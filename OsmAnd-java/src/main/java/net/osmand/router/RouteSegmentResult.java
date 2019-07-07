@@ -228,10 +228,4 @@ public class RouteSegmentResult {
 		return object.toString() + ": " + startPointIndex + "-" + endPointIndex;
 	}
 
-	public String getObjectAttribute(String key) {
-		if (key.equals("highway")) {
-			return object.getHighway();
-		}
-		return object.getValue(key);
-	}
 }

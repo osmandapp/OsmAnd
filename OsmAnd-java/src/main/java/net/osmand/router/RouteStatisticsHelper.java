@@ -1,5 +1,7 @@
 package net.osmand.router;
 
+import net.osmand.binary.BinaryMapRouteReaderAdapter;
+import net.osmand.binary.RouteDataObject;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
 
@@ -19,34 +21,36 @@ public class RouteStatisticsHelper {
 
 		List<RouteStatistics> result = new ArrayList<>();
 
-		String[] attrNames = { "surface", "highway", "smoothness" };
 		String[] colorAttrNames = { "surfaceColor", "roadClassColor", "smoothnessColor" };
 
-		for (int i = 0; i < attrNames.length; i++) {
-			String attrName = attrNames[i];
+		for (int i = 0; i < colorAttrNames.length; i++) {
 			String colorAttrName = colorAttrNames[i];
-			RouteStatisticComputer statisticComputer = new RoutePlainStatisticComputer(route, attrName, colorAttrName, currentRenderer, defaultRenderer, currentSearchRequest, defaultSearchRequest);
+			RouteStatisticComputer statisticComputer = new RoutePlainStatisticComputer(route, colorAttrName, currentRenderer, defaultRenderer, currentSearchRequest, defaultSearchRequest);
 			result.add(statisticComputer.computeStatistic());
 		}
 
 		return result;
 	}
 
-	private abstract static class RouteStatisticComputer<E extends Comparable<E>> {
+	private static class RouteSegmentClass {
+
+		String className;
+		int color;
+	}
+
+	private abstract static class RouteStatisticComputer {
 
 		final List<RouteSegmentResult> route;
-		final String attrName;
 		final String colorAttrName;
 		final RenderingRulesStorage currentRenderer;
 		final RenderingRulesStorage defaultRenderer;
 		final RenderingRuleSearchRequest currentRenderingRuleSearchRequest;
 		final RenderingRuleSearchRequest defaultRenderingRuleSearchRequest;
 
-		RouteStatisticComputer(List<RouteSegmentResult> route, String attrName, String colorAttrName,
+		RouteStatisticComputer(List<RouteSegmentResult> route, String colorAttrName,
 							   RenderingRulesStorage currentRenderer, RenderingRulesStorage defaultRenderer,
 							   RenderingRuleSearchRequest currentRenderingRuleSearchRequest, RenderingRuleSearchRequest defaultRenderingRuleSearchRequest) {
 			this.route = route;
-			this.attrName = attrName;
 			this.colorAttrName = colorAttrName;
 			this.currentRenderer = currentRenderer;
 			this.defaultRenderer = defaultRenderer;
@@ -76,19 +80,17 @@ public class RouteStatisticsHelper {
 			return distance;
 		}
 
-		protected List<RouteSegmentAttribute<E>> processRoute() {
+		protected List<RouteSegmentAttribute> processRoute() {
 			int index = 0;
-			List<RouteSegmentAttribute<E>> routes = new ArrayList<>();
-			E prev = null;
+			List<RouteSegmentAttribute> routes = new ArrayList<>();
+			RouteSegmentClass prev = null;
 			for (RouteSegmentResult segment : route) {
-				E current = getAttribute(segment);
-				if (prev != null && !prev.equals(current)) {
+				RouteSegmentClass current = getAttribute(segment);
+				if (prev != null && !prev.className.equals(current.className)) {
 					index++;
 				}
 				if (index >= routes.size()) {
-					int color = getColor(current);
-					String propertyName = getPropertyName(current);
-					routes.add(new RouteSegmentAttribute<>(index, current, propertyName, color));
+					routes.add(new RouteSegmentAttribute(index, current.className, current.color));
 				}
 				RouteSegmentAttribute surface = routes.get(index);
 				surface.incrementDistanceBy(segment.getDistance());
@@ -108,62 +110,61 @@ public class RouteStatisticsHelper {
 			return new RenderingRuleSearchRequest(useCurrentRenderer ? currentRenderingRuleSearchRequest : defaultRenderingRuleSearchRequest);
 		}
 
-		public int getColor(E attribute) {
-			int color = 0;
+		public RouteSegmentClass getAttribute(RouteSegmentResult segment) {
 			RenderingRuleSearchRequest currentRequest = getSearchRequest(true);
-			if (searchRenderingAttribute(currentRenderer, currentRequest, attribute)) {
-				color = currentRequest.getIntPropertyValue(currentRenderer.PROPS.R_ATTR_COLOR_VALUE);
+			RouteSegmentClass res = null;
+
+			if (searchRenderingAttribute(currentRenderer, currentRequest, segment)) {
+				res = new RouteSegmentClass();
+				res.className = currentRequest.getStringPropertyValue(currentRenderer.PROPS.R_ATTR_STRING_VALUE);
+				res.color = currentRequest.getIntPropertyValue(currentRenderer.PROPS.R_ATTR_COLOR_VALUE);
 			} else {
 				RenderingRuleSearchRequest defaultRequest = getSearchRequest(false);
-				if (searchRenderingAttribute(defaultRenderer, defaultRequest, attribute)) {
-					color = defaultRequest.getIntPropertyValue(defaultRenderer.PROPS.R_ATTR_COLOR_VALUE);
+				if (searchRenderingAttribute(defaultRenderer, defaultRequest, segment)) {
+					res = new RouteSegmentClass();
+					res.className = defaultRequest.getStringPropertyValue(defaultRenderer.PROPS.R_ATTR_STRING_VALUE);
+					res.color = defaultRequest.getIntPropertyValue(defaultRenderer.PROPS.R_ATTR_COLOR_VALUE);
 				}
 			}
-			return color;
+			return res;
 		}
 
-		public abstract E getAttribute(RouteSegmentResult segment);
+		protected boolean searchRenderingAttribute(RenderingRulesStorage rrs, RenderingRuleSearchRequest req, RouteSegmentResult segment) {
+			//String additional = attrName + "=" + attribute;
+			RouteDataObject obj = segment.getObject();
+			int[] tps = obj.getTypes();
+			String additional = "";
+			for(int k = 0; k < tps.length; k++) {
+				BinaryMapRouteReaderAdapter.RouteTypeRule tp = obj.region.quickGetEncodingRule(tps[k]);
+				if(tp.getTag().equals("highway") || tp.getTag().equals("route") ||
+						tp.getTag().equals("railway") || tp.getTag().equals("aeroway") || tp.getTag().equals("aerialway")) {
+					req.setStringFilter(rrs.PROPS.R_TAG, tp.getTag());
+					req.setStringFilter(rrs.PROPS.R_TAG, tp.getValue());
+				} else {
+					if(additional.length() > 0) {
+						additional += ";";
+					}
+					additional = tp.getTag() +"=" +tp.getValue();
+				}
+			}
+			req.setStringFilter(rrs.PROPS.R_ADDITIONAL, additional);
+			return req.searchRenderingAttribute(colorAttrName);
 
-		public abstract String getPropertyName(E attribute);
-
-		protected abstract boolean searchRenderingAttribute(RenderingRulesStorage rrs, RenderingRuleSearchRequest req, E attribute);
+		}
 	}
 
 	private static class RoutePlainStatisticComputer extends RouteStatisticComputer<String> {
 
-		public RoutePlainStatisticComputer(List<RouteSegmentResult> route, String attrName, String colorAttrName,
+		public RoutePlainStatisticComputer(List<RouteSegmentResult> route, String colorAttrName,
 										   RenderingRulesStorage currentRenderer, RenderingRulesStorage defaultRenderer,
 										   RenderingRuleSearchRequest currentSearchRequest, RenderingRuleSearchRequest defaultSearchRequest) {
-			super(route, attrName, colorAttrName, currentRenderer, defaultRenderer, currentSearchRequest, defaultSearchRequest);
+			super(route, colorAttrName, currentRenderer, defaultRenderer, currentSearchRequest, defaultSearchRequest);
 		}
 
-		@Override
-		public String getAttribute(RouteSegmentResult segment) {
-			String attribute = segment.getObjectAttribute(attrName);
-			if (attribute == null) {
-				return UNDEFINED_ATTR;
-			}
-			String type = getAttributeType(attribute);
-			return type != null ? type : UNDEFINED_ATTR;
-		}
 
 		private String getAttributeType(String attribute) {
 			String type = null;
-			RenderingRuleSearchRequest currentRequest = getSearchRequest(true);
-			if (searchRenderingAttribute(currentRenderer, currentRequest, attribute)) {
-				type = currentRequest.getStringPropertyValue(currentRenderer.PROPS.R_ATTR_STRING_VALUE);
-				if (currentRequest.searchRenderingAttribute(type)) {
-					type = currentRequest.getStringPropertyValue(currentRenderer.PROPS.R_ATTR_STRING_VALUE);
-				}
-			} else {
-				RenderingRuleSearchRequest defaultRequest = getSearchRequest(false);
-				if (searchRenderingAttribute(defaultRenderer, defaultRequest, attribute)) {
-					type = defaultRequest.getStringPropertyValue(currentRenderer.PROPS.R_ATTR_STRING_VALUE);
-					if (defaultRequest.searchRenderingAttribute(type)) {
-						type = defaultRequest.getStringPropertyValue(currentRenderer.PROPS.R_ATTR_STRING_VALUE);
-					}
-				}
-			}
+
 			return type == null ? UNDEFINED_ATTR : type;
 		}
 
@@ -173,22 +174,6 @@ public class RouteStatisticsHelper {
 			return type != null ? type : attribute;
 		}
 
-		@Override
-		protected boolean searchRenderingAttribute(RenderingRulesStorage rrs, RenderingRuleSearchRequest req, String attribute) {
-			String additional = attrName + "=" + attribute;
-			req.setStringFilter(rrs.PROPS.R_ATTR_STRING_VALUE, attrName + "_" + attribute);
-			req.setStringFilter(rrs.PROPS.R_ADDITIONAL, additional);
-			boolean result = req.searchRenderingAttribute(colorAttrName);
-			/*
-			if (!result) {
-				req.clearState();
-				req.setStringFilter(rrs.PROPS.R_TAG, attrName);
-				req.setStringFilter(rrs.PROPS.R_VALUE, attribute);
-				result = req.searchRenderingAttribute(colorAttrName);
-			}
-			*/
-			return result;
-		}
 	}
 
 	private static class RouteBoundariesStatisticComputer extends RouteStatisticComputer<Boundaries> {
@@ -267,36 +252,29 @@ public class RouteStatisticsHelper {
 		}
 	}
 
-	public static class RouteSegmentAttribute<E> {
+	public static class RouteSegmentAttribute {
 
 		private final int index;
-		private final E attribute;
 		private final int color;
 		private final String propertyName;
 
 		private float distance;
 		private float initDistance;
 
-		RouteSegmentAttribute(int index, E attribute, String propertyName, int color) {
+		RouteSegmentAttribute(int index, String propertyName, int color) {
 			this.index = index;
-			this.attribute = attribute;
 			this.propertyName = propertyName;
 			this.color = color;
 		}
 
-		RouteSegmentAttribute(RouteSegmentAttribute<E> segmentAttribute) {
+		RouteSegmentAttribute(RouteSegmentAttribute segmentAttribute) {
 			this.index = segmentAttribute.getIndex();
-			this.attribute = segmentAttribute.getAttribute();
 			this.propertyName = segmentAttribute.getPropertyName();
 			this.color = segmentAttribute.getColor();
 		}
 
 		public int getIndex() {
 			return index;
-		}
-
-		public E getAttribute() {
-			return attribute;
 		}
 
 		public float getDistance() {
@@ -327,7 +305,7 @@ public class RouteStatisticsHelper {
 		public String toString() {
 			return "RouteSegmentAttribute{" +
 					"index=" + index +
-					", attribute='" + attribute + '\'' +
+					", propertyName='" + propertyName + '\'' +
 					", color='" + color + '\'' +
 					", distance=" + distance +
 					'}';
