@@ -498,6 +498,11 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 				new String[]{getString(R.string.dark_theme), getString(R.string.light_theme)}, new Integer[]{OsmandSettings.OSMAND_DARK_THEME,
 						OsmandSettings.OSMAND_LIGHT_THEME});
 
+		registerListPreference(
+				settings.EXTERNAL_INPUT_DEVICE, misc,
+				new String[]{getString(R.string.sett_no_ext_input), getString(R.string.sett_generic_ext_input), getString(R.string.sett_wunderlinq_ext_input), getString(R.string.sett_parrot_ext_input)}, new Integer[]{OsmandSettings.NO_EXTERNAL_DEVICE,
+						OsmandSettings.GENERIC_EXTERNAL_DEVICE, OsmandSettings.WUNDERLINQ_EXTERNAL_DEVICE, OsmandSettings.PARROT_EXTERNAL_DEVICE});
+
 		misc.addPreference(createCheckBoxPreference(settings.USE_KALMAN_FILTER_FOR_COMPASS, R.string.use_kalman_filter_compass, R.string.use_kalman_filter_compass_descr));
 		misc.addPreference(createCheckBoxPreference(settings.USE_MAGNETIC_FIELD_SENSOR_COMPASS, R.string.use_magnetic_sensor, R.string.use_magnetic_sensor_descr));
 		misc.addPreference(createCheckBoxPreference(settings.DO_NOT_USE_ANIMATIONS, R.string.do_not_use_animations, R.string.do_not_use_animations_descr));
