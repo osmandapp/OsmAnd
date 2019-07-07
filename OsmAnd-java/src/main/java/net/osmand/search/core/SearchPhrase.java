@@ -422,10 +422,18 @@ public class SearchPhrase {
 	}
 
 	public boolean isSearchTypeAllowed(ObjectType searchType) {
-		if (getSearchTypes() == null) {
-			return true;
+		return isSearchTypeAllowed(searchType, false);
+	}
+
+	public boolean isSearchTypeAllowed(ObjectType searchType, boolean exclusive) {
+		ObjectType[] searchTypes = getSearchTypes();
+		if (searchTypes == null) {
+			return !exclusive;
 		} else {
-			for (ObjectType type : getSearchTypes()) {
+			if (exclusive && searchTypes.length > 1) {
+				return false;
+			}
+			for (ObjectType type : searchTypes) {
 				if (type == searchType) {
 					return true;
 				}
