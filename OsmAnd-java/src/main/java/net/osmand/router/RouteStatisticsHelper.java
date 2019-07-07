@@ -1,6 +1,9 @@
 package net.osmand.router;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -58,7 +61,7 @@ public class RouteStatisticsHelper {
 		public String toString() {
 			StringBuilder s  = new StringBuilder("Statistic '").append(name).append("':");
 			for (RouteSegmentAttribute a : elements) {
-				s.append(String.format(" %.2fm %s,", a.distance, a.propertyName));
+				s.append(String.format(" %.0fm %s,", a.distance, a.getUserPropertyName()));
 			}
 			s.append("\n  Partition: ").append(partition);
 			return s.toString();
@@ -260,7 +263,20 @@ public class RouteStatisticsHelper {
 				}
 				attr.incrementDistanceBy(attribute.getDistance());
 			}
-			return partition;
+			List<String> keys = new ArrayList<String>(partition.keySet());
+			Collections.sort(keys, new Comparator<String>() {
+
+				@Override
+				public int compare(String o1, String o2) {
+					return -Float.compare(partition.get(o1).getDistance(), partition.get(o2).getDistance());
+				}
+			});
+			Map<String, RouteSegmentAttribute> sorted = new LinkedHashMap<String, RouteStatisticsHelper.RouteSegmentAttribute>();
+			for(String k : keys ) {
+				sorted.put(k, partition.get(k));
+			}
+
+			return sorted;
 		}
 
 		private float computeTotalDistance(List<RouteSegmentAttribute> attributes) {
@@ -298,11 +314,12 @@ public class RouteStatisticsHelper {
 								prev.getPropertyName().equals(current.getPropertyName())) {
 								prev.incrementDistanceBy(current.distance);
 							} else {
+								if(segment.slopeClass[i].endsWith(current.propertyName)) {
+									current.setUserPropertyName(segment.slopeClassUserString[i]);
+								}
 								routes.add(current);
 								prev = current;
 							}
-							// TODO pass slope user name
-							// prev.propertyUserName = segment.slopeClassUserString;
 						}
 					}
 				}
@@ -321,7 +338,8 @@ public class RouteStatisticsHelper {
 			} else {
 				RenderingRuleSearchRequest defaultRequest = new RenderingRuleSearchRequest(defaultRenderingRuleSearchRequest);
 				if (searchRenderingAttribute(attribute, defaultRenderer, defaultRequest, segment, slopeClass)) {
-					res = new RouteSegmentAttribute(defaultRequest.getStringPropertyValue(defaultRenderer.PROPS.R_ATTR_STRING_VALUE),
+					res = new RouteSegmentAttribute(
+							defaultRequest.getStringPropertyValue(defaultRenderer.PROPS.R_ATTR_STRING_VALUE),
 							defaultRequest.getIntPropertyValue(defaultRenderer.PROPS.R_ATTR_COLOR_VALUE));
 				}
 			}
@@ -342,10 +360,11 @@ public class RouteStatisticsHelper {
 					req.setStringFilter(rrs.PROPS.R_TAG, tp.getTag());
 					req.setStringFilter(rrs.PROPS.R_VALUE, tp.getValue());
 				} else {
-					if (additional.length() > 0) {
-						additional += ";";
-					}
-					additional += tp.getTag() + "=" + tp.getValue();
+					// TODO
+//					if (additional.length() > 0) {
+//						additional += ";";
+//					}
+//					additional += tp.getTag() + "=" + tp.getValue();
 				}
 			}
 			req.setStringFilter(rrs.PROPS.R_ADDITIONAL, additional);
@@ -358,6 +377,7 @@ public class RouteStatisticsHelper {
 		private final int color;
 		private final String propertyName;
 		private float distance;
+		private String userPropertyName;
 
 		RouteSegmentAttribute(String propertyName, int color) {
 			this.propertyName = propertyName == null ? UNDEFINED_ATTR : propertyName;
@@ -367,6 +387,15 @@ public class RouteStatisticsHelper {
 		RouteSegmentAttribute(RouteSegmentAttribute segmentAttribute) {
 			this.propertyName = segmentAttribute.getPropertyName();
 			this.color = segmentAttribute.getColor();
+			this.userPropertyName = segmentAttribute.userPropertyName;
+		}
+		
+		public String getUserPropertyName() {
+			return userPropertyName == null ? propertyName : userPropertyName;
+		}
+		
+		public void setUserPropertyName(String userPropertyName) {
+			this.userPropertyName = userPropertyName;
 		}
 
 		public float getDistance() {
@@ -387,11 +416,7 @@ public class RouteStatisticsHelper {
 
 		@Override
 		public String toString() {
-			return "RouteSegmentAttribute{" +
-					"propertyName='" + propertyName + '\'' +
-					", color='" + color + '\'' +
-					", distance=" + distance +
-					'}';
+			return String.format("%s - %.0f m %d", getUserPropertyName(), getDistance(), getColor());
 		}
 	}
 
