@@ -25,7 +25,8 @@ public class RouteStatisticsHelper {
 
 		for (int i = 0; i < colorAttrNames.length; i++) {
 			String colorAttrName = colorAttrNames[i];
-			RouteStatisticComputer statisticComputer = new RoutePlainStatisticComputer(route, colorAttrName, currentRenderer, defaultRenderer, currentSearchRequest, defaultSearchRequest);
+			RouteStatisticComputer statisticComputer =
+					new RouteStatisticComputer(route, colorAttrName, currentRenderer, defaultRenderer, currentSearchRequest, defaultSearchRequest);
 			result.add(statisticComputer.computeStatistic());
 		}
 
@@ -38,7 +39,7 @@ public class RouteStatisticsHelper {
 		int color;
 	}
 
-	private abstract static class RouteStatisticComputer {
+	private static class RouteStatisticComputer {
 
 		final List<RouteSegmentResult> route;
 		final String colorAttrName;
@@ -58,21 +59,20 @@ public class RouteStatisticsHelper {
 			this.defaultRenderingRuleSearchRequest = defaultRenderingRuleSearchRequest;
 		}
 
-		Map<E, RouteSegmentAttribute<E>> makePartition(List<RouteSegmentAttribute<E>> routeAttributes) {
-			Map<E, RouteSegmentAttribute<E>> partition = new TreeMap<>();
-			for (RouteSegmentAttribute<E> attribute : routeAttributes) {
-				E key = attribute.getAttribute();
-				RouteSegmentAttribute<E> pattr = partition.get(key);
-				if (pattr == null) {
-					pattr = new RouteSegmentAttribute<>(attribute);
-					partition.put(key, pattr);
+		Map<String, RouteSegmentAttribute> makePartition(List<RouteSegmentAttribute> routeAttributes) {
+			Map<String, RouteSegmentAttribute> partition = new TreeMap<>();
+			for (RouteSegmentAttribute attribute : routeAttributes) {
+				RouteSegmentAttribute attr = partition.get(attribute.propertyName);
+				if (attr == null) {
+					attr = new RouteSegmentAttribute(attribute);
+					partition.put(attribute.propertyName, attr);
 				}
-				pattr.incrementDistanceBy(attribute.getDistance());
+				attr.incrementDistanceBy(attribute.getDistance());
 			}
 			return partition;
 		}
 
-		private float computeTotalDistance(List<RouteSegmentAttribute<E>> attributes) {
+		private float computeTotalDistance(List<RouteSegmentAttribute> attributes) {
 			float distance = 0f;
 			for (RouteSegmentAttribute attribute : attributes) {
 				distance += attribute.getDistance();
@@ -99,11 +99,11 @@ public class RouteStatisticsHelper {
 			return routes;
 		}
 
-		RouteStatistics<E> computeStatistic() {
-			List<RouteSegmentAttribute<E>> routeAttributes = processRoute();
-			Map<E, RouteSegmentAttribute<E>> partition = makePartition(routeAttributes);
+		RouteStatistics computeStatistic() {
+			List<RouteSegmentAttribute> routeAttributes = processRoute();
+			Map<String, RouteSegmentAttribute> partition = makePartition(routeAttributes);
 			float totalDistance = computeTotalDistance(routeAttributes);
-			return new RouteStatistics<>(routeAttributes, partition, totalDistance);
+			return new RouteStatistics(routeAttributes, partition, totalDistance);
 		}
 
 		RenderingRuleSearchRequest getSearchRequest(boolean useCurrentRenderer) {
@@ -112,10 +112,10 @@ public class RouteStatisticsHelper {
 
 		public RouteSegmentClass getAttribute(RouteSegmentResult segment) {
 			RenderingRuleSearchRequest currentRequest = getSearchRequest(true);
-			RouteSegmentClass res = null;
-
+			RouteSegmentClass res = new RouteSegmentClass();
+			res.className = UNDEFINED_ATTR;
 			if (searchRenderingAttribute(currentRenderer, currentRequest, segment)) {
-				res = new RouteSegmentClass();
+
 				res.className = currentRequest.getStringPropertyValue(currentRenderer.PROPS.R_ATTR_STRING_VALUE);
 				res.color = currentRequest.getIntPropertyValue(currentRenderer.PROPS.R_ATTR_COLOR_VALUE);
 			} else {
@@ -151,29 +151,6 @@ public class RouteStatisticsHelper {
 			return req.searchRenderingAttribute(colorAttrName);
 
 		}
-	}
-
-	private static class RoutePlainStatisticComputer extends RouteStatisticComputer<String> {
-
-		public RoutePlainStatisticComputer(List<RouteSegmentResult> route, String colorAttrName,
-										   RenderingRulesStorage currentRenderer, RenderingRulesStorage defaultRenderer,
-										   RenderingRuleSearchRequest currentSearchRequest, RenderingRuleSearchRequest defaultSearchRequest) {
-			super(route, colorAttrName, currentRenderer, defaultRenderer, currentSearchRequest, defaultSearchRequest);
-		}
-
-
-		private String getAttributeType(String attribute) {
-			String type = null;
-
-			return type == null ? UNDEFINED_ATTR : type;
-		}
-
-		@Override
-		public String getPropertyName(String attribute) {
-			String type = getAttributeType(attribute);
-			return type != null ? type : attribute;
-		}
-
 	}
 
 	private static class RouteBoundariesStatisticComputer extends RouteStatisticComputer<Boundaries> {
@@ -436,14 +413,14 @@ public class RouteStatisticsHelper {
 		}
 	}
 
-	public static class RouteStatistics<E> {
+	public static class RouteStatistics {
 
-		private final List<RouteSegmentAttribute<E>> elements;
-		private final Map<E, RouteSegmentAttribute<E>> partition;
+		private final List<RouteSegmentAttribute> elements;
+		private final Map<String, RouteSegmentAttribute> partition;
 		private final float totalDistance;
 
-		private RouteStatistics(List<RouteSegmentAttribute<E>> elements,
-								Map<E, RouteSegmentAttribute<E>> partition,
+		private RouteStatistics(List<RouteSegmentAttribute> elements,
+								Map<String, RouteSegmentAttribute> partition,
 								float totalDistance) {
 			this.elements = elements;
 			this.partition = partition;
@@ -454,11 +431,11 @@ public class RouteStatisticsHelper {
 			return totalDistance;
 		}
 
-		public List<RouteSegmentAttribute<E>> getElements() {
+		public List<RouteSegmentAttribute> getElements() {
 			return elements;
 		}
 
-		public Map<E, RouteSegmentAttribute<E>> getPartition() {
+		public Map<E, RouteSegmentAttribute> getPartition() {
 			return partition;
 		}
 	}
