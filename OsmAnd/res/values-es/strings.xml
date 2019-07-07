@@ -2263,15 +2263,15 @@
     <string name="fonts_header">Tipografías del mapa</string>
     <string name="osmand_extended_description_part2">Navegación GPS 
 \n • Elige entre los modos sin conexión (sin cargos de roaming al viajar al extranjero) o en línea (más rápido) 
-\n • La guía por voz giro-a-giro lo guía a lo largo del camino (voces grabadas y sintetizadas) 
-\n • La ruta se recalcula al salirse de la misma 
-\n • Guía de carriles, nombres de calles y tiempo estimado al destino, lo ayudará a lo largo de la ruta 
-\n • Para hacer su viaje seguro, los modos diurno/nocturno se alternan automáticamente 
-\n • Muestra los límites de velocidad y obtiene un aviso al excederte del mismo 
-\n • El zoom del mapa se ajusta a la velocidad 
+\n • Las instrucciones por voz paso a paso te guían a lo largo de la ruta (voces grabadas y sintetizadas) 
+\n • La ruta se recalcula cuando te sales de ella
+\n • La guía de carriles, los nombres de calles y la hora estimada de llegada, te ayudarán a lo largo de la ruta 
+\n • Para hacer su viaje más seguro, los modos diurno/nocturno se alternan automáticamente 
+\n • Muestra los límites de velocidad y recibe un aviso si los superas
+\n • El zoom del mapa se ajusta a tu velocidad 
 \n • Busca destinos por dirección, por tipo (por ejemplo: aparcamientos, restaurantes, hoteles, gasolineras, museos), o por coordenadas geográficas 
-\n • Soporta puntos intermedios en el itinerario 
-\n • Grabe su viaje o suba una traza GPX y síguela 
+\n • Soporta puntos intermedios en tu itinerario 
+\n • Graba tu viaje o sube una traza GPX y síguela
 \n</string>
     <string name="osmand_extended_description_part3">Mapa 
 \n • Muestra PDI (puntos de interés) a tu alrededor 
@@ -2359,12 +2359,19 @@
     <string name="animate_my_location_desc">Activa el desplazamiento animado del mapa para «Mi ubicación» durante la navegación.</string>
     <string name="shared_string_overview">Resumen</string>
     <string name="osmand_plus_extended_description_part2">"Navegación GPS 
+\n
 \n • Funciona en línea (rápido) o sin conexión (sin cargos de roaming al viajar al extranjero) 
-\n • Guía por voz giro-a-giro (voces grabadas y sintetizadas) 
-\n • (Opcional) Guía de carriles, nombres de calles y tiempo estimado al destino 
-\n • Soporta puntos intermedios en el itinerario 
+\n
+\n • Instrucciones por voz paso a paso (voces grabadas y sintetizadas) 
+\n
+\n • (Opcional) asistente de carril, visualización de nombres de calles y hora  estimada de llegada
+\n
+\n • Soporta puntos intermedios en tu itinerario 
+\n
 \n • La ruta se recalcula al salirse de la misma  
-\n • Busca destinos por dirección, por tipo (por ejemplo: Restaurantes, hoteles, gasolineras, museos), o por coordenada geográfica 
+\n
+\n • Busca destinos por dirección, por tipo (por ejemplo: Restaurantes, hoteles, gasolineras, museos), o por coordenadas geográficas
+\n
 \n"</string>
     <string name="osmand_plus_extended_description_part3">Vista del mapa 
 \n • Muestra tu ubicación y orientación 
