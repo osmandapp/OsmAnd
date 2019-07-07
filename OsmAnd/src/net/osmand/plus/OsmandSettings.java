@@ -1050,15 +1050,6 @@ public class OsmandSettings {
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> DIRECTION_HAPTIC_FEEDBACK =
 		new BooleanAccessibilityPreference("direction_haptic_feedback", false).makeGlobal();
-	
-	// this value string is synchronized with settings_pref.xml preference name
-	public final OsmandPreference<Boolean> ZOOM_BY_TRACKBALL =
-			new BooleanAccessibilityPreference("zoom_by_trackball", false).makeGlobal();
-
-	// this value string is synchronized with settings_pref.xml preference name
-	public final OsmandPreference<Boolean> ZOOM_BY_WUNDERLINQ =
-			new BooleanAccessibilityPreference("zoom_by_wunderlinq", false).makeGlobal();
-
 
 	// magnetic field doesn'torkmost of the time on some phones
 	public final OsmandPreference<Boolean> USE_MAGNETIC_FIELD_SENSOR_COMPASS = new BooleanPreference("use_magnetic_field_sensor_compass", false).makeGlobal().cache();
@@ -1506,6 +1497,9 @@ public class OsmandSettings {
 	public final CommonPreference<NotesSortByMode> NOTES_SORT_BY_MODE = new EnumIntPreference<>("notes_sort_by_mode", NotesSortByMode.BY_DATE, NotesSortByMode.values());
 
 	public final OsmandPreference<Boolean> ANIMATE_MY_LOCATION = new BooleanPreference("animate_my_location", true).makeGlobal().cache();
+
+	public final OsmandPreference<Integer> EXTERNAL_INPUT_DEVICE =
+			new IntPreference("external_input_device", 0).makeGlobal();
 
 	public final OsmandPreference<Boolean> ROUTE_MAP_MARKERS_START_MY_LOC = new BooleanPreference("route_map_markers_start_my_loc", false).makeGlobal().cache();
 	public final OsmandPreference<Boolean> ROUTE_MAP_MARKERS_ROUND_TRIP = new BooleanPreference("route_map_markers_round_trip", false).makeGlobal().cache();
@@ -2752,6 +2746,10 @@ public class OsmandSettings {
 	public static final int OSMAND_DARK_THEME = 0;
 	public static final int OSMAND_LIGHT_THEME = 1;
 
+	public static final int NO_EXTERNAL_DEVICE = 0;
+	public static final int GENERIC_EXTERNAL_DEVICE = 1;
+	public static final int WUNDERLINQ_EXTERNAL_DEVICE = 2;
+	public static final int PARROT_EXTERNAL_DEVICE = 3;
 
 	public final CommonPreference<Integer> SEARCH_TAB =
 			new IntPreference("SEARCH_TAB", 0).makeGlobal().cache();

@@ -1486,7 +1486,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			// repeat count 0 doesn't work for samsung, 1 doesn't work for lg
 			toggleDrawer();
 			return true;
-		} else if (settings.ZOOM_BY_TRACKBALL.get()) {
+		} else if (settings.EXTERNAL_INPUT_DEVICE.get() == 3) {
 			// Parrot device has only dpad left and right
 			if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT) {
 				changeZoom(-1);
@@ -1495,7 +1495,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				changeZoom(1);
 				return true;
 			}
-		} else if (settings.ZOOM_BY_WUNDERLINQ.get()) {
+		} else if (settings.EXTERNAL_INPUT_DEVICE.get() == 2) {
 			// WunderLINQ device, motorcycle smart phone control
 			if (keyCode == KeyEvent.KEYCODE_DPAD_DOWN) {
 				changeZoom(-1);
@@ -1508,6 +1508,14 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				Intent intent = new Intent(Intent.ACTION_VIEW);
 				intent.setData(Uri.parse(callingApp));
 				startActivity(intent);
+				return true;
+			}
+		} else if (settings.EXTERNAL_INPUT_DEVICE.get() == 1) {
+			if (keyCode == KeyEvent.KEYCODE_DPAD_DOWN) {
+				changeZoom(-1);
+				return true;
+			} else if (keyCode == KeyEvent.KEYCODE_DPAD_UP) {
+				changeZoom(1);
 				return true;
 			}
 		} else if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT || keyCode == KeyEvent.KEYCODE_DPAD_RIGHT

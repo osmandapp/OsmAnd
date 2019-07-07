@@ -1920,6 +1920,12 @@
     <string name="contribution_activity">Install version</string>
     <string name="choose_osmand_theme_descr">Choose how the app looks.</string>
     <string name="choose_osmand_theme">App theme</string>
+    <string name="external_input_device">External input devices</string>
+    <string name="external_input_device_descr">Select a device such as a generic keyboard or WunderLINQ for external controls.</string>
+    <string name="sett_no_ext_input">None</string>
+    <string name="sett_generic_ext_input">Generic Keyboard</string>
+    <string name="sett_wunderlinq_ext_input">WunderLINQ</string>
+    <string name="sett_parrot_ext_input">Parrot</string>
     <string name="accessibility_options">Accessibility options</string>
     <string name="select_address_activity">Select address</string>
     <string name="favourites_list_activity">Select Favorite</string>
@@ -2434,8 +2440,6 @@
     <string name="i_am_here">I am here</string>
     <string name="zoom_by_trackball_descr">Change map zooming by horizontal trackball movement.</string>
     <string name="zoom_by_trackball">Use trackball for zoom control</string>
-    <string name="zoom_by_wunderlinq_descr">Change map zooming by scrolling the wheel up and down. Escape returns you to the WunderLINQ App.</string>
-    <string name="zoom_by_wunderlinq">Use WunderLINQ for control</string>
     <string name="accessibility_preferences_descr">Accessibility related preferences.</string>
     <string name="arrival_distance_factor_early">Early</string>
     <string name="arrival_distance_factor_normally">Normal</string>
