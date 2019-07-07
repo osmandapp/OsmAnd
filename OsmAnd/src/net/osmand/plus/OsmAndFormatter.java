@@ -136,7 +136,7 @@ public class OsmAndFormatter {
 		byte pointer = 1;
 		double point = mainUnitInMeter;
 		double roundDist = 1;
-		while (distInMeters * point > generator) {
+		while (distInMeters * point >= generator) {
 			roundDist = (generator / point);
 			if (pointer++ % 3 == 2) {
 				generator = generator * 5 / 2;
