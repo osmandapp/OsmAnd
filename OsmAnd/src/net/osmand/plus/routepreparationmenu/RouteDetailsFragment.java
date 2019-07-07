@@ -89,7 +89,6 @@ import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RouteStatisticsHelper;
-import net.osmand.router.RouteStatisticsHelper.Incline;
 import net.osmand.router.RouteStatisticsHelper.RouteStatistics;
 import net.osmand.router.TransportRoutePlanner.TransportRouteResult;
 import net.osmand.router.TransportRoutePlanner.TransportRouteResultSegment;
@@ -363,34 +362,24 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		buildRowDivider(cardsContainer, false);
 		slopeDataSet = statisticCard.getSlopeDataSet();
 		elevationDataSet = statisticCard.getElevationDataSet();
-		if (gpx.hasAltitude) {
-			List<RouteSegmentResult> route = app.getRoutingHelper().getRoute().getOriginalRoute();
-			if (route != null) {
-				RenderingRulesStorage currentRenderer = app.getRendererRegistry().getCurrentSelectedRenderer();
-				RenderingRulesStorage defaultRender = app.getRendererRegistry().defaultRender();
 
-				MapRenderRepositories maps = app.getResourceManager().getRenderer();
-				RenderingRuleSearchRequest currentSearchRequest = maps.getSearchRequestWithAppliedCustomRules(currentRenderer, isNightMode());
-				RenderingRuleSearchRequest defaultSearchRequest = maps.getSearchRequestWithAppliedCustomRules(defaultRender, isNightMode());
+		List<RouteSegmentResult> route = app.getRoutingHelper().getRoute().getOriginalRoute();
+		if (route != null) {
+			RenderingRulesStorage currentRenderer = app.getRendererRegistry().getCurrentSelectedRenderer();
+			RenderingRulesStorage defaultRender = app.getRendererRegistry().defaultRender();
 
-				List<RouteStatistics> routeStatistics = RouteStatisticsHelper.calculateRouteStatistic(route, currentRenderer, defaultRender, currentSearchRequest, defaultSearchRequest);
-				GPXTrackAnalysis analysis = gpx.getAnalysis(0);
+			MapRenderRepositories maps = app.getResourceManager().getRenderer();
+			RenderingRuleSearchRequest currentSearchRequest = maps.getSearchRequestWithAppliedCustomRules(currentRenderer, isNightMode());
+			RenderingRuleSearchRequest defaultSearchRequest = maps.getSearchRequestWithAppliedCustomRules(defaultRender, isNightMode());
 
-				for (RouteStatistics statistic : routeStatistics) {
-					RouteInfoCard routeClassCard = new RouteInfoCard(mapActivity, statistic, analysis);
-					addRouteCard(cardsContainer, routeClassCard);
-				}
+			List<RouteStatistics> routeStatistics = RouteStatisticsHelper.calculateRouteStatistic(route,
+					currentRenderer, defaultRender, currentSearchRequest, defaultSearchRequest);
+			GPXTrackAnalysis analysis = gpx.getAnalysis(0);
 
-				/*
-				if (slopeDataSet != null) {
-					List<Incline> inclines = createInclinesAndAdd100MetersWith0Incline(slopeDataSet.getValues(), slopeDataSet.getDivX());
-					RouteInfoCard routeSteepnessCard = new RouteInfoCard(mapActivity, routeStatistics.getRouteSteepnessStatistic(inclines), analysis);
-					addRouteCard(cardsContainer, routeSteepnessCard);
-				}
 
-				RouteInfoCard routeSmoothnessCard = new RouteInfoCard(mapActivity, routeStatistics.getRouteSmoothnessStatistic(), analysis);
-				addRouteCard(cardsContainer, routeSmoothnessCard);
-				*/
+			for (RouteStatistics statistic : routeStatistics) {
+				RouteInfoCard routeClassCard = new RouteInfoCard(mapActivity, statistic, analysis);
+				addRouteCard(cardsContainer, routeClassCard);
 			}
 		}
 		routeDetailsMenu = new RouteDetailsMenu();
@@ -1517,36 +1506,6 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		horizontalLine.setLayoutParams(llHorLineParams);
 		horizontalLine.setBackgroundColor(ContextCompat.getColor(app, isNightMode() ? R.color.divider_color_dark : R.color.divider_color_light));
 		((LinearLayout) view).addView(horizontalLine);
-	}
-
-	private List<Incline> createInclinesAndAdd100MetersWith0Incline(List<Entry> entries, float divX) {
-		float minIncline = 0;
-		float maxIncline = 0;
-		int size = entries.size();
-		List<Incline> inclines = new ArrayList<>();
-		for (Entry entry : entries) {
-			float inclineValue = entry.getY();
-			maxIncline = Math.max(inclineValue, maxIncline);
-			minIncline = Math.min(inclineValue, minIncline);
-
-			Incline incline = new Incline(inclineValue, entry.getX() * divX);
-			inclines.add(incline);
-		}
-		for (int i = 0; i < 10; i++) {
-			float distance = i * 5;
-			inclines.add(i, new Incline(0f, distance));
-		}
-		if (slopeDataSet != null) {
-			float lastDistance = slopeDataSet.getEntryForIndex(size - 1).getX();
-			for (int i = 1; i <= 10; i++) {
-				float distance = lastDistance * divX + i * 5f;
-				inclines.add(new Incline(0f, distance));
-			}
-		}
-		for (Incline incline : inclines) {
-			incline.computeBoundaries(minIncline, maxIncline);
-		}
-		return inclines;
 	}
 
 	private void makeGpx() {
