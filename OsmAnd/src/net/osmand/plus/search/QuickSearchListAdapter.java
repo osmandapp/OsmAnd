@@ -229,8 +229,9 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 
 			SearchWord word = searchPhrase.getLastSelectedWord();
 			if (word != null && word.getType() != null && word.getType().equals(POI_TYPE)) {
+				float rd = (float) OsmAndFormatter.calculateRoundedDist(searchUICore.getNextSearchRadius(searchPhrase), app);
 				String textIncreaseRadiusTo = app.getString(R.string.increase_search_radius_to,
-						OsmAndFormatter.getFormattedDistance(searchUICore.getNextSearchRadius(searchPhrase), app));
+						OsmAndFormatter.getFormattedDistance(rd, app));
 				((TextView) view.findViewById(R.id.title)).setText(textIncreaseRadiusTo);
 			} else {
 				((TextView) view.findViewById(R.id.title)).setText(app.getString(R.string.increase_search_radius));
