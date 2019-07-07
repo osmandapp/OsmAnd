@@ -613,7 +613,7 @@ public class RouteResultPreparation {
 		println(msg);
 		
 		
-		//calculateStatistics(result);
+//		calculateStatistics(result);
 	}
 
 	private void calculateStatistics(List<RouteSegmentResult> result) {

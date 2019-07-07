@@ -352,7 +352,7 @@ public class RouteStatisticsHelper {
 			//String additional = attrName + "=" + attribute;
 			RouteDataObject obj = segment.obj;
 			int[] tps = obj.getTypes();
-			String additional = slopeClass != null ? slopeClass : "";
+			String additional = slopeClass != null ? (slopeClass + ";") : "";
 			for (int k = 0; k < tps.length; k++) {
 				BinaryMapRouteReaderAdapter.RouteTypeRule tp = obj.region.quickGetEncodingRule(tps[k]);
 				if (tp.getTag().equals("highway") || tp.getTag().equals("route") ||
@@ -360,11 +360,7 @@ public class RouteStatisticsHelper {
 					req.setStringFilter(rrs.PROPS.R_TAG, tp.getTag());
 					req.setStringFilter(rrs.PROPS.R_VALUE, tp.getValue());
 				} else {
-					// TODO
-//					if (additional.length() > 0) {
-//						additional += ";";
-//					}
-//					additional += tp.getTag() + "=" + tp.getValue();
+					additional += tp.getTag() + "=" + tp.getValue() + ";";
 				}
 			}
 			req.setStringFilter(rrs.PROPS.R_ADDITIONAL, additional);
