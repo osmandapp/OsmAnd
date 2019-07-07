@@ -21,7 +21,7 @@ public class RouteStatisticsHelper {
 
 		List<RouteStatistics> result = new ArrayList<>();
 
-		String[] colorAttrNames = { "surfaceColor", "roadClassColor", "smoothnessColor" };
+		String[] colorAttrNames = {"surfaceColor", "roadClassColor", "smoothnessColor"};
 
 		for (int i = 0; i < colorAttrNames.length; i++) {
 			String colorAttrName = colorAttrNames[i];
@@ -86,7 +86,7 @@ public class RouteStatisticsHelper {
 			RouteSegmentClass prev = null;
 			for (RouteSegmentResult segment : route) {
 				RouteSegmentClass current = getAttribute(segment);
-				if (prev != null && !prev.className.equals(current.className)) {
+				if (prev != null && prev.className != null && !prev.className.equals(current.className)) {
 					index++;
 				}
 				if (index >= routes.size()) {
@@ -134,17 +134,17 @@ public class RouteStatisticsHelper {
 			RouteDataObject obj = segment.getObject();
 			int[] tps = obj.getTypes();
 			String additional = "";
-			for(int k = 0; k < tps.length; k++) {
+			for (int k = 0; k < tps.length; k++) {
 				BinaryMapRouteReaderAdapter.RouteTypeRule tp = obj.region.quickGetEncodingRule(tps[k]);
-				if(tp.getTag().equals("highway") || tp.getTag().equals("route") ||
+				if (tp.getTag().equals("highway") || tp.getTag().equals("route") ||
 						tp.getTag().equals("railway") || tp.getTag().equals("aeroway") || tp.getTag().equals("aerialway")) {
 					req.setStringFilter(rrs.PROPS.R_TAG, tp.getTag());
 					req.setStringFilter(rrs.PROPS.R_TAG, tp.getValue());
 				} else {
-					if(additional.length() > 0) {
+					if (additional.length() > 0) {
 						additional += ";";
 					}
-					additional = tp.getTag() +"=" +tp.getValue();
+					additional += tp.getTag() + "=" + tp.getValue();
 				}
 			}
 			req.setStringFilter(rrs.PROPS.R_ADDITIONAL, additional);
@@ -153,20 +153,20 @@ public class RouteStatisticsHelper {
 		}
 	}
 
-	private static class RouteBoundariesStatisticComputer extends RouteStatisticComputer<Boundaries> {
+	private static class RouteBoundariesStatisticComputer extends RouteStatisticComputer {
 
 		private final List<Incline> inclines;
 
-		public RouteBoundariesStatisticComputer(List<Incline> inclines, String attrName, String colorAttrName,
+		public RouteBoundariesStatisticComputer(List<Incline> inclines, String colorAttrName,
 												RenderingRulesStorage currentRenderer, RenderingRulesStorage defaultRenderer,
 												RenderingRuleSearchRequest currentSearchRequest, RenderingRuleSearchRequest defaultSearchRequest) {
-			super(null, attrName, colorAttrName, currentRenderer, defaultRenderer, currentSearchRequest, defaultSearchRequest);
+			super(null, colorAttrName, currentRenderer, defaultRenderer, currentSearchRequest, defaultSearchRequest);
 			this.inclines = inclines;
 		}
 
 		@Override
-		public List<RouteSegmentAttribute<Boundaries>> processRoute() {
-			List<RouteSegmentAttribute<Boundaries>> routeInclines = new ArrayList<>();
+		public List<RouteSegmentAttribute> processRoute() {
+			List<RouteSegmentAttribute> routeInclines = new ArrayList<>();
 			int index = 0;
 			Boundaries prev = null;
 			Incline prevIncline = null;
@@ -177,8 +177,8 @@ public class RouteStatisticsHelper {
 				}
 				if (index >= routeInclines.size()) {
 					String propertyName = getPropertyName(current);
-					int color = getColor(current);
-					RouteSegmentAttribute<Boundaries> attribute = new RouteSegmentAttribute<>(index, current, propertyName, color);
+					int color = 0;//getColor(current);
+					RouteSegmentAttribute attribute = new RouteSegmentAttribute(index, propertyName, color);
 					if (prevIncline != null) {
 						attribute.setInitDistance(prevIncline.getDistance());
 					}
@@ -193,11 +193,10 @@ public class RouteStatisticsHelper {
 		}
 
 		@Override
-		public Boundaries getAttribute(RouteSegmentResult segment) {
+		public RouteSegmentClass getAttribute(RouteSegmentResult segment) {
 			return null;
 		}
 
-		@Override
 		public String getPropertyName(Boundaries attribute) {
 			int lowerBoundary = Math.round(attribute.getLowerBoundary());
 			int upperBoundary = Math.round(attribute.getUpperBoundary());
@@ -207,7 +206,6 @@ public class RouteStatisticsHelper {
 			return String.format(Locale.US, "%d%% ... %d%%", lowerBoundary, upperBoundary);
 		}
 
-		@Override
 		public boolean searchRenderingAttribute(RenderingRulesStorage rrs, RenderingRuleSearchRequest req, Boundaries attribute) {
 			int lowerBoundary = Math.round(attribute.getLowerBoundary());
 			int upperBoundary = Math.round(attribute.getUpperBoundary());
@@ -223,8 +221,8 @@ public class RouteStatisticsHelper {
 			range.append(lowerBoundary);
 			range.append(upperBoundary < 0 ? "_" : "-");
 			range.append(upperBoundary);
-			String additional = attrName + "=" + range;
-			req.setStringFilter(rrs.PROPS.R_ADDITIONAL, additional);
+			//String additional = attrName + "=" + range;
+			//req.setStringFilter(rrs.PROPS.R_ADDITIONAL, additional);
 			return req.searchRenderingAttribute(colorAttrName);
 		}
 	}
@@ -435,7 +433,7 @@ public class RouteStatisticsHelper {
 			return elements;
 		}
 
-		public Map<E, RouteSegmentAttribute> getPartition() {
+		public Map<String, RouteSegmentAttribute> getPartition() {
 			return partition;
 		}
 	}

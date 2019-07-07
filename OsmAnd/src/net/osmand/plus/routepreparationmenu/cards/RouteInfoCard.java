@@ -27,7 +27,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsNavigationActivity;
 import net.osmand.plus.helpers.GpxUiHelper;
-import net.osmand.router.RouteStatisticsHelper;
 import net.osmand.router.RouteStatisticsHelper.Boundaries;
 import net.osmand.router.RouteStatisticsHelper.RouteSegmentAttribute;
 import net.osmand.router.RouteStatisticsHelper.RouteStatistics;
@@ -72,7 +71,7 @@ public class RouteInfoCard extends BaseCard {
 		return (HorizontalBarChart) view.findViewById(R.id.chart);
 	}
 
-	private <E> void updateContent(final RouteStatisticsHelper.RouteStatistics<E> routeStatistics) {
+	private void updateContent(final RouteStatistics routeStatistics) {
 		updateHeader();
 		final HorizontalBarChart chart = (HorizontalBarChart) view.findViewById(R.id.chart);
 		GpxUiHelper.setupHorizontalGPXChart(app, chart, 5, 9, 24, true, nightMode);
@@ -83,7 +82,7 @@ public class RouteInfoCard extends BaseCard {
 		chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
 			@Override
 			public void onValueSelected(Entry e, Highlight h) {
-				List<RouteSegmentAttribute<E>> elems = routeStatistics.getElements();
+				List<RouteSegmentAttribute> elems = routeStatistics.getElements();
 				int i = h.getStackIndex();
 				if (i >= 0 && elems.size() > i) {
 					selectedPropertyName = elems.get(i).getPropertyName();
@@ -118,7 +117,7 @@ public class RouteInfoCard extends BaseCard {
 		});
 	}
 
-	protected <E> void updateLegend(RouteStatisticsHelper.RouteStatistics<E> routeStatistics) {
+	protected void updateLegend(RouteStatistics routeStatistics) {
 		LinearLayout container = (LinearLayout) view.findViewById(R.id.route_items);
 		container.removeAllViews();
 		attachLegend(container, routeStatistics);
@@ -153,14 +152,14 @@ public class RouteInfoCard extends BaseCard {
 		return "000";
 	}
 
-	private <E> void attachLegend(ViewGroup container, RouteStatisticsHelper.RouteStatistics<E> routeStatistics) {
-		Map<E, RouteSegmentAttribute<E>> partition = routeStatistics.getPartition();
-		List<Map.Entry<E, RouteSegmentAttribute<E>>> list = new ArrayList<>(partition.entrySet());
+	private void attachLegend(ViewGroup container, RouteStatistics routeStatistics) {
+		Map<String, RouteSegmentAttribute> partition = routeStatistics.getPartition();
+		List<Map.Entry<String, RouteSegmentAttribute>> list = new ArrayList<>(partition.entrySet());
 		sortRouteSegmentAttributes(list);
 		ContextThemeWrapper ctx = new ContextThemeWrapper(mapActivity, !nightMode ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme);
 		LayoutInflater inflater = LayoutInflater.from(ctx);
-		for (Map.Entry<E, RouteSegmentAttribute<E>> entry : list) {
-			RouteSegmentAttribute<E> segment = entry.getValue();
+		for (Map.Entry<String, RouteSegmentAttribute> entry : list) {
+			RouteSegmentAttribute segment = entry.getValue();
 			View view = inflater.inflate(R.layout.route_details_legend, container, false);
 			int segmentColor = segment.getColor();
 			Drawable circle = app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_circle, segmentColor);
@@ -180,10 +179,10 @@ public class RouteInfoCard extends BaseCard {
 		}
 	}
 
-	private <E> void sortRouteSegmentAttributes(List<Map.Entry<E, RouteSegmentAttribute<E>>> list) {
-		Collections.sort(list, new Comparator<Map.Entry<E, RouteSegmentAttribute<E>>>() {
+	private void sortRouteSegmentAttributes(List<Map.Entry<String, RouteSegmentAttribute>> list) {
+		Collections.sort(list, new Comparator<Map.Entry<String, RouteSegmentAttribute>>() {
 			@Override
-			public int compare(Map.Entry<E, RouteSegmentAttribute<E>> o1, Map.Entry<E, RouteSegmentAttribute<E>> o2) {
+			public int compare(Map.Entry<String, RouteSegmentAttribute> o1, Map.Entry<String, RouteSegmentAttribute> o2) {
 				Object key1 = o1.getKey();
 				Object key2 = o2.getKey();
 				if (key1 instanceof String && key2 instanceof String) {
