@@ -27,7 +27,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsNavigationActivity;
 import net.osmand.plus.helpers.GpxUiHelper;
-import net.osmand.router.RouteStatisticsHelper.Boundaries;
 import net.osmand.router.RouteStatisticsHelper.RouteSegmentAttribute;
 import net.osmand.router.RouteStatisticsHelper.RouteStatistics;
 import net.osmand.util.Algorithms;
@@ -82,7 +81,7 @@ public class RouteInfoCard extends BaseCard {
 		chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
 			@Override
 			public void onValueSelected(Entry e, Highlight h) {
-				List<RouteSegmentAttribute> elems = routeStatistics.getElements();
+				List<RouteSegmentAttribute> elems = routeStatistics.elements;
 				int i = h.getStackIndex();
 				if (i >= 0 && elems.size() > i) {
 					selectedPropertyName = elems.get(i).getPropertyName();
@@ -153,9 +152,8 @@ public class RouteInfoCard extends BaseCard {
 	}
 
 	private void attachLegend(ViewGroup container, RouteStatistics routeStatistics) {
-		Map<String, RouteSegmentAttribute> partition = routeStatistics.getPartition();
+		Map<String, RouteSegmentAttribute> partition = routeStatistics.partition;
 		List<Map.Entry<String, RouteSegmentAttribute>> list = new ArrayList<>(partition.entrySet());
-		sortRouteSegmentAttributes(list);
 		ContextThemeWrapper ctx = new ContextThemeWrapper(mapActivity, !nightMode ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme);
 		LayoutInflater inflater = LayoutInflater.from(ctx);
 		for (Map.Entry<String, RouteSegmentAttribute> entry : list) {
@@ -177,30 +175,6 @@ public class RouteInfoCard extends BaseCard {
 
 			container.addView(view);
 		}
-	}
-
-	private void sortRouteSegmentAttributes(List<Map.Entry<String, RouteSegmentAttribute>> list) {
-		Collections.sort(list, new Comparator<Map.Entry<String, RouteSegmentAttribute>>() {
-			@Override
-			public int compare(Map.Entry<String, RouteSegmentAttribute> o1, Map.Entry<String, RouteSegmentAttribute> o2) {
-				Object key1 = o1.getKey();
-				Object key2 = o2.getKey();
-				if (key1 instanceof String && key2 instanceof String) {
-					float distance1 = o1.getValue().getDistance();
-					float distance2 = o2.getValue().getDistance();
-
-					if (((String) key1).equalsIgnoreCase(UNDEFINED_ATTR) || distance1 < distance2) {
-						return 1;
-					}
-					if (((String) key2).equalsIgnoreCase(UNDEFINED_ATTR) || distance1 > distance2) {
-						return -1;
-					}
-				} else if (key1 instanceof Boundaries && key2 instanceof Boundaries) {
-					return ((Boundaries) key1).compareTo((Boundaries) key2);
-				}
-				return 0;
-			}
-		});
 	}
 
 	private Spannable getSpanLegend(String title, RouteSegmentAttribute segment, boolean selected) {

@@ -1287,7 +1287,7 @@ public class GpxUiHelper {
 		}
 		float divX = setupAxisDistance(app, yAxis, analysis.totalDistance);
 
-		List<RouteSegmentAttribute> segments = routeStatistics.getElements();
+		List<RouteSegmentAttribute> segments = routeStatistics.elements;
 		List<BarEntry> entries = new ArrayList<>();
 		float[] stacks = new float[segments.size()];
 		int[] colors = new int[segments.size()];
