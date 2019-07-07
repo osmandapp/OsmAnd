@@ -1835,7 +1835,7 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="morning">Mattina</string>
     <string name="night">Notte</string>
     <string name="shared_string_not_selected">Non selezionato</string>
-    <string name="shared_string_type">Digita</string>
+    <string name="shared_string_type">Tipo</string>
     <string name="starting_point">Punto di partenza</string>
     <string name="select_month_and_country">Scegli il mese e lo stato</string>
     <string name="item_removed">Oggetto rimosso</string>
