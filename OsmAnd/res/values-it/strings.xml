@@ -3142,4 +3142,10 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="routing_profile_broutrer">BRouter (offline)</string>
     <string name="default_speed_dialog_msg">Utilizzata per calcolare l\'ora di arrivo prevista nel calcolo del percorso</string>
     <string name="osmand_default_routing">Navigazione OsmAnd</string>
+    <string name="custom_routing">Profilo personalizzato</string>
+    <string name="routing_attr_piste_type_downhill_name">Sci alpino</string>
+    <string name="routing_attr_piste_type_downhill_description">Piste per sci alpino e accesso agli impianti di risalita.</string>
+    <string name="routing_attr_piste_type_skitour_name">Scialpinismo</string>
+    <string name="routing_attr_piste_type_skitour_description">Percorsi per lo sci alpinismo.</string>
+    <string name="routing_attr_piste_type_sled_description">Piste per slittino.</string>
 </resources>
