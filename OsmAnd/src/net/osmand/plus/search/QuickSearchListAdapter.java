@@ -218,8 +218,9 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			String textTitle;
 			int minimalSearchRadius = searchUICore.getMinimalSearchRadius(searchPhrase);
 			if (searchUICore.isSearchMoreAvailable(searchPhrase) && minimalSearchRadius != Integer.MAX_VALUE) {
+				double rd = OsmAndFormatter.calculateRoundedDist(minimalSearchRadius, app);
 				textTitle = app.getString(R.string.nothing_found_in_radius) + " "
-						+ OsmAndFormatter.getFormattedDistance(minimalSearchRadius, app);
+						+ OsmAndFormatter.getFormattedDistance((float) rd, app);
 			} else {
 				textTitle = app.getString(R.string.search_nothing_found);
 			}
