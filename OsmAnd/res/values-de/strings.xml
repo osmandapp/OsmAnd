@@ -3090,7 +3090,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="profile_alert_delete_title">Profil löschen</string>
     <string name="profile_alert_delete_msg">Möchten Sie das Profil %s wirklich löschen\?</string>
     <string name="select_base_profile_dialog_title">Ein Basisprofil auswählen</string>
-    <string name="select_base_profile_dialog_message">Erstellen Sie ein eigenes Anwendungsprofil aus einem der Standardprofile der App. Dieses bestimmt die Grundeinstellungen – etwa die standardmäßig Sichtbarkeit der Widgets und die Einheiten für Geschwindigkeit und Entfernungen. Dieses sind die Standardprofile der App, zusammen mit Beispielen von darauf basierenden Anwendungsprofilen die erweitert werden können:</string>
+    <string name="select_base_profile_dialog_message">Bauen Sie ein eigenes Anwendungsprofil auf einem der Standardprofile der App auf. Dieses bestimmt die Grundeinstellungen wie die standardmäßige Sichtbarkeit von Widgets und die Einheiten für Geschwindigkeit und Entfernungen. Dies sind die App-Standardprofile zusammen mit Beispielen für eigene Profile, die erweitert werden können:</string>
     <string name="select_nav_profile_dialog_title">Navigationsart auswählen</string>
     <string name="base_profile_descr_car">Auto, LKW, Motorrad</string>
     <string name="base_profile_descr_bicycle">MTB, Moped, Pferd</string>
