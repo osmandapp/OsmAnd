@@ -2146,7 +2146,7 @@
     <string name="quick_favorites_show_favorites_dialog">Mostrar diálogo de Favoritos</string>
     <string name="quick_favorites_name_preset">Nombre predefinido</string>
     <string name="quick_action_add_marker_descr">Este botón de acción, añade un marcador en el centro de la pantalla.</string>
-    <string name="quick_action_add_gpx_descr">Este botón de acción, añade un punto de referencia GPX en el centro de la pantalla.</string>
+    <string name="quick_action_add_gpx_descr">Este botón de acción añade un punto de referencia GPX en el centro de la pantalla.</string>
     <string name="quick_action_take_audio_note_descr">Este botón de acción, añade una nota de audio en el centro de la pantalla.</string>
     <string name="quick_action_take_video_note_descr">Este botón de acción, añade una nota de video en el centro de la pantalla.</string>
     <string name="quick_action_take_photo_note_descr">Este botón de acción, añade una nota fotográfica en el centro de la pantalla.</string>
@@ -3088,7 +3088,7 @@
 \n</string>
     <string name="app_mode_personal_transporter">Transportador personal</string>
     <string name="app_mode_monowheel">Monociclo</string>
-    <string name="app_mode_scooter">Motoneta</string>
+    <string name="app_mode_scooter">Escúter</string>
     <string name="precision_hdop_and_vdop">Precisión horizontal: %1$s, vertical: %2$s</string>
     <string name="precision_hdop">Precisión horizontal: %s</string>
     <string name="rate_dialog_descr">Por favor, dedícanos 30 segundos compartiendo tus comentarios y valorando en Google Play nuestro trabajo.</string>
@@ -3150,7 +3150,7 @@
     <string name="profile_alert_need_save_title">Guardar cambios</string>
     <string name="profile_alert_need_save_msg">Debes guardar los cambios en el perfil antes de continuar</string>
     <string name="profile_alert_delete_title">Eliminar perfil</string>
-    <string name="profile_alert_delete_msg">Estás seguro de que deseas eliminar el perfil %s</string>
+    <string name="profile_alert_delete_msg">¿Estás seguro de que deseas eliminar el perfil %s\?</string>
     <string name="select_base_profile_dialog_title">Selecciona un perfil base</string>
     <string name="select_base_profile_dialog_message">Basa tu perfil personalizado en uno de los perfiles de aplicación predeterminados, esto define la configuración básica como la visibilidad de los widgets y las unidades de velocidad y distancia. Estos son los perfiles de aplicación predeterminados, junto con ejemplos de perfiles personalizados que pueden ser ampliados:</string>
     <string name="select_nav_profile_dialog_title">Selecciona el tipo de navegación</string>
