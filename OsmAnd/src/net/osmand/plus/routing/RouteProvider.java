@@ -60,6 +60,7 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.xml.parsers.FactoryConfigurationError;
 import javax.xml.parsers.ParserConfigurationException;
@@ -1145,6 +1146,22 @@ public class RouteProvider {
 		}
 		lats[index] = params.end.getLatitude();
 		lons[index] = params.end.getLongitude();
+
+		Set<LatLon> impassableRoads = params.ctx.getAvoidSpecificRoads().getImpassableRoads().keySet();
+		double[] nogoLats = new double[impassableRoads.size()];
+		double[] nogoLons = new double[impassableRoads.size()];
+		double[] nogoRadi = new double[impassableRoads.size()];
+
+		if(impassableRoads.size() != 0) {
+			int nogoindex = 0;
+			for (LatLon nogos : impassableRoads) {
+				nogoLats[nogoindex] = nogos.getLatitude();
+				nogoLons[nogoindex] = nogos.getLongitude();
+				nogoRadi[nogoindex] = 10;
+				nogoindex++;
+			}
+		}
+		
 		if (params.mode.isDerivedRoutingFrom(ApplicationMode.PEDESTRIAN)) {
 			mode = "foot"; //$NON-NLS-1$
 		} else if (params.mode.isDerivedRoutingFrom(ApplicationMode.BICYCLE)) {
@@ -1155,6 +1172,9 @@ public class RouteProvider {
 		Bundle bpars = new Bundle();
 		bpars.putDoubleArray("lats", lats);
 		bpars.putDoubleArray("lons", lons);
+		bpars.putDoubleArray("nogoLats", nogoLats);
+		bpars.putDoubleArray("nogoLons", nogoLons);
+		bpars.putDoubleArray("nogoRadi", nogoRadi);
 		bpars.putString("fast", params.fast ? "1" : "0");
 		bpars.putString("v", mode);
 		bpars.putString("trackFormat", "gpx");
