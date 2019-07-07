@@ -3093,7 +3093,7 @@
     <string name="profile_alert_delete_title">Apagar perfil</string>
     <string name="profile_alert_delete_msg">Tem certeza de que deseja apagar o perfil %s</string>
     <string name="select_base_profile_dialog_title">Selecione o perfil base</string>
-    <string name="select_base_profile_dialog_message">O Perfil de Aplicativo Personalizado deve ser baseado num dos Perfis de Aplicativo predefinido. O Perfil Seleccionado define definições básicas: configuração de Widgets, unidades de velocidade e distância. Na cadeia abaixo do nome do Perfil, você pode aprender quais Perfis de Navegação são adequados para cada Perfil de Aplicação.</string>
+    <string name="select_base_profile_dialog_message">Basê seu perfil personalizado num dos perfis de app predefinido, para definir a configuração básica, como a visibilidade predefinida de widgets e unidades de velocidade e distância. Estes são os perfis de app predefinidos, juntamente com exemplos de perfis personalizados para os quais eles podem ser estendidos:</string>
     <string name="select_nav_profile_dialog_title">Selecione o tipo de navegação</string>
     <string name="base_profile_descr_car">Carro, caminhão, motocicleta</string>
     <string name="base_profile_descr_bicycle">MTB, ciclomotor, cavalo</string>
@@ -3150,20 +3150,20 @@
     <string name="shared_string_crash">Travou</string>
     <string name="last_launch_crashed">O último lançamento de OsmAnd falhou. Por favor ajude-nos a melhorar o OsmAnd enviando-nos uma mensagem de erro.</string>
     <string name="app_mode_ufo">UFO</string>
-    <string name="release_3_4">"- Perfis de aplicação: crie o seu próprio perfil para as suas necessidades, com um ícone e cor personalizados
-\n
-\n - Adicionar configurações como predefinição e velocidade mínima/máxima para perfis
-\n
-\n - Adicionar um widget com coordenadas atuais
-\n
-\n - Adicionar opções para mostrar a bússola no mapa com uma régua de raio
-\n
-\n - Descarregamento de mapas  em segundo plano melhorado
-\n
-\n - A seleção da língua Wikipedia corrigida
-\n
-\n - Comportamento fixo do botão da bússola durante a navegação
-\n
+    <string name="release_3_4">"- Perfis de aplicação: crie o seu perfil personalizado para as suas necessidades, com um ícone e cor personalizados 
+\n 
+\n - Adaptar predefinições para perfis e velocidades mínimas/máximas
+\n 
+\n - Um widget para as coordenadas atuais adicionado
+\n 
+\n - Opções para mostrar a bússola no mapa com uma régua de raio adicionados
+\n 
+\n - Descarregamento de mapas  em segundo plano melhorado 
+\n 
+\n - A seleção da língua Wikipedia corrigida 
+\n 
+\n - Comportamento fixo do botão da bússola durante a navegação 
+\n 
 \n - Correções de bugs
 \n
 \n"</string>
