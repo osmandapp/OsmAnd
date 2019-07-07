@@ -3165,7 +3165,7 @@
     <string name="zoom_by_wunderlinq">Usa WunderLINQ para controlar</string>
     <string name="quick_action_need_to_add_item_to_list">Debes agregar al menos un elemento a la lista en Configuración de acción rápida</string>
     <string name="routing_attr_piste_type_downhill_name">Esquí alpino</string>
-    <string name="routing_attr_piste_type_downhill_description">"Pistas para esquí alpino  y acceso a remontes."</string>
+    <string name="routing_attr_piste_type_downhill_description">Pistas para esquí alpino y acceso a remontes.</string>
     <string name="routing_attr_piste_type_nordic_name">Esquí de fondo/nórdico</string>
     <string name="routing_attr_piste_type_nordic_description">Senderos para el esquí nórdico o de fondo.</string>
     <string name="routing_attr_piste_type_skitour_name">Esquí de travesía</string>
