@@ -32,7 +32,7 @@ public class RouteStatisticsHelper {
 		BOUNDARIES_CLASS[0] = "steepness=" + (MIN_INCLINE + 1) + "_" + MIN_DIVIDED_INCLINE;
 		for (int i = 1; i < NUM - 1; i++) {
 			BOUNDARIES_ARRAY[i] = MIN_DIVIDED_INCLINE + (i - 1) * STEP;
-			BOUNDARIES_CLASS[NUM - 1] = "steepness=" + (BOUNDARIES_ARRAY[i - 1] + 1) + "_" + BOUNDARIES_ARRAY[i];
+			BOUNDARIES_CLASS[i] = "steepness=" + (BOUNDARIES_ARRAY[i - 1] + 1) + "_" + BOUNDARIES_ARRAY[i];
 		}
 		BOUNDARIES_ARRAY[NUM - 1] = MAX_INCLINE;
 		BOUNDARIES_CLASS[NUM - 1] = "steepness="+MAX_DIVIDED_INCLINE+"_"+MAX_INCLINE;
@@ -70,9 +70,11 @@ public class RouteStatisticsHelper {
 																RenderingRuleSearchRequest defaultSearchRequest) {
 		List<RouteSegmentWithIncline> routeSegmentWithInclines = calculateInclineRouteSegments(route);
 		List<String> attributeNames = new ArrayList<>();
-		for (String s : currentRenderer.getRenderingAttributeNames()) {
-			if (s.startsWith("routeInfo_")) {
-				attributeNames.add(s);
+		if (currentRenderer != null) {
+			for (String s : currentRenderer.getRenderingAttributeNames()) {
+				if (s.startsWith("routeInfo_")) {
+					attributeNames.add(s);
+				}
 			}
 		}
 		if(attributeNames.isEmpty()) {
@@ -117,10 +119,11 @@ public class RouteStatisticsHelper {
 				float distCum = 0;
 				prevH = heightValues[1];
 				incl.h = prevH ;
-				if(incl.interpolatedHeightByStep.length > indStep) {
+				if(incl.interpolatedHeightByStep != null && incl.interpolatedHeightByStep.length > indStep) {
 					incl.interpolatedHeightByStep[indStep++] = prevH;
 				}
-				while(indStep < incl.interpolatedHeightByStep.length && indH < heightValues.length) {
+				while(incl.interpolatedHeightByStep != null && 
+						indStep < incl.interpolatedHeightByStep.length && indH < heightValues.length) {
 					float dist = heightValues[indH] + distCum;
 					if(dist > indStep * H_STEP) {
 						if(dist == distCum) {
@@ -141,7 +144,8 @@ public class RouteStatisticsHelper {
 			} else {
 				incl.h = prevH;
 			}
-			while(indStep < incl.interpolatedHeightByStep.length) {
+			while(incl.interpolatedHeightByStep != null && 
+					indStep < incl.interpolatedHeightByStep.length) {
 				incl.interpolatedHeightByStep[indStep++] = prevH;
 			}
 			prevHeight = prevH;
@@ -191,10 +195,10 @@ public class RouteStatisticsHelper {
 				rswi.slopeClassUserString = new String[rswi.slopeByStep.length];
 				for (int t = 0; t < rswi.slopeClass.length; t++) {
 					
-					for (int k = 0; k < BOUNDARIES_ARRAY.length - 1; k++) {
+					for (int k = 0; k < BOUNDARIES_ARRAY.length; k++) {
 						if (rswi.slopeByStep[t] <= BOUNDARIES_ARRAY[k] || k == BOUNDARIES_ARRAY.length - 1) {
-							rswi.slopeClass[k] = BOUNDARIES_CLASS[k];
-							rswi.slopeClassUserString[k] = classFormattedStrings[k];
+							rswi.slopeClass[t] = BOUNDARIES_CLASS[k];
+							rswi.slopeClassUserString[t] = classFormattedStrings[k];
 							break;
 						}
 					}
@@ -297,8 +301,9 @@ public class RouteStatisticsHelper {
 
 		public RouteSegmentAttribute classifySegment(String attribute, String slopeClass, RouteSegmentWithIncline segment) {
 			RouteSegmentAttribute res = new RouteSegmentAttribute(UNDEFINED_ATTR, 0);
-			RenderingRuleSearchRequest currentRequest = new RenderingRuleSearchRequest(currentRenderingRuleSearchRequest);
-			if (searchRenderingAttribute(attribute, currentRenderer, currentRequest, segment, slopeClass)) {
+			RenderingRuleSearchRequest currentRequest = 
+					currentRenderer == null ? null : new RenderingRuleSearchRequest(currentRenderingRuleSearchRequest);
+			if (currentRenderer != null && searchRenderingAttribute(attribute, currentRenderer, currentRequest, segment, slopeClass)) {
 				res = new RouteSegmentAttribute(currentRequest.getStringPropertyValue(currentRenderer.PROPS.R_ATTR_STRING_VALUE),
 						currentRequest.getIntPropertyValue(currentRenderer.PROPS.R_ATTR_COLOR_VALUE));
 			} else {
