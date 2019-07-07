@@ -958,8 +958,6 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				clickRouteGo();
 			}
 		});
-		startButton.setFocusable(true);
-		startButton.requestFocus();
 		View cancelButton = mainView.findViewById(R.id.cancel_button);
 		TextView cancelButtonText = (TextView) mainView.findViewById(R.id.cancel_button_descr);
 		if (helper.isRouteCalculated() || helper.isRouteBeingCalculated() || isTransportRouteCalculated()) {

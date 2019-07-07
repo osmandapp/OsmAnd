@@ -1055,10 +1055,6 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> ZOOM_BY_TRACKBALL =
 			new BooleanAccessibilityPreference("zoom_by_trackball", false).makeGlobal();
 
-	// this value string is synchronized with settings_pref.xml preference name
-	public final OsmandPreference<Boolean> ZOOM_BY_WUNDERLINQ =
-			new BooleanAccessibilityPreference("zoom_by_wunderlinq", false).makeGlobal();
-
 
 	// magnetic field doesn'torkmost of the time on some phones
 	public final OsmandPreference<Boolean> USE_MAGNETIC_FIELD_SENSOR_COMPASS = new BooleanPreference("use_magnetic_field_sensor_compass", false).makeGlobal().cache();
