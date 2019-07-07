@@ -3140,6 +3140,6 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="base_profile_descr_aircraft">Aereo, volo a vela</string>
     <string name="routing_profile_geocoding">Geocodifica</string>
     <string name="routing_profile_broutrer">BRouter (offline)</string>
-    <string name="default_speed_dialog_msg">Utilizzato per calcolare l\'ora di arrivo prevista durante il routing</string>
+    <string name="default_speed_dialog_msg">Utilizzata per calcolare l\'ora di arrivo prevista nel calcolo del percorso</string>
     <string name="osmand_default_routing">Navigazione OsmAnd</string>
 </resources>
