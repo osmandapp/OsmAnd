@@ -3148,4 +3148,5 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="routing_attr_piste_type_skitour_name">Scialpinismo</string>
     <string name="routing_attr_piste_type_skitour_description">Percorsi per lo sci alpinismo.</string>
     <string name="routing_attr_piste_type_sled_description">Piste per slittino.</string>
+    <string name="shared_string_crash">Crash</string>
 </resources>
