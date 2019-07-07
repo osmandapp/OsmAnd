@@ -9,7 +9,6 @@ import net.osmand.binary.BinaryMapRouteReaderAdapter;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
-import net.osmand.util.Algorithms;
 
 public class RouteStatisticsHelper {
 
@@ -44,15 +43,28 @@ public class RouteStatisticsHelper {
 		public final List<RouteSegmentAttribute> elements;
 		public final Map<String, RouteSegmentAttribute> partition;
 		public final float totalDistance;
+		public final String name;
 
-		private RouteStatistics(List<RouteSegmentAttribute> elements,
+		private RouteStatistics(String name, List<RouteSegmentAttribute> elements,
 								Map<String, RouteSegmentAttribute> partition,
 								float totalDistance) {
+			this.name = name.startsWith("routeInfo_") ? name.substring("routeInfo_".length()) : name;
 			this.elements = elements;
 			this.partition = partition;
 			this.totalDistance = totalDistance;
 		}
+		
+		@Override
+		public String toString() {
+			StringBuilder s  = new StringBuilder("Statistic '").append(name).append("':");
+			for (RouteSegmentAttribute a : elements) {
+				s.append(String.format(" %.2fm %s,", a.distance, a.propertyName));
+			}
+			s.append("\n  Partition: ").append(partition);
+			return s.toString();
+		}
 	}
+	
 
 	private static class RouteSegmentWithIncline {
 		RouteDataObject obj;
@@ -235,7 +247,7 @@ public class RouteStatisticsHelper {
 			List<RouteSegmentAttribute> routeAttributes = processRoute(route, attribute);
 			Map<String, RouteSegmentAttribute> partition = makePartition(routeAttributes);
 			float totalDistance = computeTotalDistance(routeAttributes);
-			return new RouteStatistics(routeAttributes, partition, totalDistance);
+			return new RouteStatistics(attribute, routeAttributes, partition, totalDistance);
 		}
 
 		Map<String, RouteSegmentAttribute> makePartition(List<RouteSegmentAttribute> routeAttributes) {
@@ -328,7 +340,7 @@ public class RouteStatisticsHelper {
 				if (tp.getTag().equals("highway") || tp.getTag().equals("route") ||
 						tp.getTag().equals("railway") || tp.getTag().equals("aeroway") || tp.getTag().equals("aerialway")) {
 					req.setStringFilter(rrs.PROPS.R_TAG, tp.getTag());
-					req.setStringFilter(rrs.PROPS.R_TAG, tp.getValue());
+					req.setStringFilter(rrs.PROPS.R_VALUE, tp.getValue());
 				} else {
 					if (additional.length() > 0) {
 						additional += ";";
@@ -348,7 +360,7 @@ public class RouteStatisticsHelper {
 		private float distance;
 
 		RouteSegmentAttribute(String propertyName, int color) {
-			this.propertyName = propertyName == null ? Algorithms.colorToString(color) : propertyName;
+			this.propertyName = propertyName == null ? UNDEFINED_ATTR : propertyName;
 			this.color = color;
 		}
 
