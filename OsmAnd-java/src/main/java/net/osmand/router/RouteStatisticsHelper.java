@@ -1,36 +1,41 @@
 package net.osmand.router;
 
-import net.osmand.binary.BinaryMapRouteReaderAdapter;
-import net.osmand.binary.RouteDataObject;
-import net.osmand.render.RenderingRuleSearchRequest;
-import net.osmand.render.RenderingRulesStorage;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+
+import net.osmand.binary.BinaryMapRouteReaderAdapter;
+import net.osmand.binary.RouteDataObject;
+import net.osmand.render.RenderingRuleSearchRequest;
+import net.osmand.render.RenderingRulesStorage;
+import net.osmand.util.Algorithms;
 
 public class RouteStatisticsHelper {
 
 	public static final String UNDEFINED_ATTR = "undefined";
 	private static final double H_STEP = 5;
 	private static final double H_SLOPE_APPROX = 100;
-	private static final int MIN_INCLINE = -100;
+	private static final int MIN_INCLINE = -101;
 	private static final int MIN_DIVIDED_INCLINE = -20;
 	private static final int MAX_INCLINE = 100;
 	private static final int MAX_DIVIDED_INCLINE = 20;
 	private static final int STEP = 4;
-	private static final int NUM;
 	private static final int[] BOUNDARIES_ARRAY;
+	private static final String[] BOUNDARIES_CLASS;
 
 	static {
-		NUM = ((MAX_DIVIDED_INCLINE - MIN_DIVIDED_INCLINE) / STEP) + 3;
+		int NUM = ((MAX_DIVIDED_INCLINE - MIN_DIVIDED_INCLINE) / STEP) + 3;
 		BOUNDARIES_ARRAY = new int[NUM];
+		BOUNDARIES_CLASS = new String[NUM];
 		BOUNDARIES_ARRAY[0] = MIN_INCLINE;
+		BOUNDARIES_CLASS[0] = "steepness=" + (MIN_INCLINE + 1) + "_" + MIN_DIVIDED_INCLINE;
 		for (int i = 1; i < NUM - 1; i++) {
 			BOUNDARIES_ARRAY[i] = MIN_DIVIDED_INCLINE + (i - 1) * STEP;
+			BOUNDARIES_CLASS[NUM - 1] = "steepness=" + (BOUNDARIES_ARRAY[i - 1] + 1) + "_" + BOUNDARIES_ARRAY[i];
 		}
 		BOUNDARIES_ARRAY[NUM - 1] = MAX_INCLINE;
+		BOUNDARIES_CLASS[NUM - 1] = "steepness="+MAX_DIVIDED_INCLINE+"_"+MAX_INCLINE;
 	}
 
 
@@ -55,6 +60,9 @@ public class RouteStatisticsHelper {
 		float h;
 		float[] interpolatedHeightByStep;
 		float[] slopeByStep;
+		String[] slopeClass;
+		String[] slopeClassUserString;
+		
 	}
 
 	public static List<RouteStatistics> calculateRouteStatistic(List<RouteSegmentResult> route, RenderingRulesStorage currentRenderer,
@@ -100,7 +108,8 @@ public class RouteStatisticsHelper {
 			float prevH = prevHeight;
 			int indStep = 0;
 			if(incl.dist > H_STEP) {
-				incl.interpolatedHeightByStep = new float[(int) (incl.dist / H_STEP) - 1];
+				// for 10.1 meters 3 points (0, 5, 10)
+				incl.interpolatedHeightByStep = new float[(int) ((incl.dist) / H_STEP) + 1];
 				totalArrayHeightsLength += incl.interpolatedHeightByStep.length;
 			}
 			if(heightValues != null && heightValues.length > 0) {
@@ -108,14 +117,17 @@ public class RouteStatisticsHelper {
 				float distCum = 0;
 				prevH = heightValues[1];
 				incl.h = prevH ;
+				if(incl.interpolatedHeightByStep.length > indStep) {
+					incl.interpolatedHeightByStep[indStep++] = prevH;
+				}
 				while(indStep < incl.interpolatedHeightByStep.length && indH < heightValues.length) {
 					float dist = heightValues[indH] + distCum;
-					if(dist > (indStep + 1) * H_STEP) {
+					if(dist > indStep * H_STEP) {
 						if(dist == distCum) {
 							incl.interpolatedHeightByStep[indStep] = prevH;
 						} else {
 							incl.interpolatedHeightByStep[indStep] = (float) (prevH +
-									((indStep + 1) * H_STEP - distCum) *
+									(indStep * H_STEP - distCum) *
 											(heightValues[indH + 1] - prevH) / (dist - distCum));
 						}
 						indStep++;
@@ -145,21 +157,57 @@ public class RouteStatisticsHelper {
 			}
 		}
 		iter = 0;
+		int minSlope = Integer.MAX_VALUE;
+		int maxSlope = Integer.MIN_VALUE;
 		for(int i = 0; i < input.size(); i ++) {
 			RouteSegmentWithIncline rswi = input.get(i);
 			if(rswi.interpolatedHeightByStep != null) {
 				rswi.slopeByStep = new float[rswi.interpolatedHeightByStep.length];
 				for (int k = 0; k < rswi.slopeByStep.length; k++) {
 					if (iter > slopeSmoothShift && iter + slopeSmoothShift < heightArray.length) {
-						rswi.slopeByStep[k] =
-								(float) ((heightArray[iter + slopeSmoothShift] - heightArray[iter - slopeSmoothShift]) * 100
-										/ H_SLOPE_APPROX);
+						double slope = (heightArray[iter + slopeSmoothShift] - heightArray[iter - slopeSmoothShift]) * 100
+								/ H_SLOPE_APPROX;
+						rswi.slopeByStep[k] = (float) slope;
+						minSlope = Math.min((int) slope, minSlope);
+						maxSlope = Math.max((int) slope, maxSlope);
+						
+						
 					}
 					iter++;
 				}
 			}
 		}
+		String[] classFormattedStrings = new String[BOUNDARIES_ARRAY.length];
+		classFormattedStrings[0] = formatSlopeString(minSlope, MIN_DIVIDED_INCLINE);
+		classFormattedStrings[1] = formatSlopeString(minSlope, MIN_DIVIDED_INCLINE);
+		classFormattedStrings[BOUNDARIES_ARRAY.length - 1] = formatSlopeString(MAX_DIVIDED_INCLINE, maxSlope);
+		for (int k = 2; k < BOUNDARIES_ARRAY.length - 1; k++) {
+			classFormattedStrings[k] = formatSlopeString(BOUNDARIES_ARRAY[k - 1], BOUNDARIES_ARRAY[k]);
+		}
+		for(int i = 0; i < input.size(); i ++) {
+			RouteSegmentWithIncline rswi = input.get(i);
+			if(rswi.slopeByStep != null) {
+				rswi.slopeClass = new String[rswi.slopeByStep.length];
+				rswi.slopeClassUserString = new String[rswi.slopeByStep.length];
+				for (int t = 0; t < rswi.slopeClass.length; t++) {
+					
+					for (int k = 0; k < BOUNDARIES_ARRAY.length - 1; k++) {
+						if (rswi.slopeByStep[t] <= BOUNDARIES_ARRAY[k] || k == BOUNDARIES_ARRAY.length - 1) {
+							rswi.slopeClass[k] = BOUNDARIES_CLASS[k];
+							rswi.slopeClassUserString[k] = classFormattedStrings[k];
+							break;
+						}
+					}
+					// end of break
+				}
+			}
+		}
 		return input;
+	}
+
+
+	private static String formatSlopeString(int slope, int next) {
+		return String.format("%d%% .. %d%%", slope, next);
 	}
 
 
@@ -211,42 +259,65 @@ public class RouteStatisticsHelper {
 			List<RouteSegmentAttribute> routes = new ArrayList<>();
 			RouteSegmentAttribute prev = null;
 			for (RouteSegmentWithIncline segment : route) {
-				RouteSegmentAttribute current = classifySegment(attribute, segment);
-				if (prev != null && prev.getPropertyName() != null &&
+				if(segment.slopeClass == null || segment.slopeClass.length == 0) {
+					RouteSegmentAttribute current = classifySegment(attribute, null, segment);
+					current.distance = segment.dist;
+					if (prev != null && prev.getPropertyName() != null &&
 						prev.getPropertyName().equals(current.getPropertyName())) {
-					prev.incrementDistanceBy(current.distance);
+						prev.incrementDistanceBy(current.distance);
+					} else {
+						routes.add(current);
+						prev = current;
+					}
 				} else {
-					routes.add(current);
-					prev = current;
+					for(int i = 0; i < segment.slopeClass.length; i++) {
+						float d = (float) (i == 0 ? (segment.dist - H_STEP * (segment.slopeClass.length - 1)) : H_STEP);
+						if(i > 0 && segment.slopeClass[i].equals(segment.slopeClass[i - 1])) {
+							prev.incrementDistanceBy(d);
+						} else {
+							RouteSegmentAttribute current = classifySegment(attribute, 
+									segment.slopeClass[i], segment);
+							current.distance = d;
+							if (prev != null && prev.getPropertyName() != null &&
+								prev.getPropertyName().equals(current.getPropertyName())) {
+								prev.incrementDistanceBy(current.distance);
+							} else {
+								routes.add(current);
+								prev = current;
+							}
+							// TODO pass slope user name
+							// prev.propertyUserName = segment.slopeClassUserString;
+						}
+					}
 				}
 			}
 			return routes;
 		}
 
 
-		public RouteSegmentAttribute classifySegment(String attribute, RouteSegmentWithIncline segment) {
+		public RouteSegmentAttribute classifySegment(String attribute, String slopeClass, RouteSegmentWithIncline segment) {
 			RouteSegmentAttribute res = new RouteSegmentAttribute(UNDEFINED_ATTR, 0);
 			RenderingRuleSearchRequest currentRequest = new RenderingRuleSearchRequest(currentRenderingRuleSearchRequest);
-			if (searchRenderingAttribute(attribute, currentRenderer, currentRequest, segment)) {
+			if (searchRenderingAttribute(attribute, currentRenderer, currentRequest, segment, slopeClass)) {
 				res = new RouteSegmentAttribute(currentRequest.getStringPropertyValue(currentRenderer.PROPS.R_ATTR_STRING_VALUE),
 						currentRequest.getIntPropertyValue(currentRenderer.PROPS.R_ATTR_COLOR_VALUE));
 			} else {
 				RenderingRuleSearchRequest defaultRequest = new RenderingRuleSearchRequest(defaultRenderingRuleSearchRequest);
-				if (searchRenderingAttribute(attribute, defaultRenderer, defaultRequest, segment)) {
+				if (searchRenderingAttribute(attribute, defaultRenderer, defaultRequest, segment, slopeClass)) {
 					res = new RouteSegmentAttribute(defaultRequest.getStringPropertyValue(defaultRenderer.PROPS.R_ATTR_STRING_VALUE),
 							defaultRequest.getIntPropertyValue(defaultRenderer.PROPS.R_ATTR_COLOR_VALUE));
 				}
 			}
-			res.distance = segment.dist;
 			return res;
 		}
 
 		protected boolean searchRenderingAttribute(String attribute,
-												   RenderingRulesStorage rrs, RenderingRuleSearchRequest req, RouteSegmentWithIncline segment) {
+												   RenderingRulesStorage rrs, RenderingRuleSearchRequest req, RouteSegmentWithIncline segment,
+												   String slopeClass) {
 			//String additional = attrName + "=" + attribute;
 			RouteDataObject obj = segment.obj;
 			int[] tps = obj.getTypes();
-			String additional = "";
+			String additional = slopeClass != null ? slopeClass : "";
 			for (int k = 0; k < tps.length; k++) {
 				BinaryMapRouteReaderAdapter.RouteTypeRule tp = obj.region.quickGetEncodingRule(tps[k]);
 				if (tp.getTag().equals("highway") || tp.getTag().equals("route") ||
@@ -272,7 +343,7 @@ public class RouteStatisticsHelper {
 		private float distance;
 
 		RouteSegmentAttribute(String propertyName, int color) {
-			this.propertyName = propertyName;
+			this.propertyName = propertyName == null ? Algorithms.colorToString(color) : propertyName;
 			this.color = color;
 		}
 
