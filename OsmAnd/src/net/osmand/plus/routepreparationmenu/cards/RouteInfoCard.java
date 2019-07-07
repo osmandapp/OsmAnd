@@ -27,9 +27,10 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsNavigationActivity;
 import net.osmand.plus.helpers.GpxUiHelper;
-import net.osmand.router.RouteStatistics.Boundaries;
-import net.osmand.router.RouteStatistics.RouteSegmentAttribute;
-import net.osmand.router.RouteStatistics.Statistics;
+import net.osmand.router.RouteStatisticsHelper;
+import net.osmand.router.RouteStatisticsHelper.Boundaries;
+import net.osmand.router.RouteStatisticsHelper.RouteSegmentAttribute;
+import net.osmand.router.RouteStatisticsHelper.RouteStatistics;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -38,19 +39,19 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
-import static net.osmand.router.RouteStatistics.UNDEFINED_ATTR;
+import static net.osmand.router.RouteStatisticsHelper.UNDEFINED_ATTR;
 
 public class RouteInfoCard extends BaseCard {
 
 	private static final int MINIMUM_CONTRAST_RATIO = 3;
 
-	private Statistics routeStatistics;
+	private RouteStatistics routeStatistics;
 	private GPXTrackAnalysis analysis;
 	private String selectedPropertyName;
 
 	private boolean showLegend;
 
-	public RouteInfoCard(MapActivity mapActivity, Statistics routeStatistics, GPXTrackAnalysis analysis) {
+	public RouteInfoCard(MapActivity mapActivity, RouteStatistics routeStatistics, GPXTrackAnalysis analysis) {
 		super(mapActivity);
 		this.routeStatistics = routeStatistics;
 		this.analysis = analysis;
@@ -71,7 +72,7 @@ public class RouteInfoCard extends BaseCard {
 		return (HorizontalBarChart) view.findViewById(R.id.chart);
 	}
 
-	private <E> void updateContent(final Statistics<E> routeStatistics) {
+	private <E> void updateContent(final RouteStatisticsHelper.RouteStatistics<E> routeStatistics) {
 		updateHeader();
 		final HorizontalBarChart chart = (HorizontalBarChart) view.findViewById(R.id.chart);
 		GpxUiHelper.setupHorizontalGPXChart(app, chart, 5, 9, 24, true, nightMode);
@@ -117,7 +118,7 @@ public class RouteInfoCard extends BaseCard {
 		});
 	}
 
-	protected <E> void updateLegend(Statistics<E> routeStatistics) {
+	protected <E> void updateLegend(RouteStatisticsHelper.RouteStatistics<E> routeStatistics) {
 		LinearLayout container = (LinearLayout) view.findViewById(R.id.route_items);
 		container.removeAllViews();
 		attachLegend(container, routeStatistics);
@@ -135,6 +136,7 @@ public class RouteInfoCard extends BaseCard {
 	}
 
 	private String getInfoType() {
+		/*
 		switch (routeStatistics.getStatisticType()) {
 			case CLASS:
 				return app.getString(R.string.road_types);
@@ -147,9 +149,11 @@ public class RouteInfoCard extends BaseCard {
 			default:
 				return "";
 		}
+		*/
+		return "000";
 	}
 
-	private <E> void attachLegend(ViewGroup container, Statistics<E> routeStatistics) {
+	private <E> void attachLegend(ViewGroup container, RouteStatisticsHelper.RouteStatistics<E> routeStatistics) {
 		Map<E, RouteSegmentAttribute<E>> partition = routeStatistics.getPartition();
 		List<Map.Entry<E, RouteSegmentAttribute<E>>> list = new ArrayList<>(partition.entrySet());
 		sortRouteSegmentAttributes(list);

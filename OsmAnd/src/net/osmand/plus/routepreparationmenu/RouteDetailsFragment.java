@@ -88,8 +88,9 @@ import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.render.RenderingRuleSearchRequest;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.RouteSegmentResult;
-import net.osmand.router.RouteStatistics;
-import net.osmand.router.RouteStatistics.Incline;
+import net.osmand.router.RouteStatisticsHelper;
+import net.osmand.router.RouteStatisticsHelper.Incline;
+import net.osmand.router.RouteStatisticsHelper.RouteStatistics;
 import net.osmand.router.TransportRoutePlanner.TransportRouteResult;
 import net.osmand.router.TransportRoutePlanner.TransportRouteResultSegment;
 import net.osmand.util.Algorithms;
@@ -372,15 +373,15 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 				RenderingRuleSearchRequest currentSearchRequest = maps.getSearchRequestWithAppliedCustomRules(currentRenderer, isNightMode());
 				RenderingRuleSearchRequest defaultSearchRequest = maps.getSearchRequestWithAppliedCustomRules(defaultRender, isNightMode());
 
-				RouteStatistics routeStatistics = RouteStatistics.newRouteStatistic(route, currentRenderer, defaultRender, currentSearchRequest, defaultSearchRequest);
+				List<RouteStatistics> routeStatistics = RouteStatisticsHelper.calculateRouteStatistic(route, currentRenderer, defaultRender, currentSearchRequest, defaultSearchRequest);
 				GPXTrackAnalysis analysis = gpx.getAnalysis(0);
 
-				RouteInfoCard routeClassCard = new RouteInfoCard(mapActivity, routeStatistics.getRouteClassStatistic(), analysis);
-				addRouteCard(cardsContainer, routeClassCard);
+				for (RouteStatistics statistic : routeStatistics) {
+					RouteInfoCard routeClassCard = new RouteInfoCard(mapActivity, statistic, analysis);
+					addRouteCard(cardsContainer, routeClassCard);
+				}
 
-				RouteInfoCard routeSurfaceCard = new RouteInfoCard(mapActivity, routeStatistics.getRouteSurfaceStatistic(), analysis);
-				addRouteCard(cardsContainer, routeSurfaceCard);
-
+				/*
 				if (slopeDataSet != null) {
 					List<Incline> inclines = createInclinesAndAdd100MetersWith0Incline(slopeDataSet.getValues(), slopeDataSet.getDivX());
 					RouteInfoCard routeSteepnessCard = new RouteInfoCard(mapActivity, routeStatistics.getRouteSteepnessStatistic(inclines), analysis);
@@ -389,6 +390,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 
 				RouteInfoCard routeSmoothnessCard = new RouteInfoCard(mapActivity, routeStatistics.getRouteSmoothnessStatistic(), analysis);
 				addRouteCard(cardsContainer, routeSmoothnessCard);
+				*/
 			}
 		}
 		routeDetailsMenu = new RouteDetailsMenu();

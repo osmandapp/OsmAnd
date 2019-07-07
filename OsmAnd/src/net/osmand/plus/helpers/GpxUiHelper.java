@@ -92,7 +92,7 @@ import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.routing.RouteCalculationResult;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRulesStorage;
-import net.osmand.router.RouteStatistics;
+import net.osmand.router.RouteStatisticsHelper;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -1269,7 +1269,7 @@ public class GpxUiHelper {
 
 	public static <E> BarData buildStatisticChart(@NonNull OsmandApplication app,
 	                                              @NonNull HorizontalBarChart mChart,
-	                                              @NonNull RouteStatistics.Statistics<E> routeStatistics,
+	                                              @NonNull RouteStatisticsHelper.RouteStatistics<E> routeStatistics,
 	                                              @NonNull GPXTrackAnalysis analysis,
 	                                              boolean useRightAxis,
 	                                              boolean nightMode) {
@@ -1286,12 +1286,12 @@ public class GpxUiHelper {
 		}
 		float divX = setupAxisDistance(app, yAxis, analysis.totalDistance);
 
-		List<RouteStatistics.RouteSegmentAttribute<E>> segments = routeStatistics.getElements();
+		List<RouteStatisticsHelper.RouteSegmentAttribute<E>> segments = routeStatistics.getElements();
 		List<BarEntry> entries = new ArrayList<>();
 		float[] stacks = new float[segments.size()];
 		int[] colors = new int[segments.size()];
 		for (int i = 0; i < stacks.length; i++) {
-			RouteStatistics.RouteSegmentAttribute segment = segments.get(i);
+			RouteStatisticsHelper.RouteSegmentAttribute segment = segments.get(i);
 			stacks[i] = segment.getDistance() / divX;
 			colors[i] = segment.getColor();
 		}
