@@ -3045,17 +3045,17 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="coordinates_widget">Widget coordinate</string>
     <string name="help_us_make_osmand_better">Aiutaci a rendere OsmAnd migliore!</string>
     <string name="choose_data_to_share">Scegli che tipo di dati vuoi condividere:</string>
-    <string name="downloaded_maps">Mappe Scaricate</string>
+    <string name="downloaded_maps">Mappe scaricate</string>
     <string name="visited_screens">Schermate visitate</string>
     <string name="collected_data_descr">Lista dei dati che vuoi condividere con OsmAnd.</string>
-    <string name="downloaded_maps_collect_descr">Collezioniamo questi dati per capire le mappe di che regioni e paesi sono più popolari.</string>
-    <string name="visited_screens_collect_descr">Collezioniamo questi dati per capire le funzionalità più popolari di OsmAnd.</string>
+    <string name="downloaded_maps_collect_descr">Raccogliamo questi dati per capire quali mappe di quali regioni e paesi sono più popolari.</string>
+    <string name="visited_screens_collect_descr">Collezioniamo questi dati per capire quali funzionalità di OSmAnd sono le più popolari.</string>
     <string name="privacy_and_security_change_descr">Cliccando \"Consenti\" accetti la nostra %1$s</string>
     <string name="settings_privacy_and_security">Privacy e Sicurezza</string>
     <string name="shared_string_no_thank_you">No, grazie</string>
     <string name="shared_string_allow">Consenti</string>
-    <string name="profile_name_hint">Nome del Profilo</string>
-    <string name="nav_type_hint">Tipo di Navigazione</string>
+    <string name="profile_name_hint">Nome del profilo</string>
+    <string name="nav_type_hint">Tipo di navigazione</string>
     <string name="app_mode_taxi">Taxi</string>
     <string name="app_mode_shuttle_bus">Bus navetta</string>
     <string name="app_mode_subway">Metropolitana</string>
@@ -3084,7 +3084,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="routing_attr_freeride_policy_name">Fuori pista</string>
     <string name="shared_string_color_magenta">Magenta</string>
     <string name="shared_string_icon">Icona</string>
-    <string name="collected_data">Dati Raccolti</string>
+    <string name="collected_data">Dati raccolti</string>
     <string name="press_again_to_change_the_map_orientation">Tappa di nuovo per cambiare l\'orientamento della mappa</string>
     <string name="shared_string_min_speed">Velocità min</string>
     <string name="shared_string_max_speed">Velocità max</string>
@@ -3127,7 +3127,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="routing_attr_max_num_changes_description">Specifica il massimo numero di cambiamenti</string>
     <string name="routing_attr_max_num_changes_name">Numero di cambiamenti</string>
     <string name="settings_privacy_and_security_desc">Seleziona i dati che stai condividendo con noi</string>
-    <string name="osmand_routing_promo">È possibile aggiungere la propria versione modificata del file routing.xml in ..osmand/routing</string>
+    <string name="osmand_routing_promo">Puoi aggiungere la tua versione modificata del file routing.xml in ..osmand/routing</string>
     <string name="app_mode_skiing">Sciare</string>
     <string name="base_profile_descr_ski">Sciare</string>
     <string name="routing_profile_ski">Sci</string>
@@ -3153,4 +3153,9 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="button_rate">Dai un voto</string>
     <string name="shared_string_privacy_policy">Regolamentazione della privacy</string>
     <string name="process_downloading_service">Servizio di download OsmAnd</string>
+    <string name="make_osmand_better_descr">Permetti a OsmAnd di raccogliere ed elaborare dati di utilizzo dell\'applicazione. Non raccogliamo o memorizziamo dati circa la tua posizione o i luoghi che visualizzi nella mappa.
+\n
+\nPuoi cambiare la tua scelta in ogni momento in Impostazioni&gt;Gestione della Privacy.</string>
+    <string name="show_compass_ruler">Mostra il righello della bussola</string>
+    <string name="hide_compass_ruler">Nascondi il righello della bussola</string>
 </resources>
