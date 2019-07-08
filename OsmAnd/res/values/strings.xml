@@ -31,7 +31,7 @@
         • Added options to show the compass and a radius ruler on the map\n\n
         • Fix background track logging\n\n
         • Improved background map downloads\n\n
-        • Returned \'Turn Screen On'\ option\n\n
+        • Returned \'Turn Screen On\' option\n\n
         • Fixed Wikipedia language selection\n\n
         • Fixed compass button behavior during navigation\n\n
         • Other bug fixes\n\n
@@ -116,8 +116,8 @@
     <string name="custom_routing">Custom routing profile</string>
     <string name="special_routing_type">Special routing</string>
     <string name="third_party_routing_type">Third-party routing</string>
-  <string name="application_profiles_descr">Select the profiles to be visible in the app.</string>
-  <string name="application_profiles">Application profiles</string>
+    <string name="application_profiles_descr">Select the profiles to be visible in the app.</string>
+    <string name="application_profiles">Application profiles</string>
     <string name="searching_gps">Searching GPS</string>
     <string name="coordinates_widget">Coordinates widget</string>
     <string name="files_moved">Moved %1$d files (%2$s).</string>
