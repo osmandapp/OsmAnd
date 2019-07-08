@@ -364,7 +364,7 @@ public class RouteStatisticsHelper {
 			String additional = slopeClass >= 0 ? (BOUNDARIES_CLASS[slopeClass] + ";") : "";
 			for (int k = 0; k < tps.length; k++) {
 				BinaryMapRouteReaderAdapter.RouteTypeRule tp = obj.region.quickGetEncodingRule(tps[k]);
-				if (tp.getTag().equals("highway") || tp.getTag().equals("route") || tp.getTag().equals("lit") ||
+				if (tp.getTag().equals("highway") || tp.getTag().equals("route") || 
 						tp.getTag().equals("railway") || tp.getTag().equals("aeroway") || tp.getTag().equals("aerialway")) {
 					req.setStringFilter(rrs.PROPS.R_TAG, tp.getTag());
 					req.setStringFilter(rrs.PROPS.R_VALUE, tp.getValue());
