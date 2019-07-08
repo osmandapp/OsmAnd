@@ -257,10 +257,10 @@ public class RouteStatisticsHelper {
 		Map<String, RouteSegmentAttribute> makePartition(List<RouteSegmentAttribute> routeAttributes) {
 			final Map<String, RouteSegmentAttribute> partition = new TreeMap<>();
 			for (RouteSegmentAttribute attribute : routeAttributes) {
-				RouteSegmentAttribute attr = partition.get(attribute.propertyName);
+				RouteSegmentAttribute attr = partition.get(attribute.getUserPropertyName());
 				if (attr == null) {
 					attr = new RouteSegmentAttribute(attribute);
-					partition.put(attribute.propertyName, attr);
+					partition.put(attribute.getUserPropertyName(), attr);
 				}
 				attr.incrementDistanceBy(attribute.getDistance());
 			}
@@ -279,7 +279,7 @@ public class RouteStatisticsHelper {
 				}
 			});
 			Map<String, RouteSegmentAttribute> sorted = new LinkedHashMap<String, RouteStatisticsHelper.RouteSegmentAttribute>();
-			for(String k : keys ) {
+			for (String k : keys) {
 				sorted.put(k, partition.get(k));
 			}
 
