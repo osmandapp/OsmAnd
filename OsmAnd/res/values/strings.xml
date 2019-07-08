@@ -212,6 +212,11 @@
     <string name="rendering_attr_highway_class_path_name">Path</string>
     <string name="rendering_attr_highway_class_cycleway_name">Cycleway</string>
     <string name="rendering_attr_undefined_name">Undefined</string>
+	<string name="rendering_attr_highway_class_track_grade1_name">Grade 1</string>
+	<string name="rendering_attr_highway_class_track_grade2_name">Grade 2</string>
+	<string name="rendering_attr_highway_class_track_grade3_name">Grade 3</string>
+	<string name="rendering_attr_highway_class_track_grade4_name">Grade 4</string>
+	<string name="rendering_attr_highway_class_track_grade5_name">Grade 5</string>
     <string name="release_3_3">
         • New \'Directions\' screen: Displays Home and Work destination buttons, \'previous route\' shortcut, list of active GPX tracks and markers, search history\n\n
         • Additional info under \'Route details\': road types, surface, steepness, smoothness\n\n
