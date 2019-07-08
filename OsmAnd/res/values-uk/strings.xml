@@ -3157,4 +3157,15 @@
     <string name="edit_profile_nav_settings_subtitle">Оберіть типові налаштування навігації для профілю</string>
     <string name="routing_attr_max_num_changes_description">Вказати найбільшу кількість змін</string>
     <string name="routing_attr_max_num_changes_name">Кількість змін</string>
+    <string name="routing_attr_piste_type_nordic_name">Бігові лижі / скандинавська ходьба</string>
+    <string name="routing_attr_piste_type_nordic_description">Траси для скандинавської ходьби або бігу на лижах.</string>
+    <string name="routing_attr_piste_type_skitour_name">Лижні тури</string>
+    <string name="routing_attr_piste_type_skitour_description">Маршрути для лижних турів.</string>
+    <string name="routing_attr_piste_type_sled_name">Сани</string>
+    <string name="routing_attr_piste_type_sled_description">Схили для катання на санях.</string>
+    <string name="routing_attr_allow_intermediate_name">Дозволити проміжні маршрути</string>
+    <string name="routing_attr_allow_intermediate_description">Більш складні маршрути з крутішими ділянками. Як правило, деякі перешкоди, яких слід уникати.</string>
+    <string name="routing_attr_allow_advanced_name">Дозволити розширені маршрути</string>
+    <string name="routing_attr_allow_advanced_description">Складні маршрути з небезпечними перешкодами і крутими ділянками.</string>
+    <string name="routing_attr_allow_expert_name">Дозволити експертні маршрути</string>
 </resources>
