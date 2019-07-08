@@ -56,4 +56,10 @@
     <string name="poi_socket">Presa</string>
     <string name="poi_additional_type">Adicionau</string>
     <string name="poi_brushless">Amb/ Sensa bròssas</string>
+    <string name="poi_aerialway_bicycle">Transpòrt de bicicletas</string>
+    <string name="poi_observatory_designation">Categoria</string>
+    <string name="poi_telescope_type">Tipe</string>
+    <string name="poi_information_contents">Contenguts</string>
+    <string name="poi_theatre_genre">Genre</string>
+    <string name="poi_beauty_salon_service">Servici</string>
 </resources>
