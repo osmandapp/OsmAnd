@@ -11,7 +11,8 @@
 	Thx - Hardy
 
 -->
-    <string name="shared_string_saved">saved</string>
+    <string name="shared_string_open_track">Open track</string>
+    <string name="shared_string_track_is_saved">Track %s is saved</string>
     <string name="turn_screen_on_router">Wake on turn</string>
     <string name="turn_screen_on_time_descr">Set the time for which the screen will turn on.</string>
     <string name="turn_screen_on_sensor">Use proximity sensor</string>

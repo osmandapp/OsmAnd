@@ -5,9 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
-import android.text.SpannableStringBuilder;
-import android.text.Spanned;
-import android.text.style.StyleSpan;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,10 +13,15 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import java.io.File;
+import net.osmand.AndroidUtils;
+import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.myplaces.AvailableGPXFragment;
+import net.osmand.plus.myplaces.AvailableGPXFragment.GpxInfo;
 
 public class OnSaveCurrentTrackFragment extends BottomSheetDialogFragment {
 
@@ -39,7 +41,7 @@ public class OnSaveCurrentTrackFragment extends BottomSheetDialogFragment {
 		} else {
 			dismiss();
 		}
-		
+
 		final File f = new File (app.getAppCustomization().getTracksDir() +"/"+ savedGpxName + ".gpx");
 		final boolean nightMode = !app.getSettings().isLightContent();
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
@@ -48,17 +50,9 @@ public class OnSaveCurrentTrackFragment extends BottomSheetDialogFragment {
 		TextView tv = mainView.findViewById(R.id.saved_track_name_string);
 		Button openTrackBtn = mainView.findViewById(R.id.open_track_button);
 		Button showOnMapBtn = mainView.findViewById(R.id.show_on_map_button);
-		
-		SpannableStringBuilder ssb = new SpannableStringBuilder();
-		ssb.append(app.getResources().getString(R.string.shared_string_gpx_track)).append(" ");
-		int startIndex = ssb.length();
-		ssb.append(savedGpxName).append(" ");
-		ssb.setSpan(new StyleSpan(Typeface.BOLD), startIndex, ssb.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-		startIndex = ssb.length();
-		ssb.append(app.getResources().getString(R.string.shared_string_saved));
-		ssb.setSpan(new StyleSpan(Typeface.NORMAL), startIndex, ssb.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-		tv.setText(ssb);
-		
+
+		tv.setText(AndroidUtils.insertStyledSubstring(app.getString(R.string.shared_string_track_is_saved), savedGpxName, Typeface.BOLD));
+
 		openTrackBtn.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -71,6 +65,18 @@ public class OnSaveCurrentTrackFragment extends BottomSheetDialogFragment {
 			@Override
 			public void onClick(View v) {
 				//show track on MapActivity
+				GpxInfo gpxInfo = new GpxInfo();
+				gpxInfo.setGpx(GPXUtilities.loadGPXFile(f));
+				boolean e = true;
+				if (gpxInfo.gpx != null) {
+					OsmandSettings settings = app.getSettings();
+					WptPt loc = gpxInfo.gpx.findPointToShow();
+					if (loc != null) {
+						settings.setMapLocationToShow(loc.lat, loc.lon, settings.getLastKnownMapZoom());
+						e = false;
+						app.getSelectedGpxHelper().setGpxFileToDisplay(gpxInfo.gpx);
+					}
+				}
 				dismiss();
 			}
 		});
@@ -84,5 +90,4 @@ public class OnSaveCurrentTrackFragment extends BottomSheetDialogFragment {
 		f.setArguments(b);
 		f.show(fragmentManager, TAG);
 	}
-	
 }

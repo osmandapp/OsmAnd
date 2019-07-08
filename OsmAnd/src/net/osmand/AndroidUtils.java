@@ -13,6 +13,7 @@ import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.PointF;
+import android.graphics.Typeface;
 import android.graphics.drawable.ClipDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
@@ -31,10 +32,13 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.text.Spannable;
 import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
 import android.text.TextPaint;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.text.style.ImageSpan;
+import android.text.style.StyleSpan;
 import android.text.style.URLSpan;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
@@ -550,5 +554,25 @@ public class AndroidUtils {
 	public static boolean isScreenLocked(Context context) {
 		KeyguardManager keyguardManager = (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);
 		return keyguardManager.inKeyguardRestrictedInputMode();
+	}
+
+	public static CharSequence insertStyledSubstring(CharSequence preFormattedString, CharSequence textToInsert, int typefaceStyle) {
+		final String placeholder = "%s";
+		if (typefaceStyle < 0 || typefaceStyle > 3) {
+			return preFormattedString;
+		}
+		if (!preFormattedString.toString().contains(placeholder)) {
+			return preFormattedString;
+		}
+		int indexOfPlaceholder = preFormattedString.toString().indexOf(placeholder);
+		SpannableStringBuilder ssb = new SpannableStringBuilder();
+		ssb.append(preFormattedString.subSequence(0, indexOfPlaceholder));
+		int startIndex = ssb.length();
+		ssb.append(textToInsert).append(" ");
+		ssb.setSpan(new StyleSpan(typefaceStyle), startIndex, ssb.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+		startIndex = ssb.length();
+		ssb.append(preFormattedString.subSequence(indexOfPlaceholder+2, preFormattedString.length()));
+		ssb.setSpan(new StyleSpan(Typeface.NORMAL), startIndex, ssb.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+		return ssb;
 	}
 }
