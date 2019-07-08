@@ -15,7 +15,7 @@
     <string name="profile_alert_need_routing_type_title">Seleccionatz la mena de navigacion</string>
     <string name="profile_alert_need_profile_name_title">Intratz lo nom dau perfiu</string>
     <string name="profile_alert_need_profile_name_msg">Lo nom dau perfiu deu pas ètre vuege !</string>
-    <string name="profile_alert_duplicate_name_title">Nom publicat</string>
+    <string name="profile_alert_duplicate_name_title">Nom en doble</string>
     <string name="profile_alert_duplicate_name_msg">I a ja un perfiu amb aquest nom</string>
     <string name="profile_alert_cant_delete_base">Podètz pas suprimir lei perfius de basa d\'OsmAnd</string>
     <string name="profile_alert_need_save_title">Sauvagardar lei cambiaments</string>
@@ -24,14 +24,14 @@
     <string name="profile_alert_delete_msg">Siatz segur que volètz suprimir lo perfiu %s</string>
     <string name="select_base_profile_dialog_title">Seleccion dau perfiu de basa</string>
     <string name="select_nav_profile_dialog_title">Seleccionatz la mena de navigacion</string>
-    <string name="base_profile_descr_car">Veitura, camion, motocicleta</string>
+    <string name="base_profile_descr_car">Automobila, camion, motocicleta</string>
     <string name="base_profile_descr_pedestrian">Passejada, Escorreguda, Corsa</string>
     <string name="base_profile_descr_public_transport">Tota mena de transpòrt public</string>
     <string name="base_profile_descr_boat">Barca, Aviron, Vela</string>
     <string name="base_profile_descr_aircraft">Avion, Planador</string>
     <string name="routing_profile_geocoding">Geocodatge</string>
     <string name="routing_profile_straightline">Endrechiera</string>
-    <string name="routing_profile_broutrer">Navigacion Fòra-linha</string>
+    <string name="routing_profile_broutrer">Navigacion fòra-linha</string>
     <string name="osmand_default_routing">Navigacion OsmAnd</string>
     <string name="custom_routing">Perfiu de navigacion personalizat</string>
     <string name="special_routing_type">Navigacion particulara</string>
@@ -230,7 +230,7 @@
     <string name="choose_data_to_share">Indicatz quinei menas de dadas volètz partejar:</string>
     <string name="downloaded_maps">Mapas descargadas</string>
     <string name="visited_screens">Escrans visitats</string>
-    <string name="collected_data">Dadas recampadas</string>
+    <string name="collected_data">Dadas acampadas</string>
     <string name="collected_data_descr">Lista de dadas que partejatz amb OsmAnd.</string>
     <string name="downloaded_maps_collect_descr">Recampam aquestei dadas per conóisser lei mapas mai popularas.</string>
     <string name="visited_screens_collect_descr">Recampam aquestei dadas per conóisser lei caracteristicas mai popularas d\'OsmAnd.</string>
@@ -421,7 +421,7 @@
     <string name="default_speed_dialog_msg">Emplegat per calcular l\'ora d\'arribada prevista dau temps dau camin</string>
     <string name="new_profile">Perfiu novèu</string>
     <string name="shared_string_crash">Auvari</string>
-    <string name="last_launch_crashed">Falhida dau darrier lançament d\'OsmAnd. Ajudatz-nos per melhorar OsmAnd. Saretz brave de nos avisar per un messatge d\'error.</string>
+    <string name="last_launch_crashed">Falhida dau darrier lançament d\'OsmAnd. Ajudatz-nos a melhorar OsmAnd. Saretz brave de nos avisar per un messatge d\'error.</string>
     <string name="shared_string_install">Installar</string>
     <string name="average_speed">Velocitat mejana</string>
     <string name="average_altitude">Altitud mejana</string>
@@ -443,4 +443,46 @@
     <string name="shared_string_all">Tot</string>
     <string name="altitude">Altitud</string>
     <string name="shared_string_name">Nom</string>
+    <string name="make_osmand_better_descr">Autorizatz OsmAnd a acampar e tractar lei dadas anonimas de foncionament de l\'aplicacion. Non acamparem ni mai conservarem de dadas sobre vòstra posicion ni mai lei luòcs que consultatz sus la mapa. 
+\n 
+\nPodètz cambiar aquesta opcion quand volètz dins Configuracion &gt; Vida privada e seguretat.</string>
+    <string name="profile_alert_need_routing_type_msg">Seleccionatz lo tipe de navigacion per lo perfiu d\'aplicacion novèu</string>
+    <string name="select_base_profile_dialog_message">Començatz vòstre perfiu personalizat d\'un perfiu predeterminat de l\'aplicacion, es eu que fixa la configuracion basica per visibilitat predeterminada, leis extensions e leis unitats de velocitat de distància. Vaicí lei perfius d\'aplicacion predeterminats, amb d’exemples de personalizacion que se pòdon ajustar:</string>
+    <string name="base_profile_descr_bicycle">Cicle de montanha, ciclimotor, cavau</string>
+    <string name="increase_search_radius_to">Aumenta lo radian de recèrca fins %1s</string>
+    <string name="send_search_query">Volètz mandar leis informacions de la recèca \?</string>
+    <string name="light_rs_render_descr">"Estil simple e contrastat per la navigacion automobila. En mòde nocturne fatiga pas leis uelhs.  Caracteristicas principalas: corbas de nivèu, vias contrastadas de color iranja, mens d’objèctes segondaris sus la mapa que pòcan distraire."</string>
+    <string name="shared_string_min_speed">Velocitat minimala</string>
+    <string name="app_mode_ufo">UFO</string>
+    <string name="release_3_4">• Perfius d\'aplicacion: se pòt crear un perfiu personalitzat segon lei besonhs, amb icona e colors personalizadas
+\n
+\n • Ara podètz modificar lei valors predeterminadas de que perfiu que siegue e la velocitat minima/maxima
+\n
+\n • Es estat ajustada una extension per lei coordenades actualas
+\n
+\n • D’opcions novèlas per mostrar la bossòla e una règla radiala sus la mapa
+\n
+\n • L’enregistrament de traçat es fixat en segon plan
+\n
+\n • Cargament de mapas en segon plan melhorada
+\n
+\n • Seleccion de la lengua de Viquipèdia reglada
+\n
+\n • S\'es reglat lo comportament dau boton de la bossòla en navegacion
+\n
+\n • Autrei correccions d\'errors
+\n
+\n</string>
+    <string name="app_mode_personal_transporter">Transpòrt personau</string>
+    <string name="app_mode_monowheel">Monocicleta</string>
+    <string name="app_mode_scooter">Escotèr</string>
+    <string name="precision_hdop_and_vdop">Precision orizontala: %1$s, verticala: %2$s</string>
+    <string name="precision_hdop">Precision orizontala: %s</string>
+    <string name="edit_profile_setup_title">Configuracion dau perfiu</string>
+    <string name="edit_profile_setup_subtitle">Lo perfiu consèrva la configuracion personala</string>
+    <string name="edit_profile_setup_map_subtitle">Seleccionatz leis opcions de mapa predeterminadas per lo perfiu</string>
+    <string name="edit_profile_screen_options_subtitle">Seleccionatz leis opcions d’escran predeterminadas per lo perfiu</string>
+    <string name="edit_profile_nav_settings_subtitle">Seleccionatz leis opcions de navigacion predeterminadas per lo perfiu</string>
+    <string name="routing_attr_max_num_changes_description">Especificatz lo nombre maximum de cambiaments</string>
+    <string name="routing_attr_max_num_changes_name">Nombre de cambiaments</string>
 </resources>
