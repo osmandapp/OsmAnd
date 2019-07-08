@@ -158,16 +158,14 @@ public class LocationConvert {
 		StringBuilder sb = new StringBuilder();
 
 		// Handle negative values and append cardinal directions if necessary
-		if (addCardinalDirection) {
-			sb.append(latitude < 0 ? 'S' : 'N');
-		} else if (latitude < 0) {
+		if (!addCardinalDirection && latitude < 0) {
 			sb.append('-');
 		}
-		if (latitude < 0) {
-			latitude = -latitude;
+		formatDegrees(latitude < 0 ? -latitude : latitude, outputType, sb);
+		if (addCardinalDirection) {
+			sb.append(' ').append(latitude < 0 ? 'S' : 'N');
 		}
-
-		return formatDegrees(latitude, outputType, sb);
+		return sb.toString();
 	}
 
 	public static String convertLongitude(double longitude, int outputType, boolean addCardinalDirection) {
@@ -181,16 +179,14 @@ public class LocationConvert {
 		StringBuilder sb = new StringBuilder();
 
 		// Handle negative values and append cardinal directions if necessary
-		if (addCardinalDirection) {
-			sb.append(longitude < 0 ? 'W' : 'E');
-		} else if (longitude < 0) {
+		if (!addCardinalDirection && longitude < 0) {
 			sb.append('-');
 		}
-		if (longitude < 0) {
-			longitude = -longitude;
+		formatDegrees(longitude < 0 ? -longitude : longitude, outputType, sb);
+		if (addCardinalDirection) {
+			sb.append(' ').append(longitude < 0 ? 'W' : 'E');
 		}
-
-		return formatDegrees(longitude, outputType, sb);
+		return sb.toString();
 	}
 
 	private static double formatCoordinate(double coordinate, StringBuilder sb, char delimiter) {
