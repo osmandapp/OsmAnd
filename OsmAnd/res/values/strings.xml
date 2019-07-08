@@ -1194,7 +1194,7 @@
     <string name="simulate_your_location_stop_descr">Stop simulating your position.</string>
     <string name="simulate_your_location_descr">Simulate your position using a calculated route or a recorded GPX track.</string>
     <string name="looking_up_address">Looking up address</string>
-    <string name="av_locations_descr">GPX file with note locations.</string>
+    <string name="av_locations_descr">GPX file with locations.</string>
     <string name="av_locations">Locations</string>
     <string name="plugin_settings">Plugins</string>
     <string name="routing_attr_avoid_shuttle_train_name">Avoid shuttle train</string>
