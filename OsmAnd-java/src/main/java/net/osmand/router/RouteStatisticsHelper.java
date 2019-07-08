@@ -76,9 +76,8 @@ public class RouteStatisticsHelper {
 		float h;
 		float[] interpolatedHeightByStep;
 		float[] slopeByStep;
-		String[] slopeClass;
 		String[] slopeClassUserString;
-		
+		int[] slopeClass;
 	}
 
 	public static List<RouteStatistics> calculateRouteStatistic(List<RouteSegmentResult> route, RenderingRulesStorage currentRenderer,
@@ -207,13 +206,12 @@ public class RouteStatisticsHelper {
 		for(int i = 0; i < input.size(); i ++) {
 			RouteSegmentWithIncline rswi = input.get(i);
 			if(rswi.slopeByStep != null) {
-				rswi.slopeClass = new String[rswi.slopeByStep.length];
+				rswi.slopeClass = new int[rswi.slopeByStep.length];
 				rswi.slopeClassUserString = new String[rswi.slopeByStep.length];
 				for (int t = 0; t < rswi.slopeClass.length; t++) {
-					
 					for (int k = 0; k < BOUNDARIES_ARRAY.length; k++) {
 						if (rswi.slopeByStep[t] <= BOUNDARIES_ARRAY[k] || k == BOUNDARIES_ARRAY.length - 1) {
-							rswi.slopeClass[t] = BOUNDARIES_CLASS[k];
+							rswi.slopeClass[t] = k;
 							rswi.slopeClassUserString[t] = classFormattedStrings[k];
 							break;
 						}
@@ -275,6 +273,10 @@ public class RouteStatisticsHelper {
 					if (o2.equalsIgnoreCase(UNDEFINED_ATTR)) {
 						return -1;
 					}
+					int cmp = Integer.compare(partition.get(o1).slopeIndex, partition.get(o2).slopeIndex);
+					if(cmp != 0) {
+						return cmp;
+					}
 					return -Float.compare(partition.get(o1).getDistance(), partition.get(o2).getDistance());
 				}
 			});
@@ -299,7 +301,7 @@ public class RouteStatisticsHelper {
 			RouteSegmentAttribute prev = null;
 			for (RouteSegmentWithIncline segment : route) {
 				if(segment.slopeClass == null || segment.slopeClass.length == 0) {
-					RouteSegmentAttribute current = classifySegment(attribute, null, segment);
+					RouteSegmentAttribute current = classifySegment(attribute, -1, segment);
 					current.distance = segment.dist;
 					if (prev != null && prev.getPropertyName() != null &&
 						prev.getPropertyName().equals(current.getPropertyName())) {
@@ -311,7 +313,7 @@ public class RouteStatisticsHelper {
 				} else {
 					for(int i = 0; i < segment.slopeClass.length; i++) {
 						float d = (float) (i == 0 ? (segment.dist - H_STEP * (segment.slopeClass.length - 1)) : H_STEP);
-						if(i > 0 && segment.slopeClass[i].equals(segment.slopeClass[i - 1])) {
+						if(i > 0 && segment.slopeClass[i] == segment.slopeClass[i-1]) {
 							prev.incrementDistanceBy(d);
 						} else {
 							RouteSegmentAttribute current = classifySegment(attribute, 
@@ -321,7 +323,7 @@ public class RouteStatisticsHelper {
 								prev.getPropertyName().equals(current.getPropertyName())) {
 								prev.incrementDistanceBy(current.distance);
 							} else {
-								if(segment.slopeClass[i].endsWith(current.propertyName)) {
+								if(current.slopeIndex == segment.slopeClass[i]) {
 									current.setUserPropertyName(segment.slopeClassUserString[i]);
 								}
 								routes.add(current);
@@ -335,19 +337,19 @@ public class RouteStatisticsHelper {
 		}
 
 
-		public RouteSegmentAttribute classifySegment(String attribute, String slopeClass, RouteSegmentWithIncline segment) {
-			RouteSegmentAttribute res = new RouteSegmentAttribute(UNDEFINED_ATTR, 0);
+		public RouteSegmentAttribute classifySegment(String attribute, int slopeClass, RouteSegmentWithIncline segment) {
+			RouteSegmentAttribute res = new RouteSegmentAttribute(UNDEFINED_ATTR, 0, -1);
 			RenderingRuleSearchRequest currentRequest = 
 					currentRenderer == null ? null : new RenderingRuleSearchRequest(currentRenderingRuleSearchRequest);
 			if (currentRenderer != null && searchRenderingAttribute(attribute, currentRenderer, currentRequest, segment, slopeClass)) {
 				res = new RouteSegmentAttribute(currentRequest.getStringPropertyValue(currentRenderer.PROPS.R_ATTR_STRING_VALUE),
-						currentRequest.getIntPropertyValue(currentRenderer.PROPS.R_ATTR_COLOR_VALUE));
+						currentRequest.getIntPropertyValue(currentRenderer.PROPS.R_ATTR_COLOR_VALUE), slopeClass);
 			} else {
 				RenderingRuleSearchRequest defaultRequest = new RenderingRuleSearchRequest(defaultRenderingRuleSearchRequest);
 				if (searchRenderingAttribute(attribute, defaultRenderer, defaultRequest, segment, slopeClass)) {
 					res = new RouteSegmentAttribute(
 							defaultRequest.getStringPropertyValue(defaultRenderer.PROPS.R_ATTR_STRING_VALUE),
-							defaultRequest.getIntPropertyValue(defaultRenderer.PROPS.R_ATTR_COLOR_VALUE));
+							defaultRequest.getIntPropertyValue(defaultRenderer.PROPS.R_ATTR_COLOR_VALUE), slopeClass);
 				}
 			}
 			return res;
@@ -355,11 +357,11 @@ public class RouteStatisticsHelper {
 
 		protected boolean searchRenderingAttribute(String attribute,
 												   RenderingRulesStorage rrs, RenderingRuleSearchRequest req, RouteSegmentWithIncline segment,
-												   String slopeClass) {
+												   int slopeClass) {
 			//String additional = attrName + "=" + attribute;
 			RouteDataObject obj = segment.obj;
 			int[] tps = obj.getTypes();
-			String additional = slopeClass != null ? (slopeClass + ";") : "";
+			String additional = slopeClass >= 0 ? (BOUNDARIES_CLASS[slopeClass] + ";") : "";
 			for (int k = 0; k < tps.length; k++) {
 				BinaryMapRouteReaderAdapter.RouteTypeRule tp = obj.region.quickGetEncodingRule(tps[k]);
 				if (tp.getTag().equals("highway") || tp.getTag().equals("route") ||
@@ -379,17 +381,20 @@ public class RouteStatisticsHelper {
 
 		private final int color;
 		private final String propertyName;
+		private final int slopeIndex;
 		private float distance;
 		private String userPropertyName;
 
-		RouteSegmentAttribute(String propertyName, int color) {
+		RouteSegmentAttribute(String propertyName, int color, int slopeIndex) {
 			this.propertyName = propertyName == null ? UNDEFINED_ATTR : propertyName;
-			this.color = color;
+			this.slopeIndex = slopeIndex >= 0 && BOUNDARIES_CLASS[slopeIndex].endsWith(this.propertyName) ? slopeIndex : -1;
+ 			this.color = color;
 		}
 
 		RouteSegmentAttribute(RouteSegmentAttribute segmentAttribute) {
 			this.propertyName = segmentAttribute.getPropertyName();
 			this.color = segmentAttribute.getColor();
+			this.slopeIndex = segmentAttribute.slopeIndex;
 			this.userPropertyName = segmentAttribute.userPropertyName;
 		}
 		
