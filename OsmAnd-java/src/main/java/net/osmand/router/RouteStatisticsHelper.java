@@ -269,6 +269,12 @@ public class RouteStatisticsHelper {
 
 				@Override
 				public int compare(String o1, String o2) {
+					if (o1.equalsIgnoreCase(UNDEFINED_ATTR)) {
+						return 1;
+					}
+					if (o2.equalsIgnoreCase(UNDEFINED_ATTR)) {
+						return -1;
+					}
 					return -Float.compare(partition.get(o1).getDistance(), partition.get(o2).getDistance());
 				}
 			});
