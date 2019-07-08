@@ -1,5 +1,10 @@
 package net.osmand.router;
 
+import net.osmand.binary.BinaryMapRouteReaderAdapter;
+import net.osmand.binary.RouteDataObject;
+import net.osmand.render.RenderingRuleSearchRequest;
+import net.osmand.render.RenderingRulesStorage;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -7,11 +12,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
-
-import net.osmand.binary.BinaryMapRouteReaderAdapter;
-import net.osmand.binary.RouteDataObject;
-import net.osmand.render.RenderingRuleSearchRequest;
-import net.osmand.render.RenderingRulesStorage;
 
 public class RouteStatisticsHelper {
 
@@ -106,7 +106,10 @@ public class RouteStatisticsHelper {
 		for(String attributeName : attributeNames) {
 			RouteStatisticComputer statisticComputer =
 					new RouteStatisticComputer(currentRenderer, defaultRenderer, currentSearchRequest, defaultSearchRequest);
-			result.add(statisticComputer.computeStatistic(routeSegmentWithInclines, attributeName));
+			RouteStatistics routeStatistics = statisticComputer.computeStatistic(routeSegmentWithInclines, attributeName);
+			if (!routeStatistics.partition.isEmpty() && (routeStatistics.partition.size() != 1 || !routeStatistics.partition.containsKey(UNDEFINED_ATTR))) {
+				result.add(routeStatistics);
+			}
 		}
 
 		return result;
