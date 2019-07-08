@@ -2533,7 +2533,6 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="plan_route">Planavać maršrut</string>
     <string name="shared_string_sort">Sartavać</string>
     <string name="coordinate_input">Uvod kaardynat</string>
-    <string name="is_saved">zachavany</string>
     <string name="marker_save_as_track_descr">Ekspartavać vašy paznaki ŭ nastupny GPX-fajl:</string>
     <string name="marker_save_as_track">Zachavać jak GPX-fajl</string>
     <string name="move_to_history">Pieramiaścić u historyju</string>

@@ -2538,7 +2538,6 @@
     <string name="plan_route">Планаваць маршрут</string>
     <string name="shared_string_sort">Упарадкаваць</string>
     <string name="coordinate_input">Увод каардынат</string>
-    <string name="is_saved">захаваны</string>
     <string name="marker_save_as_track_descr">Экспартаваць вашыя адзнакі ў наступны GPX-файл:</string>
     <string name="marker_save_as_track">Захаваць як GPX-файл</string>
     <string name="move_to_history">Перамясціць у гісторыю</string>

@@ -1712,7 +1712,6 @@
     <string name="plan_route">Σχεδιασμός διαδρομής</string>
     <string name="shared_string_sort">Ταξινόμηση</string>
     <string name="coordinate_input">Η εισαγωγή συντεταγμένης</string>
-    <string name="is_saved">αποθηκεύτηκε</string>
     <string name="marker_save_as_track_descr">Εξαγωγή των δεικτών σας στο παρακάτω αρχείο GPX:</string>
     <string name="marker_save_as_track">Αποθήκευση ως αρχείο GPX</string>
     <string name="move_to_history">Μετακίνηση στο ιστορικό</string>

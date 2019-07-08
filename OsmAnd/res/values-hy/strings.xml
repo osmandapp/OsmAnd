@@ -155,7 +155,6 @@
     <string name="plan_route">Պլանավորել երթուղին</string>
     <string name="shared_string_sort">Տեսակավորել</string>
     <string name="coordinate_input">Կոորդինատների մուտքագրում</string>
-    <string name="is_saved">պահպանված է</string>
     <string name="marker_save_as_track_descr">Արտահանեք ձեր մարկերները հետևյալ GPX ֆայլի մեջ:</string>
     <string name="marker_save_as_track">Պահպանել որպես GPX ֆայլ</string>
     <string name="move_to_history">Տեղափոխեք պատմություն</string>

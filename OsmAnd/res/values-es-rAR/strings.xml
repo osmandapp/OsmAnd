@@ -2540,7 +2540,6 @@ Lon %2$s</string>
     <string name="plan_route">Planificar ruta</string>
     <string name="shared_string_sort">Ordenar</string>
     <string name="coordinate_input">Ingresar coordenadas</string>
-    <string name="is_saved">está guardado</string>
     <string name="marker_save_as_track_descr">Exporta los marcadores al siguiente archivo GPX:</string>
     <string name="marker_save_as_track">Guardar como archivo GPX</string>
     <string name="move_to_history">Mover al historial</string>

@@ -2475,7 +2475,6 @@
     <string name="plan_route">تخطيط الطريق</string>
     <string name="shared_string_sort">فرز</string>
     <string name="coordinate_input">تنسيق الإدخال</string>
-    <string name="is_saved">تم حفظه</string>
     <string name="marker_save_as_track_descr">تصدير علاماتك إلى ملف يمكنك تحديده هنا:</string>
     <string name="marker_save_as_track">حفظ كمسار</string>
     <string name="move_to_history">نقل إلى السجل</string>

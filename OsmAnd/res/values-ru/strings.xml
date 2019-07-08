@@ -2473,7 +2473,6 @@
     <string name="route_is_calculated">Маршрут рассчитан</string>
     <string name="round_trip">Путешествие</string>
     <string name="add_location_as_first_point_descr">Добавить ваше местоположение как точку старта при планировании маршрута.</string>
-    <string name="is_saved">сохранено</string>
     <string name="show_passed">Показать пройденные</string>
     <string name="hide_passed">Скрыть пройденные</string>
     <string name="remove_from_map_markers">Удалить из маркеров карты</string>

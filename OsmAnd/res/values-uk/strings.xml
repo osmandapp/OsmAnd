@@ -2530,7 +2530,6 @@
     <string name="plan_route">Планувати маршрут</string>
     <string name="shared_string_sort">Впорядкувати</string>
     <string name="coordinate_input">Введення координат</string>
-    <string name="is_saved">збережено</string>
     <string name="marker_save_as_track_descr">Експортувати Ваші маркери у наступний GPX-файл:</string>
     <string name="marker_save_as_track">Зберегти як GPX-файл</string>
     <string name="move_to_history">Перемістити в історію</string>

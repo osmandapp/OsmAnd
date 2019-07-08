@@ -2142,7 +2142,6 @@
     <string name="plan_route">Planlegg rute</string>
     <string name="shared_string_sort">Sorter</string>
     <string name="coordinate_input">Koordinatinntasting</string>
-    <string name="is_saved">blir lagret</string>
     <string name="marker_save_as_track_descr">Eksporter dine markører til følgende GPX-fil:</string>
     <string name="marker_save_as_track">Lagre som GPX-fil</string>
     <string name="all_markers_moved_to_history">Alle kartmarkører flyttet til historikk</string>

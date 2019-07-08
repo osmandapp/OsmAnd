@@ -1741,7 +1741,6 @@
     <string name="routing_attr_avoid_ice_roads_fords_description">Evită drumurile cu polei și traversarile râurilor.</string>
     <string name="plan_route">Planul rutei</string>
     <string name="coordinate_input">Introduceți coordonatele</string>
-    <string name="is_saved">este salvat</string>
     <string name="marker_save_as_track_descr">Exportați marcajele dvs. în următorul fișier GPX:</string>
     <string name="marker_save_as_track">Salvați ca fișier GPX</string>
     <string name="group_will_be_removed_after_restart">Grupul va dispărea data viitoare când porniți aplicația.</string>

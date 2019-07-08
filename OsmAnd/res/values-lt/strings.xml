@@ -2392,7 +2392,6 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="context_menu_item_modify_note">Keisti OSM pastabą</string>
     <string name="fast_coordinates_input">Sparčioji koordinatės įvestis</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Vengti ledo kelių, brastų</string>
-    <string name="is_saved">išsaugota</string>
     <string name="move_to_history">Perkelti į istoriją</string>
     <string name="group_will_be_removed_after_restart">Grupė bus pašalinta iš naujo paleidus aplikaciją.</string>
     <string name="show_arrows_on_the_map">Rodyti rodykles žemėlapyje</string>

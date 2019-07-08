@@ -1449,7 +1449,6 @@
     <string name="plan_route">План путовања</string>
     <string name="shared_string_sort">Распореди</string>
     <string name="coordinate_input">Унос координата</string>
-    <string name="is_saved">је сачуван</string>
     <string name="marker_save_as_track_descr">Извезите ознаке у следећи GPX фајл:</string>
     <string name="marker_save_as_track">Сачувај као GPX фајл</string>
     <string name="move_to_history">Премести у историју</string>

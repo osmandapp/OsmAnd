@@ -11,6 +11,7 @@
 	Thx - Hardy
 
 -->
+    <string name="shared_string_file_is_saved">%s is saved</string>
     <string name="shared_string_open_track">Open track</string>
     <string name="shared_string_track_is_saved">Track %s is saved</string>
     <string name="turn_screen_on_router">Wake on turn</string>
@@ -556,7 +557,6 @@
     <string name="plan_route">Plan route</string>
     <string name="shared_string_sort">Sort</string>
     <string name="coordinate_input">Coordinate input</string>
-    <string name="is_saved">is saved</string>
     <string name="marker_save_as_track_descr">Export your markers to the following GPX file:</string>
     <string name="marker_save_as_track">Save as GPX file</string>
     <string name="move_to_history">Move to history</string>
