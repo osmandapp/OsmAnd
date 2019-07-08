@@ -2916,10 +2916,10 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="quick_action_switch_day_mode">Dagshamur</string>
     <string name="quick_action_switch_night_mode">Næturhamur</string>
     <string name="quick_action_day_night_switch_mode">Skipta á milli Dags/Næturhams</string>
-    <string name="route_class_stat_container">Flokkur</string>
-    <string name="route_surface_stat_container">Yfirborð</string>
-    <string name="route_smoothness_stat_container">Áferð</string>
-    <string name="route_steepness_stat_container">Bratti</string>
+    <string name="routeInfo_roadClass_name">Flokkur</string>
+    <string name="routeInfo_surface_name">Yfirborð</string>
+    <string name="routeInfo_smoothness_name">Áferð</string>
+    <string name="routeInfo_steepness_name">Bratti</string>
     <string name="add_home">Bæta við heima</string>
     <string name="add_work">Bæta við vinnu</string>
     <string name="work_button">Vinna</string>
@@ -2931,7 +2931,7 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="time_of_day">Tími dagsins</string>
     <string name="by_transport_type">Eftir %1$s</string>
     <string name="step_by_step">Skref fyrir skref</string>
-    <string name="road_types">Gerðir vega</string>
+    <string name="routeInfo_road_types_name">Gerðir vega</string>
     <string name="exit_at">Fara útaf við</string>
     <string name="sit_on_the_stop">Fara um borð við stöðvunina</string>
     <string name="quick_action_show_hide_gpx_tracks">Birta/Fela GPX-ferla</string>

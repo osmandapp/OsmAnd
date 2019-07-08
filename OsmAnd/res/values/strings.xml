@@ -226,7 +226,7 @@
     <string name="time_of_day">Time of day</string>
     <string name="by_transport_type">By %1$s</string>
     <string name="step_by_step">Step by step</string>
-    <string name="road_types">Road types</string>
+    <string name="routeInfo_road_types_name">Road types</string>
     <string name="exit_at">Exit at</string>
     <string name="sit_on_the_stop">Board at stop</string>
     <string name="shared_string_swap">Swap</string>
@@ -3223,10 +3223,10 @@
     <string name="wiki_article_not_found">Article not found</string>
     <string name="how_to_open_wiki_title">How to open Wikipedia articles?</string>
     <string name="test_voice_desrc">Tap a button and listen to the corresponding voice prompt to identify missing or faulty prompts.</string>
-    <string name="route_class_stat_container">Class</string>
-    <string name="route_surface_stat_container">Surface</string>
-    <string name="route_smoothness_stat_container">Smoothness</string>
-    <string name="route_steepness_stat_container">Steepness</string>
+    <string name="routeInfo_roadClass_name">Class</string>
+    <string name="routeInfo_surface_name">Surface</string>
+    <string name="routeInfo_smoothness_name">Smoothness</string>
+    <string name="routeInfo_steepness_name">Steepness</string>
     <string name="run_full_osmand_msg">You are using {0} Map which is powered by OsmAnd. Do you want to launch OsmAnd full version?</string>
     <string name="run_full_osmand_header">Launch OsmAnd?</string>
     <string name="routing_attr_avoid_sett_name">Avoid cobblestone and sett</string>

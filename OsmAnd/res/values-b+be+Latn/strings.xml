@@ -2902,7 +2902,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="time_of_day">Čas sutak</string>
     <string name="by_transport_type">Užyta %1$s</string>
     <string name="step_by_step">Krok za krokam</string>
-    <string name="road_types">Typy daroh</string>
+    <string name="routeInfo_road_types_name">Typy daroh</string>
     <string name="exit_at">Vychad na</string>
     <string name="sit_on_the_stop">Pasadka na prypynku</string>
     <string name="shared_string_swap">Pamianiać</string>
@@ -2917,10 +2917,10 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="add_home">Dadać dom</string>
     <string name="add_work">Dadać pracu</string>
     <string name="work_button">Praca</string>
-    <string name="route_class_stat_container">Klas</string>
-    <string name="route_surface_stat_container">Pavierchnia</string>
-    <string name="route_smoothness_stat_container">Hladkasć</string>
-    <string name="route_steepness_stat_container">Pakatasć</string>
+    <string name="routeInfo_roadClass_name">Klas</string>
+    <string name="routeInfo_surface_name">Pavierchnia</string>
+    <string name="routeInfo_smoothness_name">Hladkasć</string>
+    <string name="routeInfo_steepness_name">Pakatasć</string>
     <string name="release_3_3">• Novy ekran «Napramki»: adliustroŭvaje knopki napramkaŭ dachaty i na pracu, skarot «papiaredni maršrut», spis aktyŭnych GPX-sliadoŭ i adznak, historyju pošuku
 \n
 \n • Dadatkovyja zviestki pad «Detali maršrutu»: typy daroh, pakryccio, pakatasć, hladkasć

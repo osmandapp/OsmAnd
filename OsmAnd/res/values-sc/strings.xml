@@ -2891,10 +2891,10 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="voice_announcements">Annùntzios vocales</string>
     <string name="intermediate_destinations">Destinatziones intermèdias</string>
     <string name="arrive_at_time">Arribada a sas %1$s</string>
-    <string name="route_class_stat_container">Classe</string>
-    <string name="route_surface_stat_container">Superfìtzie</string>
-    <string name="route_smoothness_stat_container">Uniformidade</string>
-    <string name="route_steepness_stat_container">Ratesa</string>
+    <string name="routeInfo_roadClass_name">Classe</string>
+    <string name="routeInfo_surface_name">Superfìtzie</string>
+    <string name="routeInfo_smoothness_name">Uniformidade</string>
+    <string name="routeInfo_steepness_name">Ratesa</string>
     <string name="add_home">Annanghe sa domo</string>
     <string name="add_work">Annanghe su logu de traballu</string>
     <string name="work_button">Traballu</string>
@@ -2906,7 +2906,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="time_of_day">Ora de sa die</string>
     <string name="by_transport_type">Tràmite %1$s</string>
     <string name="step_by_step">Passu pro passu</string>
-    <string name="road_types">Casta de àndalas</string>
+    <string name="routeInfo_road_types_name">Casta de àndalas</string>
     <string name="exit_at">Essi in</string>
     <string name="sit_on_the_stop">Sede·ti in sa firmada</string>
     <string name="quick_action_show_hide_gpx_tracks">Ammustra/Istichi sas rastas GPX</string>

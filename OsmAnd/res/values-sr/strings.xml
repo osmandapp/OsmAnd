@@ -2917,10 +2917,10 @@
     <string name="voice_announcements">Гласовне најаве</string>
     <string name="intermediate_destinations">Успутна одредишта</string>
     <string name="arrive_at_time">"Долазак у %1$s "</string>
-    <string name="route_class_stat_container">Класа</string>
-    <string name="route_surface_stat_container">Подлога</string>
-    <string name="route_smoothness_stat_container">Углачаност</string>
-    <string name="route_steepness_stat_container">Нагиб</string>
+    <string name="routeInfo_roadClass_name">Класа</string>
+    <string name="routeInfo_surface_name">Подлога</string>
+    <string name="routeInfo_smoothness_name">Углачаност</string>
+    <string name="routeInfo_steepness_name">Нагиб</string>
     <string name="routing_attr_avoid_tram_name">Избегавај трамваје</string>
     <string name="routing_attr_avoid_tram_description">Избегавање трамваја</string>
     <string name="routing_attr_avoid_bus_name">Избегавај аутобусе</string>
@@ -2984,7 +2984,7 @@
     <string name="time_of_day">Доба дана</string>
     <string name="by_transport_type">До %1$s</string>
     <string name="step_by_step">Корак по корак</string>
-    <string name="road_types">Типови путева</string>
+    <string name="routeInfo_road_types_name">Типови путева</string>
     <string name="exit_at">Излаз на</string>
     <string name="shared_string_swap">Замени</string>
     <string name="show_more">Прикажи још</string>

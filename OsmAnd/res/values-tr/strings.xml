@@ -2369,7 +2369,7 @@
     <string name="rendering_attr_highway_class_track_name">Tarım yolu</string>
     <string name="rendering_attr_highway_class_cycleway_name">Bisiklet yolu</string>
     <string name="rendering_attr_undefined_name">Belirtilmemiş</string>
-    <string name="road_types">Yol tipleri</string>
+    <string name="routeInfo_road_types_name">Yol tipleri</string>
     <string name="shared_string_swap">Takas</string>
     <string name="show_more">Daha fazla görüntüle</string>
     <string name="quick_action_show_hide_gpx_tracks">Gps izlerini göster/gizle</string>

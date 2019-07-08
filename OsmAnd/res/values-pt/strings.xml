@@ -2983,7 +2983,7 @@
     <string name="time_of_day">Hora do dia</string>
     <string name="by_transport_type">Por %1$s</string>
     <string name="step_by_step">Passo a passo</string>
-    <string name="road_types">Tipos de estrada</string>
+    <string name="routeInfo_road_types_name">Tipos de estrada</string>
     <string name="exit_at">Sair em</string>
     <string name="shared_string_swap">Trocar</string>
     <string name="show_more">Mostrar mais</string>
@@ -3022,10 +3022,10 @@
     <string name="add_home">Adicionar casa</string>
     <string name="add_work">Adicionar trabalho</string>
     <string name="work_button">Trabalho</string>
-    <string name="route_class_stat_container">Classe</string>
-    <string name="route_surface_stat_container">Superfície</string>
-    <string name="route_smoothness_stat_container">Lisura</string>
-    <string name="route_steepness_stat_container">Inclinação</string>
+    <string name="routeInfo_roadClass_name">Classe</string>
+    <string name="routeInfo_surface_name">Superfície</string>
+    <string name="routeInfo_smoothness_name">Lisura</string>
+    <string name="routeInfo_steepness_name">Inclinação</string>
     <string name="routing_attr_avoid_sett_name">Evitar paralelepípedo</string>
     <string name="routing_attr_avoid_sett_description">Evitar paralelepípedo</string>
     <string name="send_log">Enviar registo</string>

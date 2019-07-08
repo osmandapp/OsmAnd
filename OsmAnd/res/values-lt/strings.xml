@@ -2643,7 +2643,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="rendering_attr_highway_class_cycleway_name">Dviračių takas</string>
     <string name="rendering_attr_undefined_name">Nenurodyta</string>
     <string name="time_of_day">Dienos metas</string>
-    <string name="road_types">Kelių tipai</string>
+    <string name="routeInfo_road_types_name">Kelių tipai</string>
     <string name="show_more">Rodyti daugiau</string>
     <string name="quick_action_show_hide_gpx_tracks">Rodyti/slėpti GPX pėdsakus</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Paspaudus šį mygtuką žemėlapyje parodomi arba paslepiami GPX pėdsakai</string>

@@ -139,7 +139,7 @@
     <string name="time_of_day">Ora de la jornada</string>
     <string name="by_transport_type">Per %1$s</string>
     <string name="step_by_step">Pas a pas</string>
-    <string name="road_types">Tipe de rota</string>
+    <string name="routeInfo_road_types_name">Tipe de rota</string>
     <string name="exit_at">Sortida a</string>
     <string name="sit_on_the_stop">Avançatz-vos a l\'aplant</string>
     <string name="shared_string_swap">De l\'envèrs</string>

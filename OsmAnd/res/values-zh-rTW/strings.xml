@@ -2892,10 +2892,10 @@
     <string name="quick_action_switch_day_mode">日間模式</string>
     <string name="quick_action_switch_night_mode">夜間模式</string>
     <string name="quick_action_day_night_switch_mode">切換日間／夜間模式</string>
-    <string name="route_class_stat_container">級別</string>
-    <string name="route_surface_stat_container">路面</string>
-    <string name="route_smoothness_stat_container">平坦</string>
-    <string name="route_steepness_stat_container">坡度</string>
+    <string name="routeInfo_roadClass_name">級別</string>
+    <string name="routeInfo_surface_name">路面</string>
+    <string name="routeInfo_smoothness_name">平坦</string>
+    <string name="routeInfo_steepness_name">坡度</string>
     <string name="add_home">新增首頁</string>
     <string name="add_work">新增工作</string>
     <string name="work_button">工作</string>
@@ -2907,7 +2907,7 @@
     <string name="time_of_day">一天中的時間</string>
     <string name="by_transport_type">由 %1$s</string>
     <string name="step_by_step">按步驟</string>
-    <string name="road_types">道路類型</string>
+    <string name="routeInfo_road_types_name">道路類型</string>
     <string name="exit_at">出口於</string>
     <string name="sit_on_the_stop">站點的座位</string>
     <string name="quick_action_show_hide_gpx_tracks">顯示／隱藏 GPX 軌跡</string>

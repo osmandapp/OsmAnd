@@ -2986,7 +2986,7 @@
     <string name="time_of_day">Ώρα της ημέρας</string>
     <string name="by_transport_type">Κατά %1$s</string>
     <string name="step_by_step">Βήμα-βήμα</string>
-    <string name="road_types">Τύποι δρόμων</string>
+    <string name="routeInfo_road_types_name">Τύποι δρόμων</string>
     <string name="exit_at">Έξοδος στο</string>
     <string name="sit_on_the_stop">Επιβίβαση στη στάση</string>
     <string name="shared_string_swap">Αλλαγή</string>
@@ -3030,10 +3030,10 @@
     <string name="quick_action_switch_day_mode">Κατάσταση ημέρας</string>
     <string name="quick_action_switch_night_mode">Κατάσταση νύχτας</string>
     <string name="quick_action_day_night_switch_mode">Εναλλαγή κατάστασης ημέρας/νύχτας</string>
-    <string name="route_class_stat_container">Κλάση</string>
-    <string name="route_surface_stat_container">Επιφάνεια</string>
-    <string name="route_smoothness_stat_container">Ομαλότητα</string>
-    <string name="route_steepness_stat_container">Απότομη κλίση</string>
+    <string name="routeInfo_roadClass_name">Κλάση</string>
+    <string name="routeInfo_surface_name">Επιφάνεια</string>
+    <string name="routeInfo_smoothness_name">Ομαλότητα</string>
+    <string name="routeInfo_steepness_name">Απότομη κλίση</string>
     <string name="run_full_osmand_msg">Χρησιμοποιείτε τον χάρτη {0} που παρέχεται από το OsmAnd. Θέλετε να εκκινήσετε την πλήρη έκδοση του OsmAnd;</string>
     <string name="run_full_osmand_header">Να εκκινήσει το OsmAnd;</string>
     <string name="routing_attr_avoid_sett_name">Αποφυγή βοτσάλων και πλακών</string>

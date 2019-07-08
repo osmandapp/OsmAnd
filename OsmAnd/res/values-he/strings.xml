@@ -2898,10 +2898,10 @@
     <string name="shared_string_capacity">נפח</string>
     <string name="shared_string_width">רוחב</string>
     <string name="shared_string_height">גובה</string>
-    <string name="route_class_stat_container">מחלקה</string>
-    <string name="route_surface_stat_container">משטח</string>
-    <string name="route_smoothness_stat_container">רכות</string>
-    <string name="route_steepness_stat_container">תלילות</string>
+    <string name="routeInfo_roadClass_name">מחלקה</string>
+    <string name="routeInfo_surface_name">משטח</string>
+    <string name="routeInfo_smoothness_name">רכות</string>
+    <string name="routeInfo_steepness_name">תלילות</string>
     <string name="add_home">הוספת בית</string>
     <string name="add_work">הוספת עבודה</string>
     <string name="work_button">עבודה</string>
@@ -2913,7 +2913,7 @@
     <string name="time_of_day">השעה ביום</string>
     <string name="by_transport_type">עם %1$s</string>
     <string name="step_by_step">שלב אחר שלב</string>
-    <string name="road_types">סוגי כבישים</string>
+    <string name="routeInfo_road_types_name">סוגי כבישים</string>
     <string name="exit_at">לצאת ב־</string>
     <string name="quick_action_show_hide_gpx_tracks">הצגה/הסתרה של מסלולי GPX</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">נגיעה בכפתור פעולה זה מציגה או מסתירה את מסלולי ה־GPX הנבחרים במפה</string>

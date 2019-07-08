@@ -3,7 +3,7 @@
     <string name="back_to_search">Гэр тайхар</string>
     <string name="rendering_attr_highway_class_road_name">Зам</string>
     <string name="rendering_attr_highway_class_street_name">Гудамж</string>
-    <string name="road_types">замын төрөл</string>
+    <string name="routeInfo_road_types_name">замын төрөл</string>
     <string name="search_street">Гудамж хайх</string>
     <string name="search_no_results_feedback">илэрц алга</string>
     <string name="download_all">Бүгдийг татах</string>

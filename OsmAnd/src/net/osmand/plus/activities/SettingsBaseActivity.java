@@ -190,6 +190,23 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 		return propertyValue;
 	}
 
+	public static String getStringRouteInfoPropertyValue(Context ctx, String propertyValue) {
+		try {
+			if(propertyValue == null) {
+				return "";
+			}
+			final String propertyValueReplaced = propertyValue.replaceAll("\\s+","_");
+			Field f = R.string.class.getField("routeInfo_" + propertyValueReplaced + "_name");
+			if (f != null) {
+				Integer in = (Integer) f.get(null);
+				return ctx.getString(in);
+			}
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+		return propertyValue;
+	}
+
 	public SeekBarPreference createSeekBarPreference(OsmandPreference<Integer> b, int title, int summary, int dialogTextId, int defValue,
 			int maxValue) {
 		SeekBarPreference p = new SeekBarPreference(this, dialogTextId, defValue, maxValue);

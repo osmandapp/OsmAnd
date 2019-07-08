@@ -2905,10 +2905,10 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="waiting_for_route_calculation">Ibilbidea kalkulatzen…</string>
     <string name="show_along_the_route">Erakutsi ibilbidean zehar</string>
     <string name="choose_track_file_to_follow">Hautatu lorratz fitxategia jarraitzeko</string>
-    <string name="route_class_stat_container">Klasea</string>
-    <string name="route_surface_stat_container">Gainazala</string>
-    <string name="route_smoothness_stat_container">Lausotasuna</string>
-    <string name="route_steepness_stat_container">Aldapa</string>
+    <string name="routeInfo_roadClass_name">Klasea</string>
+    <string name="routeInfo_surface_name">Gainazala</string>
+    <string name="routeInfo_smoothness_name">Lausotasuna</string>
+    <string name="routeInfo_steepness_name">Aldapa</string>
     <string name="add_home">Gehitu etxea</string>
     <string name="add_work">Gehitu lana</string>
     <string name="work_button">Lana</string>
@@ -2919,7 +2919,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="time_of_day">Eguneko ordua</string>
     <string name="by_transport_type">Egilea: %1$s</string>
     <string name="step_by_step">Urratsez urrats</string>
-    <string name="road_types">Bide motak</string>
+    <string name="routeInfo_road_types_name">Bide motak</string>
     <string name="exit_at">Irten hemen</string>
     <string name="sit_on_the_stop">Muntatu honako geltokian</string>
     <string name="shared_string_swap">Aldatu</string>

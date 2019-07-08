@@ -2864,7 +2864,7 @@
     <string name="use_osm_live_public_transport_description">Увімкнути громадський транспорт із врахуванням авто-оновлень OsmAnd Live.</string>
     <string name="use_osm_live_public_transport">Громадський транспорт OsmAnd Live</string>
     <string name="step_by_step">Крок за кроком</string>
-    <string name="road_types">Типи доріг</string>
+    <string name="routeInfo_road_types_name">Типи доріг</string>
     <string name="exit_at">Вихід на</string>
     <string name="sit_on_the_stop">Посадка на зупинці</string>
     <string name="shared_string_swap">Поміняти</string>
@@ -2903,10 +2903,10 @@
     <string name="quick_action_switch_day_mode">Денний режим</string>
     <string name="quick_action_switch_night_mode">Нічний режим</string>
     <string name="quick_action_day_night_switch_mode">Перемкнути Денний/Нічний режим</string>
-    <string name="route_class_stat_container">Клас</string>
-    <string name="route_surface_stat_container">Поверхня</string>
-    <string name="route_smoothness_stat_container">Рівність</string>
-    <string name="route_steepness_stat_container">Крутість</string>
+    <string name="routeInfo_roadClass_name">Клас</string>
+    <string name="routeInfo_surface_name">Поверхня</string>
+    <string name="routeInfo_smoothness_name">Рівність</string>
+    <string name="routeInfo_steepness_name">Крутість</string>
     <string name="run_full_osmand_header">Запустити OsmAnd\?</string>
     <string name="shared_string_walk">Пішки</string>
     <string name="save_poi_value_exceed_length">Довжина тегу \"%s\" не може перевищувати 255 символів.

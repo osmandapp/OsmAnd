@@ -748,7 +748,7 @@
     <string name="previous_route">Rute sebelumnya</string>
     <string name="show_more">Tampilkan lainnya</string>
     <string name="by_transport_type">Dengan %1$s</string>
-    <string name="road_types">Tipe jalan</string>
+    <string name="routeInfo_road_types_name">Tipe jalan</string>
     <string name="add_destination_query">Silakan tambah Tujuan terlebih dahulu</string>
     <string name="use_osm_live_public_transport_description">Aktifkan angkutan publik untuk perubahan OsmAnd Live.</string>
     <string name="use_osm_live_public_transport">Angkutan publik OsmAnd Live</string>

@@ -25,6 +25,7 @@ import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.SettingsBaseActivity;
 import net.osmand.plus.activities.SettingsNavigationActivity;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.router.RouteStatisticsHelper.RouteSegmentAttribute;
@@ -32,12 +33,8 @@ import net.osmand.router.RouteStatisticsHelper.RouteStatistics;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
-
-import static net.osmand.router.RouteStatisticsHelper.UNDEFINED_ATTR;
 
 public class RouteInfoCard extends BaseCard {
 
@@ -129,26 +126,8 @@ public class RouteInfoCard extends BaseCard {
 
 	private void updateHeader() {
 		TextView title = (TextView) view.findViewById(R.id.info_type_title);
-		String name = getInfoType();
+		String name = SettingsBaseActivity.getStringRouteInfoPropertyValue(app, routeStatistics.name);
 		title.setText(name);
-	}
-
-	private String getInfoType() {
-		/*
-		switch (routeStatistics.getStatisticType()) {
-			case CLASS:
-				return app.getString(R.string.road_types);
-			case STEEPNESS:
-				return app.getString(R.string.route_steepness_stat_container);
-			case SMOOTHNESS:
-				return app.getString(R.string.route_smoothness_stat_container);
-			case SURFACE:
-				return app.getString(R.string.route_surface_stat_container);
-			default:
-				return "";
-		}
-		*/
-		return "000";
 	}
 
 	private void attachLegend(ViewGroup container, RouteStatistics routeStatistics) {

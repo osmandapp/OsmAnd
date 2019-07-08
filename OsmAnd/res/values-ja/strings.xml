@@ -2902,7 +2902,7 @@ POIの更新は利用できません</string>
     <string name="use_osm_live_public_transport">OsmAnd Live 公共交通機関機能の使用</string>
     <string name="time_of_day">時刻</string>
     <string name="by_transport_type">%1$s を利用</string>
-    <string name="road_types">道路種別</string>
+    <string name="routeInfo_road_types_name">道路種別</string>
     <string name="shared_string_swap">入れ替え</string>
     <string name="show_more">詳細を見る</string>
     <string name="tracks_on_map">マップ上の経路</string>
@@ -2959,9 +2959,9 @@ POIの更新は利用できません</string>
     <string name="quick_action_switch_night_mode">夜モード</string>
     <string name="quick_action_day_night_switch_mode">昼/夜モードの切り替え</string>
     <string name="favorite_autofill_toast_text">" は、以下の名前で保存されます:"</string>
-    <string name="route_surface_stat_container">路面</string>
-    <string name="route_smoothness_stat_container">滑らかさ</string>
-    <string name="route_steepness_stat_container">勾配</string>
+    <string name="routeInfo_surface_name">路面</string>
+    <string name="routeInfo_smoothness_name">滑らかさ</string>
+    <string name="routeInfo_steepness_name">勾配</string>
     <string name="run_full_osmand_msg">あなたは今 OsmAndで動くマップを使用しています。{0} OsmAndのフルバージョンを起動しますか？</string>
     <string name="run_full_osmand_header">OsmAndを起動しますか？</string>
     <string name="add_intermediate">経由地点を追加する</string>

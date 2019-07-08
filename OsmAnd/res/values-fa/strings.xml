@@ -2945,10 +2945,10 @@
     <string name="shared_string_capacity">ظرفیت</string>
     <string name="shared_string_width">عرض</string>
     <string name="shared_string_height">ارتفاع</string>
-    <string name="route_class_stat_container">رده</string>
-    <string name="route_surface_stat_container">سطح</string>
-    <string name="route_smoothness_stat_container">همواری</string>
-    <string name="route_steepness_stat_container">شیب</string>
+    <string name="routeInfo_roadClass_name">رده</string>
+    <string name="routeInfo_surface_name">سطح</string>
+    <string name="routeInfo_smoothness_name">همواری</string>
+    <string name="routeInfo_steepness_name">شیب</string>
     <string name="add_home">افزودن خانه</string>
     <string name="add_work">افزودن محل کار</string>
     <string name="work_button">محل کار</string>
@@ -2960,7 +2960,7 @@
     <string name="time_of_day">ساعت</string>
     <string name="by_transport_type">با %1$s</string>
     <string name="step_by_step">گام به گام</string>
-    <string name="road_types">نوع جاده‌ها</string>
+    <string name="routeInfo_road_types_name">نوع جاده‌ها</string>
     <string name="exit_at">ایستگاه پیاده‌شدن</string>
     <string name="sit_on_the_stop">ایستگاه سوارشدن</string>
     <string name="quick_action_show_hide_gpx_tracks">آشکار/پنهان کردن ردهای GPX</string>

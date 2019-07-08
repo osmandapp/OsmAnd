@@ -16,6 +16,7 @@ import net.osmand.render.RenderingRulesStorage;
 public class RouteStatisticsHelper {
 
 	public static final String UNDEFINED_ATTR = "undefined";
+	public static final String ROUTE_INFO_PREFIX = "routeInfo_";
 	private static final double H_STEP = 5;
 	private static final double H_SLOPE_APPROX = 100;
 	private static final int MIN_INCLINE = -101;
@@ -51,7 +52,7 @@ public class RouteStatisticsHelper {
 		private RouteStatistics(String name, List<RouteSegmentAttribute> elements,
 								Map<String, RouteSegmentAttribute> partition,
 								float totalDistance) {
-			this.name = name.startsWith("routeInfo_") ? name.substring("routeInfo_".length()) : name;
+			this.name = name.startsWith(ROUTE_INFO_PREFIX) ? name.substring(ROUTE_INFO_PREFIX.length()) : name;
 			this.elements = elements;
 			this.partition = partition;
 			this.totalDistance = totalDistance;
@@ -87,14 +88,14 @@ public class RouteStatisticsHelper {
 		List<String> attributeNames = new ArrayList<>();
 		if (currentRenderer != null) {
 			for (String s : currentRenderer.getRenderingAttributeNames()) {
-				if (s.startsWith("routeInfo_")) {
+				if (s.startsWith(ROUTE_INFO_PREFIX)) {
 					attributeNames.add(s);
 				}
 			}
 		}
 		if(attributeNames.isEmpty()) {
 			for (String s : defaultRenderer.getRenderingAttributeNames()) {
-				if (s.startsWith("routeInfo_")) {
+				if (s.startsWith(ROUTE_INFO_PREFIX)) {
 					attributeNames.add(s);
 				}
 			}
