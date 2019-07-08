@@ -67,6 +67,9 @@ public class RoutePlannerFrontEnd {
 		if (dataObjects.isEmpty()) {
 			ctx.loadTileData(px, py, 15, dataObjects);
 		}
+		if (dataObjects.isEmpty()) {
+			ctx.loadTileData(px, py, 13, dataObjects);
+		}
 		if (list == null) {
 			list = new ArrayList<BinaryRoutePlanner.RouteSegmentPoint>();
 		}
@@ -196,6 +199,9 @@ public class RoutePlannerFrontEnd {
 			RoutingContext nctx = buildRoutingContext(ctx.config, ctx.nativeLib, ctx.getMaps(), RouteCalculationMode.BASE);
 			nctx.calculationProgress = ctx.calculationProgress;
 			List<RouteSegmentResult> ls = searchRoute(nctx, start, end, intermediates);
+			if(ls == null) {
+				return null;
+			}
 			routeDirection = PrecalculatedRouteDirection.build(ls, ctx.config.DEVIATION_RADIUS, ctx.getRouter().getMaxSpeed());
 		}
 		if (intermediatesEmpty && ctx.nativeLib != null) {
