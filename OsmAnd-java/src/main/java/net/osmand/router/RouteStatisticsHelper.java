@@ -254,7 +254,7 @@ public class RouteStatisticsHelper {
 		}
 
 		Map<String, RouteSegmentAttribute> makePartition(List<RouteSegmentAttribute> routeAttributes) {
-			Map<String, RouteSegmentAttribute> partition = new TreeMap<>();
+			final Map<String, RouteSegmentAttribute> partition = new TreeMap<>();
 			for (RouteSegmentAttribute attribute : routeAttributes) {
 				RouteSegmentAttribute attr = partition.get(attribute.propertyName);
 				if (attr == null) {
