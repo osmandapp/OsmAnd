@@ -565,7 +565,7 @@
     <string name="driving_region_canada">Canadá</string>
     <string name="driving_region_europe_asia">Europa, Ásia, América Latina etc</string>
     <string name="driving_region_uk">Reino Unido, Índia e similares</string>
-    <string name="speak_descr">Configurar para anunciar nomes de ruas, moderadores de tráfego (paradas obrigatórias, lombadas), radares, limites de velocidade.</string>
+    <string name="speak_descr">Configure para anunciar nomes de ruas, moderadores de tráfego (paradas obrigatórias, lombadas), radares, limites de velocidade.</string>
     <string name="speak_street_names">Nome das ruas (TTS)</string>
     <string name="speak_speed_limit">Limite de velocidade</string>
     <string name="speak_cameras">Radares</string>
@@ -710,8 +710,8 @@ Pôr do Sol: %2$s</string>
     <string name="recording_can_not_be_played">Gravação não pode ser reproduzida</string>
     <string name="recording_context_menu_delete">Apagar gravação</string>
     <string name="recording_context_menu_play">Tocar</string>
-    <string name="recording_description">Gravando %1$s %3$s %2$s</string>
-    <string name="recording_default_name">Gravando</string>
+    <string name="recording_description">Gravação %1$s %3$s %2$s</string>
+    <string name="recording_default_name">Gravação</string>
     <string name="map_widget_av_notes">Notas de áudio/vídeo</string>
     <string name="map_widget_distancemeasurement">Medição de distância</string>
     <string name="audionotes_location_not_defined">Local para associar com a nota ainda não está definido. \"Usar posição…\" para atribuir uma nota para o local especificado.</string>
@@ -835,7 +835,7 @@ Pôr do Sol: %2$s</string>
     <string name="replace_destination_point">Substituir o destino</string>
     <string name="new_destination_point_dialog">Você já tem o destino definido:</string>
     <string name="shared_string_target_points">Destinos</string>
-    <string name="show_warnings_descr">Configurar avisos de tráfego (limites de velocidade, paradas obrigatórias, lombadas, túneis), radares e faixas de rolamento.</string>
+    <string name="show_warnings_descr">Configure avisos de tráfego (limites de velocidade, paradas obrigatórias, lombadas, túneis), radares e faixas de rolamento.</string>
     <string name="intermediate_point_too_far">Destino intermediário %1$s está muito longe da via mais próxima.</string>
     <string name="arrived_at_intermediate_point">Destino intermediário alcançado</string>
     <string name="context_menu_item_intermediate_point">Adicionar como destino intermediário</string>
@@ -855,7 +855,7 @@ Pôr do Sol: %2$s</string>
     <string name="poi_filter_fuel">Combustível</string>
     <string name="show_warnings_title">Mostrar alertas…</string>
     <string name="use_compass_navigation_descr">Usar a bússola quando nenhuma direção é detectada.</string>
-    <string name="select_animate_speedup">Selecionar velocidade de simulação da rota</string>
+    <string name="select_animate_speedup">Selecione a velocidade de simulação da rota</string>
     <string name="global_app_allocated_memory_descr">Memória alocada %1$s MB (limite Android %2$s MB, Dalvik %3$s MB).</string>
     <string name="global_app_allocated_memory">Memória alocada</string>
     <string name="native_app_allocated_memory_descr">Memória nativa total alocada pelo app %1$s MB (Dalvik %2$s MB, outros %3$s MB). Memória proporcional %4$s MB (limite Android %5$s MB, Dalvik %6$s MB).</string>
@@ -1216,7 +1216,7 @@ Pôr do Sol: %2$s</string>
     <string name="preferred_locale_descr">Selecionar idioma de exibição (entra em vigor quando OsmAnd é reiniciado).</string>
     <string name="preferred_locale">Idioma de exibição</string>
     <string name="incomplete_locale">incompleto</string>
-    <string name="unit_of_length_descr">Alterar unidades de distância e velocidade.</string>
+    <string name="unit_of_length_descr">Altere as unidades de distância e velocidade.</string>
     <string name="unit_of_length">Unidades de medida</string>
     <string name="si_mi_feet">Milhas/pés</string>
     <string name="si_mi_yard">Milhas/jardas</string>
@@ -3128,8 +3128,8 @@ Pôr do Sol: %2$s</string>
     <string name="shared_string_min_speed">Velocidade mínima</string>
     <string name="shared_string_max_speed">Velocidade máxima</string>
     <string name="default_speed_setting_title">Velocidade padrão</string>
-    <string name="default_speed_setting_descr">Alterar as configurações de velocidade padrão</string>
-    <string name="minmax_speed_dialog_title">Definir velocidade mínima/máxima</string>
+    <string name="default_speed_setting_descr">Altere as configurações de velocidade padrão</string>
+    <string name="minmax_speed_dialog_title">Defina velocidade mínima/máxima</string>
     <string name="default_speed_dialog_msg">Usado para calcular a hora de chegada prevista durante o roteamento</string>
     <string name="new_profile">Novo perfil</string>
     <string name="shared_string_crash">Erro</string>
