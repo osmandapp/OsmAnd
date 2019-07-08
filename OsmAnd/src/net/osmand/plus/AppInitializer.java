@@ -743,7 +743,7 @@ public class AppInitializer implements IProgress {
 			if (System.currentTimeMillis() - timeUpdated >= 1000 * 60 * 30) {
 				startTask(app.getString(R.string.saving_gpx_tracks), -1);
 				try {
-					warnings.addAll(app.savingTrackHelper.saveDataToGpx(app.getAppCustomization().getTracksDir()));
+					warnings.addAll(app.savingTrackHelper.saveDataToGpx(app.getAppCustomization().getTracksDir()).getWarnings());
 				} catch (RuntimeException e) {
 					warnings.add(e.getMessage());
 				}
