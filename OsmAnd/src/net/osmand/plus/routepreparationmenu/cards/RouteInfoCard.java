@@ -146,9 +146,9 @@ public class RouteInfoCard extends BaseCard {
 			if (contrastRatio < MINIMUM_CONTRAST_RATIO) {
 				legendIcon.setBackgroundResource(nightMode ? R.drawable.circle_contour_bg_dark : R.drawable.circle_contour_bg_light);
 			}
-			String propertyName = segment.getPropertyName();
+			String propertyName = segment.getUserPropertyName();
 			String name = SettingsNavigationActivity.getStringPropertyName(app, propertyName, propertyName.replaceAll("_", " "));
-			Spannable text = getSpanLegend(name, segment, segment.getPropertyName().equals(selectedPropertyName));
+			Spannable text = getSpanLegend(name, segment, segment.getUserPropertyName().equals(selectedPropertyName));
 			TextView legend = (TextView) view.findViewById(R.id.legend_text);
 			legend.setText(text);
 
