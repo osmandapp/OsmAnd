@@ -1987,7 +1987,6 @@ Pôr do Sol: %2$s</string>
     <string name="plan_route">Planejar rota</string>
     <string name="shared_string_sort">Ordenar</string>
     <string name="coordinate_input">Inserção de coordenada</string>
-    <string name="is_saved">está salvo</string>
     <string name="marker_save_as_track_descr">Exporte seus marcadores para o seguinte arquivo GPX:</string>
     <string name="marker_save_as_track">Salvar como arquivo GPX</string>
     <string name="move_to_history">Mover para o histórico</string>

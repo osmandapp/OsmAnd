@@ -2591,7 +2591,6 @@
     <string name="empty_state_osm_edits_descr">ניתן ליצור או לערוך נקודות עניין ב־OSM, לפתוח או להגיב על הערות OSM ולתרום קובצי GPX שהוקלטו.</string>
     <string name="empty_state_markers_history_desc">סמנים שסומנו כיוון שעברת אותם יופיעו במסך הזה.</string>
     <string name="mark_passed">סמן שעברת</string>
-    <string name="is_saved">נשמר</string>
     <string name="show_passed">הצגת אלו שעברת</string>
     <string name="hide_passed">הסתרת אלו שעברת</string>
     <string name="index_item_world_wikivoyage">מאמרי ויקימסע מכל רחבי העולם</string>

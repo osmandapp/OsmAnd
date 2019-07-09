@@ -2458,7 +2458,6 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="plan_route">Pianifica percorso</string>
     <string name="shared_string_sort">Ordina</string>
     <string name="coordinate_input">Inserimento coordinate</string>
-    <string name="is_saved">è salvato</string>
     <string name="marker_save_as_track_descr">Esporta i tuoi marcatori nel seguente file GPX:</string>
     <string name="marker_save_as_track">Salva come file GPX</string>
     <string name="move_to_history">Sposta nella cronologia</string>

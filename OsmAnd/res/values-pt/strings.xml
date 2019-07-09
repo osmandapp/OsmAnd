@@ -1834,7 +1834,6 @@
     <string name="plan_route">Planear percurso</string>
     <string name="shared_string_sort">Classificar</string>
     <string name="coordinate_input">Introdução de coordenada</string>
-    <string name="is_saved">está guardado</string>
     <string name="marker_save_as_track_descr">Exporte os seus marcadores para um ficheiro que pode especificar aqui:</string>
     <string name="marker_save_as_track">Guardar como ficheiro GPX</string>
     <string name="move_to_history">Mover para histórico</string>

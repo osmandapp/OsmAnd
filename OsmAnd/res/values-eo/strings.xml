@@ -2531,7 +2531,6 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="plan_route">Plani kurson</string>
     <string name="shared_string_sort">Ordigi</string>
     <string name="coordinate_input">Enigi koordinatojn</string>
-    <string name="is_saved">estas konservita</string>
     <string name="marker_save_as_track_descr">Elporti map-markojn al dosiero la GPX-dosiero:</string>
     <string name="marker_save_as_track">Konservi kiel GPX-dosieron</string>
     <string name="move_to_history">Movi al historio</string>

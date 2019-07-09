@@ -13,6 +13,7 @@ import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.PointF;
+import android.graphics.Typeface;
 import android.graphics.drawable.ClipDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
@@ -31,10 +32,13 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.text.Spannable;
 import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
 import android.text.TextPaint;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.text.style.ImageSpan;
+import android.text.style.StyleSpan;
 import android.text.style.URLSpan;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
@@ -64,10 +68,13 @@ import static android.util.TypedValue.COMPLEX_UNIT_SP;
 
 public class AndroidUtils {
 
+	public static final String STRING_PLACEHOLDER = "%s";
+	
 	/**
 	 * @param context
 	 * @return true if Hardware keyboard is available
 	 */
+	
 	public static boolean isHardwareKeyboardAvailable(Context context) {
 		return context.getResources().getConfiguration().keyboard != Configuration.KEYBOARD_NOKEYS;
 	}
@@ -550,5 +557,23 @@ public class AndroidUtils {
 	public static boolean isScreenLocked(Context context) {
 		KeyguardManager keyguardManager = (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);
 		return keyguardManager.inKeyguardRestrictedInputMode();
+	}
+	
+	public static CharSequence getStyledString(CharSequence baseString, CharSequence stringToInsertAndStyle, int typefaceStyle) {
+		
+		if (typefaceStyle == Typeface.NORMAL || typefaceStyle == Typeface.BOLD 
+			|| typefaceStyle == Typeface.ITALIC || typefaceStyle == Typeface.BOLD_ITALIC 
+			|| baseString.toString().contains(STRING_PLACEHOLDER)) {
+
+			int indexOfPlaceholder = baseString.toString().indexOf(STRING_PLACEHOLDER);
+			
+			SpannableStringBuilder ssb = new SpannableStringBuilder(
+				baseString.toString().replace(STRING_PLACEHOLDER, stringToInsertAndStyle));
+			ssb.setSpan(new StyleSpan(typefaceStyle), indexOfPlaceholder, 
+				stringToInsertAndStyle.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+			return ssb;
+		} else {
+			return baseString;
+		}
 	}
 }

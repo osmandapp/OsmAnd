@@ -149,7 +149,6 @@
     <string name="plan_route">Rencanakan rute</string>
     <string name="shared_string_sort">Urutkan</string>
     <string name="coordinate_input">Input koordinat</string>
-    <string name="is_saved">telah disimpan</string>
     <string name="marker_save_as_track_descr">Ekspor penanda anda ke file yang dapat Anda tentukan di sini:</string>
     <string name="marker_save_as_track">Simpan sebagai berkas GPX</string>
     <string name="move_to_history">Pindahkan ke riwayat</string>
