@@ -9,7 +9,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 import net.osmand.Location;
 import net.osmand.binary.RouteDataObject;
@@ -80,7 +79,7 @@ public class VoiceRouter {
 	private static RouteDirectionInfo nextRouteDirection;
 
 	public interface VoiceMessageListener {
-		void onVoiceMessage();
+		void onVoiceMessage(List<String> listCommands, List<String> played);
 	}
 
 	private List<WeakReference<VoiceMessageListener>> voiceMessageListeners = new ArrayList<>();
@@ -241,8 +240,8 @@ public class VoiceRouter {
 	}
 
 	public void announceBackOnRoute() {
-		CommandBuilder p = getNewCommandPlayerToPlay();
 		if (announceBackOnRoute) {
+			CommandBuilder p = getNewCommandPlayerToPlay();
 			if (p != null) {
 				p.backOnRoute();
 			}
@@ -909,9 +908,12 @@ public class VoiceRouter {
 
 	private void play(CommandBuilder p) {
 		if (p != null) {
-			p.play();
+			List<String> played = p.play();
+			notifyOnVoiceMessage(p.getListCommands(), played);
+		} else {
+			notifyOnVoiceMessage(Collections.emptyList(), Collections.emptyList());
 		}
-		notifyOnVoiceMessage();
+
 	}
 
 	private void makeSound() {
@@ -941,12 +943,12 @@ public class VoiceRouter {
 		voiceMessageListeners = updateVoiceMessageListeners(new ArrayList<>(voiceMessageListeners), voiceMessageListener, false);
 	}
 
-	private void notifyOnVoiceMessage() {
-		List<WeakReference<VoiceMessageListener>> voiceMessageListeners = new ArrayList<>(this.voiceMessageListeners);
+	private void notifyOnVoiceMessage(List<String> listCommands, List<String> played) {
+		List<WeakReference<VoiceMessageListener>> voiceMessageListeners = this.voiceMessageListeners;
 		for (WeakReference<VoiceMessageListener> weakReference : voiceMessageListeners) {
 			VoiceMessageListener lnt = weakReference.get();
 			if (lnt != null) {
-				lnt.onVoiceMessage();
+				lnt.onVoiceMessage(listCommands, played);
 			}
 		}
 	}

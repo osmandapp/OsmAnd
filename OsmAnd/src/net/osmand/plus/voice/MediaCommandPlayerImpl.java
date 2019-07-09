@@ -67,7 +67,7 @@ public class MediaCommandPlayerImpl extends AbstractPrologCommandPlayer implemen
 
 	//  Called from the calculating route thread.
 	@Override
-	public synchronized void playCommands(CommandBuilder builder) {
+	public synchronized List<String> playCommands(CommandBuilder builder) {
 		if(vrt.isMute()) {
 			StringBuilder bld = new StringBuilder();
 			for (String s : builder.execute()) {
@@ -76,9 +76,11 @@ public class MediaCommandPlayerImpl extends AbstractPrologCommandPlayer implemen
 			if (ctx != null) {
 				// sendAlertToAndroidWear(ctx, bld.toString());
 			}
-			return;
+			return Collections.emptyList();
 		}
-		filesToPlay.addAll(builder.execute());
+		List<String> lst = builder.execute();
+
+		filesToPlay.addAll(lst);
 		
 		// If we have not already started to play audio, start.
 		if (mediaPlayer == null) {
@@ -93,6 +95,7 @@ public class MediaCommandPlayerImpl extends AbstractPrologCommandPlayer implemen
 			}
 		}
 		playQueue();
+		return lst;
 	}
 	
 	synchronized void playQueue() {
