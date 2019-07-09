@@ -17,6 +17,8 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.routing.VoiceRouter.VoiceMessageListener;
 
+import java.util.List;
+
 public class LockHelper implements SensorEventListener {
 
 	private static final int SENSOR_SENSITIVITY = 4;
@@ -57,7 +59,7 @@ public class LockHelper implements SensorEventListener {
 		};
 		voiceMessageListener = new VoiceMessageListener() {
 			@Override
-			public void onVoiceMessage() {
+			public void onVoiceMessage(List<String> listCommands, List<String> played) {
 				unlockEvent();
 			}
 		};

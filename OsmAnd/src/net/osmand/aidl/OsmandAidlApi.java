@@ -47,6 +47,7 @@ import net.osmand.aidl.mapmarker.AMapMarker;
 import net.osmand.aidl.mapwidget.AMapWidget;
 import net.osmand.aidl.navdrawer.NavDrawerFooterParams;
 import net.osmand.aidl.navigation.ADirectionInfo;
+import net.osmand.aidl.navigation.OnVoiceNavigationParams;
 import net.osmand.aidl.plugins.PluginParams;
 import net.osmand.aidl.search.SearchResult;
 import net.osmand.aidl.tiles.ASqliteDbFile;
@@ -1923,12 +1924,12 @@ public class OsmandAidlApi {
 	public void registerForVoiceRouterMessages(long id) {
 		VoiceRouter.VoiceMessageListener listener = new VoiceRouter.VoiceMessageListener() {
 			@Override
-			public void onVoiceMessage() {
+			public void onVoiceMessage(List<String> cmds, List<String> played) {
 				if (aidlCallbackListener != null) {
 					for (OsmandAidlService.AidlCallbackParams cb : aidlCallbackListener.getAidlCallbacks().values()) {
 						if (!aidlCallbackListener.getAidlCallbacks().isEmpty() && (cb.getKey() & KEY_ON_VOICE_MESSAGE) > 0) {
 							try {
-								cb.getCallback().onVoiceRouterNotify();
+								cb.getCallback().onVoiceRouterNotify(new OnVoiceNavigationParams(cmds, played));
 							} catch (Exception e) {
 								LOG.error(e.getMessage(), e);
 							}

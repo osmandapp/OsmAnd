@@ -213,7 +213,13 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 		AngularConstants[] ac = AngularConstants.values();
 		entries = new String[ac.length];
 		for (int i = 0; i < entries.length; i++) {
-			entries[i] = ac[i].toHumanString(getMyApplication());
+			if (ac[i] == AngularConstants.DEGREES) {
+				entries[i] = AngularConstants.DEGREES.toHumanString(getMyApplication()) + " 180";
+			} else if (ac [i] == AngularConstants.DEGREES360) {
+				entries[i] = AngularConstants.DEGREES.toHumanString(getMyApplication()) + " 360";
+			} else {
+				entries[i] = ac[i].toHumanString(getMyApplication());
+			}
 		}
 		registerListPreference(settings.ANGULAR_UNITS, screen, entries, ac);
 

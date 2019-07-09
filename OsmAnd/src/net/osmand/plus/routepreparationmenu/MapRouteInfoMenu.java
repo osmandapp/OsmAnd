@@ -7,6 +7,7 @@ import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Handler;
+import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -26,6 +27,7 @@ import android.widget.FrameLayout;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
@@ -917,6 +919,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		final RoutingHelper helper = app.getRoutingHelper();
 		View startButton = mainView.findViewById(R.id.start_button);
 		TextViewExProgress startButtonText = (TextViewExProgress) mainView.findViewById(R.id.start_button_descr);
+		ProgressBar progressBar = (ProgressBar) mainView.findViewById(R.id.progress_bar_button);
 		boolean publicTransportMode = helper.getAppMode() == ApplicationMode.PUBLIC_TRANSPORT;
 		boolean routeCalculated = isRouteCalculated();
 		int iconId = publicTransportMode ? R.drawable.ic_map : R.drawable.ic_action_start_navigation;
@@ -942,8 +945,8 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				color2 = R.color.description_font_and_bottom_sheet_icons;
 			}
 		}
-		startButtonText.color1 = ContextCompat.getColor(mapActivity, color1);
-		startButtonText.color2 = ContextCompat.getColor(mapActivity, color2);
+		setupRouteCalculationButtonProgressBar(progressBar, startButtonText, color1, color2);
+
 		startButtonText.setCompoundDrawablesWithIntrinsicBounds(app.getUIUtilities().getIcon(iconId, color2), null, null, null);
 		if (publicTransportMode) {
 			startButtonText.setText(R.string.shared_string_show_on_map);
@@ -974,6 +977,16 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				clickRouteCancel();
 			}
 		});
+	}
+
+	private void setupRouteCalculationButtonProgressBar(@NonNull ProgressBar pb, @NonNull TextViewExProgress textProgress, @ColorRes int progressTextColor, @ColorRes int bgTextColor) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			int progressColor = ContextCompat.getColor(mapActivity, nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
+			pb.setProgressDrawable(AndroidUtils.createProgressDrawable(ContextCompat.getColor(mapActivity, R.color.color_transparent), ContextCompat.getColor(mapActivity, progressTextColor)));
+			textProgress.paint.setColor(progressColor);
+			textProgress.setTextColor(ContextCompat.getColor(mapActivity, bgTextColor));
+		}
 	}
 
 	private void createRoutingParametersButtons(MapActivity mapActivity, final RouteMenuAppModes mode, LinearLayout optionsContainer) {
