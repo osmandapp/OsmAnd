@@ -40,6 +40,8 @@ public class OsmAndFormatter {
 	private static final SimpleDateFormat SIMPLE_TIME_OF_DAY_FORMAT = new SimpleDateFormat("HH:mm", Locale.getDefault());
 	private static final String[] localDaysStr = getLettersStringArray(DateFormatSymbols.getInstance().getShortWeekdays(), 3);
 
+	public static final float MILS_IN_DEGREE = 17.777778f;
+
 	public static final int FORMAT_DEGREES_SHORT = 6;
 	public static final int FORMAT_DEGREES = LocationConvert.FORMAT_DEGREES;
 	public static final int FORMAT_MINUTES = LocationConvert.FORMAT_MINUTES;
@@ -195,12 +197,23 @@ public class OsmAndFormatter {
 		while(bearing > 360.0) {
 			bearing -= 360;
 		}
-		int azimuth = (int) bearing;
-
+		
 		if (app.getSettings().ANGULAR_UNITS.get() == AngularConstants.MILLIRADS) {
-			return (int) (azimuth * 17.4533) + " " + AngularConstants.MILLIRADS.getUnitSymbol();
+			if (bearing < 0) {
+				return Math.round((360 + bearing) * MILS_IN_DEGREE) + " " + AngularConstants.MILLIRADS.getUnitSymbol();
+			} else {
+				return Math.round(bearing * MILS_IN_DEGREE) + " " + AngularConstants.MILLIRADS.getUnitSymbol();
+			}
+		} else if (app.getSettings().ANGULAR_UNITS.get() == AngularConstants.DEGREES360) {
+			if (bearing < -0.5) {
+				return (360 + Math.round(bearing)) + AngularConstants.DEGREES360.getUnitSymbol();
+			} else if (bearing >= -0.5 && bearing < 0) {
+				return 0 + AngularConstants.DEGREES360.getUnitSymbol();
+			} else {
+				return Math.round(bearing) + AngularConstants.DEGREES360.getUnitSymbol();
+			}
 		} else {
-			return azimuth + AngularConstants.DEGREES.getUnitSymbol();
+			return Math.round(bearing) + AngularConstants.DEGREES.getUnitSymbol();
 		}
 
 	}
