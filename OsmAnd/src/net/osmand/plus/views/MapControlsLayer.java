@@ -52,9 +52,11 @@ import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
+import net.osmand.plus.routepreparationmenu.ChooseRouteFragment;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu.PointType;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchType;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 
@@ -396,7 +398,13 @@ public class MapControlsLayer extends OsmandMapLayer {
 			@Override
 			public void onClick(View v) {
 				mapActivity.dismissCardDialog();
-				doRoute(false);
+				RoutingHelper routingHelper = mapActivity.getRoutingHelper();
+				TransportRoutingHelper transportRoutingHelper = routingHelper.getTransportRoutingHelper();
+				if (routingHelper.isPublicTransportMode() && transportRoutingHelper.getCurrentRoute() >= 0) {
+					ChooseRouteFragment.showFromRouteInfo(mapActivity.getSupportFragmentManager(), transportRoutingHelper.getCurrentRoute(), MenuState.FULL_SCREEN);
+				} else {
+					doRoute(false);
+				}
 			}
 		});
 	}
@@ -758,6 +766,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		// default buttons
 		boolean routePlanningMode = false;
 		RoutingHelper rh = mapActivity.getRoutingHelper();
+		TransportRoutingHelper trh = mapActivity.getRoutingHelper().getTransportRoutingHelper();
 		if (rh.isRoutePlanningMode()) {
 			routePlanningMode = true;
 		} else if ((rh.isRouteCalculated() || rh.isRouteBeingCalculated()) && !rh.isFollowingMode()) {
@@ -773,7 +782,10 @@ public class MapControlsLayer extends OsmandMapLayer {
 		boolean showButtons = (showRouteCalculationControls || !routeFollowingMode)
 				&& !isInMovingMarkerMode() && !isInGpxDetailsMode() && !isInMeasurementToolMode() && !isInPlanRouteMode() && !contextMenuOpened && !isInChoosingRoutesMode() && !isInWaypointsChoosingMode();
 		//routePlanningBtn.setIconResId(routeFollowingMode ? R.drawable.ic_action_gabout_dark : R.drawable.map_directions);
-		if (rh.isFollowingMode()) {
+		if (rh.isPublicTransportMode() && trh.getCurrentRoute() >= 0) {
+			routePlanningBtn.setIconResId(R.drawable.map_action_bus_dark);
+			routePlanningBtn.setIconColorId(R.color.color_myloc_distance);
+		} else if (rh.isFollowingMode()) {
 			routePlanningBtn.setIconResId(R.drawable.map_start_navigation);
 			routePlanningBtn.setIconColorId(R.color.color_myloc_distance);
 		} else if (routePlanningMode) {

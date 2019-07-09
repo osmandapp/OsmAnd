@@ -47,6 +47,7 @@ public class PublicTransportCard extends BaseCard {
 	private PublicTransportCardListener transportCardListener;
 
 	private int routeId;
+	private String showButtonCustomTitle;
 
 	public interface PublicTransportCardListener {
 		void onPublicTransportCardBadgePressed(@NonNull PublicTransportCard card, @NonNull TransportRouteResultSegment segment);
@@ -54,7 +55,8 @@ public class PublicTransportCard extends BaseCard {
 		void onPublicTransportCardBadgePressed(@NonNull PublicTransportCard card, @NonNull LatLon start, @NonNull LatLon end);
 	}
 
-	public PublicTransportCard(MapActivity mapActivity, LatLon startLocation, LatLon endLocation, TransportRouteResult routeResult, int routeId) {
+	public PublicTransportCard(@NonNull MapActivity mapActivity, LatLon startLocation, LatLon endLocation,
+							   @NonNull TransportRouteResult routeResult, int routeId) {
 		super(mapActivity);
 		this.startLocation = startLocation;
 		this.endLocation = endLocation;
@@ -73,6 +75,14 @@ public class PublicTransportCard extends BaseCard {
 
 	public void setTransportCardListener(PublicTransportCardListener listener) {
 		this.transportCardListener = listener;
+	}
+
+	public String getShowButtonCustomTitle() {
+		return showButtonCustomTitle;
+	}
+
+	public void setShowButtonCustomTitle(String showButtonCustomTitle) {
+		this.showButtonCustomTitle = showButtonCustomTitle;
 	}
 
 	@Override
@@ -123,8 +133,20 @@ public class PublicTransportCard extends BaseCard {
 		if (isCurrentRoute()) {
 			color = ContextCompat.getColor(app, R.color.card_and_list_background_light);
 			AndroidUtils.setBackground(app, showButton, nightMode, R.drawable.btn_active_light, R.drawable.btn_active_dark);
-			showButtonDescr.setText(R.string.shared_string_selected);
-			showButton.setOnClickListener(null);
+			if (!Algorithms.isEmpty(showButtonCustomTitle)) {
+				showButtonDescr.setText(showButtonCustomTitle);
+			} else {
+				showButtonDescr.setText(R.string.shared_string_control_start);
+			}
+			showButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					CardListener listener = getListener();
+					if (listener != null) {
+						listener.onCardButtonPressed(PublicTransportCard.this, SHOW_BUTTON_INDEX);
+					}
+				}
+			});
 		} else {
 			if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
 				AndroidUtils.setBackground(app, showButton, nightMode, R.drawable.btn_border_light, R.drawable.btn_border_dark);
@@ -132,7 +154,11 @@ public class PublicTransportCard extends BaseCard {
 			} else {
 				AndroidUtils.setBackground(app, showButton, nightMode, R.drawable.btn_border_trans_light, R.drawable.btn_border_trans_dark);
 			}
-			showButtonDescr.setText(R.string.shared_string_show_on_map);
+			if (!Algorithms.isEmpty(showButtonCustomTitle)) {
+				showButtonDescr.setText(showButtonCustomTitle);
+			} else {
+				showButtonDescr.setText(R.string.shared_string_show_on_map);
+			}
 			showButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {

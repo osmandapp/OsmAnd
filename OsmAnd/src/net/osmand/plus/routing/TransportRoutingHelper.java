@@ -288,6 +288,7 @@ public class TransportRoutingHelper {
 	}
 
 	public synchronized void clearCurrentRoute(LatLon newFinalLocation) {
+		currentRoute = -1;
 		routes = null;
 		walkingRouteSegments = null;
 		app.getWaypointHelper().setNewRoute(new RouteCalculationResult(""));
