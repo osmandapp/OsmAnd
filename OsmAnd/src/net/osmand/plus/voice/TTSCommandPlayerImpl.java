@@ -104,7 +104,7 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 	
 	// Called from the calculating route thread.
 	@Override
-	public synchronized void playCommands(CommandBuilder builder) {
+	public synchronized List<String> playCommands(CommandBuilder builder) {
 		final List<String> execute = builder.execute(); //list of strings, the speech text, play it
 		StringBuilder bld = new StringBuilder();
 		for (String s : execute) {
@@ -132,6 +132,7 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 		} else if (ctx != null && vrt.isMute()) {
 			// sendAlertToAndroidWear(ctx, bld.toString());
 		}
+		return execute;
 	}
 
 	@Override

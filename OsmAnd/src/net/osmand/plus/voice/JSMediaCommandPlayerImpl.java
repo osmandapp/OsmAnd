@@ -15,6 +15,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class JSMediaCommandPlayerImpl extends MediaCommandPlayerImpl {
@@ -44,11 +45,12 @@ public class JSMediaCommandPlayerImpl extends MediaCommandPlayerImpl {
     }
 
     @Override
-    public synchronized void playCommands(CommandBuilder builder) {
+    public synchronized List<String> playCommands(CommandBuilder builder) {
         if(vrt.isMute()) {
-            return;
+            return Collections.emptyList();
         }
-        filesToPlay.addAll(splitAnnouncements(builder.execute()));
+        List<String> lst = splitAnnouncements(builder.execute());
+        filesToPlay.addAll(lst);
 
         // If we have not already started to play audio, start.
         if (mediaPlayer == null) {
@@ -63,6 +65,7 @@ public class JSMediaCommandPlayerImpl extends MediaCommandPlayerImpl {
             }
         }
         playQueue();
+        return lst;
     }
 
     private List<String> splitAnnouncements(List<String> execute) {
