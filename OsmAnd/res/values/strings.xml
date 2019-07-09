@@ -75,9 +75,9 @@
     <string name="downloaded_maps">Maps downloaded</string>
     <string name="visited_screens">Screens visited</string>
     <string name="collected_data">Data collected</string>
-    <string name="collected_data_descr">List of data you want to share with OsmAnd.</string>
-    <string name="downloaded_maps_collect_descr">We collect this data to understand which maps of which regions and countries are the most popular.</string>
-    <string name="visited_screens_collect_descr">We collect this data to understand which OsmAnd features are the most popular.</string>
+    <string name="collected_data_descr">Define which data you allow OsmAnd to share.</string>
+    <string name="downloaded_maps_collect_descr">Helps us understand which maps of which regions and countries are the most popular.</string>
+    <string name="visited_screens_collect_descr">Helps us understand which OsmAnd features are the most popular.</string>
     <string name="privacy_and_security_change_descr">By tapping \"Allow\" you agree with our %1$s</string>
     <string name="settings_privacy_and_security">Privacy and security</string>
     <string name="settings_privacy_and_security_desc">Select which data you are sharing with us</string>
