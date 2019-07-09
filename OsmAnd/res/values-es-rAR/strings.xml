@@ -2904,10 +2904,10 @@ Lon %2$s</string>
     <string name="shared_string_capacity">Capacidad</string>
     <string name="shared_string_width">Ancho</string>
     <string name="shared_string_height">Altura</string>
-    <string name="route_class_stat_container">Clase</string>
-    <string name="route_surface_stat_container">Superficie</string>
-    <string name="route_smoothness_stat_container">Suavidad</string>
-    <string name="route_steepness_stat_container">Inclinación</string>
+    <string name="routeInfo_roadClass_name">Clase</string>
+    <string name="routeInfo_surface_name">Superficie</string>
+    <string name="routeInfo_smoothness_name">Suavidad</string>
+    <string name="routeInfo_steepness_name">Inclinación</string>
     <string name="add_home">Añadir como «Casa»</string>
     <string name="add_work">Añadir como «Trabajo»</string>
     <string name="work_button">Trabajo</string>
@@ -2919,7 +2919,7 @@ Lon %2$s</string>
     <string name="time_of_day">Hora del día</string>
     <string name="by_transport_type">En %1$s</string>
     <string name="step_by_step">Paso a paso</string>
-    <string name="road_types">Tipos de caminos</string>
+    <string name="routeInfo_road_types_name">Tipos de caminos</string>
     <string name="exit_at">Bajarse en</string>
     <string name="sit_on_the_stop">Esperar en la parada</string>
     <string name="quick_action_show_hide_gpx_tracks">Alternar vista de trazas GPX</string>

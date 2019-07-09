@@ -290,7 +290,8 @@ public class RenderingRuleProperty {
 						return false;
 					}
 					String val2 = req.getStorage().getStringValue(vl);
-					return val != null && val.equals(val2);
+					return val != null && (val.equals(val2) || 
+							(val2.indexOf(';') != -1 && val2.contains(val+';')));
 				}
 				
 				int k = val.indexOf('=');

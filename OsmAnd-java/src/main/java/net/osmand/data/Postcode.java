@@ -192,12 +192,6 @@ public class Postcode {
 				String res = matcher.replaceAll(replacement);
 				if (res != null) {
 					result = res.replaceAll("null", "");
-					if (!result.equals(postcode)) {
-						log.info("Normalize " + country + "'s postcode: " + postcode + " -> " + result);
-					}
-					if (!matcher.matches()) {
-						log.info("Not matches " + country + "'s postcode regex: " + postcode);
-					}
 				}
 			}
 		}

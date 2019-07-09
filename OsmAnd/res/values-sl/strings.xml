@@ -2941,7 +2941,7 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="time_of_day">Čas dneva</string>
     <string name="by_transport_type">Do %1$s</string>
     <string name="step_by_step">Korak po korak</string>
-    <string name="road_types">Vrste poti</string>
+    <string name="routeInfo_road_types_name">Vrste poti</string>
     <string name="shared_string_swap">Zamenjaj</string>
     <string name="show_more">Pokaži več</string>
     <string name="tracks_on_map">Prikazane sledi</string>
@@ -2977,10 +2977,10 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="exit_at">Izstopi na postaji</string>
     <string name="sit_on_the_stop">Vstopi na postaji</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">S pritiskom na gumb dejanja se pokažejo ali skrijejo sledi GPX na zemljevidu</string>
-    <string name="route_class_stat_container">Razred</string>
-    <string name="route_surface_stat_container">Površina</string>
-    <string name="route_smoothness_stat_container">Gladkost</string>
-    <string name="route_steepness_stat_container">Naklon</string>
+    <string name="routeInfo_roadClass_name">Razred</string>
+    <string name="routeInfo_surface_name">Površina</string>
+    <string name="routeInfo_smoothness_name">Gladkost</string>
+    <string name="routeInfo_steepness_name">Naklon</string>
     <string name="shared_string_degrees">Stopinje</string>
     <string name="shared_string_milliradians">Miliradiani</string>
     <string name="angular_measeurement">Kotne enote</string>

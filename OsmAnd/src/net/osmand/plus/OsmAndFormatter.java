@@ -468,9 +468,9 @@ public class OsmAndFormatter {
 			return "Unknown Output Format!"; 
 		}
 
-		DecimalFormat degDf = new DecimalFormat("##0.00000",new DecimalFormatSymbols(Locale.US));
-		DecimalFormat minDf = new DecimalFormat("00.0000",new DecimalFormatSymbols(Locale.US));
-		DecimalFormat secDf = new DecimalFormat("00.000",new DecimalFormatSymbols(Locale.US));
+		DecimalFormat degDf = new DecimalFormat("##0.00000", new DecimalFormatSymbols(Locale.US));
+		DecimalFormat minDf = new DecimalFormat("00.000", new DecimalFormatSymbols(Locale.US));
+		DecimalFormat secDf = new DecimalFormat("00.0", new DecimalFormatSymbols(Locale.US));
 		
 		StringBuilder sb = new StringBuilder();
 

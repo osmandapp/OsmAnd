@@ -1,9 +1,7 @@
 package net.osmand.plus.views;
 
 
-import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -11,7 +9,6 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -38,7 +35,6 @@ import net.osmand.plus.views.mapwidgets.RouteInfoWidgetsFactory.RulerWidget;
 import net.osmand.plus.views.mapwidgets.RouteInfoWidgetsFactory.TimeControlWidgetState;
 import net.osmand.plus.views.mapwidgets.TextInfoWidget;
 
-import java.lang.reflect.Field;
 import static net.osmand.plus.views.mapwidgets.MapWidgetRegistry.*;
 
 public class MapInfoLayer extends OsmandMapLayer {
@@ -359,33 +355,5 @@ public class MapInfoLayer extends OsmandMapLayer {
 	@Override
 	public boolean drawInScreenPixels() {
 		return true;
-	}
-	
-
-	public static String getStringPropertyName(Context ctx, String propertyName, String defValue) {
-		try {
-			Field f = R.string.class.getField("rendering_attr_" + propertyName + "_name");
-			if (f != null) {
-				Integer in = (Integer) f.get(null);
-				return ctx.getString(in);
-			}
-		} catch (Exception e) {
-			System.err.println(e.getMessage());
-		}
-		return defValue;
-	}
-	
-	public static String getStringPropertyDescription(Context ctx, String propertyName, String defValue) {
-		try {
-			Field f = R.string.class.getField("rendering_attr_" + propertyName + "_description");
-			if (f != null) {
-				Integer in = (Integer) f.get(null);
-				return ctx.getString(in);
-			}
-		} catch (Exception e) {
-			//e.printStackTrace();
-			System.err.println(e.getMessage());
-		}
-		return defValue;
 	}
 }

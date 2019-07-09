@@ -2902,10 +2902,10 @@
     <string name="shared_string_capacity">Kapasitet</string>
     <string name="shared_string_width">Bredde</string>
     <string name="shared_string_height">Høyde</string>
-    <string name="route_class_stat_container">Klasse</string>
-    <string name="route_surface_stat_container">Overflate</string>
-    <string name="route_smoothness_stat_container">Jevnhet</string>
-    <string name="route_steepness_stat_container">Stigning</string>
+    <string name="routeInfo_roadClass_name">Klasse</string>
+    <string name="routeInfo_surface_name">Overflate</string>
+    <string name="routeInfo_smoothness_name">Jevnhet</string>
+    <string name="routeInfo_steepness_name">Stigning</string>
     <string name="add_home">Legg til bosted</string>
     <string name="add_work">Legg til arbeidssted</string>
     <string name="work_button">Arbeid</string>
@@ -2917,7 +2917,7 @@
     <string name="time_of_day">Tid på dagen</string>
     <string name="by_transport_type">Med %1$s</string>
     <string name="step_by_step">Steg for steg</string>
-    <string name="road_types">Veityper</string>
+    <string name="routeInfo_road_types_name">Veityper</string>
     <string name="exit_at">Gå av på</string>
     <string name="sit_on_the_stop">Sitt på stoppet</string>
     <string name="quick_action_show_hide_gpx_tracks">Vis/skjul GPX-spor</string>

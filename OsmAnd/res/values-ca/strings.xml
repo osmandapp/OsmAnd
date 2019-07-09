@@ -2920,10 +2920,10 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="shared_string_capacity">Capacitat</string>
     <string name="shared_string_width">Amplada</string>
     <string name="shared_string_height">Alçada</string>
-    <string name="route_class_stat_container">Classe</string>
-    <string name="route_surface_stat_container">Superfície</string>
-    <string name="route_smoothness_stat_container">Uniformitat</string>
-    <string name="route_steepness_stat_container">Pendent</string>
+    <string name="routeInfo_roadClass_name">Classe</string>
+    <string name="routeInfo_surface_name">Superfície</string>
+    <string name="routeInfo_smoothness_name">Uniformitat</string>
+    <string name="routeInfo_steepness_name">Pendent</string>
     <string name="add_home">Afegeix casa meva</string>
     <string name="add_work">Afegeix feina</string>
     <string name="work_button">Feina</string>
@@ -2935,7 +2935,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="time_of_day">Hora del dia</string>
     <string name="by_transport_type">Per %1$s</string>
     <string name="step_by_step">Pas a pas</string>
-    <string name="road_types">Tipus de carretera</string>
+    <string name="routeInfo_road_types_name">Tipus de carretera</string>
     <string name="exit_at">Sortida a</string>
     <string name="quick_action_show_hide_gpx_tracks">"Mostra/amaga traces GPX "</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Prement aquest botó d\'acció es mostren o s\'amaguen al mapa les traces GPX</string>

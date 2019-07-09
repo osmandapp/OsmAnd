@@ -1037,16 +1037,18 @@ public class OsmandAidlApi {
 		}
 	}
 
-	boolean removeMapMarker(AMapMarker marker) {
+	boolean removeMapMarker(AMapMarker marker, boolean ignoreCoordinates) {
 		if (marker != null) {
 			LatLon latLon = new LatLon(marker.getLatLon().getLatitude(), marker.getLatLon().getLongitude());
 			MapMarkersHelper markersHelper = app.getMapMarkersHelper();
 			List<MapMarker> mapMarkers = markersHelper.getMapMarkers();
 			for (MapMarker m : mapMarkers) {
-				if (m.getOnlyName().equals(marker.getName()) && latLon.equals(new LatLon(m.getLatitude(), m.getLongitude()))) {
-					markersHelper.moveMapMarkerToHistory(m);
-					refreshMap();
-					return true;
+				if (m.getOnlyName().equals(marker.getName())) {
+					if (ignoreCoordinates || latLon.equals(new LatLon(m.getLatitude(), m.getLongitude()))) {
+						markersHelper.moveMapMarkerToHistory(m);
+						refreshMap();
+						return true;
+					}
 				}
 			}
 			return false;
@@ -1055,23 +1057,40 @@ public class OsmandAidlApi {
 		}
 	}
 
-	boolean updateMapMarker(AMapMarker markerPrev, AMapMarker markerNew) {
+	boolean removeAllActiveMapMarkers() {
+		boolean refreshNeeded = false;
+		MapMarkersHelper markersHelper = app.getMapMarkersHelper();
+		List<MapMarker> mapMarkers = markersHelper.getMapMarkers();
+		for (MapMarker m : mapMarkers) {
+			markersHelper.moveMapMarkerToHistory(m);
+			refreshNeeded = true;
+		}
+		if (refreshNeeded) {
+			refreshMap();
+		}
+		return true;
+	}
+
+
+	boolean updateMapMarker(AMapMarker markerPrev, AMapMarker markerNew, boolean ignoreCoordinates) {
 		if (markerPrev != null && markerNew != null) {
 			LatLon latLon = new LatLon(markerPrev.getLatLon().getLatitude(), markerPrev.getLatLon().getLongitude());
 			LatLon latLonNew = new LatLon(markerNew.getLatLon().getLatitude(), markerNew.getLatLon().getLongitude());
 			MapMarkersHelper markersHelper = app.getMapMarkersHelper();
 			List<MapMarker> mapMarkers = markersHelper.getMapMarkers();
 			for (MapMarker m : mapMarkers) {
-				if (m.getOnlyName().equals(markerPrev.getName()) && latLon.equals(new LatLon(m.getLatitude(), m.getLongitude()))) {
-					PointDescription pd = new PointDescription(
-							PointDescription.POINT_TYPE_MAP_MARKER, markerNew.getName() != null ? markerNew.getName() : "");
-					MapMarker marker = new MapMarker(m.point, pd, m.colorIndex, m.selected, m.index);
-					marker.id = m.id;
-					marker.creationDate = m.creationDate;
-					marker.visitedDate = m.visitedDate;
-					markersHelper.moveMapMarker(marker, latLonNew);
-					refreshMap();
-					return true;
+				if (m.getOnlyName().equals(markerPrev.getName())) {
+					if (ignoreCoordinates || latLon.equals(new LatLon(m.getLatitude(), m.getLongitude()))) {
+						PointDescription pd = new PointDescription(
+								PointDescription.POINT_TYPE_MAP_MARKER, markerNew.getName() != null ? markerNew.getName() : "");
+						MapMarker marker = new MapMarker(m.point, pd, m.colorIndex, m.selected, m.index);
+						marker.id = m.id;
+						marker.creationDate = m.creationDate;
+						marker.visitedDate = m.visitedDate;
+						markersHelper.moveMapMarker(marker, latLonNew);
+						refreshMap();
+						return true;
+					}
 				}
 			}
 			return false;

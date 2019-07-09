@@ -2579,8 +2579,8 @@
     <string name="quick_action_edit_actions">编辑活动</string>
     <string name="coord_input_save_as_track_descr">你增加了%1$s 个目标。输入文件名后点击\"保存\"。</string>
     <string name="ask_for_location_permission">请在允许OsmAnd获取定位信息后继续。</string>
-    <string name="route_smoothness_stat_container">光滑度</string>
-    <string name="route_steepness_stat_container">坡度</string>
+    <string name="routeInfo_smoothness_name">光滑度</string>
+    <string name="routeInfo_steepness_name">坡度</string>
     <string name="unirs_render_descr">更改默认风格以突出显示人行道和非机动车道，使用旧版Mapnik配色。</string>
     <string name="run_full_osmand_msg">你正在使用基于 OsmAnd 的 {0}。是否启动完整版 OsmAnd？</string>
     <string name="transfers_size">%1$d 次中转</string>
@@ -2631,7 +2631,7 @@
     <string name="time_of_day">当前时间</string>
     <string name="by_transport_type">乘坐 %1$s</string>
     <string name="step_by_step">逐步</string>
-    <string name="road_types">道路类型</string>
+    <string name="routeInfo_road_types_name">道路类型</string>
     <string name="exit_at">退出于</string>
     <string name="quick_action_show_hide_gpx_tracks">显示/隐藏GPX路径</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">点按此按钮以在地图中显示或隐藏已选中的GPX路径</string>
