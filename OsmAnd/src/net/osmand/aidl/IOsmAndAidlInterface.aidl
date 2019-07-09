@@ -90,6 +90,7 @@ import net.osmand.aidl.contextmenu.ContextMenuButtonsParams;
 import net.osmand.aidl.contextmenu.UpdateContextMenuButtonsParams;
 import net.osmand.aidl.contextmenu.RemoveContextMenuButtonsParams;
 
+import net.osmand.aidl.mapmarker.RemoveMapMarkersParams;
 
 // NOTE: Add new methods at the end of file!!!
 
@@ -829,5 +830,5 @@ interface IOsmAndAidlInterface {
      * Removes all active map markers (marks them as passed and moves to history)
      * Empty class of params
      */
-    boolean removeAllActiveMapMarkers(in RemoveMapMarkersParams);
+    boolean removeAllActiveMapMarkers(in RemoveMapMarkersParams params);
 }
