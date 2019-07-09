@@ -47,6 +47,7 @@ import net.osmand.aidl.mapmarker.AMapMarker;
 import net.osmand.aidl.mapwidget.AMapWidget;
 import net.osmand.aidl.navdrawer.NavDrawerFooterParams;
 import net.osmand.aidl.navigation.ADirectionInfo;
+import net.osmand.aidl.navigation.ANavigationVoiceRouterMessageParams;
 import net.osmand.aidl.plugins.PluginParams;
 import net.osmand.aidl.search.SearchResult;
 import net.osmand.aidl.tiles.ASqliteDbFile;
@@ -1909,7 +1910,9 @@ public class OsmandAidlApi {
 					for (OsmandAidlService.AidlCallbackParams cb : aidlCallbackListener.getAidlCallbacks().values()) {
 						if (!aidlCallbackListener.getAidlCallbacks().isEmpty() && (cb.getKey() & KEY_ON_VOICE_MESSAGE) > 0) {
 							try {
-								cb.getCallback().onVoiceRouterNotify(commands);
+								ANavigationVoiceRouterMessageParams params 
+										= new ANavigationVoiceRouterMessageParams(commands);
+								cb.getCallback().onVoiceRouterNotify(params);
 							} catch (Exception e) {
 								LOG.error(e.getMessage(), e);
 							}

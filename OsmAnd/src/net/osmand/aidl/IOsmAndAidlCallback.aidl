@@ -3,6 +3,7 @@ package net.osmand.aidl;
 import net.osmand.aidl.search.SearchResult;
 import net.osmand.aidl.gpx.AGpxBitmap;
 import net.osmand.aidl.navigation.ADirectionInfo;
+import net.osmand.aidl.navigation.ANavigationVoiceRouterMessageParams;
 
 interface IOsmAndAidlCallback {
 
@@ -48,6 +49,8 @@ interface IOsmAndAidlCallback {
     
     /**
      *  Callback for {@link IOsmAndAidlInterface} registerForVoiceRouterMessages() method.
+     *  
+     *  @return commands - list of voice commands strings to speech.
      */
-    void onVoiceRouterNotify(in List<String> commands);
+    void onVoiceRouterNotify(in ANavigationVoiceRouterMessageParams commands);
 }

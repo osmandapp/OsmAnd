@@ -57,7 +57,7 @@ import net.osmand.aidl.navdrawer.NavDrawerFooterParams;
 import net.osmand.aidl.navdrawer.NavDrawerHeaderParams;
 import net.osmand.aidl.navdrawer.SetNavDrawerItemsParams;
 import net.osmand.aidl.navigation.ANavigationUpdateParams;
-import net.osmand.aidl.navigation.ANavigationVoiceRouterMessageParams;
+import net.osmand.aidl.navigation.ANavigationVoiceRouterRegistrationParams;
 import net.osmand.aidl.navigation.MuteNavigationParams;
 import net.osmand.aidl.navigation.NavigateGpxParams;
 import net.osmand.aidl.navigation.NavigateParams;
@@ -75,7 +75,6 @@ import net.osmand.aidl.search.SearchParams;
 import net.osmand.aidl.search.SearchResult;
 import net.osmand.aidl.tiles.ASqliteDbFile;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.routing.VoiceRouter;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -1142,7 +1141,7 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 		}
 
 		@Override
-		public long registerForVoiceRouterMessages(ANavigationVoiceRouterMessageParams params, final IOsmAndAidlCallback callback) throws RemoteException {
+		public long registerForVoiceRouterMessages(ANavigationVoiceRouterRegistrationParams params, final IOsmAndAidlCallback callback) throws RemoteException {
 			try {
 				OsmandAidlApi api = getApi("registerForVoiceRouterMessages");
 				if (api != null ) {

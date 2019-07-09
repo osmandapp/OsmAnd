@@ -77,8 +77,7 @@ public class CommandBuilder {
 	}
 	
 	protected void addToCommandList(String name, Object... args) {
-		listCommands.add(name);
-		listCommands.add(Arrays.toString(args));
+		listCommands.add(name + " " + Arrays.toString(args));
 	}
 
 	private Struct prepareStruct(String name, Object... args) {

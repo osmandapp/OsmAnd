@@ -3,54 +3,42 @@ package net.osmand.aidl.navigation;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class ANavigationVoiceRouterMessageParams implements Parcelable{
-    private boolean subscribeToUpdates = true;
-    private long callbackId = -1L;
+import java.util.List;
 
-    public ANavigationVoiceRouterMessageParams() {
-    }
+public class ANavigationVoiceRouterMessageParams implements Parcelable {
+	private List<String> voiceCommands;
 
-    public long getCallbackId() {
-        return callbackId;
-    }
+	protected ANavigationVoiceRouterMessageParams(Parcel in) {
+		readFromParcel(in);
+	}
 
-    public void setCallbackId(long callbackId) {
-        this.callbackId = callbackId;
-    }
+	public ANavigationVoiceRouterMessageParams(List<String> commands) {
+		this.voiceCommands = commands;
+	}
 
-    public void setSubscribeToUpdates(boolean subscribeToUpdates) {
-        this.subscribeToUpdates = subscribeToUpdates;
-    }
+	private void readFromParcel(Parcel in) {
+		in.readStringList(voiceCommands);
+	}
 
-    public boolean isSubscribeToUpdates() {
-        return subscribeToUpdates;
-    }
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeStringList(voiceCommands);
+	}
 
-    protected ANavigationVoiceRouterMessageParams(Parcel in) {
-        callbackId = in.readLong();
-        subscribeToUpdates = in.readByte() != 0;
-    }
+	public static final Parcelable.Creator<ANavigationVoiceRouterMessageParams> CREATOR = new Parcelable.Creator<ANavigationVoiceRouterMessageParams>() {
+		@Override
+		public ANavigationVoiceRouterMessageParams createFromParcel(Parcel in) {
+			return new ANavigationVoiceRouterMessageParams(in);
+		}
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeLong(callbackId);
-        dest.writeByte((byte) (subscribeToUpdates ? 1 : 0));
-    }
+		@Override
+		public ANavigationVoiceRouterMessageParams[] newArray(int size) {
+			return new ANavigationVoiceRouterMessageParams[size];
+		}
+	};
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    public static final Parcelable.Creator<ANavigationVoiceRouterMessageParams> CREATOR = new Parcelable.Creator<ANavigationVoiceRouterMessageParams>() {
-        @Override
-        public ANavigationVoiceRouterMessageParams createFromParcel(Parcel in) {
-            return new ANavigationVoiceRouterMessageParams(in);
-        }
-
-        @Override
-        public ANavigationVoiceRouterMessageParams[] newArray(int size) {
-            return new ANavigationVoiceRouterMessageParams[size];
-        }
-    };
+	@Override
+	public int describeContents() {
+		return 0;
+	}
 }
