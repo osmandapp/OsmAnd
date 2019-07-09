@@ -340,12 +340,12 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		saveCurrentTrack(onComplete, null);
 	}
 
-	public void saveCurrentTrack(@Nullable final WeakReference<Activity> weakReferenceToActivity) {
-		saveCurrentTrack(null, weakReferenceToActivity);
+	public void saveCurrentTrack(@Nullable final WeakReference<Activity> mapActivityRef) {
+		saveCurrentTrack(null, mapActivityRef);
 	}
 	
 	public void saveCurrentTrack(@Nullable final Runnable onComplete, 
-		@Nullable final WeakReference<Activity> weakReferenceToActivity) {
+		@Nullable final WeakReference<Activity> mapActivityRef) {
 		app.getTaskManager().runInBackground(new OsmAndTaskRunnable<Void, Void, SaveGpxResult>() {
 
 			@Override
@@ -372,9 +372,9 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 				isSaving = false;
 				app.getNotificationHelper().refreshNotifications();
 				updateControl();
-				if (weakReferenceToActivity != null) {
-					final Activity a = weakReferenceToActivity.get();
-					if (a instanceof MapActivity && !a.isFinishing() && !Algorithms.isEmpty(result.getFilenames())) {
+				if (mapActivityRef != null && !Algorithms.isEmpty(result.getFilenames())) {
+					final Activity a = mapActivityRef.get();
+					if (a instanceof MapActivity && !a.isFinishing()) {
 						OnSaveCurrentTrackFragment.showInstance(((MapActivity) a)
 							.getSupportFragmentManager(), result.getFilenames().get(0));	
 					}
