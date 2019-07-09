@@ -791,6 +791,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 					mapActivity.getMapView().setMapPositionX(visible ? 0 : 1);
 				}
 			}
+			mapActivity.updateStatusBarColor();
 			mapActivity.refreshMap();
 		}
 	}
@@ -856,7 +857,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		}
 	}
 
-	static boolean showFromRouteInfo(FragmentManager fragmentManager, int routeIndex, int initialMenuState) {
+	public static boolean showFromRouteInfo(FragmentManager fragmentManager, int routeIndex, int initialMenuState) {
 		try {
 			ChooseRouteFragment fragment = new ChooseRouteFragment();
 			Bundle args = new Bundle();
@@ -880,7 +881,9 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		if (mapActivity != null) {
 			useRouteInfoMenu = false;
 			dismiss();
-			mapActivity.getMapLayers().getMapControlsLayer().startNavigation();
+			if (!mapActivity.getMyApplication().getRoutingHelper().isPublicTransportMode()) {
+				mapActivity.getMapLayers().getMapControlsLayer().startNavigation();
+			}
 		}
 	}
 

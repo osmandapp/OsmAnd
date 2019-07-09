@@ -3,7 +3,6 @@ package net.osmand.plus.routepreparationmenu;
 
 import android.content.Context;
 import android.content.DialogInterface.OnDismissListener;
-import android.content.res.Configuration;
 import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -97,6 +96,8 @@ import net.osmand.search.SearchUICore.SearchResultCollection;
 import net.osmand.search.core.SearchResult;
 import net.osmand.util.MapUtils;
 
+import org.apache.commons.logging.Log;
+
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -106,7 +107,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
-import org.apache.commons.logging.Log;
 
 public class MapRouteInfoMenu implements IRouteInformationListener, CardListener {
 
@@ -528,6 +528,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				for (int i = 0; i < routes.size(); i++) {
 					route = routes.get(i);
 					PublicTransportCard card = new PublicTransportCard(mapActivity, startLocation, endLocation, route, i);
+					card.setShowButtonCustomTitle(mapActivity.getString(R.string.shared_string_show_on_map));
 					card.setShowBottomShadow(i == routes.size() - 1 && !showPedestrianCard);
 					card.setShowTopShadow(i != 0);
 					card.setListener(this);
@@ -671,8 +672,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 					ChooseRouteFragment.showFromRouteInfo(mapActivity.getSupportFragmentManager(),
 							((PublicTransportCard) card).getRouteId(), MenuState.FULL_SCREEN);
 				} else if (buttonIndex == PublicTransportCard.SHOW_BUTTON_INDEX) {
-					setupCards();
-					openMenuHeaderOnly();
+					showRouteOnMap(mapActivity, ((PublicTransportCard) card).getRouteId());
 				}
 			} else if (card instanceof SimpleRouteCard) {
 				hide();
@@ -1374,11 +1374,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			OsmandApplication app = mapActivity.getMyApplication();
 			if (app.getRoutingHelper().isPublicTransportMode()) {
 				if (isTransportRouteCalculated() && hasTransportRoutes()) {
-					if (mapActivity.getPointToNavigate() != null) {
-						hide();
-					}
-					ChooseRouteFragment.showFromRouteInfo(mapActivity.getSupportFragmentManager(),
-							app.getTransportRoutingHelper().getCurrentRoute(), MenuState.HEADER_ONLY);
+					showRouteOnMap(mapActivity, app.getTransportRoutingHelper().getCurrentRoute());
 				}
 			} else {
 				if (mapActivity.getPointToNavigate() != null) {
@@ -1387,6 +1383,14 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				mapActivity.getMapLayers().getMapControlsLayer().startNavigation();
 			}
 		}
+	}
+
+	private void showRouteOnMap(@NonNull MapActivity mapActivity, int routeIndex) {
+		if (mapActivity.getPointToNavigate() != null) {
+			hide();
+		}
+		ChooseRouteFragment.showFromRouteInfo(mapActivity.getSupportFragmentManager(),
+				routeIndex, MenuState.HEADER_ONLY);
 	}
 
 	private void clickRouteCancel() {

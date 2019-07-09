@@ -1608,10 +1608,22 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 
 	@Override
 	public void onCardButtonPressed(@NonNull BaseCard card, int buttonIndex) {
-		if (card instanceof PublicTransportCard && buttonIndex == 0) {
-			openMenuFullScreen();
-		} else if (card instanceof RouteDirectionsCard && buttonIndex >= 0) {
-			showDirectionsInfo(buttonIndex);
+		if (card instanceof PublicTransportCard) {
+			switch (buttonIndex) {
+				case PublicTransportCard.DETAILS_BUTTON_INDEX:
+					openMenuFullScreen();
+					break;
+				case PublicTransportCard.SHOW_BUTTON_INDEX:
+					RouteDetailsFragmentListener listener = getRouteDetailsListener();
+					if (listener != null) {
+						listener.onNavigationRequested();
+					}
+					break;
+			}
+		} else if (card instanceof RouteDirectionsCard) {
+			if (buttonIndex >= 0) {
+				showDirectionsInfo(buttonIndex);
+			}
 		} else if (card instanceof RouteStatisticCard) {
 			switch (buttonIndex) {
 				case RouteStatisticCard.DETAILS_BUTTON_INDEX:
