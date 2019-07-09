@@ -105,16 +105,23 @@ interface IOsmAndAidlInterface {
     boolean addMapMarker(in AddMapMarkerParams params);
 
     /**
-     * Add map marker at given location.
+     * Remove map marker.
+     *
+     * If ignoreCoordinates is false the marker is only removed if lat/lon match the currently set values of the marker.
+     * If ignoreCoordinates is true the marker is removed if the name matches, the values of lat/lon are ignored.
      *
      * @param lat (double) -  latitude.
      * @param lon (double) - longitude.
      * @param name (String)- name of marker.
+     * @param ignoreCoordinates (boolean) - flag to determine whether lat/lon shall be ignored
      */
     boolean removeMapMarker(in RemoveMapMarkerParams params);
 
     /**
-     * Update map marker at given location with name.
+     * Update map marker.
+     *
+     * If ignoreCoordinates is false the marker gets updated only if latPrev/lonPrev match the currently set values of the marker.
+     * If ignoreCoordinates is true the marker gets updated if the name matches, the values of latPrev/lonPrev are ignored.
      *
      * @param latPrev (double) - latitude (current marker).
      * @param lonPrev (double) - longitude (current marker).
@@ -122,6 +129,7 @@ interface IOsmAndAidlInterface {
      * @param latNew (double) - latitude (new marker).
      * @param lonNew (double) - longitude (new marker).
      * @param nameNew (String) - name (new marker).
+     * @param ignoreCoordinates (boolean) - flag to determine whether latPrev/lonPrev shall be ignored
      */
     boolean updateMapMarker(in UpdateMapMarkerParams params);
 
@@ -816,4 +824,9 @@ interface IOsmAndAidlInterface {
      * @params callback (IOsmAndAidlCallback) - callback to notify user on voice message
      */
     long registerForVoiceRouterMessages(in ANavigationVoiceRouterMessageParams params, IOsmAndAidlCallback callback);
+
+    /**
+     * Remove all map markers.
+     */
+    boolean removeAllMapMarkers();
 }
