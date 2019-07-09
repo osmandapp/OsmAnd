@@ -64,16 +64,13 @@ public class OnSaveCurrentTrackFragment extends BottomSheetDialogFragment {
 		showOnMapBtn.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				//show track on MapActivity
 				GpxInfo gpxInfo = new GpxInfo();
 				gpxInfo.setGpx(GPXUtilities.loadGPXFile(f));
-				boolean e = true;
 				if (gpxInfo.gpx != null) {
 					OsmandSettings settings = app.getSettings();
 					WptPt loc = gpxInfo.gpx.findPointToShow();
 					if (loc != null) {
 						settings.setMapLocationToShow(loc.lat, loc.lon, settings.getLastKnownMapZoom());
-						e = false;
 						app.getSelectedGpxHelper().setGpxFileToDisplay(gpxInfo.gpx);
 					}
 				}
