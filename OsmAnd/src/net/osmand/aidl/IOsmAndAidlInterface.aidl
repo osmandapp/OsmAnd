@@ -829,5 +829,5 @@ interface IOsmAndAidlInterface {
      * Removes all active map markers (marks them as passed and moves to history)
      * Empty class of params
      */
-    boolean removeAllActiveMapMarkers(in RemoveMapMarkersParams);
+    boolean removeAllActiveMapMarkers(in RemoveMapMarkersParams params);
 }
