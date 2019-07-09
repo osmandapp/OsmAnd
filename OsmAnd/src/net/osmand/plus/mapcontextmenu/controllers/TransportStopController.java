@@ -168,7 +168,7 @@ public class TransportStopController extends MenuController {
 
 	private void addTransportStopRoutes(List<TransportStop> stops, List<TransportStopRoute> routes, boolean useEnglishNames, TransportIndexRepository t) {
 		for (TransportStop tstop : stops) {
-			if (!tstop.isDeleted()) {
+			if (!tstop.isDeleted() && tstop.hasReferencesToRoutes()) {
 				addRoutes(routes, useEnglishNames, t, tstop, transportStop, (int) MapUtils.getDistance(tstop.getLocation(), transportStop.getLocation()));
 			}
 		}
