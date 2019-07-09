@@ -33,7 +33,7 @@ public class OnSaveCurrentTrackFragment extends BottomSheetDialogFragment {
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		final OsmandApplication app = getMyApplication();
+		final OsmandApplication app = requiredMyApplication();
 		Bundle args = getArguments();
 		String savedGpxName = "";
 		if (args != null && args.containsKey(SAVED_TRACK_KEY)) {
