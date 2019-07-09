@@ -9,7 +9,6 @@ import com.jwetherell.openmap.common.LatLonPoint;
 import com.jwetherell.openmap.common.UTMPoint;
 import java.text.DecimalFormatSymbols;
 import net.osmand.LocationConvert;
-import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
 import net.osmand.data.City.CityType;
 import net.osmand.osm.AbstractPoiType;
