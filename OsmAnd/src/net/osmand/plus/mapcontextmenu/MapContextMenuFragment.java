@@ -537,13 +537,13 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		buttonsBottomBorder.setBackgroundColor(ContextCompat.getColor(mapActivity, nightMode ? R.color.ctx_menu_buttons_divider_dark : R.color.ctx_menu_buttons_divider_light));
 		buttonsTopBorder.setBackgroundColor(ContextCompat.getColor(mapActivity, nightMode ? R.color.ctx_menu_buttons_divider_dark : R.color.ctx_menu_buttons_divider_light));
 		View buttons = view.findViewById(R.id.context_menu_buttons);
-		buttons.setBackgroundColor(ContextCompat.getColor(mapActivity, nightMode ? R.color.ctx_menu_buttons_bg_dark : R.color.ctx_menu_buttons_bg_light));
+		buttons.setBackgroundColor(ContextCompat.getColor(mapActivity, nightMode ? R.color.list_background_color_dark : R.color.activity_background_color_light));
 		if (!menu.buttonsVisible()) {
 			buttonsTopBorder.setVisibility(View.GONE);
 			buttons.setVisibility(View.GONE);
 		}
 		View bottomButtons = view.findViewById(R.id.context_menu_bottom_buttons);
-		bottomButtons.setBackgroundColor(ContextCompat.getColor(mapActivity, nightMode ? R.color.ctx_menu_buttons_bg_dark : R.color.ctx_menu_buttons_bg_light));
+		bottomButtons.setBackgroundColor(ContextCompat.getColor(mapActivity, nightMode ? R.color.list_background_color_dark : R.color.activity_background_color_light));
 		if (!menu.navigateButtonVisible()) {
 			bottomButtons.findViewById(R.id.context_menu_directions_button).setVisibility(View.GONE);
 		}

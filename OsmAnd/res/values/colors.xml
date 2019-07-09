@@ -340,7 +340,7 @@
 	<color name="ctx_menu_buttons_bg_light">#f2f2f2</color>
 	<color name="ctx_menu_buttons_bg_dark">#222526</color>
 	<color name="ctx_menu_buttons_divider_light">#e6e6e6</color>
-	<color name="ctx_menu_buttons_divider_dark">#2d3133</color>
+	<color name="ctx_menu_buttons_divider_dark">#2c3033</color>
 	<color name="ctx_menu_buttons_text_color">#727272</color>
 	<color name="ctx_menu_buttons_icon_color">#727272</color>
 	<color name="ctx_menu_bottom_buttons_text_color_light">#536dfe</color>
