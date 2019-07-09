@@ -1,7 +1,5 @@
 package net.osmand.plus.osmedit;
 
-import static net.osmand.plus.osmedit.EditPoiDialogFragment.AMENITY_TEXT_LENGTH;
-
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -10,8 +8,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.InputFilter;
-import android.text.InputFilter.LengthFilter;
-import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.TypedValue;
@@ -40,6 +36,8 @@ import org.apache.commons.logging.Log;
 import java.util.Map;
 
 import gnu.trove.list.array.TIntArrayList;
+
+import static net.osmand.plus.osmedit.EditPoiDialogFragment.AMENITY_TEXT_LENGTH;
 
 public class BasicEditPoiFragment extends BaseOsmAndFragment
 		implements EditPoiDialogFragment.OnFragmentActivatedListener {
@@ -165,6 +163,19 @@ public class BasicEditPoiFragment extends BaseOsmAndFragment
 			item.setEndTime(24 * 60);
 		}
 		mOpeningHoursAdapter.setOpeningHoursRule(item, position);
+	}
+
+	public void removeUnsavedOpeningHours() {
+		EditPoiData data = getData();
+		if (data != null) {
+			OpeningHoursParser.OpeningHours openingHours = OpeningHoursParser.parseOpenedHoursHandleErrors(data.getTagValues()
+					.get(OSMSettings.OSMTagKey.OPENING_HOURS.getValue()));
+			if (openingHours == null) {
+				openingHours = new OpeningHoursParser.OpeningHours();
+			}
+			mOpeningHoursAdapter.replaceOpeningHours(openingHours);
+			mOpeningHoursAdapter.updateViews();
+		}
 	}
 
 	private EditPoiData getData() {
