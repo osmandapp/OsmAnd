@@ -826,7 +826,8 @@ interface IOsmAndAidlInterface {
     long registerForVoiceRouterMessages(in ANavigationVoiceRouterMessageParams params, IOsmAndAidlCallback callback);
 
     /**
-     * Remove all map markers.
+     * Removes all active map markers (marks them as passed and moves to history)
+     * Empty class of params
      */
-    boolean removeAllMapMarkers();
+    boolean removeAllActiveMapMarkers(in RemoveMapMarkersParams);
 }
