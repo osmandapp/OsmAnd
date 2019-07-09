@@ -2888,10 +2888,10 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="shared_string_capacity">Enhaveco</string>
     <string name="shared_string_width">Larĝo</string>
     <string name="shared_string_height">Alto</string>
-    <string name="route_class_stat_container">Kategorio</string>
-    <string name="route_surface_stat_container">Pavimo</string>
-    <string name="route_smoothness_stat_container">Glateco</string>
-    <string name="route_steepness_stat_container">Klineco</string>
+    <string name="routeInfo_roadClass_name">Kategorio</string>
+    <string name="routeInfo_surface_name">Pavimo</string>
+    <string name="routeInfo_smoothness_name">Glateco</string>
+    <string name="routeInfo_steepness_name">Klineco</string>
     <string name="add_home">Aldoni hejmon</string>
     <string name="add_work">Aldoni laborejon</string>
     <string name="work_button">Laborejo</string>
@@ -2903,7 +2903,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="time_of_day">Tagtempo</string>
     <string name="by_transport_type">Per %1$s</string>
     <string name="step_by_step">Paŝon post paŝo</string>
-    <string name="road_types">Specoj de vojoj</string>
+    <string name="routeInfo_road_types_name">Specoj de vojoj</string>
     <string name="exit_at">Eliru ĉe</string>
     <string name="sit_on_the_stop">Atendu ĉe haltejo</string>
     <string name="quick_action_show_hide_gpx_tracks">Montri/kaŝi GPX-spurojn</string>

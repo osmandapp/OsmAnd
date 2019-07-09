@@ -1372,7 +1372,7 @@
     <string name="route_tsll">Xira llixeramente a la esquierda y sigui per</string>
     <string name="route_head">De frente</string>
     <string name="app_mode_pedestrian">Andadura</string>
-    <string name="route_surface_stat_container">Superficie</string>
+    <string name="routeInfo_surface_name">Superficie</string>
     <string name="angular_measeurement">Unidaes de midida angular</string>
     <string name="angular_measeurement_descr">Camuda en qué se mide l\'acimut.</string>
     <string name="previous_route">Ruta anterior</string>

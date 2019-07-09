@@ -2836,7 +2836,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="use_osm_live_public_transport">OsmAnd Live Openbaar vervoer</string>
     <string name="time_of_day">Huidige tijd</string>
     <string name="step_by_step">Stap voor stap</string>
-    <string name="road_types">Weg types</string>
+    <string name="routeInfo_road_types_name">Weg types</string>
     <string name="exit_at">Uitrit over</string>
     <string name="shared_string_swap">Wissel</string>
     <string name="show_more">Toon meer</string>
@@ -2876,9 +2876,9 @@ voor Gebied: %1$s x %2$s</string>
     <string name="quick_action_switch_day_mode">Dag Modus</string>
     <string name="quick_action_switch_night_mode">Nacht Modus</string>
     <string name="quick_action_day_night_switch_mode">Wissel tussen Dag/Nacht modus</string>
-    <string name="route_surface_stat_container">Oppervlakte</string>
-    <string name="route_smoothness_stat_container">Kwaliteit wegdek</string>
-    <string name="route_steepness_stat_container">Steilte</string>
+    <string name="routeInfo_surface_name">Oppervlakte</string>
+    <string name="routeInfo_smoothness_name">Kwaliteit wegdek</string>
+    <string name="routeInfo_steepness_name">Steilte</string>
     <string name="run_full_osmand_msg">U gebruikt {0} kaart geleverd door OsmAnd. Wilt u de \"OsmAnd full\" versie openen\?</string>
     <string name="run_full_osmand_header">Open OsmAnd\?</string>
     <string name="release_3_3_7">• Toon de overstaptijden in Openbaar Vervoer

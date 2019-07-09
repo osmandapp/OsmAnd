@@ -2907,10 +2907,10 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="voice_announcements">Stemmemeddelelser</string>
     <string name="arrive_at_time">Ankommer %1$s</string>
     <string name="quick_action_switch_day_night_descr">Tryk på handlingsknappen skifter mellem dag- og nattilstand</string>
-    <string name="route_class_stat_container">Klasse</string>
-    <string name="route_surface_stat_container">Overflade</string>
-    <string name="route_smoothness_stat_container">Jævnhed</string>
-    <string name="route_steepness_stat_container">Stejlhed</string>
+    <string name="routeInfo_roadClass_name">Klasse</string>
+    <string name="routeInfo_surface_name">Overflade</string>
+    <string name="routeInfo_smoothness_name">Jævnhed</string>
+    <string name="routeInfo_steepness_name">Stejlhed</string>
     <string name="run_full_osmand_msg">Der bruges {0} kort leveret af OsmAnd. Start den fulde version\?</string>
     <string name="shared_string_swap">Byt rundt</string>
     <string name="show_more">Vis mere</string>
@@ -2922,7 +2922,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="time_of_day">Tidspunkt på dagen</string>
     <string name="by_transport_type">Med %1$s</string>
     <string name="step_by_step">Trin for trin</string>
-    <string name="road_types">Vejtyper</string>
+    <string name="routeInfo_road_types_name">Vejtyper</string>
     <string name="exit_at">Stå af ved</string>
     <string name="sit_on_the_stop">Stig på ved stoppested</string>
     <string name="quick_action_show_hide_gpx_tracks">Vis/skjul GPX spor</string>

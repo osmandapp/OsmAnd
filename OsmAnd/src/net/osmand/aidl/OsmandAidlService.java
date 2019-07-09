@@ -49,6 +49,7 @@ import net.osmand.aidl.maplayer.point.ShowMapPointParams;
 import net.osmand.aidl.maplayer.point.UpdateMapPointParams;
 import net.osmand.aidl.mapmarker.AddMapMarkerParams;
 import net.osmand.aidl.mapmarker.RemoveMapMarkerParams;
+import net.osmand.aidl.mapmarker.RemoveMapMarkersParams;
 import net.osmand.aidl.mapmarker.UpdateMapMarkerParams;
 import net.osmand.aidl.mapwidget.AddMapWidgetParams;
 import net.osmand.aidl.mapwidget.RemoveMapWidgetParams;
@@ -75,7 +76,6 @@ import net.osmand.aidl.search.SearchParams;
 import net.osmand.aidl.search.SearchResult;
 import net.osmand.aidl.tiles.ASqliteDbFile;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.routing.VoiceRouter;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -282,7 +282,7 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 		public boolean removeMapMarker(RemoveMapMarkerParams params) {
 			try {
 				OsmandAidlApi api = getApi("removeMapMarker");
-				return params != null && api != null && api.removeMapMarker(params.getMarker());
+				return params != null && api != null && api.removeMapMarker(params.getMarker(), params.getIgnoreCoordinates());
 			} catch (Exception e) {
 				handleException(e);
 				return false;
@@ -293,7 +293,7 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 		public boolean updateMapMarker(UpdateMapMarkerParams params) {
 			try {
 				OsmandAidlApi api = getApi("updateMapMarker");
-				return params != null && api != null && api.updateMapMarker(params.getMarkerPrev(), params.getMarkerNew());
+				return params != null && api != null && api.updateMapMarker(params.getMarkerPrev(), params.getMarkerNew(), params.getIgnoreCoordinates());
 			} catch (Exception e) {
 				handleException(e);
 				return false;
@@ -1161,6 +1161,17 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 			} catch (Exception e) {
 				handleException(e);
 				return UNKNOWN_API_ERROR;
+			}
+		}
+
+		@Override
+		public boolean removeAllActiveMapMarkers(RemoveMapMarkersParams params) {
+			try {
+				OsmandAidlApi api = getApi("removeAllActiveMapMarkers");
+				return api != null && api.removeAllActiveMapMarkers();
+			} catch (Exception e) {
+				handleException(e);
+				return false;
 			}
 		}
 	};

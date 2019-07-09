@@ -2889,10 +2889,10 @@ Pôr do Sol: %2$s</string>
     <string name="shared_string_capacity">Capacidade</string>
     <string name="shared_string_width">Largura</string>
     <string name="shared_string_height">Altura</string>
-    <string name="route_class_stat_container">Classe</string>
-    <string name="route_surface_stat_container">Superfície</string>
-    <string name="route_smoothness_stat_container">Suavidade</string>
-    <string name="route_steepness_stat_container">Inclinação</string>
+    <string name="routeInfo_roadClass_name">Classe</string>
+    <string name="routeInfo_surface_name">Superfície</string>
+    <string name="routeInfo_smoothness_name">Suavidade</string>
+    <string name="routeInfo_steepness_name">Inclinação</string>
     <string name="add_destination_query">Por favor adicione o primeiro destino</string>
     <string name="previous_route">Rota anterior</string>
     <string name="add_home">Adicionar casa</string>
@@ -2904,7 +2904,7 @@ Pôr do Sol: %2$s</string>
     <string name="time_of_day">Hora do dia</string>
     <string name="by_transport_type">Por %1$s</string>
     <string name="step_by_step">Passo a passo</string>
-    <string name="road_types">Tipos de estrada</string>
+    <string name="routeInfo_road_types_name">Tipos de estrada</string>
     <string name="exit_at">Desembarque em</string>
     <string name="sit_on_the_stop">Embarque na parada</string>
     <string name="quick_action_show_hide_gpx_tracks">Mostrar/Ocultar faixas GPX</string>
