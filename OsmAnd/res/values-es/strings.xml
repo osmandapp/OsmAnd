@@ -1673,7 +1673,7 @@
     <string name="next_proceed">Siguiente</string>
     <string name="opening_at">Abren a las</string>
     <string name="closing_at">Cierran a las</string>
-    <string name="av_locations_descr">Archivo GPX con notas de ubicaciones.</string>
+    <string name="av_locations_descr">Archivo GPX con ubicaciones.</string>
     <string name="av_locations">Ubicaciones</string>
     <string name="contact_info">Información de contacto</string>
     <string name="add_opening_hours">Añadir horario de atención</string>
@@ -2360,19 +2360,17 @@
     <string name="shared_string_overview">Resumen</string>
     <string name="osmand_plus_extended_description_part2">"Navegación GPS 
 \n
-\n • Funciona en línea (rápido) o sin conexión (sin cargos de roaming al viajar al extranjero) 
+\n • Funciona en línea (rápido) o sin conexión (sin cargos de roaming al viajar al extranjero)
 \n
-\n • Instrucciones por voz paso a paso (voces grabadas y sintetizadas) 
+\n • Instrucciones por voz paso a paso (voces grabadas y sintetizadas)
 \n
 \n • (Opcional) asistente de carril, visualización de nombres de calles y hora  estimada de llegada
 \n
-\n • Soporta puntos intermedios en tu itinerario 
+\n • Soporta puntos intermedios en tu itinerario
 \n
-\n • La ruta se recalcula al salirse de la misma  
+\n • La ruta se recalcula al salirse de la misma
 \n
-\n • Busca destinos por dirección, por tipo (por ejemplo: Restaurantes, hoteles, gasolineras, museos), o por coordenadas geográficas
-\n
-\n"</string>
+\n • Busca destinos por dirección, por tipo (por ejemplo: Restaurantes, hoteles, gasolineras, museos), o por coordenadas geográficas"</string>
     <string name="osmand_plus_extended_description_part3">Vista del mapa 
 \n • Muestra tu ubicación y orientación 
 \n • (Opcional) Ajusta el mapa a la dirección del movimiento (o la brújula) 
@@ -3203,4 +3201,19 @@
     <string name="edit_profile_nav_settings_subtitle">Selecciona los ajustes de navegación por defecto para este perfil</string>
     <string name="routing_attr_max_num_changes_description">Especifica el número máximo de transbordos</string>
     <string name="routing_attr_max_num_changes_name">Número de transbordos</string>
+    <string name="turn_screen_on_router">Encender</string>
+    <string name="turn_screen_on_time_descr">Establece el tiempo durante el cual se encenderá la pantalla.</string>
+    <string name="turn_screen_on_sensor">Usar sensor de proximidad</string>
+    <string name="turn_screen_on_sensor_descr">Mueve tu mano sobre la parte superior de la pantalla para encender la pantalla mientras navegas.</string>
+    <string name="rendering_attr_highway_class_track_grade1_name">Grado 1</string>
+    <string name="rendering_attr_highway_class_track_grade2_name">Grado 2</string>
+    <string name="rendering_attr_highway_class_track_grade3_name">Grado 3</string>
+    <string name="rendering_attr_highway_class_track_grade4_name">Grado 4</string>
+    <string name="rendering_attr_highway_class_track_grade5_name">Grado 5</string>
+    <string name="external_input_device">Dispositivos de entrada externos</string>
+    <string name="external_input_device_descr">Selecciona un dispositivo como un teclado genérico o WunderLINQ para controles externos.</string>
+    <string name="sett_no_ext_input">Ninguno</string>
+    <string name="sett_generic_ext_input">Teclado genérico</string>
+    <string name="sett_wunderlinq_ext_input">WunderLINQ</string>
+    <string name="sett_parrot_ext_input">Parrot</string>
 </resources>
