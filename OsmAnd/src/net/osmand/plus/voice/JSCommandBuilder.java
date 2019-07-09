@@ -13,6 +13,7 @@ import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class JSCommandBuilder extends CommandBuilder {
@@ -54,7 +55,15 @@ public class JSCommandBuilder extends CommandBuilder {
     }
 
     private JSCommandBuilder addCommand(String name, Object... args){
-        Object obj = jsScope.get(name);
+        listCommands.add(name);
+        for(Object o : args) {
+            if(o != null) {
+                 listCommands.add(o.toString());
+            } else {
+                 listCommands.add("");
+            }
+        }
+	Object obj = jsScope.get(name);
         if (obj instanceof Function) {
             Function jsFunction = (Function) obj;
             Object jsResult = jsFunction.call(jsContext, jsScope, jsScope, args);
