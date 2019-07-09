@@ -482,7 +482,7 @@ public class BinaryMapTransportReaderAdapter {
 			int filePointer) throws IOException {
 		TransportStop dataObject = new TransportStop();
 		dataObject.setFileOffset(codedIS.getTotalBytesRead());
-		// dataObject.setReferencesToRoutes(new int[] {filePointer});
+		dataObject.setReferencesToRoutes(new int[] {filePointer});
 		boolean end = false;
 		while(!end){
 			int t = codedIS.readTag();
