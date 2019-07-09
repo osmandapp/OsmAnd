@@ -67,8 +67,13 @@ public class CommandBuilder {
 	}
 
 	private CommandBuilder addCommand(String name, Object... args){
+		addToCommandList(name, args);
 		Struct struct = prepareStruct(name, args);
 		listStruct.add(struct);
+		return this;
+	}
+	
+	protected void addToCommandList(String name, Object... args) {
 		listCommands.add(name);
 		for(Object o : args) {
 			if(o != null) {
@@ -77,7 +82,6 @@ public class CommandBuilder {
 				listCommands.add("");
 			}
 		}
-		return this;
 	}
 
 	public List<String> getListCommands() {
