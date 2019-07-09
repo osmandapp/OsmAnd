@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.support.annotation.ColorRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
@@ -425,9 +426,13 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 		AndroidUtils.setBackground(mapActivity, view.findViewById(R.id.controls_divider), nightMode, R.color.divider_color_light, R.color.divider_color_dark);
 
 		((TextView) view.findViewById(R.id.cancel_button_descr)).setTextColor(colorActive);
-		((TextView) view.findViewById(R.id.start_button_descr)).setText(getText(R.string.shared_string_apply));
 
-		setupRouteCalculationButtonProgressBar((ProgressBar) view.findViewById(R.id.progress_bar_button));
+		TextViewExProgress startButtonText = (TextViewExProgress) view.findViewById(R.id.start_button_descr);
+		ProgressBar progressBar = (ProgressBar) view.findViewById(R.id.progress_bar_button);
+		startButtonText.setText(getText(R.string.shared_string_apply));
+
+		int progressTextColor = nightMode ? R.color.active_buttons_and_links_text_disabled_dark : R.color.active_buttons_and_links_text_light;
+		setupRouteCalculationButtonProgressBar(progressBar, startButtonText, progressTextColor);
 	}
 
 	public void reloadListAdapter(ArrayAdapter<Object> listAdapter) {
@@ -551,19 +556,17 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 		}
 		TextViewExProgress textViewExProgress = (TextViewExProgress) view.findViewById(R.id.start_button_descr);
 		textViewExProgress.percent = progress / 100f;
-		int color = nightMode ? R.color.active_buttons_and_links_text_disabled_dark : R.color.active_buttons_and_links_text_light;
-		textViewExProgress.color1 = ContextCompat.getColor(mapActivity, color);
-		textViewExProgress.color2 = ContextCompat.getColor(mapActivity, R.color.active_buttons_and_links_text_disabled_dark);
 		textViewExProgress.invalidate();
 	}
 
-	public void setupRouteCalculationButtonProgressBar(@NonNull ProgressBar pb) {
+	private void setupRouteCalculationButtonProgressBar(@NonNull ProgressBar pb, @NonNull TextViewExProgress textProgress, @ColorRes int progressTextColor) {
 		OsmandApplication app = getMyApplication();
 		if (app != null) {
 			int bgColor = ContextCompat.getColor(app, nightMode ? R.color.activity_background_dark : R.color.activity_background_light);
 			int progressColor = ContextCompat.getColor(app, nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
-
-			pb.setProgressDrawable(AndroidUtils.createProgressDrawable(bgColor, progressColor));
+			pb.setProgressDrawable(AndroidUtils.createProgressDrawable(bgColor, ContextCompat.getColor(app, progressTextColor)));
+			textProgress.paint.setColor(progressColor);
+			textProgress.setTextColor(ContextCompat.getColor(app, R.color.active_buttons_and_links_text_disabled_dark));
 		}
 	}
 
