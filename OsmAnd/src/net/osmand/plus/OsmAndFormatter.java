@@ -9,6 +9,7 @@ import com.jwetherell.openmap.common.LatLonPoint;
 import com.jwetherell.openmap.common.UTMPoint;
 import java.text.DecimalFormatSymbols;
 import net.osmand.LocationConvert;
+import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
 import net.osmand.data.City.CityType;
 import net.osmand.osm.AbstractPoiType;
@@ -195,12 +196,17 @@ public class OsmAndFormatter {
 		while(bearing > 360.0) {
 			bearing -= 360;
 		}
-		int azimuth = (int) bearing;
-
+		
 		if (app.getSettings().ANGULAR_UNITS.get() == AngularConstants.MILLIRADS) {
-			return (int) (azimuth * 17.4533) + " " + AngularConstants.MILLIRADS.getUnitSymbol();
+			return Math.round(bearing * 17.4533) + " " + AngularConstants.MILLIRADS.getUnitSymbol();
+		} else if (app.getSettings().ANGULAR_UNITS.get() == AngularConstants.DEGREES360) {
+			if (bearing < 0) {
+				return (359 + Math.round(bearing)) + AngularConstants.DEGREES360.getUnitSymbol();
+			} else {
+				return Math.round(bearing) + AngularConstants.DEGREES360.getUnitSymbol();
+			}
 		} else {
-			return azimuth + AngularConstants.DEGREES.getUnitSymbol();
+			return Math.round(bearing) + AngularConstants.DEGREES.getUnitSymbol();
 		}
 
 	}

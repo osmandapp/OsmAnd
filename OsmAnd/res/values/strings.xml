@@ -11,6 +11,8 @@
 	Thx - Hardy
 
 -->
+    <string name="settings_degrees_360">Degrees 360</string>
+    <string name="settings_degrees_180">Degrees 180</string>
     <string name="turn_screen_on_router">Wake on turn</string>
     <string name="turn_screen_on_time_descr">Set the time for which the screen will turn on.</string>
     <string name="turn_screen_on_sensor">Use proximity sensor</string>
