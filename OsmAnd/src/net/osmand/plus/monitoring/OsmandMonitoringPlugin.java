@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AlertDialog;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -18,7 +19,6 @@ import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
-import java.lang.ref.WeakReference;
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.ValueHolder;
@@ -38,11 +38,12 @@ import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.TextInfoWidget;
+import net.osmand.util.Algorithms;
 
+import java.lang.ref.WeakReference;
 import java.util.List;
 
 import gnu.trove.list.array.TIntArrayList;
-import net.osmand.util.Algorithms;
 
 public class OsmandMonitoringPlugin extends OsmandPlugin {
 	public static final String ID = "osmand.monitoring";
@@ -261,10 +262,10 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		return monitoringControl;
 	}
 
-	public void controlDialog(final Activity map, final boolean showTrackSelection) {
+	public void controlDialog(final Activity activity, final boolean showTrackSelection) {
 		final boolean wasTrackMonitored = settings.SAVE_GLOBAL_TRACK_TO_GPX.get();
 		
-		AlertDialog.Builder bld = new AlertDialog.Builder(map);
+		AlertDialog.Builder bld = new AlertDialog.Builder(activity);
 		final TIntArrayList items = new TIntArrayList();
 		if (wasTrackMonitored) {
 			items.add(R.string.gpx_monitoring_stop);
@@ -291,14 +292,10 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 				int which = holder[0];
 				int item = items.get(which);
 				if(item == R.string.save_current_track){
-					if (map instanceof MapActivity) {
-						saveCurrentTrack(new WeakReference<>((MapActivity) map));
-					} else {
-						saveCurrentTrack();
-					}
+					saveCurrentTrack(null, activity);
 				} else if(item == R.string.gpx_monitoring_start) {
-					if (app.getLocationProvider().checkGPSEnabled(map)) {
-						startGPXMonitoring(map, showTrackSelection);
+					if (app.getLocationProvider().checkGPSEnabled(activity)) {
+						startGPXMonitoring(activity, showTrackSelection);
 					}
 				} else if(item == R.string.gpx_monitoring_stop) {
 					stopRecording();
@@ -309,7 +306,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 				} else if(item == R.string.live_monitoring_start) {
 					final ValueHolder<Integer> vs = new ValueHolder<Integer>();
 					vs.value = settings.LIVE_MONITORING_INTERVAL.get();
-					showIntervalChooseDialog(map, app.getString(R.string.live_monitoring_interval) + " : %s", 
+					showIntervalChooseDialog(activity, app.getString(R.string.live_monitoring_interval) + " : %s",
 							app.getString(R.string.save_track_to_gpx_globally), SECONDS, MINUTES,
 							null, vs, showTrackSelection, new OnClickListener() {
 						@Override
@@ -344,12 +341,10 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		saveCurrentTrack(onComplete, null);
 	}
 
-	public void saveCurrentTrack(@Nullable final WeakReference<MapActivity> mapActivityRef) {
-		saveCurrentTrack(null, mapActivityRef);
-	}
-	
-	public void saveCurrentTrack(@Nullable final Runnable onComplete, 
-		@Nullable final WeakReference<MapActivity> mapActivityRef) {
+	public void saveCurrentTrack(@Nullable final Runnable onComplete, @Nullable Activity activity) {
+
+		final WeakReference<Activity> activityRef = activity != null ? new WeakReference<>(activity) : null;
+
 		app.getTaskManager().runInBackground(new OsmAndTaskRunnable<Void, Void, SaveGpxResult>() {
 
 			@Override
@@ -376,10 +371,10 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 				isSaving = false;
 				app.getNotificationHelper().refreshNotifications();
 				updateControl();
-				if (mapActivityRef != null && !Algorithms.isEmpty(result.getFilenames())) {
-					final MapActivity a = mapActivityRef.get();
-					if (a != null && !a.isFinishing()) {
-						OnSaveCurrentTrackFragment.showInstance(a.getSupportFragmentManager(), result.getFilenames().get(0));	
+				if (activityRef != null && !Algorithms.isEmpty(result.getFilenames())) {
+					final Activity a = activityRef.get();
+					if (a instanceof FragmentActivity && !a.isFinishing()) {
+						OnSaveCurrentTrackFragment.showInstance(((FragmentActivity) a).getSupportFragmentManager(), result.getFilenames().get(0));
 					}
 				}
 				
