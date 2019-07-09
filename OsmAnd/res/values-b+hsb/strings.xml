@@ -1091,7 +1091,6 @@
     <string name="use_location">Stejišćo wužiwać</string>
     <string name="my_location">Moje stejišćo</string>
     <string name="shared_string_sort">Sortěrować</string>
-    <string name="is_saved">bu składowane</string>
     <string name="osm_edit_context_menu_delete">OSM-změnu wotstronić</string>
     <string name="local_recordings_delete_all_confirm">Chceš %1$d noticu wotstronić. Sy sej wěsty/a?</string>
     <string name="shared_string_delete">Wotstronić</string>

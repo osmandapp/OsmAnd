@@ -2248,7 +2248,6 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="shared_string_finish">Ljúka</string>
     <string name="plan_route">Skipuleggja leið</string>
     <string name="coordinate_input">Innsett hnit</string>
-    <string name="is_saved">eru vistuð</string>
     <string name="marker_save_as_track_descr">Flyttu kortamerkin þín út í eftirfarandi GPX-skrá:</string>
     <string name="marker_save_as_track">Vista sem GPX-skrá</string>
     <string name="move_to_history">Flytja í aðgerðaferil</string>

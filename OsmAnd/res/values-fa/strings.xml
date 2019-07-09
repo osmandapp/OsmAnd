@@ -2264,7 +2264,6 @@
     <string name="plan_route">طراحی مسیر</string>
     <string name="shared_string_sort">مرتب‌سازی</string>
     <string name="coordinate_input">واردکردن مختصات</string>
-    <string name="is_saved">ذخیره شد</string>
     <string name="marker_save_as_track_descr">نشانه‌هایتان را در این فایل GPX ذخیره کنید:</string>
     <string name="move_to_history">فرستادن به سابقه</string>
     <string name="group_will_be_removed_after_restart">گروه با راه‌اندازی مجدد برنامه حذف می‌شود.</string>

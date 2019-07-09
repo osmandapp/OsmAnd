@@ -1076,7 +1076,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				if (listener != null) {
 					listener.onPointsSaved();
 				}
-				snackbar = Snackbar.make(mainView, fileName + " " + getString(R.string.is_saved) + ".", Snackbar.LENGTH_LONG)
+				snackbar = Snackbar.make(mainView, String.format(getString(R.string.shared_string_file_is_saved), fileName) + ".", Snackbar.LENGTH_LONG)
 						.setAction(R.string.shared_string_show, new View.OnClickListener() {
 							@Override
 							public void onClick(View view) {

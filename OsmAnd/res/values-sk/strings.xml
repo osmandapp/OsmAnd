@@ -2523,7 +2523,6 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="plan_route">Naplánovať trasu</string>
     <string name="shared_string_sort">Zotriediť</string>
     <string name="coordinate_input">Zadanie súradníc</string>
-    <string name="is_saved">je uložený</string>
     <string name="marker_save_as_track_descr">Exportovať vaše značky do nasledovného súboru GPX:</string>
     <string name="marker_save_as_track">Uložiť ako súbor GPX</string>
     <string name="move_to_history">Presunúť do histórie</string>

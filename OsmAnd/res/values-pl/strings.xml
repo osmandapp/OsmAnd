@@ -2465,7 +2465,6 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="move_to_history">Przenieś do historii</string>
     <string name="group_will_be_removed_after_restart">Grupa zostanie usunięta po ponownym uruchomieniu.</string>
     <string name="use_system_keyboard">Użycie klawiatury systemowej</string>
-    <string name="is_saved">jest zapisany</string>
     <string name="wrong_format">Błędny format</string>
     <string name="shared_string_road">Droga</string>
     <string name="show_map">Wyświetl mapę</string>

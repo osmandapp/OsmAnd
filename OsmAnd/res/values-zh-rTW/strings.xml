@@ -2527,7 +2527,6 @@
     <string name="plan_route">計畫路線</string>
     <string name="shared_string_sort">分類</string>
     <string name="coordinate_input">座標輸入</string>
-    <string name="is_saved">已儲存</string>
     <string name="marker_save_as_track_descr">將您的標記匯出到下方的 GPX 檔案：</string>
     <string name="marker_save_as_track">另存為 GPX 檔案</string>
     <string name="move_to_history">移至歷程</string>

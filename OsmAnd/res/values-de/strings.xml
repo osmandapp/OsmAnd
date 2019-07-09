@@ -2543,7 +2543,6 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="plan_route">Route planen</string>
     <string name="shared_string_sort">Sortieren</string>
     <string name="coordinate_input">Koordinateneingabe</string>
-    <string name="is_saved">ist gespeichert</string>
     <string name="marker_save_as_track_descr">Markierungen in die hier festgelegte GPX-Datei exportieren:</string>
     <string name="marker_save_as_track">Als GPX-Datei speichern</string>
     <string name="move_to_history">In den Verlauf verschieben</string>

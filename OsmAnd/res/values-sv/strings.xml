@@ -2196,7 +2196,6 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">Undvik isvägar och vadställen.</string>
     <string name="my_location">Min plats</string>
     <string name="shared_string_sort">Sortera</string>
-    <string name="is_saved">har sparats</string>
     <string name="marker_save_as_track">Spara som GPX-fil</string>
     <string name="move_to_history">Flytta till historiken</string>
     <string name="show_arrows_on_the_map">Visa pilar på kartan</string>

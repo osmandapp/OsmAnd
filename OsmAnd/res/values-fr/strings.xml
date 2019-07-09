@@ -2517,7 +2517,6 @@ représentant la zone : %1$s x %2$s</string>
     <string name="plan_route">Itinéraire planifié</string>
     <string name="shared_string_sort">Trier</string>
     <string name="coordinate_input">Saisie des coordonnées</string>
-    <string name="is_saved">a été enregistré</string>
     <string name="marker_save_as_track_descr">Exporter vos marques dans le fichier GPX suivant :</string>
     <string name="marker_save_as_track">Enregistrer comme fichier GPX</string>
     <string name="move_to_history">Déplacer vers l\'historique</string>

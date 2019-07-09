@@ -2381,7 +2381,6 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="plan_route">Útvonal tervezése</string>
     <string name="shared_string_sort">Sorba rendezés</string>
     <string name="coordinate_input">Koordináta bevitele</string>
-    <string name="is_saved">mentve</string>
     <string name="marker_save_as_track_descr">Jelölők exportálása az alábbi GPX fájlba:</string>
     <string name="marker_save_as_track">Mentés GPX fájlként</string>
     <string name="move_to_history">Áthelyezés az előzményekbe</string>
