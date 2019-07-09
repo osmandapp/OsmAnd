@@ -5,12 +5,15 @@ import java.util.Arrays;
 import java.util.List;
 
 import net.osmand.PlatformUtil;
+import net.osmand.plus.R;
 import net.osmand.plus.routing.data.StreetName;
 
 import org.apache.commons.logging.Log;
 
 import alice.tuprolog.Struct;
 import alice.tuprolog.Term;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 
 public class CommandBuilder {
 	
