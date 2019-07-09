@@ -2427,7 +2427,6 @@ voor Gebied: %1$s x %2$s</string>
     <string name="plan_route">Plan route</string>
     <string name="shared_string_sort">Sorteer</string>
     <string name="coordinate_input">Invoer van coördinaten</string>
-    <string name="is_saved">is opgeslagen</string>
     <string name="marker_save_as_track_descr">Exporteer uw Markeervlaggetjes naar het volgende bestand:</string>
     <string name="marker_save_as_track">Opslaan als GPX-track</string>
     <string name="move_to_history">Verplaats naar geschiedenis</string>

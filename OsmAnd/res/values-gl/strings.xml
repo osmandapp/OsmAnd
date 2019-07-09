@@ -20,9 +20,9 @@
     <string name="sleep_mode_stop_dialog">Deter o modo de segundo plano do GPS?</string>
     <string name="stop_navigation_service">Deter</string>
     <string name="confirm_every_run">Preguntar sempre</string>
-    <string name="save_global_track_interval_descr">Escolle o intervalo de rexistro para a gravación xeral de pistas (activar mediante trebello da gravación do GPX no mapa).</string>
-    <string name="save_global_track_interval">Intervalo de rexistro xeral</string>
-    <string name="background_service_int">Intervalo para espertar o GPS</string>
+    <string name="save_global_track_interval_descr">Escolle o intre de rexistro para a gravación xeral de pistas (activar mediante trebello da gravación do GPX no mapa).</string>
+    <string name="save_global_track_interval">Intre de rexistro xeral</string>
+    <string name="background_service_int">Intre para espertar o GPS</string>
     <string name="enable_sleep_mode">Activar o modo de segundo plano do GPS</string>
     <string name="save_track_to_gpx_globally">Rexistrar a pista nun ficheiro GPX</string>
     <string name="save_track_to_gpx_globally_descr">Rexistra a ubicación nun ficheiro GPX, podendo activalo ou desactivalo empregando o trebello do rexistro do GPX na pantalla do mapa.</string>
@@ -30,9 +30,9 @@
     <string name="save_current_track">Garda-la pista actual</string>
     <string name="save_track_to_gpx">Rexistra-la pista de xeito automático durante a navigación</string>
     <string name="save_track_to_gpx_descrp">Unha pista do GPX gárdarase de xeito automático no cartafol das pistas durante a navigación.</string>
-    <string name="save_track_interval_globally">Intervalo de rexistro</string>
-    <string name="save_track_interval">Intervalo de rexistro durante a navegación</string>
-    <string name="save_track_interval_descr">Elixi-lo intervalo do rexistro das pistas durante a navigación.</string>
+    <string name="save_track_interval_globally">Intre de rexistro</string>
+    <string name="save_track_interval">Intre de rexistro durante a navegación</string>
+    <string name="save_track_interval_descr">Escoller o intre do rexistro das pistas durante a navigación.</string>
     <string name="voice_provider_descr">Escolle a voz das indicacións para a navigación.</string>
     <string name="voice_provider">Indicacións por voz</string>
     <string name="rendering_attr_publicTransportMode_name">Liñas dos buses, trolebúses e lanzadeiras</string>
@@ -59,7 +59,7 @@
     <string name="pause_navigation">Deter a navegación</string>
     <string name="rendering_attr_subwayMode_name">Liñas do metro</string>
     <string name="keep_navigation_service">Manter</string>
-    <string name="gps_wake_up_timer">Intervalo para espertar o GPS</string>
+    <string name="gps_wake_up_timer">Intre para espertar o GPS</string>
     <string name="map_preferred_locale_descr">Lingua preferida para os nomes no mapa (de non estaren dispoñíbeis pasará ó inglés ou ás linguas locais).</string>
     <string name="map_preferred_locale">Lingua preferida do mapa</string>
     <string name="local_map_names">Mapas locais</string>
@@ -90,7 +90,7 @@
     <string name="select_index_file_to_download">Non se atopou ren. Se non dás atopado a túa rexión, a podes facer ti mesmo (ollar https://osmand.net).</string>
     <string name="none_selected_gpx">Sen ficheiros GPX seleccionados. Mantén premido para escoller un.</string>
     <string name="local_index_select_gpx_file">Escolle para amosar</string>
-    <string name="gpx_split_interval">Intervalo quebrado</string>
+    <string name="gpx_split_interval">Intre de división</string>
     <string name="sort_by_distance">Ordenar pola distancia</string>
     <string name="sort_by_name">Ordenar polo nome</string>
     <string name="show_zoom_buttons_navigation_descr">Amosa-los botóns de achegamento durante a navegación.</string>
@@ -117,7 +117,7 @@
     <string name="gpx_info_average_speed">"Velocidade media: %1$s "</string>
     <string name="gpx_info_maximum_speed">"Velocidade máxima: %1$s "</string>
     <string name="gpx_info_avg_altitude">Altitude media: %1$s</string>
-    <string name="gpx_info_diff_altitude">Intervalo de altitudes: %1$s</string>
+    <string name="gpx_info_diff_altitude">Intre de altitudes: %1$s</string>
     <string name="gpx_info_asc_altitude">Descenso/ascenso: %1$s</string>
     <string name="gpx_timespan">Duración: %1$s</string>
     <string name="gpx_timemoving">Tempo en movemento: %1$s</string>
@@ -339,8 +339,8 @@
     <string name="use_magnetic_sensor_descr">Para a lectura do compás, emprega o sensor magnético no canto do sensor da orientación.</string>
     <string name="use_magnetic_sensor">Empregar o sensor magnético</string>
     <string name="other_location">Outra</string>
-    <string name="files_limit">Quedan %1$d ficheiros</string>
-    <string name="available_downloads_left">Aínda quedan %1$d ficheiros para baixar</string>
+    <string name="files_limit">Faltan %1$d ficheiros</string>
+    <string name="available_downloads_left">Aínda faltan %1$d ficheiros para baixar</string>
     <string name="install_paid">Versión completa</string>
     <string name="cancel_route">Rexeitar rota</string>
     <string name="cancel_navigation">Para-la navigación</string>
@@ -406,7 +406,7 @@
     <string name="recording_open_external_player">Abrir un reprodutor externo</string>
     <string name="recording_delete_confirm">Desexa eliminar este elemento\?</string>
     <string name="recording_unavailable">non dispoñíbel</string>
-    <string name="recording_context_menu_arecord">Tomar unha nota de son</string>
+    <string name="recording_context_menu_arecord">Gravar unha nota de son</string>
     <string name="recording_context_menu_vrecord">Tomar unha nota de vídeo</string>
     <string name="layer_recordings">Capa de gravacións</string>
     <string name="recording_can_not_be_played">Non é posíbel reproducir a gravación</string>
@@ -583,7 +583,7 @@
     <string name="map_widget_transparent">Trebellos transparentes</string>
     <string name="bg_service_sleep_mode_off">Executar\n o aplicativo en segundo plano</string>
     <string name="bg_service_sleep_mode_on">Deter\n a execución en segundo plano</string>
-    <string name="gps_wakeup_interval">Intervalo para espertar o GPS: %s</string>
+    <string name="gps_wakeup_interval">Intre para espertar o GPS: %s</string>
     <string name="int_continuosly">Continuo</string>
     <string name="screen_is_locked">Para desbloqueares a pantalla prema na icona do cadeado</string>
     <string name="map_widget_top_text">Nome da rúa</string>
@@ -605,7 +605,7 @@
     <string name="bg_service_screen_lock">Bloquear a pantalla</string>
     <string name="bg_service_screen_unlock">Desbloquear a pantalla</string>
     <string name="bg_service_screen_lock_toast">A pantalla está bloqueada</string>
-    <string name="bg_service_interval">Estabelecer o intervalo para espertar:</string>
+    <string name="bg_service_interval">Estabelecer o intre para espertar:</string>
     <string name="show_cameras">Radares da velocidade</string>
     <string name="show_traffic_warnings">Avisos do tráfico</string>
     <string name="avoid_toll_roads">Evita-las estradas de portaxe ou peaxe</string>
@@ -786,8 +786,8 @@
     <string name="local_openstreetmap_descr_title">Edición asíncrona de OSM:</string>
     <string name="local_openstreetmap_settings">PDI/Notas do OSM gardados no dispositivo</string>
     <string name="local_openstreetmap_settings_descr">Amosar e xestionar os PDI/Notas do OSM anotados na base de datos local.</string>
-    <string name="live_monitoring_interval_descr">Indica-lo intervalo de seguemento ao vivo.</string>
-    <string name="live_monitoring_interval">Intervalo de seguimento con conexión</string>
+    <string name="live_monitoring_interval_descr">Indicar o intre de seguemento ao vivo.</string>
+    <string name="live_monitoring_interval">Intre de seguemento con conexión</string>
     <string name="live_monitoring_url_descr">Indique o enderezo web con esta sintaxe dos parámetros: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
     <string name="live_monitoring_url">Enderezo web para o seguimento con conexión</string>
     <string name="gpx_monitoring_disabled_warn">Rexistre a pista empregando o trebello de GPX ou mediante as opcións de «Gravación de viaxe».</string>
@@ -834,7 +834,7 @@
     <string name="choose_auto_follow_route">Centrar de xeito automático a vista do mapa</string>
     <string name="choose_auto_follow_route_descr">Tempo até que a vista do mapa volva a sincronizarse ca ubicación actual.</string>
     <string name="keep_informing_never">Só de xeito manual (prema a frecha)</string>
-    <string name="keep_informing_descr">Anunciar de novo as instrucións de navigación a intervalos regulares.</string>
+    <string name="keep_informing_descr">Anunciar de novo as instrucións de navigación a intres regulares.</string>
     <string name="keep_informing">Recuncar as instrucións da navigación</string>
     <string name="auto_follow_route_navigation">Centrar automaticamente só ao navegar</string>
     <string name="auto_follow_route_navigation_descr">Centrar automaticamente a vista do mapa só ao navegar.</string>
@@ -930,7 +930,7 @@
     <string name="choose_audio_stream">Saída das indicacións por voz</string>
     <string name="choose_audio_stream_descr">Escolle-la canle pola que reproduci-las indicacións por voz.</string>
     <string name="voice_stream_voice_call">Son de chamada telefónica (tamén nos altavoces estéreos co Bluetooth)</string>
-    <string name="voice_stream_notification">Son de notificaión</string>
+    <string name="voice_stream_notification">Son de notificación</string>
     <string name="voice_stream_music">Son de música</string>
     <string name="warning_tile_layer_not_downloadable">O aplicativo non pode baixa-la capa do mapa \"%1$s\"; tenta reinstalala, podería axudar.</string>
     <string name="overlay_transparency_descr">Modifica-la transparencia da sobreposición.</string>
@@ -1111,7 +1111,7 @@
     <string name="gps_provider">GPS</string>
     <string name="int_seconds">segundos</string>
     <string name="int_min">min.</string>
-    <string name="background_service_int_descr">Estabelece o intervalo da activación do servizo de segundo plano.</string>
+    <string name="background_service_int_descr">Estabelece o intre da activación do servizo de segundo plano.</string>
     <string name="background_service_provider_descr">Método de ubicación empregado do modo reposo.</string>
     <string name="background_service_provider">Fornecedor de localización</string>
     <string name="background_router_service_descr">Fai un seguemento da túa ubicación ca pantalla apagada.</string>
@@ -1701,7 +1701,7 @@ Lon %2$s</string>
     <string name="count_of_lines">Número de liñas</string>
     <string name="are_you_sure">Tes a certeza de querer facelo\?</string>
     <string name="unsaved_changes_will_be_lost">Vanse perde-las mudanzas non gardadas. Proseguer\?</string>
-    <string name="downloads_left_template">Quedan %1$s baixadas</string>
+    <string name="downloads_left_template">Faltan %1$s baixadas</string>
     <string name="roads">Estradas</string>
     <string name="downloading_number_of_files">Estase a baixar - ficheiro %1$d</string>
     <string name="buy">Mercar</string>
@@ -2003,7 +2003,7 @@ Lon %2$s</string>
     <string name="access_smart_autoannounce">Anuncios automáticos intelixentes</string>
     <string name="access_smart_autoannounce_descr">Notificar só cando se mude o enderezo ó destino.</string>
     <string name="access_autoannounce_period">Período dos anuncios automáticos</string>
-    <string name="access_autoannounce_period_descr">Intervalo de tempo mínimo entre os avisos.</string>
+    <string name="access_autoannounce_period_descr">Intre de tempo mínimo entre os avisos.</string>
     <string name="access_default_color">Cor por omisión</string>
     <string name="access_category_choice">Escolle a categoría</string>
     <string name="access_hint_enter_name">Insira o nome</string>
@@ -2073,7 +2073,7 @@ Lon %2$s</string>
     <string name="consider_turning_polygons_off">Recoméndase agocha-la visualización dos polígonos.</string>
     <string name="rendering_attr_showMtbRoutes_name">Amosar roteiros para bicicletas da montaña</string>
     <string name="clear_updates_proposition_message">Elimina-las actualizacións baixadas e voltar á versión orixinal do mapa</string>
-    <string name="add_time_span">Engadir intervalo de tempo</string>
+    <string name="add_time_span">Engadir intre de tempo</string>
     <string name="select_voice_provider">Escoller a orientación por voz</string>
     <string name="select_voice_provider_descr">Escolle ou baixa a orientación por voz para a túa lingua.</string>
     <string name="lang_als">Albanés (Tosco)</string>
@@ -2219,7 +2219,7 @@ Lon %2$s</string>
     <string name="route_altitude">Altitude da rota</string>
     <string name="altitude_descent">Descenso</string>
     <string name="altitude_ascent">Ascenso</string>
-    <string name="altitude_range">Intervalo de altitude</string>
+    <string name="altitude_range">Intre de altitude</string>
     <string name="average_altitude">Altitude media</string>
     <string name="shared_string_time">Tempo</string>
     <string name="total_distance">Distancia total</string>
@@ -2299,7 +2299,6 @@ Lon %2$s</string>
     <string name="plan_route">Planificar rota</string>
     <string name="shared_string_sort">Ordenar</string>
     <string name="coordinate_input">Inserir coordenadas</string>
-    <string name="is_saved">foi gardado</string>
     <string name="marker_save_as_track_descr">Exporte as súas marcaxes cara un ficheiro que pode fornecer eiquí:</string>
     <string name="move_to_history">Mover ao historial</string>
     <string name="group_will_be_removed_after_restart">O grupo será riscado após o reinicio.</string>
@@ -2653,7 +2652,7 @@ Lon %2$s</string>
     <string name="routing_attr_height_obstacles_description">Inclúe coma factor, a altitude do terreo (segundo datos do SRTM, ASTER e EU-DEM).</string>
     <string name="rendering_attr_depthContours_description">Amosar curvas e puntos do afundimento.</string>
     <string name="rendering_attr_depthContours_name">Curvas do afundimento náuticos</string>
-    <string name="auto_split_recording_title">División automática das gravacións en intervalos</string>
+    <string name="auto_split_recording_title">División automática das gravacións en intres</string>
     <string name="auto_split_recording_descr">Comezar novo segmento despois dun intre de 6 min, nova pista despois dun intre de 2 h, ou novo ficheiro despois dun intre máis longo se mudaches a data.</string>
     <string name="shared_string_paused">Detido</string>
     <string name="save_track_min_distance">Mínimo desprazamento para o rexistro</string>
@@ -3072,8 +3071,8 @@ Lon %2$s</string>
     <string name="dont_move_maps">Non mover</string>
     <string name="public_transport_ped_route_title">A ruta a pé é de aproximadamente %1$s e pode que sexa máis rápida que no transporte público</string>
     <string name="public_transport_no_route_title">Por desgraza, OsmAnd non puido atopar unha ruta adecuada para a túa configuración.</string>
-    <string name="public_transport_try_ped">Inténtao coa navegación a pé.</string>
-    <string name="public_transport_try_change_settings">Proba a cambiar os axustes.</string>
+    <string name="public_transport_try_ped">Téntao ca navegación a pé.</string>
+    <string name="public_transport_try_change_settings">Tenta mudar os axustes.</string>
     <string name="public_transport_calc_pedestrian">Calcular a ruta a pé</string>
     <string name="public_transport_type">Tipo de transporte</string>
     <string name="searching_gps">Estase a procurar o GPS</string>

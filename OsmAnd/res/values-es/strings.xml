@@ -2,7 +2,7 @@
 <resources>
     <string name="layer_map_appearance">Configurar pantalla</string>
     <string name="show_lanes">Carriles</string>
-    <string name="avoid_unpaved">Evitar caminos sin pavimentar</string>
+    <string name="avoid_unpaved">Evitar caminos sin asfaltar</string>
     <string name="avoid_ferries">Evitar ferris</string>
     <string name="avoid_in_routing_title">Evitar…</string>
     <string name="avoid_in_routing_descr">Evita caminos con peajes, sin pavimentar, transbordadores o ferris y otros.</string>
@@ -201,7 +201,7 @@
     <string name="search_offline_geo_error">No se pudo analizar el filtro «%s».</string>
     <string name="search_osm_offline">Buscar ubicación geográfica</string>
     <string name="system_locale">Sistema</string>
-    <string name="preferred_locale_descr">Idioma de visualización (surte efecto al reiniciar OsmAnd).</string>
+    <string name="preferred_locale_descr">Selecciona el idioma (surte efecto al reiniciar OsmAnd).</string>
     <string name="preferred_locale">Idioma de visualización</string>
     <string name="shared_string_next">Siguiente</string>
     <string name="shared_string_previous">Anterior</string>
@@ -1133,9 +1133,9 @@
     <string name="routing_attr_prefer_motorway_description">Preferir autopistas en la navegación</string>
     <string name="routing_attr_avoid_toll_name">Evitar peajes</string>
     <string name="routing_attr_avoid_toll_description">Evita los caminos con peajes</string>
-    <string name="routing_attr_avoid_unpaved_name">Evitar caminos sin pavimentar</string>
+    <string name="routing_attr_avoid_unpaved_name">Evitar caminos sin asfaltar</string>
     <string name="routing_attr_avoid_unpaved_description">Evita los caminos sin pavimentar.</string>
-    <string name="routing_attr_avoid_ferries_name">Evitar ferris/transbordadores</string>
+    <string name="routing_attr_avoid_ferries_name">Evitar ferris</string>
     <string name="routing_attr_avoid_ferries_description">Evita usar ferris</string>
     <string name="routing_attr_avoid_motorway_name">Evitar autopistas</string>
     <string name="routing_attr_avoid_motorway_description">Evita usar las autopistas</string>
@@ -1358,7 +1358,7 @@
     <string name="text_size_descr">Define el tamaño del texto en el mapa.</string>
     <string name="text_size">Tamaño del texto</string>
     <string name="fav_point_dublicate">Nombre del punto favorito duplicado</string>
-    <string name="fav_point_dublicate_message">Nombre del Favorito en uso, cambiado a «%1$s» para evitar duplicación.</string>
+    <string name="fav_point_dublicate_message">Nombre del Favorito en uso, cambiado a «%1$s» para evitar duplicidad.</string>
     <string name="print_route">Imprimir ruta</string>
     <string name="fav_point_emoticons_message">Nombre del Favorito cambiado a «%1$s», para facilitar el guardado de la cadena con emoticonos a un archivo.</string>
     <string name="speed_limit_exceed">Tolerancia del límite de velocidad</string>
@@ -1664,7 +1664,7 @@
     <string name="offline_maps_and_navigation">Mapas y navegación 
 \nsin conexión</string>
     <string name="commit_poi">Enviar PDI</string>
-    <string name="routing_attr_avoid_shuttle_train_name">Evitar trenes de enlace</string>
+    <string name="routing_attr_avoid_shuttle_train_name">Evitar trenes lanzadera</string>
     <string name="routing_attr_avoid_shuttle_train_description">Evite tomar trenes de enlace</string>
     <string name="plugin_settings">Complementos</string>
     <string name="tab_title_basic">Básico</string>
@@ -2146,7 +2146,7 @@
     <string name="quick_favorites_show_favorites_dialog">Mostrar diálogo de Favoritos</string>
     <string name="quick_favorites_name_preset">Nombre predefinido</string>
     <string name="quick_action_add_marker_descr">Este botón de acción, añade un marcador en el centro de la pantalla.</string>
-    <string name="quick_action_add_gpx_descr">Este botón de acción, añade un punto de referencia GPX en el centro de la pantalla.</string>
+    <string name="quick_action_add_gpx_descr">Este botón de acción añade un punto de referencia GPX en el centro de la pantalla.</string>
     <string name="quick_action_take_audio_note_descr">Este botón de acción, añade una nota de audio en el centro de la pantalla.</string>
     <string name="quick_action_take_video_note_descr">Este botón de acción, añade una nota de video en el centro de la pantalla.</string>
     <string name="quick_action_take_photo_note_descr">Este botón de acción, añade una nota fotográfica en el centro de la pantalla.</string>
@@ -2157,7 +2157,7 @@
     <string name="quick_action_interim_dialog">Mostrar un diálogo temporal</string>
     <string name="favorite_autofill_toast_text">" guardado como "</string>
     <string name="favorite_empty_place_name">Lugar</string>
-    <string name="quick_action_duplicates">El nombre de la acción rápida ya existe, cambiado a «%1$s» para evitar duplicados.</string>
+    <string name="quick_action_duplicates">El nombre de la acción rápida ya existe, cambiado a «%1$s» para evitar duplicidades.</string>
     <string name="quick_action_duplicate">Nombre de la acción rápida duplicado</string>
     <string name="quick_action_showhide_favorites_descr">Este botón de acción, muestra u oculta los Favoritos en el mapa.</string>
     <string name="quick_action_showhide_poi_descr">Este botón de acción, muestra u oculta los PDI en el mapa.</string>
@@ -2263,15 +2263,15 @@
     <string name="fonts_header">Tipografías del mapa</string>
     <string name="osmand_extended_description_part2">Navegación GPS 
 \n • Elige entre los modos sin conexión (sin cargos de roaming al viajar al extranjero) o en línea (más rápido) 
-\n • La guía por voz giro-a-giro lo guía a lo largo del camino (voces grabadas y sintetizadas) 
-\n • La ruta se recalcula al salirse de la misma 
-\n • Guía de carriles, nombres de calles y tiempo estimado al destino, lo ayudará a lo largo de la ruta 
-\n • Para hacer su viaje seguro, los modos diurno/nocturno se alternan automáticamente 
-\n • Muestra los límites de velocidad y obtiene un aviso al excederte del mismo 
-\n • El zoom del mapa se ajusta a la velocidad 
+\n • Las instrucciones por voz paso a paso te guían a lo largo de la ruta (voces grabadas y sintetizadas) 
+\n • La ruta se recalcula cuando te sales de ella
+\n • La guía de carriles, los nombres de calles y la hora estimada de llegada, te ayudarán a lo largo de la ruta 
+\n • Para hacer su viaje más seguro, los modos diurno/nocturno se alternan automáticamente 
+\n • Muestra los límites de velocidad y recibe un aviso si los superas
+\n • El zoom del mapa se ajusta a tu velocidad 
 \n • Busca destinos por dirección, por tipo (por ejemplo: aparcamientos, restaurantes, hoteles, gasolineras, museos), o por coordenadas geográficas 
-\n • Soporta puntos intermedios en el itinerario 
-\n • Grabe su viaje o suba una traza GPX y síguela 
+\n • Soporta puntos intermedios en tu itinerario 
+\n • Graba tu viaje o sube una traza GPX y síguela
 \n</string>
     <string name="osmand_extended_description_part3">Mapa 
 \n • Muestra PDI (puntos de interés) a tu alrededor 
@@ -2359,12 +2359,19 @@
     <string name="animate_my_location_desc">Activa el desplazamiento animado del mapa para «Mi ubicación» durante la navegación.</string>
     <string name="shared_string_overview">Resumen</string>
     <string name="osmand_plus_extended_description_part2">"Navegación GPS 
+\n
 \n • Funciona en línea (rápido) o sin conexión (sin cargos de roaming al viajar al extranjero) 
-\n • Guía por voz giro-a-giro (voces grabadas y sintetizadas) 
-\n • (Opcional) Guía de carriles, nombres de calles y tiempo estimado al destino 
-\n • Soporta puntos intermedios en el itinerario 
+\n
+\n • Instrucciones por voz paso a paso (voces grabadas y sintetizadas) 
+\n
+\n • (Opcional) asistente de carril, visualización de nombres de calles y hora  estimada de llegada
+\n
+\n • Soporta puntos intermedios en tu itinerario 
+\n
 \n • La ruta se recalcula al salirse de la misma  
-\n • Busca destinos por dirección, por tipo (por ejemplo: Restaurantes, hoteles, gasolineras, museos), o por coordenada geográfica 
+\n
+\n • Busca destinos por dirección, por tipo (por ejemplo: Restaurantes, hoteles, gasolineras, museos), o por coordenadas geográficas
+\n
 \n"</string>
     <string name="osmand_plus_extended_description_part3">Vista del mapa 
 \n • Muestra tu ubicación y orientación 
@@ -2558,7 +2565,6 @@
     <string name="plan_route">Planificar ruta</string>
     <string name="shared_string_sort">Ordenar</string>
     <string name="coordinate_input">Ingresar coordenadas</string>
-    <string name="is_saved">está guardado</string>
     <string name="marker_save_as_track_descr">Exporta los marcadores al siguiente archivo GPX:</string>
     <string name="marker_save_as_track">Guardar como archivo GPX</string>
     <string name="move_to_history">Mover al historial</string>
@@ -3028,15 +3034,15 @@
     <string name="angular_measeurement_descr">Cambiar el acimut en el que se mide.</string>
     <string name="routing_attr_avoid_tram_name">Evitar tranvías</string>
     <string name="routing_attr_avoid_tram_description">Evita usar los tranvías</string>
-    <string name="routing_attr_avoid_bus_name">Evitar los autobuses</string>
+    <string name="routing_attr_avoid_bus_name">Evitar autobuses</string>
     <string name="routing_attr_avoid_bus_description">Evita usar los autobuses y trolebuses</string>
     <string name="routing_attr_avoid_share_taxi_name">Evitar los taxis colectivos</string>
     <string name="routing_attr_avoid_share_taxi_description">Evita usar los taxis colectivos</string>
-    <string name="routing_attr_avoid_train_name">Evitar los trenes</string>
+    <string name="routing_attr_avoid_train_name">Evitar trenes</string>
     <string name="routing_attr_avoid_train_description">Evita usar los trenes</string>
-    <string name="routing_attr_avoid_subway_name">Evitar los subterráneos o metros</string>
+    <string name="routing_attr_avoid_subway_name">Evitar metros</string>
     <string name="routing_attr_avoid_subway_description">Evita transporte en metro y en tren ligero</string>
-    <string name="routing_attr_avoid_ferry_name">Evitar los ferris/transbordadores</string>
+    <string name="routing_attr_avoid_ferry_name">Evitar los ferris</string>
     <string name="routing_attr_avoid_ferry_description">Evita usar los ferris o transbordadores</string>
     <string name="release_3_3_7">• Mostrar el tiempo entre transbordos en transporte público
 \n
@@ -3081,7 +3087,7 @@
 \n</string>
     <string name="app_mode_personal_transporter">Transportador personal</string>
     <string name="app_mode_monowheel">Monociclo</string>
-    <string name="app_mode_scooter">Motoneta</string>
+    <string name="app_mode_scooter">Escúter</string>
     <string name="precision_hdop_and_vdop">Precisión horizontal: %1$s, vertical: %2$s</string>
     <string name="precision_hdop">Precisión horizontal: %s</string>
     <string name="rate_dialog_descr">Por favor, dedícanos 30 segundos compartiendo tus comentarios y valorando en Google Play nuestro trabajo.</string>
@@ -3143,7 +3149,7 @@
     <string name="profile_alert_need_save_title">Guardar cambios</string>
     <string name="profile_alert_need_save_msg">Debes guardar los cambios en el perfil antes de continuar</string>
     <string name="profile_alert_delete_title">Eliminar perfil</string>
-    <string name="profile_alert_delete_msg">Estás seguro de que deseas eliminar el perfil %s</string>
+    <string name="profile_alert_delete_msg">¿Estás seguro de que deseas eliminar el perfil %s\?</string>
     <string name="select_base_profile_dialog_title">Selecciona un perfil base</string>
     <string name="select_base_profile_dialog_message">Basa tu perfil personalizado en uno de los perfiles de aplicación predeterminados, esto define la configuración básica como la visibilidad de los widgets y las unidades de velocidad y distancia. Estos son los perfiles de aplicación predeterminados, junto con ejemplos de perfiles personalizados que pueden ser ampliados:</string>
     <string name="select_nav_profile_dialog_title">Selecciona el tipo de navegación</string>
@@ -3165,7 +3171,7 @@
     <string name="zoom_by_wunderlinq">Usa WunderLINQ para controlar</string>
     <string name="quick_action_need_to_add_item_to_list">Debes agregar al menos un elemento a la lista en Configuración de acción rápida</string>
     <string name="routing_attr_piste_type_downhill_name">Esquí alpino</string>
-    <string name="routing_attr_piste_type_downhill_description">"Pistas para esquí alpino  y acceso a remontes."</string>
+    <string name="routing_attr_piste_type_downhill_description">Pistas para esquí alpino y acceso a remontes.</string>
     <string name="routing_attr_piste_type_nordic_name">Esquí de fondo/nórdico</string>
     <string name="routing_attr_piste_type_nordic_description">Senderos para el esquí nórdico o de fondo.</string>
     <string name="routing_attr_piste_type_skitour_name">Esquí de travesía</string>
@@ -3188,7 +3194,7 @@
     <string name="routing_attr_freeride_policy_description">Las rutas fuera de pista son rutas no oficiales. Por lo general, no arregladas, sin el mantenimiento de los operarios y no revisadas por la noche. Entre bajo su propio riesgo.</string>
     <string name="routing_profile_geocoding">Geocodificación</string>
     <string name="shared_string_crash">Error</string>
-    <string name="app_mode_offroad">Todoterreno</string>
+    <string name="app_mode_offroad">Todo terreno</string>
     <string name="edit_profile_setup_title">Configurar perfil</string>
     <string name="edit_profile_setup_subtitle">El perfil mantiene su propia configuración</string>
     <string name="edit_profile_setup_map_subtitle">Selecciona la configuración del mapa por defecto para este perfil</string>

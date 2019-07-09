@@ -1713,7 +1713,6 @@
     <string name="fast_coordinates_input">Sürətli koordinat daxiletmə</string>
     <string name="use_location">Mövqe istifadə et</string>
     <string name="coordinate_input">Koordinat daxiletmə</string>
-    <string name="is_saved">yadda saxlandı</string>
     <string name="marker_save_as_track_descr">İşarələrinizi aşağıdakı GPX faylına ixrac edin:</string>
     <string name="move_to_history">Tarixçəyə daşı</string>
     <string name="group_will_be_removed_after_restart">Proqramı növbəti dəfə başlatdığınızda qrup yox olacaq.</string>

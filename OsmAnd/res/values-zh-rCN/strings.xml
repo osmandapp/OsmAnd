@@ -2350,7 +2350,6 @@
     <string name="use_location">使用位置</string>
     <string name="shared_string_sort">排序</string>
     <string name="coordinate_input">坐标输入</string>
-    <string name="is_saved">已保存</string>
     <string name="marker_save_as_track">保存为轨迹</string>
     <string name="today">今天</string>
     <string name="yesterday">昨天</string>

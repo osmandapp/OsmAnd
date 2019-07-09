@@ -1928,7 +1928,7 @@ Lon %2$s</string>
     <string name="report">Raportu</string>
     <string name="file_name_containes_illegal_char">Su nùmene de su documentu cuntennit caràteres non permitidos</string>
     <string name="rendering_value_thin_name">Fine</string>
-    <string name="rendering_value_medium_name">Mesanu</string>
+    <string name="rendering_value_medium_name">Mèdia</string>
     <string name="rendering_value_bold_name">Grussu</string>
     <string name="map_mode">Modalidade mapa</string>
     <string name="number_of_gpx_files_selected_pattern">%s documentos GPX ischertados</string>
@@ -2093,7 +2093,7 @@ Lon %2$s</string>
     <string name="rendering_attr_contourDensity_description">Densidade de curvas de livellu</string>
     <string name="rendering_attr_contourDensity_name">Densidade de curvas de livellu</string>
     <string name="rendering_value_high_name">Arta</string>
-    <string name="rendering_value_medium_w_name">Mesana</string>
+    <string name="rendering_value_medium_w_name">Mèdia</string>
     <string name="rendering_value_low_name">Bassa</string>
     <string name="rendering_attr_hideWaterPolygons_name">Cua s\'abba</string>
     <string name="configure_screen_quick_action">Atzione lestra</string>
@@ -2530,7 +2530,6 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="plan_route">Pranìfica àndala</string>
     <string name="shared_string_sort">Òrdina</string>
     <string name="coordinate_input">Insertada de sas coordinadas</string>
-    <string name="is_saved">est istadu sarvadu</string>
     <string name="marker_save_as_track_descr">Esporta sos marcadores tuos in custu documentu GPX:</string>
     <string name="marker_save_as_track">Sarva comente documentu GPX</string>
     <string name="move_to_history">Pone in sa cronologia</string>

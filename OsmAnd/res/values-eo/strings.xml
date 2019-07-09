@@ -2531,7 +2531,6 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="plan_route">Plani kurson</string>
     <string name="shared_string_sort">Ordigi</string>
     <string name="coordinate_input">Enigi koordinatojn</string>
-    <string name="is_saved">estas konservita</string>
     <string name="marker_save_as_track_descr">Elporti map-markojn al dosiero la GPX-dosiero:</string>
     <string name="marker_save_as_track">Konservi kiel GPX-dosieron</string>
     <string name="move_to_history">Movi al historio</string>
@@ -3028,20 +3027,20 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="public_transport_type">Speco de transporto</string>
     <string name="searching_gps">Determinado de pozicio…</string>
     <string name="coordinates_widget">Fenestraĵo de koordinatoj</string>
-    <string name="press_again_to_change_the_map_orientation">Premu ree por ŝanĝi map‑orientiĝon</string>
+    <string name="press_again_to_change_the_map_orientation">Frapetu ree por ŝanĝi map‑orientiĝon</string>
     <string name="rate_dialog_descr">Bonvolu dediĉi 30 sekundojn por kunhavigi vian opinion kaj taksi nian laboron ĉe Google Play.</string>
     <string name="button_rate">Taksi</string>
     <string name="shared_string_privacy_policy">Privateca politiko</string>
     <string name="help_us_make_osmand_better">Helpu al ni igi OsmAnd pli bona!</string>
-    <string name="make_osmand_better_descr">Bonvolu permesi al OsmAnd kolekti kaj pritrakti anonimajn datumojn pri uzado de la aplikaĵo. Ni ne kolektos kaj konservos datumojn pri via pozicio aŭ pri serĉataj lokoj.
-\n
-\nVi ĉiam povos ŝanĝi tion en agordoj → privateco kaj sekureco.</string>
+    <string name="make_osmand_better_descr">Bonvolu permesi al OsmAnd kolekti kaj pritrakti anonimajn datumojn pri uzado de la aplikaĵo. Ni ne kolektos kaj konservos datumojn pri via pozicio aŭ pri foliumataj lokoj sur la mapo.
+\n 
+\nVi povas ŝanĝi vian elekton per agordoj → privateco kaj sekureco.</string>
     <string name="choose_data_to_share">Elektu datumojn por kunhavigi:</string>
     <string name="downloaded_maps">Elŝutitaj mapoj</string>
     <string name="visited_screens">Vidigitaj ekranoj</string>
     <string name="collected_data_descr">Datumoj por kunhavigi kun programistoj de OsmAnd.</string>
     <string name="downloaded_maps_collect_descr">Ni kolektas tiujn datumojn por ekkoni mapojn de kiuj regionoj kaj landoj estas la plej popularaj.</string>
-    <string name="visited_screens_collect_descr">Ni kolektas tiujn datumojn por ekkoni la plej popularajn eblaĵojn de OsmAnd.</string>
+    <string name="visited_screens_collect_descr">Ni kolektas tiujn datumojn por ekkoni kiujn eblaĵoj de OsmAnd estas la plej uzataj.</string>
     <string name="privacy_and_security_change_descr">Frapetu “permesi” por akcepti nian %1$s</string>
     <string name="settings_privacy_and_security">Privateco kaj sekureco</string>
     <string name="settings_privacy_and_security_desc">Elekti datumojn por kunhavigi kun ni</string>
@@ -3054,7 +3053,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="app_mode_subway">Metroo</string>
     <string name="app_mode_horse">Ĉevalo</string>
     <string name="app_mode_helicopter">Helikoptero</string>
-    <string name="osmand_routing_promo">Vi povas aldoni propran modifitan version de routing.xml al “..osmand/routing”</string>
+    <string name="osmand_routing_promo">Vi povas aldoni propran modifitan version de la dosiero routing.xml al “..osmand/routing”</string>
     <string name="app_mode_skiing">Skiado</string>
     <string name="base_profile_descr_ski">Skiado</string>
     <string name="show_compass_ruler">Montri mezurilon de kompaso</string>
@@ -3066,7 +3065,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="profile_type_descr_string">Speco: %s</string>
     <string name="profile_type_base_string">Ĉefa profilo</string>
     <string name="profile_alert_need_routing_type_title">Elektu specon de navigado</string>
-    <string name="profile_alert_need_routing_type_msg">Vi devas elekti specon de navigado por krei novan profilon</string>
+    <string name="profile_alert_need_routing_type_msg">Bonvolu elekti specon de navigo por la nova aplikaĵa profilo</string>
     <string name="profile_alert_need_profile_name_title">Entajpu nomon por profilo</string>
     <string name="profile_alert_need_profile_name_msg">Nomo de profilo ne estu malplena!</string>
     <string name="profile_alert_duplicate_name_title">Nomo neebla</string>
@@ -3077,7 +3076,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="profile_alert_delete_title">Forigi profilon</string>
     <string name="profile_alert_delete_msg">Ĉu vi certe volas forigi la profilon “%s”\?</string>
     <string name="select_base_profile_dialog_title">Elektu bazan profilon</string>
-    <string name="select_base_profile_dialog_message">Propra aplikaĵa profilo estu bazita sur iu implicita profilo. Elektita profilo difinas bazajn agordojn: fenestraĵojn, unuoj de longo kaj distanco. Sube nomo de profilo troviĝas taŭgaj navigadaj profiloj por ĉiu aplikaĵa profilo.</string>
+    <string name="select_base_profile_dialog_message">Via propra profilo estos bazita sur iu implicita aplikaĵa profilo, kiu difinos bazajn agordojn kiel videblon de fenestraĵoj, unuojn de rapido kaj distanco. Jen implicitaj profiloj kaj ekzemplaj profiloj por krei:</string>
     <string name="select_nav_profile_dialog_title">Elektu navigadan profilon</string>
     <string name="base_profile_descr_car">Aŭto, kamiono, motorciklo</string>
     <string name="base_profile_descr_bicycle">Biciklo, malgranda motorbiciklo, ĉevalo</string>
@@ -3131,7 +3130,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="default_speed_dialog_msg">Uzata por kalkuli esperatan tempon de alveno dum navigadi</string>
     <string name="new_profile">Nova profilo</string>
     <string name="shared_string_crash">Paneo</string>
-    <string name="last_launch_crashed">La antaŭa starto de OsmAnd paneis. Helpu al ni plibonigi la aplikaĵon, sendu mesaĝon pri eraro.</string>
+    <string name="last_launch_crashed">La antaŭa starto de OsmAnd paneis. Helpu al ni plibonigi la aplikaĵon per sendi mesaĝon pri eraro.</string>
     <string name="app_mode_ufo">NIFO</string>
     <string name="release_3_4">• profiloj de aplikaĵo: krei profilojn laŭ viaj bezonoj kun propra emblemo kaj koloro 
 \n 
