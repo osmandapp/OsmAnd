@@ -2967,6 +2967,7 @@ public class OsmandSettings {
 
 	public enum AngularConstants {
 		DEGREES(R.string.shared_string_degrees, "°"),
+		DEGREES360(R.string.shared_string_degrees, "°"),
 		MILLIRADS(R.string.shared_string_milliradians, "mil");
 
 		private final int key;
