@@ -911,7 +911,7 @@ public class VoiceRouter {
 			List<String> played = p.play();
 			notifyOnVoiceMessage(p.getListCommands(), played);
 		} else {
-			notifyOnVoiceMessage(Collections.emptyList(), Collections.emptyList());
+			notifyOnVoiceMessage(Collections.EMPTY_LIST, Collections.EMPTY_LIST);
 		}
 
 	}
