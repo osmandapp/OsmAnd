@@ -2669,7 +2669,7 @@ public class OsmandSettings {
 
 	public final OsmandPreference<Boolean> USE_OSM_LIVE_FOR_ROUTING = new BooleanPreference("enable_osmc_routing", true).makeGlobal();
 
-	public final OsmandPreference<Boolean> USE_OSM_LIVE_FOR_PUBLIC_TRANSPORT = new BooleanPreference("enable_osmc_public_transport", true).makeGlobal();
+	public final OsmandPreference<Boolean> USE_OSM_LIVE_FOR_PUBLIC_TRANSPORT = new BooleanPreference("enable_osmc_public_transport", false).makeGlobal();
 
 	public final OsmandPreference<Boolean> VOICE_MUTE = new BooleanPreference("voice_mute", false).makeGlobal();
 
