@@ -1057,7 +1057,7 @@ public class OsmandAidlApi {
 		}
 	}
 
-	boolean removeAllMapMarkers() {
+	boolean removeAllActiveMapMarkers() {
 		boolean refreshNeeded = false;
 		MapMarkersHelper markersHelper = app.getMapMarkersHelper();
 		List<MapMarker> mapMarkers = markersHelper.getMapMarkers();

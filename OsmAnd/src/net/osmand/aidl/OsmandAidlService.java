@@ -49,6 +49,7 @@ import net.osmand.aidl.maplayer.point.ShowMapPointParams;
 import net.osmand.aidl.maplayer.point.UpdateMapPointParams;
 import net.osmand.aidl.mapmarker.AddMapMarkerParams;
 import net.osmand.aidl.mapmarker.RemoveMapMarkerParams;
+import net.osmand.aidl.mapmarker.RemoveMapMarkersParams;
 import net.osmand.aidl.mapmarker.UpdateMapMarkerParams;
 import net.osmand.aidl.mapwidget.AddMapWidgetParams;
 import net.osmand.aidl.mapwidget.RemoveMapWidgetParams;
@@ -75,7 +76,6 @@ import net.osmand.aidl.search.SearchParams;
 import net.osmand.aidl.search.SearchResult;
 import net.osmand.aidl.tiles.ASqliteDbFile;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.routing.VoiceRouter;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -1165,10 +1165,10 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 		}
 
 		@Override
-		public boolean removeAllMapMarkers() {
+		public boolean removeAllActiveMapMarkers(RemoveMapMarkersParams params) {
 			try {
-				OsmandAidlApi api = getApi("removeAllMapMarkers");
-				return api != null && api.removeAllMapMarkers();
+				OsmandAidlApi api = getApi("removeAllActiveMapMarkers");
+				return api != null && api.removeAllActiveMapMarkers();
 			} catch (Exception e) {
 				handleException(e);
 				return false;
