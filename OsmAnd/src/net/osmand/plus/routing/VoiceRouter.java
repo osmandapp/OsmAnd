@@ -29,6 +29,7 @@ import net.osmand.util.MapUtils;
 
 import android.media.AudioManager;
 import android.media.SoundPool;
+import android.util.Log;
 
 
 public class VoiceRouter {
@@ -80,7 +81,7 @@ public class VoiceRouter {
 	private static RouteDirectionInfo nextRouteDirection;
 
 	public interface VoiceMessageListener {
-		void onVoiceMessage();
+		void onVoiceMessage(List<String> commands);
 	}
 
 	private List<WeakReference<VoiceMessageListener>> voiceMessageListeners = new ArrayList<>();
@@ -911,7 +912,7 @@ public class VoiceRouter {
 		if (p != null) {
 			p.play();
 		}
-		notifyOnVoiceMessage();
+		notifyOnVoiceMessage(p.getCommands());
 	}
 
 	private void makeSound() {
@@ -941,12 +942,12 @@ public class VoiceRouter {
 		voiceMessageListeners = updateVoiceMessageListeners(new ArrayList<>(voiceMessageListeners), voiceMessageListener, false);
 	}
 
-	private void notifyOnVoiceMessage() {
+	private void notifyOnVoiceMessage(List<String> commands) {
 		List<WeakReference<VoiceMessageListener>> voiceMessageListeners = new ArrayList<>(this.voiceMessageListeners);
 		for (WeakReference<VoiceMessageListener> weakReference : voiceMessageListeners) {
 			VoiceMessageListener lnt = weakReference.get();
 			if (lnt != null) {
-				lnt.onVoiceMessage();
+				lnt.onVoiceMessage(commands);
 			}
 		}
 	}

@@ -12,15 +12,8 @@ import org.mozilla.javascript.NativeJSON;
 import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptableObject;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class JSCommandBuilder extends CommandBuilder {
 
@@ -67,6 +60,7 @@ public class JSCommandBuilder extends CommandBuilder {
             Object jsResult = jsFunction.call(jsContext, jsScope, jsScope, args);
             listStruct.add(Context.toString(jsResult));
         }
+        addToCommandList(name, args);
         return this;
     }
 

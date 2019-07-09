@@ -5,15 +5,12 @@ import java.util.Arrays;
 import java.util.List;
 
 import net.osmand.PlatformUtil;
-import net.osmand.plus.R;
 import net.osmand.plus.routing.data.StreetName;
 
 import org.apache.commons.logging.Log;
 
 import alice.tuprolog.Struct;
 import alice.tuprolog.Term;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationManagerCompat;
 
 public class CommandBuilder {
 	
@@ -57,6 +54,7 @@ public class CommandBuilder {
 	protected final CommandPlayer commandPlayer;
 	protected boolean alreadyExecuted = false;
 	private List<Struct> listStruct = new ArrayList<Struct>();
+	protected List<String> listCommands = new ArrayList<>();
 
 	public CommandBuilder(CommandPlayer commandPlayer){
 		this.commandPlayer = commandPlayer;
@@ -71,7 +69,13 @@ public class CommandBuilder {
 	private CommandBuilder addCommand(String name, Object... args){
 		Struct struct = prepareStruct(name, args);
 		listStruct.add(struct);
+		addToCommandList(name, args);
 		return this;
+	}
+	
+	protected void addToCommandList(String name, Object... args) {
+		listCommands.add(name);
+		listCommands.add(Arrays.toString(args));
 	}
 
 	private Struct prepareStruct(String name, Object... args) {
@@ -262,5 +266,9 @@ public class CommandBuilder {
 	protected List<String> execute(){
 		alreadyExecuted = true;
 		return this.commandPlayer.execute(listStruct);
+	}
+	
+	public List<String> getCommands() {
+		return listCommands;
 	}
 }

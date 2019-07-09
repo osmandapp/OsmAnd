@@ -49,5 +49,5 @@ interface IOsmAndAidlCallback {
     /**
      *  Callback for {@link IOsmAndAidlInterface} registerForVoiceRouterMessages() method.
      */
-    void onVoiceRouterNotify();
+    void onVoiceRouterNotify(in List<String> commands);
 }
