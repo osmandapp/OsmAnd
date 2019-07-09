@@ -282,7 +282,7 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 		public boolean removeMapMarker(RemoveMapMarkerParams params) {
 			try {
 				OsmandAidlApi api = getApi("removeMapMarker");
-				return params != null && api != null && api.removeMapMarker(params.getMarker());
+				return params != null && api != null && api.removeMapMarker(params.getMarker(), params.getIgnoreCoordinates());
 			} catch (Exception e) {
 				handleException(e);
 				return false;
@@ -293,7 +293,7 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 		public boolean updateMapMarker(UpdateMapMarkerParams params) {
 			try {
 				OsmandAidlApi api = getApi("updateMapMarker");
-				return params != null && api != null && api.updateMapMarker(params.getMarkerPrev(), params.getMarkerNew());
+				return params != null && api != null && api.updateMapMarker(params.getMarkerPrev(), params.getMarkerNew(), params.getIgnoreCoordinates());
 			} catch (Exception e) {
 				handleException(e);
 				return false;
@@ -1161,6 +1161,17 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 			} catch (Exception e) {
 				handleException(e);
 				return UNKNOWN_API_ERROR;
+			}
+		}
+
+		@Override
+		public boolean removeAllMapMarkers() {
+			try {
+				OsmandAidlApi api = getApi("removeAllMapMarkers");
+				return api != null && api.removeAllMapMarkers();
+			} catch (Exception e) {
+				handleException(e);
+				return false;
 			}
 		}
 	};
