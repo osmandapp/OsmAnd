@@ -51,7 +51,7 @@ public class OnSaveCurrentTrackFragment extends BottomSheetDialogFragment {
 		Button openTrackBtn = mainView.findViewById(R.id.open_track_button);
 		Button showOnMapBtn = mainView.findViewById(R.id.show_on_map_button);
 
-		tv.setText(AndroidUtils.insertStyledSubstring(app.getString(R.string.shared_string_track_is_saved), savedGpxName, Typeface.BOLD));
+		tv.setText(AndroidUtils.getStyledString(app.getString(R.string.shared_string_track_is_saved), savedGpxName, Typeface.BOLD));
 
 		openTrackBtn.setOnClickListener(new OnClickListener() {
 			@Override

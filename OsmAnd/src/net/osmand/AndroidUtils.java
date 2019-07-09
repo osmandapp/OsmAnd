@@ -68,10 +68,13 @@ import static android.util.TypedValue.COMPLEX_UNIT_SP;
 
 public class AndroidUtils {
 
+	public static final String STRING_PLACEHOLDER = "%s";
+	
 	/**
 	 * @param context
 	 * @return true if Hardware keyboard is available
 	 */
+	
 	public static boolean isHardwareKeyboardAvailable(Context context) {
 		return context.getResources().getConfiguration().keyboard != Configuration.KEYBOARD_NOKEYS;
 	}
@@ -555,24 +558,22 @@ public class AndroidUtils {
 		KeyguardManager keyguardManager = (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);
 		return keyguardManager.inKeyguardRestrictedInputMode();
 	}
+	
+	public static CharSequence getStyledString(CharSequence baseString, CharSequence stringToInsertAndStyle, int typefaceStyle) {
+		
+		if (typefaceStyle == Typeface.NORMAL || typefaceStyle == Typeface.BOLD 
+			|| typefaceStyle == Typeface.ITALIC || typefaceStyle == Typeface.BOLD_ITALIC 
+			|| baseString.toString().contains(STRING_PLACEHOLDER)) {
 
-	public static CharSequence insertStyledSubstring(CharSequence preFormattedString, CharSequence textToInsert, int typefaceStyle) {
-		final String placeholder = "%s";
-		if (typefaceStyle < 0 || typefaceStyle > 3) {
-			return preFormattedString;
+			int indexOfPlaceholder = baseString.toString().indexOf(STRING_PLACEHOLDER);
+			
+			SpannableStringBuilder ssb = new SpannableStringBuilder(
+				baseString.toString().replace(STRING_PLACEHOLDER, stringToInsertAndStyle));
+			ssb.setSpan(new StyleSpan(typefaceStyle), indexOfPlaceholder, 
+				stringToInsertAndStyle.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+			return ssb;
+		} else {
+			return baseString;
 		}
-		if (!preFormattedString.toString().contains(placeholder)) {
-			return preFormattedString;
-		}
-		int indexOfPlaceholder = preFormattedString.toString().indexOf(placeholder);
-		SpannableStringBuilder ssb = new SpannableStringBuilder();
-		ssb.append(preFormattedString.subSequence(0, indexOfPlaceholder));
-		int startIndex = ssb.length();
-		ssb.append(textToInsert).append(" ");
-		ssb.setSpan(new StyleSpan(typefaceStyle), startIndex, ssb.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-		startIndex = ssb.length();
-		ssb.append(preFormattedString.subSequence(indexOfPlaceholder+2, preFormattedString.length()));
-		ssb.setSpan(new StyleSpan(Typeface.NORMAL), startIndex, ssb.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-		return ssb;
 	}
 }

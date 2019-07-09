@@ -18,6 +18,7 @@ import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
+import java.lang.ref.WeakReference;
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.ValueHolder;
@@ -290,7 +291,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 				int which = holder[0];
 				int item = items.get(which);
 				if(item == R.string.save_current_track){
-					saveCurrentTrack(map);
+					saveCurrentTrack(new WeakReference<>(map));
 				} else if(item == R.string.gpx_monitoring_start) {
 					if (app.getLocationProvider().checkGPSEnabled(map)) {
 						startGPXMonitoring(map, showTrackSelection);
@@ -339,12 +340,12 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		saveCurrentTrack(onComplete, null);
 	}
 
-	public void saveCurrentTrack(@Nullable final Activity activity) {
-		saveCurrentTrack(null, activity);
+	public void saveCurrentTrack(@Nullable final WeakReference<Activity> weakReferenceToActivity) {
+		saveCurrentTrack(null, weakReferenceToActivity);
 	}
 	
-	public void saveCurrentTrack(@Nullable final Runnable onComplete, @Nullable final
-		Activity activity) {
+	public void saveCurrentTrack(@Nullable final Runnable onComplete, 
+		@Nullable final WeakReference<Activity> weakReferenceToActivity) {
 		app.getTaskManager().runInBackground(new OsmAndTaskRunnable<Void, Void, SaveGpxResult>() {
 
 			@Override
@@ -371,8 +372,11 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 				isSaving = false;
 				app.getNotificationHelper().refreshNotifications();
 				updateControl();
-				if (activity instanceof MapActivity && !Algorithms.isEmpty(result.getFilenames())) {
-					OnSaveCurrentTrackFragment.showInstance(((MapActivity) activity)
+				if (weakReferenceToActivity != null && weakReferenceToActivity.get() instanceof MapActivity
+					&& !((MapActivity) weakReferenceToActivity.get()).isActivityStopped()
+					&& !((MapActivity) weakReferenceToActivity.get()).isActivityDestroyed()
+					&& !Algorithms.isEmpty(result.getFilenames())) {
+					OnSaveCurrentTrackFragment.showInstance(((MapActivity) weakReferenceToActivity.get())
 						.getSupportFragmentManager(), result.getFilenames().get(0));
 				}
 				if (onComplete != null) {
