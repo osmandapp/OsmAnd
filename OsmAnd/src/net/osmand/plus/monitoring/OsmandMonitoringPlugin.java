@@ -291,7 +291,11 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 				int which = holder[0];
 				int item = items.get(which);
 				if(item == R.string.save_current_track){
-					saveCurrentTrack(new WeakReference<>(map));
+					if (map instanceof MapActivity) {
+						saveCurrentTrack(new WeakReference<>((MapActivity) map));
+					} else {
+						saveCurrentTrack();
+					}
 				} else if(item == R.string.gpx_monitoring_start) {
 					if (app.getLocationProvider().checkGPSEnabled(map)) {
 						startGPXMonitoring(map, showTrackSelection);
@@ -340,12 +344,12 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		saveCurrentTrack(onComplete, null);
 	}
 
-	public void saveCurrentTrack(@Nullable final WeakReference<Activity> mapActivityRef) {
+	public void saveCurrentTrack(@Nullable final WeakReference<MapActivity> mapActivityRef) {
 		saveCurrentTrack(null, mapActivityRef);
 	}
 	
 	public void saveCurrentTrack(@Nullable final Runnable onComplete, 
-		@Nullable final WeakReference<Activity> mapActivityRef) {
+		@Nullable final WeakReference<MapActivity> mapActivityRef) {
 		app.getTaskManager().runInBackground(new OsmAndTaskRunnable<Void, Void, SaveGpxResult>() {
 
 			@Override
@@ -373,10 +377,9 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 				app.getNotificationHelper().refreshNotifications();
 				updateControl();
 				if (mapActivityRef != null && !Algorithms.isEmpty(result.getFilenames())) {
-					final Activity a = mapActivityRef.get();
-					if (a instanceof MapActivity && !a.isFinishing()) {
-						OnSaveCurrentTrackFragment.showInstance(((MapActivity) a)
-							.getSupportFragmentManager(), result.getFilenames().get(0));	
+					final MapActivity a = mapActivityRef.get();
+					if (a != null && !a.isFinishing()) {
+						OnSaveCurrentTrackFragment.showInstance(a.getSupportFragmentManager(), result.getFilenames().get(0));	
 					}
 				}
 				
