@@ -1032,10 +1032,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		return mIsDestroyed;
 	}
 
-	public boolean isActivityStopped() {
-		return stopped;
-	}
-
 	private void restartApp() {
 		AlertDialog.Builder bld = new AlertDialog.Builder(this);
 		bld.setMessage(R.string.storage_permission_restart_is_required);

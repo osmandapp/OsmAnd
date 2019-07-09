@@ -372,13 +372,14 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 				isSaving = false;
 				app.getNotificationHelper().refreshNotifications();
 				updateControl();
-				if (weakReferenceToActivity != null && weakReferenceToActivity.get() instanceof MapActivity
-					&& !((MapActivity) weakReferenceToActivity.get()).isActivityStopped()
-					&& !((MapActivity) weakReferenceToActivity.get()).isActivityDestroyed()
-					&& !Algorithms.isEmpty(result.getFilenames())) {
-					OnSaveCurrentTrackFragment.showInstance(((MapActivity) weakReferenceToActivity.get())
-						.getSupportFragmentManager(), result.getFilenames().get(0));
+				if (weakReferenceToActivity != null) {
+					final Activity a = weakReferenceToActivity.get();
+					if (a instanceof MapActivity && !a.isFinishing() && !Algorithms.isEmpty(result.getFilenames())) {
+						OnSaveCurrentTrackFragment.showInstance(((MapActivity) a)
+							.getSupportFragmentManager(), result.getFilenames().get(0));	
+					}
 				}
+				
 				if (onComplete != null) {
 					onComplete.run();
 				}
