@@ -227,7 +227,7 @@
     <string name="proxy_port">Porta</string>
     <string name="proxy_server">Server</string>
     <string name="shared_string_connection">Connessione</string>
-    <string name="shared_string_enable">Abilita</string>
+    <string name="shared_string_enable">Abilitato</string>
     <string name="proxy_type">Tipo di Proxy</string>
     <string name="proxy_connected">Connesso</string>
     <string name="proxy_disconnected">Disconnesso</string>
