@@ -5,15 +5,15 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.text.format.DateFormat;
 
-import net.osmand.PlatformUtil;
-import net.osmand.data.LatLon;
-import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.GPXUtilities.Track;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
+import net.osmand.PlatformUtil;
+import net.osmand.data.LatLon;
+import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
@@ -59,6 +59,9 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	public final static String POINT_COL_COLOR = "color"; //$NON-NLS-1$
 
 	public final static Log log = PlatformUtil.getLog(SavingTrackHelper.class);
+
+	private final static int SAME_SEGMENT_INTERVAL = 6 * 60 * 1000;
+	private final static int SAME_TRACK_INTERVAL = 2 * 60 * 60 * 1000;
 
 	private String updateScript;
 	private String insertPointsScript;
@@ -334,14 +337,14 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 				pt.time = time;
 				long currentInterval = Math.abs(time - previousTime);
 				boolean newInterval = pt.lat == 0 && pt.lon == 0;
-				
-				if (track != null && !newInterval && (!ctx.getSettings().AUTO_SPLIT_RECORDING.get() || currentInterval < 6 * 60 * 1000 || currentInterval < 10 * previousInterval)) {
+
+				if (track != null && !newInterval && (!ctx.getSettings().AUTO_SPLIT_RECORDING.get() || currentInterval < SAME_SEGMENT_INTERVAL || currentInterval < 10 * previousInterval)) {
 					// 6 minute - same segment
 					segment.points.add(pt);
-				} else if (track != null && (ctx.getSettings().AUTO_SPLIT_RECORDING.get() && currentInterval < 2 * 60 * 60 * 1000)) {
+				} else if (track != null && (ctx.getSettings().AUTO_SPLIT_RECORDING.get() && currentInterval < SAME_TRACK_INTERVAL)) {
 					// 2 hour - same track
 					segment = new TrkSegment();
-					if(!newInterval) {
+					if (!newInterval) {
 						segment.points.add(pt);
 					}
 					track.segments.add(segment);
