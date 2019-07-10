@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -46,6 +47,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadPoint;
+import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.data.TransportRoute;
 import net.osmand.plus.LockableScrollView;
@@ -72,6 +74,9 @@ import net.osmand.plus.views.TransportStopsLayer;
 import net.osmand.plus.views.controls.HorizontalSwipeConfirm;
 import net.osmand.plus.views.controls.SingleTapConfirm;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
+import net.osmand.router.TransportRoutePlanner;
+import net.osmand.router.TransportRoutePlanner.TransportRouteResult;
+import net.osmand.router.TransportRoutePlanner.TransportRouteResultSegment;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -102,6 +107,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 	private View topButtonContainer;
 	private LockableScrollView menuScrollView;
 
+	private LinearLayout mainRouteBadgeContainer;
 	private LinearLayout nearbyRoutesLayout;
 	private LinearLayout routesBadgesContainer;
 	private GridView localTransportStopRoutesGrid;
@@ -523,6 +529,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		localRoutesMoreTv = (TextView) view.findViewById(R.id.local_routes_more_text_view);
 		nearbyRoutesLayout = (LinearLayout) view.findViewById(R.id.nearby_routes);
 		routesBadgesContainer = (LinearLayout) view.findViewById(R.id.transport_badges_container);
+		mainRouteBadgeContainer = (LinearLayout) view.findViewById(R.id.main_transport_route_badge);
 
 		if (nightMode) {
 			nearbyRoutesWithinTv.setTextColor(ContextCompat.getColor(mapActivity, R.color.text_color_secondary_dark));
@@ -1396,8 +1403,86 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		}
 	}
 
+	private View createRouteBadge(TransportStopRoute transportStopRoute) {
+		LinearLayout convertView = null;
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			OsmandApplication app = mapActivity.getMyApplication();
+			convertView = (LinearLayout) mapActivity.getLayoutInflater().inflate(R.layout.transport_stop_route_item_with_icon, null, false);
+			if (transportStopRoute != null) {
+				String routeDescription = transportStopRoute.getDescription(app);
+				String routeRef = transportStopRoute.route.getAdjustedRouteRef(true);
+				int bgColor = transportStopRoute.getColor(app, nightMode);
+
+				TextView transportStopRouteTextView = (TextView) convertView.findViewById(R.id.transport_stop_route_text);
+				ImageView transportStopRouteImageView = (ImageView) convertView.findViewById(R.id.transport_stop_route_icon);
+
+				int drawableResId = transportStopRoute.type == null ? R.drawable.ic_action_bus_dark : transportStopRoute.type.getResourceId();
+				transportStopRouteImageView.setImageDrawable(app.getUIUtilities().getPaintedIcon(drawableResId, UiUtilities.getContrastColor(mapActivity, bgColor, true)));
+				transportStopRouteTextView.setText(routeRef + ": " + routeDescription);
+				GradientDrawable gradientDrawableBg = (GradientDrawable) convertView.getBackground();
+				gradientDrawableBg.setColor(bgColor);
+				transportStopRouteTextView.setTextColor(UiUtilities.getContrastColor(mapActivity, bgColor, true));
+			}
+		}
+		return convertView;
+	}
+
+	public void fitRectOnMap(QuadRect rect) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			RotatedTileBox tb = mapActivity.getMapView().getCurrentRotatedTileBox().copy();
+			int tileBoxWidthPx = 0;
+			int tileBoxHeightPx;
+			if (menu.isLandscapeLayout()) {
+				tileBoxWidthPx = tb.getPixWidth() - mainView.getWidth();
+				tileBoxHeightPx = viewHeight;
+			} else {
+				tileBoxHeightPx = viewHeight - menuFullHeight;
+			}
+			if (tileBoxHeightPx > 0 || tileBoxWidthPx > 0) {
+				int topMarginPx = AndroidUtils.getStatusBarHeight(mapActivity);
+				int leftMarginPx = mainView.getWidth();
+				restoreCustomMapRatio();
+				mapActivity.getMapView().fitRectToMap(rect.left, rect.right, rect.top, rect.bottom,
+						tileBoxWidthPx, tileBoxHeightPx, topMarginPx, leftMarginPx);
+			}
+		}
+	}
+
 	private void updateLocalRoutesBadges(List<TransportStopRoute> localTransportStopRoutes, int localColumnsPerRow) {
 		int localRoutesSize = localTransportStopRoutes.size();
+		OsmandApplication app = requireMyApplication();
+		TransportRouteResult activeRoute = app.getRoutingHelper().getTransportRoutingHelper().getActiveRoute();
+		if (localRoutesSize > 0 && activeRoute != null) {
+			for (int i = 0; i < localTransportStopRoutes.size(); i++) {
+				final TransportStopRoute stopRoute = localTransportStopRoutes.get(i);
+				if (activeRoute.isRouteStop(stopRoute.stop)) {
+					View routeBadge = createRouteBadge(stopRoute);
+					mainRouteBadgeContainer.addView(routeBadge);
+					mainRouteBadgeContainer.setVisibility(View.VISIBLE);
+					mainRouteBadgeContainer.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							TransportRouteResult activeRoute = requireMyApplication().getRoutingHelper().getTransportRoutingHelper().getActiveRoute();
+							if (activeRoute != null) {
+								TransportRouteResultSegment segment = activeRoute.getRouteStopSegment(stopRoute.stop);
+								if (segment != null) {
+									QuadRect rect = segment.getSegmentRect();
+									if (rect != null) {
+										//openMenuHeaderOnly();
+										fitRectOnMap(rect);
+									}
+								}
+							}
+						}
+					});
+					localTransportStopRoutes.remove(i);
+					localRoutesSize--;
+					break;
+				}
+			}
+		}
 		if (localRoutesSize > 0) {
 			int maxLocalBadges = localColumnsPerRow * 5;
 			TransportStopRouteAdapter adapter;
