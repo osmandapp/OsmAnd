@@ -80,6 +80,15 @@
                 android:paddingLeft="@dimen/context_menu_padding_margin_default"
                 android:paddingRight="@dimen/context_menu_padding_margin_default">
 
+				<LinearLayout
+					android:id="@+id/main_transport_route_badge"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_marginTop="@dimen/context_menu_padding_margin_tiny"
+					android:gravity="top"
+					android:orientation="horizontal"
+					android:visibility="gone"/>
+
                 <GridView
                     android:id="@+id/transport_stop_routes_grid"
                     android:layout_width="match_parent"

@@ -1025,7 +1025,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		LinearLayout llText = buildTextContainerView(view.getContext());
 		ll.addView(llText);
 
-		View routeBadge = createRouteBadge(mapActivity, transportStopRoute, routeDescription);
+		View routeBadge = createRouteBadge(mapActivity, transportStopRoute);
 		LinearLayout.LayoutParams routeBadgeParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		routeBadgeParams.setMargins(0, dpToPx(6), 0, dpToPx(8));
 		routeBadge.setLayoutParams(routeBadgeParams);
@@ -1430,10 +1430,11 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		return ll;
 	}
 
-	public View createRouteBadge(@NonNull MapActivity mapActivity, TransportStopRoute transportStopRoute, String routeDescription) {
+	public View createRouteBadge(@NonNull MapActivity mapActivity, TransportStopRoute transportStopRoute) {
 		OsmandApplication app = mapActivity.getMyApplication();
 		LinearLayout convertView = (LinearLayout) mapActivity.getLayoutInflater().inflate(R.layout.transport_stop_route_item_with_icon, null, false);
 		if (transportStopRoute != null) {
+			String routeDescription = transportStopRoute.getDescription(app);
 			String routeRef = transportStopRoute.route.getAdjustedRouteRef(true);
 			int bgColor = transportStopRoute.getColor(app, isNightMode());
 

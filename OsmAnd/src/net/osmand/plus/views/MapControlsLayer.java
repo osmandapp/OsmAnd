@@ -400,7 +400,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 				mapActivity.dismissCardDialog();
 				RoutingHelper routingHelper = mapActivity.getRoutingHelper();
 				TransportRoutingHelper transportRoutingHelper = routingHelper.getTransportRoutingHelper();
-				if (routingHelper.isPublicTransportMode() && transportRoutingHelper.getCurrentRoute() >= 0) {
+				if (transportRoutingHelper.hasActiveRoute()) {
 					ChooseRouteFragment.showFromRouteInfo(mapActivity.getSupportFragmentManager(), transportRoutingHelper.getCurrentRoute(), MenuState.FULL_SCREEN);
 				} else {
 					doRoute(false);
@@ -782,7 +782,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		boolean showButtons = (showRouteCalculationControls || !routeFollowingMode)
 				&& !isInMovingMarkerMode() && !isInGpxDetailsMode() && !isInMeasurementToolMode() && !isInPlanRouteMode() && !contextMenuOpened && !isInChoosingRoutesMode() && !isInWaypointsChoosingMode();
 		//routePlanningBtn.setIconResId(routeFollowingMode ? R.drawable.ic_action_gabout_dark : R.drawable.map_directions);
-		if (rh.isPublicTransportMode() && trh.getCurrentRoute() >= 0) {
+		if (trh.hasActiveRoute()) {
 			routePlanningBtn.setIconResId(R.drawable.map_action_bus_dark);
 			routePlanningBtn.setIconColorId(R.color.color_myloc_distance);
 		} else if (rh.isFollowingMode()) {

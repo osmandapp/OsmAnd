@@ -84,9 +84,17 @@ public class TransportRoutingHelper {
 		return endLocation;
 	}
 
-
 	public int getCurrentRoute() {
 		return currentRoute;
+	}
+
+	public boolean hasActiveRoute() {
+		return routingHelper.isPublicTransportMode() && currentRoute >= 0;
+	}
+
+	@Nullable
+	public TransportRouteResult getActiveRoute() {
+		return routes != null && routes.size() > currentRoute && currentRoute >= 0 ? routes.get(currentRoute) : null;
 	}
 
 	@Nullable

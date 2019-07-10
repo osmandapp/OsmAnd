@@ -931,14 +931,23 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public void fitRectToMap(double left, double right, double top, double bottom,
 							 int tileBoxWidthPx, int tileBoxHeightPx, int marginTopPx) {
+		fitRectToMap(left, right, top, bottom, tileBoxWidthPx, tileBoxHeightPx, marginTopPx, 0);
+	}
+
+	public void fitRectToMap(double left, double right, double top, double bottom,
+							 int tileBoxWidthPx, int tileBoxHeightPx, int marginTopPx, int marginLeftPx) {
 		RotatedTileBox tb = currentViewport.copy();
 		double border = 0.8;
+		int dx = 0;
 		int dy = 0;
 
 		int tbw = (int) (tb.getPixWidth() * border);
 		int tbh = (int) (tb.getPixHeight() * border);
 		if (tileBoxWidthPx > 0) {
 			tbw = (int) (tileBoxWidthPx * border);
+			if (marginLeftPx > 0) {
+				dx = (tb.getPixWidth() - tileBoxWidthPx) / 2 - marginLeftPx;
+			}
 		} else if (tileBoxHeightPx > 0) {
 			tbh = (int) (tileBoxHeightPx * border);
 			dy = (tb.getPixHeight() - tileBoxHeightPx) / 2 - marginTopPx;
@@ -954,9 +963,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		while (tb.getZoom() >= 7 && (!tb.containsLatLon(top, left) || !tb.containsLatLon(bottom, right))) {
 			tb.setZoom(tb.getZoom() - 1);
 		}
-		if (dy != 0) {
+		if (dy != 0 || dx != 0) {
 			clat = tb.getLatFromPixel(tb.getPixWidth() / 2, tb.getPixHeight() / 2 + dy);
-			clon = tb.getLonFromPixel(tb.getPixWidth() / 2, tb.getPixHeight() / 2);
+			clon = tb.getLonFromPixel(tb.getPixWidth() / 2 + dx, tb.getPixHeight() / 2);
 		}
 		animatedDraggingThread.startMoving(clat, clon, tb.getZoom(), true);
 	}
