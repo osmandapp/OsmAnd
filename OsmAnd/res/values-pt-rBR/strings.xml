@@ -1651,7 +1651,7 @@ Pôr do Sol: %2$s</string>
     <string name="next_proceed">Próximo</string>
     <string name="opening_at">Abre às</string>
     <string name="closing_at">Fecha às</string>
-    <string name="av_locations_descr">Arquivo GPX com notas de posição.</string>
+    <string name="av_locations_descr">Arquivo GPX com posições.</string>
     <string name="av_locations">Posições</string>
     <string name="contact_info">Informações de contato</string>
     <string name="add_opening_hours">Adicionar horário de funcionamento</string>
@@ -3166,4 +3166,9 @@ Pôr do Sol: %2$s</string>
     <string name="routing_attr_max_num_changes_description">Especificar o número máximo de transferências</string>
     <string name="routing_attr_max_num_changes_name">Número de transferências</string>
     <string name="edit_profile_setup_subtitle">O perfil mantém suas próprias configurações</string>
+    <string name="rendering_attr_highway_class_track_grade1_name">Grau 1</string>
+    <string name="rendering_attr_highway_class_track_grade2_name">Grau 2</string>
+    <string name="rendering_attr_highway_class_track_grade3_name">Grau 3</string>
+    <string name="rendering_attr_highway_class_track_grade4_name">Grau 4</string>
+    <string name="rendering_attr_highway_class_track_grade5_name">Grau 5</string>
 </resources>
