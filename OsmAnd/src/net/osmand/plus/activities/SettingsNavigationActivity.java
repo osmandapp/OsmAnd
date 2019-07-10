@@ -85,7 +85,8 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		settings = getMyApplication().getSettings();
 		if (!settings.hasAvailableApplicationMode()) {
 			Toast.makeText(this, R.string.turn_on_profile_desc, Toast.LENGTH_SHORT).show();
-			onBackPressed();
+			finish();
+			return;
 		}
 		getToolbar().setTitle(R.string.routing_settings);
 		createUI();
