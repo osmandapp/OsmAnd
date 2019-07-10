@@ -69,7 +69,7 @@ import java.util.Map;
 import static net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
 
 public class MenuBuilder {
-	
+
 	public static final float SHADOW_HEIGHT_TOP_DP = 17f;
 	public static final int TITLE_LIMIT = 60;
 	protected static final String[] arrowChars = new String[]{"=>"," - "};
@@ -316,7 +316,7 @@ public class MenuBuilder {
 		buildPluginRows(view);
 //		buildAfter(view);
 	}
-	
+
 	private boolean showTransportRoutes() {
 		return showLocalTransportRoutes() || showNearbyTransportRoutes();
 	}
