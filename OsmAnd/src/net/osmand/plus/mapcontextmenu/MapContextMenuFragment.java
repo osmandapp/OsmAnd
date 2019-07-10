@@ -60,12 +60,14 @@ import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.UiUtilities.UpdateLocationViewCache;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.base.ContextMenuFragment;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.mapcontextmenu.MenuController.MenuState;
 import net.osmand.plus.mapcontextmenu.MenuController.TitleButtonController;
 import net.osmand.plus.mapcontextmenu.MenuController.TitleProgressController;
 import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
+import net.osmand.plus.routepreparationmenu.ChooseRouteFragment;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.views.AnimateDraggingMapThread;
@@ -74,9 +76,7 @@ import net.osmand.plus.views.TransportStopsLayer;
 import net.osmand.plus.views.controls.HorizontalSwipeConfirm;
 import net.osmand.plus.views.controls.SingleTapConfirm;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
-import net.osmand.router.TransportRoutePlanner;
 import net.osmand.router.TransportRoutePlanner.TransportRouteResult;
-import net.osmand.router.TransportRoutePlanner.TransportRouteResultSegment;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -1464,6 +1464,11 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 					mainRouteBadgeContainer.setOnClickListener(new View.OnClickListener() {
 						@Override
 						public void onClick(View v) {
+							dismissMenu();
+							ChooseRouteFragment.showFromRouteInfo(requireMyActivity().getSupportFragmentManager(),
+									requireMyApplication().getRoutingHelper().getTransportRoutingHelper().getCurrentRoute(),
+									ContextMenuFragment.MenuState.FULL_SCREEN);
+							/* fit route segment on map
 							TransportRouteResult activeRoute = requireMyApplication().getRoutingHelper().getTransportRoutingHelper().getActiveRoute();
 							if (activeRoute != null) {
 								TransportRouteResultSegment segment = activeRoute.getRouteStopSegment(stopRoute.stop);
@@ -1475,6 +1480,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 									}
 								}
 							}
+							*/
 						}
 					});
 					localTransportStopRoutes.remove(i);
