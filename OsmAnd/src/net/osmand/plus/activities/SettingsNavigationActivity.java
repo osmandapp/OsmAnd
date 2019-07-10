@@ -25,6 +25,7 @@ import android.widget.ArrayAdapter;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
@@ -81,6 +82,11 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
     public void onCreate(Bundle savedInstanceState) {
 		((OsmandApplication) getApplication()).applyTheme(this);
 		super.onCreate(savedInstanceState);
+		settings = getMyApplication().getSettings();
+		if (!settings.hasAvailableApplicationMode()) {
+			Toast.makeText(this, R.string.turn_on_profile_desc, Toast.LENGTH_SHORT).show();
+			onBackPressed();
+		}
 		getToolbar().setTitle(R.string.routing_settings);
 		createUI();
     }
@@ -98,7 +104,6 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 	private void createUI() {
 		addPreferencesFromResource(R.xml.navigation_settings);
 		PreferenceScreen screen = getPreferenceScreen();
-		settings = getMyApplication().getSettings();
 		RouteService[] vls = RouteService.getAvailableRouters(getMyApplication());
 		String[] entries = new String[vls.length];
 		for (int i = 0; i < entries.length; i++) {

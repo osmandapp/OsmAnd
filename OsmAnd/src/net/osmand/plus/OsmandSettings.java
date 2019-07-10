@@ -339,6 +339,14 @@ public class OsmandSettings {
 	public ApplicationMode getApplicationMode() {
 		return APPLICATION_MODE.get();
 	}
+	
+	public boolean hasAvailableApplicationMode() {
+		int currentModeCount = ApplicationMode.values(ctx).size();
+		if (currentModeCount == 0 || currentModeCount == 1 && getApplicationMode() == ApplicationMode.DEFAULT) {
+			return false;
+		}
+		return true;
+	}
 
 	protected ApplicationMode readApplicationMode() {
 		String s = settingsAPI.getString(globalPreferences, APPLICATION_MODE.getId(), ApplicationMode.DEFAULT.getStringKey());
