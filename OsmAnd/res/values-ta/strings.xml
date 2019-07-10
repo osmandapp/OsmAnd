@@ -1399,4 +1399,5 @@
     <string name="avoid_pt_types_descr">வழிசெலுத்தலைத் தவிர்ப்பதற்கு பொதுப் போக்குவரத்து வகைகளைத் தேர்ந்தெடுக்கவும்:</string>
     <string name="quick_action_day_night_mode">%s விதம்</string>
     <string name="avoid_pt_types">போக்குவரத்து வகையை தவிர்க்க…</string>
+    <string name="turn_screen_on_router">திருப்பத்தில் எழுந்திரு</string>
 </resources>
