@@ -3171,4 +3171,14 @@ Pôr do Sol: %2$s</string>
     <string name="rendering_attr_highway_class_track_grade3_name">Grau 3</string>
     <string name="rendering_attr_highway_class_track_grade4_name">Grau 4</string>
     <string name="rendering_attr_highway_class_track_grade5_name">Grau 5</string>
+    <string name="turn_screen_on_router">Despertar ao girar</string>
+    <string name="turn_screen_on_time_descr">Defina a hora em que a tela será ativada.</string>
+    <string name="turn_screen_on_sensor">Usar sensor de proximidade</string>
+    <string name="turn_screen_on_sensor_descr">Agite sua mão sobre a parte superior da tela para ligar a tela enquanto navega.</string>
+    <string name="external_input_device">Dispositivos de entrada externos</string>
+    <string name="external_input_device_descr">Selecione um dispositivo, como um teclado genérico ou WunderLINQ para controles externos.</string>
+    <string name="sett_no_ext_input">Nenhum</string>
+    <string name="sett_generic_ext_input">Teclado genérico</string>
+    <string name="sett_wunderlinq_ext_input">WunderLINQ</string>
+    <string name="sett_parrot_ext_input">Parrot</string>
 </resources>
