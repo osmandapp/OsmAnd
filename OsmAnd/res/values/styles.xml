@@ -258,6 +258,7 @@
         <item name="dlg_btn_stroked">@drawable/dlg_btn_stroked_light</item>
         <item name="profile_save_btn">@drawable/btn_round_profile_blue</item>
         <item name="profile_cancel_btn">@drawable/btn_round_profile_gray</item>
+        <item name="android:textColor">@color/text_color_primary_light</item>
     </style>
 
     <style name="OverflowMenuButton" parent="@style/Widget.AppCompat.ActionButton.Overflow">
@@ -504,6 +505,7 @@
         <item name="dlg_btn_stroked">@drawable/dlg_btn_stroked_dark</item>
         <item name="profile_save_btn">@drawable/btn_round_profile_night</item>
         <item name="profile_cancel_btn">@drawable/btn_round_profile_gray_n</item>
+        <item name="android:textColor">@color/text_color_primary_dark</item>
     </style>
 
     <style name="FreeVersionBanner" parent="OsmandDarkTheme">

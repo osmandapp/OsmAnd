@@ -672,15 +672,6 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			buildRow(view, R.drawable.ic_action_openstreetmap_logo, null, link + (amenity.getId() >> 1),
 					0, false, null, true, 0, true, null, false);
 		}
-
-		Map<Integer, String> locationData = PointDescription.getLocationData(mapActivity, amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude(), true);
-		String title = locationData.get(PointDescription.LOCATION_LIST_HEADER);
-		locationData.remove(PointDescription.LOCATION_LIST_HEADER);
-		CollapsableView cv = getLocationCollapsableView(locationData);
-		
-		buildRow(view, R.drawable.ic_action_get_my_location, null, title, 0, true, cv,
-			true, 1, false, null, false);
-
 	}
 
 	private String getFormattedInt(String value) {
