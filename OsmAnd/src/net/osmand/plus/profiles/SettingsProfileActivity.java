@@ -15,6 +15,7 @@ public class SettingsProfileActivity extends OsmandActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.single_fragment_layout);
 		getSupportActionBar().setElevation(5.0f);
+		getSupportActionBar().setTitle(R.string.application_profiles);
 		if (savedInstanceState == null) {
 			SettingsProfileFragment profileFragment = new SettingsProfileFragment();
 			profileFragment.setArguments(getIntent().getExtras());
