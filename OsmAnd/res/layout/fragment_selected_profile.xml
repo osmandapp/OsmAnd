@@ -185,7 +185,7 @@
 						android:layout_width="match_parent"
 						android:layout_height="60dp"
 						app:primaryColor="@color/active_color_primary_dark"
-						app:labelText="Navigation Type">
+						app:labelText="@string/nav_type_hint">
 
 						<studio.carbonylgroup.textfieldboxes.ExtendedEditText
 							android:id="@+id/navigation_type_et"
