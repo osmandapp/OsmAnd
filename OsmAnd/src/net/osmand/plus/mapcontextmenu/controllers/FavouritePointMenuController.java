@@ -166,8 +166,6 @@ public class FavouritePointMenuController extends MenuController {
 			if (originObject instanceof Amenity) {
 				AmenityMenuController.addTypeMenuItem((Amenity) originObject, builder);
 			}
-		} else {
-			addMyLocationToPlainItems(latLon);
-		}
+		} 
 	}
 }
