@@ -280,6 +280,7 @@
     </style>
 
     <style name="OsmandLightTheme.NoActionbar.Preferences">
+        <item name="android:textColor">@color/text_color_primary_light</item>
         <item name="android:textColorSecondary">@color/text_color_secondary_light</item>
     </style>
 
@@ -348,6 +349,7 @@
     </style>
 
     <style name="OsmandDarkTheme.NoActionbar.Preferences">
+        <item name="android:textColor">@color/text_color_primary_dark</item>
         <item name="android:textColorSecondary">@color/text_color_secondary_dark</item>
     </style>
 
