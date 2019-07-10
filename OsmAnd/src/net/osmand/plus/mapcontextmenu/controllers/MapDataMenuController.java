@@ -28,8 +28,8 @@ import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.liveupdates.LiveUpdatesHelper;
-import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
+import net.osmand.plus.mapcontextmenu.builders.MapDataMenuBuilder;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.DownloadedRegionsLayer.DownloadMapObject;
@@ -57,7 +57,7 @@ public class MapDataMenuController extends MenuController {
 	private DownloadIndexesThread downloadThread;
 
 	public MapDataMenuController(@NonNull MapActivity mapActivity, @NonNull PointDescription pointDescription, final @NonNull DownloadMapObject mapObject) {
-		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
+		super(new MapDataMenuBuilder(mapActivity), pointDescription, mapActivity);
 		this.mapObject = mapObject;
 		indexItem = mapObject.getIndexItem();
 		localIndexInfo = mapObject.getLocalIndexInfo();

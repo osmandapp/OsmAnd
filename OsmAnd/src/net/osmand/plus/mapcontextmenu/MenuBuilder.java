@@ -309,7 +309,9 @@ public class MenuBuilder {
 			buildPlainMenuItems(view);
 		}
 		buildInternal(view);
-		buildCoordinatesRow(view);
+		if (needBuildCoordinatesRow()) {
+			buildCoordinatesRow(view);
+		}
 		if (showOnlinePhotos) {
 			buildNearestPhotosRow(view);
 		}
@@ -353,6 +355,10 @@ public class MenuBuilder {
 	}
 
 	protected boolean needBuildPlainMenuItems() {
+		return true;
+	}
+	
+	protected boolean needBuildCoordinatesRow() {
 		return true;
 	}
 
