@@ -610,15 +610,17 @@ public class GPXUtilities {
 						// totalDistance += MapUtils.getDistance(prev.lat, prev.lon, point.lat, point.lon);
 						// using ellipsoidal 'distanceBetween' instead of spherical haversine (MapUtils.getDistance) is
 						// a little more exact, also seems slightly faster:
-						net.osmand.Location.distanceBetween(prev.lat, prev.lon, point.lat, point.lon, calculations);
-						totalDistance += calculations[0];
-						segmentDistance += calculations[0];
-						point.distance = segmentDistance;
-						timeDiff = (int)((point.time - prev.time) / 1000);
+						if (!s.segment.generalSegment || !point.firstPoint) {
+							net.osmand.Location.distanceBetween(prev.lat, prev.lon, point.lat, point.lon, calculations);
+							totalDistance += calculations[0];
+							segmentDistance += calculations[0];
+							point.distance = segmentDistance;
+							timeDiff = (int) ((point.time - prev.time) / 1000);
 
-						//Last resort: Derive speed values from displacement if track does not originally contain speed
-						if (!hasSpeedInTrack && speed == 0 && timeDiff > 0) {
-							speed = calculations[0] / timeDiff;
+							//Last resort: Derive speed values from displacement if track does not originally contain speed
+							if (!hasSpeedInTrack && speed == 0 && timeDiff > 0) {
+								speed = calculations[0] / timeDiff;
+							}
 						}
 
 						// Motion detection:
