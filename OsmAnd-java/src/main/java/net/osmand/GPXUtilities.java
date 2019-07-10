@@ -610,7 +610,9 @@ public class GPXUtilities {
 						// totalDistance += MapUtils.getDistance(prev.lat, prev.lon, point.lat, point.lon);
 						// using ellipsoidal 'distanceBetween' instead of spherical haversine (MapUtils.getDistance) is
 						// a little more exact, also seems slightly faster:
-						if (!s.segment.generalSegment || !point.firstPoint) {
+						if (s.segment.generalSegment && point.firstPoint) {
+							segmentDistance = 0;
+						} else {
 							net.osmand.Location.distanceBetween(prev.lat, prev.lon, point.lat, point.lon, calculations);
 							totalDistance += calculations[0];
 							segmentDistance += calculations[0];
