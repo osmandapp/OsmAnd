@@ -309,6 +309,9 @@ public class MenuBuilder {
 			buildPlainMenuItems(view);
 		}
 		buildInternal(view);
+		if (needBuildCoordinatesRow()) {
+			buildCoordinatesRow(view);
+		}
 		if (showOnlinePhotos) {
 			buildNearestPhotosRow(view);
 		}
@@ -352,6 +355,10 @@ public class MenuBuilder {
 	}
 
 	protected boolean needBuildPlainMenuItems() {
+		return true;
+	}
+	
+	protected boolean needBuildCoordinatesRow() {
 		return true;
 	}
 
@@ -412,6 +419,15 @@ public class MenuBuilder {
 		}
 	}
 
+	private void buildCoordinatesRow(View view) {
+		Map<Integer, String> locationData = PointDescription.getLocationData(mapActivity, latLon.getLatitude(), latLon.getLongitude(), true);
+		String title = locationData.get(PointDescription.LOCATION_LIST_HEADER);
+		locationData.remove(PointDescription.LOCATION_LIST_HEADER);
+		CollapsableView cv = getLocationCollapsableView(locationData);
+		buildRow(view, R.drawable.ic_action_get_my_location, null, title, 0, true, cv, false, 1,
+			false, null, false);
+	}
+	
 	private void startLoadingImages() {
 		if (onlinePhotoCardsRow == null) {
 			return;
