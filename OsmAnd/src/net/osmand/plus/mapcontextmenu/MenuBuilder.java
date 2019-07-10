@@ -32,7 +32,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import net.osmand.AndroidUtils;
-import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
@@ -66,7 +65,6 @@ import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import org.apache.commons.logging.Log;
 
 import static net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
 
@@ -75,8 +73,6 @@ public class MenuBuilder {
 	public static final float SHADOW_HEIGHT_TOP_DP = 17f;
 	public static final int TITLE_LIMIT = 60;
 	protected static final String[] arrowChars = new String[]{"=>"," - "};
-
-	private static final Log LOG = PlatformUtil.getLog(MenuBuilder.class);
 
 	protected MapActivity mapActivity;
 	protected MapContextMenu mapContextMenu;
@@ -197,7 +193,6 @@ public class MenuBuilder {
 		}
 
 		public void setCollapsed(boolean collapsed) {
-			
 			if (collapsedPref != null) {
 				collapsedPref.set(collapsed);
 			} else {
@@ -321,8 +316,6 @@ public class MenuBuilder {
 		buildPluginRows(view);
 //		buildAfter(view);
 	}
-
-
 	
 	private boolean showTransportRoutes() {
 		return showLocalTransportRoutes() || showNearbyTransportRoutes();
@@ -467,7 +460,6 @@ public class MenuBuilder {
 	}
 
 	protected void buildInternal(View view) {
-		
 	}
 
 	protected void buildTopInternal(View view) {
