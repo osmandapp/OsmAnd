@@ -928,7 +928,6 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		if (mapActivity == null) {
 			return;
 		}
-		OsmandApplication app = mapActivity.getMyApplication();
 
 		FrameLayout baseItemView = new FrameLayout(view.getContext());
 		FrameLayout.LayoutParams baseViewLayoutParams = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
@@ -1026,16 +1025,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		LinearLayout llText = buildTextContainerView(view.getContext());
 		ll.addView(llText);
 
-		TextView routeTypeView = new TextView(view.getContext());
-		LinearLayout.LayoutParams routeTypeParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-		routeTypeParams.setMargins(0, dpToPx(4), 0, 0);
-		routeTypeView.setLayoutParams(routeTypeParams);
-		routeTypeView.setTextSize(16);
-		routeTypeView.setTextColor(getSecondaryColor());
-		routeTypeView.setText(routeDescription);
-		llText.addView(routeTypeView);
-
-		View routeBadge = createRouteBadge(mapActivity, transportStopRoute, isNightMode());
+		View routeBadge = createRouteBadge(mapActivity, transportStopRoute, routeDescription);
 		LinearLayout.LayoutParams routeBadgeParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		routeBadgeParams.setMargins(0, dpToPx(6), 0, dpToPx(8));
 		routeBadge.setLayoutParams(routeBadgeParams);
@@ -1440,7 +1430,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		return ll;
 	}
 
-	public View createRouteBadge(@NonNull MapActivity mapActivity, TransportStopRoute transportStopRoute, boolean isNightMode) {
+	public View createRouteBadge(@NonNull MapActivity mapActivity, TransportStopRoute transportStopRoute, String routeDescription) {
 		OsmandApplication app = mapActivity.getMyApplication();
 		LinearLayout convertView = (LinearLayout) mapActivity.getLayoutInflater().inflate(R.layout.transport_stop_route_item_with_icon, null, false);
 		if (transportStopRoute != null) {
@@ -1452,7 +1442,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 
 			int drawableResId = transportStopRoute.type == null ? R.drawable.ic_action_bus_dark : transportStopRoute.type.getResourceId();
 			transportStopRouteImageView.setImageDrawable(app.getUIUtilities().getPaintedIcon(drawableResId, UiUtilities.getContrastColor(mapActivity, bgColor, true)));
-			transportStopRouteTextView.setText(routeRef);
+			transportStopRouteTextView.setText(routeRef + ": " + routeDescription);
 			GradientDrawable gradientDrawableBg = (GradientDrawable) convertView.getBackground();
 			gradientDrawableBg.setColor(bgColor);
 			transportStopRouteTextView.setTextColor(UiUtilities.getContrastColor(mapActivity, bgColor, true));
@@ -1608,10 +1598,22 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 
 	@Override
 	public void onCardButtonPressed(@NonNull BaseCard card, int buttonIndex) {
-		if (card instanceof PublicTransportCard && buttonIndex == 0) {
-			openMenuFullScreen();
-		} else if (card instanceof RouteDirectionsCard && buttonIndex >= 0) {
-			showDirectionsInfo(buttonIndex);
+		if (card instanceof PublicTransportCard) {
+			switch (buttonIndex) {
+				case PublicTransportCard.DETAILS_BUTTON_INDEX:
+					openMenuFullScreen();
+					break;
+				case PublicTransportCard.SHOW_BUTTON_INDEX:
+					RouteDetailsFragmentListener listener = getRouteDetailsListener();
+					if (listener != null) {
+						listener.onNavigationRequested();
+					}
+					break;
+			}
+		} else if (card instanceof RouteDirectionsCard) {
+			if (buttonIndex >= 0) {
+				showDirectionsInfo(buttonIndex);
+			}
 		} else if (card instanceof RouteStatisticCard) {
 			switch (buttonIndex) {
 				case RouteStatisticCard.DETAILS_BUTTON_INDEX:

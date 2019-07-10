@@ -54,7 +54,7 @@ public class CommandBuilder {
 	protected final CommandPlayer commandPlayer;
 	protected boolean alreadyExecuted = false;
 	private List<Struct> listStruct = new ArrayList<Struct>();
-	private List<String> listCommands = new ArrayList<String>();
+	protected List<String> listCommands = new ArrayList<String>();
 
 	public CommandBuilder(CommandPlayer commandPlayer){
 		this.commandPlayer = commandPlayer;
@@ -67,17 +67,21 @@ public class CommandBuilder {
 	}
 
 	private CommandBuilder addCommand(String name, Object... args){
+		addToCommandList(name, args);
 		Struct struct = prepareStruct(name, args);
 		listStruct.add(struct);
+		return this;
+	}
+	
+	protected void addToCommandList(String name, Object... args) {
 		listCommands.add(name);
 		for(Object o : args) {
-			if(o == null) {
+			if(o != null) {
 				listCommands.add(o.toString());
 			} else {
 				listCommands.add("");
 			}
 		}
-		return this;
 	}
 
 	public List<String> getListCommands() {

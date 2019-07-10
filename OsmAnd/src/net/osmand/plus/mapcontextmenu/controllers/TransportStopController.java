@@ -123,12 +123,14 @@ public class TransportStopController extends MenuController {
 	private void processTransportStop(List<TransportStopRoute> routesOnTheSameExit, List<TransportStopRoute> routesNearby) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			List<TransportIndexRepository> reps = mapActivity.getMyApplication()
-					.getResourceManager().searchTransportRepositories(transportStop.getLocation().getLatitude(),
-							transportStop.getLocation().getLongitude());
+			OsmandApplication app = mapActivity.getMyApplication();
+			List<TransportIndexRepository> reps = app.getResourceManager().searchTransportRepositories(transportStop.getLocation().getLatitude(),
+					transportStop.getLocation().getLongitude());
 
-			boolean useEnglishNames = mapActivity.getMyApplication().getSettings().usingEnglishNames();
-
+			boolean useEnglishNames = app.getSettings().usingEnglishNames();
+			if (transportStop.getTransportStopAggregated() == null) {
+				processTransportStopAggregated(app, transportStop);
+			}
 			for (TransportIndexRepository t : reps) {
 				if (t.acceptTransportStop(transportStop)) {
 					ArrayList<TransportStop> transportStopsSameExit = new ArrayList<TransportStop>(transportStop.getLocalTransportStops());
@@ -166,7 +168,7 @@ public class TransportStopController extends MenuController {
 
 	private void addTransportStopRoutes(List<TransportStop> stops, List<TransportStopRoute> routes, boolean useEnglishNames, TransportIndexRepository t) {
 		for (TransportStop tstop : stops) {
-			if (!tstop.isDeleted()) {
+			if (!tstop.isDeleted() && tstop.hasReferencesToRoutes()) {
 				addRoutes(routes, useEnglishNames, t, tstop, transportStop, (int) MapUtils.getDistance(tstop.getLocation(), transportStop.getLocation()));
 			}
 		}
@@ -271,6 +273,19 @@ public class TransportStopController extends MenuController {
 			return nearbyStops.get(0);
 		}
 		return null;
+	}
+
+	public static void processTransportStopAggregated(OsmandApplication app, TransportStop transportStop) {
+		TransportStopAggregated stopAggregated = new TransportStopAggregated();
+		transportStop.setTransportStopAggregated(stopAggregated);
+		stopAggregated.addLocalTransportStop(transportStop);
+
+		LatLon loc = transportStop.getLocation();
+		List<TransportStop> transportStops = findTransportStopsAt(app, loc.getLatitude(), loc.getLongitude(), SHOW_STOPS_RADIUS_METERS);
+
+		for (TransportStop stop : transportStops) {
+			stopAggregated.addNearbyTransportStop(stop);
+		}
 	}
 
 	public static TransportStopAggregated processTransportStopsForAmenity(List<TransportStop> transportStops, Amenity amenity) {

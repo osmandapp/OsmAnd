@@ -83,7 +83,15 @@ public class OpeningHoursHoursDialogFragment extends DialogFragment {
 								}
 							}
 						})
-				.setNegativeButton(R.string.shared_string_cancel, null);
+				.setNegativeButton(R.string.shared_string_cancel, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						BasicEditPoiFragment editPoiFragment = ((BasicEditPoiFragment) getParentFragment());
+						if (editPoiFragment != null) {
+							editPoiFragment.removeUnsavedOpeningHours();
+						}
+					}
+				});
 
 		int paddingInDp = 18;
 		float density = getActivity().getResources().getDisplayMetrics().density;

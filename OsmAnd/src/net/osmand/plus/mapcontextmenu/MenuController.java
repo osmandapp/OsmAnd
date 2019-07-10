@@ -282,18 +282,6 @@ public abstract class MenuController extends BaseMenuController implements Colla
 			addAltitudeToPlainItems();
 			addPrecisionToPlainItems();
 		}
-		addMyLocationToPlainItems(latLon);
-	}
-
-	protected void addMyLocationToPlainItems(LatLon latlon) {
-		final MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			Map<Integer, String> locationData = PointDescription.getLocationData(mapActivity, latlon.getLatitude(), latlon.getLongitude(), true);
-			String title = locationData.get(PointDescription.LOCATION_LIST_HEADER);
-			locationData.remove(PointDescription.LOCATION_LIST_HEADER);
-			CollapsableView cv = builder.getLocationCollapsableView(locationData);
-			addPlainMenuItem(R.drawable.ic_action_get_my_location, title, false, false, true, cv, null);
-		}
 	}
 
 	protected void addSpeedToPlainItems() {

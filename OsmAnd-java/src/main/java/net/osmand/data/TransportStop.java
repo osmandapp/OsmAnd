@@ -32,6 +32,10 @@ public class TransportStop extends MapObject {
 		return referencesToRoutes != null && referencesToRoutes.length == 1 && referencesToRoutes[0] == DELETED_STOP;
 	}
 
+	public boolean hasReferencesToRoutes() {
+		return referencesToRoutes != null && referencesToRoutes.length > 0;
+	}
+
 	public void setDeleted() {
 		this.referencesToRoutes = new int[] { DELETED_STOP };
 	}

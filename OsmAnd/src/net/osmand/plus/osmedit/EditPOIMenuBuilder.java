@@ -71,12 +71,5 @@ public class EditPOIMenuBuilder extends MenuBuilder {
 				buildRow(view, R.drawable.ic_action_info_dark, null, text, 0, false, null, false, 0, false, null, false);
 			}
 		}
-
-		Map<Integer, String> locationData = PointDescription.getLocationData(mapActivity, osmPoint.getLatitude(), osmPoint.getLongitude(), true);
-		String title = locationData.get(PointDescription.LOCATION_LIST_HEADER);
-		locationData.remove(PointDescription.LOCATION_LIST_HEADER);
-		CollapsableView cv = getLocationCollapsableView(locationData);
-		buildRow(view, R.drawable.ic_action_get_my_location, null, title, 0, true, cv,
-			true, 1, false, null, false);
 	}
 }

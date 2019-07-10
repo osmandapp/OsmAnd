@@ -339,6 +339,14 @@ public class OsmandSettings {
 	public ApplicationMode getApplicationMode() {
 		return APPLICATION_MODE.get();
 	}
+	
+	public boolean hasAvailableApplicationMode() {
+		int currentModeCount = ApplicationMode.values(ctx).size();
+		if (currentModeCount == 0 || currentModeCount == 1 && getApplicationMode() == ApplicationMode.DEFAULT) {
+			return false;
+		}
+		return true;
+	}
 
 	protected ApplicationMode readApplicationMode() {
 		String s = settingsAPI.getString(globalPreferences, APPLICATION_MODE.getId(), ApplicationMode.DEFAULT.getStringKey());
@@ -2669,7 +2677,7 @@ public class OsmandSettings {
 
 	public final OsmandPreference<Boolean> USE_OSM_LIVE_FOR_ROUTING = new BooleanPreference("enable_osmc_routing", true).makeGlobal();
 
-	public final OsmandPreference<Boolean> USE_OSM_LIVE_FOR_PUBLIC_TRANSPORT = new BooleanPreference("enable_osmc_public_transport", true).makeGlobal();
+	public final OsmandPreference<Boolean> USE_OSM_LIVE_FOR_PUBLIC_TRANSPORT = new BooleanPreference("enable_osmc_public_transport", false).makeGlobal();
 
 	public final OsmandPreference<Boolean> VOICE_MUTE = new BooleanPreference("voice_mute", false).makeGlobal();
 

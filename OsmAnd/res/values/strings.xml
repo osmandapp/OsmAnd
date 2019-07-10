@@ -11,6 +11,16 @@
 	Thx - Hardy
 
 -->
+    <string name="turn_on_profile_desc">Please turn on at least one application profile, to use this setting.</string>
+    <string name="rendering_attr_winter_road_name">Winter road</string>
+    <string name="rendering_attr_ice_road_name">Ice road</string>
+    <string name="routeInfo_winter_ice_road_name">Winter and ice roads</string>
+    <string name="rendering_attr_tracktype_grade1_name">Solid (paved)</string>
+    <string name="rendering_attr_tracktype_grade2_name">Solid (unpaved)</string>
+    <string name="rendering_attr_tracktype_grade3_name">Mostly solid</string>
+    <string name="rendering_attr_tracktype_grade4_name">Mostly soft</string>
+    <string name="rendering_attr_tracktype_grade5_name">Soft</string>
+    <string name="routeInfo_tracktype_name">Surface firmness</string>
     <string name="rendering_attr_winter_road_name">Winter road</string>
     <string name="rendering_attr_ice_road_name">Ice road</string>
     <string name="routeInfo_winter_ice_road_name">Winter and ice roads</string>
