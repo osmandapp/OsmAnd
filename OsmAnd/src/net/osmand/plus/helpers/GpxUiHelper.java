@@ -1207,11 +1207,17 @@ public class GpxUiHelper {
 						}
 						hasSameY = false;
 					}
+					if (e.firstPoint) {
+						values.add(new Entry(nextX, 0));
+					}
 					prevElevOrig = e.elevation;
 					prevElev = elev;
 					nextY = elev * convEle;
 					lastEntry = new Entry(nextX, nextY);
 					values.add(lastEntry);
+					if (e.lastPoint) {
+						values.add(new Entry(nextX, 0));
+					}
 				}
 			}
 		}
@@ -1483,7 +1489,13 @@ public class GpxUiHelper {
 				if (nextY < 0 || Float.isInfinite(nextY)) {
 					nextY = 0;
 				}
+				if (s.firstPoint) {
+					values.add(new Entry(nextX, 0));
+				}
 				values.add(new Entry(nextX, nextY));
+				if (s.lastPoint) {
+					values.add(new Entry(nextX, 0));
+				}
 			}
 		}
 

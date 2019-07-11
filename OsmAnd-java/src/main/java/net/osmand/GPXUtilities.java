@@ -159,12 +159,16 @@ public class GPXUtilities {
 		public float distance;
 		public int time;
 		public float elevation;
+		public boolean firstPoint = false;
+		public boolean lastPoint = false;
 	}
 
 	public static class Speed {
 		public float distance;
 		public int time;
 		public float speed;
+		public boolean firstPoint = false;
+		public boolean lastPoint = false;
 	}
 
 	public static class WptPt extends GPXExtensions {
@@ -610,21 +614,15 @@ public class GPXUtilities {
 						// totalDistance += MapUtils.getDistance(prev.lat, prev.lon, point.lat, point.lon);
 						// using ellipsoidal 'distanceBetween' instead of spherical haversine (MapUtils.getDistance) is
 						// a little more exact, also seems slightly faster:
-						if (s.segment.generalSegment && point.firstPoint) {
-							calculations[0] = 0;
-							segmentDistance = 0;
-							timeDiff = (int) ((point.time - prev.time) / 1000);
-						} else {
-							net.osmand.Location.distanceBetween(prev.lat, prev.lon, point.lat, point.lon, calculations);
-							totalDistance += calculations[0];
-							segmentDistance += calculations[0];
-							point.distance = segmentDistance;
-							timeDiff = (int) ((point.time - prev.time) / 1000);
+						net.osmand.Location.distanceBetween(prev.lat, prev.lon, point.lat, point.lon, calculations);
+						totalDistance += calculations[0];
+						segmentDistance += calculations[0];
+						point.distance = segmentDistance;
+						timeDiff = (int) ((point.time - prev.time) / 1000);
 
-							//Last resort: Derive speed values from displacement if track does not originally contain speed
-							if (!hasSpeedInTrack && speed == 0 && timeDiff > 0) {
-								speed = calculations[0] / timeDiff;
-							}
+						//Last resort: Derive speed values from displacement if track does not originally contain speed
+						if (!hasSpeedInTrack && speed == 0 && timeDiff > 0) {
+							speed = calculations[0] / timeDiff;
 						}
 
 						// Motion detection:
@@ -663,6 +661,16 @@ public class GPXUtilities {
 					speedData.add(speed1);
 					if (!hasSpeedData && speed1.speed > 0 && totalDistance > 0) {
 						hasSpeedData = true;
+					}
+					if (s.segment.generalSegment) {
+						if (point.firstPoint && j > 0) {
+							elevation1.firstPoint = true;
+							speed1.firstPoint = true;
+						}
+						if (point.lastPoint && j < numberOfPoints - 1) {
+							elevation1.lastPoint = true;
+							speed1.lastPoint = true;
+						}
 					}
 				}
 			}
