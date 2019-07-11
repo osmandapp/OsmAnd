@@ -3100,4 +3100,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="shared_string_file_is_saved">Gain de %s</string>
     <string name="shared_string_open_track">Ouvrir la trace</string>
     <string name="shared_string_track_is_saved">Trace %s enregistrée</string>
+    <string name="default_speed_dialog_msg">Utilisé pour estimé l\'heure d\'arrivée pendant la navigation</string>
+    <string name="shared_string_crash">Oups</string>
+    <string name="last_launch_crashed">Le dernier lancement d\'OsmAnd à échoué. Merci de nous aider à améliorer OsmAnd en nous partageant le message d\'erreur.</string>
 </resources>
