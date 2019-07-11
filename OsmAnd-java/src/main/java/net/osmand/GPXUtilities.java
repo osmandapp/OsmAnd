@@ -611,6 +611,7 @@ public class GPXUtilities {
 						// using ellipsoidal 'distanceBetween' instead of spherical haversine (MapUtils.getDistance) is
 						// a little more exact, also seems slightly faster:
 						if (s.segment.generalSegment && point.firstPoint) {
+							calculations[0] = 0;
 							segmentDistance = 0;
 							timeDiff = (int) ((point.time - prev.time) / 1000);
 						} else {
