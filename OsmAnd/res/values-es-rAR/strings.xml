@@ -3053,9 +3053,9 @@ Lon %2$s</string>
     <string name="downloaded_maps">Mapas descargados</string>
     <string name="visited_screens">Pantallas visitadas</string>
     <string name="colleted_data">Datos recopilados</string>
-    <string name="collected_data_descr">Lista de datos a compartir con OsmAnd.</string>
-    <string name="downloaded_maps_collect_descr">Recopilamos estos datos para entender qué mapas de regiones y países son los más populares.</string>
-    <string name="visited_screens_collect_descr">Recopilamos estos datos para entender qué características de OsmAnd son las más populares.</string>
+    <string name="collected_data_descr">Define qué datos permite que OsmAnd comparta.</string>
+    <string name="downloaded_maps_collect_descr">Nos ayuda a entender qué mapas de regiones y países son los más populares.</string>
+    <string name="visited_screens_collect_descr">Nos ayuda a entender qué características de OsmAnd son las más populares.</string>
     <string name="privacy_and_security_change_descr">Al pulsar en «Permitir», se entiende que está de acuerdo con nuestra %1$s</string>
     <string name="settings_privacy_and_security">Privacidad y seguridad</string>
     <string name="settings_privacy_and_security_desc">Elegir los datos a compartir con nosotros</string>
@@ -3195,4 +3195,17 @@ Lon %2$s</string>
     <string name="sett_generic_ext_input">Teclado genérico</string>
     <string name="sett_wunderlinq_ext_input">WunderLINQ</string>
     <string name="sett_parrot_ext_input">Parrot</string>
+    <string name="turn_on_profile_desc">Activa al menos un perfil de aplicación para utilizar estos ajustes.</string>
+    <string name="rendering_attr_winter_road_name">Camino de invierno</string>
+    <string name="rendering_attr_ice_road_name">Camino de hielo</string>
+    <string name="routeInfo_winter_ice_road_name">Caminos de invierno y de hielo</string>
+    <string name="rendering_attr_tracktype_grade1_name">Sólido (pavimentado)</string>
+    <string name="rendering_attr_tracktype_grade2_name">Sólido (sin pavimentar)</string>
+    <string name="rendering_attr_tracktype_grade3_name">Mayormente sólido</string>
+    <string name="rendering_attr_tracktype_grade4_name">Mayormente suave</string>
+    <string name="rendering_attr_tracktype_grade5_name">Suave</string>
+    <string name="routeInfo_tracktype_name">Firmeza superficial</string>
+    <string name="shared_string_file_is_saved">Se ha guardado «%s»</string>
+    <string name="shared_string_open_track">Abrir traza</string>
+    <string name="shared_string_track_is_saved">Se ha guardado la traza «%s»</string>
 </resources>
