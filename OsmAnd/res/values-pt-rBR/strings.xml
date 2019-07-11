@@ -3180,4 +3180,6 @@ Pôr do Sol: %2$s</string>
     <string name="sett_generic_ext_input">Teclado genérico</string>
     <string name="sett_wunderlinq_ext_input">WunderLINQ</string>
     <string name="sett_parrot_ext_input">Parrot</string>
+    <string name="routeInfo_tracktype_name">Firmeza da superfície</string>
+    <string name="shared_string_file_is_saved">%s está salvo</string>
 </resources>
