@@ -3075,8 +3075,8 @@ représentant la zone : %1$s x %2$s</string>
     <string name="routing_attr_max_num_changes_name">Nombre de modifications</string>
     <string name="turn_screen_on_sensor">Utiliser le capteur de proximité</string>
     <string name="sett_no_ext_input">Aucun</string>
-    <string name="routing_attr_freeride_policy_description">Le freeride et le hors-piste sont des itinéraires non-officiels. Ils ne sont généralement pas damés ni maintenu par les autorités et ne sont pas contrôlés en fin de journée. Y pénétrer en assumant les risques.</string>
-    <string name="default_speed_setting_descr">Changer les réglages de vitesses par défaut</string>
+    <string name="routing_attr_freeride_policy_description">Le freeride et le hors-piste sont des itinéraires non-officiels. Ils ne sont généralement pas damés ni maintenus par les autorités et ne sont pas contrôlés en fin de journée. Entrez à vos risques et périls.</string>
+    <string name="default_speed_setting_descr">Modifiez les paramètres de vitesse par défaut</string>
     <string name="app_mode_ufo">OVNI</string>
     <string name="app_mode_personal_transporter">Gyropode</string>
     <string name="edit_profile_setup_title">Paramétres du profil</string>
@@ -3084,10 +3084,10 @@ représentant la zone : %1$s x %2$s</string>
     <string name="edit_profile_setup_map_subtitle">Sélectionnez les paramètres de carte par défaut pour ce profil</string>
     <string name="edit_profile_screen_options_subtitle">Sélectionnez les paramètres d\'affichage écran par défaut pour ce profil</string>
     <string name="edit_profile_nav_settings_subtitle">Sélectionnez les paramètres de navigation par défaut pour ce profil</string>
-    <string name="routing_attr_max_num_changes_description">Indiquer le nombre maximum de modifications</string>
+    <string name="routing_attr_max_num_changes_description">Indiquez le nombre maximum de modifications</string>
     <string name="turn_screen_on_router">Allumer pour les changements de direction</string>
     <string name="turn_screen_on_time_descr">Définir le temps pendant lequel l\'écran sera allumé.</string>
-    <string name="turn_screen_on_sensor_descr">Agiter la main en haut de l\'écran pour allumer l\'écran pendant la navigation.</string>
+    <string name="turn_screen_on_sensor_descr">Agitez la main en haut de l\'écran pour allumer l\'écran pendant la navigation.</string>
     <string name="rendering_attr_winter_road_name">Route sur neige</string>
     <string name="rendering_attr_ice_road_name">Route sur glace</string>
     <string name="routeInfo_winter_ice_road_name">Route sur neige et glace</string>
@@ -3100,7 +3100,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="shared_string_file_is_saved">Gain de %s</string>
     <string name="shared_string_open_track">Ouvrir la trace</string>
     <string name="shared_string_track_is_saved">Trace %s enregistrée</string>
-    <string name="default_speed_dialog_msg">Utilisé pour estimé l\'heure d\'arrivée pendant la navigation</string>
+    <string name="default_speed_dialog_msg">Utilisé pour estimer l\'heure d\'arrivée pendant la navigation</string>
     <string name="shared_string_crash">Oups</string>
-    <string name="last_launch_crashed">Le dernier lancement d\'OsmAnd à échoué. Merci de nous aider à améliorer OsmAnd en nous partageant le message d\'erreur.</string>
+    <string name="last_launch_crashed">Le dernier lancement d\'OsmAnd a échoué. Aidez-nous à améliorer OsmAnd en nous envoyant le message d\'erreur.</string>
 </resources>
