@@ -3038,9 +3038,9 @@ Pôr do Sol: %2$s</string>
     <string name="downloaded_maps">Mapas baixados</string>
     <string name="visited_screens">Telas visitadas</string>
     <string name="colleted_data">Dados coletados</string>
-    <string name="collected_data_descr">Lista de dados que você deseja compartilhar com OsmAnd.</string>
-    <string name="downloaded_maps_collect_descr">Coletamos esses dados para entender quais mapas de quais regiões e países são os mais populares.</string>
-    <string name="visited_screens_collect_descr">Coletamos esses dados para entender quais recursos do OsmAnd são os mais populares.</string>
+    <string name="collected_data_descr">Defina quais dados você permite que OsmAnd compartilhe.</string>
+    <string name="downloaded_maps_collect_descr">Isso nos ajuda a compreender quais mapas de quais regiões e países são os mais populares.</string>
+    <string name="visited_screens_collect_descr">Isso nos ajuda a entender quais recursos do OsmAnd são os mais populares.</string>
     <string name="privacy_and_security_change_descr">Ao tocar em \"Permitir\", você concorda com nossas %1$s</string>
     <string name="settings_privacy_and_security">Privacidade e segurança</string>
     <string name="settings_privacy_and_security_desc">Selecione quais dados você está compartilhando conosco</string>
@@ -3182,4 +3182,6 @@ Pôr do Sol: %2$s</string>
     <string name="sett_parrot_ext_input">Parrot</string>
     <string name="routeInfo_tracktype_name">Firmeza da superfície</string>
     <string name="shared_string_file_is_saved">%s está salvo</string>
+    <string name="shared_string_open_track">Abrir trilha</string>
+    <string name="shared_string_track_is_saved">A trilha %s está salva</string>
 </resources>
