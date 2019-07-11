@@ -3015,9 +3015,9 @@ représentant la zone : %1$s x %2$s</string>
     <string name="choose_data_to_share">Choisissez le type de données que vous souhaitez partager :</string>
     <string name="downloaded_maps">Cartes téléchargées</string>
     <string name="visited_screens">Écrans visités</string>
-    <string name="collected_data_descr">Liste des données que vous souhaitez partager avec OsmAnd.</string>
-    <string name="settings_privacy_and_security">Confidentialité et sécurité</string>
-    <string name="settings_privacy_and_security_desc">Choisissez vos données que vous souhaitez partager avec nous</string>
+    <string name="collected_data_descr">Définissez quelles données vous autorisez OsmAnd à partager.</string>
+    <string name="settings_privacy_and_security">Vie privée et Sécurité</string>
+    <string name="settings_privacy_and_security_desc">Sélectionnez les données que vous souhaitez partager avec nous</string>
     <string name="shared_string_no_thank_you">Non, merci</string>
     <string name="shared_string_allow">Autoriser</string>
     <string name="profile_name_hint">Nom du profil</string>
@@ -3079,14 +3079,14 @@ représentant la zone : %1$s x %2$s</string>
     <string name="default_speed_setting_descr">Modifiez les paramètres de vitesse par défaut</string>
     <string name="app_mode_ufo">OVNI</string>
     <string name="app_mode_personal_transporter">Gyropode</string>
-    <string name="edit_profile_setup_title">Paramétres du profil</string>
-    <string name="edit_profile_setup_subtitle">Le profile garde ses propres réglages</string>
+    <string name="edit_profile_setup_title">Paramétrez le profil</string>
+    <string name="edit_profile_setup_subtitle">Le profil conserve ses paramètres</string>
     <string name="edit_profile_setup_map_subtitle">Sélectionnez les paramètres de carte par défaut pour ce profil</string>
     <string name="edit_profile_screen_options_subtitle">Sélectionnez les paramètres d\'affichage écran par défaut pour ce profil</string>
     <string name="edit_profile_nav_settings_subtitle">Sélectionnez les paramètres de navigation par défaut pour ce profil</string>
     <string name="routing_attr_max_num_changes_description">Indiquez le nombre maximum de modifications</string>
-    <string name="turn_screen_on_router">Allumer pour les changements de direction</string>
-    <string name="turn_screen_on_time_descr">Définir le temps pendant lequel l\'écran sera allumé.</string>
+    <string name="turn_screen_on_router">Allumer lors des changements de direction</string>
+    <string name="turn_screen_on_time_descr">Définissez la durée pendant laquelle l\'écran restera allumé.</string>
     <string name="turn_screen_on_sensor_descr">Agitez la main en haut de l\'écran pour allumer l\'écran pendant la navigation.</string>
     <string name="rendering_attr_winter_road_name">Route sur neige</string>
     <string name="rendering_attr_ice_road_name">Route sur glace</string>
@@ -3103,4 +3103,8 @@ représentant la zone : %1$s x %2$s</string>
     <string name="default_speed_dialog_msg">Utilisé pour estimer l\'heure d\'arrivée pendant la navigation</string>
     <string name="shared_string_crash">Oups</string>
     <string name="last_launch_crashed">Le dernier lancement d\'OsmAnd a échoué. Aidez-nous à améliorer OsmAnd en nous envoyant le message d\'erreur.</string>
+    <string name="app_mode_shuttle_bus">Bus navette</string>
+    <string name="base_profile_descr_ski">Ski</string>
+    <string name="show_compass_ruler">Afficher la boussole</string>
+    <string name="hide_compass_ruler">Masquer la boussole</string>
 </resources>
