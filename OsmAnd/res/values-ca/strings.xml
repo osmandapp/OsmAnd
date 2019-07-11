@@ -3178,4 +3178,9 @@ Abasta l\'àrea: %1$s x %2$s</string>
 \n
 \n</string>
     <string name="app_mode_personal_transporter">Transport personal</string>
+    <string name="routing_attr_allow_classic_only_name">Restringeix a rutes clàssiques</string>
+    <string name="routing_attr_difficulty_preference_name">Dificultat preferida</string>
+    <string name="routing_attr_difficulty_preference_description">Preferència per les rutes amb aquesta dificultat, però si són més curtes també altres rutes més senzilles o més complicades.</string>
+    <string name="turn_screen_on_time_descr">Defineix el temps que la pantalla estarà engegada.</string>
+    <string name="turn_screen_on_sensor">Utilitza el sensor de proximitat</string>
 </resources>
