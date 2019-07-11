@@ -612,6 +612,7 @@ public class GPXUtilities {
 						// a little more exact, also seems slightly faster:
 						if (s.segment.generalSegment && point.firstPoint) {
 							segmentDistance = 0;
+							timeDiff = (int) ((point.time - prev.time) / 1000);
 						} else {
 							net.osmand.Location.distanceBetween(prev.lat, prev.lon, point.lat, point.lon, calculations);
 							totalDistance += calculations[0];
