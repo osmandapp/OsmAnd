@@ -561,14 +561,16 @@ public class AppInitializer implements IProgress {
 			protected Builder doInBackground(Void... voids) {
 				File routingFolder = app.getAppPath(IndexConstants.ROUTING_PROFILES_DIR);
 				RoutingConfiguration.Builder builder = RoutingConfiguration.getDefault();
-				if (routingFolder.isDirectory() && routingFolder.listFiles().length > 0) {
+				if (routingFolder.isDirectory()) {
 					File[] fl = routingFolder.listFiles();
-					for (File f : fl) {
-						if (f.isFile() && f.getName().endsWith(".xml") && f.canRead()) {
-							try {
-								RoutingConfiguration.parseFromInputStream(new FileInputStream(f), f.getName(), builder);
-							} catch (XmlPullParserException | IOException e) {
-								throw new IllegalStateException(e);
+					if (fl != null && fl.length > 0) {
+						for (File f : fl) {
+							if (f.isFile() && f.getName().endsWith(".xml") && f.canRead()) {
+								try {
+									RoutingConfiguration.parseFromInputStream(new FileInputStream(f), f.getName(), builder);
+								} catch (XmlPullParserException | IOException e) {
+									throw new IllegalStateException(e);
+								}
 							}
 						}
 					}
