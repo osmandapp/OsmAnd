@@ -1405,7 +1405,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="proxy_port_title">Port du mandataire (Proxy)</string>
     <string name="proxy_port_descr">Configurez le numéro de port de votre mandataire (Proxy). Par exemple : 8118</string>
     <string name="proxy_pref_descr">Indiquer un serveur proxy.</string>
-    <string name="settings_privacy">Confidentialité</string>
+    <string name="settings_privacy">Vie privée</string>
     <string name="rendering_attr_streetLighting_name">Éclairage public</string>
     <string name="enable_proxy_title">Activer le mandataire HTTP (Proxy)</string>
     <string name="version_settings_descr">Télécharger les versions en cours de développement.</string>
@@ -3107,11 +3107,11 @@ représentant la zone : %1$s x %2$s</string>
     <string name="base_profile_descr_ski">Ski</string>
     <string name="show_compass_ruler">Afficher la boussole</string>
     <string name="hide_compass_ruler">Masquer la boussole</string>
-    <string name="make_osmand_better_descr">Autoriser OsmAnd à collecter et analyser des données anonymes liées à l\'utilisation de l\'application. Nous ne stockées pas de données liées à votre position ou à tout endroit que vous consultez sur la carte.
+    <string name="make_osmand_better_descr">Autoriser OsmAnd à collecter et analyser des données anonymes d\'utilisation de l\'application. Nous ne collectons aucune donnée liée à votre position et aucun emplacement consulté sur la carte.
 \n
-\nVous pouvez changer d\'avis à tout moment dans Paramètres &gt; Confidentialité et sécurité.</string>
+\nVous pouvez changer d\'avis à tout moment dans Paramètres &gt; Vie privée et Sécurité.</string>
     <string name="downloaded_maps_collect_descr">Nous collectons ces données pour connaitre les pays et régions les plus populaires.</string>
-    <string name="privacy_and_security_change_descr">En sélectionnant \"Autoriser\" vous acceptez %1$s</string>
+    <string name="privacy_and_security_change_descr">En sélectionnant \"Autoriser\" vous acceptez nos %1$s.</string>
     <string name="settings_derived_routing_mode_string">Mode utilisateur, dérive de : %s</string>
     <string name="profile_alert_need_routing_type_msg">Merci de sélectionner un type de navigation pour le nouveau profil</string>
     <string name="turn_on_profile_desc">Merci d\'activer au moins un profil pour utiliser cette option.</string>
