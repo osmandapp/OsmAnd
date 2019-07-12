@@ -1654,7 +1654,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="routing_attr_avoid_shuttle_train_description">Éviter les trains-navettes</string>
     <string name="shared_string_card_was_hidden">La carte a été masquée</string>
     <string name="routing_attr_avoid_shuttle_train_name">Éviter les trains-navettes</string>
-    <string name="av_locations_descr">Fichier GPX avec notes d\'emplacements.</string>
+    <string name="av_locations_descr">Fichier GPX avec positions.</string>
     <string name="simulate_your_location_stop_descr">Arrêter de simuler votre position.</string>
     <string name="simulate_your_location_descr">Simulez votre position à partir d\'un fichier GPX ou d\'une route calculée.</string>
     <string name="are_you_sure">Etes-vous certain ?</string>
@@ -2382,7 +2382,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="mapillary_menu_title_dates">Date</string>
     <string name="mapillary_menu_edit_text_hint">Saisissez le nom d\'utilisateur</string>
     <string name="mapillary_menu_title_username">Nom d\'utilisateur</string>
-    <string name="shared_string_reload">Recharger</string>
+    <string name="shared_string_reload">Actualiser</string>
     <string name="mapillary_menu_descr_tile_cache">Recharger les tuiles afin d\'afficher des données à jour.</string>
     <string name="mapillary_menu_title_tile_cache">Cache des tuiles</string>
     <string name="mapillary_menu_descr_dates">Afficher uniquement les images ajoutées</string>
@@ -3002,7 +3002,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="files_present">%1$d fichiers (%2$s) sont présents à l\'emplacement précédent \'%3$s\'.</string>
     <string name="move_maps">Déplacer les cartes</string>
     <string name="dont_move_maps">Ne pas déplacer</string>
-    <string name="public_transport_ped_route_title">L\'itinéraire piéton est approximativement de %1$s et peut-être plus rapide qu\'en transport public.</string>
+    <string name="public_transport_ped_route_title">L\'itinéraire piéton est approximativement de %1$s et peut-être plus rapide qu\'en transport public</string>
     <string name="public_transport_no_route_title">Malheureusement OsmAnd n\'a pas trouvé d\'itinéraire avec les paramètres courants.</string>
     <string name="public_transport_try_ped">Essayez l\'itinéraire piéton.</string>
     <string name="public_transport_try_change_settings">Essayez de modifier les paramètres.</string>
@@ -3026,7 +3026,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="app_mode_subway">Métro</string>
     <string name="app_mode_horse">À cheval</string>
     <string name="app_mode_helicopter">Hélicoptère</string>
-    <string name="osmand_routing_promo">Vous pouvez ajouter votre propre version modifiée de routing.xml à ..osmand/routing</string>
+    <string name="osmand_routing_promo">"Vous pouvez ajouter votre propre version du fichier routing.xml dans  ..osmand/routing"</string>
     <string name="app_mode_skiing">Ski</string>
     <string name="settings_routing_mode_string">Mode : %s</string>
     <string name="routing_profile_ski">Ski</string>
@@ -3045,7 +3045,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="collected_data">Données collectées</string>
     <string name="rate_dialog_descr">Merci de nous consacrer 30 secondes en ajoutant un commentaire et en évaluant notre travail sur Google Play.</string>
     <string name="button_rate">Évaluer</string>
-    <string name="visited_screens_collect_descr">Nous collectons ces données pour analyser les fonctions d\'OsmAnd les plus utilisées.</string>
+    <string name="visited_screens_collect_descr">Aidez-nous à analyser quelles sont les fonctions d\'OsmAnd les plus utilisées.</string>
     <string name="select_icon_profile_dialog_title">Sélectionnez une icône</string>
     <string name="profile_alert_need_profile_name_msg">Le nom du profil ne peut pas être vide !</string>
     <string name="profile_alert_duplicate_name_title">Nom déjà existant</string>
