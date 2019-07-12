@@ -150,31 +150,10 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 		List<ProfileDataObject> profiles = new ArrayList<>();
 		for (ApplicationMode mode : ApplicationMode.getDefaultValues()) {
 			if (mode != ApplicationMode.DEFAULT) {
-				profiles.add(new ProfileDataObject( mode.toHumanString(ctx),
-					ctx.getString(BaseProfilesDescr.valueOf(mode.getStringKey().toUpperCase()).getDescrRes()),
+				profiles.add(new ProfileDataObject(mode.toHumanString(ctx), mode.getDescription(ctx),
 					mode.getStringKey(), mode.getIconRes(), false, mode.getIconColorInfo()));
 			}
 		}
 		return profiles;
-	}
-
-	public enum BaseProfilesDescr {
-		CAR(R.string.base_profile_descr_car),
-		BICYCLE(R.string.base_profile_descr_bicycle),
-		PEDESTRIAN(R.string.base_profile_descr_pedestrian),
-		PUBLIC_TRANSPORT(R.string.base_profile_descr_public_transport),
-		BOAT(R.string.base_profile_descr_boat),
-		AIRCRAFT(R.string.base_profile_descr_aircraft),
-		SKI(R.string.base_profile_descr_ski);
-
-		private int descrRes;
-
-		BaseProfilesDescr(int descrRes) {
-			this.descrRes = descrRes;
-		}
-
-		public int getDescrRes() {
-			return descrRes;
-		}
 	}
 }
