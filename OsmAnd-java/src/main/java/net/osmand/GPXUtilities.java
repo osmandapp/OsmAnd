@@ -1965,14 +1965,17 @@ public class GPXUtilities {
 						Object pop = parserState.pop();
 						assert pop instanceof Metadata;
 					} else if (tag.equals("author")) {
-						Object pop = parserState.pop();
-						assert pop instanceof Author;
+						if (parse instanceof Author) {
+							parserState.pop();
+						}
 					} else if (tag.equals("copyright")) {
-						Object pop = parserState.pop();
-						assert pop instanceof Copyright;
+						if (parse instanceof Copyright) {
+							parserState.pop();
+						}
 					} else if (tag.equals("bounds")) {
-						Object pop = parserState.pop();
-						assert pop instanceof Bounds;
+						if (parse instanceof Bounds) {
+							parserState.pop();
+						}
 					} else if (tag.equals("trkpt")) {
 						Object pop = parserState.pop();
 						assert pop instanceof WptPt;
@@ -2038,6 +2041,7 @@ public class GPXUtilities {
 			wpt.lat = Double.parseDouble(parser.getAttributeValue("", "lat")); //$NON-NLS-1$ //$NON-NLS-2$
 			wpt.lon = Double.parseDouble(parser.getAttributeValue("", "lon")); //$NON-NLS-1$ //$NON-NLS-2$
 		} catch (NumberFormatException e) {
+			// ignore
 		}
 		return wpt;
 	}
@@ -2050,6 +2054,7 @@ public class GPXUtilities {
 			bounds.maxlat = Double.parseDouble(parser.getAttributeValue("", "maxlat"));
 			bounds.maxlon = Double.parseDouble(parser.getAttributeValue("", "maxlon"));
 		} catch (NumberFormatException e) {
+			// ignore
 		}
 		return bounds;
 	}
