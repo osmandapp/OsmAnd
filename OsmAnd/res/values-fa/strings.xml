@@ -3181,7 +3181,7 @@
     <string name="settings_derived_routing_mode_string">حالت کاربر، بر پایهٔ: %s</string>
     <string name="profile_type_descr_string">نوع: %s</string>
     <string name="base_profile_descr_bicycle">MTB، موتور گازی، اسب</string>
-    <string name="base_profile_descr_public_transport">همهٔ وسایل نقلیهٔ فردی (رانک‌ها)</string>
+    <string name="base_profile_descr_public_transport">همهٔ انواع رانَک‌ها (وسایل نقلیهٔ فردی)</string>
     <string name="base_profile_descr_boat">کشتی، روئینگ، بادبانی‌رانی</string>
     <string name="application_profiles_descr">پروفایل‌ها را انتخاب کنید تا در برنامه فعال شوند.</string>
     <string name="application_profiles">پروفایل‌های برنامه</string>
