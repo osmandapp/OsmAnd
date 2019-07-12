@@ -1795,11 +1795,13 @@ public class GPXUtilities {
 							}
 							if (tag.equals("author")) {
 								Author author = new Author();
+								author.name = parser.getText();
 								((Metadata) parse).author = author;
 								parserState.push(author);
 							}
 							if (tag.equals("copyright")) {
 								Copyright copyright = new Copyright();
+								copyright.license = parser.getText();
 								copyright.author = parser.getAttributeValue("", "author");
 								((Metadata) parse).copyright = copyright;
 								parserState.push(copyright);
