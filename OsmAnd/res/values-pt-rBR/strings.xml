@@ -3184,4 +3184,13 @@ Pôr do Sol: %2$s</string>
     <string name="shared_string_file_is_saved">%s está salvo</string>
     <string name="shared_string_open_track">Abrir trilha</string>
     <string name="shared_string_track_is_saved">A trilha %s está salva</string>
+    <string name="turn_on_profile_desc">Por favor, ligue pelo menos um perfil de aplicação, para usar esta configuração.</string>
+    <string name="rendering_attr_winter_road_name">Estrada de inverno</string>
+    <string name="rendering_attr_ice_road_name">Estrada de gelo</string>
+    <string name="routeInfo_winter_ice_road_name">Estradas de inverno e gelo</string>
+    <string name="rendering_attr_tracktype_grade1_name">Sólido (pavimentado)</string>
+    <string name="rendering_attr_tracktype_grade2_name">Sólido (não pavimentado)</string>
+    <string name="rendering_attr_tracktype_grade3_name">Principalmente sólido</string>
+    <string name="rendering_attr_tracktype_grade4_name">Principalmente macio</string>
+    <string name="rendering_attr_tracktype_grade5_name">Suave</string>
 </resources>
