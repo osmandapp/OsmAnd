@@ -676,9 +676,9 @@
     <string name="use_fluorescent_overlays_descr">Utiliser des couleurs fluorescentes pour les traces et routes.</string>
     <string name="shared_string_name">Nom</string>
     <string name="favourites_edit_dialog_category">Catégorie</string>
-    <string name="navigate_point_format_D">DDD.DDDDD</string>
-    <string name="navigate_point_format_DM">DDD:MM.MMMMM</string>
-    <string name="navigate_point_format_DMS">DDD:MM:SS.SSSSS</string>
+    <string name="navigate_point_format_D">DDD.DD</string>
+    <string name="navigate_point_format_DM">DDD MM.MM</string>
+    <string name="navigate_point_format_DMS">DDD MM SS.SS</string>
     <string name="local_index_routing_data">Données de navigation</string>
     <string name="navigate_point_format">Format</string>
     <string name="poi_search_desc">Recherche par point d\'intérêt</string>
@@ -1851,7 +1851,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="add_time_span">Ajouter un laps de temps</string>
     <string name="data_is_not_available">Donnée indisponible</string>
     <string name="rendering_attr_hideUnderground_name">Objets souterrains</string>
-    <string name="shared_string_read_more">Lire la suite</string>
+    <string name="shared_string_read_more">En savoir plus</string>
     <string name="shared_string_email_address">Adresse email</string>
     <string name="shared_string_status">Statut</string>
     <string name="shared_string_save_changes">Enregistrer les modifications</string>
@@ -2309,7 +2309,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="favorite_group_name">Nom du groupe</string>
     <string name="change_color">Modifier la couleur</string>
     <string name="edit_name">Modifier le nom</string>
-    <string name="save_poi_too_many_uppercase">Le nom contient beaucoup de majuscules. Souhaitez-vous continuer ?</string>
+    <string name="save_poi_too_many_uppercase">Le nom contient beaucoup de lettres majuscules. Voulez-vous continuer \?</string>
     <string name="routing_attr_allow_private_name">Autoriser les accès privés</string>
     <string name="routing_attr_allow_private_description">Autoriser l\'accès aux zones privées.</string>
     <string name="display_zoom_level">Niveau de zoom de l\'affichage : %1$s</string>
@@ -2824,7 +2824,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="rendering_value_black_name">Noir</string>
     <string name="more_transport_on_stop_hint">Il y a d\'autres moyens de transport à cet arrêt.</string>
     <string name="search_street">Rechercher une rue</string>
-    <string name="start_search_from_city">Tapez un nom de ville</string>
+    <string name="start_search_from_city">Recherche par ville</string>
     <string name="shared_string_restore">Restaurer</string>
     <string name="keep_passed_markers_descr">Les marques visitées resteront affichées sur la carte, que les marques appartiennent à un groupe de favoris ou qu\'il s\'agisse de points de passage GPX. Ces marques ne disparaîtront que lorsque le groupe ou la trace sera désactivé.</string>
     <string name="keep_passed_markers">Afficher sur la carte les marques visitées</string>
@@ -3044,7 +3044,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="shared_string_icon">icône</string>
     <string name="collected_data">Données collectées</string>
     <string name="rate_dialog_descr">Merci de nous consacrer 30 secondes en ajoutant un commentaire et en évaluant notre travail sur Google Play.</string>
-    <string name="button_rate">Évaluer</string>
+    <string name="button_rate">Noter</string>
     <string name="visited_screens_collect_descr">Aidez-nous à analyser quelles sont les fonctions d\'OsmAnd les plus utilisées.</string>
     <string name="select_icon_profile_dialog_title">Sélectionnez une icône</string>
     <string name="profile_alert_need_profile_name_msg">Le nom du profil ne peut pas être vide !</string>
@@ -3071,7 +3071,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="app_mode_scooter">Scooter</string>
     <string name="precision_hdop_and_vdop">Précision, horizontale : %1$s, verticale : %2$s</string>
     <string name="precision_hdop">Précision horizontale : %s</string>
-    <string name="app_mode_offroad">Tout terrain</string>
+    <string name="app_mode_offroad">Hors route</string>
     <string name="routing_attr_max_num_changes_name">Nombre de modifications</string>
     <string name="turn_screen_on_sensor">Utiliser le capteur de proximité</string>
     <string name="sett_no_ext_input">Aucun</string>
@@ -3115,4 +3115,63 @@ représentant la zone : %1$s x %2$s</string>
     <string name="settings_derived_routing_mode_string">Mode utilisateur, dérive de : %s</string>
     <string name="profile_alert_need_routing_type_msg">Merci de sélectionner un type de navigation pour le nouveau profil</string>
     <string name="turn_on_profile_desc">Merci d\'activer au moins un profil pour utiliser cette option.</string>
+    <string name="base_profile_descr_car">Voiture, camion, moto</string>
+    <string name="base_profile_descr_bicycle">VTT, vélomoteur, cheval</string>
+    <string name="base_profile_descr_pedestrian">Marche, randonnée, course à pied</string>
+    <string name="base_profile_descr_public_transport">Tous les transports publics</string>
+    <string name="base_profile_descr_boat">Bateau, aviron, voile</string>
+    <string name="base_profile_descr_aircraft">Avion, parapente</string>
+    <string name="routing_profile_broutrer">BRouter (hors-ligne)</string>
+    <string name="custom_routing">Profil de calcul d\'itinéraire personnalisé</string>
+    <string name="special_routing_type">Calcul d\'itinéraire spécial</string>
+    <string name="third_party_routing_type">Calcul d\'itinéraire tiers</string>
+    <string name="application_profiles_descr">Sélectionnez les profils affichés dans l\'application.</string>
+    <string name="application_profiles">Profils de l\'application</string>
+    <string name="quick_action_need_to_add_item_to_list">Vous devez définir au moins une action pour la barre d\'Actions rapides</string>
+    <string name="routing_attr_piste_type_downhill_name">Ski alpin / ski de descente</string>
+    <string name="routing_attr_piste_type_downhill_description">Pistes de ski et accès aux remontées mécaniques.</string>
+    <string name="routing_attr_piste_type_nordic_name">Ski de randonnée et ski nordique</string>
+    <string name="routing_attr_piste_type_nordic_description">Pistes de ski de fond ou de ski de randonnée.</string>
+    <string name="routing_attr_piste_type_skitour_name">Ski de randonnée</string>
+    <string name="routing_attr_piste_type_sled_name">Traîneau</string>
+    <string name="routing_attr_piste_type_sled_description">Pistes pour chiens de traîneau.</string>
+    <string name="routing_attr_allow_intermediate_name">Autoriser les itinéraires intermédiaires</string>
+    <string name="routing_attr_allow_intermediate_description">Itinéraires plus difficiles avec des sections pentues et souvent des obstacles à contourner.</string>
+    <string name="routing_attr_allow_skating_only_name">Autoriser uniquement les itinéraires skating</string>
+    <string name="routing_attr_allow_skating_only_description">Pistes damées avec traces ou sans traces.</string>
+    <string name="routing_attr_allow_classic_only_name">Autoriser uniquement les routes classiques</string>
+    <string name="routing_attr_allow_classic_only_description">Pistes de ski de fond (inclus les pistes tracées par le passage des skieurs).</string>
+    <string name="routing_attr_difficulty_preference_name">Difficulté préférée</string>
+    <string name="routing_attr_difficulty_preference_description">Privilégier les itinéraires avec ce niveau de difficulté (un itinéraire plus difficile ou pus facile est toujours possible s\'il est plus court).</string>
+    <string name="release_3_4">• Application profiles: create a custom profile for your own needs, with a custom icon and color
+\n
+\n • Now customize any profile\'s default and min/max speeds
+\n
+\n • Added a widget for the current coordinates
+\n
+\n • Added options to show the compass and a radius ruler on the map
+\n
+\n • Fix background track logging
+\n
+\n • Improved background map downloads
+\n
+\n • Returned \'Turn Screen On\' option
+\n
+\n • Fixed Wikipedia language selection
+\n
+\n • Fixed compass button behavior during navigation
+\n
+\n • Other bug fixes
+\n
+\n</string>
+    <string name="rendering_attr_highway_class_track_grade1_name">Niveau 1</string>
+    <string name="rendering_attr_highway_class_track_grade2_name">Niveau 2</string>
+    <string name="rendering_attr_highway_class_track_grade3_name">Niveau 3</string>
+    <string name="rendering_attr_highway_class_track_grade4_name">Niveau 4</string>
+    <string name="rendering_attr_highway_class_track_grade5_name">Niveau 5</string>
+    <string name="external_input_device">Périphériques externes d\'entrée</string>
+    <string name="external_input_device_descr">"Sélectionnez un périphérique externe comme un clavier générique ou  un WunderLINQ pour utiliser l\'application."</string>
+    <string name="sett_generic_ext_input">Clavier générique</string>
+    <string name="sett_wunderlinq_ext_input">WunderLINQ</string>
+    <string name="sett_parrot_ext_input">Parrot</string>
 </resources>
