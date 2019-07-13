@@ -2,17 +2,20 @@ package net.osmand.plus.views;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.os.AsyncTask;
 
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.GPXUtilities.WptPt;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 
 public class Renderable {
+
+    private static final Executor THREAD_POOL_EXECUTOR = Executors.newFixedThreadPool(5);
 
     public static abstract class RenderableSegment {
 
@@ -139,7 +142,7 @@ public class Renderable {
 
                 double cullDistance = Math.pow(2.0, segmentSize - zoom);    // segmentSize == epsilon
                 culler = new AsynchronousResampler.RamerDouglasPeucer(this, cullDistance);
-                culler.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, "");
+                culler.executeOnExecutor(THREAD_POOL_EXECUTOR, "");
             }
         }
 
