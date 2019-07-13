@@ -3035,4 +3035,22 @@
     <string name="public_transport_type">סוג תחבורה</string>
     <string name="searching_gps">בחיפוש אחר GPS</string>
     <string name="coordinates_widget">וידג׳ט נקודות ציון</string>
+    <string name="external_input_device">התקני קלט חיצוניים</string>
+    <string name="external_input_device_descr">נא לבחור התקן בתור מקלדת גנרית או WunderLINQ כפקדים חיצוניים.</string>
+    <string name="sett_no_ext_input">ללא</string>
+    <string name="sett_generic_ext_input">מקלדת גנרית</string>
+    <string name="sett_wunderlinq_ext_input">WunderLINQ</string>
+    <string name="sett_parrot_ext_input">Parrot</string>
+    <string name="turn_on_profile_desc">נא להפעיל לפחות פרופיל יישומון אחד כדי להשתמש בהגדרה הזו.</string>
+    <string name="rendering_attr_winter_road_name">כביש חורפי</string>
+    <string name="rendering_attr_ice_road_name">כביש קרח</string>
+    <string name="routeInfo_winter_ice_road_name">כבישי חורף וקרח</string>
+    <string name="rendering_attr_tracktype_grade1_name">אחיד (סלול)</string>
+    <string name="rendering_attr_tracktype_grade2_name">אחיד (לא סלול)</string>
+    <string name="rendering_attr_tracktype_grade3_name">בעיקר אחיד</string>
+    <string name="rendering_attr_tracktype_grade4_name">בעיקר רך</string>
+    <string name="rendering_attr_tracktype_grade5_name">רך</string>
+    <string name="routeInfo_tracktype_name">קשיחות המשטח</string>
+    <string name="shared_string_file_is_saved">%s נשמר</string>
+    <string name="shared_string_open_track">מסלול פתוח</string>
 </resources>
