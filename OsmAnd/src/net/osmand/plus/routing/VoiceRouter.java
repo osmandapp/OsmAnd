@@ -901,7 +901,7 @@ public class VoiceRouter {
 				} else if (type == ROUTE_RECALCULATED) {
 					newCommand.routeRecalculated(left, time);
 				}
-				VoiceRouter.play(newCommand);
+				VoiceRouter.this.play(newCommand);
 			}
 		}
 	}
