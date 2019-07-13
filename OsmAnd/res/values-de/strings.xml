@@ -3060,7 +3060,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="choose_data_to_share">Wählen Sie, welche Art Daten Sie freigeben möchten:</string>
     <string name="downloaded_maps">Heruntergeladene Karten</string>
     <string name="visited_screens">Besuchte Bildschirme</string>
-    <string name="collected_data_descr">Liste der Daten, die Sie mit OsmAnd teilen möchten.</string>
+    <string name="collected_data_descr">Definieren Sie welche Daten Sie OsmAnd erlauben zu teilen.</string>
     <string name="downloaded_maps_collect_descr">Helfen Sie uns herauszufinden, welche Karten welcher Regionen und Länder die beliebtesten sind.</string>
     <string name="visited_screens_collect_descr">Helfen Sie un, zu verstehen, welche Funktionen von OsmAnd die beliebtesten sind.</string>
     <string name="privacy_and_security_change_descr">Durch das Antippen von \"Genehmigen\" willigen Sie in unsere %1$s ein</string>
