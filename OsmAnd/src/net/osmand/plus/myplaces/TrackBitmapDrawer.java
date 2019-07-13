@@ -30,7 +30,6 @@ import net.osmand.plus.views.Renderable;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.RejectedExecutionException;
 
 public class TrackBitmapDrawer {
 
@@ -226,34 +225,30 @@ public class TrackBitmapDrawer {
 	}
 
 	private void drawTrack(Canvas canvas, RotatedTileBox tileBox, GpxSelectionHelper.SelectedGpxFile g) {
-		try {
-			GpxDataItem gpxDataItem = null;
-			if (!g.isShowCurrentTrack()) {
-				gpxDataItem = getGpxDataItem();
+		GpxDataItem gpxDataItem = null;
+		if (!g.isShowCurrentTrack()) {
+			gpxDataItem = getGpxDataItem();
+		}
+		List<TrkSegment> segments = g.getPointsToDisplay();
+		for (TrkSegment ts : segments) {
+			int color = gpxDataItem != null ? gpxDataItem.getColor() : 0;
+			if (g.isShowCurrentTrack()) {
+				color = currentTrackColor;
 			}
-			List<TrkSegment> segments = g.getPointsToDisplay();
-			for (TrkSegment ts : segments) {
-				int color = gpxDataItem != null ? gpxDataItem.getColor() : 0;
+			if (color == 0) {
+				color = ts.getColor(trackColor);
+			}
+			if (ts.renderer == null && !ts.points.isEmpty()) {
 				if (g.isShowCurrentTrack()) {
-					color = currentTrackColor;
-				}
-				if (color == 0) {
-					color = ts.getColor(trackColor);
-				}
-				if (ts.renderer == null && !ts.points.isEmpty()) {
-					if (g.isShowCurrentTrack()) {
-						ts.renderer = new Renderable.CurrentTrack(ts.points);
-					} else {
-						ts.renderer = new Renderable.StandardTrack(ts.points, 17.2);
-					}
-				}
-				paint.setColor(color == 0 ? trackColor : color);
-				if (ts.renderer instanceof Renderable.RenderableSegment) {
-					((Renderable.RenderableSegment) ts.renderer).drawSegment(tileBox.getZoom(), paint, canvas, tileBox);
+					ts.renderer = new Renderable.CurrentTrack(ts.points);
+				} else {
+					ts.renderer = new Renderable.StandardTrack(ts.points, 17.2);
 				}
 			}
-		} catch (RejectedExecutionException e) {
-			// ignore
+			paint.setColor(color == 0 ? trackColor : color);
+			if (ts.renderer instanceof Renderable.RenderableSegment) {
+				((Renderable.RenderableSegment) ts.renderer).drawSegment(tileBox.getZoom(), paint, canvas, tileBox);
+			}
 		}
 	}
 
