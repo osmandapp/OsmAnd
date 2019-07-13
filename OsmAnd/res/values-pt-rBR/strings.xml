@@ -3173,7 +3173,7 @@ Pôr do Sol: %2$s</string>
     <string name="turn_screen_on_router">Despertar ao girar</string>
     <string name="turn_screen_on_time_descr">Defina a hora em que a tela será ativada.</string>
     <string name="turn_screen_on_sensor">Usar sensor de proximidade</string>
-    <string name="turn_screen_on_sensor_descr">Agite sua mão sobre a parte superior da tela para ligar a tela enquanto navega.</string>
+    <string name="turn_screen_on_sensor_descr">Agite sua mão sobre a parte superior da tela para ligá-la enquanto navega.</string>
     <string name="external_input_device">Dispositivos de entrada externos</string>
     <string name="external_input_device_descr">Selecione um dispositivo, como um teclado genérico ou WunderLINQ para controles externos.</string>
     <string name="sett_no_ext_input">Nenhum</string>
