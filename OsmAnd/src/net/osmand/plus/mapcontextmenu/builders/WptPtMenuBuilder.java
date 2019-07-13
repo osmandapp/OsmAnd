@@ -26,10 +26,19 @@ import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class WptPtMenuBuilder extends MenuBuilder {
+	//todo extract
+	final String KEY_PHONE = "Phone: ";
+	final String KEY_EMAIL = "Email: ";
+	final String PHONE_REGEX = "(\\(?\\+?[0-9]*\\)?)?[0-9_\\- \\(\\)]*";
+	final String EMAIL_REGEX = "([0-9a-zA-Z]([-.\\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\\w]*[0-9a-zA-Z]\\.)+[a-zA-Z]{2,9})";
+
 
 	private final WptPt wpt;
 
@@ -72,15 +81,45 @@ public class WptPtMenuBuilder extends MenuBuilder {
 					null, Algorithms.capitalizeFirstLetterAndLowercase(app.getString(R.string.plugin_distance_point_hdop)) + ": " + (int)wpt.hdop, 0,
 					false, null, false, 0, false, null, false);
 		}
-		if (!Algorithms.isEmpty(wpt.desc)) {
-			final View row = buildRow(view, R.drawable.ic_action_note_dark, null, wpt.desc, 0, false, null, true, 10, false, null, false);
+		
+		String phoneToken = getDescriptionToken(wpt.desc, KEY_PHONE, PHONE_REGEX);
+		String emailToken = getDescriptionToken(wpt.desc, KEY_EMAIL, EMAIL_REGEX);
+		
+		final ArrayList<String> phones = findAllElementsInLine(phoneToken, PHONE_REGEX);
+		final ArrayList<String> emails = findAllElementsInLine(emailToken, EMAIL_REGEX);
+		
+		final String desc = deleteAllElementsOccurrence(wpt.desc, phoneToken, emailToken);
+		if (!Algorithms.isEmpty(desc)) {
+			final View row = buildRow(view, R.drawable.ic_action_note_dark, null, desc, 0, false, null, true, 10, false, null, false);
+			//todo maybe delete
 			row.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					POIMapLayer.showDescriptionDialog(row.getContext(), app, wpt.desc,
+					POIMapLayer.showDescriptionDialog(row.getContext(), app, desc,
 							row.getResources().getString(R.string.shared_string_description));
 				}
 			});
+		}
+		if (phones != null) {
+			String phonesCommaLine = prepareCommaLine(phones);
+			if (!Algorithms.isEmpty(phonesCommaLine)) {
+				buildRow(view, R.drawable.ic_action_call_dark,
+						null, phonesCommaLine, 0,
+						false, null, false, 0, false, true, false, null, false);
+			}
+		}
+		if (!Algorithms.isEmpty(wpt.link)) {
+			buildRow(view, R.drawable.ic_world_globe_dark,
+					null, wpt.link, 0,
+					false, null, false, 0, true, null, false);
+		}
+		if (emails != null) {
+			String emailsCommaLine = prepareCommaLine(emails);
+			if (!Algorithms.isEmpty(emailsCommaLine)) {
+				buildRow(view, R.drawable.ic_action_message,
+						null, emailsCommaLine, 0,
+						false, null, false, 0, false, false, true, null, false);
+			}
 		}
 		if (!Algorithms.isEmpty(wpt.comment)) {
 			final View rowc = buildRow(view, R.drawable.ic_action_note_dark, null, wpt.comment, 0,
@@ -95,6 +134,95 @@ public class WptPtMenuBuilder extends MenuBuilder {
 		}
 
 		buildPlainMenuItems(view);
+	}
+	
+	//todo extract somewhere / improve algorithm
+	private String getDescriptionToken(String text, String key, String ... allowedElementsRegEx) {
+		final String END_TOKEN_REGEX = "( +)?[.,]";
+		final String SPACE_REGEX = "\\s+";
+		
+		if (!Algorithms.isEmpty(text)) {
+			int startId, endId;
+			if (!Algorithms.isEmpty(key) && text.contains(key)) {
+				startId = text.indexOf(key);
+				endId = 0;
+
+				int finalIndex = text.indexOf(':', startId + key.length());
+				if (finalIndex > 0) {
+					text = text.substring(0, finalIndex);
+				}
+				
+				for (String regEx : allowedElementsRegEx) {
+					ArrayList<String> items = findAllElementsInLine(text, regEx);
+					for (String item : items) {
+						int currentEnd = text.indexOf(item) + item.length();
+						if (endId < currentEnd) {
+							endId = currentEnd;
+						}
+					}
+					
+					String endedText = text.substring(endId);
+					
+					if (endedText.startsWith(SPACE_REGEX)) {
+						endId += findAllElementsInLine(endedText, SPACE_REGEX).get(0).length();
+					}
+				}
+				
+				return text.substring(startId, endId);
+			}
+		}
+		return null;
+	}
+	
+	//todo extract somewhere, maybe to Algorithms
+	private ArrayList<String> findAllElementsInLine(String text, String ... regExArgs) {
+		ArrayList<String> foundItems = new ArrayList<>();
+		if (!Algorithms.isEmpty(text)) {
+			for (String regEx : regExArgs) {
+				Pattern p = Pattern.compile(regEx);
+				Matcher m = p.matcher(text);
+				while (m.find()) {
+					String item = m.group().trim();
+					if (!Algorithms.isEmpty(item)) {
+						foundItems.add(item);
+					}
+				}
+			}
+			return foundItems;
+		}
+		return null;
+	}
+	
+	//todo extract somewhere, maybe to Algorithms / improve algorithm
+	private String deleteAllElementsOccurrence(String text, String ... args) {
+		if (text != null) {
+			for (String s : args) {
+				if (s != null) {
+					text = text.replace(s, "");
+				}
+			}
+			while (text.startsWith(".") && text.length() > 1) {
+				text = text.substring(1);
+				text = text.trim();
+			}
+			text = text.trim();
+		}
+		return text;
+	}
+	
+	//todo extract somewhere, maybe to Algorithms
+	private String prepareCommaLine(List<String> items) {
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < items.size(); i++) {
+			String item = items.get(i);
+			if (!Algorithms.isEmpty(item)) {
+				sb.append(item);
+				if (i < items.size() - 1) {
+					sb.append(", ");
+				}
+			}
+		}
+		return sb.toString();
 	}
 
 	private void buildWaypointsView(View view) {
@@ -138,24 +266,32 @@ public class WptPtMenuBuilder extends MenuBuilder {
 		LinearLayout view = (LinearLayout) buildCollapsableContentView(context, collapsed, true);
 
 		List<WptPt> points = gpxFile.getPoints();
-		for (int i = 0; i < points.size() && i < 10; i++) {
-			final WptPt point = points.get(i);
-			boolean selected = selectedPoint != null && selectedPoint.equals(point);
-			TextViewEx button = buildButtonInCollapsableView(context, selected, false);
-			button.setText(point.name);
+		String selectedCategory = selectedPoint != null && selectedPoint.category != null ? selectedPoint.category : "";
+		int showedCount = 0;
+		for (final WptPt point : points) {
+			String currentCategory = point != null ? point.category : null;
+			if (selectedCategory.equals(currentCategory)) {
+				showedCount++;
+				boolean selected = selectedPoint != null && selectedPoint.equals(point);
+				TextViewEx button = buildButtonInCollapsableView(context, selected, false);
+				button.setText(point.name);
 
-			if (!selected) {
-				button.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						LatLon latLon = new LatLon(point.getLatitude(), point.getLongitude());
-						PointDescription pointDescription = new PointDescription(PointDescription.POINT_TYPE_WPT, point.name);
-						mapActivity.getContextMenu().setCenterMarker(true);
-						mapActivity.getContextMenu().show(latLon, pointDescription, point);
-					}
-				});
+				if (!selected) {
+					button.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							LatLon latLon = new LatLon(point.getLatitude(), point.getLongitude());
+							PointDescription pointDescription = new PointDescription(PointDescription.POINT_TYPE_WPT, point.name);
+							mapActivity.getContextMenu().setCenterMarker(true);
+							mapActivity.getContextMenu().show(latLon, pointDescription, point);
+						}
+					});
+				}
+				view.addView(button);
 			}
-			view.addView(button);
+			if (showedCount >= 10) {
+				break;
+			}
 		}
 
 		if (points.size() > 10) {
