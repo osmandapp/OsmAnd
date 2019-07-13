@@ -1448,7 +1448,7 @@ og leiðsögn</string>
     <string name="osm_edit_created_poi">Bjó til OSM-merkisstað</string>
     <string name="simulate_initial_startup">Líkja eftir fyrstu ræsingu forritsins</string>
     <string name="favorite_category_dublicate_message">Notaðu eitthvað nafn á flokkinn sem ekki er þegar í notkun.</string>
-    <string name="av_locations_descr">GPX-skrá með minnispunktum við staðsetningar.</string>
+    <string name="av_locations_descr">GPX-skrá með staðsetningum.</string>
     <string name="download_wikipedia_files">Viltu ná í viðbótargögn af Wikipedia (%1$s MB) ?</string>
     <string name="osm_edit_context_menu_delete">Eyða OSM-breytingu</string>
     <string name="rendering_attr_hideHouseNumbers_name">Húsnúmer</string>
@@ -3087,7 +3087,7 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="collected_data">Söfnuð gögn</string>
     <string name="choose_data_to_share">Veldu hvaða gerðum gagna þú vilt deila:</string>
     <string name="visited_screens">Skoðaðir skjáir</string>
-    <string name="collected_data_descr">Listi yfir gögn sem þú vilt deila með OsmAnd.</string>
+    <string name="collected_data_descr">Listi yfir gögn sem þú vilt leyfa OsmAnd að deila.</string>
     <string name="privacy_and_security_change_descr">Með því að ýta á \'Leyfa\' samþykkir þú %1$s</string>
     <string name="settings_privacy_and_security_desc">Veldu þau gögn sem þú vilt deila með okkur</string>
     <string name="app_mode_shuttle_bus">Tengirúta</string>
@@ -3144,8 +3144,8 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="make_osmand_better_descr">Leyfa OsmAnd að safna og vinna notkun á ónafngreindum notkunargögnum. Við söfnum ekki né geymum gögn um staðsetningu þína eða um þá staði sem þú skoðar á kortinu.
 \n
 \nÞú getur alltaf breytt valinu á Stillingar &gt; Gagnaleynd og öryggi.</string>
-    <string name="downloaded_maps_collect_descr">Við söfnum þessum gögnum til að skilja hvaða kort af svæðum og löndum eru vinsælust.</string>
-    <string name="visited_screens_collect_descr">Við söfnum þessum gögnum til að skilja hvaða eiginleikar OsmAnd eru vinsælastir.</string>
+    <string name="downloaded_maps_collect_descr">Hjálpar okkur að skilja hvaða kort af hvaða svæðum og löndum eru vinsælust.</string>
+    <string name="visited_screens_collect_descr">Hjálpar okkur að skilja hvaða eiginleikar OsmAnd eru vinsælastir.</string>
     <string name="profile_alert_need_routing_type_msg">Þú þarft að velja gerð leiðsagnar til að búa til nýtt forritssnið</string>
     <string name="select_base_profile_dialog_message">Sérstillt notkunarsnið ættu að vera byggð á einu af sjálfgefnu forritssniðunum. Valda sniðið skilgreinir grunnstillingar: sýnileika viðmótshluta, einingar fyrir hraða og vegalengdir. Þetta eru sjálfgefnu forritssniðin, ásamt dæmum um sérsnið sem hægt er að útvíkka þau með:</string>
     <string name="press_again_to_change_the_map_orientation">Ýttu aftur til að breyta stefnu kortsins</string>
@@ -3171,4 +3171,52 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="edit_profile_nav_settings_subtitle">Veldu sjálfgefna valkosti leiðsagnar fyrir sniðið</string>
     <string name="routing_attr_max_num_changes_description">Tilgreindu hámarksfjölda breytinga</string>
     <string name="routing_attr_max_num_changes_name">Fjöldi breytinga</string>
+    <string name="release_3_4">• Forritasnið: útbúðu þín eigin snið fyrir þínar þarfir, með sérniðnum táknmyndum og litum
+\n
+\n • Nú er hægt að sérsníða í öllum sniðum jafnt sjálfgefinn hraða sem hámarks-/lágmarkshraða
+\n
+\n • Viðmótshluti með fyrirliggjandi hnitum
+\n
+\n • Bætt við valkosti til að birta áttavita og vegalengdarradíus á korti
+\n
+\n • Lagfærð ferilskráning í bakgrunni
+\n
+\n • Lagfært niðurhal korta í bakgrunni
+\n
+\n • Valkosturinn \'Kveikja á skjá\' kemur aftur inn
+\n
+\n • Lagfært val á tungumálum Wikipedia
+\n
+\n • Lagfærð hegðun áttavitahnapps við leiðsögn
+\n
+\n • Aðrir lagfærðir gallar
+\n
+\n</string>
+    <string name="turn_screen_on_router">Vekja við beygjur</string>
+    <string name="turn_screen_on_time_descr">Skilgreindu þann tíma sem kveikt er á skjánum.</string>
+    <string name="turn_screen_on_sensor">Nota nálægðarskynjara</string>
+    <string name="turn_screen_on_sensor_descr">Veifaðu hendinni yfir efri hluta skjásins til að kveikja á skjánum á meðan leiðsögn stendur.</string>
+    <string name="rendering_attr_highway_class_track_grade1_name">Gráða 1</string>
+    <string name="rendering_attr_highway_class_track_grade2_name">Gráða 2</string>
+    <string name="rendering_attr_highway_class_track_grade3_name">Gráða 3</string>
+    <string name="rendering_attr_highway_class_track_grade4_name">Gráða 4</string>
+    <string name="rendering_attr_highway_class_track_grade5_name">Gráða 5</string>
+    <string name="external_input_device">Utanáliggjandi inntakstæki</string>
+    <string name="external_input_device_descr">Veldu tæki á borð við venjulegt lyklaborð eða WunderLINQ fyrir ytri stýringar.</string>
+    <string name="sett_no_ext_input">Ekkert</string>
+    <string name="sett_generic_ext_input">Venjulegt lyklaborð</string>
+    <string name="sett_wunderlinq_ext_input">WunderLINQ</string>
+    <string name="turn_on_profile_desc">Til að nota þessa stillingu, þarftu að virkja að minnsta kosti eitt forritssnið.</string>
+    <string name="rendering_attr_winter_road_name">Vegur með vetrarskilyrðum</string>
+    <string name="rendering_attr_ice_road_name">Ísaður vegur</string>
+    <string name="routeInfo_winter_ice_road_name">Vegir með hálku og snjó</string>
+    <string name="rendering_attr_tracktype_grade1_name">Þétt (bundið slitlag)</string>
+    <string name="rendering_attr_tracktype_grade2_name">Þétt (óbundið slitlag)</string>
+    <string name="rendering_attr_tracktype_grade3_name">Mestmegnis þétt</string>
+    <string name="rendering_attr_tracktype_grade4_name">Mestmegnis mjúkt</string>
+    <string name="rendering_attr_tracktype_grade5_name">Mjúkt</string>
+    <string name="routeInfo_tracktype_name">Þéttleiki yfirborðs</string>
+    <string name="shared_string_file_is_saved">%s er vistað</string>
+    <string name="shared_string_open_track">Opna feril</string>
+    <string name="shared_string_track_is_saved">Ferill %s er vistaður</string>
 </resources>
