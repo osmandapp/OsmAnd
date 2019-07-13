@@ -12,13 +12,13 @@ import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 
 import net.osmand.AndroidUtils;
+import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
-import net.osmand.GPXUtilities;
-import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -30,6 +30,7 @@ import net.osmand.plus.views.Renderable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.RejectedExecutionException;
 
 public class TrackBitmapDrawer {
 
@@ -225,30 +226,34 @@ public class TrackBitmapDrawer {
 	}
 
 	private void drawTrack(Canvas canvas, RotatedTileBox tileBox, GpxSelectionHelper.SelectedGpxFile g) {
-		GpxDataItem gpxDataItem = null;
-		if (!g.isShowCurrentTrack()) {
-			gpxDataItem = getGpxDataItem();
-		}
-		List<TrkSegment> segments = g.getPointsToDisplay();
-		for (TrkSegment ts : segments) {
-			int color = gpxDataItem != null ? gpxDataItem.getColor() : 0;
-			if (g.isShowCurrentTrack()) {
-				color = currentTrackColor;
+		try {
+			GpxDataItem gpxDataItem = null;
+			if (!g.isShowCurrentTrack()) {
+				gpxDataItem = getGpxDataItem();
 			}
-			if (color == 0) {
-				color = ts.getColor(trackColor);
-			}
-			if (ts.renderer == null && !ts.points.isEmpty()) {
+			List<TrkSegment> segments = g.getPointsToDisplay();
+			for (TrkSegment ts : segments) {
+				int color = gpxDataItem != null ? gpxDataItem.getColor() : 0;
 				if (g.isShowCurrentTrack()) {
-					ts.renderer = new Renderable.CurrentTrack(ts.points);
-				} else {
-					ts.renderer = new Renderable.StandardTrack(ts.points, 17.2);
+					color = currentTrackColor;
+				}
+				if (color == 0) {
+					color = ts.getColor(trackColor);
+				}
+				if (ts.renderer == null && !ts.points.isEmpty()) {
+					if (g.isShowCurrentTrack()) {
+						ts.renderer = new Renderable.CurrentTrack(ts.points);
+					} else {
+						ts.renderer = new Renderable.StandardTrack(ts.points, 17.2);
+					}
+				}
+				paint.setColor(color == 0 ? trackColor : color);
+				if (ts.renderer instanceof Renderable.RenderableSegment) {
+					((Renderable.RenderableSegment) ts.renderer).drawSegment(tileBox.getZoom(), paint, canvas, tileBox);
 				}
 			}
-			paint.setColor(color == 0 ? trackColor : color);
-			if(ts.renderer instanceof  Renderable.RenderableSegment) {
-				((Renderable.RenderableSegment)ts.renderer).drawSegment(tileBox.getZoom(), paint, canvas, tileBox);
-			}
+		} catch (RejectedExecutionException e) {
+			// ignore
 		}
 	}
 
