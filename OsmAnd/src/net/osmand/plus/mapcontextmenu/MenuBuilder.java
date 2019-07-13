@@ -2,6 +2,7 @@ package net.osmand.plus.mapcontextmenu;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -14,6 +15,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.view.ContextThemeWrapper;
 import android.text.ClipboardManager;
 import android.text.SpannableStringBuilder;
@@ -501,8 +503,22 @@ public class MenuBuilder {
 	}
 
 	public View buildRow(final View view, Drawable icon, final String buttonText, final String text, int textColor, String secondaryText,
+	                     boolean collapsable, final CollapsableView collapsableView, boolean needLinks,
+	                     int textLinesLimit, boolean isUrl, OnClickListener onClickListener, boolean matchWidthDivider) {
+		return buildRow(view, icon, buttonText, text, textColor, secondaryText, collapsable, collapsableView,
+				needLinks, textLinesLimit, isUrl, false, false, onClickListener, matchWidthDivider);
+	}
+
+	public View buildRow(View view, int iconId, String buttonText, String text, int textColor,
+	                     boolean collapsable, final CollapsableView collapsableView,
+	                     boolean needLinks, int textLinesLimit, boolean isUrl, boolean isNumber, boolean isEmail, OnClickListener onClickListener, boolean matchWidthDivider) {
+		return buildRow(view, iconId == 0 ? null : getRowIcon(iconId), buttonText, text, textColor, null, collapsable, collapsableView,
+				needLinks, textLinesLimit, isUrl, isNumber, isEmail, onClickListener, matchWidthDivider);
+	}
+
+	public View buildRow(final View view, Drawable icon, final String buttonText, final String text, int textColor, String secondaryText,
 							boolean collapsable, final CollapsableView collapsableView, boolean needLinks,
-							int textLinesLimit, boolean isUrl, OnClickListener onClickListener, boolean matchWidthDivider) {
+							int textLinesLimit, boolean isUrl, boolean isNumber, boolean isEmail, OnClickListener onClickListener, boolean matchWidthDivider) {
 
 		if (!isFirstRow()) {
 			buildRowDivider(view);
@@ -567,7 +583,7 @@ public class MenuBuilder {
 
 		int linkTextColor = ContextCompat.getColor(view.getContext(), light ? R.color.ctx_menu_bottom_view_url_color_light : R.color.ctx_menu_bottom_view_url_color_dark);
 
-		if (isUrl) {
+		if (isUrl || isNumber || isEmail) {
 			textView.setTextColor(linkTextColor);
 		} else if (needLinks) {
 			Linkify.addLinks(textView, Linkify.ALL);
@@ -661,6 +677,46 @@ public class MenuBuilder {
 				public void onClick(View v) {
 					Intent intent = new Intent(Intent.ACTION_VIEW);
 					intent.setData(Uri.parse(text));
+					v.getContext().startActivity(intent);
+				}
+			});
+		} else if (isNumber) {
+			ll.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(final View v) {
+					//todo extract to MenuBuilder method
+					//the same logic uses for AmenityMenuBuilder and can be generalized
+					final String[] phones = text.split(",|;");
+					
+					for (int i = 0; i < phones.length; i++) {
+						phones[i] = phones[i].trim();
+					}
+					
+					if (phones.length > 1) {
+						AlertDialog.Builder dlg = new AlertDialog.Builder(v.getContext());
+						dlg.setNegativeButton(R.string.shared_string_cancel, null);
+						dlg.setItems(phones, new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								Intent intent = new Intent(Intent.ACTION_DIAL);
+								intent.setData(Uri.parse("tel:" + phones[which]));
+								v.getContext().startActivity(intent);
+							}
+						});
+						dlg.show();
+					} else {
+						Intent intent = new Intent(Intent.ACTION_DIAL);
+						intent.setData(Uri.parse("tel:" + text));
+						v.getContext().startActivity(intent);
+					}
+				}
+			});
+		} else if (isEmail) {   //todo the same for the phones
+			ll.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					Intent intent = new Intent(Intent.ACTION_SENDTO);
+					intent.setData(Uri.parse("mailto:" + text));
 					v.getContext().startActivity(intent);
 				}
 			});
