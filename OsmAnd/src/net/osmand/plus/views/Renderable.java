@@ -15,7 +15,7 @@ import java.util.concurrent.Executors;
 
 public class Renderable {
 
-    public static final Executor THREAD_POOL_EXECUTOR = Executors.newFixedThreadPool(5);
+    private static final Executor THREAD_POOL_EXECUTOR = Executors.newFixedThreadPool(5);
 
     public static abstract class RenderableSegment {
 

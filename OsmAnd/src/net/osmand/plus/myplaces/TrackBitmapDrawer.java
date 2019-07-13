@@ -12,13 +12,13 @@ import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 
 import net.osmand.AndroidUtils;
-import net.osmand.GPXUtilities;
-import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
+import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -246,8 +246,8 @@ public class TrackBitmapDrawer {
 				}
 			}
 			paint.setColor(color == 0 ? trackColor : color);
-			if (ts.renderer instanceof Renderable.RenderableSegment) {
-				((Renderable.RenderableSegment) ts.renderer).drawSegment(tileBox.getZoom(), paint, canvas, tileBox);
+			if(ts.renderer instanceof Renderable.RenderableSegment) {
+				((Renderable.RenderableSegment)ts.renderer).drawSegment(tileBox.getZoom(), paint, canvas, tileBox);
 			}
 		}
 	}
