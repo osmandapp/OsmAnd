@@ -1447,9 +1447,7 @@ public class GPXUtilities {
 				}
 				writeNotNullText(serializer, "keywords", file.metadata.keywords);
 				if (file.metadata.bounds != null) {
-					serializer.startTag(null, "bounds");
 					writeBounds(serializer, file.metadata.bounds);
-					serializer.endTag(null, "bounds");
 				}
 				writeExtensions(serializer, file.metadata);
 			}
@@ -1591,10 +1589,12 @@ public class GPXUtilities {
 	}
 
 	private static void writeBounds(XmlSerializer serializer, Bounds bounds) throws IOException {
+		serializer.startTag(null, "bounds");
 		serializer.attribute(null, "minlat", latLonFormat.format(bounds.minlat));
 		serializer.attribute(null, "minlon", latLonFormat.format(bounds.minlon));
 		serializer.attribute(null, "maxlat", latLonFormat.format(bounds.maxlat));
 		serializer.attribute(null, "maxlon", latLonFormat.format(bounds.maxlon));
+		serializer.endTag(null, "bounds");
 	}
 
 	public static class GPXFileResult {
@@ -2051,10 +2051,36 @@ public class GPXUtilities {
 	private static Bounds parseBoundsAttributes(XmlPullParser parser) {
 		Bounds bounds = new Bounds();
 		try {
-			bounds.minlat = Double.parseDouble(parser.getAttributeValue("", "minlat"));
-			bounds.minlon = Double.parseDouble(parser.getAttributeValue("", "minlon"));
-			bounds.maxlat = Double.parseDouble(parser.getAttributeValue("", "maxlat"));
-			bounds.maxlon = Double.parseDouble(parser.getAttributeValue("", "maxlon"));
+			String minlat = parser.getAttributeValue("", "minlat");
+			String minlon = parser.getAttributeValue("", "minlon");
+			String maxlat = parser.getAttributeValue("", "maxlat");
+			String maxlon = parser.getAttributeValue("", "maxlon");
+
+			if (minlat == null) {
+				minlat = parser.getAttributeValue("", "minLat");
+			}
+			if (minlon == null) {
+				minlon = parser.getAttributeValue("", "minLon");
+			}
+			if (maxlat == null) {
+				maxlat = parser.getAttributeValue("", "maxLat");
+			}
+			if (maxlat == null) {
+				maxlon = parser.getAttributeValue("", "maxLon");
+			}
+
+			if (minlat != null) {
+				bounds.minlat = Double.parseDouble(minlat);
+			}
+			if (minlon != null) {
+				bounds.minlon = Double.parseDouble(minlon);
+			}
+			if (maxlat != null) {
+				bounds.maxlat = Double.parseDouble(maxlat);
+			}
+			if (maxlon != null) {
+				bounds.maxlon = Double.parseDouble(maxlon);
+			}
 		} catch (NumberFormatException e) {
 			// ignore
 		}
