@@ -392,7 +392,7 @@ La memoria utilizzata è  {1} MB.
     <string name="favorite">Preferito</string>
     <string name="uploading_data">Invio dati…</string>
     <string name="uploading">Invio…</string>
-    <string name="search_nothing_found">Trovato nulla</string>
+    <string name="search_nothing_found">Non è stato tovato nulla</string>
     <string name="searching">Ricerca…</string>
     <string name="searching_address">Ricerca indirizzo…</string>
     <string name="search_osm_nominatim">Ricerca indirizzo con OSM Nominatim</string>
@@ -2418,7 +2418,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="live_monitoring_max_interval_to_send">Buffer temporale per il tracciamento online</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Specifica un tempo della memoria tampone per memorizzare le localizzazioni quando non c\'è connessione</string>
     <string name="retry">Riprova</string>
-    <string name="add_route_points">Aggiungi nuovi punti al percorso</string>
+    <string name="add_route_points">Aggiungi punti al percorso</string>
     <string name="add_line">Aggiungi una linea</string>
     <string name="save_route_point">Salva il Punto Percorso</string>
     <string name="route_point_one">Punto Percorso 1</string>
@@ -2650,7 +2650,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="clear_all_intermediates">Cancella tutti i punti intermedi</string>
     <string name="osm_recipients_label">Destinatari OSM</string>
     <string name="waypoints_removed_from_map_markers">Punti intermedi rimossi dai marcatori della mappa</string>
-    <string name="nothing_found_in_radius">Nessun risultato trovato:</string>
+    <string name="nothing_found_in_radius">Nessun risultato trovato nel raggio di:</string>
     <string name="shared_string_total">Totale</string>
     <string name="use_two_digits_longitude">"Usa  due cifre per la longitudine"</string>
     <string name="shared_string_travel_guides">Viaggio</string>
