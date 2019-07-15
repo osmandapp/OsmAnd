@@ -1814,7 +1814,7 @@ Lon %2$s</string>
     <string name="file_size_in_mb">%.1f MB</string>
     <string name="please_specify_poi_type_only_from_list">Bitte einen gültigen POI-Typ angeben oder überspringen.</string>
     <string name="share_osm_edits_subject">OSM-Bearbeitung mit OsmAnd geteilt</string>
-    <string name="av_locations_descr">GPX-Datei mit Notizen.</string>
+    <string name="av_locations_descr">GPX-Datei mit Standorten.</string>
     <string name="free_downloads_used_description">Anzeige der verbliebenen freien Downloads.</string>
     <string name="shared_string_location">Standort</string>
     <string name="hillshade_layer_disabled">Relief deaktiviert</string>
@@ -2983,7 +2983,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="rendering_attr_highway_class_steps_name">Stufen</string>
     <string name="rendering_attr_highway_class_path_name">Pfad</string>
     <string name="rendering_attr_highway_class_cycleway_name">Radweg</string>
-    <string name="rendering_attr_undefined_name">Nicht definiert</string>
+    <string name="rendering_attr_undefined_name">Undefiniert</string>
     <string name="release_3_3">• Neuer Bildschirm \'Navigation\': Zeigt Tasten mit den Zielen \'Zuhause\' und \'Arbeit\', eine \'Vorherige Route\'-Verknüpfung, eine Liste aktiver GPX-Tracks und Markierungen, den Suchverlauf. 
 \n 
 \n• Weitere Informationen unter \'Routendetails\': Straßentypen, -oberfläche, Steilheit, Oberflächenbeschaffenheit 
@@ -3060,9 +3060,9 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="choose_data_to_share">Wählen Sie, welche Art Daten Sie freigeben möchten:</string>
     <string name="downloaded_maps">Heruntergeladene Karten</string>
     <string name="visited_screens">Besuchte Bildschirme</string>
-    <string name="collected_data_descr">Liste der Daten, die Sie mit OsmAnd teilen möchten.</string>
-    <string name="downloaded_maps_collect_descr">Wir erfassen diese Daten, um herauszufinden, welche Karten welcher Regionen und Länder die beliebtesten sind.</string>
-    <string name="visited_screens_collect_descr">Wir erfassen diese Daten, um zu verstehen, welche Funktionen von OsmAnd die beliebtesten sind.</string>
+    <string name="collected_data_descr">Definieren Sie welche Daten Sie OsmAnd erlauben zu teilen.</string>
+    <string name="downloaded_maps_collect_descr">Helfen Sie uns herauszufinden, welche Karten welcher Regionen und Länder die beliebtesten sind.</string>
+    <string name="visited_screens_collect_descr">Helfen Sie un, zu verstehen, welche Funktionen von OsmAnd die beliebtesten sind.</string>
     <string name="privacy_and_security_change_descr">Durch das Antippen von \"Genehmigen\" willigen Sie in unsere %1$s ein</string>
     <string name="settings_privacy_and_security">Datenschutz und Sicherheit</string>
     <string name="settings_privacy_and_security_desc">Wählen Sie die Daten, die Sie uns freigeben möchten</string>
@@ -3132,26 +3132,26 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="routing_attr_difficulty_preference_name">Bevorzugte Schwierigkeit</string>
     <string name="routing_attr_piste_type_downhill_name">Ski Alpin/Abfahrt</string>
     <string name="routing_attr_piste_type_downhill_description">Pisten für Ski Alpin oder Abfahrt und Zugang zu den Skiliften.</string>
-    <string name="process_downloading_service">OsmAnd Download-Service</string>
+    <string name="process_downloading_service">OsmAnd Download-Dienst</string>
     <string name="shared_string_color_magenta">Magenta</string>
     <string name="shared_string_icon">Symbol</string>
     <string name="collected_data">Erfasste Daten</string>
     <string name="routing_attr_piste_type_nordic_name">Skilanglauf/Nordischer Skisport</string>
     <string name="routing_attr_piste_type_nordic_description">Loipen für Skilangläufer und Nordische Skiläufer.</string>
-    <string name="routing_attr_difficulty_preference_description">Routen dieser Schwierigkeit bevorzugen, obwohl, bei kürzerer Routenführung, schwierigere oder einfachere Pisten immer noch möglich sind.</string>
+    <string name="routing_attr_difficulty_preference_description">Routen dieser Schwierigkeit bevorzugen, obwohl bei kürzerer Routenführung schwierigere oder einfachere Pisten immer noch möglich sind.</string>
     <string name="routing_attr_freeride_policy_name">Abseits der Piste</string>
     <string name="routing_attr_freeride_policy_description">Freerides und Strecken abseits der Piste sind inoffizielle Routen und Passagen. Typischerweise unpräpariert, nicht offiziell betreut und abends nicht kontrolliert. Betreten auf eigene Gefahr.</string>
     <string name="press_again_to_change_the_map_orientation">Erneut antippen, um die Kartenausrichtung zu ändern</string>
     <string name="quick_action_need_to_add_item_to_list">Sie müssen mindestens einen Eintrag in die Liste der Schnellaktionseinstellungen hinzufügen</string>
-    <string name="shared_string_min_speed">Min. Geschwindigkeit</string>
-    <string name="shared_string_max_speed">Max. Geschwindigkeit</string>
-    <string name="default_speed_setting_title">Standardgeschwindigkeit</string>
-    <string name="default_speed_setting_descr">Standard-Geschwindigkeitseinstellungen ändern</string>
-    <string name="minmax_speed_dialog_title">Min/Max Geschwindigkeit einstellen</string>
-    <string name="default_speed_dialog_msg">Wird zur Berechnung der erwarteten Ankunftszeit während des Routings verwendet</string>
+    <string name="shared_string_min_speed">Min. Tempo</string>
+    <string name="shared_string_max_speed">Max. Tempo</string>
+    <string name="default_speed_setting_title">Standardtempo</string>
+    <string name="default_speed_setting_descr">Einstellungen des Standardtempos ändern</string>
+    <string name="minmax_speed_dialog_title">Min/Max Tempo einstellen</string>
+    <string name="default_speed_dialog_msg">Wird zur Berechnung der erwarteten Ankunftszeit während der Navigation verwendet</string>
     <string name="new_profile">Neues Profil</string>
     <string name="shared_string_crash">Absturz</string>
-    <string name="last_launch_crashed">Der letzte Start von OsmAnd ist fehlgeschlagen. Bitte helfen Sie uns, OsmAnd zu verbessern, indem Sie uns die Fehlermeldung mitteilen.</string>
+    <string name="last_launch_crashed">Der letzte Start von OsmAnd ist fehlgeschlagen. Bitte helfen Sie uns, OsmAnd zu verbessern, indem Sie uns über diesen Fehler informieren.</string>
     <string name="release_3_4">"• Anwendungsprofile: Benutzerdefiniertes Profil nach den eigenen Bedürfnissen mit benutzerdefiniertem Symbol und in eigener Farbe anlegen. 
 \n 
 \n• Benutzerdefinierte Standard- und Min/Max-Geschwindigkeiten für jedes Profil jetzt möglich
@@ -3177,7 +3177,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="routing_attr_allow_skating_only_description">Nur für Freestyle oder Skating präparierte Routen, keine klassischen Loipen.</string>
     <string name="routing_attr_allow_classic_only_description">Für den klassischen Stil präparierte Loipen, keine Skating-Pisten. Eingeschlossen sind lockere Pisten die durch kleinere Schneemobile präparierte wurden und ebenso durch Skifahrer selbstgespurte Bahnen.</string>
     <string name="app_mode_ufo">UFO</string>
-    <string name="app_mode_personal_transporter">Einpersonen-Transportmittel</string>
+    <string name="app_mode_personal_transporter">Segway Personal Transporter</string>
     <string name="edit_profile_setup_title">Profil einrichten</string>
     <string name="edit_profile_setup_subtitle">Das Profil behält seine eigenen Einstellungen bei</string>
     <string name="edit_profile_setup_map_subtitle">Standardkartenoptionen für das Profil auswählen</string>
@@ -3187,4 +3187,26 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="routing_attr_max_num_changes_name">Anzahl der Änderungen</string>
     <string name="app_mode_offroad">Offroad</string>
     <string name="external_input_device">externes Eingabegerät</string>
+    <string name="turn_screen_on_router">Bei Richtungsänderung aufwecken</string>
+    <string name="turn_screen_on_time_descr">Zeitdauer festlegen, für die der Bildschirm eingeschaltet wird.</string>
+    <string name="turn_screen_on_sensor">Annäherungssensor verwenden</string>
+    <string name="turn_screen_on_sensor_descr">Streichen Sie mit der Hand über die Oberfläche des Bildschirms, um ihn während der Navigation einzuschalten.</string>
+    <string name="turn_on_profile_desc">Bitte wenigstens ein Anwendungsprofil einschalten, um diese Einstellung zu verwenden.</string>
+    <string name="rendering_attr_winter_road_name">Schneepiste</string>
+    <string name="rendering_attr_ice_road_name">Eispiste</string>
+    <string name="routeInfo_winter_ice_road_name">Schnee- und Eispisten</string>
+    <string name="rendering_attr_tracktype_grade1_name">Fest (befestigt)</string>
+    <string name="rendering_attr_tracktype_grade2_name">Fest (unbefestigt)</string>
+    <string name="rendering_attr_tracktype_grade3_name">Überwiegend fest</string>
+    <string name="rendering_attr_tracktype_grade4_name">Überwiegend weich</string>
+    <string name="rendering_attr_tracktype_grade5_name">Weich</string>
+    <string name="routeInfo_tracktype_name">Oberflächenfestigkeit</string>
+    <string name="shared_string_file_is_saved">%s ist gespeichert</string>
+    <string name="shared_string_open_track">Track öffnen</string>
+    <string name="shared_string_track_is_saved">Track %s ist gespeichert</string>
+    <string name="sett_no_ext_input">Keine</string>
+    <string name="sett_wunderlinq_ext_input">WunderLINQ</string>
+    <string name="sett_parrot_ext_input">Parrot</string>
+    <string name="external_input_device_descr">Ein Gerät, wie eine Tastatur oder ein WunderLINQ, zur externen Steuerung wählen.</string>
+    <string name="sett_generic_ext_input">Tastatur</string>
 </resources>

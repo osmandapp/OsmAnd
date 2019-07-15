@@ -1644,7 +1644,7 @@
     <string name="opening_at">營業於</string>
     <string name="closing_at">結束於</string>
     <string name="next_proceed">下頁</string>
-    <string name="av_locations_descr">GPX 檔案加上地點附註。</string>
+    <string name="av_locations_descr">GPX 檔案加上地點。</string>
     <string name="av_locations">地點</string>
     <string name="contact_info">連絡資訊</string>
     <string name="add_opening_hours">增加營業時間</string>
@@ -3039,11 +3039,11 @@
 \n
 \n您總是可以在設定→隱私與安全中變更您的選擇。</string>
     <string name="choose_data_to_share">選擇您想要分享何種類型的資料：</string>
-    <string name="downloaded_maps">下載地圖</string>
+    <string name="downloaded_maps">已下載的地圖</string>
     <string name="visited_screens">造訪過的畫面</string>
-    <string name="collected_data_descr">您想要與 OsmAnd 分享的資料清單。</string>
-    <string name="downloaded_maps_collect_descr">我們蒐集資料以了解哪些區域與國家的地圖最受歡迎。</string>
-    <string name="visited_screens_collect_descr">我們蒐集這些資料以了解 OsmAnd 最受歡迎的功能。</string>
+    <string name="collected_data_descr">定義您允許 OsmAnd 分享的資料。</string>
+    <string name="downloaded_maps_collect_descr">協助我們了解哪些區域與國家的地圖最受歡迎。</string>
+    <string name="visited_screens_collect_descr">協助我們了解 OsmAnd 最受歡迎的功能。</string>
     <string name="privacy_and_security_change_descr">只要點擊「允許」就代表您同意我們的 %1$s</string>
     <string name="settings_privacy_and_security">隱私與安全</string>
     <string name="settings_privacy_and_security_desc">選擇您要與我們分享的資料</string>
@@ -3056,7 +3056,7 @@
     <string name="app_mode_subway">地下鐵</string>
     <string name="app_mode_horse">馬</string>
     <string name="app_mode_helicopter">直升機</string>
-    <string name="osmand_routing_promo">您可以新增您自行修改版本的 routing.xml 到 ..osmand/routing</string>
+    <string name="osmand_routing_promo">您可以新增您自行修改版本的 routing.xml 檔案到 ..osmand/routing</string>
     <string name="app_mode_skiing">滑雪</string>
     <string name="base_profile_descr_ski">滑雪</string>
     <string name="show_compass_ruler">顯示指南針與尺規</string>
@@ -3068,7 +3068,7 @@
     <string name="profile_type_descr_string">類型：%s</string>
     <string name="profile_type_base_string">基本設定檔</string>
     <string name="profile_alert_need_routing_type_title">選取導航類型</string>
-    <string name="profile_alert_need_routing_type_msg">您必須選取導航類型以建立新的應用程式設定檔</string>
+    <string name="profile_alert_need_routing_type_msg">請選取新應用程式設定檔的導航類型</string>
     <string name="profile_alert_need_profile_name_title">輸入設定檔名稱</string>
     <string name="profile_alert_need_profile_name_msg">設定檔名稱不應為空！</string>
     <string name="profile_alert_duplicate_name_title">重覆的名稱</string>
@@ -3079,7 +3079,7 @@
     <string name="profile_alert_delete_title">刪除設定檔</string>
     <string name="profile_alert_delete_msg">您確定您想要刪除 %s 設定檔嗎</string>
     <string name="select_base_profile_dialog_title">選取基本設定檔</string>
-    <string name="select_base_profile_dialog_message">自訂應用程式設定檔應該以其中一個應用程式預設的設定檔為基礎。選取的設定檔會定義基本設定：小工具設定、速度與距離的單位。在設定檔下方的名稱，您可以了解到每個應用程式設定檔適用於哪些導航設定檔。</string>
+    <string name="select_base_profile_dialog_message">讓您自訂的設定檔以其中一個預設應用程式設定檔為基礎，這定義了如小工具、速度單位與距離的顯示方式。這些是預設的應用程式設定檔，連同其可以擴展成的自訂設定檔範例：</string>
     <string name="select_nav_profile_dialog_title">選取導航類型</string>
     <string name="base_profile_descr_car">汽車、卡車、摩托車</string>
     <string name="base_profile_descr_bicycle">山地車、代步車、馬</string>
@@ -3134,5 +3134,68 @@
     <string name="default_speed_dialog_msg">用於在導航期間計算預計到達時間</string>
     <string name="new_profile">新設定檔</string>
     <string name="shared_string_crash">當機</string>
-    <string name="last_launch_crashed">OsmAnd 上次啟動失敗。協助我們改善 OsmAnd。請將錯誤訊息傳送給我們。</string>
+    <string name="last_launch_crashed">OsmAnd 上次啟動失敗。請透過將錯誤訊息傳送給我們協助我們改善 OsmAnd。</string>
+    <string name="app_mode_ufo">UFO</string>
+    <string name="release_3_4">• 應用程式設定檔：按您的需求建立自訂的設定檔，可自訂圖示與顏色
+\n
+\n • 現在可以自訂任何設定檔的預設值與最小／最大速度
+\n
+\n • 新增目前經緯度的小工具
+\n
+\n • 新增在地圖上顯示羅盤與半徑尺規的選項
+\n
+\n • 修復背景軌跡記錄
+\n
+\n • 改善背景地圖下載
+\n
+\n • 「將螢幕開啟」選項重返
+\n
+\n • 修復維基百科語言選取
+\n
+\n • 修復在導航時的羅盤按鈕行為
+\n
+\n • 其他臭蟲修復
+\n
+\n</string>
+    <string name="app_mode_personal_transporter">個人運輸</string>
+    <string name="app_mode_monowheel">單輪</string>
+    <string name="app_mode_scooter">摩托車</string>
+    <string name="precision_hdop_and_vdop">水平精度：%1$s，垂直：%2$s</string>
+    <string name="precision_hdop">水平精度：%s</string>
+    <string name="app_mode_offroad">越野</string>
+    <string name="edit_profile_setup_title">調整設定檔</string>
+    <string name="edit_profile_setup_subtitle">設定檔維持其設定</string>
+    <string name="edit_profile_setup_map_subtitle">選取設定檔的預設地圖選項</string>
+    <string name="edit_profile_screen_options_subtitle">選取設定檔的預設螢幕選項</string>
+    <string name="edit_profile_nav_settings_subtitle">選取設定檔的預設導覽設定</string>
+    <string name="routing_attr_max_num_changes_description">指定最大變更數量</string>
+    <string name="routing_attr_max_num_changes_name">變更數量</string>
+    <string name="turn_screen_on_router">輪流喚醒</string>
+    <string name="turn_screen_on_time_descr">設定螢幕打開的時間。</string>
+    <string name="turn_screen_on_sensor">使用距離感測器</string>
+    <string name="turn_screen_on_sensor_descr">在導航時，將手在螢幕頂部揮一揮以開啟螢幕。</string>
+    <string name="rendering_attr_highway_class_track_grade1_name">等級 1</string>
+    <string name="rendering_attr_highway_class_track_grade2_name">等級 2</string>
+    <string name="rendering_attr_highway_class_track_grade3_name">等級 3</string>
+    <string name="rendering_attr_highway_class_track_grade4_name">等級 4</string>
+    <string name="rendering_attr_highway_class_track_grade5_name">等級 5</string>
+    <string name="external_input_device">外部輸入裝置</string>
+    <string name="external_input_device_descr">為外部控制選取如通用鍵盤或 WunderLINQ 的裝置。</string>
+    <string name="sett_no_ext_input">無</string>
+    <string name="sett_generic_ext_input">通用鍵盤</string>
+    <string name="sett_wunderlinq_ext_input">WunderLINQ</string>
+    <string name="sett_parrot_ext_input">Parrot</string>
+    <string name="turn_on_profile_desc">請開啟至少一個應用程式設定檔以使用此設定。</string>
+    <string name="rendering_attr_winter_road_name">冬季道路</string>
+    <string name="rendering_attr_ice_road_name">冰路</string>
+    <string name="routeInfo_winter_ice_road_name">冬季與冰路</string>
+    <string name="rendering_attr_tracktype_grade1_name">堅實（有鋪面）</string>
+    <string name="rendering_attr_tracktype_grade2_name">堅實（無鋪面）</string>
+    <string name="rendering_attr_tracktype_grade3_name">大多堅實</string>
+    <string name="rendering_attr_tracktype_grade4_name">大多鬆軟</string>
+    <string name="rendering_attr_tracktype_grade5_name">鬆軟</string>
+    <string name="routeInfo_tracktype_name">表面堅固</string>
+    <string name="shared_string_file_is_saved">%s 已儲存</string>
+    <string name="shared_string_open_track">開放軌道</string>
+    <string name="shared_string_track_is_saved">軌道 %s 已儲存</string>
 </resources>
