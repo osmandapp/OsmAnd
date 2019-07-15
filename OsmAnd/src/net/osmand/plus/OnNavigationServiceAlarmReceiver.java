@@ -21,13 +21,13 @@ public class OnNavigationServiceAlarmReceiver extends BroadcastReceiver {
 		if (service == null) {
 			return;
 		} else if (lock.isHeld()) {
-			rescheduleAlarm(context);
+			rescheduleAlarm(context, service);
 			return;
 		}
 
 		//
 		lock.acquire();
-		rescheduleAlarm(context);
+		rescheduleAlarm(context, service);
 
 		// request location updates
 		final LocationManager locationManager = (LocationManager) service.getSystemService(Context.LOCATION_SERVICE);
@@ -46,17 +46,17 @@ public class OnNavigationServiceAlarmReceiver extends BroadcastReceiver {
 				}, service.getServiceError());
 			}
 		} catch (RuntimeException e) {
-			e.printStackTrace();
+			// ignore
 		}
 	}
 
-	private void rescheduleAlarm(Context context) {
+	private void rescheduleAlarm(Context context, NavigationService service) {
 		//Unless setRepeating was used, manually re-schedule service to the next measurement point in the future
-		if (Build.VERSION.SDK_INT >= 19) {
-			NavigationService service = ((OsmandApplication) context.getApplicationContext()).getNavigationService();
+		int serviceOffInterval = service.getServiceOffInterval();
+		if (Build.VERSION.SDK_INT >= 19 && serviceOffInterval > 0) {
 			// Avoid drift
 			while ((service.getNextManualWakeup() - SystemClock.elapsedRealtime()) < 0) {
-				service.setNextManualWakeup(service.getNextManualWakeup() + service.getServiceOffInterval());
+				service.setNextManualWakeup(service.getNextManualWakeup() + serviceOffInterval);
 			}
 			AlarmManager alarmManager = (AlarmManager) service.getSystemService(Context.ALARM_SERVICE);
 			PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 1, new Intent(context, OnNavigationServiceAlarmReceiver.class), PendingIntent.FLAG_UPDATE_CURRENT);
