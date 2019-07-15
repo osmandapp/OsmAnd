@@ -1,10 +1,9 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
-import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
-import android.text.TextUtils;
+import android.util.Log;
 
 import net.osmand.GPXUtilities;
 import net.osmand.data.LatLon;
@@ -14,26 +13,29 @@ import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.FavoriteImageDrawable;
+import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapcontextmenu.builders.WptPtMenuBuilder;
-import net.osmand.plus.wikivoyage.article.WikivoyageArticleDialogFragment;
-import net.osmand.plus.wikivoyage.data.TravelArticle;
+import net.osmand.plus.wikivoyage.menu.WikivoyageWptPtMenuBuilder;
+import net.osmand.plus.wikivoyage.menu.WikivoyageWptPtMenuController;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
+import java.util.Map;
 
 public class WptPtMenuController extends MenuController {
 
 	private WptPt wpt;
 	private MapMarker mapMarker;
+	private MapActivity mapActivity;
 
-	public WptPtMenuController(@NonNull MapActivity mapActivity, @NonNull PointDescription pointDescription, @NonNull final WptPt wpt) {
-		super(new WptPtMenuBuilder(mapActivity, wpt), pointDescription, mapActivity);
+	public WptPtMenuController(@NonNull MenuBuilder menuBuilder,  @NonNull MapActivity mapActivity, @NonNull PointDescription pointDescription, @NonNull final WptPt wpt) {
+		super(menuBuilder, pointDescription, mapActivity);
 		this.wpt = wpt;
+		this.mapActivity = mapActivity;
 
 		final MapMarkersHelper markersHelper = mapActivity.getMyApplication().getMapMarkersHelper();
 		mapMarker = markersHelper.getMapMarker(wpt);
@@ -45,32 +47,6 @@ public class WptPtMenuController extends MenuController {
 			leftTitleButtonController = markerMenuController.getLeftTitleButtonController();
 			rightTitleButtonController = markerMenuController.getRightTitleButtonController();
 		}
-		//todo extract / simplify
-		final OsmandApplication app = mapActivity.getMyApplication();
-		SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedGPXFile(wpt);
-		GPXUtilities.GPXFile gpxFile = selectedGpxFile != null ? selectedGpxFile.getGpxFile() : null;
-		GPXUtilities.Metadata metadata = gpxFile != null ? gpxFile.metadata : null;
-		final TravelArticle article = metadata != null ? getTravelArticle(metadata) : null;
-		if (article != null) {
-			leftTitleButtonController = new TitleButtonController() {
-				@Override
-				public void buttonPressed() {
-					WikivoyageArticleDialogFragment.showInstance(app, getMapActivity().getSupportFragmentManager(), article.getTripId(), article.getLang());
-				}
-			};
-			leftTitleButtonController.caption = mapActivity.getString(R.string.context_menu_read_article);
-			leftTitleButtonController.leftIconId = R.drawable.ic_action_read_text;
-		}
-	}
-
-	//todo extract somewhere, maybe to TravelDbHelper
-	private TravelArticle getTravelArticle(@NonNull GPXUtilities.Metadata metadata) {
-		String title = metadata.getArticleTitle();
-		String lang = metadata.getArticleLang();
-		if (!TextUtils.isEmpty(title) && !TextUtils.isEmpty(lang)) {
-			return getMapActivity().getMyApplication().getTravelDbHelper().getArticle(title, lang);
-		}
-		return null;
 	}
 
 	@Override
@@ -168,5 +144,17 @@ public class WptPtMenuController extends MenuController {
 		} else {
 			return "";
 		}
+	}
+	
+	public static WptPtMenuController getInstance(@NonNull MapActivity mapActivity, @NonNull PointDescription pointDescription, @NonNull final WptPt wpt) {
+		SelectedGpxFile selectedGpxFile = mapActivity.getMyApplication().getSelectedGpxHelper().getSelectedGPXFile(wpt);
+		GPXUtilities.GPXFile gpxFile = selectedGpxFile != null ? selectedGpxFile.getGpxFile() : null;
+		GPXUtilities.Metadata metadata = gpxFile != null ? gpxFile.metadata : null;
+		Map<String, String> extensions = metadata != null ? metadata.getExtensionsToRead() : null;
+		String metadataDesc = extensions != null ? metadata.getExtensionsToRead().get("desc") : null;
+		if (metadataDesc != null && metadataDesc.contains("wikivoyage.org/")) {
+			return new WikivoyageWptPtMenuController(new WikivoyageWptPtMenuBuilder(mapActivity, wpt), mapActivity, pointDescription, wpt);
+		}
+		return new WptPtMenuController(new WptPtMenuBuilder(mapActivity, wpt), mapActivity, pointDescription, wpt);
 	}
 }
