@@ -76,6 +76,9 @@ class LocationMessages(val app: TelegramApplication) {
 		return dbHelper.getMessagesForUser(userId, start, end)
 	}
 
+	fun getLastLocationInfoForUserInChat(userId: Int, chatId: Long, deviceName: String) =
+		lastLocationPoints.sortedByDescending { it.time }.firstOrNull { it.userId == userId && it.chatId == chatId && it.deviceName == deviceName }
+
 	fun addBufferedMessage(message: BufferMessage) {
 		log.debug("addBufferedMessage $message")
 		val messages = mutableListOf(*this.bufferedMessages.toTypedArray())
@@ -91,7 +94,7 @@ class LocationMessages(val app: TelegramApplication) {
 		val content = OsmandLocationUtils.parseMessageContent(message, app.telegramHelper)
 		if (content != null) {
 			val deviceName = if (content is OsmandLocationUtils.MessageOsmAndBotLocation) content.deviceName else ""
-			val previousLocationMessage = lastLocationPoints.sortedBy { it.time }.firstOrNull {
+			val previousLocationMessage = lastLocationPoints.sortedByDescending { it.time }.firstOrNull {
 				it.userId == senderId && it.chatId == message.chatId && it.deviceName == deviceName && it.type == type
 			}
 			if (previousLocationMessage == null || content.lastUpdated * 1000L > previousLocationMessage.time) {
