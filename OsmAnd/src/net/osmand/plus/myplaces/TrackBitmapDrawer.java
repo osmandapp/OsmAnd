@@ -246,8 +246,8 @@ public class TrackBitmapDrawer {
 				}
 			}
 			paint.setColor(color == 0 ? trackColor : color);
-			if(ts.renderer instanceof  Renderable.RenderableSegment) {
-				((Renderable.RenderableSegment)ts.renderer).drawSegment(tileBox.getZoom(), paint, canvas, tileBox);
+			if (ts.renderer instanceof Renderable.RenderableSegment) {
+				((Renderable.RenderableSegment) ts.renderer).drawSegment(tileBox.getZoom(), paint, canvas, tileBox);
 			}
 		}
 	}

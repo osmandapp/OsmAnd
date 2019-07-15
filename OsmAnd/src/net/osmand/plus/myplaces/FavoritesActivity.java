@@ -1,6 +1,7 @@
 package net.osmand.plus.myplaces;
 
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -18,6 +19,7 @@ import android.text.style.ImageSpan;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
+import net.osmand.PlatformUtil;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmAndLocationProvider;
@@ -30,6 +32,9 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TabActivity;
 import net.osmand.plus.helpers.ImportHelper;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
+import net.osmand.plus.wikivoyage.data.TravelDbHelper;
+
+import org.apache.commons.logging.Log;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -39,6 +44,7 @@ import java.util.List;
  *
  */
 public class FavoritesActivity extends TabActivity {
+	private static final Log LOG = PlatformUtil.getLog(FavoritesActivity.class);
 
 	private static final int OPEN_GPX_DOCUMENT_REQUEST = 1006;
 	private static final int IMPORT_FAVOURITES_REQUEST = 1007;
@@ -92,12 +98,20 @@ public class FavoritesActivity extends TabActivity {
 
 	public void addTrack() {
 		Intent intent = getImportGpxIntent();
-		startActivityForResult(intent, OPEN_GPX_DOCUMENT_REQUEST);
+		try {
+			startActivityForResult(intent, OPEN_GPX_DOCUMENT_REQUEST);
+		} catch (ActivityNotFoundException e) {
+			LOG.error(e.getMessage(), e);
+		}
 	}
 
 	public void importFavourites() {
 		Intent intent = getImportGpxIntent();
-		startActivityForResult(intent, IMPORT_FAVOURITES_REQUEST);
+		try {
+			startActivityForResult(intent, IMPORT_FAVOURITES_REQUEST);
+		} catch (ActivityNotFoundException e) {
+			LOG.error(e.getMessage(), e);
+		}
 	}
 
 	private Intent getImportGpxIntent() {

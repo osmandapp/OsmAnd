@@ -2081,8 +2081,8 @@
     <string name="rendering_attr_hideWaterPolygons_description">ماء</string>
     <string name="rendering_attr_contourWidth_description">عرض الخطوط الكنتورية</string>
     <string name="rendering_attr_contourWidth_name">عرض الخطوط الكنتورية</string>
-    <string name="rendering_attr_contourDensity_description">كثافة الخطوط الكنتورية</string>
-    <string name="rendering_attr_contourDensity_name">كثافة الخطوط الكنتورية</string>
+    <string name="rendering_attr_contourDensity_description">كثافة الخط المحيطي</string>
+    <string name="rendering_attr_contourDensity_name">كثافة الخط المحيطي</string>
     <string name="rendering_value_high_name">عالية</string>
     <string name="rendering_value_medium_w_name">وسطى</string>
     <string name="rendering_value_low_name">منخفض</string>
@@ -2162,7 +2162,7 @@
     <string name="navigate_point_olc">رمز التَّمَوْضُع المفتوح</string>
     <string name="navigate_point_olc_info_invalid">خطآ في الرمز المفتوح للتَّمَوْضُع</string>
     <string name="quick_action_btn_tutorial_descr">قم بالضغط على الزر لفترة أطوَل ثم اسحبه لتغيير مكانه على الشاشة</string>
-    <string name="rendering_attr_depthContours_name">معالم أعماق البحار</string>
+    <string name="rendering_attr_depthContours_name">محيطات الأعماق البحرية</string>
     <string name="auto_split_recording_title">تقسيم المسارات آلياً إلى أجزاء بعد كل فراغ</string>
     <string name="navigate_point_olc_info_short">تقصير رمز التموضع المفتوح يُرجى تقديم رمزٍ كامل</string>
     <string name="quick_action_duplicate">إسم الإجراء السريع مكرر</string>
@@ -2294,10 +2294,10 @@
     <string name="subscribe_email_desc">اشترك في قائمة البريد الإلكتروني لدينا فيما يخص الخصومات والحصول على 3 تنزيلات خرائط إضافية!</string>
     <string name="depth_contour_descr">مجموعة من الخرائط التي تحوي نقاط أعماق البحر وخطوطه المحيطية</string>
     <string name="sea_depth_thanks">شكرا لشراء معالم أعماق البحار</string>
-    <string name="index_item_depth_contours_osmand_ext">معالم أعماق البحار</string>
+    <string name="index_item_depth_contours_osmand_ext">محيطات الأعماق البحرية</string>
     <string name="index_item_depth_points_southern_hemisphere">معالم أعماق البحار في نصف الكرة الجنوبي</string>
     <string name="index_item_depth_points_northern_hemisphere">معالم أعماق البحار في نصف الكرة الشمالي</string>
-    <string name="download_depth_countours">معالم أعماق البحار  </string>
+    <string name="download_depth_countours">محيطات الأعماق البحرية</string>
     <string name="do_not_send_anonymous_app_usage_desc">التطبيق يقوم بجمع معلومات حول أجزاء من التطبيقات التي تفتحها. الموقع الخاص بك لا يرسل ابدأ، ولا أي شيء تقوم بإدخاله في التطبيق أو أي تفاصيل لمناطق رأيتها ، بحثت عنها أو نزلتها.</string>
     <string name="do_not_show_startup_messages_desc">عرض خصومات التطبيق ورسائل الأحداث المحلية الخاصة</string>
     <string name="routing_attr_relief_smoothness_factor_plains_name">أقل تضاريس</string>
@@ -2378,7 +2378,7 @@
     <string name="navigate_point_olc_info_area">OLC الصالحة بالكامل\nتمثل المنطقة: %1$s x %2$s</string>
     <string name="wrong_user_name">اسم المستخدم خاطئ</string>
     <string name="shared_string_to">إلى</string>
-    <string name="mapillary_menu_date_from">من</string>
+    <string name="mapillary_menu_date_from">مِن</string>
     <string name="mapillary_menu_descr_dates">عرض الصور المضافة في فترة زمنية معينة.</string>
     <string name="mapillary_menu_title_dates">التاريخ</string>
     <string name="mapillary_menu_edit_text_hint">اسم المستخدم</string>
@@ -2480,7 +2480,7 @@
     <string name="move_to_history">نقل إلى السجل</string>
     <string name="group_will_be_removed_after_restart">سيتم إزالة المجموعة بعد إعادة تشغيل التطبيق.</string>
     <string name="shared_string_markers">العلامات</string>
-    <string name="coordinates_format">تنسيق الصيغة</string>
+    <string name="coordinates_format">نمط الإحداثيات</string>
     <string name="use_system_keyboard">استخدم لوحة مفاتيح النظام</string>
     <string name="fast_coordinates_input_descr">اختر نسق إدخال الأحداثيات. يمكنك دائماً تغييره بالنقر على خيارات.</string>
     <string name="fast_coordinates_input">إدخال إحداثيات سريع</string>
@@ -2492,7 +2492,7 @@
     <string name="osn_modify_dialog_title">تعديل ملاحظة</string>
     <string name="context_menu_item_modify_note">تعديل ملاحظة OSM</string>
     <string name="rendering_value_darkyellow_name">أصفر غامق</string>
-    <string name="shared_string_road">الطريق</string>
+    <string name="shared_string_road">طريق</string>
     <string name="show_map">اظهر الخريطة</string>
     <string name="route_is_calculated">تم حساب المسار</string>
     <string name="round_trip">رحلة ذهاب وإياب</string>
@@ -2601,14 +2601,14 @@
     <string name="wikivoyage_search_hint">البحث : بلد أو مدينة أو منطقة</string>
     <string name="shared_string_explore">استكشاف</string>
     <string name="shared_string_result">النتيجة</string>
-    <string name="shared_string_travel_guides">إرشادات السفر</string>
+    <string name="shared_string_travel_guides">أدلة السفر</string>
     <string name="enter_lon">أدخل خط الطول</string>
     <string name="enter_lat">أدخل خط العرض</string>
     <string name="transport_nearby_routes">في غضون</string>
     <string name="shared_string_current">الحالي</string>
     <string name="delete_search_history">حذف محفوظات البحث</string>
     <string name="show_images">عرض الصور</string>
-    <string name="download_maps_travel">إرشادات السفر</string>
+    <string name="download_maps_travel">أدلة السفر</string>
     <string name="shared_string_wikivoyage">ويكي الرحلات</string>
     <string name="select_travel_book">اختيار كتاب للسفر</string>
     <string name="shared_string_travel_book">كتاب السفر</string>
@@ -2619,10 +2619,10 @@
     <string name="travel_card_update_descr">تتوفر تحديثات جديدة لويكي الرحلات. حدثها لتستمتع</string>
     <string name="update_is_available">تحديث متوفر</string>
     <string name="download_file">تحميل</string>
-    <string name="start_editing">بدء التحرير</string>
+    <string name="start_editing">ابدأ التحرير</string>
     <string name="get_unlimited_access">تحصل على نفاذ بلا حدود</string>
     <string name="welcome_to_open_beta">مرحبا بكم على النسخة التجريبية المفتوحة</string>
-    <string name="wikivoyage_travel_guide">إرشادات السفر</string>
+    <string name="wikivoyage_travel_guide">أدلة السفر</string>
     <string name="monthly_map_updates">تحديثات الخريطة:<b> كل شهر</b>
     </string>
     <string name="daily_map_updates">تحديثات الخريطة: <b>كل ساعة</b>
@@ -2633,10 +2633,10 @@
     <string name="unlimited_downloads">تحميلات غير محدودة</string>
     <string name="wikipedia_offline">ويكيبيديا دون اتصال</string>
     <string name="contour_lines_hillshade_maps">الخطوط المحيطية والتضاريس</string>
-    <string name="shared_string_only_with_wifi">فقط على Wi-Fi</string>
+    <string name="shared_string_only_with_wifi">على الواي فاي فقط</string>
     <string name="wikivoyage_download_pics">تنزيل الصور</string>
-    <string name="shared_string_wifi_only">فقط على Wi-Fi</string>
-    <string name="download_images">عرض الصور</string>
+    <string name="shared_string_wifi_only">على الواي فاي فقط</string>
+    <string name="download_images">تنزيل الصور</string>
     <string name="article_removed">تم حذف المقال</string>
     <string name="shared_string_read">قراءة</string>
     <string name="saved_articles">مقالات مرجعية</string>
@@ -2769,7 +2769,7 @@
     <string name="shared_string_capacity">السعة</string>
     <string name="shared_string_width">العرض</string>
     <string name="shared_string_height">الارتفاع</string>
-    <string name="add_destination_point">اضافة وجهة</string>
+    <string name="add_destination_point">أضف وجهة</string>
     <string name="add_intermediate_point">إضافة وسيطة</string>
     <string name="add_start_point">إضافة نقطة انطلاق</string>
     <string name="intermediate_waypoint">النقطة المتوسط</string>

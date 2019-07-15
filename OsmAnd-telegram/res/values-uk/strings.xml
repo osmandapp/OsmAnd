@@ -202,4 +202,8 @@
     <string name="monitoring_is_disabled">Моніторинг вимкнуто</string>
     <string name="shared_string_live">Активні</string>
     <string name="timeline">Хронологія</string>
+    <string name="shared_string_search">Пошук</string>
+    <string name="altitude">Висота</string>
+    <string name="shared_string_enable">Увімкнути</string>
+    <string name="shared_string_select">Обрати</string>
 </resources>

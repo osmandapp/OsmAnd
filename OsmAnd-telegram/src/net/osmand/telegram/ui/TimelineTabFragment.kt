@@ -16,23 +16,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.Switch
 import android.widget.TextView
-import net.osmand.PlatformUtil
 import net.osmand.telegram.R
 import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.helpers.LocationMessages
 import net.osmand.telegram.helpers.TelegramUiHelper
 import net.osmand.telegram.helpers.TelegramUiHelper.ListItem
 import net.osmand.telegram.ui.TimelineTabFragment.LiveNowListAdapter.BaseViewHolder
+import net.osmand.telegram.ui.views.EmptyStateRecyclerView
 import net.osmand.telegram.utils.AndroidUtils
 import net.osmand.telegram.utils.OsmandFormatter
 import java.util.*
 
 
 class TimelineTabFragment : Fragment() {
-
-	private val log = PlatformUtil.getLog(TimelineTabFragment::class.java)
 
 	private val app: TelegramApplication
 		get() = activity?.application as TelegramApplication
@@ -43,11 +42,12 @@ class TimelineTabFragment : Fragment() {
 	private lateinit var adapter: LiveNowListAdapter
 
 	private lateinit var dateBtn: TextView
+	private lateinit var previousDateBtn: ImageView
+	private lateinit var nextDateBtn: ImageView
 	private lateinit var mainView: View
 	private lateinit var switcher: Switch
 
-	private var start = 0L
-	private var end = 0L
+	private lateinit var calendar: Calendar
 
 	private var updateEnable: Boolean = false
 
@@ -59,15 +59,16 @@ class TimelineTabFragment : Fragment() {
 		mainView = inflater.inflate(R.layout.fragment_timeline_tab, container, false)
 		val appBarLayout = mainView.findViewById<View>(R.id.app_bar_layout)
 
-		val calendar = Calendar.getInstance()
-		start = getStartOfDay(calendar)
-		end = getEndOfDay(calendar)
+		calendar = Calendar.getInstance()
 
 		AndroidUtils.addStatusBarPadding19v(context!!, appBarLayout)
 		adapter = LiveNowListAdapter()
-		mainView.findViewById<RecyclerView>(R.id.recycler_view).apply {
+
+		val emptyView = mainView.findViewById<LinearLayout>(R.id.empty_view)
+		mainView.findViewById<EmptyStateRecyclerView>(R.id.recycler_view).apply {
 			layoutManager = LinearLayoutManager(context)
 			adapter = this@TimelineTabFragment.adapter
+			setEmptyView(emptyView)
 		}
 
 		switcher = mainView.findViewById<Switch>(R.id.monitoring_switcher)
@@ -88,7 +89,25 @@ class TimelineTabFragment : Fragment() {
 			}
 			setCompoundDrawablesWithIntrinsicBounds(getPressedStateIcon(R.drawable.ic_action_date_start), null, null, null)
 			setTextColor(AndroidUtils.createPressedColorStateList(app, true, R.color.ctrl_active_light, R.color.ctrl_light))
-			text = OsmandFormatter.getFormattedDate(start / 1000)
+		}
+		updateDateButton()
+
+		previousDateBtn = mainView.findViewById<ImageView>(R.id.date_btn_previous).apply {
+			setImageDrawable(getPressedStateIcon(R.drawable.ic_arrow_back))
+			setOnClickListener {
+				calendar.add(Calendar.DAY_OF_MONTH, -1)
+				updateList()
+				updateDateButton()
+			}
+		}
+
+		nextDateBtn = mainView.findViewById<ImageView>(R.id.date_btn_next).apply {
+			setImageDrawable(getPressedStateIcon(R.drawable.ic_arrow_forward))
+			setOnClickListener {
+				calendar.add(Calendar.DAY_OF_MONTH, 1)
+				updateList()
+				updateDateButton()
+			}
 		}
 
 		mainView.findViewById<SwipeRefreshLayout>(R.id.swipe_refresh).apply {
@@ -122,25 +141,21 @@ class TimelineTabFragment : Fragment() {
 	fun tabClosed() {}
 
 	private fun selectDate() {
-		val dateFromDialog =
+		val dateSetListener =
 			DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
-				val calendar = Calendar.getInstance()
+				calendar = Calendar.getInstance()
 				calendar.set(Calendar.YEAR, year)
 				calendar.set(Calendar.MONTH, monthOfYear)
 				calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
 
-				start = getStartOfDay(calendar)
-				end = getEndOfDay(calendar)
-
 				updateList()
 				updateDateButton()
 			}
-		val startCalendar = Calendar.getInstance()
-		startCalendar.timeInMillis = start
-		DatePickerDialog(context, dateFromDialog,
-			startCalendar.get(Calendar.YEAR),
-			startCalendar.get(Calendar.MONTH),
-			startCalendar.get(Calendar.DAY_OF_MONTH)
+		DatePickerDialog(
+			context, dateSetListener,
+			calendar.get(Calendar.YEAR),
+			calendar.get(Calendar.MONTH),
+			calendar.get(Calendar.DAY_OF_MONTH)
 		).show()
 	}
 
@@ -161,7 +176,7 @@ class TimelineTabFragment : Fragment() {
 	}
 
 	private fun updateDateButton() {
-		dateBtn.text = OsmandFormatter.getFormattedDate(start / 1000)
+		dateBtn.text = OsmandFormatter.getFormattedDate(getStartOfDay(calendar) / 1000)
 	}
 
 	private fun getPressedStateIcon(@DrawableRes iconId: Int): Drawable? {
@@ -187,6 +202,8 @@ class TimelineTabFragment : Fragment() {
 
 	private fun updateList() {
 		val res = mutableListOf<ListItem>()
+		val start = getStartOfDay(calendar)
+		val end = getEndOfDay(calendar)
 		app.locationMessages.getIngoingUserLocations(start, end).forEach {
 			TelegramUiHelper.userLocationsToChatItem(telegramHelper, it)?.also { chatItem ->
 				res.add(chatItem)
@@ -303,12 +320,13 @@ class TimelineTabFragment : Fragment() {
 		}
 	}
 
-	data class UITrackData (
+	data class UITrackData(
 		var dist: Float,
 		var points: Int,
 		var minTime: Long,
 		var maxTime: Long
 	)
+
 	companion object {
 		private const val ADAPTER_UPDATE_INTERVAL_MIL = 15 * 1000L // 15 sec
 	}

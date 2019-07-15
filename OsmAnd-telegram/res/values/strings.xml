@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="timeline_no_data_descr">We don`t have collected data for the selected day</string>
+    <string name="timeline_no_data">No data</string>
     <string name="shared_string_select">Select</string>
     <string name="min_logging_distance">Minimum logging distance</string>
     <string name="min_logging_distance_descr">Filter: minimum distance to log a new point</string>

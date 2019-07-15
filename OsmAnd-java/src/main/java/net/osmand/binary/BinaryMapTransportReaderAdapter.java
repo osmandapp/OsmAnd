@@ -253,6 +253,7 @@ public class BinaryMapTransportReaderAdapter {
 		int routeLength = codedIS.readRawVarint32();
 		int old = codedIS.pushLimit(routeLength);
 		net.osmand.data.TransportRoute dataObject = new net.osmand.data.TransportRoute();
+		dataObject.setFileOffset(filePointer);
 		boolean end = false;
 		long rid = 0;
 		int rx = 0;

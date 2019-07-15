@@ -527,12 +527,17 @@ public class RouteResultPreparation {
 				}
 				StringBuilder additional = new StringBuilder();
 				additional.append("time = \"").append(res.getSegmentTime()).append("\" ");
-				additional.append("rtime = \"").append(res.getRoutingTime()).append("\" ");
+				if (res.getRoutingTime() > 0) {
+					additional.append("rspeed = \"")
+							.append((int) Math.round(res.getDistance() / res.getRoutingTime() * 3.6)).append("\" ");
+				}
+				
+//				additional.append("rtime = \"").append(res.getRoutingTime()).append("\" ");
 				additional.append("name = \"").append(name).append("\" ");
 //				float ms = res.getSegmentSpeed();
 				float ms = res.getObject().getMaximumSpeed(res.isForwardDirection());
 				if(ms > 0) {
-					additional.append("maxspeed = \"").append(ms * 3.6f).append("\" ").append(res.getObject().getHighway()).append(" ");
+					additional.append("maxspeed = \"").append((int) Math.round(ms * 3.6f)).append("\" ").append(res.getObject().getHighway()).append(" ");
 				}
 				additional.append("distance = \"").append(res.getDistance()).append("\" ");
 				if (res.getTurnType() != null) {

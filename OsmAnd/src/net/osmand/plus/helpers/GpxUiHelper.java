@@ -963,7 +963,7 @@ public class GpxUiHelper {
 				for (String fname : filename) {
 					final File f = new File(dir, fname);
 					GPXFile res = GPXUtilities.loadGPXFile(f);
-					if (res.error != null && res.error.getMessage().length() > 0) {
+					if (res.error != null && !Algorithms.isEmpty(res.error.getMessage())) {
 						w += res.error.getMessage() + "\n";
 					}
 					result[k++] = res;

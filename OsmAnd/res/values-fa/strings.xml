@@ -3167,4 +3167,8 @@
     <string name="edit_profile_setup_map_subtitle">انتخاب گزینه‌های پیشفرض نقشه برای پروفایل</string>
     <string name="edit_profile_screen_options_subtitle">انتخاب گزینه‌های پیشفرض صفحه برای پروفایل</string>
     <string name="edit_profile_nav_settings_subtitle">انتخاب تنظیمات پیشفرض ناوبری برای پروفایل</string>
+    <string name="app_mode_ufo">یوفو</string>
+    <string name="app_mode_personal_transporter">رانَک (وسیلهٔ نقلیهٔ انفرادی)</string>
+    <string name="app_mode_monowheel">یکچرخه</string>
+    <string name="app_mode_scooter">اسکوتر</string>
 </resources>

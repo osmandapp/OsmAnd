@@ -50,7 +50,7 @@ public interface OsmAndCustomizationConstants {
 	String MAP_RENDERING_CATEGORY_ID = RENDERING_ITEMS_ID_SCHEME + "category";
 	String MAP_STYLE_ID = RENDERING_ITEMS_ID_SCHEME + "map_style";
 	String MAP_MODE_ID = RENDERING_ITEMS_ID_SCHEME + "map_mode";
-	String MAP_MAGNIFIER_ID = RENDERING_ITEMS_ID_SCHEME + "map_marnifier";
+	String MAP_MAGNIFIER_ID = RENDERING_ITEMS_ID_SCHEME + "map_magnifier";
 	String ROAD_STYLE_ID = RENDERING_ITEMS_ID_SCHEME + "road_style";
 	String TEXT_SIZE_ID = RENDERING_ITEMS_ID_SCHEME + "text_size";
 	String MAP_LANGUAGE_ID = RENDERING_ITEMS_ID_SCHEME + "map_language";
