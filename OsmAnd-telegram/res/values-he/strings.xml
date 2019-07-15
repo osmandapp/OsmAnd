@@ -241,4 +241,6 @@
     <string name="min_logging_speed">מהירות תיעוד מזערית</string>
     <string name="min_logging_speed_descr">מסנן: לא לתעד מתחת למהירות הנבחרת</string>
     <string name="gpx_settings">הגדרות GPX</string>
+    <string name="timeline_no_data_descr">לא אספנו נתונים ליום הנבחר</string>
+    <string name="timeline_no_data">אין נתונים</string>
 </resources>
