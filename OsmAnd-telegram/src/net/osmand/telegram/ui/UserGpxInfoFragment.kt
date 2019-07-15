@@ -7,6 +7,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
+import android.graphics.drawable.LayerDrawable
 import android.os.Build
 import android.os.Bundle
 import android.support.design.widget.Snackbar
@@ -46,6 +47,7 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 	private lateinit var timeStartBtn: TextView
 	private lateinit var dateEndBtn: TextView
 	private lateinit var timeEndBtn: TextView
+	private lateinit var liveBtn: TextView
 
 	private lateinit var avgElevationTv: TextView
 	private lateinit var avgSpeedTv: TextView
@@ -121,6 +123,15 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 		timeStartBtn = mainView.findViewById<TextView>(R.id.time_start_btn)
 		dateEndBtn = mainView.findViewById<TextView>(R.id.date_end_btn)
 		timeEndBtn = mainView.findViewById<TextView>(R.id.time_end_btn)
+
+		liveBtn = mainView.findViewById<TextView>(R.id.live_btn).apply {
+			setOnClickListener {
+				val enabled = settings.isLiveTrackEnabled(userId, chatId, deviceName)
+				settings.updateLiveTrack(userId, chatId, deviceName, !enabled)
+				updateLiveTrackBtn()
+			}
+		}
+		updateLiveTrackBtn()
 
 		dateStartBtn.setOnClickListener { selectStartDate() }
 		timeStartBtn.setOnClickListener { selectStartTime() }
@@ -241,6 +252,15 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 		textView.setTextColor(AndroidUtils.createPressedColorStateList(app, true, R.color.ctrl_active_light, R.color.ctrl_light))
 	}
 
+	private fun updateLiveTrackBtn() {
+		val enabled = settings.isLiveTrackEnabled(userId, chatId, deviceName)
+		val icon = getLiveTrackBtnIcon(enabled)
+		val normalTextColor = if (enabled) R.color.ctrl_active_light else R.color.secondary_text_light
+
+		liveBtn.setTextColor(AndroidUtils.createPressedColorStateList(app, true, normalTextColor, R.color.ctrl_light))
+		liveBtn.setCompoundDrawablesWithIntrinsicBounds(null, null, icon, null)
+	}
+
 	private fun getShareIcon(): Drawable? {
 		val normal = app.uiUtils.getActiveIcon(R.drawable.ic_action_share)
 		if (Build.VERSION.SDK_INT >= 21) {
@@ -252,9 +272,27 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 		return normal
 	}
 
+	private fun getLiveTrackBtnIcon(enabled: Boolean): Drawable? {
+		val iconColor = if (enabled) R.color.live_track_active_icon else R.color.icon_light
+
+		val layers = arrayOfNulls<Drawable>(2)
+		layers[0] = app.uiUtils.getIcon(R.drawable.ic_action_round_shape)
+		layers[1] = app.uiUtils.getIcon(R.drawable.ic_action_record, iconColor)
+
+		if (Build.VERSION.SDK_INT >= 21 && !enabled) {
+			val normal = layers[1]
+			val active = app.uiUtils.getIcon(R.drawable.ic_action_record, R.color.live_track_active_icon)
+			if (normal != null && active != null) {
+				layers[1] = AndroidUtils.createPressedStateListDrawable(normal, active)
+			}
+		}
+
+		return LayerDrawable(layers)
+	}
+
 	private fun updateGpxInfo() {
 		checkTime()
-		locationMessages = app.locationMessages.getMessagesForUserInChat(userId, chatId,deviceName, startCalendar.timeInMillis, endCalendar.timeInMillis)
+		locationMessages = app.locationMessages.getMessagesForUserInChat(userId, chatId, deviceName, startCalendar.timeInMillis, endCalendar.timeInMillis)
 
 		gpxFile = OsmandLocationUtils.convertLocationMessagesToGpxFiles(locationMessages).firstOrNull()?:GPXUtilities.GPXFile()
 		updateGPXStatisticRow()
