@@ -198,7 +198,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 			} else if (object instanceof OsmPoint) {
 				menuController = new EditPOIMenuController(mapActivity, pointDescription, (OsmPoint) object);
 			} else if (object instanceof WptPt) {
-				menuController = new WptPtMenuController(mapActivity, pointDescription, (WptPt) object);
+				menuController = WptPtMenuController.getInstance(mapActivity, pointDescription, (WptPt) object);
 			} else if (object instanceof DownloadMapObject) {
 				menuController = new MapDataMenuController(mapActivity, pointDescription, (DownloadMapObject) object);
 			} else if (object instanceof OpenStreetNote) {

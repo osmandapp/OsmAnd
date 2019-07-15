@@ -684,34 +684,10 @@ public class MenuBuilder {
 			ll.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(final View v) {
-					//todo extract to MenuBuilder method
-					//the same logic uses for AmenityMenuBuilder and can be generalized
-					final String[] phones = text.split(",|;");
-					
-					for (int i = 0; i < phones.length; i++) {
-						phones[i] = phones[i].trim();
-					}
-					
-					if (phones.length > 1) {
-						AlertDialog.Builder dlg = new AlertDialog.Builder(v.getContext());
-						dlg.setNegativeButton(R.string.shared_string_cancel, null);
-						dlg.setItems(phones, new DialogInterface.OnClickListener() {
-							@Override
-							public void onClick(DialogInterface dialog, int which) {
-								Intent intent = new Intent(Intent.ACTION_DIAL);
-								intent.setData(Uri.parse("tel:" + phones[which]));
-								v.getContext().startActivity(intent);
-							}
-						});
-						dlg.show();
-					} else {
-						Intent intent = new Intent(Intent.ACTION_DIAL);
-						intent.setData(Uri.parse("tel:" + text));
-						v.getContext().startActivity(intent);
-					}
+					showDialog(text, Intent.ACTION_DIAL, "tel:", v);
 				}
 			});
-		} else if (isEmail) {   //todo the same for the phones
+		} else if (isEmail) {
 			ll.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -729,6 +705,29 @@ public class MenuBuilder {
 		setDividerWidth(matchWidthDivider);
 
 		return ll;
+	}
+	
+	protected void showDialog(String text, final String actionType, final String dataPrefix, final View v) {
+		final String[] items = text.split("[,;]");
+		final Intent intent = new Intent(actionType);
+		if (items.length > 1) {
+			for (int i = 0; i < items.length; i++) {
+				items[i] = items[i].trim();
+			}
+			AlertDialog.Builder dlg = new AlertDialog.Builder(v.getContext());
+			dlg.setNegativeButton(R.string.shared_string_cancel, null);
+			dlg.setItems(items, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					intent.setData(Uri.parse(dataPrefix + items[which]));
+					v.getContext().startActivity(intent);
+				}
+			});
+			dlg.show();
+		} else {
+			intent.setData(Uri.parse(dataPrefix + text));
+			v.getContext().startActivity(intent);
+		}
 	}
 
 	protected void setDividerWidth(boolean matchWidthDivider) {
