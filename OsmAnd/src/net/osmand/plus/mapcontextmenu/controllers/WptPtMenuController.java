@@ -153,7 +153,7 @@ public class WptPtMenuController extends MenuController {
 		Map<String, String> extensions = metadata != null ? metadata.getExtensionsToRead() : null;
 		String metadataDesc = extensions != null ? metadata.getExtensionsToRead().get("desc") : null;
 		if (metadataDesc != null && metadataDesc.contains("wikivoyage.org/")) {
-			return new WikivoyageWptPtMenuController(new WikivoyageWptPtMenuBuilder(mapActivity, wpt), mapActivity, pointDescription, wpt);
+			return new WikivoyageWptPtMenuController(new WikivoyageWptPtMenuBuilder(mapActivity, wpt), mapActivity, pointDescription, wpt, gpxFile);
 		}
 		return new WptPtMenuController(new WptPtMenuBuilder(mapActivity, wpt), mapActivity, pointDescription, wpt);
 	}
