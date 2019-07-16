@@ -27,6 +27,8 @@ val ADDITIONAL_ACTIVE_TIME_VALUES_SEC = listOf(15 * 60L, 30 * 60L, 60 * 60L, 180
 
 const val SHARE_DEVICES_KEY = "devices"
 
+const val LIVE_TRACKS_KEY = "live_tracks"
+
 private val SEND_MY_LOC_VALUES_SEC =
 	listOf(1L, 2L, 3L, 5L, 10L, 15L, 30L, 60L, 90L, 2 * 60L, 3 * 60L, 5 * 60L)
 private val STALE_LOC_VALUES_SEC =
@@ -110,6 +112,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 	private var shareChatsInfo = ConcurrentHashMap<Long, ShareChatInfo>()
 	private var hiddenOnMapChats: Set<Long> = emptySet()
 	private var shareDevices: Set<DeviceBot> = emptySet()
+	private var liveTracksInfo: Set<LiveTrackInfo> = emptySet()
 
 	var sharingStatusChanges = ConcurrentLinkedQueue<SharingStatus>()
 
@@ -162,6 +165,19 @@ class TelegramSettings(private val app: TelegramApplication) {
 	fun hasAnyChatToShowOnMap() = !hiddenOnMapChats.containsAll(getLiveNowChats())
 
 	fun isShowingChatOnMap(chatId: Long) = !hiddenOnMapChats.contains(chatId)
+
+	fun isLiveTrackEnabled(userId: Int, chatId: Long, deviceName: String) =
+		liveTracksInfo.any { (it.chatId == chatId && it.userId == userId && it.deviceName == deviceName) }
+
+	fun updateLiveTrack(userId: Int, chatId: Long, deviceName: String, enable: Boolean) {
+		val tracksInfo = liveTracksInfo.toMutableList()
+		if (enable) {
+			tracksInfo.add(LiveTrackInfo(userId, chatId, deviceName))
+		} else {
+			tracksInfo.remove(LiveTrackInfo(userId, chatId, deviceName))
+		}
+		liveTracksInfo = tracksInfo.toHashSet()
+	}
 
 	fun removeNonexistingChats(presentChatIds: List<Long>) {
 		val hiddenChats = hiddenOnMapChats.toMutableList()
@@ -610,6 +626,11 @@ class TelegramSettings(private val app: TelegramApplication) {
 			edit.putString(PROXY_PREFERENCES_KEY, jsonObjectProxy.toString())
 		}
 
+		val jsonArrayLiveTracks = convertLiveTracksInfoToJson()
+		if (jsonArrayLiveTracks != null) {
+			edit.putString(LIVE_TRACKS_KEY, jsonArrayLiveTracks.toString())
+		}
+
 		edit.apply()
 	}
 
@@ -674,7 +695,13 @@ class TelegramSettings(private val app: TelegramApplication) {
 		try {
 			parseProxyPreferences(JSONObject(prefs.getString(PROXY_PREFERENCES_KEY, "")))
 		} catch (e: JSONException) {
-			e.printStackTrace()
+			log.error(e)
+		}
+
+		try {
+			parseLiveTracks(JSONArray(prefs.getString(LIVE_TRACKS_KEY, "")))
+		} catch (e: JSONException) {
+			log.error(e)
 		}
 	}
 
@@ -695,6 +722,23 @@ class TelegramSettings(private val app: TelegramApplication) {
 			jsonObject.put(SHARE_DEVICES_KEY, jArray)
 		} catch (e: JSONException) {
 			e.printStackTrace()
+			null
+		}
+	}
+
+	private fun convertLiveTracksInfoToJson(): JSONArray? {
+		return try {
+			JSONArray().apply {
+				liveTracksInfo.forEach { liveTrackInfo ->
+					val obj = JSONObject()
+					obj.put(LiveTrackInfo.USER_ID, liveTrackInfo.userId)
+					obj.put(LiveTrackInfo.CHAT_ID, liveTrackInfo.chatId)
+					obj.put(LiveTrackInfo.DEVICE_NAME, liveTrackInfo.deviceName)
+					put(obj)
+				}
+			}
+		} catch (e: JSONException) {
+			log.error(e)
 			null
 		}
 	}
@@ -746,7 +790,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 			}
 			jArray
 		} catch (e: JSONException) {
-			e.printStackTrace()
+			log.error(e)
 			null
 		}
 	}
@@ -797,6 +841,19 @@ class TelegramSettings(private val app: TelegramApplication) {
 		if (proxyPref != null) {
 			currentProxyPref = proxyPref
 		}
+	}
+
+	private fun parseLiveTracks(json: JSONArray) {
+		val list = mutableListOf<LiveTrackInfo>()
+		for (i in 0 until json.length()) {
+			val obj = json.getJSONObject(i)
+			val userId = obj.optInt(LiveTrackInfo.USER_ID)
+			val chatId = obj.optLong(LiveTrackInfo.CHAT_ID)
+			val deviceName = obj.optString(LiveTrackInfo.DEVICE_NAME)
+
+			list.add(LiveTrackInfo(userId, chatId, deviceName))
+		}
+		liveTracksInfo = list.toHashSet()
 	}
 
 	private fun parseShareDevices(json: String) {
@@ -1119,6 +1176,15 @@ class TelegramSettings(private val app: TelegramApplication) {
 			internal const val DEVICE_NAME = "deviceName"
 			internal const val EXTERNAL_ID = "externalId"
 			internal const val DATA = "data"
+		}
+	}
+
+	data class LiveTrackInfo(val userId: Int, val chatId: Long, val deviceName: String) {
+		companion object {
+
+			internal const val USER_ID = "userId"
+			internal const val CHAT_ID = "chatId"
+			internal const val DEVICE_NAME = "deviceName"
 		}
 	}
 
