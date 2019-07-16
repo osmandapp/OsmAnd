@@ -1,12 +1,12 @@
 package net.osmand.plus.routing;
 
 
+import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.ValueHolder;
 import net.osmand.data.LatLon;
 import net.osmand.plus.ApplicationMode;
-import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
@@ -1021,7 +1021,7 @@ public class RoutingHelper {
 			if(System.currentTimeMillis() - lastTimeEvaluatedRoute < RECALCULATE_THRESHOLD_CAUSING_FULL_RECALCULATE_INTERVAL) {
 				recalculateCountInInterval ++;
 			}
-			RouteCalculationParams params = new RouteCalculationParams();
+			final RouteCalculationParams params = new RouteCalculationParams();
 			params.start = start;
 			params.end = end;
 			params.intermediates = intermediates;
@@ -1041,6 +1041,28 @@ public class RoutingHelper {
 			if (params.mode.getRouteService() == RouteService.OSMAND) {
 				params.calculationProgress = new RouteCalculationProgress();
 				updateProgress = true;
+			} else {
+				params.resultListener = new RouteCalculationParams.RouteCalculationResultListener() {
+					@Override
+					public void onRouteCalculated(RouteCalculationResult route) {
+						final RouteCalculationProgressCallback progressRoute;
+
+						if (params.calculationProgressCallback != null) {
+							progressRoute = params.calculationProgressCallback;
+						} else {
+							progressRoute = RoutingHelper.this.progressRoute;
+						}
+						if (progressRoute != null) {
+							app.runInUIThread(new Runnable() {
+
+								@Override
+								public void run() {
+									progressRoute.finish();
+								}
+							}, 300);
+						}
+					}
+				};
 			}
 			startRouteCalculationThread(params, paramsChanged, updateProgress);
 		}
