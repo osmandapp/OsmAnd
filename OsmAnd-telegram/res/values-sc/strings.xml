@@ -157,7 +157,7 @@
     <string name="my_location_search_hint">Chirca: grupu o cuntatu</string>
     <string name="start_location_sharing">Cumpartzi sa positzione</string>
     <string name="show_on_map">Ammustra in sa mapa</string>
-    <string name="app_name">OsmAnd Online GPS Tracker</string>
+    <string name="app_name">OsmAnd arrastadore GPS in lìnia</string>
     <string name="phone_number_title">Nùmeru de telèfono</string>
     <string name="phone_number_descr">Nùmeru de telèfono in formadu internatzionale</string>
     <string name="shared_string_password">Crae de intrada</string>
@@ -241,4 +241,6 @@
     <string name="min_logging_speed">Lestresa mìnima de registratzione</string>
     <string name="min_logging_speed_descr">Filtru: peruna registratzione in suta de sa lestresa isseberada</string>
     <string name="gpx_settings">Impostatziones GPX</string>
+    <string name="timeline_no_data_descr">Non tenimus datos collidos pro sa die ischertada</string>
+    <string name="timeline_no_data">Perunu datu</string>
 </resources>
