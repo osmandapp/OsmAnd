@@ -146,11 +146,11 @@ public class WptPtMenuBuilder extends MenuBuilder {
 
 		List<WptPt> points = gpxFile.getPoints();
 		String selectedCategory = selectedPoint != null && selectedPoint.category != null ? selectedPoint.category : "";
-		int showedCount = 0;
+		int showCount = 0;
 		for (final WptPt point : points) {
 			String currentCategory = point != null ? point.category : null;
 			if (selectedCategory.equals(currentCategory)) {
-				showedCount++;
+				showCount++;
 				boolean selected = selectedPoint != null && selectedPoint.equals(point);
 				TextViewEx button = buildButtonInCollapsableView(context, selected, false);
 				button.setText(point.name);
@@ -168,7 +168,7 @@ public class WptPtMenuBuilder extends MenuBuilder {
 				}
 				view.addView(button);
 			}
-			if (showedCount >= 10) {
+			if (showCount >= 10) {
 				break;
 			}
 		}

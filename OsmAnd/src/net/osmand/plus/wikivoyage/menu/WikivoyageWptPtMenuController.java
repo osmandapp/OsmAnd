@@ -15,19 +15,15 @@ import net.osmand.plus.wikivoyage.article.WikivoyageArticleDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelArticle;
 
 public class WikivoyageWptPtMenuController extends WptPtMenuController {
-	public WikivoyageWptPtMenuController(@NonNull MenuBuilder menuBuilder, @NonNull final MapActivity mapActivity, @NonNull PointDescription pointDescription, @NonNull GPXUtilities.WptPt wpt) {
+	public WikivoyageWptPtMenuController(@NonNull MenuBuilder menuBuilder, @NonNull final MapActivity mapActivity, @NonNull PointDescription pointDescription, @NonNull GPXUtilities.WptPt wpt, GPXUtilities.GPXFile gpxFile) {
 		super(menuBuilder, mapActivity, pointDescription, wpt);
-
-		final OsmandApplication app = mapActivity.getMyApplication();
-		GpxSelectionHelper.SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedGPXFile(wpt);
-		GPXUtilities.GPXFile gpxFile = selectedGpxFile != null ? selectedGpxFile.getGpxFile() : null;
 		GPXUtilities.Metadata metadata = gpxFile != null ? gpxFile.metadata : null;
 		final TravelArticle article = metadata != null ? getTravelArticle(metadata) : null;
 		if (article != null) {
 			leftTitleButtonController = new TitleButtonController() {
 				@Override
 				public void buttonPressed() {
-					WikivoyageArticleDialogFragment.showInstance(app, mapActivity.getSupportFragmentManager(), article.getTripId(), article.getLang());
+					WikivoyageArticleDialogFragment.showInstance(mapActivity.getMyApplication(), mapActivity.getSupportFragmentManager(), article.getTripId(), article.getLang());
 				}
 			};
 			leftTitleButtonController.caption = mapActivity.getString(R.string.context_menu_read_article);
