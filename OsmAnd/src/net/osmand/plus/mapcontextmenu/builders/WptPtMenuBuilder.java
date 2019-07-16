@@ -30,7 +30,6 @@ import java.util.Date;
 import java.util.List;
 
 public class WptPtMenuBuilder extends MenuBuilder {
-
 	private final WptPt wpt;
 
 	public WptPtMenuBuilder(@NonNull MapActivity mapActivity, final @NonNull WptPt wpt) {
@@ -72,16 +71,11 @@ public class WptPtMenuBuilder extends MenuBuilder {
 					null, Algorithms.capitalizeFirstLetterAndLowercase(app.getString(R.string.plugin_distance_point_hdop)) + ": " + (int)wpt.hdop, 0,
 					false, null, false, 0, false, null, false);
 		}
+		
 		if (!Algorithms.isEmpty(wpt.desc)) {
-			final View row = buildRow(view, R.drawable.ic_action_note_dark, null, wpt.desc, 0, false, null, true, 10, false, null, false);
-			row.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					POIMapLayer.showDescriptionDialog(row.getContext(), app, wpt.desc,
-							row.getResources().getString(R.string.shared_string_description));
-				}
-			});
+			prepareDescription(wpt, view);
 		}
+		
 		if (!Algorithms.isEmpty(wpt.comment)) {
 			final View rowc = buildRow(view, R.drawable.ic_action_note_dark, null, wpt.comment, 0,
 					false, null, true, 10, false, null, false);
@@ -95,6 +89,19 @@ public class WptPtMenuBuilder extends MenuBuilder {
 		}
 
 		buildPlainMenuItems(view);
+	}
+	
+	protected void prepareDescription(final WptPt wpt, View view) {
+		if (!Algorithms.isEmpty(wpt.desc)) {
+			final View row = buildRow(view, R.drawable.ic_action_note_dark, null, wpt.desc, 0, false, null, true, 10, false, null, false);
+			row.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					POIMapLayer.showDescriptionDialog(row.getContext(), app, wpt.desc,
+							row.getResources().getString(R.string.shared_string_description));
+				}
+			});
+		}
 	}
 
 	private void buildWaypointsView(View view) {
@@ -138,24 +145,32 @@ public class WptPtMenuBuilder extends MenuBuilder {
 		LinearLayout view = (LinearLayout) buildCollapsableContentView(context, collapsed, true);
 
 		List<WptPt> points = gpxFile.getPoints();
-		for (int i = 0; i < points.size() && i < 10; i++) {
-			final WptPt point = points.get(i);
-			boolean selected = selectedPoint != null && selectedPoint.equals(point);
-			TextViewEx button = buildButtonInCollapsableView(context, selected, false);
-			button.setText(point.name);
+		String selectedCategory = selectedPoint != null && selectedPoint.category != null ? selectedPoint.category : "";
+		int showCount = 0;
+		for (final WptPt point : points) {
+			String currentCategory = point != null ? point.category : null;
+			if (selectedCategory.equals(currentCategory)) {
+				showCount++;
+				boolean selected = selectedPoint != null && selectedPoint.equals(point);
+				TextViewEx button = buildButtonInCollapsableView(context, selected, false);
+				button.setText(point.name);
 
-			if (!selected) {
-				button.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						LatLon latLon = new LatLon(point.getLatitude(), point.getLongitude());
-						PointDescription pointDescription = new PointDescription(PointDescription.POINT_TYPE_WPT, point.name);
-						mapActivity.getContextMenu().setCenterMarker(true);
-						mapActivity.getContextMenu().show(latLon, pointDescription, point);
-					}
-				});
+				if (!selected) {
+					button.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							LatLon latLon = new LatLon(point.getLatitude(), point.getLongitude());
+							PointDescription pointDescription = new PointDescription(PointDescription.POINT_TYPE_WPT, point.name);
+							mapActivity.getContextMenu().setCenterMarker(true);
+							mapActivity.getContextMenu().show(latLon, pointDescription, point);
+						}
+					});
+				}
+				view.addView(button);
 			}
-			view.addView(button);
+			if (showCount >= 10) {
+				break;
+			}
 		}
 
 		if (points.size() > 10) {

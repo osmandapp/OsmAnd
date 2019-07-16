@@ -1638,7 +1638,7 @@ Dĺžka %2$s</string>
     <string name="app_name_osmand">OsmAnd</string>
     <string name="offline_maps_and_navigation">Offline mapy\n&amp; Navigácia</string>
     <string name="commit_poi">Odoslať POI</string>
-    <string name="av_locations_descr">GPX súbor s pozíciami poznámok.</string>
+    <string name="av_locations_descr">GPX súbor s pozíciami.</string>
     <string name="av_locations">Pozície</string>
     <string name="plugin_settings">Zásuvné moduly</string>
     <string name="routing_attr_avoid_shuttle_train_name">Nepoužiť autovlak</string>
@@ -3039,9 +3039,9 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="choose_data_to_share">Zvoľte ktoré typy údajov dovolíte zdieľať:</string>
     <string name="downloaded_maps">Stiahnuté mapy</string>
     <string name="visited_screens">Navštívené obrazovky</string>
-    <string name="collected_data_descr">Zoznam údajov, ktoré chcete zdieľať s OsmAnd.</string>
-    <string name="downloaded_maps_collect_descr">Zbierame tieto údaje pre pochopenie, ktoré mapy regiónov a krajín sú najpopulárnejšie.</string>
-    <string name="visited_screens_collect_descr">Zbierame tieto údaje pre pochopenie, ktoré funkcie OsmAnd sú najpopulárnejšie.</string>
+    <string name="collected_data_descr">Určite, ktoré údaje umožníte OsmAndu zdieľať.</string>
+    <string name="downloaded_maps_collect_descr">Pomôže nám pochopiť, ktoré mapy regiónov a krajín sú najpopulárnejšie.</string>
+    <string name="visited_screens_collect_descr">Pomôže nám pochopiť, ktoré funkcie OsmAnd sú najpopulárnejšie.</string>
     <string name="privacy_and_security_change_descr">Stlačením \"Povoliť\" súhlasíte s: %1$s</string>
     <string name="settings_privacy_and_security">Súkromie a bezpečnosť</string>
     <string name="settings_privacy_and_security_desc">Zvoľte ktoré údaje budete zdieľať s nami</string>
@@ -3143,10 +3143,12 @@ Zodpovedá oblasti: %1$s x %2$s</string>
 \n • Pridané možnosti zobrazenia kompasu na mape s pravítkom polomeru
 \n 
 \n • Opravené zaznamenávanie stopy na pozadí
-\n
-\n • Vylepšené sťahovanie máp na pozadí
 \n 
-\n • Opravný výber jazyka Wikipedie
+\n • Vylepšené sťahovanie máp na pozadí
+\n
+\n • Návrat voľby \'Zapnúť obrazovku\'
+\n 
+\n • Opravený výber jazyka Wikipedie
 \n 
 \n • Opravené správanie tlačidla kompasu počas navigácie
 \n 
@@ -3166,4 +3168,32 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="edit_profile_nav_settings_subtitle">Zvoľte predvolené nastavenia navigácie pre profil</string>
     <string name="routing_attr_max_num_changes_description">Zadajte maximálny počet zmien</string>
     <string name="routing_attr_max_num_changes_name">Počet zmien</string>
+    <string name="turn_screen_on_router">Prebudiť pri odbočení</string>
+    <string name="turn_screen_on_time_descr">Nastavte čas, na ktorý bude obrazovka prebudená.</string>
+    <string name="turn_screen_on_sensor">Použiť senzor priblíženia</string>
+    <string name="turn_screen_on_sensor_descr">Zamávajte rukou ponad hornú stranu obrazovky pre zapnutie obrazovky počas navigácie.</string>
+    <string name="rendering_attr_highway_class_track_grade1_name">Stupeň 1</string>
+    <string name="rendering_attr_highway_class_track_grade2_name">Stupeň 2</string>
+    <string name="rendering_attr_highway_class_track_grade3_name">Stupeň 3</string>
+    <string name="rendering_attr_highway_class_track_grade4_name">Stupeň 4</string>
+    <string name="rendering_attr_highway_class_track_grade5_name">Stupeň 5</string>
+    <string name="external_input_device">Externé vstupné zariadenia</string>
+    <string name="external_input_device_descr">Zvoľte zariadenie, ako napr. univerzálnu klávesnicu alebo WunderLINQ, pre externé ovládanie.</string>
+    <string name="sett_no_ext_input">Žiadne</string>
+    <string name="sett_generic_ext_input">Všeobecná klávesnica</string>
+    <string name="sett_wunderlinq_ext_input">WunderLINQ</string>
+    <string name="sett_parrot_ext_input">Parrot</string>
+    <string name="turn_on_profile_desc">Pre použitie tohto nastavenia prosím zapnite aspoň jeden profil aplikácie.</string>
+    <string name="rendering_attr_winter_road_name">Zimná cesta</string>
+    <string name="rendering_attr_ice_road_name">Ľadová cesta</string>
+    <string name="routeInfo_winter_ice_road_name">Zimné a ľadové cesty</string>
+    <string name="rendering_attr_tracktype_grade1_name">Pevné (spevnené)</string>
+    <string name="rendering_attr_tracktype_grade2_name">Pevné (nespevnené)</string>
+    <string name="rendering_attr_tracktype_grade3_name">Väčšinou pevné</string>
+    <string name="rendering_attr_tracktype_grade4_name">Väčšinou mäkké</string>
+    <string name="rendering_attr_tracktype_grade5_name">Mäkké</string>
+    <string name="routeInfo_tracktype_name">Pevnosť povrchu</string>
+    <string name="shared_string_file_is_saved">%s je uložený</string>
+    <string name="shared_string_open_track">Otvoriť stopu</string>
+    <string name="shared_string_track_is_saved">Stopa %s je uložená</string>
 </resources>

@@ -514,7 +514,7 @@
     <string name="poi_car_rental">Пракат аўтамабіляў</string>
     <string name="poi_car_sharing">Кароткачасовы пракат аўтамабіляў</string>
     <string name="poi_boat_sharing">Пракат лодак</string>
-    <string name="poi_toilets">Туалет</string>
+    <string name="poi_toilets">Прыбіральня;Туалет</string>
     <string name="poi_sauna">Саўна</string>
     <string name="poi_brothel">Бардэль</string>
     <string name="poi_mortuary">Морг</string>
@@ -3600,4 +3600,8 @@
     <string name="poi_changing_table_count">Колькасць спавівальных сталоў</string>
     <string name="poi_changing_table_fee_yes">Свабодны спавівальны стол: так</string>
     <string name="poi_changing_table_fee_no">Свабодны спавівальны стол: не</string>
+    <string name="poi_historic_tank">Танк</string>
+    <string name="poi_charcoal_pile">Куча вуголля</string>
+    <string name="poi_hookah_lounge">Кальянная</string>
+    <string name="poi_source_biomass">Крыніца энергіі: біямаса</string>
 </resources>

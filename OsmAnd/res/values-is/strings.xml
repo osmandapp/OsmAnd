@@ -1448,7 +1448,7 @@ og leiðsögn</string>
     <string name="osm_edit_created_poi">Bjó til OSM-merkisstað</string>
     <string name="simulate_initial_startup">Líkja eftir fyrstu ræsingu forritsins</string>
     <string name="favorite_category_dublicate_message">Notaðu eitthvað nafn á flokkinn sem ekki er þegar í notkun.</string>
-    <string name="av_locations_descr">GPX-skrá með minnispunktum við staðsetningar.</string>
+    <string name="av_locations_descr">GPX-skrá með staðsetningum.</string>
     <string name="download_wikipedia_files">Viltu ná í viðbótargögn af Wikipedia (%1$s MB) ?</string>
     <string name="osm_edit_context_menu_delete">Eyða OSM-breytingu</string>
     <string name="rendering_attr_hideHouseNumbers_name">Húsnúmer</string>
@@ -3061,7 +3061,7 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="settings_privacy_and_security">Gagnaleynd og öryggi</string>
     <string name="shared_string_no_thank_you">Nei takk</string>
     <string name="shared_string_allow">Leyfa</string>
-    <string name="profile_name_hint">Heiti notandasniðs</string>
+    <string name="profile_name_hint">Heiti notkunarsniðs</string>
     <string name="nav_type_hint">Gerð leiðsagnar</string>
     <string name="app_mode_taxi">Leigubíll</string>
     <string name="app_mode_subway">Neðanjarðarlest</string>
@@ -3076,7 +3076,7 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="profile_type_descr_string">Tegund: %s</string>
     <string name="profile_alert_need_routing_type_title">Veldu gerð leiðsagnar</string>
     <string name="profile_alert_need_save_title">Vista breytingar</string>
-    <string name="profile_alert_delete_title">Eyða notandasniði</string>
+    <string name="profile_alert_delete_title">Eyða notkunarsniði</string>
     <string name="select_nav_profile_dialog_title">Veldu gerð leiðsagnar</string>
     <string name="routing_profile_straightline">Bein lína</string>
     <string name="routing_attr_piste_type_skitour_name">Ferðaskíði</string>
@@ -3087,21 +3087,21 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="collected_data">Söfnuð gögn</string>
     <string name="choose_data_to_share">Veldu hvaða gerðum gagna þú vilt deila:</string>
     <string name="visited_screens">Skoðaðir skjáir</string>
-    <string name="collected_data_descr">Listi yfir gögn sem þú vilt deila með OsmAnd.</string>
-    <string name="privacy_and_security_change_descr">Með því að smella á \'Leyfa\' samþykkir þú %1$s</string>
+    <string name="collected_data_descr">Listi yfir gögn sem þú vilt leyfa OsmAnd að deila.</string>
+    <string name="privacy_and_security_change_descr">Með því að ýta á \'Leyfa\' samþykkir þú %1$s</string>
     <string name="settings_privacy_and_security_desc">Veldu þau gögn sem þú vilt deila með okkur</string>
     <string name="app_mode_shuttle_bus">Tengirúta</string>
     <string name="osmand_routing_promo">Þú getur bætt við þinni eigin sérsniðnu útgáfu af routing.xml í ..osmand/routing</string>
     <string name="hide_compass_ruler">Fela áttavitastiku</string>
     <string name="settings_derived_routing_mode_string">Notandahamur, afleiddur af: %s</string>
     <string name="profile_type_base_string">Grunnsnið</string>
-    <string name="profile_alert_need_profile_name_title">Settu inn heiti á sniði</string>
+    <string name="profile_alert_need_profile_name_title">Settu inn heiti á notkunarsniði</string>
     <string name="profile_alert_need_profile_name_msg">Heiti notkunarsniðs má ekki vera autt!</string>
     <string name="profile_alert_duplicate_name_title">Tvítekið nafn</string>
     <string name="profile_alert_duplicate_name_msg">Þegar er til notkunarsnið með þessu nafni</string>
     <string name="profile_alert_cant_delete_base">Þú getur ekki eytt grunnsniðum OsmAnd</string>
-    <string name="profile_alert_need_save_msg">Þú verður að vista breytingar á sniðinu áður en haldið er áfram</string>
-    <string name="profile_alert_delete_msg">Ertu viss um að þú viljir eyða sniðinu %s</string>
+    <string name="profile_alert_need_save_msg">Þú verður að vista breytingar á notkunarsniðinu áður en haldið er áfram</string>
+    <string name="profile_alert_delete_msg">Ertu viss um að þú viljir eyða notkunarsniðinu %s</string>
     <string name="select_base_profile_dialog_title">Veldu grunnsnið</string>
     <string name="base_profile_descr_car">Bílar, trukkar, mótorhjól</string>
     <string name="base_profile_descr_bicycle">MTB, skellinöðrur, hestar</string>
@@ -3131,7 +3131,7 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="routing_attr_allow_classic_only_name">Leyfa leiðir sem eingöngu eru fyrir klassísk skíðaspor</string>
     <string name="routing_attr_freeride_policy_name">Utanbrauta</string>
     <string name="process_downloading_service">OsmAnd niðurhalsþjónusta</string>
-    <string name="rate_dialog_descr">Tileinkaðu okkur 30 sekúndur, deildu reynslu þinni og gefðu okkur einkunn á Google Play.</string>
+    <string name="rate_dialog_descr">Tileinkaðu okkur 30 sekúndur með því að deila reynslu þinni og gefa okkur einkunn á Google Play.</string>
     <string name="routing_profile_geocoding">Landkóðun</string>
     <string name="zoom_by_wunderlinq_descr">Breyttu aðdrætti á kort með skruni músarhjóls upp og niður. Escape fer aftur með þig inn í WunderLINQ forritið.</string>
     <string name="quick_action_need_to_add_item_to_list">Þú verður að skilgreina a.m.k. eitt atriði í listanum í stillingum flýtiaðgerða</string>
@@ -3144,10 +3144,10 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="make_osmand_better_descr">Leyfa OsmAnd að safna og vinna notkun á ónafngreindum notkunargögnum. Við söfnum ekki né geymum gögn um staðsetningu þína eða um þá staði sem þú skoðar á kortinu.
 \n
 \nÞú getur alltaf breytt valinu á Stillingar &gt; Gagnaleynd og öryggi.</string>
-    <string name="downloaded_maps_collect_descr">Við söfnum þessum gögnum til að skilja hvaða kort af svæðum og löndum eru vinsælust.</string>
-    <string name="visited_screens_collect_descr">Við söfnum þessum gögnum til að skilja hvaða eiginleikar OsmAnd eru vinsælastir.</string>
+    <string name="downloaded_maps_collect_descr">Hjálpar okkur að skilja hvaða kort af hvaða svæðum og löndum eru vinsælust.</string>
+    <string name="visited_screens_collect_descr">Hjálpar okkur að skilja hvaða eiginleikar OsmAnd eru vinsælastir.</string>
     <string name="profile_alert_need_routing_type_msg">Þú þarft að velja gerð leiðsagnar til að búa til nýtt forritssnið</string>
-    <string name="select_base_profile_dialog_message">Sérstillt forritssnið ættu að vera byggð á einum af sjálfgefnu forritsstillingunum. Valda sniðið skilgreinir grunnstillingar: uppsetning viðmótshluta, einingar fyrir hraða og vegalengdir. Þú getur fundið út hvaða leiðsagnarsnið henta fyrir hvaða forritssnið í streng fyrir neðan nafn sniðsins.</string>
+    <string name="select_base_profile_dialog_message">Sérstillt notkunarsnið ættu að vera byggð á einu af sjálfgefnu forritssniðunum. Valda sniðið skilgreinir grunnstillingar: sýnileika viðmótshluta, einingar fyrir hraða og vegalengdir. Þetta eru sjálfgefnu forritssniðin, ásamt dæmum um sérsnið sem hægt er að útvíkka þau með:</string>
     <string name="press_again_to_change_the_map_orientation">Ýttu aftur til að breyta stefnu kortsins</string>
     <string name="shared_string_min_speed">Lágmarkshraði</string>
     <string name="shared_string_max_speed">Hámarkshraði</string>
@@ -3157,5 +3157,66 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="default_speed_dialog_msg">Notað til að reikna út væntanlegan komutíma við leiðaval</string>
     <string name="new_profile">Nýtt notkunarsnið</string>
     <string name="shared_string_crash">Hrun</string>
-    <string name="last_launch_crashed">Seinasta ræsing OsmAnd mistókst. Hjálpaðu okkur að bæta OsmAnd. Vinsamlegast sendið okkur villuboð.</string>
+    <string name="last_launch_crashed">Seinasta ræsing OsmAnd mistókst. Hjálpaðu okkur að bæta OsmAnd með því að senda okkur villuboðin.</string>
+    <string name="app_mode_ufo">FFH</string>
+    <string name="app_mode_monowheel">Einhjól</string>
+    <string name="app_mode_scooter">Skellinöðrur</string>
+    <string name="precision_hdop_and_vdop">Lárétt nákvæmni: %1$s, lóðrétt: %2$s</string>
+    <string name="precision_hdop">Lárétt nákvæmni: %s</string>
+    <string name="app_mode_offroad">Torfærur</string>
+    <string name="edit_profile_setup_title">Setja upp snið</string>
+    <string name="edit_profile_setup_subtitle">Sniðið heldur sínum eigin stillingum</string>
+    <string name="edit_profile_setup_map_subtitle">Veldu sjálfgefna valkosti landakorts fyrir sniðið</string>
+    <string name="edit_profile_screen_options_subtitle">Veldu sjálfgefna valkosti skjás fyrir sniðið</string>
+    <string name="edit_profile_nav_settings_subtitle">Veldu sjálfgefna valkosti leiðsagnar fyrir sniðið</string>
+    <string name="routing_attr_max_num_changes_description">Tilgreindu hámarksfjölda breytinga</string>
+    <string name="routing_attr_max_num_changes_name">Fjöldi breytinga</string>
+    <string name="release_3_4">• Forritasnið: útbúðu þín eigin snið fyrir þínar þarfir, með sérniðnum táknmyndum og litum
+\n
+\n • Nú er hægt að sérsníða í öllum sniðum jafnt sjálfgefinn hraða sem hámarks-/lágmarkshraða
+\n
+\n • Viðmótshluti með fyrirliggjandi hnitum
+\n
+\n • Bætt við valkosti til að birta áttavita og vegalengdarradíus á korti
+\n
+\n • Lagfærð ferilskráning í bakgrunni
+\n
+\n • Lagfært niðurhal korta í bakgrunni
+\n
+\n • Valkosturinn \'Kveikja á skjá\' kemur aftur inn
+\n
+\n • Lagfært val á tungumálum Wikipedia
+\n
+\n • Lagfærð hegðun áttavitahnapps við leiðsögn
+\n
+\n • Aðrir lagfærðir gallar
+\n
+\n</string>
+    <string name="turn_screen_on_router">Vekja við beygjur</string>
+    <string name="turn_screen_on_time_descr">Skilgreindu þann tíma sem kveikt er á skjánum.</string>
+    <string name="turn_screen_on_sensor">Nota nálægðarskynjara</string>
+    <string name="turn_screen_on_sensor_descr">Veifaðu hendinni yfir efri hluta skjásins til að kveikja á skjánum á meðan leiðsögn stendur.</string>
+    <string name="rendering_attr_highway_class_track_grade1_name">Gráða 1</string>
+    <string name="rendering_attr_highway_class_track_grade2_name">Gráða 2</string>
+    <string name="rendering_attr_highway_class_track_grade3_name">Gráða 3</string>
+    <string name="rendering_attr_highway_class_track_grade4_name">Gráða 4</string>
+    <string name="rendering_attr_highway_class_track_grade5_name">Gráða 5</string>
+    <string name="external_input_device">Utanáliggjandi inntakstæki</string>
+    <string name="external_input_device_descr">Veldu tæki á borð við venjulegt lyklaborð eða WunderLINQ fyrir ytri stýringar.</string>
+    <string name="sett_no_ext_input">Ekkert</string>
+    <string name="sett_generic_ext_input">Venjulegt lyklaborð</string>
+    <string name="sett_wunderlinq_ext_input">WunderLINQ</string>
+    <string name="turn_on_profile_desc">Til að nota þessa stillingu, þarftu að virkja að minnsta kosti eitt forritssnið.</string>
+    <string name="rendering_attr_winter_road_name">Vegur með vetrarskilyrðum</string>
+    <string name="rendering_attr_ice_road_name">Ísaður vegur</string>
+    <string name="routeInfo_winter_ice_road_name">Vegir með hálku og snjó</string>
+    <string name="rendering_attr_tracktype_grade1_name">Þétt (bundið slitlag)</string>
+    <string name="rendering_attr_tracktype_grade2_name">Þétt (óbundið slitlag)</string>
+    <string name="rendering_attr_tracktype_grade3_name">Mestmegnis þétt</string>
+    <string name="rendering_attr_tracktype_grade4_name">Mestmegnis mjúkt</string>
+    <string name="rendering_attr_tracktype_grade5_name">Mjúkt</string>
+    <string name="routeInfo_tracktype_name">Þéttleiki yfirborðs</string>
+    <string name="shared_string_file_is_saved">%s er vistað</string>
+    <string name="shared_string_open_track">Opna feril</string>
+    <string name="shared_string_track_is_saved">Ferill %s er vistaður</string>
 </resources>
