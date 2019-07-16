@@ -372,11 +372,10 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 		}
 		ProgressBar progressBarButton = (ProgressBar) view.findViewById(R.id.progress_bar_button);
 		if (progressBarButton != null) {
-			int visibility = publicTransportMode ? View.GONE : View.VISIBLE;
-			if (progressBarButton.getVisibility() != visibility) {
-				progressBarButton.setVisibility(visibility);
+			if (progressBarButton.getVisibility() != View.VISIBLE) {
+				progressBarButton.setVisibility(View.VISIBLE);
 			}
-			progressBarButton.setProgress(progress);
+			progressBarButton.setProgress(publicTransportMode ? 0 : progress);
 		}
 		TextViewExProgress textViewExProgress = (TextViewExProgress) view.findViewById(R.id.start_button_descr);
 		textViewExProgress.percent = publicTransportMode ? 0 : progress / 100f;
