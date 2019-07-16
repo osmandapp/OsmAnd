@@ -23,6 +23,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import net.osmand.GPXUtilities
 import net.osmand.PlatformUtil
 import net.osmand.aidl.gpx.AGpxBitmap
 import net.osmand.telegram.R
@@ -30,7 +31,10 @@ import net.osmand.telegram.TelegramSettings
 import net.osmand.telegram.helpers.LocationMessages
 import net.osmand.telegram.helpers.OsmandAidlHelper
 import net.osmand.telegram.helpers.TelegramUiHelper
-import net.osmand.telegram.utils.*
+import net.osmand.telegram.utils.AndroidUtils
+import net.osmand.telegram.utils.OsmandFormatter
+import net.osmand.telegram.utils.OsmandLocationUtils
+import net.osmand.telegram.utils.TRACKS_DIR
 import net.osmand.util.Algorithms
 import java.io.File
 import java.text.SimpleDateFormat
@@ -42,7 +46,7 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 
 	private val uiUtils get() = app.uiUtils
 
-	private var gpxFile = GPXUtilities.GPXFile()
+	private var gpxFile = GPXUtilities.GPXFile("")
 
 	private lateinit var mainView: View
 	private lateinit var dateStartBtn: TextView
@@ -101,8 +105,10 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 						openGpx(path)
 					}
 
-					override fun onSavingGpxError(warnings: List<String>?) {
-						Toast.makeText(app, warnings?.firstOrNull(), Toast.LENGTH_LONG).show()
+					override fun onSavingGpxError(warning: String?) {
+						warning?.also {
+							Toast.makeText(app, it, Toast.LENGTH_LONG).show()
+						}
 					}
 				})
 			}
@@ -198,8 +204,10 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 							(activity as MainActivity).shareGpx(path)
 						}
 
-						override fun onSavingGpxError(warnings: List<String>?) {
-							Toast.makeText(app, warnings?.firstOrNull(), Toast.LENGTH_LONG).show()
+						override fun onSavingGpxError(warning: String?) {
+							warning?.also {
+								Toast.makeText(app, it, Toast.LENGTH_LONG).show()
+							}
 						}
 					})
 				}
@@ -320,7 +328,7 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 		checkTime()
 		locationMessages = app.locationMessages.getMessagesForUserInChat(userId, chatId, deviceName, startCalendar.timeInMillis, endCalendar.timeInMillis)
 
-		gpxFile = OsmandLocationUtils.convertLocationMessagesToGpxFiles(locationMessages).firstOrNull()?:GPXUtilities.GPXFile()
+		gpxFile = OsmandLocationUtils.convertLocationMessagesToGpxFiles(app.packageName, locationMessages).firstOrNull() ?: GPXUtilities.GPXFile(app.packageName)
 		updateGPXStatisticRow()
 		updateDateAndTimeButtons()
 		updateGPXMap()
@@ -390,8 +398,8 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 					}
 				}
 
-				override fun onSavingGpxError(warnings: List<String>?) {
-					log.debug("onSavingGpxError ${warnings?.firstOrNull()}")
+				override fun onSavingGpxError(warning: String?) {
+					log.debug("onSavingGpxError $warning")
 				}
 			})
 		}

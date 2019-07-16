@@ -1,6 +1,7 @@
 package net.osmand.telegram.utils
 
 import android.os.AsyncTask
+import net.osmand.GPXUtilities
 import net.osmand.Location
 import net.osmand.data.LatLon
 import net.osmand.telegram.TelegramApplication
@@ -15,6 +16,7 @@ import org.drinkless.td.libcore.telegram.TdApi
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.math.abs
 
 const val TRACKS_DIR = "tracker/"
 
@@ -412,7 +414,7 @@ object OsmandLocationUtils {
 		return TdApi.InputMessageText(TdApi.FormattedText(textMessage, entities.toTypedArray()), true, true)
 	}
 
-	fun convertLocationMessagesToGpxFiles(items: List<LocationMessage>, newGpxPerChat: Boolean = true): List<GPXUtilities.GPXFile> {
+	fun convertLocationMessagesToGpxFiles(author:String, items: List<LocationMessage>, newGpxPerChat: Boolean = true): List<GPXUtilities.GPXFile> {
 		val dataTracks = ArrayList<GPXUtilities.GPXFile>()
 
 		var previousTime: Long = -1
@@ -432,24 +434,25 @@ object OsmandLocationUtils {
 			}
 			countedLocations++
 			if (previousUserId != userId || (newGpxPerChat && previousChatId != chatId)) {
-				gpx = GPXUtilities.GPXFile()
-				gpx!!.chatId = chatId
-				gpx!!.userId = userId
+				gpx = GPXUtilities.GPXFile(author).apply {
+					metadata = GPXUtilities.Metadata().apply {
+						extensionsToWrite["chatId"] = chatId.toString()
+						extensionsToWrite["userId"] = userId.toString()
+					}
+				}
 				previousTime = 0
 				track = null
 				segment = null
 				dataTracks.add(gpx!!)
 			}
 			val pt = GPXUtilities.WptPt()
-			pt.userId = userId
-			pt.chatId = chatId
 			pt.lat = it.lat
 			pt.lon = it.lon
 			pt.ele = it.altitude
 			pt.speed = it.speed
 			pt.hdop = it.hdop
 			pt.time = time
-			val currentInterval = Math.abs(time - previousTime)
+			val currentInterval = abs(time - previousTime)
 			if (track != null) {
 				if (currentInterval < 30 * 60 * 1000) {
 					// 30 minute - same segment
@@ -524,44 +527,46 @@ object OsmandLocationUtils {
 		private val app: TelegramApplication, private val listener: SaveGpxListener?,
 		private val gpxFile: GPXUtilities.GPXFile, private val dir: File, private val userId: Int
 	) :
-		AsyncTask<Void, Void, List<String>>() {
+		AsyncTask<Void, Void, java.lang.Exception>() {
 
-		override fun doInBackground(vararg params: Void): List<String> {
-			val warnings = ArrayList<String>()
+		override fun doInBackground(vararg params: Void): Exception? {
 			dir.mkdirs()
 			if (dir.parentFile.canWrite()) {
 				if (dir.exists()) {
 					// save file
-					var fout = File(dir, "$userId.gpx")
 					if (!gpxFile.isEmpty) {
 						val pt = gpxFile.findPointToShow()
-
-						val user = app.telegramHelper.getUser(pt!!.userId)
+						val userId = gpxFile.metadata.extensionsToRead["userId"]
+						val user = if (!userId.isNullOrEmpty()) {
+							try {
+								app.telegramHelper.getUser(userId.toInt())
+							} catch (e: NumberFormatException) {
+								null
+							}
+						} else {
+							null
+						}
 						val fileName: String
 						fileName = if (user != null) {
 							(TelegramUiHelper.getUserName(user) + "_" + SimpleDateFormat("yyyy-MM-dd", Locale.US).format(Date(pt.time)))
 						} else {
 							userId.toString() + "_" + SimpleDateFormat("yyyy-MM-dd", Locale.US).format(Date(pt.time))
 						}
-						fout = File(dir, "$fileName.gpx")
-					}
-					val warn = GPXUtilities.writeGpxFile(fout, gpxFile, app)
-					if (warn != null) {
-						warnings.add(warn)
-						return warnings
+						gpxFile.metadata?.name = fileName
+						val fout = File(dir, "$fileName.gpx")
+						return GPXUtilities.writeGpxFile(fout, gpxFile)
 					}
 				}
 			}
-
-			return warnings
+			return null
 		}
 
-		override fun onPostExecute(warnings: List<String>?) {
+		override fun onPostExecute(warning: Exception?) {
 			if (listener != null) {
-				if (warnings != null && warnings.isEmpty()) {
+				if (warning == null) {
 					listener.onSavingGpxFinish(gpxFile.path)
 				} else {
-					listener.onSavingGpxError(warnings)
+					listener.onSavingGpxError(warning.message)
 				}
 			}
 		}
@@ -571,6 +576,6 @@ object OsmandLocationUtils {
 
 		fun onSavingGpxFinish(path: String)
 
-		fun onSavingGpxError(warnings: List<String>?)
+		fun onSavingGpxError(warning: String?)
 	}
 }
