@@ -395,7 +395,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 							} else {
 								color = getPointColor(o, fileColor);
 							}
-							paintIcon.setColorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.MULTIPLY));
+							paintIcon.setColorFilter(new PorterDuffColorFilter(color | 0xff000000, PorterDuff.Mode.MULTIPLY));
 							canvas.drawBitmap(pointSmall, x - pointSmall.getWidth() / 2, y - pointSmall.getHeight() / 2, paintIcon);
 							smallObjectsLatLon.add(new LatLon(o.lat, o.lon));
 						} else {
