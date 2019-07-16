@@ -232,6 +232,13 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 		}
 	}
 
+	override fun onResume() {
+		super.onResume()
+		if (liveTrackEnabled()) {
+			startHandler()
+		}
+	}
+
 	private fun startHandler() {
 		log.debug("startHandler")
 		if (!handler.hasMessages(TRACK_UPDATE_MSG_ID)) {
