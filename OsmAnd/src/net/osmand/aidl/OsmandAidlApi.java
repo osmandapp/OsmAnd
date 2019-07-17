@@ -74,7 +74,6 @@ import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.helpers.ExternalApiHelper;
-import net.osmand.plus.helpers.LockHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.IContextMenuButtonListener;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
@@ -1315,6 +1314,9 @@ public class OsmandAidlApi {
 				File destination = app.getAppPath(IndexConstants.GPX_INDEX_DIR + destinationPath);
 				if (destination.getParentFile().canWrite()) {
 					boolean destinationExists = destination.exists();
+					if (!destinationExists) {
+						Algorithms.createParentDirsForFile(destination);
+					}
 					try {
 						Algorithms.fileCopy(source, destination);
 						finishGpxImport(destinationExists, destination, color, show);
@@ -1336,6 +1338,9 @@ public class OsmandAidlApi {
 				gpxParcelDescriptor = app.getContentResolver().openFileDescriptor(gpxUri, "r");
 				if (gpxParcelDescriptor != null) {
 					boolean destinationExists = destination.exists();
+					if (!destinationExists) {
+						Algorithms.createParentDirsForFile(destination);
+					}
 					FileDescriptor fileDescriptor = gpxParcelDescriptor.getFileDescriptor();
 					InputStream is = new FileInputStream(fileDescriptor);
 					FileOutputStream fout = new FileOutputStream(destination);
@@ -1370,6 +1375,9 @@ public class OsmandAidlApi {
 				InputStream is = new ByteArrayInputStream(sourceRawData.getBytes());
 				FileOutputStream fout = new FileOutputStream(destination);
 				boolean destinationExists = destination.exists();
+				if (!destinationExists) {
+					Algorithms.createParentDirsForFile(destination);
+				}
 				try {
 					Algorithms.streamCopy(is, fout);
 					finishGpxImport(destinationExists, destination, color, show);
