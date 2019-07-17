@@ -461,14 +461,7 @@ public class Algorithms {
 
 	public static String gzipToString(byte[] gzip) throws IOException {
 		GZIPInputStream gzipIs = new GZIPInputStream(new ByteArrayInputStream(gzip));
-		BufferedReader br = new BufferedReader(new InputStreamReader(gzipIs, "UTF-8"));
-		StringBuilder sb = new StringBuilder();
-		String s;
-		while ((s = br.readLine()) != null) {
-			sb.append(s);
-		}
-		br.close();
-		return sb.toString();
+		return readFromInputStream(gzipIs).toString();
 	}
 
 	public static boolean removeAllFiles(File f) {
