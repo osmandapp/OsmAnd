@@ -21,6 +21,7 @@ import org.drinkless.td.libcore.telegram.TdApi
 import java.util.*
 
 private const val UPDATE_LIVE_MESSAGES_INTERVAL_MS = 10000L // 10 sec
+private const val UPDATE_LIVE_TRACKS_INTERVAL_MS = 30000L // 30 sec
 
 class TelegramService : Service(), LocationListener, TelegramIncomingMessagesListener,
 	TelegramOutgoingMessagesListener {
@@ -31,6 +32,9 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 
 	private var updateShareInfoHandler: Handler? = null
 	private var mHandlerThread = HandlerThread("SharingServiceThread")
+
+	private var updateTracksHandler: Handler? = null
+	private var tracksHandlerThread = HandlerThread("TracksUpdateServiceThread")
 
 	var handler: Handler? = null
 		private set
@@ -53,7 +57,9 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 	override fun onCreate() {
 		super.onCreate()
 		mHandlerThread.start()
+		tracksHandlerThread.start()
 		updateShareInfoHandler = Handler(mHandlerThread.looper)
+		updateTracksHandler = Handler(tracksHandlerThread.looper)
 	}
 
 	override fun onBind(intent: Intent): IBinder? {
@@ -103,6 +109,7 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 		}
 		if (isUsedByUsersLocations(usedBy)) {
 			app.telegramHelper.startLiveMessagesUpdates(app.settings.sendMyLocInterval)
+			startTracksUpdates()
 		}
 
 		val locationNotification = app.notificationHelper.locationNotification
@@ -130,6 +137,7 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 		app.telegramHelper.removeOutgoingMessagesListener(this)
 		app.settings.save()
 		app.telegramService = null
+		tracksHandlerThread.quit()
 		mHandlerThread.quit()
 
 		usedBy = 0
@@ -189,6 +197,17 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 				startShareInfoUpdates()
 			}
 		}, UPDATE_LIVE_MESSAGES_INTERVAL_MS)
+	}
+
+	private fun startTracksUpdates() {
+		updateTracksHandler?.postDelayed({
+			if (isUsedByUsersLocations(usedBy)) {
+				if (app().settings.hasAnyLiveTracksToShowOnMap()) {
+					app().showLocationHelper.startUpdateTracksTask()
+				}
+				startTracksUpdates()
+			}
+		}, UPDATE_LIVE_TRACKS_INTERVAL_MS)
 	}
 	
 	@SuppressLint("MissingPermission")

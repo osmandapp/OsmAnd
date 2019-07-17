@@ -164,6 +164,19 @@ class TelegramSettings(private val app: TelegramApplication) {
 
 	fun hasAnyChatToShowOnMap() = !hiddenOnMapChats.containsAll(getLiveNowChats())
 
+	fun hasAnyLiveTracksToShowOnMap(): Boolean {
+		val time = System.currentTimeMillis() - locHistoryTime * 1000
+		val locations = app.locationMessages.getLastLocationMessagesSinceTime(time)
+		locations.forEach { loc ->
+			if (liveTracksInfo.any { it.userId == loc.userId && it.chatId == loc.chatId && it.deviceName == loc.deviceName }) {
+				return true
+			}
+		}
+		return false
+	}
+
+	fun getLiveTracksInfo() = liveTracksInfo
+
 	fun isShowingChatOnMap(chatId: Long) = !hiddenOnMapChats.contains(chatId)
 
 	fun isLiveTrackEnabled(userId: Int, chatId: Long, deviceName: String) =
