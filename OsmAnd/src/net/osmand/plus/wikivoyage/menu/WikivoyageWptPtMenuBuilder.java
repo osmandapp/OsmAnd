@@ -3,7 +3,7 @@ package net.osmand.plus.wikivoyage.menu;
 import android.support.annotation.NonNull;
 import android.view.View;
 
-import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.builders.WptPtMenuBuilder;
@@ -12,35 +12,27 @@ import net.osmand.util.Algorithms;
 import java.util.HashMap;
 
 public class WikivoyageWptPtMenuBuilder extends WptPtMenuBuilder {
-	final String KEY_PHONE = "Phone: ";
-	final String KEY_EMAIL = "Email: ";
-	final String KEY_WORKING_HOURS = "Working hours: ";
-	final String KEY_PRICE = "Price: ";
-	final String KEY_DIRECTIONS = "Directions: ";
-	final String KEY_OTHER_DESCRIPTION = "Other description";
+	private final static String KEY_PHONE = "Phone: ";
+	private final static String KEY_EMAIL = "Email: ";
+	private final static String KEY_WORKING_HOURS = "Working hours: ";
+	private final static String KEY_PRICE = "Price: ";
+	private final static String KEY_DIRECTIONS = "Directions: ";
+	private final static String KEY_DESCRIPTION = "Description";
 	
-	public WikivoyageWptPtMenuBuilder(@NonNull MapActivity mapActivity, @NonNull GPXUtilities.WptPt wpt) {
+	public WikivoyageWptPtMenuBuilder(@NonNull MapActivity mapActivity, @NonNull WptPt wpt) {
 		super(mapActivity, wpt);
 	}
 
 	@Override
-	protected void prepareDescription(final GPXUtilities.WptPt wpt, View view) {
-		String description = wpt.desc;
-
-		if (!description.contains("\n")) {
-			super.prepareDescription(wpt, view);
-			return;
-		}
-		
-		HashMap<String, String> descTokens = getDescriptionTokens(description, KEY_PHONE, KEY_EMAIL, KEY_WORKING_HOURS, KEY_PRICE, KEY_DIRECTIONS);
-
+	protected void prepareDescription(final WptPt wpt, View view) {
+		HashMap<String, String> descTokens = getDescriptionTokens(wpt.desc, KEY_PHONE, KEY_EMAIL, KEY_WORKING_HOURS, KEY_PRICE, KEY_DIRECTIONS);
 		String phones = descTokens.get(KEY_PHONE);
 		String emails = descTokens.get(KEY_EMAIL);
 		String workingHours = descTokens.get(KEY_WORKING_HOURS);
 		String price = descTokens.get(KEY_PRICE);
 		String direction = descTokens.get(KEY_DIRECTIONS);
 
-		final String desc = descTokens.get(KEY_OTHER_DESCRIPTION);
+		final String desc = descTokens.get(KEY_DESCRIPTION);
 		if (!Algorithms.isEmpty(desc)) {
 			buildRow(view, R.drawable.ic_action_note_dark, null, desc, 0, false, null, true, 10, false, null, false);
 		}
@@ -89,8 +81,8 @@ public class WikivoyageWptPtMenuBuilder extends WptPtMenuBuilder {
 				}
 			}
 			if (!matched) {
-				String s = mTokens.get(KEY_OTHER_DESCRIPTION);
-				mTokens.put(KEY_OTHER_DESCRIPTION, s != null ? s + "\n" + token : token);
+				String s = mTokens.get(KEY_DESCRIPTION);
+				mTokens.put(KEY_DESCRIPTION, s != null ? s + "\n" + token : token);
 			}
 		}
 		return mTokens;
