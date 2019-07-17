@@ -243,4 +243,6 @@
     <string name="min_logging_speed">最小記錄速度</string>
     <string name="min_logging_speed_descr">過濾：在選定的速度以下不記錄</string>
     <string name="gpx_settings">GPX 設定</string>
+    <string name="timeline_no_data_descr">我們沒有蒐集所選日期的資料</string>
+    <string name="timeline_no_data">沒有資料</string>
 </resources>

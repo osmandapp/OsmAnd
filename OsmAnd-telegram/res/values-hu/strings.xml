@@ -241,4 +241,6 @@
     <string name="min_logging_speed">Legkisebb naplózott sebesség</string>
     <string name="min_logging_speed_descr">Szűrő: a megadott sebesség alatt nincs naplózás</string>
     <string name="gpx_settings">GPX-beállítások</string>
+    <string name="timeline_no_data_descr">A kijelölt napon nem gyűjtöttünk adatot</string>
+    <string name="timeline_no_data">Nincs adat</string>
 </resources>

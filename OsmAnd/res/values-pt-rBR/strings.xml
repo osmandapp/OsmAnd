@@ -2824,7 +2824,7 @@ Pôr do Sol: %2$s</string>
 \n 
 \n</string>
     <string name="test_voice_desrc">Toque num botão e ouça a correspondente voz de comando para identificar os comandos faltantes ou com falha.</string>
-    <string name="osm_live_plan_pricing">Planos</string>
+    <string name="osm_live_plan_pricing">Planos e Preços</string>
     <string name="osm_live_payment_monthly_title">Mensal</string>
     <string name="osm_live_payment_3_months_title">A cada três meses</string>
     <string name="osm_live_payment_annual_title">Anualmente</string>
