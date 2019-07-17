@@ -79,6 +79,8 @@ class LocationMessages(val app: TelegramApplication) {
 	fun getLastLocationInfoForUserInChat(userId: Int, chatId: Long, deviceName: String) =
 		lastLocationPoints.sortedByDescending { it.time }.firstOrNull { it.userId == userId && it.chatId == chatId && it.deviceName == deviceName }
 
+	fun getLastLocationMessagesSinceTime(time: Long) = lastLocationPoints.filter { it.time > time }
+
 	fun addBufferedMessage(message: BufferMessage) {
 		log.debug("addBufferedMessage $message")
 		val messages = mutableListOf(*this.bufferedMessages.toTypedArray())

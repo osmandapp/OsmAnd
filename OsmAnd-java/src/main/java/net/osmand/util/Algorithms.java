@@ -2,8 +2,6 @@ package net.osmand.util;
 
 import net.osmand.IProgress;
 import net.osmand.PlatformUtil;
-import net.osmand.router.GeneralRouter;
-import net.osmand.router.RoutingConfiguration;
 
 import org.apache.commons.logging.Log;
 import org.xmlpull.v1.XmlPullParser;
@@ -31,7 +29,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
-import java.util.Stack;
 import java.util.zip.GZIPInputStream;
 
 
@@ -370,6 +367,14 @@ public class Algorithms {
 		return "";
 	}
 
+	public static void createParentDirsForFile(File file) {
+		if (file != null && !file.exists()) {
+			File parent = file.getParentFile();
+			if (parent != null && !parent.exists()) {
+				parent.mkdirs();
+			}
+		}
+	}
 
 	@SuppressWarnings("TryFinallyCanBeTryWithResources")
 	public static void fileCopy(File src, File dst) throws IOException {
