@@ -425,7 +425,7 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 		for (int i = backStackEntryCount - 1; i >= 0; i--) {
 			BackStackEntry entry = fragmentManager.getBackStackEntryAt(i);
 			if (!TAG.equals(entry.getName())) {
-				pop = i;
+				pop = entry.getId();
 				break;
 			}
 		}
