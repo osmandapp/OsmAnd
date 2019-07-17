@@ -331,6 +331,12 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 	}
 
 	@Override
+	public void onDestroyView() {
+		super.onDestroyView();
+		onDismiss();
+	}
+
+	@Override
 	public void onScrollChanged(int scrollY, boolean firstScroll, boolean dragging) {
 
 	}
@@ -909,6 +915,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 
 			fragmentManager.beginTransaction()
 					.add(R.id.routeMenuContainer, fragment, TAG)
+					.addToBackStack(TAG)
 					.commitAllowingStateLoss();
 
 			return true;
@@ -918,14 +925,24 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 		}
 	}
 
+	private void onDismiss() {
+		try {
+			if (useRouteInfoMenu) {
+				MapActivity mapActivity = (MapActivity) getActivity();
+				if (mapActivity != null) {
+					mapActivity.getMapLayers().getMapControlsLayer().showRouteInfoControlDialog();
+				}
+			}
+		} catch (Exception e) {
+			//
+		}
+	}
+
 	private void dismiss() {
 		try {
 			MapActivity mapActivity = (MapActivity) getActivity();
 			if (mapActivity != null) {
 				mapActivity.getSupportFragmentManager().beginTransaction().remove(this).commitAllowingStateLoss();
-				if (useRouteInfoMenu) {
-					mapActivity.getMapLayers().getMapControlsLayer().showRouteInfoControlDialog();
-				}
 			}
 		} catch (Exception e) {
 			//
