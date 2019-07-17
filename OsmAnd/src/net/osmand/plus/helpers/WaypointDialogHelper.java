@@ -378,7 +378,11 @@ public class WaypointDialogHelper {
 				for (TargetPoint p : lt) {
 					al.add(p.point);
 				}
-				return new TspAnt().readGraph(al, start.point, end.point).solve();
+				try {
+					return new TspAnt().readGraph(al, start.point, end.point).solve();
+				} catch (Exception e) {
+					return null;
+				}
 			}
 
 			protected void onPostExecute(int[] result) {
@@ -395,7 +399,9 @@ public class WaypointDialogHelper {
 						dlg.dismiss();
 					}
 				}
-
+				if (result == null) {
+					return;
+				}
 				List<TargetPoint> alocs = new ArrayList<>();
 				for (int i : result) {
 					if (i > 0) {
