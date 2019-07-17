@@ -16,6 +16,7 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
 import android.graphics.Rect;
+import android.os.Build;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
@@ -325,7 +326,9 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 					popupWindow.setAnchorView(selectColorBtn);
 					popupWindow.setContentWidth(AndroidUtils.dpToPx(activity, 200f));
 					popupWindow.setModal(true);
-					popupWindow.setDropDownGravity(Gravity.TOP | Gravity.RIGHT);
+					if (Build.VERSION.SDK_INT >= VERSION_CODES.KITKAT) {
+						popupWindow.setDropDownGravity(Gravity.TOP | Gravity.RIGHT);
+					}
 					popupWindow.setVerticalOffset(AndroidUtils.dpToPx(activity, -48f));
 					popupWindow.setHorizontalOffset(AndroidUtils.dpToPx(activity, -6f));
 					final ProfileColorAdapter profileColorAdapter = new ProfileColorAdapter(activity, mode.getIconColorInfo());

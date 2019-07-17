@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.os.Build.VERSION_CODES;
 import android.support.annotation.LayoutRes;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
@@ -84,18 +85,22 @@ public class AppModeDialog {
 		
 		ApplicationMode activeMode = ((OsmandApplication) a.getApplication()).getSettings().getApplicationMode();
 		final int idx = values.indexOf(activeMode);
-		
-		OnGlobalLayoutListener globalListener = new OnGlobalLayoutListener() {
-			@Override
-			public void onGlobalLayout() {
-				HorizontalScrollView scrollView = ll.findViewById(R.id.app_modes_scroll_container);
-				LinearLayout container = ll.findViewById(R.id.app_modes_content);
-				int s = container.getChildAt(idx) != null ? container.getChildAt(idx).getRight() : 0;
-				scrollView.scrollTo(s - scrollView.getWidth() > 0 ? s - scrollView.getWidth() : 0, 0);
-				ll.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-			}
-		};
-		ll.getViewTreeObserver().addOnGlobalLayoutListener(globalListener);
+		if (Build.VERSION.SDK_INT >= VERSION_CODES.JELLY_BEAN) {
+			OnGlobalLayoutListener globalListener = new OnGlobalLayoutListener() {
+				@Override
+				public void onGlobalLayout() {
+					HorizontalScrollView scrollView = ll
+						.findViewById(R.id.app_modes_scroll_container);
+					LinearLayout container = ll.findViewById(R.id.app_modes_content);
+					int s = container.getChildAt(idx) != null ? container.getChildAt(idx).getRight()
+						: 0;
+					scrollView
+						.scrollTo(s - scrollView.getWidth() > 0 ? s - scrollView.getWidth() : 0, 0);
+					ll.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+				}
+			};
+			ll.getViewTreeObserver().addOnGlobalLayoutListener(globalListener);
+		}
 		
 		return ll;
 	}

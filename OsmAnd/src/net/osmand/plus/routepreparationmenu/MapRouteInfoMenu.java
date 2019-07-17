@@ -6,6 +6,7 @@ import android.content.DialogInterface.OnDismissListener;
 import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.os.Build.VERSION_CODES;
 import android.os.Handler;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
@@ -849,16 +850,18 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		final ApplicationMode activeMode = app.getSettings().getApplicationMode();
 		final int idx = values.indexOf(activeMode);
 
-		OnGlobalLayoutListener globalListener = new OnGlobalLayoutListener() {
-			@Override
-			public void onGlobalLayout() {
-				LinearLayout container = ll.findViewById(R.id.app_modes_content);
-				int s = container.getChildAt(idx) != null ? container.getChildAt(idx).getRight() + rightTogglePadding : 0;
-				scrollView.scrollTo(s - scrollView.getWidth() > 0 ? s - scrollView.getWidth() : 0, 0);
-				ll.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-			}
-		};
-		ll.getViewTreeObserver().addOnGlobalLayoutListener(globalListener);
+		if (Build.VERSION.SDK_INT >= VERSION_CODES.JELLY_BEAN) {
+			OnGlobalLayoutListener globalListener = new OnGlobalLayoutListener() {
+				@Override
+				public void onGlobalLayout() {
+					LinearLayout container = ll.findViewById(R.id.app_modes_content);
+					int s = container.getChildAt(idx) != null ? container.getChildAt(idx).getRight() + rightTogglePadding : 0;
+					scrollView.scrollTo(s - scrollView.getWidth() > 0 ? s - scrollView.getWidth() : 0, 0);
+						ll.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+				}
+			};
+			ll.getViewTreeObserver().addOnGlobalLayoutListener(globalListener);
+		}
 		
 	}
 
