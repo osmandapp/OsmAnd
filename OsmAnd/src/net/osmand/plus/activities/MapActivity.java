@@ -651,10 +651,24 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			prevActivityIntent = null;
 			return;
 		}
-		if (getMapView().getLayerByClass(MapQuickActionLayer.class).onBackPressed())
+		if (getMapView().getLayerByClass(MapQuickActionLayer.class).onBackPressed()) {
 			return;
-
+		}
+		boolean closeWindowAfter = tellFragmentsAboutOnBackPressed();
+		if (!closeWindowAfter) {
+			return;
+		}
 		super.onBackPressed();
+	}
+
+	private boolean tellFragmentsAboutOnBackPressed() {
+		boolean closeWindowAfter = true;
+		List<Fragment> fragments = getSupportFragmentManager().getFragments();
+		for(Fragment f : fragments){
+			if(f != null && f instanceof BaseOsmAndFragment.IOnBackPressed)
+				closeWindowAfter = ((BaseOsmAndFragment.IOnBackPressed)f).onBackPressed();
+		}
+		return closeWindowAfter;
 	}
 
 	private void quitAddGpxPointMode() {

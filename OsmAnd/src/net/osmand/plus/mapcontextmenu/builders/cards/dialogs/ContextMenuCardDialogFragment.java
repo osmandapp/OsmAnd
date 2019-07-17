@@ -23,7 +23,7 @@ import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.mapillary.MapillaryPlugin;
 import net.osmand.util.Algorithms;
 
-public class ContextMenuCardDialogFragment extends BaseOsmAndFragment {
+public class ContextMenuCardDialogFragment extends BaseOsmAndFragment implements BaseOsmAndFragment.IOnBackPressed {
 	public static final String TAG = "ContextMenuCardDialogFragment";
 
 	private ContextMenuCardDialog dialog;
@@ -148,5 +148,11 @@ public class ContextMenuCardDialogFragment extends BaseOsmAndFragment {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	@Override
+	public boolean onBackPressed() {
+		dismiss();
+		return false;
 	}
 }

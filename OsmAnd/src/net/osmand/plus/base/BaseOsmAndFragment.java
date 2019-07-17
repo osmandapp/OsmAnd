@@ -30,6 +30,10 @@ public class BaseOsmAndFragment extends Fragment implements TransitionAnimator {
 
 	private int statusBarColor = -1;
 	private boolean transitionAnimationAllowed = true;
+	
+	public interface IOnBackPressed {
+		boolean onBackPressed();
+	}
 
 	@Override
 	public void onResume() {
