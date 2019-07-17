@@ -1021,7 +1021,7 @@ public class RoutingHelper {
 			if(System.currentTimeMillis() - lastTimeEvaluatedRoute < RECALCULATE_THRESHOLD_CAUSING_FULL_RECALCULATE_INTERVAL) {
 				recalculateCountInInterval ++;
 			}
-			RouteCalculationParams params = new RouteCalculationParams();
+			final RouteCalculationParams params = new RouteCalculationParams();
 			params.start = start;
 			params.end = end;
 			params.intermediates = intermediates;
@@ -1041,6 +1041,19 @@ public class RoutingHelper {
 			if (params.mode.getRouteService() == RouteService.OSMAND) {
 				params.calculationProgress = new RouteCalculationProgress();
 				updateProgress = true;
+			} else {
+				params.resultListener = new RouteCalculationParams.RouteCalculationResultListener() {
+					@Override
+					public void onRouteCalculated(RouteCalculationResult route) {
+						app.runInUIThread(new Runnable() {
+
+							@Override
+							public void run() {
+								finishProgress(params);
+							}
+						});
+					}
+				};
 			}
 			startRouteCalculationThread(params, paramsChanged, updateProgress);
 		}
@@ -1106,6 +1119,18 @@ public class RoutingHelper {
 					}
 				}
 			}, 300);
+		}
+	}
+
+	private void finishProgress(RouteCalculationParams params) {
+		final RouteCalculationProgressCallback progressRoute;
+		if (params.calculationProgressCallback != null) {
+			progressRoute = params.calculationProgressCallback;
+		} else {
+			progressRoute = this.progressRoute;
+		}
+		if (progressRoute != null ) {
+			progressRoute.finish();
 		}
 	}
 
