@@ -211,6 +211,25 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 			return null
 		}
 
+	/**
+	 * Get list of all imported GPX files.
+	 *
+	 * @return list of imported gpx files.
+	 */
+	val importedGpxFiles: List<AGpxFile>?
+		get() {
+			if (mIOsmAndAidlInterface != null) {
+				try {
+					val files = mutableListOf<AGpxFile>()
+					mIOsmAndAidlInterface!!.getImportedGpx(files)
+					return files
+				} catch (e: RemoteException) {
+					e.printStackTrace()
+				}
+			}
+			return null
+		}
+
 	init {
 		connectOsmand()
 	}

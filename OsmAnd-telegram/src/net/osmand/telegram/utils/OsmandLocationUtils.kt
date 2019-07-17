@@ -414,7 +414,7 @@ object OsmandLocationUtils {
 		return TdApi.InputMessageText(TdApi.FormattedText(textMessage, entities.toTypedArray()), true, true)
 	}
 
-	fun convertLocationMessagesToGpxFiles(author:String, items: List<LocationMessage>, newGpxPerChat: Boolean = true): List<GPXUtilities.GPXFile> {
+	fun convertLocationMessagesToGpxFiles(app: TelegramApplication, items: List<LocationMessage>, newGpxPerChat: Boolean = true): List<GPXUtilities.GPXFile> {
 		val dataTracks = ArrayList<GPXUtilities.GPXFile>()
 
 		var previousTime: Long = -1
@@ -434,10 +434,9 @@ object OsmandLocationUtils {
 			}
 			countedLocations++
 			if (previousUserId != userId || (newGpxPerChat && previousChatId != chatId)) {
-				gpx = GPXUtilities.GPXFile(author).apply {
+				gpx = GPXUtilities.GPXFile(app.packageName).apply {
 					metadata = GPXUtilities.Metadata().apply {
-						extensionsToWrite["chatId"] = chatId.toString()
-						extensionsToWrite["userId"] = userId.toString()
+						name = getGpxFileNameForUserId(app, userId, time)
 					}
 				}
 				previousTime = 0
@@ -478,11 +477,25 @@ object OsmandLocationUtils {
 		return dataTracks
 	}
 
-	fun saveGpx(app: TelegramApplication, listener: SaveGpxListener, dir: File, gpxFile: GPXUtilities.GPXFile) {
+	fun saveGpx(app: TelegramApplication, gpxFile: GPXUtilities.GPXFile, listener: SaveGpxListener) {
 		if (!gpxFile.isEmpty) {
-			val task = SaveGPXTrackToFileTask(app, listener, gpxFile, dir, 0)
+			val dir = File(app.getExternalFilesDir(null), TRACKS_DIR)
+			val task = SaveGPXTrackToFileTask(listener, gpxFile, dir)
 			task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR)
 		}
+	}
+
+	fun getGpxFileNameForUserId(app: TelegramApplication, userId: Int, time: Long): String {
+		var userName = userId.toString()
+		try {
+			val user = app.telegramHelper.getUser(userId)
+			if (user != null) {
+				userName = TelegramUiHelper.getUserName(user)
+			}
+		} catch (e: NumberFormatException) {
+			//ignore
+		}
+		return "${userName}_${UTC_DATE_FORMAT.format(Date(time))}"
 	}
 
 	abstract class MessageLocation : TdApi.MessageContent() {
@@ -524,8 +537,9 @@ object OsmandLocationUtils {
 	}
 
 	private class SaveGPXTrackToFileTask internal constructor(
-		private val app: TelegramApplication, private val listener: SaveGpxListener?,
-		private val gpxFile: GPXUtilities.GPXFile, private val dir: File, private val userId: Int
+		private val listener: SaveGpxListener?,
+		private val gpxFile: GPXUtilities.GPXFile,
+		private val dir: File
 	) :
 		AsyncTask<Void, Void, java.lang.Exception>() {
 
@@ -535,25 +549,9 @@ object OsmandLocationUtils {
 				if (dir.exists()) {
 					// save file
 					if (!gpxFile.isEmpty) {
-						val pt = gpxFile.findPointToShow()
-						val userId = gpxFile.metadata.extensionsToRead["userId"]
-						val user = if (!userId.isNullOrEmpty()) {
-							try {
-								app.telegramHelper.getUser(userId.toInt())
-							} catch (e: NumberFormatException) {
-								null
-							}
-						} else {
-							null
-						}
-						val fileName: String
-						fileName = if (user != null) {
-							(TelegramUiHelper.getUserName(user) + "_" + SimpleDateFormat("yyyy-MM-dd", Locale.US).format(Date(pt.time)))
-						} else {
-							userId.toString() + "_" + SimpleDateFormat("yyyy-MM-dd", Locale.US).format(Date(pt.time))
-						}
-						gpxFile.metadata?.name = fileName
+						val fileName = gpxFile.metadata.name
 						val fout = File(dir, "$fileName.gpx")
+
 						return GPXUtilities.writeGpxFile(fout, gpxFile)
 					}
 				}
@@ -566,7 +564,7 @@ object OsmandLocationUtils {
 				if (warning == null) {
 					listener.onSavingGpxFinish(gpxFile.path)
 				} else {
-					listener.onSavingGpxError(warning.message)
+					listener.onSavingGpxError(warning)
 				}
 			}
 		}
@@ -576,6 +574,6 @@ object OsmandLocationUtils {
 
 		fun onSavingGpxFinish(path: String)
 
-		fun onSavingGpxError(warning: String?)
+		fun onSavingGpxError(error: Exception)
 	}
 }

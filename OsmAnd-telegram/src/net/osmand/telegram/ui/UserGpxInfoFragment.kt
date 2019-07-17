@@ -34,7 +34,6 @@ import net.osmand.telegram.helpers.TelegramUiHelper
 import net.osmand.telegram.utils.AndroidUtils
 import net.osmand.telegram.utils.OsmandFormatter
 import net.osmand.telegram.utils.OsmandLocationUtils
-import net.osmand.telegram.utils.TRACKS_DIR
 import net.osmand.util.Algorithms
 import java.io.File
 import java.text.SimpleDateFormat
@@ -105,10 +104,8 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 						openGpx(path)
 					}
 
-					override fun onSavingGpxError(warning: String?) {
-						warning?.also {
-							Toast.makeText(app, it, Toast.LENGTH_LONG).show()
-						}
+					override fun onSavingGpxError(error: Exception) {
+						Toast.makeText(app, error.message, Toast.LENGTH_LONG).show()
 					}
 				})
 			}
@@ -204,10 +201,8 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 							(activity as MainActivity).shareGpx(path)
 						}
 
-						override fun onSavingGpxError(warning: String?) {
-							warning?.also {
-								Toast.makeText(app, it, Toast.LENGTH_LONG).show()
-							}
+						override fun onSavingGpxError(error: Exception) {
+							Toast.makeText(app, error.message, Toast.LENGTH_LONG).show()
 						}
 					})
 				}
@@ -271,10 +266,7 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 	}
 
 	private fun saveCurrentGpxToFile(listener: OsmandLocationUtils.SaveGpxListener) {
-		if (!gpxFile.isEmpty) {
-			val file = File(app.getExternalFilesDir(null), TRACKS_DIR)
-			OsmandLocationUtils.saveGpx(app, listener, file, gpxFile)
-		}
+		OsmandLocationUtils.saveGpx(app, gpxFile, listener)
 	}
 
 	private fun readFromBundle(bundle: Bundle?) {
@@ -335,7 +327,7 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 		checkTime()
 		locationMessages = app.locationMessages.getMessagesForUserInChat(userId, chatId, deviceName, startCalendar.timeInMillis, endCalendar.timeInMillis)
 
-		gpxFile = OsmandLocationUtils.convertLocationMessagesToGpxFiles(app.packageName, locationMessages).firstOrNull() ?: GPXUtilities.GPXFile(app.packageName)
+		gpxFile = OsmandLocationUtils.convertLocationMessagesToGpxFiles(app, locationMessages).firstOrNull() ?: GPXUtilities.GPXFile(app.packageName)
 		updateGPXStatisticRow()
 		updateDateAndTimeButtons()
 		updateGPXMap()
@@ -405,8 +397,8 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 					}
 				}
 
-				override fun onSavingGpxError(warning: String?) {
-					log.debug("onSavingGpxError $warning")
+				override fun onSavingGpxError(error: Exception) {
+					log.error(error)
 				}
 			})
 		}
