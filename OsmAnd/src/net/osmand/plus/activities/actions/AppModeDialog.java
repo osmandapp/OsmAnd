@@ -85,16 +85,14 @@ public class AppModeDialog {
 		
 		ApplicationMode activeMode = ((OsmandApplication) a.getApplication()).getSettings().getApplicationMode();
 		final int idx = values.indexOf(activeMode);
+		
 		OnGlobalLayoutListener globalListener = new OnGlobalLayoutListener() {
 			@Override
 			public void onGlobalLayout() {
-				HorizontalScrollView scrollView = ll
-					.findViewById(R.id.app_modes_scroll_container);
+				HorizontalScrollView scrollView = ll.findViewById(R.id.app_modes_scroll_container);
 				LinearLayout container = ll.findViewById(R.id.app_modes_content);
-				int s = container.getChildAt(idx) != null ? container.getChildAt(idx).getRight()
-					: 0;
-				scrollView
-					.scrollTo(s - scrollView.getWidth() > 0 ? s - scrollView.getWidth() : 0, 0);
+				int s = container.getChildAt(idx) != null ? container.getChildAt(idx).getRight() : 0;
+				scrollView.scrollTo(s - scrollView.getWidth() > 0 ? s - scrollView.getWidth() : 0, 0);
 				if (Build.VERSION.SDK_INT >= VERSION_CODES.JELLY_BEAN) {
 					ll.getViewTreeObserver().removeOnGlobalLayoutListener(this);
 				} else {
@@ -103,6 +101,7 @@ public class AppModeDialog {
 			}
 		};
 		ll.getViewTreeObserver().addOnGlobalLayoutListener(globalListener);
+		
 		return ll;
 	}
 
