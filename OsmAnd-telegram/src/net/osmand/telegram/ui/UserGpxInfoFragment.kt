@@ -7,8 +7,11 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
+import android.graphics.drawable.LayerDrawable
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Message
 import android.support.design.widget.Snackbar
 import android.support.v4.app.FragmentManager
 import android.util.DisplayMetrics
@@ -46,6 +49,7 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 	private lateinit var timeStartBtn: TextView
 	private lateinit var dateEndBtn: TextView
 	private lateinit var timeEndBtn: TextView
+	private lateinit var liveBtn: TextView
 
 	private lateinit var avgElevationTv: TextView
 	private lateinit var avgSpeedTv: TextView
@@ -60,6 +64,10 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 	private var userId = -1
 	private var chatId = -1L
 	private var deviceName = ""
+
+	private var handler: Handler = Handler()
+
+	private var endTimeChanged: Boolean = false
 
 	override fun onCreateView(
 		inflater: LayoutInflater,
@@ -121,6 +129,18 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 		timeStartBtn = mainView.findViewById<TextView>(R.id.time_start_btn)
 		dateEndBtn = mainView.findViewById<TextView>(R.id.date_end_btn)
 		timeEndBtn = mainView.findViewById<TextView>(R.id.time_end_btn)
+
+		liveBtn = mainView.findViewById<TextView>(R.id.live_btn).apply {
+			setOnClickListener {
+				val enabled = !liveTrackEnabled()
+				settings.updateLiveTrack(userId, chatId, deviceName, enabled)
+				updateLiveTrackBtn()
+				if (enabled) {
+					startHandler()
+				}
+			}
+		}
+		updateLiveTrackBtn()
 
 		dateStartBtn.setOnClickListener { selectStartDate() }
 		timeStartBtn.setOnClickListener { selectStartTime() }
@@ -204,6 +224,21 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 		}
 	}
 
+	private fun startHandler() {
+		log.debug("startHandler")
+		if (!handler.hasMessages(TRACK_UPDATE_MSG_ID)) {
+			val msg = Message.obtain(handler) {
+				log.debug("Handler postDelayed")
+				if (isResumed && liveTrackEnabled()) {
+					updateGpxInfo()
+					startHandler()
+				}
+			}
+			msg.what = TRACK_UPDATE_MSG_ID
+			handler.sendMessageDelayed(msg, UPDATE_TRACK_INTERVAL_MS)
+		}
+	}
+
 	private fun canOsmandCreateBitmap(): Boolean {
 		val version = AndroidUtils.getAppVersionCode(app, app.settings.appToConnectPackage)
 		return version >= MIN_OSMAND_BITMAP_VERSION_CODE
@@ -237,8 +272,19 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 		}
 	}
 
+	private fun liveTrackEnabled() = settings.isLiveTrackEnabled(userId, chatId, deviceName)
+
 	private fun setupBtnTextColor(textView: TextView) {
 		textView.setTextColor(AndroidUtils.createPressedColorStateList(app, true, R.color.ctrl_active_light, R.color.ctrl_light))
+	}
+
+	private fun updateLiveTrackBtn() {
+		val enabled = liveTrackEnabled()
+		val icon = getLiveTrackBtnIcon(enabled)
+		val normalTextColor = if (enabled) R.color.ctrl_active_light else R.color.secondary_text_light
+
+		liveBtn.setTextColor(AndroidUtils.createPressedColorStateList(app, true, normalTextColor, R.color.ctrl_light))
+		liveBtn.setCompoundDrawablesWithIntrinsicBounds(null, null, icon, null)
 	}
 
 	private fun getShareIcon(): Drawable? {
@@ -252,9 +298,27 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 		return normal
 	}
 
+	private fun getLiveTrackBtnIcon(enabled: Boolean): Drawable? {
+		val iconColor = if (enabled) R.color.live_track_active_icon else R.color.icon_light
+
+		val layers = arrayOfNulls<Drawable>(2)
+		layers[0] = app.uiUtils.getIcon(R.drawable.ic_action_round_shape)
+		layers[1] = app.uiUtils.getIcon(R.drawable.ic_action_record, iconColor)
+
+		if (Build.VERSION.SDK_INT >= 21 && !enabled) {
+			val normal = layers[1]
+			val active = app.uiUtils.getIcon(R.drawable.ic_action_record, R.color.live_track_active_icon)
+			if (normal != null && active != null) {
+				layers[1] = AndroidUtils.createPressedStateListDrawable(normal, active)
+			}
+		}
+
+		return LayerDrawable(layers)
+	}
+
 	private fun updateGpxInfo() {
 		checkTime()
-		locationMessages = app.locationMessages.getMessagesForUserInChat(userId, chatId,deviceName, startCalendar.timeInMillis, endCalendar.timeInMillis)
+		locationMessages = app.locationMessages.getMessagesForUserInChat(userId, chatId, deviceName, startCalendar.timeInMillis, endCalendar.timeInMillis)
 
 		gpxFile = OsmandLocationUtils.convertLocationMessagesToGpxFiles(locationMessages).firstOrNull()?:GPXUtilities.GPXFile()
 		updateGPXStatisticRow()
@@ -263,6 +327,13 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 	}
 
 	private fun checkTime() {
+		val enabled = liveTrackEnabled()
+		if (enabled && !endTimeChanged) {
+			val locationMessage = app.locationMessages.getLastLocationInfoForUserInChat(userId, chatId, deviceName)
+			if (locationMessage != null && locationMessage.time > endCalendar.timeInMillis) {
+				endCalendar.timeInMillis = locationMessage.time
+			}
+		}
 		if (startCalendar.timeInMillis > endCalendar.timeInMillis) {
 			val time = startCalendar.timeInMillis
 			startCalendar.timeInMillis = endCalendar.timeInMillis
@@ -355,6 +426,7 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 				endCalendar.set(Calendar.YEAR, year)
 				endCalendar.set(Calendar.MONTH, monthOfYear)
 				endCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+				endTimeChanged = true
 				updateGpxInfo()
 			}
 		DatePickerDialog(context, dateFromDialog,
@@ -368,6 +440,7 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 			TimePickerDialog.OnTimeSetListener { _, hours, minutes ->
 				endCalendar.set(Calendar.HOUR_OF_DAY, hours)
 				endCalendar.set(Calendar.MINUTE, minutes)
+				endTimeChanged = true
 				updateGpxInfo()
 			}, 0, 0, true).show()
 	}
@@ -383,6 +456,8 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 
 		private const val GPX_TRACK_COLOR = -65536
 		private	const val MIN_OSMAND_BITMAP_VERSION_CODE = 330
+		private const val UPDATE_TRACK_INTERVAL_MS = 30 * 1000L // 30 sec
+		private const val TRACK_UPDATE_MSG_ID = 1001
 
 		fun showInstance(fm: FragmentManager,userId:Int,chatId:Long,deviceName:String, start: Long, end: Long): Boolean {
 			return try {

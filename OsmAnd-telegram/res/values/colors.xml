@@ -43,4 +43,6 @@
 
 	<color name="text_bold_highlight">#5959FF</color>
 
+	<color name="live_track_active_icon">#F54522</color>
+
 </resources>
