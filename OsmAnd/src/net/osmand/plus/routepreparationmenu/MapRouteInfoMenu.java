@@ -850,18 +850,23 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		final ApplicationMode activeMode = app.getSettings().getApplicationMode();
 		final int idx = values.indexOf(activeMode);
 
-		if (Build.VERSION.SDK_INT >= VERSION_CODES.JELLY_BEAN) {
-			OnGlobalLayoutListener globalListener = new OnGlobalLayoutListener() {
-				@Override
-				public void onGlobalLayout() {
-					LinearLayout container = ll.findViewById(R.id.app_modes_content);
-					int s = container.getChildAt(idx) != null ? container.getChildAt(idx).getRight() + rightTogglePadding : 0;
-					scrollView.scrollTo(s - scrollView.getWidth() > 0 ? s - scrollView.getWidth() : 0, 0);
-						ll.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+		OnGlobalLayoutListener globalListener = new OnGlobalLayoutListener() {
+			@Override
+			public void onGlobalLayout() {
+				LinearLayout container = ll.findViewById(R.id.app_modes_content);
+				int s = container.getChildAt(idx) != null ? container.getChildAt(idx).getRight()
+					+ rightTogglePadding : 0;
+				scrollView
+					.scrollTo(s - scrollView.getWidth() > 0 ? s - scrollView.getWidth() : 0, 0);
+				if (Build.VERSION.SDK_INT >= VERSION_CODES.JELLY_BEAN) {
+					ll.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+				} else {
+					ll.getViewTreeObserver().removeGlobalOnLayoutListener(this);
 				}
-			};
-			ll.getViewTreeObserver().addOnGlobalLayoutListener(globalListener);
-		}
+			}
+		};
+		ll.getViewTreeObserver().addOnGlobalLayoutListener(globalListener);
+
 		
 	}
 

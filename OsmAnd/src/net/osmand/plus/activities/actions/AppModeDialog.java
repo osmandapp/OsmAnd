@@ -85,7 +85,7 @@ public class AppModeDialog {
 		
 		ApplicationMode activeMode = ((OsmandApplication) a.getApplication()).getSettings().getApplicationMode();
 		final int idx = values.indexOf(activeMode);
-		if (Build.VERSION.SDK_INT >= VERSION_CODES.JELLY_BEAN) {
+		
 			OnGlobalLayoutListener globalListener = new OnGlobalLayoutListener() {
 				@Override
 				public void onGlobalLayout() {
@@ -96,11 +96,15 @@ public class AppModeDialog {
 						: 0;
 					scrollView
 						.scrollTo(s - scrollView.getWidth() > 0 ? s - scrollView.getWidth() : 0, 0);
-					ll.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+					if (Build.VERSION.SDK_INT >= VERSION_CODES.JELLY_BEAN) {
+						ll.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+					} else {
+						ll.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+					}
 				}
 			};
 			ll.getViewTreeObserver().addOnGlobalLayoutListener(globalListener);
-		}
+		
 		
 		return ll;
 	}
