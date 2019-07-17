@@ -286,11 +286,11 @@ public class WikiArticleHelper {
 	}
 
 	@Nullable
-	public static String getPartialContent(String content) {
-		if (content == null) {
+	public static String getPartialContent(String source) {
+		if (source == null) {
 			return null;
 		}
-
+		String content = source.replaceAll("\\n", "");
 		int firstParagraphStart = content.indexOf(P_OPENED);
 		int firstParagraphEnd = content.indexOf(P_CLOSED);
 		firstParagraphEnd = firstParagraphEnd < firstParagraphStart ? content.indexOf(P_CLOSED, firstParagraphStart) : firstParagraphEnd;
