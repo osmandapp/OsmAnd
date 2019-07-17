@@ -22,6 +22,10 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 
 public class SecondSplashScreenFragment extends BaseOsmAndFragment {
+	private final static int LOGO_ID = 1001;
+	private final static int TEXT_ID = 1002;
+	private final static int OSM_TEXT_ID = 1003;
+	
 	public static final String TAG = "SecondSplashScreenFragment";
 	public static boolean SHOW = true;
 	public static boolean VISIBLE = false;
@@ -86,6 +90,7 @@ public class SecondSplashScreenFragment extends BaseOsmAndFragment {
 		view.setBackgroundColor(getResources().getColor(R.color.map_background_color_light));
 
 		ImageView logo = new ImageView(getContext());
+		logo.setId(LOGO_ID);
 		if (Version.isFreeVersion(app)) {
 			logo.setImageDrawable(getResources().getDrawable(R.drawable.ic_logo_splash_osmand));
 		} else if (Version.isPaidVersion(app) || Version.isDeveloperVersion(app)) {
@@ -94,7 +99,9 @@ public class SecondSplashScreenFragment extends BaseOsmAndFragment {
 		RelativeLayout.LayoutParams logoLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
 		logoLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
 		logoLayoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
+		
 		ImageView text = new ImageView(activity);
+		text.setId(TEXT_ID);
 		if (Version.isFreeVersion(app)) {
 			if (InAppPurchaseHelper.isSubscribedToLiveUpdates(app)) {
 				text.setImageDrawable(getResources().getDrawable(R.drawable.image_text_osmand_osmlive));
@@ -111,37 +118,44 @@ public class SecondSplashScreenFragment extends BaseOsmAndFragment {
 			}
 		}
 		RelativeLayout.LayoutParams textLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-		textLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+		textLayoutParams.addRule(RelativeLayout.ABOVE, OSM_TEXT_ID);
 		textLayoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
+		
+		ImageView osmText = new ImageView(activity);
+		osmText.setId(OSM_TEXT_ID);
+		osmText.setImageDrawable(getResources().getDrawable(R.drawable.image_text_openstreetmap));
+		RelativeLayout.LayoutParams osmTextLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
+		osmTextLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+		osmTextLayoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
+		
 		int defaultLogoMarginTop = (int) getResources().getDimension(R.dimen.splash_screen_logo_top);
 		int logoMarginTop = defaultLogoMarginTop - (Build.VERSION.SDK_INT >= 21 ? 0 : getStatusBarHeight());
-		int logoPaddingLeft = 0;
-		int logoPaddingRight = 0;
-		int defaultTextMarginBottom = (int) getResources().getDimension(R.dimen.splash_screen_text_bottom);
-		int textMarginBottom = defaultTextMarginBottom - getNavigationBarHeight();
-		int textPaddingLeft = 0;
-		int textPaddingRight = 0;
+		int textMarginBottom = (int) getResources().getDimension(R.dimen.splash_screen_text_bottom);
+		int osmTextMarginBottom = (int) getResources().getDimension(R.dimen.splash_screen_osm_text_bottom);
+		int elementsPaddingLeft = 0;
+		int elementsPaddingRight = 0;
 		if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N_MR1) {
 			int screenOrientation = AndroidUiHelper.getScreenOrientation(activity);
 			if (screenOrientation == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
-				logoPaddingLeft = getNavigationBarWidth();
-				textPaddingLeft = getNavigationBarWidth();
+				elementsPaddingLeft = getNavigationBarWidth();
 			} else if (screenOrientation == ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE) {
-				logoPaddingRight = getNavigationBarWidth();
-				textPaddingRight = getNavigationBarWidth();
+				elementsPaddingRight = getNavigationBarWidth();
 			}
 		} else {
-			logoPaddingLeft = getNavigationBarWidth();
-			textPaddingLeft = getNavigationBarWidth();
+			elementsPaddingLeft = getNavigationBarWidth();
 		}
 		logoLayoutParams.setMargins(0, logoMarginTop, 0, 0);
-		logo.setPadding(logoPaddingLeft, 0, logoPaddingRight, 0);
+		logo.setPadding(elementsPaddingLeft, 0, elementsPaddingRight, 0);
 		logo.setLayoutParams(logoLayoutParams);
 		view.addView(logo);
 		textLayoutParams.setMargins(0, 0, 0, textMarginBottom);
-		text.setPadding(textPaddingLeft, 0, textPaddingRight, 0);
+		text.setPadding(elementsPaddingLeft, 0, elementsPaddingRight, 0);
 		text.setLayoutParams(textLayoutParams);
 		view.addView(text);
+		osmTextLayoutParams.setMargins(0, 0, 0, osmTextMarginBottom);
+		osmText.setPadding(elementsPaddingLeft, 0, elementsPaddingRight, 0);
+		osmText.setLayoutParams(osmTextLayoutParams);
+		view.addView(osmText);
 
 		return view;
 	}
