@@ -21,12 +21,6 @@ public class MapillaryImageCard extends ImageCard {
 		OnClickListener onClickListener = new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (!getMyApplication().getSettings().SHOW_MAPILLARY.get()) {
-					MapillaryPlugin mapillaryPlugin = OsmandPlugin.getPlugin(MapillaryPlugin.class);
-					if (mapillaryPlugin != null) {
-						mapillaryPlugin.updateLayers(getMapActivity().getMapView(), getMapActivity(), true);
-					}
-				}
 				getMapActivity().getContextMenu().close();
 				MapillaryImageDialog.show(getMapActivity(), getKey(), getImageHiresUrl(), getUrl(), getLocation(),
 						getCa(), getMyApplication().getString(R.string.mapillary), null, true);
