@@ -184,7 +184,9 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 				setBackgroundDrawable(searchBoxBg)
 			}
 			findViewById<View>(R.id.search_button).setOnClickListener {
-				activity.supportFragmentManager?.also { SearchDialogFragment.showInstance(it, this@MyLocationTabFragment) }
+				activity.supportFragmentManager?.also {
+					SearchDialogFragment.showInstance(it, this@MyLocationTabFragment, selectedChats, selectedUsers)
+				}
 			}
 			findViewById<ImageView>(R.id.search_icon)
 				.setImageDrawable(app.uiUtils.getThemedIcon(R.drawable.ic_action_search_dark))

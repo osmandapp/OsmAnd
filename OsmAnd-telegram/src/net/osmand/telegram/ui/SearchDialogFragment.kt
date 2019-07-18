@@ -64,6 +64,8 @@ class SearchDialogFragment : BaseDialogFragment(), TelegramHelper.TelegramSearch
 		parent: ViewGroup?,
 		savedInstanceState: Bundle?
 	): View {
+		readFromBundle(savedInstanceState ?: arguments)
+
 		val mainView = inflater.inflate(R.layout.fragment_search_dialog, parent)
 
 		mainView.findViewById<Toolbar>(R.id.toolbar).apply {
@@ -168,6 +170,8 @@ class SearchDialogFragment : BaseDialogFragment(), TelegramHelper.TelegramSearch
 		startLocationUpdate()
 		searchEditText.requestFocus()
 		AndroidUtils.softKeyboardDelayed(searchEditText)
+		updateList()
+		switchButtonsVisibility(selectedChats.isNotEmpty() || selectedUsers.isNotEmpty())
 	}
 
 	override fun onPause() {
@@ -332,6 +336,12 @@ class SearchDialogFragment : BaseDialogFragment(), TelegramHelper.TelegramSearch
 				}
 			}
 		}
+	}
+
+	override fun onSaveInstanceState(outState: Bundle) {
+		super.onSaveInstanceState(outState)
+		outState.putLongArray(SELECTED_CHATS_KEY, selectedChats.toLongArray())
+		outState.putLongArray(SELECTED_USERS_KEY, selectedUsers.toLongArray())
 	}
 
 	inner class SearchAdapter : RecyclerView.Adapter<SearchAdapter.ChatViewHolder>() {
@@ -500,6 +510,17 @@ class SearchDialogFragment : BaseDialogFragment(), TelegramHelper.TelegramSearch
 		}
 	}
 
+	private fun readFromBundle(bundle: Bundle?) {
+		selectedChats.clear()
+		selectedUsers.clear()
+		bundle?.getLongArray(SELECTED_CHATS_KEY)?.also {
+			selectedChats.addAll(it.toHashSet())
+		}
+		bundle?.getLongArray(SELECTED_USERS_KEY)?.also {
+			selectedUsers.addAll(it.toHashSet())
+		}
+	}
+
 	private fun onPrimaryBtnClick() {
 		if (selectedChats.isNotEmpty() || selectedUsers.isNotEmpty()) {
 			fragmentManager?.also {
@@ -510,8 +531,7 @@ class SearchDialogFragment : BaseDialogFragment(), TelegramHelper.TelegramSearch
 
 	private fun onSecondaryBtnClick() {
 		clearSelection()
-		adapter.notifyDataSetChanged()
-		adapter.notifyDataSetChanged()
+		updateList()
 		switchButtonsVisibility(false)
 	}
 
@@ -530,10 +550,20 @@ class SearchDialogFragment : BaseDialogFragment(), TelegramHelper.TelegramSearch
 	companion object {
 
 		const val TAG = "SearchDialogFragment"
+		private const val SELECTED_CHATS_KEY = "selected_chats_key"
+		private const val SELECTED_USERS_KEY = "selected_users_key"
 
-		fun showInstance(fm: FragmentManager, target: Fragment?): Boolean {
+		fun showInstance(fm: FragmentManager, target: Fragment?, selectedChats: Set<Long>, selectedUsers: Set<Long>): Boolean {
 			return try {
 				SearchDialogFragment().apply {
+					arguments = Bundle().apply {
+						if (selectedChats.isNotEmpty()) {
+							putLongArray(SELECTED_CHATS_KEY, selectedChats.toLongArray())
+						}
+						if (selectedUsers.isNotEmpty()) {
+							putLongArray(SELECTED_USERS_KEY, selectedUsers.toLongArray())
+						}
+					}
 					if (target != null) {
 						setTargetFragment(target, SetTimeDialogFragment.LOCATION_SHARED_REQUEST_CODE)
 					}
