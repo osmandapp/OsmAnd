@@ -388,10 +388,10 @@
     <string name="unzipping_file">Descomprimiendo archivo…</string>
     <string name="route_tr">Gira a la derecha en</string>
     <string name="route_tshr">Gira fuerte a la derecha en</string>
-    <string name="route_tslr">Gira leve a la derecha en</string>
+    <string name="route_tslr">Gira levemente a la derecha en</string>
     <string name="route_tl">Gira a la izquierda en</string>
     <string name="route_tshl">Gira fuerte a la izquierda en</string>
-    <string name="route_tsll">Gira leve a la izquierda en</string>
+    <string name="route_tsll">Gira levemente a la izquierda en</string>
     <string name="route_tu">Cambia de sentido en</string>
     <string name="route_head">Inicio</string>
     <string name="first_time_continue">Después</string>
@@ -465,7 +465,7 @@
     <string name="only_show">Mostrar ruta</string>
     <string name="follow">Iniciar la guía</string>
     <string name="recalculate_route_to_your_location">Modo transporte:</string>
-    <string name="mark_final_location_first">Elige primero el destino</string>
+    <string name="mark_final_location_first">Por favor, elige primero el destino</string>
     <string name="get_directions">Indicaciones</string>
     <string name="opening_hours">Horario de apertura</string>
     <string name="opening_changeset">Abriendo conjunto de cambios…</string>
@@ -485,7 +485,7 @@
     <string name="error_calculating_route_occured">No se pudo calcular la ruta</string>
     <string name="empty_route_calculated">La ruta calculada está vacía</string>
     <string name="new_route_calculated_dist">Nueva ruta calculada, distancia</string>
-    <string name="arrived_at_destination">Has llegado al destino</string>
+    <string name="arrived_at_destination">Has llegado a tu destino</string>
     <string name="invalid_locations">Coordenadas inválidas</string>
     <string name="go_back_to_osmand">Volver al mapa OsmAnd</string>
     <string name="shared_string_close">Cerrar</string>
@@ -713,7 +713,7 @@
     <string name="rendering_attr_contourLines_name">Mostrar curvas de nivel</string>
     <string name="rendering_attr_hmRendered_description">Aumentar detalle que se muestra en el mapa.</string>
     <string name="rendering_attr_hmRendered_name">Mostrar más detalle del mapa</string>
-    <string name="route_roundabout">Rotonda: Tome la %1$dª salida en dirección a</string>
+    <string name="route_roundabout">Rotonda: Toma la %1$dª salida en</string>
     <string name="route_kl">Mantente a la izquierda y continúa por</string>
     <string name="route_kr">Mantente a la derecha y continúa por</string>
     <string name="asap">Lo antes posible</string>
@@ -966,7 +966,7 @@
     <string name="av_def_action_picture">Fotografiar</string>
     <string name="recording_context_menu_precord">Fotografiar</string>
     <string name="stop_routing_confirm">¿Parar la navegación?</string>
-    <string name="clear_dest_confirm">¿Limpiar el destino (y los destinos intermedios)?</string>
+    <string name="clear_dest_confirm">¿Estás seguro de que quieres borrar tu destino (y los destinos intermedios)\?</string>
     <string name="precise_routing_mode_descr">Calcula rutas precisas sin interferencias. Aún está limitado por la distancia y es lento.</string>
     <string name="precise_routing_mode">Navegación precisa (alfa)</string>
     <string name="local_indexes_cat_av">Datos multimedia</string>
@@ -2323,7 +2323,7 @@
     <string name="quick_action_add_destination">Añadir destino</string>
     <string name="quick_action_replace_destination">Reemplazar destino</string>
     <string name="quick_action_add_first_intermediate">Añadir primer destino intermedio</string>
-    <string name="quick_action_add_destination_desc">Este botón de acción, añade un destino de ruta en el centro de la pantalla. Cualquier destino previamente elegido, se mueve como último destino intermedio.</string>
+    <string name="quick_action_add_destination_desc">Este botón de acción hace del centro de la pantalla el destino de la ruta. Cualquier destino previamente elegido, se convierte en el último punto intermedio.</string>
     <string name="quick_action_replace_destination_desc">Este botón de acción, añade un nuevo destino de ruta en el centro de la pantalla, reemplazando el anterior destino (si existe).</string>
     <string name="quick_action_add_first_intermediate_desc">Este botón de acción, añade el primer destino intermedio en el centro de la pantalla.</string>
     <string name="no_overlay">Sin superposición</string>
@@ -2445,7 +2445,7 @@
     <string name="nothing_found_descr">Modificar la consulta de búsqueda o aumentar el radio de búsqueda.</string>
     <string name="hillshade_menu_download_descr">Para ver el sombreado del relieve en el mapa, debes descargar la superposición del sombreado de esta región.</string>
     <string name="hillshade_purchase_header">Para ver el sombreado del relieve en el mapa, debes comprar e instalar el complemento «Curvas de nivel»</string>
-    <string name="private_access_routing_req">El destino se ubica en un área de acceso privado. ¿Permitir el acceso a los caminos privados para este viaje?</string>
+    <string name="private_access_routing_req">Tu destino está ubicado en un área de acceso privado. ¿Permitir el acceso a los caminos privados para este viaje\?</string>
     <string name="mapillary_widget">Control de Mapillary</string>
     <string name="mapillary_descr">Fotos a nivel de calle en línea para todos. Descubre lugares, colabora, captura el mundo.</string>
     <string name="mapillary">Mapillary</string>
@@ -2935,7 +2935,7 @@
     <string name="add_home">Añadir como «Casa»</string>
     <string name="add_work">Añadir como «Trabajo»</string>
     <string name="work_button">Trabajo</string>
-    <string name="add_destination_query">Primero añada el destino</string>
+    <string name="add_destination_query">Por favor, primero añada el destino</string>
     <string name="shared_string_swap">Intercambiar</string>
     <string name="show_more">Mostrar más</string>
     <string name="tracks_on_map">Trazas mostradas</string>
@@ -3117,7 +3117,7 @@
     <string name="app_mode_skiing">Esquí</string>
     <string name="base_profile_descr_ski">Esquí</string>
     <string name="show_compass_ruler">Mostrar regla radial</string>
-    <string name="hide_compass_ruler">Ocultar regla de brújula</string>
+    <string name="hide_compass_ruler">Ocultar regla radial</string>
     <string name="process_downloading_service">Servicio de descargas de OsmAnd</string>
     <string name="shared_string_color_magenta">Magenta</string>
     <string name="shared_string_icon">Icono</string>
