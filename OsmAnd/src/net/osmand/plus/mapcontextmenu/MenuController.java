@@ -17,9 +17,12 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
 
+import java.util.Map;
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
+import net.osmand.Location;
 import net.osmand.NativeLibrary.RenderedObject;
+import net.osmand.PlatformUtil;
 import net.osmand.aidl.maplayer.point.AMapPoint;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
@@ -34,6 +37,8 @@ import net.osmand.map.WorldRegion;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
+import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
@@ -45,6 +50,7 @@ import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.SearchHistoryHelper;
+import net.osmand.plus.mapcontextmenu.MenuBuilder.CollapsableView;
 import net.osmand.plus.mapcontextmenu.MenuBuilder.CollapseExpandListener;
 import net.osmand.plus.mapcontextmenu.controllers.AMapPointMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.AmenityMenuController;
@@ -83,6 +89,7 @@ import java.lang.ref.WeakReference;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import org.apache.commons.logging.Log;
 
 public abstract class MenuController extends BaseMenuController implements CollapseExpandListener {
 
@@ -123,6 +130,8 @@ public abstract class MenuController extends BaseMenuController implements Colla
 	private DownloadIndexesThread downloadThread;
 
 	protected List<OpeningHours.Info> openingHoursInfo;
+
+	private static final Log LOG = PlatformUtil.getLog(MenuController.class);
 
 	public MenuController(MenuBuilder builder, PointDescription pointDescription, MapActivity mapActivity) {
 		super(mapActivity);
@@ -189,7 +198,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 			} else if (object instanceof OsmPoint) {
 				menuController = new EditPOIMenuController(mapActivity, pointDescription, (OsmPoint) object);
 			} else if (object instanceof WptPt) {
-				menuController = new WptPtMenuController(mapActivity, pointDescription, (WptPt) object);
+				menuController = WptPtMenuController.getInstance(mapActivity, pointDescription, (WptPt) object);
 			} else if (object instanceof DownloadMapObject) {
 				menuController = new MapDataMenuController(mapActivity, pointDescription, (DownloadMapObject) object);
 			} else if (object instanceof OpenStreetNote) {
@@ -257,19 +266,66 @@ public abstract class MenuController extends BaseMenuController implements Colla
 		builder.addPlainMenuItem(iconId, buttonText, text, needLinks, isUrl, onClickListener);
 	}
 
+	public void addPlainMenuItem(int iconId, String text, boolean needLinks, boolean isUrl,
+		boolean collapsable, CollapsableView collapsableView, OnClickListener onClickListener) {
+
+		builder.addPlainMenuItem(iconId, text, needLinks, isUrl, collapsable, collapsableView, onClickListener);
+	}
+
 	public void clearPlainMenuItems() {
 		builder.clearPlainMenuItems();
 	}
 
 	public void addPlainMenuItems(String typeStr, PointDescription pointDescription, LatLon latLon) {
-		addMyLocationToPlainItems(latLon);
+		if (pointDescription.isMyLocation()) {
+			addSpeedToPlainItems();
+			addAltitudeToPlainItems();
+			addPrecisionToPlainItems();
+		}
 	}
 
-	protected void addMyLocationToPlainItems(LatLon latLon) {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			addPlainMenuItem(R.drawable.ic_action_get_my_location, null, PointDescription.getLocationName(mapActivity,
-					latLon.getLatitude(), latLon.getLongitude(), true).replaceAll("\n", " "), false, false, null);
+	protected void addSpeedToPlainItems() {
+		final MapActivity mapActivity = getMapActivity();
+		if (getMapActivity() != null) {
+			final OsmandApplication app = mapActivity.getMyApplication();
+			Location l = app.getLocationProvider().getLastKnownLocation();
+			if (l != null && l.hasSpeed() && l.getSpeed() > 0f) {
+				String speed = OsmAndFormatter.getFormattedSpeed(l.getSpeed(), app);
+				addPlainMenuItem(R.drawable.ic_action_speed, null, speed, false, false, null);
+			}
+		}
+	}
+
+	protected void addAltitudeToPlainItems() {
+		final MapActivity mapActivity = getMapActivity();
+		if (getMapActivity() != null) {
+			final OsmandApplication app = mapActivity.getMyApplication();
+			Location l = app.getLocationProvider().getLastKnownLocation();
+			if (l != null && l.hasAltitude()) {
+				String alt = OsmAndFormatter.getFormattedAlt(l.getAltitude(), app);
+				addPlainMenuItem(R.drawable.ic_action_altitude_average, null, alt, false, false, null);
+			}
+		}
+	}
+
+	protected void addPrecisionToPlainItems() {
+		final MapActivity mapActivity = getMapActivity();
+		if (getMapActivity() != null ) {
+			final OsmandApplication app = mapActivity.getMyApplication();
+			Location l = app.getLocationProvider().getLastKnownLocation();
+			if (l != null && l.hasAccuracy()) {
+				String acc;
+				if (l.hasVerticalAccuracy()) {
+					acc = String.format(app.getString(R.string.precision_hdop_and_vdop),
+						OsmAndFormatter.getFormattedDistance(l.getAccuracy(), app),
+						OsmAndFormatter.getFormattedDistance(l.getVerticalAccuracy(), app));
+				} else {
+					acc = String.format(app.getString(R.string.precision_hdop),
+						OsmAndFormatter.getFormattedDistance(l.getAccuracy(), app));
+				}
+
+				addPlainMenuItem(R.drawable.ic_action_ruler_circle, null, acc, false, false, null);
+			}
 		}
 	}
 
@@ -486,7 +542,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 			}
 			return open ? R.color.ctx_menu_amenity_opened_text_color : R.color.ctx_menu_amenity_closed_text_color;
 		} else if (shouldShowMapSize()) {
-			return R.color.icon_color;
+			return R.color.icon_color_default_light;
 		}
 		return 0;
 	}
@@ -655,7 +711,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 		public boolean needRightText = false;
 		public String rightTextCaption = "";
 		public boolean visible = true;
-		public boolean needColorizeIcon = true;
+		public boolean tintIcon = true;
 		public Drawable leftIcon;
 		public Drawable rightIcon;
 		public boolean enabled = true;
@@ -678,7 +734,7 @@ public abstract class MenuController extends BaseMenuController implements Colla
 			}
 			int resId = left ? leftIconId : rightIconId;
 			if (resId != 0) {
-				if (needColorizeIcon) {
+				if (tintIcon) {
 					return enabled ? getNormalIcon(resId) : getDisabledIcon(resId);
 				}
 				MapActivity mapActivity = getMapActivity();
@@ -697,33 +753,12 @@ public abstract class MenuController extends BaseMenuController implements Colla
 			}
 		}
 
-		public void updateStateListDrawableIcon(@DrawableRes int resId, boolean left) {
-			boolean useStateList = enabled && Build.VERSION.SDK_INT >= 21;
-			if (left) {
-				leftIcon = useStateList ? getStateListDrawable(resId) : null;
-				leftIconId = useStateList ? 0 : resId;
-			} else {
-				rightIcon = useStateList ? getStateListDrawable(resId) : null;
-				rightIconId = useStateList ? 0 : resId;
-			}
-		}
-
 		private Drawable getDisabledIcon(@DrawableRes int iconResId) {
-			return getIcon(iconResId, isLight() ? R.color.ctx_menu_controller_disabled_text_color_light
-					: R.color.ctx_menu_controller_disabled_text_color_dark);
+			return getIcon(iconResId, isLight() ? R.color.text_color_secondary_light : R.color.text_color_secondary_dark);
 		}
 
 		private Drawable getNormalIcon(@DrawableRes int iconResId) {
-			return getIcon(iconResId, isLight() ? R.color.map_widget_blue : R.color.osmand_orange);
-		}
-
-		private Drawable getPressedIcon(@DrawableRes int iconResId) {
-			return getIcon(iconResId, isLight() ? R.color.ctx_menu_controller_button_text_color_light_p
-					: R.color.ctx_menu_controller_button_text_color_dark_p);
-		}
-
-		private StateListDrawable getStateListDrawable(@DrawableRes int iconResId) {
-			return AndroidUtils.createPressedStateListDrawable(getNormalIcon(iconResId), getPressedIcon(iconResId));
+			return getIcon(iconResId, isLight() ? R.color.active_color_primary_light : R.color.active_color_primary_dark);
 		}
 
 		public abstract void buttonPressed();
@@ -803,8 +838,8 @@ public abstract class MenuController extends BaseMenuController implements Colla
 		public ContextMenuToolbarController(MenuController menuController) {
 			super(TopToolbarControllerType.CONTEXT_MENU);
 			this.menuController = menuController;
-			setBgIds(R.color.actionbar_light_color, R.color.actionbar_dark_color,
-					R.color.actionbar_light_color, R.color.actionbar_dark_color);
+			setBgIds(R.color.app_bar_color_light, R.color.app_bar_color_dark,
+					R.color.app_bar_color_light, R.color.app_bar_color_dark);
 			setBackBtnIconClrIds(R.color.color_white, R.color.color_white);
 			setCloseBtnIconClrIds(R.color.color_white, R.color.color_white);
 			setTitleTextClrIds(R.color.color_white, R.color.color_white);

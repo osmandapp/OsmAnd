@@ -2,9 +2,7 @@
 <resources>
     <string name="background_work_description">Zmień ustawienia optymalizacji baterii, aby zapewnić stabilną lokalizację.</string>
     <string name="background_work">Praca w tle</string>
-    <string name="battery_optimization_description">Aby stabilnie udostępniać swoją pozycję w tle, zaleca się wyłączenie optymalizacji baterii dla Tracker OsmAnd.
-\n
-\nJeśli włączona jest optymalizacja, system może automatycznie wyłączyć aplikację działającą w tle (gdy ekran jest zablokowany i/lub aplikacja jest zminimalizowana). Dzieje się tak bez powiadomienia i powoduje zatrzymanie położenia geograficznego.</string>
+    <string name="battery_optimization_description">Wyłącz optymalizację baterii dla OsmAnd Tracker, aby nie została nagle wyłączona, gdy znajduje się w tle.</string>
     <string name="sharing_in_background">Udostępnianie w tle</string>
     <string name="go_to_settings">Przejdź do ustawień</string>
     <string name="shared_string_later">Później</string>
@@ -46,7 +44,7 @@
     <string name="connected_account">Połączone konta</string>
     <string name="shared_string_account">Konto</string>
     <string name="in_time">w %1$s</string>
-    <string name="osmand_connect_desc">Wybierz wersję OsmAnd, którą Tracker OsmAnd będzie używał do wyświetlaniu pozycji.</string>
+    <string name="osmand_connect_desc">Wybierz wersję OsmAnd, której używa OsmAnd Tracker do wyświetlania pozycji.</string>
     <string name="osmand_connect">Połącz OsmAnd</string>
     <string name="location_history_desc">Ukryj kontakty, które nie zostały przeniesione w określonym czasie.</string>
     <string name="location_history">Historia lokalizacji</string>
@@ -167,7 +165,7 @@
     <string name="initializing">Wystartuj</string>
     <string name="searching_for_gps">Pozycjonowanie…</string>
     <string name="connecting_to_the_internet">Łączenie z internetem</string>
-    <string name="disconnect_from_telegram_desc">Aby anulować dostęp do udostępniania lokalizacji. Otwórz Telegram, przejdź do Ustawienia → Prywatność i bezpieczeństwo → Sesje i zakończ sesję OsmAnd Telegram.</string>
+    <string name="disconnect_from_telegram_desc">Aby anulować dostęp do udostępniania lokalizacji. Otwórz Telegram, przejdź do Ustawienia → Prywatność i bezpieczeństwo → Sesje i zakończ sesję OsmAnd Tracker.</string>
     <string name="stale_location">Nie porusza się</string>
     <string name="last_update_from_telegram">Ostatnia aktualizacja z Telegram</string>
     <string name="stop_sharing_all">Udostępnianie jest włączone (wyłącz)</string>
@@ -200,7 +198,6 @@
     <string name="disable_monitoring">Wyłącz monitorowanie</string>
     <string name="location_recording_enabled">Zapis położenia włączony</string>
     <string name="timeline_description">Włącz monitorowanie, by zapisać wszystkie lokalizacje w historii.</string>
-    <string name="app_name_short_online">Nadajnik online</string>
     <string name="app_name_short">Nadajnik OsmAnd</string>
     <string name="shared_string_telegram">Telegram</string>
     <string name="privacy_policy_use_telegram">Telegram (aplikacji do wysyłania wiadomości) jest używana do łączenia i komunikowania się z ludźmi.</string>
@@ -237,4 +234,12 @@
     <string name="proxy">Serwer proxy</string>
     <string name="privacy">Prywatność</string>
     <string name="bearing">Kierunek</string>
+    <string name="shared_string_select">Wybierz</string>
+    <string name="min_logging_distance">Minimalna odległość rejestrowania</string>
+    <string name="min_logging_distance_descr">Filtr: minimalna odległość do zarejestrowania nowego punktu</string>
+    <string name="min_logging_accuracy">Minimalna dokładność rejestrowania</string>
+    <string name="min_logging_accuracy_descr">Filtr: brak rejestrowania, chyba że zostanie osiągnięta dokładność</string>
+    <string name="min_logging_speed">Minimalna szybkość rejestrowania</string>
+    <string name="min_logging_speed_descr">Filtr: brak rejestrowania poniżej wybranej prędkości</string>
+    <string name="gpx_settings">Ustawienia GPX</string>
 </resources>

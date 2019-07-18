@@ -308,7 +308,7 @@ public class MapActivityLayers {
 								PoiUIFilter filter = list.get(i);
 							if (item.getSelected()) {
 								if (filter.isStandardFilter()) {
-									filter.setFilterByName(null);
+									filter.removeUnsavedFilterByName();
 								}
 								getApplication().getPoiFilters().addSelectedPoiFilter(filter);
 							} else {
@@ -376,7 +376,7 @@ public class MapActivityLayers {
 					activity.showQuickSearch(ShowQuickSearchMode.NEW, true);
 				} else {
 					if (pf.isStandardFilter()) {
-						pf.setFilterByName(null);
+						pf.removeUnsavedFilterByName();
 					}
 					getApplication().getPoiFilters().clearSelectedPoiFilters();
 					getApplication().getPoiFilters().addSelectedPoiFilter(pf);

@@ -841,7 +841,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 			this.ctx = ctx;
 			warningColor = ContextCompat.getColor(ctx, R.color.color_warning);
 			boolean light = ctx.getMyApplication().getSettings().isLightContent();
-			okColor = ContextCompat.getColor(ctx, light ? R.color.primary_text_light : R.color.primary_text_dark);
+			okColor = ContextCompat.getColor(ctx, light ? R.color.text_color_primary_light : R.color.text_color_primary_dark);
 			corruptedColor = ContextCompat.getColor(ctx, R.color.color_invalid);
 		}
 
@@ -1033,7 +1033,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 
 			TypedValue typedValue = new TypedValue();
 			Resources.Theme theme = ctx.getTheme();
-			theme.resolveAttribute(R.attr.ctx_menu_info_view_bg, typedValue, true);
+			theme.resolveAttribute(R.attr.activity_background_color, typedValue, true);
 			v.setBackgroundColor(typedValue.data);
 			return v;
 		}

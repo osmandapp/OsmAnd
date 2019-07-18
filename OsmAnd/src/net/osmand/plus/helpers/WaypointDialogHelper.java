@@ -117,7 +117,7 @@ public class WaypointDialogHelper {
 				String devStr = "+" + OsmAndFormatter.getFormattedDistance(ps.deviationDistance, app);
 				textDeviation.setText(devStr);
 				if (!topBar) {
-					int colorId = nightMode ? R.color.secondary_text_dark : R.color.secondary_text_light;
+					int colorId = nightMode ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light;
 					AndroidUtils.setTextSecondaryColor(activity, textDeviation, nightMode);
 					if (ps.deviationDirectionRight) {
 						textDeviation.setCompoundDrawablesWithIntrinsicBounds(
@@ -378,7 +378,11 @@ public class WaypointDialogHelper {
 				for (TargetPoint p : lt) {
 					al.add(p.point);
 				}
-				return new TspAnt().readGraph(al, start.point, end.point).solve();
+				try {
+					return new TspAnt().readGraph(al, start.point, end.point).solve();
+				} catch (Exception e) {
+					return null;
+				}
 			}
 
 			protected void onPostExecute(int[] result) {
@@ -395,7 +399,9 @@ public class WaypointDialogHelper {
 						dlg.dismiss();
 					}
 				}
-
+				if (result == null) {
+					return;
+				}
 				List<TargetPoint> alocs = new ArrayList<>();
 				for (int i : result) {
 					if (i > 0) {

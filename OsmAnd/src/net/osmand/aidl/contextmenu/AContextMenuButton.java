@@ -61,7 +61,7 @@ public class AContextMenuButton implements Parcelable {
 		return rightIconName;
 	}
 
-	public boolean isNeedColorizeIcon() {
+	public boolean isTintIcon() {
 		return needColorizeIcon;
 	}
 

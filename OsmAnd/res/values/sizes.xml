@@ -18,6 +18,7 @@
 	<dimen name="card_button_progress_size">32dp</dimen>
 	<dimen name="card_button_progress_size_small">24dp</dimen>
 	<dimen name="card_padding">12dp</dimen>
+	<dimen name="dlg_button_rect_rad">3dp</dimen>
 
 	<dimen name="widget_turn_lane_size">36dp</dimen>
 	<dimen name="widget_turn_lane_border">6dp</dimen>
@@ -127,6 +128,7 @@
 
 
 	<dimen name="map_widget_text_size">23sp</dimen>
+	<dimen name="map_top_widget_text_size">22sp</dimen>
 	<dimen name="map_widget_text_size_small">15sp</dimen>
 	<dimen name="map_button_text_size">18sp</dimen>
 	<dimen name="map_alarm_text_size">25sp</dimen>
@@ -197,9 +199,10 @@
 
 	<dimen name="dialog_header_text_size">20sp</dimen>
 
-	<dimen name="splash_screen_logo_top">150dp</dimen>
-	<dimen name="splash_screen_text_bottom">128dp</dimen>
-	
+	<dimen name="splash_screen_logo_top">80dp</dimen>
+	<dimen name="splash_screen_text_bottom">36dp</dimen>
+	<dimen name="splash_screen_osm_text_bottom">12dp</dimen>
+
 	<dimen name="guide_line_text_size">14sp</dimen>
 	<dimen name="guide_line_vertical_offset">6dp</dimen>
 
@@ -216,6 +219,7 @@
 	<dimen name="empty_state_text_button_padding_top">64dp</dimen>
 
     <dimen name="bottom_sheet_cancel_button_height">48dp</dimen>
+	<dimen name="bottom_sheet_cancel_button_height_small">36dp</dimen>
 	<dimen name="landscape_bottom_sheet_dialog_fragment_width">360dp</dimen>
 
 	<dimen name="measurement_tool_select_radius">20dp</dimen>
@@ -223,6 +227,7 @@
 	<dimen name="bottom_sheet_content_margin_small">8dp</dimen>
 	<dimen name="content_padding">16dp</dimen>
 	<dimen name="content_padding_small">12dp</dimen>
+	<dimen name="content_padding_half">8dp</dimen>
 	<dimen name="bottom_sheet_content_padding_small">8dp</dimen>
 	<dimen name="measurement_tool_divider_margin">8dp</dimen>
 	<dimen name="measurement_tool_content_padding_medium">12dp</dimen>
@@ -242,6 +247,7 @@
 	<dimen name="bottom_sheet_title_height">52dp</dimen>
 	<dimen name="bottom_sheet_descr_height">44dp</dimen>
 	<dimen name="bottom_sheet_list_item_height">48dp</dimen>
+	<dimen name="bottom_sheet_large_list_item_height">64dp</dimen>
 	<dimen name="bottom_sheet_icon_margin">24dp</dimen>
 	<dimen name="bottom_sheet_divider_margin_top">7dp</dimen>
 	<dimen name="bottom_sheet_divider_margin_bottom">8dp</dimen>
@@ -303,7 +309,7 @@
     <dimen name="grid_menu_item_sides_margin">40dp</dimen>
 
 	<dimen name="bottom_sheet_menu_peek_height">300dp</dimen>
-	
+
 	<dimen name="side_of_the_world_button_size">36dp</dimen>
 
 	<dimen name="coords_input_show_hide_keyboard_btn_padding">13dp</dimen>
@@ -337,5 +343,8 @@
 	<dimen name="pages_item_size">4dp</dimen>
 	<dimen name="pages_item_padding">3dp</dimen>
 	<dimen name="pages_item_margin">4dp</dimen>
+
+	<dimen name="setting_profile_item_height">64dp</dimen>
+	<dimen name="setting_profile_item_switch_margin">18dp</dimen>
 
 </resources>

@@ -166,7 +166,7 @@
     <string name="poi_vehicle_inspection">Inspección de vehículos</string>
     <string name="poi_car_wash">Lavadero de automóviles</string>
     <string name="poi_fuel">Gasolinera;Estación de servicio;Estación de combustible;Servicentro;Bencinera</string>
-    <string name="poi_fuel_diesel">Diésel (Euro)</string>
+    <string name="poi_fuel_diesel">Diésel (Euro);Infinia Diesel;V-Power Nitro+ Diesel;Euro+ Diesel;Podium</string>
     <string name="poi_fuel_gtl_diesel">Diésel GTL</string>
     <string name="poi_fuel_hgv_diesel">Diésel de vehículos pesados</string>
     <string name="poi_fuel_biodiesel">Biodiésel</string>
@@ -174,8 +174,8 @@
     <string name="poi_fuel_octane_80">80 octanos</string>
     <string name="poi_fuel_octane_91">91 octanos</string>
     <string name="poi_fuel_octane_92">92 octanos</string>
-    <string name="poi_fuel_octane_95">95 octanos;Nafta súper</string>
-    <string name="poi_fuel_octane_98">98 octanos;Nafta premium</string>
+    <string name="poi_fuel_octane_95">95 octanos;Nafta súper (grado 2);Energy 5000;Super+</string>
+    <string name="poi_fuel_octane_98">98 octanos;Nafta premium (grado 3);Infinia;V-Power Nitro+;Energy 8000;Podium;SL Magnum</string>
     <string name="poi_fuel_octane_100">100 octanos</string>
     <string name="poi_fuel_cng">GNC</string>
     <string name="poi_fuel_1_25">Combustible 1:25</string>
@@ -650,7 +650,7 @@
     <string name="poi_car_sharing">Coche compartido</string>
     <string name="poi_boat_sharing">Barco compartido</string>
     <string name="poi_dock">Dársena</string>
-    <string name="poi_toilets">Baño</string>
+    <string name="poi_toilets">Baño;Aseos</string>
     <string name="poi_sauna">Sauna</string>
     <string name="poi_brothel">Burdel;Cabaré;Lupanar;Prostíbulo;Mancebía</string>
     <string name="poi_smoking_area">Área de fumadores</string>
@@ -663,7 +663,7 @@
     <string name="poi_money_lender">Prestamista</string>
     <string name="poi_pawnbroker">Casa de empeños;Prestamista</string>
     <string name="poi_bureau_de_change">Casa de cambio</string>
-    <string name="poi_accountant">Contador;Contable</string>
+    <string name="poi_accountant">Estudio contable;Contador</string>
     <string name="poi_bitcoin_yes">Pago de Bitcoin</string>
     <string name="poi_cave_entrance">Entrada a cueva</string>
     <string name="poi_peak">Pico de montaña</string>
@@ -1494,9 +1494,9 @@
     <string name="poi_takeaway_yes">Comida para llevar: sí</string>
     <string name="poi_takeaway_no">Comida para llevar: no</string>
     <string name="poi_takeaway_only">Comida para llevar: únicamente</string>
-    <string name="poi_delivery_no">Servicio a domicilio: no</string>
-    <string name="poi_delivery_yes">Servicio a domicilio: sí</string>
-    <string name="poi_delivery_only">Servicio a domicilio: únicamente</string>
+    <string name="poi_delivery_no">Envío a domicilio: no</string>
+    <string name="poi_delivery_yes">Envío a domicilio: sí</string>
+    <string name="poi_delivery_only">Envío a domicilio: únicamente</string>
     <string name="poi_outdoor_seating_yes">Asientos exteriores: sí</string>
     <string name="poi_outdoor_seating_no">Asientos exteriores: no</string>
     <string name="poi_outdoor_seating_terrace">Asientos exteriores: terraza</string>
@@ -2208,7 +2208,7 @@
     <string name="poi_cargo_bicycle">Bicicletas</string>
     <string name="poi_cargo_container">Contenedores</string>
     <string name="poi_cargo_hgv">Vehículos pesados</string>
-    <string name="poi_fitness_station">Gimnasio exterior;Estación aeróbica</string>
+    <string name="poi_fitness_station">Estación aeróbica;Gimnasio exterior;Parque de gimnasia</string>
     <string name="poi_hackerspace">Encuentro de hackers</string>
     <string name="poi_wiki_lang_af">Wiki en Afrikáans</string>
     <string name="poi_wiki_lang_als">Wiki en alsaciano</string>
@@ -2826,7 +2826,7 @@
     <string name="poi_outdoor_seating">Asientos exteriores</string>
     <string name="poi_fee">Tarifado</string>
     <string name="poi_smoking">Permitido fumar</string>
-    <string name="poi_delivery">Servicio a domicilio;Delivery</string>
+    <string name="poi_delivery">Envío a domicilio;Delivery</string>
     <string name="poi_drive_in">Conducir por dentro</string>
     <string name="poi_drive_through">Servicio en el automóvil</string>
     <string name="poi_takeaway">Comida para llevar</string>
@@ -3521,7 +3521,7 @@
     <string name="poi_hill">Colina</string>
     <string name="poi_atm">Cajero automático</string>
     <string name="poi_shoe_repair">Reparación de calzado;Zapatero</string>
-    <string name="poi_bulk_purchase">Compra al por mayor</string>
+    <string name="poi_bulk_purchase">Compra mayorista</string>
     <string name="poi_substation_type">Tipo de subestación</string>
     <string name="poi_bulk_purchase_yes">Sí</string>
     <string name="poi_bulk_purchase_only">Únicamente</string>
@@ -3588,4 +3588,27 @@
     <string name="poi_climbing_crag_filter">Peñón de escalada</string>
     <string name="poi_rescue_box">Caja de rescate</string>
     <string name="poi_climbing_crag">Sí</string>
+    <string name="reddit">Reddit</string>
+    <string name="poi_hazard_additional_erosion">Peligro: erosión</string>
+    <string name="poi_hazard_additional_rockfall">Peligro: desprendimiento de rocas</string>
+    <string name="poi_hazard_additional_nuclear">Peligro: nuclear</string>
+    <string name="poi_hazard_additional_flood">Peligro: inundación</string>
+    <string name="poi_hazard_additional_avalanche">Peligro: avalancha</string>
+    <string name="poi_hazard_additional_minefield">Peligro: campo minado</string>
+    <string name="poi_hazard_additional_contamination">Peligro: contaminación</string>
+    <string name="poi_defibrillator_location">Ubicación</string>
+    <string name="poi_changing_table_yes">Cambiador de pañales: sí</string>
+    <string name="poi_changing_table_no">Cambiador de pañales: no</string>
+    <string name="poi_changing_table_limited">Cambiador de pañales: limitado</string>
+    <string name="poi_changing_table_location_room">Ubicación del cambiador de pañales: habitación</string>
+    <string name="poi_changing_table_location_male_toilet">Ubicación del cambiador de pañales: baño masculino</string>
+    <string name="poi_changing_table_location_female_toilet">Ubicación del cambiador de pañales: baño femenino</string>
+    <string name="poi_changing_table_location_unisex_toilet">Ubicación del cambiador de pañales: baño unisex</string>
+    <string name="poi_changing_table_count">Cantidad de cambiadores de pañales</string>
+    <string name="poi_changing_table_fee_yes">Cambiador de pañales tarifado: sí</string>
+    <string name="poi_changing_table_fee_no">Cambiador de pañales tarifado: no</string>
+    <string name="poi_charcoal_pile">Carbonera;Pila de carbón</string>
+    <string name="poi_historic_tank">Tanque histórico</string>
+    <string name="poi_hookah_lounge">Bar de cachimbas;Salón Hookah</string>
+    <string name="poi_source_biomass">Fuente de energía: biomasa</string>
 </resources>

@@ -2,9 +2,9 @@ package net.osmand.plus.mapcontextmenu;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.ColorStateList;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
@@ -15,11 +15,14 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.view.ContextThemeWrapper;
 import android.text.ClipboardManager;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
 import android.text.TextUtils;
+import android.text.style.ForegroundColorSpan;
 import android.text.util.Linkify;
-import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -37,12 +40,12 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.osm.PoiCategory;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.mapcontextmenu.builders.cards.AbstractCard;
@@ -51,8 +54,8 @@ import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask;
 import net.osmand.plus.mapcontextmenu.builders.cards.NoImagesCard;
 import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
-import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.render.RenderingIcons;
+import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.views.TransportStopsLayer;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.util.Algorithms;
@@ -65,8 +68,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import static android.util.TypedValue.COMPLEX_UNIT_DIP;
-import static net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.*;
+import static net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
 
 public class MenuBuilder {
 
@@ -89,7 +91,6 @@ public class MenuBuilder {
 	private boolean showOnlinePhotos = true;
 	protected List<Amenity> nearestWiki = new ArrayList<>();
 	private List<OsmandPlugin> menuPlugins = new ArrayList<>();
-	private List<TransportStopRoute> routes = new ArrayList<>();
 	@Nullable
 	private CardsRowBuilder onlinePhotoCardsRow;
 	private List<AbstractCard> onlinePhotoCards;
@@ -233,10 +234,6 @@ public class MenuBuilder {
 		this.collapseExpandListener = collapseExpandListener;
 	}
 
-	public void setRoutes(List<TransportStopRoute> routes) {
-		this.routes = routes;
-	}
-
 	public String getPreferredMapLang() {
 		return preferredMapLang;
 	}
@@ -314,6 +311,9 @@ public class MenuBuilder {
 			buildPlainMenuItems(view);
 		}
 		buildInternal(view);
+		if (needBuildCoordinatesRow()) {
+			buildCoordinatesRow(view);
+		}
 		if (showOnlinePhotos) {
 			buildNearestPhotosRow(view);
 		}
@@ -322,7 +322,7 @@ public class MenuBuilder {
 	}
 
 	private boolean showTransportRoutes() {
-		return routes.size() > 0;
+		return showLocalTransportRoutes() || showNearbyTransportRoutes();
 	}
 
 	private boolean showLocalTransportRoutes() {
@@ -357,6 +357,10 @@ public class MenuBuilder {
 	}
 
 	protected boolean needBuildPlainMenuItems() {
+		return true;
+	}
+	
+	protected boolean needBuildCoordinatesRow() {
 		return true;
 	}
 
@@ -417,6 +421,15 @@ public class MenuBuilder {
 		}
 	}
 
+	private void buildCoordinatesRow(View view) {
+		Map<Integer, String> locationData = PointDescription.getLocationData(mapActivity, latLon.getLatitude(), latLon.getLongitude(), true);
+		String title = locationData.get(PointDescription.LOCATION_LIST_HEADER);
+		locationData.remove(PointDescription.LOCATION_LIST_HEADER);
+		CollapsableView cv = getLocationCollapsableView(locationData);
+		buildRow(view, R.drawable.ic_action_get_my_location, null, title, 0, true, cv, false, 1,
+			false, null, false);
+	}
+	
 	private void startLoadingImages() {
 		if (onlinePhotoCardsRow == null) {
 			return;
@@ -458,17 +471,15 @@ public class MenuBuilder {
 	}
 
 	protected void buildTopInternal(View view) {
-		if (showTransportRoutes()) {
-			if (showLocalTransportRoutes()) {
-				buildRow(view, 0, null, app.getString(R.string.transport_Routes), 0, true, getCollapsableTransportStopRoutesView(view.getContext(), false, false),
-						false, 0, false, null, true);
-			}
-			if (showNearbyTransportRoutes()) {
-				CollapsableView collapsableView = getCollapsableTransportStopRoutesView(view.getContext(), false, true);
-				String routesWithingDistance = app.getString(R.string.transport_nearby_routes_within) + " " + OsmAndFormatter.getFormattedDistance(TransportStopController.SHOW_STOPS_RADIUS_METERS, app);
-				buildRow(view, 0, null, routesWithingDistance, 0, true, collapsableView,
-						false, 0, false, null, true);
-			}
+		if (showLocalTransportRoutes()) {
+			buildRow(view, 0, null, app.getString(R.string.transport_Routes), 0, true, getCollapsableTransportStopRoutesView(view.getContext(), false, false),
+					false, 0, false, null, true);
+		}
+		if (showNearbyTransportRoutes()) {
+			CollapsableView collapsableView = getCollapsableTransportStopRoutesView(view.getContext(), false, true);
+			String routesWithingDistance = app.getString(R.string.transport_nearby_routes_within) + " " + OsmAndFormatter.getFormattedDistance(TransportStopController.SHOW_STOPS_RADIUS_METERS, app);
+			buildRow(view, 0, null, routesWithingDistance, 0, true, collapsableView,
+					false, 0, false, null, true);
 		}
 	}
 
@@ -492,8 +503,22 @@ public class MenuBuilder {
 	}
 
 	public View buildRow(final View view, Drawable icon, final String buttonText, final String text, int textColor, String secondaryText,
+	                     boolean collapsable, final CollapsableView collapsableView, boolean needLinks,
+	                     int textLinesLimit, boolean isUrl, OnClickListener onClickListener, boolean matchWidthDivider) {
+		return buildRow(view, icon, buttonText, text, textColor, secondaryText, collapsable, collapsableView,
+				needLinks, textLinesLimit, isUrl, false, false, onClickListener, matchWidthDivider);
+	}
+
+	public View buildRow(View view, int iconId, String buttonText, String text, int textColor,
+	                     boolean collapsable, final CollapsableView collapsableView,
+	                     boolean needLinks, int textLinesLimit, boolean isUrl, boolean isNumber, boolean isEmail, OnClickListener onClickListener, boolean matchWidthDivider) {
+		return buildRow(view, iconId == 0 ? null : getRowIcon(iconId), buttonText, text, textColor, null, collapsable, collapsableView,
+				needLinks, textLinesLimit, isUrl, isNumber, isEmail, onClickListener, matchWidthDivider);
+	}
+
+	public View buildRow(final View view, Drawable icon, final String buttonText, final String text, int textColor, String secondaryText,
 							boolean collapsable, final CollapsableView collapsableView, boolean needLinks,
-							int textLinesLimit, boolean isUrl, OnClickListener onClickListener, boolean matchWidthDivider) {
+							int textLinesLimit, boolean isUrl, boolean isNumber, boolean isEmail, OnClickListener onClickListener, boolean matchWidthDivider) {
 
 		if (!isFirstRow()) {
 			buildRowDivider(view);
@@ -554,11 +579,11 @@ public class MenuBuilder {
 		textView.setLayoutParams(llTextParams);
 		textView.setTypeface(FontCache.getRobotoRegular(view.getContext()));
 		textView.setTextSize(16);
-		textView.setTextColor(app.getResources().getColor(light ? R.color.ctx_menu_bottom_view_text_color_light : R.color.ctx_menu_bottom_view_text_color_dark));
+		textView.setTextColor(app.getResources().getColor(light ? R.color.text_color_primary_light : R.color.text_color_primary_dark));
 
 		int linkTextColor = ContextCompat.getColor(view.getContext(), light ? R.color.ctx_menu_bottom_view_url_color_light : R.color.ctx_menu_bottom_view_url_color_dark);
 
-		if (isUrl) {
+		if (isUrl || isNumber || isEmail) {
 			textView.setTextColor(linkTextColor);
 		} else if (needLinks) {
 			Linkify.addLinks(textView, Linkify.ALL);
@@ -584,7 +609,7 @@ public class MenuBuilder {
 			textViewSecondary.setLayoutParams(llTextSecondaryParams);
 			textViewSecondary.setTypeface(FontCache.getRobotoRegular(view.getContext()));
 			textViewSecondary.setTextSize(14);
-			textViewSecondary.setTextColor(app.getResources().getColor(light ? R.color.ctx_menu_bottom_view_secondary_text_color_light: R.color.ctx_menu_bottom_view_secondary_text_color_dark));
+			textViewSecondary.setTextColor(app.getResources().getColor(light ? R.color.text_color_secondary_light: R.color.text_color_secondary_dark));
 			textViewSecondary.setText(secondaryText);
 			llText.addView(textViewSecondary);
 		}
@@ -637,6 +662,10 @@ public class MenuBuilder {
 				collapsableView.getContenView().setVisibility(View.GONE);
 				iconViewCollapse.setImageDrawable(getCollapseIcon(true));
 			}
+			if (collapsableView.getContenView().getParent() != null) {
+				((ViewGroup) collapsableView.getContenView().getParent())
+					.removeView(collapsableView.getContenView());
+			}
 			baseView.addView(collapsableView.getContenView());
 		}
 
@@ -651,6 +680,22 @@ public class MenuBuilder {
 					v.getContext().startActivity(intent);
 				}
 			});
+		} else if (isNumber) {
+			ll.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(final View v) {
+					showDialog(text, Intent.ACTION_DIAL, "tel:", v);
+				}
+			});
+		} else if (isEmail) {
+			ll.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					Intent intent = new Intent(Intent.ACTION_SENDTO);
+					intent.setData(Uri.parse("mailto:" + text));
+					v.getContext().startActivity(intent);
+				}
+			});
 		}
 
 		((LinearLayout) view).addView(baseView);
@@ -660,6 +705,29 @@ public class MenuBuilder {
 		setDividerWidth(matchWidthDivider);
 
 		return ll;
+	}
+	
+	protected void showDialog(String text, final String actionType, final String dataPrefix, final View v) {
+		final String[] items = text.split("[,;]");
+		final Intent intent = new Intent(actionType);
+		if (items.length > 1) {
+			for (int i = 0; i < items.length; i++) {
+				items[i] = items[i].trim();
+			}
+			AlertDialog.Builder dlg = new AlertDialog.Builder(v.getContext());
+			dlg.setNegativeButton(R.string.shared_string_cancel, null);
+			dlg.setItems(items, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					intent.setData(Uri.parse(dataPrefix + items[which]));
+					v.getContext().startActivity(intent);
+				}
+			});
+			dlg.show();
+		} else {
+			intent.setData(Uri.parse(dataPrefix + text));
+			v.getContext().startActivity(intent);
+		}
 	}
 
 	protected void setDividerWidth(boolean matchWidthDivider) {
@@ -671,6 +739,31 @@ public class MenuBuilder {
 		Toast.makeText(ctx,
 				ctx.getResources().getString(R.string.copied_to_clipboard) + ":\n" + text,
 				Toast.LENGTH_SHORT).show();
+	}
+
+	protected CollapsableView getLocationCollapsableView(Map<Integer, String> locationData) {
+		LinearLayout llv = buildCollapsableContentView(mapActivity, true, true);
+		for (final Map.Entry<Integer, String> line : locationData.entrySet()) {
+			final TextViewEx button = buildButtonInCollapsableView(mapActivity, false, false);
+			if (line.getKey() == OsmAndFormatter.UTM_FORMAT || line.getKey() == OsmAndFormatter.OLC_FORMAT) {
+				SpannableStringBuilder ssb = new SpannableStringBuilder();
+				ssb.append(line.getKey() == OsmAndFormatter.UTM_FORMAT ? "UTM: " : "OLC: ");
+				ssb.setSpan(new ForegroundColorSpan(app.getResources().getColor(R.color.text_color_secondary_light)), 0, 4, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+				ssb.append(line.getValue());
+				button.setText(ssb);
+			} else {
+				button.setText(line.getValue());
+			}
+			button.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					copyToClipboard(line.getValue(), mapActivity);
+				}
+			});
+			llv.addView(button);
+		}
+		return new CollapsableView(llv, this, true);
+
 	}
 
 	protected void buildButtonRow(final View view, Drawable buttonIcon, String text, OnClickListener onClickListener) {
@@ -820,7 +913,7 @@ public class MenuBuilder {
 		LinearLayout.LayoutParams titleParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 		titleView.setLayoutParams(titleParams);
 		titleView.setTextSize(16);
-		titleView.setTextColor(app.getResources().getColor(light ? R.color.ctx_menu_bottom_view_text_color_light : R.color.ctx_menu_bottom_view_text_color_dark));
+		titleView.setTextColor(app.getResources().getColor(light ? R.color.text_color_primary_light : R.color.text_color_primary_dark));
 		String desc = route.getDescription(getMapActivity().getMyApplication(), true);
 		Drawable arrow = app.getUIUtilities().getIcon(R.drawable.ic_arrow_right_16, light ? R.color.ctx_menu_route_icon_color_light : R.color.ctx_menu_route_icon_color_dark);
 		arrow.setBounds(0, 0, arrow.getIntrinsicWidth(), arrow.getIntrinsicHeight());
@@ -910,7 +1003,7 @@ public class MenuBuilder {
 		textView.setLayoutParams(llTextDescParams);
 		textView.setTypeface(FontCache.getRobotoRegular(context));
 		textView.setTextSize(16);
-		textView.setTextColor(app.getResources().getColor(light ? R.color.ctx_menu_bottom_view_text_color_light : R.color.ctx_menu_bottom_view_text_color_dark));
+		textView.setTextColor(app.getResources().getColor(light ? R.color.text_color_primary_light : R.color.text_color_primary_dark));
 		textView.setText(text);
 		return new CollapsableView(textView, this, collapsed);
 	}
@@ -978,7 +1071,7 @@ public class MenuBuilder {
 					R.color.ctx_menu_controller_button_text_color_dark_n, R.color.ctx_menu_controller_button_text_color_dark_p);
 			button.setTextColor(buttonColorStateList);
 		} else {
-			button.setTextColor(ContextCompat.getColor(context, light ? R.color.ctx_menu_bottom_view_text_color_light : R.color.ctx_menu_bottom_view_text_color_dark));
+			button.setTextColor(ContextCompat.getColor(context, light ? R.color.text_color_primary_light : R.color.text_color_primary_dark));
 		}
 		button.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
 		button.setSingleLine(singleLine);

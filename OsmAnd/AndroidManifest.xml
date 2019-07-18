@@ -866,6 +866,11 @@
 			</intent-filter>
 		</service>
 
+		<service
+			android:name="net.osmand.plus.download.DownloadService"
+			android:label="@string/process_downloading_service"
+			android:stopWithTask="false" />
+
 		<receiver android:name="net.osmand.plus.OnNavigationServiceAlarmReceiver" />
 		<receiver android:name="net.osmand.plus.notifications.NotificationDismissReceiver" />
 
@@ -891,5 +896,18 @@
 		</activity>
 
         <receiver android:name="net.osmand.plus.liveupdates.LiveUpdatesAlarmReceiver"/>
-</application>
+
+		<activity
+			android:configChanges="keyboardHidden|orientation"
+			android:label="Application profiles"
+			android:name=".profiles.SettingsProfileActivity"/>
+
+		<activity
+			android:name=".profiles.EditProfileActivity"
+			android:label="Application profiles"/>
+
+		<activity android:name=".activities.PrivacyAndSecurityActivity"
+			android:configChanges="keyboardHidden|orientation" />
+
+	</application>
 </manifest> 

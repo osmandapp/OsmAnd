@@ -2,7 +2,7 @@
 <resources>
     <string name="background_work_description">Endre batterioptimiseringsinnstillinger for mer stabil posisjonsdeling.</string>
     <string name="background_work">Bakgrunnsarbeid</string>
-    <string name="battery_optimization_description">Skru av batterioptimisering for OsmAnd Telegram slik at det ikke plutselig skrur seg av når det er i bakgrunnen.</string>
+    <string name="battery_optimization_description">Skru av batterioptimisering for OsmAnd Tracker slik at det ikke plutselig skrur seg av når det er i bakgrunnen.</string>
     <string name="sharing_in_background">Deling i bakgrunnen</string>
     <string name="go_to_settings">Gå til innstillinger</string>
     <string name="shared_string_later">Senere</string>
@@ -19,8 +19,8 @@
     <string name="add_device">Legg til enhet</string>
     <string name="share_location_as">Del posisjon som</string>
     <string name="live_now_description">Kontakter og grupper som deler sin posisjon med deg.</string>
-    <string name="logout_from_osmand_telegram_descr">Er du sikker på at du vil logge ut av OsmAnd Telegram slik at du ikke kan sende din posisjon, eller se andres\?</string>
-    <string name="logout_from_osmand_telegram">Logg ut av OsmAnd Telegram\?</string>
+    <string name="logout_from_osmand_telegram_descr">Er du sikker på at du vil logge ut av OsmAnd Tracker slik at du ikke kan sende din posisjon, eller se andres\?</string>
+    <string name="logout_from_osmand_telegram">Logg ut av OsmAnd Tracker\?</string>
     <string name="shared_string_name">Navn</string>
     <string name="by_distance">Etter distanse</string>
     <string name="by_name">Etter navn</string>
@@ -38,13 +38,13 @@
     <string name="shared_string_group">Gruppe</string>
     <string name="logout_no_internet_msg">Koble til Internett for å logge ut av Telegram ordentlig.</string>
     <string name="shared_string_close">Lukk</string>
-    <string name="disconnect_from_telegram_desc">For å tilbakekalle posisjonsdelingstilgang. Åpne Telegram, gå til Innstillinger - Personvern og sikkerhet - Økter, og sluttfør OsmAnd Telegram-økta.</string>
+    <string name="disconnect_from_telegram_desc">For å tilbakekalle posisjonsdelingstilgang. Åpne Telegram, gå til Innstillinger - Personvern og sikkerhet - Økter, og sluttfør OsmAnd Tracker-økta.</string>
     <string name="disconnect_from_telegram">Hvordan koble fra OsmAnd-sporeren fra Telegram</string>
     <string name="logout_help_desc">Hvordan koble fra OsmAnd-sporeren fra Telegram</string>
     <string name="connected_account">Tilkoblet konto</string>
     <string name="shared_string_account">Konto</string>
     <string name="in_time">i %1$s</string>
-    <string name="osmand_connect_desc">Velg OsmAnd-versjonen OsmAnd Telegram bruker for å vise posisjoner på kartet.</string>
+    <string name="osmand_connect_desc">Velg OsmAnd-versjonen OsmAnd Tracker bruker for å vise posisjoner på kartet.</string>
     <string name="osmand_connect">OsmAnd connect</string>
     <string name="location_history_desc">Skjul kontaktene som ikke har oppdatert sin plassering etter et gitt tidsintervall.</string>
     <string name="location_history">Posisjonshistorikk</string>
@@ -83,7 +83,7 @@
     <string name="my_location_search_hint">Søk: Gruppe eller kontakt</string>
     <string name="start_location_sharing">Del posisjon</string>
     <string name="show_on_map">Vis på kartet</string>
-    <string name="app_name">OsmAnd Telegram</string>
+    <string name="app_name">OsmAnd Online GPS Tracker</string>
     <string name="phone_number_title">Telefonnummer</string>
     <string name="phone_number_descr">Telefonnummer i internasjonalt format</string>
     <string name="shared_string_password">Passord</string>
@@ -102,11 +102,11 @@
     <string name="gps_not_available">Skru på «Posisjon» i systeminnstillingene</string>
     <string name="location_service_no_gps_available">Velg en av posisjonstilbyderne for å dele din posisjon.</string>
     <string name="osmand_service">Bakgrunnsmodus</string>
-    <string name="osmand_service_descr">OsmAnd Telegram kjører som nisse med skjermen av.</string>
+    <string name="osmand_service_descr">OsmAnd Tracker kjører som nisse med skjermen av.</string>
     <string name="shared_string_distance">Distanse</string>
     <string name="share_location">Del posisjon</string>
     <string name="sharing_location">Deler posisjon</string>
-    <string name="process_service">OsmAnd Telegram-tjeneste</string>
+    <string name="process_service">OsmAnd Tracker-tjeneste</string>
     <string name="osmand_logo">OsmAnd-logo</string>
     <string name="install_osmand_dialog_message">Du må installere gratis- eller betalt versjon av OsmAnd først</string>
     <string name="install_osmand">Installer OsmAnd</string>
@@ -207,7 +207,6 @@
     <string name="timeline_available_for_free_now">Tidslinjefunksjonen er nå gratis.</string>
     <string name="disable_monitoring">Skru av overvåkning</string>
     <string name="location_recording_enabled">Plasseringsregistrering påskrudd</string>
-    <string name="app_name_short_online">Nettbasert sporer</string>
     <string name="app_name_short">OsmAnd-sporer</string>
     <string name="privacy_policy_use_telegram">Telegram (meldingsprogrammet) brukes til å komme i kontakt og snakke med folk.</string>
     <string name="osmand_privacy_policy">OsmAnd-personvernspraksis</string>
@@ -235,4 +234,12 @@
     <string name="proxy_settings">Mellomtjener-innstillinger</string>
     <string name="proxy">Mellomtjener</string>
     <string name="privacy">Personvern</string>
+    <string name="shared_string_select">Velg</string>
+    <string name="min_logging_distance">Minste loggingsavstand</string>
+    <string name="min_logging_distance_descr">Filter: Minimumsdistanse til neste loggingspunkt</string>
+    <string name="min_logging_accuracy">Minimumsnøyaktighet for logging</string>
+    <string name="min_logging_accuracy_descr">Filter: Ingen logging med mindre nøyaktigheten nås</string>
+    <string name="min_logging_speed">Minimumshastighet ved logging</string>
+    <string name="min_logging_speed_descr">Filter: Ingen logging under valgt hastighet</string>
+    <string name="gpx_settings">GPX-innstillinger</string>
 </resources>

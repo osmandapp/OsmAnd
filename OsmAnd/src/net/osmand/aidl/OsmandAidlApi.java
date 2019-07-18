@@ -23,7 +23,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.ArrayAdapter;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities;
@@ -33,6 +32,7 @@ import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.aidl.contextmenu.ContextMenuButtonsParams;
 import net.osmand.aidl.copyfile.CopyFileParams;
+import net.osmand.aidl.customization.CustomizationInfoParams;
 import net.osmand.aidl.favorite.AFavorite;
 import net.osmand.aidl.favorite.group.AFavoriteGroup;
 import net.osmand.aidl.gpx.AGpxBitmap;
@@ -47,6 +47,7 @@ import net.osmand.aidl.mapmarker.AMapMarker;
 import net.osmand.aidl.mapwidget.AMapWidget;
 import net.osmand.aidl.navdrawer.NavDrawerFooterParams;
 import net.osmand.aidl.navigation.ADirectionInfo;
+import net.osmand.aidl.navigation.OnVoiceNavigationParams;
 import net.osmand.aidl.plugins.PluginParams;
 import net.osmand.aidl.search.SearchResult;
 import net.osmand.aidl.tiles.ASqliteDbFile;
@@ -58,7 +59,6 @@ import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GpxSelectionHelper;
@@ -82,6 +82,7 @@ import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.routing.IRoutingDataUpdateListener;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.routing.VoiceRouter;
 import net.osmand.plus.views.AidlMapLayer;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapLayer;
@@ -109,8 +110,6 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -126,7 +125,7 @@ import static net.osmand.aidl.OsmandAidlConstants.COPY_FILE_WRITE_LOCK_ERROR;
 import static net.osmand.aidl.OsmandAidlConstants.OK_RESPONSE;
 import static net.osmand.aidl.OsmandAidlService.KEY_ON_CONTEXT_MENU_BUTTONS_CLICK;
 import static net.osmand.aidl.OsmandAidlService.KEY_ON_NAV_DATA_UPDATE;
-import static net.osmand.plus.OsmAndCustomizationConstants.DRAWER_ITEM_ID_SCHEME;
+import static net.osmand.aidl.OsmandAidlService.KEY_ON_VOICE_MESSAGE;
 
 public class OsmandAidlApi {
 
@@ -194,8 +193,6 @@ public class OsmandAidlApi {
 
 	private static final int DEFAULT_ZOOM = 15;
 
-	private static final int MAX_NAV_DRAWER_ITEMS_PER_APP = 3;
-
 	private OsmandApplication app;
 	private Map<String, AMapWidget> widgets = new ConcurrentHashMap<>();
 	private Map<String, TextInfoWidget> widgetControls = new ConcurrentHashMap<>();
@@ -204,6 +201,7 @@ public class OsmandAidlApi {
 	private Map<String, BroadcastReceiver> receivers = new TreeMap<>();
 	private Map<String, ConnectedApp> connectedApps = new ConcurrentHashMap<>();
 	private Map<String, ContextMenuButtonsParams> contextMenuButtonsParams = new ConcurrentHashMap<>();
+	private Map<Long, VoiceRouter.VoiceMessageListener> voiceRouterMessageCallbacks= new ConcurrentHashMap<>();
 
 	private AMapPointUpdateListener aMapPointUpdateListener;
 
@@ -1039,16 +1037,18 @@ public class OsmandAidlApi {
 		}
 	}
 
-	boolean removeMapMarker(AMapMarker marker) {
+	boolean removeMapMarker(AMapMarker marker, boolean ignoreCoordinates) {
 		if (marker != null) {
 			LatLon latLon = new LatLon(marker.getLatLon().getLatitude(), marker.getLatLon().getLongitude());
 			MapMarkersHelper markersHelper = app.getMapMarkersHelper();
 			List<MapMarker> mapMarkers = markersHelper.getMapMarkers();
 			for (MapMarker m : mapMarkers) {
-				if (m.getOnlyName().equals(marker.getName()) && latLon.equals(new LatLon(m.getLatitude(), m.getLongitude()))) {
-					markersHelper.moveMapMarkerToHistory(m);
-					refreshMap();
-					return true;
+				if (m.getOnlyName().equals(marker.getName())) {
+					if (ignoreCoordinates || latLon.equals(new LatLon(m.getLatitude(), m.getLongitude()))) {
+						markersHelper.moveMapMarkerToHistory(m);
+						refreshMap();
+						return true;
+					}
 				}
 			}
 			return false;
@@ -1057,23 +1057,40 @@ public class OsmandAidlApi {
 		}
 	}
 
-	boolean updateMapMarker(AMapMarker markerPrev, AMapMarker markerNew) {
+	boolean removeAllActiveMapMarkers() {
+		boolean refreshNeeded = false;
+		MapMarkersHelper markersHelper = app.getMapMarkersHelper();
+		List<MapMarker> mapMarkers = markersHelper.getMapMarkers();
+		for (MapMarker m : mapMarkers) {
+			markersHelper.moveMapMarkerToHistory(m);
+			refreshNeeded = true;
+		}
+		if (refreshNeeded) {
+			refreshMap();
+		}
+		return true;
+	}
+
+
+	boolean updateMapMarker(AMapMarker markerPrev, AMapMarker markerNew, boolean ignoreCoordinates) {
 		if (markerPrev != null && markerNew != null) {
 			LatLon latLon = new LatLon(markerPrev.getLatLon().getLatitude(), markerPrev.getLatLon().getLongitude());
 			LatLon latLonNew = new LatLon(markerNew.getLatLon().getLatitude(), markerNew.getLatLon().getLongitude());
 			MapMarkersHelper markersHelper = app.getMapMarkersHelper();
 			List<MapMarker> mapMarkers = markersHelper.getMapMarkers();
 			for (MapMarker m : mapMarkers) {
-				if (m.getOnlyName().equals(markerPrev.getName()) && latLon.equals(new LatLon(m.getLatitude(), m.getLongitude()))) {
-					PointDescription pd = new PointDescription(
-							PointDescription.POINT_TYPE_MAP_MARKER, markerNew.getName() != null ? markerNew.getName() : "");
-					MapMarker marker = new MapMarker(m.point, pd, m.colorIndex, m.selected, m.index);
-					marker.id = m.id;
-					marker.creationDate = m.creationDate;
-					marker.visitedDate = m.visitedDate;
-					markersHelper.moveMapMarker(marker, latLonNew);
-					refreshMap();
-					return true;
+				if (m.getOnlyName().equals(markerPrev.getName())) {
+					if (ignoreCoordinates || latLon.equals(new LatLon(m.getLatitude(), m.getLongitude()))) {
+						PointDescription pd = new PointDescription(
+								PointDescription.POINT_TYPE_MAP_MARKER, markerNew.getName() != null ? markerNew.getName() : "");
+						MapMarker marker = new MapMarker(m.point, pd, m.colorIndex, m.selected, m.index);
+						marker.id = m.id;
+						marker.creationDate = m.creationDate;
+						marker.visitedDate = m.visitedDate;
+						markersHelper.moveMapMarker(marker, latLonNew);
+						refreshMap();
+						return true;
+					}
 				}
 			}
 			return false;
@@ -1297,6 +1314,9 @@ public class OsmandAidlApi {
 				File destination = app.getAppPath(IndexConstants.GPX_INDEX_DIR + destinationPath);
 				if (destination.getParentFile().canWrite()) {
 					boolean destinationExists = destination.exists();
+					if (!destinationExists) {
+						Algorithms.createParentDirsForFile(destination);
+					}
 					try {
 						Algorithms.fileCopy(source, destination);
 						finishGpxImport(destinationExists, destination, color, show);
@@ -1318,6 +1338,9 @@ public class OsmandAidlApi {
 				gpxParcelDescriptor = app.getContentResolver().openFileDescriptor(gpxUri, "r");
 				if (gpxParcelDescriptor != null) {
 					boolean destinationExists = destination.exists();
+					if (!destinationExists) {
+						Algorithms.createParentDirsForFile(destination);
+					}
 					FileDescriptor fileDescriptor = gpxParcelDescriptor.getFileDescriptor();
 					InputStream is = new FileInputStream(fileDescriptor);
 					FileOutputStream fout = new FileOutputStream(destination);
@@ -1352,6 +1375,9 @@ public class OsmandAidlApi {
 				InputStream is = new ByteArrayInputStream(sourceRawData.getBytes());
 				FileOutputStream fout = new FileOutputStream(destination);
 				boolean destinationExists = destination.exists();
+				if (!destinationExists) {
+					Algorithms.createParentDirsForFile(destination);
+				}
 				try {
 					Algorithms.streamCopy(is, fout);
 					finishGpxImport(destinationExists, destination, color, show);
@@ -1738,123 +1764,11 @@ public class OsmandAidlApi {
 	}
 
 	boolean setNavDrawerItems(String appPackage, List<net.osmand.aidl.navdrawer.NavDrawerItem> items) {
-		if (!TextUtils.isEmpty(appPackage) && items != null) {
-			clearNavDrawerItems(appPackage);
-			if (items.isEmpty()) {
-				return true;
-			}
-			List<NavDrawerItem> newItems = new ArrayList<>(MAX_NAV_DRAWER_ITEMS_PER_APP);
-			boolean success = true;
-			for (int i = 0; i < items.size() && i <= MAX_NAV_DRAWER_ITEMS_PER_APP; i++) {
-				net.osmand.aidl.navdrawer.NavDrawerItem item = items.get(i);
-				String name = item.getName();
-				String uri = item.getUri();
-				if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(uri)) {
-					newItems.add(new NavDrawerItem(name, uri, item.getIconName(), item.getFlags()));
-				} else {
-					success = false;
-					break;
-				}
-			}
-			if (success) {
-				saveNavDrawerItems(appPackage, newItems);
-			}
-			return success;
-		}
-		return false;
+		return app.getAppCustomization().setNavDrawerItems(appPackage, items);
 	}
 
 	public void registerNavDrawerItems(final Activity activity, ContextMenuAdapter adapter) {
-		PackageManager pm = activity.getPackageManager();
-		for (Map.Entry<String, List<NavDrawerItem>> entry : getNavDrawerItems().entrySet()) {
-			String appPackage = entry.getKey();
-			for (NavDrawerItem item : entry.getValue()) {
-				Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(item.uri));
-				if (intent.resolveActivity(pm) == null) {
-					intent = pm.getLaunchIntentForPackage(appPackage);
-				}
-				if (intent != null) {
-					if (item.flags != -1) {
-						intent.addFlags(item.flags);
-					}
-					final Intent finalIntent = intent;
-					adapter.addItem(new ContextMenuItem.ItemBuilder()
-							.setId(item.getId())
-							.setTitle(item.name)
-							.setIcon(getIconId(item.iconName))
-							.setListener(new ContextMenuAdapter.ItemClickListener() {
-								@Override
-								public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked, int[] viewCoordinates) {
-									activity.startActivity(finalIntent);
-									return true;
-								}
-							})
-							.createItem());
-				}
-			}
-		}
-	}
-
-	private int getIconId(@Nullable String iconName) {
-		if (!TextUtils.isEmpty(iconName)) {
-			int id = app.getResources().getIdentifier(iconName, "drawable", app.getPackageName());
-			return id == 0 ? -1 : id;
-		}
-		return -1;
-	}
-
-	private void clearNavDrawerItems(String appPackage) {
-		try {
-			JSONObject allItems = new JSONObject(app.getSettings().API_NAV_DRAWER_ITEMS_JSON.get());
-			allItems.put(appPackage, new JSONArray());
-			app.getSettings().API_NAV_DRAWER_ITEMS_JSON.set(allItems.toString());
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-	}
-
-	private void saveNavDrawerItems(String appPackage, List<NavDrawerItem> items) {
-		try {
-			JSONArray jArray = new JSONArray();
-			for (NavDrawerItem item : items) {
-				JSONObject obj = new JSONObject();
-				obj.put(NavDrawerItem.NAME_KEY, item.name);
-				obj.put(NavDrawerItem.URI_KEY, item.uri);
-				obj.put(NavDrawerItem.ICON_NAME_KEY, item.iconName);
-				obj.put(NavDrawerItem.FLAGS_KEY, item.flags);
-				jArray.put(obj);
-			}
-			JSONObject allItems = new JSONObject(app.getSettings().API_NAV_DRAWER_ITEMS_JSON.get());
-			allItems.put(appPackage, jArray);
-			app.getSettings().API_NAV_DRAWER_ITEMS_JSON.set(allItems.toString());
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-	}
-
-	private Map<String, List<NavDrawerItem>> getNavDrawerItems() {
-		Map<String, List<NavDrawerItem>> res = new LinkedHashMap<>();
-		try {
-			JSONObject allItems = new JSONObject(app.getSettings().API_NAV_DRAWER_ITEMS_JSON.get());
-			for (Iterator<?> it = allItems.keys(); it.hasNext(); ) {
-				String appPackage = (String) it.next();
-				JSONArray jArray = allItems.getJSONArray(appPackage);
-				List<NavDrawerItem> list = new ArrayList<>();
-				for (int i = 0; i < jArray.length(); i++) {
-					JSONObject obj = jArray.getJSONObject(i);
-					list.add(new NavDrawerItem(
-							obj.optString(NavDrawerItem.NAME_KEY),
-							obj.optString(NavDrawerItem.URI_KEY),
-							obj.optString(NavDrawerItem.ICON_NAME_KEY),
-							obj.optInt(NavDrawerItem.FLAGS_KEY, -1)
-					));
-				}
-				res.put(appPackage, list);
-			}
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-		return res;
+		app.getAppCustomization().registerNavDrawerItems(activity, adapter);
 	}
 
 	public List<ConnectedApp> getConnectedApps() {
@@ -1999,7 +1913,7 @@ public class OsmandAidlApi {
 							try {
 								cb.getCallback().updateNavigationInfo(directionInfo);
 							} catch (Exception e) {
-								LOG.debug(e.getMessage(), e);
+								LOG.error(e.getMessage(), e);
 							}
 						}
 					}
@@ -2015,6 +1929,31 @@ public class OsmandAidlApi {
 		navUpdateCallbacks.remove(id);
 	}
 
+	public void registerForVoiceRouterMessages(long id) {
+		VoiceRouter.VoiceMessageListener listener = new VoiceRouter.VoiceMessageListener() {
+			@Override
+			public void onVoiceMessage(List<String> cmds, List<String> played) {
+				if (aidlCallbackListener != null) {
+					for (OsmandAidlService.AidlCallbackParams cb : aidlCallbackListener.getAidlCallbacks().values()) {
+						if (!aidlCallbackListener.getAidlCallbacks().isEmpty() && (cb.getKey() & KEY_ON_VOICE_MESSAGE) > 0) {
+							try {
+								cb.getCallback().onVoiceRouterNotify(new OnVoiceNavigationParams(cmds, played));
+							} catch (Exception e) {
+								LOG.error(e.getMessage(), e);
+							}
+						}
+					}
+				}
+			}
+		};
+		voiceRouterMessageCallbacks.put(id, listener);
+		app.getRoutingHelper().getVoiceRouter().addVoiceMessageListener(listener);
+	}
+
+	public void unregisterFromVoiceRouterMessages(long id) {
+		app.getRoutingHelper().getVoiceRouter().removeVoiceMessageListener(voiceRouterMessageCallbacks.get(id));
+		voiceRouterMessageCallbacks.remove(id);
+	}
 
 	public Map<String, ContextMenuButtonsParams> getContextMenuButtonsParams() {
 		return contextMenuButtonsParams;
@@ -2062,6 +2001,15 @@ public class OsmandAidlApi {
 		}
 	}
 
+	boolean areOsmandSettingsCustomized(String sharedPreferencesName) {
+		return app.getAppCustomization().areSettingsCustomizedForPreference(sharedPreferencesName);
+	}
+
+	boolean setCustomization(CustomizationInfoParams params) {
+		app.getAppCustomization().setCustomization(params);
+		return true;
+	}
+
 	private void addContextMenuButtonListener(ContextMenuButtonsParams buttonsParams, long callbackId) {
 		IContextMenuButtonListener listener = new IContextMenuButtonListener() {
 
@@ -2073,7 +2021,7 @@ public class OsmandAidlApi {
 							try {
 								cb.getCallback().onContextMenuButtonClicked(buttonId, pointId, layerId);
 							} catch (Exception e) {
-								LOG.debug(e.getMessage(), e);
+								LOG.error(e.getMessage(), e);
 							}
 						}
 					}
@@ -2322,30 +2270,6 @@ public class OsmandAidlApi {
 				return name.compareTo(app.name);
 			}
 			return 0;
-		}
-	}
-
-	private static class NavDrawerItem {
-
-		static final String NAME_KEY = "name";
-		static final String URI_KEY = "uri";
-		static final String ICON_NAME_KEY = "icon_name";
-		static final String FLAGS_KEY = "flags";
-
-		private String name;
-		private String uri;
-		private String iconName;
-		private int flags;
-
-		NavDrawerItem(String name, String uri, String iconName, int flags) {
-			this.name = name;
-			this.uri = uri;
-			this.iconName = iconName;
-			this.flags = flags;
-		}
-
-		public String getId() {
-			return DRAWER_ITEM_ID_SCHEME + name;
 		}
 	}
 

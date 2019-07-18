@@ -256,7 +256,6 @@
     <string name="nearest_cities">ಹತ್ತಿರದ ನಗರಗಳು</string>
     <string name="select_city">ನಗರವನ್ನು ಆರಿಸು</string>
     <string name="select_postcode">ಅಂಚೆಸಂಖ್ಯೆಯನ್ನು ಆರಿಸು</string>
-    <string name="is_saved">ಉಳಿಸಲಾಗಿದೆ</string>
     <string name="shared_string_list">ಪಟ್ಟಿ</string>
     <string name="shared_string_groups">ಗುಂಪುಗಳು</string>
     <string name="passed">ಕೊನೆಯದಾಗಿ ಬಳಸಿದ್ದು: %1$s</string>

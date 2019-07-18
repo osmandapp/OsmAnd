@@ -24,6 +24,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.widgets.tools.CropCircleTransformation;
 
@@ -39,6 +40,8 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider, MapTextLayer.MapTextProvider<AMapPoint> {
+
+	private static final float POINT_IMAGE_VERTICAL_OFFSET = 0.91f;
 
 	private static final int POINT_OUTER_COLOR = 0x88555555;
 	private static final float START_ZOOM = 7;
@@ -58,6 +61,8 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 	private Bitmap smallIconBg;
 	private Bitmap bigIconBg;
 	private Bitmap bigIconBgStale;
+	private Bitmap bigIconBgSelected;
+	private Bitmap bigIconBgSelectedStale;
 	private Bitmap placeholder;
 
 	private int smallIconSize;
@@ -106,6 +111,10 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 				? R.drawable.map_pin_user_location_night : R.drawable.map_pin_user_location_day);
 		bigIconBgStale = BitmapFactory.decodeResource(res, night
 				? R.drawable.map_pin_user_stale_location_night : R.drawable.map_pin_user_stale_location_day);
+		bigIconBgSelected = BitmapFactory.decodeResource(res, night
+				? R.drawable.map_pin_user_location_selected_night : R.drawable.map_pin_user_location_selected_day);
+		bigIconBgSelectedStale = BitmapFactory.decodeResource(res, night
+				? R.drawable.map_pin_user_stale_location_selected_night : R.drawable.map_pin_user_stale_location_selected_day);
 		placeholder = BitmapFactory.decodeResource(res, R.drawable.img_user_picture);
 
 		smallIconSize = AndroidUtils.dpToPx(map, SMALL_ICON_SIZE_DP);
@@ -130,6 +139,7 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 
 		canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 
+		String selectedPointId = getSelectedContextMenuPointId();
 		for (AMapPoint point : aidlLayer.getPoints()) {
 			ALatLon l = point.getLocation();
 			if (l != null) {
@@ -147,7 +157,8 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 						}
 					}
 					displayedPoints.add(point);
-					drawPoint(canvas, x, y, tileBox, point, image);
+					boolean selected = selectedPointId != null && selectedPointId.equals(point.getId());
+					drawPoint(canvas, x, y, tileBox, point, image, selected);
 				}
 			}
 		}
@@ -158,11 +169,14 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 		mapTextLayer.putData(this, displayedPoints);
 	}
 
-	private void drawPoint(Canvas canvas, int x, int y, RotatedTileBox tb, AMapPoint point, Bitmap image) {
+	private void drawPoint(Canvas canvas, int x, int y, RotatedTileBox tb, AMapPoint point, Bitmap image, boolean selected) {
 		if (image == null) {
 			image = placeholder;
 		}
-		if (pointsType == PointsType.STANDARD) {
+		if (selected) {
+			Bitmap bg = isStale(point) ? bigIconBgSelectedStale : bigIconBgSelected;
+			drawBigIcon(canvas, x, y, image, bg);
+		} else if (pointsType == PointsType.STANDARD) {
 			int radius = getRadiusPoi(tb);
 			float density = tb.getDensity();
 			pointInnerCircle.setColor(point.getColor());
@@ -175,13 +189,27 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 			bitmapPaint.setColorFilter(null);
 			canvas.drawBitmap(image, null, getDstRect(x, y, smallIconSize / 2), bitmapPaint);
 		} else if (pointsType == PointsType.BIG_ICON) {
-			bitmapPaint.setColorFilter(null);
 			Bitmap bg = isStale(point) ? bigIconBgStale : bigIconBg;
-			float vOffset = bg.getHeight() * 0.91f;
-			int imageCenterY = (int) (y - vOffset + bg.getHeight() / 2);
-			canvas.drawBitmap(bg, x - bg.getWidth() / 2, y - vOffset, bitmapPaint);
-			canvas.drawBitmap(image, null, getDstRect(x, imageCenterY, bigIconSize / 2), bitmapPaint);
+			drawBigIcon(canvas, x, y, image, bg);
 		}
+	}
+
+	private void drawBigIcon(Canvas canvas, int x, int y, Bitmap image, Bitmap bg) {
+		bitmapPaint.setColorFilter(null);
+		float vOffset = bg.getHeight() * POINT_IMAGE_VERTICAL_OFFSET;
+		int imageCenterY = (int) (y - vOffset + bg.getHeight() / 2);
+		canvas.drawBitmap(bg, x - bg.getWidth() / 2, y - vOffset, bitmapPaint);
+		canvas.drawBitmap(image, null, getDstRect(x, imageCenterY, bigIconSize / 2), bitmapPaint);
+	}
+
+	private String getSelectedContextMenuPointId() {
+		MapContextMenu mapContextMenu = map.getContextMenu();
+		Object object = mapContextMenu.getObject();
+		if (mapContextMenu.isVisible() && object instanceof AMapPoint) {
+			AMapPoint aMapPoint = (AMapPoint) object;
+			return aMapPoint.getId();
+		}
+		return null;
 	}
 
 	private void drawColoredBitmap(Canvas canvas, int x, int y, Bitmap bitmap, int color) {

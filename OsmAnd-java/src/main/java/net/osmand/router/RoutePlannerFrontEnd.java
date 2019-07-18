@@ -26,6 +26,7 @@ import org.apache.commons.logging.Log;
 public class RoutePlannerFrontEnd {
 
 	protected static final Log log = PlatformUtil.getLog(RoutePlannerFrontEnd.class);
+	protected static final double GPS_POSSIBLE_ERROR = 10;
 	public boolean useSmartRouteRecalculation = true;
 
 	
@@ -66,6 +67,9 @@ public class RoutePlannerFrontEnd {
 		if (dataObjects.isEmpty()) {
 			ctx.loadTileData(px, py, 15, dataObjects);
 		}
+		if (dataObjects.isEmpty()) {
+			ctx.loadTileData(px, py, 14, dataObjects);
+		}
 		if (list == null) {
 			list = new ArrayList<BinaryRoutePlanner.RouteSegmentPoint>();
 		}
@@ -78,13 +82,24 @@ public class RoutePlannerFrontEnd {
 					double currentsDistSquare = squareDist((int) pr.x, (int) pr.y, px, py);
 					if (road == null || currentsDistSquare < road.distSquare) {
 						RouteDataObject ro = new RouteDataObject(r);
+						
 						road = new RouteSegmentPoint(ro, j, currentsDistSquare);
 						road.preciseX = (int) pr.x;
 						road.preciseY = (int) pr.y;
 					}
 				}
 				if (road != null) {
-					list.add(road);
+					if(!transportStop) {
+						float prio = ctx.getRouter().defineSpeedPriority(road.road);
+						if (prio > 0) {
+							road.distSquare = (road.distSquare + GPS_POSSIBLE_ERROR * GPS_POSSIBLE_ERROR)
+									/ (prio * prio);
+							list.add(road);
+						}
+					} else {
+						list.add(road);
+					}
+					
 				}
 			}
 		}
@@ -99,7 +114,7 @@ public class RoutePlannerFrontEnd {
 			RouteSegmentPoint ps = null;
 			if (ctx.publicTransport) {
 				for (RouteSegmentPoint p : list) {
-					if (transportStop && p.distSquare > 100) {
+					if (transportStop && p.distSquare > GPS_POSSIBLE_ERROR * GPS_POSSIBLE_ERROR) {
 						break;
 					}
 					boolean platform = p.road.platform();
@@ -184,7 +199,10 @@ public class RoutePlannerFrontEnd {
 			RoutingContext nctx = buildRoutingContext(ctx.config, ctx.nativeLib, ctx.getMaps(), RouteCalculationMode.BASE);
 			nctx.calculationProgress = ctx.calculationProgress;
 			List<RouteSegmentResult> ls = searchRoute(nctx, start, end, intermediates);
-			routeDirection = PrecalculatedRouteDirection.build(ls, ctx.config.DEVIATION_RADIUS, ctx.getRouter().getMaxDefaultSpeed());
+			if(ls == null) {
+				return null;
+			}
+			routeDirection = PrecalculatedRouteDirection.build(ls, ctx.config.DEVIATION_RADIUS, ctx.getRouter().getMaxSpeed());
 		}
 		if (intermediatesEmpty && ctx.nativeLib != null) {
 			ctx.startX = MapUtils.get31TileNumberX(start.getLongitude());
@@ -414,7 +432,7 @@ public class RoutePlannerFrontEnd {
 			ctx.calculationProgress.reverseSegmentQueueSize = 0;
 			ctx.calculationProgress.directSegmentQueueSize = 0;
 			float rd = (float) MapUtils.squareRootDist31(ctx.startX, ctx.startY, ctx.targetX, ctx.targetY);
-			float speed = 0.9f * ctx.config.router.getMaxDefaultSpeed();
+			float speed = 0.9f * ctx.config.router.getMaxSpeed();
 			ctx.calculationProgress.totalEstimatedDistance = (float) (rd / speed);
 		}
 

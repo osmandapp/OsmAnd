@@ -942,7 +942,8 @@ public class RoutingHelper {
 				}
 				return;
 			}
-			final boolean onlineSourceWithoutInternet = !res.isCalculated() && params.type.isOnline() && !settings.isInternetConnectionAvailable();
+			final boolean onlineSourceWithoutInternet = !res.isCalculated() &&
+					params.mode.getRouteService().isOnline() && !settings.isInternetConnectionAvailable();
 			if (onlineSourceWithoutInternet && settings.GPX_ROUTE_CALC_OSMAND_PARTS.get()) {
 				if (params.previousToRecalculate != null && params.previousToRecalculate.isCalculated()) {
 					res = provider.recalculatePartOfflineRoute(res, params);
@@ -1020,7 +1021,7 @@ public class RoutingHelper {
 			if(System.currentTimeMillis() - lastTimeEvaluatedRoute < RECALCULATE_THRESHOLD_CAUSING_FULL_RECALCULATE_INTERVAL) {
 				recalculateCountInInterval ++;
 			}
-			RouteCalculationParams params = new RouteCalculationParams();
+			final RouteCalculationParams params = new RouteCalculationParams();
 			params.start = start;
 			params.end = end;
 			params.intermediates = intermediates;
@@ -1034,13 +1035,25 @@ public class RoutingHelper {
 			}
 			params.leftSide = settings.DRIVING_REGION.get().leftHandDriving;
 			params.fast = settings.FAST_ROUTE_MODE.getModeValue(mode);
-			params.type = settings.ROUTER_SERVICE.getModeValue(mode);
 			params.mode = mode;
 			params.ctx = app;
 			boolean updateProgress = false;
-			if (params.type == RouteService.OSMAND) {
+			if (params.mode.getRouteService() == RouteService.OSMAND) {
 				params.calculationProgress = new RouteCalculationProgress();
 				updateProgress = true;
+			} else {
+				params.resultListener = new RouteCalculationParams.RouteCalculationResultListener() {
+					@Override
+					public void onRouteCalculated(RouteCalculationResult route) {
+						app.runInUIThread(new Runnable() {
+
+							@Override
+							public void run() {
+								finishProgress(params);
+							}
+						});
+					}
+				};
 			}
 			startRouteCalculationThread(params, paramsChanged, updateProgress);
 		}
@@ -1109,10 +1122,21 @@ public class RoutingHelper {
 		}
 	}
 
+	private void finishProgress(RouteCalculationParams params) {
+		final RouteCalculationProgressCallback progressRoute;
+		if (params.calculationProgressCallback != null) {
+			progressRoute = params.calculationProgressCallback;
+		} else {
+			progressRoute = this.progressRoute;
+		}
+		if (progressRoute != null ) {
+			progressRoute.finish();
+		}
+	}
+
 	public static void applyApplicationSettings(RouteCalculationParams params, OsmandSettings settings, ApplicationMode mode) {
 		params.leftSide = settings.DRIVING_REGION.get().leftHandDriving;
 		params.fast = settings.FAST_ROUTE_MODE.getModeValue(mode);
-		params.type = settings.ROUTER_SERVICE.getModeValue(mode);
 	}
 
 	public void setProgressBar(RouteCalculationProgressCallback progressRoute) {

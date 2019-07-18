@@ -25,6 +25,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.RenderingContext;
+import net.osmand.aidl.maplayer.point.AMapPoint;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.AmenitySymbolsProvider.AmenitySymbolsGroup;
 import net.osmand.core.jni.AreaI;
@@ -42,7 +43,6 @@ import net.osmand.core.jni.Utilities;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.data.TransportStop;
 import net.osmand.osm.PoiCategory;
@@ -55,10 +55,10 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityActions;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
+import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
 import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.NativeOsmandLibrary;
-import net.osmand.plus.resources.TransportIndexRepository;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
 import net.osmand.plus.views.corenative.NativeCoreContext;
@@ -66,8 +66,6 @@ import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -75,10 +73,8 @@ import java.util.Map.Entry;
 import java.util.Set;
 
 import gnu.trove.list.array.TIntArrayList;
-import gnu.trove.list.array.TLongArrayList;
 
 import static net.osmand.plus.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_CHANGE_MARKER_POSITION;
-import static net.osmand.plus.mapcontextmenu.controllers.TransportStopController.SHOW_STOPS_RADIUS_METERS;
 
 public class ContextMenuLayer extends OsmandMapLayer {
 	//private static final Log LOG = PlatformUtil.getLog(ContextMenuLayer.class);
@@ -195,6 +191,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox box, DrawSettings nightMode) {
+		boolean markerCustomized = false;
 		if (selectedObject != null) {
 			TIntArrayList x = null;
 			TIntArrayList y = null;
@@ -206,11 +203,13 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				RenderedObject r = (RenderedObject) selectedObject;
 				x = r.getX();
 				y = r.getY();
+			} else if (selectedObject instanceof AMapPoint) {
+				markerCustomized = true;
 			}
 			if (x != null && y != null && x.size() > 2) {
 				double lat = MapUtils.get31LatitudeY(y.get(0));
 				double lon = MapUtils.get31LongitudeX(x.get(0));
-				int px,py, prevX, prevY;
+				int px, py, prevX, prevY;
 				prevX = (int) box.getPixXFromLatLon(lat, lon);
 				prevY = (int) box.getPixYFromLatLon(lat, lon);
 				for (int i = 1; i < x.size(); i++) {
@@ -235,7 +234,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			canvas.drawBitmap(pressedBitmap, x - pressedBitmap.getWidth() / 2, y - pressedBitmap.getHeight() / 2, paint);
 		}
 
-		if (mapQuickActionLayer!= null && mapQuickActionLayer.isInMovingMarkerMode())
+		if (mapQuickActionLayer != null && mapQuickActionLayer.isInMovingMarkerMode())
 			return;
 
 		if (mInChangeMarkerPositionMode) {
@@ -248,7 +247,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			canvas.translate(box.getPixWidth() / 2 - contextMarker.getWidth() / 2, box.getPixHeight() / 2 - contextMarker.getHeight());
 			contextMarker.draw(canvas);
 			mAddGpxPointBottomSheetHelper.onDraw(box);
-		} else if (menu.isActive()) {
+		} else if (menu.isActive() && !markerCustomized) {
 			LatLon latLon = menu.getLatLon();
 			int x = (int) box.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude());
 			int y = (int) box.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude());
@@ -860,73 +859,18 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				}
 			}
 			if (transportStopAmenities.size() > 0) {
-				List<TransportStop> transportStops = findTransportStopsAt(latLon.getLatitude(), latLon.getLongitude());
-				List<TransportStop> transportStopsReplacement = new ArrayList<>();
 				for (Amenity amenity : transportStopAmenities) {
-					List<TransportStop> amenityTransportStops = new ArrayList<>();
-					for (TransportStop transportStop : transportStops) {
-						if (transportStop.getName().startsWith(amenity.getName())) {
-							amenityTransportStops.add(transportStop);
-							transportStop.setAmenity(amenity);
-						}
-					}
-					if (amenityTransportStops.size() > 0) {
-						selectedObjects.remove(amenity);
-						if (amenityTransportStops.size() > 1) {
-							sortTransportStops(amenity.getLocation(), amenityTransportStops);
-						}
-						TransportStop amenityTransportStop = amenityTransportStops.get(0);
-						if (!transportStopsReplacement.contains(amenityTransportStop)) {
-							transportStopsReplacement.add(amenityTransportStop);
-						}
-					}
-				}
-				if (transportStopsReplacement.size() > 0) {
-					TransportStopsLayer transportStopsLayer = activity.getMapLayers().getTransportStopsLayer();
-					if (transportStopsLayer != null) {
-						for (TransportStop transportStop : transportStopsReplacement) {
+					TransportStop transportStop = TransportStopController.findBestTransportStopForAmenity(activity.getMyApplication(), amenity);
+					if (transportStop != null) {
+						TransportStopsLayer transportStopsLayer = activity.getMapLayers().getTransportStopsLayer();
+						if (transportStopsLayer != null) {
+							selectedObjects.remove(amenity);
 							selectedObjects.put(transportStop, transportStopsLayer);
 						}
 					}
 				}
 			}
 		}
-	}
-
-	private void sortTransportStops(@NonNull LatLon latLon, List<TransportStop> transportStops) {
-		for (TransportStop transportStop : transportStops) {
-			transportStop.distance = (int) MapUtils.getDistance(latLon, transportStop.getLocation());
-		}
-		Collections.sort(transportStops, new Comparator<TransportStop>() {
-
-			@Override
-			public int compare(TransportStop s1, TransportStop s2) {
-				return Algorithms.compare(s1.distance, s2.distance);
-			}
-		});
-	}
-
-	@NonNull
-	private List<TransportStop> findTransportStopsAt(double latitude, double longitude) {
-		ArrayList<TransportStop> transportStops = new ArrayList<>();
-		List<TransportIndexRepository> reps =
-				activity.getMyApplication().getResourceManager().searchTransportRepositories(latitude, longitude);
-
-		TLongArrayList addedTransportStops = new TLongArrayList();
-		for (TransportIndexRepository t : reps) {
-			ArrayList<TransportStop> ls = new ArrayList<>();
-			QuadRect ll = MapUtils.calculateLatLonBbox(latitude, longitude, SHOW_STOPS_RADIUS_METERS);
-			t.searchTransportStops(ll.top, ll.left, ll.bottom, ll.right, -1, ls, null);
-			for (TransportStop tstop : ls) {
-				if (!addedTransportStops.contains(tstop.getId())) {
-					addedTransportStops.add(tstop.getId());
-					if (!tstop.isDeleted()) {
-						transportStops.add(tstop);
-					}
-				}
-			}
-		}
-		return transportStops;
 	}
 
 	@NonNull

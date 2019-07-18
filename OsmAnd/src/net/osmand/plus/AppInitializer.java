@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.support.v7.app.AlertDialog;
 
@@ -31,6 +32,7 @@ import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
+import net.osmand.plus.helpers.LockHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.liveupdates.LiveUpdatesHelper;
@@ -56,6 +58,7 @@ import net.osmand.plus.voice.TTSCommandPlayerImpl;
 import net.osmand.plus.wikivoyage.data.TravelDbHelper;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.RoutingConfiguration;
+import net.osmand.router.RoutingConfiguration.Builder;
 import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
 
@@ -101,7 +104,7 @@ public class AppInitializer implements IProgress {
 	private static final String VERSION_INSTALLED = "VERSION_INSTALLED"; //$NON-NLS-1$
 	private static final String EXCEPTION_FILE_SIZE = "EXCEPTION_FS"; //$NON-NLS-1$
 
-	public static final String LATEST_CHANGES_URL = "https://osmand.net/blog/osmand-3-3-released";
+	public static final String LATEST_CHANGES_URL = "https://osmand.net/blog/osmand-3-4-released";
 //	public static final String LATEST_CHANGES_URL = null; // not enough to read
 	public static final int APP_EXIT_CODE = 4;
 	public static final String APP_EXIT_KEY = "APP_EXIT_KEY";
@@ -190,7 +193,9 @@ public class AppInitializer implements IProgress {
 		}
 		app.getSettings().SHOW_TRAVEL_UPDATE_CARD.set(true);
 		app.getSettings().SHOW_TRAVEL_NEEDED_MAPS_CARD.set(true);
+		ApplicationMode.onApplicationStart(app);
 		initSettings = true;
+
 	}
 
 	public int getNumberOfStarts() {
@@ -456,6 +461,7 @@ public class AppInitializer implements IProgress {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		getLazyRoutingConfig();
 		app.applyTheme(app);
 		app.inAppPurchaseHelper = startupInit(new InAppPurchaseHelper(app), InAppPurchaseHelper.class);
 		app.poiTypes = startupInit(MapPoiTypes.getDefaultNoInit(), MapPoiTypes.class);
@@ -467,6 +473,7 @@ public class AppInitializer implements IProgress {
 		app.locationProvider = startupInit(new OsmAndLocationProvider(app), OsmAndLocationProvider.class);
 		app.avoidSpecificRoads = startupInit(new AvoidSpecificRoads(app), AvoidSpecificRoads.class);
 		app.savingTrackHelper = startupInit(new SavingTrackHelper(app), SavingTrackHelper.class);
+		app.analyticsHelper = startupInit(new AnalyticsHelper(app), AnalyticsHelper.class);
 		app.notificationHelper = startupInit(new NotificationHelper(app), NotificationHelper.class);
 		app.liveMonitoringHelper = startupInit(new LiveMonitoringHelper(app), LiveMonitoringHelper.class);
 		app.selectedGpxHelper = startupInit(new GpxSelectionHelper(app, app.savingTrackHelper), GpxSelectionHelper.class);
@@ -491,7 +498,8 @@ public class AppInitializer implements IProgress {
 			app.travelDbHelper.initTravelBooks();
 		}
 		app.travelDbHelper = startupInit(app.travelDbHelper, TravelDbHelper.class);
-		
+		app.lockHelper = startupInit(new LockHelper(app), LockHelper.class);
+
 
 		initOpeningHoursParser();
 	}
@@ -546,29 +554,37 @@ public class AppInitializer implements IProgress {
 		return object;
 	}
 
-
-	public net.osmand.router.RoutingConfiguration.Builder getLazyDefaultRoutingConfig() {
-		long tm = System.currentTimeMillis();
-		try {
-			File routingXml = app.getAppPath(IndexConstants.ROUTING_XML_FILE);
-			if (routingXml.exists() && routingXml.canRead()) {
-				try {
-					return RoutingConfiguration.parseFromInputStream(new FileInputStream(routingXml));
-				} catch (XmlPullParserException | IOException e) {
-					throw new IllegalStateException(e);
+	@SuppressLint("StaticFieldLeak")
+	private void getLazyRoutingConfig() {
+		new AsyncTask<Void, Void, RoutingConfiguration.Builder>() {
+			@Override
+			protected Builder doInBackground(Void... voids) {
+				File routingFolder = app.getAppPath(IndexConstants.ROUTING_PROFILES_DIR);
+				RoutingConfiguration.Builder builder = RoutingConfiguration.getDefault();
+				if (routingFolder.isDirectory()) {
+					File[] fl = routingFolder.listFiles();
+					if (fl != null && fl.length > 0) {
+						for (File f : fl) {
+							if (f.isFile() && f.getName().endsWith(".xml") && f.canRead()) {
+								try {
+									RoutingConfiguration.parseFromInputStream(new FileInputStream(f), f.getName(), builder);
+								} catch (XmlPullParserException | IOException e) {
+									throw new IllegalStateException(e);
+								}
+							}
+						}
+					}
 				}
-			} else {
-				return RoutingConfiguration.getDefault();
+				return builder;
 			}
-		} finally {
-			long te = System.currentTimeMillis();
-			if(te - tm > 30) {
-				System.err.println("Defalt routing config init took " + (te - tm) + " ms");
+
+			@Override
+			protected void onPostExecute(Builder builder) {
+				super.onPostExecute(builder);
+				app.updateRoutingConfig(builder);
 			}
-		}
+		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
-
-
 
 
 	public synchronized void initVoiceDataInDifferentThread(final Activity uiContext,
@@ -729,7 +745,7 @@ public class AppInitializer implements IProgress {
 			if (System.currentTimeMillis() - timeUpdated >= 1000 * 60 * 30) {
 				startTask(app.getString(R.string.saving_gpx_tracks), -1);
 				try {
-					warnings.addAll(app.savingTrackHelper.saveDataToGpx(app.getAppCustomization().getTracksDir()));
+					warnings.addAll(app.savingTrackHelper.saveDataToGpx(app.getAppCustomization().getTracksDir()).getWarnings());
 				} catch (RuntimeException e) {
 					warnings.add(e.getMessage());
 				}

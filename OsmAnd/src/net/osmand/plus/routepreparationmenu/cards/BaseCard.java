@@ -113,12 +113,12 @@ public abstract class BaseCard {
 
 	@ColorInt
 	protected int getActiveColor() {
-		return getResolvedColor(nightMode ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light);
+		return getResolvedColor(nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
 	}
 
 	@ColorInt
 	protected int getMainFontColor() {
-		return getResolvedColor(nightMode ? R.color.main_font_dark : R.color.main_font_light);
+		return getResolvedColor(nightMode ? R.color.text_color_primary_dark : R.color.text_color_primary_light);
 	}
 
 	@ColorInt
@@ -131,7 +131,7 @@ public abstract class BaseCard {
 	}
 
 	protected Drawable getActiveIcon(@DrawableRes int icon) {
-		return getColoredIcon(icon, R.color.active_buttons_and_links_light, R.color.active_buttons_and_links_dark);
+		return getColoredIcon(icon, R.color.active_color_primary_light, R.color.active_color_primary_dark);
 	}
 
 	protected Drawable getColoredIcon(@DrawableRes int icon, @ColorRes int colorLight, @ColorRes int colorDark) {

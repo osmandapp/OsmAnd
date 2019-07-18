@@ -4,7 +4,6 @@ package net.osmand.srtmPlugin;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
@@ -15,8 +14,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import net.osmand.srtmPlugin.paid.R;
-
-import java.lang.reflect.Method;
 
 public class SRTMPluginActivity extends Activity {
 	private static final String OSMAND_COMPONENT = "net.osmand"; //$NON-NLS-1$
@@ -74,15 +71,9 @@ public class SRTMPluginActivity extends Activity {
 
 	public void logEvent(Activity ctx, String event) {
 		try {
-			Class<?> cl = Class.forName("com.google.firebase.analytics.FirebaseAnalytics");
-			Method mm = cl.getMethod("getInstance", Context.class);
-			Object inst = mm.invoke(null, ctx == null ? this : ctx);
-			Method log = cl.getMethod("logEvent", String.class, Bundle.class);
-			log.invoke(inst, event, new Bundle());
-		} catch (ClassNotFoundException e) {
-			//ignore
+			// not implemented yet
 		} catch (Exception e) {
-			e.printStackTrace();
+			//ignore
 		}
 	}
 }

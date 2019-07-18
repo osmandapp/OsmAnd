@@ -2,23 +2,24 @@ package net.osmand.plus.mapcontextmenu.other;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
 import net.osmand.data.LatLon;
 import net.osmand.plus.ApplicationMode;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
@@ -43,8 +44,11 @@ public class DestinationReachedMenuFragment extends Fragment {
 
 	@Nullable
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.dest_reached_menu_fragment, container, false);
+	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		ContextThemeWrapper ctx = new ContextThemeWrapper(getMapActivity(), menu.isLight() ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme);
+		LayoutInflater inf = LayoutInflater.from(ctx);
+		View view = inf.inflate(R.layout.dest_reached_menu_fragment, container, false);
+		AndroidUtils.addStatusBarPadding21v(ctx, view);
 		view.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -66,14 +70,13 @@ public class DestinationReachedMenuFragment extends Fragment {
 		Button removeDestButton = (Button) view.findViewById(R.id.removeDestButton);
 		removeDestButton.setCompoundDrawablesWithIntrinsicBounds(
 				iconsCache.getIcon(R.drawable.ic_action_done, menu.isLight()), null, null, null);
-		AndroidUtils.setTextPrimaryColor(view.getContext(), removeDestButton, !menu.isLight());
 		removeDestButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				getMapActivity().getMyApplication().getTargetPointsHelper().removeWayPoint(true, -1);
 				Object contextMenuObj = getMapActivity().getContextMenu().getObject();
 				if (getMapActivity().getContextMenu().isActive()
-						&& contextMenuObj != null && contextMenuObj instanceof TargetPoint) {
+						&& contextMenuObj instanceof TargetPoint) {
 					TargetPoint targetPoint = (TargetPoint) contextMenuObj;
 					if (!targetPoint.start && !targetPoint.intermediate) {
 						getMapActivity().getContextMenu().close();
@@ -89,7 +92,6 @@ public class DestinationReachedMenuFragment extends Fragment {
 		Button recalcDestButton = (Button) view.findViewById(R.id.recalcDestButton);
 		recalcDestButton.setCompoundDrawablesWithIntrinsicBounds(
 				iconsCache.getIcon(R.drawable.ic_action_gdirections_dark, menu.isLight()), null, null, null);
-		AndroidUtils.setTextPrimaryColor(view.getContext(), recalcDestButton, !menu.isLight());
 		recalcDestButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -111,13 +113,12 @@ public class DestinationReachedMenuFragment extends Fragment {
 
 		ApplicationMode appMode = getMapActivity().getMyApplication().getRoutingHelper().getAppMode();
 
-		if (!appMode.isDerivedRoutingFrom(appMode.CAR)) {
+		if (!appMode.isDerivedRoutingFrom(ApplicationMode.CAR)) {
 			findParkingButton.setVisibility(View.GONE);
 		}
 
 		findParkingButton.setCompoundDrawablesWithIntrinsicBounds(
 				iconsCache.getIcon(R.drawable.ic_action_parking_dark, menu.isLight()), null, null, null);
-		AndroidUtils.setTextPrimaryColor(view.getContext(), findParkingButton, !menu.isLight());
 		findParkingButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -139,9 +140,6 @@ public class DestinationReachedMenuFragment extends Fragment {
 			AndroidUtils.setBackground(view.getContext(), mainView, !menu.isLight(),
 					R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);
 		}
-		TextView title = (TextView) view.findViewById(R.id.titleTextView);
-		AndroidUtils.setTextPrimaryColor(view.getContext(), title, !menu.isLight());
-
 		return view;
 	}
 

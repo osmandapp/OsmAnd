@@ -88,7 +88,7 @@
     <string name="last_response">Ùrtima risposta</string>
     <string name="shared_string_group">Grupu</string>
     <string name="logout_no_internet_msg">Collega·ti a ìnternet pro essire in manera curreta dae Telegram.</string>
-    <string name="disconnect_from_telegram_desc">Pro bogare s\'atzessu a sa cumpartzidura de sa positzione. Aberi Telegram, bae a Cunfiguratziones → Riservadesa e Seguresa → Sessiones ativas, e acaba sa sessione de OsmAnd Telegram.</string>
+    <string name="disconnect_from_telegram_desc">Pro bogare s\'atzessu a sa cumpartzidura de sa positzione. Aberi Telegram, bae a Cunfiguratziones → Riservadesa e Seguresa → Sessiones ativas, e acaba sa sessione de OsmAnd Tracker.</string>
     <string name="disconnect_from_telegram">Comente istudare s\'arrastadore de OsmAnd dae Telegram</string>
     <string name="logout_help_desc">Comente istudare s\'arrastadore de OsmAnd dae Telegram</string>
     <string name="connected_account">Contu connessu</string>
@@ -135,16 +135,16 @@
     <string name="km_h">km/h</string>
     <string name="mile_per_hour">mph</string>
     <string name="si_kmh">Chilòmetros a s\'ora</string>
-    <string name="si_mph">Mìglios a s\'ora</string>
+    <string name="si_mph">Mìllias a s\'ora</string>
     <string name="si_m_s">Metros a su segundu</string>
     <string name="si_min_km">Minutos a su chilòmetru</string>
-    <string name="si_min_m">Minutos a su mìgliu</string>
+    <string name="si_min_m">Minutos a su mìlliu</string>
     <string name="si_nm_h">Mìglios nàuticos a s\'ora (knot)</string>
-    <string name="si_mi_feet">Mìglios/pedes</string>
-    <string name="si_mi_yard">Mìglios/iardas</string>
+    <string name="si_mi_feet">Mìllias/pedes</string>
+    <string name="si_mi_yard">Mìllias/iardas</string>
     <string name="si_km_m">Chilòmetros/metros</string>
-    <string name="si_nm">Mìglios nàuticos</string>
-    <string name="si_mi_meters">Mìglios/metros</string>
+    <string name="si_nm">Mìllias nàuticas</string>
+    <string name="si_mi_meters">Mìllias/metros</string>
     <string name="shared_string_hour_short">h</string>
     <string name="shared_string_minute_short">min</string>
     <string name="shared_string_second_short">seg</string>
@@ -157,7 +157,7 @@
     <string name="my_location_search_hint">Chirca: grupu o cuntatu</string>
     <string name="start_location_sharing">Cumpartzi sa positzione</string>
     <string name="show_on_map">Ammustra in sa mapa</string>
-    <string name="app_name">OsmAnd Online GPS Tracker</string>
+    <string name="app_name">OsmAnd arrastadore GPS in lìnia</string>
     <string name="phone_number_title">Nùmeru de telèfono</string>
     <string name="phone_number_descr">Nùmeru de telèfono in formadu internatzionale</string>
     <string name="shared_string_password">Crae de intrada</string>
@@ -210,7 +210,6 @@
     <string name="disable_monitoring">Disabìlita su monitoràgiu</string>
     <string name="location_recording_enabled">Registratzione de sa positzione abilitada</string>
     <string name="timeline_description">Abìlita su monitoràgiu pro sarvare totu sas positziones in sa cronologia.</string>
-    <string name="app_name_short_online">Arrastadore in lìnia</string>
     <string name="app_name_short">Arrastadore de OsmAnd</string>
     <string name="search_contacts">Chirca cuntatos</string>
     <string name="search_contacts_descr">Chirca intre totu sos grupos e sos cuntatos tuos.</string>
@@ -234,4 +233,14 @@
     <string name="proxy">Servidore intermediàriu (proxy)</string>
     <string name="privacy">Privadesa</string>
     <string name="bearing">Andamentu</string>
+    <string name="shared_string_select">Seletziona</string>
+    <string name="min_logging_distance">Distàntzia mìnima de registratzione</string>
+    <string name="min_logging_distance_descr">FIltru: distàntzia mìnima pro registrare unu puntu nou</string>
+    <string name="min_logging_accuracy">Pretzisione mìnima de registratzione</string>
+    <string name="min_logging_accuracy_descr">Filtru: peruna registratzione si sa pretzisione no est istada retzida</string>
+    <string name="min_logging_speed">Lestresa mìnima de registratzione</string>
+    <string name="min_logging_speed_descr">Filtru: peruna registratzione in suta de sa lestresa isseberada</string>
+    <string name="gpx_settings">Impostatziones GPX</string>
+    <string name="timeline_no_data_descr">Non tenimus datos collidos pro sa die ischertada</string>
+    <string name="timeline_no_data">Perunu datu</string>
 </resources>

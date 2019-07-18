@@ -18,6 +18,6 @@
 		<bitmap
 			android:gravity="center"
 			android:src="@drawable/ic_action_placeholder_city"
-			android:tint="@color/icon_color"/>
+			android:tint="@color/icon_color_default_light"/>
 	</item>
 </layer-list>

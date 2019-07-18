@@ -7,7 +7,6 @@ import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AlertDialog;
@@ -28,10 +27,10 @@ import android.widget.TextView;
 
 import net.osmand.AndroidNetworkUtils;
 import net.osmand.AndroidUtils;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.OsmandBaseExpandableListAdapter;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivity.BannerAndDownloadFreeVersion;
@@ -283,7 +282,7 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 			protected String doInBackground(Void... params) {
 				try {
 					Map<String, String> parameters = new HashMap<>();
-					parameters.put("aid", Settings.Secure.getString(activity.getContentResolver(), Settings.Secure.ANDROID_ID));
+					parameters.put("aid", getMyApplication().getUserAndroidId());
 					parameters.put("email", email);
 
 					return AndroidNetworkUtils.sendRequest(getMyApplication(),
@@ -409,7 +408,7 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 		super.onActivityCreated(savedInstanceState);
 		setShowsDialog(openAsDialog());
 		listView.setBackgroundColor(getResources().getColor(
-				getMyApplication().getSettings().isLightContent() ? R.color.bg_color_light : R.color.bg_color_dark));
+				getMyApplication().getSettings().isLightContent() ? R.color.list_background_color_light : R.color.list_background_color_dark));
 	}
 
 	@Override
@@ -669,7 +668,7 @@ public class DownloadResourceGroupFragment extends DialogFragment implements Dow
 			v.setOnClickListener(null);
 			TypedValue typedValue = new TypedValue();
 			Resources.Theme theme = ctx.getTheme();
-			theme.resolveAttribute(R.attr.ctx_menu_info_view_bg, typedValue, true);
+			theme.resolveAttribute(R.attr.activity_background_color, typedValue, true);
 			v.setBackgroundColor(typedValue.data);
 
 			return v;

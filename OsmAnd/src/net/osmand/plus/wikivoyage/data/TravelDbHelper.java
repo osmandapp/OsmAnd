@@ -600,7 +600,7 @@ public class TravelDbHelper {
 
 		res.title = cursor.getString(0);
 		try {
-			res.content = Algorithms.gzipToString(cursor.getBlob(1));
+			res.content = Algorithms.gzipToString(cursor.getBlob(1)).trim();
 		} catch (IOException e) {
 			LOG.error(e.getMessage(), e);
 		}

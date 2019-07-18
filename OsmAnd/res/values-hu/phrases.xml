@@ -3004,7 +3004,7 @@
     <string name="poi_payment_ep_avant_yes">AvantCard</string>
     <string name="poi_payment_ep_avant_no">AvantCardot nem fogad el</string>
     <string name="poi_payment_ep_mep_yes">MEP</string>
-    <string name="poi_payment_ep_mep_no">MEP-et nem fogad el</string>
+    <string name="poi_payment_ep_mep_no">Met nem fogad el</string>
     <string name="poi_payment_ep_minipay_yes">Minipay</string>
     <string name="poi_payment_ep_minipay_no">Minipayt nem fogad el</string>
     <string name="poi_payment_ep_minicash_yes">MiniCash</string>
@@ -3575,4 +3575,26 @@
     <string name="poi_climbing_crag_filter">Mászószikla</string>
     <string name="poi_rescue_box">Hegyi mentőláda</string>
     <string name="poi_climbing_crag">Igen</string>
+    <string name="reddit">Reddit</string>
+    <string name="poi_hazard_additional_erosion">Veszély: földcsuszamlás</string>
+    <string name="poi_hazard_additional_rockfall">Veszély: kőomlás</string>
+    <string name="poi_hazard_additional_nuclear">Veszély: nukleáris sugárzás</string>
+    <string name="poi_hazard_additional_flood">Veszély: áradás</string>
+    <string name="poi_hazard_additional_avalanche">Veszély: lavina</string>
+    <string name="poi_hazard_additional_minefield">Veszély: aknamező</string>
+    <string name="poi_hazard_additional_contamination">Veszély: szennyeződés</string>
+    <string name="poi_defibrillator_location">Hely</string>
+    <string name="poi_changing_table_yes">Pelenkázóasztal van</string>
+    <string name="poi_changing_table_no">Pelenkázóasztal nincs</string>
+    <string name="poi_changing_table_limited">Pelenkázóasztal: korlátozottan alkalmas</string>
+    <string name="poi_changing_table_location_room">Pelenkázóasztal helye: egy helyiség</string>
+    <string name="poi_changing_table_location_male_toilet">Pelenkázóasztal helye: férfi WC</string>
+    <string name="poi_changing_table_location_female_toilet">Pelenkázóasztal helye: női WC</string>
+    <string name="poi_changing_table_location_unisex_toilet">Pelenkázóasztal helye: közös WC</string>
+    <string name="poi_changing_table_count">Pelenkázóasztalok száma</string>
+    <string name="poi_changing_table_fee_yes">Pelenkázóasztal: fizetős</string>
+    <string name="poi_changing_table_fee_no">Pelenkázóasztal ingyenes</string>
+    <string name="poi_charcoal_pile">Faszénégető boksa</string>
+    <string name="poi_historic_tank">Történelmi harckocsi</string>
+    <string name="poi_hookah_lounge">Vízipipázó társalgóhely</string>
 </resources>

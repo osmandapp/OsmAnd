@@ -2427,7 +2427,6 @@ voor Gebied: %1$s x %2$s</string>
     <string name="plan_route">Plan route</string>
     <string name="shared_string_sort">Sorteer</string>
     <string name="coordinate_input">Invoer van coördinaten</string>
-    <string name="is_saved">is opgeslagen</string>
     <string name="marker_save_as_track_descr">Exporteer uw Markeervlaggetjes naar het volgende bestand:</string>
     <string name="marker_save_as_track">Opslaan als GPX-track</string>
     <string name="move_to_history">Verplaats naar geschiedenis</string>
@@ -2708,7 +2707,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="send_search_query_description">We gebruiken uw zoekterm: <b>\"%1$s\"</b>, en uw locatie.<br/>
         <br/> om ons zoekalgoritme te verbeteren. We verzamelen geen persoonlijke informatie <br/>
     </string>
-    <string name="send_search_query">"Zoekterm versturen? "</string>
+    <string name="send_search_query">Zoekterm versturen\?</string>
     <string name="shared_string_world">Wereld</string>
     <string name="shared_string_gpx_files">GPX bestanden</string>
     <string name="commiting_way">"Weg vastleggen.. ik "</string>
@@ -2782,7 +2781,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="shared_string_milliradians">Milliradialen</string>
     <string name="angular_measeurement_descr">Wijzig azimuth meet formaat.</string>
     <string name="avoid_pt_types_descr">Selecteer de te vermijden openbaar vervoer opties:</string>
-    <string name="quick_action_day_night_mode">% modus</string>
+    <string name="quick_action_day_night_mode">%s modus</string>
     <string name="avoid_pt_types">Vermijd transport types…</string>
     <string name="shared_string_walk">Loop</string>
     <string name="save_poi_value_exceed_length">The maximale tag lengte van \"%s\" is 255 karakters.
@@ -2837,7 +2836,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="use_osm_live_public_transport">OsmAnd Live Openbaar vervoer</string>
     <string name="time_of_day">Huidige tijd</string>
     <string name="step_by_step">Stap voor stap</string>
-    <string name="road_types">Weg types</string>
+    <string name="routeInfo_road_types_name">Weg types</string>
     <string name="exit_at">Uitrit over</string>
     <string name="shared_string_swap">Wissel</string>
     <string name="show_more">Toon meer</string>
@@ -2877,9 +2876,9 @@ voor Gebied: %1$s x %2$s</string>
     <string name="quick_action_switch_day_mode">Dag Modus</string>
     <string name="quick_action_switch_night_mode">Nacht Modus</string>
     <string name="quick_action_day_night_switch_mode">Wissel tussen Dag/Nacht modus</string>
-    <string name="route_surface_stat_container">Oppervlakte</string>
-    <string name="route_smoothness_stat_container">Kwaliteit wegdek</string>
-    <string name="route_steepness_stat_container">Steilte</string>
+    <string name="routeInfo_surface_name">Oppervlakte</string>
+    <string name="routeInfo_smoothness_name">Kwaliteit wegdek</string>
+    <string name="routeInfo_steepness_name">Steilte</string>
     <string name="run_full_osmand_msg">U gebruikt {0} kaart geleverd door OsmAnd. Wilt u de \"OsmAnd full\" versie openen\?</string>
     <string name="run_full_osmand_header">Open OsmAnd\?</string>
     <string name="release_3_3_7">• Toon de overstaptijden in Openbaar Vervoer

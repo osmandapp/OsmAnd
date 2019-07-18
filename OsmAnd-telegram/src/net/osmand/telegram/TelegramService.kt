@@ -21,6 +21,7 @@ import org.drinkless.td.libcore.telegram.TdApi
 import java.util.*
 
 private const val UPDATE_LIVE_MESSAGES_INTERVAL_MS = 10000L // 10 sec
+private const val UPDATE_LIVE_TRACKS_INTERVAL_MS = 30000L // 30 sec
 
 class TelegramService : Service(), LocationListener, TelegramIncomingMessagesListener,
 	TelegramOutgoingMessagesListener {
@@ -31,6 +32,9 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 
 	private var updateShareInfoHandler: Handler? = null
 	private var mHandlerThread = HandlerThread("SharingServiceThread")
+
+	private var updateTracksHandler: Handler? = null
+	private var tracksHandlerThread = HandlerThread("TracksUpdateServiceThread")
 
 	var handler: Handler? = null
 		private set
@@ -53,7 +57,9 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 	override fun onCreate() {
 		super.onCreate()
 		mHandlerThread.start()
+		tracksHandlerThread.start()
 		updateShareInfoHandler = Handler(mHandlerThread.looper)
+		updateTracksHandler = Handler(tracksHandlerThread.looper)
 	}
 
 	override fun onBind(intent: Intent): IBinder? {
@@ -64,25 +70,30 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 		if (usedBy and usageIntent > 0) {
 			usedBy -= usageIntent
 		}
-		if (usedBy == 0) {
-			shouldCleanupResources = false
-			val serviceIntent = Intent(ctx, TelegramService::class.java)
-			ctx.stopService(serviceIntent)
-		} else if (isUsedByMyLocation(usedBy)) {
-			val app = app()
-			if (app.settings.sendMyLocInterval >= OFF_INTERVAL_THRESHOLD && serviceOffInterval == 0L) {
-				serviceOffInterval = app.settings.sendMyLocInterval
-				setupServiceErrorInterval()
-				setupAlarm()
+		when {
+			usedBy == 0 -> {
+				shouldCleanupResources = false
+				val serviceIntent = Intent(ctx, TelegramService::class.java)
+				ctx.stopService(serviceIntent)
 			}
-			app.notificationHelper.refreshNotification(NotificationType.LOCATION)
+			isUsedByMyLocation(usedBy) -> {
+				val app = app()
+				if (app.settings.sendMyLocInterval >= OFF_INTERVAL_THRESHOLD && serviceOffInterval == 0L) {
+					serviceOffInterval = app.settings.sendMyLocInterval
+					setupServiceErrorInterval()
+					setupAlarm()
+				}
+				app.notificationHelper.refreshNotification(NotificationType.LOCATION)
+			}
+			isUsedByUsersLocations(usedBy) -> removeLocationUpdates()
 		}
 	}
 
 	override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
 		val app = app()
 		handler = Handler()
-		usedBy = intent.getIntExtra(USAGE_INTENT, 0)
+		val usageIntent = intent.getIntExtra(USAGE_INTENT, 0)
+		usedBy = usageIntent or usedBy
 
 		serviceOffInterval = intent.getLongExtra(USAGE_OFF_INTERVAL, 0)
 		sendLocationInterval = intent.getLongExtra(SEND_LOCATION_INTERVAL, 0)
@@ -98,6 +109,7 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 		}
 		if (isUsedByUsersLocations(usedBy)) {
 			app.telegramHelper.startLiveMessagesUpdates(app.settings.sendMyLocInterval)
+			startTracksUpdates()
 		}
 
 		val locationNotification = app.notificationHelper.locationNotification
@@ -125,6 +137,7 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 		app.telegramHelper.removeOutgoingMessagesListener(this)
 		app.settings.save()
 		app.telegramService = null
+		tracksHandlerThread.quit()
 		mHandlerThread.quit()
 
 		usedBy = 0
@@ -184,6 +197,17 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 				startShareInfoUpdates()
 			}
 		}, UPDATE_LIVE_MESSAGES_INTERVAL_MS)
+	}
+
+	private fun startTracksUpdates() {
+		updateTracksHandler?.postDelayed({
+			if (isUsedByUsersLocations(usedBy)) {
+				if (app().settings.hasAnyLiveTracksToShowOnMap()) {
+					app().showLocationHelper.startUpdateTracksTask()
+				}
+				startTracksUpdates()
+			}
+		}, UPDATE_LIVE_TRACKS_INTERVAL_MS)
 	}
 	
 	@SuppressLint("MissingPermission")
@@ -259,9 +283,7 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 		Toast.makeText(this, getString(R.string.location_service_no_gps_available), Toast.LENGTH_LONG).show()
 	}
 
-
 	override fun onProviderEnabled(provider: String) {}
-
 
 	override fun onStatusChanged(provider: String, status: Int, extras: Bundle) {}
 

@@ -53,7 +53,7 @@ public class MapMarkersHistoryFragment extends Fragment implements MapMarkersHel
 		final boolean night = !app.getSettings().isLightContent();
 		final MapActivity mapActivity = (MapActivity) getActivity();
 
-		backgroundPaint.setColor(ContextCompat.getColor(getActivity(), night ? R.color.dashboard_divider_dark : R.color.dashboard_divider_light));
+		backgroundPaint.setColor(ContextCompat.getColor(getActivity(), night ? R.color.divider_color_dark : R.color.divider_color_light));
 		backgroundPaint.setStyle(Paint.Style.FILL_AND_STROKE);
 		backgroundPaint.setAntiAlias(true);
 		iconPaint.setAntiAlias(true);
@@ -113,8 +113,8 @@ public class MapMarkersHistoryFragment extends Fragment implements MapMarkersHel
 						colorIcon = R.color.map_widget_blue;
 						colorText = R.color.map_widget_blue;
 					} else {
-						colorIcon = night ? 0 : R.color.icon_color;
-						colorText = R.color.dashboard_subheader_text_light;
+						colorIcon = night ? R.color.icon_color_default_dark : R.color.icon_color_default_light;
+						colorText = night ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light;
 					}
 					if (colorIcon != 0) {
 						iconPaint.setColorFilter(new PorterDuffColorFilter(ContextCompat.getColor(getActivity(), colorIcon), PorterDuff.Mode.SRC_IN));
@@ -170,7 +170,7 @@ public class MapMarkersHistoryFragment extends Fragment implements MapMarkersHel
 									}
 								}
 							});
-					AndroidUtils.setSnackbarTextColor(snackbar, R.color.color_dialog_buttons_dark);
+					AndroidUtils.setSnackbarTextColor(snackbar, R.color.active_color_primary_dark);
 					snackbar.show();
 				}
 			}

@@ -98,13 +98,13 @@ public class GPXAction extends QuickAction {
 			if (getParams().get(KEY_NAME).isEmpty() && Integer.valueOf(getParams().get(KEY_CATEGORY_COLOR)) == 0) {
 
 				categoryEdit.setText("");
-				categoryImage.setColorFilter(activity.getResources().getColor(R.color.icon_color));
+				categoryImage.setColorFilter(activity.getResources().getColor(R.color.icon_color_default_light));
 			}
 
 		} else {
 
 			categoryEdit.setText("");
-			categoryImage.setColorFilter(activity.getResources().getColor(R.color.icon_color));
+			categoryImage.setColorFilter(activity.getResources().getColor(R.color.icon_color_default_light));
 
 			getParams().put(KEY_CATEGORY_NAME, "");
 			getParams().put(KEY_CATEGORY_COLOR, "0");
@@ -172,7 +172,7 @@ public class GPXAction extends QuickAction {
 
 	private void fillGroupParams(View root, String name, int color) {
 
-		if (color == 0) color = root.getContext().getResources().getColor(R.color.icon_color);
+		if (color == 0) color = root.getContext().getResources().getColor(R.color.icon_color_default_light);
 
 		((AutoCompleteTextViewEx) root.findViewById(R.id.category_edit)).setText(name);
 		((ImageView) root.findViewById(R.id.category_image)).setColorFilter(color);

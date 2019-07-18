@@ -5,10 +5,13 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
+import android.content.res.Resources.Theme;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.view.ContextThemeWrapper;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +22,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import net.osmand.PlatformUtil;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
@@ -37,6 +41,7 @@ public class DashboardSettingsDialogFragment extends DialogFragment
 	private static final String CHECKED_ITEMS = "checked_items";
 	private static final String NUMBER_OF_ROWS_ARRAY = "number_of_rows_array";
 	private MapActivity mapActivity;
+	private ContextThemeWrapper context;
 	private ArrayList<DashFragmentData> mFragmentsData;
 	private DashFragmentAdapter mAdapter;
 	private int textColorPrimary;
@@ -60,10 +65,14 @@ public class DashboardSettingsDialogFragment extends DialogFragment
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		TypedValue typedValue = new TypedValue();
-		Resources.Theme theme = getActivity().getTheme();
+		FragmentActivity activity = requireActivity();
+		OsmandApplication app = (OsmandApplication) activity.getApplication();
+		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+		context = new ContextThemeWrapper(activity, !nightMode ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme);
+		Theme theme = context.getTheme();
 		theme.resolveAttribute(android.R.attr.textColorPrimary, typedValue, true);
 		textColorPrimary = typedValue.data;
-		theme.resolveAttribute(R.attr.dialog_inactive_text_color, typedValue, true);
+		theme.resolveAttribute(android.R.attr.textColorSecondary, typedValue, true);
 		textColorSecondary = typedValue.data;
 
 		final OsmandSettings settings = mapActivity.getMyApplication().getSettings();
@@ -72,13 +81,13 @@ public class DashboardSettingsDialogFragment extends DialogFragment
 		final View accessFromMap = createCheckboxItem(settings.SHOW_DASHBOARD_ON_MAP_SCREEN, 
 				R.string.access_from_map, R.string.access_from_map_description); 
 
-		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+		AlertDialog.Builder builder = new AlertDialog.Builder(context);
 		if (savedInstanceState != null && savedInstanceState.containsKey(CHECKED_ITEMS)) {
-			mAdapter = new DashFragmentAdapter(getActivity(), mFragmentsData,
+			mAdapter = new DashFragmentAdapter(context, mFragmentsData,
 					savedInstanceState.getBooleanArray(CHECKED_ITEMS),
 					savedInstanceState.getIntArray(NUMBER_OF_ROWS_ARRAY));
 		} else {
-			mAdapter = new DashFragmentAdapter(getActivity(), mFragmentsData, settings);
+			mAdapter = new DashFragmentAdapter(context, mFragmentsData, settings);
 		}
 		builder.setTitle(R.string.dahboard_options_dialog_title)
 				.setAdapter(mAdapter, null)
@@ -115,7 +124,7 @@ public class DashboardSettingsDialogFragment extends DialogFragment
 	}
 
 	private View createCheckboxItem(final CommonPreference<Boolean> pref, int text, int description) {
-		final View view = LayoutInflater.from(getActivity()).inflate(
+		final View view = LayoutInflater.from(context).inflate(
 				R.layout.show_dashboard_on_start_dialog_item, null, false);
 		final TextView textView = (TextView) view.findViewById(R.id.text);
 		final TextView subtextView = (TextView) view.findViewById(R.id.subtext);
@@ -123,8 +132,7 @@ public class DashboardSettingsDialogFragment extends DialogFragment
 		subtextView.setText(description);
 		final CompoundButton compoundButton = (CompoundButton) view.findViewById(R.id.toggle_item);
 		compoundButton.setChecked(pref.get());
-		textView.setTextColor(pref.get() ? textColorPrimary
-				: textColorSecondary);
+		textView.setTextColor(pref.get() ? textColorPrimary : textColorSecondary);
 		compoundButton.setOnCheckedChangeListener(
 				new CompoundButton.OnCheckedChangeListener() {
 					@Override
@@ -180,7 +188,7 @@ public class DashboardSettingsDialogFragment extends DialogFragment
 		public View getView(final int position, View convertView, ViewGroup parent) {
 			final DashViewHolder viewHolder;
 			if (convertView == null) {
-				convertView = LayoutInflater.from(getContext()).inflate(R.layout.dashboard_settings_dialog_item,
+				convertView = LayoutInflater.from(context).inflate(R.layout.dashboard_settings_dialog_item,
 						parent, false);
 				viewHolder = new DashViewHolder(this, convertView, getContext());
 			} else {
@@ -240,7 +248,7 @@ public class DashboardSettingsDialogFragment extends DialogFragment
 		final CompoundButton compoundButton;
 		final TextView numberOfRowsTextView;
 		private int position;
-		private int colorBlue;
+		private int colorActive;
 		private DashFragmentAdapter dashFragmentAdapter;
 
 		public DashViewHolder(DashFragmentAdapter dashFragmentAdapter, View view, Context ctx) {
@@ -248,15 +256,19 @@ public class DashboardSettingsDialogFragment extends DialogFragment
 			this.numberOfRowsTextView = (TextView) view.findViewById(R.id.numberOfRowsTextView);
 			this.textView = (TextView) view.findViewById(R.id.text);
 			this.compoundButton = (CompoundButton) view.findViewById(R.id.toggle_item);
-			colorBlue = ctx.getResources().getColor(R.color.dashboard_blue);
+
+			TypedValue typedValue = new TypedValue();
+			Theme theme = ctx.getTheme();
+			theme.resolveAttribute(R.attr.active_color_basic, typedValue, true);
+			colorActive = typedValue.data;
 		}
 
 		public void bindDashView(DashFragmentData fragmentData, int position) {
 			if (fragmentData.hasRows()) {
 				numberOfRowsTextView.setVisibility(View.VISIBLE);
 				numberOfRowsTextView.setText(String.valueOf(dashFragmentAdapter.getNumberOfRows(position)));
-				numberOfRowsTextView.setTextColor(dashFragmentAdapter.isChecked(position) ? colorBlue :
-						textColorSecondary);
+				numberOfRowsTextView.setTextColor(
+						dashFragmentAdapter.isChecked(position) ? colorActive : textColorSecondary);
 			} else {
 				numberOfRowsTextView.setVisibility(View.GONE);
 			}

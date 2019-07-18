@@ -47,21 +47,21 @@ class TelegramApplication : Application(), OsmandHelperListener {
 				if (connected) {
 					osmandAidlHelper.setNavDrawerItems(
 						applicationContext.packageName,
-						listOf(getString(R.string.app_name_short_online)),
+						listOf(getString(R.string.app_name_short)),
 						listOf("osmand_telegram://main_activity"),
 						listOf("ic_action_location_sharing_app"),
 						listOf(-1)
 					)
 					showLocationHelper.addDirectionContextMenuButton()
-					if (settings.hasAnyChatToShowOnMap()) {
-						showLocationHelper.startShowingLocation()
-					}
+					showLocationHelper.startShowingLocation()
 				}
 			}
 		}
 		osmandAidlHelper.setUpdatesListener(object : UpdatesListener {
 			override fun update() {
-				showLocationHelper.startUpdateMessagesTask()
+				if (settings.hasAnyChatToShowOnMap()) {
+					showLocationHelper.startUpdateMessagesTask()
+				}
 			}
 		})
 		shareLocationHelper = ShareLocationHelper(this)

@@ -15,7 +15,7 @@
         android:layout_alignParentRight="true"
         android:contentDescription="@string/quick_action_new_action"
         android:src="@drawable/ic_action_plus"
-        app:backgroundTint="@color/dashboard_blue"
+        app:backgroundTint="@color/active_color_primary_light"
         app:fabSize="normal"
         app:useCompatPadding="true"/>
 

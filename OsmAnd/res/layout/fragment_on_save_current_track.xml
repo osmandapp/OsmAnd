@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:background="?attr/bg_color"
+	android:orientation="vertical">
+	
+		<TextView
+			android:id="@+id/saved_track_name_string"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:padding="@dimen/content_padding"
+			tools:text="Track 2019-02-26 12-52 saved"
+			android:textColor="?android:textColorPrimary"
+			android:textSize="@dimen/default_list_text_size"/>
+
+
+	<LinearLayout
+		android:orientation="horizontal"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:paddingBottom="@dimen/content_padding_small">
+
+		<Button
+			android:id="@+id/open_track_button"
+			android:background="?attr/dlg_btn_secondary"
+			android:layout_width="0dp"
+			android:layout_height="@dimen/bottom_sheet_cancel_button_height_small"
+			android:layout_weight="1"
+			android:text="@string/shared_string_open_track"
+			android:textColor="?attr/dlg_btn_secondary_text"
+			android:textSize="@dimen/default_desc_text_size"
+			android:textAllCaps="false"
+			android:layout_marginLeft="@dimen/bottom_sheet_content_margin"
+			android:layout_marginRight="@dimen/bottom_sheet_content_margin_small"
+
+			/>
+
+		<Button
+			android:id="@+id/show_on_map_button"
+			android:background="?attr/dlg_btn_primary"
+			android:layout_width="0dp"
+			android:layout_height="@dimen/bottom_sheet_cancel_button_height_small"
+			android:layout_weight="1"
+			android:text="@string/shared_string_show_on_map"
+			android:textAllCaps="false"
+			android:textColor="?attr/dlg_btn_primary_text"
+			android:textSize="@dimen/default_desc_text_size"
+			android:layout_marginLeft="@dimen/bottom_sheet_content_margin_small"
+			android:layout_marginRight="@dimen/bottom_sheet_content_margin"
+			/>
+
+	</LinearLayout>
+</LinearLayout>

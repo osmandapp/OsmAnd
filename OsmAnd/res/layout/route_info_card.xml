@@ -24,11 +24,11 @@
 			android:maxLines="1"
 			android:paddingLeft="@dimen/content_padding"
 			android:paddingRight="@dimen/content_padding"
-			android:textColor="?attr/main_font_color_basic"
+			android:textColor="?android:textColorPrimary"
 			android:textSize="@dimen/default_list_text_size"
 			osmand:typeface="@string/font_roboto_medium"
 			tools:ignore="UnusedAttribute"
-			tools:text="@string/route_class_stat_container" />
+			tools:text="@string/routeInfo_roadClass_name" />
 
 		<LinearLayout
 			android:id="@+id/info_type_details_button"

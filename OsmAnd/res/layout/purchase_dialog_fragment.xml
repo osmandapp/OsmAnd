@@ -31,7 +31,7 @@
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:padding="@dimen/list_content_padding"
                     android:src="@drawable/ic_arrow_back"
-                    android:tint="@color/icon_color"/>
+                    android:tint="@color/icon_color_default_light"/>
 
                 <net.osmand.plus.widgets.TextViewEx
                     android:id="@+id/title"

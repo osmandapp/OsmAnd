@@ -2196,7 +2196,6 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">Undvik isvägar och vadställen.</string>
     <string name="my_location">Min plats</string>
     <string name="shared_string_sort">Sortera</string>
-    <string name="is_saved">har sparats</string>
     <string name="marker_save_as_track">Spara som GPX-fil</string>
     <string name="move_to_history">Flytta till historiken</string>
     <string name="show_arrows_on_the_map">Visa pilar på kartan</string>
@@ -2636,18 +2635,18 @@ Vänligen tillhandahåll fullständig kod</string>
 \n• Valfri reseinspelning i bakgrundsläge (när enheten är i strömsparläge)
 \nOsmAnd utvecklas aktivt med öppen källkod. Alla kan bidra till appen genom att rapportera buggar, förbättra översättningar eller koda nya funktioner. Dock är projektet beroende av ekonomiska bidrag för att finansiera kodning och testning av nya funktioner.
 \n</string>
-    <string name="osmand_plus_extended_description_part8">Ungefärlig karttäckning och kvalitet:
-\n• Västeuropa: ****
-\n• Östreuropa: ***
-\n• Ryssland: ***
-\n• Nordamerika: ***
-\n• Sydamerika: **
-\n• Asien: **
-\n• Japan &amp; Korea: ***
-\n• Mellanöstern: **
-\n• Afrika: **
-\n• Antarktis: *
-\nDe flesta länder runt om i världen finns som nedladdningar
+    <string name="osmand_plus_extended_description_part8">Ungefärlig karttäckning och kvalitet: 
+\n• Västeuropa: **** 
+\n• Östreuropa: *** 
+\n• Ryssland: *** 
+\n• Nordamerika: *** 
+\n• Sydamerika: ** 
+\n• Asien: ** 
+\n• Japan &amp; Korea: *** 
+\n• Mellanöstern: ** 
+\n• Afrika: ** 
+\n• Antarktis: * 
+\nDe flesta länder runt om i världen finns som nedladdningar 
 \nFrån Afghanistan till Zimbabwe, från Australien till USA. Argentina, Brasilien, Kanada, Frankrike, Tyskland, Mexiko, Storbritannien, Spanien, ...
 \n</string>
     <string name="quick_action_bug_descr">Detta meddelande ingår i kommentarsfältet.</string>
@@ -2778,4 +2777,53 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="voice_announcements">Röstmeddelanden</string>
     <string name="intermediate_destinations">Mellanliggande destinationer</string>
     <string name="arrive_at_time">Ankomst klockan %1$s</string>
+    <string name="rate_dialog_descr">Vänligen ge oss 30 sekunder, dela återkoppling och betygsätt vårt arbete på Google Play.</string>
+    <string name="button_rate">Betygsätt</string>
+    <string name="shared_string_privacy_policy">Sekretesspolicy</string>
+    <string name="help_us_make_osmand_better">Hjälp oss att göra OsmAnd bättre!</string>
+    <string name="make_osmand_better_descr">Tillåt OsmAnd att samla in och bearbeta anonyma användningsdata. Vi samlar inte in eller lagrar data om din plats, eller om de platser som du ser på kartan.
+\n
+\nDu kan alltid ändra ditt val i Inställningar &gt; Sekretess och säkerhet.</string>
+    <string name="choose_data_to_share">Välj vilken typ av data du vill dela:</string>
+    <string name="downloaded_maps">Hämtade Kartor</string>
+    <string name="visited_screens">Besökta skärmar</string>
+    <string name="collected_data_descr">Lista över data du vill dela med OsmAnd.</string>
+    <string name="downloaded_maps_collect_descr">Vi samlar in dessa data för att förstå kartorna över vilka regioner och länder som är mest populära.</string>
+    <string name="visited_screens_collect_descr">Vi samlar in dessa data för att förstå de mest populära funktionerna i OsmAnd.</string>
+    <string name="privacy_and_security_change_descr">Genom att klicka på \"Tillåt\" godkänner du våra %1$s</string>
+    <string name="settings_privacy_and_security">Integritet och säkerhet</string>
+    <string name="settings_privacy_and_security_desc">Välj dina data för att dela med oss</string>
+    <string name="shared_string_no_thank_you">Nej, tack</string>
+    <string name="shared_string_allow">Tillåt</string>
+    <string name="profile_name_hint">Profilnamn</string>
+    <string name="nav_type_hint">Navigationstyp</string>
+    <string name="app_mode_taxi">Taxi</string>
+    <string name="app_mode_shuttle_bus">Pendelbuss</string>
+    <string name="app_mode_subway">Tunnelbana</string>
+    <string name="app_mode_horse">Häst</string>
+    <string name="app_mode_helicopter">Helikopter</string>
+    <string name="osmand_routing_promo">Du kan lägga till egen modifierad version av routing.xml till ..osmand/routing</string>
+    <string name="app_mode_skiing">Skidning</string>
+    <string name="base_profile_descr_ski">Skidning</string>
+    <string name="select_icon_profile_dialog_title">Välj ikon</string>
+    <string name="settings_routing_mode_string">Läge: %s</string>
+    <string name="settings_derived_routing_mode_string">Användarläge, härledd från: %s</string>
+    <string name="routing_profile_ski">Skida</string>
+    <string name="profile_type_descr_string">Typ: %s</string>
+    <string name="profile_type_base_string">Basprofil</string>
+    <string name="profile_alert_need_routing_type_title">Välj navigeringstyp</string>
+    <string name="profile_alert_need_routing_type_msg">Du måste välja Navigeringstyp för att skapa ny applikationsprofil</string>
+    <string name="profile_alert_need_profile_name_title">Ange profilnamn</string>
+    <string name="profile_alert_need_profile_name_msg">Profilnamnet ska inte vara tomt!</string>
+    <string name="profile_alert_duplicate_name_msg">Det finns redan profil med sådant namn</string>
+    <string name="profile_alert_cant_delete_base">Du kan inte ta bort OsmAnd-basprofiler</string>
+    <string name="profile_alert_need_save_title">Spara ändringar</string>
+    <string name="profile_alert_need_save_msg">Du måste spara ändringar i Profil innan du fortsätter</string>
+    <string name="profile_alert_delete_title">Ta bort profil</string>
+    <string name="profile_alert_delete_msg">Är du säker på att du vill ta bort %s profil</string>
+    <string name="select_base_profile_dialog_title">Välj basprofil</string>
+    <string name="process_downloading_service">OsmAnd-hämtningstjänst</string>
+    <string name="shared_string_icon">Ikon</string>
+    <string name="collected_data">Insamlade data</string>
+    <string name="press_again_to_change_the_map_orientation">Tryck igen för att ändra kartorienteringen</string>
 </resources>

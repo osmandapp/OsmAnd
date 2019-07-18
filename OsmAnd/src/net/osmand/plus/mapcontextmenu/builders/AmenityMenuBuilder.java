@@ -164,7 +164,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 				textPrefixView == null ? (collapsable ? dpToPx(13f) : dpToPx(8f)) : dpToPx(2f), 0, collapsable && textPrefixView == null ? dpToPx(13f) : dpToPx(8f));
 		textView.setLayoutParams(llTextParams);
 		textView.setTextSize(16);
-		textView.setTextColor(app.getResources().getColor(light ? R.color.ctx_menu_bottom_view_text_color_light : R.color.ctx_menu_bottom_view_text_color_dark));
+		textView.setTextColor(app.getResources().getColor(light ? R.color.text_color_primary_light : R.color.text_color_primary_dark));
 
 		int linkTextColor = ContextCompat.getColor(view.getContext(), light ? R.color.ctx_menu_bottom_view_url_color_light : R.color.ctx_menu_bottom_view_url_color_dark);
 
@@ -282,24 +282,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			ll.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(final View v) {
-					final String[] phones = text.split(",|;");
-					if (phones.length > 1) {
-						AlertDialog.Builder dlg = new AlertDialog.Builder(v.getContext());
-						dlg.setNegativeButton(R.string.shared_string_cancel, null);
-						dlg.setItems(phones, new DialogInterface.OnClickListener() {
-							@Override
-							public void onClick(DialogInterface dialog, int which) {
-								Intent intent = new Intent(Intent.ACTION_DIAL);
-								intent.setData(Uri.parse("tel:" + phones[which]));
-								v.getContext().startActivity(intent);
-							}
-						});
-						dlg.show();
-					} else {
-						Intent intent = new Intent(Intent.ACTION_DIAL);
-						intent.setData(Uri.parse("tel:" + text));
-						v.getContext().startActivity(intent);
-					}
+					showDialog(text, Intent.ACTION_DIAL, "tel:", v);
 				}
 			});
 		} else if (isUrl) {
@@ -440,7 +423,8 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			} else if (Amenity.OPENING_HOURS.equals(key) || 
 					Amenity.COLLECTION_TIMES.equals(key) || Amenity.SERVICE_TIMES.equals(key)) {
 				iconId = R.drawable.ic_action_time;
-				collapsableView = getCollapsableTextView(view.getContext(), true, amenity.getAdditionalInfo(key));
+				collapsableView = getCollapsableTextView(view.getContext(), true,
+					amenity.getAdditionalInfo(key).replace("; ", "\n").replace(",", ", "));
 				collapsable = true;
 				OpeningHoursParser.OpeningHours rs = OpeningHoursParser.parseOpenedHours(amenity.getAdditionalInfo(key));
 				if (rs != null) {
@@ -454,10 +438,14 @@ public class AmenityMenuBuilder extends MenuBuilder {
 						textColor = R.color.color_invalid;
 					}
 				}
+				vl = vl.replace("; ", "\n");
 				needLinks = false;
 
 			} else if (Amenity.PHONE.equals(key)) {
 				iconId = R.drawable.ic_action_call_dark;
+				isPhoneNumber = true;
+			} else if (Amenity.MOBILE.equals(key)) {
+				iconId = R.drawable.ic_action_phone;
 				isPhoneNumber = true;
 			} else if (Amenity.WEBSITE.equals(key)) {
 				iconId = R.drawable.ic_world_globe_dark;
@@ -489,6 +477,8 @@ public class AmenityMenuBuilder extends MenuBuilder {
 					iconId = R.drawable.ic_action_poi_brand;
 				} else if (key.equals("internet_access_fee_yes")) {
 					iconId = R.drawable.ic_action_internet_access_fee;
+				} else if (key.equals("instagram")) {
+					iconId = R.drawable.ic_action_social_instagram;
 				} else {
 					iconId = R.drawable.ic_action_info_dark;
 				}
@@ -665,9 +655,6 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			buildRow(view, R.drawable.ic_action_openstreetmap_logo, null, link + (amenity.getId() >> 1),
 					0, false, null, true, 0, true, null, false);
 		}
-		buildRow(view, R.drawable.ic_action_get_my_location, null, PointDescription.getLocationName(app,
-				amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude(), true)
-				.replaceAll("\n", " "), 0, false, null, false, 0, false, null, false);
 	}
 
 	private String getFormattedInt(String value) {

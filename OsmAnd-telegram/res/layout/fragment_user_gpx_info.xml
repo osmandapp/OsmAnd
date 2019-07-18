@@ -188,6 +188,24 @@
 
 			</LinearLayout>
 
+			<net.osmand.telegram.ui.views.TextViewEx
+				android:id="@+id/live_btn"
+				android:layout_width="wrap_content"
+				android:layout_height="@dimen/dialog_button_height"
+				android:layout_gravity="center"
+				android:layout_marginBottom="@dimen/content_padding_half"
+				android:background="@drawable/btn_round"
+				android:ellipsize="end"
+				android:gravity="center"
+				android:maxLines="1"
+				android:paddingLeft="@dimen/image_button_padding"
+				android:paddingRight="@dimen/image_button_padding"
+				android:text="@string/shared_string_live"
+				android:textSize="@dimen/text_button_text_size"
+				android:visibility="visible"
+				app:typeface="@string/font_roboto_medium"
+				tools:textColor="?attr/ctrl_active_color" />
+
 		</LinearLayout>
 
 		<FrameLayout

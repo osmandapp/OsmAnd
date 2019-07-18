@@ -97,7 +97,7 @@
                     android:id="@+id/tab_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="?attr/ctx_menu_info_view_bg"
+                    android:background="?attr/activity_background_color"
                     android:theme="?attr/search_tabbar_layout_theme"
                     app:tabGravity="fill"
                     app:tabMaxWidth="0dp"
@@ -109,7 +109,7 @@
                 android:id="@+id/button_toolbar_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="?attr/ctx_menu_info_view_bg"
+                android:background="?attr/activity_background_color"
                 android:orientation="vertical"
                 android:visibility="gone"
                 tools:visibility="visible">
@@ -194,7 +194,7 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:layout_gravity="bottom"
-			android:background="?attr/ctx_menu_info_view_bg"
+			android:background="?attr/activity_background_color"
 			android:orientation="vertical"
 			android:visibility="gone"
 			tools:visibility="visible">

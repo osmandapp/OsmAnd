@@ -64,4 +64,18 @@
     <string name="poi_transportation">交通</string>
     <string name="poi_public_transport">公共交通</string>
     <string name="poi_education">教育</string>
+    <string name="poi_aerialway_bicycle">自行车运输</string>
+    <string name="poi_telescope_type">类型</string>
+    <string name="poi_outdoor_seating">户外座位</string>
+    <string name="poi_smoking">吸烟</string>
+    <string name="poi_takeaway">外带</string>
+    <string name="poi_cocktails">鸡尾酒</string>
+    <string name="poi_washing_machine">洗衣机</string>
+    <string name="poi_motorcycle_services">服务</string>
+    <string name="poi_internet_access">互联网访问</string>
+    <string name="poi_club">俱乐部</string>
+    <string name="poi_sustenance">食物</string>
+    <string name="poi_cafe_and_restaurant">咖啡馆和餐厅</string>
+    <string name="poi_service">服务</string>
+    <string name="poi_water_supply_type">水供应类型</string>
 </resources>

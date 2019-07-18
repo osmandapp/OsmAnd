@@ -354,7 +354,7 @@ public class SearchCoreFactory {
 
 		private void searchByName(final SearchPhrase phrase, final SearchResultMatcher resultMatcher)
 				throws IOException {
-			if (phrase.getRadiusLevel() > 1 || phrase.getUnknownSearchWordLength() > 3 || phrase.getUnknownSearchWords().size() > 0) {
+			if (phrase.getRadiusLevel() > 1 || phrase.getUnknownSearchWordLength() > 3 || phrase.getUnknownSearchWords().size() > 0 || phrase.isSearchTypeAllowed(ObjectType.POSTCODE, true)) {
 				final boolean locSpecified = phrase.getLastTokenLocation() != null;
 				LatLon loc = phrase.getLastTokenLocation();
 				final List<SearchResult> immediateResults = new ArrayList<>();
@@ -516,16 +516,14 @@ public class SearchCoreFactory {
 			if (!phrase.isUnknownSearchWordPresent()) {
 				return false;
 			}
-			if (phrase.isNoSelectedType() && phrase.isUnknownSearchWordPresent()
-					&& phrase.isUnknownSearchWordComplete() && phrase.hasUnknownSearchWordPoiTypes()) {
-				return false;
-			}
+			boolean hasUnselectedType = phrase.isNoSelectedType() && phrase.isUnknownSearchWordPresent()
+					&& phrase.isUnknownSearchWordComplete() && phrase.hasUnknownSearchWordPoiTypes();
 			final BinaryMapIndexReader[] currentFile = new BinaryMapIndexReader[1];
 			Iterator<BinaryMapIndexReader> offlineIterator = phrase.getRadiusOfflineIndexes(BBOX_RADIUS,
 					SearchPhraseDataType.POI);
-			String searchWord = phrase.getUnknownWordToSearch();
-			final NameStringMatcher nm = phrase.getNameStringMatcher(searchWord, phrase.isUnknownSearchWordComplete());
 			String unknownSearchPhrase = phrase.getUnknownSearchPhrase().trim();
+			String searchWord = hasUnselectedType ? unknownSearchPhrase : phrase.getUnknownWordToSearch();
+			final NameStringMatcher nm = phrase.getNameStringMatcher(searchWord, phrase.isUnknownSearchWordComplete());
 			final NameStringMatcher phraseMatcher;
 			if (!Algorithms.isEmpty(unknownSearchPhrase)) {
 				phraseMatcher = new NameStringMatcher(unknownSearchPhrase, StringMatcherMode.CHECK_EQUALS);
@@ -1227,7 +1225,9 @@ public class SearchCoreFactory {
 
 	public static class SearchLocationAndUrlAPI extends SearchBaseAPI {
 
+		private static final int OLC_RECALC_DISTANCE_THRESHOLD = 100000; // 100 km
 		private int olcPhraseHash;
+		private LatLon olcPhraseLocation;
 		private ParsedOpenLocationCode cachedParsedCode;
 		private final List<String> citySubTypes = Arrays.asList("city", "town", "village");
 
@@ -1330,6 +1330,9 @@ public class SearchCoreFactory {
 						}
 					}
 				}
+				if (latLon == null && !parsedCode.isFull()) {
+					latLon = parsedCode.recover(phrase.getSettings().getOriginalLocation());
+				}
 				if (latLon != null) {
 					publishLocation(phrase, resultMatcher, lw, latLon);
 				}
@@ -1388,8 +1391,15 @@ public class SearchCoreFactory {
 				return -1;
 			}
 			int olcPhraseHash = p.getUnknownSearchPhrase().hashCode();
+			if (this.olcPhraseHash == olcPhraseHash && this.olcPhraseLocation != null) {
+				double distance = MapUtils.getDistance(p.getSettings().getOriginalLocation(), this.olcPhraseLocation);
+				if (distance > OLC_RECALC_DISTANCE_THRESHOLD) {
+					olcPhraseHash++;
+				}
+			}
 			if (this.olcPhraseHash != olcPhraseHash) {
 				this.olcPhraseHash = olcPhraseHash;
+				this.olcPhraseLocation = p.getSettings().getOriginalLocation();
 				cachedParsedCode = LocationParser.parseOpenLocationCode(p.getUnknownSearchPhrase());
 			}
 			return cachedParsedCode == null ? SEARCH_LOCATION_PRIORITY : SEARCH_MAX_PRIORITY;

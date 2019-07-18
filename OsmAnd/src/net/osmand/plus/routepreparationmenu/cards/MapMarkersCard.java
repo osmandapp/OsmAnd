@@ -97,7 +97,7 @@ public class MapMarkersCard extends BaseCard {
 			ImageView arrow = (ImageView) v.findViewById(R.id.direction);
 			Drawable arrowIcon = arrow.getDrawable();
 			if (arrowIcon instanceof DirectionDrawable) {
-				((DirectionDrawable) arrowIcon).setImage(R.drawable.ic_direction_arrow, nightMode ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light);
+				((DirectionDrawable) arrowIcon).setImage(R.drawable.ic_direction_arrow, nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
 			}
 
 			v.setBackgroundResource(AndroidUtils.resolveAttribute(ctx, android.R.attr.selectableItemBackground));
@@ -115,7 +115,7 @@ public class MapMarkersCard extends BaseCard {
 				LinearLayout.LayoutParams p = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, AndroidUtils.dpToPx(ctx, 1f));
 				p.setMargins(listTextPadding, 0, 0, 0);
 				div.setLayoutParams(p);
-				AndroidUtils.setBackgroundColor(ctx, div, nightMode, R.color.divider_light, R.color.divider_dark);
+				AndroidUtils.setBackgroundColor(ctx, div, nightMode, R.color.divider_color_light, R.color.divider_color_dark);
 				div.setVisibility(View.VISIBLE);
 				root.addView(div);
 			}

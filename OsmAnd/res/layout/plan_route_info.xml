@@ -30,7 +30,6 @@
 					android:id="@+id/modes_layout"
 					android:layout_width="match_parent"
 					android:layout_height="match_parent"
-					android:background="?attr/card_and_list_background_basic"
 					tools:ignore="UselessParent">
 
 					<LinearLayout
@@ -139,7 +138,7 @@
 							android:layout_marginRight="@dimen/list_content_padding"
 							android:gravity="left"
 							android:singleLine="true"
-							android:textColor="?attr/main_font_color_basic"
+							android:textColor="?android:textColorPrimary"
 							android:textSize="@dimen/default_list_text_size"
 							tools:text="My position" />
 
@@ -256,7 +255,7 @@
 							android:layout_marginRight="@dimen/list_content_padding"
 							android:gravity="left"
 							android:singleLine="true"
-							android:textColor="?attr/main_font_color_basic"
+							android:textColor="?android:textColorPrimary"
 							android:textSize="@dimen/default_list_text_size"
 							tools:text="Intermediate point" />
 
@@ -369,7 +368,7 @@
 							android:layout_marginRight="@dimen/list_content_padding"
 							android:gravity="left"
 							android:singleLine="true"
-							android:textColor="?attr/main_font_color_basic"
+							android:textColor="?android:textColorPrimary"
 							android:textSize="@dimen/default_list_text_size"
 							tools:text="Destination" />
 

@@ -4,9 +4,9 @@ import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.MapMarkersHelper;
@@ -14,8 +14,10 @@ import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.FavoriteImageDrawable;
+import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
-import net.osmand.plus.mapcontextmenu.builders.WptPtMenuBuilder;
+import net.osmand.plus.wikivoyage.menu.WikivoyageWptPtMenuBuilder;
+import net.osmand.plus.wikivoyage.menu.WikivoyageWptPtMenuController;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -25,11 +27,10 @@ public class WptPtMenuController extends MenuController {
 	private WptPt wpt;
 	private MapMarker mapMarker;
 
-	public WptPtMenuController(@NonNull MapActivity mapActivity, @NonNull PointDescription pointDescription, @NonNull WptPt wpt) {
-		super(new WptPtMenuBuilder(mapActivity, wpt), pointDescription, mapActivity);
+	public WptPtMenuController(@NonNull MenuBuilder menuBuilder,  @NonNull MapActivity mapActivity, @NonNull PointDescription pointDescription, @NonNull final WptPt wpt) {
+		super(menuBuilder, pointDescription, mapActivity);
 		this.wpt = wpt;
-
-		final MapMarkersHelper markersHelper = mapActivity.getMyApplication().getMapMarkersHelper();
+		MapMarkersHelper markersHelper = mapActivity.getMyApplication().getMapMarkersHelper();
 		mapMarker = markersHelper.getMapMarker(wpt);
 		if (mapMarker == null) {
 			mapMarker = markersHelper.getMapMarker(new LatLon(wpt.lat, wpt.lon));
@@ -92,7 +93,7 @@ public class WptPtMenuController extends MenuController {
 		if (Algorithms.isEmpty(getSubtypeStr())) {
 			return null;
 		} else {
-			return getIcon(R.drawable.ic_action_group_name_16, isLight() ? R.color.icon_color : R.color.ctx_menu_bottom_view_icon_dark);
+			return getIcon(R.drawable.ic_action_group_name_16, isLight() ? R.color.icon_color_default_light : R.color.ctx_menu_bottom_view_icon_dark);
 		}
 	}
 
@@ -137,5 +138,13 @@ public class WptPtMenuController extends MenuController {
 		} else {
 			return "";
 		}
+	}
+
+	public static WptPtMenuController getInstance(@NonNull MapActivity mapActivity, @NonNull PointDescription pointDescription, @NonNull final WptPt wpt) {
+		WptPtMenuController controller = WikivoyageWptPtMenuController.getInstance(mapActivity, pointDescription, wpt);
+		if (controller == null) {
+			controller = new WptPtMenuController(new WikivoyageWptPtMenuBuilder(mapActivity, wpt), mapActivity, pointDescription, wpt);
+		}
+		return controller;
 	}
 }

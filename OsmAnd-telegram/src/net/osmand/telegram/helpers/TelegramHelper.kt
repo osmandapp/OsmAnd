@@ -413,7 +413,7 @@ class TelegramHelper private constructor() {
 					}
 					TdApi.File.CONSTRUCTOR -> {
 						val file = obj as TdApi.File
-						client!!.send(TdApi.DownloadFile(file.id, 10), defaultHandler)
+						client!!.send(TdApi.DownloadFile(file.id, 10, 0, 0, true), defaultHandler)
 					}
 					else -> listener?.onTelegramError(-1, "Receive wrong response from TDLib: $obj")
 				}
@@ -524,7 +524,7 @@ class TelegramHelper private constructor() {
 			}
 			resultArticles.forEach {
 				client?.send(TdApi.SendInlineQueryResultMessage(shareInfo.chatId, 0, true,
-					true, inlineQueryResults.inlineQueryId, it.id)) { obj ->
+					true, inlineQueryResults.inlineQueryId, it.id, false)) { obj ->
 					handleTextLocationMessageUpdate(obj, shareInfo)
 				}
 			}
@@ -1342,7 +1342,7 @@ class TelegramHelper private constructor() {
 										}
 										TdApi.File.CONSTRUCTOR -> {
 											val file = obj as TdApi.File
-											client!!.send(TdApi.DownloadFile(file.id, 10), defaultHandler)
+											client!!.send(TdApi.DownloadFile(file.id, 10, 0, 0, true), defaultHandler)
 										}
 										else -> listener?.onTelegramError(-1, "Receive wrong response from TDLib: $obj")
 									}

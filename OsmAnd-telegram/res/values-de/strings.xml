@@ -16,7 +16,7 @@
     <string name="last_available_location">Letzter verfügbarer Standort</string>
     <string name="share_location_as">Standort teilen als</string>
     <string name="live_now_description">Kontakte und Gruppen, die ihren Standort mit Ihnen teilen.</string>
-    <string name="logout_from_osmand_telegram">Aus OsmAnd Telegram abmelden\?</string>
+    <string name="logout_from_osmand_telegram">Aus OsmAnd Tracker abmelden\?</string>
     <string name="shared_string_name">"Name "</string>
     <string name="by_distance">Nach Entfernung</string>
     <string name="by_name">Nach Namen</string>
@@ -35,7 +35,7 @@
     <string name="connected_account">Verbundenes Konto</string>
     <string name="shared_string_account">Konto</string>
     <string name="in_time">"in %1$s "</string>
-    <string name="osmand_connect_desc">Wählen Sie die OsmAnd-Version, die OsmAnd Telegram verwendet, um Positionen anzuzeigen.</string>
+    <string name="osmand_connect_desc">Wählen Sie die OsmAnd-Version, die OsmAnd Tracker verwendet, um Positionen anzuzeigen.</string>
     <string name="osmand_connect">OsmAnd verbinden</string>
     <string name="location_history_desc">Blendet Kontakte aus, die sich eine bestimmte Zeit lang nicht bewegt haben.</string>
     <string name="location_history">Standortverlauf</string>
@@ -64,7 +64,7 @@
     <string name="set_time">Zeit einstellen</string>
     <string name="my_location_search_hint">Suche: Gruppe oder Kontakt</string>
     <string name="show_on_map">Auf Karte anzeigen</string>
-    <string name="app_name">"OsmAnd Telegram "</string>
+    <string name="app_name">OsmAnd Online GPS-Tracker</string>
     <string name="phone_number_title">Telefonnummer</string>
     <string name="phone_number_descr">Telefonnummer in internationalem Format</string>
     <string name="shared_string_password">Passwort</string>
@@ -72,7 +72,7 @@
     <string name="authentication_code">Authentifizierungscode</string>
     <string name="authentication_code_descr">Telegram hat Ihnen einen Code für OsmAnd zur Anmeldung an Ihrem Konto gesendet.</string>
     <string name="enter_password">Passwort eingeben</string>
-    <string name="shared_string_login">Anmelden</string>
+    <string name="shared_string_login">Anmeldung</string>
     <string name="shared_string_logout">Abmelden</string>
     <string name="not_logged_in">Sie sind nicht angemeldet</string>
     <string name="shared_string_continue">Fortfahren</string>
@@ -81,10 +81,10 @@
     <string name="no_location_permission">Der App fehlt die Berechtigung, auf Standortdaten zuzugreifen.</string>
     <string name="gps_not_available">Bitte schalten Sie \"Standort\" in den Systemeinstellungen ein</string>
     <string name="osmand_service">Hintergrundmodus</string>
-    <string name="osmand_service_descr">OsmAnd Telegram läuft im Hintergrund bei ausgeschaltetem Bildschirm.</string>
+    <string name="osmand_service_descr">OsmAnd Tracker läuft im Hintergrund bei ausgeschaltetem Bildschirm.</string>
     <string name="shared_string_distance">Distanz</string>
     <string name="share_location">Standort teilen</string>
-    <string name="process_service">OsmAnd Telegram-Service</string>
+    <string name="process_service">OsmAnd Tracker-Service</string>
     <string name="osmand_logo">OsmAnd-Logo</string>
     <string name="install_osmand_dialog_message">Sie müssen zuerst die kostenlose oder kostenpflichtige Version von OsmAnd installieren</string>
     <string name="install_osmand">OsmAnd installieren</string>
@@ -127,15 +127,15 @@
     <string name="connecting_to_the_internet">Verbindung zum Internet</string>
     <string name="background_work_description">Akkuoptimierungseinstellungen, um die Standortfreigabe zu stabilisieren.</string>
     <string name="password_descr">Telegram-Passwort</string>
-    <string name="nm">kn</string>
+    <string name="nm">sm</string>
     <string name="nm_h">kn/h</string>
     <string name="last_updated_location">Zuletzt aktualisierter Ort:</string>
     <string name="not_possible_to_send_to_telegram_chats">Es ist nicht möglich, an Telegram-Chats zu senden:</string>
-    <string name="battery_optimization_description">Schalten Sie die Batterieoptimierung für OsmAnd Telegram aus, damit es nicht plötzlich im Hintergrund ausgeschaltet wird.</string>
-    <string name="logout_from_osmand_telegram_descr">Sind Sie sicher, dass Sie sich von OsmAnd Telegram abmelden möchten, so dass Sie den Standort nicht teilen oder den Standort anderer sehen können\?</string>
+    <string name="battery_optimization_description">Schalten Sie die Batterieoptimierung für OsmAnd Tracker aus, damit es nicht plötzlich im Hintergrund ausgeschaltet wird.</string>
+    <string name="logout_from_osmand_telegram_descr">Sind Sie sicher, dass Sie sich von OsmAnd Tracker abmelden möchten, so dass Sie den Standort nicht teilen oder den Standort anderer sehen können\?</string>
     <string name="disable_all_sharing_desc">Schaltet die Standortfreigabe für alle ausgewählten Chats aus (%1$d).</string>
     <string name="disable_all_sharing">Alle Freigaben deaktivieren</string>
-    <string name="disconnect_from_telegram_desc">Um den Zugriff auf die Standortfreigabe zu widerrufen, öffnen Sie Telegram, gehen zu Einstellungen → Datenschutz und Sicherheit → Sitzungen und beenden die OsmAnd Telegram-Sitzung.</string>
+    <string name="disconnect_from_telegram_desc">Um den Zugriff auf die Standortfreigabe zu widerrufen, öffnen Sie Telegram, gehen zu Einstellungen → Datenschutz und Sicherheit → Sitzungen und beenden die OsmAnd Tracker-Sitzung.</string>
     <string name="disconnect_from_telegram">So deaktivieren Sie OsmAnd Tracker von Telegram aus</string>
     <string name="logout_help_desc">So deaktivieren Sie OsmAnd Tracker von Telegram aus</string>
     <string name="stale_location">Keine Bewegung</string>
@@ -198,7 +198,6 @@
     <string name="privacy_policy_use_telegram">Telegram (die Messaging-App) wird verwendet, um sich mit Menschen zu verbinden und mit ihnen zu kommunizieren.</string>
     <string name="shared_string_ok">OK</string>
     <string name="location_recording_enabled">Standortaufzeichnung aktiviert</string>
-    <string name="app_name_short_online">Online-Tracker</string>
     <string name="app_name_short">OsmAnd-Tracker</string>
     <string name="shared_string_accept">Akzeptieren</string>
     <string name="telegram_privacy_policy">Telegram-Datenschutzerklärung</string>
@@ -235,4 +234,12 @@
     <string name="proxy_settings">Proxy-Einstellungen</string>
     <string name="proxy">Proxy</string>
     <string name="privacy">Datenschutz</string>
+    <string name="shared_string_select">Auswählen</string>
+    <string name="min_logging_distance">Minimaler Protokollierungsabstand</string>
+    <string name="min_logging_distance_descr">Filter: Mindestabstand zum Protokollieren eines neuen Punktes</string>
+    <string name="min_logging_accuracy">Minimale Protokollierungsgenauigkeit</string>
+    <string name="min_logging_accuracy_descr">Filter: keine Protokollierung, es sei denn, die Genauigkeit wird erreicht</string>
+    <string name="min_logging_speed">Minimale Protokollierungsgeschwindigkeit</string>
+    <string name="min_logging_speed_descr">Filter: keine Protokollierung unter der gewählten Geschwindigkeit</string>
+    <string name="gpx_settings">GPX-Einstellungen</string>
 </resources>

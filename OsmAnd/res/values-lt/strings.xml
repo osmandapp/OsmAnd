@@ -2392,7 +2392,6 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="context_menu_item_modify_note">Keisti OSM pastabą</string>
     <string name="fast_coordinates_input">Sparčioji koordinatės įvestis</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Vengti ledo kelių, brastų</string>
-    <string name="is_saved">išsaugota</string>
     <string name="move_to_history">Perkelti į istoriją</string>
     <string name="group_will_be_removed_after_restart">Grupė bus pašalinta iš naujo paleidus aplikaciją.</string>
     <string name="show_arrows_on_the_map">Rodyti rodykles žemėlapyje</string>
@@ -2643,7 +2642,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="rendering_attr_highway_class_cycleway_name">Dviračių takas</string>
     <string name="rendering_attr_undefined_name">Nenurodyta</string>
     <string name="time_of_day">Dienos metas</string>
-    <string name="road_types">Kelių tipai</string>
+    <string name="routeInfo_road_types_name">Kelių tipai</string>
     <string name="show_more">Rodyti daugiau</string>
     <string name="quick_action_show_hide_gpx_tracks">Rodyti/slėpti GPX pėdsakus</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Paspaudus šį mygtuką žemėlapyje parodomi arba paslepiami GPX pėdsakai</string>

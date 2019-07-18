@@ -33,6 +33,9 @@ public class GeneralRouter implements VehicleRouter {
 	public static final String PREFER_MOTORWAYS = "prefer_motorway";
 	public static final String ALLOW_PRIVATE = "allow_private";
 	public static final String ALLOW_MOTORWAYS = "allow_motorway";
+	public static final String DEFAULT_SPEED = "default_speed";
+	public static final String MIN_SPEED = "min_speed";
+	public static final String MAX_SPEED = "max_speed";
 
 	private final RouteAttributeContext[] objectAttributes;
 	public final Map<String, String> attributes;
@@ -44,6 +47,8 @@ public class GeneralRouter implements VehicleRouter {
 	private boolean shortestRoute;
 	private boolean heightObstacles;
 	private boolean allowPrivate;
+	private String filename = null;
+	private String profileName = "";
 
 	private Map<RouteRegion, Map<Integer, Integer>> regionConvert = new LinkedHashMap<RouteRegion, Map<Integer,Integer>>();
 	
@@ -53,10 +58,12 @@ public class GeneralRouter implements VehicleRouter {
 	private float roundaboutTurn;
 	private float rightTurn;
 	// speed in m/s
-	private float minDefaultSpeed = 10;
+	private float minSpeed = 0.28f;
 	// speed in m/s
-	private float maxDefaultSpeed = 10;
-	
+	private float defaultSpeed = 1f;
+	// speed in m/s
+	private float maxSpeed = 10f;
+
 	private TLongHashSet impassableRoads;
 	private GeneralRouterProfile profile;
 	
@@ -119,7 +126,23 @@ public class GeneralRouter implements VehicleRouter {
 		ruleToValue = new ArrayList<Object>();
 		parameters = new LinkedHashMap<String, GeneralRouter.RoutingParameter>();
 	}
-	
+
+	public String getFilename() {
+		return filename;
+	}
+
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
+
+	public String getProfileName() {
+		return profileName;
+	}
+
+	public void setProfileName(String profileName) {
+		this.profileName = profileName;
+	}
+
 	public GeneralRouter(GeneralRouter parent, Map<String, String> params) {
 		this.profile = parent.profile;
 		this.attributes = new LinkedHashMap<String, String>();
@@ -143,9 +166,17 @@ public class GeneralRouter implements VehicleRouter {
 		shortestRoute = params.containsKey(USE_SHORTEST_WAY) && parseSilentBoolean(params.get(USE_SHORTEST_WAY), false);
 		heightObstacles = params.containsKey(USE_HEIGHT_OBSTACLES) && parseSilentBoolean(params.get(USE_HEIGHT_OBSTACLES), false); 
 		if(shortestRoute) {
-			maxDefaultSpeed = Math.min(CAR_SHORTEST_DEFAULT_SPEED, maxDefaultSpeed);
+			maxSpeed = Math.min(CAR_SHORTEST_DEFAULT_SPEED, maxSpeed);
 		}
-
+		if (params.containsKey(DEFAULT_SPEED)) {
+			defaultSpeed = parseSilentFloat(params.get(DEFAULT_SPEED), defaultSpeed);
+		}
+		if (params.containsKey(MIN_SPEED)) {
+			minSpeed = parseSilentFloat(params.get(MIN_SPEED), minSpeed);
+		}
+		if (params.containsKey(MAX_SPEED)) {
+			maxSpeed = parseSilentFloat(params.get(MAX_SPEED), maxSpeed);
+		}
 	}
 	
 	public GeneralRouterProfile getProfile() {
@@ -170,10 +201,12 @@ public class GeneralRouter implements VehicleRouter {
 			rightTurn = parseSilentFloat(v, rightTurn);
 		} else if(k.equals("roundaboutTurn")) {
 			roundaboutTurn = parseSilentFloat(v, roundaboutTurn);
-		} else if(k.equals("minDefaultSpeed")) {
-			minDefaultSpeed = parseSilentFloat(v, minDefaultSpeed * 3.6f) / 3.6f;
-		} else if(k.equals("maxDefaultSpeed")) {
-			maxDefaultSpeed = parseSilentFloat(v, maxDefaultSpeed * 3.6f) / 3.6f;
+		} else if(k.equals("minDefaultSpeed") || k.equals("defaultSpeed")) {
+			defaultSpeed = parseSilentFloat(v, defaultSpeed * 3.6f) / 3.6f;
+		} else if( k.equals("minSpeed")) {
+			minSpeed = parseSilentFloat(v, minSpeed * 3.6f) / 3.6f;
+		} else if(k.equals("maxDefaultSpeed") || k.equals("maxSpeed")) {
+			maxSpeed = parseSilentFloat(v, maxSpeed * 3.6f) / 3.6f;
 		}
 	}
 	
@@ -359,13 +392,15 @@ public class GeneralRouter implements VehicleRouter {
 
 	@Override
 	public float defineRoutingSpeed(RouteDataObject road) {
-		return Math.min(defineVehicleSpeed(road), maxDefaultSpeed);
+		float spd = getObjContext(RouteDataObjectAttribute.ROAD_SPEED).evaluateFloat(road, defaultSpeed);
+		return spd;
 	}
 	
 	
 	@Override
 	public float defineVehicleSpeed(RouteDataObject road) {
-		return getObjContext(RouteDataObjectAttribute.ROAD_SPEED) .evaluateFloat(road, getMinDefaultSpeed());
+		float spd = getObjContext(RouteDataObjectAttribute.ROAD_SPEED).evaluateFloat(road, defaultSpeed);
+		return Math.max(Math.min(spd, maxSpeed), minSpeed);
 	}
 
 	@Override
@@ -374,16 +409,20 @@ public class GeneralRouter implements VehicleRouter {
 	}
 
 	@Override
-	public float getMinDefaultSpeed() {
-		return minDefaultSpeed;
+	public float getDefaultSpeed() {
+		return defaultSpeed;
 	}
 
 	@Override
-	public float getMaxDefaultSpeed() {
-		return maxDefaultSpeed;
+	public float getMinSpeed() {
+		return minSpeed;
 	}
 
-	
+	@Override
+	public float getMaxSpeed() {
+		return maxSpeed;
+	}
+
 	public double getLeftTurn() {
 		return leftTurn;
 	}

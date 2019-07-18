@@ -42,6 +42,29 @@ public class MapWidgetRegistry {
 	public static final String HIDE_PREFIX = "-";
 	public static final String SHOW_PREFIX = "";
 	public static final String SETTINGS_SEPARATOR = ";";
+
+	public static String WIDGET_NEXT_TURN = "next_turn";
+	public static String WIDGET_NEXT_TURN_SMALL = "next_turn_small";
+	public static String WIDGET_NEXT_NEXT_TURN = "next_next_turn";
+	public static String WIDGET_COMPASS = "compass";
+	public static String WIDGET_DISTANCE = "distance";
+	public static String WIDGET_INTERMEDIATE_DISTANCE = "intermediate_distance";
+	public static String WIDGET_TIME = "time";
+	public static String WIDGET_INTERMEDIATE_TIME = "intermediate_time";
+	public static String WIDGET_MAX_SPEED = "max_speed";
+	public static String WIDGET_SPEED = "speed";
+	public static String WIDGET_ALTITUDE = "altitude";
+	public static String WIDGET_GPS_INFO = "gps_info";
+	public static String WIDGET_MARKER_1 = "map_marker_1st";
+	public static String WIDGET_MARKER_2 = "map_marker_2nd";
+	public static String WIDGET_BEARING = "bearing";
+	public static String WIDGET_PLAIN_TIME = "plain_time";
+	public static String WIDGET_BATTERY = "battery";
+	public static String WIDGET_RULER = "ruler";
+
+	public static String WIDGET_STREET_NAME = "street_name";
+
+
 	private Set<MapWidgetRegInfo> leftWidgetSet = new TreeSet<>();
 	private Set<MapWidgetRegInfo> rightWidgetSet = new TreeSet<>();
 	private Map<ApplicationMode, Set<String>> visibleElementsFromSettings = new LinkedHashMap<>();
@@ -309,7 +332,6 @@ public class MapWidgetRegistry {
 	}
 
 	private void resetDefaultAppearance(ApplicationMode appMode) {
-//		settings.SHOW_RULER.resetToDefault();
 		settings.TRANSPARENT_MAP_THEME.resetToDefault();
 		settings.SHOW_STREET_NAME.resetToDefault();
 		settings.CENTER_POSITION_ON_MAP.resetToDefault();
@@ -317,11 +339,13 @@ public class MapWidgetRegistry {
 	}
 
 	public void addControlsAppearance(final MapActivity map, final ContextMenuAdapter cm, ApplicationMode mode) {
-		addControlId(map, cm, R.string.map_widget_transparent, settings.TRANSPARENT_MAP_THEME);
-		addControlId(map, cm, R.string.always_center_position_on_map, settings.CENTER_POSITION_ON_MAP);
 		if (mode != ApplicationMode.DEFAULT) {
 			addControlId(map, cm, R.string.map_widget_top_text, settings.SHOW_STREET_NAME);
 		}
+		cm.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.coordinates_widget, map)
+				.setIcon(R.drawable.ic_action_coordinates_widget)
+				.setSelected(settings.SHOW_COORDINATES_WIDGET.get())
+				.setListener(new ApearanceItemClickListener(settings.SHOW_COORDINATES_WIDGET, map)).createItem());
 		cm.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.map_markers, map)
 				.setDescription(settings.MAP_MARKERS_MODE.get().toHumanString(map))
 				.setListener(new ContextMenuAdapter.ItemClickListener() {
@@ -340,6 +364,8 @@ public class MapWidgetRegistry {
 						return false;
 					}
 				}).setLayout(R.layout.list_item_text_button).createItem());
+		addControlId(map, cm, R.string.map_widget_transparent, settings.TRANSPARENT_MAP_THEME);
+		addControlId(map, cm, R.string.always_center_position_on_map, settings.CENTER_POSITION_ON_MAP);
 	}
 
 	public void updateMapMarkersMode(MapActivity mapActivity) {
@@ -515,37 +541,37 @@ public class MapWidgetRegistry {
 										@Override
 										public boolean onMenuItemClick(MenuItem menuItem) {
 
-											switch (menuItem.getItemId()) {
-												case R.id.action_show:
-													setVisibility(adapter, pos, true, false);
-													return true;
-												case R.id.action_hide:
-													setVisibility(adapter, pos, false, false);
-													return true;
-												case R.id.action_collapse:
-													setVisibility(adapter, pos, true, true);
-													return true;
-												default:
-													if (menuItemIds != null) {
-														for (int menuItemId : menuItemIds) {
-															if (menuItem.getItemId() == menuItemId) {
-																r.changeState(menuItemId);
-																MapInfoLayer mil = mapActivity.getMapLayers().getMapInfoLayer();
-																if (mil != null) {
-																	mil.recreateControls();
-																}
-																ContextMenuItem item = adapter.getItem(pos);
-																item.setIcon(r.getDrawableMenu());
-																if (r.getMessage() != null) {
-																	item.setTitle(r.getMessage());
-																} else {
-																	item.setTitle(mapActivity.getResources().getString(r.getMessageId()));
-																}
-																adapter.notifyDataSetChanged();
-																return true;
+											int i = menuItem.getItemId();
+											if (i == R.id.action_show) {
+												setVisibility(adapter, pos, true, false);
+												return true;
+											} else if (i == R.id.action_hide) {
+												setVisibility(adapter, pos, false, false);
+												return true;
+											} else if (i == R.id.action_collapse) {
+												setVisibility(adapter, pos, true, true);
+												return true;
+											} else {
+												if (menuItemIds != null) {
+													for (int menuItemId : menuItemIds) {
+														if (menuItem.getItemId() == menuItemId) {
+															r.changeState(menuItemId);
+															MapInfoLayer mil = mapActivity.getMapLayers().getMapInfoLayer();
+															if (mil != null) {
+																mil.recreateControls();
 															}
+															ContextMenuItem item = adapter.getItem(pos);
+															item.setIcon(r.getDrawableMenu());
+															if (r.getMessage() != null) {
+																item.setTitle(r.getMessage());
+															} else {
+																item.setTitle(mapActivity.getResources().getString(r.getMessageId()));
+															}
+															adapter.notifyDataSetChanged();
+															return true;
 														}
 													}
+												}
 											}
 											return false;
 										}

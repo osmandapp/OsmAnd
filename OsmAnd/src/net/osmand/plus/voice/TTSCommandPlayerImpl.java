@@ -10,6 +10,7 @@ import android.speech.tts.TextToSpeech.OnInitListener;
 import android.speech.tts.TextToSpeech.OnUtteranceCompletedListener;
 import android.support.v7.app.AlertDialog;
 
+import android.widget.Toast;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
@@ -103,7 +104,7 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 	
 	// Called from the calculating route thread.
 	@Override
-	public synchronized void playCommands(CommandBuilder builder) {
+	public synchronized List<String> playCommands(CommandBuilder builder) {
 		final List<String> execute = builder.execute(); //list of strings, the speech text, play it
 		StringBuilder bld = new StringBuilder();
 		for (String s : execute) {
@@ -131,6 +132,7 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 		} else if (ctx != null && vrt.isMute()) {
 			// sendAlertToAndroidWear(ctx, bld.toString());
 		}
+		return execute;
 	}
 
 	@Override
@@ -215,7 +217,11 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 									mTts.setLanguage(newLocale);
 								} catch(Exception e) {
 									e.printStackTrace();
-									mTts.setLanguage(Locale.getDefault());
+									if (mTts.isLanguageAvailable(Locale.getDefault()) > 0) {
+										mTts.setLanguage(Locale.getDefault());
+									} else {
+										Toast.makeText(act, "TTS language not available", Toast.LENGTH_LONG).show();
+									}
 								}
 								if(speechRate != 1) {
 									mTts.setSpeechRate(speechRate);

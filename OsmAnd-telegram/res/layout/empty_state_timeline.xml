@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:gravity="center_horizontal"
+	android:orientation="vertical">
+
+	<ImageView
+		android:id="@+id/empty_state_background_image"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="@dimen/content_padding_big"
+		android:layout_marginBottom="@dimen/content_padding_standard"
+		android:scaleType="center"
+		android:src="@drawable/img_timeline_no_data"
+		android:tint="@color/icon_light" />
+
+	<net.osmand.telegram.ui.views.TextViewEx
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginBottom="@dimen/content_padding_half"
+		android:background="@null"
+		android:text="@string/timeline_no_data"
+		android:textColor="?android:attr/textColorSecondary"
+		android:textSize="20sp"
+		osmand:typeface="@string/font_roboto_medium" />
+
+	<TextView
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginLeft="@dimen/empty_state_descr_margin"
+		android:layout_marginRight="@dimen/empty_state_descr_margin"
+		android:background="@null"
+		android:gravity="center"
+		android:text="@string/timeline_no_data_descr"
+		android:textColor="?android:attr/textColorSecondary"
+		android:textSize="18sp" />
+
+</LinearLayout>

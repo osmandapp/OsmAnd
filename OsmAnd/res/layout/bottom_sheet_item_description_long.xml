@@ -11,4 +11,5 @@
     android:paddingRight="@dimen/content_padding"
     android:textColor="?android:textColorSecondary"
     android:textSize="@dimen/default_desc_text_size"
+	android:linksClickable="true"
     tools:text="Some long description"/>

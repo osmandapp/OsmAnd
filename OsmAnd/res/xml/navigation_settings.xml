@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <ListPreference
-        android:key="router_service"
-        android:summary="@string/router_service_descr"
-        android:title="@string/router_service"/>
 
     <PreferenceCategory
         android:key="routing_preferences"
@@ -74,6 +70,25 @@
             android:title="@string/delay_to_start_navigation"
             android:summary="@string/delay_to_start_navigation_descr" />
         -->
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:key="turn_screen_on"
+        android:title="@string/wake_on_voice">
+
+        <Preference
+            android:selectable="false"
+            android:summary="@string/wake_on_voice_descr" />
+
+        <ListPreference
+            android:key="turn_screen_on_time_int"
+            android:summary="@string/turn_screen_on_time_descr"
+            android:title="@string/shared_string_time"/>
+        
+        <CheckBoxPreference
+            android:key="turn_screen_on_sensor"
+            android:summary="@string/turn_screen_on_sensor_descr"
+            android:title="@string/turn_screen_on_sensor"/>
     </PreferenceCategory>
 
     <PreferenceCategory

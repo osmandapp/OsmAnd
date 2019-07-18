@@ -218,8 +218,9 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			String textTitle;
 			int minimalSearchRadius = searchUICore.getMinimalSearchRadius(searchPhrase);
 			if (searchUICore.isSearchMoreAvailable(searchPhrase) && minimalSearchRadius != Integer.MAX_VALUE) {
+				double rd = OsmAndFormatter.calculateRoundedDist(minimalSearchRadius, app);
 				textTitle = app.getString(R.string.nothing_found_in_radius) + " "
-						+ OsmAndFormatter.getFormattedDistance(minimalSearchRadius, app);
+						+ OsmAndFormatter.getFormattedDistance((float) rd, app, false);
 			} else {
 				textTitle = app.getString(R.string.search_nothing_found);
 			}
@@ -228,8 +229,9 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 
 			SearchWord word = searchPhrase.getLastSelectedWord();
 			if (word != null && word.getType() != null && word.getType().equals(POI_TYPE)) {
+				float rd = (float) OsmAndFormatter.calculateRoundedDist(searchUICore.getNextSearchRadius(searchPhrase), app);
 				String textIncreaseRadiusTo = app.getString(R.string.increase_search_radius_to,
-						OsmAndFormatter.getFormattedDistance(searchUICore.getNextSearchRadius(searchPhrase), app));
+						OsmAndFormatter.getFormattedDistance(rd, app, false));
 				((TextView) view.findViewById(R.id.title)).setText(textIncreaseRadiusTo);
 			} else {
 				((TextView) view.findViewById(R.id.title)).setText(app.getString(R.string.increase_search_radius));
@@ -433,7 +435,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			updateCompassVisibility(view, listItem);
 		}
 		view.setBackgroundColor(app.getResources().getColor(
-						app.getSettings().isLightContent() ? R.color.bg_color_light : R.color.bg_color_dark));
+						app.getSettings().isLightContent() ? R.color.list_background_color_light : R.color.list_background_color_dark));
 		View divider = view.findViewById(R.id.divider);
 		if (divider != null) {
 			if (position == getCount() - 1 || getItem(position + 1).getType() == QuickSearchListItemType.HEADER

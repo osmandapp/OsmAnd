@@ -211,6 +211,25 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 			return null
 		}
 
+	/**
+	 * Get list of all imported GPX files.
+	 *
+	 * @return list of imported gpx files.
+	 */
+	val importedGpxFiles: List<AGpxFile>?
+		get() {
+			if (mIOsmAndAidlInterface != null) {
+				try {
+					val files = mutableListOf<AGpxFile>()
+					mIOsmAndAidlInterface!!.getImportedGpx(files)
+					return files
+				} catch (e: RemoteException) {
+					e.printStackTrace()
+				}
+			}
+			return null
+		}
+
 	init {
 		connectOsmand()
 	}
@@ -1173,7 +1192,7 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 		if (mIOsmAndAidlInterface != null) {
 			try {
 				val leftButton = AContextMenuButton(buttonId, leftTextCaption, rightTextCaption, leftIconName, rightIconName, needColorizeIcon, enabled)
-				val params = ContextMenuButtonsParams(leftButton, null, paramsId, appPackage, MAP_LAYER_ID, true, osmandContextMenuCallbackId, mutableListOf())
+				val params = ContextMenuButtonsParams(leftButton, null, paramsId, appPackage, MAP_LAYER_ID, osmandContextMenuCallbackId, mutableListOf())
 				osmandContextMenuCallbackId = mIOsmAndAidlInterface!!.addContextMenuButtons(params, mIOsmAndAidlCallback)
 				return osmandContextMenuCallbackId >= 0
 			} catch (e: RemoteException) {

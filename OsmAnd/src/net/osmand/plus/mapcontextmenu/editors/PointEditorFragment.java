@@ -100,10 +100,10 @@ public abstract class PointEditorFragment extends BaseOsmAndFragment {
 			deleteButton.setVisibility(View.VISIBLE);
 		}
 
-		view.findViewById(R.id.background_layout).setBackgroundResource(!editor.isLight() ? R.color.ctx_menu_info_view_bg_dark : R.color.ctx_menu_info_view_bg_light);
-		view.findViewById(R.id.buttons_layout).setBackgroundResource(!editor.isLight() ? R.color.ctx_menu_info_view_bg_dark : R.color.ctx_menu_info_view_bg_light);
-		view.findViewById(R.id.title_view).setBackgroundResource(!editor.isLight() ? R.color.bg_color_dark : R.color.bg_color_light);
-		view.findViewById(R.id.description_info_view).setBackgroundResource(!editor.isLight() ? R.color.ctx_menu_info_view_bg_dark : R.color.ctx_menu_info_view_bg_light);
+		view.findViewById(R.id.background_layout).setBackgroundResource(!editor.isLight() ? R.color.activity_background_color_dark : R.color.activity_background_color_light);
+		view.findViewById(R.id.buttons_layout).setBackgroundResource(!editor.isLight() ? R.color.activity_background_color_dark : R.color.activity_background_color_light);
+		view.findViewById(R.id.title_view).setBackgroundResource(!editor.isLight() ? R.color.list_background_color_dark : R.color.list_background_color_light);
+		view.findViewById(R.id.description_info_view).setBackgroundResource(!editor.isLight() ? R.color.activity_background_color_dark : R.color.activity_background_color_light);
 
 		TextView nameCaption = (TextView) view.findViewById(R.id.name_caption);
 		AndroidUtils.setTextSecondaryColor(view.getContext(), nameCaption, !editor.isLight());
@@ -177,7 +177,7 @@ public abstract class PointEditorFragment extends BaseOsmAndFragment {
 	public Drawable getRowIcon(int iconId) {
 		PointEditor editor = getEditor();
 		boolean light = editor == null || editor.isLight();
-		return getIcon(iconId, light ? R.color.icon_color : R.color.icon_color_light);
+		return getIcon(iconId, light ? R.color.icon_color_default_light : R.color.icon_color_default_dark);
 	}
 
 	@Override
@@ -221,7 +221,7 @@ public abstract class PointEditorFragment extends BaseOsmAndFragment {
 
 	@Override
 	public int getStatusBarColorId() {
-		return R.color.status_bar_light;
+		return R.color.status_bar_color_light;
 	}
 
 	@Override

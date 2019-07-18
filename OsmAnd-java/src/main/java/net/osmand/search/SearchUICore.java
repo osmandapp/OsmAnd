@@ -218,7 +218,8 @@ public class SearchUICore {
 		}
 
 		public boolean sameSearchResult(SearchResult r1, SearchResult r2) {
-			if (r1.location != null && r2.location != null) {
+			if (r1.location != null && r2.location != null &&
+					!ObjectType.isTopVisible(r1.objectType) && !ObjectType.isTopVisible(r2.objectType)) {
 				if (r1.objectType == r2.objectType) {
 					if (r1.objectType == ObjectType.STREET) {
 						Street st1 = (Street) r1.object;
@@ -852,8 +853,8 @@ public class SearchUICore {
 			boolean topVisible1 = ObjectType.isTopVisible(o1.objectType);
 			boolean topVisible2 = ObjectType.isTopVisible(o2.objectType);
 			if ((!topVisible1 && !topVisible2) || (topVisible1 && topVisible2)) {
-				if (o1.isUnknownPhraseMatches() != o2.isUnknownPhraseMatches()) {
-					return o1.isUnknownPhraseMatches() ? -1 : 1;
+				if (o1.getUnknownPhraseMatchWeight() != o2.getUnknownPhraseMatchWeight()) {
+					return -Double.compare(o1.getUnknownPhraseMatchWeight(), o2.getUnknownPhraseMatchWeight());
 				} else if (o1.getFoundWordCount() != o2.getFoundWordCount()) {
 					return -Algorithms.compare(o1.getFoundWordCount(), o2.getFoundWordCount());
 				}

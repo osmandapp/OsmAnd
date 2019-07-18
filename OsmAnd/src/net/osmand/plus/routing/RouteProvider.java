@@ -4,6 +4,7 @@ package net.osmand.plus.routing;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Base64;
 
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
@@ -29,7 +30,6 @@ import net.osmand.plus.Version;
 import net.osmand.plus.activities.SettingsNavigationActivity;
 import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.router.GeneralRouter;
-import net.osmand.router.GeneralRouter.GeneralRouterProfile;
 import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.router.GeneralRouter.RoutingParameterType;
 import net.osmand.router.PrecalculatedRouteDirection;
@@ -52,6 +52,7 @@ import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URLConnection;
@@ -61,6 +62,8 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.zip.GZIPInputStream;
 
 import javax.xml.parsers.FactoryConfigurationError;
 import javax.xml.parsers.ParserConfigurationException;
@@ -297,22 +300,22 @@ public class RouteProvider {
 		if (params.start != null && params.end != null) {
 			if(log.isInfoEnabled()){
 				log.info("Start finding route from " + params.start + " to " + params.end +" using " + 
-						params.type.getName()); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+						params.mode.getRouteService().getName()); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 			}
 			try {
 				RouteCalculationResult res;
 				boolean calcGPXRoute = params.gpxRoute != null && !params.gpxRoute.points.isEmpty();
 				if(calcGPXRoute && !params.gpxRoute.calculateOsmAndRoute){
 					res = calculateGpxRoute(params);
-				} else if (params.type == RouteService.OSMAND) {
+				} else if (params.mode.getRouteService() == RouteService.OSMAND) {
 					res = findVectorMapsRoute(params, calcGPXRoute);
-				} else if (params.type == RouteService.BROUTER) {
+				} else if (params.mode.getRouteService() == RouteService.BROUTER) {
 					res = findBROUTERRoute(params);
 //				} else if (params.type == RouteService.ORS) {
 //					res = findORSRoute(params);
 //				} else if (params.type == RouteService.OSRM) {
 //					res = findOSRMRoute(params);
-				} else if (params.type == RouteService.STRAIGHT){
+				} else if (params.mode.getRouteService() == RouteService.STRAIGHT){
 					res = findStraightRoute(params);
 				}
 				else {
@@ -411,7 +414,6 @@ public class RouteProvider {
 		rp.start = routeParams.start;
 		rp.end = routeParams.end;
 		rp.leftSide = routeParams.leftSide;
-		rp.type = routeParams.type;
 		rp.fast = routeParams.fast;
 		rp.onlyStartPointChanged = routeParams.onlyStartPointChanged;
 		rp.previousToRecalculate =  routeParams.previousToRecalculate;
@@ -534,7 +536,6 @@ public class RouteProvider {
 		newParams.ctx = rParams.ctx;
 		newParams.calculationProgress = rParams.calculationProgress;
 		newParams.mode = rParams.mode;
-		newParams.type = RouteService.OSMAND;
 		newParams.leftSide = rParams.leftSide;
 		RouteCalculationResult newRes = null;
 		try {
@@ -595,7 +596,7 @@ public class RouteProvider {
 		OsmandSettings settings = params.ctx.getSettings();
 		router.setUseFastRecalculation(settings.USE_FAST_RECALCULATION.get());
 		
-		RoutingConfiguration.Builder config = params.ctx.getDefaultRoutingConfig();
+		RoutingConfiguration.Builder config = params.ctx.getRoutingConfig();
 		GeneralRouter generalRouter = SettingsNavigationActivity.getRouter(config, params.mode);
 		if(generalRouter == null) {
 			return applicationModeNotSupported(params);
@@ -612,7 +613,7 @@ public class RouteProvider {
 			for(int k = 0; k < latLon.length; k ++) {
 				latLon[k] = new LatLon(sublist.get(k).getLatitude(), sublist.get(k).getLongitude());
 			}
-			precalculated = PrecalculatedRouteDirection.build(latLon, generalRouter.getMaxDefaultSpeed());
+			precalculated = PrecalculatedRouteDirection.build(latLon, generalRouter.getMaxSpeed());
 			precalculated.setFollowNext(true);
 			//cf.planRoadDirection = 1;
 		}
@@ -680,19 +681,6 @@ public class RouteProvider {
 
 	private RoutingConfiguration initOsmAndRoutingConfig(Builder config, final RouteCalculationParams params, OsmandSettings settings,
 			GeneralRouter generalRouter) throws IOException, FileNotFoundException {
-		GeneralRouterProfile p ;
-		if (params.mode.isDerivedRoutingFrom(ApplicationMode.BICYCLE)) {
-			p = GeneralRouterProfile.BICYCLE;
-		} else if (params.mode.isDerivedRoutingFrom(ApplicationMode.PEDESTRIAN)) {
-			p = GeneralRouterProfile.PEDESTRIAN;
-		} else if(params.mode.isDerivedRoutingFrom(ApplicationMode.CAR)){
-			p = GeneralRouterProfile.CAR;
-		} else if (params.mode.isDerivedRoutingFrom(ApplicationMode.BOAT)) {
-			p = GeneralRouterProfile.BOAT;
-		} else {
-			return null;
-		}
-		
 		Map<String, String> paramsR = new LinkedHashMap<String, String>();
 		for(Map.Entry<String, RoutingParameter> e : generalRouter.getParameters().entrySet()){
 			String key = e.getKey();
@@ -712,16 +700,25 @@ public class RouteProvider {
 				paramsR.put(key, vl);
 			}
 		}
-		if (params.inSnapToRoadMode) {
-			paramsR.put(GeneralRouter.ALLOW_PRIVATE, "true");
+		Float defaultSpeed = params.mode.getDefaultSpeed();
+		if (defaultSpeed > 0) {
+			paramsR.put(GeneralRouter.DEFAULT_SPEED, String.valueOf(defaultSpeed));
 		}
+		Float minSpeed = settings.MIN_SPEED.getModeValue(params.mode);
+		if (minSpeed > 0) {
+			paramsR.put(GeneralRouter.MIN_SPEED, String.valueOf(minSpeed));
+		}
+		Float maxSpeed = settings.MAX_SPEED.getModeValue(params.mode);
+		if (maxSpeed > 0) {
+			paramsR.put(GeneralRouter.MAX_SPEED, String.valueOf(maxSpeed));
+		}
+
 		float mb = (1 << 20);
 		Runtime rt = Runtime.getRuntime();
 		// make visible
 		int memoryLimit = (int) (0.95 * ((rt.maxMemory() - rt.totalMemory()) + rt.freeMemory()) / mb);
 		log.warn("Use " + memoryLimit +  " MB Free " + rt.freeMemory() / mb + " of " + rt.totalMemory() / mb + " max " + rt.maxMemory() / mb);
-		
-		RoutingConfiguration cf = config.build(p.name().toLowerCase(), params.start.hasBearing() ? 
+		RoutingConfiguration cf = config.build( params.mode.getRoutingProfile(), params.start.hasBearing() ?
 				params.start.getBearing() / 180d * Math.PI : null, 
 				memoryLimit, paramsR);
 		return cf;
@@ -791,7 +788,7 @@ public class RouteProvider {
 	}
 
 	private RouteCalculationResult applicationModeNotSupported(RouteCalculationParams params) {
-		return new RouteCalculationResult("Application mode '"+ params.mode.toHumanStringCtx(params.ctx)+ "' is not supported.");
+		return new RouteCalculationResult("Application mode '"+ params.mode.toHumanString(params.ctx)+ "' is not supported.");
 	}
 
 	private RouteCalculationResult interrupted() {
@@ -831,6 +828,7 @@ public class RouteProvider {
 		if (route != null && route.points.size() > 0) {
 			directions = new ArrayList<RouteDirectionInfo>();
 			Iterator<WptPt> iterator = route.points.iterator();
+			float lasttime = 0;
 			while(iterator.hasNext()){
 				WptPt item = iterator.next();
 				try {
@@ -846,12 +844,15 @@ public class RouteProvider {
 						if (distanceToEnd.length > last.routePointOffset && distanceToEnd.length > offset) {
 							float lastDistanceToEnd = distanceToEnd[last.routePointOffset];
 							float currentDistanceToEnd = distanceToEnd[offset];
-							last.setAverageSpeed((lastDistanceToEnd - currentDistanceToEnd) / last.getAverageSpeed());
+							if (lasttime != 0) {
+								last.setAverageSpeed((lastDistanceToEnd - currentDistanceToEnd) / lasttime);
+							} 
 							last.distance = (int) Math.round(lastDistanceToEnd - currentDistanceToEnd);
 						}
 					} 
 					// save time as a speed because we don't know distance of the route segment
-					float avgSpeed = time;
+					lasttime = time;
+					float avgSpeed = defSpeed;
 					if (!iterator.hasNext() && time > 0) {
 						if (distanceToEnd.length > offset) {
 							avgSpeed = distanceToEnd[offset] / time;
@@ -1135,6 +1136,7 @@ public class RouteProvider {
 		double[] lons = new double[numpoints];
 		int index = 0;
 		String mode;
+		boolean addMissingTurns = true;
 		lats[index] = params.start.getLatitude();
 		lons[index] = params.start.getLongitude();
 		index++;
@@ -1147,9 +1149,25 @@ public class RouteProvider {
 		}
 		lats[index] = params.end.getLatitude();
 		lons[index] = params.end.getLongitude();
-		if (ApplicationMode.PEDESTRIAN == params.mode) {
+
+		Set<LatLon> impassableRoads = params.ctx.getAvoidSpecificRoads().getImpassableRoads().keySet();
+		double[] nogoLats = new double[impassableRoads.size()];
+		double[] nogoLons = new double[impassableRoads.size()];
+		double[] nogoRadi = new double[impassableRoads.size()];
+
+		if(impassableRoads.size() != 0) {
+			int nogoindex = 0;
+			for (LatLon nogos : impassableRoads) {
+				nogoLats[nogoindex] = nogos.getLatitude();
+				nogoLons[nogoindex] = nogos.getLongitude();
+				nogoRadi[nogoindex] = 10;
+				nogoindex++;
+			}
+		}
+		
+		if (params.mode.isDerivedRoutingFrom(ApplicationMode.PEDESTRIAN)) {
 			mode = "foot"; //$NON-NLS-1$
-		} else if (ApplicationMode.BICYCLE == params.mode) {
+		} else if (params.mode.isDerivedRoutingFrom(ApplicationMode.BICYCLE)) {
 			mode = "bicycle"; //$NON-NLS-1$
 		} else {
 			mode = "motorcar"; //$NON-NLS-1$
@@ -1157,12 +1175,18 @@ public class RouteProvider {
 		Bundle bpars = new Bundle();
 		bpars.putDoubleArray("lats", lats);
 		bpars.putDoubleArray("lons", lons);
+		bpars.putDoubleArray("nogoLats", nogoLats);
+		bpars.putDoubleArray("nogoLons", nogoLons);
+		bpars.putDoubleArray("nogoRadi", nogoRadi);
 		bpars.putString("fast", params.fast ? "1" : "0");
 		bpars.putString("v", mode);
 		bpars.putString("trackFormat", "gpx");
+		bpars.putString("turnInstructionFormat", "osmand");
+		bpars.putString("acceptCompressedResult", "true");
 
 		OsmandApplication ctx = (OsmandApplication) params.ctx;
 		List<Location> res = new ArrayList<Location>();
+		List<RouteDirectionInfo > dir = new ArrayList<>();
 
 		IBRouterService brouterService = ctx.getBRouterService();
 		if (brouterService == null) {
@@ -1172,29 +1196,34 @@ public class RouteProvider {
 			String gpxMessage = brouterService.getTrackFromParams(bpars);
 			if (gpxMessage == null)
 				gpxMessage = "no result from brouter";
-			if (!gpxMessage.startsWith("<")) {
+
+			boolean isZ64Encoded = gpxMessage.startsWith("ejY0"); // base-64 version of "z64"
+
+			if (!( isZ64Encoded || gpxMessage.startsWith("<") ) ) {
 				return new RouteCalculationResult(gpxMessage);
 			}
 
-			GPXFile gpxFile = GPXUtilities.loadGPXFile(new ByteArrayInputStream(gpxMessage.getBytes("UTF-8")));
-
-			for (Track track : gpxFile.tracks) {
-				for (TrkSegment ts : track.segments) {
-					for (WptPt p : ts.points) {
-						Location l = new Location("router"); //$NON-NLS-1$
-						l.setLatitude(p.lat);
-						l.setLongitude(p.lon);
-						if (p.ele != Double.NaN) {
-							l.setAltitude(p.ele);
-						}
-						res.add(l);
-					}
-				}
+			InputStream gpxStream;
+			if ( isZ64Encoded ) {
+				ByteArrayInputStream bais = new ByteArrayInputStream( Base64.decode(gpxMessage, Base64.DEFAULT) );
+				bais.read( new byte[3] ); // skip prefix
+				gpxStream = new GZIPInputStream( bais );
+			} else {
+				gpxStream = new ByteArrayInputStream(gpxMessage.getBytes("UTF-8"));
 			}
+
+			GPXFile gpxFile = GPXUtilities.loadGPXFile(gpxStream);
+
+			dir = parseOsmAndGPXRoute(res, gpxFile, true, params.leftSide, params.mode.getDefaultSpeed());
+
+			if (dir != null) {
+				addMissingTurns = false;
+			}
+
 		} catch (Exception e) {
 			return new RouteCalculationResult("Exception calling BRouter: " + e); //$NON-NLS-1$
 		}
-		return new RouteCalculationResult(res, null, params, null, true);
+		return new RouteCalculationResult(res, dir, params, null, addMissingTurns);
 	}
 
 	private RouteCalculationResult findStraightRoute(RouteCalculationParams params) {

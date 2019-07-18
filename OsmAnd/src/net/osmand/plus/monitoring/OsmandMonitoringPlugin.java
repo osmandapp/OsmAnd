@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AlertDialog;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -31,12 +32,15 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
+import net.osmand.plus.activities.SavingTrackHelper.SaveGpxResult;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.TextInfoWidget;
+import net.osmand.util.Algorithms;
 
+import java.lang.ref.WeakReference;
 import java.util.List;
 
 import gnu.trove.list.array.TIntArrayList;
@@ -258,10 +262,10 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		return monitoringControl;
 	}
 
-	public void controlDialog(final Activity map, final boolean showTrackSelection) {
+	public void controlDialog(final Activity activity, final boolean showTrackSelection) {
 		final boolean wasTrackMonitored = settings.SAVE_GLOBAL_TRACK_TO_GPX.get();
 		
-		AlertDialog.Builder bld = new AlertDialog.Builder(map);
+		AlertDialog.Builder bld = new AlertDialog.Builder(activity);
 		final TIntArrayList items = new TIntArrayList();
 		if (wasTrackMonitored) {
 			items.add(R.string.gpx_monitoring_stop);
@@ -288,10 +292,10 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 				int which = holder[0];
 				int item = items.get(which);
 				if(item == R.string.save_current_track){
-					saveCurrentTrack();
+					saveCurrentTrack(null, activity);
 				} else if(item == R.string.gpx_monitoring_start) {
-					if (app.getLocationProvider().checkGPSEnabled(map)) {
-						startGPXMonitoring(map, showTrackSelection);
+					if (app.getLocationProvider().checkGPSEnabled(activity)) {
+						startGPXMonitoring(activity, showTrackSelection);
 					}
 				} else if(item == R.string.gpx_monitoring_stop) {
 					stopRecording();
@@ -302,7 +306,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 				} else if(item == R.string.live_monitoring_start) {
 					final ValueHolder<Integer> vs = new ValueHolder<Integer>();
 					vs.value = settings.LIVE_MONITORING_INTERVAL.get();
-					showIntervalChooseDialog(map, app.getString(R.string.live_monitoring_interval) + " : %s", 
+					showIntervalChooseDialog(activity, app.getString(R.string.live_monitoring_interval) + " : %s",
 							app.getString(R.string.save_track_to_gpx_globally), SECONDS, MINUTES,
 							null, vs, showTrackSelection, new OnClickListener() {
 						@Override
@@ -330,11 +334,18 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	}
 
 	public void saveCurrentTrack() {
-		saveCurrentTrack(null);
+		saveCurrentTrack(null, null);
+	}
+	
+	public void saveCurrentTrack(@Nullable final Runnable onComplete) {
+		saveCurrentTrack(onComplete, null);
 	}
 
-	public void saveCurrentTrack(@Nullable final Runnable onComplete) {
-		app.getTaskManager().runInBackground(new OsmAndTaskRunnable<Void, Void, Void>() {
+	public void saveCurrentTrack(@Nullable final Runnable onComplete, @Nullable Activity activity) {
+
+		final WeakReference<Activity> activityRef = activity != null ? new WeakReference<>(activity) : null;
+
+		app.getTaskManager().runInBackground(new OsmAndTaskRunnable<Void, Void, SaveGpxResult>() {
 
 			@Override
 			protected void onPreExecute() {
@@ -343,11 +354,12 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 			}
 
 			@Override
-			protected Void doInBackground(Void... params) {
+			protected SaveGpxResult doInBackground(Void... params) {
 				try {
 					SavingTrackHelper helper = app.getSavingTrackHelper();
-					helper.saveDataToGpx(app.getAppCustomization().getTracksDir());
+					SaveGpxResult result = helper.saveDataToGpx(app.getAppCustomization().getTracksDir());
 					helper.close();
+					return result;
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -355,10 +367,17 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 			}
 
 			@Override
-			protected void onPostExecute(Void aVoid) {
+			protected void onPostExecute(SaveGpxResult result) {
 				isSaving = false;
 				app.getNotificationHelper().refreshNotifications();
 				updateControl();
+				if (activityRef != null && !Algorithms.isEmpty(result.getFilenames())) {
+					final Activity a = activityRef.get();
+					if (a instanceof FragmentActivity && !a.isFinishing()) {
+						OnSaveCurrentTrackFragment.showInstance(((FragmentActivity) a).getSupportFragmentManager(), result.getFilenames().get(0));
+					}
+				}
+				
 				if (onComplete != null) {
 					onComplete.run();
 				}
@@ -519,7 +538,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 			lp.setMargins(0, dp8 * 2, 0, 0);
 			divider.setLayoutParams(lp);
 			divider.setBackgroundColor(uiCtx.getResources().getColor(
-					light ? R.color.dashboard_divider_light : R.color.dashboard_divider_dark));
+					light ? R.color.divider_color_light : R.color.divider_color_dark));
 			ll.addView(divider);
 
 			final CheckBox cb = new CheckBox(uiCtx);

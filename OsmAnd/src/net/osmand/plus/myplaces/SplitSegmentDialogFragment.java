@@ -85,8 +85,8 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 		super.onActivityCreated(savedInstanceState);
 		TrackActivity trackActivity = requireTrackActivity();
 		listView.setBackgroundColor(getResources().getColor(
-				trackActivity.getMyApplication().getSettings().isLightContent() ? R.color.ctx_menu_info_view_bg_light
-						: R.color.ctx_menu_info_view_bg_dark));
+				trackActivity.getMyApplication().getSettings().isLightContent() ? R.color.activity_background_color_light
+						: R.color.activity_background_color_dark));
 		trackActivity.onAttachFragment(this);
 	}
 
@@ -129,7 +129,7 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 
 		adapter = new SplitSegmentsAdapter(new ArrayList<GpxDisplayItem>());
 		headerView = view.findViewById(R.id.header_layout);
-		((ImageView) headerView.findViewById(R.id.header_split_image)).setImageDrawable(ic.getIcon(R.drawable.ic_action_split_interval, app.getSettings().isLightContent() ? R.color.icon_color : 0));
+		((ImageView) headerView.findViewById(R.id.header_split_image)).setImageDrawable(ic.getIcon(R.drawable.ic_action_split_interval, app.getSettings().isLightContent() ? R.color.icon_color_default_light : 0));
 
 		listView.addHeaderView(trackActivity.getLayoutInflater().inflate(R.layout.gpx_split_segments_empty_header, null, false));
 		listView.addFooterView(trackActivity.getLayoutInflater().inflate(R.layout.list_shadow_footer, null, false));
@@ -249,10 +249,10 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 		final List<GpxDisplayGroup> groups = getDisplayGroups();
 		if (groups.size() > 0) {
 			colorId = app.getSettings().isLightContent() ?
-					R.color.primary_text_light : R.color.primary_text_dark;
+					R.color.text_color_primary_light : R.color.text_color_primary_dark;
 		} else {
 			colorId = app.getSettings().isLightContent() ?
-					R.color.secondary_text_light : R.color.secondary_text_dark;
+					R.color.text_color_secondary_light : R.color.text_color_secondary_dark;
 		}
 		int color = app.getResources().getColor(colorId);
 		title.setTextColor(color);
@@ -446,25 +446,28 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 				overviewTextView.setTextColor(defaultTextColor);
 				overviewTextView.setText(app.getString(R.string.shared_string_overview));
 				if (currentGpxDisplayItem != null) {
+					overviewTextView.setText(app.getString(R.string.shared_string_overview)	+ "  (" + Integer.toString(currentGpxDisplayItem.analysis.points) + ")");
 					((TextView) convertView.findViewById(R.id.fragment_count_text)).setText(app.getString(R.string.shared_string_time_span) + ": " + Algorithms.formatDuration((int) (currentGpxDisplayItem.analysis.timeSpan / 1000), app.accessibilityEnabled()));
 				}
 			} else {
 				if (currentGpxDisplayItem != null && currentGpxDisplayItem.analysis != null) {
-					overviewTextView.setTextColor(app.getSettings().isLightContent() ? app.getResources().getColor(R.color.gpx_split_overview_light) : app.getResources().getColor(R.color.gpx_split_overview_dark));
+					overviewTextView.setTextColor(app.getSettings().isLightContent() ? app.getResources().getColor(R.color.active_color_primary_light) : app.getResources().getColor(R.color.active_color_primary_dark));
 					if (currentGpxDisplayItem.group.isSplitDistance()) {
-						overviewImageView.setImageDrawable(ic.getIcon(R.drawable.ic_action_track_16, app.getSettings().isLightContent() ? R.color.gpx_split_overview_light : R.color.gpx_split_overview_dark));
+						overviewImageView.setImageDrawable(ic.getIcon(R.drawable.ic_action_track_16, app.getSettings().isLightContent() ? R.color.active_color_primary_light : R.color.active_color_primary_dark));
 						overviewTextView.setText("");
 						double metricStart = currentGpxDisplayItem.analysis.metricEnd - currentGpxDisplayItem.analysis.totalDistance;
 						overviewTextView.append(OsmAndFormatter.getFormattedDistance((float) metricStart, app));
 						overviewTextView.append(" - ");
 						overviewTextView.append(OsmAndFormatter.getFormattedDistance((float) currentGpxDisplayItem.analysis.metricEnd, app));
+						overviewTextView.append("  (" + Integer.toString(currentGpxDisplayItem.analysis.points) + ")");
 					} else if (currentGpxDisplayItem.group.isSplitTime()) {
-						overviewImageView.setImageDrawable(ic.getIcon(R.drawable.ic_action_time_span_16, app.getSettings().isLightContent() ? R.color.gpx_split_overview_light : R.color.gpx_split_overview_dark));
+						overviewImageView.setImageDrawable(ic.getIcon(R.drawable.ic_action_time_span_16, app.getSettings().isLightContent() ? R.color.active_color_primary_light : R.color.active_color_primary_dark));
 						overviewTextView.setText("");
 						double metricStart = currentGpxDisplayItem.analysis.metricEnd - (currentGpxDisplayItem.analysis.timeSpan / 1000);
 						overviewTextView.append(OsmAndFormatter.getFormattedDuration((int) metricStart, app));
 						overviewTextView.append(" - ");
 						overviewTextView.append(OsmAndFormatter.getFormattedDuration((int) currentGpxDisplayItem.analysis.metricEnd, app));
+						overviewTextView.append("  (" + Integer.toString(currentGpxDisplayItem.analysis.points) + ")");
 					}
 					((TextView) convertView.findViewById(R.id.fragment_count_text)).setText(app.getString(R.string.of, position, adapter.getCount() - 1));
 				}

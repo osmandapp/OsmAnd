@@ -253,6 +253,7 @@ public class BinaryMapTransportReaderAdapter {
 		int routeLength = codedIS.readRawVarint32();
 		int old = codedIS.pushLimit(routeLength);
 		net.osmand.data.TransportRoute dataObject = new net.osmand.data.TransportRoute();
+		dataObject.setFileOffset(filePointer);
 		boolean end = false;
 		long rid = 0;
 		int rx = 0;
@@ -407,7 +408,7 @@ public class BinaryMapTransportReaderAdapter {
 			int tag = WireFormat.getTagFieldNumber(t);
 			switch (tag) {
 			case 0:
-				return;
+				break;
 			case OsmandOdb.StringTable.S_FIELD_NUMBER:
 				if (current == values[i]) {
 					String value = codedIS.readString();
@@ -482,7 +483,7 @@ public class BinaryMapTransportReaderAdapter {
 			int filePointer) throws IOException {
 		TransportStop dataObject = new TransportStop();
 		dataObject.setFileOffset(codedIS.getTotalBytesRead());
-		// dataObject.setReferencesToRoutes(new int[] {filePointer});
+		dataObject.setReferencesToRoutes(new int[] {filePointer});
 		boolean end = false;
 		while(!end){
 			int t = codedIS.readTag();

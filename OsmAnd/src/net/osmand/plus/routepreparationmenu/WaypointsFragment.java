@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.support.annotation.ColorRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
@@ -330,6 +331,12 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 	}
 
 	@Override
+	public void onDestroyView() {
+		super.onDestroyView();
+		onDismiss();
+	}
+
+	@Override
 	public void onScrollChanged(int scrollY, boolean firstScroll, boolean dragging) {
 
 	}
@@ -385,7 +392,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 		}
 		boolean landscapeLayout = !portrait;
 		boolean nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
-		int colorActive = ContextCompat.getColor(mapActivity, nightMode ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light);
+		int colorActive = ContextCompat.getColor(mapActivity, nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
 		if (!landscapeLayout) {
 			AndroidUtils.setBackground(mapActivity, mainView, nightMode, R.drawable.route_info_menu_bg_light, R.drawable.route_info_menu_bg_dark);
 		} else {
@@ -395,7 +402,8 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 		((TextView) view.findViewById(R.id.sort_button)).setTextColor(colorActive);
 		((TextView) view.findViewById(R.id.add_button_descr)).setTextColor(colorActive);
 		((TextView) view.findViewById(R.id.clear_all_button_descr)).setTextColor(colorActive);
-		((TextView) view.findViewById(R.id.title)).setTextColor(ContextCompat.getColor(mapActivity, nightMode ? R.color.main_font_dark : R.color.main_font_light));
+		((TextView) view.findViewById(R.id.title)).setTextColor(
+				ContextCompat.getColor(mapActivity, nightMode ? R.color.text_color_primary_dark : R.color.text_color_primary_light));
 
 		FrameLayout addButton = view.findViewById(R.id.add_button);
 		TextView addButtonDescr = (TextView) view.findViewById(R.id.add_button_descr);
@@ -421,12 +429,16 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 			AndroidUtils.setBackground(mapActivity, clearButtonDescr, nightMode, R.drawable.btn_border_trans_light, R.drawable.btn_border_trans_dark);
 		}
 		AndroidUtils.setBackground(mapActivity, view.findViewById(R.id.cancel_button), nightMode, R.color.card_and_list_background_light, R.color.card_and_list_background_dark);
-		AndroidUtils.setBackground(mapActivity, view.findViewById(R.id.controls_divider), nightMode, R.color.divider_light, R.color.divider_dark);
+		AndroidUtils.setBackground(mapActivity, view.findViewById(R.id.controls_divider), nightMode, R.color.divider_color_light, R.color.divider_color_dark);
 
 		((TextView) view.findViewById(R.id.cancel_button_descr)).setTextColor(colorActive);
-		((TextView) view.findViewById(R.id.start_button_descr)).setText(getText(R.string.shared_string_apply));
 
-		setupRouteCalculationButtonProgressBar((ProgressBar) view.findViewById(R.id.progress_bar_button));
+		TextViewExProgress startButtonText = (TextViewExProgress) view.findViewById(R.id.start_button_descr);
+		ProgressBar progressBar = (ProgressBar) view.findViewById(R.id.progress_bar_button);
+		startButtonText.setText(getText(R.string.shared_string_apply));
+
+		int progressTextColor = nightMode ? R.color.active_buttons_and_links_text_disabled_dark : R.color.active_buttons_and_links_text_light;
+		setupRouteCalculationButtonProgressBar(progressBar, startButtonText, progressTextColor);
 	}
 
 	public void reloadListAdapter(ArrayAdapter<Object> listAdapter) {
@@ -550,19 +562,17 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 		}
 		TextViewExProgress textViewExProgress = (TextViewExProgress) view.findViewById(R.id.start_button_descr);
 		textViewExProgress.percent = progress / 100f;
-		int color = nightMode ? R.color.main_font_dark : R.color.card_and_list_background_light;
-		textViewExProgress.color1 = ContextCompat.getColor(mapActivity, color);
-		textViewExProgress.color2 = ContextCompat.getColor(mapActivity, R.color.description_font_and_bottom_sheet_icons);
 		textViewExProgress.invalidate();
 	}
 
-	public void setupRouteCalculationButtonProgressBar(@NonNull ProgressBar pb) {
+	private void setupRouteCalculationButtonProgressBar(@NonNull ProgressBar pb, @NonNull TextViewExProgress textProgress, @ColorRes int progressTextColor) {
 		OsmandApplication app = getMyApplication();
 		if (app != null) {
 			int bgColor = ContextCompat.getColor(app, nightMode ? R.color.activity_background_dark : R.color.activity_background_light);
-			int progressColor = ContextCompat.getColor(app, nightMode ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light);
-
-			pb.setProgressDrawable(AndroidUtils.createProgressDrawable(bgColor, progressColor));
+			int progressColor = ContextCompat.getColor(app, nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
+			pb.setProgressDrawable(AndroidUtils.createProgressDrawable(bgColor, ContextCompat.getColor(app, progressTextColor)));
+			textProgress.paint.setColor(progressColor);
+			textProgress.setTextColor(ContextCompat.getColor(app, R.color.active_buttons_and_links_text_disabled_dark));
 		}
 	}
 
@@ -754,7 +764,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 				}
 			}
 
-			AndroidUtils.setBackground(mapActivity, topDivider, nightMode, R.color.divider_light, R.color.divider_dark);
+			AndroidUtils.setBackground(mapActivity, topDivider, nightMode, R.color.divider_color_light, R.color.divider_color_dark);
 			topDivider.setVisibility(position != 0 ? View.VISIBLE : View.GONE);
 
 			move.setVisibility(notFlatTargets ? View.VISIBLE : View.GONE);
@@ -781,7 +791,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 		final LocationPoint point = ps.getPoint();
 		TextView text = (TextView) localView.findViewById(R.id.waypoint_text);
 		if (!topBar) {
-			text.setTextColor(ContextCompat.getColor(mapActivity, nightMode ? R.color.main_font_dark : R.color.main_font_light));
+			text.setTextColor(ContextCompat.getColor(mapActivity, nightMode ? R.color.text_color_primary_dark : R.color.text_color_primary_light));
 		}
 		TextView textShadow = (TextView) localView.findViewById(R.id.waypoint_text_shadow);
 		if (!edit) {
@@ -793,7 +803,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 			});
 		}
 		TextView textDist = (TextView) localView.findViewById(R.id.waypoint_dist);
-		textDist.setTextColor(ContextCompat.getColor(app, nightMode ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light));
+		textDist.setTextColor(ContextCompat.getColor(app, nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light));
 		((ImageView) localView.findViewById(R.id.waypoint_icon)).setImageDrawable(ps.getDrawable(mapActivity, app, nightMode));
 		int dist = -1;
 		boolean startPoint = ps.type == WaypointHelper.TARGETS && ((TargetPoint) ps.point).start;
@@ -905,6 +915,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 
 			fragmentManager.beginTransaction()
 					.add(R.id.routeMenuContainer, fragment, TAG)
+					.addToBackStack(TAG)
 					.commitAllowingStateLoss();
 
 			return true;
@@ -914,14 +925,24 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 		}
 	}
 
+	private void onDismiss() {
+		try {
+			if (useRouteInfoMenu) {
+				MapActivity mapActivity = (MapActivity) getActivity();
+				if (mapActivity != null) {
+					mapActivity.getMapLayers().getMapControlsLayer().showRouteInfoControlDialog();
+				}
+			}
+		} catch (Exception e) {
+			//
+		}
+	}
+
 	private void dismiss() {
 		try {
 			MapActivity mapActivity = (MapActivity) getActivity();
 			if (mapActivity != null) {
 				mapActivity.getSupportFragmentManager().beginTransaction().remove(this).commitAllowingStateLoss();
-				if (useRouteInfoMenu) {
-					mapActivity.getMapLayers().getMapControlsLayer().showRouteInfoControlDialog();
-				}
 			}
 		} catch (Exception e) {
 			//

@@ -2,6 +2,8 @@ package net.osmand.plus.activities;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
+import android.content.DialogInterface.OnDismissListener;
 import android.content.DialogInterface.OnMultiChoiceClickListener;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
@@ -13,42 +15,45 @@ import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AlertDialog.Builder;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import net.osmand.PlatformUtil;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.actions.AppModeDialog;
+import net.osmand.plus.profiles.AppProfileArrayAdapter;
+import net.osmand.plus.profiles.ProfileDataObject;
 import net.osmand.plus.views.SeekBarPreference;
+
+import org.apache.commons.logging.Log;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.Set;
 
 
 public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 		implements OnPreferenceChangeListener, OnPreferenceClickListener {
 
+	private static final Log LOG = PlatformUtil.getLog(SettingsBaseActivity.class);
 	public static final String INTENT_APP_MODE = "INTENT_APP_MODE";
-
+	private static final String PREV_MODE_KEY = "previous_mode";
+	private static final String SELECTED_MODE_KEY = "selected_mode";
+	
 	protected OsmandSettings settings;
 	protected final boolean profileSettings;
 	protected List<ApplicationMode> modes = new ArrayList<ApplicationMode>();
-	private ApplicationMode previousAppMode; 
+	private ApplicationMode previousAppMode;
+	protected ApplicationMode selectedAppMode;
 
 	private Map<String, Preference> screenPreferences = new LinkedHashMap<String, Preference>();
 	private Map<String, OsmandPreference<Boolean>> booleanPreferences = new LinkedHashMap<String, OsmandPreference<Boolean>>();
@@ -57,12 +62,13 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 	private Map<String, OsmandPreference<Integer>> seekBarPreferences = new LinkedHashMap<String, OsmandPreference<Integer>>();
 
 	private Map<String, Map<String, ?>> listPrefValues = new LinkedHashMap<String, Map<String, ?>>();
-	private AlertDialog profileDialog;
-	
+
 	public SettingsBaseActivity() {
 		this(false);
 	}
-	
+
+	private boolean isModeSelected = false;
+
 	public SettingsBaseActivity(boolean profile) {
 		profileSettings = profile;
 	}
@@ -174,6 +180,23 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 			}
 			final String propertyValueReplaced = propertyValue.replaceAll("\\s+","_");
 			Field f = R.string.class.getField("rendering_value_" + propertyValueReplaced + "_name");
+			if (f != null) {
+				Integer in = (Integer) f.get(null);
+				return ctx.getString(in);
+			}
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+		return propertyValue;
+	}
+
+	public static String getStringRouteInfoPropertyValue(Context ctx, String propertyValue) {
+		try {
+			if(propertyValue == null) {
+				return "";
+			}
+			final String propertyValueReplaced = propertyValue.replaceAll("\\s+","_");
+			Field f = R.string.class.getField("routeInfo_" + propertyValueReplaced + "_name");
 			if (f != null) {
 				Integer in = (Integer) f.get(null);
 				return ctx.getString(in);
@@ -328,116 +351,136 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 		settings = app.getSettings();
 		getToolbar().setTitle(R.string.shared_string_settings);
 
-		
 		if (profileSettings) {
 			modes.clear();
+			findViewById(R.id.selector_shadow).setVisibility(View.VISIBLE);
 			for (ApplicationMode a : ApplicationMode.values(app)) {
 				if (a != ApplicationMode.DEFAULT) {
 					modes.add(a);
 				}
 			}
-			List<String> s = new ArrayList<String>();
-			for (ApplicationMode a : modes) {
-				s.add(a.toHumanString(app));
-			}
-			SpinnerAdapter spinnerAdapter = new SpinnerAdapter(this,
-					R.layout.spinner_item, s);
-//			android.R.layout.simple_spinner_dropdown_item
-			spinnerAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
-			getSpinner().setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-				@Override
-				public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-					settings.APPLICATION_MODE.set(modes.get(position));
-					updateAllSettings();
-				}
 
+			getTypeButton().setVisibility(View.VISIBLE);
+			getTypeButton().setOnClickListener(new View.OnClickListener() {
 				@Override
-				public void onNothingSelected(AdapterView<?> parent) {
-
+				public void onClick(View v) {
+					selectAppModeDialog().show();
 				}
 			});
-			getSpinner().setAdapter(spinnerAdapter);
-			getSpinner().setVisibility(View.VISIBLE);
+
 		}
 		setPreferenceScreen(getPreferenceManager().createPreferenceScreen(this));
     }
 
+    protected AlertDialog.Builder selectAppModeDialog() {
+	    AlertDialog.Builder singleSelectDialogBuilder = new Builder(SettingsBaseActivity.this);
+	    singleSelectDialogBuilder.setTitle(R.string.profile_settings);
 
-	class SpinnerAdapter extends ArrayAdapter<String>{
+	    final List<ProfileDataObject> activeModes = new ArrayList<>();
+	    for (ApplicationMode am : ApplicationMode.values(getMyApplication())) {
+		    boolean isSelected = false;
+	    	if (am == selectedAppMode) {
+			    isSelected = true;
+		    }
+	    	if (am != ApplicationMode.DEFAULT) {
+			    activeModes.add(new ProfileDataObject(
+				    am.toHumanString(getMyApplication()),
+					getAppModeDescription(am),
+				    am.getStringKey(),
+				    am.getIconRes(),
+				    isSelected,
+				    am.getIconColorInfo()
+			    ));
+		    }
+	    }
 
+	    final AppProfileArrayAdapter modeNames = new AppProfileArrayAdapter(
+		    SettingsBaseActivity.this, R.layout.bottom_sheet_item_with_descr_and_radio_btn, activeModes, isModeSelected);
 
-		public SpinnerAdapter(Context context, int resource, List<String> objects) {
-			super(context, resource, objects);
-		}
+	    singleSelectDialogBuilder.setNegativeButton(R.string.shared_string_cancel,
+		    new OnClickListener() {
+			    @Override
+			    public void onClick(DialogInterface dialog, int which) {
+				    dialog.dismiss();
+			    }
+		    });
+	    singleSelectDialogBuilder.setOnDismissListener(new OnDismissListener() {
+		    @Override
+		    public void onDismiss(DialogInterface dialog) {
+			    if (!isModeSelected) {
+				    List<ApplicationMode> m = ApplicationMode.values(getMyApplication());
+				    setSelectedAppMode(m.get(m.size() > 1 ? 1 : 0));
+			    }
+		    }
+	    });
+	    singleSelectDialogBuilder.setAdapter(modeNames, new DialogInterface.OnClickListener() {
+		    @Override
+		    public void onClick(DialogInterface dialog, int which) {
+			    settings.APPLICATION_MODE.set(modes.get(which));
+			    updateModeButton(modes.get(which));
+			    updateAllSettings();
+		    }
+	    });
+	    return singleSelectDialogBuilder;
+    }
 
-		@Override
-		public View getDropDownView(int position, View convertView, ViewGroup parent) {
-			View view = super.getDropDownView(position, convertView, parent);
-			if (!settings.isLightActionBar()){
-				TextView textView = (TextView) view.findViewById(android.R.id.text1);
-				textView.setBackgroundColor(getResources().getColor(R.color.actionbar_dark_color));
-			}
-			return view;
-		}
-	}
-	
+    void updateModeButton(ApplicationMode mode) {
+		OsmandApplication app = getMyApplication();
+		boolean nightMode = !app.getSettings().isLightContent();
+	    String title = mode.toHumanString(SettingsBaseActivity.this);
 
+	    getModeTitleTV().setText(title);
+	    getModeSubTitleTV().setText(getAppModeDescription(mode));
+	    settings.APPLICATION_MODE.set(mode);
+	    selectedAppMode = mode;
+	    getModeIconIV().setImageDrawable(getMyApplication().getUIUtilities().getIcon(mode.getIconRes(),
+		    mode.getIconColorInfo().getColor(nightMode)));
+	    getDropDownArrow().setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_arrow_drop_down, !nightMode));
+	    isModeSelected = true;
+	    updateAllSettings();
+    }
+
+    private String getAppModeDescription(ApplicationMode mode) {
+	    String descr;
+	    if (!mode.isCustomProfile()) {
+		    descr = getString(R.string.profile_type_base_string);
+	    } else {
+		    descr = String.format(getString(R.string.profile_type_descr_string),
+			    mode.getParent().toHumanString(getMyApplication()));
+		    if (mode.getRoutingProfile() != null && mode.getRoutingProfile().contains("/")) {
+			    descr = descr.concat(", " + mode.getRoutingProfile()
+				    .substring(0, mode.getRoutingProfile().indexOf("/")));
+		    }
+	    }
+	    return descr;
+    }
 
 	@Override
 	protected void onResume() {
 		super.onResume();
 		if (profileSettings) {
-			previousAppMode = settings.getApplicationMode();
-			boolean found;
+			if (previousAppMode == null) {
+				previousAppMode = settings.getApplicationMode();
+			}
 			if (getIntent() != null && getIntent().hasExtra(INTENT_APP_MODE)) {
 				String modeStr = getIntent().getStringExtra(INTENT_APP_MODE);
 				ApplicationMode mode = ApplicationMode.valueOfStringKey(modeStr, previousAppMode);
-				found = setSelectedAppMode(mode);
+				setSelectedAppMode(mode);
 			} else {
-				found = setSelectedAppMode(previousAppMode);
-			}
-			if (!found) {
-				getSpinner().setSelection(0);
+				setSelectedAppMode(selectedAppMode);
 			}
 		} else {
 			updateAllSettings();
 		}
 	}
-	
-	protected void profileDialog() {
-		AlertDialog.Builder b = new AlertDialog.Builder(this);
-		final Set<ApplicationMode> selected = new LinkedHashSet<ApplicationMode>();
-		View v = AppModeDialog.prepareAppModeView(this, selected, false, null, true, true, false,
-				new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						if(selected.size() > 0) {
-							// test
-							setSelectedAppMode(selected.iterator().next());
-						}
-						if(profileDialog != null && profileDialog.isShowing()) {
-							profileDialog.dismiss();
-						}
-						profileDialog = null;
-					}
-				});
-		b.setTitle(R.string.profile_settings);
-		b.setView(v);
-		profileDialog = b.show();
-	}
 
-	protected boolean setSelectedAppMode(ApplicationMode am) {
-		int ind = 0;
-		boolean found = false;
+	protected void setSelectedAppMode(ApplicationMode am) {
 		for (ApplicationMode a : modes) {
-			if (am == a) {
-				getSpinner().setSelection(ind);
-				found = true;
+			if (am != null && am == a) {
+				updateModeButton(a);
 				break;
 			}
-			ind++;
 		}
-		return found;
 	}
 	
 	@Override
@@ -447,7 +490,36 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 			settings.APPLICATION_MODE.set(previousAppMode);
 		}
 	}
+	
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		if (profileSettings) {
+			if (previousAppMode != null) {
+				outState.putString(PREV_MODE_KEY, previousAppMode.getStringKey());
+			}
+			if (selectedAppMode != null) {
+				outState.putString(SELECTED_MODE_KEY, selectedAppMode.getStringKey());
+			} 
+		}
+	}
 
+	@Override
+	protected void onRestoreInstanceState(Bundle state) {
+		super.onRestoreInstanceState(state);
+		if (state != null) {
+			if (profileSettings && state.containsKey(SELECTED_MODE_KEY) && state.containsKey(PREV_MODE_KEY)) {
+				for (ApplicationMode am : ApplicationMode.values(getMyApplication())) {
+					if (am.getStringKey() == state.get(SELECTED_MODE_KEY)) {
+						setSelectedAppMode(am);
+					}
+					if (am.getStringKey() == state.get(PREV_MODE_KEY)) {
+						previousAppMode = am;
+					}
+				}
+			}	
+		}
+	}
 
 	public void updateAllSettings() {
 		for (OsmandPreference<Boolean> b : booleanPreferences.values()) {
@@ -541,7 +613,7 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 	}
 	
 
-	
+
 
 	public void showBooleanSettings(String[] vals, final OsmandPreference<Boolean>[] prefs) {
 		AlertDialog.Builder bld = new AlertDialog.Builder(this);

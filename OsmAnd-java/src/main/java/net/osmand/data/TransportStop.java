@@ -11,7 +11,7 @@ public class TransportStop extends MapObject {
 	private static final int DELETED_STOP = -1;
 
 	private int[] referencesToRoutes = null;
-	private Amenity amenity;
+	private TransportStopAggregated transportStopAggregated;
 	public int distance;
 	public int x31;
 	public int y31;
@@ -32,16 +32,62 @@ public class TransportStop extends MapObject {
 		return referencesToRoutes != null && referencesToRoutes.length == 1 && referencesToRoutes[0] == DELETED_STOP;
 	}
 
+	public boolean hasReferencesToRoutes() {
+		return referencesToRoutes != null && referencesToRoutes.length > 0;
+	}
+
 	public void setDeleted() {
 		this.referencesToRoutes = new int[] { DELETED_STOP };
 	}
 
 	public Amenity getAmenity() {
-		return amenity;
+		if (transportStopAggregated != null) {
+			return transportStopAggregated.getAmenity();
+		}
+		return null;
 	}
 
 	public void setAmenity(Amenity amenity) {
-		this.amenity = amenity;
+		if (transportStopAggregated == null) {
+			transportStopAggregated = new TransportStopAggregated();
+		}
+		transportStopAggregated.setAmenity(amenity);
+	}
+
+	public List<TransportStop> getLocalTransportStops() {
+		if (transportStopAggregated != null) {
+			return transportStopAggregated.getLocalTransportStops();
+		}
+		return Collections.emptyList();
+	}
+
+	public void addLocalTransportStop(TransportStop stop) {
+		if (transportStopAggregated == null) {
+			transportStopAggregated = new TransportStopAggregated();
+		}
+		transportStopAggregated.addLocalTransportStop(stop);
+	}
+
+	public List<TransportStop> getNearbyTransportStops() {
+		if (transportStopAggregated != null) {
+			return transportStopAggregated.getNearbyTransportStops();
+		}
+		return Collections.emptyList();
+	}
+
+	public void addNearbyTransportStop(TransportStop stop) {
+		if (transportStopAggregated == null) {
+			transportStopAggregated = new TransportStopAggregated();
+		}
+		transportStopAggregated.addNearbyTransportStop(stop);
+	}
+
+	public TransportStopAggregated getTransportStopAggregated() {
+		return transportStopAggregated;
+	}
+
+	public void setTransportStopAggregated(TransportStopAggregated stopAggregated) {
+		transportStopAggregated = stopAggregated;
 	}
 
 	@Override

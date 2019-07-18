@@ -94,7 +94,6 @@
     <string name="plan_route">பாதையை திட்டமிடு</string>
     <string name="shared_string_sort">வகைபடுத்து.</string>
     <string name="coordinate_input">ஒருங்கிணைப்பு உள்ளீடு</string>
-    <string name="is_saved">சேமிக்கபட்டது</string>
     <string name="marker_save_as_track_descr">பின்வரும் ஜிபிஎக்ஸ் கோப்புக்கு குறிப்பாங்களை ஏற்றுமதி செய்:</string>
     <string name="marker_save_as_track">ஜிபிஎக்ஸ் கோப்பாக சேமி</string>
     <string name="move_to_history">வறலாற்றுக்கு நகர்த்து</string>
@@ -423,8 +422,7 @@
     <string name="clear_tile_data">அனைத்து ஓலைகளையும் அழி</string>
     <string name="routing_attr_short_way_name">எரிபொருள்-திறனுள்ள வழி</string>
     <string name="routing_attr_short_way_description">எரிபொருள்-திறனுள்ள வழி (வழக்கமாக குறுகியது) பயன்படுத்தவும்.</string>
-    <string name="replace_favorite_confirmation">%1$s விருப்பத்தை நிச்சயமாக மாற்ற விரும்புகிறீர்களா \?
-\n</string>
+    <string name="replace_favorite_confirmation">%1$s விருப்பத்தை நிச்சயமாக மாற்ற விரும்புகிறீர்களா \?</string>
     <string name="rendering_attr_hideOverground_name">நிலப்பரப்பு பொருட்கள்</string>
     <string name="shared_string_change">மாற்றம்</string>
     <string name="get_started">தொடங்குக</string>
@@ -1400,4 +1398,5 @@
     <string name="avoid_pt_types_descr">வழிசெலுத்தலைத் தவிர்ப்பதற்கு பொதுப் போக்குவரத்து வகைகளைத் தேர்ந்தெடுக்கவும்:</string>
     <string name="quick_action_day_night_mode">%s விதம்</string>
     <string name="avoid_pt_types">போக்குவரத்து வகையை தவிர்க்க…</string>
+    <string name="turn_screen_on_router">திருப்பத்தில் எழுந்திரு</string>
 </resources>

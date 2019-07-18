@@ -88,9 +88,9 @@ public class ChoosePlanFreeBannerDialogFragment extends ChoosePlanDialogFragment
 				if (activity != null) {
 					OsmandApplication app = getOsmandApplication();
 					if (app.isPlusVersionInApp()) {
-						app.logEvent(getActivity(), "in_app_purchase_redirect_from_banner");
+						app.logEvent("in_app_purchase_redirect_from_banner");
 					} else {
-						app.logEvent(getActivity(), "paid_version_redirect_from_banner");
+						app.logEvent("paid_version_redirect_from_banner");
 						dismiss();
 					}
 					OsmandInAppPurchaseActivity.purchaseFullVersion(activity);

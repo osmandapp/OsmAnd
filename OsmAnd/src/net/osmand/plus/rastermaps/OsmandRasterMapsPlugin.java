@@ -272,53 +272,52 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 			@Override
 			public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> adapter, int itemId, final int pos, boolean isChecked, int[] viewCoordinates) {
 				final OsmandSettings settings = mapActivity.getMyApplication().getSettings();
-				switch (itemId) {
-					case R.string.layer_overlay:
-						toggleUnderlayState(mapActivity, RasterMapType.OVERLAY,
-								new OnMapSelectedCallback() {
-									@Override
-									public void onMapSelected(boolean canceled) {
-										ContextMenuItem item = adapter.getItem(pos);
+				if (itemId == R.string.layer_overlay) {
+					toggleUnderlayState(mapActivity, RasterMapType.OVERLAY,
+							new OnMapSelectedCallback() {
+								@Override
+								public void onMapSelected(boolean canceled) {
+									ContextMenuItem item = adapter.getItem(pos);
 
-										String overlayMapDescr = settings.MAP_OVERLAY.get();
+									String overlayMapDescr = settings.MAP_OVERLAY.get();
 
-										boolean hasOverlayDescription = overlayMapDescr != null;
-										overlayMapDescr = hasOverlayDescription ? overlayMapDescr
-												: mapActivity.getString(R.string.shared_string_none);
+									boolean hasOverlayDescription = overlayMapDescr != null;
+									overlayMapDescr = hasOverlayDescription ? overlayMapDescr
+											: mapActivity.getString(R.string.shared_string_none);
 
-										item.setDescription(overlayMapDescr);
-										item.setSelected(hasOverlayDescription);
-										item.setColorRes(hasOverlayDescription ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
-										adapter.notifyDataSetChanged();
-									}
-								});
-						return false;
-					case R.string.layer_underlay:
-						toggleUnderlayState(mapActivity, RasterMapType.UNDERLAY,
-								new OnMapSelectedCallback() {
-									@Override
-									public void onMapSelected(boolean canceled) {
-										ContextMenuItem item = adapter.getItem(pos);
+									item.setDescription(overlayMapDescr);
+									item.setSelected(hasOverlayDescription);
+									item.setColorRes(hasOverlayDescription ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+									adapter.notifyDataSetChanged();
+								}
+							});
+					return false;
+				} else if (itemId == R.string.layer_underlay) {
+					toggleUnderlayState(mapActivity, RasterMapType.UNDERLAY,
+							new OnMapSelectedCallback() {
+								@Override
+								public void onMapSelected(boolean canceled) {
+									ContextMenuItem item = adapter.getItem(pos);
 
-										String underlayMapDescr = settings.MAP_UNDERLAY.get();
+									String underlayMapDescr = settings.MAP_UNDERLAY.get();
 
-										boolean hasUnderlayDescription = underlayMapDescr != null;
-										underlayMapDescr = hasUnderlayDescription ? underlayMapDescr
-												: mapActivity.getString(R.string.shared_string_none);
+									boolean hasUnderlayDescription = underlayMapDescr != null;
+									underlayMapDescr = hasUnderlayDescription ? underlayMapDescr
+											: mapActivity.getString(R.string.shared_string_none);
 
-										item.setDescription(underlayMapDescr);
-										item.setSelected(hasUnderlayDescription);
-										item.setColorRes(hasUnderlayDescription ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+									item.setDescription(underlayMapDescr);
+									item.setSelected(hasUnderlayDescription);
+									item.setColorRes(hasUnderlayDescription ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
 
-										adapter.notifyDataSetChanged();
+									adapter.notifyDataSetChanged();
 
-										final OsmandSettings.CommonPreference<Boolean> hidePolygonsPref =
-												mapActivity.getMyApplication().getSettings().getCustomRenderBooleanProperty("noPolygons");
-										hidePolygonsPref.set(hasUnderlayDescription);
-										RasterMapMenu.refreshMapComplete(mapActivity);
-									}
-								});
-						return false;
+									final CommonPreference<Boolean> hidePolygonsPref =
+											mapActivity.getMyApplication().getSettings().getCustomRenderBooleanProperty("noPolygons");
+									hidePolygonsPref.set(hasUnderlayDescription);
+									RasterMapMenu.refreshMapComplete(mapActivity);
+								}
+							});
+					return false;
 				}
 				return true;
 			}

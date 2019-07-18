@@ -71,6 +71,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	private long duration = 0;
 	private SelectedGpxFile currentTrack;
 	private int points;
+	private int trkPoints = 0;
 	
 	public SavingTrackHelper(OsmandApplication ctx){
 		super(ctx, DATABASE_NAME, null, DATABASE_VERSION);
@@ -187,10 +188,11 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	}
 	
 	/**
-	 * @return warnings
+	 * @return warnings, filenames
 	 */
-	public synchronized List<String> saveDataToGpx(File dir ) {
-		List<String> warnings = new ArrayList<String>();
+	public synchronized SaveGpxResult saveDataToGpx(File dir) {
+		List<String> warnings = new ArrayList<>();
+		List<String> filenames = new ArrayList<>();
 		dir.mkdirs();
 		if (dir.getParentFile().canWrite()) {
 			if (dir.exists()) {
@@ -198,6 +200,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 
 				// save file
 				for (final String f : data.keySet()) {
+					log.debug("Filename: " + f);
 					File fout = new File(dir, f + ".gpx"); //$NON-NLS-1$
 					if (!data.get(f).isEmpty()) {
 						WptPt pt = data.get(f).findPointToShow();
@@ -213,6 +216,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 						}
 
 						String fileName = f + "_" + new SimpleDateFormat("HH-mm_EEE", Locale.US).format(new Date(pt.time)); //$NON-NLS-1$
+						filenames.add(fileName);
 						fout = new File(targetDir, fileName + ".gpx"); //$NON-NLS-1$
 						int ind = 1;
 						while (fout.exists()) {
@@ -223,7 +227,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 					Exception warn = GPXUtilities.writeGpxFile(fout, data.get(f));
 					if (warn != null) {
 						warnings.add(warn.getMessage());
-						return warnings;
+						return new SaveGpxResult(warnings, new ArrayList<String>());
 					}
 
 					GPXFile gpx = data.get(f);
@@ -250,12 +254,13 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		distance = 0;
 		points = 0;
 		duration = 0;
+		trkPoints = 0;
 		ctx.getSelectedGpxHelper().clearPoints(currentTrack.getModifiableGpxFile());
 		currentTrack.getModifiableGpxFile().tracks.clear();
 		currentTrack.getModifiablePointsToDisplay().clear();
 		currentTrack.getModifiableGpxFile().modifiedTime = System.currentTimeMillis();
 		prepareCurrentTrackForRecording();
-		return warnings;
+		return new SaveGpxResult(warnings, filenames);
 	}
 
 	public Map<String, GPXFile> collectRecordedData() {
@@ -457,6 +462,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		lastTimeUpdated = time;
 		WptPt pt = new GPXUtilities.WptPt(lat, lon, time, alt, speed, hdop);
 		addTrackPoint(pt, newSegment, time);
+		trkPoints++;
 	}
 	
 	private void addTrackPoint(WptPt pt, boolean newSegment, long time) {
@@ -632,6 +638,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		distance = analysis.totalDistance;
 		points = analysis.wptPoints;
 		duration = analysis.timeSpan;
+		trkPoints = analysis.points;
 	}
 
 	private void prepareCurrentTrackForRecording() {
@@ -666,6 +673,10 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		return points;
 	}
 	
+	public int getTrkPoints() {
+		return trkPoints;
+	}
+
 	public long getLastTimeUpdated() {
 		return lastTimeUpdated;
 	}
@@ -676,6 +687,25 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	
 	public SelectedGpxFile getCurrentTrack() {
 		return currentTrack;
+	}
+	
+	public class SaveGpxResult {
+
+		public SaveGpxResult(List<String> warnings, List<String> filenames) {
+			this.warnings = warnings;
+			this.filenames = filenames;
+		}
+
+		List<String> warnings;
+		List<String> filenames;
+
+		public List<String> getWarnings() {
+			return warnings;
+		}
+
+		public List<String> getFilenames() {
+			return filenames;
+		}
 	}
 
 }

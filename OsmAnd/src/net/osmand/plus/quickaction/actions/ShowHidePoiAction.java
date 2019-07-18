@@ -108,7 +108,7 @@ public class ShowHidePoiAction extends QuickAction {
 
 			for (PoiUIFilter filter : poiFilters) {
 				if (filter.isStandardFilter()) {
-					filter.setFilterByName(null);
+					filter.removeUnsavedFilterByName();
 				}
 				pf.addSelectedPoiFilter(filter);
 			}

@@ -365,6 +365,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 
 			List<LatLon> fullObjectsLatLon = new ArrayList<>();
 			List<LatLon> smallObjectsLatLon = new ArrayList<>();
+			Map<WptPt, SelectedGpxFile> pointFileMap = new HashMap<>();
 			// request to load
 			final QuadRect latLonBounds = tileBox.getLatLonBounds();
 			for (SelectedGpxFile g : selectedGPXFiles) {
@@ -375,6 +376,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 					if (o.lat >= latLonBounds.bottom && o.lat <= latLonBounds.top
 							&& o.lon >= latLonBounds.left && o.lon <= latLonBounds.right
 							&& o != contextMenuLayer.getMoveableObject()) {
+						pointFileMap.put(o, g);
 						MapMarker marker = null;
 						if (synced) {
 							if ((marker = mapMarkersHelper.getMapMarker(o)) == null) {
@@ -393,7 +395,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 							} else {
 								color = getPointColor(o, fileColor);
 							}
-							paintIcon.setColorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.MULTIPLY));
+							paintIcon.setColorFilter(new PorterDuffColorFilter(color | 0xff000000, PorterDuff.Mode.MULTIPLY));
 							canvas.drawBitmap(pointSmall, x - pointSmall.getWidth() / 2, y - pointSmall.getHeight() / 2, paintIcon);
 							smallObjectsLatLon.add(new LatLon(o.lat, o.lon));
 						} else {
@@ -401,7 +403,9 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 							fullObjectsLatLon.add(new LatLon(o.lat, o.lon));
 						}
 					}
-					pointFileMap.put(o, g);
+					if (o == contextMenuLayer.getMoveableObject()) {
+						pointFileMap.put(o, g);
+					}
 				}
 				for (Pair<WptPt, MapMarker> pair : fullObjects) {
 					WptPt o = pair.first;
@@ -426,6 +430,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 			}
 			this.fullObjectsLatLon = fullObjectsLatLon;
 			this.smallObjectsLatLon = smallObjectsLatLon;
+			this.pointFileMap = pointFileMap;
 		}
 	}
 
@@ -677,17 +682,20 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 
 		if (o instanceof WptPt) {
 			WptPt objectInMotion = (WptPt) o;
-			GPXFile gpxFile = pointFileMap.get(objectInMotion).getGpxFile();
-			gpxFile.updateWptPt(objectInMotion, position.getLatitude(),
-					position.getLongitude(), System.currentTimeMillis(), objectInMotion.desc,
-					objectInMotion.name, objectInMotion.category, objectInMotion.getColor());
-			syncGpx(gpxFile);
-			if (gpxFile.showCurrentTrack) {
-				if (callback != null) {
-					callback.onApplyMovedObject(true, objectInMotion);
+			SelectedGpxFile selectedGpxFile = pointFileMap.get(objectInMotion);
+			if (selectedGpxFile != null) {
+				GPXFile gpxFile = selectedGpxFile.getGpxFile();
+				gpxFile.updateWptPt(objectInMotion, position.getLatitude(),
+						position.getLongitude(), System.currentTimeMillis(), objectInMotion.desc,
+						objectInMotion.name, objectInMotion.category, objectInMotion.getColor());
+				syncGpx(gpxFile);
+				if (gpxFile.showCurrentTrack) {
+					if (callback != null) {
+						callback.onApplyMovedObject(true, objectInMotion);
+					}
+				} else {
+					new SaveGpxFileAsyncTask(view.getApplication(), callback, objectInMotion).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, gpxFile);
 				}
-			} else {
-				new SaveGpxFileAsyncTask(view.getApplication(), callback, objectInMotion).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, gpxFile);
 			}
 		} else if (callback != null) {
 			callback.onApplyMovedObject(false, o);

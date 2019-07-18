@@ -44,9 +44,9 @@
     <string name="add_device">הוספת מכשיר</string>
     <string name="share_location_as">שיתוף מיקום בתור</string>
     <string name="live_now_description">אנשי קשר וקבוצות שמשתפים אתך מיקום.</string>
-    <string name="battery_optimization_description">כיבוי מיטוב סוללה עבור טלגרם OsmAnd כדי שהשירות לא יכבה ברקע.</string>
-    <string name="logout_from_osmand_telegram_descr">לצאת מטלגרם OsmAnd כדי לכבות את האפשרות לשתף מיקום או לצפות במיקום של אחרים\?</string>
-    <string name="logout_from_osmand_telegram">לצאת מטלגרם OsmAnd\?</string>
+    <string name="battery_optimization_description">כיבוי מיטוב סוללה עבור עוקב OsmAnd כדי שהשירות לא יכבה ברקע.</string>
+    <string name="logout_from_osmand_telegram_descr">לצאת מעוקב OsmAnd כדי לכבות את האפשרות לשתף מיקום או לצפות במיקום של אחרים\?</string>
+    <string name="logout_from_osmand_telegram">לצאת מעוקב OsmAnd\?</string>
     <string name="shared_string_name">שם</string>
     <string name="by_distance">לפי מרחק</string>
     <string name="by_name">לפי שם</string>
@@ -72,12 +72,12 @@
     <string name="open_in_osmand">הצגה ב־OsmAnd</string>
     <string name="end_date">מועד סיום</string>
     <string name="start_date">מועד התחלה</string>
-    <string name="disconnect_from_telegram_desc">כדי לשלול גישה לשיתוף המיקום. יש לפתוח את טלגרם, לגשת להגדרות ← פרטיות ← הפעלות ולסגור את הפעלת הטלגרם של OsmAnd.</string>
+    <string name="disconnect_from_telegram_desc">כדי לשלול גישה לשיתוף המיקום. יש לפתוח את טלגרם, לגשת להגדרות ← פרטיות ← הפעלות ולסגור את הפעלת העוקב של OsmAnd.</string>
     <string name="disconnect_from_telegram">איך לכבות את העוקב של OsmAnd מטלגרם</string>
     <string name="logout_help_desc">איך לכבות את העוקב של OsmAnd מטלגרם</string>
     <string name="connected_account">חשבון מחובר</string>
     <string name="in_time">בעוד %1$s</string>
-    <string name="osmand_connect_desc">נא לבחור את גרסת ה־OsmAnd בה יעשה שימוש OsmAnd טלגרם לטובת הצגת מיקומים.</string>
+    <string name="osmand_connect_desc">נא לבחור את גרסת ה־OsmAnd בה יעשה שימוש עוקב OsmAnd לטובת הצגת מיקומים.</string>
     <string name="location_history_desc">להסתיר אנשי קשר שלא זזו במשך זה מסוים.</string>
     <string name="location_history">היסטוריית מיקום</string>
     <string name="stale_location_desc">הפעם האחרונה שאיש קשר זז.</string>
@@ -115,7 +115,7 @@
     <string name="my_location_search_hint">חיפוש: קבוצה או איש קשר</string>
     <string name="start_location_sharing">שיתוף מיקום</string>
     <string name="show_on_map">הצגה במפה</string>
-    <string name="app_name">OsmAnd Online GPS Tracker</string>
+    <string name="app_name">עוקב GPS מקוון של OsmAnd</string>
     <string name="phone_number_title">מספר טלפון</string>
     <string name="phone_number_descr">מספר טלפון בתצורה בינלאומית</string>
     <string name="shared_string_password">ססמה</string>
@@ -138,11 +138,11 @@
     <string name="gps_not_available">נא להפעיל את „מיקום” בהגדרות המערכת</string>
     <string name="location_service_no_gps_available">נא לבחור את אחד מספקי המיקום כדי לשתף את המיקום שלך.</string>
     <string name="osmand_service">מצב רקע</string>
-    <string name="osmand_service_descr">OsmAnd טלגרם פועל ברקע בזמן שהמסך כבוי.</string>
+    <string name="osmand_service_descr">עוקב OsmAnd פועל ברקע בזמן שהמסך כבוי.</string>
     <string name="shared_string_distance">מרחק</string>
     <string name="share_location">שיתוף מיקום</string>
     <string name="sharing_location">המיקום משותף</string>
-    <string name="process_service">שירות OsmAnd טלגרם</string>
+    <string name="process_service">שירות עוקב OsmAnd</string>
     <string name="osmand_logo">הלוגו של OsmAnd</string>
     <string name="install_osmand_dialog_message">עליך להתקין את הגרסה החופשית או את הגרסה בתשלום של OsmAnd תחילה</string>
     <string name="install_osmand">התקנת OsmAnd</string>
@@ -210,7 +210,6 @@
     <string name="timeline_available_for_free_now">ציר הזמן היא תכונה שמעתה זמינה בחינם.</string>
     <string name="disable_monitoring">השבתת מעקב</string>
     <string name="location_recording_enabled">הופעלה הקלטת מיקום</string>
-    <string name="app_name_short_online">עוקב בזמן אמת</string>
     <string name="app_name_short">עוקב OsmAnd</string>
     <string name="search_contacts">חיפוש באנשי קשר</string>
     <string name="search_contacts_descr">חיפוש בין כל הקבוצות ואנשי הקשר שלך.</string>
@@ -234,4 +233,14 @@
     <string name="proxy_settings">הגדרות מתווך</string>
     <string name="proxy">מתווך</string>
     <string name="privacy">פרטיות</string>
+    <string name="shared_string_select">בחירה</string>
+    <string name="min_logging_distance">מרחק תיעוד מזערי</string>
+    <string name="min_logging_distance_descr">מסנן: מרחק מזערי לתיעוד נקודה חדשה</string>
+    <string name="min_logging_accuracy">דיוק תיעוד מזערי</string>
+    <string name="min_logging_accuracy_descr">מסנן: אין תיעוד עד שרמת הדיוק הושגה</string>
+    <string name="min_logging_speed">מהירות תיעוד מזערית</string>
+    <string name="min_logging_speed_descr">מסנן: לא לתעד מתחת למהירות הנבחרת</string>
+    <string name="gpx_settings">הגדרות GPX</string>
+    <string name="timeline_no_data_descr">לא אספנו נתונים ליום הנבחר</string>
+    <string name="timeline_no_data">אין נתונים</string>
 </resources>

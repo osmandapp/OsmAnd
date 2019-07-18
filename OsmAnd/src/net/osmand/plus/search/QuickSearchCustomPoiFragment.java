@@ -113,8 +113,8 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 
 		listView = (ListView) view.findViewById(android.R.id.list);
 		listView.setBackgroundColor(getResources().getColor(
-				app.getSettings().isLightContent() ? R.color.ctx_menu_info_view_bg_light
-						: R.color.ctx_menu_info_view_bg_dark));
+				app.getSettings().isLightContent() ? R.color.activity_background_color_light
+						: R.color.activity_background_color_dark));
 
 		View header = getLayoutInflater(savedInstanceState).inflate(R.layout.list_shadow_header, null);
 		listView.addHeaderView(header, null, false);
@@ -262,7 +262,7 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 				}
 				secondaryIconView.setImageDrawable(
 						ic.getIcon(R.drawable.ic_action_additional_option,
-								app.getSettings().isLightContent() ? R.color.icon_color_light : 0));
+								app.getSettings().isLightContent() ? R.color.icon_color_default_dark : 0));
 				check.setOnCheckedChangeListener(null);
 				check.setChecked(filter.isTypeAccepted(category));
 				String textString = category.getTranslation();

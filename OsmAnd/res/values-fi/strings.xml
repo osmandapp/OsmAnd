@@ -1972,7 +1972,6 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="plan_route">Suunnittele reitti</string>
     <string name="shared_string_sort">Lajittele</string>
     <string name="coordinate_input">Koordinaattien syöttö</string>
-    <string name="is_saved">on talletettu</string>
     <string name="marker_save_as_track_descr">Vie markkerisi seuraavaan GPX-tiedostoon:</string>
     <string name="marker_save_as_track">Tallenna GPX-tiedostona</string>
     <string name="move_to_history">Siirrä historiaan</string>
@@ -2304,7 +2303,7 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="rendering_attr_highway_class_path_name">Polku</string>
     <string name="rendering_attr_highway_class_cycleway_name">Pyörätie</string>
     <string name="rendering_attr_undefined_name">Määrittelemätön</string>
-    <string name="road_types">Tietyypit</string>
+    <string name="routeInfo_road_types_name">Tietyypit</string>
     <string name="shared_string_swap">Muuta</string>
     <string name="show_more">Näytä lisää</string>
     <string name="tracks_on_map">Näytä jäljet</string>

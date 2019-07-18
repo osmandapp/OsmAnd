@@ -22,7 +22,7 @@
         <item name="android:gravity">center_vertical</item>
         <item name="android:textSize">@dimen/default_desc_text_size</item>
         <item name="typeface">@string/font_roboto_medium</item>
-        <item name="android:textColor">?attr/dashboard_subheader_text_color</item>
+        <item name="android:textColor">?android:textColorSecondary</item>
         <item name="android:layout_marginLeft">@dimen/subHeaderMarginLeft</item>
     </style>
 
@@ -101,34 +101,34 @@
     </style>
 
     <style name="TextAppearance.App.DarkTextInputLayout" parent="@android:style/TextAppearance">
-        <item name="android:textColor">@color/color_dialog_buttons_dark</item>
+        <item name="android:textColor">@color/active_color_primary_dark</item>
     </style>
 
     <!-- Osmand themes styles -->
     <style name="OsmandLightTheme" parent="Theme.AppCompat.Light">
-        <item name="android:statusBarColor">@color/status_bar_light</item>
+        <item name="android:statusBarColor">@color/status_bar_color_light</item>
         <item name="mapBackground">@color/map_background_color_light</item>
         <item name="chart_marker_background">@drawable/chart_marker_background_light</item>
         <item name="routeParameterTitleColor">@color/color_myloc_distance</item>
-        <item name="ctx_menu_info_divider">@color/ctx_menu_info_divider_light</item>
-        <item name="ctx_menu_card_btn">@color/ctx_menu_card_btn_light</item>
-        <item name="searchbar_text">@color/searchbar_text_light</item>
-        <item name="searchbar_text_hint">@color/searchbar_text_hint_light</item>
-        <item name="list_divider">@color/list_divider_dark</item>
+        <item name="ctx_menu_info_divider">@color/divider_color_light</item>
+        <item name="ctx_menu_card_btn">@color/inactive_buttons_and_links_bg_light</item>
+        <item name="searchbar_text">@color/text_color_primary_light</item>
+        <item name="searchbar_text_hint">@color/text_color_secondary_light</item>
+        <item name="list_divider">@color/divider_color_light</item>
         <item name="expandable_category_color">?android:attr/colorBackground</item>
         <item name="bottomToolBarColor">@color/tool_bar_color_light</item>
         <item name="downloadButtonBackground">@drawable/download_light</item>
-        <item name="pstsTabBackground">@color/actionbar_light_color</item>
-        <item name="pstsUnderlineColor">@color/actionbar_light_color</item>
-        <item name="pstsIndicatorColor">@color/color_white</item>
-        <item name="pstsTextColor">@color/color_white</item>
-        <item name="pstsInactiveTextColor">@color/icon_color</item>
+        <item name="pstsTabBackground">@color/app_bar_color_light</item>
+        <item name="pstsUnderlineColor">@color/app_bar_color_light</item>
+        <item name="pstsIndicatorColor">@color/active_color_primary_light</item>
+        <item name="pstsTextColor">@color/text_color_tab_active_light</item>
+        <item name="pstsInactiveTextColor">@color/searchbar_tab_inactive_light</item>
         <item name="btn_flat_bg">@drawable/btn_flat</item>
         <item name="btn_border_bg">@drawable/btn_border_bg_light</item>
         <item name="android:windowContentOverlay">@null</item>
-        <item name="actionModeBackground">@color/actionbar_light_color</item>
+        <item name="actionModeBackground">@color/app_bar_color_light</item>
         <item name="actionBarStyle">@style/Widget.Styled.ActionBarLight</item>
-        <item name="bg_color">@color/bg_color_light</item>
+        <item name="bg_color">@color/list_background_color_light</item>
         <item name="btn_round_border">@drawable/btn_round_border_light</item>
         <item name="btn_round_border_2">@drawable/btn_round_border_light_2</item>
         <item name="bg_card">@drawable/bg_card_light</item>
@@ -137,14 +137,15 @@
         <item name="bottom_menu_view_bg">@drawable/bg_bottom_menu_light</item>
         <item name="left_menu_view_bg">@drawable/bg_left_menu_light</item>
         <item name="bg_point_editor_view">@drawable/bg_point_editor_view_light</item>
-        <item name="dashboard_divider">@color/dashboard_divider_light</item>
+        <item name="dashboard_divider">@color/divider_color_light</item>
         <item name="divider_color">@color/divider_color</item>
         <item name="dashboard_button">@drawable/dashboard_button_light</item>
-        <item name="ctx_menu_info_view_bg">@color/ctx_menu_info_view_bg_light</item>
+        <item name="activity_background_color">@color/activity_background_color_light</item>
+        <item name="list_background_color">@color/list_background_color_light</item>
         <item name="ctx_menu_controller_bg">@drawable/context_menu_controller_bg_light</item>
         <item name="ctx_menu_controller_text_color">@drawable/context_menu_controller_text_color_light</item>
         <item name="ctx_menu_divider">@color/ctx_menu_buttons_divider_light</item>
-        <item name="search_background">@color/search_background_dark</item>
+        <item name="search_background">@color/activity_background_color_dark</item>
         <item name="actionModeCloseDrawable">@drawable/ic_action_mode_back</item>
         <item name="actionModeStyle">@style/WhiteActionMode</item>
         <item name="actionMenuTextColor">@color/color_white</item>
@@ -157,24 +158,25 @@
         <item name="expandable_list_item_background">
             @drawable/expandable_list_item_background_light
         </item>
-        <item name="expandable_list_background">@color/list_item_light</item>
+        <item name="expandable_list_background">@color/list_background_color_light</item>
         <item name="size_progress_bar">@drawable/size_progressbar_light</item>
         <item name="dash_parking_bg">@drawable/dash_parking_light</item>
-        <item name="dashboard_subheader_text_color">@color/dashboard_subheader_text_light</item>
-        <item name="dashboard_general_button_text_color">
-            @color/dashboard_general_button_text_light
-        </item>
+        <item name="dashboard_general_button_text_color">@color/active_color_primary_light</item>
         <item name="android:listChoiceIndicatorMultiple">@drawable/check_light</item>
-        <item name="android:textColorPrimary">@color/color_black</item>
+
+        <item name="android:textColorPrimary">@color/text_color_primary_light</item>
+        <item name="android:textColorSecondary">@color/text_color_secondary_light</item>
+        <item name="android:textColorTertiary">@color/text_color_tertiary_light</item>
+
         <item name="spinnerItemTextColor">@color/color_black</item>
         <item name="spinnerListBackground">@color/spinner_list_background_light</item>
         <item name="colorButtonNormal">@color/color_white</item>
 
         <item name="colorPrimary">@color/osmand_orange</item>
         <item name="colorPrimaryDark">@color/osmand_orange_dark</item>
-        <item name="colorAccent">@color/dashboard_blue</item>
+        <item name="colorAccent">@color/active_color_primary_light</item>
 
-        <item name="android:actionModeBackground">@color/actionbar_light_color</item>
+        <item name="android:actionModeBackground">@color/app_bar_color_light</item>
         <item name="android:actionBarStyle">@style/Widget.Styled.ActionBarLight</item>
         <item name="android:actionModeCloseDrawable">@drawable/ic_action_mode_back</item>
         <item name="android:actionModeStyle">@style/WhiteActionMode</item>
@@ -182,17 +184,20 @@
         <item name="actionOverflowButtonStyle">@style/OverflowMenuButton</item>
 
         <item name="circle_dialog_bg">@drawable/circle_dialog_bg_light</item>
-        <item name="dialog_inactive_text_color">@color/icon_color_light</item>
-        <item name="secondary_icon_color">@color/icon_color_light</item>
-        <item name="primary_icon_color">@color/icon_color</item>
+
+        <item name="secondary_icon_color">@color/icon_color_secondary_light</item>
+        <item name="default_icon_color">@color/icon_color_default_light</item>
+        <item name="primary_icon_color">@color/icon_color_primary_light</item>
+        <item name="text_color_tab_active">@color/text_color_tab_active_light</item>
+        <item name="text_color_tab_active_white">@color/text_color_secondary_light</item>
+
         <item name="appbar_layout_theme">@style/OsmandLightTheme.DarkActionbar</item>
         <item name="search_tabbar_layout_theme">@style/OsmandLightTheme.SearchTabbar</item>
         <item name="toolbar_theme">@style/OsmandLightTheme.Toolbar</item>
         <item name="new_app_theme">@style/OsmandLightTheme.NewAppTheme</item>
-        <item name="android:textColorSecondary">@color/icon_color</item>
         <item name="contextMenuButtonColor">@color/map_widget_blue</item>
 
-        <item name="color_dialog_buttons">@color/color_dialog_buttons_light</item>
+        <item name="color_dialog_buttons">@color/active_color_primary_light</item>
 
         <item name="popupMenuStyle">@style/PopupMenuLight</item>
 
@@ -203,12 +208,12 @@
         <item name="subscription_active_bg_color">@color/subscription_active_bg_color_light</item>
         <item name="subscription_active_div_color">@color/subscription_active_div_color_light</item>
 
-        <item name="dialog_bg_color">@color/dialog_bg_color_light</item>
-        <item name="dialog_transparent_bg_color">@color/dialog_transparent_bg_color_light</item>
-        <item name="dialog_title_color">@color/dialog_title_color_light</item>
-        <item name="dialog_description_color">@color/dialog_description_color_light</item>
-        <item name="dialog_text_description_color">@color/dialog_text_description_color</item>
-        <item name="card_description_text_color">@color/card_description_text_color_light</item>
+        <item name="dialog_bg_color">@color/activity_background_color_light</item>
+        <item name="dialog_transparent_bg_color">@color/activity_background_transparent_color_light</item>
+        <item name="dialog_title_color">@color/text_color_primary_light</item>
+        <item name="dialog_description_color">@color/text_color_primary_light</item>
+        <item name="dialog_text_description_color">@color/text_color_secondary_light</item>
+        <item name="card_description_text_color">@color/text_color_tertiary_light</item>
 
         <item name="wikivoyage_bg_color">@color/wikivoyage_bg_light</item>
         <item name="wikivoyage_card_bg_color">@color/wikivoyage_card_bg_light</item>
@@ -219,9 +224,9 @@
         <item name="wikivoyage_bottom_bar_bg_color">@color/wikivoyage_bottom_bar_bg_light</item>
         <item name="wikivoyage_bottom_bar_divider_color">@color/wikivoyage_bottom_bar_divider_light</item>
         <item name="wikivoyage_secondary_btn_bg_color">@color/wikivoyage_secondary_btn_bg_light</item>
-        <item name="wikivoyage_primary_btn_text_color">@color/wikivoyage_primary_btn_text_light</item>
+        <item name="wikivoyage_primary_btn_text_color">@color/active_buttons_and_links_text_light</item>
         <item name="wikivoyage_welcome_bg_color">@color/wikivoyage_welcome_bg_light</item>
-        <item name="wikivoyage_primary_text_color">@color/wikivoyage_primary_text_light</item>
+        <item name="wikivoyage_primary_text_color">@color/text_color_primary_light</item>
 
         <item name="wikivoyage_travel_card_bg">@drawable/travel_card_bg_light</item>
         <item name="wikivoyage_travel_card_stroke_bg">@drawable/travel_card_stroke_bg_light</item>
@@ -240,12 +245,26 @@
         <item name="route_info_bg">@color/route_info_bg_light</item>
 
         <item name="flow_toolbar_bg">@drawable/flow_toolbar_bg_light</item>
-        <item name="divider_color_basic">@color/divider_light</item>
-        <item name="main_font_color_basic">@color/main_font_light</item>
-        <item name="active_color_basic">@color/active_buttons_and_links_light</item>
+        <item name="divider_color_basic">@color/divider_color_light</item>
+        <item name="main_font_color_basic">@color/text_color_primary_light</item>
+        <item name="active_color_basic">@color/active_color_primary_light</item>
         <item name="card_and_list_background_basic">@color/card_and_list_background_light</item>
         <item name="activity_background_basic">@color/activity_background_light</item>
         <item name="pages_bg">@drawable/pages_bg_light</item>
+        <item name="dlg_btn_primary">@drawable/dlg_btn_primary_light</item>
+        <item name="dlg_btn_primary_text">@color/dlg_btn_primary_text_light</item>
+        <item name="dlg_btn_secondary">@drawable/dlg_btn_secondary_light</item>
+        <item name="dlg_btn_secondary_text">@color/dlg_btn_secondary_text_light</item>
+        <item name="dlg_btn_stroked">@drawable/dlg_btn_stroked_light</item>
+        <item name="profile_save_btn">@drawable/btn_round_profile_blue</item>
+        <item name="profile_cancel_btn">@drawable/btn_round_profile_gray</item>
+        <item name="android:textColor">@color/text_color_primary_light</item>
+
+        <item name="buttonBarNegativeButtonStyle">@style/DialogButtonStyleLight</item>
+        <item name="buttonBarPositiveButtonStyle">@style/DialogButtonStyleLight</item>
+        <item name="buttonBarNeutralButtonStyle">@style/DialogButtonStyleLight</item>
+        <item name="colorBackgroundFloating">@color/list_background_color_light</item>
+        <item name="android:colorBackgroundFloating">@color/list_background_color_light</item>
     </style>
 
     <style name="OverflowMenuButton" parent="@style/Widget.AppCompat.ActionButton.Overflow">
@@ -268,7 +287,7 @@
     </style>
 
     <style name="OsmandLightTheme.NoActionbar.Preferences">
-        <item name="android:textColorSecondary">@color/color_black</item>
+        <item name="android:textColorSecondary">@color/text_color_secondary_light</item>
     </style>
 
     <style name="OsmandLightTheme.DarkActionbar">
@@ -282,8 +301,8 @@
     <style name="OsmandLightTheme.SearchTabbar">
         <item name="android:textColorPrimary">@color/osmand_orange</item>
         <item name="colorAccent">@color/osmand_orange</item>
-        <item name="android:textColorSecondary">@color/searchbar_tab_inactive_light</item>
-        <item name="android:textColorHint">@color/searchbar_tab_inactive_light</item>
+        <item name="android:textColorSecondary">@color/text_color_secondary_light</item>
+        <item name="android:textColorHint">@color/text_color_secondary_light</item>
     </style>
 
     <style name="OsmandLightTheme.Toolbar">
@@ -300,7 +319,7 @@
         <item name="android:dropDownSelector">?attr/selectableItemBackground</item>
         <item name="android:divider">@null</item>
         <item name="overlapAnchor">true</item>
-        <item name="android:textColorPrimary">@color/color_dialog_buttons_light</item>
+        <item name="android:textColorPrimary">@color/active_color_primary_light</item>
     </style>
 
     <style name="OsmandDarkTheme.DarkActionbar">
@@ -310,8 +329,8 @@
     <style name="OsmandDarkTheme.SearchTabbar">
         <item name="android:textColorPrimary">@color/osmand_orange</item>
         <item name="colorAccent">@color/osmand_orange</item>
-        <item name="android:textColorSecondary">@color/searchbar_tab_inactive_dark</item>
-        <item name="android:textColorHint">@color/searchbar_tab_inactive_dark</item>
+        <item name="android:textColorSecondary">@color/text_color_secondary_dark</item>
+        <item name="android:textColorHint">@color/text_color_secondary_dark</item>
     </style>
 
     <style name="OsmandLightTheme.BottomSheet">
@@ -336,7 +355,7 @@
     </style>
 
     <style name="OsmandDarkTheme.NoActionbar.Preferences">
-        <item name="android:textColorSecondary">@color/color_white</item>
+        <item name="android:textColorSecondary">@color/text_color_secondary_dark</item>
     </style>
 
     <style name="OsmandDarkTheme.NoAnimation">
@@ -353,28 +372,28 @@
     </style>
 
     <style name="OsmandDarkTheme" parent="Theme.AppCompat">
-        <item name="android:statusBarColor">@color/status_bar_dark</item>
+        <item name="android:statusBarColor">@color/status_bar_color_dark</item>
         <item name="mapBackground">@color/map_background_color_dark</item>
         <item name="chart_marker_background">@drawable/chart_marker_background_dark</item>
         <item name="routeParameterTitleColor">@color/osmand_orange</item>
-        <item name="ctx_menu_info_divider">@color/ctx_menu_info_divider_dark</item>
-        <item name="ctx_menu_card_btn">@color/ctx_menu_card_btn_dark</item>
-        <item name="searchbar_text">@color/searchbar_text_dark</item>
-        <item name="searchbar_text_hint">@color/searchbar_text_hint_dark</item>
-        <item name="list_divider">@color/list_divider_light</item>
+        <item name="ctx_menu_info_divider">@color/divider_color_dark</item>
+        <item name="ctx_menu_card_btn">@color/inactive_buttons_and_links_bg_dark</item>
+        <item name="searchbar_text">@color/text_color_primary_dark</item>
+        <item name="searchbar_text_hint">@color/text_color_secondary_dark</item>
+        <item name="list_divider">@color/divider_color_dark</item>
         <item name="expandable_category_color">?android:attr/colorBackground</item>
         <item name="bottomToolBarColor">@color/tool_bar_color_dark</item>
         <item name="downloadButtonBackground">@drawable/download_dark</item>
-        <item name="pstsTabBackground">@color/actionbar_dark_color</item>
-        <item name="pstsUnderlineColor">@color/actionbar_dark_color</item>
-        <item name="pstsIndicatorColor">@color/actionbar_light_color</item>
-        <item name="pstsTextColor">@color/color_white</item>
-        <item name="pstsInactiveTextColor">@color/dash_search_icon_dark</item>
+        <item name="pstsTabBackground">@color/app_bar_color_dark</item>
+        <item name="pstsUnderlineColor">@color/app_bar_color_dark</item>
+        <item name="pstsIndicatorColor">@color/active_color_primary_light</item>
+        <item name="pstsTextColor">@color/text_color_tab_active_dark</item>
+        <item name="pstsInactiveTextColor">@color/searchbar_tab_inactive_dark</item>
         <item name="btn_flat_bg">@drawable/btn_flat_night</item>
         <item name="btn_border_bg">@drawable/btn_border_bg_dark</item>
-        <item name="actionModeBackground">@color/actionbar_dark_color</item>
+        <item name="actionModeBackground">@color/app_bar_color_dark</item>
         <item name="actionBarStyle">@style/Widget.Styled.ActionBarDark</item>
-        <item name="bg_color">@color/bg_color_dark</item>
+        <item name="bg_color">@color/list_background_color_dark</item>
         <item name="btn_round_border">@drawable/btn_round_border_dark</item>
         <item name="btn_round_border_2">@drawable/btn_round_border_dark_2</item>
         <item name="bg_card">@drawable/bg_card_dark</item>
@@ -383,14 +402,15 @@
         <item name="bottom_menu_view_bg">@drawable/bg_bottom_menu_dark</item>
         <item name="left_menu_view_bg">@drawable/bg_left_menu_dark</item>
         <item name="bg_point_editor_view">@drawable/bg_point_editor_view_dark</item>
-        <item name="dashboard_divider">@color/dashboard_divider_dark</item>
-        <item name="divider_color">@color/dashboard_divider_dark</item>
+        <item name="dashboard_divider">@color/divider_color_dark</item>
+        <item name="divider_color">@color/divider_color_dark</item>
         <item name="dashboard_button">@drawable/dashboard_button_dark</item>
-        <item name="ctx_menu_info_view_bg">@color/ctx_menu_info_view_bg_dark</item>
+        <item name="activity_background_color">@color/activity_background_color_dark</item>
+        <item name="list_background_color">@color/list_background_color_dark</item>
         <item name="ctx_menu_controller_bg">@drawable/context_menu_controller_bg_dark</item>
         <item name="ctx_menu_controller_text_color">@drawable/context_menu_controller_text_color_dark</item>
         <item name="ctx_menu_divider">@color/ctx_menu_buttons_divider_dark</item>
-        <item name="search_background">@color/color_white</item>
+        <item name="search_background">@color/activity_background_color_light</item>
         <item name="switch_ex_background">@drawable/switch_ex_background_dark</item>
         <item name="switch_ex_text_color">@color/switch_ex_button_text_dark</item>
         <item name="bg_plugin_logo_disabled">@drawable/bg_plugin_logo_disabled_dark</item>
@@ -398,32 +418,38 @@
         <item name="expandable_list_item_background">
             @drawable/expandable_list_item_background_dark
         </item>
-        <item name="expandable_list_background">@color/list_item_dark</item>
+        <item name="expandable_list_background">@color/list_background_color_dark</item>
         <item name="size_progress_bar">@drawable/size_progressbar_dark</item>
         <item name="dash_parking_bg">@drawable/dash_parking_dark</item>
-        <item name="dashboard_subheader_text_color">@color/dashboard_subheader_text_dark</item>
-        <item name="dashboard_general_button_text_color">@color/dashboard_general_button_text_dark</item>
+        <item name="dashboard_general_button_text_color">@color/active_color_primary_dark</item>
         <item name="android:listChoiceIndicatorMultiple">@drawable/check_dark</item>
-        <item name="android:textColorPrimary">@color/color_white</item>
+
+        <item name="android:textColorPrimary">@color/text_color_primary_dark</item>
+        <item name="android:textColorSecondary">@color/text_color_secondary_dark</item>
+        <item name="android:textColorTertiary">@color/text_color_tertiary_dark</item>
+
         <item name="spinnerItemTextColor">@color/color_white</item>
         <item name="spinnerListBackground">@color/spinner_list_background_dark</item>
-        <item name="colorButtonNormal">@color/actionbar_dark_color</item>
+        <item name="colorButtonNormal">@color/app_bar_color_dark</item>
 
-        <item name="android:actionModeBackground">@color/actionbar_dark_color</item>
+        <item name="android:actionModeBackground">@color/app_bar_color_dark</item>
         <item name="android:actionBarStyle">@style/Widget.Styled.ActionBarDark</item>
         <item name="actionOverflowButtonStyle">@style/OverflowMenuButton</item>
 
-        <item name="dialog_inactive_text_color">@color/dialog_inactive_text_color_dark</item>
-        <item name="secondary_icon_color">@color/dialog_inactive_text_color_dark</item>
-        <item name="primary_icon_color">@color/color_white</item>
+        <item name="secondary_icon_color">@color/icon_color_secondary_dark</item>
+        <item name="default_icon_color">@color/icon_color_default_dark</item>
+        <item name="primary_icon_color">@color/icon_color_primary_dark</item>
+        <item name="text_color_tab_active">@color/text_color_tab_active_dark</item>
+        <item name="text_color_tab_active_white">@color/text_color_tab_active_dark</item>
+
         <item name="appbar_layout_theme">@style/OsmandDarkTheme.DarkActionbar</item>
         <item name="search_tabbar_layout_theme">@style/OsmandDarkTheme.SearchTabbar</item>
         <item name="toolbar_theme">@style/OsmandDarkTheme</item>
         <item name="new_app_theme">@style/OsmandDarkTheme</item>
-        <item name="android:textColorSecondary">@color/dash_search_icon_dark</item>
+        <item name="colorAccent">@color/active_color_primary_dark</item>
 
         <item name="contextMenuButtonColor">@color/osmand_orange</item>
-        <item name="color_dialog_buttons">@color/color_dialog_buttons_dark</item>
+        <item name="color_dialog_buttons">@color/active_color_primary_dark</item>
 
         <item name="popupMenuStyle">@style/PopupMenuDark</item>
 
@@ -435,12 +461,12 @@
         <item name="subscription_active_div_color">@color/subscription_active_div_color_dark</item>
 
         <item name="circle_dialog_bg">@drawable/circle_dialog_bg_night</item>
-        <item name="dialog_bg_color">@color/dialog_bg_color_night</item>
-        <item name="dialog_transparent_bg_color">@color/dialog_transparent_bg_color_night</item>
-        <item name="dialog_title_color">@color/dialog_title_color_dark</item>
-        <item name="dialog_description_color">@color/dialog_description_color_dark</item>
-        <item name="dialog_text_description_color">@color/dialog_text_description_color_night</item>
-        <item name="card_description_text_color">@color/card_description_text_color_dark</item>
+        <item name="dialog_bg_color">@color/activity_background_color_dark</item>
+        <item name="dialog_transparent_bg_color">@color/activity_background_transparent_color_dark</item>
+        <item name="dialog_title_color">@color/text_color_primary_dark</item>
+        <item name="dialog_description_color">@color/text_color_secondary_dark</item>
+        <item name="dialog_text_description_color">@color/text_color_secondary_dark</item>
+        <item name="card_description_text_color">@color/text_color_tertiary_dark</item>
 
         <item name="wikivoyage_bg_color">@color/wikivoyage_bg_dark</item>
         <item name="wikivoyage_card_bg_color">@color/wikivoyage_card_bg_dark</item>
@@ -451,9 +477,9 @@
         <item name="wikivoyage_bottom_bar_bg_color">@color/wikivoyage_bottom_bar_bg_dark</item>
         <item name="wikivoyage_bottom_bar_divider_color">@color/wikivoyage_bottom_bar_divider_dark</item>
         <item name="wikivoyage_secondary_btn_bg_color">@color/wikivoyage_secondary_btn_bg_dark</item>
-        <item name="wikivoyage_primary_btn_text_color">@color/wikivoyage_primary_btn_text_dark</item>
+        <item name="wikivoyage_primary_btn_text_color">@color/active_buttons_and_links_text_dark</item>
         <item name="wikivoyage_welcome_bg_color">@color/wikivoyage_welcome_bg_dark</item>
-        <item name="wikivoyage_primary_text_color">@color/wikivoyage_primary_text_dark</item>
+        <item name="wikivoyage_primary_text_color">@color/text_color_primary_dark</item>
 
         <item name="wikivoyage_travel_card_bg">@drawable/travel_card_bg_dark</item>
         <item name="wikivoyage_travel_card_stroke_bg">@drawable/travel_card_stroke_bg_dark</item>
@@ -467,17 +493,31 @@
         <item name="text_rounded_bg_active">@drawable/text_rounded_bg_active_dark</item>
         <item name="text_rounded_bg_regular">@drawable/text_rounded_bg_regular_dark</item>
 
-        <item name="menu_bottom_sheet_icon_color">@color/ctx_menu_info_text_dark</item>
+        <item name="menu_bottom_sheet_icon_color">@color/text_color_primary_dark</item>
         <item name="route_info_control_icon_color">@color/route_info_control_icon_color_dark</item>
         <item name="route_info_bg">@color/route_info_bg_dark</item>
 
         <item name="flow_toolbar_bg">@drawable/flow_toolbar_bg_dark</item>
-        <item name="divider_color_basic">@color/divider_dark</item>
-        <item name="main_font_color_basic">@color/main_font_dark</item>
-        <item name="active_color_basic">@color/active_buttons_and_links_dark</item>
+        <item name="divider_color_basic">@color/divider_color_dark</item>
+        <item name="main_font_color_basic">@color/text_color_primary_dark</item>
+        <item name="active_color_basic">@color/active_color_primary_dark</item>
         <item name="card_and_list_background_basic">@color/card_and_list_background_dark</item>
         <item name="activity_background_basic">@color/activity_background_dark</item>
         <item name="pages_bg">@drawable/pages_bg_dark</item>
+        <item name="dlg_btn_primary">@drawable/dlg_btn_primary_dark</item>
+        <item name="dlg_btn_primary_text">@color/dlg_btn_primary_text_dark</item>
+        <item name="dlg_btn_secondary">@drawable/dlg_btn_secondary_dark</item>
+        <item name="dlg_btn_secondary_text">@color/dlg_btn_secondary_text_dark</item>
+        <item name="dlg_btn_stroked">@drawable/dlg_btn_stroked_dark</item>
+        <item name="profile_save_btn">@drawable/btn_round_profile_night</item>
+        <item name="profile_cancel_btn">@drawable/btn_round_profile_gray_n</item>
+        <item name="android:textColor">@color/text_color_primary_dark</item>
+
+        <item name="buttonBarNegativeButtonStyle">@style/DialogButtonStyleDark</item>
+        <item name="buttonBarPositiveButtonStyle">@style/DialogButtonStyleDark</item>
+        <item name="buttonBarNeutralButtonStyle">@style/DialogButtonStyleDark</item>
+        <item name="colorBackgroundFloating">@color/list_background_color_dark</item>
+        <item name="android:colorBackgroundFloating">@color/list_background_color_dark</item>
     </style>
 
     <style name="FreeVersionBanner" parent="OsmandDarkTheme">
@@ -492,16 +532,24 @@
         <item name="android:windowAnimationStyle">@null</item>
     </style>
 
+    <style name="DialogButtonStyleLight" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
+        <item name="android:textColor">@color/active_color_primary_light</item>
+    </style>
+
+    <style name="DialogButtonStyleDark" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
+        <item name="android:textColor">@color/active_color_primary_dark</item>
+    </style>
+
     <!-- Standard action bar override -->
     <style name="Widget.Styled.ActionBarDark" parent="Widget.AppCompat.Light.ActionBar.Solid.Inverse">
-        <item name="background">@color/actionbar_dark_color</item>
-        <item name="android:background">@color/actionbar_dark_color</item>
+        <item name="background">@color/app_bar_color_dark</item>
+        <item name="android:background">@color/app_bar_color_dark</item>
         <item name="elevation">0dp</item>
     </style>
 
     <style name="Widget.Styled.ActionBarLight" parent="Widget.AppCompat.Light.ActionBar.Solid">
-        <item name="background">@color/actionbar_light_color</item>
-        <item name="android:background">@color/actionbar_light_color</item>
+        <item name="background">@color/app_bar_color_light</item>
+        <item name="android:background">@color/app_bar_color_light</item>
         <item name="titleTextStyle">@style/Widget.Styled.LightActionBarTitle</item>
         <item name="subtitleTextStyle">@style/Widget.Styled.LightActionBarSubtitle</item>
         <item name="actionBarWidgetTheme">@style/Theme.AppCompat</item>
@@ -658,9 +706,9 @@
         <item name="android:windowMinWidthMajor">90%</item>
         <item name="android:windowMinWidthMinor">90%</item>
 
-        <item name="secondary_icon_color">@color/icon_color_light</item>
-        <item name="primary_icon_color">@color/icon_color</item>
-        <item name="bg_color">@color/bg_color_light</item>
+        <item name="secondary_icon_color">@color/icon_color_secondary_light</item>
+        <item name="default_icon_color">@color/icon_color_default_light</item>
+        <item name="bg_color">@color/list_background_color_light</item>
     </style>
 
     <style name="Dialog90Dark" parent="Base.Theme.AppCompat.Dialog">
@@ -668,9 +716,9 @@
         <item name="android:windowMinWidthMajor">90%</item>
         <item name="android:windowMinWidthMinor">90%</item>
 
-        <item name="secondary_icon_color">@color/dialog_inactive_text_color_dark</item>
-        <item name="primary_icon_color">@color/color_white</item>
-        <item name="bg_color">@color/bg_color_dark</item>
+        <item name="secondary_icon_color">@color/icon_color_secondary_dark</item>
+        <item name="default_icon_color">@color/icon_color_default_dark</item>
+        <item name="bg_color">@color/list_background_color_dark</item>
     </style>
 
     <style name="WhiteControls" parent="Theme.AppCompat.Light.DarkActionBar">

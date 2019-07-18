@@ -4,7 +4,7 @@
               android:layout_width="fill_parent"
               android:layout_height="fill_parent"
               android:orientation="vertical"
-              android:background="?attr/ctx_menu_info_view_bg">
+              android:background="?attr/activity_background_color">
 
     <ExpandableListView
         android:id="@android:id/list"

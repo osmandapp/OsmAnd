@@ -11,7 +11,6 @@
     <string name="disable_monitoring">Desgaitu kontrola</string>
     <string name="location_recording_enabled">Kokapen grabaketa gaituta</string>
     <string name="timeline_description">Gaitu kontrola zure kokapen guztiak historian gordetzeko.</string>
-    <string name="app_name_short_online">Online Aztarnaria</string>
     <string name="app_name_short">OsmAnd Aztarnaria</string>
     <string name="shared_string_telegram">Telegram</string>
     <string name="privacy_policy_use_telegram">Telegram (mezularitza aplikazioa) jendearekin konektatzeko eta komunikatzeko erabiltzen da.</string>
@@ -78,7 +77,7 @@
     <string name="shared_string_back">Atzera</string>
     <string name="start_location_sharing">Partekatu kokapena</string>
     <string name="show_on_map">Erakutsi mapan</string>
-    <string name="app_name">OsmAnd Telegram</string>
+    <string name="app_name">OsmAnd Online GPS Tracker</string>
     <string name="phone_number_title">Telefono zenbakia</string>
     <string name="phone_number_descr">Telefono zenbakia formatu internazionalean</string>
     <string name="shared_string_password">Pasahitza</string>
@@ -101,7 +100,7 @@
     <string name="shared_string_distance">Distantzia</string>
     <string name="share_location">Partekatu kokapena</string>
     <string name="sharing_location">Partekatzen kokapena</string>
-    <string name="process_service">OsmAnd Telegram zebitzua</string>
+    <string name="process_service">OsmAnd Tracker zebitzua</string>
     <string name="osmand_logo">OsmAnd logoa</string>
     <string name="install_osmand_dialog_message">OsmAnd doako edo ordainpeko bertsioa instalatu behar duzu lehenik</string>
     <string name="install_osmand">Instalatu OsmAnd</string>
@@ -138,4 +137,20 @@
     <string name="my_location">Nire kokapena</string>
     <string name="live_now">Zuzenean orain</string>
     <string name="timeline">Denbora-eskala</string>
+    <string name="search_contacts_descr">Bilatu zure talde eta kontaktu guztien artean.</string>
+    <string name="timeline_available_for_free_now">Denbora-lerroa orain doan eskuragarri dagoen ezaugarri bat da.</string>
+    <string name="proxy_key">Gakoa</string>
+    <string name="proxy_password">Pasahitza</string>
+    <string name="proxy_username">Erabiltzaile-izena</string>
+    <string name="proxy_credentials">Kredentzialak</string>
+    <string name="proxy_port">Ataka</string>
+    <string name="proxy_server">Zerbitzaria</string>
+    <string name="shared_string_connection">Konexioa</string>
+    <string name="shared_string_enable">Gaitu</string>
+    <string name="proxy_type">Proxy mota</string>
+    <string name="proxy_connected">Konektatuta</string>
+    <string name="proxy_disconnected">Deskonektatuta</string>
+    <string name="proxy_settings">Proxyaren ezarpenak</string>
+    <string name="proxy">Proxya</string>
+    <string name="privacy">Pribatutasuna</string>
 </resources>

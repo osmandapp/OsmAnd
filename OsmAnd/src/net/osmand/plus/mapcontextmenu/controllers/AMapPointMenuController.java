@@ -32,7 +32,7 @@ import java.util.Map;
 
 public class AMapPointMenuController extends MenuController {
 
-	private static final float NO_SPEED = -1;
+	private static final float NO_VALUE = -1;
 	private static final int NO_ICON = 0;
 
 	private AMapPoint point;
@@ -129,7 +129,7 @@ public class AMapPointMenuController extends MenuController {
 
 	@Override
 	public int getAdditionalInfoColorId() {
-		return R.color.icon_color;
+		return R.color.icon_color_default_light;
 	}
 
 	@Override
@@ -137,17 +137,38 @@ public class AMapPointMenuController extends MenuController {
 		MapActivity activity = getMapActivity();
 		if (activity != null) {
 			float speed = getPointSpeed();
-			if (speed != NO_SPEED) {
-				String formatted = OsmAndFormatter.getFormattedSpeed(speed, activity.getMyApplication());
-				return activity.getString(R.string.map_widget_speed) + ": " + formatted;
+			if (speed != NO_VALUE) {
+				return OsmAndFormatter.getFormattedSpeed(speed, activity.getMyApplication());
 			}
 		}
 		return super.getAdditionalInfoStr();
 	}
 
+	@NonNull
+	@Override
+	public String getSubtypeStr() {
+		MapActivity activity = getMapActivity();
+		if (activity != null) {
+			float bearing = getPointBearing();
+			if (bearing != NO_VALUE) {
+				return OsmAndFormatter.getFormattedAzimuth(bearing, activity.getMyApplication());
+			}
+		}
+		return super.getSubtypeStr();
+	}
+
+	@Nullable
+	@Override
+	public Drawable getSubtypeIcon() {
+		if (getPointBearing() != NO_VALUE) {
+			return getIcon(R.drawable.ic_action_bearing_16);
+		}
+		return super.getSubtypeIcon();
+	}
+
 	@Override
 	public int getAdditionalInfoIconRes() {
-		if (getPointSpeed() != NO_SPEED) {
+		if (getPointSpeed() != NO_VALUE) {
 			return R.drawable.ic_action_speed_16;
 		}
 		return super.getAdditionalInfoIconRes();
@@ -180,7 +201,7 @@ public class AMapPointMenuController extends MenuController {
 		titleButtonController.leftIconId = getIconIdByName(contextMenuButton.getLeftIconName());
 		titleButtonController.rightIconId = getIconIdByName(contextMenuButton.getRightIconName());
 		titleButtonController.enabled = contextMenuButton.isEnabled();
-		titleButtonController.needColorizeIcon = contextMenuButton.isNeedColorizeIcon();
+		titleButtonController.tintIcon = contextMenuButton.isTintIcon();
 
 		return titleButtonController;
 	}
@@ -214,10 +235,22 @@ public class AMapPointMenuController extends MenuController {
 			try {
 				return Float.parseFloat(speed);
 			} catch (NumberFormatException e) {
-				return NO_SPEED;
+				return NO_VALUE;
 			}
 		}
-		return NO_SPEED;
+		return NO_VALUE;
+	}
+
+	private float getPointBearing() {
+		String bearing = point.getParams().get(AMapPoint.POINT_BEARING_PARAM);
+		if (!TextUtils.isEmpty(bearing)) {
+			try {
+				return Float.parseFloat(bearing);
+			} catch (NumberFormatException e) {
+				return NO_VALUE;
+			}
+		}
+		return NO_VALUE;
 	}
 
 	@Nullable

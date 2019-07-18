@@ -1638,7 +1638,7 @@ Dĺžka %2$s</string>
     <string name="app_name_osmand">OsmAnd</string>
     <string name="offline_maps_and_navigation">Offline mapy\n&amp; Navigácia</string>
     <string name="commit_poi">Odoslať POI</string>
-    <string name="av_locations_descr">GPX súbor s pozíciami poznámok.</string>
+    <string name="av_locations_descr">GPX súbor s pozíciami.</string>
     <string name="av_locations">Pozície</string>
     <string name="plugin_settings">Zásuvné moduly</string>
     <string name="routing_attr_avoid_shuttle_train_name">Nepoužiť autovlak</string>
@@ -2523,7 +2523,6 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="plan_route">Naplánovať trasu</string>
     <string name="shared_string_sort">Zotriediť</string>
     <string name="coordinate_input">Zadanie súradníc</string>
-    <string name="is_saved">je uložený</string>
     <string name="marker_save_as_track_descr">Exportovať vaše značky do nasledovného súboru GPX:</string>
     <string name="marker_save_as_track">Uložiť ako súbor GPX</string>
     <string name="move_to_history">Presunúť do histórie</string>
@@ -2891,10 +2890,10 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="voice_announcements">Hlasové oznámenia</string>
     <string name="intermediate_destinations">Medziciele</string>
     <string name="arrive_at_time">Príjazd o %1$s</string>
-    <string name="route_class_stat_container">Trieda</string>
-    <string name="route_surface_stat_container">Povrch</string>
-    <string name="route_smoothness_stat_container">Hladkosť povrchu</string>
-    <string name="route_steepness_stat_container">Strmosť</string>
+    <string name="routeInfo_roadClass_name">Trieda</string>
+    <string name="routeInfo_surface_name">Povrch</string>
+    <string name="routeInfo_smoothness_name">Hladkosť povrchu</string>
+    <string name="routeInfo_steepness_name">Strmosť</string>
     <string name="previous_route">Predchádzajúca trasa</string>
     <string name="add_home">Pridať Domov</string>
     <string name="add_work">Pridať Prácu</string>
@@ -2925,7 +2924,7 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="time_of_day">Denná doba</string>
     <string name="by_transport_type">Pomocou %1$s</string>
     <string name="step_by_step">Krok za krokom</string>
-    <string name="road_types">Druhy ciest</string>
+    <string name="routeInfo_road_types_name">Druhy ciest</string>
     <string name="exit_at">Vystúpte na</string>
     <string name="sit_on_the_stop">Nastúpte na zastávke</string>
     <string name="quick_action_show_hide_gpx_tracks">Zobraziť/Skryť GPX stopy</string>
@@ -2984,7 +2983,7 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="add_intermediate">Pridať prechodný bod</string>
     <string name="shared_string_degrees">Stupne</string>
     <string name="shared_string_milliradians">Miliradiány</string>
-    <string name="angular_measeurement">Merné jednotky pre uhly</string>
+    <string name="angular_measeurement">Jednotky pre uhly</string>
     <string name="angular_measeurement_descr">Zmení jednotku na meranie azimutu.</string>
     <string name="avoid_pt_types_descr">Vyberte typy verejnej dopravy, ktorej sa má navigácia vyhnúť:</string>
     <string name="quick_action_day_night_mode">%s režim</string>
@@ -3028,4 +3027,173 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="public_transport_try_change_settings">Skúste zmeniť nastavenia.</string>
     <string name="public_transport_calc_pedestrian">Vypočítať pešiu trasu</string>
     <string name="public_transport_type">Spôsob dopravy</string>
+    <string name="searching_gps">Hľadá sa GPS</string>
+    <string name="coordinates_widget">Nástroj súradníc</string>
+    <string name="rate_dialog_descr">Prosím dajte nám 30 sekúnd zdieľaním spätnej väzby a ohodnotením našej práce na Google Play.</string>
+    <string name="button_rate">Ohodnotiť</string>
+    <string name="shared_string_privacy_policy">Ochrana súkromia</string>
+    <string name="help_us_make_osmand_better">Pomôžte nám vylepšiť OsmAnd!</string>
+    <string name="make_osmand_better_descr">Umožnite OsmAndu zbierať a spracovať anonymné údaje o používaní aplikácie. Nezbierame ani neukladáme údaje o vašej polohe, ani o miestach, ktoré si prezeráte na mape.
+\n
+\nVašu voľbu môžete zmeniť kedykoľvek v Nastavenia &gt; Súkromie a bezpečnosť.</string>
+    <string name="choose_data_to_share">Zvoľte ktoré typy údajov dovolíte zdieľať:</string>
+    <string name="downloaded_maps">Stiahnuté mapy</string>
+    <string name="visited_screens">Navštívené obrazovky</string>
+    <string name="collected_data_descr">Určite, ktoré údaje umožníte OsmAndu zdieľať.</string>
+    <string name="downloaded_maps_collect_descr">Pomôže nám pochopiť, ktoré mapy regiónov a krajín sú najpopulárnejšie.</string>
+    <string name="visited_screens_collect_descr">Pomôže nám pochopiť, ktoré funkcie OsmAnd sú najpopulárnejšie.</string>
+    <string name="privacy_and_security_change_descr">Stlačením \"Povoliť\" súhlasíte s: %1$s</string>
+    <string name="settings_privacy_and_security">Súkromie a bezpečnosť</string>
+    <string name="settings_privacy_and_security_desc">Zvoľte ktoré údaje budete zdieľať s nami</string>
+    <string name="shared_string_no_thank_you">Nie, ďakujem</string>
+    <string name="shared_string_allow">Povoliť</string>
+    <string name="profile_name_hint">Názov profilu</string>
+    <string name="nav_type_hint">Typ navigácie</string>
+    <string name="app_mode_taxi">Taxi</string>
+    <string name="app_mode_shuttle_bus">Kyvadlový autobus</string>
+    <string name="app_mode_subway">Metro</string>
+    <string name="app_mode_horse">Kôň</string>
+    <string name="app_mode_helicopter">Vrtuľník</string>
+    <string name="osmand_routing_promo">Môžete pridať vlastnú upravenú verziu súboru routing.xml do ..osmand/routing</string>
+    <string name="app_mode_skiing">Lyžovanie</string>
+    <string name="base_profile_descr_ski">Lyžovanie</string>
+    <string name="show_compass_ruler">Zobraziť stupnicu kompasu</string>
+    <string name="hide_compass_ruler">Skryť stupnicu kompasu</string>
+    <string name="select_icon_profile_dialog_title">Zvoľte ikonu</string>
+    <string name="settings_routing_mode_string">Režim: %s</string>
+    <string name="settings_derived_routing_mode_string">Používateľský režim, odvodený z: %s</string>
+    <string name="routing_profile_ski">Lyžovanie</string>
+    <string name="profile_type_descr_string">Typ: %s</string>
+    <string name="profile_type_base_string">Základný profil</string>
+    <string name="profile_alert_need_routing_type_title">Vyberte typ navigácie</string>
+    <string name="profile_alert_need_routing_type_msg">Prosím zvoľte typ navigácie pre nový profil aplikácie</string>
+    <string name="profile_alert_need_profile_name_title">Zadajte názov profilu</string>
+    <string name="profile_alert_need_profile_name_msg">Názov profilu nesmie byť prázdny!</string>
+    <string name="profile_alert_duplicate_name_title">Duplicitný názov</string>
+    <string name="profile_alert_duplicate_name_msg">Už existuje profil s týmto názvom</string>
+    <string name="profile_alert_cant_delete_base">Nemôžete odstrániť základné profily OsmAnd</string>
+    <string name="profile_alert_need_save_title">Uložiť zmeny</string>
+    <string name="profile_alert_need_save_msg">Zmeny profilu musíte pred pokračovaním uložiť</string>
+    <string name="profile_alert_delete_title">Odstrániť profil</string>
+    <string name="profile_alert_delete_msg">Naozaj chcete odstrániť profil %s</string>
+    <string name="select_base_profile_dialog_title">Zvoľte základný profil</string>
+    <string name="select_base_profile_dialog_message">Vlastný profil aplikácie založíte na niektorom základnom profile, čo určí predvolené nastavenia ako stav nástrojov, jednotky rýchlosti a vzdialenosti. Toto sú základné profily aplikácie, spolu s príkladmi vlastných profilov na ktoré môžu byť rozšírené:</string>
+    <string name="select_nav_profile_dialog_title">Vyberte typ navigácie</string>
+    <string name="base_profile_descr_car">Auto, nákladné auto, motocykel</string>
+    <string name="base_profile_descr_bicycle">Horský bicykel, moped, kôň</string>
+    <string name="base_profile_descr_pedestrian">Chôdza, turistika, beh</string>
+    <string name="base_profile_descr_public_transport">Všetky typy hromadnej dopravy</string>
+    <string name="base_profile_descr_boat">Loď, veslovanie, plachetnica</string>
+    <string name="base_profile_descr_aircraft">Lietadlo, plachtenie</string>
+    <string name="routing_profile_geocoding">Georeferencovanie</string>
+    <string name="routing_profile_straightline">Rovná čiara</string>
+    <string name="routing_profile_broutrer">BRouter (offline)</string>
+    <string name="osmand_default_routing">Navigácia OsmAnd</string>
+    <string name="custom_routing">Vlastný profil navigácie</string>
+    <string name="special_routing_type">Špeciálna navigácia</string>
+    <string name="third_party_routing_type">Navigácia tretej strany</string>
+    <string name="application_profiles_descr">Zvoľte profily, ktoré majú byť viditeľné v aplikácii.</string>
+    <string name="application_profiles">Profily aplikácie</string>
+    <string name="zoom_by_wunderlinq_descr">Zmeňte priblíženie mapy pomocou posúvania kolieskom nahor a nadol. Esc vás vráti do aplikácie WunderLINQ.</string>
+    <string name="zoom_by_wunderlinq">Použiť WunderLINQ na približovanie</string>
+    <string name="quick_action_need_to_add_item_to_list">Potrebujete aspoň jednu položku v nastaveniach Rýchlej akcie</string>
+    <string name="routing_attr_piste_type_downhill_name">Alpské/zjazdové lyžovanie</string>
+    <string name="routing_attr_piste_type_downhill_description">Svahy pre alpské a zjazdové lyžovanie a prístup k vlekom.</string>
+    <string name="routing_attr_piste_type_nordic_name">Bežkovanie</string>
+    <string name="routing_attr_piste_type_nordic_description">Trasy pre beh na lyžiach.</string>
+    <string name="routing_attr_piste_type_skitour_name">Lyžiarske okruhy</string>
+    <string name="routing_attr_piste_type_skitour_description">Trasy lyžiarskych okruhov.</string>
+    <string name="routing_attr_piste_type_sled_name">Sánkovanie</string>
+    <string name="routing_attr_piste_type_sled_description">Svahy pre sánkovanie.</string>
+    <string name="routing_attr_allow_intermediate_name">Povoliť trasy strednej náročnosti</string>
+    <string name="routing_attr_allow_intermediate_description">Náročnejšie trasy so strmejšími úsekmi. S možnými prekážkami, ktoré je nutné obísť.</string>
+    <string name="routing_attr_allow_advanced_name">Povoliť pokročilé trasy</string>
+    <string name="routing_attr_allow_advanced_description">Náročné trasy s nebezpečnými prekážkami a strmými úsekmi.</string>
+    <string name="routing_attr_allow_expert_name">Povoliť trasy pre expertov</string>
+    <string name="routing_attr_allow_expert_description">Extrémne náročné trasy s nebezpečnými prekážkami a okolím.</string>
+    <string name="routing_attr_allow_skating_only_name">Povoliť trasy len pre korčuľovanie na lyžiach</string>
+    <string name="routing_attr_allow_skating_only_description">Trasy upravované pre voľný štýl alebo korčuľovanie na lyžiach, nie pre klasické lyžovanie.</string>
+    <string name="routing_attr_allow_classic_only_name">Povoliť trasy pre klasické lyžovanie</string>
+    <string name="routing_attr_allow_classic_only_description">Trasy upravované pre klasické lyžovanie bez korčuľovania. Zahŕňa trasy upravované menšími snežnými vozidlami a stopou vytvorenou lyžiarmi.</string>
+    <string name="routing_attr_difficulty_preference_name">Preferovaná náročnosť</string>
+    <string name="routing_attr_difficulty_preference_description">Preferovať trasy s touto náročnosťou, ale navigovanie cez náročnejšie alebo jednoduchšie zjazdovky je možné ak sú kratšie.</string>
+    <string name="routing_attr_freeride_policy_name">Mimo zjazdovky</string>
+    <string name="routing_attr_freeride_policy_description">Voľný zjazd mimo zjazdovky cez neoficiálne trasy a prejazdy. Obyčajne neupravované a neudržiavané prevádzkarom, bez večernej kontroly. Vstup na vlastné riziko.</string>
+    <string name="process_downloading_service">OsmAnd služba na sťahovanie</string>
+    <string name="shared_string_color_magenta">Purpurová</string>
+    <string name="shared_string_icon">Ikona</string>
+    <string name="collected_data">Zbierané údaje</string>
+    <string name="press_again_to_change_the_map_orientation">Stlačte znovu pre zmenu orientácie mapy</string>
+    <string name="shared_string_min_speed">Min. rýchlosť</string>
+    <string name="shared_string_max_speed">Max. rýchlosť</string>
+    <string name="default_speed_setting_title">Predvolená rýchlosť</string>
+    <string name="default_speed_setting_descr">Zmeniť predvoľby rýchlosti</string>
+    <string name="minmax_speed_dialog_title">Nastaviť min./max. rýchlosť</string>
+    <string name="default_speed_dialog_msg">Používa sa na výpočet očakávaného času príjazdu počas navigovania</string>
+    <string name="new_profile">Nový profil</string>
+    <string name="shared_string_crash">Pád aplikácie</string>
+    <string name="last_launch_crashed">Posledné spustenie OsmAnd zlyhalo. Prosíme pomôžte nám vylepšiť OsmAnd zdieľaním správy o chybe.</string>
+    <string name="app_mode_ufo">UFO</string>
+    <string name="release_3_4">• Aplikačné profily: vytvorte vlastné profily pre vaše potreby, s vlastnou ikonou a farbou
+\n 
+\n • Predanie nastavenia pre predvolenú a minimálnu a maximálnu rýchlosť v profiloch
+\n 
+\n • Pridaný nástroj s aktuálnymi súradnicami
+\n 
+\n • Pridané možnosti zobrazenia kompasu na mape s pravítkom polomeru
+\n 
+\n • Opravené zaznamenávanie stopy na pozadí
+\n 
+\n • Vylepšené sťahovanie máp na pozadí
+\n
+\n • Návrat voľby \'Zapnúť obrazovku\'
+\n 
+\n • Opravený výber jazyka Wikipedie
+\n 
+\n • Opravené správanie tlačidla kompasu počas navigácie
+\n 
+\n • Ďalšie opravy chýb
+\n
+\n</string>
+    <string name="app_mode_personal_transporter">Osobný transportér</string>
+    <string name="app_mode_monowheel">Koleso (monowheel)</string>
+    <string name="app_mode_scooter">Skúter</string>
+    <string name="precision_hdop_and_vdop">Presnosť horizontálne: %1$s, vertikálne: %2$s</string>
+    <string name="precision_hdop">Presnosť horizontálne: %s</string>
+    <string name="app_mode_offroad">Mimo cesty (Offroad)</string>
+    <string name="edit_profile_setup_title">Nastaviť profil</string>
+    <string name="edit_profile_setup_subtitle">Profil udržuje vlastné nastavenia</string>
+    <string name="edit_profile_setup_map_subtitle">Zvoľte predvolené nastavenia mapy pre profil</string>
+    <string name="edit_profile_screen_options_subtitle">Zvoľte predvolené nastavenia obrazovky pre profil</string>
+    <string name="edit_profile_nav_settings_subtitle">Zvoľte predvolené nastavenia navigácie pre profil</string>
+    <string name="routing_attr_max_num_changes_description">Zadajte maximálny počet zmien</string>
+    <string name="routing_attr_max_num_changes_name">Počet zmien</string>
+    <string name="turn_screen_on_router">Prebudiť pri odbočení</string>
+    <string name="turn_screen_on_time_descr">Nastavte čas, na ktorý bude obrazovka prebudená.</string>
+    <string name="turn_screen_on_sensor">Použiť senzor priblíženia</string>
+    <string name="turn_screen_on_sensor_descr">Zamávajte rukou ponad hornú stranu obrazovky pre zapnutie obrazovky počas navigácie.</string>
+    <string name="rendering_attr_highway_class_track_grade1_name">Stupeň 1</string>
+    <string name="rendering_attr_highway_class_track_grade2_name">Stupeň 2</string>
+    <string name="rendering_attr_highway_class_track_grade3_name">Stupeň 3</string>
+    <string name="rendering_attr_highway_class_track_grade4_name">Stupeň 4</string>
+    <string name="rendering_attr_highway_class_track_grade5_name">Stupeň 5</string>
+    <string name="external_input_device">Externé vstupné zariadenia</string>
+    <string name="external_input_device_descr">Zvoľte zariadenie, ako napr. univerzálnu klávesnicu alebo WunderLINQ, pre externé ovládanie.</string>
+    <string name="sett_no_ext_input">Žiadne</string>
+    <string name="sett_generic_ext_input">Všeobecná klávesnica</string>
+    <string name="sett_wunderlinq_ext_input">WunderLINQ</string>
+    <string name="sett_parrot_ext_input">Parrot</string>
+    <string name="turn_on_profile_desc">Pre použitie tohto nastavenia prosím zapnite aspoň jeden profil aplikácie.</string>
+    <string name="rendering_attr_winter_road_name">Zimná cesta</string>
+    <string name="rendering_attr_ice_road_name">Ľadová cesta</string>
+    <string name="routeInfo_winter_ice_road_name">Zimné a ľadové cesty</string>
+    <string name="rendering_attr_tracktype_grade1_name">Pevné (spevnené)</string>
+    <string name="rendering_attr_tracktype_grade2_name">Pevné (nespevnené)</string>
+    <string name="rendering_attr_tracktype_grade3_name">Väčšinou pevné</string>
+    <string name="rendering_attr_tracktype_grade4_name">Väčšinou mäkké</string>
+    <string name="rendering_attr_tracktype_grade5_name">Mäkké</string>
+    <string name="routeInfo_tracktype_name">Pevnosť povrchu</string>
+    <string name="shared_string_file_is_saved">%s je uložený</string>
+    <string name="shared_string_open_track">Otvoriť stopu</string>
+    <string name="shared_string_track_is_saved">Stopa %s je uložená</string>
 </resources>

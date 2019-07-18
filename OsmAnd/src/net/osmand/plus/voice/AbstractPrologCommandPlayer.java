@@ -162,10 +162,6 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 				config = new FileInputStream(new File(voiceDir, configFile)); //$NON-NLS-1$
 				// }
 				MetricsConstants mc = settings.METRIC_SYSTEM.get();
-				ApplicationMode m = settings.getApplicationMode();
-				if(m.getParent() != null) {
-					m = m.getParent();
-				}
 				settings.APPLICATION_MODE.addListener(this);
 				prologSystem.getTheoryManager()
 				.assertA(

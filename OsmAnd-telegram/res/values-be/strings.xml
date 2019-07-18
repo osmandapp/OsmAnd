@@ -199,7 +199,6 @@
     <string name="disable_monitoring">Выключыць маніторынг</string>
     <string name="location_recording_enabled">Запіс месцазнаходжання ўключаны</string>
     <string name="timeline_description">Уключыць маніторынг, каб захоўваць пункты месцазнаходжання ў гісторыі.</string>
-    <string name="app_name_short_online">Сеціўны назіральнік</string>
     <string name="app_name_short">Назіральнік OsmAnd</string>
     <string name="shared_string_telegram">Telegram</string>
     <string name="privacy_policy_use_telegram">Telegram (дадатак для ліставання) выкарыстоўваецца для зносін паміж людзьмі.</string>
@@ -235,4 +234,12 @@
     <string name="proxy">Проксі</string>
     <string name="privacy">Прыватнасць</string>
     <string name="bearing">Накірунак</string>
+    <string name="shared_string_select">Абраць</string>
+    <string name="min_logging_distance">Мінімальная адлегласць для рэгістрацыі</string>
+    <string name="min_logging_distance_descr">Фільтр: мінімальная адлегласць для рэгістрацыі новай кропкі</string>
+    <string name="min_logging_accuracy">Мінімальная дакладнасць для рэгістрацыі</string>
+    <string name="min_logging_accuracy_descr">Фільтр: не рэгістраваць, калі дакладнасць не дасягнутая</string>
+    <string name="min_logging_speed">Мінімальная хуткасць для рэгістрацыі</string>
+    <string name="min_logging_speed_descr">Фільтр: не рэгістраваць пры хуткасці ніжэй за абраную</string>
+    <string name="gpx_settings">Налады GPX</string>
 </resources>

@@ -1,23 +1,32 @@
 package net.osmand.plus;
 
-import gnu.trove.map.hash.TLongObjectHashMap;
-import net.osmand.Location;
-import net.osmand.data.LatLon;
-import net.osmand.plus.views.DirectionDrawable;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
+import android.os.Build;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
+import android.support.annotation.StringRes;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
+import android.support.v7.view.ContextThemeWrapper;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import net.osmand.AndroidUtils;
+import net.osmand.Location;
+import net.osmand.data.LatLon;
+import net.osmand.plus.views.DirectionDrawable;
+import net.osmand.plus.widgets.TextViewEx;
+
+import gnu.trove.map.hash.TLongObjectHashMap;
 
 public class UiUtilities {
 
@@ -27,7 +36,12 @@ public class UiUtilities {
 	private static final int ORIENTATION_90 = 3;
 	private static final int ORIENTATION_270 = 1;
 	private static final int ORIENTATION_180 = 2;
-	
+
+	public enum DialogButtonType {
+		PRIMARY,
+		SECONDARY,
+		STROKED
+	}
 
 	public UiUtilities(OsmandApplication app) {
 		this.app = app;
@@ -80,7 +94,7 @@ public class UiUtilities {
 	}
 
 	public Drawable getThemedIcon(@DrawableRes int id) {
-		return getDrawable(id, R.color.description_font_and_bottom_sheet_icons);
+		return getDrawable(id, R.color.icon_color_default_light);
 	}
 
 	public Drawable getIcon(@DrawableRes int id) {
@@ -88,14 +102,14 @@ public class UiUtilities {
 	}
 
 	public Drawable getIcon(@DrawableRes int id, boolean light) {
-		return getDrawable(id, light ? R.color.icon_color : 0);
+		return getDrawable(id, light ? R.color.icon_color_default_light : R.color.icon_color_default_dark);
 	}
 
 	@ColorRes
 	public static int getDefaultColorRes(Context context) {
 		final OsmandApplication app = (OsmandApplication) context.getApplicationContext();
 		boolean light = app.getSettings().isLightContent();
-		return light ? R.color.icon_color : R.color.color_white;
+		return light ? R.color.icon_color_default_light : R.color.icon_color_default_dark;
 	}
 
 	@ColorInt
@@ -110,7 +124,7 @@ public class UiUtilities {
 		uvc.screenOrientation = getScreenOrientation();
 		return uvc;
 	}
-	
+
 	public static class UpdateLocationViewCache {
 		int screenOrientation;
 		public boolean paintTxt = true;
@@ -120,11 +134,11 @@ public class UiUtilities {
 		public LatLon specialFrom;
 	}
 
-	public void updateLocationView(UpdateLocationViewCache cache, ImageView arrow, TextView txt, 
+	public void updateLocationView(UpdateLocationViewCache cache, ImageView arrow, TextView txt,
 			double toLat, double toLon) {
 		updateLocationView(cache, arrow, txt, new LatLon(toLat, toLon));
 	}
-	public void updateLocationView(UpdateLocationViewCache cache, ImageView arrow, TextView txt, 
+	public void updateLocationView(UpdateLocationViewCache cache, ImageView arrow, TextView txt,
 			LatLon toLoc) {
 		float[] mes = new float[2];
 		boolean stale = false;
@@ -172,7 +186,7 @@ public class UiUtilities {
 			if (imgColorSet == 0) {
 				imgColorSet = useCenter ? R.color.color_distance : R.color.color_myloc_distance;
 				if (stale) {
-					imgColorSet = R.color.icon_color;
+					imgColorSet = R.color.icon_color_default_light;
 				}
 			}
 			dd.setImage(arrowResId, imgColorSet);
@@ -194,7 +208,7 @@ public class UiUtilities {
 					if (textColorSet == 0) {
 						textColorSet = useCenter ? R.color.color_distance : R.color.color_myloc_distance;
 						if (stale) {
-							textColorSet = R.color.icon_color;
+							textColorSet = R.color.icon_color_default_light;
 						}
 					}
 					txt.setTextColor(app.getResources().getColor(textColorSet));
@@ -205,7 +219,7 @@ public class UiUtilities {
 			}
 		}
 	}
-	
+
 	public int getScreenOrientation() {
 		int screenOrientation = ((WindowManager) app.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getRotation();
 		switch (screenOrientation) {
@@ -230,4 +244,47 @@ public class UiUtilities {
 		return screenOrientation;
 	}
 
+	public static void setupDialogButton(boolean nightMode, View buttonView, DialogButtonType buttonType, @StringRes int buttonTextId) {
+		setupDialogButton(nightMode, buttonView, buttonType, buttonView.getContext().getString(buttonTextId));
+	}
+
+	public static void setupDialogButton(boolean nightMode, View buttonView, DialogButtonType buttonType, CharSequence buttonText) {
+		Context ctx = buttonView.getContext();
+		TextViewEx buttonTextView = (TextViewEx) buttonView.findViewById(R.id.button_text);
+		boolean v21 = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP;
+		View buttonContainer = buttonView.findViewById(R.id.button_container);
+		switch (buttonType) {
+			case PRIMARY:
+				if (v21) {
+					AndroidUtils.setBackground(ctx, buttonContainer, nightMode, R.drawable.ripple_solid_light, R.drawable.ripple_solid_dark);
+				}
+				AndroidUtils.setBackground(ctx, buttonView, nightMode, R.drawable.dlg_btn_primary_light, R.drawable.dlg_btn_primary_dark);
+				buttonTextView.setTextColor(ContextCompat.getColorStateList(ctx, nightMode ? R.color.dlg_btn_primary_text_dark : R.color.dlg_btn_primary_text_light));
+				break;
+			case SECONDARY:
+				if (v21) {
+					AndroidUtils.setBackground(ctx, buttonContainer, nightMode, R.drawable.ripple_solid_light, R.drawable.ripple_solid_dark);
+				}
+				AndroidUtils.setBackground(ctx, buttonView, nightMode, R.drawable.dlg_btn_secondary_light, R.drawable.dlg_btn_secondary_dark);
+				buttonTextView.setTextColor(ContextCompat.getColorStateList(ctx, nightMode ? R.color.dlg_btn_secondary_text_dark : R.color.dlg_btn_secondary_text_light));
+				break;
+			case STROKED:
+				if (v21) {
+					AndroidUtils.setBackground(ctx, buttonContainer, nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
+				}
+				AndroidUtils.setBackground(ctx, buttonView, nightMode, R.drawable.dlg_btn_stroked_light, R.drawable.dlg_btn_stroked_dark);
+				buttonTextView.setTextColor(ContextCompat.getColorStateList(ctx, nightMode ? R.color.dlg_btn_secondary_text_dark : R.color.dlg_btn_secondary_text_light));
+				break;
+		}
+		buttonTextView.setText(buttonText);
+		buttonTextView.setEnabled(buttonView.isEnabled());
+	}
+
+	public static Context getThemedContext(Context context, boolean nightMode) {
+		return new ContextThemeWrapper(context, !nightMode ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme);
+	}
+
+	public static LayoutInflater getInflater(Context ctx, boolean nightMode) {
+		return LayoutInflater.from(getThemedContext(ctx, nightMode));
+	}
 }

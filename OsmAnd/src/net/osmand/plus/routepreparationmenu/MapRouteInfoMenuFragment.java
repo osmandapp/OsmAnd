@@ -210,7 +210,7 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 				if (Build.VERSION.SDK_INT >= 23 && !nightMode) {
 					view.setSystemUiVisibility(view.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 				}
-				return nightMode ? R.color.dialog_divider_dark : R.color.dialog_divider_light;
+				return nightMode ? R.color.divider_color_dark : R.color.divider_color_light;
 			} else {
 				if (Build.VERSION.SDK_INT >= 23 && !nightMode) {
 					view.setSystemUiVisibility(view.getSystemUiVisibility() & ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
@@ -372,14 +372,13 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 		}
 		ProgressBar progressBarButton = (ProgressBar) view.findViewById(R.id.progress_bar_button);
 		if (progressBarButton != null) {
-			int visibility = publicTransportMode ? View.GONE : View.VISIBLE;
-			if (progressBarButton.getVisibility() != visibility) {
-				progressBarButton.setVisibility(visibility);
+			if (progressBarButton.getVisibility() != View.VISIBLE) {
+				progressBarButton.setVisibility(View.VISIBLE);
 			}
-			progressBarButton.setProgress(progress);
+			progressBarButton.setProgress(publicTransportMode ? 0 : progress);
 		}
 		TextViewExProgress textViewExProgress = (TextViewExProgress) view.findViewById(R.id.start_button_descr);
-		textViewExProgress.percent = progress / 100f;
+		textViewExProgress.percent = publicTransportMode ? 0 : progress / 100f;
 		textViewExProgress.invalidate();
 	}
 
@@ -395,12 +394,12 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 		if (progressBar != null) {
 			progressBar.setVisibility(View.GONE);
 		}
-		View progressBarButton = view.findViewById(R.id.progress_bar_button);
+		ProgressBar progressBarButton = (ProgressBar) view.findViewById(R.id.progress_bar_button);
 		if (progressBarButton != null) {
-			progressBarButton.setVisibility(View.GONE);
+			progressBarButton.setProgress(isPublicTransportMode() ? 0 : 100);
 		}
 		TextViewExProgress textViewExProgress = (TextViewExProgress) view.findViewById(R.id.start_button_descr);
-		textViewExProgress.percent = 1;
+		textViewExProgress.percent = isPublicTransportMode() ? 0 : 1;
 	}
 
 	public void show(MapActivity mapActivity) {
@@ -425,31 +424,40 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 		if (ctx == null || mainView == null || view == null) {
 			return;
 		}
+		updateNightMode();
 
-		boolean nightMode = isNightMode();
-		AndroidUtils.setBackground(ctx, view.findViewById(R.id.modes_layout_toolbar_container), nightMode,
+		AndroidUtils.setBackground(ctx, view.findViewById(R.id.modes_layout_toolbar_container), isNightMode(),
 				R.color.card_and_list_background_light, R.color.card_and_list_background_dark);
-		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.dividerFromDropDown), nightMode,
-				R.color.divider_light, R.color.divider_dark);
-		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.viaLayoutDivider), nightMode,
-				R.color.divider_light, R.color.divider_dark);
-		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.dividerButtons), nightMode,
-				R.color.divider_light, R.color.divider_dark);
-		AndroidUtils.setBackground(ctx, view.findViewById(R.id.controls_divider), nightMode,
-				R.color.divider_light, R.color.divider_dark);
-		AndroidUtils.setBackground(ctx, view.findViewById(R.id.app_modes_options_container), nightMode,
+		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.dividerFromDropDown), isNightMode(),
+				R.color.divider_color_light, R.color.divider_color_dark);
+		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.viaLayoutDivider), isNightMode(),
+				R.color.divider_color_light, R.color.divider_color_dark);
+		AndroidUtils.setBackground(ctx, mainView.findViewById(R.id.dividerButtons), isNightMode(),
+				R.color.divider_color_light, R.color.divider_color_dark);
+		AndroidUtils.setBackground(ctx, view.findViewById(R.id.controls_divider), isNightMode(),
+				R.color.divider_color_light, R.color.divider_color_dark);
+		AndroidUtils.setBackground(ctx, view.findViewById(R.id.app_modes_options_container), isNightMode(),
 				R.drawable.route_info_trans_gradient_light, R.drawable.route_info_trans_gradient_dark);
-		AndroidUtils.setBackground(ctx, view.findViewById(R.id.app_modes_fold_container), nightMode,
+		AndroidUtils.setBackground(ctx, view.findViewById(R.id.app_modes_fold_container), isNightMode(),
 				R.drawable.route_info_trans_gradient_left_light, R.drawable.route_info_trans_gradient_left_dark);
+		AndroidUtils.setBackground(ctx, getBottomScrollView(), isNightMode(),
+				R.color.activity_background_light, R.color.activity_background_dark);
+		AndroidUtils.setBackground(ctx, getCardsContainer(), isNightMode(),
+				R.color.activity_background_light, R.color.activity_background_dark);
 
-		int activeColor = ContextCompat.getColor(ctx, nightMode ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light);
+		if (getTopViewId() != 0) {
+			View topView = view.findViewById(getTopViewId());
+			AndroidUtils.setBackground(ctx, topView, isNightMode(), R.color.card_and_list_background_light, R.color.card_and_list_background_dark);
+		}
+
+		int activeColor = ContextCompat.getColor(ctx, isNightMode() ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
 		((TextView) view.findViewById(R.id.cancel_button_descr)).setTextColor(activeColor);
 		((TextView) mainView.findViewById(R.id.from_button_description)).setTextColor(activeColor);
 		((TextView) mainView.findViewById(R.id.via_button_description)).setTextColor(activeColor);
 		((TextView) mainView.findViewById(R.id.to_button_description)).setTextColor(activeColor);
 		((TextView) mainView.findViewById(R.id.map_options_route_button_title)).setTextColor(activeColor);
 
-		int mainFontColor = ContextCompat.getColor(ctx, nightMode ? R.color.main_font_dark : R.color.main_font_light);
+		int mainFontColor = ContextCompat.getColor(ctx, isNightMode() ? R.color.text_color_primary_dark : R.color.text_color_primary_light);
 		((TextView) mainView.findViewById(R.id.fromText)).setTextColor(mainFontColor);
 		((TextView) mainView.findViewById(R.id.ViaView)).setTextColor(mainFontColor);
 		((TextView) mainView.findViewById(R.id.toText)).setTextColor(mainFontColor);
@@ -460,7 +468,6 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 		((TextView) mainView.findViewById(R.id.toTitle)).setTextColor(descriptionColor);
 
 		ctx.setupRouteCalculationProgressBar((ProgressBar) mainView.findViewById(R.id.progress_bar));
-		setupRouteCalculationButtonProgressBar((ProgressBar) view.findViewById(R.id.progress_bar_button));
 	}
 
 	public static boolean showInstance(final MapActivity mapActivity, int initialMenuState) {
@@ -495,16 +502,6 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 
 		} catch (RuntimeException e) {
 			return false;
-		}
-	}
-
-	public void setupRouteCalculationButtonProgressBar(@NonNull ProgressBar pb) {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			int bgColor = ContextCompat.getColor(mapActivity, isNightMode() ? R.color.activity_background_dark : R.color.activity_background_light);
-			int progressColor = ContextCompat.getColor(mapActivity, isNightMode() ? R.color.active_buttons_and_links_dark : R.color.active_buttons_and_links_light);
-			pb.setProgressDrawable(AndroidUtils.createProgressDrawable(bgColor, progressColor));
-			pb.getIndeterminateDrawable().setColorFilter(progressColor, android.graphics.PorterDuff.Mode.SRC_IN);
 		}
 	}
 }

@@ -21,14 +21,13 @@ import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditorFragment;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.util.OpeningHoursParser;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class FavouritePointMenuController extends MenuController {
 
 	private FavouritePoint fav;
 	private MapMarker mapMarker;
-	private List<TransportStopRoute> routes = new ArrayList<>();
+
 	private TransportStopController transportStopController;
 
 	public FavouritePointMenuController(@NonNull MapActivity mapActivity, @NonNull PointDescription pointDescription, final @NonNull FavouritePoint fav) {
@@ -49,8 +48,7 @@ public class FavouritePointMenuController extends MenuController {
 		if (getObject() instanceof TransportStop) {
 			TransportStop stop = (TransportStop) getObject();
 			transportStopController = new TransportStopController(mapActivity, pointDescription, stop);
-			routes = transportStopController.processTransportStop();
-			builder.setRoutes(routes);
+			transportStopController.processRoutes();
 		}
 
 		Object originObject = getBuilder().getOriginObject();
@@ -73,7 +71,10 @@ public class FavouritePointMenuController extends MenuController {
 
 	@Override
 	public List<TransportStopRoute> getTransportStopRoutes() {
-		return routes;
+		if (transportStopController != null) {
+			return transportStopController.getTransportStopRoutes();
+		}
+		return null;
 	}
 
 	@Override
@@ -129,7 +130,7 @@ public class FavouritePointMenuController extends MenuController {
 
 	@Override
 	public Drawable getSecondLineTypeIcon() {
-		return getIcon(R.drawable.ic_action_group_name_16, isLight() ? R.color.icon_color : R.color.ctx_menu_bottom_view_icon_dark);
+		return getIcon(R.drawable.ic_action_group_name_16, isLight() ? R.color.icon_color_default_light : R.color.ctx_menu_bottom_view_icon_dark);
 	}
 
 	@Override
@@ -165,8 +166,6 @@ public class FavouritePointMenuController extends MenuController {
 			if (originObject instanceof Amenity) {
 				AmenityMenuController.addTypeMenuItem((Amenity) originObject, builder);
 			}
-		} else {
-			addMyLocationToPlainItems(latLon);
-		}
+		} 
 	}
 }

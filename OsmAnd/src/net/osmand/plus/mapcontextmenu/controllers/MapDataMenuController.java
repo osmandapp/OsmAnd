@@ -28,8 +28,8 @@ import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.liveupdates.LiveUpdatesHelper;
-import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
+import net.osmand.plus.mapcontextmenu.builders.MapDataMenuBuilder;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.DownloadedRegionsLayer.DownloadMapObject;
@@ -57,7 +57,7 @@ public class MapDataMenuController extends MenuController {
 	private DownloadIndexesThread downloadThread;
 
 	public MapDataMenuController(@NonNull MapActivity mapActivity, @NonNull PointDescription pointDescription, final @NonNull DownloadMapObject mapObject) {
-		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
+		super(new MapDataMenuBuilder(mapActivity), pointDescription, mapActivity);
 		this.mapObject = mapObject;
 		indexItem = mapObject.getIndexItem();
 		localIndexInfo = mapObject.getLocalIndexInfo();
@@ -122,7 +122,7 @@ public class MapDataMenuController extends MenuController {
 			}
 		};
 		leftDownloadButtonController.caption = mapActivity.getString(R.string.shared_string_download);
-		leftDownloadButtonController.updateStateListDrawableIcon(R.drawable.ic_action_import, true);
+		leftDownloadButtonController.leftIconId = R.drawable.ic_action_import;
 
 		rightDownloadButtonController = new TitleButtonController() {
 			@Override
@@ -152,7 +152,7 @@ public class MapDataMenuController extends MenuController {
 			}
 		};
 		rightDownloadButtonController.caption = mapActivity.getString(R.string.download_select_map_types);
-		rightDownloadButtonController.updateStateListDrawableIcon(R.drawable.ic_plugin_srtm, true);
+		rightDownloadButtonController.leftIconId = R.drawable.ic_plugin_srtm;
 
 		bottomTitleButtonController = new TitleButtonController() {
 			@Override
@@ -169,7 +169,7 @@ public class MapDataMenuController extends MenuController {
 			}
 		};
 		bottomTitleButtonController.caption = mapActivity.getString(R.string.shared_string_delete);
-		bottomTitleButtonController.updateStateListDrawableIcon(R.drawable.ic_action_delete_dark, true);
+		bottomTitleButtonController.leftIconId = R.drawable.ic_action_delete_dark;
 
 		titleProgressController = new TitleProgressController() {
 			@Override
@@ -205,7 +205,7 @@ public class MapDataMenuController extends MenuController {
 
 	@Override
 	public int getAdditionalInfoColorId() {
-		return R.color.icon_color;
+		return R.color.icon_color_default_light;
 	}
 
 	@Override
@@ -398,7 +398,7 @@ public class MapDataMenuController extends MenuController {
 		}
 
 		leftDownloadButtonController.visible = true;
-		leftDownloadButtonController.updateStateListDrawableIcon(R.drawable.ic_action_import, true);
+		leftDownloadButtonController.leftIconId = R.drawable.ic_action_import;
 		if (backuped) {
 			leftDownloadButtonController.caption = mapActivity.getString(R.string.local_index_mi_restore);
 		} else if (indexItem != null) {

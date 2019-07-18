@@ -247,7 +247,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 				if (Build.VERSION.SDK_INT >= 23 && !nightMode) {
 					view.setSystemUiVisibility(view.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 				}
-				return nightMode ? R.color.dialog_divider_dark : R.color.dialog_divider_light;
+				return nightMode ? R.color.divider_color_dark : R.color.divider_color_light;
 			} else {
 				if (Build.VERSION.SDK_INT >= 23 && !nightMode) {
 					view.setSystemUiVisibility(view.getSystemUiVisibility() & ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
@@ -264,7 +264,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 
 	@Override
 	protected Drawable getContentIcon(@DrawableRes int id) {
-		return getIcon(id, nightMode ? R.color.ctx_menu_info_text_dark : R.color.icon_color);
+		return getIcon(id, nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light);
 	}
 
 	public void analyseOnMap(LatLon location, GpxDisplayItem gpxItem) {
@@ -389,7 +389,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		ImageButton myLocButtonView = this.myLocButtonView;
 		if (myLocButtonView != null) {
 			if (!enabled) {
-				myLocButtonView.setImageDrawable(getIcon(R.drawable.map_my_location, R.color.icon_color));
+				myLocButtonView.setImageDrawable(getIcon(R.drawable.map_my_location, R.color.icon_color_default_light));
 				AndroidUtils.setBackground(app, myLocButtonView, nightMode, R.drawable.btn_circle, R.drawable.btn_circle_night);
 				myLocButtonView.setContentDescription(mapActivity.getString(R.string.unknown_location));
 			} else if (tracked) {
@@ -791,6 +791,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 					mapActivity.getMapView().setMapPositionX(visible ? 0 : 1);
 				}
 			}
+			mapActivity.updateStatusBarColor();
 			mapActivity.refreshMap();
 		}
 	}
@@ -856,7 +857,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		}
 	}
 
-	static boolean showFromRouteInfo(FragmentManager fragmentManager, int routeIndex, int initialMenuState) {
+	public static boolean showFromRouteInfo(FragmentManager fragmentManager, int routeIndex, int initialMenuState) {
 		try {
 			ChooseRouteFragment fragment = new ChooseRouteFragment();
 			Bundle args = new Bundle();
@@ -880,7 +881,9 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		if (mapActivity != null) {
 			useRouteInfoMenu = false;
 			dismiss();
-			mapActivity.getMapLayers().getMapControlsLayer().startNavigation();
+			if (!mapActivity.getMyApplication().getRoutingHelper().isPublicTransportMode()) {
+				mapActivity.getMapLayers().getMapControlsLayer().startNavigation();
+			}
 		}
 	}
 

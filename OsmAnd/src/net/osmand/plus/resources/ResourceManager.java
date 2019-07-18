@@ -245,6 +245,11 @@ public class ResourceManager {
 		float tiles = (dm.widthPixels / 256 + 2) * (dm.heightPixels / 256 + 2) * 3;
 		log.info("Bitmap tiles to load in memory : " + tiles);
 		bitmapTilesCache.setMaxCacheSize((int) (tiles));
+
+		File path = context.getAppPath(IndexConstants.ROUTING_PROFILES_DIR);
+		if (!path.exists()) {
+			path.mkdir();
+		}
 	}
 
 	public BitmapTilesCache getBitmapTilesCache() {

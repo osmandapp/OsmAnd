@@ -77,7 +77,7 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 
 		articleToolbarText = (TextView) mainView.findViewById(R.id.title_text_view);
 		ImageView options = (ImageView) mainView.findViewById(R.id.options_button);
-		options.setImageDrawable(getIcon(R.drawable.ic_overflow_menu_white, R.color.icon_color));
+		options.setImageDrawable(getIcon(R.drawable.ic_overflow_menu_white, R.color.icon_color_default_light));
 		options.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -101,8 +101,8 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 
 		ColorStateList selectedLangColorStateList = AndroidUtils.createPressedColorStateList(
 				getContext(), nightMode,
-				R.color.icon_color, R.color.wikivoyage_active_light,
-				R.color.icon_color, R.color.wikivoyage_active_dark
+				R.color.icon_color_default_light, R.color.wikivoyage_active_light,
+				R.color.icon_color_default_light, R.color.wikivoyage_active_dark
 		);
 
 		readFullArticleButton = (TextView) mainView.findViewById(R.id.read_full_article);
@@ -215,7 +215,7 @@ public class WikipediaDialogFragment extends WikiArticleBaseDialogFragment {
 	public static void showFullArticle(@NonNull Context context, @NonNull Uri uri, boolean nightMode) {
 		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
 			CustomTabsIntent customTabsIntent = new CustomTabsIntent.Builder()
-					.setToolbarColor(ContextCompat.getColor(context, nightMode ? R.color.actionbar_dark_color : R.color.actionbar_light_color))
+					.setToolbarColor(ContextCompat.getColor(context, nightMode ? R.color.app_bar_color_dark : R.color.app_bar_color_light))
 					.build();
 			customTabsIntent.launchUrl(context, uri);
 		} else {

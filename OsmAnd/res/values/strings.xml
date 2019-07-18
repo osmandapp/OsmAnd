@@ -11,19 +11,142 @@
 	Thx - Hardy
 
 -->
+    <string name="turn_on_profile_desc">Please turn on at least one application profile, to use this setting.</string>
+    <string name="rendering_attr_winter_road_name">Winter road</string>
+    <string name="rendering_attr_ice_road_name">Ice road</string>
+    <string name="routeInfo_winter_ice_road_name">Winter and ice roads</string>
+    <string name="rendering_attr_tracktype_grade1_name">Solid (paved)</string>
+    <string name="rendering_attr_tracktype_grade2_name">Solid (unpaved)</string>
+    <string name="rendering_attr_tracktype_grade3_name">Mostly solid</string>
+    <string name="rendering_attr_tracktype_grade4_name">Mostly soft</string>
+    <string name="rendering_attr_tracktype_grade5_name">Soft</string>
+    <string name="routeInfo_tracktype_name">Surface firmness</string>
+    <string name="shared_string_file_is_saved">%s is saved</string>
+    <string name="shared_string_open_track">Open track</string>
+    <string name="shared_string_track_is_saved">Track %s is saved</string>
+    <string name="turn_screen_on_router">Wake on turn</string>
+    <string name="turn_screen_on_time_descr">Set the time for which the screen will turn on.</string>
+    <string name="turn_screen_on_sensor">Use proximity sensor</string>
+    <string name="turn_screen_on_sensor_descr">Wave your hand over the top of the screen to turn on the screen while navigating.</string>
+    <string name="app_mode_offroad">Offroad</string>
+    <string name="edit_profile_setup_title">Setup profile</string>
+    <string name="edit_profile_setup_subtitle">Profile keeps its own settings</string>
+    <string name="edit_profile_setup_map_subtitle">Select default map options for profile</string>
+    <string name="edit_profile_screen_options_subtitle">Select default screen options for profile</string>
+    <string name="edit_profile_nav_settings_subtitle">Select default navigation settings for profile</string>
+    <string name="routing_attr_max_num_changes_description">Specify max number of changes</string>
+    <string name="routing_attr_max_num_changes_name">Number of changes</string>
+    <string name="app_mode_ufo">UFO</string>
+    <string name="release_3_4">
+        • Application profiles: create a custom profile for your own needs, with a custom icon and color\n\n
+        • Now customize any profile\'s default and min/max speeds\n\n
+        • Added a widget for the current coordinates\n\n
+        • Added options to show the compass and a radius ruler on the map\n\n
+        • Fix background track logging\n\n
+        • Improved background map downloads\n\n
+        • Returned \'Turn Screen On\' option\n\n
+        • Fixed Wikipedia language selection\n\n
+        • Fixed compass button behavior during navigation\n\n
+        • Other bug fixes\n\n
+    </string>
+    <string name="precision_hdop_and_vdop">Precision horizontally: %1$s, vertically: %2$s</string>
+    <string name="precision_hdop">Precision horizontally: %s</string>
+    <string name="app_mode_personal_transporter">Personal transporter</string>
+    <string name="app_mode_monowheel">Monowheel</string>
+    <string name="app_mode_scooter">Scooter</string>
+    <string name="shared_string_min_speed">Min. speed</string>
+    <string name="shared_string_max_speed">Max. speed</string>
+    <string name="default_speed_setting_title">Default speed</string>
+    <string name="default_speed_setting_descr">Change default speed settings</string>
+    <string name="minmax_speed_dialog_title">Set min/max speed</string>
+    <string name="default_speed_dialog_msg">Used to calculate the expected arrival time during routing</string>
+    <string name="new_profile">New profile</string>
+    <string name="shared_string_crash">Crash</string>
+    <string name="last_launch_crashed">The last launch of OsmAnd failed. Please help us to improve OsmAnd by sharing the error message.</string>
+    <string name="press_again_to_change_the_map_orientation">Tap again to change the map orientation</string>
+    <string name="process_downloading_service">OsmAnd downloading service</string>
+    <string name="shared_string_color_magenta">Magenta</string>
+    <string name="shared_string_icon">Icon</string>
+    <string name="rate_dialog_descr">Please give us 30 seconds by sharing your feedback and rating our work on Google Play.</string>
+    <string name="button_rate">Rate</string>
+    <string name="shared_string_privacy_policy">Privacy Policy</string>
+    <string name="help_us_make_osmand_better">Help us make OsmAnd better!</string>
+    <string name="make_osmand_better_descr">Allow OsmAnd to collect and process anonymous application usage data. We do not collect or store data about your position, or about any locations you view on the map.\n\nYou can change your selection at any time in Settings > Privacy and Security.</string>
+    <string name="choose_data_to_share">Choose what type of data you want to share:</string>
+    <string name="downloaded_maps">Maps downloaded</string>
+    <string name="visited_screens">Screens visited</string>
+    <string name="collected_data">Data collected</string>
+    <string name="collected_data_descr">Define which data you allow OsmAnd to share.</string>
+    <string name="downloaded_maps_collect_descr">Helps us understand which maps of which regions and countries are the most popular.</string>
+    <string name="visited_screens_collect_descr">Helps us understand which OsmAnd features are the most popular.</string>
+    <string name="privacy_and_security_change_descr">By tapping \"Allow\" you agree with our %1$s</string>
+    <string name="settings_privacy_and_security">Privacy and security</string>
+    <string name="settings_privacy_and_security_desc">Select which data you are sharing with us</string>
+    <string name="shared_string_no_thank_you">No, thank you</string>
+    <string name="shared_string_allow">Allow</string>
+    <string name="profile_name_hint">Profile name</string>
+    <string name="nav_type_hint">Navigation type</string>
+    <string name="app_mode_taxi">Taxi</string>
+    <string name="app_mode_shuttle_bus">Shuttle bus</string>
+    <string name="app_mode_subway">Subway</string>
+    <string name="app_mode_horse">Horse</string>
+    <string name="app_mode_helicopter">Helicopter</string>
+    <string name="osmand_routing_promo">You can add your own modified version of the file routing.xml in ..osmand/routing</string>
+    <string name="app_mode_skiing">Skiing</string>
+    <string name="base_profile_descr_ski">Skiing</string>
+    <string name="show_compass_ruler">Show compass ruler</string>
+    <string name="hide_compass_ruler">Hide compass ruler</string>
+    <string name="select_icon_profile_dialog_title">Select icon</string>
+    <string name="settings_routing_mode_string">Mode: %s</string>
+    <string name="settings_derived_routing_mode_string">User mode, derived from: %s</string>
+    <string name="routing_profile_ski">Ski</string>
+    <string name="profile_type_descr_string">Type: %s</string>
+    <string name="profile_type_base_string">Base profile</string>
+    <string name="profile_alert_need_routing_type_title">Select navigation type</string>
+    <string name="profile_alert_need_routing_type_msg">Please select a navigation type for the new application profile</string>
+    <string name="profile_alert_need_profile_name_title">Enter profile name</string>
+    <string name="profile_alert_need_profile_name_msg">Profile name shouldn\'t be empty!</string>
+    <string name="profile_alert_duplicate_name_title">Duplicate name</string>
+    <string name="profile_alert_duplicate_name_msg">There is already profile with that name</string>
+    <string name="profile_alert_cant_delete_base">You cannot delete OsmAnd\'s base profiles</string>
+    <string name="profile_alert_need_save_title">Save changes</string>
+    <string name="profile_alert_need_save_msg">You need to save changes to the profile before proceeding</string>
+    <string name="profile_alert_delete_title">Delete profile</string>
+    <string name="profile_alert_delete_msg">Are you sure you want to delete the %s profile</string>
+    <string name="select_base_profile_dialog_title">Select a base profile</string>
+    <string name="select_base_profile_dialog_message">Base your custom profile on one of the default app profiles, this defines the basic setup like default visibility of widgets and units of speed and distance. These are the default app profiles, together with examples of custom profiles they may be extended to:</string>
+    <string name="select_nav_profile_dialog_title">Select navigation type</string>
+    <string name="base_profile_descr_car">Car, truck, motorcycle</string>
+    <string name="base_profile_descr_bicycle">MTB, moped, horse</string>
+    <string name="base_profile_descr_pedestrian">Walking, hiking, running</string>
+    <string name="base_profile_descr_public_transport">All PT types</string>
+    <string name="base_profile_descr_boat">Ship, rowing, sailing</string>
+    <string name="base_profile_descr_aircraft">Airplane, gliding</string>
+    <string name="routing_profile_geocoding">Geocoding</string>
+    <string name="routing_profile_straightline">Straight line</string>
+    <string name="routing_profile_broutrer">BRouter (offline)</string>
+    <string name="osmand_default_routing">OsmAnd routing</string>
+    <string name="custom_routing">Custom routing profile</string>
+    <string name="special_routing_type">Special routing</string>
+    <string name="third_party_routing_type">Third-party routing</string>
+    <string name="application_profiles_descr">Select the profiles to be visible in the app.</string>
+    <string name="application_profiles">Application profiles</string>
+    <string name="searching_gps">Searching GPS</string>
+    <string name="coordinates_widget">Coordinates widget</string>
     <string name="files_moved">Moved %1$d files (%2$s).</string>
     <string name="files_copied">Copied %1$d files (%2$s).</string>
     <string name="files_failed">Failed to copy %1$d files (%2$s).</string>
     <string name="files_present">%1$d files (%2$s) are present at previous location \'%3$s\'.</string>
     <string name="move_maps">Move maps</string>
     <string name="dont_move_maps">Don\'t move</string>
-    <string name="public_transport_ped_route_title">The route by foot is approximately %1$s and it could be faster than by public transport</string>
+    <string name="public_transport_ped_route_title">The route by foot is approximately %1$s and may be faster than via public transport</string>
     <string name="public_transport_no_route_title">Unfortunately, OsmAnd could not find a route suitable for your settings.</string>
     <string name="public_transport_try_ped">Try the pedestrian navigation.</string>
     <string name="public_transport_try_change_settings">Try changing the settings.</string>
     <string name="public_transport_calc_pedestrian">Calculate pedestrian route</string>
     <string name="public_transport_type">Transport type</string>
     <string name="send_log">Send log</string>
+
     <string name="routing_attr_avoid_tram_name">Avoid trams</string>
     <string name="routing_attr_avoid_tram_description">Avoid trams</string>
     <string name="routing_attr_avoid_bus_name">Avoid buses</string>
@@ -102,6 +225,11 @@
     <string name="rendering_attr_highway_class_path_name">Path</string>
     <string name="rendering_attr_highway_class_cycleway_name">Cycleway</string>
     <string name="rendering_attr_undefined_name">Undefined</string>
+	<string name="rendering_attr_highway_class_track_grade1_name">Grade 1</string>
+	<string name="rendering_attr_highway_class_track_grade2_name">Grade 2</string>
+	<string name="rendering_attr_highway_class_track_grade3_name">Grade 3</string>
+	<string name="rendering_attr_highway_class_track_grade4_name">Grade 4</string>
+	<string name="rendering_attr_highway_class_track_grade5_name">Grade 5</string>
     <string name="release_3_3">
         • New \'Directions\' screen: Displays Home and Work destination buttons, \'previous route\' shortcut, list of active GPX tracks and markers, search history\n\n
         • Additional info under \'Route details\': road types, surface, steepness, smoothness\n\n
@@ -117,7 +245,7 @@
     <string name="time_of_day">Time of day</string>
     <string name="by_transport_type">By %1$s</string>
     <string name="step_by_step">Step by step</string>
-    <string name="road_types">Road types</string>
+    <string name="routeInfo_road_types_name">Road types</string>
     <string name="exit_at">Exit at</string>
     <string name="sit_on_the_stop">Board at stop</string>
     <string name="shared_string_swap">Swap</string>
@@ -445,7 +573,6 @@
     <string name="plan_route">Plan route</string>
     <string name="shared_string_sort">Sort</string>
     <string name="coordinate_input">Coordinate input</string>
-    <string name="is_saved">is saved</string>
     <string name="marker_save_as_track_descr">Export your markers to the following GPX file:</string>
     <string name="marker_save_as_track">Save as GPX file</string>
     <string name="move_to_history">Move to history</string>
@@ -1084,7 +1211,7 @@
     <string name="simulate_your_location_stop_descr">Stop simulating your position.</string>
     <string name="simulate_your_location_descr">Simulate your position using a calculated route or a recorded GPX track.</string>
     <string name="looking_up_address">Looking up address</string>
-    <string name="av_locations_descr">GPX file with note locations.</string>
+    <string name="av_locations_descr">GPX file with locations.</string>
     <string name="av_locations">Locations</string>
     <string name="plugin_settings">Plugins</string>
     <string name="routing_attr_avoid_shuttle_train_name">Avoid shuttle train</string>
@@ -1811,6 +1938,12 @@
     <string name="contribution_activity">Install version</string>
     <string name="choose_osmand_theme_descr">Choose how the app looks.</string>
     <string name="choose_osmand_theme">App theme</string>
+    <string name="external_input_device">External input devices</string>
+    <string name="external_input_device_descr">Select a device such as a generic keyboard or WunderLINQ for external controls.</string>
+    <string name="sett_no_ext_input">None</string>
+    <string name="sett_generic_ext_input">Generic Keyboard</string>
+    <string name="sett_wunderlinq_ext_input">WunderLINQ</string>
+    <string name="sett_parrot_ext_input">Parrot</string>
     <string name="accessibility_options">Accessibility options</string>
     <string name="select_address_activity">Select address</string>
     <string name="favourites_list_activity">Select Favorite</string>
@@ -3108,13 +3241,37 @@
     <string name="wiki_article_not_found">Article not found</string>
     <string name="how_to_open_wiki_title">How to open Wikipedia articles?</string>
     <string name="test_voice_desrc">Tap a button and listen to the corresponding voice prompt to identify missing or faulty prompts.</string>
-    <string name="route_class_stat_container">Class</string>
-    <string name="route_surface_stat_container">Surface</string>
-    <string name="route_smoothness_stat_container">Smoothness</string>
-    <string name="route_steepness_stat_container">Steepness</string>
+    <string name="routeInfo_roadClass_name">Class</string>
+    <string name="routeInfo_surface_name">Surface</string>
+    <string name="routeInfo_smoothness_name">Smoothness</string>
+    <string name="routeInfo_steepness_name">Steepness</string>
     <string name="run_full_osmand_msg">You are using {0} Map which is powered by OsmAnd. Do you want to launch OsmAnd full version?</string>
     <string name="run_full_osmand_header">Launch OsmAnd?</string>
     <string name="routing_attr_avoid_sett_name">Avoid cobblestone and sett</string>
     <string name="routing_attr_avoid_sett_description">Avoid cobblestone and sett</string>
+    <string name="quick_action_need_to_add_item_to_list">You need to add at least one Item to list in Quick Action\' Settings</string>
+    <string name="routing_attr_piste_type_downhill_name">Alpine/downhill ski</string>
+    <string name="routing_attr_piste_type_downhill_description">Slopes for alpine or downhill skiing and access to ski lifts.</string>
+    <string name="routing_attr_piste_type_nordic_name">Cross country/nordic ski</string>
+    <string name="routing_attr_piste_type_nordic_description">Trails for nordic or cross-country skiing.</string>
+    <string name="routing_attr_piste_type_skitour_name">Ski touring</string>
+    <string name="routing_attr_piste_type_skitour_description">Routes for ski touring.</string>
+    <string name="routing_attr_piste_type_sled_name">Sled</string>
+    <string name="routing_attr_piste_type_sled_description">Slopes for sled usage.</string>
+    <string name="routing_attr_allow_intermediate_name">Allow intermediate routes</string>
+    <string name="routing_attr_allow_intermediate_description">More difficult routes with steeper sections. Generally some obstacles that should be avoided.</string>
+    <string name="routing_attr_allow_advanced_name">Allow advanced routes</string>
+    <string name="routing_attr_allow_advanced_description">Difficult routes, with dangerous obstacles and steep sections.</string>
+    <string name="routing_attr_allow_expert_name">Allow expert routes</string>
+    <string name="routing_attr_allow_expert_description">Extremely difficult routes, with dangerous obstacles and surroundings.</string>
+    <string name="routing_attr_allow_skating_only_name">Allow skating only routes</string>
+    <string name="routing_attr_allow_skating_only_description">Routes groomed for free style or skating only without classic trails.</string>
+    <string name="routing_attr_allow_classic_only_name">Allow classic only routes</string>
+    <string name="routing_attr_allow_classic_only_description">Routes groomed for classic style only without skating trails. This includes routes groomed by a smaller snowmobile with looser piste and tracks made manually by skiers.</string>
+    <string name="routing_attr_difficulty_preference_name">Prefered difficulty</string>
+    <string name="routing_attr_difficulty_preference_description">Prefer routes of this difficulty, although routing over harder or easier pistes is still possible if shorter.</string>
+    <string name="routing_attr_freeride_policy_name">Off-piste</string>
+    <string name="routing_attr_freeride_policy_description">Freerides and offpiste are unofficial routes and passages. Typically ungroomed, unmainted by the officials and not checked in the evening. Enter at own risk.</string>
+
 
 </resources>

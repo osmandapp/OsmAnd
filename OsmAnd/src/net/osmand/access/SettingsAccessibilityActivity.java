@@ -101,8 +101,6 @@ public class SettingsAccessibilityActivity extends SettingsBaseActivity {
 		cat.addPreference(createCheckBoxPreference(settings.DIRECTION_HAPTIC_FEEDBACK, R.string.access_direction_haptic_feedback,
 				R.string.access_direction_haptic_feedback_descr));
 
-		cat.addPreference(createCheckBoxPreference(settings.ZOOM_BY_TRACKBALL, R.string.zoom_by_trackball,
-				R.string.zoom_by_trackball_descr));
 	}
 
 

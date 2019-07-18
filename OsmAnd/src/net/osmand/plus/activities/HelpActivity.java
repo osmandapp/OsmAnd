@@ -58,7 +58,7 @@ public class HelpActivity extends OsmandActionBarActivity implements AdapterView
 		ListView listView = (ListView) findViewById(android.R.id.list);
 		listView.setAdapter(mAdapter);
 		listView.setOnItemClickListener(this);
-		int dividerColor = lightContent ? R.color.icon_color_light : R.color.dialog_inactive_text_color_dark;
+		int dividerColor = lightContent ? R.color.divider_color_light : R.color.divider_color_dark;
 		Drawable dividerDrawable = new ColorDrawable(ContextCompat.getColor(this, dividerColor));
 		listView.setDivider(dividerDrawable);
 		listView.setDividerHeight(AndroidUtils.dpToPx(this, 1f));
@@ -103,7 +103,7 @@ public class HelpActivity extends OsmandActionBarActivity implements AdapterView
 		contextMenuAdapter.addItem(createSocialItem(R.string.twitter, R.string.twitter_address,
 				R.drawable.ic_action_social_twitter));
 	        contextMenuAdapter.addItem(createSocialItem(R.string.reddit, R.string.reddit_address,
-				R.drawable.ic_action_social_twitter));
+				R.drawable.ic_action_social_reddit));
 		contextMenuAdapter.addItem(createSocialItem(R.string.facebook, R.string.facebook_address,
 				R.drawable.ic_action_social_facebook));
 		contextMenuAdapter.addItem(createSocialItem(R.string.vk, R.string.vk_address,

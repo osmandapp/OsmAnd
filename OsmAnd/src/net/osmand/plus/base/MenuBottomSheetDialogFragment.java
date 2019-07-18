@@ -1,6 +1,7 @@
 package net.osmand.plus.base;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
@@ -19,11 +21,12 @@ import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
+import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.helpers.AndroidUiHelper;
 
@@ -41,8 +44,13 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 	protected boolean nightMode;
 
 	protected int themeRes;
+	protected View dismissButton;
+	protected View rightButton;
 
 	private LinearLayout itemsContainer;
+
+	@StringRes
+	protected int dismissButtonStringRes = R.string.shared_string_cancel;
 
 	public void setUsedOnMap(boolean usedOnMap) {
 		this.usedOnMap = usedOnMap;
@@ -54,7 +62,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 		if (savedInstanceState != null) {
 			usedOnMap = savedInstanceState.getBoolean(USED_ON_MAP_KEY);
 		}
-		nightMode = isNightMode();
+		nightMode = isNightMode(requiredMyApplication());
 		themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 	}
 
@@ -62,10 +70,8 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 		createMenuItems(savedInstanceState);
-
-		OsmandApplication app = getMyApplication();
-
-		View mainView = View.inflate(new ContextThemeWrapper(app, themeRes), R.layout.bottom_sheet_menu_base, null);
+		Context ctx = requireContext();
+		View mainView = View.inflate(new ContextThemeWrapper(ctx, themeRes), R.layout.bottom_sheet_menu_base, null);
 		if (useScrollableItemsContainer()) {
 			itemsContainer = (LinearLayout) mainView.findViewById(R.id.scrollable_items_container);
 		} else {
@@ -76,12 +82,9 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 
 		inflateMenuItems();
 
-		int bottomDividerColorId = getBottomDividerColorId();
-		if (bottomDividerColorId != DEFAULT_VALUE) {
-			mainView.findViewById(R.id.bottom_row_divider).setBackgroundColor(getResolvedColor(bottomDividerColorId));
-		}
-
-		mainView.findViewById(R.id.dismiss_button).setOnClickListener(new View.OnClickListener() {
+		dismissButton = mainView.findViewById(R.id.dismiss_button);
+		UiUtilities.setupDialogButton(nightMode, dismissButton, getDismissByttonType(), getDismissButtonTextId());
+		dismissButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				onDismissButtonClickAction();
@@ -89,19 +92,13 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 			}
 		});
 		if (hideButtonsContainer()) {
-			mainView.findViewById(R.id.bottom_row_divider).setVisibility(View.GONE);
 			mainView.findViewById(R.id.buttons_container).setVisibility(View.GONE);
 		} else {
-			((TextView) mainView.findViewById(R.id.dismiss_button_text)).setText(getDismissButtonTextId());
-
 			int rightBottomButtonTextId = getRightBottomButtonTextId();
 			if (rightBottomButtonTextId != DEFAULT_VALUE) {
-				View buttonsDivider = mainView.findViewById(R.id.bottom_buttons_divider);
-				buttonsDivider.setVisibility(View.VISIBLE);
-				if (bottomDividerColorId != DEFAULT_VALUE) {
-					buttonsDivider.setBackgroundColor(getResolvedColor(bottomDividerColorId));
-				}
-				View rightButton = mainView.findViewById(R.id.right_bottom_button);
+				mainView.findViewById(R.id.buttons_divider).setVisibility(View.VISIBLE);
+				rightButton = mainView.findViewById(R.id.right_bottom_button);
+				UiUtilities.setupDialogButton(nightMode, rightButton, getRightBottomByttonType(), rightBottomButtonTextId);
 				rightButton.setVisibility(View.VISIBLE);
 				rightButton.setOnClickListener(new View.OnClickListener() {
 					@Override
@@ -109,23 +106,24 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 						onRightBottomButtonClick();
 					}
 				});
-				((TextView) rightButton.findViewById(R.id.right_bottom_button_text)).setText(rightBottomButtonTextId);
 			}
 		}
-
+		updateBottomButtons();
 		setupHeightAndBackground(mainView);
-
 		return mainView;
 	}
 
 	@Override
 	public void onStart() {
 		super.onStart();
-		if (!AndroidUiHelper.isOrientationPortrait(getActivity())) {
+		FragmentActivity activity = requireActivity();
+		if (!AndroidUiHelper.isOrientationPortrait(activity)) {
 			final Window window = getDialog().getWindow();
-			WindowManager.LayoutParams params = window.getAttributes();
-			params.width = getActivity().getResources().getDimensionPixelSize(R.dimen.landscape_bottom_sheet_dialog_fragment_width);
-			window.setAttributes(params);
+			if (window != null) {
+				WindowManager.LayoutParams params = window.getAttributes();
+				params.width = activity.getResources().getDimensionPixelSize(R.dimen.landscape_bottom_sheet_dialog_fragment_width);
+				window.setAttributes(params);
+			}
 		}
 	}
 
@@ -146,7 +144,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 
 	public abstract void createMenuItems(Bundle savedInstanceState);
 
-	protected void inflateMenuItems(){
+	protected void inflateMenuItems() {
 		OsmandApplication app = getMyApplication();
 		for (BaseBottomSheetItem item : items) {
 			item.inflate(app, itemsContainer, nightMode);
@@ -155,7 +153,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 
 	@Override
 	protected Drawable getContentIcon(@DrawableRes int id) {
-		return getIcon(id, nightMode ? R.color.ctx_menu_info_text_dark : R.color.on_map_icon_color);
+		return getIcon(id, nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light);
 	}
 
 	protected Drawable getActiveIcon(@DrawableRes int id) {
@@ -169,7 +167,8 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 
 	@ColorInt
 	protected int getResolvedColor(@ColorRes int colorId) {
-		return ContextCompat.getColor(getContext(), colorId);
+		Context ctx = getContext();
+		return ctx != null ? ContextCompat.getColor(ctx, colorId) : 0;
 	}
 
 	protected void setupHeightAndBackground(final View mainView) {
@@ -184,6 +183,13 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 		mainView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 			@Override
 			public void onGlobalLayout() {
+				ViewTreeObserver obs = mainView.getViewTreeObserver();
+				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+					obs.removeOnGlobalLayoutListener(this);
+				} else {
+					obs.removeGlobalOnLayoutListener(this);
+				}
+
 				final View contentView = useScrollableItemsContainer() ? mainView.findViewById(R.id.scroll_view) : itemsContainer;
 				if (contentView.getHeight() > contentHeight) {
 					if (useScrollableItemsContainer()) {
@@ -204,22 +210,13 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 				} else {
 					mainView.setBackgroundResource(showTopShadow ? getLandscapeTopsidesBgResId() : getLandscapeSidesBgResId());
 				}
-
-				ViewTreeObserver obs = mainView.getViewTreeObserver();
-				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-					obs.removeOnGlobalLayoutListener(this);
-				} else {
-					obs.removeGlobalOnLayoutListener(this);
-				}
 			}
 		});
 	}
 
 	private int getContentHeight(int availableScreenHeight) {
 		int customHeight = getCustomHeight();
-		int maxHeight = availableScreenHeight
-				- AndroidUtils.dpToPx(getContext(), 1) // divider height
-				- getResources().getDimensionPixelSize(R.dimen.bottom_sheet_cancel_button_height);
+		int maxHeight = availableScreenHeight - getResources().getDimensionPixelSize(R.dimen.dialog_button_ex_height);
 		if (customHeight != DEFAULT_VALUE && customHeight <= maxHeight) {
 			return customHeight;
 		}
@@ -239,13 +236,21 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 	}
 
 	@ColorRes
-	protected int getBottomDividerColorId() {
+	protected int getDividerColorId() {
 		return DEFAULT_VALUE;
 	}
 
 	@StringRes
 	protected int getDismissButtonTextId() {
-		return R.string.shared_string_cancel;
+		return dismissButtonStringRes;
+	}
+
+	protected void setDismissButtonTextId(@StringRes int stringRes) {
+		dismissButtonStringRes = stringRes;
+	}
+
+	protected DialogButtonType getDismissByttonType() {
+		return DialogButtonType.SECONDARY;
 	}
 
 	protected void onDismissButtonClickAction() {
@@ -257,13 +262,38 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 		return DEFAULT_VALUE;
 	}
 
+	protected DialogButtonType getRightBottomByttonType() {
+		return DialogButtonType.PRIMARY;
+	}
+
 	protected void onRightBottomButtonClick() {
 
 	}
 
+	protected boolean isDismissButtonEnabled() {
+		return true;
+	}
+
+	protected boolean isRightBottomButtonEnabled() {
+		return true;
+	}
+
+	protected void updateBottomButtons() {
+		if (dismissButton != null) {
+			boolean enabled = isDismissButtonEnabled();
+			dismissButton.setEnabled(enabled);
+			dismissButton.findViewById(R.id.button_text).setEnabled(enabled);
+		}
+		if (rightButton != null) {
+			boolean enabled = isRightBottomButtonEnabled();
+			rightButton.setEnabled(enabled);
+			rightButton.findViewById(R.id.button_text).setEnabled(enabled);
+		}
+	}
+
 	@ColorRes
 	protected int getBgColorId() {
-		return nightMode ? R.color.bg_color_dark : R.color.bg_color_light;
+		return nightMode ? R.color.list_background_color_dark : R.color.list_background_color_light;
 	}
 
 	@DrawableRes
@@ -281,10 +311,10 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 		return nightMode ? R.drawable.bg_bottom_sheet_sides_landscape_dark : R.drawable.bg_bottom_sheet_sides_landscape_light;
 	}
 
-	private boolean isNightMode() {
+	private boolean isNightMode(@NonNull OsmandApplication app) {
 		if (usedOnMap) {
-			return getMyApplication().getDaynightHelper().isNightModeForMapControls();
+			return app.getDaynightHelper().isNightModeForMapControls();
 		}
-		return !getMyApplication().getSettings().isLightContent();
+		return !app.getSettings().isLightContent();
 	}
 }

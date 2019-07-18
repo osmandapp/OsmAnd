@@ -65,7 +65,7 @@ public class TransportRouteController extends MenuController {
 			}
 		};
 		leftTitleButtonController.caption = mapActivity.getString(R.string.shared_string_previous);
-		updateLeftTitleButtonIcon();
+		leftTitleButtonController.leftIconId = R.drawable.ic_arrow_back;
 
 		rightTitleButtonController = new TitleButtonController() {
 			@Override
@@ -77,7 +77,7 @@ public class TransportRouteController extends MenuController {
 			}
 		};
 		rightTitleButtonController.caption = mapActivity.getString(R.string.shared_string_next);
-		updateRightTitleButtonIcon();
+		rightTitleButtonController.rightIconId = R.drawable.ic_arrow_forward;
 	}
 
 	@NonNull
@@ -162,14 +162,6 @@ public class TransportRouteController extends MenuController {
 		resetRoute();
 	}
 
-	private void updateLeftTitleButtonIcon() {
-		leftTitleButtonController.updateStateListDrawableIcon(R.drawable.ic_arrow_back, true);
-	}
-
-	private void updateRightTitleButtonIcon() {
-		rightTitleButtonController.updateStateListDrawableIcon(R.drawable.ic_arrow_forward, false);
-	}
-
 	public void onAcquireNewController(PointDescription pointDescription, Object object) {
 		if (object instanceof TransportRouteStop) {
 			resetRoute();
@@ -180,13 +172,11 @@ public class TransportRouteController extends MenuController {
 		boolean previousStopEnabled = getPreviousStop() != -1;
 		if (leftTitleButtonController.enabled != previousStopEnabled) {
 			leftTitleButtonController.enabled = previousStopEnabled;
-			updateLeftTitleButtonIcon();
 		}
 
 		boolean nextStopEnabled = getNextStop() != -1;
 		if (rightTitleButtonController.enabled != nextStopEnabled) {
 			rightTitleButtonController.enabled = nextStopEnabled;
-			updateRightTitleButtonIcon();
 		}
 	}
 

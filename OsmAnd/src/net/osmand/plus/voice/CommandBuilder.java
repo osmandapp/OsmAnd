@@ -5,15 +5,12 @@ import java.util.Arrays;
 import java.util.List;
 
 import net.osmand.PlatformUtil;
-import net.osmand.plus.R;
 import net.osmand.plus.routing.data.StreetName;
 
 import org.apache.commons.logging.Log;
 
 import alice.tuprolog.Struct;
 import alice.tuprolog.Term;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationManagerCompat;
 
 public class CommandBuilder {
 	
@@ -57,6 +54,7 @@ public class CommandBuilder {
 	protected final CommandPlayer commandPlayer;
 	protected boolean alreadyExecuted = false;
 	private List<Struct> listStruct = new ArrayList<Struct>();
+	protected List<String> listCommands = new ArrayList<String>();
 
 	public CommandBuilder(CommandPlayer commandPlayer){
 		this.commandPlayer = commandPlayer;
@@ -69,9 +67,25 @@ public class CommandBuilder {
 	}
 
 	private CommandBuilder addCommand(String name, Object... args){
+		addToCommandList(name, args);
 		Struct struct = prepareStruct(name, args);
 		listStruct.add(struct);
 		return this;
+	}
+	
+	protected void addToCommandList(String name, Object... args) {
+		listCommands.add(name);
+		for(Object o : args) {
+			if(o != null) {
+				listCommands.add(o.toString());
+			} else {
+				listCommands.add("");
+			}
+		}
+	}
+
+	public List<String> getListCommands() {
+		return listCommands;
 	}
 
 	private Struct prepareStruct(String name, Object... args) {
@@ -254,8 +268,8 @@ public class CommandBuilder {
 		return alt(prepareStruct(C_ROUTE_RECALC, dist, time), prepareStruct(C_ROUTE_RECALC, dist));
 	}
 
-	public void play(){
-		this.commandPlayer.playCommands(this);
+	public List<String> play(){
+		return this.commandPlayer.playCommands(this);
 	}
 
 
