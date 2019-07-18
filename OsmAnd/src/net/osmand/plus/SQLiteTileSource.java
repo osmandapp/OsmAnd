@@ -48,7 +48,7 @@ public class SQLiteTileSource implements ITileSource {
 	private String rule = null;
 	private String referer = null;
 	
-	static final int tileSize = 256;
+	int tileSize = 256;
 	private OsmandApplication ctx;
 	private boolean onlyReadonlyAvailable = false;
 	
@@ -355,6 +355,9 @@ public class SQLiteTileSource implements ITileSource {
 			if(bmp == null) {
 				// broken image delete it
 				db.execSQL("DELETE FROM tiles WHERE x = ? AND y = ? AND z = ?", params); 
+			} else if(tileSize != bmp.getHeight() && tileSize != bmp.getWidth() &&
+					bmp.getWidth() > 0) {
+				tileSize = bmp.getWidth();
 			}
 			return bmp;
 		}
