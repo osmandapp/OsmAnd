@@ -533,6 +533,9 @@ class SearchDialogFragment : BaseDialogFragment(), TelegramHelper.TelegramSearch
 		clearSelection()
 		updateList()
 		switchButtonsVisibility(false)
+		targetFragment?.also {
+			it.onActivityResult(targetRequestCode, CLEAR_SELECTED_ITEMS_REQUEST_CODE, null)
+		}
 	}
 
 	private fun clearSelection() {
@@ -552,6 +555,8 @@ class SearchDialogFragment : BaseDialogFragment(), TelegramHelper.TelegramSearch
 		const val TAG = "SearchDialogFragment"
 		private const val SELECTED_CHATS_KEY = "selected_chats_key"
 		private const val SELECTED_USERS_KEY = "selected_users_key"
+		const val SEARCH_ITEMS_REQUEST_CODE = 3
+		const val CLEAR_SELECTED_ITEMS_REQUEST_CODE = 4
 
 		fun showInstance(fm: FragmentManager, target: Fragment?, selectedChats: Set<Long>, selectedUsers: Set<Long>): Boolean {
 			return try {
@@ -565,7 +570,7 @@ class SearchDialogFragment : BaseDialogFragment(), TelegramHelper.TelegramSearch
 						}
 					}
 					if (target != null) {
-						setTargetFragment(target, SetTimeDialogFragment.LOCATION_SHARED_REQUEST_CODE)
+						setTargetFragment(target, SEARCH_ITEMS_REQUEST_CODE)
 					}
 					show(fm, TAG)
 				}

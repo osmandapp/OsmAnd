@@ -258,15 +258,12 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 	override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 		super.onActivityResult(requestCode, resultCode, data)
 		when (requestCode) {
-			SetTimeDialogFragment.LOCATION_SHARED_REQUEST_CODE -> {
+			SetTimeDialogFragment.LOCATION_SHARED_REQUEST_CODE, SearchDialogFragment.SEARCH_ITEMS_REQUEST_CODE -> {
 				sharingMode = settings.hasAnyChatToShareLocation()
 				clearSelection()
 				updateContent()
-				if (sharingMode && !settings.batteryOptimisationAsked && Build.VERSION.SDK_INT >= 26) {
-					fragmentManager?.also { fm ->
-						BatteryOptimizationBottomSheet.showInstance(fm)
-						settings.batteryOptimisationAsked = true
-					}
+				if (resultCode == SetTimeDialogFragment.LOCATION_SHARED_REQUEST_CODE) {
+					askBatteryOptimisation()
 				}
 			}
 			DisableSharingBottomSheet.SHARING_DISABLED_REQUEST_CODE -> {
@@ -336,6 +333,15 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 		if (settings.hasAnyChatToShareLocation()) {
 			sharingMode = true
 			updateContent()
+		}
+	}
+
+	private fun askBatteryOptimisation() {
+		if (sharingMode && !settings.batteryOptimisationAsked && Build.VERSION.SDK_INT >= 26) {
+			fragmentManager?.also { fm ->
+				BatteryOptimizationBottomSheet.showInstance(fm)
+				settings.batteryOptimisationAsked = true
+			}
 		}
 	}
 
