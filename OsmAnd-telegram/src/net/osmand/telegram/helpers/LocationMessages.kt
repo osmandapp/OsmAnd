@@ -69,7 +69,7 @@ class LocationMessages(val app: TelegramApplication) {
 	}
 
 	fun getMessagesForUserInChat(userId: Int, chatId: Long, deviceName: String, start: Long, end: Long): List<LocationMessage> {
-		return dbHelper.getMessagesForUserInChat(userId, chatId,deviceName, start, end)
+		return dbHelper.getMessagesForUserInChat(userId, chatId, deviceName, start, end)
 	}
 
 	fun getMessagesForUser(userId: Int, start: Long, end: Long): List<LocationMessage> {

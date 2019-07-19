@@ -39,6 +39,14 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 		const val DIRECTION_ICON_ID = "ic_action_start_navigation"
 
 		const val LIVE_TRACKS_DIR = "livetracks"
+
+		const val GPX_COLORS_COUNT = 10
+
+		val GPX_COLORS = arrayOf(
+			"red", "orange", "lightblue", "blue", "purple",
+			"translucent_red", "translucent_orange", "translucent_lightblue",
+			"translucent_blue", "translucent_purple"
+		)
 	}
 
 	private val telegramHelper = app.telegramHelper
@@ -271,7 +279,8 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 							log.debug("LiveTracks onSavingGpxFinish $path time ${startTime - System.currentTimeMillis()}")
 							val uri = AndroidUtils.getUriForFile(app, File(path))
 							val destinationPath = "$LIVE_TRACKS_DIR/${it.metadata.name}.gpx"
-							osmandAidlHelper.importGpxFromUri(uri, destinationPath, GPXUtilities.GPXColor.AQUA.name, true)
+							val color = it.extensionsToRead["color"] ?: ""
+							osmandAidlHelper.importGpxFromUri(uri, destinationPath, color, true)
 							log.debug("LiveTracks importGpxFromUri finish time ${startTime - System.currentTimeMillis()}")
 						}
 
