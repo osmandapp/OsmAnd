@@ -242,4 +242,5 @@
     <string name="min_logging_speed">Minimalna szybkość rejestrowania</string>
     <string name="min_logging_speed_descr">Filtr: brak rejestrowania poniżej wybranej prędkości</string>
     <string name="gpx_settings">Ustawienia GPX</string>
+    <string name="timeline_no_data_descr">Nie zgromadziliśmy danych dla wybranego dnia</string>
 </resources>
