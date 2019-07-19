@@ -1477,12 +1477,17 @@ public class OsmandAidlApi {
 						boolean active = app.getSelectedGpxHelper().getSelectedFileByPath(file.getAbsolutePath()) != null;
 						long modifiedTime = dataItem.getFileLastModifiedTime();
 						long fileSize = file.length();
+						int color = dataItem.getColor();
+						String colorName = "";
+						if (color != 0) {
+							colorName = ConfigureMapMenu.GpxAppearanceAdapter.parseTrackColorName(app.getRendererRegistry().getCurrentSelectedRenderer(), color);
+						}
 						AGpxFileDetails details = null;
 						GPXTrackAnalysis analysis = dataItem.getAnalysis();
 						if (analysis != null) {
 							details = createGpxFileDetails(analysis);
 						}
-						files.add(new AGpxFile(fileName, modifiedTime, fileSize, active, details));
+						files.add(new AGpxFile(fileName, modifiedTime, fileSize, active, colorName, details));
 					}
 				//}
 			}

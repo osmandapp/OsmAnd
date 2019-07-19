@@ -272,7 +272,7 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 
 			val importedGpxFiles = osmandAidlHelper.importedGpxFiles
 			gpxFiles.forEach {
-				if (!isGpxAlreadyImported(importedGpxFiles, it)) {
+				if (!checkAlreadyImportedGpx(importedGpxFiles, it)) {
 					val listener = object : OsmandLocationUtils.SaveGpxListener {
 
 						override fun onSavingGpxFinish(path: String) {
@@ -294,12 +294,16 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 		}
 	}
 
-	private fun isGpxAlreadyImported(importedGpxFiles: List<AGpxFile>?, gpxFile: GPXUtilities.GPXFile): Boolean {
+	private fun checkAlreadyImportedGpx(importedGpxFiles: List<AGpxFile>?, gpxFile: GPXUtilities.GPXFile): Boolean {
 		if (importedGpxFiles != null && importedGpxFiles.isNotEmpty()) {
 			val name = "${gpxFile.metadata.name}.gpx"
 			val aGpxFile = importedGpxFiles.firstOrNull { it.fileName == name }
 
 			if (aGpxFile != null) {
+				val color = aGpxFile.color
+				if (!color.isNullOrEmpty()) {
+					gpxFile.extensionsToWrite["color"] = color
+				}
 				val startTimeImported = aGpxFile.details?.startTime
 				val endTimeImported = aGpxFile.details?.endTime
 				if (startTimeImported != null && endTimeImported != null) {
