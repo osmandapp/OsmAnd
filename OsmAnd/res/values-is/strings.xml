@@ -3219,4 +3219,6 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="shared_string_file_is_saved">%s er vistað</string>
     <string name="shared_string_open_track">Opna feril</string>
     <string name="shared_string_track_is_saved">Ferill %s er vistaður</string>
+    <string name="app_mode_personal_transporter">Rafskutla (Segway)</string>
+    <string name="sett_parrot_ext_input">Parrot</string>
 </resources>
