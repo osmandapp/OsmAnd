@@ -11,6 +11,7 @@ import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.utils.OsmandLocationUtils
 import net.osmand.util.MapUtils
 import org.drinkless.td.libcore.telegram.TdApi
+import java.util.concurrent.ConcurrentLinkedQueue
 
 class LocationMessages(val app: TelegramApplication) {
 
@@ -18,7 +19,7 @@ class LocationMessages(val app: TelegramApplication) {
 
 	private var bufferedMessages = emptyList<BufferMessage>()
 
-	private var lastLocationPoints = mutableListOf<LocationMessage>()
+	private var lastLocationPoints = ConcurrentLinkedQueue<LocationMessage>()
 
 	private val dbHelper: SQLiteHelper
 
@@ -144,7 +145,7 @@ class LocationMessages(val app: TelegramApplication) {
 	}
 
 	private fun readLastMessages() {
-		this.lastLocationPoints = dbHelper.getLastMessages()
+		this.lastLocationPoints.addAll(dbHelper.getLastMessages())
 	}
 
 	private class SQLiteHelper(context: Context) :
