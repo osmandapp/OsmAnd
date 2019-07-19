@@ -450,7 +450,6 @@ public class RulerControlLayer extends OsmandMapLayer {
 				cacheTileX = tb.getCenterTileX();
 				cacheTileY = tb.getCenterTileY();
 				cacheMapDensity = mapDensity.get();
-				cacheDistances.clear();
 				updateDistance(tb);
 			}
 		}
@@ -484,6 +483,7 @@ public class RulerControlLayer extends OsmandMapLayer {
 	}
 
 	private void updateText() {
+		cacheDistances.clear();
 		double maxCircleRadius = maxRadius;
 		int i = 1;
 		while ((maxCircleRadius -= radius) > 0) {
