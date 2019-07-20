@@ -9,6 +9,7 @@ import android.text.SpannableStringBuilder
 import android.text.style.ForegroundColorSpan
 import net.osmand.PlatformUtil
 import net.osmand.telegram.helpers.OsmandAidlHelper
+import net.osmand.telegram.helpers.ShowLocationHelper
 import net.osmand.telegram.helpers.TelegramHelper
 import net.osmand.telegram.utils.AndroidUtils
 import net.osmand.telegram.utils.OsmandApiUtils
@@ -112,7 +113,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 	private var shareChatsInfo = ConcurrentHashMap<Long, ShareChatInfo>()
 	private var hiddenOnMapChats: Set<Long> = emptySet()
 	private var shareDevices: Set<DeviceBot> = emptySet()
-	private var liveTracksInfo: Set<LiveTrackInfo> = emptySet()
+	private var liveTracksInfo = emptyList<LiveTrackInfo>()
 
 	var sharingStatusChanges = ConcurrentLinkedQueue<SharingStatus>()
 
@@ -177,6 +178,9 @@ class TelegramSettings(private val app: TelegramApplication) {
 
 	fun getLiveTracksInfo() = liveTracksInfo
 
+	fun getLiveTrackInfo(userId: Int, chatId: Long, deviceName: String) =
+		liveTracksInfo.firstOrNull { it.userId == userId && it.chatId == chatId && it.deviceName == deviceName }
+
 	fun isShowingChatOnMap(chatId: Long) = !hiddenOnMapChats.contains(chatId)
 
 	fun isLiveTrackEnabled(userId: Int, chatId: Long, deviceName: String) =
@@ -185,11 +189,12 @@ class TelegramSettings(private val app: TelegramApplication) {
 	fun updateLiveTrack(userId: Int, chatId: Long, deviceName: String, enable: Boolean) {
 		val tracksInfo = liveTracksInfo.toMutableList()
 		if (enable) {
-			tracksInfo.add(LiveTrackInfo(userId, chatId, deviceName))
+			val colorIndex = if (tracksInfo.size > 0) (tracksInfo.last().colorIndex + 1) % ShowLocationHelper.GPX_COLORS_COUNT else 0
+			tracksInfo.add(LiveTrackInfo(userId, chatId, deviceName, colorIndex))
 		} else {
-			tracksInfo.remove(LiveTrackInfo(userId, chatId, deviceName))
+			tracksInfo.removeAll { it.userId == userId && it.chatId == chatId && it.deviceName == deviceName }
 		}
-		liveTracksInfo = tracksInfo.toHashSet()
+		liveTracksInfo = tracksInfo.toList()
 	}
 
 	fun removeNonexistingChats(presentChatIds: List<Long>) {
@@ -747,6 +752,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 					obj.put(LiveTrackInfo.USER_ID, liveTrackInfo.userId)
 					obj.put(LiveTrackInfo.CHAT_ID, liveTrackInfo.chatId)
 					obj.put(LiveTrackInfo.DEVICE_NAME, liveTrackInfo.deviceName)
+					obj.put(LiveTrackInfo.COLOR_INDEX, liveTrackInfo.colorIndex)
 					put(obj)
 				}
 			}
@@ -863,10 +869,11 @@ class TelegramSettings(private val app: TelegramApplication) {
 			val userId = obj.optInt(LiveTrackInfo.USER_ID)
 			val chatId = obj.optLong(LiveTrackInfo.CHAT_ID)
 			val deviceName = obj.optString(LiveTrackInfo.DEVICE_NAME)
+			val colorIndex = obj.optInt(LiveTrackInfo.COLOR_INDEX)
 
-			list.add(LiveTrackInfo(userId, chatId, deviceName))
+			list.add(LiveTrackInfo(userId, chatId, deviceName, colorIndex))
 		}
-		liveTracksInfo = list.toHashSet()
+		liveTracksInfo = list.toList()
 	}
 
 	private fun parseShareDevices(json: String) {
@@ -1192,12 +1199,13 @@ class TelegramSettings(private val app: TelegramApplication) {
 		}
 	}
 
-	data class LiveTrackInfo(val userId: Int, val chatId: Long, val deviceName: String) {
+	data class LiveTrackInfo(val userId: Int, val chatId: Long, val deviceName: String, val colorIndex: Int) {
 		companion object {
 
 			internal const val USER_ID = "userId"
 			internal const val CHAT_ID = "chatId"
 			internal const val DEVICE_NAME = "deviceName"
+			internal const val COLOR_INDEX = "colorIndex"
 		}
 	}
 
