@@ -1546,7 +1546,7 @@
     <string name="simulate_your_location_stop_descr">Parar de simular a sua posição.</string>
     <string name="simulate_your_location_descr">Simule a sua posição utilizando uma rota calculada ou uma trajeto GPX gravado.</string>
     <string name="looking_up_address">A procurar o endereço</string>
-    <string name="av_locations_descr">Ficheiro GPX com anotações de posições.</string>
+    <string name="av_locations_descr">Ficheiro GPX com posições.</string>
     <string name="av_locations">Localizações</string>
     <string name="plugin_settings">Complementos</string>
     <string name="routing_attr_avoid_shuttle_train_name">Evitar transporte de comboio</string>
@@ -2137,7 +2137,7 @@
 \nDê-nos a sua opinião</string>
     <string name="commiting_way">Cometendo caminho…</string>
     <string name="increase_search_radius_to">Aumentar o raio de pesquisa para %1$s</string>
-    <string name="send_search_query_description">Enviaremos a sua consulta de pesquisa: <b>\"%1$s\"</b>, bem como a sua localização.<br/>
+    <string name="send_search_query_description">Enviaremos a sua consulta de pesquisa: <b>\"%1$s\"</b> e a sua localização.<br/>
         <br/> Nenhuma informação pessoal é recolhida. Os dados de pesquisa só servem para melhorar o algoritmo de pesquisa.<br/>
     </string>
     <string name="send_search_query">Enviar a consulta de pesquisa?</string>
@@ -3053,11 +3053,11 @@
     <string name="choose_data_to_share">Escolha o tipo de dados que pretende partilhar:</string>
     <string name="downloaded_maps">Mapas descarregados</string>
     <string name="visited_screens">Ecrãs visitadas</string>
-    <string name="collected_data_descr">Lista de dados que você deseja compartilhar com OsmAnd.</string>
-    <string name="downloaded_maps_collect_descr">Coletamos esses dados para entender quais mapas de quais regiões e países são os mais populares.</string>
-    <string name="visited_screens_collect_descr">Coletamos esses dados para entender quais recursos são os mais populares de OsmAnd.</string>
+    <string name="collected_data_descr">Define quais dados você permite que OsmAnd compartilhe.</string>
+    <string name="downloaded_maps_collect_descr">Ajude-nos a entender quais mapas de quais regiões e países são os mais populares.</string>
+    <string name="visited_screens_collect_descr">Ajude-nos a entender quais recursos são os mais populares de OsmAnd.</string>
     <string name="privacy_and_security_change_descr">Ao tocar em \"Permitir\" você concorda com nossos %1$s</string>
-    <string name="settings_privacy_and_security">Privacidade e Segurança</string>
+    <string name="settings_privacy_and_security">Privacidade e segurança</string>
     <string name="settings_privacy_and_security_desc">Escolha quais dados você está compartilhando conosco</string>
     <string name="shared_string_no_thank_you">Não, obrigado</string>
     <string name="shared_string_allow">Permitir</string>
@@ -3178,4 +3178,32 @@
     <string name="edit_profile_nav_settings_subtitle">Selecione as configurações de navegação predefinidas para o perfil</string>
     <string name="routing_attr_max_num_changes_description">Especificar a quantidade máxima de modificações</string>
     <string name="routing_attr_max_num_changes_name">Quantidade de modificações</string>
+    <string name="turn_screen_on_router">Despertar na curva</string>
+    <string name="turn_screen_on_time_descr">Defina o tempo para a qual o ecrã será ativado.</string>
+    <string name="turn_screen_on_sensor">Utilizar sensor de proximidade</string>
+    <string name="turn_screen_on_sensor_descr">Acene sua mão sobre o ecrã para ligar-lo ao navegar.</string>
+    <string name="rendering_attr_highway_class_track_grade1_name">Grau 1</string>
+    <string name="rendering_attr_highway_class_track_grade2_name">Grau 2</string>
+    <string name="rendering_attr_highway_class_track_grade3_name">Grau 3</string>
+    <string name="rendering_attr_highway_class_track_grade4_name">Grau 4</string>
+    <string name="rendering_attr_highway_class_track_grade5_name">Grau 5</string>
+    <string name="external_input_device">Aparelhos de entrada externos</string>
+    <string name="external_input_device_descr">Selecione um aparelho como um teclado genérico ou WunderLINQ para controles externos.</string>
+    <string name="sett_no_ext_input">Nenhum</string>
+    <string name="sett_generic_ext_input">Teclado Genérico</string>
+    <string name="sett_wunderlinq_ext_input">WunderLINQ</string>
+    <string name="sett_parrot_ext_input">Parrot</string>
+    <string name="turn_on_profile_desc">Por favor, ative pelo menos um perfil de aplicação para usar esta configuração.</string>
+    <string name="rendering_attr_winter_road_name">Estrada do inverno</string>
+    <string name="rendering_attr_ice_road_name">Estrada de gelo</string>
+    <string name="routeInfo_winter_ice_road_name">Estradas de inverno e gelo</string>
+    <string name="rendering_attr_tracktype_grade1_name">Sólido (pavimentado)</string>
+    <string name="rendering_attr_tracktype_grade2_name">Sólido (não pavimentado)</string>
+    <string name="rendering_attr_tracktype_grade3_name">Maioritariamente sólido</string>
+    <string name="rendering_attr_tracktype_grade4_name">Maioritariamente macio</string>
+    <string name="rendering_attr_tracktype_grade5_name">Macio</string>
+    <string name="routeInfo_tracktype_name">Dureza da superfície</string>
+    <string name="shared_string_file_is_saved">%s está gravado</string>
+    <string name="shared_string_open_track">Abrir faixa</string>
+    <string name="shared_string_track_is_saved">A faixa% s está gravada</string>
 </resources>
