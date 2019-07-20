@@ -1657,7 +1657,7 @@
     <string name="add_opening_hours">Дадаць гадзіны працы</string>
     <string name="poi_dialog_poi_type">Тып POI</string>
     <string name="please_specify_poi_type">Калі ласка, вызначце тып POI.</string>
-    <string name="av_locations_descr">GPX-файл з мецазнаходжаннем заўваг.</string>
+    <string name="av_locations_descr">GPX-файл з мясцінамі.</string>
     <string name="av_locations">Месцазнаходжанні</string>
     <string name="number_of_rows_in_dash">Колькасць радкоў на галоўным экране %1$s</string>
     <string name="poi_action_delete">выдаліць</string>
@@ -1866,7 +1866,7 @@
     <string name="shared_string_email_address">Адрас электроннай пошты</string>
     <string name="rendering_attr_hideUnderground_name">Падземныя аб\'екты</string>
     <string name="data_is_not_available">Даныя недаступныя</string>
-    <string name="shared_string_read_more">Чытаць далей</string>
+    <string name="shared_string_read_more">Падрабязней</string>
     <string name="clear_updates_proposition_message">Выдаліць спампаваныя абнаўленні і вярнуцца да першапачатковай рэдакцыі мапы</string>
     <string name="add_time_span">Дадаць часавы прамежак</string>
     <string name="item_removed">Элемент выдалены</string>
@@ -2036,7 +2036,7 @@
     <string name="osmand_plus_banner_desc">Неабмежаваная колькасць спамоўванняў мапаў, абнаўленняў і ўбудова Wikipedia.</string>
     <string name="si_mi_meters">Мілі/метры</string>
     <string name="osm_live_payment_desc">Плата за падпіску спаганяецца штомесяц. Скасаваць яе на Google Play можна у любы момант.</string>
-    <string name="donation_to_osm">Ахвяраванне OpenStreetMap супольнасці</string>
+    <string name="donation_to_osm">Ахвяраванне OpenStreetMap-супольнасці</string>
     <string name="donation_to_osm_desc">Частка вашага ахвяравання накіроўваецца OSM карыстальнікам, якія адпраўляюць змены ў OpenStreetMap. Кошт падпіскі застаецца тым жа самым.</string>
     <string name="osm_live_subscription_desc">Падпіска дазваляе атрымліваць штогадзіныя, штодзённыя, штотыднёвыя абнаўленні і неабмежаваную колькасць спампоўванняў для ўсіх мапаў па ўсім свеце.</string>
     <string name="driving_region_australia">Аўстралія</string>
@@ -2732,7 +2732,7 @@
     <string name="purchase_unlim_title">Купіць - %1$s</string>
     <string name="purchase_subscription_title">Папісацца - %1$s</string>
     <string name="wikivoyage_offline">Аўтаномны Wikivoyage</string>
-    <string name="unlimited_downloads">Неабмежаваныя спампоўванні</string>
+    <string name="unlimited_downloads">Неабмежаваныя спампоўкі</string>
     <string name="wikipedia_offline">Аўтаномная Вікіпедыя</string>
     <string name="unlock_all_features">Разблакаваць усе функцыі OsmAnd</string>
     <string name="purchase_dialog_title">Абярыце план</string>
@@ -3038,7 +3038,7 @@
     <string name="files_present">%1$d файлаў (%2$s) знаходзіцца ў папярэднім месцы \'%3$s\'.</string>
     <string name="move_maps">Перамясціць мапы</string>
     <string name="dont_move_maps">Не перамяшчаць</string>
-    <string name="public_transport_ped_route_title">Маршрут пешшу складае %1$s, дайсці можна хутчэй, чым рухацца на грамадскім транспарце</string>
+    <string name="public_transport_ped_route_title">Маршрут пешшу складае %1$s, дайсці можна хутчэй, чым грамадскім транспартам</string>
     <string name="public_transport_no_route_title">На жаль, OsmAnd не змог знайсці маршрут па вашых наладах.</string>
     <string name="public_transport_try_ped">Паспрабуйце пешаходную навігацыю.</string>
     <string name="public_transport_try_change_settings">Паспрабуйце змяніць налады.</string>
