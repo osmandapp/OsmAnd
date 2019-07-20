@@ -1434,7 +1434,6 @@ public class ConfigureMapMenu {
 		}
 
 		public static String parseTrackColorName(RenderingRulesStorage renderer, int color) {
-			int defaultColor = -1;
 			RenderingRule gpxRule = null;
 			if (renderer != null) {
 				gpxRule = renderer.getRenderingAttributeRule("gpx");
@@ -1445,9 +1444,6 @@ public class ConfigureMapMenu {
 					String cName = r.getStringPropertyValue(CURRENT_TRACK_COLOR_ATTR);
 					if (!Algorithms.isEmpty(cName) && color == r.getIntPropertyValue(COLOR_ATTR)) {
 						return cName;
-					}
-					if (cName == null && defaultColor == -1) {
-						defaultColor = r.getIntPropertyValue(COLOR_ATTR);
 					}
 				}
 			}
