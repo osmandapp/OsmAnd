@@ -1577,6 +1577,7 @@ public class GPXUtilities {
 				serializer.startTag(null, "email");
 				serializer.attribute(null, "id", idAndDomain[0]);
 				serializer.attribute(null, "domain", idAndDomain[1]);
+				serializer.endTag(null, "email");
 			}
 		}
 		writeNotNullTextWithAttribute(serializer, "link", "href", author.link);
