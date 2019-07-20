@@ -372,7 +372,7 @@
     <string name="vector_data_missing">הורדת נתונים (‚בלתי מקוונים’) כדי להשתמש במפות באופן בלתי מקוון.</string>
     <string name="local_index_gpx_info_show">"
 \n
-\nיש ללחוץ לחיצה ארוכה כדי להגיע לאפשרויות"</string>
+\nלחיצה ארוכה לאפשרויות"</string>
     <string name="local_index_installed">גרסה מקומית</string>
     <string name="local_index_items_backuped">%1$d מתוך %2$d פריטים הושבתו.</string>
     <string name="local_index_items_deleted">%1$d מתוך %2$d פריטים נמחקו.</string>
@@ -1918,7 +1918,7 @@
     <string name="simulate_your_location_stop_descr">הפסקת הדמיית המיקום שלך.</string>
     <string name="simulate_your_location_descr">הדמיית המיקום שלך באמצעות נתיב מחושב או מסלול GPX מוקלט.</string>
     <string name="looking_up_address">הכתובת בחיפוש</string>
-    <string name="av_locations_descr">קובץ GPX עם מיקומי הערות.</string>
+    <string name="av_locations_descr">קובץ GPX עם מיקומים.</string>
     <string name="routing_attr_avoid_shuttle_train_name">התעלמות מרכבות שאטל</string>
     <string name="routing_attr_avoid_shuttle_train_description">הימנעות מרכבות שאטל</string>
     <string name="rendering_value_boldOutline_name">קו מתאר מודגש</string>
@@ -3077,4 +3077,16 @@
     <string name="turn_screen_on_sensor">להשתמש בחיישן מרחק</string>
     <string name="turn_screen_on_sensor_descr">יש לנופף ביד מול החלק העליון של חזית המכשיר כדי להדליק את המסך בזמן ניווט.</string>
     <string name="shared_string_track_is_saved">המסלול %s נשמר</string>
+    <string name="profile_alert_cant_delete_base">לא ניתן למחוק את הפרופילים הבסיסיים של OsmAnd</string>
+    <string name="profile_alert_need_save_title">שמירת שינויים</string>
+    <string name="profile_alert_need_save_msg">עליך לשמור את השינויים לפרופיל כדי להמשיך</string>
+    <string name="profile_alert_delete_title">מחיקת פרופיל</string>
+    <string name="profile_alert_delete_msg">למחוק את הפרופיל %s\?</string>
+    <string name="select_base_profile_dialog_title">בחירת פרופיל בסיס</string>
+    <string name="process_downloading_service">שירות ההורדות של OsmAnd</string>
+    <string name="press_again_to_change_the_map_orientation">יש לגעת שוב כדי לשנות את כיוון המפה</string>
+    <string name="default_speed_dialog_msg">משמש לחישוב מועד ההגעה הצפוי במהלך הניווט</string>
+    <string name="new_profile">פרופיל חדש</string>
+    <string name="shared_string_crash">קריסה</string>
+    <string name="last_launch_crashed">הטעינה האחרונה של OsmAnd נכשלה. נא לסייע לנו לשפר את OsmAnd על ידי שיתוף הודעת השגיאה.</string>
 </resources>
