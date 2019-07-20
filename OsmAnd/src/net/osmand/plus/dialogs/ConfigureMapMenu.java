@@ -1419,7 +1419,7 @@ public class ConfigureMapMenu {
 				gpxRule = renderer.getRenderingAttributeRule("gpx");
 			}
 			if (gpxRule != null && gpxRule.getIfElseChildren().size() > 0) {
-				List<RenderingRule> rules = renderer.getRenderingAttributeRule("gpx").getIfElseChildren().get(0).getIfElseChildren();
+				List<RenderingRule> rules = gpxRule.getIfElseChildren().get(0).getIfElseChildren();
 				for (RenderingRule r : rules) {
 					String cName = r.getStringPropertyValue(CURRENT_TRACK_COLOR_ATTR);
 					if (!Algorithms.isEmpty(cName) && cName.equals(colorName)) {
@@ -1440,7 +1440,7 @@ public class ConfigureMapMenu {
 				gpxRule = renderer.getRenderingAttributeRule("gpx");
 			}
 			if (gpxRule != null && gpxRule.getIfElseChildren().size() > 0) {
-				List<RenderingRule> rules = renderer.getRenderingAttributeRule("gpx").getIfElseChildren().get(0).getIfElseChildren();
+				List<RenderingRule> rules = gpxRule.getIfElseChildren().get(0).getIfElseChildren();
 				for (RenderingRule r : rules) {
 					String cName = r.getStringPropertyValue(CURRENT_TRACK_COLOR_ATTR);
 					if (!Algorithms.isEmpty(cName) && color == r.getIntPropertyValue(COLOR_ATTR)) {
