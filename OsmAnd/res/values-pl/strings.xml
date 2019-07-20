@@ -3186,4 +3186,26 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="shared_string_file_is_saved">%s jest zapisany</string>
     <string name="shared_string_open_track">Otwórz ślad</string>
     <string name="shared_string_track_is_saved">Ślad %s jest zapisany</string>
+    <string name="release_3_4">• Profile aplikacji: Stwórz własny profil dla własnych potrzeb, z niestandardową ikoną i kolorem
+\n
+\n• Teraz można dostosować domyślne ustawienia dowolnego profilu i prędkości min/max
+\n
+\n• Dodano widget dla bieżących współrzędnych
+\n
+\n• Dodano opcje pokazania kompasu i linijki promienia na mapie
+\n
+\n• Napraw Rejestrowanie śladu tła
+\n
+\n• Ulepszone pliki do pobrania mapy w tle
+\n
+\n• Zwrócona opcja \"Turn Screen on\"
+\n
+\n• Poprawiono wybór języka Wikipedii
+\n
+\n• Poprawiono zachowanie przycisku kompasu podczas nawigacji
+\n
+\n• Inne poprawki błędów
+\n
+\n</string>
+    <string name="edit_profile_setup_title">Konfiguracja Profilu</string>
 </resources>
