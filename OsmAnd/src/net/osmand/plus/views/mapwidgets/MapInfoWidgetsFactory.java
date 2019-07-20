@@ -1160,8 +1160,12 @@ public class MapInfoWidgetsFactory {
 						} catch (RuntimeException e) {
 							e.printStackTrace();
 						}
-						latitudeIcon.setImageDrawable(iconsCache.getIcon(nightMode ? R.drawable.widget_coordinates_latitude_night : R.drawable.widget_coordinates_latitude_day));
-						longitudeIcon.setImageDrawable(iconsCache.getIcon(nightMode ? R.drawable.widget_coordinates_longitude_night : R.drawable.widget_coordinates_longitude_day));
+						int latDayImgId = lat >= 0 ? R.drawable.widget_coordinates_latitude_north_day : R.drawable.widget_coordinates_latitude_south_day;
+						int latNightImgId = lat >= 0 ? R.drawable.widget_coordinates_latitude_north_night : R.drawable.widget_coordinates_latitude_south_night;
+						int lonDayImgId = lon >= 0 ? R.drawable.widget_coordinates_longitude_east_day : R.drawable.widget_coordinates_longitude_west_day;
+						int lonNightImgId = lon >= 0 ? R.drawable.widget_coordinates_longitude_east_night : R.drawable.widget_coordinates_longitude_west_night;
+						latitudeIcon.setImageDrawable(iconsCache.getIcon(nightMode ? latDayImgId : latNightImgId));
+						longitudeIcon.setImageDrawable(iconsCache.getIcon(nightMode ? lonDayImgId : lonNightImgId));
 						latitudeText.setText(latitude);
 						longitudeText.setText(longitude);
 					}
