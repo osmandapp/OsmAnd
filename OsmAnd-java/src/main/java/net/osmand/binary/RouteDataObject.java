@@ -192,7 +192,7 @@ public class RouteDataObject {
 					} else {
 						String desc = getValue(k, "osmand_ele_desc");
 						if(desc != null && desc.length() > 0) {
-							height = (prevHeight - Float.parseFloat(asc));
+							height = (prevHeight - Float.parseFloat(desc));
 						}
 					}
 				}
