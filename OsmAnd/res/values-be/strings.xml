@@ -3046,4 +3046,22 @@
     <string name="public_transport_type">Тып транспарту</string>
     <string name="searching_gps">Пошук GPS</string>
     <string name="coordinates_widget">Віджэт каардынат</string>
+    <string name="app_mode_offroad">Бездарожжа</string>
+    <string name="edit_profile_setup_title">Наладзіць профіль</string>
+    <string name="edit_profile_setup_subtitle">У кожнага профіля свае налады</string>
+    <string name="turn_screen_on_time_descr">Вызначце час, цягам якога экран уключыцца.</string>
+    <string name="turn_screen_on_sensor">Выкарыстоўваць датчык адлегласці</string>
+    <string name="turn_screen_on_sensor_descr">Правядзіце рукой па верхняй частцы экрана, каб уключыць яго падчас навігацыі.</string>
+    <string name="rendering_attr_winter_road_name">Зімовая дарога</string>
+    <string name="rendering_attr_ice_road_name">Ледзяная дарога</string>
+    <string name="routeInfo_winter_ice_road_name">Зімовыя і ледзяныя дарогі</string>
+    <string name="rendering_attr_tracktype_grade1_name">Цвёрдае</string>
+    <string name="rendering_attr_tracktype_grade2_name">Амаль цвёрдае</string>
+    <string name="rendering_attr_tracktype_grade3_name">Змяшанае</string>
+    <string name="rendering_attr_tracktype_grade4_name">Амаль мяккае</string>
+    <string name="rendering_attr_tracktype_grade5_name">Мяккае</string>
+    <string name="routeInfo_tracktype_name">Трываласць паверхні</string>
+    <string name="shared_string_file_is_saved">%s захаваны</string>
+    <string name="shared_string_open_track">Адкрыць след</string>
+    <string name="shared_string_track_is_saved">След %s захаваны</string>
 </resources>
