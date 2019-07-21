@@ -3205,5 +3205,5 @@
     <string name="routeInfo_tracktype_name">Dureza da superfície</string>
     <string name="shared_string_file_is_saved">%s está gravado</string>
     <string name="shared_string_open_track">Abrir faixa</string>
-    <string name="shared_string_track_is_saved">A faixa% s está gravada</string>
+    <string name="shared_string_track_is_saved">A faixa %s está gravada</string>
 </resources>
