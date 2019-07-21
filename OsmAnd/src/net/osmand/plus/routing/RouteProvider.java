@@ -709,7 +709,6 @@ public class RouteProvider {
 		if (maxSpeed > 0) {
 			paramsR.put(GeneralRouter.MAX_SPEED, String.valueOf(maxSpeed));
 		}
-
 		float mb = (1 << 20);
 		Runtime rt = Runtime.getRuntime();
 		// make visible
@@ -718,6 +717,9 @@ public class RouteProvider {
 		RoutingConfiguration cf = config.build( params.mode.getRoutingProfile(), params.start.hasBearing() ?
 				params.start.getBearing() / 180d * Math.PI : null, 
 				memoryLimit, paramsR);
+		if(settings.ENABLE_TIME_CONDITIONAL_ROUTING.get()) {
+			cf.routeCalculationTime = System.currentTimeMillis();
+		}
 		return cf;
 	}
 
