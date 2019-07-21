@@ -689,10 +689,12 @@ public class RouteDataObject {
 				return r.getValue();
 			}
 		}
-		for(int i = 0; i < nameIds.length; i++) {
-			RouteTypeRule r = region.quickGetEncodingRule(nameIds[i]);
-			if (r.getTag().equals(tag)) {
-				return names.get(nameIds[i]);
+		if (nameIds != null) {
+			for (int i = 0; i < nameIds.length; i++) {
+				RouteTypeRule r = region.quickGetEncodingRule(nameIds[i]);
+				if (r.getTag().equals(tag)) {
+					return names.get(nameIds[i]);
+				}
 			}
 		}
 		return null;
