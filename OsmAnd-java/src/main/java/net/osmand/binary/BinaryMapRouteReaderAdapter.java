@@ -42,7 +42,7 @@ public class BinaryMapRouteReaderAdapter {
 		String condition = "";
 		OpeningHoursParser.OpeningHours hours = null;
 		String value;
-		int routeType;
+		int ruleid;
 	}
 
 	public static class RouteTypeRule {
@@ -124,7 +124,7 @@ public class BinaryMapRouteReaderAdapter {
 				i.setTimeInMillis(time);
 				for (RouteTypeCondition c : conditions) {
 					if (c.hours != null && c.hours.isOpenedForTime(i)) {
-						return c.routeType;
+						return c.ruleid;
 					}
 				}
 			}
@@ -294,7 +294,7 @@ public class BinaryMapRouteReaderAdapter {
 					String tag = rtr.getNonConditionalTag();
 					for(RouteTypeCondition c : rtr.conditions ) {
 						if(tag != null && c.value != null) {
-							c.routeType = findOrCreateRouteType(tag, c.value);
+							c.ruleid = findOrCreateRouteType(tag, c.value);
 						}
 					}
 					

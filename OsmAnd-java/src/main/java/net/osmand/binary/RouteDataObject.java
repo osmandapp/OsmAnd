@@ -186,17 +186,13 @@ public class RouteDataObject {
 				if(k == getPointsLength() - 1) {
 					height = endHeight;
 				} else {
-					int[] tps = getPointTypes(k);
-					if (tps != null) {
-						for (int id : tps) {
-							RouteTypeRule rt = region.quickGetEncodingRule(id);
-							if (rt.getTag().equals("osmand_ele_asc")) {
-								height = (prevHeight + Float.parseFloat(rt.getValue()));
-								break;
-							} else if (rt.getTag().equals("osmand_ele_desc")) {
-								height = (prevHeight - Float.parseFloat(rt.getValue()));
-								break;
-							}
+					String asc = getValue(k, "osmand_ele_asc");
+					if(asc != null && asc.length() > 0) {
+						height = (prevHeight + Float.parseFloat(asc));
+					} else {
+						String desc = getValue(k, "osmand_ele_desc");
+						if(desc != null && desc.length() > 0) {
+							height = (prevHeight - Float.parseFloat(asc));
 						}
 					}
 				}
@@ -697,6 +693,26 @@ public class RouteDataObject {
 			RouteTypeRule r = region.quickGetEncodingRule(nameIds[i]);
 			if (r.getTag().equals(tag)) {
 				return names.get(nameIds[i]);
+			}
+		}
+		return null;
+	}
+	
+	public String getValue(int pnt, String tag) {
+		if (pointTypes != null && pnt < pointTypes.length && pointTypes[pnt] != null) {
+			for (int i = 0; i < pointTypes[pnt].length; i++) {
+				RouteTypeRule r = region.quickGetEncodingRule(pointTypes[pnt][i]);
+				if (r.getTag().equals(tag)) {
+					return r.getValue();
+				}
+			}
+		}
+		if (pointNameTypes != null && pnt < pointNameTypes.length && pointNameTypes[pnt] != null) {
+			for (int i = 0; i < pointNameTypes[pnt].length; i++) {
+				RouteTypeRule r = region.quickGetEncodingRule(pointNameTypes[pnt][i]);
+				if (r.getTag().equals(tag)) {
+					return pointNames[pnt][i];
+				}
 			}
 		}
 		return null;
