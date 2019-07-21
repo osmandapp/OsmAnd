@@ -1,12 +1,6 @@
 package net.osmand.router;
 
 
-import gnu.trove.iterator.TIntObjectIterator;
-import gnu.trove.iterator.TLongIterator;
-import gnu.trove.map.TLongObjectMap;
-import gnu.trove.map.hash.TLongObjectHashMap;
-import gnu.trove.set.hash.TLongHashSet;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -18,6 +12,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.apache.commons.logging.Log;
+
+import gnu.trove.iterator.TIntObjectIterator;
+import gnu.trove.iterator.TLongIterator;
+import gnu.trove.map.TLongObjectMap;
+import gnu.trove.map.hash.TLongObjectHashMap;
+import gnu.trove.set.hash.TLongHashSet;
 import net.osmand.NativeLibrary;
 import net.osmand.NativeLibrary.NativeRouteSearchResult;
 import net.osmand.PlatformUtil;
@@ -31,8 +32,6 @@ import net.osmand.router.BinaryRoutePlanner.FinalRouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegmentVisitor;
 import net.osmand.router.RoutePlannerFrontEnd.RouteCalculationMode;
-
-import org.apache.commons.logging.Log;
 
 
 public class RoutingContext {
@@ -70,6 +69,8 @@ public class RoutingContext {
 	public boolean leftSideNavigation;
 	public List<RouteSegmentResult> previouslyCalculatedRoute;
 	public PrecalculatedRouteDirection precalculatedRouteDirection;
+	
+	public long conditionalTime = 0;
 
 	// 2. Routing memory cache (big objects)
 	TLongObjectHashMap<List<RoutingSubregionTile>> indexedSubregions = new TLongObjectHashMap<List<RoutingSubregionTile>>();
@@ -109,8 +110,6 @@ public class RoutingContext {
 	// old planner
 	public FinalRouteSegment finalRouteSegment;
 
-
-	
 
 	RoutingContext(RoutingContext cp) {
 		this.config = cp.config;
@@ -316,12 +315,15 @@ public class RoutingContext {
 				BinaryMapIndexReader reader = reverseMap.get(ts.subregion.routeReg);
 				ts.setLoadedNonNative();
 				List<RouteDataObject> res = reader.loadRouteIndexData(ts.subregion);
-//				System.out.println(ts.subregion.shiftToData + " " + res);
+				
 				if(toLoad != null) {
 					toLoad.addAll(res);
 				} else {
 					for(RouteDataObject ro : res){
 						if(ro != null) {
+							if(conditionalTime != 0) {
+								ro.processConditionalTags(conditionalTime);
+							}
 							if(config.router.acceptLine(ro)) {
 								if(excludeNotAllowed != null && !excludeNotAllowed.contains(ro.getId())) {
 									ts.add(ro);

@@ -486,27 +486,49 @@ public class RouteDataObject {
 	public int[] getTypes() {
 		return types;
 	}
+	
+	public void processConditionalTags(long conditionalTime) {
+		int sz = types.length;
+		for (int i = 0; i < sz; i++) {
+			RouteTypeRule r = region.quickGetEncodingRule(types[i]);
+			if (r != null && r.conditional()) {
+				String vl = r.conditionalValue(conditionalTime);
+				if(vl != null) {
+					String nonCondTag = r.getNonConditionalTag();
+					int tp = region.findOrCreateRouteType(nonCondTag, vl);
+					for(int ks = 0; ks < types.length; ks++) {
+						RouteTypeRule toReplace = region.quickGetEncodingRule(types[ks]);
+						if(toReplace != null && toReplace.getTag().equals(nonCondTag)) {
+							types[ks] = tp;
+							break;
+						}
+					}
+				}
+			}
+		}
+	}
 
-	public float getMaximumSpeed(boolean direction){
+	public float getMaximumSpeed(boolean direction) {
 		int sz = types.length;
 		float maxSpeed = 0;
 		for (int i = 0; i < sz; i++) {
 			RouteTypeRule r = region.quickGetEncodingRule(types[i]);
-			if(r.isForward() != 0) {
-				if((r.isForward() == 1) != direction) {
-					continue;
-				}
-			}
 			float mx = r.maxSpeed();
 			if (mx > 0) {
-				maxSpeed = mx;
-				// conditional has priority
-				if(r.conditional()) {
-					break;
+				if (r.isForward() != 0) {
+					if ((r.isForward() == 1) != direction) {
+						continue;
+					} else {
+						// priority over default
+						maxSpeed = mx;
+						break;
+					}
+				} else {
+					maxSpeed = mx;
 				}
 			}
 		}
-		return maxSpeed ;
+		return maxSpeed;
 	}
 
 	public static float parseSpeed(String v, float def) {
@@ -669,6 +691,12 @@ public class RouteDataObject {
 			RouteTypeRule r = region.quickGetEncodingRule(types[i]);
 			if (r.getTag().equals(tag)) {
 				return r.getValue();
+			}
+		}
+		for(int i = 0; i < nameIds.length; i++) {
+			RouteTypeRule r = region.quickGetEncodingRule(nameIds[i]);
+			if (r.getTag().equals(tag)) {
+				return names.get(nameIds[i]);
 			}
 		}
 		return null;
@@ -896,6 +924,8 @@ public class RouteDataObject {
 		}
 		restrictionsVia[k] = viaWay;
 	}
+
+	
 
 	
 }
