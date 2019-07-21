@@ -70,8 +70,6 @@ public class RoutingContext {
 	public List<RouteSegmentResult> previouslyCalculatedRoute;
 	public PrecalculatedRouteDirection precalculatedRouteDirection;
 	
-	public long conditionalTime = 0;
-
 	// 2. Routing memory cache (big objects)
 	TLongObjectHashMap<List<RoutingSubregionTile>> indexedSubregions = new TLongObjectHashMap<List<RoutingSubregionTile>>();
 	TLongObjectHashMap<List<RouteDataObject>> tileRoutes = new TLongObjectHashMap<List<RouteDataObject>>();
@@ -115,7 +113,6 @@ public class RoutingContext {
 		this.config = cp.config;
 		this.map.putAll(cp.map);
 		this.calculationMode = cp.calculationMode;
-		this.conditionalTime = cp.conditionalTime;
 		this.leftSideNavigation = cp.leftSideNavigation;
 		this.reverseMap.putAll(cp.reverseMap);
 		this.nativeLib = cp.nativeLib;
@@ -322,8 +319,8 @@ public class RoutingContext {
 				} else {
 					for(RouteDataObject ro : res){
 						if(ro != null) {
-							if(conditionalTime != 0) {
-								ro.processConditionalTags(conditionalTime);
+							if(config.routeCalculationTime != 0) {
+								ro.processConditionalTags(config.routeCalculationTime);
 							}
 							if(config.router.acceptLine(ro)) {
 								if(excludeNotAllowed != null && !excludeNotAllowed.contains(ro.getId())) {
@@ -713,8 +710,8 @@ public class RoutingContext {
 				for (RouteDataObject ro : res) {
 					boolean accept = ro != null;
 					if (ctx != null && ro != null) {
-						if(ctx.conditionalTime != 0) {
-							ro.processConditionalTags(ctx.conditionalTime);
+						if(ctx.config.routeCalculationTime != 0) {
+							ro.processConditionalTags(ctx.config.routeCalculationTime);
 						}
 						accept = ctx.getRouter().acceptLine(ro);
 					}
