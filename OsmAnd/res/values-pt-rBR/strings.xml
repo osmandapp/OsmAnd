@@ -2955,7 +2955,7 @@ Pôr do Sol: %2$s</string>
     <string name="rendering_attr_smoothness_horrible_name">Horrível</string>
     <string name="rendering_attr_smoothness_very_horrible_name">Muito horrível</string>
     <string name="rendering_attr_smoothness_impassable_name">Intransitável</string>
-    <string name="rendering_attr_highway_class_motorway_name">Autoestrada/Via expressa</string>
+    <string name="rendering_attr_highway_class_motorway_name">Autoestrada</string>
     <string name="rendering_attr_highway_class_state_road_name">Rodovia</string>
     <string name="rendering_attr_highway_class_road_name">Avenida/Estrada</string>
     <string name="rendering_attr_highway_class_street_name">Rua</string>
