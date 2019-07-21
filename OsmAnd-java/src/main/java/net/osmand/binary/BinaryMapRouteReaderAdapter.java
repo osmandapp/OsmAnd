@@ -42,6 +42,7 @@ public class BinaryMapRouteReaderAdapter {
 		String condition = "";
 		OpeningHoursParser.OpeningHours hours = null;
 		String value;
+		int routeType;
 	}
 
 	public static class RouteTypeRule {
@@ -117,17 +118,17 @@ public class BinaryMapRouteReaderAdapter {
 			return 0;
 		}
 
-		public String conditionalValue(long time) {
+		public int conditionalValue(long time) {
 			if (conditional()) {
 				Calendar i = Calendar.getInstance();
 				i.setTimeInMillis(time);
 				for (RouteTypeCondition c : conditions) {
 					if (c.hours != null && c.hours.isOpenedForTime(i)) {
-						return c.value;
+						return c.routeType;
 					}
 				}
 			}
-			return null;
+			return 0;
 		}
 		
 		public float maxSpeed(){
@@ -293,7 +294,7 @@ public class BinaryMapRouteReaderAdapter {
 					String tag = rtr.getNonConditionalTag();
 					for(RouteTypeCondition c : rtr.conditions ) {
 						if(tag != null && c.value != null) {
-							findOrCreateRouteType(tag, c.value);
+							c.routeType = findOrCreateRouteType(tag, c.value);
 						}
 					}
 					
