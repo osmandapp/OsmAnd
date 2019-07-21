@@ -242,4 +242,6 @@
     <string name="min_logging_speed">Minimale Protokollierungsgeschwindigkeit</string>
     <string name="min_logging_speed_descr">Filter: keine Protokollierung unter der gewählten Geschwindigkeit</string>
     <string name="gpx_settings">GPX-Einstellungen</string>
+    <string name="timeline_no_data_descr">Für den ausgewählten Tag gibt es keine Datenaufzeichnungen</string>
+    <string name="timeline_no_data">Keine Daten</string>
 </resources>

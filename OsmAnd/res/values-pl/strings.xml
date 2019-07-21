@@ -1653,7 +1653,7 @@ Długość %2$s</string>
     <string name="poi_dialog_poi_type">Rodzaj użytecznego miejsca</string>
     <string name="poi_action_delete">usuń</string>
     <string name="building_number">Numer budynku</string>
-    <string name="av_locations_descr">Plik śladu GPX z notatkami o położeniach.</string>
+    <string name="av_locations_descr">Plik GPX z lokalizacjami.</string>
     <string name="rendering_value_boldOutline_name">Pogrubione kontury</string>
     <string name="download_live_updates">Aktualizowanie na bieżąco</string>
     <string name="commit_poi">Wyślij użyteczne miejsce</string>
@@ -3097,7 +3097,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="profile_alert_delete_title">Usuń profil</string>
     <string name="profile_alert_delete_msg">Czy na pewno chcesz usunąć profil %s\?</string>
     <string name="select_base_profile_dialog_title">Wybierz profil bazowy</string>
-    <string name="select_base_profile_dialog_message">Niestandardowy profil aplikacji powinien być oparty na jednym z domyślnych profili aplikacji. Wybrany profil definiuje podstawowe ustawienia: ustawienia widżetów, jednostek prędkości i odległości. W łańcuchu poniżej Nazwa Profilu można dowiedzieć się, które profile nawigacyjne są odpowiednie dla każdego profilu aplikacji.</string>
+    <string name="select_base_profile_dialog_message">Oprzyj swój profil niestandardowy na jednym z domyślnych profili aplikacji, który określa podstawowe ustawienia, takie jak domyślna widoczność widgetów i jednostek prędkości i odległości. Są to domyślne profile aplikacji, wraz z przykładami profili niestandardowych, które można rozszerzyć na:</string>
     <string name="select_nav_profile_dialog_title">Wybierz typ nawigacji</string>
     <string name="base_profile_descr_car">Samochód, ciężarówka, motocykl</string>
     <string name="base_profile_descr_bicycle">Rower górski, motorower, koń</string>
@@ -3156,7 +3156,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="app_mode_personal_transporter">Transporter osobisty</string>
     <string name="precision_hdop_and_vdop">Precyzja w poziomie: %1$s, w pionie: %2$s</string>
     <string name="precision_hdop">Precyzja w poziomie: %s</string>
-    <string name="app_mode_offroad">Offroad</string>
+    <string name="app_mode_offroad">Poza drogą</string>
     <string name="edit_profile_setup_subtitle">Profil zachowa własne ustawienia</string>
     <string name="edit_profile_setup_map_subtitle">Wybierz domyślne opcje mapy dla profilu</string>
     <string name="edit_profile_screen_options_subtitle">Wybierz domyślne opcje ekranu dla profilu</string>
@@ -3186,4 +3186,26 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="shared_string_file_is_saved">%s jest zapisany</string>
     <string name="shared_string_open_track">Otwórz ślad</string>
     <string name="shared_string_track_is_saved">Ślad %s jest zapisany</string>
+    <string name="release_3_4">• Profile aplikacji: Stwórz własny profil dla własnych potrzeb, z niestandardową ikoną i kolorem
+\n
+\n• Teraz można dostosować domyślne ustawienia dowolnego profilu i prędkości min/max
+\n
+\n• Dodano widget dla bieżących współrzędnych
+\n
+\n• Dodano opcje pokazania kompasu i linijki promienia na mapie
+\n
+\n• Napraw Rejestrowanie śladu tła
+\n
+\n• Ulepszone pliki do pobrania mapy w tle
+\n
+\n• Zwrócona opcja \"Turn Screen on\"
+\n
+\n• Poprawiono wybór języka Wikipedii
+\n
+\n• Poprawiono zachowanie przycisku kompasu podczas nawigacji
+\n
+\n• Inne poprawki błędów
+\n
+\n</string>
+    <string name="edit_profile_setup_title">Konfiguracja Profilu</string>
 </resources>

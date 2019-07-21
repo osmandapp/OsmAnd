@@ -1834,7 +1834,7 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="poi_error_unexpected_template">Ne povas fari agon {0}.</string>
     <string name="poi_error_io_error_template">Eraro de en/eligo okazis dum la agado {0}.</string>
     <string name="poi_error_info_not_loaded">Ne povas legi informojn pri nodo</string>
-    <string name="poi_dialog_opening_hours">Malferma je</string>
+    <string name="poi_dialog_opening_hours">Malfermita je</string>
     <string name="poi_dialog_comment">Komento</string>
     <string name="poi_dialog_reopen">Remalfermi</string>
     <string name="poi_dialog_comment_default">Ŝanĝi interesejon</string>
@@ -1961,8 +1961,8 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="coords_format">Koordinat-formo</string>
     <string name="coords_format_descr">Formo de geografiaj koordinatoj.</string>
     <string name="storage_directory_card">Memorkarto</string>
-    <string name="shared_string_is_open">Malfermaj nun</string>
-    <string name="shared_string_is_open_24_7">Malfermaj 24/7</string>
+    <string name="shared_string_is_open">Malfermitaj nun</string>
+    <string name="shared_string_is_open_24_7">Malfermita 24/7</string>
     <string name="map_widget_search">Serĉi</string>
     <string name="shared_string_from">el</string>
     <string name="city_type_district">Kvartalo</string>

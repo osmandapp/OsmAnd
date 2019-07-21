@@ -504,7 +504,7 @@
     <string name="gps_not_available">لطفاً GPS را از طریق تنظیمات فعال کنید</string>
     <string name="map_widget_monitoring_services">خدمات ثبت و ضبط</string>
     <string name="show_warnings_descr">پیکربندی‌های مربوط به هشدارهای ترافیکی (مانند محدودیت‌های سرعت، توقف‌های اجباری، سرعتگیرها، تونل‌ها)، هشدارهای دوربین کنترل سرعت و اطلاعات خط عبوری را انجام دهید.</string>
-    <string name="use_compass_navigation_descr">اگر جهت شناسایی نمی‌شود از قطب‌نما استفاده شود.</string>
+    <string name="use_compass_navigation_descr">اگر جهت شناسایی نشد از قطب‌نما استفاده شود.</string>
     <string name="avoid_motorway">پرهیز از آزادراه‌ها</string>
     <string name="snap_to_road_descr">در هنگام ناوبری، موقعیت را به جاده‌ها بچسبان.</string>
     <string name="snap_to_road">چسبیدن به راه</string>
@@ -3142,22 +3142,22 @@
     <string name="default_speed_dialog_msg">برای پیش‌بینی زمان رسیدن در هنگام مسیریابی استفاده می‌شود</string>
     <string name="new_profile">پروفایل جدید</string>
     <string name="last_launch_crashed">آخرین اجرای OsmAnd با شکست مواجه شد. لطفاً با اشتراک‌گذاری پیغام خطا ما را در بهبود OsmAnd یاری کنید.</string>
-    <string name="release_3_4">"• پروفایل‌های برنامه: متناسب با نیازهای خود پروفایل سفارشی بسازید؛ با رنگ و نماد دلخواه
-\n
-\n • برای هر پروفایل پیشفرض‌ها و سرعت‌های حداقل/حداکثر  را به‌دلخواه تنظیم کنید
-\n
-\n • یک ابزارک برای نمایش مختصات کنونی اضافه شده
-\n
-\n • Added options to show the compass and a radius ruler on the map
-\n
-\n • Fix background track logging
-\n
-\n • Improved background map downloads
-\n
-\n • Fixed Wikipedia language selection
-\n
-\n • Fixed compass button behavior during navigation
-\n
+    <string name="release_3_4">"• پروفایل‌های برنامه: متناسب با نیازهای خود پروفایل سفارشی بسازید؛ با رنگ و نماد دلخواه 
+\n 
+\n • برای هر پروفایل پیشفرض‌ها و سرعت‌های حداقل/حداکثر  را به‌دلخواه تنظیم کنید 
+\n 
+\n • یک ابزارک برای نمایش مختصات کنونی اضافه شده 
+\n 
+\n • Added options to show the compass and a radius ruler on the map 
+\n 
+\n • Fix background track logging 
+\n 
+\n • Improved background map downloads 
+\n 
+\n • Fixed Wikipedia language selection 
+\n 
+\n • Fixed compass button behavior during navigation 
+\n 
 \n • Other bug fixes
 \n
 \n"</string>
