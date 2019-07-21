@@ -47,9 +47,6 @@ public class RoutingConfiguration {
 	// 1.5 Recalculate distance help
 	public float recalculateDistance = 20000f;
 	
-	// 1.6 Timestamp to calculate route using conditional tags and temporal restrictions
-	public long dateToCalculateRoute;
-
 	public static class Builder {
 		// Design time storage
 		private String defaultRouter = "";
