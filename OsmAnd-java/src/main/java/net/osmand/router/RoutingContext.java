@@ -619,7 +619,6 @@ public class RoutingContext {
 		int cnt = 4;
 		while (cnt-- >= 0) {
 			for (int i = 0; (usedMem1 < usedMem2) && (i < 1000); ++i) {
-				// AVIAN FIXME
 				runtime.runFinalization();
 				runtime.gc();
 				Thread.yield();
@@ -711,9 +710,11 @@ public class RoutingContext {
 			ctx.timeToLoad += (System.nanoTime() - nanoTime);
 			if (res != null) {
 				for (RouteDataObject ro : res) {
-					
 					boolean accept = ro != null;
-					if (ctx != null) {
+					if (ctx != null && ro != null) {
+						if(ctx.conditionalTime != 0) {
+							ro.processConditionalTags(ctx.conditionalTime);
+						}
 						accept = ctx.getRouter().acceptLine(ro);
 					}
 					if (accept) {
