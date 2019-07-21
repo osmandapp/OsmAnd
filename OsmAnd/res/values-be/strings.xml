@@ -3064,4 +3064,12 @@
     <string name="shared_string_file_is_saved">%s захаваны</string>
     <string name="shared_string_open_track">Адкрыць след</string>
     <string name="shared_string_track_is_saved">След %s захаваны</string>
+    <string name="app_mode_ufo">НЛА</string>
+    <string name="precision_hdop_and_vdop">Дакладнасць па гарызанталі: %1$s, па вертыкалі: %2$s</string>
+    <string name="precision_hdop">Дакладнасць па гарызанталі: %s</string>
+    <string name="edit_profile_setup_map_subtitle">Абярыце прадвызначаныя параметры мапы для профіля</string>
+    <string name="edit_profile_screen_options_subtitle">Абярыце прадвызначаныя параметры экрана для профіля</string>
+    <string name="edit_profile_nav_settings_subtitle">Абярыце прадвызначаныя налады навігацыі для профіля</string>
+    <string name="routing_attr_max_num_changes_description">Вызначце максімальную колькасць змен</string>
+    <string name="routing_attr_max_num_changes_name">Колькасць змен</string>
 </resources>
