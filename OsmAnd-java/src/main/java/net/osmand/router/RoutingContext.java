@@ -115,6 +115,7 @@ public class RoutingContext {
 		this.config = cp.config;
 		this.map.putAll(cp.map);
 		this.calculationMode = cp.calculationMode;
+		this.conditionalTime = cp.conditionalTime;
 		this.leftSideNavigation = cp.leftSideNavigation;
 		this.reverseMap.putAll(cp.reverseMap);
 		this.nativeLib = cp.nativeLib;
