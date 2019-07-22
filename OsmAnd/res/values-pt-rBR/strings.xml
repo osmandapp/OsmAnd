@@ -2721,7 +2721,8 @@ Pôr do Sol: %2$s</string>
     <string name="shared_string_gpx_files">Arquivos GPX</string>
     <string name="access_intermediate_arrival_time">Hora de chegada intermediária</string>
     <string name="map_widget_intermediate_time">Hora intermediária</string>
-    <string name="get_osmand_live">Adquira OsmAnd Live para desbloquear todos os recursos:atualização diária de mapa com downloads ilimitados, todos os plugins grátis e pagos, Wikipédia, Wikivoyage e muito mais.</string>
+    <string name="get_osmand_live">Adquira OsmAnd Live para desbloquear todos estes recursos:
+\nAtualização diária de mapa com downloads ilimitados, todos os plugins grátis e pagos, Wikipédia, Wikivoyage e muito mais.</string>
     <string name="unirs_render_descr">Modificação do estilo padrão para aumentar o contraste de vias de pedestre e bicicleta. Usa as cores Mapnik antigo.</string>
     <string name="off_road_render_descr">Adequado para uso durante a condução off-road e com imagens de satélite verde usadas como mapa de fundo. Pontos-chave: espessura de vias principais reduzida, maior espessura de caminhos, trilhas, ciclovias e outras rotas. Baseado no estilo \'Topo\'.</string>
     <string name="nautical_render_descr">Estilo de navegação náutica. Principais características: boias, faróis, rios, rotas e marcas marítimas, portos, serviços de balizamento, batimetria.</string>
