@@ -34,37 +34,37 @@ public class LiveUpdatesHelper {
 	public static OsmandSettings.CommonPreference<Boolean> preferenceForLocalIndex(
 			String fileName, OsmandSettings settings) {
 		final String settingId = fileName + LIVE_UPDATES_ON_POSTFIX;
-		return settings.registerBooleanPreference(settingId, false);
+		return settings.registerBooleanPreference(settingId, false).makeGlobal();
 	}
 
 	public static OsmandSettings.CommonPreference<Boolean> preferenceLiveUpdatesOn(
 			String fileName, OsmandSettings settings) {
 		final String settingId = fileName + LIVE_UPDATES_ON_POSTFIX;
-		return settings.registerBooleanPreference(settingId, false);
+		return settings.registerBooleanPreference(settingId, false).makeGlobal();
 	}
 
 	public static OsmandSettings.CommonPreference<Boolean> preferenceDownloadViaWiFi(
 			String fileName, OsmandSettings settings) {
 		final String settingId = fileName + DOWNLOAD_VIA_WIFI_POSTFIX;
-		return settings.registerBooleanPreference(settingId, false);
+		return settings.registerBooleanPreference(settingId, false).makeGlobal();
 	}
 
 	public static OsmandSettings.CommonPreference<Integer> preferenceUpdateFrequency(
 			String fileName, OsmandSettings settings) {
 		final String settingId = fileName + UPDATE_TIMES_POSTFIX;
-		return settings.registerIntPreference(settingId, UpdateFrequency.HOURLY.ordinal());
+		return settings.registerIntPreference(settingId, UpdateFrequency.HOURLY.ordinal()).makeGlobal();
 	}
 
 	public static OsmandSettings.CommonPreference<Integer> preferenceTimeOfDayToUpdate(
 			String fileName, OsmandSettings settings) {
 		final String settingId = fileName + TIME_OF_DAY_TO_UPDATE_POSTFIX;
-		return settings.registerIntPreference(settingId, TimeOfDay.NIGHT.ordinal());
+		return settings.registerIntPreference(settingId, TimeOfDay.NIGHT.ordinal()).makeGlobal();
 	}
 
 	public static OsmandSettings.CommonPreference<Long> preferenceLastCheck(
 			String fileName, OsmandSettings settings) {
 		final String settingId = fileName + LAST_UPDATE_ATTEMPT_ON_POSTFIX;
-		return settings.registerLongPreference(settingId, DEFAULT_LAST_CHECK);
+		return settings.registerLongPreference(settingId, DEFAULT_LAST_CHECK).makeGlobal();
 	}
 
 	public static String getNameToDisplay(String fileName, OsmandActionBarActivity activity) {
