@@ -3047,4 +3047,6 @@ POIの更新は利用できません</string>
     <string name="rendering_attr_highway_class_path_name">道(自動車以外のもの向け)</string>
     <string name="rendering_attr_highway_class_cycleway_name">自転車道</string>
     <string name="add_home">自宅の追加</string>
+    <string name="shared_string_privacy_policy">プライバシーポリシー</string>
+    <string name="settings_privacy_and_security">プライバシーとセキュリティ</string>
 </resources>
