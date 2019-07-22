@@ -1662,7 +1662,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="next_proceed">Næste</string>
     <string name="opening_at">Åbner kl.</string>
     <string name="closing_at">Lukker</string>
-    <string name="av_locations_descr">GPX-fil med placeringsnoter.</string>
+    <string name="av_locations_descr">GPX-fil med placeringer.</string>
     <string name="av_locations">Placeringer</string>
     <string name="tab_title_basic">Grundlæggende</string>
     <string name="contact_info">Kontaktoplysninger</string>
@@ -3059,9 +3059,9 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="downloaded_maps">Hentede kort</string>
     <string name="visited_screens">Besøgte skærme</string>
     <string name="colleted_data">Indsamlede data</string>
-    <string name="collected_data_descr">Liste over data der deles med OsmAnd.</string>
-    <string name="downloaded_maps_collect_descr">Data indsamles for at forstå, hvilke kort over regioner og lande der er mest populære.</string>
-    <string name="visited_screens_collect_descr">Data indsamles for at forstå hvilke funktioner i OsmAnd der er mest populære.</string>
+    <string name="collected_data_descr">Definer hvilke data der deles med OsmAnd.</string>
+    <string name="downloaded_maps_collect_descr">Hjælper med at forstå, hvilke kort over hvilke regioner og lande der er mest populære.</string>
+    <string name="visited_screens_collect_descr">Hjælper med at forstå hvilke funktioner i OsmAnd der er mest populære.</string>
     <string name="privacy_and_security_change_descr">Ved at trykke på \"Tillad\" accepteres vores %1$s</string>
     <string name="settings_privacy_and_security">Privatliv og sikkerhed</string>
     <string name="settings_privacy_and_security_desc">Vælg hvilke data der deles med os</string>
@@ -3124,7 +3124,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="routing_attr_piste_type_skitour_name">Langrend ski</string>
     <string name="routing_attr_piste_type_skitour_description">Spor til langrend ski</string>
     <string name="routing_attr_piste_type_sled_name">Slæde</string>
-    <string name="routing_attr_piste_type_sled_description">Pister til kælling.</string>
+    <string name="routing_attr_piste_type_sled_description">Pister til kælkning.</string>
     <string name="routing_attr_allow_intermediate_name">Tillad mellemliggende ruter</string>
     <string name="routing_attr_allow_intermediate_description">Mere vanskelige ruter med stejlere sektioner. Generelt bør nogle hindringer undgås.</string>
     <string name="routing_attr_allow_advanced_name">Tillad avancerede ruter</string>
@@ -3132,9 +3132,9 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="routing_attr_allow_expert_name">Tillad ekspert ruter</string>
     <string name="routing_attr_allow_expert_description">Ekstremt vanskelige ruter, med farlige forhindringer og omgivelser.</string>
     <string name="routing_attr_allow_skating_only_name">Tillad kun skøjteløb ruter</string>
-    <string name="routing_attr_allow_skating_only_description">Ruter forberedt til freestyle eller bare skøjteløb uden klassiske stier.</string>
+    <string name="routing_attr_allow_skating_only_description">Ruter forberedt til freestyle eller kun skøjteløb uden klassiske spor</string>
     <string name="routing_attr_allow_classic_only_name">Tillad kun klassiske ruter</string>
-    <string name="routing_attr_allow_classic_only_description">Ruter forberedt til den klassiske stil uden skøjtebaner. Omfatter ruter udarbejdet af en mindre snescooter med løsere pister og stier lavet manuelt af skiløbere.</string>
+    <string name="routing_attr_allow_classic_only_description">Ruter forberedt til den klassiske stil uden skøjtebaner. Omfatter ruter udarbejdet af en mindre snescooter med løsere pister og spor lavet manuelt af skiløbere.</string>
     <string name="routing_attr_difficulty_preference_name">Foretrukket sværhedsgrad</string>
     <string name="routing_attr_difficulty_preference_description">Foretræk ruter med denne vanskelighed, selv om ruteplanlægning over sværere eller lettere pister stadig er muligt, hvis de er kortere.</string>
     <string name="routing_attr_freeride_policy_name">Off-piste</string>
@@ -3154,8 +3154,8 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="shared_string_crash">Nedbrud</string>
     <string name="last_launch_crashed">Den sidste start af OsmAnd mislykkedes. Hjælp med at forbedre OsmAnd ved at dele fejlmeddelelsen.</string>
     <string name="app_mode_ufo">UFO</string>
-    <string name="release_3_4">"• Anvendelsesprofiler: opret en brugervalgt profil med en brugervalgt ikon og farve
-\n
+    <string name="release_3_4">"• Anvendelsesprofiler: opret en brugervalgt profil med en brugervalgt ikon og farve 
+\n 
 \n • Tilpas alle profilers standard- og min/max hastigheder 
 \n
 \n• Tilføjet et modul til de aktuelle koordinater 
@@ -3164,8 +3164,8 @@ Repræsenterer område: %1$s x %2$s</string>
 \n
 \n• Rettet logføring af baggrundsspor 
 \n
-\n• Forbedret hentning af kort  i baggrunden
-\n
+\n• Forbedret hentning af kort  i baggrunden 
+\n 
 \n• Rettet Wikipedia sprogvalg 
 \n
 \n• Rettet kompasknappens opførsel under navigationen 
