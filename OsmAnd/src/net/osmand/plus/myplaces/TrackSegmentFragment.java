@@ -455,7 +455,7 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 							dataSets.add(elevationDataSet);
 						}
 						if (analysis.hasElevationData) {
-							List<Entry> eleValues = elevationDataSet != null ? elevationDataSet.getValues() : null;
+							List<Entry> eleValues = elevationDataSet != null && !gpxItem.isGeneralTrack() ? elevationDataSet.getValues() : null;
 							OrderedLineDataSet slopeDataSet = GpxUiHelper.createGPXSlopeDataSet(app, chart,
 									analysis, GPXDataSetAxisType.DISTANCE, eleValues, true, true);
 							if (slopeDataSet != null) {
@@ -713,8 +713,9 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 							((ImageView) view.findViewById(R.id.end_time_icon))
 									.setImageDrawable(ic.getThemedIcon(R.drawable.ic_action_time_end));
 
+							float totalDistance = fragmentAdapter.isCalcGeneralTrackOnlySegments() && gpxItem.isGeneralTrack() ? analysis.totalDistanceGeneralTrackOnlySegments : analysis.totalDistance;
 							((TextView) view.findViewById(R.id.distance_text))
-									.setText(OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app));
+									.setText(OsmAndFormatter.getFormattedDistance(totalDistance, app));
 							((TextView) view.findViewById(R.id.duration_text))
 									.setText(Algorithms.formatDuration((int) (analysis.timeSpan / 1000), app.accessibilityEnabled()));
 
@@ -938,10 +939,14 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 
 							((TextView) view.findViewById(R.id.average_text)).setText(avg);
 							((TextView) view.findViewById(R.id.max_text)).setText(max);
+
+							long timeMoving = fragmentAdapter.isCalcGeneralTrackOnlySegments() && gpxItem.isGeneralTrack() ? analysis.timeMovingGeneralTrackOnlySegments : analysis.timeMoving;
+							float totalDistanceMoving = fragmentAdapter.isCalcGeneralTrackOnlySegments() && gpxItem.isGeneralTrack() ? analysis.totalDistanceMovingGeneralTrackOnlySegments : analysis.totalDistanceMoving;
+
 							((TextView) view.findViewById(R.id.time_moving_text))
-									.setText(Algorithms.formatDuration((int) (analysis.timeMoving / 1000), app.accessibilityEnabled()));
+									.setText(Algorithms.formatDuration((int) (timeMoving / 1000), app.accessibilityEnabled()));
 							((TextView) view.findViewById(R.id.distance_text))
-									.setText(OsmAndFormatter.getFormattedDistance(analysis.totalDistanceMoving, app));
+									.setText(OsmAndFormatter.getFormattedDistance(totalDistanceMoving, app));
 
 						} else {
 							chart.setVisibility(View.GONE);

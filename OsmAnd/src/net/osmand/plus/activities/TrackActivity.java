@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
 
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
@@ -287,6 +288,18 @@ public class TrackActivity extends TabActivity {
 					((TrackSegmentFragment) frag).updateHeader();
 				} else if (frag instanceof TrackPointFragment) {
 					((TrackPointFragment) frag).updateHeader();
+				}
+			}
+		}
+	}
+
+	public void notifySegmentAdapter() {
+		for (WeakReference<Fragment> f : fragList) {
+			Fragment frag = f.get();
+			if (frag instanceof TrackSegmentFragment) {
+				ArrayAdapter adapter = ((TrackSegmentFragment) frag).getAdapter();
+				if (adapter != null) {
+					adapter.notifyDataSetChanged();
 				}
 			}
 		}

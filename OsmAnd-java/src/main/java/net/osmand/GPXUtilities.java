@@ -159,12 +159,16 @@ public class GPXUtilities {
 		public float distance;
 		public int time;
 		public float elevation;
+		public boolean firstPoint = false;
+		public boolean lastPoint = false;
 	}
 
 	public static class Speed {
 		public float distance;
 		public int time;
 		public float speed;
+		public boolean firstPoint = false;
+		public boolean lastPoint = false;
 	}
 
 	public static class WptPt extends GPXExtensions {
@@ -355,6 +359,7 @@ public class GPXUtilities {
 
 	public static class GPXTrackAnalysis {
 		public float totalDistance = 0;
+		public float totalDistanceGeneralTrackOnlySegments = 0;
 		public int totalTracks = 0;
 		public long startTime = Long.MAX_VALUE;
 		public long endTime = Long.MIN_VALUE;
@@ -363,7 +368,9 @@ public class GPXUtilities {
 		//public long timeMoving0 = 0;
 		//public float totalDistanceMoving0 = 0;
 		public long timeMoving = 0;
+		public long timeMovingGeneralTrackOnlySegments = 0;
 		public float totalDistanceMoving = 0;
+		public float totalDistanceMovingGeneralTrackOnlySegments = 0;
 
 		public double diffElevationUp = 0;
 		public double diffElevationDown = 0;
@@ -431,6 +438,10 @@ public class GPXUtilities {
 
 			long startTimeOfSingleSegment = 0;
 			long endTimeOfSingleSegment = 0;
+
+			float distanceOfSingleSegment = 0;
+			float distanceMovingOfSingleSegment = 0;
+			long timeMovingOfSingleSegment = 0;
 
 			float totalElevation = 0;
 			int elevationPoints = 0;
@@ -627,6 +638,10 @@ public class GPXUtilities {
 						if ((speed > 0) && (calculations[0] > 0.1 / 1000f * (point.time - prev.time)) && point.time != 0 && prev.time != 0) {
 							timeMoving = timeMoving + (point.time - prev.time);
 							totalDistanceMoving += calculations[0];
+							if (s.segment.generalSegment && !point.firstPoint) {
+								timeMovingOfSingleSegment += point.time - prev.time;
+								distanceMovingOfSingleSegment += calculations[0];
+							}
 						}
 
 						//Next few lines for Issue 3222 heuristic testing only
@@ -657,6 +672,27 @@ public class GPXUtilities {
 					speedData.add(speed1);
 					if (!hasSpeedData && speed1.speed > 0 && totalDistance > 0) {
 						hasSpeedData = true;
+					}
+					if (s.segment.generalSegment) {
+						distanceOfSingleSegment += calculations[0];
+						if (point.firstPoint) {
+							distanceOfSingleSegment = 0;
+							timeMovingOfSingleSegment = 0;
+							distanceMovingOfSingleSegment = 0;
+							if (j > 0) {
+								elevation1.firstPoint = true;
+								speed1.firstPoint = true;
+							}
+						}
+						if (point.lastPoint) {
+							totalDistanceGeneralTrackOnlySegments += distanceOfSingleSegment;
+							timeMovingGeneralTrackOnlySegments += timeMovingOfSingleSegment;
+							totalDistanceMovingGeneralTrackOnlySegments += distanceMovingOfSingleSegment;
+							if (j < numberOfPoints - 1) {
+								elevation1.lastPoint = true;
+								speed1.lastPoint = true;
+							}
+						}
 					}
 				}
 			}
