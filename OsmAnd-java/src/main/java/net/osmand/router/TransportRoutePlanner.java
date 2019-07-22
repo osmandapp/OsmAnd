@@ -22,8 +22,12 @@ import java.util.PriorityQueue;
 
 import gnu.trove.iterator.TIntIterator;
 import gnu.trove.list.array.TIntArrayList;
+import gnu.trove.list.array.TLongArrayList;
+import gnu.trove.map.TIntLongMap;
+import gnu.trove.map.hash.TIntLongHashMap;
 import gnu.trove.map.hash.TIntObjectHashMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
+import gnu.trove.set.hash.TLongHashSet;
 
 public class TransportRoutePlanner {
 	
@@ -761,40 +765,65 @@ public class TransportRoutePlanner {
 			int pz = (31 - cfg.ZOOM_TO_LOAD_TILES);
 			SearchRequest<TransportStop> sr = BinaryMapIndexReader.buildSearchTransportRequest(x << pz, (x + 1) << pz,
 					y << pz, (y + 1) << pz, -1, null);
-			TIntArrayList references = new TIntArrayList();
+			TIntArrayList allReferences = new TIntArrayList();
+			TLongObjectHashMap<TLongHashSet> stopsRoutes = new TLongObjectHashMap<>();
 			TIntArrayList referencesToLoad = new TIntArrayList();
 			// should it be global?
 			TLongObjectHashMap<TransportStop> loadedTransportStops = new TLongObjectHashMap<TransportStop>();
+			List<TransportStop> existingStops = new ArrayList<>();
+			TIntArrayList stopReferences = new TIntArrayList();
 			for (BinaryMapIndexReader r : routeMap.keySet()) {
 				sr.clearSearchResults();
-				references.clear();
+				allReferences.clear();
 				referencesToLoad.clear();
 
-				List<TransportStop> existingStops = null;
 				List<TransportStop> stops = r.searchTransportIndex(sr);
-				for (TransportStop s : stops) {
-					if (!loadedTransportStops.contains(s.getId())) {
-						loadedTransportStops.put(s.getId(), s);
-						if (!s.isDeleted()) {
-							references.addAll(s.getReferencesToRoutes());
+				existingStops.clear();
+				for (TransportStop stop : stops) {
+					Long stopId = stop.getId();
+					TransportStop s = loadedTransportStops.get(stopId);
+					if (s == null) {
+						s = loadedTransportStops.put(stopId, stop);
+					}
+					if (!s.isDeleted()) {
+						stopReferences.clear();
+						stopReferences.addAll(stop.getReferencesToRoutes());
+						long[] routesIds = stop.getRoutesIds();
+						if (routesIds != null) {
+							TLongHashSet routes = stopsRoutes.get(stopId);
+							if (routes == null) {
+								routes = new TLongHashSet(routesIds);
+								stopsRoutes.put(stopId, routes);
+							} else {
+								for (int i = 0; i < routesIds.length; i++) {
+									long routeId = routesIds[i];
+									if (routes.contains(routeId)) {
+										stopReferences.removeAt(i);
+									} else {
+										routes.add(routeId);
+									}
+								}
+							}
+						}
+						if (stopReferences.size() > 0) {
+							allReferences.addAll(stopReferences);
+						} else {
+							existingStops.add(stop);
 						}
 					} else {
-						if (existingStops == null) {
-							existingStops = new ArrayList<>();
-						}
-						existingStops.add(s);
+						existingStops.add(stop);
 					}
 				}
-				if (existingStops != null && existingStops.size() > 0) {
+				if (existingStops.size() > 0) {
 					stops.removeAll(existingStops);
 				}
 
-				if (references.size() > 0) {
-					references.sort();
+				if (allReferences.size() > 0) {
+					allReferences.sort();
 					TIntObjectHashMap<TransportRoute> loadedRoutes = routeMap.get(r);
 					TIntObjectHashMap<TransportRoute> routes = new TIntObjectHashMap<TransportRoute>();
-					TIntIterator it = references.iterator();
-					int p = references.get(0) + 1; // different
+					TIntIterator it = allReferences.iterator();
+					int p = allReferences.get(0) + 1; // different
 					while (it.hasNext()) {
 						int nxt = it.next();
 						if (p != nxt) {
