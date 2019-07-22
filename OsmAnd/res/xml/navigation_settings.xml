@@ -33,6 +33,9 @@
             android:key="snap_to_road"
             android:summary="@string/snap_to_road_descr"
             android:title="@string/snap_to_road"/>
+        <CheckBoxPreference
+            android:key="enable_time_conditional_routing"
+            android:title="@string/temporary_conditional_routing"/>
         <Preference
             android:key="show_routing_alarms"
             android:summary="@string/show_warnings_descr"

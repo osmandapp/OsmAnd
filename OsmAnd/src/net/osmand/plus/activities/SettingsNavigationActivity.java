@@ -209,6 +209,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 
 
 
+		registerBooleanPreference(settings.ENABLE_TIME_CONDITIONAL_ROUTING, screen);
 
 		addTurnScreenOn((PreferenceGroup) screen.findPreference("turn_screen_on"));
 
