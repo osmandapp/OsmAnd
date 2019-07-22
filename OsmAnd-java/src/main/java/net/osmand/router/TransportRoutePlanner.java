@@ -759,24 +759,24 @@ public class TransportRoutePlanner {
 			long nanoTime = System.nanoTime();
 			List<TransportRouteSegment> lst = new ArrayList<TransportRouteSegment>();
 			int pz = (31 - cfg.ZOOM_TO_LOAD_TILES);
-			SearchRequest<TransportStop> sr = BinaryMapIndexReader.buildSearchTransportRequest(x << pz, (x + 1) << pz, 
+			SearchRequest<TransportStop> sr = BinaryMapIndexReader.buildSearchTransportRequest(x << pz, (x + 1) << pz,
 					y << pz, (y + 1) << pz, -1, null);
-			TIntArrayList allPoints = new TIntArrayList();
-			TIntArrayList allPointsLoad = new TIntArrayList();
+			TIntArrayList references = new TIntArrayList();
+			TIntArrayList referencesToLoad = new TIntArrayList();
 			// should it be global?
 			TLongObjectHashMap<TransportStop> loadedTransportStops = new TLongObjectHashMap<TransportStop>();
-			for(BinaryMapIndexReader r : routeMap.keySet()) {
+			for (BinaryMapIndexReader r : routeMap.keySet()) {
 				sr.clearSearchResults();
-				allPoints.clear();
-				allPointsLoad.clear();
+				references.clear();
+				referencesToLoad.clear();
 
 				List<TransportStop> existingStops = null;
 				List<TransportStop> stops = r.searchTransportIndex(sr);
-				for(TransportStop s : stops) {
-					if(!loadedTransportStops.contains(s.getId())) {
+				for (TransportStop s : stops) {
+					if (!loadedTransportStops.contains(s.getId())) {
 						loadedTransportStops.put(s.getId(), s);
 						if (!s.isDeleted()) {
-							allPoints.addAll(s.getReferencesToRoutes());
+							references.addAll(s.getReferencesToRoutes());
 						}
 					} else {
 						if (existingStops == null) {
@@ -788,28 +788,28 @@ public class TransportRoutePlanner {
 				if (existingStops != null && existingStops.size() > 0) {
 					stops.removeAll(existingStops);
 				}
-				
-				if(allPoints.size() > 0) {
-					allPoints.sort();
+
+				if (references.size() > 0) {
+					references.sort();
 					TIntObjectHashMap<TransportRoute> loadedRoutes = routeMap.get(r);
-					TIntObjectHashMap<TransportRoute> routes  = new TIntObjectHashMap<TransportRoute>();
-					TIntIterator it = allPoints.iterator();
-					int p = allPoints.get(0) + 1; // different
-					while(it.hasNext()) {
+					TIntObjectHashMap<TransportRoute> routes = new TIntObjectHashMap<TransportRoute>();
+					TIntIterator it = references.iterator();
+					int p = references.get(0) + 1; // different
+					while (it.hasNext()) {
 						int nxt = it.next();
 						if (p != nxt) {
 							if (loadedRoutes.contains(nxt)) {
 								routes.put(nxt, loadedRoutes.get(nxt));
 							} else {
-								allPointsLoad.add(nxt);
+								referencesToLoad.add(nxt);
 							}
 						}
 					}
-					r.loadTransportRoutes(allPointsLoad.toArray(), routes);
+					r.loadTransportRoutes(referencesToLoad.toArray(), routes);
 					loadedRoutes.putAll(routes);
 					loadTransportSegments(routes, r, stops, lst);
 				}
-			}			
+			}
 			readTime += System.nanoTime() - nanoTime;
 			return lst;
 		}

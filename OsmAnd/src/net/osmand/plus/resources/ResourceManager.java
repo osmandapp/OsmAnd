@@ -942,7 +942,7 @@ public class ResourceManager {
 	public List<TransportIndexRepository> searchTransportRepositories(double latitude, double longitude) {
 		List<TransportIndexRepository> repos = new ArrayList<TransportIndexRepository>();
 		for (TransportIndexRepository index : transportRepositories.values()) {
-			if (index.checkContains(latitude,longitude) && index.isUseForPublicTransport()) {
+			if (index.isUseForPublicTransport() && index.checkContains(latitude,longitude)) {
 				repos.add(index);
 			}
 		}
@@ -954,7 +954,7 @@ public class ResourceManager {
 		List<TransportIndexRepository> repos = new ArrayList<TransportIndexRepository>();
 		List<TransportStop> stops = new ArrayList<>();
 		for (TransportIndexRepository index : transportRepositories.values()) {
-			if (index.checkContains(topLatitude, leftLongitude, bottomLatitude, rightLongitude) && index.isUseForPublicTransport()) {
+			if (index.isUseForPublicTransport() && index.checkContains(topLatitude, leftLongitude, bottomLatitude, rightLongitude)) {
 				repos.add(index);
 			}
 		}
