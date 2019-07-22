@@ -1,13 +1,12 @@
 package net.osmand.data;
 
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-
-import gnu.trove.set.hash.TLongHashSet;
 
 public class TransportStop extends MapObject {
 
@@ -162,13 +161,36 @@ public class TransportStop extends MapObject {
 		return exitsString;
 	}
 
+	private boolean areRoutesEquals(long[] r1, long[] r2) {
+		boolean res = (r1 == null && r2 == null);
+		if (!res && r1 != null && r2 != null) {
+			res = true;
+			for (long id : r1) {
+				if (!Algorithms.containsInArrayL(r2, id)) {
+					res = false;
+					break;
+				}
+			}
+		}
+		return res;
+	}
+
 	public boolean compareStop(TransportStop thatObj) {
-		if (this.compareObject(thatObj) &&
-				((this.routesIds == null && thatObj.routesIds == null) || (this.routesIds != null && this.routesIds.equals(thatObj.routesIds))) &&
+		if (this.compareObject(thatObj) && areRoutesEquals(this.routesIds, thatObj.routesIds) &&
 				((this.exits == null && thatObj.exits == null) || (this.exits != null && thatObj.exits != null && this.exits.size() == thatObj.exits.size()))) {
 			if (this.exits != null) {
-				for (int i = 0; i < this.exits.size(); i++) {
-					if (!this.exits.get(i).compareExit(thatObj.exits.get(i))) {
+				for (TransportStopExit exit1 : this.exits) {
+					boolean contains = false;
+					for (TransportStopExit exit2 : thatObj.exits) {
+						if (exit1.getId().equals(exit2.getId())) {
+							contains = true;
+							if (!exit1.compareExit(exit2)) {
+								return false;
+							}
+							break;
+						}
+					}
+					if (!contains) {
 						return false;
 					}
 				}
