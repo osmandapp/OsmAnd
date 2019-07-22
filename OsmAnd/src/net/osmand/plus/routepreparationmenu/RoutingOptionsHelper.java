@@ -370,6 +370,8 @@ public class RoutingOptionsHelper {
 				return new AvoidRoadsRoutingParameter();
 			case GpxLocalRoutingParameter.KEY:
 				return new GpxLocalRoutingParameter();
+			case TimeConditionalRoutingItem.KEY:
+				return new TimeConditionalRoutingItem();
 			case OtherSettingsRoutingParameter.KEY:
 				return new OtherSettingsRoutingParameter();
 			default:
@@ -413,6 +415,7 @@ public class RoutingOptionsHelper {
 		list.add(1, new VoiceGuidanceRoutingParameter());
 		list.add(2, new InterruptMusicRoutingParameter());
 		list.add(3, new AvoidRoadsRoutingParameter());
+		list.add(4, new TimeConditionalRoutingItem());
 		list.add(new GpxLocalRoutingParameter());
 		list.add(new OtherSettingsRoutingParameter());
 		return list;
@@ -747,6 +750,33 @@ public class RoutingOptionsHelper {
 
 		public RouteSimulationItem() {
 			super(null);
+		}
+	}
+
+	public static class TimeConditionalRoutingItem extends LocalRoutingParameter {
+
+		public static final String KEY = "TimeConditionalRoutingItem";
+
+		public String getKey() {
+			return KEY;
+		}
+
+		public boolean canAddToRouteMenu() {
+			return false;
+		}
+
+		public TimeConditionalRoutingItem() {
+			super(null);
+		}
+
+		@Override
+		public int getActiveIconId() {
+			return R.drawable.ic_action_road_works_dark;
+		}
+
+		@Override
+		public int getDisabledIconId() {
+			return R.drawable.ic_action_road_works_dark;
 		}
 	}
 
