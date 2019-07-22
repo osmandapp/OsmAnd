@@ -779,4 +779,41 @@ public class Algorithms {
 		is.close();
 		return map;
 	}
+
+	public static boolean containsInArrayL(long[] array, long value) {
+		return Arrays.binarySearch(array, value) >= 0;
+	}
+
+	public static long[] addToArrayL(long[] array, long value, boolean skipIfExists) {
+		long[] result;
+		if (array == null) {
+			result = new long[]{ value };
+		} else if (skipIfExists && Arrays.binarySearch(array, value) >= 0) {
+			result = array;
+		} else {
+			result = new long[array.length + 1];
+			System.arraycopy(array, 0, result, 0, array.length);
+			result[result.length - 1] = value;
+		}
+		return result;
+	}
+
+	public static long[] removeFromArrayL(long[] array, long value) {
+		long[] result;
+		if (array != null) {
+			int index = Arrays.binarySearch(array, value);
+			if (index >= 0) {
+				result = new long[array.length - 1];
+				System.arraycopy(array, 0, result, 0, index);
+				if (index < result.length) {
+					System.arraycopy(array, index + 1, result, index, array.length - (index + 1));
+				}
+				return result;
+			} else {
+				return array;
+			}
+		} else {
+			return array;
+		}
+	}
 }
