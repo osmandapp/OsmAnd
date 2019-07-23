@@ -716,8 +716,6 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 							((ImageView) view.findViewById(R.id.end_time_icon))
 									.setImageDrawable(ic.getThemedIcon(R.drawable.ic_action_time_end));
 
-							updateJoinGapsInfo(view, position);
-
 							final SwitchCompat joinGapsSwitch = (SwitchCompat) view.findViewById(R.id.gpx_join_gaps_switch);
 							joinGapsSwitch.setOnClickListener(new View.OnClickListener() {
 								@Override
@@ -749,6 +747,7 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 							view.findViewById(R.id.list_divider).setVisibility(View.GONE);
 							view.findViewById(R.id.start_end_time).setVisibility(View.GONE);
 						}
+						updateJoinGapsInfo(view, position);
 						view.findViewById(R.id.analyze_on_map).setOnClickListener(new View.OnClickListener() {
 							@Override
 							public void onClick(View v) {
@@ -855,12 +854,24 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 							((TextView) view.findViewById(R.id.ascent_text)).setText(asc);
 							((TextView) view.findViewById(R.id.descent_text)).setText(desc);
 
+							final SwitchCompat joinGapsSwitch = (SwitchCompat) view.findViewById(R.id.gpx_join_gaps_switch);
+							joinGapsSwitch.setOnClickListener(new View.OnClickListener() {
+								@Override
+								public void onClick(View v) {
+									joinGapsEnabled = joinGapsSwitch.isChecked();
+									for (int i = 0; i < getCount(); i++) {
+										View view = getViewAtPosition(i);
+										updateJoinGapsInfo(view, i);
+									}
+								}
+							});
 						} else {
 							chart.setVisibility(View.GONE);
 							view.findViewById(R.id.average_range).setVisibility(View.GONE);
 							view.findViewById(R.id.list_divider).setVisibility(View.GONE);
 							view.findViewById(R.id.ascent_descent).setVisibility(View.GONE);
 						}
+						updateJoinGapsInfo(view, position);
 						view.findViewById(R.id.analyze_on_map).setOnClickListener(new View.OnClickListener() {
 							@Override
 							public void onClick(View v) {
@@ -923,7 +934,6 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 						} else {
 							view.findViewById(R.id.overflow_menu).setVisibility(View.GONE);
 						}
-						updateJoinGapsInfo(view, position);
 
 						break;
 					case GPX_TAB_ITEM_SPEED:
@@ -951,8 +961,6 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 							((TextView) view.findViewById(R.id.average_text)).setText(avg);
 							((TextView) view.findViewById(R.id.max_text)).setText(max);
 
-							updateJoinGapsInfo(view, position);
-
 							final SwitchCompat joinGapsSwitch = (SwitchCompat) view.findViewById(R.id.gpx_join_gaps_switch);
 							joinGapsSwitch.setOnClickListener(new View.OnClickListener() {
 								@Override
@@ -970,6 +978,7 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 							view.findViewById(R.id.list_divider).setVisibility(View.GONE);
 							view.findViewById(R.id.time_distance).setVisibility(View.GONE);
 						}
+						updateJoinGapsInfo(view, position);
 						view.findViewById(R.id.analyze_on_map).setOnClickListener(new View.OnClickListener() {
 							@Override
 							public void onClick(View v) {
@@ -1134,7 +1143,7 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 		void updateJoinGapsInfo(View view, int position) {
 			if (view != null) {
 				GPXTrackAnalysis analysis = gpxItem.analysis;
-				AndroidUiHelper.updateVisibility(view.findViewById(R.id.gpx_join_gaps_container), gpxItem.isGeneralTrack());
+				AndroidUiHelper.updateVisibility(view.findViewById(R.id.gpx_join_gaps_container), gpxItem.isGeneralTrack() && analysis != null);
 				((SwitchCompat) view.findViewById(R.id.gpx_join_gaps_switch)).setChecked(joinGapsEnabled);
 				if (analysis != null) {
 					GPXTabItemType tabType = tabTypes[position];
