@@ -1164,7 +1164,7 @@ public class GpxUiHelper {
 	}
 
 	private static List<Entry> calculateElevationArray(GPXTrackAnalysis analysis, GPXDataSetAxisType axisType,
-													   float divX, float convEle) {
+													   float divX, float convEle, boolean useGeneralTrackPoints) {
 		List<Entry> values = new ArrayList<>();
 		List<Elevation> elevationData = analysis.elevationData;
 		float nextX = 0;
@@ -1206,6 +1206,9 @@ public class GpxUiHelper {
 							values.add(new Entry(lastXSameY, lastEntry.getY()));
 						}
 						hasSameY = false;
+					}
+					if (useGeneralTrackPoints && e.firstPoint && lastEntry != null) {
+						values.add(new Entry(nextX, lastEntry.getY()));
 					}
 					prevElevOrig = e.elevation;
 					prevElev = elev;
@@ -1352,7 +1355,7 @@ public class GpxUiHelper {
 			}
 		});
 
-		List<Entry> values = calculateElevationArray(analysis, axisType, divX, convEle);
+		List<Entry> values = calculateElevationArray(analysis, axisType, divX, convEle, true);
 
 		OrderedLineDataSet dataSet = new OrderedLineDataSet(values, "", GPXDataSetType.ALTITUDE, axisType);
 		dataSet.priority = (float) (analysis.avgElevation - analysis.minElevation) * convEle;
@@ -1483,7 +1486,13 @@ public class GpxUiHelper {
 				if (nextY < 0 || Float.isInfinite(nextY)) {
 					nextY = 0;
 				}
+				if (s.firstPoint) {
+					values.add(new Entry(nextX, 0));
+				}
 				values.add(new Entry(nextX, nextY));
+				if (s.lastPoint) {
+					values.add(new Entry(nextX, 0));
+				}
 			}
 		}
 
@@ -1602,7 +1611,7 @@ public class GpxUiHelper {
 
 		List<Entry> values;
 		if (eleValues == null) {
-			values = calculateElevationArray(analysis, GPXDataSetAxisType.DISTANCE, 1f, 1f);
+			values = calculateElevationArray(analysis, GPXDataSetAxisType.DISTANCE, 1f, 1f, false);
 		} else {
 			values = new ArrayList<>(eleValues.size());
 			for (Entry e : eleValues) {
