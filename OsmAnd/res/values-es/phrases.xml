@@ -3596,12 +3596,13 @@
     <string name="poi_changing_table_limited">Cambiador: limitado</string>
     <string name="poi_changing_table_location_room">Cambiador: habitación</string>
     <string name="poi_changing_table_location_male_toilet">Cambiador: aseo masculino</string>
-    <string name="poi_changing_table_location_female_toilet">Cambiador: Aseo femenino</string>
-    <string name="poi_changing_table_location_unisex_toilet">Cambiador: Aseo Unisex</string>
+    <string name="poi_changing_table_location_female_toilet">Ubicación del cambiador: Aseo femenino</string>
+    <string name="poi_changing_table_location_unisex_toilet">Ubicación del cambiador: aseo unisex</string>
     <string name="poi_changing_table_count">Número de cambiadores</string>
-    <string name="poi_changing_table_fee_yes">Cambiador de pago: si</string>
+    <string name="poi_changing_table_fee_yes">Cambiador de pago: sí</string>
     <string name="poi_changing_table_fee_no">Cambiador de pago: no</string>
-    <string name="poi_charcoal_pile">Montón de carbón</string>
+    <string name="poi_charcoal_pile">Pila de carbón vegetal</string>
     <string name="poi_historic_tank">Tanque histórico</string>
-    <string name="poi_hookah_lounge">Lugar para fumar en pipa</string>
+    <string name="poi_hookah_lounge">Salón del narguile</string>
+    <string name="poi_source_biomass">Fuente de energía: biomasa</string>
 </resources>

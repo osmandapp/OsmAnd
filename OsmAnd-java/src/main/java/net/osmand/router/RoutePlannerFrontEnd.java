@@ -68,7 +68,7 @@ public class RoutePlannerFrontEnd {
 			ctx.loadTileData(px, py, 15, dataObjects);
 		}
 		if (dataObjects.isEmpty()) {
-			ctx.loadTileData(px, py, 13, dataObjects);
+			ctx.loadTileData(px, py, 14, dataObjects);
 		}
 		if (list == null) {
 			list = new ArrayList<BinaryRoutePlanner.RouteSegmentPoint>();

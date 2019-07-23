@@ -3,19 +3,25 @@ package net.osmand.data;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
+import gnu.trove.set.hash.TLongHashSet;
 
 public class TransportStop extends MapObject {
 
 	private static final int DELETED_STOP = -1;
 
 	private int[] referencesToRoutes = null;
-	private TransportStopAggregated transportStopAggregated;
+	private long[] deletedRoutesIds;
+	private long[] routesIds;
 	public int distance;
 	public int x31;
 	public int y31;
 	private List<TransportStopExit> exits;
+
+	private TransportStopAggregated transportStopAggregated;
 
 	public TransportStop() {
 	}
@@ -28,16 +34,40 @@ public class TransportStop extends MapObject {
 		this.referencesToRoutes = referencesToRoutes;
 	}
 
+	public long[] getRoutesIds() {
+		return routesIds;
+	}
+
+	public void setRoutesIds(long[] routesIds) {
+		this.routesIds = routesIds;
+	}
+
+	public boolean hasRoute(long routeId) {
+		return routesIds != null && Arrays.binarySearch(routesIds, routeId) >= 0;
+	}
+
 	public boolean isDeleted() {
 		return referencesToRoutes != null && referencesToRoutes.length == 1 && referencesToRoutes[0] == DELETED_STOP;
 	}
 
-	public boolean hasReferencesToRoutes() {
-		return referencesToRoutes != null && referencesToRoutes.length > 0;
-	}
-
 	public void setDeleted() {
 		this.referencesToRoutes = new int[] { DELETED_STOP };
+	}
+
+	public long[] getDeletedRoutesIds() {
+		return deletedRoutesIds;
+	}
+
+	public void setDeletedRoutesIds(long[] deletedRoutesIds) {
+		this.deletedRoutesIds = deletedRoutesIds;
+	}
+
+	public boolean isRouteDeleted(long routeId) {
+		return deletedRoutesIds != null && Arrays.binarySearch(deletedRoutesIds, routeId) >= 0;
+	}
+
+	public boolean hasReferencesToRoutes() {
+		return !isDeleted() && referencesToRoutes != null && referencesToRoutes.length > 0;
 	}
 
 	public Amenity getAmenity() {
@@ -134,10 +164,8 @@ public class TransportStop extends MapObject {
 
 	public boolean compareStop(TransportStop thatObj) {
 		if (this.compareObject(thatObj) &&
-				((this.referencesToRoutes == null && thatObj.referencesToRoutes == null) ||
-						(this.referencesToRoutes != null && thatObj.referencesToRoutes != null && this.referencesToRoutes.length == thatObj.referencesToRoutes.length)) &&
-				((this.exits == null && thatObj.exits == null) ||
-						(this.exits != null && thatObj.exits != null && this.exits.size() == thatObj.exits.size()))) {
+				((this.routesIds == null && thatObj.routesIds == null) || (this.routesIds != null && this.routesIds.equals(thatObj.routesIds))) &&
+				((this.exits == null && thatObj.exits == null) || (this.exits != null && thatObj.exits != null && this.exits.size() == thatObj.exits.size()))) {
 			if (this.exits != null) {
 				for (int i = 0; i < this.exits.size(); i++) {
 					if (!this.exits.get(i).compareExit(thatObj.exits.get(i))) {

@@ -11,7 +11,6 @@
 	Thx - Hardy
 
 -->
-    <string name="gpx_join_gaps">Join gaps</string>
     <string name="app_mode_camper">Camper</string>
     <string name="app_mode_campervan">Campervan</string>
     <string name="rendering_attr_showLez_description">Show Low Emission zones on the map. Does not affect routing.</string>
@@ -35,7 +34,7 @@
     <string name="turn_screen_on_sensor">Use proximity sensor</string>
     <string name="turn_screen_on_sensor_descr">Wave your hand over the top of the screen to turn on the screen while navigating.</string>
     <string name="app_mode_offroad">Offroad</string>
-    <string name="edit_profile_setup_title">Setup Profile</string>
+    <string name="edit_profile_setup_title">Setup profile</string>
     <string name="edit_profile_setup_subtitle">Profile keeps its own settings</string>
     <string name="edit_profile_setup_map_subtitle">Select default map options for profile</string>
     <string name="edit_profile_screen_options_subtitle">Select default screen options for profile</string>
@@ -50,6 +49,7 @@
         • Added options to show the compass and a radius ruler on the map\n\n
         • Fix background track logging\n\n
         • Improved background map downloads\n\n
+        • Returned \'Turn Screen On\' option\n\n
         • Fixed Wikipedia language selection\n\n
         • Fixed compass button behavior during navigation\n\n
         • Other bug fixes\n\n
@@ -81,11 +81,11 @@
     <string name="downloaded_maps">Maps downloaded</string>
     <string name="visited_screens">Screens visited</string>
     <string name="collected_data">Data collected</string>
-    <string name="collected_data_descr">List of data you want to share with OsmAnd.</string>
-    <string name="downloaded_maps_collect_descr">We collect this data to understand which maps of which regions and countries are the most popular.</string>
-    <string name="visited_screens_collect_descr">We collect this data to understand which OsmAnd features are the most popular.</string>
+    <string name="collected_data_descr">Define which data you allow OsmAnd to share.</string>
+    <string name="downloaded_maps_collect_descr">Helps us understand which maps of which regions and countries are the most popular.</string>
+    <string name="visited_screens_collect_descr">Helps us understand which OsmAnd features are the most popular.</string>
     <string name="privacy_and_security_change_descr">By tapping \"Allow\" you agree with our %1$s</string>
-    <string name="settings_privacy_and_security">Privacy and Security</string>
+    <string name="settings_privacy_and_security">Privacy and security</string>
     <string name="settings_privacy_and_security_desc">Select which data you are sharing with us</string>
     <string name="shared_string_no_thank_you">No, thank you</string>
     <string name="shared_string_allow">Allow</string>
@@ -106,7 +106,7 @@
     <string name="settings_derived_routing_mode_string">User mode, derived from: %s</string>
     <string name="routing_profile_ski">Ski</string>
     <string name="profile_type_descr_string">Type: %s</string>
-    <string name="profile_type_base_string">Base Profile</string>
+    <string name="profile_type_base_string">Base profile</string>
     <string name="profile_alert_need_routing_type_title">Select navigation type</string>
     <string name="profile_alert_need_routing_type_msg">Please select a navigation type for the new application profile</string>
     <string name="profile_alert_need_profile_name_title">Enter profile name</string>
@@ -134,8 +134,8 @@
     <string name="custom_routing">Custom routing profile</string>
     <string name="special_routing_type">Special routing</string>
     <string name="third_party_routing_type">Third-party routing</string>
-  <string name="application_profiles_descr">Select the profiles to be visible in the app.</string>
-  <string name="application_profiles">Application profiles</string>
+    <string name="application_profiles_descr">Select the profiles to be visible in the app.</string>
+    <string name="application_profiles">Application profiles</string>
     <string name="searching_gps">Searching GPS</string>
     <string name="coordinates_widget">Coordinates widget</string>
     <string name="files_moved">Moved %1$d files (%2$s).</string>
@@ -230,6 +230,11 @@
     <string name="rendering_attr_highway_class_path_name">Path</string>
     <string name="rendering_attr_highway_class_cycleway_name">Cycleway</string>
     <string name="rendering_attr_undefined_name">Undefined</string>
+	<string name="rendering_attr_highway_class_track_grade1_name">Grade 1</string>
+	<string name="rendering_attr_highway_class_track_grade2_name">Grade 2</string>
+	<string name="rendering_attr_highway_class_track_grade3_name">Grade 3</string>
+	<string name="rendering_attr_highway_class_track_grade4_name">Grade 4</string>
+	<string name="rendering_attr_highway_class_track_grade5_name">Grade 5</string>
     <string name="release_3_3">
         • New \'Directions\' screen: Displays Home and Work destination buttons, \'previous route\' shortcut, list of active GPX tracks and markers, search history\n\n
         • Additional info under \'Route details\': road types, surface, steepness, smoothness\n\n
@@ -1211,7 +1216,7 @@
     <string name="simulate_your_location_stop_descr">Stop simulating your position.</string>
     <string name="simulate_your_location_descr">Simulate your position using a calculated route or a recorded GPX track.</string>
     <string name="looking_up_address">Looking up address</string>
-    <string name="av_locations_descr">GPX file with note locations.</string>
+    <string name="av_locations_descr">GPX file with locations.</string>
     <string name="av_locations">Locations</string>
     <string name="plugin_settings">Plugins</string>
     <string name="routing_attr_avoid_shuttle_train_name">Avoid shuttle train</string>

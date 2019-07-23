@@ -372,7 +372,7 @@
     <string name="vector_data_missing">הורדת נתונים (‚בלתי מקוונים’) כדי להשתמש במפות באופן בלתי מקוון.</string>
     <string name="local_index_gpx_info_show">"
 \n
-\nיש ללחוץ לחיצה ארוכה כדי להגיע לאפשרויות"</string>
+\nלחיצה ארוכה לאפשרויות"</string>
     <string name="local_index_installed">גרסה מקומית</string>
     <string name="local_index_items_backuped">%1$d מתוך %2$d פריטים הושבתו.</string>
     <string name="local_index_items_deleted">%1$d מתוך %2$d פריטים נמחקו.</string>
@@ -1918,7 +1918,7 @@
     <string name="simulate_your_location_stop_descr">הפסקת הדמיית המיקום שלך.</string>
     <string name="simulate_your_location_descr">הדמיית המיקום שלך באמצעות נתיב מחושב או מסלול GPX מוקלט.</string>
     <string name="looking_up_address">הכתובת בחיפוש</string>
-    <string name="av_locations_descr">קובץ GPX עם מיקומי הערות.</string>
+    <string name="av_locations_descr">קובץ GPX עם מיקומים.</string>
     <string name="routing_attr_avoid_shuttle_train_name">התעלמות מרכבות שאטל</string>
     <string name="routing_attr_avoid_shuttle_train_description">הימנעות מרכבות שאטל</string>
     <string name="rendering_value_boldOutline_name">קו מתאר מודגש</string>
@@ -3035,4 +3035,58 @@
     <string name="public_transport_type">סוג תחבורה</string>
     <string name="searching_gps">בחיפוש אחר GPS</string>
     <string name="coordinates_widget">וידג׳ט נקודות ציון</string>
+    <string name="external_input_device">התקני קלט חיצוניים</string>
+    <string name="external_input_device_descr">נא לבחור התקן בתור מקלדת גנרית או WunderLINQ כפקדים חיצוניים.</string>
+    <string name="sett_no_ext_input">ללא</string>
+    <string name="sett_generic_ext_input">מקלדת גנרית</string>
+    <string name="sett_wunderlinq_ext_input">WunderLINQ</string>
+    <string name="sett_parrot_ext_input">Parrot</string>
+    <string name="turn_on_profile_desc">נא להפעיל לפחות פרופיל יישומון אחד כדי להשתמש בהגדרה הזו.</string>
+    <string name="rendering_attr_winter_road_name">כביש חורפי</string>
+    <string name="rendering_attr_ice_road_name">כביש קרח</string>
+    <string name="routeInfo_winter_ice_road_name">כבישי חורף וקרח</string>
+    <string name="rendering_attr_tracktype_grade1_name">אחיד (סלול)</string>
+    <string name="rendering_attr_tracktype_grade2_name">אחיד (לא סלול)</string>
+    <string name="rendering_attr_tracktype_grade3_name">בעיקר אחיד</string>
+    <string name="rendering_attr_tracktype_grade4_name">בעיקר רך</string>
+    <string name="rendering_attr_tracktype_grade5_name">רך</string>
+    <string name="routeInfo_tracktype_name">קשיחות המשטח</string>
+    <string name="shared_string_file_is_saved">%s נשמר</string>
+    <string name="shared_string_open_track">מסלול פתוח</string>
+    <string name="shared_string_min_speed">מהירות מזערית</string>
+    <string name="shared_string_max_speed">מהירות מרבית</string>
+    <string name="default_speed_setting_title">מהירות כבררת מחדל</string>
+    <string name="default_speed_setting_descr">החלפת הגדרות מהירות בררת מחדל</string>
+    <string name="minmax_speed_dialog_title">הגדרת מהירות מרבית/מזערית</string>
+    <string name="app_mode_ufo">חיזר</string>
+    <string name="app_mode_personal_transporter">אמצעי תעבורה אישי</string>
+    <string name="app_mode_monowheel">חד־אופן</string>
+    <string name="app_mode_scooter">קטנוע/קורקינט</string>
+    <string name="precision_hdop_and_vdop">דיוק אופקי: %1$s, אנכי: %2$s</string>
+    <string name="precision_hdop">דיוק אופקי: %s</string>
+    <string name="app_mode_offroad">שטח</string>
+    <string name="edit_profile_setup_title">הקמת פרופיל</string>
+    <string name="edit_profile_setup_subtitle">לפרופיל יש הגדרות משלו</string>
+    <string name="edit_profile_setup_map_subtitle">יש לבחור את מפת בררת המחדל לפרופיל</string>
+    <string name="edit_profile_screen_options_subtitle">נא לבחור את הגדרות בררת המחדל למסך עבור הפרופיל</string>
+    <string name="edit_profile_nav_settings_subtitle">נא לבחור את הגדרות הניווט כבררת מחדל עבור פרופיל</string>
+    <string name="routing_attr_max_num_changes_description">ציון מספר השינויים המרבי</string>
+    <string name="routing_attr_max_num_changes_name">מספר שינויים</string>
+    <string name="turn_screen_on_router">להתעורר בפניות</string>
+    <string name="turn_screen_on_time_descr">להגדיר את זמן התעוררות המסך.</string>
+    <string name="turn_screen_on_sensor">להשתמש בחיישן מרחק</string>
+    <string name="turn_screen_on_sensor_descr">יש לנופף ביד מול החלק העליון של חזית המכשיר כדי להדליק את המסך בזמן ניווט.</string>
+    <string name="shared_string_track_is_saved">המסלול %s נשמר</string>
+    <string name="profile_alert_cant_delete_base">לא ניתן למחוק את הפרופילים הבסיסיים של OsmAnd</string>
+    <string name="profile_alert_need_save_title">שמירת שינויים</string>
+    <string name="profile_alert_need_save_msg">עליך לשמור את השינויים לפרופיל כדי להמשיך</string>
+    <string name="profile_alert_delete_title">מחיקת פרופיל</string>
+    <string name="profile_alert_delete_msg">למחוק את הפרופיל %s\?</string>
+    <string name="select_base_profile_dialog_title">בחירת פרופיל בסיס</string>
+    <string name="process_downloading_service">שירות ההורדות של OsmAnd</string>
+    <string name="press_again_to_change_the_map_orientation">יש לגעת שוב כדי לשנות את כיוון המפה</string>
+    <string name="default_speed_dialog_msg">משמש לחישוב מועד ההגעה הצפוי במהלך הניווט</string>
+    <string name="new_profile">פרופיל חדש</string>
+    <string name="shared_string_crash">קריסה</string>
+    <string name="last_launch_crashed">הטעינה האחרונה של OsmAnd נכשלה. נא לסייע לנו לשפר את OsmAnd על ידי שיתוף הודעת השגיאה.</string>
 </resources>

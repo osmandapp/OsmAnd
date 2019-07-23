@@ -3552,4 +3552,6 @@
     <string name="poi_socket_nema_5_15_yes">NEMA 5-15R</string>
     <string name="poi_socket_nema_5_20_yes">NEMA 5-20</string>
     <string name="poi_socket_as3112_yes">AS/NZS 3112</string>
+    <string name="poi_historic_tank">Tank historique</string>
+    <string name="poi_source_biomass">Source d\'énergie : biomasse</string>
 </resources>

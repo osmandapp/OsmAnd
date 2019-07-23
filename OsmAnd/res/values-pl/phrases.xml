@@ -391,7 +391,7 @@
     <string name="poi_laundry">Pralnia</string>
     <string name="poi_car_rental">Wypożyczalnia samochodów</string>
     <string name="poi_dock">Dok</string>
-    <string name="poi_toilets">Toalety</string>
+    <string name="poi_toilets">Ubikacja;Toalety</string>
     <string name="poi_sauna">Sauna</string>
     <string name="poi_brothel">Dom publiczny</string>
     <string name="poi_mortuary">Kostnica</string>
@@ -3602,4 +3602,5 @@
     <string name="poi_charcoal_pile">Stos węgla drzewnego</string>
     <string name="poi_historic_tank">Zbiornik historyczny</string>
     <string name="poi_hookah_lounge">Hookah lounge - Salon fajki wodnej (shisha)</string>
+    <string name="poi_source_biomass">Źródło energii: biomasa</string>
 </resources>

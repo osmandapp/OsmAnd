@@ -174,8 +174,8 @@
     <string name="poi_fuel_octane_80">80 octanos</string>
     <string name="poi_fuel_octane_91">91 octanos</string>
     <string name="poi_fuel_octane_92">92 octanos</string>
-    <string name="poi_fuel_octane_95">Nafta súper (grado 2);Energy 5000;Super+</string>
-    <string name="poi_fuel_octane_98">Nafta premium (grado 3);Infinia;V-Power Nitro+;Energy 8000;Podium;SL Magnum</string>
+    <string name="poi_fuel_octane_95">Nafta súper (grado 2);Energy 5000;Super+;95 octanos</string>
+    <string name="poi_fuel_octane_98">Nafta premium (grado 3);Infinia;V-Power Nitro+;Energy 8000;Podium;SL Magnum;98 octanos</string>
     <string name="poi_fuel_octane_100">100 octanos</string>
     <string name="poi_fuel_cng">GNC</string>
     <string name="poi_fuel_1_25">Combustible 1:25</string>
@@ -3610,4 +3610,5 @@
     <string name="poi_charcoal_pile">Carbonera;Pila de carbón</string>
     <string name="poi_historic_tank">Tanque histórico</string>
     <string name="poi_hookah_lounge">Bar de cachimbas;Salón Hookah</string>
+    <string name="poi_source_biomass">Fuente de energía: biomasa</string>
 </resources>

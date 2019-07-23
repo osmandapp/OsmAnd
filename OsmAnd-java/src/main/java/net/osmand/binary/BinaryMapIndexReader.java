@@ -71,10 +71,12 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import gnu.trove.list.array.TIntArrayList;
+import gnu.trove.list.array.TLongArrayList;
 import gnu.trove.map.TIntObjectMap;
 import gnu.trove.map.hash.TIntObjectHashMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
 import gnu.trove.set.hash.TIntHashSet;
+import gnu.trove.set.hash.TLongHashSet;
 
 public class BinaryMapIndexReader {
 
@@ -1624,6 +1626,8 @@ public class BinaryMapIndexReader {
 		// cache information
 		TIntArrayList cacheCoordinates = new TIntArrayList();
 		TIntArrayList cacheTypes = new TIntArrayList();
+		TLongArrayList cacheIdsA = new TLongArrayList();
+		TLongArrayList cacheIdsB = new TLongArrayList();
 
 		MapObjectStat stat = new MapObjectStat();
 

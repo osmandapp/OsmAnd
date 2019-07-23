@@ -1,14 +1,7 @@
 package net.osmand.binary;
 
-import gnu.trove.list.array.TIntArrayList;
-import gnu.trove.map.hash.TIntObjectHashMap;
-
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import com.google.protobuf.CodedInputStream;
+import com.google.protobuf.WireFormat;
 
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.data.TransportSchedule;
@@ -19,8 +12,15 @@ import net.osmand.osm.edit.Way;
 import net.osmand.util.MapUtils;
 import net.osmand.util.TransliterationHelper;
 
-import com.google.protobuf.CodedInputStream;
-import com.google.protobuf.WireFormat;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
+import gnu.trove.list.array.TIntArrayList;
+import gnu.trove.map.hash.TIntObjectHashMap;
 
 public class BinaryMapTransportReaderAdapter {
 	private CodedInputStream codedIS;
@@ -536,7 +536,9 @@ public class BinaryMapTransportReaderAdapter {
 		
 		req.numberOfAcceptedObjects++;
 		req.cacheTypes.clear();
-		
+		req.cacheIdsA.clear();
+		req.cacheIdsB.clear();
+
 		TransportStop dataObject = new TransportStop();
 		dataObject.setLocation(BinaryMapIndexReader.TRANSPORT_STOP_ZOOM, x, y);
 		dataObject.setFileOffset(shift);
@@ -547,12 +549,20 @@ public class BinaryMapTransportReaderAdapter {
 			switch (tag) {
 			case 0:
 				dataObject.setReferencesToRoutes(req.cacheTypes.toArray());
+				dataObject.setDeletedRoutesIds(req.cacheIdsA.toArray());
+				dataObject.setRoutesIds(req.cacheIdsB.toArray());
 				if(dataObject.getName("en").length() == 0){
 					dataObject.setEnName(TransliterationHelper.transliterate(dataObject.getName()));
 				}
 				return dataObject;
 			case OsmandOdb.TransportStop.ROUTES_FIELD_NUMBER :
 				req.cacheTypes.add(shift - codedIS.readUInt32());
+				break;
+			case OsmandOdb.TransportStop.DELETEDROUTESIDS_FIELD_NUMBER :
+				req.cacheIdsA.add(codedIS.readUInt64());
+				break;
+			case OsmandOdb.TransportStop.ROUTESIDS_FIELD_NUMBER :
+				req.cacheIdsB.add(codedIS.readUInt64());
 				break;
 			case OsmandOdb.TransportStop.NAME_EN_FIELD_NUMBER :
 				if (req.stringTable != null) {

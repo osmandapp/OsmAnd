@@ -242,4 +242,6 @@
     <string name="min_logging_speed">Minimum logningshastighed</string>
     <string name="min_logging_speed_descr">Filter: ingen logning under den valgte hastighed</string>
     <string name="gpx_settings">GPX-indstillinger</string>
+    <string name="timeline_no_data_descr">Vi har ikke indsamlet data for den valgte dag</string>
+    <string name="timeline_no_data">Ingen data</string>
 </resources>

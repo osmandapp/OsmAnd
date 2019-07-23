@@ -237,7 +237,7 @@
     <string name="simulate_your_location_stop_descr">Ĉesigi simuladon de pozicio.</string>
     <string name="simulate_your_location_descr">Simuli vian pozicion uzante komputitan kurson aŭ registritan GPX-spuron.</string>
     <string name="looking_up_address">Serĉado de adreso</string>
-    <string name="av_locations_descr">GPX-dosiero kun notoj pri lokoj.</string>
+    <string name="av_locations_descr">GPX-dosiero kun lokoj.</string>
     <string name="av_locations">Lokoj</string>
     <string name="plugin_settings">Kromprogramoj</string>
     <string name="routing_attr_avoid_shuttle_train_name">Eviti aŭt-ŝarĝovagonarojn</string>
@@ -1834,7 +1834,7 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="poi_error_unexpected_template">Ne povas fari agon {0}.</string>
     <string name="poi_error_io_error_template">Eraro de en/eligo okazis dum la agado {0}.</string>
     <string name="poi_error_info_not_loaded">Ne povas legi informojn pri nodo</string>
-    <string name="poi_dialog_opening_hours">Malferma je</string>
+    <string name="poi_dialog_opening_hours">Malfermita je</string>
     <string name="poi_dialog_comment">Komento</string>
     <string name="poi_dialog_reopen">Remalfermi</string>
     <string name="poi_dialog_comment_default">Ŝanĝi interesejon</string>
@@ -1961,8 +1961,8 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="coords_format">Koordinat-formo</string>
     <string name="coords_format_descr">Formo de geografiaj koordinatoj.</string>
     <string name="storage_directory_card">Memorkarto</string>
-    <string name="shared_string_is_open">Malfermaj nun</string>
-    <string name="shared_string_is_open_24_7">Malfermaj 24/7</string>
+    <string name="shared_string_is_open">Malfermitaj nun</string>
+    <string name="shared_string_is_open_24_7">Malfermita 24/7</string>
     <string name="map_widget_search">Serĉi</string>
     <string name="shared_string_from">el</string>
     <string name="city_type_district">Kvartalo</string>
@@ -3027,20 +3027,20 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="public_transport_type">Speco de transporto</string>
     <string name="searching_gps">Determinado de pozicio…</string>
     <string name="coordinates_widget">Fenestraĵo de koordinatoj</string>
-    <string name="press_again_to_change_the_map_orientation">Premu ree por ŝanĝi map‑orientiĝon</string>
+    <string name="press_again_to_change_the_map_orientation">Frapetu ree por ŝanĝi map‑orientiĝon</string>
     <string name="rate_dialog_descr">Bonvolu dediĉi 30 sekundojn por kunhavigi vian opinion kaj taksi nian laboron ĉe Google Play.</string>
     <string name="button_rate">Taksi</string>
     <string name="shared_string_privacy_policy">Privateca politiko</string>
     <string name="help_us_make_osmand_better">Helpu al ni igi OsmAnd pli bona!</string>
-    <string name="make_osmand_better_descr">Bonvolu permesi al OsmAnd kolekti kaj pritrakti anonimajn datumojn pri uzado de la aplikaĵo. Ni ne kolektos kaj konservos datumojn pri via pozicio aŭ pri serĉataj lokoj.
-\n
-\nVi ĉiam povos ŝanĝi tion en agordoj → privateco kaj sekureco.</string>
+    <string name="make_osmand_better_descr">Bonvolu permesi al OsmAnd kolekti kaj pritrakti anonimajn datumojn pri uzado de la aplikaĵo. Ni ne kolektos kaj konservos datumojn pri via pozicio aŭ pri foliumataj lokoj sur la mapo.
+\n 
+\nVi povas ŝanĝi vian elekton per agordoj → privateco kaj sekureco.</string>
     <string name="choose_data_to_share">Elektu datumojn por kunhavigi:</string>
     <string name="downloaded_maps">Elŝutitaj mapoj</string>
     <string name="visited_screens">Vidigitaj ekranoj</string>
-    <string name="collected_data_descr">Datumoj por kunhavigi kun programistoj de OsmAnd.</string>
-    <string name="downloaded_maps_collect_descr">Ni kolektas tiujn datumojn por ekkoni mapojn de kiuj regionoj kaj landoj estas la plej popularaj.</string>
-    <string name="visited_screens_collect_descr">Ni kolektas tiujn datumojn por ekkoni la plej popularajn eblaĵojn de OsmAnd.</string>
+    <string name="collected_data_descr">Elekti datumojn por kunhavigi al programistoj de OsmAnd.</string>
+    <string name="downloaded_maps_collect_descr">Helpu al ni scii pri mapoj de kiuj regionoj kaj landoj estas la plej popularaj.</string>
+    <string name="visited_screens_collect_descr">Helpu al ni scii pri kiuj eblaĵoj de OsmAnd estas la plej uzataj.</string>
     <string name="privacy_and_security_change_descr">Frapetu “permesi” por akcepti nian %1$s</string>
     <string name="settings_privacy_and_security">Privateco kaj sekureco</string>
     <string name="settings_privacy_and_security_desc">Elekti datumojn por kunhavigi kun ni</string>
@@ -3053,7 +3053,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="app_mode_subway">Metroo</string>
     <string name="app_mode_horse">Ĉevalo</string>
     <string name="app_mode_helicopter">Helikoptero</string>
-    <string name="osmand_routing_promo">Vi povas aldoni propran modifitan version de routing.xml al “..osmand/routing”</string>
+    <string name="osmand_routing_promo">Vi povas aldoni propran modifitan version de la dosiero routing.xml al “..osmand/routing”</string>
     <string name="app_mode_skiing">Skiado</string>
     <string name="base_profile_descr_ski">Skiado</string>
     <string name="show_compass_ruler">Montri mezurilon de kompaso</string>
@@ -3065,7 +3065,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="profile_type_descr_string">Speco: %s</string>
     <string name="profile_type_base_string">Ĉefa profilo</string>
     <string name="profile_alert_need_routing_type_title">Elektu specon de navigado</string>
-    <string name="profile_alert_need_routing_type_msg">Vi devas elekti specon de navigado por krei novan profilon</string>
+    <string name="profile_alert_need_routing_type_msg">Bonvolu elekti specon de navigo por la nova aplikaĵa profilo</string>
     <string name="profile_alert_need_profile_name_title">Entajpu nomon por profilo</string>
     <string name="profile_alert_need_profile_name_msg">Nomo de profilo ne estu malplena!</string>
     <string name="profile_alert_duplicate_name_title">Nomo neebla</string>
@@ -3076,7 +3076,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="profile_alert_delete_title">Forigi profilon</string>
     <string name="profile_alert_delete_msg">Ĉu vi certe volas forigi la profilon “%s”\?</string>
     <string name="select_base_profile_dialog_title">Elektu bazan profilon</string>
-    <string name="select_base_profile_dialog_message">Propra aplikaĵa profilo estu bazita sur iu implicita profilo. Elektita profilo difinas bazajn agordojn: fenestraĵojn, unuoj de longo kaj distanco. Sube nomo de profilo troviĝas taŭgaj navigadaj profiloj por ĉiu aplikaĵa profilo.</string>
+    <string name="select_base_profile_dialog_message">Via propra profilo estos bazita sur iu implicita aplikaĵa profilo, kiu difinos bazajn agordojn kiel videblon de fenestraĵoj, unuojn de rapido kaj distanco. Jen implicitaj profiloj kaj ekzemplaj profiloj por krei:</string>
     <string name="select_nav_profile_dialog_title">Elektu navigadan profilon</string>
     <string name="base_profile_descr_car">Aŭto, kamiono, motorciklo</string>
     <string name="base_profile_descr_bicycle">Biciklo, malgranda motorbiciklo, ĉevalo</string>
@@ -3130,7 +3130,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="default_speed_dialog_msg">Uzata por kalkuli esperatan tempon de alveno dum navigadi</string>
     <string name="new_profile">Nova profilo</string>
     <string name="shared_string_crash">Paneo</string>
-    <string name="last_launch_crashed">La antaŭa starto de OsmAnd paneis. Helpu al ni plibonigi la aplikaĵon, sendu mesaĝon pri eraro.</string>
+    <string name="last_launch_crashed">La antaŭa starto de OsmAnd paneis. Helpu al ni plibonigi la aplikaĵon per sendi mesaĝon pri eraro.</string>
     <string name="app_mode_ufo">NIFO</string>
     <string name="release_3_4">• profiloj de aplikaĵo: krei profilojn laŭ viaj bezonoj kun propra emblemo kaj koloro 
 \n 
@@ -3162,4 +3162,32 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="edit_profile_nav_settings_subtitle">Elekti implicitajn agordojn pri navigado por profilo</string>
     <string name="routing_attr_max_num_changes_description">Difini maksimuman nombron da ŝanĝoj de transportiloj</string>
     <string name="routing_attr_max_num_changes_name">Nombro da transveturiliĝoj</string>
+    <string name="turn_screen_on_router">Teni ekranon ŝaltita</string>
+    <string name="turn_screen_on_time_descr">Agordi tempon post kiu la ekrano malŝaltiĝos.</string>
+    <string name="turn_screen_on_sensor">Uzi proksimec‑sentilon</string>
+    <string name="turn_screen_on_sensor_descr">Svingu vian manon antaŭ la ekrano por ŝalti la ekranon dum navigi.</string>
+    <string name="rendering_attr_highway_class_track_grade1_name">Firma</string>
+    <string name="rendering_attr_highway_class_track_grade2_name">Plejparte firma</string>
+    <string name="rendering_attr_highway_class_track_grade3_name">Mezkvalita</string>
+    <string name="rendering_attr_highway_class_track_grade4_name">Plejparte mola</string>
+    <string name="rendering_attr_highway_class_track_grade5_name">Mola</string>
+    <string name="external_input_device">Eksteraj enigaj aparatoj</string>
+    <string name="external_input_device_descr">Elekti aparatojn kiel fizikan klavaron aŭ WunderLINQ por regi la aplikaĵon.</string>
+    <string name="sett_no_ext_input">Neniu</string>
+    <string name="sett_generic_ext_input">Fizika klavaro</string>
+    <string name="sett_wunderlinq_ext_input">WunderLINQ</string>
+    <string name="sett_parrot_ext_input">Parrot</string>
+    <string name="turn_on_profile_desc">Aktivigu almenaŭ unu profilon de aplikaĵo por uzi tiun ĉi agordon.</string>
+    <string name="rendering_attr_winter_road_name">Vintraj vojoj</string>
+    <string name="rendering_attr_ice_road_name">Glaciaj vojoj</string>
+    <string name="routeInfo_winter_ice_road_name">Vintraj kaj glaciaj vojoj</string>
+    <string name="rendering_attr_tracktype_grade1_name">Firmaj (pavimaj)</string>
+    <string name="rendering_attr_tracktype_grade2_name">Firmaj (nepavimaj)</string>
+    <string name="rendering_attr_tracktype_grade3_name">Plejparte firmaj</string>
+    <string name="rendering_attr_tracktype_grade4_name">Plejparte malfirmaj</string>
+    <string name="rendering_attr_tracktype_grade5_name">Malfirmaj</string>
+    <string name="routeInfo_tracktype_name">Kvalito de vojoj</string>
+    <string name="shared_string_file_is_saved">%s estas konservita</string>
+    <string name="shared_string_open_track">Malfermita kurso</string>
+    <string name="shared_string_track_is_saved">Kurso %s estas konservita</string>
 </resources>

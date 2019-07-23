@@ -1339,4 +1339,9 @@
     <string name="poi_bailiff">Fogd</string>
     <string name="poi_tax_inspection">Skattekontor</string>
     <string name="poi_climbing_crag">Ja</string>
+    <string name="poi_traffic_calming_cushion">Fartshump</string>
+    <string name="poi_traffic_calming_table">Bred fartshump</string>
+    <string name="poi_traffic_calming_choker">Innsnevring</string>
+    <string name="poi_denotation">Betegnelse</string>
+    <string name="poi_rtsa_scale_filter">Vanskelighetsgrad</string>
 </resources>

@@ -4,6 +4,7 @@ package net.osmand.plus.routing;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Base64;
 
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
@@ -51,6 +52,7 @@ import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URLConnection;
@@ -61,6 +63,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.zip.GZIPInputStream;
 
 import javax.xml.parsers.FactoryConfigurationError;
 import javax.xml.parsers.ParserConfigurationException;
@@ -1181,6 +1184,7 @@ public class RouteProvider {
 		bpars.putString("v", mode);
 		bpars.putString("trackFormat", "gpx");
 		bpars.putString("turnInstructionFormat", "osmand");
+		bpars.putString("acceptCompressedResult", "true");
 
 		OsmandApplication ctx = (OsmandApplication) params.ctx;
 		List<Location> res = new ArrayList<Location>();
@@ -1194,11 +1198,23 @@ public class RouteProvider {
 			String gpxMessage = brouterService.getTrackFromParams(bpars);
 			if (gpxMessage == null)
 				gpxMessage = "no result from brouter";
-			if (!gpxMessage.startsWith("<")) {
+
+			boolean isZ64Encoded = gpxMessage.startsWith("ejY0"); // base-64 version of "z64"
+
+			if (!( isZ64Encoded || gpxMessage.startsWith("<") ) ) {
 				return new RouteCalculationResult(gpxMessage);
 			}
 
-			GPXFile gpxFile = GPXUtilities.loadGPXFile(new ByteArrayInputStream(gpxMessage.getBytes("UTF-8")));
+			InputStream gpxStream;
+			if ( isZ64Encoded ) {
+				ByteArrayInputStream bais = new ByteArrayInputStream( Base64.decode(gpxMessage, Base64.DEFAULT) );
+				bais.read( new byte[3] ); // skip prefix
+				gpxStream = new GZIPInputStream( bais );
+			} else {
+				gpxStream = new ByteArrayInputStream(gpxMessage.getBytes("UTF-8"));
+			}
+
+			GPXFile gpxFile = GPXUtilities.loadGPXFile(gpxStream);
 
 			dir = parseOsmAndGPXRoute(res, gpxFile, true, params.leftSide, params.mode.getDefaultSpeed());
 
