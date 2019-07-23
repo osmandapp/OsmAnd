@@ -3209,4 +3209,10 @@ Lon %2$s</string>
     <string name="shared_string_file_is_saved">Se ha guardado «%s»</string>
     <string name="shared_string_open_track">Abrir traza</string>
     <string name="shared_string_track_is_saved">Se ha guardado la traza «%s»</string>
+    <string name="gpx_join_gaps">Fusionar espacios</string>
+    <string name="app_mode_camper">Casa rodante (camper)</string>
+    <string name="app_mode_campervan">Autocaravana</string>
+    <string name="rendering_attr_showLez_description">Mostrar zonas de baja emisión en el mapa. No afecta a la navegación.</string>
+    <string name="rendering_attr_showLez_name">Mostrar zonas de baja emisión</string>
+    <string name="temporary_conditional_routing">Considerar limitaciones temporales</string>
 </resources>
