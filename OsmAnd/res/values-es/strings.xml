@@ -741,7 +741,7 @@
     <string name="osmand_parking_plugin_description">Este complemento, memoriza dónde se ha aparcado el automóvil y cuánto tiempo queda (si hay un límite de tiempo). 
 \nTanto la ubicación como el tiempo de estacionamiento se muestran en el panel de control y en el control en la pantalla de mapas. Añade una notificación al calendario, en el caso de que desee tener un recordatorio al respecto.</string>
     <string name="osmand_parking_plugin_name">Aparcamiento</string>
-    <string name="context_menu_item_add_parking_point">Marcar aparcamiento</string>
+    <string name="context_menu_item_add_parking_point">Marcar pos. aparcamiento</string>
     <string name="context_menu_item_delete_parking_point">Quitar marcador de aparcamiento</string>
     <string name="starting_point_too_far">Punto de inicio demasiado lejos del camino más cercano.</string>
     <string name="shared_location">Ubicación compartida</string>
