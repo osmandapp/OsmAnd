@@ -3194,4 +3194,10 @@ Pôr do Sol: %2$s</string>
     <string name="rendering_attr_tracktype_grade3_name">Principalmente sólido</string>
     <string name="rendering_attr_tracktype_grade4_name">Principalmente macio</string>
     <string name="rendering_attr_tracktype_grade5_name">Suave</string>
+    <string name="gpx_join_gaps">Mesclar espaços</string>
+    <string name="app_mode_camper">Casa móvel (campista)</string>
+    <string name="app_mode_campervan">Autocaravana</string>
+    <string name="rendering_attr_showLez_description">"Mostrar zonas de baixa emissão no mapa.  Não afeta o roteamento."</string>
+    <string name="rendering_attr_showLez_name">Mostrar baixas zonas de emissão</string>
+    <string name="temporary_conditional_routing">Considere limitações temporárias</string>
 </resources>
