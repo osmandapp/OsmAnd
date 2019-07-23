@@ -817,12 +817,12 @@ public class RoutingOptionsHelper {
 
 		@Override
 		public int getActiveIconId() {
-			return R.drawable.ic_action_road_works_dark;
+			return R.drawable.ic_action_alert;
 		}
 
 		@Override
 		public int getDisabledIconId() {
-			return R.drawable.ic_action_road_works_dark;
+			return R.drawable.ic_action_alert;
 		}
 	}
 
