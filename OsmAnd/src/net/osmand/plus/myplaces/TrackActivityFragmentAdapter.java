@@ -81,7 +81,6 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 	private List<Double> distanceSplit = new ArrayList<>();
 	private TIntArrayList timeSplit = new TIntArrayList();
 	private int selectedSplitInterval;
-	private boolean calcGeneralTrackOnlySegments;
 	private boolean updateEnable;
 	private View headerView;
 	private SwitchCompat vis;
@@ -228,10 +227,6 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 		return updateEnable;
 	}
 
-	public boolean isCalcGeneralTrackOnlySegments() {
-		return calcGeneralTrackOnlySegments;
-	}
-
 	public void setUpdateEnable(boolean updateEnable) {
 		this.updateEnable = updateEnable;
 		TrackBitmapDrawer trackDrawer = getTrackBitmapDrawer();
@@ -344,22 +339,6 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 				}
 			}
 		});
-		boolean switchVisible = gpxFile != null && gpxFile.getGeneralTrack() != null;
-		headerView.findViewById(R.id.calculate_distance_between_segments_container).setVisibility(switchVisible ? View.VISIBLE : View.GONE);
-		if (switchVisible) {
-			final SwitchCompat switchCompat = (SwitchCompat) headerView.findViewById(R.id.calculate_distance_between_segments);
-			switchCompat.setChecked(calcGeneralTrackOnlySegments);
-			switchCompat.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					calcGeneralTrackOnlySegments = switchCompat.isChecked();
-					TrackActivity trackActivity = getTrackActivity();
-					if (trackActivity != null) {
-						trackActivity.notifySegmentAdapter();
-					}
-				}
-			});
-		}
 
 		if (showMapOnly) {
 			splitIntervalView.setVisibility(View.GONE);

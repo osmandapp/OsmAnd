@@ -16,6 +16,7 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.SwitchCompat;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -60,6 +61,7 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.base.OsmAndListFragment;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetAxisType;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
@@ -91,6 +93,7 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 
 	private boolean updateEnable;
 	private boolean chartClicked;
+	private boolean joinGapsEnabled;
 
 	private IconPopupMenu generalPopupMenu;
 	private IconPopupMenu altitudePopupMenu;
@@ -713,12 +716,20 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 							((ImageView) view.findViewById(R.id.end_time_icon))
 									.setImageDrawable(ic.getThemedIcon(R.drawable.ic_action_time_end));
 
-							float totalDistance = fragmentAdapter.isCalcGeneralTrackOnlySegments() && gpxItem.isGeneralTrack() ? analysis.totalDistanceGeneralTrackOnlySegments : analysis.totalDistance;
-							((TextView) view.findViewById(R.id.distance_text))
-									.setText(OsmAndFormatter.getFormattedDistance(totalDistance, app));
-							((TextView) view.findViewById(R.id.duration_text))
-									.setText(Algorithms.formatDuration((int) (analysis.timeSpan / 1000), app.accessibilityEnabled()));
+							updateJoinGapsInfo(view, position);
 
+							final SwitchCompat joinGapsSwitch = (SwitchCompat) view.findViewById(R.id.gpx_join_gaps_switch);
+							joinGapsSwitch.setChecked(joinGapsEnabled);
+							joinGapsSwitch.setOnClickListener(new View.OnClickListener() {
+								@Override
+								public void onClick(View v) {
+									joinGapsEnabled = joinGapsSwitch.isChecked();
+									for (int i = 0; i < getCount(); i++) {
+										View view = getViewAtPosition(i);
+										updateJoinGapsInfo(view, i);
+									}
+								}
+							});
 							if (analysis.timeSpan > 0) {
 								DateFormat tf = SimpleDateFormat.getTimeInstance(DateFormat.SHORT);
 								DateFormat df = SimpleDateFormat.getDateInstance(DateFormat.MEDIUM);
@@ -913,6 +924,7 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 						} else {
 							view.findViewById(R.id.overflow_menu).setVisibility(View.GONE);
 						}
+						updateJoinGapsInfo(view, position);
 
 						break;
 					case GPX_TAB_ITEM_SPEED:
@@ -940,14 +952,20 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 							((TextView) view.findViewById(R.id.average_text)).setText(avg);
 							((TextView) view.findViewById(R.id.max_text)).setText(max);
 
-							long timeMoving = fragmentAdapter.isCalcGeneralTrackOnlySegments() && gpxItem.isGeneralTrack() ? analysis.timeMovingGeneralTrackOnlySegments : analysis.timeMoving;
-							float totalDistanceMoving = fragmentAdapter.isCalcGeneralTrackOnlySegments() && gpxItem.isGeneralTrack() ? analysis.totalDistanceMovingGeneralTrackOnlySegments : analysis.totalDistanceMoving;
+							updateJoinGapsInfo(view, position);
 
-							((TextView) view.findViewById(R.id.time_moving_text))
-									.setText(Algorithms.formatDuration((int) (timeMoving / 1000), app.accessibilityEnabled()));
-							((TextView) view.findViewById(R.id.distance_text))
-									.setText(OsmAndFormatter.getFormattedDistance(totalDistanceMoving, app));
-
+							final SwitchCompat joinGapsSwitch = (SwitchCompat) view.findViewById(R.id.gpx_join_gaps_switch);
+							joinGapsSwitch.setChecked(joinGapsEnabled);
+							joinGapsSwitch.setOnClickListener(new View.OnClickListener() {
+								@Override
+								public void onClick(View v) {
+									joinGapsEnabled = joinGapsSwitch.isChecked();
+									for (int i = 0; i < getCount(); i++) {
+										View view = getViewAtPosition(i);
+										updateJoinGapsInfo(view, i);
+									}
+								}
+							});
 						} else {
 							chart.setVisibility(View.GONE);
 							view.findViewById(R.id.average_max).setVisibility(View.GONE);
@@ -1112,6 +1130,29 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 			View view = getViewAtPosition(position);
 			if (view != null) {
 				updateChart((LineChart) view.findViewById(R.id.chart));
+			}
+		}
+
+		void updateJoinGapsInfo(View view, int position) {
+			if (view != null) {
+				GPXTrackAnalysis analysis = gpxItem.analysis;
+				AndroidUiHelper.updateVisibility(view.findViewById(R.id.gpx_join_gaps_container), gpxItem.isGeneralTrack());
+				((SwitchCompat) view.findViewById(R.id.gpx_join_gaps_switch)).setChecked(joinGapsEnabled);
+				if (analysis != null) {
+					GPXTabItemType tabType = tabTypes[position];
+					if (tabType.equals(GPXTabItemType.GPX_TAB_ITEM_GENERAL)) {
+						float totalDistance = joinGapsEnabled && gpxItem.isGeneralTrack() ? analysis.totalDistanceWithoutGaps : analysis.totalDistance;
+
+						((TextView) view.findViewById(R.id.distance_text)).setText(OsmAndFormatter.getFormattedDistance(totalDistance, app));
+						((TextView) view.findViewById(R.id.duration_text)).setText(Algorithms.formatDuration((int) (analysis.timeSpan / 1000), app.accessibilityEnabled()));
+					} else if (tabType.equals(GPXTabItemType.GPX_TAB_ITEM_SPEED)) {
+						long timeMoving = joinGapsEnabled && gpxItem.isGeneralTrack() ? analysis.timeMovingWithoutGaps : analysis.timeMoving;
+						float totalDistanceMoving = joinGapsEnabled && gpxItem.isGeneralTrack() ? analysis.totalDistanceMovingWithoutGaps : analysis.totalDistanceMoving;
+
+						((TextView) view.findViewById(R.id.time_moving_text)).setText(Algorithms.formatDuration((int) (timeMoving / 1000), app.accessibilityEnabled()));
+						((TextView) view.findViewById(R.id.distance_text)).setText(OsmAndFormatter.getFormattedDistance(totalDistanceMoving, app));
+					}
+				}
 			}
 		}
 

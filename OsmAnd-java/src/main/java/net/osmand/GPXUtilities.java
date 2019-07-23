@@ -359,7 +359,7 @@ public class GPXUtilities {
 
 	public static class GPXTrackAnalysis {
 		public float totalDistance = 0;
-		public float totalDistanceGeneralTrackOnlySegments = 0;
+		public float totalDistanceWithoutGaps = 0;
 		public int totalTracks = 0;
 		public long startTime = Long.MAX_VALUE;
 		public long endTime = Long.MIN_VALUE;
@@ -368,9 +368,9 @@ public class GPXUtilities {
 		//public long timeMoving0 = 0;
 		//public float totalDistanceMoving0 = 0;
 		public long timeMoving = 0;
-		public long timeMovingGeneralTrackOnlySegments = 0;
+		public long timeMovingWithoutGaps = 0;
 		public float totalDistanceMoving = 0;
-		public float totalDistanceMovingGeneralTrackOnlySegments = 0;
+		public float totalDistanceMovingWithoutGaps = 0;
 
 		public double diffElevationUp = 0;
 		public double diffElevationDown = 0;
@@ -685,9 +685,9 @@ public class GPXUtilities {
 							}
 						}
 						if (point.lastPoint) {
-							totalDistanceGeneralTrackOnlySegments += distanceOfSingleSegment;
-							timeMovingGeneralTrackOnlySegments += timeMovingOfSingleSegment;
-							totalDistanceMovingGeneralTrackOnlySegments += distanceMovingOfSingleSegment;
+							totalDistanceWithoutGaps += distanceOfSingleSegment;
+							timeMovingWithoutGaps += timeMovingOfSingleSegment;
+							totalDistanceMovingWithoutGaps += distanceMovingOfSingleSegment;
 							if (j < numberOfPoints - 1) {
 								elevation1.lastPoint = true;
 								speed1.lastPoint = true;

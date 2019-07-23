@@ -1207,17 +1207,14 @@ public class GpxUiHelper {
 						}
 						hasSameY = false;
 					}
-					if (useGeneralTrackPoints && e.firstPoint) {
-						values.add(new Entry(nextX, 0));
+					if (useGeneralTrackPoints && e.firstPoint && lastEntry != null) {
+						values.add(new Entry(nextX, lastEntry.getY()));
 					}
 					prevElevOrig = e.elevation;
 					prevElev = elev;
 					nextY = elev * convEle;
 					lastEntry = new Entry(nextX, nextY);
 					values.add(lastEntry);
-					if (useGeneralTrackPoints && e.lastPoint) {
-						values.add(new Entry(nextX, 0));
-					}
 				}
 			}
 		}
