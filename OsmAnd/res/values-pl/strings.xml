@@ -3183,7 +3183,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="rendering_attr_tracktype_grade4_name">Głównie miękkie</string>
     <string name="rendering_attr_tracktype_grade5_name">Miękkie</string>
     <string name="routeInfo_tracktype_name">Trwałość powierzchni</string>
-    <string name="shared_string_file_is_saved">%s jest zapisany</string>
+    <string name="shared_string_file_is_saved">Zapisano %s</string>
     <string name="shared_string_open_track">Otwórz ślad</string>
     <string name="shared_string_track_is_saved">Ślad %s jest zapisany</string>
     <string name="release_3_4">• Profile aplikacji: Stwórz własny profil dla własnych potrzeb, z niestandardową ikoną i kolorem
