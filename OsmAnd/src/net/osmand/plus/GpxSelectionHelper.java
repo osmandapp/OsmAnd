@@ -197,6 +197,7 @@ public class GpxSelectionHelper {
 			d = t.name + " " + d;
 		}
 		group.setDescription(d);
+		group.setGeneralTrack(true);
 		processGroupTrack(app, group);
 		return group;
 	}
@@ -215,6 +216,7 @@ public class GpxSelectionHelper {
 			d = t.name + " " + d;
 		}
 		group.setDescription(d);
+		group.setGeneralTrack(t.generalTrack);
 		processGroupTrack(app, group);
 		return group;
 	}
@@ -771,6 +773,7 @@ public class GpxSelectionHelper {
 		private double splitDistance = -1;
 		private int splitTime = -1;
 		private int color;
+		private boolean generalTrack;
 
 		public GpxDisplayGroup(GPXFile gpx) {
 			this.gpx = gpx;
@@ -878,6 +881,14 @@ public class GpxSelectionHelper {
 		public void setColor(int color) {
 			this.color = color;
 		}
+
+		public boolean isGeneralTrack() {
+			return generalTrack;
+		}
+
+		public void setGeneralTrack(boolean generalTrack) {
+			this.generalTrack = generalTrack;
+		}
 	}
 
 	public static class GpxDisplayItem {
@@ -903,5 +914,9 @@ public class GpxSelectionHelper {
 
 		public Matrix chartMatrix;
 		public float chartHighlightPos = -1f;
+
+		public boolean isGeneralTrack() {
+			return group != null && group.isGeneralTrack();
+		}
 	}
 }

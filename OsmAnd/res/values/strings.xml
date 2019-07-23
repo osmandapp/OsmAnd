@@ -11,6 +11,7 @@
 	Thx - Hardy
 
 -->
+    <string name="gpx_join_gaps">Join gaps</string>
     <string name="app_mode_camper">Camper</string>
     <string name="app_mode_campervan">Campervan</string>
     <string name="rendering_attr_showLez_description">Show Low Emission zones on the map. Does not affect routing.</string>

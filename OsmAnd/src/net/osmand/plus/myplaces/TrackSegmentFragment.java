@@ -16,6 +16,7 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.SwitchCompat;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -60,6 +61,7 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.base.OsmAndListFragment;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetAxisType;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
@@ -91,6 +93,7 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 
 	private boolean updateEnable;
 	private boolean chartClicked;
+	private boolean joinGapsEnabled;
 
 	private IconPopupMenu generalPopupMenu;
 	private IconPopupMenu altitudePopupMenu;
@@ -455,7 +458,7 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 							dataSets.add(elevationDataSet);
 						}
 						if (analysis.hasElevationData) {
-							List<Entry> eleValues = elevationDataSet != null ? elevationDataSet.getValues() : null;
+							List<Entry> eleValues = elevationDataSet != null && !gpxItem.isGeneralTrack() ? elevationDataSet.getValues() : null;
 							OrderedLineDataSet slopeDataSet = GpxUiHelper.createGPXSlopeDataSet(app, chart,
 									analysis, GPXDataSetAxisType.DISTANCE, eleValues, true, true);
 							if (slopeDataSet != null) {
@@ -713,11 +716,17 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 							((ImageView) view.findViewById(R.id.end_time_icon))
 									.setImageDrawable(ic.getThemedIcon(R.drawable.ic_action_time_end));
 
-							((TextView) view.findViewById(R.id.distance_text))
-									.setText(OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app));
-							((TextView) view.findViewById(R.id.duration_text))
-									.setText(Algorithms.formatDuration((int) (analysis.timeSpan / 1000), app.accessibilityEnabled()));
-
+							final SwitchCompat joinGapsSwitch = (SwitchCompat) view.findViewById(R.id.gpx_join_gaps_switch);
+							joinGapsSwitch.setOnClickListener(new View.OnClickListener() {
+								@Override
+								public void onClick(View v) {
+									joinGapsEnabled = joinGapsSwitch.isChecked();
+									for (int i = 0; i < getCount(); i++) {
+										View view = getViewAtPosition(i);
+										updateJoinGapsInfo(view, i);
+									}
+								}
+							});
 							if (analysis.timeSpan > 0) {
 								DateFormat tf = SimpleDateFormat.getTimeInstance(DateFormat.SHORT);
 								DateFormat df = SimpleDateFormat.getDateInstance(DateFormat.MEDIUM);
@@ -738,6 +747,7 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 							view.findViewById(R.id.list_divider).setVisibility(View.GONE);
 							view.findViewById(R.id.start_end_time).setVisibility(View.GONE);
 						}
+						updateJoinGapsInfo(view, position);
 						view.findViewById(R.id.analyze_on_map).setOnClickListener(new View.OnClickListener() {
 							@Override
 							public void onClick(View v) {
@@ -844,12 +854,24 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 							((TextView) view.findViewById(R.id.ascent_text)).setText(asc);
 							((TextView) view.findViewById(R.id.descent_text)).setText(desc);
 
+							final SwitchCompat joinGapsSwitch = (SwitchCompat) view.findViewById(R.id.gpx_join_gaps_switch);
+							joinGapsSwitch.setOnClickListener(new View.OnClickListener() {
+								@Override
+								public void onClick(View v) {
+									joinGapsEnabled = joinGapsSwitch.isChecked();
+									for (int i = 0; i < getCount(); i++) {
+										View view = getViewAtPosition(i);
+										updateJoinGapsInfo(view, i);
+									}
+								}
+							});
 						} else {
 							chart.setVisibility(View.GONE);
 							view.findViewById(R.id.average_range).setVisibility(View.GONE);
 							view.findViewById(R.id.list_divider).setVisibility(View.GONE);
 							view.findViewById(R.id.ascent_descent).setVisibility(View.GONE);
 						}
+						updateJoinGapsInfo(view, position);
 						view.findViewById(R.id.analyze_on_map).setOnClickListener(new View.OnClickListener() {
 							@Override
 							public void onClick(View v) {
@@ -938,17 +960,25 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 
 							((TextView) view.findViewById(R.id.average_text)).setText(avg);
 							((TextView) view.findViewById(R.id.max_text)).setText(max);
-							((TextView) view.findViewById(R.id.time_moving_text))
-									.setText(Algorithms.formatDuration((int) (analysis.timeMoving / 1000), app.accessibilityEnabled()));
-							((TextView) view.findViewById(R.id.distance_text))
-									.setText(OsmAndFormatter.getFormattedDistance(analysis.totalDistanceMoving, app));
 
+							final SwitchCompat joinGapsSwitch = (SwitchCompat) view.findViewById(R.id.gpx_join_gaps_switch);
+							joinGapsSwitch.setOnClickListener(new View.OnClickListener() {
+								@Override
+								public void onClick(View v) {
+									joinGapsEnabled = joinGapsSwitch.isChecked();
+									for (int i = 0; i < getCount(); i++) {
+										View view = getViewAtPosition(i);
+										updateJoinGapsInfo(view, i);
+									}
+								}
+							});
 						} else {
 							chart.setVisibility(View.GONE);
 							view.findViewById(R.id.average_max).setVisibility(View.GONE);
 							view.findViewById(R.id.list_divider).setVisibility(View.GONE);
 							view.findViewById(R.id.time_distance).setVisibility(View.GONE);
 						}
+						updateJoinGapsInfo(view, position);
 						view.findViewById(R.id.analyze_on_map).setOnClickListener(new View.OnClickListener() {
 							@Override
 							public void onClick(View v) {
@@ -1107,6 +1137,30 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 			View view = getViewAtPosition(position);
 			if (view != null) {
 				updateChart((LineChart) view.findViewById(R.id.chart));
+			}
+		}
+
+		void updateJoinGapsInfo(View view, int position) {
+			if (view != null) {
+				GPXTrackAnalysis analysis = gpxItem.analysis;
+				AndroidUiHelper.updateVisibility(view.findViewById(R.id.gpx_join_gaps_container), gpxItem.isGeneralTrack() && analysis != null);
+				((SwitchCompat) view.findViewById(R.id.gpx_join_gaps_switch)).setChecked(joinGapsEnabled);
+				if (analysis != null) {
+					GPXTabItemType tabType = tabTypes[position];
+					if (tabType.equals(GPXTabItemType.GPX_TAB_ITEM_GENERAL)) {
+						float totalDistance = joinGapsEnabled && gpxItem.isGeneralTrack() ? analysis.totalDistanceWithoutGaps : analysis.totalDistance;
+						float timeSpan = joinGapsEnabled && gpxItem.isGeneralTrack() ? analysis.timeSpanWithoutGaps : analysis.timeSpan;
+
+						((TextView) view.findViewById(R.id.distance_text)).setText(OsmAndFormatter.getFormattedDistance(totalDistance, app));
+						((TextView) view.findViewById(R.id.duration_text)).setText(Algorithms.formatDuration((int) (timeSpan / 1000), app.accessibilityEnabled()));
+					} else if (tabType.equals(GPXTabItemType.GPX_TAB_ITEM_SPEED)) {
+						long timeMoving = joinGapsEnabled && gpxItem.isGeneralTrack() ? analysis.timeMovingWithoutGaps : analysis.timeMoving;
+						float totalDistanceMoving = joinGapsEnabled && gpxItem.isGeneralTrack() ? analysis.totalDistanceMovingWithoutGaps : analysis.totalDistanceMoving;
+
+						((TextView) view.findViewById(R.id.time_moving_text)).setText(Algorithms.formatDuration((int) (timeMoving / 1000), app.accessibilityEnabled()));
+						((TextView) view.findViewById(R.id.distance_text)).setText(OsmAndFormatter.getFormattedDistance(totalDistanceMoving, app));
+					}
+				}
 			}
 		}
 
