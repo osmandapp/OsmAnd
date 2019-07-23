@@ -364,6 +364,7 @@ public class GPXUtilities {
 		public long startTime = Long.MAX_VALUE;
 		public long endTime = Long.MIN_VALUE;
 		public long timeSpan = 0;
+		public long timeSpanWithoutGaps = 0;
 		//Next few lines for Issue 3222 heuristic testing only
 		//public long timeMoving0 = 0;
 		//public float totalDistanceMoving0 = 0;
@@ -490,7 +491,7 @@ public class GPXUtilities {
 									endTimeOfSingleSegment = time;
 								}
 								if (startTimeOfSingleSegment != 0 && endTimeOfSingleSegment != 0) {
-									timeSpan += endTimeOfSingleSegment - startTimeOfSingleSegment;
+									timeSpanWithoutGaps += endTimeOfSingleSegment - startTimeOfSingleSegment;
 									startTimeOfSingleSegment = 0;
 									endTimeOfSingleSegment = 0;
 								}

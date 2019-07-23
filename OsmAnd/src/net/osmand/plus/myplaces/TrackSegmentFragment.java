@@ -1142,9 +1142,10 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 					GPXTabItemType tabType = tabTypes[position];
 					if (tabType.equals(GPXTabItemType.GPX_TAB_ITEM_GENERAL)) {
 						float totalDistance = joinGapsEnabled && gpxItem.isGeneralTrack() ? analysis.totalDistanceWithoutGaps : analysis.totalDistance;
+						float timeSpan = joinGapsEnabled && gpxItem.isGeneralTrack() ? analysis.timeSpanWithoutGaps : analysis.timeSpan;
 
 						((TextView) view.findViewById(R.id.distance_text)).setText(OsmAndFormatter.getFormattedDistance(totalDistance, app));
-						((TextView) view.findViewById(R.id.duration_text)).setText(Algorithms.formatDuration((int) (analysis.timeSpan / 1000), app.accessibilityEnabled()));
+						((TextView) view.findViewById(R.id.duration_text)).setText(Algorithms.formatDuration((int) (timeSpan / 1000), app.accessibilityEnabled()));
 					} else if (tabType.equals(GPXTabItemType.GPX_TAB_ITEM_SPEED)) {
 						long timeMoving = joinGapsEnabled && gpxItem.isGeneralTrack() ? analysis.timeMovingWithoutGaps : analysis.timeMoving;
 						float totalDistanceMoving = joinGapsEnabled && gpxItem.isGeneralTrack() ? analysis.totalDistanceMovingWithoutGaps : analysis.totalDistanceMoving;
