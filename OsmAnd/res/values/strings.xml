@@ -11,6 +11,8 @@
 	Thx - Hardy
 
 -->
+    <string name="app_mode_camper">Camper</string>
+    <string name="app_mode_campervan">Campervan</string>
     <string name="rendering_attr_showLez_description">Show Low Emission zones on the map. Does not affect routing.</string>
     <string name="rendering_attr_showLez_name">Show Low Emission Zones</string>
     <string name="temporary_conditional_routing">Consider temporary limitations</string>
