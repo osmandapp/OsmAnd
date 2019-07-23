@@ -1143,10 +1143,11 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 		void updateJoinGapsInfo(View view, int position) {
 			if (view != null) {
 				GPXTrackAnalysis analysis = gpxItem.analysis;
-				AndroidUiHelper.updateVisibility(view.findViewById(R.id.gpx_join_gaps_container), gpxItem.isGeneralTrack() && analysis != null);
+				GPXTabItemType tabType = tabTypes[position];
+				boolean visible = gpxItem.isGeneralTrack() && analysis != null && tabType.equals(GPXTabItemType.GPX_TAB_ITEM_GENERAL);
+				AndroidUiHelper.updateVisibility(view.findViewById(R.id.gpx_join_gaps_container), visible);
 				((SwitchCompat) view.findViewById(R.id.gpx_join_gaps_switch)).setChecked(joinGapsEnabled);
 				if (analysis != null) {
-					GPXTabItemType tabType = tabTypes[position];
 					if (tabType.equals(GPXTabItemType.GPX_TAB_ITEM_GENERAL)) {
 						float totalDistance = joinGapsEnabled && gpxItem.isGeneralTrack() ? analysis.totalDistanceWithoutGaps : analysis.totalDistance;
 						float timeSpan = joinGapsEnabled && gpxItem.isGeneralTrack() ? analysis.timeSpanWithoutGaps : analysis.timeSpan;
