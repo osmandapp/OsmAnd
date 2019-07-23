@@ -716,11 +716,10 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 							((ImageView) view.findViewById(R.id.end_time_icon))
 									.setImageDrawable(ic.getThemedIcon(R.drawable.ic_action_time_end));
 
-							final SwitchCompat joinGapsSwitch = (SwitchCompat) view.findViewById(R.id.gpx_join_gaps_switch);
-							joinGapsSwitch.setOnClickListener(new View.OnClickListener() {
+							view.findViewById(R.id.gpx_join_gaps_container).setOnClickListener(new View.OnClickListener() {
 								@Override
 								public void onClick(View v) {
-									joinGapsEnabled = joinGapsSwitch.isChecked();
+									joinGapsEnabled = !joinGapsEnabled;
 									for (int i = 0; i < getCount(); i++) {
 										View view = getViewAtPosition(i);
 										updateJoinGapsInfo(view, i);
@@ -854,11 +853,10 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 							((TextView) view.findViewById(R.id.ascent_text)).setText(asc);
 							((TextView) view.findViewById(R.id.descent_text)).setText(desc);
 
-							final SwitchCompat joinGapsSwitch = (SwitchCompat) view.findViewById(R.id.gpx_join_gaps_switch);
-							joinGapsSwitch.setOnClickListener(new View.OnClickListener() {
+							view.findViewById(R.id.gpx_join_gaps_container).setOnClickListener(new View.OnClickListener() {
 								@Override
 								public void onClick(View v) {
-									joinGapsEnabled = joinGapsSwitch.isChecked();
+									joinGapsEnabled = !joinGapsEnabled;
 									for (int i = 0; i < getCount(); i++) {
 										View view = getViewAtPosition(i);
 										updateJoinGapsInfo(view, i);
@@ -961,11 +959,10 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 							((TextView) view.findViewById(R.id.average_text)).setText(avg);
 							((TextView) view.findViewById(R.id.max_text)).setText(max);
 
-							final SwitchCompat joinGapsSwitch = (SwitchCompat) view.findViewById(R.id.gpx_join_gaps_switch);
-							joinGapsSwitch.setOnClickListener(new View.OnClickListener() {
+							view.findViewById(R.id.gpx_join_gaps_container).setOnClickListener(new View.OnClickListener() {
 								@Override
 								public void onClick(View v) {
-									joinGapsEnabled = joinGapsSwitch.isChecked();
+									joinGapsEnabled = !joinGapsEnabled;
 									for (int i = 0; i < getCount(); i++) {
 										View view = getViewAtPosition(i);
 										updateJoinGapsInfo(view, i);
