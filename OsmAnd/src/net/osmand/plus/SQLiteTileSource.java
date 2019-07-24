@@ -364,7 +364,7 @@ public class SQLiteTileSource implements ITileSource {
 			} else if(!tileSizeSpecified &&
 					tileSize != bmp.getWidth() && bmp.getWidth() > 0) {
 				tileSize = bmp.getWidth();
-				addInfoColumn("tilesize", tileSize);
+				addInfoColumn("tilesize", tileSize+"");
 				tileSizeSpecified = true;
 			}
 			return bmp;
