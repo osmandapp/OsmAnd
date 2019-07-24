@@ -256,6 +256,8 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 		icons.add(new IconResWithDescr(R.drawable.ic_action_scooter, R.string.app_mode_scooter, "ic_action_scooter", false));
 		icons.add(new IconResWithDescr(R.drawable.ic_action_ufo, R.string.app_mode_ufo, "ic_action_ufo", false));
 		icons.add(new IconResWithDescr(R.drawable.ic_action_offroad, R.string.app_mode_offroad, "ic_action_offroad", false));
+		icons.add(new IconResWithDescr(R.drawable.ic_action_campervan, R.string.app_mode_campervan, "ic_action_campervan", false));
+		icons.add(new IconResWithDescr(R.drawable.ic_action_camper, R.string.app_mode_camper, "ic_action_camper", false));
 		return icons;
 	}
 

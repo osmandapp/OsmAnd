@@ -11,6 +11,12 @@
 	Thx - Hardy
 
 -->
+    <string name="shared_string_default">Default</string>
+    <string name="gpx_join_gaps">Join gaps</string>
+    <string name="app_mode_camper">Camper</string>
+    <string name="app_mode_campervan">Campervan</string>
+    <string name="rendering_attr_showLez_description">Show Low Emission zones on the map. Does not affect routing.</string>
+    <string name="rendering_attr_showLez_name">Show Low Emission Zones</string>
     <string name="temporary_conditional_routing">Consider temporary limitations</string>
     <string name="turn_on_profile_desc">Please turn on at least one application profile, to use this setting.</string>
     <string name="rendering_attr_winter_road_name">Winter road</string>
