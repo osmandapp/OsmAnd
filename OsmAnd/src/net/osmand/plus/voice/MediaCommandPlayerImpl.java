@@ -1,7 +1,9 @@
 package net.osmand.plus.voice;
 
 
+import android.media.AudioAttributes;
 import android.media.MediaPlayer;
+import android.os.Build;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.ApplicationMode;
@@ -170,6 +172,12 @@ public class MediaCommandPlayerImpl extends AbstractPrologCommandPlayer implemen
 		try {
 			log.debug("Playing file : " + file); //$NON-NLS-1$
 			mediaPlayer.reset();
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+				mediaPlayer.setAudioAttributes(new AudioAttributes.Builder()
+						.setUsage(AudioAttributes.USAGE_ASSISTANCE_NAVIGATION_GUIDANCE)
+						.setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
+						.build());
+			}
 			mediaPlayer.setAudioStreamType(streamType);
 			mediaPlayer.setDataSource(file.getAbsolutePath());
 			mediaPlayer.prepare();
