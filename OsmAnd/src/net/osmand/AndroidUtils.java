@@ -30,6 +30,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
+import android.text.ParcelableSpan;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
@@ -37,6 +38,7 @@ import android.text.Spanned;
 import android.text.TextPaint;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
+import android.text.style.CharacterStyle;
 import android.text.style.ImageSpan;
 import android.text.style.StyleSpan;
 import android.text.style.URLSpan;
@@ -558,19 +560,39 @@ public class AndroidUtils {
 		KeyguardManager keyguardManager = (KeyguardManager) context.getSystemService(Context.KEYGUARD_SERVICE);
 		return keyguardManager.inKeyguardRestrictedInputMode();
 	}
-	
-	public static CharSequence getStyledString(CharSequence baseString, CharSequence stringToInsertAndStyle, int typefaceStyle) {
-		
-		if (typefaceStyle == Typeface.NORMAL || typefaceStyle == Typeface.BOLD 
-			|| typefaceStyle == Typeface.ITALIC || typefaceStyle == Typeface.BOLD_ITALIC 
-			|| baseString.toString().contains(STRING_PLACEHOLDER)) {
 
-			int indexOfPlaceholder = baseString.toString().indexOf(STRING_PLACEHOLDER);
-			
-			SpannableStringBuilder ssb = new SpannableStringBuilder(
-				baseString.toString().replace(STRING_PLACEHOLDER, stringToInsertAndStyle));
-			ssb.setSpan(new StyleSpan(typefaceStyle), indexOfPlaceholder, 
-				stringToInsertAndStyle.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+	public static CharSequence getStyledString(CharSequence baseString, CharSequence stringToInsertAndStyle, int typefaceStyle) {
+
+		if (typefaceStyle == Typeface.NORMAL || typefaceStyle == Typeface.BOLD
+				|| typefaceStyle == Typeface.ITALIC || typefaceStyle == Typeface.BOLD_ITALIC
+				|| baseString.toString().contains(STRING_PLACEHOLDER)) {
+
+			return getStyledString(baseString, stringToInsertAndStyle, null, new StyleSpan(typefaceStyle));
+		} else {
+			return baseString;
+		}
+	}
+
+	public static CharSequence getStyledString(CharSequence baseString, CharSequence stringToInsertAndStyle,
+											   CharacterStyle baseStyle, CharacterStyle replaceStyle) {
+		int indexOfPlaceholder = baseString.toString().indexOf(STRING_PLACEHOLDER);
+		if (replaceStyle != null || baseStyle != null || indexOfPlaceholder != -1) {
+			String nStr = baseString.toString().replace(STRING_PLACEHOLDER, stringToInsertAndStyle);
+			SpannableStringBuilder ssb = new SpannableStringBuilder(nStr);
+			if(baseStyle != null) {
+				if(indexOfPlaceholder > 0) {
+					ssb.setSpan(baseStyle, 0, indexOfPlaceholder, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+				}
+				if(indexOfPlaceholder + stringToInsertAndStyle.length() < nStr.length()) {
+					ssb.setSpan(baseStyle,
+							indexOfPlaceholder + stringToInsertAndStyle.length(),
+							nStr.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+				}
+			}
+			if(replaceStyle != null) {
+				ssb.setSpan(replaceStyle, indexOfPlaceholder,
+						stringToInsertAndStyle.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+			}
 			return ssb;
 		} else {
 			return baseString;
