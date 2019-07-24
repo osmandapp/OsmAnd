@@ -3208,4 +3208,14 @@ Reprezentuje obszar: %1$s x %2$s</string>
 \n
 \n</string>
     <string name="edit_profile_setup_title">Konfiguracja Profilu</string>
+    <string name="rendering_attr_highway_class_track_grade1_name">Stopień 1</string>
+    <string name="rendering_attr_highway_class_track_grade2_name">Stopień 2</string>
+    <string name="rendering_attr_highway_class_track_grade3_name">Stopień 3</string>
+    <string name="rendering_attr_highway_class_track_grade4_name">Stopień 4</string>
+    <string name="rendering_attr_highway_class_track_grade5_name">Stopień 5</string>
+    <string name="app_mode_camper">Kamper</string>
+    <string name="app_mode_campervan">Samochód kempingowy</string>
+    <string name="rendering_attr_showLez_description">Pokaż strefy niskiej emisji na mapie. Nie ma to wpływu na przebieg trasy.</string>
+    <string name="rendering_attr_showLez_name">Pokaż strefy niskiej emisji</string>
+    <string name="temporary_conditional_routing">Rozważ tymczasowe ograniczenia</string>
 </resources>
