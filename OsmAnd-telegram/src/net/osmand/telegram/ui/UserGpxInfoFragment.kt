@@ -96,7 +96,7 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 			override fun onLoadGpxFinish(dataItem: GpxDataItem) {
 				gpxDataItem = dataItem
 				updateGPXStatisticRow()
-				updateDateAndTimeButtons()
+				updateDateAndTimeButton()
 				updateGPXMap()
 			}
 
@@ -152,6 +152,7 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 			}
 			setTextColor(AndroidUtils.createPressedColorStateList(app, true, R.color.ctrl_active_light, R.color.ctrl_light))
 		}
+		updateDateAndTimeButton()
 
 		liveBtn = mainView.findViewById<TextView>(R.id.live_btn).apply {
 			setOnClickListener {
@@ -361,7 +362,7 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 		}
 	}
 
-	private fun updateDateAndTimeButtons() {
+	private fun updateDateAndTimeButton() {
 		val dateFormat = SimpleDateFormat(DATE_FORMAT, Locale.getDefault())
 		val start = dateFormat.format(startCalendar.timeInMillis)
 		val end = dateFormat.format(endCalendar.timeInMillis)
@@ -376,12 +377,10 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 
 	private fun updateGPXStatisticRow() {
 		val analysis = gpxDataItem?.analysis
-		if (analysis != null) {
-			avgElevationTv.text = if (analysis.avgElevation != 0.0) OsmandFormatter.getFormattedAlt(analysis.avgElevation, app) else "-"
-			avgSpeedTv.text = if (analysis.isSpeedSpecified) OsmandFormatter.getFormattedSpeed(analysis.avgSpeed, app) else "-"
-			totalDistanceTv.text = if (analysis.totalDistance != 0.0f) OsmandFormatter.getFormattedDistance(analysis.totalDistance, app) else "-"
-			timeSpanTv.text = if (analysis.timeSpan != 0L) Algorithms.formatDuration((analysis.timeSpan / 1000).toInt(), true) else "-"
-		}
+		avgElevationTv.text = if (analysis != null && analysis.avgElevation != 0.0) OsmandFormatter.getFormattedAlt(analysis.avgElevation, app) else "-"
+		avgSpeedTv.text = if (analysis != null && analysis.isSpeedSpecified) OsmandFormatter.getFormattedSpeed(analysis.avgSpeed, app) else "-"
+		totalDistanceTv.text = if (analysis != null && analysis.totalDistance != 0.0f) OsmandFormatter.getFormattedDistance(analysis.totalDistance, app) else "-"
+		timeSpanTv.text = if (analysis != null && analysis.timeSpan != 0L) Algorithms.formatDuration((analysis.timeSpan / 1000).toInt(), true) else "-"
 	}
 
 	private fun updateGPXMap() {
