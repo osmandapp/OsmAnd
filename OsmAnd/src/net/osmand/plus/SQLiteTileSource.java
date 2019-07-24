@@ -49,6 +49,7 @@ public class SQLiteTileSource implements ITileSource {
 	private String referer = null;
 	
 	int tileSize = 256;
+	boolean tileSizeSpecified = false;
 	private OsmandApplication ctx;
 	private boolean onlyReadonlyAvailable = false;
 	
@@ -220,6 +221,11 @@ public class SQLiteTileSource implements ITileSource {
 					} else {
 						addInfoColumn("expireminutes", "0");
 					}
+					int tsColumn = list.indexOf("tilesize");
+					this.tileSizeSpecified = tsColumn != -1;
+					if(tileSizeSpecified) {
+						this.tileSize = (int) cursor.getInt(tsColumn);
+					}
 					int ellipsoid = list.indexOf("ellipsoid");
 					if(ellipsoid != -1) {
 						int set = (int) cursor.getInt(ellipsoid);
@@ -355,9 +361,11 @@ public class SQLiteTileSource implements ITileSource {
 			if(bmp == null) {
 				// broken image delete it
 				db.execSQL("DELETE FROM tiles WHERE x = ? AND y = ? AND z = ?", params); 
-			} else if(tileSize != bmp.getHeight() && tileSize != bmp.getWidth() &&
-					bmp.getWidth() > 0) {
+			} else if(!tileSizeSpecified &&
+					tileSize != bmp.getWidth() && bmp.getWidth() > 0) {
 				tileSize = bmp.getWidth();
+				addInfoColumn("tilesize", tileSize);
+				tileSizeSpecified = true;
 			}
 			return bmp;
 		}
