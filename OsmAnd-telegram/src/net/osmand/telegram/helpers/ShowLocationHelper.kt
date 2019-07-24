@@ -33,6 +33,7 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 		const val MAP_LAYER_ID = "telegram_layer"
 		
 		const val MIN_OSMAND_CALLBACK_VERSION_CODE = 320
+		const val MIN_OSMAND_CREATE_IMPORT_DIRS_VERSION_CODE = 340
 
 		const val MAP_CONTEXT_MENU_BUTTON_ID = 1
 		const val MAP_CONTEXT_MENU_BUTTONS_PARAMS_ID = "DIRECTION"
@@ -278,7 +279,7 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 						override fun onSavingGpxFinish(path: String) {
 							log.debug("LiveTracks onSavingGpxFinish $path time ${startTime - System.currentTimeMillis()}")
 							val uri = AndroidUtils.getUriForFile(app, File(path))
-							val destinationPath = "$LIVE_TRACKS_DIR/${it.metadata.name}.gpx"
+							val destinationPath = if (canOsmandCreateGpxDirs()) "$LIVE_TRACKS_DIR/${it.metadata.name}.gpx" else "${it.metadata.name}.gpx"
 							val color = it.extensionsToRead["color"] ?: ""
 							osmandAidlHelper.importGpxFromUri(uri, destinationPath, color, true)
 							log.debug("LiveTracks importGpxFromUri finish time ${startTime - System.currentTimeMillis()}")
@@ -386,6 +387,11 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 	fun isUseOsmandCallback(): Boolean {
 		val version = AndroidUtils.getAppVersionCode(app, app.settings.appToConnectPackage)
 		return version >= MIN_OSMAND_CALLBACK_VERSION_CODE
+	}
+
+	fun canOsmandCreateGpxDirs(): Boolean {
+		val version = AndroidUtils.getAppVersionCode(app, app.settings.appToConnectPackage)
+		return version >= MIN_OSMAND_CREATE_IMPORT_DIRS_VERSION_CODE
 	}
 
 	fun startShowMessagesTask(chatId: Long, vararg messages: TdApi.Message) {

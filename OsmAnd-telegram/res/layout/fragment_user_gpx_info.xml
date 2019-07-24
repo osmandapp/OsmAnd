@@ -81,42 +81,44 @@
 				android:layout_height="wrap_content"
 				android:orientation="horizontal">
 
-				<net.osmand.telegram.ui.views.TextViewEx
-					android:id="@+id/date_time_btn"
-					android:layout_width="wrap_content"
-					android:layout_height="@dimen/dialog_button_height"
-					android:layout_gravity="center_vertical"
-					android:layout_marginStart="@dimen/content_padding_standard"
-					android:layout_marginLeft="@dimen/content_padding_standard"
-					android:background="@drawable/btn_round"
-					android:ellipsize="end"
-					android:gravity="center_vertical"
-					android:maxLines="1"
-					android:paddingLeft="@dimen/content_padding_half"
-					android:paddingRight="@dimen/content_padding_half"
-					android:textSize="@dimen/hint_text_size"
-					app:typeface="@string/font_roboto_medium"
-					tools:text="15 Feb, 12:20 — 30 Jul, 23:59"
-					tools:textColor="?attr/ctrl_active_color"
-					tools:visibility="visible" />
-
-				<View
+				<FrameLayout
 					android:layout_width="0dp"
 					android:layout_height="match_parent"
-					android:layout_weight="1" />
+					android:layout_weight="1"
+					android:paddingLeft="@dimen/content_padding_standard"
+					android:paddingRight="@dimen/content_padding_standard">
+
+					<net.osmand.telegram.ui.views.TextViewEx
+						android:id="@+id/date_time_btn"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_gravity="center_vertical"
+						android:background="@drawable/btn_round"
+						android:ellipsize="end"
+						android:gravity="center_vertical"
+						android:maxLines="1"
+						android:minHeight="@dimen/dialog_button_height"
+						android:paddingLeft="@dimen/content_padding_half"
+						android:paddingRight="@dimen/content_padding_half"
+						android:textSize="@dimen/hint_text_size"
+						app:typeface="@string/font_roboto_medium"
+						tools:text="15 Feb, 12:20 — 30 Jul, 23:59"
+						tools:textColor="?attr/ctrl_active_color"
+						tools:visibility="visible" />
+
+				</FrameLayout>
 
 				<net.osmand.telegram.ui.views.TextViewEx
 					android:id="@+id/live_btn"
 					android:layout_width="wrap_content"
-					android:layout_height="@dimen/dialog_button_height"
-					android:layout_marginStart="@dimen/content_padding_half"
-					android:layout_marginLeft="@dimen/content_padding_half"
+					android:layout_height="wrap_content"
 					android:layout_marginEnd="@dimen/content_padding_standard"
 					android:layout_marginRight="@dimen/content_padding_standard"
 					android:background="@drawable/btn_round"
 					android:ellipsize="end"
 					android:gravity="center"
 					android:maxLines="1"
+					android:minHeight="@dimen/dialog_button_height"
 					android:paddingLeft="@dimen/content_padding_half"
 					android:paddingRight="@dimen/content_padding_half"
 					android:text="@string/shared_string_live"

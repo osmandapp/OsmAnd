@@ -69,7 +69,8 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 
 	private var handler: Handler = Handler()
 
-	private var endTimeChanged: Boolean = false
+	private var endTimeChanged = false
+	private var snackbarShown = false
 
 	override fun onCreateView(
 		inflater: LayoutInflater,
@@ -391,13 +392,17 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 		} else if (!app.isOsmAndChosen() || (app.isOsmAndChosen() && !app.isOsmAndInstalled())) {
 			fragmentManager?.also { ChooseOsmAndBottomSheet.showInstance(it, this) }
 		} else if (!canOsmandCreateBitmap()) {
-			 val snackbar = Snackbar.make(mainView, R.string.please_update_osmand, Snackbar.LENGTH_LONG).setAction(R.string.shared_string_update) {
-					val packageName = if (app.settings.appToConnectPackage == OsmandAidlHelper.OSMAND_NIGHTLY_PACKAGE_NAME)
-							OsmandAidlHelper.OSMAND_FREE_PACKAGE_NAME else app.settings.appToConnectPackage
-					startActivity(AndroidUtils.getPlayMarketIntent(app, packageName))
-				}
-			AndroidUtils.setSnackbarTextColor(snackbar, R.color.ctrl_active_dark)
-			snackbar.show()
+			if (!snackbarShown) {
+				val snackbar = Snackbar.make(mainView, R.string.please_update_osmand, Snackbar.LENGTH_LONG)
+						.setAction(R.string.shared_string_update) {
+							val packageName = if (app.settings.appToConnectPackage == OsmandAidlHelper.OSMAND_NIGHTLY_PACKAGE_NAME)
+									OsmandAidlHelper.OSMAND_FREE_PACKAGE_NAME else app.settings.appToConnectPackage
+							startActivity(AndroidUtils.getPlayMarketIntent(app, packageName))
+						}
+				AndroidUtils.setSnackbarTextColor(snackbar, R.color.ctrl_active_dark)
+				snackbar.show()
+				snackbarShown = true
+			}
 		} else {
 			saveCurrentGpxToFile(object :
 				OsmandLocationUtils.SaveGpxListener {
