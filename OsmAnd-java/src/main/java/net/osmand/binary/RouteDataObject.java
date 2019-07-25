@@ -492,13 +492,19 @@ public class RouteDataObject {
 				if(vl != 0) {
 					RouteTypeRule rtr = region.quickGetEncodingRule(vl);
 					String nonCondTag = rtr.getTag();
-					for(int ks = 0; ks < types.length; ks++) {
+					int ks;
+					for(ks = 0; ks < types.length; ks++) {
 						RouteTypeRule toReplace = region.quickGetEncodingRule(types[ks]);
 						if(toReplace != null && toReplace.getTag().equals(nonCondTag)) {
-							types[ks] = vl;
 							break;
 						}
 					}
+					if(ks == types.length) {
+						int[] ntypes = new int[types.length + 1];
+						System.arraycopy(types, 0, ntypes, 0, types.length);
+						types = ntypes;
+					}
+					types[ks] = vl;
 				}
 			}
 		}
