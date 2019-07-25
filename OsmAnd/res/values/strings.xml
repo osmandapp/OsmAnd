@@ -1773,8 +1773,8 @@
     <string name="lang_ro">Romanian</string>
     <string name="lang_ru">Russian</string>
     <string name="lang_sc">Sardinian</string>
-    <string name="lang_sr">Serbian</string>
-    <string name="lang_sr_latn">Serbian (Latin)</string>
+    <string name="lang_sr">Serbian (cyrillic)</string>
+    <string name="lang_sr_latn">Serbian (latin)</string>
     <string name="lang_zh_cn">Chinese (Simplified)</string>
     <string name="lang_zh_hk">Chinese (Hong Kong)</string>
     <string name="lang_sk">Slovak</string>
