@@ -116,7 +116,93 @@ public class OpeningHoursParserTest {
 		Locale locale = Locale.getDefault();
 		try {
 			Locale.setDefault(Locale.forLanguageTag("en-US"));
-			OpeningHours hours = parseOpenedHours("Apr 05-Oct 24: Fr 08:00-16:00");
+
+			OpeningHours hours = parseOpenedHours("2019 Apr 1 - 2020 Apr 1");
+			System.out.println(hours);
+			testOpened("01.04.2018 15:00", hours, false);
+			testOpened("01.04.2019 15:00", hours, true);
+			testOpened("01.04.2020 15:00", hours, true);
+
+			hours = parseOpenedHours("2019 Apr 15 -  2020 Mar 1");
+			System.out.println(hours);
+			testOpened("01.04.2018 15:00", hours, false);
+			testOpened("01.04.2019 15:00", hours, false);
+			testOpened("15.04.2019 15:00", hours, true);
+			testOpened("15.09.2019 15:00", hours, true);
+			testOpened("15.02.2020 15:00", hours, true);
+			testOpened("15.03.2020 15:00", hours, false);
+			testOpened("15.04.2020 15:00", hours, false);
+
+			hours = parseOpenedHours("2019 Jul 23 05:00-24:00; 2019 Jul 24-2019 Jul 26 00:00-24:00; 2019 Jul 27 00:00-18:00");
+			System.out.println(hours);
+			testOpened("23.07.2018 15:00", hours, false);
+			testOpened("23.07.2019 15:00", hours, true);
+			testOpened("23.07.2019 04:00", hours, false);
+			testOpened("23.07.2020 15:00", hours, false);
+			testOpened("25.07.2018 15:00", hours, false);
+			testOpened("24.07.2019 15:00", hours, true);
+			testOpened("25.07.2019 04:00", hours, true);
+			testOpened("26.07.2019 15:00", hours, true);
+			testOpened("25.07.2020 15:00", hours, false);
+			testOpened("27.07.2018 15:00", hours, false);
+			testOpened("27.07.2019 15:00", hours, true);
+			testOpened("27.07.2019 19:00", hours, false);
+			testOpened("27.07.2020 15:00", hours, false);
+
+			hours = parseOpenedHours("2019 Sep 1 - 2022 Apr 1");
+			System.out.println(hours);
+			testOpened("01.02.2018 15:00", hours, false);
+			testOpened("29.05.2019 15:00", hours, false);
+			testOpened("05.09.2019 11:00", hours, true);
+			testOpened("05.02.2020 11:00", hours, true);
+			testOpened("03.06.2020 11:00", hours, false);
+			testOpened("05.02.2021 11:00", hours, true);
+			testOpened("05.02.2022 11:00", hours, true);
+			testOpened("05.02.2023 11:00", hours, false);
+
+			hours = parseOpenedHours("2019 Apr 15 - 2019 Sep 1: Mo-Fr 00:00-24:00");
+			System.out.println(hours);
+			testOpened("06.04.2019 15:00", hours, false);
+			testOpened("29.05.2019 15:00", hours, true);
+			testOpened("25.07.2019 11:00", hours, true);
+			testOpened("12.07.2018 11:00", hours, false);
+			testOpened("18.07.2020 11:00", hours, false);
+			testOpened("28.07.2021 11:00", hours, false);
+
+			hours = parseOpenedHours("2019 Sep 1 - 2020 Apr 1");
+			System.out.println(hours);
+			testOpened("01.04.2019 15:00", hours, false);
+			testOpened("29.05.2019 15:00", hours, false);
+			testOpened("05.09.2019 11:00", hours, true);
+			testOpened("05.02.2020 11:00", hours, true);
+			testOpened("05.06.2020 11:00", hours, false);
+			testOpened("05.02.2021 11:00", hours, false);
+
+			hours = parseOpenedHours("2019 Apr 15 - 2019 Sep 1");
+			System.out.println(hours);
+			testOpened("01.04.2019 15:00", hours, false);
+			testOpened("29.05.2019 15:00", hours, true);
+			testOpened("27.07.2019 15:00", hours, true);
+			testOpened("05.09.2019 11:00", hours, false);
+			testOpened("05.06.2018 11:00", hours, false);
+			testOpened("05.06.2020 11:00", hours, false);
+
+			hours = parseOpenedHours("Apr 15 - Sep 1");
+			System.out.println(hours);
+			testOpened("01.04.2019 15:00", hours, false);
+			testOpened("29.05.2019 15:00", hours, true);
+			testOpened("27.07.2019 15:00", hours, true);
+			testOpened("05.09.2019 11:00", hours, false);
+
+			hours = parseOpenedHours("Apr 15 - Sep 1: Mo-Fr 00:00-24:00");
+			System.out.println(hours);
+			testOpened("01.04.2019 15:00", hours, false);
+			testOpened("29.05.2019 15:00", hours, true);
+			testOpened("24.07.2019 15:00", hours, true);
+			testOpened("27.07.2019 15:00", hours, false);
+			testOpened("05.09.2019 11:00", hours, false);
+
+			hours = parseOpenedHours("Apr 05-Oct 24: Fr 08:00-16:00");
 			System.out.println(hours);
 			testOpened("26.08.2018 15:00", hours, false);
 			testOpened("29.03.2019 15:00", hours, false);
