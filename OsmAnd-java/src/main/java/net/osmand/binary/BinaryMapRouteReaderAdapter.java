@@ -174,7 +174,7 @@ public class BinaryMapRouteReaderAdapter {
 				type = HIGHWAY_TYPE;
 			} else if(t.endsWith(":conditional") && v != null){
 				conditions = new ArrayList<RouteTypeCondition>();
-				String[] cts = v.split(";");
+				String[] cts = v.split("\\);");
 				for(String c : cts) {
 					int ch = c.indexOf('@');
 					if (ch > 0) {
