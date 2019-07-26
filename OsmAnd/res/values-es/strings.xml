@@ -3228,4 +3228,8 @@
     <string name="shared_string_file_is_saved">"%s  está guardado"</string>
     <string name="shared_string_open_track">Abrir traza</string>
     <string name="shared_string_track_is_saved">Traza %s guardada</string>
+    <string name="app_mode_campervan">Caravana</string>
+    <string name="rendering_attr_showLez_description">Mostrar zonas de baja emisión en el mapa. No afecta al enrutamiento.</string>
+    <string name="rendering_attr_showLez_name">Mostrar zonas de baja emisión</string>
+    <string name="temporary_conditional_routing">Considerar limitaciones temporales</string>
 </resources>
