@@ -2631,9 +2631,9 @@
     <string name="switch_to_vector_map_to_see">Offline vector map present for this location. \n\t\n\tTo use activate \'Menu\' → \'Configure map\' → \'Map Source…\' → \'Offline vector maps\'.</string>
     <string name="choose_audio_stream">Voice guidance output</string>
     <string name="choose_audio_stream_descr">Select the speaker to play the voice guidance.</string>
-    <string name="voice_stream_voice_call">Phone call audio (also to interrupt car BT stereos)</string>
+    <string name="voice_stream_voice_call">Phone call audio (to interrupt car BT stereos)</string>
     <string name="voice_stream_notification">Notification audio</string>
-    <string name="voice_stream_music">Media/music audio</string>
+    <string name="voice_stream_music">Media/Navigation audio</string>
     <string name="warning_tile_layer_not_downloadable">The app cannot download the map layer %1$s, reinstalling it might help.</string>
     <string name="overlay_transparency_descr">Modify the overlay transparency.</string>
     <string name="overlay_transparency">Overlay transparency</string>
