@@ -1119,7 +1119,7 @@
     <string name="app_mode_boat">قایق</string>
     <string name="app_mode_aircraft">هواپیما</string>
     <string name="amenity_type_seamark">علامت دریایی</string>
-    <string name="app_modes_choose_descr">پروفایل‌ها را از اینجا انتخاب کنید تا در برنامه ببینیدشان.</string>
+    <string name="app_modes_choose_descr">پروفایل‌ها را اینجا انتخاب کنید تا در برنامه ظاهر شوند.</string>
     <string name="app_modes_choose">پروفایل‌های برنامه</string>
     <string name="map_widget_map_rendering">رسم نقشه</string>
     <string name="routing_preferences_descr">تنظیمات مسیریابی</string>
@@ -2405,7 +2405,7 @@
     <string name="context_menu_item_open_note">ایجاد یادداشت OSM</string>
     <string name="osm_edit_reopened_note">یادداشت OSM بازگشوده</string>
     <string name="osm_edit_created_note">ایجاد یادداشت OSM</string>
-    <string name="rendering_attr_hideProposed_name">مکان‌های در حد پیشنهاد</string>
+    <string name="rendering_attr_hideProposed_name">عارضه‌های پیشنهادی (Proposed)</string>
     <string name="osm_edit_created_poi">ایجاد POI</string>
     <string name="logged_as">واردشده با عنوان %1$s</string>
     <string name="moving_time">مدت حرکت</string>
@@ -3102,7 +3102,7 @@
     <string name="app_mode_shuttle_bus">اتوبوس خطی</string>
     <string name="app_mode_subway">مترو</string>
     <string name="app_mode_horse">اسب</string>
-    <string name="app_mode_helicopter">بالگرد</string>
+    <string name="app_mode_helicopter">هلی‌کوپتر</string>
     <string name="app_mode_skiing">اسکی</string>
     <string name="base_profile_descr_ski">اسکی</string>
     <string name="select_icon_profile_dialog_title">انتخاب نماد</string>
@@ -3120,7 +3120,8 @@
     <string name="profile_alert_delete_title">حذف پروفایل</string>
     <string name="profile_alert_delete_msg">آیا از حذف پروفایل %s اطمینان دارید</string>
     <string name="select_base_profile_dialog_title">یک پروفایل پایه انتخاب کنید</string>
-    <string name="select_base_profile_dialog_message">پروفایل سفارشی خود را بر پایهٔ یکی از پروفایل‌های برنامه بسازید. با این کار برخی چیزهای ابتدایی مانند نمایانی ابزارک‌ها و واحد سرعت و مسافت تنظیم می‌شود. این‌ها پروفایل‌های پیشفرض برنامه هستند، به‌علاوهٔ نمونه‌هایی از پروفایل‌های سفارشی که بر پایهٔ آن‌ها ساخته شده‌اند:</string>
+    <string name="select_base_profile_dialog_message">پروفایل سفارشی خود را بر پایهٔ یکی از پروفایل‌های برنامه بسازید. با این کار برخی چیزهای ابتدایی مانند نمایانی ابزارک‌ها و واحد سرعت و مسافت تنظیم می‌شود. 
+\nپروفایل‌های پیشفرض برنامه و چند نمونه پروفایل سفارشی که بر پایهٔ آن‌ها ساخته شده، در زیر آمده:</string>
     <string name="select_nav_profile_dialog_title">انتخاب نوع ناوبری</string>
     <string name="base_profile_descr_car">خودرو، کامیون، موتورسیکلت</string>
     <string name="base_profile_descr_pedestrian">پیاده‌روی، پیاده‌گردی، دو</string>
@@ -3142,23 +3143,23 @@
     <string name="default_speed_dialog_msg">برای پیش‌بینی زمان رسیدن در هنگام مسیریابی استفاده می‌شود</string>
     <string name="new_profile">پروفایل جدید</string>
     <string name="last_launch_crashed">آخرین اجرای OsmAnd با شکست مواجه شد. لطفاً با اشتراک‌گذاری پیغام خطا ما را در بهبود OsmAnd یاری کنید.</string>
-    <string name="release_3_4">"• پروفایل‌های برنامه: متناسب با نیازهای خود پروفایل سفارشی بسازید؛ با رنگ و نماد دلخواه 
-\n 
+    <string name="release_3_4">"• پروفایل‌های برنامه: متناسب با نیاز خود پروفایل سفارشی بسازید؛ با رنگ و نماد دلخواه 
+\n
 \n • برای هر پروفایل پیشفرض‌ها و سرعت‌های حداقل/حداکثر  را به‌دلخواه تنظیم کنید 
-\n 
+\n
 \n • یک ابزارک برای نمایش مختصات کنونی اضافه شده 
+\n
+\n • گزینه‌های جدید برای نمایش قطب‌نما و خط‌کش شعاعی روی نقشه اضافه شده
+\n
+\n • ضبط رد در پس‌زمینه اصلاح شد
+\n
+\n • دانلود نقشه در پس‌زمینه بهبود یافت
+\n
+\n • انتخاب زبان ویکی‌پدیا اصلاح شد
+\n
+\n • رفتار دکمهٔ قطب‌نما در هنگام مسیریابی اصلاح شد
 \n 
-\n • Added options to show the compass and a radius ruler on the map 
-\n 
-\n • Fix background track logging 
-\n 
-\n • Improved background map downloads 
-\n 
-\n • Fixed Wikipedia language selection 
-\n 
-\n • Fixed compass button behavior during navigation 
-\n 
-\n • Other bug fixes
+\n •  اصلاح سایر باگ‌ها
 \n
 \n"</string>
     <string name="app_mode_offroad">آفرود</string>
@@ -3167,7 +3168,7 @@
     <string name="edit_profile_setup_map_subtitle">انتخاب گزینه‌های پیشفرض نقشه برای پروفایل</string>
     <string name="edit_profile_screen_options_subtitle">انتخاب گزینه‌های پیشفرض صفحه برای پروفایل</string>
     <string name="edit_profile_nav_settings_subtitle">انتخاب تنظیمات پیشفرض ناوبری برای پروفایل</string>
-    <string name="app_mode_ufo">یوفو</string>
+    <string name="app_mode_ufo">بشقاب‌پرنده</string>
     <string name="app_mode_personal_transporter">رانَک (وسیلهٔ نقلیهٔ انفرادی)</string>
     <string name="app_mode_monowheel">یکچرخه</string>
     <string name="app_mode_scooter">اسکوتر</string>
@@ -3226,4 +3227,8 @@
     <string name="base_profile_descr_aircraft">هواپیما، گلایدینگ</string>
     <string name="routing_attr_max_num_changes_description">بیشترین تعداد تغییر وسیله را مشخص کنید</string>
     <string name="routing_attr_max_num_changes_name">تعداد تغییرات</string>
+    <string name="gpx_join_gaps">اتصال بریدگی‌ها</string>
+    <string name="rendering_attr_showLez_description">محدوده‌های کم‌آلاینده (LEZ) را روی نقشه نشان بده. بر مسیریابی تأثیر ندارد.</string>
+    <string name="rendering_attr_showLez_name">نمایش محدوده‌های کم‌آلاینده</string>
+    <string name="temporary_conditional_routing">در نظر گرفتن محدودیت‌های موقت در مسیریابی</string>
 </resources>
