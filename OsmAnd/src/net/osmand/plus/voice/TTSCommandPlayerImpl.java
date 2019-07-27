@@ -116,6 +116,12 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 		if (mTts != null && !vrt.isMute() && speechAllowed) {
 			if (ttsRequests++ == 0) {
 				requestAudioFocus();
+				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+					mTts.setAudioAttributes(new AudioAttributes.Builder()
+							.setUsage(AudioAttributes.USAGE_ASSISTANCE_NAVIGATION_GUIDANCE)
+							.setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
+							.build());
+				}
 				// Delay first prompt of each batch to allow BT SCO connection being established
 				if (ctx.getSettings().AUDIO_STREAM_GUIDANCE.getModeValue(getApplicationMode()) == 0) {
 					ttsRequests++;
@@ -129,13 +135,6 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 			}
 			log.debug("ttsRequests="+ttsRequests);
 			params.put(TextToSpeech.Engine.KEY_PARAM_UTTERANCE_ID,""+System.currentTimeMillis());
-
-			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-				mTts.setAudioAttributes(new AudioAttributes.Builder()
-						.setUsage(AudioAttributes.USAGE_ASSISTANCE_NAVIGATION_GUIDANCE)
-						.setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
-						.build());
-			}
 			mTts.speak(bld.toString(), TextToSpeech.QUEUE_ADD, params);
 			// Audio focus will be released when onUtteranceCompleted() completed is called by the TTS engine.
 		} else if (ctx != null && vrt.isMute()) {
