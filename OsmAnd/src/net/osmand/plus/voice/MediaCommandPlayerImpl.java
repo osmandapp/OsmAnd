@@ -178,10 +178,11 @@ public class MediaCommandPlayerImpl extends AbstractPrologCommandPlayer implemen
 						.setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
 						.build());
 			}
-			if (Build.VERSION.SDK_INT < 26) {
+			//if (Build.VERSION.SDK_INT < 26) {
 				// Deprecated in API Level 26, use above AudioAtrributes instead
+				// TODO: convert code to replace deprecated setAudioStreamType and requestAudioFocus(AudioManager.OnAudioFocusChangeListener l, int streamType, int durationHint)
 				mediaPlayer.setAudioStreamType(streamType);
-			}
+			//}
 			mediaPlayer.setDataSource(file.getAbsolutePath());
 			mediaPlayer.prepare();
 			mediaPlayer.setOnCompletionListener(this);
