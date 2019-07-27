@@ -9,10 +9,6 @@
         <item name="android:backgroundDimEnabled">false</item>
     </style>
 
-
-    <style name="OsmandListView" parent="@android:style/Widget.ListView">
-    </style>
-
     <!-- Dashboard styles -->
     <style name="DashboardSubHeader">
         <item name="android:layout_width">0dp</item>
@@ -190,6 +186,7 @@
         <item name="primary_icon_color">@color/icon_color_primary_light</item>
         <item name="text_color_tab_active">@color/text_color_tab_active_light</item>
         <item name="text_color_tab_active_white">@color/text_color_secondary_light</item>
+        <item name="app_bar_primary_item_color">@color/active_buttons_and_links_text_light</item>
 
         <item name="appbar_layout_theme">@style/OsmandLightTheme.DarkActionbar</item>
         <item name="search_tabbar_layout_theme">@style/OsmandLightTheme.SearchTabbar</item>
@@ -290,8 +287,6 @@
         <item name="android:textColorSecondary">@color/text_color_secondary_light</item>
         <item name="android:listDivider">@color/divider_color_light</item>
         <item name="android:dividerHeight">1dp</item>
-        <!--<item name="colorControlNormal">@color/icon_color_secondary_light</item>-->
-        <!--<item name="colorControlActivated">@color/active_color_primary_light</item>-->
     </style>
 
     <style name="OsmandLightTheme.DarkActionbar">
@@ -362,8 +357,6 @@
         <item name="android:textColorSecondary">@color/text_color_secondary_dark</item>
         <item name="android:listDivider">@color/divider_color_dark</item>
         <item name="android:dividerHeight">1dp</item>
-        <!--<item name="colorControlNormal">@color/icon_color_secondary_dark</item>-->
-        <!--<item name="colorControlActivated">@color/active_color_primary_dark</item>-->
     </style>
 
     <style name="OsmandDarkTheme.NoAnimation">
@@ -450,6 +443,7 @@
         <item name="primary_icon_color">@color/icon_color_primary_dark</item>
         <item name="text_color_tab_active">@color/text_color_tab_active_dark</item>
         <item name="text_color_tab_active_white">@color/text_color_tab_active_dark</item>
+        <item name="app_bar_primary_item_color">@color/active_buttons_and_links_text_dark</item>
 
         <item name="appbar_layout_theme">@style/OsmandDarkTheme.DarkActionbar</item>
         <item name="search_tabbar_layout_theme">@style/OsmandDarkTheme.SearchTabbar</item>
@@ -738,10 +732,10 @@
         <item name="bg_color">@color/list_background_color_dark</item>
     </style>
 
-    <style name="WhiteControls" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorControlNormal">?attr/wikivoyage_primary_btn_text_color</item>
-        <item name="colorControlActivated">?attr/wikivoyage_primary_btn_text_color</item>
-        <item name="colorControlHighlight">?attr/wikivoyage_primary_btn_text_color</item>
+    <style name="AppBarControls" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorControlNormal">?attr/app_bar_primary_item_color</item>
+        <item name="colorControlActivated">?attr/app_bar_primary_item_color</item>
+        <item name="colorControlHighlight">?attr/app_bar_primary_item_color</item>
 
     </style>
 </resources>
