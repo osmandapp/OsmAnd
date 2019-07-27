@@ -277,21 +277,26 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			}
 		});
 
+		TextView optionsButton = mainView.findViewById(R.id.options_button);
+
 		if (orientationPortrait) {
-			backBtn.setImageDrawable(getActiveIcon(R.drawable.ic_arrow_back));
+			backBtn.setImageDrawable(getColoredIcon(R.drawable.ic_arrow_back, lightTheme ? R.color.color_black : R.color.active_buttons_and_links_text_dark));
+			optionsButton.setTextColor(getResolvedColor(lightTheme ? R.color.active_color_primary_light : R.color.active_color_primary_dark));
 			TextView toolbar = (TextView) mainView.findViewById(R.id.toolbar_text);
-			toolbar.setTextColor(getResolvedColor(lightTheme ? R.color.color_black : R.color.color_white));
+			toolbar.setTextColor(getResolvedColor(lightTheme ? R.color.text_color_primary_light : R.color.text_color_primary_dark));
 			toolbar.setText(R.string.coord_input_add_point);
 			setBackgroundColor(R.id.app_bar, lightTheme ? R.color.route_info_bg_light : R.color.route_info_bg_dark);
 			setBackgroundColor(mainView, lightTheme ? R.color.activity_background_color_light : R.color.activity_background_color_dark);
 		} else {
+			backBtn.setImageDrawable(getColoredIcon(R.drawable.ic_arrow_back, lightTheme ? R.color.active_buttons_and_links_text_light : R.color.active_buttons_and_links_text_dark));
+			optionsButton.setTextColor(getResolvedColor(lightTheme ? R.color.color_white : R.color.active_color_primary_dark));
 			TextView toolbar = (TextView) mainView.findViewById(R.id.toolbar_text);
-			toolbar.setTextColor(getResolvedColor(lightTheme ? R.color.text_color_primary_light : R.color.text_color_primary_dark));
+			toolbar.setTextColor(getResolvedColor(lightTheme ? R.color.color_white : R.color.text_color_primary_dark));
 			toolbar.setText(R.string.coord_input_add_point);
 			setBackgroundColor(R.id.app_bar, lightTheme ? R.color.app_bar_color_light : R.color.route_info_bottom_view_bg_dark);
 		}
 
-		mainView.findViewById(R.id.options_button).setOnClickListener(new View.OnClickListener() {
+		optionsButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				CoordinateInputBottomSheetDialogFragment fragment = new CoordinateInputBottomSheetDialogFragment();

@@ -62,6 +62,8 @@ public class HelpActivity extends OsmandActionBarActivity implements AdapterView
 		Drawable dividerDrawable = new ColorDrawable(ContextCompat.getColor(this, dividerColor));
 		listView.setDivider(dividerDrawable);
 		listView.setDividerHeight(AndroidUtils.dpToPx(this, 1f));
+		listView.setBackgroundColor(getResources().getColor(
+				lightContent ? R.color.list_background_color_light : R.color.list_background_color_dark));
 
 		setTitle(R.string.shared_string_help);
 		setupHomeButton();

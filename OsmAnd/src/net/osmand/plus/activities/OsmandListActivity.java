@@ -78,6 +78,9 @@ public abstract class OsmandListActivity extends
 
 	public ListAdapter getListAdapter() {
 		ListAdapter adapter = getListView().getAdapter();
+		getListView().setDivider(getMyApplication().getUIUtilities().getIcon(R.drawable.divider_solid, 
+				getMyApplication().getSettings().isLightContent() ? R.color.divider_color_light : R.color.divider_color_dark));
+		getListView().setDividerHeight(1);
 		if (adapter instanceof HeaderViewListAdapter) {
 			return ((HeaderViewListAdapter)adapter).getWrappedAdapter();
 		} else {

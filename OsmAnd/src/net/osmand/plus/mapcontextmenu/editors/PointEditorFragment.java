@@ -3,6 +3,7 @@ package net.osmand.plus.mapcontextmenu.editors;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -53,10 +55,12 @@ public abstract class PointEditorFragment extends BaseOsmAndFragment {
 		editor.updateNightMode();
 
 		Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+		toolbar.setBackgroundColor(ContextCompat.getColor(getContext(), !editor.isLight() ? R.color.app_bar_color_dark : R.color.app_bar_color_light));
 		toolbar.setTitle(getToolbarTitle());
 
 		OsmandApplication app = requireMyApplication();
-		toolbar.setNavigationIcon(app.getUIUtilities().getIcon(R.drawable.ic_arrow_back));
+		Drawable icBack = app.getUIUtilities().getIcon(R.drawable.ic_arrow_back, !editor.isLight() ? R.color.active_buttons_and_links_text_dark : R.color.active_buttons_and_links_text_light);
+		toolbar.setNavigationIcon(icBack);
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		toolbar.setTitleTextColor(getResources().getColor(getResIdFromAttribute(getMapActivity(), R.attr.pstsTextColor)));
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -65,9 +69,11 @@ public abstract class PointEditorFragment extends BaseOsmAndFragment {
 				dismiss();
 			}
 		});
+		
+		int activeColorResId = !editor.isLight() ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
 
 		Button saveButton = (Button) view.findViewById(R.id.save_button);
-		saveButton.setTextColor(getResources().getColor(!editor.isLight() ? R.color.osmand_orange : R.color.map_widget_blue));
+		saveButton.setTextColor(getResources().getColor(activeColorResId));
 		saveButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -76,7 +82,7 @@ public abstract class PointEditorFragment extends BaseOsmAndFragment {
 		});
 
 		Button cancelButton = (Button) view.findViewById(R.id.cancel_button);
-		cancelButton.setTextColor(getResources().getColor(!editor.isLight() ? R.color.osmand_orange : R.color.map_widget_blue));
+		cancelButton.setTextColor(getResources().getColor(activeColorResId));
 		cancelButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -86,7 +92,7 @@ public abstract class PointEditorFragment extends BaseOsmAndFragment {
 		});
 
 		Button deleteButton = (Button) view.findViewById(R.id.delete_button);
-		deleteButton.setTextColor(getResources().getColor(!editor.isLight() ? R.color.osmand_orange : R.color.map_widget_blue));
+		deleteButton.setTextColor(getResources().getColor(activeColorResId));
 		deleteButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

@@ -2,6 +2,7 @@ package net.osmand.plus.download.ui;
 
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -107,8 +108,12 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 			showWiki = false;
 		}
 
+		boolean isLightContent = getMyApplication().getSettings().isLightContent();
+		int iconColorResId = isLightContent ? R.color.active_buttons_and_links_text_light : R.color.active_buttons_and_links_text_dark;
+
 		Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
-		toolbar.setNavigationIcon(R.drawable.ic_arrow_back);
+		Drawable icBack = getMyApplication().getUIUtilities().getIcon(R.drawable.ic_arrow_back, iconColorResId);
+		toolbar.setNavigationIcon(icBack);
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override
@@ -144,12 +149,12 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 
 		searchEditText = (EditText) view.findViewById(R.id.searchEditText);
 		searchEditText.setHint(R.string.search_map_hint);
-		searchEditText.setTextColor(Color.WHITE);
-		boolean isLight = getMyApplication().getSettings().isLightContent();
-		searchEditText.setHintTextColor(ContextCompat.getColor(activity, isLight ? R.color.inactive_item_orange : R.color.searchbar_tab_inactive_dark));
+		searchEditText.setTextColor(ContextCompat.getColor(activity, isLightContent ? R.color.text_color_primary_light : R.color.text_color_primary_dark));
+		searchEditText.setHintTextColor(ContextCompat.getColor(activity, isLightContent ? R.color.inactive_item_orange : R.color.searchbar_tab_inactive_dark));
 
 		progressBar = (ProgressBar) view.findViewById(R.id.searchProgressBar);
 		clearButton = (ImageButton) view.findViewById(R.id.clearButton);
+		clearButton.setColorFilter(iconColorResId);
 		clearButton.setVisibility(View.GONE);
 
 		searchEditText.addTextChangedListener(new TextWatcher() {

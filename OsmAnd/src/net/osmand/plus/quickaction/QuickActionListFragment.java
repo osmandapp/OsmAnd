@@ -50,13 +50,17 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
     QuickActionAdapter  adapter;
     ItemTouchHelper     touchHelper;
     QuickActionRegistry quickActionRegistry;
+    
+    private boolean isLightContent;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.quick_action_list, container, false);
-
+        
+        isLightContent = getMyApplication().getSettings().isLightContent();
+        
         quickActionRV = (RecyclerView) view.findViewById(R.id.recycler_view);
         fab = (FloatingActionButton) view.findViewById(R.id.fabButton);
 
@@ -109,7 +113,8 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 
     private void setUpToolbar(View view) {
         Toolbar  toolbar = (Toolbar) view.findViewById(R.id.custom_toolbar);
-        Drawable back = getMyApplication().getUIUtilities().getIcon(R.drawable.ic_arrow_back, R.color.color_white);
+        Drawable back = getMyApplication().getUIUtilities().getIcon(R.drawable.ic_arrow_back, 
+                isLightContent ? R.color.active_buttons_and_links_text_light : R.color.active_buttons_and_links_text_dark);
         toolbar.setNavigationIcon(back);
         toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -119,7 +124,8 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
             }
         });
         toolbar.setTitle(R.string.configure_screen_quick_action);
-        toolbar.setTitleTextColor(ContextCompat.getColor(getContext(), R.color.color_white));
+        toolbar.setTitleTextColor(ContextCompat.getColor(getContext(), 
+                isLightContent ? R.color.color_white : R.color.text_color_primary_dark));
     }
 
     @Override

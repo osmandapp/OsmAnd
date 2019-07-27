@@ -48,7 +48,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="16dp"
             android:scaleType="centerInside"
-            android:tint="@color/color_white"
+            android:tint="?attr/wikivoyage_primary_btn_text_color"
             android:layout_marginTop="24dp"
             android:src="@drawable/ic_action_flag_dark" />
 
@@ -91,12 +91,12 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="?attr/spinnerListBackground"
-            android:layout_marginBottom="56dp">
+            android:layout_marginBottom="56dp"
+            android:background="?attr/activity_background_color">
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:id="@+id/container"/>
         </ScrollView>
 
@@ -126,7 +126,7 @@
             android:gravity="center"
             android:layout_gravity="bottom"
             android:foreground="?attr/selectableItemBackground"
-            android:background="@color/active_color_primary_light"/>
+            android:background="?attr/color_dialog_buttons"/>
 
     </FrameLayout>
 
