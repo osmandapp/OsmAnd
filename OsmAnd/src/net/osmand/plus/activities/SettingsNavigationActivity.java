@@ -251,11 +251,12 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 
 	private void addVoicePrefs(PreferenceGroup cat) {
 		if (!Version.isBlackberry((OsmandApplication) getApplication())) {
-			String[] streamTypes = new String[]{getString(R.string.voice_stream_music), getString(R.string.voice_stream_notification),
-					getString(R.string.voice_stream_voice_call), getString(R.string.shared_string_default)};
+			String[] streamTypes = new String[]{getString(R.string.voice_stream_music),
+					getString(R.string.voice_stream_notification), getString(R.string.voice_stream_voice_call)};
+					//getString(R.string.shared_string_default)};
 			Integer[] streamIntTypes = new Integer[]{AudioManager.STREAM_MUSIC,
-					AudioManager.STREAM_NOTIFICATION, AudioManager.STREAM_VOICE_CALL,
-					AudioManager.USE_DEFAULT_STREAM_TYPE};
+					AudioManager.STREAM_NOTIFICATION, AudioManager.STREAM_VOICE_CALL);
+					//AudioManager.USE_DEFAULT_STREAM_TYPE};
 			ListPreference lp = createListPreference(
 					settings.AUDIO_STREAM_GUIDANCE, streamTypes, streamIntTypes , R.string.choose_audio_stream,
 					R.string.choose_audio_stream_descr);
