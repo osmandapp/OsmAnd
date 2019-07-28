@@ -1554,7 +1554,7 @@ Pôr do Sol: %2$s</string>
     <string name="use_fast_recalculation_desc">Recalcular apenas a parte inicial da rota para viagens longas.</string>
     <string name="rendering_value_disabled_name">Desativado</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Cor por afiliação da rede</string>
-    <string name="rendering_value_walkingRoutesOSMC_name">Colorir conforme símbolo de caminhadas OSMC</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">Cor por símbolo de caminhadas OSMC</string>
     <string name="osm_edit_context_menu_delete">Apagar edição no OSM</string>
     <string name="shared_string_show_details">Mostrar detalhes</string>
     <string name="read_full_article">Leia o artigo completo (on-line)</string>
