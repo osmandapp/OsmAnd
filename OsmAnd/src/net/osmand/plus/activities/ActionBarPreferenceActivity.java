@@ -38,6 +38,7 @@ public abstract class ActionBarPreferenceActivity extends AppCompatPreferenceAct
 		}
 		setTheme(t);
 		super.onCreate(savedInstanceState);
+		boolean lightTheme = settings.isLightContent();
 		setContentView(R.layout.preference_activity);
 		tb = (Toolbar) findViewById(R.id.toolbar);
 		if (VERSION.SDK_INT >= VERSION_CODES.LOLLIPOP) {
@@ -47,7 +48,8 @@ public abstract class ActionBarPreferenceActivity extends AppCompatPreferenceAct
 			shadowView = null;
 		}
 		tb.setClickable(true);
-		tb.setNavigationIcon(((OsmandApplication) getApplication()).getUIUtilities().getIcon(R.drawable.ic_arrow_back));
+		int activeButtonsAndLinksTextColorResId = lightTheme ? R.color.active_buttons_and_links_text_light : R.color.active_buttons_and_links_text_dark;
+		tb.setNavigationIcon(((OsmandApplication) getApplication()).getUIUtilities().getIcon(R.drawable.ic_arrow_back, activeButtonsAndLinksTextColorResId));
 		tb.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		tb.setBackgroundColor(getResources().getColor(getResIdFromAttribute(this, R.attr.pstsTabBackground)));
 		tb.setTitleTextColor(getResources().getColor(getResIdFromAttribute(this, R.attr.pstsTextColor)));

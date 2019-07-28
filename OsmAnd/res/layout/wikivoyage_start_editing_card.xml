@@ -48,6 +48,7 @@
 
 		<TextView
 			android:id="@+id/description"
+			android:textColor="?android:textColorPrimary"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:lineSpacingMultiplier="@dimen/text_button_line_spacing_multiplier"

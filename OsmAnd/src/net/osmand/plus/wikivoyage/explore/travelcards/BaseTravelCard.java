@@ -65,4 +65,9 @@ public abstract class BaseTravelCard {
 		}
 		return R.color.wikivoyage_secondary_text;
 	}
+
+	@ColorRes
+	protected int getPrimaryTextColorRes() {
+		return nightMode ? R.color.text_color_primary_dark : R.color.text_color_primary_light;
+	}
 }

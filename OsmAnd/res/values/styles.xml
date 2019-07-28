@@ -9,10 +9,6 @@
         <item name="android:backgroundDimEnabled">false</item>
     </style>
 
-
-    <style name="OsmandListView" parent="@android:style/Widget.ListView">
-    </style>
-
     <!-- Dashboard styles -->
     <style name="DashboardSubHeader">
         <item name="android:layout_width">0dp</item>
@@ -184,12 +180,13 @@
         <item name="actionOverflowButtonStyle">@style/OverflowMenuButton</item>
 
         <item name="circle_dialog_bg">@drawable/circle_dialog_bg_light</item>
-
+        <item name="textColorAlertDialogListItem">@color/text_color_primary_light</item>
         <item name="secondary_icon_color">@color/icon_color_secondary_light</item>
         <item name="default_icon_color">@color/icon_color_default_light</item>
         <item name="primary_icon_color">@color/icon_color_primary_light</item>
         <item name="text_color_tab_active">@color/text_color_tab_active_light</item>
         <item name="text_color_tab_active_white">@color/text_color_secondary_light</item>
+        <item name="app_bar_primary_item_color">@color/active_buttons_and_links_text_light</item>
 
         <item name="appbar_layout_theme">@style/OsmandLightTheme.DarkActionbar</item>
         <item name="search_tabbar_layout_theme">@style/OsmandLightTheme.SearchTabbar</item>
@@ -288,6 +285,8 @@
 
     <style name="OsmandLightTheme.NoActionbar.Preferences">
         <item name="android:textColorSecondary">@color/text_color_secondary_light</item>
+        <item name="android:listDivider">@color/divider_color_light</item>
+        <item name="android:dividerHeight">1dp</item>
     </style>
 
     <style name="OsmandLightTheme.DarkActionbar">
@@ -356,10 +355,13 @@
 
     <style name="OsmandDarkTheme.NoActionbar.Preferences">
         <item name="android:textColorSecondary">@color/text_color_secondary_dark</item>
+        <item name="android:listDivider">@color/divider_color_dark</item>
+        <item name="android:dividerHeight">1dp</item>
     </style>
 
     <style name="OsmandDarkTheme.NoAnimation">
         <item name="alertDialogTheme">@style/Theme.AppCompat.Dialog.Alert.NoAnimation</item>
+        <item name="dialog_title_color">@color/marker_red</item>
     </style>
 
     <style name="OsmandLightTheme.NoAnimation">
@@ -441,6 +443,7 @@
         <item name="primary_icon_color">@color/icon_color_primary_dark</item>
         <item name="text_color_tab_active">@color/text_color_tab_active_dark</item>
         <item name="text_color_tab_active_white">@color/text_color_tab_active_dark</item>
+        <item name="app_bar_primary_item_color">@color/active_buttons_and_links_text_dark</item>
 
         <item name="appbar_layout_theme">@style/OsmandDarkTheme.DarkActionbar</item>
         <item name="search_tabbar_layout_theme">@style/OsmandDarkTheme.SearchTabbar</item>
@@ -461,6 +464,7 @@
         <item name="subscription_active_div_color">@color/subscription_active_div_color_dark</item>
 
         <item name="circle_dialog_bg">@drawable/circle_dialog_bg_night</item>
+        <item name="textColorAlertDialogListItem">@color/text_color_primary_dark</item>
         <item name="dialog_bg_color">@color/activity_background_color_dark</item>
         <item name="dialog_transparent_bg_color">@color/activity_background_transparent_color_dark</item>
         <item name="dialog_title_color">@color/text_color_primary_dark</item>
@@ -543,7 +547,10 @@
     <!-- Standard action bar override -->
     <style name="Widget.Styled.ActionBarDark" parent="Widget.AppCompat.Light.ActionBar.Solid.Inverse">
         <item name="background">@color/app_bar_color_dark</item>
+        <item name="titleTextStyle">@style/Widget.Styled.DarkActionBarTitle</item>
+
         <item name="android:background">@color/app_bar_color_dark</item>
+        <item name="android:titleTextStyle">@style/Widget.Styled.DarkActionBarTitle</item>
         <item name="elevation">0dp</item>
     </style>
 
@@ -562,6 +569,10 @@
 
     <style name="Widget.Styled.LightActionBarTitle" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
         <item name="android:textColor">@color/color_white</item>
+    </style>
+
+    <style name="Widget.Styled.DarkActionBarTitle" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/text_color_primary_dark</item>
     </style>
 
     <style name="Widget.Styled.LightActionBarSubtitle" parent="TextAppearance.AppCompat.Widget.ActionBar.Subtitle">
@@ -721,10 +732,10 @@
         <item name="bg_color">@color/list_background_color_dark</item>
     </style>
 
-    <style name="WhiteControls" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorControlNormal">@color/color_white</item>
-        <item name="colorControlActivated">@color/color_white</item>
-        <item name="colorControlHighlight">@color/color_white</item>
+    <style name="AppBarControls" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorControlNormal">?attr/app_bar_primary_item_color</item>
+        <item name="colorControlActivated">?attr/app_bar_primary_item_color</item>
+        <item name="colorControlHighlight">?attr/app_bar_primary_item_color</item>
 
     </style>
 </resources>

@@ -88,7 +88,7 @@ public class OsmNotesMenu {
 		if (showOsmBugs) {
 			toggleIconColorId = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
 		} else {
-			toggleIconColorId = nightMode ? 0 : R.color.icon_color_default_light;
+			toggleIconColorId = nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light;
 		}
 
 		adapter.addItem(new ContextMenuItem.ItemBuilder()

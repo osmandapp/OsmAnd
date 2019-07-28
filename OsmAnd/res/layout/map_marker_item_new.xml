@@ -185,7 +185,7 @@
             android:layout_height="1dp"
             android:layout_marginLeft="@dimen/map_button_shadow_width"
             android:layout_marginStart="@dimen/map_button_shadow_width"
-            tools:background="?attr/dashboard_divider"/>
+            tools:background="?attr/divider_color"/>
     </LinearLayout>
 
     <include

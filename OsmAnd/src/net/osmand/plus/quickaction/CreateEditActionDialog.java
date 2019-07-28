@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.view.ContextThemeWrapper;
 import android.support.v7.widget.Toolbar;
@@ -63,14 +64,15 @@ public class CreateEditActionDialog extends DialogFragment {
     private QuickAction action;
 
     private boolean isNew;
+    private boolean isLightContent;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
         OsmandApplication application = (OsmandApplication) getActivity().getApplication();
-        boolean light = application.getSettings().isLightContent() && !application.getDaynightHelper().isNightMode();
+        isLightContent = application.getSettings().isLightContent() && !application.getDaynightHelper().isNightMode();
 
-        Dialog dialog = new Dialog(new ContextThemeWrapper(getActivity(), light
+        Dialog dialog = new Dialog(new ContextThemeWrapper(getActivity(), isLightContent
                 ? R.style.Dialog90Light
                 : R.style.Dialog90Dark), getTheme());
 
@@ -149,11 +151,10 @@ public class CreateEditActionDialog extends DialogFragment {
                 ? R.string.quick_action_new_action
                 : R.string.quick_action_edit_action);
 
-        toolbar.setTitleTextColor(Color.WHITE);
+        int buttonsAndLinksTextColorResId = isLightContent ? R.color.active_buttons_and_links_text_light : R.color.active_buttons_and_links_text_dark;
+        toolbar.setTitleTextColor(ContextCompat.getColor(getContext(), buttonsAndLinksTextColorResId));
 
-        toolbar.setNavigationIcon(getIconsCache().getIcon(
-                R.drawable.ic_arrow_back,
-                R.color.color_white));
+        toolbar.setNavigationIcon(getIconsCache().getIcon(R.drawable.ic_arrow_back, buttonsAndLinksTextColorResId));
 
         toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 
@@ -169,6 +170,8 @@ public class CreateEditActionDialog extends DialogFragment {
 
         ImageView image = (ImageView) root.findViewById(R.id.image);
         EditText name = (EditText) root.findViewById(R.id.name);
+        int buttonsAndLinksTextColorResId = isLightContent ? R.color.active_buttons_and_links_text_light : R.color.active_buttons_and_links_text_dark;
+        name.setTextColor(ContextCompat.getColor(getContext(), buttonsAndLinksTextColorResId));
 
         name.addTextChangedListener(new TextWatcher() {
             @Override

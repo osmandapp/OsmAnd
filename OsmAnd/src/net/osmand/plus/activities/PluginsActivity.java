@@ -97,6 +97,7 @@ public class PluginsActivity extends OsmandListActivity {
 			boolean active = false;
 			int logoContDescId = R.string.shared_string_disable;
 			String name = "";
+			boolean isLightTheme = getMyApplication().getSettings().isLightContent();
 
 			ImageButton pluginLogo = (ImageButton) view.findViewById(R.id.plugin_logo);
 			ImageView pluginOptions = (ImageView) view.findViewById(R.id.plugin_options);
@@ -151,7 +152,7 @@ public class PluginsActivity extends OsmandListActivity {
 
 			pluginLogo.setContentDescription(getString(logoContDescId));
 			if (active) {
-				pluginLogo.setBackgroundResource(R.drawable.bg_plugin_logo_enabled);
+				pluginLogo.setBackgroundResource(isLightTheme ? R.drawable.bg_plugin_logo_enabled_light : R.drawable.bg_plugin_logo_enabled_dark);
 			} else {
 				TypedArray attributes = getTheme().obtainStyledAttributes(new int[]{R.attr.bg_plugin_logo_disabled});
 				pluginLogo.setBackgroundDrawable(attributes.getDrawable(0));

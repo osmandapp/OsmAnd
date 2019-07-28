@@ -1,5 +1,6 @@
 package net.osmand.plus.activities;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import android.app.ActionBar;
@@ -31,6 +32,9 @@ public abstract class OsmandListActivity extends
 				getResources().getColor(
 						getMyApplication().getSettings().isLightContent() ? R.color.list_background_color_light
 								: R.color.list_background_color_dark));
+		getListView().setDivider(getMyApplication().getUIUtilities().getIcon(R.drawable.divider_solid,
+				getMyApplication().getSettings().isLightContent() ? R.color.divider_color_light : R.color.divider_color_dark));
+		getListView().setDividerHeight(AndroidUtils.dpToPx(getMyApplication(), 1));
 	}
 
 

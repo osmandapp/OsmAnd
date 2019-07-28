@@ -64,6 +64,7 @@
 						<TextView
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content"
+							android:textColor="?android:textColorPrimary"
 							android:ellipsize="end"
 							android:maxLines="1"
 							android:text="@string/profile_type_base_string"/>
@@ -218,7 +219,7 @@
 					<View
 						android:layout_width="match_parent"
 						android:layout_height="1dp"
-						android:background="@color/divider_color_light"/>
+						android:background="?attr/divider_color"/>
 
 
 					<LinearLayout
@@ -261,7 +262,7 @@
 							android:layout_width="1dp"
 							android:layout_height="36dp"
 							android:layout_gravity="center_vertical"
-							android:background="@color/divider_color_light"/>
+							android:background="?attr/divider_color"/>
 
 						<LinearLayout
 							android:id="@+id/select_icon_color_button"
@@ -298,7 +299,7 @@
 					<View
 						android:layout_width="match_parent"
 						android:layout_height="1dp"
-						android:background="@color/divider_color_light"/>
+						android:background="?attr/divider_color"/>
 
 				</LinearLayout>
 
@@ -421,7 +422,7 @@
 					android:layout_height="1dp"
 					android:layout_marginStart="64dp"
 					android:layout_marginLeft="64dp"
-					android:background="@color/divider_color_light"/>
+					android:background="?attr/divider_color"/>
 
 				<LinearLayout
 					android:id="@+id/screen_config_btn"
@@ -470,7 +471,7 @@
 					android:layout_height="1dp"
 					android:layout_marginStart="64dp"
 					android:layout_marginLeft="64dp"
-					android:background="@color/divider_color_light"
+					android:background="?attr/divider_color"
 					/>
 
 				<LinearLayout
