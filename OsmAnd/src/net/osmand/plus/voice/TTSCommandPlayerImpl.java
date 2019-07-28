@@ -118,7 +118,7 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 				requestAudioFocus();
 				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 					mTts.setAudioAttributes(new AudioAttributes.Builder()
-							.setUsage(AudioAttributes.USAGE_ASSISTANCE_NAVIGATION_GUIDANCE)
+							.setUsage(ctx.getSettings().AUDIO_USAGE.get())
 							.setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
 							.build());
 				}

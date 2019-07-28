@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.DialogInterface.OnMultiChoiceClickListener;
 import android.content.Intent;
+import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
@@ -270,8 +271,20 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 					if (player != null) {
 						player.updateAudioStream(settings.AUDIO_STREAM_GUIDANCE.get());
 					}
+					// Sync corresponding AUDIO_USAGE value
+					ApplicationMode mode = getMyApplication().getSettings().getApplicationMode();
+					int stream = settings.AUDIO_STREAM_GUIDANCE.getModeValue(mode);
+					if (stream == AudioManager.STREAM_MUSIC) {
+						settings.AUDIO_USAGE.setModeValue(mode, AudioAttributes.USAGE_ASSISTANCE_NAVIGATION_GUIDANCE);
+					} else if (stream == AudioManager.STREAM_NOTIFICATION) {
+						settings.AUDIO_USAGE.setModeValue(mode, AudioAttributes.USAGE_NOTIFICATION);
+					} else if (stream == AudioManager.STREAM_VOICE_CALL) {
+						settings.AUDIO_USAGE.setModeValue(mode, AudioAttributes.USAGE_VOICE_COMMUNICATION);
+					}
+
 					// Sync DEFAULT value with CAR value, as we have other way to set it for now
 					settings.AUDIO_STREAM_GUIDANCE.setModeValue(ApplicationMode.DEFAULT, settings.AUDIO_STREAM_GUIDANCE.getModeValue(ApplicationMode.CAR));
+					settings.AUDIO_USAGE.setModeValue(ApplicationMode.DEFAULT, settings.AUDIO_USAGE.getModeValue(ApplicationMode.CAR));
 					return true;
 				}
 			});
