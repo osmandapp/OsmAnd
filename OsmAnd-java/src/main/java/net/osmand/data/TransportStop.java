@@ -1,5 +1,6 @@
 package net.osmand.data;
 
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
@@ -7,7 +8,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import gnu.trove.set.hash.TLongHashSet;
 
 public class TransportStop extends MapObject {
 
@@ -41,6 +41,10 @@ public class TransportStop extends MapObject {
 	public void setRoutesIds(long[] routesIds) {
 		this.routesIds = routesIds;
 	}
+	
+	public void addRouteId(long routeId) {
+		routesIds = Algorithms.addToArrayL(routesIds, routeId, true);
+	}
 
 	public boolean hasRoute(long routeId) {
 		return routesIds != null && Arrays.binarySearch(routesIds, routeId) >= 0;
@@ -60,6 +64,10 @@ public class TransportStop extends MapObject {
 
 	public void setDeletedRoutesIds(long[] deletedRoutesIds) {
 		this.deletedRoutesIds = deletedRoutesIds;
+	}
+	
+	public void addDeletedRouteId(long routeId) {
+		deletedRoutesIds = Algorithms.addToArrayL(deletedRoutesIds, routeId, true);
 	}
 
 	public boolean isRouteDeleted(long routeId) {
@@ -164,7 +172,8 @@ public class TransportStop extends MapObject {
 
 	public boolean compareStop(TransportStop thatObj) {
 		if (this.compareObject(thatObj) &&
-				((this.routesIds == null && thatObj.routesIds == null) || (this.routesIds != null && this.routesIds.equals(thatObj.routesIds))) &&
+				// don't compare routes cause stop could be identical
+				// ((this.routesIds == null && thatObj.routesIds == null) || (this.routesIds != null && this.routesIds.equals(thatObj.routesIds))) &&
 				((this.exits == null && thatObj.exits == null) || (this.exits != null && thatObj.exits != null && this.exits.size() == thatObj.exits.size()))) {
 			if (this.exits != null) {
 				for (int i = 0; i < this.exits.size(); i++) {
