@@ -1,8 +1,16 @@
 package net.osmand.binary;
 
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
 import com.google.protobuf.CodedInputStream;
 import com.google.protobuf.WireFormat;
 
+import gnu.trove.list.array.TIntArrayList;
+import gnu.trove.map.hash.TIntObjectHashMap;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.data.TransportSchedule;
 import net.osmand.data.TransportStop;
@@ -11,16 +19,6 @@ import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.Way;
 import net.osmand.util.MapUtils;
 import net.osmand.util.TransliterationHelper;
-
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import gnu.trove.list.array.TIntArrayList;
-import gnu.trove.map.hash.TIntObjectHashMap;
 
 public class BinaryMapTransportReaderAdapter {
 	private CodedInputStream codedIS;
@@ -256,8 +254,8 @@ public class BinaryMapTransportReaderAdapter {
 		dataObject.setFileOffset(filePointer);
 		boolean end = false;
 		long rid = 0;
-		int rx = 0;
-		int ry = 0;
+		int[] rx = new int[] {0};
+		int[] ry = new int[] {0};
 		while(!end){
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
@@ -336,8 +334,6 @@ public class BinaryMapTransportReaderAdapter {
 				TransportStop stop = readTransportRouteStop(rx, ry, rid, stringTable, filePointer);
 				dataObject.getForwardStops().add(stop);
 				rid = stop.getId();
-				rx = (int) MapUtils.getTileNumberX(BinaryMapIndexReader.TRANSPORT_STOP_ZOOM, stop.getLocation().getLongitude());
-				ry = (int) MapUtils.getTileNumberY(BinaryMapIndexReader.TRANSPORT_STOP_ZOOM, stop.getLocation().getLatitude());
 				codedIS.popLimit(olds);
 				break;
 			default:
@@ -479,7 +475,7 @@ public class BinaryMapTransportReaderAdapter {
 
 	
 	
-	private TransportStop readTransportRouteStop(int dx, int dy, long did, TIntObjectHashMap<String> stringTable, 
+	private TransportStop readTransportRouteStop(int[] dx, int[] dy, long did, TIntObjectHashMap<String> stringTable, 
 			int filePointer) throws IOException {
 		TransportStop dataObject = new TransportStop();
 		dataObject.setFileOffset(codedIS.getTotalBytesRead());
@@ -502,10 +498,10 @@ public class BinaryMapTransportReaderAdapter {
 				did += codedIS.readSInt64();
 				break;
 			case OsmandOdb.TransportRouteStop.DX_FIELD_NUMBER :
-				dx += codedIS.readSInt32();
+				dx[0] += codedIS.readSInt32();
 				break;
 			case OsmandOdb.TransportRouteStop.DY_FIELD_NUMBER :
-				dy += codedIS.readSInt32();
+				dy[0] += codedIS.readSInt32();
 				break;
 			default:
 				skipUnknownField(t);
@@ -513,7 +509,7 @@ public class BinaryMapTransportReaderAdapter {
 			}
 		}
 		dataObject.setId(did);
-		dataObject.setLocation(BinaryMapIndexReader.TRANSPORT_STOP_ZOOM, dx, dy);
+		dataObject.setLocation(BinaryMapIndexReader.TRANSPORT_STOP_ZOOM, dx[0], dy[0]);
 		return dataObject;
 	}
 	
@@ -542,7 +538,6 @@ public class BinaryMapTransportReaderAdapter {
 		TransportStop dataObject = new TransportStop();
 		dataObject.setLocation(BinaryMapIndexReader.TRANSPORT_STOP_ZOOM, x, y);
 		dataObject.setFileOffset(shift);
-		List<String> names = null;
 		while(true){
 			int t = codedIS.readTag();
 			tag = WireFormat.getTagFieldNumber(t);
