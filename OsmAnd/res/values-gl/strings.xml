@@ -3181,7 +3181,7 @@ Lon %2$s</string>
     <string name="routing_attr_difficulty_preference_description">Preferir rotas desta dificultade, aínda que o trazado sobre pistas máis duras ou máis doadas segue a ser posíbel se son máis curtas.</string>
     <string name="routing_attr_freeride_policy_name">Fóra de pista</string>
     <string name="routing_attr_freeride_policy_description">As pistas libres e fóra de pista son rotas e pasaxes non oficiais. Adoitan ser descoidadas, non mantidas polos oficiais e non controladas pola noite. Entrar baixo o teu propio risco.</string>
-    <string name="app_mode_ufo">UFO</string>
+    <string name="app_mode_ufo">OVNI</string>
     <string name="release_3_4">• Perfís de aplicación: crea o teu propio perfil para as túas necesidades, cunha icona e unha cor personalizadas 
 \n 
 \n • Engade a opción para estabelecer a velocidade predeterminada e mínima/máxima para os diferentes perfís 
@@ -3242,4 +3242,10 @@ Lon %2$s</string>
     <string name="shared_string_file_is_saved">%s está gardado</string>
     <string name="shared_string_open_track">Abrir pista</string>
     <string name="shared_string_track_is_saved">A pista %s está gardada</string>
+    <string name="gpx_join_gaps">Xuntar espazos</string>
+    <string name="app_mode_camper">Casa móbil (camper)</string>
+    <string name="app_mode_campervan">Autocaravana</string>
+    <string name="rendering_attr_showLez_description">Amosar zonas de baixas emisións no mapa. Non afecta á navigación.</string>
+    <string name="rendering_attr_showLez_name">Amosar zonas de baixas emisións</string>
+    <string name="temporary_conditional_routing">Considerar limitacións temporais</string>
 </resources>

@@ -1060,13 +1060,13 @@
     <string name="poi_backrest_no">Támla nincs</string>
     <string name="poi_intermittent">Időszakos meder</string>
     <string name="poi_building">Épület</string>
-    <string name="poi_generator_source_coal">Áramforrás: szén</string>
-    <string name="poi_generator_source_gas">Áramforrás: földgáz</string>
-    <string name="poi_generator_source_nuclear">Áramforrás: nukleáris energia</string>
-    <string name="poi_generator_source_solar">Áramforrás: napenergia</string>
-    <string name="poi_generator_source_hydro">Áramforrás: vízenergia</string>
-    <string name="poi_generator_source_wind">Áramforrás: szélenergia</string>
-    <string name="poi_generator_source_geothermal">Áramforrás: geotermikus energia</string>
+    <string name="poi_generator_source_coal">Energiaforrás: szén</string>
+    <string name="poi_generator_source_gas">Energiaforrás: földgáz</string>
+    <string name="poi_generator_source_nuclear">Energiaforrás: nukleáris energia</string>
+    <string name="poi_generator_source_solar">Energiaforrás: napsütés</string>
+    <string name="poi_generator_source_hydro">Energiaforrás: vízenergia</string>
+    <string name="poi_generator_source_wind">Energiaforrás: szél</string>
+    <string name="poi_generator_source_geothermal">Energiaforrás: geotermikus energia</string>
     <string name="poi_generator_source_oil">Áramforrás: kőolaj</string>
     <string name="poi_generator_source_diesel">Áramforrás: gázolaj</string>
     <string name="poi_pump_manual">Kézi</string>
@@ -3597,4 +3597,5 @@
     <string name="poi_charcoal_pile">Faszénégető boksa</string>
     <string name="poi_historic_tank">Történelmi harckocsi</string>
     <string name="poi_hookah_lounge">Vízipipázó társalgóhely</string>
+    <string name="poi_source_biomass">Energiaforrás: biomassza</string>
 </resources>

@@ -116,7 +116,7 @@
     <string name="stop_routing_confirm">Ziur nabigazioa gelditu nahi duzula?</string>
     <string name="clear_dest_confirm">Ziur zaude zure helmuga (eta erdibideko helburuak) garbitu nahi dituzula?</string>
     <string name="precise_routing_mode_descr">Kalkulatu errorerik gabeko ibilbide zehatza. Distantzia laburetara dago mugatua eta motela da.</string>
-    <string name="precise_routing_mode">Ibilbide kalkulu zehatza (alpha)</string>
+    <string name="precise_routing_mode">Ibilbide-kalkulu zehatza (alpha)</string>
     <string name="recording_context_menu_show">Erakutsi</string>
     <string name="recording_photo_description">"%1$s  %2$s argazkia"</string>
     <string name="av_def_action_picture">Argazkia atera</string>
@@ -241,7 +241,7 @@
     <string name="osmand_short_description_80_chars">Lineaz Kanpoko eta Sare Bidezko Mapa Ikusle eta Nabigatzaile Mugikor Globala OSM Mapetarako</string>
     <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Navigation Directions) 
 \n 
-\nOsmAnd kode irekiko software bidezko nabigaziorako aplikazioa da, OpenStreetMapeko (OSM) mota askotako munduko mapetara sarbidearekin. Mapa guztiak (bektore edo tesela mapak) telefonoaren memoria txartelean gorde daitezke, lineaz kanpoko erabilpena bermatzeko. OsmAndek ere lineaz kanpoko eta sareko ibilbideak eskaintzen ditu, txandakako ahots gidaritzarekin. 
+\nOsmAnd kode irekiko software bidezko nabigaziorako aplikazioa da, OpenStreetMapeko (OSM) mota askotako munduko mapetara sarbidearekin. Mapa guztiak (bektore edo tesela mapak) telefonoaren memoria txartelean gorde daitezke, lineaz kanpoko erabilpena bermatzeko. OsmAndek ere lineaz kanpoko eta sareko ibilbide-kalkulua eskaintzen du, txandakako ahots gidaritzarekin. 
 \n 
 \nEzaugarri nagusi batzuk: 
 \n- Lineaz kanpoko erabateko erabilpena (bektore edo tesela mapak gorde ondoren aukeratu daitezken karpetetan) 
@@ -249,7 +249,7 @@
 \n- Herrialde edo eskualdeetako mapen deskarga, aplikaziotik zuzenean 
 \n- Gain-geruza desberdin asko ikusi daitezke, GPX edo ibilbide bidea, interes puntuak (POI), gogokoak, sestra-kurbak, garraio publikoaren geltokiak, geruza gardeneko mapa gehigarriak. 
 \n- Lineaz kanpoko helbide eta lekuen bilatzailea (POI-ak) 
-\n- Lineaz kanpoko ibilbide motzetarako nabigazioa 
+\n- Lineaz kanpoko ibilbide-kalkulua distantzia ertainetarako 
 \n- Kotxea, bizikleta eta oinezkoentzat modua: 
 \n- Egun/gau ikuspegi automatizatua 
 \n- Abiaduraren araberako maparen zooma 
@@ -265,7 +265,7 @@
     <string name="osmand_plus_short_description_80_chars">Lineaz Kanpoko eta Sare Bidezko OSM Mapetarako Mapa Ikusle eta Nabigatzaile Mugikor Globala</string>
     <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions) 
 \n 
-\nOsmAnd+ kode irekiko nabigaziorako aplikazioa da, OpenStreetMap-eko (OSM) mota askotako munduko mapetara sarbidearekin. Mapa guztiak (bektore edo tesela mapak) telefonoaren memoria txartelean gorde daitezke, lineaz kanpoko erabilpena bermatzeko. OsmAnd-ek ere lineaz kanpoko eta sareko ibilbideak eskaintzen ditu, txandakako ahots gidaritzarekin. 
+\nOsmAnd+ kode irekiko nabigaziorako aplikazioa da, OpenStreetMap-eko (OSM) mota askotako munduko mapetara sarbidearekin. Mapa guztiak (bektore edo tesela mapak) telefonoaren memoria txartelean gorde daitezke, lineaz kanpoko erabilpena bermatzeko. OsmAnd-ek ere lineaz kanpoko eta sareko ibilbide-kalkulua eskaintzen du, txandakako ahots gidaritzarekin. 
 \n 
 \nOsmAnd+ aplikazioaren ordaindutako bertsioa da, hau erosiz gero proiektua aurrera eramaten laguntzen ari zara, ezaugarri berrien garapena finantzatzen, eta gainera, azken eguneraketak jasoko dituzu. 
 \n 
@@ -276,12 +276,13 @@
 \n- Lineaz kanpoko WIkipedia-ko erabilpena (deskargatu Wikipedia-ko POIak), turismorako erabilgarriak 
 \n- Gain-geruza desberdin asko ikusi daitezke, GPX edo ibilbide bidea, interes puntuak (POI), gogokoak, sestra-kurbak, garraio publikoaren geltokiak, geruza gardeneko mapa gehigarriak. 
 \n- Lineaz kanpoko helbide eta lekuen bilatzailea (POI-ak) 
-\n- Lineaz kanpoko ibilbide ertainetarako nabigazioa 
+\n- Lineaz kanpoko ibilbide-kalkulua distantzia ertainetarako
 \n- Kotxea, bizikleta eta oinezkoentzat modua: 
 \n- Aukerazko egun/gau ikuspegi automatizatua 
 \n- Aukerazko abiaduraren araberako maparen zooma 
 \n- Aukerazko maparen lerrokatzea, iparrorratzaren edo norabidearen araberakoa 
-\n- Aukerazko errei gidaritza, abiadura muga bistaratzea, grabaketa edo TTS (ahots bihurgailua) motorra⏎ ⇥</string>
+\n- Aukerazko errei gidaritza, abiadura muga bistaratzea, grabaketa edo TTS (ahots bihurgailua) motorra⏎ ⇥
+\n</string>
     <string name="filterpoi_activity">Sortu POI iragazkia</string>
     <string name="recalculate_route_to_your_location">Garraio modua:</string>
     <string name="select_navigation_mode">Aukeratu garraio modua</string>
@@ -318,7 +319,7 @@
     <string name="map_widget_time">Falta den denbora</string>
     <string name="map_widget_next_turn">Hurrengo biraketa</string>
     <string name="map_widget_next_turn_small">Hurrengo biraketa (txikia)</string>
-    <string name="map_widget_next_next_turn">Hurrengoaren ondorengo bilaketa</string>
+    <string name="map_widget_next_next_turn">Hurrengoaren ondorengo biraketa</string>
     <string name="map_widget_mini_route">Ibilbide mapa txikia</string>
     <string name="bg_service_screen_lock">Pantaila blokeatu</string>
     <string name="bg_service_screen_unlock">Pantaila desblokeatu</string>
@@ -409,7 +410,7 @@
 \n
 \nTesela mapak zuzenean sareko iturburuetatik eskuratu daitezke, edo lineaz kanporako prestatu daitezke ere SQLite datu base gisa (eta eskuz OsmAndeko karpetan kopiatu), horretarako dauden hirugarrengoen prestaketa tresnaren bat erabiliz."</string>
     <string name="osmand_accessibility_description">Gehigarri honek gailuaren irisgarritasun ezaugarriak OsmAnd aplikazioan eskuragarri jartzen ditu. Besteak beste TTS ahotsen hizketaren abiadura moldatzea baimentzen du, gurutzetaren bidezko nabigazioa konfiguratzea, zooma trackball bidez kontrolatzea, edo testu-ahots bihurketaren bidezko erantzuna, adibidez zure kokalekua iragartzeko.</string>
-    <string name="osmand_development_plugin_description">Gehigarri honek garapen eta arazte ezaugarriak azalarazten ditu, ibilbide simulazioa edo pantailaren marrazketaren errendimenduaren bistaratzea, edo ahots abisuak esaterako. Ezarpen hauek garatzaileentzako dira eta erabiltzaile arruntek ez dituzte behar.</string>
+    <string name="osmand_development_plugin_description">Gehigarri honek garapen eta arazte ezaugarriak azalarazten ditu, ibilbide-kalkuluaren simulazioa edo pantailaren marrazketaren errendimenduaren bistaratzea, edo ahots abisuak esaterako. Ezarpen hauek garatzaileentzako dira eta erabiltzaile arruntek ez dituzte behar.</string>
     <string name="plugins_screen">Gehigarriak</string>
     <string name="prefs_plugins_descr">Gehigarriek ezarpen aurreratuak eta funtzionalitate berriak aktibatzen dituzte.</string>
     <string name="prefs_plugins">Gehigarriak</string>
@@ -1095,7 +1096,7 @@ Biltegiratzean {1} MB erabiliko dira.
     <string name="copying_osmand_files">OsmAnd fitxategiak kopiatzen…</string>
     <string name="app_mode_truck">Kamioia</string>
     <string name="guidance_preferences_descr">Nabigazio hobespenak</string>
-    <string name="routing_preferences_descr">Nabigazioaren hobespenak</string>
+    <string name="routing_preferences_descr">Ibilbide-kalkuluaren hobespenak</string>
     <string name="speech_rate_descr">Zehaztu TTS ahotsaren abiadura.</string>
     <string name="speech_rate">Ahots abiadura</string>
     <string name="rendering_attr_coloredBuildings_name">Koloreztatu eraikinak motaren arabera</string>
@@ -1625,7 +1626,7 @@ Eskuragarri {2} MB besterik ez daude.</string>
     <string name="index_item_world_bitcoin_payments">Munduko bitcoin ordainketak</string>
     <string name="index_item_world_basemap">Munduko ikuspegi mapa</string>
     <string name="index_item_world_ski">Munduko ski mapa</string>
-    <string name="disable_complex_routing">Ezgaitu ibilbide kalkulu konplexua</string>
+    <string name="disable_complex_routing">Desgaitu ibilbide-kalkulu konplexua</string>
     <string name="amenity_type_seamark">Itsaso marka</string>
     <string name="app_modes_choose">Aplikazio profilak</string>
     <string name="app_mode_motorcycle">Motorra</string>
@@ -1684,7 +1685,7 @@ Eskuragarri {2} MB besterik ez daude.</string>
     <string name="si_min_m">Minutu miliaro</string>
     <string name="si_nm_h">Itsas miliak orduko (korapiloak)</string>
     <string name="nm_h">kn</string>
-    <string name="av_locations_descr">GPX fitxategia ohar-kokapenekin.</string>
+    <string name="av_locations_descr">GPX fitxategia kokalekuekin.</string>
     <string name="traffic_warning_hazard">Arriskua</string>
     <string name="rendering_value_boldOutline_name">Ingerada lodia</string>
     <string name="download_live_updates">Berehalako eguneraketak</string>
@@ -1755,8 +1756,8 @@ Eskuragarri {2} MB besterik ez daude.</string>
     <string name="rendering_value_default_name">Lehenetsia</string>
     <string name="traffic_warning_pedestrian">Zebrabidea</string>
     <string name="show_pedestrian_warnings">Zebrabideak</string>
-    <string name="routing_attr_no_new_routing_name">v1.9 nabigazio araurik gabe</string>
-    <string name="routing_attr_no_new_routing_description">Ez erabili 1.9 bertsioan sartutako nabigazio arauak.</string>
+    <string name="routing_attr_no_new_routing_name">v1.9 ibilbide-kalkulu araurik gabe</string>
+    <string name="routing_attr_no_new_routing_description">Ez erabili 1.9 bertsioan sartutako ibilbide-kalkulu arauak.</string>
     <string name="dash_download_msg_none">Deskargatu lineaz kanpoko mapak?</string>
     <string name="dash_download_msg">%1$s mapa deskargatu dituzu</string>
     <string name="dash_download_new_one">Deskargatu mapa berria</string>
@@ -1908,7 +1909,7 @@ Eskuragarri {2} MB besterik ez daude.</string>
     <string name="lang_hu_formal">Hungariera (formala)</string>
     <string name="lang_kn">Kannada</string>
     <string name="routing_attr_height_name">Altuera muga</string>
-    <string name="disable_complex_routing_descr">Desgaitu bi faseetako ibilbide kalkulua kotxe bidezko nabigaziorako.</string>
+    <string name="disable_complex_routing_descr">Desgaitu bi faseetako ibilbide-kalkulua kotxe bidezko nabigaziorako.</string>
     <string name="app_modes_choose_descr">Hautatu aplikazioan ikusgai egongo diren erabilera profilak.</string>
     <string name="map_widget_map_rendering">Mapen marrazketa</string>
     <string name="local_osm_changes_delete_all_confirm">%1$d OSM aldaketa ezabatuko dituzu. Ziur zaude?</string>
@@ -2394,7 +2395,7 @@ Area honi dagokio: %1$s x %2$s</string>
 \n• Gehigarriekin sestra-kurbak eta erliebe-itzalak gaitu ditzakezu</string>
     <string name="osmand_plus_extended_description_part6">Bizikleta eta oinezkoentzako ezaugarriak 
 \n• Oinez, mendian, eta bizikletarekin egiteko bideak eta aktibitateak ikusi 
-\n• Bizikleta eta oinezkoentzako ibilbide eta ikuspegi bereziak 
+\n• Bizikleta eta oinezkoentzako ibilbide-kalkulu eta ikuspegi bereziak 
 \n• Aukeran garraio publikoaren geltokiak (autobusa, tranbia, trena) lineen izenak barne 
 \n• Aukeran bidaiaren grabaketa tokiko GPX fitxategira edo interneteko zerbitzari batera 
 \n• Aukeran abiadura eta garaiera bistaratu 
@@ -3014,7 +3015,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="files_failed">%1$d fitxategi kopiatzeak huts egin du (%2$s).</string>
     <string name="move_maps">Mugitu mapak</string>
     <string name="dont_move_maps">Ez mugitu</string>
-    <string name="public_transport_ped_route_title">Oinezko bidea</string>
+    <string name="public_transport_ped_route_title">Ibilbidea oinez gutxi gora behera %1$s da eta garraio publikoa baino azkarrago izan daiteke</string>
     <string name="public_transport_no_route_title">Tamalez, OsmAnd-ek ezin izan du zure ezarpenetarako bide egokirik aurkitu.</string>
     <string name="public_transport_try_ped">Saiatu oinezko nabigazioa.</string>
     <string name="public_transport_try_change_settings">Saiatu ezarpenak aldatzen.</string>
@@ -3029,16 +3030,16 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="files_present">%1$d fitxategi (%2$s) aurreko kokapen batean daude jada \'%3$s\'.</string>
     <string name="searching_gps">GPSa bilatzen</string>
     <string name="coordinates_widget">Koordenatuen trepeta</string>
-    <string name="rate_dialog_descr">Emazkiguzu 30 segundo mesedez, eman zure iritzia eta baloratu gure lana Google Play-n.</string>
+    <string name="rate_dialog_descr">"Emazkiguzu 30 segundo mesedez Google Play-n zure iritzia emanez eta  gure lana baloratuz."</string>
     <string name="button_rate">Baloratu</string>
     <string name="help_us_make_osmand_better">Lagundu gaitzazu OsmAnd hobetzen!</string>
     <string name="choose_data_to_share">Aukeratu zein motako datuak partekatu nahi dituzun:</string>
     <string name="downloaded_maps">Deskargatutako mapak</string>
     <string name="visited_screens">Bisitatutako pantailak</string>
     <string name="colleted_data">Jasotako datuak</string>
-    <string name="collected_data_descr">OsmAnd proiektuarekin partekatu nahi dituzun datuak.</string>
-    <string name="downloaded_maps_collect_descr">OsmAnd zeintzuk eskualde eta herrialdetan erabili ohi den ulertzeko jasotzen ditugu datu hauek.</string>
-    <string name="visited_screens_collect_descr">OsmAnd-en zeintzuk ezaugarri erabili ohi diren ulertzeko jasotzen ditugu datu hauek.</string>
+    <string name="collected_data_descr">Zehaztu zeintzuk datu baimentzen duzun OsmAnd-ek partekatzea.</string>
+    <string name="downloaded_maps_collect_descr">Lagundu gaitzazu mapa eta eskualde erabilienak zeintzuk diren ulertzen.</string>
+    <string name="visited_screens_collect_descr">Lagundu gaitzazu OsmAnd-en ezaugarri erabilienak zeintzuk diren ulertzen.</string>
     <string name="privacy_and_security_change_descr">\"Onartu\" sakatzean gure %1$s onartzen duzu</string>
     <string name="settings_privacy_and_security">Pribatutasuna eta segurtasuna</string>
     <string name="settings_privacy_and_security_desc">Hautatu gurekin partekatu nahi dituzun datuak</string>
@@ -3061,7 +3062,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="profile_type_descr_string">Mota: %s</string>
     <string name="profile_type_base_string">Oinarrizko profila</string>
     <string name="profile_alert_need_routing_type_title">Hautatu nabigazio mota</string>
-    <string name="profile_alert_need_routing_type_msg">Nabigazio mota hautatu behar duzu aplikazioaren profil berria sortzeko</string>
+    <string name="profile_alert_need_routing_type_msg">Hautatu aplikazio-profil berriaren nabigazio mota</string>
     <string name="profile_alert_need_profile_name_title">Sartu profilaren izena</string>
     <string name="profile_alert_need_profile_name_msg">Profilaren izena ezin da hutsik egon!</string>
     <string name="profile_alert_duplicate_name_title">Bikoiztutako izena</string>
@@ -3079,4 +3080,103 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="application_profiles_descr">Hautatu aplikazioan ikusgai egongo diren profilak.</string>
     <string name="application_profiles">Aplikazioaren profilak</string>
     <string name="routing_attr_freeride_policy_name">Pistatik kanpo</string>
+    <string name="shared_string_privacy_policy">Pribatutasun-politika</string>
+    <string name="make_osmand_better_descr">"Baimendu OsmAnd aplikazioaren erabilera-datu  anonimoen bildu eta prozesatzea. Ez dugu zure kokalekuari buruzko datuak biltzen edo gordetzen, ezta mapan begiratzen dituzun tokiena ere.
+\n
+\nEdonoiz zure hautapena alda dezakezu Ezarpenak &gt; Pribatutasuna eta segurtasuna atalean."</string>
+    <string name="app_mode_shuttle_bus">Autobus lotura-linea</string>
+    <string name="osmand_routing_promo">Routing.xml fitxategiaren zure bertsio aldatua gehitu dezakezu ..osmand/routing helbidean</string>
+    <string name="base_profile_descr_bicycle">Mendiko bizikleta, ziklomotorra, zaldia</string>
+    <string name="base_profile_descr_pedestrian">Oinezkoa, mendizalea, korrikalaria</string>
+    <string name="base_profile_descr_public_transport">Garraio publiko mota guztiak</string>
+    <string name="base_profile_descr_boat">Barkua, arrauna, bela</string>
+    <string name="base_profile_descr_aircraft">Hegazkina, planeatzailea</string>
+    <string name="routing_profile_geocoding">Geokodetzea</string>
+    <string name="osmand_default_routing">OsmAnd ibilbide-kalkulua</string>
+    <string name="custom_routing">Ibilbide-kalkuluaren profil pertsonalizatua</string>
+    <string name="special_routing_type">Ibilbide-kalkulu berezia</string>
+    <string name="third_party_routing_type">Hirugarrengoen ibilbide-kalkulua</string>
+    <string name="quick_action_need_to_add_item_to_list">Gutxienez elementu bat gehitu behar duzu zerrendara ekintza azkarren ezarpenetan</string>
+    <string name="routing_attr_piste_type_downhill_name">Eski alpinoa edo jaitsierakoa</string>
+    <string name="routing_attr_piste_type_downhill_description">Eski alpino edo jaitsierakoarentzako maldak eta igogailuetarako sarbideak.</string>
+    <string name="routing_attr_piste_type_nordic_name">Eski nordikoa edo fondokoa</string>
+    <string name="routing_attr_piste_type_nordic_description">Eski nordiko edo fondokoarentzako bidexkak.</string>
+    <string name="routing_attr_piste_type_skitour_name">Mendiko eskia</string>
+    <string name="routing_attr_piste_type_skitour_description">Mendiko eskiarentzako ibilbideak.</string>
+    <string name="routing_attr_piste_type_sled_name">Lera</string>
+    <string name="routing_attr_piste_type_sled_description">Lera erabiltzeko maldak.</string>
+    <string name="routing_attr_allow_intermediate_name">Baimendu tarteko ibilbideak</string>
+    <string name="routing_attr_allow_intermediate_description">Ibilbide zailagoak tarte aldapatsuagoekin. Orokorrean gainditu behar diren oztopoak.</string>
+    <string name="routing_attr_allow_advanced_name">Baimendu ibilbide aurreratuak</string>
+    <string name="routing_attr_allow_advanced_description">Ibilbide zailak, oztopo arriskutsuekin eta tarte aldapatsuekin.</string>
+    <string name="routing_attr_allow_expert_name">Baimendu adituentzako ibilbideak</string>
+    <string name="routing_attr_allow_expert_description">Ibilbide oso zailak, oztopo eta ingurune arriskutsuekin.</string>
+    <string name="routing_attr_allow_skating_only_name">Baimendu skate ibilbideak soilik</string>
+    <string name="routing_attr_allow_skating_only_description">Estilo libre edo skaterako prestatutako ibilbideak, bidexka klasikorik gabe.</string>
+    <string name="routing_attr_allow_classic_only_name">Baimendu ibilbide klasikoak soilik</string>
+    <string name="routing_attr_allow_classic_only_description">Estilo klasikorako soilik prestatutako ibilbideak, skaterako bidexkarik gabe. Elurretarako motorrarekin zein eskiatzaileek egindako pistak barne.</string>
+    <string name="routing_attr_difficulty_preference_name">Hobetsitako zailtasuna</string>
+    <string name="routing_attr_difficulty_preference_description">Hobetsi zailtasun hau duten ibilbideak, baina laburragoa bada pista zailago edo errazagoak hartu daitezke.</string>
+    <string name="routing_attr_freeride_policy_description">"Pista kanpoko ibilbideak ibilbide eta pasabide ez ofizialak dira. Orokorrean ofizialki  konpondu eta prestatu gabekoak eta gauez zaindu gabeak. Sartu zure ardurapean."</string>
+    <string name="process_downloading_service">OsmAnd deskarga zerbitzua</string>
+    <string name="shared_string_color_magenta">Magenta</string>
+    <string name="shared_string_icon">Ikonoa</string>
+    <string name="collected_data">Bildutako datuak</string>
+    <string name="press_again_to_change_the_map_orientation">Sakatu berriro maparen orientazioa aldatzeko</string>
+    <string name="shared_string_min_speed">Gutxieneko abiadura</string>
+    <string name="shared_string_max_speed">Gehieneko abiadura</string>
+    <string name="default_speed_setting_title">Lehenetsitako abiadura</string>
+    <string name="default_speed_setting_descr">Aldatu lehenetsitako abiadura-ezarpenak</string>
+    <string name="minmax_speed_dialog_title">Ezarri gutxieneko/gehieneko abiadurak</string>
+    <string name="default_speed_dialog_msg">Erabili ibilbide-kalkuluetan estimatutako iritsiera ordua kalkulatzeko</string>
+    <string name="new_profile">Profil berria</string>
+    <string name="shared_string_crash">Kraskatzea</string>
+    <string name="last_launch_crashed">Aurreko OsmAnd abioak huts egin du. Lagundu gaitzazu OsmAnd hobetzen errore mezua partekatuz.</string>
+    <string name="app_mode_ufo">OHE (objektu hegalari ezezagun)</string>
+    <string name="app_mode_personal_transporter">Garraio pertsonala</string>
+    <string name="app_mode_monowheel">Monozikloa</string>
+    <string name="precision_hdop_and_vdop">Zehaztasun horizontala: %1$s, bertikala: %2$s</string>
+    <string name="precision_hdop">Zehaztasun horizontala: %s</string>
+    <string name="app_mode_offroad">Errepidez kanpokoa</string>
+    <string name="edit_profile_setup_title">Ezarri profila</string>
+    <string name="edit_profile_setup_subtitle">Profilak bere ezarpen propioak ditu</string>
+    <string name="edit_profile_setup_map_subtitle">Hautatu profilean lehenetsitako mapa-aukerak</string>
+    <string name="edit_profile_screen_options_subtitle">Hautatu profilean lehenetsitako pantaila-aukerak</string>
+    <string name="edit_profile_nav_settings_subtitle">Hautatu profilean lehenetsitako nabigazio-aukerak</string>
+    <string name="routing_attr_max_num_changes_description">Zehaztu gehieneko aldaketa kopurua</string>
+    <string name="routing_attr_max_num_changes_name">Aldaketa kopurua</string>
+    <string name="turn_screen_on_router">Piztu pantaila biraketetan</string>
+    <string name="turn_screen_on_time_descr">Ezarri pantaila piztuta mantentzeko denbora.</string>
+    <string name="turn_screen_on_sensor">Erabili gertutasun sentsorea</string>
+    <string name="turn_screen_on_sensor_descr">Agurtu eskuarekin pantailaren goialdean pantaila pizteko nabigazioan zehar.</string>
+    <string name="rendering_attr_highway_class_track_grade1_name">1. gradua</string>
+    <string name="rendering_attr_highway_class_track_grade2_name">2. gradua</string>
+    <string name="rendering_attr_highway_class_track_grade3_name">3. gradua</string>
+    <string name="rendering_attr_highway_class_track_grade4_name">4. gradua</string>
+    <string name="rendering_attr_highway_class_track_grade5_name">5. gradua</string>
+    <string name="external_input_device">Kanpoko sarrera-gailuak</string>
+    <string name="external_input_device_descr">Hautatu kanpo-kontroletarako gailu bat, esaterako teklatu generiko bat edo WunderLINQ.</string>
+    <string name="sett_no_ext_input">Bat ere ez</string>
+    <string name="sett_generic_ext_input">Teklatu generikoa</string>
+    <string name="sett_wunderlinq_ext_input">WunderLINQ</string>
+    <string name="sett_parrot_ext_input">Parrot</string>
+    <string name="turn_on_profile_desc">Aktibatu aplikazio-profilen bat ezarpen hau erabiltzeko.</string>
+    <string name="rendering_attr_winter_road_name">Elur gaineko errepidea</string>
+    <string name="rendering_attr_ice_road_name">Izotz gaineko errepidea</string>
+    <string name="routeInfo_winter_ice_road_name">Elur eta izotz gaineko errepideak</string>
+    <string name="rendering_attr_tracktype_grade1_name">Sendoa (zolatua)</string>
+    <string name="rendering_attr_tracktype_grade2_name">Sendoa (zolatu gabea)</string>
+    <string name="rendering_attr_tracktype_grade3_name">Nagusiki sendoa</string>
+    <string name="rendering_attr_tracktype_grade4_name">Nagusiki biguna</string>
+    <string name="rendering_attr_tracktype_grade5_name">Biguna</string>
+    <string name="routeInfo_tracktype_name">Gainazalaren irmotasuna</string>
+    <string name="shared_string_file_is_saved">%s gorde da</string>
+    <string name="shared_string_open_track">Ireki lorratza</string>
+    <string name="shared_string_track_is_saved">%s lorratza gorde da</string>
+    <string name="gpx_join_gaps">Elkartu hutsuneak</string>
+    <string name="app_mode_camper">Kanpinzalea</string>
+    <string name="app_mode_campervan">Karabana</string>
+    <string name="rendering_attr_showLez_description">Erakutsi emisio gutxiko zonaldeak mapan. Ez dio ibilbide-kalkuluari eragiten.</string>
+    <string name="rendering_attr_showLez_name">Erakutsi emisio gutxiko zonaldeak</string>
+    <string name="temporary_conditional_routing">Hartu behin behineko mugatzeak aintzat</string>
 </resources>

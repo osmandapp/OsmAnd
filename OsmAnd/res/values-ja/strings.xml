@@ -630,7 +630,7 @@ POIの更新は利用できません</string>
     <string name="recording_delete_confirm">この記録を削除しますか？</string>
     <string name="recording_unavailable">利用できません</string>
     <string name="recording_context_menu_arecord">音声を録音</string>
-    <string name="recording_context_menu_vrecord">動画メモを取る</string>
+    <string name="recording_context_menu_vrecord">動画メモを撮影</string>
     <string name="layer_recordings">記録レイヤー</string>
     <string name="recording_can_not_be_played">記録されたファイルは再生できませんでした</string>
     <string name="recording_context_menu_delete">記録を削除</string>
@@ -2141,7 +2141,7 @@ POIの更新は利用できません</string>
     <string name="quick_action_map_style">マップスタイルの変更</string>
     <string name="quick_action_map_style_switch">マップスタイルが\"%s\"に変更されました。</string>
     <string name="quick_action_take_audio_note">音声メモを取る</string>
-    <string name="quick_action_take_video_note">動画メモを取る</string>
+    <string name="quick_action_take_video_note">動画メモを撮影</string>
     <string name="quick_action_take_photo_note">写真メモを取る</string>
     <string name="quick_action_add_osm_bug">OSM注記を追加</string>
     <string name="quick_action_navigation_voice">音声のon/off</string>
@@ -3049,4 +3049,11 @@ POIの更新は利用できません</string>
     <string name="add_home">自宅の追加</string>
     <string name="shared_string_privacy_policy">プライバシーポリシー</string>
     <string name="settings_privacy_and_security">プライバシーとセキュリティ</string>
+    <string name="downloaded_maps">ダウンロードしたマップ</string>
+    <string name="visited_screens">アクセスした画面</string>
+    <string name="application_profiles_descr">アプリ内で使用する移動手段別プロファイルの設定をします。</string>
+    <string name="application_profiles">各プロファイルの設定</string>
+    <string name="collected_data">収集されるデータ</string>
+    <string name="shared_string_crash">動作停止エラー</string>
+    <string name="last_launch_crashed">前回OsmAndの起動に失敗しました。エラー内容を送信し、OsmAndの改善にご協力ください。</string>
 </resources>

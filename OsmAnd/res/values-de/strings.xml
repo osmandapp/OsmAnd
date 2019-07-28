@@ -3209,4 +3209,12 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="sett_parrot_ext_input">Parrot</string>
     <string name="external_input_device_descr">Ein Gerät, wie eine Tastatur oder ein WunderLINQ, zur externen Steuerung wählen.</string>
     <string name="sett_generic_ext_input">Tastatur</string>
+    <string name="rendering_attr_highway_class_track_grade1_name">Klasse 1</string>
+    <string name="rendering_attr_highway_class_track_grade2_name">Klasse 2</string>
+    <string name="rendering_attr_highway_class_track_grade3_name">Klasse 3</string>
+    <string name="rendering_attr_highway_class_track_grade4_name">Klasse 4</string>
+    <string name="rendering_attr_highway_class_track_grade5_name">Klasse 5</string>
+    <string name="rendering_attr_showLez_description">Umweltzonen auf der Karte anzeigen. Beeinflusst die Routenführung nicht.</string>
+    <string name="rendering_attr_showLez_name">Umweltzonen anzeigen</string>
+    <string name="temporary_conditional_routing">Vorübergehende Einschränkungen berückichtigen</string>
 </resources>

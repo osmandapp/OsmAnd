@@ -3206,4 +3206,7 @@
     <string name="shared_string_file_is_saved">%s está gravado</string>
     <string name="shared_string_open_track">Abrir faixa</string>
     <string name="shared_string_track_is_saved">A faixa %s está gravada</string>
+    <string name="rendering_attr_showLez_description">Mostrar zonas de baixa emissão no mapa. Não afeta o roteamento.</string>
+    <string name="rendering_attr_showLez_name">Mostrar zonas de baixa emissão</string>
+    <string name="temporary_conditional_routing">Considerar limitações temporárias</string>
 </resources>

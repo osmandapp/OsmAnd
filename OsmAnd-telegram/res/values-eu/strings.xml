@@ -153,4 +153,15 @@
     <string name="proxy_settings">Proxyaren ezarpenak</string>
     <string name="proxy">Proxya</string>
     <string name="privacy">Pribatutasuna</string>
+    <string name="turn_off_location_sharing">Itzali kokalekua partekatzea</string>
+    <string name="shared_string_select">Hautatu</string>
+    <string name="min_logging_distance">Erregistratzeko gutxieneko distantzia</string>
+    <string name="min_logging_distance_descr">Iragazkia: Puntu berria erregistratzeko distantzia minimoa</string>
+    <string name="min_logging_accuracy">Erregistroaren gutxieneko zehaztasuna</string>
+    <string name="min_logging_accuracy_descr">Iragazkia: Ez erregistratu zehaztasun hau ez badago</string>
+    <string name="min_logging_speed">Erregistratzeko gutxieneko abiadura</string>
+    <string name="min_logging_speed_descr">Iragazkia: Ez erregistratu abiadura honen azpitik</string>
+    <string name="gpx_settings">GPX ezarpenak</string>
+    <string name="timeline_no_data_descr">Ez dugu bildutako daturik hautatutako egunarentzat</string>
+    <string name="timeline_no_data">Daturik ez</string>
 </resources>
