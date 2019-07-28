@@ -948,27 +948,27 @@ public class ResourceManager {
 		}
 		return repos;
 	}
-	
-	
-	public List<TransportStop> searchTransportSync(double topLatitude, double leftLongitude, double bottomLatitude, double rightLongitude, ResultMatcher<TransportStop> matcher){
-		List<TransportIndexRepository> repos = new ArrayList<TransportIndexRepository>();
+
+
+	public List<TransportStop> searchTransportSync(double topLat, double leftLon, double bottomLat, double rightLon, ResultMatcher<TransportStop> matcher) {
+		List<TransportIndexRepository> repos = new ArrayList<>();
 		List<TransportStop> stops = new ArrayList<>();
 		for (TransportIndexRepository index : transportRepositories.values()) {
-			if (index.isUseForPublicTransport() && index.checkContains(topLatitude, leftLongitude, bottomLatitude, rightLongitude)) {
+			if (index.isUseForPublicTransport() && index.checkContains(topLat, leftLon, bottomLat, rightLon)) {
 				repos.add(index);
 			}
 		}
-		if (!repos.isEmpty()){
-			TLongArrayList addedTransportStops = new TLongArrayList();
-			for (TransportIndexRepository repository : repos) {
-				List<TransportStop> ls = new ArrayList<>();
-				repository.searchTransportStops(topLatitude, leftLongitude, bottomLatitude, rightLongitude,
-						-1, ls, matcher);
-				for (TransportStop tstop : ls) {
-					if (!addedTransportStops.contains(tstop.getId())) {
-						addedTransportStops.add(tstop.getId());
-						if (!tstop.isDeleted()) {
-							stops.add(tstop);
+		if (!repos.isEmpty()) {
+			TLongArrayList addedStops = new TLongArrayList();
+			for (int i = repos.size() - 1; i >= 0; i--) {
+				TransportIndexRepository r = repos.get(i);
+				List<TransportStop> repStops = new ArrayList<>();
+				r.searchTransportStops(topLat, leftLon, bottomLat, rightLon, -1, repStops, matcher);
+				for (TransportStop s : repStops) {
+					if (!addedStops.contains(s.getId())) {
+						addedStops.add(s.getId());
+						if (!s.isDeleted()) {
+							stops.add(s);
 						}
 					}
 				}
