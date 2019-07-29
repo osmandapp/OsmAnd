@@ -194,9 +194,12 @@ public class TransportStop extends MapObject {
 				((this.exits == null && thatObj.exits == null) || (this.exits != null && thatObj.exits != null && this.exits.size() == thatObj.exits.size()))) {
 			if (this.exits != null) {
 				for (TransportStopExit exit1 : this.exits) {
+					if(exit1 == null) {
+						return false;
+					}
 					boolean contains = false;
 					for (TransportStopExit exit2 : thatObj.exits) {
-						if (exit1.getId().equals(exit2.getId())) {
+						if (Algorithms.objectEquals(exit1, exit2) ) {
 							contains = true;
 							if (!exit1.compareExit(exit2)) {
 								return false;
