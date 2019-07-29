@@ -301,9 +301,9 @@
     <string name="no_buildings_found">Perunu edifìtziu agatau.</string>
     <string name="incremental_search_city">Chirca incrementale de sa tzitade</string>
     <string name="search_villages_and_postcodes">Chirca àteras biddas/còdighes postales</string>
-    <string name="voice_stream_voice_call">Àudio mutidas bogales (firmat fintzas sa mùsica)</string>
+    <string name="voice_stream_voice_call">Àudio mutidas bogales (pro interrùmpere sos istèreos BT de sa màchina)</string>
     <string name="voice_stream_notification">Àudio notìficas</string>
-    <string name="voice_stream_music">Àudio media/mùsica</string>
+    <string name="voice_stream_music">Àudio media/navigatzione</string>
     <string name="rendering_attr_showRoadMaps_description">Issèbera cando ammustrare mapas cun sos caminos ebbia:</string>
     <string name="rendering_attr_showRoadMaps_name">Mapas cun caminos ebbia</string>
     <string name="safe_mode_description">Allue s’aplicatzione in modalidade segura (impreende Android, prus lentu, imbetzes de su còdighe nativu).</string>
@@ -510,7 +510,7 @@
     <string name="lang_al">Albanesu</string>
     <string name="lang_ar">Àrabu</string>
     <string name="lang_sc">Sardu</string>
-    <string name="lang_sr">Serbu</string>
+    <string name="lang_sr">Serbu (tzirìllicu)</string>
     <string name="lang_zh_cn">Tzinesu (semplificadu)</string>
     <string name="lang_zh_tw">Tzinesu (traditzionale)</string>
     <string name="rendering_attr_subwayMode_name">Àndalas metropolitana</string>
@@ -2098,7 +2098,7 @@ Lon %2$s</string>
     <string name="wiki_around">Artìculos de Wikipedia a curtzu</string>
     <string name="routing_attr_allow_motorway_name">Inclue sas autostradas</string>
     <string name="routing_attr_allow_motorway_description">Inclue sas autostradas.</string>
-    <string name="lang_sr_latn">Serbu (caràteres latinos)</string>
+    <string name="lang_sr_latn">Serbu (latinu)</string>
     <string name="lang_zh_hk">Tzinesu (Hong Kong)</string>
     <string name="legacy_search">Chirca betza</string>
     <string name="show_legacy_search">Ammustra sa chirca betza</string>
@@ -3215,4 +3215,9 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="shared_string_file_is_saved">%s est sarvadu</string>
     <string name="shared_string_open_track">Aberi sa rasta</string>
     <string name="shared_string_track_is_saved">Rasta %s sarvada</string>
+    <string name="app_mode_camper">Camper</string>
+    <string name="rendering_attr_showLez_description">Ammustra sas zonas de emissione bassa in sa mapa. No infuentzat su càlculu de s\'àndala.</string>
+    <string name="rendering_attr_showLez_name">Ammustra sas zonas de emissione bassa</string>
+    <string name="temporary_conditional_routing">Mentene in cunsìderu sas limitatziones temporàneas</string>
+    <string name="shared_string_default">Predefinidu</string>
 </resources>
