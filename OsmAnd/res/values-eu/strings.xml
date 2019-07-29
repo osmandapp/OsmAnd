@@ -641,9 +641,9 @@ Biltegiratzean {1} MB erabiliko dira.
 ⇥Erabiltzeko, aktibatu \'Menua\' -&gt; \'Konfiguratu mapa\' -&gt; \'Maparen Iturburua…\' -&gt; \'Lineaz kanpoko bektore mapak\'.</string>
     <string name="choose_audio_stream">Ahots gidaritzaren irteera</string>
     <string name="choose_audio_stream_descr">Aukeratu ahots gidaritza erreproduzitzeko bozgorailua.</string>
-    <string name="voice_stream_voice_call">Ahots deiaren audioa (Kotxearen BT estereoak ere eteteko)</string>
+    <string name="voice_stream_voice_call">Ahots deiaren audioa (Kotxearen BT estereoak eteteko)</string>
     <string name="voice_stream_notification">Notifikazioen audioa</string>
-    <string name="voice_stream_music">Media/musikaren audioa</string>
+    <string name="voice_stream_music">Media/Nabigazio audioa</string>
     <string name="warning_tile_layer_not_downloadable">Aplikazioak ezin du %1$s geruza mapa deskargatu, berrinstalatzeak lagundu lezake.</string>
     <string name="overlay_transparency_descr">Eraldatu gain-azalaren gardentasuna.</string>
     <string name="overlay_transparency">Gain-azalaren gardentasuna</string>
@@ -1237,7 +1237,7 @@ Lorratza %2$s</string>
     <string name="lang_ro">Errumaniera</string>
     <string name="lang_ru">Errusiera</string>
     <string name="lang_sc">Sardiniera</string>
-    <string name="lang_sr">Serbiera</string>
+    <string name="lang_sr">Serbiera (zirilikoa)</string>
     <string name="lang_zh_cn">Txinera (sinplifikatuta)</string>
     <string name="lang_sk">Eslovakiera</string>
     <string name="lang_sl">Esloveniera</string>
@@ -2099,7 +2099,7 @@ mapak eta nabigazioa</string>
     <string name="show_legacy_search_desc">Gehitu bilaketa zaharra tiraderako zerrendan.</string>
     <string name="routing_attr_allow_motorway_name">Baimendu autobideak</string>
     <string name="routing_attr_allow_motorway_description">Baimendu autobideak.</string>
-    <string name="lang_sr_latn">Serbiera (Latinoa)</string>
+    <string name="lang_sr_latn">Serbiera (latinoa)</string>
     <string name="lang_zh_hk">Txinera (Hong Kong)</string>
     <string name="rendering_attr_hideWaterPolygons_description">Ura</string>
     <string name="rendering_attr_contourWidth_description">Sestra-kurben zabalera</string>
@@ -3179,4 +3179,6 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="rendering_attr_showLez_description">Erakutsi emisio gutxiko zonaldeak mapan. Ez dio ibilbide-kalkuluari eragiten.</string>
     <string name="rendering_attr_showLez_name">Erakutsi emisio gutxiko zonaldeak</string>
     <string name="temporary_conditional_routing">Hartu behin behineko mugatzeak aintzat</string>
+    <string name="select_base_profile_dialog_message">"Oinarritu zure  profil pertsonala lehenetsitako aplikazio profil  batean, hau da, oinarrizko konfigurazioa, widgeten eta abiadura eta distantziaren lehenetsitako ikusgarritasuna definitzen duena. Hauek dira aplikazio profil lehenetsiak, profil pertsonalizatuen adibideekin batera:"</string>
+    <string name="app_mode_scooter">Motoa</string>
 </resources>

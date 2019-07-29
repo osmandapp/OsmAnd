@@ -410,9 +410,9 @@
 \n\t\n\tכדי להשתמש בה יש להפעיל את \'תפריט\' -&gt; \'הגדרת תצוגה\' -&gt; \'מקור המפה…\' -&gt; \'מפות וקטוריות בלתי מקוונות\'.</string>
     <string name="choose_audio_stream">פלט ההנחיה הקולית</string>
     <string name="choose_audio_stream_descr">נא לבחור בערוץ להשמעת ההנחיה הקולית.</string>
-    <string name="voice_stream_voice_call">שמע שיחה (גם כדי להפריע לרמקולי ה־BT של האוטו)</string>
+    <string name="voice_stream_voice_call">שמע שיחה (כדי להפריע לרמקולי ה־BT של המכונית)</string>
     <string name="voice_stream_notification">שמע להתרעה</string>
-    <string name="voice_stream_music">שמע למוזיקה/מדיה</string>
+    <string name="voice_stream_music">שמע לניווט/מדיה</string>
     <string name="warning_tile_layer_not_downloadable">ליישומון אין אפשרות להוריד את שכבת המפה %1$s, התקנה מחדש עשויה לסייע.</string>
     <string name="overlay_transparency_descr">שינוי שקיפות שכבת העל.</string>
     <string name="overlay_transparency">שקיפות שכבת העל</string>
@@ -1227,8 +1227,8 @@
     <string name="lang_ro">רומנית</string>
     <string name="lang_ru">רוסית</string>
     <string name="lang_sc">סרדו</string>
-    <string name="lang_sr">סרבית</string>
-    <string name="lang_sr_latn">סרבית (לטינית)</string>
+    <string name="lang_sr">סרבית קירילית</string>
+    <string name="lang_sr_latn">סרבית לטינית</string>
     <string name="lang_zh_cn">סינית מפושטת</string>
     <string name="lang_zh_hk">סינית (הונג קונג)</string>
     <string name="lang_sk">סלובקית</string>
@@ -3134,4 +3134,15 @@
     <string name="rendering_attr_showLez_description">הצגת אזורים עם פליטה נמוכה במפה. לא משפיע על הניווט.</string>
     <string name="rendering_attr_showLez_name">הצגת אזורים עם פליטה נמוכה</string>
     <string name="temporary_conditional_routing">התייחסות למגבלות זמניות</string>
+    <string name="rate_dialog_descr">נא להקדיש לנו 30 שניות כדי לשתף אתנו את המשוב והדירוג שלך על עבודתנו ב־Google Play.</string>
+    <string name="downloaded_maps_collect_descr">מסייע לנו להבין אילו מפות באילו אזורים ומדינות הן הפופולריות ביותר.</string>
+    <string name="osmand_routing_promo">באפשרותך להוסיף גרסה משופצת משלך ל־routing.xml תחת ‎..osmand/routing</string>
+    <string name="select_nav_profile_dialog_title">בחירת סוג ניווט</string>
+    <string name="base_profile_descr_car">מכונית, משאית, אופנוע</string>
+    <string name="base_profile_descr_bicycle">אופני הרים, טוסטוס, סוס</string>
+    <string name="base_profile_descr_pedestrian">הליכה, טיול הרים, ריצה</string>
+    <string name="base_profile_descr_public_transport">כל סוגי התחב״צ</string>
+    <string name="base_profile_descr_boat">ספינה, חתירה, שיט</string>
+    <string name="base_profile_descr_aircraft">טיסה, דאייה</string>
+    <string name="shared_string_default">בררת מחדל</string>
 </resources>

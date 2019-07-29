@@ -243,4 +243,9 @@
     <string name="gpx_settings">הגדרות GPX</string>
     <string name="timeline_no_data_descr">לא אספנו נתונים ליום הנבחר</string>
     <string name="timeline_no_data">אין נתונים</string>
+    <string name="shared_string_end">סיום</string>
+    <string name="shared_string_start">התחלה</string>
+    <string name="shared_string_apply">החלה</string>
+    <string name="set_time_timeline_descr">בחירת זמן להצגה</string>
+    <string name="start_end_date">תאריך התחלה - סיום</string>
 </resources>

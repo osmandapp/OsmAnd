@@ -339,7 +339,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="internet_connection_required_for_online_route">S\'ha seleccionat un servei de navegació en línia però no esteu connectat a Internet.</string>
     <string name="tts_missing_language_data_title">Falten dades</string>
     <string name="voice_stream_notification">Àudio d\'avís</string>
-    <string name="voice_stream_music">Àudio de multimèdia/música</string>
+    <string name="voice_stream_music">Àudio de multimèdia/navegació</string>
     <string name="shared_string_none">Cap</string>
     <string name="tile_source_already_installed">El mapa ja està instal·lat, s\'actualitzarà \'Configuració\'.</string>
     <string name="select_tile_source_to_install">Seleccioneu els mapes (de tessel·les) per instal·lar o actualitzar.</string>
@@ -821,7 +821,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="shared_string_clear">Neteja</string>
     <string name="edit_filter_delete_dialog_title">Voleu eliminar el filtre seleccionat?</string>
     <string name="no_route">Sense ruta</string>
-    <string name="voice_stream_voice_call">Àudio de trucada telefònica (també de interrupció de la música del cotxe)</string>
+    <string name="voice_stream_voice_call">Àudio de trucada telefònica (interrupció de la música BT del cotxe)</string>
     <string name="enable_plugin_monitoring_services">"Habiliteu el connector \"Enregistrament de ruta\"  per utilitzar els serveis de registre d\'ubicació (enregistrament GPX, seguiment en directe)"</string>
     <string name="gps_not_available">Habiliteu el GPS a les preferències</string>
     <string name="zxing_barcode_scanner_not_found">L\'aplicació ZXing Barcode Scanner no està instal·lada. La voleu cercar a Google Play?</string>
@@ -1300,7 +1300,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="lang_al">Albanès</string>
     <string name="lang_ar">Àrab</string>
     <string name="lang_sc">Sard</string>
-    <string name="lang_sr">Serbi</string>
+    <string name="lang_sr">Serbi (ciríl·lic)</string>
     <string name="lang_zh_cn">Xinès (simplificat)</string>
     <string name="lang_zh_tw">Xinès (tradicional)</string>
     <string name="rendering_attr_subwayMode_name">Rutes de metro</string>
@@ -2107,7 +2107,7 @@ L\'espai disponible és només de {2} MB.</string>
     <string name="show_legacy_search_desc">Afegeix la cerca de llegat en la llista desplegable.</string>
     <string name="routing_attr_allow_motorway_name">Permet les autopistes</string>
     <string name="routing_attr_allow_motorway_description">Permet les autopistes.</string>
-    <string name="lang_sr_latn">Serbi (alfabet llatí)</string>
+    <string name="lang_sr_latn">Serbi (llatí)</string>
     <string name="lang_zh_hk">Xinès (Hong Kong)</string>
     <string name="rendering_attr_contourWidth_description">Gruix de la corba de nivell</string>
     <string name="rendering_attr_contourWidth_name">Gruix de la corba de nivell</string>
@@ -3231,4 +3231,5 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="rendering_attr_showLez_description">Mostra les zones de baixes emissions al mapa. No afecta el càlcul de ruta.</string>
     <string name="rendering_attr_showLez_name">Mostra les zones de baixes emissions</string>
     <string name="temporary_conditional_routing">Considereu les limitacions temporals</string>
+    <string name="shared_string_default">Per defecte</string>
 </resources>
