@@ -8,7 +8,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-
 public class TransportStop extends MapObject {
 
 	private static final int DELETED_STOP = -1;
@@ -32,6 +31,13 @@ public class TransportStop extends MapObject {
 	
 	public void setRoutes(List<TransportRoute> routes) {
 		this.routes = routes;
+	}
+	
+	public void addRoute(TransportRoute rt) {
+		if (this.routes == null) {
+			this.routes = new ArrayList<TransportRoute>();
+		}
+		this.routes.add(rt);
 	}
 
 	public int[] getReferencesToRoutes() {
@@ -187,8 +193,18 @@ public class TransportStop extends MapObject {
 				// ((this.routesIds == null && thatObj.routesIds == null) || (this.routesIds != null && this.routesIds.equals(thatObj.routesIds))) &&
 				((this.exits == null && thatObj.exits == null) || (this.exits != null && thatObj.exits != null && this.exits.size() == thatObj.exits.size()))) {
 			if (this.exits != null) {
-				for (int i = 0; i < this.exits.size(); i++) {
-					if (!this.exits.get(i).compareExit(thatObj.exits.get(i))) {
+				for (TransportStopExit exit1 : this.exits) {
+					boolean contains = false;
+					for (TransportStopExit exit2 : thatObj.exits) {
+						if (exit1.getId().equals(exit2.getId())) {
+							contains = true;
+							if (!exit1.compareExit(exit2)) {
+								return false;
+							}
+							break;
+						}
+					}
+					if (!contains) {
 						return false;
 					}
 				}

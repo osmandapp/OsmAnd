@@ -1,5 +1,20 @@
 package net.osmand.router;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.PriorityQueue;
+
+import gnu.trove.iterator.TIntIterator;
+import gnu.trove.list.array.TIntArrayList;
+import gnu.trove.map.hash.TIntObjectHashMap;
+import gnu.trove.map.hash.TLongObjectHashMap;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.data.LatLon;
@@ -10,20 +25,6 @@ import net.osmand.data.TransportStop;
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.Way;
 import net.osmand.util.MapUtils;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.PriorityQueue;
-
-import gnu.trove.iterator.TIntIterator;
-import gnu.trove.list.array.TIntArrayList;
-import gnu.trove.map.hash.TIntObjectHashMap;
-import gnu.trove.map.hash.TLongObjectHashMap;
 
 public class TransportRoutePlanner {
 	
@@ -761,91 +762,152 @@ public class TransportRoutePlanner {
 			int pz = (31 - cfg.ZOOM_TO_LOAD_TILES);
 			SearchRequest<TransportStop> sr = BinaryMapIndexReader.buildSearchTransportRequest(x << pz, (x + 1) << pz,
 					y << pz, (y + 1) << pz, -1, null);
-			TIntArrayList references = new TIntArrayList();
-			TIntArrayList referencesToLoad = new TIntArrayList();
-			// should it be global?
+			
+			// could be global ?
 			TLongObjectHashMap<TransportStop> loadedTransportStops = new TLongObjectHashMap<TransportStop>();
+			
+			TIntArrayList localFileRoutesToLoad = new TIntArrayList();
 			for (BinaryMapIndexReader r : routeMap.keySet()) {
 				sr.clearSearchResults();
-				references.clear();
-				referencesToLoad.clear();
-
-				List<TransportStop> existingStops = null;
 				List<TransportStop> stops = r.searchTransportIndex(sr);
-				for (TransportStop s : stops) {
-					if (!loadedTransportStops.contains(s.getId())) {
-						loadedTransportStops.put(s.getId(), s);
-						if (!s.isDeleted()) {
-							references.addAll(s.getReferencesToRoutes());
-						}
-					} else {
-						if (existingStops == null) {
-							existingStops = new ArrayList<>();
-						}
-						existingStops.add(s);
-					}
-				}
-				if (existingStops != null && existingStops.size() > 0) {
-					stops.removeAll(existingStops);
-				}
-
-				if (references.size() > 0) {
-					references.sort();
+				
+				localFileRoutesToLoad.clear();
+				prepareRoutesToLoad(loadedTransportStops, stops, localFileRoutesToLoad);
+				
+				
+				// load routes and create transport segments
+				TIntObjectHashMap<TransportRoute> localFileRoutes = new TIntObjectHashMap<TransportRoute>();
+				if (localFileRoutesToLoad.size() > 0) {
+					localFileRoutesToLoad.sort();
+					TIntArrayList referencesToLoad = new TIntArrayList();
 					TIntObjectHashMap<TransportRoute> loadedRoutes = routeMap.get(r);
-					TIntObjectHashMap<TransportRoute> routes = new TIntObjectHashMap<TransportRoute>();
-					TIntIterator it = references.iterator();
-					int p = references.get(0) + 1; // different
+					TIntIterator it = localFileRoutesToLoad.iterator();
+					int p = localFileRoutesToLoad.get(0) + 1; // different
 					while (it.hasNext()) {
 						int nxt = it.next();
 						if (p != nxt) {
 							if (loadedRoutes.contains(nxt)) {
-								routes.put(nxt, loadedRoutes.get(nxt));
+								localFileRoutes.put(nxt, loadedRoutes.get(nxt));
 							} else {
 								referencesToLoad.add(nxt);
 							}
 						}
 					}
-					r.loadTransportRoutes(referencesToLoad.toArray(), routes);
-					loadedRoutes.putAll(routes);
-					loadTransportSegments(routes, r, stops, lst);
+					r.loadTransportRoutes(referencesToLoad.toArray(), localFileRoutes);
+					loadedRoutes.putAll(localFileRoutes);
+				}
+				
+				for (TransportStop stop : stops) {
+					long stopId = stop.getId();
+					TransportStop multifileStop = loadedTransportStops.get(stopId);
+					int[] rrs = stop.getReferencesToRoutes();
+					if (multifileStop == stop) {
+						// clear up so it won't be used as it is multi file stop
+						stop.setReferencesToRoutes(null);
+					} else {
+						// add other routes
+						stop.setReferencesToRoutes(null);
+					}
+					if(rrs != null && !multifileStop.isDeleted()) {
+						for(int i = 0; i < rrs.length; i++) {
+							TransportRoute route = localFileRoutes.get(rrs[i]);
+							if(route == null) {
+								System.err.println(String.format("Something went wrong by loading route %d for stop %s", rrs[i], stop));
+							} else if(multifileStop == stop ||
+									(!multifileStop.hasRoute(route.getId()) && 
+									!multifileStop.isRouteDeleted(route.getId()))){
+								// duplicates won't be added
+								multifileStop.addRouteId(route.getId());
+								multifileStop.addRoute(route);
+							}
+							
+						}
+					}
 				}
 			}
+			
+			loadTransportSegments(loadedTransportStops.valueCollection(), lst);
+			
 			readTime += System.nanoTime() - nanoTime;
 			return lst;
 		}
 
-		private void loadTransportSegments(TIntObjectHashMap<TransportRoute> routes, BinaryMapIndexReader r,
-				List<TransportStop> stops, List<TransportRouteSegment> lst) throws IOException {
+		private List<TransportStop> prepareRoutesToLoad(TLongObjectHashMap<TransportStop> loadedTransportStops,
+				List<TransportStop> stops, TIntArrayList resRoutesToLoad) {
+			Iterator<TransportStop> it = stops.iterator();
+			while (it.hasNext()) {
+				TransportStop stop = it.next();
+				long stopId = stop.getId();
+				TransportStop multifileStop = loadedTransportStops.get(stopId);
+				long[] routesIds = stop.getRoutesIds();
+				long[] delRIds = stop.getDeletedRoutesIds();
+				if (multifileStop == null) {
+					loadedTransportStops.put(stopId, stop);
+					if(!stop.isDeleted()) {
+						resRoutesToLoad.addAll(stop.getReferencesToRoutes());
+					}
+				} else if(multifileStop.isDeleted()){
+					// stop has noting to load, so not needed
+					it.remove();
+				} else {
+					if (delRIds != null) {
+						for (long deletedRouteId : delRIds) {
+							multifileStop.addDeletedRouteId(deletedRouteId);
+						}
+					}
+					if (routesIds != null && routesIds.length > 0) {
+						int[] refs = stop.getReferencesToRoutes();
+						for (int i = 0; i < routesIds.length; i++) {
+							long routeId = routesIds[i];
+							if (!multifileStop.hasRoute(routeId) && !multifileStop.isRouteDeleted(routeId)) {
+								resRoutesToLoad.add(refs[i]);
+							}
+						}
+					} else {
+						if (stop.hasReferencesToRoutes()) {
+							// old format
+							resRoutesToLoad.addAll(stop.getReferencesToRoutes());
+						} else {
+							// stop has noting to load, so not needed
+							it.remove();
+						}
+					}
+				}
+			}
+			return stops;
+		}
+
+		private void loadTransportSegments(Collection<TransportStop> stops, List<TransportRouteSegment> lst) throws IOException {
 			for(TransportStop s : stops) {
-				if (s.isDeleted()) {
+				if (s.isDeleted() || s.getRoutes() == null) {
 					continue;
 				}
-				for (int ref : s.getReferencesToRoutes()) {
-					TransportRoute route = routes.get(ref);
-					if (route != null) {
-						int stopIndex = -1;
-						double dist = TransportRoute.SAME_STOP;
-						for (int k = 0; k < route.getForwardStops().size(); k++) {
-							TransportStop st = route.getForwardStops().get(k);
-							double d = MapUtils.getDistance(st.getLocation(), s.getLocation());
-							if (d < dist) {
-								stopIndex = k;
-								dist = d; 
-							}
+				for (TransportRoute route : s.getRoutes()) {
+					int stopIndex = -1;
+					double dist = TransportRoute.SAME_STOP;
+					for (int k = 0; k < route.getForwardStops().size(); k++) {
+						TransportStop st = route.getForwardStops().get(k);
+						if(st.getId().longValue() == s.getId().longValue() ) {
+							stopIndex = k;
+							break;
 						}
-						if (stopIndex != -1) {
-							if(cfg.useSchedule) {
-								loadScheduleRouteSegment(lst, route, stopIndex);
-							} else {
-								TransportRouteSegment segment = new TransportRouteSegment(route, stopIndex);
-								lst.add(segment);
-							}
+						double d = MapUtils.getDistance(st.getLocation(), s.getLocation());
+						if (d < dist) {
+							stopIndex = k;
+							dist = d;
+						}
+					}
+					if (stopIndex != -1) {
+						if (cfg.useSchedule) {
+							loadScheduleRouteSegment(lst, route, stopIndex);
 						} else {
-							// MapUtils.getDistance(s.getLocation(), route.getForwardStops().get(158).getLocation());
-							System.err.println(
-									String.format("Routing error: missing stop '%s' in route '%s' id: %d",
-											s.toString(), route.getRef(), route.getId() / 2));
+							TransportRouteSegment segment = new TransportRouteSegment(route, stopIndex);
+							lst.add(segment);
 						}
+					} else {
+						// MapUtils.getDistance(s.getLocation(), route.getForwardStops().get(158).getLocation());
+						System.err.println(String.format("Routing error: missing stop '%s' in route '%s' id: %d",
+								s.toString(), route.getRef(), route.getId() / 2));
 					}
 				}
 			}
