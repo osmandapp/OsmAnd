@@ -19,7 +19,7 @@
     <string name="choose_audio_stream_descr">音声案内を再生するチャンネルを選択します</string>
     <string name="voice_stream_voice_call">通話ストリーム(BT接続カーステレオも中断)</string>
     <string name="voice_stream_notification">通知ストリーム</string>
-    <string name="voice_stream_music">音楽ストリーム</string>
+    <string name="voice_stream_music">メディア/ナビ音声ストリーム</string>
     <string name="warning_tile_layer_not_downloadable">アプリケーションはマップレイヤー %1$sをダウンロードできません、再度インストールしてみてください。</string>
     <string name="overlay_transparency_descr">オーバーレイマップの透明度を設定します</string>
     <string name="overlay_transparency">オーバーレイ透明度</string>
@@ -1283,7 +1283,7 @@ POIの更新は利用できません</string>
     <string name="lang_ro">ルーマニア語</string>
     <string name="lang_ru">ロシア語</string>
     <string name="lang_sc">サルデーニャ語</string>
-    <string name="lang_sr">セルビア語</string>
+    <string name="lang_sr">セルビア語(キリル文字)</string>
     <string name="lang_zh_cn">中国語 (簡体字)</string>
     <string name="lang_sk">スロバキア語</string>
     <string name="lang_sl">スロベニア語</string>
@@ -1554,9 +1554,9 @@ POIの更新は利用できません</string>
     <string name="rendering_value__name">標準</string>
     <string name="rendering_value_highContrastRoads_name">ハイコントラスト道路</string>
     <string name="rendering_attr_hideHouseNumbers_name">番地</string>
-    <string name="application_dir_change_warning3">OsmAndとそのデータファイルを新しい保存先にコピーしますか？</string>
+    <string name="application_dir_change_warning3">OsmAndとそのデータファイルを新しい保存先に移動させますか？</string>
     <string name="specified_directiory_not_writeable">指定したディレクトリ内にマップを作成(あるいは書き込みが)できませんでした</string>
-    <string name="copying_osmand_file_failed">ファイルのコピーに失敗しました</string>
+    <string name="copying_osmand_file_failed">ファイルの移動に失敗しました</string>
     <string name="storage_directory_external">外部ストレージ</string>
     <string name="storage_directory_multiuser">マルチユーザーストレージ</string>
     <string name="storage_directory_internal_app">アプリの専用記憶域</string>
@@ -1662,7 +1662,7 @@ POIの更新は利用できません</string>
     <string name="app_name_osmand">OsmAnd</string>
     <string name="offline_maps_and_navigation">Offline Maps\n&amp; Navigation</string>
     <string name="commit_poi">POIを申請する</string>
-    <string name="av_locations_descr">GPXファイルに位置に関するメモを付けます。</string>
+    <string name="av_locations_descr">位置情報付きGPXファイルです。</string>
     <string name="av_locations">位置</string>
     <string name="poi_action_delete">削除</string>
     <string name="shared_string_card_was_hidden">項目は非表示</string>
@@ -2085,7 +2085,7 @@ POIの更新は利用できません</string>
     <string name="shared_string_change">変更</string>
     <string name="get_started">スタート</string>
     <string name="lang_kab">カビル語</string>
-    <string name="lang_sr_latn">セルビア語 (ラテン)</string>
+    <string name="lang_sr_latn">セルビア語 (ラテン文字)</string>
     <string name="lang_zh_hk">中国語 (香港)</string>
     <string name="driving_region_australia">オーストラリア</string>
     <string name="gpx_no_tracks_title">フォルダ内に経路データが存在しません</string>
@@ -2993,7 +2993,7 @@ POIの更新は利用できません</string>
 \n• 距離測定時に方位を表示</string>
     <string name="shared_string_degrees">度</string>
     <string name="shared_string_milliradians">ミリラジアン</string>
-    <string name="angular_measeurement">角度測定ユニット</string>
+    <string name="angular_measeurement">角度単位</string>
     <string name="angular_measeurement_descr">方位角度の単位を変更します。</string>
     <string name="avoid_pt_types_descr">ナビゲーション時に使用したくない公共交通機関を指定します:</string>
     <string name="quick_action_day_night_mode">%sモード</string>
@@ -3100,4 +3100,117 @@ POIの更新は利用できません</string>
     <string name="rendering_attr_showLez_description">マップ上に低排出ゾーン(CO2排出量の多い車両に課税するエリア)を表示します。ルーティングには影響しません。</string>
     <string name="rendering_attr_showLez_name">低排出ゾーンの表示</string>
     <string name="shared_string_default">デフォルト</string>
+    <string name="exit_at">終点</string>
+    <string name="transfers_size">%1$d回の乗り換え</string>
+    <string name="shared_string_walk">歩行</string>
+    <string name="send_log">ログの送信</string>
+    <string name="files_moved">%1$d個のファイルを移動しました。(%2$s)</string>
+    <string name="files_copied">%1$d個のファイルをコピーしました。(%2$s)</string>
+    <string name="files_failed">%1$d個のファイルのコピーに失敗しました。(%2$s)</string>
+    <string name="files_present">%1$d個のファイル(%2$s)は、以前の場所\'%3$s\'に残っています。</string>
+    <string name="move_maps">マップの移動</string>
+    <string name="dont_move_maps">移動しない</string>
+    <string name="public_transport_ped_route_title">徒歩でのルートは約%1$sで、公共交通機関の利用よりも速い可能性があります</string>
+    <string name="public_transport_no_route_title">残念ながらOsmAndでは設定に即したルートを見つけることができませんでした。</string>
+    <string name="public_transport_try_ped">徒歩移動用ナビゲーションを試してください。</string>
+    <string name="public_transport_try_change_settings">設定を変更してみてください。</string>
+    <string name="public_transport_calc_pedestrian">徒歩移動でのルートを計算</string>
+    <string name="public_transport_type">交通機関の種類</string>
+    <string name="searching_gps">GPS検索</string>
+    <string name="rate_dialog_descr">あなたからのフィードバック共有や、Google Playで私たちの成果を評価するためにあなたの30秒を分けてください。</string>
+    <string name="button_rate">レート</string>
+    <string name="help_us_make_osmand_better">OsmAndの改善にご協力ください</string>
+    <string name="make_osmand_better_descr">OsmAndに匿名のアプリケーション使用状況データの収集と処理を許可します。利用者の位置やマップ上で見た場所についてのデータは収集や保存はしません。
+\n
+\n[設定]＞[プライバシーとセキュリティ]からいつでも設定を変更できます。</string>
+    <string name="choose_data_to_share">どの種類のデータを共有するかを選択:</string>
+    <string name="collected_data_descr">OsmAndで共有を許可するデータを定義します。</string>
+    <string name="downloaded_maps_collect_descr">どの地域や国のどの地図が最も需要があるのかを把握するのに役立ちます。</string>
+    <string name="visited_screens_collect_descr">どのOsmAnd機能が最も需要があるのかを把握するのに役立ちます。</string>
+    <string name="privacy_and_security_change_descr">\"許可\"をタップすると、我々が提示した%1$sに同意したとみなされます。</string>
+    <string name="shared_string_no_thank_you">いいえ、結構です</string>
+    <string name="shared_string_allow">許可</string>
+    <string name="profile_name_hint">プロファイル名</string>
+    <string name="nav_type_hint">ナビゲーションタイプ</string>
+    <string name="app_mode_taxi">タクシー</string>
+    <string name="app_mode_shuttle_bus">シャトルバス</string>
+    <string name="app_mode_subway">地下鉄</string>
+    <string name="app_mode_horse">馬</string>
+    <string name="app_mode_helicopter">ヘリコプター</string>
+    <string name="app_mode_skiing">スキー</string>
+    <string name="base_profile_descr_ski">スキー</string>
+    <string name="show_compass_ruler">コンパス定規を表示</string>
+    <string name="hide_compass_ruler">コンパス定規を非表示</string>
+    <string name="settings_routing_mode_string">モード:%s</string>
+    <string name="settings_derived_routing_mode_string">ユーザーモード、派生元:%s</string>
+    <string name="routing_profile_ski">スキー</string>
+    <string name="profile_type_descr_string">タイプ:%s</string>
+    <string name="profile_alert_need_routing_type_title">ナビゲーションタイプを選択</string>
+    <string name="profile_alert_need_routing_type_msg">新規アプリケーションプロファイルのナビゲーションタイプを選択してください</string>
+    <string name="profile_alert_need_profile_name_title">プロファイル名を入力</string>
+    <string name="profile_alert_need_profile_name_msg">プロファイル名が入力されていません！</string>
+    <string name="profile_alert_duplicate_name_title">名前の重複</string>
+    <string name="profile_alert_duplicate_name_msg">そのプロファイル名は既に使用されています</string>
+    <string name="profile_alert_cant_delete_base">OsmAndの基本プロファイルは削除できません</string>
+    <string name="profile_alert_need_save_title">変更の保存</string>
+    <string name="profile_alert_need_save_msg">続行するにはプロファイルへの変更を保存する必要があります</string>
+    <string name="profile_alert_delete_title">プロファイルの削除</string>
+    <string name="profile_alert_delete_msg">プロファイル %s を削除してよろしいですか？</string>
+    <string name="select_base_profile_dialog_title">ベースプロファイルの選択</string>
+    <string name="select_base_profile_dialog_message">カスタムプロファイルは標準のアプリケーションプロファイルを元に作成します。ウィジェットなどの表示設定や速度と距離の単位などの標準設定をプロファイルごとに定義可能です。これらは標準のアプリプロファイルを基本としており、今後それらと共に拡張される可能性があります:</string>
+    <string name="select_nav_profile_dialog_title">ナビゲーションタイプの選択</string>
+    <string name="base_profile_descr_car">乗用車,トラック,オートバイ</string>
+    <string name="base_profile_descr_bicycle">MTB,モペッド(ペダル付き原動機付自転車),馬</string>
+    <string name="base_profile_descr_pedestrian">徒歩,ハイキング,ランニング</string>
+    <string name="base_profile_descr_public_transport">すべての公共交通機関</string>
+    <string name="base_profile_descr_boat">エンジン付き船舶,漕ぎボート,帆船</string>
+    <string name="base_profile_descr_aircraft">航空機,グライダー</string>
+    <string name="routing_profile_geocoding">ジオコーディング</string>
+    <string name="routing_profile_straightline">直線</string>
+    <string name="routing_profile_broutrer">BRouter(オフライン)</string>
+    <string name="osmand_default_routing">OsmAndルーティング</string>
+    <string name="custom_routing">カスタムルーティングプロファイル</string>
+    <string name="special_routing_type">特殊ルーティング</string>
+    <string name="third_party_routing_type">サードパーティー製ルーティング</string>
+    <string name="process_downloading_service">OsmAndダウンロード機能</string>
+    <string name="shared_string_color_magenta">マゼンタ</string>
+    <string name="press_again_to_change_the_map_orientation">もう一度タップするとマップの向きが変わります</string>
+    <string name="default_speed_setting_descr">デフォルトの速度設定を変更</string>
+    <string name="minmax_speed_dialog_title">最低/最高速度を設定</string>
+    <string name="new_profile">新規プロファイル</string>
+    <string name="app_mode_ufo">UFO(未確認飛行物体)</string>
+    <string name="release_3_4">• アプリケーションプロファイル機能:数種類のアイコンと色を使い、利用者のニーズに合ったカスタムプロファイルを作成可能に
+\n
+\n• すべてのプロファイルで標準速度および最低/最高速度を任意設定可能に
+\n
+\n• 座標用ウィジェットの追加
+\n
+\n• マップ上にコンパスと半径定規を表示するオプションの追加
+\n
+\n• バックグラウンドで動く経路記録機能を修正
+\n
+\n• マップのバックグラウンドダウンロードの改善
+\n
+\n• 方向転換時の画面ON機能の復活
+\n
+\n• ウィキペディアの言語選択を修正
+\n
+\n• ナビゲーション中のコンパスボタンの動作を修正
+\n
+\n• その他のバグ修正
+\n
+\n</string>
+    <string name="app_mode_personal_transporter">個人輸送業者</string>
+    <string name="app_mode_monowheel">モノホイール</string>
+    <string name="app_mode_scooter">スクーター</string>
+    <string name="precision_hdop_and_vdop">"精度 水平方向: %1$s,  垂直方向:%2$s"</string>
+    <string name="precision_hdop">水平精度: %s</string>
+    <string name="rendering_attr_highway_class_track_grade1_name">グレード1</string>
+    <string name="rendering_attr_highway_class_track_grade2_name">グレード2</string>
+    <string name="rendering_attr_highway_class_track_grade3_name">グレード3</string>
+    <string name="rendering_attr_highway_class_track_grade4_name">グレード4</string>
+    <string name="rendering_attr_highway_class_track_grade5_name">グレード5</string>
+    <string name="shared_string_open_track">経路を開く</string>
+    <string name="shared_string_track_is_saved">経路%sは保存されました</string>
+    <string name="temporary_conditional_routing">一時的な制限の検討</string>
 </resources>
