@@ -292,9 +292,9 @@
     <string name="switch_to_vector_map_to_see">Pre túto oblasť je dostupná offline vektorová mapa.\n\t\n\tNa jej použitie aktivujte Menu → Zobrazenie → Zdroj mapy… → Vektorové OSM mapy.</string>
     <string name="choose_audio_stream">Výstup hlasových pokynov</string>
     <string name="choose_audio_stream_descr">Vybrať reproduktor pre prehrávanie hlasových pokynov.</string>
-    <string name="voice_stream_voice_call">Zvuk telefónneho hovoru (tiež preruší Bluetooth stereo v aute)</string>
+    <string name="voice_stream_voice_call">Zvuk telefónneho hovoru (preruší Bluetooth stereo v aute)</string>
     <string name="voice_stream_notification">Oznámenia</string>
-    <string name="voice_stream_music">Hudba/médiá</string>
+    <string name="voice_stream_music">Médiá/Zvuky navigácie</string>
     <string name="warning_tile_layer_not_downloadable">Aplikácia nemôže stiahnuť mapovú vrstvu %1$s, preinštalovanie môže pomôcť.</string>
     <string name="overlay_transparency_descr">Zmeniť priehľadnosť prekrývacej mapy.</string>
     <string name="overlay_transparency">Priehľadnosť prekrývacej mapy</string>
@@ -1231,7 +1231,7 @@ Proporčná pamäť %4$s MB (Limit Androidu %5$s MB, Dalvik %6$s MB).</string>
     <string name="lang_al">Albánsky</string>
     <string name="lang_ar">Arabsky</string>
     <string name="lang_sc">Sardínsky</string>
-    <string name="lang_sr">Srbsky</string>
+    <string name="lang_sr">Srbsky (Cyrilika)</string>
     <string name="lang_zh_cn">Čínština (Zjednodušená)</string>
     <string name="lang_zh_tw">Čínština (Tradičná)</string>
     <string name="continue_navigation">Pokračovať v navigácii</string>
@@ -3196,4 +3196,11 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="shared_string_file_is_saved">%s je uložený</string>
     <string name="shared_string_open_track">Otvoriť stopu</string>
     <string name="shared_string_track_is_saved">Stopa %s je uložená</string>
+    <string name="gpx_join_gaps">Spojiť medzery</string>
+    <string name="app_mode_camper">Obytný príves</string>
+    <string name="app_mode_campervan">Obytné vozidlo</string>
+    <string name="rendering_attr_showLez_description">Zobraziť Zóny s nízkymi emisiami na mape. Neovplyvňuje navigáciu.</string>
+    <string name="rendering_attr_showLez_name">Zobraziť Zóny s nízkymi emisiami</string>
+    <string name="temporary_conditional_routing">Zohľadniť dočasné obmedzenia</string>
+    <string name="shared_string_default">Predvolené</string>
 </resources>
