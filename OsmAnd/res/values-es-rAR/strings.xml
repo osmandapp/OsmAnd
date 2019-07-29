@@ -333,7 +333,7 @@ Lon %2$s</string>
     <string name="lang_ro">Rumano</string>
     <string name="lang_ru">Ruso</string>
     <string name="lang_sc">Sardo</string>
-    <string name="lang_sr">Serbio</string>
+    <string name="lang_sr">Serbio (cirílico)</string>
     <string name="lang_zh_cn">Chino (simplificado)</string>
     <string name="lang_sk">Eslovaco</string>
     <string name="lang_sl">Esloveno</string>
@@ -1147,9 +1147,9 @@ Lon %2$s</string>
 \n\tPara usarlo activa «Menú» → «Configurar mapa» → «Fuente del mapa…» → «Mapas vectoriales sin conexión».</string>
     <string name="choose_audio_stream">Salida de indicaciones por voz</string>
     <string name="choose_audio_stream_descr">Elige que altavoz reproducirá indicaciones por voz.</string>
-    <string name="voice_stream_voice_call">Audio de llamada telefónica (también en altavoces estéreos con Bluetooth)</string>
+    <string name="voice_stream_voice_call">Audio de llamada telefónica (para altavoces estéreos con Bluetooth)</string>
     <string name="voice_stream_notification">Notificación auditiva</string>
-    <string name="voice_stream_music">Audio de multimedia</string>
+    <string name="voice_stream_music">Audio de multimedia/navegación</string>
     <string name="warning_tile_layer_not_downloadable">La aplicación no puede descargar la capa del mapa «%1$s», reinstalarla podría ayudar.</string>
     <string name="overlay_transparency_descr">Modifica la transparencia de la capa superpuesta.</string>
     <string name="overlay_transparency">Transparencia de superposición</string>
@@ -2097,7 +2097,7 @@ Lon %2$s</string>
     <string name="show_legacy_search_desc">Añade el modo de búsqueda clásica a la lista del panel lateral.</string>
     <string name="routing_attr_allow_motorway_name">Permitir autopistas</string>
     <string name="routing_attr_allow_motorway_description">Permite pasar por autopistas.</string>
-    <string name="lang_sr_latn">Serbio (Latino)</string>
+    <string name="lang_sr_latn">Serbio (latino)</string>
     <string name="lang_zh_hk">Chino (Hong Kong)</string>
     <string name="rendering_attr_hideWaterPolygons_description">Agua</string>
     <string name="rendering_attr_contourDensity_description">Densidad de la curva de nivel</string>
@@ -3214,4 +3214,5 @@ Lon %2$s</string>
     <string name="rendering_attr_showLez_description">Mostrar zonas de baja emisión en el mapa. No afecta a la navegación.</string>
     <string name="rendering_attr_showLez_name">Mostrar zonas de baja emisión</string>
     <string name="temporary_conditional_routing">Considerar limitaciones temporales</string>
+    <string name="shared_string_default">Predefinido</string>
 </resources>
