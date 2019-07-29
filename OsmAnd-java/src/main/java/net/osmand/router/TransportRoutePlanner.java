@@ -804,13 +804,18 @@ public class TransportRoutePlanner {
 					if (multifileStop == stop) {
 						// clear up so it won't be used as it is multi file stop
 						stop.setReferencesToRoutes(null);
+					} else {
+						// add other routes
+						stop.setReferencesToRoutes(null);
 					}
 					if(rrs != null && !multifileStop.isDeleted()) {
 						for(int i = 0; i < rrs.length; i++) {
 							TransportRoute route = localFileRoutes.get(rrs[i]);
 							if(route == null) {
 								System.err.println(String.format("Something went wrong by loading route %d for stop %s", rrs[i], stop));
-							} else {
+							} else if(multifileStop == stop ||
+									(!multifileStop.hasRoute(route.getId()) && 
+									!multifileStop.isRouteDeleted(route.getId()))){
 								// duplicates won't be added
 								multifileStop.addRouteId(route.getId());
 								multifileStop.addRoute(route);
@@ -874,7 +879,7 @@ public class TransportRoutePlanner {
 
 		private void loadTransportSegments(Collection<TransportStop> stops, List<TransportRouteSegment> lst) throws IOException {
 			for(TransportStop s : stops) {
-				if (s.isDeleted()) {
+				if (s.isDeleted() || s.getRoutes() == null) {
 					continue;
 				}
 				for (TransportRoute route : s.getRoutes()) {
