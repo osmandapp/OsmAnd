@@ -321,9 +321,10 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 		}
 
 		vis.setChecked(gpxFileSelected);
-		vis.setOnClickListener(new View.OnClickListener() {
+		headerView.findViewById(R.id.showOnMapContainer).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				vis.toggle();
 				if (!vis.isChecked()) {
 					selectedSplitInterval = 0;
 				}

@@ -19,6 +19,40 @@
             android:layout_gravity="center_vertical"/>
 
         <LinearLayout
+            android:id="@+id/gpx_join_gaps_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
+            android:minHeight="@dimen/card_row_min_height"
+            android:orientation="horizontal">
+
+            <net.osmand.plus.widgets.TextViewEx
+                android:id="@+id/gpx_join_gaps_text"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/content_padding"
+                android:paddingRight="@dimen/content_padding"
+                android:text="@string/gpx_join_gaps"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="@dimen/default_list_text_size"
+                osmand:typeface="@string/font_roboto_regular" />
+
+            <android.support.v7.widget.SwitchCompat
+                android:id="@+id/gpx_join_gaps_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:clickable="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:paddingLeft="@dimen/content_padding"
+                android:paddingRight="@dimen/content_padding" />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/average_max"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

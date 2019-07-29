@@ -167,7 +167,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 				.setChecked(settings.ENABLE_TIME_CONDITIONAL_ROUTING.get())
 				.setIcon(getContentIcon((optionsItem.getActiveIconId())))
 				.setTitle(getString(R.string.temporary_conditional_routing))
-				.setLayoutId(R.layout.bottom_sheet_item_with_descr_and_switch_56dp)
+				.setLayoutId(R.layout.bottom_sheet_item_with_switch_56dp)
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
