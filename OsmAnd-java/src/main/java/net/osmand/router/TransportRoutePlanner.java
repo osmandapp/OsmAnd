@@ -1,19 +1,8 @@
 package net.osmand.router;
 
-import net.osmand.binary.BinaryMapIndexReader;
-import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
-import net.osmand.data.LatLon;
-import net.osmand.data.QuadRect;
-import net.osmand.data.TransportRoute;
-import net.osmand.data.TransportSchedule;
-import net.osmand.data.TransportStop;
-import net.osmand.osm.edit.Node;
-import net.osmand.osm.edit.Way;
-import net.osmand.util.Algorithms;
-import net.osmand.util.MapUtils;
-
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -24,12 +13,18 @@ import java.util.PriorityQueue;
 
 import gnu.trove.iterator.TIntIterator;
 import gnu.trove.list.array.TIntArrayList;
-import gnu.trove.list.array.TLongArrayList;
-import gnu.trove.map.TIntLongMap;
-import gnu.trove.map.hash.TIntLongHashMap;
 import gnu.trove.map.hash.TIntObjectHashMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
-import gnu.trove.set.hash.TLongHashSet;
+import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
+import net.osmand.data.LatLon;
+import net.osmand.data.QuadRect;
+import net.osmand.data.TransportRoute;
+import net.osmand.data.TransportSchedule;
+import net.osmand.data.TransportStop;
+import net.osmand.osm.edit.Node;
+import net.osmand.osm.edit.Way;
+import net.osmand.util.MapUtils;
 
 public class TransportRoutePlanner {
 	
@@ -826,7 +821,7 @@ public class TransportRoutePlanner {
 				}
 			}
 			
-			loadTransportSegments(loadedTransportStops.values(), lst);
+			loadTransportSegments(loadedTransportStops.valueCollection(), lst);
 			
 			readTime += System.nanoTime() - nanoTime;
 			return lst;
@@ -877,7 +872,7 @@ public class TransportRoutePlanner {
 			return stops;
 		}
 
-		private void loadTransportSegments(TransportStop[] stops, List<TransportRouteSegment> lst) throws IOException {
+		private void loadTransportSegments(Collection<TransportStop> stops, List<TransportRouteSegment> lst) throws IOException {
 			for(TransportStop s : stops) {
 				if (s.isDeleted()) {
 					continue;
