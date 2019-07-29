@@ -161,22 +161,10 @@ public class TransportStop extends MapObject {
 		return exitsString;
 	}
 
-	private boolean areRoutesEquals(long[] r1, long[] r2) {
-		boolean res = (r1 == null && r2 == null);
-		if (!res && r1 != null && r2 != null) {
-			res = true;
-			for (long id : r1) {
-				if (!Algorithms.containsInArrayL(r2, id)) {
-					res = false;
-					break;
-				}
-			}
-		}
-		return res;
-	}
-
 	public boolean compareStop(TransportStop thatObj) {
-		if (this.compareObject(thatObj) && areRoutesEquals(this.routesIds, thatObj.routesIds) &&
+		if (this.compareObject(thatObj) && 
+			    // don't compare routes cause stop could be identical
+				// ((this.routesIds == null && thatObj.routesIds == null) || (this.routesIds != null && this.routesIds.equals(thatObj.routesIds))) &&
 				((this.exits == null && thatObj.exits == null) || (this.exits != null && thatObj.exits != null && this.exits.size() == thatObj.exits.size()))) {
 			if (this.exits != null) {
 				for (TransportStopExit exit1 : this.exits) {
