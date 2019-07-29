@@ -617,7 +617,7 @@ Ehhez {1} MB helyre van szükség.
     <string name="context_menu_item_create_poi">POI készítés</string>
     <string name="shared_string_yes">Igen</string>
     <string name="shared_string_cancel">Mégse</string>
-    <string name="shared_string_apply">Alkalmaz</string>
+    <string name="shared_string_apply">Alkalmazás</string>
     <string name="shared_string_add">Hozzáadás</string>
     <string name="shared_string_no">Nem</string>
     <string name="add_favorite_dialog_top_text">Add meg a Kedvenc nevét</string>
@@ -3130,4 +3130,9 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="rendering_attr_showLez_description">Alacsony kibocsátású övezetek megjelenítése a térképen. Nem befolyásolja az útvonaltervezést.</string>
     <string name="rendering_attr_showLez_name">Alacsony kibocsátású övezetek megjelenítése</string>
     <string name="temporary_conditional_routing">Időszakos korlátozások figyelembevétele</string>
+    <string name="routing_attr_allow_classic_only_name">Csak klasszikus útvonalak engedélyezése</string>
+    <string name="routing_attr_difficulty_preference_name">Előnyben részesített nehézség</string>
+    <string name="routing_attr_difficulty_preference_description">Az ilyen nehézségű pályák részesülnek előnyben, azonban az útvonalba továbbra is bekerülhetnek nehezebb vagy könnyebb pályák, ha úgy rövidebb.</string>
+    <string name="routing_attr_freeride_policy_name">Pályán kívül</string>
+    <string name="routing_attr_freeride_policy_description">A freeride és pályán kívüli utak nem hivatalos útvonalak és átjárók. Általában nem egyengetik el őket, nincsenek karbantartva, este pedig nem ellenőrzik őket. Belépés csak saját felelősségre.</string>
 </resources>
