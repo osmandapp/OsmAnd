@@ -242,4 +242,11 @@
     <string name="min_logging_speed">Minimumshastighet ved logging</string>
     <string name="min_logging_speed_descr">Filter: Ingen logging under valgt hastighet</string>
     <string name="gpx_settings">GPX-innstillinger</string>
+    <string name="timeline_no_data_descr">Data for valgt dato mangler</string>
+    <string name="timeline_no_data">Ingen data</string>
+    <string name="shared_string_end">Slutt</string>
+    <string name="shared_string_start">Start</string>
+    <string name="shared_string_apply">Bruk</string>
+    <string name="set_time_timeline_descr">Velg tid å vise</string>
+    <string name="start_end_date">Start–sluttdato</string>
 </resources>
