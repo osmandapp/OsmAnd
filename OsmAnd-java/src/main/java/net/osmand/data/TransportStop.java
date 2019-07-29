@@ -32,6 +32,13 @@ public class TransportStop extends MapObject {
 	public void setRoutes(List<TransportRoute> routes) {
 		this.routes = routes;
 	}
+	
+	public void addRoute(TransportRoute rt) {
+		if (this.routes == null) {
+			this.routes = new ArrayList<TransportRoute>();
+		}
+		this.routes.add(rt);
+	}
 
 	public int[] getReferencesToRoutes() {
 		return referencesToRoutes;
