@@ -20,10 +20,18 @@ public class TransportStop extends MapObject {
 	public int x31;
 	public int y31;
 	private List<TransportStopExit> exits;
+	private List<TransportRoute> routes = null;
 
 	private TransportStopAggregated transportStopAggregated;
 
-	public TransportStop() {
+	public TransportStop() {}
+	
+	public List<TransportRoute> getRoutes() {
+		return routes;
+	}
+	
+	public void setRoutes(List<TransportRoute> routes) {
+		this.routes = routes;
 	}
 
 	public int[] getReferencesToRoutes() {
@@ -39,14 +47,12 @@ public class TransportStop extends MapObject {
 	}
 
 	public void setRoutesIds(long[] routesIds) {
+		// CHECK route ids are sorted (used later)
 		this.routesIds = routesIds;
 	}
 	
-	public void addRouteId(long routeId) {
-		routesIds = Algorithms.addToArrayL(routesIds, routeId, true);
-	}
-
 	public boolean hasRoute(long routeId) {
+		// make assumption that ids are sorted
 		return routesIds != null && Arrays.binarySearch(routesIds, routeId) >= 0;
 	}
 
@@ -66,6 +72,11 @@ public class TransportStop extends MapObject {
 		this.deletedRoutesIds = deletedRoutesIds;
 	}
 	
+	public void addRouteId(long routeId) {
+		// make assumption that ids are sorted
+		routesIds = Algorithms.addToArrayL(routesIds, routeId, true);
+	}
+	 
 	public void addDeletedRouteId(long routeId) {
 		deletedRoutesIds = Algorithms.addToArrayL(deletedRoutesIds, routeId, true);
 	}
