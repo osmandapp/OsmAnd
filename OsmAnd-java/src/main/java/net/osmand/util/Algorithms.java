@@ -794,6 +794,7 @@ public class Algorithms {
 			result = new long[array.length + 1];
 			System.arraycopy(array, 0, result, 0, array.length);
 			result[result.length - 1] = value;
+			Arrays.sort(result);
 		}
 		return result;
 	}
