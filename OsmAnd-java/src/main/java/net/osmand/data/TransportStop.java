@@ -60,6 +60,15 @@ public class TransportStop extends MapObject {
 	public void setDeletedRoutesIds(long[] deletedRoutesIds) {
 		this.deletedRoutesIds = deletedRoutesIds;
 	}
+	
+	public void addRouteId(long routeId) {
+		routesIds = Algorithms.addToArrayL(routesIds, routeId, true);
+	}
+	 
+	public void addDeletedRouteId(long routeId) {
+		deletedRoutesIds = Algorithms.addToArrayL(deletedRoutesIds, routeId, true);
+	}
+
 
 	public boolean isRouteDeleted(long routeId) {
 		return deletedRoutesIds != null && Arrays.binarySearch(deletedRoutesIds, routeId) >= 0;
