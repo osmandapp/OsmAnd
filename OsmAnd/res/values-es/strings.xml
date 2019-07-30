@@ -173,9 +173,9 @@
 \n\tPara usarlo activa «Menú» → «Configurar mapa» → «Fuente del mapa…» → «Mapas vectoriales sin conexión».</string>
     <string name="choose_audio_stream">Salida de indicaciones por voz</string>
     <string name="choose_audio_stream_descr">Elige que altavoz reproducirá indicaciones por voz.</string>
-    <string name="voice_stream_voice_call">Audio de llamada telefónica (también en altavoces estéreos con Bluetooth)</string>
-    <string name="voice_stream_notification">Notificación auditiva</string>
-    <string name="voice_stream_music">Audio de multimedia</string>
+    <string name="voice_stream_voice_call">Audio de llamada telefónica (interrumpe la música en los altavoces Bluetooth del coche)</string>
+    <string name="voice_stream_notification">Audio de notificación</string>
+    <string name="voice_stream_music">Audio multimedia/navegación</string>
     <string name="warning_tile_layer_not_downloadable">La aplicación no puede descargar la capa del mapa «%1$s», reinstalarla podría ayudar.</string>
     <string name="overlay_transparency_descr">Modifica la transparencia de la capa superpuesta.</string>
     <string name="overlay_transparency">Transparencia de superposición</string>
@@ -1304,7 +1304,7 @@
     <string name="lang_al">Albanés</string>
     <string name="lang_ar">Árabe</string>
     <string name="lang_sc">Sardo</string>
-    <string name="lang_sr">Serbio</string>
+    <string name="lang_sr">Serbio (cirílico)</string>
     <string name="lang_zh_cn">Chino (simplificado)</string>
     <string name="lang_zh_tw">Chino (tradicional)</string>
     <string name="rendering_attr_subwayMode_name">Rutas de metro</string>
@@ -2110,7 +2110,7 @@
     <string name="new_filter">Nuevo filtro</string>
     <string name="new_filter_desc">Ingresa el nombre del nuevo filtro, que se añadirá en tu pestaña «Categorías».</string>
     <string name="rendering_value_fine_name">Muy fino</string>
-    <string name="lang_sr_latn">Serbio (Latino)</string>
+    <string name="lang_sr_latn">Serbio (latino)</string>
     <string name="lang_zh_hk">Chino (Hong Kong)</string>
     <string name="rendering_attr_contourDensity_description">Densidad de la curva de nivel</string>
     <string name="rendering_attr_contourDensity_name">Densidad de la curva de nivel</string>
@@ -3229,7 +3229,9 @@
     <string name="shared_string_open_track">Abrir traza</string>
     <string name="shared_string_track_is_saved">Traza %s guardada</string>
     <string name="app_mode_campervan">Caravana</string>
-    <string name="rendering_attr_showLez_description">Mostrar zonas de baja emisión en el mapa. No afecta al enrutamiento.</string>
+    <string name="rendering_attr_showLez_description">Mostrar zonas de baja emisión en el mapa. No afecta a la navegación</string>
     <string name="rendering_attr_showLez_name">Mostrar zonas de baja emisión</string>
     <string name="temporary_conditional_routing">Considerar limitaciones temporales</string>
+    <string name="gpx_join_gaps">Unir espacios</string>
+    <string name="shared_string_default">Predefinido</string>
 </resources>
