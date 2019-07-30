@@ -285,7 +285,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="72dp"
                             android:layout_marginRight="16dp"
-                            android:background="@drawable/btn_round_blue"
+                            android:background="?attr/btn_round"
                             android:paddingLeft="16dp"
                             android:paddingRight="16dp"
                             android:text="@string/shared_string_save_changes"
