@@ -45,7 +45,8 @@ class TelegramApplication : Application(), OsmandHelperListener {
 		osmandAidlHelper.listener = object : OsmandHelperListener {
 			override fun onOsmandConnectionStateChanged(connected: Boolean) {
 				if (connected) {
-					val otherPackage = if (applicationContext.packageName != "net.osmand.telegram") "net.osmand.telegram" else "net.osmand.telegram.debug"
+					osmandAidlHelper.clearNavDrawerItems("net.osmand.telegram")
+					osmandAidlHelper.clearNavDrawerItems("net.osmand.telegram.debug")
 					osmandAidlHelper.setNavDrawerItems(
 						applicationContext.packageName,
 						listOf(getString(R.string.app_name_short)),
@@ -53,7 +54,6 @@ class TelegramApplication : Application(), OsmandHelperListener {
 						listOf("ic_action_location_sharing_app"),
 						listOf(-1)
 					)
-					osmandAidlHelper.clearNavDrawerItems(otherPackage)
 					showLocationHelper.addDirectionContextMenuButton()
 					showLocationHelper.startShowingLocation()
 				}
