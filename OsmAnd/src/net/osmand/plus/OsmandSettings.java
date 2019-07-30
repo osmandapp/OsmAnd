@@ -87,9 +87,7 @@ public class OsmandSettings {
 			if (l == null) {
 				l = new LinkedList<WeakReference<StateChangedListener<T>>>();
 			}
-			if (!l.contains(new WeakReference<StateChangedListener<T>>(listener))) {
-				l.add(new WeakReference<StateChangedListener<T>>(listener));
-			}
+			l = updateListeners(new LinkedList<>(l), listener, true);
 		}
 
 		public synchronized void fireEvent(T value) {
@@ -108,15 +106,25 @@ public class OsmandSettings {
 
 		@Override
 		public synchronized void removeListener(StateChangedListener<T> listener) {
-			if (l != null) {
-				Iterator<WeakReference<StateChangedListener<T>>> it = l.iterator();
-				while (it.hasNext()) {
-					StateChangedListener<T> t = it.next().get();
-					if (t == listener) {
-						it.remove();
-					}
+			l = updateListeners(new LinkedList<>(l), listener, false);
+		}
+
+		private List<WeakReference<StateChangedListener<T>>> updateListeners(
+				List<WeakReference<StateChangedListener<T>>> copyList,
+				StateChangedListener<T> listener, boolean isNewListener) {
+			Iterator<WeakReference<StateChangedListener<T>>> it = copyList.iterator();
+			while (it.hasNext()) {
+				WeakReference<StateChangedListener<T>> ref = it.next();
+				StateChangedListener l = ref.get();
+				if (l == null || l == listener) {
+					it.remove();
 				}
 			}
+
+			if (isNewListener) {
+				copyList.add(new WeakReference<>(listener));
+			}
+			return copyList;
 		}
 	}
 
