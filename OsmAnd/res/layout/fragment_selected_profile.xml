@@ -142,6 +142,7 @@
 							android:layout_weight="1"
 							android:layout_margin="@dimen/list_content_padding"
 							app:primaryColor="@color/active_color_primary_dark"
+							app:secondaryColor="?android:textColorSecondary"
 							app:labelText="@string/profile_name_hint">
 
 							<studio.carbonylgroup.textfieldboxes.ExtendedEditText
@@ -185,6 +186,7 @@
 						android:layout_width="match_parent"
 						android:layout_height="60dp"
 						app:primaryColor="@color/active_color_primary_dark"
+						app:secondaryColor="?android:textColorSecondary"
 						app:labelText="@string/nav_type_hint">
 
 						<studio.carbonylgroup.textfieldboxes.ExtendedEditText
