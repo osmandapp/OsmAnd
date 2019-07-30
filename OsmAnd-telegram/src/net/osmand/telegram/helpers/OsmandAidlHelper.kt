@@ -1043,6 +1043,16 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 		return false
 	}
 
+	fun clearNavDrawerItems(appPackage: String): Boolean {
+		if (mIOsmAndAidlInterface != null) {
+			try {
+				return mIOsmAndAidlInterface!!.setNavDrawerItems(SetNavDrawerItemsParams(appPackage, emptyList()))
+			} catch (e: RemoteException) {
+				e.printStackTrace()
+			}
+		}
+		return false
+	}
 
 	/**
 	 * Put navigation on pause.
