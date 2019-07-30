@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.TypedArray;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -517,7 +518,10 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				});
 			}
 			if (contextMenuItem.getIcon() != -1) {
-				item.setIcon(contextMenuItem.getIcon());
+				int activeButtonsAndLinksTextColorResId = getMyApplication().getSettings().isLightContent() ?
+						R.color.active_buttons_and_links_text_light : R.color.active_buttons_and_links_text_dark;
+				Drawable icMenuItem = getMyApplication().getUIUtilities().getIcon(contextMenuItem.getIcon(), activeButtonsAndLinksTextColorResId);
+				item.setIcon(icMenuItem);
 			}
 		}
 	}
