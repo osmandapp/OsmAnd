@@ -3221,4 +3221,5 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="third_party_routing_type">Wyznaczanie tras przez inne osoby</string>
     <string name="app_mode_monowheel">Monocykl</string>
     <string name="shared_string_default">Domyślnie</string>
+    <string name="gpx_join_gaps">Połącz luki</string>
 </resources>
