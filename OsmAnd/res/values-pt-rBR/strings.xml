@@ -490,7 +490,7 @@
     <string name="lang_ro">Romeno</string>
     <string name="lang_ru">Russo</string>
     <string name="lang_sc">Sardenho</string>
-    <string name="lang_sr">Sérvio</string>
+    <string name="lang_sr">Sérvio (cirílico)</string>
     <string name="lang_zh_cn">Chinês simplificado</string>
     <string name="lang_sk">Eslovaco</string>
     <string name="lang_sl">Esloveno</string>
@@ -1190,8 +1190,8 @@ Pôr do Sol: %2$s</string>
 \n\t\n\tPara usá-lo, ative em \'Menu\' → \'Configurar mapa\' → \'Fonte de mapas…\' → \'Mapas vetoriais off-line\'.</string>
     <string name="choose_audio_stream">Saída para orientação por voz</string>
     <string name="choose_audio_stream_descr">Escolha o canal para orientação por voz.</string>
-    <string name="voice_stream_voice_call">Áudio de chamada de voz (também para interromper os aparelhos de som BT do carro)</string>
-    <string name="voice_stream_music">Áudio de mídia/música</string>
+    <string name="voice_stream_voice_call">Áudio de chamada de voz (para interromper os aparelhos de som BT do carro)</string>
+    <string name="voice_stream_music">Áudio de mídia/navegação</string>
     <string name="warning_tile_layer_not_downloadable">O aplicativo não pode fazer o download da camada de mapa %1$s, a reinstalação pode ajudar.</string>
     <string name="overlay_transparency_descr">Modificar a transparência da camada superior.</string>
     <string name="overlay_transparency">Transparência da camada superior</string>
@@ -3200,4 +3200,5 @@ Pôr do Sol: %2$s</string>
     <string name="rendering_attr_showLez_description">"Mostrar zonas de baixa emissão no mapa.  Não afeta o roteamento."</string>
     <string name="rendering_attr_showLez_name">Mostrar baixas zonas de emissão</string>
     <string name="temporary_conditional_routing">Considere limitações temporárias</string>
+    <string name="shared_string_default">Predefinido</string>
 </resources>
