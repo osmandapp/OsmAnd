@@ -28,6 +28,7 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.OsmandSettings.AngularConstants;
 import net.osmand.plus.OsmandSettings.RulerMode;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -576,7 +577,7 @@ public class RulerControlLayer extends OsmandMapLayer {
 			canvas.rotate(-cachedHeading, center.x, center.y);
 
 			String distance = cacheDistances.get(circleNumber - 1);
-			String heading = OsmAndFormatter.getFormattedAzimuth(cachedHeading, app) + " " + getCardinalDirectionForDegrees(cachedHeading);
+			String heading = OsmAndFormatter.getFormattedAzimuth(cachedHeading, AngularConstants.DEGREES360) + " " + getCardinalDirectionForDegrees(cachedHeading);
 			float[] textCoords = calculateTextCoords(distance, heading, radiusLength + AndroidUtils.dpToPx(app, 16), center, attrs);
 			canvas.rotate(-tileBox.getRotate(), center.x, center.y);
 

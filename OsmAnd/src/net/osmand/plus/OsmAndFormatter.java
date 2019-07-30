@@ -191,31 +191,30 @@ public class OsmAndFormatter {
 	}
 
 	public static String getFormattedAzimuth(float bearing, OsmandApplication app) {
+		return getFormattedAzimuth(bearing, app.getSettings().ANGULAR_UNITS.get());
+	}
+
+	public static String getFormattedAzimuth(float bearing, AngularConstants angularConstant) {
 		while(bearing < -180.0) {
 			bearing += 360;
 		}
 		while(bearing > 360.0) {
 			bearing -= 360;
 		}
-		
-		if (app.getSettings().ANGULAR_UNITS.get() == AngularConstants.MILLIRADS) {
-			if (bearing < 0) {
-				return Math.round((360 + bearing) * MILS_IN_DEGREE) + " " + AngularConstants.MILLIRADS.getUnitSymbol();
-			} else {
+		switch (angularConstant) {
+			case DEGREES360: {
+				bearing += bearing < 0 ? 360 : 0;
+				int b = Math.round(bearing);
+				b = b == 360 ? 0 : b;
+				return b + AngularConstants.DEGREES360.getUnitSymbol();
+			}
+			case MILLIRADS: {
+				bearing += bearing < 0 ? 360 : 0;
 				return Math.round(bearing * MILS_IN_DEGREE) + " " + AngularConstants.MILLIRADS.getUnitSymbol();
 			}
-		} else if (app.getSettings().ANGULAR_UNITS.get() == AngularConstants.DEGREES360) {
-			if (bearing < -0.5) {
-				return (360 + Math.round(bearing)) + AngularConstants.DEGREES360.getUnitSymbol();
-			} else if (bearing >= -0.5 && bearing < 0) {
-				return 0 + AngularConstants.DEGREES360.getUnitSymbol();
-			} else {
-				return Math.round(bearing) + AngularConstants.DEGREES360.getUnitSymbol();
-			}
-		} else {
-			return Math.round(bearing) + AngularConstants.DEGREES.getUnitSymbol();
+			default:
+				return Math.round(bearing) + AngularConstants.DEGREES.getUnitSymbol();
 		}
-
 	}
 
 	public static String getFormattedDistance(float meters, OsmandApplication ctx) {
