@@ -1,7 +1,6 @@
 package net.osmand.binary;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -9,7 +8,6 @@ import java.util.Map;
 import com.google.protobuf.CodedInputStream;
 import com.google.protobuf.WireFormat;
 
-import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.map.hash.TIntObjectHashMap;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.data.TransportSchedule;
@@ -76,10 +74,7 @@ public class BinaryMapTransportReaderAdapter {
 	protected static class IndexStringTable {
 		int fileOffset = 0;
 		int length = 0;
-
-		// offset from start for each SIZE_OFFSET_ARRAY elements
-		// (SIZE_OFFSET_ARRAY + 1) offset = offsets[0] + skipOneString()
-		TIntArrayList offsets = new TIntArrayList();
+		TIntObjectHashMap<String> stringTable = null;
 
 	}
 	
@@ -147,7 +142,7 @@ public class BinaryMapTransportReaderAdapter {
 	}
 	
 	protected void searchTransportTreeBounds(int pleft, int pright, int ptop, int pbottom,
-			SearchRequest<TransportStop> req) throws IOException {
+			SearchRequest<TransportStop> req, TIntObjectHashMap<String> stringTable) throws IOException {
 		int init = 0;
 		int lastIndexResult = -1;
 		int cright = 0;
@@ -197,7 +192,7 @@ public class BinaryMapTransportReaderAdapter {
 					lastIndexResult = req.getSearchResults().size();
 				}
 				req.numberOfVisitedObjects++;
-				TransportStop transportStop = readTransportStop(stopOffset, cleft, cright, ctop, cbottom, req);
+				TransportStop transportStop = readTransportStop(stopOffset, cleft, cright, ctop, cbottom, req, stringTable);
 				if(transportStop != null){
 					req.publish(transportStop);
 				}
@@ -209,7 +204,7 @@ public class BinaryMapTransportReaderAdapter {
 				int filePointer = codedIS.getTotalBytesRead();
 				if (req.limit == -1 || req.limit >= req.getSearchResults().size()) {
 					oldLimit = codedIS.pushLimit(length);
-					searchTransportTreeBounds(cleft, cright, ctop, cbottom, req);
+					searchTransportTreeBounds(cleft, cright, ctop, cbottom, req, stringTable);
 					codedIS.popLimit(oldLimit);
 				}
 				codedIS.seek(filePointer + length);
@@ -392,35 +387,33 @@ public class BinaryMapTransportReaderAdapter {
 		
 	}
 
-	protected void initializeStringTable(TransportIndex ind, TIntObjectHashMap<String> stringTable) throws IOException {
-		int[] values = stringTable.keys();
-		Arrays.sort(values);
-		codedIS.seek(ind.stringTable.fileOffset);
-		int oldLimit = codedIS.pushLimit(ind.stringTable.length);
-		int current = 0;
-		int i = 0;
-		while (i < values.length && codedIS.getBytesUntilLimit() > 0) {
-			int t = codedIS.readTag();
-			int tag = WireFormat.getTagFieldNumber(t);
-			switch (tag) {
-			case 0:
-				break;
-			case OsmandOdb.StringTable.S_FIELD_NUMBER:
-				if (current == values[i]) {
+	protected TIntObjectHashMap<String> initializeStringTable(TransportIndex ind,
+			TIntObjectHashMap<String> requested) throws IOException {
+		if (ind.stringTable.stringTable == null) {
+			ind.stringTable.stringTable = new TIntObjectHashMap<>();
+			codedIS.seek(ind.stringTable.fileOffset);
+			int oldLimit = codedIS.pushLimit(ind.stringTable.length);
+			int current = 0;
+			int i = 0;
+			while (codedIS.getBytesUntilLimit() > 0) {
+				int t = codedIS.readTag();
+				int tag = WireFormat.getTagFieldNumber(t);
+				switch (tag) {
+				case 0:
+					break;
+				case OsmandOdb.StringTable.S_FIELD_NUMBER:
 					String value = codedIS.readString();
-					stringTable.put(values[i], value);
-					i++;
-				} else {
+					ind.stringTable.stringTable.put(current, value);
+					current++;
+					break;
+				default:
 					skipUnknownField(t);
+					break;
 				}
-				current ++;
-				break;
-			default:
-				skipUnknownField(t);
-				break;
 			}
+			codedIS.popLimit(oldLimit);
 		}
-		codedIS.popLimit(oldLimit);
+		return ind.stringTable.stringTable;
 	}
 
 	protected void initializeNames(boolean onlyDescription, net.osmand.data.TransportRoute dataObject,
@@ -513,7 +506,8 @@ public class BinaryMapTransportReaderAdapter {
 		return dataObject;
 	}
 	
-	private TransportStop readTransportStop(int shift, int cleft, int cright, int ctop, int cbottom, SearchRequest<TransportStop> req) throws IOException {
+	private TransportStop readTransportStop(int shift, int cleft, int cright, int ctop, int cbottom, 
+			SearchRequest<TransportStop> req, TIntObjectHashMap<String> stringTable) throws IOException {
 		int tag = WireFormat.getTagFieldNumber(codedIS.readTag());
 		if(OsmandOdb.TransportStop.DX_FIELD_NUMBER != tag) {
 			throw new IllegalArgumentException();
@@ -560,26 +554,26 @@ public class BinaryMapTransportReaderAdapter {
 				req.cacheIdsB.add(codedIS.readUInt64());
 				break;
 			case OsmandOdb.TransportStop.NAME_EN_FIELD_NUMBER :
-				if (req.stringTable != null) {
-					dataObject.setEnName(regStr(req.stringTable)); //$NON-NLS-1$
+				if (stringTable != null) {
+					dataObject.setEnName(regStr(stringTable)); //$NON-NLS-1$
 				} else {
 					skipUnknownField(t);
 				}
 				break;
 			case OsmandOdb.TransportStop.NAME_FIELD_NUMBER :
-				if (req.stringTable != null) {
-					dataObject.setName(regStr(req.stringTable)); //$NON-NLS-1$
+				if (stringTable != null) {
+					dataObject.setName(regStr(stringTable)); //$NON-NLS-1$
 				} else {
 					skipUnknownField(t);
 				}
 				break;
 			case OsmandOdb.TransportStop.ADDITIONALNAMEPAIRS_FIELD_NUMBER :
-				if (req.stringTable != null) {
+				if (stringTable != null) {
 					int sizeL = codedIS.readRawVarint32();
 					int oldRef = codedIS.pushLimit(sizeL);
 					while (codedIS.getBytesUntilLimit() > 0) {
-						dataObject.setName(regStr(req.stringTable,codedIS.readRawVarint32()),
-								regStr(req.stringTable,codedIS.readRawVarint32()));
+						dataObject.setName(regStr(stringTable,codedIS.readRawVarint32()),
+								regStr(stringTable,codedIS.readRawVarint32()));
 					}
 					codedIS.popLimit(oldRef);
 				} else {
@@ -593,7 +587,7 @@ public class BinaryMapTransportReaderAdapter {
 				int length = codedIS.readRawVarint32();
 				int oldLimit = codedIS.pushLimit(length);
 
-				TransportStopExit transportStopExit = readTransportStopExit(cleft, ctop, req);
+				TransportStopExit transportStopExit = readTransportStopExit(cleft, ctop, req, stringTable);
 				dataObject.addExit(transportStopExit);
 				codedIS.popLimit(oldLimit);
 				break;
@@ -604,7 +598,8 @@ public class BinaryMapTransportReaderAdapter {
 		}
 	}
 
-	private TransportStopExit readTransportStopExit(int cleft, int ctop, SearchRequest<TransportStop> req) throws IOException {
+	private TransportStopExit readTransportStopExit(int cleft, int ctop, SearchRequest<TransportStop> req,
+			TIntObjectHashMap<String> stringTable) throws IOException {
 
 		TransportStopExit dataObject = new TransportStopExit();
 		int x = 0;
@@ -624,8 +619,8 @@ public class BinaryMapTransportReaderAdapter {
 					}
 					return dataObject;
 				case OsmandOdb.TransportStopExit.REF_FIELD_NUMBER:
-					if (req.stringTable != null) {
-						dataObject.setRef(regStr(req.stringTable));
+					if (stringTable != null) {
+						dataObject.setRef(regStr(stringTable));
 					} else {
 						skipUnknownField(t);
 					}
