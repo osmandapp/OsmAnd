@@ -653,7 +653,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginBottom="@dimen/first_usage_title_margin_bottom"
-                android:background="@drawable/btn_round_blue"
+                android:background="@drawable/btn_round_light"
                 android:padding="14dp"
                 android:text="@string/give_permission"
                 android:textColor="@color/color_white"

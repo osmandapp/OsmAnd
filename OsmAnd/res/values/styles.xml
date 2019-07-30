@@ -55,7 +55,7 @@
         <item name="android:paddingTop">8dp</item>
         <item name="android:paddingBottom">8dp</item>
         <item name="android:textColor">@color/color_white</item>
-        <item name="android:background">@drawable/btn_round_blue</item>
+        <item name="android:background">?attr/btn_round</item>
     </style>
 
     <style name="DialogCancelButton">
@@ -125,6 +125,7 @@
         <item name="actionModeBackground">@color/app_bar_color_light</item>
         <item name="actionBarStyle">@style/Widget.Styled.ActionBarLight</item>
         <item name="bg_color">@color/list_background_color_light</item>
+        <item name="btn_round">@drawable/btn_round_light</item>
         <item name="btn_round_border">@drawable/btn_round_border_light</item>
         <item name="btn_round_border_2">@drawable/btn_round_border_light_2</item>
         <item name="bg_card">@drawable/bg_card_light</item>
@@ -396,6 +397,7 @@
         <item name="actionModeBackground">@color/app_bar_color_dark</item>
         <item name="actionBarStyle">@style/Widget.Styled.ActionBarDark</item>
         <item name="bg_color">@color/list_background_color_dark</item>
+        <item name="btn_round">@drawable/btn_round_dark</item>
         <item name="btn_round_border">@drawable/btn_round_border_dark</item>
         <item name="btn_round_border_2">@drawable/btn_round_border_dark_2</item>
         <item name="bg_card">@drawable/bg_card_dark</item>

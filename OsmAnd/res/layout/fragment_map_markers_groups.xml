@@ -21,7 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_action_plus"
-        app:backgroundTint="@color/active_color_primary_light"
+        app:backgroundTint="?attr/active_color_basic"
         app:fabSize="normal"
         app:useCompatPadding="true"/>
 
