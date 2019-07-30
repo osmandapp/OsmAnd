@@ -70,9 +70,9 @@
     <string name="live_monitoring_m_descr">Enviar o seguimento a un servizo web indicado se a gravación de GPX estiver activada.</string>
     <string name="live_monitoring_m">Seguimento con conexión (requírese GPX)</string>
     <string name="live_monitoring_start">Iniciar o seguimento con conexión</string>
-    <string name="live_monitoring_stop">Para-lo seguemento con conexión</string>
+    <string name="live_monitoring_stop">Deter o seguemento con conexión</string>
     <string name="gpx_monitoring_start">Iniciar a gravación de GPX</string>
-    <string name="gpx_monitoring_stop">Para-la gravación do GPX</string>
+    <string name="gpx_monitoring_stop">Deter a gravación do GPX</string>
     <string name="gpx_start_new_segment">Comezar un segmento novo</string>
     <string name="rendering_attr_hideBuildings_name">Edificios</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Estradas que non sexan para vehículos</string>
@@ -188,7 +188,7 @@
     <string name="lang_ro">Romanés</string>
     <string name="lang_ru">Ruso</string>
     <string name="lang_sc">Sardo</string>
-    <string name="lang_sr">Serbio</string>
+    <string name="lang_sr">Serbio cirílico</string>
     <string name="lang_zh_cn">Chinés sinxelo</string>
     <string name="lang_sk">Eslovaco</string>
     <string name="lang_sl">Esloveno</string>
@@ -343,7 +343,7 @@
     <string name="available_downloads_left">Aínda faltan %1$d ficheiros para baixar</string>
     <string name="install_paid">Versión completa</string>
     <string name="cancel_route">Rexeitar rota</string>
-    <string name="cancel_navigation">Para-la navigación</string>
+    <string name="cancel_navigation">Deter a navigación</string>
     <string name="clear_destination">Limpar o destino</string>
     <string name="download_using_mobile_internet">Non estás conectado a unha rede Wi-Fi. Emprega-la conexión actual á Internet para baixar\?</string>
     <string name="street_name">Nome da rúa</string>
@@ -414,7 +414,7 @@
     <string name="recording_context_menu_play">Reproducir</string>
     <string name="recording_description">Gravación %1$s %3$s %2$s</string>
     <string name="recording_default_name">Gravación</string>
-    <string name="shared_string_control_stop">Parar</string>
+    <string name="shared_string_control_stop">Deter</string>
     <string name="shared_string_control_start">Comezar</string>
     <string name="map_widget_av_notes">Notas de son/vídeo</string>
     <string name="osmand_srtm_short_description_80_chars">Engadido do OsmAnd para curvas do nivel sen conexión</string>
@@ -760,7 +760,7 @@
     <string name="settings_direction_style">Estilo de dirección</string>
     <string name="settings_direction_style_descr">Escolle o estilo para expresa-las direccións relativas cando se estea en movemento.</string>
     <string name="auto_announce_on">Iniciar os anuncios automáticos</string>
-    <string name="auto_announce_off">Para-los anuncios automáticos</string>
+    <string name="auto_announce_off">Deter os anuncios automáticos</string>
     <string name="i_am_here">Estou aquí</string>
     <string name="zoom_by_trackball_descr">Muda-lo achegamento do mapa a través dos movementos horizontais da roda de desprazamento.</string>
     <string name="zoom_by_trackball">Emprega-la roda de desprazamento para controla-lo achegamento</string>
@@ -849,7 +849,7 @@
     <string name="city_type_village">Vila</string>
     <string name="city_type_town">Vila grande</string>
     <string name="city_type_city">Cidade</string>
-    <string name="animate_route_off">Para-la simulación</string>
+    <string name="animate_route_off">Deter a simulación</string>
     <string name="animate_route">Iniciar a simulación</string>
     <string name="file_can_not_be_renamed">Non é posíbel mudar o nome do ficheiro.</string>
     <string name="file_with_name_already_exists">Xa existe un ficheiro con ese nome.</string>
@@ -929,9 +929,9 @@
 \n\tPara empregalo active «Menú» → «Configura-lo mapa» → «Fonte dos mapas…» → «Mapas vectoriais sen conexión».</string>
     <string name="choose_audio_stream">Saída das indicacións por voz</string>
     <string name="choose_audio_stream_descr">Escolle-la canle pola que reproduci-las indicacións por voz.</string>
-    <string name="voice_stream_voice_call">Son de chamada telefónica (tamén nos altavoces estéreos co Bluetooth)</string>
+    <string name="voice_stream_voice_call">Son de chamada telefónica (para os altavoces estéreos co Bluetooth)</string>
     <string name="voice_stream_notification">Son de notificación</string>
-    <string name="voice_stream_music">Son de música</string>
+    <string name="voice_stream_music">Son multimedia e de navigación</string>
     <string name="warning_tile_layer_not_downloadable">O aplicativo non pode baixa-la capa do mapa \"%1$s\"; tenta reinstalala, podería axudar.</string>
     <string name="overlay_transparency_descr">Modifica-la transparencia da sobreposición.</string>
     <string name="overlay_transparency">Transparencia da sobreposición</string>
@@ -1669,7 +1669,7 @@ Lon %2$s</string>
     <string name="nm_h">kn</string>
     <string name="shared_string_navigation">Navegación</string>
     <string name="osmand_running_in_background">Executar no segundo plano</string>
-    <string name="simulate_your_location_stop_descr">Parar a simulación da posición.</string>
+    <string name="simulate_your_location_stop_descr">Deter a simulación da posición.</string>
     <string name="simulate_your_location_descr">Simula-la ubicación, empregando unha rota calculada ou unha pista GPX gravada.</string>
     <string name="traffic_warning_hazard">Perigo</string>
     <string name="read_more">Ler máis</string>
@@ -2242,7 +2242,7 @@ Lon %2$s</string>
     <string name="online_photos">Imaxes da rede</string>
     <string name="quick_action_resume_pause_navigation">Deter/Voltar á navigación</string>
     <string name="quick_action_resume_pause_navigation_descr">Preme neste botón para deter ou voltar á navigación.</string>
-    <string name="quick_action_start_stop_navigation">Iniciar/Parar a navigación</string>
+    <string name="quick_action_start_stop_navigation">Iniciar/Deter a navigación</string>
     <string name="quick_action_start_stop_navigation_descr">Prema neste botón para iniciar a navegación, ou para detela se xa estaba iniciada.</string>
     <string name="store_tracks_in_monthly_directories">Almacenar as pistas gravadas en cartafoles mensuais</string>
     <string name="store_tracks_in_monthly_directories_descrp">Garda-las pistas gravadas nos subcartafoles segundo o mes da gravación (coma 2019-01).</string>
@@ -3248,4 +3248,5 @@ Lon %2$s</string>
     <string name="rendering_attr_showLez_description">Amosar zonas de baixas emisións no mapa. Non afecta á navigación.</string>
     <string name="rendering_attr_showLez_name">Amosar zonas de baixas emisións</string>
     <string name="temporary_conditional_routing">Considerar limitacións temporais</string>
+    <string name="shared_string_default">Predefinido</string>
 </resources>
