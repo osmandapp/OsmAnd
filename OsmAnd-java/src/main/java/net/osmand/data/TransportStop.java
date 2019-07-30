@@ -1,13 +1,12 @@
 package net.osmand.data;
 
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-
-import gnu.trove.set.hash.TLongHashSet;
 
 public class TransportStop extends MapObject {
 
@@ -20,10 +19,25 @@ public class TransportStop extends MapObject {
 	public int x31;
 	public int y31;
 	private List<TransportStopExit> exits;
+	private List<TransportRoute> routes = null;
 
 	private TransportStopAggregated transportStopAggregated;
 
-	public TransportStop() {
+	public TransportStop() {}
+	
+	public List<TransportRoute> getRoutes() {
+		return routes;
+	}
+	
+	public void setRoutes(List<TransportRoute> routes) {
+		this.routes = routes;
+	}
+	
+	public void addRoute(TransportRoute rt) {
+		if (this.routes == null) {
+			this.routes = new ArrayList<TransportRoute>();
+		}
+		this.routes.add(rt);
 	}
 
 	public int[] getReferencesToRoutes() {
@@ -39,10 +53,12 @@ public class TransportStop extends MapObject {
 	}
 
 	public void setRoutesIds(long[] routesIds) {
+		// CHECK route ids are sorted (used later)
 		this.routesIds = routesIds;
 	}
 
 	public boolean hasRoute(long routeId) {
+		// make assumption that ids are sorted
 		return routesIds != null && Arrays.binarySearch(routesIds, routeId) >= 0;
 	}
 
@@ -60,6 +76,15 @@ public class TransportStop extends MapObject {
 
 	public void setDeletedRoutesIds(long[] deletedRoutesIds) {
 		this.deletedRoutesIds = deletedRoutesIds;
+	}
+	
+	public void addRouteId(long routeId) {
+		// make assumption that ids are sorted
+		routesIds = Algorithms.addToArrayL(routesIds, routeId, true);
+	}
+	 
+	public void addDeletedRouteId(long routeId) {
+		deletedRoutesIds = Algorithms.addToArrayL(deletedRoutesIds, routeId, true);
 	}
 
 	public boolean isRouteDeleted(long routeId) {
@@ -163,12 +188,23 @@ public class TransportStop extends MapObject {
 	}
 
 	public boolean compareStop(TransportStop thatObj) {
-		if (this.compareObject(thatObj) &&
-				((this.routesIds == null && thatObj.routesIds == null) || (this.routesIds != null && this.routesIds.equals(thatObj.routesIds))) &&
+		if (this.compareObject(thatObj) && 
+			    // don't compare routes cause stop could be identical
+				// ((this.routesIds == null && thatObj.routesIds == null) || (this.routesIds != null && this.routesIds.equals(thatObj.routesIds))) &&
 				((this.exits == null && thatObj.exits == null) || (this.exits != null && thatObj.exits != null && this.exits.size() == thatObj.exits.size()))) {
 			if (this.exits != null) {
-				for (int i = 0; i < this.exits.size(); i++) {
-					if (!this.exits.get(i).compareExit(thatObj.exits.get(i))) {
+				for (TransportStopExit exit1 : this.exits) {
+					boolean contains = false;
+					for (TransportStopExit exit2 : thatObj.exits) {
+						if (exit1.getId().equals(exit2.getId())) {
+							contains = true;
+							if (!exit1.compareExit(exit2)) {
+								return false;
+							}
+							break;
+						}
+					}
+					if (!contains) {
 						return false;
 					}
 				}
