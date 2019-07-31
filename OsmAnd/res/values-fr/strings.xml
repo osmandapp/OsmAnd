@@ -1274,7 +1274,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="lang_al">albanais</string>
     <string name="lang_ar">Arabe</string>
     <string name="lang_sc">sarde</string>
-    <string name="lang_sr">serbe</string>
+    <string name="lang_sr">Serbe (cyrillique)</string>
     <string name="lang_zh_cn">Chinois (simplifié)</string>
     <string name="lang_zh_tw">Chinois (traditionnel)</string>
     <string name="continue_navigation">Reprendre la navigation</string>
@@ -2077,7 +2077,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="routing_attr_allow_motorway_description">Autoriser les trajets sur autoroute.</string>
     <string name="routing_attr_allow_motorway_name">Autoriser les autoroutes</string>
     <string name="wiki_around">Articles Wikipédia à proximité</string>
-    <string name="lang_sr_latn">Serbe (Latin)</string>
+    <string name="lang_sr_latn">Serbe (latin)</string>
     <string name="lang_zh_hk">Chinois (Hong Kong)</string>
     <string name="rendering_attr_hideWaterPolygons_description">Eau</string>
     <string name="rendering_attr_contourWidth_description">Épaisseur des traits pour les courbes de niveaux</string>
@@ -3143,25 +3143,25 @@ représentant la zone : %1$s x %2$s</string>
     <string name="routing_attr_allow_classic_only_description">Pistes de ski de fond (inclus les pistes tracées par le passage des skieurs).</string>
     <string name="routing_attr_difficulty_preference_name">Difficulté préférée</string>
     <string name="routing_attr_difficulty_preference_description">Privilégier les itinéraires avec ce niveau de difficulté (un itinéraire plus difficile ou pus facile est toujours possible s\'il est plus court).</string>
-    <string name="release_3_4">• Application profiles: create a custom profile for your own needs, with a custom icon and color
-\n
-\n • Now customize any profile\'s default and min/max speeds
-\n
-\n • Added a widget for the current coordinates
-\n
-\n • Added options to show the compass and a radius ruler on the map
-\n
-\n • Fix background track logging
-\n
-\n • Improved background map downloads
-\n
-\n • Returned \'Turn Screen On\' option
-\n
-\n • Fixed Wikipedia language selection
-\n
-\n • Fixed compass button behavior during navigation
-\n
-\n • Other bug fixes
+    <string name="release_3_4">• Profils d\'application : créez un profil personnalisé pour vos propres besoins, avec une icône et une couleur personnalisées
+\n 
+\n• Personnalisez maintenant les paramètres par défaut et la vitesse min/max de n\'importe quel profil
+\n 
+\n• Ajout d\'un widget pour les coordonnées actuelles
+\n 
+\n• Ajout d\'options pour afficher la boussole et une règle de rayon sur la carte
+\n 
+\n• Correction de l\'enregistrement de la trace en arrière-plan
+\n 
+\n• Téléchargements de cartes en arrière-plan améliorés
+\n 
+\n• Retour de l\'option \"Allumer l\'écran\"
+\n 
+\n• Correction de la sélection de la langue Wikipédia
+\n 
+\n• Correction du comportement du bouton de la boussole pendant la navigation
+\n 
+\n• Diverses corrections d\'anomalies
 \n
 \n</string>
     <string name="rendering_attr_highway_class_track_grade1_name">Niveau 1</string>
@@ -3177,4 +3177,9 @@ représentant la zone : %1$s x %2$s</string>
     <string name="select_base_profile_dialog_message">Basez votre profil personnalisé sur l\'un des profils par défaut pour définir les unités de vitesse, de distance ou la visibilité des widgets. Voici les profils par défaut de l\'application ainsi que des exemples de profils personnalisés :</string>
     <string name="temporary_conditional_routing">Prendre en compte les limitations temporaires</string>
     <string name="shared_string_default">Par défaut</string>
+    <string name="gpx_join_gaps">Relier les traces</string>
+    <string name="app_mode_camper">Campeur</string>
+    <string name="app_mode_campervan">Caravane</string>
+    <string name="rendering_attr_showLez_description">Afficher les zones à faibles émissions sur la carte (n\'influe pas sur l\'itinéraire).</string>
+    <string name="rendering_attr_showLez_name">Afficher les zones à faibles émissions</string>
 </resources>
