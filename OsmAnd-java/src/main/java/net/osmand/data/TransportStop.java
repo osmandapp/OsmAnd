@@ -6,7 +6,9 @@ import net.osmand.util.MapUtils;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class TransportStop extends MapObject {
 
@@ -20,6 +22,7 @@ public class TransportStop extends MapObject {
 	public int y31;
 	private List<TransportStopExit> exits;
 	private List<TransportRoute> routes = null;
+	private LinkedHashMap<String, int[]> referencesToRoutesMap;
 
 	private TransportStopAggregated transportStopAggregated;
 
@@ -28,7 +31,20 @@ public class TransportStop extends MapObject {
 	public List<TransportRoute> getRoutes() {
 		return routes;
 	}
-	
+
+	public LinkedHashMap<String, int[]> getReferencesToRoutesMap() {
+		return referencesToRoutesMap;
+	}
+
+	public void putReferencesToRoutes(String repositoryFileName, int[] referencesToRoutes) {
+		LinkedHashMap<String, int[]> referencesToRoutesMap = this.referencesToRoutesMap;
+		if (referencesToRoutesMap == null) {
+			referencesToRoutesMap = new LinkedHashMap<>();
+			this.referencesToRoutesMap = referencesToRoutesMap;
+		}
+		referencesToRoutesMap.put(repositoryFileName, referencesToRoutes);
+	}
+
 	public void setRoutes(List<TransportRoute> routes) {
 		this.routes = routes;
 	}
