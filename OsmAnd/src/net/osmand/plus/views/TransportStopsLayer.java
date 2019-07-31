@@ -28,6 +28,7 @@ import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.transport.TransportStopType;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -102,27 +103,30 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 				if (latLonBounds == null) {
 					return new ArrayList<>();
 				}
-				List<TransportStop> res = view.getApplication().getResourceManager().searchTransportSync(latLonBounds.top, latLonBounds.left,
-						latLonBounds.bottom, latLonBounds.right, new ResultMatcher<TransportStop>() {
+				try {
+					List<TransportStop> res = view.getApplication().getResourceManager().searchTransportSync(latLonBounds.top, latLonBounds.left,
+							latLonBounds.bottom, latLonBounds.right, new ResultMatcher<TransportStop>() {
 
-							@Override
-							public boolean publish(TransportStop object) {
-								return true;
-							}
+								@Override
+								public boolean publish(TransportStop object) {
+									return true;
+								}
 
-							@Override
-							public boolean isCancelled() {
-								return isInterrupted();
-							}
-						});
-				Collections.sort(res, new Comparator<TransportStop>() {
-					@Override
-					public int compare(TransportStop lhs, TransportStop rhs) {
-						return lhs.getId() < rhs.getId() ? -1 : (lhs.getId().longValue() == rhs.getId().longValue() ? 0 : 1);
-					}
-				});
-
-				return res;
+								@Override
+								public boolean isCancelled() {
+									return isInterrupted();
+								}
+							});
+					Collections.sort(res, new Comparator<TransportStop>() {
+						@Override
+						public int compare(TransportStop lhs, TransportStop rhs) {
+							return lhs.getId() < rhs.getId() ? -1 : (lhs.getId().longValue() == rhs.getId().longValue() ? 0 : 1);
+						}
+					});
+					return res;
+				} catch (IOException e) {
+					return new ArrayList<>();
+				}
 			}
 		};
 	}

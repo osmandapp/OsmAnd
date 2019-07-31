@@ -765,38 +765,14 @@ public class TransportRoutePlanner {
 			
 			// could be global ?
 			TLongObjectHashMap<TransportStop> loadedTransportStops = new TLongObjectHashMap<TransportStop>();
-			
-			TIntArrayList localFileRoutesToLoad = new TIntArrayList();
+			TIntObjectHashMap<TransportRoute> localFileRoutes = new TIntObjectHashMap<>();
 			for (BinaryMapIndexReader r : routeMap.keySet()) {
 				sr.clearSearchResults();
 				List<TransportStop> stops = r.searchTransportIndex(sr);
-				
-				localFileRoutesToLoad.clear();
-				prepareRoutesToLoad(loadedTransportStops, stops, localFileRoutesToLoad);
-				
-				
-				// load routes and create transport segments
-				TIntObjectHashMap<TransportRoute> localFileRoutes = new TIntObjectHashMap<TransportRoute>();
-				if (localFileRoutesToLoad.size() > 0) {
-					localFileRoutesToLoad.sort();
-					TIntArrayList referencesToLoad = new TIntArrayList();
-					TIntObjectHashMap<TransportRoute> loadedRoutes = routeMap.get(r);
-					TIntIterator it = localFileRoutesToLoad.iterator();
-					int p = localFileRoutesToLoad.get(0) + 1; // different
-					while (it.hasNext()) {
-						int nxt = it.next();
-						if (p != nxt) {
-							if (loadedRoutes.contains(nxt)) {
-								localFileRoutes.put(nxt, loadedRoutes.get(nxt));
-							} else {
-								referencesToLoad.add(nxt);
-							}
-						}
-					}
-					r.loadTransportRoutes(referencesToLoad.toArray(), localFileRoutes);
-					loadedRoutes.putAll(localFileRoutes);
-				}
-				
+
+				localFileRoutes.clear();
+				mergeTransportStops(r, loadedTransportStops, stops, localFileRoutes, routeMap.get(r));
+
 				for (TransportStop stop : stops) {
 					long stopId = stop.getId();
 					TransportStop multifileStop = loadedTransportStops.get(stopId);
@@ -808,19 +784,18 @@ public class TransportRoutePlanner {
 						// add other routes
 						stop.setReferencesToRoutes(null);
 					}
-					if(rrs != null && !multifileStop.isDeleted()) {
-						for(int i = 0; i < rrs.length; i++) {
-							TransportRoute route = localFileRoutes.get(rrs[i]);
-							if(route == null) {
-								System.err.println(String.format("Something went wrong by loading route %d for stop %s", rrs[i], stop));
-							} else if(multifileStop == stop ||
-									(!multifileStop.hasRoute(route.getId()) && 
-									!multifileStop.isRouteDeleted(route.getId()))){
+					if (rrs != null && !multifileStop.isDeleted()) {
+						for (int rr : rrs) {
+							TransportRoute route = localFileRoutes.get(rr);
+							if (route == null) {
+								System.err.println(String.format("Something went wrong by loading route %d for stop %s", rr, stop));
+							} else if (multifileStop == stop ||
+									(!multifileStop.hasRoute(route.getId()) &&
+											!multifileStop.isRouteDeleted(route.getId()))) {
 								// duplicates won't be added
 								multifileStop.addRouteId(route.getId());
 								multifileStop.addRoute(route);
 							}
-							
 						}
 					}
 				}
@@ -832,21 +807,28 @@ public class TransportRoutePlanner {
 			return lst;
 		}
 
-		private List<TransportStop> prepareRoutesToLoad(TLongObjectHashMap<TransportStop> loadedTransportStops,
-				List<TransportStop> stops, TIntArrayList resRoutesToLoad) {
+		public static List<TransportStop> mergeTransportStops(BinaryMapIndexReader reader,
+															  TLongObjectHashMap<TransportStop> loadedTransportStops,
+															  List<TransportStop> stops,
+															  TIntObjectHashMap<TransportRoute> localFileRoutes,
+															  TIntObjectHashMap<TransportRoute> loadedRoutes) throws IOException {
+			TIntArrayList routesToLoad = new TIntArrayList();
+			TIntArrayList localRoutesToLoad = new TIntArrayList();
 			Iterator<TransportStop> it = stops.iterator();
 			while (it.hasNext()) {
 				TransportStop stop = it.next();
 				long stopId = stop.getId();
+				localRoutesToLoad.clear();
 				TransportStop multifileStop = loadedTransportStops.get(stopId);
 				long[] routesIds = stop.getRoutesIds();
 				long[] delRIds = stop.getDeletedRoutesIds();
 				if (multifileStop == null) {
 					loadedTransportStops.put(stopId, stop);
+					multifileStop = stop;
 					if(!stop.isDeleted()) {
-						resRoutesToLoad.addAll(stop.getReferencesToRoutes());
+						localRoutesToLoad.addAll(stop.getReferencesToRoutes());
 					}
-				} else if(multifileStop.isDeleted()){
+				} else if (multifileStop.isDeleted()){
 					// stop has noting to load, so not needed
 					it.remove();
 				} else {
@@ -860,20 +842,45 @@ public class TransportRoutePlanner {
 						for (int i = 0; i < routesIds.length; i++) {
 							long routeId = routesIds[i];
 							if (!multifileStop.hasRoute(routeId) && !multifileStop.isRouteDeleted(routeId)) {
-								resRoutesToLoad.add(refs[i]);
+								localRoutesToLoad.add(refs[i]);
 							}
 						}
 					} else {
 						if (stop.hasReferencesToRoutes()) {
 							// old format
-							resRoutesToLoad.addAll(stop.getReferencesToRoutes());
+							localRoutesToLoad.addAll(stop.getReferencesToRoutes());
 						} else {
 							// stop has noting to load, so not needed
 							it.remove();
 						}
 					}
 				}
+				routesToLoad.addAll(localRoutesToLoad);
+				multifileStop.putReferencesToRoutes(reader.getFile().getName(), localRoutesToLoad.toArray());
 			}
+
+			// load routes
+			if (routesToLoad.size() > 0) {
+				routesToLoad.sort();
+				TIntArrayList referencesToLoad = new TIntArrayList();
+				TIntIterator itr = routesToLoad.iterator();
+				int p = routesToLoad.get(0) + 1; // different
+				while (itr.hasNext()) {
+					int nxt = itr.next();
+					if (p != nxt) {
+						if (localFileRoutes != null && loadedRoutes != null && loadedRoutes.contains(nxt)) {
+							localFileRoutes.put(nxt, loadedRoutes.get(nxt));
+						} else {
+							referencesToLoad.add(nxt);
+						}
+					}
+				}
+				if (localFileRoutes != null && loadedRoutes != null) {
+					reader.loadTransportRoutes(referencesToLoad.toArray(), localFileRoutes);
+					loadedRoutes.putAll(localFileRoutes);
+				}
+			}
+
 			return stops;
 		}
 
@@ -937,7 +944,7 @@ public class TransportRoutePlanner {
 			}
 		}
 
-		
+
 
 	}
 
