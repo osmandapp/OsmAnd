@@ -1020,9 +1020,9 @@
     <string name="trace_rendering">اطلاعات عیب‌یابی رندرگیری</string>
     <string name="trace_rendering_descr">عملکرد رندرگیری را نمایش می‌دهد.</string>
     <string name="choose_audio_stream_descr">بلندگوی پخش راهنمای گفتاری را انتخاب کنید.</string>
-    <string name="voice_stream_voice_call">منبع صدای تماس تلفنی (همچنین برای وقفه‌انداختن در دستگاه پخش خودرو)</string>
-    <string name="voice_stream_notification">منبع صدای اعلان</string>
-    <string name="voice_stream_music">منبع پخش صدای موسیقی/رسانه</string>
+    <string name="voice_stream_voice_call">صدای تماس تلفنی (برای وقفه‌انداختن در دستگاه پخش بلوتوثی خودرو)</string>
+    <string name="voice_stream_notification">صدای اعلان</string>
+    <string name="voice_stream_music">صدای رسانه/ناوبری</string>
     <string name="warning_tile_layer_not_downloadable">برنامه نمی‌تواند لایهٔ %1$s را دانلود کند، شاید نصب مجدد آن راهگشا باشد.</string>
     <string name="overlay_transparency_descr">شفافیت لایهٔ رویی را تغییر دهید.</string>
     <string name="overlay_transparency">شفافیت لایهٔ رویی</string>
@@ -1343,7 +1343,7 @@
     <string name="lang_ar">عربی</string>
     <string name="lang_fa">فارسی</string>
     <string name="lang_sc">ساردینیایی</string>
-    <string name="lang_sr">صربی</string>
+    <string name="lang_sr">صربی (سیریلیک)</string>
     <string name="lang_zh_cn">چینی (ساده‌شده)</string>
     <string name="lang_zh_tw">چینی (سنتی)</string>
     <string name="arrival_distance_factor_early">زود</string>
@@ -1662,7 +1662,7 @@
     <string name="skip_map_downloading_desc">شما نقشه‌های آفلاین را نصب نکرده‌اید. نقشه‌ای را از لیست انتخاب کنید یا اینکه بعداً از طریق منو ← %1$s، آن را دانلود کنید.</string>
     <string name="search_another_country">منطقهٔ دیگری را انتخاب کنید</string>
     <string name="search_map">جست‌وجوی نقشه‌ها…</string>
-    <string name="first_usage_wizard_desc">اجازه دهید برنامه موقعیت شما را پیدا کند تا نقشهٔ آنجا را دانلود کنید.</string>
+    <string name="first_usage_wizard_desc">اجازه دهید برنامه موقعیت شما را پیدا کند تا نقشهٔ آنجا را برای دانلود پیشنهاد بدهد.</string>
     <string name="location_not_found">موقعیت پیدا نشد</string>
     <string name="no_inet_connection">اتصال اینترنت برقرار نیست</string>
     <string name="no_inet_connection_desc_map">برای دانلودکردن نقشه‌ها لازم است.</string>
@@ -3055,7 +3055,7 @@
     <string name="routing_attr_avoid_train_name">پرهیز از قطار</string>
     <string name="routing_attr_avoid_train_description">از قطار پرهیز شود</string>
     <string name="routing_attr_avoid_subway_name">پرهیز از مترو</string>
-    <string name="routing_attr_avoid_subway_description">از مترو پرهیز شود</string>
+    <string name="routing_attr_avoid_subway_description">از مترو و حمل‌ونقل ریلی سبک پرهیز شود</string>
     <string name="routing_attr_avoid_ferry_name">پرهیز از فرابر</string>
     <string name="routing_attr_avoid_ferry_description">از فرابر پرهیز شود</string>
     <string name="release_3_3_7">• نمایش زمان بین انتقال‌ها در حمل‌ونقل عمومی
@@ -3134,7 +3134,7 @@
     <string name="process_downloading_service">سرویس دانلود OsmAnd</string>
     <string name="shared_string_color_magenta">ارغوانی</string>
     <string name="shared_string_icon">نماد</string>
-    <string name="collected_data">داده‌هایی که جمع‌آوری شده</string>
+    <string name="collected_data">داده‌های جمع‌آوری‌شده</string>
     <string name="shared_string_min_speed">حداقل سرعت</string>
     <string name="shared_string_max_speed">حداکثر سرعت</string>
     <string name="default_speed_setting_title">سرعت پیشفرض</string>
@@ -3231,4 +3231,11 @@
     <string name="rendering_attr_showLez_description">محدوده‌های کم‌آلاینده (LEZ) را روی نقشه نشان بده. بر مسیریابی تأثیر ندارد.</string>
     <string name="rendering_attr_showLez_name">نمایش محدوده‌های کم‌آلاینده</string>
     <string name="temporary_conditional_routing">در نظر گرفتن محدودیت‌های موقت در مسیریابی</string>
+    <string name="routing_attr_piste_type_downhill_name">اسکی آلپاین</string>
+    <string name="routing_attr_piste_type_downhill_description">سراشیبی‌های اسکی آلپاین و دسترسی به بالابرهای اسکی.</string>
+    <string name="routing_attr_piste_type_nordic_name">اسکی کراس/نوردیک</string>
+    <string name="routing_attr_piste_type_nordic_description">مسیرهای اسکی کراس یا نوردیک</string>
+    <string name="shared_string_crash">از کار افتادن</string>
+    <string name="shared_string_open_track">باز کن</string>
+    <string name="shared_string_default">پیشفرض</string>
 </resources>
