@@ -244,4 +244,9 @@
     <string name="gpx_settings">Налады GPX</string>
     <string name="timeline_no_data_descr">Даныя для абранага дня адсутнічаюць</string>
     <string name="timeline_no_data">Няма даных</string>
+    <string name="shared_string_end">Канец</string>
+    <string name="shared_string_start">Пачатак</string>
+    <string name="shared_string_apply">Ужыць</string>
+    <string name="set_time_timeline_descr">Абраць час для паказу</string>
+    <string name="start_end_date">Пачатак - дата завяршэння</string>
 </resources>

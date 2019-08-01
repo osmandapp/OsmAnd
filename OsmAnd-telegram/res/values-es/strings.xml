@@ -243,4 +243,5 @@
     <string name="gpx_settings">Ajustes de GPX</string>
     <string name="timeline_no_data_descr">No tenemos datos recopilados para el día seleccionado</string>
     <string name="timeline_no_data">Sin datos</string>
+    <string name="shared_string_apply">Aplicar</string>
 </resources>

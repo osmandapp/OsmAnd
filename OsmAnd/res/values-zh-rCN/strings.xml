@@ -287,7 +287,7 @@
     <string name="transport_search_before">此前路线</string>
     <string name="transport_finish_search">完成搜索</string>
     <string name="shared_string_ok">确定</string>
-    <string name="favorite"></string>
+    <string name="favorite"/>
     <string name="shared_string_clear_all">全部清除</string>
     <string name="shared_string_download_successful">下载成功</string>
     <string name="update_existing">更换</string>
@@ -499,7 +499,7 @@
     <string name="route_kr">靠右行驶</string>
     <string name="rendering_attr_noPolygons_name">隐藏多边形</string>
     <string name="rendering_attr_appMode_name">渲染模式</string>
-    <string name="rendering_attr_contourLines_name"></string>
+    <string name="rendering_attr_contourLines_name"/>
     <string name="rendering_attr_hmRendered_name">显示更多地图细节</string>
     <string name="local_index_routing_data">路线规划数据</string>
     <string name="navigate_point_format">格式</string>
@@ -1076,8 +1076,8 @@
     <string name="shared_string_selected">已选择</string>
     <string name="shared_string_selected_lowercase">已选择</string>
     <string name="shared_string_never">总不</string>
-    <string name="shared_string_and"></string>
-    <string name="shared_string_or"></string>
+    <string name="shared_string_and"/>
+    <string name="shared_string_or"/>
     <string name="shared_string_select_on_map">在地图上选择</string>
     <string name="shared_string_deselect">取消选中</string>
     <string name="shared_string_deselect_all">全部取消</string>
@@ -1181,7 +1181,7 @@
     <string name="routing_attr_avoid_unpaved_name">避开未铺设道路</string>
     <string name="routing_attr_avoid_unpaved_description">避开未铺设道路。</string>
     <string name="routing_attr_avoid_ferries_name">避开渡轮</string>
-    <string name="routing_attr_avoid_ferries_description">避开渡轮</string>
+    <string name="routing_attr_avoid_ferries_description">避免轮渡</string>
     <string name="favourites_context_menu_add">添加收藏</string>
     <string name="map_widget_plain_time">当前时间</string>
     <string name="map_widget_battery">电池用量</string>
@@ -1201,11 +1201,11 @@
     <string name="quick_action_map_source_action">添加地图来源</string>
     <string name="map_mode">地图模式</string>
     <string name="map_magnifier">地图缩放</string>
-    <string name="rendering_attr_showSurfaceGrade_name"></string>
-    <string name="rendering_attr_showSurfaces_name"></string>
+    <string name="rendering_attr_showSurfaceGrade_name"/>
+    <string name="rendering_attr_showSurfaces_name"/>
     <string name="map_widget_left">左边栏</string>
     <string name="map_widget_right">右边栏</string>
-    <string name="rendering_attr_showCycleRoutes_name"></string>
+    <string name="rendering_attr_showCycleRoutes_name"/>
     <string name="rendering_attr_horseRoutes_name">马匹路线</string>
     <string name="download_wikipedia_maps">维基百科</string>
     <string name="do_not_show_startup_messages_desc">停止显示应用折扣信息和特殊本地事件信息。</string>
@@ -1221,7 +1221,7 @@
     <string name="anonymous_user">匿名用户</string>
     <string name="logged_as">以 %1$s 身份登录</string>
     <string name="speed_limit_exceed">速度限制容忍程度</string>
-    <string name="rendering_category_others"></string>
+    <string name="rendering_category_others"/>
     <string name="print_route">显示路线</string>
     <string name="search_osm_offline">搜索地理位置</string>
     <string name="srtm_color_scheme">颜色方案</string>
@@ -1230,7 +1230,7 @@
     <string name="display_zoom_level">显示缩放等级：%1$s</string>
     <string name="online_map">在线地图</string>
     <string name="roads_only">仅道路</string>
-    <string name="device_memory">设备内存</string>
+    <string name="device_memory"></string>
     <string name="first_usage_item">初次使用</string>
     <string name="tips_and_tricks_descr">常见问题、最近修改和其它内容。</string>
     <string name="faq_item_description">常见问题</string>
@@ -1272,20 +1272,20 @@
     <string name="everything_up_to_date">所有文件均为最新</string>
     <string name="use_opengl_render">使用 OpenGL 渲染</string>
     <string name="use_opengl_render_descr">使用硬件加速 OpenGL 渲染（可能在某些设备上无法工作）</string>
-    <string name="rendering_attr_publicTransportMode_name"></string>
-    <string name="rendering_attr_tramTrainRoutes_name"></string>
-    <string name="rendering_attr_subwayMode_name"></string>
+    <string name="rendering_attr_publicTransportMode_name"/>
+    <string name="rendering_attr_tramTrainRoutes_name"/>
+    <string name="rendering_attr_subwayMode_name"/>
     <string name="dash_download_msg_none">您是否想要下载离线地图？</string>
     <string name="lock_screen_request_explanation">%1$s 需要该项权限以关闭屏幕提供节能功能。</string>
     <string name="dash_download_msg">您已下载 %1$s 份地图</string>
     <string name="dash_download_new_one">下载新地图</string>
     <string name="dash_download_manage">管理</string>
     <string name="rendering_attr_trainLightrailRoutes_name">铁路线路</string>
-    <string name="rendering_category_hide"></string>
+    <string name="rendering_category_hide"/>
     <string name="traffic_warning_pedestrian">人行横道</string>
-    <string name="rendering_category_routes"></string>
+    <string name="rendering_category_routes"/>
     <string name="show_railway_warnings">铁道交口</string>
-    <string name="rendering_category_details"></string>
+    <string name="rendering_category_details"/>
     <string name="show_pedestrian_warnings">人行横道</string>
     <string name="rendering_attr_busRoutes_name">公交线路</string>
     <string name="traffic_warning_railways">铁道交口</string>
@@ -1657,7 +1657,7 @@
     <string name="gps_status">GPS 状态</string>
     <string name="version_settings_descr">下载每夜构建。</string>
     <string name="version_settings">构建</string>
-    <string name="rendering_attr_streetLighting_name"></string>
+    <string name="rendering_attr_streetLighting_name"/>
     <string name="proxy_pref_descr">设置代理互联网通信</string>
     <string name="shared_string_gpx_points">点</string>
     <string name="navigation_over_track">开始沿着轨道导航吗？</string>
@@ -1684,7 +1684,7 @@
     <string name="rendering_attr_tramRoutes_name">有轨电车路线</string>
     <string name="rendering_attr_shareTaxiRoutes_name">分享出租车路线</string>
     <string name="rendering_attr_trolleybusRoutes_name">无轨电车路线</string>
-    <string name="rendering_category_transport"></string>
+    <string name="rendering_category_transport"/>
     <string name="map_widget_appearance_rem">剩余的元素</string>
     <string name="search_radius_proximity">之间</string>
     <string name="speed_limit_exceed_message">选择速限容许余裕界限，超过时您将会收到语音警告。</string>
@@ -1736,14 +1736,14 @@
 \n
 \n启动此预览，会更改地图样式到“冬季和滑雪”，显示出冬季的条件下，所有的景观特征。此查看可以在这里经由再次取消启动，或通过“配置地图”下的“地图样式”这两者中任何一个的更改而恢复它。</string>
     <string name="index_tours">旅游</string>
-    <string name="shared_string_all"></string>
+    <string name="shared_string_all"/>
     <string name="shared_string_waypoints">路标</string>
     <string name="download_additional_maps">要下载缺少的地图 %1$s (%2$d MB) 吗？</string>
     <string name="rendering_value_browse_map_name">浏览地图</string>
     <string name="rendering_value_car_name">汽车</string>
     <string name="rendering_value_bicycle_name">自行车</string>
     <string name="rendering_value_pedestrian_name">行人</string>
-    <string name="rendering_attr_coloredBuildings_name"></string>
+    <string name="rendering_attr_coloredBuildings_name"/>
     <string name="continue_navigation">继续导航</string>
     <string name="pause_navigation">暂停导航</string>
     <string name="keep_navigation_service">保持</string>
@@ -1762,7 +1762,7 @@
     <string name="rendering_attr_hideText_name">文本</string>
     <string name="rendering_attr_hideWoodScrubs_name">木材和磨砂</string>
     <string name="rendering_attr_buildings15zoom_name">15 级缩放建筑物</string>
-    <string name="rendering_attr_moreDetailed_name"></string>
+    <string name="rendering_attr_moreDetailed_name"/>
     <string name="rendering_attr_lessDetailed_name">较少细节</string>
     <string name="rendering_attr_hideAccess_name">访问限制</string>
     <string name="rendering_attr_showAccess_name">显示访问限制和收费</string>
@@ -1884,7 +1884,7 @@
     <string name="routing_attr_prefer_motorway_name">更喜欢机动车路</string>
     <string name="routing_attr_prefer_motorway_description">更喜欢机动车路</string>
     <string name="routing_attr_avoid_motorway_name">避免机动车路</string>
-    <string name="routing_attr_avoid_motorway_description">避免机动车路</string>
+    <string name="routing_attr_avoid_motorway_description">避開高速路</string>
     <string name="copying_osmand_files_descr">将 OsmAnd 数据文件复制到新的目标 (%s)…</string>
     <string name="copying_osmand_files">正在复制 OsmAnd 数据文件…</string>
     <string name="calculate_osmand_route_gpx">计算 OsmAnd 离线路线</string>
@@ -1938,9 +1938,9 @@
     <string name="map_widget_av_notes">音频/视频注释</string>
     <string name="audionotes_location_not_defined">以位置去关联的附注尚未下定义。\"使用位置 …\"，把注解分配给指定的位置。</string>
     <string name="map_widget_audionotes">音频注释</string>
-    <string name="rendering_attr_alpineHiking_name"></string>
+    <string name="rendering_attr_alpineHiking_name"/>
     <string name="rendering_attr_alpineHiking_description">依据 SAC 分级计算路径</string>
-    <string name="rendering_attr_hikingRoutesOSMC_name"></string>
+    <string name="rendering_attr_hikingRoutesOSMC_name"/>
     <string name="rendering_attr_hikingRoutesOSMC_description">根据 OSMC 轨迹渲染路径。</string>
     <string name="target_point">目的地 %1$s</string>
     <string name="intermediate_point">中转地点 %1$s</string>
@@ -2724,7 +2724,7 @@
     <string name="shared_string_travel_book">旅游书</string>
     <string name="download_images">下载图片</string>
     <string name="rendering_value_black_name">黑色</string>
-    <string name="rendering_attr_surface_wood_name"></string>
+    <string name="rendering_attr_surface_wood_name"/>
     <string name="app_mode_subway">地铁</string>
     <string name="app_mode_horse">马</string>
     <string name="shared_string_color_magenta">品红色</string>
