@@ -11,15 +11,13 @@ public class AGpxFile implements Parcelable {
 	private long modifiedTime;
 	private long fileSize;
 	private boolean active;
-	private String color;
 	private AGpxFileDetails details;
 
-	public AGpxFile(@NonNull String fileName, long modifiedTime, long fileSize, boolean active, String color, @Nullable AGpxFileDetails details) {
+	public AGpxFile(@NonNull String fileName, long modifiedTime, long fileSize, boolean active, @Nullable AGpxFileDetails details) {
 		this.fileName = fileName;
 		this.modifiedTime = modifiedTime;
 		this.fileSize = fileSize;
 		this.active = active;
-		this.color = color;
 		this.details = details;
 	}
 
@@ -54,10 +52,6 @@ public class AGpxFile implements Parcelable {
 		return active;
 	}
 
-	public String getColor() {
-		return color;
-	}
-
 	public AGpxFileDetails getDetails() {
 		return details;
 	}
@@ -72,7 +66,6 @@ public class AGpxFile implements Parcelable {
 		if (details != null) {
 			out.writeParcelable(details, flags);
 		}
-		out.writeString(color);
 	}
 
 	private void readFromParcel(Parcel in) {
@@ -87,7 +80,6 @@ public class AGpxFile implements Parcelable {
 		} else {
 			details = null;
 		}
-		color = in.readString();
 	}
 
 	public int describeContents() {
