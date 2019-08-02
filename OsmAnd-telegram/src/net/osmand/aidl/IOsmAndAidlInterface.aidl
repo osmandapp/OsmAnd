@@ -71,10 +71,13 @@ import net.osmand.aidl.navigation.NavigateSearchParams;
 
 import net.osmand.aidl.customization.SetWidgetsParams;
 import net.osmand.aidl.customization.OsmandSettingsParams;
+import net.osmand.aidl.customization.OsmandSettingsInfoParams;
+import net.osmand.aidl.customization.CustomizationInfoParams;
 
 import net.osmand.aidl.gpx.AGpxFile;
 import net.osmand.aidl.gpx.AGpxFileDetails;
 import net.osmand.aidl.gpx.CreateGpxBitmapParams;
+import net.osmand.aidl.gpx.GpxColorParams;
 
 import net.osmand.aidl.tiles.ASqliteDbFile;
 
@@ -82,11 +85,13 @@ import net.osmand.aidl.plugins.PluginParams;
 import net.osmand.aidl.copyfile.CopyFileParams;
 
 import net.osmand.aidl.navigation.ANavigationUpdateParams;
+import net.osmand.aidl.navigation.ANavigationVoiceRouterMessageParams;
 
 import net.osmand.aidl.contextmenu.ContextMenuButtonsParams;
 import net.osmand.aidl.contextmenu.UpdateContextMenuButtonsParams;
 import net.osmand.aidl.contextmenu.RemoveContextMenuButtonsParams;
 
+import net.osmand.aidl.mapmarker.RemoveMapMarkersParams;
 
 // NOTE: Add new methods at the end of file!!!
 
@@ -102,16 +107,23 @@ interface IOsmAndAidlInterface {
     boolean addMapMarker(in AddMapMarkerParams params);
 
     /**
-     * Add map marker at given location.
+     * Remove map marker.
+     *
+     * If ignoreCoordinates is false the marker is only removed if lat/lon match the currently set values of the marker.
+     * If ignoreCoordinates is true the marker is removed if the name matches, the values of lat/lon are ignored.
      *
      * @param lat (double) -  latitude.
      * @param lon (double) - longitude.
      * @param name (String)- name of marker.
+     * @param ignoreCoordinates (boolean) - flag to determine whether lat/lon shall be ignored
      */
     boolean removeMapMarker(in RemoveMapMarkerParams params);
 
     /**
-     * Update map marker at given location with name.
+     * Update map marker.
+     *
+     * If ignoreCoordinates is false the marker gets updated only if latPrev/lonPrev match the currently set values of the marker.
+     * If ignoreCoordinates is true the marker gets updated if the name matches, the values of latPrev/lonPrev are ignored.
      *
      * @param latPrev (double) - latitude (current marker).
      * @param lonPrev (double) - longitude (current marker).
@@ -119,6 +131,7 @@ interface IOsmAndAidlInterface {
      * @param latNew (double) - latitude (new marker).
      * @param lonNew (double) - longitude (new marker).
      * @param nameNew (String) - name (new marker).
+     * @param ignoreCoordinates (boolean) - flag to determine whether latPrev/lonPrev shall be ignored
      */
     boolean updateMapMarker(in UpdateMapMarkerParams params);
 
@@ -190,6 +203,7 @@ interface IOsmAndAidlInterface {
      *
      * @param layerId (String) - layer id.
      * @param pointId (String) - point id.
+     * @param updateOpenedMenuAndMap (boolean) - flag to enable folowing mode and menu updates for point
      * @param shortName (String) - short name (single char). Displayed on the map.
      * @param fullName (String) - full name. Displayed in the context menu on first row.
      * @param typeName (String) - type name. Displayed in context menu on second row.
@@ -686,17 +700,150 @@ interface IOsmAndAidlInterface {
      */
     int copyFile(in CopyFileParams filePart);
 
-
     /**
      * Method to register for updates during navgation. Notifies user about distance to the next turn and its type.
      *
-     * @params subscribeToUpdates (boolean) - boolean flag to subscribe or unsubscribe from updates
-     * @params callbackId (long) - id of callback, needed to unsubscribe from updates
-     * @params callback (IOsmAndAidlCallback) - callback to notify user on navigation data change
+     * @param subscribeToUpdates (boolean) - subscribe or unsubscribe from updates
+     * @param callbackId (long) - id of callback, needed to unsubscribe from updates
+     * @param callback (IOsmAndAidlCallback) - callback to notify user on navigation data change
      */
     long registerForNavigationUpdates(in ANavigationUpdateParams params, IOsmAndAidlCallback callback);
 
+    /**
+     * Method to add Context Menu buttons to OsmAnd Context menu.
+     *
+     * {@link ContextMenuButtonsParams } is a wrapper class for params:
+     *
+     * @param leftButton (AContextMenuButton) - parameters for left context button:
+     * @param buttonId (String at AContextMenuButton) - id of button in View
+     * @param leftTextCaption (String at AContextMenuButton) - left-side button text
+     * @param rightTextCaption (String at AContextMenuButton) - right-side button text
+     * @param String leftIconName (String at AContextMenuButton) - name of left-side icon
+     * @param String rightIconName (String at AContextMenuButton) - name of right-side icon
+     * @param boolean needColorizeIcon (booleanat AContextMenuButton) - flag to apply color to icon
+     * @param boolean enabled (boolean at AContextMenuButton) - enable button flag
+     *
+     * @param rightButton (AContextMenuButton) - parameters for right context button, see <i>leftButton</i> param for details.
+     * @param id (String) - button id;
+     * @param appPackage (String) - clinet's app package name
+     * @param layerId (String) - id of Osmand's map layer
+     * @param callbackId (long) - {@link IOsmAndAidlCallback} id
+     * @param pointsIds (List<String>) - list of point Ids to which this rules applies to.
+     *
+     * @param callback (IOsmAndAidlCallback) - AIDL callback;
+     *
+     * @return long - callback's Id;
+     */
     long addContextMenuButtons(in ContextMenuButtonsParams params, IOsmAndAidlCallback callback);
+
+    /**
+     * Method to remove Context Menu buttons from OsmAnd Context menu.
+     *
+     * {@link RemoveContextMenuButtonsParams} is a wrapper class for params:
+     *
+     * @param paramsId (String) - id of {@link ContextMenuButtonsParams} of button you want to remove;
+     * @param callbackId (long) - id of {@ling IOsmAndAidlCallback} of button you want to remove;
+     *
+     */
     boolean removeContextMenuButtons(in RemoveContextMenuButtonsParams params);
+
+    /**
+     * Method to update params on already set custom Context Button.
+     *
+     * {@link UpdateContextMenuButtonsParams } is a wrapper class for params:
+     *
+     * @param leftButton (AContextMenuButton) - parameters for left context button:
+     * @param buttonId (String at AContextMenuButton) - id of button in View
+     * @param leftTextCaption (String at AContextMenuButton) - left-side button text
+     * @param rightTextCaption (String at AContextMenuButton) - right-side button text
+     * @param String leftIconName (String at AContextMenuButton) - name of left-side icon
+     * @param String rightIconName (String at AContextMenuButton) - name of right-side icon
+     * @param boolean needColorizeIcon (booleanat AContextMenuButton) - flag to apply color to icon
+     * @param boolean enabled (boolean at AContextMenuButton) - enable button flag
+     *
+     * @param rightButton (AContextMenuButton) - parameters for right context button, see <i>leftButton</i> param for details.
+     * @param id (String) - button id;
+     * @param appPackage (String) - clinet's app package name
+     * @param layerId (String) - id of Osmand's map layer
+     * @param callbackId (long) - {@link IOsmAndAidlCallback} id
+     * @param pointsIds (List<String>) - list of point Ids to which this rules applies to.
+     *
+     */
     boolean updateContextMenuButtons(in UpdateContextMenuButtonsParams params);
+
+    /**
+     * Method to check if there is a customized setting in OsmAnd Settings.
+     *
+     * {@link OsmandSettingsInfoParams} is a wrapper class for params:
+     *
+     * @param sharedPreferencesName (String at OsmandSettingInfoParams) - key of setting in OsmAnd's preferences.
+     *
+     * @return boolean - true if setting is already set in SharedPreferences
+     *
+     */
+    boolean areOsmandSettingsCustomized(in OsmandSettingsInfoParams params);
+
+    /**
+     * Method to customize parameters of OsmAnd.
+     *
+     * @param params (CustomizationInfoParams) - wrapper class for custom settings and ui.
+     *
+     * @param settingsParams (OsmandSettingsParams) - wrapper class for OsmAnd shared preferences params.
+     * 			   See {@link #customizeOsmandSettings(in OsmandSettingsParams params) customizeOsmandSettings}
+     * 			   method description for details.
+     * @param navDrawerHeaderParams (NavDrawerHeaderParams) - wrapper class for OsmAnd navdrawer header params.
+     * 			   See {@link #setNavDrawerLogoWithParams(in NavDrawerHeaderParams params) setNavDrawerLogoWithParams}
+     * 			   method description for details.
+     * @param navDrawerFooterParams (NavDrawerFooterParams) - wrapper class for OsmAnd navdrawer footer params.
+     * 			   See {@link #setNavDrawerFooterWithParams(in NavDrawerFooterParams params) setNavDrawerFooterWithParams}
+     * 			   method description for details.
+     * @param visibilityWidgetsParams (ArrayList<SetWidgetsParams>) - wrapper class for OsmAnd widgets visibility.
+     * 			   See {@link #regWidgetVisibility(in SetWidgetsParams params) regWidgetVisibility}
+     * 			   method description for details.
+     * @param availabilityWidgetsParams (ArrayList<SetWidgetsParams>) - wrapper class for OsmAnd widgets availability.
+     * 			   See {@link #regWidgetAvailability(in SetWidgetsParams params) regWidgetAvailability}
+     * 			   method description for details.
+     * @param pluginsParams (ArrayList<PluginParams>) - wrapper class for OsmAnd plugins states params.
+     * 			   See {@link #changePluginState(in PluginParams params) changePluginState}
+     * 			   method description for details.
+     * @param featuresEnabledIds (List<String>) - list of UI elements (like QuickSearch button) to show.
+     * 			   See {@link #setEnabledIds(in List<String> ids) setEnabledIds}
+     * @param featuresDisabledIds (List<String>) - list of UI elements (like QuickSearch button) to hide.
+     * 			   See {@link #setDisabledIds(in List<String> ids) setDisabledIds}
+     * @param featuresEnabledPatterns (List<String>) - list of NavDrawer menu items to show.
+     * 			   See {@link #setEnabledPatterns(in List<String> patterns) setEnabledPatterns}
+     * @param featuresDisabledPatterns (List<String>) - list of NavDrawer menu items to hide.
+     * 			   See {@link #setDisabledPatterns(in List<String> patterns) setDisabledPatterns}
+     *
+     */
+    boolean setCustomization(in CustomizationInfoParams params);
+
+    /**
+     * Method to register for Voice Router voice messages during navigation. Notifies user about voice messages.
+     *
+     * @params subscribeToUpdates (boolean) - boolean flag to subscribe or unsubscribe from messages
+     * @params callbackId (long) - id of callback, needed to unsubscribe from messages
+     * @params callback (IOsmAndAidlCallback) - callback to notify user on voice message
+     */
+    long registerForVoiceRouterMessages(in ANavigationVoiceRouterMessageParams params, IOsmAndAidlCallback callback);
+
+    /**
+     * Removes all active map markers (marks them as passed and moves to history)
+     * Empty class of params
+     */
+    boolean removeAllActiveMapMarkers(in RemoveMapMarkersParams params);
+
+    /**
+    * Method to get color name for gpx.
+    *
+    * @param fileName (String) - name of gpx file.
+    *
+    * @param gpxColor (String) - color name of gpx. Can be one of: "red", "orange", "lightblue",
+    *                                              "blue", "purple", "translucent_red", "translucent_orange",
+    *                                              "translucent_lightblue", "translucent_blue", "translucent_purple"
+    * Which used in {@link #importGpx(in ImportGpxParams params) importGpx}
+    * Or color hex if gpx has custom color.
+    *
+    */
+    boolean getGpxColor(inout GpxColorParams params);
 }

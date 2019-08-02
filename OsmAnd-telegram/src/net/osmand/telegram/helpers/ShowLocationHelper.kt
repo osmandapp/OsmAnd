@@ -114,7 +114,7 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 		setupMapLayer()
 		osmandAidlHelper.execOsmandApi {
 			val pointId = item.getMapPointId()
-			val name = item.getVisibleName()
+			val name = item.name
 			val aLatLon = ALatLon(item.latLon!!.latitude, item.latLon!!.longitude)
 			val details = generatePointDetails(item.bearing?.toFloat(), item.altitude?.toFloat(), item.precision?.toFloat())
 			val params = generatePointParams(if (stale) item.grayscalePhotoPath else item.photoPath, stale, item.speed?.toFloat(), item.bearing?.toFloat())
@@ -300,7 +300,7 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 			val aGpxFile = importedGpxFiles.firstOrNull { it.fileName == name }
 
 			if (aGpxFile != null) {
-				val color = aGpxFile.color
+				val color = osmandAidlHelper.getGpxColor(aGpxFile.fileName)
 				if (!color.isNullOrEmpty()) {
 					gpxFile.extensionsToWrite["color"] = color
 				}

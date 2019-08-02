@@ -39,6 +39,7 @@ import net.osmand.aidl.gpx.AGpxBitmap;
 import net.osmand.aidl.gpx.AGpxFile;
 import net.osmand.aidl.gpx.AGpxFileDetails;
 import net.osmand.aidl.gpx.ASelectedGpxFile;
+import net.osmand.aidl.gpx.GpxColorParams;
 import net.osmand.aidl.gpx.StartGpxRecordingParams;
 import net.osmand.aidl.gpx.StopGpxRecordingParams;
 import net.osmand.aidl.maplayer.AMapLayer;
@@ -1477,21 +1478,36 @@ public class OsmandAidlApi {
 						boolean active = app.getSelectedGpxHelper().getSelectedFileByPath(file.getAbsolutePath()) != null;
 						long modifiedTime = dataItem.getFileLastModifiedTime();
 						long fileSize = file.length();
-						int color = dataItem.getColor();
-						String colorName = "";
-						if (color != 0) {
-							colorName = ConfigureMapMenu.GpxAppearanceAdapter.parseTrackColorName(app.getRendererRegistry().getCurrentSelectedRenderer(), color);
-						}
 						AGpxFileDetails details = null;
 						GPXTrackAnalysis analysis = dataItem.getAnalysis();
 						if (analysis != null) {
 							details = createGpxFileDetails(analysis);
 						}
-						files.add(new AGpxFile(fileName, modifiedTime, fileSize, active, colorName, details));
+						files.add(new AGpxFile(fileName, modifiedTime, fileSize, active, details));
 					}
 				//}
 			}
 			return true;
+		}
+		return false;
+	}
+
+	boolean getGpxColor(GpxColorParams params) {
+		if (params != null) {
+			List<GpxDataItem> gpxDataItems = app.getGpxDatabase().getItems();
+			for (GpxDataItem dataItem : gpxDataItems) {
+				File file = dataItem.getFile();
+				if (file.exists()) {
+					if (file.getName().equals(params.getFileName())) {
+						int color = dataItem.getColor();
+						if (color != 0) {
+							String colorName = ConfigureMapMenu.GpxAppearanceAdapter.parseTrackColorName(app.getRendererRegistry().getCurrentSelectedRenderer(), color);
+							params.setGpxColor(colorName);
+							return true;
+						}
+					}
+				}
+			}
 		}
 		return false;
 	}

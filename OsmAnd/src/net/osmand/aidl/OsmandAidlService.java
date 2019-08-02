@@ -33,6 +33,7 @@ import net.osmand.aidl.gpx.AGpxBitmap;
 import net.osmand.aidl.gpx.AGpxFile;
 import net.osmand.aidl.gpx.ASelectedGpxFile;
 import net.osmand.aidl.gpx.CreateGpxBitmapParams;
+import net.osmand.aidl.gpx.GpxColorParams;
 import net.osmand.aidl.gpx.HideGpxParams;
 import net.osmand.aidl.gpx.ImportGpxParams;
 import net.osmand.aidl.gpx.RemoveGpxParams;
@@ -1169,6 +1170,17 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 			try {
 				OsmandAidlApi api = getApi("removeAllActiveMapMarkers");
 				return api != null && api.removeAllActiveMapMarkers();
+			} catch (Exception e) {
+				handleException(e);
+				return false;
+			}
+		}
+
+		@Override
+		public boolean getGpxColor(GpxColorParams params) throws RemoteException {
+			try {
+				OsmandAidlApi api = getApi("getGpxColor");
+				return api != null && api.getGpxColor(params);
 			} catch (Exception e) {
 				handleException(e);
 				return false;
