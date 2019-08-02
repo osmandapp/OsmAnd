@@ -248,5 +248,5 @@
     <string name="shared_string_apply">Zastosuj</string>
     <string name="shared_string_start">Start</string>
     <string name="set_time_timeline_descr">Wybierz czas wyświetlania</string>
-    <string name="start_end_date">Start — Data końcowa</string>
+    <string name="start_end_date">Daty rozpoczęcia i zakończenia</string>
 </resources>
