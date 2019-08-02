@@ -276,7 +276,7 @@ public class AMapPointMenuController extends MenuController {
 				}
 				ims.close();
 			}
-		} catch (IOException e) {
+		} catch (Exception e) {
 			// ignore
 		}
 
