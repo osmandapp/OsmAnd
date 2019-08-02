@@ -252,6 +252,7 @@ public abstract class ContextMenuFragment extends BaseOsmAndFragment {
 		ContextThemeWrapper context =
 				new ContextThemeWrapper(mapActivity, !nightMode ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme);
 		view = LayoutInflater.from(context).inflate(getMainLayoutId(), container, false);
+		initLayout = true;
 		currentMenuState = getInitialMenuState();
 		Bundle args = getArguments();
 		if (args != null) {

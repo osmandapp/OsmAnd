@@ -156,7 +156,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		final RoutesPagerAdapter pagerAdapter = new RoutesPagerAdapter(getChildFragmentManager(), routesCount);
 		viewPager.setAdapter(pagerAdapter);
 		viewPager.setCurrentItem(routeIndex);
-		viewPager.setOffscreenPageLimit(routesCount);
+		viewPager.setOffscreenPageLimit(1);
 		viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 			public void onPageScrollStateChanged(int state) {
 			}
@@ -172,6 +172,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 					mapActivity.refreshMap();
 					buildPagesControl(view);
 					List<WeakReference<RouteDetailsFragment>> routeDetailsFragments = ChooseRouteFragment.this.routeDetailsFragments;
+					RouteDetailsFragment current = getCurrentFragment();
 					for (WeakReference<RouteDetailsFragment> ref : routeDetailsFragments) {
 						RouteDetailsFragment f = ref.get();
 						if (f != null) {
@@ -179,9 +180,13 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 							if (card != null) {
 								card.updateButtons();
 							}
-							if (f == getCurrentFragment()) {
+							if (f == current) {
 								updateZoomButtonsPos(f, f.getViewY(), true);
 								updatePagesViewPos(f, f.getViewY(), true);
+							}
+							Bundle args = f.getArguments();
+							if (args != null) {
+								args.putInt(ContextMenuFragment.MENU_STATE_KEY, currentMenuState);
 							}
 						}
 					}
@@ -323,10 +328,8 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 					pagesView.addView(itemView);
 				}
 				pagesView.requestLayout();
-				pagesView.setVisibility(View.VISIBLE);
-			} else {
-				pagesView.setVisibility(View.GONE);
 			}
+			updatePagesViewVisibility(currentMenuState);
 		}
 	}
 
@@ -698,6 +701,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		return html;
 	}
 
+	@Nullable
 	private RouteDetailsFragment getCurrentFragment() {
 		LockableViewPager viewPager = this.viewPager;
 		if (viewPager != null) {
@@ -810,7 +814,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 	public void onContextMenuStateChanged(@NonNull ContextMenuFragment fragment, int menuState) {
 		LockableViewPager viewPager = this.viewPager;
 		RouteDetailsFragment current = getCurrentFragment();
-		if (viewPager != null && current != null && fragment == current) {
+		if (viewPager != null && fragment == current) {
 			currentMenuState = menuState;
 			List<WeakReference<RouteDetailsFragment>> routeDetailsFragments = this.routeDetailsFragments;
 			for (WeakReference<RouteDetailsFragment> ref : routeDetailsFragments) {
