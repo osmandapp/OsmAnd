@@ -268,27 +268,6 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		}
 	}
 
-	@Override
-	protected void setViewY(int y, boolean animated, boolean adjustMapPos) {
-		super.setViewY(y, animated, adjustMapPos);
-		View mainView = getMainView();
-		if (mainView != null && isPortrait()) {
-			LinearLayout cardsContainer = getCardsContainer();
-			View topShadow = getTopShadow();
-			FrameLayout bottomContainer = getBottomContainer();
-			int top = Math.max(getMenuStatePosY(MenuState.HALF_SCREEN), getViewHeight() - getMenuFullHeightMax());
-			if (y > top) {
-				topShadow.setVisibility(View.INVISIBLE);
-				bottomContainer.setBackgroundDrawable(null);
-				AndroidUtils.setBackground(mainView.getContext(), cardsContainer, isNightMode(), R.drawable.travel_card_bg_light, R.drawable.travel_card_bg_dark);
-			} else {
-				topShadow.setVisibility(View.VISIBLE);
-				AndroidUtils.setBackground(mainView.getContext(), bottomContainer, isNightMode(), R.color.card_and_list_background_light, R.color.card_and_list_background_dark);
-				AndroidUtils.setBackground(mainView.getContext(), cardsContainer, isNightMode(), R.color.card_and_list_background_light, R.color.card_and_list_background_dark);
-			}
-		}
-	}
-
 	private void updateCards() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
