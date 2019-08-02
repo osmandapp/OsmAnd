@@ -16,7 +16,7 @@
     <string name="live_monitoring_url_descr">Préciser l\'adresse web pour le suivi en ligne avec la syntaxe : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
     <string name="live_monitoring_url">Adresse web pour le suivi en ligne</string>
     <string name="gpx_monitoring_disabled_warn">Enregistrer la trace avec le composant GPX ou avec l\'option \"Enregistrer l\'itinéraire\".</string>
-    <string name="show_current_gpx_title">Afficher la trace courante</string>
+    <string name="show_current_gpx_title">Afficher la trace actuelle</string>
     <string name="free_version_message">La version gratuite d\'OsmAnd est limitée à %1$s téléchargements (un téléchargement correspond à l\'installation ou à la mise à jour d\'une carte).</string>
     <string name="free_version_title">Version gratuite</string>
     <string name="poi_context_menu_showdescription">Afficher la description du point d\'intérêt.</string>
@@ -483,8 +483,8 @@
     <string name="auto_zoom_map">Zoom automatique de la carte</string>
     <string name="additional_settings">Paramètres supplémentaires</string>
     <string name="shared_string_settings">Paramètres</string>
-    <string name="save_current_track_descr">Enregistrer la trace courante comme fichier GPX.</string>
-    <string name="save_current_track">Enregistrer la trace courante</string>
+    <string name="save_current_track_descr">Enregistrer la trace actuelle comme fichier GPX.</string>
+    <string name="save_current_track">Enregistrer la trace actuelle</string>
     <string name="save_track_interval_descr">Sélectionnez l\'intervalle d\'enregistrement de la trace pendant l\'itinéraire</string>
     <string name="save_track_interval">Intervalle d\'enregistrement pendant la navigation</string>
     <string name="save_track_to_gpx_descrp">Une trace GPX est enregistrée automatiquement dans le dossier des traces pendant l\'itinéraire</string>
@@ -1174,7 +1174,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="lang_uk">Ukrainien</string>
     <string name="lang_vi">Vietnamien</string>
     <string name="lang_cy">Gallois</string>
-    <string name="always_center_position_on_map">Centrer l\'écran sur la position courante</string>
+    <string name="always_center_position_on_map">Centrer l\'écran sur la position actuelle</string>
     <string name="voice_pref_title">Voix</string>
     <string name="misc_pref_title">Divers</string>
     <string name="localization_pref_title">Paramètres régionaux</string>
@@ -1460,7 +1460,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="location_on_map">Position :\n Lat. %1$s\n Lon. %2$s</string>
     <string name="days_behind">jours passés</string>
     <string name="rename_failed">Échec du renommage.</string>
-    <string name="shared_string_currently_recording_track">Enregistrement de l\'itinéraire courant</string>
+    <string name="shared_string_currently_recording_track">Enregistrement de l\'itinéraire</string>
     <string name="back_to_map">Retour à la carte</string>
     <string name="shared_string_selected">Sélectionné</string>
     <string name="track_points">Points de la trace</string>
@@ -1957,7 +1957,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="map_widget_battery">Niveau de batterie</string>
     <string name="lang_hu_formal">Hongrois (formel)</string>
     <string name="move_marker_bottom_sheet_title">Déplacez la carte pour modifier la position de la marque</string>
-    <string name="current_track">Trace courante</string>
+    <string name="current_track">Trace actuelle</string>
     <string name="change_markers_position">Déplacer la marque</string>
     <string name="lang_es_us">Espagnol (américain)</string>
     <string name="lang_en_gb">Anglais (Royaume-Uni)</string>
@@ -3003,7 +3003,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="move_maps">Déplacer les cartes</string>
     <string name="dont_move_maps">Ne pas déplacer</string>
     <string name="public_transport_ped_route_title">L\'itinéraire piéton est approximativement de %1$s et peut-être plus rapide qu\'en transport public</string>
-    <string name="public_transport_no_route_title">Malheureusement OsmAnd n\'a pas trouvé d\'itinéraire avec les paramètres courants.</string>
+    <string name="public_transport_no_route_title">Malheureusement OsmAnd n\'a pas trouvé d\'itinéraire avec les paramètres actuels.</string>
     <string name="public_transport_try_ped">Essayez l\'itinéraire piéton.</string>
     <string name="public_transport_try_change_settings">Essayez de modifier les paramètres.</string>
     <string name="public_transport_calc_pedestrian">Calculer l\'itinéraire piéton</string>
@@ -3177,7 +3177,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="select_base_profile_dialog_message">Basez votre profil personnalisé sur l\'un des profils par défaut pour définir les unités de vitesse, de distance ou la visibilité des widgets. Voici les profils par défaut de l\'application ainsi que des exemples de profils personnalisés :</string>
     <string name="temporary_conditional_routing">Prendre en compte les limitations temporaires</string>
     <string name="shared_string_default">Par défaut</string>
-    <string name="gpx_join_gaps">Relier les traces</string>
+    <string name="gpx_join_gaps">Relier les trous</string>
     <string name="app_mode_camper">Campeur</string>
     <string name="app_mode_campervan">Caravane</string>
     <string name="rendering_attr_showLez_description">Afficher les zones à faibles émissions sur la carte (n\'influe pas sur l\'itinéraire).</string>
