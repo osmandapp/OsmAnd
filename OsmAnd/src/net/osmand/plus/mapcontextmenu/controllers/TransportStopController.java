@@ -161,7 +161,7 @@ public class TransportStopController extends MenuController {
 
 	private void addTransportStopRoutes(OsmandApplication app, List<TransportStop> stops, List<TransportStopRoute> routes, boolean useEnglishNames) {
 		for (TransportStop tstop : stops) {
-			if (tstop.hasReferencesToRoutes()) {
+			if (tstop.hasReferencesToRoutesMap()) {
 				addRoutes(app, routes, useEnglishNames, tstop, transportStop, (int) MapUtils.getDistance(tstop.getLocation(), transportStop.getLocation()));
 			}
 		}
@@ -262,15 +262,19 @@ public class TransportStopController extends MenuController {
 	private static void processTransportStopAggregated(OsmandApplication app, TransportStop transportStop) {
 		TransportStopAggregated stopAggregated = new TransportStopAggregated();
 		transportStop.setTransportStopAggregated(stopAggregated);
-		stopAggregated.addLocalTransportStop(transportStop);
-
+		TransportStop localStop = null;
 		LatLon loc = transportStop.getLocation();
 		List<TransportStop> transportStops = findTransportStopsAt(app, loc.getLatitude(), loc.getLongitude(), SHOW_STOPS_RADIUS_METERS);
 		if (transportStops != null) {
 			for (TransportStop stop : transportStops) {
-				stopAggregated.addNearbyTransportStop(stop);
+				if (localStop == null && transportStop.getLocation().equals(stop.getLocation()) && transportStop.getName().equals(stop.getName())) {
+					localStop = stop;
+				} else {
+					stopAggregated.addNearbyTransportStop(stop);
+				}
 			}
 		}
+		stopAggregated.addLocalTransportStop(localStop == null ? transportStop : localStop);
 	}
 
 	private static TransportStopAggregated processTransportStopsForAmenity(List<TransportStop> transportStops, Amenity amenity) {
