@@ -333,8 +333,8 @@ public class OsmandRegions {
 	
 	private synchronized List<BinaryMapDataObject> queryBboxNoInit(int lx, int rx, int ty, int by) throws IOException {
 		final List<BinaryMapDataObject> result = new ArrayList<BinaryMapDataObject>();
-		int mx = lx / 2 + rx / 2;
-		int my = ty / 2 + by / 2;
+		final int mx = lx / 2 + rx / 2;
+		final int my = ty / 2 + by / 2;
 		BinaryMapIndexReader.SearchRequest<BinaryMapDataObject> sr = BinaryMapIndexReader.buildSearchRequest(lx, rx, ty, by,
 				5, new BinaryMapIndexReader.SearchFilter() {
 					@Override
