@@ -99,6 +99,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 	private boolean wasDrawerDisabled;
 	private int currentMenuState;
 	private int routesCount;
+	private boolean paused;
 
 	private boolean publicTransportMode;
 	private boolean needAdjustMap;
@@ -209,6 +210,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 	@Override
 	public void onResume() {
 		super.onResume();
+		paused = false;
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			mapActivity.getMapLayers().getMapControlsLayer().showMapControlsIfHidden();
@@ -223,6 +225,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 
 	public void onPause() {
 		super.onPause();
+		paused = true;
 		MapRouteInfoMenu.chooseRoutesVisible = false;
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
@@ -260,6 +263,10 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 	@Override
 	protected Drawable getContentIcon(@DrawableRes int id) {
 		return getIcon(id, nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light);
+	}
+
+	public boolean isPaused() {
+		return paused;
 	}
 
 	public void analyseOnMap(LatLon location, GpxDisplayItem gpxItem) {

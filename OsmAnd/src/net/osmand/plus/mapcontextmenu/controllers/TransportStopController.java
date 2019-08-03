@@ -267,7 +267,7 @@ public class TransportStopController extends MenuController {
 		List<TransportStop> transportStops = findTransportStopsAt(app, loc.getLatitude(), loc.getLongitude(), SHOW_STOPS_RADIUS_METERS);
 		if (transportStops != null) {
 			for (TransportStop stop : transportStops) {
-				if (localStop == null && transportStop.getLocation().equals(stop.getLocation()) && transportStop.getName().equals(stop.getName())) {
+				if (localStop == null && transportStop.equals(stop)) {
 					localStop = stop;
 				} else {
 					stopAggregated.addNearbyTransportStop(stop);
