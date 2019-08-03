@@ -2888,7 +2888,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="shared_string_capacity">Enhaveco</string>
     <string name="shared_string_width">Larĝo</string>
     <string name="shared_string_height">Alto</string>
-    <string name="routeInfo_roadClass_name">Kategorio</string>
+    <string name="routeInfo_roadClass_name">Speco de vojo</string>
     <string name="routeInfo_surface_name">Pavimo</string>
     <string name="routeInfo_smoothness_name">Glateco</string>
     <string name="routeInfo_steepness_name">Klineco</string>
@@ -2902,7 +2902,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="tracks_on_map">Montrataj kursoj</string>
     <string name="time_of_day">Tagtempo</string>
     <string name="by_transport_type">Per %1$s</string>
-    <string name="step_by_step">Paŝon post paŝo</string>
+    <string name="step_by_step">Turno-post-turno</string>
     <string name="routeInfo_road_types_name">Specoj de vojoj</string>
     <string name="exit_at">Eliru ĉe</string>
     <string name="sit_on_the_stop">Atendu ĉe haltejo</string>
