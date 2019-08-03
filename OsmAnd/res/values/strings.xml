@@ -251,7 +251,7 @@
     <string name="use_osm_live_public_transport">OsmAnd Live public transport</string>
     <string name="time_of_day">Time of day</string>
     <string name="by_transport_type">By %1$s</string>
-    <string name="step_by_step">Step by step</string>
+    <string name="step_by_step">Turn-by-turn</string>
     <string name="routeInfo_road_types_name">Road types</string>
     <string name="exit_at">Exit at</string>
     <string name="sit_on_the_stop">Board at stop</string>
@@ -3248,7 +3248,7 @@
     <string name="wiki_article_not_found">Article not found</string>
     <string name="how_to_open_wiki_title">How to open Wikipedia articles?</string>
     <string name="test_voice_desrc">Tap a button and listen to the corresponding voice prompt to identify missing or faulty prompts.</string>
-    <string name="routeInfo_roadClass_name">Class</string>
+    <string name="routeInfo_roadClass_name">Road type</string>
     <string name="routeInfo_surface_name">Surface</string>
     <string name="routeInfo_smoothness_name">Smoothness</string>
     <string name="routeInfo_steepness_name">Steepness</string>
