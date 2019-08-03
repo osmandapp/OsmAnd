@@ -2890,7 +2890,7 @@ Pôr do Sol: %2$s</string>
     <string name="shared_string_capacity">Capacidade</string>
     <string name="shared_string_width">Largura</string>
     <string name="shared_string_height">Altura</string>
-    <string name="routeInfo_roadClass_name">Classe</string>
+    <string name="routeInfo_roadClass_name">Tipo de estrada</string>
     <string name="routeInfo_surface_name">Superfície</string>
     <string name="routeInfo_smoothness_name">Suavidade</string>
     <string name="routeInfo_steepness_name">Inclinação</string>
@@ -2904,7 +2904,7 @@ Pôr do Sol: %2$s</string>
     <string name="tracks_on_map">Trilhas exibidas</string>
     <string name="time_of_day">Hora do dia</string>
     <string name="by_transport_type">Por %1$s</string>
-    <string name="step_by_step">Passo a passo</string>
+    <string name="step_by_step">Curva a curva</string>
     <string name="routeInfo_road_types_name">Tipos de estrada</string>
     <string name="exit_at">Desembarque em</string>
     <string name="sit_on_the_stop">Embarque na parada</string>
