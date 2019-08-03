@@ -543,6 +543,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 						card.setRouteButtonsVisible(false);
 						card.setShowBottomShadow(false);
 						card.setShowTopShadow(false);
+						card.setListener(this);
 						menuCards.add(card);
 						hasTopCard = true;
 					}
@@ -668,6 +669,10 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			if (card instanceof SimpleRouteCard) {
 				hide();
 				ChooseRouteFragment.showInstance(mapActivity.getSupportFragmentManager(), 0, MenuState.FULL_SCREEN);
+			} else if (card instanceof PublicTransportCard) {
+				hide();
+				ChooseRouteFragment.showInstance(mapActivity.getSupportFragmentManager(),
+						((PublicTransportCard) card).getRouteId(), MenuState.FULL_SCREEN);
 			}
 		}
 	}

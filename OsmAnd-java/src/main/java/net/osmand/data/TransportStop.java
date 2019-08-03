@@ -8,7 +8,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 public class TransportStop extends MapObject {
 
@@ -109,6 +108,10 @@ public class TransportStop extends MapObject {
 
 	public boolean hasReferencesToRoutes() {
 		return !isDeleted() && referencesToRoutes != null && referencesToRoutes.length > 0;
+	}
+
+	public boolean hasReferencesToRoutesMap() {
+		return !isDeleted() && referencesToRoutesMap != null && !referencesToRoutesMap.isEmpty();
 	}
 
 	public Amenity getAmenity() {
