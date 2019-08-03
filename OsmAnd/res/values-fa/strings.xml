@@ -2944,7 +2944,7 @@
     <string name="shared_string_capacity">ظرفیت</string>
     <string name="shared_string_width">عرض</string>
     <string name="shared_string_height">ارتفاع</string>
-    <string name="routeInfo_roadClass_name">رده</string>
+    <string name="routeInfo_roadClass_name">نوع جاده</string>
     <string name="routeInfo_surface_name">سطح</string>
     <string name="routeInfo_smoothness_name">همواری</string>
     <string name="routeInfo_steepness_name">شیب</string>
@@ -2958,7 +2958,7 @@
     <string name="shared_string_swap">تعویض</string>
     <string name="time_of_day">ساعت</string>
     <string name="by_transport_type">با %1$s</string>
-    <string name="step_by_step">گام به گام</string>
+    <string name="step_by_step">راهنمای پیچ به پیچ</string>
     <string name="routeInfo_road_types_name">نوع جاده‌ها</string>
     <string name="exit_at">ایستگاه پیاده‌شدن</string>
     <string name="sit_on_the_stop">ایستگاه سوارشدن</string>
@@ -3234,8 +3234,13 @@
     <string name="routing_attr_piste_type_downhill_name">اسکی آلپاین</string>
     <string name="routing_attr_piste_type_downhill_description">سراشیبی‌های اسکی آلپاین و دسترسی به بالابرهای اسکی.</string>
     <string name="routing_attr_piste_type_nordic_name">اسکی کراس/نوردیک</string>
-    <string name="routing_attr_piste_type_nordic_description">مسیرهای اسکی کراس یا نوردیک</string>
+    <string name="routing_attr_piste_type_nordic_description">مسیرهای اسکی کراس یا نوردیک.</string>
     <string name="shared_string_crash">از کار افتادن</string>
     <string name="shared_string_open_track">باز کن</string>
     <string name="shared_string_default">پیشفرض</string>
+    <string name="routing_attr_difficulty_preference_name">دشواری</string>
+    <string name="routing_attr_difficulty_preference_description">اولویت را به مسیرهای با این سطح دشواری بده. هرچند اگر مسیرهای سخت‌تر یا آسان‌تر، کوتاه‌تر باشند همچنان مسیریابی از آن‌ها امکان‌پذیر است.</string>
+    <string name="sett_generic_ext_input">صفحه‌کلید معمولی</string>
+    <string name="sett_wunderlinq_ext_input">WunderLINQ</string>
+    <string name="sett_parrot_ext_input">Parrot</string>
 </resources>
