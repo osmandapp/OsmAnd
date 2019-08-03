@@ -250,6 +250,14 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 		menuTitleHeight = view.findViewById(R.id.route_menu_top_shadow_all).getHeight()
 				+ view.findViewById(R.id.control_buttons).getHeight()
 				- view.findViewById(R.id.buttons_shadow).getHeight();
+		LinearLayout cardsContainer = getCardsContainer();
+		if (menu != null && cardsContainer != null && cardsContainer.getChildCount() > 0 && menu.isRouteSelected()) {
+			View topRouteCard = cardsContainer.getChildAt(0);
+			View badgesView = topRouteCard.findViewById(R.id.routes_badges);
+			View badgesPaddingView = topRouteCard.findViewById(R.id.badges_padding);
+			int paddingHeight = badgesPaddingView != null ? badgesPaddingView.getHeight() : 0;
+			menuTitleHeight += badgesView != null ? badgesView.getBottom() + paddingHeight : 0;
+		}
 		super.calculateLayout(view, initLayout);
 	}
 
