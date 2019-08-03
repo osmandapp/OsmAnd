@@ -147,6 +147,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 
 	private boolean nightMode;
 	private boolean switched;
+	private boolean routeSelected;
 
 	private AddressLookupRequest startPointRequest;
 	private AddressLookupRequest targetPointRequest;
@@ -333,6 +334,10 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		if (animationsHandler != null) {
 			animationsHandler.removeCallbacksAndMessages(null);
 		}
+	}
+
+	public boolean isRouteSelected() {
+		return routeSelected;
 	}
 
 	public void setVisible(boolean visible) {
@@ -528,12 +533,26 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				LatLon endLocation = transportRoutingHelper.getEndLocation();
 				int approxPedestrianTime = (int) MapUtils.getDistance(startLocation, endLocation);
 				boolean showPedestrianCard = approxPedestrianTime < travelTime + 60 && approxPedestrianTime < MAX_PEDESTRIAN_ROUTE_DURATION;
+				boolean hasTopCard = false;
+				if (routes.size() > 1 && routeSelected) {
+					int currentRoute = app.getTransportRoutingHelper().getCurrentRoute();
+					if (currentRoute >= 0 && currentRoute < routes.size()) {
+						route = routes.get(currentRoute);
+						PublicTransportCard card = new PublicTransportCard(mapActivity, startLocation, endLocation, route, currentRoute);
+						card.setRouteInfoVisible(false);
+						card.setRouteButtonsVisible(false);
+						card.setShowBottomShadow(false);
+						card.setShowTopShadow(false);
+						menuCards.add(card);
+						hasTopCard = true;
+					}
+				}
 				for (int i = 0; i < routes.size(); i++) {
 					route = routes.get(i);
 					PublicTransportCard card = new PublicTransportCard(mapActivity, startLocation, endLocation, route, i);
 					card.setShowButtonCustomTitle(mapActivity.getString(R.string.shared_string_show_on_map));
 					card.setShowBottomShadow(i == routes.size() - 1 && !showPedestrianCard);
-					card.setShowTopShadow(i != 0);
+					card.setShowTopShadow(i != 0 || hasTopCard);
 					card.setListener(this);
 					menuCards.add(card);
 				}
@@ -1901,6 +1920,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	@Override
 	public void newRouteIsCalculated(boolean newRoute, ValueHolder<Boolean> showToast) {
 		directionInfo = -1;
+		routeSelected = false;
 		updateMenu();
 		if (isVisible()) {
 			showToast.value = false;
@@ -2067,6 +2087,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				}
 				removeTargetPointListener();
 			} else if (fragment instanceof ChooseRouteFragment) {
+				routeSelected = true;
 				MapRouteMenuStateHolder holder = new MapRouteMenuStateHolder(MapRouteMenuType.ROUTE_DETAILS, currentMenuState, fragment.getArguments());
 				if (!menuBackStack.empty() && menuBackStack.peek().type == holder.type) {
 					menuBackStack.pop();

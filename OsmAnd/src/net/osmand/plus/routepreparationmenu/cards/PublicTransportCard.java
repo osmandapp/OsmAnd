@@ -48,6 +48,8 @@ public class PublicTransportCard extends BaseCard {
 
 	private int routeId;
 	private String showButtonCustomTitle;
+	private boolean routeInfoVisible = true;
+	private boolean routeButtonsVisible = true;
 
 	public interface PublicTransportCardListener {
 		void onPublicTransportCardBadgePressed(@NonNull PublicTransportCard card, @NonNull TransportRouteResultSegment segment);
@@ -85,10 +87,30 @@ public class PublicTransportCard extends BaseCard {
 		this.showButtonCustomTitle = showButtonCustomTitle;
 	}
 
+	public boolean isRouteInfoVisible() {
+		return routeInfoVisible;
+	}
+
+	public void setRouteInfoVisible(boolean routeInfoVisible) {
+		this.routeInfoVisible = routeInfoVisible;
+	}
+
+	public boolean isRouteButtonsVisible() {
+		return routeButtonsVisible;
+	}
+
+	public void setRouteButtonsVisible(boolean routeButtonsVisible) {
+		this.routeButtonsVisible = routeButtonsVisible;
+	}
+
 	@Override
 	protected void updateContent() {
 		List<TransportRouteResultSegment> segments = routeResult.getSegments();
 		createRouteBadges(segments);
+
+		view.findViewById(R.id.route_info).setVisibility(routeInfoVisible ? View.VISIBLE : View.GONE);
+		view.findViewById(R.id.route_buttons).setVisibility(routeButtonsVisible ? View.VISIBLE : View.GONE);
+		view.findViewById(R.id.badges_padding).setVisibility(!routeInfoVisible && !routeButtonsVisible ? View.VISIBLE : View.GONE);
 
 		TextView fromLine = (TextView) view.findViewById(R.id.from_line);
 		TextView wayLine = (TextView) view.findViewById(R.id.way_line);
