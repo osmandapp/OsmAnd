@@ -115,7 +115,12 @@ public class PublicTransportCard extends BaseCard {
 			view.findViewById(R.id.badges_padding).setVisibility(View.VISIBLE);
 			view.setBackgroundResource(AndroidUtils.resolveAttribute(view.getContext(), R.attr.card_and_list_background_basic));
 			View info = view.findViewById(R.id.routes_info_container);
+			int paddingLeft = info.getPaddingLeft();
+			int paddingTop = info.getPaddingTop();
+			int paddingRight = info.getPaddingRight();
+			int paddingBottom = info.getPaddingBottom();
 			info.setBackgroundResource(AndroidUtils.resolveAttribute(view.getContext(), android.R.attr.selectableItemBackground));
+			info.setPadding(paddingLeft, paddingTop, paddingRight, paddingBottom);
 			info.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
