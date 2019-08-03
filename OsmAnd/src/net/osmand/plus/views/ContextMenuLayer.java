@@ -59,12 +59,14 @@ import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
 import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.NativeOsmandLibrary;
+import net.osmand.plus.routepreparationmenu.ChooseRouteFragment;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -962,6 +964,16 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 		boolean processed = hideVisibleMenues();
 		processed |= menu.onSingleTapOnMap();
+		if (!processed && MapRouteInfoMenu.chooseRoutesVisible) {
+			WeakReference<ChooseRouteFragment> chooseRouteFragmentRef = activity.getMapRouteInfoMenu().findChooseRouteFragment();
+			if (chooseRouteFragmentRef != null) {
+				ChooseRouteFragment chooseRouteFragment = chooseRouteFragmentRef.get();
+				if (chooseRouteFragment != null) {
+					chooseRouteFragment.dismiss();
+					processed = true;
+				}
+			}
+		}
 		if (!processed && activity.getMyApplication().getSettings().MAP_EMPTY_STATE_ALLOWED.get()) {
 			activity.getMapLayers().getMapControlsLayer().switchMapControlsVisibility(true);
 		}
