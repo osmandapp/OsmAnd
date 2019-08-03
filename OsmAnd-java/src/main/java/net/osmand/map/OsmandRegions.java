@@ -268,18 +268,19 @@ public class OsmandRegions {
 		return Math.abs(area);
 	}
 
-	private List<BinaryMapDataObject> getCountries(int tile31x, int tile31y) {
-		HashSet<String> set = new HashSet<String>(quadTree.queryInBox(new QuadRect(tile31x, tile31y, tile31x, tile31y),
+	private List<BinaryMapDataObject> getCountries(int lx, int rx, int ty, int by) throws IOException {
+		HashSet<String> set = new HashSet<String>(quadTree.queryInBox(new QuadRect(lx, ty, rx, by),
 				new ArrayList<String>()));
 		List<BinaryMapDataObject> result = new ArrayList<BinaryMapDataObject>();
 		Iterator<String> it = set.iterator();
-
+		int mx = lx / 2 + rx / 2;
+		int my = ty / 2 + by / 2;
 		while (it.hasNext()) {
 			String cname = it.next();
 			BinaryMapDataObject container = null;
 			int count = 0;
 			for (BinaryMapDataObject bo : countriesByDownloadName.get(cname)) {
-				if (contain(bo, tile31x, tile31y)) {
+				if (contain(bo, mx, my)) {
 					count++;
 					container = bo;
 					break;
@@ -314,51 +315,26 @@ public class OsmandRegions {
 	}
 
 
+	public List<BinaryMapDataObject> query(int lx, int rx, int ty, int by) throws IOException {
+		if (quadTree != null) {
+			return getCountries(lx, rx, ty, by);
+		}
+		return queryBboxNoInit(lx, rx, ty, by);
+	}
+	
+	
 	public List<BinaryMapDataObject> query(final int tile31x, final int tile31y) throws IOException {
 		if (quadTree != null) {
-			return getCountries(tile31x, tile31y);
+			return getCountries(tile31x, tile31x, tile31y, tile31y);
 		}
-		return queryNoInit(tile31x, tile31y);
+		return queryBboxNoInit(tile31x, tile31x, tile31y, tile31y);
 	}
 
-	private synchronized List<BinaryMapDataObject> queryNoInit(final int tile31x, final int tile31y) throws IOException {
+	
+	private synchronized List<BinaryMapDataObject> queryBboxNoInit(int lx, int rx, int ty, int by) throws IOException {
 		final List<BinaryMapDataObject> result = new ArrayList<BinaryMapDataObject>();
-		BinaryMapIndexReader.SearchRequest<BinaryMapDataObject> sr = BinaryMapIndexReader.buildSearchRequest(tile31x, tile31x, tile31y, tile31y,
-				5, new BinaryMapIndexReader.SearchFilter() {
-					@Override
-					public boolean accept(TIntArrayList types, BinaryMapIndexReader.MapIndex index) {
-						return true;
-					}
-				}, new ResultMatcher<BinaryMapDataObject>() {
-
-
-					@Override
-					public boolean publish(BinaryMapDataObject object) {
-						if (object.getPointsLength() < 1) {
-							return false;
-						}
-						initTypes(object);
-						if (contain(object, tile31x, tile31y)) {
-							result.add(object);
-						}
-						return false;
-					}
-
-					@Override
-					public boolean isCancelled() {
-						return false;
-					}
-				}
-		);
-		if (reader != null) {
-			reader.searchMapIndex(sr);
-		}
-		return result;
-	}
-
-
-	public synchronized List<BinaryMapDataObject> queryBbox(int lx, int rx, int ty, int by) throws IOException {
-		final List<BinaryMapDataObject> result = new ArrayList<BinaryMapDataObject>();
+		int mx = lx / 2 + rx / 2;
+		int my = ty / 2 + by / 2;
 		BinaryMapIndexReader.SearchRequest<BinaryMapDataObject> sr = BinaryMapIndexReader.buildSearchRequest(lx, rx, ty, by,
 				5, new BinaryMapIndexReader.SearchFilter() {
 					@Override
@@ -373,7 +349,9 @@ public class OsmandRegions {
 							return false;
 						}
 						initTypes(object);
-						result.add(object);
+						if (contain(object, mx, my)) {
+							result.add(object);
+						}
 						return false;
 					}
 
@@ -747,7 +725,7 @@ public class OsmandRegions {
 
 		List<BinaryMapDataObject> mapDataObjects;
 		try {
-			mapDataObjects = queryBbox(point31x, point31x, point31y, point31y);
+			mapDataObjects = queryBboxNoInit(point31x, point31x, point31y, point31y);
 		} catch (IOException e) {
 			throw new IOException("Error while calling queryBbox");
 		}
