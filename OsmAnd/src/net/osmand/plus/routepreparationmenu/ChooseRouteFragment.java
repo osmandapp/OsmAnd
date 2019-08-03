@@ -78,7 +78,6 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 	public static final String ROUTE_INDEX_KEY = "route_index_key";
 	public static final String ROUTE_INFO_STATE_KEY = "route_info_state_key";
 	public static final String INITIAL_MENU_STATE_KEY = "initial_menu_state_key";
-	public static final String USE_ROUTE_INFO_MENU_KEY = "use_route_info_menu_key";
 	public static final String ADJUST_MAP_KEY = "adjust_map_key";
 
 	@Nullable
@@ -102,8 +101,6 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 	private int routesCount;
 
 	private boolean publicTransportMode;
-	private boolean useRouteInfoMenu;
-	private boolean openingAnalyseOnMap = false;
 	private boolean needAdjustMap;
 
 	@Nullable
@@ -123,7 +120,6 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		}
 		if (args != null) {
 			routeIndex = args.getInt(ROUTE_INDEX_KEY);
-			useRouteInfoMenu = args.getBoolean(USE_ROUTE_INFO_MENU_KEY, false);
 			needAdjustMap = args.getBoolean(ADJUST_MAP_KEY, false);
 			initialMenuState = args.getInt(INITIAL_MENU_STATE_KEY, initialMenuState);
 		}
@@ -221,7 +217,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 			if (!wasDrawerDisabled) {
 				mapActivity.disableDrawer();
 			}
-			updateControlsVisibility(false, false);
+			updateControlsVisibility(false);
 		}
 	}
 
@@ -233,14 +229,8 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 			if (!wasDrawerDisabled) {
 				mapActivity.enableDrawer();
 			}
-			updateControlsVisibility(true, useRouteInfoMenu);
+			updateControlsVisibility(true);
 		}
-	}
-
-	@Override
-	public void onSaveInstanceState(@NonNull Bundle outState) {
-		outState.putBoolean(USE_ROUTE_INFO_MENU_KEY, useRouteInfoMenu);
-		super.onSaveInstanceState(outState);
 	}
 
 	@Override
@@ -273,7 +263,6 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 	}
 
 	public void analyseOnMap(LatLon location, GpxDisplayItem gpxItem) {
-		openingAnalyseOnMap = true;
 		OsmandApplication app = requireMyApplication();
 		final OsmandSettings settings = app.getSettings();
 		settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(),
@@ -287,13 +276,23 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 	}
 
 	public void dismiss() {
+		dismiss(false);
+	}
+
+	public void dismiss(boolean backPressed) {
 		try {
 			MapActivity mapActivity = getMapActivity();
-			if (mapActivity != null) {
+			LockableViewPager viewPager = this.viewPager;
+			if (mapActivity != null && viewPager != null) {
 				mapActivity.getSupportFragmentManager().beginTransaction().remove(this).commitAllowingStateLoss();
-				if (useRouteInfoMenu && !openingAnalyseOnMap) {
-					mapActivity.getMapLayers().getMapControlsLayer().showRouteInfoControlDialog();
+				Bundle args = getArguments();
+				if (args == null) {
+					args = new Bundle();
 				}
+				args.putInt(ROUTE_INDEX_KEY, viewPager.getCurrentItem());
+				args.putInt(INITIAL_MENU_STATE_KEY, currentMenuState);
+				args.putBoolean(ADJUST_MAP_KEY, false);
+				mapActivity.getMapRouteInfoMenu().onDismiss(this, currentMenuState, args, backPressed);
 			}
 		} catch (Exception e) {
 			// ignore
@@ -445,10 +444,16 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 
 	private void updatePagesViewVisibility(int menuState) {
 		View pagesView = this.pagesView;
-		if (portrait && routesCount > 1 && pagesView != null) {
-			if (menuState != MenuState.FULL_SCREEN) {
-				if (pagesView.getVisibility() != View.VISIBLE) {
-					pagesView.setVisibility(View.VISIBLE);
+		if (pagesView != null) {
+			if (portrait && routesCount > 1) {
+				if (menuState != MenuState.FULL_SCREEN) {
+					if (pagesView.getVisibility() != View.VISIBLE) {
+						pagesView.setVisibility(View.VISIBLE);
+					}
+				} else {
+					if (pagesView.getVisibility() == View.VISIBLE) {
+						pagesView.setVisibility(View.INVISIBLE);
+					}
 				}
 			} else {
 				if (pagesView.getVisibility() == View.VISIBLE) {
@@ -474,7 +479,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		OnClickListener backOnClick = new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				dismiss();
+				dismiss(true);
 			}
 		};
 		backButton.setOnClickListener(backOnClick);
@@ -783,16 +788,16 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		}
 	}
 
-	public void updateControlsVisibility(boolean visible, boolean openingRouteInfo) {
+	public void updateControlsVisibility(boolean visible) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			int visibility = visible ? View.VISIBLE : View.GONE;
 			mapActivity.findViewById(R.id.map_center_info).setVisibility(visibility);
 			mapActivity.findViewById(R.id.map_left_widgets_panel).setVisibility(visibility);
-			if (!openingRouteInfo) {
+			if (!visible) {
 				mapActivity.findViewById(R.id.map_right_widgets_panel).setVisibility(visibility);
 				if (!portrait) {
-					mapActivity.getMapView().setMapPositionX(visible ? 0 : 1);
+					mapActivity.getMapView().setMapPositionX(1);
 				}
 			}
 			mapActivity.updateStatusBarColor();
@@ -861,14 +866,17 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 		}
 	}
 
-	public static boolean showFromRouteInfo(FragmentManager fragmentManager, int routeIndex, int initialMenuState) {
+	public static boolean showInstance(FragmentManager fragmentManager, int routeIndex, int initialMenuState) {
+		Bundle args = new Bundle();
+		args.putInt(ROUTE_INDEX_KEY, routeIndex);
+		args.putInt(INITIAL_MENU_STATE_KEY, initialMenuState);
+		args.putBoolean(ADJUST_MAP_KEY, initialMenuState != MenuState.FULL_SCREEN);
+		return showInstance(fragmentManager, args);
+	}
+
+	public static boolean showInstance(FragmentManager fragmentManager, Bundle args) {
 		try {
 			ChooseRouteFragment fragment = new ChooseRouteFragment();
-			Bundle args = new Bundle();
-			args.putInt(ROUTE_INDEX_KEY, routeIndex);
-			args.putBoolean(USE_ROUTE_INFO_MENU_KEY, true);
-			args.putInt(INITIAL_MENU_STATE_KEY, initialMenuState);
-			args.putBoolean(ADJUST_MAP_KEY, initialMenuState != MenuState.FULL_SCREEN);
 			fragment.setArguments(args);
 			fragmentManager.beginTransaction()
 					.add(R.id.routeMenuContainer, fragment, TAG)
@@ -883,8 +891,7 @@ public class ChooseRouteFragment extends BaseOsmAndFragment implements ContextMe
 	public void onNavigationRequested() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			useRouteInfoMenu = false;
-			dismiss();
+			dismiss(false);
 			if (!mapActivity.getMyApplication().getRoutingHelper().isPublicTransportMode()) {
 				mapActivity.getMapLayers().getMapControlsLayer().startNavigation();
 			}

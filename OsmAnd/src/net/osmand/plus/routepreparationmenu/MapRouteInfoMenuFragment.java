@@ -169,7 +169,7 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 	public void onDestroyView() {
 		super.onDestroyView();
 		if (menu != null) {
-			menu.onDismiss(getCurrentMenuState());
+			menu.onDismiss(this, getCurrentMenuState(), null, false);
 		}
 	}
 

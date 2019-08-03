@@ -340,10 +340,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 		mapRouteInfoMenu.showHideMenu();
 	}
 
-	public void showRouteInfoControlDialog(int menuState) {
-		mapRouteInfoMenu.showHideMenu(menuState);
-	}
-
 	public void showRouteInfoMenu() {
 		mapRouteInfoMenu.setShowMenu(MapRouteInfoMenu.DEFAULT_MENU_STATE);
 	}
@@ -398,13 +394,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			@Override
 			public void onClick(View v) {
 				mapActivity.dismissCardDialog();
-				RoutingHelper routingHelper = mapActivity.getRoutingHelper();
-				TransportRoutingHelper transportRoutingHelper = routingHelper.getTransportRoutingHelper();
-				if (transportRoutingHelper.hasActiveRoute()) {
-					ChooseRouteFragment.showFromRouteInfo(mapActivity.getSupportFragmentManager(), transportRoutingHelper.getCurrentRoute(), MenuState.FULL_SCREEN);
-				} else {
-					doRoute(false);
-				}
+				doRoute(false);
 			}
 		});
 	}
@@ -434,7 +424,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 				mapActivity.getMapActions().enterRoutePlanningMode(null, null);
 			}
 		} else {
-			showRouteInfoControlDialog(MenuState.HEADER_ONLY);
+			showRouteInfoControlDialog();
 		}
 		hasTargets = false;
 	}
@@ -782,8 +772,9 @@ public class MapControlsLayer extends OsmandMapLayer {
 		boolean showButtons = (showRouteCalculationControls || !routeFollowingMode)
 				&& !isInMovingMarkerMode() && !isInGpxDetailsMode() && !isInMeasurementToolMode() && !isInPlanRouteMode() && !contextMenuOpened && !isInChoosingRoutesMode() && !isInWaypointsChoosingMode();
 		//routePlanningBtn.setIconResId(routeFollowingMode ? R.drawable.ic_action_gabout_dark : R.drawable.map_directions);
-		if (trh.hasActiveRoute()) {
-			routePlanningBtn.setIconResId(R.drawable.map_action_bus_dark);
+		int routePlanningBtnImage = mapRouteInfoMenu.getRoutePlanningBtnImage();
+		if (routePlanningBtnImage != 0) {
+			routePlanningBtn.setIconResId(routePlanningBtnImage);
 			routePlanningBtn.setIconColorId(R.color.color_myloc_distance);
 		} else if (rh.isFollowingMode()) {
 			routePlanningBtn.setIconResId(R.drawable.map_start_navigation);

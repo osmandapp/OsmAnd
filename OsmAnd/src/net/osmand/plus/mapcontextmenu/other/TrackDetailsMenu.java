@@ -104,18 +104,18 @@ public class TrackDetailsMenu {
 		}
 	}
 
-	public void dismiss() {
+	public void dismiss(boolean backPressed) {
 		TrackDetailsMenuFragment fragment = getMenuFragment();
 		if (fragment != null) {
-			fragment.dismiss();
+			fragment.dismiss(backPressed);
 		}
 	}
 
-	public void hide() {
+	public void hide(boolean backPressed) {
 		TrackDetailsMenuFragment fragment = getMenuFragment();
 		if (fragment != null) {
 			hidding = true;
-			fragment.dismiss();
+			fragment.dismiss(backPressed);
 		} else {
 			segment = null;
 			trackChartPoints = null;
@@ -174,7 +174,7 @@ public class TrackDetailsMenu {
 				toolbarController.setOnCloseButtonClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						hide();
+						hide(false);
 					}
 				});
 				mapActivity.showTopToolbar(toolbarController);

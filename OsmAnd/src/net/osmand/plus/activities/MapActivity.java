@@ -362,7 +362,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			app.getMapMarkersHelper().getPlanRouteContext().setFragmentVisible(true);
 		}
 		if (trackDetailsMenu.isVisible()) {
-			trackDetailsMenu.dismiss();
+			trackDetailsMenu.dismiss(false);
 		}
 		removeFragment(ImportGpxBottomSheetDialogFragment.TAG);
 		removeFragment(AdditionalActionsBottomSheetDialogFragment.TAG);
@@ -606,7 +606,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			return;
 		}
 		if (trackDetailsMenu.isVisible()) {
-			trackDetailsMenu.hide();
+			trackDetailsMenu.hide(true);
 			if (prevActivityIntent == null) {
 				return;
 			}
@@ -625,7 +625,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 		ChooseRouteFragment chooseRouteFragment = getChooseRouteFragment();
 		if (chooseRouteFragment != null) {
-			chooseRouteFragment.dismiss();
+			chooseRouteFragment.dismiss(true);
 			return;
 		}
 		if (mapContextMenu.isVisible() && mapContextMenu.isClosable()) {

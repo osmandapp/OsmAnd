@@ -187,6 +187,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 				FrameLayout.LayoutParams layoutParams = (FrameLayout.LayoutParams) cardsContainer.getLayoutParams();
 				layoutParams.setMargins(pageMarginPx, 0, pageMarginPx, 0);
 				cardsContainer.setLayoutParams(layoutParams);
+				updateCardsLayout();
 			}
 			updateCards();
 			runLayoutListener();
