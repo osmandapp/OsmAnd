@@ -82,7 +82,7 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment {
 			closeButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					menu.hide();
+					menu.hide(false);
 				}
 			});
 		}
@@ -114,7 +114,7 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment {
 	public void onResume() {
 		super.onResume();
 		if (menu == null || menu.getGpxItem() == null) {
-			dismiss();
+			dismiss(false);
 		} else {
 			menu.onShow();
 		}
@@ -172,11 +172,12 @@ public class TrackDetailsMenuFragment extends BaseOsmAndFragment {
 				.commitAllowingStateLoss();
 	}
 
-	public void dismiss() {
-		FragmentActivity activity = getActivity();
-		if (activity != null) {
+	public void dismiss(boolean backPressed) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
 			try {
-				activity.getSupportFragmentManager().popBackStackImmediate(TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+				mapActivity.getSupportFragmentManager().popBackStackImmediate(TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+				mapActivity.getMapRouteInfoMenu().onDismiss(this, 0, null, backPressed);
 			} catch (Exception e) {
 				// ignore
 			}

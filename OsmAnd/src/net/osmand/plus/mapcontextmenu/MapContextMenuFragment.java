@@ -1311,9 +1311,12 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		super.onResume();
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			if (!menu.isActive() || (mapActivity.getMapRouteInfoMenu().isVisible()) || MapRouteInfoMenu.chooseRoutesVisible || MapRouteInfoMenu.waypointsVisible) {
+			if (!menu.isActive() || (mapActivity.getMapRouteInfoMenu().isVisible()) || MapRouteInfoMenu.waypointsVisible) {
 				dismissMenu();
 				return;
+			}
+			if (MapRouteInfoMenu.chooseRoutesVisible) {
+				mapActivity.getChooseRouteFragment().dismiss();
 			}
 			updateLocationViewCache = mapActivity.getMyApplication().getUIUtilities().getUpdateLocationViewCache();
 			mapActivity.getMapViewTrackingUtilities().setContextMenu(menu);
@@ -1465,7 +1468,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 						@Override
 						public void onClick(View v) {
 							dismissMenu();
-							ChooseRouteFragment.showFromRouteInfo(requireMyActivity().getSupportFragmentManager(),
+							ChooseRouteFragment.showInstance(requireMyActivity().getSupportFragmentManager(),
 									requireMyApplication().getRoutingHelper().getTransportRoutingHelper().getCurrentRoute(),
 									ContextMenuFragment.MenuState.FULL_SCREEN);
 							/* fit route segment on map
