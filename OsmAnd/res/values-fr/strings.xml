@@ -1460,7 +1460,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="location_on_map">Position :\n Lat. %1$s\n Lon. %2$s</string>
     <string name="days_behind">jours passés</string>
     <string name="rename_failed">Échec du renommage.</string>
-    <string name="shared_string_currently_recording_track">Enregistrement de l\'itinéraire</string>
+    <string name="shared_string_currently_recording_track">Enregistrement de l\'itinéraire en cours</string>
     <string name="back_to_map">Retour à la carte</string>
     <string name="shared_string_selected">Sélectionné</string>
     <string name="track_points">Points de la trace</string>

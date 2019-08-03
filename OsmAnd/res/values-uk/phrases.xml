@@ -966,7 +966,7 @@
     <string name="poi_boat_sharing">Прокат човнів</string>
     <string name="poi_dock">Док</string>
     <string name="poi_cutline">Просіка у лісі</string>
-    <string name="poi_toilets">Туалет, вбиральня</string>
+    <string name="poi_toilets">Туалет; вбиральня</string>
     <string name="poi_shower">Душ</string>
     <string name="poi_sauna">Сауна</string>
     <string name="poi_brothel">Бордель, публічний будинок</string>
@@ -1203,7 +1203,7 @@
     <string name="poi_route_hiking_rwn_poi">Регіональний піший маршрут</string>
     <string name="poi_route_hiking_lwn_poi">Місцевий піший маршрут</string>
     <string name="poi_route_hiking_ref_poi">Позначення маршруту пішого туризму</string>
-    <string name="poi_opening_hours">Години роботи</string>
+    <string name="poi_opening_hours">Робочі години</string>
     <string name="poi_collection_times">Години виймання (посилок)</string>
     <string name="poi_phone">Телефон</string>
     <string name="poi_website">Веб-сайт</string>
@@ -3570,4 +3570,26 @@
     <string name="poi_rescue_box">Рятувальна коробка</string>
     <string name="poi_climbing_crag">Так</string>
     <string name="reddit">Reddit</string>
+    <string name="poi_hazard_additional_erosion">Небезпека: ерозія</string>
+    <string name="poi_hazard_additional_rockfall">Небезпека: каменепад</string>
+    <string name="poi_hazard_additional_nuclear">Небезпека: радіація</string>
+    <string name="poi_hazard_additional_flood">Небезпека: повінь</string>
+    <string name="poi_hazard_additional_avalanche">Небезпека: лавина</string>
+    <string name="poi_hazard_additional_minefield">Небезпека: мінне поле</string>
+    <string name="poi_hazard_additional_contamination">Небезпека: забруднення</string>
+    <string name="poi_defibrillator_location">Розташування</string>
+    <string name="poi_changing_table_yes">Стіл для переодягання: так</string>
+    <string name="poi_changing_table_no">Стіл для переодягання: ні</string>
+    <string name="poi_changing_table_limited">Стіл для переодягання: обмежено</string>
+    <string name="poi_changing_table_location_room">Розташування стола для переодягання: кімната</string>
+    <string name="poi_changing_table_location_male_toilet">Розташування стола для переодягання: чоловічий туалет</string>
+    <string name="poi_changing_table_location_female_toilet">Розташування стола для переодягання: жіночий туалет</string>
+    <string name="poi_changing_table_location_unisex_toilet">Розташування стола для переодягання: загальний туалет</string>
+    <string name="poi_changing_table_count">Кількість столів для переодягання</string>
+    <string name="poi_changing_table_fee_yes">Плата за користування столом для переодягання: так</string>
+    <string name="poi_changing_table_fee_no">Плата за користування столом для переодягання: ні</string>
+    <string name="poi_charcoal_pile">Купа для випалювання деревного вугілля</string>
+    <string name="poi_historic_tank">Старовинний танк</string>
+    <string name="poi_hookah_lounge">Кальянна зала</string>
+    <string name="poi_source_biomass">Джерело енергії: біомаса</string>
 </resources>
