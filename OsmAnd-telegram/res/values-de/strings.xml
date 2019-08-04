@@ -244,4 +244,7 @@
     <string name="gpx_settings">GPX-Einstellungen</string>
     <string name="timeline_no_data_descr">Für den ausgewählten Tag gibt es keine Datenaufzeichnungen</string>
     <string name="timeline_no_data">Keine Daten</string>
+    <string name="shared_string_end">Ende</string>
+    <string name="shared_string_start">Start</string>
+    <string name="start_end_date">Start — Ende Datum</string>
 </resources>
