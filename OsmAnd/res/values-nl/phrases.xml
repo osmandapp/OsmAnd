@@ -2644,7 +2644,7 @@
     <string name="poi_wiki_lang_ne">Nepalese wiki</string>
     <string name="poi_wiki_lang_scn">Siciliaanse wiki</string>
     <string name="poi_wiki_lang_mn">Mongoolse wiki</string>
-    <string name="poi_payment_token_yes">Tekens</string>
+    <string name="poi_payment_token_yes">Munten</string>
     <string name="poi_payment_token_no">Munten niet geaccepteerd</string>
     <string name="poi_bridge_movable_drawbridge">Beweegbare brug type: draaibrug</string>
     <string name="poi_bridge_movable_retractable">Beweegbare brug type: intrekbaar</string>
@@ -2667,7 +2667,7 @@
     <string name="poi_wiki_lang_ml">Malayalam wiki</string>
     <string name="poi_wiki_lang_mr">Marathi wiki</string>
     <string name="poi_wiki_lang_war">Waray wiki</string>
-    <string name="poi_payment_icsf_yes"></string>
+    <string name="poi_payment_icsf_yes"/>
     <string name="poi_shelter_type_sun_shelter">Zonnescherm</string>
     <string name="poi_bridge_structure_truss">Brugstructuur: gebonden hout</string>
     <string name="poi_surface_grass_paver">Wegoppervlak: grasswegdek</string>
