@@ -71,7 +71,6 @@ public class BinaryRoutePlanner {
 		ctx.timeToLoad = 0;
 		ctx.visitedSegments = 0;
 		ctx.memoryOverhead = 1000;
-		ctx.timeToCalculate = System.nanoTime();
 
 
 		// Initializing priority queue to visit way segments 
