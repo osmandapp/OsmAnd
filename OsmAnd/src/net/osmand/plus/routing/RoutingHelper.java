@@ -732,11 +732,9 @@ public class RoutingHelper {
 					}
 				}
 				if (showToast.value && OsmandPlugin.isDevelopment()) {
-					String msg = app.getString(R.string.new_route_calculated_dist) + ": "
-							+ OsmAndFormatter.getFormattedDistance(res.getWholeDistance(), app);
-					if (res.getRoutingTime() != 0f) {
-						msg += " (" + Algorithms.formatDuration((int) res.getRoutingTime(), app.accessibilityEnabled()) + ")";
-					}
+					String msg = app.getString(R.string.new_route_calculated_dist_dbg,
+							OsmAndFormatter.getFormattedDistance(res.getWholeDistance(), app),
+							((int)res.getRoutingTime()) + " sec", res.getVisitedSegments(), res.getLoadedTiles());
 					app.showToastMessage(msg);
 				}
 			}

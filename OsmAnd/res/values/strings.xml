@@ -2911,7 +2911,7 @@
     <string name="error_calculating_route">Could not calculate route</string>
     <string name="error_calculating_route_occured">Could not calculate route</string>
     <string name="empty_route_calculated">Calculated route is empty</string>
-    <string name="new_route_calculated_dist">New route calculated, distance</string>
+    <string name="new_route_calculated_dist_dbg">Route calculated (internal): distance %s, router time %s (%d tiles, %d segments)</string>
     <string name="arrived_at_destination">You have arrived at your destination</string>
     <string name="invalid_locations">Invalid coordinates</string>
     <string name="go_back_to_osmand">Go back to OsmAnd map</string>
