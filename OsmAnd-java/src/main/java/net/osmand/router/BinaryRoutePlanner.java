@@ -70,7 +70,7 @@ public class BinaryRoutePlanner {
 		// measure time
 		ctx.timeToLoad = 0;
 		ctx.memoryOverhead = 1000;
-
+		ctx.visitedSegments = 0;
 
 		// Initializing priority queue to visit way segments 
 		Comparator<RouteSegment> nonHeuristicSegmentsComparator = new NonHeuristicSegmentsComparator();
@@ -121,7 +121,7 @@ public class BinaryRoutePlanner {
 			if (ctx.memoryOverhead > ctx.config.memoryLimitation * 0.95) {
 				throw new IllegalStateException("There is no enough memory " + ctx.config.memoryLimitation / (1 << 20) + " Mb");
 			}
-			
+			ctx.visitedSegments ++;
 			if (forwardSearch) {
 				boolean doNotAddIntersections = onlyBackward;
 				processRouteSegment(ctx, false, graphDirectSegments, visitedDirectSegments,
