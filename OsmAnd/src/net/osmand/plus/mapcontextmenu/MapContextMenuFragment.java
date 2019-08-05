@@ -1698,7 +1698,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 	public void centerMarkerLocation() {
 		centered = true;
-		showOnMap(menu.getLatLon(), true, true, false, getZoom());
+		showOnMap(menu.getLatLon(), true, false, getZoom());
 	}
 
 	private int getZoom() {
@@ -1722,8 +1722,8 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		cp.setCenterLocation(0.5f, map.getMapPosition() == OsmandSettings.BOTTOM_CONSTANT ? 0.15f : 0.5f);
 		cp.setLatLonCenter(flat, flon);
 		cp.setZoom(zoom);
-		flat = cp.getLatFromPixel(cp.getPixWidth() / 2, cp.getPixHeight() / 2);
-		flon = cp.getLonFromPixel(cp.getPixWidth() / 2, cp.getPixHeight() / 2);
+		flat = cp.getLatFromPixel(cp.getPixWidth() / 2f, cp.getPixHeight() / 2f);
+		flon = cp.getLonFromPixel(cp.getPixWidth() / 2f, cp.getPixHeight() / 2f);
 
 		if (updateOrigXY) {
 			origMarkerX = cp.getCenterPixelX();
@@ -1732,21 +1732,17 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		return new LatLon(flat, flon);
 	}
 
-	private void showOnMap(LatLon latLon, boolean updateCoords, boolean needMove, boolean alreadyAdjusted, int zoom) {
+	private void showOnMap(LatLon latLon, boolean updateCoords, boolean alreadyAdjusted, int zoom) {
 		AnimateDraggingMapThread thread = map.getAnimatedDraggingThread();
 		LatLon calcLatLon = calculateCenterLatLon(latLon, zoom, updateCoords);
 		if (updateCoords) {
 			mapCenter = calcLatLon;
 			menu.setMapCenter(mapCenter);
 		}
-
 		if (!alreadyAdjusted) {
 			calcLatLon = getAdjustedMarkerLocation(getPosY(), calcLatLon, true, zoom);
 		}
-
-		if (needMove) {
-			thread.startMoving(calcLatLon.getLatitude(), calcLatLon.getLongitude(), zoom, true);
-		}
+		thread.startMoving(calcLatLon.getLatitude(), calcLatLon.getLongitude(), zoom, true);
 	}
 
 	private void setAddressLocation() {
@@ -2021,7 +2017,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		}
 
 		if (animated) {
-			showOnMap(latlon, false, true, true, zoom);
+			showOnMap(latlon, false, true, zoom);
 		} else {
 			if (dZoom != 0) {
 				map.setIntZoom(zoom);
