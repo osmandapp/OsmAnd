@@ -372,7 +372,7 @@ public class BinaryRoutePlanner {
 			TLongObjectHashMap<RouteSegment> visitedDirectSegments,TLongObjectHashMap<RouteSegment> visitedOppositeSegments) {
 		printInfo("Time to calculate : " + (System.nanoTime() - ctx.timeToCalculate) / 1e6 + 
 				", time to load : " + ctx.timeToLoad / 1e6 + ", time to load headers : " + ctx.timeToLoadHeaders / 1e6 + 
-				", time to calc dev : " + ctx.timeNanoToCalcDeviation/ 1e6);
+				", time to calc dev : " + ctx.timeNanoToCalcDeviation / 1e6);
 		int maxLoadedTiles = Math.max(ctx.maxLoadedTiles, ctx.getCurrentlyLoadedTiles());
 		printInfo("Current loaded tiles : " + ctx.getCurrentlyLoadedTiles() + ", maximum loaded tiles " + maxLoadedTiles);
 		printInfo("Loaded tiles " + ctx.loadedTiles + " (distinct " + ctx.distinctLoadedTiles + "), unloaded tiles " + ctx.unloadedTiles +

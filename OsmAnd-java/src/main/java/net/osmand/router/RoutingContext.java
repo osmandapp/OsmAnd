@@ -92,7 +92,7 @@ public class RoutingContext {
 	long timeToLoad = 0;
 	long timeToLoadHeaders = 0;
 	long timeToFindInitialSegments = 0;
-	long timeToCalculate = 0;
+	public long timeToCalculate = 0;
 	
 	int distinctLoadedTiles = 0;
 	int maxLoadedTiles = 0;

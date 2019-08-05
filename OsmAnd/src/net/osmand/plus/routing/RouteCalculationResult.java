@@ -42,6 +42,7 @@ public class RouteCalculationResult {
 	private final float routingTime;
 	private final int visitedSegments;
 	private final int loadedTiles;
+	private final float calculateTime;
 
 	protected int cacheCurrentTextDirectionInfo = -1;
 	protected List<RouteDirectionInfo> cacheAgreggatedDirections;
@@ -61,6 +62,7 @@ public class RouteCalculationResult {
 		this.routingTime = 0;
 		this.loadedTiles = 0;
 		this.visitedSegments = 0;
+		this.calculateTime = 0;
 		this.intermediatePoints = new int[0];
 		this.locations = new ArrayList<Location>();
 		this.segments = new ArrayList<RouteSegmentResult>();
@@ -72,6 +74,7 @@ public class RouteCalculationResult {
 	public RouteCalculationResult(List<Location> list, List<RouteDirectionInfo> directions, RouteCalculationParams params, List<LocationPoint> waypoints, boolean addMissingTurns) {
 		this.routingTime = 0;
 		this.loadedTiles = 0;
+		this.calculateTime = 0;
 		this.visitedSegments = 0;
 		this.errorMessage = null;
 		this.intermediatePoints = new int[params.intermediates == null ? 0 : params.intermediates.size()];
@@ -106,6 +109,7 @@ public class RouteCalculationResult {
 		this.routingTime = rctx.routingTime;
 		this.visitedSegments =  rctx.visitedSegments;
 		this.loadedTiles = rctx.loadedTiles;
+		this.calculateTime = (float) (((System.nanoTime() - rctx.timeToCalculate) / 1e6) / 1000f);
 		if(waypoints != null) {
 			this.locationPoints.addAll(waypoints);
 		}
@@ -820,6 +824,10 @@ public class RouteCalculationResult {
 
 	public int getVisitedSegments() {
 		return visitedSegments;
+	}
+
+	public float getCalculateTime() {
+		return calculateTime;
 	}
 
 	public int getLoadedTiles() {
