@@ -180,6 +180,7 @@ public class AnimateDraggingMapThread {
 
 	public void startMoving(final double finalLat, final double finalLon, final int endZoom,
 							final boolean notifyListener, final Runnable finishAnimationCallback) {
+		boolean wasAnimating = isAnimating();
 		stopAnimatingSync();
 
 		final RotatedTileBox rb = tileView.getCurrentRotatedTileBox().copy();
@@ -202,7 +203,7 @@ public class AnimateDraggingMapThread {
 		final int moveZoom = rb.getZoom();
 		// check if animation needed
 		skipAnimation = skipAnimation || (Math.abs(moveZoom - startZoom) >= 3 || Math.abs(endZoom - moveZoom) > 3);
-		if (skipAnimation) {
+		if (skipAnimation || wasAnimating) {
 			tileView.setLatLonAnimate(finalLat, finalLon, notifyListener);
 			tileView.setFractionalZoom(endZoom, 0, notifyListener);
 			if (finishAnimationCallback != null) {
