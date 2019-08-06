@@ -3201,4 +3201,6 @@ Pôr do Sol: %2$s</string>
     <string name="rendering_attr_showLez_name">Mostrar baixas zonas de emissão</string>
     <string name="temporary_conditional_routing">Considere limitações temporárias</string>
     <string name="shared_string_default">Predefinido</string>
+    <string name="new_route_calculated_dist_dbg">Rota: distância %s, tempo do rota %s
+\nCálculo: %.1f sec, %d estradas, %d azulejos)</string>
 </resources>
