@@ -2927,7 +2927,7 @@
     <string name="shared_string_capacity">Capacidad</string>
     <string name="shared_string_width">Ancho</string>
     <string name="shared_string_height">Altura</string>
-    <string name="routeInfo_roadClass_name">Clase</string>
+    <string name="routeInfo_roadClass_name">Tipo de carretera</string>
     <string name="routeInfo_surface_name">Superficie</string>
     <string name="routeInfo_smoothness_name">Suavidad</string>
     <string name="routeInfo_steepness_name">Inclinación</string>

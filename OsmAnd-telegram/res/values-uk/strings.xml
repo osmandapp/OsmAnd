@@ -206,4 +206,5 @@
     <string name="altitude">Висота</string>
     <string name="shared_string_enable">Увімкнути</string>
     <string name="shared_string_select">Обрати</string>
+    <string name="shared_string_apply">Застосувати</string>
 </resources>

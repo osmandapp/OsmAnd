@@ -758,7 +758,7 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="map_widget_view_direction">Direzione della visuale</string>
     <string name="map_widget_transparent">Widget trasparenti</string>
     <string name="gps_wakeup_interval">Intervallo di risveglio GPS: %s</string>
-    <string name="int_continuosly">Continuo</string>
+    <string name="int_continuosly">continuo</string>
     <string name="email">e-mail</string>
     <string name="osmand_short_description_80_chars">OsmAnd è un\'applicazione di navigazione opensource per mappe offline e online</string>
     <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automatizzata Navigazione Direzioni)↵ ↵
@@ -2056,7 +2056,7 @@ Sono disponibili solo {2} MB.</string>
     <string name="save_track_precision">Precisione minima per la registrazione</string>
     <string name="save_track_precision_descr">Filtro: nessuna registrazione se tale precisione non è raggiunta.</string>
     <string name="rendering_attr_contourColorScheme_name">Colorazione delle linee isoipse</string>
-    <string name="search_hint">Digitare città, indirizzo, PDI nome</string>
+    <string name="search_hint">Digitare città, indirizzo, nome PDI</string>
     <string name="shared_string_continue">Continua</string>
     <string name="shared_string_pause">Pausa</string>
     <string name="shared_string_trip">Viaggio</string>
@@ -2912,7 +2912,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="step_by_step">Passo dopo passo</string>
     <string name="routeInfo_road_types_name">Tipi di strade</string>
     <string name="show_more">Mostra di più</string>
-    <string name="tracks_on_map">Tracciati mostrati</string>
+    <string name="tracks_on_map">Tracciati visualizzati</string>
     <string name="quick_action_show_hide_gpx_tracks">Mostra/Nascondi Tracciati GPX</string>
     <string name="quick_action_gpx_tracks_hide">Nascondi Tracciati GPX</string>
     <string name="quick_action_gpx_tracks_show">Mostra Tracciati GPX</string>
@@ -3203,4 +3203,10 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="shared_string_file_is_saved">%s è salvato</string>
     <string name="shared_string_open_track">Apri traccia</string>
     <string name="shared_string_track_is_saved">Traccia %s salvata</string>
+    <string name="turn_on_profile_desc">Prego attiva almeno un profilo dell\'applicazione per utilizzare questa impostazione.</string>
+    <string name="gpx_join_gaps">Unisci le lacune</string>
+    <string name="app_mode_campervan">Camper</string>
+    <string name="rendering_attr_showLez_description">Mostra sulla mappa le zone a Basse Emissioni. Non influisce sul calcolo del percorso.</string>
+    <string name="rendering_attr_showLez_name">Mostra le zone a Basse Emissioni</string>
+    <string name="temporary_conditional_routing">Tieni conto delle limitazioni tempooranee</string>
 </resources>

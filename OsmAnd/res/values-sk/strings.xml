@@ -2890,7 +2890,7 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="voice_announcements">Hlasové oznámenia</string>
     <string name="intermediate_destinations">Medziciele</string>
     <string name="arrive_at_time">Príjazd o %1$s</string>
-    <string name="routeInfo_roadClass_name">Trieda</string>
+    <string name="routeInfo_roadClass_name">Typ cesty</string>
     <string name="routeInfo_surface_name">Povrch</string>
     <string name="routeInfo_smoothness_name">Hladkosť povrchu</string>
     <string name="routeInfo_steepness_name">Strmosť</string>
@@ -2923,7 +2923,7 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="use_osm_live_public_transport">Hromadná doprava z OsmAnd Live</string>
     <string name="time_of_day">Denná doba</string>
     <string name="by_transport_type">Pomocou %1$s</string>
-    <string name="step_by_step">Krok za krokom</string>
+    <string name="step_by_step">Zákruta za zákrutou (turn-by-turn)</string>
     <string name="routeInfo_road_types_name">Druhy ciest</string>
     <string name="exit_at">Vystúpte na</string>
     <string name="sit_on_the_stop">Nastúpte na zastávke</string>

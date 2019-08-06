@@ -235,7 +235,7 @@
     <string name="vector_data_missing">Завантажити (\'офлайн\') дані для автономного використання мап.</string>
     <string name="local_index_gpx_info_show">"
 \n
-\nДовго утримуйте для налаштувань"</string>
+\nДовго утримуйте для виклику налаштувань"</string>
     <string name="local_index_installed">Локальна версія</string>
     <string name="local_index_items_backuped">%1$d з %2$d об’єктів деактивовано.</string>
     <string name="local_index_items_deleted">%1$d з %2$d об’єктів вилучено.</string>
@@ -272,9 +272,9 @@
     <string name="switch_to_vector_map_to_see">Для цього регіону доступні оффлайн векторні мапи\n\t\n\tДля їх використання виберіть пункт меню \'Налаштування Мапи\' → \'Джерело мапи…\' → \'Локальні векторні мапи\'.</string>
     <string name="choose_audio_stream">Вивід голосових вказівок</string>
     <string name="choose_audio_stream_descr">Виберіть канал для голосових вказівок.</string>
-    <string name="voice_stream_voice_call">Голосовий канал (також призупиняє музику з динаміків)</string>
+    <string name="voice_stream_voice_call">Голосовий канал (перервати звук з динаміків автомобіля)</string>
     <string name="voice_stream_notification">Повідомлення аудіо</string>
-    <string name="voice_stream_music">Медіа / аудіо музика</string>
+    <string name="voice_stream_music">Медіа / Навігаційне аудіо</string>
     <string name="warning_tile_layer_not_downloadable">Програма не може звантажити шар мапи %1$s, спробуйте перевстановити її.</string>
     <string name="overlay_transparency_descr">Змінити прозорість мапи.</string>
     <string name="overlay_transparency">Прозорість</string>
@@ -1211,7 +1211,7 @@
     <string name="lang_al">Албанська</string>
     <string name="lang_ar">Арабська</string>
     <string name="lang_sc">Сардинська</string>
-    <string name="lang_sr">Сербська</string>
+    <string name="lang_sr">Сербська (кирилиця)</string>
     <string name="lang_zh_cn">Китайська (спрощена)</string>
     <string name="lang_zh_tw">Китайська (традиційна)</string>
     <string name="lang_vi">В’єтнамська</string>
@@ -1892,9 +1892,7 @@
     <string name="shared_string_toolbar">Панель інструментів</string>
     <string name="shared_string_widgets">Віджети</string>
     <string name="map_markers_other">Інші маркери</string>
-    <string name="download_files_error_not_enough_space">Недостатньо пам\'яті!
- Необхідно {3} МБ тимчасової та {1} МБ постійної пам\'яті.
- На разі доступно лише {2} МБ.</string>
+    <string name="download_files_error_not_enough_space">Недостатньо пам\'яті! Необхідно {3} МБ тимчасово та {1} МБ постійно. Наразі доступно лише {2} МБ.</string>
     <string name="download_files_question_space_with_temp">Звантажити {0} файл(ів)\? Використовується {3} Мб тимчасової та {1} Мб постійної пам’яті (наразі вільно лише {2} Мб)</string>
     <string name="donations">Пожертвування</string>
     <string name="osm_live_subscribe_btn">Підписатися</string>
@@ -2869,7 +2867,7 @@
     <string name="powered_by_osmand">Від OsmAnd</string>
     <string name="use_osm_live_public_transport_description">Увімкнути громадський транспорт із врахуванням авто-оновлень OsmAnd Live.</string>
     <string name="use_osm_live_public_transport">Громадський транспорт OsmAnd Live</string>
-    <string name="step_by_step">Крок за кроком</string>
+    <string name="step_by_step">По черзі</string>
     <string name="routeInfo_road_types_name">Типи доріг</string>
     <string name="exit_at">Вихід на</string>
     <string name="sit_on_the_stop">Посадка на зупинці</string>
@@ -2909,7 +2907,7 @@
     <string name="quick_action_switch_day_mode">Денний режим</string>
     <string name="quick_action_switch_night_mode">Нічний режим</string>
     <string name="quick_action_day_night_switch_mode">Перемкнути Денний/Нічний режим</string>
-    <string name="routeInfo_roadClass_name">Клас</string>
+    <string name="routeInfo_roadClass_name">Тип дороги</string>
     <string name="routeInfo_surface_name">Поверхня</string>
     <string name="routeInfo_smoothness_name">Рівність</string>
     <string name="routeInfo_steepness_name">Крутість</string>
@@ -3210,4 +3208,5 @@
     <string name="rendering_attr_showLez_description">Показати на карті зони низьких викидів. Не впливає на маршрутизацію.</string>
     <string name="rendering_attr_showLez_name">Показати зони низьких викидів</string>
     <string name="temporary_conditional_routing">Враховувати тимчасові обмеження</string>
+    <string name="shared_string_default">Типовий</string>
 </resources>

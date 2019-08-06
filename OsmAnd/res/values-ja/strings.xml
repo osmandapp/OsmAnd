@@ -1536,7 +1536,7 @@ POIの更新は利用できません</string>
     <string name="welcome_header">ようこそ</string>
     <string name="current_route">現在のルート</string>
     <string name="agps_info">A-GPS情報</string>
-    <string name="agps_data_last_downloaded">最後にダウンロードしたA-GPSデータ: %1$s</string>
+    <string name="agps_data_last_downloaded">A-GPSデータの最終ダウンロード日時: %1$s</string>
     <string name="confirm_usage_speed_cameras">多くの国(ドイツ、フランス、イタリア、その他)ではスピードカメラ警告の使用が法律で許可されていません。あなたが法律に違反した場合OsmAndは一切の責任を負いません。この機能を使用する事ができる国の場合のみ、[はい]をタップしてください。</string>
     <string name="shared_string_message">メッセージ</string>
     <string name="shared_string_do_not_use">使用しない</string>
@@ -2969,7 +2969,7 @@ POIの更新は利用できません</string>
     <string name="rendering_attr_highway_class_road_name">その他道路</string>
     <string name="rendering_attr_highway_class_service_name">アクセス道路、特定施設用道路</string>
     <string name="rendering_attr_undefined_name">OSMに情報なし</string>
-    <string name="step_by_step">道順</string>
+    <string name="step_by_step">ターンバイターン</string>
     <string name="add_work">職場の追加</string>
     <string name="work_button">職場</string>
     <string name="routing_attr_avoid_tram_name">路面電車を使用しない</string>
@@ -3213,4 +3213,28 @@ POIの更新は利用できません</string>
     <string name="shared_string_open_track">経路を開く</string>
     <string name="shared_string_track_is_saved">経路%sは保存されました</string>
     <string name="temporary_conditional_routing">一時的な制限の検討</string>
+    <string name="quick_action_need_to_add_item_to_list">クイックアクションリストに最低ひとつは設定を行う必要があります</string>
+    <string name="routing_attr_piste_type_downhill_name">アルペン/ダウンヒルスキー</string>
+    <string name="routing_attr_piste_type_downhill_description">アルペンスキーまたはダウンヒルスキーに用の斜面(ゲレンデ)やスキーリフトへの道</string>
+    <string name="routing_attr_piste_type_nordic_name">クロスカントリー/ノルディックスキー</string>
+    <string name="routing_attr_piste_type_nordic_description">ノルディックスキーやクロスカントリースキー用コースやそれらに用いられる小道などです。</string>
+    <string name="routing_attr_piste_type_skitour_name">スキーツーリング</string>
+    <string name="routing_attr_piste_type_skitour_description">スキーツーリング用ルートです。</string>
+    <string name="routing_attr_piste_type_sled_name">ソリ</string>
+    <string name="routing_attr_piste_type_sled_description">ソリ用斜面(ゲレンデ)です。</string>
+    <string name="routing_attr_allow_intermediate_name">中級ルートを許可</string>
+    <string name="routing_attr_allow_intermediate_description">急勾配のより難易度の高いルートです。一般的に避けた方がよい障害などをいくつか含んでいることがあります。</string>
+    <string name="routing_attr_allow_advanced_name">上級ルートを許可</string>
+    <string name="routing_attr_allow_advanced_description">危険性の高い障害物や急勾配のある難易度の高いルートです。</string>
+    <string name="routing_attr_allow_expert_name">熟練者用ルートを許可</string>
+    <string name="routing_attr_allow_expert_description">周辺に危険な障害物や環境を伴う非常に困難なルートです。</string>
+    <string name="routing_attr_allow_skating_only_name">スケートルートのみを許可</string>
+    <string name="routing_attr_allow_skating_only_description">フリースタイルやスケート専用に整備されたルートで、クラシック(ノルディック)スキーのコースではありません。</string>
+    <string name="routing_attr_allow_classic_only_name">クラシックルートのみを許可</string>
+    <string name="routing_attr_allow_classic_only_description">スケート道のないクラシックスタイル(ノルディック)のみのルートです。小型スノーモービルで圧雪されたルート、緩い斜面(ゲレンデ、滑降路)、スキーヤーによって人力で作られた道が含まれます。</string>
+    <string name="routing_attr_difficulty_preference_name">難易度指定</string>
+    <string name="routing_attr_difficulty_preference_description">ここで選択した難易度をベースにルート検索をしますが、短い距離ならば難しいゲレンデや簡単なゲレンデへのルーティングも可能です。</string>
+    <string name="routing_attr_freeride_policy_name">ゲレンデ外</string>
+    <string name="routing_attr_freeride_policy_description">フリーライドやゲレンデ外は非公式のルートです。通常は手入れされていないうえ、職員によってメンテナンスされておらずクローズ時間にもチェックされません。禁止されている場所には決して入らず自己責任で利用してください。</string>
+    <string name="routeInfo_roadClass_name">道路種別</string>
 </resources>

@@ -2888,7 +2888,7 @@ Lon %2$s</string>
     <string name="intermediate_waypoint">Punto intermedio</string>
     <string name="transfers">Transbordos</string>
     <string name="on_foot">A pie</string>
-    <string name="route_way">Ruta</string>
+    <string name="route_way">Trayecto</string>
     <string name="points_of_interests">Puntos de interés (PDI)</string>
     <string name="waiting_for_route_calculation">Calculando la ruta…</string>
     <string name="app_mode_public_transport">Transporte público</string>
@@ -2904,7 +2904,7 @@ Lon %2$s</string>
     <string name="shared_string_capacity">Capacidad</string>
     <string name="shared_string_width">Ancho</string>
     <string name="shared_string_height">Altura</string>
-    <string name="routeInfo_roadClass_name">Clase</string>
+    <string name="routeInfo_roadClass_name">Tipo de camino</string>
     <string name="routeInfo_surface_name">Superficie</string>
     <string name="routeInfo_smoothness_name">Suavidad</string>
     <string name="routeInfo_steepness_name">Inclinación</string>
@@ -2918,7 +2918,7 @@ Lon %2$s</string>
     <string name="tracks_on_map">Trazas mostradas</string>
     <string name="time_of_day">Hora del día</string>
     <string name="by_transport_type">En %1$s</string>
-    <string name="step_by_step">Paso a paso</string>
+    <string name="step_by_step">Giro a giro</string>
     <string name="routeInfo_road_types_name">Tipos de caminos</string>
     <string name="exit_at">Bajarse en</string>
     <string name="sit_on_the_stop">Esperar en la parada</string>
