@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+	<SwitchPreference
+		android:key="show_routing_alarms"
+		android:title="@string/shared_string_on" />
+
+	<Preference
+		android:icon="@drawable/ic_action_info_dark"
+		android:key="show_routing_alarms_descr"
+		android:selectable="false"
+		android:summary="@string/screen_alerts_descr" />
+
+	<SwitchPreference
+		android:key="show_traffic_warnings"
+		android:title="@string/show_traffic_warnings" />
+
+	<SwitchPreference
+		android:key="show_pedestrian"
+		android:title="@string/show_pedestrian_warnings" />
+
+	<SwitchPreference
+		android:key="show_cameras"
+		android:title="@string/show_cameras" />
+
+	<SwitchPreference
+		android:key="show_lanes"
+		android:title="@string/show_lanes" />
+
+	<SwitchPreference
+		android:key="show_tunnels"
+		android:title="@string/show_tunnels" />
+
+</PreferenceScreen>

@@ -36,6 +36,8 @@ public class GeneralRouter implements VehicleRouter {
 	public static final String DEFAULT_SPEED = "default_speed";
 	public static final String MIN_SPEED = "min_speed";
 	public static final String MAX_SPEED = "max_speed";
+	public static final String VEHICLE_HEIGHT = "height";
+	public static final String VEHICLE_WEIGHT = "weight";
 
 	private final RouteAttributeContext[] objectAttributes;
 	public final Map<String, String> attributes;

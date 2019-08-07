@@ -100,8 +100,18 @@
         <item name="android:textColor">@color/active_color_primary_dark</item>
     </style>
 
+    <!-- Custom Preference Theme -->
+    <style name="AppPreferenceTheme" parent="@style/PreferenceThemeOverlay.v14.Material">
+        <item name="preferenceFragmentCompatStyle">@style/AppPreferenceFragmentCompatStyle</item>
+    </style>
+    <!-- Custom Style for PreferenceFragmentCompat -->
+    <style name="AppPreferenceFragmentCompatStyle" parent="@style/PreferenceFragment.Material">
+        <item name="android:layout">@layout/pref_screen</item>
+    </style>
+
     <!-- Osmand themes styles -->
     <style name="OsmandLightTheme" parent="Theme.AppCompat.Light">
+        <item name="preferenceTheme">@style/AppPreferenceTheme</item>
         <item name="android:statusBarColor">@color/status_bar_color_light</item>
         <item name="mapBackground">@color/map_background_color_light</item>
         <item name="chart_marker_background">@drawable/chart_marker_background_light</item>
@@ -375,6 +385,7 @@
     </style>
 
     <style name="OsmandDarkTheme" parent="Theme.AppCompat">
+        <item name="preferenceTheme">@style/AppPreferenceTheme</item>
         <item name="android:statusBarColor">@color/status_bar_color_dark</item>
         <item name="mapBackground">@color/map_background_color_dark</item>
         <item name="chart_marker_background">@drawable/chart_marker_background_dark</item>

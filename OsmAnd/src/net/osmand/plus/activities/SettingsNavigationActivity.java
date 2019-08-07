@@ -104,7 +104,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 	}
 
 	private void createUI() {
-		addPreferencesFromResource(R.xml.navigation_settings);
+		addPreferencesFromResource(R.xml.navigation_settings_old);
 		PreferenceScreen screen = getPreferenceScreen();
 		RouteService[] vls = RouteService.getAvailableRouters(getMyApplication());
 		String[] entries = new String[vls.length];
@@ -769,13 +769,13 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		builder.show();
 	}
 
-	private enum SpeedSliderType {
+	public enum SpeedSliderType {
 		DEFAULT_SPEED,
 		MIN_SPEED,
 		MAX_SPEED,
 	}
 
-	private void setupSpeedSlider(final SpeedSliderType type, String speedUnits, final int[] minValue, final int[] defaultValue, final int[] maxValue, final int min, final int max, View seekbarView) {
+	public static void setupSpeedSlider(final SpeedSliderType type, String speedUnits, final int[] minValue, final int[] defaultValue, final int[] maxValue, final int min, final int max, View seekbarView) {
 		View seekbarLayout;
 		int titleId;
 		final int[] speedValue;

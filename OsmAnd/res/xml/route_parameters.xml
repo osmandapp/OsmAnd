@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools">
+
+	<SwitchPreference
+		android:key="fast_route_mode"
+		android:summary="@string/fast_route_mode_descr"
+		android:title="@string/fast_route_mode"
+		tools:icon="@drawable/ic_action_fastest_route" />
+
+	<Preference
+		android:key="avoid_in_routing"
+		android:summary="@string/avoid_in_routing_descr"
+		android:title="@string/avoid_in_routing_title"
+		tools:icon="@drawable/ic_action_alert" />
+
+	<Preference
+		android:key="prefer_in_routing"
+		android:summary="@string/prefer_in_routing_descr"
+		android:title="@string/prefer_in_routing_title" />
+
+	<SwitchPreference
+		android:key="enable_time_conditional_routing"
+		android:title="@string/temporary_conditional_routing"
+		tools:icon="@drawable/ic_action_road_works_dark" />
+
+	<!--<ListPreference-->
+	<!--android:key="delay_to_start_navigation"-->
+	<!--android:title="@string/delay_to_start_navigation"-->
+	<!--android:summary="@string/delay_to_start_navigation_descr" />-->
+
+</PreferenceScreen>

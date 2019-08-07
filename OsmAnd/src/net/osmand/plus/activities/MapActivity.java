@@ -29,6 +29,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceFragmentCompat;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -111,7 +113,6 @@ import net.osmand.plus.mapmarkers.PlanRouteFragment;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.measurementtool.NewGpxData;
-import net.osmand.plus.profiles.EditProfileFragment;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routepreparationmenu.ChooseRouteFragment;
@@ -124,6 +125,9 @@ import net.osmand.plus.routing.TransportRoutingHelper.TransportRouteCalculationP
 import net.osmand.plus.search.QuickSearchDialogFragment;
 import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchTab;
 import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchType;
+import net.osmand.plus.settings.SettingsBaseProfileDependentFragment;
+import net.osmand.plus.settings.SettingsMainFragment;
+import net.osmand.plus.settings.profiles.EditProfileFragment;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.MapControlsLayer;
@@ -156,9 +160,14 @@ import java.util.concurrent.Executors;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static net.osmand.plus.settings.profiles.SettingsProfileFragment.IS_USER_PROFILE;
+import static net.osmand.plus.settings.profiles.SettingsProfileFragment.PROFILE_STRING_KEY;
+
 public class MapActivity extends OsmandActionBarActivity implements DownloadEvents,
 		OnRequestPermissionsResultCallback, IRouteInformationListener, AMapPointUpdateListener,
-		MapMarkerChangedListener, OnDismissDialogFragmentListener, OnDrawMapListener, OsmAndAppCustomizationListener, LockHelper.LockUIAdapter {
+		MapMarkerChangedListener, OnDismissDialogFragmentListener, OnDrawMapListener,
+		OsmAndAppCustomizationListener, LockHelper.LockUIAdapter, PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
+
 	public static final String INTENT_KEY_PARENT_MAP_ACTIVITY = "intent_parent_map_activity_key";
 	public static final String INTENT_PARAMS = "intent_prarams";
 
@@ -1398,6 +1407,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	public void updateApplicationModeSettings() {
 		updateMapSettings();
+		OsmandPlugin.updateActivatedPlugins(app);
 		mapViewTrackingUtilities.updateSettings();
 		//app.getRoutingHelper().setAppMode(settings.getApplicationMode());
 		if (mapLayers.getMapInfoLayer() != null) {
@@ -1913,6 +1923,32 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		changeKeyguardFlags(true);
 	}
 
+	@Override
+	public boolean onPreferenceStartFragment(PreferenceFragmentCompat caller, Preference pref) {
+		if (caller instanceof SettingsBaseProfileDependentFragment) {
+			SettingsBaseProfileDependentFragment baseFragment = (SettingsBaseProfileDependentFragment) caller;
+
+			ApplicationMode mode = baseFragment.getSelectedMode();
+			if (mode != null) {
+				Bundle args = new Bundle();
+				args.putString(PROFILE_STRING_KEY, mode.getStringKey());
+				args.putBoolean(IS_USER_PROFILE, mode.isCustomProfile());
+
+				String fragmentName = pref.getFragment();
+				final Fragment fragment = Fragment.instantiate(this, fragmentName);
+				fragment.setArguments(args);
+
+				getSupportFragmentManager().beginTransaction()
+						.add(R.id.fragmentContainer, fragment, fragmentName)
+						.addToBackStack(fragmentName)
+						.commitAllowingStateLoss();
+
+				return true;
+			}
+		}
+		return false;
+	}
+
 	private class ScreenOffReceiver extends BroadcastReceiver {
 
 		@Override
@@ -2126,6 +2162,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			QuickSearchDialogFragment.showInstance(this, searchQuery, null,
 					QuickSearchType.REGULAR, showSearchTab, searchLocation);
 		}
+	}
+
+	public void showSettings() {
+		SettingsMainFragment.showInstance(getSupportFragmentManager());
 	}
 
 	private void hideContextMenu() {

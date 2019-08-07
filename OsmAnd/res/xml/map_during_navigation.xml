@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+	<net.osmand.plus.views.ListIntPreference
+		android:key="auto_follow_route"
+		android:summary="@string/choose_auto_follow_route_descr"
+		android:title="@string/choose_auto_follow_route" />
+
+	<Preference
+		android:key="auto_zoom_map_on_off"
+		android:summary="@string/auto_zoom_map_descr"
+		android:title="@string/auto_zoom_map" />
+
+	<SwitchPreference
+		android:key="snap_to_road"
+		android:summary="@string/snap_to_road_descr"
+		android:title="@string/snap_to_road" />
+
+	<net.osmand.plus.views.ListFloatPreference
+		android:key="speed_for_map_to_direction_of_movement"
+		android:summary="@string/map_orientation_change_in_accordance_with_speed_descr"
+		android:title="@string/map_orientation_change_in_accordance_with_speed" />
+
+	<!--<CheckBoxPreference-->
+	<!--android:key="show_zoom_buttons_navigation"-->
+	<!--android:summary="@string/show_zoom_buttons_navigation_descr"-->
+	<!--android:title="@string/show_zoom_buttons_navigation" />-->
+
+</PreferenceScreen>

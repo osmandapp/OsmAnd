@@ -11,6 +11,37 @@
 	Thx - Hardy
 
 -->
+    <string name="units_and_formats">Units &amp; formats</string>
+    <string name="appearance">Appearance</string>
+    <string name="map_look_descr">icons, widgets</string>
+    <string name="map_look">Map look</string>
+    <string name="list_of_installed_plugins">List of installed plugins</string>
+    <string name="configure_navigation">Configure navigation</string>
+    <string name="general_settings_profile_descr">App theme, units, region</string>
+    <string name="configure_profile">Configure profile</string>
+    <string name="screen_alerts_descr">Alerts will be shown on left bottom corner of the screen during the navigation.</string>
+    <string name="switch_profile">Switch profile</string>
+    <string name="language_and_output">Language and output</string>
+    <string name="reset_to_default">Reset to default</string>
+    <string name="manage_profiles_descr">Create, import, edit profiles</string>
+    <string name="manage_profiles">Manage application profiles…</string>
+    <string name="osmand_settings_descr">Affect the entire application</string>
+    <string name="osmand_settings">OsmAnd settings</string>
+    <string name="personal_account_descr">Create or Log in into personal account</string>
+    <string name="personal_account">Personal account</string>
+    <string name="copy_from_other_profile">Copy from other profile</string>
+    <string name="turn_screen_on">Turn screen on</string>
+    <string name="map_during_navigation_descr">Map during navigation</string>
+    <string name="map_during_navigation">Map during navigation</string>
+    <string name="shared_string_other">Other</string>
+    <string name="vehicle_parameters_descr">Weight, height, speed</string>
+    <string name="vehicle_parameters">Vehicle parameters</string>
+    <string name="voice_announces_info">Voice announces are played only during navigation.</string>
+    <string name="voice_announces_descr">Navigation instruction and announces</string>
+    <string name="voice_announces">Voice announces</string>
+    <string name="screen_alerts">Screen alerts</string>
+    <string name="route_parameters_descr">Configure route parameters</string>
+    <string name="route_parameters">Route parameters</string>
     <string name="shared_string_default">Default</string>
     <string name="gpx_join_gaps">Join gaps</string>
     <string name="app_mode_camper">Camper</string>

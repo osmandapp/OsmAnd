@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+	<Preference
+		android:key="appearance_category"
+		android:layout="@layout/simple_preference_category"
+		android:selectable="false"
+		android:title="@string/appearance" />
+
+	<net.osmand.plus.views.ListIntPreference
+		android:defaultValue="1"
+		android:key="osmand_theme"
+		android:layout="@layout/preference_with_descr"
+		android:summary="@string/choose_osmand_theme_descr"
+		android:title="@string/choose_osmand_theme" />
+
+	<net.osmand.plus.views.ListIntPreference
+		android:key="rotate_map"
+		android:layout="@layout/preference_with_descr"
+		android:summary="@string/rotate_map_to_bearing_descr"
+		android:title="@string/rotate_map_to_bearing" />
+
+	<net.osmand.plus.views.ListIntPreference
+		android:key="map_screen_orientation"
+		android:layout="@layout/preference_with_descr"
+		android:summary="@string/map_screen_orientation_descr"
+		android:title="@string/map_screen_orientation" />
+
+	<Preference
+		android:key="units_and_formats"
+		android:layout="@layout/simple_preference_category"
+		android:selectable="false"
+		android:title="@string/units_and_formats" />
+
+	<Preference
+		android:key="default_driving_region"
+		android:layout="@layout/preference_with_descr"
+		android:summary="@string/driving_region_descr"
+		android:title="@string/driving_region" />
+
+	<ListPreference
+		android:key="default_metric_system"
+		android:layout="@layout/preference_with_descr"
+		android:summary="@string/unit_of_length_descr"
+		android:title="@string/unit_of_length" />
+
+	<net.osmand.plus.views.ListIntPreference
+		android:key="coordinates_format"
+		android:layout="@layout/preference_with_descr"
+		android:summary="@string/coords_format_descr"
+		android:title="@string/coords_format" />
+
+	<ListPreference
+		android:key="angular_measurement"
+		android:layout="@layout/preference_with_descr"
+		android:summary="@string/angular_measeurement_descr"
+		android:title="@string/angular_measeurement" />
+
+	<Preference
+		android:key="other"
+		android:layout="@layout/simple_preference_category"
+		android:selectable="false"
+		android:title="@string/shared_string_other" />
+
+</PreferenceScreen>

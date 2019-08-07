@@ -183,6 +183,11 @@ public class BaseOsmAndFragment extends Fragment implements TransitionAnimator {
 		return cache != null ? cache.getIcon(id, colorId) : null;
 	}
 
+	protected Drawable getIcon(@DrawableRes int id) {
+		UiUtilities cache = getIconsCache();
+		return cache != null ? cache.getIcon(id) : null;
+	}
+
 	protected Drawable getContentIcon(@DrawableRes int id) {
 		UiUtilities cache = getIconsCache();
 		return cache != null ? cache.getThemedIcon(id) : null;

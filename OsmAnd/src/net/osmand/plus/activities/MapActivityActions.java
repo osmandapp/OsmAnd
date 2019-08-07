@@ -23,6 +23,9 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import net.osmand.AndroidUtils;
+import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
@@ -36,9 +39,6 @@ import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.ContextMenuItem.ItemBuilder;
-import net.osmand.GPXUtilities;
-import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
@@ -79,8 +79,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import static net.osmand.plus.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_ADD_GPX_WAYPOINT;
-import static net.osmand.plus.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_DIRECTIONS_FROM_ID;
 import static net.osmand.plus.OsmAndCustomizationConstants.DRAWER_CONFIGURE_MAP_ID;
 import static net.osmand.plus.OsmAndCustomizationConstants.DRAWER_CONFIGURE_SCREEN_ID;
 import static net.osmand.plus.OsmAndCustomizationConstants.DRAWER_DASHBOARD_ID;
@@ -96,6 +94,8 @@ import static net.osmand.plus.OsmAndCustomizationConstants.DRAWER_PLUGINS_ID;
 import static net.osmand.plus.OsmAndCustomizationConstants.DRAWER_SEARCH_ID;
 import static net.osmand.plus.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
 import static net.osmand.plus.OsmAndCustomizationConstants.DRAWER_TRAVEL_GUIDES_ID;
+import static net.osmand.plus.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_ADD_GPX_WAYPOINT;
+import static net.osmand.plus.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_DIRECTIONS_FROM_ID;
 import static net.osmand.plus.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_EDIT_GPX_WP;
 import static net.osmand.plus.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MEASURE_DISTANCE;
 import static net.osmand.plus.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_SEARCH_NEARBY;
@@ -837,6 +837,18 @@ public class MapActivityActions implements DialogProvider {
 								.getSettingsActivity());
 						settings.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 						mapActivity.startActivity(settings);
+						return true;
+					}
+				}).createItem());
+
+		optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.shared_string_settings, mapActivity)
+				.setId(DRAWER_SETTINGS_ID)
+				.setIcon(R.drawable.ic_action_compass)
+				.setListener(new ItemClickListener() {
+					@Override
+					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
+						app.logEvent("drawer_settings_open");
+						mapActivity.showSettings();
 						return true;
 					}
 				}).createItem());
