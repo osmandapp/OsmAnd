@@ -115,7 +115,18 @@
 	<string name="poi_rtsa_scale_filter">Difficulty category</string>
 	<string name="poi_climbing_crag_filter">Climbing crag</string>
 	<string name="poi_climbing_crag">Yes</string>
-	
+	<string name="poi_snowmobile_filter">Snowmobile access</string>
+	<string name="poi_access_bus">Bus access</string>
+	<string name="poi_access_caravan">Caravan access</string>
+	<string name="poi_access_motorhome">Motorhome access</string>
+	<string name="poi_access_trailer">Trailer access</string>
+	<string name="poi_access_motorcycle">Motorcycle access</string>
+	<string name="poi_access_moped">Moped access</string>
+	<string name="poi_access_mofa">Mofa access</string>
+	<string name="poi_access_hgv">HGV access</string>
+	<string name="poi_access_goods">Light goods vehicles access</string>
+	<string name="poi_access_disabled">Disabled access</string>
+
 <!--  categories -->
 	<string name="poi_shop">Store</string>
 	<string name="poi_shop_food">Convenience store and supermarket</string>
@@ -2450,8 +2461,6 @@
 	<string name="poi_animal_training_dog">Dog</string>
 	<string name="poi_animal_training_horse">Horse</string>
 
-	<string name="poi_horse_yes">Horses allowed</string>
-	<string name="poi_horse_no">Horses not allowed</string>
 	<string name="poi_animal_yes">Animals allowed</string>
 	<string name="poi_animal_no">Animals not allowed</string>
 
@@ -3959,5 +3968,133 @@
 	<string name="poi_charcoal_pile">Charcoal pile</string>
 
 	<string name="poi_hookah_lounge">Hookah lounge</string>
+
+	<string name="poi_taxi_office">Taxi office</string>
+
+	<string name="poi_vehicle_yes">Vehicle access: yes</string>
+	<string name="poi_vehicle_private">Vehicle access: private</string>
+	<string name="poi_vehicle_no">Vehicle access: no</string>
+	<string name="poi_vehicle_destination">Vehicle access: destination</string>
+	<string name="poi_vehicle_permissive">Vehicle access: permissive</string>
+	<string name="poi_vehicle_customers">Vehicle access: customers</string>
+	<string name="poi_vehicle_military">Vehicle access: military</string>
+	<string name="poi_vehicle_delivery">Vehicle access: delivery</string>
+	<string name="poi_vehicle_forestry">Vehicle access: forestry</string>
+
+	<string name="poi_motorcar_yes">Motorcar access: </string>
+	<string name="poi_motorcar_private">Motorcar access: private</string>
+	<string name="poi_motorcar_no">Motorcar access: no</string>
+	<string name="poi_motorcar_destination">Motorcar access: destination</string>
+	<string name="poi_motorcar_permissive">Motorcar access: permissive</string>
+	<string name="poi_motorcar_customers">Motorcar access: customers</string>
+	<string name="poi_motorcar_forestry">Motorcar access: forestry</string>
+
+	<string name="poi_motor_vehicle_yes">Motor vehicle access: yes</string>
+	<string name="poi_motor_vehicle_private">Motor vehicle access: private</string>
+	<string name="poi_motor_vehicle_no">Motor vehicle access: no</string>
+	<string name="poi_motor_vehicle_destination">Motor vehicle access: destination</string>
+	<string name="poi_motor_vehicle_permissive">Motor vehicle access: permissive</string>
+	<string name="poi_motor_vehicle_customers">Motor vehicle access: customers</string>
+	<string name="poi_motor_vehicle_military">Motor vehicle access: military</string>
+	<string name="poi_motor_vehicle_delivery">Motor vehicle access: delivery</string>
+	<string name="poi_motor_vehicle_forestry">Motor vehicle access: forestry</string>
+	<string name="poi_motor_vehicle_agricultural">Motor vehicle access: agricultural</string>
+
+	<string name="poi_hgv_private">HGV access: private</string>
+	<string name="poi_hgv_no">HGV access: no</string>
+	<string name="poi_hgv_agricultural">HGV access: agricultural</string>
+	<string name="poi_hgv_discouraged">HGV access: discouraged</string>
+	<string name="poi_hgv_unsuitable">HGV access: unsuitable</string>
+
+	<string name="poi_goods_no">Light goods vehicles access: no</string>
+
+	<string name="poi_motorcycle_private">Motorcycle access: private</string>
+	<string name="poi_motorcycle_no">Motorcycle access: no</string>
+
+	<string name="poi_moped_no">Moped access: no</string>
+
+	<string name="poi_mofa_no">Mofa access: no</string>
+
+	<string name="poi_bicycle_private">Bicycle access: private</string>
+	<string name="poi_bicycle_dismount">Bicycle access: dismount</string>
+	<string name="poi_bicycle_destination">Bicycle access: destination</string>
+	<string name="poi_bicycle_permissive">Bicycle access: permissive</string>
+	<string name="poi_bicycle_customers">Bicycle access: customers</string>
+
+	<string name="poi_horse_yes">Horses allowed</string>
+	<string name="poi_horse_no">Horses not allowed</string>
+	<string name="poi_horse_private">Horse access: private</string>
+	<string name="poi_horse_destination">Horse access: destination</string>
+	<string name="poi_horse_permissive">Horse access: permissive</string>
+	<string name="poi_horse_forestry">Horse access: forestry</string>
+
+	<string name="poi_foot_yes">Pedestrian access: yes</string>
+	<string name="poi_foot_private">Pedestrian access: private</string>
+	<string name="poi_foot_no">Pedestrian access: no</string>
+	<string name="poi_foot_destination">Pedestrian access: destination</string>
+	<string name="poi_foot_permissive">Pedestrian access: permissive</string>
+	<string name="poi_foot_customers">Pedestrian access: customers</string>
+
+	<string name="poi_caravan_no">Caravan access: no</string>
+	<string name="poi_motorhome_no">Motorhome access: no</string>
+	<string name="poi_trailer_no">Trailer access: no</string>
+
+	<string name="poi_psv_yes">PSV access: yes</string>
+	<string name="poi_psv_designated">PSV access: designated</string>
+	<string name="poi_psv_no">PSV access: no</string>
+
+	<string name="poi_bus_no">Bus access: no</string>
+
+	<string name="poi_tourist_bus_yes">Tourist bus access: yes</string>
+	<string name="poi_tourist_bus_designated">Tourist bus access: designated</string>
+	<string name="poi_tourist_bus_no">Tourist bus access: no</string>
+
+	<string name="poi_coach_yes">Coach access: yes</string>
+	<string name="poi_coach_no">Coach access: no</string>
+
+	<string name="poi_ski_yes">Ski access: yes</string>
+	<string name="poi_ski_no">Ski access: no</string>
+
+	<string name="poi_snowmobile_private">Snowmobile access: private</string>
+	<string name="poi_snowmobile_no">Snowmobile access: no</string>
+
+	<string name="poi_agricultural_yes">Agricultural vehicles access: yes</string>
+	<string name="poi_agricultural_no">Agricultural vehicles access: no</string>
+
+	<string name="poi_taxi_yes">Taxi access: yes</string>
+	<string name="poi_taxi_designated">Taxi access: designated</string>
+	<string name="poi_taxi_no">Taxi access: no</string>
+
+	<string name="poi_disabled_no">Access for disabled: no</string>
+
+	<string name="poi_snowmobile_yes">Yes</string>
+	<string name="poi_snowmobile_designated">Designated</string>
+	<string name="poi_snowmobile_permissive">Permissive</string>
+
+	<string name="poi_bus_yes">Yes</string>
+	<string name="poi_bus_designated">Designated</string>
+	<string name="poi_caravan_yes">Yes</string>
+	<string name="poi_caravan_designated">Designated</string>
+	<string name="poi_motorhome_yes">Yes</string>
+	<string name="poi_motorhome_designated">Designated</string>
+	<string name="poi_trailer_yes">Yes</string>
+	<string name="poi_trailer_designated">Designated</string>
+	<string name="poi_motorcycle_yes">Yes</string>
+	<string name="poi_motorcycle_permissive">Permissive</string>
+	<string name="poi_motorcycle_destination">Destination</string>
+	<string name="poi_motorcycle_designated">Designated</string>
+	<string name="poi_moped_yes">Yes</string>
+	<string name="poi_moped_designated">Designated</string>
+	<string name="poi_mofa_yes">Yes</string>
+	<string name="poi_mofa_designated">Designated</string>
+	<string name="poi_hgv_yes">Yes</string>
+	<string name="poi_hgv_destination">Destination</string>
+	<string name="poi_hgv_permissive">Permissive</string>
+	<string name="poi_hgv_designated">Designated</string>
+	<string name="poi_hgv_delivery">Delivery</string>
+	<string name="poi_goods_yes">Yes</string>
+	<string name="poi_goods_designated">Designated</string>
+	<string name="poi_disabled_yes">Yes</string>
+	<string name="poi_disabled_designated">Designated</string>
 
 </resources>

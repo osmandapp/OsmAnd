@@ -268,7 +268,7 @@ public class OsmandRegions {
 		return Math.abs(area);
 	}
 
-	private List<BinaryMapDataObject> getCountries(int lx, int rx, int ty, int by) throws IOException {
+	private List<BinaryMapDataObject> getCountries(int lx, int rx, int ty, int by,  final boolean checkCenter) throws IOException {
 		HashSet<String> set = new HashSet<String>(quadTree.queryInBox(new QuadRect(lx, ty, rx, by),
 				new ArrayList<String>()));
 		List<BinaryMapDataObject> result = new ArrayList<BinaryMapDataObject>();
@@ -280,7 +280,7 @@ public class OsmandRegions {
 			BinaryMapDataObject container = null;
 			int count = 0;
 			for (BinaryMapDataObject bo : countriesByDownloadName.get(cname)) {
-				if (contain(bo, mx, my)) {
+				if (!checkCenter || contain(bo, mx, my)) {
 					count++;
 					container = bo;
 					break;
@@ -314,24 +314,27 @@ public class OsmandRegions {
 		return null;
 	}
 
-
 	public List<BinaryMapDataObject> query(int lx, int rx, int ty, int by) throws IOException {
+		return queryBboxNoInit(lx, rx, ty, by, true);
+	}
+
+	public List<BinaryMapDataObject> query(int lx, int rx, int ty, int by, boolean checkCenter) throws IOException {
 		if (quadTree != null) {
-			return getCountries(lx, rx, ty, by);
+			return getCountries(lx, rx, ty, by, checkCenter);
 		}
-		return queryBboxNoInit(lx, rx, ty, by);
+		return queryBboxNoInit(lx, rx, ty, by, checkCenter);
 	}
 	
 	
 	public List<BinaryMapDataObject> query(final int tile31x, final int tile31y) throws IOException {
 		if (quadTree != null) {
-			return getCountries(tile31x, tile31x, tile31y, tile31y);
+			return getCountries(tile31x, tile31x, tile31y, tile31y, true);
 		}
-		return queryBboxNoInit(tile31x, tile31x, tile31y, tile31y);
+		return queryBboxNoInit(tile31x, tile31x, tile31y, tile31y, true);
 	}
 
 	
-	private synchronized List<BinaryMapDataObject> queryBboxNoInit(int lx, int rx, int ty, int by) throws IOException {
+	private synchronized List<BinaryMapDataObject> queryBboxNoInit(int lx, int rx, int ty, int by, final boolean checkCenter) throws IOException {
 		final List<BinaryMapDataObject> result = new ArrayList<BinaryMapDataObject>();
 		final int mx = lx / 2 + rx / 2;
 		final int my = ty / 2 + by / 2;
@@ -349,7 +352,7 @@ public class OsmandRegions {
 							return false;
 						}
 						initTypes(object);
-						if (contain(object, mx, my)) {
+						if (!checkCenter || contain(object, mx, my)) {
 							result.add(object);
 						}
 						return false;
@@ -725,7 +728,7 @@ public class OsmandRegions {
 
 		List<BinaryMapDataObject> mapDataObjects;
 		try {
-			mapDataObjects = queryBboxNoInit(point31x, point31x, point31y, point31y);
+			mapDataObjects = queryBboxNoInit(point31x, point31x, point31y, point31y, true);
 		} catch (IOException e) {
 			throw new IOException("Error while calling queryBbox");
 		}

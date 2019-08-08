@@ -281,7 +281,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 		int bottom = MapUtils.get31TileNumberY(rb.getLatitude());
 
 		try {
-			result = osmandRegions.query(left, right, top, bottom);
+			result = osmandRegions.query(left, right, top, bottom, false);
 		} catch (IOException e) {
 			return result;
 		}
