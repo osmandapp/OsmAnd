@@ -3219,4 +3219,5 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="temporary_conditional_routing">Vorübergehende Einschränkungen berückichtigen</string>
     <string name="gpx_join_gaps">Lücken schließen</string>
     <string name="app_mode_campervan">Wohnmobil</string>
+    <string name="shared_string_default">Standard</string>
 </resources>
