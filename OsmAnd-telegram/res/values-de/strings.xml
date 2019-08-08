@@ -248,4 +248,5 @@
     <string name="shared_string_start">Start</string>
     <string name="start_end_date">Start — Ende Datum</string>
     <string name="shared_string_apply">Anwenden</string>
+    <string name="set_time_timeline_descr">Dauer der Anzeige auswählen</string>
 </resources>
