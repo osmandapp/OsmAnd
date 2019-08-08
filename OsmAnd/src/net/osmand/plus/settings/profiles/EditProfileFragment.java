@@ -48,7 +48,7 @@ import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.profiles.RoutingProfileDataObject;
 import net.osmand.plus.routing.RouteProvider.RouteService;
-import net.osmand.plus.settings.SettingsNavigationFragment;
+import net.osmand.plus.settings.NavigationFragment;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 import net.osmand.router.GeneralRouter;
 import net.osmand.util.Algorithms;
@@ -410,7 +410,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 				} else if (getSettings() != null) {
 					activateMode(mode);
 					getSettings().APPLICATION_MODE.set(mode);
-					SettingsNavigationFragment.showInstance(getActivity().getSupportFragmentManager(), mode);
+					NavigationFragment.showInstance(getActivity().getSupportFragmentManager(), mode);
 				}
 			}
 		});

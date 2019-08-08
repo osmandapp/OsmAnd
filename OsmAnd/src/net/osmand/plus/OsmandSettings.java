@@ -203,6 +203,16 @@ public class OsmandSettings {
 		return settingsAPI.getPreferenceObject(getSharedPreferencesName(mode));
 	}
 
+	public void updateCachedPreference(String key) {
+		OsmandSettings.OsmandPreference pref = registeredPreferences.get(key);
+		if (pref instanceof OsmandSettings.CommonPreference) {
+			OsmandSettings.CommonPreference commonPreference = (OsmandSettings.CommonPreference) pref;
+			if (commonPreference.cache && commonPreference.cachedValue != null) {
+				commonPreference.cachedValue = null;
+			}
+		}
+	}
+
 	public boolean setPreference(String key, Object value) {
 		OsmandPreference<?> preference = registeredPreferences.get(key);
 		if (preference != null) {
@@ -1060,11 +1070,11 @@ public class OsmandSettings {
 		new BooleanAccessibilityPreference("direction_haptic_feedback", false).makeGlobal();
 
 	// magnetic field doesn'torkmost of the time on some phones
-	public final OsmandPreference<Boolean> USE_MAGNETIC_FIELD_SENSOR_COMPASS = new BooleanPreference("use_magnetic_field_sensor_compass", false).makeGlobal().cache();
-	public final OsmandPreference<Boolean> USE_KALMAN_FILTER_FOR_COMPASS = new BooleanPreference("use_kalman_filter_compass", true).makeGlobal().cache();
+	public final OsmandPreference<Boolean> USE_MAGNETIC_FIELD_SENSOR_COMPASS = new BooleanPreference("use_magnetic_field_sensor_compass", false).makeProfile().cache();
+	public final OsmandPreference<Boolean> USE_KALMAN_FILTER_FOR_COMPASS = new BooleanPreference("use_kalman_filter_compass", true).makeProfile().cache();
 
 	public final OsmandPreference<Boolean> DO_NOT_SHOW_STARTUP_MESSAGES = new BooleanPreference("do_not_show_startup_messages", false).makeGlobal().cache();
-	public final OsmandPreference<Boolean> DO_NOT_USE_ANIMATIONS = new BooleanPreference("do_not_use_animations", false).makeGlobal().cache();
+	public final OsmandPreference<Boolean> DO_NOT_USE_ANIMATIONS = new BooleanPreference("do_not_use_animations", false).makeProfile().cache();
 	public final OsmandPreference<Boolean> SEND_ANONYMOUS_MAP_DOWNLOADS_DATA = new BooleanPreference("send_anonymous_map_downloads_data", false).makeGlobal().cache();
 	public final OsmandPreference<Boolean> SEND_ANONYMOUS_APP_USAGE_DATA = new BooleanPreference("send_anonymous_app_usage_data", false).makeGlobal().cache();
 	public final OsmandPreference<Boolean> SEND_ANONYMOUS_DATA_REQUEST_PROCESSED = new BooleanPreference("send_anonymous_data_request_processed", false).makeGlobal().cache();
@@ -1515,8 +1525,7 @@ public class OsmandSettings {
 
 	public final OsmandPreference<Boolean> ANIMATE_MY_LOCATION = new BooleanPreference("animate_my_location", true).makeGlobal().cache();
 
-	public final OsmandPreference<Integer> EXTERNAL_INPUT_DEVICE =
-			new IntPreference("external_input_device", 0).makeGlobal();
+	public final OsmandPreference<Integer> EXTERNAL_INPUT_DEVICE = new IntPreference("external_input_device", 0).makeProfile();
 
 	public final OsmandPreference<Boolean> ROUTE_MAP_MARKERS_START_MY_LOC = new BooleanPreference("route_map_markers_start_my_loc", false).makeGlobal().cache();
 	public final OsmandPreference<Boolean> ROUTE_MAP_MARKERS_ROUND_TRIP = new BooleanPreference("route_map_markers_round_trip", false).makeGlobal().cache();

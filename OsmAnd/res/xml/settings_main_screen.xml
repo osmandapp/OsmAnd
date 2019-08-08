@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools">
+
+	<Preference
+		android:key="personal_account"
+		android:layout="@layout/preference_with_descr"
+		android:summary="@string/personal_account_descr"
+		android:title="@string/personal_account"
+		app:fragment="net.osmand.plus.settings.ProfileGeneralSettings"
+		tools:icon="@drawable/ic_person" />
+
+	<Preference
+		android:key="global_settings"
+		android:layout="@layout/preference_with_descr"
+		android:summary="@string/osmand_settings_descr"
+		android:title="@string/osmand_settings"
+		app:fragment="net.osmand.plus.settings.NavigationFragment"
+		tools:icon="@drawable/ic_action_settings" />
+
+	<Preference
+		android:key="application_profiles"
+		android:layout="@layout/simple_preference_category"
+		android:selectable="false"
+		android:title="@string/application_profiles" />
+
+	<Preference
+		android:key="browse_map"
+		android:layout="@layout/preference_with_descr"
+		android:summary="@string/map_look_descr"
+		android:title="@string/rendering_value_browse_map_name"
+		app:fragment="net.osmand.plus.settings.RouteParametersFragment"
+		tools:icon="@drawable/ic_world_globe_dark" />
+
+	<Preference
+		android:key="configure_profile"
+		android:layout="@layout/preference_with_descr"
+		android:title="@string/configure_profile"
+		app:fragment="net.osmand.plus.settings.ConfigureProfileFragment"
+		tools:icon="@drawable/ic_action_car_dark" />
+
+	<Preference
+		android:key="manage_profiles"
+		android:layout="@layout/preference_with_descr"
+		android:summary="@string/manage_profiles_descr"
+		android:title="@string/manage_profiles"
+		app:fragment="net.osmand.plus.profiles.SettingsProfileFragment"
+		tools:icon="@drawable/ic_action_manage_profiles" />
+
+</PreferenceScreen>

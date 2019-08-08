@@ -1819,6 +1819,22 @@ public class OsmandAidlApi {
 		return res;
 	}
 
+	public void updateConnectedApps() {
+		try {
+			JSONArray array = new JSONArray(app.getSettings().API_CONNECTED_APPS_JSON.get());
+			for (int i = 0; i < array.length(); i++) {
+				JSONObject obj = array.getJSONObject(i);
+				String pack = obj.optString(ConnectedApp.PACK_KEY, "");
+				ConnectedApp connectedApp = connectedApps.get(pack);
+				if (connectedApp != null) {
+					connectedApp.enabled = obj.optBoolean(ConnectedApp.ENABLED_KEY, true);
+				}
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+	}
+
 	public boolean switchEnabled(@NonNull ConnectedApp app) {
 		app.enabled = !app.enabled;
 		return saveConnectedApps();

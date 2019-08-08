@@ -8,7 +8,7 @@
 		android:layout="@layout/preference_with_descr"
 		android:summary="@string/route_parameters_descr"
 		android:title="@string/route_parameters"
-		app:fragment="net.osmand.plus.settings.SettingsRouteParametersFragment"
+		app:fragment="net.osmand.plus.settings.RouteParametersFragment"
 		tools:icon="@drawable/ic_action_track_16" />
 
 	<net.osmand.plus.views.SwitchFragmentPreference
@@ -17,7 +17,7 @@
 		android:switchTextOff="@string/shared_string_off"
 		android:switchTextOn="@string/shared_string_on"
 		android:title="@string/screen_alerts"
-		app:fragment="net.osmand.plus.settings.SettingsScreenAlertsFragment"
+		app:fragment="net.osmand.plus.settings.ScreenAlertsFragment"
 		tools:icon="@drawable/ic_action_alert" />
 
 	<net.osmand.plus.views.SwitchFragmentPreference
@@ -25,7 +25,7 @@
 		android:layout="@layout/preference_fragment_and_switch"
 		android:summary="@string/voice_announces_descr"
 		android:title="@string/voice_announces"
-		app:fragment="net.osmand.plus.settings.SettingsVoiceAnnouncesFragment"
+		app:fragment="net.osmand.plus.settings.VoiceAnnouncesFragment"
 		tools:icon="@drawable/ic_action_volume_up" />
 
 	<Preference
@@ -33,7 +33,7 @@
 		android:layout="@layout/preference_with_descr"
 		android:summary="@string/vehicle_parameters_descr"
 		android:title="@string/vehicle_parameters"
-		app:fragment="net.osmand.plus.settings.SettingsVehicleParametersFragment"
+		app:fragment="net.osmand.plus.settings.VehicleParametersFragment"
 		tools:icon="@drawable/ic_action_car_dark" />
 
 	<Preference
@@ -47,7 +47,7 @@
 		android:layout="@layout/preference_with_descr"
 		android:summary="@string/map_during_navigation"
 		android:title="@string/map_during_navigation"
-		app:fragment="net.osmand.plus.settings.SettingsMapDuringNavigationFragment"
+		app:fragment="net.osmand.plus.settings.MapDuringNavigationFragment"
 		tools:icon="@drawable/ic_action_copy" />
 
 	<net.osmand.plus.views.SwitchFragmentPreference
@@ -56,7 +56,7 @@
 		android:switchTextOff="@string/shared_string_off"
 		android:switchTextOn="@string/shared_string_on"
 		android:title="@string/turn_screen_on"
-		app:fragment="net.osmand.plus.settings.SettingsTurnScreenOnFragment"
+		app:fragment="net.osmand.plus.settings.TurnScreenOnFragment"
 		tools:icon="@drawable/ic_action_copy" />
 
 	<Preference

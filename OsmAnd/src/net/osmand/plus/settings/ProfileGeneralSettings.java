@@ -14,9 +14,9 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.views.ListIntPreference;
 
-public class GeneralProfileSettings extends SettingsBaseProfileDependentFragment {
+public class ProfileGeneralSettings extends BaseProfileSettingsFragment {
 
-	public static final String TAG = "GeneralProfileSettings";
+	public static final String TAG = "ProfileGeneralSettings";
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -42,15 +42,15 @@ public class GeneralProfileSettings extends SettingsBaseProfileDependentFragment
 	protected void createUI() {
 		PreferenceScreen screen = getPreferenceScreen();
 
-		ListIntPreference appTheme = (ListIntPreference) screen.findPreference(settings.OSMAND_THEME.getId());
+		ListIntPreference appTheme = (ListIntPreference) findAndRegisterPreference(settings.OSMAND_THEME.getId());
 		appTheme.setEntries(new String[]{getString(R.string.dark_theme), getString(R.string.light_theme)});
 		appTheme.setEntryValues(new int[]{OsmandSettings.OSMAND_DARK_THEME, OsmandSettings.OSMAND_LIGHT_THEME});
 
-		ListIntPreference rotateMap = (ListIntPreference) screen.findPreference(settings.ROTATE_MAP.getId());
+		ListIntPreference rotateMap = (ListIntPreference) findAndRegisterPreference(settings.ROTATE_MAP.getId());
 		rotateMap.setEntries(new String[]{getString(R.string.rotate_map_none_opt), getString(R.string.rotate_map_bearing_opt), getString(R.string.rotate_map_compass_opt)});
 		rotateMap.setEntryValues(new int[]{OsmandSettings.ROTATE_MAP_NONE, OsmandSettings.ROTATE_MAP_BEARING, OsmandSettings.ROTATE_MAP_COMPASS});
 
-		ListIntPreference mapScreenOrientation = (ListIntPreference) screen.findPreference(settings.MAP_SCREEN_ORIENTATION.getId());
+		ListIntPreference mapScreenOrientation = (ListIntPreference) findAndRegisterPreference(settings.MAP_SCREEN_ORIENTATION.getId());
 		mapScreenOrientation.setEntries(new String[]{getString(R.string.map_orientation_portrait), getString(R.string.map_orientation_landscape), getString(R.string.map_orientation_default)});
 		mapScreenOrientation.setEntryValues(new int[]{ActivityInfo.SCREEN_ORIENTATION_PORTRAIT, ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE, ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED});
 
@@ -70,7 +70,7 @@ public class GeneralProfileSettings extends SettingsBaseProfileDependentFragment
 		entries[3] = PointDescription.formatToHumanString(getContext(), PointDescription.UTM_FORMAT);
 		entries[4] = PointDescription.formatToHumanString(getContext(), PointDescription.OLC_FORMAT);
 
-		ListIntPreference coordinatesFormat = (ListIntPreference) screen.findPreference(settings.COORDINATES_FORMAT.getId());
+		ListIntPreference coordinatesFormat = (ListIntPreference) findAndRegisterPreference(settings.COORDINATES_FORMAT.getId());
 		coordinatesFormat.setEntries(entries);
 		coordinatesFormat.setEntryValues(cvls);
 	}
@@ -91,10 +91,10 @@ public class GeneralProfileSettings extends SettingsBaseProfileDependentFragment
 
 	public static boolean showInstance(FragmentManager fragmentManager) {
 		try {
-			GeneralProfileSettings generalProfileSettings = new GeneralProfileSettings();
+			ProfileGeneralSettings profileGeneralSettingsSettings = new ProfileGeneralSettings();
 			fragmentManager.beginTransaction()
-					.add(R.id.fragmentContainer, generalProfileSettings, GeneralProfileSettings.TAG)
-					.addToBackStack(GeneralProfileSettings.TAG)
+					.add(R.id.fragmentContainer, profileGeneralSettingsSettings, ProfileGeneralSettings.TAG)
+					.addToBackStack(ProfileGeneralSettings.TAG)
 					.commitAllowingStateLoss();
 			return true;
 		} catch (Exception e) {

@@ -8,7 +8,7 @@
 		android:layout="@layout/preference_with_descr"
 		android:summary="@string/general_settings_profile_descr"
 		android:title="@string/general_settings_2"
-		app:fragment="net.osmand.plus.settings.GeneralProfileSettings"
+		app:fragment="net.osmand.plus.settings.ProfileGeneralSettings"
 		tools:icon="@drawable/ic_action_settings" />
 
 	<Preference
@@ -16,7 +16,7 @@
 		android:layout="@layout/preference_with_descr"
 		android:summary="@string/configure_navigation"
 		android:title="@string/routing_settings_2"
-		app:fragment="net.osmand.plus.settings.SettingsNavigationFragment"
+		app:fragment="net.osmand.plus.settings.NavigationFragment"
 		tools:icon="@drawable/ic_action_gdirections_dark" />
 
 	<Preference
@@ -24,7 +24,7 @@
 		android:layout="@layout/preference_with_descr"
 		android:summary="@string/map_look_descr"
 		android:title="@string/map_look"
-		app:fragment="net.osmand.plus.settings.SettingsRouteParametersFragment"
+		app:fragment="net.osmand.plus.settings.RouteParametersFragment"
 		tools:icon="@drawable/ic_action_layers_dark" />
 
 	<Preference

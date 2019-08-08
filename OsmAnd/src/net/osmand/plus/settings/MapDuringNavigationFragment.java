@@ -15,9 +15,9 @@ import net.osmand.plus.R;
 import net.osmand.plus.views.ListFloatPreference;
 import net.osmand.plus.views.ListIntPreference;
 
-public class SettingsMapDuringNavigationFragment extends SettingsBaseProfileDependentFragment {
+public class MapDuringNavigationFragment extends BaseProfileSettingsFragment {
 
-	public static final String TAG = "SettingsMapDuringNavigationFragment";
+	public static final String TAG = "MapDuringNavigationFragment";
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -49,14 +49,14 @@ public class SettingsMapDuringNavigationFragment extends SettingsBaseProfileDepe
 		for (int i = 1; i < intValues.length; i++) {
 			entries[i] = intValues[i] + " " + getString(R.string.int_seconds);
 		}
-		ListIntPreference autoFollowRoute = (ListIntPreference) screen.findPreference(settings.AUTO_FOLLOW_ROUTE.getId());
+		ListIntPreference autoFollowRoute = (ListIntPreference) findAndRegisterPreference(settings.AUTO_FOLLOW_ROUTE.getId());
 		autoFollowRoute.setEntries(entries);
 		autoFollowRoute.setEntryValues(intValues);
 
-		Preference autoZoomMap = screen.findPreference(settings.AUTO_ZOOM_MAP.getId());
+		Preference autoZoomMap = findAndRegisterPreference(settings.AUTO_ZOOM_MAP.getId());
 		autoZoomMap.setOnPreferenceClickListener(this);
 
-		SwitchPreference snapToRoad = (SwitchPreference) screen.findPreference(settings.SNAP_TO_ROAD.getId());
+		SwitchPreference snapToRoad = (SwitchPreference) findAndRegisterPreference(settings.SNAP_TO_ROAD.getId());
 
 		String[] speedNamesPos;
 		float[] speedLimitsPos;
@@ -80,7 +80,7 @@ public class SettingsMapDuringNavigationFragment extends SettingsBaseProfileDepe
 			}
 		}
 
-		ListFloatPreference switchMapDirectionToCompass = (ListFloatPreference) screen.findPreference(settings.SWITCH_MAP_DIRECTION_TO_COMPASS.getId());
+		ListFloatPreference switchMapDirectionToCompass = (ListFloatPreference) findAndRegisterPreference(settings.SWITCH_MAP_DIRECTION_TO_COMPASS.getId());
 		switchMapDirectionToCompass.setEntries(speedNamesPos);
 		switchMapDirectionToCompass.setEntryValues(speedLimitsPos);
 	}
@@ -105,10 +105,10 @@ public class SettingsMapDuringNavigationFragment extends SettingsBaseProfileDepe
 
 	public static boolean showInstance(FragmentManager fragmentManager) {
 		try {
-			SettingsMapDuringNavigationFragment settingsNavigationFragment = new SettingsMapDuringNavigationFragment();
+			MapDuringNavigationFragment settingsNavigationFragment = new MapDuringNavigationFragment();
 			fragmentManager.beginTransaction()
-					.add(R.id.fragmentContainer, settingsNavigationFragment, SettingsMapDuringNavigationFragment.TAG)
-					.addToBackStack(SettingsMapDuringNavigationFragment.TAG)
+					.add(R.id.fragmentContainer, settingsNavigationFragment, MapDuringNavigationFragment.TAG)
+					.addToBackStack(MapDuringNavigationFragment.TAG)
 					.commitAllowingStateLoss();
 			return true;
 		} catch (Exception e) {

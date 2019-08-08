@@ -19,11 +19,11 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceFragmentCompat;
-import android.support.v7.preference.PreferenceGroup;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -33,18 +33,20 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.activities.OsmandInAppPurchaseActivity;
 import net.osmand.plus.profiles.AppProfileArrayAdapter;
 import net.osmand.plus.profiles.ProfileDataObject;
+import net.osmand.plus.views.SwitchFragmentPreference;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-import static net.osmand.plus.settings.profiles.SettingsProfileFragment.PROFILE_STRING_KEY;
+import static net.osmand.plus.profiles.SettingsProfileFragment.PROFILE_STRING_KEY;
 
-public abstract class SettingsBaseProfileDependentFragment extends PreferenceFragmentCompat implements Preference.OnPreferenceChangeListener, Preference.OnPreferenceClickListener {
+public abstract class BaseProfileSettingsFragment extends PreferenceFragmentCompat implements Preference.OnPreferenceChangeListener, Preference.OnPreferenceClickListener {
 
 	protected OsmandApplication app;
 	protected OsmandSettings settings;
@@ -53,6 +55,7 @@ public abstract class SettingsBaseProfileDependentFragment extends PreferenceFra
 	protected ApplicationMode selectedAppMode = null;
 
 	private boolean nightMode;
+	private boolean wasDrawerDisabled;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -84,6 +87,27 @@ public abstract class SettingsBaseProfileDependentFragment extends PreferenceFra
 		}
 
 		return view;
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			wasDrawerDisabled = mapActivity.isDrawerDisabled();
+			if (!wasDrawerDisabled) {
+				mapActivity.disableDrawer();
+			}
+		}
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		MapActivity mapActivity = getMapActivity();
+		if (!wasDrawerDisabled && mapActivity != null) {
+			mapActivity.enableDrawer();
+		}
 	}
 
 	private void createToolbar(LayoutInflater inflater, View view) {
@@ -182,12 +206,34 @@ public abstract class SettingsBaseProfileDependentFragment extends PreferenceFra
 		return -1;
 	}
 
+	protected Preference findAndRegisterPreference(String key) {
+		Preference preference = getPreferenceScreen().findPreference(key);
+		registerPreference(preference);
+		return preference;
+	}
+
+	protected void registerPreference(Preference preference) {
+		if (preference != null) {
+			preference.setOnPreferenceChangeListener(this);
+		}
+	}
+
 	public ApplicationMode getSelectedMode() {
 		return selectedAppMode;
 	}
 
 	public boolean isNightMode() {
 		return nightMode;
+	}
+
+	@Nullable
+	public MapActivity getMapActivity() {
+		FragmentActivity activity = getActivity();
+		if (activity instanceof MapActivity) {
+			return (MapActivity) activity;
+		} else {
+			return null;
+		}
 	}
 
 	@Nullable
@@ -277,14 +323,17 @@ public abstract class SettingsBaseProfileDependentFragment extends PreferenceFra
 
 //	------------------------------------------------------------------------------------------------
 
-	public SwitchPreference registerBooleanPreference(OsmandSettings.OsmandPreference<Boolean> b, PreferenceGroup screen) {
-		SwitchPreference p = (SwitchPreference) screen.findPreference(b.getId());
+	public SwitchPreference createSwitchPreference(OsmandSettings.OsmandPreference<Boolean> b, int title, int summary) {
+		SwitchPreference p = new SwitchPreference(getContext());
+		p.setTitle(title);
+		p.setKey(b.getId());
+		p.setSummary(summary);
 		p.setOnPreferenceChangeListener(this);
 		return p;
 	}
 
-	public SwitchPreference createSwitchPreference(OsmandSettings.OsmandPreference<Boolean> b, int title, int summary) {
-		SwitchPreference p = new SwitchPreference(getContext());
+	public SwitchPreference createSwitchFragmentPreference(OsmandSettings.OsmandPreference<Boolean> b, int title, int summary) {
+		SwitchFragmentPreference p = new SwitchFragmentPreference(getContext());
 		p.setTitle(title);
 		p.setKey(b.getId());
 		p.setSummary(summary);
@@ -300,22 +349,13 @@ public abstract class SettingsBaseProfileDependentFragment extends PreferenceFra
 		return p;
 	}
 
-	public <T> ListPreference createListPreference(OsmandSettings.OsmandPreference<T> b, String[] names, T[] values, int title, int summary) {
-		ListPreference p = new ListPreference(getContext());
-		p.setTitle(title);
-		p.setKey(b.getId());
-		p.setDialogTitle(title);
-		p.setSummary(summary);
-		prepareListPreference(b, names, values, p);
-		return p;
-	}
-
 	public <T> ListPreference createListPreference(OsmandSettings.OsmandPreference<T> b, String[] names, T[] values, String title, String summary) {
 		ListPreference p = new ListPreference(getContext());
 		p.setTitle(title);
 		p.setKey(b.getId());
 		p.setDialogTitle(title);
 		p.setSummary(summary);
+		p.setOnPreferenceChangeListener(this);
 		prepareListPreference(b, names, values, p);
 		return p;
 	}
@@ -409,6 +449,10 @@ public abstract class SettingsBaseProfileDependentFragment extends PreferenceFra
 	@Override
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
 		// handle boolean preferences
+		String key = preference.getKey();
+		if (preference.isPersistent()) {
+			settings.updateCachedPreference(key);
+		}
 		return true;
 	}
 

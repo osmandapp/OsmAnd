@@ -26,9 +26,9 @@ import java.util.Map;
 
 import static net.osmand.plus.activities.SettingsNavigationActivity.getRouter;
 
-public class SettingsRouteParametersFragment extends SettingsBaseProfileDependentFragment {
+public class RouteParametersFragment extends BaseProfileSettingsFragment {
 
-	public static final String TAG = "SettingsRouteParametersFragment";
+	public static final String TAG = "RouteParametersFragment";
 	private List<GeneralRouter.RoutingParameter> avoidParameters = new ArrayList<GeneralRouter.RoutingParameter>();
 	private List<GeneralRouter.RoutingParameter> preferParameters = new ArrayList<GeneralRouter.RoutingParameter>();
 	private List<GeneralRouter.RoutingParameter> reliefFactorParameters = new ArrayList<GeneralRouter.RoutingParameter>();
@@ -56,10 +56,10 @@ public class SettingsRouteParametersFragment extends SettingsBaseProfileDependen
 
 	public static boolean showInstance(FragmentManager fragmentManager) {
 		try {
-			SettingsRouteParametersFragment settingsNavigationFragment = new SettingsRouteParametersFragment();
+			RouteParametersFragment settingsNavigationFragment = new RouteParametersFragment();
 			fragmentManager.beginTransaction()
-					.add(R.id.fragmentContainer, settingsNavigationFragment, SettingsRouteParametersFragment.TAG)
-					.addToBackStack(SettingsRouteParametersFragment.TAG)
+					.add(R.id.fragmentContainer, settingsNavigationFragment, RouteParametersFragment.TAG)
+					.addToBackStack(RouteParametersFragment.TAG)
 					.commitAllowingStateLoss();
 			return true;
 		} catch (Exception e) {
@@ -71,7 +71,7 @@ public class SettingsRouteParametersFragment extends SettingsBaseProfileDependen
 	protected void createUI() {
 		PreferenceScreen screen = getPreferenceScreen();
 
-		SwitchPreference fastRoute = (SwitchPreference) screen.findPreference(settings.FAST_ROUTE_MODE.getId());
+		SwitchPreference fastRoute = (SwitchPreference) findAndRegisterPreference(settings.FAST_ROUTE_MODE.getId());
 		fastRoute.setIcon(getContentIcon(R.drawable.ic_action_fastest_route));
 		if (settings.getApplicationMode().getRouteService() != RouteProvider.RouteService.OSMAND) {
 			screen.addPreference(fastRoute);
@@ -102,14 +102,14 @@ public class SettingsRouteParametersFragment extends SettingsBaseProfileDependen
 						others.add(routingParameter);
 					}
 				}
-				Preference avoidRouting = screen.findPreference("avoid_in_routing");
+				Preference avoidRouting = findAndRegisterPreference("avoid_in_routing");
 				if (avoidParameters.size() > 0) {
 					avoidRouting.setOnPreferenceClickListener(this);
 					avoidRouting.setIcon(getContentIcon(R.drawable.ic_action_alert));
 				} else {
 					screen.removePreference(avoidRouting);
 				}
-				Preference preferRouting = screen.findPreference("prefer_in_routing");
+				Preference preferRouting = findAndRegisterPreference("prefer_in_routing");
 				if (preferParameters.size() > 0) {
 					preferRouting.setOnPreferenceClickListener(this);
 				} else {
@@ -155,13 +155,13 @@ public class SettingsRouteParametersFragment extends SettingsBaseProfileDependen
 		switch (key) {
 			case "avoid_in_routing": {
 				AvoidRoadsBottomSheetDialogFragment avoidRoadsFragment = new AvoidRoadsBottomSheetDialogFragment(false);
-				avoidRoadsFragment.setTargetFragment(SettingsRouteParametersFragment.this, AvoidRoadsBottomSheetDialogFragment.REQUEST_CODE);
+				avoidRoadsFragment.setTargetFragment(RouteParametersFragment.this, AvoidRoadsBottomSheetDialogFragment.REQUEST_CODE);
 				avoidRoadsFragment.show(getActivity().getSupportFragmentManager(), AvoidRoadsBottomSheetDialogFragment.TAG);
 				return true;
 			}
 			case "prefer_in_routing": {
 //				AvoidRoadsBottomSheetDialogFragment avoidRoadsFragment = new AvoidRoadsBottomSheetDialogFragment(true);
-//				avoidRoadsFragment.setTargetFragment(SettingsRouteParametersFragment.this, AvoidRoadsBottomSheetDialogFragment.REQUEST_CODE);
+//				avoidRoadsFragment.setTargetFragment(RouteParametersFragment.this, AvoidRoadsBottomSheetDialogFragment.REQUEST_CODE);
 //				avoidRoadsFragment.show(getActivity().getSupportFragmentManager(), AvoidRoadsBottomSheetDialogFragment.TAG);
 				Toast.makeText(getContext(), "prefer_in_routing", Toast.LENGTH_LONG).show();
 				return true;

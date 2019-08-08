@@ -22,9 +22,9 @@ import java.util.List;
 
 import static net.osmand.plus.settings.profiles.SettingsProfileFragment.PROFILE_STRING_KEY;
 
-public class SettingsConfigureProfileFragment extends SettingsBaseProfileDependentFragment {
+public class ConfigureProfileFragment extends BaseProfileSettingsFragment {
 
-	public static final String TAG = "SettingsConfigureProfileFragment";
+	public static final String TAG = "ConfigureProfileFragment";
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -56,13 +56,12 @@ public class SettingsConfigureProfileFragment extends SettingsBaseProfileDepende
 
 		for (ConnectedApp connectedApp : connectedApps) {
 			SwitchPreference preference = new SwitchPreference(getContext());
-
 			preference.setKey(connectedApp.getPack());
 			preference.setTitle(connectedApp.getName());
 			preference.setIcon(connectedApp.getIcon());
 			preference.setChecked(connectedApp.isEnabled());
 			preference.setLayoutResource(R.layout.preference_fragment_and_switch);
-			preference.setOnPreferenceChangeListener(this);
+			registerPreference(preference);
 
 			screen.addPreference(preference);
 		}
@@ -73,8 +72,8 @@ public class SettingsConfigureProfileFragment extends SettingsBaseProfileDepende
 			preference.setTitle(plugin.getName());
 			preference.setIcon(getContentIcon(plugin.getLogoResourceId()));
 			preference.setChecked(plugin.isActive());
-			preference.setOnPreferenceChangeListener(this);
 			preference.setLayoutResource(R.layout.preference_fragment_and_switch);
+			registerPreference(preference);
 
 			Intent intent = new Intent(getContext(), PluginActivity.class);
 			intent.putExtra(PluginActivity.EXTRA_PLUGIN_ID, plugin.getId());
@@ -111,12 +110,12 @@ public class SettingsConfigureProfileFragment extends SettingsBaseProfileDepende
 			Bundle args = new Bundle();
 			args.putString(PROFILE_STRING_KEY, mode.getStringKey());
 
-			SettingsConfigureProfileFragment settingsConfigureProfileFragment = new SettingsConfigureProfileFragment();
-			settingsConfigureProfileFragment.setArguments(args);
+			ConfigureProfileFragment configureProfileFragment = new ConfigureProfileFragment();
+			configureProfileFragment.setArguments(args);
 
 			fragmentManager.beginTransaction()
-					.add(R.id.fragmentContainer, settingsConfigureProfileFragment, SettingsConfigureProfileFragment.TAG)
-					.addToBackStack(SettingsConfigureProfileFragment.TAG)
+					.add(R.id.fragmentContainer, configureProfileFragment, ConfigureProfileFragment.TAG)
+					.addToBackStack(ConfigureProfileFragment.TAG)
 					.commitAllowingStateLoss();
 			return true;
 		} catch (Exception e) {

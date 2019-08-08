@@ -94,7 +94,7 @@ public class SettingsMainFragment extends BaseOsmAndFragment {
 		configure_profile_container.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				SettingsConfigureProfileFragment.showInstance(getActivity().getSupportFragmentManager(), selectedMode);
+				ConfigureProfileFragment.showInstance(getActivity().getSupportFragmentManager(), selectedMode);
 			}
 		});
 		View manage_profiles_container = view.findViewById(R.id.manage_profiles_container);

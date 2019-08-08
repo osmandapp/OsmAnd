@@ -11,9 +11,9 @@ import android.view.ViewGroup;
 import net.osmand.plus.R;
 import net.osmand.plus.views.ListIntPreference;
 
-public class SettingsTurnScreenOnFragment extends SettingsBaseProfileDependentFragment {
+public class TurnScreenOnFragment extends BaseProfileSettingsFragment {
 
-	public static final String TAG = "SettingsTurnScreenOnFragment";
+	public static final String TAG = "TurnScreenOnFragment";
 
 	@Override
 	protected int getPreferenceResId() {
@@ -40,7 +40,7 @@ public class SettingsTurnScreenOnFragment extends SettingsBaseProfileDependentFr
 	protected void createUI() {
 		PreferenceScreen screen = getPreferenceScreen();
 
-		SwitchPreference turnScreenOn = (SwitchPreference) screen.findPreference(settings.TURN_SCREEN_ON.getId());
+		SwitchPreference turnScreenOn = (SwitchPreference) findAndRegisterPreference(settings.TURN_SCREEN_ON.getId());
 
 		int[] screenPowerSaveValues = new int[]{0, 5, 10, 15, 20, 30, 45, 60};
 		String[] screenPowerSaveNames = new String[screenPowerSaveValues.length];
@@ -49,19 +49,19 @@ public class SettingsTurnScreenOnFragment extends SettingsBaseProfileDependentFr
 			screenPowerSaveNames[i] = screenPowerSaveValues[i] + " " + getString(R.string.int_seconds);
 		}
 
-		ListIntPreference turnScreenOnTime = (ListIntPreference) screen.findPreference(settings.TURN_SCREEN_ON_TIME_INT.getId());
+		ListIntPreference turnScreenOnTime = (ListIntPreference) findAndRegisterPreference(settings.TURN_SCREEN_ON_TIME_INT.getId());
 		turnScreenOnTime.setEntries(screenPowerSaveNames);
 		turnScreenOnTime.setEntryValues(screenPowerSaveValues);
 
-		SwitchPreference turnScreenOnSensor = (SwitchPreference) screen.findPreference(settings.TURN_SCREEN_ON_SENSOR.getId());
+		SwitchPreference turnScreenOnSensor = (SwitchPreference) findAndRegisterPreference(settings.TURN_SCREEN_ON_SENSOR.getId());
 	}
 
 	public static boolean showInstance(FragmentManager fragmentManager) {
 		try {
-			SettingsTurnScreenOnFragment settingsNavigationFragment = new SettingsTurnScreenOnFragment();
+			TurnScreenOnFragment settingsNavigationFragment = new TurnScreenOnFragment();
 			fragmentManager.beginTransaction()
-					.add(R.id.fragmentContainer, settingsNavigationFragment, SettingsTurnScreenOnFragment.TAG)
-					.addToBackStack(SettingsTurnScreenOnFragment.TAG)
+					.add(R.id.fragmentContainer, settingsNavigationFragment, TurnScreenOnFragment.TAG)
+					.addToBackStack(TurnScreenOnFragment.TAG)
 					.commitAllowingStateLoss();
 			return true;
 		} catch (Exception e) {

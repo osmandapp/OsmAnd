@@ -25,9 +25,9 @@ import java.util.Set;
 
 import static net.osmand.plus.activities.SettingsNavigationActivity.MORE_VALUE;
 
-public class SettingsVoiceAnnouncesFragment extends SettingsBaseProfileDependentFragment {
+public class VoiceAnnouncesFragment extends BaseProfileSettingsFragment {
 
-	public static final String TAG = "SettingsVoiceAnnouncesFragment";
+	public static final String TAG = "VoiceAnnouncesFragment";
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -53,20 +53,20 @@ public class SettingsVoiceAnnouncesFragment extends SettingsBaseProfileDependent
 	protected void createUI() {
 		PreferenceScreen screen = getPreferenceScreen();
 
-		SwitchPreference SPEAK_ROUTING_ALARMS = (SwitchPreference) screen.findPreference(settings.SPEAK_ROUTING_ALARMS.getId());
+		SwitchPreference SPEAK_ROUTING_ALARMS = (SwitchPreference) findAndRegisterPreference(settings.SPEAK_ROUTING_ALARMS.getId());
 
-		Preference voiceAnnouncesInfo = screen.findPreference("voice_announces_info");
+		Preference voiceAnnouncesInfo = findAndRegisterPreference("voice_announces_info");
 		voiceAnnouncesInfo.setIcon(getContentIcon(R.drawable.ic_action_info_dark));
 
-		SwitchPreference SPEAK_STREET_NAMES = (SwitchPreference) screen.findPreference(settings.SPEAK_STREET_NAMES.getId());
-		SwitchPreference SPEAK_TRAFFIC_WARNINGS = (SwitchPreference) screen.findPreference(settings.SPEAK_TRAFFIC_WARNINGS.getId());
-		SwitchPreference SPEAK_PEDESTRIAN = (SwitchPreference) screen.findPreference(settings.SPEAK_PEDESTRIAN.getId());
-		SwitchPreference SPEAK_SPEED_LIMIT = (SwitchPreference) screen.findPreference(settings.SPEAK_SPEED_LIMIT.getId());
-		SwitchPreference SPEAK_SPEED_CAMERA = (SwitchPreference) screen.findPreference(settings.SPEAK_SPEED_CAMERA.getId());
-		SwitchPreference SPEAK_TUNNELS = (SwitchPreference) screen.findPreference(settings.SPEAK_TUNNELS.getId());
-		SwitchPreference ANNOUNCE_WPT = (SwitchPreference) screen.findPreference(settings.ANNOUNCE_WPT.getId());
-		SwitchPreference ANNOUNCE_NEARBY_FAVORITES = (SwitchPreference) screen.findPreference(settings.ANNOUNCE_NEARBY_FAVORITES.getId());
-		SwitchPreference ANNOUNCE_NEARBY_POI = (SwitchPreference) screen.findPreference(settings.ANNOUNCE_NEARBY_POI.getId());
+		SwitchPreference SPEAK_STREET_NAMES = (SwitchPreference) findAndRegisterPreference(settings.SPEAK_STREET_NAMES.getId());
+		SwitchPreference SPEAK_TRAFFIC_WARNINGS = (SwitchPreference) findAndRegisterPreference(settings.SPEAK_TRAFFIC_WARNINGS.getId());
+		SwitchPreference SPEAK_PEDESTRIAN = (SwitchPreference) findAndRegisterPreference(settings.SPEAK_PEDESTRIAN.getId());
+		SwitchPreference SPEAK_SPEED_LIMIT = (SwitchPreference) findAndRegisterPreference(settings.SPEAK_SPEED_LIMIT.getId());
+		SwitchPreference SPEAK_SPEED_CAMERA = (SwitchPreference) findAndRegisterPreference(settings.SPEAK_SPEED_CAMERA.getId());
+		SwitchPreference SPEAK_TUNNELS = (SwitchPreference) findAndRegisterPreference(settings.SPEAK_TUNNELS.getId());
+		SwitchPreference ANNOUNCE_WPT = (SwitchPreference) findAndRegisterPreference(settings.ANNOUNCE_WPT.getId());
+		SwitchPreference ANNOUNCE_NEARBY_FAVORITES = (SwitchPreference) findAndRegisterPreference(settings.ANNOUNCE_NEARBY_FAVORITES.getId());
+		SwitchPreference ANNOUNCE_NEARBY_POI = (SwitchPreference) findAndRegisterPreference(settings.ANNOUNCE_NEARBY_POI.getId());
 
 		String[] speedNames;
 		float[] speedLimits;
@@ -83,7 +83,7 @@ public class SettingsVoiceAnnouncesFragment extends SettingsBaseProfileDependent
 				speedNames[i] = (int) speedLimits[i] + " " + getString(R.string.mile_per_hour);
 			}
 		}
-		ListFloatPreference SPEED_LIMIT_EXCEED = (ListFloatPreference) screen.findPreference(settings.SPEED_LIMIT_EXCEED.getId());
+		ListFloatPreference SPEED_LIMIT_EXCEED = (ListFloatPreference) findAndRegisterPreference(settings.SPEED_LIMIT_EXCEED.getId());
 		SPEED_LIMIT_EXCEED.setEntries(speedNames);
 		SPEED_LIMIT_EXCEED.setEntryValues(speedLimits);
 
@@ -94,7 +94,7 @@ public class SettingsVoiceAnnouncesFragment extends SettingsBaseProfileDependent
 		for (int i = 1; i < keepInformingValues.length; i++) {
 			keepInformingNames[i] = keepInformingValues[i] + " " + getString(R.string.int_min);
 		}
-		ListIntPreference KEEP_INFORMING = (ListIntPreference) screen.findPreference(settings.KEEP_INFORMING.getId());
+		ListIntPreference KEEP_INFORMING = (ListIntPreference) findAndRegisterPreference(settings.KEEP_INFORMING.getId());
 		KEEP_INFORMING.setEntries(keepInformingNames);
 		KEEP_INFORMING.setEntryValues(keepInformingValues);
 
@@ -106,7 +106,7 @@ public class SettingsVoiceAnnouncesFragment extends SettingsBaseProfileDependent
 				getString(R.string.arrival_distance_factor_at_last)
 		};
 
-		ListFloatPreference ARRIVAL_DISTANCE_FACTOR = (ListFloatPreference) screen.findPreference(settings.ARRIVAL_DISTANCE_FACTOR.getId());
+		ListFloatPreference ARRIVAL_DISTANCE_FACTOR = (ListFloatPreference) findAndRegisterPreference(settings.ARRIVAL_DISTANCE_FACTOR.getId());
 		ARRIVAL_DISTANCE_FACTOR.setEntries(arrivalNames);
 		ARRIVAL_DISTANCE_FACTOR.setEntryValues(arrivalValues);
 
@@ -132,7 +132,7 @@ public class SettingsVoiceAnnouncesFragment extends SettingsBaseProfileDependent
 		}
 		entrieValues[k] = MORE_VALUE;
 		entries[k] = getString(R.string.install_more);
-		ListPreference voiceProvider = (ListPreference) screen.findPreference(settings.VOICE_PROVIDER.getId());
+		ListPreference voiceProvider = (ListPreference) findAndRegisterPreference(settings.VOICE_PROVIDER.getId());
 		voiceProvider.setEntries(entries);
 		voiceProvider.setEntryValues(entrieValues);
 		voiceProvider.setIcon(getContentIcon(R.drawable.ic_action_volume_mute));
@@ -155,12 +155,13 @@ public class SettingsVoiceAnnouncesFragment extends SettingsBaseProfileDependent
 			lp.setSummary(R.string.choose_audio_stream_descr);
 			lp.setEntries(streamTypes);
 			lp.setEntryValues(streamIntTypesStr);
-//			final Preference.OnPreferenceChangeListener prev = lp.getOnPreferenceChangeListener();
+			registerPreference(lp);
+			final Preference.OnPreferenceChangeListener prev = lp.getOnPreferenceChangeListener();
 			lp.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
 
 				@Override
 				public boolean onPreferenceChange(Preference preference, Object newValue) {
-//					prev.onPreferenceChange(preference, newValue);
+					prev.onPreferenceChange(preference, newValue);
 					CommandPlayer player = getMyApplication().getPlayer();
 					if (player != null) {
 						player.updateAudioStream(settings.AUDIO_STREAM_GUIDANCE.get());
@@ -190,10 +191,10 @@ public class SettingsVoiceAnnouncesFragment extends SettingsBaseProfileDependent
 
 	public static boolean showInstance(FragmentManager fragmentManager) {
 		try {
-			SettingsVoiceAnnouncesFragment settingsNavigationFragment = new SettingsVoiceAnnouncesFragment();
+			VoiceAnnouncesFragment settingsNavigationFragment = new VoiceAnnouncesFragment();
 			fragmentManager.beginTransaction()
-					.add(R.id.fragmentContainer, settingsNavigationFragment, SettingsVoiceAnnouncesFragment.TAG)
-					.addToBackStack(SettingsVoiceAnnouncesFragment.TAG)
+					.add(R.id.fragmentContainer, settingsNavigationFragment, VoiceAnnouncesFragment.TAG)
+					.addToBackStack(VoiceAnnouncesFragment.TAG)
 					.commitAllowingStateLoss();
 			return true;
 		} catch (Exception e) {

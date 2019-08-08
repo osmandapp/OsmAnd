@@ -13,12 +13,11 @@ import android.widget.Toast;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.R;
 
-import static net.osmand.plus.settings.profiles.SettingsProfileFragment.IS_USER_PROFILE;
 import static net.osmand.plus.settings.profiles.SettingsProfileFragment.PROFILE_STRING_KEY;
 
-public class SettingsNavigationFragment extends SettingsBaseProfileDependentFragment {
+public class NavigationFragment extends BaseProfileSettingsFragment {
 
-	public static final String TAG = "SettingsNavigationFragment";
+	public static final String TAG = "NavigationFragment";
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -46,21 +45,14 @@ public class SettingsNavigationFragment extends SettingsBaseProfileDependentFrag
 	protected void createUI() {
 		PreferenceScreen screen = getPreferenceScreen();
 
-		Preference route_parameters = screen.findPreference("route_parameters");
+		Preference route_parameters = findAndRegisterPreference("route_parameters");
 
-		SwitchPreference show_routing_alarms = (SwitchPreference) screen.findPreference("show_routing_alarms");
-		SwitchPreference speak_routing_alarms = (SwitchPreference) screen.findPreference("speak_routing_alarms");
-		Preference vehicle_parameters = screen.findPreference("vehicle_parameters");
-		Preference map_during_navigation = screen.findPreference("map_during_navigation");
-		SwitchPreference turn_screen_on = (SwitchPreference) screen.findPreference("turn_screen_on");
-		Preference reset_to_default = screen.findPreference("reset_to_default");
-
-		route_parameters.setOnPreferenceChangeListener(this);
-		show_routing_alarms.setOnPreferenceChangeListener(this);
-		speak_routing_alarms.setOnPreferenceChangeListener(this);
-		vehicle_parameters.setOnPreferenceChangeListener(this);
-		map_during_navigation.setOnPreferenceChangeListener(this);
-		turn_screen_on.setOnPreferenceChangeListener(this);
+		SwitchPreference show_routing_alarms = (SwitchPreference) findAndRegisterPreference("show_routing_alarms");
+		SwitchPreference speak_routing_alarms = (SwitchPreference) findAndRegisterPreference("speak_routing_alarms");
+		Preference vehicle_parameters = findAndRegisterPreference("vehicle_parameters");
+		Preference map_during_navigation = findAndRegisterPreference("map_during_navigation");
+		SwitchPreference turn_screen_on = (SwitchPreference) findAndRegisterPreference("turn_screen_on");
+		Preference reset_to_default = findAndRegisterPreference("reset_to_default");
 
 		route_parameters.setIcon(getContentIcon(R.drawable.ic_action_track_16));
 		show_routing_alarms.setIcon(getContentIcon(R.drawable.ic_action_alert));
@@ -88,12 +80,12 @@ public class SettingsNavigationFragment extends SettingsBaseProfileDependentFrag
 			Bundle args = new Bundle();
 			args.putString(PROFILE_STRING_KEY, mode.getStringKey());
 
-			SettingsNavigationFragment settingsNavigationFragment = new SettingsNavigationFragment();
+			NavigationFragment settingsNavigationFragment = new NavigationFragment();
 			settingsNavigationFragment.setArguments(args);
 
 			fragmentManager.beginTransaction()
-					.add(R.id.fragmentContainer, settingsNavigationFragment, SettingsNavigationFragment.TAG)
-					.addToBackStack(SettingsNavigationFragment.TAG)
+					.add(R.id.fragmentContainer, settingsNavigationFragment, NavigationFragment.TAG)
+					.addToBackStack(NavigationFragment.TAG)
 					.commitAllowingStateLoss();
 			return true;
 		} catch (Exception e) {

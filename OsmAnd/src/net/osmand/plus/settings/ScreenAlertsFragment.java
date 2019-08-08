@@ -11,9 +11,9 @@ import android.view.ViewGroup;
 
 import net.osmand.plus.R;
 
-public class SettingsScreenAlertsFragment extends SettingsBaseProfileDependentFragment {
+public class ScreenAlertsFragment extends BaseProfileSettingsFragment {
 
-	public static final String TAG = "SettingsScreenAlertsFragment";
+	public static final String TAG = "ScreenAlertsFragment";
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -40,20 +40,13 @@ public class SettingsScreenAlertsFragment extends SettingsBaseProfileDependentFr
 	protected void createUI() {
 		PreferenceScreen screen = getPreferenceScreen();
 
-		SwitchPreference SHOW_ROUTING_ALARMS = (SwitchPreference) screen.findPreference(settings.SHOW_ROUTING_ALARMS.getId());
-		Preference SHOW_TRAFFIC_WARNINGS_DESCR = screen.findPreference("show_routing_alarms_descr");
-		SwitchPreference SHOW_TRAFFIC_WARNINGS = (SwitchPreference) screen.findPreference(settings.SHOW_TRAFFIC_WARNINGS.getId());
-		SwitchPreference SHOW_PEDESTRIAN = (SwitchPreference) screen.findPreference(settings.SHOW_PEDESTRIAN.getId());
-		SwitchPreference SHOW_CAMERAS = (SwitchPreference) screen.findPreference(settings.SHOW_CAMERAS.getId());
-		SwitchPreference SHOW_LANES = (SwitchPreference) screen.findPreference(settings.SHOW_LANES.getId());
-		SwitchPreference SHOW_TUNNELS = (SwitchPreference) screen.findPreference(settings.SHOW_TUNNELS.getId());
-
-		SHOW_ROUTING_ALARMS.setOnPreferenceChangeListener(this);
-		SHOW_TRAFFIC_WARNINGS.setOnPreferenceChangeListener(this);
-		SHOW_PEDESTRIAN.setOnPreferenceChangeListener(this);
-		SHOW_CAMERAS.setOnPreferenceChangeListener(this);
-		SHOW_LANES.setOnPreferenceChangeListener(this);
-		SHOW_TUNNELS.setOnPreferenceChangeListener(this);
+		SwitchPreference SHOW_ROUTING_ALARMS = (SwitchPreference) findAndRegisterPreference(settings.SHOW_ROUTING_ALARMS.getId());
+		Preference SHOW_TRAFFIC_WARNINGS_DESCR = findAndRegisterPreference("show_routing_alarms_descr");
+		SwitchPreference SHOW_TRAFFIC_WARNINGS = (SwitchPreference) findAndRegisterPreference(settings.SHOW_TRAFFIC_WARNINGS.getId());
+		SwitchPreference SHOW_PEDESTRIAN = (SwitchPreference) findAndRegisterPreference(settings.SHOW_PEDESTRIAN.getId());
+		SwitchPreference SHOW_CAMERAS = (SwitchPreference) findAndRegisterPreference(settings.SHOW_CAMERAS.getId());
+		SwitchPreference SHOW_LANES = (SwitchPreference) findAndRegisterPreference(settings.SHOW_LANES.getId());
+		SwitchPreference SHOW_TUNNELS = (SwitchPreference) findAndRegisterPreference(settings.SHOW_TUNNELS.getId());
 
 		SHOW_TRAFFIC_WARNINGS_DESCR.setIcon(getContentIcon(R.drawable.ic_action_info_dark));
 		SHOW_TRAFFIC_WARNINGS.setIcon(getIcon(R.drawable.list_warnings_traffic_calming));
@@ -65,10 +58,10 @@ public class SettingsScreenAlertsFragment extends SettingsBaseProfileDependentFr
 
 	public static boolean showInstance(FragmentManager fragmentManager) {
 		try {
-			SettingsScreenAlertsFragment settingsNavigationFragment = new SettingsScreenAlertsFragment();
+			ScreenAlertsFragment settingsNavigationFragment = new ScreenAlertsFragment();
 			fragmentManager.beginTransaction()
-					.add(R.id.fragmentContainer, settingsNavigationFragment, SettingsScreenAlertsFragment.TAG)
-					.addToBackStack(SettingsScreenAlertsFragment.TAG)
+					.add(R.id.fragmentContainer, settingsNavigationFragment, ScreenAlertsFragment.TAG)
+					.addToBackStack(ScreenAlertsFragment.TAG)
 					.commitAllowingStateLoss();
 			return true;
 		} catch (Exception e) {

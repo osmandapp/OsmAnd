@@ -27,9 +27,9 @@ import java.util.Map;
 import static net.osmand.plus.activities.SettingsNavigationActivity.getRouter;
 import static net.osmand.plus.activities.SettingsNavigationActivity.setupSpeedSlider;
 
-public class SettingsVehicleParametersFragment extends SettingsBaseProfileDependentFragment {
+public class VehicleParametersFragment extends BaseProfileSettingsFragment {
 
-	public static final String TAG = "SettingsVehicleParametersFragment";
+	public static final String TAG = "VehicleParametersFragment";
 
 	@Override
 	protected int getPreferenceResId() {
@@ -94,7 +94,7 @@ public class SettingsVehicleParametersFragment extends SettingsBaseProfileDepend
 				screen.addPreference(basePref);
 			}
 			GeneralRouter.GeneralRouterProfile routerProfile = router.getProfile();
-			Preference defaultSpeed = screen.findPreference("default_speed");
+			Preference defaultSpeed = findAndRegisterPreference("default_speed");
 			if (routerProfile != GeneralRouter.GeneralRouterProfile.PUBLIC_TRANSPORT) {
 				defaultSpeed.setOnPreferenceClickListener(this);
 			} else {
@@ -176,10 +176,10 @@ public class SettingsVehicleParametersFragment extends SettingsBaseProfileDepend
 
 	public static boolean showInstance(FragmentManager fragmentManager) {
 		try {
-			SettingsVehicleParametersFragment settingsNavigationFragment = new SettingsVehicleParametersFragment();
+			VehicleParametersFragment settingsNavigationFragment = new VehicleParametersFragment();
 			fragmentManager.beginTransaction()
-					.add(R.id.fragmentContainer, settingsNavigationFragment, SettingsVehicleParametersFragment.TAG)
-					.addToBackStack(SettingsVehicleParametersFragment.TAG)
+					.add(R.id.fragmentContainer, settingsNavigationFragment, VehicleParametersFragment.TAG)
+					.addToBackStack(VehicleParametersFragment.TAG)
 					.commitAllowingStateLoss();
 			return true;
 		} catch (Exception e) {
