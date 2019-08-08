@@ -3215,9 +3215,11 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="shared_string_file_is_saved">%s est sarvadu</string>
     <string name="shared_string_open_track">Aberi sa rasta</string>
     <string name="shared_string_track_is_saved">Rasta %s sarvada</string>
-    <string name="app_mode_camper">Camper</string>
+    <string name="app_mode_camper">Caravana</string>
     <string name="rendering_attr_showLez_description">Ammustra sas zonas de emissione bassa in sa mapa. No infuentzat su càlculu de s\'àndala.</string>
     <string name="rendering_attr_showLez_name">Ammustra sas zonas de emissione bassa</string>
     <string name="temporary_conditional_routing">Mentene in cunsìderu sas limitatziones temporàneas</string>
     <string name="shared_string_default">Predefinidu</string>
+    <string name="gpx_join_gaps">Liga sos bòidos</string>
+    <string name="app_mode_campervan">Camper</string>
 </resources>
