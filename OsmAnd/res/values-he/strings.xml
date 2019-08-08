@@ -2897,7 +2897,7 @@
     <string name="shared_string_capacity">נפח</string>
     <string name="shared_string_width">רוחב</string>
     <string name="shared_string_height">גובה</string>
-    <string name="routeInfo_roadClass_name">מחלקה</string>
+    <string name="routeInfo_roadClass_name">סוג דרך</string>
     <string name="routeInfo_surface_name">משטח</string>
     <string name="routeInfo_smoothness_name">רכות</string>
     <string name="routeInfo_steepness_name">תלילות</string>
@@ -2911,7 +2911,7 @@
     <string name="tracks_on_map">עקבות מוצגים</string>
     <string name="time_of_day">השעה ביום</string>
     <string name="by_transport_type">עם %1$s</string>
-    <string name="step_by_step">שלב אחר שלב</string>
+    <string name="step_by_step">פנייה אחר פנייה</string>
     <string name="routeInfo_road_types_name">סוגי כבישים</string>
     <string name="exit_at">לצאת ב־</string>
     <string name="quick_action_show_hide_gpx_tracks">הצגה/הסתרה של מסלולי GPX</string>
@@ -3170,4 +3170,9 @@
     <string name="rendering_attr_highway_class_track_grade3_name">רמה 3</string>
     <string name="rendering_attr_highway_class_track_grade4_name">רמה 4</string>
     <string name="rendering_attr_highway_class_track_grade5_name">רמה 5</string>
+    <string name="routing_profile_geocoding">גאוקודינג</string>
+    <string name="routing_attr_piste_type_skitour_name">טיול סקי</string>
+    <string name="routing_attr_piste_type_skitour_description">מסלולי טיולי סקי.</string>
+    <string name="new_route_calculated_dist_dbg">מסלול: מרחק %s, זמן מנתב מסלול %s 
+\nחישוב: %.1f שנ׳, %d מסלולים, %d אריחים)</string>
 </resources>
