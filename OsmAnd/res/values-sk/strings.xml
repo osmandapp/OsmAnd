@@ -3203,4 +3203,6 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="rendering_attr_showLez_name">Zobraziť Zóny s nízkymi emisiami</string>
     <string name="temporary_conditional_routing">Zohľadniť dočasné obmedzenia</string>
     <string name="shared_string_default">Predvolené</string>
+    <string name="new_route_calculated_dist_dbg">Trasa: vzdialenosť %s, potrebný čas %s 
+\nVýpočet: %.1f sekúnd, %d ciest, %d dlaždíc)</string>
 </resources>
