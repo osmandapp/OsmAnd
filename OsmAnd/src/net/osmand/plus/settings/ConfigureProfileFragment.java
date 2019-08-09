@@ -51,6 +51,14 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 	protected void createUI() {
 		PreferenceScreen screen = getPreferenceScreen();
 
+		Preference generalSettings = findAndRegisterPreference("general_settings");
+		Preference navigationSettings = findAndRegisterPreference("navigation_settings");
+		Preference configureMap = findAndRegisterPreference("configure_map");
+
+		generalSettings.setIcon(getContentIcon(R.drawable.ic_action_settings));
+		navigationSettings.setIcon(getContentIcon(R.drawable.ic_action_gdirections_dark));
+		configureMap.setIcon(getContentIcon(R.drawable.ic_action_layers_dark));
+
 		List<ConnectedApp> connectedApps = getMyApplication().getAidlApi().getConnectedApps();
 		List<OsmandPlugin> plugins = OsmandPlugin.getVisiblePlugins();
 

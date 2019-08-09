@@ -6,6 +6,7 @@
 	<Preference
 		android:key="general_settings"
 		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
 		android:summary="@string/general_settings_profile_descr"
 		android:title="@string/general_settings_2"
 		app:fragment="net.osmand.plus.settings.ProfileGeneralSettings"
@@ -14,16 +15,18 @@
 	<Preference
 		android:key="navigation_settings"
 		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
 		android:summary="@string/configure_navigation"
 		android:title="@string/routing_settings_2"
 		app:fragment="net.osmand.plus.settings.NavigationFragment"
 		tools:icon="@drawable/ic_action_gdirections_dark" />
 
 	<Preference
-		android:key="map_look"
+		android:key="configure_map"
 		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
 		android:summary="@string/map_look_descr"
-		android:title="@string/map_look"
+		android:title="@string/configure_map"
 		tools:icon="@drawable/ic_action_layers_dark" />
 
 	<Preference

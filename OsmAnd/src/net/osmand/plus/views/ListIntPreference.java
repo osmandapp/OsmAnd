@@ -74,4 +74,9 @@ public class ListIntPreference extends ListPreference {
 	protected Object onGetDefaultValue(TypedArray a, int index) {
 		return String.valueOf(a.getInt(index, 0));
 	}
+
+	@Override
+	public boolean callChangeListener(Object newValue) {
+		return super.callChangeListener(Integer.valueOf((String) newValue));
+	}
 }

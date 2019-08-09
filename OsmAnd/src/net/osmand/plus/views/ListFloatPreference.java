@@ -82,4 +82,9 @@ public class ListFloatPreference extends ListPreference {
 	protected Object onGetDefaultValue(TypedArray a, int index) {
 		return String.valueOf(a.getFloat(index, 0f));
 	}
+
+	@Override
+	public boolean callChangeListener(Object newValue) {
+		return super.callChangeListener(Float.valueOf((String) newValue));
+	}
 }

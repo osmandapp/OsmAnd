@@ -203,6 +203,7 @@ public class OsmandSettings {
 		return settingsAPI.getPreferenceObject(getSharedPreferencesName(mode));
 	}
 
+	@SuppressWarnings("unchecked")
 	public boolean setPreference(String key, Object value) {
 		OsmandPreference<?> preference = registeredPreferences.get(key);
 		if (preference != null) {
@@ -272,6 +273,22 @@ public class OsmandSettings {
 				if (value instanceof Long) {
 					((LongPreference) preference).set((Long) value);
 					return true;
+				}
+			} else if (preference instanceof EnumIntPreference) {
+				EnumIntPreference enumPref = (EnumIntPreference) preference;
+				if (value instanceof String) {
+					String name = (String) value;
+					Enum enumValue = null;
+					for (int i = 0; i < enumPref.values.length; i++) {
+						if (name.equals(enumPref.values[i].name())) {
+							enumValue = enumPref.values[i];
+							break;
+						}
+					}
+					if (enumValue != null) {
+						return enumPref.set(enumValue);
+					}
+					return false;
 				}
 			}
 		}
@@ -694,7 +711,7 @@ public class OsmandSettings {
 
 	}
 
-	private class EnumIntPreference<E extends Enum<E>> extends CommonPreference<E> {
+	public class EnumIntPreference<E extends Enum<E>> extends CommonPreference<E> {
 
 		private final E[] values;
 

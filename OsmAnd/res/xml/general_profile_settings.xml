@@ -15,17 +15,17 @@
 		android:title="@string/choose_osmand_theme" />
 
 	<net.osmand.plus.views.ListIntPreference
+		android:defaultValue="0"
 		android:key="rotate_map"
 		android:layout="@layout/preference_with_descr"
 		android:summary="@string/rotate_map_to_bearing_descr"
-		android:defaultValue="0"
 		android:title="@string/rotate_map_to_bearing" />
 
 	<net.osmand.plus.views.ListIntPreference
+		android:defaultValue="-1"
 		android:key="map_screen_orientation"
 		android:layout="@layout/preference_with_descr"
 		android:summary="@string/map_screen_orientation_descr"
-		android:defaultValue="-1"
 		android:title="@string/map_screen_orientation" />
 
 	<Preference
