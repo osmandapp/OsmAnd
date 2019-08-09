@@ -315,7 +315,7 @@ public class OsmandRegions {
 	}
 
 	public List<BinaryMapDataObject> query(int lx, int rx, int ty, int by) throws IOException {
-		return queryBboxNoInit(lx, rx, ty, by, true);
+		return query(lx, rx, ty, by, true);
 	}
 
 	public List<BinaryMapDataObject> query(int lx, int rx, int ty, int by, boolean checkCenter) throws IOException {
