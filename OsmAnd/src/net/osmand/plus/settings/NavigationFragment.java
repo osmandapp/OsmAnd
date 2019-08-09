@@ -63,18 +63,6 @@ public class NavigationFragment extends BaseProfileSettingsFragment {
 		reset_to_default.setIcon(getContentIcon(R.drawable.ic_action_undo_dark));
 	}
 
-	@Override
-	public boolean onPreferenceChange(Preference preference, Object newValue) {
-		Toast.makeText(getActivity(), "Change " + preference.getKey(), Toast.LENGTH_LONG).show();
-		return super.onPreferenceChange(preference, newValue);
-	}
-
-	@Override
-	public boolean onPreferenceClick(Preference preference) {
-		Toast.makeText(getActivity(), "Click " + preference.getKey(), Toast.LENGTH_LONG).show();
-		return super.onPreferenceClick(preference);
-	}
-
 	public static boolean showInstance(FragmentManager fragmentManager, ApplicationMode mode) {
 		try {
 			Bundle args = new Bundle();

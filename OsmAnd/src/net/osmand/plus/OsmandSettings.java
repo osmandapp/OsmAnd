@@ -203,16 +203,6 @@ public class OsmandSettings {
 		return settingsAPI.getPreferenceObject(getSharedPreferencesName(mode));
 	}
 
-	public void updateCachedPreference(String key) {
-		OsmandSettings.OsmandPreference pref = registeredPreferences.get(key);
-		if (pref instanceof OsmandSettings.CommonPreference) {
-			OsmandSettings.CommonPreference commonPreference = (OsmandSettings.CommonPreference) pref;
-			if (commonPreference.cache && commonPreference.cachedValue != null) {
-				commonPreference.cachedValue = null;
-			}
-		}
-	}
-
 	public boolean setPreference(String key, Object value) {
 		OsmandPreference<?> preference = registeredPreferences.get(key);
 		if (preference != null) {

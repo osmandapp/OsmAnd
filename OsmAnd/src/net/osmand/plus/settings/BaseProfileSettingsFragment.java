@@ -23,7 +23,6 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewParent;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -448,12 +447,8 @@ public abstract class BaseProfileSettingsFragment extends PreferenceFragmentComp
 	@SuppressWarnings("unchecked")
 	@Override
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
-		// handle boolean preferences
 		String key = preference.getKey();
-		if (preference.isPersistent()) {
-			settings.updateCachedPreference(key);
-		}
-		return true;
+		return settings.setPreference(key, newValue);
 	}
 
 	@Override
