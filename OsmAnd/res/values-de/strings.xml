@@ -428,7 +428,7 @@
     <string name="choose_audio_stream_descr">Lautsprecher für Sprachansagen auswählen.</string>
     <string name="voice_stream_voice_call">Wie Anrufe (über Bluetooth auch zur Stereoanlage im Auto)</string>
     <string name="voice_stream_notification">Wie Benachrichtigungen</string>
-    <string name="voice_stream_music">Wie Medien/Musik</string>
+    <string name="voice_stream_music">Wie Medien/Navigation</string>
     <string name="warning_tile_layer_not_downloadable">Die App kann die Kartenebene %1$s nicht herunterladen, eine Neuinstallation könnte helfen.</string>
     <string name="overlay_transparency_descr">Transparenz der Overlay-Karte ändern.</string>
     <string name="overlay_transparency">Overlay-Transparenz</string>
