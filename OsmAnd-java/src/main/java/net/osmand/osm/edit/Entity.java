@@ -127,12 +127,16 @@ public abstract class Entity implements Serializable {
 
 	public Entity(Entity copy, long id) {
 		this.id = id;
-		for (String t : copy.getTagKeySet()) {
-			putTagNoLC(t, copy.getTag(t));
-		}
+		copyTags(copy);
 		this.dataLoaded = copy.dataLoaded;
 		this.latitude = copy.latitude;
 		this.longitude = copy.longitude;
+	}
+
+	public void copyTags(Entity copy) {
+		for (String t : copy.getTagKeySet()) {
+			putTagNoLC(t, copy.getTag(t));
+		}
 	}
 
 	public Set<String> getChangedTags() {
