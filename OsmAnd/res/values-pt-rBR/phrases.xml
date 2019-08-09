@@ -2758,8 +2758,8 @@
     <string name="poi_treat_inpatient_only">Serviços de internamento: somente</string>
     <string name="poi_counselling_yes">Aconselhamento: sim</string>
     <string name="poi_counselling_no">Aconselhamento: não</string>
-    <string name="poi_emergency_yes">sim</string>
-    <string name="poi_emergency_no">não</string>
+    <string name="poi_emergency_yes">Emergência: sim</string>
+    <string name="poi_emergency_no">Emergência: não</string>
     <string name="poi_home_visit_yes">Sim</string>
     <string name="poi_home_visit_no">Visita domiciliar: não</string>
     <string name="poi_disease_malaria_yes">Malária: sim</string>
