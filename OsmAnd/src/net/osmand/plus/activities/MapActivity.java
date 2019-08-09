@@ -909,6 +909,13 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 	}
 
+	public void setKeepScreenOn(boolean keepScreenOn) {
+		View mainView = findViewById(R.id.MapViewWithLayers);
+		if (mainView != null) {
+			mainView.setKeepScreenOn(keepScreenOn);
+		}
+	}
+
 	private void clearIntent(Intent intent) {
 		intent.setAction(null);
 		intent.setData(null);
@@ -1397,6 +1404,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public void updateApplicationModeSettings() {
+		changeKeyguardFlags(true);
 		updateMapSettings();
 		mapViewTrackingUtilities.updateSettings();
 		//app.getRoutingHelper().setAppMode(settings.getApplicationMode());
@@ -1898,8 +1906,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (enable) {
 			getWindow().setFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED,
 					WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
+			setKeepScreenOn(true);
 		} else {
 			getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
+			setKeepScreenOn(false);
 		}
 	}
 
@@ -1976,12 +1986,14 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	@Override
 	public void routeWasCancelled() {
+		changeKeyguardFlags(true);
 	}
 
 	@Override
 	public void routeWasFinished() {
 		if (!mIsDestroyed) {
 			DestinationReachedMenu.show(this);
+			changeKeyguardFlags(true);
 		}
 	}
 
