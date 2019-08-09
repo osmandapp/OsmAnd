@@ -24,7 +24,6 @@
 		android:layout="@layout/preference_with_descr"
 		android:summary="@string/map_look_descr"
 		android:title="@string/map_look"
-		app:fragment="net.osmand.plus.settings.RouteParametersFragment"
 		tools:icon="@drawable/ic_action_layers_dark" />
 
 	<Preference

@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 
 import net.osmand.plus.R;
 
-public class ScreenAlertsFragment extends BaseProfileSettingsFragment {
+public class ScreenAlertsFragment extends BaseSettingsFragment {
 
 	public static final String TAG = "ScreenAlertsFragment";
 

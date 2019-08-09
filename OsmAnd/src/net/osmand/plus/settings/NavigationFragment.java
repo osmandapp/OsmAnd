@@ -8,14 +8,13 @@ import android.support.v7.preference.PreferenceScreen;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.R;
 
 import static net.osmand.plus.settings.profiles.SettingsProfileFragment.PROFILE_STRING_KEY;
 
-public class NavigationFragment extends BaseProfileSettingsFragment {
+public class NavigationFragment extends BaseSettingsFragment {
 
 	public static final String TAG = "NavigationFragment";
 

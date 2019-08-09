@@ -3,7 +3,6 @@ package net.osmand.plus.settings;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +13,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.views.ListIntPreference;
 
-public class ProfileGeneralSettings extends BaseProfileSettingsFragment {
+public class ProfileGeneralSettings extends BaseSettingsFragment {
 
 	public static final String TAG = "ProfileGeneralSettings";
 
@@ -73,20 +72,6 @@ public class ProfileGeneralSettings extends BaseProfileSettingsFragment {
 		ListIntPreference coordinatesFormat = (ListIntPreference) findAndRegisterPreference(settings.COORDINATES_FORMAT.getId());
 		coordinatesFormat.setEntries(entries);
 		coordinatesFormat.setEntryValues(cvls);
-	}
-
-	@Override
-	public void onDisplayPreferenceDialog(Preference preference) {
-		String key = preference.getKey();
-
-		super.onDisplayPreferenceDialog(preference);
-	}
-
-	@Override
-	public boolean onPreferenceClick(Preference preference) {
-		String key = preference.getKey();
-
-		return super.onPreferenceClick(preference);
 	}
 
 	public static boolean showInstance(FragmentManager fragmentManager) {

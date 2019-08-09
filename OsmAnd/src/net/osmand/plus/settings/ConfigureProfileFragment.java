@@ -22,7 +22,7 @@ import java.util.List;
 
 import static net.osmand.plus.settings.profiles.SettingsProfileFragment.PROFILE_STRING_KEY;
 
-public class ConfigureProfileFragment extends BaseProfileSettingsFragment {
+public class ConfigureProfileFragment extends BaseSettingsFragment {
 
 	public static final String TAG = "ConfigureProfileFragment";
 
@@ -97,12 +97,6 @@ public class ConfigureProfileFragment extends BaseProfileSettingsFragment {
 		}
 
 		return false;
-	}
-
-	@Override
-	public boolean onPreferenceClick(Preference preference) {
-		Toast.makeText(getActivity(), "Click " + preference.getKey(), Toast.LENGTH_LONG).show();
-		return super.onPreferenceClick(preference);
 	}
 
 	public static boolean showInstance(FragmentManager fragmentManager, ApplicationMode mode) {

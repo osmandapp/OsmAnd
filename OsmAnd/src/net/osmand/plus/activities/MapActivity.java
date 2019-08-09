@@ -125,7 +125,7 @@ import net.osmand.plus.routing.TransportRoutingHelper.TransportRouteCalculationP
 import net.osmand.plus.search.QuickSearchDialogFragment;
 import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchTab;
 import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchType;
-import net.osmand.plus.settings.BaseProfileSettingsFragment;
+import net.osmand.plus.settings.BaseSettingsFragment;
 import net.osmand.plus.settings.SettingsMainFragment;
 import net.osmand.plus.settings.profiles.EditProfileFragment;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
@@ -1926,8 +1926,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	@Override
 	public boolean onPreferenceStartFragment(PreferenceFragmentCompat caller, Preference pref) {
-		if (caller instanceof BaseProfileSettingsFragment) {
-			BaseProfileSettingsFragment baseFragment = (BaseProfileSettingsFragment) caller;
+		if (caller instanceof BaseSettingsFragment) {
+			BaseSettingsFragment baseFragment = (BaseSettingsFragment) caller;
 
 			ApplicationMode mode = baseFragment.getSelectedMode();
 			if (mode != null) {

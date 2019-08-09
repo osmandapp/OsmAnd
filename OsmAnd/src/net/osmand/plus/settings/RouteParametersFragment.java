@@ -26,7 +26,7 @@ import java.util.Map;
 
 import static net.osmand.plus.activities.SettingsNavigationActivity.getRouter;
 
-public class RouteParametersFragment extends BaseProfileSettingsFragment {
+public class RouteParametersFragment extends BaseSettingsFragment {
 
 	public static final String TAG = "RouteParametersFragment";
 	private List<GeneralRouter.RoutingParameter> avoidParameters = new ArrayList<GeneralRouter.RoutingParameter>();
@@ -154,7 +154,7 @@ public class RouteParametersFragment extends BaseProfileSettingsFragment {
 		String key = preference.getKey();
 		switch (key) {
 			case "avoid_in_routing": {
-				AvoidRoadsBottomSheetDialogFragment avoidRoadsFragment = new AvoidRoadsBottomSheetDialogFragment(false);
+				AvoidRoadsBottomSheetDialogFragment avoidRoadsFragment = new AvoidRoadsBottomSheetDialogFragment(true);
 				avoidRoadsFragment.setTargetFragment(RouteParametersFragment.this, AvoidRoadsBottomSheetDialogFragment.REQUEST_CODE);
 				avoidRoadsFragment.show(getActivity().getSupportFragmentManager(), AvoidRoadsBottomSheetDialogFragment.TAG);
 				return true;

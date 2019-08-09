@@ -15,7 +15,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.views.ListFloatPreference;
 import net.osmand.plus.views.ListIntPreference;
 
-public class MapDuringNavigationFragment extends BaseProfileSettingsFragment {
+public class MapDuringNavigationFragment extends BaseSettingsFragment {
 
 	public static final String TAG = "MapDuringNavigationFragment";
 
@@ -92,15 +92,6 @@ public class MapDuringNavigationFragment extends BaseProfileSettingsFragment {
 			Toast.makeText(getContext(), "onDisplayPreferenceDialog AUTO_ZOOM_MAP", Toast.LENGTH_LONG).show();
 		}
 		super.onDisplayPreferenceDialog(preference);
-	}
-
-	@Override
-	public boolean onPreferenceClick(Preference preference) {
-		String key = preference.getKey();
-		if (key != null && key.equals(settings.AUTO_ZOOM_MAP.getId())) {
-			Toast.makeText(getContext(), "onPreferenceClick AUTO_ZOOM_MAP", Toast.LENGTH_LONG).show();
-		}
-		return super.onPreferenceClick(preference);
 	}
 
 	public static boolean showInstance(FragmentManager fragmentManager) {

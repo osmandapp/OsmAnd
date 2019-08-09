@@ -43,9 +43,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
-import static net.osmand.plus.profiles.SettingsProfileFragment.PROFILE_STRING_KEY;
-
-public abstract class BaseProfileSettingsFragment extends PreferenceFragmentCompat implements Preference.OnPreferenceChangeListener, Preference.OnPreferenceClickListener {
+public abstract class BaseSettingsFragment extends PreferenceFragmentCompat implements Preference.OnPreferenceChangeListener, Preference.OnPreferenceClickListener {
 
 	protected OsmandApplication app;
 	protected OsmandSettings settings;
@@ -61,12 +59,7 @@ public abstract class BaseProfileSettingsFragment extends PreferenceFragmentComp
 		app = requireMyApplication();
 		settings = app.getSettings();
 		nightMode = !settings.isLightContent();
-		String modeName = "";
-		if (getArguments() != null) {
-			modeName = getArguments().getString(PROFILE_STRING_KEY, ApplicationMode.CAR.getStringKey());
-		}
-		selectedAppMode = ApplicationMode.valueOfStringKey(modeName, ApplicationMode.DEFAULT);
-		settings.APPLICATION_MODE.set(selectedAppMode);
+		selectedAppMode = settings.APPLICATION_MODE.get();
 		super.onCreate(savedInstanceState);
 		modes.clear();
 		for (ApplicationMode a : ApplicationMode.values(app)) {
@@ -123,12 +116,15 @@ public abstract class BaseProfileSettingsFragment extends PreferenceFragmentComp
 					getActivity().getSupportFragmentManager().popBackStack();
 				}
 			});
-			view.findViewById(R.id.switch_profile_button).setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					selectAppModeDialog().show();
-				}
-			});
+			View switchProfile = view.findViewById(R.id.switch_profile_button);
+			if (switchProfile != null) {
+				switchProfile.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						selectAppModeDialog().show();
+					}
+				});
+			}
 			updateToolbar(view);
 		}
 	}
@@ -214,6 +210,7 @@ public abstract class BaseProfileSettingsFragment extends PreferenceFragmentComp
 	protected void registerPreference(Preference preference) {
 		if (preference != null) {
 			preference.setOnPreferenceChangeListener(this);
+			preference.setOnPreferenceClickListener(this);
 		}
 	}
 

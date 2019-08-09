@@ -10,7 +10,7 @@
 	app:contentInsetStart="4dp">
 
 	<ImageButton
-		android:id="@+id/toolbar_back"
+		android:id="@+id/close_button"
 		style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
 		android:layout_width="56dp"
 		android:layout_height="56dp"
@@ -18,7 +18,7 @@
 		android:src="@drawable/ic_action_mode_back" />
 
 	<TextView
-		android:id="@+id/toolbar_text"
+		android:id="@+id/toolbar_title"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:layout_gravity="left"

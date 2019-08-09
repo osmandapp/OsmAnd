@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import net.osmand.plus.R;
 import net.osmand.plus.views.ListIntPreference;
 
-public class TurnScreenOnFragment extends BaseProfileSettingsFragment {
+public class TurnScreenOnFragment extends BaseSettingsFragment {
 
 	public static final String TAG = "TurnScreenOnFragment";
 

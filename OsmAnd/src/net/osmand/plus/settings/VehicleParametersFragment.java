@@ -27,7 +27,7 @@ import java.util.Map;
 import static net.osmand.plus.activities.SettingsNavigationActivity.getRouter;
 import static net.osmand.plus.activities.SettingsNavigationActivity.setupSpeedSlider;
 
-public class VehicleParametersFragment extends BaseProfileSettingsFragment {
+public class VehicleParametersFragment extends BaseSettingsFragment {
 
 	public static final String TAG = "VehicleParametersFragment";
 

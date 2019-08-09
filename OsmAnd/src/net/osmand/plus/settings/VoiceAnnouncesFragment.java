@@ -25,7 +25,7 @@ import java.util.Set;
 
 import static net.osmand.plus.activities.SettingsNavigationActivity.MORE_VALUE;
 
-public class VoiceAnnouncesFragment extends BaseProfileSettingsFragment {
+public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 
 	public static final String TAG = "VoiceAnnouncesFragment";
 
