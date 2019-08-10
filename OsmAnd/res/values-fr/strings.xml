@@ -1247,8 +1247,8 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="map_preferred_locale_descr">Langue préférée des libellés sur la carte (en cas d\'indisponibilité affiche les noms anglais ou locaux).</string>
     <string name="map_preferred_locale">Langue préférée pour la carte</string>
     <string name="local_map_names">Noms locaux</string>
-    <string name="lang_sw">swahili</string>
-    <string name="lang_he">hébreux</string>
+    <string name="lang_sw">Swahili</string>
+    <string name="lang_he">Hébreu</string>
     <string name="forward">Suivant</string>
     <string name="home">Tableau de bord</string>
     <string name="live_monitoring_m_descr">Envoyer les positions à un service Web lorsque l\'enregistrement GPX est activé.</string>
@@ -1270,10 +1270,10 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="rendering_attr_showSurfaceGrade_name">Afficher la qualité des routes</string>
     <string name="rendering_attr_showSurfaces_name">Afficher la surface des routes</string>
     <string name="rendering_attr_showCycleRoutes_name">Afficher les itinéraires cyclables</string>
-    <string name="lang_fa">perse</string>
+    <string name="lang_fa">Persan</string>
     <string name="lang_al">albanais</string>
     <string name="lang_ar">Arabe</string>
-    <string name="lang_sc">sarde</string>
+    <string name="lang_sc">Sarde</string>
     <string name="lang_sr">Serbe (cyrillique)</string>
     <string name="lang_zh_cn">Chinois (simplifié)</string>
     <string name="lang_zh_tw">Chinois (traditionnel)</string>
