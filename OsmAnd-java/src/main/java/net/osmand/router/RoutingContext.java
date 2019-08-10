@@ -235,7 +235,6 @@ public class RoutingContext {
 	
 	private int searchSubregionTile(RouteSubregion subregion){
 		RoutingSubregionTile key = new RoutingSubregionTile(subregion);
-		long now = System.nanoTime();
 		int ind = Collections.binarySearch(subregionTiles, key, new Comparator<RoutingSubregionTile>() {
 			@Override
 			public int compare(RoutingSubregionTile o1, RoutingSubregionTile o2) {
@@ -256,7 +255,6 @@ public class RoutingContext {
 				}
 			}
 		}
-		timeToLoadHeaders += (System.nanoTime() - now);
 		return ind;
 	}
 	
