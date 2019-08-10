@@ -3108,7 +3108,7 @@ POIの更新は利用できません</string>
     <string name="files_copied">%1$d個のファイルをコピーしました。(%2$s)</string>
     <string name="files_failed">%1$d個のファイルのコピーに失敗しました。(%2$s)</string>
     <string name="files_present">%1$d個のファイル(%2$s)は、以前の場所\'%3$s\'に残っています。</string>
-    <string name="move_maps">マップの移動</string>
+    <string name="move_maps">移動させる</string>
     <string name="dont_move_maps">移動しない</string>
     <string name="public_transport_ped_route_title">徒歩でのルートは約%1$sで、公共交通機関の利用よりも速い可能性があります</string>
     <string name="public_transport_no_route_title">残念ながらOsmAndでは設定に即したルートを見つけることができませんでした。</string>

@@ -242,4 +242,5 @@
     <string name="min_logging_speed">Velocità minima di registrazione</string>
     <string name="min_logging_speed_descr">Filtra: nessuna registrazione al di sotto della velocità selezionata</string>
     <string name="gpx_settings">Impostazioni GPX</string>
+    <string name="shared_string_apply">Applica</string>
 </resources>

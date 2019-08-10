@@ -3243,4 +3243,6 @@
     <string name="sett_generic_ext_input">صفحه‌کلید معمولی</string>
     <string name="sett_wunderlinq_ext_input">WunderLINQ</string>
     <string name="sett_parrot_ext_input">Parrot</string>
+    <string name="new_route_calculated_dist_dbg">مسیر: مسافت %s، زمان مسیریاب %s 
+\nمحاسبه: %.1f ثانیه، %d جاده، %d کاشی)</string>
 </resources>

@@ -693,7 +693,7 @@
     <string name="poi_piste_skitour">Trasa skitour</string>
     <string name="poi_piste_snow_park">Trasa - park śnieżny</string>
     <string name="poi_piste_ice_skate">Trasa łyżwiarska</string>
-    <string name="poi_community_centre">Centrum kultury</string>
+    <string name="poi_community_centre">Centrum społeczności</string>
     <string name="poi_social_centre">Klub towarzyski</string>
     <string name="poi_trail_riding_station">Przejażdżki konne</string>
     <string name="poi_craft_agricultural_engines">Silniki rolnicze (wystawa)</string>
@@ -1519,7 +1519,7 @@
     <string name="poi_piste_grooming_no">Brak</string>
     <string name="poi_piste_grooming_mogul">Kocie łby</string>
     <string name="poi_garden_type_residential">Typ ogrodu: przydomowy</string>
-    <string name="poi_garden_type_community">Typ ogrodu: społeczności</string>
+    <string name="poi_garden_type_community">Typ ogrodu: społecznościowy</string>
     <string name="poi_garden_type_private">Typ ogrodu: prywatny</string>
     <string name="poi_garden_type_botanical">Typ ogrodu: botaniczny</string>
     <string name="poi_garden_style_kitchen">Styl ogrodu: warzywny</string>
@@ -3242,7 +3242,7 @@
     <string name="poi_water_supply_water_trucking">cysterna</string>
     <string name="poi_water_supply_water_tank">zbiornik</string>
     <string name="poi_water_supply_bottled_water">woda butelkowana</string>
-    <string name="poi_water_place_access_community">społeczność</string>
+    <string name="poi_water_place_access_community">Społeczność</string>
     <string name="poi_water_place_access_family">rodzina</string>
     <string name="poi_water_place_access_multifamilies">dla wielu rodzin</string>
     <string name="poi_socket_cee_blue">Wtyczka: CEE niebieska</string>

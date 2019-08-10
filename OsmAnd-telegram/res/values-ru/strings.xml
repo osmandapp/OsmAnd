@@ -26,7 +26,7 @@
     <string name="gps_not_available">Пожалуйста, включите «Местоположение» в системных настройках</string>
     <string name="location_service_no_gps_available">Выберите один из провайдеров определения местоположения, чтобы поделиться своим местоположением.</string>
     <string name="background_work">Работа в фоне</string>
-    <string name="battery_optimization_description">Отключите оптимизацию батареи для OsmAnd Tracker, чтобы оно не было внезапно отключено в фоновом режиме.</string>
+    <string name="battery_optimization_description">Отключите оптимизацию батареи для OsmAnd Tracker, чтобы не было внезапного отключения в фоновом режиме.</string>
     <string name="osmand_service">Фоновый режим</string>
     <string name="osmand_service_descr">OsmAnd Tracker работает в фоновом режиме с выключенным экраном.</string>
     <string name="choose_osmand_desc">Выберите версию OsmAnd, в которой контакты будут отображаться на карте.</string>
@@ -214,4 +214,20 @@
     <string name="search_contacts_descr">Поиск среди всех ваших групп и контактов.</string>
     <string name="type_contact_or_group_name">Введите контакт или название группы</string>
     <string name="shared_string_search">Поиск</string>
+    <string name="direction">Направление</string>
+    <string name="precision">Точность</string>
+    <string name="proxy_credentials">Учетные данные</string>
+    <string name="proxy_port">Порт</string>
+    <string name="proxy_server">Сервер</string>
+    <string name="shared_string_connection">Соединение</string>
+    <string name="proxy_type">Тип прокси</string>
+    <string name="proxy_connected">Подключено</string>
+    <string name="proxy_disconnected">Отключено</string>
+    <string name="proxy_settings">Настройки прокси</string>
+    <string name="proxy">Прокси</string>
+    <string name="gpx_settings">настройки GPX</string>
+    <string name="timeline_no_data_descr">Нет собранных данных за выбранный день</string>
+    <string name="timeline_no_data">Нет данных</string>
+    <string name="shared_string_apply">Применить</string>
+    <string name="start_end_date">Дата начала - окончания</string>
 </resources>
