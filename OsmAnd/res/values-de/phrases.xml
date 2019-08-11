@@ -1231,7 +1231,7 @@
     <string name="poi_ramp_bicycle_yes">Fahrradrampe: ja</string>
     <string name="poi_ramp_bicycle_no">Fahrradrampe: nein</string>
     <string name="poi_step_count">Anzahl Stufen</string>
-    <string name="poi_defibrillator">Defibrillator</string>
+    <string name="poi_defibrillator">Defibrillator (AED)</string>
     <string name="poi_defibrillator_yes">Defibrillator: ja</string>
     <string name="poi_horse_yes">Pferde erlaubt</string>
     <string name="poi_horse_no">Pferde nicht erlaubt</string>
