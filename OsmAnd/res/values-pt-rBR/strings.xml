@@ -3203,4 +3203,5 @@ Pôr do Sol: %2$s</string>
     <string name="shared_string_default">Predefinido</string>
     <string name="new_route_calculated_dist_dbg">Rota: distância %s, tempo do rota %s
 \nCálculo: %.1f sec, %d estradas, %d azulejos)</string>
+    <string name="lang_oc">Occitano</string>
 </resources>
