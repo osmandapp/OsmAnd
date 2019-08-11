@@ -1535,7 +1535,7 @@
     <string name="poi_toilets_wheelchair_yes">Acesso aos banheiros para cadeirantes: sim</string>
     <string name="poi_toilets_wheelchair_no">Acesso aos banheiros para cadeirantes: não</string>
     <string name="poi_toilets_access_customers">Acesso aos banheiros: clientes</string>
-    <string name="poi_toilets_access_permissive">Acesso aos banheiros: permitido</string>
+    <string name="poi_toilets_access_permissive">Acesso aos banheiros: permissivo</string>
     <string name="poi_toilets_access_community">Acesso aos banheiros: comunidade</string>
     <string name="poi_toilets_access_public">Acesso aos banheiros: público</string>
     <string name="poi_diaper_yes">Com trocador de fralda</string>
@@ -3604,4 +3604,11 @@
     <string name="poi_historic_tank">Tanque histórico</string>
     <string name="poi_hookah_lounge">Salão do cachimbo de água</string>
     <string name="poi_source_biomass">Fonte de energia: biomassa</string>
+    <string name="poi_access_motorcycle">Acesso a motocicletas</string>
+    <string name="poi_access_mofa">Acesso de bicicleta motorizada</string>
+    <string name="poi_access_hgv">Acesso de veículos pesados</string>
+    <string name="poi_access_goods">Acesso de veículos de cargas leves</string>
+    <string name="poi_access_disabled">Acesso para deficientes físicos</string>
+    <string name="poi_moped_no">Acesso de mobilete: não</string>
+    <string name="poi_disabled_yes">Sim</string>
 </resources>
