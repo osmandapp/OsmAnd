@@ -13,8 +13,8 @@
     <string name="prefer_motorways">बडी सड़को को प्राधान्य दो</string>
     <string name="prefer_in_routing_title">प्राधान्य…</string>
     <string name="shared_string_walk">टहल लो</string>
-    <string name="save_poi_value_exceed_length">टैग \"% s\" की अधिकतम लंबाई 255 वर्ण है।कृपया जारी रखने के लिए छोटा करें।</string>
-    <string name="save_poi_value_exceed_length_title">\"% S\" मान की लंबाई</string>
+    <string name="save_poi_value_exceed_length">टैग \"%s\" की अधिकतम लंबाई 255 वर्ण है।कृपया जारी रखने के लिए छोटा करें।</string>
+    <string name="save_poi_value_exceed_length_title">\"%s\" मान की लंबाई</string>
     <string name="avoid_pt_types_descr">नेविगेशन के लिए बचने के लिए सार्वजनिक परिवहन प्रकारों का चयन करें:</string>
     <string name="avoid_pt_types">परिवहन प्रकारों से बचें …</string>
     <string name="quick_action_day_night_mode">%s मोड</string>
