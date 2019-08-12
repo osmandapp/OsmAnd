@@ -2934,7 +2934,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="tracks_on_map">Traces visualitzades</string>
     <string name="time_of_day">Hora del dia</string>
     <string name="by_transport_type">Per %1$s</string>
-    <string name="step_by_step">Pas a pas</string>
+    <string name="step_by_step">Totes les cruïlles</string>
     <string name="routeInfo_road_types_name">Tipus de carretera</string>
     <string name="exit_at">Sortida a</string>
     <string name="quick_action_show_hide_gpx_tracks">"Mostra/amaga traces GPX "</string>
@@ -3232,4 +3232,5 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="rendering_attr_showLez_name">Mostra les zones de baixes emissions</string>
     <string name="temporary_conditional_routing">Considereu les limitacions temporals</string>
     <string name="shared_string_default">Per defecte</string>
+    <string name="lang_oc">Occità</string>
 </resources>
