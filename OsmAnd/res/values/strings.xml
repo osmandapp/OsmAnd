@@ -11,6 +11,8 @@
 	Thx - Hardy
 
 -->
+    <string name="app_mode_wagon">Wagon</string>
+    <string name="app_mode_pickup_truck">Pickup truck</string>
     <string name="shared_string_default">Default</string>
     <string name="gpx_join_gaps">Join gaps</string>
     <string name="app_mode_camper">Camper</string>
