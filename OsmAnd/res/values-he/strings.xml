@@ -3175,4 +3175,32 @@
     <string name="routing_attr_piste_type_skitour_description">מסלולי טיולי סקי.</string>
     <string name="new_route_calculated_dist_dbg">מסלול: מרחק %s, זמן מנתב מסלול %s 
 \nחישוב: %.1f שנ׳, %d מסלולים, %d אריחים)</string>
+    <string name="make_osmand_better_descr">לאפשר ל־OsmAnd לאסוף ולעבד נתונים אלמוניים בנוגע לשימוש ביישומון. אנו לא אוספים או מאחסנים נתונים על המיקום שלך, או על מיקום בהם צפית במפה.
+\n
+\nבאפשרותך לשנות את בחירתך בכל עת דרך הגדרות &gt; פרטיות ואבטחה.</string>
+    <string name="routing_attr_piste_type_nordic_name">סקי למרחקים/נורדי</string>
+    <string name="routing_attr_piste_type_nordic_description">מסלולים לסקי נורדי או למרחקים.</string>
+    <string name="routing_attr_allow_intermediate_description">מסלולים קשים יותר עם מקטעים יותר תלולים. בדרך כלל עם מכשולים שרצוי להימנע מהם.</string>
+    <string name="release_3_4">• פרופילי יישומון: יצירת פרופיל שמותאם אישית לצרכיך, עם סמל וצבע לבחירתך
+\n
+\n • מעתה ניתן להתאים לפרופיל את המהירות המרבית/מזערית ואת בררת המחדל
+\n
+\n • נוסף וידג׳ט לנקודות הציון הנוכחיות
+\n
+\n • נוספו אפשרויות להצגת מצפן וסרגל רדיוס במפה
+\n
+\n • תיקון תיעוד מסלול ברקע
+\n
+\n • שיפור הורדות רקע של מפות
+\n
+\n • הוחזרה האפשרות ‚הפעלת המסך’
+\n
+\n • תוקנה בחירת השפות בוויקיפדיה
+\n
+\n • תוקנה התנהגות כפתור המצפן במהלך ניווט
+\n
+\n • תיקוני תקלות נוספים
+\n
+\n</string>
+    <string name="lang_oc">אוקסיטנית</string>
 </resources>

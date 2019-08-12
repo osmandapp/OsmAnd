@@ -541,9 +541,9 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
 \n\tFor at anvende aktiver \'Menu\' → \'Konfigurer kort\' → \'Vælg kortkilde…\' → \'Offline vektor-kort\'.</string>
     <string name="choose_audio_stream">Lydkanal for talevejledning</string>
     <string name="choose_audio_stream_descr">Vælg højttaler til at afspille talevejledning.</string>
-    <string name="voice_stream_voice_call">Telefonopkald lyd (afbryder også Bluetooth bilradio)</string>
+    <string name="voice_stream_voice_call">Telefonopkaldslyd (til at afbryde Bluetooth bilradio)</string>
     <string name="voice_stream_notification">Meddelelselyd</string>
-    <string name="voice_stream_music">Medie-/musiklyd</string>
+    <string name="voice_stream_music">Medie-/navigationslyd</string>
     <string name="warning_tile_layer_not_downloadable">Kan ikke hente kortlaget %1$s, at geninstallere kan hjælpe.</string>
     <string name="overlay_transparency_descr">Ændr gennemsigtigheden for overlejring.</string>
     <string name="overlay_transparency">Overlejrings-gennemsigtighed</string>
@@ -1243,7 +1243,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="keep_navigation_service">Hold</string>
     <string name="lang_al">Albansk</string>
     <string name="lang_ar">Arabisk</string>
-    <string name="lang_sr">Serbisk</string>
+    <string name="lang_sr">Serbisk (kyrillisk)</string>
     <string name="lang_zh_cn">Kinesisk (forenklet)</string>
     <string name="lang_zh_tw">Kinesisk (traditionelt)</string>
     <string name="lang_sc">Sardisk</string>
@@ -2106,7 +2106,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="legacy_search">Legacy søgning</string>
     <string name="show_legacy_search">Vis legacy søgning</string>
     <string name="show_legacy_search_desc">Tilføj legacy søgning til sidemenuen.</string>
-    <string name="lang_sr_latn">Serbisk (Latin)</string>
+    <string name="lang_sr_latn">Serbisk (latinsk)</string>
     <string name="lang_zh_hk">Kinesisk (Hong Kong)</string>
     <string name="rendering_attr_hideWaterPolygons_description">Vand</string>
     <string name="rendering_attr_contourWidth_description">Bredde på højdekurver</string>
@@ -2907,7 +2907,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="voice_announcements">Stemmemeddelelser</string>
     <string name="arrive_at_time">Ankommer %1$s</string>
     <string name="quick_action_switch_day_night_descr">Tryk på handlingsknappen skifter mellem dag- og nattilstand</string>
-    <string name="routeInfo_roadClass_name">Klasse</string>
+    <string name="routeInfo_roadClass_name">Vejtype</string>
     <string name="routeInfo_surface_name">Overflade</string>
     <string name="routeInfo_smoothness_name">Jævnhed</string>
     <string name="routeInfo_steepness_name">Stejlhed</string>
@@ -2921,7 +2921,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="work_button">Arbejde</string>
     <string name="time_of_day">Tidspunkt på dagen</string>
     <string name="by_transport_type">Med %1$s</string>
-    <string name="step_by_step">Trin for trin</string>
+    <string name="step_by_step">Sving-for-sving</string>
     <string name="routeInfo_road_types_name">Vejtyper</string>
     <string name="exit_at">Stå af ved</string>
     <string name="sit_on_the_stop">Stig på ved stoppested</string>
@@ -3097,7 +3097,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="profile_alert_delete_title">Slet profil</string>
     <string name="profile_alert_delete_msg">Slet profilen %s\?</string>
     <string name="select_base_profile_dialog_title">Vælg en basisprofil</string>
-    <string name="select_base_profile_dialog_message">Brugerdefineret Programprofil skal være baseret på en af standardprofilerne. Valgte Profil definerer grundlæggende indstillinger: opsætning af moduler, enheder for hastighed og afstand. I strengen nedenunder Profilnavn, kan ses, hvilke Navigationprofiler der er velegnet for hver Profil.</string>
+    <string name="select_base_profile_dialog_message">Basér den brugerdefinerede profil på en af standardprofilerne, dette definerer den grundlæggende opsætning som standard synlighed for moduler og enheder for hastighed og distance. Dette er standardprofilerne, sammen med eksempler på brugerdefinerede profiler, de kan udvides til:</string>
     <string name="select_nav_profile_dialog_title">Vælg navigationstype</string>
     <string name="base_profile_descr_car">Bil, lastbil, motorcykel</string>
     <string name="base_profile_descr_bicycle">MTB, knallert, hest</string>
@@ -3155,7 +3155,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="last_launch_crashed">Den sidste start af OsmAnd mislykkedes. Hjælp med at forbedre OsmAnd ved at dele fejlmeddelelsen.</string>
     <string name="app_mode_ufo">UFO</string>
     <string name="release_3_4">"• Anvendelsesprofiler: opret en brugervalgt profil med en brugervalgt ikon og farve 
-\n 
+\n
 \n • Tilpas alle profilers standard- og min/max hastigheder 
 \n
 \n• Tilføjet et modul til de aktuelle koordinater 
@@ -3165,7 +3165,7 @@ Repræsenterer område: %1$s x %2$s</string>
 \n• Rettet logføring af baggrundsspor 
 \n
 \n• Forbedret hentning af kort  i baggrunden 
-\n 
+\n
 \n• Rettet Wikipedia sprogvalg 
 \n
 \n• Rettet kompasknappens opførsel under navigationen 
@@ -3186,7 +3186,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="edit_profile_nav_settings_subtitle">Vælg standardnavigationsindstillinger for profil</string>
     <string name="routing_attr_max_num_changes_description">Angiv det maksimale antal ændringer</string>
     <string name="routing_attr_max_num_changes_name">Antal ændringer</string>
-    <string name="turn_screen_on_router">Vågn op, når der skiftes retning</string>
+    <string name="turn_screen_on_router">Vågn op ved retningsændring</string>
     <string name="turn_screen_on_time_descr">Indstil tiden, for hvornår skærmen vil tænde.</string>
     <string name="turn_screen_on_sensor">Brug nærhedssensor</string>
     <string name="turn_screen_on_sensor_descr">Vink med hånden over toppen af skærmen for at tænde for skærmen, under navigering.</string>
@@ -3221,4 +3221,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="rendering_attr_showLez_name">Vis Miljøzoner</string>
     <string name="temporary_conditional_routing">Overvej midlertidige begrænsninger</string>
     <string name="shared_string_default">Standard</string>
+    <string name="new_route_calculated_dist_dbg">Rute: afstand %s, router-tid % s 
+\nBeregning: %.1f sek., %d veje, %d fliser)</string>
+    <string name="lang_oc">Occitansk</string>
 </resources>
