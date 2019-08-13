@@ -226,4 +226,9 @@
     <string name="start_end_date">Дата початку - кінця</string>
     <string name="gpx_settings">Налаштування GPX</string>
     <string name="timeline_no_data_descr">Накопичені дані для обраного дня відсутні</string>
+    <string name="send_location_as">Надіслати місцезнаходження як</string>
+    <string name="send_location_as_descr">Виберіть, як виглядатимуть повідомлення з вашим місцезнаходженням.</string>
+    <string name="time_on_the_move">Час руху</string>
+    <string name="show_gps_points_descr">Показати кількість зібраних та відправлених GPS-точок.</string>
+    <string name="set_time_timeline_descr">Виберіть час для відображення</string>
 </resources>
