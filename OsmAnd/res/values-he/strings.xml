@@ -3203,4 +3203,7 @@
 \n
 \n</string>
     <string name="lang_oc">אוקסיטנית</string>
+    <string name="select_base_profile_dialog_message">באפשרותך לבסס את הפרופיל שלך על אחד מפרופילי בררת המחדל של היישומון, פעולה זו מגדירה את ההגדרות הבסיסיות כמו אופן הצגת וידג׳טים כבררת מחדל ויחידות של מהירות ומרחק. אלו פרופילי בררת המחדל של היישומון, יחד עם דוגמאות של פרופילים מותאמים אישית ניתן להרחיב אותם לכדי:</string>
+    <string name="app_mode_wagon">קרון</string>
+    <string name="app_mode_pickup_truck">טנדר</string>
 </resources>
