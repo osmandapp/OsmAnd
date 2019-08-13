@@ -3592,4 +3592,7 @@
     <string name="poi_historic_tank">Старовинний танк</string>
     <string name="poi_hookah_lounge">Кальянна зала</string>
     <string name="poi_source_biomass">Джерело енергії: біомаса</string>
+    <string name="poi_snowmobile_filter">Доступ для снігоходів</string>
+    <string name="poi_access_bus">Доступ для автобусів</string>
+    <string name="poi_access_caravan">Доступ для будинків на колесах</string>
 </resources>
