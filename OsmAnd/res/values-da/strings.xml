@@ -3224,4 +3224,6 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="new_route_calculated_dist_dbg">Rute: afstand %s, router-tid %s 
 \nBeregning: %.1f sek., %d veje, %d fliser)</string>
     <string name="lang_oc">Occitansk</string>
+    <string name="app_mode_wagon">Vogn</string>
+    <string name="app_mode_pickup_truck">Pickup</string>
 </resources>
