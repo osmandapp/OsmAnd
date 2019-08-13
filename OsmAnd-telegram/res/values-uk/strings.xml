@@ -207,4 +207,21 @@
     <string name="shared_string_enable">Увімкнути</string>
     <string name="shared_string_select">Обрати</string>
     <string name="shared_string_apply">Застосувати</string>
+    <string name="proxy_key">Ключ</string>
+    <string name="proxy_password">Пароль</string>
+    <string name="proxy_username">Ім\'я користувача</string>
+    <string name="proxy_credentials">Облікові дані</string>
+    <string name="proxy_port">Порт</string>
+    <string name="proxy_server">Сервер</string>
+    <string name="shared_string_connection">З’єднання</string>
+    <string name="proxy_type">Тип проксі-сервера</string>
+    <string name="proxy_connected">З\'єднано</string>
+    <string name="proxy_disconnected">Роз\'єднано</string>
+    <string name="proxy_settings">Налаштування проксі</string>
+    <string name="proxy">Проксі</string>
+    <string name="privacy">Конфіденційність</string>
+    <string name="timeline_no_data">Нема даних</string>
+    <string name="shared_string_end">Кінець</string>
+    <string name="shared_string_start">Початок</string>
+    <string name="start_end_date">Дата початку - кінця</string>
 </resources>
