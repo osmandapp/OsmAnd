@@ -1,5 +1,6 @@
 package net.osmand.plus.helpers;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.hardware.Sensor;
@@ -28,10 +29,9 @@ public class LockHelper implements SensorEventListener {
 
 	private Handler uiHandler;
 	private OsmandApplication app;
-	private CommonPreference<Boolean> turnScreenOn;
 	private CommonPreference<Integer> turnScreenOnTime;
 	private CommonPreference<Boolean> turnScreenOnSensor;
-
+	private boolean active;
 
 	@Nullable
 	private LockUIAdapter lockUIAdapter;
@@ -76,17 +76,16 @@ public class LockHelper implements SensorEventListener {
 		}
 	}
 
-	private void unlock(long timeInMills) {
-		releaseWakeLocks();
+	@SuppressLint("WakelockTimeout")
+	private void unlock() {
 		if (lockUIAdapter != null) {
 			lockUIAdapter.unlock();
 		}
-
 		PowerManager pm = (PowerManager) app.getSystemService(Context.POWER_SERVICE);
 		if (pm != null) {
 			wakeLock = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK
-					| PowerManager.ACQUIRE_CAUSES_WAKEUP, "tso:wakelocktag");
-			wakeLock.acquire(timeInMills);
+					| PowerManager.ACQUIRE_CAUSES_WAKEUP, "OsmAnd:OnVoiceWakeupTag");
+			wakeLock.acquire();
 		}
 	}
 
@@ -103,12 +102,14 @@ public class LockHelper implements SensorEventListener {
 
 	private void timedUnlock(final long millis) {
 		uiHandler.removeCallbacks(lockRunnable);
-		uiHandler.post(new Runnable() {
-			@Override
-			public void run() {
-				unlock(millis);
-			}
-		});
+		if (!active && wakeLock == null) {
+			uiHandler.post(new Runnable() {
+				@Override
+				public void run() {
+					unlock();
+				}
+			});
+		}
 		uiHandler.postDelayed(lockRunnable, millis);
 	}
 
@@ -158,12 +159,13 @@ public class LockHelper implements SensorEventListener {
 	}
 
 	public void onStart(@NonNull Activity activity) {
-		if (wakeLock == null) {
-			switchSensorOff();
-		}
+		active = true;
+		switchSensorOff();
 	}
 
 	public void onStop(@NonNull Activity activity) {
+		lock();
+		active = false;
 		if (!activity.isFinishing() && isSensorEnabled()) {
 			switchSensorOn();
 		}
