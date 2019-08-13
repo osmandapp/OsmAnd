@@ -37,4 +37,6 @@
     <string name="gpx_join_gaps">ఖాలీలు నింపుము</string>
     <string name="app_mode_camper">మకాం వేసే వ్యక్తి</string>
     <string name="shared_string_default">సమయంలోగా చెల్లించకపోవుట</string>
+    <string name="app_mode_campervan">తాత్కాలిక హడ్డులు ఎంచుకో</string>
+    <string name="temporary_conditional_routing">తాత్కాలిక హద్దులు ఎన్నుకో</string>
 </resources>

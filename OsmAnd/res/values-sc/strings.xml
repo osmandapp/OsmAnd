@@ -2910,7 +2910,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="voice_announcements">Annùntzios vocales</string>
     <string name="intermediate_destinations">Destinatziones intermèdias</string>
     <string name="arrive_at_time">Arribada a sas %1$s</string>
-    <string name="routeInfo_roadClass_name">Classe</string>
+    <string name="routeInfo_roadClass_name">Casta de caminu</string>
     <string name="routeInfo_surface_name">Superfìtzie</string>
     <string name="routeInfo_smoothness_name">Uniformidade</string>
     <string name="routeInfo_steepness_name">Ratesa</string>
@@ -3216,10 +3216,13 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="shared_string_open_track">Aberi sa rasta</string>
     <string name="shared_string_track_is_saved">Rasta %s sarvada</string>
     <string name="app_mode_camper">Caravana</string>
-    <string name="rendering_attr_showLez_description">Ammustra sas zonas de emissione bassa in sa mapa. No infuentzat su càlculu de s\'àndala.</string>
-    <string name="rendering_attr_showLez_name">Ammustra sas zonas de emissione bassa</string>
+    <string name="rendering_attr_showLez_description">Ammustra sas zonas de emissione bassa in sa mapa. No influentzat su càlculu de s\'àndala.</string>
+    <string name="rendering_attr_showLez_name">Ammustra sas zonas a emissione bassa</string>
     <string name="temporary_conditional_routing">Mentene in cunsìderu sas limitatziones temporàneas</string>
     <string name="shared_string_default">Predefinidu</string>
-    <string name="gpx_join_gaps">Liga sos bòidos</string>
+    <string name="gpx_join_gaps">Liga sas separatziones</string>
     <string name="app_mode_campervan">Camper</string>
+    <string name="new_route_calculated_dist_dbg">Àndala: distàntzia %s, tempus %s 
+\nCàlculu: %.1f seg, %d caminos, %d tasseddos)</string>
+    <string name="lang_oc">Otzitanu</string>
 </resources>

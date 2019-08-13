@@ -3209,4 +3209,7 @@
     <string name="rendering_attr_showLez_name">Показати зони низьких викидів</string>
     <string name="temporary_conditional_routing">Враховувати тимчасові обмеження</string>
     <string name="shared_string_default">Типовий</string>
+    <string name="new_route_calculated_dist_dbg">Маршрут: відстань %s, час навігації %s 
+\nРозрахунок: %.1f с, %d доріг, %d тайлів)</string>
+    <string name="lang_oc">Окситанська</string>
 </resources>
