@@ -1926,7 +1926,7 @@ Pôr do Sol: %2$s</string>
     <string name="no_update_info_desc">Não verificar se há novas versões ou descontos relacionados ao OsmAnd.</string>
     <string name="no_update_info">Não mostrar novas versões</string>
     <string name="update_all_maps_now">Atualizar todos os mapas agora?</string>
-    <string name="clear_tile_data">Limpar todos os títulos</string>
+    <string name="clear_tile_data">Limpar quadrículas</string>
     <string name="replace_favorite_confirmation">Você tem certeza que deseja substituir o Favorito %1$s?</string>
     <string name="shared_string_change">Mudar</string>
     <string name="coords_search">Busca de coordenadas</string>
