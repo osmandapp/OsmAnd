@@ -3212,4 +3212,6 @@
     <string name="new_route_calculated_dist_dbg">Маршрут: відстань %s, час навігації %s 
 \nРозрахунок: %.1f с, %d доріг, %d тайлів)</string>
     <string name="lang_oc">Окситанська</string>
+    <string name="app_mode_wagon">Фургон</string>
+    <string name="app_mode_pickup_truck">Пікап</string>
 </resources>
