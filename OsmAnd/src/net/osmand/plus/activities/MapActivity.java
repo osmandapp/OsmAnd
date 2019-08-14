@@ -1903,7 +1903,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public void changeKeyguardFlags() {
-		changeKeyguardFlags(false, true);
+		changeKeyguardFlags(settings.TURN_SCREEN_ON_TIME_INT.get() > 0, true);
 	}
 
 	private void changeKeyguardFlags(boolean enable, boolean forceKeepScreenOn) {
