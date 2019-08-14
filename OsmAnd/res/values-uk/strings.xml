@@ -303,9 +303,9 @@
     <string name="shared_string_previous">Назад</string>
     <string name="unit_of_length_descr">Змінити одиниці вимірювання довжини.</string>
     <string name="unit_of_length">Одиниці довжини</string>
-    <string name="si_mi_feet">Милі, фути</string>
-    <string name="si_mi_yard">Милі, ярди</string>
-    <string name="si_km_m">Кілометри, метри</string>
+    <string name="si_mi_feet">Милі/фути</string>
+    <string name="si_mi_yard">Милі/ярди</string>
+    <string name="si_km_m">Кілометри/метри</string>
     <string name="yard">ярд</string>
     <string name="foot">фут</string>
     <string name="mile_per_hour">мл/г</string>
@@ -1031,7 +1031,7 @@
     <string name="av_camera_focus_infinity">Фокус встановлюється на нескінченність</string>
     <string name="av_photo_play_sound">Відтворювати звук затвору камери</string>
     <string name="av_photo_play_sound_descr">Під час фотографування відтворювати звук.</string>
-    <string name="osmand_net_previously_installed">Всі локальні дані зі старого встановленого додатку будуть підтримуватися новим, але Закладки потрібно експортувати зі старого додатку і імпортувати в новий.</string>
+    <string name="osmand_net_previously_installed">Всі локальні дані зі старого встановленого додатку будуть підтримуватися новим, але Закладки потрібно експортувати зі старого додатку та імпортувати в новий.</string>
     <string name="speak_speed_limit">Обмеження швидкості</string>
     <string name="speak_cameras">Камери детектування швидкості</string>
     <string name="speak_traffic_warnings">Попередження про дорожній рух</string>
@@ -2052,7 +2052,7 @@
     <string name="get_for_month">Отримати за %1$s на місяць</string>
     <string name="osm_live_banner_desc">Отримайте необмежені звантаження для мап, а також оновлення мап частіше ніж один раз на місяць: щотижня, щодня або щогодини.</string>
     <string name="osmand_plus_banner_desc">Втулок для необмеженого доступу до мап, їх оновлень та отримання інформації з Wikipedia.</string>
-    <string name="si_mi_meters">Милі, метри</string>
+    <string name="si_mi_meters">Милі/метри</string>
     <string name="skip_map_downloading">Пропустити звантаження мап</string>
     <string name="skip_map_downloading_desc">У Вас немає звантажених мап. Ви можете вибрати мапу зі списку або звантажити її пізніше за допомогою меню — %1$s.</string>
     <string name="search_another_country">Виберіть інший регіон</string>
