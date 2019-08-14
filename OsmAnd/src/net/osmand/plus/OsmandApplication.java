@@ -242,7 +242,7 @@ public class OsmandApplication extends MultiDexApplication {
         if(RateUsBottomSheetDialog.shouldShow(this)) {
             osmandSettings.RATE_US_STATE.set(RateUsBottomSheetDialog.RateUsState.IGNORED);
         }
-        getNotificationHelper().removeNotifications();
+        getNotificationHelper().removeNotifications(false);
 	}
 
 	public RendererRegistry getRendererRegistry() {

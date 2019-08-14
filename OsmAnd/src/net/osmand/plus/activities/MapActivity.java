@@ -1315,7 +1315,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	@Override
 	protected void onStop() {
-		getMyApplication().getNotificationHelper().removeNotifications();
+		getMyApplication().getNotificationHelper().removeNotifications(true);
 		if(pendingPause) {
 			onPauseActivity();
 		}
@@ -1404,7 +1404,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public void updateApplicationModeSettings() {
-		changeKeyguardFlags(true);
+		changeKeyguardFlags();
 		updateMapSettings();
 		mapViewTrackingUtilities.updateSettings();
 		//app.getRoutingHelper().setAppMode(settings.getApplicationMode());
@@ -1902,25 +1902,29 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		return oldPoint.getLayerId().equals(layerId) && oldPoint.getId().equals(point.getId());
 	}
 
-	public void changeKeyguardFlags(final boolean enable) {
+	public void changeKeyguardFlags() {
+		changeKeyguardFlags(false, true);
+	}
+
+	private void changeKeyguardFlags(boolean enable, boolean forceKeepScreenOn) {
 		if (enable) {
 			getWindow().setFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED,
 					WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
 			setKeepScreenOn(true);
 		} else {
 			getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
-			setKeepScreenOn(false);
+			setKeepScreenOn(forceKeepScreenOn);
 		}
 	}
 
 	@Override
 	public void lock() {
-		changeKeyguardFlags(false);
+		changeKeyguardFlags(false, false);
 	}
 
 	@Override
 	public void unlock() {
-		changeKeyguardFlags(true);
+		changeKeyguardFlags(true, false);
 	}
 
 	private class ScreenOffReceiver extends BroadcastReceiver {
@@ -1986,14 +1990,14 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	@Override
 	public void routeWasCancelled() {
-		changeKeyguardFlags(true);
+		changeKeyguardFlags();
 	}
 
 	@Override
 	public void routeWasFinished() {
 		if (!mIsDestroyed) {
 			DestinationReachedMenu.show(this);
-			changeKeyguardFlags(true);
+			changeKeyguardFlags();
 		}
 	}
 
