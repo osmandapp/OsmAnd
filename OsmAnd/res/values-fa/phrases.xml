@@ -232,7 +232,7 @@
     <string name="poi_town">شهر</string>
     <string name="poi_village">روستا</string>
     <string name="poi_hamlet">دهکده</string>
-    <string name="poi_isolated_dwelling">منطقه مسکونی</string>
+    <string name="poi_isolated_dwelling">سکونتگاه دورافتاده</string>
     <string name="poi_suburb">حومه شهر</string>
     <string name="poi_neighbourhood">محله</string>
     <string name="poi_locality">محل</string>
@@ -1195,7 +1195,7 @@
     <string name="poi_internet_access_yes">دسترسی اینترنت: دارد</string>
     <string name="poi_internet_access_fee_yes">دسترسی اینترنت - پولی</string>
     <string name="poi_smoking_separated">در اتاق جداگانه</string>
-    <string name="poi_smoking_isolated">در اتاق ایزوله</string>
+    <string name="poi_smoking_isolated">در یک اتاق جدا</string>
     <string name="poi_piste_grooming_scooter">اسکوتر</string>
     <string name="poi_piste_grooming_skating">اسکیت</string>
     <string name="poi_rooms">اتاق‌ها</string>

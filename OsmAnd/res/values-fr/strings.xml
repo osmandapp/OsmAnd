@@ -3185,4 +3185,5 @@ représentant la zone : %1$s x %2$s</string>
     <string name="new_route_calculated_dist_dbg">Itinéraire : distance %s, durée %s 
 \nCalculs : %.1f secondes, %d routes, %d tuiles)</string>
     <string name="lang_oc">Occitan</string>
+    <string name="app_mode_wagon">Wagon</string>
 </resources>

@@ -3225,4 +3225,6 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="new_route_calculated_dist_dbg">Àndala: distàntzia %s, tempus %s 
 \nCàlculu: %.1f seg, %d caminos, %d tasseddos)</string>
     <string name="lang_oc">Otzitanu</string>
+    <string name="app_mode_wagon">Vagone pro sas mertzes</string>
+    <string name="app_mode_pickup_truck">Camieddu</string>
 </resources>

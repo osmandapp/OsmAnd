@@ -1230,7 +1230,7 @@
     <string name="display_zoom_level">显示缩放等级：%1$s</string>
     <string name="online_map">在线地图</string>
     <string name="roads_only">仅道路</string>
-    <string name="device_memory"></string>
+    <string name="device_memory"/>
     <string name="first_usage_item">初次使用</string>
     <string name="tips_and_tricks_descr">常见问题、最近修改和其它内容。</string>
     <string name="faq_item_description">常见问题</string>
@@ -2398,7 +2398,7 @@
     <string name="shared_string_added">已添加</string>
     <string name="marker_activated">标记%s 已激活。</string>
     <string name="one_tap_active_descr">点击地图上的标记将其移动到活动标记的顶端, 而不打开上下文菜单。</string>
-    <string name="one_tap_active">一个点击激活</string>
+    <string name="one_tap_active">\'一个点击\'激活</string>
     <string name="empty_state_av_notes">做笔记!</string>
     <string name="empty_state_av_notes_desc">使用小部件或上下文菜单, 在地图上的每个点添加音频、视频或照片注释。</string>
     <string name="notes_by_date">按日期说明</string>
@@ -2724,8 +2724,26 @@
     <string name="shared_string_travel_book">旅游书</string>
     <string name="download_images">下载图片</string>
     <string name="rendering_value_black_name">黑色</string>
-    <string name="rendering_attr_surface_wood_name"/>
+    <string name="rendering_attr_surface_wood_name">木</string>
     <string name="app_mode_subway">地铁</string>
     <string name="app_mode_horse">马</string>
     <string name="shared_string_color_magenta">品红色</string>
+    <string name="go_to_next_field">下个栏位</string>
+    <string name="shared_string_dont">别</string>
+    <string name="download_file">下载文件</string>
+    <string name="start_editing">开始编辑</string>
+    <string name="points_of_interests">兴趣点（POI）</string>
+    <string name="shared_string_capacity">容量</string>
+    <string name="rendering_attr_surface_metal_name">金属</string>
+    <string name="rendering_attr_highway_class_path_name">路径</string>
+    <string name="app_mode_helicopter">直升机</string>
+    <string name="app_mode_skiing">滑雪</string>
+    <string name="base_profile_descr_ski">滑雪</string>
+    <string name="routing_profile_ski">滑雪</string>
+    <string name="profile_type_descr_string">类型：%s</string>
+    <string name="profile_alert_need_save_title">保存更改</string>
+    <string name="shared_string_min_speed">最低速率</string>
+    <string name="shared_string_max_speed">最高速率</string>
+    <string name="default_speed_setting_title">默认速率</string>
+    <string name="shared_string_default">默认</string>
 </resources>

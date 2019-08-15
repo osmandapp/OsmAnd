@@ -3204,4 +3204,6 @@ Pôr do Sol: %2$s</string>
     <string name="new_route_calculated_dist_dbg">Rota: distância %s, tempo do rota %s
 \nCálculo: %.1f sec, %d estradas, %d azulejos)</string>
     <string name="lang_oc">Occitano</string>
+    <string name="app_mode_wagon">Vagão</string>
+    <string name="app_mode_pickup_truck">Caminhonete</string>
 </resources>

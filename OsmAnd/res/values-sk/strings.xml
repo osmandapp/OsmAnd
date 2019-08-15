@@ -3206,4 +3206,6 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="new_route_calculated_dist_dbg">Trasa: vzdialenosť %s, potrebný čas %s 
 \nVýpočet: %.1f sekúnd, %d ciest, %d dlaždíc)</string>
     <string name="lang_oc">Okcitánsky</string>
+    <string name="app_mode_wagon">Dodávkové auto</string>
+    <string name="app_mode_pickup_truck">Pickup auto</string>
 </resources>
