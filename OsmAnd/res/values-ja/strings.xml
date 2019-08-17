@@ -1002,7 +1002,7 @@ POIの更新は利用できません</string>
     <string name="search_position_map_view">マップ画面中心</string>
     <string name="select_search_position">検索基点:</string>
     <string name="context_menu_item_search">近隣を検索</string>
-    <string name="shared_string_save_as_gpx">新規としてGPX経路を保存</string>
+    <string name="shared_string_save_as_gpx">GPX経路を新規保存</string>
     <string name="route_successfully_saved_at">ルートを「%1$s」として保存しました。</string>
     <string name="filename_input">ファイル名: </string>
     <string name="file_with_name_already_exist">同じ名前のファイルが既に存在します。</string>
@@ -2544,11 +2544,11 @@ POIの更新は利用できません</string>
     <string name="save_as_line">線として保存</string>
     <string name="route_point">ルートポイント</string>
     <string name="edit_line">線の編集</string>
-    <string name="add_point_before">その前にポイントを追加する</string>
-    <string name="add_point_after">その後にポイントを追加する</string>
+    <string name="add_point_before">選択地点の前に追加</string>
+    <string name="add_point_after">選択地点の後に追加</string>
     <string name="shared_string_options">オプション</string>
     <string name="measurement_tool_snap_to_road_descr">OsmAndは、選択したプロファイルのルートにポイントを接続します。</string>
-    <string name="measurement_tool_save_as_new_track_descr">そのルートポイントを点または線として保存できます。</string>
+    <string name="measurement_tool_save_as_new_track_descr">選択した地点をルートポイントまたは線として保存できます。</string>
     <string name="add_line">線の追加</string>
     <string name="wrong_input">入力が間違っています</string>
     <string name="enter_new_name">新しい名前を入力</string>
