@@ -54,17 +54,6 @@ public class OsmandInAppPurchaseActivity extends AppCompatActivity implements In
 		deinitInAppPurchaseHelper();
 	}
 
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		// Pass on the activity result to the helper for handling
-		if (purchaseHelper == null || !purchaseHelper.onActivityResultHandled(requestCode, resultCode, data)) {
-			// not handled, so handle it ourselves (here's where you'd
-			// perform any handling of activity results not related to in-app
-			// billing...
-			super.onActivityResult(requestCode, resultCode, data);
-		}
-	}
-
 	private void initInAppPurchaseHelper() {
 		deinitInAppPurchaseHelper();
 

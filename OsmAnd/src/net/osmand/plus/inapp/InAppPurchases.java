@@ -7,10 +7,11 @@ import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.StyleSpan;
 
+import com.android.billingclient.api.SkuDetails;
+
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
-import net.osmand.plus.inapp.util.SkuDetails;
 import net.osmand.util.Algorithms;
 
 import java.text.NumberFormat;
@@ -122,13 +123,19 @@ public class InAppPurchases {
 		return liveUpdates;
 	}
 
-	public List<InAppPurchase> getAllInAppPurchases() {
+	public List<InAppPurchase> getAllInAppPurchases(boolean includeSubscriptions) {
 		List<InAppPurchase> purchases = new ArrayList<>();
 		purchases.add(fullVersion);
 		purchases.add(depthContours);
 		purchases.add(contourLines);
-		purchases.addAll(liveUpdates.getAllSubscriptions());
+		if (includeSubscriptions) {
+			purchases.addAll(liveUpdates.getAllSubscriptions());
+		}
 		return purchases;
+	}
+
+	public List<InAppSubscription> getAllInAppSubscriptions() {
+		return liveUpdates.getAllSubscriptions();
 	}
 
 	public boolean isFullVersion(String sku) {
