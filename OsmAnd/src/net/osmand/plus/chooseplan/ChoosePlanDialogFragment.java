@@ -353,7 +353,6 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 			for (final InAppSubscription s : visibleSubscriptions) {
 				InAppSubscriptionIntroductoryInfo introductoryInfo = s.getIntroductoryInfo();
 				boolean hasIntroductoryInfo = introductoryInfo != null;
-				CharSequence priceTitle = hasIntroductoryInfo ? introductoryInfo.getFormattedDescription(ctx) : s.getPrice(ctx);
 				CharSequence descriptionText = hasIntroductoryInfo ?
 						introductoryInfo.getDescriptionTitle(ctx) : s.getDescription(ctx, purchaseHelper.getMonthlyLiveUpdates());
 				if (s.isPurchased()) {
@@ -366,8 +365,10 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 					View buttonView = buttonPurchased.findViewById(R.id.button_view);
 					View buttonCancelView = buttonPurchased.findViewById(R.id.button_cancel_view);
 					View div = buttonPurchased.findViewById(R.id.div);
-					AppCompatImageView rightImage = buttonPurchased.findViewById(R.id.right_image);
+					AppCompatImageView rightImage = (AppCompatImageView) buttonPurchased.findViewById(R.id.right_image);
 
+					CharSequence priceTitle = hasIntroductoryInfo ?
+							introductoryInfo.getFormattedDescription(ctx, buttonTitle.getCurrentTextColor()) : s.getPrice(ctx);
 					title.setText(s.getTitle(ctx));
 					description.setText(descriptionText);
 					buttonTitle.setText(priceTitle);
@@ -395,13 +396,13 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 					buttonView = buttonCancel.findViewById(R.id.button_view);
 					buttonCancelView = buttonCancel.findViewById(R.id.button_cancel_view);
 					div = buttonCancel.findViewById(R.id.div);
-					rightImage = buttonPurchased.findViewById(R.id.right_image);
+					rightImage = (AppCompatImageView) buttonCancel.findViewById(R.id.right_image);
 
 					title.setText(getString(R.string.osm_live_payment_current_subscription));
 					description.setText(s.getRenewDescription(ctx));
 					buttonView.setVisibility(View.GONE);
 					buttonCancelView.setVisibility(View.VISIBLE);
-					buttonCancel.setOnClickListener(new OnClickListener() {
+					buttonCancelView.setOnClickListener(new OnClickListener() {
 						@Override
 						public void onClick(View v) {
 							manageSubscription(ctx, s.getSku());
@@ -426,9 +427,10 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 					boolean showSolidButton = !anyPurchasedOrIntroducted || hasIntroductoryInfo;
 					buttonView.setVisibility(!showSolidButton ? View.VISIBLE : View.GONE);
 					buttonExView.setVisibility(showSolidButton ? View.VISIBLE : View.GONE);
-
 					View div = button.findViewById(R.id.div);
 
+					CharSequence priceTitle = hasIntroductoryInfo ?
+							introductoryInfo.getFormattedDescription(ctx, buttonExTitle.getCurrentTextColor()) : s.getPrice(ctx);
 					title.setText(s.getTitle(ctx));
 					description.setText(descriptionText);
 					buttonTitle.setText(priceTitle);
