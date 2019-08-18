@@ -30,6 +30,9 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
+import android.support.v4.text.TextUtilsCompat;
+import android.support.v4.view.ViewCompat;
+import android.text.ParcelableSpan;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
@@ -60,6 +63,7 @@ import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import static android.content.Context.POWER_SERVICE;
@@ -575,5 +579,9 @@ public class AndroidUtils {
 		} else {
 			return baseString;
 		}
+	}
+
+	public static boolean isRTL() {
+		return TextUtilsCompat.getLayoutDirectionFromLocale(Locale.getDefault()) == ViewCompat.LAYOUT_DIRECTION_RTL;
 	}
 }
