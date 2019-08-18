@@ -3200,6 +3200,6 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="new_route_calculated_dist_dbg">Kurso: distanco %s, tempo: %s 
 \n(kalkulita en %.1f s, %d vojoj, %d kaheloj)</string>
     <string name="lang_oc">Okcitana</string>
-    <string name="app_mode_wagon">Ĉaro</string>
-    <string name="app_mode_pickup_truck">Pickup</string>
+    <string name="app_mode_wagon">Aŭto (kombino)</string>
+    <string name="app_mode_pickup_truck">Aŭto (pickup)</string>
 </resources>
