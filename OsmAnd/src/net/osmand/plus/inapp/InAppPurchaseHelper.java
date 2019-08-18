@@ -240,7 +240,7 @@ public class InAppPurchaseHelper {
 				}
 
 				@Override
-				public void onPurchasesUpdated(List<Purchase> purchases) {
+				public void onPurchasesUpdated(final List<Purchase> purchases) {
 
 					// Have we been disposed of in the meantime? If so, quit.
 					if (billingManager == null) {
@@ -252,6 +252,9 @@ public class InAppPurchaseHelper {
 						List<String> skuInApps = new ArrayList<>();
 						for (InAppPurchase purchase : getInAppPurchases().getAllInAppPurchases(false)) {
 							skuInApps.add(purchase.getSku());
+						}
+						for (Purchase p : purchases) {
+							skuInApps.add(p.getSku());
 						}
 						billingManager.querySkuDetailsAsync(SkuType.INAPP, skuInApps, new SkuDetailsResponseListener() {
 							@Override
@@ -267,6 +270,9 @@ public class InAppPurchaseHelper {
 								List<String> skuSubscriptions = new ArrayList<>();
 								for (InAppSubscription subscription : getInAppPurchases().getAllInAppSubscriptions()) {
 									skuSubscriptions.add(subscription.getSku());
+								}
+								for (Purchase p : purchases) {
+									skuSubscriptions.add(p.getSku());
 								}
 
 								// Have we been disposed of in the meantime? If so, quit.
@@ -415,8 +421,7 @@ public class InAppPurchaseHelper {
 		private List<String> getAllOwnedSubscriptionSkus() {
 			List<String> result = new ArrayList<>();
 			for (Purchase p : billingManager.getPurchases()) {
-				InAppPurchase inAppPurchase = getInAppPurchases().getInAppPurchaseBySku(p.getSku());
-				if (inAppPurchase instanceof InAppSubscription) {
+				if (getInAppPurchases().getInAppSubscriptionBySku(p.getSku()) != null) {
 					result.add(p.getSku());
 				}
 			}
@@ -451,14 +456,14 @@ public class InAppPurchaseHelper {
 			 */
 
 			List<String> allOwnedSubscriptionSkus = getAllOwnedSubscriptionSkus();
-			for (InAppPurchase p : getLiveUpdates().getAllSubscriptions()) {
-				if (hasDetails(p.getSku())) {
-					Purchase purchase = getPurchase(p.getSku());
-					SkuDetails liveUpdatesDetails = getSkuDetails(p.getSku());
+			for (InAppSubscription s : getLiveUpdates().getAllSubscriptions()) {
+				if (hasDetails(s.getSku())) {
+					Purchase purchase = getPurchase(s.getSku());
+					SkuDetails liveUpdatesDetails = getSkuDetails(s.getSku());
 					if (liveUpdatesDetails != null) {
-						fetchInAppPurchase(p, liveUpdatesDetails, purchase);
+						fetchInAppPurchase(s, liveUpdatesDetails, purchase);
 					}
-					allOwnedSubscriptionSkus.remove(p.getSku());
+					allOwnedSubscriptionSkus.remove(s.getSku());
 				}
 			}
 			for (String sku : allOwnedSubscriptionSkus) {

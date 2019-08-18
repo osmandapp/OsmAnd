@@ -70,7 +70,7 @@
 				android:layout_gravity="center"
 				android:layout_marginStart="@dimen/list_header_padding"
 				android:layout_marginLeft="@dimen/list_header_padding"
-				android:src="@drawable/ic_action_singleselect" />
+				android:src="@drawable/img_feature_purchased" />
 
 		</LinearLayout>
 

@@ -1,10 +1,11 @@
 package net.osmand.plus.inapp;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Typeface;
+import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
@@ -144,6 +145,16 @@ public class InAppPurchases {
 
 	public List<InAppSubscription> getAllInAppSubscriptions() {
 		return liveUpdates.getAllSubscriptions();
+	}
+
+	@Nullable
+	public InAppSubscription getInAppSubscriptionBySku(@NonNull String sku) {
+		for (InAppSubscription s : liveUpdates.getAllSubscriptions()) {
+			if (sku.startsWith(s.getSkuNoVersion())) {
+				return s;
+			}
+		}
+		return null;
 	}
 
 	public boolean isFullVersion(String sku) {
@@ -570,7 +581,7 @@ public class InAppPurchases {
 			return ctx.getString(R.string.get_discount_title, totalPeriods, unitStr, discountPercent + "%");
 		}
 
-		public CharSequence getFormattedDescription(@NonNull Context ctx) {
+		public CharSequence getFormattedDescription(@NonNull Context ctx, @ColorInt int textColor) {
 			long totalPeriods = getTotalPeriods();
 			String singleUnitStr = getUnitString(ctx).toLowerCase();
 			String unitStr = getTotalUnitsString(ctx, false).toLowerCase();
@@ -614,9 +625,10 @@ public class InAppPurchases {
 			SpannableStringBuilder thenPart = new SpannableStringBuilder(ctx.getString(R.string.get_discount_second_part, originalPricePeriod));
 			Typeface typefaceRegular = FontCache.getRobotoRegular(ctx);
 			Typeface typefaceBold = FontCache.getRobotoMedium(ctx);
+			mainPart.setSpan(new ForegroundColorSpan(textColor), 0, mainPart.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 			mainPart.setSpan(new CustomTypefaceSpan(typefaceBold), 0, mainPart.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-			int textColor = ContextCompat.getColor(ctx, R.color.white_50_transparent);
-			thenPart.setSpan(new ForegroundColorSpan(textColor), 0, thenPart.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			int secondaryTextColor = Color.argb(128, Color.red(textColor), Color.green(textColor), Color.blue(textColor));
+			thenPart.setSpan(new ForegroundColorSpan(secondaryTextColor), 0, thenPart.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 			thenPart.setSpan(new CustomTypefaceSpan(typefaceRegular), 0, thenPart.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
 			return new SpannableStringBuilder(mainPart).append("\n").append(thenPart);
