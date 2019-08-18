@@ -11,6 +11,27 @@
 	Thx - Hardy
 
 -->
+    <string name="day">Day</string>
+    <string name="days_2_4">Days</string>
+    <string name="days_5">Days</string>
+    <string name="week">Week</string>
+    <string name="weeks_2_4">Weeks</string>
+    <string name="weeks_5">Weeks</string>
+    <string name="month">Month</string>
+    <string name="months_2_4">Months</string>
+    <string name="months_5">Months</string>
+    <string name="year">Year</string>
+    <string name="years_2_4">Years</string>
+    <string name="years_5">Years</string>
+    <string name="months_3">Three months</string>
+    <string name="price_free">Free</string>
+    <string name="get_discount_title">Get %1$d %2$s at %3$s off.</string>
+    <string name="get_free_trial_title">Start your %1$d %2$s free trial.</string>
+    <string name="get_discount_first_part">%1$s for first %2$s</string>
+    <string name="get_discount_first_few_part">%1$s for first %2$s</string>
+    <string name="get_discount_second_part">then %1$s</string>
+    <string name="cancel_subscription">Cancel subscription</string>
+    <string name="price_and_discount">%1$s • Save %2$s</string>
     <string name="app_mode_wagon">Wagon</string>
     <string name="app_mode_pickup_truck">Pickup truck</string>
     <string name="shared_string_default">Default</string>

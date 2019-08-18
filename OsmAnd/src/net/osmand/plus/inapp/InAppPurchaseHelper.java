@@ -27,6 +27,7 @@ import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase.PurchaseState;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchaseLiveUpdatesOldSubscription;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
+import net.osmand.plus.inapp.InAppPurchases.InAppSubscriptionIntroductoryInfo;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscriptionList;
 import net.osmand.plus.inapp.util.BillingManager;
 import net.osmand.plus.inapp.util.BillingManager.BillingUpdatesListener;
@@ -39,6 +40,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.ref.WeakReference;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -603,7 +605,26 @@ public class InAppPurchaseHelper {
 		String subscriptionPeriod = skuDetails.getSubscriptionPeriod();
 		if (!Algorithms.isEmpty(subscriptionPeriod)) {
 			if (inAppPurchase instanceof InAppSubscription) {
-				((InAppSubscription) inAppPurchase).setSubscriptionPeriod(subscriptionPeriod);
+				try {
+					((InAppSubscription) inAppPurchase).setSubscriptionPeriodString(subscriptionPeriod);
+				} catch (ParseException e) {
+					LOG.error(e);
+				}
+			}
+		}
+		if (inAppPurchase instanceof InAppSubscription) {
+			String introductoryPrice = skuDetails.getIntroductoryPrice();
+			String introductoryPricePeriod = skuDetails.getIntroductoryPricePeriod();
+			String introductoryPriceCycles = skuDetails.getIntroductoryPriceCycles();
+			long introductoryPriceAmountMicros = skuDetails.getIntroductoryPriceAmountMicros();
+			if (!Algorithms.isEmpty(introductoryPrice)) {
+				InAppSubscription s = (InAppSubscription) inAppPurchase;
+				try {
+					s.setIntroductoryInfo(new InAppSubscriptionIntroductoryInfo(s, introductoryPrice,
+							introductoryPriceAmountMicros, introductoryPricePeriod, introductoryPriceCycles));
+				} catch (ParseException e) {
+					LOG.error(e);
+				}
 			}
 		}
 	}
