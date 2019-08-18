@@ -155,7 +155,7 @@
     <string name="asap">So bald wie möglich</string>
     <string name="route_roundabout">Kreisverkehr: Nehmen Sie die %1$d Ausfahrt, dann</string>
     <string name="route_kl">Links halten, dann</string>
-    <string name="route_kr">Rechts halten, dann</string>
+    <string name="route_kr">rechts halten, dann</string>
     <string name="rendering_attr_noPolygons_description">Unterdrückt die Anzeige aller Flächenelemente in der Karte.</string>
     <string name="rendering_attr_noPolygons_name">Flächen</string>
     <string name="rendering_attr_appMode_description">Optimierung der Kartendarstellung für</string>
@@ -426,7 +426,7 @@
 		\n\tZur Verwendung aktivieren: \'Menu\' → \'Karte konfigurieren\' → \'Kartenquelle…\' → \'Offline-Vektor-Karten\'.</string>
     <string name="choose_audio_stream">Navi-Sprachausgabe</string>
     <string name="choose_audio_stream_descr">Lautsprecher für Sprachansagen auswählen.</string>
-    <string name="voice_stream_voice_call">Wie Anrufe (über Bluetooth auch zur Stereoanlage im Auto)</string>
+    <string name="voice_stream_voice_call">Wie Anrufe (unterbricht Bluetooth Verbindung zum Autoradio)</string>
     <string name="voice_stream_notification">Wie Benachrichtigungen</string>
     <string name="voice_stream_music">Wie Medien/Navigation</string>
     <string name="warning_tile_layer_not_downloadable">Die App kann die Kartenebene %1$s nicht herunterladen, eine Neuinstallation könnte helfen.</string>
@@ -3224,4 +3224,6 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="lang_oc">Okzitanisch</string>
     <string name="app_mode_wagon">Wagen</string>
     <string name="app_mode_pickup_truck">Kleintransporter</string>
+    <string name="new_route_calculated_dist_dbg">Route: Entfernung %s, Fahrzeit%s
+\nBerechnung: %.1f Sek.,%d Straßen,%d Kacheln)</string>
 </resources>

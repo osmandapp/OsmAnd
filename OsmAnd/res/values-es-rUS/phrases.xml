@@ -611,7 +611,7 @@
     <string name="poi_craft_locksmith">Cerrajero</string>
     <string name="poi_craft_key_cutter">Duplicación de llaves</string>
     <string name="poi_craft_metal_construction">Metalistería</string>
-    <string name="poi_craft_optician">Oculista;Óptica</string>
+    <string name="poi_craft_optician">Optometrista;Técnico óptico;Oculista;Óptica</string>
     <string name="poi_craft_painter">Pintor</string>
     <string name="poi_craft_parquet_layer">Parquetista</string>
     <string name="poi_craft_photographer">Fotógrafo</string>

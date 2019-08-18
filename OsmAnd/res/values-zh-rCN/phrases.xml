@@ -725,4 +725,12 @@
     <string name="poi_hgv_destination">目的地</string>
     <string name="poi_goods_yes">是</string>
     <string name="poi_disabled_yes">是</string>
+    <string name="poi_religion_type">宗教</string>
+    <string name="poi_veterinary">兽医的</string>
+    <string name="poi_audiologist">听力师</string>
+    <string name="poi_occupational_therapist">职业治疗师</string>
+    <string name="poi_optometrist">验光师</string>
+    <string name="poi_physiotherapist">物理治疗师</string>
+    <string name="poi_trees_rubber">橡胶</string>
+    <string name="poi_resource_mineral_oil">矿物油</string>
 </resources>

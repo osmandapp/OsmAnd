@@ -3212,4 +3212,7 @@
     <string name="shared_string_default">Padrão</string>
     <string name="new_route_calculated_dist_dbg">Rota: distância %s, tempo do roteador %s
 \nCálculo: %.1f seg, %d estradas, %d telhas)</string>
+    <string name="lang_oc">Occitano</string>
+    <string name="app_mode_wagon">Vagão</string>
+    <string name="app_mode_pickup_truck">Caminhonete</string>
 </resources>
