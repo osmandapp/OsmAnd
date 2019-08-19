@@ -3246,4 +3246,9 @@
     <string name="new_route_calculated_dist_dbg">مسیر: مسافت %s، زمان مسیریاب %s 
 \nمحاسبه: %.1f ثانیه، %d جاده، %d کاشی)</string>
     <string name="lang_oc">اُکسیتان</string>
+    <string name="day">روز</string>
+    <string name="week">هفته</string>
+    <string name="month">ماه</string>
+    <string name="year">سال</string>
+    <string name="price_free">رایگان</string>
 </resources>
