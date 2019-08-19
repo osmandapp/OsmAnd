@@ -772,7 +772,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="avoid_ferries">Éviter les ferries</string>
     <string name="avoid_in_routing_title">Éviter</string>
     <string name="avoid_in_routing_descr">Éviter les routes à péage, les voies non revêtues, les bateaux ferries.</string>
-    <string name="show_warnings_title">Annonces visuelles…</string>
+    <string name="show_warnings_title">Alertes visuelles…</string>
     <string name="show_warnings_descr">Paramétrer les avertissements de circulation (limites de vitesse, stops, ralentisseurs, tunnels), les radars et les informations sur les voies de circulation.</string>
     <string name="map_widget_fluorescent">Itinéraires fluorescents</string>
     <string name="map_widget_show_ruler">Échelle</string>
@@ -1011,12 +1011,12 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="intermediate_items_sort_by_distance">Optimiser</string>
     <string name="please_select_address">Sélectionnez d\'abord une ville ou une rue</string>
     <string name="context_menu_item_destination_point">Définir comme destination</string>
-    <string name="speak_street_names">Noms des rues (TTS)</string>
+    <string name="speak_street_names">Nom des rues (TTS)</string>
     <string name="about_version">Version :</string>
     <string name="driving_region_japan">Japon</string>
     <string name="driving_region_us">États-Unis d\'Amérique</string>
     <string name="driving_region_canada">Canada</string>
-    <string name="speak_speed_limit">Limitation de vitesse</string>
+    <string name="speak_speed_limit">Limitations de vitesse</string>
     <string name="shared_string_about">À propos</string>
     <string name="about_settings_descr">Note de version, licences, membres du projet</string>
     <string name="local_index_tile_data_zooms">Zooms téléchargés : %1$s</string>
@@ -1032,7 +1032,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="driving_region">Région de conduite</string>
     <string name="driving_region_europe_asia">Europe, Asie, Amérique latine et équivalent</string>
     <string name="driving_region_uk">Royaume-Uni, Inde et équivalents</string>
-    <string name="speak_title">Annonce…</string>
+    <string name="speak_title">Annoncer…</string>
     <string name="speak_cameras">Radars</string>
     <string name="speak_traffic_warnings">Alertes de trafic</string>
     <string name="osb_author_or_password_not_specified">Merci d\'indiquer votre nom d\'utilisateur et mot de passe OSM dans les paramètres</string>
@@ -1186,7 +1186,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="keep_informing_descr">Répéter les instructions de navigation à intervalles réguliers.</string>
     <string name="keep_informing">Répéter les instructions de navigation</string>
     <string name="navigation_intent_invalid">Format invalide : %s</string>
-    <string name="arrival_distance">Annonce de l\'arrivée</string>
+    <string name="arrival_distance">Annonce d\'arrivée</string>
     <string name="arrival_distance_descr">Quand souhaitez-vous être informé de l\'arrivée à destination ?</string>
     <string name="shared_string_share">Partager</string>
     <string name="share_fav_subject">Favoris partagés grâce à OsmAnd</string>
@@ -1237,7 +1237,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="sort_by_distance">Trier par distance</string>
     <string name="sort_by_name">Trier par nom</string>
     <string name="no_index_file_to_download">Aucun téléchargement trouvé, veuillez vérifier votre connexion Internet.</string>
-    <string name="none_selected_gpx">Aucun fichier GPX sélectionné. Pressez longuement sur un fichier pour le sélectionner.</string>
+    <string name="none_selected_gpx">"Aucun fichier GPX sélectionné. Appuyez  longuement sur un fichier pour le sélectionner."</string>
     <string name="local_index_select_gpx_file">Sélectionnez pour afficher</string>
     <string name="keep_navigation_service">Conserver</string>
     <string name="stop_navigation_service">Arrêter</string>
@@ -1247,8 +1247,8 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="map_preferred_locale_descr">Langue préférée des libellés sur la carte (en cas d\'indisponibilité affiche les noms anglais ou locaux).</string>
     <string name="map_preferred_locale">Langue préférée pour la carte</string>
     <string name="local_map_names">Noms locaux</string>
-    <string name="lang_sw">swahili</string>
-    <string name="lang_he">hébreux</string>
+    <string name="lang_sw">Swahili</string>
+    <string name="lang_he">Hébreu</string>
     <string name="forward">Suivant</string>
     <string name="home">Tableau de bord</string>
     <string name="live_monitoring_m_descr">Envoyer les positions à un service Web lorsque l\'enregistrement GPX est activé.</string>
@@ -1270,10 +1270,10 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="rendering_attr_showSurfaceGrade_name">Afficher la qualité des routes</string>
     <string name="rendering_attr_showSurfaces_name">Afficher la surface des routes</string>
     <string name="rendering_attr_showCycleRoutes_name">Afficher les itinéraires cyclables</string>
-    <string name="lang_fa">perse</string>
+    <string name="lang_fa">Persan</string>
     <string name="lang_al">albanais</string>
     <string name="lang_ar">Arabe</string>
-    <string name="lang_sc">sarde</string>
+    <string name="lang_sc">Sarde</string>
     <string name="lang_sr">Serbe (cyrillique)</string>
     <string name="lang_zh_cn">Chinois (simplifié)</string>
     <string name="lang_zh_tw">Chinois (traditionnel)</string>
@@ -1460,7 +1460,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="location_on_map">Position :\n Lat. %1$s\n Lon. %2$s</string>
     <string name="days_behind">jours passés</string>
     <string name="rename_failed">Échec du renommage.</string>
-    <string name="shared_string_currently_recording_track">Enregistrement de l\'itinéraire en cours</string>
+    <string name="shared_string_currently_recording_track">Enregistrement d\'itinéraire en cours</string>
     <string name="back_to_map">Retour à la carte</string>
     <string name="shared_string_selected">Sélectionné</string>
     <string name="track_points">Points de la trace</string>
@@ -2940,7 +2940,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="rendering_attr_highway_class_footway_name">Passerelle</string>
     <string name="rendering_attr_highway_class_track_name">Piste</string>
     <string name="rendering_attr_highway_class_bridleway_name">Passage piéton</string>
-    <string name="rendering_attr_highway_class_steps_name">Étape</string>
+    <string name="rendering_attr_highway_class_steps_name">Étapes</string>
     <string name="rendering_attr_highway_class_path_name">Chemin</string>
     <string name="rendering_attr_highway_class_cycleway_name">Voie cyclable</string>
     <string name="rendering_attr_undefined_name">Non défini</string>
@@ -3182,4 +3182,9 @@ représentant la zone : %1$s x %2$s</string>
     <string name="app_mode_campervan">Caravane</string>
     <string name="rendering_attr_showLez_description">Afficher les zones à faibles émissions sur la carte (n\'influe pas sur l\'itinéraire).</string>
     <string name="rendering_attr_showLez_name">Afficher les zones à faibles émissions</string>
+    <string name="new_route_calculated_dist_dbg">Itinéraire : distance %s, durée %s 
+\nCalculs : %.1f secondes, %d routes, %d tuiles)</string>
+    <string name="lang_oc">Occitan</string>
+    <string name="app_mode_wagon">Wagon</string>
+    <string name="app_mode_pickup_truck">Camionnette</string>
 </resources>

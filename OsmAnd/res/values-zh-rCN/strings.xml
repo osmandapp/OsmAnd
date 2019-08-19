@@ -187,7 +187,7 @@
     <string name="city_type_village">村</string>
     <string name="city_type_town">镇</string>
     <string name="city_type_city">城市</string>
-    <string name="shared_string_gpx_route">GPX 路径</string>
+    <string name="shared_string_gpx_route">GPX路径</string>
     <string name="button_upgrade_osmandplus">升级OsmAnd+</string>
     <string name="shared_string_rename">重命名</string>
     <string name="shared_string_save_as_gpx">另存为 GPX 轨迹</string>
@@ -543,7 +543,7 @@
     <string name="fav_export_confirmation">已存在上次导出的收藏夹文件。是否要替换它？</string>
     <string name="routing_settings_descr">指定导航选项。</string>
     <string name="index_settings">数据管理</string>
-    <string name="general_settings_descr">配置应用程序的显示与公用设置</string>
+    <string name="general_settings_descr">配置应用的显示与公用设置。</string>
     <string name="global_app_settings">应用程序全局设置</string>
     <string name="download_files_not_enough_space">可用空间不足以下载 %1$s MB (可用空间：%2$s)。</string>
     <string name="download_files_question_space">下载 {0} 个文件？
@@ -651,7 +651,7 @@
     <string name="filter_existing_indexes">已下载</string>
     <string name="shared_string_select_all">全部选中</string>
     <string name="fast_route_mode">最快路线</string>
-    <string name="fast_route_mode_descr">打开则规划最快路线，关闭则计算最短路线 </string>
+    <string name="fast_route_mode_descr">打开则规划最快路线，关闭则计算最短路线。</string>
     <string name="shared_string_download_map">下载地图</string>
     <string name="maps_could_not_be_downloaded">此地图无法下载</string>
     <string name="rendering_exception">渲染选中区域时发生错误</string>
@@ -961,7 +961,7 @@
     <string name="si_min_m">分钟/英里</string>
     <string name="si_nm_h">海里/小时 (节)</string>
     <string name="nm_h">浬里/时</string>
-    <string name="min_mile">分/米</string>
+    <string name="min_mile"></string>
     <string name="min_km">分/公里</string>
     <string name="m_s">米/秒</string>
     <string name="shared_string_navigation">导航</string>
@@ -1167,7 +1167,7 @@
     <string name="voice_provider_descr">为导航选择语音指引。</string>
     <string name="voice_provider">语音指引</string>
     <string name="choose_audio_stream">语音指引输出</string>
-    <string name="choose_audio_stream_descr">选择播放语音指引的扬声器</string>
+    <string name="choose_audio_stream_descr">选择播放语音指引的扬声器。</string>
     <string name="quick_action_navigation_voice_descr">点击动作按钮将会禁用或启用导航时的语音指引。</string>
     <string name="map_preferred_locale">地图偏好语言</string>
     <string name="map_preferred_locale_descr">地图上标签显示的偏好语言（如果不可用，将会切换至英文或者本地名称）</string>
@@ -1230,7 +1230,7 @@
     <string name="display_zoom_level">显示缩放等级：%1$s</string>
     <string name="online_map">在线地图</string>
     <string name="roads_only">仅道路</string>
-    <string name="device_memory"></string>
+    <string name="device_memory"/>
     <string name="first_usage_item">初次使用</string>
     <string name="tips_and_tricks_descr">常见问题、最近修改和其它内容。</string>
     <string name="faq_item_description">常见问题</string>
@@ -1379,7 +1379,7 @@
     <string name="routing_attr_driving_style_speed_name">更短的路径</string>
     <string name="routing_attr_driving_style_balance_name">平衡</string>
     <string name="routing_attr_driving_style_safety_name">偏好背街小路</string>
-    <string name="relief_smoothness_factor_descr">首选的地形︰ 平坦或丘陵。</string>
+    <string name="relief_smoothness_factor_descr">首选的地形：平坦或丘陵。</string>
     <string name="shared_string_slope">坡度</string>
     <string name="add_new_folder">添加新文件夹</string>
     <string name="route_points_category_name">转到这条路线上</string>
@@ -2398,7 +2398,7 @@
     <string name="shared_string_added">已添加</string>
     <string name="marker_activated">标记%s 已激活。</string>
     <string name="one_tap_active_descr">点击地图上的标记将其移动到活动标记的顶端, 而不打开上下文菜单。</string>
-    <string name="one_tap_active">一个点击激活</string>
+    <string name="one_tap_active">\'一个点击\'激活</string>
     <string name="empty_state_av_notes">做笔记!</string>
     <string name="empty_state_av_notes_desc">使用小部件或上下文菜单, 在地图上的每个点添加音频、视频或照片注释。</string>
     <string name="notes_by_date">按日期说明</string>
@@ -2724,8 +2724,27 @@
     <string name="shared_string_travel_book">旅游书</string>
     <string name="download_images">下载图片</string>
     <string name="rendering_value_black_name">黑色</string>
-    <string name="rendering_attr_surface_wood_name"/>
+    <string name="rendering_attr_surface_wood_name">木</string>
     <string name="app_mode_subway">地铁</string>
     <string name="app_mode_horse">马</string>
     <string name="shared_string_color_magenta">品红色</string>
+    <string name="go_to_next_field">下个栏位</string>
+    <string name="shared_string_dont">别</string>
+    <string name="download_file">下载文件</string>
+    <string name="start_editing">开始编辑</string>
+    <string name="points_of_interests">兴趣点（POI）</string>
+    <string name="shared_string_capacity">容量</string>
+    <string name="rendering_attr_surface_metal_name">金属</string>
+    <string name="rendering_attr_highway_class_path_name">路径</string>
+    <string name="app_mode_helicopter">直升机</string>
+    <string name="app_mode_skiing">滑雪</string>
+    <string name="base_profile_descr_ski">滑雪</string>
+    <string name="routing_profile_ski">滑雪</string>
+    <string name="profile_type_descr_string">类型：%s</string>
+    <string name="profile_alert_need_save_title">保存更改</string>
+    <string name="shared_string_min_speed">最低速率</string>
+    <string name="shared_string_max_speed">最高速率</string>
+    <string name="default_speed_setting_title">默认速率</string>
+    <string name="shared_string_default">默认</string>
+    <string name="transport_nearby_routes">之间</string>
 </resources>

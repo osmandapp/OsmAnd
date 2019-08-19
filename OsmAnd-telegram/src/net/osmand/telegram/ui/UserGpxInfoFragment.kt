@@ -156,14 +156,12 @@ class UserGpxInfoFragment : BaseDialogFragment() {
 		updateDateAndTimeButton()
 
 		liveBtn = mainView.findViewById<TextView>(R.id.live_btn).apply {
-			if (userId != telegramHelper.getCurrentUserId()) {
-				setOnClickListener {
-					val enabled = !liveTrackEnabled()
-					settings.updateLiveTrack(userId, chatId, deviceName, enabled)
-					updateLiveTrackBtn()
-					if (enabled) {
-						startHandler()
-					}
+			setOnClickListener {
+				val enabled = !liveTrackEnabled()
+				settings.updateLiveTrack(userId, chatId, deviceName, enabled)
+				updateLiveTrackBtn()
+				if (enabled) {
+					startHandler()
 				}
 			}
 		}

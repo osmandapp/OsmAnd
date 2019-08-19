@@ -94,4 +94,26 @@
     <string name="search_contacts_descr">Iskanje med skupinami in stiki</string>
     <string name="shared_string_search">Iskanje</string>
     <string name="shared_string_ok">V redu</string>
+    <string name="time_ago">nazaj</string>
+    <string name="shared_string_all">Vse</string>
+    <string name="shared_string_off">Izlključeno</string>
+    <string name="shared_string_install">Namesti</string>
+    <string name="shared_string_share">Skupna raba</string>
+    <string name="shared_string_back">Nazaj</string>
+    <string name="shared_string_continue">Nadaljuj</string>
+    <string name="shared_string_cancel">Prekliči</string>
+    <string name="shared_string_settings">Nastavitve</string>
+    <string name="osmand_service">Delovanje v ozadju</string>
+    <string name="shared_string_map">Zemljevid</string>
+    <string name="average_altitude">Povprečna nadmorska višina</string>
+    <string name="average_speed">Povprečna hitrost</string>
+    <string name="shared_string_update">Posodobitev</string>
+    <string name="received_gps_points">Prejetih točk GPX: %1$s</string>
+    <string name="altitude">Višina</string>
+    <string name="shared_string_enable">Omogoči</string>
+    <string name="shared_string_select">Izberi</string>
+    <string name="timeline_no_data">Ni podatkov</string>
+    <string name="shared_string_end">Končaj</string>
+    <string name="shared_string_start">Začni</string>
+    <string name="shared_string_apply">Uveljavi</string>
 </resources>

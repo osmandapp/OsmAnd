@@ -45,6 +45,7 @@ import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseListener;
 import net.osmand.plus.inapp.InAppPurchaseHelper.InAppPurchaseTaskType;
 import net.osmand.plus.inapp.InAppPurchases.InAppPurchase;
 import net.osmand.plus.inapp.InAppPurchases.InAppSubscription;
+import net.osmand.plus.inapp.InAppPurchases.InAppSubscriptionIntroductoryInfo;
 import net.osmand.plus.liveupdates.SubscriptionFragment;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.widgets.TextViewEx;
@@ -341,38 +342,41 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 		} else if (osmLiveCardButtonsContainer != null) {
 			osmLiveCardButtonsContainer.removeAllViews();
 			View lastBtn = null;
-			InAppSubscription monthlyLiveUpdates = purchaseHelper.getMonthlyLiveUpdates();
-			double regularMonthlyPrice = monthlyLiveUpdates.getPriceValue();
 			List<InAppSubscription> visibleSubscriptions = purchaseHelper.getLiveUpdates().getVisibleSubscriptions();
-			boolean anyPurchased = false;
+			boolean anyPurchasedOrIntroducted = false;
 			for (final InAppSubscription s : visibleSubscriptions) {
-				if (s.isPurchased()) {
-					anyPurchased = true;
+				if (s.isPurchased() || s.getIntroductoryInfo() != null) {
+					anyPurchasedOrIntroducted = true;
 					break;
 				}
 			}
 			for (final InAppSubscription s : visibleSubscriptions) {
+				InAppSubscriptionIntroductoryInfo introductoryInfo = s.getIntroductoryInfo();
+				boolean hasIntroductoryInfo = introductoryInfo != null;
+				CharSequence descriptionText = hasIntroductoryInfo ?
+						introductoryInfo.getDescriptionTitle(ctx) : s.getDescription(ctx, purchaseHelper.getMonthlyLiveUpdates());
 				if (s.isPurchased()) {
 					View buttonPurchased = inflate(R.layout.purchase_dialog_card_button_active_ex, osmLiveCardButtonsContainer);
-					View buttonContainer = buttonPurchased.findViewById(R.id.button_container);
 					TextViewEx title = (TextViewEx) buttonPurchased.findViewById(R.id.title);
 					TextViewEx description = (TextViewEx) buttonPurchased.findViewById(R.id.description);
+					TextViewEx descriptionContribute = (TextViewEx) buttonPurchased.findViewById(R.id.description_contribute);
+					descriptionContribute.setVisibility(s.isDonationSupported() ? View.VISIBLE : View.GONE);
 					TextViewEx buttonTitle = (TextViewEx) buttonPurchased.findViewById(R.id.button_title);
 					View buttonView = buttonPurchased.findViewById(R.id.button_view);
 					View buttonCancelView = buttonPurchased.findViewById(R.id.button_cancel_view);
-					View divTop = buttonPurchased.findViewById(R.id.div_top);
-					View divBottom = buttonPurchased.findViewById(R.id.div_bottom);
 					View div = buttonPurchased.findViewById(R.id.div);
+					AppCompatImageView rightImage = (AppCompatImageView) buttonPurchased.findViewById(R.id.right_image);
 
+					CharSequence priceTitle = hasIntroductoryInfo ?
+							introductoryInfo.getFormattedDescription(ctx, buttonTitle.getCurrentTextColor()) : s.getPrice(ctx);
 					title.setText(s.getTitle(ctx));
-					description.setText(s.getDescription(ctx));
-					buttonTitle.setText(s.getPrice(ctx));
+					description.setText(descriptionText);
+					buttonTitle.setText(priceTitle);
 					buttonView.setVisibility(View.VISIBLE);
 					buttonCancelView.setVisibility(View.GONE);
 					buttonPurchased.setOnClickListener(null);
-					divTop.setVisibility(View.VISIBLE);
-					div.setVisibility(View.VISIBLE);
-					divBottom.setVisibility(View.GONE);
+					div.setVisibility(View.GONE);
+					rightImage.setVisibility(View.GONE);
 					if (s.isDonationSupported()) {
 						buttonPurchased.setOnClickListener(new OnClickListener() {
 							@Override
@@ -387,89 +391,52 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 					osmLiveCardButtonsContainer.addView(buttonPurchased);
 
 					View buttonCancel = inflate(R.layout.purchase_dialog_card_button_active_ex, osmLiveCardButtonsContainer);
-					buttonContainer = buttonCancel.findViewById(R.id.button_container);
 					title = (TextViewEx) buttonCancel.findViewById(R.id.title);
 					description = (TextViewEx) buttonCancel.findViewById(R.id.description);
 					buttonView = buttonCancel.findViewById(R.id.button_view);
 					buttonCancelView = buttonCancel.findViewById(R.id.button_cancel_view);
-					divTop = buttonCancel.findViewById(R.id.div_top);
-					divBottom = buttonCancel.findViewById(R.id.div_bottom);
 					div = buttonCancel.findViewById(R.id.div);
+					rightImage = (AppCompatImageView) buttonCancel.findViewById(R.id.right_image);
 
 					title.setText(getString(R.string.osm_live_payment_current_subscription));
 					description.setText(s.getRenewDescription(ctx));
 					buttonView.setVisibility(View.GONE);
 					buttonCancelView.setVisibility(View.VISIBLE);
-					buttonCancel.setOnClickListener(new OnClickListener() {
+					buttonCancelView.setOnClickListener(new OnClickListener() {
 						@Override
 						public void onClick(View v) {
 							manageSubscription(ctx, s.getSku());
 						}
 					});
-					divTop.setVisibility(View.GONE);
-					div.setVisibility(View.GONE);
-					divBottom.setVisibility(View.VISIBLE);
+					div.setVisibility(View.VISIBLE);
+					rightImage.setVisibility(View.VISIBLE);
 					osmLiveCardButtonsContainer.addView(buttonCancel);
-
-					if (lastBtn != null) {
-						View lastBtnDiv = lastBtn.findViewById(R.id.div);
-						if (lastBtnDiv != null) {
-							lastBtnDiv.setVisibility(View.GONE);
-						}
-						View lastBtnDivBottom = lastBtn.findViewById(R.id.div_bottom);
-						if (lastBtnDivBottom != null) {
-							lastBtnDivBottom.setVisibility(View.GONE);
-						}
-					}
 					lastBtn = buttonCancel;
 
 				} else {
 					View button = inflate(R.layout.purchase_dialog_card_button_ex, osmLiveCardButtonsContainer);
 					TextViewEx title = (TextViewEx) button.findViewById(R.id.title);
 					TextViewEx description = (TextViewEx) button.findViewById(R.id.description);
+					TextViewEx descriptionContribute = (TextViewEx) button.findViewById(R.id.description_contribute);
+					descriptionContribute.setVisibility(s.isDonationSupported() ? View.VISIBLE : View.GONE);
 
 					View buttonView = button.findViewById(R.id.button_view);
 					View buttonExView = button.findViewById(R.id.button_ex_view);
 					TextViewEx buttonTitle = (TextViewEx) button.findViewById(R.id.button_title);
 					TextViewEx buttonExTitle = (TextViewEx) button.findViewById(R.id.button_ex_title);
-					buttonView.setVisibility(anyPurchased ? View.VISIBLE : View.GONE);
-					buttonExView.setVisibility(!anyPurchased ? View.VISIBLE : View.GONE);
-
-					TextViewEx discountRegular = (TextViewEx) button.findViewById(R.id.discount_banner_regular);
-					TextViewEx discountActive = (TextViewEx) button.findViewById(R.id.discount_banner_active);
+					boolean showSolidButton = !anyPurchasedOrIntroducted || hasIntroductoryInfo;
+					buttonView.setVisibility(!showSolidButton ? View.VISIBLE : View.GONE);
+					buttonExView.setVisibility(showSolidButton ? View.VISIBLE : View.GONE);
 					View div = button.findViewById(R.id.div);
 
+					CharSequence priceTitle = hasIntroductoryInfo ?
+							introductoryInfo.getFormattedDescription(ctx, buttonExTitle.getCurrentTextColor()) : s.getPrice(ctx);
 					title.setText(s.getTitle(ctx));
-					description.setText(s.getDescription(ctx));
-					buttonTitle.setText(s.getPrice(ctx));
-					buttonExTitle.setText(s.getPrice(ctx));
+					description.setText(descriptionText);
+					buttonTitle.setText(priceTitle);
+					buttonExTitle.setText(priceTitle);
 
-					if (regularMonthlyPrice > 0 && s.getMonthlyPriceValue() > 0 && s.getMonthlyPriceValue() < regularMonthlyPrice) {
-						int discount = (int) ((1 - s.getMonthlyPriceValue() / regularMonthlyPrice) * 100d);
-						String discountStr = discount + "%";
-						if (discount > 50) {
-							discountActive.setText(String.format(" %s ", getString(R.string.osm_live_payment_discount_descr, discountStr)));
-							discountActive.setVisibility(View.VISIBLE);
-							discountRegular.setVisibility(View.GONE);
-						} else if (discount > 0) {
-							discountActive.setVisibility(View.GONE);
-							discountRegular.setText(String.format(" %s ", getString(R.string.osm_live_payment_discount_descr, discountStr)));
-							discountRegular.setVisibility(View.VISIBLE);
-						} else {
-							discountActive.setVisibility(View.GONE);
-							discountRegular.setVisibility(View.GONE);
-						}
-					} else {
-						discountActive.setVisibility(View.GONE);
-						discountRegular.setVisibility(View.GONE);
-					}
-					button.setOnClickListener(new OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							subscribe(s.getSku());
-						}
-					});
-					if (anyPurchased) {
+					if (!showSolidButton) {
 						buttonView.setOnClickListener(new OnClickListener() {
 							@Override
 							public void onClick(View v) {
@@ -493,10 +460,6 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 				View div = lastBtn.findViewById(R.id.div);
 				if (div != null) {
 					div.setVisibility(View.GONE);
-				}
-				View divBottom = lastBtn.findViewById(R.id.div_bottom);
-				if (divBottom != null) {
-					divBottom.setVisibility(View.GONE);
 				}
 			}
 			if (osmLiveCardProgress != null) {

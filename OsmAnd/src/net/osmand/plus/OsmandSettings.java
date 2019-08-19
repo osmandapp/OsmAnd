@@ -2830,7 +2830,7 @@ public class OsmandSettings {
 
 
 	public enum DayNightMode {
-		AUTO(R.string.daynight_mode_auto, R.drawable.ic_action_map_sunst),
+		AUTO(R.string.daynight_mode_auto, R.drawable.ic_action_map_sunset),
 		DAY(R.string.daynight_mode_day, R.drawable.ic_action_map_day),
 		NIGHT(R.string.daynight_mode_night, R.drawable.ic_action_map_night),
 		SENSOR(R.string.daynight_mode_sensor, R.drawable.ic_action_map_light_sensor);

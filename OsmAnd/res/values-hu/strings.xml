@@ -3095,7 +3095,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="rendering_attr_tracktype_grade5_name">Laza</string>
     <string name="routeInfo_tracktype_name">Burkolat szilárdsága</string>
     <string name="shared_string_file_is_saved">%s elmentve</string>
-    <string name="shared_string_open_track">Nyitott nyomvonal</string>
+    <string name="shared_string_open_track">Nyomvonal megnyitása</string>
     <string name="shared_string_track_is_saved">%s nyomvonal elmentve</string>
     <string name="select_nav_profile_dialog_title">Navigációs mód kijelölése</string>
     <string name="base_profile_descr_car">Személyautó, teherautó, motorkerékpár</string>

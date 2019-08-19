@@ -1411,7 +1411,7 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="shared_string_ellipsis">…</string>
     <string name="shared_string_ok">OK</string>
     <string name="shared_string_cancel">Annulla</string>
-    <string name="shared_string_dismiss">Scarta</string>
+    <string name="shared_string_dismiss">Elimina</string>
     <string name="shared_string_yes">Sì</string>
     <string name="shared_string_no">No</string>
     <string name="shared_string_on">Acceso</string>
@@ -2913,7 +2913,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="routeInfo_road_types_name">Tipi di strade</string>
     <string name="show_more">Mostra di più</string>
     <string name="tracks_on_map">Tracciati visualizzati</string>
-    <string name="quick_action_show_hide_gpx_tracks">Mostra/Nascondi Tracciati GPX</string>
+    <string name="quick_action_show_hide_gpx_tracks">Mostra/Nascondi tracce GPX</string>
     <string name="quick_action_gpx_tracks_hide">Nascondi Tracciati GPX</string>
     <string name="quick_action_gpx_tracks_show">Mostra Tracciati GPX</string>
     <string name="quick_action_day_night_mode">Modalità %s</string>
@@ -3046,9 +3046,9 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="choose_data_to_share">Scegli che tipo di dati vuoi condividere:</string>
     <string name="downloaded_maps">Mappe scaricate</string>
     <string name="visited_screens">Schermi visitati</string>
-    <string name="collected_data_descr">Seleziona i dati che stai condividendo a OsmAnd.</string>
-    <string name="downloaded_maps_collect_descr">Raccogliamo questi dati per capire quali mappe di quali regioni e paesi sono più popolari.</string>
-    <string name="visited_screens_collect_descr">Collezioniamo questi dati per capire quali funzionalità di OSmAnd sono le più popolari.</string>
+    <string name="collected_data_descr">Scegli quali dati permetti a OsmAnd di condividere.</string>
+    <string name="downloaded_maps_collect_descr">Aiutaci a capire quali mappe di quali regioni e paesi sono più popolari.</string>
+    <string name="visited_screens_collect_descr">Aiutaci a capire quali funzionalità di OSmAnd sono le più popolari.</string>
     <string name="privacy_and_security_change_descr">Tappando \"Consenti\" accetti la nostra %1$s</string>
     <string name="settings_privacy_and_security">Privacy e sicurezza</string>
     <string name="shared_string_no_thank_you">No, grazie</string>
@@ -3147,7 +3147,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="routing_attr_piste_type_skitour_name">Scialpinismo</string>
     <string name="routing_attr_piste_type_skitour_description">Percorsi per lo sci alpinismo.</string>
     <string name="routing_attr_piste_type_sled_description">Piste per slittino.</string>
-    <string name="shared_string_crash">Crash</string>
+    <string name="shared_string_crash">Interruzione</string>
     <string name="rate_dialog_descr">Per favore dedicaci 30 secondi del tuo tempo condividendo il tuo feedback e dando un voto al nostro lavoro si Google Play.</string>
     <string name="button_rate">Dai un voto</string>
     <string name="shared_string_privacy_policy">Politica della privacy</string>
@@ -3158,7 +3158,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="show_compass_ruler">Mostra il righello della bussola</string>
     <string name="hide_compass_ruler">Nascondi il righello della bussola</string>
     <string name="settings_derived_routing_mode_string">Modo di utilizzo, derivato da: %s</string>
-    <string name="select_base_profile_dialog_message">Basa il tuo profilo personalizzato su uno di quelli di default dell\'applicazione, questo definisce le impostazioni di base come la visibilità dei widget, e le unità di misura di velocità e distanza.Queste sono i profili di default dell\'applicazione, assieme a esempi di profili personalizzati possono essere estesi a:</string>
+    <string name="select_base_profile_dialog_message">Basa il tuo profilo personalizzato su uno di quelli di default dell\'applicazione, questo definisce le impostazioni di base come la visibilità dei widget, e le unità di misura di velocità e distanza. Questi sono i profili di default dell\'applicazione, assieme a esempi di profili personalizzati possono essere estesi a:</string>
     <string name="base_profile_descr_public_transport">Tutti i tipi di trasporto pubblico</string>
     <string name="special_routing_type">Calcolo del percorso speciale</string>
     <string name="third_party_routing_type">Calcolo del percorso di terze parti</string>
@@ -3176,7 +3176,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="routing_attr_allow_skating_only_name">Permetti percorsi dedicati al pattinaggio</string>
     <string name="routing_attr_difficulty_preference_description">Preferisci percorsi di questa difficoltà, benché percorsi di maggiore o minore difficoltà sono ancora possibili se più brevi.</string>
     <string name="turn_screen_on_router">Accendi alla svolta</string>
-    <string name="turn_screen_on_time_descr">Imposta il tempo di accensione dello schermo alla svolta</string>
+    <string name="turn_screen_on_time_descr">Imposta il tempo di accensione dello schermo.</string>
     <string name="turn_screen_on_sensor">Usa il sensore di prossimità</string>
     <string name="turn_screen_on_sensor_descr">Passa la mano davanti il display per accendere lo schermo durante la navigazione.</string>
     <string name="routing_attr_freeride_policy_description">Freeride e fuoripista sono percorsi e passaggi non ufficiali. Tipicamente non curati, non sguarniti dai funzionari e non controllati la sera. Entrare a proprio rischio e pericolo.</string>
@@ -3208,5 +3208,9 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="app_mode_campervan">Camper</string>
     <string name="rendering_attr_showLez_description">Mostra sulla mappa le zone a Basse Emissioni. Non influisce sul calcolo del percorso.</string>
     <string name="rendering_attr_showLez_name">Mostra le zone a Basse Emissioni</string>
-    <string name="temporary_conditional_routing">Tieni conto delle limitazioni tempooranee</string>
+    <string name="temporary_conditional_routing">Tieni conto delle limitazioni temporanee</string>
+    <string name="app_mode_camper">Camper</string>
+    <string name="shared_string_default">Predefinita</string>
+    <string name="app_mode_wagon">Carrozza</string>
+    <string name="app_mode_pickup_truck">Fuoristrada pickup</string>
 </resources>

@@ -1,5 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="day">День</string>
+    <string name="days_2_4">Дня</string>
+    <string name="days_5">Дней</string>
+    <string name="week">Неделя</string>
+    <string name="weeks_2_4">Недели</string>
+    <string name="weeks_5">Недель</string>
+    <string name="month">Месяц</string>
+    <string name="months_2_4">Месяца</string>
+    <string name="months_5">Месяцев</string>
+    <string name="year">Год</string>
+    <string name="years_2_4">Года</string>
+    <string name="years_5">Лет</string>
+    <string name="months_3">Три месяца</string>
+    <string name="price_free">Бесплатно</string>
+    <string name="get_discount_title">Получите %1$d %2$s со скидкой %3$s.</string>
+    <string name="get_free_trial_title">Начать бесплатный период в %1$d %2$s.</string>
+    <string name="get_discount_first_part">%1$s за первый %2$s</string>
+    <string name="get_discount_first_few_part">%1$s за первые %2$s</string>
+    <string name="get_discount_second_part">затем %1$s</string>
+    <string name="cancel_subscription">Отменить подписку</string>
+    <string name="price_and_discount">%1$s • Экономия %2$s</string>
     <string name="rendering_attr_winter_road_name">Автозимник</string>
     <string name="rendering_attr_ice_road_name">Ледовый автозимник</string>
     <string name="routeInfo_winter_ice_road_name">Зимники</string>
@@ -3156,4 +3177,25 @@
     <string name="turn_screen_on_sensor">Использовать датчик приближения</string>
     <string name="turn_on_profile_desc">Пожалуйста, включите по крайней мере один профиль приложения, чтобы использовать этот параметр.</string>
     <string name="shared_string_file_is_saved">%s сохранено</string>
+    <string name="osmand_default_routing">Навигация OsmAnd</string>
+    <string name="custom_routing">Пользовательский профиль навигации</string>
+    <string name="special_routing_type">Специальная навигация</string>
+    <string name="third_party_routing_type">Сторонняя навигация</string>
+    <string name="routing_attr_piste_type_nordic_name">Лыжные гонки / северные дисциплины</string>
+    <string name="routing_attr_piste_type_nordic_description">Трассы для северных дисциплин или лыжных гонок.</string>
+    <string name="app_mode_personal_transporter">Сегвей</string>
+    <string name="routing_attr_max_num_changes_name">Количество изменений</string>
+    <string name="turn_screen_on_time_descr">Укажите время до поворота за которое экран будет включен.</string>
+    <string name="turn_screen_on_sensor_descr">Включение экрана во время навигации при проведении рукой в верхней части экрана.</string>
+    <string name="external_input_device">Внешние устройства ввода</string>
+    <string name="external_input_device_descr">Выберите устройство для внешнего управления, например, типовую клавиатуру или WunderLINQ.</string>
+    <string name="sett_no_ext_input">Нет</string>
+    <string name="sett_generic_ext_input">Типовая клавиатура</string>
+    <string name="sett_wunderlinq_ext_input">WunderLINQ</string>
+    <string name="sett_parrot_ext_input">Parrot</string>
+    <string name="shared_string_track_is_saved">Трек %s сохранен</string>
+    <string name="rendering_attr_showLez_name">Отображать зоны с низким уровнем выбросов</string>
+    <string name="temporary_conditional_routing">Учитывать временные ограничения</string>
+    <string name="new_route_calculated_dist_dbg">Маршрут: расстояние %s, время навигации %s 
+\nРасчет: %.1f с, %d дорог, %d тайлов)</string>
 </resources>

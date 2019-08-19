@@ -3205,4 +3205,9 @@
     <string name="rendering_attr_showLez_name">顯示低排放區域</string>
     <string name="temporary_conditional_routing">考慮暫時限制</string>
     <string name="shared_string_default">預設</string>
+    <string name="new_route_calculated_dist_dbg">路徑：距離 %s，路徑時間 %s
+\n計算：%.1f 秒，%d 路，%d 圖磚)</string>
+    <string name="lang_oc">Occitan</string>
+    <string name="app_mode_wagon">休旅車</string>
+    <string name="app_mode_pickup_truck">皮卡車</string>
 </resources>

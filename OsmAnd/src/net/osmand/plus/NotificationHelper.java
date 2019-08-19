@@ -155,9 +155,11 @@ public class NotificationHelper {
 		}
 	}
 
-	public void removeNotifications() {
+	public void removeNotifications(boolean inactiveOnly) {
 		for (OsmandNotification notification : all) {
-			notification.removeNotification();
+			if (!inactiveOnly || !notification.isActive()) {
+				notification.removeNotification();
+			}
 		}
 	}
 

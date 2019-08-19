@@ -3228,4 +3228,9 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="rendering_attr_showLez_name">Birta svæði með takmörkunum á útblæstri</string>
     <string name="temporary_conditional_routing">Taka tillit til tímabundinna takmarkana</string>
     <string name="shared_string_default">Sjálfgefið</string>
+    <string name="new_route_calculated_dist_dbg">Leið: vegalengd %s, tími leiðsagnar %s 
+\nÚtreikningur: %.1f sek, %d vegir, %d kortaflísar)</string>
+    <string name="lang_oc">Occitanska</string>
+    <string name="app_mode_wagon">Dráttarvagn</string>
+    <string name="app_mode_pickup_truck">Pallbíll</string>
 </resources>

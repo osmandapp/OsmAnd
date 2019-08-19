@@ -918,6 +918,13 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 	}
 
+	public void setKeepScreenOn(boolean keepScreenOn) {
+		View mainView = findViewById(R.id.MapViewWithLayers);
+		if (mainView != null) {
+			mainView.setKeepScreenOn(keepScreenOn);
+		}
+	}
+
 	private void clearIntent(Intent intent) {
 		intent.setAction(null);
 		intent.setData(null);
@@ -1317,7 +1324,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	@Override
 	protected void onStop() {
-		getMyApplication().getNotificationHelper().removeNotifications();
+		getMyApplication().getNotificationHelper().removeNotifications(true);
 		if(pendingPause) {
 			onPauseActivity();
 		}
@@ -1406,6 +1413,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public void updateApplicationModeSettings() {
+		changeKeyguardFlags();
 		updateMapSettings();
 		OsmandPlugin.updateActivatedPlugins(app);
 		getMyApplication().getAidlApi().updateConnectedApps();
@@ -1905,23 +1913,29 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		return oldPoint.getLayerId().equals(layerId) && oldPoint.getId().equals(point.getId());
 	}
 
-	public void changeKeyguardFlags(final boolean enable) {
+	public void changeKeyguardFlags() {
+		changeKeyguardFlags(settings.TURN_SCREEN_ON_TIME_INT.get() > 0, true);
+	}
+
+	private void changeKeyguardFlags(boolean enable, boolean forceKeepScreenOn) {
 		if (enable) {
 			getWindow().setFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED,
 					WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
+			setKeepScreenOn(true);
 		} else {
 			getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
+			setKeepScreenOn(forceKeepScreenOn);
 		}
 	}
 
 	@Override
 	public void lock() {
-		changeKeyguardFlags(false);
+		changeKeyguardFlags(false, false);
 	}
 
 	@Override
 	public void unlock() {
-		changeKeyguardFlags(true);
+		changeKeyguardFlags(true, false);
 	}
 
 	@Override
@@ -2013,12 +2027,14 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	@Override
 	public void routeWasCancelled() {
+		changeKeyguardFlags();
 	}
 
 	@Override
 	public void routeWasFinished() {
 		if (!mIsDestroyed) {
 			DestinationReachedMenu.show(this);
+			changeKeyguardFlags();
 		}
 	}
 
