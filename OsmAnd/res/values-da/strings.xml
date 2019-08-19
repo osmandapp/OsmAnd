@@ -3226,4 +3226,25 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="lang_oc">Occitansk</string>
     <string name="app_mode_wagon">Vogn</string>
     <string name="app_mode_pickup_truck">Pickup</string>
+    <string name="day">Dag</string>
+    <string name="days_2_4">Dage</string>
+    <string name="days_5">Dage</string>
+    <string name="week">Uge</string>
+    <string name="weeks_2_4">Uger</string>
+    <string name="weeks_5">Uger</string>
+    <string name="month">Måned</string>
+    <string name="months_2_4">Måneder</string>
+    <string name="months_5">Måneder</string>
+    <string name="year">År</string>
+    <string name="years_2_4">År</string>
+    <string name="years_5">År</string>
+    <string name="months_3">Tre måneder</string>
+    <string name="price_free">Gratis</string>
+    <string name="get_discount_title">Hent %d%@ med %d%% rabat.</string>
+    <string name="get_free_trial_title">Start %d%@ gratis prøveversion.</string>
+    <string name="get_discount_first_part">%1$s for første %2$s</string>
+    <string name="get_discount_first_few_part">%1$s for første %2$s</string>
+    <string name="get_discount_second_part">derefter %1$s</string>
+    <string name="cancel_subscription">Annuller abonnement</string>
+    <string name="price_and_discount">%1$s • Spar %2$s</string>
 </resources>
