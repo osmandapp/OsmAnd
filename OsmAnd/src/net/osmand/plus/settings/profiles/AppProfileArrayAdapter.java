@@ -1,10 +1,8 @@
-package net.osmand.plus.profiles;
+package net.osmand.plus.settings.profiles;
 
 import android.app.Activity;
-import android.app.Application;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
-import android.system.Os;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

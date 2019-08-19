@@ -1,5 +1,6 @@
 package net.osmand.plus.settings;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.preference.Preference;
@@ -10,7 +11,12 @@ import android.view.ViewGroup;
 
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.util.Algorithms;
+
+import static net.osmand.plus.settings.profiles.EditProfileFragment.MAP_CONFIG;
+import static net.osmand.plus.settings.profiles.EditProfileFragment.OPEN_CONFIG_ON_MAP;
+import static net.osmand.plus.settings.profiles.EditProfileFragment.SELECTED_ITEM;
 
 public class SettingsMainFragment extends BaseSettingsFragment {
 
@@ -86,5 +92,19 @@ public class SettingsMainFragment extends BaseSettingsFragment {
 	@Override
 	public int getStatusBarColorId() {
 		return getSettings().isLightContent() ? R.color.status_bar_color_light : R.color.status_bar_color_dark;
+	}
+
+	@Override
+	public boolean onPreferenceClick(Preference preference) {
+		if (preference.getKey().equals("browse_map")) {
+			Intent intent = new Intent(getActivity(), MapActivity.class);
+			intent.putExtra(OPEN_CONFIG_ON_MAP, MAP_CONFIG);
+			intent.putExtra(SELECTED_ITEM, getSelectedMode().getStringKey());
+			startActivity(intent);
+			getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
+
+			return true;
+		}
+		return super.onPreferenceClick(preference);
 	}
 }

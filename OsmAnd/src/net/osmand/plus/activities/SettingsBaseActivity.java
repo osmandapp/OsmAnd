@@ -27,8 +27,8 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.R;
-import net.osmand.plus.profiles.AppProfileArrayAdapter;
-import net.osmand.plus.profiles.ProfileDataObject;
+import net.osmand.plus.settings.profiles.AppProfileArrayAdapter;
+import net.osmand.plus.settings.profiles.ProfileDataObject;
 import net.osmand.plus.views.SeekBarPreference;
 
 import org.apache.commons.logging.Log;

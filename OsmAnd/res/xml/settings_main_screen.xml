@@ -42,7 +42,7 @@
 		android:layout="@layout/preference_with_descr"
 		android:summary="@string/manage_profiles_descr"
 		android:title="@string/manage_profiles"
-		app:fragment="net.osmand.plus.profiles.SettingsProfileFragment"
+		app:fragment="net.osmand.plus.settings.profiles.SettingsProfileFragment"
 		tools:icon="@drawable/ic_action_manage_profiles" />
 
 </PreferenceScreen>

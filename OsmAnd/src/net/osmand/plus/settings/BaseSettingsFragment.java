@@ -35,8 +35,8 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.activities.OsmandInAppPurchaseActivity;
-import net.osmand.plus.profiles.AppProfileArrayAdapter;
-import net.osmand.plus.profiles.ProfileDataObject;
+import net.osmand.plus.settings.profiles.AppProfileArrayAdapter;
+import net.osmand.plus.settings.profiles.ProfileDataObject;
 import net.osmand.plus.views.SwitchFragmentPreference;
 
 import java.util.ArrayList;

@@ -1,10 +1,21 @@
 package net.osmand.plus.settings.profiles;
 
+import static net.osmand.plus.activities.SettingsNavigationActivity.INTENT_SKIP_DIALOG;
+import static net.osmand.plus.settings.profiles.SelectProfileBottomSheetDialogFragment.DIALOG_TYPE;
+import static net.osmand.plus.settings.profiles.SelectProfileBottomSheetDialogFragment.SELECTED_KEY;
+import static net.osmand.plus.settings.profiles.SelectProfileBottomSheetDialogFragment.TYPE_BASE_APP_PROFILE;
+import static net.osmand.plus.settings.profiles.SelectProfileBottomSheetDialogFragment.TYPE_ICON;
+import static net.osmand.plus.settings.profiles.SelectProfileBottomSheetDialogFragment.TYPE_NAV_PROFILE;
+import static net.osmand.plus.settings.profiles.SettingsProfileFragment.IS_NEW_PROFILE;
+import static net.osmand.plus.settings.profiles.SettingsProfileFragment.IS_USER_PROFILE;
+import static net.osmand.plus.settings.profiles.SettingsProfileFragment.PROFILE_STRING_KEY;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
+import android.graphics.Rect;
 import android.os.Build;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
@@ -14,15 +25,15 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AlertDialog.Builder;
-import android.support.v7.widget.Toolbar;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+
 import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
@@ -36,7 +47,10 @@ import android.widget.ListPopupWindow;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.ApplicationMode;
@@ -45,30 +59,17 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
+import net.osmand.plus.activities.SettingsNavigationActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
-import net.osmand.plus.profiles.RoutingProfileDataObject;
+import net.osmand.plus.settings.profiles.SelectProfileBottomSheetDialogFragment.SelectProfileListener;
 import net.osmand.plus.routing.RouteProvider.RouteService;
-import net.osmand.plus.settings.NavigationFragment;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 import net.osmand.router.GeneralRouter;
 import net.osmand.util.Algorithms;
-
 import org.apache.commons.logging.Log;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import studio.carbonylgroup.textfieldboxes.ExtendedEditText;
 
-import static net.osmand.plus.settings.profiles.SettingsProfileFragment.IS_NEW_PROFILE;
-import static net.osmand.plus.settings.profiles.SettingsProfileFragment.IS_USER_PROFILE;
-import static net.osmand.plus.settings.profiles.SettingsProfileFragment.PROFILE_STRING_KEY;
-
 public class EditProfileFragment extends BaseOsmAndFragment {
-
-	public static final String TAG = "EditProfileFragment";
 
 	private static final Log LOG = PlatformUtil.getLog(EditProfileFragment.class);
 
@@ -92,9 +93,9 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 	private boolean isCancelAllowed = true;
 	private boolean nightMode;
 
-	private SelectProfileBottomSheetDialogFragment.SelectProfileListener navTypeListener = null;
-	private SelectProfileBottomSheetDialogFragment.SelectProfileListener iconIdListener = null;
-	private SelectProfileBottomSheetDialogFragment.SelectProfileListener baseTypeListener = null;
+	private SelectProfileListener navTypeListener = null;
+	private SelectProfileListener iconIdListener = null;
+	private SelectProfileListener baseTypeListener = null;
 
 	private ImageView profileIcon;
 	private LinearLayout profileIconBtn;
@@ -138,25 +139,9 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-	                         @Nullable Bundle savedInstanceState) {
-		final MapActivity activity = (MapActivity) getActivity();
+		@Nullable Bundle savedInstanceState) {
+		final AppCompatActivity activity = (AppCompatActivity) getActivity();
 		final View view = inflater.inflate(R.layout.fragment_selected_profile, container, false);
-
-		AndroidUtils.addStatusBarPadding21v(activity, view);
-
-		Toolbar tb = (Toolbar) view.findViewById(R.id.toolbar);
-
-		tb.setClickable(true);
-		tb.setNavigationIcon(getIcon(R.drawable.ic_arrow_back));
-		tb.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
-		tb.setBackgroundColor(getResources().getColor(resolveResourceId(getActivity(), R.attr.pstsTabBackground)));
-		tb.setTitleTextColor(getResources().getColor(resolveResourceId(getActivity(), R.attr.pstsTextColor)));
-		tb.setNavigationOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(final View v) {
-				getActivity().getSupportFragmentManager().popBackStack();
-			}
-		});
 
 		profileIcon = view.findViewById(R.id.profile_icon_img);
 		profileIconBtn = view.findViewById(R.id.select_icon_button);
@@ -205,14 +190,12 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		}
 		profile.userProfileTitle = title;
 
-		tb.setTitle(title);
-
 		if (profile.parent != null) {
 			setupBaseProfileView(profile.parent.getStringKey());
 		} else if (profile.stringKeyName != -1) {
 			baseModeTitle.setText(profile.stringKeyName);
 			baseModeIcon.setImageDrawable(
-					app.getUIUtilities().getIcon(profile.iconId, R.color.icon_color_default_light));
+				app.getUIUtilities().getIcon(profile.iconId, R.color.icon_color_default_light));
 		}
 		if (isUserProfile || isNew) {
 			typeSelectionBtn.setOnClickListener(new OnClickListener() {
@@ -221,13 +204,13 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 					final SelectProfileBottomSheetDialogFragment dialog = new SelectProfileBottomSheetDialogFragment();
 					Bundle bundle = new Bundle();
 					if (profile.parent != null) {
-						bundle.putString(SelectProfileBottomSheetDialogFragment.SELECTED_KEY, profile.parent.getStringKey());
+						bundle.putString(SELECTED_KEY, profile.parent.getStringKey());
 					}
-					bundle.putString(SelectProfileBottomSheetDialogFragment.DIALOG_TYPE, SelectProfileBottomSheetDialogFragment.TYPE_BASE_APP_PROFILE);
+					bundle.putString(DIALOG_TYPE, TYPE_BASE_APP_PROFILE);
 					dialog.setArguments(bundle);
 					if (getActivity() != null) {
 						getActivity().getSupportFragmentManager().beginTransaction()
-								.add(dialog, "select_base_type").commitAllowingStateLoss();
+							.add(dialog, "select_base_type").commitAllowingStateLoss();
 					}
 				}
 			});
@@ -237,11 +220,11 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 
 		if (!Algorithms.isEmpty(mode.getRoutingProfile()) || mode.getRouteService() != RouteService.OSMAND) {
 			for (RoutingProfileDataObject r : routingProfileDataObjects) {
-				if (mode.getRoutingProfile() != null && mode.getRoutingProfile().equals(r.getStringKey())
-						|| (mode.getRouteService() == RouteService.BROUTER
-						&& r.getStringKey().equals(RoutingProfilesResources.BROUTER_MODE.name()))
-						|| (mode.getRouteService() == RouteService.STRAIGHT
-						&& r.getStringKey().equals(RoutingProfilesResources.STRAIGHT_LINE_MODE.name()))) {
+				if (mode.getRoutingProfile() != null && mode.getRoutingProfile().equals(r.getStringKey()) 
+					|| (mode.getRouteService() == RouteService.BROUTER
+					&& r.getStringKey().equals(RoutingProfilesResources.BROUTER_MODE.name())) 
+					|| (mode.getRouteService() == RouteService.STRAIGHT
+					&& r.getStringKey().equals(RoutingProfilesResources.STRAIGHT_LINE_MODE.name()))) {
 					profile.routingProfileDataObject = r;
 					r.setSelected(true);
 					navTypeEt.setText(r.getName());
@@ -260,6 +243,11 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		}
 		profileNameEt.clearFocus();
 
+		if (activity != null && activity.getSupportActionBar() != null) {
+			activity.getSupportActionBar().setTitle(title);
+			activity.getSupportActionBar().setElevation(5.0f);
+		}
+
 		int iconColor = profile.iconColor.getColor(nightMode);
 
 		profileIcon.setImageDrawable(app.getUIUtilities().getIcon(startIconId, iconColor));
@@ -276,13 +264,13 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 
 			@Override
 			public void afterTextChanged(Editable s) {
-				profile.userProfileTitle = s.toString();
-				isCancelAllowed = false;
-
 				if (getActivity() instanceof OsmandActionBarActivity) {
-					ActionBar actionBar = ((OsmandActionBarActivity) getActivity()).getSupportActionBar();
+					ActionBar actionBar = ((OsmandActionBarActivity) getActivity())
+						.getSupportActionBar();
 					if (actionBar != null) {
 						actionBar.setTitle(s.toString());
+						profile.userProfileTitle = s.toString();
+						isCancelAllowed = false;
 					}
 				}
 			}
@@ -296,14 +284,14 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 					final SelectProfileBottomSheetDialogFragment fragment = new SelectProfileBottomSheetDialogFragment();
 					Bundle bundle = new Bundle();
 					if (profile.routingProfileDataObject != null) {
-						bundle.putString(SelectProfileBottomSheetDialogFragment.SELECTED_KEY,
-								profile.routingProfileDataObject.getStringKey());
+						bundle.putString(SELECTED_KEY,
+							profile.routingProfileDataObject.getStringKey());
 					}
-					bundle.putString(SelectProfileBottomSheetDialogFragment.DIALOG_TYPE, SelectProfileBottomSheetDialogFragment.TYPE_NAV_PROFILE);
+					bundle.putString(DIALOG_TYPE, TYPE_NAV_PROFILE);
 					fragment.setArguments(bundle);
 					if (getActivity() != null) {
 						getActivity().getSupportFragmentManager().beginTransaction()
-								.add(fragment, "select_nav_type").commitAllowingStateLoss();
+							.add(fragment, "select_nav_type").commitAllowingStateLoss();
 					}
 					navTypeEt.setCursorVisible(false);
 					navTypeEt.setTextIsSelectable(false);
@@ -319,14 +307,14 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 				public void onClick(View v) {
 					final SelectProfileBottomSheetDialogFragment iconSelectDialog = new SelectProfileBottomSheetDialogFragment();
 					Bundle bundle = new Bundle();
-					bundle.putString(SelectProfileBottomSheetDialogFragment.DIALOG_TYPE, SelectProfileBottomSheetDialogFragment.TYPE_ICON);
+					bundle.putString(DIALOG_TYPE, TYPE_ICON);
 					bundle.putString(SELECTED_ICON, profile.iconStringName);
 					iconSelectDialog.setArguments(bundle);
 					hideKeyboard();
 					if (getActivity() != null) {
 						getActivity().getSupportFragmentManager().beginTransaction()
-								.add(iconSelectDialog, "select_icon")
-								.commitAllowingStateLoss();
+							.add(iconSelectDialog, "select_icon")
+							.commitAllowingStateLoss();
 					}
 				}
 			});
@@ -410,7 +398,11 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 				} else if (getSettings() != null) {
 					activateMode(mode);
 					getSettings().APPLICATION_MODE.set(mode);
-					NavigationFragment.showInstance(getActivity().getSupportFragmentManager(), mode);
+					Intent i = new Intent(getActivity(), SettingsNavigationActivity.class);
+					i.putExtra(INTENT_SKIP_DIALOG, true);
+					i.putExtra(OPEN_CONFIG_ON_MAP, NAV_CONFIG);
+					i.putExtra(SELECTED_ITEM, profile.stringKey);
+					startActivity(i);
 				}
 			}
 		});
@@ -461,32 +453,26 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		view.getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
 			@Override
 			public void onGlobalLayout() {
-//				int marginShow = 66;
-//				int marginHide = 0;
-//
-//				float d = getResources().getDisplayMetrics().density;
-//				Rect r = new Rect();
-//				view.getWindowVisibleDisplayFrame(r);
-//				int screenHeight = view.getRootView().getHeight();
-//				int keypadHeight = screenHeight - r.bottom;
-//				if (keypadHeight > screenHeight * 0.15) {
-//					buttonsLayout.setVisibility(View.GONE);
-//					buttonsLayoutSV.setVisibility(View.VISIBLE);
-//					setMargins(scrollContainer, 0, 0, 0, (int) (marginHide * d));
-//				} else {
-//					buttonsLayoutSV.setVisibility(View.GONE);
-//					buttonsLayout.setVisibility(View.VISIBLE);
-//					setMargins(scrollContainer, 0, 0, 0, (int) (marginShow * d));
-//				}
+				int marginShow = 66;
+				int marginHide = 0;
+
+				float d = getResources().getDisplayMetrics().density;
+				Rect r = new Rect();
+				view.getWindowVisibleDisplayFrame(r);
+				int screenHeight = view.getRootView().getHeight();
+				int keypadHeight = screenHeight - r.bottom;
+				if (keypadHeight > screenHeight * 0.15) {
+					buttonsLayout.setVisibility(View.GONE);
+					buttonsLayoutSV.setVisibility(View.VISIBLE);
+					setMargins(scrollContainer, 0, 0, 0, (int) (marginHide * d));
+				} else {
+					buttonsLayoutSV.setVisibility(View.GONE);
+					buttonsLayout.setVisibility(View.VISIBLE);
+					setMargins(scrollContainer, 0, 0, 0, (int) (marginShow * d));
+				}
 			}
 		});
 		return view;
-	}
-
-	private int resolveResourceId(final Activity activity, final int attr) {
-		final TypedValue typedvalueattr = new TypedValue();
-		activity.getTheme().resolveAttribute(attr, typedvalueattr, true);
-		return typedvalueattr.resourceId;
 	}
 
 	@Override
@@ -497,25 +483,20 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		super.onResume();
 	}
 
-	@Override
-	public int getStatusBarColorId() {
-		return getSettings().isLightContent() ? R.color.status_bar_color_light : R.color.status_bar_color_dark;
-	}
-
-	public boolean onBackPressedAllowed() {
+	boolean onBackPressedAllowed() {
 		return isCancelAllowed;
 	}
 
-	SelectProfileBottomSheetDialogFragment.SelectProfileListener getIconListener() {
+	SelectProfileListener getIconListener() {
 		if (iconIdListener == null) {
-			iconIdListener = new SelectProfileBottomSheetDialogFragment.SelectProfileListener() {
+			iconIdListener = new SelectProfileListener() {
 				@Override
 				public void onSelectedType(int pos, String stringRes) {
 					isDataChanged = true;
 					profile.iconId = pos;
 					profile.iconStringName = stringRes;
 					profileIcon.setImageDrawable(app.getUIUtilities().getIcon(pos,
-							profile.iconColor.getColor(nightMode)));
+						profile.iconColor.getColor(nightMode)));
 
 				}
 			};
@@ -523,13 +504,13 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		return iconIdListener;
 	}
 
-	SelectProfileBottomSheetDialogFragment.SelectProfileListener getBaseProfileListener() {
+	SelectProfileListener getBaseProfileListener() {
 		if (baseTypeListener == null) {
-			baseTypeListener = new SelectProfileBottomSheetDialogFragment.SelectProfileListener() {
+			baseTypeListener = new SelectProfileListener() {
 				@Override
 				public void onSelectedType(int pos, String stringRes) {
 					String key = SettingsProfileFragment.getBaseProfiles(getMyApplication())
-							.get(pos).getStringKey();
+						.get(pos).getStringKey();
 					setupBaseProfileView(key);
 					profile.parent = ApplicationMode.valueOfStringKey(key, ApplicationMode.DEFAULT);
 				}
@@ -538,9 +519,9 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		return baseTypeListener;
 	}
 
-	SelectProfileBottomSheetDialogFragment.SelectProfileListener getNavProfileListener() {
+	SelectProfileListener getNavProfileListener() {
 		if (navTypeListener == null) {
-			navTypeListener = new SelectProfileBottomSheetDialogFragment.SelectProfileListener() {
+			navTypeListener = new SelectProfileListener() {
 				@Override
 				public void onSelectedType(int pos, String stringRes) {
 					updateRoutingProfile(pos);
@@ -590,7 +571,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		for (ApplicationMode am : ApplicationMode.getDefaultValues()) {
 			if (am.getStringKey().equals(stringKey)) {
 				baseModeIcon.setImageDrawable(
-						app.getUIUtilities().getIcon(am.getIconRes(), R.color.icon_color_default_light));
+					app.getUIUtilities().getIcon(am.getIconRes(), R.color.icon_color_default_light));
 				baseModeTitle.setText(Algorithms.capitalizeFirstLetter(am.toHumanString(app)));
 				isDataChanged = false;
 			}
@@ -608,19 +589,19 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 	private boolean saveNewProfile() {
 		if (profile.routingProfileDataObject == null) {
 			showSaveWarningDialog(
-					getString(R.string.profile_alert_need_routing_type_title),
-					getString(R.string.profile_alert_need_routing_type_msg),
-					getActivity());
+				getString(R.string.profile_alert_need_routing_type_title),
+				getString(R.string.profile_alert_need_routing_type_msg),
+				getActivity());
 			return false;
 		}
 
 		if (profile.userProfileTitle.isEmpty()
-				|| profile.userProfileTitle.replace(" ", "").length() < 1
-				|| profileNameEt.getText().toString().replace(" ", "").length() < 1) {
+			|| profile.userProfileTitle.replace(" ", "").length() < 1 
+			|| profileNameEt.getText().toString().replace(" ", "").length() < 1) {
 			showSaveWarningDialog(
-					getString(R.string.profile_alert_need_profile_name_title),
-					getString(R.string.profile_alert_need_profile_name_msg),
-					getActivity()
+				getString(R.string.profile_alert_need_profile_name_title),
+				getString(R.string.profile_alert_need_profile_name_msg),
+				getActivity()
 			);
 			return false;
 		}
@@ -645,17 +626,17 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		String customStringKey = profile.stringKey;
 		if (isNew) {
 			customStringKey =
-					profile.parent.getStringKey() + "_" + System.currentTimeMillis();
+				profile.parent.getStringKey() + "_" + System.currentTimeMillis();
 		}
 
 		ApplicationMode.ApplicationModeBuilder builder = ApplicationMode
-				.createCustomMode(profile.parent, profile.userProfileTitle.trim(), customStringKey)
-				.icon(app, profile.iconStringName);
+			.createCustomMode(profile.parent, profile.userProfileTitle.trim(), customStringKey)
+			.icon(app, profile.iconStringName);
 
-		if (profile.routingProfileDataObject.getStringKey().equals(
+		if(profile.routingProfileDataObject.getStringKey().equals(
 				RoutingProfilesResources.STRAIGHT_LINE_MODE.name())) {
 			builder.setRouteService(RouteService.STRAIGHT);
-		} else if (profile.routingProfileDataObject.getStringKey().equals(
+		} else if(profile.routingProfileDataObject.getStringKey().equals(
 				RoutingProfilesResources.BROUTER_MODE.name())) {
 			builder.setRouteService(RouteService.BROUTER);
 		} else if (profile.routingProfileDataObject != null) {
@@ -690,7 +671,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		bld.show();
 	}
 
-	public void confirmCancelDialog(final Activity activity) {
+	void confirmCancelDialog(final Activity activity) {
 		AlertDialog.Builder bld = new Builder(activity);
 		bld.setTitle(R.string.shared_string_dismiss);
 		bld.setMessage(R.string.exit_without_saving);
@@ -706,35 +687,35 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 
 	}
 
-	public void onDeleteProfileClick() {
+	void onDeleteProfileClick() {
 		if (getActivity() != null) {
 			if (isUserProfile) {
 				AlertDialog.Builder bld = new AlertDialog.Builder(getActivity());
 				bld.setTitle(R.string.profile_alert_delete_title);
 				bld.setMessage(String
-						.format(getString(R.string.profile_alert_delete_msg),
-								profile.userProfileTitle));
+					.format(getString(R.string.profile_alert_delete_msg),
+						profile.userProfileTitle));
 				bld.setPositiveButton(R.string.shared_string_delete,
-						new DialogInterface.OnClickListener() {
-							@Override
-							public void onClick(DialogInterface dialog, int which) {
-								ApplicationMode
-										.deleteCustomMode(mode, getMyApplication());
-								if (getActivity() != null) {
-									getActivity().onBackPressed();
-								}
-								getSettings().APPLICATION_MODE.set(ApplicationMode.DEFAULT);
+					new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							ApplicationMode
+								.deleteCustomMode(mode, getMyApplication());
+							if (getActivity() != null) {
+								getActivity().onBackPressed();
 							}
-						});
+							getSettings().APPLICATION_MODE.set(ApplicationMode.DEFAULT);
+						}
+					});
 				bld.setNegativeButton(R.string.shared_string_dismiss, null);
 				bld.show();
 			} else {
 				Toast.makeText(getActivity(), R.string.profile_alert_cant_delete_base,
-						Toast.LENGTH_SHORT).show();
+					Toast.LENGTH_SHORT).show();
 			}
 		}
 	}
-
+	
 	private void hideKeyboard() {
 		View cf = getActivity().getCurrentFocus();
 		if (cf != null) {
@@ -748,18 +729,18 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 	static List<RoutingProfileDataObject> getRoutingProfiles(OsmandApplication context) {
 		List<RoutingProfileDataObject> profilesObjects = new ArrayList<>();
 		profilesObjects.add(new RoutingProfileDataObject(
-				RoutingProfilesResources.STRAIGHT_LINE_MODE.name(),
-				context.getString(RoutingProfilesResources.STRAIGHT_LINE_MODE.getStringRes()),
-				context.getString(R.string.special_routing_type),
-				RoutingProfilesResources.STRAIGHT_LINE_MODE.getIconRes(),
-				false, null));
+			RoutingProfilesResources.STRAIGHT_LINE_MODE.name(),
+			context.getString(RoutingProfilesResources.STRAIGHT_LINE_MODE.getStringRes()),
+			context.getString(R.string.special_routing_type),
+			RoutingProfilesResources.STRAIGHT_LINE_MODE.getIconRes(),
+			false, null));
 		if (context.getBRouterService() != null) {
 			profilesObjects.add(new RoutingProfileDataObject(
-					RoutingProfilesResources.BROUTER_MODE.name(),
-					context.getString(RoutingProfilesResources.BROUTER_MODE.getStringRes()),
-					context.getString(R.string.third_party_routing_type),
-					RoutingProfilesResources.BROUTER_MODE.getIconRes(),
-					false, null));
+				RoutingProfilesResources.BROUTER_MODE.name(),
+				context.getString(RoutingProfilesResources.BROUTER_MODE.getStringRes()),
+				context.getString(R.string.third_party_routing_type),
+				RoutingProfilesResources.BROUTER_MODE.getIconRes(),
+				false, null));
 		}
 
 		Map<String, GeneralRouter> inputProfiles = context.getRoutingConfig().getAllRouters();
@@ -770,13 +751,13 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 				String description = context.getString(R.string.osmand_default_routing);
 				if (!Algorithms.isEmpty(e.getValue().getFilename())) {
 					description = e.getValue().getFilename();
-				} else if (RoutingProfilesResources.isRpValue(name.toUpperCase())) {
+				} else if (RoutingProfilesResources.isRpValue(name.toUpperCase())){
 					iconRes = RoutingProfilesResources.valueOf(name.toUpperCase()).getIconRes();
 					name = context
-							.getString(RoutingProfilesResources.valueOf(name.toUpperCase()).getStringRes());
+						.getString(RoutingProfilesResources.valueOf(name.toUpperCase()).getStringRes());
 				}
 				profilesObjects.add(new RoutingProfileDataObject(e.getKey(), name, description,
-						iconRes, false, e.getValue().getFilename()));
+					iconRes, false, e.getValue().getFilename()));
 			}
 		}
 		return profilesObjects;
@@ -894,15 +875,15 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 				textView.setText(item.valueName);
 				if (item.color == -1) {
 					textView.setCompoundDrawablesWithIntrinsicBounds(null, null,
-							app.getUIUtilities().getThemedIcon(R.drawable.ic_action_circle), null);
+						app.getUIUtilities().getThemedIcon(R.drawable.ic_action_circle), null);
 				} else {
 					textView.setCompoundDrawablesWithIntrinsicBounds(null, null,
-							app.getUIUtilities().getIcon(R.drawable.ic_action_circle, item.color), null);
+						app.getUIUtilities().getIcon(R.drawable.ic_action_circle, item.color), null);
 				}
 
 				textView.setCompoundDrawablePadding(AndroidUtils.dpToPx(getContext(), 10f));
 				v.findViewById(R.id.divider).setVisibility(item.lastItem
-						&& position < getCount() - 1 ? View.VISIBLE : View.GONE);
+					&& position < getCount() - 1 ? View.VISIBLE : View.GONE);
 			}
 			return v;
 		}
@@ -919,6 +900,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 			this.valueName = valueName;
 			this.color = color;
 		}
+
 
 
 		public int getColor() {
