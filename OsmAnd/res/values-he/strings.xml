@@ -3206,4 +3206,13 @@
     <string name="select_base_profile_dialog_message">באפשרותך לבסס את הפרופיל שלך על אחד מפרופילי בררת המחדל של היישומון, פעולה זו מגדירה את ההגדרות הבסיסיות כמו אופן הצגת וידג׳טים כבררת מחדל ויחידות של מהירות ומרחק. אלו פרופילי בררת המחדל של היישומון, יחד עם דוגמאות של פרופילים מותאמים אישית ניתן להרחיב אותם לכדי:</string>
     <string name="app_mode_wagon">קרון</string>
     <string name="app_mode_pickup_truck">טנדר</string>
+    <string name="day">יום</string>
+    <string name="days_2_4">ימים</string>
+    <string name="days_5">ימים</string>
+    <string name="week">שבוע</string>
+    <string name="weeks_2_4">שבועות</string>
+    <string name="weeks_5">שבועות</string>
+    <string name="month">חודש</string>
+    <string name="months_2_4">חודשיים</string>
+    <string name="months_5">חודשים</string>
 </resources>
