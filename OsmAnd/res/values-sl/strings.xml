@@ -1340,7 +1340,7 @@ Sorazmerna velikost pomnilnika je %4$s MB (omejitev na androidu je %5$s MB, na d
     <string name="rendering_attr_trolleybusRoutes_name">Proge trolejbusa</string>
     <string name="rendering_attr_tramRoutes_name">Proge tramvaja</string>
     <string name="rendering_attr_shareTaxiRoutes_name">Proge souporabe taksijev</string>
-    <string name="rendering_category_details">Podrobnost prikaza</string>
+    <string name="rendering_category_details">Podrobnosti</string>
     <string name="rendering_attr_trainLightrailRoutes_name">Proge vlakov</string>
     <string name="wake_on_voice">Vklopi zaslon</string>
     <string name="wake_on_voice_descr">Vklopi zaslon naprave (če je izklopljen), ko se med vodenjem pojavi zavoj.</string>
@@ -1352,7 +1352,7 @@ Sorazmerna velikost pomnilnika je %4$s MB (omejitev na androidu je %5$s MB, na d
     <string name="map_widget_right">Desni pult</string>
     <string name="map_widget_left">Levi pult</string>
     <string name="shared_string_show">Pokaži</string>
-    <string name="configure_map">Možnosti zemljevida</string>
+    <string name="configure_map">Nastavi zemljevid</string>
     <string name="search_radius_proximity">Znotraj</string>
     <string name="anonymous_user_hint">Nevpisan uporabnik ne more:
 \n- ustvarjati skupin,
@@ -2212,7 +2212,7 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="points_delete_multiple">Izbrisati želite točke (%1$d). Ali želite nadaljevati?</string>
     <string name="route_points_category_name">Zavoji na poti, ki jih je treba doseči</string>
     <string name="track_points_category_name">Vmesne točke, točke POI in druge pomembnejše točke</string>
-    <string name="shared_string_slope">Pobočje</string>
+    <string name="shared_string_slope">Naklon</string>
     <string name="add_new_folder">Dodaj novo mapo</string>
     <string name="lang_ber">Berberščina</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">Gričevnato</string>
@@ -2932,7 +2932,7 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="rendering_attr_highway_class_footway_name">Pešpot</string>
     <string name="rendering_attr_highway_class_track_name">Sled</string>
     <string name="rendering_attr_highway_class_bridleway_name">Jahalna steza</string>
-    <string name="rendering_attr_highway_class_steps_name">Stopinje</string>
+    <string name="rendering_attr_highway_class_steps_name">Stopnice</string>
     <string name="rendering_attr_highway_class_path_name">Pot</string>
     <string name="rendering_attr_highway_class_cycleway_name">Kolesarska steza</string>
     <string name="rendering_attr_undefined_name">Nedoločljivo</string>
@@ -3158,4 +3158,29 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="sett_parrot_ext_input">Parrot</string>
     <string name="shared_string_track_is_saved">Sled %s je shranjena</string>
     <string name="lang_oc">Okcitanščina</string>
+    <string name="routing_attr_piste_type_downhill_name">Alpsko smučanje/smuk</string>
+    <string name="routing_attr_piste_type_nordic_name">Tek na smučeh/nordijsko smučanje</string>
+    <string name="routing_attr_piste_type_skitour_name">Turno smučanje</string>
+    <string name="routing_attr_piste_type_sled_name">Sani</string>
+    <string name="day">Dan</string>
+    <string name="days_2_4">Dni</string>
+    <string name="days_5">Dni</string>
+    <string name="week">Teden</string>
+    <string name="weeks_2_4">Tedni</string>
+    <string name="weeks_5">Tednov</string>
+    <string name="month">Mesec</string>
+    <string name="months_2_4">Meseci</string>
+    <string name="months_5">Mesecev</string>
+    <string name="year">Leto</string>
+    <string name="years_2_4">Leta</string>
+    <string name="years_5">Let</string>
+    <string name="months_3">Tri mesece</string>
+    <string name="price_free">Brezplačno</string>
+    <string name="get_discount_title">Kupite %1$d %2$s s/z %3$s popusta.</string>
+    <string name="get_free_trial_title">Začnite %1$d %2$s brezplačno preizkusno obdobje.</string>
+    <string name="get_discount_first_part">%1$s za prvi %2$s</string>
+    <string name="get_discount_first_few_part">%1$s za prvi %2$s</string>
+    <string name="get_discount_second_part">nato %1$s</string>
+    <string name="cancel_subscription">Odpoved naročnine</string>
+    <string name="price_and_discount">%1$s • Prihranite %2$s</string>
 </resources>
