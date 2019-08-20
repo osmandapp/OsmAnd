@@ -54,7 +54,7 @@ public class InAppPurchaseHelper {
 	// Debug tag, for logging
 	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(InAppPurchaseHelper.class);
 	private static final String TAG = InAppPurchaseHelper.class.getSimpleName();
-	private boolean mDebugLog = true;
+	private boolean mDebugLog = false;
 
 	public static final long SUBSCRIPTION_HOLDING_TIME_MSEC = 1000 * 60 * 60 * 24 * 3; // 3 days
 
@@ -190,6 +190,10 @@ public class InAppPurchaseHelper {
 		return false;
 	}
 
+	private BillingManager getBillingManager() {
+		return billingManager;
+	}
+
 	private void exec(final @NonNull InAppPurchaseTaskType taskType, final @NonNull InAppRunnable runnable) {
 		if (isDeveloperVersion || !Version.isGooglePlayEnabled(ctx)) {
 			return;
@@ -218,16 +222,17 @@ public class InAppPurchaseHelper {
 				public void onBillingClientSetupFinished() {
 					logDebug("Setup finished.");
 
-					if (!billingManager.isIsServiceConnected()) {
-						// Oh noes, there was a problem.
-						//complain("Problem setting up in-app billing: " + result);
-						notifyError(taskType, billingManager.getBillingClientResponseMessage());
+					BillingManager billingManager = getBillingManager();
+					// Have we been disposed of in the meantime? If so, quit.
+					if (billingManager == null) {
 						stop(true);
 						return;
 					}
 
-					// Have we been disposed of in the meantime? If so, quit.
-					if (billingManager == null) {
+					if (!billingManager.isServiceConnected()) {
+						// Oh noes, there was a problem.
+						//complain("Problem setting up in-app billing: " + result);
+						notifyError(taskType, billingManager.getBillingClientResponseMessage());
 						stop(true);
 						return;
 					}
@@ -242,6 +247,7 @@ public class InAppPurchaseHelper {
 				@Override
 				public void onPurchasesUpdated(final List<Purchase> purchases) {
 
+					BillingManager billingManager = getBillingManager();
 					// Have we been disposed of in the meantime? If so, quit.
 					if (billingManager == null) {
 						stop(true);
@@ -275,6 +281,7 @@ public class InAppPurchaseHelper {
 									skuSubscriptions.add(p.getSku());
 								}
 
+								BillingManager billingManager = getBillingManager();
 								// Have we been disposed of in the meantime? If so, quit.
 								if (billingManager == null) {
 									stop(true);
@@ -340,7 +347,12 @@ public class InAppPurchaseHelper {
 					if (skuDetails == null) {
 						throw new IllegalArgumentException("Cannot find sku details");
 					}
-					billingManager.initiatePurchaseFlow(activity, skuDetails);
+					BillingManager billingManager = getBillingManager();
+					if (billingManager != null) {
+						billingManager.initiatePurchaseFlow(activity, skuDetails);
+					} else {
+						throw new IllegalStateException("BillingManager disposed");
+					}
 					return false;
 				} catch (Exception e) {
 					complain("Cannot launch full version purchase!");
@@ -369,7 +381,12 @@ public class InAppPurchaseHelper {
 					if (skuDetails == null) {
 						throw new IllegalArgumentException("Cannot find sku details");
 					}
-					billingManager.initiatePurchaseFlow(activity, skuDetails);
+					BillingManager billingManager = getBillingManager();
+					if (billingManager != null) {
+						billingManager.initiatePurchaseFlow(activity, skuDetails);
+					} else {
+						throw new IllegalStateException("BillingManager disposed");
+					}
 					return false;
 				} catch (Exception e) {
 					complain("Cannot launch depth contours purchase!");
@@ -400,7 +417,7 @@ public class InAppPurchaseHelper {
 
 	@Nullable
 	private Purchase getPurchase(@NonNull String sku) {
-		BillingManager billingManager = this.billingManager;
+		BillingManager billingManager = getBillingManager();
 		if (billingManager != null) {
 			List<Purchase> purchases = billingManager.getPurchases();
 			if (purchases != null) {
@@ -420,9 +437,12 @@ public class InAppPurchaseHelper {
 		@NonNull
 		private List<String> getAllOwnedSubscriptionSkus() {
 			List<String> result = new ArrayList<>();
-			for (Purchase p : billingManager.getPurchases()) {
-				if (getInAppPurchases().getInAppSubscriptionBySku(p.getSku()) != null) {
-					result.add(p.getSku());
+			BillingManager billingManager = getBillingManager();
+			if (billingManager != null) {
+				for (Purchase p : billingManager.getPurchases()) {
+					if (getInAppPurchases().getInAppSubscriptionBySku(p.getSku()) != null) {
+						result.add(p.getSku());
+					}
 				}
 			}
 			return result;
@@ -434,7 +454,7 @@ public class InAppPurchaseHelper {
 			logDebug("Query sku details finished.");
 
 			// Have we been disposed of in the meantime? If so, quit.
-			if (billingManager == null) {
+			if (getBillingManager() == null) {
 				stop(true);
 				return;
 			}
@@ -727,8 +747,13 @@ public class InAppPurchaseHelper {
 							Activity a = activity.get();
 							SkuDetails skuDetails = getSkuDetails(sku);
 							if (a != null && skuDetails != null) {
-								billingManager.setPayload(payload);
-								billingManager.initiatePurchaseFlow(a, skuDetails);
+								BillingManager billingManager = getBillingManager();
+								if (billingManager != null) {
+									billingManager.setPayload(payload);
+									billingManager.initiatePurchaseFlow(a, skuDetails);
+								} else {
+									throw new IllegalStateException("BillingManager disposed");
+								}
 								return false;
 							} else {
 								stop(true);
@@ -793,7 +818,12 @@ public class InAppPurchaseHelper {
 				public boolean run(InAppPurchaseHelper helper) {
 					logDebug("Setup successful. Querying inventory.");
 					try {
-						billingManager.queryPurchases();
+						BillingManager billingManager = getBillingManager();
+						if (billingManager != null) {
+							billingManager.queryPurchases();
+						} else {
+							throw new IllegalStateException("BillingManager disposed");
+						}
 						return false;
 					} catch (Exception e) {
 						logError("queryInventoryAsync Error", e);
@@ -820,7 +850,7 @@ public class InAppPurchaseHelper {
 		logDebug("Purchase finished: " + purchase);
 
 		// if we were disposed of in the meantime, quit.
-		if (billingManager == null) {
+		if (getBillingManager() == null) {
 			stop(true);
 			return;
 		}
@@ -886,6 +916,7 @@ public class InAppPurchaseHelper {
 
 	private void stop(boolean taskDone) {
 		logDebug("Destroying helper.");
+		BillingManager billingManager = getBillingManager();
 		if (billingManager != null) {
 			if (taskDone) {
 				processingTask = false;
@@ -893,7 +924,7 @@ public class InAppPurchaseHelper {
 			if (!processingTask) {
 				activeTask = null;
 				billingManager.destroy();
-				billingManager = null;
+				this.billingManager = null;
 			}
 		} else {
 			processingTask = false;
