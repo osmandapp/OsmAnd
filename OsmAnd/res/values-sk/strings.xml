@@ -3208,4 +3208,12 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="lang_oc">Okcitánsky</string>
     <string name="app_mode_wagon">Dodávkové auto</string>
     <string name="app_mode_pickup_truck">Pickup auto</string>
+    <string name="price_free">Zdarma</string>
+    <string name="get_discount_title">Získajte %d %@ pri zľave %d%%.</string>
+    <string name="get_free_trial_title">Začnite skúšobnú prevádzku %d %@ zdarma.</string>
+    <string name="get_discount_first_part">%@ za prvé %@</string>
+    <string name="get_discount_first_few_part">%@ za prvé %@</string>
+    <string name="get_discount_second_part">potom %@</string>
+    <string name="cancel_subscription">Zrušiť predplatné</string>
+    <string name="price_and_discount">%1$s • Ušetrite %2$s</string>
 </resources>
