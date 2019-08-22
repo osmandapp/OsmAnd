@@ -2688,7 +2688,7 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="map_import_error">Villa í innflutningi landakorts</string>
     <string name="map_imported_successfully">Tókst að flytja inn landakort</string>
     <string name="transport_nearby_routes_within">Nálægar leiðir innan</string>
-    <string name="transport_nearby_routes">Innan</string>
+    <string name="transport_nearby_routes">innan</string>
     <string name="dd_mm_ss_format">DD°MM′SS″</string>
     <string name="dd_dddddd_format">DD.DDDDDD°</string>
     <string name="dd_ddddd_format">DD.DDDDD°</string>
