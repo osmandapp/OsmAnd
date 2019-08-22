@@ -3227,4 +3227,25 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="lang_oc">Otzitanu</string>
     <string name="app_mode_wagon">Vagone pro sas mertzes</string>
     <string name="app_mode_pickup_truck">Camieddu</string>
+    <string name="day">Die</string>
+    <string name="days_2_4">Dies</string>
+    <string name="days_5">Dies</string>
+    <string name="week">Chida</string>
+    <string name="weeks_2_4">Chidas</string>
+    <string name="weeks_5">Chidas</string>
+    <string name="month">Mese</string>
+    <string name="months_2_4">Meses</string>
+    <string name="months_5">Meses</string>
+    <string name="year">Annu</string>
+    <string name="years_2_4">Annos</string>
+    <string name="years_5">Annos</string>
+    <string name="months_3">Tres meses</string>
+    <string name="price_free">De badas</string>
+    <string name="get_discount_title">Otene %1$d %2$s a su %3$s de iscontu.</string>
+    <string name="get_free_trial_title">Incumintza sa proa de badas de %1$d %2$s tua.</string>
+    <string name="get_discount_first_part">%1$s pro sos primos %2$s</string>
+    <string name="get_discount_first_few_part">%1$s pro sos primos %2$s</string>
+    <string name="get_discount_second_part">a pustis %1$s</string>
+    <string name="cancel_subscription">Annulla s\'abbonamentu</string>
+    <string name="price_and_discount">%1$s • Rispàrmia %2$s</string>
 </resources>
