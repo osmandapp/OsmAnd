@@ -191,9 +191,16 @@ public class NavigationService extends Service implements LocationListener {
 		// registering icon at top level
 		// Leave icon visible even for navigation for proper display
 		Notification notification = app.getNotificationHelper().buildTopNotification();
-		startForeground(OsmandNotification.TOP_NOTIFICATION_SERVICE_ID, notification);
-		app.getNotificationHelper().refreshNotifications();
-		return START_REDELIVER_INTENT;
+		if (notification != null) {
+			startForeground(OsmandNotification.TOP_NOTIFICATION_SERVICE_ID, notification);
+			app.getNotificationHelper().refreshNotifications();
+			return START_REDELIVER_INTENT;
+		} else {
+			notification = app.getNotificationHelper().buildErrorNotification();
+			startForeground(OsmandNotification.TOP_NOTIFICATION_SERVICE_ID, notification);
+			stopSelf();
+			return START_NOT_STICKY;
+		}
 	}
 
 
