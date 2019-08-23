@@ -3187,4 +3187,21 @@ représentant la zone : %1$s x %2$s</string>
     <string name="lang_oc">Occitan</string>
     <string name="app_mode_wagon">Wagon</string>
     <string name="app_mode_pickup_truck">Camionnette</string>
+    <string name="day">Jour</string>
+    <string name="days_2_4">Jours</string>
+    <string name="days_5">Jours</string>
+    <string name="week">Semaine</string>
+    <string name="weeks_2_4">Semaines</string>
+    <string name="weeks_5">Semaines</string>
+    <string name="month">Mois</string>
+    <string name="months_2_4">Mois</string>
+    <string name="months_5">Mois</string>
+    <string name="year">Année</string>
+    <string name="years_2_4">Années</string>
+    <string name="years_5">Années</string>
+    <string name="months_3">Trois mois</string>
+    <string name="price_free">Gratuit</string>
+    <string name="get_free_trial_title">Démarrer votre %1$d %2$s essai gratuit.</string>
+    <string name="get_discount_second_part">puis %1$s</string>
+    <string name="cancel_subscription">Annuler l\'abonnement</string>
 </resources>

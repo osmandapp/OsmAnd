@@ -162,4 +162,5 @@
     <string name="rendering_attr_showLez_name">कम उत्सर्जन क्षेत्र दिखाएं</string>
     <string name="temporary_conditional_routing">अस्थायी सीमाओं पर विचार करें</string>
     <string name="shared_string_default">चूक</string>
+    <string name="price_free">मुफ़्त</string>
 </resources>

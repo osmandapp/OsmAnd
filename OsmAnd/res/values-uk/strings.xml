@@ -31,7 +31,7 @@
     <string name="select_index_file_to_download">Нічого не знайдено. Якщо ви не знайшли свій регіон, ви можете створити його самостійно (див. https://osmand.net).</string>
     <string name="local_indexes_cat_tile">Онлайн та кешовані растрові мапи</string>
     <string name="local_indexes_cat_map">Стандартні мапи (векторні)</string>
-    <string name="index_settings_descr">Звантаження, перегляд подробиць та управління локальними мапами.</string>
+    <string name="index_settings_descr">Завантаження, перегляд подробиць та управління локальними мапами.</string>
     <string name="map_online_plugin_is_not_installed">Увімкніть втулок \'Онлайн-мапи\', щоб вибирати різні джерела мап</string>
     <string name="map_online_data">Онлайн мапи (растрові)</string>
     <string name="map_online_data_descr">Використовувати онлайн-мапи (завантажити та закешувати плитки на карті пам\'яті).</string>
@@ -171,7 +171,7 @@
     <string name="user_password">Пароль</string>
     <string name="osmand_service">Фоновий режим</string>
     <string name="osmand_service_descr">OsmAnd працює у фоновому режимі з вимкненим екраном.</string>
-    <string name="download_files_not_enough_space">Не вистачає місця на диску для звантаження %1$s MB (вільно: %2$s).</string>
+    <string name="download_files_not_enough_space">Не вистачає місця на диску для завантаження %1$s MB (вільно: %2$s).</string>
     <string name="download_files_question_space">Звантажити {0} файл(ів)\? Це потребує {1} МБ. (Наразі вільно {2} МБ.)</string>
     <string name="use_transparent_map_theme">Прозора тема</string>
     <string name="native_library_not_supported">Вбудована бібліотека не підтримується на цьому пристрої.</string>
@@ -388,7 +388,7 @@
     <string name="fast_route_mode_descr">Задіяти розрахунок найшвидшого маршруту, або ж вимкнути режим паливно-ощадного маршруту.</string>
     <string name="tiles_to_download_estimated_size">На масштабі{0} завантажувати {1} тайли ({2} MB)</string>
     <string name="shared_string_download_map">Завантажити мапу</string>
-    <string name="select_max_zoom_preload_area">Виберіть максимальний масштаб для попереднього звантаження</string>
+    <string name="select_max_zoom_preload_area">Виберіть максимальний масштаб для попереднього завантаження</string>
     <string name="maps_could_not_be_downloaded">Дана мапа не може бути завантажена</string>
     <string name="continuous_rendering">Безперервний рендеринг</string>
     <string name="continuous_rendering_descr">Відображати безперервне промальовування замість цілковитого зображення.</string>
@@ -922,29 +922,49 @@
     <string name="osmand_long_description_1000_chars">"OsmAnd (OSM Automated Navigation Directions) 
 \n
 \n 
+\n 
 \n
+\n 
 \nOsmAnd — навігаційне програмне забезпечення з відкритим кодом з доступом до різноманітних картографічних даних від OpenStreetMap (OSM). Всі картографічні дані (векторні та растрові) можуть бути збережені на карті пам’яті телефону для подальшого автономного використання. Також пропонується функція маршрутизації в автономному режимі та в режимі он-лайн, включаючи покрокові голосові підказки. 
 \n
 \n 
+\n 
 \n
+\n 
 \nКілька основних можливостей: 
 \n
+\n 
 \n- повноцінна робота без інтернет-з’єднання (просто збережіть векторні чи растрові дані на пристрій) 
+\n
 \n- доступні компактні автономні векторні мапи всього світу 
-\n- звантаження мап країн чи областей безпосередньо в програмі 
+\n
+\n- завантаження мап країн чи областей безпосередньо в програмі 
+\n
 \n- можливе накладання декількох шарів карти, такі як GPX- або навігаційні треки, POI, Закладки, горизонталі, зупинки громадського транспорту, додаткові карти з налаштовуваною прозорістю 
+\n
 \n- автономний пошук адрес та POI 
+\n
 \n- автономне прокладання маршрутів середньої дальності 
+\n
 \n- режими для пішохідної, автомобільної та велонавігації з опціональними:  - автоматичним перемиканням на денного/нічного режиму мапи 
+\n
 \n- автомасштабуванням мапи відповідно до швидкості руху 
+\n
 \n- можливістю орієнтації мапи за компасом чи напрямком руху 
+\n
 \n- веденням по смугах руху, відображенням обмежень швидкості, записаними та синтезованими голосами супроводу 
+\n
 \n 
 \n
-\nОбмеження цієї безкоштовної версії OsmAnd: 
-\n- кількість завантажень мап є обмеженою 
-\n- відсутній автономний доступ до POI з Вікіпедії 
 \n 
+\nОбмеження цієї безкоштовної версії OsmAnd: 
+\n
+\n- кількість завантажень мап є обмеженою 
+\n
+\n- відсутній автономний доступ до POI з Вікіпедії 
+\n
+\n 
+\n
 \nOsmAnd активно розвивається, і наш проект та його подальший розвиток покладається на фінансові внески на розробку та тестування. Будь ласка, розгляньте можливість придбання OsmAnd+, профінансуйте конкретні нові можливості програми або зробіть благодійний внесок на https://osmand.net."</string>
     <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions)
 \n
@@ -1429,10 +1449,10 @@
     <string name="rendering_attr_transportStops_name">Зупинки транспорту</string>
     <string name="navigate_point_zone">Зона</string>
     <string name="navigate_point_easting">Східної довготи</string>
-    <string name="download_tab_downloads">Усі звантаження</string>
+    <string name="download_tab_downloads">Усі завантаження</string>
     <string name="download_tab_updates">Оновлення</string>
     <string name="download_tab_local">Локальні</string>
-    <string name="no_internet_connection">Звантаження неможливе. Перевірте з’єднання з Інтернет.</string>
+    <string name="no_internet_connection">Завантаження неможливе. Перевірте з’єднання з Інтернет.</string>
     <string name="everything_up_to_date">Всі файли оновлені</string>
     <string name="use_opengl_render">Використовувати OpenGL для візуалізації</string>
     <string name="use_opengl_render_descr">Використовувати апаратне прискорення OpenGL для візуалізації (може сильніше садити батарею або не працювати на деяких пристроях).</string>
@@ -1509,7 +1529,7 @@
     <string name="shared_string_message">Повідомлення</string>
     <string name="agps_data_last_downloaded">Останні завантажені дані A-GPS: %1$s</string>
     <string name="confirm_usage_speed_cameras">У багатьох країнах (Німеччина, Франція, Італія та інші) використання детекторів камер контролю швидкості не дозволено законом. OsmAnd не несе ніякої відповідальності, якщо Ви порушите закон. Будь ласка, натисніть кнопку „Так“, тільки якщо ви маєте право використовувати цю функцію.</string>
-    <string name="welmode_download_maps">Звантаження мап</string>
+    <string name="welmode_download_maps">Завантаження мап</string>
     <string name="welcome_select_region">Щоб правильно показувати дорожні знаки та правила дорожнього руху, будь ласка, виберіть ваш регіон:</string>
     <string name="welcome_text">OsmAnd забезпечує перегляд глобальної автономної (офлайн-) мапи і автономну навігацію.</string>
     <string name="welcome_header">Ласкаво просимо</string>
@@ -1528,7 +1548,7 @@
 \n 
 \nВін також має спеціальні налаштування для показу веломаршрутів та гірських туристичних маршрутів. 
 \n 
-\nВін не потребує звантаження окремих мап, вид створюється на основі інформації зі стандартної мапи. 
+\nВін не потребує завантаження окремих мап, вид створюється на основі інформації зі стандартної мапи. 
 \n 
 \nЦей вид можна де-активувати тут або змінити на інший, змінивши „Стиль мапи“ на потрібний в „Налаштування мапи“.</string>
     <string name="plugin_ski_descr">Втулок забезпечує вам доступ до даних про гірськолижні траси, маршрути для бігових лиж, гірськолижні спуски, фунікулери та підйомники. Маршрути і спуски відзначені різними кольорами залежно від їх складності та зображені з використанням спеціального „зимового“ стилю мапи, який полягає в тому, що використовуються „снігові“ кольори зимового пейзажу. 
@@ -1764,7 +1784,7 @@
     <string name="activate_srtm_plugin">Будь ласка, активуйте втулок \'Горизонталі\' (\'Contour lines\')</string>
     <string name="later">Пізніше</string>
     <string name="get_full_version">Повна версія</string>
-    <string name="downloads">Звантаження</string>
+    <string name="downloads">Завантаження</string>
     <string name="value_downloaded_of_max">%1$.1f з %2$.1f МБ</string>
     <string name="file_size_in_mb">%.1f МБ</string>
     <string name="update_all">Оновити все (%1$s МБ)</string>
@@ -1804,7 +1824,7 @@
     <string name="closing_at">Закриття о</string>
     <string name="number_of_rows_in_dash">Кількість рядків на панелі %1$s</string>
     <string name="recent_places">Нещодавні місця</string>
-    <string name="downloading_number_of_files">Звантаження файлу — %1$d</string>
+    <string name="downloading_number_of_files">Завантаження файлу — %1$d</string>
     <string name="show_free_version_banner">Показати банер безкоштовної версії</string>
     <string name="use_dashboard_btn">Використовувати домашню сторінку</string>
     <string name="use_drawer_btn">Використовувати меню</string>
@@ -2050,10 +2070,10 @@
     <string name="get_it">Отримати</string>
     <string name="get_for">Отримати на %1$s</string>
     <string name="get_for_month">Отримати за %1$s на місяць</string>
-    <string name="osm_live_banner_desc">Отримайте необмежені звантаження для мап, а також оновлення мап частіше ніж один раз на місяць: щотижня, щодня або щогодини.</string>
+    <string name="osm_live_banner_desc">Отримайте необмежені завантаження для мап, а також оновлення мап частіше ніж один раз на місяць: щотижня, щодня або щогодини.</string>
     <string name="osmand_plus_banner_desc">Втулок для необмеженого доступу до мап, їх оновлень та отримання інформації з Wikipedia.</string>
     <string name="si_mi_meters">Милі/метри</string>
-    <string name="skip_map_downloading">Пропустити звантаження мап</string>
+    <string name="skip_map_downloading">Пропустити завантаження мап</string>
     <string name="skip_map_downloading_desc">У Вас немає звантажених мап. Ви можете вибрати мапу зі списку або звантажити її пізніше за допомогою меню — %1$s.</string>
     <string name="search_another_country">Виберіть інший регіон</string>
     <string name="search_map">Пошук мапи…</string>
@@ -2230,7 +2250,7 @@
     <string name="animate_my_location">Анімувати моє місце розташування</string>
     <string name="animate_my_location_desc">Задіяти анімацію прокрутки мапи з моїм місцем розташування під час навігації.</string>
     <string name="do_not_show_startup_messages">Не показувати повідомлення при запуску</string>
-    <string name="subscribe_email_desc">Підпишіться на наше email-розсилання про знижки на OsmAnd та отримаєте 3 додаткові звантаження мап!</string>
+    <string name="subscribe_email_desc">Підпишіться на наше email-розсилання про знижки на OsmAnd та отримаєте 3 додаткові завантаження мап!</string>
     <string name="do_not_show_startup_messages_desc">Пригнічує відображення знижок на застосунок та спеціальні повідомлення про місцеві події.</string>
     <string name="restart_search">Шукати знову</string>
     <string name="increase_search_radius">Збільшити радіус пошуку</string>
@@ -2345,19 +2365,19 @@
 \n• Вивантажуйте GPX-треки в OSM безпосередньо з програми
 \n• Додавайте POI та вивантажуйте їх безпосередньо в OSM (або пізніше, якщо ви зараз в офлайні)
 \n</string>
-    <string name="osmand_extended_description_part8">Osmand — це програмне забезпечення з відкритим кодом, що активно розвивається. Кожен може зробити внесок у програму шляхом звітування про помилки, поліпшення перекладів або створення нових функцій. Крім того, проект покладається на фінансові внески для оплати створення та тестування нових можливостей.
-\nПриблизне охоплення та якість мап:
-\n• Західна Європа: ****
-\n• Східна Європа: ***
-\n• Росія: ***
-\n• Північна Америка: ***
-\n• Південна Америка: **
-\n• Азія: **
-\n• Японія і Корея: ***
-\n• Середній Схід: **
-\n• Африка: **
-\n• Антарктида: *
-\nБільшість країн по всьому світу доступні для звантаження!
+    <string name="osmand_extended_description_part8">Osmand — це програмне забезпечення з відкритим кодом, що активно розвивається. Кожен може зробити внесок у програму шляхом звітування про помилки, поліпшення перекладів або створення нових функцій. Крім того, проект покладається на фінансові внески для оплати створення та тестування нових можливостей. 
+\nПриблизне охоплення та якість мап: 
+\n• Західна Європа: **** 
+\n• Східна Європа: *** 
+\n• Росія: *** 
+\n• Північна Америка: *** 
+\n• Південна Америка: ** 
+\n• Азія: ** 
+\n• Японія і Корея: *** 
+\n• Середній Схід: ** 
+\n• Африка: ** 
+\n• Антарктида: * 
+\nБільшість країн по всьому світу доступні для завантаження! 
 \nОтримайте надійний навігатор у своїй країні — будь то Україна, Франція, Німеччина, Мексика, Великобританія, Іспанія, Нідерланди, США, Росія, Бразилія чи будь-яка інша.</string>
     <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automated Navigation Directions) — картографічна і навігаційна програма з доступом до вільних, глобальних та високоякісних даних OpenStreetMap (OSM).
 \nНасолоджуйтесь голосовою та візуальною навігацією, переглядом цікавих точок (англ. POI), створенням та керуванням GPX-треками, використовуючи відображення горизонталей та даних про висоту (за допомогою зовнішнього втулка), вибором між режимами автомобіліста, велосипедиста й пішохода, редагуванням OSM та ще багато чим іншим.
@@ -2419,7 +2439,7 @@
 \n • Середній Схід: ** 
 \n • Африка: ** 
 \n • Антарктида: * 
-\nБільшість країн по всьому світу доступні для звантаження! 
+\nБільшість країн по всьому світу доступні для завантаження! 
 \nОтримайте надійний навігатор у вашій країні — будь то Україна, Франція, Німеччина, Мексика, Великобританія, Іспанія, Нідерланди, США, Росія, Бразилія чи будь-яка інша…
 \n</string>
     <string name="save_poi_too_many_uppercase">Назва містить занадто багато великих літер. Продовжити?</string>
@@ -2786,7 +2806,7 @@
     <string name="online_webpage_warning">Сторінка доступна тільки онлайн. Відкрити її в браузері?</string>
     <string name="images_cache">Кеш зображень</string>
     <string name="delete_search_history">Вилучити історію пошуку</string>
-    <string name="download_images">Звантаження зображень</string>
+    <string name="download_images">Завантаження зображень</string>
     <string name="download_maps_travel">Туристичні путівники</string>
     <string name="shared_string_wikivoyage">Вікімандри</string>
     <string name="article_removed">Стаття вилучена</string>
@@ -2812,7 +2832,7 @@
     <string name="access_intermediate_arrival_time">Проміжний час прибуття</string>
     <string name="map_widget_intermediate_time">Проміжний час</string>
     <string name="download_wikipedia_description">Звантажити статті Вікіпедії для %1$s, щоб читати їх в автономному режимі.</string>
-    <string name="download_wikipedia_label">Звантаження даних Вікіпедії</string>
+    <string name="download_wikipedia_label">Завантаження даних Вікіпедії</string>
     <string name="open_in_browser_wiki">Відкрити статтю в Інтернеті</string>
     <string name="open_in_browser_wiki_description">Переглянути статтю в браузері.</string>
     <string name="download_wiki_region_placeholder">цей регіон</string>

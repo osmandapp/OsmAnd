@@ -3226,4 +3226,18 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="app_mode_pickup_truck">Kleintransporter</string>
     <string name="new_route_calculated_dist_dbg">Route: Entfernung %s, Fahrzeit%s
 \nBerechnung: %.1f Sek.,%d Straßen,%d Kacheln)</string>
+    <string name="day">Tag</string>
+    <string name="days_2_4">Tage</string>
+    <string name="days_5">Tage</string>
+    <string name="week">Woche</string>
+    <string name="weeks_2_4">Wochen</string>
+    <string name="weeks_5">Wochen</string>
+    <string name="month">Monat</string>
+    <string name="months_2_4">Monate</string>
+    <string name="months_5">Monate</string>
+    <string name="year">Jahr</string>
+    <string name="years_2_4">Jahre</string>
+    <string name="years_5">Jahre</string>
+    <string name="months_3">Drei Monate</string>
+    <string name="price_free">Kostenlos</string>
 </resources>

@@ -3234,4 +3234,27 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="shared_string_default">Per defecte</string>
     <string name="lang_oc">Occità</string>
     <string name="app_mode_pickup_truck">Camioneta descoberta</string>
+    <string name="new_route_calculated_dist_dbg">"Ruta: distància %s, durada %s 
+\nCàlcul: %.1f  s, %d vies, %d tessel·les)"</string>
+    <string name="day">Dia</string>
+    <string name="days_2_4">Dies</string>
+    <string name="days_5">Dies</string>
+    <string name="week">Setmana</string>
+    <string name="weeks_2_4">Setmanes</string>
+    <string name="weeks_5">Setmanes</string>
+    <string name="month">Mes</string>
+    <string name="months_2_4">Mesos</string>
+    <string name="months_5">Mesos</string>
+    <string name="year">Any</string>
+    <string name="years_2_4">Anys</string>
+    <string name="years_5">Anys</string>
+    <string name="months_3">Trimestres</string>
+    <string name="price_free">Gratuït</string>
+    <string name="get_discount_title">"Aconseguiu  %d %@ amb un  %d%% de descompte."</string>
+    <string name="get_free_trial_title">Comenceu la vostra prova gratuïta %1$d %2$s.</string>
+    <string name="get_discount_first_part">%1$s els primers %2$s</string>
+    <string name="get_discount_first_few_part">%1$s els primers %2$s</string>
+    <string name="get_discount_second_part">després %1$s</string>
+    <string name="cancel_subscription">Cancel·la la subscripció</string>
+    <string name="price_and_discount">%1$s • Estalvieu %2$s</string>
 </resources>
