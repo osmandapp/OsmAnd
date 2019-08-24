@@ -3071,7 +3071,7 @@
     <string name="edit_profile_screen_options_subtitle">נא לבחור את הגדרות בררת המחדל למסך עבור הפרופיל</string>
     <string name="edit_profile_nav_settings_subtitle">נא לבחור את הגדרות הניווט כבררת מחדל עבור פרופיל</string>
     <string name="routing_attr_max_num_changes_description">ציון מספר השינויים המרבי</string>
-    <string name="routing_attr_max_num_changes_name">מספר שינויים</string>
+    <string name="routing_attr_max_num_changes_name">מספר החלפות</string>
     <string name="turn_screen_on_router">להתעורר בפניות</string>
     <string name="turn_screen_on_time_descr">להגדיר את זמן התעוררות המסך.</string>
     <string name="turn_screen_on_sensor">להשתמש בחיישן מרחק</string>
