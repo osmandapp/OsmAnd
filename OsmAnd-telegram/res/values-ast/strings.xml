@@ -116,7 +116,7 @@
     <string name="visible_time_for_all">Visibilidá xeneral demientres</string>
     <string name="set_time">Afitamientu del tiempu</string>
     <string name="location_sharing_description">Esbilla los contautos y grupos colos que quies compartir el to allugamientu.</string>
-    <string name="app_name">OsmAnd Online GPS Tracker</string>
+    <string name="app_name">OsmAnd Tracker</string>
     <string name="phone_number_title">Númberu telefónicu</string>
     <string name="phone_number_descr">Númberu telefónicu nel formatu internacional</string>
     <string name="shared_string_password">Contraseña</string>
@@ -156,4 +156,6 @@
     <string name="how_it_works">Cómo funciona</string>
     <string name="show_gps_points">Cómo</string>
     <string name="shared_string_date">Data</string>
+    <string name="altitude">Altitú</string>
+    <string name="shared_string_apply">Aplicar</string>
 </resources>
