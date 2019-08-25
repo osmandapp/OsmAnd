@@ -3225,4 +3225,10 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="lang_oc">Prowansalski</string>
     <string name="app_mode_wagon">Wóz</string>
     <string name="app_mode_pickup_truck">Pickup</string>
+    <string name="day">Dzień</string>
+    <string name="days_2_4">Dni</string>
+    <string name="days_5">Dni</string>
+    <string name="week">Tydzień</string>
+    <string name="weeks_2_4">Tygodnie</string>
+    <string name="weeks_5">Tygodnie</string>
 </resources>
