@@ -3177,7 +3177,7 @@
     <string name="edit_profile_screen_options_subtitle">Selecionar opções de ecrã predefinidos para o perfil</string>
     <string name="edit_profile_nav_settings_subtitle">Selecione as configurações de navegação predefinidas para o perfil</string>
     <string name="routing_attr_max_num_changes_description">Especificar a quantidade máxima de modificações</string>
-    <string name="routing_attr_max_num_changes_name">Quantidade de modificações</string>
+    <string name="routing_attr_max_num_changes_name">Quantidade de transferências</string>
     <string name="turn_screen_on_router">Despertar na curva</string>
     <string name="turn_screen_on_time_descr">Defina o tempo para a qual o ecrã será ativado.</string>
     <string name="turn_screen_on_sensor">Utilizar sensor de proximidade</string>
