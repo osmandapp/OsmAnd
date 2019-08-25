@@ -116,4 +116,20 @@
     <string name="shared_string_end">Končaj</string>
     <string name="shared_string_start">Začni</string>
     <string name="shared_string_apply">Uveljavi</string>
+    <string name="set_time">Nastavi čas</string>
+    <string name="location_sharing_description">Izberite stike in skupine, s katerimi želite deliti svojo lokacijo.</string>
+    <string name="my_location_search_hint">Iskanje: Skupina ali stik</string>
+    <string name="start_location_sharing">Skupna raba lokacije</string>
+    <string name="authentication_code_descr">Telegram vam je poslal kodo OsmAnd za prijavo v vaš račun.</string>
+    <string name="enter_password">Vnesite geslo</string>
+    <string name="password_descr">Telegram geslo</string>
+    <string name="shared_string_login">Prijava</string>
+    <string name="shared_string_logout">Odjava</string>
+    <string name="initialization">Začenjanje</string>
+    <string name="logging_out">Odjavljanje</string>
+    <string name="closing">Zapiranje</string>
+    <string name="gps_network_not_enabled">Vklopi \"Lokacijo\"\?</string>
+    <string name="not_logged_in">Niste prijavljeni</string>
+    <string name="shared_string_distance">Razdalja</string>
+    <string name="share_location">Skupna raba lokacije</string>
 </resources>
