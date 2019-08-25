@@ -1690,7 +1690,7 @@
     <string name="do_not_use_animations">ആനിമേഷനുകള്‍ ഉപയോഗിക്കാതിരിക്കുക</string>
     <string name="do_not_use_animations_descr">ആനിമേഷനുകള്‍ ഉപയോഗിക്കാതിരിക്കുക</string>
     <string name="keep_showing_on_map">കാണിക്കുന്നത് തുടരു</string>
-    <string name="exit_without_saving">സൂക്ഷിക്കാതെ പുറത്ത് പോവുക</string>
+    <string name="exit_without_saving">സൂക്ഷിക്കാതെ പുറത്ത് പോവുക\?</string>
     <string name="line">വര</string>
     <string name="save_as_route_point">"പാതബിന്ദുവായ് സൂക്ഷിക്കുക "</string>
     <string name="save_as_line">"വരയായ്  സൂക്ഷിക്കുക "</string>
@@ -1714,7 +1714,7 @@
     <string name="online_photos">"ഓണ്‍ലൈന്‍ ഫോട്ടോകള്‍ "</string>
     <string name="shared_string_add_photos">"ഫോട്ടോകള്‍ ചേര്‍ക്കുക "</string>
     <string name="mapillary">"മാപ്പില്ലാരി "</string>
-    <string name="private_access_routing_req">"നിങ്ങളുടെ ലക്ഷ്യസ്ഥാനം പൊതുസ്ഥലമല്ല. ഈ യാത്രയില്‍ സ്വകാര്യ വഴികളില്‍ പ്രവേശിക്കാമോ? "</string>
+    <string name="private_access_routing_req">നിങ്ങളുടെ ലക്ഷ്യസ്ഥാനം പൊതുസ്ഥലമല്ല. ഈ യാത്രയില്‍ സ്വകാര്യ വഴികളില്‍ പ്രവേശിക്കാമോ\?</string>
     <string name="restart_search">"വീണ്ടും തെരയുക "</string>
     <string name="increase_search_radius">"തെരച്ചില്‍ വൃത്തം വലുതാക്കുക "</string>
     <string name="nothing_found">"ഒന്നും കണ്ടെത്താനായില്ല "</string>
@@ -1944,7 +1944,7 @@
     <string name="download_wiki_region_placeholder">ഈ പ്രദേശം</string>
     <string name="wiki_article_search_text">"സമാനമായ വിക്കിലേഖനം തെരയുന്നു "</string>
     <string name="wiki_article_not_found">"ലേഖനം   കണ്ടെത്താനായില്ല "</string>
-    <string name="how_to_open_wiki_title">വിക്കിപ്പീഡിയ ലേഖനം എങ്ങനെ തുറക്കാം</string>
+    <string name="how_to_open_wiki_title">വിക്കിപ്പീഡിയ ലേഖനം എങ്ങനെ തുറക്കാം\?</string>
     <string name="osm_live_subscriptions">സബ്സ്ക്രിപ്ഷനുകള്‍</string>
     <string name="powered_by_osmand">ഒസ്മണ്ട്</string>
     <string name="release_3_1">"നാവിഗേഷന്‍: പ്രോഗ്രസ് ബാര്‍ ശരിയാക്കി, റൂട്ടിന്റെ തുടക്കവും ഒടുക്കവും വേഗത്തില്‍ തിരിച്ചിടാം 
@@ -2636,7 +2636,7 @@
     <string name="use_two_digits_longitude">ഇരട്ട അക്ക രേഖാംശം ഉപയോഗിക്കുക</string>
     <string name="index_item_world_wikivoyage">ലോകമെങ്ങുമുള്ള വിക്കിവൊയേജ് ലേഖനങ്ങള്‍</string>
     <string name="images_cache">ഇമേജ് ക്യാഷേ</string>
-    <string name="online_webpage_warning">"ഈ പേ ജ് ഓണ്‍ലൈനിലെ ഉള്ളൂ. ബ്രൗവ്സറില്‍ തുറക്കട്ടേ\? "</string>
+    <string name="online_webpage_warning">ഈ പേ ജ് ഓണ്‍ലൈനിലെ ഉള്ളൂ. ബ്രൗവ്സറില്‍ തുറക്കട്ടേ\?</string>
     <string name="shared_string_dont">അരുത്</string>
     <string name="shared_string_do">ചെയ്യൂ</string>
     <string name="wikivoyage_download_pics">ചിത്രങ്ങൾ ഡൗൺലോഡ് ചെയ്യുക</string>
