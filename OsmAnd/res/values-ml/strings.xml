@@ -2140,7 +2140,7 @@
     <string name="gpx_option_calculate_first_last_segment">ആദ്യത്തേയും അവസാനത്തേയും റൂട്ട് സെഗ്മെന്റിനായി OsmAnd വഴി കണക്കാക്കുക</string>
     <string name="keep_and_add_destination_point">തുടർന്നുള്ള ലക്ഷ്യമായി ചേർക്കുക</string>
     <string name="copying_osmand_one_file_descr">പുതിയ ലക്ഷ്യത്തിലേക്ക് ഫയൽ (%s) പകർത്തുന്നു ...</string>
-    <string name="copying_osmand_files_descr">"പുതിയ ലക്ഷ്യത്തിലേക്കു (% s) OsmAnd ഡാറ്റാ ഫയലുകൾ പകർത്തുന്നു  ..."</string>
+    <string name="copying_osmand_files_descr">"പുതിയ ലക്ഷ്യത്തിലേക്കു (%s) OsmAnd ഡാറ്റാ ഫയലുകൾ പകർത്തുന്നു  ..."</string>
     <string name="copying_osmand_files">OsmAnd ഡാറ്റാ ഫയലുകൾ പകർത്തുന്നു ...</string>
     <string name="local_osm_changes_delete_all_confirm">നിങ്ങൾ %1$d OSM മാറ്റങ്ങൾ ഇല്ലാതാക്കാൻ പോകുകയാണ്. ഉറപ്പാണോ\?</string>
     <string name="local_index_tile_data_zooms">ഡൌൺലോഡ് ചെയ്ത സൂം: %1$s</string>
@@ -2441,7 +2441,7 @@
     <string name="quick_action_gpx_category_descr">ഒരു ഓപ്ഷണൽ വിഭാഗം തിരഞ്ഞെടുക്കുക.</string>
     <string name="quick_action_fav_name_descr">വിലാസം അല്ലെങ്കിൽ സ്ഥല നാമം ഉപയോഗിക്കാൻ ശൂന്യമായി വിടുക.</string>
     <string name="quick_action_interim_dialog">ഒരു ഇടക്കാല ഡയലോഗ് കാണിക്കുക</string>
-    <string name="quick_action_map_overlay_switch">മാപ്പ് ഓവർലേ \"% s\" ആയി മാറ്റിയിരിക്കുന്നു.</string>
+    <string name="quick_action_map_overlay_switch">മാപ്പ് ഓവർലേ \"%s\" ആയി മാറ്റിയിരിക്കുന്നു.</string>
     <string name="quick_action_map_underlay_switch">മാപ്പ് അണ്ടർലേ \"%s\" ആയി മാറ്റിയിട്ടുണ്ടു്.</string>
     <string name="navigate_point_olc">ലൊക്കേഷൻ കോഡ് തുറക്കുക</string>
     <string name="navigate_point_olc_info_invalid">അസാധുവായ OLC
