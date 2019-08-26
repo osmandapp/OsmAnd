@@ -2991,7 +2991,7 @@ POIの更新は利用できません</string>
 \n• 案内メニューとルート詳細の暗色テーマ時の表示を修正
 \n
 \n• 距離測定時に方位を表示</string>
-    <string name="shared_string_degrees">度</string>
+    <string name="shared_string_degrees">角度(°)</string>
     <string name="shared_string_milliradians">ミリラジアン</string>
     <string name="angular_measeurement">角度単位</string>
     <string name="angular_measeurement_descr">方位角度の単位を変更します。</string>
