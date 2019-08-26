@@ -172,5 +172,20 @@
     <string name="min_logging_speed">Najmanjša hitrost beleženja</string>
     <string name="gpx_settings">Nastavitve GPX</string>
     <string name="set_time_timeline_descr">Izbor časa za prikaz</string>
-    <string name="start_end_date">"Začetni  – Končni datum"</string>
+    <string name="start_end_date">Začetni — Končni datum</string>
+    <string name="location_history">Zgodovina lokacij</string>
+    <string name="open_osmand">Odpri OsmAnd</string>
+    <string name="shared_string_live">V živo</string>
+    <string name="osmand_service_descr">OsmAnd Tracker deluje v ozadju z izklopljenim zaslonom.</string>
+    <string name="osmand_logo">OsmAnd logotip</string>
+    <string name="install_osmand_dialog_message">Najprej morate namestiti brezplačno ali plačljivo različico OsmAnd</string>
+    <string name="welcome_descr">
+        <b>OsmAnd tracker</b> vam omogoča, da delite svojo lokacijo in vidite lokacijo drugih v programu OsmAnd.<br/>
+        <br/>Aplikacija uporablja Telegram API, tako da boste potrebovali Telegram račun.</string>
+    <string name="my_location">Moja lokacija</string>
+    <string name="live_now">V živo zdaj</string>
+    <string name="timeline">Časovnica</string>
+    <string name="type_contact_or_group_name">Vnesite ime stika ali skupine</string>
+    <string name="bearing">Smer</string>
+    <string name="timeline_no_data_descr">Za izbrani dan nimamo zbranih podatkov</string>
 </resources>
