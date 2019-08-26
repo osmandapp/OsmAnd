@@ -3190,7 +3190,7 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="routing_attr_allow_expert_name">Dovoli nevarne poti</string>
     <string name="routing_attr_allow_expert_description">Izjemno zahtevne poti z nevarnimi preprekami in okolico.</string>
     <string name="routing_attr_difficulty_preference_name">Prednostna raven zahtevnosti</string>
-    <string name="routing_attr_freeride_policy_name">Neoznačene poti</string>
+    <string name="routing_attr_freeride_policy_name">Izven urejenih smučišč</string>
     <string name="process_downloading_service">Storitev prejemanja posodobitev OsmAnd</string>
     <string name="shared_string_color_magenta">Sinje modra</string>
     <string name="press_again_to_change_the_map_orientation">Pritisnite znova, da spremenite usmerjenost zemljevida.</string>
@@ -3205,4 +3205,5 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="new_route_calculated_dist_dbg">Pot: razdalja %s, čas %s 
 \nPreračun: %.1f sek, %d poti, %d ploščic)</string>
     <string name="app_mode_pickup_truck">Poltovornjak</string>
+    <string name="routing_attr_freeride_policy_description">Turno in izven urejenih smušišč so neuradne poti in prehodi. Običajno niso teptani in uradno ne vzdrževani in jih ob koncu dneva ne preverja nihče. Vstop na lastno odgovornost.</string>
 </resources>
