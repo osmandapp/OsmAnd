@@ -217,7 +217,7 @@ MB)をダウンロードしますか?</string>
     <string name="use_trackball">トラックボールを使用</string>
     <string name="background_service_wait_int_descr">位置修正用の待ち時間をセットします</string>
     <string name="background_service_wait_int">待ち時間</string>
-    <string name="where_am_i">現在地を表示</string>
+    <string name="where_am_i">現在地を表示\?</string>
     <string name="process_navigation_service">OsmAnd ナビゲーションサービス</string>
     <string name="network_provider">ネットワーク</string>
     <string name="gps_provider">GPS</string>
@@ -1231,7 +1231,7 @@ POIの更新は利用できません</string>
     <string name="keep_informing">ナビゲーション指示の繰り返し</string>
     <string name="keep_informing_descr">ナビゲーション指示を繰り返す間隔を設定します</string>
     <string name="arrival_distance">目的地周辺でのアナウンスタイミング</string>
-    <string name="arrival_distance_descr">目的地周辺でのアナウンスをするタイミングを設定します</string>
+    <string name="arrival_distance_descr">目的地周辺でのアナウンスをするタイミングを設定します\?</string>
     <string name="always_center_position_on_map">移動時、現在地を画面中央よりに表示</string>
     <string name="voice_pref_title">音声関連設定</string>
     <string name="misc_pref_title">その他の設定</string>

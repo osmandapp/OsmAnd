@@ -668,8 +668,7 @@
     <string name="index_tours">சுற்றுப்பயணம்</string>
     <string name="shared_string_all">அனைத்து</string>
     <string name="shared_string_waypoints">பாதை புள்ளிகளின்</string>
-    <string name="download_additional_maps">காணாமல் போன வரைபடங்கள் %1$s (%2$d எம்பி) பதிவிறக்க வேண்டுமா\?
-\n</string>
+    <string name="download_additional_maps">காணாமல் போன வரைபடங்கள் %1$s (%2$d எம்பி) பதிவிறக்க வேண்டுமா\?</string>
     <string name="rendering_value_browse_map_name">வரைபடத்தை உலாவுக</string>
     <string name="rendering_value_car_name">கார்</string>
     <string name="rendering_value_bicycle_name">மிதிவண்டி</string>
