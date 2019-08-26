@@ -1810,7 +1810,7 @@
     <string name="default_price_currency_format">%1$.2f %2$s</string>
     <string name="osm_live_payment_header">വരിസംഖ്യ അടക്കാനുള്ള ഇടവേള തെരഞ്ഞെടുക്കുക:</string>
     <string name="osm_live_payment_contribute_descr">വരുമാനത്തിന്റെ ഭാഗം ഓപ്പൺസ്ട്രീറ്റ്മാപ്പ് സംഭാവകർക്ക് പോകുന്നു.</string>
-    <string name="markers_remove_dialog_msg">മാപ്പ് മാർക്കർ \'% s\' ഇല്ലാതാക്കണോ\?</string>
+    <string name="markers_remove_dialog_msg">മാപ്പ് മാർക്കർ \'%s\' ഇല്ലാതാക്കണോ\?</string>
     <string name="edit_map_marker">മാപ്പ് മാര്‍ക്കര്‍ തിരുത്തുക</string>
     <string name="third_party_application">മൂന്നാം-കക്ഷി അപ്ലിക്കേഷൻ</string>
     <string name="search_street">"തെരുവ് തെരയുക "</string>
