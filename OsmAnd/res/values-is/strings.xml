@@ -114,8 +114,8 @@
     <string name="si_min_m">mínútur á mílu</string>
     <string name="si_nm_h">Sjómílur á klukkustund (hnútar)</string>
     <string name="nm_h">hnútar</string>
-    <string name="min_mile">min/m</string>
-    <string name="min_km">min/km</string>
+    <string name="min_mile">mín/m</string>
+    <string name="min_km">mín/km</string>
     <string name="m_s">m/sek</string>
     <string name="shared_string_navigation">Leiðsögn</string>
     <string name="av_locations">Staðsetningar</string>
@@ -509,7 +509,7 @@
     <string name="left">eftir</string>
     <string name="front_left">áfram til vinstri</string>
     <string name="oclock">á klukku</string>
-    <string name="towards">tilhneiging</string>
+    <string name="towards">í áttina að</string>
     <string name="accuracy">nákvæmni</string>
     <string name="altitude">Hæð</string>
     <string name="no_info">Engar upplýsingar</string>
@@ -527,7 +527,7 @@
     <string name="index_name_africa">Afríka</string>
     <string name="index_name_asia">Asía</string>
     <string name="amenity_type_user_defined">Skilgreint af notanda</string>
-    <string name="routing_settings">Rötun</string>
+    <string name="routing_settings">Leiðsögn</string>
     <string name="global_settings">Víðværar stillingar</string>
     <string name="general_settings">Almennt</string>
     <string name="osmand_service">Bakgrunnshamur</string>
@@ -599,7 +599,7 @@
     <string name="int_min">mín.</string>
     <string name="show_poi_filter">Sýna síu</string>
     <string name="search_poi_filter">Sía</string>
-    <string name="route_head">Haus</string>
+    <string name="route_head">Beint</string>
     <string name="first_time_continue">Seinna</string>
     <string name="map_orientation_portrait">Lóðrétt</string>
     <string name="map_orientation_landscape">Lárétt</string>
@@ -1049,7 +1049,7 @@ Ferill %2$s</string>
     <string name="route_descr_select_destination">Veldu áfangastað</string>
     <string name="route_preferences">Kjörstillingar leiðar</string>
     <string name="route_info">Upplýsingar um leið</string>
-    <string name="routing_attr_prefer_motorway_name">Velja hraðbrautir</string>
+    <string name="routing_attr_prefer_motorway_name">Velja helst hraðbrautir</string>
     <string name="routing_attr_prefer_motorway_description">Velja helst hraðbrautir</string>
     <string name="routing_attr_avoid_toll_name">Forðast gjaldskylda vegi</string>
     <string name="routing_attr_avoid_toll_description">Forðast gjaldskylda vegi</string>
@@ -1080,7 +1080,7 @@ Ferill %2$s</string>
     <string name="maps_define_edit">Skilgreina/Breyta…</string>
     <string name="driving_region_descr">Veldu aksturssvæði: BNA, Evrópa, Bretland, Asía og annað.</string>
     <string name="driving_region">Aksturssvæði</string>
-    <string name="speak_street_names">Götuheiti (TTS)</string>
+    <string name="speak_street_names">Götuheiti (talgervill)</string>
     <string name="speak_cameras">Hraðamyndavélar</string>
     <string name="route_descr_lat_lon">Bre %1$.3f, Len %2$.3f</string>
     <string name="context_menu_item_destination_point">Setja sem áfangastað</string>
@@ -1317,7 +1317,7 @@ og leiðsögn</string>
     <string name="download_files_not_enough_space">Það er ekki nægilegt pláss til að sækja %1$s MB (laust: %2$s).</string>
     <string name="native_library_not_supported">Innbyggt aðgerðasafn er ekki stutt á þessu tæki.</string>
     <string name="init_native_library">Frumstilli innbyggt aðgerðasafn…</string>
-    <string name="keep_informing_never">Einungis handvirkt (banka á örina)</string>
+    <string name="keep_informing_never">Einungis handvirkt (ýta á örina)</string>
     <string name="keep_informing_descr">Endurtaka leiðsagnarleiðbeiningar með reglulegu millibili.</string>
     <string name="keep_informing">Endurtaka leiðsagnarleiðbeiningar</string>
     <string name="auto_follow_route_navigation">Miðja sýn einungis við leiðsögn</string>
@@ -1537,7 +1537,7 @@ Len %2$s</string>
     <string name="use_opengl_render">Nota OpenGL myndgerð</string>
     <string name="use_opengl_render_descr">Nota vélbúnaðarhröðun OpenGL myndgerðar (gæti notað meira af rafhlöðu, eða virkað ekki á eldri tækjum).</string>
     <string name="map_update">Uppfærslur tiltækar fyrir %1$s kort</string>
-    <string name="rendering_attr_publicTransportMode_name">strætisvagn,strætó,áætlanabifreið,sporvagn,rafknúinn strætisvagn,skutla</string>
+    <string name="rendering_attr_publicTransportMode_name">Strætisvagnaleiðir, sporvagnar og skutlur</string>
     <string name="lock_screen_request_explanation">%1$s þarf heimild fyrir þessu til að slökkva á skjánum til að spara orku.</string>
     <string name="wake_on_voice_descr">Kveikja á skjá (ef slökkt er á honum) þegar beygja nálgast.</string>
     <string name="rendering_attr_trolleybusRoutes_name">Leiðir rafknúinna strætisvagna</string>
@@ -1545,7 +1545,7 @@ Len %2$s</string>
     <string name="speed_limit_exceed">Þolvik hraðatakmarka</string>
     <string name="text_size_descr">Stilla stærð texta á korti.</string>
     <string name="traffic_warning_calming">Hæging á umferð</string>
-    <string name="traffic_warning">Aðvörun vegna umbefðar</string>
+    <string name="traffic_warning">Aðvörun vegna umferðar</string>
     <string name="speak_favorites">Eftirlæti í næsta nágrenni</string>
     <string name="way_alarms">Aðvaranir vegna umferðar</string>
     <string name="background_service_is_enabled_question">OsmAnd bakgrunnsþjónustan er ennþá keyrandi. Viltu stöðva hana líka?</string>
@@ -1924,7 +1924,7 @@ Punktar</string>
     <string name="zoom_by_trackball">Nota bendilkúlu til að stýra aðdrætti</string>
     <string name="use_fluorescent_overlays_descr">Nota flúrliti til að birta ferla og leiðir.</string>
     <string name="gpx_option_from_start_point">Fara eftir öllum ferlinum</string>
-    <string name="routing_attr_avoid_shuttle_train_name">Forðast tengilest</string>
+    <string name="routing_attr_avoid_shuttle_train_name">Forðast tengilestir</string>
     <string name="routing_attr_avoid_shuttle_train_description">Forðast að nota tengilestir</string>
     <string name="restart_is_required">Til að breytingarnar verði að fullu virkar, þarf að endurræsa forritið handvirkt.</string>
     <string name="lang_ber">Berberska</string>
@@ -3233,4 +3233,25 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="lang_oc">Occitanska</string>
     <string name="app_mode_wagon">Dráttarvagn</string>
     <string name="app_mode_pickup_truck">Pallbíll</string>
+    <string name="day">dag</string>
+    <string name="days_2_4">daga</string>
+    <string name="days_5">daga</string>
+    <string name="week">viku</string>
+    <string name="weeks_2_4">vikur</string>
+    <string name="weeks_5">vikur</string>
+    <string name="month">mánuð</string>
+    <string name="months_2_4">mánuði</string>
+    <string name="months_5">mánuði</string>
+    <string name="year">ár</string>
+    <string name="years_2_4">ár</string>
+    <string name="years_5">ár</string>
+    <string name="months_3">þrjá mánuði</string>
+    <string name="price_free">ókeypis</string>
+    <string name="get_discount_title">Fáðu %d %@ með %d%% afslætti.</string>
+    <string name="get_free_trial_title">Byrjaðu að nota %d %@ ókeypis prufuáskriftina.</string>
+    <string name="get_discount_first_part">%@ fyrir fyrstu %@</string>
+    <string name="get_discount_first_few_part">%@ fyrir fyrstu %@</string>
+    <string name="get_discount_second_part">síðan %@</string>
+    <string name="cancel_subscription">Hætta áskrift</string>
+    <string name="price_and_discount">%1$s • Sparaðu %2$s</string>
 </resources>
