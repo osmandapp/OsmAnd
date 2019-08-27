@@ -2168,7 +2168,7 @@ L\'espai disponible és només de {2} MB.</string>
     <string name="quick_action_add_configure_map">Configura el mapa</string>
     <string name="quick_action_add_navigation">Navegació</string>
     <string name="quick_action_fav_name_descr">Deixeu-lo buit per utilitzar l\'adreça o el nom d\'un lloc.</string>
-    <string name="quick_action_bug_descr">Aquest missatge està inclòs en el camp de comentaris.</string>
+    <string name="quick_action_bug_descr">Aquest missatge s\'inclou en el camp de comentaris.</string>
     <string name="quick_action_bug_message">Missatge</string>
     <string name="quick_action_category_descr">Seleccioneu la categoria on desar-hi el Preferit.</string>
     <string name="quick_action_gpx_category_descr">Seleccioneu una categoria opcional.</string>
