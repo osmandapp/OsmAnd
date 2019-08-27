@@ -41,19 +41,27 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 	private String bottomButtonText;
 	private static final String BUTTON_ITEM = "button_item";
 
+	private boolean usedOnMap;
+
 	public ProfileMenuAdapter(List<ApplicationMode> items, Set<ApplicationMode> selectedItems,
-		OsmandApplication app, String bottomButtonText) {
+	                          OsmandApplication app, String bottomButtonText) {
+		this(items, selectedItems, app, bottomButtonText, false);
+	}
+
+	public ProfileMenuAdapter(List<ApplicationMode> items, Set<ApplicationMode> selectedItems,
+	                          OsmandApplication app, String bottomButtonText, boolean usedOnMap) {
 		this.items.addAll(items);
 		if (bottomButton) {
 			this.items.add(BUTTON_ITEM);
 		}
+		this.usedOnMap = usedOnMap;
 		this.app = app;
 		this.selectedItems = selectedItems;
 		this.bottomButton = !Algorithms.isEmpty(bottomButtonText);
 		this.bottomButtonText = bottomButtonText;
-		selectedIconColorRes = isNightMode(app)
-			? R.color.active_color_primary_dark
-			: R.color.active_color_primary_light;
+		selectedIconColorRes = isNightMode(app, usedOnMap)
+				? R.color.active_color_primary_dark
+				: R.color.active_color_primary_light;
 	}
 
 	public List<Object> getItems() {
@@ -80,6 +88,14 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 		return super.getItemViewType(position);
 	}
 
+	public boolean isUsedOnMap() {
+		return usedOnMap;
+	}
+
+	public void setUsedOnMap(boolean usedOnMap) {
+		this.usedOnMap = usedOnMap;
+	}
+
 	@NonNull
 	@Override
 	public ProfileViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -99,7 +115,7 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 			holder.menuIcon.setVisibility(View.VISIBLE);
 			final ApplicationMode item = (ApplicationMode) obj;
 			if (bottomButton) {
-				holder.divider.setBackgroundColor(isNightMode(app)
+				holder.divider.setBackgroundColor(isNightMode(app, usedOnMap)
 					? app.getResources().getColor(R.color.divider_color_dark)
 					: app.getResources().getColor(R.color.divider_color_light));
 			}
@@ -111,7 +127,7 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 				holder.descr.setText(R.string.profile_type_base_string);
 			}
 
-			holder.title.setTextColor(app.getResources().getColor(isNightMode(app)
+			holder.title.setTextColor(app.getResources().getColor(isNightMode(app, usedOnMap)
 				? R.color.text_color_primary_dark
 				: R.color.text_color_primary_light));
 
@@ -129,7 +145,7 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 			holder.switcher.setVisibility(View.GONE);
 			holder.menuIcon.setVisibility(View.GONE);
 			holder.title.setTextColor(app.getResources().getColor(
-				isNightMode(app)
+				isNightMode(app, usedOnMap)
 				? R.color.active_color_primary_dark
 				: R.color.active_color_primary_light));
 			holder.title.setText(bottomButtonText);
@@ -146,16 +162,19 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 		if (iconRes == 0 || iconRes == -1) {
 			iconRes = R.drawable.ic_action_world_globe;
 		}
-		selectedIconColorRes = mode.getIconColorInfo().getColor(isNightMode(app));
+		selectedIconColorRes = mode.getIconColorInfo().getColor(isNightMode(app, usedOnMap));
 		if (selectedItems.contains(mode)) {
-			holder.icon.setImageDrawable(app.getUIUtilities().getIcon(iconRes, mode.getIconColorInfo().getColor(isNightMode(app))));
+			holder.icon.setImageDrawable(app.getUIUtilities().getIcon(iconRes, mode.getIconColorInfo().getColor(isNightMode(app, usedOnMap))));
 		} else {
 			holder.icon.setImageDrawable(app.getUIUtilities().getIcon(iconRes, R.color.profile_icon_color_inactive));
 		}
 	}
 
-	private static boolean isNightMode(OsmandApplication ctx) {
-		return !ctx.getSettings().isLightContent();
+	private static boolean isNightMode(OsmandApplication ctx, boolean useMapTheme) {
+		if (useMapTheme) {
+			return ctx.getDaynightHelper().isNightModeForMapControls();
+		}
+		return	!ctx.getSettings().isLightContent();
 	}
 
 	class ProfileViewHolder extends RecyclerView.ViewHolder {

@@ -104,7 +104,7 @@ public class AppModesBottomSheetDialogFragment extends MenuBottomSheetDialogFrag
 	public void createMenuItems(Bundle savedInstanceState) {
 
 		themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
-		adapter = new ProfileMenuAdapter(allModes, selectedModes, getMyApplication(), getString(R.string.shared_string_manage));
+		adapter = new ProfileMenuAdapter(allModes, selectedModes, getMyApplication(), getString(R.string.shared_string_manage), true);
 		recyclerView = new RecyclerView(getContext());
 		recyclerView = (RecyclerView) View
 			.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.recyclerview, null);
