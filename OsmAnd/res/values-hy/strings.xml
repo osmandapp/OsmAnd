@@ -2549,8 +2549,7 @@
     <string name="welcome_to_open_beta">Բարի գալուստ բաց բետա տարբերակ</string>
     <string name="monthly_map_updates">Քարտեզի թարմացումները`<b>ամսական</b>
     </string>
-    <string name="daily_map_updates">Քարտեզի թարմացումները`<b>ամեն ժամ</b>
-    </string>
+    <string name="daily_map_updates">Քարտեզի թարմացումները`<b>ամեն ժամ</b> m</string>
     <string name="in_app_purchase">Գնում հավելվածում</string>
     <string name="in_app_purchase_desc">Մեկանգամյա վճարում</string>
     <string name="in_app_purchase_desc_ex">Մի անգամ գնելուց հետո այն մշտապես մատչելի կլինի ձեզ համար:</string>
