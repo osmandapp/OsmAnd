@@ -85,7 +85,7 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 			}
 		});
 
-		adapter = new ProfileMenuAdapter(allAppModes, availableAppModes, getMyApplication(), null);
+		adapter = new ProfileMenuAdapter(allAppModes, availableAppModes, getMyApplication(), null, !getMyApplication().getSettings().isLightContent());
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 		recyclerView.setAdapter(adapter);
 		return view;
