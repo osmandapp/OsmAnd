@@ -3,9 +3,9 @@ package net.osmand.plus.profiles;
 import android.support.annotation.ColorRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.view.ContextThemeWrapper;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SwitchCompat;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -41,25 +41,20 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 	private String bottomButtonText;
 	private static final String BUTTON_ITEM = "button_item";
 
-	private boolean usedOnMap;
+	private boolean nightMode;
 
 	public ProfileMenuAdapter(List<ApplicationMode> items, Set<ApplicationMode> selectedItems,
-	                          OsmandApplication app, String bottomButtonText) {
-		this(items, selectedItems, app, bottomButtonText, false);
-	}
-
-	public ProfileMenuAdapter(List<ApplicationMode> items, Set<ApplicationMode> selectedItems,
-	                          OsmandApplication app, String bottomButtonText, boolean usedOnMap) {
+	                          OsmandApplication app, String bottomButtonText, boolean nightMode) {
 		this.items.addAll(items);
 		if (bottomButton) {
 			this.items.add(BUTTON_ITEM);
 		}
-		this.usedOnMap = usedOnMap;
 		this.app = app;
 		this.selectedItems = selectedItems;
 		this.bottomButton = !Algorithms.isEmpty(bottomButtonText);
 		this.bottomButtonText = bottomButtonText;
-		selectedIconColorRes = isNightMode(app, usedOnMap)
+		this.nightMode = nightMode;
+		selectedIconColorRes = nightMode
 				? R.color.active_color_primary_dark
 				: R.color.active_color_primary_light;
 	}
@@ -88,19 +83,12 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 		return super.getItemViewType(position);
 	}
 
-	public boolean isUsedOnMap() {
-		return usedOnMap;
-	}
-
-	public void setUsedOnMap(boolean usedOnMap) {
-		this.usedOnMap = usedOnMap;
-	}
-
 	@NonNull
 	@Override
 	public ProfileViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-		View itemView =
-				LayoutInflater.from(parent.getContext()).inflate(R.layout.profile_list_item, parent, false);
+		int themeResId = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
+		View itemView = 
+				View.inflate(new ContextThemeWrapper(parent.getContext(), themeResId), R.layout.profile_list_item, null);
 		return new ProfileViewHolder(itemView);
 	}
 
@@ -114,11 +102,6 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 			holder.switcher.setVisibility(View.VISIBLE);
 			holder.menuIcon.setVisibility(View.VISIBLE);
 			final ApplicationMode item = (ApplicationMode) obj;
-			if (bottomButton) {
-				holder.divider.setBackgroundColor(isNightMode(app, usedOnMap)
-					? app.getResources().getColor(R.color.divider_color_dark)
-					: app.getResources().getColor(R.color.divider_color_light));
-			}
 			holder.title.setText(item.toHumanString(app));
 			if (item.isCustomProfile()) {
 				holder.descr.setText(String.format(app.getString(R.string.profile_type_descr_string),
@@ -126,10 +109,6 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 			} else {
 				holder.descr.setText(R.string.profile_type_base_string);
 			}
-
-			holder.title.setTextColor(app.getResources().getColor(isNightMode(app, usedOnMap)
-				? R.color.text_color_primary_dark
-				: R.color.text_color_primary_light));
 
 			holder.initSwitcher = true;
 			holder.switcher.setChecked(selectedItems.contains(item));
@@ -145,7 +124,7 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 			holder.switcher.setVisibility(View.GONE);
 			holder.menuIcon.setVisibility(View.GONE);
 			holder.title.setTextColor(app.getResources().getColor(
-				isNightMode(app, usedOnMap)
+				nightMode
 				? R.color.active_color_primary_dark
 				: R.color.active_color_primary_light));
 			holder.title.setText(bottomButtonText);
@@ -162,19 +141,12 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 		if (iconRes == 0 || iconRes == -1) {
 			iconRes = R.drawable.ic_action_world_globe;
 		}
-		selectedIconColorRes = mode.getIconColorInfo().getColor(isNightMode(app, usedOnMap));
+		selectedIconColorRes = mode.getIconColorInfo().getColor(nightMode);
 		if (selectedItems.contains(mode)) {
-			holder.icon.setImageDrawable(app.getUIUtilities().getIcon(iconRes, mode.getIconColorInfo().getColor(isNightMode(app, usedOnMap))));
+			holder.icon.setImageDrawable(app.getUIUtilities().getIcon(iconRes, selectedIconColorRes));
 		} else {
 			holder.icon.setImageDrawable(app.getUIUtilities().getIcon(iconRes, R.color.profile_icon_color_inactive));
 		}
-	}
-
-	private static boolean isNightMode(OsmandApplication ctx, boolean useMapTheme) {
-		if (useMapTheme) {
-			return ctx.getDaynightHelper().isNightModeForMapControls();
-		}
-		return	!ctx.getSettings().isLightContent();
 	}
 
 	class ProfileViewHolder extends RecyclerView.ViewHolder {

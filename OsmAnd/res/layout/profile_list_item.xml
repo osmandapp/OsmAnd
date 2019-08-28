@@ -51,7 +51,7 @@
 					android:ellipsize="end"
 					android:maxLines="1"
 					android:textSize="@dimen/default_desc_text_size"
-					android:textColor="@color/description_font_and_bottom_sheet_icons"
+					android:textColor="?android:textColorSecondary"
 					tools:text="Type: Bicycle" />
 
 			</LinearLayout>
