@@ -3037,4 +3037,92 @@
     <string name="run_full_osmand_header">Να εκκινήσει το OsmAnd;</string>
     <string name="routing_attr_avoid_sett_name">Αποφυγή βοτσάλων και πλακών</string>
     <string name="routing_attr_avoid_sett_description">Αποφυγή βοτσάλων και πλακών</string>
+    <string name="shared_string_min_speed">Ελαχ. ταχύτητα</string>
+    <string name="shared_string_max_speed">Μεγ. ταχύτητα</string>
+    <string name="default_speed_setting_title">Προεπιλεγμένη ταχύτητα</string>
+    <string name="default_speed_setting_descr">Αλλαγή ρυθμίσεων προεπιλεγμένης ταχύτητας</string>
+    <string name="minmax_speed_dialog_title">Ορισμός ελαχ/μεγ ταχύτητας</string>
+    <string name="default_speed_dialog_msg">Χρησιμοποιείται για τον υπολογισμό του αναμενόμενου χρόνου άφιξης κατά τη διαδρομή</string>
+    <string name="new_profile">Νέα κατατομή (προφίλ)</string>
+    <string name="shared_string_crash">Κατάρρευση</string>
+    <string name="app_mode_ufo">ΑΤΙΑ</string>
+    <string name="release_3_4">• Κατατομές (προφίλ) εφαρμογής: δημιουργήστε μια προσαρμοσμένη κατατομή για τις δικές σας ανάγκες, με προσαρμοσμένο εικονίδιο και χρώμα
+\n
+\n • Τώρα, προσαρμόστε οποιεσδήποτε προεπιλογές και μεγ/ελαχ ταχύτητα της κατατομής
+\n
+\n • Προστέθηκε γραφικό στοιχείο για τις τρέχουσες συντεταγμένες
+\n
+\n • Προστέθηκαν επιλογές για την εμφάνιση πυξίδας και χάρακα ακτίνας στον χάρτη
+\n
+\n • Διόρθωση παρασκηνίου καταγραφής ίχνους
+\n
+\n • Βελτιωμένες λήψεις παρασκηνίου χάρτη
+\n
+\n • Επιστροφή της επιλογής \'Ενεργοποίηση οθόνης\'
+\n
+\n • Διόρθωση επιλογής γλώσσας της βικιπαίδειας
+\n
+\n • Διόρθωση συμπεριφοράς πλήκτρου πυξίδας κατά την πλοήγηση
+\n
+\n • Άλλες διορθώσεις σφαλμάτων
+\n
+\n</string>
+    <string name="app_mode_personal_transporter">Προσωπικός μεταφορέας</string>
+    <string name="app_mode_monowheel">Μονός τροχός</string>
+    <string name="app_mode_scooter">Βέσπα</string>
+    <string name="precision_hdop_and_vdop">Οριζόντια ακρίβεια: %1$s, κάθετη: %2$s</string>
+    <string name="precision_hdop">Οριζόντια ακρίβεια: %s</string>
+    <string name="app_mode_offroad">Εκτός δρόμου</string>
+    <string name="edit_profile_setup_title">Κατατομή (προφίλ) ρύθμισης</string>
+    <string name="edit_profile_setup_subtitle">Η κατατομή (προφίλ) κρατά τις δικές της ρυθμίσεις</string>
+    <string name="edit_profile_setup_map_subtitle">Επιλέξτε τις προεπιλεγμένες επιλογές χάρτη για την κατατομή (προφίλ)</string>
+    <string name="edit_profile_screen_options_subtitle">Επιλέξτε τις προεγκατεστημένες επιλογές ως κατατομή</string>
+    <string name="edit_profile_nav_settings_subtitle">Επιλέξτε τις προεπιλεγμένες ρυθμίσεις πλοήγησης ως κατατομή</string>
+    <string name="routing_attr_max_num_changes_description">Καθορίστε τον μέγιστο αριθμό αλλαγών</string>
+    <string name="routing_attr_max_num_changes_name">Αριθμός αλλαγών</string>
+    <string name="turn_screen_on_router">Ενεργοποίηση στη στροφή</string>
+    <string name="turn_screen_on_time_descr">Ορίστε τον χρόνο ενεργοποίησης της οθόνης.</string>
+    <string name="turn_screen_on_sensor">Χρήση του αισθητήρα προσέγγισης</string>
+    <string name="turn_screen_on_sensor_descr">Κουνήστε το χέρι σας πάνω από την κορυφή της οθόνης για να ενεργοποιήσετε την οθόνη κατά την πλοήγηση.</string>
+    <string name="turn_on_profile_desc">Για να χρησιμοποιήσετε αυτήν τη ρύθμιση, ενεργοποιήστε τουλάχιστον μία κατατομή (προφίλ) εφαρμογής.</string>
+    <string name="rendering_attr_winter_road_name">Χειμερινός δρόμος</string>
+    <string name="rendering_attr_ice_road_name">Παγωμένος δρόμος</string>
+    <string name="routeInfo_winter_ice_road_name">Χειμερινοί και παγωμένοι δρόμοι</string>
+    <string name="rendering_attr_tracktype_grade1_name">Στερεός (πλακοστρωμένος)</string>
+    <string name="rendering_attr_tracktype_grade2_name">Στερεός (μη πλακοστρωμένος)</string>
+    <string name="rendering_attr_tracktype_grade3_name">Κυρίως στερεός</string>
+    <string name="rendering_attr_tracktype_grade4_name">Κυρίως μαλακός</string>
+    <string name="rendering_attr_tracktype_grade5_name">Μαλακός</string>
+    <string name="routeInfo_tracktype_name">Στερεότητα επιφανείας</string>
+    <string name="shared_string_file_is_saved">Το %s είναι αποθηκευμένο</string>
+    <string name="shared_string_open_track">Ανοίξτε το ίχνος</string>
+    <string name="shared_string_track_is_saved">Το %s του ίχνους είναι αποθηκευμένο</string>
+    <string name="gpx_join_gaps">Ένωση κενών</string>
+    <string name="app_mode_camper">Τροχόσπιτο</string>
+    <string name="app_mode_campervan">Τροχόσπιτο</string>
+    <string name="rendering_attr_showLez_description">Να εμφανίζονται οι ζώνες χαμηλής εκπομπής στον χάρτη. Δεν επηρεάζει τη διαδρομή.</string>
+    <string name="rendering_attr_showLez_name">Να εμφανίζονται οι ζώνες χαμηλής εκπομπής</string>
+    <string name="temporary_conditional_routing">Λάβετε υπόψη τους προσωρινούς περιορισμούς</string>
+    <string name="shared_string_default">Προεπιλεγμένο</string>
+    <string name="app_mode_pickup_truck">Ημιφορτηγό</string>
+    <string name="day">Ημέρα</string>
+    <string name="days_2_4">Ημέρες</string>
+    <string name="days_5">Ημέρες</string>
+    <string name="week">Εβδομάδα</string>
+    <string name="weeks_2_4">Εβδομάδες</string>
+    <string name="weeks_5">Εβδομάδες</string>
+    <string name="month">Μήνας</string>
+    <string name="months_2_4">Μήνες</string>
+    <string name="months_5">Μήνες</string>
+    <string name="year">Έτος</string>
+    <string name="years_2_4">Έτη</string>
+    <string name="years_5">Έτη</string>
+    <string name="months_3">Τρεις μήνες</string>
+    <string name="price_free">Δωρεάν</string>
+    <string name="get_free_trial_title">Ξεκινήστε την ελεύθερη δοκιμή σας %1$d %2$s.</string>
+    <string name="get_discount_first_part">%1$s για τους πρώτους %2$s</string>
+    <string name="get_discount_first_few_part">%1$s για τους πρώτους %2$s</string>
+    <string name="get_discount_second_part">έπειτα %1$s</string>
+    <string name="cancel_subscription">Ακύρωση συνδρομής</string>
+    <string name="price_and_discount">%1$s • Εξοικονομήστε %2$s</string>
 </resources>
