@@ -30,6 +30,7 @@ public class NavResumePauseAction extends QuickAction {
 		if (routingHelper.isRoutePlanningMode()) {
 			routingHelper.setRoutePlanningMode(false);
 			routingHelper.setFollowingMode(true);
+			routingHelper.setCurrentLocation(activity.getMyApplication().getLocationProvider().getLastKnownLocation(), false);
 		} else {
 			routingHelper.setRoutePlanningMode(true);
 			routingHelper.setFollowingMode(false);
