@@ -126,7 +126,7 @@ public abstract class OsmandNotification {
 		if (isEnabled()) {
 			Builder notificationBuilder = buildNotification(false);
 			if (notificationBuilder != null) {
-				Notification notification = getNotification(notificationBuilder);
+				Notification notification = getNotification(notificationBuilder, false);
 				setupNotification(notification);
 				notificationManager.notify(top ? TOP_NOTIFICATION_SERVICE_ID : getOsmandNotificationId(), notification);
 				notifyWearable(notificationManager);
@@ -141,7 +141,7 @@ public abstract class OsmandNotification {
 		if (isEnabled()) {
 			Builder notificationBuilder = buildNotification(false);
 			if (notificationBuilder != null) {
-				Notification notification = getNotification(notificationBuilder);
+				Notification notification = getNotification(notificationBuilder, true);
 				setupNotification(notification);
 				if (top) {
 					//notificationManager.cancel(getOsmandNotificationId());
@@ -160,9 +160,9 @@ public abstract class OsmandNotification {
 		return false;
 	}
 
-	private Notification getNotification(Builder notificationBuilder) {
+	private Notification getNotification(Builder notificationBuilder, boolean forceBuild) {
 		Notification notification = currentNotification;
-		if (notification == null) {
+		if (forceBuild || notification == null) {
 			notification = notificationBuilder.build();
 			currentNotification = notification;
 		}
