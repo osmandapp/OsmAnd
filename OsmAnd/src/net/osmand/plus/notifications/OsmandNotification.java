@@ -141,13 +141,13 @@ public abstract class OsmandNotification {
 		if (isEnabled()) {
 			Builder notificationBuilder = buildNotification(false);
 			if (notificationBuilder != null) {
-				Notification notification = getNotification(notificationBuilder);
-				setupNotification(notification);
+				currentNotification = notificationBuilder.build();
+				setupNotification(currentNotification);
 				if (top) {
 					//notificationManager.cancel(getOsmandNotificationId());
-					notificationManager.notify(TOP_NOTIFICATION_SERVICE_ID, notification);
+					notificationManager.notify(TOP_NOTIFICATION_SERVICE_ID, currentNotification);
 				} else {
-					notificationManager.notify(getOsmandNotificationId(), notification);
+					notificationManager.notify(getOsmandNotificationId(), currentNotification);
 				}
 				notifyWearable(notificationManager);
 				return true;
