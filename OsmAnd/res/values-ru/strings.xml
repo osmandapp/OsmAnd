@@ -372,7 +372,7 @@
     <string name="online_map_settings_descr">Настройки источников онлайн или кэшированных растровых карт.</string>
     <string name="osmand_rastermaps_plugin_description">С помощью этого плагина можно получить доступ ко множеству видов онлайн-карт (тайловых или растровых), от предопределенных тайловых OpenStreetMap (Mapnik) до спутниковых снимков и слоев специального назначения, таких как карты погоды, климатические карты, геологических карты, слои затемнения высот и т. д. 
 \n 
-\nЛюбая из этих карт может быть использована в качестве основной (базовой) карты для отображения на экране OsmAnd или в виде наложения или подложки к другой базовой карте (например стандартной офлайн-карте OsmAnd). Чтобы сделать какую-либо подложку лучше видимой, некоторые элементы векторной карты OsmAnd могут быть по желанию легко скрыты через меню «Настроить карту». 
+\nЛюбая из этих карт может быть использована в качестве основной (базовой) карты для отображения на экране OsmAnd или в виде наложения или подложки к другой базовой карте (например стандартной офлайн-карте OsmAnd). Чтобы сделать какую-либо подложку лучше видимой, некоторые элементы векторной карты OsmAnd могут быть по желанию легко скрыты через меню «Настройки карты». 
 \n 
 \nТайловые карты можно получить непосредственно с помощью онлайн-источников или подготовить для использования в автономном режиме (и вручную скопировать в папку данных OsmAnd) в виде базы данных sqlite, которая может быть создана с помощью различных инструментов подготовки карт сторонних производителей.</string>
     <string name="osmand_background_plugin_description">Показывает настройки для включения фонового отслеживания и навигации путем периодического пробуждения устройства GPS (с выключенным экраном).</string>
@@ -437,7 +437,7 @@
     <string name="amenity_type_osmwiki">Википедия (локально)</string>
     <string name="amenity_type_user_defined">Пользовательские</string>
     <string name="fav_export_confirmation">Файл, содержащий ранее экспортированные избранные, уже существует. Заменить его?</string>
-    <string name="profile_settings">Настройка профиля</string>
+    <string name="profile_settings">Настройки профиля</string>
     <string name="settings_preset">Профиль по умолчанию</string>
     <string name="settings_preset_descr">Выберите профиль работы приложения (в каждом профиле настройки хранятся отдельно).</string>
     <string name="global_settings">Общие настройки</string>
@@ -522,7 +522,7 @@
     <string name="gpx_option_from_start_point">Пройти весь путь</string>
     <string name="switch_to_vector_map_to_see">Для этого региона доступны локальные векторные карты. 
 \n\t 
-\n\tДля их использования выберите в \"Меню\" → \"Настроить карту\" → \"Источник карты…\" → \"Векторные карты\".</string>
+\n\tДля их использования выберите в \"Меню\" → \"Настройки карты\" → \"Источник карты…\" → \"Векторные карты\".</string>
     <string name="choose_audio_stream">Голосовые инструкции</string>
     <string name="choose_audio_stream_descr">Выберите канал для голосовых инструкций.</string>
     <string name="voice_stream_voice_call">Поток голосовых звонков (также прерывает BT стерео авто)</string>
@@ -1072,11 +1072,11 @@
     <string name="route_updated_loc_found">Маршрут будет пересчитан после определения местоположения</string>
     <string name="continue_follow_previous_route_auto">Предыдущий маршрут не был закончен. Продолжить следование по нему? (%1$s секунд)</string>
     <string name="show_cameras">Камеры контроля скорости</string>
-    <string name="show_traffic_warnings">Показать ограничения скорости</string>
+    <string name="show_traffic_warnings">Ограничения скорости</string>
     <string name="avoid_toll_roads">Платные дороги</string>
     <string name="screen_is_locked">Для разблокировки экрана коснитесь значка блокировки</string>
     <string name="map_widget_top_text">Название улицы</string>
-    <string name="map_widget_config">Конфигурация</string>
+    <string name="map_widget_config">Настройки экрана</string>
     <string name="map_widget_back_to_loc">Где я</string>
     <string name="map_widget_lock_screen">Заблокировать экран</string>
     <string name="map_widget_compass">Компас</string>
@@ -1099,7 +1099,7 @@
     <string name="bg_service_screen_lock_toast">Экран заблокирован</string>
     <string name="bg_service_interval">Установить интервал пробуждения:</string>
     <string name="layer_map_appearance">Настроить экран</string>
-    <string name="show_lanes">Показывать полосы движения</string>
+    <string name="show_lanes">Полосы движения</string>
     <string name="avoid_unpaved">Избегать проселочных дорог</string>
     <string name="avoid_ferries">Избегать паромов</string>
     <string name="avoid_in_routing_title">Избегать при прокладке маршрута…</string>
@@ -1609,7 +1609,7 @@
     <string name="rendering_category_details">Подробности</string>
     <string name="rendering_category_transport">Транспорт</string>
     <string name="rendering_category_others">Другие атрибуты карты</string>
-    <string name="configure_map">Настроить карту</string>
+    <string name="configure_map">Настройки карты</string>
     <string name="map_widget_appearance_rem">Остальное</string>
     <string name="map_widget_right">Правая панель</string>
     <string name="map_widget_left">Левая панель</string>
@@ -1657,7 +1657,7 @@
     <string name="routing_attr_no_new_routing_name">Не использовать маршрутизацию версии 1.9</string>
     <string name="routing_attr_no_new_routing_description">Не использовать для построения маршрута алгоритм представленный в версии 1.9.</string>
     <string name="show_railway_warnings">Показывать ж/д переезды</string>
-    <string name="show_pedestrian_warnings">Показывать пешеходные переходы</string>
+    <string name="show_pedestrian_warnings">Пешеходные переходы</string>
     <string name="traffic_warning_railways">Железнодорожный переезд</string>
     <string name="traffic_warning_pedestrian">Пешеходный переход</string>
     <string name="speak_pedestrian">Пешеходные переходы</string>
@@ -1665,7 +1665,7 @@
     <string name="avoid_roads_msg">Запуск альтернативного маршрута, путем выбора дорог, которых стоит избегать</string>
     <string name="save_track_to_gpx_globally_headline">Запись трека по требованию</string>
     <string name="proxy_pref_title">Прокси-сервер</string>
-    <string name="proxy_pref_descr">Настройка Интернет соединения через прокси-сервер.</string>
+    <string name="proxy_pref_descr">Укажите прокси-сервер.</string>
     <string name="settings_privacy">Приватность</string>
     <string name="enable_proxy_title">Включить HTTP прокси-сервер</string>
     <string name="enable_proxy_descr">Настройка HTTP прокси-сервера для всех сетевых запросов.</string>
@@ -1786,12 +1786,12 @@
 \n 
 \nСпециальная дополнительная карта для OsmAnd добавляет морские навигационные и условные знаки как для внутренней, так и для прибрежной навигации. Описание навигационных отметок содержит информацию, необходимую для их идентификации, а также их характеристики (категория, форма, цвет, последовательность мерцания огней и т.д.). 
 \n 
-\nЧтобы вернуться к одному из традиционных стилей карт в OsmAnd, просто деактивируйте этот плагин или измените на желаемый \"Стиль карты\" в разделе \"Настроить карту\".</string>
+\nЧтобы вернуться к одному из традиционных стилей карт в OsmAnd, просто деактивируйте этот плагин или измените на желаемый \"Стиль карты\" в разделе \"Настройки карты\".</string>
     <string name="local_osm_changes_upload_all_confirm">Вы собираетесь отправить %1$d изменений в OSM. Вы уверены?</string>
     <string name="confirmation_to_clear_history">Очистить историю?</string>
     <string name="plugin_ski_descr">Плагин обеспечивает вам доступ к данным о горнолыжных трассах, маршрутах для беговых лыж, альпийских спусках, фуникулерах и горнолыжных подъемниках. Маршруты и спуски отмечены разными цветами в зависимости от их сложности и изображены с использованием специального \"зимнего\" стиля карты, который заключается в том, что используются \"снежные\" цвета зимнего пейзажа. 
 \n 
-\nВ случае активации этого вида, стиль карты меняется на \"Winter and ski\", показывая все детали пейзажа так, как они выглядят зимой. Такой (зимний) вид может быть отменен либо путем деактивации здесь, либо если вы поменяете \"Стиль карты\" в меню \"Настроить карту\" на желаемый вид.</string>
+\nВ случае активации этого вида, стиль карты меняется на \"Зимний/лыжный\", показывая все детали пейзажа так, как они выглядят зимой. Такой (зимний) вид может быть отменен либо путем деактивации здесь, либо если вы поменяете \"Стиль карты\" в меню \"Настройки карты\" на желаемый вид.</string>
     <string name="current_route">Текущий маршрут</string>
     <string name="welmode_download_maps">Скачать карты</string>
     <string name="welcome_select_region">Для правильного отображения дорожных знаков и правил, пожалуйста, выберите свой регион вождения:</string>
@@ -2017,7 +2017,7 @@
     <string name="faq_item">Вопросы и ответы</string>
     <string name="first_usage_item">Первый запуск</string>
     <string name="first_usage_item_description">Как загрузить карты, установить основные настройки.</string>
-    <string name="navigation_item_description">Настройка навигации.</string>
+    <string name="navigation_item_description">Настройки навигации.</string>
     <string name="planning_trip_item">Планирование поездки</string>
     <string name="enter_country_name">Введите название страны</string>
     <string name="new_version">Новая версия</string>
@@ -2286,7 +2286,7 @@
     <string name="quick_action_showhide_poi_title">Показать/скрыть POI</string>
     <string name="quick_action_poi_show">Показать %1$s</string>
     <string name="quick_action_poi_hide">Скрыть %1$s</string>
-    <string name="quick_action_add_configure_map">Настроить карту</string>
+    <string name="quick_action_add_configure_map">Настройки карты</string>
     <string name="quick_action_add_navigation">Навигация</string>
     <string name="quick_action_bug_message">Сообщение</string>
     <string name="quick_action_map_style_action">Добавить стиль карты</string>
@@ -3142,20 +3142,22 @@
     <string name="default_speed_setting_descr">Изменение настроек скорости по умолчанию</string>
     <string name="default_speed_dialog_msg">Используется для расчета ожидаемого времени прибытия во время навигации</string>
     <string name="new_profile">Новый профиль</string>
-    <string name="release_3_4">• Профили приложения: создайте свой собственный профиль в соответствии с вашими потребностями, используя специальный значок и цвет.
+    <string name="release_3_4">• Профили приложения: создайте свой собственный профиль в соответствии с вашими потребностями, используя специальный значок и цвет. 
+\n 
+\n • Добавлены настройки по умолчанию и минимальной/максимальной скорости для профилей 
+\n 
+\n • Добавлен виджет с текущими координатами 
+\n 
+\n • Добавлены опции для отображения на карте компаса с радиус-линейкой 
+\n 
+\n • Улучшена загрузка карт в фоновом режиме 
 \n
-\n • Добавлены настройки по умолчанию и минимальной/максимальной скорости для профилей
-\n
-\n • Добавлен виджет с текущими координатами
-\n
-\n • Добавлены опции для отображения на карте компаса с радиус-линейкой
-\n
-\n • Улучшена загрузка карт в фоновом режиме
-\n
-\n • Исправлен выбор языка Википедии
-\n
-\n • Исправлено поведение кнопки компаса во время навигации
-\n
+\n • Возвращена опция «Включить экран»
+\n 
+\n • Исправлен выбор языка Википедии 
+\n 
+\n • Исправлено поведение кнопки компаса во время навигации 
+\n 
 \n • Исправления ошибок
 \n
 \n</string>
@@ -3165,11 +3167,11 @@
     <string name="precision_hdop">Точность по горизонтали: %s</string>
     <string name="app_mode_shuttle_bus">Маршрутка</string>
     <string name="app_mode_ufo">НЛО</string>
-    <string name="edit_profile_setup_title">Настройка профиля</string>
+    <string name="edit_profile_setup_title">Настройки профиля</string>
     <string name="edit_profile_setup_subtitle">У каждого профиля свои настройки</string>
     <string name="minmax_speed_dialog_title">Мин/макс скорость</string>
     <string name="shared_string_crash">Аварии</string>
-    <string name="app_mode_offroad">Бездорожье</string>
+    <string name="app_mode_offroad">Внедорожник</string>
     <string name="edit_profile_setup_map_subtitle">Выберите настройки карты по умолчанию для профиля</string>
     <string name="edit_profile_screen_options_subtitle">Выбор параметров экрана по умолчанию для профиля</string>
     <string name="edit_profile_nav_settings_subtitle">Выбор параметров навигации по умолчанию для профиля</string>
@@ -3198,4 +3200,16 @@
     <string name="temporary_conditional_routing">Учитывать временные ограничения</string>
     <string name="new_route_calculated_dist_dbg">Маршрут: расстояние %s, время навигации %s 
 \nРасчет: %.1f с, %d дорог, %d тайлов)</string>
+    <string name="quick_action_need_to_add_item_to_list">Вам нужно добавить по крайней мере один элемент в список в настройках Быстрого действия</string>
+    <string name="routing_attr_piste_type_skitour_description">Маршруты для горнолыжного туризма.</string>
+    <string name="routing_attr_freeride_policy_name">Офпист</string>
+    <string name="routing_attr_freeride_policy_description">Фрирайды и офписты являются неофициальными неадаптированными трассами. Обычно неухоженные, неразмеченные и неосвещенные вечером. Вход на свой страх и риск.</string>
+    <string name="shared_string_open_track">Открыть трек</string>
+    <string name="gpx_join_gaps">Соединить разрывы (исключить пробелы)</string>
+    <string name="app_mode_camper">Прицеп</string>
+    <string name="app_mode_campervan">Автодом</string>
+    <string name="rendering_attr_showLez_description">Отображать на карте зоны с низким уровнем выбросов. Не влияет на навигацию.</string>
+    <string name="shared_string_default">По умолчанию</string>
+    <string name="lang_oc">Окситанский</string>
+    <string name="app_mode_pickup_truck">Пикап</string>
 </resources>
