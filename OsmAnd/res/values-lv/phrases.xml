@@ -246,10 +246,10 @@
     <string name="poi_fuel_electricity">Elektroenerğija</string>
     <string name="poi_aeroway_fuel">Aviācijas degvielas stacijas</string>
     <string name="poi_waterway_fuel">Ūdenstransporta degvielas stacijas</string>
-    <string name="poi_electricity_combined_charging">Elektrouzlādes stacijas</string>
+    <string name="poi_electricity_combined_charging">Uzlādes stacijas</string>
     <string name="poi_vehicle_ramp">Estekāde</string>
     <string name="poi_compressed_air">Saspiests gaiss</string>
-    <string name="poi_parking">Stāvvieta</string>
+    <string name="poi_parking">Stāvvietas</string>
     <string name="poi_motorcycle_parking">Motociklu stāvvieta</string>
     <string name="poi_parking_entrance">Ieeja stāvvietā</string>
     <string name="poi_garages">Garāžas</string>
@@ -1927,8 +1927,8 @@
     <string name="poi_service_bicycle_chaintool_no">Ķēdes noņēmējs: nav</string>
     <string name="poi_service_bicycle_second_hand_yes">Lietotu velosipēdu veikals</string>
     <string name="poi_service_bicycle_second_hand_no">Lietotu velosipēdu veikals: nav</string>
-    <string name="poi_service_bicycle_charging_yes">Elektrovelosipēdu uzlāde: ir</string>
-    <string name="poi_service_bicycle_charging_no">Elektrovelosipēdu uzlāde: nav</string>
+    <string name="poi_service_bicycle_charging_yes">Uzlāde: ir</string>
+    <string name="poi_service_bicycle_charging_no">Uzlāde: nav</string>
     <string name="poi_bicycle_repair_station">Velosipēdu remontstends</string>
     <string name="poi_wildlife_hide">Savvaļas iemītnieku novērošanas vieta</string>
     <string name="poi_training_language">Valodu kursi</string>
@@ -3061,4 +3061,5 @@
     <string name="poi_animal_shelter_horse">Zirgi</string>
     <string name="poi_animal_shelter_mammal">Zīdītāji</string>
     <string name="poi_animal_shelter_fish">Zivis</string>
+    <string name="poi_charging_station">Uzlādes stacija</string>
 </resources>

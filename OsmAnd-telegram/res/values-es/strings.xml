@@ -244,4 +244,8 @@
     <string name="timeline_no_data_descr">No tenemos datos recopilados para el día seleccionado</string>
     <string name="timeline_no_data">Sin datos</string>
     <string name="shared_string_apply">Aplicar</string>
+    <string name="shared_string_end">Fin</string>
+    <string name="shared_string_start">Inicio</string>
+    <string name="set_time_timeline_descr">Elige la hora de visualización</string>
+    <string name="start_end_date">Fecha de Inicio — Fin</string>
 </resources>

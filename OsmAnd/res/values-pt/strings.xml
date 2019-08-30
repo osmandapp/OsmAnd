@@ -3177,7 +3177,7 @@
     <string name="edit_profile_screen_options_subtitle">Selecionar opções de ecrã predefinidos para o perfil</string>
     <string name="edit_profile_nav_settings_subtitle">Selecione as configurações de navegação predefinidas para o perfil</string>
     <string name="routing_attr_max_num_changes_description">Especificar a quantidade máxima de modificações</string>
-    <string name="routing_attr_max_num_changes_name">Quantidade de modificações</string>
+    <string name="routing_attr_max_num_changes_name">Quantidade de transferências</string>
     <string name="turn_screen_on_router">Despertar na curva</string>
     <string name="turn_screen_on_time_descr">Defina o tempo para a qual o ecrã será ativado.</string>
     <string name="turn_screen_on_sensor">Utilizar sensor de proximidade</string>
@@ -3215,4 +3215,23 @@
     <string name="lang_oc">Occitano</string>
     <string name="app_mode_wagon">Vagão</string>
     <string name="app_mode_pickup_truck">Caminhonete</string>
+    <string name="day">Dia</string>
+    <string name="days_2_4">Dias</string>
+    <string name="days_5">Dias</string>
+    <string name="week">Semana</string>
+    <string name="weeks_2_4">Semanas</string>
+    <string name="weeks_5">Semanas</string>
+    <string name="month">Semana</string>
+    <string name="months_2_4">Semanas</string>
+    <string name="months_5">Semanas</string>
+    <string name="year">Ano</string>
+    <string name="years_2_4">Anos</string>
+    <string name="years_5">Anos</string>
+    <string name="months_3">Três meses</string>
+    <string name="price_free">Livre</string>
+    <string name="get_discount_title">Obter %1$d %2$s de %3$s desconto.</string>
+    <string name="get_free_trial_title">Inicie sua avaliação gratuita de %1$d %2$s.</string>
+    <string name="get_discount_second_part">depois %1$s</string>
+    <string name="cancel_subscription">Cancelar subscrição</string>
+    <string name="price_and_discount">%1$s - Poupe %2$s</string>
 </resources>

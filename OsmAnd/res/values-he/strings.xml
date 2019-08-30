@@ -3071,7 +3071,7 @@
     <string name="edit_profile_screen_options_subtitle">נא לבחור את הגדרות בררת המחדל למסך עבור הפרופיל</string>
     <string name="edit_profile_nav_settings_subtitle">נא לבחור את הגדרות הניווט כבררת מחדל עבור פרופיל</string>
     <string name="routing_attr_max_num_changes_description">ציון מספר השינויים המרבי</string>
-    <string name="routing_attr_max_num_changes_name">מספר שינויים</string>
+    <string name="routing_attr_max_num_changes_name">מספר החלפות</string>
     <string name="turn_screen_on_router">להתעורר בפניות</string>
     <string name="turn_screen_on_time_descr">להגדיר את זמן התעוררות המסך.</string>
     <string name="turn_screen_on_sensor">להשתמש בחיישן מרחק</string>
@@ -3206,4 +3206,13 @@
     <string name="select_base_profile_dialog_message">באפשרותך לבסס את הפרופיל שלך על אחד מפרופילי בררת המחדל של היישומון, פעולה זו מגדירה את ההגדרות הבסיסיות כמו אופן הצגת וידג׳טים כבררת מחדל ויחידות של מהירות ומרחק. אלו פרופילי בררת המחדל של היישומון, יחד עם דוגמאות של פרופילים מותאמים אישית ניתן להרחיב אותם לכדי:</string>
     <string name="app_mode_wagon">קרון</string>
     <string name="app_mode_pickup_truck">טנדר</string>
+    <string name="day">יום</string>
+    <string name="days_2_4">ימים</string>
+    <string name="days_5">ימים</string>
+    <string name="week">שבוע</string>
+    <string name="weeks_2_4">שבועות</string>
+    <string name="weeks_5">שבועות</string>
+    <string name="month">חודש</string>
+    <string name="months_2_4">חודשיים</string>
+    <string name="months_5">חודשים</string>
 </resources>

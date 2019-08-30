@@ -163,7 +163,9 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
     }
 
     void createAndShowDeleteDialog(final int itemPosition, final String itemName) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(getContext(), R.style.OsmandLightTheme));
+        boolean isLightContent = getMyApplication().getSettings().isLightContent();
+        AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(getContext(), 
+                isLightContent ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme));
         builder.setTitle(R.string.quick_actions_delete);
         builder.setMessage(getResources().getString(R.string.quick_actions_delete_text, itemName));
         builder.setIcon(getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_delete_dark));
@@ -179,8 +181,9 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
             }
         });
         AlertDialog dialog = builder.show();
-        dialog.getButton(DialogInterface.BUTTON_NEGATIVE).setTextColor(ContextCompat.getColor(getContext(), R.color.active_color_primary_light));
-        dialog.getButton(DialogInterface.BUTTON_POSITIVE).setTextColor(ContextCompat.getColor(getContext(), R.color.active_color_primary_light));
+        int activeColorPrimaryResId = isLightContent ? R.color.active_color_primary_light : R.color.active_color_primary_dark;
+        dialog.getButton(DialogInterface.BUTTON_NEGATIVE).setTextColor(ContextCompat.getColor(getContext(), activeColorPrimaryResId));
+        dialog.getButton(DialogInterface.BUTTON_POSITIVE).setTextColor(ContextCompat.getColor(getContext(), activeColorPrimaryResId));
     }
 
     @Override

@@ -3221,4 +3221,25 @@ Lon %2$s</string>
     <string name="lang_oc">Occitano</string>
     <string name="app_mode_wagon">Vagón</string>
     <string name="app_mode_pickup_truck">Camioneta</string>
+    <string name="day">Día</string>
+    <string name="days_2_4">Días</string>
+    <string name="days_5">Días</string>
+    <string name="week">Semana</string>
+    <string name="weeks_2_4">Semanas</string>
+    <string name="weeks_5">Semanas</string>
+    <string name="month">Mes</string>
+    <string name="months_2_4">Meses</string>
+    <string name="months_5">Meses</string>
+    <string name="year">Año</string>
+    <string name="years_2_4">Años</string>
+    <string name="years_5">Años</string>
+    <string name="months_3">Tres meses</string>
+    <string name="price_free">Gratis</string>
+    <string name="get_discount_title">Obtén %1$d %2$s a %3$s de descuento.</string>
+    <string name="get_free_trial_title">Iniciar prueba gratuita de %1$d %2$s.</string>
+    <string name="get_discount_first_part">%1$s para el primer %2$s</string>
+    <string name="get_discount_first_few_part">%1$s para el primer %2$s</string>
+    <string name="get_discount_second_part">luego %1$s</string>
+    <string name="cancel_subscription">Cancelar suscripción</string>
+    <string name="price_and_discount">%1$s • Ahorra %2$s</string>
 </resources>

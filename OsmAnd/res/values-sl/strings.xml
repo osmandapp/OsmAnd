@@ -152,7 +152,7 @@
     <string name="global_app_allocated_memory">Uporabljen pomnilnik</string>
     <string name="starting_point_too_far">- izhodišče je predaleč od najbližje ceste.</string>
     <string name="rendering_attr_noPolygons_description">Nastavi vse ploskve zemljevida kot prosojne.</string>
-    <string name="rendering_attr_noPolygons_name">Izriši ploskve</string>
+    <string name="rendering_attr_noPolygons_name">Ne izriši ploskev</string>
     <string name="rendering_attr_appMode_name">Način izrisa</string>
     <string name="rendering_attr_appMode_description">Prilagodi zemljevid za</string>
     <string name="rendering_attr_contourLines_name">Izriši izohipse</string>
@@ -883,7 +883,7 @@ Sorazmerna velikost pomnilnika je %4$s MB (omejitev na androidu je %5$s MB, na d
     <string name="map_source">Vir zemljevida</string>
     <string name="map_widget_max_speed">Omejitve hitrosti</string>
     <string name="monitoring_control_start">Beleženje GPX</string>
-    <string name="rendering_attr_noAdminboundaries_name">Izriši upravne meje</string>
+    <string name="rendering_attr_noAdminboundaries_name">Ne izriši upravnih mej</string>
     <string name="rendering_attr_noAdminboundaries_description">Izbira onemogoči izris upravnih mej (na ravneh približanja od 5 do 9).</string>
     <string name="index_srtm_ele">Izris izohips</string>
     <string name="srtm_plugin_description">Vstavek omogoča prikaz izohips in senčenje hribovitih področij kot prekrivni zemljevid. Zmožnost je uporabna predvsem za pohodnike, športnike, raziskovalce in druge zanesenjake, ki si želijo, ali potrebujejo natančen prikaz na zemljevidu. 
@@ -1081,10 +1081,10 @@ Sorazmerna velikost pomnilnika je %4$s MB (omejitev na androidu je %5$s MB, na d
     <string name="animate_routing_route_not_calculated">Najprej je treba preračunati pot</string>
     <string name="animate_routing_route">Navidezno vodi s podatki izračunane poti</string>
     <string name="animate_routing_gpx">Navidezno vodi z uporabo sledi GPX</string>
-    <string name="app_mode_hiking">Pohodništvo</string>
+    <string name="app_mode_hiking">Navigacija za gornike</string>
     <string name="app_mode_motorcycle">Motorno kolo</string>
-    <string name="app_mode_boat">Plovilo</string>
-    <string name="app_mode_aircraft">Letalo</string>
+    <string name="app_mode_boat">Navigacija za plovbo</string>
+    <string name="app_mode_aircraft">Letalska navigacija</string>
     <string name="local_osm_changes_delete_all_confirm">Izbrisanih bo %1$d sprememb. Ali ste prepričani, da želite nadaljevati?</string>
     <string name="shared_string_delete_all">Izbriši vse</string>
     <string name="map_widget_map_rendering">Izrisovanje zemljevida</string>
@@ -1340,7 +1340,7 @@ Sorazmerna velikost pomnilnika je %4$s MB (omejitev na androidu je %5$s MB, na d
     <string name="rendering_attr_trolleybusRoutes_name">Proge trolejbusa</string>
     <string name="rendering_attr_tramRoutes_name">Proge tramvaja</string>
     <string name="rendering_attr_shareTaxiRoutes_name">Proge souporabe taksijev</string>
-    <string name="rendering_category_details">Podrobnost prikaza</string>
+    <string name="rendering_category_details">Podrobnosti</string>
     <string name="rendering_attr_trainLightrailRoutes_name">Proge vlakov</string>
     <string name="wake_on_voice">Vklopi zaslon</string>
     <string name="wake_on_voice_descr">Vklopi zaslon naprave (če je izklopljen), ko se med vodenjem pojavi zavoj.</string>
@@ -1352,7 +1352,7 @@ Sorazmerna velikost pomnilnika je %4$s MB (omejitev na androidu je %5$s MB, na d
     <string name="map_widget_right">Desni pult</string>
     <string name="map_widget_left">Levi pult</string>
     <string name="shared_string_show">Pokaži</string>
-    <string name="configure_map">Možnosti zemljevida</string>
+    <string name="configure_map">Nastavi zemljevid</string>
     <string name="search_radius_proximity">Znotraj</string>
     <string name="anonymous_user_hint">Nevpisan uporabnik ne more:
 \n- ustvarjati skupin,
@@ -1970,15 +1970,15 @@ Sorazmerna velikost pomnilnika je %4$s MB (omejitev na androidu je %5$s MB, na d
     <!-- string name="lat_lon_pattern">ZŠir: %1$.5f ZDol: %2$.5f</string -->
     <string name="map_widget_battery">Stanje baterije</string>
     <string name="lang_hu_formal">Madžarščina (uradna)</string>
-    <string name="current_track">Trenutna sled</string>
+    <string name="current_track">Trenutno beležena sled</string>
     <string name="change_markers_position">Spremeni položaj označbe</string>
     <string name="lang_es_us">Španščina (ameriška)</string>
     <string name="lang_en_gb">Angleščina (Združeno kraljestvo)</string>
     <string name="lang_be_by">Beloruščina (latinica)</string>
     <string name="lang_kn">Kanada</string>
     <string name="lang_ast">Asturijski</string>
-    <string name="app_mode_bus">Avtobus</string>
-    <string name="app_mode_train">Vlak</string>
+    <string name="app_mode_bus">Vožnja z avtobusom</string>
+    <string name="app_mode_train">Vožnja z vlakom</string>
     <string name="map_widget_search">Poišči</string>
     <string name="shared_string_is_open_24_7">Odprto 24/7</string>
     <string name="storage_directory_card">Pomnilniška kartica</string>
@@ -2212,7 +2212,7 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="points_delete_multiple">Izbrisati želite točke (%1$d). Ali želite nadaljevati?</string>
     <string name="route_points_category_name">Zavoji na poti, ki jih je treba doseči</string>
     <string name="track_points_category_name">Vmesne točke, točke POI in druge pomembnejše točke</string>
-    <string name="shared_string_slope">Pobočje</string>
+    <string name="shared_string_slope">Naklon</string>
     <string name="add_new_folder">Dodaj novo mapo</string>
     <string name="lang_ber">Berberščina</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">Gričevnato</string>
@@ -2291,7 +2291,7 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="quick_action_add_first_intermediate">Dodaj prvo vmesno točko</string>
     <string name="no_overlay">Brez prekrivnih plasti</string>
     <string name="no_underlay">Brez podlog</string>
-    <string name="shared_string_visible">Vidno</string>
+    <string name="shared_string_visible">Prikazano</string>
     <string name="shared_string_add_photos">Dodaj fotografije</string>
     <string name="mapillary_widget">Gradnik Mapillary</string>
     <string name="mapillary">Mapillary</string>
@@ -2548,7 +2548,7 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="add_group">Dodaj skupino</string>
     <string name="empty_state_markers_groups">Uvoz skupin</string>
     <string name="shared_string_paste">Prilepi</string>
-    <string name="empty_state_osm_edits">Ustvari ali spremeni predmete OSM</string>
+    <string name="empty_state_osm_edits">Ustvarjanje ali spreminjanje predmetov OSM</string>
     <string name="shared_string_deleted">Izbrisano</string>
     <string name="shared_string_edited">Urejeno</string>
     <string name="shared_string_added">Dodano</string>
@@ -2593,7 +2593,7 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="empty_state_markers_history_desc">Označbe, označene kot dosežene, bodo prikazane na tem zaslonu.</string>
     <string name="shared_string_two">Dve</string>
     <string name="shared_string_one">Ena</string>
-    <string name="show_guide_line_descr">Pokaži vodilne črte od trenutnega mesta do mest dejavnih označb.</string>
+    <string name="show_guide_line_descr">Prikaz vodilnih črt od trenutnega mesta do mest dejavnih označb.</string>
     <string name="show_arrows_descr">Pokaži eno ali dve črti, ki določata smer do dejavnih označb.</string>
     <string name="distance_indication_descr">Izbor načina za prikaz razdalje do dejavnih označb.</string>
     <string name="active_markers_descr">Izbor števila prikazanih oznak smeri.</string>
@@ -2602,7 +2602,7 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="waypoints_added_to_map_markers">Vmesne točke so dodane med označbe zemljevida.</string>
     <string name="plan_route_no_markers_toast">Za uporabo te zmožnosti je treba dodati vsaj eno označbo.</string>
     <string name="marker_moved_to_active">Označba zemljevida je premaknjena med dejavne</string>
-    <string name="empty_state_osm_edits_descr">Ustvari ali spremeni točke POI, ureja opombe OSM in omogoča objavljanje zabeleženih sledi GPX.</string>
+    <string name="empty_state_osm_edits_descr">Omogoča ustvarjanje ali spreminjanje točk POI, urejanje opomb OSM in objavljanje zabeleženih sledi GPX.</string>
     <string name="coordinate_input_accuracy_description">Samodejno preklopi na naslednje polje, ko je vpisana %1$d decimalka.</string>
     <string name="tap_on_map_to_hide_interface_descr">S pritiskom na zemljevid se preklopi prikaz gumbov in gradnikov.</string>
     <string name="import_gpx_file_description">je lahko uvožen med priljubljene točke, ali kot datoteka sledi.</string>
@@ -2932,7 +2932,7 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="rendering_attr_highway_class_footway_name">Pešpot</string>
     <string name="rendering_attr_highway_class_track_name">Sled</string>
     <string name="rendering_attr_highway_class_bridleway_name">Jahalna steza</string>
-    <string name="rendering_attr_highway_class_steps_name">Stopinje</string>
+    <string name="rendering_attr_highway_class_steps_name">Stopnice</string>
     <string name="rendering_attr_highway_class_path_name">Pot</string>
     <string name="rendering_attr_highway_class_cycleway_name">Kolesarska steza</string>
     <string name="rendering_attr_undefined_name">Nedoločljivo</string>
@@ -3006,13 +3006,10 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="routing_attr_avoid_subway_description">Načrtovanje poti brez potovanja s podzemno železnico</string>
     <string name="routing_attr_avoid_ferry_name">Izogni se trajektom</string>
     <string name="routing_attr_avoid_ferry_description">Načrtovanje poti brez potovanja s trajektom</string>
-    <string name="release_3_3_7">• Pokaže čas med prevozi javnega potniškega prometa
-\n
-\n• Popravljen vmesnik za prikaz podrobnosti poti
-\n
-\n• Popravljena je temna tema v meniju smeri in podrobnosti poti
-\n
-\n• Prikaz azimuta pri merjenju razdalje
+    <string name="release_3_3_7">• Dodan je prikaz časa med prevozi javnega potniškega prometa 
+\n• Popravljen je vmesnik za prikaz podrobnosti poti 
+\n• Popravljena je temna tema v meniju smeri in pri izrisu podrobnosti poti 
+\n• Omogočen je prikaz azimuta pri merjenju razdalje
 \n
 \n</string>
     <string name="send_log">Pošlji dnevnik</string>
@@ -3058,12 +3055,12 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="profile_type_descr_string">Vrsta: %s</string>
     <string name="profile_type_base_string">Osnovni profil</string>
     <string name="profile_alert_need_routing_type_title">Izberite vrsto navigacije</string>
-    <string name="profile_alert_need_routing_type_msg">Prosim, izberite vrsto navigacije za nov profil aplikacije</string>
+    <string name="profile_alert_need_routing_type_msg">Izberite vrsto navigacije za nov profil</string>
     <string name="profile_alert_need_profile_name_title">Vpišite ime profila</string>
     <string name="profile_alert_need_profile_name_msg">Ime profila ne sme biti prazno!</string>
     <string name="profile_alert_duplicate_name_title">Podvojeno ime</string>
     <string name="profile_alert_duplicate_name_msg">Profil s tem imenom že obstaja</string>
-    <string name="profile_alert_cant_delete_base">Ne morete izbrisati osnovnih profilov aplikacije OsmAnd</string>
+    <string name="profile_alert_cant_delete_base">Osnovnega profila OsmAnd ni mogoče izbrisati</string>
     <string name="profile_alert_need_save_title">Shrani spremembe</string>
     <string name="profile_alert_need_save_msg">Pred nadaljevanjem morate shraniti spremembe profila</string>
     <string name="profile_alert_delete_title">Izbriši profil</string>
@@ -3091,27 +3088,18 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="new_profile">Nov profil</string>
     <string name="last_launch_crashed">Med zadnjo uporabo programa OsmAnd je prišlo do napake. Pomagajte nam izboljšati OsmAnd tako, da nam posredujete sporočilo o napaki.</string>
     <string name="app_mode_ufo">NLP</string>
-    <string name="release_3_4">"• Profili aplikacije: naredite si profile prilagojene vašim potrebam, s prilagojeno ikono in barvo
+    <string name="release_3_4">• Profili: ustvariti je mogoče osebni profil z izbrano ikono in barvo
+\n• Mogoče je nastaviti določila prednostne hitrosti za vsak profil
+\n• Dodan je gradnik za prikaz trenutnih koordinat
+\n• Dodana je možnost za prikaz kompasa in krožnega merila na zemljevidu 
+\n• Popravljeno je delovanje beleženja poti v ozadju
+\n• Izboljšan je način prejemanja zemljevidov v ozadju
+\n• Ponovno je omogočena možnost »Ohrani prikaz na zaslonu« 
+\n• Popravljena je možnost izbora jezika na Wikipediji
+\n• Popravljeno je delovanje gumba kompasa med navigacijo 
+\n• Dodane so številne druge posodobitve
 \n
-\n •  Sedaj lahko prilagodite min/max hitrost vsakega profila
-\n
-\n • Dodan gradnik za prikaz trenutnih koordinat
-\n
-\n • Dodana možnost za prikaz kompasa in krožnega merila na zemljevidu
-\n
-\n • Popravljeno beleženje poti v ozadju
-\n
-\n • Izboljšano prenašanje zemljevidov v ozadju
-\n
-\n • Vrnjena možnost \'Ohrani prižgan zaslon\'
-\n
-\n • Popravljen izbor jezika na Wikipediji
-\n
-\n • Popravljeno obnašanje gumba za kompas med navigacijo
-\n
-\n • Drugi popravki
-\n
-\n"</string>
+\n</string>
     <string name="app_mode_monowheel">Monocikel</string>
     <string name="precision_hdop_and_vdop">Horizontalna natančnost: %1$s, vertikalna: %2$s</string>
     <string name="precision_hdop">Horizontalna natančnost: %s</string>
@@ -3127,7 +3115,7 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="turn_screen_on_time_descr">Izberite za koliko časa naj se vklopi ekran.</string>
     <string name="turn_screen_on_sensor">Uporabi senzor bližine</string>
     <string name="turn_screen_on_sensor_descr">Za vklop ekrana med navigacijo z roko pomagajte pred ekranom.</string>
-    <string name="turn_on_profile_desc">Za uporabo te nastavitve omogočite vsaj en profil aplikacije.</string>
+    <string name="turn_on_profile_desc">Za uporabo te nastavitve je treba omogočiti vsaj en profil.</string>
     <string name="rendering_attr_winter_road_name">Zimska cesta</string>
     <string name="rendering_attr_ice_road_name">Ledena cesta</string>
     <string name="routeInfo_winter_ice_road_name">Zimske in ledene ceste</string>
@@ -3141,7 +3129,7 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="gpx_join_gaps">Združi prekinjene sledi</string>
     <string name="app_mode_camper">Avtodom</string>
     <string name="app_mode_campervan">Avtodom (kombi)</string>
-    <string name="rendering_attr_showLez_description">Prikaži področja z omejitvijo izpustov. Ne vpliva na usmerjanje.</string>
+    <string name="rendering_attr_showLez_description">Prikaži področja z omejitvijo izpustov. Določilo ne vpliva na usmerjanje.</string>
     <string name="rendering_attr_showLez_name">Prikaži področja z omejitvijo izpustov</string>
     <string name="temporary_conditional_routing">Upoštevaj začasne omejitve</string>
     <string name="shared_string_default">Privzeto</string>
@@ -3158,4 +3146,64 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="sett_parrot_ext_input">Parrot</string>
     <string name="shared_string_track_is_saved">Sled %s je shranjena</string>
     <string name="lang_oc">Okcitanščina</string>
+    <string name="routing_attr_piste_type_downhill_name">Alpsko smučanje/smuk</string>
+    <string name="routing_attr_piste_type_nordic_name">Tek na smučeh/nordijsko smučanje</string>
+    <string name="routing_attr_piste_type_skitour_name">Turno smučanje</string>
+    <string name="routing_attr_piste_type_sled_name">Sani</string>
+    <string name="day">Dan</string>
+    <string name="days_2_4">Dni</string>
+    <string name="days_5">Dni</string>
+    <string name="week">Teden</string>
+    <string name="weeks_2_4">Tedni</string>
+    <string name="weeks_5">Tednov</string>
+    <string name="month">Mesec</string>
+    <string name="months_2_4">Meseci</string>
+    <string name="months_5">Mesecev</string>
+    <string name="year">Leto</string>
+    <string name="years_2_4">Leta</string>
+    <string name="years_5">Let</string>
+    <string name="months_3">Tri mesece</string>
+    <string name="price_free">Brezplačno</string>
+    <string name="get_discount_title">Kupite %1$d %2$s s/z %3$s popusta.</string>
+    <string name="get_free_trial_title">Začnite %1$d %2$s brezplačno preizkusno obdobje.</string>
+    <string name="get_discount_first_part">%1$s za prvi %2$s</string>
+    <string name="get_discount_first_few_part">%1$s za prvi %2$s</string>
+    <string name="get_discount_second_part">nato %1$s</string>
+    <string name="cancel_subscription">Prekliči naročnino</string>
+    <string name="price_and_discount">%1$s • Prihranite %2$s</string>
+    <string name="rate_dialog_descr">Vzemite si čas in objavite mnenje in oceno našega dela na Google Play.</string>
+    <string name="make_osmand_better_descr">Dovoli zbiranje in obdelavo anonimnih podatkov uporabe programa. Podatki o gibanju, iskanju in pregledovanju zemljevida se ne zbirajo in ne shranjujejo.
+\n
+\nIzbiro je mogoče kadarkoli spremeniti med Nastavitvami &gt; Zasebnost in varnost.</string>
+    <string name="app_mode_shuttle_bus">Avtobus</string>
+    <string name="routing_profile_geocoding">Geokodiranje</string>
+    <string name="custom_routing">Profil poti po meri</string>
+    <string name="special_routing_type">Posebno določanje poti</string>
+    <string name="third_party_routing_type">Poti drugih uporabnikov</string>
+    <string name="application_profiles_descr">Izbor profilov, ki naj bodo prikazani v programu.</string>
+    <string name="application_profiles">Profili programa</string>
+    <string name="routing_attr_piste_type_skitour_description">Poti za turno smučanje.</string>
+    <string name="routing_attr_piste_type_sled_description">Strmine za sankanje.</string>
+    <string name="routing_attr_allow_intermediate_name">Dovoli vmesne poti</string>
+    <string name="routing_attr_allow_advanced_name">Dovoli napredne poti</string>
+    <string name="routing_attr_allow_advanced_description">Zahtevnejše poti z nevarnimi preprekami in strmimi odseki.</string>
+    <string name="routing_attr_allow_expert_name">Dovoli nevarne poti</string>
+    <string name="routing_attr_allow_expert_description">Izjemno zahtevne poti z nevarnimi preprekami in okolico.</string>
+    <string name="routing_attr_difficulty_preference_name">Prednostna raven zahtevnosti</string>
+    <string name="routing_attr_freeride_policy_name">Izven urejenih smučišč</string>
+    <string name="process_downloading_service">Storitev prejemanja posodobitev OsmAnd</string>
+    <string name="shared_string_color_magenta">Sinje modra</string>
+    <string name="press_again_to_change_the_map_orientation">Pritisnite znova, da spremenite usmerjenost zemljevida.</string>
+    <string name="shared_string_crash">Program se je sesul!</string>
+    <string name="rendering_attr_highway_class_track_grade1_name">Ocena 1</string>
+    <string name="rendering_attr_highway_class_track_grade2_name">Ocena 2</string>
+    <string name="rendering_attr_highway_class_track_grade3_name">Ocena 3</string>
+    <string name="rendering_attr_highway_class_track_grade4_name">Ocena 4</string>
+    <string name="rendering_attr_highway_class_track_grade5_name">Ocena 5</string>
+    <string name="external_input_device_descr">Izbor naprave, kot je privzeta tipkovnica oziroma WunderLINQ kot zunanjo vhodno napravo.</string>
+    <string name="shared_string_open_track">Odprta sled</string>
+    <string name="new_route_calculated_dist_dbg">Pot: razdalja %s, čas %s 
+\nPreračun: %.1f sek, %d poti, %d ploščic)</string>
+    <string name="app_mode_pickup_truck">Poltovornjak</string>
+    <string name="routing_attr_freeride_policy_description">Turno in izven urejenih smušišč so neuradne poti in prehodi. Običajno niso teptani in uradno ne vzdrževani in jih ob koncu dneva ne preverja nihče. Vstop na lastno odgovornost.</string>
 </resources>

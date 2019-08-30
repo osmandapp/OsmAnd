@@ -344,7 +344,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="use_fluorescent_overlays_descr">Brug fluorescerende farver til at vise spor og ruter.</string>
     <string name="offline_edition">Offline redigering</string>
     <string name="offline_edition_descr">Brug altid offline redigering.</string>
-    <string name="update_poi_does_not_change_indexes">Interessepunkt ændringer lavet i programmet påvirker ikke hentede kort, ændringer gemmes som en fil på enhedeni stedet.</string>
+    <string name="update_poi_does_not_change_indexes">Interessepunkt ændringer lavet i programmet påvirker ikke hentede kort, ændringer gemmes som en fil på enheden i stedet.</string>
     <string name="local_openstreetmap_uploading">Overfører…</string>
     <string name="local_openstreetmap_were_uploaded">{0} interessepunkt/noter blev overført</string>
     <string name="local_openstreetmap_uploadall">Send alt</string>
@@ -3222,8 +3222,29 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="temporary_conditional_routing">Overvej midlertidige begrænsninger</string>
     <string name="shared_string_default">Standard</string>
     <string name="new_route_calculated_dist_dbg">Rute: afstand %s, rute tid %s 
-\nBeregning: %.1f s., %d veje, %d fortove</string>
+\nBeregning: %.1f s., %d veje, %d fliser</string>
     <string name="lang_oc">Occitansk</string>
     <string name="app_mode_wagon">Vogn</string>
     <string name="app_mode_pickup_truck">Pickup</string>
+    <string name="day">Dag</string>
+    <string name="days_2_4">Dage</string>
+    <string name="days_5">Dage</string>
+    <string name="week">Uge</string>
+    <string name="weeks_2_4">Uger</string>
+    <string name="weeks_5">Uger</string>
+    <string name="month">Måned</string>
+    <string name="months_2_4">Måneder</string>
+    <string name="months_5">Måneder</string>
+    <string name="year">År</string>
+    <string name="years_2_4">År</string>
+    <string name="years_5">År</string>
+    <string name="months_3">Tre måneder</string>
+    <string name="price_free">Gratis</string>
+    <string name="get_discount_title">Hent %d%@ med %d%% rabat.</string>
+    <string name="get_free_trial_title">Start %d%@ gratis prøveversion.</string>
+    <string name="get_discount_first_part">%1$s for første %2$s</string>
+    <string name="get_discount_first_few_part">%1$s for første %2$s</string>
+    <string name="get_discount_second_part">derefter %1$s</string>
+    <string name="cancel_subscription">Annuller abonnement</string>
+    <string name="price_and_discount">%1$s • Spar %2$s</string>
 </resources>

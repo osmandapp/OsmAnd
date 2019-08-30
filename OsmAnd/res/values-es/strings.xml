@@ -2941,7 +2941,7 @@
     <string name="tracks_on_map">Trazas mostradas</string>
     <string name="time_of_day">Hora del día</string>
     <string name="by_transport_type">En %1$s</string>
-    <string name="step_by_step">Paso a paso</string>
+    <string name="step_by_step">Giro a giro</string>
     <string name="routeInfo_road_types_name">Tipos de caminos</string>
     <string name="exit_at">Bajarse en</string>
     <string name="sit_on_the_stop">Esperar en la parada</string>
@@ -3229,9 +3229,36 @@
     <string name="shared_string_open_track">Abrir traza</string>
     <string name="shared_string_track_is_saved">Traza %s guardada</string>
     <string name="app_mode_campervan">Caravana</string>
-    <string name="rendering_attr_showLez_description">Mostrar zonas de baja emisión en el mapa. No afecta a la navegación</string>
-    <string name="rendering_attr_showLez_name">Mostrar zonas de baja emisión</string>
+    <string name="rendering_attr_showLez_description">Muestra Zonas de Baja Emisión en el mapa. No afecta al cálculo de ruta.</string>
+    <string name="rendering_attr_showLez_name">Mostrar Zonas de Baja Emisión</string>
     <string name="temporary_conditional_routing">Considerar limitaciones temporales</string>
     <string name="gpx_join_gaps">Unir espacios</string>
     <string name="shared_string_default">Predefinido</string>
+    <string name="app_mode_camper">Campista</string>
+    <string name="new_route_calculated_dist_dbg">Ruta: distancia %s, tiempo del enrutador %s
+\nCálculo: %.1f seg, %d carreteras, %d teselas)</string>
+    <string name="lang_oc">Occitano</string>
+    <string name="app_mode_wagon">Vagón</string>
+    <string name="app_mode_pickup_truck">Camioneta</string>
+    <string name="day">Día</string>
+    <string name="days_2_4">Días</string>
+    <string name="days_5">Días</string>
+    <string name="week">Semana</string>
+    <string name="weeks_2_4">Semanas</string>
+    <string name="weeks_5">Semanas</string>
+    <string name="month">Mes</string>
+    <string name="months_2_4">Meses</string>
+    <string name="months_5">Meses</string>
+    <string name="year">Año</string>
+    <string name="years_2_4">Años</string>
+    <string name="years_5">Años</string>
+    <string name="months_3">Tres meses</string>
+    <string name="price_free">Gratis</string>
+    <string name="get_discount_title">Consigue %1$d %2$s a %3$s de descuento.</string>
+    <string name="get_free_trial_title">Empieza tu %1$d %2$s de prueba gratis.</string>
+    <string name="get_discount_first_part">%1$s para el primer %2$s</string>
+    <string name="get_discount_first_few_part">%1$s para el primer %2$s</string>
+    <string name="get_discount_second_part">a continuación, %1$s</string>
+    <string name="cancel_subscription">Cancelar la suscripción</string>
+    <string name="price_and_discount">%1$s • Ahorra %2$s</string>
 </resources>

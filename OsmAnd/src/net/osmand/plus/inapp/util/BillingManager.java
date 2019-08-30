@@ -226,7 +226,7 @@ public class BillingManager implements PurchasesUpdatedListener {
 		executeServiceRequest(consumeRequest);
 	}
 
-	public boolean isIsServiceConnected() {
+	public boolean isServiceConnected() {
 		return mIsServiceConnected;
 	}
 

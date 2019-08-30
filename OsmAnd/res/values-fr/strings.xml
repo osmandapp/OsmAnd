@@ -151,8 +151,9 @@
     <string name="gpx_option_reverse_route">Inverser l\'itinéraire GPX</string>
     <string name="gpx_option_destination_point">Utiliser la destination en cours</string>
     <string name="gpx_option_from_start_point">Suivre l\'ensemble de la trace</string>
-    <string name="switch_to_vector_map_to_see">Cartes vectorielles hors-lignes disponibles pour cette position.
-\n\t\n\tPour activer : \'Menu\' → \'Configurer la carte\' → \'Carte en ligne…\' → \'Cartes vectorielles hors ligne\'.</string>
+    <string name="switch_to_vector_map_to_see">Cartes vectorielles hors-lignes disponibles pour cette position. 
+\n\t
+\n\tPour activer : \'Menu\' → \'Paramétrer la carte\' → \'Carte en ligne…\' → \'Cartes vectorielles hors ligne\'.</string>
     <string name="choose_audio_stream">Sortie audio pour le guidage</string>
     <string name="choose_audio_stream_descr">Sélectionnez la sortie audio à utiliser pour le guidage vocal.</string>
     <string name="voice_stream_voice_call">Sortie audio appel téléphonique (interrompt le Bluetooth véhicule)</string>
@@ -594,11 +595,11 @@
     <string name="map_online_data">Carte en ligne (tuiles)</string>
     <string name="map_online_data_descr">Utiliser les cartes en ligne (télécharge et conserve en cache les tuiles sur la carte mémoire).</string>
     <string name="shared_string_online_maps">Cartes en ligne</string>
-    <string name="online_map_settings_descr">Configurer la source de la carte en ligne ou en cache.</string>
-    <string name="osmand_rastermaps_plugin_description">Ce greffon permet d\'accéder à une grand nombre de cartes en ligne (aussi appelées tuiles ou cartes raster) qui vont de cartes OpenStreetMap (comme Mapnik) jusqu\'aux images satellites en passant par des cartes spécialisées comme des cartes météo, des cartes de climat, des cartes géologiques, des couches de relief, etc.
-\n
-\nChacune de ces cartes est utilisable, comme carte principale, sur-couche ou sous-couche d\'une autre carte. Afin de gérer au mieux la superposition des cartes, vous pouvez masquer certains éléments des cartes vectorielles hors ligne depuis le menu \"Configurer la carte\".
-\n
+    <string name="online_map_settings_descr">Paramétrer la source de la carte : en ligne ou tuiles en cache.</string>
+    <string name="osmand_rastermaps_plugin_description">Ce greffon permet d\'accéder à une grand nombre de cartes en ligne (aussi appelées tuiles ou cartes raster) qui vont de cartes OpenStreetMap (comme Mapnik) jusqu\'aux images satellites en passant par des cartes spécialisées comme des cartes météo, des cartes de climat, des cartes géologiques, des couches de relief, etc. 
+\n 
+\nChacune de ces cartes est utilisable, comme carte principale, sur-couche ou sous-couche d\'une autre carte. Afin de gérer au mieux la superposition des cartes, vous pouvez masquer certains éléments des cartes vectorielles hors ligne depuis le menu \"Paramétrer la carte\". 
+\n 
 \nLes cartes tuiles peuvent être obtenues directement en ligne ou peuvent être préparées pour un usage hors ligne grâce à des outils tiers puis copiées dans le dossier de données d\'OsmAnd sous forme de base de données SQLite.</string>
     <string name="osmand_background_plugin_description">Affiche les préférences afin d\'activer le suivi et la navigation en arrière-plan (écran éteint) en réveillant périodiquement le GPS.</string>
     <string name="osmand_accessibility_description">Ce greffon active dans OsmAnd les options d\'accessibilité de votre appareil (réglage de la vitesse des voix TTS, utilisation du trackball pour zoomer ou annonces vocales de votre position).</string>
@@ -1344,7 +1345,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="map_widget_right">Panneau de droite</string>
     <string name="map_widget_left">Panneau de gauche</string>
     <string name="shared_string_show">Afficher</string>
-    <string name="configure_map">Configurer la carte</string>
+    <string name="configure_map">Paramétrer la carte</string>
     <string name="search_radius_proximity">Dans</string>
     <string name="rendering_category_routes">Itinéraires</string>
     <string name="rendering_attr_busRoutes_name">Lignes de bus</string>
@@ -1437,26 +1438,26 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="shared_string_audio">Audio</string>
     <string name="share_note">Partager la note</string>
     <string name="shared_string_export">Exporter</string>
-    <string name="plugin_ski_descr">Ce greffon pour OsmAnd affiche le relief en conditions hivernales, ainsi que les pistes de ski (dont la difficulté est représentée par un code couleurs) et les remontées mécaniques.
-\n
-\nL\'activation de cette vue change le style de carte en \"Hiver et ski\", en affichant toutes les caractéristiques du paysage en condition neigeuse. Cet affichage peut être annulé soit en le désactivant ici, soit en modifiant le Style de la carte dans \"Configurer la carte\".</string>
-    <string name="plugin_touringview_descr">Activer cette vue bascule vers le style d\'affichage \"Grand tourisme\", affichant une carte très détaillée adaptée aux voyageurs et chauffeurs routiers.
-\n
+    <string name="plugin_ski_descr">Ce greffon pour OsmAnd affiche le relief en conditions hivernales, ainsi que les pistes de ski (dont la difficulté est représentée par un code couleurs) et les remontées mécaniques. 
+\n 
+\nL\'activation de cette vue change le style de carte en \"Hiver et ski\", en affichant toutes les caractéristiques du paysage en condition neigeuse. Cet affichage peut être annulé soit en le désactivant ici, soit en modifiant le Style de la carte dans \"Paramétrer la carte\".</string>
+    <string name="plugin_touringview_descr">Activer cette vue bascule vers le style d\'affichage \"Grand tourisme\", affichant une carte très détaillée adaptée aux voyageurs et chauffeurs routiers. 
+\n 
 \nCet affichage, quel que soit le niveau de zoom, fournit le maximum de détails disponibles. 
-\n
+\n 
 \nChaque type de voie (routes, pistes, chemins …) est distingué de manière explicite grâce à des codes couleurs, ce qui est particulièrement utile en cas de conduite de grands véhicules. 
-\n
-\nIl existe aussi des options pour l\'affichage des itinéraires cyclables ou des chemins de randonnée.
-\n
-\nIl n\'est pas nécessaire de télécharger une carte supplémentaire, cet affichage s\'appuyant sur les cartes standards.
-\n
-\nCet affichage peut être annulé soit en le désactivant ici, soit en modifiant le Style de la carte dans \"Configurer la carte\".</string>
+\n 
+\nIl existe aussi des options pour l\'affichage des itinéraires cyclables ou des chemins de randonnée. 
+\n 
+\nIl n\'est pas nécessaire de télécharger une carte supplémentaire, cet affichage s\'appuyant sur les cartes standards. 
+\n 
+\nCet affichage peut être annulé soit en le désactivant ici, soit en modifiant le Style de la carte dans \"Paramétrer la carte\".</string>
     <string name="plugin_touringview_name">Grand tourisme</string>
-    <string name="plugin_nautical_descr">Ce greffon enrichit la carte OsmAnd ainsi que l\'application de navigation afin d\'afficher des cartes marines pour la navigation de plaisance, la voile et tous les sports nautiques.
-\n
-\nCe greffon OsmAnd affichera les marques nautiques et symboles graphiques utiles à la navigation aussi bien sur terre que le long des côtes. Chaque marque de navigation est détaillée afin de permettre son identification et de connaître sa signification (catégorie, forme, couleur, fréquence, référence, etc.).
-\n
-\nPour revenir à l’un des styles de carte classique de OsmAnd, désactivez simplement ce greffon ou modifiez le « Style de carte » dans le menu « Configurer la carte ».</string>
+    <string name="plugin_nautical_descr">Ce greffon enrichit la carte OsmAnd ainsi que l\'application de navigation afin d\'afficher des cartes marines pour la navigation de plaisance, la voile et tous les sports nautiques. 
+\n 
+\nCe greffon OsmAnd affichera les marques nautiques et symboles graphiques utiles à la navigation aussi bien sur terre que le long des côtes. Chaque marque de navigation est détaillée afin de permettre son identification et de connaître sa signification (catégorie, forme, couleur, fréquence, référence, etc.). 
+\n 
+\nPour revenir à l’un des styles de carte classique de OsmAnd, désactivez simplement ce greffon ou modifiez le « Style de carte » dans le menu « Paramétrer la carte ».</string>
     <string name="location_on_map">Position :\n Lat. %1$s\n Lon. %2$s</string>
     <string name="days_behind">jours passés</string>
     <string name="rename_failed">Échec du renommage.</string>
@@ -2836,10 +2837,10 @@ représentant la zone : %1$s x %2$s</string>
     <string name="osm_live_payment_annual_title">Annuel</string>
     <string name="osm_live_payment_month_cost_descr">%1$s / mois</string>
     <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / mois</string>
-    <string name="osm_live_payment_discount_descr">Économisez %1$s.</string>
+    <string name="osm_live_payment_discount_descr">Économisez %1$s</string>
     <string name="osm_live_payment_current_subscription">Abonnement en cours</string>
     <string name="default_price_currency_format">%1$.2f %2$s</string>
-    <string name="osm_live_payment_header">Sélectionnez la période d\'abonnement qui vous convient :</string>
+    <string name="osm_live_payment_header">Sélectionnez l\'abonnement qui vous convient :</string>
     <string name="osm_live_payment_contribute_descr">Une partie des revenus est reversée aux contributeurs OpenStreetMap.</string>
     <string name="osm_live_plan_pricing">Abonnements &amp; tarifs</string>
     <string name="osm_live_payment_renews_monthly">Tous les mois</string>
@@ -3072,7 +3073,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="precision_hdop_and_vdop">Précision, horizontale : %1$s, verticale : %2$s</string>
     <string name="precision_hdop">Précision horizontale : %s</string>
     <string name="app_mode_offroad">Hors route</string>
-    <string name="routing_attr_max_num_changes_name">Nombre de modifications</string>
+    <string name="routing_attr_max_num_changes_name">Nombre de correspondances</string>
     <string name="turn_screen_on_sensor">Utiliser le capteur de proximité</string>
     <string name="sett_no_ext_input">Aucun</string>
     <string name="routing_attr_freeride_policy_description">Le freeride et le hors-piste sont des itinéraires non-officiels. Ils ne sont généralement pas damés ni maintenus par les autorités et ne sont pas contrôlés en fin de journée. Entrez à vos risques et périls.</string>
@@ -3084,7 +3085,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="edit_profile_setup_map_subtitle">Sélectionnez les paramètres de carte par défaut pour ce profil</string>
     <string name="edit_profile_screen_options_subtitle">Sélectionnez les paramètres d\'affichage écran par défaut pour ce profil</string>
     <string name="edit_profile_nav_settings_subtitle">Sélectionnez les paramètres de navigation par défaut pour ce profil</string>
-    <string name="routing_attr_max_num_changes_description">Indiquez le nombre maximum de modifications</string>
+    <string name="routing_attr_max_num_changes_description">Indiquez le nombre maximum de correspondances</string>
     <string name="turn_screen_on_router">Allumer lors des changements de direction</string>
     <string name="turn_screen_on_time_descr">Définissez la durée pendant laquelle l\'écran restera allumé.</string>
     <string name="turn_screen_on_sensor_descr">Agitez la main en haut de l\'écran pour allumer l\'écran pendant la navigation.</string>
@@ -3187,4 +3188,24 @@ représentant la zone : %1$s x %2$s</string>
     <string name="lang_oc">Occitan</string>
     <string name="app_mode_wagon">Wagon</string>
     <string name="app_mode_pickup_truck">Camionnette</string>
+    <string name="day">Jour</string>
+    <string name="days_2_4">Jours</string>
+    <string name="days_5">Jours</string>
+    <string name="week">Semaine</string>
+    <string name="weeks_2_4">Semaines</string>
+    <string name="weeks_5">Semaines</string>
+    <string name="month">Mois</string>
+    <string name="months_2_4">Mois</string>
+    <string name="months_5">Mois</string>
+    <string name="year">Année</string>
+    <string name="years_2_4">Années</string>
+    <string name="years_5">Années</string>
+    <string name="months_3">Trois mois</string>
+    <string name="price_free">Gratuit</string>
+    <string name="get_free_trial_title">Démarrer votre %1$d %2$s essai gratuit.</string>
+    <string name="get_discount_second_part">puis %1$s</string>
+    <string name="cancel_subscription">Annuler l\'abonnement</string>
+    <string name="get_discount_first_part">%1$s pour %2$s</string>
+    <string name="get_discount_first_few_part">%1$s pour %2$s</string>
+    <string name="price_and_discount">%1$s • Économisez %2$s</string>
 </resources>
