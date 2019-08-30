@@ -756,8 +756,8 @@
     <string name="indexing_poi">نمایه‌کردن POI‏…</string>
     <string name="indexing_transport">در حال نمایه‌کردن حمل‌ونقل…</string>
     <string name="shared_string_io_error">خطای ورودی/خروجی</string>
-    <string name="km">km</string>
-    <string name="m">m</string>
+    <string name="km">ک‌م</string>
+    <string name="m">متر</string>
     <string name="map_tile_source">منبع کاشی‌های نقشه</string>
     <string name="mark_point">هدف</string>
     <string name="speak_speed_limit">سرعت مجاز</string>
@@ -3251,4 +3251,20 @@
     <string name="month">ماه</string>
     <string name="year">سال</string>
     <string name="price_free">رایگان</string>
+    <string name="days_2_4">روز</string>
+    <string name="days_5">روز</string>
+    <string name="weeks_2_4">هفته</string>
+    <string name="weeks_5">هفته</string>
+    <string name="months_2_4">ماه</string>
+    <string name="months_5">ماه</string>
+    <string name="years_2_4">سال</string>
+    <string name="years_5">سال</string>
+    <string name="months_3">سه ماه</string>
+    <string name="get_discount_title">‏ %1$d %2$s را با %3$s تخفیف بگیرید.</string>
+    <string name="get_free_trial_title">دورهٔ آزمایش رایگان %1$d %2$s را آغاز کنید.</string>
+    <string name="get_discount_first_part">‏%1$s برای %2$s اول</string>
+    <string name="get_discount_first_few_part">‏%1$s برای %2$s اول</string>
+    <string name="get_discount_second_part">سپس %1$s</string>
+    <string name="cancel_subscription">لغو اشتراک</string>
+    <string name="price_and_discount">%1$s • %2$s ارزان‌تر</string>
 </resources>
