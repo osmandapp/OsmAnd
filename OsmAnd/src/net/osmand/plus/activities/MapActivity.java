@@ -113,6 +113,7 @@ import net.osmand.plus.mapmarkers.PlanRouteFragment;
 import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.measurementtool.NewGpxData;
+import net.osmand.plus.profiles.EditProfileFragment;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routepreparationmenu.ChooseRouteFragment;
@@ -127,7 +128,6 @@ import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchTab;
 import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchType;
 import net.osmand.plus.settings.BaseSettingsFragment;
 import net.osmand.plus.settings.SettingsMainFragment;
-import net.osmand.plus.settings.profiles.EditProfileFragment;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.MapControlsLayer;
@@ -160,8 +160,8 @@ import java.util.concurrent.Executors;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static net.osmand.plus.settings.profiles.SettingsProfileFragment.IS_USER_PROFILE;
-import static net.osmand.plus.settings.profiles.SettingsProfileFragment.PROFILE_STRING_KEY;
+import static net.osmand.plus.profiles.SettingsProfileFragment.IS_USER_PROFILE;
+import static net.osmand.plus.profiles.SettingsProfileFragment.PROFILE_STRING_KEY;
 
 public class MapActivity extends OsmandActionBarActivity implements DownloadEvents,
 		OnRequestPermissionsResultCallback, IRouteInformationListener, AMapPointUpdateListener,
@@ -231,7 +231,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private boolean stopped = true;
 
 	private ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
-	
+
 	private LockHelper lockHelper;
 
 	@Override
@@ -351,7 +351,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		registerReceiver(screenOffReceiver, filter);
 
 		app.getAidlApi().onCreateMapActivity(this);
-		
+
 		lockHelper.setLockUIAdapter(this);
 
 		mIsDestroyed = false;
@@ -1943,7 +1943,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (caller instanceof BaseSettingsFragment) {
 			BaseSettingsFragment baseFragment = (BaseSettingsFragment) caller;
 
-			ApplicationMode mode = baseFragment.getSelectedMode();
+			ApplicationMode mode = baseFragment.getSelectedAppMode();
 			if (mode != null) {
 				Bundle args = new Bundle();
 				args.putString(PROFILE_STRING_KEY, mode.getStringKey());
@@ -2080,7 +2080,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public void showQuickSearch(@NonNull ShowQuickSearchMode mode, boolean showCategories,
-								@NonNull String searchQuery, @Nullable LatLon searchLocation) {
+	                            @NonNull String searchQuery, @Nullable LatLon searchLocation) {
 		if (mode == ShowQuickSearchMode.CURRENT) {
 			mapContextMenu.close();
 		} else {
@@ -2133,7 +2133,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public void showQuickSearch(@NonNull ShowQuickSearchMode mode, QuickSearchTab showSearchTab,
-								@NonNull String searchQuery, @Nullable LatLon searchLocation) {
+	                            @NonNull String searchQuery, @Nullable LatLon searchLocation) {
 		if (mode == ShowQuickSearchMode.CURRENT) {
 			mapContextMenu.close();
 		} else {

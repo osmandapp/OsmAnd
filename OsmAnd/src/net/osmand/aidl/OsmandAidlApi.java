@@ -377,7 +377,7 @@ public class OsmandAidlApi {
 	}
 
 	private void registerReceiver(BroadcastReceiver rec, MapActivity ma,
-			String filter) {
+	                              String filter) {
 		receivers.put(filter, rec);
 		ma.registerReceiver(rec, new IntentFilter(filter));
 	}
@@ -1254,7 +1254,7 @@ public class OsmandAidlApi {
 	@SuppressLint("StaticFieldLeak")
 	private void finishGpxImport(boolean destinationExists, File destination, String color, boolean show) {
 		int col = ConfigureMapMenu.GpxAppearanceAdapter.parseTrackColor(
-					app.getRendererRegistry().getCurrentSelectedRenderer(), color);
+				app.getRendererRegistry().getCurrentSelectedRenderer(), color);
 		if (!destinationExists) {
 			GpxDataItem gpxDataItem = new GpxDataItem(destination, col);
 			gpxDataItem.setApiImported(true);
@@ -1472,19 +1472,19 @@ public class OsmandAidlApi {
 			List<GpxDataItem> gpxDataItems = app.getGpxDatabase().getItems();
 			for (GpxDataItem dataItem : gpxDataItems) {
 				//if (dataItem.isApiImported()) {
-					File file = dataItem.getFile();
-					if (file.exists()) {
-						String fileName = file.getName();
-						boolean active = app.getSelectedGpxHelper().getSelectedFileByPath(file.getAbsolutePath()) != null;
-						long modifiedTime = dataItem.getFileLastModifiedTime();
-						long fileSize = file.length();
-						AGpxFileDetails details = null;
-						GPXTrackAnalysis analysis = dataItem.getAnalysis();
-						if (analysis != null) {
-							details = createGpxFileDetails(analysis);
-						}
-						files.add(new AGpxFile(fileName, modifiedTime, fileSize, active, details));
+				File file = dataItem.getFile();
+				if (file.exists()) {
+					String fileName = file.getName();
+					boolean active = app.getSelectedGpxHelper().getSelectedFileByPath(file.getAbsolutePath()) != null;
+					long modifiedTime = dataItem.getFileLastModifiedTime();
+					long fileSize = file.length();
+					AGpxFileDetails details = null;
+					GPXTrackAnalysis analysis = dataItem.getAnalysis();
+					if (analysis != null) {
+						details = createGpxFileDetails(analysis);
 					}
+					files.add(new AGpxFile(fileName, modifiedTime, fileSize, active, details));
+				}
 				//}
 			}
 			return true;
@@ -1661,8 +1661,8 @@ public class OsmandAidlApi {
 	}
 
 	boolean navigate(String startName, double startLat, double startLon,
-					 String destName, double destLat, double destLon,
-					 String profile, boolean force) {
+	                 String destName, double destLat, double destLon,
+	                 String profile, boolean force) {
 		Intent intent = new Intent();
 		intent.setAction(AIDL_NAVIGATE);
 		intent.putExtra(AIDL_START_NAME, startName);
@@ -1678,8 +1678,8 @@ public class OsmandAidlApi {
 	}
 
 	boolean navigateSearch(String startName, double startLat, double startLon,
-						   String searchQuery, double searchLat, double searchLon,
-						   String profile, boolean force) {
+	                       String searchQuery, double searchLat, double searchLon,
+	                       String profile, boolean force) {
 		Intent intent = new Intent();
 		intent.setAction(AIDL_NAVIGATE_SEARCH);
 		intent.putExtra(AIDL_START_NAME, startName);
@@ -1740,7 +1740,7 @@ public class OsmandAidlApi {
 	}
 
 	boolean search(final String searchQuery, final int searchType, final double latitude, final double longitude,
-				   final int radiusLevel, final int totalLimit, final SearchCompleteCallback callback) {
+	               final int radiusLevel, final int totalLimit, final SearchCompleteCallback callback) {
 		if (Algorithms.isEmpty(searchQuery) || latitude == 0 || longitude == 0 || callback == null) {
 			return false;
 		}
@@ -1762,7 +1762,7 @@ public class OsmandAidlApi {
 	}
 
 	boolean registerForOsmandInitialization(final OsmandAppInitCallback callback)
-		throws RemoteException {
+			throws RemoteException {
 		if (app.isApplicationInitializing()) {
 			app.getAppInitializer().addListener(new AppInitializeListener() {
 				@Override
@@ -2090,7 +2090,7 @@ public class OsmandAidlApi {
 	}
 
 	boolean getBitmapForGpx(final Uri gpxUri, final float density, final int widthPixels,
-		final int heightPixels, final int color, final GpxBitmapCreatedCallback callback) {
+	                        final int heightPixels, final int color, final GpxBitmapCreatedCallback callback) {
 		if (gpxUri == null || callback == null) {
 			return false;
 		}

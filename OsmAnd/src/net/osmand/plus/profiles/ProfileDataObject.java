@@ -1,4 +1,4 @@
-package net.osmand.plus.settings.profiles;
+package net.osmand.plus.profiles;
 
 import android.support.annotation.ColorRes;
 import net.osmand.plus.ApplicationMode.ProfileIconColors;

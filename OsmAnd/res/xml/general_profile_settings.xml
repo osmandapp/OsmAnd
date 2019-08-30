@@ -1,92 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-	<Preference
+	<PreferenceCategory
 		android:key="appearance_category"
 		android:layout="@layout/simple_preference_category"
-		android:selectable="false"
 		android:title="@string/appearance" />
 
-	<net.osmand.plus.views.ListIntPreference
-		android:defaultValue="1"
+	<net.osmand.plus.settings.preferences.ListPreferenceEx
 		android:key="osmand_theme"
 		android:layout="@layout/preference_with_descr"
-		android:summary="@string/choose_osmand_theme_descr"
 		android:title="@string/choose_osmand_theme" />
 
-	<net.osmand.plus.views.ListIntPreference
-		android:defaultValue="0"
+	<net.osmand.plus.settings.preferences.ListPreferenceEx
 		android:key="rotate_map"
 		android:layout="@layout/preference_with_descr"
-		android:summary="@string/rotate_map_to_bearing_descr"
 		android:title="@string/rotate_map_to_bearing" />
 
-	<net.osmand.plus.views.ListIntPreference
-		android:defaultValue="-1"
+	<net.osmand.plus.settings.preferences.ListPreferenceEx
 		android:key="map_screen_orientation"
 		android:layout="@layout/preference_with_descr"
-		android:summary="@string/map_screen_orientation_descr"
 		android:title="@string/map_screen_orientation" />
 
-	<Preference
+	<PreferenceCategory
 		android:key="units_and_formats"
 		android:layout="@layout/simple_preference_category"
-		android:selectable="false"
 		android:title="@string/units_and_formats" />
 
 	<Preference
 		android:key="default_driving_region"
 		android:layout="@layout/preference_with_descr"
-		android:summary="@string/driving_region_descr"
 		android:title="@string/driving_region" />
 
-	<ListPreference
+	<net.osmand.plus.settings.preferences.ListPreferenceEx
 		android:key="default_metric_system"
 		android:layout="@layout/preference_with_descr"
-		android:summary="@string/unit_of_length_descr"
 		android:title="@string/unit_of_length" />
 
-	<net.osmand.plus.views.ListIntPreference
+	<net.osmand.plus.settings.preferences.ListPreferenceEx
 		android:key="coordinates_format"
 		android:layout="@layout/preference_with_descr"
-		android:summary="@string/coords_format_descr"
 		android:title="@string/coords_format" />
 
-	<ListPreference
+	<net.osmand.plus.settings.preferences.ListPreferenceEx
 		android:key="angular_measurement"
 		android:layout="@layout/preference_with_descr"
-		android:summary="@string/angular_measeurement_descr"
 		android:title="@string/angular_measeurement" />
 
-	<Preference
+	<PreferenceCategory
 		android:key="other"
 		android:layout="@layout/simple_preference_category"
-		android:selectable="false"
 		android:title="@string/shared_string_other" />
 
-	<SwitchPreference
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
 		android:key="use_kalman_filter_compass"
-		android:layout="@layout/preference_fragment_and_switch"
+		android:layout="@layout/preference_dialog_and_switch"
 		android:title="@string/use_kalman_filter_compass" />
 
-	<SwitchPreference
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
 		android:key="use_magnetic_field_sensor_compass"
-		android:layout="@layout/preference_fragment_and_switch"
+		android:layout="@layout/preference_dialog_and_switch"
 		android:title="@string/use_magnetic_sensor" />
 
-	<SwitchPreference
-		android:key="full_screen_mode"
-		android:layout="@layout/preference_fragment_and_switch"
-		android:title="@string/use_kalman_filter_compass" />
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="map_empty_state_allowed"
+		android:layout="@layout/preference_dialog_and_switch"
+		android:title="@string/tap_on_map_to_hide_interface" />
 
 	<SwitchPreference
 		android:key="do_not_use_animations"
-		android:layout="@layout/preference_fragment_and_switch"
-		android:title="@string/tap_on_map_to_hide_interface" />
+		android:layout="@layout/preference_switch"
+		android:summary="@string/do_not_use_animations_descr"
+		android:title="@string/do_not_use_animations" />
 
-	<net.osmand.plus.views.ListIntPreference
+	<net.osmand.plus.settings.preferences.ListPreferenceEx
 		android:key="external_input_device"
-		android:layout="@layout/preference_fragment_and_switch"
+		android:layout="@layout/preference_dialog_and_switch"
 		android:title="@string/external_input_device" />
 
 </PreferenceScreen>

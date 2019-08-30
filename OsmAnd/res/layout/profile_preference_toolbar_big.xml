@@ -51,7 +51,8 @@
 				android:layout_height="wrap_content"
 				android:layout_gravity="center"
 				android:padding="@dimen/content_padding"
-				android:src="@drawable/ic_overflow_menu_dark" />
+				android:src="@drawable/ic_overflow_menu_dark"
+				android:visibility="gone" />
 
 		</LinearLayout>
 

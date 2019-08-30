@@ -1,9 +1,9 @@
-package net.osmand.plus.settings.profiles;
+package net.osmand.plus.profiles;
 
 
 
-import static net.osmand.plus.settings.profiles.SelectProfileBottomSheetDialogFragment.DIALOG_TYPE;
-import static net.osmand.plus.settings.profiles.SelectProfileBottomSheetDialogFragment.TYPE_BASE_APP_PROFILE;
+import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.DIALOG_TYPE;
+import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.TYPE_BASE_APP_PROFILE;
 
 import android.content.Context;
 import android.content.Intent;
@@ -25,8 +25,8 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndFragment;
-import net.osmand.plus.settings.profiles.ProfileMenuAdapter.ProfileMenuAdapterListener;
-import net.osmand.plus.settings.profiles.SelectProfileBottomSheetDialogFragment.SelectProfileListener;
+import net.osmand.plus.profiles.ProfileMenuAdapter.ProfileMenuAdapterListener;
+import net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.SelectProfileListener;
 
 import org.apache.commons.logging.Log;
 
@@ -108,12 +108,12 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 
 				@Override
 				public void onProfilePressed(ApplicationMode item) {
-//					Intent intent = new Intent(getActivity(), EditProfileActivity.class);
-//					intent.putExtra(PROFILE_STRING_KEY, item.getStringKey());
-//					if (item.isCustomProfile()) {
-//						intent.putExtra(IS_USER_PROFILE, true);
-//					}
-//					startActivity(intent);
+					Intent intent = new Intent(getActivity(), EditProfileActivity.class);
+					intent.putExtra(PROFILE_STRING_KEY, item.getStringKey());
+					if (item.isCustomProfile()) {
+						intent.putExtra(IS_USER_PROFILE, true);
+					}
+					startActivity(intent);
 				}
 
 				@Override
@@ -135,11 +135,11 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 			typeListener = new SelectProfileListener() {
 				@Override
 				public void onSelectedType(int pos, String stringRes) {
-//					Intent intent = new Intent(getActivity(), EditProfileActivity.class);
-//					intent.putExtra(IS_NEW_PROFILE, true);
-//					intent.putExtra(IS_USER_PROFILE, true);
-//					intent.putExtra(PROFILE_STRING_KEY, baseProfiles.get(pos).getStringKey());
-//					startActivity(intent);
+					Intent intent = new Intent(getActivity(), EditProfileActivity.class);
+					intent.putExtra(IS_NEW_PROFILE, true);
+					intent.putExtra(IS_USER_PROFILE, true);
+					intent.putExtra(PROFILE_STRING_KEY, baseProfiles.get(pos).getStringKey());
+					startActivity(intent);
 				}
 			};
 		}

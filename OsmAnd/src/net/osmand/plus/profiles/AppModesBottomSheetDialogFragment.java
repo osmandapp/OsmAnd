@@ -1,7 +1,7 @@
-package net.osmand.plus.settings.profiles;
+package net.osmand.plus.profiles;
 
-import static net.osmand.plus.settings.profiles.SettingsProfileFragment.IS_USER_PROFILE;
-import static net.osmand.plus.settings.profiles.SettingsProfileFragment.PROFILE_STRING_KEY;
+import static net.osmand.plus.profiles.SettingsProfileFragment.IS_USER_PROFILE;
+import static net.osmand.plus.profiles.SettingsProfileFragment.PROFILE_STRING_KEY;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -22,7 +22,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
-import net.osmand.plus.settings.profiles.ProfileMenuAdapter.ProfileMenuAdapterListener;
+import net.osmand.plus.profiles.ProfileMenuAdapter.ProfileMenuAdapterListener;
 
 public class AppModesBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
@@ -68,20 +68,20 @@ public class AppModesBottomSheetDialogFragment extends MenuBottomSheetDialogFrag
 
 				@Override
 				public void onProfilePressed(ApplicationMode item) {
-//					Intent intent = new Intent(getActivity(), EditProfileActivity.class);
-//					intent.putExtra(PROFILE_STRING_KEY, item.getStringKey());
-//					if (item.isCustomProfile()) {
-//						intent.putExtra(IS_USER_PROFILE, true);
-//					}
-//					startActivity(intent);
+					Intent intent = new Intent(getActivity(), EditProfileActivity.class);
+					intent.putExtra(PROFILE_STRING_KEY, item.getStringKey());
+					if (item.isCustomProfile()) {
+						intent.putExtra(IS_USER_PROFILE, true);
+					}
+					startActivity(intent);
 				}
 
 				@Override
 				public void onButtonPressed() {
-//					OsmandApplication app = requiredMyApplication();
-//					Intent intent = new Intent(app, SettingsProfileActivity.class);
-//					intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//					app.startActivity(intent);
+					OsmandApplication app = requiredMyApplication();
+					Intent intent = new Intent(app, SettingsProfileActivity.class);
+					intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+					app.startActivity(intent);
 				}
 			};
 		}

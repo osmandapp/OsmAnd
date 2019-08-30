@@ -1,4 +1,4 @@
-package net.osmand.plus.settings.profiles;
+package net.osmand.plus.profiles;
 
 import android.support.annotation.ColorRes;
 import android.support.annotation.NonNull;
@@ -21,7 +21,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.settings.profiles.ProfileMenuAdapter.ProfileViewHolder;
+import net.osmand.plus.profiles.ProfileMenuAdapter.ProfileViewHolder;
 import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 

@@ -16,11 +16,11 @@ import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.PluginActivity;
-import net.osmand.plus.views.SwitchFragmentPreference;
+import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 
 import java.util.List;
 
-import static net.osmand.plus.settings.profiles.SettingsProfileFragment.PROFILE_STRING_KEY;
+import static net.osmand.plus.profiles.SettingsProfileFragment.PROFILE_STRING_KEY;
 
 public class ConfigureProfileFragment extends BaseSettingsFragment {
 
@@ -34,7 +34,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 	}
 
 	@Override
-	protected int getPreferenceResId() {
+	protected int getPreferencesResId() {
 		return R.xml.configure_profile;
 	}
 
@@ -48,12 +48,12 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 	}
 
 	@Override
-	protected void createUI() {
+	protected void setupPreferences() {
 		PreferenceScreen screen = getPreferenceScreen();
 
-		Preference generalSettings = findAndRegisterPreference("general_settings");
-		Preference navigationSettings = findAndRegisterPreference("navigation_settings");
-		Preference configureMap = findAndRegisterPreference("configure_map");
+		Preference generalSettings = findPreference("general_settings");
+		Preference navigationSettings = findPreference("navigation_settings");
+		Preference configureMap = findPreference("configure_map");
 
 		generalSettings.setIcon(getContentIcon(R.drawable.ic_action_settings));
 		navigationSettings.setIcon(getContentIcon(R.drawable.ic_action_gdirections_dark));
@@ -68,20 +68,18 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 			preference.setTitle(connectedApp.getName());
 			preference.setIcon(connectedApp.getIcon());
 			preference.setChecked(connectedApp.isEnabled());
-			preference.setLayoutResource(R.layout.preference_fragment_and_switch);
-			registerPreference(preference);
+			preference.setLayoutResource(R.layout.preference_dialog_and_switch);
 
 			screen.addPreference(preference);
 		}
 		for (OsmandPlugin plugin : plugins) {
-			SwitchFragmentPreference preference = new SwitchFragmentPreference(getContext());
+			SwitchPreferenceEx preference = new SwitchPreferenceEx(getContext());
 			preference.setKey(plugin.getId());
-			preference.setPersistent(false);
 			preference.setTitle(plugin.getName());
+			preference.setSummaryOn("");
 			preference.setIcon(getContentIcon(plugin.getLogoResourceId()));
 			preference.setChecked(plugin.isActive());
-			preference.setLayoutResource(R.layout.preference_fragment_and_switch);
-			registerPreference(preference);
+			preference.setLayoutResource(R.layout.preference_dialog_and_switch);
 
 			Intent intent = new Intent(getContext(), PluginActivity.class);
 			intent.putExtra(PluginActivity.EXTRA_PLUGIN_ID, plugin.getId());
@@ -104,7 +102,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 			return getMyApplication().getAidlApi().switchEnabled(connectedApp);
 		}
 
-		return false;
+		return super.onPreferenceChange(preference, newValue);
 	}
 
 	public static boolean showInstance(FragmentManager fragmentManager, ApplicationMode mode) {

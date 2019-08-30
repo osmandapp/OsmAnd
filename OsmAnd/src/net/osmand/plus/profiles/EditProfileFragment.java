@@ -1,14 +1,14 @@
-package net.osmand.plus.settings.profiles;
+package net.osmand.plus.profiles;
 
 import static net.osmand.plus.activities.SettingsNavigationActivity.INTENT_SKIP_DIALOG;
-import static net.osmand.plus.settings.profiles.SelectProfileBottomSheetDialogFragment.DIALOG_TYPE;
-import static net.osmand.plus.settings.profiles.SelectProfileBottomSheetDialogFragment.SELECTED_KEY;
-import static net.osmand.plus.settings.profiles.SelectProfileBottomSheetDialogFragment.TYPE_BASE_APP_PROFILE;
-import static net.osmand.plus.settings.profiles.SelectProfileBottomSheetDialogFragment.TYPE_ICON;
-import static net.osmand.plus.settings.profiles.SelectProfileBottomSheetDialogFragment.TYPE_NAV_PROFILE;
-import static net.osmand.plus.settings.profiles.SettingsProfileFragment.IS_NEW_PROFILE;
-import static net.osmand.plus.settings.profiles.SettingsProfileFragment.IS_USER_PROFILE;
-import static net.osmand.plus.settings.profiles.SettingsProfileFragment.PROFILE_STRING_KEY;
+import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.DIALOG_TYPE;
+import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.SELECTED_KEY;
+import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.TYPE_BASE_APP_PROFILE;
+import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.TYPE_ICON;
+import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.TYPE_NAV_PROFILE;
+import static net.osmand.plus.profiles.SettingsProfileFragment.IS_NEW_PROFILE;
+import static net.osmand.plus.profiles.SettingsProfileFragment.IS_USER_PROFILE;
+import static net.osmand.plus.profiles.SettingsProfileFragment.PROFILE_STRING_KEY;
 
 import android.app.Activity;
 import android.content.Context;
@@ -25,7 +25,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AlertDialog.Builder;
-import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Gravity;
@@ -61,7 +60,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.activities.SettingsNavigationActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
-import net.osmand.plus.settings.profiles.SelectProfileBottomSheetDialogFragment.SelectProfileListener;
+import net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.SelectProfileListener;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 import net.osmand.router.GeneralRouter;
@@ -140,7 +139,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
 		@Nullable Bundle savedInstanceState) {
-		final AppCompatActivity activity = (AppCompatActivity) getActivity();
+		final EditProfileActivity activity = (EditProfileActivity) getActivity();
 		final View view = inflater.inflate(R.layout.fragment_selected_profile, container, false);
 
 		profileIcon = view.findViewById(R.id.profile_icon_img);
@@ -235,17 +234,18 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 			for (RoutingProfileDataObject rp : routingProfileDataObjects) {
 				if (profile.stringKey.equals(rp.getStringKey())) {
 					navTypeEt.setText(
-							RoutingProfilesResources.valueOf(rp.getStringKey().toUpperCase())
-									.getStringRes());
+						RoutingProfilesResources.valueOf(rp.getStringKey().toUpperCase())
+							.getStringRes());
 				}
 			}
 			navTypeEt.clearFocus();
 		}
 		profileNameEt.clearFocus();
 
-		if (activity != null && activity.getSupportActionBar() != null) {
-			activity.getSupportActionBar().setTitle(title);
-			activity.getSupportActionBar().setElevation(5.0f);
+		if (getActivity() != null
+			&& ((EditProfileActivity) getActivity()).getSupportActionBar() != null) {
+			((EditProfileActivity) getActivity()).getSupportActionBar().setTitle(title);
+			((EditProfileActivity) getActivity()).getSupportActionBar().setElevation(5.0f);
 		}
 
 		int iconColor = profile.iconColor.getColor(nightMode);

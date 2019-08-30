@@ -2,23 +2,17 @@ package net.osmand.plus.settings;
 
 import android.media.AudioAttributes;
 import android.media.AudioManager;
-import android.os.Bundle;
 import android.support.v14.preference.SwitchPreference;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
+import net.osmand.StateChangedListener;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
+import net.osmand.plus.activities.SettingsNavigationActivity;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
-import net.osmand.plus.views.ListFloatPreference;
-import net.osmand.plus.views.ListIntPreference;
+import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.voice.CommandPlayer;
 
 import java.util.Set;
@@ -30,14 +24,7 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 	public static final String TAG = "VoiceAnnouncesFragment";
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = super.onCreateView(inflater, container, savedInstanceState);
-
-		return view;
-	}
-
-	@Override
-	protected int getPreferenceResId() {
+	protected int getPreferencesResId() {
 		return R.xml.voice_announces;
 	}
 
@@ -50,155 +37,191 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 		return getString(R.string.voice_announces);
 	}
 
-	protected void createUI() {
-		PreferenceScreen screen = getPreferenceScreen();
+	protected void setupPreferences() {
+		SwitchPreference speakRoutingAlarms = (SwitchPreference) findPreference(settings.SPEAK_ROUTING_ALARMS.getId());
+		speakRoutingAlarms.setSummaryOn(R.string.shared_string_on);
+		speakRoutingAlarms.setSummaryOff(R.string.shared_string_off);
 
-		SwitchPreference SPEAK_ROUTING_ALARMS = (SwitchPreference) findAndRegisterPreference(settings.SPEAK_ROUTING_ALARMS.getId());
-
-		Preference voiceAnnouncesInfo = findAndRegisterPreference("voice_announces_info");
+		Preference voiceAnnouncesInfo = findPreference("voice_announces_info");
 		voiceAnnouncesInfo.setIcon(getContentIcon(R.drawable.ic_action_info_dark));
 
-		SwitchPreference SPEAK_STREET_NAMES = (SwitchPreference) findAndRegisterPreference(settings.SPEAK_STREET_NAMES.getId());
-		SwitchPreference SPEAK_TRAFFIC_WARNINGS = (SwitchPreference) findAndRegisterPreference(settings.SPEAK_TRAFFIC_WARNINGS.getId());
-		SwitchPreference SPEAK_PEDESTRIAN = (SwitchPreference) findAndRegisterPreference(settings.SPEAK_PEDESTRIAN.getId());
-		SwitchPreference SPEAK_SPEED_LIMIT = (SwitchPreference) findAndRegisterPreference(settings.SPEAK_SPEED_LIMIT.getId());
-		SwitchPreference SPEAK_SPEED_CAMERA = (SwitchPreference) findAndRegisterPreference(settings.SPEAK_SPEED_CAMERA.getId());
-		SwitchPreference SPEAK_TUNNELS = (SwitchPreference) findAndRegisterPreference(settings.SPEAK_TUNNELS.getId());
-		SwitchPreference ANNOUNCE_WPT = (SwitchPreference) findAndRegisterPreference(settings.ANNOUNCE_WPT.getId());
-		SwitchPreference ANNOUNCE_NEARBY_FAVORITES = (SwitchPreference) findAndRegisterPreference(settings.ANNOUNCE_NEARBY_FAVORITES.getId());
-		SwitchPreference ANNOUNCE_NEARBY_POI = (SwitchPreference) findAndRegisterPreference(settings.ANNOUNCE_NEARBY_POI.getId());
+		SwitchPreference speakStreetNames = (SwitchPreference) findPreference(settings.SPEAK_STREET_NAMES.getId());
+		SwitchPreference speakTrafficWarnings = (SwitchPreference) findPreference(settings.SPEAK_TRAFFIC_WARNINGS.getId());
+		SwitchPreference speakPedestrian = (SwitchPreference) findPreference(settings.SPEAK_PEDESTRIAN.getId());
+		SwitchPreference speakSpeedLimit = (SwitchPreference) findPreference(settings.SPEAK_SPEED_LIMIT.getId());
 
-		String[] speedNames;
-		float[] speedLimits;
+		setupSpeedLimitExceedPref();
+		setupSpeakSpeedCameraPref();
+
+		SwitchPreference speakTunnels = (SwitchPreference) findPreference(settings.SPEAK_TUNNELS.getId());
+		SwitchPreference announceWpt = (SwitchPreference) findPreference(settings.ANNOUNCE_WPT.getId());
+		SwitchPreference announceNearbyFavorites = (SwitchPreference) findPreference(settings.ANNOUNCE_NEARBY_FAVORITES.getId());
+		SwitchPreference announceNearbyPoi = (SwitchPreference) findPreference(settings.ANNOUNCE_NEARBY_POI.getId());
+
+		setupKeepInformingPref();
+		setupArrivalAnnouncementPref();
+		setupVoiceProviderPref();
+
+		if (!Version.isBlackberry(app)) {
+			setupAudioStreamGuidancePref();
+			setupInterruptMusicPref();
+		}
+	}
+
+	private void setupSpeedLimitExceedPref() {
+		Float[] speedLimitValues;
+		String[] speedLimitNames;
+
 		if (settings.METRIC_SYSTEM.get() == OsmandSettings.MetricsConstants.KILOMETERS_AND_METERS) {
-			speedLimits = new float[]{-10f, -7f, -5f, 0f, 5f, 7f, 10f, 15f, 20f};
-			speedNames = new String[speedLimits.length];
-			for (int i = 0; i < speedLimits.length; i++) {
-				speedNames[i] = (int) speedLimits[i] + " " + getString(R.string.km_h);
+			speedLimitValues = new Float[] {-10f, -7f, -5f, 0f, 5f, 7f, 10f, 15f, 20f};
+			speedLimitNames = new String[speedLimitValues.length];
+
+			for (int i = 0; i < speedLimitValues.length; i++) {
+				speedLimitNames[i] = speedLimitValues[i].intValue() + " " + getString(R.string.km_h);
 			}
 		} else {
-			speedLimits = new float[]{-7f, -5f, -3f, 0f, 3f, 5f, 7f, 10f, 15f};
-			speedNames = new String[speedLimits.length];
-			for (int i = 0; i < speedNames.length; i++) {
-				speedNames[i] = (int) speedLimits[i] + " " + getString(R.string.mile_per_hour);
+			speedLimitValues = new Float[] {-7f, -5f, -3f, 0f, 3f, 5f, 7f, 10f, 15f};
+			speedLimitNames = new String[speedLimitValues.length];
+
+			for (int i = 0; i < speedLimitNames.length; i++) {
+				speedLimitNames[i] = speedLimitValues[i].intValue() + " " + getString(R.string.mile_per_hour);
 			}
 		}
-		ListFloatPreference SPEED_LIMIT_EXCEED = (ListFloatPreference) findAndRegisterPreference(settings.SPEED_LIMIT_EXCEED.getId());
-		SPEED_LIMIT_EXCEED.setEntries(speedNames);
-		SPEED_LIMIT_EXCEED.setEntryValues(speedLimits);
 
-		//keep informing option:
-		int[] keepInformingValues = new int[]{0, 1, 2, 3, 5, 7, 10, 15, 20, 25, 30};
+		ListPreferenceEx voiceProvider = (ListPreferenceEx) findPreference(settings.SPEED_LIMIT_EXCEED.getId());
+		voiceProvider.setEntries(speedLimitNames);
+		voiceProvider.setEntryValues(speedLimitValues);
+	}
+
+	private void setupSpeakSpeedCameraPref() {
+		settings.SPEAK_SPEED_CAMERA.addListener(new StateChangedListener<Boolean>() {
+			@Override
+			public void stateChanged(Boolean change) {
+				SwitchPreference speakSpeedCamera = (SwitchPreference) findPreference(settings.SPEAK_SPEED_CAMERA.getId());
+				if (speakSpeedCamera != null) {
+					speakSpeedCamera.setChecked(change);
+				}
+			}
+		});
+	}
+
+	private void setupKeepInformingPref() {
+		Integer[] keepInformingValues = new Integer[] {0, 1, 2, 3, 5, 7, 10, 15, 20, 25, 30};
 		String[] keepInformingNames = new String[keepInformingValues.length];
 		keepInformingNames[0] = getString(R.string.keep_informing_never);
 		for (int i = 1; i < keepInformingValues.length; i++) {
 			keepInformingNames[i] = keepInformingValues[i] + " " + getString(R.string.int_min);
 		}
-		ListIntPreference KEEP_INFORMING = (ListIntPreference) findAndRegisterPreference(settings.KEEP_INFORMING.getId());
-		KEEP_INFORMING.setEntries(keepInformingNames);
-		KEEP_INFORMING.setEntryValues(keepInformingValues);
 
-		float[] arrivalValues = new float[]{1.5f, 1f, 0.5f, 0.25f};
-		String[] arrivalNames = new String[]{
+		ListPreferenceEx voiceProvider = (ListPreferenceEx) findPreference(settings.KEEP_INFORMING.getId());
+		voiceProvider.setEntries(keepInformingNames);
+		voiceProvider.setEntryValues(keepInformingValues);
+	}
+
+	private void setupArrivalAnnouncementPref() {
+		Float[] arrivalValues = new Float[] {1.5f, 1f, 0.5f, 0.25f};
+		String[] arrivalNames = new String[] {
 				getString(R.string.arrival_distance_factor_early),
 				getString(R.string.arrival_distance_factor_normally),
 				getString(R.string.arrival_distance_factor_late),
 				getString(R.string.arrival_distance_factor_at_last)
 		};
 
-		ListFloatPreference ARRIVAL_DISTANCE_FACTOR = (ListFloatPreference) findAndRegisterPreference(settings.ARRIVAL_DISTANCE_FACTOR.getId());
-		ARRIVAL_DISTANCE_FACTOR.setEntries(arrivalNames);
-		ARRIVAL_DISTANCE_FACTOR.setEntryValues(arrivalValues);
-
-		reloadVoiceListPreference(screen);
-		addVoicePrefs(screen);
+		ListPreferenceEx voiceProvider = (ListPreferenceEx) findPreference(settings.ARRIVAL_DISTANCE_FACTOR.getId());
+		voiceProvider.setEntries(arrivalNames);
+		voiceProvider.setEntryValues(arrivalValues);
 	}
 
-	private void reloadVoiceListPreference(PreferenceScreen screen) {
-		String[] entries;
-		String[] entrieValues;
-		Set<String> voiceFiles = getMyApplication().getRoutingOptionsHelper().getVoiceFiles(getActivity());
-		entries = new String[voiceFiles.size() + 2];
-		entrieValues = new String[voiceFiles.size() + 2];
+	private void setupVoiceProviderPref() {
+		Set<String> voiceFiles = app.getRoutingOptionsHelper().getVoiceFiles(getActivity());
+		String[] entries = new String[voiceFiles.size() + 2];
+		String[] entryValues = new String[voiceFiles.size() + 2];
+
 		int k = 0;
 		// entries[k++] = getString(R.string.shared_string_none);
-		entrieValues[k] = OsmandSettings.VOICE_PROVIDER_NOT_USE;
+		entryValues[k] = OsmandSettings.VOICE_PROVIDER_NOT_USE;
 		entries[k++] = getString(R.string.shared_string_do_not_use);
 		for (String s : voiceFiles) {
-			entries[k] = (s.contains("tts") ? getString(R.string.ttsvoice) + " " : "") +
-					FileNameTranslationHelper.getVoiceName(getMyActivity(), s);
-			entrieValues[k] = s;
+			entries[k] = (s.contains("tts") ? getString(R.string.ttsvoice) + " " : "") + FileNameTranslationHelper.getVoiceName(getActivity(), s);
+			entryValues[k] = s;
 			k++;
 		}
-		entrieValues[k] = MORE_VALUE;
+		entryValues[k] = MORE_VALUE;
 		entries[k] = getString(R.string.install_more);
-		ListPreference voiceProvider = (ListPreference) findAndRegisterPreference(settings.VOICE_PROVIDER.getId());
+
+		ListPreferenceEx voiceProvider = (ListPreferenceEx) findPreference(settings.VOICE_PROVIDER.getId());
 		voiceProvider.setEntries(entries);
-		voiceProvider.setEntryValues(entrieValues);
-		voiceProvider.setIcon(getContentIcon(R.drawable.ic_action_volume_mute));
+		voiceProvider.setEntryValues(entryValues);
+		voiceProvider.setIcon(getContentIcon(R.drawable.ic_action_volume_up));
 	}
 
-	private void addVoicePrefs(PreferenceScreen screen) {
-		if (!Version.isBlackberry(getMyApplication())) {
-			String[] streamTypes = new String[]{getString(R.string.voice_stream_music),
-					getString(R.string.voice_stream_notification), getString(R.string.voice_stream_voice_call)};
-			//getString(R.string.shared_string_default)};
-			Integer[] streamIntTypes = new Integer[]{AudioManager.STREAM_MUSIC,
-					AudioManager.STREAM_NOTIFICATION, AudioManager.STREAM_VOICE_CALL};
-			String[] streamIntTypesStr = new String[]{String.valueOf(AudioManager.STREAM_MUSIC),
-					String.valueOf(AudioManager.STREAM_NOTIFICATION), String.valueOf(AudioManager.STREAM_VOICE_CALL)};
-			//AudioManager.USE_DEFAULT_STREAM_TYPE};
-			ListIntPreference lp = new ListIntPreference(getContext());
-			lp.setTitle(R.string.choose_audio_stream);
-			lp.setKey(settings.AUDIO_STREAM_GUIDANCE.getId());
-			lp.setDialogTitle(R.string.choose_audio_stream);
-			lp.setSummary(R.string.choose_audio_stream_descr);
-			lp.setEntries(streamTypes);
-			lp.setEntryValues(streamIntTypesStr);
-			registerPreference(lp);
-			final Preference.OnPreferenceChangeListener prev = lp.getOnPreferenceChangeListener();
-			lp.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+	private void setupAudioStreamGuidancePref() {
+		String[] streamTypes = new String[] {
+				getString(R.string.voice_stream_music),
+				getString(R.string.voice_stream_notification),
+				getString(R.string.voice_stream_voice_call)
+		};
+		//getString(R.string.shared_string_default)};
 
-				@Override
-				public boolean onPreferenceChange(Preference preference, Object newValue) {
-					prev.onPreferenceChange(preference, newValue);
-					CommandPlayer player = getMyApplication().getPlayer();
-					if (player != null) {
-						player.updateAudioStream(settings.AUDIO_STREAM_GUIDANCE.get());
-					}
-					// Sync corresponding AUDIO_USAGE value
-					ApplicationMode mode = getMyApplication().getSettings().getApplicationMode();
-					int stream = settings.AUDIO_STREAM_GUIDANCE.getModeValue(mode);
-					if (stream == AudioManager.STREAM_MUSIC) {
-						settings.AUDIO_USAGE.setModeValue(mode, AudioAttributes.USAGE_ASSISTANCE_NAVIGATION_GUIDANCE);
-					} else if (stream == AudioManager.STREAM_NOTIFICATION) {
-						settings.AUDIO_USAGE.setModeValue(mode, AudioAttributes.USAGE_NOTIFICATION);
-					} else if (stream == AudioManager.STREAM_VOICE_CALL) {
-						settings.AUDIO_USAGE.setModeValue(mode, AudioAttributes.USAGE_VOICE_COMMUNICATION);
-					}
+		Integer[] streamIntTypes = new Integer[] {
+				AudioManager.STREAM_MUSIC,
+				AudioManager.STREAM_NOTIFICATION,
+				AudioManager.STREAM_VOICE_CALL
+		};
+		//AudioManager.USE_DEFAULT_STREAM_TYPE};
 
-					// Sync DEFAULT value with CAR value, as we have other way to set it for now
-					settings.AUDIO_STREAM_GUIDANCE.setModeValue(ApplicationMode.DEFAULT, settings.AUDIO_STREAM_GUIDANCE.getModeValue(ApplicationMode.CAR));
-					settings.AUDIO_USAGE.setModeValue(ApplicationMode.DEFAULT, settings.AUDIO_USAGE.getModeValue(ApplicationMode.CAR));
-					return true;
-				}
-			});
-			screen.addPreference(lp);
-			screen.addPreference(createSwitchPreference(settings.INTERRUPT_MUSIC, R.string.interrupt_music,
-					R.string.interrupt_music_descr));
+		ListPreferenceEx lp = createListPreferenceEx(settings.AUDIO_STREAM_GUIDANCE.getId(), streamTypes, streamIntTypes, R.string.choose_audio_stream, R.layout.preference_with_descr);
+		getPreferenceScreen().addPreference(lp);
+	}
+
+	private void setupInterruptMusicPref() {
+		Preference interruptMusicPref = createSwitchPreference(settings.INTERRUPT_MUSIC, R.string.interrupt_music, R.string.interrupt_music_descr, R.layout.preference_switch);
+		getPreferenceScreen().addPreference(interruptMusicPref);
+	}
+
+	@Override
+	public boolean onPreferenceChange(Preference preference, Object newValue) {
+		String prefId = preference.getKey();
+
+		if (prefId.equals(settings.ANNOUNCE_NEARBY_POI.getId())) {
+			settings.SHOW_NEARBY_POI.set(settings.ANNOUNCE_NEARBY_POI.get());
 		}
-	}
+		if (prefId.equals(settings.ANNOUNCE_NEARBY_FAVORITES.getId())) {
+			settings.SHOW_NEARBY_FAVORITES.set(settings.ANNOUNCE_NEARBY_FAVORITES.get());
+		}
+		if (prefId.equals(settings.ANNOUNCE_WPT.getId())) {
+			settings.SHOW_WPT.set(settings.ANNOUNCE_WPT.get());
+		}
+		if (prefId.equals(settings.SPEAK_SPEED_CAMERA.getId())) {
+			if (!settings.SPEAK_SPEED_CAMERA.get()) {
+				SettingsNavigationActivity.confirmSpeedCamerasDlg(getActivity(), settings);
+				return false;
+			} else {
+				return true;
+			}
+		}
+		if (prefId.equals(settings.AUDIO_STREAM_GUIDANCE.getId())) {
+			CommandPlayer player = app.getPlayer();
+			if (player != null) {
+				player.updateAudioStream(settings.AUDIO_STREAM_GUIDANCE.get());
+			}
+			// Sync corresponding AUDIO_USAGE value
+			ApplicationMode mode = getSelectedAppMode();
+			int stream = settings.AUDIO_STREAM_GUIDANCE.getModeValue(mode);
+			if (stream == AudioManager.STREAM_MUSIC) {
+				settings.AUDIO_USAGE.setModeValue(mode, AudioAttributes.USAGE_ASSISTANCE_NAVIGATION_GUIDANCE);
+			} else if (stream == AudioManager.STREAM_NOTIFICATION) {
+				settings.AUDIO_USAGE.setModeValue(mode, AudioAttributes.USAGE_NOTIFICATION);
+			} else if (stream == AudioManager.STREAM_VOICE_CALL) {
+				settings.AUDIO_USAGE.setModeValue(mode, AudioAttributes.USAGE_VOICE_COMMUNICATION);
+			}
 
-	public static boolean showInstance(FragmentManager fragmentManager) {
-		try {
-			VoiceAnnouncesFragment settingsNavigationFragment = new VoiceAnnouncesFragment();
-			fragmentManager.beginTransaction()
-					.add(R.id.fragmentContainer, settingsNavigationFragment, VoiceAnnouncesFragment.TAG)
-					.addToBackStack(VoiceAnnouncesFragment.TAG)
-					.commitAllowingStateLoss();
+			// Sync DEFAULT value with CAR value, as we have other way to set it for now
+			settings.AUDIO_STREAM_GUIDANCE.setModeValue(ApplicationMode.DEFAULT, settings.AUDIO_STREAM_GUIDANCE.getModeValue(ApplicationMode.CAR));
+			settings.AUDIO_USAGE.setModeValue(ApplicationMode.DEFAULT, settings.AUDIO_USAGE.getModeValue(ApplicationMode.CAR));
 			return true;
-		} catch (Exception e) {
-			return false;
 		}
+
+		return super.onPreferenceChange(preference, newValue);
 	}
 }

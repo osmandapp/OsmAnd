@@ -1,33 +1,19 @@
 package net.osmand.plus.settings;
 
-import android.os.Bundle;
-import android.support.v14.preference.SwitchPreference;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Toast;
 
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.OsmandSettings.AutoZoomMap;
 import net.osmand.plus.R;
-import net.osmand.plus.views.ListFloatPreference;
-import net.osmand.plus.views.ListIntPreference;
+import net.osmand.plus.settings.preferences.ListPreferenceEx;
+import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 
 public class MapDuringNavigationFragment extends BaseSettingsFragment {
 
 	public static final String TAG = "MapDuringNavigationFragment";
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = super.onCreateView(inflater, container, savedInstanceState);
-
-		return view;
-	}
-
-	@Override
-	protected int getPreferenceResId() {
+	protected int getPreferencesResId() {
 		return R.xml.map_during_navigation;
 	}
 
@@ -36,74 +22,114 @@ public class MapDuringNavigationFragment extends BaseSettingsFragment {
 		return R.layout.profile_preference_toolbar;
 	}
 
+	@Override
 	protected String getToolbarTitle() {
 		return getString(R.string.map_during_navigation);
 	}
 
-	protected void createUI() {
-		PreferenceScreen screen = getPreferenceScreen();
+	@Override
+	protected void setupPreferences() {
+		Preference mapDuringNavigationInfo = findPreference("map_during_navigation_info");
+		mapDuringNavigationInfo.setTitle(R.string.map_during_navigation_info);
+		mapDuringNavigationInfo.setIcon(getContentIcon(R.drawable.ic_action_info_dark));
 
-		int[] intValues = new int[]{0, 5, 10, 15, 20, 25, 30, 45, 60, 90};
-		String[] entries = new String[intValues.length];
+		setupAutoFollowPref();
+		setupAutoZoomMapPref();
+		setupSnapToRoadPref();
+		setupMapDirectionToCompassPref();
+	}
+
+	private void setupAutoFollowPref() {
+		Integer[] entryValues = new Integer[] {0, 5, 10, 15, 20, 25, 30, 45, 60, 90};
+		String[] entries = new String[entryValues.length];
 		entries[0] = getString(R.string.shared_string_never);
-		for (int i = 1; i < intValues.length; i++) {
-			entries[i] = intValues[i] + " " + getString(R.string.int_seconds);
+		for (int i = 1; i < entryValues.length; i++) {
+			entries[i] = (int) entryValues[i] + " " + getString(R.string.int_seconds);
 		}
-		ListIntPreference autoFollowRoute = (ListIntPreference) findAndRegisterPreference(settings.AUTO_FOLLOW_ROUTE.getId());
+
+		ListPreferenceEx autoFollowRoute = (ListPreferenceEx) findPreference(settings.AUTO_FOLLOW_ROUTE.getId());
 		autoFollowRoute.setEntries(entries);
-		autoFollowRoute.setEntryValues(intValues);
+		autoFollowRoute.setEntryValues(entryValues);
+	}
 
-		Preference autoZoomMap = findAndRegisterPreference(settings.AUTO_ZOOM_MAP.getId());
-		autoZoomMap.setOnPreferenceClickListener(this);
+	private void setupAutoZoomMapPref() {
+		Integer[] entryValues = new Integer[AutoZoomMap.values().length + 1];
+		String[] entries = new String[entryValues.length];
 
-		SwitchPreference snapToRoad = (SwitchPreference) findAndRegisterPreference(settings.SNAP_TO_ROAD.getId());
+		int i = 0;
+		int selectedIndex = -1;
+		entries[i] = getString(R.string.auto_zoom_none);
+		entryValues[0] = 0;
+		if (!settings.AUTO_ZOOM_MAP.get()) {
+			selectedIndex = 0;
+		}
+		i++;
+		for (AutoZoomMap autoZoomMap : AutoZoomMap.values()) {
+			entries[i] = getString(autoZoomMap.name);
+			entryValues[i] = i;
+			if (selectedIndex == -1 && settings.AUTO_ZOOM_MAP_SCALE.get() == autoZoomMap) {
+				selectedIndex = i;
+			}
+			i++;
+		}
+		if (selectedIndex == -1) {
+			selectedIndex = 0;
+		}
 
-		String[] speedNamesPos;
-		float[] speedLimitsPos;
+		ListPreferenceEx autoZoomMapPref = (ListPreferenceEx) findPreference(settings.AUTO_ZOOM_MAP.getId());
+		autoZoomMapPref.setEntries(entries);
+		autoZoomMapPref.setEntryValues(entryValues);
+		autoZoomMapPref.setValue(selectedIndex);
+		autoZoomMapPref.setPersistent(false);
+	}
+
+	private void setupSnapToRoadPref() {
+		SwitchPreferenceEx snapToRoad = (SwitchPreferenceEx) findPreference(settings.SNAP_TO_ROAD.getId());
+		snapToRoad.setTitle(getString(R.string.snap_to_road));
+		snapToRoad.setSummaryOn(R.string.shared_string_on);
+		snapToRoad.setSummaryOff(R.string.shared_string_off);
+		snapToRoad.setDescription(getString(R.string.snap_to_road_descr));
+	}
+
+	private void setupMapDirectionToCompassPref() {
+		String[] entries;
+		Float[] entryValues;
 		if (settings.METRIC_SYSTEM.get() == OsmandSettings.MetricsConstants.KILOMETERS_AND_METERS) {
-			speedLimitsPos = new float[]{0f, 5f, 7f, 10f, 15f, 20f};
-			speedNamesPos = new String[speedLimitsPos.length];
-			for (int i = 0; i < speedLimitsPos.length; i++) {
-				speedNamesPos[i] = (int) speedLimitsPos[i] + " " + getString(R.string.km_h);
+			entryValues = new Float[] {0f, 5f, 7f, 10f, 15f, 20f};
+			entries = new String[entryValues.length];
+
+			for (int i = 0; i < entryValues.length; i++) {
+				entries[i] = entryValues[i].intValue() + " " + getString(R.string.km_h);
 			}
 		} else {
-			Float[] speedLimitsMiles = new Float[]{-7f, -5f, -3f, 0f, 3f, 5f, 7f, 10f, 15f};
-			speedLimitsPos = new float[]{0f, 3f, 5f, 7f, 10f, 15f};
+			Float[] speedLimitsMiles = new Float[] {-7f, -5f, -3f, 0f, 3f, 5f, 7f, 10f, 15f};
+			entryValues = new Float[] {0f, 3f, 5f, 7f, 10f, 15f};
+			entries = new String[entryValues.length];
 
-			String[] speedNames = new String[speedLimitsMiles.length];
-			for (int i = 0; i < speedNames.length; i++) {
-				speedNames[i] = speedLimitsMiles[i].intValue() + " " + getString(R.string.mile_per_hour);
-			}
-			speedNamesPos = new String[speedLimitsPos.length];
-			for (int i = 0; i < speedNamesPos.length; i++) {
-				speedNamesPos[i] = speedLimitsMiles[i].intValue() + " " + getString(R.string.mile_per_hour);
+			for (int i = 0; i < entries.length; i++) {
+				entries[i] = speedLimitsMiles[i].intValue() + " " + getString(R.string.mile_per_hour);
 			}
 		}
 
-		ListFloatPreference switchMapDirectionToCompass = (ListFloatPreference) findAndRegisterPreference(settings.SWITCH_MAP_DIRECTION_TO_COMPASS.getId());
-		switchMapDirectionToCompass.setEntries(speedNamesPos);
-		switchMapDirectionToCompass.setEntryValues(speedLimitsPos);
+		ListPreferenceEx switchMapDirectionToCompass = (ListPreferenceEx) findPreference(settings.SWITCH_MAP_DIRECTION_TO_COMPASS.getId());
+		switchMapDirectionToCompass.setEntries(entries);
+		switchMapDirectionToCompass.setEntryValues(entryValues);
 	}
 
 	@Override
-	public void onDisplayPreferenceDialog(Preference preference) {
-		String key = preference.getKey();
-		if (key != null && key.equals(settings.AUTO_ZOOM_MAP.getId())) {
-			Toast.makeText(getContext(), "onDisplayPreferenceDialog AUTO_ZOOM_MAP", Toast.LENGTH_LONG).show();
+	public boolean onPreferenceChange(Preference preference, Object newValue) {
+		if (preference.getKey().equals(settings.AUTO_ZOOM_MAP.getId())) {
+			if (newValue instanceof Integer) {
+				int position = (int) newValue;
+				if (position == 0) {
+					settings.AUTO_ZOOM_MAP.set(false);
+				} else {
+					settings.AUTO_ZOOM_MAP.set(true);
+					settings.AUTO_ZOOM_MAP_SCALE.set(OsmandSettings.AutoZoomMap.values()[position - 1]);
+				}
+				return true;
+			}
 		}
-		super.onDisplayPreferenceDialog(preference);
-	}
-
-	public static boolean showInstance(FragmentManager fragmentManager) {
-		try {
-			MapDuringNavigationFragment settingsNavigationFragment = new MapDuringNavigationFragment();
-			fragmentManager.beginTransaction()
-					.add(R.id.fragmentContainer, settingsNavigationFragment, MapDuringNavigationFragment.TAG)
-					.addToBackStack(MapDuringNavigationFragment.TAG)
-					.commitAllowingStateLoss();
-			return true;
-		} catch (Exception e) {
-			return false;
-		}
+		return super.onPreferenceChange(preference, newValue);
 	}
 }

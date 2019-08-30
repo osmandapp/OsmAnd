@@ -15,34 +15,35 @@
 		android:layout="@layout/preference_with_descr"
 		android:summary="@string/osmand_settings_descr"
 		android:title="@string/osmand_settings"
+		app:fragment="net.osmand.plus.settings.GlobalSettingsFragment"
 		tools:icon="@drawable/ic_action_settings" />
 
-	<Preference
+	<PreferenceCategory
 		android:key="application_profiles"
 		android:layout="@layout/simple_preference_category"
-		android:selectable="false"
-		android:title="@string/application_profiles" />
+		android:title="@string/application_profiles">
 
-	<Preference
-		android:key="browse_map"
-		android:layout="@layout/preference_with_descr"
-		android:summary="@string/map_look_descr"
-		android:title="@string/rendering_value_browse_map_name"
-		tools:icon="@drawable/ic_world_globe_dark" />
+		<Preference
+			android:key="browse_map"
+			android:layout="@layout/preference_with_descr"
+			android:summary="@string/map_look_descr"
+			android:title="@string/rendering_value_browse_map_name"
+			tools:icon="@drawable/ic_world_globe_dark" />
 
-	<Preference
-		android:key="configure_profile"
-		android:layout="@layout/preference_with_descr"
-		android:title="@string/configure_profile"
-		app:fragment="net.osmand.plus.settings.ConfigureProfileFragment"
-		tools:icon="@drawable/ic_action_car_dark" />
+		<Preference
+			android:key="configure_profile"
+			android:layout="@layout/preference_with_descr"
+			android:title="@string/configure_profile"
+			app:fragment="net.osmand.plus.settings.ConfigureProfileFragment"
+			tools:icon="@drawable/ic_action_car_dark" />
 
-	<Preference
-		android:key="manage_profiles"
-		android:layout="@layout/preference_with_descr"
-		android:summary="@string/manage_profiles_descr"
-		android:title="@string/manage_profiles"
-		app:fragment="net.osmand.plus.settings.profiles.SettingsProfileFragment"
-		tools:icon="@drawable/ic_action_manage_profiles" />
+		<Preference
+			android:key="manage_profiles"
+			android:layout="@layout/preference_with_descr"
+			android:summary="@string/manage_profiles_descr"
+			android:title="@string/manage_profiles"
+			tools:icon="@drawable/ic_action_manage_profiles" />
+
+	</PreferenceCategory>
 
 </PreferenceScreen>

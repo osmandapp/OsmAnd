@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.LayoutRes;
@@ -15,12 +14,14 @@ import android.support.annotation.XmlRes;
 import android.support.design.widget.AppBarLayout;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.preference.EditTextPreference;
 import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceFragmentCompat;
+import android.support.v7.preference.PreferenceScreen;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -35,12 +36,12 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.activities.OsmandInAppPurchaseActivity;
-import net.osmand.plus.settings.profiles.AppProfileArrayAdapter;
-import net.osmand.plus.settings.profiles.ProfileDataObject;
-import net.osmand.plus.views.SwitchFragmentPreference;
+import net.osmand.plus.profiles.AppProfileArrayAdapter;
+import net.osmand.plus.profiles.ProfileDataObject;
+import net.osmand.plus.settings.preferences.ListPreferenceEx;
+import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 public abstract class BaseSettingsFragment extends PreferenceFragmentCompat implements Preference.OnPreferenceChangeListener, Preference.OnPreferenceClickListener {
@@ -49,7 +50,6 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	protected OsmandSettings settings;
 	protected UiUtilities iconsCache;
 	protected List<ApplicationMode> modes = new ArrayList<ApplicationMode>();
-	protected ApplicationMode selectedAppMode = null;
 
 	private boolean nightMode;
 	private boolean wasDrawerDisabled;
@@ -59,14 +59,9 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		app = requireMyApplication();
 		settings = app.getSettings();
 		nightMode = !settings.isLightContent();
-		selectedAppMode = settings.APPLICATION_MODE.get();
 		super.onCreate(savedInstanceState);
 		modes.clear();
-		for (ApplicationMode a : ApplicationMode.values(app)) {
-			if (a != ApplicationMode.DEFAULT) {
-				modes.add(a);
-			}
-		}
+		modes.addAll(ApplicationMode.values(app));
 	}
 
 	@Override
@@ -134,6 +129,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 			return;
 		}
 
+		ApplicationMode selectedAppMode = getSelectedAppMode();
 		int iconRes = selectedAppMode.getIconRes();
 		int iconColor = selectedAppMode.getIconColorInfo().getColor(nightMode);
 		String title = selectedAppMode.isCustomProfile() ? selectedAppMode.getCustomProfileName() : getResources().getString(selectedAppMode.getNameKeyResource());
@@ -158,25 +154,99 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 
 	@Override
 	public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+		getPreferenceManager().setPreferenceDataStore(settings.getDataStore());
 		updatePreferencesScreen();
 	}
 
 	private void updatePreferencesScreen() {
-		if (selectedAppMode != null) {
-			String sharedPreferencesName = OsmandSettings.getSharedPreferencesName(selectedAppMode);
-			getPreferenceManager().setSharedPreferencesName(sharedPreferencesName);
-			int resId = getPreferenceResId();
+		if (getSelectedAppMode() != null) {
+			int resId = getPreferencesResId();
 			if (resId != -1) {
-				addPreferencesFromResource(getPreferenceResId());
+				addPreferencesFromResource(getPreferencesResId());
+				setupPreferences();
+				registerPreferences();
 			}
-			createUI();
 		}
 	}
 
-	protected abstract void createUI();
+	protected abstract void setupPreferences();
+
+	private void registerPreferences() {
+		PreferenceScreen screen = getPreferenceScreen();
+		if (screen != null) {
+			for (int i = 0; i < screen.getPreferenceCount(); i++) {
+				Preference preference = screen.getPreference(i);
+				registerPreference(preference);
+			}
+		}
+	}
+
+	protected AlertDialog.Builder selectAppModeDialog() {
+		AlertDialog.Builder singleSelectDialogBuilder = new AlertDialog.Builder(getContext());
+		singleSelectDialogBuilder.setTitle(R.string.profile_settings);
+
+		final List<ProfileDataObject> activeModes = new ArrayList<>();
+		for (ApplicationMode am : ApplicationMode.values(getMyApplication())) {
+			boolean isSelected = false;
+			if (am == getSelectedAppMode()) {
+				isSelected = true;
+			}
+			activeModes.add(new ProfileDataObject(
+					am.toHumanString(getMyApplication()),
+					getAppModeDescription(am),
+					am.getStringKey(),
+					am.getIconRes(),
+					isSelected,
+					am.getIconColorInfo()
+			));
+		}
+
+		final AppProfileArrayAdapter modeNames = new AppProfileArrayAdapter(
+				getActivity(), R.layout.bottom_sheet_item_with_descr_and_radio_btn, activeModes, true);
+
+		singleSelectDialogBuilder.setNegativeButton(R.string.shared_string_cancel,
+				new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.dismiss();
+					}
+				});
+		singleSelectDialogBuilder.setAdapter(modeNames, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				ApplicationMode selectedAppMode = modes.get(which);
+				requireSettings().APPLICATION_MODE.set(selectedAppMode);
+				updateAllSettings();
+			}
+		});
+		return singleSelectDialogBuilder;
+	}
+
+	private String getAppModeDescription(ApplicationMode mode) {
+		String descr;
+		if (!mode.isCustomProfile()) {
+			descr = getString(R.string.profile_type_base_string);
+		} else {
+			descr = String.format(getString(R.string.profile_type_descr_string),
+					mode.getParent().toHumanString(getMyApplication()));
+			if (mode.getRoutingProfile() != null && mode.getRoutingProfile().contains("/")) {
+				descr = descr.concat(", " + mode.getRoutingProfile()
+						.substring(0, mode.getRoutingProfile().indexOf("/")));
+			}
+		}
+		return descr;
+	}
+
+	public void updateAllSettings() {
+		String sharedPreferencesName = OsmandSettings.getSharedPreferencesName(getSelectedAppMode());
+		getPreferenceManager().setSharedPreferencesName(sharedPreferencesName);
+		updateToolbar(getView());
+		getPreferenceScreen().removeAll();
+		updatePreferencesScreen();
+	}
 
 	@XmlRes
-	protected int getPreferenceResId() {
+	protected int getPreferencesResId() {
 		return -1;
 	}
 
@@ -201,21 +271,21 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		return -1;
 	}
 
-	protected Preference findAndRegisterPreference(String key) {
-		Preference preference = getPreferenceScreen().findPreference(key);
-		registerPreference(preference);
-		return preference;
-	}
-
 	protected void registerPreference(Preference preference) {
 		if (preference != null) {
 			preference.setOnPreferenceChangeListener(this);
 			preference.setOnPreferenceClickListener(this);
+			preference.setIconSpaceReserved(true);
+
+			if (preference instanceof ListPreference) {
+				ListPreference listPreference = (ListPreference) preference;
+				assert listPreference.getEntryValues().length == listPreference.getEntries().length;
+			}
 		}
 	}
 
-	public ApplicationMode getSelectedMode() {
-		return selectedAppMode;
+	public ApplicationMode getSelectedAppMode() {
+		return settings.APPLICATION_MODE.get();
 	}
 
 	public boolean isNightMode() {
@@ -277,11 +347,6 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		return iconsCache;
 	}
 
-	protected Drawable getPaintedContentIcon(@DrawableRes int id, @ColorInt int color) {
-		UiUtilities cache = getIconsCache();
-		return cache != null ? cache.getPaintedIcon(id, color) : null;
-	}
-
 	protected Drawable getIcon(@DrawableRes int id, @ColorRes int colorId) {
 		UiUtilities cache = getIconsCache();
 		return cache != null ? cache.getIcon(id, colorId) : null;
@@ -295,10 +360,6 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	protected Drawable getContentIcon(@DrawableRes int id) {
 		UiUtilities cache = getIconsCache();
 		return cache != null ? cache.getThemedIcon(id) : null;
-	}
-
-	protected void setThemedDrawable(View view, @DrawableRes int iconId) {
-		((ImageView) view).setImageDrawable(getContentIcon(iconId));
 	}
 
 	@Nullable
@@ -317,139 +378,85 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		return app.getSettings();
 	}
 
-//	------------------------------------------------------------------------------------------------
-
-	public SwitchPreference createSwitchPreference(OsmandSettings.OsmandPreference<Boolean> b, int title, int summary) {
-		SwitchPreference p = new SwitchPreference(getContext());
-		p.setTitle(title);
-		p.setKey(b.getId());
-		p.setSummary(summary);
-		p.setOnPreferenceChangeListener(this);
-		return p;
-	}
-
-	public SwitchPreference createSwitchFragmentPreference(OsmandSettings.OsmandPreference<Boolean> b, int title, int summary) {
-		SwitchFragmentPreference p = new SwitchFragmentPreference(getContext());
-		p.setTitle(title);
-		p.setKey(b.getId());
-		p.setSummary(summary);
-		p.setOnPreferenceChangeListener(this);
-		return p;
-	}
-
-	public SwitchPreference createSwitchPreference(OsmandSettings.OsmandPreference<Boolean> b) {
-		SwitchPreference p = new SwitchPreference(getContext());
-		p.setKey(b.getId());
-		p.setOnPreferenceChangeListener(this);
-		p.setSelectable(true);
-		return p;
-	}
-
-	public <T> ListPreference createListPreference(OsmandSettings.OsmandPreference<T> b, String[] names, T[] values, String title, String summary) {
-		ListPreference p = new ListPreference(getContext());
-		p.setTitle(title);
-		p.setKey(b.getId());
-		p.setDialogTitle(title);
-		p.setSummary(summary);
-		p.setOnPreferenceChangeListener(this);
-		prepareListPreference(b, names, values, p);
-		return p;
-	}
-
-	private <T> void prepareListPreference(OsmandSettings.OsmandPreference<T> b, String[] names, T[] values, ListPreference p) {
-		p.setOnPreferenceChangeListener(this);
-		LinkedHashMap<String, Object> vals = new LinkedHashMap<String, Object>();
-		assert names.length == values.length;
-		for (int i = 0; i < names.length; i++) {
-			vals.put(names[i], values[i]);
-		}
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		int itemId = item.getItemId();
-		switch (itemId) {
-			case android.R.id.home:
-//				finish();
-				return true;
-
-		}
-		return false;
-	}
-
-	protected AlertDialog.Builder selectAppModeDialog() {
-		AlertDialog.Builder singleSelectDialogBuilder = new AlertDialog.Builder(getContext());
-		singleSelectDialogBuilder.setTitle(R.string.profile_settings);
-
-		final List<ProfileDataObject> activeModes = new ArrayList<>();
-		for (ApplicationMode am : ApplicationMode.values(getMyApplication())) {
-			boolean isSelected = false;
-			if (am == selectedAppMode) {
-				isSelected = true;
-			}
-			if (am != ApplicationMode.DEFAULT) {
-				activeModes.add(new ProfileDataObject(
-						am.toHumanString(getMyApplication()),
-						getAppModeDescription(am),
-						am.getStringKey(),
-						am.getIconRes(),
-						isSelected,
-						am.getIconColorInfo()
-				));
-			}
-		}
-
-		final AppProfileArrayAdapter modeNames = new AppProfileArrayAdapter(
-				getActivity(), R.layout.bottom_sheet_item_with_descr_and_radio_btn, activeModes, true);
-
-		singleSelectDialogBuilder.setNegativeButton(R.string.shared_string_cancel,
-				new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						dialog.dismiss();
-					}
-				});
-		singleSelectDialogBuilder.setAdapter(modeNames, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				selectedAppMode = modes.get(which);
-				requireSettings().APPLICATION_MODE.set(selectedAppMode);
-				updateAllSettings();
-			}
-		});
-		return singleSelectDialogBuilder;
-	}
-
-	private String getAppModeDescription(ApplicationMode mode) {
-		String descr;
-		if (!mode.isCustomProfile()) {
-			descr = getString(R.string.profile_type_base_string);
-		} else {
-			descr = String.format(getString(R.string.profile_type_descr_string),
-					mode.getParent().toHumanString(getMyApplication()));
-			if (mode.getRoutingProfile() != null && mode.getRoutingProfile().contains("/")) {
-				descr = descr.concat(", " + mode.getRoutingProfile()
-						.substring(0, mode.getRoutingProfile().indexOf("/")));
-			}
-		}
-		return descr;
-	}
-
-	public void updateAllSettings() {
-		updateToolbar(getView());
-		getPreferenceScreen().removeAll();
-		updatePreferencesScreen();
-	}
-
-	@SuppressWarnings("unchecked")
 	@Override
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
-		String key = preference.getKey();
-		return settings.setPreference(key, newValue);
+		return true;
+	}
+
+	@Override
+	public void onDisplayPreferenceDialog(Preference preference) {
+		if (preference instanceof ListPreferenceEx) {
+			FragmentManager fragmentManager = getFragmentManager();
+			if (fragmentManager != null) {
+				SingleSelectPreferenceBottomSheet.showInstance(fragmentManager, preference.getKey(), this);
+			}
+		} else if (preference instanceof SwitchPreferenceEx) {
+			FragmentManager fragmentManager = getFragmentManager();
+			if (fragmentManager != null) {
+				BooleanPreferenceBottomSheet.showInstance(fragmentManager, preference.getKey(), this);
+			}
+		} else if (preference instanceof EditTextPreference) {
+			FragmentManager fragmentManager = getFragmentManager();
+			if (fragmentManager != null) {
+				EditTextPreferenceBottomSheet.showInstance(fragmentManager, preference.getKey(), this);
+			}
+		} else {
+			super.onDisplayPreferenceDialog(preference);
+		}
 	}
 
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
 		return false;
+	}
+
+
+	public SwitchPreference createSwitchPreference(OsmandSettings.OsmandPreference<Boolean> b, int title, int summary, int layoutId) {
+		return createSwitchPreference(b, getString(title), getString(summary), layoutId);
+	}
+
+	public SwitchPreference createSwitchPreference(OsmandSettings.OsmandPreference<Boolean> b, String title, String summary, int layoutId) {
+		SwitchPreference p = new SwitchPreference(getContext());
+		p.setTitle(title);
+		p.setKey(b.getId());
+		p.setSummary(summary);
+		p.setLayoutResource(layoutId);
+		return p;
+	}
+
+	public SwitchPreferenceEx createSwitchPreferenceEx(String prefId, int title, int layoutId) {
+		return createSwitchPreferenceEx(prefId, getString(title), null, layoutId);
+	}
+
+	public SwitchPreferenceEx createSwitchPreferenceEx(String prefId, int title, int summary, int layoutId) {
+		return createSwitchPreferenceEx(prefId, getString(title), getString(summary), layoutId);
+	}
+
+	public SwitchPreferenceEx createSwitchPreferenceEx(String prefId, String title, String summary, int layoutId) {
+		SwitchPreferenceEx p = new SwitchPreferenceEx(getContext());
+		p.setKey(prefId);
+		p.setTitle(title);
+		p.setSummary(summary);
+		p.setLayoutResource(layoutId);
+		return p;
+	}
+
+	public ListPreferenceEx createListPreferenceEx(String prefId, String[] names, Object[] values, int title, int layoutId) {
+		return createListPreferenceEx(prefId, names, values, getString(title), layoutId);
+	}
+
+	public ListPreferenceEx createListPreferenceEx(String prefId, String[] names, Object[] values, String title, int layoutId) {
+		ListPreferenceEx listPreference = new ListPreferenceEx(getContext());
+		listPreference.setKey(prefId);
+		listPreference.setTitle(title);
+		listPreference.setDialogTitle(title);
+		listPreference.setEntries(names);
+		listPreference.setEntryValues(values);
+
+		if (layoutId != 0) {
+			listPreference.setLayoutResource(layoutId);
+		}
+
+		return listPreference;
 	}
 }

@@ -14,6 +14,7 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.liveupdates.OsmLiveActivity;
+import net.osmand.plus.profiles.SettingsProfileActivity;
 
 public class SettingsActivity extends SettingsBaseActivity {
 
@@ -95,7 +96,7 @@ public class SettingsActivity extends SettingsBaseActivity {
 			startActivity(new Intent(this, SettingsGeneralActivity.class));
 			return true;
 		} else if (preference == profiles){
-//			startActivity(new Intent(this, SettingsProfileActivity.class));
+			startActivity(new Intent(this, SettingsProfileActivity.class));
 			return true;
 		} else if (preference == routing) {
 			startActivity(new Intent(this, SettingsNavigationActivity.class));

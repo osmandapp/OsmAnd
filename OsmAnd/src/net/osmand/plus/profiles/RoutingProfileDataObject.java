@@ -1,4 +1,7 @@
-package net.osmand.plus.settings.profiles;
+package net.osmand.plus.profiles;
+
+import android.os.Parcel;
+import net.osmand.plus.ApplicationMode.ProfileIconColors;
 
 
 public class RoutingProfileDataObject extends ProfileDataObject {

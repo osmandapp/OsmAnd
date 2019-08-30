@@ -423,6 +423,8 @@
 	<color name="text_field_box_dark">#3F474B</color>
 	<color name="text_field_box_light">#eeeeee</color>
 
+	<color name="preference_category_title">#7E33FF</color>
+
 	<!-- Basic colors -->
 	<color name="app_bar_main_dark">#101112</color>
 	<color name="app_bar_main_light">#ff8800</color>

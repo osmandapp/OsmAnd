@@ -47,4 +47,21 @@
 
 	</LinearLayout>
 
+	<View
+		android:layout_width="1dp"
+		android:layout_height="match_parent"
+		android:layout_marginTop="18dp"
+		android:layout_marginBottom="18dp"
+		android:background="?attr/divider_color_basic" />
+
+	<Switch
+		android:id="@android:id/switch_widget"
+		android:layout_width="wrap_content"
+		android:layout_height="match_parent"
+		android:background="@null"
+		android:clickable="true"
+		android:focusable="true"
+		android:paddingLeft="@dimen/content_padding"
+		android:paddingRight="@dimen/content_padding" />
+
 </LinearLayout>

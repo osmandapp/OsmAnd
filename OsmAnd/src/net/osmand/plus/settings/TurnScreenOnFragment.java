@@ -1,30 +1,19 @@
 package net.osmand.plus.settings;
 
-import android.os.Bundle;
 import android.support.v14.preference.SwitchPreference;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.preference.PreferenceScreen;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.support.v7.preference.Preference;
 
 import net.osmand.plus.R;
-import net.osmand.plus.views.ListIntPreference;
+import net.osmand.plus.settings.preferences.ListPreferenceEx;
+import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 
 public class TurnScreenOnFragment extends BaseSettingsFragment {
 
 	public static final String TAG = "TurnScreenOnFragment";
 
 	@Override
-	protected int getPreferenceResId() {
+	protected int getPreferencesResId() {
 		return R.xml.turn_screen_on;
-	}
-
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = super.onCreateView(inflater, container, savedInstanceState);
-
-		return view;
 	}
 
 	@Override
@@ -32,40 +21,52 @@ public class TurnScreenOnFragment extends BaseSettingsFragment {
 		return R.layout.profile_preference_toolbar;
 	}
 
+	@Override
 	protected String getToolbarTitle() {
 		return getString(R.string.turn_screen_on);
 	}
 
 	@Override
-	protected void createUI() {
-		PreferenceScreen screen = getPreferenceScreen();
+	protected void setupPreferences() {
+		setupTurnScreenOnPref();
 
-		SwitchPreference turnScreenOn = (SwitchPreference) findAndRegisterPreference(settings.TURN_SCREEN_ON.getId());
+		Preference turnScreenOnInfo = findPreference("turn_screen_on_info");
+		turnScreenOnInfo.setIcon(getContentIcon(R.drawable.ic_action_info_dark));
 
-		int[] screenPowerSaveValues = new int[]{0, 5, 10, 15, 20, 30, 45, 60};
-		String[] screenPowerSaveNames = new String[screenPowerSaveValues.length];
-		screenPowerSaveNames[0] = getString(R.string.shared_string_never);
-		for (int i = 1; i < screenPowerSaveValues.length; i++) {
-			screenPowerSaveNames[i] = screenPowerSaveValues[i] + " " + getString(R.string.int_seconds);
-		}
-
-		ListIntPreference turnScreenOnTime = (ListIntPreference) findAndRegisterPreference(settings.TURN_SCREEN_ON_TIME_INT.getId());
-		turnScreenOnTime.setEntries(screenPowerSaveNames);
-		turnScreenOnTime.setEntryValues(screenPowerSaveValues);
-
-		SwitchPreference turnScreenOnSensor = (SwitchPreference) findAndRegisterPreference(settings.TURN_SCREEN_ON_SENSOR.getId());
+		setupTurnScreenOnTimePref();
+		setupTurnScreenOnSensorPref();
 	}
 
-	public static boolean showInstance(FragmentManager fragmentManager) {
-		try {
-			TurnScreenOnFragment settingsNavigationFragment = new TurnScreenOnFragment();
-			fragmentManager.beginTransaction()
-					.add(R.id.fragmentContainer, settingsNavigationFragment, TurnScreenOnFragment.TAG)
-					.addToBackStack(TurnScreenOnFragment.TAG)
-					.commitAllowingStateLoss();
-			return true;
-		} catch (Exception e) {
-			return false;
+	private void setupTurnScreenOnPref() {
+		SwitchPreference turnScreenOn = (SwitchPreference) findPreference(settings.TURN_SCREEN_ON.getId());
+		turnScreenOn.setSummaryOn(R.string.shared_string_on);
+		turnScreenOn.setSummaryOff(R.string.shared_string_off);
+	}
+
+	private void setupTurnScreenOnTimePref() {
+		Integer[] entryValues = new Integer[] {0, 5, 10, 15, 20, 30, 45, 60};
+		String[] entries = new String[entryValues.length];
+
+		entries[0] = getString(R.string.shared_string_never);
+		for (int i = 1; i < entryValues.length; i++) {
+			entries[i] = entryValues[i] + " " + getString(R.string.int_seconds);
 		}
+
+		ListPreferenceEx turnScreenOnTime = (ListPreferenceEx) findPreference(settings.TURN_SCREEN_ON_TIME_INT.getId());
+		turnScreenOnTime.setEntries(entries);
+		turnScreenOnTime.setEntryValues(entryValues);
+		turnScreenOnTime.setIcon(getContentIcon(R.drawable.ic_action_time_span));
+	}
+
+	private void setupTurnScreenOnSensorPref() {
+		String title = getString(R.string.turn_screen_on_sensor);
+		String description = getString(R.string.turn_screen_on_sensor_descr);
+
+		SwitchPreferenceEx turnScreenOnSensor = (SwitchPreferenceEx) findPreference(settings.TURN_SCREEN_ON_SENSOR.getId());
+		turnScreenOnSensor.setIcon(getContentIcon(R.drawable.ic_action_sensor_interaction));
+		turnScreenOnSensor.setTitle(title);
+		turnScreenOnSensor.setSummaryOn(R.string.shared_string_on);
+		turnScreenOnSensor.setSummaryOff(R.string.shared_string_off);
+		turnScreenOnSensor.setDescription(description);
 	}
 }

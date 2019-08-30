@@ -1,13 +1,7 @@
 package net.osmand.plus.settings;
 
-import android.os.Bundle;
 import android.support.v14.preference.SwitchPreference;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import net.osmand.plus.R;
 
@@ -16,14 +10,7 @@ public class ScreenAlertsFragment extends BaseSettingsFragment {
 	public static final String TAG = "ScreenAlertsFragment";
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = super.onCreateView(inflater, container, savedInstanceState);
-
-		return view;
-	}
-
-	@Override
-	protected int getPreferenceResId() {
+	protected int getPreferencesResId() {
 		return R.xml.screen_alerts;
 	}
 
@@ -37,35 +24,22 @@ public class ScreenAlertsFragment extends BaseSettingsFragment {
 	}
 
 	@Override
-	protected void createUI() {
-		PreferenceScreen screen = getPreferenceScreen();
+	protected void setupPreferences() {
+		Preference showRoutingAlarmsInfo = findPreference("show_routing_alarms_info");
 
-		SwitchPreference SHOW_ROUTING_ALARMS = (SwitchPreference) findAndRegisterPreference(settings.SHOW_ROUTING_ALARMS.getId());
-		Preference SHOW_TRAFFIC_WARNINGS_DESCR = findAndRegisterPreference("show_routing_alarms_descr");
-		SwitchPreference SHOW_TRAFFIC_WARNINGS = (SwitchPreference) findAndRegisterPreference(settings.SHOW_TRAFFIC_WARNINGS.getId());
-		SwitchPreference SHOW_PEDESTRIAN = (SwitchPreference) findAndRegisterPreference(settings.SHOW_PEDESTRIAN.getId());
-		SwitchPreference SHOW_CAMERAS = (SwitchPreference) findAndRegisterPreference(settings.SHOW_CAMERAS.getId());
-		SwitchPreference SHOW_LANES = (SwitchPreference) findAndRegisterPreference(settings.SHOW_LANES.getId());
-		SwitchPreference SHOW_TUNNELS = (SwitchPreference) findAndRegisterPreference(settings.SHOW_TUNNELS.getId());
+		SwitchPreference showRoutingAlarms = (SwitchPreference) findPreference(settings.SHOW_ROUTING_ALARMS.getId());
+		showRoutingAlarms.setSummaryOn(R.string.shared_string_on);
+		showRoutingAlarms.setSummaryOff(R.string.shared_string_off);
 
-		SHOW_TRAFFIC_WARNINGS_DESCR.setIcon(getContentIcon(R.drawable.ic_action_info_dark));
-		SHOW_TRAFFIC_WARNINGS.setIcon(getIcon(R.drawable.list_warnings_traffic_calming));
-		SHOW_PEDESTRIAN.setIcon(getIcon(R.drawable.list_warnings_pedestrian));
-		SHOW_CAMERAS.setIcon(getIcon(R.drawable.list_warnings_speed_camera));
-		SHOW_LANES.setIcon(getIcon(R.drawable.ic_action_lanes));
-		SHOW_TUNNELS.setIcon(getIcon(R.drawable.list_warnings_tunnel));
-	}
+		SwitchPreference showTrafficWarnings = (SwitchPreference) findPreference(settings.SHOW_TRAFFIC_WARNINGS.getId());
+		SwitchPreference showPedestrian = (SwitchPreference) findPreference(settings.SHOW_PEDESTRIAN.getId());
+		SwitchPreference showCameras = (SwitchPreference) findPreference(settings.SHOW_CAMERAS.getId());
+		SwitchPreference showTunnels = (SwitchPreference) findPreference(settings.SHOW_TUNNELS.getId());
 
-	public static boolean showInstance(FragmentManager fragmentManager) {
-		try {
-			ScreenAlertsFragment settingsNavigationFragment = new ScreenAlertsFragment();
-			fragmentManager.beginTransaction()
-					.add(R.id.fragmentContainer, settingsNavigationFragment, ScreenAlertsFragment.TAG)
-					.addToBackStack(ScreenAlertsFragment.TAG)
-					.commitAllowingStateLoss();
-			return true;
-		} catch (Exception e) {
-			return false;
-		}
+		showRoutingAlarmsInfo.setIcon(getContentIcon(R.drawable.ic_action_info_dark));
+		showTrafficWarnings.setIcon(getIcon(R.drawable.list_warnings_traffic_calming));
+		showPedestrian.setIcon(getIcon(R.drawable.list_warnings_pedestrian));
+		showCameras.setIcon(getIcon(R.drawable.list_warnings_speed_camera));
+		showTunnels.setIcon(getIcon(R.drawable.list_warnings_tunnel));
 	}
 }

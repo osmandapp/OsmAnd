@@ -109,7 +109,7 @@ public class MapActivityActions implements DialogProvider {
 	public static final String KEY_NAME = "name";
 
 	public static final String KEY_ZOOM = "zoom";
-	
+
 	public static final int REQUEST_LOCATION_FOR_DIRECTIONS_NAVIGATION_PERMISSION = 203;
 
 	// Constants for determining the order of items in the additional actions context menu
@@ -144,7 +144,7 @@ public class MapActivityActions implements DialogProvider {
 		routingHelper = mapActivity.getMyApplication().getRoutingHelper();
 		drawerLogoHeader = new ImageView(mapActivity);
 		drawerLogoHeader.setPadding(-AndroidUtils.dpToPx(mapActivity, 8f), AndroidUtils.dpToPx(mapActivity, 16f), 0,
-						0);
+				0);
 		drawerOsmAndFooter = mapActivity.getLayoutInflater().inflate(R.layout.powered_by_osmand_item, null);
 	}
 
@@ -457,12 +457,12 @@ public class MapActivityActions implements DialogProvider {
 	}
 
 	public void enterRoutePlanningModeGivenGpx(GPXFile gpxFile, LatLon from, PointDescription fromName,
-											   boolean useIntermediatePointsByDefault, boolean showMenu) {
+	                                           boolean useIntermediatePointsByDefault, boolean showMenu) {
 		enterRoutePlanningModeGivenGpx(gpxFile, from, fromName, useIntermediatePointsByDefault, showMenu, MapRouteInfoMenu.DEFAULT_MENU_STATE);
 	}
 
 	public void enterRoutePlanningModeGivenGpx(GPXFile gpxFile, LatLon from, PointDescription fromName,
-											   boolean useIntermediatePointsByDefault, boolean showMenu, int menuState) {
+	                                           boolean useIntermediatePointsByDefault, boolean showMenu, int menuState) {
 		settings.USE_INTERMEDIATE_POINTS_NAVIGATION.set(useIntermediatePointsByDefault);
 		OsmandApplication app = mapActivity.getMyApplication();
 		TargetPointsHelper targets = app.getTargetPointsHelper();
@@ -479,7 +479,7 @@ public class MapActivityActions implements DialogProvider {
 		targets.setStartPoint(from, false, fromName);
 		// then set gpx
 		setGPXRouteParams(gpxFile);
-		// then update start and destination point  
+		// then update start and destination point
 		targets.updateRouteAndRefresh(true);
 
 		mapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
@@ -685,7 +685,7 @@ public class MapActivityActions implements DialogProvider {
 					}
 				}).createItem());
 
-		
+
 		optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.get_directions, mapActivity)
 				.setId(DRAWER_DIRECTIONS_ID)
 				.setIcon(R.drawable.ic_action_gdirections_dark)
@@ -963,24 +963,24 @@ public class MapActivityActions implements DialogProvider {
 	}
 
 	public void restoreOrReturnDialog(final String packageName) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(mapActivity);
-        builder.setTitle("Restore OsmAnd");
-        builder.setMessage("Do you want to Restore OsmAnd or get back to the Client App?");
-        builder.setPositiveButton("Restore", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                restoreOsmand();
-            }
-        });
-        builder.setNeutralButton("Return", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                executeHeadersIntent(packageName);
-            }
-        });
-        builder.setNegativeButton("Cancel", null);
-        builder.show();
-    }
+		AlertDialog.Builder builder = new AlertDialog.Builder(mapActivity);
+		builder.setTitle("Restore OsmAnd");
+		builder.setMessage("Do you want to Restore OsmAnd or get back to the Client App?");
+		builder.setPositiveButton("Restore", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialogInterface, int i) {
+				restoreOsmand();
+			}
+		});
+		builder.setNeutralButton("Return", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialogInterface, int i) {
+				executeHeadersIntent(packageName);
+			}
+		});
+		builder.setNegativeButton("Cancel", null);
+		builder.show();
+	}
 
 	protected void updateDrawerMenu() {
 		boolean nightMode = getMyApplication().getDaynightHelper().isNightModeForMapControls();
@@ -1014,17 +1014,17 @@ public class MapActivityActions implements DialogProvider {
 				boolean hasHeader = menuItemsListView.getHeaderViewsCount() > 0;
 				boolean hasFooter = menuItemsListView.getFooterViewsCount() > 0;
 				if (hasHeader && position ==0 || (hasFooter && position== menuItemsListView.getCount() - 1)) {
-						if(navDrawerLogoParams!=null) executeHeadersIntent(navDrawerLogoParams.get(0));
-						else restoreOsmand();
-					} else {
-						position -= menuItemsListView.getHeaderViewsCount();
-						ContextMenuItem item = contextMenuAdapter.getItem(position);
-						ItemClickListener click = item.getItemClickListener();
-						if (click != null && click.onContextMenuClick(simpleListAdapter, item.getTitleId(),
-								position, false, AndroidUtils.getCenterViewCoordinates(view))) {
-							mapActivity.closeDrawer();
-						}
-			        }
+					if(navDrawerLogoParams!=null) executeHeadersIntent(navDrawerLogoParams.get(0));
+					else restoreOsmand();
+				} else {
+					position -= menuItemsListView.getHeaderViewsCount();
+					ContextMenuItem item = contextMenuAdapter.getItem(position);
+					ItemClickListener click = item.getItemClickListener();
+					if (click != null && click.onContextMenuClick(simpleListAdapter, item.getTitleId(),
+							position, false, AndroidUtils.getCenterViewCoordinates(view))) {
+						mapActivity.closeDrawer();
+					}
+				}
 			}
 
 		});
@@ -1076,7 +1076,7 @@ public class MapActivityActions implements DialogProvider {
 
 	private void showReturnConfirmationDialog(String packageName) {
 		restoreOrReturnDialog(packageName);
-	    mapActivity.closeDrawer();
+		mapActivity.closeDrawer();
 	}
 
 	private void restoreOsmand(){

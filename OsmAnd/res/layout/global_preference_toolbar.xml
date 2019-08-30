@@ -28,4 +28,11 @@
 		tools:text="Toolbar"
 		tools:visibility="visible" />
 
+	<ProgressBar
+		android:id="@+id/ProgressBar"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="right"
+		android:visibility="gone" />
+
 </android.support.v7.widget.Toolbar>
