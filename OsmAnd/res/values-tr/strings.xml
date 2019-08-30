@@ -2492,4 +2492,9 @@
     <string name="shared_string_crash">Çökme</string>
     <string name="app_mode_personal_transporter">Kişisel taşıyıcı</string>
     <string name="app_mode_scooter">Scooter</string>
+    <string name="day">Gün</string>
+    <string name="days_2_4">Günler</string>
+    <string name="days_5">Günler</string>
+    <string name="week">Hafta</string>
+    <string name="weeks_2_4">Haftalar</string>
 </resources>
