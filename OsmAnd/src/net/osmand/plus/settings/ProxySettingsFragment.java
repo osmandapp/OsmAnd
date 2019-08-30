@@ -71,7 +71,7 @@ public class ProxySettingsFragment extends BaseSettingsFragment {
 		String prefId = preference.getKey();
 
 		if (prefId.equals(settings.ENABLE_PROXY.getId())) {
-			enableProxy((Boolean) newValue);
+			return true;
 		} else if (prefId.equals(settings.PROXY_HOST.getId())) {
 			String ipAddress = (String) newValue;
 			if (ipAddress.matches(IP_ADDRESS_PATTERN)) {

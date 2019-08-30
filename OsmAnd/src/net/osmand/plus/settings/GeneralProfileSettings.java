@@ -42,10 +42,12 @@ public class GeneralProfileSettings extends BaseSettingsFragment {
 		return R.layout.profile_preference_toolbar_big;
 	}
 
+	@Override
 	protected String getToolbarTitle() {
 		return getString(R.string.general_settings_2);
 	}
 
+	@Override
 	protected void setupPreferences() {
 		setupAppThemePref();
 		setupRotateMapPref();
@@ -323,5 +325,14 @@ public class GeneralProfileSettings extends BaseSettingsFragment {
 			return true;
 		}
 		return super.onPreferenceClick(preference);
+	}
+
+	@Override
+	public boolean onPreferenceChange(Preference preference, Object newValue) {
+		FragmentManager fragmentManager = getFragmentManager();
+		if (fragmentManager != null) {
+			ChangeProfilesPreferenceBottomSheet.showInstance(fragmentManager, preference.getKey(), newValue);
+		}
+		return false;
 	}
 }
