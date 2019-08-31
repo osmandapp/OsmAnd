@@ -2459,7 +2459,7 @@
     <string name="improve_coverage_mapillary">Mejorar cobertura de fotos con Mapillary</string>
     <string name="improve_coverage_install_mapillary_desc">Instala Mapillary para añadir una o más fotos a esta ubicación del mapa.</string>
     <string name="online_photos">Fotos en línea</string>
-    <string name="mapillary_image">Imagen Mapillary</string>
+    <string name="mapillary_image">Imagen de Mapillary</string>
     <string name="shared_string_permissions">Permisos</string>
     <string name="import_gpx_failed_descr">OsmAnd no puede importar el archivo. Comprueba si OsmAnd tiene permiso para leer archivos desde esta ubicación.</string>
     <string name="distance_moving">Distancia corregida</string>
@@ -3027,7 +3027,7 @@
     <string name="routing_attr_avoid_sett_name">Evitar el empedrado y adoquín</string>
     <string name="routing_attr_avoid_sett_description">Evita las calles empedradas y adoquinadas</string>
     <string name="shared_string_degrees">Grados</string>
-    <string name="shared_string_milliradians">Mil angular</string>
+    <string name="shared_string_milliradians">Milirradianes</string>
     <string name="angular_measeurement">Unidad angular</string>
     <string name="angular_measeurement_descr">Cambiar el acimut en el que se mide.</string>
     <string name="routing_attr_avoid_tram_name">Evitar tranvías</string>
