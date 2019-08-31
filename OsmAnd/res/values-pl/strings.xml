@@ -3231,4 +3231,11 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="week">Tydzień</string>
     <string name="weeks_2_4">Tygodnie</string>
     <string name="weeks_5">Tygodnie</string>
+    <string name="month">Miesiąc</string>
+    <string name="year">Rok</string>
+    <string name="months_3">Trzy miesiące</string>
+    <string name="get_free_trial_title">Rozpocznij bezpłatny okres próbny %1$d %2$s.</string>
+    <string name="get_discount_first_part">%1$s dla pierwszych %2$s</string>
+    <string name="cancel_subscription">Anuluj subskrypcję</string>
+    <string name="price_and_discount">%1$s • Zapisz %2$s</string>
 </resources>
