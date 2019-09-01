@@ -8,6 +8,8 @@ import android.view.View;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
@@ -15,6 +17,8 @@ import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 
 import org.apache.commons.logging.Log;
+
+import java.util.List;
 
 public class ChangeProfilesPreferenceBottomSheet extends MenuBottomSheetDialogFragment {
 
@@ -32,6 +36,12 @@ public class ChangeProfilesPreferenceBottomSheet extends MenuBottomSheetDialogFr
 		if (context == null) {
 			return;
 		}
+		Bundle args = getArguments();
+		if (args == null || !args.containsKey(PREFERENCE_ID)) {
+			return;
+		}
+		final String prefId = args.getString(PREFERENCE_ID);
+
 		items.add(new TitleItem(getString(R.string.change_default_settings)));
 
 		BaseBottomSheetItem applyToAllProfiles = new SimpleBottomSheetItem.Builder()
@@ -41,7 +51,19 @@ public class ChangeProfilesPreferenceBottomSheet extends MenuBottomSheetDialogFr
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						getMyApplication().showShortToastMessage("applyToAllProfiles");
+						OsmandApplication app = getMyApplication();
+						if (app != null) {
+							OsmandSettings settings = app.getSettings();
+							OsmandSettings.OsmandPreference pref = settings.getPreference(prefId);
+							if (pref instanceof OsmandSettings.CommonPreference) {
+								OsmandSettings.CommonPreference commonPref = (OsmandSettings.CommonPreference) pref;
+								final List<ApplicationMode> values = ApplicationMode.values(app);
+								for (ApplicationMode mode : values) {
+									commonPref.setModeDefaultValue(mode, newValue);
+								}
+							}
+						}
+						dismiss();
 					}
 				})
 				.create();
@@ -56,7 +78,16 @@ public class ChangeProfilesPreferenceBottomSheet extends MenuBottomSheetDialogFr
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						getMyApplication().showShortToastMessage("applyToCurrentProfile");
+						OsmandApplication app = getMyApplication();
+						if (app != null) {
+							OsmandSettings settings = app.getSettings();
+							OsmandSettings.OsmandPreference pref = settings.getPreference(prefId);
+							if (pref instanceof OsmandSettings.CommonPreference) {
+								OsmandSettings.CommonPreference commonPref = (OsmandSettings.CommonPreference) pref;
+								commonPref.setModeDefaultValue(settings.APPLICATION_MODE.get(), newValue);
+							}
+						}
+						dismiss();
 					}
 				})
 				.create();
@@ -64,7 +95,7 @@ public class ChangeProfilesPreferenceBottomSheet extends MenuBottomSheetDialogFr
 
 		BaseBottomSheetItem discardChanges = new SimpleBottomSheetItem.Builder()
 				.setTitle(getString(R.string.discard_changes))
-				.setIcon(getActiveIcon(R.drawable.ic_action_copy))
+				.setIcon(getActiveIcon(R.drawable.ic_action_undo_dark))
 				.setLayoutId(R.layout.bottom_sheet_item_simple)
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
