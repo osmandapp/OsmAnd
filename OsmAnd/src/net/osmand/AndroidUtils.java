@@ -32,7 +32,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.support.v4.text.TextUtilsCompat;
 import android.support.v4.view.ViewCompat;
-import android.text.ParcelableSpan;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
@@ -594,7 +593,7 @@ public class AndroidUtils {
 			}
 			if(replaceStyle != null) {
 				ssb.setSpan(replaceStyle, indexOfPlaceholder,
-						stringToInsertAndStyle.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+						indexOfPlaceholder + stringToInsertAndStyle.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 			}
 			return ssb;
 		} else {

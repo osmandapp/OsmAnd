@@ -218,8 +218,12 @@ public class OsmandSettings {
 		return registeredPreferences.get(key);
 	}
 
-	@SuppressWarnings("unchecked")
 	public boolean setPreference(String key, Object value) {
+		return setPreference(key, value, APPLICATION_MODE.get());
+	}
+
+	@SuppressWarnings("unchecked")
+	public boolean setPreference(String key, Object value, ApplicationMode mode) {
 		OsmandPreference<?> preference = registeredPreferences.get(key);
 		if (preference != null) {
 			if (preference == APPLICATION_MODE) {
@@ -251,7 +255,7 @@ public class OsmandSettings {
 				} catch (IllegalArgumentException e) {
 					return false;
 				}
-				METRIC_SYSTEM.set(metricSystem);
+				METRIC_SYSTEM.setModeValue(mode, metricSystem);
 				return true;
 			} else if (preference == SPEED_SYSTEM && value instanceof String) {
 				String speedSystemName = (String) value;
@@ -261,31 +265,31 @@ public class OsmandSettings {
 				} catch (IllegalArgumentException e) {
 					return false;
 				}
-				SPEED_SYSTEM.set(speedSystem);
+				SPEED_SYSTEM.setModeValue(mode, speedSystem);
 				return true;
 			} else if (preference instanceof BooleanPreference) {
 				if (value instanceof Boolean) {
-					((BooleanPreference) preference).set((Boolean) value);
+					((BooleanPreference) preference).setModeValue(mode, (Boolean) value);
 					return true;
 				}
 			} else if (preference instanceof StringPreference) {
 				if (value instanceof String) {
-					((StringPreference) preference).set((String) value);
+					((StringPreference) preference).setModeValue(mode, (String) value);
 					return true;
 				}
 			} else if (preference instanceof FloatPreference) {
 				if (value instanceof Float) {
-					((FloatPreference) preference).set((Float) value);
+					((FloatPreference) preference).setModeValue(mode, (Float) value);
 					return true;
 				}
 			} else if (preference instanceof IntPreference) {
 				if (value instanceof Integer) {
-					((IntPreference) preference).set((Integer) value);
+					((IntPreference) preference).setModeValue(mode, (Integer) value);
 					return true;
 				}
 			} else if (preference instanceof LongPreference) {
 				if (value instanceof Long) {
-					((LongPreference) preference).set((Long) value);
+					((LongPreference) preference).setModeValue(mode, (Long) value);
 					return true;
 				}
 			} else if (preference instanceof EnumIntPreference) {
@@ -294,7 +298,7 @@ public class OsmandSettings {
 					int newVal = (Integer) value;
 					if (enumPref.values.length > newVal) {
 						Enum enumValue = enumPref.values[newVal];
-						return enumPref.set(enumValue);
+						return enumPref.setModeValue(mode, enumValue);
 					}
 					return false;
 				}
@@ -3202,6 +3206,7 @@ public class OsmandSettings {
 			return defValue;
 		}
 
+		@Nullable
 		public Object getValue(String key, Object defValue) {
 			OsmandPreference preference = getPreference(key);
 			if (preference != null) {

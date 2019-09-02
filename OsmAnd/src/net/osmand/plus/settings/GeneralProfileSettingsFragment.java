@@ -331,7 +331,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
 		FragmentManager fragmentManager = getFragmentManager();
 		if (fragmentManager != null) {
-			ChangeProfilesPreferenceBottomSheet.showInstance(fragmentManager, preference.getKey(), newValue);
+			ChangeGeneralProfilesPrefBottomSheet.showInstance(fragmentManager, preference.getKey(), newValue, this);
 		}
 		return false;
 	}

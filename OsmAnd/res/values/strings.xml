@@ -11,6 +11,7 @@
 	Thx - Hardy
 
 -->
+    <string name="pref_selected_by_default_for_profiles">This setting is selected by default for profiles: %s.</string>
     <string name="change_default_settings">Change default settings</string>
     <string name="discard_changes">Discard changes</string>
     <string name="apply_to_current_profile">Apply to current %1$s profile</string>

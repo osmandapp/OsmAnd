@@ -85,7 +85,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment {
 	}
 
 	private void setupDefaultAppModePref() {
-		ApplicationMode selectedMode = getSelectedAppMode();
+		ApplicationMode selectedMode = settings.DEFAULT_APPLICATION_MODE.get();
 
 		int iconRes = selectedMode.getIconRes();
 		String title = selectedMode.toHumanString(getContext());
