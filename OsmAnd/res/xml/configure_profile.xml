@@ -9,7 +9,7 @@
 		android:persistent="false"
 		android:summary="@string/general_settings_profile_descr"
 		android:title="@string/general_settings_2"
-		app:fragment="net.osmand.plus.settings.GeneralProfileSettings"
+		app:fragment="net.osmand.plus.settings.GeneralProfileSettingsFragment"
 		tools:icon="@drawable/ic_action_settings" />
 
 	<Preference

@@ -155,7 +155,6 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 						OsmandSettings.OsmandPreference pref = settings.getCustomRoutingBooleanProperty(p.getId(), p.getDefaultBoolean());
 
 						SwitchPreferenceEx switchPreferenceEx = (SwitchPreferenceEx) createSwitchPreferenceEx(pref.getId(), title, description, R.layout.preference_dialog_and_switch);
-
 						switchPreferenceEx.setDescription(description);
 						switchPreferenceEx.setIcon(getRoutingPrefIcon(p.getId()));
 						switchPreferenceEx.setSummaryOn(R.string.shared_string_enable);
@@ -172,7 +171,6 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 						OsmandSettings.OsmandPreference pref = settings.getCustomRoutingProperty(p.getId(), p.getType() == GeneralRouter.RoutingParameterType.NUMERIC ? "0.0" : "-");
 
 						ListPreferenceEx listPreferenceEx = (ListPreferenceEx) createListPreferenceEx(pref.getId(), p.getPossibleValueDescriptions(), svlss, title, R.layout.preference_with_descr);
-
 						listPreferenceEx.setDescription(description);
 						listPreferenceEx.setIcon(getRoutingPrefIcon(p.getId()));
 
@@ -198,7 +196,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 			}
 			SettingsNavigationActivity.showBooleanSettings(getContext(), vals, bls, preference.getTitle());
 
-			MultiSelectPreferencesBottomSheet.showInstance(getFragmentManager(), preference.getTitle().toString(), preference.getTitle().toString(), vals, bls, this);
+			MultiSelectPreferencesBottomSheet.showInstance(getFragmentManager(), preference.getTitle().toString(), preference.getSummary().toString(), vals, bls, this);
 
 			return false;
 		}

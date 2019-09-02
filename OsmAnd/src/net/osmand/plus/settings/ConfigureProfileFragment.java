@@ -1,18 +1,12 @@
 package net.osmand.plus.settings;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v14.preference.SwitchPreference;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Toast;
 
 import net.osmand.aidl.OsmandAidlApi.ConnectedApp;
-import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.PluginActivity;
@@ -20,18 +14,9 @@ import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 
 import java.util.List;
 
-import static net.osmand.plus.profiles.SettingsProfileFragment.PROFILE_STRING_KEY;
-
 public class ConfigureProfileFragment extends BaseSettingsFragment {
 
 	public static final String TAG = "ConfigureProfileFragment";
-
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = super.onCreateView(inflater, container, savedInstanceState);
-
-		return view;
-	}
 
 	@Override
 	protected int getPreferencesResId() {
@@ -76,7 +61,6 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 			SwitchPreferenceEx preference = new SwitchPreferenceEx(getContext());
 			preference.setKey(plugin.getId());
 			preference.setTitle(plugin.getName());
-			preference.setSummaryOn("");
 			preference.setIcon(getContentIcon(plugin.getLogoResourceId()));
 			preference.setChecked(plugin.isActive());
 			preference.setLayoutResource(R.layout.preference_dialog_and_switch);
@@ -103,23 +87,5 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 		}
 
 		return super.onPreferenceChange(preference, newValue);
-	}
-
-	public static boolean showInstance(FragmentManager fragmentManager, ApplicationMode mode) {
-		try {
-			Bundle args = new Bundle();
-			args.putString(PROFILE_STRING_KEY, mode.getStringKey());
-
-			ConfigureProfileFragment configureProfileFragment = new ConfigureProfileFragment();
-			configureProfileFragment.setArguments(args);
-
-			fragmentManager.beginTransaction()
-					.add(R.id.fragmentContainer, configureProfileFragment, ConfigureProfileFragment.TAG)
-					.addToBackStack(ConfigureProfileFragment.TAG)
-					.commitAllowingStateLoss();
-			return true;
-		} catch (Exception e) {
-			return false;
-		}
 	}
 }

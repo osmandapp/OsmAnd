@@ -34,18 +34,40 @@ public class SettingsMainFragment extends BaseSettingsFragment {
 	}
 
 	@Override
+	public int getStatusBarColorId() {
+		return isNightMode() ? R.color.status_bar_color_light : R.color.status_bar_color_dark;
+	}
+
+	@Override
 	protected void setupPreferences() {
 		Preference personalAccount = findPreference("personal_account");
 		Preference globalSettings = findPreference("global_settings");
-		Preference browseMap = findPreference("browse_map");
-		Preference configureProfile = findPreference("configure_profile");
-		Preference manageProfiles = findPreference("manage_profiles");
 
 		personalAccount.setIcon(getContentIcon(R.drawable.ic_action_user));
 		globalSettings.setIcon(getContentIcon(R.drawable.ic_action_settings));
-		browseMap.setIcon(getContentIcon(R.drawable.ic_world_globe_dark));
-		manageProfiles.setIcon(getIcon(R.drawable.ic_action_manage_profiles));
 
+		setupConfigureProfilePref();
+		setupBrowseMapPref();
+		setupManageProfilesPref();
+	}
+
+	private void setupManageProfilesPref() {
+		Preference manageProfiles = findPreference("manage_profiles");
+		manageProfiles.setIcon(getIcon(R.drawable.ic_action_manage_profiles));
+		manageProfiles.setIntent(new Intent(getActivity(), SettingsProfileActivity.class));
+	}
+
+	private void setupBrowseMapPref() {
+		Preference browseMap = findPreference("browse_map");
+		browseMap.setIcon(getContentIcon(R.drawable.ic_world_globe_dark));
+		Intent intent = new Intent(getActivity(), MapActivity.class);
+		intent.putExtra(OPEN_CONFIG_ON_MAP, MAP_CONFIG);
+		intent.putExtra(SELECTED_ITEM, getSelectedAppMode().getStringKey());
+		startActivity(intent);
+		browseMap.setIntent(intent);
+	}
+
+	private void setupConfigureProfilePref() {
 		ApplicationMode selectedMode = getSelectedAppMode();
 
 		int iconRes = selectedMode.getIconRes();
@@ -59,29 +81,19 @@ public class SettingsMainFragment extends BaseSettingsFragment {
 			profileType = getString(R.string.profile_type_base_string);
 		}
 
+		Preference configureProfile = findPreference("configure_profile");
 		configureProfile.setIcon(getIcon(iconRes, iconColor));
 		configureProfile.setTitle(title);
 		configureProfile.setSummary(profileType);
 	}
 
 	@Override
-	public int getStatusBarColorId() {
-		return isNightMode() ? R.color.status_bar_color_light : R.color.status_bar_color_dark;
-	}
-
-	@Override
 	public boolean onPreferenceClick(Preference preference) {
 		if (preference.getKey().equals("browse_map")) {
-			Intent intent = new Intent(getActivity(), MapActivity.class);
-			intent.putExtra(OPEN_CONFIG_ON_MAP, MAP_CONFIG);
-			intent.putExtra(SELECTED_ITEM, getSelectedAppMode().getStringKey());
-			startActivity(intent);
 			getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
 			return true;
-		} else if (preference.getKey().equals("manage_profiles")) {
-			startActivity(new Intent(getActivity(), SettingsProfileActivity.class));
-			return true;
 		}
+
 		return super.onPreferenceClick(preference);
 	}
 

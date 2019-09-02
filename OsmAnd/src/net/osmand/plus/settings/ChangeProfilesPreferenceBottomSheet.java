@@ -59,7 +59,7 @@ public class ChangeProfilesPreferenceBottomSheet extends MenuBottomSheetDialogFr
 								OsmandSettings.CommonPreference commonPref = (OsmandSettings.CommonPreference) pref;
 								final List<ApplicationMode> values = ApplicationMode.values(app);
 								for (ApplicationMode mode : values) {
-									commonPref.setModeDefaultValue(mode, newValue);
+									commonPref.setModeValue(mode, newValue);
 								}
 							}
 						}
@@ -84,7 +84,7 @@ public class ChangeProfilesPreferenceBottomSheet extends MenuBottomSheetDialogFr
 							OsmandSettings.OsmandPreference pref = settings.getPreference(prefId);
 							if (pref instanceof OsmandSettings.CommonPreference) {
 								OsmandSettings.CommonPreference commonPref = (OsmandSettings.CommonPreference) pref;
-								commonPref.setModeDefaultValue(settings.APPLICATION_MODE.get(), newValue);
+								commonPref.setModeValue(settings.APPLICATION_MODE.get(), newValue);
 							}
 						}
 						dismiss();

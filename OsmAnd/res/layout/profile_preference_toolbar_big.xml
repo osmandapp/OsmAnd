@@ -135,8 +135,8 @@
 				android:id="@+id/toolbar_divider"
 				android:layout_width="match_parent"
 				android:layout_height="2dp"
-				android:background="?attr/active_color_basic"
-				android:visibility="visible" />
+				android:visibility="visible"
+				tools:background="?attr/active_color_basic" />
 
 		</LinearLayout>
 

@@ -15,6 +15,7 @@ import android.support.design.widget.AppBarLayout;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.preference.EditTextPreference;
 import android.support.v7.preference.ListPreference;
@@ -150,6 +151,10 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		if (profileType != null) {
 			profileType.setVisibility(View.GONE);
 		}
+		View toolbarDivider = view.findViewById(R.id.toolbar_divider);
+		if (toolbarDivider != null) {
+			toolbarDivider.setBackgroundColor(ContextCompat.getColor(app, iconColor));
+		}
 	}
 
 	@Override
@@ -157,6 +162,8 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		getPreferenceManager().setPreferenceDataStore(settings.getDataStore());
 		updatePreferencesScreen();
 	}
+
+	protected abstract void setupPreferences();
 
 	private void updatePreferencesScreen() {
 		if (getSelectedAppMode() != null) {
@@ -168,8 +175,6 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 			}
 		}
 	}
-
-	protected abstract void setupPreferences();
 
 	private void registerPreferences() {
 		PreferenceScreen screen = getPreferenceScreen();
@@ -409,7 +414,6 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	public boolean onPreferenceClick(Preference preference) {
 		return false;
 	}
-
 
 	public SwitchPreference createSwitchPreference(OsmandSettings.OsmandPreference<Boolean> b, int title, int summary, int layoutId) {
 		return createSwitchPreference(b, getString(title), getString(summary), layoutId);

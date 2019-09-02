@@ -28,9 +28,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class GeneralProfileSettings extends BaseSettingsFragment {
+public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 
-	public static final String TAG = "GeneralProfileSettings";
+	public static final String TAG = "GeneralProfileSettingsFragment";
 
 	@Override
 	protected int getPreferencesResId() {
