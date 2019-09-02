@@ -3,16 +3,20 @@ package net.osmand.plus.settings;
 import android.content.Intent;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceScreen;
 import android.widget.Toast;
 
 import net.osmand.aidl.OsmandAidlApi.ConnectedApp;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.PluginActivity;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 
 import java.util.List;
+
+import static net.osmand.plus.profiles.EditProfileFragment.MAP_CONFIG;
+import static net.osmand.plus.profiles.EditProfileFragment.OPEN_CONFIG_ON_MAP;
+import static net.osmand.plus.profiles.EditProfileFragment.SELECTED_ITEM;
 
 public class ConfigureProfileFragment extends BaseSettingsFragment {
 
@@ -34,19 +38,19 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 
 	@Override
 	protected void setupPreferences() {
-		PreferenceScreen screen = getPreferenceScreen();
-
 		Preference generalSettings = findPreference("general_settings");
 		Preference navigationSettings = findPreference("navigation_settings");
-		Preference configureMap = findPreference("configure_map");
 
 		generalSettings.setIcon(getContentIcon(R.drawable.ic_action_settings));
 		navigationSettings.setIcon(getContentIcon(R.drawable.ic_action_gdirections_dark));
-		configureMap.setIcon(getContentIcon(R.drawable.ic_action_layers_dark));
 
+		setupConfigureMapPref();
+		setupConnectedAppsPref();
+		setupOsmandPluginsPref();
+	}
+
+	private void setupConnectedAppsPref() {
 		List<ConnectedApp> connectedApps = getMyApplication().getAidlApi().getConnectedApps();
-		List<OsmandPlugin> plugins = OsmandPlugin.getVisiblePlugins();
-
 		for (ConnectedApp connectedApp : connectedApps) {
 			SwitchPreference preference = new SwitchPreference(getContext());
 			preference.setKey(connectedApp.getPack());
@@ -55,8 +59,12 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 			preference.setChecked(connectedApp.isEnabled());
 			preference.setLayoutResource(R.layout.preference_dialog_and_switch);
 
-			screen.addPreference(preference);
+			getPreferenceScreen().addPreference(preference);
 		}
+	}
+
+	private void setupOsmandPluginsPref() {
+		List<OsmandPlugin> plugins = OsmandPlugin.getVisiblePlugins();
 		for (OsmandPlugin plugin : plugins) {
 			SwitchPreferenceEx preference = new SwitchPreferenceEx(getContext());
 			preference.setKey(plugin.getId());
@@ -69,8 +77,28 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 			intent.putExtra(PluginActivity.EXTRA_PLUGIN_ID, plugin.getId());
 			preference.setIntent(intent);
 
-			screen.addPreference(preference);
+			getPreferenceScreen().addPreference(preference);
 		}
+	}
+
+	private void setupConfigureMapPref() {
+		Preference configureMap = findPreference("configure_map");
+		configureMap.setIcon(getContentIcon(R.drawable.ic_action_layers_dark));
+
+		Intent intent = new Intent(getActivity(), MapActivity.class);
+		intent.putExtra(OPEN_CONFIG_ON_MAP, MAP_CONFIG);
+		intent.putExtra(SELECTED_ITEM, getSelectedAppMode().getStringKey());
+		configureMap.setIntent(intent);
+	}
+
+	@Override
+	public boolean onPreferenceClick(Preference preference) {
+		if (preference.getKey().equals("configure_map")) {
+			getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
+			return false;
+		}
+
+		return super.onPreferenceClick(preference);
 	}
 
 	@Override

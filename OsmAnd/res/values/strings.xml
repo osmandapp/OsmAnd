@@ -11,6 +11,9 @@
 	Thx - Hardy
 
 -->
+    <string name="navigate_point_format_UTM">UTM</string>
+    <string name="navigate_point_format_OLC">OLC</string>
+    <string name="coordinates_format_info">The selected format will be applied to all places in the application.</string>
     <string name="pref_selected_by_default_for_profiles">This setting is selected by default for profiles: %s.</string>
     <string name="change_default_settings">Change default settings</string>
     <string name="discard_changes">Discard changes</string>

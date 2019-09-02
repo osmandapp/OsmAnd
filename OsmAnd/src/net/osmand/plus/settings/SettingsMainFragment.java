@@ -63,7 +63,6 @@ public class SettingsMainFragment extends BaseSettingsFragment {
 		Intent intent = new Intent(getActivity(), MapActivity.class);
 		intent.putExtra(OPEN_CONFIG_ON_MAP, MAP_CONFIG);
 		intent.putExtra(SELECTED_ITEM, getSelectedAppMode().getStringKey());
-		startActivity(intent);
 		browseMap.setIntent(intent);
 	}
 
@@ -91,7 +90,7 @@ public class SettingsMainFragment extends BaseSettingsFragment {
 	public boolean onPreferenceClick(Preference preference) {
 		if (preference.getKey().equals("browse_map")) {
 			getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
-			return true;
+			return false;
 		}
 
 		return super.onPreferenceClick(preference);

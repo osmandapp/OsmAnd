@@ -1,6 +1,5 @@
 package net.osmand.plus.settings;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.graphics.drawable.Drawable;
@@ -155,28 +154,24 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 	}
 
 	private void setupCoordinatesFormatPref() {
-		Context ctx = getContext();
-		if (ctx == null) {
-			return;
-		}
-
-		ListPreferenceEx coordinatesFormat = (ListPreferenceEx) findPreference(settings.COORDINATES_FORMAT.getId());
+		Preference coordinatesFormat = findPreference(settings.COORDINATES_FORMAT.getId());
 		coordinatesFormat.setIcon(getContentIcon(R.drawable.ic_action_coordinates_widget));
+		coordinatesFormat.setSummary(PointDescription.formatToHumanString(app, settings.COORDINATES_FORMAT.get()));
 
-		coordinatesFormat.setEntries(new String[] {
-				PointDescription.formatToHumanString(ctx, PointDescription.FORMAT_DEGREES),
-				PointDescription.formatToHumanString(ctx, PointDescription.FORMAT_MINUTES),
-				PointDescription.formatToHumanString(ctx, PointDescription.FORMAT_SECONDS),
-				PointDescription.formatToHumanString(ctx, PointDescription.UTM_FORMAT),
-				PointDescription.formatToHumanString(ctx, PointDescription.OLC_FORMAT)
-		});
-		coordinatesFormat.setEntryValues(new Integer[] {
-				PointDescription.FORMAT_DEGREES,
-				PointDescription.FORMAT_MINUTES,
-				PointDescription.FORMAT_SECONDS,
-				PointDescription.UTM_FORMAT,
-				PointDescription.OLC_FORMAT
-		});
+//		coordinatesFormat.setEntries(new String[] {
+//				PointDescription.formatToHumanString(ctx, PointDescription.FORMAT_DEGREES),
+//				PointDescription.formatToHumanString(ctx, PointDescription.FORMAT_MINUTES),
+//				PointDescription.formatToHumanString(ctx, PointDescription.FORMAT_SECONDS),
+//				PointDescription.formatToHumanString(ctx, PointDescription.UTM_FORMAT),
+//				PointDescription.formatToHumanString(ctx, PointDescription.OLC_FORMAT)
+//		});
+//		coordinatesFormat.setEntryValues(new Integer[] {
+//				PointDescription.FORMAT_DEGREES,
+//				PointDescription.FORMAT_MINUTES,
+//				PointDescription.FORMAT_SECONDS,
+//				PointDescription.UTM_FORMAT,
+//				PointDescription.OLC_FORMAT
+//		});
 	}
 
 	private void setupAngularUnitsPref() {

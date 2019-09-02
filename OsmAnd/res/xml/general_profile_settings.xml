@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto">
 
 	<PreferenceCategory
 		android:key="appearance_category"
@@ -36,10 +37,11 @@
 		android:layout="@layout/preference_with_descr"
 		android:title="@string/unit_of_length" />
 
-	<net.osmand.plus.settings.preferences.ListPreferenceEx
+	<Preference
 		android:key="coordinates_format"
 		android:layout="@layout/preference_with_descr"
-		android:title="@string/coords_format" />
+		android:title="@string/coords_format"
+		app:fragment="net.osmand.plus.settings.CoordinatesFormatFragment" />
 
 	<net.osmand.plus.settings.preferences.ListPreferenceEx
 		android:key="angular_measurement"
