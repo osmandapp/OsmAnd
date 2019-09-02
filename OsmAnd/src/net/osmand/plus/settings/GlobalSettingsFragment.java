@@ -1,5 +1,6 @@
 package net.osmand.plus.settings;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
@@ -259,11 +260,12 @@ public class GlobalSettingsFragment extends BaseSettingsFragment {
 		settings.PREFERRED_LOCALE.addListener(new StateChangedListener<String>() {
 			@Override
 			public void stateChanged(String change) {
-				// restart application to update locale
+				// recreate activity to update locale
+				Activity activity = getActivity();
 				OsmandApplication app = getMyApplication();
-				if (app != null) {
+				if (app != null && activity != null) {
 					app.checkPreferredLocale();
-					app.restartApp(getContext());
+					activity.recreate();
 				}
 			}
 		});
