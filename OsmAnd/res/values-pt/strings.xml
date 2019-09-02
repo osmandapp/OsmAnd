@@ -3234,4 +3234,6 @@
     <string name="get_discount_second_part">depois %1$s</string>
     <string name="cancel_subscription">Cancelar subscrição</string>
     <string name="price_and_discount">%1$s - Poupe %2$s</string>
+    <string name="get_discount_first_part">%1$s para o primeiro %2$s</string>
+    <string name="get_discount_first_few_part">%1$s para o primeiro %2$s</string>
 </resources>

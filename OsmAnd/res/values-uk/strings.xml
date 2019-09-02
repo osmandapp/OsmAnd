@@ -1378,7 +1378,7 @@
     <string name="map_widget_right">Права панель</string>
     <string name="map_widget_left">Ліва панель</string>
     <string name="shared_string_show">Показати</string>
-    <string name="configure_map">Налаштування мапи</string>
+    <string name="configure_map">Налаштувати мапу</string>
     <string name="search_radius_proximity">В межах</string>
     <string name="anonymous_user_hint">Анонімний користувач не в змозі:\n- створювати групи;\n- синхронізувати групи та пристрої з сервером;\n- керувати групами та пристроями в персональній панелі керування на вебсайті.</string>
     <string name="anonymous_user">Анонімний користувач</string>
@@ -3234,4 +3234,25 @@
     <string name="lang_oc">Окситанська</string>
     <string name="app_mode_wagon">Фургон</string>
     <string name="app_mode_pickup_truck">Пікап</string>
+    <string name="day">День</string>
+    <string name="days_2_4">Дні</string>
+    <string name="days_5">Днів</string>
+    <string name="week">Тиждень</string>
+    <string name="weeks_2_4">Тижні</string>
+    <string name="weeks_5">Тижнів</string>
+    <string name="month">Місяць</string>
+    <string name="months_2_4">Місяці</string>
+    <string name="months_5">Місяців</string>
+    <string name="year">Рік</string>
+    <string name="years_2_4">Роки</string>
+    <string name="years_5">Років</string>
+    <string name="months_3">Три місяці</string>
+    <string name="price_free">Безкоштовно</string>
+    <string name="get_discount_title">Отримайте %1$d %2$s зі знижкою %3$s.</string>
+    <string name="get_free_trial_title">Почати безкоштовний пробний період тривалістю %1$d %2$s.</string>
+    <string name="get_discount_first_part">%1$s за перший %2$s</string>
+    <string name="get_discount_first_few_part">%1$s за перші %2$s</string>
+    <string name="get_discount_second_part">далі %1$s</string>
+    <string name="cancel_subscription">Скасувати підписку</string>
+    <string name="price_and_discount">%1$s • Заощадити %2$s</string>
 </resources>

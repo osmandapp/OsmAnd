@@ -1308,7 +1308,7 @@
     <string name="map_widget_top">狀態列</string>
     <string name="map_widget_right">右面板</string>
     <string name="map_widget_left">左面板</string>
-    <string name="configure_map">組態地圖</string>
+    <string name="configure_map">設定地圖</string>
     <string name="search_radius_proximity">範圍內</string>
     <string name="rendering_category_routes">導航路線</string>
     <string name="rendering_attr_trainLightrailRoutes_name">火車路線</string>
@@ -3210,4 +3210,25 @@
     <string name="lang_oc">Occitan</string>
     <string name="app_mode_wagon">休旅車</string>
     <string name="app_mode_pickup_truck">皮卡車</string>
+    <string name="day">天</string>
+    <string name="days_2_4">天</string>
+    <string name="days_5">天</string>
+    <string name="week">週</string>
+    <string name="weeks_2_4">週</string>
+    <string name="weeks_5">週</string>
+    <string name="month">月</string>
+    <string name="months_2_4">月</string>
+    <string name="months_5">月</string>
+    <string name="year">年</string>
+    <string name="years_2_4">年</string>
+    <string name="years_5">年</string>
+    <string name="months_3">三個月</string>
+    <string name="price_free">免費</string>
+    <string name="get_discount_title">以 %3$s 折扣的優惠取得 %1$d %2$s。</string>
+    <string name="get_free_trial_title">開始您的 %1$d %2$s 免費試用。</string>
+    <string name="get_discount_first_part">供 %1$s 的第一次 %2$s</string>
+    <string name="get_discount_first_few_part">供 %1$s 的第一次 %2$s</string>
+    <string name="get_discount_second_part">然後 %1$s</string>
+    <string name="cancel_subscription">取消訂閱</string>
+    <string name="price_and_discount">%1$s • 省下 %2$s</string>
 </resources>

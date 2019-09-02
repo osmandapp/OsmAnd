@@ -2769,17 +2769,28 @@ Lon %2$s</string>
 \n • Marcaxes do mapa: Importación de grupos elixidos dende ficheiros GPX, ingreso de coordenadas, novo aspecto 
 \n 
 \n • A subscrición do OsmAnd Live, suporta agora tódalas características do OsmAnd "</string>
-    <string name="osmand_extended_description_part2">"Navigación GPS 
+    <string name="osmand_extended_description_part2">Navigación GPS 
+\n
 \n • Escolle entre os modos sen conexión (sen pagamentos do roaming ó viaxar ó extranxeiro) ou en liña (máis rápido) 
+\n
 \n • A guía por voz xiro-a-xiro ou guía ó longo do camiño (voces gravadas e sintetizadas) 
+\n
 \n • A rota recalcúlase ó saírse da mesma 
+\n
 \n • Guía dos carrís, nomes das rúas e tempo estimado ó destino, axudaráo ó longo da rota 
+\n
 \n • Para facer o seu viaxe seguro, os modos día/noite altérnanse de xeito automático 
+\n
 \n • Amosa os límites de velocidade e obtén un aviso ó excederche do mesmo 
+\n
 \n • O achegamento do mapa axústase á velocidade 
+\n
 \n • Procura destinos por enderezo, por tipo (por exemplo: aparcadoiros, restaurantes, hoteis, gasolineiras, museos), ou por coordenadas xeográficas 
+\n
 \n • Suporta puntos intermedios no itinerario 
-\n • Grave a súa viaxe ou soba unha pista GPX e séguea "</string>
+\n
+\n • Grave a súa viaxe ou soba unha pista GPX e séguea
+\n</string>
     <string name="osmand_extended_description_part3">Navigación GPS 
 \n • Escolle entre os modos sen conexión (sen pagamentos do roaming ó viaxar ó extranxeiro) ou en liña (máis rápido) 
 \n • A guía por voz xiro-a-xiro ou guía ó longo do camiño (voces gravadas e sintetizadas) 

@@ -429,7 +429,7 @@
     <string name="av_audio_bitrate_descr">ശബ്ദ നിലവാരം തെരഞ്ഞെടുക്കുക</string>
     <string name="access_from_map_description">മെനുബട്ടണ്‍ മെനുവിന് പകരം ഡാഷ് ബോര്‍ഡ് തുറക്കും</string>
     <string name="access_from_map">ഭൂപടത്തില്‍ നിന്നു പ്രവേശിക്കുക</string>
-    <string name="av_locations_descr">"സ്ഥലക്കുറിപ്പുകളോടെയുള്ള ജിപിഎക്സ് ഫയല്‍ "</string>
+    <string name="av_locations_descr">സ്ഥലക്കുറിപ്പുകളോടെയുള്ള ജിപിഎക്സ് ഫയല്‍.</string>
     <string name="light_theme">പ്രകാശമയം</string>
     <string name="agps_info">അസിസ്റ്റഡ് ജിപിഎസ് വിവരങ്ങള്‍</string>
     <string name="action_create">സൃഷ്ടിക്കുക</string>
@@ -455,7 +455,7 @@
     <string name="av_settings">"ഓഡിയോസജ്ജീകരണങ്ങള്‍ "</string>
     <string name="add_as_last_destination_point">"അവസാനത്തെ  ഇട-ലക്ഷ്യസ്ഥാനമായി ചേര്‍ക്കുക"</string>
     <string name="add_as_first_destination_point">അദ്യത്തെ ഇട-ലക്ഷ്യസ്ഥാനമായി ചേര്‍ക്കുക</string>
-    <string name="arrived_at_intermediate_point">"  ഇട-ലക്ഷ്യസ്ഥാനത്തെത്തി "</string>
+    <string name="arrived_at_intermediate_point">ഇട-ലക്ഷ്യസ്ഥാനത്തെത്തി</string>
     <string name="add_tag">"ടാഗ് ചേര്‍ക്കുക "</string>
     <string name="avoid_motorway">അതിവേഗപാതകള്‍ ഒഴിവാക്കുക</string>
     <string name="avoid_unpaved">" ടാര്‍ ചെയ്യാത്ത(പാകാത്ത) റോഡുകള്‍ ഒഴിവാക്കുക "</string>
@@ -1797,8 +1797,8 @@
     <string name="add_route_points">പാതബിന്ദുക്കള്‍ ചേര്‍ക്കു</string>
     <string name="shared_string_restore">പുനഃസ്ഥാപിക്കുക</string>
     <string name="osm_live_plan_pricing">"വിലവിവരങ്ങൾ "</string>
-    <string name="osm_live_payment_monthly_title">"മാസത്തിലൊരിക്കൽ  "</string>
-    <string name="osm_live_payment_3_months_title">"മൂന്നുമാസത്തിലൊരിക്കൽ "</string>
+    <string name="osm_live_payment_monthly_title">മാസത്തിലൊരിക്കൽ</string>
+    <string name="osm_live_payment_3_months_title">മൂന്നുമാസത്തിലൊരിക്കൽ</string>
     <string name="osm_live_payment_annual_title">വര്ഷത്തിലൊരിക്കൽ</string>
     <string name="osm_live_payment_month_cost_descr">"പ്റതിമാസം  %1$s"</string>
     <string name="osm_live_payment_month_cost_descr_ex">"പ്റതിമാസം %1$.2f %2$s "</string>
@@ -1819,7 +1819,7 @@
     <string name="keep_passed_markers">"കടന്നുപോയ മാര്‍ക്കറുകള്‍ മാപ്പില്‍ നിലനിര്‍ത്തുക "</string>
     <string name="more_transport_on_stop_hint">ഈ സ്ടോപ്പില്‍ ഒന്നിലധികം പൊതുഗതാഗതസംവിധാനം ലഭ്യമാണ് .</string>
     <string name="ask_for_location_permission">തുടരാനായി ദയവായ് ഓഎസ്എംആന്റിനു ലൊക്കേഷന്‍ അനുമതി നല്കുക.</string>
-    <string name="thank_you_for_feedback">"നിങ്ങളുടെ  ഫീഡ്ബാക്കിനു നന്ദി "</string>
+    <string name="thank_you_for_feedback">"നിങ്ങളുടെ  ഫീഡ്ബാക്കിനു നന്ദി"</string>
     <string name="poi_cannot_be_found">സ്ഥലമോ, വഴിയോ കണ്ടെത്താനായില്ല.</string>
     <string name="search_no_results_feedback">"തെരച്ചിലില്‍ ഒന്നും കണ്ടെത്തിയില്ലെ\?
 \nദയവായ് നിങ്ങളുടെ ഫീഡ്ബാക്ക്  തരുക"</string>
@@ -2042,7 +2042,7 @@
     <string name="shared_string_topbar">ടോപ്പ് ബാർ</string>
     <string name="number_of_recipients">സ്വീകർത്താക്കളുടെ എണ്ണം</string>
     <string name="osm_user_stat">%1$s എഡിറ്റുകൾ, %2$s റാങ്ക്, മൊത്തം എഡിറ്റുകൾ %3$s</string>
-    <string name="osm_live_subscription">"OsmAnd ലൈവ് സബ്സ്ക്രിപ്ഷൻ "</string>
+    <string name="osm_live_subscription">OsmAnd ലൈവ് സബ്സ്ക്രിപ്ഷൻ</string>
     <string name="osm_live_subscribe_btn">സബ്സ്ക്രൈബ്</string>
     <string name="osm_live_email_desc">സംഭാവനകൾ സംബന്ധിച്ച വിവരങ്ങൾ നിങ്ങൾക്ക് നൽകേണ്ടതുണ്ട്.</string>
     <string name="osm_live_hide_user_name">റിപ്പോർട്ടുകളിൽ എന്റെ പേര് കാണിക്കരുത്</string>
@@ -2117,7 +2117,7 @@
     <string name="no_index_file_to_download">ഡൗൺലോഡുകൾ കണ്ടെത്താനായില്ല, ഇന്റർനെറ്റിലേക്കുള്ള നിങ്ങളുടെ കണക്ഷൻ പരിശോധിക്കുക.</string>
     <string name="select_index_file_to_download">ഒന്നും കണ്ടെത്തിയില്ല. നിങ്ങളുടെ പ്രദേശം കണ്ടെത്താൻ കഴിയുന്നില്ലെങ്കിൽ, നിങ്ങൾക്ക് അത് സ്വയം സൃഷ്ടിക്കാനാകും (https://osmand.net കാണുക).</string>
     <string name="local_index_select_gpx_file">കാണിക്കുന്നതിന് തിരഞ്ഞെടുക്കുക</string>
-    <string name="gpx_split_interval">"വിഭജിക്കാനുള്ള ഇടവേള "</string>
+    <string name="gpx_split_interval">വിഭജിക്കാനുള്ള ഇടവേള</string>
     <string name="save_as_favorites_points">പ്രിയങ്കരങ്ങളുടെ സംഘമായി (group of Favorites)സംരക്ഷിക്കുക</string>
     <string name="selected_gpx_info_show">"
 \n
@@ -2264,7 +2264,7 @@
     <string name="mile_per_hour">മൈല്‍/മണി.</string>
     <string name="send_location_email_pattern">"ലൊക്കേഷൻ കാണാൻ %1$s വെബ് ലിങ്ക്  അല്ലെങ്കിൽ Android ഇന്റെന്റ് ലിങ്ക് %2$s പിന്തുടരുക"</string>
     <string name="old_map_index_is_not_supported">കാലഹരണപ്പെട്ട മാപ്പ് ഡാറ്റ ഫോർമാറ്റ് \'\' {0} \'\', സപ്പോര്‍ട്ട് ചെയ്യുന്നില്ല</string>
-    <string name="reading_cached_tiles">"കാഷെ ചെയ്ത ടൈലുകൾ വായിക്കുന്നു ... "</string>
+    <string name="reading_cached_tiles">കാഷെ ചെയ്ത ടൈലുകൾ വായിക്കുന്നു …</string>
     <string name="version_index_is_big_for_memory">ഇന്ഡക്സ് \'\' {0} \'\' ആവശ്യമായ മെമ്മറിയില്ല</string>
     <string name="osmand_routing_experimental">"OsmAnd ഓഫ്-ലൈന്‍ നാവിഗേഷന്‍ പരീക്ഷിക്കപ്പെടുന്ന സവിശേഷതയാണ്, ഏകദേശം 20 കിലോമീറ്റര്‍ വരെ മാത്രമെ ഇതു വര്‍ക്ക് ചെയ്യൂ.
 \n
@@ -2401,7 +2401,7 @@
     <string name="quick_actions_delete_text">\"%s\" പ്രവർത്തനം നീക്കം ചെയ്യണമോ\?</string>
     <string name="quick_favorites_show_favorites_dialog">പ്രിയപ്പെട്ടവയുടെ ഡയലോഗ് കാണിക്കുക</string>
     <string name="quick_favorites_name_preset">പേര് പ്രീസെറ്റ് ചെയ്യുക</string>
-    <string name="favorite_autofill_toast_text"> സംരക്ഷിക്കപ്പെടുന്നു</string>
+    <string name="favorite_autofill_toast_text">" സംരക്ഷിക്കപ്പെടുന്നു "</string>
     <string name="favorite_empty_place_name">സ്ഥലം</string>
     <string name="quick_action_duplicates">"അതിവേഗ പ്രവൃത്തിയുടെ നാമം  ഉപയോഗത്തിലുണ്ട്, ഡ്യൂപ്ലിക്കേഷൻ ഒഴിവാക്കുന്നതിന്  %1$s  എന്നാക്കി മാറ്റി."</string>
     <string name="quick_action_duplicate">ദ്രുത പ്രവർത്തനത്തിന്റെ പേര് ഒന്നിലധികം പകര്‍പ്പിലുണ്ട്</string>
@@ -2426,7 +2426,7 @@
     <string name="quick_action_map_source">മാപ്പ് ഉറവിടം മാറ്റുക</string>
     <string name="quick_action_sh_poi_descr">മാപ്പിൽ പ്രദർശിപ്പിക്കുന്നതിന് ഒന്നോ അതിലധികമോ POI വിഭാഗങ്ങൾ ചേർക്കുക.</string>
     <string name="quick_action_add_marker_descr">ഈ പ്രവർത്തന ബട്ടൺ ടാപ്പുചെയ്യുന്നത് സ്ക്രീനിന്റെ നടുക്കായ് ഒരു മാപ്പ് മാർക്കർ ചേർക്കുന്നു.</string>
-    <string name="quick_action_add_gpx_descr">"സ്ക്രീനിന്റെ മധ്യത്തിൽ ഒരു GPX വേ പോയിന്റ് ചേർക്കാന്‍ ഈ പ്രവർത്തന ബട്ടൺ ടാപ്പുചെയ്യുക. "</string>
+    <string name="quick_action_add_gpx_descr">സ്ക്രീനിന്റെ മധ്യത്തിൽ ഒരു GPX വേ പോയിന്റ് ചേർക്കാന്‍ ഈ പ്രവർത്തന ബട്ടൺ ടാപ്പുചെയ്യുക.</string>
     <string name="quick_action_take_audio_note_descr">ഈ പ്രവർത്തന ബട്ടൺ ടാപ്പുചെയ്യുന്നത് സ്ക്രീനിന്റെ മധ്യത്തില്‍ ഓഡിയോ കുറിപ്പ് ചേർക്കുന്നു.</string>
     <string name="quick_action_take_video_note_descr">ഈ പ്രവർത്തന ബട്ടൺ ടാപ്പുചെയ്യുന്നത് സ്ക്രീനിന്റെ മധ്യഭാഗത്ത് ഒരു വീഡിയോ കുറിപ്പ് ചേർക്കുന്നു.</string>
     <string name="quick_action_take_photo_note_descr">ഈ പ്രവർത്തന ബട്ടൺ ടാപ്പുചെയ്യുന്നത് സ്ക്രീനിന്റെ മധ്യഭാഗത്തായി ഒരു ഫോട്ടോ നോട്ട് ചേർക്കുന്നു.</string>
@@ -2464,7 +2464,7 @@
     <string name="points_delete_multiple">നിങ്ങൾ %1$d പോയിന്റ് (കൾ) ഇല്ലാതാക്കാൻ പോകുന്നു. ഉറപ്പാണോ\?</string>
     <string name="route_points_category_name">ഈ റൂട്ടിലൂടെ കടന്നുപോകും</string>
     <string name="track_points_category_name">"വേപോയിന്റുകള്‍, താൽപ്പര്യമുള്ള പോയിൻറുകള്‍,  പേരുള്ള ഫീച്ചറുകളും"</string>
-    <string name="shared_string_slope">"ചരിവ് "</string>
+    <string name="shared_string_slope">ചരിവ്</string>
     <string name="lang_ber">ബെർബർ</string>
     <string name="relief_smoothness_factor_descr">ഇഷ്ടപ്പെട്ട ഭൂപ്രദേശം: സമതലം അല്ലെങ്കിൽ മലകൾ.</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">മലകള്‍</string>
@@ -2503,7 +2503,7 @@
     <string name="route_is_too_long_v2">ദീര്‍ഘ-ദൂരത്തിന്: 10 മിനിറ്റിനകം റൂട്ടൊന്നും കണ്ടെത്തിയില്ലെങ്കിൽ ദയവായി ഇന്റർമീഡിയറ്റ് കേന്ദ്രങ്ങൾ ചേർക്കുക.</string>
     <string name="display_zoom_level">സൂം ലെവല്‍ കാണുക:%1$s</string>
     <string name="show_from_zoom_level">സൂം ലെവല്‍ മുതല്‍ പ്രദർശിപ്പിക്കുക</string>
-    <string name="routing_attr_allow_private_name">"സ്വകാര്യ വഴികള്‍ ഉപയോഗിക്കുക "</string>
+    <string name="routing_attr_allow_private_name">സ്വകാര്യ വഴികള്‍ ഉപയോഗിക്കുക</string>
     <string name="srtm_menu_download_descr">ഈ പ്രദേശത്ത് ഉപയോഗിക്കുന്നതിനുള്ള \'കോണ്ടൂർ ലൈൻ\' മാപ്പ് ഡൗൺലോഡ് ചെയ്യുക.</string>
     <string name="srtm_purchase_header">മാപ്പിൽ കോണ്ടൂർ ലൈനുകൾ കാണുന്നതിന് നിങ്ങൾ \'കോണ്ടൂർ ലൈനുകൾ\' പ്ലഗിൻ വാങ്ങി ഇൻസ്റ്റാളുചെയ്യുക</string>
     <string name="hillshade_menu_download_descr">"മാപ്പിൽ  ഹില്‍ ഷേഡ്  കാണുന്നതിന്, ഈ മേഖലയിലെ ഹില്‍ ഷേഡ് ഓവർലേ മാപ്പ് ഡൗൺലോഡ് ചെയ്യുക."</string>
@@ -2666,14 +2666,14 @@
     <string name="open_wikipedia_link_online_description">വെബ് ബ്രൗസറിൽ ലിങ്ക് തുറക്കുക.</string>
     <string name="topo_render_descr">"ഹൈക്കിംങ്| ട്രക്കിങ്| സൈക്ലിംഗ് എന്നിവയ്ക്ക് വേണ്ടി രൂപകൽപ്പന ചെയ്ത കോൺട്രാസ്റ്റ് ശൈലി. സങ്കീർണ്ണമായ വെളിച്ചത്തില്‍ പോലും  വായിക്കാനായ്. പ്രധാന സവിശേഷതകൾ: റോഡുകളും സ്വാഭാവിക വസ്തുക്കളും വേര്‍തിരിച്ചറിയാം| വിവിധ തരത്തിലുള്ള റൂട്ടുകൾ| വിപുലമായ സജ്ജീകരണങ്ങൾ ഉള്ള കോണ്ടൂർ ലൈനുകൾ| ഒരേ സൂം ലെവലിൽ സാധരണ ശൈലിയേക്കാൾ കൂടുതൽ വിശദാംശങ്ങൾ. റോഡ് ഗുണനിലവാരത്തെ തിരിച്ചറിയാം. രാത്രി മോഡ് ഇല്ല."</string>
     <string name="mapnik_render_descr">പഴയ \'മാപ്പ്നിക്ക്\' ശൈലിയുള്ള സ്ഥിര റെൻഡറിംഗ് ശൈലി. പ്രധാന സവിശേഷതകൾ: മാപ്പ്നിക്ക്\' ശൈലിക്ക് സമാനമായ കളര്‍.</string>
-    <string name="default_render_descr">"പൊതു ഉദ്ദേശ്യ ശൈലി. ജനസാന്ദ്രതയുള്ള നഗരങ്ങളിൽ ലളിതമായ ക്ലീനർ റെൻഡറിംഗ്. പ്രധാന സവിശേഷതകൾ: കോണ്ടൂർ ലൈനുകൾ| വഴികൾ| ഉപരിതല നിലവാരം| പ്രവേശന നിയന്ത്രണങ്ങൾ| റോഡ് ഷീൽഡുകൾ| പാതകള്‍ എസ്എസി സ്കെയിൽ റെന്‍ഡര്‍ ചെയ്തിരിക്കുന്നു | വാട്ടർ സ്പോർട്സ് സവിശേഷതകൾ "</string>
+    <string name="default_render_descr">പൊതു ഉദ്ദേശ്യ ശൈലി. ജനസാന്ദ്രതയുള്ള നഗരങ്ങളിൽ ലളിതമായ ക്ലീനർ റെൻഡറിംഗ്. പ്രധാന സവിശേഷതകൾ: കോണ്ടൂർ ലൈനുകൾ| വഴികൾ| ഉപരിതല നിലവാരം| പ്രവേശന നിയന്ത്രണങ്ങൾ| റോഡ് ഷീൽഡുകൾ| പാതകള്‍ എസ്എസി സ്കെയിൽ റെന്‍ഡര്‍ ചെയ്തിരിക്കുന്നു | വാട്ടർ സ്പോർട്സ് സവിശേഷതകൾ</string>
     <string name="touring_view_render_descr">ടൂറിങ്ങ് ആവശ്യകതകൾക്കായി ഉയർന്ന വിശദാംശങ്ങളുള്ള ശൈലി. സാധാരണ ശൈലിയിലുള്ള എല്ലാ കോൺഫിഗറേഷൻ ഓപ്ഷനുകളും ഉൾപ്പെടുന്നു: സാധ്യമായത്രയും വിശദമായി| പ്രത്യേകിച്ച് എല്ലാ റോഡുകളും പാതകളും യാത്ര ചെയ്യാനുള്ള മറ്റ് വഴികളും എല്ലാം പ്രദർശിപ്പിക്കുന്നു. എല്ലാ വ്യത്യസ്ത തരം റോഡുകൾക്കും വ്യക്തമാക്കുക. ഔട്ട്ഡോർ ഉപയോഗത്തിനായി ഉയർന്ന ദൃശ്യതീവ്രത നിറം| ദിനം| രാത്രി മോഡ്.</string>
     <string name="access_intermediate_arrival_time">ഇട-ലക്ഷ്യസ്ഥാനത്തെത്തുന്ന സമയം</string>
     <string name="map_widget_intermediate_time">ഇടയ്ക്കുള്ള സമയം</string>
     <string name="shared_string_gpx_file">GPX ഫയൽ</string>
     <string name="shared_string_gpx_track">ട്രാക്ക്</string>
     <string name="shared_string_gpx_files">GPX ഫയലുകൾ</string>
-    <string name="wikivoyage_travel_guide">"യാത്ര സഹായികള്‍ "</string>
+    <string name="wikivoyage_travel_guide">യാത്ര സഹായികള്‍</string>
     <string name="wikivoyage_travel_guide_descr">ഒസ്മാൻഡിനുള്ളിലുള്ള ലോകത്തേ പ്രധാനസ്ഥലങ്ങളുടെ യാത്രാസഹായി, ഇന്റർനെറ്റാവശ്യമില്ലാത്തത്.</string>
     <string name="test_voice_desrc">"ഇല്ലാത്ത അല്ലെങ്കിൽ തെറ്റായ നിർദ്ദേശങ്ങൾ തിരിച്ചറിയാൻ  ഒരു ബട്ടൺ ടാപ്പുചെയ്ത്,  വോയ്സ് പ്രോംപ്റ്റ് ശ്രദ്ധിക്കുക."</string>
     <string name="mapillary_menu_title_pano">360° ഇമേജുകൾ മാത്രം പ്രദർശിപ്പിക്കുക</string>
@@ -2686,10 +2686,10 @@
     <string name="quick_action_switch_night_mode">രാത്രി മോഡ്</string>
     <string name="quick_action_day_night_switch_mode">പകല്‍/രാത്രി മോഡ് മാറ്റുക</string>
     <string name="swap_start_and_destination">ആരംഭവും ലക്ഷ്യവും വച്ച്മാറ്റുക</string>
-    <string name="add_destination_point">"ലക്ഷ്യസ്ഥാനം ചേര്‍ക്കുക "</string>
-    <string name="add_intermediate_point">"ഇടലക്ഷ്യസ്ഥാനം ചേര്‍ക്കുക "</string>
+    <string name="add_destination_point">ലക്ഷ്യസ്ഥാനം ചേര്‍ക്കുക</string>
+    <string name="add_intermediate_point">ഇടലക്ഷ്യസ്ഥാനം ചേര്‍ക്കുക</string>
     <string name="add_start_point">ആരംഭസ്ഥാനം ചേർക്കുക</string>
-    <string name="intermediate_waypoint">"ഇടലക്ഷ്യസ്ഥാനം "</string>
+    <string name="intermediate_waypoint">ഇടലക്ഷ്യസ്ഥാനം</string>
     <string name="transfers">മാറിക്കയറുന്ന സ്ഥലം(Transfers)</string>
     <string name="on_foot">കാൽനടയായി</string>
     <string name="route_way">വഴി</string>
@@ -2701,7 +2701,7 @@
     <string name="simulate_navigation">നാവിഗേഷൻ സിമുലേറ്റ് ചെയ്യുക</string>
     <string name="choose_track_file_to_follow">പിന്തുടരാൻ ട്രാക്ക് ഫയൽ തിരഞ്ഞെടുക്കുക</string>
     <string name="voice_announcements">വോയ്സ് അറിയിപ്പുകൾ</string>
-    <string name="intermediate_destinations">"ഇട-ലക്ഷ്യസ്ഥാനങ്ങള്‍ "</string>
+    <string name="intermediate_destinations">ഇട-ലക്ഷ്യസ്ഥാനങ്ങള്‍</string>
     <string name="arrive_at_time">%1$s- ൽ എത്തിച്ചേരും</string>
     <string name="cubic_m">m³</string>
     <string name="metric_ton">ടണ്‍</string>
@@ -2767,7 +2767,7 @@
     <string name="rendering_attr_surface_gravel_name">ചരല്‍</string>
     <string name="rendering_attr_surface_fine_gravel_name">പുഴിമണല്‍</string>
     <string name="rendering_attr_surface_compacted_name">ഉറപ്പിച്ചത്</string>
-    <string name="rendering_attr_smoothness_excellent_name">"വളരെ നല്ലത് "</string>
+    <string name="rendering_attr_smoothness_excellent_name">വളരെ നല്ലത്</string>
     <string name="rendering_attr_smoothness_good_name">നല്ലത്</string>
     <string name="rendering_attr_smoothness_intermediate_name">ഇന്റർമീഡിയറ്റ്</string>
     <string name="rendering_attr_smoothness_bad_name">മോശം</string>
