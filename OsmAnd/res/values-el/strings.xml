@@ -3232,4 +3232,9 @@
     <string name="lang_oc">Οξιτανικά</string>
     <string name="app_mode_wagon">Οικογενειακό αυτοκίνητο</string>
     <string name="get_discount_title">Αποκτήστε το %1$d %2$s με έκπτωση %3$s.</string>
+    <string name="routing_attr_allow_classic_only_description">Καθαρισμένες διαδρομές για κλασική μορφή μόνο, χωρίς μονοπάτια με πατίνια. Αυτό περιλαμβάνει καθαρισμένες διαδρομές από μικρότερο χιονοόχημα με πιο χαλαρή πίστα και ίχνη που έγιναν από χιονοδρόμους.</string>
+    <string name="routing_attr_difficulty_preference_name">Προτιμώμενη δυσκολία</string>
+    <string name="routing_attr_difficulty_preference_description">Προτιμήστε διαδρομές αυτής της δυσκολίας, αν και η διαδρομή σε πιο δύσκολες ή εύκολες πίστες είναι ακόμα εφικτές, εάν είναι πιο σύντομες.</string>
+    <string name="routing_attr_freeride_policy_name">Εκτός πίστας</string>
+    <string name="routing_attr_freeride_policy_description">Ελεύθερες καθώς και εκτός πίστας διαδρομές είναι ανεπίσημες και περάσματα. Συνήθως ακαθάριστες, ασυντήρητες από τους υπεύθυνους και μη ελεγμένες το πρωί. Μπαίνετε με δικό σας κίνδυνο.</string>
 </resources>
