@@ -5,43 +5,45 @@
 	<Preference
 		android:key="coordinates_format_info"
 		android:layout="@layout/preference_info"
+		android:order="0"
 		android:persistent="false"
 		android:selectable="false"
-		tools:title="@string/coordinates_format_info" />
+		android:title="@string/coordinates_format_info"
+		tools:icon="@drawable/ic_action_info_dark" />
 
 	<CheckBoxPreference
 		android:key="format_degrees"
 		android:layout="@layout/preference_radio_button"
+		android:order="1"
 		android:persistent="false"
-		android:title="@string/navigate_point_format_D"
-		tools:summary="@string/fast_route_mode_descr" />
+		android:title="@string/navigate_point_format_D" />
 
 	<CheckBoxPreference
 		android:key="format_minutes"
 		android:layout="@layout/preference_radio_button"
+		android:order="2"
 		android:persistent="false"
-		android:title="@string/navigate_point_format_DM"
-		tools:summary="@string/fast_route_mode_descr" />
+		android:title="@string/navigate_point_format_DM" />
 
 	<CheckBoxPreference
 		android:key="format_seconds"
 		android:layout="@layout/preference_radio_button"
+		android:order="3"
 		android:persistent="false"
-		android:title="@string/navigate_point_format_DMS"
-		tools:summary="@string/fast_route_mode_descr" />
+		android:title="@string/navigate_point_format_DMS" />
+
+	<!--	This pref added in code -->
+	<!--	<CheckBoxPreference-->
+	<!--		android:key="utm_format"-->
+	<!--		android:layout="@layout/preference_radio_button"-->
+	<!--		android:persistent="false"-->
+	<!--		android:title="@string/navigate_point_format_utm" />-->
 
 	<CheckBoxPreference
-		android:key="format_utm"
+		android:key="olc_format"
 		android:layout="@layout/preference_radio_button"
+		android:order="5"
 		android:persistent="false"
-		android:title="@string/navigate_point_format_UTM"
-		tools:summary="@string/fast_route_mode_descr" />
-
-	<CheckBoxPreference
-		android:key="format_olc"
-		android:layout="@layout/preference_radio_button"
-		android:persistent="false"
-		android:title="@string/navigate_point_format_OLC"
-		tools:summary="@string/fast_route_mode_descr" />
+		android:title="@string/navigate_point_format_olc" />
 
 </PreferenceScreen>

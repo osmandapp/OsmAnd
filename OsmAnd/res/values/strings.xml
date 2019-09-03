@@ -11,8 +11,10 @@
 	Thx - Hardy
 
 -->
-    <string name="navigate_point_format_UTM">UTM</string>
-    <string name="navigate_point_format_OLC">OLC</string>
+    <string name="utm_format_descr">"OsmAnd uses UTM Standard format which is similar but not identical to UTM Nato format."</string>
+    <string name="shared_string_example">Example</string>
+    <string name="navigate_point_format_utm">UTM Standard</string>
+    <string name="navigate_point_format_olc">Open Location Code</string>
     <string name="coordinates_format_info">The selected format will be applied to all places in the application.</string>
     <string name="pref_selected_by_default_for_profiles">This setting is selected by default for profiles: %s.</string>
     <string name="change_default_settings">Change default settings</string>
