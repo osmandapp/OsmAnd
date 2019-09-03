@@ -8,19 +8,23 @@ import android.support.v7.preference.PreferenceScreen;
 
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.OsmandSettings.BooleanPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.SettingsBaseActivity;
 import net.osmand.plus.activities.SettingsNavigationActivity;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper;
 import net.osmand.plus.routing.RouteProvider;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
+import net.osmand.plus.settings.preferences.MultiSelectBooleanPreference;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.router.GeneralRouter;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import static net.osmand.plus.activities.SettingsNavigationActivity.getRouter;
 
@@ -107,12 +111,34 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 					}
 				}
 				if (avoidParameters.size() > 0) {
-					Preference avoidRouting = new Preference(ctx);
+					MultiSelectBooleanPreference avoidRouting = new MultiSelectBooleanPreference(ctx);
 					avoidRouting.setKey(AVOID_ROUTING_PARAMETER_PREFIX);
 					avoidRouting.setTitle(R.string.avoid_in_routing_title);
 					avoidRouting.setSummary(R.string.avoid_in_routing_descr);
+					avoidRouting.setDescription(R.string.avoid_in_routing_descr);
 					avoidRouting.setLayoutResource(R.layout.preference_with_descr);
 					avoidRouting.setIcon(getRoutingPrefIcon(AVOID_ROUTING_PARAMETER_PREFIX));
+
+					String[] entries = new String[avoidParameters.size()];
+					String[] prefsIds = new String[avoidParameters.size()];
+					Set<String> enabledPrefsIds = new HashSet<>();
+
+					for (int i = 0; i < avoidParameters.size(); i++) {
+						GeneralRouter.RoutingParameter p = avoidParameters.get(i);
+						BooleanPreference booleanRoutingPref = (BooleanPreference) settings.getCustomRoutingBooleanProperty(p.getId(), p.getDefaultBoolean());
+
+						entries[i] = SettingsBaseActivity.getRoutingStringPropertyName(ctx, p.getId(), p.getName());
+						prefsIds[i] = booleanRoutingPref.getId();
+
+						if (booleanRoutingPref.get()) {
+							enabledPrefsIds.add(booleanRoutingPref.getId());
+						}
+					}
+
+					avoidRouting.setEntries(entries);
+					avoidRouting.setEntryValues(prefsIds);
+					avoidRouting.setValues(enabledPrefsIds);
+
 					screen.addPreference(avoidRouting);
 				}
 				if (preferParameters.size() > 0) {
@@ -134,7 +160,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 					for (int i = 0; i < reliefFactorParameters.size(); i++) {
 						GeneralRouter.RoutingParameter parameter = reliefFactorParameters.get(i);
 						entryValues[i] = parameter.getId();
-						entries[i] = SettingsNavigationActivity.getRoutinParameterTitle(getContext(), parameter);
+						entries[i] = SettingsNavigationActivity.getRoutinParameterTitle(ctx, parameter);
 						if (SettingsNavigationActivity.isRoutingParameterSelected(settings, am, parameter)) {
 							selectedParameterId = parameter.getId();
 						}
@@ -179,29 +205,6 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 				}
 			}
 		}
-	}
-
-	@Override
-	public boolean onPreferenceClick(Preference preference) {
-		String key = preference.getKey();
-
-		if (key.equals(AVOID_ROUTING_PARAMETER_PREFIX) || key.equals(PREFER_ROUTING_PARAMETER_PREFIX)) {
-			List<GeneralRouter.RoutingParameter> prms = key.equals(AVOID_ROUTING_PARAMETER_PREFIX) ? avoidParameters : preferParameters;
-			String[] vals = new String[prms.size()];
-			OsmandSettings.OsmandPreference[] bls = new OsmandSettings.OsmandPreference[prms.size()];
-			for (int i = 0; i < prms.size(); i++) {
-				GeneralRouter.RoutingParameter p = prms.get(i);
-				vals[i] = SettingsBaseActivity.getRoutingStringPropertyName(getContext(), p.getId(), p.getName());
-				bls[i] = settings.getCustomRoutingBooleanProperty(p.getId(), p.getDefaultBoolean());
-			}
-			SettingsNavigationActivity.showBooleanSettings(getContext(), vals, bls, preference.getTitle());
-
-			MultiSelectPreferencesBottomSheet.showInstance(getFragmentManager(), preference.getTitle().toString(), preference.getSummary().toString(), vals, bls, this);
-
-			return false;
-		}
-
-		return super.onPreferenceClick(preference);
 	}
 
 	@Override

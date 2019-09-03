@@ -165,7 +165,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 //				PointDescription.formatToHumanString(ctx, PointDescription.UTM_FORMAT),
 //				PointDescription.formatToHumanString(ctx, PointDescription.OLC_FORMAT)
 //		});
-//		coordinatesFormat.setEntryValues(new Integer[] {
+//		coordinatesFormat.setPrefsIds(new Integer[] {
 //				PointDescription.FORMAT_DEGREES,
 //				PointDescription.FORMAT_MINUTES,
 //				PointDescription.FORMAT_SECONDS,

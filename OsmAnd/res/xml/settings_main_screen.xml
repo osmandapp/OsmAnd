@@ -3,13 +3,13 @@
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools">
 
-	<Preference
-		android:key="personal_account"
-		android:layout="@layout/preference_with_descr"
-		android:persistent="false"
-		android:summary="@string/personal_account_descr"
-		android:title="@string/personal_account"
-		tools:icon="@drawable/ic_person" />
+	<!--	<Preference-->
+	<!--		android:key="personal_account"-->
+	<!--		android:layout="@layout/preference_with_descr"-->
+	<!--		android:persistent="false"-->
+	<!--		android:summary="@string/personal_account_descr"-->
+	<!--		android:title="@string/personal_account"-->
+	<!--		tools:icon="@drawable/ic_person" />-->
 
 	<Preference
 		android:key="global_settings"
@@ -26,11 +26,11 @@
 		android:title="@string/application_profiles" />
 
 	<Preference
-		android:key="browse_map"
+		android:key="configure_profile_general"
 		android:layout="@layout/preference_with_descr"
 		android:persistent="false"
-		android:summary="@string/map_look_descr"
-		android:title="@string/rendering_value_browse_map_name"
+		android:title="@string/general_settings_2"
+		app:fragment="net.osmand.plus.settings.GeneralProfileSettingsFragment"
 		tools:icon="@drawable/ic_world_globe_dark" />
 
 	<Preference

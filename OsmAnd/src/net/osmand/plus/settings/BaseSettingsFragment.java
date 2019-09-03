@@ -40,6 +40,7 @@ import net.osmand.plus.activities.OsmandInAppPurchaseActivity;
 import net.osmand.plus.profiles.AppProfileArrayAdapter;
 import net.osmand.plus.profiles.ProfileDataObject;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
+import net.osmand.plus.settings.preferences.MultiSelectBooleanPreference;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 
 import java.util.ArrayList;
@@ -404,6 +405,11 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 			FragmentManager fragmentManager = getFragmentManager();
 			if (fragmentManager != null) {
 				EditTextPreferenceBottomSheet.showInstance(fragmentManager, preference.getKey(), this);
+			}
+		} else if (preference instanceof MultiSelectBooleanPreference) {
+			FragmentManager fragmentManager = getFragmentManager();
+			if (fragmentManager != null) {
+				MultiSelectPreferencesBottomSheet.showInstance(getFragmentManager(), preference.getKey(), this);
 			}
 		} else {
 			super.onDisplayPreferenceDialog(preference);

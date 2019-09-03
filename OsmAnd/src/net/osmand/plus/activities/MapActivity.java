@@ -127,7 +127,7 @@ import net.osmand.plus.search.QuickSearchDialogFragment;
 import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchTab;
 import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchType;
 import net.osmand.plus.settings.BaseSettingsFragment;
-import net.osmand.plus.settings.SettingsMainFragment;
+import net.osmand.plus.settings.MainSettingsFragment;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.MapControlsLayer;
@@ -2182,7 +2182,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public void showSettings() {
-		SettingsMainFragment.showInstance(getSupportFragmentManager());
+		MainSettingsFragment.showInstance(getSupportFragmentManager());
 	}
 
 	private void hideContextMenu() {
