@@ -2838,7 +2838,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="time_of_day">Huidige tijd</string>
     <string name="step_by_step">Stap voor stap</string>
     <string name="routeInfo_road_types_name">Weg types</string>
-    <string name="exit_at">Uitrit over</string>
+    <string name="exit_at">Uitstappen op</string>
     <string name="shared_string_swap">Wissel</string>
     <string name="show_more">Toon meer</string>
     <string name="tracks_on_map">Getoonde tracks</string>
@@ -2941,4 +2941,6 @@ voor Gebied: %1$s x %2$s</string>
     <string name="new_profile">Nieuw profiel</string>
     <string name="app_mode_ufo">UFO</string>
     <string name="route_way">Weg</string>
+    <string name="searching_gps">GPS aan het zoeken</string>
+    <string name="routing_profile_straightline">Rechte lijn</string>
 </resources>
