@@ -313,7 +313,7 @@
     <string name="poi_prosecutor">Fiscal</string>
     <string name="poi_pension_fund">Seguridad social;Fondo de pensiones</string>
     <string name="poi_migration">Migración</string>
-    <string name="poi_tax_inspection">Fiscalización (AFIP);Inspección fiscal</string>
+    <string name="poi_tax_inspection">Inspección fiscal;Fiscalización (AFIP);Centro de impuestos</string>
     <string name="poi_office_administrative">Oficina administrativa</string>
     <string name="poi_customs">Aduana</string>
     <string name="poi_city">Ciudad</string>
@@ -2872,7 +2872,7 @@
     <string name="poi_cuisine_pizza">Pizza</string>
     <string name="poi_cuisine_burger">Hamburguesas</string>
     <string name="poi_cuisine_coffee">Café</string>
-    <string name="poi_cuisine_sandwich">Emparedados;Sándwich</string>
+    <string name="poi_cuisine_sandwich">Sándwich</string>
     <string name="poi_cuisine_kebab">Kebab;Brochetas</string>
     <string name="poi_cuisine_chicken">Pollo</string>
     <string name="poi_cuisine_ice_cream">Helado</string>
@@ -3724,4 +3724,5 @@
     <string name="poi_goods_designated">Designado</string>
     <string name="poi_disabled_yes">Sí</string>
     <string name="poi_disabled_designated">Designado</string>
+    <string name="poi_cellar_entrance">Entrada de la bodega</string>
 </resources>
