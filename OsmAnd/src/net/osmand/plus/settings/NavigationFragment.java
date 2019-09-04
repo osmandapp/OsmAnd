@@ -27,19 +27,24 @@ public class NavigationFragment extends BaseSettingsFragment {
 	@Override
 	protected void setupPreferences() {
 		Preference routeParameters = findPreference("route_parameters");
-		SwitchPreference showRoutingAlarms = (SwitchPreference) findPreference("show_routing_alarms");
-		SwitchPreference speakRoutingAlarms = (SwitchPreference) findPreference("speak_routing_alarms");
-		Preference vehicleParameters = findPreference("vehicle_parameters");
+		SwitchPreference showRoutingAlarms = (SwitchPreference) findPreference(settings.SHOW_ROUTING_ALARMS.getId());
+		SwitchPreference speakRoutingAlarms = (SwitchPreference) findPreference(settings.SPEAK_ROUTING_ALARMS.getId());
 		Preference mapDuringNavigation = findPreference("map_during_navigation");
-		SwitchPreference turnScreenOn = (SwitchPreference) findPreference("turn_screen_on");
+		mapDuringNavigation.setIconSpaceReserved(true);
+
+		SwitchPreference turnScreenOn = (SwitchPreference) findPreference(settings.TURN_SCREEN_ON_ENABLED.getId());
 
 		routeParameters.setIcon(getContentIcon(R.drawable.ic_action_route_distance));
 		showRoutingAlarms.setIcon(getContentIcon(R.drawable.ic_action_alert));
 		speakRoutingAlarms.setIcon(getContentIcon(R.drawable.ic_action_volume_up));
+		turnScreenOn.setIcon(getContentIcon(R.drawable.ic_action_turn_screen_on));
 
+		setupVehicleParametersPref();
+	}
+
+	private void setupVehicleParametersPref() {
+		Preference vehicleParameters = findPreference("vehicle_parameters");
 		int iconRes = getSelectedAppMode().getIconRes();
 		vehicleParameters.setIcon(getContentIcon(iconRes));
-
-		turnScreenOn.setIcon(getContentIcon(R.drawable.ic_action_turn_screen_on));
 	}
 }

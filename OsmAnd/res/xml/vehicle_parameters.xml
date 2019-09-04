@@ -5,7 +5,9 @@
 	<Preference
 		android:key="vehicle_parameters_info"
 		android:layout="@layout/preference_info"
+		android:persistent="false"
 		android:selectable="false"
-		tools:title="@string/vehicle_parameters_info" />
+		tools:icon="@drawable/ic_action_info_dark"
+		tools:title="@string/route_parameters_info" />
 
 </PreferenceScreen>

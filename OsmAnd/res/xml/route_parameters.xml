@@ -7,6 +7,6 @@
 		android:layout="@layout/preference_info"
 		android:persistent="false"
 		android:selectable="false"
-		tools:title="@string/route_parameters" />
+		tools:title="@string/route_parameters_info" />
 
 </PreferenceScreen>

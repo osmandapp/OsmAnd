@@ -5,28 +5,33 @@
 	<SwitchPreference
 		android:key="show_routing_alarms"
 		android:layout="@layout/preference_top_switch"
-		tools:summary="@string/shared_string_on" />
+		android:summaryOff="@string/shared_string_off"
+		android:summaryOn="@string/shared_string_on" />
 
 	<Preference
-		android:icon="@drawable/ic_action_info_dark"
 		android:key="show_routing_alarms_info"
-		android:selectable="false"
 		android:layout="@layout/preference_info"
-		android:title="@string/screen_alerts_descr" />
+		android:selectable="false"
+		android:title="@string/screen_alerts_descr"
+		tools:icon="@drawable/ic_action_info_dark" />
 
 	<SwitchPreference
+		android:dependency="show_routing_alarms"
 		android:key="show_traffic_warnings"
 		android:title="@string/show_traffic_warnings" />
 
 	<SwitchPreference
+		android:dependency="show_routing_alarms"
 		android:key="show_pedestrian"
 		android:title="@string/show_pedestrian_warnings" />
 
 	<SwitchPreference
+		android:dependency="show_routing_alarms"
 		android:key="show_cameras"
 		android:title="@string/show_cameras" />
 
 	<SwitchPreference
+		android:dependency="show_routing_alarms"
 		android:key="show_tunnels"
 		android:title="@string/show_tunnels" />
 

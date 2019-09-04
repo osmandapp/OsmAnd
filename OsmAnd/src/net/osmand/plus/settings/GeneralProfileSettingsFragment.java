@@ -15,7 +15,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import net.osmand.StateChangedListener;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -69,13 +68,6 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		appTheme.setEntries(new String[] {getString(R.string.dark_theme), getString(R.string.light_theme)});
 		appTheme.setEntryValues(new Integer[] {OsmandSettings.OSMAND_DARK_THEME, OsmandSettings.OSMAND_LIGHT_THEME});
 		appTheme.setIcon(getOsmandThemeIcon());
-
-		settings.OSMAND_THEME.addListener(new StateChangedListener<Integer>() {
-			@Override
-			public void stateChanged(Integer change) {
-				appTheme.setIcon(getOsmandThemeIcon());
-			}
-		});
 	}
 
 	private Drawable getOsmandThemeIcon() {
@@ -87,13 +79,6 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		rotateMap.setEntries(new String[] {getString(R.string.rotate_map_none_opt), getString(R.string.rotate_map_bearing_opt), getString(R.string.rotate_map_compass_opt)});
 		rotateMap.setEntryValues(new Integer[] {OsmandSettings.ROTATE_MAP_NONE, OsmandSettings.ROTATE_MAP_BEARING, OsmandSettings.ROTATE_MAP_COMPASS});
 		rotateMap.setIcon(getRotateMapIcon());
-
-		settings.ROTATE_MAP.addListener(new StateChangedListener<Integer>() {
-			@Override
-			public void stateChanged(Integer change) {
-				rotateMap.setIcon(getRotateMapIcon());
-			}
-		});
 	}
 
 	private Drawable getRotateMapIcon() {
@@ -112,13 +97,6 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		mapScreenOrientation.setEntries(new String[] {getString(R.string.map_orientation_portrait), getString(R.string.map_orientation_landscape), getString(R.string.map_orientation_default)});
 		mapScreenOrientation.setEntryValues(new Integer[] {ActivityInfo.SCREEN_ORIENTATION_PORTRAIT, ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE, ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED});
 		mapScreenOrientation.setIcon(getMapScreenOrientationIcon());
-
-		settings.MAP_SCREEN_ORIENTATION.addListener(new StateChangedListener<Integer>() {
-			@Override
-			public void stateChanged(Integer change) {
-				mapScreenOrientation.setIcon(getMapScreenOrientationIcon());
-			}
-		});
 	}
 
 	private Drawable getMapScreenOrientationIcon() {
@@ -157,21 +135,6 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		Preference coordinatesFormat = findPreference(settings.COORDINATES_FORMAT.getId());
 		coordinatesFormat.setIcon(getContentIcon(R.drawable.ic_action_coordinates_widget));
 		coordinatesFormat.setSummary(PointDescription.formatToHumanString(app, settings.COORDINATES_FORMAT.get()));
-
-//		coordinatesFormat.setEntries(new String[] {
-//				PointDescription.formatToHumanString(ctx, PointDescription.FORMAT_DEGREES),
-//				PointDescription.formatToHumanString(ctx, PointDescription.FORMAT_MINUTES),
-//				PointDescription.formatToHumanString(ctx, PointDescription.FORMAT_SECONDS),
-//				PointDescription.formatToHumanString(ctx, PointDescription.UTM_FORMAT),
-//				PointDescription.formatToHumanString(ctx, PointDescription.OLC_FORMAT)
-//		});
-//		coordinatesFormat.setPrefsIds(new Integer[] {
-//				PointDescription.FORMAT_DEGREES,
-//				PointDescription.FORMAT_MINUTES,
-//				PointDescription.FORMAT_SECONDS,
-//				PointDescription.UTM_FORMAT,
-//				PointDescription.OLC_FORMAT
-//		});
 	}
 
 	private void setupAngularUnitsPref() {
@@ -200,36 +163,33 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 
 	private void setupKalmanFilterPref() {
 		SwitchPreferenceEx kalmanFilterPref = (SwitchPreferenceEx) findPreference(settings.USE_KALMAN_FILTER_FOR_COMPASS.getId());
-		kalmanFilterPref.setSummaryOn(R.string.shared_string_on);
-		kalmanFilterPref.setSummaryOff(R.string.shared_string_off);
 		kalmanFilterPref.setTitle(getString(R.string.use_kalman_filter_compass));
 		kalmanFilterPref.setDescription(getString(R.string.use_kalman_filter_compass_descr));
+		kalmanFilterPref.setIconSpaceReserved(true);
 	}
 
 	private void setupMagneticFieldSensorPref() {
 		SwitchPreferenceEx useMagneticSensorPref = (SwitchPreferenceEx) findPreference(settings.USE_MAGNETIC_FIELD_SENSOR_COMPASS.getId());
-		useMagneticSensorPref.setSummaryOn(R.string.shared_string_on);
-		useMagneticSensorPref.setSummaryOff(R.string.shared_string_off);
 		useMagneticSensorPref.setTitle(getString(R.string.use_magnetic_sensor));
 		useMagneticSensorPref.setDescription(getString(R.string.use_magnetic_sensor_descr));
+		useMagneticSensorPref.setIconSpaceReserved(true);
 	}
 
 	private void setupMapEmptyStateAllowedPref() {
 		SwitchPreferenceEx mapEmptyStateAllowedPref = (SwitchPreferenceEx) findPreference(settings.MAP_EMPTY_STATE_ALLOWED.getId());
-		mapEmptyStateAllowedPref.setSummaryOn(R.string.shared_string_on);
-		mapEmptyStateAllowedPref.setSummaryOff(R.string.shared_string_off);
 		mapEmptyStateAllowedPref.setTitle(getString(R.string.tap_on_map_to_hide_interface));
 		mapEmptyStateAllowedPref.setDescription(getString(R.string.tap_on_map_to_hide_interface_descr));
+		mapEmptyStateAllowedPref.setIconSpaceReserved(true);
 	}
 
 	private void setupDoNotUseAnimationsPref() {
 		SwitchPreference doNotUseAnimations = (SwitchPreference) findPreference(settings.DO_NOT_USE_ANIMATIONS.getId());
-		doNotUseAnimations.setSummaryOn(R.string.shared_string_on);
-		doNotUseAnimations.setSummaryOff(R.string.shared_string_off);
+		doNotUseAnimations.setIconSpaceReserved(true);
 	}
 
 	private void setupExternalInputDevicePref() {
 		ListPreferenceEx externalInputDevice = (ListPreferenceEx) findPreference(settings.EXTERNAL_INPUT_DEVICE.getId());
+		externalInputDevice.setIconSpaceReserved(true);
 		externalInputDevice.setEntries(new String[] {
 				getString(R.string.sett_no_ext_input),
 				getString(R.string.sett_generic_ext_input),

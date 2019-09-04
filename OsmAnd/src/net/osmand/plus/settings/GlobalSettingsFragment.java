@@ -319,21 +319,15 @@ public class GlobalSettingsFragment extends BaseSettingsFragment {
 
 	private void setupSendAnonymousDataPref() {
 		SwitchPreferenceEx sendAnonymousData = (SwitchPreferenceEx) findPreference(settings.SEND_ANONYMOUS_DATA.getId());
-		sendAnonymousData.setSummaryOn(R.string.shared_string_on);
-		sendAnonymousData.setSummaryOff(R.string.shared_string_off);
 	}
 
 	private void setupDoNotShowStartupMessagesPref() {
 		SwitchPreference doNotShowStartupMessages = (SwitchPreference) findPreference(settings.DO_NOT_SHOW_STARTUP_MESSAGES.getId());
-		doNotShowStartupMessages.setSummaryOn(R.string.shared_string_on);
-		doNotShowStartupMessages.setSummaryOff(R.string.shared_string_off);
 	}
 
 	private void setupEnableProxyPref() {
 		SwitchPreferenceEx enableProxy = (SwitchPreferenceEx) findPreference(settings.ENABLE_PROXY.getId());
 		enableProxy.setIcon(getContentIcon(R.drawable.ic_action_proxy));
-		enableProxy.setSummaryOn(R.string.shared_string_on);
-		enableProxy.setSummaryOff(R.string.shared_string_off);
 	}
 
 	@Override

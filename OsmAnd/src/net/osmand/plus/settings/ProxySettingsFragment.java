@@ -41,29 +41,22 @@ public class ProxySettingsFragment extends BaseSettingsFragment {
 
 	private void setupEnableProxyPref() {
 		SwitchPreference enableProxyPref = (SwitchPreference) findPreference(settings.ENABLE_PROXY.getId());
-		enableProxyPref.setSummaryOn(R.string.shared_string_on);
-		enableProxyPref.setSummaryOff(R.string.shared_string_off);
 	}
 
 	private void setupProxyHostPref() {
 		EditTextPreferenceEx hostPref = (EditTextPreferenceEx) findPreference(settings.PROXY_HOST.getId());
+		hostPref.setPersistent(false);
 		hostPref.setSummary(settings.PROXY_HOST.get());
 		hostPref.setDescription(R.string.proxy_host_descr);
+		hostPref.setIconSpaceReserved(true);
 	}
 
 	private void setupProxyPortPref() {
 		EditTextPreferenceEx portPref = (EditTextPreferenceEx) findPreference(settings.PROXY_PORT.getId());
+		portPref.setPersistent(false);
 		portPref.setSummary(String.valueOf(settings.PROXY_PORT.get()));
 		portPref.setDescription(R.string.proxy_port_descr);
-	}
-
-	protected void enableProxy(boolean enable) {
-		settings.ENABLE_PROXY.set(enable);
-		if (enable) {
-			NetworkUtils.setProxy(settings.PROXY_HOST.get(), settings.PROXY_PORT.get());
-		} else {
-			NetworkUtils.setProxy(null, 0);
-		}
+		portPref.setIconSpaceReserved(true);
 	}
 
 	@Override
@@ -76,8 +69,8 @@ public class ProxySettingsFragment extends BaseSettingsFragment {
 			String ipAddress = (String) newValue;
 			if (ipAddress.matches(IP_ADDRESS_PATTERN)) {
 				settings.PROXY_HOST.set(ipAddress);
-				enableProxy(NetworkUtils.getProxy() != null);
-				setupProxyHostPref();
+				settings.ENABLE_PROXY.set(NetworkUtils.getProxy() != null);
+				preference.setSummary(ipAddress);
 				return true;
 			} else {
 				Toast.makeText(getContext(), getString(R.string.wrong_format), Toast.LENGTH_SHORT).show();
@@ -91,8 +84,8 @@ public class ProxySettingsFragment extends BaseSettingsFragment {
 			} catch (NumberFormatException e1) {
 			}
 			settings.PROXY_PORT.set(port);
-			enableProxy(NetworkUtils.getProxy() != null);
-			setupProxyPortPref();
+			settings.ENABLE_PROXY.set(NetworkUtils.getProxy() != null);
+			preference.setSummary(String.valueOf(port));
 			return true;
 		}
 

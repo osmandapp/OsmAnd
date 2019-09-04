@@ -8,6 +8,8 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
+import android.media.AudioAttributes;
+import android.media.AudioManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
@@ -38,6 +40,7 @@ import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.mapillary.MapillaryPlugin;
 import net.osmand.plus.mapmarkers.CoordinateInputFormats.Format;
 import net.osmand.plus.render.RendererRegistry;
+import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
 
@@ -158,6 +161,7 @@ public class OsmandSettings {
 		ctx = clientContext;
 		this.settingsAPI = settinsAPI;
 		CUSTOM_SHARED_PREFERENCES_NAME = CUSTOM_SHARED_PREFERENCES_PREFIX + sharedPreferencesName;
+		dataStore = new PreferencesDataStore();
 		initPrefs();
 		setCustomized();
 	}
@@ -471,9 +475,15 @@ public class OsmandSettings {
 			if (global) {
 				return set(obj);
 			}
-			boolean ch = setValue(getProfilePreferences(mode), obj);
+			Object profilePrefs = getProfilePreferences(mode);
+			boolean changed = setValue(profilePrefs, obj);
+
+			if (changed && cache && cachedPreference == profilePrefs) {
+				cachedValue = obj;
+			}
+
 			fireEvent(obj);
-			return ch;
+			return changed;
 		}
 
 		public T getProfileDefaultValue(ApplicationMode mode) {
@@ -1227,11 +1237,11 @@ public class OsmandSettings {
 	public final CommonPreference<Boolean> ENABLE_PROXY = new BooleanPreference("enable_proxy", false) {
 		@Override
 		protected boolean setValue(Object prefs, Boolean val) {
-			boolean changed = super.setValue(prefs, val);
-			if (changed) {
+			boolean valueSet = super.setValue(prefs, val);
+			if (valueSet) {
 				NetworkUtils.setProxy(val ? PROXY_HOST.get() : null, val ? PROXY_PORT.get() : 0);
 			}
-			return changed;
+			return valueSet;
 		}
 	}.makeGlobal();
 
@@ -1309,9 +1319,42 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> SPEAK_SPEED_LIMIT = new BooleanPreference("speak_speed_limit", false).makeProfile().cache();
 	public final OsmandPreference<Boolean> SPEAK_SPEED_CAMERA = new BooleanPreference("speak_cameras", false).makeProfile().cache();
 	public final OsmandPreference<Boolean> SPEAK_TUNNELS = new BooleanPreference("speak_tunnels", false).makeProfile().cache();
-	public final OsmandPreference<Boolean> ANNOUNCE_WPT = new BooleanPreference("announce_wpt", true).makeProfile().cache();
-	public final OsmandPreference<Boolean> ANNOUNCE_NEARBY_FAVORITES = new BooleanPreference("announce_nearby_favorites", false).makeProfile().cache();
-	public final OsmandPreference<Boolean> ANNOUNCE_NEARBY_POI = new BooleanPreference("announce_nearby_poi", false).makeProfile().cache();
+
+	public final OsmandPreference<Boolean> ANNOUNCE_WPT = new BooleanPreference("announce_wpt", true) {
+		@Override
+		protected boolean setValue(Object prefs, Boolean val) {
+			boolean changed = super.setValue(prefs, val);
+			if (changed) {
+				SHOW_WPT.set(val);
+			}
+
+			return changed;
+		}
+	}.makeProfile().cache();
+
+	public final OsmandPreference<Boolean> ANNOUNCE_NEARBY_FAVORITES = new BooleanPreference("announce_nearby_favorites", false) {
+		@Override
+		protected boolean setValue(Object prefs, Boolean val) {
+			boolean changed = super.setValue(prefs, val);
+			if (changed) {
+				SHOW_NEARBY_FAVORITES.set(val);
+			}
+
+			return changed;
+		}
+	}.makeProfile().cache();
+
+	public final OsmandPreference<Boolean> ANNOUNCE_NEARBY_POI = new BooleanPreference("announce_nearby_poi", false) {
+		@Override
+		protected boolean setValue(Object prefs, Boolean val) {
+			boolean changed = super.setValue(prefs, val);
+			if (changed) {
+				SHOW_NEARBY_POI.set(val);
+			}
+
+			return changed;
+		}
+	}.makeProfile().cache();
 
 	public final OsmandPreference<Boolean> GPX_ROUTE_CALC_OSMAND_PARTS = new BooleanPreference("gpx_routing_calculate_osmand_route", true).makeGlobal().cache();
 	public final OsmandPreference<Boolean> GPX_CALCULATE_RTEPT = new BooleanPreference("gpx_routing_calculate_rtept", true).makeGlobal().cache();
@@ -1437,7 +1480,7 @@ public class OsmandSettings {
 		KEEP_INFORMING.setModeDefaultValue(ApplicationMode.PEDESTRIAN, 0);
 	}
 
-	public final CommonPreference<Boolean> TURN_SCREEN_ON = new BooleanPreference("turn_screen_on", false).makeProfile();
+	public final CommonPreference<Boolean> TURN_SCREEN_ON_ENABLED = new BooleanPreference("turn_screen_on_enabled", false).makeProfile();
 
 	public final CommonPreference<Integer> TURN_SCREEN_ON_TIME_INT = new IntPreference("turn_screen_on_time_int", 0).makeProfile();
 
@@ -1487,8 +1530,31 @@ public class OsmandSettings {
 	public final OsmandPreference<Integer> LEVEL_TO_SWITCH_VECTOR_RASTER = new IntPreference("level_to_switch_vector_raster", 1).makeGlobal().cache();
 
 	// this value string is synchronized with settings_pref.xml preference name
-	public final OsmandPreference<Integer> AUDIO_STREAM_GUIDANCE = new IntPreference("audio_stream",
-			3/*AudioManager.STREAM_MUSIC*/).makeProfile();
+	public final OsmandPreference<Integer> AUDIO_STREAM_GUIDANCE = new IntPreference("audio_stream", 3/*AudioManager.STREAM_MUSIC*/) {
+		@Override
+		protected boolean setValue(Object prefs, Integer stream) {
+			boolean valueSet = super.setValue(prefs, stream);
+
+			if (valueSet) {
+				CommandPlayer player = ctx.getPlayer();
+				if (player != null) {
+					player.updateAudioStream(get());
+				}
+				// Sync corresponding AUDIO_USAGE value
+				ApplicationMode mode = APPLICATION_MODE.get();
+				if (stream == AudioManager.STREAM_MUSIC) {
+					AUDIO_USAGE.setModeValue(mode, AudioAttributes.USAGE_ASSISTANCE_NAVIGATION_GUIDANCE);
+				} else if (stream == AudioManager.STREAM_NOTIFICATION) {
+					AUDIO_USAGE.setModeValue(mode, AudioAttributes.USAGE_NOTIFICATION);
+				} else if (stream == AudioManager.STREAM_VOICE_CALL) {
+					AUDIO_USAGE.setModeValue(mode, AudioAttributes.USAGE_VOICE_COMMUNICATION);
+				}
+			}
+
+			return valueSet;
+		}
+	}.makeProfile();
+
 	// Corresponding USAGE value for AudioAttributes
 	public final OsmandPreference<Integer> AUDIO_USAGE = new IntPreference("audio_usage",
 			12/*AudioAttributes.USAGE_ASSISTANCE_NAVIGATION_GUIDANCE*/).makeProfile();

@@ -23,6 +23,7 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class ChangeGeneralProfilesPrefBottomSheet extends MenuBottomSheetDialogFragment {
@@ -39,7 +40,7 @@ public class ChangeGeneralProfilesPrefBottomSheet extends MenuBottomSheetDialogF
 	public void createMenuItems(Bundle savedInstanceState) {
 		final OsmandApplication app = getMyApplication();
 		Bundle args = getArguments();
-		if (app == null || args == null || !args.containsKey(PREFERENCE_ID)) {
+		if (app == null || args == null || newValue == null || !args.containsKey(PREFERENCE_ID)) {
 			return;
 		}
 		final String prefId = args.getString(PREFERENCE_ID);
@@ -57,17 +58,18 @@ public class ChangeGeneralProfilesPrefBottomSheet extends MenuBottomSheetDialogF
 		for (int i = 0; i < values.size(); i++) {
 			ApplicationMode mode = values.get(i);
 			Object modeValue = pref.getModeValue(mode);
+			if (modeValue instanceof Enum) {
+				modeValue = ((Enum) modeValue).ordinal();
+			}
 			if (modeValue.equals(newValue)) {
 				appModesSameValue.add(mode);
 			}
 		}
 
-		for (int i = 0; i < appModesSameValue.size(); i++) {
-			ApplicationMode mode = appModesSameValue.get(i);
-			builder.append(mode.toHumanString(app));
-			if (i < appModesSameValue.size() - 1) {
-				builder.append(", ");
-			}
+		Iterator<ApplicationMode> iterator = appModesSameValue.iterator();
+		while (iterator.hasNext()) {
+			builder.append(iterator.next().toHumanString(app));
+			builder.append(iterator.hasNext() ? ", " : '.');
 		}
 
 		if (builder.length() > 0) {
@@ -85,6 +87,10 @@ public class ChangeGeneralProfilesPrefBottomSheet extends MenuBottomSheetDialogF
 						for (ApplicationMode mode : values) {
 							app.getSettings().setPreference(prefId, newValue, mode);
 						}
+						BaseSettingsFragment target = (BaseSettingsFragment) getTargetFragment();
+						if (target != null) {
+							target.updateAllSettings();
+						}
 						dismiss();
 					}
 				})
@@ -101,6 +107,10 @@ public class ChangeGeneralProfilesPrefBottomSheet extends MenuBottomSheetDialogF
 					@Override
 					public void onClick(View v) {
 						app.getSettings().setPreference(prefId, newValue);
+						BaseSettingsFragment target = (BaseSettingsFragment) getTargetFragment();
+						if (target != null) {
+							target.updateAllSettings();
+						}
 						dismiss();
 					}
 				})

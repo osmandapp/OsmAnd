@@ -11,12 +11,13 @@
 	Thx - Hardy
 
 -->
-    <string name="utm_format_descr">"OsmAnd uses UTM Standard format which is similar but not identical to UTM Nato format."</string>
+    <string name="configure_profile_info">All settings below are affected only selected profile.</string>
+    <string name="utm_format_descr">OsmAnd uses UTM Standard format which is similar but not identical to UTM Nato format.</string>
     <string name="shared_string_example">Example</string>
     <string name="navigate_point_format_utm">UTM Standard</string>
     <string name="navigate_point_format_olc">Open Location Code</string>
     <string name="coordinates_format_info">The selected format will be applied to all places in the application.</string>
-    <string name="pref_selected_by_default_for_profiles">This setting is selected by default for profiles: %s.</string>
+    <string name="pref_selected_by_default_for_profiles">This setting is selected by default for profiles: %s</string>
     <string name="change_default_settings">Change default settings</string>
     <string name="discard_changes">Discard changes</string>
     <string name="apply_to_current_profile">Apply to current %1$s profile</string>
@@ -24,7 +25,7 @@
     <string name="start_up_message_pref">Start up message</string>
     <string name="analytics_pref_title">Analytics</string>
     <string name="turn_screen_on_info">Show map during navigation above the lock screen.</string>
-    <string name="vehicle_parameters_info">These settings affect the construction of the route. Will be applied only to the selected profile: %1$s.</string>
+    <string name="route_parameters_info">These settings affect the construction of the route. Will be applied only to the selected profile: %1$s.</string>
     <string name="wake_time">Wake time</string>
     <string name="units_and_formats">Units &amp; formats</string>
     <string name="appearance">Appearance</string>
@@ -42,8 +43,6 @@
     <string name="manage_profiles">Manage application profiles…</string>
     <string name="osmand_settings_descr">Affect the entire application</string>
     <string name="osmand_settings">OsmAnd settings</string>
-    <string name="personal_account_descr">Create or Log in into personal account</string>
-    <string name="personal_account">Personal account</string>
     <string name="copy_from_other_profile">Copy from other profile</string>
     <string name="turn_screen_on">Turn screen on</string>
     <string name="map_during_navigation_info">Map during navigation</string>

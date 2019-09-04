@@ -45,9 +45,9 @@ public class VehicleParametersFragment extends BaseSettingsFragment {
 
 		Preference vehicleParametersInfo = findPreference("vehicle_parameters_info");
 		vehicleParametersInfo.setIcon(getContentIcon(R.drawable.ic_action_info_dark));
-		vehicleParametersInfo.setTitle(getString(R.string.vehicle_parameters_info, getSelectedAppMode().toHumanString(getContext())));
+		vehicleParametersInfo.setTitle(getString(R.string.route_parameters_info, getSelectedAppMode().toHumanString(getContext())));
 
-		if (settings.getApplicationMode().getRouteService() == RouteProvider.RouteService.OSMAND) {
+		if (app.getSettings().getApplicationMode().getRouteService() == RouteProvider.RouteService.OSMAND) {
 			GeneralRouter router = getRouter(app.getRoutingConfig(), getSelectedAppMode());
 			if (router != null) {
 				Map<String, GeneralRouter.RoutingParameter> parameters = router.getParameters();
@@ -68,16 +68,16 @@ public class VehicleParametersFragment extends BaseSettingsFragment {
 	}
 
 	private void setupCustomRoutingPropertyPref(GeneralRouter.RoutingParameter parameter) {
-		Context ctx = getContext();
-		if (ctx == null) {
+		OsmandApplication app = getMyApplication();
+		if (app == null) {
 			return;
 		}
 		String parameterId = parameter.getId();
-		String title = SettingsBaseActivity.getRoutingStringPropertyName(ctx, parameterId, parameter.getName());
-		String description = SettingsBaseActivity.getRoutingStringPropertyDescription(ctx, parameterId, parameter.getDescription());
+		String title = SettingsBaseActivity.getRoutingStringPropertyName(app, parameterId, parameter.getName());
+		String description = SettingsBaseActivity.getRoutingStringPropertyDescription(app, parameterId, parameter.getDescription());
 
 		String defValue = parameter.getType() == GeneralRouter.RoutingParameterType.NUMERIC ? "0.0" : "-";
-		OsmandSettings.StringPreference pref = (OsmandSettings.StringPreference) settings.getCustomRoutingProperty(parameterId, defValue);
+		OsmandSettings.StringPreference pref = (OsmandSettings.StringPreference) app.getSettings().getCustomRoutingProperty(parameterId, defValue);
 
 		Object[] values = parameter.getPossibleValues();
 		String[] valuesStr = new String[values.length];

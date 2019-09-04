@@ -281,7 +281,6 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		if (preference != null) {
 			preference.setOnPreferenceChangeListener(this);
 			preference.setOnPreferenceClickListener(this);
-			preference.setIconSpaceReserved(true);
 
 			if (preference instanceof ListPreference) {
 				ListPreference listPreference = (ListPreference) preference;

@@ -3,8 +3,8 @@
 
 	<Preference
 		android:key="map_during_navigation_info"
-		android:selectable="false"
 		android:layout="@layout/preference_info"
+		android:selectable="false"
 		android:title="@string/map_during_navigation_info" />
 
 	<net.osmand.plus.settings.preferences.ListPreferenceEx
@@ -20,6 +20,8 @@
 	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
 		android:key="snap_to_road"
 		android:layout="@layout/preference_dialog_and_switch"
+		android:summaryOff="@string/shared_string_off"
+		android:summaryOn="@string/shared_string_on"
 		android:title="@string/snap_to_road" />
 
 	<net.osmand.plus.settings.preferences.ListPreferenceEx

@@ -92,6 +92,7 @@ public class CoordinatesFormatFragment extends BaseSettingsFragment {
 			}
 		};
 		utmPref.setKey(UTM_FORMAT);
+		utmPref.setTitle(R.string.navigate_point_format_utm);
 		utmPref.setPersistent(false);
 		utmPref.setOrder(4);
 		utmPref.setLayoutResource(R.layout.preference_radio_button);

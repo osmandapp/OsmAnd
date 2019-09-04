@@ -25,12 +25,9 @@ public class ScreenAlertsFragment extends BaseSettingsFragment {
 
 	@Override
 	protected void setupPreferences() {
+		setupShowRoutingAlarmsPref();
+
 		Preference showRoutingAlarmsInfo = findPreference("show_routing_alarms_info");
-
-		SwitchPreference showRoutingAlarms = (SwitchPreference) findPreference(settings.SHOW_ROUTING_ALARMS.getId());
-		showRoutingAlarms.setSummaryOn(R.string.shared_string_on);
-		showRoutingAlarms.setSummaryOff(R.string.shared_string_off);
-
 		SwitchPreference showTrafficWarnings = (SwitchPreference) findPreference(settings.SHOW_TRAFFIC_WARNINGS.getId());
 		SwitchPreference showPedestrian = (SwitchPreference) findPreference(settings.SHOW_PEDESTRIAN.getId());
 		SwitchPreference showCameras = (SwitchPreference) findPreference(settings.SHOW_CAMERAS.getId());
@@ -41,5 +38,10 @@ public class ScreenAlertsFragment extends BaseSettingsFragment {
 		showPedestrian.setIcon(getIcon(R.drawable.list_warnings_pedestrian));
 		showCameras.setIcon(getIcon(R.drawable.list_warnings_speed_camera));
 		showTunnels.setIcon(getIcon(R.drawable.list_warnings_tunnel));
+	}
+
+	private void setupShowRoutingAlarmsPref() {
+		SwitchPreference showRoutingAlarms = (SwitchPreference) findPreference(settings.SHOW_ROUTING_ALARMS.getId());
+
 	}
 }

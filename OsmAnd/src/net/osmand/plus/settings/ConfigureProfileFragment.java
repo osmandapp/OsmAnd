@@ -40,6 +40,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 	protected void setupPreferences() {
 		Preference generalSettings = findPreference("general_settings");
 		Preference navigationSettings = findPreference("navigation_settings");
+		Preference pluginSettings = findPreference("plugin_settings");
 
 		generalSettings.setIcon(getContentIcon(R.drawable.ic_action_settings));
 		navigationSettings.setIcon(getContentIcon(R.drawable.ic_action_gdirections_dark));

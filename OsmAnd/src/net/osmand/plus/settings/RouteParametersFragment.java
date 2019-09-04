@@ -1,12 +1,12 @@
 package net.osmand.plus.settings;
 
-import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
 import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.BooleanPreference;
 import net.osmand.plus.R;
@@ -58,6 +58,10 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 
 	@Override
 	protected void setupPreferences() {
+		Preference vehicleParametersInfo = findPreference("route_parameters_info");
+		vehicleParametersInfo.setIcon(getContentIcon(R.drawable.ic_action_info_dark));
+		vehicleParametersInfo.setTitle(getString(R.string.route_parameters_info, getSelectedAppMode().toHumanString(getContext())));
+
 		setupRoutingPrefs();
 		setupTimeConditionalRoutingPref();
 	}
@@ -71,22 +75,22 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 	}
 
 	private void setupRoutingPrefs() {
-		Context ctx = getContext();
-		if (ctx == null) {
+		OsmandApplication app = getMyApplication();
+		if (app == null) {
 			return;
 		}
 		PreferenceScreen screen = getPreferenceScreen();
 
-		SwitchPreferenceEx fastRoute = createSwitchPreferenceEx(settings.FAST_ROUTE_MODE.getId(), R.string.fast_route_mode, R.layout.preference_dialog_and_switch);
-		fastRoute.setIcon(getRoutingPrefIcon(settings.FAST_ROUTE_MODE.getId()));
+		SwitchPreferenceEx fastRoute = createSwitchPreferenceEx(app.getSettings().FAST_ROUTE_MODE.getId(), R.string.fast_route_mode, R.layout.preference_dialog_and_switch);
+		fastRoute.setIcon(getRoutingPrefIcon(app.getSettings().FAST_ROUTE_MODE.getId()));
 		fastRoute.setDescription(getString(R.string.fast_route_mode_descr));
 		fastRoute.setSummaryOn(R.string.shared_string_enable);
 		fastRoute.setSummaryOff(R.string.shared_string_disable);
 
-		if (settings.getApplicationMode().getRouteService() != RouteProvider.RouteService.OSMAND) {
+		if (app.getSettings().getApplicationMode().getRouteService() != RouteProvider.RouteService.OSMAND) {
 			screen.addPreference(fastRoute);
 		} else {
-			ApplicationMode am = settings.getApplicationMode();
+			ApplicationMode am = app.getSettings().getApplicationMode();
 			GeneralRouter router = getRouter(getMyApplication().getRoutingConfig(), am);
 			clearParameters();
 			if (router != null) {
@@ -111,7 +115,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 					}
 				}
 				if (avoidParameters.size() > 0) {
-					MultiSelectBooleanPreference avoidRouting = new MultiSelectBooleanPreference(ctx);
+					MultiSelectBooleanPreference avoidRouting = new MultiSelectBooleanPreference(app);
 					avoidRouting.setKey(AVOID_ROUTING_PARAMETER_PREFIX);
 					avoidRouting.setTitle(R.string.avoid_in_routing_title);
 					avoidRouting.setSummary(R.string.avoid_in_routing_descr);
@@ -127,7 +131,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 						GeneralRouter.RoutingParameter p = avoidParameters.get(i);
 						BooleanPreference booleanRoutingPref = (BooleanPreference) settings.getCustomRoutingBooleanProperty(p.getId(), p.getDefaultBoolean());
 
-						entries[i] = SettingsBaseActivity.getRoutingStringPropertyName(ctx, p.getId(), p.getName());
+						entries[i] = SettingsBaseActivity.getRoutingStringPropertyName(app, p.getId(), p.getName());
 						prefsIds[i] = booleanRoutingPref.getId();
 
 						if (booleanRoutingPref.get()) {
@@ -138,20 +142,22 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 					avoidRouting.setEntries(entries);
 					avoidRouting.setEntryValues(prefsIds);
 					avoidRouting.setValues(enabledPrefsIds);
+					avoidRouting.setIconSpaceReserved(true);
 
 					screen.addPreference(avoidRouting);
 				}
 				if (preferParameters.size() > 0) {
-					Preference preferRouting = new Preference(ctx);
+					Preference preferRouting = new Preference(app);
 					preferRouting.setKey(PREFER_ROUTING_PARAMETER_PREFIX);
 					preferRouting.setTitle(R.string.prefer_in_routing_title);
 					preferRouting.setSummary(R.string.prefer_in_routing_descr);
 					preferRouting.setLayoutResource(R.layout.preference_with_descr);
+					preferRouting.setIconSpaceReserved(true);
 					screen.addPreference(preferRouting);
 				}
 				if (reliefFactorParameters.size() > 0) {
 					String defaultTitle = Algorithms.capitalizeFirstLetterAndLowercase(RELIEF_SMOOTHNESS_FACTOR.replace('_', ' '));
-					String title = SettingsBaseActivity.getRoutingStringPropertyName(ctx, RELIEF_SMOOTHNESS_FACTOR, defaultTitle);
+					String title = SettingsBaseActivity.getRoutingStringPropertyName(app, RELIEF_SMOOTHNESS_FACTOR, defaultTitle);
 
 					Object[] entryValues = new Object[reliefFactorParameters.size()];
 					String[] entries = new String[entryValues.length];
@@ -160,7 +166,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 					for (int i = 0; i < reliefFactorParameters.size(); i++) {
 						GeneralRouter.RoutingParameter parameter = reliefFactorParameters.get(i);
 						entryValues[i] = parameter.getId();
-						entries[i] = SettingsNavigationActivity.getRoutinParameterTitle(ctx, parameter);
+						entries[i] = SettingsNavigationActivity.getRoutinParameterTitle(app, parameter);
 						if (SettingsNavigationActivity.isRoutingParameterSelected(settings, am, parameter)) {
 							selectedParameterId = parameter.getId();
 						}
@@ -170,12 +176,13 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 					reliefFactorRouting.setPersistent(false);
 					reliefFactorRouting.setValue(selectedParameterId);
 					reliefFactorRouting.setDescription(R.string.relief_smoothness_factor_descr);
+					reliefFactorRouting.setIconSpaceReserved(true);
 
 					screen.addPreference(reliefFactorRouting);
 				}
 				for (GeneralRouter.RoutingParameter p : otherRoutingParameters) {
-					String title = SettingsBaseActivity.getRoutingStringPropertyName(ctx, p.getId(), p.getName());
-					String description = SettingsBaseActivity.getRoutingStringPropertyDescription(ctx, p.getId(), p.getDescription());
+					String title = SettingsBaseActivity.getRoutingStringPropertyName(app, p.getId(), p.getName());
+					String description = SettingsBaseActivity.getRoutingStringPropertyDescription(app, p.getId(), p.getDescription());
 
 					if (p.getType() == GeneralRouter.RoutingParameterType.BOOLEAN) {
 						OsmandSettings.OsmandPreference pref = settings.getCustomRoutingBooleanProperty(p.getId(), p.getDefaultBoolean());
@@ -185,6 +192,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 						switchPreferenceEx.setIcon(getRoutingPrefIcon(p.getId()));
 						switchPreferenceEx.setSummaryOn(R.string.shared_string_enable);
 						switchPreferenceEx.setSummaryOff(R.string.shared_string_disable);
+						switchPreferenceEx.setIconSpaceReserved(true);
 
 						screen.addPreference(switchPreferenceEx);
 					} else {
@@ -199,6 +207,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 						ListPreferenceEx listPreferenceEx = (ListPreferenceEx) createListPreferenceEx(pref.getId(), p.getPossibleValueDescriptions(), svlss, title, R.layout.preference_with_descr);
 						listPreferenceEx.setDescription(description);
 						listPreferenceEx.setIcon(getRoutingPrefIcon(p.getId()));
+						listPreferenceEx.setIconSpaceReserved(true);
 
 						screen.addPreference(listPreferenceEx);
 					}
@@ -226,8 +235,8 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 	}
 
 	private void clearParameters() {
-		preferParameters.clear();
 		avoidParameters.clear();
+		preferParameters.clear();
 		reliefFactorParameters.clear();
 		otherRoutingParameters.clear();
 	}

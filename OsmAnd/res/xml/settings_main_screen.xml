@@ -3,14 +3,6 @@
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools">
 
-	<!--	<Preference-->
-	<!--		android:key="personal_account"-->
-	<!--		android:layout="@layout/preference_with_descr"-->
-	<!--		android:persistent="false"-->
-	<!--		android:summary="@string/personal_account_descr"-->
-	<!--		android:title="@string/personal_account"-->
-	<!--		tools:icon="@drawable/ic_person" />-->
-
 	<Preference
 		android:key="global_settings"
 		android:layout="@layout/preference_with_descr"

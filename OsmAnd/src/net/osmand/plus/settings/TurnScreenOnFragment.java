@@ -38,9 +38,7 @@ public class TurnScreenOnFragment extends BaseSettingsFragment {
 	}
 
 	private void setupTurnScreenOnPref() {
-		SwitchPreference turnScreenOn = (SwitchPreference) findPreference(settings.TURN_SCREEN_ON.getId());
-		turnScreenOn.setSummaryOn(R.string.shared_string_on);
-		turnScreenOn.setSummaryOff(R.string.shared_string_off);
+		SwitchPreference turnScreenOn = (SwitchPreference) findPreference(settings.TURN_SCREEN_ON_ENABLED.getId());
 	}
 
 	private void setupTurnScreenOnTimePref() {
@@ -65,8 +63,6 @@ public class TurnScreenOnFragment extends BaseSettingsFragment {
 		SwitchPreferenceEx turnScreenOnSensor = (SwitchPreferenceEx) findPreference(settings.TURN_SCREEN_ON_SENSOR.getId());
 		turnScreenOnSensor.setIcon(getContentIcon(R.drawable.ic_action_sensor_interaction));
 		turnScreenOnSensor.setTitle(title);
-		turnScreenOnSensor.setSummaryOn(R.string.shared_string_on);
-		turnScreenOnSensor.setSummaryOff(R.string.shared_string_off);
 		turnScreenOnSensor.setDescription(description);
 	}
 }

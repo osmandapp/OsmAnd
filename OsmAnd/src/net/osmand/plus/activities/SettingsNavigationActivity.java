@@ -645,7 +645,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 					if (!initialSpeedCam) {
 						if (settings.SPEAK_SPEED_CAMERA.get()) {
 							settings.SPEAK_SPEED_CAMERA.set(false);
-							confirmSpeedCamerasDlg(SettingsNavigationActivity.this, settings);
+							confirmSpeedCamerasDlg();
 						}
 					}
 
@@ -658,9 +658,9 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		}
 		return false;
 	}
-
-	public static void confirmSpeedCamerasDlg(Activity activity, final OsmandSettings settings) {
-		AlertDialog.Builder bld = new AlertDialog.Builder(activity);
+	
+	private void confirmSpeedCamerasDlg() {
+		AlertDialog.Builder bld = new AlertDialog.Builder(this);
 		bld.setMessage(R.string.confirm_usage_speed_cameras);
 		bld.setPositiveButton(R.string.shared_string_yes, new OnClickListener() {
 			

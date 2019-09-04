@@ -30,7 +30,6 @@ public class MapDuringNavigationFragment extends BaseSettingsFragment {
 	@Override
 	protected void setupPreferences() {
 		Preference mapDuringNavigationInfo = findPreference("map_during_navigation_info");
-		mapDuringNavigationInfo.setTitle(R.string.map_during_navigation_info);
 		mapDuringNavigationInfo.setIcon(getContentIcon(R.drawable.ic_action_info_dark));
 
 		setupAutoFollowPref();
@@ -86,8 +85,6 @@ public class MapDuringNavigationFragment extends BaseSettingsFragment {
 	private void setupSnapToRoadPref() {
 		SwitchPreferenceEx snapToRoad = (SwitchPreferenceEx) findPreference(settings.SNAP_TO_ROAD.getId());
 		snapToRoad.setTitle(getString(R.string.snap_to_road));
-		snapToRoad.setSummaryOn(R.string.shared_string_on);
-		snapToRoad.setSummaryOff(R.string.shared_string_off);
 		snapToRoad.setDescription(getString(R.string.snap_to_road_descr));
 	}
 
