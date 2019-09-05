@@ -1,7 +1,9 @@
 package net.osmand.plus.activities;
 
 
+import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.pm.ActivityInfo;
@@ -22,6 +24,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat.OnRequestPermissionsResultCallback;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatCheckedTextView;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,7 +72,6 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 	private Preference applicationDir;
 	private ListPreference applicationModePreference;
 	private Preference drivingRegionPreference;
-	private ChooseAppDirFragment chooseAppDirFragment;
 	private boolean permissionRequested;
 	private boolean permissionGranted;
 
@@ -223,17 +225,35 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 		}
 		registerListPreference(settings.ANGULAR_UNITS, screen, entries, ac);
 
+		Pair<String[], String[]> preferredLocaleInfo = getPreferredLocaleIdsAndValues(this);
+		if (preferredLocaleInfo != null) {
+			registerListPreference(settings.PREFERRED_LOCALE, screen, preferredLocaleInfo.first, preferredLocaleInfo.second);
+		}
+
+		// Add " (Display language)" to menu title in Latin letters for all non-en languages
+		if (!getResources().getString(R.string.preferred_locale).equals(getResources().getString(R.string.preferred_locale_no_translate))) {
+			((ListPreference) screen.findPreference(settings.PREFERRED_LOCALE.getId())).setTitle(getString(R.string.preferred_locale) + " (" + getString(R.string.preferred_locale_no_translate) + ")");
+		}
+
+		// This setting now only in "Confgure map" menu
+		//String[] values = ConfigureMapMenu.getMapNamesValues(this, ConfigureMapMenu.mapNamesIds);
+		//String[] ids = ConfigureMapMenu.getSortedMapNamesIds(this, ConfigureMapMenu.mapNamesIds, values);
+		//registerListPreference(settings.MAP_PREFERRED_LOCALE, screen, ConfigureMapMenu.getMapNamesValues(this, ids), ids);
+	}
+
+	public static Pair<String[], String[]> getPreferredLocaleIdsAndValues(Context ctx) {
 		// See language list and statistics at: https://hosted.weblate.org/projects/osmand/main/
 		// Hardy maintenance 2016-05-29:
 		//  - Include languages if their translation is >= ~10%    (but any language will be visible if it is the device's system locale)
 		//  - Mark as "incomplete" if                    < ~80%
-		String incompleteSuffix = " (" + getString(R.string.incomplete_locale) + ")";
+		String incompleteSuffix = " (" + ctx.getString(R.string.incomplete_locale) + ")";
 
 		// Add " (Device language)" to system default entry in Latin letters, so it can be more easily identified if a foreign language has been selected by mistake
-		String latinSystemDefaultSuffix = " (" + getString(R.string.system_locale_no_translate) + ")";
+		String latinSystemDefaultSuffix = " (" + ctx.getString(R.string.system_locale_no_translate) + ")";
 
 		//getResources().getAssets().getLocales();
-		entrieValues = new String[]{"",
+		String[] entryValues = new String[] {
+				"",
 				"en",
 				"af",
 				"ar",
@@ -294,82 +314,75 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 				"vi",
 				"zh_CN",
 				"zh_TW"};
-		entries = new String[]{getString(R.string.system_locale) + latinSystemDefaultSuffix,
-				getString(R.string.lang_en),
-				getString(R.string.lang_af) + incompleteSuffix,
-				getString(R.string.lang_ar),
-				getString(R.string.lang_ast) + incompleteSuffix,
-				getString(R.string.lang_az),
-				getString(R.string.lang_be),
+
+		String[] entries = new String[] {
+				ctx.getString(R.string.system_locale) + latinSystemDefaultSuffix,
+				ctx.getString(R.string.lang_en),
+				ctx.getString(R.string.lang_af) + incompleteSuffix,
+				ctx.getString(R.string.lang_ar),
+				ctx.getString(R.string.lang_ast) + incompleteSuffix,
+				ctx.getString(R.string.lang_az),
+				ctx.getString(R.string.lang_be),
 				// getString(R.string.lang_be_by),
-				getString(R.string.lang_bg),
-				getString(R.string.lang_ca),
-				getString(R.string.lang_cs),
-				getString(R.string.lang_cy) + incompleteSuffix,
-				getString(R.string.lang_da),
-				getString(R.string.lang_de),
-				getString(R.string.lang_el) + incompleteSuffix,
-				getString(R.string.lang_en_gb),
-				getString(R.string.lang_eo),
-				getString(R.string.lang_es),
-				getString(R.string.lang_es_ar),
-				getString(R.string.lang_es_us),
-				getString(R.string.lang_eu),
-				getString(R.string.lang_fa),
-				getString(R.string.lang_fi) + incompleteSuffix,
-				getString(R.string.lang_fr),
-				getString(R.string.lang_gl),
-				getString(R.string.lang_he) + incompleteSuffix,
-				getString(R.string.lang_hr) + incompleteSuffix,
-				getString(R.string.lang_hsb) + incompleteSuffix,
-				getString(R.string.lang_hu),
-				getString(R.string.lang_hy),
-				getString(R.string.lang_is),
-				getString(R.string.lang_it),
-				getString(R.string.lang_ja),
-				getString(R.string.lang_ka) + incompleteSuffix,
-				getString(R.string.lang_kab) + incompleteSuffix,
-				getString(R.string.lang_kn) + incompleteSuffix,
-				getString(R.string.lang_ko),
-				getString(R.string.lang_lt),
-				getString(R.string.lang_lv),
-				getString(R.string.lang_ml) + incompleteSuffix,
-				getString(R.string.lang_mr) + incompleteSuffix,
-				getString(R.string.lang_nb),
-				getString(R.string.lang_nl),
-				getString(R.string.lang_nn) + incompleteSuffix,
-				getString(R.string.lang_oc) + incompleteSuffix,
-				getString(R.string.lang_pl),
-				getString(R.string.lang_pt),
-				getString(R.string.lang_pt_br),
-				getString(R.string.lang_ro) + incompleteSuffix,
-				getString(R.string.lang_ru),
-				getString(R.string.lang_sc),
-				getString(R.string.lang_sk),
-				getString(R.string.lang_sl),
-				getString(R.string.lang_sr) + incompleteSuffix,
-				getString(R.string.lang_sr_latn) + incompleteSuffix,
-				getString(R.string.lang_sv),
-				getString(R.string.lang_tr),
-				getString(R.string.lang_uk),
-				getString(R.string.lang_vi) + incompleteSuffix,
-				getString(R.string.lang_zh_cn) + incompleteSuffix,
-				getString(R.string.lang_zh_tw)};
-		String[] valuesPl = ConfigureMapMenu.getSortedMapNamesIds(this, entries, entries);
-		String[] idsPl = ConfigureMapMenu.getSortedMapNamesIds(this, entrieValues, entries);
-		registerListPreference(settings.PREFERRED_LOCALE, screen, valuesPl, idsPl);
+				ctx.getString(R.string.lang_bg),
+				ctx.getString(R.string.lang_ca),
+				ctx.getString(R.string.lang_cs),
+				ctx.getString(R.string.lang_cy) + incompleteSuffix,
+				ctx.getString(R.string.lang_da),
+				ctx.getString(R.string.lang_de),
+				ctx.getString(R.string.lang_el) + incompleteSuffix,
+				ctx.getString(R.string.lang_en_gb),
+				ctx.getString(R.string.lang_eo),
+				ctx.getString(R.string.lang_es),
+				ctx.getString(R.string.lang_es_ar),
+				ctx.getString(R.string.lang_es_us),
+				ctx.getString(R.string.lang_eu),
+				ctx.getString(R.string.lang_fa),
+				ctx.getString(R.string.lang_fi) + incompleteSuffix,
+				ctx.getString(R.string.lang_fr),
+				ctx.getString(R.string.lang_gl),
+				ctx.getString(R.string.lang_he) + incompleteSuffix,
+				ctx.getString(R.string.lang_hr) + incompleteSuffix,
+				ctx.getString(R.string.lang_hsb) + incompleteSuffix,
+				ctx.getString(R.string.lang_hu),
+				ctx.getString(R.string.lang_hy),
+				ctx.getString(R.string.lang_is),
+				ctx.getString(R.string.lang_it),
+				ctx.getString(R.string.lang_ja),
+				ctx.getString(R.string.lang_ka) + incompleteSuffix,
+				ctx.getString(R.string.lang_kab) + incompleteSuffix,
+				ctx.getString(R.string.lang_kn) + incompleteSuffix,
+				ctx.getString(R.string.lang_ko),
+				ctx.getString(R.string.lang_lt),
+				ctx.getString(R.string.lang_lv),
+				ctx.getString(R.string.lang_ml) + incompleteSuffix,
+				ctx.getString(R.string.lang_mr) + incompleteSuffix,
+				ctx.getString(R.string.lang_nb),
+				ctx.getString(R.string.lang_nl),
+				ctx.getString(R.string.lang_nn) + incompleteSuffix,
+				ctx.getString(R.string.lang_oc) + incompleteSuffix,
+				ctx.getString(R.string.lang_pl),
+				ctx.getString(R.string.lang_pt),
+				ctx.getString(R.string.lang_pt_br),
+				ctx.getString(R.string.lang_ro) + incompleteSuffix,
+				ctx.getString(R.string.lang_ru),
+				ctx.getString(R.string.lang_sc),
+				ctx.getString(R.string.lang_sk),
+				ctx.getString(R.string.lang_sl),
+				ctx.getString(R.string.lang_sr) + incompleteSuffix,
+				ctx.getString(R.string.lang_sr_latn) + incompleteSuffix,
+				ctx.getString(R.string.lang_sv),
+				ctx.getString(R.string.lang_tr),
+				ctx.getString(R.string.lang_uk),
+				ctx.getString(R.string.lang_vi) + incompleteSuffix,
+				ctx.getString(R.string.lang_zh_cn) + incompleteSuffix,
+				ctx.getString(R.string.lang_zh_tw)};
 
-		// Add " (Display language)" to menu title in Latin letters for all non-en languages
-		if (!getResources().getString(R.string.preferred_locale).equals(getResources().getString(R.string.preferred_locale_no_translate))) {
-			((ListPreference) screen.findPreference(settings.PREFERRED_LOCALE.getId())).setTitle(getString(R.string.preferred_locale) + " (" + getString(R.string.preferred_locale_no_translate) + ")");
-		}
+		String[] valuesPl = ConfigureMapMenu.getSortedMapNamesIds(ctx, entries, entries);
+		String[] idsPl = ConfigureMapMenu.getSortedMapNamesIds(ctx, entryValues, entries);
 
-		// This setting now only in "Confgure map" menu
-		//String[] values = ConfigureMapMenu.getMapNamesValues(this, ConfigureMapMenu.mapNamesIds);
-		//String[] ids = ConfigureMapMenu.getSortedMapNamesIds(this, ConfigureMapMenu.mapNamesIds, values);
-		//registerListPreference(settings.MAP_PREFERRED_LOCALE, screen, ConfigureMapMenu.getMapNamesValues(this, ids), ids);
+		return Pair.create(valuesPl, idsPl);
 	}
-
 
 	protected void enableProxy(boolean enable) {
 		settings.ENABLE_PROXY.set(enable);
@@ -425,14 +438,14 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 	}
 
 
-	public void showAppDirDialog() {
+	public static void showAppDirDialog(final OsmandSettings settings, final ActionBarPreferenceActivity ctx, boolean permissionRequested, boolean permissionGranted) {
 		if (Build.VERSION.SDK_INT >= 19) {
-			showAppDirDialogV19();
+			showAppDirDialogV19(ctx,permissionRequested,permissionGranted);
 			return;
 		}
-		AlertDialog.Builder editalert = new AlertDialog.Builder(SettingsGeneralActivity.this);
+		AlertDialog.Builder editalert = new AlertDialog.Builder(ctx);
 		editalert.setTitle(R.string.application_dir);
-		final EditText input = new EditText(SettingsGeneralActivity.this);
+		final EditText input = new EditText(ctx);
 		input.setText(settings.getExternalStorageDirectory().getAbsolutePath());
 		LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
 				LinearLayout.LayoutParams.MATCH_PARENT,
@@ -445,25 +458,27 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 		editalert.setNegativeButton(R.string.shared_string_cancel, null);
 		editalert.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int whichButton) {
-				warnAboutChangingStorage(input.getText().toString());
+				warnAboutChangingStorage(settings,ctx,input.getText().toString());
 			}
 		});
 		editalert.show();
 
 	}
 
-	private void showAppDirDialogV19() {
-		AlertDialog.Builder bld = new AlertDialog.Builder(this);
-		chooseAppDirFragment = new DashChooseAppDirFragment.ChooseAppDirFragment(this, (Dialog) null) {
+	private static void showAppDirDialogV19(final Activity activity, boolean permissionRequested, boolean permissionGranted) {
+		AlertDialog.Builder bld = new AlertDialog.Builder(activity);
+		ChooseAppDirFragment chooseAppDirFragment = new DashChooseAppDirFragment.ChooseAppDirFragment(activity, (Dialog) null) {
 			@Override
 			protected void successCallback() {
-				updateApplicationDirTextAndSummary();
+				if (activity instanceof SettingsGeneralActivity) {
+					((SettingsGeneralActivity) activity).updateApplicationDirTextAndSummary();
+				}
 			}
 		};
 		if (permissionRequested && !permissionGranted) {
 			chooseAppDirFragment.setPermissionDenied();
 		}
-		bld.setView(chooseAppDirFragment.initView(getLayoutInflater(), null, null));
+		bld.setView(chooseAppDirFragment.initView(activity.getLayoutInflater(), null, null));
 		AlertDialog dlg = bld.show();
 		chooseAppDirFragment.setDialog(dlg);
 	}
@@ -473,12 +488,12 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 		if (!Version.isBlackberry(getMyApplication())) {
 			applicationDir = new Preference(this);
 			applicationDir.setTitle(R.string.application_dir);
-			applicationDir.setKey("external_storage_dir");
+			applicationDir.setKey(OsmandSettings.EXTERNAL_STORAGE_DIR);
 			applicationDir.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 
 				@Override
 				public boolean onPreferenceClick(Preference preference) {
-					showAppDirDialog();
+					showAppDirDialog(settings, SettingsGeneralActivity.this, permissionRequested, permissionGranted);
 					return false;
 				}
 			});
@@ -569,7 +584,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 	
 
 
-	private void warnAboutChangingStorage(final String newValue) {
+	private static void warnAboutChangingStorage(final OsmandSettings settings, final ActionBarPreferenceActivity activity, String newValue) {
 		String newDir = newValue != null ? newValue.trim() : newValue;
 		if (!newDir.replace('/', ' ').trim().
 				toLowerCase().endsWith(IndexConstants.APP_DIR.replace('/', ' ').trim())) {
@@ -578,21 +593,21 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 		final File path = new File(newDir);
 		path.mkdirs();
 		if (!path.canRead() || !path.exists()) {
-			Toast.makeText(this, R.string.specified_dir_doesnt_exist, Toast.LENGTH_LONG).show();
+			Toast.makeText(activity, R.string.specified_dir_doesnt_exist, Toast.LENGTH_LONG).show();
 			return;
 		}
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setMessage(getString(R.string.application_dir_change_warning3));
+		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+		builder.setMessage(activity.getString(R.string.application_dir_change_warning3));
 		builder.setPositiveButton(R.string.shared_string_yes, new OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				MoveFilesToDifferentDirectory task =
-						new MoveFilesToDifferentDirectory(SettingsGeneralActivity.this,
+						new MoveFilesToDifferentDirectory(activity,
 								settings.getExternalStorageDirectory(), path);
 				task.setRunOnSuccess(new Runnable() {
 					@Override
 					public void run() {
-						updateSettingsToNewDir(path.getParentFile().getAbsolutePath());
+						updateSettingsToNewDir(settings,activity,path.getParentFile().getAbsolutePath());
 					}
 				});
 				task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
@@ -602,39 +617,41 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				updateSettingsToNewDir(path.getParentFile().getAbsolutePath());
+				updateSettingsToNewDir(settings,activity,path.getParentFile().getAbsolutePath());
 			}
 		});
 		builder.setNegativeButton(R.string.shared_string_cancel, null);
 		builder.show();
 	}
 
-	private void updateSettingsToNewDir(final String newDir) {
+	private static void updateSettingsToNewDir(OsmandSettings settings, ActionBarPreferenceActivity activity, String newDir) {
 		// edit the preference
 		settings.setExternalStorageDirectoryPre19(newDir);
-		getMyApplication().getResourceManager().resetStoreDirectory();
-		reloadIndexes();
-		updateApplicationDirTextAndSummary();
+		((OsmandApplication) activity.getApplication()).getResourceManager().resetStoreDirectory();
+		reloadIndexes(activity);
+		if (activity instanceof SettingsGeneralActivity) {
+			((SettingsGeneralActivity) activity).updateApplicationDirTextAndSummary();
+		}
 	}
 
-	public void reloadIndexes() {
-		setProgressVisibility(true);
-		final CharSequence oldTitle = getToolbar().getTitle();
-		getToolbar().setTitle(getString(R.string.loading_data));
-		getToolbar().setSubtitle(getString(R.string.reading_indexes));
+	public static void reloadIndexes(final ActionBarPreferenceActivity activity) {
+		activity.setProgressVisibility(true);
+		final CharSequence oldTitle = activity.getToolbar().getTitle();
+		activity.getToolbar().setTitle(activity.getString(R.string.loading_data));
+		activity.getToolbar().setSubtitle(activity.getString(R.string.reading_indexes));
 		new AsyncTask<Void, Void, List<String>>() {
 
 			@Override
 			protected List<String> doInBackground(Void... params) {
-				return getMyApplication().getResourceManager().reloadIndexes(IProgress.EMPTY_PROGRESS,
+				return ((OsmandApplication) activity.getApplication()).getResourceManager().reloadIndexes(IProgress.EMPTY_PROGRESS,
 						new ArrayList<String>());
 			}
 
 			protected void onPostExecute(List<String> result) {
-				showWarnings(result);
-				getToolbar().setTitle(oldTitle);
-				getToolbar().setSubtitle("");
-				setProgressVisibility(false);
+				showWarnings(((OsmandApplication)activity.getApplication()),result);
+				activity.getToolbar().setTitle(oldTitle);
+				activity.getToolbar().setSubtitle("");
+				activity.setProgressVisibility(false);
 			}
 
 		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
@@ -667,34 +684,11 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 		}
 	}
 
-
-	protected void showWarnings(List<String> warnings) {
-		if (!warnings.isEmpty()) {
-			final StringBuilder b = new StringBuilder();
-			boolean f = true;
-			for (String w : warnings) {
-				if (f) {
-					f = false;
-				} else {
-					b.append('\n');
-				}
-				b.append(w);
-			}
-			runOnUiThread(new Runnable() {
-				@Override
-				public void run() {
-					Toast.makeText(SettingsGeneralActivity.this, b.toString(), Toast.LENGTH_LONG).show();
-
-				}
-			});
-		}
-	}
-
 	@Override
 	protected void onResume() {
 		super.onResume();
 		if (permissionRequested) {
-			showAppDirDialogV19();
+			showAppDirDialogV19(this, permissionRequested, permissionGranted);
 			permissionRequested = false;
 		}
 	}

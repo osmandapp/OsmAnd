@@ -135,6 +135,10 @@ public class SingleSelectPreferenceBottomSheet extends MenuBottomSheetDialogFrag
 				listPreference.setValue(value);
 			}
 		}
+		Fragment target = getTargetFragment();
+		if (target instanceof OnPreferenceChanged) {
+			((OnPreferenceChanged) target).onPreferenceChanged(listPreference.getKey());
+		}
 		dismiss();
 	}
 

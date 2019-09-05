@@ -31,6 +31,7 @@
 		android:icon="@drawable/ic_action_privacy_and_security"
 		android:key="send_anonymous_data"
 		android:layout="@layout/preference_dialog_and_switch"
+		android:persistent="false"
 		android:summaryOff="@string/shared_string_off"
 		android:summaryOn="@string/shared_string_on"
 		android:title="@string/analytics_pref_title" />

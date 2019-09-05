@@ -53,7 +53,7 @@ public class MainSettingsFragment extends BaseSettingsFragment {
 		ApplicationMode selectedMode = getSelectedAppMode();
 
 		int iconRes = selectedMode.getIconRes();
-		int iconColor = selectedMode.getIconColorInfo().getColor(isNightMode());
+		int iconColor = getActiveProfileColor();
 		String title = selectedMode.toHumanString(getContext());
 
 		String profileType;
@@ -73,7 +73,7 @@ public class MainSettingsFragment extends BaseSettingsFragment {
 		ApplicationMode selectedMode = getSelectedAppMode();
 
 		int iconRes = selectedMode.getIconRes();
-		int iconColor = selectedMode.getIconColorInfo().getColor(isNightMode());
+		int iconColor = getActiveProfileColor();
 		String title = selectedMode.toHumanString(getContext());
 
 		String profileType;

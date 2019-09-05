@@ -73,6 +73,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		if (view != null) {
 			AndroidUtils.addStatusBarPadding21v(getContext(), view);
 			createToolbar(inflater, view);
+			setDivider(null);
 		}
 
 		return view;
@@ -110,7 +111,10 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 			view.findViewById(R.id.close_button).setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					getActivity().getSupportFragmentManager().popBackStack();
+					MapActivity mapActivity = getMapActivity();
+					if (mapActivity != null) {
+						mapActivity.onBackPressed();
+					}
 				}
 			});
 			View switchProfile = view.findViewById(R.id.switch_profile_button);
@@ -244,11 +248,9 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	}
 
 	public void updateAllSettings() {
-		String sharedPreferencesName = OsmandSettings.getSharedPreferencesName(getSelectedAppMode());
-		getPreferenceManager().setSharedPreferencesName(sharedPreferencesName);
-		updateToolbar(getView());
 		getPreferenceScreen().removeAll();
 		updatePreferencesScreen();
+		updateToolbar(getView());
 	}
 
 	@XmlRes
@@ -275,6 +277,11 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 			return nightMode ? R.color.list_background_color_dark : R.color.list_background_color_light;
 		}
 		return -1;
+	}
+
+	@ColorRes
+	protected int getActiveProfileColor() {
+		return getSelectedAppMode().getIconColorInfo().getColor(isNightMode());
 	}
 
 	protected void registerPreference(Preference preference) {
@@ -352,14 +359,19 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		return iconsCache;
 	}
 
-	protected Drawable getIcon(@DrawableRes int id, @ColorRes int colorId) {
-		UiUtilities cache = getIconsCache();
-		return cache != null ? cache.getIcon(id, colorId) : null;
-	}
-
 	protected Drawable getIcon(@DrawableRes int id) {
 		UiUtilities cache = getIconsCache();
 		return cache != null ? cache.getIcon(id) : null;
+	}
+
+	protected Drawable getActiveIcon(@DrawableRes int id) {
+		UiUtilities cache = getIconsCache();
+		return cache != null ? cache.getIcon(id, getActiveProfileColor()) : null;
+	}
+
+	protected Drawable getIcon(@DrawableRes int id, @ColorRes int colorId) {
+		UiUtilities cache = getIconsCache();
+		return cache != null ? cache.getIcon(id, colorId) : null;
 	}
 
 	protected Drawable getContentIcon(@DrawableRes int id) {

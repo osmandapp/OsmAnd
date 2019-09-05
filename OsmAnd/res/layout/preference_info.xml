@@ -4,7 +4,7 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
-	android:minHeight="72dp">
+	android:minHeight="52dp">
 
 	<ImageView
 		android:id="@android:id/icon"

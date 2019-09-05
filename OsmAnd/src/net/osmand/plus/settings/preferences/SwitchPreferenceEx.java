@@ -34,7 +34,7 @@ public class SwitchPreferenceEx extends SwitchPreference {
 
 	@Override
 	protected void onClick() {
-		if (getFragment() == null) {
+		if (getFragment() == null && getIntent() == null) {
 			getPreferenceManager().showDialog(this);
 		}
 	}

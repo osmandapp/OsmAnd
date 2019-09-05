@@ -2,38 +2,36 @@ package net.osmand.plus.settings;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Build;
-import android.os.Bundle;
 import android.os.StatFs;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.preference.Preference;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
+import android.util.Pair;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
-import net.osmand.StateChangedListener;
 import net.osmand.ValueHolder;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
+import net.osmand.plus.activities.SettingsBaseActivity;
+import net.osmand.plus.activities.SettingsGeneralActivity;
 import net.osmand.plus.dashboard.DashChooseAppDirFragment;
-import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.dialogs.SendAnalyticsBottomSheetDialogFragment;
 import net.osmand.plus.download.DownloadActivity;
-import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 
@@ -41,13 +39,11 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GlobalSettingsFragment extends BaseSettingsFragment {
+public class GlobalSettingsFragment extends BaseSettingsFragment implements SendAnalyticsBottomSheetDialogFragment.OnSendAnalyticsPrefsUpdate, OnPreferenceChanged {
 
 	public static final String TAG = "GlobalSettingsFragment";
 
-	private Preference applicationDir;
-	private boolean permissionRequested;
-	private boolean permissionGranted;
+	private static final String SEND_ANONYMOUS_DATA_PREF_ID = "send_anonymous_data";
 
 	@Override
 	protected int getPreferencesResId() {
@@ -71,204 +67,163 @@ public class GlobalSettingsFragment extends BaseSettingsFragment {
 		setupExternalStorageDirPref();
 
 		setupSendAnonymousDataPref();
-		setupDoNotShowStartupMessagesPref();
 		setupEnableProxyPref();
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = super.onCreateView(inflater, container, savedInstanceState);
+	public boolean onPreferenceChange(Preference preference, Object newValue) {
+		String prefId = preference.getKey();
 
-		AndroidUiHelper.updateVisibility(view.findViewById(R.id.ProgressBar), false);
+		if (prefId.equals(SEND_ANONYMOUS_DATA_PREF_ID)) {
+			if (newValue instanceof Boolean) {
+				boolean enabled = (Boolean) newValue;
+				if (enabled) {
+					FragmentManager fragmentManager = getFragmentManager();
+					if (fragmentManager != null) {
+						SendAnalyticsBottomSheetDialogFragment.showInstance(app, fragmentManager, this);
+					}
+				} else {
+					settings.SEND_ANONYMOUS_MAP_DOWNLOADS_DATA.set(false);
+					settings.SEND_ANONYMOUS_APP_USAGE_DATA.set(false);
+					return true;
+				}
+			}
+			return false;
+		}
 
-		return view;
+		return super.onPreferenceChange(preference, newValue);
+	}
+
+	@Override
+	public boolean onPreferenceClick(Preference preference) {
+		String prefId = preference.getKey();
+
+		if (prefId.equals(OsmandSettings.EXTERNAL_STORAGE_DIR)) {
+			showAppDirDialog();
+			return true;
+		}
+
+		return super.onPreferenceClick(preference);
+	}
+
+	@Override
+	public void onDisplayPreferenceDialog(Preference preference) {
+		String prefId = preference.getKey();
+
+		if (prefId.equals(SEND_ANONYMOUS_DATA_PREF_ID)) {
+			FragmentManager fragmentManager = getFragmentManager();
+			if (fragmentManager != null) {
+				SendAnalyticsBottomSheetDialogFragment.showInstance(app, fragmentManager, this);
+			}
+		} else {
+			super.onDisplayPreferenceDialog(preference);
+		}
+	}
+
+	@Override
+	public void onPreferenceChanged(String prefId) {
+		if (prefId.equals(settings.DEFAULT_APPLICATION_MODE.getId())) {
+			setupDefaultAppModePref();
+		} else if (prefId.equals(settings.PREFERRED_LOCALE.getId())) {
+			// recreate activity to update locale
+			Activity activity = getActivity();
+			OsmandApplication app = getMyApplication();
+			if (app != null && activity != null) {
+				app.checkPreferredLocale();
+				activity.recreate();
+			}
+		}
+	}
+
+	@Override
+	public void onAnalyticsPrefsUpdate() {
+		setupSendAnonymousDataPref();
 	}
 
 	private void setupDefaultAppModePref() {
+		OsmandApplication app = getMyApplication();
+		if (app == null) {
+			return;
+		}
 		ApplicationMode selectedMode = settings.DEFAULT_APPLICATION_MODE.get();
-
-		int iconRes = selectedMode.getIconRes();
-		String title = selectedMode.toHumanString(getContext());
 
 		ApplicationMode[] appModes = ApplicationMode.values(app).toArray(new ApplicationMode[0]);
 		String[] entries = new String[appModes.length];
+		String[] entryValues = new String[appModes.length];
 		for (int i = 0; i < entries.length; i++) {
 			entries[i] = appModes[i].toHumanString(app);
+			entryValues[i] = appModes[i].getStringKey();
 		}
 
-		final ListPreferenceEx defaultApplicationMode = (ListPreferenceEx) findPreference(settings.DEFAULT_APPLICATION_MODE.getId());
-		defaultApplicationMode.setIcon(getContentIcon(iconRes));
-		defaultApplicationMode.setSummary(title);
+		ListPreferenceEx defaultApplicationMode = (ListPreferenceEx) findPreference(settings.DEFAULT_APPLICATION_MODE.getId());
+		defaultApplicationMode.setIcon(getContentIcon(selectedMode.getIconRes()));
 		defaultApplicationMode.setEntries(entries);
-		defaultApplicationMode.setEntryValues(appModes);
+		defaultApplicationMode.setEntryValues(entryValues);
 	}
 
 	private void setupPreferredLocalePref() {
-		// See language list and statistics at: https://hosted.weblate.org/projects/osmand/main/
-		// Hardy maintenance 2016-05-29:
-		//  - Include languages if their translation is >= ~10%    (but any language will be visible if it is the device's system locale)
-		//  - Mark as "incomplete" if                    < ~80%
-		String incompleteSuffix = " (" + getString(R.string.incomplete_locale) + ")";
-
-		// Add " (Device language)" to system default entry in Latin letters, so it can be more easily identified if a foreign language has been selected by mistake
-		String latinSystemDefaultSuffix = " (" + getString(R.string.system_locale_no_translate) + ")";
-
-		//getResources().getAssets().getLocales();
-		String[] entrieValues = new String[] {"",
-				"en",
-				"af",
-				"ar",
-				"ast",
-				"az",
-				"be",
-				//"be_BY",
-				"bg",
-				"ca",
-				"cs",
-				"cy",
-				"da",
-				"de",
-				"el",
-				"en_GB",
-				"eo",
-				"es",
-				"es_AR",
-				"es_US",
-				"eu",
-				"fa",
-				"fi",
-				"fr",
-				"gl",
-				"he",
-				"hr",
-				"hsb",
-				"hu",
-				"hy",
-				"is",
-				"it",
-				"ja",
-				"ka",
-				"kab",
-				"kn",
-				"ko",
-				"lt",
-				"lv",
-				"ml",
-				"mr",
-				"nb",
-				"nl",
-				"nn",
-				"oc",
-				"pl",
-				"pt",
-				"pt_BR",
-				"ro",
-				"ru",
-				"sc",
-				"sk",
-				"sl",
-				"sr",
-				"sr+Latn",
-				"sv",
-				"tr",
-				"uk",
-				"vi",
-				"zh_CN",
-				"zh_TW"};
-
-		String[] entries = new String[] {getString(R.string.system_locale) + latinSystemDefaultSuffix,
-				getString(R.string.lang_en),
-				getString(R.string.lang_af) + incompleteSuffix,
-				getString(R.string.lang_ar),
-				getString(R.string.lang_ast) + incompleteSuffix,
-				getString(R.string.lang_az),
-				getString(R.string.lang_be),
-				// getString(R.string.lang_be_by),
-				getString(R.string.lang_bg),
-				getString(R.string.lang_ca),
-				getString(R.string.lang_cs),
-				getString(R.string.lang_cy) + incompleteSuffix,
-				getString(R.string.lang_da),
-				getString(R.string.lang_de),
-				getString(R.string.lang_el) + incompleteSuffix,
-				getString(R.string.lang_en_gb),
-				getString(R.string.lang_eo),
-				getString(R.string.lang_es),
-				getString(R.string.lang_es_ar),
-				getString(R.string.lang_es_us),
-				getString(R.string.lang_eu),
-				getString(R.string.lang_fa),
-				getString(R.string.lang_fi) + incompleteSuffix,
-				getString(R.string.lang_fr),
-				getString(R.string.lang_gl),
-				getString(R.string.lang_he) + incompleteSuffix,
-				getString(R.string.lang_hr) + incompleteSuffix,
-				getString(R.string.lang_hsb) + incompleteSuffix,
-				getString(R.string.lang_hu),
-				getString(R.string.lang_hy),
-				getString(R.string.lang_is),
-				getString(R.string.lang_it),
-				getString(R.string.lang_ja),
-				getString(R.string.lang_ka) + incompleteSuffix,
-				getString(R.string.lang_kab) + incompleteSuffix,
-				getString(R.string.lang_kn) + incompleteSuffix,
-				getString(R.string.lang_ko),
-				getString(R.string.lang_lt),
-				getString(R.string.lang_lv),
-				getString(R.string.lang_ml) + incompleteSuffix,
-				getString(R.string.lang_mr) + incompleteSuffix,
-				getString(R.string.lang_nb),
-				getString(R.string.lang_nl),
-				getString(R.string.lang_nn) + incompleteSuffix,
-				getString(R.string.lang_oc) + incompleteSuffix,
-				getString(R.string.lang_pl),
-				getString(R.string.lang_pt),
-				getString(R.string.lang_pt_br),
-				getString(R.string.lang_ro) + incompleteSuffix,
-				getString(R.string.lang_ru),
-				getString(R.string.lang_sc),
-				getString(R.string.lang_sk),
-				getString(R.string.lang_sl),
-				getString(R.string.lang_sr) + incompleteSuffix,
-				getString(R.string.lang_sr_latn) + incompleteSuffix,
-				getString(R.string.lang_sv),
-				getString(R.string.lang_tr),
-				getString(R.string.lang_uk),
-				getString(R.string.lang_vi) + incompleteSuffix,
-				getString(R.string.lang_zh_cn) + incompleteSuffix,
-				getString(R.string.lang_zh_tw)};
-
-		String[] valuesPl = ConfigureMapMenu.getSortedMapNamesIds(getContext(), entries, entries);
-		String[] idsPl = ConfigureMapMenu.getSortedMapNamesIds(getContext(), entrieValues, entries);
-
+		Context ctx = getContext();
+		if (ctx == null) {
+			return;
+		}
 		ListPreferenceEx preferredLocale = (ListPreferenceEx) findPreference(settings.PREFERRED_LOCALE.getId());
 		preferredLocale.setIcon(getContentIcon(R.drawable.ic_action_map_language));
 		preferredLocale.setSummary(settings.PREFERRED_LOCALE.get());
-		preferredLocale.setEntries(valuesPl);
-		preferredLocale.setEntryValues(idsPl);
+
+		Pair<String[], String[]> preferredLocaleInfo = SettingsGeneralActivity.getPreferredLocaleIdsAndValues(ctx);
+		if (preferredLocaleInfo != null) {
+			preferredLocale.setEntries(preferredLocaleInfo.first);
+			preferredLocale.setEntryValues(preferredLocaleInfo.second);
+		}
 
 		// Add " (Display language)" to menu title in Latin letters for all non-en languages
 		if (!getResources().getString(R.string.preferred_locale).equals(getResources().getString(R.string.preferred_locale_no_translate))) {
 			preferredLocale.setTitle(getString(R.string.preferred_locale) + " (" + getString(R.string.preferred_locale_no_translate) + ")");
 		}
+	}
 
-		// This setting now only in "Confgure map" menu
-		//String[] values = ConfigureMapMenu.getMapNamesValues(this, ConfigureMapMenu.mapNamesIds);
-		//String[] ids = ConfigureMapMenu.getSortedMapNamesIds(this, ConfigureMapMenu.mapNamesIds, values);
-		//registerListPreference(settings.MAP_PREFERRED_LOCALE, screen, ConfigureMapMenu.getMapNamesValues(this, ids), ids);
+	private void setupSendAnonymousDataPref() {
+		boolean enabled = settings.SEND_ANONYMOUS_MAP_DOWNLOADS_DATA.get() || settings.SEND_ANONYMOUS_APP_USAGE_DATA.get();
 
-		settings.PREFERRED_LOCALE.addListener(new StateChangedListener<String>() {
-			@Override
-			public void stateChanged(String change) {
-				// recreate activity to update locale
-				Activity activity = getActivity();
-				OsmandApplication app = getMyApplication();
-				if (app != null && activity != null) {
-					app.checkPreferredLocale();
-					activity.recreate();
-				}
-			}
-		});
+		SwitchPreference sendAnonymousData = (SwitchPreference) findPreference(SEND_ANONYMOUS_DATA_PREF_ID);
+		sendAnonymousData.setChecked(enabled);
+	}
+
+	private void setupEnableProxyPref() {
+		SwitchPreferenceEx enableProxy = (SwitchPreferenceEx) findPreference(settings.ENABLE_PROXY.getId());
+		enableProxy.setIcon(getContentIcon(R.drawable.ic_action_proxy));
+	}
+
+
+//	-------------------------- APP DIR PREF --------------------------------------------------------
+
+	private Preference applicationDir;
+	private boolean permissionRequested;
+	private boolean permissionGranted;
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		if (permissionRequested) {
+			showAppDirDialogV19();
+			permissionRequested = false;
+		}
+	}
+
+	@Override
+	public void onRequestPermissionsResult(int requestCode,
+	                                       String permissions[], int[] grantResults) {
+		permissionRequested = requestCode == DownloadActivity.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE;
+		if (permissionRequested
+				&& grantResults.length > 0
+				&& grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+			permissionGranted = true;
+		} else {
+			permissionGranted = false;
+			Toast.makeText(getContext(),
+					R.string.missing_write_external_storage_permission,
+					Toast.LENGTH_LONG).show();
+		}
 	}
 
 	private void setupExternalStorageDirPref() {
@@ -315,55 +270,6 @@ public class GlobalSettingsFragment extends BaseSettingsFragment {
 			return DownloadActivity.formatGb.format(new Object[] {(float) (fs.getAvailableBlocks()) * fs.getBlockSize() / (1 << 30)});
 		}
 		return "";
-	}
-
-	private void setupSendAnonymousDataPref() {
-		SwitchPreferenceEx sendAnonymousData = (SwitchPreferenceEx) findPreference(settings.SEND_ANONYMOUS_DATA.getId());
-	}
-
-	private void setupDoNotShowStartupMessagesPref() {
-		SwitchPreference doNotShowStartupMessages = (SwitchPreference) findPreference(settings.DO_NOT_SHOW_STARTUP_MESSAGES.getId());
-	}
-
-	private void setupEnableProxyPref() {
-		SwitchPreferenceEx enableProxy = (SwitchPreferenceEx) findPreference(settings.ENABLE_PROXY.getId());
-		enableProxy.setIcon(getContentIcon(R.drawable.ic_action_proxy));
-	}
-
-	@Override
-	public void onDisplayPreferenceDialog(Preference preference) {
-		if (preference.getKey().equals(settings.SEND_ANONYMOUS_DATA.getId())) {
-			FragmentManager fragmentManager = getFragmentManager();
-			if (fragmentManager != null) {
-				SendAnalyticsBottomSheetDialogFragment.showInstance(app, fragmentManager);
-			}
-		} else {
-			super.onDisplayPreferenceDialog(preference);
-		}
-	}
-
-	@Override
-	public boolean onPreferenceClick(Preference preference) {
-		String prefId = preference.getKey();
-
-		if (prefId.equals(OsmandSettings.EXTERNAL_STORAGE_DIR)) {
-			showAppDirDialog();
-			return true;
-		}
-
-		return super.onPreferenceClick(preference);
-	}
-
-	@Override
-	public boolean onPreferenceChange(Preference preference, Object newValue) {
-		String prefId = preference.getKey();
-
-		if (prefId.equals(settings.DEFAULT_APPLICATION_MODE.getId()) && newValue instanceof ApplicationMode) {
-			preference.setIcon(getContentIcon(((ApplicationMode) newValue).getIconRes()));
-			settings.APPLICATION_MODE.set((ApplicationMode) newValue);
-		}
-
-		return super.onPreferenceChange(preference, newValue);
 	}
 
 	public void showAppDirDialog() {
@@ -478,7 +384,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment {
 			}
 
 			protected void onPostExecute(List<String> result) {
-				showWarnings(result);
+				SettingsBaseActivity.showWarnings(getMyApplication(), result);
 				toolbar.setTitle(oldTitle);
 				toolbar.setSubtitle("");
 				setProgressVisibility(false);
@@ -492,52 +398,6 @@ public class GlobalSettingsFragment extends BaseSettingsFragment {
 			getView().findViewById(R.id.ProgressBar).setVisibility(View.VISIBLE);
 		} else {
 			getView().findViewById(R.id.ProgressBar).setVisibility(View.GONE);
-		}
-	}
-
-	protected void showWarnings(List<String> warnings) {
-		if (!warnings.isEmpty()) {
-			final StringBuilder b = new StringBuilder();
-			boolean f = true;
-			for (String w : warnings) {
-				if (f) {
-					f = false;
-				} else {
-					b.append('\n');
-				}
-				b.append(w);
-			}
-			app.runInUIThread(new Runnable() {
-				@Override
-				public void run() {
-					Toast.makeText(getContext(), b.toString(), Toast.LENGTH_LONG).show();
-				}
-			});
-		}
-	}
-
-	@Override
-	public void onResume() {
-		super.onResume();
-		if (permissionRequested) {
-			showAppDirDialogV19();
-			permissionRequested = false;
-		}
-	}
-
-	@Override
-	public void onRequestPermissionsResult(int requestCode,
-	                                       String permissions[], int[] grantResults) {
-		permissionRequested = requestCode == DownloadActivity.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE;
-		if (permissionRequested
-				&& grantResults.length > 0
-				&& grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-			permissionGranted = true;
-		} else {
-			permissionGranted = false;
-			Toast.makeText(getContext(),
-					R.string.missing_write_external_storage_permission,
-					Toast.LENGTH_LONG).show();
 		}
 	}
 }

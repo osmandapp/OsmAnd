@@ -1,11 +1,15 @@
 package net.osmand.plus.settings;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
-import android.widget.Toast;
 
+import net.osmand.aidl.OsmandAidlApi;
 import net.osmand.aidl.OsmandAidlApi.ConnectedApp;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -32,6 +36,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 		return R.layout.profile_preference_toolbar_big;
 	}
 
+	@Override
 	protected String getToolbarTitle() {
 		return getString(R.string.configure_profile);
 	}
@@ -50,69 +55,99 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 		setupOsmandPluginsPref();
 	}
 
+	private void setupConfigureMapPref() {
+		Context ctx = getContext();
+		if (ctx == null) {
+			return;
+		}
+		Preference configureMap = findPreference("configure_map");
+		configureMap.setIcon(getContentIcon(R.drawable.ic_action_layers_dark));
+
+		Intent intent = new Intent(ctx, MapActivity.class);
+		intent.putExtra(OPEN_CONFIG_ON_MAP, MAP_CONFIG);
+		intent.putExtra(SELECTED_ITEM, getSelectedAppMode().getStringKey());
+		configureMap.setIntent(intent);
+	}
+
 	private void setupConnectedAppsPref() {
-		List<ConnectedApp> connectedApps = getMyApplication().getAidlApi().getConnectedApps();
+		OsmandApplication app = getMyApplication();
+		if (app == null) {
+			return;
+		}
+		List<ConnectedApp> connectedApps = app.getAidlApi().getConnectedApps();
 		for (ConnectedApp connectedApp : connectedApps) {
-			SwitchPreference preference = new SwitchPreference(getContext());
+			SwitchPreference preference = new SwitchPreference(app);
+			preference.setPersistent(false);
 			preference.setKey(connectedApp.getPack());
 			preference.setTitle(connectedApp.getName());
 			preference.setIcon(connectedApp.getIcon());
 			preference.setChecked(connectedApp.isEnabled());
-			preference.setLayoutResource(R.layout.preference_dialog_and_switch);
+			preference.setLayoutResource(R.layout.preference_switch);
 
 			getPreferenceScreen().addPreference(preference);
 		}
 	}
 
 	private void setupOsmandPluginsPref() {
+		Context ctx = getContext();
+		if (ctx == null) {
+			return;
+		}
 		List<OsmandPlugin> plugins = OsmandPlugin.getVisiblePlugins();
 		for (OsmandPlugin plugin : plugins) {
-			SwitchPreferenceEx preference = new SwitchPreferenceEx(getContext());
+			SwitchPreferenceEx preference = new SwitchPreferenceEx(ctx);
+			preference.setPersistent(false);
 			preference.setKey(plugin.getId());
 			preference.setTitle(plugin.getName());
-			preference.setIcon(getContentIcon(plugin.getLogoResourceId()));
+			preference.setIcon(getPluginIcon(plugin));
 			preference.setChecked(plugin.isActive());
 			preference.setLayoutResource(R.layout.preference_dialog_and_switch);
-
-			Intent intent = new Intent(getContext(), PluginActivity.class);
-			intent.putExtra(PluginActivity.EXTRA_PLUGIN_ID, plugin.getId());
-			preference.setIntent(intent);
+			preference.setIntent(getPluginIntent(plugin));
 
 			getPreferenceScreen().addPreference(preference);
 		}
 	}
 
-	private void setupConfigureMapPref() {
-		Preference configureMap = findPreference("configure_map");
-		configureMap.setIcon(getContentIcon(R.drawable.ic_action_layers_dark));
-
-		Intent intent = new Intent(getActivity(), MapActivity.class);
-		intent.putExtra(OPEN_CONFIG_ON_MAP, MAP_CONFIG);
-		intent.putExtra(SELECTED_ITEM, getSelectedAppMode().getStringKey());
-		configureMap.setIntent(intent);
+	private Drawable getPluginIcon(OsmandPlugin plugin) {
+		int iconResId = plugin.getLogoResourceId();
+		return plugin.isActive() ? getActiveIcon(iconResId) : getContentIcon(iconResId);
 	}
 
-	@Override
-	public boolean onPreferenceClick(Preference preference) {
-		if (preference.getKey().equals("configure_map")) {
-			getActivity().getSupportFragmentManager().beginTransaction().remove(this).commit();
-			return false;
+	private Intent getPluginIntent(OsmandPlugin plugin) {
+		Intent intent;
+		final Class<? extends Activity> settingsActivity = plugin.getSettingsActivity();
+		if (settingsActivity != null && !plugin.needsInstallation()) {
+			intent = new Intent(getContext(), settingsActivity);
+		} else {
+			intent = new Intent(getContext(), PluginActivity.class);
+			intent.putExtra(PluginActivity.EXTRA_PLUGIN_ID, plugin.getId());
 		}
-
-		return super.onPreferenceClick(preference);
+		return intent;
 	}
 
 	@Override
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
 		String key = preference.getKey();
+
 		OsmandPlugin plugin = OsmandPlugin.getPlugin(key);
 		if (plugin != null) {
-			Toast.makeText(getActivity(), "Change " + plugin.getId(), Toast.LENGTH_LONG).show();
-			return OsmandPlugin.enablePlugin(getActivity(), app, plugin, (Boolean) newValue);
+			if (newValue instanceof Boolean) {
+				if ((plugin.isActive() || !plugin.needsInstallation())) {
+					if (OsmandPlugin.enablePlugin(getActivity(), app, plugin, (Boolean) newValue)) {
+						updateAllSettings();
+						return true;
+					}
+				} else if (plugin.needsInstallation() && preference.getIntent() != null) {
+					startActivity(preference.getIntent());
+				}
+			}
+			return false;
 		}
-		ConnectedApp connectedApp = getMyApplication().getAidlApi().getConnectedApp(key);
+
+		OsmandAidlApi aidlApi = app.getAidlApi();
+		ConnectedApp connectedApp = aidlApi.getConnectedApp(key);
 		if (connectedApp != null) {
-			return getMyApplication().getAidlApi().switchEnabled(connectedApp);
+			return aidlApi.switchEnabled(connectedApp);
 		}
 
 		return super.onPreferenceChange(preference, newValue);

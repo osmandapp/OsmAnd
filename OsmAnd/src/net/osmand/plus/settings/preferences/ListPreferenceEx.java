@@ -6,6 +6,7 @@ import android.support.v7.preference.DialogPreference;
 import android.support.v7.preference.PreferenceDataStore;
 import android.util.AttributeSet;
 
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandSettings.PreferencesDataStore;
 
 public class ListPreferenceEx extends DialogPreference {
@@ -128,6 +129,8 @@ public class ListPreferenceEx extends DialogPreference {
 			Object value = ((PreferencesDataStore) dataStore).getValue(getKey(), defaultValue);
 			if (value instanceof Enum) {
 				return ((Enum) value).ordinal();
+			} else if (value instanceof ApplicationMode) {
+				return ((ApplicationMode) value).getStringKey();
 			} else {
 				return value;
 			}

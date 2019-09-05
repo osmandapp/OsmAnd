@@ -34,13 +34,8 @@ public class ProxySettingsFragment extends BaseSettingsFragment {
 		Preference mapDuringNavigationInfo = findPreference("proxy_preferences_info");
 		mapDuringNavigationInfo.setIcon(getContentIcon(R.drawable.ic_action_info_dark));
 
-		setupEnableProxyPref();
 		setupProxyHostPref();
 		setupProxyPortPref();
-	}
-
-	private void setupEnableProxyPref() {
-		SwitchPreference enableProxyPref = (SwitchPreference) findPreference(settings.ENABLE_PROXY.getId());
 	}
 
 	private void setupProxyHostPref() {
