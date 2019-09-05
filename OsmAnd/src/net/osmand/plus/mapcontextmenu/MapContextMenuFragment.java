@@ -1734,10 +1734,11 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 	private void showOnMap(LatLon latLon, boolean updateCoords, boolean alreadyAdjusted, int zoom) {
 		AnimateDraggingMapThread thread = map.getAnimatedDraggingThread();
-		int calculatedZoom = thread.calculateMoveZoom(null, latLon.getLatitude(), latLon.getLongitude(), null);
+		int calculatedZoom = menu.isZoomOutOnly() ? thread.calculateMoveZoom(null, latLon.getLatitude(), latLon.getLongitude(), null) : 0;
 		if (calculatedZoom > 0) {
 			zoom = Math.min(zoom, calculatedZoom);
 		}
+		menu.setZoomOutOnly(false);
 		LatLon calcLatLon = calculateCenterLatLon(latLon, zoom, updateCoords);
 		if (updateCoords) {
 			mapCenter = calcLatLon;
