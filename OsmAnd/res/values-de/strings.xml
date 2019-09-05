@@ -3244,4 +3244,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="get_discount_second_part">dann %1$s</string>
     <string name="cancel_subscription">Abonnement beenden</string>
     <string name="price_and_discount">%1$s • Spare %2$s</string>
+    <string name="get_discount_title">Erhalten Sie %1$d %2$s von %3$s Rabatt.</string>
+    <string name="get_discount_first_part">%1$s zuerst %2$s</string>
+    <string name="get_discount_first_few_part">%1$s zuerst %2$s</string>
 </resources>
