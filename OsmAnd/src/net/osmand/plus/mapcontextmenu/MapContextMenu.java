@@ -88,6 +88,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	private LatLon mapCenter;
 	private int mapPosition = 0;
 	private boolean centerMarker;
+	private boolean zoomOutOnly;
 	private int mapZoom;
 
 	private boolean inLocationUpdate = false;
@@ -284,6 +285,14 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 
 	public void setCenterMarker(boolean centerMarker) {
 		this.centerMarker = centerMarker;
+	}
+
+	public boolean isZoomOutOnly() {
+		return zoomOutOnly;
+	}
+
+	public void setZoomOutOnly(boolean zoomOutOnly) {
+		this.zoomOutOnly = zoomOutOnly;
 	}
 
 	public int getMapZoom() {
