@@ -3120,7 +3120,7 @@
     <string name="press_again_to_change_the_map_orientation">Trykk igjen for å endre kartorientering</string>
     <string name="app_mode_offroad">Terreng</string>
     <string name="edit_profile_setup_title">Sett opp profil</string>
-    <string name="routing_attr_max_num_changes_name">Antall endringer</string>
+    <string name="routing_attr_max_num_changes_name">Antall overganger</string>
     <string name="app_mode_shuttle_bus">Pendlebuss</string>
     <string name="app_mode_subway">Tunnelbane</string>
     <string name="select_base_profile_dialog_message">Baser din egendefinerte profil på en av de forvalgte programprofilene, dette definerer grunnleggende oppsett, som forvalg synliget for miniprogrammer, enheter for hastighet og distanse. Dette er de forvalgte programprofilene, sammen med eksempler på egentilpassede profiler de kan utvides til:</string>
@@ -3183,4 +3183,18 @@
     <string name="sett_wunderlinq_ext_input">WunderLINQ</string>
     <string name="shared_string_default">Forvalg</string>
     <string name="shared_string_file_is_saved">% lagret</string>
+    <string name="day">Dag</string>
+    <string name="days_2_4">Dager</string>
+    <string name="days_5">Dager</string>
+    <string name="week">Uke</string>
+    <string name="weeks_2_4">Uker</string>
+    <string name="weeks_5">Uker</string>
+    <string name="month">Måned</string>
+    <string name="months_2_4">Måneder</string>
+    <string name="months_5">Måneder</string>
+    <string name="year">År</string>
+    <string name="years_2_4">År</string>
+    <string name="years_5">År</string>
+    <string name="months_3">Tre måneder</string>
+    <string name="price_free">Gratis</string>
 </resources>
