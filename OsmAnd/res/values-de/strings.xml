@@ -3240,7 +3240,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="years_5">Jahre</string>
     <string name="months_3">Drei Monate</string>
     <string name="price_free">Kostenlos</string>
-    <string name="get_free_trial_title">Beginnen Sie Ihre %1$d %2$s Probezeit.</string>
+    <string name="get_free_trial_title">Probezeit für %1$d %2$s beginnen.</string>
     <string name="get_discount_second_part">dann %1$s</string>
     <string name="cancel_subscription">Abonnement beenden</string>
     <string name="price_and_discount">%1$s • Spare %2$s</string>
