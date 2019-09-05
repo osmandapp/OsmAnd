@@ -3238,4 +3238,9 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="get_discount_first_part">%1$s dla pierwszych %2$s</string>
     <string name="cancel_subscription">Anuluj subskrypcję</string>
     <string name="price_and_discount">%1$s • Zapisz %2$s</string>
+    <string name="months_2_4">Miesięcy</string>
+    <string name="months_5">Miesięcy</string>
+    <string name="years_2_4">Lat</string>
+    <string name="years_5">Lata</string>
+    <string name="price_free">Darmowy</string>
 </resources>
