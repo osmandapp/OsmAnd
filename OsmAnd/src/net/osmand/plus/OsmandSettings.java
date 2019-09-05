@@ -948,7 +948,7 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> FIRST_MAP_IS_DOWNLOADED = new BooleanPreference(
 			"first_map_is_downloaded", false);
 
-	public final CommonPreference<Boolean> DRIVING_REGION_AUTOMATIC = new BooleanPreference("driving_region_automatic", true).makeGlobal().cache();
+	public final CommonPreference<Boolean> DRIVING_REGION_AUTOMATIC = new BooleanPreference("driving_region_automatic", true).makeProfile().cache();
 	public final OsmandPreference<DrivingRegion> DRIVING_REGION = new EnumIntPreference<DrivingRegion>(
 			"default_driving_region", DrivingRegion.EUROPE_ASIA, DrivingRegion.values()) {
 		protected boolean setValue(Object prefs, DrivingRegion val) {

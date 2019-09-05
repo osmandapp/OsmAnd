@@ -113,6 +113,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 	private void setupDrivingRegionPref() {
 		Preference defaultDrivingRegion = findPreference(settings.DRIVING_REGION.getId());
 		defaultDrivingRegion.setIcon(getContentIcon(R.drawable.ic_action_car_dark));
+		defaultDrivingRegion.setSummary(getString(settings.DRIVING_REGION_AUTOMATIC.get() ? R.string.driving_region_automatic : settings.DRIVING_REGION.get().name));
 	}
 
 	private void setupUnitsOfLengthPref() {
