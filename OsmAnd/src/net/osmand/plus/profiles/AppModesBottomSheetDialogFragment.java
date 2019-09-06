@@ -1,8 +1,5 @@
 package net.osmand.plus.profiles;
 
-import static net.osmand.plus.profiles.SettingsProfileFragment.IS_USER_PROFILE;
-import static net.osmand.plus.profiles.SettingsProfileFragment.PROFILE_STRING_KEY;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,30 +8,25 @@ import android.support.v7.widget.RecyclerView;
 import android.view.ContextThemeWrapper;
 import android.view.View;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
-import net.osmand.plus.profiles.ProfileMenuAdapter.ProfileMenuAdapterListener;
 
-public class AppModesBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
+import static net.osmand.plus.profiles.SettingsProfileFragment.IS_USER_PROFILE;
+import static net.osmand.plus.profiles.SettingsProfileFragment.PROFILE_STRING_KEY;
 
-	private List<ApplicationMode> allModes = new ArrayList<>();
-	private Set<ApplicationMode> selectedModes = new HashSet<>();
+public abstract class AppModesBottomSheetDialogFragment<T extends AbstractProfileMenuAdapter> extends MenuBottomSheetDialogFragment {
 
-	private int themeRes;
-	private ProfileMenuAdapter adapter;
-	private RecyclerView recyclerView;
-
-	private ProfileMenuAdapterListener listener;
 	private UpdateMapRouteMenuListener updateMapRouteMenuListener;
+	protected AbstractProfileMenuAdapter.ButtonPressedListener buttonPressedListener;
+	protected AbstractProfileMenuAdapter.ProfilePressedListener profilePressedListener;
+	
+	private int themeRes;
+	protected T adapter;
+	private RecyclerView recyclerView;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -52,30 +44,43 @@ public class AppModesBottomSheetDialogFragment extends MenuBottomSheetDialogFrag
 	}
 
 	@Override
+	public void createMenuItems(Bundle savedInstanceState) {
+		themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
+		adapter = getMenuAdapter();
+		recyclerView = new RecyclerView(getContext());
+		recyclerView = (RecyclerView) View
+				.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.recyclerview, null);
+		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+		recyclerView.setAdapter(adapter);
+		items.add(new TitleItem(getTitle()));
+		items.add(new BaseBottomSheetItem.Builder().setCustomView(recyclerView).create());
+	}
+	
+	protected abstract String getTitle();
+
+	protected abstract void getData();
+	
+	protected abstract T getMenuAdapter();
+	
+	public void setUpdateMapRouteMenuListener(
+		UpdateMapRouteMenuListener updateMapRouteMenuListener) {
+		this.updateMapRouteMenuListener = updateMapRouteMenuListener;
+	}
+
+	public interface UpdateMapRouteMenuListener {
+		void updateAppModeMenu();
+	}
+
+	@Override
 	public void onResume() {
 		super.onResume();
-		if (listener == null) {
-			listener = new ProfileMenuAdapterListener() {
-				@Override
-				public void onProfileSelected(ApplicationMode item, boolean selected) {
-					if (selected) {
-						selectedModes.add(item);
-					} else {
-						selectedModes.remove(item);
-					}
-					ApplicationMode.changeProfileAvailability(item, selected, getMyApplication());
-				}
+		adapter.setButtonPressedListener(getButtonPressedListener());
+		adapter.setProfilePressedListener(getProfilePressedListener());
+	}
 
-				@Override
-				public void onProfilePressed(ApplicationMode item) {
-					Intent intent = new Intent(getActivity(), EditProfileActivity.class);
-					intent.putExtra(PROFILE_STRING_KEY, item.getStringKey());
-					if (item.isCustomProfile()) {
-						intent.putExtra(IS_USER_PROFILE, true);
-					}
-					startActivity(intent);
-				}
-
+	public AbstractProfileMenuAdapter.ButtonPressedListener getButtonPressedListener() {
+		if (buttonPressedListener == null) {
+			buttonPressedListener = new AbstractProfileMenuAdapter.ButtonPressedListener() {
 				@Override
 				public void onButtonPressed() {
 					OsmandApplication app = requiredMyApplication();
@@ -85,43 +90,23 @@ public class AppModesBottomSheetDialogFragment extends MenuBottomSheetDialogFrag
 				}
 			};
 		}
-		adapter.setListener(listener);
-		allModes = new ArrayList<>(ApplicationMode.allPossibleValues());
-		allModes.remove(ApplicationMode.DEFAULT);
-		adapter.updateItemsList(allModes,
-			new LinkedHashSet<>(ApplicationMode.values(getMyApplication())));
-		setupHeightAndBackground(getView());
+		return buttonPressedListener;
 	}
 
-	private void getData() {
-		allModes.addAll(ApplicationMode.allPossibleValues());
-		allModes.remove(ApplicationMode.DEFAULT);
-		selectedModes.addAll(ApplicationMode.values(getMyApplication()));
-		selectedModes.remove(ApplicationMode.DEFAULT);
-	}
-
-	@Override
-	public void createMenuItems(Bundle savedInstanceState) {
-
-		themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
-		adapter = new ProfileMenuAdapter(allModes, selectedModes, getMyApplication(), getString(R.string.shared_string_manage), nightMode);
-		recyclerView = new RecyclerView(getContext());
-		recyclerView = (RecyclerView) View
-			.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.recyclerview, null);
-		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-		recyclerView.setAdapter(adapter);
-
-
-		items.add(new TitleItem(getString(R.string.application_profiles)));
-		items.add(new BaseBottomSheetItem.Builder().setCustomView(recyclerView).create());
-	}
-
-	public void setUpdateMapRouteMenuListener(
-		UpdateMapRouteMenuListener updateMapRouteMenuListener) {
-		this.updateMapRouteMenuListener = updateMapRouteMenuListener;
-	}
-
-	public interface UpdateMapRouteMenuListener {
-		void updateAppModeMenu();
+	public AbstractProfileMenuAdapter.ProfilePressedListener getProfilePressedListener() {
+		if (profilePressedListener == null) {
+			profilePressedListener = new AbstractProfileMenuAdapter.ProfilePressedListener() {
+				@Override
+				public void onProfilePressed(ApplicationMode item) {
+					Intent intent = new Intent(getActivity(), EditProfileActivity.class);
+					intent.putExtra(PROFILE_STRING_KEY, item.getStringKey());
+					if (item.isCustomProfile()) {
+						intent.putExtra(IS_USER_PROFILE, true);
+					}
+					startActivity(intent);
+				}
+			};
+		}
+		return profilePressedListener;
 	}
 }

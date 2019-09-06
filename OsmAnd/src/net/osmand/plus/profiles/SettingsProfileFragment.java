@@ -25,8 +25,9 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndFragment;
-import net.osmand.plus.profiles.ProfileMenuAdapter.ProfileMenuAdapterListener;
 import net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.SelectProfileListener;
+import net.osmand.plus.profiles.AbstractProfileMenuAdapter.*;
+import net.osmand.plus.profiles.ConfigureProfileMenuAdapter.*;
 
 import org.apache.commons.logging.Log;
 
@@ -39,11 +40,12 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 	public static final String IS_USER_PROFILE = "user_profile";
 
 
-	private ProfileMenuAdapter adapter;
+	private ConfigureProfileMenuAdapter adapter;
 	private RecyclerView recyclerView;
 	private LinearLayout addNewProfileBtn;
 
-	ProfileMenuAdapterListener listener = null;
+	private ProfilePressedListener profilePressedListener;
+	private ProfileSelectedListener profileSelectedListener;
 	SelectProfileListener typeListener = null;
 
 	private List<ApplicationMode> allAppModes;
@@ -85,7 +87,7 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 			}
 		});
 
-		adapter = new ProfileMenuAdapter(allAppModes, availableAppModes, getMyApplication(), null, !getMyApplication().getSettings().isLightContent());
+		adapter = new ConfigureProfileMenuAdapter(allAppModes, availableAppModes, getMyApplication(), null, !getMyApplication().getSettings().isLightContent());
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 		recyclerView.setAdapter(adapter);
 		return view;
@@ -94,18 +96,8 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		if (listener == null) {
-			listener = new ProfileMenuAdapterListener() {
-				@Override
-				public void onProfileSelected(ApplicationMode am, boolean selected) {
-					if(selected) {
-						availableAppModes.add(am);
-					} else {
-						availableAppModes.remove(am);
-					}
-					ApplicationMode.changeProfileAvailability(am, selected, getMyApplication());
-				}
-
+		if (profilePressedListener == null) {
+			profilePressedListener = new ProfilePressedListener() {
 				@Override
 				public void onProfilePressed(ApplicationMode item) {
 					Intent intent = new Intent(getActivity(), EditProfileActivity.class);
@@ -115,14 +107,23 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 					}
 					startActivity(intent);
 				}
-
+			};
+		}
+		if (profileSelectedListener == null) {
+			profileSelectedListener = new ProfileSelectedListener() {
 				@Override
-				public void onButtonPressed() {
+				public void onProfileSelected(ApplicationMode item, boolean isChecked) {
+					if(isChecked) {
+						availableAppModes.add(item);
+					} else {
+						availableAppModes.remove(item);
+					}
+					ApplicationMode.changeProfileAvailability(item, isChecked, getMyApplication());
 				}
 			};
 		}
-		adapter.setListener(listener);
-
+		adapter.setProfilePressedListener(profilePressedListener);
+		adapter.setProfileSelectedListener(profileSelectedListener);
 		getBaseProfileListener();
 
 		allAppModes = new ArrayList<>(ApplicationMode.allPossibleValues());

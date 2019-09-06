@@ -125,6 +125,7 @@
         <item name="actionModeBackground">@color/app_bar_color_light</item>
         <item name="actionBarStyle">@style/Widget.Styled.ActionBarLight</item>
         <item name="bg_color">@color/list_background_color_light</item>
+        <item name="bg_circle">@drawable/circle_background_light</item>
         <item name="btn_round">@drawable/btn_round_light</item>
         <item name="btn_round_border">@drawable/btn_round_border_light</item>
         <item name="btn_round_border_2">@drawable/btn_round_border_light_2</item>
@@ -397,6 +398,7 @@
         <item name="actionModeBackground">@color/app_bar_color_dark</item>
         <item name="actionBarStyle">@style/Widget.Styled.ActionBarDark</item>
         <item name="bg_color">@color/list_background_color_dark</item>
+        <item name="bg_circle">@drawable/circle_background_dark</item>
         <item name="btn_round">@drawable/btn_round_dark</item>
         <item name="btn_round_border">@drawable/btn_round_border_dark</item>
         <item name="btn_round_border_2">@drawable/btn_round_border_dark_2</item>
