@@ -261,7 +261,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="shared_string_online_maps">Onlinekort</string>
     <string name="online_map_settings_descr">Konfigurer online- eller cachelagrede kilder til kortbrikker.</string>
     <string name="osmand_background_plugin_description">Viser indstillinger til at aktivere baggrundssporing og navigation ved periodisk at vække GPS-enheden (med slukket skærm).</string>
-    <string name="osmand_accessibility_description">Udvidelsen gør tilgængelighedsfunktioner tilgængelige direkte i OsmAnd. Det letter fx justering af hastigheden for talesyntese, konfiguration af skærmnavigation med styrekryds (D-pad), brug af en styrekugle til zoomstyring, eller tekst-til-tale-tilbagemeldinger, fx til at sige din position højt.</string>
+    <string name="osmand_accessibility_description">Udvidelsen gør tilgængelighedsfunktioner tilgængelige direkte i OsmAnd. Det letter fx justering af hastigheden for talesyntese, konfiguration af skærmnavigation med styrekryds (D-pad), brug af en styrekugle til zoomstyring, eller tekst-til-tale-tilbagemeldinger, fx automatisk at annoncere positionen.</string>
     <string name="osmand_rastermaps_plugin_description">Udvidelsen giver adgang til mange typer af online (såkaldte brikker eller raster) kort, fra foruddefinerede OpenStreetMap kortbrikker (som Mapnik) til satellitbilleder og lag til særlig anvendelse som vejr-, klima- eller geologiskekort og reliefskygger osv. 
 \n 
 \nAlle disse kort kan enten bruges som det vigtigste (primær) kort, der skal vises på skærmen, eller som en over- eller underlejring til et andet basiskort (såsom OsmAnd standard offline kort). For at gøre underlejringskortet mere synlig, kan visse elementer af OsmAnd vektorkort nemt skjules via \'Konfigurer kort\' menuen som ønsket. 
@@ -332,8 +332,8 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="direction_style_clockwise">Med uret (12 sektioner)</string>
     <string name="settings_direction_style">Retningsstil</string>
     <string name="settings_direction_style_descr">Vælg stil til at udtrykke relative retninger under bevægelse.</string>
-    <string name="auto_announce_on">Begynd autoannoncering</string>
-    <string name="auto_announce_off">Stop autoannoncering</string>
+    <string name="auto_announce_on">Start automatisk annonceringen</string>
+    <string name="auto_announce_off">Stop automatisk annonceringen</string>
     <string name="i_am_here">Jeg er her</string>
     <string name="zoom_by_trackball_descr">Skift kortzoom via vandrette trackball bevægelser.</string>
     <string name="zoom_by_trackball">Brug trackball til zoom</string>
@@ -403,11 +403,11 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="use_transparent_map_theme">Gennemsigtigt tema</string>
     <string name="native_library_not_supported">Indbygget bibliotek understøttes ikke på enheden.</string>
     <string name="init_native_library">Initialisere indbygget bibliotek…</string>
-    <string name="choose_auto_follow_route">Autocentrer kortvisning</string>
+    <string name="choose_auto_follow_route">Automatisk centrering af kortvisning</string>
     <string name="choose_auto_follow_route_descr">Tid indtil kortvisning synkroniseres med den aktuel position.</string>
-    <string name="auto_follow_route_navigation">Autocentrer kun navigation</string>
+    <string name="auto_follow_route_navigation">Kun automatisk centrering af navigation</string>
     <string name="auto_follow_route_navigation_descr">Autocentrer kun kortvisning under navigation.</string>
-    <string name="auto_follow_location_enabled">Autocentrer kort.</string>
+    <string name="auto_follow_location_enabled">Automatisk centrering af kortvisning aktiv.</string>
     <string name="pref_vector_rendering">Specifikke indstillinger for vektorrendering</string>
     <string name="pref_overlay">Over-/underlejring</string>
     <string name="pref_raster_map">Indstillinger for kortkilde</string>
@@ -1046,7 +1046,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="route_descr_destination">Destination</string>
     <string name="base_world_map">Globalt grundkort</string>
     <string name="map_magnifier">Kortlup</string>
-    <string name="auto_zoom_none">Ingen autozoom</string>
+    <string name="auto_zoom_none">Ingen automatisk zoom</string>
     <string name="auto_zoom_far">Mellemafstand</string>
     <string name="auto_zoom_farthest">Lange afstande</string>
     <string name="auto_zoom_close">Tæt på</string>
@@ -2906,7 +2906,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="swap_start_and_destination">Skift start og destination</string>
     <string name="voice_announcements">Stemmemeddelelser</string>
     <string name="arrive_at_time">Ankommer %1$s</string>
-    <string name="quick_action_switch_day_night_descr">Tryk på handlingsknappen skifter mellem dag- og nattilstand</string>
+    <string name="quick_action_switch_day_night_descr">Tryk på genvejsknappen skifter mellem dag- og nattilstand</string>
     <string name="routeInfo_roadClass_name">Vejtype</string>
     <string name="routeInfo_surface_name">Overflade</string>
     <string name="routeInfo_smoothness_name">Jævnhed</string>
@@ -2926,7 +2926,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="exit_at">Stå af ved</string>
     <string name="sit_on_the_stop">Stig på ved stoppested</string>
     <string name="quick_action_show_hide_gpx_tracks">Vis/skjul GPX spor</string>
-    <string name="quick_action_show_hide_gpx_tracks_descr">Tryk på handlingsknappen viser eller skjuler valgte GPX spor på kortet</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Tryk på genvejssknappen viser eller skjuler valgte GPX spor på kortet</string>
     <string name="quick_action_gpx_tracks_hide">Skjul GPX spor</string>
     <string name="quick_action_gpx_tracks_show">Vis GPX spor</string>
     <string name="add_destination_query">Tilføj en destination først</string>
