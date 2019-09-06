@@ -156,19 +156,6 @@ public abstract class OsmandPlugin {
 		activatePlugins(app, enabledPlugins);
 	}
 
-	public static void updateActivatedPlugins(@NonNull OsmandApplication app) {
-		Set<String> enabledPlugins = app.getSettings().getEnabledPlugins();
-		for (OsmandPlugin plugin : allPlugins) {
-			try {
-				if (plugin.init(app, null)) {
-					plugin.setActive(enabledPlugins.contains(plugin.getId()));
-				}
-			} catch (Exception e) {
-				LOG.error("Plugin initialization failed " + plugin.getId(), e);
-			}
-		}
-	}
-
 	private static void activatePlugins(OsmandApplication app, Set<String> enabledPlugins) {
 		for (OsmandPlugin plugin : allPlugins) {
 			if (enabledPlugins.contains(plugin.getId()) || plugin.isActive()) {

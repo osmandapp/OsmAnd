@@ -1,7 +1,7 @@
 package net.osmand.plus.settings;
 
 import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.preference.CheckBoxPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
@@ -23,6 +23,7 @@ import net.osmand.Location;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
+import net.osmand.plus.settings.bottomsheets.ChangeGeneralProfilesPrefBottomSheet;
 
 
 public class CoordinatesFormatFragment extends BaseSettingsFragment {
@@ -158,8 +159,6 @@ public class CoordinatesFormatFragment extends BaseSettingsFragment {
 			spannableBuilder.append(" ");
 			spannableBuilder.append(getString(R.string.shared_string_read_more));
 
-			final int color = ContextCompat.getColor(app, isNightMode() ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
-
 			ClickableSpan clickableSpan = new ClickableSpan() {
 				@Override
 				public void onClick(@NonNull View widget) {
@@ -168,7 +167,7 @@ public class CoordinatesFormatFragment extends BaseSettingsFragment {
 
 				@Override
 				public void updateDrawState(@NonNull TextPaint ds) {
-					ds.setColor(color);
+					super.updateDrawState(ds);
 					ds.setUnderlineText(false);
 				}
 			};
@@ -180,18 +179,19 @@ public class CoordinatesFormatFragment extends BaseSettingsFragment {
 	}
 
 	@Override
-	public boolean onPreferenceClick(Preference preference) {
+	public boolean onPreferenceChange(Preference preference, Object newValue) {
 		String key = preference.getKey();
-
-		updateSelectedFormatPrefs(key);
 
 		int newFormat = getCoordinatesFormatForKey(key);
 		if (newFormat != -1) {
-			settings.COORDINATES_FORMAT.set(newFormat);
-			return true;
+			FragmentManager fragmentManager = getFragmentManager();
+			if (fragmentManager != null) {
+				ChangeGeneralProfilesPrefBottomSheet.showInstance(fragmentManager, settings.COORDINATES_FORMAT.getId(), newFormat, this);
+				return false;
+			}
 		}
 
-		return super.onPreferenceClick(preference);
+		return super.onPreferenceChange(preference, newValue);
 	}
 
 	private void updateSelectedFormatPrefs(String key) {

@@ -1,4 +1,4 @@
-package net.osmand.plus.settings;
+package net.osmand.plus.settings.bottomsheets;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -14,11 +14,11 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.R;
-import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.LongDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.settings.BaseSettingsFragment;
 
 import org.apache.commons.logging.Log;
 
@@ -26,11 +26,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class ChangeGeneralProfilesPrefBottomSheet extends MenuBottomSheetDialogFragment {
+public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSheet {
 
 	public static final String TAG = "ChangeGeneralProfilesPrefBottomSheet";
-
-	private static final String PREFERENCE_ID = "preference_id";
 
 	private static final Log LOG = PlatformUtil.getLog(ChangeGeneralProfilesPrefBottomSheet.class);
 

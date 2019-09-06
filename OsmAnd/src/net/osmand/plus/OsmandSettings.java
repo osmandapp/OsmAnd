@@ -8,8 +8,6 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
-import android.media.AudioAttributes;
-import android.media.AudioManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
@@ -21,9 +19,9 @@ import android.support.v4.util.Pair;
 import android.support.v7.preference.PreferenceDataStore;
 
 import net.osmand.IndexConstants;
-import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
 import net.osmand.ValueHolder;
+import net.osmand.aidl.OsmandAidlApi;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.map.ITileSource;
@@ -43,8 +41,6 @@ import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
-
-import org.apache.commons.logging.Log;
 
 import java.io.File;
 import java.io.IOException;
@@ -247,30 +243,45 @@ public class OsmandSettings {
 						DEFAULT_APPLICATION_MODE.set(appMode);
 						return true;
 					}
-				} else if (value instanceof ApplicationMode) {
-					DEFAULT_APPLICATION_MODE.set((ApplicationMode) value);
+				}
+			} else if (preference == METRIC_SYSTEM) {
+				MetricsConstants metricSystem = null;
+				if (value instanceof String) {
+					String metricSystemName = (String) value;
+					try {
+						metricSystem = MetricsConstants.valueOf(metricSystemName);
+					} catch (IllegalArgumentException e) {
+						return false;
+					}
+				} else if (value instanceof Integer) {
+					int index = (Integer) value;
+					if (index >= 0 && index < MetricsConstants.values().length) {
+						metricSystem = MetricsConstants.values()[index];
+					}
+				}
+				if (metricSystem != null) {
+					METRIC_SYSTEM.set(metricSystem);
 					return true;
 				}
-			} else if (preference == METRIC_SYSTEM && value instanceof String) {
-				String metricSystemName = (String) value;
-				MetricsConstants metricSystem;
-				try {
-					metricSystem = MetricsConstants.valueOf(metricSystemName);
-				} catch (IllegalArgumentException e) {
-					return false;
+			} else if (preference == SPEED_SYSTEM) {
+				SpeedConstants speedSystem = null;
+				if (value instanceof String) {
+					String speedSystemName = (String) value;
+					try {
+						speedSystem = SpeedConstants.valueOf(speedSystemName);
+					} catch (IllegalArgumentException e) {
+						return false;
+					}
+				} else if (value instanceof Integer) {
+					int index = (Integer) value;
+					if (index >= 0 && index < SpeedConstants.values().length) {
+						speedSystem = SpeedConstants.values()[index];
+					}
 				}
-				METRIC_SYSTEM.setModeValue(mode, metricSystem);
-				return true;
-			} else if (preference == SPEED_SYSTEM && value instanceof String) {
-				String speedSystemName = (String) value;
-				SpeedConstants speedSystem;
-				try {
-					speedSystem = SpeedConstants.valueOf(speedSystemName);
-				} catch (IllegalArgumentException e) {
-					return false;
+				if (speedSystem != null) {
+					SPEED_SYSTEM.set(speedSystem);
+					return true;
 				}
-				SPEED_SYSTEM.setModeValue(mode, speedSystem);
-				return true;
 			} else if (preference instanceof BooleanPreference) {
 				if (value instanceof Boolean) {
 					((BooleanPreference) preference).setModeValue(mode, (Boolean) value);
@@ -349,13 +360,20 @@ public class OsmandSettings {
 		@Override
 		public boolean set(ApplicationMode val) {
 			ApplicationMode oldMode = currentMode;
-			boolean changed = settingsAPI.edit(globalPreferences).putString(getId(), val.getStringKey()).commit();
-			if (changed) {
+			boolean valueSaved = settingsAPI.edit(globalPreferences).putString(getId(), val.getStringKey()).commit();
+			if (valueSaved) {
 				currentMode = val;
 				profilePreferences = getProfilePreferences(currentMode);
+
+				OsmandAidlApi aidlApi = ctx.getAidlApi();
+				if (aidlApi != null) {
+					aidlApi.loadConnectedApps();
+					OsmandPlugin.initPlugins(ctx);
+				}
+
 				fireEvent(oldMode);
 			}
-			return changed;
+			return valueSaved;
 		}
 
 		@Override
@@ -475,15 +493,15 @@ public class OsmandSettings {
 			if (global) {
 				return set(obj);
 			}
-			Object profilePrefs = getProfilePreferences(mode);
-			boolean changed = setValue(profilePrefs, obj);
 
-			if (changed && cache && cachedPreference == profilePrefs) {
+			Object profilePrefs = getProfilePreferences(mode);
+			boolean valueSaved = setValue(profilePrefs, obj);
+			if (valueSaved && cache && cachedPreference == profilePrefs) {
 				cachedValue = obj;
 			}
-
 			fireEvent(obj);
-			return changed;
+
+			return valueSaved;
 		}
 
 		public T getProfileDefaultValue(ApplicationMode mode) {
@@ -1241,11 +1259,11 @@ public class OsmandSettings {
 	public final CommonPreference<Boolean> ENABLE_PROXY = new BooleanPreference("enable_proxy", false) {
 		@Override
 		protected boolean setValue(Object prefs, Boolean val) {
-			boolean valueSet = super.setValue(prefs, val);
-			if (valueSet) {
+			boolean valueSaved = super.setValue(prefs, val);
+			if (valueSaved) {
 				NetworkUtils.setProxy(val ? PROXY_HOST.get() : null, val ? PROXY_PORT.get() : 0);
 			}
-			return valueSet;
+			return valueSaved;
 		}
 	}.makeGlobal();
 
@@ -1327,36 +1345,36 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> ANNOUNCE_WPT = new BooleanPreference("announce_wpt", true) {
 		@Override
 		protected boolean setValue(Object prefs, Boolean val) {
-			boolean changed = super.setValue(prefs, val);
-			if (changed) {
+			boolean valueSaved = super.setValue(prefs, val);
+			if (valueSaved) {
 				SHOW_WPT.set(val);
 			}
 
-			return changed;
+			return valueSaved;
 		}
 	}.makeProfile().cache();
 
 	public final OsmandPreference<Boolean> ANNOUNCE_NEARBY_FAVORITES = new BooleanPreference("announce_nearby_favorites", false) {
 		@Override
 		protected boolean setValue(Object prefs, Boolean val) {
-			boolean changed = super.setValue(prefs, val);
-			if (changed) {
+			boolean valueSaved = super.setValue(prefs, val);
+			if (valueSaved) {
 				SHOW_NEARBY_FAVORITES.set(val);
 			}
 
-			return changed;
+			return valueSaved;
 		}
 	}.makeProfile().cache();
 
 	public final OsmandPreference<Boolean> ANNOUNCE_NEARBY_POI = new BooleanPreference("announce_nearby_poi", false) {
 		@Override
 		protected boolean setValue(Object prefs, Boolean val) {
-			boolean changed = super.setValue(prefs, val);
-			if (changed) {
+			boolean valueSaved = super.setValue(prefs, val);
+			if (valueSaved) {
 				SHOW_NEARBY_POI.set(val);
 			}
 
-			return changed;
+			return valueSaved;
 		}
 	}.makeProfile().cache();
 
@@ -1537,25 +1555,25 @@ public class OsmandSettings {
 	public final OsmandPreference<Integer> AUDIO_STREAM_GUIDANCE = new IntPreference("audio_stream", 3/*AudioManager.STREAM_MUSIC*/) {
 		@Override
 		protected boolean setValue(Object prefs, Integer stream) {
-			boolean valueSet = super.setValue(prefs, stream);
+			boolean valueSaved = super.setValue(prefs, stream);
 
-			if (valueSet) {
+			if (valueSaved) {
 				CommandPlayer player = ctx.getPlayer();
 				if (player != null) {
 					player.updateAudioStream(get());
 				}
 				// Sync corresponding AUDIO_USAGE value
 				ApplicationMode mode = APPLICATION_MODE.get();
-				if (stream == AudioManager.STREAM_MUSIC) {
-					AUDIO_USAGE.setModeValue(mode, AudioAttributes.USAGE_ASSISTANCE_NAVIGATION_GUIDANCE);
-				} else if (stream == AudioManager.STREAM_NOTIFICATION) {
-					AUDIO_USAGE.setModeValue(mode, AudioAttributes.USAGE_NOTIFICATION);
-				} else if (stream == AudioManager.STREAM_VOICE_CALL) {
-					AUDIO_USAGE.setModeValue(mode, AudioAttributes.USAGE_VOICE_COMMUNICATION);
+				if (stream == 3 /*AudioManager.STREAM_MUSIC*/) {
+					AUDIO_USAGE.setModeValue(mode, 12 /*AudioAttributes.USAGE_ASSISTANCE_NAVIGATION_GUIDANCE*/);
+				} else if (stream == 5 /*AudioManager.STREAM_NOTIFICATION*/) {
+					AUDIO_USAGE.setModeValue(mode, 5 /*AudioAttributes.USAGE_NOTIFICATION*/);
+				} else if (stream == 0 /*AudioManager.STREAM_VOICE_CALL*/) {
+					AUDIO_USAGE.setModeValue(mode, 2 /*AudioAttributes.USAGE_VOICE_COMMUNICATION*/);
 				}
 			}
 
-			return valueSet;
+			return valueSaved;
 		}
 	}.makeProfile();
 
@@ -3176,47 +3194,38 @@ public class OsmandSettings {
 
 	public class PreferencesDataStore extends PreferenceDataStore {
 
-		private final Log log = PlatformUtil.getLog(PreferencesDataStore.class);
-
 		@Override
 		public void putString(String key, @Nullable String value) {
 			setPreference(key, value);
-			log.debug("putString key " + key + " value " + value);
 		}
 
 		@Override
 		public void putStringSet(String key, @Nullable Set<String> values) {
 			setPreference(key, values);
-			log.debug("putStringSet key " + key + " value " + values);
 		}
 
 		@Override
 		public void putInt(String key, int value) {
 			setPreference(key, value);
-			log.debug("putInt key " + key + " value " + value);
 		}
 
 		@Override
 		public void putLong(String key, long value) {
 			setPreference(key, value);
-			log.debug("putLong key " + key + " value " + value);
 		}
 
 		@Override
 		public void putFloat(String key, float value) {
 			setPreference(key, value);
-			log.debug("putFloat key " + key + " value " + value);
 		}
 
 		@Override
 		public void putBoolean(String key, boolean value) {
 			setPreference(key, value);
-			log.debug("putBoolean key " + key + " value " + value);
 		}
 
 		public void putValue(String key, Object value) {
 			setPreference(key, value);
-			log.debug("putValue key " + key + " value " + value);
 		}
 
 		@Nullable
