@@ -4,7 +4,8 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
-	android:minHeight="52dp">
+	android:background="?attr/list_background_color"
+	android:minHeight="@dimen/bottom_sheet_list_item_height">
 
 	<ImageView
 		android:id="@android:id/icon"

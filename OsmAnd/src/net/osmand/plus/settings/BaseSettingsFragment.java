@@ -1,6 +1,7 @@
 package net.osmand.plus.settings;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -22,6 +23,8 @@ import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceFragmentCompat;
 import android.support.v7.preference.PreferenceScreen;
+import android.support.v7.view.ContextThemeWrapper;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -109,7 +112,13 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 
 		int toolbarRes = getToolbarResId();
 		if (toolbarRes != -1) {
-			View toolbarContainer = inflater.inflate(toolbarRes, null);
+			Context activityContext = getActivity();
+
+			final int themeRes = nightMode ? darkTheme : lightTheme;
+			final Context themedContext = new ContextThemeWrapper(activityContext, themeRes);
+			LayoutInflater themedInflater = LayoutInflater.from(themedContext);
+
+			View toolbarContainer = themedInflater.inflate(toolbarRes, null);
 			appBarLayout.addView(toolbarContainer);
 
 			view.findViewById(R.id.close_button).setOnClickListener(new View.OnClickListener() {
@@ -164,12 +173,28 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		if (toolbarDivider != null) {
 			toolbarDivider.setBackgroundColor(ContextCompat.getColor(app, iconColor));
 		}
+		view.setBackgroundColor(ContextCompat.getColor(app, getBackgroundColor()));
 	}
+
+	int darkTheme = R.style.OsmandDarkTheme;
+	int lightTheme = R.style.OsmandLightTheme;
 
 	@Override
 	public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
 		getPreferenceManager().setPreferenceDataStore(settings.getDataStore());
 		updatePreferencesScreen();
+	}
+
+	@Override
+	public RecyclerView onCreateRecyclerView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
+		Context activityContext = getActivity();
+
+		final int themeRes = nightMode ? darkTheme : lightTheme;
+		final Context themedContext = new ContextThemeWrapper(activityContext, themeRes);
+
+		LayoutInflater themedInflater = LayoutInflater.from(themedContext);
+
+		return super.onCreateRecyclerView(themedInflater, parent, savedInstanceState);
 	}
 
 	protected abstract void setupPreferences();
@@ -252,6 +277,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	}
 
 	public void updateAllSettings() {
+		getListView().getRecycledViewPool().clear();
 		getPreferenceScreen().removeAll();
 		updatePreferencesScreen();
 		updateToolbar(getView());
@@ -275,10 +301,10 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	protected int getStatusBarColorId() {
 		View view = getView();
 		if (view != null) {
-			if (Build.VERSION.SDK_INT >= 23 && !nightMode) {
+			if (Build.VERSION.SDK_INT >= 23 && !isNightMode()) {
 				view.setSystemUiVisibility(view.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 			}
-			return nightMode ? R.color.list_background_color_dark : R.color.list_background_color_light;
+			return isNightMode() ? R.color.list_background_color_dark : R.color.list_background_color_light;
 		}
 		return -1;
 	}
@@ -286,6 +312,11 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	@ColorRes
 	protected int getActiveProfileColor() {
 		return getSelectedAppMode().getIconColorInfo().getColor(isNightMode());
+	}
+
+	@ColorRes
+	protected int getBackgroundColor() {
+		return isNightMode() ? R.color.list_background_color_dark : R.color.list_background_color_light;
 	}
 
 	protected void registerPreference(Preference preference) {

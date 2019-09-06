@@ -4,11 +4,13 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.ColorRes;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 
 import net.osmand.aidl.OsmandAidlApi;
 import net.osmand.aidl.OsmandAidlApi.ConnectedApp;
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
@@ -41,18 +43,30 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 		return getString(R.string.configure_profile);
 	}
 
+	@ColorRes
+	protected int getBackgroundColor() {
+		return isNightMode() ? R.color.activity_background_color_dark : R.color.activity_background_color_light;
+	}
+
 	@Override
 	protected void setupPreferences() {
 		Preference generalSettings = findPreference("general_settings");
-		Preference navigationSettings = findPreference("navigation_settings");
 		Preference pluginSettings = findPreference("plugin_settings");
 
 		generalSettings.setIcon(getContentIcon(R.drawable.ic_action_settings));
-		navigationSettings.setIcon(getContentIcon(R.drawable.ic_action_gdirections_dark));
 
+		setupNavigationSettingsPref();
 		setupConfigureMapPref();
 		setupConnectedAppsPref();
 		setupOsmandPluginsPref();
+	}
+
+	private void setupNavigationSettingsPref() {
+		Preference navigationSettings = findPreference("navigation_settings");
+		navigationSettings.setIcon(getContentIcon(R.drawable.ic_action_gdirections_dark));
+		if (getSelectedAppMode() == ApplicationMode.DEFAULT) {
+			navigationSettings.setVisible(false);
+		}
 	}
 
 	private void setupConfigureMapPref() {

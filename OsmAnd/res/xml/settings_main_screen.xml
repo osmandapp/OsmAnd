@@ -18,14 +18,6 @@
 		android:title="@string/application_profiles" />
 
 	<Preference
-		android:key="configure_profile_general"
-		android:layout="@layout/preference_with_descr"
-		android:persistent="false"
-		android:title="@string/general_settings_2"
-		app:fragment="net.osmand.plus.settings.GeneralProfileSettingsFragment"
-		tools:icon="@drawable/ic_world_globe_dark" />
-
-	<Preference
 		android:key="configure_profile"
 		android:layout="@layout/preference_with_descr"
 		android:persistent="false"
