@@ -702,7 +702,7 @@
     <string name="where_am_i">Где я?</string>
     <string name="network_provider">Сеть</string>
     <string name="gps_provider">GPS</string>
-    <string name="int_seconds">секунд</string>
+    <string name="int_seconds">секунды</string>
     <string name="int_min">мин.</string>
     <string name="background_service_int_descr">Выберите интервал пробуждения для фоновой службы.</string>
     <string name="background_service_int">Интервал пробуждения GPS</string>
@@ -1698,7 +1698,7 @@
     <string name="back_to_map">Вернуться на карту</string>
     <string name="location_on_map">Координаты:\n Широта %1$s\n Долгота %2$s</string>
     <string name="shared_string_ellipsis">…</string>
-    <string name="shared_string_enabled">Включен</string>
+    <string name="shared_string_enabled">Включено</string>
     <string name="shared_string_disabled">Выключен</string>
     <string name="shared_string_never">Никогда</string>
     <string name="shared_string_and">и</string>
@@ -2671,7 +2671,7 @@
     <string name="shared_string_marker">Маркер</string>
     <string name="shared_string_without_name">Без имени</string>
     <string name="lang_lo">Лаосский</string>
-    <string name="day_off_label">вых.</string>
+    <string name="day_off_label">выкл</string>
     <string name="winter_and_ski_renderer">Зимний/лыжный</string>
     <string name="touring_view_renderer">Туристический</string>
     <string name="nautical_renderer">Морской</string>
