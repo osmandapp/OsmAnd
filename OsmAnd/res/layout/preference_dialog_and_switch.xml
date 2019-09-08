@@ -17,18 +17,17 @@
 			android:layout_width="@dimen/standard_icon_size"
 			android:layout_height="@dimen/standard_icon_size"
 			android:layout_gravity="center"
-			android:layout_marginStart="@dimen/content_padding"
 			android:layout_marginLeft="@dimen/content_padding"
-			android:layout_marginEnd="@dimen/content_padding_half"
-			android:layout_marginRight="@dimen/content_padding_half" />
+			android:layout_marginRight="@dimen/content_padding" />
 
 		<LinearLayout
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:layout_marginLeft="@dimen/content_padding"
+			android:layout_marginRight="@dimen/content_padding"
 			android:layout_weight="1"
-			android:orientation="vertical"
-			android:paddingLeft="@dimen/content_padding"
-			android:paddingRight="@dimen/content_padding">
+			android:orientation="vertical">
 
 			<net.osmand.plus.widgets.TextViewEx
 				android:id="@android:id/title"
@@ -52,13 +51,6 @@
 
 		</LinearLayout>
 
-		<View
-			android:layout_width="1dp"
-			android:layout_height="match_parent"
-			android:layout_marginTop="18dp"
-			android:layout_marginBottom="18dp"
-			android:background="?attr/divider_color_basic" />
-
 		<Switch
 			android:id="@android:id/switch_widget"
 			android:layout_width="wrap_content"
@@ -68,6 +60,13 @@
 			android:focusable="true"
 			android:paddingLeft="@dimen/content_padding"
 			android:paddingRight="@dimen/content_padding" />
+
+		<View
+			android:layout_width="1dp"
+			android:layout_height="match_parent"
+			android:layout_marginTop="18dp"
+			android:layout_marginBottom="18dp"
+			android:background="?attr/divider_color_basic" />
 
 	</LinearLayout>
 

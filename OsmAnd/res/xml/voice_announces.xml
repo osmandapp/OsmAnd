@@ -10,9 +10,10 @@
 
 	<Preference
 		android:key="voice_announces_info"
+		android:layout="@layout/preference_info"
 		android:persistent="false"
 		android:selectable="false"
-		android:summary="@string/voice_announces_info"
+		android:title="@string/voice_announces_info"
 		tools:icon="@drawable/ic_action_info_dark" />
 
 	<SwitchPreference
@@ -89,7 +90,7 @@
 
 	<PreferenceCategory
 		android:key="language_and_output"
-		android:layout="@layout/simple_preference_category"
+		android:layout="@layout/preference_category_with_descr"
 		android:title="@string/language_and_output" />
 
 	<net.osmand.plus.settings.preferences.ListPreferenceEx

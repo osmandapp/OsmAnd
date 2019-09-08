@@ -4,7 +4,7 @@
 
 	<PreferenceCategory
 		android:key="appearance_category"
-		android:layout="@layout/simple_preference_category"
+		android:layout="@layout/preference_category_with_descr"
 		android:title="@string/appearance" />
 
 	<net.osmand.plus.settings.preferences.ListPreferenceEx
@@ -24,7 +24,7 @@
 
 	<PreferenceCategory
 		android:key="units_and_formats"
-		android:layout="@layout/simple_preference_category"
+		android:layout="@layout/preference_category_with_descr"
 		android:title="@string/units_and_formats" />
 
 	<Preference
@@ -50,7 +50,7 @@
 
 	<PreferenceCategory
 		android:key="other"
-		android:layout="@layout/simple_preference_category"
+		android:layout="@layout/preference_category_with_descr"
 		android:title="@string/shared_string_other" />
 
 	<net.osmand.plus.settings.preferences.SwitchPreferenceEx

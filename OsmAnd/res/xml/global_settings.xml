@@ -15,16 +15,16 @@
 		android:layout="@layout/preference_with_descr"
 		android:title="@string/preferred_locale" />
 
-	<Preference
-		android:icon="@drawable/ic_action_folder"
-		android:key="external_storage_dir"
-		android:layout="@layout/preference_with_descr"
-		android:persistent="false"
-		android:title="@string/application_dir" />
+<!--	<Preference-->
+<!--		android:icon="@drawable/ic_action_folder"-->
+<!--		android:key="external_storage_dir"-->
+<!--		android:layout="@layout/preference_with_descr"-->
+<!--		android:persistent="false"-->
+<!--		android:title="@string/application_dir" />-->
 
 	<PreferenceCategory
 		android:key="privacy_and_security"
-		android:layout="@layout/simple_preference_category"
+		android:layout="@layout/preference_category_with_descr"
 		android:title="@string/application_profiles" />
 
 	<net.osmand.plus.settings.preferences.SwitchPreferenceEx

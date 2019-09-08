@@ -81,6 +81,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 		intent.putExtra(OPEN_CONFIG_ON_MAP, MAP_CONFIG);
 		intent.putExtra(SELECTED_ITEM, getSelectedAppMode().getStringKey());
 		configureMap.setIntent(intent);
+		configureMap.setVisible(false);
 	}
 
 	private void setupConnectedAppsPref() {

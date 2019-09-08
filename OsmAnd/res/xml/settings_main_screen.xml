@@ -14,7 +14,7 @@
 
 	<PreferenceCategory
 		android:key="application_profiles"
-		android:layout="@layout/simple_preference_category"
+		android:layout="@layout/preference_category_with_descr"
 		android:title="@string/application_profiles" />
 
 	<Preference

@@ -48,6 +48,14 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 
 	@Override
 	protected void setupPreferences() {
+		Preference appearanceCategory = findPreference("appearance_category");
+		Preference unitsAndFormats = findPreference("units_and_formats");
+		Preference other = findPreference("other");
+
+		appearanceCategory.setIconSpaceReserved(true);
+		unitsAndFormats.setIconSpaceReserved(true);
+		other.setIconSpaceReserved(true);
+
 		setupAppThemePref();
 		setupRotateMapPref();
 		setupMapScreenOrientationPref();
@@ -66,8 +74,8 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 
 	private void setupAppThemePref() {
 		final ListPreferenceEx appTheme = (ListPreferenceEx) findPreference(settings.OSMAND_THEME.getId());
-		appTheme.setEntries(new String[] {getString(R.string.dark_theme), getString(R.string.light_theme)});
-		appTheme.setEntryValues(new Integer[] {OsmandSettings.OSMAND_DARK_THEME, OsmandSettings.OSMAND_LIGHT_THEME});
+		appTheme.setEntries(new String[]{getString(R.string.dark_theme), getString(R.string.light_theme)});
+		appTheme.setEntryValues(new Integer[]{OsmandSettings.OSMAND_DARK_THEME, OsmandSettings.OSMAND_LIGHT_THEME});
 		appTheme.setIcon(getOsmandThemeIcon());
 	}
 
@@ -77,8 +85,8 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 
 	private void setupRotateMapPref() {
 		final ListPreferenceEx rotateMap = (ListPreferenceEx) findPreference(settings.ROTATE_MAP.getId());
-		rotateMap.setEntries(new String[] {getString(R.string.rotate_map_none_opt), getString(R.string.rotate_map_bearing_opt), getString(R.string.rotate_map_compass_opt)});
-		rotateMap.setEntryValues(new Integer[] {OsmandSettings.ROTATE_MAP_NONE, OsmandSettings.ROTATE_MAP_BEARING, OsmandSettings.ROTATE_MAP_COMPASS});
+		rotateMap.setEntries(new String[]{getString(R.string.rotate_map_none_opt), getString(R.string.rotate_map_bearing_opt), getString(R.string.rotate_map_compass_opt)});
+		rotateMap.setEntryValues(new Integer[]{OsmandSettings.ROTATE_MAP_NONE, OsmandSettings.ROTATE_MAP_BEARING, OsmandSettings.ROTATE_MAP_COMPASS});
 		rotateMap.setIcon(getRotateMapIcon());
 	}
 
@@ -95,8 +103,8 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 
 	private void setupMapScreenOrientationPref() {
 		final ListPreferenceEx mapScreenOrientation = (ListPreferenceEx) findPreference(settings.MAP_SCREEN_ORIENTATION.getId());
-		mapScreenOrientation.setEntries(new String[] {getString(R.string.map_orientation_portrait), getString(R.string.map_orientation_landscape), getString(R.string.map_orientation_default)});
-		mapScreenOrientation.setEntryValues(new Integer[] {ActivityInfo.SCREEN_ORIENTATION_PORTRAIT, ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE, ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED});
+		mapScreenOrientation.setEntries(new String[]{getString(R.string.map_orientation_portrait), getString(R.string.map_orientation_landscape), getString(R.string.map_orientation_default)});
+		mapScreenOrientation.setEntryValues(new Integer[]{ActivityInfo.SCREEN_ORIENTATION_PORTRAIT, ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE, ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED});
 		mapScreenOrientation.setIcon(getMapScreenOrientationIcon());
 	}
 
@@ -192,14 +200,14 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 	private void setupExternalInputDevicePref() {
 		ListPreferenceEx externalInputDevice = (ListPreferenceEx) findPreference(settings.EXTERNAL_INPUT_DEVICE.getId());
 		externalInputDevice.setIconSpaceReserved(true);
-		externalInputDevice.setEntries(new String[] {
+		externalInputDevice.setEntries(new String[]{
 				getString(R.string.sett_no_ext_input),
 				getString(R.string.sett_generic_ext_input),
 				getString(R.string.sett_wunderlinq_ext_input),
 				getString(R.string.sett_parrot_ext_input)
 		});
 
-		externalInputDevice.setEntryValues(new Integer[] {
+		externalInputDevice.setEntryValues(new Integer[]{
 				OsmandSettings.NO_EXTERNAL_DEVICE,
 				OsmandSettings.GENERIC_EXTERNAL_DEVICE,
 				OsmandSettings.WUNDERLINQ_EXTERNAL_DEVICE,

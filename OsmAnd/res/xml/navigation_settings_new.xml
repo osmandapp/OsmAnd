@@ -38,7 +38,7 @@
 
 	<PreferenceCategory
 		android:key="other"
-		android:layout="@layout/simple_preference_category"
+		android:layout="@layout/preference_category_with_descr"
 		android:title="@string/shared_string_other" />
 
 	<Preference

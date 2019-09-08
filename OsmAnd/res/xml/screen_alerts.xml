@@ -18,21 +18,25 @@
 	<SwitchPreference
 		android:dependency="show_routing_alarms"
 		android:key="show_traffic_warnings"
+		android:layout="@layout/preference_switch"
 		android:title="@string/show_traffic_warnings" />
 
 	<SwitchPreference
 		android:dependency="show_routing_alarms"
 		android:key="show_pedestrian"
+		android:layout="@layout/preference_switch"
 		android:title="@string/show_pedestrian_warnings" />
 
 	<SwitchPreference
 		android:dependency="show_routing_alarms"
 		android:key="show_cameras"
+		android:layout="@layout/preference_switch"
 		android:title="@string/show_cameras" />
 
 	<SwitchPreference
 		android:dependency="show_routing_alarms"
 		android:key="show_tunnels"
+		android:layout="@layout/preference_switch"
 		android:title="@string/show_tunnels" />
 
 </PreferenceScreen>

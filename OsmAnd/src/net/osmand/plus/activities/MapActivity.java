@@ -160,9 +160,6 @@ import java.util.concurrent.Executors;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static net.osmand.plus.profiles.SettingsProfileFragment.IS_USER_PROFILE;
-import static net.osmand.plus.profiles.SettingsProfileFragment.PROFILE_STRING_KEY;
-
 public class MapActivity extends OsmandActionBarActivity implements DownloadEvents,
 		OnRequestPermissionsResultCallback, IRouteInformationListener, AMapPointUpdateListener,
 		MapMarkerChangedListener, OnDismissDialogFragmentListener, OnDrawMapListener,
@@ -1943,13 +1940,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 			ApplicationMode mode = baseFragment.getSelectedAppMode();
 			if (mode != null) {
-				Bundle args = new Bundle();
-				args.putString(PROFILE_STRING_KEY, mode.getStringKey());
-				args.putBoolean(IS_USER_PROFILE, mode.isCustomProfile());
-
 				String fragmentName = pref.getFragment();
-				final Fragment fragment = Fragment.instantiate(this, fragmentName);
-				fragment.setArguments(args);
+				Fragment fragment = Fragment.instantiate(this, fragmentName);
 
 				getSupportFragmentManager().beginTransaction()
 						.add(R.id.fragmentContainer, fragment, fragmentName)

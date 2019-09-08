@@ -46,6 +46,7 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 
 		Preference voiceAnnouncesInfo = findPreference("voice_announces_info");
 		voiceAnnouncesInfo.setIcon(getContentIcon(R.drawable.ic_action_info_dark));
+		Preference languageAndOutput = findPreference("language_and_output");
 
 		SwitchPreference speakStreetNames = (SwitchPreference) findPreference(settings.SPEAK_STREET_NAMES.getId());
 		SwitchPreference speakTrafficWarnings = (SwitchPreference) findPreference(settings.SPEAK_TRAFFIC_WARNINGS.getId());
@@ -56,6 +57,7 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 		speakTrafficWarnings.setIconSpaceReserved(true);
 		speakPedestrian.setIconSpaceReserved(true);
 		speakSpeedLimit.setIconSpaceReserved(true);
+		languageAndOutput.setIconSpaceReserved(true);
 
 		setupSpeedLimitExceedPref();
 
