@@ -72,6 +72,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 	private Preference applicationDir;
 	private ListPreference applicationModePreference;
 	private Preference drivingRegionPreference;
+	private ChooseAppDirFragment chooseAppDirFragment;
 	private boolean permissionRequested;
 	private boolean permissionGranted;
 
@@ -141,29 +142,29 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 				final int selected = sel;
 				final ArrayAdapter<DrivingRegion> singleChoiceAdapter =
 						new ArrayAdapter<DrivingRegion>(SettingsGeneralActivity.this, R.layout.single_choice_description_item, R.id.text1, drs) {
-					@NonNull
-					@Override
-					public View getView(int position, View convertView, @NonNull ViewGroup parent) {
-						View v = convertView;
-						if (v == null) {
-							LayoutInflater inflater = SettingsGeneralActivity.this.getLayoutInflater();
-							v = inflater.inflate(R.layout.single_choice_description_item, parent, false);
-						}
-						DrivingRegion item = getItem(position);
-						AppCompatCheckedTextView title = (AppCompatCheckedTextView) v.findViewById(R.id.text1);
-						TextView desc = (TextView) v.findViewById(R.id.description);
-						if (item != null) {
-							title.setText(getString(item.name));
-							desc.setVisibility(View.VISIBLE);
-							desc.setText(item.getDescription(v.getContext()));
-						} else {
-							title.setText(getString(R.string.driving_region_automatic));
-							desc.setVisibility(View.GONE);
-						}
-						title.setChecked(position == selected);
-						return v;
-					}
-				};
+							@NonNull
+							@Override
+							public View getView(int position, View convertView, @NonNull ViewGroup parent) {
+								View v = convertView;
+								if (v == null) {
+									LayoutInflater inflater = SettingsGeneralActivity.this.getLayoutInflater();
+									v = inflater.inflate(R.layout.single_choice_description_item, parent, false);
+								}
+								DrivingRegion item = getItem(position);
+								AppCompatCheckedTextView title = (AppCompatCheckedTextView) v.findViewById(R.id.text1);
+								TextView desc = (TextView) v.findViewById(R.id.description);
+								if (item != null) {
+									title.setText(getString(item.name));
+									desc.setVisibility(View.VISIBLE);
+									desc.setText(item.getDescription(v.getContext()));
+								} else {
+									title.setText(getString(R.string.driving_region_automatic));
+									desc.setVisibility(View.GONE);
+								}
+								title.setChecked(position == selected);
+								return v;
+							}
+						};
 
 				b.setAdapter(singleChoiceAdapter, new OnClickListener() {
 					@Override
@@ -438,14 +439,14 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 	}
 
 
-	public static void showAppDirDialog(final OsmandSettings settings, final ActionBarPreferenceActivity ctx, boolean permissionRequested, boolean permissionGranted) {
+	public void showAppDirDialog() {
 		if (Build.VERSION.SDK_INT >= 19) {
-			showAppDirDialogV19(ctx,permissionRequested,permissionGranted);
+			showAppDirDialogV19();
 			return;
 		}
-		AlertDialog.Builder editalert = new AlertDialog.Builder(ctx);
+		AlertDialog.Builder editalert = new AlertDialog.Builder(SettingsGeneralActivity.this);
 		editalert.setTitle(R.string.application_dir);
-		final EditText input = new EditText(ctx);
+		final EditText input = new EditText(SettingsGeneralActivity.this);
 		input.setText(settings.getExternalStorageDirectory().getAbsolutePath());
 		LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
 				LinearLayout.LayoutParams.MATCH_PARENT,
@@ -458,27 +459,25 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 		editalert.setNegativeButton(R.string.shared_string_cancel, null);
 		editalert.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int whichButton) {
-				warnAboutChangingStorage(settings,ctx,input.getText().toString());
+				warnAboutChangingStorage(input.getText().toString());
 			}
 		});
 		editalert.show();
 
 	}
 
-	private static void showAppDirDialogV19(final Activity activity, boolean permissionRequested, boolean permissionGranted) {
-		AlertDialog.Builder bld = new AlertDialog.Builder(activity);
-		ChooseAppDirFragment chooseAppDirFragment = new DashChooseAppDirFragment.ChooseAppDirFragment(activity, (Dialog) null) {
+	private void showAppDirDialogV19() {
+		AlertDialog.Builder bld = new AlertDialog.Builder(this);
+		chooseAppDirFragment = new DashChooseAppDirFragment.ChooseAppDirFragment(this, (Dialog) null) {
 			@Override
 			protected void successCallback() {
-				if (activity instanceof SettingsGeneralActivity) {
-					((SettingsGeneralActivity) activity).updateApplicationDirTextAndSummary();
-				}
+				updateApplicationDirTextAndSummary();
 			}
 		};
 		if (permissionRequested && !permissionGranted) {
 			chooseAppDirFragment.setPermissionDenied();
 		}
-		bld.setView(chooseAppDirFragment.initView(activity.getLayoutInflater(), null, null));
+		bld.setView(chooseAppDirFragment.initView(getLayoutInflater(), null, null));
 		AlertDialog dlg = bld.show();
 		chooseAppDirFragment.setDialog(dlg);
 	}
@@ -493,7 +492,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 
 				@Override
 				public boolean onPreferenceClick(Preference preference) {
-					showAppDirDialog(settings, SettingsGeneralActivity.this, permissionRequested, permissionGranted);
+					showAppDirDialog();
 					return false;
 				}
 			});
@@ -581,10 +580,10 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 	}
 
 
-	
 
 
-	private static void warnAboutChangingStorage(final OsmandSettings settings, final ActionBarPreferenceActivity activity, String newValue) {
+
+	private void warnAboutChangingStorage(final String newValue) {
 		String newDir = newValue != null ? newValue.trim() : newValue;
 		if (!newDir.replace('/', ' ').trim().
 				toLowerCase().endsWith(IndexConstants.APP_DIR.replace('/', ' ').trim())) {
@@ -593,21 +592,21 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 		final File path = new File(newDir);
 		path.mkdirs();
 		if (!path.canRead() || !path.exists()) {
-			Toast.makeText(activity, R.string.specified_dir_doesnt_exist, Toast.LENGTH_LONG).show();
+			Toast.makeText(this, R.string.specified_dir_doesnt_exist, Toast.LENGTH_LONG).show();
 			return;
 		}
-		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-		builder.setMessage(activity.getString(R.string.application_dir_change_warning3));
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setMessage(getString(R.string.application_dir_change_warning3));
 		builder.setPositiveButton(R.string.shared_string_yes, new OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				MoveFilesToDifferentDirectory task =
-						new MoveFilesToDifferentDirectory(activity,
+						new MoveFilesToDifferentDirectory(SettingsGeneralActivity.this,
 								settings.getExternalStorageDirectory(), path);
 				task.setRunOnSuccess(new Runnable() {
 					@Override
 					public void run() {
-						updateSettingsToNewDir(settings,activity,path.getParentFile().getAbsolutePath());
+						updateSettingsToNewDir(path.getParentFile().getAbsolutePath());
 					}
 				});
 				task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
@@ -617,41 +616,39 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				updateSettingsToNewDir(settings,activity,path.getParentFile().getAbsolutePath());
+				updateSettingsToNewDir(path.getParentFile().getAbsolutePath());
 			}
 		});
 		builder.setNegativeButton(R.string.shared_string_cancel, null);
 		builder.show();
 	}
 
-	private static void updateSettingsToNewDir(OsmandSettings settings, ActionBarPreferenceActivity activity, String newDir) {
+	private void updateSettingsToNewDir(final String newDir) {
 		// edit the preference
 		settings.setExternalStorageDirectoryPre19(newDir);
-		((OsmandApplication) activity.getApplication()).getResourceManager().resetStoreDirectory();
-		reloadIndexes(activity);
-		if (activity instanceof SettingsGeneralActivity) {
-			((SettingsGeneralActivity) activity).updateApplicationDirTextAndSummary();
-		}
+		getMyApplication().getResourceManager().resetStoreDirectory();
+		reloadIndexes();
+		updateApplicationDirTextAndSummary();
 	}
 
-	public static void reloadIndexes(final ActionBarPreferenceActivity activity) {
-		activity.setProgressVisibility(true);
-		final CharSequence oldTitle = activity.getToolbar().getTitle();
-		activity.getToolbar().setTitle(activity.getString(R.string.loading_data));
-		activity.getToolbar().setSubtitle(activity.getString(R.string.reading_indexes));
+	public void reloadIndexes() {
+		setProgressVisibility(true);
+		final CharSequence oldTitle = getToolbar().getTitle();
+		getToolbar().setTitle(getString(R.string.loading_data));
+		getToolbar().setSubtitle(getString(R.string.reading_indexes));
 		new AsyncTask<Void, Void, List<String>>() {
 
 			@Override
 			protected List<String> doInBackground(Void... params) {
-				return ((OsmandApplication) activity.getApplication()).getResourceManager().reloadIndexes(IProgress.EMPTY_PROGRESS,
+				return getMyApplication().getResourceManager().reloadIndexes(IProgress.EMPTY_PROGRESS,
 						new ArrayList<String>());
 			}
 
 			protected void onPostExecute(List<String> result) {
-				showWarnings(((OsmandApplication)activity.getApplication()),result);
-				activity.getToolbar().setTitle(oldTitle);
-				activity.getToolbar().setSubtitle("");
-				activity.setProgressVisibility(false);
+				showWarnings(result);
+				getToolbar().setTitle(oldTitle);
+				getToolbar().setSubtitle("");
+				setProgressVisibility(false);
 			}
 
 		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
@@ -684,18 +681,41 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 		}
 	}
 
+
+	protected void showWarnings(List<String> warnings) {
+		if (!warnings.isEmpty()) {
+			final StringBuilder b = new StringBuilder();
+			boolean f = true;
+			for (String w : warnings) {
+				if (f) {
+					f = false;
+				} else {
+					b.append('\n');
+				}
+				b.append(w);
+			}
+			runOnUiThread(new Runnable() {
+				@Override
+				public void run() {
+					Toast.makeText(SettingsGeneralActivity.this, b.toString(), Toast.LENGTH_LONG).show();
+
+				}
+			});
+		}
+	}
+
 	@Override
 	protected void onResume() {
 		super.onResume();
 		if (permissionRequested) {
-			showAppDirDialogV19(this, permissionRequested, permissionGranted);
+			showAppDirDialogV19();
 			permissionRequested = false;
 		}
 	}
 
 	@Override
 	public void onRequestPermissionsResult(int requestCode,
-										   String permissions[], int[] grantResults) {
+	                                       String permissions[], int[] grantResults) {
 		permissionRequested = requestCode == DownloadActivity.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE;
 		if (permissionRequested
 				&& grantResults.length > 0
