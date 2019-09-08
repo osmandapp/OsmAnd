@@ -3,6 +3,8 @@ package net.osmand.plus.dialogs;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.text.Spannable;
@@ -25,7 +27,6 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.LongDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.SubtitleDividerItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.SubtitmeListDividerItem;
-import net.osmand.plus.chooseplan.OsmLiveCancelledDialog;
 
 import org.apache.commons.logging.Log;
 
@@ -142,6 +143,7 @@ public class SendAnalyticsBottomSheetDialogFragment extends MenuBottomSheetDialo
 		settings.SEND_ANONYMOUS_MAP_DOWNLOADS_DATA.set(false);
 		settings.SEND_ANONYMOUS_APP_USAGE_DATA.set(false);
 		settings.SEND_ANONYMOUS_DATA_REQUEST_PROCESSED.set(true);
+		informAnalyticsPrefsUpdate();
 	}
 
 	@Override
@@ -151,7 +153,15 @@ public class SendAnalyticsBottomSheetDialogFragment extends MenuBottomSheetDialo
 		settings.SEND_ANONYMOUS_MAP_DOWNLOADS_DATA.set(sendAnonymousMapDownloadsData);
 		settings.SEND_ANONYMOUS_APP_USAGE_DATA.set(sendAnonymousAppUsageData);
 		settings.SEND_ANONYMOUS_DATA_REQUEST_PROCESSED.set(true);
+		informAnalyticsPrefsUpdate();
 		dismiss();
+	}
+
+	private void informAnalyticsPrefsUpdate() {
+		Fragment target = getTargetFragment();
+		if (target instanceof OnSendAnalyticsPrefsUpdate) {
+			((OnSendAnalyticsPrefsUpdate) target).onAnalyticsPrefsUpdate();
+		}
 	}
 
 	public static boolean shouldShowDialog(@NonNull OsmandApplication app) {
@@ -171,10 +181,11 @@ public class SendAnalyticsBottomSheetDialogFragment extends MenuBottomSheetDialo
 		return false;
 	}
 
-	public static void showInstance(@NonNull OsmandApplication app, @NonNull FragmentManager fm) {
+	public static void showInstance(@NonNull OsmandApplication app, @NonNull FragmentManager fm, @Nullable Fragment target) {
 		try {
 			if (fm.findFragmentByTag(SendAnalyticsBottomSheetDialogFragment.TAG) == null) {
 				SendAnalyticsBottomSheetDialogFragment fragment = new SendAnalyticsBottomSheetDialogFragment();
+				fragment.setTargetFragment(target, 0);
 				fragment.show(fm, SendAnalyticsBottomSheetDialogFragment.TAG);
 
 				OsmandSettings settings = app.getSettings();
@@ -189,5 +200,11 @@ public class SendAnalyticsBottomSheetDialogFragment extends MenuBottomSheetDialo
 		} catch (RuntimeException e) {
 			LOG.error("showInstance", e);
 		}
+	}
+
+	public interface OnSendAnalyticsPrefsUpdate {
+
+		void onAnalyticsPrefsUpdate();
+
 	}
 }

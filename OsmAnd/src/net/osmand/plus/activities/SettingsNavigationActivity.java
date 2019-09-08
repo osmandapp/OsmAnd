@@ -1,6 +1,7 @@
 package net.osmand.plus.activities;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -387,12 +388,12 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		}
 	}
 
-	public String getRoutinParameterTitle(Context context, RoutingParameter routingParameter) {
+	public static String getRoutinParameterTitle(Context context, RoutingParameter routingParameter) {
 		return SettingsBaseActivity.getRoutingStringPropertyName(context, routingParameter.getId(),
 				routingParameter.getName());
 	}
 
-	public boolean isRoutingParameterSelected(OsmandSettings settings, ApplicationMode am, RoutingParameter routingParameter) {
+	public static boolean isRoutingParameterSelected(OsmandSettings settings, ApplicationMode am, RoutingParameter routingParameter) {
 		final OsmandSettings.CommonPreference<Boolean> property =
 				settings.getCustomRoutingBooleanProperty(routingParameter.getId(), routingParameter.getDefaultBoolean());
 		if(am != null) {
@@ -402,10 +403,9 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		}
 	}
 
-	public void setRoutingParameterSelected(OsmandSettings settings, ApplicationMode am, RoutingParameter routingParameter, boolean isChecked) {
-		final OsmandSettings.CommonPreference<Boolean> property =
-				settings.getCustomRoutingBooleanProperty(routingParameter.getId(), routingParameter.getDefaultBoolean());
-		if(am != null) {
+	public static void setRoutingParameterSelected(OsmandSettings settings, ApplicationMode am, String routingParameterId, boolean defaultBoolean, boolean isChecked) {
+		final OsmandSettings.CommonPreference<Boolean> property = settings.getCustomRoutingBooleanProperty(routingParameterId, defaultBoolean);
+		if (am != null) {
 			property.setModeValue(am, isChecked);
 		} else {
 			property.set(isChecked);
@@ -468,7 +468,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 				vals[i] = SettingsBaseActivity.getRoutingStringPropertyName(this, p.getId(), p.getName());
 				bls[i] = settings.getCustomRoutingBooleanProperty(p.getId(), p.getDefaultBoolean());
 			}
-			showBooleanSettings(vals, bls, preference.getTitle());
+			showBooleanSettings(this, vals, bls, preference.getTitle());
 			return true;
 		} else if (preference == autoZoom) {
 			final ApplicationMode am = settings.getApplicationMode();
@@ -597,7 +597,8 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 							int position = selectedPosition[0];
 							if (position >= 0 && position < reliefFactorParameters.size()) {
 								for (int i = 0; i < reliefFactorParameters.size(); i++) {
-									setRoutingParameterSelected(settings, am, reliefFactorParameters.get(i), i == position);
+									RoutingParameter parameter = reliefFactorParameters.get(i);
+									setRoutingParameterSelected(settings, am, parameter.getId(), parameter.getDefaultBoolean(), i == position);
 								}
 								//mapActivity.getRoutingHelper().recalculateRouteDueToSettingsChange();
 								//updateParameters();
@@ -609,12 +610,12 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 			builder.create().show();
 			return true;
 		} else if (preference == showAlarms) {
-			showBooleanSettings(new String[] { getString(R.string.show_traffic_warnings), getString(R.string.show_pedestrian_warnings),
+			showBooleanSettings(this, new String[] { getString(R.string.show_traffic_warnings), getString(R.string.show_pedestrian_warnings),
 					getString(R.string.show_cameras), getString(R.string.show_lanes), getString(R.string.show_tunnels) }, new OsmandPreference[] { settings.SHOW_TRAFFIC_WARNINGS,
 					settings.SHOW_PEDESTRIAN, settings.SHOW_CAMERAS, settings.SHOW_LANES, settings.SHOW_TUNNELS }, preference.getTitle());
 			return true;
 		} else if (preference == speakAlarms) {
-			AlertDialog dlg = showBooleanSettings(new String[] { getString(R.string.speak_street_names),
+			AlertDialog dlg = showBooleanSettings(this, new String[] { getString(R.string.speak_street_names),
 					getString(R.string.speak_traffic_warnings), getString(R.string.speak_pedestrian),
 					getString(R.string.speak_speed_limit), getString(R.string.speak_cameras), getString(R.string.show_tunnels),
 					getString(R.string.shared_string_gpx_waypoints), getString(R.string.speak_favorites),
@@ -653,7 +654,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 			});
 			return true;
 		} else if (preference == defaultSpeed) {
-			showSeekbarSettingsDialog();
+			showSeekbarSettingsDialog(this);
 		}
 		return false;
 	}
@@ -672,8 +673,8 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		bld.show();
 	}
 
-	public AlertDialog showBooleanSettings(String[] vals, final OsmandPreference<Boolean>[] prefs, final CharSequence title) {
-		AlertDialog.Builder bld = new AlertDialog.Builder(this);
+	public static AlertDialog showBooleanSettings(Context ctx, String[] vals, final OsmandPreference<Boolean>[] prefs, final CharSequence title) {
+		AlertDialog.Builder bld = new AlertDialog.Builder(ctx);
 		boolean[] checkedItems = new boolean[prefs.length];
 		for (int i = 0; i < prefs.length; i++) {
 			checkedItems[i] = prefs[i].get();
@@ -707,11 +708,17 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		return bld.show();
 	}
 
-	private void showSeekbarSettingsDialog() {
+	public static void showSeekbarSettingsDialog(Activity activity) {
+		if (activity == null) {
+			return;
+		}
+		final OsmandApplication app = (OsmandApplication) activity.getApplication();
+		final OsmandSettings settings = app.getSettings();
+
 		final ApplicationMode mode = settings.getApplicationMode();
-		GeneralRouter router = getRouter(getMyApplication().getRoutingConfig(), mode);
+		GeneralRouter router = getRouter(app.getRoutingConfig(), mode);
 		SpeedConstants units = settings.SPEED_SYSTEM.get();
-		String speedUnits = units.toShortString(this);
+		String speedUnits = units.toShortString(activity);
 		final float[] ratio = new float[1];
 		switch (units) {
 			case MILES_PER_HOUR:
@@ -722,7 +729,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 				break;
 			case MINUTES_PER_KILOMETER:
 				ratio[0] = 3600 / OsmAndFormatter.METERS_IN_KILOMETER;
-				speedUnits = getString(R.string.km_h);
+				speedUnits = activity.getString(R.string.km_h);
 				break;
 			case NAUTICALMILES_PER_HOUR:
 				ratio[0] = 3600 / OsmAndFormatter.METERS_IN_ONE_NAUTICALMILE;
@@ -732,22 +739,22 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		float settingsMinSpeed = settings.MIN_SPEED.get();
 		float settingsMaxSpeed = settings.MAX_SPEED.get();
 
-		final int[] defaultValue = { Math.round(mode.getDefaultSpeed() * ratio[0]) };
-		final int[] minValue = { Math.round((settingsMinSpeed > 0 ? settingsMinSpeed : router.getMinSpeed()) * ratio[0]) };
-		final int[] maxValue = { Math.round((settingsMaxSpeed > 0 ? settingsMaxSpeed : router.getMaxSpeed()) * ratio[0]) };
+		final int[] defaultValue = {Math.round(mode.getDefaultSpeed() * ratio[0])};
+		final int[] minValue = {Math.round((settingsMinSpeed > 0 ? settingsMinSpeed : router.getMinSpeed()) * ratio[0])};
+		final int[] maxValue = {Math.round((settingsMaxSpeed > 0 ? settingsMaxSpeed : router.getMaxSpeed()) * ratio[0])};
 		final int min = Math.round(router.getMinSpeed() * ratio[0] / 2f);
 		final int max = Math.round(router.getMaxSpeed() * ratio[0] * 1.5f);
 
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		boolean lightMode = getMyApplication().getSettings().isLightContent();
+		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+		boolean lightMode = app.getSettings().isLightContent();
 		int themeRes = lightMode ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme;
-		View seekbarView = LayoutInflater.from(new ContextThemeWrapper(this, themeRes))
+		View seekbarView = LayoutInflater.from(new ContextThemeWrapper(activity, themeRes))
 				.inflate(R.layout.default_speed_dialog, null, false);
 		builder.setView(seekbarView);
 		builder.setPositiveButton(R.string.shared_string_ok, new OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				mode.setDefaultSpeed(getMyApplication(), defaultValue[0] / ratio[0]);
+				mode.setDefaultSpeed(app, defaultValue[0] / ratio[0]);
 				settings.MIN_SPEED.set(minValue[0] / ratio[0]);
 				settings.MAX_SPEED.set(maxValue[0] / ratio[0]);
 			}
@@ -756,7 +763,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		builder.setNeutralButton("Revert", new OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				mode.resetDefaultSpeed(getMyApplication());
+				mode.resetDefaultSpeed(app);
 				settings.MIN_SPEED.set(0f);
 				settings.MAX_SPEED.set(0f);
 			}
@@ -775,7 +782,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		MAX_SPEED,
 	}
 
-	private void setupSpeedSlider(final SpeedSliderType type, String speedUnits, final int[] minValue, final int[] defaultValue, final int[] maxValue, final int min, final int max, View seekbarView) {
+	private static void setupSpeedSlider(final SpeedSliderType type, String speedUnits, final int[] minValue, final int[] defaultValue, final int[] maxValue, final int min, final int max, View seekbarView) {
 		View seekbarLayout;
 		int titleId;
 		final int[] speedValue;

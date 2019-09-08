@@ -1,7 +1,9 @@
 package net.osmand.plus.activities;
 
 
+import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.pm.ActivityInfo;
@@ -22,6 +24,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat.OnRequestPermissionsResultCallback;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatCheckedTextView;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,7 +63,7 @@ import java.util.List;
 
 public class SettingsGeneralActivity extends SettingsBaseActivity implements OnRequestPermissionsResultCallback {
 
-	private static final String IP_ADDRESS_PATTERN =
+	public static final String IP_ADDRESS_PATTERN =
 			"^([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
 					"([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
 					"([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
@@ -139,29 +142,29 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 				final int selected = sel;
 				final ArrayAdapter<DrivingRegion> singleChoiceAdapter =
 						new ArrayAdapter<DrivingRegion>(SettingsGeneralActivity.this, R.layout.single_choice_description_item, R.id.text1, drs) {
-					@NonNull
-					@Override
-					public View getView(int position, View convertView, @NonNull ViewGroup parent) {
-						View v = convertView;
-						if (v == null) {
-							LayoutInflater inflater = SettingsGeneralActivity.this.getLayoutInflater();
-							v = inflater.inflate(R.layout.single_choice_description_item, parent, false);
-						}
-						DrivingRegion item = getItem(position);
-						AppCompatCheckedTextView title = (AppCompatCheckedTextView) v.findViewById(R.id.text1);
-						TextView desc = (TextView) v.findViewById(R.id.description);
-						if (item != null) {
-							title.setText(getString(item.name));
-							desc.setVisibility(View.VISIBLE);
-							desc.setText(item.getDescription(v.getContext()));
-						} else {
-							title.setText(getString(R.string.driving_region_automatic));
-							desc.setVisibility(View.GONE);
-						}
-						title.setChecked(position == selected);
-						return v;
-					}
-				};
+							@NonNull
+							@Override
+							public View getView(int position, View convertView, @NonNull ViewGroup parent) {
+								View v = convertView;
+								if (v == null) {
+									LayoutInflater inflater = SettingsGeneralActivity.this.getLayoutInflater();
+									v = inflater.inflate(R.layout.single_choice_description_item, parent, false);
+								}
+								DrivingRegion item = getItem(position);
+								AppCompatCheckedTextView title = (AppCompatCheckedTextView) v.findViewById(R.id.text1);
+								TextView desc = (TextView) v.findViewById(R.id.description);
+								if (item != null) {
+									title.setText(getString(item.name));
+									desc.setVisibility(View.VISIBLE);
+									desc.setText(item.getDescription(v.getContext()));
+								} else {
+									title.setText(getString(R.string.driving_region_automatic));
+									desc.setVisibility(View.GONE);
+								}
+								title.setChecked(position == selected);
+								return v;
+							}
+						};
 
 				b.setAdapter(singleChoiceAdapter, new OnClickListener() {
 					@Override
@@ -223,17 +226,35 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 		}
 		registerListPreference(settings.ANGULAR_UNITS, screen, entries, ac);
 
+		Pair<String[], String[]> preferredLocaleInfo = getPreferredLocaleIdsAndValues(this);
+		if (preferredLocaleInfo != null) {
+			registerListPreference(settings.PREFERRED_LOCALE, screen, preferredLocaleInfo.first, preferredLocaleInfo.second);
+		}
+
+		// Add " (Display language)" to menu title in Latin letters for all non-en languages
+		if (!getResources().getString(R.string.preferred_locale).equals(getResources().getString(R.string.preferred_locale_no_translate))) {
+			((ListPreference) screen.findPreference(settings.PREFERRED_LOCALE.getId())).setTitle(getString(R.string.preferred_locale) + " (" + getString(R.string.preferred_locale_no_translate) + ")");
+		}
+
+		// This setting now only in "Confgure map" menu
+		//String[] values = ConfigureMapMenu.getMapNamesValues(this, ConfigureMapMenu.mapNamesIds);
+		//String[] ids = ConfigureMapMenu.getSortedMapNamesIds(this, ConfigureMapMenu.mapNamesIds, values);
+		//registerListPreference(settings.MAP_PREFERRED_LOCALE, screen, ConfigureMapMenu.getMapNamesValues(this, ids), ids);
+	}
+
+	public static Pair<String[], String[]> getPreferredLocaleIdsAndValues(Context ctx) {
 		// See language list and statistics at: https://hosted.weblate.org/projects/osmand/main/
 		// Hardy maintenance 2016-05-29:
 		//  - Include languages if their translation is >= ~10%    (but any language will be visible if it is the device's system locale)
 		//  - Mark as "incomplete" if                    < ~80%
-		String incompleteSuffix = " (" + getString(R.string.incomplete_locale) + ")";
+		String incompleteSuffix = " (" + ctx.getString(R.string.incomplete_locale) + ")";
 
 		// Add " (Device language)" to system default entry in Latin letters, so it can be more easily identified if a foreign language has been selected by mistake
-		String latinSystemDefaultSuffix = " (" + getString(R.string.system_locale_no_translate) + ")";
+		String latinSystemDefaultSuffix = " (" + ctx.getString(R.string.system_locale_no_translate) + ")";
 
 		//getResources().getAssets().getLocales();
-		entrieValues = new String[]{"",
+		String[] entryValues = new String[] {
+				"",
 				"en",
 				"af",
 				"ar",
@@ -294,82 +315,75 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 				"vi",
 				"zh_CN",
 				"zh_TW"};
-		entries = new String[]{getString(R.string.system_locale) + latinSystemDefaultSuffix,
-				getString(R.string.lang_en),
-				getString(R.string.lang_af) + incompleteSuffix,
-				getString(R.string.lang_ar),
-				getString(R.string.lang_ast) + incompleteSuffix,
-				getString(R.string.lang_az),
-				getString(R.string.lang_be),
+
+		String[] entries = new String[] {
+				ctx.getString(R.string.system_locale) + latinSystemDefaultSuffix,
+				ctx.getString(R.string.lang_en),
+				ctx.getString(R.string.lang_af) + incompleteSuffix,
+				ctx.getString(R.string.lang_ar),
+				ctx.getString(R.string.lang_ast) + incompleteSuffix,
+				ctx.getString(R.string.lang_az),
+				ctx.getString(R.string.lang_be),
 				// getString(R.string.lang_be_by),
-				getString(R.string.lang_bg),
-				getString(R.string.lang_ca),
-				getString(R.string.lang_cs),
-				getString(R.string.lang_cy) + incompleteSuffix,
-				getString(R.string.lang_da),
-				getString(R.string.lang_de),
-				getString(R.string.lang_el) + incompleteSuffix,
-				getString(R.string.lang_en_gb),
-				getString(R.string.lang_eo),
-				getString(R.string.lang_es),
-				getString(R.string.lang_es_ar),
-				getString(R.string.lang_es_us),
-				getString(R.string.lang_eu),
-				getString(R.string.lang_fa),
-				getString(R.string.lang_fi) + incompleteSuffix,
-				getString(R.string.lang_fr),
-				getString(R.string.lang_gl),
-				getString(R.string.lang_he) + incompleteSuffix,
-				getString(R.string.lang_hr) + incompleteSuffix,
-				getString(R.string.lang_hsb) + incompleteSuffix,
-				getString(R.string.lang_hu),
-				getString(R.string.lang_hy),
-				getString(R.string.lang_is),
-				getString(R.string.lang_it),
-				getString(R.string.lang_ja),
-				getString(R.string.lang_ka) + incompleteSuffix,
-				getString(R.string.lang_kab) + incompleteSuffix,
-				getString(R.string.lang_kn) + incompleteSuffix,
-				getString(R.string.lang_ko),
-				getString(R.string.lang_lt),
-				getString(R.string.lang_lv),
-				getString(R.string.lang_ml) + incompleteSuffix,
-				getString(R.string.lang_mr) + incompleteSuffix,
-				getString(R.string.lang_nb),
-				getString(R.string.lang_nl),
-				getString(R.string.lang_nn) + incompleteSuffix,
-				getString(R.string.lang_oc) + incompleteSuffix,
-				getString(R.string.lang_pl),
-				getString(R.string.lang_pt),
-				getString(R.string.lang_pt_br),
-				getString(R.string.lang_ro) + incompleteSuffix,
-				getString(R.string.lang_ru),
-				getString(R.string.lang_sc),
-				getString(R.string.lang_sk),
-				getString(R.string.lang_sl),
-				getString(R.string.lang_sr) + incompleteSuffix,
-				getString(R.string.lang_sr_latn) + incompleteSuffix,
-				getString(R.string.lang_sv),
-				getString(R.string.lang_tr),
-				getString(R.string.lang_uk),
-				getString(R.string.lang_vi) + incompleteSuffix,
-				getString(R.string.lang_zh_cn) + incompleteSuffix,
-				getString(R.string.lang_zh_tw)};
-		String[] valuesPl = ConfigureMapMenu.getSortedMapNamesIds(this, entries, entries);
-		String[] idsPl = ConfigureMapMenu.getSortedMapNamesIds(this, entrieValues, entries);
-		registerListPreference(settings.PREFERRED_LOCALE, screen, valuesPl, idsPl);
+				ctx.getString(R.string.lang_bg),
+				ctx.getString(R.string.lang_ca),
+				ctx.getString(R.string.lang_cs),
+				ctx.getString(R.string.lang_cy) + incompleteSuffix,
+				ctx.getString(R.string.lang_da),
+				ctx.getString(R.string.lang_de),
+				ctx.getString(R.string.lang_el) + incompleteSuffix,
+				ctx.getString(R.string.lang_en_gb),
+				ctx.getString(R.string.lang_eo),
+				ctx.getString(R.string.lang_es),
+				ctx.getString(R.string.lang_es_ar),
+				ctx.getString(R.string.lang_es_us),
+				ctx.getString(R.string.lang_eu),
+				ctx.getString(R.string.lang_fa),
+				ctx.getString(R.string.lang_fi) + incompleteSuffix,
+				ctx.getString(R.string.lang_fr),
+				ctx.getString(R.string.lang_gl),
+				ctx.getString(R.string.lang_he) + incompleteSuffix,
+				ctx.getString(R.string.lang_hr) + incompleteSuffix,
+				ctx.getString(R.string.lang_hsb) + incompleteSuffix,
+				ctx.getString(R.string.lang_hu),
+				ctx.getString(R.string.lang_hy),
+				ctx.getString(R.string.lang_is),
+				ctx.getString(R.string.lang_it),
+				ctx.getString(R.string.lang_ja),
+				ctx.getString(R.string.lang_ka) + incompleteSuffix,
+				ctx.getString(R.string.lang_kab) + incompleteSuffix,
+				ctx.getString(R.string.lang_kn) + incompleteSuffix,
+				ctx.getString(R.string.lang_ko),
+				ctx.getString(R.string.lang_lt),
+				ctx.getString(R.string.lang_lv),
+				ctx.getString(R.string.lang_ml) + incompleteSuffix,
+				ctx.getString(R.string.lang_mr) + incompleteSuffix,
+				ctx.getString(R.string.lang_nb),
+				ctx.getString(R.string.lang_nl),
+				ctx.getString(R.string.lang_nn) + incompleteSuffix,
+				ctx.getString(R.string.lang_oc) + incompleteSuffix,
+				ctx.getString(R.string.lang_pl),
+				ctx.getString(R.string.lang_pt),
+				ctx.getString(R.string.lang_pt_br),
+				ctx.getString(R.string.lang_ro) + incompleteSuffix,
+				ctx.getString(R.string.lang_ru),
+				ctx.getString(R.string.lang_sc),
+				ctx.getString(R.string.lang_sk),
+				ctx.getString(R.string.lang_sl),
+				ctx.getString(R.string.lang_sr) + incompleteSuffix,
+				ctx.getString(R.string.lang_sr_latn) + incompleteSuffix,
+				ctx.getString(R.string.lang_sv),
+				ctx.getString(R.string.lang_tr),
+				ctx.getString(R.string.lang_uk),
+				ctx.getString(R.string.lang_vi) + incompleteSuffix,
+				ctx.getString(R.string.lang_zh_cn) + incompleteSuffix,
+				ctx.getString(R.string.lang_zh_tw)};
 
-		// Add " (Display language)" to menu title in Latin letters for all non-en languages
-		if (!getResources().getString(R.string.preferred_locale).equals(getResources().getString(R.string.preferred_locale_no_translate))) {
-			((ListPreference) screen.findPreference(settings.PREFERRED_LOCALE.getId())).setTitle(getString(R.string.preferred_locale) + " (" + getString(R.string.preferred_locale_no_translate) + ")");
-		}
+		String[] valuesPl = ConfigureMapMenu.getSortedMapNamesIds(ctx, entries, entries);
+		String[] idsPl = ConfigureMapMenu.getSortedMapNamesIds(ctx, entryValues, entries);
 
-		// This setting now only in "Confgure map" menu
-		//String[] values = ConfigureMapMenu.getMapNamesValues(this, ConfigureMapMenu.mapNamesIds);
-		//String[] ids = ConfigureMapMenu.getSortedMapNamesIds(this, ConfigureMapMenu.mapNamesIds, values);
-		//registerListPreference(settings.MAP_PREFERRED_LOCALE, screen, ConfigureMapMenu.getMapNamesValues(this, ids), ids);
+		return Pair.create(valuesPl, idsPl);
 	}
-
 
 	protected void enableProxy(boolean enable) {
 		settings.ENABLE_PROXY.set(enable);
@@ -473,7 +487,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 		if (!Version.isBlackberry(getMyApplication())) {
 			applicationDir = new Preference(this);
 			applicationDir.setTitle(R.string.application_dir);
-			applicationDir.setKey("external_storage_dir");
+			applicationDir.setKey(OsmandSettings.EXTERNAL_STORAGE_DIR);
 			applicationDir.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 
 				@Override
@@ -566,7 +580,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 	}
 
 
-	
+
 
 
 	private void warnAboutChangingStorage(final String newValue) {
@@ -701,7 +715,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 
 	@Override
 	public void onRequestPermissionsResult(int requestCode,
-										   String permissions[], int[] grantResults) {
+	                                       String permissions[], int[] grantResults) {
 		permissionRequested = requestCode == DownloadActivity.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE;
 		if (permissionRequested
 				&& grantResults.length > 0

@@ -1080,7 +1080,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		if (!poiFilters.isEmpty()) {
 			createPoiFiltersItems(mapActivity, poiFilters, optionsContainer);
 		}
-		if (traffic) {
+		if (traffic && app.getSettings().SHOW_ROUTING_ALARMS.get()) {
 			createWaypointItem(mapActivity, optionsContainer, WaypointHelper.ALARMS);
 		}
 		if (fav) {

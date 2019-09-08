@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/toolbar"
+	android:layout_width="match_parent"
+	android:layout_height="@dimen/dashboard_map_toolbar"
+	android:background="@color/app_bar_color_light"
+	app:contentInsetLeft="4dp"
+	app:contentInsetStart="4dp">
+
+	<ImageButton
+		android:id="@+id/close_button"
+		style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
+		android:layout_width="56dp"
+		android:layout_height="56dp"
+		android:contentDescription="@string/access_shared_string_navigate_up"
+		android:src="@drawable/ic_action_mode_back" />
+
+	<TextView
+		android:id="@+id/toolbar_title"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="left"
+		android:scaleType="center"
+		android:textColor="@color/abc_primary_text_material_dark"
+		android:textSize="@dimen/abc_text_size_large_material"
+		tools:text="Toolbar"
+		tools:visibility="visible" />
+
+	<ProgressBar
+		android:id="@+id/ProgressBar"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="right"
+		android:visibility="gone" />
+
+</android.support.v7.widget.Toolbar>

@@ -590,7 +590,7 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 		return (OsmandApplication) getApplication();
 	}
 
-	protected void showWarnings(List<String> warnings) {
+	public static void showWarnings(final OsmandApplication app, List<String> warnings) {
 		if (!warnings.isEmpty()) {
 			final StringBuilder b = new StringBuilder();
 			boolean f = true;
@@ -602,11 +602,10 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 				}
 				b.append(w);
 			}
-			runOnUiThread(new Runnable() {
+			app.runInUIThread(new Runnable() {
 				@Override
 				public void run() {
-					Toast.makeText(SettingsBaseActivity.this, b.toString(), Toast.LENGTH_LONG).show();
-
+					Toast.makeText(app, b.toString(), Toast.LENGTH_LONG).show();
 				}
 			});
 		}
