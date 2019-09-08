@@ -1096,7 +1096,7 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="lang_cs">Ceco</string>
     <string name="lang_da">Danese</string>
     <string name="lang_nl">Olandese</string>
-    <string name="lang_fi">Finnico</string>
+    <string name="lang_fi">Finlandese</string>
     <string name="lang_fr">Francese</string>
     <string name="lang_ka">Georgiano</string>
     <string name="lang_de">Tedesco</string>
@@ -3213,4 +3213,20 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="shared_string_default">Predefinita</string>
     <string name="app_mode_wagon">Carrozza</string>
     <string name="app_mode_pickup_truck">Fuoristrada pickup</string>
+    <string name="weeks_5">Settimane</string>
+    <string name="month">Mese</string>
+    <string name="months_2_4">Mesi</string>
+    <string name="months_5">Mesi</string>
+    <string name="year">Anno</string>
+    <string name="years_2_4">Anni</string>
+    <string name="years_5">Anni</string>
+    <string name="months_3">Tre mesi</string>
+    <string name="price_free">Gratuito</string>
+    <string name="get_discount_title">Ottieni %1$d %2$s al %3$s di sconto.</string>
+    <string name="get_free_trial_title">Inizia il tuo %1$d %2$s periodo di prova gratuito.</string>
+    <string name="get_discount_first_part">%1$s per il primo %2$s</string>
+    <string name="get_discount_first_few_part">%1$s per il primo %2$s</string>
+    <string name="get_discount_second_part">poi %1$s</string>
+    <string name="cancel_subscription">Cancella la sottoscrizione</string>
+    <string name="price_and_discount">%1$s • Risparmia %2$s</string>
 </resources>

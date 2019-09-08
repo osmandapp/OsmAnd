@@ -807,11 +807,11 @@
     <!-- string name="search_tabs_location">Position</string -->
     <string name="context_menu_item_update_map">Karte aktualisieren</string>
     <string name="context_menu_item_create_poi">POI erstellen</string>
-    <string name="shared_string_yes">Ja</string>
+    <string name="shared_string_yes">ja</string>
     <string name="shared_string_cancel">Abbrechen</string>
     <string name="shared_string_apply">Anwenden</string>
     <string name="shared_string_add">Hinzufügen</string>
-    <string name="shared_string_no">Nein</string>
+    <string name="shared_string_no">nein</string>
     <string name="add_favorite_dialog_top_text">Favorit benennen</string>
     <string name="add_favorite_dialog_default_favourite_name">Favorit</string>
     <string name="add_favorite_dialog_favourite_added_template">Favorit \'\'{0}\'\' hinzugefügt.</string>
@@ -3240,7 +3240,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="years_5">Jahre</string>
     <string name="months_3">Drei Monate</string>
     <string name="price_free">Kostenlos</string>
-    <string name="get_free_trial_title">Beginnen Sie Ihre %1$d %2$s Probezeit.</string>
+    <string name="get_free_trial_title">Probezeit für %1$d %2$s beginnen.</string>
     <string name="get_discount_second_part">dann %1$s</string>
     <string name="cancel_subscription">Abonnement beenden</string>
     <string name="price_and_discount">%1$s • Spare %2$s</string>
