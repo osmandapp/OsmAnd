@@ -3127,8 +3127,8 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="routing_attr_max_num_changes_name">Numero di cambiamenti</string>
     <string name="settings_privacy_and_security_desc">Seleziona i dati che stai condividendo con noi</string>
     <string name="osmand_routing_promo">Puoi aggiungere la tua versione modificata del file routing.xml in ..osmand/routing</string>
-    <string name="app_mode_skiing">Sciare</string>
-    <string name="base_profile_descr_ski">Sciare</string>
+    <string name="app_mode_skiing">Sci</string>
+    <string name="base_profile_descr_ski">Sci</string>
     <string name="routing_profile_ski">Sci</string>
     <string name="profile_type_base_string">Profilo base</string>
     <string name="profile_alert_duplicate_name_title">Nome duplicato</string>
@@ -3228,5 +3228,14 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="get_discount_first_few_part">%1$s per il primo %2$s</string>
     <string name="get_discount_second_part">poi %1$s</string>
     <string name="cancel_subscription">Cancella la sottoscrizione</string>
-    <string name="price_and_discount">%1$s • Risparmia %2$s</string>
+    <string name="price_and_discount">%1$s • Risparmi %2$s</string>
+    <string name="routing_attr_allow_classic_only_name">Permetti solo i percorsi classici</string>
+    <string name="new_route_calculated_dist_dbg">PeErcorso: distanza %s, durata %s 
+\nCalcolo: %.1f sec, %d strade, %d mattonelle)</string>
+    <string name="lang_oc">Occitano</string>
+    <string name="day">Giorno</string>
+    <string name="days_2_4">Giorni</string>
+    <string name="days_5">Giorni</string>
+    <string name="week">Settimana</string>
+    <string name="weeks_2_4">Settimane</string>
 </resources>
