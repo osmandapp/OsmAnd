@@ -125,7 +125,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 
 	private Drawable getPluginIcon(OsmandPlugin plugin) {
 		int iconResId = plugin.getLogoResourceId();
-		return plugin.isActive() ? getActiveIcon(iconResId) : getContentIcon(iconResId);
+		return plugin.isActive() ? getActiveIcon(iconResId) : getIcon(iconResId, isNightMode() ? R.color.icon_color_secondary_dark : R.color.icon_color_secondary_light);
 	}
 
 	private Intent getPluginIntent(OsmandPlugin plugin) {

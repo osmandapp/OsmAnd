@@ -15,12 +15,12 @@
 		android:layout="@layout/preference_with_descr"
 		android:title="@string/preferred_locale" />
 
-<!--	<Preference-->
-<!--		android:icon="@drawable/ic_action_folder"-->
-<!--		android:key="external_storage_dir"-->
-<!--		android:layout="@layout/preference_with_descr"-->
-<!--		android:persistent="false"-->
-<!--		android:title="@string/application_dir" />-->
+	<Preference
+		android:key="external_storage_dir"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		android:title="@string/application_dir"
+		tools:icon="@drawable/ic_action_folder" />
 
 	<PreferenceCategory
 		android:key="privacy_and_security"

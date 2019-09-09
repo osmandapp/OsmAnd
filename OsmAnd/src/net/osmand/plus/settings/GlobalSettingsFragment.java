@@ -9,6 +9,7 @@ import android.util.Pair;
 
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.SettingsGeneralActivity;
 import net.osmand.plus.dialogs.SendAnalyticsBottomSheetDialogFragment;
@@ -41,7 +42,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment implements Send
 	protected void setupPreferences() {
 		setupDefaultAppModePref();
 		setupPreferredLocalePref();
-//		setupExternalStorageDirPref();
+		setupExternalStorageDirPref();
 
 		setupSendAnonymousDataPref();
 		setupEnableProxyPref();
@@ -145,6 +146,12 @@ public class GlobalSettingsFragment extends BaseSettingsFragment implements Send
 		if (!getResources().getString(R.string.preferred_locale).equals(getResources().getString(R.string.preferred_locale_no_translate))) {
 			preferredLocale.setTitle(getString(R.string.preferred_locale) + " (" + getString(R.string.preferred_locale_no_translate) + ")");
 		}
+	}
+
+	private void setupExternalStorageDirPref() {
+		Preference externalStorageDir = (Preference) findPreference(OsmandSettings.EXTERNAL_STORAGE_DIR);
+		externalStorageDir.setIcon(getContentIcon(R.drawable.ic_action_folder));
+
 	}
 
 	private void setupSendAnonymousDataPref() {
