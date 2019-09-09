@@ -52,6 +52,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 	protected void setupPreferences() {
 		Preference generalSettings = findPreference("general_settings");
 		Preference pluginSettings = findPreference("plugin_settings");
+		pluginSettings.setIconSpaceReserved(false);
 
 		generalSettings.setIcon(getContentIcon(R.drawable.ic_action_settings));
 

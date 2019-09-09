@@ -17,15 +17,18 @@
 
 	<Preference
 		android:key="external_storage_dir"
-		android:layout="@layout/preference_with_descr"
-		android:persistent="false"
+		android:layout="@layout/preference_with_descr"		android:persistent="false"
 		android:title="@string/application_dir"
 		tools:icon="@drawable/ic_action_folder" />
+
+	<Preference
+		android:layout="@layout/simple_divider_item"
+		android:selectable="false" />
 
 	<PreferenceCategory
 		android:key="privacy_and_security"
 		android:layout="@layout/preference_category_with_descr"
-		android:title="@string/application_profiles" />
+		android:title="@string/settings_privacy_and_security" />
 
 	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
 		android:icon="@drawable/ic_action_privacy_and_security"

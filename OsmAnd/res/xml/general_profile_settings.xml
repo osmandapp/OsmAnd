@@ -22,6 +22,10 @@
 		android:layout="@layout/preference_with_descr"
 		android:title="@string/map_screen_orientation" />
 
+	<Preference
+		android:layout="@layout/simple_divider_item"
+		android:selectable="false" />
+
 	<PreferenceCategory
 		android:key="units_and_formats"
 		android:layout="@layout/preference_category_with_descr"
@@ -47,6 +51,10 @@
 		android:key="angular_measurement"
 		android:layout="@layout/preference_with_descr"
 		android:title="@string/angular_measeurement" />
+
+	<Preference
+		android:layout="@layout/simple_divider_item"
+		android:selectable="false" />
 
 	<PreferenceCategory
 		android:key="other"

@@ -36,6 +36,10 @@
 		android:title="@string/configure_map"
 		tools:icon="@drawable/ic_action_layers_dark" />
 
+	<Preference
+		android:layout="@layout/list_item_divider"
+		android:selectable="false" />
+
 	<PreferenceCategory
 		android:key="plugin_settings"
 		android:layout="@layout/preference_category_with_descr"

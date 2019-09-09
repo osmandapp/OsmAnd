@@ -142,7 +142,6 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 					avoidRouting.setEntries(entries);
 					avoidRouting.setEntryValues(prefsIds);
 					avoidRouting.setValues(enabledPrefsIds);
-					avoidRouting.setIconSpaceReserved(true);
 
 					screen.addPreference(avoidRouting);
 				}
@@ -152,7 +151,6 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 					preferRouting.setTitle(R.string.prefer_in_routing_title);
 					preferRouting.setSummary(R.string.prefer_in_routing_descr);
 					preferRouting.setLayoutResource(R.layout.preference_with_descr);
-					preferRouting.setIconSpaceReserved(true);
 					screen.addPreference(preferRouting);
 				}
 				if (reliefFactorParameters.size() > 0) {
@@ -176,7 +174,6 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 					reliefFactorRouting.setPersistent(false);
 					reliefFactorRouting.setValue(selectedParameterId);
 					reliefFactorRouting.setDescription(R.string.relief_smoothness_factor_descr);
-					reliefFactorRouting.setIconSpaceReserved(true);
 
 					screen.addPreference(reliefFactorRouting);
 				}
@@ -192,7 +189,6 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 						switchPreferenceEx.setIcon(getRoutingPrefIcon(p.getId()));
 						switchPreferenceEx.setSummaryOn(R.string.shared_string_enable);
 						switchPreferenceEx.setSummaryOff(R.string.shared_string_disable);
-						switchPreferenceEx.setIconSpaceReserved(true);
 
 						screen.addPreference(switchPreferenceEx);
 					} else {
@@ -207,7 +203,6 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 						ListPreferenceEx listPreferenceEx = (ListPreferenceEx) createListPreferenceEx(pref.getId(), p.getPossibleValueDescriptions(), svlss, title, R.layout.preference_with_descr);
 						listPreferenceEx.setDescription(description);
 						listPreferenceEx.setIcon(getRoutingPrefIcon(p.getId()));
-						listPreferenceEx.setIconSpaceReserved(true);
 
 						screen.addPreference(listPreferenceEx);
 					}

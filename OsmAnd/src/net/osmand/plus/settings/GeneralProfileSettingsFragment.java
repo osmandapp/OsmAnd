@@ -52,10 +52,6 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		Preference unitsAndFormats = findPreference("units_and_formats");
 		Preference other = findPreference("other");
 
-		appearanceCategory.setIconSpaceReserved(true);
-		unitsAndFormats.setIconSpaceReserved(true);
-		other.setIconSpaceReserved(true);
-
 		setupAppThemePref();
 		setupRotateMapPref();
 		setupMapScreenOrientationPref();
@@ -68,7 +64,6 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		setupKalmanFilterPref();
 		setupMagneticFieldSensorPref();
 		setupMapEmptyStateAllowedPref();
-		setupDoNotUseAnimationsPref();
 		setupExternalInputDevicePref();
 	}
 
@@ -175,31 +170,22 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		SwitchPreferenceEx kalmanFilterPref = (SwitchPreferenceEx) findPreference(settings.USE_KALMAN_FILTER_FOR_COMPASS.getId());
 		kalmanFilterPref.setTitle(getString(R.string.use_kalman_filter_compass));
 		kalmanFilterPref.setDescription(getString(R.string.use_kalman_filter_compass_descr));
-		kalmanFilterPref.setIconSpaceReserved(true);
 	}
 
 	private void setupMagneticFieldSensorPref() {
 		SwitchPreferenceEx useMagneticSensorPref = (SwitchPreferenceEx) findPreference(settings.USE_MAGNETIC_FIELD_SENSOR_COMPASS.getId());
 		useMagneticSensorPref.setTitle(getString(R.string.use_magnetic_sensor));
 		useMagneticSensorPref.setDescription(getString(R.string.use_magnetic_sensor_descr));
-		useMagneticSensorPref.setIconSpaceReserved(true);
 	}
 
 	private void setupMapEmptyStateAllowedPref() {
 		SwitchPreferenceEx mapEmptyStateAllowedPref = (SwitchPreferenceEx) findPreference(settings.MAP_EMPTY_STATE_ALLOWED.getId());
 		mapEmptyStateAllowedPref.setTitle(getString(R.string.tap_on_map_to_hide_interface));
 		mapEmptyStateAllowedPref.setDescription(getString(R.string.tap_on_map_to_hide_interface_descr));
-		mapEmptyStateAllowedPref.setIconSpaceReserved(true);
-	}
-
-	private void setupDoNotUseAnimationsPref() {
-		SwitchPreference doNotUseAnimations = (SwitchPreference) findPreference(settings.DO_NOT_USE_ANIMATIONS.getId());
-		doNotUseAnimations.setIconSpaceReserved(true);
 	}
 
 	private void setupExternalInputDevicePref() {
 		ListPreferenceEx externalInputDevice = (ListPreferenceEx) findPreference(settings.EXTERNAL_INPUT_DEVICE.getId());
-		externalInputDevice.setIconSpaceReserved(true);
 		externalInputDevice.setEntries(new String[]{
 				getString(R.string.sett_no_ext_input),
 				getString(R.string.sett_generic_ext_input),

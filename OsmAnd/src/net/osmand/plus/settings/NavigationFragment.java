@@ -29,8 +29,6 @@ public class NavigationFragment extends BaseSettingsFragment {
 		Preference routeParameters = findPreference("route_parameters");
 		SwitchPreference showRoutingAlarms = (SwitchPreference) findPreference(settings.SHOW_ROUTING_ALARMS.getId());
 		SwitchPreference speakRoutingAlarms = (SwitchPreference) findPreference(settings.SPEAK_ROUTING_ALARMS.getId());
-		Preference mapDuringNavigation = findPreference("map_during_navigation");
-		mapDuringNavigation.setIconSpaceReserved(true);
 
 		SwitchPreference turnScreenOn = (SwitchPreference) findPreference(settings.TURN_SCREEN_ON_ENABLED.getId());
 

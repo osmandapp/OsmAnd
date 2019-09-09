@@ -70,6 +70,11 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	}
 
 	@Override
+	public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+		getPreferenceManager().setPreferenceDataStore(settings.getDataStore());
+	}
+
+	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		nightMode = !settings.isLightContent();
 
@@ -82,6 +87,16 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		}
 
 		return view;
+	}
+
+	@Override
+	public RecyclerView onCreateRecyclerView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
+		int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
+
+		Context themedContext = new ContextThemeWrapper(getActivity(), themeRes);
+		LayoutInflater themedInflater = inflater.cloneInContext(themedContext);
+
+		return super.onCreateRecyclerView(themedInflater, parent, savedInstanceState);
 	}
 
 	@Override
@@ -173,22 +188,6 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 			toolbarDivider.setBackgroundColor(ContextCompat.getColor(app, iconColor));
 		}
 		view.setBackgroundColor(ContextCompat.getColor(app, getBackgroundColor()));
-	}
-
-	@Override
-	public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-		getPreferenceManager().setPreferenceDataStore(settings.getDataStore());
-	}
-
-	@Override
-	public RecyclerView onCreateRecyclerView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
-
-		Context activityContext = getActivity();
-		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
-		final Context themedContext = new ContextThemeWrapper(activityContext, themeRes);
-		LayoutInflater themedInflater = LayoutInflater.from(themedContext);
-
-		return super.onCreateRecyclerView(themedInflater, parent, savedInstanceState);
 	}
 
 	protected abstract void setupPreferences();

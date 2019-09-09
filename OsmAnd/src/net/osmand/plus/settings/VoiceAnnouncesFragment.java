@@ -46,32 +46,8 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 
 		Preference voiceAnnouncesInfo = findPreference("voice_announces_info");
 		voiceAnnouncesInfo.setIcon(getContentIcon(R.drawable.ic_action_info_dark));
-		Preference languageAndOutput = findPreference("language_and_output");
-
-		SwitchPreference speakStreetNames = (SwitchPreference) findPreference(settings.SPEAK_STREET_NAMES.getId());
-		SwitchPreference speakTrafficWarnings = (SwitchPreference) findPreference(settings.SPEAK_TRAFFIC_WARNINGS.getId());
-		SwitchPreference speakPedestrian = (SwitchPreference) findPreference(settings.SPEAK_PEDESTRIAN.getId());
-		SwitchPreference speakSpeedLimit = (SwitchPreference) findPreference(settings.SPEAK_SPEED_LIMIT.getId());
-
-		speakStreetNames.setIconSpaceReserved(true);
-		speakTrafficWarnings.setIconSpaceReserved(true);
-		speakPedestrian.setIconSpaceReserved(true);
-		speakSpeedLimit.setIconSpaceReserved(true);
-		languageAndOutput.setIconSpaceReserved(true);
 
 		setupSpeedLimitExceedPref();
-
-		SwitchPreference speakSpeedCamera = (SwitchPreference) findPreference(settings.SPEAK_SPEED_CAMERA.getId());
-		SwitchPreference speakTunnels = (SwitchPreference) findPreference(settings.SPEAK_TUNNELS.getId());
-		SwitchPreference announceWpt = (SwitchPreference) findPreference(settings.ANNOUNCE_WPT.getId());
-		SwitchPreference announceNearbyFavorites = (SwitchPreference) findPreference(settings.ANNOUNCE_NEARBY_FAVORITES.getId());
-		SwitchPreference announceNearbyPoi = (SwitchPreference) findPreference(settings.ANNOUNCE_NEARBY_POI.getId());
-
-		speakSpeedCamera.setIconSpaceReserved(true);
-		speakTunnels.setIconSpaceReserved(true);
-		announceWpt.setIconSpaceReserved(true);
-		announceNearbyFavorites.setIconSpaceReserved(true);
-		announceNearbyPoi.setIconSpaceReserved(true);
 
 		setupKeepInformingPref();
 		setupArrivalAnnouncementPref();
@@ -111,7 +87,6 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 		ListPreferenceEx voiceProvider = (ListPreferenceEx) findPreference(settings.SPEED_LIMIT_EXCEED.getId());
 		voiceProvider.setEntries(speedLimitNames);
 		voiceProvider.setEntryValues(speedLimitValues);
-		voiceProvider.setIconSpaceReserved(true);
 	}
 
 	private void setupKeepInformingPref() {
@@ -125,7 +100,6 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 		ListPreferenceEx keepInforming = (ListPreferenceEx) findPreference(settings.KEEP_INFORMING.getId());
 		keepInforming.setEntries(keepInformingNames);
 		keepInforming.setEntryValues(keepInformingValues);
-		keepInforming.setIconSpaceReserved(true);
 	}
 
 	private void setupArrivalAnnouncementPref() {
@@ -140,7 +114,6 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 		ListPreferenceEx arrivalDistanceFactor = (ListPreferenceEx) findPreference(settings.ARRIVAL_DISTANCE_FACTOR.getId());
 		arrivalDistanceFactor.setEntries(arrivalNames);
 		arrivalDistanceFactor.setEntryValues(arrivalValues);
-		arrivalDistanceFactor.setIconSpaceReserved(true);
 	}
 
 	private void setupVoiceProviderPref() {
@@ -186,7 +159,6 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 		//AudioManager.USE_DEFAULT_STREAM_TYPE};
 
 		ListPreferenceEx audioStreamGuidance = createListPreferenceEx(settings.AUDIO_STREAM_GUIDANCE.getId(), streamTypes, streamIntTypes, R.string.choose_audio_stream, R.layout.preference_with_descr);
-		audioStreamGuidance.setIconSpaceReserved(true);
 
 		getPreferenceScreen().addPreference(audioStreamGuidance);
 
@@ -195,7 +167,6 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 
 	private void setupInterruptMusicPref() {
 		Preference interruptMusicPref = createSwitchPreference(settings.INTERRUPT_MUSIC, R.string.interrupt_music, R.string.interrupt_music_descr, R.layout.preference_switch);
-		interruptMusicPref.setIconSpaceReserved(true);
 		getPreferenceScreen().addPreference(interruptMusicPref);
 
 		interruptMusicPref.setDependency(settings.SPEAK_ROUTING_ALARMS.getId());

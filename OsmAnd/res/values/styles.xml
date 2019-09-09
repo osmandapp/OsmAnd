@@ -549,7 +549,8 @@
     </style>
 
     <style name="OsmandPreferenceTheme" parent="@style/PreferenceThemeOverlay.v14.Material">
-        <item name="android:layout">@layout/pref_screen</item>
+        <item name="android:layout">@layout/preferences_screen</item>
+        <item name="iconSpaceReserved">true</item>
     </style>
 
     <!-- Standard action bar override -->
