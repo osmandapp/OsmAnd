@@ -3227,4 +3227,10 @@ Pôr do Sol: %2$s</string>
     <string name="get_discount_second_part">em seguida %1$s</string>
     <string name="cancel_subscription">Cancelar assinatura</string>
     <string name="price_and_discount">%1$s • Economizar %2$s</string>
+    <string name="shared_string_example">Exemplo</string>
+    <string name="change_default_settings">Alterar as configurações padrões</string>
+    <string name="discard_changes">Descartar alterações</string>
+    <string name="vehicle_parameters_descr">Peso, altura, velocidade</string>
+    <string name="vehicle_parameters">Parâmetros do veículo</string>
+    <string name="screen_alerts">Alertas de tela</string>
 </resources>
