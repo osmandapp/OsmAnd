@@ -18,11 +18,10 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import static net.osmand.plus.profiles.SettingsProfileFragment.IS_USER_PROFILE;
 import static net.osmand.plus.profiles.SettingsProfileFragment.PROFILE_STRING_KEY;
 
-public abstract class AppModesBottomSheetDialogFragment<T extends AbstractProfileMenuAdapter> extends MenuBottomSheetDialogFragment {
+public abstract class AppModesBottomSheetDialogFragment<T extends AbstractProfileMenuAdapter> extends MenuBottomSheetDialogFragment 
+		implements AbstractProfileMenuAdapter.ButtonPressedListener, AbstractProfileMenuAdapter.ProfilePressedListener {
 
 	private UpdateMapRouteMenuListener updateMapRouteMenuListener;
-	protected AbstractProfileMenuAdapter.ButtonPressedListener buttonPressedListener;
-	protected AbstractProfileMenuAdapter.ProfilePressedListener profilePressedListener;
 	
 	private int themeRes;
 	protected T adapter;
@@ -74,39 +73,25 @@ public abstract class AppModesBottomSheetDialogFragment<T extends AbstractProfil
 	@Override
 	public void onResume() {
 		super.onResume();
-		adapter.setButtonPressedListener(getButtonPressedListener());
-		adapter.setProfilePressedListener(getProfilePressedListener());
+		adapter.setButtonPressedListener(this);
+		adapter.setProfilePressedListener(this);
 	}
 
-	public AbstractProfileMenuAdapter.ButtonPressedListener getButtonPressedListener() {
-		if (buttonPressedListener == null) {
-			buttonPressedListener = new AbstractProfileMenuAdapter.ButtonPressedListener() {
-				@Override
-				public void onButtonPressed() {
-					OsmandApplication app = requiredMyApplication();
-					Intent intent = new Intent(app, SettingsProfileActivity.class);
-					intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-					app.startActivity(intent);
-				}
-			};
+	@Override
+	public void onProfilePressed(ApplicationMode item) {
+		Intent intent = new Intent(getActivity(), EditProfileActivity.class);
+		intent.putExtra(PROFILE_STRING_KEY, item.getStringKey());
+		if (item.isCustomProfile()) {
+			intent.putExtra(IS_USER_PROFILE, true);
 		}
-		return buttonPressedListener;
+		startActivity(intent);
 	}
 
-	public AbstractProfileMenuAdapter.ProfilePressedListener getProfilePressedListener() {
-		if (profilePressedListener == null) {
-			profilePressedListener = new AbstractProfileMenuAdapter.ProfilePressedListener() {
-				@Override
-				public void onProfilePressed(ApplicationMode item) {
-					Intent intent = new Intent(getActivity(), EditProfileActivity.class);
-					intent.putExtra(PROFILE_STRING_KEY, item.getStringKey());
-					if (item.isCustomProfile()) {
-						intent.putExtra(IS_USER_PROFILE, true);
-					}
-					startActivity(intent);
-				}
-			};
-		}
-		return profilePressedListener;
+	@Override
+	public void onButtonPressed() {
+		OsmandApplication app = requiredMyApplication();
+		Intent intent = new Intent(app, SettingsProfileActivity.class);
+		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		app.startActivity(intent);
 	}
 }

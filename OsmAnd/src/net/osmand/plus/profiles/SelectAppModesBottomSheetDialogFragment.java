@@ -35,19 +35,11 @@ public class SelectAppModesBottomSheetDialogFragment extends AppModesBottomSheet
 	}
 
 	@Override
-	public AbstractProfileMenuAdapter.ProfilePressedListener getProfilePressedListener() {
-		if (profilePressedListener == null) {
-			profilePressedListener = new AbstractProfileMenuAdapter.ProfilePressedListener() {
-				@Override
-				public void onProfilePressed(ApplicationMode item) {
-					if (!(item == getMyApplication().getSettings().APPLICATION_MODE.get())) {
-						getMyApplication().getSettings().APPLICATION_MODE.set(item);
-						Toast.makeText(getMyApplication(), String.format(getString(R.string.application_profile_changed), item.toHumanString(getMyApplication())), Toast.LENGTH_SHORT).show();
-					}
-					dismiss();
-				}
-			};
+	public void onProfilePressed(ApplicationMode item) {
+		if (!(item == getMyApplication().getSettings().APPLICATION_MODE.get())) {
+			getMyApplication().getSettings().APPLICATION_MODE.set(item);
+			Toast.makeText(getMyApplication(), String.format(getString(R.string.application_profile_changed), item.toHumanString(getMyApplication())), Toast.LENGTH_SHORT).show();
 		}
-		return profilePressedListener;
+		dismiss();
 	}
 }

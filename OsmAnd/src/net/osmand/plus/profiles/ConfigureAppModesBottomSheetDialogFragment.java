@@ -9,18 +9,17 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-public class ConfigureAppModesBottomSheetDialogFragment extends AppModesBottomSheetDialogFragment<ConfigureProfileMenuAdapter> {
+public class ConfigureAppModesBottomSheetDialogFragment extends AppModesBottomSheetDialogFragment<ConfigureProfileMenuAdapter> 
+		implements ConfigureProfileMenuAdapter.ProfileSelectedListener {
 
 	private List<ApplicationMode> allModes = new ArrayList<>();
 	private Set<ApplicationMode> selectedModes = new HashSet<>();
 	
-	private ConfigureProfileMenuAdapter.ProfileSelectedListener profileSelectedListener;
-
 	@Override
 	public void onResume() {
 		super.onResume();
 		
-		adapter.setProfileSelectedListener(getProfileSelectedListener());
+		adapter.setProfileSelectedListener(this);
 		allModes = new ArrayList<>(ApplicationMode.allPossibleValues());
 		allModes.remove(ApplicationMode.DEFAULT);
 		adapter.updateItemsList(allModes,
@@ -46,20 +45,13 @@ public class ConfigureAppModesBottomSheetDialogFragment extends AppModesBottomSh
 		return new ConfigureProfileMenuAdapter(allModes, selectedModes, getMyApplication(), getString(R.string.shared_string_manage), nightMode);
 	}
 
-	public ConfigureProfileMenuAdapter.ProfileSelectedListener getProfileSelectedListener() {
-		if (profileSelectedListener == null) {
-			profileSelectedListener = new ConfigureProfileMenuAdapter.ProfileSelectedListener() {
-				@Override
-				public void onProfileSelected(ApplicationMode item, boolean isChecked) {
-					if (isChecked) {
-						selectedModes.add(item);
-					} else {
-						selectedModes.remove(item);
-					}
-					ApplicationMode.changeProfileAvailability(item, isChecked, getMyApplication());
-				}
-			};
+	@Override
+	public void onProfileSelected(ApplicationMode item, boolean isChecked) {
+		if (isChecked) {
+			selectedModes.add(item);
+		} else {
+			selectedModes.remove(item);
 		}
-		return profileSelectedListener;
+		ApplicationMode.changeProfileAvailability(item, isChecked, getMyApplication());
 	}
 }

@@ -26,12 +26,11 @@ import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.SelectProfileListener;
-import net.osmand.plus.profiles.AbstractProfileMenuAdapter.*;
-import net.osmand.plus.profiles.ConfigureProfileMenuAdapter.*;
 
 import org.apache.commons.logging.Log;
 
-public class SettingsProfileFragment extends BaseOsmAndFragment {
+public class SettingsProfileFragment extends BaseOsmAndFragment 
+		implements ConfigureProfileMenuAdapter.ProfileSelectedListener, AbstractProfileMenuAdapter.ProfilePressedListener{
 
 	private static final Log LOG = PlatformUtil.getLog(SettingsProfileFragment.class);
 
@@ -44,8 +43,6 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 	private RecyclerView recyclerView;
 	private LinearLayout addNewProfileBtn;
 
-	private ProfilePressedListener profilePressedListener;
-	private ProfileSelectedListener profileSelectedListener;
 	SelectProfileListener typeListener = null;
 
 	private List<ApplicationMode> allAppModes;
@@ -96,34 +93,8 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		if (profilePressedListener == null) {
-			profilePressedListener = new ProfilePressedListener() {
-				@Override
-				public void onProfilePressed(ApplicationMode item) {
-					Intent intent = new Intent(getActivity(), EditProfileActivity.class);
-					intent.putExtra(PROFILE_STRING_KEY, item.getStringKey());
-					if (item.isCustomProfile()) {
-						intent.putExtra(IS_USER_PROFILE, true);
-					}
-					startActivity(intent);
-				}
-			};
-		}
-		if (profileSelectedListener == null) {
-			profileSelectedListener = new ProfileSelectedListener() {
-				@Override
-				public void onProfileSelected(ApplicationMode item, boolean isChecked) {
-					if(isChecked) {
-						availableAppModes.add(item);
-					} else {
-						availableAppModes.remove(item);
-					}
-					ApplicationMode.changeProfileAvailability(item, isChecked, getMyApplication());
-				}
-			};
-		}
-		adapter.setProfilePressedListener(profilePressedListener);
-		adapter.setProfileSelectedListener(profileSelectedListener);
+		adapter.setProfilePressedListener(this);
+		adapter.setProfileSelectedListener(this);
 		getBaseProfileListener();
 
 		allAppModes = new ArrayList<>(ApplicationMode.allPossibleValues());
@@ -156,5 +127,25 @@ public class SettingsProfileFragment extends BaseOsmAndFragment {
 			}
 		}
 		return profiles;
+	}
+
+	@Override
+	public void onProfilePressed(ApplicationMode item) {
+		Intent intent = new Intent(getActivity(), EditProfileActivity.class);
+		intent.putExtra(PROFILE_STRING_KEY, item.getStringKey());
+		if (item.isCustomProfile()) {
+			intent.putExtra(IS_USER_PROFILE, true);
+		}
+		startActivity(intent);
+	}
+
+	@Override
+	public void onProfileSelected(ApplicationMode item, boolean isChecked) {
+		if(isChecked) {
+			availableAppModes.add(item);
+		} else {
+			availableAppModes.remove(item);
+		}
+		ApplicationMode.changeProfileAvailability(item, isChecked, getMyApplication());
 	}
 }
