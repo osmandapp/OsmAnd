@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="drm_dialog_message_hiapp_not_installed">"Installa l\'ultima versione di HiApp."</string>
+    <string name="drm_dialog_message_get_sign_failed">"Errore di rete. Verifica la connessione Internet e riprova."</string>
+    <string name="drm_dialog_message_no_internet">"Nessuna connessione Internet. Verifica la connessione Internet e riprova."</string>
+    <string name="drm_dialog_message_check_failed">"(%s), non hai acquistato l\'app. Effettua prima l\'acquisto."</string>
+    <string name="drm_dialog_message_check_failed_without_name">"Non hai acquistato l\'app. Effettua prima l\'acquisto."</string>
+    <string name="drm_dialog_message_not_logged">"Accedi con Huawei ID."</string>
+    <string name="drm_dialog_message_user_interrupt">"Impossibile verificare la cronologia acquisti. Riprova."</string>
+    <string name="drm_dialog_message_hiapp_agreement">"Accetta i Termini d\'uso di HiApp."</string>
+    <string name="drm_dialog_message_gamebox_agreement">"Accetta i Termini d\'uso di HiGame."</string>
+    <string name="drm_dialog_message_waiting">"Verifica cronologia acquisti..."</string>
+    <string name="drm_dialog_text_install">"Installa"</string>
+    <string name="drm_dialog_text_quit">"Esci"</string>
+    <string name="drm_dialog_text_retry">"OK"</string>
+    <string name="drm_dialog_text_buy">"Acquista"</string>
+    <string name="drm_dialog_text_login">"Accedi"</string>
+    <string name="drm_dialog_text_ok">"OK"</string>
+    <string name="drm_dialog_message_over_limit">"(%s), hai superato il numero massimo di dispositivi da utilizzare con l\'app. Accedi con un altro Huawei ID ed effettua di nuovo l\'acquisto."</string>
+    <string name="drm_dialog_message_over_limit_without_name">"hai superato il numero massimo di dispositivi da utilizzare con l\'app. Accedi con un altro Huawei ID ed effettua di nuovo l\'acquisto."</string>
+    <string name="drm_dialog_message_other_errorcode">"Impossibile verificare la cronologia acquisti, codice errato: %s. Contatta l\'assistenza clienti HiApp."</string>
+    <string name="drm_dialog_text_hasknow">"OK"</string>
+</resources>

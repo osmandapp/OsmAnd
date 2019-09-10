@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="drm_dialog_message_hiapp_not_installed">"Instal versi HiApp sing paling anyar dhisik."</string>
+    <string name="drm_dialog_message_get_sign_failed">"Jaringan error. Priksa sambungan internet lan coba maneh."</string>
+    <string name="drm_dialog_message_no_internet">"Ora ana sambungan internet. Priksa sambungan internet lan coba maneh."</string>
+    <string name="drm_dialog_message_check_failed">"Sampeyan (%s) durung nuku apl iki. Tukunen iki dhisik."</string>
+    <string name="drm_dialog_message_check_failed_without_name">"Sampeyan durung nuku apl iki. Tukunen iki dhisik."</string>
+    <string name="drm_dialog_message_not_logged">"Login nganggo ID Huawei sampeyan."</string>
+    <string name="drm_dialog_message_user_interrupt">"Gagal mriksa riwayat tetuku. Coba maneh."</string>
+    <string name="drm_dialog_message_hiapp_agreement">"Sarujuka karo Syarat Layanan HiApp dhisik."</string>
+    <string name="drm_dialog_message_gamebox_agreement">"Sarujuka karo Syarat Layanan HiGame dhisik."</string>
+    <string name="drm_dialog_message_waiting">"Mriksa riwayat tetuku... Enteni dhisik."</string>
+    <string name="drm_dialog_text_install">"Instal"</string>
+    <string name="drm_dialog_text_quit">"Metu"</string>
+    <string name="drm_dialog_text_retry">"OK"</string>
+    <string name="drm_dialog_text_buy">"Tuku"</string>
+    <string name="drm_dialog_text_login">"Login"</string>
+    <string name="drm_dialog_text_ok">"OK"</string>
+    <string name="drm_dialog_message_over_limit">"Sampeyan (%s) wis ngluwihi jumlah layanan maksimal singbisa digunakake nganggo apl iki. Ngaliha menyang ID Huawei liyane lan tuku maneh."</string>
+    <string name="drm_dialog_message_over_limit_without_name">"Sampeyan wis ngluwihi jumlah layanan maksimal singbisa digunakake nganggo apl iki. Ngaliha menyang ID Huawei liyane lan tuku maneh."</string>
+    <string name="drm_dialog_message_other_errorcode">"Gagal mriksa riwayat tetuku, kode error: %s. Kontak layanan pelanggan HiApp."</string>
+    <string name="drm_dialog_text_hasknow">"OK"</string>
+</resources>

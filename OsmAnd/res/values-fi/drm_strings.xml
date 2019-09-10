@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="drm_dialog_message_hiapp_not_installed">"Asenna HiApp-sovelluksen uusin versio ensin."</string>
+    <string name="drm_dialog_message_get_sign_failed">"Verkkovirhe. Tarkista internetyhteys ja yritä uudelleen."</string>
+    <string name="drm_dialog_message_no_internet">"Ei Internet-yhteyttä. Tarkista internetyhteys ja yritä uudelleen."</string>
+    <string name="drm_dialog_message_check_failed">"Et (%s) ole ostanut tätä sovellusta. Osta se ensin."</string>
+    <string name="drm_dialog_message_check_failed_without_name">"Et ole ostanut tätä sovellusta. Osta se ensin."</string>
+    <string name="drm_dialog_message_not_logged">"Kirjaudu Huawei ID -tunnuksellasi."</string>
+    <string name="drm_dialog_message_user_interrupt">"Ostohistorian tarkistus epäonnistui. Yritä uudelleen."</string>
+    <string name="drm_dialog_message_hiapp_agreement">"Hyväksy HiApp-palvelun käyttöehdot ensin."</string>
+    <string name="drm_dialog_message_gamebox_agreement">"Hyväksy HiGame -palvelun käyttöehdot ensin."</string>
+    <string name="drm_dialog_message_waiting">"Tarkistetaan ostohistoriaa... Odota hetki."</string>
+    <string name="drm_dialog_text_install">"Asenna"</string>
+    <string name="drm_dialog_text_quit">"Lopeta"</string>
+    <string name="drm_dialog_text_retry">"OK"</string>
+    <string name="drm_dialog_text_buy">"Osta"</string>
+    <string name="drm_dialog_text_login">"Kirjaudu"</string>
+    <string name="drm_dialog_text_ok">"OK"</string>
+    <string name="drm_dialog_message_over_limit">"Olet (%s) ylittänyt enimmäismäärän laitteita, joita voidaan käyttää tällä sovelluksella. Käytä toista Huawei ID -tunnusta ja tee ostos uudelleen."</string>
+    <string name="drm_dialog_message_over_limit_without_name">"Olet ylittänyt enimmäismäärän laitteita, joita voidaan käyttää tällä sovelluksella. Käytä toista Huawei ID -tunnusta ja tee ostos uudelleen."</string>
+    <string name="drm_dialog_message_other_errorcode">"Ostohistorian tarkistus epäonnistui, virhekoodi: %s. Ota yhteyttä HiApp-asiakaspalveluun."</string>
+    <string name="drm_dialog_text_hasknow">"OK"</string>
+</resources>

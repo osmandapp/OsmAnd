@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="drm_dialog_message_hiapp_not_installed">"Nejdříve si nainstalujte nejnovější verzi aplikace HiApp."</string>
+    <string name="drm_dialog_message_get_sign_failed">"Chyba sítě. Zkontrolujte připojení k internetu a opakujte akci."</string>
+    <string name="drm_dialog_message_no_internet">"Připojení k&#160;internetu není k&#160;dispozici. Zkontrolujte připojení k internetu a opakujte akci."</string>
+    <string name="drm_dialog_message_check_failed">"Tuto aplikaci nemáte zakoupenou (uživatel %s). Nejdříve si ji zakupte."</string>
+    <string name="drm_dialog_message_check_failed_without_name">"Tuto aplikaci nemáte zakoupenou. Nejdříve si ji zakupte."</string>
+    <string name="drm_dialog_message_not_logged">"Přihlaste se pomocí svého účtu Huawei ID."</string>
+    <string name="drm_dialog_message_user_interrupt">"Kontrola historie nákupu neproběhla úspěšně. Opakujte akci."</string>
+    <string name="drm_dialog_message_hiapp_agreement">"Nejdříve udělte souhlas s dokumentem Podmínky služby HiApp."</string>
+    <string name="drm_dialog_message_gamebox_agreement">"Nejdříve udělte souhlas s dokumentem Podmínky služby HiGame."</string>
+    <string name="drm_dialog_message_waiting">"Probíhá kontrola historie nákupu… Čekejte."</string>
+    <string name="drm_dialog_text_install">"Instalovat"</string>
+    <string name="drm_dialog_text_quit">"Ukončit"</string>
+    <string name="drm_dialog_text_retry">"OK"</string>
+    <string name="drm_dialog_text_buy">"Koupit"</string>
+    <string name="drm_dialog_text_login">"Přihlásit se"</string>
+    <string name="drm_dialog_text_ok">"OK"</string>
+    <string name="drm_dialog_message_over_limit">"Překročili jste (uživatel %s) maximální počet zařízení, která mohou používat tuto aplikaci. Přihlaste se pod jiným účtem Huawei ID a proveďte nákup znovu."</string>
+    <string name="drm_dialog_message_over_limit_without_name">"Překročili jste maximální počet zařízení, která mohou používat tuto aplikaci. Přihlaste se pod jiným účtem Huawei ID a proveďte nákup znovu."</string>
+    <string name="drm_dialog_message_other_errorcode">"Kontrola historie nákupů neproběhla úspěšně, kód chyby: %s. Obraťte se na zákaznický servis služby HiApp."</string>
+    <string name="drm_dialog_text_hasknow">"OK"</string>
+</resources>

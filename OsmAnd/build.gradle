@@ -18,6 +18,8 @@ apply plugin: 'com.android.application'
 // Less important
 
 
+def huawei = (!System.getenv("APP_FEATURES") || System.getenv("APP_FEATURES").contains("+huawei"))
+
 task printc {
 	configurations.each { if(it.isCanBeResolved())  println it.name }
 }
@@ -422,4 +424,8 @@ dependencies {
 	implementation ("com.github.HITGIF:TextFieldBoxes:1.3.5"){
 		exclude group: 'com.android.support'
 	}
+
+    if (huawei) {
+        implementation files('libs/huawei-android-drm_v2.5.2.300.jar')
+    }
 }

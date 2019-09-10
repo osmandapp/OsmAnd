@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="drm_dialog_message_hiapp_not_installed">"Сначала установите последнюю версию магазина приложений HiApp."</string>
+    <string name="drm_dialog_message_get_sign_failed">"Ошибка сети. Проверьте интернет-соединение и повторите попытку."</string>
+    <string name="drm_dialog_message_no_internet">"Нет интернет-соединения. Проверьте интернет-соединение и повторите попытку."</string>
+    <string name="drm_dialog_message_check_failed">"Вы (%s) не купили это приложение. Сначала купите его."</string>
+    <string name="drm_dialog_message_check_failed_without_name">"Вы не купили это приложение. Сначала купите его."</string>
+    <string name="drm_dialog_message_not_logged">"Выполните вход в аккаунт Huawei."</string>
+    <string name="drm_dialog_message_user_interrupt">"Сбой проверки истории покупок. Повторите попытку."</string>
+    <string name="drm_dialog_message_hiapp_agreement">"Сначала примите условия использования HiApp."</string>
+    <string name="drm_dialog_message_gamebox_agreement">"Сначала примите условия использования HiGame."</string>
+    <string name="drm_dialog_message_waiting">"Проверка истории покупок… Подождите."</string>
+    <string name="drm_dialog_text_install">"Установить"</string>
+    <string name="drm_dialog_text_quit">"Выйти"</string>
+    <string name="drm_dialog_text_retry">"OK"</string>
+    <string name="drm_dialog_text_buy">"Купить"</string>
+    <string name="drm_dialog_text_login">"Войти"</string>
+    <string name="drm_dialog_text_ok">"OK"</string>
+    <string name="drm_dialog_message_over_limit">"У Вас (%s) превышено макс. число устройств, на которых может использоваться это приложение. Переключитесь на другой аккаунт Huawei и повторите покупку."</string>
+    <string name="drm_dialog_message_over_limit_without_name">"Пользователь превышено макс. число устройств, на которых может использоваться это приложение. Переключитесь на другой аккаунт Huawei и повторите покупку."</string>
+    <string name="drm_dialog_message_other_errorcode">"Сбой проверки истории покупок. Код ошибки: %s. Обратитесь в службу поддержки клиентов HiApp."</string>
+    <string name="drm_dialog_text_hasknow">"OK"</string>
+</resources>

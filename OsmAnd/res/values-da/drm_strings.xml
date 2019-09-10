@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="drm_dialog_message_hiapp_not_installed">"Installer først den nyeste version af HiApp."</string>
+    <string name="drm_dialog_message_get_sign_failed">"Netværksfejl. Kontroller din internetforbindelse, og prøv igen."</string>
+    <string name="drm_dialog_message_no_internet">"Der er ingen internetforbindelse. Kontroller din internetforbindelse, og prøv igen."</string>
+    <string name="drm_dialog_message_check_failed">"Du (%s) har ikke købt denne app. Køb den først."</string>
+    <string name="drm_dialog_message_check_failed_without_name">"Du har ikke købt denne app. Køb den først."</string>
+    <string name="drm_dialog_message_not_logged">"Log på med dit Huawei-id."</string>
+    <string name="drm_dialog_message_user_interrupt">"Købshistorikken kunne ikke kontrolleres. Prøv igen."</string>
+    <string name="drm_dialog_message_hiapp_agreement">"Du skal først acceptere HiApps tjenestevilkår."</string>
+    <string name="drm_dialog_message_gamebox_agreement">"Du skal først acceptere HiGames tjenestevilkår."</string>
+    <string name="drm_dialog_message_waiting">"Kontrollerer købshistorik ... Vent."</string>
+    <string name="drm_dialog_text_install">"Installer"</string>
+    <string name="drm_dialog_text_quit">"Afslut"</string>
+    <string name="drm_dialog_text_retry">"OK"</string>
+    <string name="drm_dialog_text_buy">"Køb"</string>
+    <string name="drm_dialog_text_login">"Log på"</string>
+    <string name="drm_dialog_text_ok">"OK"</string>
+    <string name="drm_dialog_message_over_limit">"Du har (%s) overskredet det maksimale antal enheder, som kan bruges med denne app. Skift til et andet Huawei-id, og køb igen."</string>
+    <string name="drm_dialog_message_over_limit_without_name">"Du har overskredet det maksimale antal enheder, som kan bruges med denne app. Skift til et andet Huawei-id, og køb igen."</string>
+    <string name="drm_dialog_message_other_errorcode">"Købshistorikken kunne ikke kontrolleres. Fejlkode: %s. Kontakt HiApp-kundeservice."</string>
+    <string name="drm_dialog_text_hasknow">"OK"</string>
+</resources>

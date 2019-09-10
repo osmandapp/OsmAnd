@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="drm_dialog_message_hiapp_not_installed">"សូមដំឡើងកំណែចុងក្រោយបំផុតនៃ HiApp ជាមុនសិន។"</string>
+    <string name="drm_dialog_message_get_sign_failed">"កំហុស​បណ្ដាញ។ សូមពិនិត្យការភ្ជាប់អ៊ីនធឺណិតរបស់អ្នក ហើយ​ព្យាយាមម្ដងទៀត។"</string>
+    <string name="drm_dialog_message_no_internet">"មិនមាន​ការ​ភ្ជាប់បណ្ដាញអ៊ីនធឺណិត។ សូមពិនិត្យការភ្ជាប់អ៊ីនធឺណិតរបស់អ្នក ហើយ​ព្យាយាមម្ដងទៀត។"</string>
+    <string name="drm_dialog_message_check_failed">"អ្នក (%s) មិន​បាន​ទិញ​កម្មវិធី​នេះ​ទេ។ សូម​ទិញ​វា​ជាមុនសិន។"</string>
+    <string name="drm_dialog_message_check_failed_without_name">"អ្នក​មិនបាន​ទិញ​កម្មវិធីនេះ​ទេ។ សូម​ទិញ​វា​ជាមុនសិន។"</string>
+    <string name="drm_dialog_message_not_logged">"សូមចូលក្នុងប្រព័ន្ធជាមួយ Huawei ID​​ របស់អ្នក។"</string>
+    <string name="drm_dialog_message_user_interrupt">"បាន​បរាជ័យ​ក្នុង​ការពិនិត្យ​មើល​ប្រវត្តិ​ទិញ។ សូមព្យាយាមម្តងទៀត។"</string>
+    <string name="drm_dialog_message_hiapp_agreement">"សូម​យល់​ព្រម​នឹង​លក្ខខណ្ឌ​សេវាកម្ម​របស់​ HiApp ជា​មុន​សិន។"</string>
+    <string name="drm_dialog_message_gamebox_agreement">"សូម​យល់​ព្រម​នឹង​លក្ខខណ្ឌ​សេវាកម្ម​របស់​ HiGame ជា​មុន​សិន។"</string>
+    <string name="drm_dialog_message_waiting">"កំពុងពិនិត្យមើល​ប្រវត្តិ​ទិញ… សូម​រង់ចាំ។"</string>
+    <string name="drm_dialog_text_install">"ដំឡើង"</string>
+    <string name="drm_dialog_text_quit">"ចាកចេញ"</string>
+    <string name="drm_dialog_text_retry">"OK"</string>
+    <string name="drm_dialog_text_buy">"ទិញ"</string>
+    <string name="drm_dialog_text_login">"ចូលក្នុងប្រព័ន្ធ"</string>
+    <string name="drm_dialog_text_ok">"OK"</string>
+    <string name="drm_dialog_message_over_limit">"អ្នក (%s) បាន​លើស​ចំនួន​ឧបករណ៍​អតិបរមា​ដែល​អាច​ប្រើ​បាន​ជាមួយ​កម្មវិធីនេះ។ សូម​ប្ដូរ​ទៅ​ Huawei ID មួយ​ផ្សេងទៀត ហើយ​ទិញ​ម្ដងទៀត។"</string>
+    <string name="drm_dialog_message_over_limit_without_name">"អ្នក  បាន​លើស​ចំនួន​ឧបករណ៍​អតិបរមា​ដែល​អាច​ប្រើ​បាន​ជាមួយ​កម្មវិធីនេះ។ សូម​ប្ដូរ​ទៅ​ Huawei ID មួយ​ផ្សេងទៀត ហើយ​ទិញ​ម្ដងទៀត។"</string>
+    <string name="drm_dialog_message_other_errorcode">"បាន​បរាជ័យ​ក្នុង​ការពិនិត្យ​មើល​ប្រវត្តិ​ទិញ កូដកំហុស៖ %s. សូម​ទាក់ទង​ទៅកាន់​សេវាកម្ម​អតិថិជន​ HiApp។"</string>
+    <string name="drm_dialog_text_hasknow">"OK"</string>
+</resources>

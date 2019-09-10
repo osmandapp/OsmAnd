@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="drm_dialog_message_hiapp_not_installed">"最新のHiAppをインストールしてください"</string>
+    <string name="drm_dialog_message_get_sign_failed">"ネットワークエラー。インターネット接続を確認して、再試行してください。"</string>
+    <string name="drm_dialog_message_no_internet">"インターネットに接続されていません。インターネット接続を確認して、再試行してください。"</string>
+    <string name="drm_dialog_message_check_failed">"ユーザー(%s)はこのアプリを購入していません。先に購入してください。"</string>
+    <string name="drm_dialog_message_check_failed_without_name">"ユーザーはこのアプリを購入していません。先に購入してください。"</string>
+    <string name="drm_dialog_message_not_logged">"Huawei IDでログインしてください"</string>
+    <string name="drm_dialog_message_user_interrupt">"購入履歴が確認できませんでした。再試行してください。"</string>
+    <string name="drm_dialog_message_hiapp_agreement">"HiAppの利用規約に同意してください"</string>
+    <string name="drm_dialog_message_gamebox_agreement">"最初にHiGameの利用規約に同意してください"</string>
+    <string name="drm_dialog_message_waiting">"購入履歴の確認中...お待ちください"</string>
+    <string name="drm_dialog_text_install">"インストール"</string>
+    <string name="drm_dialog_text_quit">"終了"</string>
+    <string name="drm_dialog_text_retry">"OK"</string>
+    <string name="drm_dialog_text_buy">"購入"</string>
+    <string name="drm_dialog_text_login">"ログイン"</string>
+    <string name="drm_dialog_text_ok">"OK"</string>
+    <string name="drm_dialog_message_over_limit">"ユーザー(%s)はこのアプリで利用可能なデバイス数の上限に達しました。別のHuawei IDに切り替えて再購入してください"</string>
+    <string name="drm_dialog_message_over_limit_without_name">"ユーザーはこのアプリで利用可能なデバイス数の上限に達しました。別のHuawei IDに切り替えて再購入してください"</string>
+    <string name="drm_dialog_message_other_errorcode">"購入履歴が確認できませんでした。エラーコード：%s。HiAppカスタマーサービスにお問い合わせください。"</string>
+    <string name="drm_dialog_text_hasknow">"OK"</string>
+</resources>

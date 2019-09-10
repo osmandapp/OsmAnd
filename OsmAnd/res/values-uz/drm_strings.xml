@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="drm_dialog_message_hiapp_not_installed">"Avval HiApp ilovasining eng oxirgi versiyasini o‘rnating."</string>
+    <string name="drm_dialog_message_get_sign_failed">"Tarmoq xatosi. Internet aloqasini tekshiring va qaytadan urining."</string>
+    <string name="drm_dialog_message_no_internet">"Internet aloqasi yo‘q. Internet aloqasini tekshiring va qaytadan urining."</string>
+    <string name="drm_dialog_message_check_failed">"Siz (%s) bu ilovani sotib olmagansiz. Avval uni sotib oling."</string>
+    <string name="drm_dialog_message_check_failed_without_name">"Siz bu ilovani sotib olmagansiz. Avval uni sotib oling."</string>
+    <string name="drm_dialog_message_not_logged">"Huawei ID bilan kiring."</string>
+    <string name="drm_dialog_message_user_interrupt">"Xaridlar tarixi tekshirilmadi. Qaytadan urining."</string>
+    <string name="drm_dialog_message_hiapp_agreement">"Avval HiApp xizmat shartlariga rozilik bildiring."</string>
+    <string name="drm_dialog_message_gamebox_agreement">"Avval HiGame xizmat shartlariga rozilik bildiring."</string>
+    <string name="drm_dialog_message_waiting">"Xaridlar tarixi tekshirilmoqda… Kutib turing."</string>
+    <string name="drm_dialog_text_install">"O‘rnatish"</string>
+    <string name="drm_dialog_text_quit">"Chiqish"</string>
+    <string name="drm_dialog_text_retry">"OK"</string>
+    <string name="drm_dialog_text_buy">"Sotib olish"</string>
+    <string name="drm_dialog_text_login">"Kirish"</string>
+    <string name="drm_dialog_text_ok">"OK"</string>
+    <string name="drm_dialog_message_over_limit">"Siz (%s) bu ilova bilan ishlatish mumkin bo‘lgan qurilmalar sonining maksimal miqdoridan oshib ketdingiz. Boshqa Huawei ID bilan kirib, keyin qaytadan xarid qiling."</string>
+    <string name="drm_dialog_message_over_limit_without_name">"Siz bu ilova bilan ishlatish mumkin bo‘lgan qurilmalar sonining maksimal miqdoridan oshib ketdingiz. Boshqa Huawei ID bilan kirib, keyin qaytadan xarid qiling."</string>
+    <string name="drm_dialog_message_other_errorcode">"Xaridlar tarixi tekshirilmadi, xatolik kodi: %s. HiApp mijozlarga xizmat ko‘rsatish markaziga murojaat qiling."</string>
+    <string name="drm_dialog_text_hasknow">"OK"</string>
+</resources>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string name="drm_dialog_message_hiapp_not_installed">"請先安裝最新版本的華為應用程式市集"</string>
+    <string name="drm_dialog_message_get_sign_failed">"網路錯誤，請檢查網路後再試一次。"</string>
+    <string name="drm_dialog_message_no_internet">"沒有網際網路連線，請檢查網路後再試一次。"</string>
+    <string name="drm_dialog_message_check_failed">"您 (%s) 尚未購買本應用程式，請購買後使用。"</string>
+    <string name="drm_dialog_message_check_failed_without_name">"尚未購買本應用程式，請購買後使用。"</string>
+    <string name="drm_dialog_message_not_logged">"使用您的華為 ID 登入"</string>
+    <string name="drm_dialog_message_user_interrupt">"檢查購買記錄失敗，請再試一次。"</string>
+    <string name="drm_dialog_message_hiapp_agreement">"請同意華為應用程式市集服務條款後再使用"</string>
+    <string name="drm_dialog_message_gamebox_agreement">"請同意華為遊戲中心服務條款後再使用"</string>
+    <string name="drm_dialog_message_waiting">"正在檢查購買記錄…請稍候。"</string>
+    <string name="drm_dialog_text_install">安裝</string>
+    <string name="drm_dialog_text_quit">"登出"</string>
+    <string name="drm_dialog_text_retry">"重試"</string>
+    <string name="drm_dialog_text_buy">購買</string>
+    <string name="drm_dialog_text_login">登入</string>
+    <string name="drm_dialog_text_ok">"同意"</string>
+
+    <string name="drm_dialog_message_over_limit">"目前帳號下 (%s)，使用本應用程式的裝置數量已超過上限，請更換帳號並再度購買。"</string>
+    <string name="drm_dialog_message_over_limit_without_name">"目前帳號下，使用本應用程式的裝置數量已超過上限，請更換帳號再重新購買。"</string>
+    <string name="drm_dialog_message_other_errorcode">"檢查購買記錄失敗，錯誤碼：(%s)，請聯絡華為應用程式市集客服。"</string>
+    <string name="drm_dialog_text_hasknow">"完成"</string>
+</resources>

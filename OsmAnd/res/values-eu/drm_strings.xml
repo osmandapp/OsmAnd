@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="drm_dialog_message_hiapp_not_installed">"Instala ezazu HiApp aplikazioaren bertsio berriena."</string>
+    <string name="drm_dialog_message_get_sign_failed">"Sareko errorea. Egiaztatu Interneteko konexioa eta saiatu berriro."</string>
+    <string name="drm_dialog_message_no_internet">"Ez dago Interneteko konexiorik. Egiaztatu Interneteko konexioa eta saiatu berriro."</string>
+    <string name="drm_dialog_message_check_failed">"Zuk (%s) ez duzu erosi aplikazio hau. Eros ezazu lehenik."</string>
+    <string name="drm_dialog_message_check_failed_without_name">"Zuk ez duzu erosi aplikazio hau. Eros ezazu lehenik."</string>
+    <string name="drm_dialog_message_not_logged">"Hasi saioa Huawei IDarekin."</string>
+    <string name="drm_dialog_message_user_interrupt">"Ezin izan da egiaztatu erosketa-historiarik. Saiatu berriro."</string>
+    <string name="drm_dialog_message_hiapp_agreement">"Lehenik, onartu HiApp-en Zerbitzu-baldintzak."</string>
+    <string name="drm_dialog_message_gamebox_agreement">"Lehenik, onartu HiGame-ren Zerbitzu-baldintzak."</string>
+    <string name="drm_dialog_message_waiting">"Erosketa-historia egiaztatzen... Itxaron."</string>
+    <string name="drm_dialog_text_install">"Instalatu"</string>
+    <string name="drm_dialog_text_quit">"Irten"</string>
+    <string name="drm_dialog_text_retry">"Ados"</string>
+    <string name="drm_dialog_text_buy">"Erosi"</string>
+    <string name="drm_dialog_text_login">"Hasi saioa"</string>
+    <string name="drm_dialog_text_ok">"Ados"</string>
+    <string name="drm_dialog_message_over_limit">"Aplikazioarekin erabil daitezkeen gehienezko kopurua gainditu duzu (%s). Aldatu beste Huawei ID batera eta erosi berriz."</string>
+    <string name="drm_dialog_message_over_limit_without_name">"Aplikazioarekin erabil daitezkeen gehienezko kopurua gainditu duzu. Aldatu beste Huawei ID batera eta erosi berriz."</string>
+    <string name="drm_dialog_message_other_errorcode">"Ezin izan da egiaztatu erosketa-historia (errore-kodea: %s). Jarri harremanetan HiApp-en bezeroaren zerbitzuarekin."</string>
+    <string name="drm_dialog_text_hasknow">"Ados"</string>
+</resources>

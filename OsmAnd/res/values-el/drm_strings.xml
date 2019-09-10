@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="drm_dialog_message_hiapp_not_installed">"Εγκαταστήστε την τελευταία έκδοση του HiApp πρώτα."</string>
+    <string name="drm_dialog_message_get_sign_failed">"Σφάλμα δικτύου. Ελέγξτε τη σύνδεση στο Internet και προσπαθήστε ξανά."</string>
+    <string name="drm_dialog_message_no_internet">"Δεν υπάρχει σύνδεση στο Internet. Ελέγξτε τη σύνδεση στο Internet και προσπαθήστε ξανά."</string>
+    <string name="drm_dialog_message_check_failed">"Δεν έχετε (%s) αγοράσει αυτήν την εφαρμογή. Αγοράστε την πρώτα."</string>
+    <string name="drm_dialog_message_check_failed_without_name">"Δεν έχετε αγοράσει αυτήν την εφαρμογή. Αγοράστε την πρώτα."</string>
+    <string name="drm_dialog_message_not_logged">"Συνδεθείτε με το αναγνωριστικό Huawei."</string>
+    <string name="drm_dialog_message_user_interrupt">"Ανεπιτυχής έλεγχος ιστορικού αγοράς. Δοκιμάστε ξανά."</string>
+    <string name="drm_dialog_message_hiapp_agreement">"Συμφωνήστε με τους Όρους χρήσης HiApp πρώτα."</string>
+    <string name="drm_dialog_message_gamebox_agreement">"Συμφωνήστε με τους Όρους χρήσης HiGame πρώτα."</string>
+    <string name="drm_dialog_message_waiting">"Έλεγχος ιστορικού αγοράς… Περιμένετε."</string>
+    <string name="drm_dialog_text_install">"Εγκατάσταση"</string>
+    <string name="drm_dialog_text_quit">"Έξοδος"</string>
+    <string name="drm_dialog_text_retry">"OK"</string>
+    <string name="drm_dialog_text_buy">"Αγορά"</string>
+    <string name="drm_dialog_text_login">"Σύνδεση"</string>
+    <string name="drm_dialog_text_ok">"OK"</string>
+    <string name="drm_dialog_message_over_limit">"Έχετε (%s) υπερβεί τον μέγιστο αριθμό συσκευών που μπορούν να χρησιμοποιηθούν με αυτήν την εφαρμογή. Αλλάξτε σε ένα άλλο αναγνωριστικό Huawei και αγοράστε ξανά."</string>
+    <string name="drm_dialog_message_over_limit_without_name">"Έχετε υπερβεί τον μέγιστο αριθμό συσκευών που μπορεί να χρησιμοποιηθεί με αυτήν την εφαρμογή. Αλλάξτε σε ένα άλλο αναγνωριστικό Huawei και αγοράστε ξανά."</string>
+    <string name="drm_dialog_message_other_errorcode">"Ανεπιτυχής έλεγχος ιστορικού αγοράς, κωδικός σφάλματος: %s. Επικοινωνήστε με την υπηρεσία εξυπηρέτησης πελατών της HiApp."</string>
+    <string name="drm_dialog_text_hasknow">"OK"</string>
+</resources>

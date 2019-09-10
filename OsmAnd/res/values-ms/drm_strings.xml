@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="drm_dialog_message_hiapp_not_installed">"Sila pasang versi terkini HiApp dahulu."</string>
+    <string name="drm_dialog_message_get_sign_failed">"Ralat rangkaian. Sila periksa sambungan Internet anda dan cuba lagi."</string>
+    <string name="drm_dialog_message_no_internet">"Tiada sambungan Internet. Sila periksa sambungan Internet anda dan cuba lagi."</string>
+    <string name="drm_dialog_message_check_failed">"Anda (%s) belum membeli apl ini. Sila belinya dahulu."</string>
+    <string name="drm_dialog_message_check_failed_without_name">"Anda belum membeli apl ini. Sila belinya dahulu."</string>
+    <string name="drm_dialog_message_not_logged">"Sila log masuk dengan ID Huawei anda."</string>
+    <string name="drm_dialog_message_user_interrupt">"Gagal menyemak sejarah pembelian. Sila cuba lagi."</string>
+    <string name="drm_dialog_message_hiapp_agreement">"Sila bersetuju dengan Terma Perkhidmatan HiApp dahulu."</string>
+    <string name="drm_dialog_message_gamebox_agreement">"Sila bersetuju dengan Terma Perkhidmatan HiGame dahulu."</string>
+    <string name="drm_dialog_message_waiting">"Menyemak sejarah pembelian... Sila tunggu."</string>
+    <string name="drm_dialog_text_install">"Pasang"</string>
+    <string name="drm_dialog_text_quit">"Keluar"</string>
+    <string name="drm_dialog_text_retry">"OK"</string>
+    <string name="drm_dialog_text_buy">"Beli"</string>
+    <string name="drm_dialog_text_login">"Log masuk"</string>
+    <string name="drm_dialog_text_ok">"OK"</string>
+    <string name="drm_dialog_message_over_limit">"Anda (%s) telah melebihi bilangan maksimum peranti yang boleh digunakan dengan apl ini. Sila bertukar kepada ID Huawei yang lain dan beli lagi."</string>
+    <string name="drm_dialog_message_over_limit_without_name">"Anda telah melebihi bilangan maksimum peranti yang boleh digunakan dengan apl ini. Sila bertukar kepada ID Huawei yang lain dan beli lagi."</string>
+    <string name="drm_dialog_message_other_errorcode">"Gagal menyemak sejarah pembelian, kod ralat: %s. Sila hubungi perkhidmatan pelanggan HiApp."</string>
+    <string name="drm_dialog_text_hasknow">"OK"</string>
+</resources>

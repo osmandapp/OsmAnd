@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="drm_dialog_message_hiapp_not_installed">"Zainstaluj najpierw najnowszą wersję aplikacji HiApp."</string>
+    <string name="drm_dialog_message_get_sign_failed">"Błąd sieciowy. Sprawdź połączenie internetowe i spróbuj ponownie."</string>
+    <string name="drm_dialog_message_no_internet">"Brak połączenia z Internetem. Sprawdź połączenie internetowe i spróbuj ponownie."</string>
+    <string name="drm_dialog_message_check_failed">"Ta aplikacja nie została przez Ciebie (%s) kupiona. Najpierw ją kup."</string>
+    <string name="drm_dialog_message_check_failed_without_name">"Ta aplikacja nie została przez Ciebie kupiona. Najpierw ją kup."</string>
+    <string name="drm_dialog_message_not_logged">"Zaloguj się przy użyciu ID Huawei."</string>
+    <string name="drm_dialog_message_user_interrupt">"Nie można sprawdzić historii zakupów. Spróbuj ponownie."</string>
+    <string name="drm_dialog_message_hiapp_agreement">"Zaakceptuj najpierw Warunki świadczenia usługi HiApp."</string>
+    <string name="drm_dialog_message_gamebox_agreement">"Zaakceptuj najpierw Warunki świadczenia usługi HiGame."</string>
+    <string name="drm_dialog_message_waiting">"Sprawdzanie historii zakupów… Czekaj."</string>
+    <string name="drm_dialog_text_install">"Zainstaluj"</string>
+    <string name="drm_dialog_text_quit">"Zamknij"</string>
+    <string name="drm_dialog_text_retry">"OK"</string>
+    <string name="drm_dialog_text_buy">"Kup"</string>
+    <string name="drm_dialog_text_login">"Zaloguj"</string>
+    <string name="drm_dialog_text_ok">"OK"</string>
+    <string name="drm_dialog_message_over_limit">"Przekroczono maksymalną liczbę urządzeń dla użytkownika %s, na których można korzystać z tej aplikacji. Zmień ID Huawei i dokonaj zakupu ponownie."</string>
+    <string name="drm_dialog_message_over_limit_without_name">"Przekroczono maksymalną liczbę urządzeń dla użytkownika, na których można korzystać z tej aplikacji. Zmień ID Huawei i dokonaj zakupu ponownie."</string>
+    <string name="drm_dialog_message_other_errorcode">"Nie można sprawdzić historii zakupów. Kod błędu: %s. Skontaktuj się z działem obsługi klienta HiApp."</string>
+    <string name="drm_dialog_text_hasknow">"OK"</string>
+</resources>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="drm_dialog_message_hiapp_not_installed">"कृपया सबसे पहले HiApp का नवीनतम संस्करण स्थापित करें।"</string>
+    <string name="drm_dialog_message_get_sign_failed">"नेटवर्क त्रुटि। कृपया अपना इंटरनेट कनेक्शन जाँचें और पुनः प्रयास करें।"</string>
+    <string name="drm_dialog_message_no_internet">"कोई इंटरनेट कनेक्शन नहीं। कृपया अपना इंटरनेट कनेक्शन जाँचें और पुनः प्रयास करें।"</string>
+    <string name="drm_dialog_message_check_failed">"आपने (%s) इस ऐप को नहीं खरीदा है। कृपया पहले इसे खरीदें।"</string>
+    <string name="drm_dialog_message_check_failed_without_name">"अपने इस ऐप को नहीं खरीदा है। कृपया पहले इसे खरीदें।"</string>
+    <string name="drm_dialog_message_not_logged">"कृपया अपनी हुअवी ID द्वारा लॉग इन करें।"</string>
+    <string name="drm_dialog_message_user_interrupt">"खरीद इतिहास जाँचने में विफल रहा। कृपया पुन: प्रयास करें।"</string>
+    <string name="drm_dialog_message_hiapp_agreement">"कृपया सबसे पहले HiApp की सेवा की शर्तें पर सहमति प्रदान करें।"</string>
+    <string name="drm_dialog_message_gamebox_agreement">"कृपया सबसे पहले HiGame की सेवा की शर्तें पर सहमति प्रदान करें।"</string>
+    <string name="drm_dialog_message_waiting">"खरीद इतिहास की जाँच कर रहा है… कृपया प्रतीक्षा करें।"</string>
+    <string name="drm_dialog_text_install">"स्थापित करें"</string>
+    <string name="drm_dialog_text_quit">"बाहर निकलें"</string>
+    <string name="drm_dialog_text_retry">"ठीक"</string>
+    <string name="drm_dialog_text_buy">"खरीदें"</string>
+    <string name="drm_dialog_text_login">"लॉग इन करें"</string>
+    <string name="drm_dialog_text_ok">"ठीक"</string>
+    <string name="drm_dialog_message_over_limit">"आपने (%s) उन डिवाइसेस की अधिकतम सीमा पार कर ली है जिनका उपयोग इस ऐप के साथ किया जा सकता है। कृपया दूसरे हुअवी ID पर स्विच करें और पुन: खरीदें।"</string>
+    <string name="drm_dialog_message_over_limit_without_name">"आपने उन डिवाइसेस की अधिकतम सीमा पार कर ली है जिनका उपयोग इस ऐप के साथ किया जा सकता है। कृपया दूसरे हुअवी ID पर स्विच करें और पुन: खरीदें।"</string>
+    <string name="drm_dialog_message_other_errorcode">"खरीद इतिहास जाँचने में विफल, त्रुटि कोड: %s. कृपया HiApp ग्राहक सेवा से संपर्क करें।"</string>
+    <string name="drm_dialog_text_hasknow">"ठीक"</string>
+</resources>

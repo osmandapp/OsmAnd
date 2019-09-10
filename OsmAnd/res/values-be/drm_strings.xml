@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="drm_dialog_message_hiapp_not_installed">"Калі ласка, спачатку ўсталюйце апошнюю версію HiApp."</string>
+    <string name="drm_dialog_message_get_sign_failed">"Сеткавая памылка. Калі ласка, праверце падлучэнне да Інтэрнэту і паспрабуйце ізноў."</string>
+    <string name="drm_dialog_message_no_internet">"Інтэрнэт злучэнне адсутнічае. Калі ласка, праверце падлучэнне да Інтэрнэту і паспрабуйце ізноў."</string>
+    <string name="drm_dialog_message_check_failed">"Вы (%s) не набылі гэты дадатак. Калі ласка, спачатку набудзьце яго."</string>
+    <string name="drm_dialog_message_check_failed_without_name">"Вы не набылі гэты дадатак. Калі ласка, спачатку набудзьце яго."</string>
+    <string name="drm_dialog_message_not_logged">"Калі ласка, увайдзіце ў свой ідэнтыфікатор Huawei."</string>
+    <string name="drm_dialog_message_user_interrupt">"Памылка праверыкі гісторыі пакупак. Калі ласка, паспрабуйце яшчэ раз."</string>
+    <string name="drm_dialog_message_hiapp_agreement">"Калі ласка, спачатку прыміце Ўмовы прадастаўлення паслуг HiApp."</string>
+    <string name="drm_dialog_message_gamebox_agreement">"Калі ласка, спачатку прыміце Ўмовы прадастаўлення паслуг HiGame."</string>
+    <string name="drm_dialog_message_waiting">"Праверка гісторыі пакупак... Калі ласка, пачакайце."</string>
+    <string name="drm_dialog_text_install">"Усталяваць"</string>
+    <string name="drm_dialog_text_quit">"Выхад"</string>
+    <string name="drm_dialog_text_retry">"ОК"</string>
+    <string name="drm_dialog_text_buy">"Пакупка"</string>
+    <string name="drm_dialog_text_login">"Увайсці"</string>
+    <string name="drm_dialog_text_ok">"ОК"</string>
+    <string name="drm_dialog_message_over_limit">"Вы (%s) перавысілі максімальную колькасць прылад, якія могуць быць выкарыстаны з гэтым дадаткам. Калі ласка, пераключыцца на іншы ідэнтыфікатар Huawei і купіць ізноў."</string>
+    <string name="drm_dialog_message_over_limit_without_name">"Вы перавысілі максімальную колькасць прылад, якія могуць быць выкарыстаны з гэтым дадаткам. Калі ласка, пераключыцца на іншы ідэнтыфікатар Huawei і купіць ізноў."</string>
+    <string name="drm_dialog_message_other_errorcode">"Не атрымалася праверыць гісторыю пакупак, код памылкі: %s. Калі ласка, звярніцеся ў службу падтрымкі HiApp."</string>
+    <string name="drm_dialog_text_hasknow">"ОК"</string>
+</resources>

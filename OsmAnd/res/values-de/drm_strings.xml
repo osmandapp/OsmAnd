@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="drm_dialog_message_hiapp_not_installed">"Installieren Sie zuerst die neueste Version von HiApp."</string>
+    <string name="drm_dialog_message_get_sign_failed">"Netzwerkfehler. Überprüfen Sie Ihre Internetverbindung und versuchen Sie es erneut."</string>
+    <string name="drm_dialog_message_no_internet">"Keine Internetverbindung. Überprüfen Sie Ihre Internetverbindung und versuchen Sie es erneut."</string>
+    <string name="drm_dialog_message_check_failed">"Sie (%s) haben diese App nicht gekauft. Bitte zuerst kaufen."</string>
+    <string name="drm_dialog_message_check_failed_without_name">"Sie haben diese App nicht gekauft. Bitte zuerst kaufen."</string>
+    <string name="drm_dialog_message_not_logged">"Melden Sie sich mit Ihrer Huawei-ID an."</string>
+    <string name="drm_dialog_message_user_interrupt">"Prüfen des Kaufverlaufs fehlgeschlagen. Bitte versuchen Sie es erneut."</string>
+    <string name="drm_dialog_message_hiapp_agreement">"Stimmen Sie zunächst den HiApp-Servicebestimmungen zu."</string>
+    <string name="drm_dialog_message_gamebox_agreement">"Stimmen Sie zunächst den HiGame-Servicebestimmungen zu."</string>
+    <string name="drm_dialog_message_waiting">"Kaufverlauf prüfen ... Bitte warten."</string>
+    <string name="drm_dialog_text_install">"Installieren"</string>
+    <string name="drm_dialog_text_quit">"Beenden"</string>
+    <string name="drm_dialog_text_retry">"OK"</string>
+    <string name="drm_dialog_text_buy">"Kaufen"</string>
+    <string name="drm_dialog_text_login">"Anmelden"</string>
+    <string name="drm_dialog_text_ok">"Ok"</string>
+    <string name="drm_dialog_message_over_limit">"Sie (%s) haben die maximale Anzahl an Geräten, die mit dieser App verwendet werden können, überschritten. Wechseln Sie zu einer anderen Huawei-ID und kaufen Sie die App erneut."</string>
+    <string name="drm_dialog_message_over_limit_without_name">"Sie haben die maximale Anzahl von Geräten, die mit dieser App verwendet werden können, überschritten. Wechseln Sie zu einer anderen Huawei-ID und kaufen sie die App nochmals."</string>
+    <string name="drm_dialog_message_other_errorcode">"Prüfen des Kaufverlaufs fehlgeschlagen, Fehlercode: %s. Bitte wenden Sie sich an den HiApp-Kundendienst."</string>
+    <string name="drm_dialog_text_hasknow">"Ok"</string>
+</resources>
