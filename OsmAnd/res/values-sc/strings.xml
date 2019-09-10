@@ -2185,7 +2185,7 @@ Lon %2$s</string>
     <string name="quick_action_btn_tutorial_title">Càmbia sa positzione de su butone</string>
     <string name="quick_action_btn_tutorial_descr">Mantene incarcadu e trìsina su butone pro cambiare sa positzione sua in s\'ischermu.</string>
     <string name="shared_string_action_name">Nùmene de s\'atzione</string>
-    <string name="navigate_point_olc">Aberi unu còdighe de logu</string>
+    <string name="navigate_point_olc">Còdighe Abertu de Logu (OLC)</string>
     <string name="navigate_point_olc_info_invalid">OLC non vàlidu
 </string>
     <string name="navigate_point_olc_info_short">OLC curtzu
@@ -3248,4 +3248,12 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="get_discount_second_part">a pustis %1$s</string>
     <string name="cancel_subscription">Annulla s\'abbonamentu</string>
     <string name="price_and_discount">%1$s • Rispàrmia %2$s</string>
+    <string name="shared_string_example">Esèmpiu</string>
+    <string name="navigate_point_format_utm">Istandard UTM</string>
+    <string name="navigate_point_format_olc">Còdighe Abertu de Logu (OLC)</string>
+    <string name="appearance">Aparèntzia</string>
+    <string name="list_of_installed_plugins">Lista de estensiones installadas</string>
+    <string name="reset_to_default">Reimposta sos valores predefinidos</string>
+    <string name="turn_screen_on">Allughe s’ischermu</string>
+    <string name="shared_string_other">Àteru</string>
 </resources>
