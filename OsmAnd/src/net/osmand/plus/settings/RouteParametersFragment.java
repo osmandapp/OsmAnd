@@ -67,7 +67,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 	}
 
 	private void setupTimeConditionalRoutingPref() {
-		SwitchPreference timeConditionalRouting = createSwitchPreferenceEx(settings.ENABLE_TIME_CONDITIONAL_ROUTING.getId(), R.string.temporary_conditional_routing, R.layout.preference_dialog_and_switch);
+		SwitchPreference timeConditionalRouting = createSwitchPreferenceEx(settings.ENABLE_TIME_CONDITIONAL_ROUTING.getId(), R.string.temporary_conditional_routing, R.layout.preference_with_descr_dialog_and_switch);
 		timeConditionalRouting.setIcon(getRoutingPrefIcon(settings.ENABLE_TIME_CONDITIONAL_ROUTING.getId()));
 		timeConditionalRouting.setSummaryOn(R.string.shared_string_enable);
 		timeConditionalRouting.setSummaryOff(R.string.shared_string_disable);
@@ -81,7 +81,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 		}
 		PreferenceScreen screen = getPreferenceScreen();
 
-		SwitchPreferenceEx fastRoute = createSwitchPreferenceEx(app.getSettings().FAST_ROUTE_MODE.getId(), R.string.fast_route_mode, R.layout.preference_dialog_and_switch);
+		SwitchPreferenceEx fastRoute = createSwitchPreferenceEx(app.getSettings().FAST_ROUTE_MODE.getId(), R.string.fast_route_mode, R.layout.preference_with_descr_dialog_and_switch);
 		fastRoute.setIcon(getRoutingPrefIcon(app.getSettings().FAST_ROUTE_MODE.getId()));
 		fastRoute.setDescription(getString(R.string.fast_route_mode_descr));
 		fastRoute.setSummaryOn(R.string.shared_string_enable);
@@ -142,7 +142,6 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 					avoidRouting.setEntries(entries);
 					avoidRouting.setEntryValues(prefsIds);
 					avoidRouting.setValues(enabledPrefsIds);
-					avoidRouting.setIconSpaceReserved(true);
 
 					screen.addPreference(avoidRouting);
 				}
@@ -187,7 +186,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 					if (p.getType() == GeneralRouter.RoutingParameterType.BOOLEAN) {
 						OsmandSettings.OsmandPreference pref = settings.getCustomRoutingBooleanProperty(p.getId(), p.getDefaultBoolean());
 
-						SwitchPreferenceEx switchPreferenceEx = (SwitchPreferenceEx) createSwitchPreferenceEx(pref.getId(), title, description, R.layout.preference_dialog_and_switch);
+						SwitchPreferenceEx switchPreferenceEx = (SwitchPreferenceEx) createSwitchPreferenceEx(pref.getId(), title, description, R.layout.preference_with_descr_dialog_and_switch);
 						switchPreferenceEx.setDescription(description);
 						switchPreferenceEx.setIcon(getRoutingPrefIcon(p.getId()));
 						switchPreferenceEx.setSummaryOn(R.string.shared_string_enable);

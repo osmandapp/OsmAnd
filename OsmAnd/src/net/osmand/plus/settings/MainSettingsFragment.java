@@ -45,9 +45,6 @@ public class MainSettingsFragment extends BaseSettingsFragment {
 		Preference globalSettings = findPreference("global_settings");
 		globalSettings.setIcon(getContentIcon(R.drawable.ic_action_settings));
 
-		PreferenceCategory applicationProfiles = (PreferenceCategory) findPreference("application_profiles");
-		applicationProfiles.setIconSpaceReserved(true);
-
 		setupConfigureProfilePref();
 		setupManageProfilesPref();
 	}

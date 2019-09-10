@@ -58,7 +58,6 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	protected OsmandApplication app;
 	protected OsmandSettings settings;
 	protected UiUtilities iconsCache;
-	protected List<ApplicationMode> modes = new ArrayList<ApplicationMode>();
 
 	private boolean nightMode;
 	private boolean wasDrawerDisabled;
@@ -67,28 +66,43 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	public void onCreate(Bundle savedInstanceState) {
 		app = requireMyApplication();
 		settings = app.getSettings();
-		nightMode = !settings.isLightContent();
 		super.onCreate(savedInstanceState);
-		modes.clear();
-		modes.addAll(ApplicationMode.values(app));
+	}
+
+	@Override
+	public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+		getPreferenceManager().setPreferenceDataStore(settings.getDataStore());
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = super.onCreateView(inflater, container, savedInstanceState);
+		nightMode = !settings.isLightContent();
 
+		View view = super.onCreateView(inflater, container, savedInstanceState);
 		if (view != null) {
 			AndroidUtils.addStatusBarPadding21v(getContext(), view);
 			createToolbar(inflater, view);
 			setDivider(null);
+			updateAllSettings();
 		}
 
 		return view;
 	}
 
 	@Override
+	public RecyclerView onCreateRecyclerView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
+		int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
+
+		Context themedContext = new ContextThemeWrapper(getActivity(), themeRes);
+		LayoutInflater themedInflater = inflater.cloneInContext(themedContext);
+
+		return super.onCreateRecyclerView(themedInflater, parent, savedInstanceState);
+	}
+
+	@Override
 	public void onResume() {
 		super.onResume();
+
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			wasDrawerDisabled = mapActivity.isDrawerDisabled();
@@ -114,7 +128,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		if (toolbarRes != -1) {
 			Context activityContext = getActivity();
 
-			final int themeRes = nightMode ? darkTheme : lightTheme;
+			final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 			final Context themedContext = new ContextThemeWrapper(activityContext, themeRes);
 			LayoutInflater themedInflater = LayoutInflater.from(themedContext);
 
@@ -176,27 +190,6 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		view.setBackgroundColor(ContextCompat.getColor(app, getBackgroundColor()));
 	}
 
-	int darkTheme = R.style.OsmandDarkTheme;
-	int lightTheme = R.style.OsmandLightTheme;
-
-	@Override
-	public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-		getPreferenceManager().setPreferenceDataStore(settings.getDataStore());
-		updatePreferencesScreen();
-	}
-
-	@Override
-	public RecyclerView onCreateRecyclerView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
-		Context activityContext = getActivity();
-
-		final int themeRes = nightMode ? darkTheme : lightTheme;
-		final Context themedContext = new ContextThemeWrapper(activityContext, themeRes);
-
-		LayoutInflater themedInflater = LayoutInflater.from(themedContext);
-
-		return super.onCreateRecyclerView(themedInflater, parent, savedInstanceState);
-	}
-
 	protected abstract void setupPreferences();
 
 	private void updatePreferencesScreen() {
@@ -253,7 +246,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		singleSelectDialogBuilder.setAdapter(modeNames, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				ApplicationMode selectedAppMode = modes.get(which);
+				ApplicationMode selectedAppMode = ApplicationMode.values(app).get(which);
 				requireSettings().APPLICATION_MODE.set(selectedAppMode);
 				updateAllSettings();
 			}
@@ -278,7 +271,10 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 
 	public void updateAllSettings() {
 		getListView().getRecycledViewPool().clear();
-		getPreferenceScreen().removeAll();
+		PreferenceScreen screen = getPreferenceScreen();
+		if (screen != null) {
+			getPreferenceScreen().removeAll();
+		}
 		updatePreferencesScreen();
 		updateToolbar(getView());
 	}

@@ -1944,7 +1944,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				Fragment fragment = Fragment.instantiate(this, fragmentName);
 
 				getSupportFragmentManager().beginTransaction()
-						.add(R.id.fragmentContainer, fragment, fragmentName)
+						.replace(R.id.fragmentContainer, fragment, fragmentName)
 						.addToBackStack(fragmentName)
 						.commitAllowingStateLoss();
 

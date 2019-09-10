@@ -52,6 +52,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 	protected void setupPreferences() {
 		Preference generalSettings = findPreference("general_settings");
 		Preference pluginSettings = findPreference("plugin_settings");
+		pluginSettings.setIconSpaceReserved(false);
 
 		generalSettings.setIcon(getContentIcon(R.drawable.ic_action_settings));
 
@@ -125,7 +126,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 
 	private Drawable getPluginIcon(OsmandPlugin plugin) {
 		int iconResId = plugin.getLogoResourceId();
-		return plugin.isActive() ? getActiveIcon(iconResId) : getContentIcon(iconResId);
+		return plugin.isActive() ? getActiveIcon(iconResId) : getIcon(iconResId, isNightMode() ? R.color.icon_color_secondary_dark : R.color.icon_color_secondary_light);
 	}
 
 	private Intent getPluginIntent(OsmandPlugin plugin) {

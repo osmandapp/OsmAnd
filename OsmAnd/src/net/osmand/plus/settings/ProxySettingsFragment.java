@@ -43,7 +43,6 @@ public class ProxySettingsFragment extends BaseSettingsFragment {
 		hostPref.setPersistent(false);
 		hostPref.setSummary(settings.PROXY_HOST.get());
 		hostPref.setDescription(R.string.proxy_host_descr);
-		hostPref.setIconSpaceReserved(true);
 	}
 
 	private void setupProxyPortPref() {
@@ -51,7 +50,6 @@ public class ProxySettingsFragment extends BaseSettingsFragment {
 		portPref.setPersistent(false);
 		portPref.setSummary(String.valueOf(settings.PROXY_PORT.get()));
 		portPref.setDescription(R.string.proxy_port_descr);
-		portPref.setIconSpaceReserved(true);
 	}
 
 	@Override

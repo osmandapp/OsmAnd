@@ -22,6 +22,10 @@
 		android:layout="@layout/preference_with_descr"
 		android:title="@string/map_screen_orientation" />
 
+	<Preference
+		android:layout="@layout/simple_divider_item"
+		android:selectable="false" />
+
 	<PreferenceCategory
 		android:key="units_and_formats"
 		android:layout="@layout/preference_category_with_descr"
@@ -48,6 +52,10 @@
 		android:layout="@layout/preference_with_descr"
 		android:title="@string/angular_measeurement" />
 
+	<Preference
+		android:layout="@layout/simple_divider_item"
+		android:selectable="false" />
+
 	<PreferenceCategory
 		android:key="other"
 		android:layout="@layout/preference_category_with_descr"
@@ -55,21 +63,21 @@
 
 	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
 		android:key="use_kalman_filter_compass"
-		android:layout="@layout/preference_dialog_and_switch"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
 		android:summaryOff="@string/shared_string_off"
 		android:summaryOn="@string/shared_string_on"
 		android:title="@string/use_kalman_filter_compass" />
 
 	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
 		android:key="use_magnetic_field_sensor_compass"
-		android:layout="@layout/preference_dialog_and_switch"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
 		android:summaryOff="@string/shared_string_off"
 		android:summaryOn="@string/shared_string_on"
 		android:title="@string/use_magnetic_sensor" />
 
 	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
 		android:key="map_empty_state_allowed"
-		android:layout="@layout/preference_dialog_and_switch"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
 		android:summaryOff="@string/shared_string_off"
 		android:summaryOn="@string/shared_string_on"
 		android:title="@string/tap_on_map_to_hide_interface" />
@@ -83,7 +91,7 @@
 
 	<net.osmand.plus.settings.preferences.ListPreferenceEx
 		android:key="external_input_device"
-		android:layout="@layout/preference_dialog_and_switch"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
 		android:title="@string/external_input_device" />
 
 </PreferenceScreen>
