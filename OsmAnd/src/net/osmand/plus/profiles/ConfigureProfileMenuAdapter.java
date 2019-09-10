@@ -5,15 +5,12 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.view.ContextThemeWrapper;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SwitchCompat;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -21,19 +18,19 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.profiles.ProfileMenuAdapter.ProfileViewHolder;
 import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
 
-public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> {
+public class ConfigureProfileMenuAdapter extends AbstractProfileMenuAdapter<ConfigureProfileMenuAdapter.ConfigureProfileViewHolder> {
 
-	private static final Log LOG = PlatformUtil.getLog(ProfileMenuAdapter.class);
+	private static final Log LOG = PlatformUtil.getLog(ConfigureProfileMenuAdapter.class);
 
 	private List<Object> items = new ArrayList<>();
 	private Set<ApplicationMode> selectedItems;
+
 	@Nullable
-	private ProfileMenuAdapterListener listener;
+	private ProfileSelectedListener profileSelectedListener;
 	private final OsmandApplication app;
 	@ColorRes
 	private int selectedIconColorRes;
@@ -43,8 +40,8 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 
 	private boolean nightMode;
 
-	public ProfileMenuAdapter(List<ApplicationMode> items, Set<ApplicationMode> selectedItems,
-	                          OsmandApplication app, String bottomButtonText, boolean nightMode) {
+	public ConfigureProfileMenuAdapter(List<ApplicationMode> items, Set<ApplicationMode> selectedItems,
+	                                   OsmandApplication app, String bottomButtonText, boolean nightMode) {
 		this.items.addAll(items);
 		if (bottomButton) {
 			this.items.add(BUTTON_ITEM);
@@ -63,8 +60,8 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 		return items;
 	}
 
-	public void setListener(@Nullable ProfileMenuAdapterListener listener) {
-		this.listener = listener;
+	public void setProfileSelectedListener(@Nullable ProfileSelectedListener profileSelectedListener) {
+		this.profileSelectedListener = profileSelectedListener;
 	}
 
 	public void updateItemsList(List<ApplicationMode> newList, Set<ApplicationMode> selectedItems) {
@@ -85,18 +82,19 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 
 	@NonNull
 	@Override
-	public ProfileViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+	public ConfigureProfileViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 		int themeResId = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 		View itemView = 
 				View.inflate(new ContextThemeWrapper(parent.getContext(), themeResId), R.layout.profile_list_item, null);
-		return new ProfileViewHolder(itemView);
+		return new ConfigureProfileViewHolder(itemView);
 	}
 
 	@Override
-	public void onBindViewHolder(@NonNull final ProfileViewHolder holder, int position) {
+	public void onBindViewHolder(@NonNull final ConfigureProfileViewHolder holder, int position) {
 		Object obj = items.get(position);
+		holder.dividerUp.setVisibility(View.INVISIBLE);
 		if (obj instanceof ApplicationMode) {
-			holder.divider.setVisibility(View.VISIBLE);
+			holder.dividerBottom.setVisibility(View.VISIBLE);
 			holder.icon.setVisibility(View.VISIBLE);
 			holder.descr.setVisibility(View.VISIBLE);
 			holder.switcher.setVisibility(View.VISIBLE);
@@ -117,7 +115,7 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 		} else {
 			final String title = (String) obj;
 			if (title.equals(BUTTON_ITEM)) {
-				holder.divider.setVisibility(View.INVISIBLE);
+				holder.dividerBottom.setVisibility(View.INVISIBLE);
 			}
 			holder.icon.setVisibility(View.INVISIBLE);
 			holder.descr.setVisibility(View.GONE);
@@ -136,7 +134,7 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 		return items.size();
 	}
 
-	private void updateViewHolder(ProfileViewHolder holder, ApplicationMode mode) {
+	private void updateViewHolder(ConfigureProfileViewHolder holder, ApplicationMode mode) {
 		int iconRes = mode.getIconRes();
 		if (iconRes == 0 || iconRes == -1) {
 			iconRes = R.drawable.ic_action_world_globe;
@@ -149,36 +147,23 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 		}
 	}
 
-	class ProfileViewHolder extends RecyclerView.ViewHolder {
-
-		TextView title, descr;
-		SwitchCompat switcher;
-		ImageView icon, menuIcon;
-		LinearLayout profileOptions;
-		View divider;
+	class ConfigureProfileViewHolder extends ProfileAbstractViewHolder {
 
 		boolean initSwitcher;
 
-		ProfileViewHolder(View itemView) {
+		ConfigureProfileViewHolder(View itemView) {
 			super(itemView);
-			title = itemView.findViewById(R.id.title);
-			descr = itemView.findViewById(R.id.description);
-			switcher = itemView.findViewById(R.id.compound_button);
-			icon = itemView.findViewById(R.id.icon);
-			profileOptions = itemView.findViewById(R.id.profile_settings);
-			divider = itemView.findViewById(R.id.divider_bottom);
-			menuIcon = itemView.findViewById(R.id.menu_image);
 
 			profileOptions.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					int pos = getAdapterPosition();
-					if (pos != RecyclerView.NO_POSITION && listener != null) {
+					if (pos != RecyclerView.NO_POSITION) {
 						Object o = items.get(pos);
-						if (o instanceof ApplicationMode) {
-							listener.onProfilePressed((ApplicationMode) o);
-						} else {
-							listener.onButtonPressed();
+						if (o instanceof ApplicationMode && profilePressedListener != null) {
+							profilePressedListener.onProfilePressed((ApplicationMode) o);
+						} else if (buttonPressedListener != null) {
+							buttonPressedListener.onButtonPressed();
 						}
 					}
 				}
@@ -187,7 +172,7 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 				@Override
 				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 					int pos = getAdapterPosition();
-					if (pos != RecyclerView.NO_POSITION && listener != null && !initSwitcher) {
+					if (pos != RecyclerView.NO_POSITION && profileSelectedListener != null && !initSwitcher) {
 						Object o = items.get(pos);
 						if (o instanceof ApplicationMode) {
 							final ApplicationMode item = (ApplicationMode) o;
@@ -196,8 +181,8 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 							} else {
 								selectedItems.remove(item);
 							}
-							updateViewHolder(ProfileViewHolder.this, item);
-							listener.onProfileSelected(item, isChecked);
+							updateViewHolder(ConfigureProfileViewHolder.this, item);
+							profileSelectedListener.onProfileSelected(item, isChecked);
 						}
 					}
 				}
@@ -205,12 +190,7 @@ public class ProfileMenuAdapter extends RecyclerView.Adapter<ProfileViewHolder> 
 		}
 	}
 
-	public interface ProfileMenuAdapterListener {
-
-		void onProfileSelected(ApplicationMode item, boolean selected);
-
-		void onProfilePressed(ApplicationMode item);
-
-		void onButtonPressed();
+	public interface ProfileSelectedListener {
+		void onProfileSelected(ApplicationMode item, boolean isChecked);
 	}
 }

@@ -107,7 +107,7 @@
             android:layout_height="match_parent"
             android:background="?attr/bg_color"
             android:clipToPadding="false"
-            android:drawSelectorOnTop="true"
+            android:drawSelectorOnTop="false"
             android:layout_gravity="start"/>
 
         <RelativeLayout

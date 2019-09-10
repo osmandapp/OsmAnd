@@ -1,9 +1,13 @@
 package net.osmand.plus;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
+import android.graphics.drawable.RippleDrawable;
+import android.graphics.drawable.StateListDrawable;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Build;
@@ -117,6 +121,68 @@ public class UiUtilities {
 		// Counting the perceptive luminance - human eye favors green color...
 		double luminance = 1 - (0.299 * Color.red(color) + 0.587 * Color.green(color) + 0.114 * Color.blue(color)) / 255;
 		return luminance < 0.5 ? transparent ? ContextCompat.getColor(context, R.color.color_black_transparent) : Color.BLACK : Color.WHITE;
+	}
+
+	@ColorInt
+	public static int getColorWithAlpha(@ColorInt int color, float ratio) {
+		int newColor = 0;
+		int alpha = Math.round(Color.alpha(color) * ratio);
+		int r = Color.red(color);
+		int g = Color.green(color);
+		int b = Color.blue(color);
+		newColor = Color.argb(alpha, r, g, b);
+		return newColor;
+	}
+
+	@ColorInt
+	public static int mixTwoColors(@ColorInt int color1, @ColorInt int color2, float amount )
+	{
+		final byte ALPHA_CHANNEL = 24;
+		final byte RED_CHANNEL   = 16;
+		final byte GREEN_CHANNEL =  8;
+		final byte BLUE_CHANNEL  =  0;
+
+		final float inverseAmount = 1.0f - amount;
+
+		int a = ((int)(((float)(color1 >> ALPHA_CHANNEL & 0xff )*amount) +
+				((float)(color2 >> ALPHA_CHANNEL & 0xff )*inverseAmount))) & 0xff;
+		int r = ((int)(((float)(color1 >> RED_CHANNEL & 0xff )*amount) +
+				((float)(color2 >> RED_CHANNEL & 0xff )*inverseAmount))) & 0xff;
+		int g = ((int)(((float)(color1 >> GREEN_CHANNEL & 0xff )*amount) +
+				((float)(color2 >> GREEN_CHANNEL & 0xff )*inverseAmount))) & 0xff;
+		int b = ((int)(((float)(color1 & 0xff )*amount) +
+				((float)(color2 & 0xff )*inverseAmount))) & 0xff;
+
+		return a << ALPHA_CHANNEL | r << RED_CHANNEL | g << GREEN_CHANNEL | b << BLUE_CHANNEL;
+	}
+
+	public static Drawable getAlphaStateDrawable(@ColorInt int colorNoAlpha) {
+		return getAlphaStateDrawable(colorNoAlpha, false, true);
+	}
+	
+	public static Drawable getAlphaStateDrawable(@ColorInt int colorNoAlpha, boolean highlightOnNormal, boolean highlightOnPressed) {
+		int colorAlpha25 = getColorWithAlpha(colorNoAlpha, 0.25f);
+		int colorAlpha30 = getColorWithAlpha(colorNoAlpha, 0.3f);
+		return getAlphaStateDrawableImpl(colorAlpha25, colorAlpha30, highlightOnNormal, highlightOnPressed);
+	}
+
+	public static Drawable getAlphaStateDrawable(@ColorInt int colorBackground, @ColorInt int colorForeground, boolean highlightOnNormal, boolean highlightOnPressed) {
+		int colorAlpha25 = UiUtilities.mixTwoColors(colorForeground, colorBackground, 0.125f);
+		int colorAlpha30 = UiUtilities.mixTwoColors(colorForeground, colorBackground, 0.15f);
+		return getAlphaStateDrawableImpl(colorAlpha25, colorAlpha30, highlightOnNormal, highlightOnPressed);
+	}
+	
+	private static Drawable getAlphaStateDrawableImpl(@ColorInt int colorMode1, @ColorInt int colorMode2, boolean highlightOnNormal, boolean highlightOnPressed) {
+		StateListDrawable sld = new StateListDrawable();
+		if (highlightOnNormal && highlightOnPressed) {
+			sld.addState(new int[]{android.R.attr.state_pressed}, new ColorDrawable(colorMode2));
+			sld.addState(new int[]{}, new ColorDrawable(colorMode1));
+		} else if (highlightOnPressed) {
+			sld.addState(new int[]{android.R.attr.state_pressed}, new ColorDrawable(colorMode1));
+		} else if (highlightOnNormal) {
+			sld.addState(new int[]{}, new ColorDrawable(colorMode1));
+		}
+		return sld;
 	}
 
 	public UpdateLocationViewCache getUpdateLocationViewCache(){

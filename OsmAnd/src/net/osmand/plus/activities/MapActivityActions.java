@@ -58,6 +58,9 @@ import net.osmand.plus.mapmarkers.MapMarkersDialogFragment;
 import net.osmand.plus.mapmarkers.MarkersPlanRouteContext;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
+import net.osmand.plus.profiles.AppModesBottomSheetDialogFragment;
+import net.osmand.plus.profiles.SelectAppModesBottomSheetDialogFragment;
+import net.osmand.plus.profiles.SettingsProfileActivity;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routepreparationmenu.WaypointsFragment;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
@@ -70,6 +73,7 @@ import net.osmand.plus.wikivoyage.WikivoyageWelcomeDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelDbHelper;
 import net.osmand.plus.wikivoyage.explore.WikivoyageExploreActivity;
 import net.osmand.router.GeneralRouter;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
@@ -630,6 +634,45 @@ public class MapActivityActions implements DialogProvider {
 		final OsmandMapTileView mapView = mapActivity.getMapView();
 		final OsmandApplication app = mapActivity.getMyApplication();
 		ContextMenuAdapter optionsMenuHelper = new ContextMenuAdapter();
+		boolean nightMode = getMyApplication().getDaynightHelper().isNightModeForMapControls();
+
+		//switch profile button
+		ApplicationMode currentMode = app.getSettings().APPLICATION_MODE.get();
+		String modeDescription;
+		if (currentMode.isCustomProfile()) {
+			modeDescription = String.format(app.getString(R.string.profile_type_descr_string),
+					Algorithms.capitalizeFirstLetterAndLowercase(currentMode.getParent().toHumanString(app)));
+		} else {
+			modeDescription = getString(R.string.profile_type_base_string);
+		}
+		optionsMenuHelper.addItem(new ItemBuilder().setLayout(R.layout.main_menu_drawer_btn_switch_profile)
+				.setIcon(currentMode.getIconRes())
+				.setColor(currentMode.getIconColorInfo().getColor(nightMode))
+				.setTitle(currentMode.toHumanString(app))
+				.setDescription(modeDescription)
+				.setListener(new ItemClickListener() {
+					@Override
+					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked, int[] viewCoordinates) {
+						final AppModesBottomSheetDialogFragment fragment = new SelectAppModesBottomSheetDialogFragment();
+						fragment.setUsedOnMap(true);
+						mapActivity.getSupportFragmentManager().beginTransaction()
+								.add(fragment, "app_profile_settings").commitAllowingStateLoss();
+						return true;
+					}
+				})
+				.createItem());
+		
+		optionsMenuHelper.addItem(new ItemBuilder().setLayout(R.layout.main_menu_drawer_btn_configure_profile)
+				.setColor(currentMode.getIconColorInfo().getColor(nightMode))
+				.setTitle(getString(R.string.configure_profile))
+				.setListener(new ItemClickListener() {
+					@Override
+					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked, int[] viewCoordinates) {
+						mapActivity.startActivity(new Intent(mapActivity, SettingsProfileActivity.class));
+						return true;
+					}
+				})
+				.createItem());
 
 		optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.home, mapActivity)
 				.setId(DRAWER_DASHBOARD_ID)

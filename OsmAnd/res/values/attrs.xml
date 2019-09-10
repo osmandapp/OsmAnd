@@ -18,6 +18,7 @@
 		<attr name="expandable_list_item_background" format="color"/>
 		<attr name="expandable_list_background" format="color"/>
 		<attr name="bg_color" format="reference" />
+	    <attr name="bg_circle" format="reference"/>
 	    <attr name="btn_round" format="reference" />
         <attr name="btn_round_border" format="reference" />
 		<attr name="btn_round_border_2" format="reference" />
