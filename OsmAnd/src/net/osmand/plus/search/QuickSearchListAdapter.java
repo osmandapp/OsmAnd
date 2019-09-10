@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v4.view.ViewCompat;
+import android.support.v7.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,6 +46,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 	private OsmandApplication app;
 	private Activity activity;
 	private AccessibilityAssistant accessibilityAssistant;
+	private LayoutInflater inflater;
 
 	private boolean useMapCenter;
 
@@ -70,6 +72,11 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		super(app, R.layout.search_list_item);
 		this.app = app;
 		this.activity = activity;
+
+		int themeRes = !app.getSettings().isLightContent() ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
+		Context themedContext = new ContextThemeWrapper(activity, themeRes);
+		this.inflater = activity.getLayoutInflater().cloneInContext(themedContext);
+
 		dp56 = AndroidUtils.dpToPx(app, 56f);
 		dp1 = AndroidUtils.dpToPx(app, 1f);
 		updateLocationViewCache = app.getUIUtilities().getUpdateLocationViewCache();
@@ -192,7 +199,6 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		LinearLayout view;
 		if (type == QuickSearchListItemType.SEARCH_MORE) {
 			if (convertView == null) {
-				LayoutInflater inflater = (LayoutInflater) app.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 				view = (LinearLayout) inflater.inflate(R.layout.search_more_list_item, null);
 			} else {
 				view = (LinearLayout) convertView;
@@ -257,10 +263,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			}
 		} else if (type == QuickSearchListItemType.BUTTON) {
 			if (convertView == null) {
-				LayoutInflater inflater = (LayoutInflater) app
-						.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-				view = (LinearLayout) inflater.inflate(
-						R.layout.search_custom_list_item, null);
+				view = (LinearLayout) inflater.inflate(R.layout.search_custom_list_item, null);
 			} else {
 				view = (LinearLayout) convertView;
 			}
@@ -272,10 +275,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			}
 		} else if (type == QuickSearchListItemType.SELECT_ALL) {
 			if (convertView == null) {
-				LayoutInflater inflater = (LayoutInflater) app
-						.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-				view = (LinearLayout) inflater.inflate(
-						R.layout.select_all_list_item, null);
+				view = (LinearLayout) inflater.inflate(R.layout.select_all_list_item, null);
 			} else {
 				view = (LinearLayout) convertView;
 			}
@@ -291,10 +291,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			});
 		} else if (type == QuickSearchListItemType.HEADER) {
 			if (convertView == null) {
-				LayoutInflater inflater = (LayoutInflater) app
-						.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-				view = (LinearLayout) inflater.inflate(
-						R.layout.search_header_list_item, null);
+				view = (LinearLayout) inflater.inflate(R.layout.search_header_list_item, null);
 			} else {
 				view = (LinearLayout) convertView;
 			}
@@ -307,30 +304,21 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			}
 		} else if (type == QuickSearchListItemType.TOP_SHADOW) {
 			if (convertView == null) {
-				LayoutInflater inflater = (LayoutInflater) app
-						.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-				view = (LinearLayout) inflater.inflate(
-						R.layout.list_shadow_header, null);
+				view = (LinearLayout) inflater.inflate(R.layout.list_shadow_header, null);
 			} else {
 				view = (LinearLayout) convertView;
 			}
 			return view;
 		} else if (type == QuickSearchListItemType.BOTTOM_SHADOW) {
 			if (convertView == null) {
-				LayoutInflater inflater = (LayoutInflater) app
-						.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-				view = (LinearLayout) inflater.inflate(
-						R.layout.list_shadow_footer, null);
+				view = (LinearLayout) inflater.inflate(R.layout.list_shadow_footer, null);
 			} else {
 				view = (LinearLayout) convertView;
 			}
 			return view;
 		} else {
 			if (convertView == null) {
-				LayoutInflater inflater = (LayoutInflater) app
-						.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-				view = (LinearLayout) inflater.inflate(
-						R.layout.search_list_item, null);
+				view = (LinearLayout) inflater.inflate(R.layout.search_list_item, null);
 			} else {
 				view = (LinearLayout) convertView;
 			}

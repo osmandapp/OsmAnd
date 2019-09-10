@@ -67,7 +67,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 	}
 
 	private void setupTimeConditionalRoutingPref() {
-		SwitchPreference timeConditionalRouting = createSwitchPreferenceEx(settings.ENABLE_TIME_CONDITIONAL_ROUTING.getId(), R.string.temporary_conditional_routing, R.layout.preference_dialog_and_switch);
+		SwitchPreference timeConditionalRouting = createSwitchPreferenceEx(settings.ENABLE_TIME_CONDITIONAL_ROUTING.getId(), R.string.temporary_conditional_routing, R.layout.preference_with_descr_dialog_and_switch);
 		timeConditionalRouting.setIcon(getRoutingPrefIcon(settings.ENABLE_TIME_CONDITIONAL_ROUTING.getId()));
 		timeConditionalRouting.setSummaryOn(R.string.shared_string_enable);
 		timeConditionalRouting.setSummaryOff(R.string.shared_string_disable);
@@ -81,7 +81,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 		}
 		PreferenceScreen screen = getPreferenceScreen();
 
-		SwitchPreferenceEx fastRoute = createSwitchPreferenceEx(app.getSettings().FAST_ROUTE_MODE.getId(), R.string.fast_route_mode, R.layout.preference_dialog_and_switch);
+		SwitchPreferenceEx fastRoute = createSwitchPreferenceEx(app.getSettings().FAST_ROUTE_MODE.getId(), R.string.fast_route_mode, R.layout.preference_with_descr_dialog_and_switch);
 		fastRoute.setIcon(getRoutingPrefIcon(app.getSettings().FAST_ROUTE_MODE.getId()));
 		fastRoute.setDescription(getString(R.string.fast_route_mode_descr));
 		fastRoute.setSummaryOn(R.string.shared_string_enable);
@@ -151,6 +151,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 					preferRouting.setTitle(R.string.prefer_in_routing_title);
 					preferRouting.setSummary(R.string.prefer_in_routing_descr);
 					preferRouting.setLayoutResource(R.layout.preference_with_descr);
+					preferRouting.setIconSpaceReserved(true);
 					screen.addPreference(preferRouting);
 				}
 				if (reliefFactorParameters.size() > 0) {
@@ -174,6 +175,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 					reliefFactorRouting.setPersistent(false);
 					reliefFactorRouting.setValue(selectedParameterId);
 					reliefFactorRouting.setDescription(R.string.relief_smoothness_factor_descr);
+					reliefFactorRouting.setIconSpaceReserved(true);
 
 					screen.addPreference(reliefFactorRouting);
 				}
@@ -184,11 +186,12 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 					if (p.getType() == GeneralRouter.RoutingParameterType.BOOLEAN) {
 						OsmandSettings.OsmandPreference pref = settings.getCustomRoutingBooleanProperty(p.getId(), p.getDefaultBoolean());
 
-						SwitchPreferenceEx switchPreferenceEx = (SwitchPreferenceEx) createSwitchPreferenceEx(pref.getId(), title, description, R.layout.preference_dialog_and_switch);
+						SwitchPreferenceEx switchPreferenceEx = (SwitchPreferenceEx) createSwitchPreferenceEx(pref.getId(), title, description, R.layout.preference_with_descr_dialog_and_switch);
 						switchPreferenceEx.setDescription(description);
 						switchPreferenceEx.setIcon(getRoutingPrefIcon(p.getId()));
 						switchPreferenceEx.setSummaryOn(R.string.shared_string_enable);
 						switchPreferenceEx.setSummaryOff(R.string.shared_string_disable);
+						switchPreferenceEx.setIconSpaceReserved(true);
 
 						screen.addPreference(switchPreferenceEx);
 					} else {
@@ -203,6 +206,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 						ListPreferenceEx listPreferenceEx = (ListPreferenceEx) createListPreferenceEx(pref.getId(), p.getPossibleValueDescriptions(), svlss, title, R.layout.preference_with_descr);
 						listPreferenceEx.setDescription(description);
 						listPreferenceEx.setIcon(getRoutingPrefIcon(p.getId()));
+						listPreferenceEx.setIconSpaceReserved(true);
 
 						screen.addPreference(listPreferenceEx);
 					}

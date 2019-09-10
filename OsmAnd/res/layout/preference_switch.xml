@@ -56,8 +56,8 @@
 			android:layout_width="wrap_content"
 			android:layout_height="match_parent"
 			android:background="@null"
-			android:clickable="true"
-			android:focusable="true"
+			android:clickable="false"
+			android:focusable="false"
 			android:paddingLeft="@dimen/content_padding"
 			android:paddingRight="@dimen/content_padding" />
 

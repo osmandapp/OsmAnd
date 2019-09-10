@@ -17,7 +17,8 @@
 
 	<Preference
 		android:key="external_storage_dir"
-		android:layout="@layout/preference_with_descr"		android:persistent="false"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
 		android:title="@string/application_dir"
 		tools:icon="@drawable/ic_action_folder" />
 
