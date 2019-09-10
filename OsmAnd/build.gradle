@@ -256,7 +256,7 @@ task downloadWorldMiniBasemap {
 task downloadHuaweiDrm {
 	doLast {
 		ant.get(src: 'https://obs.cn-north-2.myhwclouds.com/hms-ds-wf/sdk/HwDRM_SDK_2.5.2.300_ADT.zip', dest: 'HwDRM_SDK_2.5.2.300_ADT.zip', skipexisting: 'true')
-		ant.unzip(src: 'HwDRM_SDK_2.5.2.300_ADT.zip', dest: 'huaweilib/')
+		ant.unzip(src: 'HwDRM_SDK_2.5.2.300_ADT.zip', dest: 'libs/')
 	}
 }
 
