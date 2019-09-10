@@ -38,9 +38,7 @@
     <string name="list_of_installed_plugins">List of installed plugins</string>
     <string name="configure_navigation">Configure navigation</string>
     <string name="general_settings_profile_descr">App theme, units, region</string>
-    <string name="configure_profile">Configure profile</string>
     <string name="screen_alerts_descr">Alerts will be shown on left bottom corner of the screen during the navigation.</string>
-    <string name="switch_profile">Switch profile</string>
     <string name="language_and_output">Language and output</string>
     <string name="reset_to_default">Reset to default</string>
     <string name="manage_profiles_descr">Create, import, edit profiles</string>

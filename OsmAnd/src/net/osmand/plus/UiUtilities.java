@@ -173,25 +173,6 @@ public class UiUtilities {
 	}
 	
 	private static Drawable getAlphaStateDrawableImpl(@ColorInt int colorMode1, @ColorInt int colorMode2, boolean highlightOnNormal, boolean highlightOnPressed) {
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-			ColorStateList csl = new ColorStateList(
-					new int[][]
-							{
-									new int[]{android.R.attr.state_pressed},
-									new int[]{android.R.attr.state_focused},
-									new int[]{android.R.attr.state_activated},
-									new int[]{}
-							},
-					new int[]
-							{
-									colorMode2,
-									colorMode1,
-									colorMode1,
-									colorMode1
-							}
-			);
-			return new RippleDrawable(csl, null, null);
-		}
 		StateListDrawable sld = new StateListDrawable();
 		if (highlightOnNormal && highlightOnPressed) {
 			sld.addState(new int[]{android.R.attr.state_pressed}, new ColorDrawable(colorMode2));
