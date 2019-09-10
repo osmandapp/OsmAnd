@@ -3197,4 +3197,12 @@
     <string name="years_5">År</string>
     <string name="months_3">Tre måneder</string>
     <string name="price_free">Gratis</string>
+    <string name="shared_string_example">Eksempel</string>
+    <string name="navigate_point_format_utm">UTM-standard</string>
+    <string name="change_default_settings">Endre forvalgte innstillinger</string>
+    <string name="discard_changes">Forkast endringer</string>
+    <string name="start_up_message_pref">Oppstartsmelding</string>
+    <string name="configure_profile">Sett opp profil</string>
+    <string name="switch_profile">Bytt profil</string>
+    <string name="application_profile_changed">Programprofil endret til \"%s\"</string>
 </resources>
