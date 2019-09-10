@@ -1814,7 +1814,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="impassable_road_desc">Sélectionnez les routes à éviter</string>
     <string name="shared_string_sound">Son</string>
     <string name="select_voice_provider">Sélectionnez la voix de guidage</string>
-    <string name="select_voice_provider_descr">Sélectionnez ou téléchargez la voix de guidage dans votre langue</string>
+    <string name="select_voice_provider_descr">Sélectionnez ou téléchargez la voix de guidage de votre langue</string>
     <string name="live_updates">Mises à jour en temps réel</string>
     <string name="available_maps">Cartes disponibles</string>
     <string name="last_update">Dernière mise à jour : %s</string>
@@ -3205,8 +3205,8 @@ représentant la zone : %1$s x %2$s</string>
     <string name="get_free_trial_title">Démarrer votre %1$d %2$s essai gratuit.</string>
     <string name="get_discount_second_part">puis %1$s</string>
     <string name="cancel_subscription">Annuler l\'abonnement</string>
-    <string name="get_discount_first_part">%1$s pour %2$s</string>
-    <string name="get_discount_first_few_part">%1$s pour %2$s</string>
+    <string name="get_discount_first_part">%1$s pour le premier %2$s</string>
+    <string name="get_discount_first_few_part">%1$s pour le premier %2$s</string>
     <string name="price_and_discount">%1$s • Économisez %2$s</string>
     <string name="shared_string_example">Exemple</string>
     <string name="navigate_point_format_utm">UTM Standard</string>
@@ -3239,4 +3239,19 @@ représentant la zone : %1$s x %2$s</string>
     <string name="voice_announces_info">Les annonces vocales ne sont faites que pendant la navigation.</string>
     <string name="voice_announces_descr">Instructions de navigation et annonces</string>
     <string name="voice_announces">Annonces vocales</string>
+    <string name="configure_profile_info">Tous les paramètres ci-dessous ne s\'appliquent qu\'au profil sélectionné.</string>
+    <string name="utm_format_descr">OsmAnd utilise le format Standard UTM qui est comparable mais pas identique au format UTM de l\'OTAN.</string>
+    <string name="navigate_point_format_olc">Ouvrir le code de lieu</string>
+    <string name="analytics_pref_title">Analyses</string>
+    <string name="turn_screen_on_info">Afficher la carte sur l\'écran de verrouillage pendant la navigation.</string>
+    <string name="route_parameters_info">Ces paramètres influencent le calcul de l\'itinéraire et s\'appliqueront au profil : %1$s.</string>
+    <string name="wake_time">Heure de réveil</string>
+    <string name="map_look_descr">icônes, gadgets</string>
+    <string name="map_look">Apparence de la carte</string>
+    <string name="general_settings_profile_descr">Thème de l\'application, unités, région</string>
+    <string name="reset_to_default">Restaurer les valeurs par défaut</string>
+    <string name="screen_alerts">Alertes visuelles</string>
+    <string name="route_parameters_descr">Définir les paramètres de l\'itinéraire</string>
+    <string name="route_parameters">Paramètres de l\'itinéraire</string>
+    <string name="application_profile_changed">Profil de l\'application basculé à \"%s\"</string>
 </resources>
