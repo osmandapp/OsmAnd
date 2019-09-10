@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools">
+
+	<Preference
+		android:key="route_parameters_info"
+		android:layout="@layout/preference_info"
+		android:persistent="false"
+		android:selectable="false"
+		tools:title="@string/route_parameters_info" />
+
+</PreferenceScreen>

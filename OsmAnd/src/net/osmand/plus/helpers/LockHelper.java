@@ -31,6 +31,7 @@ public class LockHelper implements SensorEventListener {
 	private OsmandApplication app;
 	private CommonPreference<Integer> turnScreenOnTime;
 	private CommonPreference<Boolean> turnScreenOnSensor;
+	private CommonPreference<Boolean> turnScreenOnEnabled;
 
 	@Nullable
 	private LockUIAdapter lockUIAdapter;
@@ -48,6 +49,7 @@ public class LockHelper implements SensorEventListener {
 		this.app = app;
 		uiHandler = new Handler();
 		OsmandSettings settings = app.getSettings();
+		turnScreenOnEnabled = settings.TURN_SCREEN_ON_ENABLED;
 		turnScreenOnTime = settings.TURN_SCREEN_ON_TIME_INT;
 		turnScreenOnSensor = settings.TURN_SCREEN_ON_SENSOR;
 
@@ -116,7 +118,7 @@ public class LockHelper implements SensorEventListener {
 
 	private void unlockEvent() {
 		int unlockTime = turnScreenOnTime.get();
-		if (unlockTime > 0) {
+		if (unlockTime > 0 && turnScreenOnEnabled.get()) {
 			timedUnlock(unlockTime * 1000L);
 		}
 	}
@@ -165,7 +167,7 @@ public class LockHelper implements SensorEventListener {
 
 	public void onStop(@NonNull Activity activity) {
 		lock();
-		if (!activity.isFinishing() && isSensorEnabled()) {
+		if (!activity.isFinishing() && turnScreenOnEnabled.get() && isSensorEnabled()) {
 			switchSensorOn();
 		}
 	}

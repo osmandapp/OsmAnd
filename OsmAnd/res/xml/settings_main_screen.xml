@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools">
+
+	<Preference
+		android:key="global_settings"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		android:summary="@string/osmand_settings_descr"
+		android:title="@string/osmand_settings"
+		app:fragment="net.osmand.plus.settings.GlobalSettingsFragment"
+		tools:icon="@drawable/ic_action_settings" />
+
+	<PreferenceCategory
+		android:key="application_profiles"
+		android:layout="@layout/preference_category_with_descr"
+		android:title="@string/application_profiles" />
+
+	<Preference
+		android:key="configure_profile"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		android:title="@string/configure_profile"
+		app:fragment="net.osmand.plus.settings.ConfigureProfileFragment"
+		tools:icon="@drawable/ic_action_car_dark" />
+
+	<Preference
+		android:key="manage_profiles"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		android:summary="@string/manage_profiles_descr"
+		android:title="@string/manage_profiles"
+		tools:icon="@drawable/ic_action_manage_profiles" />
+
+</PreferenceScreen>

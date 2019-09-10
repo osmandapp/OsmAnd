@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools">
+
+	<SwitchPreference
+		android:key="speak_routing_alarms"
+		android:layout="@layout/preference_top_switch"
+		android:summaryOff="@string/shared_string_off"
+		android:summaryOn="@string/shared_string_on" />
+
+	<Preference
+		android:key="voice_announces_info"
+		android:layout="@layout/preference_info"
+		android:persistent="false"
+		android:selectable="false"
+		android:title="@string/voice_announces_info"
+		tools:icon="@drawable/ic_action_info_dark" />
+
+	<SwitchPreference
+		android:dependency="speak_routing_alarms"
+		android:key="speak_street_names"
+		android:layout="@layout/preference_switch"
+		android:title="@string/speak_street_names" />
+
+	<SwitchPreference
+		android:dependency="speak_routing_alarms"
+		android:key="speak_traffic_warnings"
+		android:layout="@layout/preference_switch"
+		android:title="@string/speak_traffic_warnings" />
+
+	<SwitchPreference
+		android:dependency="speak_routing_alarms"
+		android:key="speak_pedestrian"
+		android:layout="@layout/preference_switch"
+		android:title="@string/speak_pedestrian" />
+
+	<SwitchPreference
+		android:dependency="speak_routing_alarms"
+		android:key="speak_speed_limit"
+		android:layout="@layout/preference_switch"
+		android:title="@string/speak_speed_limit" />
+
+	<net.osmand.plus.settings.preferences.ListPreferenceEx
+		android:dependency="speak_routing_alarms"
+		android:key="speed_limit_exceed"
+		android:layout="@layout/preference_with_descr"
+		android:title="@string/speed_limit_exceed" />
+
+	<SwitchPreference
+		android:dependency="speak_routing_alarms"
+		android:key="speak_cameras"
+		android:layout="@layout/preference_switch"
+		android:title="@string/speak_cameras" />
+
+	<SwitchPreference
+		android:dependency="speak_routing_alarms"
+		android:key="speak_tunnels"
+		android:layout="@layout/preference_switch"
+		android:title="@string/show_tunnels" />
+
+	<SwitchPreference
+		android:dependency="speak_routing_alarms"
+		android:key="announce_wpt"
+		android:layout="@layout/preference_switch"
+		android:title="@string/shared_string_gpx_waypoints" />
+
+	<SwitchPreference
+		android:dependency="speak_routing_alarms"
+		android:key="announce_nearby_favorites"
+		android:layout="@layout/preference_switch"
+		android:title="@string/speak_favorites" />
+
+	<SwitchPreference
+		android:dependency="speak_routing_alarms"
+		android:key="announce_nearby_poi"
+		android:layout="@layout/preference_switch"
+		android:title="@string/speak_poi" />
+
+	<net.osmand.plus.settings.preferences.ListPreferenceEx
+		android:dependency="speak_routing_alarms"
+		android:key="keep_informing"
+		android:layout="@layout/preference_with_descr"
+		android:title="@string/keep_informing" />
+
+	<net.osmand.plus.settings.preferences.ListPreferenceEx
+		android:dependency="speak_routing_alarms"
+		android:key="arrival_distance_factor"
+		android:layout="@layout/preference_with_descr"
+		android:title="@string/arrival_distance" />
+
+	<PreferenceCategory
+		android:key="language_and_output"
+		android:layout="@layout/preference_category_with_descr"
+		android:title="@string/language_and_output" />
+
+	<net.osmand.plus.settings.preferences.ListPreferenceEx
+		android:dependency="speak_routing_alarms"
+		android:key="voice_provider"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		android:title="@string/voice_provider"
+		tools:icon="@drawable/ic_action_volume_up" />
+
+</PreferenceScreen>

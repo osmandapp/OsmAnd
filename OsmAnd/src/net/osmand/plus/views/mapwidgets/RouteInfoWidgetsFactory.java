@@ -1248,13 +1248,14 @@ public class RouteInfoWidgetsFactory {
 		}
 		
 		public boolean updateInfo(DrawSettings drawSettings) {
+			boolean showRoutingAlarms = settings.SHOW_ROUTING_ALARMS.get();
 			boolean trafficWarnings = settings.SHOW_TRAFFIC_WARNINGS.get();
 			boolean cams = settings.SHOW_CAMERAS.get();
 			boolean peds = settings.SHOW_PEDESTRIAN.get();
 			boolean tunnels = settings.SHOW_TUNNELS.get();
 			boolean visible = false;
 			if ((rh.isFollowingMode() || trackingUtilities.isMapLinkedToLocation())
-					&& (trafficWarnings || cams)) {
+					&& showRoutingAlarms && (trafficWarnings || cams)) {
 				AlarmInfo alarm;
 				if(rh.isFollowingMode() && !rh.isDeviatedFromRoute() && rh.getCurrentGPXRoute() == null) {
 					alarm = wh.getMostImportantAlarm(settings.METRIC_SYSTEM.get(), cams);

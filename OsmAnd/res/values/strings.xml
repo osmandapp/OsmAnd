@@ -11,6 +11,7 @@
 	Thx - Hardy
 
 -->
+
     <string name="application_profile_changed">Application profile changed to \"%s\"</string>
     <string name="switch_profile">Switch profile</string>
     <string name="configure_profile">Configure profile</string>

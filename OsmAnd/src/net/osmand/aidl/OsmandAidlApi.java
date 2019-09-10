@@ -1792,6 +1792,16 @@ public class OsmandAidlApi {
 		app.getAppCustomization().registerNavDrawerItems(activity, adapter);
 	}
 
+	public ConnectedApp getConnectedApp(@NonNull String pack) {
+		List<ConnectedApp> connectedApps = getConnectedApps();
+		for (ConnectedApp app : connectedApps) {
+			if (app.pack.equals(pack)) {
+				return app;
+			}
+		}
+		return null;
+	}
+
 	public List<ConnectedApp> getConnectedApps() {
 		List<ConnectedApp> res = new ArrayList<>(connectedApps.size());
 		PackageManager pm = app.getPackageManager();
@@ -1809,9 +1819,9 @@ public class OsmandAidlApi {
 		return res;
 	}
 
-	public void switchEnabled(@NonNull ConnectedApp app) {
+	public boolean switchEnabled(@NonNull ConnectedApp app) {
 		app.enabled = !app.enabled;
-		saveConnectedApps();
+		return saveConnectedApps();
 	}
 
 	boolean isAppEnabled(@NonNull String pack) {
@@ -1824,7 +1834,7 @@ public class OsmandAidlApi {
 		return app.enabled;
 	}
 
-	private void saveConnectedApps() {
+	private boolean saveConnectedApps() {
 		try {
 			JSONArray array = new JSONArray();
 			for (ConnectedApp app : connectedApps.values()) {
@@ -1833,13 +1843,14 @@ public class OsmandAidlApi {
 				obj.put(ConnectedApp.PACK_KEY, app.pack);
 				array.put(obj);
 			}
-			app.getSettings().API_CONNECTED_APPS_JSON.set(array.toString());
+			return app.getSettings().API_CONNECTED_APPS_JSON.set(array.toString());
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
+		return false;
 	}
 
-	private void loadConnectedApps() {
+	public void loadConnectedApps() {
 		try {
 			JSONArray array = new JSONArray(app.getSettings().API_CONNECTED_APPS_JSON.get());
 			for (int i = 0; i < array.length(); i++) {
@@ -2279,6 +2290,10 @@ public class OsmandAidlApi {
 
 		public String getName() {
 			return name;
+		}
+
+		public String getPack() {
+			return pack;
 		}
 
 		public Drawable getIcon() {
