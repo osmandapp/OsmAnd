@@ -3286,4 +3286,5 @@ Lon %2$s</string>
     <string name="screen_alerts">Alertas de pantalla</string>
     <string name="route_parameters_descr">Configurar parámetros de ruta</string>
     <string name="route_parameters">Parámetros de ruta</string>
+    <string name="application_profile_changed">Perfil de aplicación cambiado a «%s»</string>
 </resources>
