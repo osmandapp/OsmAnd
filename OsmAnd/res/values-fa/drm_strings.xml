@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="drm_dialog_message_hiapp_not_installed">"لطفاً ابتدا آخرين نسخۀ HiApp را نصب کنيد."</string>
+    <string name="drm_dialog_message_get_sign_failed">"خطا در شبکه. لطفاً اتصال اينترنت خود را بررسی کرده و دوباره امتحان کنید."</string>
+    <string name="drm_dialog_message_no_internet">"اتصال اينترنت برقرار نیست. لطفاً اتصال اينترنت خود را بررسی کرده و دوباره امتحان کنید."</string>
+    <string name="drm_dialog_message_check_failed">"شما (\u202a%s\u202c) این برنامه را خریداری نکرده‌اید. لطفاً ابتدا آن را خریداری کنید."</string>
+    <string name="drm_dialog_message_check_failed_without_name">"شما این برنامه را خریداری نکرده‌اید. لطفاً ابتدا آن را خریداری کنید."</string>
+    <string name="drm_dialog_message_not_logged">"لطفاً با شناسۀ Huawei خود وارد سیستم شوید."</string>
+    <string name="drm_dialog_message_user_interrupt">"بررسی تاریخچۀ خرید انجام نشد. لطفاً دوباره امتحان کنید."</string>
+    <string name="drm_dialog_message_hiapp_agreement">"لطفاً ابتدا با شرایط استفاده از خدمات HiApp موافقت کنید."</string>
+    <string name="drm_dialog_message_gamebox_agreement">"لطفاً ابتدا با شرایط استفاده از خدمات HiGame موافقت کنید."</string>
+    <string name="drm_dialog_message_waiting">"در حال بررسی تاریخچۀ خرید... لطفاً صبر کنید."</string>
+    <string name="drm_dialog_text_install">"نصب"</string>
+    <string name="drm_dialog_text_quit">"خروج"</string>
+    <string name="drm_dialog_text_retry">"تأييد"</string>
+    <string name="drm_dialog_text_buy">"خرید"</string>
+    <string name="drm_dialog_text_login">"ورود به سیستم"</string>
+    <string name="drm_dialog_text_ok">"تأييد"</string>
+    <string name="drm_dialog_message_over_limit">" شما (\u202a%s\u202c) از حداکثر تعداد دستگاه‌هایی که می‌توانند با این برنامه استفاده شوند فراتر رفته‌اید. لطفاً به یک شناسۀ Huawei دیگر جابجا شوید و دوباره خریداری کنید."</string>
+    <string name="drm_dialog_message_over_limit_without_name">" شما  از حداکثر تعداد دستگاه‌هایی که می‌توانند با این برنامه استفاده شوند فراتر رفته‌اید. لطفاً به یک شناسۀ Huawei دیگر جابجا شوید و دوباره خریداری کنید."</string>
+    <string name="drm_dialog_message_other_errorcode">"بررسی تاریخچۀ خرید انجام نشد، کد خطا: %s. لطفاً با خدمات مشتریان HiApp تماس بگیرید."</string>
+    <string name="drm_dialog_text_hasknow">"تأييد"</string>
+</resources>

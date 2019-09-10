@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="drm_dialog_message_hiapp_not_installed">"කරුණාකර පළමුව HiApp හි නවතම අනුවාදය ස්ථාපනය කරන්න."</string>
+    <string name="drm_dialog_message_get_sign_failed">"ජාල දෝෂය. කරුණාකර ඔබගේ අන්තර්ජාල සම්බන්ධතාවය පරීක්ෂා කර නැවත උත්සාහ කරන්න."</string>
+    <string name="drm_dialog_message_no_internet">"අන්තර්ජාල සම්බන්ධතාවය නැත. කරුණාකර ඔබගේ අන්තර්ජාල සම්බන්ධතාවය පරීක්ෂා කර නැවත උත්සාහ කරන්න."</string>
+    <string name="drm_dialog_message_check_failed">"ඔබ (%s) මෙම යෙදුම මිලදීගෙන නැත. කරුණාකර පළමුව එය මිලදී ගන්න."</string>
+    <string name="drm_dialog_message_check_failed_without_name">"ඔබ මෙම යෙදුම මිලදීගෙන නැත. කරුණාකර පළමුව එය මිලදී ගන්න."</string>
+    <string name="drm_dialog_message_not_logged">"කරුණාකර ඔබගේ Huawei ID සමග ලොගින් වන්න."</string>
+    <string name="drm_dialog_message_user_interrupt">"මිලදී ගැනීම් ඉතිහාසය පරීක්ෂා කිරීමට අසමත් විය. කරුණාකර නැවත උත්සාහ කරන්න."</string>
+    <string name="drm_dialog_message_hiapp_agreement">"කරුණාකර පළමුව HiApp සේවා නියමයන් සමග එකඟ වන්න."</string>
+    <string name="drm_dialog_message_gamebox_agreement">"කරුණාකර පළමුව HiGame සේවා නියමයන් සමග එකඟ වන්න."</string>
+    <string name="drm_dialog_message_waiting">"මිලදී ගැනීම් ඉතිහාසය පරීක්ෂා කරමින්... කරුණාකර රැඳී සිටින්න."</string>
+    <string name="drm_dialog_text_install">"ස්ථාපනය කරන්න"</string>
+    <string name="drm_dialog_text_quit">"ඉවත් වන්න"</string>
+    <string name="drm_dialog_text_retry">"හරි"</string>
+    <string name="drm_dialog_text_buy">"මිලදී ගන්න"</string>
+    <string name="drm_dialog_text_login">"ලොගින් වන්න"</string>
+    <string name="drm_dialog_text_ok">"හරි"</string>
+    <string name="drm_dialog_message_over_limit">"ඔබ (%s) මෙම යෙදුම සමග භාවිතා කර ඇති උපාංග උපරිම සංඛ්‍යාව ඉක්මවා ඇත. කරුණාකර වෙනත් Huawei ID එකකට මාරු වී නැවත මිලදී ගන්න."</string>
+    <string name="drm_dialog_message_over_limit_without_name">"ඔබ  මෙම යෙදුම සමග භාවිතා කර ඇති උපාංග උපරිම සංඛ්‍යාව ඉක්මවා ඇත. කරුණාකර වෙනත් Huawei ID එකකට මාරු වී නැවත මිලදී ගන්න."</string>
+    <string name="drm_dialog_message_other_errorcode">"මිලදී ගැනීම් ඉතිහාසය පරීක්ෂා කිරීමට අසමත් විය, දෝෂ කේතය: %s. කරුණාකර HiApp පාරිභෝගික සේවය අමතන්න."</string>
+    <string name="drm_dialog_text_hasknow">"හරි"</string>
+</resources>

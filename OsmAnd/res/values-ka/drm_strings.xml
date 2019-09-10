@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="drm_dialog_message_hiapp_not_installed">"გთხოვთ ჯერ დააინსტალირეთ HiApp-ის უახლესი ვერსია."</string>
+    <string name="drm_dialog_message_get_sign_failed">"ქსელის შეცდომა. გთხოვთ შეამოწმეთ ინტერნეტთან კავშირი და სცადეთ ხელახლა."</string>
+    <string name="drm_dialog_message_no_internet">"ინტერნეტთან კავშირი არ არის. გთხოვთ შეამოწმეთ ინტერნეტთან კავშირი და სცადეთ ხელახლა."</string>
+    <string name="drm_dialog_message_check_failed">"თქვენ (%s) არ შეგიძენიათ ეს აპი. გთხოვთ ჯერ შეიძინეთ იგი."</string>
+    <string name="drm_dialog_message_check_failed_without_name">"თქვენ არ შეგიძენიათ ეს აპი. გთხოვთ ჯერ შეიძინეთ იგი."</string>
+    <string name="drm_dialog_message_not_logged">"გთხოვთ შედით თქვენი Huawei ID-თი."</string>
+    <string name="drm_dialog_message_user_interrupt">"შეძენის ისტორიის შემოწმება ვერ მოხერხდა. გთხოვთ კიდევ სცადეთ."</string>
+    <string name="drm_dialog_message_hiapp_agreement">"გთხოვთ ჯერ დაეთანხმეთ HiApp-ის მომსახურეობის პირობებს."</string>
+    <string name="drm_dialog_message_gamebox_agreement">"გთხოვთ ჯერ დაეთანხმეთ HiGame-ის მომსახურეობის პირობებს."</string>
+    <string name="drm_dialog_message_waiting">"შეძენის ისტორიის შემოწმება... გთხოვთ დაელოდეთ."</string>
+    <string name="drm_dialog_text_install">"დაინსტალირება"</string>
+    <string name="drm_dialog_text_quit">"გამოსვლა"</string>
+    <string name="drm_dialog_text_retry">"OK"</string>
+    <string name="drm_dialog_text_buy">"შეძენა"</string>
+    <string name="drm_dialog_text_login">"შესვლა"</string>
+    <string name="drm_dialog_text_ok">"OK"</string>
+    <string name="drm_dialog_message_over_limit">"თქვენ (%s) გადააჭარბეთ მოწყობილობათა მაქსიმალურ რაოდენობას, რომელიც ამ აპთან შეიძლება იყოს გამოყენებული. გთხოვთ გადართეთ სხვა Huawei ID-ზე და ხელახლა შეიძინეთ."</string>
+    <string name="drm_dialog_message_over_limit_without_name">"თქვენ  გადააჭარბეთ მოწყობილობათა მაქსიმალურ რაოდენობას, რომელიც ამ აპთან შეიძლება იყოს გამოყენებული. გთხოვთ გადართეთ სხვა Huawei ID-ზე და ხელახლა შეიძინეთ."</string>
+    <string name="drm_dialog_message_other_errorcode">"შეძენის ისტორიის შემოწმება ვერ მოხერხდა, შეცდომის კოდი: %s. გთხოვთ დაუკავშირდით HiApp-ის კლიენტთა მომსახურეობას."</string>
+    <string name="drm_dialog_text_hasknow">"OK"</string>
+</resources>

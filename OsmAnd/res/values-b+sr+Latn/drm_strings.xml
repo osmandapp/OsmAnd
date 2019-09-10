@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="drm_dialog_message_hiapp_not_installed">"Prvo instalirajte najnoviju verziju aplikacije HiApp."</string>
+    <string name="drm_dialog_message_get_sign_failed">"Greška na mreži. Proverite svoju internet vezu i pokušajte ponovo."</string>
+    <string name="drm_dialog_message_no_internet">"Internet veza ne postoji. Proverite svoju internet vezu i pokušajte ponovo."</string>
+    <string name="drm_dialog_message_check_failed">"(%s), niste kupili ovu aplikaciju. Prvo je kupite."</string>
+    <string name="drm_dialog_message_check_failed_without_name">"Niste kupili ovu aplikaciju. Prvo je kupite."</string>
+    <string name="drm_dialog_message_not_logged">"Prijavite se sa svojim Huawei ID-jem."</string>
+    <string name="drm_dialog_message_user_interrupt">"Provera istorije kupovine nije uspela. Pokušajte ponovo."</string>
+    <string name="drm_dialog_message_hiapp_agreement">"Prvo prihvatite Uslove korišćenja za HiApp."</string>
+    <string name="drm_dialog_message_gamebox_agreement">"Prvo prihvatite Uslove korišćenja za HiGame."</string>
+    <string name="drm_dialog_message_waiting">"Provera istorije kupovine… Sačekajte."</string>
+    <string name="drm_dialog_text_install">"Instaliraj"</string>
+    <string name="drm_dialog_text_quit">"Odustani"</string>
+    <string name="drm_dialog_text_retry">"U redu"</string>
+    <string name="drm_dialog_text_buy">"Kupi"</string>
+    <string name="drm_dialog_text_login">"Prijavi se"</string>
+    <string name="drm_dialog_text_ok">"U redu"</string>
+    <string name="drm_dialog_message_over_limit">"(%s), prekoračili ste maksimalan broj uređaja koji se mogu koristiti sa ovom aplikacijom. Prebacite na drugi Huawei ID i ponovo obavite kupovinu."</string>
+    <string name="drm_dialog_message_over_limit_without_name">"prekoračili ste maksimalan broj uređaja koji se mogu koristiti sa ovom aplikacijom. Prebacite na drugi Huawei ID i ponovo obavite kupovinu."</string>
+    <string name="drm_dialog_message_other_errorcode">"Provera istorije kupovine nije uspela, kod greške: %s. Obratite se korisničkoj službi za HiApp."</string>
+    <string name="drm_dialog_text_hasknow">"U redu"</string>
+</resources>

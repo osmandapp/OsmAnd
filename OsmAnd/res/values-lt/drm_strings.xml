@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="drm_dialog_message_hiapp_not_installed">"Pirmiausia įdiekite naujausią „HiApp“ versiją."</string>
+    <string name="drm_dialog_message_get_sign_failed">"Tinklo klaida. Patikrinkite interneto ryšį ir bandykite dar kartą."</string>
+    <string name="drm_dialog_message_no_internet">"Nėra interneto ryšio. Patikrinkite interneto ryšį ir bandykite dar kartą."</string>
+    <string name="drm_dialog_message_check_failed">"Jūs (%s) dar nenusipirkote šios programėlės. Pirmiau ją nusipirkite."</string>
+    <string name="drm_dialog_message_check_failed_without_name">"Jūs dar nenusipirkote šios programėlės. Pirmiau ją nusipirkite."</string>
+    <string name="drm_dialog_message_not_logged">"Prisijunkite su savo „Huawei“ ID."</string>
+    <string name="drm_dialog_message_user_interrupt">"Nepavyko patikrinti pirkimo retrospektyvos. Bandykite dar kartą."</string>
+    <string name="drm_dialog_message_hiapp_agreement">"Pirmiausia reikia sutikti su „HiApp“ paslaugos teikimo sąlygomis."</string>
+    <string name="drm_dialog_message_gamebox_agreement">"Pirmiausia reikia sutikti su „HiGame“ paslaugos teikimo sąlygomis."</string>
+    <string name="drm_dialog_message_waiting">"Tikrinama pirkimo retrospektyva… Prašome palaukti."</string>
+    <string name="drm_dialog_text_install">"Įdiegti"</string>
+    <string name="drm_dialog_text_quit">"Išeiti"</string>
+    <string name="drm_dialog_text_retry">"Gerai"</string>
+    <string name="drm_dialog_text_buy">"Pirkti"</string>
+    <string name="drm_dialog_text_login">"Prisijungti"</string>
+    <string name="drm_dialog_text_ok">"Gerai"</string>
+    <string name="drm_dialog_message_over_limit">"Jūs (%s) viršijote maksimalų skaičių įrenginių, kuriuos galima naudoti su šia programėle. Persijunkite į kitą „Huawei“ ID ir nusipirkite vėl."</string>
+    <string name="drm_dialog_message_over_limit_without_name">"Jūs viršijote maksimalų skaičių įrenginių, kuriuos galima naudoti su šia programėle. Persijunkite į kitą „Huawei“ ID ir nusipirkite vėl."</string>
+    <string name="drm_dialog_message_other_errorcode">"Nepavyko patikrinti pirkimo retrospektyvos. Klaidos kodas: %s. Susisiekite su „HiApp“ klientų aptarnavimo tarnyba."</string>
+    <string name="drm_dialog_text_hasknow">"Gerai"</string>
+</resources>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="drm_dialog_message_hiapp_not_installed">"Paki-install muna ang pinakabagong bersyon ng HiApp."</string>
+    <string name="drm_dialog_message_get_sign_failed">"Error sa network. Pakisuri ang iyong koneksyon sa Internet at subukang muli."</string>
+    <string name="drm_dialog_message_no_internet">"Walang koneksyon sa Internet. Pakisuri ang iyong koneksyon sa Internet at subukang muli."</string>
+    <string name="drm_dialog_message_check_failed">"Hindi mo (%s) nabili ang app na ito. Pakibili muna ito."</string>
+    <string name="drm_dialog_message_check_failed_without_name">"Hindi mo nabili ang app na ito. Pakibili muna ito."</string>
+    <string name="drm_dialog_message_not_logged">"Mangyaring mag-log in gamit ang iyong Huawei ID."</string>
+    <string name="drm_dialog_message_user_interrupt">"Hindi natingnan ang history ng pagbili. Pakisubukang muli."</string>
+    <string name="drm_dialog_message_hiapp_agreement">"Mangyaring sumang-ayon muna sa Mga Tuntunin ng Serbisyo ng HiApp."</string>
+    <string name="drm_dialog_message_gamebox_agreement">"Mangyaring sumang-ayon muna sa Mga Tuntunin ng Serbisyo ng HiGame."</string>
+    <string name="drm_dialog_message_waiting">"Tinitingnan ang history ng pagbili… Pakihintay."</string>
+    <string name="drm_dialog_text_install">"I-install"</string>
+    <string name="drm_dialog_text_quit">"Umalis"</string>
+    <string name="drm_dialog_text_retry">"OK"</string>
+    <string name="drm_dialog_text_buy">"Bilhin"</string>
+    <string name="drm_dialog_text_login">"Mag-log in"</string>
+    <string name="drm_dialog_text_ok">"OK"</string>
+    <string name="drm_dialog_message_over_limit">"Lumampas ka (%s) na sa maximum na bilang ng device na maaaring gamitin sa app na ito. Mangyaring lumipat sa isa pang Huawei ID at bumiling muli."</string>
+    <string name="drm_dialog_message_over_limit_without_name">"Lumampas ka na sa maximum na bilang ng device na maaaring gamitin sa app na ito. Mangyaring lumipat sa isa pang Huawei ID at bumiling muli."</string>
+    <string name="drm_dialog_message_other_errorcode">"Hindi natingnan ang history ng pagbili, error code: %s. Mangyaring makipag-ugnayan sa customer service ng HiApp."</string>
+    <string name="drm_dialog_text_hasknow">"OK"</string>
+</resources>

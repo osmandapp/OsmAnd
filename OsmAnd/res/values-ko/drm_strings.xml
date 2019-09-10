@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="drm_dialog_message_hiapp_not_installed">"HiApp 최신 버전을 먼저 설치하시기 바랍니다."</string>
+    <string name="drm_dialog_message_get_sign_failed">"네트워크 에러. 인터넷 연결 확인 후 다시 시도해 보시기 바랍니다."</string>
+    <string name="drm_dialog_message_no_internet">"인터넷이 연결되지 않았습니다. 인터넷 연결 확인 후 다시 해 보시기 바랍니다."</string>
+    <string name="drm_dialog_message_check_failed">"고객님(%s)은 본 어플을 구매하지 않았습니다 먼저 구매하시기 바랍니다."</string>
+    <string name="drm_dialog_message_check_failed_without_name">"본 어플을 구매하지 않았습니다. 먼저 구매하시기 바랍니다."</string>
+    <string name="drm_dialog_message_not_logged">"화웨이 ID로 로그인하세요."</string>
+    <string name="drm_dialog_message_user_interrupt">"구매 기록 확인에 실패했습니다. 다시 시도하세요."</string>
+    <string name="drm_dialog_message_hiapp_agreement">"HiApp 서비스 약관에 동의하시기 바랍니다."</string>
+    <string name="drm_dialog_message_gamebox_agreement">"HiGame 서비스 약관에 동의하시기 바랍니다."</string>
+    <string name="drm_dialog_message_waiting">"구매 기록 확인 중… 기다려 주세요."</string>
+    <string name="drm_dialog_text_install">"설치"</string>
+    <string name="drm_dialog_text_quit">"나가기"</string>
+    <string name="drm_dialog_text_retry">"OK"</string>
+    <string name="drm_dialog_text_buy">"구매"</string>
+    <string name="drm_dialog_text_login">"로그인"</string>
+    <string name="drm_dialog_text_ok">"OK"</string>
+    <string name="drm_dialog_message_over_limit">"고객님이(%s) 본 어플로 사용 가능한 최대 기기 수가 초과하였습니다. 다른 화웨이 ID를 사용하여 다시 구매해 보세요."</string>
+    <string name="drm_dialog_message_over_limit_without_name">"고객님이 본 어플로 사용 가능한 최대 기기 수가 초과하였습니다. 다른 화웨이 Id를 사용하여 다시 구매해 보세요."</string>
+    <string name="drm_dialog_message_other_errorcode">"구매 기록 확인에 실패했습니다. 에러 코드: %s. HiApp 고객 서비스에 연락하세요."</string>
+    <string name="drm_dialog_text_hasknow">"OK"</string>
+</resources>

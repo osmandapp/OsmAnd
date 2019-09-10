@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="drm_dialog_message_hiapp_not_installed">"โปรดติดตั้ง HiApp ที่เป็นเวอร์ชันล่าสุดก่อน"</string>
+    <string name="drm_dialog_message_get_sign_failed">"ข้อผิดพลาดจากเครือข่าย โปรดตรวจสอบการเชื่อมต่ออินเทอร์เน็ตของคุณและลองใหม่อีกครั้ง"</string>
+    <string name="drm_dialog_message_no_internet">"ไม่มีการเชื่อมต่ออินเทอร์เน็ต โปรดตรวจสอบการเชื่อมต่ออินเทอร์เน็ตของคุณและลองใหม่อีกครั้ง"</string>
+    <string name="drm_dialog_message_check_failed">"คุณ (%s) ยังไม่ได้ซื้อแอปนี้ โปรดทำการซื้อแอปนี้ก่อน"</string>
+    <string name="drm_dialog_message_check_failed_without_name">"คุณยังไม่ได้ซื้อแอปนี้ โปรดทำการซื้อแอปนี้ก่อน"</string>
+    <string name="drm_dialog_message_not_logged">"โปรดล็อกอินเข้าสู่ระบบด้วย Huawei ID ของคุณ"</string>
+    <string name="drm_dialog_message_user_interrupt">"ไม่สามารถตรวจสอบประวัติการซื้อได้ โปรดลองใหม่อีกครั้ง"</string>
+    <string name="drm_dialog_message_hiapp_agreement">"โปรดยอมรับเงื่อนไขการให้บริการของ HiApp ก่อน"</string>
+    <string name="drm_dialog_message_gamebox_agreement">"โปรดยอมรับเงื่อนไขการให้บริการของ HiGame ก่อน"</string>
+    <string name="drm_dialog_message_waiting">"กำลังตรวจสอบประวัติการซื้อ... โปรดรอสักครู่"</string>
+    <string name="drm_dialog_text_install">"ติดตั้ง"</string>
+    <string name="drm_dialog_text_quit">"ออก"</string>
+    <string name="drm_dialog_text_retry">"ตกลง"</string>
+    <string name="drm_dialog_text_buy">"ซื้อ"</string>
+    <string name="drm_dialog_text_login">"ล็อกอิน"</string>
+    <string name="drm_dialog_text_ok">"ตกลง"</string>
+    <string name="drm_dialog_message_over_limit">"คุณ (%s) ได้ใช้อุปกรณ์เกินจำนวนสูงสุดที่สามารถใช้กับแอปนี้ได้ โปรดเปลี่ยนไปใช้ Huawei ID อื่นและทำการซื้ออีกครั้ง"</string>
+    <string name="drm_dialog_message_over_limit_without_name">"คุณ ได้ใช้อุปกรณ์เกินจำนวนสูงสุดที่สามารถใช้กับแอปนี้ได้ โปรดเปลี่ยนไปใช้ Huawei ID อื่นและทำการซื้ออีกครั้ง"</string>
+    <string name="drm_dialog_message_other_errorcode">"ไม่สามารถตรวจสอบประวัติการซื้อได้ รหัสข้อผิดพลาด: %s. โปรดติดต่อฝ่ายบริการลูกค้า HiApp"</string>
+    <string name="drm_dialog_text_hasknow">"ตกลง"</string>
+</resources>

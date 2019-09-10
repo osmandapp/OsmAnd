@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="drm_dialog_message_hiapp_not_installed">"कृपया पहिले HiApp को नवीनतम संस्करण स्थापना गर्नुहोस्।"</string>
+    <string name="drm_dialog_message_get_sign_failed">"सञ्जाल त्रुटि। कृपया आफ्नो इन्टरनेट जडान जाच्नुहोस् र पुन: प्रयास गर्नुहोस्।"</string>
+    <string name="drm_dialog_message_no_internet">"इन्टरनेट जडान छैन। कृपया आफ्नो इन्टरनेट जडान जाच्नुहोस् र पुन: प्रयास गर्नुहोस्।"</string>
+    <string name="drm_dialog_message_check_failed">"तपाईंले (%s) यो एप खरीद गर्नुभएको छैन। कृपया त्यसलाई पहिले खरीद गर्नुहोस्।"</string>
+    <string name="drm_dialog_message_check_failed_without_name">"तपाईंले यो एप खरीद गर्नुभएको छैन। कृपया त्यसलाई पहिले खरीद गर्नुहोस्।"</string>
+    <string name="drm_dialog_message_not_logged">"कृपया आफ्नो Huawei ID मार्फत लग इन गर्नुहोस्।"</string>
+    <string name="drm_dialog_message_user_interrupt">"खरीद इतिहास जाँच्न असफल भयो। कृपया पुन: प्रयास गर्नुहोस्।"</string>
+    <string name="drm_dialog_message_hiapp_agreement">"कृपया पहिले HiApp सेवाका सर्तहरूमा सहमत जनाउनुहोस्।"</string>
+    <string name="drm_dialog_message_gamebox_agreement">"कृपया पहिले HiGame सेवाका सर्तहरूमा सहमत जनाउनुहोस्।"</string>
+    <string name="drm_dialog_message_waiting">"खरीद इतिहास जाँच्दैछ... कृपया प्रतीक्षा गर्नुहोस्।"</string>
+    <string name="drm_dialog_text_install">"स्थापना गर्नुहोस्"</string>
+    <string name="drm_dialog_text_quit">"नकार्नुहोस्"</string>
+    <string name="drm_dialog_text_retry">"ठीक छ"</string>
+    <string name="drm_dialog_text_buy">"खरीद गर्नुहोस्"</string>
+    <string name="drm_dialog_text_login">"लग इन गर्नुहोस्"</string>
+    <string name="drm_dialog_text_ok">"ठीक छ"</string>
+    <string name="drm_dialog_message_over_limit">"तपाईंले (%s) यस एपसँग प्रयोग गर्न सकिने यन्त्रहरूको अधिकतम सङ्ख्या नाघ्नुभएको छ। कृपया अर्को Huawei ID मा स्विच गर्नुहोस् र फेरि खरीद गर्नुहोस्।"</string>
+    <string name="drm_dialog_message_over_limit_without_name">"तपाईंले यस एपसँग प्रयोग गर्न सकिने यन्त्रहरूको अधिकतम सङ्ख्या नाघ्नुभएको छ। कृपया अर्को Huawei ID मा स्विच गर्नुहोस् र फेरि खरीद गर्नुहोस्।"</string>
+    <string name="drm_dialog_message_other_errorcode">"खरीद इतिहास जाँच्न असफल भयो, त्रुटि कोड: %s. कृपया HiApp ग्राहक सेवामा सम्पर्क गर्नुहोस्।"</string>
+    <string name="drm_dialog_text_hasknow">"ठीक छ"</string>
+</resources>

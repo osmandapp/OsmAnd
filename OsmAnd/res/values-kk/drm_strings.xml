@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="drm_dialog_message_hiapp_not_installed">"Алдымен HiApp қолданбасының соңғы нұсқасын орнатыңыз."</string>
+    <string name="drm_dialog_message_get_sign_failed">"Желі қатесі. Интернет байланысын тексеріп, әрекетті қайталаңыз."</string>
+    <string name="drm_dialog_message_no_internet">"Интернет байланысы жоқ. Интернет байланысын тексеріп, әрекетті қайталаңыз."</string>
+    <string name="drm_dialog_message_check_failed">"Сіз (%s) бұл қолданбаны сатып алмағансыз. Алдымен оны сатып алыңыз."</string>
+    <string name="drm_dialog_message_check_failed_without_name">"Бұл қолданбаны сатып алмағансыз. Алдымен оны сатып алыңыз."</string>
+    <string name="drm_dialog_message_not_logged">"Huawei идентификаторыңызбен кіріңіз."</string>
+    <string name="drm_dialog_message_user_interrupt">"Сатып алулар тарихы тексерілмеді. Әрекетті қайталаңыз."</string>
+    <string name="drm_dialog_message_hiapp_agreement">"Алдымен HiApp қызмет көрсету шарттарымен келісіңіз."</string>
+    <string name="drm_dialog_message_gamebox_agreement">"Алдымен HiGame қызмет көрсету шарттарымен келісіңіз."</string>
+    <string name="drm_dialog_message_waiting">"Сатып алулар тарихы тексерілуде… Күтіңіз."</string>
+    <string name="drm_dialog_text_install">"Орнату"</string>
+    <string name="drm_dialog_text_quit">"Шығу"</string>
+    <string name="drm_dialog_text_retry">"OK"</string>
+    <string name="drm_dialog_text_buy">"Сатып алу"</string>
+    <string name="drm_dialog_text_login">"Кіру"</string>
+    <string name="drm_dialog_text_ok">"OK"</string>
+    <string name="drm_dialog_message_over_limit">"Сіз (%s) осы қолданбамен бірге пайдалануға болатын құрылғылардың ең көп санынан астыңыз. Басқа Huawei идентификаторына кіріп, қайтадан сатып алыңыз."</string>
+    <string name="drm_dialog_message_over_limit_without_name">"Сіз осы қолданбамен бірге пайдалануға болатын құрылғылардың ең көп санынан астыңыз. Басқа Huawei идентификаторына кіріп, қайтадан сатып алыңыз."</string>
+    <string name="drm_dialog_message_other_errorcode">"Сатып алулар тарихы тексерілмеді, қате коды: %s. HiApp тұтынушыларды қолдау қызметіне хабарласыңыз."</string>
+    <string name="drm_dialog_text_hasknow">"OK"</string>
+</resources>

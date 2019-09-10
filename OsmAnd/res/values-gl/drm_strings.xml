@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="drm_dialog_message_hiapp_not_installed">"Instale a última versión de HiApp primeiro."</string>
+    <string name="drm_dialog_message_get_sign_failed">"Erro de rede. Comprobe a súa conexión a Internet e ténteo de novo."</string>
+    <string name="drm_dialog_message_no_internet">"Sen Internet. Comprobe a súa conexión a Internet e ténteo de novo."</string>
+    <string name="drm_dialog_message_check_failed">"Vostede (%s) non comprou esta app. Cómprea primeiro."</string>
+    <string name="drm_dialog_message_check_failed_without_name">"Vostede non comprou esta app. Cómprea primeiro."</string>
+    <string name="drm_dialog_message_not_logged">"Inicie sesión co seu ID de Huawei."</string>
+    <string name="drm_dialog_message_user_interrupt">"Non se puido comprobar o historial de compras. Ténteo de novo."</string>
+    <string name="drm_dialog_message_hiapp_agreement">"Acepte os Termos de servizo de HiApp primeiro."</string>
+    <string name="drm_dialog_message_gamebox_agreement">"Acepte os Termos de servizo de HiGame primeiro."</string>
+    <string name="drm_dialog_message_waiting">"Comprobando historial de compras... Espere."</string>
+    <string name="drm_dialog_text_install">"Instalar"</string>
+    <string name="drm_dialog_text_quit">"Saír"</string>
+    <string name="drm_dialog_text_retry">"OK"</string>
+    <string name="drm_dialog_text_buy">"Comprar"</string>
+    <string name="drm_dialog_text_login">"Iniciar sesión"</string>
+    <string name="drm_dialog_text_ok">"OK"</string>
+    <string name="drm_dialog_message_over_limit">"Vostede (%s) superou o número máximo de dispositivos que se poden usar con esta app. Cambie a outro ID de Huawei e compre de novo."</string>
+    <string name="drm_dialog_message_over_limit_without_name">"Vostede superou o número máximo de dispositivos que se poden usar con esta app. Cambie a outro ID de Huawei e compre de novo."</string>
+    <string name="drm_dialog_message_other_errorcode">"Erro ao comprobar o historial de compras, código de erro: %s. Póñase en contacto coa atención ao cliente de HiApp."</string>
+    <string name="drm_dialog_text_hasknow">"OK"</string>
+</resources>

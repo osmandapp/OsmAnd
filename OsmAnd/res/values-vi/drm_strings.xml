@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="drm_dialog_message_hiapp_not_installed">"Trước tiên vui lòng cài đặt phiên bản mới nhất của HiApp."</string>
+    <string name="drm_dialog_message_get_sign_failed">"Lỗi mạng. Vui lòng kiểm tra kết nối Internet rồi thử lại."</string>
+    <string name="drm_dialog_message_no_internet">"Không có kết nối Internet. Vui lòng kiểm tra kết nối Internet rồi thử lại."</string>
+    <string name="drm_dialog_message_check_failed">"Bạn (%s) chưa mua ứng dụng này. Vui lòng mua ứng dụng."</string>
+    <string name="drm_dialog_message_check_failed_without_name">"Bạn chưa mua ứng dụng này. Vui lòng mua ứng dụng."</string>
+    <string name="drm_dialog_message_not_logged">"Vui lòng đăng nhập ID Huawei."</string>
+    <string name="drm_dialog_message_user_interrupt">"Kiểm tra lịch sử giao dịch bị thất bại. Vui lòng thử lại."</string>
+    <string name="drm_dialog_message_hiapp_agreement">"Bạn trước tiên cần đồng ý với Thỏa thuận Dịch vụ HiApp."</string>
+    <string name="drm_dialog_message_gamebox_agreement">"Bạn trước tiên cần đồng ý với Thỏa thuận Dịch vụ HiGame."</string>
+    <string name="drm_dialog_message_waiting">"Đang kiểm tra lịch sử giao dịch... Vui lòng đợi."</string>
+    <string name="drm_dialog_text_install">"Cài đặt"</string>
+    <string name="drm_dialog_text_quit">"Thoát"</string>
+    <string name="drm_dialog_text_retry">"OK"</string>
+    <string name="drm_dialog_text_buy">"Mua"</string>
+    <string name="drm_dialog_text_login">"Đăng nhập"</string>
+    <string name="drm_dialog_text_ok">"OK"</string>
+    <string name="drm_dialog_message_over_limit">"Bạn (%s) đã dùng ứng dụng này trên các thiết bị với số lượng vượt quá giới hạn. Vui lòng chuyển sang ID Huawei khác và thực hiện lại giao dịch."</string>
+    <string name="drm_dialog_message_over_limit_without_name">"Bạn đã dùng ứng dụng này trên các thiết bị với số lượng vượt quá giới hạn. Vui lòng chuyển sang ID Huawei khác và thực hiện lại giao dịch."</string>
+    <string name="drm_dialog_message_other_errorcode">"Kiểm tra lịch sử thanh toán bị thất bại, mã lỗi: %s. Vui lòng liên hệ dịch vụ khách hàng HiApp."</string>
+    <string name="drm_dialog_text_hasknow">"OK"</string>
+</resources>

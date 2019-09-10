@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="drm_dialog_message_hiapp_not_installed">"براہ کرم پہلے HiApp کا تازہ ترین ورژن انسٹال کریں۔"</string>
+    <string name="drm_dialog_message_get_sign_failed">"نیٹ ورک کی خرابی۔ براہ کرم اپنا انٹرنیٹ کنکشن چیک کریں اور دوبارہ کوشش کریں۔"</string>
+    <string name="drm_dialog_message_no_internet">"انٹرنیٹ کنکشن نہیں ہے۔ براہ کرم اپنا انٹرنیٹ کنکشن چیک کریں اور دوبارہ کوشش کریں۔"</string>
+    <string name="drm_dialog_message_check_failed">"آپ ‎(\u202a%s\u202c)‎ نے یہ ایپ نہیں خریدی ہے۔ براہ کرم پہلے اسے خریدیں۔"</string>
+    <string name="drm_dialog_message_check_failed_without_name">"آپ ‎نے یہ ایپ نہیں خریدی ہے۔ براہ کرم پہلے اسے خریدیں۔"</string>
+    <string name="drm_dialog_message_not_logged">"براہ کرم اپنی Huawei ID کے ساتھ لاگ ان کریں۔"</string>
+    <string name="drm_dialog_message_user_interrupt">"خریداری کی ہسٹری چیک کرنے میں ناکام ہو گیا۔ براہ کرم دوبارہ کوشش کریں۔"</string>
+    <string name="drm_dialog_message_hiapp_agreement">"براہ کرم پہلے HiApp کی سروس کی شرائط سے اتفاق کریں۔"</string>
+    <string name="drm_dialog_message_gamebox_agreement">"براہ کرم پہلے HiGame کی سروس کی شرائط سے اتفاق کریں۔"</string>
+    <string name="drm_dialog_message_waiting">"خریداری کی ہسٹری چیک کر رہا ہے… براہ کرم انتظار کریں۔"</string>
+    <string name="drm_dialog_text_install">"انسٹال کریں"</string>
+    <string name="drm_dialog_text_quit">"چھوڑیں"</string>
+    <string name="drm_dialog_text_retry">"اوکے"</string>
+    <string name="drm_dialog_text_buy">"خریدیں"</string>
+    <string name="drm_dialog_text_login">"لاگ ان کریں"</string>
+    <string name="drm_dialog_text_ok">"ٹھیک ہے"</string>
+    <string name="drm_dialog_message_over_limit">"آپ ‎(\u202a%s\u202c)‎ اس ایپ کے ساتھ استعمال کی جا سکنے والی ڈیوائسز کی زیادہ سے زیادہ تعداد کو پہنچ گئے ہیں۔ براہ کرم دیگر Huawei ID میں سوئچ کریں اور دوبارہ خریدیں۔"</string>
+    <string name="drm_dialog_message_over_limit_without_name">"آپ‎ اس ایپ کے ساتھ استعمال کی جا سکنے والی ڈیوائسز کی زیادہ سے زیادہ تعداد کو پہنچ گئے ہیں۔ براہ کرم دیگر Huawei ID میں سوئچ کریں اور دوبارہ خریدیں۔"</string>
+    <string name="drm_dialog_message_other_errorcode">"خریداری کی ہسٹری چیک کرنے میں ناکام ہو گیا، خرابی کا کوڈ: %s۔ براہ کرم HiApp کسٹمر سروس سے رابطہ کریں۔"</string>
+    <string name="drm_dialog_text_hasknow">"ٹھیک ہے"</string>
+</resources>

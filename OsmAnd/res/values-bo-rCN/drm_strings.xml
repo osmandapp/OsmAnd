@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="drm_dialog_message_hiapp_not_installed">"ཐོག་མ་ HiApp ཡི་རིམ་པ་གསར་ཤོས་དེ་སྒྲིག་འཇུག་གནང་རོགས།"</string>
+    <string name="drm_dialog_message_get_sign_failed">"དྲ་ལམ་ནོར་འཁྲུལ། ཁྱེད་ཀྱི་དྲ་རྒྱའི་སྦྲེལ་མཐུད་ཞིབ་བཤེར་གནང་བ་དང་ཡང་བསྐྱར་འབད་རྩོལ་བྱ།"</string>
+    <string name="drm_dialog_message_no_internet">"དྲ་རྒྱའི་སྦྲེལ་མཐུད་མིན་འདུག ཁྱེད་ཀྱི་དྲ་རྒྱའི་སྦྲེལ་མཐུད་ཞིབ་བཤེར་གནང་བ་དང་ཡང་བསྐྱར་འབད་རྩོལ་བྱ།"</string>
+    <string name="drm_dialog_message_check_failed">"ཁྱེད་ཀྱིས་ (%s) ཉེར་སྤྱོད་འདི་ཉོ་སྒྲུབ་བྱེད་མིན་འདུག ཐོག་མ་དེ་ཉོ་སྒྲུབ་གནང་རོགས།"</string>
+    <string name="drm_dialog_message_check_failed_without_name">"ཁྱེད་ཀྱིས་ཉེར་སྤྱོད་འདི་ཉོ་སྒྲུབ་བྱེད་མིན་འདུག ཐོག་མ་དེ་ཉོ་སྒྲུབ་གནང་རོགས།"</string>
+    <string name="drm_dialog_message_not_logged">"ཁྱེད་ཀྱི་ཧུ་ཝཡེ་ངོ་སྤྲོད་མིང་བྱང་ལྷན་ཐོ་འགོད་གནང་རོགས།"</string>
+    <string name="drm_dialog_message_user_interrupt">"ཉོ་སྒྲུབ་ལོ་རྒྱུས་ཞིབ་བཤེར་མ་ཐུབ། ཡང་བསྐྱར་འབད་རྩོལ་གནང་རོགས།"</string>
+    <string name="drm_dialog_message_hiapp_agreement">"ཐོག་མ་ HiApp ཡི་ཞབས་ཞུའི་རྒྱས་གཅད་སྟེང་མོས་མཐུན་གནང་རོགས།"</string>
+    <string name="drm_dialog_message_gamebox_agreement">"ཐོག་མ་ HiGame ཡི་ཞབས་ཞུའི་རྒྱས་གཅད་སྟེང་མོས་མཐུན་གནང་རོགས།"</string>
+    <string name="drm_dialog_message_waiting">"ཉོ་སྒྲུབ་ལོ་རྒྱུས་ཞིབ་བཤེར་བཞིན་པ། སྒུག་རོགས་གནང་།"</string>
+    <string name="drm_dialog_text_install">"སྒྲིག་འཇུག"</string>
+    <string name="drm_dialog_text_quit">"དོར།"</string>
+    <string name="drm_dialog_text_retry">"བསྐྱར་དུ་ཚོད་ལྟ་བྱེད།"</string>
+    <string name="drm_dialog_text_buy">"ཉོ་སྒྲུབ།"</string>
+    <string name="drm_dialog_text_login">"ཐོ་འགོད།"</string>
+    <string name="drm_dialog_text_ok">"ཆོག"</string>
+    <string name="drm_dialog_message_over_limit">"ཁྱེད་ཀྱིས་ (%s) ཉེར་སྤྱོད་འདི་ལྷན་བེད་སྤྱོད་བྱེད་ཐུབ་པའི་སྒྲིག་ཆས་དག་གི་གྲངས་མང་ཤོས་དེ་ལས་བརྒལ་འདུག ཧུ་ཝཡེ་ངོ་སྤྲོད་མིང་བྱང་གཞན་སྟེང་བརྗེ་སྒྱུར་གནང་བ་དང་། ཡང་བསྐྱར་ཉོ་སྒྲུབ་བྱ།"</string>
+    <string name="drm_dialog_message_over_limit_without_name">"ཁྱེད་ཀྱིས་  ཉེར་སྤྱོད་འདི་ལྷན་བེད་སྤྱོད་བྱེད་ཐུབ་པའི་སྒྲིག་ཆས་དག་གི་གྲངས་མང་ཤོས་དེ་ལས་བརྒལ་འདུག ཧུ་ཝཡེ་ངོ་སྤྲོད་མིང་བྱང་གཞན་སྟེང་བརྗེ་སྒྱུར་གནང་བ་དང་། ཡང་བསྐྱར་ཉོ་སྒྲུབ་བྱ།"</string>
+    <string name="drm_dialog_message_other_errorcode">"ཉོ་སྒྲུབ་ལོ་རྒྱུས་ཞིབ་བཤེར་མ་ཐུབ། གསང་རྟགས་ནོར་བ། %s. HiApp ཚོང་ཤག་ཞབས་ཞུ་ལ་འབྲེལ་གཏུག་གནང་རོགས།"</string>
+    <string name="drm_dialog_text_hasknow">"ཆོག"</string>
+</resources>

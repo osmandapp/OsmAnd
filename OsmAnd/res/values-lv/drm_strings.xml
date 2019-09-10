@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="drm_dialog_message_hiapp_not_installed">"Vispirms instalējiet HiApp jaunāko versiju."</string>
+    <string name="drm_dialog_message_get_sign_failed">"Tīkla kļūda. Lūdzu, pārbaudiet interneta savienojumu un mēģiniet vēlreiz."</string>
+    <string name="drm_dialog_message_no_internet">"Nav interneta savienojuma. Lūdzu, pārbaudiet interneta savienojumu un mēģiniet vēlreiz."</string>
+    <string name="drm_dialog_message_check_failed">"Jūs (%s) neesat iegādājies šo lietotni. Vispirms to iegādājieties."</string>
+    <string name="drm_dialog_message_check_failed_without_name">"Jūs neesat iegādājies šo lietotni. Vispirms to iegādājieties."</string>
+    <string name="drm_dialog_message_not_logged">"Piesakieties ar savu Huawei ID."</string>
+    <string name="drm_dialog_message_user_interrupt">"Pirkumu vēstures pārbaudes kļūme. Mēģiniet vēlreiz."</string>
+    <string name="drm_dialog_message_hiapp_agreement">"Vispirms piekrītiet HiApp pakalpojuma lietošanas noteikumiem."</string>
+    <string name="drm_dialog_message_gamebox_agreement">"Vispirms piekrītiet HiGame pakalpojuma lietošanas noteikumiem."</string>
+    <string name="drm_dialog_message_waiting">"Notiek pirkumu vēstures pārbaude... Uzgaidiet."</string>
+    <string name="drm_dialog_text_install">"Instalēt"</string>
+    <string name="drm_dialog_text_quit">"Iziet"</string>
+    <string name="drm_dialog_text_retry">"Labi"</string>
+    <string name="drm_dialog_text_buy">"Iegādāties"</string>
+    <string name="drm_dialog_text_login">"Pieteikties"</string>
+    <string name="drm_dialog_text_ok">"Labi"</string>
+    <string name="drm_dialog_message_over_limit">"Jūs (%s) esat pārsniedzis maksimālo ierīču skaitu, kurās var izmantot šo lietotni. Pārslēdzieties uz citu Huawei ID un vēlreiz veiciet pirkumu."</string>
+    <string name="drm_dialog_message_over_limit_without_name">"Jūs esat pārsniedzis maksimālo ierīču skaitu, kurās var izmantot šo lietotni. Pārslēdzieties uz citu Huawei ID un vēlreiz veiciet pirkumu."</string>
+    <string name="drm_dialog_message_other_errorcode">"Pirkumu vēstures pārbaudes kļūme; kļūdas kods: %s. Sazinieties ar HiApp klientu apkalpošanas dienestu."</string>
+    <string name="drm_dialog_text_hasknow">"Labi"</string>
+</resources>

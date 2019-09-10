@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="drm_dialog_message_hiapp_not_installed">"Installer den nyeste versjonen av HiApp først."</string>
+    <string name="drm_dialog_message_get_sign_failed">"Nettverksfeil. Kontroller Internett-forbindelsen, og prøv igjen."</string>
+    <string name="drm_dialog_message_no_internet">"Ingen Internett-forbindelse. Kontroller Internett-forbindelsen, og prøv på nytt."</string>
+    <string name="drm_dialog_message_check_failed">"Du (%s) har ikke kjøpt denne appen. Kjøp den først."</string>
+    <string name="drm_dialog_message_check_failed_without_name">"Du har ikke kjøpt denne appen. Kjøp den først."</string>
+    <string name="drm_dialog_message_not_logged">"Logg på med din Huawei-ID."</string>
+    <string name="drm_dialog_message_user_interrupt">"Sjekk av kjøpshistorikk mislyktes. Prøv igjen."</string>
+    <string name="drm_dialog_message_hiapp_agreement">"Godta brukervilkår for HiApp først."</string>
+    <string name="drm_dialog_message_gamebox_agreement">"Godta brukervilkår for HiGame først."</string>
+    <string name="drm_dialog_message_waiting">"Sjekker kjøpshistorikk... Vennligst vent."</string>
+    <string name="drm_dialog_text_install">"Installer"</string>
+    <string name="drm_dialog_text_quit">"Avslutt"</string>
+    <string name="drm_dialog_text_retry">"OK"</string>
+    <string name="drm_dialog_text_buy">"Kjøp"</string>
+    <string name="drm_dialog_text_login">"Logg på"</string>
+    <string name="drm_dialog_text_ok">"OK"</string>
+    <string name="drm_dialog_message_over_limit">"Du (%s) har overgått maksimalt antall enheter som kan brukes med denne appen. Bytt til en annen Huawei-ID og foreta kjøp på nytt."</string>
+    <string name="drm_dialog_message_over_limit_without_name">"Du har overgått maksimalt antall enheter som kan brukes med denne appen. Bytt til en annen Huawei-ID og foreta kjøp på nytt."</string>
+    <string name="drm_dialog_message_other_errorcode">"Sjekk av kjøpshistorikk mislyktes, feilkode: %s. Vennligst kontakt HiApp kundeservice."</string>
+    <string name="drm_dialog_text_hasknow">"OK"</string>
+</resources>

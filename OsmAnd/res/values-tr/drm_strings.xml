@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="drm_dialog_message_hiapp_not_installed">"Lütfen önce HiApp\'in son sürümünü yükleyin."</string>
+    <string name="drm_dialog_message_get_sign_failed">"Ağ hatası. Lütfen İnternet bağlantınızı kontrol edin ve tekrar deneyin."</string>
+    <string name="drm_dialog_message_no_internet">"İnternet bağlantısı yok. Lütfen İnternet bağlantınızı kontrol edin ve tekrar deneyin."</string>
+    <string name="drm_dialog_message_check_failed">"Siz (%s), bu uygulamayı satın almadınız. Lütfen önce uygulamayı satın alın."</string>
+    <string name="drm_dialog_message_check_failed_without_name">"Bu uygulamayı satın almadınız. Lütfen önce uygulamayı satın alın."</string>
+    <string name="drm_dialog_message_not_logged">"Lütfen Huawei Kimliğinizle giriş yapın."</string>
+    <string name="drm_dialog_message_user_interrupt">"Satın alma geçmişi kontrol edilemedi. Lütfen tekrar deneyin."</string>
+    <string name="drm_dialog_message_hiapp_agreement">"Lütfen önce HiApp Kullanım Koşulları\'nı kabul edin."</string>
+    <string name="drm_dialog_message_gamebox_agreement">"Lütfen önce HiGame Kullanım Koşulları\'nı kabul edin."</string>
+    <string name="drm_dialog_message_waiting">"Satın alma geçmişi kontrol ediliyor... Lütfen bekleyin."</string>
+    <string name="drm_dialog_text_install">"Yükle"</string>
+    <string name="drm_dialog_text_quit">"Çık"</string>
+    <string name="drm_dialog_text_retry">"TAMAM"</string>
+    <string name="drm_dialog_text_buy">"Satın Al"</string>
+    <string name="drm_dialog_text_login">"Giriş yap"</string>
+    <string name="drm_dialog_text_ok">"Tamam"</string>
+    <string name="drm_dialog_message_over_limit">"Siz (%s), bu uygulama ile kullanılabilecek cihaz sayısını aştınız. Lütfen başka bir Huawei Kimliği\’ne geçiş yapın ve tekrar satın alın."</string>
+    <string name="drm_dialog_message_over_limit_without_name">"Siz bu uygulama ile kullanılabilecek cihaz sayısını aştınız. Lütfen başka bir Huawei Kimliği\’ne geçiş yapın ve tekrar satın alın."</string>
+    <string name="drm_dialog_message_other_errorcode">"Satın alma geçmişi kontrol edilemedi, hata kodu: %s. Lütfen HiApp müşteri hizmetleriyle iletişime geçin."</string>
+    <string name="drm_dialog_text_hasknow">"Tamam"</string>
+</resources>

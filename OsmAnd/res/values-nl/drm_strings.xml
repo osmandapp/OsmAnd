@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="drm_dialog_message_hiapp_not_installed">"Installeer eerst de meest recente versie van HiApp."</string>
+    <string name="drm_dialog_message_get_sign_failed">"Netwerkfout. Controleert u uw internetverbinding en probeert u het opnieuw."</string>
+    <string name="drm_dialog_message_no_internet">"Geen internetverbinding. Controleert u uw internetverbinding en probeert u het opnieuw."</string>
+    <string name="drm_dialog_message_check_failed">"U (%s) hebt deze app niet gekocht. Koopt u deze eerst."</string>
+    <string name="drm_dialog_message_check_failed_without_name">"U hebt deze app niet gekocht. Koopt u deze eerst."</string>
+    <string name="drm_dialog_message_not_logged">"Meldt u zich aan met uw Huawei-ID."</string>
+    <string name="drm_dialog_message_user_interrupt">"Aankoopgeschiedenis controleren mislukt. Probeer het opnieuw."</string>
+    <string name="drm_dialog_message_hiapp_agreement">"Ga eerst akkoord met de Voorwaarden van dienstverlening voor HiApp."</string>
+    <string name="drm_dialog_message_gamebox_agreement">"Ga eerst akkoord met de Voorwaarden van dienstverlening voor HiGame."</string>
+    <string name="drm_dialog_message_waiting">"Bezig met aankoopgeschiedenis controleren... Even geduld."</string>
+    <string name="drm_dialog_text_install">"Installeren"</string>
+    <string name="drm_dialog_text_quit">"Stoppen"</string>
+    <string name="drm_dialog_text_retry">"OK"</string>
+    <string name="drm_dialog_text_buy">"Kopen"</string>
+    <string name="drm_dialog_text_login">"Aanmelden"</string>
+    <string name="drm_dialog_text_ok">"OK"</string>
+    <string name="drm_dialog_message_over_limit">"U (%s) heeft het maximum aantal apparaten dat kan worden gebruikt met deze app overschreden. Schakel om naar een ander Huawei-ID en voer de aankoop opnieuw uit."</string>
+    <string name="drm_dialog_message_over_limit_without_name">"U heeft het maximum aantal apparaten dat kan worden gebruikt met deze app overschreden. Schakel om naar een ander Huawei-ID en voer de aankoop opnieuw uit."</string>
+    <string name="drm_dialog_message_other_errorcode">"Aankoopgeschiedenis controleren mislukt, foutmelding: %s. Neem contact op met de HiApp-klantenservice."</string>
+    <string name="drm_dialog_text_hasknow">"OK"</string>
+</resources>

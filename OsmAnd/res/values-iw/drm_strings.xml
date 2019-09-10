@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="drm_dialog_message_hiapp_not_installed">"התקן תחילה את הגרסה העדכנית ביותר של HiApp."</string>
+    <string name="drm_dialog_message_get_sign_failed">"שגיאת רשת. בדוק את החיבור לאינטרנט ונסה שוב."</string>
+    <string name="drm_dialog_message_no_internet">"אין חיבור אינטרנט. בדוק את החיבור לאינטרנט ונסה שוב."</string>
+    <string name="drm_dialog_message_check_failed">"אתה (\u202a%s\u202c) לא רכשת את היישום הזה. רכוש אותו תחילה."</string>
+    <string name="drm_dialog_message_check_failed_without_name">"לא רכשת את היישום הזה. רכוש אותו תחילה."</string>
+    <string name="drm_dialog_message_not_logged">"היכנס עם מזהה Huawei שלך."</string>
+    <string name="drm_dialog_message_user_interrupt">"בדיקת היסטוריית הרכישות נכשלה. נסה שוב."</string>
+    <string name="drm_dialog_message_hiapp_agreement">"הסכם תחילה לתנאי השירות של HiApp."</string>
+    <string name="drm_dialog_message_gamebox_agreement">"הסכם תחילה לתנאי השירות של HiGame."</string>
+    <string name="drm_dialog_message_waiting">"בודק את היסטוריית הרכישות... נא להמתין."</string>
+    <string name="drm_dialog_text_install">"התקן"</string>
+    <string name="drm_dialog_text_quit">"סגור"</string>
+    <string name="drm_dialog_text_retry">"אישור"</string>
+    <string name="drm_dialog_text_buy">"רכישה"</string>
+    <string name="drm_dialog_text_login">"כניסה"</string>
+    <string name="drm_dialog_text_ok">"אישור"</string>
+    <string name="drm_dialog_message_over_limit">"אתה (\u202a%s\u202c) חרגת מהמספר המרבי של התקנים שבהם ניתן להשתמש עם היישום הזה. עבור למזהה Huawei אחר ובצע רכישה נוספת."</string>
+    <string name="drm_dialog_message_over_limit_without_name">"אתה  חרגת מהמספר המרבי של התקנים שבהם ניתן להשתמש עם היישום הזה. עבור למזהה Huawei אחר ובצע רכישה נוספת."</string>
+    <string name="drm_dialog_message_other_errorcode">"בדיקת היסטוריית הרכישות נכשלה, קוד שגיאה: %s. פנה לשירות הלקוחות של HiApp."</string>
+    <string name="drm_dialog_text_hasknow">"אישור"</string>
+</resources>

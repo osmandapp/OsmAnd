@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="drm_dialog_message_hiapp_not_installed">"ກະ​ລຸ​ນາ​ຕິດ​ຕັ້ງ HiApp ເວີ​ຊັນ​ຫຼ້າ​ສຸດກ່ອນ."</string>
+    <string name="drm_dialog_message_get_sign_failed">"ເຄືອຂ່າຍ​ຂັດ​ຂ້ອງ. ກະ​ລຸ​ນາກວດ​ເບິ່ງ​ການ​ເ​ຊື່ອມ​ຕໍ່ອິນ​ເຕີ​ເນັດ​ຂອງ​ທ່ານ ແລະ ​ລອງ​ໃໝ່​ອີກ."</string>
+    <string name="drm_dialog_message_no_internet">"ບໍ່​ມີ​ການ​ເຊື່ອມ​ຕໍ່​ອິນ​ເຕີ​ເນັດ. ກະ​ລຸ​ນາກວດ​ເບິ່ງ​ການ​ເ​ຊື່ອມ​ຕໍ່ອິນ​ເຕີ​ເນັດ​ຂອງ​ທ່ານ ແລະ ​ລອງ​ໃໝ່​ອີກ."</string>
+    <string name="drm_dialog_message_check_failed">"ທ່ານ (%s) ບໍ່​ໄດ້ຊື້​ແອັບນີ້ແລ້ວ. ກະ​ລຸ​ນາຊື້ມັນ​ກ່ອນ."</string>
+    <string name="drm_dialog_message_check_failed_without_name">"ທ່ານບໍ່​ໄດ້ຊື້​ແອັບນີ້. ກະ​ລຸ​ນາຊື້ມັນ​ກ່ອນ."</string>
+    <string name="drm_dialog_message_not_logged">"ກະ​ລຸ​ນາເຂົ້າສູ່​ລະ​ບົບດ້ວຍ Huawei ID."</string>
+    <string name="drm_dialog_message_user_interrupt">"​ຫຼົ້ມ​ເຫຼວ​ທີ່​ຈະກວດ​ເບິ່ງ​ປະ​ຫວັດ​ການ​ຊື້. ກະ​ລຸ​ນາ​ລອງ​ໃໝ່​ອີກ."</string>
+    <string name="drm_dialog_message_hiapp_agreement">"ກະ​ລຸ​ນາ​ເຫັນ​ດີ​ກັບ​ຂໍ້​ກຳ​ນົດ​ການ​ບໍ​ລິ​ການ HiApp ກ່ອນ."</string>
+    <string name="drm_dialog_message_gamebox_agreement">"ກະ​ລຸ​ນາ​ເຫັນ​ດີ​ກັບ​ຂໍ້​ກຳ​ນົດ​ການ​ບໍ​ລິ​ການ HiGame ກ່ອນ."</string>
+    <string name="drm_dialog_message_waiting">"ກຳ​ລັງກວດ​ເບິ່ງ​ປະ​ຫວັດ​ການ​ຊື້... ກະ​ລຸ​ນາ​ລໍ​ຖ້າ."</string>
+    <string name="drm_dialog_text_install">"​ຕິດ​ຕັ້ງ"</string>
+    <string name="drm_dialog_text_quit">"ອອກ"</string>
+    <string name="drm_dialog_text_retry">"ຕົກ​ລົງ"</string>
+    <string name="drm_dialog_text_buy">"ຊື້"</string>
+    <string name="drm_dialog_text_login">"ເຂົ້າ​ສູ່​ລະ​ບົບ"</string>
+    <string name="drm_dialog_text_ok">"ຕົກ​ລົງ"</string>
+    <string name="drm_dialog_message_over_limit">"ທ່ານ (%s) ເກີນ​ຈຳ​ນວນ​ອຸ​ປະ​ກອນ​ສູງ​ສຸດ​ທີ່​ສາ​ມາດ​ຖືກ​ນຳ​ໃຊ້​ກັບ​ແອັບ​ນີ້​ແລ້ວ. ກະ​ລຸ​ນາ​ສະ​ຫຼັບ​ໄປ​ຫາ Huawei ID ​ອື່ນ ແລະ ຊື່​ອີກ."</string>
+    <string name="drm_dialog_message_over_limit_without_name">"ທ່ານ ເກີນ​ຈຳ​ນວນ​ອຸ​ປະ​ກອນ​ສູງ​ສຸດ​ທີ່​ສາ​ມາດ​ຖືກ​ນຳ​ໃຊ້​ກັບ​ແອັບ​ນີ້​ແລ້ວ. ກະ​ລຸ​ນາ​ສະ​ຫຼັບ​ໄປ​ຫາ Huawei ID ​ອື່ນ ແລະ ຊື່​ອີກ."</string>
+    <string name="drm_dialog_message_other_errorcode">"​ຫຼົ້ມ​ເຫຼວ​ທີ່​ຈະກວດ​ເບິ່ງ​ປະ​ຫວັດ​ການ​ຊື້, ລະ​ຫັດ​ຂັດ​ຂ້ອງ: %s. ກະ​ລຸ​ນາ​ຕິດ​ຕໍ່​ຝ່າຍ​ບໍ​ລິ​ການ​ລູກ​ຄ້າ​ຂອງ HiApp."</string>
+    <string name="drm_dialog_text_hasknow">"ຕົກ​ລົງ"</string>
+</resources>

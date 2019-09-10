@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="drm_dialog_message_hiapp_not_installed">"နောက်ဆုံးထွက် HiApp ဗားရှင်းကို အရင်ဦးစွာ ထည့်သွင်းပေးပါ။"</string>
+    <string name="drm_dialog_message_get_sign_failed">"ကွန်ရက် ချို့ယွင်းချက်။ ကျေးဇူးပြု၍ အင်တာနက် ချိတ်ဆက်မှုကို စစ်ဆေးပြီး ထပ်မံ ကြိုးစားကြည့်ပါ။"</string>
+    <string name="drm_dialog_message_no_internet">"အင်တာနက် ချိတ်ဆက်မှု မရှိပါ။ ကျေးဇူးပြု၍ အင်တာနက် ချိတ်ဆက်မှုကို စစ်ဆေးပြီး ထပ်မံ ကြိုးစားကြည့်ပါ။"</string>
+    <string name="drm_dialog_message_check_failed">"သင် (%s) သည် ဤအက်ပ်အား မဝယ်ရသေးပါ။ ကျေးဇူးပြု၍ အရင် ဝယ်ပေးပါ။"</string>
+    <string name="drm_dialog_message_check_failed_without_name">"သင်သည် ဤအက်ပ်အား မဝယ်ရသေးပါ။ ကျေးဇူးပြု၍ အရင် ဝယ်ပေးပါ။"</string>
+    <string name="drm_dialog_message_not_logged">"သင့် Huawei ID ဖြင့် စနစ်အတွင်း ဝင်ရောက်ပေးပါ။"</string>
+    <string name="drm_dialog_message_user_interrupt">"ဝယ်ယူမှု မှတ်တမ်းကို စစ်ဆေးရန် မအောင်မြင်ပါ။ ကျေးဇူးပြု၍ ထပ်မံကြိုးစားပါ။"</string>
+    <string name="drm_dialog_message_hiapp_agreement">"HiApp ဝန်ဆောင်မှု စည်းမျဉ်းများကို အရင်ဦးစွာ သဘောတူပေးပါ။"</string>
+    <string name="drm_dialog_message_gamebox_agreement">"HiGame ဝန်ဆောင်မှု စည်းမျဉ်းများကို အရင်ဦးစွာ သဘောတူပေးပါ။"</string>
+    <string name="drm_dialog_message_waiting">"ဝယ်ယူမှု မှတ်တမ်းအား စစ်ဆေးနေဆဲ... ကျေးဇူးပြု၍ စောင့်ပါ။"</string>
+    <string name="drm_dialog_text_install">"ထည့်သွင်းမည်"</string>
+    <string name="drm_dialog_text_quit">"ထွက်မည်"</string>
+    <string name="drm_dialog_text_retry">"အိုကေ"</string>
+    <string name="drm_dialog_text_buy">"ဝယ်ယူမည်"</string>
+    <string name="drm_dialog_text_login">"ဝင်မည်"</string>
+    <string name="drm_dialog_text_ok">"အိုကေ"</string>
+    <string name="drm_dialog_message_over_limit">"သင် (%s) သည် ဤအက်ပ်နှင့် တွဲဖက် သုံးစွဲနိုင်သည့် အများဆုံး စက်အရေအတွက်ထက် ကျော်လွန်သွားပါပြီ။ အခြားသော Huawei ID သို့ ပြောင်း၍ ထပ်မံ ဝယ်ယူပေးပါ။"</string>
+    <string name="drm_dialog_message_over_limit_without_name">"သင် သည် ဤအက်ပ်နှင့် တွဲဖက် သုံးစွဲနိုင်သည့် အများဆုံး စက်အရေအတွက်ထက် ကျော်လွန်သွားပါပြီ။ အခြားသော Huawei ID သို့ ပြောင်း၍ ထပ်မံ ဝယ်ယူပေးပါ။"</string>
+    <string name="drm_dialog_message_other_errorcode">"ဝယ်ယူမှု မှတ်တမ်းကို စစ်ဆေးရန် မအောင်မြင်ပါ၊ ချို့ယွင်းချက် ကုဒ်- %s. ကျေးဇူးပြု၍ HiApp သုံးစွဲသူ ဝန်ဆောင်မှုဌာနသို့ ဆက်သွယ်ပါ။"</string>
+    <string name="drm_dialog_text_hasknow">"အိုကေ"</string>
+</resources>

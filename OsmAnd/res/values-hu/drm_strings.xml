@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="drm_dialog_message_hiapp_not_installed">"Telepítse a HiApp legfrissebb verzióját."</string>
+    <string name="drm_dialog_message_get_sign_failed">"Hálózati hiba. Ellenőrizze az internet kapcsolatot, és próbálja újra."</string>
+    <string name="drm_dialog_message_no_internet">"Nincs internetkapcsolat. Ellenőrizze az internet kapcsolatot, és próbálja újra."</string>
+    <string name="drm_dialog_message_check_failed">"Ön (%s) nem vásárolta meg ezt az alkalmazást. Kérjük, előbb vásárolja meg."</string>
+    <string name="drm_dialog_message_check_failed_without_name">"Ön nem vásárolta meg ezt az alkalmazást. Kérjük, előbb vásárolja meg."</string>
+    <string name="drm_dialog_message_not_logged">"Jelentkezzen be a Huawei azonosítójával."</string>
+    <string name="drm_dialog_message_user_interrupt">"Vásárlási előzmények lekérése sikertelen. Próbálja újra."</string>
+    <string name="drm_dialog_message_hiapp_agreement">"Kérjük, előbb fogadja el a HiApp szolgáltatási feltételeket."</string>
+    <string name="drm_dialog_message_gamebox_agreement">"Kérjük, előbb fogadja el a HiGame szolgáltatási feltételeket."</string>
+    <string name="drm_dialog_message_waiting">"Vásárlási előzmények lekérése... Kérjük, várjon."</string>
+    <string name="drm_dialog_text_install">"Telepítés"</string>
+    <string name="drm_dialog_text_quit">"Kilépés"</string>
+    <string name="drm_dialog_text_retry">"OK"</string>
+    <string name="drm_dialog_text_buy">"Vásárlás"</string>
+    <string name="drm_dialog_text_login">"Bejelentkezés"</string>
+    <string name="drm_dialog_text_ok">"OK"</string>
+    <string name="drm_dialog_message_over_limit">"Ön (%s) elérte az alkalmazással használható készülékek maximális számát. Váltson át másik Huawei azonosítóra, és vásárolja meg újra."</string>
+    <string name="drm_dialog_message_over_limit_without_name">"Ön elérte az alkalmazással használható készülékek maximális számát. Váltson át másik Huawei azonosítóra, és vásárolja meg újra."</string>
+    <string name="drm_dialog_message_other_errorcode">"Vásárlási előzmények lekérése sikertelen, hibakód: %s. Vegye fel a kapcsolatot a HiApp ügyfélszolgálattal."</string>
+    <string name="drm_dialog_text_hasknow">"OK"</string>
+</resources>

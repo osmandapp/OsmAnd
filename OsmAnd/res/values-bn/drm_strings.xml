@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="drm_dialog_message_hiapp_not_installed">"অনুগ্রহপূর্বক প্রথমে HiApp এর সাম্প্রতিক সংস্করণটি ইনস্টল করুন।"</string>
+    <string name="drm_dialog_message_get_sign_failed">"নেটওয়ার্ক ত্রুটি। অনুগ্রহপূর্বক আপনার ইন্টারনেট সংযোগ পরীক্ষা করুন এবং পুনরায় চেষ্টা করুন।"</string>
+    <string name="drm_dialog_message_no_internet">"কোনো ইন্টারনেট সংযোগ নেই। অনুগ্রহপূর্বক আপনার ইন্টারনেট সংযোগ পরীক্ষা করুন এবং পুনরায় চেষ্টা করুন।"</string>
+    <string name="drm_dialog_message_check_failed">"আপনি (%s) এই অ্যাপটি ক্রয় করেননি। অনুগ্রহপূর্বক প্রথমে এটি ক্রয় করুন।"</string>
+    <string name="drm_dialog_message_check_failed_without_name">"আপনি এই অ্যাপটি ক্রয় করেননি। অনুগ্রহপূর্বক প্রথমে এটি ক্রয় করুন।"</string>
+    <string name="drm_dialog_message_not_logged">"অনুগ্রহপূর্বক আপনার Huawei ID-তে লগ ইন করুন।"</string>
+    <string name="drm_dialog_message_user_interrupt">"ক্রয়ের ইতিহাস চেক করতে ব্যর্থ। অনুগ্রহপূর্বক আবার চেষ্টা করুন।"</string>
+    <string name="drm_dialog_message_hiapp_agreement">"অনুগ্রহপূর্বক প্রথমে HiApp পরিষেবার শর্তাবলিতে সম্মত হন।"</string>
+    <string name="drm_dialog_message_gamebox_agreement">"অনুগ্রহপূর্বক প্রথমে HiGame পরিষেবার শর্তাবলিতে সম্মত হন।"</string>
+    <string name="drm_dialog_message_waiting">"ক্রয়ের ইতিহাস চেক হচ্ছে... অনুগ্রহপূর্বক অপেক্ষা করুন।"</string>
+    <string name="drm_dialog_text_install">"ইনস্টল করুন"</string>
+    <string name="drm_dialog_text_quit">"প্রস্থান করুন"</string>
+    <string name="drm_dialog_text_retry">"ওকে"</string>
+    <string name="drm_dialog_text_buy">"ক্রয়"</string>
+    <string name="drm_dialog_text_login">"লগ ইন করুন"</string>
+    <string name="drm_dialog_text_ok">"ওকে"</string>
+    <string name="drm_dialog_message_over_limit">"আপনি (%s) এই অ্যাপ দ্বারা ব্যবহার করা যেতে পারে এমন ডিভাইসের সর্বাধিক সংখ্যাকে অতিক্রম করেছেন। অনুগ্রহপূর্বক অন্য Huawei ID এ স্যুইচ করুন এবং আবার ক্রয় করুন।"</string>
+    <string name="drm_dialog_message_over_limit_without_name">"আপনি এই অ্যাপ দ্বারা ব্যবহার করা যেতে পারে এমন ডিভাইসের সর্বাধিক সংখ্যাকে অতিক্রম করেছেন। অনুগ্রহপূর্বক অন্য Huawei ID এ স্যুইচ করুন এবং আবার ক্রয় করুন।"</string>
+    <string name="drm_dialog_message_other_errorcode">"ক্রয়ের ইতিহাস চেক করতে ব্যর্থ, ত্রুটি কোড: %s। অনুগ্রহপূর্বক HiApp গ্রাহক পরিষেবায় যোগাযোগ করুন।"</string>
+    <string name="drm_dialog_text_hasknow">"ওকে"</string>
+</resources>

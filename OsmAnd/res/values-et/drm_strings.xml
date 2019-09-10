@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="drm_dialog_message_hiapp_not_installed">"Installige teenuse HiApp viimane versioon."</string>
+    <string name="drm_dialog_message_get_sign_failed">"Võrgutõrge. Kontrollige Internetiühendust ja proovige uuesti."</string>
+    <string name="drm_dialog_message_no_internet">"Internetiühendus puudub. Kontrollige Internetiühendust ja proovige uuesti."</string>
+    <string name="drm_dialog_message_check_failed">"Te (%s) ei ole seda rakendust ostnud. Esmalt ostke see."</string>
+    <string name="drm_dialog_message_check_failed_without_name">"Te ei ole seda rakendust ostnud. Esmalt ostke see."</string>
+    <string name="drm_dialog_message_not_logged">"Logige sisse oma Huawei ID abil."</string>
+    <string name="drm_dialog_message_user_interrupt">"Ostu ajaloo kontrollimine nurjus. Proovige uuesti."</string>
+    <string name="drm_dialog_message_hiapp_agreement">"Esmalt nõustuge teenuse HiApp teenusetingimustega."</string>
+    <string name="drm_dialog_message_gamebox_agreement">"Esmalt nõustuge teenuse HiGame teenusetingimustega."</string>
+    <string name="drm_dialog_message_waiting">"Ostu ajaloo kontrollimine… Palun oodake."</string>
+    <string name="drm_dialog_text_install">"Installi"</string>
+    <string name="drm_dialog_text_quit">"Lõpeta"</string>
+    <string name="drm_dialog_text_retry">"OK"</string>
+    <string name="drm_dialog_text_buy">"Osta"</string>
+    <string name="drm_dialog_text_login">"Logi sisse"</string>
+    <string name="drm_dialog_text_ok">"OK"</string>
+    <string name="drm_dialog_message_over_limit">"Te (%s) olete ületanud selle rakendusega kasutatavate seadmete maksimaalse arvu. Lülitage teie Huawei ID peale ja ostke uuesti."</string>
+    <string name="drm_dialog_message_over_limit_without_name">"Te olete ületanud selle rakendusega kasutatavate seadmete maksimaalse arvu. Lülitage teie Huawei ID peale ja ostke uuesti."</string>
+    <string name="drm_dialog_message_other_errorcode">"Ostu ajaloo kontrollimine nurjus, tõrkekood: %s. Pöörduge HiAppi klienditeeninduse poole."</string>
+    <string name="drm_dialog_text_hasknow">"OK"</string>
+</resources>

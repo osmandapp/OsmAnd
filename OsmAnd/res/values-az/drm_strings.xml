@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="drm_dialog_message_hiapp_not_installed">"Zəhmət olmasa, əvvəlcə HiApp-ın ən son versiyasını quraşdırın."</string>
+    <string name="drm_dialog_message_get_sign_failed">"Şəbəkə səhvi. İnternet bağlantınızı yoxlayın və yenidən cəhd edin."</string>
+    <string name="drm_dialog_message_no_internet">"İnternet bağlantısı yoxdur. İnternet bağlantınızı yoxlayın və yenidən cəhd edin."</string>
+    <string name="drm_dialog_message_check_failed">"Siz (%s) bu proqramı satın almamısınız. Lütfən əvvəlcə onu satın alın."</string>
+    <string name="drm_dialog_message_check_failed_without_name">"Siz bu proqramı satın almamısınız. Lütfən əvvəlcə onu satın alın."</string>
+    <string name="drm_dialog_message_not_logged">"Huawei ID-nizlə daxil olun."</string>
+    <string name="drm_dialog_message_user_interrupt">"Satınalma tarixçəsini yoxlamaq mümkün olmadı. Yenidən sınayın."</string>
+    <string name="drm_dialog_message_hiapp_agreement">"Əvvəlcə HiApp Xidmət Şərtləri ilə razılaşın."</string>
+    <string name="drm_dialog_message_gamebox_agreement">"Əvvəlcə HiGame Xidmət Şərtləri ilə razılaşın."</string>
+    <string name="drm_dialog_message_waiting">"Satınalma tarixçəsi yoxlanılır… Lütfən gözləyin."</string>
+    <string name="drm_dialog_text_install">"Quraşdır"</string>
+    <string name="drm_dialog_text_quit">"Çıx"</string>
+    <string name="drm_dialog_text_retry">"OK"</string>
+    <string name="drm_dialog_text_buy">"Satın al"</string>
+    <string name="drm_dialog_text_login">"Daxil ol"</string>
+    <string name="drm_dialog_text_ok">"OK"</string>
+    <string name="drm_dialog_message_over_limit">"Siz (%s) bu proqramla istifadə oluna bilən cihazların maksimum sayını keçmisiniz. Lütfən başqa Huawei ID-sinə dəyişin və yenidən satın alın."</string>
+    <string name="drm_dialog_message_over_limit_without_name">"Siz bu proqramla istifadə oluna bilən cihazların maksimum sayını keçmisiniz. Lütfən başqa Huawei ID-sinə dəyişin və yenidən satın alın."</string>
+    <string name="drm_dialog_message_other_errorcode">"Satınalma tarixçəsini yoxlamaq mümkün olmadı, səhv kodu: %s. HiApp müştəri xidməti ilə əlaqə saxlayın."</string>
+    <string name="drm_dialog_text_hasknow">"OK"</string>
+</resources>

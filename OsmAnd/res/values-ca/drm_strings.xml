@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="drm_dialog_message_hiapp_not_installed">"Primer, instal·leu la darrera versió de HiApp."</string>
+    <string name="drm_dialog_message_get_sign_failed">"Error de xarxa. Comproveu la connexió a Internet i torneu-ho a provar."</string>
+    <string name="drm_dialog_message_no_internet">"No hi ha connexió a Internet. Comproveu la connexió a Internet i torneu-ho a provar."</string>
+    <string name="drm_dialog_message_check_failed">"No (%s) heu comprat aquesta aplicació. Primer, compreu-la."</string>
+    <string name="drm_dialog_message_check_failed_without_name">"No heu comprat aquesta aplicació. Primer, compreu-la."</string>
+    <string name="drm_dialog_message_not_logged">"Inicieu la sessió amb l\'ID de Huawei."</string>
+    <string name="drm_dialog_message_user_interrupt">"No s\'ha pogut comprovar l\'historial de compra. Torneu a provar-ho."</string>
+    <string name="drm_dialog_message_hiapp_agreement">"Primer, accepteu els Termes del Servei de HiApp."</string>
+    <string name="drm_dialog_message_gamebox_agreement">"Primer, accepteu els Termes del Servei de HiGame."</string>
+    <string name="drm_dialog_message_waiting">"Comprovant l\'historial de compra... Espereu."</string>
+    <string name="drm_dialog_text_install">"Instal·lar"</string>
+    <string name="drm_dialog_text_quit">"Sortir"</string>
+    <string name="drm_dialog_text_retry">"D\'acord"</string>
+    <string name="drm_dialog_text_buy">"Comprar"</string>
+    <string name="drm_dialog_text_login">"Iniciar la sessió"</string>
+    <string name="drm_dialog_text_ok">"D\'acord"</string>
+    <string name="drm_dialog_message_over_limit">"Heu (%s) excedit el nombre màxim de dispositius que es poden usar amb aquesta aplicació. Canvieu a una altra ID de Huawei i torneu-la a comprar."</string>
+    <string name="drm_dialog_message_over_limit_without_name">"Heu excedit el nombre màxim de dispositius que es poden usar amb aquesta aplicació. Canvieu a una altra ID de Huawei i torneu-la a comprar."</string>
+    <string name="drm_dialog_message_other_errorcode">"No s\'ha pogut comprovar l\'historial de compra, codi d\'error: %s. Poseu-vos en contacte amb el servei d\'atenció al client de HiApp."</string>
+    <string name="drm_dialog_text_hasknow">"D\'acord"</string>
+</resources>

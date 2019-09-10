@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="drm_dialog_message_hiapp_not_installed">"Prvo instalirajte najnoviju verziju aplikacije HiApp."</string>
+    <string name="drm_dialog_message_get_sign_failed">"Greška mreže. Provjerite internetsku vezu i pokušajte ponovno."</string>
+    <string name="drm_dialog_message_no_internet">"Nema internetske veze. Provjerite internetsku vezu i pokušajte ponovno."</string>
+    <string name="drm_dialog_message_check_failed">"Vi (%s) niste kupili ovu aplikaciju. Prvo je kupite."</string>
+    <string name="drm_dialog_message_check_failed_without_name">"Vi niste kupili ovu aplikaciju. Prvo je kupite."</string>
+    <string name="drm_dialog_message_not_logged">"Prijavite se sa svojim Huawei ID-jem."</string>
+    <string name="drm_dialog_message_user_interrupt">"Neuspješna provjera istorije kupovine. Molimo pokušajte ponovno."</string>
+    <string name="drm_dialog_message_hiapp_agreement">"Molimo da prvo pristanete na Uslove korištenja aplikacije HiApp."</string>
+    <string name="drm_dialog_message_gamebox_agreement">"Molimo da prvo pristanete na Uslove korištenja platforme HiGame."</string>
+    <string name="drm_dialog_message_waiting">"Provjeravanje istorije kupovine... Pričekajte."</string>
+    <string name="drm_dialog_text_install">"Instaliraj"</string>
+    <string name="drm_dialog_text_quit">"Otkaži"</string>
+    <string name="drm_dialog_text_retry">"OK"</string>
+    <string name="drm_dialog_text_buy">"Kupi"</string>
+    <string name="drm_dialog_text_login">"Prijava"</string>
+    <string name="drm_dialog_text_ok">"OK"</string>
+    <string name="drm_dialog_message_over_limit">"Vi (%s) ste premašili maksimalan broj uređaja koji se mogu koristiti s ovom aplikacijom. Prebacite se na drugi Huawei ID i kupujte ponovno."</string>
+    <string name="drm_dialog_message_over_limit_without_name">"Vi ste premašili maksimalan broj uređaja koji se mogu koristiti s ovom aplikacijom. Prebacite se na drugi Huawei ID i kupujte ponovno."</string>
+    <string name="drm_dialog_message_other_errorcode">"Neuspješna provjera istorije kupovine, šifra greške: %s. Obratite se službi korisničke podrške za HiApp."</string>
+    <string name="drm_dialog_text_hasknow">"OK"</string>
+</resources>

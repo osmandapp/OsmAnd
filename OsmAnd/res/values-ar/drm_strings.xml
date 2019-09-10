@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="drm_dialog_message_hiapp_not_installed">"يُرجى أولًا تثبيت أحدث إصدار من تطبيق HiApp."</string>
+    <string name="drm_dialog_message_get_sign_failed">"خطأ في الشبكة، يُرجى التحقق من اتصال الإنترنت لديك والمحاولة مجددًا."</string>
+    <string name="drm_dialog_message_no_internet">"لا يوجد اتصال إنترنت، يُرجى التحقق من اتصال الإنترنت لديك والمحاولة مجددًا."</string>
+    <string name="drm_dialog_message_check_failed">"(\u202a%s\u202c)، أنت لم تشتري هذا التطبيق، يُرجى شراؤه أولًا."</string>
+    <string name="drm_dialog_message_check_failed_without_name">"لم تشتري هذا التطبيق، يُرجى شراؤه أولًا."</string>
+    <string name="drm_dialog_message_not_logged">"يُرجى تسجيل الدخول باستخدام حساب هواوي الخاص بك."</string>
+    <string name="drm_dialog_message_user_interrupt">"تعذر التحقق من سجل المشتريات، يُرجى إعادة المحاولة."</string>
+    <string name="drm_dialog_message_hiapp_agreement">"يُرجى أولًا الموافقة على بنود الخدمة الخاصة بتطبيق HiApp."</string>
+    <string name="drm_dialog_message_gamebox_agreement">"يُرجى أولًا الموافقة على بنود الخدمة الخاصة بتطبيق HiGame."</string>
+    <string name="drm_dialog_message_waiting">"جارِ التحقق من سجل المشتريات... يُرجى الانتظار"</string>
+    <string name="drm_dialog_text_install">"تثبيت"</string>
+    <string name="drm_dialog_text_quit">"خروج"</string>
+    <string name="drm_dialog_text_retry">"إعادة المحاولة"</string>
+    <string name="drm_dialog_text_buy">"شراء"</string>
+    <string name="drm_dialog_text_login">"تسجيل الدخول"</string>
+    <string name="drm_dialog_text_ok">"موافق"</string>
+    <string name="drm_dialog_message_over_limit">"(\u202a%s\u202c)، لقد تجاوزت عدد الأجهزة المسموح لك استخدامها مع هذا التطبيق. يُرجى الانتقال إلى حساب هواوي آخر والقيام بالشراء مرةً أخرى."</string>
+    <string name="drm_dialog_message_over_limit_without_name">"، لقد تجاوزت عدد الأجهزة المسموح لك استخدامها مع هذا التطبيق. يُرجى الانتقال إلى حساب هواوي آخر والقيام بالشراء مرةً أخرى."</string>
+    <string name="drm_dialog_message_other_errorcode">"رمز الخطأ: %s. تعذر التحقق من سجل المشتريات، يُرجى التواصل مع مركز خدمة العملاء لتطبيق HiApp."</string>
+    <string name="drm_dialog_text_hasknow">"حسنًا"</string>
+</resources>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="drm_dialog_message_hiapp_not_installed">"Моля, първо инсталирайте най-новата версия на HiApp."</string>
+    <string name="drm_dialog_message_get_sign_failed">"Грешка в мрежата. Моля, проверете връзката с интернет и опитайте отново."</string>
+    <string name="drm_dialog_message_no_internet">"Няма интернет връзка. Моля, проверете връзката с интернет и опитайте отново."</string>
+    <string name="drm_dialog_message_check_failed">"Вие (%s) не сте закупили това приложение. Моля, първо го закупете."</string>
+    <string name="drm_dialog_message_check_failed_without_name">"Вие не сте закупили това приложение. Моля, първо го закупете."</string>
+    <string name="drm_dialog_message_not_logged">"Моля, влезте с вашето Huawei ID."</string>
+    <string name="drm_dialog_message_user_interrupt">"Неуспешна проверка на историята на покупките. Моля, опитайте отново."</string>
+    <string name="drm_dialog_message_hiapp_agreement">"Моля, първо приемете Условията за обслужване на HiApp."</string>
+    <string name="drm_dialog_message_gamebox_agreement">"Моля, първо приемете Условията за обслужване на HiGame."</string>
+    <string name="drm_dialog_message_waiting">"Проверка на историята на покупките... Моля, изчакайте."</string>
+    <string name="drm_dialog_text_install">"Инсталиране"</string>
+    <string name="drm_dialog_text_quit">"Изход"</string>
+    <string name="drm_dialog_text_retry">"ОК"</string>
+    <string name="drm_dialog_text_buy">"Покупка"</string>
+    <string name="drm_dialog_text_login">"Влизане"</string>
+    <string name="drm_dialog_text_ok">"ОК"</string>
+    <string name="drm_dialog_message_over_limit">"Вие (%s) сте надвишили максималния брой устройства, които могат да се използват с това приложение. Моля, превключете към друго Huawei ID и закупете отново."</string>
+    <string name="drm_dialog_message_over_limit_without_name">"Вие сте надвишили максималния брой устройства, които могат да се използват с това приложение. Моля, превключете към друго Huawei ID и закупете отново."</string>
+    <string name="drm_dialog_message_other_errorcode">"Неуспешна проверка на историята на покупките, код за грешка: %s. Моля, свържете се с отдела за обслужване на клиенти на HiApp."</string>
+    <string name="drm_dialog_text_hasknow">"ОК"</string>
+</resources>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="drm_dialog_message_hiapp_not_installed">"Please install the latest version of HiApp first."</string>
+    <string name="drm_dialog_message_get_sign_failed">"Network error. Please check your Internet connection and try again."</string>
+    <string name="drm_dialog_message_no_internet">"No Internet connection. Please check your Internet connection and try again."</string>
+    <string name="drm_dialog_message_check_failed">"You (%s) have not purchased this app. Please purchase it first."</string>
+    <string name="drm_dialog_message_check_failed_without_name">"You have not purchased this app. Please purchase it first."</string>
+    <string name="drm_dialog_message_not_logged">"Please log in with your Huawei ID."</string>
+    <string name="drm_dialog_message_user_interrupt">"Failed to check purchase history. Please try again."</string>
+    <string name="drm_dialog_message_hiapp_agreement">"Please agree to the HiApp Terms of Service first."</string>
+    <string name="drm_dialog_message_gamebox_agreement">"Please agree to the HiGame Terms of Service first."</string>
+    <string name="drm_dialog_message_waiting">"Checking purchase history… Please wait."</string>
+    <string name="drm_dialog_text_install">"Install"</string>
+    <string name="drm_dialog_text_quit">"Quit"</string>
+    <string name="drm_dialog_text_retry">"OK"</string>
+    <string name="drm_dialog_text_buy">"Purchase"</string>
+    <string name="drm_dialog_text_login">"Log in"</string>
+    <string name="drm_dialog_text_ok">"OK"</string>
+    <string name="drm_dialog_message_over_limit">"You (%s) have exceeded the maximum number of devices that can be used with this app. Please switch to another Huawei ID and purchase again."</string>
+    <string name="drm_dialog_message_over_limit_without_name">"You have exceeded the maximum number of devices that can be used with this app. Please switch to another Huawei ID and purchase again."</string>
+    <string name="drm_dialog_message_other_errorcode">"Failed to check purchase history, error code: %s. Please contact HiApp customer service."</string>
+    <string name="drm_dialog_text_hasknow">"OK"</string>
+</resources>
