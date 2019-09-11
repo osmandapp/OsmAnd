@@ -196,13 +196,12 @@ public class ContextMenuAdapter {
 					desc.setText(item.getDescription());
 				}
 				if (layoutId == R.layout.main_menu_drawer_btn_configure_profile) {
-					int colorAlpha50 = UiUtilities.getColorWithAlpha(colorNoAlpha, 0.5f);
 					View fatDivider = convertView.findViewById(R.id.fatDivider);
-					fatDivider.setBackgroundColor(colorAlpha50);
+					fatDivider.setBackgroundColor(colorNoAlpha);
 				}
 				
 				int colorListBackground = ContextCompat.getColor(app, lightTheme ? R.color.list_background_color_light : R.color.list_background_color_dark);
-				convertView.setBackgroundDrawable(UiUtilities.getAlphaStateDrawable(colorListBackground, colorNoAlpha, true, true));
+//				convertView.setBackgroundDrawable(UiUtilities.getAlphaStateDrawable(colorListBackground, colorNoAlpha));
 				return convertView;
 			}
 			if (layoutId == R.layout.help_to_improve_item) {

@@ -50,15 +50,14 @@
 				android:layout_width="40dp"
 				android:layout_height="40dp"
 				android:layout_marginLeft="@dimen/content_padding_half"
-				android:layout_marginRight="@dimen/content_padding_half"
-				android:background="@drawable/bg_transparent_rounded_profile">
+				android:layout_marginRight="@dimen/content_padding_half">
 
 				<ImageView
 					android:id="@+id/profile_icon"
 					android:layout_width="@dimen/standard_icon_size"
 					android:layout_height="@dimen/standard_icon_size"
 					android:layout_gravity="center"
-					android:src="@drawable/ic_action_car_dark"
+					tools:src="@drawable/ic_action_car_dark"
 					tools:tint="@color/active_color_primary_light" />
 
 			</FrameLayout>

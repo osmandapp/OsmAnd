@@ -106,7 +106,7 @@ public class SelectProfileMenuAdapter extends AbstractProfileMenuAdapter<SelectP
 			//set up cell color
 			int colorNoAlpha = ContextCompat.getColor(app, profileColorResId);
 			boolean selectedMode = app.getSettings().APPLICATION_MODE.get() == item;
-			holder.profileOptions.setBackgroundDrawable(UiUtilities.getAlphaStateDrawable(colorNoAlpha, selectedMode, true));
+			holder.profileOptions.setBackgroundDrawable(UiUtilities.getAlphaStateDrawable(colorNoAlpha, selectedMode ? 0.25f : 0, 0.3f));
 			
 			updateViewHolder(holder, item);
 		} else {

@@ -1,9 +1,10 @@
 package net.osmand.plus.settings;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.RippleDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.ColorRes;
@@ -17,12 +18,13 @@ import android.support.v14.preference.SwitchPreference;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.preference.EditTextPreference;
 import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceFragmentCompat;
+import android.support.v7.preference.PreferenceGroupAdapter;
 import android.support.v7.preference.PreferenceScreen;
+import android.support.v7.preference.PreferenceViewHolder;
 import android.support.v7.view.ContextThemeWrapper;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -32,6 +34,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
+import net.osmand.PlatformUtil;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -40,8 +43,7 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.activities.OsmandInAppPurchaseActivity;
-import net.osmand.plus.profiles.AppProfileArrayAdapter;
-import net.osmand.plus.profiles.ProfileDataObject;
+import net.osmand.plus.profiles.SelectAppModesBottomSheetDialogFragment;
 import net.osmand.plus.settings.bottomsheets.BooleanPreferenceBottomSheet;
 import net.osmand.plus.settings.bottomsheets.EditTextPreferenceBottomSheet;
 import net.osmand.plus.settings.bottomsheets.MultiSelectPreferencesBottomSheet;
@@ -50,10 +52,11 @@ import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.MultiSelectBooleanPreference;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.apache.commons.logging.Log;
 
-public abstract class BaseSettingsFragment extends PreferenceFragmentCompat implements Preference.OnPreferenceChangeListener, Preference.OnPreferenceClickListener {
+public abstract class BaseSettingsFragment extends PreferenceFragmentCompat implements Preference.OnPreferenceChangeListener, Preference.OnPreferenceClickListener, SelectAppModesBottomSheetDialogFragment.AppModeChangedListener {
+
+	private final Log log = PlatformUtil.getLog(this.getClass());
 
 	protected OsmandApplication app;
 	protected OsmandSettings settings;
@@ -97,6 +100,45 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		LayoutInflater themedInflater = inflater.cloneInContext(themedContext);
 
 		return super.onCreateRecyclerView(themedInflater, parent, savedInstanceState);
+	}
+
+	@SuppressLint("RestrictedApi")
+	@Override
+	protected RecyclerView.Adapter onCreateAdapter(PreferenceScreen preferenceScreen) {
+
+		return new PreferenceGroupAdapter(preferenceScreen) {
+
+			@Override
+			public void onBindViewHolder(PreferenceViewHolder holder, int position) {
+				super.onBindViewHolder(holder, position);
+
+				if (BaseSettingsFragment.this.getClass().equals(ConfigureProfileFragment.class)) {
+					View selectableView = holder.itemView.findViewById(R.id.selectable_list_item);
+					if (selectableView != null) {
+						Drawable selectableBg = selectableView.getBackground();
+
+						int color = ContextCompat.getColor(app, getActiveProfileColor());
+						int colorWithAlpha;
+						if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP && selectableBg instanceof RippleDrawable) {
+							colorWithAlpha = UiUtilities.getColorWithAlpha(color, 0.4f);
+						}else {
+							colorWithAlpha = UiUtilities.getColorWithAlpha(color, 0.2f);
+
+						}
+						if (selectableBg != null) {
+							Drawable drawable = app.getUIUtilities().setRippleColor(selectableBg, colorWithAlpha);
+
+							if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+								selectableView.setBackground(drawable);
+							} else {
+								selectableView.setBackgroundDrawable(drawable);
+							}
+							selectableView.invalidate();
+						}
+					}
+				}
+			}
+		};
 	}
 
 	@Override
@@ -146,10 +188,40 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 			});
 			View switchProfile = view.findViewById(R.id.switch_profile_button);
 			if (switchProfile != null) {
+
+				if (this.getClass().equals(ConfigureProfileFragment.class)) {
+					int drawableId;
+					if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+						drawableId = nightMode ? R.drawable.ripple_dark : R.drawable.ripple_light;
+					} else {
+						drawableId = nightMode ? R.drawable.btn_border_trans_dark : R.drawable.btn_border_trans_light;
+					}
+
+					int color = ContextCompat.getColor(app, getActiveProfileColor());
+					int colorWithAlpha = UiUtilities.getColorWithAlpha(color, 0.40f);
+
+					Drawable drawable = app.getUIUtilities().setRippleColor(drawableId, colorWithAlpha);
+
+					if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+						switchProfile.setBackground(drawable);
+					} else {
+						switchProfile.setBackgroundDrawable(drawable);
+					}
+				} else {
+					if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+						AndroidUtils.setBackground(app, switchProfile, nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
+					} else {
+						AndroidUtils.setBackground(app, switchProfile, nightMode, R.drawable.btn_border_trans_light, R.drawable.btn_border_trans_dark);
+					}
+				}
+
 				switchProfile.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						selectAppModeDialog().show();
+						FragmentManager fragmentManager = getFragmentManager();
+						if (fragmentManager != null) {
+							SelectAppModesBottomSheetDialogFragment.showInstance(fragmentManager, BaseSettingsFragment.this);
+						}
 					}
 				});
 			}
@@ -213,64 +285,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		}
 	}
 
-	protected AlertDialog.Builder selectAppModeDialog() {
-		AlertDialog.Builder singleSelectDialogBuilder = new AlertDialog.Builder(getContext());
-		singleSelectDialogBuilder.setTitle(R.string.profile_settings);
-
-		final List<ProfileDataObject> activeModes = new ArrayList<>();
-		for (ApplicationMode am : ApplicationMode.values(getMyApplication())) {
-			boolean isSelected = false;
-			if (am == getSelectedAppMode()) {
-				isSelected = true;
-			}
-			activeModes.add(new ProfileDataObject(
-					am.toHumanString(getMyApplication()),
-					getAppModeDescription(am),
-					am.getStringKey(),
-					am.getIconRes(),
-					isSelected,
-					am.getIconColorInfo()
-			));
-		}
-
-		final AppProfileArrayAdapter modeNames = new AppProfileArrayAdapter(
-				getActivity(), R.layout.bottom_sheet_item_with_descr_and_radio_btn, activeModes, true);
-
-		singleSelectDialogBuilder.setNegativeButton(R.string.shared_string_cancel,
-				new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						dialog.dismiss();
-					}
-				});
-		singleSelectDialogBuilder.setAdapter(modeNames, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				ApplicationMode selectedAppMode = ApplicationMode.values(app).get(which);
-				requireSettings().APPLICATION_MODE.set(selectedAppMode);
-				updateAllSettings();
-			}
-		});
-		return singleSelectDialogBuilder;
-	}
-
-	private String getAppModeDescription(ApplicationMode mode) {
-		String descr;
-		if (!mode.isCustomProfile()) {
-			descr = getString(R.string.profile_type_base_string);
-		} else {
-			descr = String.format(getString(R.string.profile_type_descr_string),
-					mode.getParent().toHumanString(getMyApplication()));
-			if (mode.getRoutingProfile() != null && mode.getRoutingProfile().contains("/")) {
-				descr = descr.concat(", " + mode.getRoutingProfile()
-						.substring(0, mode.getRoutingProfile().indexOf("/")));
-			}
-		}
-		return descr;
-	}
-
 	public void updateAllSettings() {
-		getListView().getRecycledViewPool().clear();
 		PreferenceScreen screen = getPreferenceScreen();
 		if (screen != null) {
 			getPreferenceScreen().removeAll();
@@ -461,6 +476,11 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
 		return false;
+	}
+
+	@Override
+	public void onAppModeChanged() {
+		updateAllSettings();
 	}
 
 	public SwitchPreference createSwitchPreference(OsmandSettings.OsmandPreference<Boolean> b, int title, int summary, int layoutId) {

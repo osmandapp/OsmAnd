@@ -12,6 +12,8 @@ import java.util.Set;
 public class ConfigureAppModesBottomSheetDialogFragment extends AppModesBottomSheetDialogFragment<ConfigureProfileMenuAdapter> 
 		implements ConfigureProfileMenuAdapter.ProfileSelectedListener {
 
+	public static final String TAG = "ConfigureAppModesBottomSheetDialogFragment";
+
 	private List<ApplicationMode> allModes = new ArrayList<>();
 	private Set<ApplicationMode> selectedModes = new HashSet<>();
 	

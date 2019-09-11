@@ -3,11 +3,11 @@ package net.osmand.plus;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.RippleDrawable;
-import android.graphics.drawable.StateListDrawable;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Build;
@@ -17,6 +17,7 @@ import android.support.annotation.DrawableRes;
 import android.support.annotation.StringRes;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
+import android.support.v4.graphics.drawable.TintAwareDrawable;
 import android.support.v7.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -109,6 +110,41 @@ public class UiUtilities {
 		return getDrawable(id, light ? R.color.icon_color_default_light : R.color.icon_color_default_dark);
 	}
 
+	public  Drawable colorDrawable(Drawable drawable, int color) {
+		Drawable wrappedDrawable = DrawableCompat.wrap(drawable);
+		DrawableCompat.setTint(wrappedDrawable.mutate(), color);
+		return wrappedDrawable;
+	}
+
+	public static void setBackgroundDrawable(View view, Drawable drawable) {
+		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+			view.setBackgroundDrawable(drawable);
+		} else {
+			view.setBackground(drawable);
+		}
+	}
+
+	public Drawable setRippleColor(@DrawableRes int id, int rippleColor) {
+		return setRippleColor(getIcon(id), rippleColor);
+	}
+
+	public Drawable setRippleColor(Drawable drawable, int rippleColor) {
+		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP && drawable instanceof RippleDrawable) {
+			((RippleDrawable) drawable).setColor(ColorStateList.valueOf(rippleColor));
+		} else {
+			if (drawable != null) {
+				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+					drawable.setTintList(ColorStateList.valueOf(rippleColor));
+				} else if (drawable instanceof TintAwareDrawable) {
+					((TintAwareDrawable) drawable).setTintList(ColorStateList.valueOf(rippleColor));
+				} else {
+					drawable.setColorFilter(rippleColor, PorterDuff.Mode.DST_ATOP);
+				}
+			}
+		}
+		return drawable;
+	}
+
 	@ColorRes
 	public static int getDefaultColorRes(Context context) {
 		final OsmandApplication app = (OsmandApplication) context.getApplicationContext();
@@ -156,33 +192,16 @@ public class UiUtilities {
 		return a << ALPHA_CHANNEL | r << RED_CHANNEL | g << GREEN_CHANNEL | b << BLUE_CHANNEL;
 	}
 
-	public static Drawable getAlphaStateDrawable(@ColorInt int colorNoAlpha) {
-		return getAlphaStateDrawable(colorNoAlpha, false, true);
-	}
-	
-	public static Drawable getAlphaStateDrawable(@ColorInt int colorNoAlpha, boolean highlightOnNormal, boolean highlightOnPressed) {
-		int colorAlpha25 = getColorWithAlpha(colorNoAlpha, 0.25f);
-		int colorAlpha30 = getColorWithAlpha(colorNoAlpha, 0.3f);
-		return getAlphaStateDrawableImpl(colorAlpha25, colorAlpha30, highlightOnNormal, highlightOnPressed);
+	public static Drawable getAlphaStateDrawable(@ColorInt int colorNoAlpha, float normalAlphaRatio, float pressedAlphaRatio) {
+		int colorAlpha25 = getColorWithAlpha(colorNoAlpha, normalAlphaRatio);
+		int colorAlpha30 = getColorWithAlpha(colorNoAlpha, pressedAlphaRatio);
+		return AndroidUtils.createPressedStateListDrawable(new ColorDrawable(colorAlpha25), new ColorDrawable(colorAlpha30));
 	}
 
-	public static Drawable getAlphaStateDrawable(@ColorInt int colorBackground, @ColorInt int colorForeground, boolean highlightOnNormal, boolean highlightOnPressed) {
+	public static Drawable getAlphaStateDrawable(@ColorInt int colorBackground, @ColorInt int colorForeground) {
 		int colorAlpha25 = UiUtilities.mixTwoColors(colorForeground, colorBackground, 0.125f);
 		int colorAlpha30 = UiUtilities.mixTwoColors(colorForeground, colorBackground, 0.15f);
-		return getAlphaStateDrawableImpl(colorAlpha25, colorAlpha30, highlightOnNormal, highlightOnPressed);
-	}
-	
-	private static Drawable getAlphaStateDrawableImpl(@ColorInt int colorMode1, @ColorInt int colorMode2, boolean highlightOnNormal, boolean highlightOnPressed) {
-		StateListDrawable sld = new StateListDrawable();
-		if (highlightOnNormal && highlightOnPressed) {
-			sld.addState(new int[]{android.R.attr.state_pressed}, new ColorDrawable(colorMode2));
-			sld.addState(new int[]{}, new ColorDrawable(colorMode1));
-		} else if (highlightOnPressed) {
-			sld.addState(new int[]{android.R.attr.state_pressed}, new ColorDrawable(colorMode1));
-		} else if (highlightOnNormal) {
-			sld.addState(new int[]{}, new ColorDrawable(colorMode1));
-		}
-		return sld;
+		return AndroidUtils.createPressedStateListDrawable(new ColorDrawable(colorAlpha25), new ColorDrawable(colorAlpha30));
 	}
 
 	public UpdateLocationViewCache getUpdateLocationViewCache(){

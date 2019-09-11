@@ -1,5 +1,7 @@
 package net.osmand.plus.settings;
 
+import android.content.Context;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.preference.CheckBoxPreference;
@@ -17,18 +19,20 @@ import android.text.style.ClickableSpan;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import net.osmand.Location;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.bottomsheets.ChangeGeneralProfilesPrefBottomSheet;
+import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 
 
 public class CoordinatesFormatFragment extends BaseSettingsFragment {
 
 	public static final String TAG = "CoordinatesFormatFragment";
+
+	private static final String UTM_FORMAT_WIKI_LINK = "https://en.wikipedia.org/wiki/Universal_Transverse_Mercator_coordinate_system";
 
 	private static final String FORMAT_DEGREES = "format_degrees";
 	private static final String FORMAT_MINUTES = "format_minutes";
@@ -162,7 +166,10 @@ public class CoordinatesFormatFragment extends BaseSettingsFragment {
 			ClickableSpan clickableSpan = new ClickableSpan() {
 				@Override
 				public void onClick(@NonNull View widget) {
-					Toast.makeText(widget.getContext(), getString(R.string.shared_string_read_more), Toast.LENGTH_LONG).show();
+					Context ctx = getContext();
+					if (ctx != null) {
+						WikipediaDialogFragment.showFullArticle(ctx, Uri.parse(UTM_FORMAT_WIKI_LINK), isNightMode());
+					}
 				}
 
 				@Override
