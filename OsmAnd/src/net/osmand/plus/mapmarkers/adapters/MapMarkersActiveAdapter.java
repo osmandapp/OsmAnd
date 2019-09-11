@@ -162,7 +162,8 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 								notifyDataSetChanged();
 							}
 						});
-				AndroidUtils.setSnackbarTextColor(snackbar, R.color.active_color_primary_dark);
+				AndroidUtils.setSnackbarTextColor(snackbar, night ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
+				snackbar.getView().setBackgroundColor(ContextCompat.getColor(mapActivity, night ? R.color.list_background_color_dark : R.color.list_background_color_light));
 				snackbar.show();
 			}
 		});
@@ -228,7 +229,8 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 						notifyDataSetChanged();
 					}
 				});
-		AndroidUtils.setSnackbarTextColor(snackbar, R.color.active_color_primary_dark);
+		AndroidUtils.setSnackbarTextColor(snackbar, night ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
+		snackbar.getView().setBackgroundColor(ContextCompat.getColor(mapActivity, night ? R.color.list_background_color_dark : R.color.list_background_color_light));
 		snackbar.show();
 	}
 

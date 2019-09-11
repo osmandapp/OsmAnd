@@ -170,7 +170,8 @@ public class MapMarkersHistoryFragment extends Fragment implements MapMarkersHel
 									}
 								}
 							});
-					AndroidUtils.setSnackbarTextColor(snackbar, R.color.active_color_primary_dark);
+					AndroidUtils.setSnackbarTextColor(snackbar, night ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
+					snackbar.getView().setBackgroundColor(ContextCompat.getColor(app, night ? R.color.list_background_color_dark : R.color.list_background_color_light));
 					snackbar.show();
 				}
 			}
