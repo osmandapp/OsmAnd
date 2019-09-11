@@ -418,7 +418,7 @@ afterEvaluate {
 			variant.javaCompiler.dependsOn cleanPrebuiltHuaweiDrm
 			variant.preBuild.dependsOn cleanPrebuiltHuaweiDrm
 		}
-		variant.javaCompiler.dependsOn(collectExternalResources, buildOsmAndCore, cleanupDuplicatesInCore)
+		variant.javaCompiler.dependsOn(downloadPrebuiltHuaweiDrm, collectExternalResources, buildOsmAndCore, cleanupDuplicatesInCore)
 	}
 }
 
