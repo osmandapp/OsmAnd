@@ -18,7 +18,7 @@ apply plugin: 'com.android.application'
 // Less important
 
 
-def huawei = (!System.getenv("APP_FEATURES") || System.getenv("APP_FEATURES").contains("+huawei"))
+def huawei = (System.getenv("APP_FEATURES") && System.getenv("APP_FEATURES").contains("+huawei"))
 
 task printc {
 	configurations.each { if(it.isCanBeResolved())  println it.name }
@@ -255,8 +255,10 @@ task downloadWorldMiniBasemap {
 
 task downloadHuaweiDrm {
 	doLast {
-		ant.get(src: 'https://obs.cn-north-2.myhwclouds.com/hms-ds-wf/sdk/HwDRM_SDK_2.5.2.300_ADT.zip', dest: 'HwDRM_SDK_2.5.2.300_ADT.zip', skipexisting: 'true')
-		ant.unzip(src: 'HwDRM_SDK_2.5.2.300_ADT.zip', dest: 'libs/')
+		if (huawei) {
+			ant.get(src: 'https://obs.cn-north-2.myhwclouds.com/hms-ds-wf/sdk/HwDRM_SDK_2.5.2.300_ADT.zip', dest: 'HwDRM_SDK_2.5.2.300_ADT.zip', skipexisting: 'true')
+			ant.unzip(src: 'HwDRM_SDK_2.5.2.300_ADT.zip', dest: 'libs/')
+		}
 	}
 }
 
@@ -325,11 +327,8 @@ task collectExternalResources {
 			updateNoTranslate,
 			validateTranslate,
 			copyWidgetIcons,
-			downloadWorldMiniBasemap
-	
-			if (huawei) {
-				downloadHuaweiDrm
-			}
+			downloadWorldMiniBasemap,
+			downloadHuaweiDrm
 }
 
 // Legacy core build

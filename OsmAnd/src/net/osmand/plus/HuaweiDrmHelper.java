@@ -1,14 +1,13 @@
 package net.osmand.plus;
 
 import android.app.Activity;
-import android.widget.Toast;
 
-import com.huawei.android.sdk.drm.Drm;
-import com.huawei.android.sdk.drm.DrmCheckCallback;
+//import com.huawei.android.sdk.drm.Drm;
+//import com.huawei.android.sdk.drm.DrmCheckCallback;
 
 public class HuaweiDrmHelper {
 	private Activity activity;
-	private DrmCheckCallback callback;
+	//private DrmCheckCallback callback;
 	
 	//Copyright protection id
 	private static final String DRM_ID = "101048021";
@@ -17,6 +16,7 @@ public class HuaweiDrmHelper {
 	
 	public HuaweiDrmHelper(final Activity activity) {
 		this.activity = activity;
+		/*
 		callback = new DrmCheckCallback() {
 			@Override
 			public void onCheckSuccess() { }
@@ -26,10 +26,11 @@ public class HuaweiDrmHelper {
 				activity.finish();
 			}
 		};
+		 */
 	}
 	
 	public void check() {
-		Drm.check(getActivity(), getActivity().getPackageName(), DRM_ID, DRM_PUBLIC_KEY, callback);
+		//Drm.check(getActivity(), getActivity().getPackageName(), DRM_ID, DRM_PUBLIC_KEY, callback);
 	}
 	
 	public Activity getActivity() {
