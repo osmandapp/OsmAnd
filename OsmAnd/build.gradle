@@ -410,8 +410,6 @@ task cleanupDuplicatesInCore() {
 }
 afterEvaluate {
 	android.applicationVariants.all { variant ->
-		variant.javaCompiler.dependsOn(collectExternalResources, buildOsmAndCore, cleanupDuplicatesInCore)
-
 		// Use Drm strings only for huawei flavor
 		if ("huawei" == variant.productFlavors[0].name) {
 			variant.javaCompiler.dependsOn downloadPrebuiltHuaweiDrm
@@ -420,6 +418,7 @@ afterEvaluate {
 			variant.javaCompiler.dependsOn cleanPrebuiltHuaweiDrm
 			variant.preBuild.dependsOn cleanPrebuiltHuaweiDrm
 		}
+		variant.javaCompiler.dependsOn(collectExternalResources, buildOsmAndCore, cleanupDuplicatesInCore)
 	}
 }
 
