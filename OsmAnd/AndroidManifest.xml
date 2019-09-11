@@ -909,15 +909,5 @@
 		<activity android:name=".activities.PrivacyAndSecurityActivity"
 			android:configChanges="keyboardHidden|orientation" />
 
-		<activity
-			android:name="com.huawei.android.sdk.drm.DrmDialogActivity"
-			android:configChanges="screenSize|orientation|keyboardHidden"
-			android:exported="false"
-			android:theme="@android:style/Theme.Translucent" >
-			<meta-data
-				android:name="hwc-theme"
-				android:value="androidhwext:style/Theme.Emui.Translucent" />
-		</activity>
-
 	</application>
 </manifest> 
