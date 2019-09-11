@@ -1,25 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.huawei.android.sdk.drm"
-    android:versionCode="2"
-    android:versionName="2.0.0" >
+	xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-sdk
-        android:minSdkVersion="14"
-        android:targetSdkVersion="21" />
+	<application>
+		<activity android:name="com.huawei.android.sdk.drm.DrmDialogActivity"
+			android:configChanges="screenSize|orientation|keyboardHidden"
+			android:exported="false"
+			android:theme="@android:style/Theme.Translucent">
+			<meta-data
+				android:name="hwc-theme"
+				android:value="androidhwext:style/Theme.Emui.Translucent" />
+		</activity>
 
-    <application
-        android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
-        android:theme="@style/AppTheme" >
-        <activity
-            android:name="com.huawei.android.sdk.drm.DrmDialogActivity"
-            android:configChanges="screenSize|orientation|keyboardHidden"
-            android:exported="false"
-            android:theme="@android:style/Theme.Translucent" >
-            <meta-data
-                android:name="hwc-theme"
-                android:value="androidhwext:style/Theme.Emui.Translucent" />
-        </activity>
-    </application>
+		<provider
+			android:name="android.support.v4.content.FileProvider"
+			android:authorities="net.osmand.plus.huawei.fileprovider"
+			tools:replace="android:authorities" />
+		<service
+			android:name="net.osmand.plus.NavigationService"
+			android:process="net.osmand.plus.huawei"
+			tools:replace="android:process" />
+	</application>
 
 </manifest>

@@ -26,7 +26,7 @@ public class Version {
 	}
 	
 	public static boolean isHuawei(OsmandApplication ctx) {
-		return ctx.getString(R.string.versionFeatures).contains("+huawei");
+		return ctx.getPackageName().endsWith(".huawei");
 	}
 	
 	public static boolean isMarketEnabled(OsmandApplication ctx) {
