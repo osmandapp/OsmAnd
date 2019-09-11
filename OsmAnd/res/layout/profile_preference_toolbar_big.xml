@@ -69,7 +69,6 @@
 				android:layout_marginLeft="6dp"
 				android:layout_marginRight="6dp"
 				android:layout_marginBottom="6dp"
-				android:background="@drawable/bg_transparent_rounded_profile"
 				android:clickable="true"
 				android:focusable="true"
 				android:orientation="horizontal">

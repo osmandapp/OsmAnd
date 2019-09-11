@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorRes;
 import android.support.v14.preference.SwitchPreference;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.preference.Preference;
 
 import net.osmand.aidl.OsmandAidlApi;
@@ -167,5 +168,18 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 		}
 
 		return super.onPreferenceChange(preference, newValue);
+	}
+
+	public static boolean showInstance(FragmentManager fragmentManager) {
+		try {
+			ConfigureProfileFragment configureProfileFragment = new ConfigureProfileFragment();
+			fragmentManager.beginTransaction()
+					.replace(R.id.fragmentContainer, configureProfileFragment, TAG)
+					.addToBackStack(TAG)
+					.commitAllowingStateLoss();
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 }
