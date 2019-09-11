@@ -362,8 +362,7 @@ task collectExternalResources {
 			updateNoTranslate,
 			validateTranslate,
 			copyWidgetIcons,
-			downloadWorldMiniBasemap,
-			downloadPrebuiltHuaweiDrm
+			downloadWorldMiniBasemap
 }
 
 // Legacy core build
