@@ -3247,4 +3247,26 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="configure_navigation">Alĝustigi navigadon</string>
     <string name="general_settings_profile_descr">Etoso, unuoj, regiono</string>
     <string name="configure_profile">Agordi profilon</string>
+    <string name="screen_alerts_descr">Avertoj montriĝos ĉe maldekstra suba angulo de la ekrano dum navigado.</string>
+    <string name="switch_profile">Ŝanĝi profilon</string>
+    <string name="language_and_output">Lingvo kaj eligo</string>
+    <string name="reset_to_default">Restarigi implicitajn</string>
+    <string name="manage_profiles_descr">Krei, enporti kaj redakti profilojn</string>
+    <string name="manage_profiles">Administri profilojn de aplikaĵo…</string>
+    <string name="osmand_settings_descr">Influas al la tuta aplikaĵo</string>
+    <string name="osmand_settings">Ĝeneralaj agordoj</string>
+    <string name="copy_from_other_profile">Kopii el alia profilo</string>
+    <string name="turn_screen_on">Teni ekranon ŝaltita</string>
+    <string name="map_during_navigation_info">Mapo dum navigi</string>
+    <string name="map_during_navigation">Mapo dum navigi</string>
+    <string name="shared_string_other">Aliaj</string>
+    <string name="vehicle_parameters_descr">Pezo, alto, rapido</string>
+    <string name="vehicle_parameters">Parametroj de veturilo</string>
+    <string name="voice_announces_info">Voĉaj anoncoj estas ludataj nur dum navigi.</string>
+    <string name="voice_announces_descr">Navigaj gvidiloj kaj anoncoj</string>
+    <string name="voice_announces">Voĉaj anoncoj</string>
+    <string name="screen_alerts">Ekranaj avertoj</string>
+    <string name="route_parameters_descr">Agordi parametroj de navigo</string>
+    <string name="route_parameters">Parametroj de navigo</string>
+    <string name="application_profile_changed">Profilo de aplikaĵo ŝanĝita al “%s”</string>
 </resources>
