@@ -18,6 +18,8 @@ apply plugin: 'com.android.application'
 // Less important
 
 
+def huawei = (!System.getenv("APP_FEATURES") || System.getenv("APP_FEATURES").contains("+huawei"))
+
 task printc {
 	configurations.each { if(it.isCanBeResolved())  println it.name }
 }
@@ -251,6 +253,13 @@ task downloadWorldMiniBasemap {
 	}
 }
 
+task downloadHuaweiDrm {
+	doLast {
+		ant.get(src: 'https://obs.cn-north-2.myhwclouds.com/hms-ds-wf/sdk/HwDRM_SDK_2.5.2.300_ADT.zip', dest: 'HwDRM_SDK_2.5.2.300_ADT.zip', skipexisting: 'true')
+		ant.unzip(src: 'HwDRM_SDK_2.5.2.300_ADT.zip', dest: 'libs/')
+	}
+}
+
 task collectVoiceAssets(type: Sync) {
 	from "../../resources/voice"
 	into "assets/voice"
@@ -317,6 +326,10 @@ task collectExternalResources {
 			validateTranslate,
 			copyWidgetIcons,
 			downloadWorldMiniBasemap
+	
+			if (huawei) {
+				downloadHuaweiDrm
+			}
 }
 
 // Legacy core build
@@ -422,4 +435,8 @@ dependencies {
 	implementation ("com.github.HITGIF:TextFieldBoxes:1.3.5"){
 		exclude group: 'com.android.support'
 	}
+
+    if (huawei) {
+        implementation files('libs/huawei-android-drm_v2.5.2.300.jar')
+    }
 }
