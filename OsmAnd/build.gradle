@@ -293,6 +293,10 @@ task cleanHuaweiDrmValues(type: Delete) {
 	}
 }
 
+task cleanPrebuiltHuaweiDrm {
+	dependsOn cleanHuaweiDrmLibs, cleanHuaweiDrmValues
+}
+
 task collectVoiceAssets(type: Sync) {
 	from "../../resources/voice"
 	into "assets/voice"
@@ -411,8 +415,10 @@ afterEvaluate {
 		// Use Drm strings only for huawei flavor
 		if ("huawei" == variant.productFlavors[0].name) {
 			variant.javaCompiler.dependsOn downloadPrebuiltHuaweiDrm
+			variant.preBuild.dependsOn downloadPrebuiltHuaweiDrm
 		} else {
-			variant.javaCompiler.dependsOn(cleanHuaweiDrmLibs, cleanHuaweiDrmValues)
+			variant.javaCompiler.dependsOn cleanPrebuiltHuaweiDrm
+			variant.preBuild.dependsOn cleanPrebuiltHuaweiDrm
 		}
 	}
 }
