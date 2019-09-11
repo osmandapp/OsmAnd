@@ -247,7 +247,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		super.onCreate(savedInstanceState);
 		
 		if (Version.isHuawei(getMyApplication())) {
-			new HuaweiDrmHelper(this).check();
+			HuaweiDrmHelper.check(this);
 		}
 		// Full screen is not used here
 		// getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);

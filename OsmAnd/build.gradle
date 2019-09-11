@@ -17,9 +17,6 @@ apply plugin: 'com.android.application'
 //        </unzip>
 // Less important
 
-
-def huawei = (System.getenv("APP_FEATURES") && System.getenv("APP_FEATURES").contains("+huawei"))
-
 task printc {
 	configurations.each { if(it.isCanBeResolved())  println it.name }
 }
@@ -114,6 +111,9 @@ android {
 		freecustom {
 			manifest.srcFile "AndroidManifest-freecustom.xml"
 		}
+		huawei {
+			manifest.srcFile "AndroidManifest-huawei.xml"
+		}
 
 		legacy {
 			jniLibs.srcDirs = ["libc++"]
@@ -177,6 +177,10 @@ android {
             resConfig "en"
             //resConfigs "xxhdpi", "nodpi"
         }
+		huawei {
+			dimension "version"
+			applicationId "net.osmand.plus.huawei"
+		}
 
 		// CoreVersion
 		legacy {
@@ -253,12 +257,39 @@ task downloadWorldMiniBasemap {
 	}
 }
 
-task downloadHuaweiDrm {
+task downloadHuaweiDrmZip {
 	doLast {
-		if (huawei) {
-			ant.get(src: 'https://obs.cn-north-2.myhwclouds.com/hms-ds-wf/sdk/HwDRM_SDK_2.5.2.300_ADT.zip', dest: 'HwDRM_SDK_2.5.2.300_ADT.zip', skipexisting: 'true')
-			ant.unzip(src: 'HwDRM_SDK_2.5.2.300_ADT.zip', dest: 'libs/')
-		}
+		ant.get(src: 'https://obs.cn-north-2.myhwclouds.com/hms-ds-wf/sdk/HwDRM_SDK_2.5.2.300_ADT.zip', dest: 'HwDRM_SDK_2.5.2.300_ADT.zip', skipexisting: 'true')
+		ant.unzip(src: 'HwDRM_SDK_2.5.2.300_ADT.zip', dest: 'huaweidrmlib/')
+	}
+}
+
+task copyHuaweiDrmLibs(type: Copy) {
+	dependsOn downloadHuaweiDrmZip
+	from "huaweidrmlib/HwDRM_SDK_2.5.2.300_ADT/libs"
+	into "libs"
+}
+
+task copyHuaweiDrmValues(type: Copy) {
+	dependsOn downloadHuaweiDrmZip
+	from "huaweidrmlib/HwDRM_SDK_2.5.2.300_ADT/res"
+	into "res"
+}
+
+task downloadPrebuiltHuaweiDrm {
+	dependsOn copyHuaweiDrmLibs, copyHuaweiDrmValues
+}
+
+task cleanHuaweiDrmLibs(type: Delete) {
+	delete "huaweidrmlib"
+	delete fileTree("libs").matching {
+		include "**/huawei-*.jar"
+	}
+}
+
+task cleanHuaweiDrmValues(type: Delete) {
+	delete fileTree("res").matching {
+		include "**/drm_strings.xml"
 	}
 }
 
@@ -327,8 +358,7 @@ task collectExternalResources {
 			updateNoTranslate,
 			validateTranslate,
 			copyWidgetIcons,
-			downloadWorldMiniBasemap,
-			downloadHuaweiDrm
+			downloadWorldMiniBasemap
 }
 
 // Legacy core build
@@ -375,9 +405,16 @@ task cleanupDuplicatesInCore() {
 	}
 }
 afterEvaluate {
-  android.applicationVariants.all { variant ->
-    variant.javaCompiler.dependsOn(collectExternalResources, buildOsmAndCore, cleanupDuplicatesInCore)
-  }
+	android.applicationVariants.all { variant ->
+		variant.javaCompiler.dependsOn(collectExternalResources, buildOsmAndCore, cleanupDuplicatesInCore)
+
+		// Use Drm strings only for huawei flavor
+		if ("huawei" == variant.productFlavors[0].name) {
+			variant.javaCompiler.dependsOn downloadPrebuiltHuaweiDrm
+		} else {
+			variant.javaCompiler.dependsOn(cleanHuaweiDrmLibs, cleanHuaweiDrmValues)
+		}
+	}
 }
 
 task appStart(type: Exec) {
@@ -434,7 +471,5 @@ dependencies {
 		exclude group: 'com.android.support'
 	}
 
-    if (huawei) {
-        implementation files('libs/huawei-android-drm_v2.5.2.300.jar')
-    }
+	huaweiImplementation files('libs/huawei-android-drm_v2.5.2.300.jar')
 }
