@@ -355,6 +355,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		app.getAidlApi().onCreateMapActivity(this);
 		
 		lockHelper.setLockUIAdapter(this);
+		
+		app.getRoutingHelper().addListener(this);
 
 		mIsDestroyed = false;
 	}
@@ -830,7 +832,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			mapViewTrackingUtilities.setShowRouteFinishDialog(false);
 		}
 
-		routingHelper.addListener(this);
 		app.getMapMarkersHelper().addListener(this);
 
 		QuickSearchDialogFragment searchDialogFragment = getQuickSearchDialogFragment();
@@ -1351,6 +1352,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (atlasMapRendererView != null) {
 			atlasMapRendererView.handleOnDestroy();
 		}
+		app.getRoutingHelper().removeListener(this);
 		lockHelper.setLockUIAdapter(null);
 		
 		mIsDestroyed = true;
@@ -1392,7 +1394,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		mapView.setOnDrawMapListener(null);
 		cancelSplashScreenTimer();
 		app.getMapMarkersHelper().removeListener(this);
-		app.getRoutingHelper().removeListener(this);
 		app.getDownloadThread().resetUiActivity(this);
 		if (atlasMapRendererView != null) {
 			atlasMapRendererView.handleOnPause();
