@@ -363,6 +363,15 @@ task collectExternalResources {
 			validateTranslate,
 			copyWidgetIcons,
 			downloadWorldMiniBasemap
+
+	Gradle gradle = getGradle()
+	String tskReqStr = gradle.getStartParameter().getTaskRequests().toString().toLowerCase()
+	// Use Drm SDK only for huawei build
+	if (tskReqStr.contains("huawei")) {
+		dependsOn downloadPrebuiltHuaweiDrm
+	} else {
+		dependsOn cleanPrebuiltHuaweiDrm
+	}
 }
 
 // Legacy core build
@@ -411,15 +420,6 @@ task cleanupDuplicatesInCore() {
 afterEvaluate {
 	android.applicationVariants.all { variant ->
 		variant.javaCompiler.dependsOn(collectExternalResources, buildOsmAndCore, cleanupDuplicatesInCore)
-
-		// Use Drm strings only for huawei flavor
-		if ("huawei" == variant.productFlavors[0].name) {
-			variant.javaCompiler.dependsOn downloadPrebuiltHuaweiDrm
-			variant.preBuild.dependsOn downloadPrebuiltHuaweiDrm
-		} else {
-			variant.javaCompiler.dependsOn cleanPrebuiltHuaweiDrm
-			variant.preBuild.dependsOn cleanPrebuiltHuaweiDrm
-		}
 	}
 }
 
