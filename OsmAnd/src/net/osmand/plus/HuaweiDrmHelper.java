@@ -11,9 +11,9 @@ public class HuaweiDrmHelper {
 	private static final String TAG = HuaweiDrmHelper.class.getSimpleName();
 
 	//Copyright protection id
-	private static final String DRM_ID = "101048021";
+	private static final String DRM_ID = "101117397";
 	//Copyright protection public key
-	private static final String DRM_PUBLIC_KEY = "e0a6c798fddfd0927bd509dfeafcef4b61c4408d7ea0ca9dfb4b7766b964f801";
+	private static final String DRM_PUBLIC_KEY = "9d6f861e7d46be167809a6a62302749a6753b3c1bd02c9729efb3973e268091d";
 
 	public static void check(Activity activity) {
 		boolean succeed = false;
