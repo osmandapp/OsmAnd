@@ -310,7 +310,7 @@
     <string name="shared_string_next">بعدی</string>
     <string name="shared_string_previous">قبلی</string>
     <string name="unit_of_length_descr">واحدهای طولی را تغییر دهید.</string>
-    <string name="unit_of_length">واحدهای طولی</string>
+    <string name="unit_of_length">یکاهای طول</string>
     <string name="local_index_descr_title">مدیریت فایل‌های نقشه</string>
     <string name="local_index_mi_restore">فعال‌کردن</string>
     <string name="local_index_mi_backup">غیرفعال‌کردن</string>
@@ -617,7 +617,7 @@
     <string name="bg_service_sleep_mode_on">پایان‌دادن 
 \n به اجرا در پس‌زمینه</string>
     <string name="gps_wakeup_interval">بازهٔ بیدارباش GPS:‏ %s</string>
-    <string name="screen_is_locked">برای بازکردن قفل صفحه روی آیکون قفل بزنید</string>
+    <string name="screen_is_locked">برای بازکردن قفل صفحه روی نماد قفل بزنید</string>
     <string name="map_widget_lock_screen">قفل صفحه</string>
     <string name="bg_service_screen_lock">قفل صفحه</string>
     <string name="bg_service_screen_unlock">بازکردن صفحه</string>
@@ -1946,7 +1946,7 @@
     <string name="road_blocked">جاده مسدود است</string>
     <string name="shared_string_select">انتخاب</string>
     <string name="switch_start_finish">تعویض مبدأ و مقصد</string>
-    <string name="rendering_attr_hideIcons_name">آیکون POIها</string>
+    <string name="rendering_attr_hideIcons_name">نماد POIها</string>
     <string name="item_removed">حذف شد</string>
     <string name="n_items_removed">حذف شدند</string>
     <string name="starting_point">مبدأ</string>
@@ -2004,8 +2004,8 @@
     <string name="world_maps">نقشه‌های جهانی</string>
     <string name="favorite_category_add_new">افزودن</string>
     <string name="favorite_category_select">انتخاب دسته</string>
-    <string name="default_speed_system_descr">واحد سرعت را تعریف کنید.</string>
-    <string name="default_speed_system">واحد سرعت</string>
+    <string name="default_speed_system_descr">یکای سرعت را تعریف کنید.</string>
+    <string name="default_speed_system">یکای سرعت</string>
     <string name="si_nm">مایل دریایی</string>
     <string name="si_kmh">کیلومتر بر ساعت</string>
     <string name="si_mph">مایل بر ساعت</string>
@@ -3044,7 +3044,7 @@
     <string name="routing_attr_avoid_sett_description">از کفپوش‌های cobblestone (کفپوش سنگی) و sett (سنگفرش کوبیک) پرهیز شود</string>
     <string name="shared_string_degrees">درجه</string>
     <string name="shared_string_milliradians">میلی‌رادیان</string>
-    <string name="angular_measeurement">واحد‌ زاویه</string>
+    <string name="angular_measeurement">یکای زاویه</string>
     <string name="angular_measeurement_descr">واحد اندازه‌گیری سمت (azimuth) را مشخص کنید.</string>
     <string name="routing_attr_avoid_tram_name">پرهیز از تراموا</string>
     <string name="routing_attr_avoid_tram_description">از تراموا پرهیز شود</string>
@@ -3120,7 +3120,7 @@
     <string name="profile_alert_delete_title">حذف پروفایل</string>
     <string name="profile_alert_delete_msg">آیا از حذف پروفایل %s اطمینان دارید</string>
     <string name="select_base_profile_dialog_title">یک پروفایل پایه انتخاب کنید</string>
-    <string name="select_base_profile_dialog_message">پروفایل سفارشی خود را بر پایهٔ یکی از پروفایل‌های برنامه بسازید. با این کار برخی چیزهای ابتدایی مانند نمایانی ابزارک‌ها و واحد سرعت و مسافت تنظیم می‌شود. 
+    <string name="select_base_profile_dialog_message">پروفایل سفارشی خود را بر پایهٔ یکی از پروفایل‌های برنامه بسازید. با این کار برخی چیزهای ابتدایی مانند نمایانی ابزارک‌ها و یکای سرعت و مسافت تنظیم می‌شود. 
 \nپروفایل‌های پیشفرض برنامه و چند نمونه پروفایل سفارشی که بر پایهٔ آن‌ها ساخته شده، در زیر آمده:</string>
     <string name="select_nav_profile_dialog_title">انتخاب نوع ناوبری</string>
     <string name="base_profile_descr_car">خودرو، کامیون، موتورسیکلت</string>
@@ -3196,7 +3196,7 @@
     <string name="routing_attr_allow_skating_only_name">فقط مسیرهای اسکیت مجاز باشد</string>
     <string name="routing_attr_allow_classic_only_name">فقط مسیرهای کلاسیک مجاز باشد</string>
     <string name="routing_attr_freeride_policy_name">آزاد (بیرون پیست)</string>
-    <string name="routing_attr_freeride_policy_description">مسیرهای آزادرانی و بیرون پیست مسیرهای غیررسمی هستند. معمولاً به‌طور رسمی آماده‌سازی و نگهداری نمی‌شوند و پس از تعطیلی وارسی نمی‌شوند. با مسئولیت خودتان وارد شوید.</string>
+    <string name="routing_attr_freeride_policy_description">مسیرهای آزادرانی و مسیرهای بیرون پیست غیررسمی هستند. معمولاً به‌طور رسمی آماده‌سازی و نگهداری نمی‌شوند و پس از تعطیلی وارسی نمی‌شوند. با مسئولیت خودتان وارد شوید.</string>
     <string name="press_again_to_change_the_map_orientation">دوباره بزنید تا جهت نقشه را عوض کنید</string>
     <string name="precision_hdop_and_vdop">"دقت افقی:  %1$s، عمودی:  %2$s"</string>
     <string name="precision_hdop">دقت افقی: %s</string>
@@ -3231,8 +3231,8 @@
     <string name="rendering_attr_showLez_description">محدوده‌های کم‌آلاینده (LEZ) را روی نقشه نشان بده. بر مسیریابی تأثیر ندارد.</string>
     <string name="rendering_attr_showLez_name">نمایش محدوده‌های کم‌آلاینده</string>
     <string name="temporary_conditional_routing">در نظر گرفتن محدودیت‌های موقت در مسیریابی</string>
-    <string name="routing_attr_piste_type_downhill_name">اسکی آلپاین</string>
-    <string name="routing_attr_piste_type_downhill_description">سراشیبی‌های اسکی آلپاین و دسترسی به بالابرهای اسکی.</string>
+    <string name="routing_attr_piste_type_downhill_name">اسکی آلپاین/دان‌هیل</string>
+    <string name="routing_attr_piste_type_downhill_description">سراشیبی‌های اسکی آلپاین یا دان‌هیل و دسترسی به بالابرهای اسکی.</string>
     <string name="routing_attr_piste_type_nordic_name">اسکی کراس/نوردیک</string>
     <string name="routing_attr_piste_type_nordic_description">مسیرهای اسکی کراس یا نوردیک.</string>
     <string name="shared_string_crash">از کار افتادن</string>
@@ -3283,7 +3283,7 @@
     <string name="switch_profile">تعویض پروفایل</string>
     <string name="language_and_output">زبان و خروجی</string>
     <string name="reset_to_default">بازنشانی به پیشفرض</string>
-    <string name="manage_profiles_descr">ساخت، واردات و ویرایش پروفایل‌ها</string>
+    <string name="manage_profiles_descr">ساخت، درون‌برد و ویرایش پروفایل‌ها</string>
     <string name="manage_profiles">مدیریت پروفایل‌های برنامه…</string>
     <string name="osmand_settings_descr">روی کل برنامه اثرگذار است</string>
     <string name="osmand_settings">تنظیمات OsmAnd</string>
@@ -3293,4 +3293,20 @@
     <string name="vehicle_parameters">پارامترهای وسیله نقلیه</string>
     <string name="route_parameters_descr">پیکربندی پارامترهای مسیر</string>
     <string name="route_parameters">پارامترهای مسیر</string>
+    <string name="routing_attr_piste_type_sled_name">سورتمه</string>
+    <string name="routing_attr_piste_type_sled_description">سراشیبی برای سورتمه‌سواری.</string>
+    <string name="routing_attr_allow_skating_only_description">مسیرهای آماده‌شده برای سبک آزاد یا فقط اسکیت. بدون مسیرهای کلاسیک.</string>
+    <string name="routing_attr_allow_classic_only_description">"مسیرهایی که فقط برای سبک کلاسیک آماده شده  و مسیر اسکیت ندارند. مسیرهای سُست‌تر آماده‌شده با برف‌روهای کوچک‌تر و مسیرهای دست‌ساز اسکی‌بازان را نیز شامل می‌شود."</string>
+    <string name="external_input_device_descr">یک دستگاه مانند صفحه‌کلید معمولی یا WunderLINQ را برای کنترل خارجی انتخاب کنید.</string>
+    <string name="utm_format_descr">‏OsmAnd از قالب UTM Standard استفاده می‌کند که مشابه (اما نه یکسان) با قالب UTM Nato است.</string>
+    <string name="apply_to_current_profile">به‌کارگیری برای پروفایل %1$s کنونی</string>
+    <string name="apply_to_all_profiles">به‌کارگیری برای همهٔ پروفایل‌ها</string>
+    <string name="map_look_descr">نمادها، ابزارک‌ها</string>
+    <string name="general_settings_profile_descr">پوستهٔ برنامه، یکاها، منطقه</string>
+    <string name="configure_profile">پیکربندی پروفایل</string>
+    <string name="voice_announces_info">پیام‌های گفتاری فقط در هنگام ناوبری پخش می‌شود.</string>
+    <string name="voice_announces_descr">راهنما و پیام‌های ناوبری</string>
+    <string name="voice_announces">پیام‌های گفتاری</string>
+    <string name="screen_alerts">هشدارهای نمایشگر</string>
+    <string name="application_profile_changed">پروفایل برنامه به «%s» تغییر کرد</string>
 </resources>
