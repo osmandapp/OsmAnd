@@ -667,4 +667,5 @@
     <string name="configure_profile">Sbadu amaɣnu</string>
     <string name="switch_profile">Beddel amaɣnu</string>
     <string name="application_profile_changed">Amaɣnu n usnas ittwabddel ɣer \"%s\"</string>
+    <string name="rendering_value_black_name">Aberkan</string>
 </resources>
