@@ -1639,7 +1639,7 @@
     <string name="download_tab_local">Локальные</string>
     <string name="navigate_point_zone">Зона</string>
     <string name="rendering_attr_transportStops_name">Остановки транспорта</string>
-    <string name="shared_string_dismiss">Закрыть</string>
+    <string name="shared_string_dismiss">Остановить</string>
     <string name="dash_download_msg_none">Загрузить оффлайн карты?</string>
     <string name="dash_download_msg">Загружено карт: %1$s</string>
     <string name="dash_download_new_one">Загрузить новую карту</string>
@@ -3212,4 +3212,15 @@
     <string name="shared_string_default">По умолчанию</string>
     <string name="lang_oc">Окситанский</string>
     <string name="app_mode_pickup_truck">Пикап</string>
+    <string name="shared_string_example">Пример</string>
+    <string name="change_default_settings">Изменить настройки по умолчанию</string>
+    <string name="discard_changes">Отменить изменения</string>
+    <string name="apply_to_current_profile">Применить к текущему профилю: %1$s</string>
+    <string name="apply_to_all_profiles">Применить ко всем профилям</string>
+    <string name="start_up_message_pref">Сообщение при запуске</string>
+    <string name="analytics_pref_title">Аналитика</string>
+    <string name="turn_screen_on_info">Показывать карту на экране блокировки при навигации</string>
+    <string name="configure_profile">Настроить профиль</string>
+    <string name="switch_profile">Переключить профиль</string>
+    <string name="application_profile_changed">Профиль изменён на\"%s\"</string>
 </resources>
