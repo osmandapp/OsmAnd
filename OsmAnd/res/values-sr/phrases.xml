@@ -118,7 +118,7 @@
     <string name="poi_alcohol">Подрум пића</string>
     <string name="poi_cheese">Продавница сира</string>
     <string name="poi_chocolate">Продавница чоколаде</string>
-    <string name="poi_coffee">Кафић</string>
+    <string name="poi_coffee">Продаје кафе</string>
     <string name="poi_mall">Тржни центар</string>
     <string name="poi_beverages">Продавница пића</string>
     <string name="poi_butcher">Месна пијаца</string>
@@ -718,7 +718,7 @@
     <string name="poi_biergarten">Пивска башта</string>
     <string name="poi_restaurant">Ресторан</string>
     <string name="poi_fast_food">Брза храна</string>
-    <string name="poi_bar">Кафић</string>
+    <string name="poi_bar">Бар</string>
     <string name="poi_pub">Паб</string>
     <string name="poi_drinking_water">Вода за пиће</string>
     <string name="poi_barbecue">Роштиљ</string>
@@ -2496,4 +2496,7 @@
     <string name="poi_cuisine_jewish">Јеврејска</string>
     <string name="poi_cuisine_bulgarian">Бугарска</string>
     <string name="poi_cuisine_tibetan">Тибетанска</string>
+    <string name="poi_barometer_yes">Барометар</string>
+    <string name="poi_barometer_no">Барометар: не</string>
+    <string name="poi_barbecue_grill">Роштиљ: да</string>
 </resources>
