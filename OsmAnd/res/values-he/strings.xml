@@ -3254,4 +3254,5 @@
     <string name="screen_alerts">התראות מסך</string>
     <string name="route_parameters_descr">הגדרת מאפייני מסלול</string>
     <string name="route_parameters">מאפייני מסלול</string>
+    <string name="application_profile_changed">פרופיל היישומון השתנה לכדי „%s”</string>
 </resources>
