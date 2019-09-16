@@ -517,7 +517,7 @@ Sorazmerna velikost pomnilnika je %4$s MB (omejitev na androidu je %5$s MB, na d
     <string name="accessibility_mode">Način dostopnosti</string>
     <string name="accessibility_mode_descr">Vklopi zmožnosti dostopnosti.</string>
     <string name="shared_string_on">Omogočeno</string>
-    <string name="shared_string_off">Izlključeno</string>
+    <string name="shared_string_off">Izključeno</string>
     <string name="accessibility_default">Glede na sistemske nastavitve okolja</string>
     <string name="backToMenu">Nazaj v meni</string>
     <string name="auto_announce_on">Začni s samodejnimi najavami</string>
@@ -1340,7 +1340,7 @@ Sorazmerna velikost pomnilnika je %4$s MB (omejitev na androidu je %5$s MB, na d
     <string name="rendering_attr_trolleybusRoutes_name">Proge trolejbusa</string>
     <string name="rendering_attr_tramRoutes_name">Proge tramvaja</string>
     <string name="rendering_attr_shareTaxiRoutes_name">Proge souporabe taksijev</string>
-    <string name="rendering_category_details">Podrobnosti</string>
+    <string name="rendering_category_details">Podrobnost prikaza</string>
     <string name="rendering_attr_trainLightrailRoutes_name">Proge vlakov</string>
     <string name="wake_on_voice">Vklopi zaslon</string>
     <string name="wake_on_voice_descr">Vklopi zaslon naprave (če je izklopljen), ko se med vodenjem pojavi zavoj.</string>
@@ -3023,7 +3023,7 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="public_transport_calc_pedestrian">Izračunaj pot za pešačenje</string>
     <string name="public_transport_type">Vrsta transporta</string>
     <string name="files_present">%1$d datotek (%2$s) je na predhodnem mestu »%3$s«.</string>
-    <string name="public_transport_ped_route_title">Pešačenje do cilja traja %1$s in je lahko hitrejše od javnega prevoza</string>
+    <string name="public_transport_ped_route_title">Pešačenje do cilja traja okoli %1$s in je lahko hitrejše od javnega prevoza</string>
     <string name="public_transport_no_route_title">Po omejitvah nastavitev ni mogoče najti ustrezne poti.</string>
     <string name="searching_gps">Poteka iskanje signalov GPS</string>
     <string name="coordinates_widget">Gradnik za določevanje koordinat</string>
@@ -3056,7 +3056,7 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="profile_type_base_string">Osnovni profil</string>
     <string name="profile_alert_need_routing_type_title">Izbor vrste navigacije</string>
     <string name="profile_alert_need_routing_type_msg">Izbor vrste navigacije za nov profil</string>
-    <string name="profile_alert_need_profile_name_title">Vpišite ime profila</string>
+    <string name="profile_alert_need_profile_name_title">Ime profila</string>
     <string name="profile_alert_need_profile_name_msg">Ime profila ne sme biti prazno!</string>
     <string name="profile_alert_duplicate_name_title">Podvojeno ime</string>
     <string name="profile_alert_duplicate_name_msg">Profil s tem imenom že obstaja</string>
@@ -3066,7 +3066,7 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="profile_alert_delete_title">Izbriši profil</string>
     <string name="profile_alert_delete_msg">Ali ste prepričani, da želite izbrisati profil %s</string>
     <string name="select_base_profile_dialog_title">Izbor osnovnega profila</string>
-    <string name="select_base_profile_dialog_message">Profil zasnujte na podlagi enega izmed osnovnih profilov, s katerimi so določene osnovne nastavitve, na primer privzet nabor gradnikov, enoti za hitrost in razdalje. Osnovni profili, ki so privzeto na voljo so:</string>
+    <string name="select_base_profile_dialog_message">Profil zasnujte na podlagi enega izmed osnovnih profilov, s katerimi so določene osnovne nastavitve, na primer privzet nabor gradnikov, enoti za hitrost in razdaljo. Osnovni profili, ki so privzeto na voljo so:</string>
     <string name="select_nav_profile_dialog_title">Izbor vrste navigacije</string>
     <string name="base_profile_descr_car">Za osebne avtomobile, motorje, tovornjake ...</string>
     <string name="base_profile_descr_bicycle">"Za gorska kolesa,  kolesa z motorjem, ježo s konji ..."</string>
@@ -3079,14 +3079,14 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="osmand_default_routing">Usmerjanje poti OsmAnd</string>
     <string name="shared_string_icon">Ikona</string>
     <string name="collected_data">Zbrani podatki</string>
-    <string name="shared_string_min_speed">Min. hitrost</string>
-    <string name="shared_string_max_speed">Max. hitrost</string>
+    <string name="shared_string_min_speed">Najmanjša hitrost</string>
+    <string name="shared_string_max_speed">Največja hitrost</string>
     <string name="default_speed_setting_title">Privzeta hitrost</string>
     <string name="default_speed_setting_descr">Spremeni privzete nastavitve hitrosti</string>
-    <string name="minmax_speed_dialog_title">Nastavi min/max hitrost</string>
-    <string name="default_speed_dialog_msg">To se uporabi med izračunom pričakovanega časa prihoda med usmerjanjem</string>
+    <string name="minmax_speed_dialog_title">Nastavitev najmanjše/največje hitrosti</string>
+    <string name="default_speed_dialog_msg">Uporablja se med izračunom pričakovanega časa prihoda med usmerjanjem</string>
     <string name="new_profile">Nov profil</string>
-    <string name="last_launch_crashed">Med zadnjo uporabo programa OsmAnd je prišlo do napake. Pomagajte nam izboljšati OsmAnd tako, da nam posredujete sporočilo o napaki.</string>
+    <string name="last_launch_crashed">Med zadnjim zagonom programa OsmAnd je prišlo do napake. S posredovanjem sporočila o napaki pomagate pri izboljšanju programa.</string>
     <string name="app_mode_ufo">Štopanje NLP (brisača obvezna)</string>
     <string name="release_3_4">• Profili: ustvariti je mogoče osebni profil z izbrano ikono in barvo 
 \n• Mogoče je nastaviti določila prednostne hitrosti za vsak profil 
@@ -3101,9 +3101,9 @@ Koda predstavlja območje: %1$s x %2$s</string>
 \n
 \n</string>
     <string name="app_mode_monowheel">Prevoz z monociklom</string>
-    <string name="precision_hdop_and_vdop">Horizontalna natančnost: %1$s, vertikalna: %2$s</string>
-    <string name="precision_hdop">Horizontalna natančnost: %s</string>
-    <string name="app_mode_offroad">Terensko (Offroad)</string>
+    <string name="precision_hdop_and_vdop">Vodoravna natančnost: %1$s, navpična: %2$s</string>
+    <string name="precision_hdop">Vodoravna natančnost: %s</string>
+    <string name="app_mode_offroad">Terenska vožnja (po brezpotju)</string>
     <string name="edit_profile_setup_title">Nastavitev profila</string>
     <string name="edit_profile_setup_subtitle">Profil ohrani lastne nastavitve</string>
     <string name="edit_profile_setup_map_subtitle">Izbor privzetih možnosti zemljevida za profil</string>
@@ -3111,9 +3111,9 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="edit_profile_nav_settings_subtitle">Izbor privzetih možnosti navigacije za profil</string>
     <string name="routing_attr_max_num_changes_description">Določite največje število sprememb</string>
     <string name="routing_attr_max_num_changes_name">Število sprememb</string>
-    <string name="turn_screen_on_router">Zbudi za zavoj</string>
+    <string name="turn_screen_on_router">Zbudi ob zavoju</string>
     <string name="turn_screen_on_time_descr">Izbor časa, ko naj se zaslon vklopi.</string>
-    <string name="turn_screen_on_sensor">Uporabi senzor bližine</string>
+    <string name="turn_screen_on_sensor">Uporabi bližinsko tipalo</string>
     <string name="turn_screen_on_sensor_descr">Zaslon je mogoče med navigacijo vklopiti z gibom roke prek vrha zaslona.</string>
     <string name="turn_on_profile_desc">Za uporabo te nastavitve je treba omogočiti vsaj en profil.</string>
     <string name="rendering_attr_winter_road_name">Zimska cesta</string>
@@ -3125,12 +3125,12 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="rendering_attr_tracktype_grade4_name">Pretežno mehka</string>
     <string name="rendering_attr_tracktype_grade5_name">Mehka</string>
     <string name="routeInfo_tracktype_name">Trdnost površine</string>
-    <string name="shared_string_file_is_saved">%s je shranjena</string>
+    <string name="shared_string_file_is_saved">Datoteka %s je shranjena</string>
     <string name="gpx_join_gaps">Združi prekinjene sledi</string>
     <string name="app_mode_camper">Potovanje s prikolico</string>
     <string name="app_mode_campervan">Potovanje z avtodomom</string>
     <string name="rendering_attr_showLez_description">Prikaži področja z omejitvijo izpustov. Določilo ne vpliva na usmerjanje.</string>
-    <string name="rendering_attr_showLez_name">Prikaži področja z omejitvijo izpustov</string>
+    <string name="rendering_attr_showLez_name">Pokaži področja z omejitvijo izpustov</string>
     <string name="temporary_conditional_routing">Upoštevaj začasne omejitve</string>
     <string name="shared_string_default">Privzeto</string>
     <string name="button_rate">Ocena</string>
@@ -3248,4 +3248,19 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="route_parameters_descr">Nastavitev parametrov poti</string>
     <string name="route_parameters">Parametri poti</string>
     <string name="application_profile_changed">Profil je spremenjen na »%s«</string>
+    <string name="quick_action_need_to_add_item_to_list">Na seznam nastavitev hitrih dejanj je treba dodati vsaj en predmet</string>
+    <string name="routing_attr_piste_type_downhill_description">Pobočja, namenjena alpskemu smučanju in dostop do žičnic.</string>
+    <string name="routing_attr_piste_type_nordic_description">Poti za nordijsko in prosto smučanje.</string>
+    <string name="routing_attr_allow_intermediate_description">Zahtevnejše poti z bolj strmimi odseki in z ovirami, ki se jih je priporočljivo izogniti.</string>
+    <string name="routing_attr_allow_skating_only_name">Dovoli le poti za drsanje</string>
+    <string name="routing_attr_allow_skating_only_description">Poti, namenjene prostemu slogu smučanja brez običajnega utrjevanja sledi.</string>
+    <string name="routing_attr_allow_classic_only_name">Dovoli le običajne poti</string>
+    <string name="routing_attr_allow_classic_only_description">Poti, namenjene za klasični slog brez pripravljenih poti. Vključujejo poti, utrjene z manjšimi snežnimi sanmi z ožjo širino in sledmi, ki jih ustvarijo smučarji.</string>
+    <string name="routing_attr_difficulty_preference_description">Prednostno uporabi določeno težavnost poti, čeprav je vodenje prek težjih ali lažjih poti še vedno mogoče, če je pot krajša.</string>
+    <string name="pref_selected_by_default_for_profiles">Nastavitev je izbrana privzeto za profile: %s</string>
+    <string name="turn_screen_on_info">Pokaži zemljevid med navigacijo nad zaklenjenim zaslonom.</string>
+    <string name="route_parameters_info">Nastavitve vplivajo na izgradnjo poti in bodo uveljavljene le za izbrani profil %1$s.</string>
+    <string name="wake_time">Prehod iz pripravljenosti</string>
+    <string name="screen_alerts_descr">Med navigacijo bodo opozorila prikazana na levem spodnjem robu zaslona.</string>
+    <string name="logcat_buffer">Medpomnilnik Logcat</string>
 </resources>
