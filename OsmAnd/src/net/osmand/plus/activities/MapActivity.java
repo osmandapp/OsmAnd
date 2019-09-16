@@ -121,6 +121,7 @@ import net.osmand.plus.routepreparationmenu.ChooseRouteFragment;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenuFragment;
 import net.osmand.plus.routing.IRouteInformationListener;
+import net.osmand.plus.routing.IFollowingModeUpdateListener;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelper.RouteCalculationProgressCallback;
 import net.osmand.plus.routing.TransportRoutingHelper.TransportRouteCalculationProgressCallback;
@@ -164,10 +165,12 @@ import java.util.regex.Pattern;
 public class MapActivity extends OsmandActionBarActivity implements DownloadEvents,
 		OnRequestPermissionsResultCallback, IRouteInformationListener, AMapPointUpdateListener,
 		MapMarkerChangedListener, OnDismissDialogFragmentListener, OnDrawMapListener,
-		OsmAndAppCustomizationListener, LockHelper.LockUIAdapter, PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
+		OsmAndAppCustomizationListener, LockHelper.LockUIAdapter, PreferenceFragmentCompat.OnPreferenceStartFragmentCallback,
+		IFollowingModeUpdateListener {
 
 	public static final String INTENT_KEY_PARENT_MAP_ACTIVITY = "intent_parent_map_activity_key";
 	public static final String INTENT_PARAMS = "intent_prarams";
+	public static final String WAS_DESTINATION_REACHED_DIALOG_SHOWN_KEY = "WAS_DESTINATION_REACHED_DIALOG_SHOWN";
 
 	private static final int SHOW_POSITION_MSG_ID = OsmAndConstants.UI_HANDLER_MAP_VIEW + 1;
 	private static final int LONG_KEYPRESS_MSG_ID = OsmAndConstants.UI_HANDLER_MAP_VIEW + 2;
@@ -227,6 +230,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private Timer splashScreenTimer;
 	private boolean activityRestartNeeded = false;
 	private boolean stopped = true;
+	private boolean wasDestinationReachedDialogShown = false;
 
 	private ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
 	
@@ -354,9 +358,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 		app.getAidlApi().onCreateMapActivity(this);
 		
-		lockHelper.setLockUIAdapter(this);
+		if (savedInstanceState != null) {
+			wasDestinationReachedDialogShown = savedInstanceState.getBoolean(WAS_DESTINATION_REACHED_DIALOG_SHOWN_KEY, false);
+		}
 		
-		app.getRoutingHelper().addListener(this);
+		lockHelper.setLockUIAdapter(this);
 
 		mIsDestroyed = false;
 	}
@@ -371,6 +377,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
+		outState.putBoolean(WAS_DESTINATION_REACHED_DIALOG_SHOWN_KEY, wasDestinationReachedDialogShown);
 		if (removeFragment(PlanRouteFragment.TAG)) {
 			app.getMapMarkersHelper().getPlanRouteContext().setFragmentVisible(true);
 		}
@@ -1352,7 +1359,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (atlasMapRendererView != null) {
 			atlasMapRendererView.handleOnDestroy();
 		}
-		app.getRoutingHelper().removeListener(this);
 		lockHelper.setLockUIAdapter(null);
 		
 		mIsDestroyed = true;
@@ -1394,6 +1400,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		mapView.setOnDrawMapListener(null);
 		cancelSplashScreenTimer();
 		app.getMapMarkersHelper().removeListener(this);
+		app.getRoutingHelper().removeListener(this);
+		app.getRoutingHelper().removeFollowingModeListener(this);
 		app.getDownloadThread().resetUiActivity(this);
 		if (atlasMapRendererView != null) {
 			atlasMapRendererView.handleOnPause();
@@ -1960,6 +1968,13 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		return false;
 	}
 
+	@Override
+	public void onFollowingModeChanged(boolean isFollowingMode) {
+		if (isFollowingMode) {
+			wasDestinationReachedDialogShown = false;
+		}
+	}
+
 	private class ScreenOffReceiver extends BroadcastReceiver {
 
 		@Override
@@ -2029,6 +2044,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	@Override
 	public void routeWasFinished() {
 		if (!mIsDestroyed) {
+			wasDestinationReachedDialogShown = true;
 			DestinationReachedMenu.show(this);
 			changeKeyguardFlags();
 		}

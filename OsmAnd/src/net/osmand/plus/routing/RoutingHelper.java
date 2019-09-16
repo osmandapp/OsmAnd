@@ -41,12 +41,15 @@ public class RoutingHelper {
 
 	private List<WeakReference<IRouteInformationListener>> listeners = new LinkedList<>();
 	private List<WeakReference<IRoutingDataUpdateListener>> updateListeners = new LinkedList<>();
+	private List<WeakReference<IFollowingModeUpdateListener>> followingModeListeners = new LinkedList<>();
 	private OsmandApplication app;
 	private TransportRoutingHelper transportRoutingHelper;
 
 	private boolean isFollowingMode = false;
 	private boolean isRoutePlanningMode = false;
 	private boolean isPauseNavigation = false;
+	
+	private boolean isLastDestinationReached = false;
 
 	private GPXRouteParamsBuilder currentGPXRoute = null;
 
@@ -138,6 +141,7 @@ public class RoutingHelper {
 	public void setFollowingMode(boolean follow) {
 		isFollowingMode = follow;
 		isPauseNavigation = false;
+		notifyFollowingModeUpdateListeners(follow);
 		if (!follow) {
 			if (app.getNavigationService() != null) {
 				app.getNavigationService().stopIfNeeded(app, NavigationService.USED_BY_NAVIGATION);
@@ -146,8 +150,27 @@ public class RoutingHelper {
 				app.getNotificationHelper().refreshNotifications();
 			}
 		} else {
+			isLastDestinationReached = false;
 			app.startNavigationService(NavigationService.USED_BY_NAVIGATION, 0);
 		}
+	}
+
+	private void notifyFollowingModeUpdateListeners(final boolean isFollowingMode) {
+		app.runInUIThread(new Runnable() {
+			@Override
+			public void run() {
+				Iterator<WeakReference<IFollowingModeUpdateListener>> it = followingModeListeners.iterator();
+				while(it.hasNext()) {
+					WeakReference<IFollowingModeUpdateListener> ref = it.next();
+					IFollowingModeUpdateListener l = ref.get();
+					if(l == null) {
+						it.remove();
+					} else {
+						l.onFollowingModeChanged(isFollowingMode);
+					}
+				}
+			}
+		});
 	}
 
 	public boolean isRoutePlanningMode() {
@@ -204,6 +227,7 @@ public class RoutingHelper {
 		app.runInUIThread(new Runnable() {
 			@Override
 			public void run() {
+				isLastDestinationReached = true;
 				Iterator<WeakReference<IRouteInformationListener>> it = listeners.iterator();
 				while(it.hasNext()) {
 					WeakReference<IRouteInformationListener> ref = it.next();
@@ -314,6 +338,30 @@ public class RoutingHelper {
 		return copyList;
 	}
 
+	public void addFollowingModeListener(IFollowingModeUpdateListener listener) {
+		followingModeListeners = updateListenersList(new ArrayList<>(followingModeListeners), listener, true);
+	}
+
+	public void removeFollowingModeListener(IFollowingModeUpdateListener listener) {
+		followingModeListeners = updateListenersList(new ArrayList<>(followingModeListeners), listener, false);
+	}
+
+	private List<WeakReference<IFollowingModeUpdateListener>> updateListenersList(
+			List<WeakReference<IFollowingModeUpdateListener>> copyList,
+			IFollowingModeUpdateListener listener, boolean isNewListener) {
+		Iterator<WeakReference<IFollowingModeUpdateListener>> it = copyList.iterator();
+		while (it.hasNext()) {
+			WeakReference<IFollowingModeUpdateListener> ref = it.next();
+			IFollowingModeUpdateListener l = ref.get();
+			if (l == null || l == listener) {
+				it.remove();
+			}
+		}
+		if (isNewListener) {
+			copyList.add(new WeakReference<>(listener));
+		}
+		return copyList;
+	}
 
 	public void updateLocation(Location currentLocation) {
 		if (settings.getPointToStart() == null && settings.getMyLocationToStart() == null && currentLocation != null) {
@@ -1188,5 +1236,7 @@ public class RoutingHelper {
 		}
 	}
 
-
+	public boolean isLastDestinationReached() {
+		return isLastDestinationReached;
+	}
 }
