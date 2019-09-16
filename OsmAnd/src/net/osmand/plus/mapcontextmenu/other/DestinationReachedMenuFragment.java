@@ -52,7 +52,7 @@ public class DestinationReachedMenuFragment extends Fragment {
 		view.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				dismissMenu();
+				finishNavigation();
 			}
 		});
 
@@ -63,7 +63,7 @@ public class DestinationReachedMenuFragment extends Fragment {
 		closeImageButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				dismissMenu();
+				finishNavigation();
 			}
 		});
 
@@ -73,19 +73,7 @@ public class DestinationReachedMenuFragment extends Fragment {
 		removeDestButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				getMapActivity().getMyApplication().getTargetPointsHelper().removeWayPoint(true, -1);
-				Object contextMenuObj = getMapActivity().getContextMenu().getObject();
-				if (getMapActivity().getContextMenu().isActive()
-						&& contextMenuObj instanceof TargetPoint) {
-					TargetPoint targetPoint = (TargetPoint) contextMenuObj;
-					if (!targetPoint.start && !targetPoint.intermediate) {
-						getMapActivity().getContextMenu().close();
-					}
-				}
-				OsmandSettings settings = getMapActivity().getMyApplication().getSettings();
-				settings.APPLICATION_MODE.set(settings.DEFAULT_APPLICATION_MODE.get());
-				getMapActivity().getMapActions().stopNavigationWithoutConfirm();
-				dismissMenu();
+				finishNavigation();
 			}
 		});
 
@@ -159,6 +147,22 @@ public class DestinationReachedMenuFragment extends Fragment {
 	public void onDestroy() {
 		super.onDestroy();
 		exists = false;
+	}
+
+	private void finishNavigation() {
+		getMapActivity().getMyApplication().getTargetPointsHelper().removeWayPoint(true, -1);
+		Object contextMenuObj = getMapActivity().getContextMenu().getObject();
+		if (getMapActivity().getContextMenu().isActive()
+				&& contextMenuObj instanceof TargetPoint) {
+			TargetPoint targetPoint = (TargetPoint) contextMenuObj;
+			if (!targetPoint.start && !targetPoint.intermediate) {
+				getMapActivity().getContextMenu().close();
+			}
+		}
+		OsmandSettings settings = getMapActivity().getMyApplication().getSettings();
+		settings.APPLICATION_MODE.set(settings.DEFAULT_APPLICATION_MODE.get());
+		getMapActivity().getMapActions().stopNavigationWithoutConfirm();
+		dismissMenu();
 	}
 
 	public static boolean isExists() {

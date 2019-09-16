@@ -825,9 +825,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 		app.getDownloadThread().setUiActivity(this);
 
-		if (mapViewTrackingUtilities.getShowRouteFinishDialog()) {
+		boolean routeWasFinished = routingHelper.isRouteWasFinished();
+		if (routeWasFinished && !DestinationReachedMenu.wasShown()) {
 			DestinationReachedMenu.show(this);
-			mapViewTrackingUtilities.setShowRouteFinishDialog(false);
 		}
 
 		routingHelper.addListener(this);
@@ -1388,6 +1388,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	private void onPauseActivity() {
+		if (!app.getRoutingHelper().isRouteWasFinished()) {
+			DestinationReachedMenu.resetShownState();
+		}
 		pendingPause = false;
 		mapView.setOnDrawMapListener(null);
 		cancelSplashScreenTimer();
@@ -1977,7 +1980,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (mapRouteInfoMenu.isSelectFromMapTouch()) {
 			return;
 		}
-
 		RoutingHelper rh = app.getRoutingHelper();
 		if (newRoute && rh.isRoutePlanningMode() && mapView != null) {
 			Location lt = rh.getLastProjection();
