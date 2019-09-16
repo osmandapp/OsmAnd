@@ -946,7 +946,7 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="files_limit">hai ancora %1$d file</string>
     <string name="available_downloads_left">Ancora %1$d file da scaricare</string>
     <string name="install_paid">Versione completa</string>
-    <string name="use_magnetic_sensor_descr">Per utilizzare il valore della bussola invece del sensore di orientamento, utilizza il utilizza il sensore magnetico.</string>
+    <string name="use_magnetic_sensor_descr">Per utilizzare il valore della bussola invece del sensore di orientamento, utilizza il sensore magnetico.</string>
     <string name="use_magnetic_sensor">Utilizza il sensore magnetico (bussola)</string>
     <string name="local_indexes_cat_srtm">Linee isoipse</string>
     <string name="use_kalman_filter_compass_descr">Riduce il rumore delle letture della bussola ma introduce dell\'inerzia.</string>

@@ -2481,14 +2481,14 @@
     <string name="shared_string_color_magenta">Eflatun</string>
     <string name="shared_string_icon">Simge</string>
     <string name="collected_data">Toplanmış Veri</string>
-    <string name="press_again_to_change_the_map_orientation">Harita yönünü değiştirmek için tekrar basın</string>
+    <string name="press_again_to_change_the_map_orientation">Harita yönünü değiştirmek için tekrar dokunun</string>
     <string name="shared_string_min_speed">En düşük hız</string>
     <string name="shared_string_max_speed">En yüksek hız</string>
     <string name="default_speed_setting_title">Öntanımlı hız</string>
     <string name="default_speed_setting_descr">Öntanımlı hız ayarlarını değiştir</string>
     <string name="minmax_speed_dialog_title">En düşük/en yüksek hız ayarı</string>
     <string name="default_speed_dialog_msg">Yönlendirme sırasında beklenen varış zamanının hesaplanmasında kullanılır</string>
-    <string name="new_profile">Yeni Profil</string>
+    <string name="new_profile">Yeni profil</string>
     <string name="shared_string_crash">Çökme</string>
     <string name="app_mode_personal_transporter">Kişisel taşıyıcı</string>
     <string name="app_mode_scooter">Scooter</string>
