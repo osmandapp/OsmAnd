@@ -96,7 +96,7 @@
     <string name="shared_string_ok">V redu</string>
     <string name="time_ago">nazaj</string>
     <string name="shared_string_all">Vse</string>
-    <string name="shared_string_off">Izlključeno</string>
+    <string name="shared_string_off">Izključeno</string>
     <string name="shared_string_install">Namesti</string>
     <string name="shared_string_share">Skupna raba</string>
     <string name="shared_string_back">Nazaj</string>
@@ -197,4 +197,8 @@
     <string name="disable_monitoring">Onemogoči spremljanje</string>
     <string name="min_logging_accuracy_descr">Filter: brez beleženja, če določena natančnost ni dosežena</string>
     <string name="min_logging_speed_descr">Filter: brez beleženja pod določeno hitrostjo</string>
+    <string name="osmand_connect">Povezava OsmAnd</string>
+    <string name="send_my_location">Pošlji moje trenutno mesto</string>
+    <string name="gps_and_location">Položaj</string>
+    <string name="sharing_time">Čas izmenjave</string>
 </resources>
