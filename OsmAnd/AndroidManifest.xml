@@ -846,6 +846,7 @@
 		</activity>
 
 		<activity android:name="net.osmand.plus.development.TestVoiceActivity" />
+		<activity android:name="net.osmand.plus.development.LogcatActivity" />
 		<activity android:name="net.osmand.plus.download.DownloadActivity" android:label="" />
 
 		<!-- keep android:process on a separate line !! -->
