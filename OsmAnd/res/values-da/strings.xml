@@ -3293,4 +3293,5 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="configure_profile_info">Alle indstillinger nedenfor påvirker kun den valgte profil.</string>
     <string name="analytics_pref_title">Analyser</string>
     <string name="application_profile_changed">Programprofil ændret til \"%s\"</string>
+    <string name="logcat_buffer">Logcat-buffer</string>
 </resources>

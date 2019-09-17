@@ -3205,4 +3205,18 @@
     <string name="configure_profile">Sett opp profil</string>
     <string name="switch_profile">Bytt profil</string>
     <string name="application_profile_changed">Programprofil endret til \"%s\"</string>
+    <string name="cancel_subscription">Opphev abonnement</string>
+    <string name="price_and_discount">%1$s • Lagre %2$s</string>
+    <string name="units_and_formats">Enheter og formater</string>
+    <string name="appearance">Utseende</string>
+    <string name="list_of_installed_plugins">Installerte programtillegg</string>
+    <string name="configure_navigation">Sett opp navigasjon</string>
+    <string name="reset_to_default">Tilbakestill til forvalg</string>
+    <string name="osmand_settings">OsmAnd-innstillinger</string>
+    <string name="copy_from_other_profile">Kopier fra annen profil</string>
+    <string name="turn_screen_on">Skru skjerm på</string>
+    <string name="vehicle_parameters_descr">Vekt, høyde, hastighet</string>
+    <string name="vehicle_parameters">Kjøretøyparameter</string>
+    <string name="screen_alerts">Skjermvarsler</string>
+    <string name="logcat_buffer">Logcat-mellomlager</string>
 </resources>
