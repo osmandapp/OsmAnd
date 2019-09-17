@@ -13,6 +13,11 @@ libs/it.unibo.alice.tuprolog-tuprolog-3.2.1.jar
 libs/commons-codec-commons-codec-1.11.jar
 libs/OsmAndCore_android-0.1-SNAPSHOT.jar
 
+libs/huawei-*.jar
+huaweidrmlib/
+HwDRM_SDK_*
+drm_strings.xml
+
 valgrind/
 bin/
 dist/

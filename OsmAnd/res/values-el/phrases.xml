@@ -3550,4 +3550,10 @@
     <string name="poi_access_hgv">Πρόσβαση σε όχημα μεταφοράς βαρέων φορτίων</string>
     <string name="poi_access_goods">Πρόσβαση σε οχήματα ελαφρών αγαθών</string>
     <string name="poi_access_disabled">Πρόσβαση σε ΑΜΕΑ</string>
+    <string name="poi_toll_gantry">Καμπίνα διοδίων</string>
+    <string name="poi_childcare">Φροντίδα παιδιών</string>
+    <string name="poi_denotation_natural_monument">Φυσικό μνημείο</string>
+    <string name="poi_denotation_landmark">Διακριτό σημείο</string>
+    <string name="poi_park_ride_yes">Ναι</string>
+    <string name="poi_park_ride_train">Τρένο</string>
 </resources>

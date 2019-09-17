@@ -404,10 +404,10 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 		}
 		ProgressBar progressBarButton = (ProgressBar) view.findViewById(R.id.progress_bar_button);
 		if (progressBarButton != null) {
-			progressBarButton.setProgress(isPublicTransportMode() ? 0 : 100);
+			progressBarButton.setProgress(0);
 		}
 		TextViewExProgress textViewExProgress = (TextViewExProgress) view.findViewById(R.id.start_button_descr);
-		textViewExProgress.percent = isPublicTransportMode() ? 0 : 1;
+		textViewExProgress.percent = 0;
 	}
 
 	public void show(MapActivity mapActivity) {

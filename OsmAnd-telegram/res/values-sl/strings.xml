@@ -188,4 +188,13 @@
     <string name="type_contact_or_group_name">Vnesite ime stika ali skupine</string>
     <string name="bearing">Smer</string>
     <string name="timeline_no_data_descr">Za izbrani dan nimamo zbranih podatkov</string>
+    <string name="background_work">Delovanje v ozadju</string>
+    <string name="sharing_in_background">Izmenjava podatkov v ozadju</string>
+    <string name="last_update_from_telegram">Zadnja posodobitev s programa Telegram</string>
+    <string name="monitoring_is_enabled">Sledenje je omogočeno</string>
+    <string name="monitoring_is_disabled">Sledenje je onemogočeno</string>
+    <string name="points_size">%1$d točk</string>
+    <string name="disable_monitoring">Onemogoči spremljanje</string>
+    <string name="min_logging_accuracy_descr">Filter: brez beleženja, če določena natančnost ni dosežena</string>
+    <string name="min_logging_speed_descr">Filter: brez beleženja pod določeno hitrostjo</string>
 </resources>

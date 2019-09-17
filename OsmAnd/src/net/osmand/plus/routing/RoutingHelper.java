@@ -66,6 +66,7 @@ public class RoutingHelper {
 	private long recalculateCountInInterval = 0;
 	private int evalWaitInterval = 0;
 	private boolean waitingNextJob;
+	private boolean routeWasFinished;
 
 	private ApplicationMode mode;
 	private OsmandSettings settings;
@@ -85,6 +86,10 @@ public class RoutingHelper {
 
 	public boolean isDeviatedFromRoute() {
 		return isDeviatedFromRoute;
+	}
+
+	public boolean isRouteWasFinished() {
+		return routeWasFinished;
 	}
 
 	public RoutingHelper(OsmandApplication context){
@@ -201,6 +206,7 @@ public class RoutingHelper {
 	}
 
 	private synchronized void finishCurrentRoute() {
+		routeWasFinished = true;
 		app.runInUIThread(new Runnable() {
 			@Override
 			public void run() {
@@ -917,6 +923,7 @@ public class RoutingHelper {
 		@Override
 		public void run() {
 			synchronized (RoutingHelper.this) {
+				routeWasFinished = false;
 				currentRunningJob = this;
 				waitingNextJob = prevRunningJob != null;
 			}
