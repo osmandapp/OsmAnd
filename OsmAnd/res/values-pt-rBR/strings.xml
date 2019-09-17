@@ -3273,4 +3273,5 @@ Pôr do Sol: %2$s</string>
     <string name="route_parameters_descr">Configurar parâmetros de rota</string>
     <string name="route_parameters">Parâmetros de rota</string>
     <string name="application_profile_changed">Perfil do aplicativo alterado para \"%s\"</string>
+    <string name="logcat_buffer">Buffer de Logcat</string>
 </resources>
