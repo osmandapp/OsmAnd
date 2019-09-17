@@ -1,6 +1,5 @@
 package net.osmand.plus.settings;
 
-import android.support.v14.preference.SwitchPreference;
 import android.support.v7.preference.Preference;
 import android.widget.Toast;
 
@@ -25,8 +24,8 @@ public class ProxySettingsFragment extends BaseSettingsFragment {
 	}
 
 	@Override
-	protected String getToolbarTitle() {
-		return getString(R.string.proxy_pref_title);
+	protected int getToolbarTitle() {
+		return R.string.proxy_pref_title;
 	}
 
 	@Override

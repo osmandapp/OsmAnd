@@ -51,25 +51,20 @@ public class CoordinatesFormatFragment extends BaseSettingsFragment {
 	}
 
 	@Override
-	protected String getToolbarTitle() {
-		return getString(R.string.coordinates_format);
+	protected int getToolbarTitle() {
+		return R.string.coordinates_format;
 	}
 
 	@Override
 	protected void setupPreferences() {
-		PreferenceScreen screen = getPreferenceScreen();
-		screen.setOrderingAsAdded(false);
-
 		Preference generalSettings = findPreference("coordinates_format_info");
 		generalSettings.setIcon(getContentIcon(R.drawable.ic_action_info_dark));
 
 		CheckBoxPreference degreesPref = (CheckBoxPreference) findPreference(FORMAT_DEGREES);
 		CheckBoxPreference minutesPref = (CheckBoxPreference) findPreference(FORMAT_MINUTES);
 		CheckBoxPreference secondsPref = (CheckBoxPreference) findPreference(FORMAT_SECONDS);
+		CheckBoxPreference utmPref = (CheckBoxPreference) findPreference(UTM_FORMAT);
 		CheckBoxPreference olcPref = (CheckBoxPreference) findPreference(OLC_FORMAT);
-
-		CheckBoxPreference utmPref = createUtmFormatPref();
-		screen.addPreference(utmPref);
 
 		Location loc = app.getLocationProvider().getLastKnownLocation();
 
@@ -84,24 +79,16 @@ public class CoordinatesFormatFragment extends BaseSettingsFragment {
 		updateSelectedFormatPrefs(currentPrefKey);
 	}
 
-	private CheckBoxPreference createUtmFormatPref() {
-		CheckBoxPreference utmPref = new CheckBoxPreference(app) {
+	@Override
+	protected void onBindPreferenceViewHolder(Preference preference, PreferenceViewHolder holder) {
+		super.onBindPreferenceViewHolder(preference, holder);
 
-			@Override
-			public void onBindViewHolder(PreferenceViewHolder holder) {
-				super.onBindViewHolder(holder);
-				TextView summaryView = (TextView) holder.findViewById(android.R.id.summary);
-				if (summaryView != null) {
-					summaryView.setOnTouchListener(getSummaryTouchListener());
-				}
+		if (UTM_FORMAT.equals(preference.getKey())) {
+			TextView summaryView = (TextView) holder.findViewById(android.R.id.summary);
+			if (summaryView != null) {
+				summaryView.setOnTouchListener(getSummaryTouchListener());
 			}
-		};
-		utmPref.setKey(UTM_FORMAT);
-		utmPref.setTitle(R.string.navigate_point_format_utm);
-		utmPref.setPersistent(false);
-		utmPref.setOrder(4);
-		utmPref.setLayoutResource(R.layout.preference_radio_button);
-		return utmPref;
+		}
 	}
 
 	private View.OnTouchListener getSummaryTouchListener() {

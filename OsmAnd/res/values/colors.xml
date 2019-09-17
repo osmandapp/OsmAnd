@@ -424,6 +424,7 @@
 	<color name="text_field_box_light">#eeeeee</color>
 
 	<color name="preference_category_title">#7E33FF</color>
+	<color name="preference_top_switch_off">#808080</color>
 
 	<!-- Basic colors -->
 	<color name="app_bar_main_dark">#101112</color>

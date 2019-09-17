@@ -52,8 +52,8 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 	}
 
 	@Override
-	protected String getToolbarTitle() {
-		return getString(R.string.route_parameters);
+	protected int getToolbarTitle() {
+		return R.string.route_parameters;
 	}
 
 	@Override

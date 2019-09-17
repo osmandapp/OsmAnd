@@ -34,8 +34,8 @@ public class GlobalSettingsFragment extends BaseSettingsFragment implements Send
 	}
 
 	@Override
-	protected String getToolbarTitle() {
-		return getString(R.string.osmand_settings);
+	protected int getToolbarTitle() {
+		return R.string.osmand_settings;
 	}
 
 	@Override

@@ -318,14 +318,21 @@ public class AndroidUtils {
 		tv.setMaxLines(maxLines);
 	}
 
-	@SuppressLint("NewApi")
-	@SuppressWarnings("deprecation")
 	public static void setBackground(Context ctx, View view, boolean night, int lightResId, int darkResId) {
+		Drawable drawable;
 		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-			view.setBackground(ctx.getResources().getDrawable(night ? darkResId : lightResId,
-					ctx.getTheme()));
+			drawable = ctx.getResources().getDrawable(night ? darkResId : lightResId, ctx.getTheme());
 		} else {
-			view.setBackgroundDrawable(ctx.getResources().getDrawable(night ? darkResId : lightResId));
+			drawable = ctx.getResources().getDrawable(night ? darkResId : lightResId);
+		}
+		setBackground(view, drawable);
+	}
+
+	public static void setBackground(View view, Drawable drawable) {
+		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+			view.setBackground(drawable);
+		} else {
+			view.setBackgroundDrawable(drawable);
 		}
 	}
 

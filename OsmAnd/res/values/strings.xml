@@ -11,7 +11,7 @@
 	Thx - Hardy
 
 -->
-
+    <string name="plugins_settings">Plugin settings</string>
     <string name="logcat_buffer">Logcat buffer</string>
     <string name="application_profile_changed">Application profile changed to \"%s\"</string>
     <string name="switch_profile">Switch profile</string>

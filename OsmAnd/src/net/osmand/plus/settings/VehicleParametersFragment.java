@@ -32,8 +32,8 @@ public class VehicleParametersFragment extends BaseSettingsFragment {
 	}
 
 	@Override
-	protected String getToolbarTitle() {
-		return getString(R.string.vehicle_parameters);
+	protected int getToolbarTitle() {
+		return R.string.vehicle_parameters;
 	}
 
 	@Override

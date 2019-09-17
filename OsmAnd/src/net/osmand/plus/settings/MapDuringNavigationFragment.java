@@ -23,8 +23,8 @@ public class MapDuringNavigationFragment extends BaseSettingsFragment {
 	}
 
 	@Override
-	protected String getToolbarTitle() {
-		return getString(R.string.map_during_navigation);
+	protected int getToolbarTitle() {
+		return R.string.map_during_navigation;
 	}
 
 	@Override

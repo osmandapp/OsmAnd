@@ -20,8 +20,8 @@ public class NavigationFragment extends BaseSettingsFragment {
 	}
 
 	@Override
-	protected String getToolbarTitle() {
-		return getString(R.string.routing_settings_2);
+	protected int getToolbarTitle() {
+		return R.string.routing_settings_2;
 	}
 
 	@Override

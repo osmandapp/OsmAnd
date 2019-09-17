@@ -1,7 +1,8 @@
 package net.osmand.plus.profiles;
 
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.StateListDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.support.annotation.ColorRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -11,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
+import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
@@ -106,8 +108,14 @@ public class SelectProfileMenuAdapter extends AbstractProfileMenuAdapter<SelectP
 			//set up cell color
 			int colorNoAlpha = ContextCompat.getColor(app, profileColorResId);
 			boolean selectedMode = app.getSettings().APPLICATION_MODE.get() == item;
-			holder.profileOptions.setBackgroundDrawable(UiUtilities.getAlphaStateDrawable(colorNoAlpha, selectedMode ? 0.25f : 0, 0.3f));
-			
+			Drawable drawable = UiUtilities.getColoredSelectableDrawable(app, colorNoAlpha, 0.3f);
+
+			if (selectedMode) {
+				Drawable[] layers = {new ColorDrawable(UiUtilities.getColorWithAlpha(colorNoAlpha, 0.15f)), drawable};
+				drawable = new LayerDrawable(layers);
+			}
+			AndroidUtils.setBackground(holder.profileOptions, drawable);
+
 			updateViewHolder(holder, item);
 		} else {
 			final String title = (String) obj;
@@ -119,15 +127,14 @@ public class SelectProfileMenuAdapter extends AbstractProfileMenuAdapter<SelectP
 			holder.descr.setVisibility(View.GONE);
 			holder.switcher.setVisibility(View.GONE);
 			holder.menuIcon.setVisibility(View.GONE);
-			int colorResId = nightMode
+			int color = ContextCompat.getColor(app, nightMode
 					? R.color.active_color_primary_dark
-					: R.color.active_color_primary_light;
-			holder.title.setTextColor(app.getResources().getColor(colorResId));
+					: R.color.active_color_primary_light);
+			holder.title.setTextColor(color);
 			holder.title.setText(bottomButtonText);
-			int colorAlpha25 = UiUtilities.getColorWithAlpha(ContextCompat.getColor(app, colorResId), 0.25f);
-			StateListDrawable sld = new StateListDrawable();
-			sld.addState(new int[]{android.R.attr.state_pressed}, new ColorDrawable(colorAlpha25));
-			holder.profileOptions.setBackgroundDrawable(sld);
+
+			Drawable drawable = UiUtilities.getColoredSelectableDrawable(app, color, 0.3f);
+			AndroidUtils.setBackground(holder.profileOptions, drawable);
 		}
 	}
 

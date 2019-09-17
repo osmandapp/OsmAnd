@@ -3,12 +3,25 @@ package net.osmand.plus.settings;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Canvas;
+import android.graphics.Rect;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.support.annotation.ColorRes;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceCategory;
+import android.support.v7.preference.PreferenceGroup;
+import android.support.v7.preference.PreferenceGroupAdapter;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
+import net.osmand.AndroidUtils;
 import net.osmand.aidl.OsmandAidlApi;
 import net.osmand.aidl.OsmandAidlApi.ConnectedApp;
 import net.osmand.plus.ApplicationMode;
@@ -40,27 +53,84 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 	}
 
 	@Override
-	protected String getToolbarTitle() {
-		return getString(R.string.configure_profile);
+	protected int getToolbarTitle() {
+		return R.string.configure_profile;
 	}
 
 	@ColorRes
-	protected int getBackgroundColor() {
+	protected int getBackgroundColorRes() {
 		return isNightMode() ? R.color.activity_background_color_dark : R.color.activity_background_color_light;
+	}
+
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		View view = super.onCreateView(inflater, container, savedInstanceState);
+
+		getListView().addItemDecoration(createDividerItemDecoration());
+
+		return view;
+	}
+
+	private RecyclerView.ItemDecoration createDividerItemDecoration() {
+		final Drawable dividerLight = new ColorDrawable(ContextCompat.getColor(app, R.color.list_background_color_light));
+		final Drawable dividerDark = new ColorDrawable(ContextCompat.getColor(app, R.color.list_background_color_dark));
+		final int pluginDividerHeight = AndroidUtils.dpToPx(app, 3);
+
+		return new RecyclerView.ItemDecoration() {
+			@Override
+			public void onDraw(Canvas canvas, RecyclerView parent, RecyclerView.State state) {
+				int dividerLeft = parent.getPaddingLeft();
+				int dividerRight = parent.getWidth() - parent.getPaddingRight();
+
+				int childCount = parent.getChildCount();
+				for (int i = 0; i < childCount - 1; i++) {
+					View child = parent.getChildAt(i);
+
+					if (shouldDrawDivider(child)) {
+						RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child.getLayoutParams();
+
+						int dividerTop = child.getBottom() + params.bottomMargin;
+						int dividerBottom = dividerTop + pluginDividerHeight;
+
+						Drawable divider = isNightMode() ? dividerDark : dividerLight;
+						divider.setBounds(dividerLeft, dividerTop, dividerRight, dividerBottom);
+						divider.draw(canvas);
+					}
+				}
+			}
+
+			@Override
+			public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+				if (shouldDrawDivider(view)) {
+					outRect.set(0, 0, 0, pluginDividerHeight);
+				}
+			}
+
+			private boolean shouldDrawDivider(View view) {
+				int position = getListView().getChildAdapterPosition(view);
+				Preference pref = ((PreferenceGroupAdapter) getListView().getAdapter()).getItem(position);
+				if (pref != null && pref.getParent() != null) {
+					PreferenceGroup preferenceGroup = pref.getParent();
+					return preferenceGroup.hasKey() && preferenceGroup.getKey().equals("plugin_settings");
+				}
+				return false;
+			}
+		};
 	}
 
 	@Override
 	protected void setupPreferences() {
 		Preference generalSettings = findPreference("general_settings");
-		Preference pluginSettings = findPreference("plugin_settings");
-		pluginSettings.setIconSpaceReserved(false);
-
 		generalSettings.setIcon(getContentIcon(R.drawable.ic_action_settings));
 
 		setupNavigationSettingsPref();
 		setupConfigureMapPref();
-		setupConnectedAppsPref();
-		setupOsmandPluginsPref();
+
+		PreferenceCategory pluginSettings = (PreferenceCategory) findPreference("plugin_settings");
+		pluginSettings.setIconSpaceReserved(false);
+
+		setupConnectedAppsPref(pluginSettings);
+		setupOsmandPluginsPref(pluginSettings);
 	}
 
 	private void setupNavigationSettingsPref() {
@@ -86,7 +156,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 		configureMap.setVisible(false);
 	}
 
-	private void setupConnectedAppsPref() {
+	private void setupConnectedAppsPref(PreferenceCategory preferenceCategory) {
 		OsmandApplication app = getMyApplication();
 		if (app == null) {
 			return;
@@ -101,11 +171,11 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 			preference.setChecked(connectedApp.isEnabled());
 			preference.setLayoutResource(R.layout.preference_switch);
 
-			getPreferenceScreen().addPreference(preference);
+			preferenceCategory.addPreference(preference);
 		}
 	}
 
-	private void setupOsmandPluginsPref() {
+	private void setupOsmandPluginsPref(PreferenceCategory preferenceCategory) {
 		Context ctx = getContext();
 		if (ctx == null) {
 			return;
@@ -121,7 +191,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 			preference.setLayoutResource(R.layout.preference_dialog_and_switch);
 			preference.setIntent(getPluginIntent(plugin));
 
-			getPreferenceScreen().addPreference(preference);
+			preferenceCategory.addPreference(preference);
 		}
 	}
 

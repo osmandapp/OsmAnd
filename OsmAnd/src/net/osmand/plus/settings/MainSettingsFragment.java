@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.support.annotation.ColorRes;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceCategory;
 
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.R;
@@ -26,8 +25,8 @@ public class MainSettingsFragment extends BaseSettingsFragment {
 	}
 
 	@Override
-	protected String getToolbarTitle() {
-		return getString(R.string.shared_string_settings);
+	protected int getToolbarTitle() {
+		return R.string.shared_string_settings;
 	}
 
 	@Override
@@ -36,7 +35,7 @@ public class MainSettingsFragment extends BaseSettingsFragment {
 	}
 
 	@ColorRes
-	protected int getBackgroundColor() {
+	protected int getBackgroundColorRes() {
 		return isNightMode() ? R.color.activity_background_color_dark : R.color.activity_background_color_light;
 	}
 
@@ -58,10 +57,7 @@ public class MainSettingsFragment extends BaseSettingsFragment {
 	private void setupConfigureProfilePref() {
 		ApplicationMode selectedMode = getSelectedAppMode();
 
-		int iconRes = selectedMode.getIconRes();
-		int iconColor = getActiveProfileColor();
 		String title = selectedMode.toHumanString(getContext());
-
 		String profileType;
 		if (selectedMode.isCustomProfile()) {
 			profileType = String.format(getString(R.string.profile_type_descr_string), Algorithms.capitalizeFirstLetterAndLowercase(selectedMode.getParent().toHumanString(getContext())));
@@ -69,8 +65,10 @@ public class MainSettingsFragment extends BaseSettingsFragment {
 			profileType = getString(R.string.profile_type_base_string);
 		}
 
+		int iconRes = selectedMode.getIconRes();
+
 		Preference configureProfile = findPreference("configure_profile");
-		configureProfile.setIcon(getIcon(iconRes, iconColor));
+		configureProfile.setIcon(getPaintedIcon(iconRes, getActiveProfileColor()));
 		configureProfile.setTitle(title);
 		configureProfile.setSummary(profileType);
 	}
