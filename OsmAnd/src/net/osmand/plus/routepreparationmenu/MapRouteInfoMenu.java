@@ -787,7 +787,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			}
 		});
 		getMapActivity().getSupportFragmentManager().beginTransaction()
-			.add(fragment, "app_profile_settings").commitAllowingStateLoss();
+			.add(fragment, ConfigureAppModesBottomSheetDialogFragment.TAG).commitAllowingStateLoss();
 	}
 
 	private void updateApplicationMode(ApplicationMode mode, ApplicationMode next) {

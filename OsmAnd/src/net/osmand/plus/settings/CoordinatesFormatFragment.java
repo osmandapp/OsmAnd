@@ -1,5 +1,7 @@
 package net.osmand.plus.settings;
 
+import android.content.Context;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.preference.CheckBoxPreference;
@@ -17,18 +19,20 @@ import android.text.style.ClickableSpan;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import net.osmand.Location;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.bottomsheets.ChangeGeneralProfilesPrefBottomSheet;
+import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 
 
 public class CoordinatesFormatFragment extends BaseSettingsFragment {
 
 	public static final String TAG = "CoordinatesFormatFragment";
+
+	private static final String UTM_FORMAT_WIKI_LINK = "https://en.wikipedia.org/wiki/Universal_Transverse_Mercator_coordinate_system";
 
 	private static final String FORMAT_DEGREES = "format_degrees";
 	private static final String FORMAT_MINUTES = "format_minutes";
@@ -47,25 +51,20 @@ public class CoordinatesFormatFragment extends BaseSettingsFragment {
 	}
 
 	@Override
-	protected String getToolbarTitle() {
-		return getString(R.string.coordinates_format);
+	protected int getToolbarTitle() {
+		return R.string.coordinates_format;
 	}
 
 	@Override
 	protected void setupPreferences() {
-		PreferenceScreen screen = getPreferenceScreen();
-		screen.setOrderingAsAdded(false);
-
 		Preference generalSettings = findPreference("coordinates_format_info");
 		generalSettings.setIcon(getContentIcon(R.drawable.ic_action_info_dark));
 
 		CheckBoxPreference degreesPref = (CheckBoxPreference) findPreference(FORMAT_DEGREES);
 		CheckBoxPreference minutesPref = (CheckBoxPreference) findPreference(FORMAT_MINUTES);
 		CheckBoxPreference secondsPref = (CheckBoxPreference) findPreference(FORMAT_SECONDS);
+		CheckBoxPreference utmPref = (CheckBoxPreference) findPreference(UTM_FORMAT);
 		CheckBoxPreference olcPref = (CheckBoxPreference) findPreference(OLC_FORMAT);
-
-		CheckBoxPreference utmPref = createUtmFormatPref();
-		screen.addPreference(utmPref);
 
 		Location loc = app.getLocationProvider().getLastKnownLocation();
 
@@ -80,24 +79,16 @@ public class CoordinatesFormatFragment extends BaseSettingsFragment {
 		updateSelectedFormatPrefs(currentPrefKey);
 	}
 
-	private CheckBoxPreference createUtmFormatPref() {
-		CheckBoxPreference utmPref = new CheckBoxPreference(app) {
+	@Override
+	protected void onBindPreferenceViewHolder(Preference preference, PreferenceViewHolder holder) {
+		super.onBindPreferenceViewHolder(preference, holder);
 
-			@Override
-			public void onBindViewHolder(PreferenceViewHolder holder) {
-				super.onBindViewHolder(holder);
-				TextView summaryView = (TextView) holder.findViewById(android.R.id.summary);
-				if (summaryView != null) {
-					summaryView.setOnTouchListener(getSummaryTouchListener());
-				}
+		if (UTM_FORMAT.equals(preference.getKey())) {
+			TextView summaryView = (TextView) holder.findViewById(android.R.id.summary);
+			if (summaryView != null) {
+				summaryView.setOnTouchListener(getSummaryTouchListener());
 			}
-		};
-		utmPref.setKey(UTM_FORMAT);
-		utmPref.setTitle(R.string.navigate_point_format_utm);
-		utmPref.setPersistent(false);
-		utmPref.setOrder(4);
-		utmPref.setLayoutResource(R.layout.preference_radio_button);
-		return utmPref;
+		}
 	}
 
 	private View.OnTouchListener getSummaryTouchListener() {
@@ -162,7 +153,10 @@ public class CoordinatesFormatFragment extends BaseSettingsFragment {
 			ClickableSpan clickableSpan = new ClickableSpan() {
 				@Override
 				public void onClick(@NonNull View widget) {
-					Toast.makeText(widget.getContext(), getString(R.string.shared_string_read_more), Toast.LENGTH_LONG).show();
+					Context ctx = getContext();
+					if (ctx != null) {
+						WikipediaDialogFragment.showFullArticle(ctx, Uri.parse(UTM_FORMAT_WIKI_LINK), isNightMode());
+					}
 				}
 
 				@Override

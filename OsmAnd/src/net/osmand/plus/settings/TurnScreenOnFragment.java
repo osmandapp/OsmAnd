@@ -1,8 +1,12 @@
 package net.osmand.plus.settings;
 
+import android.graphics.drawable.ColorDrawable;
 import android.support.v14.preference.SwitchPreference;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceViewHolder;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
@@ -22,14 +26,12 @@ public class TurnScreenOnFragment extends BaseSettingsFragment {
 	}
 
 	@Override
-	protected String getToolbarTitle() {
-		return getString(R.string.turn_screen_on);
+	protected int getToolbarTitle() {
+		return R.string.turn_screen_on;
 	}
 
 	@Override
 	protected void setupPreferences() {
-		setupTurnScreenOnPref();
-
 		Preference turnScreenOnInfo = findPreference("turn_screen_on_info");
 		turnScreenOnInfo.setIcon(getContentIcon(R.drawable.ic_action_info_dark));
 
@@ -37,8 +39,16 @@ public class TurnScreenOnFragment extends BaseSettingsFragment {
 		setupTurnScreenOnSensorPref();
 	}
 
-	private void setupTurnScreenOnPref() {
-		SwitchPreference turnScreenOn = (SwitchPreference) findPreference(settings.TURN_SCREEN_ON_ENABLED.getId());
+	@Override
+	protected void onBindPreferenceViewHolder(Preference preference, PreferenceViewHolder holder) {
+		super.onBindPreferenceViewHolder(preference, holder);
+
+		if (settings.TURN_SCREEN_ON_ENABLED.getId().equals(preference.getKey())) {
+			boolean checked = ((SwitchPreference) preference).isChecked();
+			int color = checked ? getActiveProfileColor() : ContextCompat.getColor(app, R.color.preference_top_switch_off);
+
+			AndroidUtils.setBackground(holder.itemView, new ColorDrawable(color));
+		}
 	}
 
 	private void setupTurnScreenOnTimePref() {

@@ -657,7 +657,7 @@ public class MapActivityActions implements DialogProvider {
 						final AppModesBottomSheetDialogFragment fragment = new SelectAppModesBottomSheetDialogFragment();
 						fragment.setUsedOnMap(true);
 						mapActivity.getSupportFragmentManager().beginTransaction()
-								.add(fragment, "app_profile_settings").commitAllowingStateLoss();
+								.add(fragment,  SelectAppModesBottomSheetDialogFragment.TAG).commitAllowingStateLoss();
 						return true;
 					}
 				})

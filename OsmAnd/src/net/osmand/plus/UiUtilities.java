@@ -7,7 +7,6 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.RippleDrawable;
-import android.graphics.drawable.StateListDrawable;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Build;
@@ -71,9 +70,7 @@ public class UiUtilities {
 		Drawable d = drawableCache.get(hash);
 		if (d == null) {
 			d = ContextCompat.getDrawable(app, resId);
-			d = DrawableCompat.wrap(d);
-			d.mutate();
-			DrawableCompat.setTint(d, color);
+			d = tintDrawable(d, color);
 
 			drawableCache.put(hash, d);
 		}
@@ -107,6 +104,42 @@ public class UiUtilities {
 
 	public Drawable getIcon(@DrawableRes int id, boolean light) {
 		return getDrawable(id, light ? R.color.icon_color_default_light : R.color.icon_color_default_dark);
+	}
+
+	public static Drawable getSelectableDrawable(Context ctx) {
+		int bgResId = AndroidUtils.resolveAttribute(ctx, R.attr.selectableItemBackground);
+		if (bgResId != 0) {
+			return ContextCompat.getDrawable(ctx, bgResId);
+		}
+		return null;
+	}
+
+	public static Drawable getColoredSelectableDrawable(Context ctx, int color, float alpha) {
+		Drawable drawable = null;
+		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+			Drawable bg = getSelectableDrawable(ctx);
+			if (bg != null) {
+				drawable = tintDrawable(bg, getColorWithAlpha(color, alpha));
+			}
+		} else {
+			drawable = AndroidUtils.createPressedStateListDrawable(new ColorDrawable(Color.TRANSPARENT), new ColorDrawable(getColorWithAlpha(color, alpha)));
+		}
+		return drawable;
+	}
+
+	public static Drawable tintDrawable(Drawable drawable, int color) {
+		Drawable coloredDrawable = null;
+		if (drawable != null) {
+			coloredDrawable = DrawableCompat.wrap(drawable);
+			coloredDrawable.mutate();
+			if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP && coloredDrawable instanceof RippleDrawable) {
+				((RippleDrawable) coloredDrawable).setColor(ColorStateList.valueOf(color));
+			} else {
+				DrawableCompat.setTint(coloredDrawable, color);
+			}
+		}
+
+		return coloredDrawable;
 	}
 
 	@ColorRes
@@ -154,35 +187,6 @@ public class UiUtilities {
 				((float)(color2 & 0xff )*inverseAmount))) & 0xff;
 
 		return a << ALPHA_CHANNEL | r << RED_CHANNEL | g << GREEN_CHANNEL | b << BLUE_CHANNEL;
-	}
-
-	public static Drawable getAlphaStateDrawable(@ColorInt int colorNoAlpha) {
-		return getAlphaStateDrawable(colorNoAlpha, false, true);
-	}
-	
-	public static Drawable getAlphaStateDrawable(@ColorInt int colorNoAlpha, boolean highlightOnNormal, boolean highlightOnPressed) {
-		int colorAlpha25 = getColorWithAlpha(colorNoAlpha, 0.25f);
-		int colorAlpha30 = getColorWithAlpha(colorNoAlpha, 0.3f);
-		return getAlphaStateDrawableImpl(colorAlpha25, colorAlpha30, highlightOnNormal, highlightOnPressed);
-	}
-
-	public static Drawable getAlphaStateDrawable(@ColorInt int colorBackground, @ColorInt int colorForeground, boolean highlightOnNormal, boolean highlightOnPressed) {
-		int colorAlpha25 = UiUtilities.mixTwoColors(colorForeground, colorBackground, 0.125f);
-		int colorAlpha30 = UiUtilities.mixTwoColors(colorForeground, colorBackground, 0.15f);
-		return getAlphaStateDrawableImpl(colorAlpha25, colorAlpha30, highlightOnNormal, highlightOnPressed);
-	}
-	
-	private static Drawable getAlphaStateDrawableImpl(@ColorInt int colorMode1, @ColorInt int colorMode2, boolean highlightOnNormal, boolean highlightOnPressed) {
-		StateListDrawable sld = new StateListDrawable();
-		if (highlightOnNormal && highlightOnPressed) {
-			sld.addState(new int[]{android.R.attr.state_pressed}, new ColorDrawable(colorMode2));
-			sld.addState(new int[]{}, new ColorDrawable(colorMode1));
-		} else if (highlightOnPressed) {
-			sld.addState(new int[]{android.R.attr.state_pressed}, new ColorDrawable(colorMode1));
-		} else if (highlightOnNormal) {
-			sld.addState(new int[]{}, new ColorDrawable(colorMode1));
-		}
-		return sld;
 	}
 
 	public UpdateLocationViewCache getUpdateLocationViewCache(){

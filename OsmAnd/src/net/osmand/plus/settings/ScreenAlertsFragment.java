@@ -1,8 +1,12 @@
 package net.osmand.plus.settings;
 
+import android.graphics.drawable.ColorDrawable;
 import android.support.v14.preference.SwitchPreference;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceViewHolder;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
 
 public class ScreenAlertsFragment extends BaseSettingsFragment {
@@ -19,14 +23,13 @@ public class ScreenAlertsFragment extends BaseSettingsFragment {
 		return R.layout.profile_preference_toolbar;
 	}
 
-	protected String getToolbarTitle() {
-		return getString(R.string.screen_alerts);
+	@Override
+	protected int getToolbarTitle() {
+		return R.string.screen_alerts;
 	}
 
 	@Override
 	protected void setupPreferences() {
-		setupShowRoutingAlarmsPref();
-
 		Preference showRoutingAlarmsInfo = findPreference("show_routing_alarms_info");
 		SwitchPreference showTrafficWarnings = (SwitchPreference) findPreference(settings.SHOW_TRAFFIC_WARNINGS.getId());
 		SwitchPreference showPedestrian = (SwitchPreference) findPreference(settings.SHOW_PEDESTRIAN.getId());
@@ -40,8 +43,15 @@ public class ScreenAlertsFragment extends BaseSettingsFragment {
 		showTunnels.setIcon(getIcon(R.drawable.list_warnings_tunnel));
 	}
 
-	private void setupShowRoutingAlarmsPref() {
-		SwitchPreference showRoutingAlarms = (SwitchPreference) findPreference(settings.SHOW_ROUTING_ALARMS.getId());
+	@Override
+	protected void onBindPreferenceViewHolder(Preference preference, PreferenceViewHolder holder) {
+		super.onBindPreferenceViewHolder(preference, holder);
 
+		if (settings.SHOW_ROUTING_ALARMS.getId().equals(preference.getKey())) {
+			boolean checked = ((SwitchPreference) preference).isChecked();
+			int color = checked ? getActiveProfileColor() : ContextCompat.getColor(app, R.color.preference_top_switch_off);
+
+			AndroidUtils.setBackground(holder.itemView, new ColorDrawable(color));
+		}
 	}
 }

@@ -13,7 +13,7 @@
 
 	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
 		android:key="show_routing_alarms"
-		android:layout="@layout/preference_dialog_and_switch"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
 		android:summaryOff="@string/shared_string_off"
 		android:summaryOn="@string/shared_string_on"
 		android:title="@string/screen_alerts"
@@ -22,7 +22,7 @@
 
 	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
 		android:key="speak_routing_alarms"
-		android:layout="@layout/preference_dialog_and_switch"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
 		android:summary="@string/voice_announces_descr"
 		android:title="@string/voice_announces"
 		app:fragment="net.osmand.plus.settings.VoiceAnnouncesFragment"
@@ -49,7 +49,7 @@
 
 	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
 		android:key="turn_screen_on_enabled"
-		android:layout="@layout/preference_dialog_and_switch"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
 		android:summaryOff="@string/shared_string_off"
 		android:summaryOn="@string/shared_string_on"
 		android:title="@string/turn_screen_on"

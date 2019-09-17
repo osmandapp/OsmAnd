@@ -2,7 +2,9 @@ package net.osmand.plus;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
@@ -196,13 +198,16 @@ public class ContextMenuAdapter {
 					desc.setText(item.getDescription());
 				}
 				if (layoutId == R.layout.main_menu_drawer_btn_configure_profile) {
-					int colorAlpha50 = UiUtilities.getColorWithAlpha(colorNoAlpha, 0.5f);
 					View fatDivider = convertView.findViewById(R.id.fatDivider);
-					fatDivider.setBackgroundColor(colorAlpha50);
+					fatDivider.setBackgroundColor(colorNoAlpha);
 				}
-				
-				int colorListBackground = ContextCompat.getColor(app, lightTheme ? R.color.list_background_color_light : R.color.list_background_color_dark);
-				convertView.setBackgroundDrawable(UiUtilities.getAlphaStateDrawable(colorListBackground, colorNoAlpha, true, true));
+
+				Drawable selectableBg = UiUtilities.getColoredSelectableDrawable(app, colorNoAlpha, 0.3f);
+				Drawable[] layers = {new ColorDrawable(UiUtilities.getColorWithAlpha(colorNoAlpha, 0.15f)), selectableBg};
+				LayerDrawable layerDrawable = new LayerDrawable(layers);
+
+				AndroidUtils.setBackground(convertView, layerDrawable);
+
 				return convertView;
 			}
 			if (layoutId == R.layout.help_to_improve_item) {

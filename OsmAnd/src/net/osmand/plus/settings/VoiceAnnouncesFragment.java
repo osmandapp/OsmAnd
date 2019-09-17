@@ -4,11 +4,15 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.media.AudioManager;
 import android.support.v14.preference.SwitchPreference;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceViewHolder;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -37,13 +41,12 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 	}
 
 	@Override
-	protected String getToolbarTitle() {
-		return getString(R.string.voice_announces);
+	protected int getToolbarTitle() {
+		return R.string.voice_announces;
 	}
 
+	@Override
 	protected void setupPreferences() {
-		setupSpeakRoutingAlarmsPref();
-
 		Preference voiceAnnouncesInfo = findPreference("voice_announces_info");
 		voiceAnnouncesInfo.setIcon(getContentIcon(R.drawable.ic_action_info_dark));
 
@@ -59,9 +62,16 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 		}
 	}
 
-	private void setupSpeakRoutingAlarmsPref() {
-		SwitchPreference speakRoutingAlarms = (SwitchPreference) findPreference(settings.SPEAK_ROUTING_ALARMS.getId());
+	@Override
+	protected void onBindPreferenceViewHolder(Preference preference, PreferenceViewHolder holder) {
+		super.onBindPreferenceViewHolder(preference, holder);
 
+		if (settings.SPEAK_ROUTING_ALARMS.getId().equals(preference.getKey())) {
+			boolean checked = ((SwitchPreference) preference).isChecked();
+			int color = checked ? getActiveProfileColor() : ContextCompat.getColor(app, R.color.preference_top_switch_off);
+
+			AndroidUtils.setBackground(holder.itemView, new ColorDrawable(color));
+		}
 	}
 
 	private void setupSpeedLimitExceedPref() {

@@ -4,7 +4,6 @@ import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
-import android.support.v14.preference.SwitchPreference;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.preference.Preference;
@@ -42,8 +41,8 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 	}
 
 	@Override
-	protected String getToolbarTitle() {
-		return getString(R.string.general_settings_2);
+	protected int getToolbarTitle() {
+		return R.string.general_settings_2;
 	}
 
 	@Override
