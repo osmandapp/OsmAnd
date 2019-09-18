@@ -9,7 +9,9 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,11 +21,14 @@ import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.OsmandActionBarActivity;
+import net.osmand.plus.activities.ActionBarProgressActivity;
 
 import org.apache.commons.logging.Log;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.ref.WeakReference;
@@ -33,9 +38,13 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-public class LogcatActivity extends OsmandActionBarActivity {
+public class LogcatActivity extends ActionBarProgressActivity {
+
+	public static final String LOGCAT_PATH = "logcat.log";
 
 	public static int MAX_BUFFER_LOG = 1000;
+
+	private static final int SHARE_ID = 0;
 
 	private static final Log log = PlatformUtil.getLog(LogcatActivity.class);
 
@@ -91,11 +100,23 @@ public class LogcatActivity extends OsmandActionBarActivity {
 	}
 
 	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuItem item = menu.add(0, SHARE_ID, 0, R.string.shared_string_export);
+		item.setIcon(R.drawable.ic_action_gshare_dark);
+		item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+
+		return super.onCreateOptionsMenu(menu);
+	}
+
+	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int itemId = item.getItemId();
 		switch (itemId) {
 			case android.R.id.home:
 				finish();
+				return true;
+			case SHARE_ID:
+				startSaveLogsAsyncTask();
 				return true;
 
 		}
@@ -113,12 +134,17 @@ public class LogcatActivity extends OsmandActionBarActivity {
 		});
 	}
 
-	public void startLogcatAsyncTask() {
+	private void startSaveLogsAsyncTask() {
+		SaveLogsAsyncTask saveLogsAsyncTask = new SaveLogsAsyncTask(this, logsMap.values());
+		saveLogsAsyncTask.execute();
+	}
+
+	private void startLogcatAsyncTask() {
 		logcatAsyncTask = new LogcatAsyncTask(this, "*:E");
 		logcatAsyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
-	public void stopLogcatAsyncTask() {
+	private void stopLogcatAsyncTask() {
 		if (logcatAsyncTask != null && logcatAsyncTask.getStatus() == AsyncTask.Status.RUNNING) {
 			logcatAsyncTask.cancel(false);
 			logcatAsyncTask.stopLogging();
@@ -133,7 +159,8 @@ public class LogcatActivity extends OsmandActionBarActivity {
 		@Override
 		public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
 			LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
-			View itemView = inflater.inflate(R.layout.bottom_sheet_item_description_long, viewGroup, false);
+			TextView itemView = (TextView) inflater.inflate(R.layout.bottom_sheet_item_description_long, viewGroup, false);
+			itemView.setGravity(Gravity.CENTER_VERTICAL);
 
 			return new LogViewHolder(itemView);
 		}
@@ -176,6 +203,58 @@ public class LogcatActivity extends OsmandActionBarActivity {
 		}
 	}
 
+	public static class SaveLogsAsyncTask extends AsyncTask<Void, String, File> {
+
+		private WeakReference<LogcatActivity> logcatActivity;
+		private Collection<String> logs;
+
+		SaveLogsAsyncTask(LogcatActivity logcatActivity, Collection<String> logs) {
+			this.logcatActivity = new WeakReference<>(logcatActivity);
+			this.logs = logs;
+		}
+
+		@Override
+		protected void onPreExecute() {
+			LogcatActivity activity = logcatActivity.get();
+			if (activity != null) {
+				activity.setSupportProgressBarIndeterminateVisibility(true);
+			}
+		}
+
+		@Override
+		protected File doInBackground(Void... voids) {
+			File file = logcatActivity.get().getMyApplication().getAppPath(LOGCAT_PATH);
+			try {
+				if (file.exists()) {
+					file.delete();
+				}
+				StringBuilder stringBuilder = new StringBuilder();
+				for (String log : logs) {
+					stringBuilder.append(log);
+					stringBuilder.append("\n");
+				}
+				if (file.getParentFile().canWrite()) {
+					BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
+					writer.write(stringBuilder.toString());
+					writer.close();
+				}
+			} catch (Exception e) {
+				log.error(e);
+			}
+
+			return file;
+		}
+
+		@Override
+		protected void onPostExecute(File file) {
+			LogcatActivity activity = logcatActivity.get();
+			if (activity != null) {
+				activity.setSupportProgressBarIndeterminateVisibility(false);
+				activity.getMyApplication().sendCrashLog(file);
+			}
+		}
+	}
+
 	public static class LogcatAsyncTask extends AsyncTask<Void, String, Void> {
 
 		private Process processLogcat;
@@ -192,7 +271,7 @@ public class LogcatActivity extends OsmandActionBarActivity {
 		protected Void doInBackground(Void... voids) {
 			try {
 				String filter = String.valueOf(android.os.Process.myPid());
-				String[] command = {"logcat", filterLevel, " | grep " + filter, "-T", String.valueOf(MAX_BUFFER_LOG)};
+				String[] command = {"logcat", filterLevel, "--pid=" + filter, "-T", String.valueOf(MAX_BUFFER_LOG)};
 				processLogcat = Runtime.getRuntime().exec(command);
 
 				BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(processLogcat.getInputStream()));
