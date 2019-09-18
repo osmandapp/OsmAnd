@@ -1,17 +1,23 @@
 package net.osmand.plus.settings;
 
-import android.graphics.drawable.ColorDrawable;
+import android.annotation.SuppressLint;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.support.v14.preference.SwitchPreference;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceGroupAdapter;
 import android.support.v7.preference.PreferenceViewHolder;
+import android.widget.ImageView;
 
-import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
 
 public class ScreenAlertsFragment extends BaseSettingsFragment {
 
 	public static final String TAG = "ScreenAlertsFragment";
+
+	private static final String SHOW_ROUTING_ALARMS_INFO = "show_routing_alarms_info";
+	private static final String SCREEN_ALERTS_IMAGE = "screen_alerts_image";
 
 	@Override
 	protected int getPreferencesResId() {
@@ -30,7 +36,7 @@ public class ScreenAlertsFragment extends BaseSettingsFragment {
 
 	@Override
 	protected void setupPreferences() {
-		Preference showRoutingAlarmsInfo = findPreference("show_routing_alarms_info");
+		Preference showRoutingAlarmsInfo = findPreference(SHOW_ROUTING_ALARMS_INFO);
 		SwitchPreference showTrafficWarnings = (SwitchPreference) findPreference(settings.SHOW_TRAFFIC_WARNINGS.getId());
 		SwitchPreference showPedestrian = (SwitchPreference) findPreference(settings.SHOW_PEDESTRIAN.getId());
 		SwitchPreference showCameras = (SwitchPreference) findPreference(settings.SHOW_CAMERAS.getId());
@@ -41,17 +47,69 @@ public class ScreenAlertsFragment extends BaseSettingsFragment {
 		showPedestrian.setIcon(getIcon(R.drawable.list_warnings_pedestrian));
 		showCameras.setIcon(getIcon(R.drawable.list_warnings_speed_camera));
 		showTunnels.setIcon(getIcon(R.drawable.list_warnings_tunnel));
+
+		setupScreenAlertsImage();
 	}
 
 	@Override
 	protected void onBindPreferenceViewHolder(Preference preference, PreferenceViewHolder holder) {
 		super.onBindPreferenceViewHolder(preference, holder);
 
-		if (settings.SHOW_ROUTING_ALARMS.getId().equals(preference.getKey())) {
+		String key = preference.getKey();
+		if (settings.SHOW_ROUTING_ALARMS.getId().equals(key)) {
 			boolean checked = ((SwitchPreference) preference).isChecked();
 			int color = checked ? getActiveProfileColor() : ContextCompat.getColor(app, R.color.preference_top_switch_off);
 
-			AndroidUtils.setBackground(holder.itemView, new ColorDrawable(color));
+			holder.itemView.setBackgroundColor(color);
+		} else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+			if (SHOW_ROUTING_ALARMS_INFO.equals(key)) {
+				int colorRes = isNightMode() ? R.color.activity_background_color_dark : R.color.activity_background_color_light;
+				holder.itemView.setBackgroundColor(ContextCompat.getColor(app, colorRes));
+			} else if (SCREEN_ALERTS_IMAGE.equals(key)) {
+				ImageView deviceImage = (ImageView) holder.itemView.findViewById(R.id.device_image);
+				ImageView warningIcon = (ImageView) holder.itemView.findViewById(R.id.warning_icon);
+
+				deviceImage.setImageDrawable(getDeviceImage());
+				warningIcon.setImageDrawable(getWarningIcon());
+			}
 		}
+	}
+
+	@SuppressLint("RestrictedApi")
+	@Override
+	public boolean onPreferenceClick(Preference preference) {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+			Preference routeParametersImage = findPreference(SCREEN_ALERTS_IMAGE);
+			((PreferenceGroupAdapter) getListView().getAdapter()).onPreferenceChange(routeParametersImage);
+		}
+
+		return super.onPreferenceClick(preference);
+	}
+
+	private void setupScreenAlertsImage() {
+		Preference routeParametersImage = findPreference(SCREEN_ALERTS_IMAGE);
+		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR2) {
+			routeParametersImage.setVisible(false);
+		}
+	}
+
+	private Drawable getDeviceImage() {
+		int bgResId = isNightMode() ? R.drawable.img_settings_device_bottom_dark : R.drawable.img_settings_device_bottom_light;
+		return app.getUIUtilities().getLayeredIcon(bgResId, R.drawable.img_settings_sreen_route_alerts);
+	}
+
+	private Drawable getWarningIcon() {
+		boolean americanSigns = settings.DRIVING_REGION.get().americanSigns;
+		if (settings.SHOW_TRAFFIC_WARNINGS.get()) {
+			return getIcon(americanSigns ? R.drawable.warnings_traffic_calming_us : R.drawable.warnings_traffic_calming);
+		} else if (settings.SHOW_PEDESTRIAN.get()) {
+			return getIcon(americanSigns ? R.drawable.warnings_pedestrian_us : R.drawable.warnings_pedestrian);
+		} else if (settings.SHOW_CAMERAS.get()) {
+			return getIcon(R.drawable.warnings_speed_camera);
+		} else if (settings.SHOW_TUNNELS.get()) {
+			return getIcon(americanSigns ? R.drawable.warnings_tunnel_us : R.drawable.warnings_tunnel);
+		}
+
+		return null;
 	}
 }

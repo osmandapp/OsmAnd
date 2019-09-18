@@ -3,6 +3,12 @@
 	xmlns:tools="http://schemas.android.com/tools">
 
 	<Preference
+		android:key="route_parameters_image"
+		android:layout="@layout/settings_device_image_screen"
+		android:persistent="false"
+		android:selectable="false" />
+
+	<Preference
 		android:key="route_parameters_info"
 		android:layout="@layout/preference_info"
 		android:persistent="false"
