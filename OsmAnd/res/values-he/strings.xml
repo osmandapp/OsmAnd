@@ -3255,4 +3255,22 @@
     <string name="route_parameters_descr">הגדרת מאפייני מסלול</string>
     <string name="route_parameters">מאפייני מסלול</string>
     <string name="application_profile_changed">פרופיל היישומון השתנה לכדי „%s”</string>
+    <string name="routing_attr_allow_skating_only_name">תמיד מסלולים להחלקה בלבד</string>
+    <string name="routing_attr_allow_skating_only_description">מסלולים שעברו גרומינג לסגנון חופשי או להחלקה בלבד רק עם מסלולים קלסיים.</string>
+    <string name="year">שנה</string>
+    <string name="years_2_4">שנים</string>
+    <string name="years_5">שנים</string>
+    <string name="months_3">שלושה חודשים</string>
+    <string name="price_free">חינם</string>
+    <string name="get_discount_title">לקבל את %1$d %2$s ב־%3$s הנחה.</string>
+    <string name="get_free_trial_title">התחלת ההתנסות שלך למשך %1$d %2$s בחינם.</string>
+    <string name="get_discount_first_part">%1$s למשך %2$s הראשונים</string>
+    <string name="get_discount_first_few_part">%1$s למשך %2$s הראשונים</string>
+    <string name="get_discount_second_part">לאחר מכן %1$s</string>
+    <string name="cancel_subscription">ביטול מינוי</string>
+    <string name="price_and_discount">%1$s • חיסכון של %2$s</string>
+    <string name="coordinates_format_info">התצורה הנבחרת תחול על כל המיקומים ביישומון.</string>
+    <string name="pref_selected_by_default_for_profiles">הגדרה זו נבחרת כבררת מחדל על הפרופילים: %s</string>
+    <string name="change_default_settings">החלפת הגדרות בררת מחדל</string>
+    <string name="logcat_buffer">"זיכרון זמני  יומנים"</string>
 </resources>
