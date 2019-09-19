@@ -180,7 +180,7 @@ public class CoordinatesFormatFragment extends BaseSettingsFragment {
 		if (newFormat != -1) {
 			FragmentManager fragmentManager = getFragmentManager();
 			if (fragmentManager != null) {
-				ChangeGeneralProfilesPrefBottomSheet.showInstance(fragmentManager, settings.COORDINATES_FORMAT.getId(), newFormat, this);
+				ChangeGeneralProfilesPrefBottomSheet.showInstance(fragmentManager, settings.COORDINATES_FORMAT.getId(), newFormat, this, false);
 				return false;
 			}
 		}

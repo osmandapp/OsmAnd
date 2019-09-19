@@ -9,6 +9,12 @@
 		android:summaryOn="@string/shared_string_on" />
 
 	<Preference
+		android:key="screen_alerts_image"
+		android:layout="@layout/settings_device_image_screen"
+		android:persistent="false"
+		android:selectable="false" />
+
+	<Preference
 		android:key="show_routing_alarms_info"
 		android:layout="@layout/preference_info"
 		android:selectable="false"

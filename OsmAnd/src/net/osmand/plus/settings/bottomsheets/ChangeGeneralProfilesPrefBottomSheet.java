@@ -41,9 +41,11 @@ public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSh
 		if (app == null || args == null || newValue == null || !args.containsKey(PREFERENCE_ID)) {
 			return;
 		}
+
 		final String prefId = args.getString(PREFERENCE_ID);
 		CommonPreference pref = getPreference(prefId);
-		if (pref == null) {
+		OsmandPreference osmandPref = app.getSettings().getPreference(prefId);
+		if (pref == null || osmandPref == null) {
 			return;
 		}
 
@@ -51,20 +53,16 @@ public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSh
 
 		StringBuilder builder = new StringBuilder();
 		final List<ApplicationMode> values = ApplicationMode.values(app);
-		List<ApplicationMode> appModesSameValue = new ArrayList<>();
+		List<ApplicationMode> appModesDefaultValue = new ArrayList<>();
 
 		for (int i = 0; i < values.size(); i++) {
 			ApplicationMode mode = values.get(i);
-			Object modeValue = pref.getModeValue(mode);
-			if (modeValue instanceof Enum) {
-				modeValue = ((Enum) modeValue).ordinal();
-			}
-			if (modeValue.equals(newValue)) {
-				appModesSameValue.add(mode);
+			if (!osmandPref.isSetForMode(mode)) {
+				appModesDefaultValue.add(mode);
 			}
 		}
 
-		Iterator<ApplicationMode> iterator = appModesSameValue.iterator();
+		Iterator<ApplicationMode> iterator = appModesDefaultValue.iterator();
 		while (iterator.hasNext()) {
 			builder.append(iterator.next().toHumanString(app));
 			builder.append(iterator.hasNext() ? ", " : '.');
@@ -146,7 +144,7 @@ public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSh
 		return null;
 	}
 
-	public static void showInstance(@NonNull FragmentManager fm, String prefId, Object newValue, Fragment target) {
+	public static void showInstance(@NonNull FragmentManager fm, String prefId, Object newValue, Fragment target, boolean usedOnMap) {
 		try {
 			if (fm.findFragmentByTag(ChangeGeneralProfilesPrefBottomSheet.TAG) == null) {
 				Bundle args = new Bundle();
@@ -154,8 +152,9 @@ public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSh
 
 				ChangeGeneralProfilesPrefBottomSheet fragment = new ChangeGeneralProfilesPrefBottomSheet();
 				fragment.setArguments(args);
-				fragment.setTargetFragment(target, 0);
+				fragment.setUsedOnMap(usedOnMap);
 				fragment.newValue = newValue;
+				fragment.setTargetFragment(target, 0);
 				fragment.show(fm, ChangeGeneralProfilesPrefBottomSheet.TAG);
 			}
 		} catch (RuntimeException e) {

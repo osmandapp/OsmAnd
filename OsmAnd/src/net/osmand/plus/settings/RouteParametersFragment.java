@@ -1,9 +1,13 @@
 package net.osmand.plus.settings;
 
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.support.v14.preference.SwitchPreference;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
+import android.support.v7.preference.PreferenceViewHolder;
+import android.widget.ImageView;
 
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
@@ -34,6 +38,8 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 
 	private static final String AVOID_ROUTING_PARAMETER_PREFIX = "avoid_";
 	private static final String PREFER_ROUTING_PARAMETER_PREFIX = "prefer_";
+	private static final String ROUTE_PARAMETERS_INFO = "route_parameters_info";
+	private static final String ROUTE_PARAMETERS_IMAGE = "route_parameters_image";
 	private static final String RELIEF_SMOOTHNESS_FACTOR = "relief_smoothness_factor";
 
 	private List<GeneralRouter.RoutingParameter> avoidParameters = new ArrayList<GeneralRouter.RoutingParameter>();
@@ -58,12 +64,43 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 
 	@Override
 	protected void setupPreferences() {
-		Preference vehicleParametersInfo = findPreference("route_parameters_info");
+		setupRouteParametersImage();
+
+		Preference vehicleParametersInfo = findPreference(ROUTE_PARAMETERS_INFO);
 		vehicleParametersInfo.setIcon(getContentIcon(R.drawable.ic_action_info_dark));
 		vehicleParametersInfo.setTitle(getString(R.string.route_parameters_info, getSelectedAppMode().toHumanString(getContext())));
 
 		setupRoutingPrefs();
 		setupTimeConditionalRoutingPref();
+	}
+
+	@Override
+	protected void onBindPreferenceViewHolder(Preference preference, PreferenceViewHolder holder) {
+		super.onBindPreferenceViewHolder(preference, holder);
+
+		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR2) {
+			return;
+		}
+		String key = preference.getKey();
+		if (ROUTE_PARAMETERS_INFO.equals(key)) {
+			int colorRes = isNightMode() ? R.color.activity_background_color_dark : R.color.activity_background_color_light;
+			holder.itemView.setBackgroundColor(ContextCompat.getColor(app, colorRes));
+		} else if (ROUTE_PARAMETERS_IMAGE.equals(key)) {
+			ImageView imageView = (ImageView) holder.itemView.findViewById(R.id.device_image);
+			if (imageView != null) {
+				int bgResId = isNightMode() ? R.drawable.img_settings_device_bottom_dark : R.drawable.img_settings_device_bottom_light;
+				Drawable layerDrawable = app.getUIUtilities().getLayeredIcon(bgResId, R.drawable.img_settings_sreen_route_parameters);
+
+				imageView.setImageDrawable(layerDrawable);
+			}
+		}
+	}
+
+	private void setupRouteParametersImage() {
+		Preference routeParametersImage = findPreference(ROUTE_PARAMETERS_IMAGE);
+		if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR2) {
+			routeParametersImage.setVisible(false);
+		}
 	}
 
 	private void setupTimeConditionalRoutingPref() {

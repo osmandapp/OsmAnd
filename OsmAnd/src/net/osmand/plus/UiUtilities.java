@@ -85,9 +85,14 @@ public class UiUtilities {
 		return getDrawable(id, colorId);
 	}
 
-	public Drawable getIcon(@DrawableRes int backgroundId, @DrawableRes int id, @ColorRes int colorId) {
-		Drawable b = getDrawable(backgroundId, 0);
-		Drawable f = getDrawable(id, colorId);
+	public Drawable getLayeredIcon(@DrawableRes int bgIconId, @DrawableRes int foregroundIconId) {
+		return getLayeredIcon(bgIconId, foregroundIconId, 0, 0);
+	}
+
+	public Drawable getLayeredIcon(@DrawableRes int bgIconId, @DrawableRes int foregroundIconId,
+	                               @ColorRes int bgColorId, @ColorRes int foregroundColorId) {
+		Drawable b = getDrawable(bgIconId, bgColorId);
+		Drawable f = getDrawable(foregroundIconId, foregroundColorId);
 		Drawable[] layers = new Drawable[2];
 		layers[0] = b;
 		layers[1] = f;

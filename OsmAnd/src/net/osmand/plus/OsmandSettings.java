@@ -81,6 +81,8 @@ public class OsmandSettings {
 		void removeListener(StateChangedListener<T> listener);
 
 		boolean isSet();
+
+		boolean isSetForMode(ApplicationMode m);
 	}
 
 	private abstract class PreferenceWithListener<T> implements OsmandPreference<T> {
@@ -326,12 +328,11 @@ public class OsmandSettings {
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<ApplicationMode> APPLICATION_MODE = new PreferenceWithListener<ApplicationMode>() {
+
 		@Override
 		public String getId() {
 			return "application_mode";
 		}
-
-		;
 
 		@Override
 		public ApplicationMode get() {
@@ -348,14 +349,15 @@ public class OsmandSettings {
 			set(ApplicationMode.DEFAULT);
 		}
 
-		;
-
 		@Override
 		public boolean isSet() {
 			return true;
 		}
 
-		;
+		@Override
+		public boolean isSetForMode(ApplicationMode m) {
+			return true;
+		}
 
 		@Override
 		public boolean set(ApplicationMode val) {
@@ -582,6 +584,9 @@ public class OsmandSettings {
 			return settingsAPI.contains(getPreferences(), getId());
 		}
 
+		public boolean isSetForMode(ApplicationMode mode) {
+			return settingsAPI.contains(getProfilePreferences(mode), getId());
+		}
 	}
 
 	public class BooleanPreference extends CommonPreference<Boolean> {

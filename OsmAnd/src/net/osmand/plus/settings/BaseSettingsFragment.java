@@ -164,26 +164,19 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 
 	@Override
 	public void onDisplayPreferenceDialog(Preference preference) {
+		FragmentManager fragmentManager = getFragmentManager();
+		if (fragmentManager == null) {
+			return;
+		}
+
 		if (preference instanceof ListPreferenceEx) {
-			FragmentManager fragmentManager = getFragmentManager();
-			if (fragmentManager != null) {
-				SingleSelectPreferenceBottomSheet.showInstance(fragmentManager, preference.getKey(), this);
-			}
+			SingleSelectPreferenceBottomSheet.showInstance(fragmentManager, preference.getKey(), this, false);
 		} else if (preference instanceof SwitchPreferenceEx) {
-			FragmentManager fragmentManager = getFragmentManager();
-			if (fragmentManager != null) {
-				BooleanPreferenceBottomSheet.showInstance(fragmentManager, preference.getKey(), this);
-			}
+			BooleanPreferenceBottomSheet.showInstance(fragmentManager, preference.getKey(), this, false);
 		} else if (preference instanceof EditTextPreference) {
-			FragmentManager fragmentManager = getFragmentManager();
-			if (fragmentManager != null) {
-				EditTextPreferenceBottomSheet.showInstance(fragmentManager, preference.getKey(), this);
-			}
+			EditTextPreferenceBottomSheet.showInstance(fragmentManager, preference.getKey(), this, false);
 		} else if (preference instanceof MultiSelectBooleanPreference) {
-			FragmentManager fragmentManager = getFragmentManager();
-			if (fragmentManager != null) {
-				MultiSelectPreferencesBottomSheet.showInstance(getFragmentManager(), preference.getKey(), this);
-			}
+			MultiSelectPreferencesBottomSheet.showInstance(fragmentManager, preference.getKey(), this, false);
 		} else {
 			super.onDisplayPreferenceDialog(preference);
 		}
