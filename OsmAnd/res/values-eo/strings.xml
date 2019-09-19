@@ -3269,4 +3269,5 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="route_parameters_descr">Agordi parametroj de navigo</string>
     <string name="route_parameters">Parametroj de navigo</string>
     <string name="application_profile_changed">Profilo de aplikaĵo ŝanĝita al “%s”</string>
+    <string name="logcat_buffer">Bufro logcat</string>
 </resources>

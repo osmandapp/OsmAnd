@@ -3287,4 +3287,5 @@ Lon %2$s</string>
     <string name="route_parameters_descr">Configurar parámetros de ruta</string>
     <string name="route_parameters">Parámetros de ruta</string>
     <string name="application_profile_changed">Perfil de aplicación cambiado a «%s»</string>
+    <string name="logcat_buffer">Búfer de Logcat</string>
 </resources>
