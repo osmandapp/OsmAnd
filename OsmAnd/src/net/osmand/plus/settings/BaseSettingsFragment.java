@@ -26,6 +26,7 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.Preference.OnPreferenceChangeListener;
 import android.support.v7.preference.Preference.OnPreferenceClickListener;
 import android.support.v7.preference.PreferenceFragmentCompat;
+import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceGroupAdapter;
 import android.support.v7.preference.PreferenceScreen;
 import android.support.v7.preference.PreferenceViewHolder;
@@ -299,19 +300,21 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		if (getSelectedAppMode() != null) {
 			int resId = getPreferencesResId();
 			if (resId != -1) {
-				addPreferencesFromResource(getPreferencesResId());
+				addPreferencesFromResource(resId);
 				setupPreferences();
-				registerPreferences();
+				registerPreferences(getPreferenceScreen());
 			}
 		}
 	}
 
-	private void registerPreferences() {
-		PreferenceScreen screen = getPreferenceScreen();
-		if (screen != null) {
-			for (int i = 0; i < screen.getPreferenceCount(); i++) {
-				Preference preference = screen.getPreference(i);
+	private void registerPreferences(PreferenceGroup preferenceGroup) {
+		if (preferenceGroup != null) {
+			for (int i = 0; i < preferenceGroup.getPreferenceCount(); i++) {
+				Preference preference = preferenceGroup.getPreference(i);
 				registerPreference(preference);
+				if (preference instanceof PreferenceGroup) {
+					registerPreferences((PreferenceGroup) preference);
+				}
 			}
 		}
 	}
