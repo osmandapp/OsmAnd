@@ -1011,7 +1011,7 @@
     <string name="vector_data_missing">برای استفاده از نقشه‌های آفلاین، داده‌های «آفلاین» را دانلود کنید.</string>
     <string name="local_index_gpx_info_show">"
 \n
-\nبرای دسترسی به گزینه‌ها چند لحظه انگشت خود را روی نمایشگر نگه دارید"</string>
+\nبرای دسترسی به گزینه‌ها طولانی لمس کنید"</string>
     <string name="local_index_items_backuped">%1$d مورد از %2$d مورد غیرفعال شد.</string>
     <string name="local_index_items_deleted">%1$d مورد از %2$d مورد حذف شد.</string>
     <string name="local_index_items_restored">%1$d مورد از %2$d مورد فعال شد.</string>
@@ -1399,7 +1399,7 @@
     <string name="shared_string_show_all">نمایش همه</string>
     <string name="coordinates">مختصات</string>
     <string name="rendering_attr_tramTrainRoutes_name">مسیرهای تراموا و قطار</string>
-    <string name="wake_on_voice">روشن‌شدن نمایشگر</string>
+    <string name="wake_on_voice">نمایشگر روشن شود</string>
     <string name="dash_download_manage">مدیریت</string>
     <string name="dash_download_new_one">دانلود نقشهٔ جدید</string>
     <string name="dash_download_msg">شما %1$s نقشه دانلود کرده‌اید</string>
@@ -2349,7 +2349,7 @@
     <string name="do_not_send_anonymous_app_usage_desc">‏OsmAnd دربارهٔ قسمت‌هایی از برنامه که باز می‌کنید، اطلاعاتی جمع‌آوری می‌کند. موقعیت شما هرگز ارسال نمی‌شود و همچنین هر چیزی که در برنامه بنویسید یا جزئیات مناطقی که مشاهده، جست‌وجو یا دانلود می‌کنید، ارسال نمی‌شود.</string>
     <string name="do_not_show_startup_messages_desc">تخفیف‌های برنامه و اخبار اتفاقاتِ ویژهٔ محلی را نشان نمی‌دهد.</string>
     <string name="routing_attr_relief_smoothness_factor_more_plains_name">هموار</string>
-    <string name="route_points_category_name">نقاطی که در این مسیر بر سر راهتان است</string>
+    <string name="route_points_category_name">پیچ‌هایی که در این مسیر می‌گذرانید</string>
     <string name="shared_string_time_moving">مدت حرکت</string>
     <string name="auto_split_recording_descr">بعد از ۶ دقیقه وقفه، بخش جدید شروع می‌شود. بعد از ۲ ساعت وقفه، رد جدید شروع می‌شود. بعد از وقفهٔ طولانی‌تر در صورتی که تاریخ تغییر کند فایل جدید ایجاد می‌شود.</string>
     <string name="upload_osm_note_description">یادداشت‌های OSM خود را به‌صورت ناشناس یا با نام کاربری‌تان در سایت OpenStreetMap.org، آپلود کنید.</string>
@@ -2835,7 +2835,7 @@
     <string name="shared_string_gpx_files">فایل‌های GPX</string>
     <string name="get_osmand_live">‏‏OsmAnd Live را تهیه کنید تا همهٔ این قابلیت‌ها باز شود: به‌روزآوری روزانهٔ نقشه و دانلودهای نامحدود، همهٔ افزونه‌های رایگان و پولی، ویکی‌پدیا، ویکی‌سفر و...</string>
     <string name="quick_action_edit_actions">ویرایش عملیات</string>
-    <string name="error_notification_desc">لطفاً از این اعلان عکس بگیرید و به support@osmand.net بفرستید</string>
+    <string name="error_notification_desc">لطفاً یک نماگرفت از این اعلان به support@osmand.net بفرستید</string>
     <string name="coord_input_edit_point">اصلاح نقطه</string>
     <string name="coord_input_add_point">افزودن نقطه</string>
     <string name="coord_input_save_as_track">ذخیره به‌عنوان رد</string>
@@ -3144,20 +3144,22 @@
     <string name="new_profile">پروفایل جدید</string>
     <string name="last_launch_crashed">آخرین اجرای OsmAnd با شکست مواجه شد. لطفاً با اشتراک‌گذاری پیغام خطا ما را در بهبود OsmAnd یاری کنید.</string>
     <string name="release_3_4">"• پروفایل‌های برنامه: متناسب با نیاز خود پروفایل سفارشی بسازید؛ با رنگ و نماد دلخواه 
-\n
+\n 
 \n • برای هر پروفایل پیشفرض‌ها و سرعت‌های حداقل/حداکثر  را به‌دلخواه تنظیم کنید 
+\n 
+\n • یک ابزارک برای نمایش مختصات کنونی اضافه شد
+\n 
+\n • گزینه‌های جدید برای نمایش قطب‌نما و خط‌کش شعاعی روی نقشه اضافه شد
+\n 
+\n • ردنگاری در پس‌زمینه اصلاح شد
 \n
-\n • یک ابزارک برای نمایش مختصات کنونی اضافه شده 
+\n• دانلود نقشه در پس‌زمینه بهبود یافت 
+\n 
+\n• گزینهٔ «نمایشگر روشن شود» برگردانده شد
 \n
-\n • گزینه‌های جدید برای نمایش قطب‌نما و خط‌کش شعاعی روی نقشه اضافه شده
-\n
-\n • ضبط رد در پس‌زمینه اصلاح شد
-\n
-\n • دانلود نقشه در پس‌زمینه بهبود یافت
-\n
-\n • انتخاب زبان ویکی‌پدیا اصلاح شد
-\n
-\n • رفتار دکمهٔ قطب‌نما در هنگام مسیریابی اصلاح شد
+\n • انتخاب زبان ویکی‌پدیا اصلاح شد 
+\n 
+\n • رفتار دکمهٔ قطب‌نما در هنگام مسیریابی اصلاح شد 
 \n 
 \n •  اصلاح سایر باگ‌ها
 \n
@@ -3166,7 +3168,7 @@
     <string name="edit_profile_setup_title">تنظیم پروفایل</string>
     <string name="edit_profile_setup_subtitle">پروفایل تنظیمات خودش را نگه می‌دارد</string>
     <string name="edit_profile_setup_map_subtitle">انتخاب گزینه‌های پیشفرض نقشه برای پروفایل</string>
-    <string name="edit_profile_screen_options_subtitle">انتخاب گزینه‌های پیشفرض صفحه برای پروفایل</string>
+    <string name="edit_profile_screen_options_subtitle">"انتخاب گزینه‌های پیشفرض  نمایشگر برای پروفایل"</string>
     <string name="edit_profile_nav_settings_subtitle">انتخاب تنظیمات پیشفرض ناوبری برای پروفایل</string>
     <string name="app_mode_ufo">بشقاب‌پرنده</string>
     <string name="app_mode_personal_transporter">رانَک (وسیلهٔ نقلیهٔ انفرادی)</string>
@@ -3201,8 +3203,7 @@
     <string name="precision_hdop_and_vdop">"دقت افقی:  %1$s، عمودی:  %2$s"</string>
     <string name="precision_hdop">دقت افقی: %s</string>
     <string name="turn_screen_on_router">بیدارباش هنگام دورزدن</string>
-    <string name="turn_screen_on_time_descr">زمان روشن‌شدن
-\nنمایشگر را تنظیم کنید.</string>
+    <string name="turn_screen_on_time_descr">زمان روشن‌شدن نمایشگر را تنظیم کنید.</string>
     <string name="turn_screen_on_sensor">استفاده از حسگر مجاورت</string>
     <string name="turn_screen_on_sensor_descr">در هنگام ناوبری، دست خود را بر فراز نمایشگر تکان دهید تا نمایشگر روشن شود.</string>
     <string name="rendering_attr_highway_class_track_grade1_name">سطح ۱</string>
@@ -3279,7 +3280,7 @@
     <string name="map_look">چهرهٔ نقشه</string>
     <string name="list_of_installed_plugins">فهرست افزونه‌های نصب‌شده</string>
     <string name="configure_navigation">پیکربندی ناوبری</string>
-    <string name="screen_alerts_descr">در هنگام ناوبری، هشدارها در گوشهٔ پایین چپ از صفحه ظاهر می‌شوند.</string>
+    <string name="screen_alerts_descr">در هنگام ناوبری، هشدارها در گوشهٔ پایین چپ صفحه ظاهر می‌شوند.</string>
     <string name="switch_profile">تعویض پروفایل</string>
     <string name="language_and_output">زبان و خروجی</string>
     <string name="reset_to_default">بازنشانی به پیشفرض</string>
@@ -3309,4 +3310,13 @@
     <string name="voice_announces">پیام‌های گفتاری</string>
     <string name="screen_alerts">هشدارهای نمایشگر</string>
     <string name="application_profile_changed">پروفایل برنامه به «%s» تغییر کرد</string>
+    <string name="pref_selected_by_default_for_profiles">این تنظیم به‌طور پیشفرض برای این پروفایل‌ها انتخاب شده: %s</string>
+    <string name="change_default_settings">تغییر تنظیمات پیشفرض</string>
+    <string name="discard_changes">انصراف از تغییرات</string>
+    <string name="turn_screen_on_info">در هنگام ناوبری، نقشه را روی صفحهٔ قفل نمایش بده.</string>
+    <string name="route_parameters_info">این تنظیمات روی مسیریابی اثرگذار است. فقط برای پروفایل انتخاب‌شده به کار گرفته خواهد شد: %1$s.</string>
+    <string name="turn_screen_on">نمایشگر روشن شود</string>
+    <string name="map_during_navigation_info">نقشه در هنگام ناوبری</string>
+    <string name="map_during_navigation">نقشه در هنگام ناوبری</string>
+    <string name="plugins_settings">تنظیمات افزونه</string>
 </resources>
