@@ -279,10 +279,15 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 
 	@Override
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
-		FragmentManager fragmentManager = getFragmentManager();
-		if (fragmentManager != null) {
-			ChangeGeneralProfilesPrefBottomSheet.showInstance(fragmentManager, preference.getKey(), newValue, this, false);
+		OsmandSettings.OsmandPreference pref = settings.getPreference(preference.getKey());
+		if (pref != null && !pref.isSetForMode(getSelectedAppMode())) {
+			FragmentManager fragmentManager = getFragmentManager();
+			if (fragmentManager != null) {
+				ChangeGeneralProfilesPrefBottomSheet.showInstance(fragmentManager, preference.getKey(), newValue, this, false);
+			}
+			return false;
 		}
-		return false;
+
+		return true;
 	}
 }
