@@ -8,6 +8,7 @@ import android.graphics.Paint.Join;
 import android.graphics.Paint.Style;
 import android.graphics.Path;
 import android.graphics.PointF;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextPaint;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
@@ -26,6 +27,8 @@ import net.osmand.plus.activities.LocalIndexHelper;
 import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.download.DownloadActivityType;
+import net.osmand.plus.download.ui.DownloadMapDialogManager;
+import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
@@ -51,6 +54,8 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 
 	private OsmandApplication app;
 	private OsmandMapTileView view;
+	private AppCompatActivity mapActivity;
+	private DownloadMapDialogManager downloadDialogManager;
 	private Paint paintDownloaded;
 	private Path pathDownloaded;
 	private Paint paintSelected;
@@ -73,6 +78,13 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 	private static int ZOOM_TO_SHOW_BORDERS = 7;
 	private static int ZOOM_TO_SHOW_SELECTION_ST = 3;
 	private static int ZOOM_TO_SHOW_SELECTION = 8;
+	private static int ZOOM_MIN_TO_SHOW_DOWNLOAD_DIALOG = 9;
+	private static int ZOOM_MAX_TO_SHOW_DOWNLOAD_DIALOG = 11;
+
+	public DownloadedRegionsLayer(AppCompatActivity activity) {
+		this.mapActivity = activity;
+		this.downloadDialogManager = new DownloadMapDialogManager();
+	}
 
 	public static class DownloadMapObject {
 		private BinaryMapDataObject dataObject;
@@ -180,6 +192,10 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 		if(zoom < ZOOM_TO_SHOW_SELECTION_ST) {
 			return;
 		}
+		
+		//check has location got a map to download
+		checkMapToDownload(zoom, data.results);
+		
 		// draw objects
 		if (osmandRegions.isInitialized() && zoom >= ZOOM_TO_SHOW_SELECTION_ST && zoom < ZOOM_TO_SHOW_SELECTION) {
 			final List<BinaryMapDataObject> currentObjects = new LinkedList<>();
@@ -330,6 +346,61 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 			empty = cState <= 1;
 		}
 		return empty;
+	}
+
+	private void checkMapToDownload(int zoom, List<BinaryMapDataObject> currentObjects) {
+		boolean found = false;
+		if (zoom >= ZOOM_MIN_TO_SHOW_DOWNLOAD_DIALOG && zoom <= ZOOM_MAX_TO_SHOW_DOWNLOAD_DIALOG
+				&& currentObjects != null) {
+			IndexItem indexItem = null;
+			String name = null;
+			WorldRegion regionData = null;
+			int cx = view.getCurrentRotatedTileBox().getCenter31X();
+			int cy = view.getCurrentRotatedTileBox().getCenter31Y();
+			for (int i = 0; i < currentObjects.size(); i++) {
+				final BinaryMapDataObject o = currentObjects.get(i);
+				if (!osmandRegions.contain(o, cx, cy)) {
+					continue;
+				}
+				String fullName = osmandRegions.getFullName(o);
+				regionData = osmandRegions.getRegionData(fullName);
+				if (regionData != null && regionData.isRegionMapDownload()) {
+					String regionDownloadName = regionData.getRegionDownloadName();
+					if (regionDownloadName != null && checkIfObjectDownloaded(regionDownloadName)) {
+						downloadDialogManager.hideDialog(getActivity());
+						return;
+					}
+				}
+			}
+
+			BinaryMapDataObject smallestRegion = null;
+			try {
+				smallestRegion = app.getRegions().getSmallestBinaryMapDataObjectAt(currentObjects);
+			} catch (IOException e) {
+				downloadDialogManager.hideDialog(mapActivity);
+			}
+			String fullName = osmandRegions.getFullName(smallestRegion);
+			regionData = osmandRegions.getRegionData(fullName);
+
+			DownloadIndexesThread downloadThread = app.getDownloadThread();
+			List<IndexItem> indexItems = downloadThread.getIndexes().getIndexItems(regionData);
+			for (IndexItem item : indexItems) {
+				if (item.getType() == DownloadActivityType.NORMAL_FILE
+						&& !(item.isDownloaded() || downloadThread.isDownloading(item))) {
+					found = true;
+					indexItem = item;
+					name = regionData.getLocaleName();
+					break;
+				}
+			}
+			if (found) {
+				downloadDialogManager.showDialog(getActivity(), indexItem, name, true);
+			} else {
+				downloadDialogManager.hideDialog(getActivity());
+			}
+		} else {
+			downloadDialogManager.hideDialog(getActivity());
+		}
 	}
 
 	@Override
@@ -555,6 +626,10 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 	@Override
 	public void clearSelectedObject() {
 		selectedObjects = new LinkedList<>();
+	}
+	
+	protected AppCompatActivity getActivity() {
+		return mapActivity;
 	}
 
 }

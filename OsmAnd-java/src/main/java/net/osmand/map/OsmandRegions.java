@@ -707,6 +707,10 @@ public class OsmandRegions {
 
 	public BinaryMapDataObject getSmallestBinaryMapDataObjectAt(LatLon latLon) throws IOException {
 		List<BinaryMapDataObject> mapDataObjects = getBinaryMapDataObjectsAt(latLon);
+		return getSmallestBinaryMapDataObjectAt(mapDataObjects);
+	}
+
+	public BinaryMapDataObject getSmallestBinaryMapDataObjectAt(List<BinaryMapDataObject> mapDataObjects) throws IOException {
 		BinaryMapDataObject res = null;
 		double smallestArea = -1;
 		for (BinaryMapDataObject o : mapDataObjects) {

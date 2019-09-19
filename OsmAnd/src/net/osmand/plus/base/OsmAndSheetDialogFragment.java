@@ -10,6 +10,7 @@ import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +21,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 
-public abstract class BottomSheetDialogFragment extends DialogFragment {
+public abstract class OsmAndSheetDialogFragment extends DialogFragment {
 
 	private OnDialogFragmentResultListener dialogFragmentResultListener;
 
@@ -32,13 +33,13 @@ public abstract class BottomSheetDialogFragment extends DialogFragment {
 		OsmandSettings settings = app.getSettings();
 		int themeId = settings.isLightContent() ? R.style.OsmandLightTheme_BottomSheet : R.style.OsmandDarkTheme_BottomSheet;
 
-		BottomSheetDialog dialog = new BottomSheetDialog(context, themeId);
-		dialog.setCanceledOnTouchOutside(true);
+		OsmandSheetDialog dialog = new OsmandSheetDialog(context, themeId, getSheetDialogType());
+		dialog.setCanceledOnTouchOutside(getCancelOnTouchOutside());
+		dialog.setInteractWithOutside(getInteractWithOutside());
 		Window window = dialog.getWindow();
-		if (!settings.DO_NOT_USE_ANIMATIONS.get() && window != null) {
-			window.getAttributes().windowAnimations = R.style.Animations_PopUpMenu_Bottom;
+		if (window != null && !settings.DO_NOT_USE_ANIMATIONS.get()) {
+			window.getAttributes().windowAnimations = getSheetDialogType().getAnimationStyleResId();
 		}
-
 		return dialog;
 	}
 
@@ -58,6 +59,16 @@ public abstract class BottomSheetDialogFragment extends DialogFragment {
 	public void onDetach() {
 		super.onDetach();
 		dialogFragmentResultListener = null;
+	}
+
+	@Override
+	public void onStart() {
+		super.onStart();
+		final Window window = getDialog().getWindow();
+		FragmentActivity activity = requireActivity();
+		if (window != null) {
+			window.setDimAmount(getBackgroundDimAmount());
+		}
 	}
 
 	@Nullable
@@ -98,5 +109,21 @@ public abstract class BottomSheetDialogFragment extends DialogFragment {
 		} else {
 			return null;
 		}
+	}
+	
+	protected SheetDialogType getSheetDialogType() {
+		return SheetDialogType.BOTTOM;
+	}
+	
+	protected boolean getCancelOnTouchOutside() {
+		return true;
+	}
+	
+	protected boolean getInteractWithOutside() {
+		return false;
+	}
+
+	protected float getBackgroundDimAmount() {
+		return 0.3f;
 	}
 }

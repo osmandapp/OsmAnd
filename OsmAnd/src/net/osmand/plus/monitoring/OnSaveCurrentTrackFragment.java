@@ -19,11 +19,11 @@ import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.base.BottomSheetDialogFragment;
+import net.osmand.plus.base.OsmAndSheetDialogFragment;
 import net.osmand.plus.myplaces.AvailableGPXFragment;
 import net.osmand.plus.myplaces.AvailableGPXFragment.GpxInfo;
 
-public class OnSaveCurrentTrackFragment extends BottomSheetDialogFragment {
+public class OnSaveCurrentTrackFragment extends OsmAndSheetDialogFragment {
 
 	public static final String TAG = "OnSaveCurrentTrackBottomSheetFragment";
 	public static final String SAVED_TRACK_KEY = "saved_track_filename";

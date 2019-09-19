@@ -26,7 +26,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityLayers;
-import net.osmand.plus.base.BottomSheetDialogFragment;
+import net.osmand.plus.base.OsmAndSheetDialogFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.MapTileLayer;
@@ -272,7 +272,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 		return false;
 	}
 
-	public static class MapillaryFirstDialogFragment extends BottomSheetDialogFragment {
+	public static class MapillaryFirstDialogFragment extends OsmAndSheetDialogFragment {
 		public static final String TAG = "MapillaryFirstDialogFragment";
 
 		private static final String KEY_SHOW_WIDGET = "key_show_widget";

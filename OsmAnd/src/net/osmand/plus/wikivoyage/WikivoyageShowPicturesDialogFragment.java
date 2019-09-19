@@ -19,10 +19,10 @@ import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings.WikiArticleShowImages;
 import net.osmand.plus.R;
-import net.osmand.plus.base.BottomSheetDialogFragment;
+import net.osmand.plus.base.OsmAndSheetDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 
-public class WikivoyageShowPicturesDialogFragment extends BottomSheetDialogFragment {
+public class WikivoyageShowPicturesDialogFragment extends OsmAndSheetDialogFragment {
 
 	public static final String TAG = WikivoyageShowPicturesDialogFragment.class.getSimpleName();
 

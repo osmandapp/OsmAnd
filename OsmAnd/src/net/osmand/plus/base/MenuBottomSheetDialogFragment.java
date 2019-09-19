@@ -33,7 +33,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFragment {
+public abstract class MenuBottomSheetDialogFragment extends OsmAndSheetDialogFragment {
 
 	private static final String USED_ON_MAP_KEY = "used_on_map";
 	private static final int DEFAULT_VALUE = -1;
