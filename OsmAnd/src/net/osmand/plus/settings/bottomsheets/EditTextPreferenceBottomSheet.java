@@ -81,14 +81,15 @@ public class EditTextPreferenceBottomSheet extends BasePreferenceBottomSheet {
 		return (EditTextPreferenceEx) getPreference();
 	}
 
-	public static boolean showInstance(@NonNull FragmentManager fragmentManager, String key, Fragment target) {
+	public static boolean showInstance(@NonNull FragmentManager fragmentManager, String key, Fragment target, boolean usedOnMap) {
 		try {
 			Bundle args = new Bundle();
 			args.putString(PREFERENCE_ID, key);
 
 			EditTextPreferenceBottomSheet fragment = new EditTextPreferenceBottomSheet();
-			fragment.setTargetFragment(target, 0);
 			fragment.setArguments(args);
+			fragment.setUsedOnMap(usedOnMap);
+			fragment.setTargetFragment(target, 0);
 			fragment.show(fragmentManager, TAG);
 			return true;
 		} catch (RuntimeException e) {

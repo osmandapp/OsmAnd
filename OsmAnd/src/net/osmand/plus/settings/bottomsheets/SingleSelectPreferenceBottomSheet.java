@@ -127,14 +127,15 @@ public class SingleSelectPreferenceBottomSheet extends BasePreferenceBottomSheet
 		return (ListPreferenceEx) getPreference();
 	}
 
-	public static boolean showInstance(@NonNull FragmentManager fragmentManager, String key, Fragment target) {
+	public static boolean showInstance(@NonNull FragmentManager fragmentManager, String key, Fragment target, boolean usedOnMap) {
 		try {
 			Bundle args = new Bundle();
 			args.putString(PREFERENCE_ID, key);
 
 			SingleSelectPreferenceBottomSheet fragment = new SingleSelectPreferenceBottomSheet();
-			fragment.setTargetFragment(target, 0);
 			fragment.setArguments(args);
+			fragment.setUsedOnMap(usedOnMap);
+			fragment.setTargetFragment(target, 0);
 			fragment.show(fragmentManager, TAG);
 			return true;
 		} catch (RuntimeException e) {

@@ -170,13 +170,13 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		}
 
 		if (preference instanceof ListPreferenceEx) {
-			SingleSelectPreferenceBottomSheet.showInstance(fragmentManager, preference.getKey(), this);
+			SingleSelectPreferenceBottomSheet.showInstance(fragmentManager, preference.getKey(), this, false);
 		} else if (preference instanceof SwitchPreferenceEx) {
-			BooleanPreferenceBottomSheet.showInstance(fragmentManager, preference.getKey(), this);
+			BooleanPreferenceBottomSheet.showInstance(fragmentManager, preference.getKey(), this, false);
 		} else if (preference instanceof EditTextPreference) {
-			EditTextPreferenceBottomSheet.showInstance(fragmentManager, preference.getKey(), this);
+			EditTextPreferenceBottomSheet.showInstance(fragmentManager, preference.getKey(), this, false);
 		} else if (preference instanceof MultiSelectBooleanPreference) {
-			MultiSelectPreferencesBottomSheet.showInstance(fragmentManager, preference.getKey(), this);
+			MultiSelectPreferencesBottomSheet.showInstance(fragmentManager, preference.getKey(), this, false);
 		} else {
 			super.onDisplayPreferenceDialog(preference);
 		}

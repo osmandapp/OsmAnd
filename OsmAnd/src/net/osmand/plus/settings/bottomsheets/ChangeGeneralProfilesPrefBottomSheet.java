@@ -146,7 +146,7 @@ public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSh
 		return null;
 	}
 
-	public static void showInstance(@NonNull FragmentManager fm, String prefId, Object newValue, Fragment target) {
+	public static void showInstance(@NonNull FragmentManager fm, String prefId, Object newValue, Fragment target, boolean usedOnMap) {
 		try {
 			if (fm.findFragmentByTag(ChangeGeneralProfilesPrefBottomSheet.TAG) == null) {
 				Bundle args = new Bundle();
@@ -154,8 +154,9 @@ public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSh
 
 				ChangeGeneralProfilesPrefBottomSheet fragment = new ChangeGeneralProfilesPrefBottomSheet();
 				fragment.setArguments(args);
-				fragment.setTargetFragment(target, 0);
+				fragment.setUsedOnMap(usedOnMap);
 				fragment.newValue = newValue;
+				fragment.setTargetFragment(target, 0);
 				fragment.show(fm, ChangeGeneralProfilesPrefBottomSheet.TAG);
 			}
 		} catch (RuntimeException e) {

@@ -151,14 +151,15 @@ public class MultiSelectPreferencesBottomSheet extends BasePreferenceBottomSheet
 		return (MultiSelectBooleanPreference) getPreference();
 	}
 
-	public static boolean showInstance(@NonNull FragmentManager fragmentManager, String prefId, Fragment target) {
+	public static boolean showInstance(@NonNull FragmentManager fragmentManager, String prefId, Fragment target, boolean usedOnMap) {
 		try {
 			Bundle args = new Bundle();
 			args.putString(PREFERENCE_ID, prefId);
 
 			MultiSelectPreferencesBottomSheet fragment = new MultiSelectPreferencesBottomSheet();
-			fragment.setTargetFragment(target, 0);
 			fragment.setArguments(args);
+			fragment.setUsedOnMap(usedOnMap);
+			fragment.setTargetFragment(target, 0);
 			fragment.show(fragmentManager, TAG);
 			return true;
 		} catch (RuntimeException e) {
