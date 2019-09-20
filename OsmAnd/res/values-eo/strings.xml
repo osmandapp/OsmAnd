@@ -534,7 +534,7 @@ Lon: %2$s</string>
 \n 
 \nRegistritaj spuroj povas esti kunhavigataj kun viaj amikoj aŭ esti uzita por kontribui al OSM. Atletoj povas uzi registritajn spurojn por kontroli siajn ekzercojn. Kelkaj bazaj ecoj oni povas analizi senpere per OsmAnd, kiel: tempoj de ĉirkaŭoj, mezumaj rapidoj, ktp; kaj kursoj oni povas poste analizi per specialaj eksteraj programoj.</string>
     <string name="use_opengl_render">Uzi OpenGL-bildigadon</string>
-    <string name="use_opengl_render_descr">Uzi aparatan plirapidigan OpenGL-bildigadon (povas eluzi pli da pilo aŭ ne funkcii ĉe tre malnovaj aparatoj).</string>
+    <string name="use_opengl_render_descr">Uzi aparatan plirapidigan OpenGL-bildigadon (povas eluzi pli da baterio aŭ ne funkcii ĉe tre malnovaj aparatoj).</string>
     <string name="error_avoid_specific_road">Ne trovis ĉirkaŭvojon</string>
     <string name="home_button">Hejmo</string>
     <string name="map_update">Ĝisdatigoj disponeblaj por %1$s mapoj</string>
@@ -3270,4 +3270,5 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="route_parameters">Parametroj de navigo</string>
     <string name="application_profile_changed">Profilo de aplikaĵo ŝanĝita al “%s”</string>
     <string name="logcat_buffer">Bufro logcat</string>
+    <string name="plugins_settings">Agordoj pri kromprogramo</string>
 </resources>
