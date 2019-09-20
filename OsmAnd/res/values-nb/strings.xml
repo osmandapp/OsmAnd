@@ -3219,4 +3219,9 @@
     <string name="vehicle_parameters">Kjøretøyparameter</string>
     <string name="screen_alerts">Skjermvarsler</string>
     <string name="logcat_buffer">Logcat-mellomlager</string>
+    <string name="map_look_descr">ikoner, miniprogrammer</string>
+    <string name="map_look">Kartutseende</string>
+    <string name="general_settings_profile_descr">Programdrakt, enheter, region</string>
+    <string name="language_and_output">Språk og utdata</string>
+    <string name="plugins_settings">Programtilleggsinnstillinger</string>
 </resources>
