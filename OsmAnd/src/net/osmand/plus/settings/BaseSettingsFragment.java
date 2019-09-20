@@ -16,7 +16,6 @@ import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.annotation.XmlRes;
 import android.support.design.widget.AppBarLayout;
-import android.support.v14.preference.SwitchPreference;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
@@ -30,6 +29,7 @@ import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceGroupAdapter;
 import android.support.v7.preference.PreferenceScreen;
 import android.support.v7.preference.PreferenceViewHolder;
+import android.support.v7.preference.SwitchPreferenceCompat;
 import android.support.v7.view.ContextThemeWrapper;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -198,6 +198,12 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 				AndroidUtils.setBackground(selectableView, drawable);
 			}
 		}
+	}
+
+	@SuppressLint("RestrictedApi")
+	protected void updatePreference(Preference preference) {
+		PreferenceGroupAdapter adapter = (PreferenceGroupAdapter) getListView().getAdapter();
+		adapter.onPreferenceChange(preference);
 	}
 
 	private void createToolbar(LayoutInflater inflater, View view) {
@@ -486,12 +492,12 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		return app.getSettings();
 	}
 
-	public SwitchPreference createSwitchPreference(OsmandSettings.OsmandPreference<Boolean> b, int title, int summary, int layoutId) {
+	public SwitchPreferenceCompat createSwitchPreference(OsmandSettings.OsmandPreference<Boolean> b, int title, int summary, int layoutId) {
 		return createSwitchPreference(b, getString(title), getString(summary), layoutId);
 	}
 
-	public SwitchPreference createSwitchPreference(OsmandSettings.OsmandPreference<Boolean> b, String title, String summary, int layoutId) {
-		SwitchPreference p = new SwitchPreference(getContext());
+	public SwitchPreferenceCompat createSwitchPreference(OsmandSettings.OsmandPreference<Boolean> b, String title, String summary, int layoutId) {
+		SwitchPreferenceCompat p = new SwitchPreferenceCompat(getContext());
 		p.setTitle(title);
 		p.setKey(b.getId());
 		p.setSummary(summary);

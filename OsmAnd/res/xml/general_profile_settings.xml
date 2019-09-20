@@ -82,7 +82,7 @@
 		android:summaryOn="@string/shared_string_on"
 		android:title="@string/tap_on_map_to_hide_interface" />
 
-	<SwitchPreference
+	<SwitchPreferenceCompat
 		android:key="do_not_use_animations"
 		android:layout="@layout/preference_switch"
 		android:summaryOff="@string/shared_string_off"

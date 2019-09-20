@@ -40,7 +40,7 @@
 		android:summaryOn="@string/shared_string_on"
 		android:title="@string/analytics_pref_title" />
 
-	<SwitchPreference
+	<SwitchPreferenceCompat
 		android:icon="@drawable/ic_action_notification"
 		android:key="do_not_show_startup_messages"
 		android:layout="@layout/preference_switch"

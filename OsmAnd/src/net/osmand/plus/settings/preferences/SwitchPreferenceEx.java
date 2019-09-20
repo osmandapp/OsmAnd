@@ -1,10 +1,10 @@
 package net.osmand.plus.settings.preferences;
 
 import android.content.Context;
-import android.support.v14.preference.SwitchPreference;
+import android.support.v7.preference.SwitchPreferenceCompat;
 import android.util.AttributeSet;
 
-public class SwitchPreferenceEx extends SwitchPreference {
+public class SwitchPreferenceEx extends SwitchPreferenceCompat {
 
 	private String description;
 

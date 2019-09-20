@@ -2,9 +2,9 @@ package net.osmand.plus.settings;
 
 import android.app.Activity;
 import android.content.Context;
-import android.support.v14.preference.SwitchPreference;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.preference.Preference;
+import android.support.v7.preference.SwitchPreferenceCompat;
 import android.util.Pair;
 
 import net.osmand.plus.ApplicationMode;
@@ -157,7 +157,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment implements Send
 	private void setupSendAnonymousDataPref() {
 		boolean enabled = settings.SEND_ANONYMOUS_MAP_DOWNLOADS_DATA.get() || settings.SEND_ANONYMOUS_APP_USAGE_DATA.get();
 
-		SwitchPreference sendAnonymousData = (SwitchPreference) findPreference(SEND_ANONYMOUS_DATA_PREF_ID);
+		SwitchPreferenceCompat sendAnonymousData = (SwitchPreferenceCompat) findPreference(SEND_ANONYMOUS_DATA_PREF_ID);
 		sendAnonymousData.setChecked(enabled);
 	}
 

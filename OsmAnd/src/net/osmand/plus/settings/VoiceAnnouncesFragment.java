@@ -6,11 +6,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.media.AudioManager;
-import android.support.v14.preference.SwitchPreference;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceViewHolder;
+import android.support.v7.preference.SwitchPreferenceCompat;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.ApplicationMode;
@@ -67,7 +67,7 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 		super.onBindPreferenceViewHolder(preference, holder);
 
 		if (settings.SPEAK_ROUTING_ALARMS.getId().equals(preference.getKey())) {
-			boolean checked = ((SwitchPreference) preference).isChecked();
+			boolean checked = ((SwitchPreferenceCompat) preference).isChecked();
 			int color = checked ? getActiveProfileColor() : ContextCompat.getColor(app, R.color.preference_top_switch_off);
 
 			AndroidUtils.setBackground(holder.itemView, new ColorDrawable(color));
@@ -196,7 +196,7 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				settings.SPEAK_SPEED_CAMERA.set(true);
-				SwitchPreference speakSpeedCamera = (SwitchPreference) findPreference(settings.SPEAK_SPEED_CAMERA.getId());
+				SwitchPreferenceCompat speakSpeedCamera = (SwitchPreferenceCompat) findPreference(settings.SPEAK_SPEED_CAMERA.getId());
 				if (speakSpeedCamera != null) {
 					speakSpeedCamera.setChecked(true);
 				}

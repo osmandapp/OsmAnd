@@ -9,13 +9,13 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.ColorRes;
-import android.support.v14.preference.SwitchPreference;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceGroupAdapter;
+import android.support.v7.preference.SwitchPreferenceCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -165,7 +165,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 		}
 		List<ConnectedApp> connectedApps = app.getAidlApi().getConnectedApps();
 		for (ConnectedApp connectedApp : connectedApps) {
-			SwitchPreference preference = new SwitchPreference(app);
+			SwitchPreferenceCompat preference = new SwitchPreferenceCompat(app);
 			preference.setPersistent(false);
 			preference.setKey(connectedApp.getPack());
 			preference.setIcon(connectedApp.getIcon());

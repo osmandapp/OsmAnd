@@ -2,7 +2,7 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:tools="http://schemas.android.com/tools">
 
-	<SwitchPreference
+	<SwitchPreferenceCompat
 		android:key="speak_routing_alarms"
 		android:layout="@layout/preference_top_switch"
 		android:summaryOff="@string/shared_string_off"
@@ -16,19 +16,19 @@
 		android:title="@string/voice_announces_info"
 		tools:icon="@drawable/ic_action_info_dark" />
 
-	<SwitchPreference
+	<SwitchPreferenceCompat
 		android:dependency="speak_routing_alarms"
 		android:key="speak_street_names"
 		android:layout="@layout/preference_switch"
 		android:title="@string/speak_street_names" />
 
-	<SwitchPreference
+	<SwitchPreferenceCompat
 		android:dependency="speak_routing_alarms"
 		android:key="speak_traffic_warnings"
 		android:layout="@layout/preference_switch"
 		android:title="@string/speak_traffic_warnings" />
 
-	<SwitchPreference
+	<SwitchPreferenceCompat
 		android:dependency="speak_routing_alarms"
 		android:key="speak_pedestrian"
 		android:layout="@layout/preference_switch"
@@ -38,7 +38,7 @@
 		android:layout="@layout/simple_divider_item"
 		android:selectable="false" />
 
-	<SwitchPreference
+	<SwitchPreferenceCompat
 		android:dependency="speak_routing_alarms"
 		android:key="speak_speed_limit"
 		android:layout="@layout/preference_switch"
@@ -54,31 +54,31 @@
 		android:layout="@layout/simple_divider_item"
 		android:selectable="false" />
 
-	<SwitchPreference
+	<SwitchPreferenceCompat
 		android:dependency="speak_routing_alarms"
 		android:key="speak_cameras"
 		android:layout="@layout/preference_switch"
 		android:title="@string/speak_cameras" />
 
-	<SwitchPreference
+	<SwitchPreferenceCompat
 		android:dependency="speak_routing_alarms"
 		android:key="speak_tunnels"
 		android:layout="@layout/preference_switch"
 		android:title="@string/show_tunnels" />
 
-	<SwitchPreference
+	<SwitchPreferenceCompat
 		android:dependency="speak_routing_alarms"
 		android:key="announce_wpt"
 		android:layout="@layout/preference_switch"
 		android:title="@string/shared_string_gpx_waypoints" />
 
-	<SwitchPreference
+	<SwitchPreferenceCompat
 		android:dependency="speak_routing_alarms"
 		android:key="announce_nearby_favorites"
 		android:layout="@layout/preference_switch"
 		android:title="@string/speak_favorites" />
 
-	<SwitchPreference
+	<SwitchPreferenceCompat
 		android:dependency="speak_routing_alarms"
 		android:key="announce_nearby_poi"
 		android:layout="@layout/preference_switch"

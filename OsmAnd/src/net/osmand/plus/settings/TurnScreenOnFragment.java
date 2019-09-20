@@ -1,10 +1,10 @@
 package net.osmand.plus.settings;
 
 import android.graphics.drawable.ColorDrawable;
-import android.support.v14.preference.SwitchPreference;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceViewHolder;
+import android.support.v7.preference.SwitchPreferenceCompat;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
@@ -44,7 +44,7 @@ public class TurnScreenOnFragment extends BaseSettingsFragment {
 		super.onBindPreferenceViewHolder(preference, holder);
 
 		if (settings.TURN_SCREEN_ON_ENABLED.getId().equals(preference.getKey())) {
-			boolean checked = ((SwitchPreference) preference).isChecked();
+			boolean checked = ((SwitchPreferenceCompat) preference).isChecked();
 			int color = checked ? getActiveProfileColor() : ContextCompat.getColor(app, R.color.preference_top_switch_off);
 
 			AndroidUtils.setBackground(holder.itemView, new ColorDrawable(color));

@@ -5,7 +5,7 @@
 	android:key="proxy"
 	android:title="@string/proxy_pref_title">
 
-	<SwitchPreference
+	<SwitchPreferenceCompat
 		android:key="enable_proxy"
 		android:summaryOff="@string/shared_string_off"
 		android:summaryOn="@string/shared_string_on" />
