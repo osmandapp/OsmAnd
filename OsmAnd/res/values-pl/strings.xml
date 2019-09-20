@@ -105,7 +105,7 @@
     <string name="choose_audio_stream_descr">Wybierz głośnik, aby odtworzyć wskazówki głosowe.</string>
     <string name="voice_stream_voice_call">Kanał głosowy (przerywa odtwarzanie muzyki z głośników)</string>
     <string name="voice_stream_notification">Kanał powiadomień</string>
-    <string name="voice_stream_music">Kanał media/music</string>
+    <string name="voice_stream_music">Media/Nawigacja audio</string>
     <string name="warning_tile_layer_not_downloadable">Aplikacja nie może pobrać warstwy %1$s, spróbuj ją przeinstalować.</string>
     <string name="overlay_transparency_descr">Zmień przezroczystość warstwy.</string>
     <string name="overlay_transparency">Przezroczystość warstwy</string>
@@ -3273,4 +3273,24 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="route_parameters">Parametry trasy</string>
     <string name="manage_profiles_descr">Tworzy, importuje, modyfikuje profile</string>
     <string name="manage_profiles">Zarządzaj profilami aplikacji…</string>
+    <string name="new_route_calculated_dist_dbg">Trasa: dystans % s, czas routera %s
+\nObliczanie: %. 1F s, %d dróg, %d płytek)</string>
+    <string name="get_discount_first_few_part">%1$s dla pierwszych %2$s</string>
+    <string name="get_discount_second_part">wtedy %1$s</string>
+    <string name="navigate_point_format_olc">Otwórz kod lokalizacji</string>
+    <string name="analytics_pref_title">Analityka</string>
+    <string name="turn_screen_on_info">Pokaż mapę podczas nawigacji nad ekranem blokady.</string>
+    <string name="route_parameters_info">Ustawienia te mają wpływ na konstrukcję trasy. Będzie stosowany tylko do wybranego profilu: %1$s.</string>
+    <string name="wake_time">Czas przebudzenia</string>
+    <string name="configure_navigation">Konfiguracja nawigacji</string>
+    <string name="screen_alerts_descr">Alerty będą wyświetlane w lewym dolnym rogu ekranu podczas nawigacji.</string>
+    <string name="reset_to_default">Przywróć ustawienia domyślne</string>
+    <string name="osmand_settings_descr">Wpływa na całą aplikację</string>
+    <string name="turn_screen_on">Włącz ekran</string>
+    <string name="map_during_navigation_info">Mapa podczas nawigacji</string>
+    <string name="map_during_navigation">Mapa podczas nawigacji</string>
+    <string name="shared_string_other">Pozostałe</string>
+    <string name="voice_announces_descr">Instrukcja nawigacyjna i komunikaty nawigacyjne</string>
+    <string name="route_parameters_descr">Konfigurowanie parametrów trasy</string>
+    <string name="logcat_buffer">Bufor Logcat</string>
 </resources>
