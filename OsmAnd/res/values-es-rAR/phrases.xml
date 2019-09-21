@@ -3725,4 +3725,5 @@
     <string name="poi_disabled_yes">Sí</string>
     <string name="poi_disabled_designated">Designado</string>
     <string name="poi_cellar_entrance">Entrada de la bodega</string>
+    <string name="poi_health_food">Comida saludable; Dietética</string>
 </resources>
