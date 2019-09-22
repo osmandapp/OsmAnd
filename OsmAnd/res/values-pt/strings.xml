@@ -3283,4 +3283,6 @@
     <string name="route_parameters_descr">Configurar os parâmetros da rota</string>
     <string name="route_parameters">Parâmetros de rota</string>
     <string name="application_profile_changed">Perfil de aplicação modificado para \"%s\"</string>
+    <string name="logcat_buffer">Buffer de logcat</string>
+    <string name="plugins_settings">Configurações de Plugins</string>
 </resources>
