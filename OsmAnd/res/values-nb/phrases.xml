@@ -1344,4 +1344,13 @@
     <string name="poi_traffic_calming_choker">Innsnevring</string>
     <string name="poi_denotation">Betegnelse</string>
     <string name="poi_rtsa_scale_filter">Vanskelighetsgrad</string>
+    <string name="poi_fuel_adblue">Dieselutslippstilsetning</string>
+    <string name="poi_access_bus">Bussadkomst</string>
+    <string name="poi_access_caravan">Campingvognadkomst</string>
+    <string name="poi_access_motorhome">Bobiladkomst</string>
+    <string name="poi_access_trailer">Tilhengeradkomst</string>
+    <string name="poi_access_motorcycle">Motorsykkeladkomst</string>
+    <string name="poi_access_moped">Mopedadkomst</string>
+    <string name="poi_access_disabled">Handicapadkomst</string>
+    <string name="poi_health_food">Helsekost</string>
 </resources>
