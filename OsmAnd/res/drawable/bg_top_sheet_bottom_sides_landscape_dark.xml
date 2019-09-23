@@ -6,8 +6,8 @@
 	<item>
 		<shape>
 			<solid android:color="@color/list_background_color_dark"/>
-			<corners android:bottomRightRadius="4dp"
-				android:bottomLeftRadius="4dp" />
+			<corners android:bottomRightRadius="3dp"
+				android:bottomLeftRadius="3dp" />
 		</shape>
 	</item>
 </layer-list>

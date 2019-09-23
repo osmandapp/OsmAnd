@@ -23,6 +23,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.OsmAndSheetDialogFragment;
+import net.osmand.plus.base.OsmandSheetDialog;
 import net.osmand.plus.base.SheetDialogType;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
@@ -84,12 +85,15 @@ public class DownloadMapDialogFragment extends OsmAndSheetDialogFragment {
 	@Override
 	public void onStart() {
 		super.onStart();
-		final Window window = getDialog().getWindow();
 		FragmentActivity activity = requireActivity();
-		if (window != null && !AndroidUiHelper.isOrientationPortrait(activity)) {
-			WindowManager.LayoutParams params = window.getAttributes();
-			params.width = activity.getResources().getDimensionPixelSize(R.dimen.landscape_bottom_sheet_dialog_fragment_width);
-			window.setAttributes(params);
+		if (!AndroidUiHelper.isOrientationPortrait(activity)) {
+			final Window window = getDialog().getWindow();
+			if (window != null) {
+				View container = window.findViewById(OsmandSheetDialog.CONTAINER_ID);
+				if (container != null) {
+					container.getLayoutParams().width = activity.getResources().getDimensionPixelSize(R.dimen.landscape_bottom_sheet_dialog_fragment_width);
+				}
+			}
 		}
 	}
 

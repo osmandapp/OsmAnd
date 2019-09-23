@@ -17,11 +17,11 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 
-import net.osmand.plus.R;
-
 import static net.osmand.plus.base.SheetDialogType.*;
 
 public class OsmandSheetDialog extends Dialog {
+	
+	public final static int CONTAINER_ID = 111111;
 
 	private boolean cancelable = true;
 	private boolean canceledOnTouchOutside = true;
@@ -168,6 +168,7 @@ public class OsmandSheetDialog extends Dialog {
 		params.gravity = gravity;
 		FrameLayout container = new FrameLayout(getContext());
 		container.setLayoutParams(params);
+		container.setId(CONTAINER_ID);
 		return container;
 	}
 
