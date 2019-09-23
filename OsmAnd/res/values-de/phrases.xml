@@ -1329,7 +1329,7 @@
     <string name="poi_covered_yes">ja</string>
     <string name="poi_covered_no">Nicht überdacht</string>
     <string name="poi_smoking_no">Nicht erlaubt</string>
-    <string name="poi_smoking_outside">nur Außerhalb</string>
+    <string name="poi_smoking_outside">Nur Außerhalb</string>
     <string name="poi_smoking_yes">Erlaubt</string>
     <string name="poi_smoking_separated">In einem separaten Raum</string>
     <string name="poi_traffic_signals_sound_yes">ja</string>
@@ -1382,8 +1382,8 @@
     <string name="poi_aerialway_bicycle_yes">Erlaubt</string>
     <string name="poi_aerialway_bicycle_no">Fahrrad: nicht erlaubt</string>
     <string name="poi_aerialway_bicycle_summer">Nur im Sommer erlaubt</string>
-    <string name="poi_aerialway_access_entry">nur Eingang</string>
-    <string name="poi_aerialway_access_exit">nur Ausgang</string>
+    <string name="poi_aerialway_access_entry">Nur Eingang</string>
+    <string name="poi_aerialway_access_exit">Nur Ausgang</string>
     <string name="poi_aerialway_access_both">Eingang und Ausgang</string>
     <string name="poi_aerialway_summer_access_entry">Sommereingang</string>
     <string name="poi_aerialway_summer_access_exit">Sommerausgang</string>
@@ -1439,7 +1439,7 @@
     <string name="poi_microbrewery_no">Keine Minibrauerei</string>
     <string name="poi_takeaway_yes">Zum Mitnehmen</string>
     <string name="poi_takeaway_no">Nicht zum Mitnehmen</string>
-    <string name="poi_takeaway_only">nur zum Mitnehmen</string>
+    <string name="poi_takeaway_only">Nur zum Mitnehmen</string>
     <string name="poi_delivery_yes">Lieferung</string>
     <string name="poi_delivery_no">Kein Lieferservice</string>
     <string name="poi_delivery_only">Nur Lieferung</string>
@@ -1765,7 +1765,7 @@
     <string name="poi_diet_vegetarian_yes">Vegetarische</string>
     <string name="poi_diet_vegetarian_no">Vegetarisch: nein</string>
     <string name="poi_diet_vegetarian_few">vegetarisch (wenige)</string>
-    <string name="poi_diet_vegan_only">nur vegan</string>
+    <string name="poi_diet_vegan_only">Nur vegan</string>
     <string name="poi_diet_vegan_yes">Vegan</string>
     <string name="poi_diet_vegan_no">Vegan: nein</string>
     <string name="poi_diet_gluten_free_only">Nur glutenfreie</string>
@@ -1790,7 +1790,7 @@
     <string name="poi_outdoor_seating_patio">Sitzplätze im Freien: Innenhof</string>
     <string name="poi_second_hand_yes">Gebrauchtwaren</string>
     <string name="poi_second_hand_no">keine Gebrauchtwaren</string>
-    <string name="poi_second_hand_only">nur Gebrauchtwaren</string>
+    <string name="poi_second_hand_only">Nur Gebrauchtwaren</string>
     <string name="poi_service_parts">Teile</string>
     <string name="poi_service_electrical">Reparatur von elektrischen Fahrzeugen</string>
     <string name="poi_motorcycle_repair">Motorradreparatur</string>
