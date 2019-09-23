@@ -3319,4 +3319,13 @@
     <string name="map_during_navigation_info">نقشه در هنگام ناوبری</string>
     <string name="map_during_navigation">نقشه در هنگام ناوبری</string>
     <string name="plugins_settings">تنظیمات افزونه</string>
+    <string name="routing_profile_geocoding">رمزگذاری جغرافیایی</string>
+    <string name="routing_attr_piste_type_skitour_name">تور اسکی</string>
+    <string name="routing_attr_piste_type_skitour_description">مسیرها برای تور اسکی.</string>
+    <string name="app_mode_camper">کمپر</string>
+    <string name="app_mode_campervan">ون کمپر</string>
+    <string name="app_mode_wagon">واگن</string>
+    <string name="app_mode_pickup_truck">کامیون پیک‌آپ</string>
+    <string name="analytics_pref_title">تحلیل‌ها</string>
+    <string name="logcat_buffer">بافر لاگ‌کت</string>
 </resources>
