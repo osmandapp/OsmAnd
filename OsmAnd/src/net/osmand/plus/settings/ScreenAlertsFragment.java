@@ -3,11 +3,10 @@ package net.osmand.plus.settings;
 import android.annotation.SuppressLint;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.support.v14.preference.SwitchPreference;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceGroupAdapter;
 import android.support.v7.preference.PreferenceViewHolder;
+import android.support.v7.preference.SwitchPreferenceCompat;
 import android.widget.ImageView;
 
 import net.osmand.plus.R;
@@ -37,10 +36,10 @@ public class ScreenAlertsFragment extends BaseSettingsFragment {
 	@Override
 	protected void setupPreferences() {
 		Preference showRoutingAlarmsInfo = findPreference(SHOW_ROUTING_ALARMS_INFO);
-		SwitchPreference showTrafficWarnings = (SwitchPreference) findPreference(settings.SHOW_TRAFFIC_WARNINGS.getId());
-		SwitchPreference showPedestrian = (SwitchPreference) findPreference(settings.SHOW_PEDESTRIAN.getId());
-		SwitchPreference showCameras = (SwitchPreference) findPreference(settings.SHOW_CAMERAS.getId());
-		SwitchPreference showTunnels = (SwitchPreference) findPreference(settings.SHOW_TUNNELS.getId());
+		SwitchPreferenceCompat showTrafficWarnings = (SwitchPreferenceCompat) findPreference(settings.SHOW_TRAFFIC_WARNINGS.getId());
+		SwitchPreferenceCompat showPedestrian = (SwitchPreferenceCompat) findPreference(settings.SHOW_PEDESTRIAN.getId());
+		SwitchPreferenceCompat showCameras = (SwitchPreferenceCompat) findPreference(settings.SHOW_CAMERAS.getId());
+		SwitchPreferenceCompat showTunnels = (SwitchPreferenceCompat) findPreference(settings.SHOW_TUNNELS.getId());
 
 		showRoutingAlarmsInfo.setIcon(getContentIcon(R.drawable.ic_action_info_dark));
 		showTrafficWarnings.setIcon(getIcon(R.drawable.list_warnings_traffic_calming));
@@ -57,7 +56,7 @@ public class ScreenAlertsFragment extends BaseSettingsFragment {
 
 		String key = preference.getKey();
 		if (settings.SHOW_ROUTING_ALARMS.getId().equals(key)) {
-			boolean checked = ((SwitchPreference) preference).isChecked();
+			boolean checked = ((SwitchPreferenceCompat) preference).isChecked();
 			int color = checked ? getActiveProfileColor() : ContextCompat.getColor(app, R.color.preference_top_switch_off);
 
 			holder.itemView.setBackgroundColor(color);
@@ -80,7 +79,7 @@ public class ScreenAlertsFragment extends BaseSettingsFragment {
 	public boolean onPreferenceClick(Preference preference) {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
 			Preference routeParametersImage = findPreference(SCREEN_ALERTS_IMAGE);
-			((PreferenceGroupAdapter) getListView().getAdapter()).onPreferenceChange(routeParametersImage);
+			updatePreference(routeParametersImage);
 		}
 
 		return super.onPreferenceClick(preference);

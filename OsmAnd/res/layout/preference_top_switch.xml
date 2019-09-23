@@ -32,8 +32,8 @@
 			android:textSize="@dimen/default_list_text_size"
 			osmand:typeface="@string/font_roboto_medium" />
 
-		<Switch
-			android:id="@android:id/switch_widget"
+		<android.support.v7.widget.SwitchCompat
+			android:id="@+id/switchWidget"
 			android:layout_width="wrap_content"
 			android:layout_height="match_parent"
 			android:background="@null"

@@ -47,10 +47,6 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 
 	@Override
 	protected void setupPreferences() {
-		Preference appearanceCategory = findPreference("appearance_category");
-		Preference unitsAndFormats = findPreference("units_and_formats");
-		Preference other = findPreference("other");
-
 		setupAppThemePref();
 		setupRotateMapPref();
 		setupMapScreenOrientationPref();

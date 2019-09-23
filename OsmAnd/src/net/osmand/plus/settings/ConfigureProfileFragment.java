@@ -9,13 +9,13 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.ColorRes;
-import android.support.v14.preference.SwitchPreference;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceGroupAdapter;
+import android.support.v7.preference.SwitchPreferenceCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,6 +41,8 @@ import static net.osmand.plus.profiles.EditProfileFragment.SELECTED_ITEM;
 public class ConfigureProfileFragment extends BaseSettingsFragment {
 
 	public static final String TAG = "ConfigureProfileFragment";
+
+	private static final String PLUGIN_SETTINGS = "plugin_settings";
 
 	@Override
 	protected int getPreferencesResId() {
@@ -111,7 +113,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 				Preference pref = ((PreferenceGroupAdapter) getListView().getAdapter()).getItem(position);
 				if (pref != null && pref.getParent() != null) {
 					PreferenceGroup preferenceGroup = pref.getParent();
-					return preferenceGroup.hasKey() && preferenceGroup.getKey().equals("plugin_settings");
+					return preferenceGroup.hasKey() && preferenceGroup.getKey().equals(PLUGIN_SETTINGS);
 				}
 				return false;
 			}
@@ -126,7 +128,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 		setupNavigationSettingsPref();
 		setupConfigureMapPref();
 
-		PreferenceCategory pluginSettings = (PreferenceCategory) findPreference("plugin_settings");
+		PreferenceCategory pluginSettings = (PreferenceCategory) findPreference(PLUGIN_SETTINGS);
 		pluginSettings.setIconSpaceReserved(false);
 
 		setupConnectedAppsPref(pluginSettings);
@@ -163,11 +165,11 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 		}
 		List<ConnectedApp> connectedApps = app.getAidlApi().getConnectedApps();
 		for (ConnectedApp connectedApp : connectedApps) {
-			SwitchPreference preference = new SwitchPreference(app);
+			SwitchPreferenceCompat preference = new SwitchPreferenceCompat(app);
 			preference.setPersistent(false);
 			preference.setKey(connectedApp.getPack());
-			preference.setTitle(connectedApp.getName());
 			preference.setIcon(connectedApp.getIcon());
+			preference.setTitle(connectedApp.getName());
 			preference.setChecked(connectedApp.isEnabled());
 			preference.setLayoutResource(R.layout.preference_switch);
 
@@ -186,10 +188,10 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 			preference.setPersistent(false);
 			preference.setKey(plugin.getId());
 			preference.setTitle(plugin.getName());
-			preference.setIcon(getPluginIcon(plugin));
 			preference.setChecked(plugin.isActive());
-			preference.setLayoutResource(R.layout.preference_dialog_and_switch);
+			preference.setIcon(getPluginIcon(plugin));
 			preference.setIntent(getPluginIntent(plugin));
+			preference.setLayoutResource(R.layout.preference_dialog_and_switch);
 
 			preferenceCategory.addPreference(preference);
 		}
@@ -221,7 +223,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 			if (newValue instanceof Boolean) {
 				if ((plugin.isActive() || !plugin.needsInstallation())) {
 					if (OsmandPlugin.enablePlugin(getActivity(), app, plugin, (Boolean) newValue)) {
-						updateAllSettings();
+						preference.setIcon(getPluginIcon(plugin));
 						return true;
 					}
 				} else if (plugin.needsInstallation() && preference.getIntent() != null) {

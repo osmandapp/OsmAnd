@@ -2,7 +2,6 @@ package net.osmand.plus.settings;
 
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.support.v14.preference.SwitchPreference;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
@@ -104,7 +103,8 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 	}
 
 	private void setupTimeConditionalRoutingPref() {
-		SwitchPreference timeConditionalRouting = createSwitchPreferenceEx(settings.ENABLE_TIME_CONDITIONAL_ROUTING.getId(), R.string.temporary_conditional_routing, R.layout.preference_with_descr_dialog_and_switch);
+		SwitchPreferenceEx timeConditionalRouting = createSwitchPreferenceEx(settings.ENABLE_TIME_CONDITIONAL_ROUTING.getId(),
+				R.string.temporary_conditional_routing, R.layout.preference_with_descr_dialog_and_switch);
 		timeConditionalRouting.setIcon(getRoutingPrefIcon(settings.ENABLE_TIME_CONDITIONAL_ROUTING.getId()));
 		timeConditionalRouting.setSummaryOn(R.string.shared_string_enable);
 		timeConditionalRouting.setSummaryOff(R.string.shared_string_disable);
