@@ -1,10 +1,12 @@
 package net.osmand.plus.settings;
 
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.support.v7.preference.SwitchPreferenceCompat;
+import android.view.View;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
@@ -13,7 +15,12 @@ import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 
 public class TurnScreenOnFragment extends BaseSettingsFragment {
 
-	public static final String TAG = "TurnScreenOnFragment";
+	public static final String TAG = TurnScreenOnFragment.class.getSimpleName();
+
+	@Override
+	protected String getFragmentTag() {
+		return TAG;
+	}
 
 	@Override
 	protected int getPreferencesResId() {
@@ -28,6 +35,20 @@ public class TurnScreenOnFragment extends BaseSettingsFragment {
 	@Override
 	protected int getToolbarTitle() {
 		return R.string.turn_screen_on;
+	}
+
+	@Override
+	public int getStatusBarColorId() {
+		View view = getView();
+		if (view != null) {
+			boolean nightMode = isNightMode();
+			if (Build.VERSION.SDK_INT >= 23 && !nightMode) {
+				view.setSystemUiVisibility(view.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+			}
+			return nightMode ? R.color.list_background_color_dark : R.color.list_background_color_light;
+		}
+
+		return -1;
 	}
 
 	@Override

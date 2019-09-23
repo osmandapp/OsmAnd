@@ -7,8 +7,10 @@ import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.ColorRes;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.preference.Preference;
@@ -22,6 +24,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import net.osmand.AndroidUtils;
+import net.osmand.PlatformUtil;
 import net.osmand.aidl.OsmandAidlApi;
 import net.osmand.aidl.OsmandAidlApi.ConnectedApp;
 import net.osmand.plus.ApplicationMode;
@@ -32,6 +35,8 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.PluginActivity;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 
+import org.apache.commons.logging.Log;
+
 import java.util.List;
 
 import static net.osmand.plus.profiles.EditProfileFragment.MAP_CONFIG;
@@ -40,9 +45,17 @@ import static net.osmand.plus.profiles.EditProfileFragment.SELECTED_ITEM;
 
 public class ConfigureProfileFragment extends BaseSettingsFragment {
 
-	public static final String TAG = "ConfigureProfileFragment";
+	public static final String TAG = ConfigureProfileFragment.class.getSimpleName();
+
+	private static final Log log = PlatformUtil.getLog(ConfigureProfileFragment.class);
 
 	private static final String PLUGIN_SETTINGS = "plugin_settings";
+	private static final String CONFIGURE_MAP = "configure_map";
+
+	@Override
+	protected String getFragmentTag() {
+		return TAG;
+	}
 
 	@Override
 	protected int getPreferencesResId() {
@@ -57,6 +70,20 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 	@Override
 	protected int getToolbarTitle() {
 		return R.string.configure_profile;
+	}
+
+	@Override
+	public int getStatusBarColorId() {
+		View view = getView();
+		if (view != null) {
+			boolean nightMode = isNightMode();
+			if (Build.VERSION.SDK_INT >= 23 && !nightMode) {
+				view.setSystemUiVisibility(view.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+			}
+			return nightMode ? R.color.list_background_color_dark : R.color.list_background_color_light;
+		}
+
+		return -1;
 	}
 
 	@ColorRes
@@ -148,14 +175,13 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 		if (ctx == null) {
 			return;
 		}
-		Preference configureMap = findPreference("configure_map");
+		Preference configureMap = findPreference(CONFIGURE_MAP);
 		configureMap.setIcon(getContentIcon(R.drawable.ic_action_layers_dark));
 
 		Intent intent = new Intent(ctx, MapActivity.class);
 		intent.putExtra(OPEN_CONFIG_ON_MAP, MAP_CONFIG);
 		intent.putExtra(SELECTED_ITEM, getSelectedAppMode().getStringKey());
 		configureMap.setIntent(intent);
-		configureMap.setVisible(false);
 	}
 
 	private void setupConnectedAppsPref(PreferenceCategory preferenceCategory) {
@@ -215,6 +241,28 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 	}
 
 	@Override
+	public boolean onPreferenceClick(Preference preference) {
+		if (CONFIGURE_MAP.equals(preference.getKey())) {
+			FragmentActivity activity = getActivity();
+			if (activity != null) {
+				try {
+					FragmentManager fragmentManager = activity.getSupportFragmentManager();
+					if (fragmentManager != null) {
+						fragmentManager.beginTransaction()
+								.remove(this)
+								.addToBackStack(TAG)
+								.commitAllowingStateLoss();
+					}
+				} catch (Exception e) {
+					log.error(e);
+				}
+			}
+		}
+
+		return super.onPreferenceClick(preference);
+	}
+
+	@Override
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
 		String key = preference.getKey();
 
@@ -224,6 +272,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 				if ((plugin.isActive() || !plugin.needsInstallation())) {
 					if (OsmandPlugin.enablePlugin(getActivity(), app, plugin, (Boolean) newValue)) {
 						preference.setIcon(getPluginIcon(plugin));
+						updatePreference(preference);
 						return true;
 					}
 				} else if (plugin.needsInstallation() && preference.getIntent() != null) {

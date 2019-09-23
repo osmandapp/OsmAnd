@@ -14,6 +14,11 @@ public class ProxySettingsFragment extends BaseSettingsFragment {
 	public static final String TAG = ProxySettingsFragment.class.getSimpleName();
 
 	@Override
+	protected String getFragmentTag() {
+		return TAG;
+	}
+
+	@Override
 	protected int getPreferencesResId() {
 		return R.xml.proxy_preferences;
 	}
@@ -26,6 +31,11 @@ public class ProxySettingsFragment extends BaseSettingsFragment {
 	@Override
 	protected int getToolbarTitle() {
 		return R.string.proxy_pref_title;
+	}
+
+	@Override
+	public int getStatusBarColorId() {
+		return isNightMode() ? R.color.status_bar_color_dark : R.color.status_bar_color_light;
 	}
 
 	@Override

@@ -7,16 +7,22 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.support.v7.preference.SwitchPreferenceCompat;
+import android.view.View;
 import android.widget.ImageView;
 
 import net.osmand.plus.R;
 
 public class ScreenAlertsFragment extends BaseSettingsFragment {
 
-	public static final String TAG = "ScreenAlertsFragment";
+	public static final String TAG = ScreenAlertsFragment.class.getSimpleName();
 
 	private static final String SHOW_ROUTING_ALARMS_INFO = "show_routing_alarms_info";
 	private static final String SCREEN_ALERTS_IMAGE = "screen_alerts_image";
+
+	@Override
+	protected String getFragmentTag() {
+		return TAG;
+	}
 
 	@Override
 	protected int getPreferencesResId() {
@@ -31,6 +37,20 @@ public class ScreenAlertsFragment extends BaseSettingsFragment {
 	@Override
 	protected int getToolbarTitle() {
 		return R.string.screen_alerts;
+	}
+
+	@Override
+	public int getStatusBarColorId() {
+		View view = getView();
+		if (view != null) {
+			boolean nightMode = isNightMode();
+			if (Build.VERSION.SDK_INT >= 23 && !nightMode) {
+				view.setSystemUiVisibility(view.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+			}
+			return nightMode ? R.color.list_background_color_dark : R.color.list_background_color_light;
+		}
+
+		return -1;
 	}
 
 	@Override

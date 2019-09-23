@@ -2,6 +2,7 @@ package net.osmand.plus.settings;
 
 import android.content.Context;
 import android.net.Uri;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.preference.CheckBoxPreference;
@@ -30,7 +31,7 @@ import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 
 public class CoordinatesFormatFragment extends BaseSettingsFragment {
 
-	public static final String TAG = "CoordinatesFormatFragment";
+	public static final String TAG = CoordinatesFormatFragment.class.getSimpleName();
 
 	private static final String UTM_FORMAT_WIKI_LINK = "https://en.wikipedia.org/wiki/Universal_Transverse_Mercator_coordinate_system";
 
@@ -39,6 +40,11 @@ public class CoordinatesFormatFragment extends BaseSettingsFragment {
 	private static final String FORMAT_SECONDS = "format_seconds";
 	private static final String UTM_FORMAT = "utm_format";
 	private static final String OLC_FORMAT = "olc_format";
+
+	@Override
+	protected String getFragmentTag() {
+		return TAG;
+	}
 
 	@Override
 	protected int getPreferencesResId() {
@@ -53,6 +59,20 @@ public class CoordinatesFormatFragment extends BaseSettingsFragment {
 	@Override
 	protected int getToolbarTitle() {
 		return R.string.coordinates_format;
+	}
+
+	@Override
+	public int getStatusBarColorId() {
+		View view = getView();
+		if (view != null) {
+			boolean nightMode = isNightMode();
+			if (Build.VERSION.SDK_INT >= 23 && !nightMode) {
+				view.setSystemUiVisibility(view.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+			}
+			return nightMode ? R.color.list_background_color_dark : R.color.list_background_color_light;
+		}
+
+		return -1;
 	}
 
 	@Override

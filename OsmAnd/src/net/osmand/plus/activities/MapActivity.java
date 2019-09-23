@@ -936,10 +936,13 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (Build.VERSION.SDK_INT >= 21) {
 			int colorId = -1;
 			BaseOsmAndFragment fragmentAboveDashboard = getVisibleBaseOsmAndFragment(R.id.fragmentContainer);
+			BaseSettingsFragment settingsFragmentAboveDashboard = getVisibleBaseSettingsFragment(R.id.fragmentContainer);
 			BaseOsmAndFragment fragmentBelowDashboard = getVisibleBaseOsmAndFragment(R.id.routeMenuContainer,
 					R.id.topFragmentContainer, R.id.bottomFragmentContainer);
 			if (fragmentAboveDashboard != null) {
 				colorId = fragmentAboveDashboard.getStatusBarColorId();
+			} else if (settingsFragmentAboveDashboard != null) {
+				colorId = settingsFragmentAboveDashboard.getStatusBarColorId();
 			} else if (dashboardOnMap.isVisible()) {
 				colorId = dashboardOnMap.getStatusBarColor();
 			} else if (fragmentBelowDashboard != null) {
@@ -984,6 +987,17 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			if (fragment != null && !fragment.isRemoving() && fragment instanceof BaseOsmAndFragment
 					&& ((BaseOsmAndFragment) fragment).getStatusBarColorId() != -1) {
 				return (BaseOsmAndFragment) fragment;
+			}
+		}
+		return null;
+	}
+
+	private BaseSettingsFragment getVisibleBaseSettingsFragment(int... ids) {
+		for (int id : ids) {
+			Fragment fragment = getSupportFragmentManager().findFragmentById(id);
+			if (fragment != null && !fragment.isRemoving() && fragment instanceof BaseSettingsFragment
+					&& ((BaseSettingsFragment) fragment).getStatusBarColorId() != -1) {
+				return (BaseSettingsFragment) fragment;
 			}
 		}
 		return null;

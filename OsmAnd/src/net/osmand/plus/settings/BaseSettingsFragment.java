@@ -1,6 +1,7 @@
 package net.osmand.plus.settings;
 
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -10,6 +11,7 @@ import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
+import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -35,11 +37,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
-import net.osmand.PlatformUtil;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -58,17 +60,14 @@ import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.MultiSelectBooleanPreference;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 
-import org.apache.commons.logging.Log;
-
 public abstract class BaseSettingsFragment extends PreferenceFragmentCompat implements OnPreferenceChangeListener,
 		OnPreferenceClickListener, AppModeChangedListener {
-
-	protected final Log log = PlatformUtil.getLog(this.getClass());
 
 	protected OsmandApplication app;
 	protected OsmandSettings settings;
 	protected UiUtilities iconsCache;
 
+	private int statusBarColor = -1;
 	private int themeRes;
 	private boolean nightMode;
 	private boolean wasDrawerDisabled;
@@ -133,12 +132,47 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	@Override
 	public void onResume() {
 		super.onResume();
-
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			wasDrawerDisabled = mapActivity.isDrawerDisabled();
 			if (!wasDrawerDisabled) {
 				mapActivity.disableDrawer();
+			}
+		}
+
+		if (Build.VERSION.SDK_INT >= 21) {
+			Activity activity = getActivity();
+			if (activity != null) {
+				int colorId = getStatusBarColorId();
+				if (colorId != -1) {
+					if (activity instanceof MapActivity) {
+						((MapActivity) activity).updateStatusBarColor();
+					} else {
+						statusBarColor = activity.getWindow().getStatusBarColor();
+						activity.getWindow().setStatusBarColor(ContextCompat.getColor(activity, colorId));
+					}
+				}
+				if (!isFullScreenAllowed() && activity instanceof MapActivity) {
+					View view = getView();
+					if (view != null) {
+						ViewTreeObserver vto = view.getViewTreeObserver();
+						vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+
+							@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+							@Override
+							public void onGlobalLayout() {
+
+								View view = getView();
+								if (view != null) {
+									ViewTreeObserver obs = view.getViewTreeObserver();
+									obs.removeOnGlobalLayoutListener(this);
+									view.requestLayout();
+								}
+							}
+						});
+					}
+					((MapActivity) activity).exitFromFullScreen();
+				}
 			}
 		}
 	}
@@ -151,6 +185,38 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		if (!wasDrawerDisabled && mapActivity != null) {
 			mapActivity.enableDrawer();
 		}
+
+		if (Build.VERSION.SDK_INT >= 21) {
+			Activity activity = getActivity();
+			if (activity != null) {
+				if (!(activity instanceof MapActivity) && statusBarColor != -1) {
+					activity.getWindow().setStatusBarColor(statusBarColor);
+				}
+				if (!isFullScreenAllowed() && activity instanceof MapActivity) {
+					((MapActivity) activity).enterToFullScreen();
+				}
+			}
+		}
+	}
+
+	@Override
+	public void onDetach() {
+		super.onDetach();
+		if (Build.VERSION.SDK_INT >= 21 && getStatusBarColorId() != -1) {
+			Activity activity = getActivity();
+			if (activity instanceof MapActivity) {
+				((MapActivity) activity).updateStatusBarColor();
+			}
+		}
+	}
+
+	@ColorRes
+	public int getStatusBarColorId() {
+		return -1;
+	}
+
+	protected boolean isFullScreenAllowed() {
+		return true;
 	}
 
 	@Override
@@ -189,6 +255,8 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	}
 
 	protected abstract void setupPreferences();
+
+	protected abstract String getFragmentTag();
 
 	protected void onBindPreferenceViewHolder(Preference preference, PreferenceViewHolder holder) {
 		if (preference.isSelectable()) {
@@ -349,18 +417,6 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		return R.string.shared_string_settings;
 	}
 
-	@ColorRes
-	protected int getStatusBarColorId() {
-		View view = getView();
-		if (view != null) {
-			if (Build.VERSION.SDK_INT >= 23 && !isNightMode()) {
-				view.setSystemUiVisibility(view.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-			}
-			return isNightMode() ? R.color.list_background_color_dark : R.color.list_background_color_light;
-		}
-		return -1;
-	}
-
 	@ColorInt
 	protected int getActiveProfileColor() {
 		return ContextCompat.getColor(app, getActiveProfileColorRes());
@@ -451,6 +507,35 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		return iconsCache;
 	}
 
+	protected Drawable getPaintedContentIcon(@DrawableRes int id, @ColorInt int color) {
+		UiUtilities cache = getIconsCache();
+		return cache != null ? cache.getPaintedIcon(id, color) : null;
+	}
+
+	protected void setThemedDrawable(View parent, @IdRes int viewId, @DrawableRes int iconId) {
+		((ImageView) parent.findViewById(viewId)).setImageDrawable(getContentIcon(iconId));
+	}
+
+	protected void setThemedDrawable(View view, @DrawableRes int iconId) {
+		((ImageView) view).setImageDrawable(getContentIcon(iconId));
+	}
+
+	@Nullable
+	protected OsmandSettings getSettings() {
+		OsmandApplication app = getMyApplication();
+		if (app != null) {
+			return app.getSettings();
+		} else {
+			return null;
+		}
+	}
+
+	@NonNull
+	protected OsmandSettings requireSettings() {
+		OsmandApplication app = requireMyApplication();
+		return app.getSettings();
+	}
+
 	protected Drawable getIcon(@DrawableRes int id) {
 		UiUtilities cache = getIconsCache();
 		return cache != null ? cache.getIcon(id) : null;
@@ -474,22 +559,6 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	protected Drawable getPaintedIcon(@DrawableRes int id, @ColorInt int color) {
 		UiUtilities cache = getIconsCache();
 		return cache != null ? cache.getPaintedIcon(id, color) : null;
-	}
-
-	@Nullable
-	protected OsmandSettings getSettings() {
-		OsmandApplication app = getMyApplication();
-		if (app != null) {
-			return app.getSettings();
-		} else {
-			return null;
-		}
-	}
-
-	@NonNull
-	protected OsmandSettings requireSettings() {
-		OsmandApplication app = requireMyApplication();
-		return app.getSettings();
 	}
 
 	public SwitchPreferenceCompat createSwitchPreference(OsmandSettings.OsmandPreference<Boolean> b, int title, int summary, int layoutId) {

@@ -12,7 +12,12 @@ import net.osmand.util.Algorithms;
 
 public class MainSettingsFragment extends BaseSettingsFragment {
 
-	public static final String TAG = "MainSettingsFragment";
+	public static final String TAG = MainSettingsFragment.class.getSimpleName();
+
+	@Override
+	protected String getFragmentTag() {
+		return TAG;
+	}
 
 	@Override
 	protected int getPreferencesResId() {
@@ -31,7 +36,7 @@ public class MainSettingsFragment extends BaseSettingsFragment {
 
 	@Override
 	public int getStatusBarColorId() {
-		return isNightMode() ? R.color.status_bar_color_light : R.color.status_bar_color_dark;
+		return isNightMode() ? R.color.status_bar_color_dark : R.color.status_bar_color_light;
 	}
 
 	@ColorRes

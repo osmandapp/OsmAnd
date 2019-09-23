@@ -3,6 +3,7 @@ package net.osmand.plus.settings;
 import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
@@ -28,7 +29,12 @@ import java.util.List;
 
 public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 
-	public static final String TAG = "GeneralProfileSettingsFragment";
+	public static final String TAG = GeneralProfileSettingsFragment.class.getSimpleName();
+
+	@Override
+	protected String getFragmentTag() {
+		return TAG;
+	}
 
 	@Override
 	protected int getPreferencesResId() {
@@ -43,6 +49,20 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 	@Override
 	protected int getToolbarTitle() {
 		return R.string.general_settings_2;
+	}
+
+	@Override
+	public int getStatusBarColorId() {
+		View view = getView();
+		if (view != null) {
+			boolean nightMode = isNightMode();
+			if (Build.VERSION.SDK_INT >= 23 && !nightMode) {
+				view.setSystemUiVisibility(view.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+			}
+			return nightMode ? R.color.list_background_color_dark : R.color.list_background_color_light;
+		}
+
+		return -1;
 	}
 
 	@Override

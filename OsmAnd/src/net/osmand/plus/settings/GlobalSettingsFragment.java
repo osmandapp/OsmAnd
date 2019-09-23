@@ -19,9 +19,14 @@ import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 
 public class GlobalSettingsFragment extends BaseSettingsFragment implements SendAnalyticsBottomSheetDialogFragment.OnSendAnalyticsPrefsUpdate, OnPreferenceChanged {
 
-	public static final String TAG = "GlobalSettingsFragment";
+	public static final String TAG = GlobalSettingsFragment.class.getSimpleName();
 
 	private static final String SEND_ANONYMOUS_DATA_PREF_ID = "send_anonymous_data";
+
+	@Override
+	protected String getFragmentTag() {
+		return TAG;
+	}
 
 	@Override
 	protected int getPreferencesResId() {
@@ -36,6 +41,11 @@ public class GlobalSettingsFragment extends BaseSettingsFragment implements Send
 	@Override
 	protected int getToolbarTitle() {
 		return R.string.osmand_settings;
+	}
+
+	@Override
+	public int getStatusBarColorId() {
+		return isNightMode() ? R.color.status_bar_color_dark : R.color.status_bar_color_light;
 	}
 
 	@Override
