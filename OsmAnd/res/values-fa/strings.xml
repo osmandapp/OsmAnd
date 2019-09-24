@@ -82,7 +82,7 @@
     <string name="poi_filter_sightseeing">مکان‌های دیدنی</string>
     <string name="poi_filter_car_aid">تعمیرگاه</string>
     <string name="poi_filter_food_shop">فروشگاه مواد غذایی</string>
-    <string name="poi_filter_for_tourists">مناسب توریست‌ها</string>
+    <string name="poi_filter_for_tourists">برای گردشگران</string>
     <string name="poi_filter_fuel">جایگاه سوخت</string>
     <string name="auto_zoom_map_descr">تنظیم درجهٔ زوم بر اساس سرعت خودرو (همزمان که نقشه موقعیت فعلی را نشان می‌دهد).</string>
     <string name="recalculate_route_to_your_location">شیوهٔ رفت‌وآمد:</string>
@@ -118,7 +118,7 @@
     <string name="route_updated_loc_found">در انتظار دریافت موقعیت برای محاسبهٔ مسیر</string>
     <string name="osmand_parking_hours">ساعت</string>
     <string name="osmand_parking_minutes">دقیقه</string>
-    <string name="osmand_parking_position_description_add_time">ساعت پارک‌کردن خودرو</string>
+    <string name="osmand_parking_position_description_add_time">ساعت پارک خودرو</string>
     <string name="global_app_allocated_memory">حافظهٔ اختصاص‌یافته</string>
     <string name="native_app_allocated_memory">حافظهٔ کل سیستم</string>
     <string name="starting_point_too_far">مبدأ از نزدیک‌ترین جاده خیلی دور است.</string>
@@ -594,7 +594,7 @@
     <string name="av_camera_focus_edof">عمق میدان گسترده (EDOF)</string>
     <string name="av_camera_focus_infinity">روی بینهایت تنظیم شده</string>
     <string name="av_camera_focus_macro">حالت ماکرو (از نزدیک)</string>
-    <string name="av_camera_focus_continuous">دوربین، پیوسته وضوح را تنظیم می‌کند</string>
+    <string name="av_camera_focus_continuous">دوربین پیوسته فوکوس را تنظیم می‌کند</string>
     <string name="choose_intersected_street">تقاطع را انتخاب کنید</string>
     <string name="osm_settings">ویرایش نقشهٔ OSM</string>
     <string name="save_current_track_descr">رد جاری را همین حالا در قالب فایل GPX ذخیره کن.</string>
@@ -655,7 +655,7 @@
     <string name="show_current_gpx_title">نمایش رد جاری</string>
     <string name="fav_export_confirmation">قبلاً از نقاط برگزیده یک خروجی تهیه کرده‌اید و فایلش وجود دارد. خروجی جدید را جایگزین آن می‌کنید؟</string>
     <string name="osmand_development_plugin_description">به‌وسیلهٔ این افزونه می‌توانید تنظیمات توسعه‌ای و امکانات عیب‌یابی را مشاهده کنید؛ مانند شبیه‌سازی مسیریابی، آزمایش عملکرد رندر یا امتحان‌کردن پیام‌های گفتاری. 
-\nاین تنظیمات برای توسعه‌دهندگان فراهم شده است و به‌کار کاربران عادی نمی‌آید.</string>
+\nاین تنظیمات برای توسعه‌دهندگان فراهم شده است و به کار کاربران عادی نمی‌آید.</string>
     <string name="animate_route_off">پایان شبیه‌سازی</string>
     <string name="animate_route">شروع شبیه‌سازی</string>
     <string name="where_am_i">من کجا هستم؟</string>
@@ -883,7 +883,7 @@
     <string name="install_selected_build">آیا OsmAnd - {0}‎ به‌تاریخ {1} را نصب می‌کنید؟ ({2} مگابایت)</string>
     <string name="loading_builds_failed">بازیابی لیست ساخت‌های OsmAnd ناموفق بود</string>
     <string name="loading_builds">بارگیری ساخت‌های OsmAnd…</string>
-    <string name="select_build_to_install">یک ساخت OsmAnd را برای نصب انتخاب کنید</string>
+    <string name="select_build_to_install">یک ساخت OsmAnd را برای نصب برگزینید</string>
     <string name="gps_status_app_not_found">این برنامهٔ وضعیت GPS نصب نیست. در بازار اندروید بگردیم؟</string>
     <string name="voice_is_not_available_msg">راهنمای گفتاری موجود نیست. لطفاً به «تنطیمات» ← «تنظیمات ناوبری» ← «راهنمای گفتاری» بروید و یکی از بسته‌های پیام گفتاری را انتخاب یا دانلود کنید.</string>
     <string name="voice_is_not_available_title">راهنمای گفتاری انتخاب نشده</string>
@@ -982,7 +982,7 @@
 \nهرکدام از این نقشه‌ها هم به‌عنوان نقشهٔ پایه و هم به‌عنوان لایهٔ رویی یا زیری برای لایهٔ پایه (مثلاً نقشه‌های آفلاین OsmAnd) قابل‌تنظیم هستند. برای اینکه لایهٔ زیری را نمایان‌تر کنید می‌توانید اجزای خاصی را در نقشه‌های بُرداری OsmAnd از طریق منوی «پیکربندی نقشه» مخفی کنید. 
 \n 
 \nنقشه‌ها مستقیماً از طریق منابع آنلاین قابل‌دریافت هستند. همچنین می‌توانید آن‌ها را به‌صورت پایگاه‌دادهٔ SQLite برای استفادهٔ آفلاین آماده کنید و سپس در پوشهٔ داده‌های OsmAnd قرار دهید. نرم‌افزارهای مختلفی برای انجام این کار وجود دارد.</string>
-    <string name="osmand_accessibility_description">این افزونه امکانات قابلیت‌دسترسی (accessibility) در دستگاهتان را مستقیماً در OsmAnd به‌کار می‌گیرد و تسهیلاتی را در اختیارتان می‌گذارد؛ مانند تنظیم‌کردن سرعت گفتار موتور صوتی، تبدیل متن به گفتار (مثل اعلام موقعیت شما)، پیمایش صفحه به‌کمک صفحهٔ جهت‌دار و استفاده از توپک برای تنظیم بزرگ‌نمایی.</string>
+    <string name="osmand_accessibility_description">این افزونه امکانات قابلیت‌دسترسی (accessibility) در دستگاهتان را مستقیماً در OsmAnd به کار می‌گیرد و تسهیلاتی را در اختیارتان می‌گذارد؛ مانند تنظیم‌کردن سرعت گفتار موتور صوتی، تبدیل متن به گفتار (مثل اعلام موقعیت شما)، پیمایش صفحه به‌کمک صفحهٔ جهت‌دار و استفاده از توپک برای تنظیم بزرگ‌نمایی.</string>
     <string name="osm_editing_plugin_description">به‌وسیلهٔ این افزونه در تکمیل نقشهٔ OSM مشارکت کنید. مثلاً با ایجاد یا اصلاح مکان‌های پرکاربرد (POI)، ارسال فایل‌های GPXای که ضبط کرده‌اید و نوشتن یادداشت‌های OSMای. 
 \nدربارهٔ یادداشت‌های OSM: 
 \nhttps://wiki.osm.org/wiki/Fa:Notes 
@@ -1356,7 +1356,7 @@
     <string name="days_behind">روز قبل</string>
     <string name="shared_string_currently_recording_track">ردّ در حال ضبط</string>
     <string name="back_to_map">برگشتن به نقشه</string>
-    <string name="plugin_touringview_name">نمای گشتی نقشه</string>
+    <string name="plugin_touringview_name">نمای گردشگری نقشه</string>
     <string name="shared_string_audio">شنیداری</string>
     <string name="share_note">به‌اشتراک‌گذاری یادداشت</string>
     <string name="location_on_map">موقعیت: 
@@ -1565,7 +1565,7 @@
     <string name="rendering_value_translucent_blue_name">آبی شفاف</string>
     <string name="rendering_value_purple_name">بنفش</string>
     <string name="rendering_value_translucent_purple_name">بنفش شفاف</string>
-    <string name="restart_is_required">جهت به‌کار بستن همهٔ تغییرات، برنامه را ببندید و مجدداً باز کنید.</string>
+    <string name="restart_is_required">جهت به‌کاربستن همهٔ تغییرات، برنامه را ببندید و مجدداً باز کنید.</string>
     <string name="light_theme">روشن</string>
     <string name="dark_theme">تیره</string>
     <string name="lang_bn">بنگالی</string>
@@ -1996,7 +1996,7 @@
     <string name="simulate_initial_startup">شبیه‌سازی اولین اجرای برنامه</string>
     <string name="share_menu_location">به‌اشتراک‌گذاشتن مکان</string>
     <string name="shared_string_send">ارسال</string>
-    <string name="favorite_category_dublicate_message">لطفاً برای اسم دسته از نامی استفاده کنید که قبلاً به‌کار نبرده باشید.</string>
+    <string name="favorite_category_dublicate_message">لطفاً برای اسم دسته از نامی استفاده کنید که قبلاً به کار نبرده باشید.</string>
     <string name="favorite_category_name">نام دسته</string>
     <string name="favorite_category_add_new_title">افزودن دستهٔ جدید</string>
     <string name="regions">مناطق</string>
@@ -2657,7 +2657,7 @@
 \n • از این پس اشتراک OsmAnd Live همهٔ قابلیت‌های OsmAnd را در بر می‌گیرد 
 \n</string>
     <string name="what_is_here">چیزهایی که اینجاست:</string>
-    <string name="parked_at">ساعت پارک‌کردن</string>
+    <string name="parked_at">ساعت پارک</string>
     <string name="pick_up_till">برداشتن تا</string>
     <string name="without_time_limit">بدون محدودیت زمانی</string>
     <string name="context_menu_read_full_article">مقالهٔ کامل را بخوانید</string>
@@ -2688,8 +2688,8 @@
     <string name="toast_empty_name_error">مکان بی‌نام</string>
     <string name="show_closed_notes">دیدن یادداشت‌های بسته</string>
     <string name="switch_osm_notes_visibility_desc">پنهان/آشکارکردن یادداشت‌های OSM.</string>
-    <string name="gpx_file_desc">جی‌پی‌ایکس - مناسب برای استفاده در JOSM یا سایر ویرایشگرهای OSM.</string>
-    <string name="osc_file_desc">اُاِس‌سی - مناسب برای استفاده در OpenStreetMap.</string>
+    <string name="gpx_file_desc">‏GPX - مناسب برای استفاده در JOSM یا سایر ویرایشگرهای OSM.</string>
+    <string name="osc_file_desc">‏OSC - مناسب برای استفاده در OpenStreetMap.</string>
     <string name="shared_string_gpx_file">فایل GPX</string>
     <string name="osc_file">فایل OSC</string>
     <string name="choose_file_type">انتخاب قالب فایل</string>
@@ -2976,11 +2976,13 @@
 \n 
 \n • اصلاح مناطقی در آلمان، آفریقای جنوبی و کِبِک که سیل‌زده نمایش داده می‌شدند 
 \n 
-\n • پشتیبانی از درون‌برد KML و KMZ 
+\n • پشتیبانی از ورود KML و KMZ 
 \n 
 \n • حل مشکل از کار افتادن هنگام بازکردن برخی ایستگاه‌های حمل‌ونقل عمومی 
 \n 
-\n • حذف آمارگیرهای Facebook و Firebase از نسخهٔ رایگان (OsmAnd+‎ آن را ندارد)</string>
+\n • حذف آمارگیرهای Facebook و Firebase از نسخهٔ رایگان (OsmAnd+‎ آن را ندارد)
+\n
+\n</string>
     <string name="use_osm_live_public_transport_description">حمل‌ونقل عمومی با استفاده از به‌روزرسانی‌های OsmAnd Live فعال شود.</string>
     <string name="use_osm_live_public_transport">حمل‌ونقل عمومی با OsmAnd Live</string>
     <string name="transfers_size">%1$d انتقال</string>
@@ -3134,7 +3136,7 @@
     <string name="process_downloading_service">سرویس دانلود OsmAnd</string>
     <string name="shared_string_color_magenta">ارغوانی</string>
     <string name="shared_string_icon">نماد</string>
-    <string name="collected_data">داده‌های جمع‌آوری‌شده</string>
+    <string name="collected_data">جمع‌آوری داده‌ها</string>
     <string name="shared_string_min_speed">حداقل سرعت</string>
     <string name="shared_string_max_speed">حداکثر سرعت</string>
     <string name="default_speed_setting_title">سرعت پیشفرض</string>
@@ -3171,7 +3173,7 @@
     <string name="edit_profile_screen_options_subtitle">"انتخاب گزینه‌های پیشفرض  نمایشگر برای پروفایل"</string>
     <string name="edit_profile_nav_settings_subtitle">انتخاب تنظیمات پیشفرض ناوبری برای پروفایل</string>
     <string name="app_mode_ufo">بشقاب‌پرنده</string>
-    <string name="app_mode_personal_transporter">رانَک (وسیلهٔ نقلیهٔ انفرادی)</string>
+    <string name="app_mode_personal_transporter">رانَک</string>
     <string name="app_mode_monowheel">یکچرخه</string>
     <string name="app_mode_scooter">اسکوتر</string>
     <string name="privacy_and_security_change_descr">با زدن روی«مجاز» %1$s ما را می‌پذیرید</string>
@@ -3202,7 +3204,7 @@
     <string name="press_again_to_change_the_map_orientation">دوباره بزنید تا جهت نقشه را عوض کنید</string>
     <string name="precision_hdop_and_vdop">"دقت افقی:  %1$s، عمودی:  %2$s"</string>
     <string name="precision_hdop">دقت افقی: %s</string>
-    <string name="turn_screen_on_router">بیدارباش هنگام دورزدن</string>
+    <string name="turn_screen_on_router">بیدارباش سر پیچ</string>
     <string name="turn_screen_on_time_descr">زمان روشن‌شدن نمایشگر را تنظیم کنید.</string>
     <string name="turn_screen_on_sensor">استفاده از حسگر مجاورت</string>
     <string name="turn_screen_on_sensor_descr">در هنگام ناوبری، دست خود را بر فراز نمایشگر تکان دهید تا نمایشگر روشن شود.</string>
@@ -3229,7 +3231,7 @@
     <string name="routing_attr_max_num_changes_description">بیشترین تعداد تغییر وسیله را مشخص کنید</string>
     <string name="routing_attr_max_num_changes_name">تعداد تغییرات</string>
     <string name="gpx_join_gaps">اتصال بریدگی‌ها</string>
-    <string name="rendering_attr_showLez_description">محدوده‌های کم‌آلاینده (LEZ) را روی نقشه نشان بده. بر مسیریابی تأثیر ندارد.</string>
+    <string name="rendering_attr_showLez_description">محدوده‌های کم‌آلاینده (LEZ) را روی نقشه نشان بده. روی مسیریابی اثر نمی‌گذارد.</string>
     <string name="rendering_attr_showLez_name">نمایش محدوده‌های کم‌آلاینده</string>
     <string name="temporary_conditional_routing">در نظر گرفتن محدودیت‌های موقت در مسیریابی</string>
     <string name="routing_attr_piste_type_downhill_name">اسکی آلپاین/دان‌هیل</string>
@@ -3284,9 +3286,9 @@
     <string name="switch_profile">تعویض پروفایل</string>
     <string name="language_and_output">زبان و خروجی</string>
     <string name="reset_to_default">بازنشانی به پیشفرض</string>
-    <string name="manage_profiles_descr">ساخت، درون‌برد و ویرایش پروفایل‌ها</string>
+    <string name="manage_profiles_descr">پروفایل‌ها را بسازید، وارد کنید، ویرایش کنید</string>
     <string name="manage_profiles">مدیریت پروفایل‌های برنامه…</string>
-    <string name="osmand_settings_descr">روی کل برنامه اثرگذار است</string>
+    <string name="osmand_settings_descr">روی کل برنامه اثر می‌گذارد</string>
     <string name="osmand_settings">تنظیمات OsmAnd</string>
     <string name="copy_from_other_profile">کپی از پروفایل دیگر</string>
     <string name="shared_string_other">سایر</string>
@@ -3300,7 +3302,7 @@
     <string name="routing_attr_allow_classic_only_description">"مسیرهایی که فقط برای سبک کلاسیک آماده شده  و مسیر اسکیت ندارند. مسیرهای سُست‌تر آماده‌شده با برف‌روهای کوچک‌تر و مسیرهای دست‌ساز اسکی‌بازان را نیز شامل می‌شود."</string>
     <string name="external_input_device_descr">یک دستگاه مانند صفحه‌کلید معمولی یا WunderLINQ را برای کنترل خارجی انتخاب کنید.</string>
     <string name="utm_format_descr">‏OsmAnd از قالب UTM Standard استفاده می‌کند که مشابه (اما نه یکسان) با قالب UTM Nato است.</string>
-    <string name="apply_to_current_profile">به‌کارگیری برای پروفایل %1$s کنونی</string>
+    <string name="apply_to_current_profile">به‌کارگیری برای پروفایل کنونی: %1$s</string>
     <string name="apply_to_all_profiles">به‌کارگیری برای همهٔ پروفایل‌ها</string>
     <string name="map_look_descr">نمادها، ابزارک‌ها</string>
     <string name="general_settings_profile_descr">پوستهٔ برنامه، یکاها، منطقه</string>
@@ -3319,4 +3321,13 @@
     <string name="map_during_navigation_info">نقشه در هنگام ناوبری</string>
     <string name="map_during_navigation">نقشه در هنگام ناوبری</string>
     <string name="plugins_settings">تنظیمات افزونه</string>
+    <string name="routing_profile_geocoding">رمزگذاری جغرافیایی</string>
+    <string name="routing_attr_piste_type_skitour_name">تور اسکی</string>
+    <string name="routing_attr_piste_type_skitour_description">مسیرها برای تور اسکی.</string>
+    <string name="app_mode_camper">کمپر</string>
+    <string name="app_mode_campervan">ون کمپر</string>
+    <string name="app_mode_wagon">واگن</string>
+    <string name="app_mode_pickup_truck">کامیون پیک‌آپ</string>
+    <string name="analytics_pref_title">تحلیل‌ها</string>
+    <string name="logcat_buffer">بافر لاگ‌کت</string>
 </resources>
