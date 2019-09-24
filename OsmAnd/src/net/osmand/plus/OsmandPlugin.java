@@ -170,6 +170,22 @@ public abstract class OsmandPlugin {
 		}
 	}
 
+	public static void updateActivatedPlugins(OsmandApplication app, Set<String> enabledPlugins) {
+		for (OsmandPlugin plugin : allPlugins) {
+			if (enabledPlugins.contains(plugin.getId())) {
+				try {
+					if (plugin.init(app, null)) {
+						plugin.setActive(true);
+					}
+				} catch (Exception e) {
+					LOG.error("Plugin initialization failed " + plugin.getId(), e);
+				}
+			} else if (plugin.isActive()) {
+				plugin.setActive(false);
+			}
+		}
+	}
+
 	private static void checkMarketPlugin(@NonNull OsmandApplication app, @NonNull Set<String> enabledPlugins,
 										  @NonNull OsmandPlugin plugin, boolean paid, String id, String id2) {
 		boolean marketEnabled = Version.isMarketEnabled(app);

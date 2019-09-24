@@ -1852,6 +1852,7 @@ public class OsmandAidlApi {
 
 	public void loadConnectedApps() {
 		try {
+			connectedApps.clear();
 			JSONArray array = new JSONArray(app.getSettings().API_CONNECTED_APPS_JSON.get());
 			for (int i = 0; i < array.length(); i++) {
 				JSONObject obj = array.getJSONObject(i);
