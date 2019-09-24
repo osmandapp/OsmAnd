@@ -3156,7 +3156,7 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="shared_string_file_is_saved">%s uložen</string>
     <string name="app_mode_ufo">UFO</string>
     <string name="shared_string_open_track">Otevřít trasu</string>
-    <string name="shared_string_track_is_saved">Trasa % s je uložena</string>
+    <string name="shared_string_track_is_saved">Trasa %s je uložena</string>
     <string name="gpx_join_gaps">Spojit mezery</string>
     <string name="app_mode_camper">Obytný přívěs</string>
     <string name="app_mode_campervan">Obytné vozidlo</string>
