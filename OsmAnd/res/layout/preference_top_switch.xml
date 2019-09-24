@@ -26,6 +26,7 @@
 			android:layout_height="wrap_content"
 			android:layout_gravity="center_vertical"
 			android:layout_weight="1"
+			android:letterSpacing="@dimen/title_letter_spacing"
 			android:paddingLeft="@dimen/content_padding"
 			android:paddingRight="@dimen/content_padding"
 			android:textColor="?attr/text_color_tab_active"

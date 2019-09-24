@@ -24,6 +24,7 @@
 			android:layout_gravity="center_vertical"
 			android:layout_weight="1"
 			android:ellipsize="end"
+			android:letterSpacing="@dimen/title_letter_spacing"
 			android:maxLines="1"
 			android:textAppearance="@style/TextAppearance.ListItemTitle"
 			android:textColor="?attr/active_color_basic"

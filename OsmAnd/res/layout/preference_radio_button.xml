@@ -51,6 +51,7 @@
 				android:id="@android:id/summary"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
+				android:letterSpacing="@dimen/description_letter_spacing"
 				android:maxLines="4"
 				android:paddingBottom="@dimen/gpx_small_text_margin"
 				android:textColor="?android:textColorSecondary"

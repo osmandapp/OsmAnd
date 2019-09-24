@@ -5,6 +5,7 @@
 	android:id="@+id/description"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
+	android:letterSpacing="@dimen/description_letter_spacing"
 	android:minHeight="@dimen/bottom_sheet_list_item_height"
 	android:paddingLeft="@dimen/content_padding"
 	android:paddingTop="@dimen/bottom_sheet_image_text_margin_start"

@@ -59,16 +59,12 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 
 	@Override
 	public int getStatusBarColorId() {
+		boolean nightMode = isNightMode();
 		View view = getView();
-		if (view != null) {
-			boolean nightMode = isNightMode();
-			if (Build.VERSION.SDK_INT >= 23 && !nightMode) {
-				view.setSystemUiVisibility(view.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-			}
-			return nightMode ? R.color.list_background_color_dark : R.color.list_background_color_light;
+		if (view != null && Build.VERSION.SDK_INT >= 23 && !nightMode) {
+			view.setSystemUiVisibility(view.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 		}
-
-		return -1;
+		return nightMode ? R.color.list_background_color_dark : R.color.list_background_color_light;
 	}
 
 	@Override

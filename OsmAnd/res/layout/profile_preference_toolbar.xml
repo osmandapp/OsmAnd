@@ -31,6 +31,7 @@
 			android:layout_height="match_parent"
 			android:layout_weight="1"
 			android:gravity="center_vertical"
+			android:letterSpacing="@dimen/text_button_letter_spacing"
 			android:paddingLeft="@dimen/content_padding"
 			android:paddingRight="@dimen/content_padding"
 			android:textColor="?android:textColorPrimary"
