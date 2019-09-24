@@ -3278,4 +3278,5 @@
     <string name="route_parameters">路徑參數</string>
     <string name="application_profile_changed">應用程式設定檔變更為「%s」</string>
     <string name="logcat_buffer">Logcat 緩衝</string>
+    <string name="plugins_settings">外掛程式設定</string>
 </resources>
