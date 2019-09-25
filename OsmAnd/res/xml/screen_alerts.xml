@@ -2,12 +2,6 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:tools="http://schemas.android.com/tools">
 
-	<SwitchPreferenceCompat
-		android:key="show_routing_alarms"
-		android:layout="@layout/preference_top_switch"
-		android:summaryOff="@string/shared_string_off"
-		android:summaryOn="@string/shared_string_on" />
-
 	<Preference
 		android:key="screen_alerts_image"
 		android:layout="@layout/settings_device_image_screen"
@@ -22,25 +16,21 @@
 		tools:icon="@drawable/ic_action_info_dark" />
 
 	<SwitchPreferenceCompat
-		android:dependency="show_routing_alarms"
 		android:key="show_traffic_warnings"
 		android:layout="@layout/preference_switch"
 		android:title="@string/show_traffic_warnings" />
 
 	<SwitchPreferenceCompat
-		android:dependency="show_routing_alarms"
 		android:key="show_pedestrian"
 		android:layout="@layout/preference_switch"
 		android:title="@string/show_pedestrian_warnings" />
 
 	<SwitchPreferenceCompat
-		android:dependency="show_routing_alarms"
 		android:key="show_cameras"
 		android:layout="@layout/preference_switch"
 		android:title="@string/show_cameras" />
 
 	<SwitchPreferenceCompat
-		android:dependency="show_routing_alarms"
 		android:key="show_tunnels"
 		android:layout="@layout/preference_switch"
 		android:title="@string/show_tunnels" />

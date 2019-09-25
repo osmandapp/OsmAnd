@@ -39,24 +39,12 @@
 			osmand:typeface="@string/font_roboto_medium"
 			tools:text="@string/routing_settings_2" />
 
-		<FrameLayout
-			android:id="@+id/switch_profile_button"
+		<include
+			layout="@layout/profile_button_small"
 			android:layout_width="@dimen/route_info_toolbar_button_size"
 			android:layout_height="@dimen/route_info_toolbar_button_size"
 			android:layout_marginLeft="@dimen/content_padding_half"
-			android:layout_marginRight="@dimen/content_padding_half"
-			tools:background="?attr/bg_circle"
-			tools:backgroundTint="@color/active_buttons_and_links_trans_light">
-
-			<ImageView
-				android:id="@+id/profile_icon"
-				android:layout_width="@dimen/standard_icon_size"
-				android:layout_height="@dimen/standard_icon_size"
-				android:layout_gravity="center"
-				tools:src="@drawable/ic_action_car_dark"
-				tools:tint="@color/active_color_primary_light" />
-
-		</FrameLayout>
+			android:layout_marginRight="@dimen/content_padding_half" />
 
 	</LinearLayout>
 

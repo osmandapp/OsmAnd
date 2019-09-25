@@ -10,9 +10,11 @@ import android.os.Build;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceViewHolder;
 import android.support.v7.preference.SwitchPreferenceCompat;
+import android.support.v7.widget.SwitchCompat;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.ApplicationMode;
@@ -44,12 +46,51 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 
 	@Override
 	protected int getToolbarResId() {
-		return R.layout.profile_preference_toolbar;
+		return R.layout.profile_preference_toolbar_with_switch;
 	}
 
 	@Override
 	protected int getToolbarTitle() {
 		return R.string.voice_announces;
+	}
+
+	@Override
+	protected void createToolbar(LayoutInflater inflater, View view) {
+		super.createToolbar(inflater, view);
+
+		view.findViewById(R.id.toolbar_switch_container).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				boolean checked = !settings.SPEAK_ROUTING_ALARMS.get();
+				settings.SPEAK_ROUTING_ALARMS.set(checked);
+				updateToolbarSwitch();
+				enableDisablePreferences(checked);
+			}
+		});
+	}
+
+	@Override
+	protected void updateToolbar() {
+		super.updateToolbar();
+		updateToolbarSwitch();
+	}
+
+	private void updateToolbarSwitch() {
+		View view = getView();
+		if (view == null) {
+			return;
+		}
+		boolean checked = settings.SPEAK_ROUTING_ALARMS.get();
+
+		int color = checked ? getActiveProfileColor() : ContextCompat.getColor(app, R.color.preference_top_switch_off);
+		View switchContainer = view.findViewById(R.id.toolbar_switch_container);
+		AndroidUtils.setBackground(switchContainer, new ColorDrawable(color));
+
+		SwitchCompat switchView = (SwitchCompat) switchContainer.findViewById(R.id.switchWidget);
+		switchView.setChecked(checked);
+
+		TextView title = switchContainer.findViewById(R.id.switchButtonText);
+		title.setText(checked ? R.string.shared_string_on : R.string.shared_string_off);
 	}
 
 	@Override
@@ -77,18 +118,7 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 			setupAudioStreamGuidancePref();
 			setupInterruptMusicPref();
 		}
-	}
-
-	@Override
-	protected void onBindPreferenceViewHolder(Preference preference, PreferenceViewHolder holder) {
-		super.onBindPreferenceViewHolder(preference, holder);
-
-		if (settings.SPEAK_ROUTING_ALARMS.getId().equals(preference.getKey())) {
-			boolean checked = ((SwitchPreferenceCompat) preference).isChecked();
-			int color = checked ? getActiveProfileColor() : ContextCompat.getColor(app, R.color.preference_top_switch_off);
-
-			AndroidUtils.setBackground(holder.itemView, new ColorDrawable(color));
-		}
+		enableDisablePreferences(settings.SPEAK_ROUTING_ALARMS.get());
 	}
 
 	private void setupSpeedLimitExceedPref() {
@@ -187,18 +217,13 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 
 		ListPreferenceEx audioStreamGuidance = createListPreferenceEx(settings.AUDIO_STREAM_GUIDANCE.getId(), streamTypes, streamIntTypes, R.string.choose_audio_stream, R.layout.preference_with_descr);
 		audioStreamGuidance.setIconSpaceReserved(true);
-
 		getPreferenceScreen().addPreference(audioStreamGuidance);
-
-		audioStreamGuidance.setDependency(settings.SPEAK_ROUTING_ALARMS.getId());
 	}
 
 	private void setupInterruptMusicPref() {
 		Preference interruptMusicPref = createSwitchPreference(settings.INTERRUPT_MUSIC, R.string.interrupt_music, R.string.interrupt_music_descr, R.layout.preference_switch);
 		interruptMusicPref.setIconSpaceReserved(true);
 		getPreferenceScreen().addPreference(interruptMusicPref);
-
-		interruptMusicPref.setDependency(settings.SPEAK_ROUTING_ALARMS.getId());
 	}
 
 	public void confirmSpeedCamerasDlg() {

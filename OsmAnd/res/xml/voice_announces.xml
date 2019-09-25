@@ -2,12 +2,6 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:tools="http://schemas.android.com/tools">
 
-	<SwitchPreferenceCompat
-		android:key="speak_routing_alarms"
-		android:layout="@layout/preference_top_switch"
-		android:summaryOff="@string/shared_string_off"
-		android:summaryOn="@string/shared_string_on" />
-
 	<Preference
 		android:key="voice_announces_info"
 		android:layout="@layout/preference_info"
@@ -17,19 +11,16 @@
 		tools:icon="@drawable/ic_action_info_dark" />
 
 	<SwitchPreferenceCompat
-		android:dependency="speak_routing_alarms"
 		android:key="speak_street_names"
 		android:layout="@layout/preference_switch"
 		android:title="@string/speak_street_names" />
 
 	<SwitchPreferenceCompat
-		android:dependency="speak_routing_alarms"
 		android:key="speak_traffic_warnings"
 		android:layout="@layout/preference_switch"
 		android:title="@string/speak_traffic_warnings" />
 
 	<SwitchPreferenceCompat
-		android:dependency="speak_routing_alarms"
 		android:key="speak_pedestrian"
 		android:layout="@layout/preference_switch"
 		android:title="@string/speak_pedestrian" />
@@ -39,13 +30,11 @@
 		android:selectable="false" />
 
 	<SwitchPreferenceCompat
-		android:dependency="speak_routing_alarms"
 		android:key="speak_speed_limit"
 		android:layout="@layout/preference_switch"
 		android:title="@string/speak_speed_limit" />
 
 	<net.osmand.plus.settings.preferences.ListPreferenceEx
-		android:dependency="speak_routing_alarms"
 		android:key="speed_limit_exceed"
 		android:layout="@layout/preference_with_descr"
 		android:title="@string/speed_limit_exceed" />
@@ -55,31 +44,26 @@
 		android:selectable="false" />
 
 	<SwitchPreferenceCompat
-		android:dependency="speak_routing_alarms"
 		android:key="speak_cameras"
 		android:layout="@layout/preference_switch"
 		android:title="@string/speak_cameras" />
 
 	<SwitchPreferenceCompat
-		android:dependency="speak_routing_alarms"
 		android:key="speak_tunnels"
 		android:layout="@layout/preference_switch"
 		android:title="@string/show_tunnels" />
 
 	<SwitchPreferenceCompat
-		android:dependency="speak_routing_alarms"
 		android:key="announce_wpt"
 		android:layout="@layout/preference_switch"
 		android:title="@string/shared_string_gpx_waypoints" />
 
 	<SwitchPreferenceCompat
-		android:dependency="speak_routing_alarms"
 		android:key="announce_nearby_favorites"
 		android:layout="@layout/preference_switch"
 		android:title="@string/speak_favorites" />
 
 	<SwitchPreferenceCompat
-		android:dependency="speak_routing_alarms"
 		android:key="announce_nearby_poi"
 		android:layout="@layout/preference_switch"
 		android:title="@string/speak_poi" />
@@ -89,13 +73,11 @@
 		android:selectable="false" />
 
 	<net.osmand.plus.settings.preferences.ListPreferenceEx
-		android:dependency="speak_routing_alarms"
 		android:key="keep_informing"
 		android:layout="@layout/preference_with_descr"
 		android:title="@string/keep_informing" />
 
 	<net.osmand.plus.settings.preferences.ListPreferenceEx
-		android:dependency="speak_routing_alarms"
 		android:key="arrival_distance_factor"
 		android:layout="@layout/preference_with_descr"
 		android:title="@string/arrival_distance" />
@@ -110,7 +92,6 @@
 		android:title="@string/language_and_output" />
 
 	<net.osmand.plus.settings.preferences.ListPreferenceEx
-		android:dependency="speak_routing_alarms"
 		android:key="voice_provider"
 		android:layout="@layout/preference_with_descr"
 		android:persistent="false"

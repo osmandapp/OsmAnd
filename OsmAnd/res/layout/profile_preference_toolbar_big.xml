@@ -47,7 +47,7 @@
 		</LinearLayout>
 
 		<LinearLayout
-			android:id="@+id/switch_profile_button"
+			android:id="@+id/profile_button"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:layout_marginLeft="@dimen/context_menu_padding_margin_tiny"
