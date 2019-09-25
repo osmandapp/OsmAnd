@@ -22,6 +22,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
@@ -33,6 +34,7 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.PluginActivity;
+import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 
 import org.apache.commons.logging.Log;
@@ -94,6 +96,35 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 		getListView().addItemDecoration(createDividerItemDecoration());
 
 		return view;
+	}
+
+	@Override
+	protected void createToolbar(LayoutInflater inflater, View view) {
+		super.createToolbar(inflater, view);
+
+		TextView toolbarTitle = (TextView) view.findViewById(R.id.profile_title);
+		toolbarTitle.setTypeface(FontCache.getRobotoMedium(view.getContext()));
+
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+			float letterSpacing = AndroidUtils.getFloatValueFromRes(view.getContext(), R.dimen.title_letter_spacing);
+			toolbarTitle.setLetterSpacing(letterSpacing);
+		}
+		TextView profileType = (TextView) view.findViewById(R.id.profile_type);
+		profileType.setVisibility(View.VISIBLE);
+	}
+
+	@Override
+	protected void updateToolbar() {
+		super.updateToolbar();
+
+		View view = getView();
+		if (view != null) {
+			ApplicationMode selectedMode = getSelectedAppMode();
+			String appModeType = getAppModeDescription(view.getContext(), selectedMode);
+
+			TextView profileType = (TextView) view.findViewById(R.id.profile_type);
+			profileType.setText(appModeType);
+		}
 	}
 
 	private RecyclerView.ItemDecoration createDividerItemDecoration() {

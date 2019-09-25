@@ -60,11 +60,11 @@ import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.profiles.AppModesBottomSheetDialogFragment;
 import net.osmand.plus.profiles.SelectAppModesBottomSheetDialogFragment;
-import net.osmand.plus.profiles.SettingsProfileActivity;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routepreparationmenu.WaypointsFragment;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.settings.BaseSettingsFragment;
 import net.osmand.plus.settings.ConfigureProfileFragment;
 import net.osmand.plus.views.BaseMapLayer;
 import net.osmand.plus.views.MapControlsLayer;
@@ -74,7 +74,6 @@ import net.osmand.plus.wikivoyage.WikivoyageWelcomeDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelDbHelper;
 import net.osmand.plus.wikivoyage.explore.WikivoyageExploreActivity;
 import net.osmand.router.GeneralRouter;
-import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
@@ -639,13 +638,8 @@ public class MapActivityActions implements DialogProvider {
 
 		//switch profile button
 		ApplicationMode currentMode = app.getSettings().APPLICATION_MODE.get();
-		String modeDescription;
-		if (currentMode.isCustomProfile()) {
-			modeDescription = String.format(app.getString(R.string.profile_type_descr_string),
-					Algorithms.capitalizeFirstLetterAndLowercase(currentMode.getParent().toHumanString(app)));
-		} else {
-			modeDescription = getString(R.string.profile_type_base_string);
-		}
+		String modeDescription = BaseSettingsFragment.getAppModeDescription(app, currentMode);
+
 		optionsMenuHelper.addItem(new ItemBuilder().setLayout(R.layout.main_menu_drawer_btn_switch_profile)
 				.setIcon(currentMode.getIconRes())
 				.setColor(currentMode.getIconColorInfo().getColor(nightMode))

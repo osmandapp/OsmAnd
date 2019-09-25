@@ -1,7 +1,6 @@
 package net.osmand;
 
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.KeyguardManager;
 import android.content.Context;
@@ -424,6 +423,12 @@ public class AndroidUtils {
 		TypedValue outValue = new TypedValue();
 		ctx.getTheme().resolveAttribute(attribute, outValue, true);
 		return outValue.resourceId;
+	}
+
+	public static float getFloatValueFromRes(Context ctx, int resId) {
+		TypedValue outValue = new TypedValue();
+		ctx.getResources().getValue(resId, outValue, true);
+		return outValue.getFloat();
 	}
 
 	public static int getStatusBarHeight(Context ctx) {

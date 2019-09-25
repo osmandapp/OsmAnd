@@ -56,6 +56,7 @@ import net.osmand.plus.settings.bottomsheets.SingleSelectPreferenceBottomSheet;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.MultiSelectBooleanPreference;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
+import net.osmand.util.Algorithms;
 
 public abstract class BaseSettingsFragment extends PreferenceFragmentCompat implements OnPreferenceChangeListener,
 		OnPreferenceClickListener, AppModeChangedListener {
@@ -305,10 +306,6 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		if (profileTitle != null) {
 			String appName = selectedAppMode.toHumanString(app);
 			profileTitle.setText(appName);
-		}
-		TextView profileType = (TextView) view.findViewById(R.id.profile_type);
-		if (profileType != null) {
-			profileType.setVisibility(View.GONE);
 		}
 		View toolbarDivider = view.findViewById(R.id.toolbar_divider);
 		if (toolbarDivider != null) {
@@ -587,5 +584,17 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		}
 
 		return listPreference;
+	}
+
+	public static String getAppModeDescription(Context ctx, ApplicationMode mode) {
+		String description;
+		if (mode.isCustomProfile()) {
+			description = String.format(ctx.getString(R.string.profile_type_descr_string),
+					Algorithms.capitalizeFirstLetterAndLowercase(mode.getParent().toHumanString(ctx)));
+		} else {
+			description = ctx.getString(R.string.profile_type_base_string);
+		}
+
+		return description;
 	}
 }
