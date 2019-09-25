@@ -2527,7 +2527,7 @@
     <string name="reset_to_default">Varsayılanlara geri dön</string>
     <string name="manage_profiles_descr">Profil oluşturma, içe aktarma, düzenleme</string>
     <string name="manage_profiles">Uygulama profillerini yönet…</string>
-    <string name="application_profile_changed">Uygulama profili \"% s\" olarak değiştirildi</string>
+    <string name="application_profile_changed">Uygulama profili \"%s\" olarak değiştirildi</string>
     <string name="logcat_buffer">Logcat tamponu</string>
     <string name="plugins_settings">Eklenti ayarları</string>
 </resources>
