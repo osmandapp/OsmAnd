@@ -11,11 +11,13 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.support.v7.preference.TwoStatePreference;
 import android.support.v7.widget.AppCompatCheckedTextView;
+import android.support.v7.widget.SwitchCompat;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
@@ -88,7 +90,17 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 	protected void onBindPreferenceViewHolder(Preference preference, PreferenceViewHolder holder) {
 		super.onBindPreferenceViewHolder(preference, holder);
 
-		OsmandSettings.OsmandPreference osmandPreference = settings.getPreference(preference.getKey());
+		String prefId = preference.getKey();
+		if (settings.EXTERNAL_INPUT_DEVICE.getId().equals(prefId)) {
+			boolean checked = settings.EXTERNAL_INPUT_DEVICE.get() != OsmandSettings.NO_EXTERNAL_DEVICE;
+
+			SwitchCompat switchView = (SwitchCompat) holder.findViewById(R.id.switchWidget);
+			switchView.setOnCheckedChangeListener(null);
+			switchView.setChecked(checked);
+			switchView.setOnCheckedChangeListener(externalInputDeviceListener);
+		}
+
+		OsmandSettings.OsmandPreference osmandPreference = settings.getPreference(prefId);
 		TextView summaryView = (TextView) holder.findViewById(android.R.id.summary);
 		if (osmandPreference != null && summaryView != null) {
 			CharSequence summary = null;
@@ -107,6 +119,23 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 			summaryView.setText(summary);
 		}
 	}
+
+	CompoundButton.OnCheckedChangeListener externalInputDeviceListener = new CompoundButton.OnCheckedChangeListener() {
+		@Override
+		public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+			ListPreferenceEx externalInputDevice = (ListPreferenceEx) findPreference(settings.EXTERNAL_INPUT_DEVICE.getId());
+			if (isChecked) {
+				getPreferenceManager().showDialog(externalInputDevice);
+				buttonView.setChecked(false);
+			} else {
+				if (externalInputDevice.callChangeListener(OsmandSettings.NO_EXTERNAL_DEVICE)) {
+					externalInputDevice.setValue(OsmandSettings.NO_EXTERNAL_DEVICE);
+				} else {
+					buttonView.setChecked(true);
+				}
+			}
+		}
+	};
 
 	private void setupAppThemePref() {
 		final ListPreferenceEx appTheme = (ListPreferenceEx) findPreference(settings.OSMAND_THEME.getId());
@@ -227,15 +256,14 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 
 	private void setupExternalInputDevicePref() {
 		ListPreferenceEx externalInputDevice = (ListPreferenceEx) findPreference(settings.EXTERNAL_INPUT_DEVICE.getId());
+		externalInputDevice.setSummary(R.string.sett_no_ext_input);
 		externalInputDevice.setEntries(new String[] {
-				getString(R.string.sett_no_ext_input),
 				getString(R.string.sett_generic_ext_input),
 				getString(R.string.sett_wunderlinq_ext_input),
 				getString(R.string.sett_parrot_ext_input)
 		});
 
 		externalInputDevice.setEntryValues(new Integer[] {
-				OsmandSettings.NO_EXTERNAL_DEVICE,
 				OsmandSettings.GENERIC_EXTERNAL_DEVICE,
 				OsmandSettings.WUNDERLINQ_EXTERNAL_DEVICE,
 				OsmandSettings.PARROT_EXTERNAL_DEVICE}

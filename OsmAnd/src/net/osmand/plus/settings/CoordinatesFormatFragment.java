@@ -197,7 +197,7 @@ public class CoordinatesFormatFragment extends BaseSettingsFragment {
 			if (settings.COORDINATES_FORMAT.isSetForMode(getSelectedAppMode())) {
 				settings.COORDINATES_FORMAT.set(newFormat);
 				updateSelectedFormatPrefs(key);
-				return true;
+				return (Boolean) newValue;
 			} else {
 				FragmentManager fragmentManager = getFragmentManager();
 				if (fragmentManager != null) {
