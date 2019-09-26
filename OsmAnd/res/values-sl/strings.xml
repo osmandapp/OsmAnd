@@ -3242,7 +3242,7 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="vehicle_parameters_descr">Masa, višina, hitrost</string>
     <string name="vehicle_parameters">Parametri vozila</string>
     <string name="voice_announces_info">"Glasovne najave se predvajajo le med  navigacijo."</string>
-    <string name="voice_announces_descr">Navodila nvigacije in najave</string>
+    <string name="voice_announces_descr">Navodila navigacije in najave</string>
     <string name="voice_announces">Glasovne najave</string>
     <string name="screen_alerts">Zaslonska opozorila</string>
     <string name="route_parameters_descr">Nastavitev parametrov poti</string>
@@ -3263,4 +3263,5 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="wake_time">Prehod iz pripravljenosti</string>
     <string name="screen_alerts_descr">Med navigacijo bodo opozorila prikazana na levem spodnjem robu zaslona.</string>
     <string name="logcat_buffer">Medpomnilnik Logcat</string>
+    <string name="plugins_settings">Nastavitve vstavka</string>
 </resources>

@@ -201,4 +201,8 @@
     <string name="send_my_location">Pošlji moje trenutno mesto</string>
     <string name="gps_and_location">Položaj</string>
     <string name="sharing_time">Čas izmenjave</string>
+    <string name="choose_osmand_desc">Izberite različico programa OsmAnd, kjer naj bodo stiki prikazani na zemljevidu.</string>
+    <string name="gps_points_in_buffer">poslano (%1$d v medpomnilniku)</string>
+    <string name="timeline_available_for_free_now">Časovnica je od sedaj na voljo brezplačno.</string>
+    <string name="location_recording_enabled">Beleženje trenutnega mesta je omogočeno</string>
 </resources>

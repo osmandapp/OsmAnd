@@ -3230,7 +3230,7 @@
     <string name="base_profile_descr_aircraft">هواپیما، گلایدینگ</string>
     <string name="routing_attr_max_num_changes_description">بیشترین تعداد تغییر وسیله را مشخص کنید</string>
     <string name="routing_attr_max_num_changes_name">تعداد تغییرات</string>
-    <string name="gpx_join_gaps">اتصال بریدگی‌ها</string>
+    <string name="gpx_join_gaps">حذف وقفه‌ها</string>
     <string name="rendering_attr_showLez_description">محدوده‌های کم‌آلاینده (LEZ) را روی نقشه نشان بده. روی مسیریابی اثر نمی‌گذارد.</string>
     <string name="rendering_attr_showLez_name">نمایش محدوده‌های کم‌آلاینده</string>
     <string name="temporary_conditional_routing">در نظر گرفتن محدودیت‌های موقت در مسیریابی</string>
