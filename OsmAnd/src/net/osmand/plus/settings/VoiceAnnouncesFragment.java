@@ -221,7 +221,7 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 	}
 
 	private void setupInterruptMusicPref() {
-		Preference interruptMusicPref = createSwitchPreference(settings.INTERRUPT_MUSIC, R.string.interrupt_music, R.string.interrupt_music_descr, R.layout.preference_switch);
+		Preference interruptMusicPref = createSwitchPreference(settings.INTERRUPT_MUSIC, R.string.interrupt_music, R.string.interrupt_music_descr, R.layout.preference_switch_with_descr);
 		interruptMusicPref.setIconSpaceReserved(true);
 		getPreferenceScreen().addPreference(interruptMusicPref);
 	}

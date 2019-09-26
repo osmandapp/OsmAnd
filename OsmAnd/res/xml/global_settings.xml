@@ -34,7 +34,7 @@
 	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
 		android:icon="@drawable/ic_action_privacy_and_security"
 		android:key="send_anonymous_data"
-		android:layout="@layout/preference_dialog_and_switch"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
 		android:persistent="false"
 		android:summaryOff="@string/shared_string_off"
 		android:summaryOn="@string/shared_string_on"
@@ -43,14 +43,14 @@
 	<SwitchPreferenceCompat
 		android:icon="@drawable/ic_action_notification"
 		android:key="do_not_show_startup_messages"
-		android:layout="@layout/preference_switch"
+		android:layout="@layout/preference_switch_with_descr"
 		android:summaryOff="@string/shared_string_off"
 		android:summaryOn="@string/shared_string_on"
 		android:title="@string/start_up_message_pref" />
 
 	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
 		android:key="enable_proxy"
-		android:layout="@layout/preference_dialog_and_switch"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
 		android:summaryOff="@string/shared_string_off"
 		android:summaryOn="@string/shared_string_on"
 		android:title="@string/proxy_pref_title"
