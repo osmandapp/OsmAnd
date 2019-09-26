@@ -2308,4 +2308,10 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="show_more">Näytä lisää</string>
     <string name="tracks_on_map">Näytä jäljet</string>
     <string name="quick_action_show_hide_gpx_tracks">Näytä/piilota GPX jäljet</string>
+    <string name="configure_profile_info">Kaikki alla näkyvät asetukset vaikuttavat vain valittuun profiiliin.</string>
+    <string name="configure_profile">Määritä profiili</string>
+    <string name="switch_profile">Vaihda profiilia</string>
+    <string name="application_profile_changed">Sovellusprofiili muutettiin muotoon \"% s\"</string>
+    <string name="logcat_buffer">Logcat-puskuri</string>
+    <string name="plugins_settings">Laajennuksen asetukset</string>
 </resources>
