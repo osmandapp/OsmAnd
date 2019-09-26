@@ -106,7 +106,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment implements Send
 			OsmandApplication app = getMyApplication();
 			if (app != null && activity != null) {
 				app.checkPreferredLocale();
-				activity.recreate();
+				app.restartApp(activity);
 			}
 		}
 	}
