@@ -6,6 +6,7 @@ import android.support.v7.preference.SwitchPreferenceCompat;
 import android.view.View;
 
 import net.osmand.plus.R;
+import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 
 public class NavigationFragment extends BaseSettingsFragment {
 
@@ -47,6 +48,7 @@ public class NavigationFragment extends BaseSettingsFragment {
 		SwitchPreferenceCompat showRoutingAlarms = (SwitchPreferenceCompat) findPreference(settings.SHOW_ROUTING_ALARMS.getId());
 		SwitchPreferenceCompat speakRoutingAlarms = (SwitchPreferenceCompat) findPreference(settings.SPEAK_ROUTING_ALARMS.getId());
 		SwitchPreferenceCompat turnScreenOn = (SwitchPreferenceCompat) findPreference(settings.TURN_SCREEN_ON_ENABLED.getId());
+		SwitchPreferenceEx animateMyLocation = (SwitchPreferenceEx) findPreference(settings.ANIMATE_MY_LOCATION.getId());
 
 		routeParameters.setIcon(getContentIcon(R.drawable.ic_action_route_distance));
 		showRoutingAlarms.setIcon(getContentIcon(R.drawable.ic_action_alert));
@@ -54,6 +56,8 @@ public class NavigationFragment extends BaseSettingsFragment {
 		turnScreenOn.setIcon(getContentIcon(R.drawable.ic_action_turn_screen_on));
 
 		setupVehicleParametersPref();
+
+		animateMyLocation.setDescription(getString(R.string.animate_my_location_desc));
 	}
 
 	private void setupVehicleParametersPref() {
