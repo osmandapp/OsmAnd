@@ -35,7 +35,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
+public class GeneralProfileSettingsFragment extends BaseSettingsFragment implements OnPreferenceChanged {
 
 	public static final String TAG = GeneralProfileSettingsFragment.class.getSimpleName();
 
@@ -359,5 +359,19 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		}
 
 		return true;
+	}
+
+	@Override
+	public void onPreferenceChanged(String prefId) {
+		Preference preference = findPreference(prefId);
+		if (preference != null) {
+			if (settings.OSMAND_THEME.getId().equals(prefId)) {
+				preference.setIcon(getOsmandThemeIcon());
+			} else if (settings.ROTATE_MAP.getId().equals(prefId)) {
+				preference.setIcon(getRotateMapIcon());
+			} else if (settings.MAP_SCREEN_ORIENTATION.getId().equals(prefId)) {
+				preference.setIcon(getMapScreenOrientationIcon());
+			}
+		}
 	}
 }
