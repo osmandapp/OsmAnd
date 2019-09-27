@@ -3290,4 +3290,17 @@
     <string name="route_parameters_descr">Налаштування параметрів маршруту</string>
     <string name="route_parameters">Параметри маршруту</string>
     <string name="application_profile_changed">Профіль додатку змінено на «%s»</string>
+    <string name="utm_format_descr">OsmAnd використовує формат UTM Standard, який є схожим, але не ідентичним, на формат UTM Nato.</string>
+    <string name="navigate_point_format_olc">Код Open Location</string>
+    <string name="coordinates_format_info">Обраний формат буде застосований до усіх місць у додатку.</string>
+    <string name="pref_selected_by_default_for_profiles">Це налаштування вибране типовим для профілів: %s</string>
+    <string name="turn_screen_on_info">Показувати мапу під час навігації поверх заблокованого екрану.</string>
+    <string name="route_parameters_info">Ці налаштування впливають на побудову маршруту. Буде застосовано тільки до обраного профілю: %1$s.</string>
+    <string name="wake_time">Час пробудження</string>
+    <string name="screen_alerts_descr">Під час навігації попередження будуть показуватися у лівому нижньому куті екрану.</string>
+    <string name="language_and_output">Мова і вивід</string>
+    <string name="osmand_settings_descr">Впливають на весь додаток</string>
+    <string name="voice_announces_descr">Інструкції і попередження при навігації</string>
+    <string name="logcat_buffer">Буфер logcat</string>
+    <string name="plugins_settings">Налаштування втулка</string>
 </resources>
