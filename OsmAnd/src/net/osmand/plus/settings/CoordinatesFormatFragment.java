@@ -23,6 +23,7 @@ import android.widget.TextView;
 
 import net.osmand.Location;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.bottomsheets.ChangeGeneralProfilesPrefBottomSheet;
@@ -194,10 +195,13 @@ public class CoordinatesFormatFragment extends BaseSettingsFragment {
 
 		int newFormat = getCoordinatesFormatForKey(key);
 		if (newFormat != -1) {
-			if (settings.COORDINATES_FORMAT.isSetForMode(getSelectedAppMode())) {
-				settings.COORDINATES_FORMAT.set(newFormat);
-				updateSelectedFormatPrefs(key);
-				return (Boolean) newValue;
+			ApplicationMode selectedAppMode = getSelectedAppMode();
+			if (settings.COORDINATES_FORMAT.isSetForMode(selectedAppMode)) {
+				if (!settings.COORDINATES_FORMAT.getModeValue(selectedAppMode).equals(newFormat)) {
+					settings.COORDINATES_FORMAT.set(newFormat);
+					updateSelectedFormatPrefs(key);
+					return true;
+				}
 			} else {
 				FragmentManager fragmentManager = getFragmentManager();
 				if (fragmentManager != null) {

@@ -19,6 +19,7 @@ import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.preference.EditTextPreference;
 import android.support.v7.preference.ListPreference;
 import android.support.v7.preference.Preference;
@@ -253,6 +254,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 
 	protected void createToolbar(LayoutInflater inflater, View view) {
 		AppBarLayout appBarLayout = (AppBarLayout) view.findViewById(R.id.appbar);
+		ViewCompat.setElevation(appBarLayout, 5.0f);
 
 		int toolbarRes = getToolbarResId();
 		if (toolbarRes != -1) {

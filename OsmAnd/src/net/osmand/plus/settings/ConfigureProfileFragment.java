@@ -192,9 +192,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 	private void setupNavigationSettingsPref() {
 		Preference navigationSettings = findPreference("navigation_settings");
 		navigationSettings.setIcon(getContentIcon(R.drawable.ic_action_gdirections_dark));
-		if (getSelectedAppMode() == ApplicationMode.DEFAULT) {
-			navigationSettings.setVisible(false);
-		}
+		navigationSettings.setVisible(!getSelectedAppMode().isDerivedRoutingFrom(ApplicationMode.DEFAULT));
 	}
 
 	private void setupConfigureMapPref() {
