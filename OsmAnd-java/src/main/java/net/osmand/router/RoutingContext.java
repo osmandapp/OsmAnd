@@ -18,6 +18,7 @@ import gnu.trove.iterator.TIntObjectIterator;
 import gnu.trove.iterator.TLongIterator;
 import gnu.trove.map.TLongObjectMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
+import gnu.trove.set.TLongSet;
 import gnu.trove.set.hash.TLongHashSet;
 import net.osmand.NativeLibrary;
 import net.osmand.NativeLibrary.NativeRouteSearchResult;
@@ -72,7 +73,6 @@ public class RoutingContext {
 	
 	// 2. Routing memory cache (big objects)
 	TLongObjectHashMap<List<RoutingSubregionTile>> indexedSubregions = new TLongObjectHashMap<List<RoutingSubregionTile>>();
-	TLongObjectHashMap<List<RouteDataObject>> tileRoutes = new TLongObjectHashMap<List<RouteDataObject>>();
 	
 	// Needs to be a sorted array list . Another option to use hashmap but it will be more memory expensive
 	List<RoutingSubregionTile> subregionTiles = new ArrayList<RoutingSubregionTile>();
@@ -229,7 +229,6 @@ public class RoutingContext {
 			}
 		}
 		subregionTiles.clear();
-		tileRoutes.clear();		
 		indexedSubregions.clear();
 	}
 	
@@ -273,30 +272,17 @@ public class RoutingContext {
 	public RouteSegment loadRouteSegment(int x31, int y31, int memoryLimit) {
 		long tileId = getRoutingTile(x31, y31, memoryLimit, OPTION_SMART_LOAD);
 		TLongObjectHashMap<RouteDataObject> excludeDuplications = new TLongObjectHashMap<RouteDataObject>();
+		TLongSet excludeIds = new TLongHashSet();
 		RouteSegment original = null;
-		if (tileRoutes.containsKey(tileId)) {
-			List<RouteDataObject> routes = tileRoutes.get(tileId);
-			if (routes != null) {
-				for (RouteDataObject ro : routes) {
-					for (int i = 0; i < ro.pointsX.length; i++) {
-						if (ro.getPoint31XTile(i) == x31 && ro.getPoint31YTile(i) == y31) {
-							long id = calcRouteId(ro, i);
-							if (excludeDuplications.contains(id)) {
-								continue;
-							}
-							excludeDuplications.put(id, ro);
-							RouteSegment segment = new RouteSegment(ro, i);
-							segment.next = original;
-							original = segment;
-						}
-					}
-				}
-			}
-		}
 		List<RoutingSubregionTile> subregions = indexedSubregions.get(tileId);
 		if (subregions != null) {
 			for (RoutingSubregionTile rs : subregions) {
-				original = rs.loadRouteSegment(x31, y31, this, excludeDuplications, original);
+				// TODO
+				original = rs.loadRouteSegment(x31, y31, this, excludeDuplications, excludeIds,
+						original);
+				if(rs.excludedIds != null) {
+					excludeIds.addAll(rs.excludedIds);
+				}
 			}
 		}
 		return original;
@@ -587,17 +573,6 @@ public class RoutingContext {
 	}
 	
 	private void getAllObjects(long tileId, final List<RouteDataObject> toFillIn, TLongObjectHashMap<RouteDataObject> excludeDuplications) {
-		if (tileRoutes.containsKey(tileId)) {
-			List<RouteDataObject> routes = tileRoutes.get(tileId);
-			if (routes != null) {
-				for (RouteDataObject ro : routes) {
-					if (!excludeDuplications.contains(ro.id)) {
-						excludeDuplications.put(ro.id, ro);
-						toFillIn.add(ro);
-					}
-				}
-			}
-		}
 		List<RoutingSubregionTile> subregions = indexedSubregions.get(tileId);
 		if (subregions != null) {
 			for (RoutingSubregionTile rs : subregions) {
@@ -678,19 +653,17 @@ public class RoutingContext {
 			}
 		}
 		
-		private RouteSegment loadRouteSegment(int x31, int y31, RoutingContext ctx, 
-				TLongObjectHashMap<RouteDataObject> excludeDuplications, RouteSegment original) {
-			if(searchResult == null && routes == null) {
-				return original;
-			}
+		private RouteSegment loadRouteSegment(int x31, int y31, RoutingContext ctx,
+				TLongObjectHashMap<RouteDataObject> excludeDuplications, TLongSet excludeIds, RouteSegment original) {
 			access++;
-			if (searchResult == null) {
+			if (routes != null) {
 				long l = (((long) x31) << 31) + (long) y31;
 				RouteSegment segment = routes.get(l);
 				while (segment != null) {
 					RouteDataObject ro = segment.road;
 					RouteDataObject toCmp = excludeDuplications.get(calcRouteId(ro, segment.getSegmentStart()));
-					if (toCmp == null || toCmp.getPointsLength() < ro.getPointsLength()) {
+					if ((toCmp == null || toCmp.getPointsLength() < ro.getPointsLength())
+							&& !excludeIds.contains(ro.id)) {
 						excludeDuplications.put(calcRouteId(ro, segment.getSegmentStart()), ro);
 						RouteSegment s = new RouteSegment(ro, segment.getSegmentStart());
 						s.next = original;
@@ -698,35 +671,8 @@ public class RoutingContext {
 					}
 					segment = segment.next;
 				}
-				return original;
-			}
-			// Native use case
-			long nanoTime = System.nanoTime();
-			RouteDataObject[] res = ctx.nativeLib.getDataObjects(searchResult, x31, y31);
-			ctx.timeToLoad += (System.nanoTime() - nanoTime);
-			if (res != null) {
-				for (RouteDataObject ro : res) {
-					boolean accept = ro != null;
-					if (ctx != null && ro != null) {
-						if(ctx.config.routeCalculationTime != 0) {
-							ro.processConditionalTags(ctx.config.routeCalculationTime);
-						}
-						accept = ctx.getRouter().acceptLine(ro);
-					}
-					if (accept) {
-						for (int i = 0; i < ro.pointsX.length; i++) {
-							if (ro.getPoint31XTile(i) == x31 && ro.getPoint31YTile(i) == y31) {
-								RouteDataObject toCmp = excludeDuplications.get(calcRouteId(ro, i));
-								if (toCmp == null || toCmp.getPointsLength() < ro.getPointsLength()) {
-									RouteSegment segment = new RouteSegment(ro, i);
-									segment.next = original;
-									original = segment;
-									excludeDuplications.put(calcRouteId(ro, i), ro);
-								}
-							}
-						}
-					}
-				}
+			} else {
+				throw new UnsupportedOperationException("Not clear how it could be used with native");
 			}
 			return original;
 		}
