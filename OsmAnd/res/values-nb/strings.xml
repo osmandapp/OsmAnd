@@ -246,7 +246,7 @@
     <string name="basemap_missing">Last ned basiskartet for verden for å få en oversikt som dekker hele verden ved lave zoomnivåer.</string>
     <string name="local_index_gpx_info_show">"
 \n
-\nLangt trykk for alternativer"</string>
+\nTrykk lenge for alternativer"</string>
     <string name="local_index_descr_title">Karthåndtering.</string>
     <string name="local_index_mi_restore">Aktiver</string>
     <string name="local_index_mi_backup">Deaktiver</string>
