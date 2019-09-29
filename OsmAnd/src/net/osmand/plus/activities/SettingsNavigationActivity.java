@@ -68,6 +68,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 	private Preference showAlarms;
 	private Preference speakAlarms;
 	private Preference defaultSpeed;
+	private Preference defaultSpeedOnly;
 	private ListPreference routerServicePreference;
 	private ListPreference speedLimitExceed;
 	
@@ -299,7 +300,15 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		PreferenceCategory cat = (PreferenceCategory) screen.findPreference("routing_preferences");
 		cat.removeAll();
 		CheckBoxPreference fastRoute = createCheckBoxPreference(settings.FAST_ROUTE_MODE, R.string.fast_route_mode, R.string.fast_route_mode_descr);
-		if(settings.getApplicationMode().getRouteService() != RouteService.OSMAND) {
+		RouteService routeService = settings.getApplicationMode().getRouteService();
+		if (routeService != RouteService.OSMAND) {
+			if (routeService == RouteService.STRAIGHT) {
+				defaultSpeedOnly = new Preference(this);
+				defaultSpeedOnly.setTitle(R.string.default_speed_setting_title);
+				defaultSpeedOnly.setSummary(R.string.default_speed_setting_descr);
+				defaultSpeedOnly.setOnPreferenceClickListener(this);
+				cat.addPreference(defaultSpeedOnly);
+			}
 			cat.addPreference(fastRoute);
 		} else {
 			ApplicationMode am = settings.getApplicationMode();
@@ -654,7 +663,9 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 			});
 			return true;
 		} else if (preference == defaultSpeed) {
-			showSeekbarSettingsDialog(this);
+			showSeekbarSettingsDialog(this, false);
+		} else if (preference == defaultSpeedOnly) {
+			showSeekbarSettingsDialog(this, true);
 		}
 		return false;
 	}
@@ -708,7 +719,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		return bld.show();
 	}
 
-	public static void showSeekbarSettingsDialog(Activity activity) {
+	public static void showSeekbarSettingsDialog(Activity activity, final boolean defaultSpeedOnly) {
 		if (activity == null) {
 			return;
 		}
@@ -740,10 +751,21 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		float settingsMaxSpeed = settings.MAX_SPEED.get();
 
 		final int[] defaultValue = {Math.round(mode.getDefaultSpeed() * ratio[0])};
-		final int[] minValue = {Math.round((settingsMinSpeed > 0 ? settingsMinSpeed : router.getMinSpeed()) * ratio[0])};
-		final int[] maxValue = {Math.round((settingsMaxSpeed > 0 ? settingsMaxSpeed : router.getMaxSpeed()) * ratio[0])};
-		final int min = Math.round(router.getMinSpeed() * ratio[0] / 2f);
-		final int max = Math.round(router.getMaxSpeed() * ratio[0] * 1.5f);
+		final int[] minValue = new int[1];
+		final int[] maxValue = new int[1];
+		final int min;
+		final int max;
+		if (defaultSpeedOnly) {
+			minValue[0] = Math.round(1 * ratio[0]);
+			maxValue[0] = Math.round(300 * ratio[0]);
+			min = minValue[0];
+			max = maxValue[0];
+		} else {
+			minValue[0] = Math.round((settingsMinSpeed > 0 ? settingsMinSpeed : router.getMinSpeed()) * ratio[0]);
+			maxValue[0] = Math.round((settingsMaxSpeed > 0 ? settingsMaxSpeed : router.getMaxSpeed()) * ratio[0]);
+			min = Math.round(router.getMinSpeed() * ratio[0] / 2f);
+			max = Math.round(router.getMaxSpeed() * ratio[0] * 1.5f);
+		}
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 		boolean lightMode = app.getSettings().isLightContent();
@@ -755,8 +777,10 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				mode.setDefaultSpeed(app, defaultValue[0] / ratio[0]);
-				settings.MIN_SPEED.set(minValue[0] / ratio[0]);
-				settings.MAX_SPEED.set(maxValue[0] / ratio[0]);
+				if (!defaultSpeedOnly) {
+					settings.MIN_SPEED.set(minValue[0] / ratio[0]);
+					settings.MAX_SPEED.set(maxValue[0] / ratio[0]);
+				}
 			}
 		});
 		builder.setNegativeButton(R.string.shared_string_cancel, null);
@@ -764,32 +788,45 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				mode.resetDefaultSpeed(app);
-				settings.MIN_SPEED.set(0f);
-				settings.MAX_SPEED.set(0f);
+				if (!defaultSpeedOnly) {
+					settings.MIN_SPEED.set(0f);
+					settings.MAX_SPEED.set(0f);
+				}
 			}
 		});
 
-		setupSpeedSlider(SpeedSliderType.MIN_SPEED, speedUnits, minValue, defaultValue, maxValue, min, max, seekbarView);
-		setupSpeedSlider(SpeedSliderType.DEFAULT_SPEED, speedUnits, minValue, defaultValue, maxValue, min, max, seekbarView);
-		setupSpeedSlider(SpeedSliderType.MAX_SPEED, speedUnits, minValue, defaultValue, maxValue, min, max, seekbarView);
+		if (!defaultSpeedOnly) {
+			setupSpeedSlider(SpeedSliderType.DEFAULT_SPEED, speedUnits, minValue, defaultValue, maxValue, min, max, seekbarView);
+			setupSpeedSlider(SpeedSliderType.MIN_SPEED, speedUnits, minValue, defaultValue, maxValue, min, max, seekbarView);
+			setupSpeedSlider(SpeedSliderType.MAX_SPEED, speedUnits, minValue, defaultValue, maxValue, min, max, seekbarView);
+		} else {
+			setupSpeedSlider(SpeedSliderType.DEFAULT_SPEED_ONLY, speedUnits, minValue, defaultValue, maxValue, min, max, seekbarView);
+			seekbarView.findViewById(R.id.default_speed_div).setVisibility(View.GONE);
+			seekbarView.findViewById(R.id.default_speed_container).setVisibility(View.GONE);
+			seekbarView.findViewById(R.id.max_speed_div).setVisibility(View.GONE);
+			seekbarView.findViewById(R.id.max_speed_container).setVisibility(View.GONE);
+		}
 
 		builder.show();
 	}
 
 	private enum SpeedSliderType {
+		DEFAULT_SPEED_ONLY,
 		DEFAULT_SPEED,
 		MIN_SPEED,
 		MAX_SPEED,
 	}
 
-	private static void setupSpeedSlider(final SpeedSliderType type, String speedUnits, final int[] minValue, final int[] defaultValue, final int[] maxValue, final int min, final int max, View seekbarView) {
+	private static void setupSpeedSlider(final SpeedSliderType type, String speedUnits,
+										 final int[] minValue, final int[] defaultValue, final int[] maxValue,
+										 final int min, final int max, View seekbarView) {
 		View seekbarLayout;
 		int titleId;
 		final int[] speedValue;
 		switch (type) {
-			case DEFAULT_SPEED:
+			case DEFAULT_SPEED_ONLY:
 				speedValue = defaultValue;
-				seekbarLayout = seekbarView.findViewById(R.id.default_speed_layout);
+				seekbarLayout = seekbarView.findViewById(R.id.min_speed_layout);
 				titleId = R.string.default_speed_setting_title;
 				break;
 			case MIN_SPEED:
@@ -828,6 +865,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 				int value = progress + min;
 				switch (type) {
 					case DEFAULT_SPEED:
+					case DEFAULT_SPEED_ONLY:
 						if (value > maxValue[0]) {
 							value = maxValue[0];
 							speedSeekBar.setProgress(Math.max(value - min, 0));

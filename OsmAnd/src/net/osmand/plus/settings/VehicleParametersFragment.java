@@ -8,7 +8,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.SettingsBaseActivity;
-import net.osmand.plus.routing.RouteProvider;
+import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.router.GeneralRouter;
 
@@ -47,7 +47,8 @@ public class VehicleParametersFragment extends BaseSettingsFragment {
 		vehicleParametersInfo.setIcon(getContentIcon(R.drawable.ic_action_info_dark));
 		vehicleParametersInfo.setTitle(getString(R.string.route_parameters_info, getSelectedAppMode().toHumanString(getContext())));
 
-		if (app.getSettings().getApplicationMode().getRouteService() == RouteProvider.RouteService.OSMAND) {
+		RouteService routeService = app.getSettings().getApplicationMode().getRouteService();
+		if (routeService == RouteService.OSMAND) {
 			GeneralRouter router = getRouter(app.getRoutingConfig(), getSelectedAppMode());
 			if (router != null) {
 				Map<String, GeneralRouter.RoutingParameter> parameters = router.getParameters();
@@ -64,6 +65,8 @@ public class VehicleParametersFragment extends BaseSettingsFragment {
 					setupDefaultSpeedPref();
 				}
 			}
+		} else if (routeService == RouteService.STRAIGHT) {
+			setupDefaultSpeedPref();
 		}
 	}
 
@@ -108,7 +111,8 @@ public class VehicleParametersFragment extends BaseSettingsFragment {
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
 		if (preference.getKey().equals(GeneralRouter.DEFAULT_SPEED)) {
-			showSeekbarSettingsDialog(getActivity());
+			RouteService routeService = app.getSettings().getApplicationMode().getRouteService();
+			showSeekbarSettingsDialog(getActivity(), routeService == RouteService.STRAIGHT);
 			return true;
 		}
 		return super.onPreferenceClick(preference);
