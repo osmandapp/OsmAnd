@@ -3195,4 +3195,10 @@
     <string name="get_discount_second_part">пасля %1$s</string>
     <string name="cancel_subscription">Скасаваць падпіску</string>
     <string name="price_and_discount">%1$s • Эканомія %2$s</string>
+    <string name="configure_profile_info">Усе налады ніжэй тычацца толькі выбранага профілю.</string>
+    <string name="utm_format_descr">OsmAnd выкарыстоўвае фармат UTM Standard, які падобны, але не ідэнтычны да фармату UTM Nato.</string>
+    <string name="shared_string_example">Прыклад</string>
+    <string name="configure_profile">Налады профілю</string>
+    <string name="switch_profile">Змяніць профіль</string>
+    <string name="logcat_buffer">Буфер logcat</string>
 </resources>
