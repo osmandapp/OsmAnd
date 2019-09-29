@@ -1096,7 +1096,7 @@
     <string name="edit_tilesource_choose_existing">انتخاب از بین موارد موجود…</string>
     <string name="maps_define_edit">تعریف/ویرایش…</string>
     <string name="driving_region">منطقهٔ رانندگی</string>
-    <string name="edit_tilesource_elliptic_tile">مرکارتور بیضوی</string>
+    <string name="edit_tilesource_elliptic_tile">مرکاتور بیضوی</string>
     <string name="edit_tilesource_url_to_load">نشانی اینترنتی</string>
     <string name="map_magnifier">ذره‌بین نقشه</string>
     <string name="base_world_map">نقشهٔ جهانی پایه</string>
