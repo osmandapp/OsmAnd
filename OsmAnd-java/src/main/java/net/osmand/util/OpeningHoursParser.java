@@ -388,9 +388,14 @@ public class OpeningHoursParser {
 			ArrayList<OpeningHoursRule> rules = getRules(sequenceIndex);
 			for (int i = 0; i < 7; i++) {
 				cal.add(Calendar.DAY_OF_MONTH, 1);
+				Calendar openingTimeCal = null;
 				for (OpeningHoursRule r : rules) {
 					if (r.containsDay(cal) && r.containsMonth(cal)) {
-						openingTime = r.getTime(cal, false, WITHOUT_TIME_LIMIT, true);
+						String time = r.getTime(cal, false, WITHOUT_TIME_LIMIT, true);
+						if (Algorithms.isEmpty(time) || openingTimeCal == null || cal.before(openingTimeCal)) {
+							openingTime = time;
+						}
+						openingTimeCal = (Calendar) cal.clone();
 					}
 				}
 				if (!Algorithms.isEmpty(openingTime)) {
