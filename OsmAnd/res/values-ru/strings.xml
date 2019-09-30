@@ -3256,4 +3256,5 @@
     <string name="route_parameters">Параметры маршрута</string>
     <string name="logcat_buffer">Буфер Logcat</string>
     <string name="plugins_settings">Настройки плагинов</string>
+    <string name="language_and_output">Язык и вывод</string>
 </resources>
