@@ -3480,5 +3480,12 @@
 
 	<string name="poi_cellar_entrance">Вход в погреб</string>
 
+	<string name="poi_craft_builder">Строитель</string>
+	<string name="poi_craft_distillery">Винокурня</string>
+	<string name="poi_craft_joiner">Столяр</string>
+	<string name="poi_craft_floorer">Укладчик полов</string>
+	<string name="poi_craft_bakery">Пекарня</string>
+	<string name="poi_craft_cabinet_maker">Краснодеревщик</string>
+
 
 </resources>
