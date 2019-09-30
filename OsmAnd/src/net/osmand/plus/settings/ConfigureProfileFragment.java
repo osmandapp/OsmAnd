@@ -43,6 +43,7 @@ import java.util.List;
 
 import static net.osmand.plus.profiles.EditProfileFragment.MAP_CONFIG;
 import static net.osmand.plus.profiles.EditProfileFragment.OPEN_CONFIG_ON_MAP;
+import static net.osmand.plus.profiles.EditProfileFragment.SCREEN_CONFIG;
 import static net.osmand.plus.profiles.EditProfileFragment.SELECTED_ITEM;
 
 public class ConfigureProfileFragment extends BaseSettingsFragment {
@@ -53,6 +54,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 
 	private static final String PLUGIN_SETTINGS = "plugin_settings";
 	private static final String CONFIGURE_MAP = "configure_map";
+	private static final String CONFIGURE_SCREEN = "configure_screen";
 
 	@Override
 	protected String getFragmentTag() {
@@ -181,6 +183,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 
 		setupNavigationSettingsPref();
 		setupConfigureMapPref();
+		setupConfigureScreenPref();
 
 		PreferenceCategory pluginSettings = (PreferenceCategory) findPreference(PLUGIN_SETTINGS);
 		pluginSettings.setIconSpaceReserved(false);
@@ -205,6 +208,20 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 
 		Intent intent = new Intent(ctx, MapActivity.class);
 		intent.putExtra(OPEN_CONFIG_ON_MAP, MAP_CONFIG);
+		intent.putExtra(SELECTED_ITEM, getSelectedAppMode().getStringKey());
+		configureMap.setIntent(intent);
+	}
+
+	private void setupConfigureScreenPref() {
+		Context ctx = getContext();
+		if (ctx == null) {
+			return;
+		}
+		Preference configureMap = findPreference(CONFIGURE_SCREEN);
+		configureMap.setIcon(getContentIcon(R.drawable.ic_configure_screen_dark));
+
+		Intent intent = new Intent(ctx, MapActivity.class);
+		intent.putExtra(OPEN_CONFIG_ON_MAP, SCREEN_CONFIG);
 		intent.putExtra(SELECTED_ITEM, getSelectedAppMode().getStringKey());
 		configureMap.setIntent(intent);
 	}
@@ -267,7 +284,9 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
-		if (CONFIGURE_MAP.equals(preference.getKey())) {
+		String prefId = preference.getKey();
+
+		if (CONFIGURE_MAP.equals(prefId) || CONFIGURE_SCREEN.equals(prefId)) {
 			FragmentActivity activity = getActivity();
 			if (activity != null) {
 				try {
@@ -297,7 +316,6 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 				if ((plugin.isActive() || !plugin.needsInstallation())) {
 					if (OsmandPlugin.enablePlugin(getActivity(), app, plugin, (Boolean) newValue)) {
 						preference.setIcon(getPluginIcon(plugin));
-						updatePreference(preference);
 						return true;
 					}
 				} else if (plugin.needsInstallation() && preference.getIntent() != null) {

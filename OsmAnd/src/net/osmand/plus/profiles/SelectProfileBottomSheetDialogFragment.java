@@ -7,16 +7,13 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.SwitchCompat;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import net.osmand.PlatformUtil;
-import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -217,20 +214,29 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 
 
 	private void getListener() {
-		if (getActivity() != null && getActivity() instanceof  EditProfileActivity) {
-			EditProfileFragment f = (EditProfileFragment) getActivity().getSupportFragmentManager()
-				.findFragmentByTag(EditProfileActivity.EDIT_PROFILE_FRAGMENT_TAG);
-			if (type.equals(TYPE_BASE_APP_PROFILE)) {
-				listener = f.getBaseProfileListener();
-			} else if (type.equals(TYPE_NAV_PROFILE)) {
-				listener = f.getNavProfileListener();
-			} else if (type.equals(TYPE_ICON)) {
-				listener = f.getIconListener();
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			FragmentManager fragmentManager = activity.getSupportFragmentManager();
+			if (fragmentManager != null) {
+				EditProfileFragment editProfileFragment = (EditProfileFragment) fragmentManager.findFragmentByTag(EditProfileFragment.TAG);
+				SettingsProfileFragment settingsProfileFragment = (SettingsProfileFragment) fragmentManager.findFragmentByTag(SettingsProfileFragment.TAG);
+
+				if (editProfileFragment != null) {
+					switch (type) {
+						case TYPE_BASE_APP_PROFILE:
+							listener = editProfileFragment.getBaseProfileListener();
+							break;
+						case TYPE_NAV_PROFILE:
+							listener = editProfileFragment.getNavProfileListener();
+							break;
+						case TYPE_ICON:
+							listener = editProfileFragment.getIconListener();
+							break;
+					}
+				} else if (settingsProfileFragment != null) {
+					listener = settingsProfileFragment.getBaseProfileListener();
+				}
 			}
-		} else if (getActivity() != null && getActivity() instanceof SettingsProfileActivity) {
-			SettingsProfileFragment f = (SettingsProfileFragment) getActivity().getSupportFragmentManager()
-				.findFragmentByTag(SettingsProfileActivity.SETTINGS_PROFILE_FRAGMENT_TAG);
-			listener = f.getBaseProfileListener();
 		}
 	}
 

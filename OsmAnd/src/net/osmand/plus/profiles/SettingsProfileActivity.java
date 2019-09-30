@@ -2,12 +2,11 @@ package net.osmand.plus.profiles;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+
 import net.osmand.plus.R;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 
 public class SettingsProfileActivity extends OsmandActionBarActivity {
-
-	public static final String SETTINGS_PROFILE_FRAGMENT_TAG = "settingsProfileFragment";
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -20,7 +19,7 @@ public class SettingsProfileActivity extends OsmandActionBarActivity {
 			SettingsProfileFragment profileFragment = new SettingsProfileFragment();
 			profileFragment.setArguments(getIntent().getExtras());
 			getSupportFragmentManager().beginTransaction()
-				.add(android.R.id.content, profileFragment, SETTINGS_PROFILE_FRAGMENT_TAG).commit();
+					.add(android.R.id.content, profileFragment, SettingsProfileFragment.TAG).commit();
 		}
 	}
 

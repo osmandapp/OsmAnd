@@ -663,6 +663,7 @@ public class MapActivityActions implements DialogProvider {
 				.setListener(new ItemClickListener() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked, int[] viewCoordinates) {
+						mapActivity.dismissSettingsScreens();
 						ConfigureProfileFragment.showInstance(mapActivity.getSupportFragmentManager());
 						return true;
 					}

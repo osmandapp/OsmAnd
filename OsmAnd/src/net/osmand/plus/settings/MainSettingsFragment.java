@@ -1,6 +1,5 @@
 package net.osmand.plus.settings;
 
-import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Build;
@@ -14,7 +13,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
-import net.osmand.plus.profiles.SettingsProfileActivity;
+import net.osmand.plus.profiles.SettingsProfileFragment;
 
 public class MainSettingsFragment extends BaseSettingsFragment {
 
@@ -89,7 +88,7 @@ public class MainSettingsFragment extends BaseSettingsFragment {
 	private void setupManageProfilesPref() {
 		Preference manageProfiles = findPreference("manage_profiles");
 		manageProfiles.setIcon(getIcon(R.drawable.ic_action_manage_profiles));
-		manageProfiles.setIntent(new Intent(getActivity(), SettingsProfileActivity.class));
+		manageProfiles.setFragment(SettingsProfileFragment.class.getName());
 	}
 
 	private void setupConfigureProfilePref() {
@@ -111,7 +110,8 @@ public class MainSettingsFragment extends BaseSettingsFragment {
 			fragmentManager.beginTransaction()
 					.replace(R.id.fragmentContainer, MainSettingsFragment, TAG)
 					.addToBackStack(TAG)
-					.commitAllowingStateLoss();
+					.commit();
+
 			return true;
 		} catch (Exception e) {
 			return false;
