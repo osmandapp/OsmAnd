@@ -1301,7 +1301,7 @@
 \n- Стварэнне групаў; 
 \n- Сінхранізацыя групаў і прылад з серверам; 
 \n- Кіраванне групамі і прыладамі ў асабістым кабінеце.</string>
-    <string name="configure_map">Налады мапы</string>
+    <string name="configure_map">Наладзіць мапу</string>
     <string name="search_radius_proximity">У межах</string>
     <string name="rendering_category_details">Падрабязнасці</string>
     <string name="rendering_category_transport">Транспарт</string>
@@ -2905,7 +2905,7 @@
     <string name="quick_action_switch_day_mode">Дзённы рэжым</string>
     <string name="quick_action_switch_night_mode">Начны рэжым</string>
     <string name="quick_action_day_night_switch_mode">Пераключыць дзённы/начны рэжым</string>
-    <string name="routeInfo_roadClass_name">Клас</string>
+    <string name="routeInfo_roadClass_name">Тып дарогі</string>
     <string name="routeInfo_surface_name">Паверхня</string>
     <string name="routeInfo_smoothness_name">Гладкасць</string>
     <string name="routeInfo_steepness_name">Пакатасць</string>
@@ -2916,7 +2916,7 @@
     <string name="work_button">Праца</string>
     <string name="time_of_day">Час сутак</string>
     <string name="by_transport_type">Ужыта %1$s</string>
-    <string name="step_by_step">Крок за крокам</string>
+    <string name="step_by_step">Падказкі</string>
     <string name="routeInfo_road_types_name">Тыпы дарог</string>
     <string name="exit_at">Выхад на</string>
     <string name="sit_on_the_stop">Пасадка на прыпынку</string>
@@ -3168,7 +3168,7 @@
     <string name="sett_parrot_ext_input">Parrot</string>
     <string name="turn_on_profile_desc">Калі ласка, ўключыце па меншай меры адзін профіль праграмы, каб выкарыстоўваць гэты параметр.</string>
     <string name="gpx_join_gaps">Абраць gaps</string>
-    <string name="app_mode_camper"/>
+    <string name="app_mode_camper">Прычэп</string>
     <string name="rendering_attr_showLez_description">Паказваць на мапе зоны з нізкім узроўнем выкідаў. Не ўплывае на маршрутызацыю.</string>
     <string name="rendering_attr_showLez_name">Паказваць зоны з нізкім узроўнем выкідаў</string>
     <string name="temporary_conditional_routing">Разглядаць часовыя абмежаванні</string>
@@ -3201,4 +3201,16 @@
     <string name="configure_profile">Налады профілю</string>
     <string name="switch_profile">Змяніць профіль</string>
     <string name="logcat_buffer">Буфер logcat</string>
+    <string name="navigate_point_format_utm">UTM Standard</string>
+    <string name="navigate_point_format_olc">Адкрыты код месцазнаходжання (OLC)</string>
+    <string name="coordinates_format_info">Абраны фармат будзе ужыты да ўсіх мясцін у дадатку.</string>
+    <string name="pref_selected_by_default_for_profiles">Параметр прадвызначана абраны для профіляў: %s</string>
+    <string name="change_default_settings">Змяніць прадвызначаныя налады</string>
+    <string name="discard_changes">Адкінуць змены</string>
+    <string name="apply_to_current_profile">Ужыць да бягучага профіля %1$s</string>
+    <string name="apply_to_all_profiles">Ужыць да ўсіх профіляў</string>
+    <string name="start_up_message_pref">Паведамленне падчас запуску</string>
+    <string name="analytics_pref_title">Аналітыка</string>
+    <string name="application_profile_changed">Профіль зменены на \"%s\"</string>
+    <string name="plugins_settings">Налады ўбудоў</string>
 </resources>
