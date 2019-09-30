@@ -2981,7 +2981,7 @@
     <string name="use_osm_live_public_transport">OsmAnd Live transportes públicos</string>
     <string name="time_of_day">Hora do dia</string>
     <string name="by_transport_type">Por %1$s</string>
-    <string name="step_by_step">Passo a passo</string>
+    <string name="step_by_step">Curva a curva</string>
     <string name="routeInfo_road_types_name">Tipos de estrada</string>
     <string name="exit_at">Sair em</string>
     <string name="shared_string_swap">Trocar</string>
@@ -3285,4 +3285,6 @@
     <string name="application_profile_changed">Perfil de aplicação modificado para \"%s\"</string>
     <string name="logcat_buffer">Buffer de logcat</string>
     <string name="plugins_settings">Configurações de Plugins</string>
+    <string name="app_mode_camper">Campista</string>
+    <string name="app_mode_campervan">Autocaravana</string>
 </resources>
