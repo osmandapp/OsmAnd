@@ -357,7 +357,7 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 
 	private boolean isPublicTransportMode() {
 		OsmandApplication app = getMyApplication();
-		return app != null && app.getRoutingHelper().getAppMode() == ApplicationMode.PUBLIC_TRANSPORT;
+		return app != null && app.getRoutingHelper().isPublicTransportMode();
 	}
 	
 	public void updateRouteCalculationProgress(int progress) {

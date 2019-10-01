@@ -1162,7 +1162,7 @@ public class RoutingHelper {
 	}
 
 	public boolean isPublicTransportMode() {
-		return mode == ApplicationMode.PUBLIC_TRANSPORT;
+		return mode.isDerivedRoutingFrom(ApplicationMode.PUBLIC_TRANSPORT);
 	}
 
 	public boolean isRouteBeingCalculated() {
