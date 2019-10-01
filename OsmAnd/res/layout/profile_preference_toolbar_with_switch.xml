@@ -10,13 +10,13 @@
 
 	<LinearLayout
 		android:layout_width="match_parent"
-		android:layout_height="match_parent"
+		android:layout_height="wrap_content"
 		android:background="?attr/card_and_list_background_basic"
 		android:orientation="vertical">
 
 		<LinearLayout
 			android:layout_width="match_parent"
-			android:layout_height="match_parent"
+			android:layout_height="wrap_content"
 			android:background="?attr/card_and_list_background_basic"
 			android:gravity="center_vertical"
 			android:orientation="horizontal">

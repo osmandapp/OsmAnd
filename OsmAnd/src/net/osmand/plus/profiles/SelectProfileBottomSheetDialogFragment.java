@@ -1,7 +1,5 @@
 package net.osmand.plus.profiles;
 
-import static net.osmand.plus.profiles.EditProfileFragment.SELECTED_ICON;
-
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -11,8 +9,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.view.View.OnClickListener;
-import java.util.ArrayList;
-import java.util.List;
+
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -20,7 +17,13 @@ import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.LongDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+
 import org.apache.commons.logging.Log;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static net.osmand.plus.profiles.EditProfileFragment.SELECTED_ICON;
 
 public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
@@ -217,25 +220,23 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
 			FragmentManager fragmentManager = activity.getSupportFragmentManager();
-			if (fragmentManager != null) {
-				EditProfileFragment editProfileFragment = (EditProfileFragment) fragmentManager.findFragmentByTag(EditProfileFragment.TAG);
-				SettingsProfileFragment settingsProfileFragment = (SettingsProfileFragment) fragmentManager.findFragmentByTag(SettingsProfileFragment.TAG);
+			EditProfileFragment editProfileFragment = (EditProfileFragment) fragmentManager.findFragmentByTag(EditProfileFragment.TAG);
+			SettingsProfileFragment settingsProfileFragment = (SettingsProfileFragment) fragmentManager.findFragmentByTag(SettingsProfileFragment.TAG);
 
-				if (editProfileFragment != null) {
-					switch (type) {
-						case TYPE_BASE_APP_PROFILE:
-							listener = editProfileFragment.getBaseProfileListener();
-							break;
-						case TYPE_NAV_PROFILE:
-							listener = editProfileFragment.getNavProfileListener();
-							break;
-						case TYPE_ICON:
-							listener = editProfileFragment.getIconListener();
-							break;
-					}
-				} else if (settingsProfileFragment != null) {
-					listener = settingsProfileFragment.getBaseProfileListener();
+			if (editProfileFragment != null) {
+				switch (type) {
+					case TYPE_BASE_APP_PROFILE:
+						listener = editProfileFragment.getBaseProfileListener();
+						break;
+					case TYPE_NAV_PROFILE:
+						listener = editProfileFragment.getNavProfileListener();
+						break;
+					case TYPE_ICON:
+						listener = editProfileFragment.getIconListener();
+						break;
 				}
+			} else if (settingsProfileFragment != null) {
+				listener = settingsProfileFragment.getBaseProfileListener();
 			}
 		}
 	}

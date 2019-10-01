@@ -170,7 +170,8 @@ public abstract class OsmandPlugin {
 		}
 	}
 
-	public static void updateActivatedPlugins(OsmandApplication app, Set<String> enabledPlugins) {
+	public static void updateActivatedPlugins(OsmandApplication app) {
+		Set<String> enabledPlugins = app.getSettings().getEnabledPlugins();
 		for (OsmandPlugin plugin : allPlugins) {
 			if (enabledPlugins.contains(plugin.getId())) {
 				try {

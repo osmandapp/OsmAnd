@@ -561,7 +561,6 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 			}
 			AndroidUiHelper.updateVisibility(appBar, false);
 		} else {
-			setHasOptionsMenu(true);
 			AndroidUtils.addStatusBarPadding21v(activity, view);
 			ViewCompat.setElevation(appBar, 5.0f);
 

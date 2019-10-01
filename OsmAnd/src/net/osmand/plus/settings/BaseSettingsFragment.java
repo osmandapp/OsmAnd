@@ -641,7 +641,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 			Fragment fragment = Fragment.instantiate(activity, screenType.fragmentName);
 
 			activity.getSupportFragmentManager().beginTransaction()
-					.replace(R.id.fragmentContainer, fragment, fragment.getClass().getSimpleName())
+					.replace(R.id.fragmentContainer, fragment, screenType.fragmentName)
 					.addToBackStack(DRAWER_SETTINGS_ID + ".new")
 					.commit();
 

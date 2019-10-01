@@ -370,7 +370,7 @@ public class OsmandSettings {
 				OsmandAidlApi aidlApi = ctx.getAidlApi();
 				if (aidlApi != null) {
 					aidlApi.loadConnectedApps();
-					OsmandPlugin.updateActivatedPlugins(ctx, getEnabledPlugins());
+					OsmandPlugin.updateActivatedPlugins(ctx);
 				}
 
 				fireEvent(oldMode);
