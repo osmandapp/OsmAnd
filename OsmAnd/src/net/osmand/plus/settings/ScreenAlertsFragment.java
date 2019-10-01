@@ -24,36 +24,6 @@ public class ScreenAlertsFragment extends BaseSettingsFragment {
 	private static final String SCREEN_ALERTS_IMAGE = "screen_alerts_image";
 
 	@Override
-	protected String getFragmentTag() {
-		return TAG;
-	}
-
-	@Override
-	protected int getPreferencesResId() {
-		return R.xml.screen_alerts;
-	}
-
-	@Override
-	protected int getToolbarResId() {
-		return R.layout.profile_preference_toolbar_with_switch;
-	}
-
-	@Override
-	protected int getToolbarTitle() {
-		return R.string.screen_alerts;
-	}
-
-	@Override
-	public int getStatusBarColorId() {
-		boolean nightMode = isNightMode();
-		View view = getView();
-		if (view != null && Build.VERSION.SDK_INT >= 23 && !nightMode) {
-			view.setSystemUiVisibility(view.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-		}
-		return nightMode ? R.color.list_background_color_dark : R.color.list_background_color_light;
-	}
-
-	@Override
 	protected void setupPreferences() {
 		Preference showRoutingAlarmsInfo = findPreference(SHOW_ROUTING_ALARMS_INFO);
 		SwitchPreferenceCompat showTrafficWarnings = (SwitchPreferenceCompat) findPreference(settings.SHOW_TRAFFIC_WARNINGS.getId());

@@ -128,8 +128,7 @@ import net.osmand.plus.search.QuickSearchDialogFragment;
 import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchTab;
 import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchType;
 import net.osmand.plus.settings.BaseSettingsFragment;
-import net.osmand.plus.settings.ConfigureProfileFragment;
-import net.osmand.plus.settings.MainSettingsFragment;
+import net.osmand.plus.settings.BaseSettingsFragment.SettingsScreenType;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.MapControlsLayer;
@@ -817,7 +816,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			if (intent.hasExtra(EditProfileFragment.OPEN_SETTINGS)) {
 				String settingsType = intent.getStringExtra(EditProfileFragment.OPEN_SETTINGS);
 				if (EditProfileFragment.OPEN_CONFIG_PROFILE.equals(settingsType)) {
-					ConfigureProfileFragment.showInstance(getSupportFragmentManager());
+					BaseSettingsFragment.showInstance(this, SettingsScreenType.CONFIGURE_PROFILE);
 				}
 				setIntent(null);
 			}
@@ -2217,7 +2216,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	public void showSettings() {
 		dismissSettingsScreens();
-		MainSettingsFragment.showInstance(getSupportFragmentManager());
+		BaseSettingsFragment.showInstance(this, SettingsScreenType.MAIN_SETTINGS);
 	}
 
 	private void hideContextMenu() {

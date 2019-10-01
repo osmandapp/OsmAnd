@@ -1,9 +1,7 @@
 package net.osmand.plus.settings;
 
-import android.os.Build;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.SwitchPreferenceCompat;
-import android.view.View;
 
 import net.osmand.plus.R;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
@@ -11,36 +9,6 @@ import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 public class NavigationFragment extends BaseSettingsFragment {
 
 	public static final String TAG = NavigationFragment.class.getSimpleName();
-
-	@Override
-	protected String getFragmentTag() {
-		return TAG;
-	}
-
-	@Override
-	protected int getPreferencesResId() {
-		return R.xml.navigation_settings_new;
-	}
-
-	@Override
-	protected int getToolbarResId() {
-		return R.layout.profile_preference_toolbar_big;
-	}
-
-	@Override
-	protected int getToolbarTitle() {
-		return R.string.routing_settings_2;
-	}
-
-	@Override
-	public int getStatusBarColorId() {
-		boolean nightMode = isNightMode();
-		View view = getView();
-		if (view != null && Build.VERSION.SDK_INT >= 23 && !nightMode) {
-			view.setSystemUiVisibility(view.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-		}
-		return nightMode ? R.color.list_background_color_dark : R.color.list_background_color_light;
-	}
 
 	@Override
 	protected void setupPreferences() {

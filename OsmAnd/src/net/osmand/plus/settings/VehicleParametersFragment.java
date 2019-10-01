@@ -2,9 +2,7 @@ package net.osmand.plus.settings;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.support.v7.preference.Preference;
-import android.view.View;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -22,36 +20,6 @@ import static net.osmand.plus.activities.SettingsNavigationActivity.showSeekbarS
 public class VehicleParametersFragment extends BaseSettingsFragment {
 
 	public static final String TAG = VehicleParametersFragment.class.getSimpleName();
-
-	@Override
-	protected String getFragmentTag() {
-		return TAG;
-	}
-
-	@Override
-	protected int getPreferencesResId() {
-		return R.xml.vehicle_parameters;
-	}
-
-	@Override
-	protected int getToolbarResId() {
-		return R.layout.profile_preference_toolbar;
-	}
-
-	@Override
-	protected int getToolbarTitle() {
-		return R.string.vehicle_parameters;
-	}
-
-	@Override
-	public int getStatusBarColorId() {
-		boolean nightMode = isNightMode();
-		View view = getView();
-		if (view != null && Build.VERSION.SDK_INT >= 23 && !nightMode) {
-			view.setSystemUiVisibility(view.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-		}
-		return nightMode ? R.color.list_background_color_dark : R.color.list_background_color_light;
-	}
 
 	@Override
 	protected void setupPreferences() {

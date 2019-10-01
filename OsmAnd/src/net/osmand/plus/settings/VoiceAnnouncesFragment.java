@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.media.AudioManager;
-import android.os.Build;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.preference.Preference;
@@ -33,26 +32,6 @@ import static net.osmand.plus.activities.SettingsNavigationActivity.MORE_VALUE;
 public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 
 	public static final String TAG = VoiceAnnouncesFragment.class.getSimpleName();
-
-	@Override
-	protected String getFragmentTag() {
-		return TAG;
-	}
-
-	@Override
-	protected int getPreferencesResId() {
-		return R.xml.voice_announces;
-	}
-
-	@Override
-	protected int getToolbarResId() {
-		return R.layout.profile_preference_toolbar_with_switch;
-	}
-
-	@Override
-	protected int getToolbarTitle() {
-		return R.string.voice_announces;
-	}
 
 	@Override
 	protected void createToolbar(LayoutInflater inflater, View view) {
@@ -91,16 +70,6 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 
 		TextView title = switchContainer.findViewById(R.id.switchButtonText);
 		title.setText(checked ? R.string.shared_string_on : R.string.shared_string_off);
-	}
-
-	@Override
-	public int getStatusBarColorId() {
-		boolean nightMode = isNightMode();
-		View view = getView();
-		if (view != null && Build.VERSION.SDK_INT >= 23 && !nightMode) {
-			view.setSystemUiVisibility(view.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-		}
-		return nightMode ? R.color.list_background_color_dark : R.color.list_background_color_light;
 	}
 
 	@Override

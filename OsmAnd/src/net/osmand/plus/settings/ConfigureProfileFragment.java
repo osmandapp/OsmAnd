@@ -56,36 +56,6 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 	private static final String CONFIGURE_MAP = "configure_map";
 	private static final String CONFIGURE_SCREEN = "configure_screen";
 
-	@Override
-	protected String getFragmentTag() {
-		return TAG;
-	}
-
-	@Override
-	protected int getPreferencesResId() {
-		return R.xml.configure_profile;
-	}
-
-	@Override
-	protected int getToolbarResId() {
-		return R.layout.profile_preference_toolbar_big;
-	}
-
-	@Override
-	protected int getToolbarTitle() {
-		return R.string.configure_profile;
-	}
-
-	@Override
-	public int getStatusBarColorId() {
-		boolean nightMode = isNightMode();
-		View view = getView();
-		if (view != null && Build.VERSION.SDK_INT >= 23 && !nightMode) {
-			view.setSystemUiVisibility(view.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-		}
-		return nightMode ? R.color.list_background_color_dark : R.color.list_background_color_light;
-	}
-
 	@ColorRes
 	protected int getBackgroundColorRes() {
 		return isNightMode() ? R.color.activity_background_color_dark : R.color.activity_background_color_light;
@@ -332,18 +302,5 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 		}
 
 		return super.onPreferenceChange(preference, newValue);
-	}
-
-	public static boolean showInstance(FragmentManager fragmentManager) {
-		try {
-			ConfigureProfileFragment configureProfileFragment = new ConfigureProfileFragment();
-			fragmentManager.beginTransaction()
-					.replace(R.id.fragmentContainer, configureProfileFragment, TAG)
-					.addToBackStack(TAG)
-					.commitAllowingStateLoss();
-			return true;
-		} catch (Exception e) {
-			return false;
-		}
 	}
 }

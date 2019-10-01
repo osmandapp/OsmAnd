@@ -4,7 +4,6 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Build;
 import android.support.annotation.ColorRes;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.view.View;
@@ -22,30 +21,6 @@ public class MainSettingsFragment extends BaseSettingsFragment {
 	private static final String CONFIGURE_PROFILE = "configure_profile";
 
 	@Override
-	protected String getFragmentTag() {
-		return TAG;
-	}
-
-	@Override
-	protected int getPreferencesResId() {
-		return R.xml.settings_main_screen;
-	}
-
-	@Override
-	protected int getToolbarResId() {
-		return R.layout.global_preference_toolbar;
-	}
-
-	@Override
-	protected int getToolbarTitle() {
-		return R.string.shared_string_settings;
-	}
-
-	@Override
-	public int getStatusBarColorId() {
-		return isNightMode() ? R.color.status_bar_color_dark : R.color.status_bar_color_light;
-	}
-
 	@ColorRes
 	protected int getBackgroundColorRes() {
 		return isNightMode() ? R.color.activity_background_color_dark : R.color.activity_background_color_light;
@@ -102,19 +77,5 @@ public class MainSettingsFragment extends BaseSettingsFragment {
 		configureProfile.setIcon(getPaintedIcon(iconRes, getActiveProfileColor()));
 		configureProfile.setTitle(title);
 		configureProfile.setSummary(profileType);
-	}
-
-	public static boolean showInstance(FragmentManager fragmentManager) {
-		try {
-			MainSettingsFragment MainSettingsFragment = new MainSettingsFragment();
-			fragmentManager.beginTransaction()
-					.replace(R.id.fragmentContainer, MainSettingsFragment, TAG)
-					.addToBackStack(TAG)
-					.commit();
-
-			return true;
-		} catch (Exception e) {
-			return false;
-		}
 	}
 }

@@ -6,7 +6,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.support.v7.preference.PreferenceViewHolder;
-import android.view.View;
 import android.widget.ImageView;
 
 import net.osmand.plus.ApplicationMode;
@@ -47,35 +46,6 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 	private List<GeneralRouter.RoutingParameter> reliefFactorParameters = new ArrayList<GeneralRouter.RoutingParameter>();
 	private List<GeneralRouter.RoutingParameter> otherRoutingParameters = new ArrayList<GeneralRouter.RoutingParameter>();
 
-	@Override
-	protected String getFragmentTag() {
-		return TAG;
-	}
-
-	@Override
-	protected int getPreferencesResId() {
-		return R.xml.route_parameters;
-	}
-
-	@Override
-	protected int getToolbarResId() {
-		return R.layout.profile_preference_toolbar;
-	}
-
-	@Override
-	protected int getToolbarTitle() {
-		return R.string.route_parameters;
-	}
-
-	@Override
-	public int getStatusBarColorId() {
-		boolean nightMode = isNightMode();
-		View view = getView();
-		if (view != null && Build.VERSION.SDK_INT >= 23 && !nightMode) {
-			view.setSystemUiVisibility(view.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-		}
-		return nightMode ? R.color.list_background_color_dark : R.color.list_background_color_light;
-	}
 
 	@Override
 	protected void setupPreferences() {

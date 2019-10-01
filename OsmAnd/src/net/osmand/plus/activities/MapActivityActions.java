@@ -65,7 +65,6 @@ import net.osmand.plus.routepreparationmenu.WaypointsFragment;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.BaseSettingsFragment;
-import net.osmand.plus.settings.ConfigureProfileFragment;
 import net.osmand.plus.views.BaseMapLayer;
 import net.osmand.plus.views.MapControlsLayer;
 import net.osmand.plus.views.MapTileLayer;
@@ -664,7 +663,7 @@ public class MapActivityActions implements DialogProvider {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked, int[] viewCoordinates) {
 						mapActivity.dismissSettingsScreens();
-						ConfigureProfileFragment.showInstance(mapActivity.getSupportFragmentManager());
+						BaseSettingsFragment.showInstance(mapActivity, BaseSettingsFragment.SettingsScreenType.CONFIGURE_PROFILE);
 						return true;
 					}
 				})

@@ -51,7 +51,8 @@ import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.SelectProfileListener;
 import net.osmand.plus.routing.RouteProvider.RouteService;
-import net.osmand.plus.settings.ConfigureProfileFragment;
+import net.osmand.plus.settings.BaseSettingsFragment;
+import net.osmand.plus.settings.BaseSettingsFragment.SettingsScreenType;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 import net.osmand.router.GeneralRouter;
 import net.osmand.util.Algorithms;
@@ -65,6 +66,7 @@ import java.util.Map.Entry;
 
 import studio.carbonylgroup.textfieldboxes.ExtendedEditText;
 
+import static net.osmand.plus.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
 import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.DIALOG_TYPE;
 import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.SELECTED_KEY;
 import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.TYPE_BASE_APP_PROFILE;
@@ -377,10 +379,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 						i.putExtra(SELECTED_ITEM, profile.stringKey);
 						startActivity(i);
 					} else {
-						FragmentManager fragmentManager = getFragmentManager();
-						if (fragmentManager != null) {
-							ConfigureProfileFragment.showInstance(fragmentManager);
-						}
+						BaseSettingsFragment.showInstance(activity, SettingsScreenType.CONFIGURE_PROFILE);
 					}
 				}
 			}
@@ -773,7 +772,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 
 			fragmentManager.beginTransaction()
 					.replace(R.id.fragmentContainer, editProfileFragment, TAG)
-					.addToBackStack(TAG)
+					.addToBackStack(DRAWER_SETTINGS_ID + ".new")
 					.commit();
 			return true;
 		} catch (Exception e) {
