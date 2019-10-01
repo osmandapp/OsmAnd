@@ -81,9 +81,7 @@ public abstract class AppModesBottomSheetDialogFragment<T extends AbstractProfil
 	public void onProfilePressed(ApplicationMode item) {
 		Intent intent = new Intent(getActivity(), EditProfileActivity.class);
 		intent.putExtra(PROFILE_STRING_KEY, item.getStringKey());
-		if (item.isCustomProfile()) {
-			intent.putExtra(IS_USER_PROFILE, true);
-		}
+		intent.putExtra(IS_USER_PROFILE, item.isCustomProfile());
 		startActivity(intent);
 	}
 
