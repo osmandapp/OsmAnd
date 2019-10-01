@@ -902,6 +902,7 @@ public class MapActivityActions implements DialogProvider {
 					}
 				}).createItem());
 
+		/*
 		optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.shared_string_settings, mapActivity)
 				.setId(DRAWER_SETTINGS_ID)
 				.setIcon(R.drawable.ic_action_settings)
@@ -916,8 +917,8 @@ public class MapActivityActions implements DialogProvider {
 						return true;
 					}
 				}).createItem());
-
-		optionsMenuHelper.addItem(new ItemBuilder().setTitle(getString(R.string.shared_string_settings) + " (Alpha)")
+		*/
+		optionsMenuHelper.addItem(new ItemBuilder().setTitle(getString(R.string.shared_string_settings))
 				.setId(DRAWER_SETTINGS_ID + ".new")
 				.setIcon(R.drawable.ic_action_settings)
 				.setListener(new ItemClickListener() {
