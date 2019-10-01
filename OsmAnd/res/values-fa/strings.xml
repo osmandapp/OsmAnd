@@ -284,7 +284,7 @@
     <string name="shared_string_close">بستن</string>
     <string name="loading_data">بارگیری اطلاعات…</string>
     <string name="reading_indexes">در حال خواندن اطلاعات محلی…</string>
-    <string name="previous_run_crashed">آخرین اجرای OsmAnd با خطا متوقف شد. فایل گزارش {0} ساخته شد. لطفاً مشکل را گزارش و فایل log را ضمیمهٔ آن کنید.</string>
+    <string name="previous_run_crashed">آخرین اجرای OsmAnd با شکست مواجه شد. فایل log در {0} قرار دارد. لطفاً مشکل را گزارش و فایل log را ضمیمهٔ آن کنید.</string>
     <string name="saving_gpx_tracks">در حال ذخیرهٔ فایل GPX…</string>
     <string name="finished_task">تمام شد</string>
     <string name="address">نشانی</string>
@@ -582,7 +582,7 @@
     <string name="av_def_action_choose">انتخاب برحسب تقاضا</string>
     <string name="audionotes_location_not_defined">مکانی برای یادداشت‌گذاری تعیین نشده. 
 \nمکانی را مشخص و از منوی زمینه اقدام کنید.</string>
-    <string name="rendering_attr_showRoadMaps_description">انتخاب کنید چه زمانی نقشه‌های فقط-جاده‌ای نشان داده شود:</string>
+    <string name="rendering_attr_showRoadMaps_description">انتخاب کنید نقشه‌های فقط-جاده چه زمانی نشان داده شود:</string>
     <string name="shared_string_target_points">مقصدها</string>
     <string name="ending_point_too_far">نقطهٔ پایانی از نزدیک‌ترین جاده خیلی دور است.</string>
     <string name="map_widget_vector_attributes">خصوصیات رندر نقشه</string>
@@ -763,7 +763,7 @@
     <string name="speak_speed_limit">سرعت مجاز</string>
     <string name="speak_cameras">دوربین‌های کنترل سرعت</string>
     <string name="speak_traffic_warnings">هشدارهای ترافیکی</string>
-    <string name="osmand_distance_planning_plugin_description">این افزونه، یک ابزارک روی صفحهٔ نقشه می‌گذارد که به‌وسیلهٔ آن می‌توانید با رسم‌کردن مسیر روی نقشه برای سفرتان طرح‌ریزی کنید یا مسافت بین نقاط را اندازه بگیرید. رسم مسیر با زدن روی صفحه امکان‌پذیر است. همچنین می‌توانید از فایل‌های GPX موجود استفاده کنید یا آن‌ها را تغییر دهید. کار نهایی نیز به‌صورت فایل GPX قابل ذخیره‌سازی است تا بعداً از آن برای راهنمایی استفاده کنید.</string>
+    <string name="osmand_distance_planning_plugin_description">این افزونه، یک ابزارک روی صفحهٔ نقشه می‌گذارد که به‌وسیلهٔ آن می‌توانید با رسم مسیر روی نقشه برای سفر خود طرح بریزید یا مسافت بین نقاط را اندازه بگیرید. رسم مسیر با زدن روی صفحه امکان‌پذیر است. همچنین می‌توانید از فایل‌های GPX موجود استفاده کنید یا آن‌ها را تغییر دهید. کار نهایی نیز به‌صورت فایل GPX قابل ذخیره‌سازی است تا بعداً از آن برای راهنمایی استفاده کنید.</string>
     <string name="layer_hillshade">لایهٔ سایه‌روشن</string>
     <string name="index_name_openmaps">نقشه‌های اتحادیهٔ اروپا</string>
     <string name="download_hillshade_maps">سایه‌روشن‌ها</string>
@@ -1915,7 +1915,7 @@
     <string name="map_markers_other">نشانه‌های دیگر</string>
     <string name="upload_anonymously">آپلود به‌صورت ناشناس</string>
     <string name="show_transparency_seekbar">نوار تنظیم شفافیت را نشان بده</string>
-    <string name="download_files_error_not_enough_space">فضای ذخیره‌سازی ناکافی است! 
+    <string name="download_files_error_not_enough_space">فضای ذخیره‌سازی کافی نیست! 
 \n{3} مگابایت برای ذخیره‌سازی موقت و {1} مگابایت برای ذخیره‌سازی دائمی لازم است. فضای موجود فقط {2} مگابایت است.</string>
     <string name="upload_osm_note">آپلود یادداشت OSM</string>
     <string name="map_marker_1st">اولین نشانهٔ نقشه</string>
@@ -3144,7 +3144,7 @@
     <string name="minmax_speed_dialog_title">سرعت حداقل/حداکثر را تنظیم کنید</string>
     <string name="default_speed_dialog_msg">برای پیش‌بینی زمان رسیدن در هنگام مسیریابی استفاده می‌شود</string>
     <string name="new_profile">پروفایل جدید</string>
-    <string name="last_launch_crashed">آخرین اجرای OsmAnd با شکست مواجه شد. لطفاً با اشتراک‌گذاری پیغام خطا ما را در بهبود OsmAnd یاری کنید.</string>
+    <string name="last_launch_crashed">آخرین اجرای OsmAnd با شکست مواجه شد. لطفاً با ارسال پیغام خطا ما را در بهبود OsmAnd یاری کنید.</string>
     <string name="release_3_4">"• پروفایل‌های برنامه: متناسب با نیاز خود پروفایل سفارشی بسازید؛ با رنگ و نماد دلخواه 
 \n 
 \n • برای هر پروفایل پیشفرض‌ها و سرعت‌های حداقل/حداکثر  را به‌دلخواه تنظیم کنید 
@@ -3176,9 +3176,9 @@
     <string name="app_mode_personal_transporter">رانَک</string>
     <string name="app_mode_monowheel">یکچرخه</string>
     <string name="app_mode_scooter">اسکوتر</string>
-    <string name="privacy_and_security_change_descr">با زدن روی«مجاز» %1$s ما را می‌پذیرید</string>
+    <string name="privacy_and_security_change_descr">با زدن روی «اجازه می‌دهم» %1$s ما را می‌پذیرید</string>
     <string name="settings_privacy_and_security_desc">انتخاب داده‌هایی که با ما به اشتراک می‌گذارید</string>
-    <string name="shared_string_allow">مجاز</string>
+    <string name="shared_string_allow">اجازه می‌دهم</string>
     <string name="osmand_routing_promo">"می‌توانید نسخهٔ اصلاح‌شدهٔ خودتان از فایل  routing.xml را در ‎..osmand/routing اضافه کنید"</string>
     <string name="show_compass_ruler">با درجه‌بندی قطب‌نما</string>
     <string name="hide_compass_ruler">بدون درجه‌بندی قطب‌نما</string>
@@ -3197,8 +3197,8 @@
     <string name="routing_attr_allow_advanced_description">مسیرهای دشوار همراه با موانع خطرناک و سراشیبی‌های تند.</string>
     <string name="routing_attr_allow_expert_name">مسیرهای حرفه‌ای مجاز باشد</string>
     <string name="routing_attr_allow_expert_description">مسیرهای خیلی دشوار، همراه با موانع و محیط خطرناک.</string>
-    <string name="routing_attr_allow_skating_only_name">فقط مسیرهای اسکیت مجاز باشد</string>
-    <string name="routing_attr_allow_classic_only_name">فقط مسیرهای کلاسیک مجاز باشد</string>
+    <string name="routing_attr_allow_skating_only_name">مسیرهای فقط-اسکیت مجاز باشد</string>
+    <string name="routing_attr_allow_classic_only_name">مسیرهای فقط-کلاسیک مجاز باشد</string>
     <string name="routing_attr_freeride_policy_name">آزاد (بیرون پیست)</string>
     <string name="routing_attr_freeride_policy_description">مسیرهای آزادرانی و مسیرهای بیرون پیست غیررسمی هستند. معمولاً به‌طور رسمی آماده‌سازی و نگهداری نمی‌شوند و پس از تعطیلی وارسی نمی‌شوند. با مسئولیت خودتان وارد شوید.</string>
     <string name="press_again_to_change_the_map_orientation">دوباره بزنید تا جهت نقشه را عوض کنید</string>
@@ -3238,7 +3238,7 @@
     <string name="routing_attr_piste_type_downhill_description">سراشیبی‌های اسکی آلپاین یا دان‌هیل و دسترسی به بالابرهای اسکی.</string>
     <string name="routing_attr_piste_type_nordic_name">اسکی کراس/نوردیک</string>
     <string name="routing_attr_piste_type_nordic_description">مسیرهای اسکی کراس یا نوردیک.</string>
-    <string name="shared_string_crash">از کار افتادن</string>
+    <string name="shared_string_crash">شکست</string>
     <string name="shared_string_open_track">باز کن</string>
     <string name="shared_string_default">پیشفرض</string>
     <string name="routing_attr_difficulty_preference_name">دشواری</string>
@@ -3298,8 +3298,8 @@
     <string name="route_parameters">پارامترهای مسیر</string>
     <string name="routing_attr_piste_type_sled_name">سورتمه</string>
     <string name="routing_attr_piste_type_sled_description">سراشیبی برای سورتمه‌سواری.</string>
-    <string name="routing_attr_allow_skating_only_description">مسیرهای آماده‌شده برای سبک آزاد یا فقط اسکیت. بدون مسیرهای کلاسیک.</string>
-    <string name="routing_attr_allow_classic_only_description">"مسیرهایی که فقط برای سبک کلاسیک آماده شده  و مسیر اسکیت ندارند. مسیرهای سُست‌تر آماده‌شده با برف‌روهای کوچک‌تر و مسیرهای دست‌ساز اسکی‌بازان را نیز شامل می‌شود."</string>
+    <string name="routing_attr_allow_skating_only_description">مسیرهای آماده‌شده برای سبک آزاد یا فقط-اسکیت. بدون مسیرهای کلاسیک.</string>
+    <string name="routing_attr_allow_classic_only_description">"مسیرهایی که فقط برای سبک کلاسیک آماده شده  و مسیر اسکیت ندارند. مسیرهای سُست‌تر و آماده‌شده با برف‌روهای کوچک‌تر و مسیرهای دست‌ساز اسکی‌بازان را نیز شامل می‌شود."</string>
     <string name="external_input_device_descr">یک دستگاه مانند صفحه‌کلید معمولی یا WunderLINQ را برای کنترل خارجی انتخاب کنید.</string>
     <string name="utm_format_descr">‏OsmAnd از قالب UTM Standard استفاده می‌کند که مشابه (اما نه یکسان) با قالب UTM Nato است.</string>
     <string name="apply_to_current_profile">به‌کارگیری برای پروفایل کنونی: %1$s</string>

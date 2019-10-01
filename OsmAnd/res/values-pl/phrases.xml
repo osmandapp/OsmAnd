@@ -613,7 +613,7 @@
     <string name="poi_piste_sled">Trasa saneczkarska</string>
     <string name="poi_piste_playground">Trasa dla dzieci</string>
     <string name="poi_stripclub">Klub ze striptizem</string>
-    <string name="poi_beach_resort">Ośrodek nadmorski</string>
+    <string name="poi_beach_resort">Obszar ośrodka nadmorskiego</string>
     <string name="poi_dog_park">Park dla psów</string>
     <string name="poi_hunting_stand">Myśliwski punkt obserwacyjny</string>
     <string name="poi_marina">Marina</string>
@@ -671,7 +671,7 @@
     <string name="poi_wine_cellar">Piwniczka z winem</string>
     <string name="poi_ski_rental">Wypożyczalnia nart</string>
     <string name="poi_gallery">Galeria sztuki</string>
-    <string name="poi_ski_resort">Ośrodek narciarski</string>
+    <string name="poi_ski_resort">Obszar ośrodka narciarskiego</string>
     <string name="poi_village_green">Teren zieleni</string>
     <string name="poi_craft_boatbuilder">Stocznia</string>
     <string name="poi_craft_jeweller">Jubiler</string>
@@ -686,7 +686,7 @@
     <string name="poi_cabin">Chata</string>
     <string name="poi_lean_to">Szałas</string>
     <string name="poi_hunting_lodge">Ambona myśliwska</string>
-    <string name="poi_resort">Ośrodek</string>
+    <string name="poi_resort">Obszar ośrodka wypoczynkowego</string>
     <string name="poi_hanami">Hanami</string>
     <string name="poi_piste_downhill">Trasa zjazdu</string>
     <string name="poi_piste_nordic">Narciarska trasa biegowa</string>
@@ -3080,7 +3080,7 @@
     <string name="poi_electronics_repair_appliance">Naprawa elektroniki: urządzenia</string>
     <string name="poi_electronics_repair_phone">Naprawa elektroniki: telefony</string>
     <string name="poi_electronics_repair_tv">Naprawa elektroniki: telewizory</string>
-    <string name="poi_resort_kids_camp">Pensjonat kolonijny</string>
+    <string name="poi_resort_kids_camp">Obszar ośrodka kolonijnego</string>
     <string name="poi_music_school">Szkoła muzyczna</string>
     <string name="poi_language_school">Szkoła językowa</string>
     <string name="poi_life_ring">Koło ratunkowe</string>
