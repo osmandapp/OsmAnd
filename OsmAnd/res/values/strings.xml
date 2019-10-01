@@ -14,6 +14,7 @@
     <string name="shared_string_by_default">By default</string>
     <string name="plugins_settings">Plugin settings</string>
     <string name="logcat_buffer">Logcat buffer</string>
+    <string name="download_detaile_map">Download detailed %s map, to view this area.</string>
     <string name="application_profile_changed">Application profile changed to \"%s\"</string>
     <string name="switch_profile">Switch profile</string>
     <string name="configure_profile">Configure profile</string>

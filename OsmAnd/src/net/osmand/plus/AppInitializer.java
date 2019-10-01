@@ -500,7 +500,6 @@ public class AppInitializer implements IProgress {
 		app.travelDbHelper = startupInit(app.travelDbHelper, TravelDbHelper.class);
 		app.lockHelper = startupInit(new LockHelper(app), LockHelper.class);
 
-
 		initOpeningHoursParser();
 	}
 

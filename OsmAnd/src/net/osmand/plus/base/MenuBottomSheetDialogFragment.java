@@ -35,13 +35,9 @@ import java.util.List;
 
 public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
-	private static final String USED_ON_MAP_KEY = "used_on_map";
 	private static final int DEFAULT_VALUE = -1;
 
 	protected List<BaseBottomSheetItem> items = new ArrayList<>();
-
-	protected boolean usedOnMap = true;
-	protected boolean nightMode;
 
 	protected int themeRes;
 	protected View dismissButton;
@@ -52,17 +48,9 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 	@StringRes
 	protected int dismissButtonStringRes = R.string.shared_string_cancel;
 
-	public void setUsedOnMap(boolean usedOnMap) {
-		this.usedOnMap = usedOnMap;
-	}
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		if (savedInstanceState != null) {
-			usedOnMap = savedInstanceState.getBoolean(USED_ON_MAP_KEY);
-		}
-		nightMode = isNightMode(requiredMyApplication());
 		themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 	}
 
@@ -111,26 +99,6 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 		updateBottomButtons();
 		setupHeightAndBackground(mainView);
 		return mainView;
-	}
-
-	@Override
-	public void onStart() {
-		super.onStart();
-		FragmentActivity activity = requireActivity();
-		if (!AndroidUiHelper.isOrientationPortrait(activity)) {
-			final Window window = getDialog().getWindow();
-			if (window != null) {
-				WindowManager.LayoutParams params = window.getAttributes();
-				params.width = activity.getResources().getDimensionPixelSize(R.dimen.landscape_bottom_sheet_dialog_fragment_width);
-				window.setAttributes(params);
-			}
-		}
-	}
-
-	@Override
-	public void onSaveInstanceState(Bundle outState) {
-		super.onSaveInstanceState(outState);
-		outState.putBoolean(USED_ON_MAP_KEY, usedOnMap);
 	}
 
 	@Override
@@ -309,12 +277,5 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 	@DrawableRes
 	protected int getLandscapeSidesBgResId() {
 		return nightMode ? R.drawable.bg_bottom_sheet_sides_landscape_dark : R.drawable.bg_bottom_sheet_sides_landscape_light;
-	}
-
-	private boolean isNightMode(@NonNull OsmandApplication app) {
-		if (usedOnMap) {
-			return app.getDaynightHelper().isNightModeForMapControls();
-		}
-		return !app.getSettings().isLightContent();
 	}
 }
