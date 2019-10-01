@@ -20,10 +20,24 @@ import net.osmand.plus.OnDialogFragmentResultListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.helpers.AndroidUiHelper;
 
 public abstract class OsmAndSheetDialogFragment extends DialogFragment {
+	private static final String USED_ON_MAP_KEY = "used_on_map";
 
 	private OnDialogFragmentResultListener dialogFragmentResultListener;
+	private int dialogWidth;
+	protected boolean usedOnMap = true;
+	protected boolean nightMode;
+
+	@Override
+	public void onCreate(@Nullable Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		if (savedInstanceState != null) {
+			usedOnMap = savedInstanceState.getBoolean(USED_ON_MAP_KEY);
+		}
+		dialogWidth = requireActivity().getResources().getDimensionPixelSize(R.dimen.landscape_bottom_sheet_dialog_fragment_width);
+	}
 
 	@NonNull
 	@Override
@@ -32,6 +46,8 @@ public abstract class OsmAndSheetDialogFragment extends DialogFragment {
 		OsmandApplication app = (OsmandApplication) context.getApplicationContext();
 		OsmandSettings settings = app.getSettings();
 		int themeId = settings.isLightContent() ? R.style.OsmandLightTheme_BottomSheet : R.style.OsmandDarkTheme_BottomSheet;
+
+		nightMode = isNightMode(app);
 
 		OsmandSheetDialog dialog = new OsmandSheetDialog(context, themeId, getSheetDialogType());
 		dialog.setCanceledOnTouchOutside(getCancelOnTouchOutside());
@@ -68,6 +84,12 @@ public abstract class OsmAndSheetDialogFragment extends DialogFragment {
 		FragmentActivity activity = requireActivity();
 		if (window != null) {
 			window.setDimAmount(getBackgroundDimAmount());
+			if (!AndroidUiHelper.isOrientationPortrait(activity)) {
+				View container = window.findViewById(OsmandSheetDialog.CONTAINER_ID);
+				if (container != null) {
+					container.getLayoutParams().width = dialogWidth;
+				}
+			}
 		}
 	}
 
@@ -110,10 +132,25 @@ public abstract class OsmAndSheetDialogFragment extends DialogFragment {
 			return null;
 		}
 	}
-	
-	protected SheetDialogType getSheetDialogType() {
-		return SheetDialogType.BOTTOM;
+
+	public void setUsedOnMap(boolean usedOnMap) {
+		this.usedOnMap = usedOnMap;
 	}
+
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putBoolean(USED_ON_MAP_KEY, usedOnMap);
+	}
+
+	private boolean isNightMode(@NonNull OsmandApplication app) {
+		if (usedOnMap) {
+			return app.getDaynightHelper().isNightModeForMapControls();
+		}
+		return !app.getSettings().isLightContent();
+	}
+
+	protected abstract SheetDialogType getSheetDialogType();
 	
 	protected boolean getCancelOnTouchOutside() {
 		return true;

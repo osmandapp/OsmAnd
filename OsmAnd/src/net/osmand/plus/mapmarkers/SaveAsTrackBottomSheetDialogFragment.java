@@ -24,7 +24,7 @@ import net.osmand.IndexConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 import net.osmand.plus.R;
-import net.osmand.plus.base.OsmAndSheetDialogFragment;
+import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 
 import java.io.File;
@@ -33,7 +33,7 @@ import java.util.Date;
 import static net.osmand.plus.helpers.ImportHelper.GPX_SUFFIX;
 import static net.osmand.plus.mapmarkers.CoordinateInputDialogFragment.ADDED_POINTS_NUMBER_KEY;
 
-public class SaveAsTrackBottomSheetDialogFragment extends OsmAndSheetDialogFragment {
+public class SaveAsTrackBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
 	public final static String TAG = "SaveAsTrackBottomSheetDialogFragment";
 	public static final String COORDINATE_INPUT_MODE_KEY = "coordinate_input_mode_key";

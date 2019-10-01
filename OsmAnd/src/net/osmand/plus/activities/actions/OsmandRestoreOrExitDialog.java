@@ -11,10 +11,10 @@ import android.widget.Button;
 import android.widget.TextView;
 import java.text.MessageFormat;
 import net.osmand.plus.R;
-import net.osmand.plus.base.OsmAndSheetDialogFragment;
+import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.helpers.FontCache;
 
-public class OsmandRestoreOrExitDialog extends OsmAndSheetDialogFragment {
+public class OsmandRestoreOrExitDialog extends BottomSheetDialogFragment {
 
 	private String clientAppTitle = "";
 

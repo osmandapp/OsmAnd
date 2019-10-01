@@ -50,7 +50,7 @@ import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TabActivity;
 import net.osmand.plus.base.BasicProgressAsyncTask;
-import net.osmand.plus.base.OsmAndSheetDialogFragment;
+import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.chooseplan.ChoosePlanDialogFragment;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.ui.ActiveDownloadsDialogFragment;
@@ -708,7 +708,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 
 	}
 
-	public static class AskMapDownloadFragment extends OsmAndSheetDialogFragment {
+	public static class AskMapDownloadFragment extends BottomSheetDialogFragment {
 		public static final String TAG = "AskMapDownloadFragment";
 
 		private static final String KEY_ASK_MAP_DOWNLOAD_ITEM_FILENAME = "key_ask_map_download_item_filename";
@@ -790,7 +790,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 
 	}
 
-	public static class GoToMapFragment extends OsmAndSheetDialogFragment {
+	public static class GoToMapFragment extends BottomSheetDialogFragment {
 		public static final String TAG = "GoToMapFragment";
 
 		private static final String KEY_GOTO_MAP_REGION_CENTER = "key_goto_map_region_center";

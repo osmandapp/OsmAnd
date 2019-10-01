@@ -22,12 +22,12 @@ import net.osmand.AndroidUtils;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.R;
-import net.osmand.plus.base.OsmAndSheetDialogFragment;
+import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.widgets.tools.ExtendedBottomSheetBehavior;
 import net.osmand.plus.widgets.tools.ExtendedBottomSheetBehavior.BottomSheetCallback;
 
-public class AdditionalActionsBottomSheetDialogFragment extends OsmAndSheetDialogFragment {
+public class AdditionalActionsBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
 	public static final String TAG = "AdditionalActionsBottomSheetDialogFragment";
 

@@ -54,7 +54,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 
 	private OsmandApplication app;
 	private OsmandMapTileView view;
-	private AppCompatActivity mapActivity;
+	private MapActivity mapActivity;
 	private DownloadMapDialogManager downloadDialogManager;
 	private Paint paintDownloaded;
 	private Path pathDownloaded;
@@ -81,7 +81,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 	private static int ZOOM_MIN_TO_SHOW_DOWNLOAD_DIALOG = 9;
 	private static int ZOOM_MAX_TO_SHOW_DOWNLOAD_DIALOG = 11;
 
-	public DownloadedRegionsLayer(AppCompatActivity activity) {
+	public DownloadedRegionsLayer(MapActivity activity) {
 		this.mapActivity = activity;
 		this.downloadDialogManager = new DownloadMapDialogManager();
 	}
@@ -193,7 +193,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 			return;
 		}
 		
-		//check has location got a map to download
+		//make sure no maps are loaded for the location
 		checkMapToDownload(zoom, data.results);
 		
 		// draw objects
@@ -628,7 +628,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 		selectedObjects = new LinkedList<>();
 	}
 	
-	protected AppCompatActivity getActivity() {
+	protected MapActivity getActivity() {
 		return mapActivity;
 	}
 

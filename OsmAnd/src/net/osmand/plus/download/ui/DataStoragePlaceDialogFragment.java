@@ -24,14 +24,14 @@ import net.osmand.plus.OnDismissDialogFragmentListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.base.OsmAndSheetDialogFragment;
+import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.dashboard.DashChooseAppDirFragment;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadIndexesThread;
 
 import java.io.File;
 
-public class DataStoragePlaceDialogFragment extends OsmAndSheetDialogFragment {
+public class DataStoragePlaceDialogFragment extends BottomSheetDialogFragment {
 
 	public static final String TAG = "DataStoragePlaceDialogFragment";
 	private static final String STORAGE_READOLNY_KEY = "storage_readolny_key";

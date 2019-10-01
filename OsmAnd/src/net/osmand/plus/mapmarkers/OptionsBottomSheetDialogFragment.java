@@ -15,10 +15,10 @@ import android.widget.ImageView;
 import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
-import net.osmand.plus.base.OsmAndSheetDialogFragment;
+import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 
-public class OptionsBottomSheetDialogFragment extends OsmAndSheetDialogFragment {
+public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
 	public final static String TAG = "OptionsBottomSheetDialogFragment";
 	public final static String GROUPS_MARKERS_MENU = "groups_markers_menu";

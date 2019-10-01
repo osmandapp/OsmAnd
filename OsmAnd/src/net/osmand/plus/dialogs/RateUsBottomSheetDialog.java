@@ -15,11 +15,11 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
-import net.osmand.plus.base.OsmAndSheetDialogFragment;
+import net.osmand.plus.base.BottomSheetDialogFragment;
 
 import java.util.Calendar;
 
-public class RateUsBottomSheetDialog extends OsmAndSheetDialogFragment {
+public class RateUsBottomSheetDialog extends BottomSheetDialogFragment {
 	private RateUsBottomSheetDialog.FragmentState state = RateUsBottomSheetDialog.FragmentState.INITIAL_STATE;
 	@Nullable
 	@Override
