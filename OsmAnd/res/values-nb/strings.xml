@@ -3224,4 +3224,6 @@
     <string name="general_settings_profile_descr">Programdrakt, enheter, region</string>
     <string name="language_and_output">Språk og utdata</string>
     <string name="plugins_settings">Programtilleggsinnstillinger</string>
+    <string name="shared_string_by_default">Som forvalg</string>
+    <string name="download_detaile_map">Last ned detaljert %s-kart, for å vise dette området.</string>
 </resources>
