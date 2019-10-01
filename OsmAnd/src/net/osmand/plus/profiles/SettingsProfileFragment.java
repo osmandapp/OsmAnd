@@ -190,7 +190,9 @@ public class SettingsProfileFragment extends BaseOsmAndFragment
 			if (activity instanceof SettingsProfileActivity) {
 				Intent intent = new Intent(getActivity(), EditProfileActivity.class);
 				intent.putExtra(PROFILE_STRING_KEY, item.getStringKey());
-				intent.putExtra(IS_USER_PROFILE, item.isCustomProfile());
+				if (item.isCustomProfile()) {
+					intent.putExtra(IS_USER_PROFILE, true);
+				}
 				activity.startActivity(intent);
 			} else {
 				FragmentManager fragmentManager = activity.getSupportFragmentManager();
