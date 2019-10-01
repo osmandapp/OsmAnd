@@ -43,11 +43,13 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-import static net.osmand.plus.activities.MapActivityActions.PROFILES_CHOSEN_PROFILE_TAG;
-import static net.osmand.plus.activities.MapActivityActions.PROFILES_CONTROL_BUTTON_TAG;
-
 public class ContextMenuAdapter {
 	private static final Log LOG = PlatformUtil.getLog(ContextMenuAdapter.class);
+
+	// Constants to determine profiles list item type (drawer menu items in 'Switch profile' mode)
+	public static final int PROFILES_NORMAL_PROFILE_TAG = 0;
+	public static final int PROFILES_CHOSEN_PROFILE_TAG = 1;
+	public static final int PROFILES_CONTROL_BUTTON_TAG = 2;
 
 	@LayoutRes
 	private int DEFAULT_LAYOUT_ID = R.layout.list_menu_item_native;

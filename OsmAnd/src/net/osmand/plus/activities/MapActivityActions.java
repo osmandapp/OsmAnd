@@ -82,6 +82,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static net.osmand.plus.ContextMenuAdapter.PROFILES_CHOSEN_PROFILE_TAG;
+import static net.osmand.plus.ContextMenuAdapter.PROFILES_CONTROL_BUTTON_TAG;
+import static net.osmand.plus.ContextMenuAdapter.PROFILES_NORMAL_PROFILE_TAG;
 import static net.osmand.plus.OsmAndCustomizationConstants.DRAWER_CONFIGURE_MAP_ID;
 import static net.osmand.plus.OsmAndCustomizationConstants.DRAWER_CONFIGURE_SCREEN_ID;
 import static net.osmand.plus.OsmAndCustomizationConstants.DRAWER_DASHBOARD_ID;
@@ -114,11 +117,6 @@ public class MapActivityActions implements DialogProvider {
 	public static final String KEY_ZOOM = "zoom";
 
 	public static final int REQUEST_LOCATION_FOR_DIRECTIONS_NAVIGATION_PERMISSION = 203;
-	
-	// Constants to determine profiles list item type (drawer menu items in 'Switch profile' mode)
-	public static final int PROFILES_NORMAL_PROFILE_TAG = 0;
-	public static final int PROFILES_CHOSEN_PROFILE_TAG = 1;
-	public static final int PROFILES_CONTROL_BUTTON_TAG = 2;
 
 	// Constants for determining the order of items in the additional actions context menu
 	public static final int DIRECTIONS_FROM_ITEM_ORDER = 1000;
@@ -135,8 +133,8 @@ public class MapActivityActions implements DialogProvider {
 
 	private static final int DIALOG_SAVE_DIRECTIONS = 106;
 	
-	private static final int DRAWER_MODE_NORMAL = 100_000;
-	private static final int DRAWER_MODE_SWITCH_PROFILE = 200_000;
+	private static final int DRAWER_MODE_NORMAL = 0;
+	private static final int DRAWER_MODE_SWITCH_PROFILE = 1;
 
 	// make static
 	private static Bundle dialogBundle = new Bundle();
@@ -651,7 +649,7 @@ public class MapActivityActions implements DialogProvider {
 	}
 
 	private ContextMenuAdapter createSwitchProfileOptionsMenu(final OsmandApplication app, ContextMenuAdapter optionsMenuHelper, boolean nightMode) {
-		
+		drawerMode = DRAWER_MODE_NORMAL;
 		createProfilesController(app, optionsMenuHelper, nightMode, true);
 		
 		List<ApplicationMode> activeModes = ApplicationMode.values(app);
@@ -679,7 +677,6 @@ public class MapActivityActions implements DialogProvider {
 						@Override
 						public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked, int[] viewCoordinates) {
 							app.getSettings().APPLICATION_MODE.set(appMode);
-							drawerMode = DRAWER_MODE_NORMAL;
 							updateDrawerMenu();
 							return false;
 						}
