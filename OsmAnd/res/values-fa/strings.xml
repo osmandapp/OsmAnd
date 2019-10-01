@@ -3330,4 +3330,6 @@
     <string name="app_mode_pickup_truck">کامیون پیک‌آپ</string>
     <string name="analytics_pref_title">تحلیل‌ها</string>
     <string name="logcat_buffer">بافر لاگ‌کت</string>
+    <string name="shared_string_by_default">به‌طور پیشفرض</string>
+    <string name="download_detaile_map">برای دیدن این منطقه، نقشهٔ باجزئیات %s را دانلود کنید.</string>
 </resources>
