@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
-	xmlns:tools="http://schemas.android.com/tools">
+	xmlns:tools="http://schemas.android.com/tools"
+	android:title="@string/configure_profile">
 
 	<Preference
 		android:key="configure_profile_info"
@@ -35,6 +36,14 @@
 		android:summary="@string/map_look_descr"
 		android:title="@string/configure_map"
 		tools:icon="@drawable/ic_action_layers_dark" />
+
+	<Preference
+		android:key="configure_screen"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		android:summary="@string/edit_profile_screen_options_subtitle"
+		android:title="@string/map_widget_config"
+		tools:icon="@drawable/ic_configure_screen_dark" />
 
 	<Preference
 		android:layout="@layout/list_item_divider"

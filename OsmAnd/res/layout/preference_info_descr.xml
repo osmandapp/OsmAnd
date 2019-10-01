@@ -11,6 +11,7 @@
 		android:layout_height="wrap_content"
 		android:layout_marginLeft="@dimen/content_padding"
 		android:layout_marginRight="@dimen/content_padding"
+		android:letterSpacing="@dimen/text_button_letter_spacing"
 		android:paddingTop="@dimen/content_padding_small"
 		android:textColor="?android:textColorSecondary"
 		android:textSize="@dimen/default_sub_text_size"

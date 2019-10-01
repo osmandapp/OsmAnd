@@ -338,6 +338,8 @@
 	<dimen name="wikilink_bottom_sheet_padding">14dp</dimen>
 
 	<dimen name="text_button_letter_spacing" format="float">0.01</dimen>
+	<dimen name="description_letter_spacing" format="float">0.02</dimen>
+	<dimen name="title_letter_spacing" format="float">0.03</dimen>
 	<dimen name="text_button_line_spacing_multiplier" format="float">1.2</dimen>
 
 	<dimen name="pages_item_size">4dp</dimen>

@@ -7,43 +7,36 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceViewHolder;
+import android.support.v7.preference.TwoStatePreference;
 import android.support.v7.widget.AppCompatCheckedTextView;
+import android.support.v7.widget.SwitchCompat;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
+import net.osmand.AndroidUtils;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MapViewTrackingUtilities;
+import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.settings.bottomsheets.ChangeGeneralProfilesPrefBottomSheet;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
+import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
+public class GeneralProfileSettingsFragment extends BaseSettingsFragment implements OnPreferenceChanged {
 
-	public static final String TAG = "GeneralProfileSettingsFragment";
-
-	@Override
-	protected int getPreferencesResId() {
-		return R.xml.general_profile_settings;
-	}
-
-	@Override
-	protected int getToolbarResId() {
-		return R.layout.profile_preference_toolbar_big;
-	}
-
-	@Override
-	protected int getToolbarTitle() {
-		return R.string.general_settings_2;
-	}
+	public static final String TAG = GeneralProfileSettingsFragment.class.getSimpleName();
 
 	@Override
 	protected void setupPreferences() {
@@ -61,6 +54,57 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		setupMapEmptyStateAllowedPref();
 		setupExternalInputDevicePref();
 	}
+
+	@Override
+	protected void onBindPreferenceViewHolder(Preference preference, PreferenceViewHolder holder) {
+		super.onBindPreferenceViewHolder(preference, holder);
+
+		String prefId = preference.getKey();
+		if (settings.EXTERNAL_INPUT_DEVICE.getId().equals(prefId)) {
+			boolean checked = settings.EXTERNAL_INPUT_DEVICE.get() != OsmandSettings.NO_EXTERNAL_DEVICE;
+
+			SwitchCompat switchView = (SwitchCompat) holder.findViewById(R.id.switchWidget);
+			switchView.setOnCheckedChangeListener(null);
+			switchView.setChecked(checked);
+			switchView.setOnCheckedChangeListener(externalInputDeviceListener);
+		}
+
+		OsmandSettings.OsmandPreference osmandPreference = settings.getPreference(prefId);
+		TextView summaryView = (TextView) holder.findViewById(android.R.id.summary);
+		if (osmandPreference != null && summaryView != null) {
+			CharSequence summary = null;
+
+			if (preference instanceof TwoStatePreference) {
+				TwoStatePreference statePreference = (TwoStatePreference) preference;
+				summary = statePreference.isChecked() ? statePreference.getSummaryOn() : statePreference.getSummaryOff();
+			}
+			if (TextUtils.isEmpty(summary)) {
+				summary = preference.getSummary();
+			}
+			if (!osmandPreference.isSetForMode(getSelectedAppMode())) {
+				String baseString = getString(R.string.shared_string_by_default) + ": %s";
+				summary = AndroidUtils.getStyledString(baseString, summary, new CustomTypefaceSpan(FontCache.getRobotoMedium(app)), null);
+			}
+			summaryView.setText(summary);
+		}
+	}
+
+	CompoundButton.OnCheckedChangeListener externalInputDeviceListener = new CompoundButton.OnCheckedChangeListener() {
+		@Override
+		public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+			ListPreferenceEx externalInputDevice = (ListPreferenceEx) findPreference(settings.EXTERNAL_INPUT_DEVICE.getId());
+			if (isChecked) {
+				getPreferenceManager().showDialog(externalInputDevice);
+				buttonView.setChecked(false);
+			} else {
+				if (externalInputDevice.callChangeListener(OsmandSettings.NO_EXTERNAL_DEVICE)) {
+					externalInputDevice.setValue(OsmandSettings.NO_EXTERNAL_DEVICE);
+				} else {
+					buttonView.setChecked(true);
+				}
+			}
+		}
+	};
 
 	private void setupAppThemePref() {
 		final ListPreferenceEx appTheme = (ListPreferenceEx) findPreference(settings.OSMAND_THEME.getId());
@@ -181,15 +225,14 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 
 	private void setupExternalInputDevicePref() {
 		ListPreferenceEx externalInputDevice = (ListPreferenceEx) findPreference(settings.EXTERNAL_INPUT_DEVICE.getId());
+		externalInputDevice.setSummary(R.string.sett_no_ext_input);
 		externalInputDevice.setEntries(new String[] {
-				getString(R.string.sett_no_ext_input),
 				getString(R.string.sett_generic_ext_input),
 				getString(R.string.sett_wunderlinq_ext_input),
 				getString(R.string.sett_parrot_ext_input)
 		});
 
 		externalInputDevice.setEntryValues(new Integer[] {
-				OsmandSettings.NO_EXTERNAL_DEVICE,
 				OsmandSettings.GENERIC_EXTERNAL_DEVICE,
 				OsmandSettings.WUNDERLINQ_EXTERNAL_DEVICE,
 				OsmandSettings.PARROT_EXTERNAL_DEVICE}
@@ -285,5 +328,19 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment {
 		}
 
 		return true;
+	}
+
+	@Override
+	public void onPreferenceChanged(String prefId) {
+		Preference preference = findPreference(prefId);
+		if (preference != null) {
+			if (settings.OSMAND_THEME.getId().equals(prefId)) {
+				preference.setIcon(getOsmandThemeIcon());
+			} else if (settings.ROTATE_MAP.getId().equals(prefId)) {
+				preference.setIcon(getRotateMapIcon());
+			} else if (settings.MAP_SCREEN_ORIENTATION.getId().equals(prefId)) {
+				preference.setIcon(getMapScreenOrientationIcon());
+			}
+		}
 	}
 }

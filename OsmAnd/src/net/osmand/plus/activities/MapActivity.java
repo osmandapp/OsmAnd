@@ -128,7 +128,7 @@ import net.osmand.plus.search.QuickSearchDialogFragment;
 import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchTab;
 import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchType;
 import net.osmand.plus.settings.BaseSettingsFragment;
-import net.osmand.plus.settings.MainSettingsFragment;
+import net.osmand.plus.settings.BaseSettingsFragment.SettingsScreenType;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.MapControlsLayer;
@@ -160,6 +160,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static net.osmand.plus.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
 
 public class MapActivity extends OsmandActionBarActivity implements DownloadEvents,
 		OnRequestPermissionsResultCallback, IRouteInformationListener, AMapPointUpdateListener,
@@ -639,6 +641,13 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			chooseRouteFragment.dismiss(true);
 			return;
 		}
+		EditProfileFragment editProfileFragment = getEditProfileFragment();
+		if (editProfileFragment != null) {
+			if (!editProfileFragment.onBackPressedAllowed()) {
+				editProfileFragment.confirmCancelDialog(this);
+				return;
+			}
+		}
 		if (mapContextMenu.isVisible() && mapContextMenu.isClosable()) {
 			if (mapContextMenu.getCurrentMenuState() != MenuState.HEADER_ONLY) {
 				mapContextMenu.openMenuHeaderOnly();
@@ -804,6 +813,13 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				}
 				setIntent(null);
 			}
+			if (intent.hasExtra(EditProfileFragment.OPEN_SETTINGS)) {
+				String settingsType = intent.getStringExtra(EditProfileFragment.OPEN_SETTINGS);
+				if (EditProfileFragment.OPEN_CONFIG_PROFILE.equals(settingsType)) {
+					BaseSettingsFragment.showInstance(this, SettingsScreenType.CONFIGURE_PROFILE);
+				}
+				setIntent(null);
+			}
 			if (intent.hasExtra(EditProfileFragment.OPEN_CONFIG_ON_MAP)) {
 				switch (intent.getStringExtra(EditProfileFragment.OPEN_CONFIG_ON_MAP)) {
 					case EditProfileFragment.MAP_CONFIG:
@@ -936,10 +952,13 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (Build.VERSION.SDK_INT >= 21) {
 			int colorId = -1;
 			BaseOsmAndFragment fragmentAboveDashboard = getVisibleBaseOsmAndFragment(R.id.fragmentContainer);
+			BaseSettingsFragment settingsFragmentAboveDashboard = getVisibleBaseSettingsFragment(R.id.fragmentContainer);
 			BaseOsmAndFragment fragmentBelowDashboard = getVisibleBaseOsmAndFragment(R.id.routeMenuContainer,
 					R.id.topFragmentContainer, R.id.bottomFragmentContainer);
 			if (fragmentAboveDashboard != null) {
 				colorId = fragmentAboveDashboard.getStatusBarColorId();
+			} else if (settingsFragmentAboveDashboard != null) {
+				colorId = settingsFragmentAboveDashboard.getStatusBarColorId();
 			} else if (dashboardOnMap.isVisible()) {
 				colorId = dashboardOnMap.getStatusBarColor();
 			} else if (fragmentBelowDashboard != null) {
@@ -984,6 +1003,17 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			if (fragment != null && !fragment.isRemoving() && fragment instanceof BaseOsmAndFragment
 					&& ((BaseOsmAndFragment) fragment).getStatusBarColorId() != -1) {
 				return (BaseOsmAndFragment) fragment;
+			}
+		}
+		return null;
+	}
+
+	private BaseSettingsFragment getVisibleBaseSettingsFragment(int... ids) {
+		for (int id : ids) {
+			Fragment fragment = getSupportFragmentManager().findFragmentById(id);
+			if (fragment != null && !fragment.isRemoving() && fragment.isVisible() && fragment instanceof BaseSettingsFragment
+					&& ((BaseSettingsFragment) fragment).getStatusBarColorId() != -1) {
+				return (BaseSettingsFragment) fragment;
 			}
 		}
 		return null;
@@ -1943,23 +1973,29 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	@Override
 	public boolean onPreferenceStartFragment(PreferenceFragmentCompat caller, Preference pref) {
-		if (caller instanceof BaseSettingsFragment) {
-			BaseSettingsFragment baseFragment = (BaseSettingsFragment) caller;
+		try {
+			String fragmentName = pref.getFragment();
+			Fragment fragment = Fragment.instantiate(this, fragmentName);
 
-			ApplicationMode mode = baseFragment.getSelectedAppMode();
-			if (mode != null) {
-				String fragmentName = pref.getFragment();
-				Fragment fragment = Fragment.instantiate(this, fragmentName);
+			getSupportFragmentManager().beginTransaction()
+					.replace(R.id.fragmentContainer, fragment, fragment.getClass().getSimpleName())
+					.addToBackStack(DRAWER_SETTINGS_ID + ".new")
+					.commit();
 
-				getSupportFragmentManager().beginTransaction()
-						.replace(R.id.fragmentContainer, fragment, fragmentName)
-						.addToBackStack(fragmentName)
-						.commitAllowingStateLoss();
-
-				return true;
-			}
+			return true;
+		} catch (Exception e) {
+			LOG.error(e);
 		}
+
 		return false;
+	}
+
+	public void dismissSettingsScreens() {
+		try {
+			getSupportFragmentManager().popBackStack(DRAWER_SETTINGS_ID + ".new", FragmentManager.POP_BACK_STACK_INCLUSIVE);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	private class ScreenOffReceiver extends BroadcastReceiver {
@@ -2179,7 +2215,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public void showSettings() {
-		MainSettingsFragment.showInstance(getSupportFragmentManager());
+		dismissSettingsScreens();
+		BaseSettingsFragment.showInstance(this, SettingsScreenType.MAIN_SETTINGS);
 	}
 
 	private void hideContextMenu() {
@@ -2216,6 +2253,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	public ChooseRouteFragment getChooseRouteFragment() {
 		Fragment fragment = getSupportFragmentManager().findFragmentByTag(ChooseRouteFragment.TAG);
 		return fragment != null && !fragment.isDetached() && !fragment.isRemoving() ? (ChooseRouteFragment) fragment : null;
+	}
+
+	public EditProfileFragment getEditProfileFragment() {
+		Fragment fragment = getSupportFragmentManager().findFragmentByTag(EditProfileFragment.TAG);
+		return fragment != null && !fragment.isDetached() && !fragment.isRemoving() ? (EditProfileFragment) fragment : null;
 	}
 
 	public boolean isTopToolbarActive() {

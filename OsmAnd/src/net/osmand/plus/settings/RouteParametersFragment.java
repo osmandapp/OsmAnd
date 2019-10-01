@@ -33,7 +33,7 @@ import static net.osmand.plus.activities.SettingsNavigationActivity.getRouter;
 
 public class RouteParametersFragment extends BaseSettingsFragment {
 
-	public static final String TAG = "RouteParametersFragment";
+	public static final String TAG = RouteParametersFragment.class.getSimpleName();
 
 	private static final String AVOID_ROUTING_PARAMETER_PREFIX = "avoid_";
 	private static final String PREFER_ROUTING_PARAMETER_PREFIX = "prefer_";
@@ -46,20 +46,6 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 	private List<GeneralRouter.RoutingParameter> reliefFactorParameters = new ArrayList<GeneralRouter.RoutingParameter>();
 	private List<GeneralRouter.RoutingParameter> otherRoutingParameters = new ArrayList<GeneralRouter.RoutingParameter>();
 
-	@Override
-	protected int getPreferencesResId() {
-		return R.xml.route_parameters;
-	}
-
-	@Override
-	protected int getToolbarResId() {
-		return R.layout.profile_preference_toolbar;
-	}
-
-	@Override
-	protected int getToolbarTitle() {
-		return R.string.route_parameters;
-	}
 
 	@Override
 	protected void setupPreferences() {

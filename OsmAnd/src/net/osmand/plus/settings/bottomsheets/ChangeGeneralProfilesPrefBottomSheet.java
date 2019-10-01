@@ -28,7 +28,7 @@ import java.util.List;
 
 public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSheet {
 
-	public static final String TAG = "ChangeGeneralProfilesPrefBottomSheet";
+	public static final String TAG = ChangeGeneralProfilesPrefBottomSheet.class.getSimpleName();
 
 	private static final Log LOG = PlatformUtil.getLog(ChangeGeneralProfilesPrefBottomSheet.class);
 

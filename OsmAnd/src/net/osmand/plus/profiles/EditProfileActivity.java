@@ -8,14 +8,12 @@ import android.support.v4.view.MenuItemCompat;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 
 public class EditProfileActivity extends OsmandActionBarActivity {
 
 	public static final int DELETE_ID = 1010;
-	public static final String EDIT_PROFILE_FRAGMENT_TAG = "editProfileFragment";
 
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -27,7 +25,7 @@ public class EditProfileActivity extends OsmandActionBarActivity {
 			EditProfileFragment editProfileFragment = new EditProfileFragment();
 			editProfileFragment.setArguments(getIntent().getExtras());
 			getSupportFragmentManager().beginTransaction().add(android.R.id.content,
-				editProfileFragment, EDIT_PROFILE_FRAGMENT_TAG).commit();
+					editProfileFragment, EditProfileFragment.TAG).commit();
 		}
 	}
 
@@ -53,7 +51,7 @@ public class EditProfileActivity extends OsmandActionBarActivity {
 				return true;
 			case DELETE_ID:
 				((EditProfileFragment) getSupportFragmentManager().findFragmentByTag(
-					EDIT_PROFILE_FRAGMENT_TAG)).onDeleteProfileClick();
+						EditProfileFragment.TAG)).onDeleteProfileClick();
 				return true;
 
 		}
@@ -63,7 +61,7 @@ public class EditProfileActivity extends OsmandActionBarActivity {
 	@Override
 	public void onBackPressed() {
 		final EditProfileFragment epf = (EditProfileFragment) getSupportFragmentManager()
-			.findFragmentByTag(EDIT_PROFILE_FRAGMENT_TAG);
+			.findFragmentByTag(EditProfileFragment.TAG);
 		if (epf.onBackPressedAllowed()) {
 			super.onBackPressed();
 		} else {

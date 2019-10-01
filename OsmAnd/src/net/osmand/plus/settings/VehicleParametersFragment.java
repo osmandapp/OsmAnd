@@ -19,22 +19,7 @@ import static net.osmand.plus.activities.SettingsNavigationActivity.showSeekbarS
 
 public class VehicleParametersFragment extends BaseSettingsFragment {
 
-	public static final String TAG = "VehicleParametersFragment";
-
-	@Override
-	protected int getPreferencesResId() {
-		return R.xml.vehicle_parameters;
-	}
-
-	@Override
-	protected int getToolbarResId() {
-		return R.layout.profile_preference_toolbar;
-	}
-
-	@Override
-	protected int getToolbarTitle() {
-		return R.string.vehicle_parameters;
-	}
+	public static final String TAG = VehicleParametersFragment.class.getSimpleName();
 
 	@Override
 	protected void setupPreferences() {

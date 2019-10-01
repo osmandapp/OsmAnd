@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
-	xmlns:tools="http://schemas.android.com/tools">
+	xmlns:tools="http://schemas.android.com/tools"
+	android:title="@string/routing_settings_2">
 
 	<Preference
 		android:key="route_parameters"
@@ -55,5 +56,12 @@
 		android:title="@string/turn_screen_on"
 		app:fragment="net.osmand.plus.settings.TurnScreenOnFragment"
 		tools:icon="@drawable/ic_action_turn_screen_on" />
+
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="animate_my_location"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_off"
+		android:summaryOn="@string/shared_string_on"
+		android:title="@string/animate_my_location" />
 
 </PreferenceScreen>

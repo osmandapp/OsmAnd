@@ -991,14 +991,18 @@ public class OsmandApplication extends MultiDexApplication {
 		}
 	}
 
-	public void restartApp(Context ctx) {
+	public void restartApp(final Context ctx) {
 		AlertDialog.Builder bld = new AlertDialog.Builder(ctx);
 		bld.setMessage(R.string.restart_is_required);
 		bld.setPositiveButton(R.string.shared_string_ok, new OnClickListener() {
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				android.os.Process.killProcess(android.os.Process.myPid());
+				if (ctx instanceof MapActivity) {
+					MapActivity.doRestart(ctx);
+				} else {
+					android.os.Process.killProcess(android.os.Process.myPid());
+				}
 			}
 		});
 		bld.show();

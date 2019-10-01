@@ -3,8 +3,10 @@ package net.osmand.plus.settings;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.preference.Preference;
-import android.support.v7.preference.PreferenceViewHolder;
-import android.support.v7.preference.SwitchPreferenceCompat;
+import android.support.v7.widget.SwitchCompat;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
@@ -13,22 +15,7 @@ import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 
 public class TurnScreenOnFragment extends BaseSettingsFragment {
 
-	public static final String TAG = "TurnScreenOnFragment";
-
-	@Override
-	protected int getPreferencesResId() {
-		return R.xml.turn_screen_on;
-	}
-
-	@Override
-	protected int getToolbarResId() {
-		return R.layout.profile_preference_toolbar;
-	}
-
-	@Override
-	protected int getToolbarTitle() {
-		return R.string.turn_screen_on;
-	}
+	public static final String TAG = TurnScreenOnFragment.class.getSimpleName();
 
 	@Override
 	protected void setupPreferences() {
@@ -40,15 +27,42 @@ public class TurnScreenOnFragment extends BaseSettingsFragment {
 	}
 
 	@Override
-	protected void onBindPreferenceViewHolder(Preference preference, PreferenceViewHolder holder) {
-		super.onBindPreferenceViewHolder(preference, holder);
+	protected void createToolbar(LayoutInflater inflater, View view) {
+		super.createToolbar(inflater, view);
 
-		if (settings.TURN_SCREEN_ON_ENABLED.getId().equals(preference.getKey())) {
-			boolean checked = ((SwitchPreferenceCompat) preference).isChecked();
-			int color = checked ? getActiveProfileColor() : ContextCompat.getColor(app, R.color.preference_top_switch_off);
+		view.findViewById(R.id.toolbar_switch_container).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				boolean checked = !settings.TURN_SCREEN_ON_ENABLED.get();
+				settings.TURN_SCREEN_ON_ENABLED.set(checked);
+				updateToolbarSwitch();
+				enableDisablePreferences(checked);
+			}
+		});
+	}
 
-			AndroidUtils.setBackground(holder.itemView, new ColorDrawable(color));
+	@Override
+	protected void updateToolbar() {
+		super.updateToolbar();
+		updateToolbarSwitch();
+	}
+
+	private void updateToolbarSwitch() {
+		View view = getView();
+		if (view == null) {
+			return;
 		}
+		boolean checked = settings.TURN_SCREEN_ON_ENABLED.get();
+
+		int color = checked ? getActiveProfileColor() : ContextCompat.getColor(app, R.color.preference_top_switch_off);
+		View switchContainer = view.findViewById(R.id.toolbar_switch_container);
+		AndroidUtils.setBackground(switchContainer, new ColorDrawable(color));
+
+		SwitchCompat switchView = (SwitchCompat) switchContainer.findViewById(R.id.switchWidget);
+		switchView.setChecked(checked);
+
+		TextView title = switchContainer.findViewById(R.id.switchButtonText);
+		title.setText(checked ? R.string.shared_string_on : R.string.shared_string_off);
 	}
 
 	private void setupTurnScreenOnTimePref() {

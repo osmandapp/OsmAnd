@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="?attr/activity_background_color"
+	android:orientation="vertical">
+
+	<android.support.design.widget.AppBarLayout
+		android:id="@+id/appbar"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+
+		<include layout="@layout/global_preference_toolbar" />
+
+	</android.support.design.widget.AppBarLayout>
+
 <RelativeLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   android:background="?attr/activity_background_color"
@@ -48,3 +62,5 @@
   </LinearLayout>
 
 </RelativeLayout>
+
+</LinearLayout>

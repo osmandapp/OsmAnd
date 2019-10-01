@@ -1,10 +1,18 @@
 package net.osmand.plus.settings;
 
+import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.preference.Preference;
+import android.support.v7.widget.SwitchCompat;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import net.osmand.AndroidUtils;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.settings.preferences.EditTextPreferenceEx;
 
 import static net.osmand.plus.activities.SettingsGeneralActivity.IP_ADDRESS_PATTERN;
@@ -14,27 +22,54 @@ public class ProxySettingsFragment extends BaseSettingsFragment {
 	public static final String TAG = ProxySettingsFragment.class.getSimpleName();
 
 	@Override
-	protected int getPreferencesResId() {
-		return R.xml.proxy_preferences;
-	}
-
-	@Override
-	protected int getToolbarResId() {
-		return R.layout.global_preference_toolbar;
-	}
-
-	@Override
-	protected int getToolbarTitle() {
-		return R.string.proxy_pref_title;
-	}
-
-	@Override
 	protected void setupPreferences() {
 		Preference mapDuringNavigationInfo = findPreference("proxy_preferences_info");
 		mapDuringNavigationInfo.setIcon(getContentIcon(R.drawable.ic_action_info_dark));
 
 		setupProxyHostPref();
 		setupProxyPortPref();
+	}
+
+	@Override
+	protected void createToolbar(LayoutInflater inflater, View view) {
+		super.createToolbar(inflater, view);
+
+		view.findViewById(R.id.toolbar_switch_container).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				boolean checked = !settings.ENABLE_PROXY.get();
+				settings.ENABLE_PROXY.set(checked);
+				updateToolbarSwitch();
+				enableDisablePreferences(checked);
+			}
+		});
+		TextView title = (TextView) view.findViewById(R.id.switchButtonText);
+		title.setTextColor(ContextCompat.getColor(app, isNightMode() ? R.color.active_color_primary_dark : R.color.active_color_primary_light));
+	}
+
+	@Override
+	protected void updateToolbar() {
+		super.updateToolbar();
+		updateToolbarSwitch();
+	}
+
+	private void updateToolbarSwitch() {
+		View view = getView();
+		if (view == null) {
+			return;
+		}
+		boolean checked = settings.ENABLE_PROXY.get();
+
+		View selectableView = view.findViewById(R.id.selectable_item);
+
+		SwitchCompat switchView = (SwitchCompat) selectableView.findViewById(R.id.switchWidget);
+		switchView.setChecked(checked);
+
+		TextView title = (TextView) selectableView.findViewById(R.id.switchButtonText);
+		title.setText(checked ? R.string.shared_string_on : R.string.shared_string_off);
+
+		Drawable drawable = UiUtilities.getColoredSelectableDrawable(app, getActiveProfileColor(), 0.3f);
+		AndroidUtils.setBackground(selectableView, drawable);
 	}
 
 	private void setupProxyHostPref() {

@@ -10,22 +10,7 @@ import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 
 public class MapDuringNavigationFragment extends BaseSettingsFragment {
 
-	public static final String TAG = "MapDuringNavigationFragment";
-
-	@Override
-	protected int getPreferencesResId() {
-		return R.xml.map_during_navigation;
-	}
-
-	@Override
-	protected int getToolbarResId() {
-		return R.layout.profile_preference_toolbar;
-	}
-
-	@Override
-	protected int getToolbarTitle() {
-		return R.string.map_during_navigation;
-	}
+	public static final String TAG = MapDuringNavigationFragment.class.getSimpleName();
 
 	@Override
 	protected void setupPreferences() {

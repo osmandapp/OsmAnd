@@ -1,9 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<FrameLayout
-	xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="?attr/activity_background_color"
+	android:orientation="vertical">
+
+	<android.support.design.widget.AppBarLayout
+		android:id="@+id/appbar"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+
+		<android.support.v7.widget.Toolbar
+			android:id="@+id/toolbar"
+			android:layout_width="match_parent"
+			android:layout_height="@dimen/toolbar_height"
+			android:background="?attr/actionModeBackground"
+			app:contentInsetLeft="0dp"
+			app:contentInsetStart="0dp">
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content">
+
+				<ImageButton
+					android:id="@+id/close_button"
+					style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
+					android:layout_width="@dimen/toolbar_height"
+					android:layout_height="@dimen/toolbar_height"
+					android:contentDescription="@string/access_shared_string_navigate_up"
+					android:src="@drawable/ic_action_mode_back" />
+
+				<net.osmand.plus.widgets.TextViewEx
+					android:id="@+id/toolbar_title"
+					android:layout_width="0dp"
+					android:layout_height="match_parent"
+					android:layout_weight="1"
+					android:gravity="center_vertical"
+					android:paddingLeft="@dimen/content_padding"
+					android:paddingRight="@dimen/content_padding"
+					android:textColor="?attr/app_bar_primary_item_color"
+					android:textSize="@dimen/dialog_header_text_size"
+					app:typeface="@string/font_roboto_medium"
+					tools:text="@string/routing_settings_2" />
+
+				<ImageButton
+					android:id="@+id/delete_button"
+					style="@style/Widget.AppCompat.Toolbar.Button.Navigation"
+					android:layout_width="@dimen/toolbar_height"
+					android:layout_height="@dimen/toolbar_height"
+					android:contentDescription="@string/shared_string_delete"
+					android:src="@drawable/ic_action_delete_dark" />
+
+			</LinearLayout>
+
+		</android.support.v7.widget.Toolbar>
+
+	</android.support.design.widget.AppBarLayout>
+
+<FrameLayout
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
 	android:background="?attr/activity_background_color">
@@ -226,8 +282,7 @@
 
 					<LinearLayout
 						android:layout_width="match_parent"
-						android:layout_height="0dp"
-						android:layout_weight="1"
+						android:layout_height="match_parent"
 						android:orientation="horizontal"
 						android:layout_gravity="center_vertical">
 
@@ -379,7 +434,7 @@
 					android:textColor="@color/description_font_and_bottom_sheet_icons"/>
 
 				<LinearLayout
-					android:id="@+id/map_config_btn"
+					android:id="@+id/profile_config_btn"
 					android:layout_width="match_parent"
 					android:layout_height="65dp"
 					android:background="?android:attr/selectableItemBackground"
@@ -387,133 +442,37 @@
 					android:orientation="horizontal">
 
 					<ImageView
-						android:id="@+id/map_config_icon"
+						android:id="@+id/profile_config_icon"
 						android:layout_width="24dp"
 						android:layout_height="24dp"
 						android:layout_marginStart="@dimen/list_content_padding"
 						android:layout_marginLeft="@dimen/list_content_padding"
-						android:src="@drawable/ic_action_layers_dark"
+						android:src="@drawable/ic_action_settings"
 						android:tint="?attr/default_icon_color"/>
 
 					<LinearLayout
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
 						android:layout_marginStart="24dp"
-						android:layout_marginEnd="@dimen/list_content_padding"
 						android:layout_marginLeft="24dp"
+						android:layout_marginEnd="@dimen/list_content_padding"
 						android:layout_marginRight="@dimen/list_content_padding"
 						android:orientation="vertical">
 
 						<TextView
 							android:layout_width="wrap_content"
 							android:layout_height="wrap_content"
-							android:text="@string/configure_map"
+							android:text="@string/configure_profile"
 							android:textColor="?android:textColorPrimary"
 							android:textSize="@dimen/default_list_text_size"/>
 
 						<TextView
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content"
-							android:text="@string/edit_profile_setup_map_subtitle"
-							android:textColor="@color/description_font_and_bottom_sheet_icons"/>
-					</LinearLayout>
-				</LinearLayout>
-
-				<View
-					android:layout_width="match_parent"
-					android:layout_height="1dp"
-					android:layout_marginStart="64dp"
-					android:layout_marginLeft="64dp"
-					android:background="?attr/divider_color"/>
-
-				<LinearLayout
-					android:id="@+id/screen_config_btn"
-					android:layout_width="match_parent"
-					android:layout_height="64dp"
-					android:background="?android:attr/selectableItemBackground"
-					android:gravity="center_vertical"
-					android:orientation="horizontal">
-
-					<ImageView
-						android:id="@+id/screen_config_icon"
-						android:layout_width="24dp"
-						android:layout_height="24dp"
-						android:layout_marginStart="@dimen/list_content_padding"
-						android:layout_marginLeft="@dimen/list_content_padding"
-						android:src="@drawable/ic_configure_screen_dark"
-						android:tint="?attr/default_icon_color"/>
-
-					<LinearLayout
-						android:layout_width="match_parent"
-						android:layout_height="wrap_content"
-						android:layout_marginStart="24dp"
-						android:layout_marginEnd="@dimen/list_content_padding"
-						android:layout_marginLeft="24dp"
-						android:layout_marginRight="@dimen/list_content_padding"
-						android:orientation="vertical">
-
-						<TextView
-							android:layout_width="wrap_content"
-							android:layout_height="wrap_content"
-							android:text="@string/map_widget_config"
-							android:textColor="?android:textColorPrimary"
-							android:textSize="@dimen/default_list_text_size"/>
-
-						<TextView
-							android:layout_width="match_parent"
-							android:layout_height="wrap_content"
-							android:text="@string/edit_profile_screen_options_subtitle"
-							android:textColor="@color/description_font_and_bottom_sheet_icons"/>
-
-					</LinearLayout>
-				</LinearLayout>
-
-				<View
-					android:layout_width="match_parent"
-					android:layout_height="1dp"
-					android:layout_marginStart="64dp"
-					android:layout_marginLeft="64dp"
-					android:background="?attr/divider_color"
-					/>
-
-				<LinearLayout
-					android:id="@+id/nav_settings_btn"
-					android:layout_width="match_parent"
-					android:layout_height="64dp"
-					android:background="?android:attr/selectableItemBackground"
-					android:gravity="center_vertical"
-					android:orientation="horizontal">
-
-					<ImageView
-						android:id="@+id/nav_settings_icon"
-						android:layout_width="24dp"
-						android:layout_height="24dp"
-						android:layout_marginStart="@dimen/list_content_padding"
-						android:layout_marginLeft="@dimen/list_content_padding"
-						android:src="@drawable/ic_action_gdirections_dark"
-						android:tint="?attr/default_icon_color"/>
-
-					<LinearLayout
-						android:layout_width="match_parent"
-						android:layout_height="wrap_content"
-						android:layout_marginStart="24dp"
-						android:layout_marginEnd="@dimen/list_content_padding"
-						android:layout_marginLeft="24dp"
-						android:layout_marginRight="@dimen/list_content_padding"
-						android:orientation="vertical">
-
-						<TextView
-							android:layout_width="wrap_content"
-							android:layout_height="wrap_content"
-							android:text="@string/routing_settings_2"
-							android:textColor="?android:textColorPrimary"
-							android:textSize="@dimen/default_list_text_size"/>
-
-						<TextView
-							android:layout_width="match_parent"
-							android:layout_height="wrap_content"
-							android:text="@string/edit_profile_nav_settings_subtitle"
-							android:textColor="@color/description_font_and_bottom_sheet_icons"/>
+							android:textColor="@color/description_font_and_bottom_sheet_icons"
+							android:visibility="gone"
+							tools:text="@string/configure_profile_info"
+							tools:visibility="visible" />
 
 					</LinearLayout>
 				</LinearLayout>
@@ -613,3 +572,5 @@
 	</LinearLayout>
 
 </FrameLayout>
+
+</LinearLayout>

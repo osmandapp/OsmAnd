@@ -7,8 +7,10 @@ import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.ColorRes;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.preference.Preference;
@@ -20,8 +22,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
+import net.osmand.PlatformUtil;
 import net.osmand.aidl.OsmandAidlApi;
 import net.osmand.aidl.OsmandAidlApi.ConnectedApp;
 import net.osmand.plus.ApplicationMode;
@@ -30,34 +34,27 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.PluginActivity;
+import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
+
+import org.apache.commons.logging.Log;
 
 import java.util.List;
 
 import static net.osmand.plus.profiles.EditProfileFragment.MAP_CONFIG;
 import static net.osmand.plus.profiles.EditProfileFragment.OPEN_CONFIG_ON_MAP;
+import static net.osmand.plus.profiles.EditProfileFragment.SCREEN_CONFIG;
 import static net.osmand.plus.profiles.EditProfileFragment.SELECTED_ITEM;
 
 public class ConfigureProfileFragment extends BaseSettingsFragment {
 
-	public static final String TAG = "ConfigureProfileFragment";
+	public static final String TAG = ConfigureProfileFragment.class.getSimpleName();
+
+	private static final Log log = PlatformUtil.getLog(ConfigureProfileFragment.class);
 
 	private static final String PLUGIN_SETTINGS = "plugin_settings";
-
-	@Override
-	protected int getPreferencesResId() {
-		return R.xml.configure_profile;
-	}
-
-	@Override
-	protected int getToolbarResId() {
-		return R.layout.profile_preference_toolbar_big;
-	}
-
-	@Override
-	protected int getToolbarTitle() {
-		return R.string.configure_profile;
-	}
+	private static final String CONFIGURE_MAP = "configure_map";
+	private static final String CONFIGURE_SCREEN = "configure_screen";
 
 	@ColorRes
 	protected int getBackgroundColorRes() {
@@ -71,6 +68,35 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 		getListView().addItemDecoration(createDividerItemDecoration());
 
 		return view;
+	}
+
+	@Override
+	protected void createToolbar(LayoutInflater inflater, View view) {
+		super.createToolbar(inflater, view);
+
+		TextView toolbarTitle = (TextView) view.findViewById(R.id.profile_title);
+		toolbarTitle.setTypeface(FontCache.getRobotoMedium(view.getContext()));
+
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+			float letterSpacing = AndroidUtils.getFloatValueFromRes(view.getContext(), R.dimen.title_letter_spacing);
+			toolbarTitle.setLetterSpacing(letterSpacing);
+		}
+		TextView profileType = (TextView) view.findViewById(R.id.profile_type);
+		profileType.setVisibility(View.VISIBLE);
+	}
+
+	@Override
+	protected void updateToolbar() {
+		super.updateToolbar();
+
+		View view = getView();
+		if (view != null) {
+			ApplicationMode selectedMode = getSelectedAppMode();
+			String appModeType = getAppModeDescription(view.getContext(), selectedMode);
+
+			TextView profileType = (TextView) view.findViewById(R.id.profile_type);
+			profileType.setText(appModeType);
+		}
 	}
 
 	private RecyclerView.ItemDecoration createDividerItemDecoration() {
@@ -127,6 +153,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 
 		setupNavigationSettingsPref();
 		setupConfigureMapPref();
+		setupConfigureScreenPref();
 
 		PreferenceCategory pluginSettings = (PreferenceCategory) findPreference(PLUGIN_SETTINGS);
 		pluginSettings.setIconSpaceReserved(false);
@@ -138,9 +165,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 	private void setupNavigationSettingsPref() {
 		Preference navigationSettings = findPreference("navigation_settings");
 		navigationSettings.setIcon(getContentIcon(R.drawable.ic_action_gdirections_dark));
-		if (getSelectedAppMode() == ApplicationMode.DEFAULT) {
-			navigationSettings.setVisible(false);
-		}
+		navigationSettings.setVisible(!getSelectedAppMode().isDerivedRoutingFrom(ApplicationMode.DEFAULT));
 	}
 
 	private void setupConfigureMapPref() {
@@ -148,14 +173,27 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 		if (ctx == null) {
 			return;
 		}
-		Preference configureMap = findPreference("configure_map");
+		Preference configureMap = findPreference(CONFIGURE_MAP);
 		configureMap.setIcon(getContentIcon(R.drawable.ic_action_layers_dark));
 
 		Intent intent = new Intent(ctx, MapActivity.class);
 		intent.putExtra(OPEN_CONFIG_ON_MAP, MAP_CONFIG);
 		intent.putExtra(SELECTED_ITEM, getSelectedAppMode().getStringKey());
 		configureMap.setIntent(intent);
-		configureMap.setVisible(false);
+	}
+
+	private void setupConfigureScreenPref() {
+		Context ctx = getContext();
+		if (ctx == null) {
+			return;
+		}
+		Preference configureMap = findPreference(CONFIGURE_SCREEN);
+		configureMap.setIcon(getContentIcon(R.drawable.ic_configure_screen_dark));
+
+		Intent intent = new Intent(ctx, MapActivity.class);
+		intent.putExtra(OPEN_CONFIG_ON_MAP, SCREEN_CONFIG);
+		intent.putExtra(SELECTED_ITEM, getSelectedAppMode().getStringKey());
+		configureMap.setIntent(intent);
 	}
 
 	private void setupConnectedAppsPref(PreferenceCategory preferenceCategory) {
@@ -215,6 +253,30 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 	}
 
 	@Override
+	public boolean onPreferenceClick(Preference preference) {
+		String prefId = preference.getKey();
+
+		if (CONFIGURE_MAP.equals(prefId) || CONFIGURE_SCREEN.equals(prefId)) {
+			FragmentActivity activity = getActivity();
+			if (activity != null) {
+				try {
+					FragmentManager fragmentManager = activity.getSupportFragmentManager();
+					if (fragmentManager != null) {
+						fragmentManager.beginTransaction()
+								.remove(this)
+								.addToBackStack(TAG)
+								.commitAllowingStateLoss();
+					}
+				} catch (Exception e) {
+					log.error(e);
+				}
+			}
+		}
+
+		return super.onPreferenceClick(preference);
+	}
+
+	@Override
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
 		String key = preference.getKey();
 
@@ -240,18 +302,5 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 		}
 
 		return super.onPreferenceChange(preference, newValue);
-	}
-
-	public static boolean showInstance(FragmentManager fragmentManager) {
-		try {
-			ConfigureProfileFragment configureProfileFragment = new ConfigureProfileFragment();
-			fragmentManager.beginTransaction()
-					.replace(R.id.fragmentContainer, configureProfileFragment, TAG)
-					.addToBackStack(TAG)
-					.commitAllowingStateLoss();
-			return true;
-		} catch (Exception e) {
-			return false;
-		}
 	}
 }

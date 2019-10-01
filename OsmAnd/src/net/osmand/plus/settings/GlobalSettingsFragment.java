@@ -19,24 +19,9 @@ import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 
 public class GlobalSettingsFragment extends BaseSettingsFragment implements SendAnalyticsBottomSheetDialogFragment.OnSendAnalyticsPrefsUpdate, OnPreferenceChanged {
 
-	public static final String TAG = "GlobalSettingsFragment";
+	public static final String TAG = GlobalSettingsFragment.class.getSimpleName();
 
 	private static final String SEND_ANONYMOUS_DATA_PREF_ID = "send_anonymous_data";
-
-	@Override
-	protected int getPreferencesResId() {
-		return R.xml.global_settings;
-	}
-
-	@Override
-	protected int getToolbarResId() {
-		return R.layout.global_preference_toolbar;
-	}
-
-	@Override
-	protected int getToolbarTitle() {
-		return R.string.osmand_settings;
-	}
 
 	@Override
 	protected void setupPreferences() {
@@ -96,7 +81,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment implements Send
 			OsmandApplication app = getMyApplication();
 			if (app != null && activity != null) {
 				app.checkPreferredLocale();
-				activity.recreate();
+				app.restartApp(activity);
 			}
 		}
 	}

@@ -5,7 +5,7 @@
 	android:id="@+id/toolbar"
 	android:layout_width="match_parent"
 	android:layout_height="@dimen/toolbar_height"
-	android:background="@color/icon_color_osmand_light"
+	android:background="?attr/actionModeBackground"
 	app:contentInsetLeft="0dp"
 	app:contentInsetStart="0dp">
 

@@ -1,37 +1,27 @@
 package net.osmand.plus.settings;
 
-import android.annotation.SuppressLint;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.support.v7.preference.SwitchPreferenceCompat;
+import android.support.v7.widget.SwitchCompat;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
 
 public class ScreenAlertsFragment extends BaseSettingsFragment {
 
-	public static final String TAG = "ScreenAlertsFragment";
+	public static final String TAG = ScreenAlertsFragment.class.getSimpleName();
 
 	private static final String SHOW_ROUTING_ALARMS_INFO = "show_routing_alarms_info";
 	private static final String SCREEN_ALERTS_IMAGE = "screen_alerts_image";
-
-	@Override
-	protected int getPreferencesResId() {
-		return R.xml.screen_alerts;
-	}
-
-	@Override
-	protected int getToolbarResId() {
-		return R.layout.profile_preference_toolbar;
-	}
-
-	@Override
-	protected int getToolbarTitle() {
-		return R.string.screen_alerts;
-	}
 
 	@Override
 	protected void setupPreferences() {
@@ -51,16 +41,50 @@ public class ScreenAlertsFragment extends BaseSettingsFragment {
 	}
 
 	@Override
+	protected void createToolbar(LayoutInflater inflater, View view) {
+		super.createToolbar(inflater, view);
+
+		view.findViewById(R.id.toolbar_switch_container).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				boolean checked = !settings.SHOW_ROUTING_ALARMS.get();
+				settings.SHOW_ROUTING_ALARMS.set(checked);
+				updateToolbarSwitch();
+				enableDisablePreferences(checked);
+			}
+		});
+	}
+
+	@Override
+	protected void updateToolbar() {
+		super.updateToolbar();
+		updateToolbarSwitch();
+	}
+
+	private void updateToolbarSwitch() {
+		View view = getView();
+		if (view == null) {
+			return;
+		}
+		boolean checked = settings.SHOW_ROUTING_ALARMS.get();
+
+		int color = checked ? getActiveProfileColor() : ContextCompat.getColor(app, R.color.preference_top_switch_off);
+		View switchContainer = view.findViewById(R.id.toolbar_switch_container);
+		AndroidUtils.setBackground(switchContainer, new ColorDrawable(color));
+
+		SwitchCompat switchView = (SwitchCompat) switchContainer.findViewById(R.id.switchWidget);
+		switchView.setChecked(checked);
+
+		TextView title = switchContainer.findViewById(R.id.switchButtonText);
+		title.setText(checked ? R.string.shared_string_on : R.string.shared_string_off);
+	}
+
+	@Override
 	protected void onBindPreferenceViewHolder(Preference preference, PreferenceViewHolder holder) {
 		super.onBindPreferenceViewHolder(preference, holder);
 
 		String key = preference.getKey();
-		if (settings.SHOW_ROUTING_ALARMS.getId().equals(key)) {
-			boolean checked = ((SwitchPreferenceCompat) preference).isChecked();
-			int color = checked ? getActiveProfileColor() : ContextCompat.getColor(app, R.color.preference_top_switch_off);
-
-			holder.itemView.setBackgroundColor(color);
-		} else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
 			if (SHOW_ROUTING_ALARMS_INFO.equals(key)) {
 				int colorRes = isNightMode() ? R.color.activity_background_color_dark : R.color.activity_background_color_light;
 				holder.itemView.setBackgroundColor(ContextCompat.getColor(app, colorRes));
@@ -74,7 +98,6 @@ public class ScreenAlertsFragment extends BaseSettingsFragment {
 		}
 	}
 
-	@SuppressLint("RestrictedApi")
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {

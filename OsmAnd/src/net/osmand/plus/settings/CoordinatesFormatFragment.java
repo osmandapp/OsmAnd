@@ -22,6 +22,7 @@ import android.widget.TextView;
 
 import net.osmand.Location;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.bottomsheets.ChangeGeneralProfilesPrefBottomSheet;
@@ -30,7 +31,7 @@ import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 
 public class CoordinatesFormatFragment extends BaseSettingsFragment {
 
-	public static final String TAG = "CoordinatesFormatFragment";
+	public static final String TAG = CoordinatesFormatFragment.class.getSimpleName();
 
 	private static final String UTM_FORMAT_WIKI_LINK = "https://en.wikipedia.org/wiki/Universal_Transverse_Mercator_coordinate_system";
 
@@ -39,21 +40,6 @@ public class CoordinatesFormatFragment extends BaseSettingsFragment {
 	private static final String FORMAT_SECONDS = "format_seconds";
 	private static final String UTM_FORMAT = "utm_format";
 	private static final String OLC_FORMAT = "olc_format";
-
-	@Override
-	protected int getPreferencesResId() {
-		return R.xml.coordinates_format;
-	}
-
-	@Override
-	protected int getToolbarResId() {
-		return R.layout.profile_preference_toolbar;
-	}
-
-	@Override
-	protected int getToolbarTitle() {
-		return R.string.coordinates_format;
-	}
 
 	@Override
 	protected void setupPreferences() {
@@ -178,10 +164,13 @@ public class CoordinatesFormatFragment extends BaseSettingsFragment {
 
 		int newFormat = getCoordinatesFormatForKey(key);
 		if (newFormat != -1) {
-			if (settings.COORDINATES_FORMAT.isSetForMode(getSelectedAppMode())) {
-				settings.COORDINATES_FORMAT.set(newFormat);
-				updateSelectedFormatPrefs(key);
-				return true;
+			ApplicationMode selectedAppMode = getSelectedAppMode();
+			if (settings.COORDINATES_FORMAT.isSetForMode(selectedAppMode)) {
+				if (!settings.COORDINATES_FORMAT.getModeValue(selectedAppMode).equals(newFormat)) {
+					settings.COORDINATES_FORMAT.set(newFormat);
+					updateSelectedFormatPrefs(key);
+					return true;
+				}
 			} else {
 				FragmentManager fragmentManager = getFragmentManager();
 				if (fragmentManager != null) {
