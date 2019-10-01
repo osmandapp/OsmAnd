@@ -2938,6 +2938,9 @@ public class OsmandSettings {
 					RateUsBottomSheetDialog.RateUsState.INITIAL_STATE, RateUsBottomSheetDialog.RateUsState.values())
 					.makeGlobal();
 
+	public final CommonPreference<String> DEFAULT_APP_PROFILES =
+			new StringPreference("default_app_profiles", "").makeGlobal().cache();
+
 	public final CommonPreference<String> CUSTOM_APP_PROFILES =
 		new StringPreference("custom_app_profiles", "").makeGlobal().cache();
 
