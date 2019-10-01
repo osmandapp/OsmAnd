@@ -350,11 +350,6 @@ public class ApplicationMode {
 		return create(parent,-1, stringKey).userProfileTitle(userProfileTitle);
 	}
 
-	public static ApplicationModeBuilder changeBaseMode(ApplicationMode applicationMode) {
-		ApplicationModeBuilder builder = new ApplicationModeBuilder();
-		builder.applicationMode = applicationMode;
-		return builder;
-	}
 
 	public static List<ApplicationMode> values(OsmandApplication app) {
 		if (customizationListener == null) {
@@ -395,16 +390,6 @@ public class ApplicationMode {
 
 	public static List<ApplicationMode> getDefaultValues() {
 		return defaultValues;
-	}
-
-	public static List<ApplicationMode> getCustomValues() {
-		List<ApplicationMode> customModes = new ArrayList<>();
-		for (ApplicationMode mode : values) {
-			if (mode.isCustomProfile()) {
-				customModes.add(mode);
-			}
-		}
-		return customModes;
 	}
 
 	// returns modifiable ! Set<ApplicationMode> to exclude non-wanted derived
@@ -622,7 +607,6 @@ public class ApplicationMode {
 
 	public static void onApplicationStart(OsmandApplication app) {
 		// load for default profiles to initialize later custom modes
-		initDefaultModesUpdates(app);
 		initDefaultSpeed(app);
 		initCustomModes(app);
 		initDefaultSpeed(app);
@@ -656,60 +640,25 @@ public class ApplicationMode {
 
 	}
 
-	private static void initDefaultModesUpdates(OsmandApplication app) {
-		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-		Type t = new TypeToken<ArrayList<ApplicationModeBean>>() {}.getType();
-		List<ApplicationModeBean> defaultAppModeBeans = gson.fromJson(app.getSettings().DEFAULT_APP_PROFILES.get(), t);
 
-		if (!Algorithms.isEmpty(defaultAppModeBeans)) {
-			for (ApplicationModeBean modeBean : defaultAppModeBeans) {
-				ApplicationMode applicationMode = ApplicationMode.valueOfStringKey(modeBean.stringKey, null);
-				if (applicationMode != null) {
-					if (!applicationMode.routingProfile.equals(modeBean.routingProfile)) {
-						applicationMode.routingProfile = modeBean.routingProfile;
-					}
-					if (!applicationMode.routeService.equals(modeBean.routeService)) {
-						applicationMode.routeService = modeBean.routeService;
-					}
-				}
+	private static void saveCustomModeToSettings(OsmandSettings settings){
+		List<ApplicationModeBean> customModes = new ArrayList<>();
+		for (ApplicationMode mode : values) {
+			if (mode.parentAppMode != null) {
+				ApplicationModeBean mb = new ApplicationModeBean();
+				mb.userProfileName = mode.userProfileName;
+				mb.iconColor = mode.iconColor;
+				mb.iconName = mode.iconResName;
+				mb.parent = mode.parentAppMode.getStringKey();
+				mb.stringKey = mode.stringKey;
+				mb.routeService = mode.routeService;
+				mb.routingProfile = mode.routingProfile;
+				customModes.add(mb);
 			}
 		}
-	}
-
-	private static void saveCustomModeToSettings(OsmandSettings settings) {
-		List<ApplicationModeBean> customModes = createApplicationModeBeans(getCustomValues());
-		saveModesToSettings(settings, customModes, true);
-	}
-
-	public static void saveDefaultModeToSettings(OsmandSettings settings) {
-		List<ApplicationModeBean> defaultModes = createApplicationModeBeans(defaultValues);
-		saveModesToSettings(settings, defaultModes, false);
-	}
-
-	private static List<ApplicationModeBean> createApplicationModeBeans(List<ApplicationMode> applicationModes) {
-		List<ApplicationModeBean> modeBeans = new ArrayList<>();
-		for (ApplicationMode mode : applicationModes) {
-			ApplicationModeBean mb = new ApplicationModeBean();
-			mb.userProfileName = mode.userProfileName;
-			mb.iconColor = mode.iconColor;
-			mb.iconName = mode.iconResName;
-			mb.parent = mode.parentAppMode != null ? mode.parentAppMode.getStringKey() : null;
-			mb.stringKey = mode.stringKey;
-			mb.routeService = mode.routeService;
-			mb.routingProfile = mode.routingProfile;
-			modeBeans.add(mb);
-		}
-		return modeBeans;
-	}
-
-	private static void saveModesToSettings(OsmandSettings settings, List<ApplicationModeBean> modeBeans, boolean customModes) {
 		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-		String profiles = gson.toJson(modeBeans);
-		if (customModes) {
-			settings.CUSTOM_APP_PROFILES.set(profiles);
-		} else {
-			settings.DEFAULT_APP_PROFILES.set(profiles);
-		}
+		String profiles = gson.toJson(customModes);
+		settings.CUSTOM_APP_PROFILES.set(profiles);
 	}
 
 	public static ApplicationMode saveCustomProfile(ApplicationModeBuilder builder, OsmandApplication app) {

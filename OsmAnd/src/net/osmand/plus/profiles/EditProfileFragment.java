@@ -285,20 +285,20 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		selectNavTypeBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				FragmentActivity activity = getActivity();
-				if (activity != null) {
+				if (isNew || isUserProfile) {
 					hideKeyboard();
+					final SelectProfileBottomSheetDialogFragment fragment = new SelectProfileBottomSheetDialogFragment();
 					Bundle bundle = new Bundle();
 					if (profile.routingProfileDataObject != null) {
-						bundle.putString(SELECTED_KEY, profile.routingProfileDataObject.getStringKey());
+						bundle.putString(SELECTED_KEY,
+							profile.routingProfileDataObject.getStringKey());
 					}
 					bundle.putString(DIALOG_TYPE, TYPE_NAV_PROFILE);
-
-					SelectProfileBottomSheetDialogFragment fragment = new SelectProfileBottomSheetDialogFragment();
 					fragment.setArguments(bundle);
-					activity.getSupportFragmentManager().beginTransaction()
+					if (getActivity() != null) {
+						getActivity().getSupportFragmentManager().beginTransaction()
 							.add(fragment, "select_nav_type").commitAllowingStateLoss();
-
+					}
 					navTypeEt.setCursorVisible(false);
 					navTypeEt.setTextIsSelectable(false);
 					navTypeEt.clearFocus();
@@ -403,27 +403,30 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 			}
 		});
 
-		saveButton.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				FragmentActivity activity = getActivity();
-				if (activity != null && saveNewProfile()) {
-					activateMode(mode);
-					activity.onBackPressed();
+		if (!isNew && !isUserProfile) {
+			saveButtonSV.setEnabled(false);
+			saveButton.setEnabled(false);
+		} else {
+			saveButton.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					if (saveNewProfile()) {
+						activateMode(mode);
+						getActivity().onBackPressed();
+					}
 				}
-			}
-		});
+			});
 
-		saveButtonSV.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				FragmentActivity activity = getActivity();
-				if (activity != null && saveNewProfile()) {
-					activateMode(mode);
-					activity.onBackPressed();
+			saveButtonSV.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					if (saveNewProfile()) {
+						activateMode(mode);
+						getActivity().onBackPressed();
+					}
 				}
-			}
-		});
+			});
+		}
 
 		final float d = getResources().getDisplayMetrics().density;
 		view.getViewTreeObserver().addOnGlobalLayoutListener(new OnGlobalLayoutListener() {
@@ -516,6 +519,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		super.onViewCreated(view, savedInstanceState);
 		if (!isUserProfile && !isNew) {
 			profileNameEt.setFocusable(false);
+			navTypeEt.setFocusable(false);
 		}
 
 		if (isNew) {
@@ -655,34 +659,22 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 				profile.parent.getStringKey() + "_" + System.currentTimeMillis();
 		}
 
-		boolean customMode = isNew || isUserProfile;
-
-		ApplicationMode.ApplicationModeBuilder builder;
-		if (customMode) {
-			builder = ApplicationMode.createCustomMode(profile.parent, profile.userProfileTitle.trim(), customStringKey);
-		} else {
-			builder = ApplicationMode.changeBaseMode(mode);
-		}
-		builder.icon(app, profile.iconStringName);
+		ApplicationMode.ApplicationModeBuilder builder = ApplicationMode
+			.createCustomMode(profile.parent, profile.userProfileTitle.trim(), customStringKey)
+			.icon(app, profile.iconStringName);
 
 		if(profile.routingProfileDataObject.getStringKey().equals(
 				RoutingProfilesResources.STRAIGHT_LINE_MODE.name())) {
-			builder.setRoutingProfile(RoutingProfilesResources.STRAIGHT_LINE_MODE.name());
 			builder.setRouteService(RouteService.STRAIGHT);
 		} else if(profile.routingProfileDataObject.getStringKey().equals(
 				RoutingProfilesResources.BROUTER_MODE.name())) {
-			builder.setRoutingProfile(RoutingProfilesResources.BROUTER_MODE.name());
 			builder.setRouteService(RouteService.BROUTER);
 		} else if (profile.routingProfileDataObject != null) {
 			builder.setRoutingProfile(profile.routingProfileDataObject.getStringKey());
-			builder.setRouteService(RouteService.OSMAND);
 		}
 		builder.setColor(profile.iconColor);
-		if (customMode) {
-			mode = ApplicationMode.saveCustomProfile(builder, getMyApplication());
-		} else {
-			ApplicationMode.saveDefaultModeToSettings(getSettings());
-		}
+
+		mode = ApplicationMode.saveCustomProfile(builder, getMyApplication());
 		if (!ApplicationMode.values(app).contains(mode)) {
 			ApplicationMode.changeProfileAvailability(mode, true, getMyApplication());
 		}
