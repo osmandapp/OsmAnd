@@ -196,6 +196,8 @@ public class InAppPurchaseHelper {
 
 	private void exec(final @NonNull InAppPurchaseTaskType taskType, final @NonNull InAppRunnable runnable) {
 		if (isDeveloperVersion || !Version.isGooglePlayEnabled(ctx)) {
+			notifyDismissProgress(taskType);
+			stop(true);
 			return;
 		}
 
