@@ -13,8 +13,6 @@
 	<dimen name="map_route_planning_land_width">510dp</dimen>
 	<dimen name="map_route_planning_land_width_minus_shadow">496dp</dimen>
 
-	<dimen name="card_content_padding_large">42dp</dimen>
-
 	<dimen name="map_address_height">60dp</dimen>
 	<dimen name="map_button_size">78dp</dimen>
 	<dimen name="map_small_button_size">66dp</dimen>
