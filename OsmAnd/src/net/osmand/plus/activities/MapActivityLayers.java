@@ -133,7 +133,7 @@ public class MapActivityLayers {
 		mapVectorLayer = new MapVectorLayer(mapTileLayer, false);
 		mapView.addLayer(mapVectorLayer, 0.5f);
 
-		downloadedRegionsLayer = new DownloadedRegionsLayer(activity);
+		downloadedRegionsLayer = new DownloadedRegionsLayer();
 		mapView.addLayer(downloadedRegionsLayer, 0.5f);
 
 		// 0.9 gpx layer
