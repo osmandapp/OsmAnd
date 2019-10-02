@@ -922,7 +922,12 @@ public class OsmandSettings {
 	public final CommonPreference<Boolean> SHOW_OSMAND_WELCOME_SCREEN = new BooleanPreference("show_osmand_welcome_screen", true).makeGlobal();
 
 	public final CommonPreference<String> API_NAV_DRAWER_ITEMS_JSON = new StringPreference("api_nav_drawer_items_json", "{}").makeGlobal();
-	public final CommonPreference<String> API_CONNECTED_APPS_JSON = new StringPreference("api_connected_apps_json", "[]").makeProfile();
+	public final CommonPreference<String> API_CONNECTED_APPS_JSON = new StringPreference("api_connected_apps_json", "[]") {
+		@Override
+		public String getModeValue(ApplicationMode mode) {
+			return getValue(getProfilePreferences(mode), "[]");
+		}
+	}.makeProfile();
 
 	public final CommonPreference<Integer> NUMBER_OF_STARTS_FIRST_XMAS_SHOWN = new IntPreference("number_of_starts_first_xmas_shown", 0).makeGlobal();
 
