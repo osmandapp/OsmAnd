@@ -3273,4 +3273,7 @@
     <string name="pref_selected_by_default_for_profiles">הגדרה זו נבחרת כבררת מחדל על הפרופילים: %s</string>
     <string name="change_default_settings">החלפת הגדרות בררת מחדל</string>
     <string name="logcat_buffer">"זיכרון זמני  יומנים"</string>
+    <string name="shared_string_by_default">כבררת מחדל</string>
+    <string name="plugins_settings">הגדרות תוסף</string>
+    <string name="download_detaile_map">הורדת המפה המפורטת %s, כדי לצפות באזור זה.</string>
 </resources>
