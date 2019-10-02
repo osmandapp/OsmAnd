@@ -1725,7 +1725,7 @@
     <string name="poi_service_bicycle_chaintool_no">Ferramentas para a cadea: non</string>
     <string name="poi_service_bicycle_second_hand_yes">Venda de bicicletas de segunda man</string>
     <string name="poi_service_bicycle_second_hand_no">Venda de bicicletas de segunda man: non</string>
-    <string name="poi_bicycle_repair_station">Estación de arranxado para bicicletas</string>
+    <string name="poi_bicycle_repair_station">Estación de arranxo para bicicletas</string>
     <string name="poi_ramp_bicycle_yes">Rampla para bicicletas: si</string>
     <string name="poi_ramp_bicycle_no">Rampla para bicicletas: non</string>
     <string name="poi_cargo_bicycle">Bicicletas</string>
@@ -3712,4 +3712,10 @@
     <string name="poi_disabled_designated">Designado</string>
     <string name="poi_cellar_entrance">Entrada da adega</string>
     <string name="poi_health_food">Alimentación saudábel</string>
+    <string name="poi_craft_builder">Construtor ou albanel</string>
+    <string name="poi_craft_distillery">Destilaría</string>
+    <string name="poi_craft_joiner">Carpinteiro</string>
+    <string name="poi_craft_floorer">Construtor de chans</string>
+    <string name="poi_craft_bakery">Obradoiro de panadaría</string>
+    <string name="poi_craft_cabinet_maker">Ebanista</string>
 </resources>
