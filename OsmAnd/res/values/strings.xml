@@ -15,38 +15,38 @@
     <string name="plugins_settings">Plugin settings</string>
     <string name="logcat_buffer">Logcat buffer</string>
     <string name="download_detaile_map">Download detailed %s map, to view this area.</string>
-    <string name="application_profile_changed">Application profile changed to \"%s\"</string>
+    <string name="application_profile_changed">App profile changed to \"%s\"</string>
     <string name="switch_profile">Switch profile</string>
     <string name="configure_profile">Configure profile</string>
-    <string name="configure_profile_info">All settings below are affected only selected profile.</string>
-    <string name="utm_format_descr">OsmAnd uses UTM Standard format which is similar but not identical to UTM Nato format.</string>
+    <string name="configure_profile_info">Only the current profile affect the settings below.</string>
+    <string name="utm_format_descr">OsmAnd uses UTM Standard format, which is similar but not identical to UTM NATO format.</string>
     <string name="shared_string_example">Example</string>
     <string name="navigate_point_format_utm">UTM Standard</string>
     <string name="navigate_point_format_olc">Open Location Code</string>
-    <string name="coordinates_format_info">The selected format will be applied to all places in the application.</string>
+    <string name="coordinates_format_info">The selected format will be applied throughout the app.</string>
     <string name="pref_selected_by_default_for_profiles">This setting is selected by default for profiles: %s</string>
     <string name="change_default_settings">Change default settings</string>
     <string name="discard_changes">Discard changes</string>
     <string name="apply_to_current_profile">Apply to current %1$s profile</string>
     <string name="apply_to_all_profiles">Apply to all profiles</string>
-    <string name="start_up_message_pref">Start up message</string>
+    <string name="start_up_message_pref">Start-up message</string>
     <string name="analytics_pref_title">Analytics</string>
-    <string name="turn_screen_on_info">Show map during navigation above the lock screen.</string>
-    <string name="route_parameters_info">These settings affect the construction of the route. Will be applied only to the selected profile: %1$s.</string>
+    <string name="turn_screen_on_info">Show map above lock screen during navigation.</string>
+    <string name="route_parameters_info">These settings affect routing, for the selected profile: %1$s.</string>
     <string name="wake_time">Wake time</string>
     <string name="units_and_formats">Units &amp; formats</string>
     <string name="appearance">Appearance</string>
     <string name="map_look_descr">icons, widgets</string>
     <string name="map_look">Map look</string>
-    <string name="list_of_installed_plugins">List of installed plugins</string>
+    <string name="list_of_installed_plugins">Installed plugins</string>
     <string name="configure_navigation">Configure navigation</string>
     <string name="general_settings_profile_descr">App theme, units, region</string>
-    <string name="screen_alerts_descr">Alerts will be shown on left bottom corner of the screen during the navigation.</string>
+    <string name="screen_alerts_descr">Alerts will be shown in the bottom left during navigation.</string>
     <string name="language_and_output">Language and output</string>
     <string name="reset_to_default">Reset to default</string>
     <string name="manage_profiles_descr">Create, import, edit profiles</string>
-    <string name="manage_profiles">Manage application profiles…</string>
-    <string name="osmand_settings_descr">Affect the entire application</string>
+    <string name="manage_profiles">Manage app profiles…</string>
+    <string name="osmand_settings_descr">Affects the entire app</string>
     <string name="osmand_settings">OsmAnd settings</string>
     <string name="copy_from_other_profile">Copy from other profile</string>
     <string name="turn_screen_on">Turn screen on</string>
@@ -55,9 +55,9 @@
     <string name="shared_string_other">Other</string>
     <string name="vehicle_parameters_descr">Weight, height, speed</string>
     <string name="vehicle_parameters">Vehicle parameters</string>
-    <string name="voice_announces_info">Voice announces are played only during navigation.</string>
-    <string name="voice_announces_descr">Navigation instruction and announces</string>
-    <string name="voice_announces">Voice announces</string>
+    <string name="voice_announces_info">Voice announcements only happen during navigation.</string>
+    <string name="voice_announces_descr">Navigation instruction and announcements</string>
+    <string name="voice_announces">Voice announcements</string>
     <string name="screen_alerts">Screen alerts</string>
     <string name="route_parameters_descr">Configure route parameters</string>
     <string name="route_parameters">Route parameters</string>
@@ -74,11 +74,11 @@
     <string name="years_2_4">Years</string>
     <string name="years_5">Years</string>
     <string name="months_3">Three months</string>
-    <string name="price_free">Free</string>
+    <string name="price_free">Gratis</string>
     <string name="get_discount_title">Get %1$d %2$s at %3$s off.</string>
-    <string name="get_free_trial_title">Start your %1$d %2$s free trial.</string>
-    <string name="get_discount_first_part">%1$s for first %2$s</string>
-    <string name="get_discount_first_few_part">%1$s for first %2$s</string>
+    <string name="get_free_trial_title">Start your %1$d %2$s gratis trial.</string>
+    <string name="get_discount_first_part">%1$s for the first %2$s</string>
+    <string name="get_discount_first_few_part">%1$s for the first %2$s</string>
     <string name="get_discount_second_part">then %1$s</string>
     <string name="cancel_subscription">Cancel subscription</string>
     <string name="price_and_discount">%1$s • Save %2$s</string>
@@ -91,7 +91,7 @@
     <string name="rendering_attr_showLez_description">Show Low Emission zones on the map. Does not affect routing.</string>
     <string name="rendering_attr_showLez_name">Show Low Emission Zones</string>
     <string name="temporary_conditional_routing">Consider temporary limitations</string>
-    <string name="turn_on_profile_desc">Please turn on at least one application profile, to use this setting.</string>
+    <string name="turn_on_profile_desc">Please turn on at least one app profile, to use this setting.</string>
     <string name="rendering_attr_winter_road_name">Winter road</string>
     <string name="rendering_attr_ice_road_name">Ice road</string>
     <string name="routeInfo_winter_ice_road_name">Winter and ice roads</string>
@@ -105,20 +105,20 @@
     <string name="shared_string_open_track">Open track</string>
     <string name="shared_string_track_is_saved">Track %s is saved</string>
     <string name="turn_screen_on_router">Wake on turn</string>
-    <string name="turn_screen_on_time_descr">Set the time for which the screen will turn on.</string>
+    <string name="turn_screen_on_time_descr">Adjust how long the screen should be on for.</string>
     <string name="turn_screen_on_sensor">Use proximity sensor</string>
-    <string name="turn_screen_on_sensor_descr">Wave your hand over the top of the screen to turn on the screen while navigating.</string>
+    <string name="turn_screen_on_sensor_descr">Wave your hand over the top of the screen to turn it on while navigating.</string>
     <string name="app_mode_offroad">Offroad</string>
-    <string name="edit_profile_setup_title">Setup profile</string>
-    <string name="edit_profile_setup_subtitle">Profile keeps its own settings</string>
-    <string name="edit_profile_setup_map_subtitle">Select default map options for profile</string>
-    <string name="edit_profile_screen_options_subtitle">Select default screen options for profile</string>
-    <string name="edit_profile_nav_settings_subtitle">Select default navigation settings for profile</string>
-    <string name="routing_attr_max_num_changes_description">Specify max number of changes</string>
+    <string name="edit_profile_setup_title">Set up profile</string>
+    <string name="edit_profile_setup_subtitle">The profile keeps its own settings</string>
+    <string name="edit_profile_setup_map_subtitle">Select default map options for the profile</string>
+    <string name="edit_profile_screen_options_subtitle">Select default screen options for the profile</string>
+    <string name="edit_profile_nav_settings_subtitle">Select default navigation settings for the profile</string>
+    <string name="routing_attr_max_num_changes_description">Specify upper limit of changes</string>
     <string name="routing_attr_max_num_changes_name">Number of changes</string>
     <string name="app_mode_ufo">UFO</string>
     <string name="release_3_4">
-        • Application profiles: create a custom profile for your own needs, with a custom icon and color\n\n
+        • App profiles: Create a custom profile for your own needs, with a custom icon and color\n\n
         • Now customize any profile\'s default and min/max speeds\n\n
         • Added a widget for the current coordinates\n\n
         • Added options to show the compass and a radius ruler on the map\n\n
@@ -127,10 +127,10 @@
         • Returned \'Turn Screen On\' option\n\n
         • Fixed Wikipedia language selection\n\n
         • Fixed compass button behavior during navigation\n\n
-        • Other bug fixes\n\n
+        • Other bugfixes\n\n
     </string>
-    <string name="precision_hdop_and_vdop">Precision horizontally: %1$s, vertically: %2$s</string>
-    <string name="precision_hdop">Precision horizontally: %s</string>
+    <string name="precision_hdop_and_vdop">Horizontal precision: %1$s, vertical: %2$s</string>
+    <string name="precision_hdop">Horizontal precision: %s</string>
     <string name="app_mode_personal_transporter">Personal transporter</string>
     <string name="app_mode_monowheel">Monowheel</string>
     <string name="app_mode_scooter">Scooter</string>
@@ -142,27 +142,27 @@
     <string name="default_speed_dialog_msg">Used to calculate the expected arrival time during routing</string>
     <string name="new_profile">New profile</string>
     <string name="shared_string_crash">Crash</string>
-    <string name="last_launch_crashed">The last launch of OsmAnd failed. Please help us to improve OsmAnd by sharing the error message.</string>
-    <string name="press_again_to_change_the_map_orientation">Tap again to change the map orientation</string>
+    <string name="last_launch_crashed">Last OsmAnd run crashed. Please help us improve OsmAnd by sharing the error message.</string>
+    <string name="press_again_to_change_the_map_orientation">Tap again to change map orientation</string>
     <string name="process_downloading_service">OsmAnd downloading service</string>
     <string name="shared_string_color_magenta">Magenta</string>
     <string name="shared_string_icon">Icon</string>
     <string name="rate_dialog_descr">Please give us 30 seconds by sharing your feedback and rating our work on Google Play.</string>
     <string name="button_rate">Rate</string>
     <string name="shared_string_privacy_policy">Privacy Policy</string>
-    <string name="help_us_make_osmand_better">Help us make OsmAnd better!</string>
-    <string name="make_osmand_better_descr">Allow OsmAnd to collect and process anonymous application usage data. We do not collect or store data about your position, or about any locations you view on the map.\n\nYou can change your selection at any time in Settings > Privacy and Security.</string>
-    <string name="choose_data_to_share">Choose what type of data you want to share:</string>
+    <string name="help_us_make_osmand_better">Help us make OsmAnd better</string>
+    <string name="make_osmand_better_descr">Allow OsmAnd to collect and process anonymous app usage data. No data about your position, or locations you view on the map are collected.\n\nIt is always available in \'Settings\' → \'Privacy and Security\'.</string>
+    <string name="choose_data_to_share">Choose the type of data you want to share:</string>
     <string name="downloaded_maps">Maps downloaded</string>
     <string name="visited_screens">Screens visited</string>
     <string name="collected_data">Data collected</string>
     <string name="collected_data_descr">Define which data you allow OsmAnd to share.</string>
-    <string name="downloaded_maps_collect_descr">Helps us understand which maps of which regions and countries are the most popular.</string>
-    <string name="visited_screens_collect_descr">Helps us understand which OsmAnd features are the most popular.</string>
-    <string name="privacy_and_security_change_descr">By tapping \"Allow\" you agree with our %1$s</string>
+    <string name="downloaded_maps_collect_descr">Helps us understand country and region map popularity.</string>
+    <string name="visited_screens_collect_descr">Helps us understand OsmAnd feature popularity.</string>
+    <string name="privacy_and_security_change_descr">By tapping \"Allow\", you agree with our %1$s</string>
     <string name="settings_privacy_and_security">Privacy and security</string>
-    <string name="settings_privacy_and_security_desc">Select which data you are sharing with us</string>
-    <string name="shared_string_no_thank_you">No, thank you</string>
+    <string name="settings_privacy_and_security_desc">Select what data you share</string>
+    <string name="shared_string_no_thank_you">No</string>
     <string name="shared_string_allow">Allow</string>
     <string name="profile_name_hint">Profile name</string>
     <string name="nav_type_hint">Navigation type</string>
@@ -178,21 +178,21 @@
     <string name="hide_compass_ruler">Hide compass ruler</string>
     <string name="select_icon_profile_dialog_title">Select icon</string>
     <string name="settings_routing_mode_string">Mode: %s</string>
-    <string name="settings_derived_routing_mode_string">User mode, derived from: %s</string>
+    <string name="settings_derived_routing_mode_string">User-mode, derived from: %s</string>
     <string name="routing_profile_ski">Ski</string>
     <string name="profile_type_descr_string">Type: %s</string>
     <string name="profile_type_base_string">Base profile</string>
     <string name="profile_alert_need_routing_type_title">Select navigation type</string>
-    <string name="profile_alert_need_routing_type_msg">Please select a navigation type for the new application profile</string>
+    <string name="profile_alert_need_routing_type_msg">Please select a navigation type for the new app profile</string>
     <string name="profile_alert_need_profile_name_title">Enter profile name</string>
-    <string name="profile_alert_need_profile_name_msg">Profile name shouldn\'t be empty!</string>
+    <string name="profile_alert_need_profile_name_msg">Profile name can\'t be empty!</string>
     <string name="profile_alert_duplicate_name_title">Duplicate name</string>
     <string name="profile_alert_duplicate_name_msg">There is already profile with that name</string>
     <string name="profile_alert_cant_delete_base">You cannot delete OsmAnd\'s base profiles</string>
     <string name="profile_alert_need_save_title">Save changes</string>
-    <string name="profile_alert_need_save_msg">You need to save changes to the profile before proceeding</string>
+    <string name="profile_alert_need_save_msg">Save changes to the profile first</string>
     <string name="profile_alert_delete_title">Delete profile</string>
-    <string name="profile_alert_delete_msg">Are you sure you want to delete the %s profile</string>
+    <string name="profile_alert_delete_msg">Are you sure you want to delete the \"%s\" profile</string>
     <string name="select_base_profile_dialog_title">Select a base profile</string>
     <string name="select_base_profile_dialog_message">Base your custom profile on one of the default app profiles, this defines the basic setup like default visibility of widgets and units of speed and distance. These are the default app profiles, together with examples of custom profiles they may be extended to:</string>
     <string name="select_nav_profile_dialog_title">Select navigation type</string>
@@ -210,20 +210,20 @@
     <string name="special_routing_type">Special routing</string>
     <string name="third_party_routing_type">Third-party routing</string>
     <string name="application_profiles_descr">Select the profiles to be visible in the app.</string>
-    <string name="application_profiles">Application profiles</string>
+    <string name="application_profiles">App profiles</string>
     <string name="searching_gps">Searching GPS</string>
-    <string name="coordinates_widget">Coordinates widget</string>
+    <string name="coordinates_widget">Coordinate widget</string>
     <string name="files_moved">Moved %1$d files (%2$s).</string>
     <string name="files_copied">Copied %1$d files (%2$s).</string>
-    <string name="files_failed">Failed to copy %1$d files (%2$s).</string>
-    <string name="files_present">%1$d files (%2$s) are present at previous location \'%3$s\'.</string>
+    <string name="files_failed">Could not copy %1$d files (%2$s).</string>
+    <string name="files_present">%1$d files (%2$s) are present in the previous location \'%3$s\'.</string>
     <string name="move_maps">Move maps</string>
     <string name="dont_move_maps">Don\'t move</string>
-    <string name="public_transport_ped_route_title">The route by foot is approximately %1$s and may be faster than via public transport</string>
+    <string name="public_transport_ped_route_title">The route on foot is approximately %1$s, and may be faster than public transport</string>
     <string name="public_transport_no_route_title">Unfortunately, OsmAnd could not find a route suitable for your settings.</string>
-    <string name="public_transport_try_ped">Try the pedestrian navigation.</string>
+    <string name="public_transport_try_ped">Try navigation on foot.</string>
     <string name="public_transport_try_change_settings">Try changing the settings.</string>
-    <string name="public_transport_calc_pedestrian">Calculate pedestrian route</string>
+    <string name="public_transport_calc_pedestrian">Calculate route on foot</string>
     <string name="public_transport_type">Transport type</string>
     <string name="send_log">Send log</string>
 
@@ -242,8 +242,8 @@
     <string name="release_3_3_7">
         • Display the time between transfers in public transport\n\n
         • Corrected UI for the Route Details\n\n
-        • Fixed dark theme in the Direction menu and Route Details\n\n
-        • Display azimuth in Measure Distance\n\n
+        • Fixed dark theme in the \'Direction menu\' and \'Route Details\'\n\n
+        • Display azimuth in \'Measure Distance\'\n\n
     </string>
     <string name="shared_string_degrees">Degrees</string>
     <string name="shared_string_milliradians">Milliradians</string>
@@ -253,9 +253,9 @@
     <string name="quick_action_day_night_mode">%s mode</string>
     <string name="avoid_pt_types">Avoid transport types…</string>
     <string name="shared_string_walk">Walk</string>
-    <string name="save_poi_value_exceed_length">The maximum length of tag \"%s\" is 255 characters. \nPlease shorten to continue.</string>
+    <string name="save_poi_value_exceed_length">Shorten the length of the \"%s\" tag to less than 255 characters.</string>
     <string name="save_poi_value_exceed_length_title">Length of \"%s\" value</string>
-    <string name="public_transport_warning_descr_blog">Learn more about how OsmAnd calculates routes in our blog.</string>
+    <string name="public_transport_warning_descr_blog">Read more about OsmAnd routing on our blog.</string>
     <string name="public_transport_warning_title">Public transport navigation is currently in beta testing, expect errors and inaccuracies.</string>
     <string name="add_intermediate">Add intermediate point</string>
     <string name="transfers_size">%1$d transfers</string>
@@ -1722,7 +1722,7 @@
     <string name="rendering_value_browse_map_name">Browse map</string>
     <string name="rendering_value_car_name">Car</string>
     <string name="rendering_value_bicycle_name">Bicycle</string>
-    <string name="rendering_value_pedestrian_name">Pedestrian</string>
+    <string name="rendering_value_pedestrian_name">On foot</string>
     <string name="rendering_attr_coloredBuildings_name">Color-code buildings by type</string>
     <string name="continue_navigation">Continue Navigation</string>
     <string name="pause_navigation">Pause Navigation</string>
@@ -1734,7 +1734,7 @@
     <string name="lang_he">Hebrew</string>
     <string name="forward">Forward</string>
     <string name="home">Dashboard</string>
-    <string name="live_monitoring_m_descr">Send tracking data to a specified web service if GPX logging is enabled.</string>
+    <string name="live_monitoring_m_descr">Send tracking data to a specified web service if GPX logging is on.</string>
     <string name="live_monitoring_m">Online tracking (GPX required)</string>
     <string name="live_monitoring_start">Start online tracking</string>
     <string name="live_monitoring_stop">Stop online tracking</string>
