@@ -7,6 +7,7 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.SwitchPreferenceCompat;
 import android.util.Pair;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -15,6 +16,9 @@ import net.osmand.plus.activities.SettingsGeneralActivity;
 import net.osmand.plus.dialogs.SendAnalyticsBottomSheetDialogFragment;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
+
+import java.io.File;
+import java.text.DecimalFormat;
 
 
 public class GlobalSettingsFragment extends BaseSettingsFragment implements SendAnalyticsBottomSheetDialogFragment.OnSendAnalyticsPrefsUpdate, OnPreferenceChanged {
@@ -134,9 +138,19 @@ public class GlobalSettingsFragment extends BaseSettingsFragment implements Send
 	}
 
 	private void setupExternalStorageDirPref() {
-		Preference externalStorageDir = (Preference) findPreference(OsmandSettings.EXTERNAL_STORAGE_DIR);
+		Preference externalStorageDir = findPreference(OsmandSettings.EXTERNAL_STORAGE_DIR);
 		externalStorageDir.setIcon(getContentIcon(R.drawable.ic_action_folder));
-
+		DataStorageItemsHolder holder = DataStorageItemsHolder.refreshInfo(app);
+		DataStorageMenuItem currentStorage = holder.getCurrentStorage();
+		File dir = new File(currentStorage.getDirectory());
+		DecimalFormat formatter = new DecimalFormat("#.##");
+		String summary = currentStorage.getTitle() +
+				" \u2022 " +
+				getString(R.string.shared_string_used) +
+				" " +
+				formatter.format(AndroidUtils.getUsedSpaceGb(dir)) +
+				" Gb";
+		externalStorageDir.setSummary(summary);
 	}
 
 	private void setupSendAnonymousDataPref() {
