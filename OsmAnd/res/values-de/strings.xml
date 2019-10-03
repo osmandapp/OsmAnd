@@ -3295,4 +3295,6 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="application_profile_changed">Anwendungsprofilwechsel auf „%s“</string>
     <string name="logcat_buffer">Logcat-Puffer</string>
     <string name="plugins_settings">Plugin-Einstellungen</string>
+    <string name="shared_string_by_default">Standardmäßig</string>
+    <string name="download_detaile_map">"Detaillierte Karte %s  herunterladen, um diesen Bereich zu sehen."</string>
 </resources>

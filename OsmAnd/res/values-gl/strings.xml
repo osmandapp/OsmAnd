@@ -3329,4 +3329,7 @@ Lon %2$s</string>
     <string name="route_parameters">Parámetros de rota</string>
     <string name="application_profile_changed">Perfil da aplicación mudado a \"%s\"</string>
     <string name="logcat_buffer">Búfer de Logcat</string>
+    <string name="shared_string_by_default">Predefinido</string>
+    <string name="plugins_settings">Axustes do engadido</string>
+    <string name="download_detaile_map">Baixa o mapa detallado de %s, para poder ollar esta área.</string>
 </resources>

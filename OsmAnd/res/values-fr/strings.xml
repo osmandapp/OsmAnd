@@ -3256,4 +3256,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="application_profile_changed">Profil de l\'application basculé à \"%s\"</string>
     <string name="logcat_buffer">Buffer Logcat</string>
     <string name="plugins_settings">Paramètres du greffon</string>
+    <string name="get_discount_title">Payez %1$d %2$s et gagnez %3$s.</string>
+    <string name="shared_string_by_default">Par défaut</string>
+    <string name="download_detaile_map">Téléchargez la carte détaillée de %s pour voir cette zone.</string>
 </resources>

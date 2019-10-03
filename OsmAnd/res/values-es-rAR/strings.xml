@@ -3289,4 +3289,6 @@ Lon %2$s</string>
     <string name="application_profile_changed">Perfil de aplicación cambiado a «%s»</string>
     <string name="logcat_buffer">Búfer de Logcat</string>
     <string name="plugins_settings">Ajustes del complemento</string>
+    <string name="shared_string_by_default">Predefinido</string>
+    <string name="download_detaile_map">Descarga el mapa detallado de «%s», para ver esta área.</string>
 </resources>
