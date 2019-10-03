@@ -35,7 +35,7 @@
     <string name="wake_time">Wake time</string>
     <string name="units_and_formats">Units &amp; formats</string>
     <string name="appearance">Appearance</string>
-    <string name="map_look_descr">icons, widgets</string>
+    <string name="map_look_descr">Map Appearance</string>
     <string name="map_look">Map look</string>
     <string name="list_of_installed_plugins">List of installed plugins</string>
     <string name="configure_navigation">Configure navigation</string>
