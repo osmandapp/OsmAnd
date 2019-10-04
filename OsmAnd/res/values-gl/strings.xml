@@ -900,8 +900,8 @@
     <string name="map_text_size">Tamaño do tipo de letra do mapa</string>
     <string name="trace_rendering">Información de fallo de renderizado</string>
     <string name="trace_rendering_descr">Amosar rendemento do renderizado.</string>
-    <string name="installing_new_resources">Estasen a desempaquetar datos novos…</string>
-    <string name="internet_connection_required_for_online_route">Hai un servizo de navegación con conexión seleccionadoo, mais non hai ningunha conexión á Internet.</string>
+    <string name="installing_new_resources">Estanse a desempaquetar datos novos…</string>
+    <string name="internet_connection_required_for_online_route">Hai un servizo de navegación con conexión seleccionado, mais non hai ningunha conexión á Internet.</string>
     <string name="tts_language_not_supported_title">Esta lingua non está dispoñíbel</string>
     <string name="tts_language_not_supported">A lingua elixida non está dispoñíbel no motor TTS (texto lido) do Android. Desexa procurar outro motor do TTS na Google Play\? Se non, tense que emprega-la lingua do TTS predeterminado.</string>
     <string name="tts_missing_language_data_title">faltan datos</string>
