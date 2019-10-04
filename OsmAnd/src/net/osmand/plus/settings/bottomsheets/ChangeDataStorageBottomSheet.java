@@ -95,7 +95,8 @@ public class ChangeDataStorageBottomSheet extends BasePreferenceBottomSheet {
 
 		//buttons
 		View btnDontMoveView = View.inflate(ctx, R.layout.bottom_sheet_big_dialog_button_with_icon, null);
-		requiredMyApplication().getUIUtilities().setupDialogButtonWithIcon(nightMode, btnDontMoveView, UiUtilities.DialogButtonType.SECONDARY, getString(R.string.dont_move_maps), currentDirectory.getIconResId());
+		UiUtilities.setupDialogButton(nightMode, btnDontMoveView, UiUtilities.DialogButtonType.SECONDARY, 
+				getString(R.string.dont_move_maps), currentDirectory.getIconResId());
 		BaseBottomSheetItem btnDontMove = new BaseBottomSheetItem.Builder()
 				.setCustomView(btnDontMoveView)
 				.setOnClickListener(new View.OnClickListener() {
@@ -108,7 +109,8 @@ public class ChangeDataStorageBottomSheet extends BasePreferenceBottomSheet {
 		items.add(btnDontMove);
 
 		View btnMoveView = View.inflate(ctx, R.layout.bottom_sheet_big_dialog_button_with_icon, null);
-		requiredMyApplication().getUIUtilities().setupDialogButtonWithIcon(nightMode, btnMoveView, UiUtilities.DialogButtonType.PRIMARY, getString(R.string.move_maps_to_new_destination), R.drawable.ic_action_folder_move);
+		UiUtilities.setupDialogButton(nightMode, btnMoveView, UiUtilities.DialogButtonType.PRIMARY, 
+				getString(R.string.move_maps_to_new_destination), R.drawable.ic_action_folder_move);
 		BaseBottomSheetItem btnMove = new BaseBottomSheetItem.Builder()
 				.setCustomView(btnMoveView)
 				.setOnClickListener(new View.OnClickListener() {
@@ -121,7 +123,8 @@ public class ChangeDataStorageBottomSheet extends BasePreferenceBottomSheet {
 		items.add(btnMove);
 
 		View btnCloseView = View.inflate(ctx, R.layout.bottom_sheet_big_dialog_button_with_icon, null);
-		requiredMyApplication().getUIUtilities().setupDialogButtonWithIcon(nightMode, btnCloseView, UiUtilities.DialogButtonType.SECONDARY, getString(R.string.shared_string_cancel), R.drawable.ic_action_undo_dark);
+		UiUtilities.setupDialogButton(nightMode, btnCloseView, UiUtilities.DialogButtonType.SECONDARY, 
+				getString(R.string.shared_string_cancel), R.drawable.ic_action_undo_dark);
 		BaseBottomSheetItem btnClose = new BaseBottomSheetItem.Builder()
 				.setCustomView(btnCloseView)
 				.setOnClickListener(new View.OnClickListener() {

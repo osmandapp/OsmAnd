@@ -11,7 +11,8 @@
 	Thx - Hardy
 
 -->
-    <string name="shared_string_used">Used</string>
+    <string name="description_used_gb">Used %1$s GB</string>
+    <string name="used_and_total_space_description">%1$s / %2$s GB</string>
     <string name="shared_string_by_default">By default</string>
     <string name="enter_path_to_folder">Enter path to the folder</string>
     <string name="shared_string_select_folder">Select folder</string>

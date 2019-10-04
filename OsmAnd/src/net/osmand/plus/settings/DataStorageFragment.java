@@ -13,15 +13,12 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.preference.CheckBoxPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,7 +28,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.ProgressImplementation;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
-import net.osmand.plus.dashboard.DashChooseAppDirFragment;
+import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.settings.bottomsheets.ChangeDataStorageBottomSheet;
 import net.osmand.plus.settings.bottomsheets.SelectFolderBottomSheet;
@@ -41,6 +38,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.lang.ref.WeakReference;
 import java.text.DecimalFormat;
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -65,7 +63,7 @@ public class DataStorageFragment extends BaseSettingsFragment {
 	private DataStorageItemsHolder itemsHolder;
 
 	private OsmandApplication app;
-	private Activity activity;
+	private OsmandActionBarActivity activity;
 	private OsmandSettings settings;
 
 	@Override
@@ -254,7 +252,7 @@ public class DataStorageFragment extends BaseSettingsFragment {
 		File fromDirectory = new File(currentStorage.getDirectory());
 		File toDirectory = new File(newStorage.getDirectory());
 		@SuppressLint("StaticFieldLeak")
-		DashChooseAppDirFragment.MoveFilesToDifferentDirectory task = new DashChooseAppDirFragment.MoveFilesToDifferentDirectory(activity, fromDirectory, toDirectory) {
+		MoveFilesToDifferentDirectory task = new MoveFilesToDifferentDirectory(activity, fromDirectory, toDirectory) {
 
 			private MessageFormat formatMb = new MessageFormat("{0, number,##.#} MB", Locale.US);
 
@@ -273,26 +271,30 @@ public class DataStorageFragment extends BaseSettingsFragment {
 
 			private void showResultsDialog() {
 				StringBuilder sb = new StringBuilder();
+				Context ctx = activity.get();
+				if (ctx == null) {
+					return;
+				}
 				int moved = getMovedCount();
 				int copied = getCopiedCount();
 				int failed = getFailedCount();
-				sb.append(activity.getString(R.string.files_moved, moved, getFormattedSize(getMovedSize()))).append("\n");
+				sb.append(ctx.getString(R.string.files_moved, moved, getFormattedSize(getMovedSize()))).append("\n");
 				if (copied > 0) {
-					sb.append(activity.getString(R.string.files_copied, copied, getFormattedSize(getCopiedSize()))).append("\n");
+					sb.append(ctx.getString(R.string.files_copied, copied, getFormattedSize(getCopiedSize()))).append("\n");
 				}
 				if (failed > 0) {
-					sb.append(activity.getString(R.string.files_failed, failed, getFormattedSize(getFailedSize()))).append("\n");
+					sb.append(ctx.getString(R.string.files_failed, failed, getFormattedSize(getFailedSize()))).append("\n");
 				}
 				if (copied > 0 || failed > 0) {
 					int count = copied + failed;
-					sb.append(activity.getString(R.string.files_present, count, getFormattedSize(getCopiedSize() + getFailedSize()), newStorage.getDirectory()));
+					sb.append(ctx.getString(R.string.files_present, count, getFormattedSize(getCopiedSize() + getFailedSize()), newStorage.getDirectory()));
 				}
-				AlertDialog.Builder bld = new AlertDialog.Builder(activity);
+				AlertDialog.Builder bld = new AlertDialog.Builder(ctx);
 				bld.setMessage(sb.toString());
 				bld.setPositiveButton(R.string.shared_string_restart, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						confirm(app, (AppCompatActivity) activity, newStorage, true);
+						confirm(app, activity.get(), newStorage, true);
 					}
 				});
 				bld.show();
@@ -301,17 +303,22 @@ public class DataStorageFragment extends BaseSettingsFragment {
 			@Override
 			protected void onPostExecute(Boolean result) {
 				super.onPostExecute(result);
+				OsmandActionBarActivity a = this.activity.get();
+				if (a == null) {
+					return;
+				}
+				OsmandApplication app = a.getMyApplication();
 				if (result) {
 					app.getResourceManager().resetStoreDirectory();
 					// immediately proceed with change (to not loose where maps are currently located)
 					if (getCopiedCount() > 0 || getFailedCount() > 0) {
 						showResultsDialog();
 					} else {
-						confirm(app, (AppCompatActivity) activity, newStorage, false);
+						confirm(app, a, newStorage, false);
 					}
 				} else {
 					showResultsDialog();
-					Toast.makeText(activity, R.string.copying_osmand_file_failed,
+					Toast.makeText(a, R.string.copying_osmand_file_failed,
 							Toast.LENGTH_SHORT).show();
 				}
 
@@ -362,12 +369,13 @@ public class DataStorageFragment extends BaseSettingsFragment {
 	}
 
 	protected void reloadData() {
-		new DashChooseAppDirFragment.ReloadData(activity, getMyApplication()).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
+		new ReloadData(activity, getMyApplication()).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
 	}
 
 	public static class MoveFilesToDifferentDirectory extends AsyncTask<Void, Void, Boolean> {
 
-		private Context ctx;
+		protected WeakReference<OsmandActionBarActivity> activity;
+		private WeakReference<Context> context;
 		private File from;
 		private File to;
 		protected ProgressImplementation progress;
@@ -379,8 +387,9 @@ public class DataStorageFragment extends BaseSettingsFragment {
 		private int failedCount;
 		private long failedSize;
 
-		public MoveFilesToDifferentDirectory(Context ctx, File from, File to) {
-			this.ctx = ctx;
+		public MoveFilesToDifferentDirectory(OsmandActionBarActivity activity, File from, File to) {
+			this.activity = new WeakReference<>(activity);
+			this.context = new WeakReference<>((Context) activity);
 			this.from = from;
 			this.to = to;
 		}
@@ -415,6 +424,10 @@ public class DataStorageFragment extends BaseSettingsFragment {
 
 		@Override
 		protected void onPreExecute() {
+			Context ctx = context.get();
+			if (context == null) {
+				return;
+			}
 			movedCount = 0;
 			copiedCount = 0;
 			failedCount = 0;
@@ -427,6 +440,10 @@ public class DataStorageFragment extends BaseSettingsFragment {
 		@Override
 		protected void onPostExecute(Boolean result) {
 			if (result != null) {
+				Context ctx = context.get();
+				if (ctx == null) {
+					return;
+				}
 				if (result.booleanValue() && runOnSuccess != null) {
 					runOnSuccess.run();
 				} else if (!result.booleanValue()) {
@@ -443,6 +460,10 @@ public class DataStorageFragment extends BaseSettingsFragment {
 		}
 
 		private void movingFiles(File f, File t, int depth) throws IOException {
+			Context ctx = context.get();
+			if (ctx == null) {
+				return;
+			}
 			if (depth <= 2) {
 				progress.startTask(ctx.getString(R.string.copying_osmand_one_file_descr, t.getName()), -1);
 			}
@@ -506,19 +527,23 @@ public class DataStorageFragment extends BaseSettingsFragment {
 	}
 
 	public static class ReloadData extends AsyncTask<Void, Void, Boolean> {
-		private Context ctx;
+		private WeakReference<Context> ctx;
 		protected ProgressImplementation progress;
 		private OsmandApplication app;
 
 		public ReloadData(Context ctx, OsmandApplication app) {
-			this.ctx = ctx;
+			this.ctx = new WeakReference<>(ctx);
 			this.app = app;
 		}
 
 		@Override
 		protected void onPreExecute() {
-			progress = ProgressImplementation.createProgressDialog(ctx, ctx.getString(R.string.loading_data),
-					ctx.getString(R.string.loading_data), ProgressDialog.STYLE_HORIZONTAL);
+			Context c = ctx.get();
+			if (c == null) {
+				return;
+			}
+			progress = ProgressImplementation.createProgressDialog(c, c.getString(R.string.loading_data),
+					c.getString(R.string.loading_data), ProgressDialog.STYLE_HORIZONTAL);
 		}
 
 		@Override

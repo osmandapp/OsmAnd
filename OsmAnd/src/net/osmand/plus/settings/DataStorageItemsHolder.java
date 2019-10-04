@@ -42,7 +42,7 @@ public class DataStorageItemsHolder {
 		if (app == null) {
 			return;
 		}
-		
+
 		if (settings.getExternalStorageDirectoryTypeV19() >= 0) {
 			currentStorageType = settings.getExternalStorageDirectoryTypeV19();
 		} else {
@@ -61,36 +61,37 @@ public class DataStorageItemsHolder {
 		File dir;
 		int iconId;
 
-		//internal storage
-		path = settings.getInternalAppPath().getAbsolutePath();
-		dir = new File(path);
-		iconId = R.drawable.ic_action_phone;
-
-		DataStorageMenuItem internalStorageItem = DataStorageMenuItem.builder()
-				.buildKey(INTERNAL_STORAGE)
-				.buildTitle(getString(R.string.storage_directory_internal_app))
-				.buildDirectory(path)
-				.buildDescription(getString(R.string.internal_app_storage_description))
-				.buildType(OsmandSettings.EXTERNAL_STORAGE_TYPE_INTERNAL_FILE)
-				.buildIconResId(iconId)
-				.build();
-		addItem(internalStorageItem);
-
-		//shared_storage
-		dir = settings.getDefaultInternalStorage();
-		path = dir.getAbsolutePath();
-		iconId = R.drawable.ic_action_phone;
-
-		DataStorageMenuItem sharedStorageItem = DataStorageMenuItem.builder()
-				.buildKey(SHARED_STORAGE)
-				.buildTitle(getString(R.string.storage_directory_shared))
-				.buildDirectory(path)
-				.buildType(OsmandSettings.EXTERNAL_STORAGE_TYPE_DEFAULT)
-				.buildIconResId(iconId)
-				.build();
-		addItem(sharedStorageItem);
-
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+			
+			//internal storage
+			path = settings.getInternalAppPath().getAbsolutePath();
+			dir = new File(path);
+			iconId = R.drawable.ic_action_phone;
+
+			DataStorageMenuItem internalStorageItem = DataStorageMenuItem.builder()
+					.buildKey(INTERNAL_STORAGE)
+					.buildTitle(getString(R.string.storage_directory_internal_app))
+					.buildDirectory(path)
+					.buildDescription(getString(R.string.internal_app_storage_description))
+					.buildType(OsmandSettings.EXTERNAL_STORAGE_TYPE_INTERNAL_FILE)
+					.buildIconResId(iconId)
+					.build();
+			addItem(internalStorageItem);
+
+			//shared_storage
+			dir = settings.getDefaultInternalStorage();
+			path = dir.getAbsolutePath();
+			iconId = R.drawable.ic_action_phone;
+
+			DataStorageMenuItem sharedStorageItem = DataStorageMenuItem.builder()
+					.buildKey(SHARED_STORAGE)
+					.buildTitle(getString(R.string.storage_directory_shared))
+					.buildDirectory(path)
+					.buildType(OsmandSettings.EXTERNAL_STORAGE_TYPE_DEFAULT)
+					.buildIconResId(iconId)
+					.build();
+			addItem(sharedStorageItem);
+
 			//external storage
 			File[] externals = app.getExternalFilesDirs(null);
 			if (externals != null) {

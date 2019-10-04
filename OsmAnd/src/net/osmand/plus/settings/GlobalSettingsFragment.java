@@ -146,10 +146,8 @@ public class GlobalSettingsFragment extends BaseSettingsFragment implements Send
 		DecimalFormat formatter = new DecimalFormat("#.##");
 		String summary = currentStorage.getTitle() +
 				" \u2022 " +
-				getString(R.string.shared_string_used) +
-				" " +
-				formatter.format(AndroidUtils.getUsedSpaceGb(dir)) +
-				" Gb";
+				String.format(getString(R.string.description_used_gb),
+						formatter.format(AndroidUtils.getUsedSpaceGb(dir)));
 		externalStorageDir.setSummary(summary);
 	}
 
