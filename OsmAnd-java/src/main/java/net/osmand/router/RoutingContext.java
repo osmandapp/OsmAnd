@@ -6,10 +6,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.Map.Entry;
 
 import org.apache.commons.logging.Log;
@@ -73,6 +76,7 @@ public class RoutingContext {
 	
 	// 2. Routing memory cache (big objects)
 	TLongObjectHashMap<List<RoutingSubregionTile>> indexedSubregions = new TLongObjectHashMap<List<RoutingSubregionTile>>();
+	TLongObjectHashMap<List<TLongHashSet>> excludedIdsByTile = new TLongObjectHashMap<List<TLongHashSet>>(); 
 	
 	// Needs to be a sorted array list . Another option to use hashmap but it will be more memory expensive
 	List<RoutingSubregionTile> subregionTiles = new ArrayList<RoutingSubregionTile>();
@@ -107,8 +111,7 @@ public class RoutingContext {
 
 	// old planner
 	public FinalRouteSegment finalRouteSegment;
-
-
+	
 	RoutingContext(RoutingContext cp) {
 		this.config = cp.config;
 		this.map.putAll(cp.map);
@@ -230,6 +233,7 @@ public class RoutingContext {
 		}
 		subregionTiles.clear();
 		indexedSubregions.clear();
+		excludedIdsByTile.clear();
 	}
 	
 	private int searchSubregionTile(RouteSubregion subregion){
@@ -272,16 +276,19 @@ public class RoutingContext {
 	public RouteSegment loadRouteSegment(int x31, int y31, int memoryLimit) {
 		long tileId = getRoutingTile(x31, y31, memoryLimit, OPTION_SMART_LOAD);
 		TLongObjectHashMap<RouteDataObject> excludeDuplications = new TLongObjectHashMap<RouteDataObject>();
-		TLongSet excludeIds = new TLongHashSet();
 		RouteSegment original = null;
 		List<RoutingSubregionTile> subregions = indexedSubregions.get(tileId);
 		if (subregions != null) {
-			for (RoutingSubregionTile rs : subregions) {
-				// TODO
-				original = rs.loadRouteSegment(x31, y31, this, excludeDuplications, excludeIds,
-						original);
-				if(rs.excludedIds != null) {
-					excludeIds.addAll(rs.excludedIds);
+			for (int j = 0; j < subregions.size(); j++) {
+				original = subregions.get(j).loadRouteSegment(x31, y31, this, excludeDuplications, 
+						excludedIdsByTile.get(tileId), original, j);
+				if(j < subregions.size()- 1) {
+					if (excludedIdsByTile.get(tileId) == null) {
+						excludedIdsByTile.put(tileId, new ArrayList<>());
+					}
+					if (excludedIdsByTile.get(tileId).size() < j) {
+						excludedIdsByTile.get(tileId).add(subregions.get(j).excludedIds);
+					}
 				}
 			}
 		}
@@ -654,7 +661,8 @@ public class RoutingContext {
 		}
 		
 		private RouteSegment loadRouteSegment(int x31, int y31, RoutingContext ctx,
-				TLongObjectHashMap<RouteDataObject> excludeDuplications, TLongSet excludeIds, RouteSegment original) {
+				TLongObjectHashMap<RouteDataObject> excludeDuplications, List<TLongHashSet> excludedIdsInTile, 
+				RouteSegment original, int subIndex) {
 			access++;
 			if (routes != null) {
 				long l = (((long) x31) << 31) + (long) y31;
@@ -662,8 +670,8 @@ public class RoutingContext {
 				while (segment != null) {
 					RouteDataObject ro = segment.road;
 					RouteDataObject toCmp = excludeDuplications.get(calcRouteId(ro, segment.getSegmentStart()));
-					if ((toCmp == null || toCmp.getPointsLength() < ro.getPointsLength())
-							&& !excludeIds.contains(ro.id)) {
+					if ((toCmp == null || toCmp.getPointsLength() < ro.getPointsLength()) 
+							&& !isExcluded(ro.id, excludedIdsInTile, subIndex)) {
 						excludeDuplications.put(calcRouteId(ro, segment.getSegmentStart()), ro);
 						RouteSegment s = new RouteSegment(ro, segment.getSegmentStart());
 						s.next = original;
@@ -675,6 +683,18 @@ public class RoutingContext {
 				throw new UnsupportedOperationException("Not clear how it could be used with native");
 			}
 			return original;
+		}
+
+		private boolean isExcluded(long id, List<TLongHashSet> excludedIdsBySub, int subIndex) {
+			if (subIndex == 0) {
+				return false;
+			}
+			for (int i = 0; i < subIndex-1; i++) {
+				if (excludedIdsBySub.get(i) != null && excludedIdsBySub.get(i).contains(id)) {
+					return true;
+				}
+			}
+			return false;
 		}
 		
 		public boolean isLoaded() {
