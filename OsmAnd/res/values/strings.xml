@@ -13,6 +13,7 @@
 -->
     <string name="description_used_gb">Used %1$s GB</string>
     <string name="used_and_total_space_description">%1$s / %2$s GB</string>
+    <string name="download_detailed_map">Download detailed %s map, to view this area.</string>
     <string name="shared_string_by_default">By default</string>
     <string name="enter_path_to_folder">Enter path to the folder</string>
     <string name="shared_string_select_folder">Select folder</string>
@@ -44,7 +45,7 @@
     <string name="wake_time">Wake time</string>
     <string name="units_and_formats">Units &amp; formats</string>
     <string name="appearance">Appearance</string>
-    <string name="map_look_descr">icons, widgets</string>
+    <string name="map_look_descr">Map Appearance</string>
     <string name="map_look">Map look</string>
     <string name="list_of_installed_plugins">List of installed plugins</string>
     <string name="configure_navigation">Configure navigation</string>

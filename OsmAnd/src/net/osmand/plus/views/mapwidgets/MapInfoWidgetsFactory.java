@@ -1,11 +1,13 @@
 package net.osmand.plus.views.mapwidgets;
 
+import android.animation.LayoutTransition;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
@@ -19,6 +21,7 @@ import android.support.v7.widget.SwitchCompat;
 import android.text.ClipboardManager;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -72,7 +75,8 @@ public class MapInfoWidgetsFactory {
 		TRACK_DETAILS,
 		DISCOUNT,
 		MEASUREMENT_TOOL,
-		POI_FILTER
+		POI_FILTER,
+		DOWNLOAD_MAP
 	}
 
 	public TextInfoWidget createAltitudeControl(final MapActivity map) {
@@ -383,6 +387,10 @@ public class MapInfoWidgetsFactory {
 		Runnable onCloseToolbarListener;
 
 		View bottomView = null;
+		boolean topViewVisible = true;
+		boolean shadowViewVisible = true;
+
+		private boolean bottomViewAdded = false;
 
 		public TopToolbarController(TopToolbarControllerType type) {
 			this.type = type;
@@ -407,6 +415,22 @@ public class MapInfoWidgetsFactory {
 
 		public void setBottomView(View bottomView) {
 			this.bottomView = bottomView;
+		}
+
+		public boolean isTopViewVisible() {
+			return topViewVisible;
+		}
+
+		public void setTopViewVisible(boolean topViewVisible) {
+			this.topViewVisible = topViewVisible;
+		}
+
+		public boolean isShadowViewVisible() {
+			return shadowViewVisible;
+		}
+
+		public void setShadowViewVisible(boolean shadowViewVisible) {
+			this.shadowViewVisible = shadowViewVisible;
 		}
 
 		public void setSingleLineTitle(boolean singleLineTitle) {
@@ -573,11 +597,14 @@ public class MapInfoWidgetsFactory {
 				AndroidUiHelper.updateVisibility(descrView, false);
 			}
 			if (bottomView != null) {
-				bottomViewLayout.removeAllViews();
-				bottomViewLayout.addView(bottomView);
-				AndroidUiHelper.updateVisibility(bottomViewLayout, true);
+				if (!bottomViewAdded) {
+					bottomViewLayout.removeAllViews();
+					bottomViewLayout.addView(bottomView);
+					bottomViewLayout.setVisibility(View.VISIBLE);
+					bottomViewAdded = true;
+				}
 			} else {
-				AndroidUiHelper.updateVisibility(bottomViewLayout, false);
+				bottomViewLayout.setVisibility(View.GONE);
 			}
 			AndroidUiHelper.updateVisibility(switchCompat, topBarSwitchVisible);
 			if (topBarSwitchVisible) {
@@ -586,8 +613,9 @@ public class MapInfoWidgetsFactory {
 					DrawableCompat.setTint(switchCompat.getTrackDrawable(), ContextCompat.getColor(switchCompat.getContext(), R.color.map_toolbar_switch_track_color));
 				}
 			}
-			if (view.getShadowView() != null) {
-				view.getShadowView().setVisibility(View.VISIBLE);
+			View shadowView = view.getShadowView();
+			if (shadowView != null) {
+				AndroidUiHelper.updateVisibility(shadowView, isShadowViewVisible());
 			}
 		}
 	}
@@ -636,6 +664,10 @@ public class MapInfoWidgetsFactory {
 
 		public View getTopbar() {
 			return topbar;
+		}
+
+		public boolean isTopToolbarViewVisible() {
+			return topbar.getVisibility() == View.VISIBLE;
 		}
 
 		public View getTopBarLayout() {
@@ -706,6 +738,7 @@ public class MapInfoWidgetsFactory {
 				}
 			}
 			controllers.add(controller);
+			map.getMapLayers().getMapMarkersLayer().getWidgetsFactory().updateInfo(null, map.getMapView().getZoom());
 			updateColors();
 			updateInfo();
 		}
@@ -738,12 +771,15 @@ public class MapInfoWidgetsFactory {
 				initToolbar(defaultController);
 				defaultController.updateToolbar(this);
 			}
-			AndroidUiHelper.updateVisibility(topbar, controller != null && !MapRouteInfoMenu.chooseRoutesVisible && !MapRouteInfoMenu.waypointsVisible &&
+			boolean updated = AndroidUiHelper.updateVisibility(topbar, controller != null && !MapRouteInfoMenu.chooseRoutesVisible && !MapRouteInfoMenu.waypointsVisible &&
 					(!map.getContextMenu().isVisible() || controller.getType() == TopToolbarControllerType.CONTEXT_MENU));
+			if (updated) {
+				map.updateStatusBarColor();
+			}
 		}
 
 		public void updateColors(TopToolbarController controller) {
-			OsmandApplication app = map.getMyApplication();
+			UiUtilities uiUtils = map.getMyApplication().getUIUtilities();
 			controller.nightMode = nightMode;
 
 			boolean portrait = AndroidUiHelper.isOrientationPortrait(map);
@@ -766,29 +802,35 @@ public class MapInfoWidgetsFactory {
 			int descrTextClrId = nightMode ? controller.descrTextClrDarkId : controller.descrTextClrLightId;
 			int textBtnTitleClr = nightMode ? controller.textBtnTitleClrDark : controller.textBtnTitleClrLight;
 
-			if (bg != null) {
-				topBarLayout.setBackgroundDrawable(bg);
+			if (controller.isTopViewVisible()) {
+				if (bg != null) {
+					topBarLayout.setBackgroundDrawable(bg);
+				} else {
+					topBarLayout.setBackgroundResource(bgId);
+				}
+				topBarLayout.setVisibility(View.VISIBLE);
 			} else {
-				topBarLayout.setBackgroundResource(bgId);
+				topBarLayout.setVisibility(View.GONE);
 			}
+
 			if (backBtnIconId == 0) {
 				backButton.setImageDrawable(null);
 			} else {
 				if (backBtnIconClr != -1) {
-					backButton.setImageDrawable(app.getUIUtilities().getPaintedIcon(backBtnIconId, backBtnIconClr));
+					backButton.setImageDrawable(uiUtils.getPaintedIcon(backBtnIconId, backBtnIconClr));
 				} else {
-					backButton.setImageDrawable(app.getUIUtilities().getIcon(backBtnIconId, backBtnIconClrId));
+					backButton.setImageDrawable(uiUtils.getIcon(backBtnIconId, backBtnIconClrId));
 				}
 			}
 			if (closeBtnIconId == 0) {
 				closeButton.setImageDrawable(null);
 			} else {
-				closeButton.setImageDrawable(app.getUIUtilities().getIcon(closeBtnIconId, closeBtnIconClrId));
+				closeButton.setImageDrawable(uiUtils.getIcon(closeBtnIconId, closeBtnIconClrId));
 			}
 			if (refreshBtnIconId == 0) {
 				refreshButton.setImageDrawable(null);
 			} else {
-				refreshButton.setImageDrawable(app.getUIUtilities().getIcon(refreshBtnIconId, refreshBtnIconClrId));
+				refreshButton.setImageDrawable(uiUtils.getIcon(refreshBtnIconId, refreshBtnIconClrId));
 			}
 			int titleColor = titleTextClr != -1 ? titleTextClr : map.getResources().getColor(titleTextClrId);
 			int descrColor = descrTextClr != -1 ? descrTextClr : map.getResources().getColor(descrTextClrId);
