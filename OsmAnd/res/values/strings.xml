@@ -11,6 +11,7 @@
 	Thx - Hardy
 
 -->
+    <string name="download_detailed_map">Download detailed %s map, to view this area.</string>
     <string name="shared_string_by_default">By default</string>
     <string name="plugins_settings">Plugin settings</string>
     <string name="logcat_buffer">Logcat buffer</string>
