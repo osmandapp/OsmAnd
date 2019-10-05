@@ -3246,7 +3246,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="turn_screen_on_info">Afficher la carte sur l\'écran de verrouillage pendant la navigation.</string>
     <string name="route_parameters_info">Ces paramètres influencent le calcul de l\'itinéraire et s\'appliqueront au profil : %1$s.</string>
     <string name="wake_time">Heure de réveil</string>
-    <string name="map_look_descr">icônes, gadgets</string>
+    <string name="map_look_descr">Apparence de la carte</string>
     <string name="map_look">Apparence de la carte</string>
     <string name="general_settings_profile_descr">Thème de l\'application, unités, région</string>
     <string name="reset_to_default">Restaurer les valeurs par défaut</string>
@@ -3259,4 +3259,5 @@ représentant la zone : %1$s x %2$s</string>
     <string name="get_discount_title">Payez %1$d %2$s et gagnez %3$s.</string>
     <string name="shared_string_by_default">Par défaut</string>
     <string name="download_detaile_map">Téléchargez la carte détaillée de %s pour voir cette zone.</string>
+    <string name="download_detailed_map">Télécharger la carte détaillée %s pour voir cette zone.</string>
 </resources>
