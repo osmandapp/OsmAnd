@@ -2177,7 +2177,7 @@
     <string name="poi_payment_oyster_yes">Oyster</string>
     <string name="poi_toilets_yes">Так</string>
     <string name="poi_resource_salt">Сіль</string>
-    <string name="poi_bicycle_repair_station">Стійка для самостійного ремонту велосипедів</string>
+    <string name="poi_bicycle_repair_station">Стійка для ремонту / самостійного ремонту велосипедів</string>
     <string name="poi_clothes_costumes">Карнавальні костюми</string>
     <string name="poi_futsal">Міні-футбол</string>
     <string name="poi_free_flying_guest_guidelines_no">Інструкції для гостей: немає</string>
@@ -3594,5 +3594,5 @@
     <string name="poi_source_biomass">Джерело енергії: біомаса</string>
     <string name="poi_snowmobile_filter">Доступ для снігоходів</string>
     <string name="poi_access_bus">Доступ для автобусів</string>
-    <string name="poi_access_caravan">Доступ для будинків на колесах</string>
+    <string name="poi_access_caravan">Доступ для автопричепів</string>
 </resources>

@@ -782,7 +782,7 @@ Pôr do Sol: %2$s</string>
     <string name="osmand_parking_minutes">Minutos</string>
     <string name="osmand_parking_position_description_add_time">O carro foi estacionado em</string>
     <string name="index_settings">Gerenciar mapas</string>
-    <string name="context_menu_item_search">Pesquisar nas proximidades</string>
+    <string name="context_menu_item_search">Pesquisar entorno</string>
     <string name="local_index_descr_title">Gerenciar mapas.</string>
     <string name="show_point_options">Usar posição…</string>
     <string name="only_show">Exibir rota</string>
@@ -1365,7 +1365,7 @@ Pôr do Sol: %2$s</string>
     <string name="route_tsll">Vire levemente à esquerda e siga</string>
     <string name="search_poi_location">Aguardando sinal…</string>
     <string name="search_near_map">Pesquisar próximo ao centro do mapa</string>
-    <string name="search_nearby">Pesquisar nas proximidades</string>
+    <string name="search_nearby">Pesquisar entorno</string>
     <string name="map_orientation_default">Mesma do aparelho</string>
     <string name="map_orientation_portrait">Vertical</string>
     <string name="map_orientation_landscape">Horizontal</string>

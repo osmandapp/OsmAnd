@@ -2604,7 +2604,7 @@
     <string name="poi_outdoor_seating_filter_yes">Sim</string>
     <string name="poi_service_bicycle_charging_yes">Cobrança: sim</string>
     <string name="poi_service_bicycle_charging_no">Cobrança: não</string>
-    <string name="poi_bicycle_repair_station">Estação de auto-reparo de bicicletas</string>
+    <string name="poi_bicycle_repair_station">Estação de reparação de bicicletas</string>
     <string name="poi_shower_filter_yes">Sim</string>
     <string name="poi_health_specialty_palliative_medicine_yes">Medicina paliativa</string>
     <string name="poi_sport_free_flying">Voo livre (esporte)</string>
@@ -3719,10 +3719,10 @@
     <string name="poi_hgv_destination">Destino</string>
     <string name="poi_cellar_entrance">Entrada da adega</string>
     <string name="poi_health_food">Alimentação saudável</string>
-    <string name="poi_craft_builder"></string>
-    <string name="poi_craft_distillery"></string>
-    <string name="poi_craft_joiner"></string>
-    <string name="poi_craft_floorer"></string>
-    <string name="poi_craft_bakery"></string>
-    <string name="poi_craft_cabinet_maker"></string>
+    <string name="poi_craft_builder">Construtora</string>
+    <string name="poi_craft_distillery">Destilaria</string>
+    <string name="poi_craft_joiner">Marceneiro</string>
+    <string name="poi_craft_floorer">Murro</string>
+    <string name="poi_craft_bakery">Padaria</string>
+    <string name="poi_craft_cabinet_maker">Marceneiro</string>
 </resources>
