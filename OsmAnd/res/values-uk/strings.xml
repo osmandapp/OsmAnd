@@ -1923,7 +1923,7 @@
     <string name="osm_live_not_active">Не активний</string>
     <string name="osm_live_enter_email">Будь ласка, введіть дійсну електронну адресу</string>
     <string name="osm_live_subscription_settings">Налаштування підписки</string>
-    <string name="select_map_marker">Виберіть позначку</string>
+    <string name="select_map_marker">Оберіть позначку на мапі</string>
     <string name="upload_anonymously">Вивантажено анонімно</string>
     <string name="show_transparency_seekbar">Показати прозору пошукову панель</string>
     <string name="report">Звіт</string>
@@ -3303,4 +3303,5 @@
     <string name="voice_announces_descr">Інструкції і попередження при навігації</string>
     <string name="logcat_buffer">Буфер logcat</string>
     <string name="plugins_settings">Налаштування втулка</string>
+    <string name="shared_string_by_default">Типово</string>
 </resources>
