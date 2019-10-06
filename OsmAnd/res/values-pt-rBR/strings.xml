@@ -3248,7 +3248,7 @@ Pôr do Sol: %2$s</string>
     <string name="wake_time">Tempo de despertar</string>
     <string name="units_and_formats">Unidades e formatos</string>
     <string name="appearance">Aparência</string>
-    <string name="map_look_descr">Ícones, widgets</string>
+    <string name="map_look_descr">Aparência do mapa</string>
     <string name="map_look">Aparência do mapa</string>
     <string name="list_of_installed_plugins">Lista de plugins instalados</string>
     <string name="configure_navigation">Configurar navegação</string>
@@ -3277,4 +3277,5 @@ Pôr do Sol: %2$s</string>
     <string name="shared_string_by_default">Pré-definido</string>
     <string name="plugins_settings">Configurações do plugin</string>
     <string name="download_detaile_map">Faça o download do mapa %s detalhado, para visualizar esta área.</string>
+    <string name="download_detailed_map">Faça o download do mapa %s detalhado, para visualizar esta área.</string>
 </resources>
