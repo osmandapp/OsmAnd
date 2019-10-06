@@ -3722,7 +3722,7 @@
     <string name="poi_craft_builder">Construtora</string>
     <string name="poi_craft_distillery">Destilaria</string>
     <string name="poi_craft_joiner">Marceneiro</string>
-    <string name="poi_craft_floorer">Murro</string>
+    <string name="poi_craft_floorer">Assentador de piso</string>
     <string name="poi_craft_bakery">Padaria</string>
     <string name="poi_craft_cabinet_maker">Marceneiro</string>
 </resources>
