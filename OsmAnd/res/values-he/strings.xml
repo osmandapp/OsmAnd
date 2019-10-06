@@ -3227,7 +3227,7 @@
     <string name="wake_time">זמן התעוררות</string>
     <string name="units_and_formats">יחידות ותבניות</string>
     <string name="appearance">מראה</string>
-    <string name="map_look_descr">סמלים, וידג׳טים</string>
+    <string name="map_look_descr">מראה המפה</string>
     <string name="map_look">מראה המפה</string>
     <string name="list_of_installed_plugins">רשימת התוספים המותקנים</string>
     <string name="configure_navigation">הגדרת ניווט</string>
@@ -3276,4 +3276,5 @@
     <string name="shared_string_by_default">כבררת מחדל</string>
     <string name="plugins_settings">הגדרות תוסף</string>
     <string name="download_detaile_map">הורדת המפה המפורטת %s, כדי לצפות באזור זה.</string>
+    <string name="download_detailed_map">הורדת מפת %s מפורטת כדי לצפות באזור הזה.</string>
 </resources>
