@@ -357,14 +357,16 @@ public class UiUtilities {
 				textAndIconColorResId = nightMode ? R.color.dlg_btn_secondary_text_dark : R.color.dlg_btn_secondary_text_light;
 				break;
 		}
-		ColorStateList colorStateList = ContextCompat.getColorStateList(ctx, textAndIconColorResId);
-		buttonTextView.setText(buttonText);
-		buttonTextView.setTextColor(colorStateList);
-		buttonTextView.setEnabled(buttonView.isEnabled());
-		if (iconResId != INVALID_ID) {
-			Drawable icon = tintDrawable(ContextCompat.getDrawable(ctx, iconResId), ContextCompat.getColor(ctx, textAndIconColorResId));
-			buttonTextView.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
-			buttonTextView.setCompoundDrawablePadding(AndroidUtils.dpToPx(ctx, ctx.getResources().getDimension(R.dimen.content_padding_half)));
+		if (textAndIconColorResId != INVALID_ID) {
+			ColorStateList colorStateList = ContextCompat.getColorStateList(ctx, textAndIconColorResId);
+			buttonTextView.setText(buttonText);
+			buttonTextView.setTextColor(colorStateList);
+			buttonTextView.setEnabled(buttonView.isEnabled());
+			if (iconResId != INVALID_ID) {
+				Drawable icon = tintDrawable(ContextCompat.getDrawable(ctx, iconResId), ContextCompat.getColor(ctx, textAndIconColorResId));
+				buttonTextView.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
+				buttonTextView.setCompoundDrawablePadding(AndroidUtils.dpToPx(ctx, ctx.getResources().getDimension(R.dimen.content_padding_half)));
+			}
 		}
 	}
 
