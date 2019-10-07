@@ -2919,8 +2919,8 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="routeInfo_surface_name">Yfirborð</string>
     <string name="routeInfo_smoothness_name">Áferð</string>
     <string name="routeInfo_steepness_name">Bratti</string>
-    <string name="add_home">Bæta við heima</string>
-    <string name="add_work">Bæta við vinnu</string>
+    <string name="add_home">Bæta við \"Heim\"</string>
+    <string name="add_work">Bæta við \"Vinna\"</string>
     <string name="work_button">Vinna</string>
     <string name="previous_route">Fyrri leið</string>
     <string name="add_destination_query">Bættu fyrst við áfangastað</string>
@@ -3272,7 +3272,7 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="wake_time">Vökutími</string>
     <string name="units_and_formats">Einingar og snið þeirra</string>
     <string name="appearance">Útlit</string>
-    <string name="map_look_descr">táknmyndir, viðmótshlutar (widgets)</string>
+    <string name="map_look_descr">Útlit landakorts</string>
     <string name="map_look">Útlit korts</string>
     <string name="list_of_installed_plugins">Listi yfir uppsettar viðbætur</string>
     <string name="configure_navigation">Stilla leiðsögn</string>
@@ -3304,4 +3304,5 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="plugins_settings">Stillingar á forritsviðbót</string>
     <string name="shared_string_by_default">Sjálfgefið</string>
     <string name="download_detaile_map">Sæktu nákvæma %s kortið til að skoða þetta svæði.</string>
+    <string name="download_detailed_map">Sæktu nákvæma %s kortið til að skoða þetta svæði.</string>
 </resources>
