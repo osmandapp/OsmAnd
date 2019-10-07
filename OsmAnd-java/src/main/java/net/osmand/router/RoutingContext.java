@@ -36,6 +36,7 @@ import net.osmand.router.BinaryRoutePlanner.FinalRouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegmentVisitor;
 import net.osmand.router.RoutePlannerFrontEnd.RouteCalculationMode;
+import net.osmand.util.Algorithms;
 
 
 public class RoutingContext {
@@ -76,7 +77,7 @@ public class RoutingContext {
 	
 	// 2. Routing memory cache (big objects)
 	TLongObjectHashMap<List<RoutingSubregionTile>> indexedSubregions = new TLongObjectHashMap<List<RoutingSubregionTile>>();
-	TLongObjectHashMap<List<TLongHashSet>> excludedIdsByTile = new TLongObjectHashMap<List<TLongHashSet>>(); 
+	TLongObjectHashMap<TLongHashSet> excludedIdsByTile = new TLongObjectHashMap<TLongHashSet>();
 	
 	// Needs to be a sorted array list . Another option to use hashmap but it will be more memory expensive
 	List<RoutingSubregionTile> subregionTiles = new ArrayList<RoutingSubregionTile>();
@@ -282,14 +283,6 @@ public class RoutingContext {
 			for (int j = 0; j < subregions.size(); j++) {
 				original = subregions.get(j).loadRouteSegment(x31, y31, this, excludeDuplications, 
 						excludedIdsByTile.get(tileId), original, j);
-				if(j < subregions.size()- 1) {
-					if (excludedIdsByTile.get(tileId) == null) {
-						excludedIdsByTile.put(tileId, new ArrayList<>());
-					}
-					if (excludedIdsByTile.get(tileId).size() < j) {
-						excludedIdsByTile.get(tileId).add(subregions.get(j).excludedIds);
-					}
-				}
 			}
 		}
 		return original;
@@ -502,6 +495,7 @@ public class RoutingContext {
 			List<RoutingSubregionTile> subregions = indexedSubregions.get(tileId);
 			if (subregions != null) {
 				boolean load = false;
+				TLongHashSet excludedIdsForTile = new TLongHashSet();
 				for (RoutingSubregionTile ts : subregions) {
 					if (!ts.isLoaded()) {
 						load = true;
@@ -517,7 +511,11 @@ public class RoutingContext {
 								excludeIds.addAll(ts.excludedIds);
 							}
 						}
+						if (excludeIds != null) {
+							excludedIdsForTile.addAll(excludeIds);
+						}
 					}
+					excludedIdsByTile.put(tileId, excludedIdsForTile);
 				}
 			}
 		}
@@ -624,6 +622,7 @@ public class RoutingContext {
 		private int isLoaded = 0;
 		private TLongObjectMap<RouteSegment> routes = null;
 		private TLongHashSet excludedIds = null;
+		private TLongHashSet excludedIdsForTile = null; 
 
 		public RoutingSubregionTile(RouteSubregion subregion) {
 			this.subregion = subregion;
@@ -661,8 +660,8 @@ public class RoutingContext {
 		}
 		
 		private RouteSegment loadRouteSegment(int x31, int y31, RoutingContext ctx,
-				TLongObjectHashMap<RouteDataObject> excludeDuplications, List<TLongHashSet> excludedIdsInTile, 
-				RouteSegment original, int subIndex) {
+				TLongObjectHashMap<RouteDataObject> excludeDuplications, 
+				TLongHashSet excludedIdsForTile, RouteSegment original, int subIndex) {
 			access++;
 			if (routes != null) {
 				long l = (((long) x31) << 31) + (long) y31;
@@ -670,8 +669,8 @@ public class RoutingContext {
 				while (segment != null) {
 					RouteDataObject ro = segment.road;
 					RouteDataObject toCmp = excludeDuplications.get(calcRouteId(ro, segment.getSegmentStart()));
-					if ((toCmp == null || toCmp.getPointsLength() < ro.getPointsLength()) 
-							&& !isExcluded(ro.id, excludedIdsInTile, subIndex)) {
+					if (!isExcluded(ro.id, excludedIdsForTile) 
+							&& (toCmp == null || toCmp.getPointsLength() < ro.getPointsLength())) {
 						excludeDuplications.put(calcRouteId(ro, segment.getSegmentStart()), ro);
 						RouteSegment s = new RouteSegment(ro, segment.getSegmentStart());
 						s.next = original;
@@ -685,14 +684,9 @@ public class RoutingContext {
 			return original;
 		}
 
-		private boolean isExcluded(long id, List<TLongHashSet> excludedIdsBySub, int subIndex) {
-			if (subIndex == 0) {
-				return false;
-			}
-			for (int i = 0; i < subIndex-1; i++) {
-				if (excludedIdsBySub.get(i) != null && excludedIdsBySub.get(i).contains(id)) {
-					return true;
-				}
+		private boolean isExcluded(long id, TLongHashSet excludedIdsForTile) {
+			if (excludedIdsForTile != null && excludedIdsForTile.contains(id)) {
+				return true;
 			}
 			return false;
 		}
