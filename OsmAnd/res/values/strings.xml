@@ -11,6 +11,16 @@
 	Thx - Hardy
 
 -->
+    <string name="change_data_storage_full_description">Move OsmAnd data files to the new destination?\n%1$s > %2$s</string>
+    <string name="data_storage_preference_summary">%1$s  •  Used %2$s GB</string>
+    <string name="data_storage_space_description">Free %1$s  •  %2$s / %3$s GB</string>
+    <string name="enter_path_to_folder">Enter path to the folder</string>
+    <string name="shared_string_select_folder">Select folder</string>
+    <string name="paste_Osmand_data_folder_path">Paste path to the folder with OsmAnd data</string>
+    <string name="change_osmand_data_folder_question">Change OsmAnd data folder?</string>
+    <string name="move_maps_to_new_destination">Move to the new destination</string>
+    <string name="internal_app_storage_description">Internal storage, hiden from user and other apps, so no one except OsmAnd can’t get access to your data</string>
+    <string name="change_data_storage_folder">Change data storage folder</string>
     <string name="download_detailed_map">Download detailed %s map, to view this area.</string>
     <string name="shared_string_by_default">By default</string>
     <string name="plugins_settings">Plugin settings</string>
