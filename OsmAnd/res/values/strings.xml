@@ -12,7 +12,7 @@
 
 -->
     <string name="change_data_storage_full_description">Move OsmAnd data files to the new destination?\n%1$s > %2$s</string>
-    <string name="data_storage_preference_summary">%1$s • Used %2$s GB</string>
+    <string name="data_storage_preference_summary">%1$s  •  Used %2$s GB</string>
     <string name="data_storage_space_description">Free %1$s  •  %2$s / %3$s GB</string>
     <string name="enter_path_to_folder">Enter path to the folder</string>
     <string name="shared_string_select_folder">Select folder</string>
