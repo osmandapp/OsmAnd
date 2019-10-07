@@ -77,7 +77,6 @@ public class RoutingContext {
 	
 	// 2. Routing memory cache (big objects)
 	TLongObjectHashMap<List<RoutingSubregionTile>> indexedSubregions = new TLongObjectHashMap<List<RoutingSubregionTile>>();
-	TLongObjectHashMap<TLongHashSet> excludedIdsByTile = new TLongObjectHashMap<TLongHashSet>();
 	
 	// Needs to be a sorted array list . Another option to use hashmap but it will be more memory expensive
 	List<RoutingSubregionTile> subregionTiles = new ArrayList<RoutingSubregionTile>();
@@ -234,7 +233,6 @@ public class RoutingContext {
 		}
 		subregionTiles.clear();
 		indexedSubregions.clear();
-		excludedIdsByTile.clear();
 	}
 	
 	private int searchSubregionTile(RouteSubregion subregion){
@@ -282,7 +280,7 @@ public class RoutingContext {
 		if (subregions != null) {
 			for (int j = 0; j < subregions.size(); j++) {
 				original = subregions.get(j).loadRouteSegment(x31, y31, this, excludeDuplications, 
-						excludedIdsByTile.get(tileId), original, j);
+						original, subregions, j);
 			}
 		}
 		return original;
@@ -495,7 +493,6 @@ public class RoutingContext {
 			List<RoutingSubregionTile> subregions = indexedSubregions.get(tileId);
 			if (subregions != null) {
 				boolean load = false;
-				TLongHashSet excludedIdsForTile = new TLongHashSet();
 				for (RoutingSubregionTile ts : subregions) {
 					if (!ts.isLoaded()) {
 						load = true;
@@ -511,11 +508,7 @@ public class RoutingContext {
 								excludeIds.addAll(ts.excludedIds);
 							}
 						}
-						if (excludeIds != null) {
-							excludedIdsForTile.addAll(excludeIds);
-						}
 					}
-					excludedIdsByTile.put(tileId, excludedIdsForTile);
 				}
 			}
 		}
@@ -622,7 +615,6 @@ public class RoutingContext {
 		private int isLoaded = 0;
 		private TLongObjectMap<RouteSegment> routes = null;
 		private TLongHashSet excludedIds = null;
-		private TLongHashSet excludedIdsForTile = null; 
 
 		public RoutingSubregionTile(RouteSubregion subregion) {
 			this.subregion = subregion;
@@ -660,8 +652,7 @@ public class RoutingContext {
 		}
 		
 		private RouteSegment loadRouteSegment(int x31, int y31, RoutingContext ctx,
-				TLongObjectHashMap<RouteDataObject> excludeDuplications, 
-				TLongHashSet excludedIdsForTile, RouteSegment original, int subIndex) {
+				TLongObjectHashMap<RouteDataObject> excludeDuplications, RouteSegment original, List<RoutingSubregionTile> subregions, int subregionIndex) {
 			access++;
 			if (routes != null) {
 				long l = (((long) x31) << 31) + (long) y31;
@@ -669,7 +660,7 @@ public class RoutingContext {
 				while (segment != null) {
 					RouteDataObject ro = segment.road;
 					RouteDataObject toCmp = excludeDuplications.get(calcRouteId(ro, segment.getSegmentStart()));
-					if (!isExcluded(ro.id, excludedIdsForTile) 
+					if (!isExcluded(ro.id, subregions, subregionIndex)
 							&& (toCmp == null || toCmp.getPointsLength() < ro.getPointsLength())) {
 						excludeDuplications.put(calcRouteId(ro, segment.getSegmentStart()), ro);
 						RouteSegment s = new RouteSegment(ro, segment.getSegmentStart());
@@ -684,9 +675,11 @@ public class RoutingContext {
 			return original;
 		}
 
-		private boolean isExcluded(long id, TLongHashSet excludedIdsForTile) {
-			if (excludedIdsForTile != null && excludedIdsForTile.contains(id)) {
-				return true;
+		private static boolean isExcluded(long id, List<RoutingSubregionTile> subregions, int subregionIndex) {
+			for (int i = 0; i < subregionIndex; i++ ) {
+				if (subregions.get(i).excludedIds != null && subregions.get(i).excludedIds.contains(id)) {
+					return true;
+				}
 			}
 			return false;
 		}
