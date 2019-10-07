@@ -3717,10 +3717,10 @@
     <string name="poi_disabled_designated">Designadu</string>
     <string name="poi_cellar_entrance">Intrada a sa cantina</string>
     <string name="poi_health_food">Màndigu pro sa salude</string>
-    <string name="poi_craft_builder"></string>
-    <string name="poi_craft_distillery"></string>
-    <string name="poi_craft_joiner"></string>
-    <string name="poi_craft_floorer"></string>
-    <string name="poi_craft_bakery"></string>
-    <string name="poi_craft_cabinet_maker"></string>
+    <string name="poi_craft_builder">Impresa edile</string>
+    <string name="poi_craft_distillery">Distilleria</string>
+    <string name="poi_craft_joiner">Mastru de linna</string>
+    <string name="poi_craft_floorer">Pamentadore</string>
+    <string name="poi_craft_bakery">Furru de su pane</string>
+    <string name="poi_craft_cabinet_maker">Ebanista</string>
 </resources>
