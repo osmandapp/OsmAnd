@@ -3254,11 +3254,11 @@
     <string name="years_5">Años</string>
     <string name="months_3">Tres meses</string>
     <string name="price_free">Gratis</string>
-    <string name="get_discount_title">Consigue %1$d %2$s a %3$s de descuento.</string>
+    <string name="get_discount_title">Consigue %1$d %2$s con un %3$s de descuento.</string>
     <string name="get_free_trial_title">Empieza tu %1$d %2$s de prueba gratis.</string>
     <string name="get_discount_first_part">%1$s para el primer %2$s</string>
     <string name="get_discount_first_few_part">%1$s para el primer %2$s</string>
-    <string name="get_discount_second_part">a continuación, %1$s</string>
+    <string name="get_discount_second_part">luego %1$s</string>
     <string name="cancel_subscription">Cancelar la suscripción</string>
     <string name="price_and_discount">%1$s • Ahorra %2$s</string>
     <string name="configure_profile_info">Todas las opciones que figuran a continuación afectan únicamente al perfil seleccionado.</string>
@@ -3279,7 +3279,7 @@
     <string name="wake_time">Hora de despertar</string>
     <string name="units_and_formats">Unidades y formatos</string>
     <string name="appearance">Apariencia</string>
-    <string name="map_look_descr">iconos, controles</string>
+    <string name="map_look_descr">Apariencia del mapa</string>
     <string name="map_look">Vista del mapa</string>
     <string name="list_of_installed_plugins">Lista de complementos instalados</string>
     <string name="configure_navigation">Configurar la navegación</string>
