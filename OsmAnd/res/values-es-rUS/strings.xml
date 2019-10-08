@@ -3257,10 +3257,10 @@ Lon %2$s</string>
     <string name="analytics_pref_title">Análisis</string>
     <string name="turn_screen_on_info">Mostrar el mapa durante la navegación, sobre la pantalla de bloqueo.</string>
     <string name="route_parameters_info">Estos ajustes afectan a la construcción de la ruta. Se aplicará sólo al perfil elegido: %1$s.</string>
-    <string name="wake_time">Tiempo para activar</string>
+    <string name="wake_time">Duración del encendido</string>
     <string name="units_and_formats">Unidades y formatos</string>
     <string name="appearance">Aspecto</string>
-    <string name="map_look_descr">iconos, widgets</string>
+    <string name="map_look_descr">Apariencia del mapa</string>
     <string name="map_look">Aspecto del mapa</string>
     <string name="list_of_installed_plugins">Lista de complementos instalados</string>
     <string name="configure_navigation">Configurar la navegación</string>
@@ -3292,4 +3292,5 @@ Lon %2$s</string>
     <string name="plugins_settings">Ajustes del complemento</string>
     <string name="shared_string_by_default">Predefinido</string>
     <string name="download_detaile_map">Descarga el mapa detallado de «%s», para ver esta área.</string>
+    <string name="download_detailed_map">Descarga el mapa detallado de «%s», para ver esta área.</string>
 </resources>
