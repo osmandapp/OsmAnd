@@ -39,6 +39,7 @@ public class UiUtilities {
 	private static final int ORIENTATION_90 = 3;
 	private static final int ORIENTATION_270 = 1;
 	private static final int ORIENTATION_180 = 2;
+	private static final int INVALID_ID = -1;
 
 	public enum DialogButtonType {
 		PRIMARY,
@@ -324,35 +325,49 @@ public class UiUtilities {
 	}
 
 	public static void setupDialogButton(boolean nightMode, View buttonView, DialogButtonType buttonType, CharSequence buttonText) {
+		setupDialogButton(nightMode, buttonView, buttonType, buttonText, INVALID_ID);
+	}
+
+	public static void setupDialogButton(boolean nightMode, View buttonView, DialogButtonType buttonType, CharSequence buttonText, int iconResId) {
 		Context ctx = buttonView.getContext();
 		TextViewEx buttonTextView = (TextViewEx) buttonView.findViewById(R.id.button_text);
 		boolean v21 = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP;
 		View buttonContainer = buttonView.findViewById(R.id.button_container);
+		int textAndIconColorResId = INVALID_ID;
 		switch (buttonType) {
 			case PRIMARY:
 				if (v21) {
 					AndroidUtils.setBackground(ctx, buttonContainer, nightMode, R.drawable.ripple_solid_light, R.drawable.ripple_solid_dark);
 				}
 				AndroidUtils.setBackground(ctx, buttonView, nightMode, R.drawable.dlg_btn_primary_light, R.drawable.dlg_btn_primary_dark);
-				buttonTextView.setTextColor(ContextCompat.getColorStateList(ctx, nightMode ? R.color.dlg_btn_primary_text_dark : R.color.dlg_btn_primary_text_light));
+				textAndIconColorResId = nightMode ? R.color.dlg_btn_primary_text_dark : R.color.dlg_btn_primary_text_light;
 				break;
 			case SECONDARY:
 				if (v21) {
 					AndroidUtils.setBackground(ctx, buttonContainer, nightMode, R.drawable.ripple_solid_light, R.drawable.ripple_solid_dark);
 				}
 				AndroidUtils.setBackground(ctx, buttonView, nightMode, R.drawable.dlg_btn_secondary_light, R.drawable.dlg_btn_secondary_dark);
-				buttonTextView.setTextColor(ContextCompat.getColorStateList(ctx, nightMode ? R.color.dlg_btn_secondary_text_dark : R.color.dlg_btn_secondary_text_light));
+				textAndIconColorResId = nightMode ? R.color.dlg_btn_secondary_text_dark : R.color.dlg_btn_secondary_text_light;
 				break;
 			case STROKED:
 				if (v21) {
 					AndroidUtils.setBackground(ctx, buttonContainer, nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
 				}
 				AndroidUtils.setBackground(ctx, buttonView, nightMode, R.drawable.dlg_btn_stroked_light, R.drawable.dlg_btn_stroked_dark);
-				buttonTextView.setTextColor(ContextCompat.getColorStateList(ctx, nightMode ? R.color.dlg_btn_secondary_text_dark : R.color.dlg_btn_secondary_text_light));
+				textAndIconColorResId = nightMode ? R.color.dlg_btn_secondary_text_dark : R.color.dlg_btn_secondary_text_light;
 				break;
 		}
-		buttonTextView.setText(buttonText);
-		buttonTextView.setEnabled(buttonView.isEnabled());
+		if (textAndIconColorResId != INVALID_ID) {
+			ColorStateList colorStateList = ContextCompat.getColorStateList(ctx, textAndIconColorResId);
+			buttonTextView.setText(buttonText);
+			buttonTextView.setTextColor(colorStateList);
+			buttonTextView.setEnabled(buttonView.isEnabled());
+			if (iconResId != INVALID_ID) {
+				Drawable icon = tintDrawable(ContextCompat.getDrawable(ctx, iconResId), ContextCompat.getColor(ctx, textAndIconColorResId));
+				buttonTextView.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
+				buttonTextView.setCompoundDrawablePadding(AndroidUtils.dpToPx(ctx, ctx.getResources().getDimension(R.dimen.content_padding_half)));
+			}
+		}
 	}
 
 	public static Context getThemedContext(Context context, boolean nightMode) {

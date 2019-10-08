@@ -3271,4 +3271,5 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="application_profile_changed">Profilo de aplikaĵo ŝanĝita al “%s”</string>
     <string name="logcat_buffer">Bufro logcat</string>
     <string name="plugins_settings">Agordoj pri kromprogramo</string>
+    <string name="shared_string_by_default">Implicite</string>
 </resources>

@@ -973,9 +973,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			}
 			int color = TopToolbarController.NO_COLOR;
 			boolean mapControlsVisible = findViewById(R.id.MapHudButtonsOverlay).getVisibility() == View.VISIBLE;
+			boolean topToolbarVisible = getMapLayers().getMapInfoLayer().isTopToolbarViewVisible();
 			boolean night = app.getDaynightHelper().isNightModeForMapControls();
 			TopToolbarController toolbarController = getMapLayers().getMapInfoLayer().getTopToolbarController();
-			if (toolbarController != null && mapControlsVisible) {
+			if (toolbarController != null && mapControlsVisible && topToolbarVisible) {
 				color = toolbarController.getStatusBarColor(this, night);
 			}
 			if (color == TopToolbarController.NO_COLOR) {
@@ -2265,21 +2266,28 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		return mapInfoLayer.hasTopToolbar();
 	}
 
-	public TopToolbarController getTopToolbarController(TopToolbarControllerType type) {
+	public TopToolbarController getTopToolbarController(@NonNull TopToolbarControllerType type) {
 		MapInfoLayer mapInfoLayer = getMapLayers().getMapInfoLayer();
 		return mapInfoLayer.getTopToolbarController(type);
 	}
 
-	public void showTopToolbar(TopToolbarController controller) {
+	public void showTopToolbar(@NonNull TopToolbarController controller) {
 		MapInfoLayer mapInfoLayer = getMapLayers().getMapInfoLayer();
 		mapInfoLayer.addTopToolbarController(controller);
 		updateStatusBarColor();
 	}
 
-	public void hideTopToolbar(TopToolbarController controller) {
+	public void hideTopToolbar(@NonNull TopToolbarController controller) {
 		MapInfoLayer mapInfoLayer = getMapLayers().getMapInfoLayer();
 		mapInfoLayer.removeTopToolbarController(controller);
 		updateStatusBarColor();
+	}
+
+	public void hideTopToolbar(@NonNull TopToolbarControllerType type) {
+		TopToolbarController controller = getTopToolbarController(type);
+		if (controller != null) {
+			hideTopToolbar(controller);
+		}
 	}
 
 	public void registerActivityResultListener(ActivityResultListener listener) {

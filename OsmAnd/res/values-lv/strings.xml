@@ -2059,7 +2059,7 @@ kas tiks pievienots jūsu Kategorijas sadaļai.</string>
     <string name="lang_sr_latn">Serbu (latīņu)</string>
     <string name="lang_zh_hk">Ķīniešu (Honkongas)</string>
     <string name="rendering_attr_hideWaterPolygons_name">Nerādīt ūdenstilpnes</string>
-    <string name="navigate_point_olc">Atvērt Lokācijas Kodu (OLC)</string>
+    <string name="navigate_point_olc">Atvērtais Lokācijas Kods (OLC)</string>
     <string name="navigate_point_olc_info_invalid">Nepareizs OLC
 </string>
     <string name="navigate_point_olc_info_short">Nepilnīgs OLC
@@ -2199,14 +2199,14 @@ Apraksta laukumu: %1$s x %2$s</string>
     <string name="lang_ber">Berberu</string>
     <string name="quick_action_osmbugs_show">Rādīt OSM piezīmes</string>
     <string name="quick_action_osmbugs_hide">Nerādīt OSM piezīmes</string>
-    <string name="quick_action_showhide_osmbugs_descr">Nospiežot pogu, tiks rādītas vai slēptas OEM piezīmes uz kartes.</string>
+    <string name="quick_action_showhide_osmbugs_descr">Nospiežot darbības pogu, tiek rādītas vai slēptas OEM piezīmes uz kartes.</string>
     <string name="sorted_by_distance">Sakārtots pēc distances</string>
-    <string name="search_favorites">Izlases meklēšana</string>
+    <string name="search_favorites">Meklēt Izlasē</string>
     <string name="hillshade_menu_download_descr">Lai attēlotu reljefa griezumu kartē, ir nepieciešams lejupielādēt reljefa virsklāja karti šim reğionam.</string>
     <string name="hillshade_purchase_header">Lai attēlotu reljefa griezumu kartē, ir nepieciešams iegādāties un instalēt Kontūrlīniju spraudni</string>
-    <string name="srtm_menu_download_descr">Lai redzētu kontūrlīnijas uz kartes, nepieciešams lejupielādēt kontūrlīniju karti šim reğionam.</string>
+    <string name="srtm_menu_download_descr">"Lejupielādējiet  \"Kontūrlīnijas\" karti šim reğionam."</string>
     <string name="shared_string_plugin">Spraudnis</string>
-    <string name="srtm_purchase_header">Lai redzētu kontūrlīnijas kartē, ir nepieciešams nopirkt un instalēt Kontūrlīniju spraudni</string>
+    <string name="srtm_purchase_header">Lai redzētu kontūrlīnijas uz kartes, jums ir nepieciešams nopirkt un instalēt \"Kontūrlīniju\" spraudni</string>
     <string name="srtm_color_scheme">Krāsu shēma</string>
     <string name="routing_attr_allow_private_name">Privātās teritorijas</string>
     <string name="favorite_group_name">Nosaukums</string>
@@ -2224,21 +2224,21 @@ Apraksta laukumu: %1$s x %2$s</string>
     <string name="select_postcode">Izvēlieties pasta kodu</string>
     <string name="quick_action_auto_zoom">Kartes automātiskā tālummaiņa iesl/izsl</string>
     <string name="driving_region_automatic">Automātiski</string>
-    <string name="private_access_routing_req">Galamērķis atrodas privātā teritorijā. Vai atļaut maršrutā iekļaut ierobežotas pieejamības ceļus?</string>
+    <string name="private_access_routing_req">Galamērķis atrodas privātas teritorijas vietā. Vai iekļaut maršrutā ierobežotas piekļuves ceļus\?</string>
     <string name="restart_search">Meklēt atkārtoti</string>
     <string name="increase_search_radius">Paplašināt meklēšanas rādiusu</string>
-    <string name="nothing_found">Neko neatradu :(</string>
+    <string name="nothing_found">Neko neatrada</string>
     <string name="nothing_found_descr">Meklējiet pēc cita vārda vai palieliniet meklēšanas rādiusu.</string>
     <string name="quick_action_showhide_osmbugs_title">Rādīt/nerādīt OSM piezīmes</string>
     <string name="routing_attr_allow_private_description">Atļaut piekļūšanu privātajām teritorijām.</string>
-    <string name="animate_my_location_desc">Maršruta gaitā rādīt kustīgu animāciju manā atrašanās vietā.</string>
-    <string name="quick_action_auto_zoom_desc">Spiežot darbības pogu, tiks ieslēgta vai izslēgta automātiskā kartes mērogošana, atkarībā no kustības ātruma.</string>
+    <string name="animate_my_location_desc">Maršruta gaitā iespējot kartes pagriešanas animāciju no manas atrašanās vietas.</string>
+    <string name="quick_action_auto_zoom_desc">Darbības pogas nospiešana ieslēdz vai izslēdz kartes auto mērogošanu pēc kustības ātruma.</string>
     <string name="quick_action_add_destination">Pievienot mērķi</string>
     <string name="quick_action_replace_destination">Nomainīt mērķi</string>
     <string name="quick_action_add_first_intermediate">Pievienot pirmo starppunktu</string>
-    <string name="quick_action_add_destination_desc">Spiežot darbības pogu, kartes centrā tiks izveidots jauns galamērķis, bet iepriekšējais galamērķis tiks pārveidots par pēdējo starppunktu.</string>
-    <string name="quick_action_replace_destination_desc">"Spiežot darbības pogu,  nomainīsies mērķis uz pašreizējo ekrāna centra punktu."</string>
-    <string name="quick_action_add_first_intermediate_desc">Spiežot darbības pogu, tiks pievienots pirmais starppunkts ekrāna centrā.</string>
+    <string name="quick_action_add_destination_desc">Spiežot šo darbības pogu, ekrāna centrs kļūst par galamērķi, bet iepriekš izvēlētais galamērķis par pēdējo starppunktu.</string>
+    <string name="quick_action_replace_destination_desc">"Spiežot šo darbības pogu,  ekrāna centrs kļūst par jauno galamērķi, nomainot iepriekšējo (ja tāds bija)."</string>
+    <string name="quick_action_add_first_intermediate_desc">Spiežot šo darbības pogu, ekrāna centrs kļūst par pirmo starppunku maršrutā.</string>
     <string name="no_overlay">Nav virsklāja</string>
     <string name="no_underlay">Nav apakšklāja</string>
     <string name="subscribe_email_error">Kļūda</string>
@@ -2411,17 +2411,15 @@ No Afganistānas līdz Zimbabvei, no Austrālijas līdz ASV, Argentīna, Brazīl
 \n OsmAnd ir atvērtā koda un aktīvā izstrādē esoša lietotne. Ikviens var piedalīties tā veidošanā, ziņojot par kļūdām, uzlabojot tulkojumus vai kodējot jaunas iespējas. Projekts atrodas patstāvīgā mijiedarbībā starp izstrādātājiem un lietotnes lietotājiem. Tāpat arī projekta progress balstās uz finansiālajiem ziedojumiem aplikācijas kodēšanai un jauno iespēju testēšanai
 \n</string>
     <string name="shared_string_add_photos">Pievienot fotogrāfijas</string>
-    <string name="mapillary_action_descr">Pievienojiet savus ielas līmeņa skatus ar Mapillary.</string>
+    <string name="mapillary_action_descr">Pievienojiet savus šīs vietas ielas līmeņa skatus caur Mapillary.</string>
     <string name="mapillary_widget">Mapillary logrīks</string>
-    <string name="mapillary_widget_descr">Ātrā piekļuve Mapillary.</string>
+    <string name="mapillary_widget_descr">Ļauj ātri piekļūt Mapillary.</string>
     <string name="mapillary_descr">Tiešsaistes ielas līmeņa fotoattēli ikvienam. Atklājiet vietas, kopīgojiet, iemūžiniet pasauli.</string>
     <string name="mapillary">Mapillary</string>
     <string name="open_mapillary">Atvērt Mapillary</string>
     <string name="shared_string_install">Instalēt</string>
     <string name="improve_coverage_mapillary">Uzlabot bilžu pārklājumu ar Mapillary</string>
-    <string name="improve_coverage_install_mapillary_desc">Uzņemiet vienu vai vairākus fotoattēlus un pievienojiet vietām uz kartes. 
-\n 
-\nLai to darītu, instalējiet Mapillary aplikāciju no Google Play.</string>
+    <string name="improve_coverage_install_mapillary_desc">Instalējiet Mapillary, lai pievienotu vienu vai vairākas forogrāfijas uz šīs vietas kartē.</string>
     <string name="online_photos">Tiešsaistes fotoattēli</string>
     <string name="no_photos_descr">Mums nav fotogrāfiju šai vietai.</string>
     <string name="plugin_mapillary_descr">Ielas līmeņa fotoattēli ikvienam - atklājiet vietas, kopīgojiet, iemūžiniet pasauli.</string>
@@ -2433,13 +2431,13 @@ No Afganistānas līdz Zimbabvei, no Austrālijas līdz ASV, Argentīna, Brazīl
     <string name="none_point_error">Lūdzu pievienojiet vismaz vienu punktu.</string>
     <string name="enter_gpx_name">GPX faila vārds:</string>
     <string name="show_on_map_after_saving">Pēc saglabāšanas rādīt uz kartes</string>
-    <string name="quick_action_resume_pause_navigation">Atsākt/pauzēt navigāciju</string>
+    <string name="quick_action_resume_pause_navigation">Pauzēt/atsākt navigāciju</string>
     <string name="quick_action_resume_pause_navigation_descr">Pieskarieties pogai, lai nopauzētu vai atsāktu navigāciju.</string>
     <string name="quick_action_show_navigation_finish_dialog">Rādīt Navigācija pabeigta dialogu</string>
     <string name="quick_action_start_stop_navigation">Sākt/apturēt navigāciju</string>
     <string name="quick_action_start_stop_navigation_descr">Pieskarieties šai pogai, lai sāktu vai apturētu navigācijas norādes.</string>
     <string name="store_tracks_in_monthly_directories">Saglabāt treka ierakstus mēneša mapēs</string>
-    <string name="store_tracks_in_monthly_directories_descrp">Ierakstītie treki tiks saglabāti apakšmapēs pēc mēneša datuma (piemēram, 2017-01).</string>
+    <string name="store_tracks_in_monthly_directories_descrp">Saglabā Ierakstītos trekus apakš-mapēs pēc mēneša datuma (piemēram, 2017-01).</string>
     <string name="map_widget_ruler_control">Rādiusa lineāls</string>
     <string name="wrong_input">Nepareiza ievade</string>
     <string name="enter_new_name">Ievadiet jaunu vārdu</string>
@@ -2485,7 +2483,7 @@ No Afganistānas līdz Zimbabvei, no Austrālijas līdz ASV, Argentīna, Brazīl
     <string name="date_added">Pēc datuma</string>
     <string name="order_by">Kārtot pēc:</string>
     <string name="measurement_tool_snap_to_road_descr">OsmAnd apvienos punktus ar maršrutiem izvēlētajam profilam.</string>
-    <string name="measurement_tool_save_as_new_track_descr">Jūs varat saglabāt punktus vai nu kā maršruta punktus vai kā līniju.</string>
+    <string name="measurement_tool_save_as_new_track_descr">Saglabā punktus kā maršruta punktus vai kā līniju.</string>
     <string name="measurement_tool_action_bar">Pārlūkojiet karti un pievienojiet punktus</string>
     <string name="measurement_tool">Mērīt attālumu</string>
     <string name="tap_on_map_to_hide_interface_descr">Pieskāriens uz kartes ieslēdz pogas un logrīkus.</string>
@@ -2512,7 +2510,7 @@ No Afganistānas līdz Zimbabvei, no Austrālijas līdz ASV, Argentīna, Brazīl
     <string name="move_all_to_history">Pārvietot visu uz vēsturi</string>
     <string name="show_direction">Distances indikācija</string>
     <string name="sort_by">Kārtot pēc</string>
-    <string name="do_not_use_animations">Nelietot animāciju</string>
+    <string name="do_not_use_animations">Nelietot animācijas</string>
     <string name="do_not_use_animations_descr">Neanimēt darbības uz ekrāna.</string>
     <string name="keep_showing_on_map">Turpināt rādīt uz kartes</string>
     <string name="exit_without_saving">Aizvērt bez saglabāšanas?</string>
@@ -2529,15 +2527,15 @@ No Afganistānas līdz Zimbabvei, no Austrālijas līdz ASV, Argentīna, Brazīl
     <string name="shared_string_reload">Pārlādēt</string>
     <string name="mapillary_menu_descr_tile_cache">Atjaunot flīzes, lai redzētu aktuālos datus.</string>
     <string name="mapillary_menu_title_tile_cache">Bilžu kešatmiņa</string>
-    <string name="wrong_user_name">Nepareizs lietotājvārds!</string>
+    <string name="wrong_user_name">Nepareizs lietotājvārds</string>
     <string name="shared_string_to">Līdz</string>
     <string name="mapillary_menu_date_from">No</string>
-    <string name="mapillary_menu_descr_dates">Skatīt bildes, kas pievienotas noteiktā laikaposmā.</string>
-    <string name="mapillary_menu_title_dates">Datumi</string>
+    <string name="mapillary_menu_descr_dates">Skatīt bildes pēc datuma</string>
+    <string name="mapillary_menu_title_dates">Datums</string>
     <string name="mapillary_menu_edit_text_hint">Ievadiet lietotājvārdu</string>
-    <string name="mapillary_menu_descr_username">Skatīt bildes, kuras pievienojis konkrēts lietotājs.</string>
+    <string name="mapillary_menu_descr_username">Skatīt lietotāja bildes</string>
     <string name="mapillary_menu_title_username">Lietotājvārds</string>
-    <string name="mapillary_menu_filter_description">Jūs varat filtrēt bildes pēc lietotāja vai datuma. Filtri tiek lietoti tikai tuvos mērogos.</string>
+    <string name="mapillary_menu_filter_description">"Filtrē bildes pēc iesūtītāja,  datuma vai tipa. Filtri darbojas tikai tuvos mērogos."</string>
     <string name="distance_moving">Distance ir koriģēta</string>
     <string name="rendering_value_darkyellow_name">Tumši dzeltens</string>
     <string name="rendering_value_translucent_pink_name">Caurspīdīgs rozā</string>
@@ -2638,7 +2636,7 @@ No Afganistānas līdz Zimbabvei, no Austrālijas līdz ASV, Argentīna, Brazīl
     <string name="point_deleted">Punkts %1$s izdzēsts</string>
     <string name="shared_string_world">Pasaule</string>
     <string name="send_search_query_description">Mēs nosūtīsim jūsu meklēšanas pieprasījumu: <b>\"%1$s\"</b>, kā arī atrašanās vietas datus. <br/>
-        <br/>"  Personīgā informācija netiek iekļauta, šie dati tiek izmantoti vienīgi meklēšanas algoritma uzlabošanai. "<br/>
+        <br/>"  Personīgā informācija netiks iekļauta, šie dati tiks izmantoti vienīgi meklēšanas algoritma uzlabošanai. "<br/>
     </string>
     <string name="send_search_query">Sūtīt meklēšanas pieprasījumu\?</string>
     <string name="thank_you_for_feedback">Paldies par Jūsu atsauksmi</string>
@@ -3145,4 +3143,83 @@ No Afganistānas līdz Zimbabvei, no Austrālijas līdz ASV, Argentīna, Brazīl
     <string name="routing_attr_difficulty_preference_description">Dot priekšroku izvēlētajai grūtības pakāpei, lai arī vieglāki un grūtāki maršruti joprojām ir iespējami, ja tie ir pietiekami īsi.</string>
     <string name="routing_attr_freeride_policy_name">Beztrases</string>
     <string name="routing_attr_freeride_policy_description">Brīvā stila un beztrases ir neoficiālie maršruti un pārejas. Parasti neiebraukti un oficiāli netiek neuzturēti. Brauciet tikai uz savu risku.</string>
+    <string name="release_3_3_7">• Rāda laiku starp pārsēšanām sabiedriskajā transportā
+\n
+\n • Izlabota lietotāja saskarsme maršruta detaļās
+\n
+\n • Salabota tumšā tēma Norādījumu izvēlnē un Maršruta Detaļās
+\n
+\n • Rāda azimutu iekš Mērīt Attālumu
+\n
+\n</string>
+    <string name="release_3_4">"• Lietotnes profili: veidojiet personisku profilu savām vajadzībām,  izvēlieties ikonu un krāsu
+\n
+\n • Tagad mainiet katra profila noklusējumus un min/max ātrumus
+\n
+\n • pievienots tekošo koordināšu logrīks
+\n
+\n • Pievienota opcija rādīt kompasu un rādiusa lineālu uz kartes
+\n
+\n • Salabota treka logošana fonā
+\n
+\n • Uzlabota karšu lejupielāde fonā 
+\n
+\n • Atgriezta \"ieslēgt ekrānu\" opcija
+\n
+\n • Salabota Vikipēdijas valodas izvēlne
+\n
+\n • Salabota kompasa pogas darbība navigācijas laikā
+\n
+\n • Citi kļūdu labojumi
+\n
+\n"</string>
+    <string name="configure_profile_info">Visi zemāk esošie iestatījumi attiecas tikai uz izvēlēto profilu.</string>
+    <string name="utm_format_descr">OsmAnd lieto UTM standarta formātu, kas ir līdzīgs, bet ne vienāds ar UTM NATO formātu.</string>
+    <string name="shared_string_example">Piemērs</string>
+    <string name="navigate_point_format_utm">UTM standarts</string>
+    <string name="navigate_point_format_olc">Open Location Code</string>
+    <string name="coordinates_format_info">Izvēlētais formāts tiks piemērots visās lietotnes sadaļās.</string>
+    <string name="pref_selected_by_default_for_profiles">Iestatījums ir izvēlēts kā noklusētais sekojošiem profiliem: %s</string>
+    <string name="change_default_settings">Mainīt noklusētos iestatījumus</string>
+    <string name="discard_changes">Atcelt izmaiņas</string>
+    <string name="apply_to_current_profile">Pielietot %1$s profilam</string>
+    <string name="apply_to_all_profiles">Pielietot visiem profiliem</string>
+    <string name="start_up_message_pref">Startēšanas ziņa</string>
+    <string name="analytics_pref_title">Analītika</string>
+    <string name="turn_screen_on_info">Navigācijas laikā rādīt karti bloķēšanas ekrānā.</string>
+    <string name="route_parameters_info">Šie parametri ietekmēs maršruta izveidošanu. Tiks piemēroti tikai izvēlētajam profilam: %1$s.</string>
+    <string name="wake_time">Pamošanās laiks</string>
+    <string name="units_and_formats">Mērvienības un formāti</string>
+    <string name="appearance">Izskats</string>
+    <string name="map_look_descr">Ikonas, logrīki</string>
+    <string name="map_look">Kartes skats</string>
+    <string name="list_of_installed_plugins">Instalēto spraudņu saraksts</string>
+    <string name="configure_navigation">Konfigurēt navigāciju</string>
+    <string name="general_settings_profile_descr">Lietotnes tēma, mērvienības, reģions</string>
+    <string name="configure_profile">Iestatīt profilu</string>
+    <string name="screen_alerts_descr">Tiks rādīti paziņojumi navigācijas laikā ekrāna apakšā kreisajā pusē.</string>
+    <string name="switch_profile">Mainīt profilu</string>
+    <string name="language_and_output">Valoda un izvade</string>
+    <string name="reset_to_default">Atiestatīt uz noklusējumiem</string>
+    <string name="manage_profiles_descr">Veidot, importēt un labot profilus</string>
+    <string name="manage_profiles">Pārvaldīt lietotnes profilus…</string>
+    <string name="osmand_settings_descr">Ietekmē visu aplikāciju</string>
+    <string name="osmand_settings">OsmAnd iestatījumi</string>
+    <string name="copy_from_other_profile">Kopēt no cita profila</string>
+    <string name="turn_screen_on">Ieslēgt ekrānu</string>
+    <string name="map_during_navigation_info">Karte navigācijas laikā</string>
+    <string name="map_during_navigation">Karte navigācijas laikā</string>
+    <string name="shared_string_other">Citi</string>
+    <string name="vehicle_parameters_descr">Svars, augstums, ātrums</string>
+    <string name="vehicle_parameters">Transportlīdzekļa parametri</string>
+    <string name="voice_announces_info">Balss uzvednes tiek atskaņotas tikai navigācijas laikā.</string>
+    <string name="voice_announces_descr">Navigācijas instrukcijas un uzvednes</string>
+    <string name="voice_announces">Balss uzvednes</string>
+    <string name="screen_alerts">Ekrāna paziņojumi</string>
+    <string name="route_parameters_descr">Konfigurēt maršruta parametrus</string>
+    <string name="route_parameters">Maršruta parametri</string>
+    <string name="application_profile_changed">Lietotnes profils nomainīts uz \"%s\"</string>
+    <string name="logcat_buffer">Logcat buferis</string>
+    <string name="plugins_settings">Spraudņu iestatījumi</string>
+    <string name="shared_string_by_default">Pēc noklusējuma</string>
 </resources>

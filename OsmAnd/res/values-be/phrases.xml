@@ -2434,7 +2434,7 @@
     <string name="poi_vacuum_cleaner_no">Без пыласоса</string>
     <string name="poi_amenity_vacuum_cleaner">Пыласос</string>
     <string name="poi_sport_free_flying">Вольны палёт (спорт)</string>
-    <string name="poi_bicycle_repair_station">Стойка для рамонту ровараў</string>
+    <string name="poi_bicycle_repair_station">Стойка для рамонту ровараў; стойка для самастойнага рамонту ровараў</string>
     <string name="poi_water_tap">Вадаправодны кран</string>
     <string name="poi_button_operated_yes">Уключаецца кнопкай: так</string>
     <string name="poi_button_operated_no">Уключаецца кнопкай: не</string>

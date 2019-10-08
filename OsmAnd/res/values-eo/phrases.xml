@@ -2335,7 +2335,7 @@
     <string name="poi_water_tap">Akvokrano</string>
     <string name="poi_button_operated_yes">Butonprema: jes</string>
     <string name="poi_button_operated_no">Butonprema: ne</string>
-    <string name="poi_bicycle_repair_station">Bicikla mem-riparejo</string>
+    <string name="poi_bicycle_repair_station">Bicikla mem-riparejo;memriparejo bicikla;riparejo bicikla;pumpilo bicikla;aerpumpilo bicikla</string>
     <string name="poi_sport_free_flying">Aersportoj</string>
     <string name="poi_free_flying_site_takeoff">elteriĝejo</string>
     <string name="poi_free_flying_site_landing">surteriĝejo</string>
@@ -3712,4 +3712,10 @@
     <string name="poi_disabled_designated">destinita</string>
     <string name="poi_cellar_entrance">Enirejo al kelo</string>
     <string name="poi_health_food">Saniga manĝaĵo</string>
+    <string name="poi_craft_builder">Oficejo de konstruisto</string>
+    <string name="poi_craft_distillery">Alkohol-distilejo</string>
+    <string name="poi_craft_joiner">Laborejo de lignaĵisto</string>
+    <string name="poi_craft_floorer">Oficejo de plank‑metisto</string>
+    <string name="poi_craft_bakery">Bakejo (ne vendejo)</string>
+    <string name="poi_craft_cabinet_maker">Laborejo de meblisto</string>
 </resources>

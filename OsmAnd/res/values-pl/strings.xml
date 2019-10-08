@@ -3296,4 +3296,6 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="get_discount_title">Uzyskaj %1$d %2$s taniej o %3$s.</string>
     <string name="language_and_output">Język i wyjście</string>
     <string name="plugins_settings">Ustawienia wtyczki</string>
+    <string name="shared_string_by_default">Domyślnie</string>
+    <string name="download_detailed_map">Pobierz szczegółową mapę %S, aby zobaczyć ten obszar.</string>
 </resources>

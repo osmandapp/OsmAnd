@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<dimen name="card_content_padding_large">42dp</dimen>
     <dimen name="map_trans_seek_size">120dp</dimen>
 	<dimen name="map_widget_text_size">35sp</dimen>
 	<dimen name="map_top_widget_text_size">33sp</dimen>
