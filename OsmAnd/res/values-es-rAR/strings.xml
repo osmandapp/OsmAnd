@@ -3292,4 +3292,35 @@ Lon %2$s</string>
     <string name="shared_string_by_default">Predefinido</string>
     <string name="download_detaile_map">Descarga el mapa detallado de «%s», para ver esta área.</string>
     <string name="download_detailed_map">Descarga el mapa detallado de «%s», para ver esta área.</string>
+    <string name="change_data_storage_full_description">¿Mover los archivos de datos de OsmAnd al nuevo destino\?
+\n%1$s &gt; %2$s</string>
+    <string name="data_storage_preference_summary">%1$s • Usado %2$s GB</string>
+    <string name="data_storage_space_description">Libre %1$s • %2$s / %3$s GB</string>
+    <string name="enter_path_to_folder">Ingresa la ruta a la carpeta</string>
+    <string name="shared_string_select_folder">Elegir carpeta</string>
+    <string name="paste_Osmand_data_folder_path">Pegar la ruta a la carpeta con los datos de OsmAnd</string>
+    <string name="change_osmand_data_folder_question">¿Cambiar la carpeta de datos de OsmAnd\?</string>
+    <string name="move_maps_to_new_destination">Mover al nuevo destino</string>
+    <string name="internal_app_storage_description">Almacenamiento interno, oculto para el usuario y otras aplicaciones, para que nadie excepto OsmAnd pueda acceder a sus datos</string>
+    <string name="change_data_storage_folder">Cambiar la carpeta de almacenamiento de datos</string>
+    <string name="rendering_attr_piste_type_snow_park_name">Parque de nieve</string>
+    <string name="rendering_attr_piste_type_sleigh_name">Trineo</string>
+    <string name="rendering_attr_piste_type_sled_name">Trineo</string>
+    <string name="rendering_attr_piste_type_hike_name">Caminata</string>
+    <string name="rendering_attr_piste_type_connection_name">Conexión</string>
+    <string name="rendering_attr_piste_type_skitour_name">Esquí de travesía</string>
+    <string name="rendering_attr_piste_type_downhill_name">Descenso</string>
+    <string name="rendering_attr_piste_type_nordic_name">Nórdico</string>
+    <string name="routeInfo_piste_type_name">Tipo de pista</string>
+    <string name="rendering_attr_piste_difficulty_novice_name">Novato;Principiante</string>
+    <string name="rendering_attr_piste_difficulty_easy_name">Fácil</string>
+    <string name="rendering_attr_piste_difficulty_intermediate_name">Intermedio</string>
+    <string name="rendering_attr_piste_difficulty_advanced_name">Avanzado</string>
+    <string name="rendering_attr_piste_difficulty_expert_name">Experto</string>
+    <string name="rendering_attr_piste_difficulty_freeride_name">Estilo libre</string>
+    <string name="rendering_attr_piste_difficulty_extreme_name">Extremo</string>
+    <string name="rendering_attr_piste_difficulty_undefined_name">Indefinido</string>
+    <string name="routeInfo_piste_difficulty_name">Dificultad de la pista</string>
+    <string name="routing_attr_width_name">Límite de anchura</string>
+    <string name="routing_attr_width_description">Especifica el límite de anchura del vehículo permitido en rutas.</string>
 </resources>
