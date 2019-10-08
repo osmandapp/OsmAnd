@@ -1,2 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="timeline_no_data">Sem dados</string>
+    <string name="shared_string_select">Selecionar</string>
+    <string name="min_logging_distance">Distância mínima de registro</string>
+    <string name="min_logging_distance_descr">Filtro: distância mínima para registrar um novo ponto</string>
+    <string name="min_logging_accuracy">Precisão mínima de registro</string>
+    <string name="min_logging_accuracy_descr">Filtro: sem registro, a menos que a precisão seja atingida</string>
+    <string name="min_logging_speed">Velocidade mínima de registro</string>
+    <string name="min_logging_speed_descr">Filtro: sem registro abaixo da velocidade selecionada</string>
+    <string name="proxy_password">Palavra-passe</string>
+    <string name="proxy_username">Nome de utilizador</string>
+    <string name="shared_string_enable">Ativar</string>
+    <string name="privacy">Privacidade</string>
+    <string name="direction">Direção</string>
+    <string name="altitude">Altitude</string>
+    <string name="shared_string_search">Pesquisar</string>
+    <string name="shared_string_ok">Ok</string>
+    <string name="app_name_short">OsmAnd Tracker</string>
+    <string name="shared_string_telegram">Telegram</string>
+    <string name="shared_string_appearance">Aparência</string>
+    <string name="shared_string_update">Atualizar</string>
+    <string name="shared_string_date">Data</string>
+    <string name="time_on_the_move">Tempo em movimento</string>
+    <string name="average_altitude">Altitude média</string>
+    <string name="average_speed">Velocidade média</string>
+    <string name="start_date">Data de início</string>
+    <string name="shared_string_map">Mapa</string>
+    <string name="shared_string_text">Texto</string>
+    <string name="shared_string_add">Adicionar</string>
+    <string name="shared_string_hide">Ocultar</string>
+    <string name="shared_string_later">Mais tarde</string>
+    <string name="shared_string_status">Situação</string>
+    <string name="shared_string_sort_by">Ordenar por</string>
+</resources>
