@@ -6,10 +6,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.Map.Entry;
 
 import org.apache.commons.logging.Log;
@@ -33,6 +36,7 @@ import net.osmand.router.BinaryRoutePlanner.FinalRouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegmentVisitor;
 import net.osmand.router.RoutePlannerFrontEnd.RouteCalculationMode;
+import net.osmand.util.Algorithms;
 
 
 public class RoutingContext {
@@ -107,8 +111,7 @@ public class RoutingContext {
 
 	// old planner
 	public FinalRouteSegment finalRouteSegment;
-
-
+	
 	RoutingContext(RoutingContext cp) {
 		this.config = cp.config;
 		this.map.putAll(cp.map);
@@ -272,17 +275,12 @@ public class RoutingContext {
 	public RouteSegment loadRouteSegment(int x31, int y31, int memoryLimit) {
 		long tileId = getRoutingTile(x31, y31, memoryLimit, OPTION_SMART_LOAD);
 		TLongObjectHashMap<RouteDataObject> excludeDuplications = new TLongObjectHashMap<RouteDataObject>();
-		TLongSet excludeIds = new TLongHashSet();
 		RouteSegment original = null;
 		List<RoutingSubregionTile> subregions = indexedSubregions.get(tileId);
 		if (subregions != null) {
-			for (RoutingSubregionTile rs : subregions) {
-				// TODO
-				original = rs.loadRouteSegment(x31, y31, this, excludeDuplications, excludeIds,
-						original);
-				if(rs.excludedIds != null) {
-					excludeIds.addAll(rs.excludedIds);
-				}
+			for (int j = 0; j < subregions.size(); j++) {
+				original = subregions.get(j).loadRouteSegment(x31, y31, this, excludeDuplications, 
+						original, subregions, j);
 			}
 		}
 		return original;
@@ -654,7 +652,7 @@ public class RoutingContext {
 		}
 		
 		private RouteSegment loadRouteSegment(int x31, int y31, RoutingContext ctx,
-				TLongObjectHashMap<RouteDataObject> excludeDuplications, TLongSet excludeIds, RouteSegment original) {
+				TLongObjectHashMap<RouteDataObject> excludeDuplications, RouteSegment original, List<RoutingSubregionTile> subregions, int subregionIndex) {
 			access++;
 			if (routes != null) {
 				long l = (((long) x31) << 31) + (long) y31;
@@ -662,8 +660,8 @@ public class RoutingContext {
 				while (segment != null) {
 					RouteDataObject ro = segment.road;
 					RouteDataObject toCmp = excludeDuplications.get(calcRouteId(ro, segment.getSegmentStart()));
-					if ((toCmp == null || toCmp.getPointsLength() < ro.getPointsLength())
-							&& !excludeIds.contains(ro.id)) {
+					if (!isExcluded(ro.id, subregions, subregionIndex)
+							&& (toCmp == null || toCmp.getPointsLength() < ro.getPointsLength())) {
 						excludeDuplications.put(calcRouteId(ro, segment.getSegmentStart()), ro);
 						RouteSegment s = new RouteSegment(ro, segment.getSegmentStart());
 						s.next = original;
@@ -675,6 +673,15 @@ public class RoutingContext {
 				throw new UnsupportedOperationException("Not clear how it could be used with native");
 			}
 			return original;
+		}
+
+		private static boolean isExcluded(long id, List<RoutingSubregionTile> subregions, int subregionIndex) {
+			for (int i = 0; i < subregionIndex; i++ ) {
+				if (subregions.get(i).excludedIds != null && subregions.get(i).excludedIds.contains(id)) {
+					return true;
+				}
+			}
+			return false;
 		}
 		
 		public boolean isLoaded() {
