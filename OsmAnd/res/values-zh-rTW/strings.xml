@@ -2895,8 +2895,8 @@
     <string name="routeInfo_surface_name">路面</string>
     <string name="routeInfo_smoothness_name">平坦</string>
     <string name="routeInfo_steepness_name">坡度</string>
-    <string name="add_home">新增首頁</string>
-    <string name="add_work">新增工作</string>
+    <string name="add_home">新增住家</string>
+    <string name="add_work">新增工作地點</string>
     <string name="work_button">工作</string>
     <string name="add_destination_query">請先增加目的地</string>
     <string name="previous_route">前一個路線</string>
@@ -3249,7 +3249,7 @@
     <string name="wake_time">喚醒時間</string>
     <string name="units_and_formats">單位與格式</string>
     <string name="appearance">外觀</string>
-    <string name="map_look_descr">圖示、小工具</string>
+    <string name="map_look_descr">地圖外觀</string>
     <string name="map_look">地圖外觀</string>
     <string name="list_of_installed_plugins">已安裝外掛程式清單</string>
     <string name="configure_navigation">設定導航</string>
@@ -3280,4 +3280,5 @@
     <string name="logcat_buffer">Logcat 緩衝</string>
     <string name="plugins_settings">外掛程式設定</string>
     <string name="shared_string_by_default">預設值</string>
+    <string name="download_detailed_map">下載更詳細的 %s 地圖以檢視此區域。</string>
 </resources>
