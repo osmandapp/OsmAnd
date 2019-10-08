@@ -23,7 +23,6 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import java.io.File;
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.PlatformUtil;
@@ -58,6 +57,7 @@ import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -828,7 +828,7 @@ public class ConfigureMapMenu {
 		}
 	}
 
-	public static String[] mapNamesIds = new String[]{"", "en", "af", "als", "ar", "az", "be", "ber", "bg", "bn", "bpy", "br", "bs", "ca", "ceb", "cs", "cy", "da", "de", "el", "eo", "es", "et", "eu", "fa", "fi", "fr", "fy", "ga", "gl", "he", "hi", "hsb", "hr", "ht", "hu", "hy", "id", "is", "it", "ja", "ka", "kab", "ko", "ku", "la", "lb", "lo", "lt", "lv", "mk", "ml", "mr", "ms", "nds", "new", "nl", "nn", "no", "nv", "os", "pl", "pms", "pt", "ro", "ru", "sc", "sh", "sk", "sl", "sq", "sr", "sv", "sw", "ta", "te", "th", "tl", "tr", "uk", "vi", "vo", "zh"};
+	public static String[] mapNamesIds = new String[]{"", "en", "af", "als", "ar", "az", "be", "ber", "bg", "bn", "bpy", "br", "bs", "ca", "ceb", "cs", "cy", "da", "de", "el", "eo", "es", "et", "eu", "fa", "fi", "fr", "fy", "ga", "gl", "he", "hi", "hsb", "hr", "ht", "hu", "hy", "id", "is", "it", "ja", "ka", "kab", "ko", "ku", "la", "lb", "lo", "lt", "lv", "mk", "ml", "mr", "ms", "nds", "new", "nl", "nn", "no", "nv", "oc", "os", "pl", "pms", "pt", "ro", "ru", "sc", "sh", "sk", "sl", "sq", "sr", "sv", "sw", "ta", "te", "th", "tl", "tr", "uk", "vi", "vo", "zh"};
 
 	public static String[] getSortedMapNamesIds(Context ctx, String[] ids, String[] values) {
 		final Map<String, String> mp = new HashMap<>();
@@ -1415,11 +1415,11 @@ public class ConfigureMapMenu {
 		public static int parseTrackColor(RenderingRulesStorage renderer, String colorName) {
 			int defaultColor = -1;
 			RenderingRule gpxRule = null;
-			if(renderer!=null) {
+			if (renderer != null) {
 				gpxRule = renderer.getRenderingAttributeRule("gpx");
 			}
 			if (gpxRule != null && gpxRule.getIfElseChildren().size() > 0) {
-				List<RenderingRule> rules = renderer.getRenderingAttributeRule("gpx").getIfElseChildren().get(0).getIfElseChildren();
+				List<RenderingRule> rules = gpxRule.getIfElseChildren().get(0).getIfElseChildren();
 				for (RenderingRule r : rules) {
 					String cName = r.getStringPropertyValue(CURRENT_TRACK_COLOR_ATTR);
 					if (!Algorithms.isEmpty(cName) && cName.equals(colorName)) {
@@ -1431,6 +1431,23 @@ public class ConfigureMapMenu {
 				}
 			}
 			return defaultColor;
+		}
+
+		public static String parseTrackColorName(RenderingRulesStorage renderer, int color) {
+			RenderingRule gpxRule = null;
+			if (renderer != null) {
+				gpxRule = renderer.getRenderingAttributeRule("gpx");
+			}
+			if (gpxRule != null && gpxRule.getIfElseChildren().size() > 0) {
+				List<RenderingRule> rules = gpxRule.getIfElseChildren().get(0).getIfElseChildren();
+				for (RenderingRule r : rules) {
+					String cName = r.getStringPropertyValue(CURRENT_TRACK_COLOR_ATTR);
+					if (!Algorithms.isEmpty(cName) && color == r.getIntPropertyValue(COLOR_ATTR)) {
+						return cName;
+					}
+				}
+			}
+			return Algorithms.colorToString(color);
 		}
 
 		@NonNull

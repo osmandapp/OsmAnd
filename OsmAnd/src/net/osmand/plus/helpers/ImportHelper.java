@@ -23,6 +23,7 @@ import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.Toast;
 
+import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
@@ -857,11 +858,13 @@ public class ImportHelper {
 			int nameColor = getResolvedColor(nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
 			int descrColor = getResolvedColor(nightMode ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light);
 			String descr = getString(R.string.import_gpx_file_description);
-			SpannableStringBuilder text = new SpannableStringBuilder(fileName).append(" ").append(descr);
-			text.setSpan(new ForegroundColorSpan(nameColor), 0, fileName.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-			text.setSpan(new ForegroundColorSpan(descrColor), fileName.length() + 1, text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+			if(!descr.contains("%s")) {
+				descr = "%s " +descr;
+			}
 
-			items.add(new ShortDescriptionItem(text));
+			CharSequence txt = AndroidUtils.getStyledString(descr, fileName, new ForegroundColorSpan(descrColor),
+					new ForegroundColorSpan(nameColor));
+			items.add(new ShortDescriptionItem(txt));
 
 			BaseBottomSheetItem asFavoritesItem = new SimpleBottomSheetItem.Builder()
 					.setIcon(getContentIcon(R.drawable.ic_action_fav_dark))

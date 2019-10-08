@@ -1,14 +1,8 @@
 package net.osmand.plus.routing;
 
 
-import java.io.IOException;
-import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import android.media.AudioManager;
+import android.media.SoundPool;
 
 import net.osmand.Location;
 import net.osmand.binary.RouteDataObject;
@@ -26,8 +20,14 @@ import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.TurnType;
 import net.osmand.util.MapUtils;
 
-import android.media.AudioManager;
-import android.media.SoundPool;
+import java.io.IOException;
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 
 public class VoiceRouter {
@@ -907,13 +907,14 @@ public class VoiceRouter {
 	}
 
 	private void play(CommandBuilder p) {
-		if (p != null) {
-			List<String> played = p.play();
-			notifyOnVoiceMessage(p.getListCommands(), played);
-		} else {
-			notifyOnVoiceMessage(Collections.EMPTY_LIST, Collections.EMPTY_LIST);
+		if (settings.SPEAK_ROUTING_ALARMS.get()) {
+			if (p != null) {
+				List<String> played = p.play();
+				notifyOnVoiceMessage(p.getListCommands(), played);
+			} else {
+				notifyOnVoiceMessage(Collections.EMPTY_LIST, Collections.EMPTY_LIST);
+			}
 		}
-
 	}
 
 	private void makeSound() {

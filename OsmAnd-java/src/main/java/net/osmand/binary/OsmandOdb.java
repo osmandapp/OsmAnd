@@ -35696,6 +35696,64 @@ public final class OsmandOdb {
      * </pre>
      */
     int getRoutes(int index);
+
+    // repeated uint64 deletedRoutesIds = 20;
+    /**
+     * <code>repeated uint64 deletedRoutesIds = 20;</code>
+     *
+     * <pre>
+     * TransportStop.Message.start -  sizeof(TransportStop.Message.length) - routes[i] 
+     *				= TransportRoute.Message.start - sizeof(TransportRoute.Message.length)
+     * message is started when body is started 
+     * </pre>
+     */
+    java.util.List<java.lang.Long> getDeletedRoutesIdsList();
+    /**
+     * <code>repeated uint64 deletedRoutesIds = 20;</code>
+     *
+     * <pre>
+     * TransportStop.Message.start -  sizeof(TransportStop.Message.length) - routes[i] 
+     *				= TransportRoute.Message.start - sizeof(TransportRoute.Message.length)
+     * message is started when body is started 
+     * </pre>
+     */
+    int getDeletedRoutesIdsCount();
+    /**
+     * <code>repeated uint64 deletedRoutesIds = 20;</code>
+     *
+     * <pre>
+     * TransportStop.Message.start -  sizeof(TransportStop.Message.length) - routes[i] 
+     *				= TransportRoute.Message.start - sizeof(TransportRoute.Message.length)
+     * message is started when body is started 
+     * </pre>
+     */
+    long getDeletedRoutesIds(int index);
+
+    // repeated uint64 routesIds = 22;
+    /**
+     * <code>repeated uint64 routesIds = 22;</code>
+     *
+     * <pre>
+     * ids of routes that contain this stop
+     * </pre>
+     */
+    java.util.List<java.lang.Long> getRoutesIdsList();
+    /**
+     * <code>repeated uint64 routesIds = 22;</code>
+     *
+     * <pre>
+     * ids of routes that contain this stop
+     * </pre>
+     */
+    int getRoutesIdsCount();
+    /**
+     * <code>repeated uint64 routesIds = 22;</code>
+     *
+     * <pre>
+     * ids of routes that contain this stop
+     * </pre>
+     */
+    long getRoutesIds(int index);
   }
   /**
    * Protobuf type {@code OsmAnd.OBF.TransportStop}
@@ -35807,6 +35865,48 @@ public final class OsmandOdb {
               input.popLimit(limit);
               break;
             }
+            case 160: {
+              if (!((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
+                deletedRoutesIds_ = new java.util.ArrayList<java.lang.Long>();
+                mutable_bitField0_ |= 0x00000100;
+              }
+              deletedRoutesIds_.add(input.readUInt64());
+              break;
+            }
+            case 162: {
+              int length = input.readRawVarint32();
+              int limit = input.pushLimit(length);
+              if (!((mutable_bitField0_ & 0x00000100) == 0x00000100) && input.getBytesUntilLimit() > 0) {
+                deletedRoutesIds_ = new java.util.ArrayList<java.lang.Long>();
+                mutable_bitField0_ |= 0x00000100;
+              }
+              while (input.getBytesUntilLimit() > 0) {
+                deletedRoutesIds_.add(input.readUInt64());
+              }
+              input.popLimit(limit);
+              break;
+            }
+            case 176: {
+              if (!((mutable_bitField0_ & 0x00000200) == 0x00000200)) {
+                routesIds_ = new java.util.ArrayList<java.lang.Long>();
+                mutable_bitField0_ |= 0x00000200;
+              }
+              routesIds_.add(input.readUInt64());
+              break;
+            }
+            case 178: {
+              int length = input.readRawVarint32();
+              int limit = input.pushLimit(length);
+              if (!((mutable_bitField0_ & 0x00000200) == 0x00000200) && input.getBytesUntilLimit() > 0) {
+                routesIds_ = new java.util.ArrayList<java.lang.Long>();
+                mutable_bitField0_ |= 0x00000200;
+              }
+              while (input.getBytesUntilLimit() > 0) {
+                routesIds_.add(input.readUInt64());
+              }
+              input.popLimit(limit);
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -35820,6 +35920,12 @@ public final class OsmandOdb {
         }
         if (((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
           routes_ = java.util.Collections.unmodifiableList(routes_);
+        }
+        if (((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
+          deletedRoutesIds_ = java.util.Collections.unmodifiableList(deletedRoutesIds_);
+        }
+        if (((mutable_bitField0_ & 0x00000200) == 0x00000200)) {
+          routesIds_ = java.util.Collections.unmodifiableList(routesIds_);
         }
         this.unknownFields = unknownFields.build();
         makeExtensionsImmutable();
@@ -36068,6 +36174,82 @@ public final class OsmandOdb {
       return routes_.get(index);
     }
 
+    // repeated uint64 deletedRoutesIds = 20;
+    public static final int DELETEDROUTESIDS_FIELD_NUMBER = 20;
+    private java.util.List<java.lang.Long> deletedRoutesIds_;
+    /**
+     * <code>repeated uint64 deletedRoutesIds = 20;</code>
+     *
+     * <pre>
+     * TransportStop.Message.start -  sizeof(TransportStop.Message.length) - routes[i] 
+     *				= TransportRoute.Message.start - sizeof(TransportRoute.Message.length)
+     * message is started when body is started 
+     * </pre>
+     */
+    public java.util.List<java.lang.Long>
+        getDeletedRoutesIdsList() {
+      return deletedRoutesIds_;
+    }
+    /**
+     * <code>repeated uint64 deletedRoutesIds = 20;</code>
+     *
+     * <pre>
+     * TransportStop.Message.start -  sizeof(TransportStop.Message.length) - routes[i] 
+     *				= TransportRoute.Message.start - sizeof(TransportRoute.Message.length)
+     * message is started when body is started 
+     * </pre>
+     */
+    public int getDeletedRoutesIdsCount() {
+      return deletedRoutesIds_.size();
+    }
+    /**
+     * <code>repeated uint64 deletedRoutesIds = 20;</code>
+     *
+     * <pre>
+     * TransportStop.Message.start -  sizeof(TransportStop.Message.length) - routes[i] 
+     *				= TransportRoute.Message.start - sizeof(TransportRoute.Message.length)
+     * message is started when body is started 
+     * </pre>
+     */
+    public long getDeletedRoutesIds(int index) {
+      return deletedRoutesIds_.get(index);
+    }
+
+    // repeated uint64 routesIds = 22;
+    public static final int ROUTESIDS_FIELD_NUMBER = 22;
+    private java.util.List<java.lang.Long> routesIds_;
+    /**
+     * <code>repeated uint64 routesIds = 22;</code>
+     *
+     * <pre>
+     * ids of routes that contain this stop
+     * </pre>
+     */
+    public java.util.List<java.lang.Long>
+        getRoutesIdsList() {
+      return routesIds_;
+    }
+    /**
+     * <code>repeated uint64 routesIds = 22;</code>
+     *
+     * <pre>
+     * ids of routes that contain this stop
+     * </pre>
+     */
+    public int getRoutesIdsCount() {
+      return routesIds_.size();
+    }
+    /**
+     * <code>repeated uint64 routesIds = 22;</code>
+     *
+     * <pre>
+     * ids of routes that contain this stop
+     * </pre>
+     */
+    public long getRoutesIds(int index) {
+      return routesIds_.get(index);
+    }
+
     private void initFields() {
       dx_ = 0;
       dy_ = 0;
@@ -36077,6 +36259,8 @@ public final class OsmandOdb {
       additionalNamePairs_ = com.google.protobuf.ByteString.EMPTY;
       exits_ = java.util.Collections.emptyList();
       routes_ = java.util.Collections.emptyList();
+      deletedRoutesIds_ = java.util.Collections.emptyList();
+      routesIds_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -36136,6 +36320,12 @@ public final class OsmandOdb {
       for (int i = 0; i < routes_.size(); i++) {
         output.writeUInt32(16, routes_.get(i));
       }
+      for (int i = 0; i < deletedRoutesIds_.size(); i++) {
+        output.writeUInt64(20, deletedRoutesIds_.get(i));
+      }
+      for (int i = 0; i < routesIds_.size(); i++) {
+        output.writeUInt64(22, routesIds_.get(i));
+      }
       getUnknownFields().writeTo(output);
     }
 
@@ -36181,6 +36371,24 @@ public final class OsmandOdb {
         }
         size += dataSize;
         size += 2 * getRoutesList().size();
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < deletedRoutesIds_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeUInt64SizeNoTag(deletedRoutesIds_.get(i));
+        }
+        size += dataSize;
+        size += 2 * getDeletedRoutesIdsList().size();
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < routesIds_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeUInt64SizeNoTag(routesIds_.get(i));
+        }
+        size += dataSize;
+        size += 2 * getRoutesIdsList().size();
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -36319,6 +36527,10 @@ public final class OsmandOdb {
         }
         routes_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000080);
+        deletedRoutesIds_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000100);
+        routesIds_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000200);
         return this;
       }
 
@@ -36385,6 +36597,16 @@ public final class OsmandOdb {
           bitField0_ = (bitField0_ & ~0x00000080);
         }
         result.routes_ = routes_;
+        if (((bitField0_ & 0x00000100) == 0x00000100)) {
+          deletedRoutesIds_ = java.util.Collections.unmodifiableList(deletedRoutesIds_);
+          bitField0_ = (bitField0_ & ~0x00000100);
+        }
+        result.deletedRoutesIds_ = deletedRoutesIds_;
+        if (((bitField0_ & 0x00000200) == 0x00000200)) {
+          routesIds_ = java.util.Collections.unmodifiableList(routesIds_);
+          bitField0_ = (bitField0_ & ~0x00000200);
+        }
+        result.routesIds_ = routesIds_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -36452,6 +36674,26 @@ public final class OsmandOdb {
           } else {
             ensureRoutesIsMutable();
             routes_.addAll(other.routes_);
+          }
+          onChanged();
+        }
+        if (!other.deletedRoutesIds_.isEmpty()) {
+          if (deletedRoutesIds_.isEmpty()) {
+            deletedRoutesIds_ = other.deletedRoutesIds_;
+            bitField0_ = (bitField0_ & ~0x00000100);
+          } else {
+            ensureDeletedRoutesIdsIsMutable();
+            deletedRoutesIds_.addAll(other.deletedRoutesIds_);
+          }
+          onChanged();
+        }
+        if (!other.routesIds_.isEmpty()) {
+          if (routesIds_.isEmpty()) {
+            routesIds_ = other.routesIds_;
+            bitField0_ = (bitField0_ & ~0x00000200);
+          } else {
+            ensureRoutesIdsIsMutable();
+            routesIds_.addAll(other.routesIds_);
           }
           onChanged();
         }
@@ -37131,6 +37373,208 @@ public final class OsmandOdb {
       public Builder clearRoutes() {
         routes_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000080);
+        onChanged();
+        return this;
+      }
+
+      // repeated uint64 deletedRoutesIds = 20;
+      private java.util.List<java.lang.Long> deletedRoutesIds_ = java.util.Collections.emptyList();
+      private void ensureDeletedRoutesIdsIsMutable() {
+        if (!((bitField0_ & 0x00000100) == 0x00000100)) {
+          deletedRoutesIds_ = new java.util.ArrayList<java.lang.Long>(deletedRoutesIds_);
+          bitField0_ |= 0x00000100;
+         }
+      }
+      /**
+       * <code>repeated uint64 deletedRoutesIds = 20;</code>
+       *
+       * <pre>
+       * TransportStop.Message.start -  sizeof(TransportStop.Message.length) - routes[i] 
+       *				= TransportRoute.Message.start - sizeof(TransportRoute.Message.length)
+       * message is started when body is started 
+       * </pre>
+       */
+      public java.util.List<java.lang.Long>
+          getDeletedRoutesIdsList() {
+        return java.util.Collections.unmodifiableList(deletedRoutesIds_);
+      }
+      /**
+       * <code>repeated uint64 deletedRoutesIds = 20;</code>
+       *
+       * <pre>
+       * TransportStop.Message.start -  sizeof(TransportStop.Message.length) - routes[i] 
+       *				= TransportRoute.Message.start - sizeof(TransportRoute.Message.length)
+       * message is started when body is started 
+       * </pre>
+       */
+      public int getDeletedRoutesIdsCount() {
+        return deletedRoutesIds_.size();
+      }
+      /**
+       * <code>repeated uint64 deletedRoutesIds = 20;</code>
+       *
+       * <pre>
+       * TransportStop.Message.start -  sizeof(TransportStop.Message.length) - routes[i] 
+       *				= TransportRoute.Message.start - sizeof(TransportRoute.Message.length)
+       * message is started when body is started 
+       * </pre>
+       */
+      public long getDeletedRoutesIds(int index) {
+        return deletedRoutesIds_.get(index);
+      }
+      /**
+       * <code>repeated uint64 deletedRoutesIds = 20;</code>
+       *
+       * <pre>
+       * TransportStop.Message.start -  sizeof(TransportStop.Message.length) - routes[i] 
+       *				= TransportRoute.Message.start - sizeof(TransportRoute.Message.length)
+       * message is started when body is started 
+       * </pre>
+       */
+      public Builder setDeletedRoutesIds(
+          int index, long value) {
+        ensureDeletedRoutesIdsIsMutable();
+        deletedRoutesIds_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated uint64 deletedRoutesIds = 20;</code>
+       *
+       * <pre>
+       * TransportStop.Message.start -  sizeof(TransportStop.Message.length) - routes[i] 
+       *				= TransportRoute.Message.start - sizeof(TransportRoute.Message.length)
+       * message is started when body is started 
+       * </pre>
+       */
+      public Builder addDeletedRoutesIds(long value) {
+        ensureDeletedRoutesIdsIsMutable();
+        deletedRoutesIds_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated uint64 deletedRoutesIds = 20;</code>
+       *
+       * <pre>
+       * TransportStop.Message.start -  sizeof(TransportStop.Message.length) - routes[i] 
+       *				= TransportRoute.Message.start - sizeof(TransportRoute.Message.length)
+       * message is started when body is started 
+       * </pre>
+       */
+      public Builder addAllDeletedRoutesIds(
+          java.lang.Iterable<? extends java.lang.Long> values) {
+        ensureDeletedRoutesIdsIsMutable();
+        super.addAll(values, deletedRoutesIds_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated uint64 deletedRoutesIds = 20;</code>
+       *
+       * <pre>
+       * TransportStop.Message.start -  sizeof(TransportStop.Message.length) - routes[i] 
+       *				= TransportRoute.Message.start - sizeof(TransportRoute.Message.length)
+       * message is started when body is started 
+       * </pre>
+       */
+      public Builder clearDeletedRoutesIds() {
+        deletedRoutesIds_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000100);
+        onChanged();
+        return this;
+      }
+
+      // repeated uint64 routesIds = 22;
+      private java.util.List<java.lang.Long> routesIds_ = java.util.Collections.emptyList();
+      private void ensureRoutesIdsIsMutable() {
+        if (!((bitField0_ & 0x00000200) == 0x00000200)) {
+          routesIds_ = new java.util.ArrayList<java.lang.Long>(routesIds_);
+          bitField0_ |= 0x00000200;
+         }
+      }
+      /**
+       * <code>repeated uint64 routesIds = 22;</code>
+       *
+       * <pre>
+       * ids of routes that contain this stop
+       * </pre>
+       */
+      public java.util.List<java.lang.Long>
+          getRoutesIdsList() {
+        return java.util.Collections.unmodifiableList(routesIds_);
+      }
+      /**
+       * <code>repeated uint64 routesIds = 22;</code>
+       *
+       * <pre>
+       * ids of routes that contain this stop
+       * </pre>
+       */
+      public int getRoutesIdsCount() {
+        return routesIds_.size();
+      }
+      /**
+       * <code>repeated uint64 routesIds = 22;</code>
+       *
+       * <pre>
+       * ids of routes that contain this stop
+       * </pre>
+       */
+      public long getRoutesIds(int index) {
+        return routesIds_.get(index);
+      }
+      /**
+       * <code>repeated uint64 routesIds = 22;</code>
+       *
+       * <pre>
+       * ids of routes that contain this stop
+       * </pre>
+       */
+      public Builder setRoutesIds(
+          int index, long value) {
+        ensureRoutesIdsIsMutable();
+        routesIds_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated uint64 routesIds = 22;</code>
+       *
+       * <pre>
+       * ids of routes that contain this stop
+       * </pre>
+       */
+      public Builder addRoutesIds(long value) {
+        ensureRoutesIdsIsMutable();
+        routesIds_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated uint64 routesIds = 22;</code>
+       *
+       * <pre>
+       * ids of routes that contain this stop
+       * </pre>
+       */
+      public Builder addAllRoutesIds(
+          java.lang.Iterable<? extends java.lang.Long> values) {
+        ensureRoutesIdsIsMutable();
+        super.addAll(values, routesIds_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated uint64 routesIds = 22;</code>
+       *
+       * <pre>
+       * ids of routes that contain this stop
+       * </pre>
+       */
+      public Builder clearRoutesIds() {
+        routesIds_ = java.util.Collections.emptyList();
+        bitField0_ = (bitField0_ & ~0x00000200);
         onChanged();
         return this;
       }
@@ -62381,84 +62825,85 @@ public final class OsmandOdb {
       "ayOfWeekRestriction\030\007 \003(\r\022\034\n\024dayOfYearRe" +
       "striction\030\010 \003(\r\"W\n\022TransportRouteStop\022\n\n" +
       "\002id\030\001 \002(\022\022\n\n\002dx\030\002 \002(\021\022\n\n\002dy\030\003 \002(\021\022\014\n\004nam" +
-      "e\030\006 \002(\r\022\017\n\007name_en\030\007 \001(\r\"\255\001\n\rTransportSt" +
+      "e\030\006 \002(\r\022\017\n\007name_en\030\007 \001(\r\"\332\001\n\rTransportSt" +
       "op\022\n\n\002dx\030\001 \002(\021\022\n\n\002dy\030\002 \002(\021\022\n\n\002id\030\005 \002(\022\022\014" +
       "\n\004name\030\006 \002(\r\022\017\n\007name_en\030\007 \001(\r\022\033\n\023additio" +
       "nalNamePairs\030\010 \001(\014\022,\n\005exits\030\t \003(\0132\035.OsmA" +
       "nd.OBF.TransportStopExit\022\016\n\006routes\030\020 \003(\r" +
-      "\"8\n\021TransportStopExit\022\n\n\002dx\030\001 \002(\021\022\n\n\002dy\030",
-      "\002 \002(\021\022\013\n\003ref\030\003 \002(\r\"\272\001\n\022TransportStopsTre" +
-      "e\022\014\n\004left\030\001 \002(\021\022\r\n\005right\030\002 \002(\021\022\013\n\003top\030\003 " +
-      "\002(\021\022\016\n\006bottom\030\004 \002(\021\0220\n\010subtrees\030\007 \003(\0132\036." +
-      "OsmAnd.OBF.TransportStopsTree\022(\n\005leafs\030\010" +
-      " \003(\0132\031.OsmAnd.OBF.TransportStop\022\016\n\006baseI" +
-      "d\030\020 \001(\004\"\256\001\n\024OsmAndTransportIndex\022\014\n\004name" +
-      "\030\001 \001(\t\022+\n\006routes\030\003 \001(\0132\033.OsmAnd.OBF.Tran" +
-      "sportRoutes\022-\n\005stops\030\006 \001(\0132\036.OsmAnd.OBF." +
-      "TransportStopsTree\022,\n\013stringTable\030\t \002(\0132" +
-      "\027.OsmAnd.OBF.StringTable\"\312\002\n\016OsmAndPoiIn",
-      "dex\022\014\n\004name\030\001 \002(\t\022-\n\nboundaries\030\002 \002(\0132\031." +
-      "OsmAnd.OBF.OsmAndTileBox\0228\n\017categoriesTa" +
-      "ble\030\003 \003(\0132\037.OsmAnd.OBF.OsmAndCategoryTab" +
-      "le\0221\n\tnameIndex\030\004 \001(\0132\036.OsmAnd.OBF.OsmAn" +
-      "dPoiNameIndex\0226\n\rsubtypesTable\030\005 \001(\0132\037.O" +
-      "smAnd.OBF.OsmAndSubtypesTable\022\'\n\005boxes\030\006" +
-      " \003(\0132\030.OsmAnd.OBF.OsmAndPoiBox\022-\n\007poiDat" +
-      "a\030\t \003(\0132\034.OsmAnd.OBF.OsmAndPoiBoxData\"\331\001" +
-      "\n\022OsmAndPoiNameIndex\022-\n\005table\030\003 \002(\0132\036.Os" +
-      "mAnd.OBF.IndexedStringTable\022C\n\004data\030\005 \003(",
-      "\01325.OsmAnd.OBF.OsmAndPoiNameIndex.OsmAnd" +
-      "PoiNameIndexData\032O\n\026OsmAndPoiNameIndexDa" +
-      "ta\0225\n\005atoms\030\003 \003(\0132&.OsmAnd.OBF.OsmAndPoi" +
-      "NameIndexDataAtom\"Q\n\032OsmAndPoiNameIndexD" +
-      "ataAtom\022\014\n\004zoom\030\002 \001(\r\022\t\n\001x\030\003 \001(\r\022\t\n\001y\030\004 " +
-      "\001(\r\022\017\n\007shiftTo\030\016 \001(\007\">\n\023OsmAndCategoryTa" +
-      "ble\022\020\n\010category\030\001 \002(\t\022\025\n\rsubcategories\030\003" +
-      " \003(\t\"E\n\023OsmAndSubtypesTable\022.\n\010subtypes\030" +
-      "\004 \003(\0132\034.OsmAnd.OBF.OsmAndPoiSubtype\"\205\001\n\020" +
-      "OsmAndPoiSubtype\022\014\n\004name\030\001 \002(\t\022\017\n\007tagnam",
-      "e\030\002 \001(\t\022\016\n\006isText\030\003 \002(\010\022\021\n\tfrequency\030\005 \001" +
-      "(\r\022\031\n\021subtypeValuesSize\030\006 \001(\r\022\024\n\014subtype" +
-      "Value\030\010 \003(\t\"\255\001\n\014OsmAndPoiBox\022\014\n\004zoom\030\001 \002" +
-      "(\r\022\014\n\004left\030\002 \002(\021\022\013\n\003top\030\003 \002(\021\0223\n\ncategor" +
-      "ies\030\004 \001(\0132\037.OsmAnd.OBF.OsmAndPoiCategori" +
-      "es\022*\n\010subBoxes\030\n \003(\0132\030.OsmAnd.OBF.OsmAnd" +
-      "PoiBox\022\023\n\013shiftToData\030\016 \001(\007\"@\n\023OsmAndPoi" +
-      "Categories\022\022\n\ncategories\030\003 \003(\r\022\025\n\rsubcat" +
-      "egories\030\005 \003(\r\"i\n\020OsmAndPoiBoxData\022\014\n\004zoo" +
-      "m\030\001 \001(\r\022\t\n\001x\030\002 \001(\r\022\t\n\001y\030\003 \001(\r\0221\n\007poiData",
-      "\030\005 \003(\0132 .OsmAnd.OBF.OsmAndPoiBoxDataAtom" +
-      "\"\360\001\n\024OsmAndPoiBoxDataAtom\022\n\n\002dx\030\002 \002(\021\022\n\n" +
-      "\002dy\030\003 \002(\021\022\022\n\ncategories\030\004 \003(\r\022\025\n\rsubcate" +
-      "gories\030\005 \003(\r\022\014\n\004name\030\006 \001(\t\022\016\n\006nameEn\030\007 \001" +
-      "(\t\022\n\n\002id\030\010 \001(\004\022\024\n\014openingHours\030\n \001(\t\022\014\n\004" +
-      "site\030\013 \001(\t\022\r\n\005phone\030\014 \001(\t\022\014\n\004note\030\r \001(\t\022" +
-      "\026\n\016textCategories\030\016 \003(\r\022\022\n\ntextValues\030\017 " +
-      "\003(\t\"\032\n\007IdTable\022\017\n\007routeId\030\001 \003(\022\"F\n\017Restr" +
-      "ictionData\022\014\n\004type\030\001 \002(\005\022\014\n\004from\030\002 \002(\005\022\n" +
-      "\n\002to\030\003 \002(\005\022\013\n\003via\030\004 \001(\005\"x\n\tRouteData\022\016\n\006",
-      "points\030\001 \002(\014\022\022\n\npointTypes\030\004 \001(\014\022\022\n\npoin" +
-      "tNames\030\005 \001(\014\022\r\n\005types\030\007 \002(\014\022\017\n\007routeId\030\014" +
-      " \002(\005\022\023\n\013stringNames\030\016 \001(\014\"\304\005\n\022OsmAndRout" +
-      "ingIndex\022\014\n\004name\030\001 \002(\t\022?\n\005rules\030\002 \003(\01320." +
-      "OsmAnd.OBF.OsmAndRoutingIndex.RouteEncod" +
-      "ingRule\022>\n\trootBoxes\030\003 \003(\0132+.OsmAnd.OBF." +
-      "OsmAndRoutingIndex.RouteDataBox\022A\n\014basem" +
-      "apBoxes\030\004 \003(\0132+.OsmAnd.OBF.OsmAndRouting" +
-      "Index.RouteDataBox\022=\n\006blocks\030\005 \003(\0132-.Osm" +
-      "And.OBF.OsmAndRoutingIndex.RouteDataBloc",
-      "k\032;\n\021RouteEncodingRule\022\013\n\003tag\030\003 \002(\t\022\r\n\005v" +
-      "alue\030\005 \002(\t\022\n\n\002id\030\007 \001(\r\032\231\001\n\014RouteDataBox\022" +
-      "\014\n\004left\030\001 \002(\021\022\r\n\005right\030\002 \002(\021\022\013\n\003top\030\003 \002(" +
-      "\021\022\016\n\006bottom\030\004 \002(\021\022\023\n\013shiftToData\030\005 \001(\007\022:" +
-      "\n\005boxes\030\007 \003(\0132+.OsmAnd.OBF.OsmAndRouting" +
-      "Index.RouteDataBox\032\303\001\n\016RouteDataBlock\022$\n" +
-      "\007idTable\030\005 \001(\0132\023.OsmAnd.OBF.IdTable\022*\n\013d" +
-      "ataObjects\030\006 \003(\0132\025.OsmAnd.OBF.RouteData\022" +
-      "1\n\014restrictions\030\007 \003(\0132\033.OsmAnd.OBF.Restr" +
-      "ictionData\022,\n\013stringTable\030\010 \001(\0132\027.OsmAnd",
-      ".OBF.StringTableB\036\n\021net.osmand.binaryB\tO" +
-      "smandOdb"
+      "\022\030\n\020deletedRoutesIds\030\024 \003(\004\022\021\n\troutesIds\030",
+      "\026 \003(\004\"8\n\021TransportStopExit\022\n\n\002dx\030\001 \002(\021\022\n" +
+      "\n\002dy\030\002 \002(\021\022\013\n\003ref\030\003 \002(\r\"\272\001\n\022TransportSto" +
+      "psTree\022\014\n\004left\030\001 \002(\021\022\r\n\005right\030\002 \002(\021\022\013\n\003t" +
+      "op\030\003 \002(\021\022\016\n\006bottom\030\004 \002(\021\0220\n\010subtrees\030\007 \003" +
+      "(\0132\036.OsmAnd.OBF.TransportStopsTree\022(\n\005le" +
+      "afs\030\010 \003(\0132\031.OsmAnd.OBF.TransportStop\022\016\n\006" +
+      "baseId\030\020 \001(\004\"\256\001\n\024OsmAndTransportIndex\022\014\n" +
+      "\004name\030\001 \001(\t\022+\n\006routes\030\003 \001(\0132\033.OsmAnd.OBF" +
+      ".TransportRoutes\022-\n\005stops\030\006 \001(\0132\036.OsmAnd" +
+      ".OBF.TransportStopsTree\022,\n\013stringTable\030\t",
+      " \002(\0132\027.OsmAnd.OBF.StringTable\"\312\002\n\016OsmAnd" +
+      "PoiIndex\022\014\n\004name\030\001 \002(\t\022-\n\nboundaries\030\002 \002" +
+      "(\0132\031.OsmAnd.OBF.OsmAndTileBox\0228\n\017categor" +
+      "iesTable\030\003 \003(\0132\037.OsmAnd.OBF.OsmAndCatego" +
+      "ryTable\0221\n\tnameIndex\030\004 \001(\0132\036.OsmAnd.OBF." +
+      "OsmAndPoiNameIndex\0226\n\rsubtypesTable\030\005 \001(" +
+      "\0132\037.OsmAnd.OBF.OsmAndSubtypesTable\022\'\n\005bo" +
+      "xes\030\006 \003(\0132\030.OsmAnd.OBF.OsmAndPoiBox\022-\n\007p" +
+      "oiData\030\t \003(\0132\034.OsmAnd.OBF.OsmAndPoiBoxDa" +
+      "ta\"\331\001\n\022OsmAndPoiNameIndex\022-\n\005table\030\003 \002(\013",
+      "2\036.OsmAnd.OBF.IndexedStringTable\022C\n\004data" +
+      "\030\005 \003(\01325.OsmAnd.OBF.OsmAndPoiNameIndex.O" +
+      "smAndPoiNameIndexData\032O\n\026OsmAndPoiNameIn" +
+      "dexData\0225\n\005atoms\030\003 \003(\0132&.OsmAnd.OBF.OsmA" +
+      "ndPoiNameIndexDataAtom\"Q\n\032OsmAndPoiNameI" +
+      "ndexDataAtom\022\014\n\004zoom\030\002 \001(\r\022\t\n\001x\030\003 \001(\r\022\t\n" +
+      "\001y\030\004 \001(\r\022\017\n\007shiftTo\030\016 \001(\007\">\n\023OsmAndCateg" +
+      "oryTable\022\020\n\010category\030\001 \002(\t\022\025\n\rsubcategor" +
+      "ies\030\003 \003(\t\"E\n\023OsmAndSubtypesTable\022.\n\010subt" +
+      "ypes\030\004 \003(\0132\034.OsmAnd.OBF.OsmAndPoiSubtype",
+      "\"\205\001\n\020OsmAndPoiSubtype\022\014\n\004name\030\001 \002(\t\022\017\n\007t" +
+      "agname\030\002 \001(\t\022\016\n\006isText\030\003 \002(\010\022\021\n\tfrequenc" +
+      "y\030\005 \001(\r\022\031\n\021subtypeValuesSize\030\006 \001(\r\022\024\n\014su" +
+      "btypeValue\030\010 \003(\t\"\255\001\n\014OsmAndPoiBox\022\014\n\004zoo" +
+      "m\030\001 \002(\r\022\014\n\004left\030\002 \002(\021\022\013\n\003top\030\003 \002(\021\0223\n\nca" +
+      "tegories\030\004 \001(\0132\037.OsmAnd.OBF.OsmAndPoiCat" +
+      "egories\022*\n\010subBoxes\030\n \003(\0132\030.OsmAnd.OBF.O" +
+      "smAndPoiBox\022\023\n\013shiftToData\030\016 \001(\007\"@\n\023OsmA" +
+      "ndPoiCategories\022\022\n\ncategories\030\003 \003(\r\022\025\n\rs" +
+      "ubcategories\030\005 \003(\r\"i\n\020OsmAndPoiBoxData\022\014",
+      "\n\004zoom\030\001 \001(\r\022\t\n\001x\030\002 \001(\r\022\t\n\001y\030\003 \001(\r\0221\n\007po" +
+      "iData\030\005 \003(\0132 .OsmAnd.OBF.OsmAndPoiBoxDat" +
+      "aAtom\"\360\001\n\024OsmAndPoiBoxDataAtom\022\n\n\002dx\030\002 \002" +
+      "(\021\022\n\n\002dy\030\003 \002(\021\022\022\n\ncategories\030\004 \003(\r\022\025\n\rsu" +
+      "bcategories\030\005 \003(\r\022\014\n\004name\030\006 \001(\t\022\016\n\006nameE" +
+      "n\030\007 \001(\t\022\n\n\002id\030\010 \001(\004\022\024\n\014openingHours\030\n \001(" +
+      "\t\022\014\n\004site\030\013 \001(\t\022\r\n\005phone\030\014 \001(\t\022\014\n\004note\030\r" +
+      " \001(\t\022\026\n\016textCategories\030\016 \003(\r\022\022\n\ntextValu" +
+      "es\030\017 \003(\t\"\032\n\007IdTable\022\017\n\007routeId\030\001 \003(\022\"F\n\017" +
+      "RestrictionData\022\014\n\004type\030\001 \002(\005\022\014\n\004from\030\002 ",
+      "\002(\005\022\n\n\002to\030\003 \002(\005\022\013\n\003via\030\004 \001(\005\"x\n\tRouteDat" +
+      "a\022\016\n\006points\030\001 \002(\014\022\022\n\npointTypes\030\004 \001(\014\022\022\n" +
+      "\npointNames\030\005 \001(\014\022\r\n\005types\030\007 \002(\014\022\017\n\007rout" +
+      "eId\030\014 \002(\005\022\023\n\013stringNames\030\016 \001(\014\"\304\005\n\022OsmAn" +
+      "dRoutingIndex\022\014\n\004name\030\001 \002(\t\022?\n\005rules\030\002 \003" +
+      "(\01320.OsmAnd.OBF.OsmAndRoutingIndex.Route" +
+      "EncodingRule\022>\n\trootBoxes\030\003 \003(\0132+.OsmAnd" +
+      ".OBF.OsmAndRoutingIndex.RouteDataBox\022A\n\014" +
+      "basemapBoxes\030\004 \003(\0132+.OsmAnd.OBF.OsmAndRo" +
+      "utingIndex.RouteDataBox\022=\n\006blocks\030\005 \003(\0132",
+      "-.OsmAnd.OBF.OsmAndRoutingIndex.RouteDat" +
+      "aBlock\032;\n\021RouteEncodingRule\022\013\n\003tag\030\003 \002(\t" +
+      "\022\r\n\005value\030\005 \002(\t\022\n\n\002id\030\007 \001(\r\032\231\001\n\014RouteDat" +
+      "aBox\022\014\n\004left\030\001 \002(\021\022\r\n\005right\030\002 \002(\021\022\013\n\003top" +
+      "\030\003 \002(\021\022\016\n\006bottom\030\004 \002(\021\022\023\n\013shiftToData\030\005 " +
+      "\001(\007\022:\n\005boxes\030\007 \003(\0132+.OsmAnd.OBF.OsmAndRo" +
+      "utingIndex.RouteDataBox\032\303\001\n\016RouteDataBlo" +
+      "ck\022$\n\007idTable\030\005 \001(\0132\023.OsmAnd.OBF.IdTable" +
+      "\022*\n\013dataObjects\030\006 \003(\0132\025.OsmAnd.OBF.Route" +
+      "Data\0221\n\014restrictions\030\007 \003(\0132\033.OsmAnd.OBF.",
+      "RestrictionData\022,\n\013stringTable\030\010 \001(\0132\027.O" +
+      "smAnd.OBF.StringTableB\036\n\021net.osmand.bina" +
+      "ryB\tOsmandOdb"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -62620,7 +63065,7 @@ public final class OsmandOdb {
           internal_static_OsmAnd_OBF_TransportStop_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_OsmAnd_OBF_TransportStop_descriptor,
-              new java.lang.String[] { "Dx", "Dy", "Id", "Name", "NameEn", "AdditionalNamePairs", "Exits", "Routes", });
+              new java.lang.String[] { "Dx", "Dy", "Id", "Name", "NameEn", "AdditionalNamePairs", "Exits", "Routes", "DeletedRoutesIds", "RoutesIds", });
           internal_static_OsmAnd_OBF_TransportStopExit_descriptor =
             getDescriptor().getMessageTypes().get(21);
           internal_static_OsmAnd_OBF_TransportStopExit_fieldAccessorTable = new

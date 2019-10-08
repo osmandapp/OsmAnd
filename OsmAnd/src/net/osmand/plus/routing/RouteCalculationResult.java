@@ -15,6 +15,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.routing.AlarmInfo.AlarmInfoType;
 import net.osmand.router.RouteSegmentResult;
+import net.osmand.router.RoutingContext;
 import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -36,8 +37,13 @@ public class RouteCalculationResult {
 	private final String errorMessage;
 	private final int[] listDistance;
 	private final int[] intermediatePoints;
+
+	// Route information
 	private final float routingTime;
-	
+	private final int visitedSegments;
+	private final int loadedTiles;
+	private final float calculateTime;
+
 	protected int cacheCurrentTextDirectionInfo = -1;
 	protected List<RouteDirectionInfo> cacheAgreggatedDirections;
 	protected List<LocationPoint> locationPoints = new ArrayList<LocationPoint>();
@@ -54,6 +60,9 @@ public class RouteCalculationResult {
 	public RouteCalculationResult(String errorMessage) {
 		this.errorMessage = errorMessage;
 		this.routingTime = 0;
+		this.loadedTiles = 0;
+		this.visitedSegments = 0;
+		this.calculateTime = 0;
 		this.intermediatePoints = new int[0];
 		this.locations = new ArrayList<Location>();
 		this.segments = new ArrayList<RouteSegmentResult>();
@@ -64,6 +73,9 @@ public class RouteCalculationResult {
 	
 	public RouteCalculationResult(List<Location> list, List<RouteDirectionInfo> directions, RouteCalculationParams params, List<LocationPoint> waypoints, boolean addMissingTurns) {
 		this.routingTime = 0;
+		this.loadedTiles = 0;
+		this.calculateTime = 0;
+		this.visitedSegments = 0;
 		this.errorMessage = null;
 		this.intermediatePoints = new int[params.intermediates == null ? 0 : params.intermediates.size()];
 		List<Location> locations = list == null ? new ArrayList<Location>() : new ArrayList<Location>(list);
@@ -92,9 +104,12 @@ public class RouteCalculationResult {
 		updateDirectionsTime(this.directions, this.listDistance);
 	}
 
-	public RouteCalculationResult(List<RouteSegmentResult> list, Location start, LatLon end, List<LatLon> intermediates,  
-			OsmandApplication ctx, boolean leftSide, float routingTime, List<LocationPoint> waypoints, ApplicationMode mode) {
-		this.routingTime = routingTime;
+	public RouteCalculationResult(List<RouteSegmentResult> list, Location start, LatLon end, List<LatLon> intermediates,
+								  OsmandApplication ctx, boolean leftSide, RoutingContext rctx, List<LocationPoint> waypoints, ApplicationMode mode) {
+		this.routingTime = rctx.routingTime;
+		this.visitedSegments =  rctx.visitedSegments;
+		this.loadedTiles = rctx.loadedTiles;
+		this.calculateTime = (float) (((System.nanoTime() - rctx.timeToCalculate) / 1e6) / 1000f);
 		if(waypoints != null) {
 			this.locationPoints.addAll(waypoints);
 		}
@@ -806,8 +821,19 @@ public class RouteCalculationResult {
 	public float getRoutingTime() {
 		return routingTime;
 	}
-	
-	
+
+	public int getVisitedSegments() {
+		return visitedSegments;
+	}
+
+	public float getCalculateTime() {
+		return calculateTime;
+	}
+
+	public int getLoadedTiles() {
+		return loadedTiles;
+	}
+
 	public int getWholeDistance() {
 		if(listDistance.length > 0) {
 			return listDistance[0];

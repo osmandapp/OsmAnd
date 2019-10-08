@@ -21,8 +21,8 @@ public class Way extends Entity {
 		super(id);
 	}
 
-	public Way(Way w) {
-		super(w.getId());
+	public Way(Way w, long id) {
+		super(w, id);
 		if (w.nodeIds != null) {
 			nodeIds = new TLongArrayList(w.nodeIds);
 		}

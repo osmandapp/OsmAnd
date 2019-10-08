@@ -41,7 +41,8 @@ public class BinaryMapRouteReaderAdapter {
 	private static class RouteTypeCondition {
 		String condition = "";
 		OpeningHoursParser.OpeningHours hours = null;
-		float floatValue;
+		String value;
+		int ruleid;
 	}
 
 	public static class RouteTypeRule {
@@ -85,7 +86,7 @@ public class BinaryMapRouteReaderAdapter {
 		public String getTag() {
 			return t;
 		}
-
+		
 		public String getValue(){
 			return v;
 		}
@@ -101,6 +102,14 @@ public class BinaryMapRouteReaderAdapter {
 		public boolean conditional() {
 			return conditions != null;
 		}
+		
+		public String getNonConditionalTag() {
+			String tag = getTag();
+			if(tag != null && tag.endsWith(":conditional")) {
+				tag = tag.substring(0, tag.length() - ":conditional".length());
+			}
+			return tag;
+		}
 
 		public int onewayDirection(){
 			if(type == ONEWAY){
@@ -109,17 +118,21 @@ public class BinaryMapRouteReaderAdapter {
 			return 0;
 		}
 
-		public float maxSpeed(){
-			if(type == MAXSPEED){
-				if(conditions != null) {
-					Calendar i = Calendar.getInstance();
-					i.setTimeInMillis(System.currentTimeMillis());
-					for(RouteTypeCondition c : conditions) {
-						if(c.hours != null && c.hours.isOpenedForTime(i)) {
-							return c.floatValue;
-						}
+		public int conditionalValue(long time) {
+			if (conditional()) {
+				Calendar i = Calendar.getInstance();
+				i.setTimeInMillis(time);
+				for (RouteTypeCondition c : conditions) {
+					if (c.hours != null && c.hours.isOpenedForTime(i)) {
+						return c.ruleid;
 					}
 				}
+			}
+			return 0;
+		}
+		
+		public float maxSpeed(){
+			if(type == MAXSPEED){
 				return floatValue;
 			}
 			return -1;
@@ -159,16 +172,14 @@ public class BinaryMapRouteReaderAdapter {
 				type = ROUNDABOUT;
 			} else if(t.equalsIgnoreCase("highway") && v != null){
 				type = HIGHWAY_TYPE;
-			} else if(t.startsWith("access") && v != null){
-				type = ACCESS;
-			} else if(t.equalsIgnoreCase("maxspeed:conditional") && v != null){
+			} else if(t.endsWith(":conditional") && v != null){
 				conditions = new ArrayList<RouteTypeCondition>();
-				String[] cts = v.split(";");
+				String[] cts = v.split("\\);");
 				for(String c : cts) {
 					int ch = c.indexOf('@');
 					if (ch > 0) {
 						RouteTypeCondition cond = new RouteTypeCondition();
-						cond.floatValue = RouteDataObject.parseSpeed(c.substring(0, ch), 0);
+						cond.value = c.substring(0, ch).trim();
 						cond.condition = c.substring(ch + 1).trim();
 						if (cond.condition.startsWith("(")) {
 							cond.condition = cond.condition.substring(1, cond.condition.length()).trim();
@@ -180,7 +191,18 @@ public class BinaryMapRouteReaderAdapter {
 						conditions.add(cond);
 					}
 				}
-				type = MAXSPEED;
+				// we don't set type for condtiional so they are not used directly
+//				if(t.startsWith("maxspeed")) {
+//					type = MAXSPEED;
+//				} else if(t.startsWith("oneway")) {
+//					type = ONEWAY;
+//				} else if(t.startsWith("lanes")) {
+//					type = LANES;
+//				} else if(t.startsWith("access")) {
+//					type = ACCESS;
+//				}
+			} else if(t.startsWith("access") && v != null){
+				type = ACCESS;
 			} else if(t.equalsIgnoreCase("maxspeed") && v != null){
 				type = MAXSPEED;
 				floatValue = RouteDataObject.parseSpeed(v, 0);
@@ -265,6 +287,21 @@ public class BinaryMapRouteReaderAdapter {
 			}
 		}
 		
+		public void completeRouteEncodingRules() {
+			for(int i = 0; i < routeEncodingRules.size(); i++) {
+				RouteTypeRule rtr = routeEncodingRules.get(i);
+				if(rtr != null && rtr.conditional()) {
+					String tag = rtr.getNonConditionalTag();
+					for(RouteTypeCondition c : rtr.conditions ) {
+						if(tag != null && c.value != null) {
+							c.ruleid = findOrCreateRouteType(tag, c.value);
+						}
+					}
+					
+				}
+			}
+		}
+		
 		public List<RouteSubregion> getSubregions(){
 			return subregions;
 		}
@@ -336,14 +373,8 @@ public class BinaryMapRouteReaderAdapter {
 				rdo.types = new int[o.types.length];
 				for (int i = 0; i < o.types.length; i++) {
 					RouteTypeRule tp = o.region.routeEncodingRules.get(o.types[i]);
-					int ruleId = searchRouteEncodingRule(tp.getTag(), tp.getValue());
-					if(ruleId != -1) {
-						rdo.types[i] = ruleId;
-					} else {
-						ruleId = routeEncodingRules.size() ;
-						initRouteEncodingRule(ruleId, tp.getTag(), tp.getValue());
-						rdo.types[i] = ruleId;
-					}
+					int ruleId = findOrCreateRouteType(tp.getTag(), tp.getValue());
+					rdo.types[i] = ruleId;
 				}
 			}
 			if (o.pointTypes != null) {
@@ -408,7 +439,16 @@ public class BinaryMapRouteReaderAdapter {
 		}
 
 
-		
+		public int findOrCreateRouteType(String tag, String value) {
+			int ruleId = searchRouteEncodingRule(tag, value);
+			if(ruleId == -1) {
+				ruleId = routeEncodingRules.size() ;
+				initRouteEncodingRule(ruleId, tag, value);
+			}
+			return ruleId;
+		}
+
+
 	}
 	
 	// Used in C++
@@ -484,6 +524,7 @@ public class BinaryMapRouteReaderAdapter {
 			int tag = WireFormat.getTagFieldNumber(t);
 			switch (tag) {
 			case 0:
+				region.completeRouteEncodingRules();
 				return;
 			case OsmandOdb.OsmAndRoutingIndex.NAME_FIELD_NUMBER :
 				region.name = codedIS.readString();

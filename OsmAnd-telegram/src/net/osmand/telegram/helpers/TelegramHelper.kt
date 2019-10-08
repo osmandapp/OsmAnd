@@ -271,8 +271,13 @@ class TelegramHelper private constructor() {
 		fun applyAuthenticationParameter(parameterType: TelegramAuthenticationParameterType, parameterValue: String) {
 			if (!TextUtils.isEmpty(parameterValue)) {
 				when (parameterType) {
-					PHONE_NUMBER -> client!!.send(TdApi.SetAuthenticationPhoneNumber(parameterValue, false, false), AuthorizationRequestHandler())
-					CODE -> client!!.send(TdApi.CheckAuthenticationCode(parameterValue, "", ""), AuthorizationRequestHandler())
+					PHONE_NUMBER -> client!!.send(
+						TdApi.SetAuthenticationPhoneNumber(
+							parameterValue,
+							TdApi.PhoneNumberAuthenticationSettings(false, false, false)
+						), AuthorizationRequestHandler()
+					)
+					CODE -> client!!.send(TdApi.CheckAuthenticationCode(parameterValue), AuthorizationRequestHandler())
 					PASSWORD -> client!!.send(TdApi.CheckAuthenticationPassword(parameterValue), AuthorizationRequestHandler())
 				}
 			}

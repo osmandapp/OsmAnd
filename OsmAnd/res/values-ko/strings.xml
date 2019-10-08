@@ -1721,4 +1721,5 @@
     <string name="no_map_markers_found"/>
     <string name="no_waypoints_found"/>
     <string name="turn_on_profile_desc">이 설정을 사용하려면 응용 프로그램 프로파일을 하나 이상 켜 주십시오.</string>
+    <string name="switch_profile">프로필 전환</string>
 </resources>

@@ -5,11 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.google.openlocationcode.OpenLocationCode;
-import com.jwetherell.openmap.common.LatLonPoint;
-import com.jwetherell.openmap.common.UTMPoint;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
 import net.osmand.LocationConvert;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
@@ -17,6 +13,9 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.util.Algorithms;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class PointDescription {
 	private String type = "";

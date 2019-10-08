@@ -372,7 +372,7 @@
     <string name="vector_data_missing">הורדת נתונים (‚בלתי מקוונים’) כדי להשתמש במפות באופן בלתי מקוון.</string>
     <string name="local_index_gpx_info_show">"
 \n
-\nיש ללחוץ לחיצה ארוכה כדי להגיע לאפשרויות"</string>
+\nלחיצה ארוכה לאפשרויות"</string>
     <string name="local_index_installed">גרסה מקומית</string>
     <string name="local_index_items_backuped">%1$d מתוך %2$d פריטים הושבתו.</string>
     <string name="local_index_items_deleted">%1$d מתוך %2$d פריטים נמחקו.</string>
@@ -410,9 +410,9 @@
 \n\t\n\tכדי להשתמש בה יש להפעיל את \'תפריט\' -&gt; \'הגדרת תצוגה\' -&gt; \'מקור המפה…\' -&gt; \'מפות וקטוריות בלתי מקוונות\'.</string>
     <string name="choose_audio_stream">פלט ההנחיה הקולית</string>
     <string name="choose_audio_stream_descr">נא לבחור בערוץ להשמעת ההנחיה הקולית.</string>
-    <string name="voice_stream_voice_call">שמע שיחה (גם כדי להפריע לרמקולי ה־BT של האוטו)</string>
+    <string name="voice_stream_voice_call">שמע שיחה (כדי להפריע לרמקולי ה־BT של המכונית)</string>
     <string name="voice_stream_notification">שמע להתרעה</string>
-    <string name="voice_stream_music">שמע למוזיקה/מדיה</string>
+    <string name="voice_stream_music">שמע לניווט/מדיה</string>
     <string name="warning_tile_layer_not_downloadable">ליישומון אין אפשרות להוריד את שכבת המפה %1$s, התקנה מחדש עשויה לסייע.</string>
     <string name="overlay_transparency_descr">שינוי שקיפות שכבת העל.</string>
     <string name="overlay_transparency">שקיפות שכבת העל</string>
@@ -1227,8 +1227,8 @@
     <string name="lang_ro">רומנית</string>
     <string name="lang_ru">רוסית</string>
     <string name="lang_sc">סרדו</string>
-    <string name="lang_sr">סרבית</string>
-    <string name="lang_sr_latn">סרבית (לטינית)</string>
+    <string name="lang_sr">סרבית קירילית</string>
+    <string name="lang_sr_latn">סרבית לטינית</string>
     <string name="lang_zh_cn">סינית מפושטת</string>
     <string name="lang_zh_hk">סינית (הונג קונג)</string>
     <string name="lang_sk">סלובקית</string>
@@ -1918,7 +1918,7 @@
     <string name="simulate_your_location_stop_descr">הפסקת הדמיית המיקום שלך.</string>
     <string name="simulate_your_location_descr">הדמיית המיקום שלך באמצעות נתיב מחושב או מסלול GPX מוקלט.</string>
     <string name="looking_up_address">הכתובת בחיפוש</string>
-    <string name="av_locations_descr">קובץ GPX עם מיקומי הערות.</string>
+    <string name="av_locations_descr">קובץ GPX עם מיקומים.</string>
     <string name="routing_attr_avoid_shuttle_train_name">התעלמות מרכבות שאטל</string>
     <string name="routing_attr_avoid_shuttle_train_description">הימנעות מרכבות שאטל</string>
     <string name="rendering_value_boldOutline_name">קו מתאר מודגש</string>
@@ -2897,7 +2897,7 @@
     <string name="shared_string_capacity">נפח</string>
     <string name="shared_string_width">רוחב</string>
     <string name="shared_string_height">גובה</string>
-    <string name="routeInfo_roadClass_name">מחלקה</string>
+    <string name="routeInfo_roadClass_name">סוג דרך</string>
     <string name="routeInfo_surface_name">משטח</string>
     <string name="routeInfo_smoothness_name">רכות</string>
     <string name="routeInfo_steepness_name">תלילות</string>
@@ -2911,7 +2911,7 @@
     <string name="tracks_on_map">עקבות מוצגים</string>
     <string name="time_of_day">השעה ביום</string>
     <string name="by_transport_type">עם %1$s</string>
-    <string name="step_by_step">שלב אחר שלב</string>
+    <string name="step_by_step">פנייה אחר פנייה</string>
     <string name="routeInfo_road_types_name">סוגי כבישים</string>
     <string name="exit_at">לצאת ב־</string>
     <string name="quick_action_show_hide_gpx_tracks">הצגה/הסתרה של מסלולי GPX</string>
@@ -3071,10 +3071,210 @@
     <string name="edit_profile_screen_options_subtitle">נא לבחור את הגדרות בררת המחדל למסך עבור הפרופיל</string>
     <string name="edit_profile_nav_settings_subtitle">נא לבחור את הגדרות הניווט כבררת מחדל עבור פרופיל</string>
     <string name="routing_attr_max_num_changes_description">ציון מספר השינויים המרבי</string>
-    <string name="routing_attr_max_num_changes_name">מספר שינויים</string>
+    <string name="routing_attr_max_num_changes_name">מספר החלפות</string>
     <string name="turn_screen_on_router">להתעורר בפניות</string>
     <string name="turn_screen_on_time_descr">להגדיר את זמן התעוררות המסך.</string>
     <string name="turn_screen_on_sensor">להשתמש בחיישן מרחק</string>
     <string name="turn_screen_on_sensor_descr">יש לנופף ביד מול החלק העליון של חזית המכשיר כדי להדליק את המסך בזמן ניווט.</string>
     <string name="shared_string_track_is_saved">המסלול %s נשמר</string>
+    <string name="profile_alert_cant_delete_base">לא ניתן למחוק את הפרופילים הבסיסיים של OsmAnd</string>
+    <string name="profile_alert_need_save_title">שמירת שינויים</string>
+    <string name="profile_alert_need_save_msg">עליך לשמור את השינויים לפרופיל כדי להמשיך</string>
+    <string name="profile_alert_delete_title">מחיקת פרופיל</string>
+    <string name="profile_alert_delete_msg">למחוק את הפרופיל %s\?</string>
+    <string name="select_base_profile_dialog_title">בחירת פרופיל בסיס</string>
+    <string name="process_downloading_service">שירות ההורדות של OsmAnd</string>
+    <string name="press_again_to_change_the_map_orientation">יש לגעת שוב כדי לשנות את כיוון המפה</string>
+    <string name="default_speed_dialog_msg">משמש לחישוב מועד ההגעה הצפוי במהלך הניווט</string>
+    <string name="new_profile">פרופיל חדש</string>
+    <string name="shared_string_crash">קריסה</string>
+    <string name="last_launch_crashed">הטעינה האחרונה של OsmAnd נכשלה. נא לסייע לנו לשפר את OsmAnd על ידי שיתוף הודעת השגיאה.</string>
+    <string name="button_rate">דירוג</string>
+    <string name="shared_string_privacy_policy">מדיניות פרטיות</string>
+    <string name="help_us_make_osmand_better">נשמח לקבל סיוע בשיפור OsmAnd!</string>
+    <string name="choose_data_to_share">נא לבחור את סוג הנתונים שברצונך לשתף:</string>
+    <string name="downloaded_maps">מפות התקבלו</string>
+    <string name="visited_screens">מסכים בהם ביקרת</string>
+    <string name="collected_data_descr">נא לציין איזה סוג של מידע מוסכם עליך לשתף עם OsmAnd.</string>
+    <string name="visited_screens_collect_descr">מסייע לנו להבין אילו תכונות של OsmAnd הן הנפוצות ביותר.</string>
+    <string name="privacy_and_security_change_descr">נגיעה ב„הרשאה” מביעה את הסכמתך עם %1$s שלנו</string>
+    <string name="settings_privacy_and_security">פרטיות ואבטחה</string>
+    <string name="settings_privacy_and_security_desc">נא לבחור אילו נתונים ישותפו אתנו</string>
+    <string name="shared_string_no_thank_you">לא, תודה</string>
+    <string name="shared_string_allow">הרשאה</string>
+    <string name="profile_name_hint">שם הפרופיל</string>
+    <string name="nav_type_hint">סוג ניווט</string>
+    <string name="app_mode_taxi">מונית</string>
+    <string name="app_mode_shuttle_bus">שאטל</string>
+    <string name="app_mode_subway">רכבת תחתית</string>
+    <string name="app_mode_horse">סוס</string>
+    <string name="app_mode_helicopter">הליקופטר</string>
+    <string name="app_mode_skiing">סקי</string>
+    <string name="base_profile_descr_ski">סקי</string>
+    <string name="show_compass_ruler">הצגת סרגל מצפן</string>
+    <string name="hide_compass_ruler">הסתרת סרגל מצפן</string>
+    <string name="select_icon_profile_dialog_title">בחירת סמל</string>
+    <string name="settings_routing_mode_string">מצב: %s</string>
+    <string name="settings_derived_routing_mode_string">מצב משתמש, נגזר מתוך: %s</string>
+    <string name="routing_profile_ski">סקי</string>
+    <string name="profile_type_descr_string">סוג: %s</string>
+    <string name="profile_type_base_string">פרופיל בסיס</string>
+    <string name="profile_alert_need_routing_type_title">בחירת סוג ניווט</string>
+    <string name="profile_alert_need_routing_type_msg">נא לבחור בסוג ניווט לפרופיל החדש ביישומון</string>
+    <string name="profile_alert_need_profile_name_title">נא להקליד שם פרופיל</string>
+    <string name="profile_alert_need_profile_name_msg">שם הפרופיל לא אמור להישאר ריק!</string>
+    <string name="profile_alert_duplicate_name_title">שם כפול</string>
+    <string name="profile_alert_duplicate_name_msg">כבר יש פרופיל בשם הזה</string>
+    <string name="shared_string_color_magenta">מג׳נטה</string>
+    <string name="shared_string_icon">סמל</string>
+    <string name="collected_data">נתונים שנאספו</string>
+    <string name="gpx_join_gaps">צירוף מרווחים</string>
+    <string name="app_mode_camper">מחנאות</string>
+    <string name="app_mode_campervan">רכב מחנאות</string>
+    <string name="rendering_attr_showLez_description">הצגת אזורים עם פליטה נמוכה במפה. לא משפיע על הניווט.</string>
+    <string name="rendering_attr_showLez_name">הצגת אזורים עם פליטה נמוכה</string>
+    <string name="temporary_conditional_routing">התייחסות למגבלות זמניות</string>
+    <string name="rate_dialog_descr">נא להקדיש לנו 30 שניות כדי לשתף אתנו את המשוב והדירוג שלך על עבודתנו ב־Google Play.</string>
+    <string name="downloaded_maps_collect_descr">מסייע לנו להבין אילו מפות באילו אזורים ומדינות הן הפופולריות ביותר.</string>
+    <string name="osmand_routing_promo">באפשרותך להוסיף גרסה משופצת משלך ל־routing.xml תחת ‎..osmand/routing</string>
+    <string name="select_nav_profile_dialog_title">בחירת סוג ניווט</string>
+    <string name="base_profile_descr_car">מכונית, משאית, אופנוע</string>
+    <string name="base_profile_descr_bicycle">אופני הרים, טוסטוס, סוס</string>
+    <string name="base_profile_descr_pedestrian">הליכה, טיול הרים, ריצה</string>
+    <string name="base_profile_descr_public_transport">כל סוגי התחב״צ</string>
+    <string name="base_profile_descr_boat">ספינה, חתירה, שיט</string>
+    <string name="base_profile_descr_aircraft">טיסה, דאייה</string>
+    <string name="shared_string_default">בררת מחדל</string>
+    <string name="routing_profile_straightline">קו ישר</string>
+    <string name="routing_profile_broutrer">BRouter (לא מקוון)</string>
+    <string name="osmand_default_routing">ניווט עם OsmAnd</string>
+    <string name="custom_routing">פרופיל ניווט מותאם אישית</string>
+    <string name="special_routing_type">ניווט מיוחד</string>
+    <string name="third_party_routing_type">ניווט עם צד־שלישי</string>
+    <string name="application_profiles_descr">נא לבחור את הפרופילים שיופיעו ביישומון.</string>
+    <string name="application_profiles">פרופילים ביישומון</string>
+    <string name="quick_action_need_to_add_item_to_list">עליך להוסיף לפחות פריט אחד לרשימה בהגדרות הפעולה המהירה</string>
+    <string name="routing_attr_piste_type_downhill_name">סקי אלפיני/במורדות</string>
+    <string name="routing_attr_piste_type_downhill_description">מדרונים לסקי אלפיני או במורד ההר וגישה למעליות סקי.</string>
+    <string name="routing_attr_piste_type_sled_name">מזחלת</string>
+    <string name="routing_attr_piste_type_sled_description">מדרונים לגלישה עם מזחלת.</string>
+    <string name="routing_attr_allow_intermediate_name">לאפשר ניווטי ביניים</string>
+    <string name="routing_attr_allow_advanced_name">לאפשר מסלולים מתקדמים</string>
+    <string name="routing_attr_allow_advanced_description">מסלולים קשים, עם מכשולים מסוכנים ומקטעים תלולים.</string>
+    <string name="routing_attr_allow_expert_name">לאפשר מסלולי מקצוענים</string>
+    <string name="routing_attr_allow_expert_description">מסלולים קשים במיוחד, עם מכשולים וסביבה מסוכנים.</string>
+    <string name="routing_attr_allow_classic_only_name">לאפשר מסלולים קלסיים בלבד</string>
+    <string name="routing_attr_difficulty_preference_name">רמת קושי מועדפת</string>
+    <string name="rendering_attr_highway_class_track_grade1_name">רמה 1</string>
+    <string name="rendering_attr_highway_class_track_grade2_name">רמה 2</string>
+    <string name="rendering_attr_highway_class_track_grade3_name">רמה 3</string>
+    <string name="rendering_attr_highway_class_track_grade4_name">רמה 4</string>
+    <string name="rendering_attr_highway_class_track_grade5_name">רמה 5</string>
+    <string name="routing_profile_geocoding">גאוקודינג</string>
+    <string name="routing_attr_piste_type_skitour_name">טיול סקי</string>
+    <string name="routing_attr_piste_type_skitour_description">מסלולי טיולי סקי.</string>
+    <string name="new_route_calculated_dist_dbg">מסלול: מרחק %s, זמן מנתב מסלול %s 
+\nחישוב: %.1f שנ׳, %d מסלולים, %d אריחים)</string>
+    <string name="make_osmand_better_descr">לאפשר ל־OsmAnd לאסוף ולעבד נתונים אלמוניים בנוגע לשימוש ביישומון. אנו לא אוספים או מאחסנים נתונים על המיקום שלך, או על מיקום בהם צפית במפה.
+\n
+\nבאפשרותך לשנות את בחירתך בכל עת דרך הגדרות &gt; פרטיות ואבטחה.</string>
+    <string name="routing_attr_piste_type_nordic_name">סקי למרחקים/נורדי</string>
+    <string name="routing_attr_piste_type_nordic_description">מסלולים לסקי נורדי או למרחקים.</string>
+    <string name="routing_attr_allow_intermediate_description">מסלולים קשים יותר עם מקטעים יותר תלולים. בדרך כלל עם מכשולים שרצוי להימנע מהם.</string>
+    <string name="release_3_4">• פרופילי יישומון: יצירת פרופיל שמותאם אישית לצרכיך, עם סמל וצבע לבחירתך
+\n
+\n • מעתה ניתן להתאים לפרופיל את המהירות המרבית/מזערית ואת בררת המחדל
+\n
+\n • נוסף וידג׳ט לנקודות הציון הנוכחיות
+\n
+\n • נוספו אפשרויות להצגת מצפן וסרגל רדיוס במפה
+\n
+\n • תיקון תיעוד מסלול ברקע
+\n
+\n • שיפור הורדות רקע של מפות
+\n
+\n • הוחזרה האפשרות ‚הפעלת המסך’
+\n
+\n • תוקנה בחירת השפות בוויקיפדיה
+\n
+\n • תוקנה התנהגות כפתור המצפן במהלך ניווט
+\n
+\n • תיקוני תקלות נוספים
+\n
+\n</string>
+    <string name="lang_oc">אוקסיטנית</string>
+    <string name="select_base_profile_dialog_message">באפשרותך לבסס את הפרופיל שלך על אחד מפרופילי בררת המחדל של היישומון, פעולה זו מגדירה את ההגדרות הבסיסיות כמו אופן הצגת וידג׳טים כבררת מחדל ויחידות של מהירות ומרחק. אלו פרופילי בררת המחדל של היישומון, יחד עם דוגמאות של פרופילים מותאמים אישית ניתן להרחיב אותם לכדי:</string>
+    <string name="app_mode_wagon">קרון</string>
+    <string name="app_mode_pickup_truck">טנדר</string>
+    <string name="day">יום</string>
+    <string name="days_2_4">ימים</string>
+    <string name="days_5">ימים</string>
+    <string name="week">שבוע</string>
+    <string name="weeks_2_4">שבועות</string>
+    <string name="weeks_5">שבועות</string>
+    <string name="month">חודש</string>
+    <string name="months_2_4">חודשיים</string>
+    <string name="months_5">חודשים</string>
+    <string name="configure_profile_info">כל ההגדרות שלהלן משפיעות על הפרופיל הנבחר בלבד.</string>
+    <string name="shared_string_example">דוגמה</string>
+    <string name="discard_changes">התעלמות מהשינויים</string>
+    <string name="apply_to_current_profile">להחיל על הפרופיל הנוכחי %1$s</string>
+    <string name="apply_to_all_profiles">להחיל על כל הפרופילים</string>
+    <string name="start_up_message_pref">הודעת פתיחה</string>
+    <string name="analytics_pref_title">ניתוח</string>
+    <string name="turn_screen_on_info">הצגת מפה במהלך הניווט מעל מסך הנעילה.</string>
+    <string name="route_parameters_info">הגדרות אלו ישפיעו על הרכבת המסלול. הן יחולו על הפרופיל הנבחר: %1$s.</string>
+    <string name="wake_time">זמן התעוררות</string>
+    <string name="units_and_formats">יחידות ותבניות</string>
+    <string name="appearance">מראה</string>
+    <string name="map_look_descr">מראה המפה</string>
+    <string name="map_look">מראה המפה</string>
+    <string name="list_of_installed_plugins">רשימת התוספים המותקנים</string>
+    <string name="configure_navigation">הגדרת ניווט</string>
+    <string name="general_settings_profile_descr">ערכת העיצוב של היישומון, יחידות, אזור</string>
+    <string name="configure_profile">הגדרת פרופיל</string>
+    <string name="screen_alerts_descr">התראות תופענה בפינה הימנית התחתונה של המסך במהלך הניווט.</string>
+    <string name="switch_profile">החלפת פרופיל</string>
+    <string name="language_and_output">שפה ופלט</string>
+    <string name="reset_to_default">איפוס לבררת מחדל</string>
+    <string name="manage_profiles_descr">יצירה, ייבוא ועריכת פרופילים</string>
+    <string name="manage_profiles">ניהולי פרופילי יישומון…</string>
+    <string name="osmand_settings_descr">השפעה על היישומון כולו</string>
+    <string name="osmand_settings">הגדרות OsmAnd</string>
+    <string name="copy_from_other_profile">העתקה מפרופיל אחר</string>
+    <string name="turn_screen_on">הפעלת המסך</string>
+    <string name="map_during_navigation_info">מפה במהלך ניווט</string>
+    <string name="map_during_navigation">מפה במהלך ניווט</string>
+    <string name="shared_string_other">אחר</string>
+    <string name="vehicle_parameters_descr">רוחב, גובה, מהירות</string>
+    <string name="vehicle_parameters">מאפייני כלי הרכב</string>
+    <string name="voice_announces_info">הכרזות קוליות מושמעות רק במהלך הניווט.</string>
+    <string name="voice_announces_descr">הנחיות והכרזות ניווט</string>
+    <string name="voice_announces">הכרזות קוליות</string>
+    <string name="screen_alerts">התראות מסך</string>
+    <string name="route_parameters_descr">הגדרת מאפייני מסלול</string>
+    <string name="route_parameters">מאפייני מסלול</string>
+    <string name="application_profile_changed">פרופיל היישומון השתנה לכדי „%s”</string>
+    <string name="routing_attr_allow_skating_only_name">תמיד מסלולים להחלקה בלבד</string>
+    <string name="routing_attr_allow_skating_only_description">מסלולים שעברו גרומינג לסגנון חופשי או להחלקה בלבד רק עם מסלולים קלסיים.</string>
+    <string name="year">שנה</string>
+    <string name="years_2_4">שנים</string>
+    <string name="years_5">שנים</string>
+    <string name="months_3">שלושה חודשים</string>
+    <string name="price_free">חינם</string>
+    <string name="get_discount_title">לקבל את %1$d %2$s ב־%3$s הנחה.</string>
+    <string name="get_free_trial_title">התחלת ההתנסות שלך למשך %1$d %2$s בחינם.</string>
+    <string name="get_discount_first_part">%1$s למשך %2$s הראשונים</string>
+    <string name="get_discount_first_few_part">%1$s למשך %2$s הראשונים</string>
+    <string name="get_discount_second_part">לאחר מכן %1$s</string>
+    <string name="cancel_subscription">ביטול מינוי</string>
+    <string name="price_and_discount">%1$s • חיסכון של %2$s</string>
+    <string name="coordinates_format_info">התצורה הנבחרת תחול על כל המיקומים ביישומון.</string>
+    <string name="pref_selected_by_default_for_profiles">הגדרה זו נבחרת כבררת מחדל על הפרופילים: %s</string>
+    <string name="change_default_settings">החלפת הגדרות בררת מחדל</string>
+    <string name="logcat_buffer">"זיכרון זמני  יומנים"</string>
+    <string name="shared_string_by_default">כבררת מחדל</string>
+    <string name="plugins_settings">הגדרות תוסף</string>
+    <string name="download_detaile_map">הורדת המפה המפורטת %s, כדי לצפות באזור זה.</string>
+    <string name="download_detailed_map">הורדת מפת %s מפורטת כדי לצפות באזור הזה.</string>
 </resources>

@@ -4,13 +4,15 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.AudioAttributes;
 import android.net.Uri;
+import android.os.Build;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.TextToSpeech.OnInitListener;
 import android.speech.tts.TextToSpeech.OnUtteranceCompletedListener;
 import android.support.v7.app.AlertDialog;
-
 import android.widget.Toast;
+
 import net.osmand.PlatformUtil;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
@@ -114,6 +116,12 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 		if (mTts != null && !vrt.isMute() && speechAllowed) {
 			if (ttsRequests++ == 0) {
 				requestAudioFocus();
+				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+					mTts.setAudioAttributes(new AudioAttributes.Builder()
+							.setUsage(ctx.getSettings().AUDIO_USAGE.get())
+							.setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
+							.build());
+				}
 				// Delay first prompt of each batch to allow BT SCO connection being established
 				if (ctx.getSettings().AUDIO_STREAM_GUIDANCE.getModeValue(getApplicationMode()) == 0) {
 					ttsRequests++;

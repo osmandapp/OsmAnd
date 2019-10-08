@@ -39,6 +39,7 @@ import net.osmand.aidl.gpx.AGpxBitmap;
 import net.osmand.aidl.gpx.AGpxFile;
 import net.osmand.aidl.gpx.AGpxFileDetails;
 import net.osmand.aidl.gpx.ASelectedGpxFile;
+import net.osmand.aidl.gpx.GpxColorParams;
 import net.osmand.aidl.gpx.StartGpxRecordingParams;
 import net.osmand.aidl.gpx.StopGpxRecordingParams;
 import net.osmand.aidl.maplayer.AMapLayer;
@@ -110,6 +111,7 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -242,6 +244,7 @@ public class OsmandAidlApi {
 
 	public void onDestroyMapActivity(MapActivity mapActivity) {
 		app.getAppCustomization().removeListener(mapActivity);
+		aMapPointUpdateListener = null;
 		mapActivityActive = false;
 		for (BroadcastReceiver b : receivers.values()) {
 			if(b == null) {
@@ -1491,6 +1494,26 @@ public class OsmandAidlApi {
 		return false;
 	}
 
+	boolean getGpxColor(GpxColorParams params) {
+		if (params != null) {
+			List<GpxDataItem> gpxDataItems = app.getGpxDatabase().getItems();
+			for (GpxDataItem dataItem : gpxDataItems) {
+				File file = dataItem.getFile();
+				if (file.exists()) {
+					if (file.getName().equals(params.getFileName())) {
+						int color = dataItem.getColor();
+						if (color != 0) {
+							String colorName = ConfigureMapMenu.GpxAppearanceAdapter.parseTrackColorName(app.getRendererRegistry().getCurrentSelectedRenderer(), color);
+							params.setGpxColor(colorName);
+							return true;
+						}
+					}
+				}
+			}
+		}
+		return false;
+	}
+
 	boolean removeGpx(String fileName) {
 		if (!Algorithms.isEmpty(fileName)) {
 			final File f = app.getAppPath(IndexConstants.GPX_INDEX_DIR + fileName);
@@ -1771,6 +1794,16 @@ public class OsmandAidlApi {
 		app.getAppCustomization().registerNavDrawerItems(activity, adapter);
 	}
 
+	public ConnectedApp getConnectedApp(@NonNull String pack) {
+		List<ConnectedApp> connectedApps = getConnectedApps();
+		for (ConnectedApp app : connectedApps) {
+			if (app.pack.equals(pack)) {
+				return app;
+			}
+		}
+		return null;
+	}
+
 	public List<ConnectedApp> getConnectedApps() {
 		List<ConnectedApp> res = new ArrayList<>(connectedApps.size());
 		PackageManager pm = app.getPackageManager();
@@ -1788,9 +1821,10 @@ public class OsmandAidlApi {
 		return res;
 	}
 
-	public void switchEnabled(@NonNull ConnectedApp app) {
-		app.enabled = !app.enabled;
-		saveConnectedApps();
+	public boolean switchEnabled(@NonNull ConnectedApp connectedApp) {
+		connectedApp.enabled = !connectedApp.enabled;
+		ApplicationMode selectedAppMode = app.getSettings().APPLICATION_MODE.get();
+		return saveConnectedApps(selectedAppMode, connectedApps);
 	}
 
 	boolean isAppEnabled(@NonNull String pack) {
@@ -1798,12 +1832,22 @@ public class OsmandAidlApi {
 		if (app == null) {
 			app = new ConnectedApp(pack, true);
 			connectedApps.put(pack, app);
-			saveConnectedApps();
+			saveNewConnectedApp(app);
 		}
 		return app.enabled;
 	}
 
-	private void saveConnectedApps() {
+	private void saveNewConnectedApp(ConnectedApp connectedApp) {
+		for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
+			Map<String, ConnectedApp> connectedApps = loadConnectedAppsForMode(mode);
+			if (!connectedApps.containsKey(connectedApp.pack)) {
+				connectedApps.put(connectedApp.pack, connectedApp);
+				saveConnectedApps(mode, connectedApps);
+			}
+		}
+	}
+
+	private boolean saveConnectedApps(ApplicationMode mode, Map<String, ConnectedApp> connectedApps) {
 		try {
 			JSONArray array = new JSONArray();
 			for (ConnectedApp app : connectedApps.values()) {
@@ -1812,15 +1856,24 @@ public class OsmandAidlApi {
 				obj.put(ConnectedApp.PACK_KEY, app.pack);
 				array.put(obj);
 			}
-			app.getSettings().API_CONNECTED_APPS_JSON.set(array.toString());
+			return app.getSettings().API_CONNECTED_APPS_JSON.setModeValue(mode, array.toString());
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
+		return false;
 	}
 
-	private void loadConnectedApps() {
+	public void loadConnectedApps() {
+		ApplicationMode selectedAppMode = app.getSettings().APPLICATION_MODE.get();
+		Map<String, ConnectedApp> appsForMode = loadConnectedAppsForMode(selectedAppMode);
+		connectedApps.clear();
+		connectedApps.putAll(appsForMode);
+	}
+
+	private Map<String, ConnectedApp> loadConnectedAppsForMode(ApplicationMode mode) {
+		Map<String, ConnectedApp> connectedApps = new HashMap<>();
 		try {
-			JSONArray array = new JSONArray(app.getSettings().API_CONNECTED_APPS_JSON.get());
+			JSONArray array = new JSONArray(app.getSettings().API_CONNECTED_APPS_JSON.getModeValue(mode));
 			for (int i = 0; i < array.length(); i++) {
 				JSONObject obj = array.getJSONObject(i);
 				String pack = obj.optString(ConnectedApp.PACK_KEY, "");
@@ -1830,6 +1883,7 @@ public class OsmandAidlApi {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
+		return connectedApps;
 	}
 
 	boolean setNavDrawerLogo(@Nullable String uri) {
@@ -2258,6 +2312,10 @@ public class OsmandAidlApi {
 
 		public String getName() {
 			return name;
+		}
+
+		public String getPack() {
+			return pack;
 		}
 
 		public Drawable getIcon() {

@@ -139,6 +139,7 @@ public class CurrentPositionHelper {
 			}
 			RoutingConfiguration cfg = app.getRoutingConfig().build(p, 10,
 					new HashMap<String, String>());
+			cfg.routeCalculationTime = System.currentTimeMillis();
 			ctx = new RoutePlannerFrontEnd().buildRoutingContext(cfg, null, rs);
 			RoutingConfiguration defCfg = app.getRoutingConfig().build("geocoding", 10,
 					new HashMap<String, String>());

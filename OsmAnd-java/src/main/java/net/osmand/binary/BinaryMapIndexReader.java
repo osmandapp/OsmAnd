@@ -71,10 +71,12 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import gnu.trove.list.array.TIntArrayList;
+import gnu.trove.list.array.TLongArrayList;
 import gnu.trove.map.TIntObjectMap;
 import gnu.trove.map.hash.TIntObjectHashMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
 import gnu.trove.set.hash.TIntHashSet;
+import gnu.trove.set.hash.TLongHashSet;
 
 public class BinaryMapIndexReader {
 
@@ -502,9 +504,9 @@ public class BinaryMapIndexReader {
 				result.put(filePointer, transportRoute);
 				finishInit.add(transportRoute);	
 			}
-			transportAdapter.initializeStringTable(ind, stringTable);
+			TIntObjectHashMap<String> indexedStringTable = transportAdapter.initializeStringTable(ind, stringTable);
 			for(TransportRoute transportRoute : finishInit ) {
-				transportAdapter.initializeNames(false, transportRoute, stringTable);
+				transportAdapter.initializeNames(false, transportRoute, indexedStringTable);
 			}
 			
 		}
@@ -554,27 +556,29 @@ public class BinaryMapIndexReader {
 		}
 		return false;
 	}
+	
+	public List<TransportStop> searchTransportIndex(TransportIndex index, SearchRequest<TransportStop> req) throws IOException {
+		if (index.stopsFileLength == 0 || index.right < req.left || index.left > req.right || index.top > req.bottom
+				|| index.bottom < req.top) {
+			return req.getSearchResults();
+		}
+		codedIS.seek(index.stopsFileOffset);
+		int oldLimit = codedIS.pushLimit(index.stopsFileLength);
+		int offset = req.searchResults.size();
+		TIntObjectHashMap<String> stringTable = new TIntObjectHashMap<String>();
+		transportAdapter.searchTransportTreeBounds(0, 0, 0, 0, req, stringTable);
+		codedIS.popLimit(oldLimit);
+		TIntObjectHashMap<String> indexedStringTable = transportAdapter.initializeStringTable(index, stringTable);
+		for (int i = offset; i < req.searchResults.size(); i++) {
+			TransportStop st = req.searchResults.get(i);
+			transportAdapter.initializeNames(indexedStringTable, st);
+		}
+		return req.getSearchResults();
+	}
+	
 	public List<TransportStop> searchTransportIndex(SearchRequest<TransportStop> req) throws IOException {
 		for (TransportIndex index : transportIndexes) {
-			if (index.stopsFileLength == 0 || index.right < req.left || index.left > req.right || index.top > req.bottom
-					|| index.bottom < req.top) {
-				continue;
-			}
-			if (req.stringTable != null) {
-				req.stringTable.clear();
-			}
-			codedIS.seek(index.stopsFileOffset);
-			int oldLimit = codedIS.pushLimit(index.stopsFileLength);
-			int offset = req.searchResults.size();
-			transportAdapter.searchTransportTreeBounds(0, 0, 0, 0, req);
-			codedIS.popLimit(oldLimit);
-			if (req.stringTable != null) {
-				transportAdapter.initializeStringTable(index, req.stringTable);
-				for (int i = offset; i < req.searchResults.size(); i++) {
-					TransportStop st = req.searchResults.get(i);
-					transportAdapter.initializeNames(req.stringTable, st);
-				}
-			}
+			searchTransportIndex(index, req);
 		}
 		if (req.numberOfVisitedObjects > 0) {
 			log.debug("Search is done. Visit " + req.numberOfVisitedObjects + " objects. Read " + req.numberOfAcceptedObjects + " objects."); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
@@ -1520,7 +1524,6 @@ public class BinaryMapIndexReader {
 		if (stops != null) {
 			request.searchResults = stops;
 		}
-		request.stringTable = new TIntObjectHashMap<String>();
 		request.left = sleft >> (31 - TRANSPORT_STOP_ZOOM);
 		request.right = sright >> (31 - TRANSPORT_STOP_ZOOM);
 		request.top = stop >> (31 - TRANSPORT_STOP_ZOOM);
@@ -1618,12 +1621,11 @@ public class BinaryMapIndexReader {
 
 		SearchPoiTypeFilter poiTypeFilter = null;
 
-		// internal read information
-		TIntObjectHashMap<String> stringTable = null;
-
 		// cache information
 		TIntArrayList cacheCoordinates = new TIntArrayList();
 		TIntArrayList cacheTypes = new TIntArrayList();
+		TLongArrayList cacheIdsA = new TLongArrayList();
+		TLongArrayList cacheIdsB = new TLongArrayList();
 
 		MapObjectStat stat = new MapObjectStat();
 
@@ -1742,9 +1744,6 @@ public class BinaryMapIndexReader {
 			searchResults = new ArrayList<T>();
 			cacheCoordinates.clear();
 			cacheTypes.clear();
-			if(stringTable != null) {
-				stringTable.clear();
-			}
 			land = false;
 			ocean = false;
 			numberOfVisitedObjects = 0;

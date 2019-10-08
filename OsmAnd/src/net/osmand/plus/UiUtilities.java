@@ -1,9 +1,12 @@
 package net.osmand.plus;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
+import android.graphics.drawable.RippleDrawable;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Build;
@@ -36,6 +39,7 @@ public class UiUtilities {
 	private static final int ORIENTATION_90 = 3;
 	private static final int ORIENTATION_270 = 1;
 	private static final int ORIENTATION_180 = 2;
+	private static final int INVALID_ID = -1;
 
 	public enum DialogButtonType {
 		PRIMARY,
@@ -67,9 +71,7 @@ public class UiUtilities {
 		Drawable d = drawableCache.get(hash);
 		if (d == null) {
 			d = ContextCompat.getDrawable(app, resId);
-			d = DrawableCompat.wrap(d);
-			d.mutate();
-			DrawableCompat.setTint(d, color);
+			d = tintDrawable(d, color);
 
 			drawableCache.put(hash, d);
 		}
@@ -84,9 +86,14 @@ public class UiUtilities {
 		return getDrawable(id, colorId);
 	}
 
-	public Drawable getIcon(@DrawableRes int backgroundId, @DrawableRes int id, @ColorRes int colorId) {
-		Drawable b = getDrawable(backgroundId, 0);
-		Drawable f = getDrawable(id, colorId);
+	public Drawable getLayeredIcon(@DrawableRes int bgIconId, @DrawableRes int foregroundIconId) {
+		return getLayeredIcon(bgIconId, foregroundIconId, 0, 0);
+	}
+
+	public Drawable getLayeredIcon(@DrawableRes int bgIconId, @DrawableRes int foregroundIconId,
+	                               @ColorRes int bgColorId, @ColorRes int foregroundColorId) {
+		Drawable b = getDrawable(bgIconId, bgColorId);
+		Drawable f = getDrawable(foregroundIconId, foregroundColorId);
 		Drawable[] layers = new Drawable[2];
 		layers[0] = b;
 		layers[1] = f;
@@ -105,6 +112,42 @@ public class UiUtilities {
 		return getDrawable(id, light ? R.color.icon_color_default_light : R.color.icon_color_default_dark);
 	}
 
+	public static Drawable getSelectableDrawable(Context ctx) {
+		int bgResId = AndroidUtils.resolveAttribute(ctx, R.attr.selectableItemBackground);
+		if (bgResId != 0) {
+			return ContextCompat.getDrawable(ctx, bgResId);
+		}
+		return null;
+	}
+
+	public static Drawable getColoredSelectableDrawable(Context ctx, int color, float alpha) {
+		Drawable drawable = null;
+		if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+			Drawable bg = getSelectableDrawable(ctx);
+			if (bg != null) {
+				drawable = tintDrawable(bg, getColorWithAlpha(color, alpha));
+			}
+		} else {
+			drawable = AndroidUtils.createPressedStateListDrawable(new ColorDrawable(Color.TRANSPARENT), new ColorDrawable(getColorWithAlpha(color, alpha)));
+		}
+		return drawable;
+	}
+
+	public static Drawable tintDrawable(Drawable drawable, int color) {
+		Drawable coloredDrawable = null;
+		if (drawable != null) {
+			coloredDrawable = DrawableCompat.wrap(drawable);
+			coloredDrawable.mutate();
+			if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP && coloredDrawable instanceof RippleDrawable) {
+				((RippleDrawable) coloredDrawable).setColor(ColorStateList.valueOf(color));
+			} else {
+				DrawableCompat.setTint(coloredDrawable, color);
+			}
+		}
+
+		return coloredDrawable;
+	}
+
 	@ColorRes
 	public static int getDefaultColorRes(Context context) {
 		final OsmandApplication app = (OsmandApplication) context.getApplicationContext();
@@ -117,6 +160,39 @@ public class UiUtilities {
 		// Counting the perceptive luminance - human eye favors green color...
 		double luminance = 1 - (0.299 * Color.red(color) + 0.587 * Color.green(color) + 0.114 * Color.blue(color)) / 255;
 		return luminance < 0.5 ? transparent ? ContextCompat.getColor(context, R.color.color_black_transparent) : Color.BLACK : Color.WHITE;
+	}
+
+	@ColorInt
+	public static int getColorWithAlpha(@ColorInt int color, float ratio) {
+		int newColor = 0;
+		int alpha = Math.round(Color.alpha(color) * ratio);
+		int r = Color.red(color);
+		int g = Color.green(color);
+		int b = Color.blue(color);
+		newColor = Color.argb(alpha, r, g, b);
+		return newColor;
+	}
+
+	@ColorInt
+	public static int mixTwoColors(@ColorInt int color1, @ColorInt int color2, float amount )
+	{
+		final byte ALPHA_CHANNEL = 24;
+		final byte RED_CHANNEL   = 16;
+		final byte GREEN_CHANNEL =  8;
+		final byte BLUE_CHANNEL  =  0;
+
+		final float inverseAmount = 1.0f - amount;
+
+		int a = ((int)(((float)(color1 >> ALPHA_CHANNEL & 0xff )*amount) +
+				((float)(color2 >> ALPHA_CHANNEL & 0xff )*inverseAmount))) & 0xff;
+		int r = ((int)(((float)(color1 >> RED_CHANNEL & 0xff )*amount) +
+				((float)(color2 >> RED_CHANNEL & 0xff )*inverseAmount))) & 0xff;
+		int g = ((int)(((float)(color1 >> GREEN_CHANNEL & 0xff )*amount) +
+				((float)(color2 >> GREEN_CHANNEL & 0xff )*inverseAmount))) & 0xff;
+		int b = ((int)(((float)(color1 & 0xff )*amount) +
+				((float)(color2 & 0xff )*inverseAmount))) & 0xff;
+
+		return a << ALPHA_CHANNEL | r << RED_CHANNEL | g << GREEN_CHANNEL | b << BLUE_CHANNEL;
 	}
 
 	public UpdateLocationViewCache getUpdateLocationViewCache(){
@@ -249,35 +325,49 @@ public class UiUtilities {
 	}
 
 	public static void setupDialogButton(boolean nightMode, View buttonView, DialogButtonType buttonType, CharSequence buttonText) {
+		setupDialogButton(nightMode, buttonView, buttonType, buttonText, INVALID_ID);
+	}
+
+	public static void setupDialogButton(boolean nightMode, View buttonView, DialogButtonType buttonType, CharSequence buttonText, int iconResId) {
 		Context ctx = buttonView.getContext();
 		TextViewEx buttonTextView = (TextViewEx) buttonView.findViewById(R.id.button_text);
 		boolean v21 = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP;
 		View buttonContainer = buttonView.findViewById(R.id.button_container);
+		int textAndIconColorResId = INVALID_ID;
 		switch (buttonType) {
 			case PRIMARY:
 				if (v21) {
 					AndroidUtils.setBackground(ctx, buttonContainer, nightMode, R.drawable.ripple_solid_light, R.drawable.ripple_solid_dark);
 				}
 				AndroidUtils.setBackground(ctx, buttonView, nightMode, R.drawable.dlg_btn_primary_light, R.drawable.dlg_btn_primary_dark);
-				buttonTextView.setTextColor(ContextCompat.getColorStateList(ctx, nightMode ? R.color.dlg_btn_primary_text_dark : R.color.dlg_btn_primary_text_light));
+				textAndIconColorResId = nightMode ? R.color.dlg_btn_primary_text_dark : R.color.dlg_btn_primary_text_light;
 				break;
 			case SECONDARY:
 				if (v21) {
 					AndroidUtils.setBackground(ctx, buttonContainer, nightMode, R.drawable.ripple_solid_light, R.drawable.ripple_solid_dark);
 				}
 				AndroidUtils.setBackground(ctx, buttonView, nightMode, R.drawable.dlg_btn_secondary_light, R.drawable.dlg_btn_secondary_dark);
-				buttonTextView.setTextColor(ContextCompat.getColorStateList(ctx, nightMode ? R.color.dlg_btn_secondary_text_dark : R.color.dlg_btn_secondary_text_light));
+				textAndIconColorResId = nightMode ? R.color.dlg_btn_secondary_text_dark : R.color.dlg_btn_secondary_text_light;
 				break;
 			case STROKED:
 				if (v21) {
 					AndroidUtils.setBackground(ctx, buttonContainer, nightMode, R.drawable.ripple_light, R.drawable.ripple_dark);
 				}
 				AndroidUtils.setBackground(ctx, buttonView, nightMode, R.drawable.dlg_btn_stroked_light, R.drawable.dlg_btn_stroked_dark);
-				buttonTextView.setTextColor(ContextCompat.getColorStateList(ctx, nightMode ? R.color.dlg_btn_secondary_text_dark : R.color.dlg_btn_secondary_text_light));
+				textAndIconColorResId = nightMode ? R.color.dlg_btn_secondary_text_dark : R.color.dlg_btn_secondary_text_light;
 				break;
 		}
-		buttonTextView.setText(buttonText);
-		buttonTextView.setEnabled(buttonView.isEnabled());
+		if (textAndIconColorResId != INVALID_ID) {
+			ColorStateList colorStateList = ContextCompat.getColorStateList(ctx, textAndIconColorResId);
+			buttonTextView.setText(buttonText);
+			buttonTextView.setTextColor(colorStateList);
+			buttonTextView.setEnabled(buttonView.isEnabled());
+			if (iconResId != INVALID_ID) {
+				Drawable icon = tintDrawable(ContextCompat.getDrawable(ctx, iconResId), ContextCompat.getColor(ctx, textAndIconColorResId));
+				buttonTextView.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
+				buttonTextView.setCompoundDrawablePadding(AndroidUtils.dpToPx(ctx, ctx.getResources().getDimension(R.dimen.content_padding_half)));
+			}
+		}
 	}
 
 	public static Context getThemedContext(Context context, boolean nightMode) {

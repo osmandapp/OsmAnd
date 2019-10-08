@@ -1,5 +1,6 @@
 package net.osmand.plus.helpers;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.hardware.Sensor;
@@ -30,7 +31,7 @@ public class LockHelper implements SensorEventListener {
 	private OsmandApplication app;
 	private CommonPreference<Integer> turnScreenOnTime;
 	private CommonPreference<Boolean> turnScreenOnSensor;
-
+	private CommonPreference<Boolean> turnScreenOnEnabled;
 
 	@Nullable
 	private LockUIAdapter lockUIAdapter;
@@ -48,6 +49,7 @@ public class LockHelper implements SensorEventListener {
 		this.app = app;
 		uiHandler = new Handler();
 		OsmandSettings settings = app.getSettings();
+		turnScreenOnEnabled = settings.TURN_SCREEN_ON_ENABLED;
 		turnScreenOnTime = settings.TURN_SCREEN_ON_TIME_INT;
 		turnScreenOnSensor = settings.TURN_SCREEN_ON_SENSOR;
 
@@ -75,41 +77,48 @@ public class LockHelper implements SensorEventListener {
 		}
 	}
 
-	private void unlock(long timeInMills) {
-		releaseWakeLocks();
+	@SuppressLint("WakelockTimeout")
+	private void unlock() {
 		if (lockUIAdapter != null) {
 			lockUIAdapter.unlock();
 		}
-
 		PowerManager pm = (PowerManager) app.getSystemService(Context.POWER_SERVICE);
 		if (pm != null) {
 			wakeLock = pm.newWakeLock(PowerManager.FULL_WAKE_LOCK
-					| PowerManager.ACQUIRE_CAUSES_WAKEUP, "tso:wakelocktag");
-			wakeLock.acquire(timeInMills);
+					| PowerManager.ACQUIRE_CAUSES_WAKEUP, "OsmAnd:OnVoiceWakeupTag");
+			wakeLock.acquire();
 		}
 	}
 
 	private void lock() {
 		releaseWakeLocks();
-		if (lockUIAdapter != null) {
+		if (lockUIAdapter != null && isFollowingMode()) {
 			lockUIAdapter.lock();
 		}
 	}
 
+	private boolean isFollowingMode() {
+		return app.getRoutingHelper().isFollowingMode();
+	}
+
 	private void timedUnlock(final long millis) {
 		uiHandler.removeCallbacks(lockRunnable);
-		uiHandler.post(new Runnable() {
-			@Override
-			public void run() {
-				unlock(millis);
-			}
-		});
+		if (wakeLock == null) {
+			uiHandler.post(new Runnable() {
+				@Override
+				public void run() {
+					if (wakeLock == null) {
+						unlock();
+					}
+				}
+			});
+		}
 		uiHandler.postDelayed(lockRunnable, millis);
 	}
 
 	private void unlockEvent() {
 		int unlockTime = turnScreenOnTime.get();
-		if (unlockTime > 0) {
+		if (unlockTime > 0 && turnScreenOnEnabled.get()) {
 			timedUnlock(unlockTime * 1000L);
 		}
 	}
@@ -149,17 +158,16 @@ public class LockHelper implements SensorEventListener {
 	}
 
 	private boolean isSensorEnabled() {
-		return turnScreenOnSensor.get() && app.getRoutingHelper().isFollowingMode();
+		return turnScreenOnSensor.get() && isFollowingMode();
 	}
 
 	public void onStart(@NonNull Activity activity) {
-		if (wakeLock == null) {
-			switchSensorOff();
-		}
+		switchSensorOff();
 	}
 
 	public void onStop(@NonNull Activity activity) {
-		if (!activity.isFinishing() && isSensorEnabled()) {
+		lock();
+		if (!activity.isFinishing() && turnScreenOnEnabled.get() && isSensorEnabled()) {
 			switchSensorOn();
 		}
 	}

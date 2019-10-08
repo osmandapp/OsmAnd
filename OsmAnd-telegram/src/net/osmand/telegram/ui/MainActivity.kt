@@ -356,7 +356,9 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 	}
 	
 	fun logoutTelegram(silent: Boolean = false) {
-		if (telegramHelper.getTelegramAuthorizationState() == TelegramHelper.TelegramAuthorizationState.READY) {
+		if (telegramHelper.getTelegramAuthorizationState() == TelegramAuthorizationState.READY) {
+			app.stopMonitoring()
+			app.stopSharingLocation()
 			if (app.isInternetConnectionAvailable) {
 				app.locationMessages.clearBufferedMessages()
 				settings.clear()

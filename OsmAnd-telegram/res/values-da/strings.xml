@@ -244,4 +244,9 @@
     <string name="gpx_settings">GPX-indstillinger</string>
     <string name="timeline_no_data_descr">Vi har ikke indsamlet data for den valgte dag</string>
     <string name="timeline_no_data">Ingen data</string>
+    <string name="shared_string_end">Slut</string>
+    <string name="shared_string_start">Start</string>
+    <string name="shared_string_apply">Anvend</string>
+    <string name="set_time_timeline_descr">Vælg tid at vise</string>
+    <string name="start_end_date">Start — slutdato</string>
 </resources>

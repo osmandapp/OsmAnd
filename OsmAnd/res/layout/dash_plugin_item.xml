@@ -25,7 +25,7 @@
 			android:layout_height="32dp"
 			android:layout_margin="11dp"
 			android:layout_gravity="center_vertical"
-			android:background="@drawable/bg_plugin_logo_enabled"
+			android:background="@drawable/bg_plugin_logo_enabled_light"
 			android:scaleType="center"
 			tools:src="@drawable/ic_extension_dark"/>
 

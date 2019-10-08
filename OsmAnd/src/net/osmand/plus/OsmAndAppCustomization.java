@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
+import net.osmand.aidl.OsmandAidlApi;
 import net.osmand.aidl.customization.CustomizationInfoParams;
 import net.osmand.aidl.customization.OsmandSettingsParams;
 import net.osmand.aidl.customization.SetWidgetsParams;
@@ -524,18 +525,21 @@ public class OsmAndAppCustomization {
 			JSONObject allItems = new JSONObject(app.getSettings().API_NAV_DRAWER_ITEMS_JSON.get());
 			for (Iterator<?> it = allItems.keys(); it.hasNext(); ) {
 				String appPackage = (String) it.next();
-				JSONArray jArray = allItems.getJSONArray(appPackage);
-				List<NavDrawerItem> list = new ArrayList<>();
-				for (int i = 0; i < jArray.length(); i++) {
-					JSONObject obj = jArray.getJSONObject(i);
-					list.add(new NavDrawerItem(
-							obj.optString(NavDrawerItem.NAME_KEY),
-							obj.optString(NavDrawerItem.URI_KEY),
-							obj.optString(NavDrawerItem.ICON_NAME_KEY),
-							obj.optInt(NavDrawerItem.FLAGS_KEY, -1)
-					));
+				OsmandAidlApi.ConnectedApp connectedApp = app.getAidlApi().getConnectedApp(appPackage);
+				if (connectedApp != null && connectedApp.isEnabled()) {
+					JSONArray jArray = allItems.getJSONArray(appPackage);
+					List<NavDrawerItem> list = new ArrayList<>();
+					for (int i = 0; i < jArray.length(); i++) {
+						JSONObject obj = jArray.getJSONObject(i);
+						list.add(new NavDrawerItem(
+								obj.optString(NavDrawerItem.NAME_KEY),
+								obj.optString(NavDrawerItem.URI_KEY),
+								obj.optString(NavDrawerItem.ICON_NAME_KEY),
+								obj.optInt(NavDrawerItem.FLAGS_KEY, -1)
+						));
+					}
+					res.put(appPackage, list);
 				}
-				res.put(appPackage, list);
 			}
 		} catch (JSONException e) {
 			e.printStackTrace();

@@ -173,6 +173,7 @@ public class RoutePlannerFrontEnd {
 
 	public List<RouteSegmentResult> searchRoute(final RoutingContext ctx, LatLon start, LatLon end, List<LatLon> intermediates,
 	                                            PrecalculatedRouteDirection routeDirection) throws IOException, InterruptedException {
+		ctx.timeToCalculate = System.nanoTime();
 		if (ctx.calculationProgress == null) {
 			ctx.calculationProgress = new RouteCalculationProgress();
 		}

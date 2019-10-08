@@ -7,7 +7,6 @@ import android.view.WindowManager;
 
 import net.osmand.Location;
 import net.osmand.StateChangedListener;
-import net.osmand.ValueHolder;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
@@ -25,7 +24,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.routing.IRouteInformationListener;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.MapUtils;
@@ -33,7 +31,7 @@ import net.osmand.util.MapUtils;
 import java.io.IOException;
 
 public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLocationListener,
-		OsmAndCompassListener, IRouteInformationListener, MapMarkerChangedListener {
+		OsmAndCompassListener, MapMarkerChangedListener {
 	private static final int AUTO_FOLLOW_MSG_ID = OsmAndConstants.UI_HANDLER_LOCATION_SERVICE + 4;
 
 	private long lastTimeAutoZooming = 0;
@@ -49,7 +47,6 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	private boolean showViewAngle = false;
 	private boolean isUserZoomed = false;
 	private String locationProvider;
-	private boolean showRouteFinishDialog = false;
 	private Location myLocation;
 	private Float heading;
 	private boolean drivingRegionUpdated = false;
@@ -63,7 +60,6 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		app.getLocationProvider().addCompassListener(this);
 		addTargetPointListener(app);
 		addMapMarkersListener(app);
-		app.getRoutingHelper().addListener(this);
 	}
 
 	public void resetDrivingRegionUpdate() {
@@ -433,27 +429,6 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 			return null;
 		}
 		return mapView.getRotate();
-	}
-
-	@Override
-	public void newRouteIsCalculated(boolean newRoute, ValueHolder<Boolean> showToast) {
-	}
-
-	@Override
-	public void routeWasCancelled() {
-	}
-
-	@Override
-	public void routeWasFinished() {
-		showRouteFinishDialog = (mapView == null);
-	}
-
-	public boolean getShowRouteFinishDialog() {
-		return showRouteFinishDialog;
-	}
-
-	public void setShowRouteFinishDialog(boolean showRouteFinishDialog) {
-		this.showRouteFinishDialog = showRouteFinishDialog;
 	}
 
 	public void setZoomTime(long time) {

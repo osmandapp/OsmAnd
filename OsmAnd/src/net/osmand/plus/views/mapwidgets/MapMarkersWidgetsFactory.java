@@ -15,7 +15,6 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.mapmarkers.MapMarkersDialogFragment;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.DirectionDrawable;
@@ -354,8 +353,8 @@ public class MapMarkersWidgetsFactory {
 				if (marker.colorIndex != cachedMarkerColorIndex
 						|| cachedNightMode == null || cachedNightMode != isNight()) {
 					setImageDrawable(map.getMyApplication().getUIUtilities()
-							.getIcon(isNight() ? R.drawable.widget_marker_night : R.drawable.widget_marker_day,
-									R.drawable.widget_marker_triangle,
+							.getLayeredIcon(isNight() ? R.drawable.widget_marker_night : R.drawable.widget_marker_day,
+									R.drawable.widget_marker_triangle, 0,
 									MapMarker.getColorId(marker.colorIndex)));
 					cachedMarkerColorIndex = marker.colorIndex;
 					cachedNightMode = isNight();

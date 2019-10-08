@@ -11,25 +11,15 @@ import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
-import android.support.v7.app.AlertDialog;
-import android.view.View;
 
-import net.osmand.PlatformUtil;
-import net.osmand.StateChangedListener;
-import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmAndLocationSimulation;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.SettingsBaseActivity;
-import net.osmand.plus.activities.actions.AppModeDialog;
-import net.osmand.plus.profiles.SettingsProfileFragment;
 import net.osmand.util.SunriseSunset;
 
 import java.text.SimpleDateFormat;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
 
 //import net.osmand.plus.development.OsmandDevelopmentPlugin;
 
@@ -134,6 +124,18 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 			@Override
 			public boolean onPreferenceClick(Preference preference) {
 				startActivity(new Intent(SettingsDevelopmentActivity.this, TestVoiceActivity.class));
+				return true;
+			}
+		});
+		cat.addPreference(pref);
+
+		pref = new Preference(this);
+		pref.setTitle(R.string.logcat_buffer);
+		pref.setKey("logcat_buffer");
+		pref.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+			@Override
+			public boolean onPreferenceClick(Preference preference) {
+				startActivity(new Intent(SettingsDevelopmentActivity.this, LogcatActivity.class));
 				return true;
 			}
 		});

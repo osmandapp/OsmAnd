@@ -621,6 +621,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		ActionBar actionBar = getDownloadActivity().getSupportActionBar();
 		//hide action bar from downloadindexfragment
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+		int iconColorResId = getMyApplication().getSettings().isLightContent() ? R.color.active_buttons_and_links_text_light : R.color.active_buttons_and_links_text_dark;
 		optionsMenuAdapter = new ContextMenuAdapter();
 		ItemClickListener listener = new ContextMenuAdapter.ItemClickListener() {
 			@Override
@@ -634,11 +635,13 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 				.setTitleId(R.string.shared_string_refresh, getContext())
 				.setIcon(R.drawable.ic_action_refresh_dark)
 				.setListener(listener)
+				.setColor(iconColorResId)
 				.createItem());
 		optionsMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setTitleId(R.string.shared_string_delete, getContext())
 				.setIcon(R.drawable.ic_action_delete_dark)
 				.setListener(listener)
+				.setColor(iconColorResId)
 				.createItem());
 		optionsMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setTitleId(R.string.local_index_mi_backup, getContext())
@@ -669,7 +672,8 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 				MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 			}
 			if (contextMenuItem.getIcon() != -1) {
-				item.setIcon(contextMenuItem.getIcon());
+				Drawable icMenuItem = getMyApplication().getUIUtilities().getIcon(contextMenuItem.getIcon(), contextMenuItem.getColorRes());
+				item.setIcon(icMenuItem);
 			}
 
 		}
@@ -721,6 +725,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 
 	private void openSelectionMode(final int actionResId, final int actionIconId,
 								   final DialogInterface.OnClickListener listener) {
+		final int colorResId = getMyApplication().getSettings().isLightContent() ? R.color.active_buttons_and_links_text_light : R.color.active_buttons_and_links_text_dark;
 		String value = getString(actionResId);
 		if (value.endsWith("...")) {
 			value = value.substring(0, value.length() - 3);
@@ -744,7 +749,8 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 				selectionMode = true;
 				MenuItem it = menu.add(actionResId);
 				if (actionIconId != 0) {
-					it.setIcon(actionIconId);
+					Drawable icon = getMyApplication().getUIUtilities().getIcon(actionIconId, colorResId);
+					it.setIcon(icon);
 				}
 				MenuItemCompat.setShowAsAction(it, MenuItemCompat.SHOW_AS_ACTION_IF_ROOM |
 						MenuItemCompat.SHOW_AS_ACTION_WITH_TEXT);

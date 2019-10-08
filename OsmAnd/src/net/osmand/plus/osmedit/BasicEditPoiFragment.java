@@ -1,5 +1,6 @@
 package net.osmand.plus.osmedit;
 
+import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.text.InputFilter;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.TypedValue;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,10 +57,12 @@ public class BasicEditPoiFragment extends BaseOsmAndFragment
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.fragment_edit_poi_normal, container, false);
+		int themeRes = requireMyApplication().getSettings().isLightActionBar() ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme;
+		Context themedContext = new ContextThemeWrapper(getContext(), themeRes);
+		View view = inflater.cloneInContext(themedContext).inflate(R.layout.fragment_edit_poi_normal, container, false);
 
 		TypedValue typedValue = new TypedValue();
-		Resources.Theme theme = getActivity().getTheme();
+		Resources.Theme theme = themedContext.getTheme();
 		theme.resolveAttribute(android.R.attr.textColorSecondary, typedValue, true);
 		int iconColor = typedValue.data;
 

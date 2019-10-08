@@ -74,7 +74,7 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
             toggleIconColorId = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
         } else {
             toggleIconId = R.drawable.ic_action_hide;
-            toggleIconColorId = nightMode ? 0 : R.color.icon_color_default_light;
+            toggleIconColorId = nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light;
         }
         ((AppCompatTextView) toggleRow.findViewById(R.id.toggle_row_title)).setText(toggleActionStringId);
         final Drawable drawable = getIcon(toggleIconId, toggleIconColorId);
@@ -110,7 +110,7 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
         });
 
 
-        final int colorRes = nightMode ? R.color.color_white : R.color.icon_color_default_light;
+        final int colorRes = nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light;
         ((AppCompatImageView) view.findViewById(R.id.mapillary_filters_user_icon)).setImageDrawable(getIcon(R.drawable.ic_action_user, colorRes));
         ((AppCompatImageView) view.findViewById(R.id.mapillary_filters_date_icon)).setImageDrawable(getIcon(R.drawable.ic_action_data, colorRes));
         ((AppCompatImageView) view.findViewById(R.id.mapillary_filters_tile_cache_icon)).setImageDrawable(getIcon(R.drawable.ic_layer_top_dark, colorRes));

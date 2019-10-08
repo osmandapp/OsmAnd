@@ -66,6 +66,7 @@ public class RoutingHelper {
 	private long recalculateCountInInterval = 0;
 	private int evalWaitInterval = 0;
 	private boolean waitingNextJob;
+	private boolean routeWasFinished;
 
 	private ApplicationMode mode;
 	private OsmandSettings settings;
@@ -85,6 +86,10 @@ public class RoutingHelper {
 
 	public boolean isDeviatedFromRoute() {
 		return isDeviatedFromRoute;
+	}
+
+	public boolean isRouteWasFinished() {
+		return routeWasFinished;
 	}
 
 	public RoutingHelper(OsmandApplication context){
@@ -201,6 +206,7 @@ public class RoutingHelper {
 	}
 
 	private synchronized void finishCurrentRoute() {
+		routeWasFinished = true;
 		app.runInUIThread(new Runnable() {
 			@Override
 			public void run() {
@@ -732,11 +738,11 @@ public class RoutingHelper {
 					}
 				}
 				if (showToast.value && OsmandPlugin.isDevelopment()) {
-					String msg = app.getString(R.string.new_route_calculated_dist) + ": "
-							+ OsmAndFormatter.getFormattedDistance(res.getWholeDistance(), app);
-					if (res.getRoutingTime() != 0f) {
-						msg += " (" + Algorithms.formatDuration((int) res.getRoutingTime(), app.accessibilityEnabled()) + ")";
-					}
+					String msg = app.getString(R.string.new_route_calculated_dist_dbg,
+							OsmAndFormatter.getFormattedDistance(res.getWholeDistance(), app),
+
+							((int)res.getRoutingTime()) + " sec",
+							res.getCalculateTime(), res.getVisitedSegments(), res.getLoadedTiles());
 					app.showToastMessage(msg);
 				}
 			}
@@ -917,6 +923,7 @@ public class RoutingHelper {
 		@Override
 		public void run() {
 			synchronized (RoutingHelper.this) {
+				routeWasFinished = false;
 				currentRunningJob = this;
 				waitingNextJob = prevRunningJob != null;
 			}
@@ -1155,7 +1162,7 @@ public class RoutingHelper {
 	}
 
 	public boolean isPublicTransportMode() {
-		return mode == ApplicationMode.PUBLIC_TRANSPORT;
+		return mode.isDerivedRoutingFrom(ApplicationMode.PUBLIC_TRANSPORT);
 	}
 
 	public boolean isRouteBeingCalculated() {

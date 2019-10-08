@@ -42,9 +42,11 @@ class TelegramApplication : Application(), OsmandHelperListener {
 		telegramHelper.messageActiveTimeSec = settings.locHistoryTime
 		uiUtils = UiUtils(this)
 		osmandAidlHelper = OsmandAidlHelper(this)
-		osmandAidlHelper.listener = object : OsmandAidlHelper.OsmandHelperListener {
+		osmandAidlHelper.listener = object : OsmandHelperListener {
 			override fun onOsmandConnectionStateChanged(connected: Boolean) {
 				if (connected) {
+					osmandAidlHelper.clearNavDrawerItems("net.osmand.telegram")
+					osmandAidlHelper.clearNavDrawerItems("net.osmand.telegram.debug")
 					osmandAidlHelper.setNavDrawerItems(
 						applicationContext.packageName,
 						listOf(getString(R.string.app_name_short)),

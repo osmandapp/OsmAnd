@@ -41,6 +41,7 @@ import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.MuteSoundRoutin
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.OtherSettingsRoutingParameter;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.RouteSimulationItem;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.ShowAlongTheRouteItem;
+import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.TimeConditionalRoutingItem;
 import net.osmand.plus.routing.RouteProvider;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.router.GeneralRouter;
@@ -96,6 +97,8 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 				items.add(createAvoidRoadsItem(optionsItem));
 			} else if (optionsItem instanceof GpxLocalRoutingParameter) {
 				items.add(createGpxRoutingItem(optionsItem));
+			} else if (optionsItem instanceof TimeConditionalRoutingItem) {
+				items.add(createTimeConditionalRoutingItem(optionsItem));
 			} else if (optionsItem instanceof OtherSettingsRoutingParameter) {
 				items.add(createOtherSettingsRoutingItem(optionsItem));
 			} else {
@@ -156,6 +159,26 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 				})
 				.create();
 		return muteSoundItem[0];
+	}
+
+	private BaseBottomSheetItem createTimeConditionalRoutingItem(final LocalRoutingParameter optionsItem) {
+		final BottomSheetItemWithCompoundButton[] timeConditionalRoutingItem = new BottomSheetItemWithCompoundButton[1];
+		timeConditionalRoutingItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
+				.setChecked(settings.ENABLE_TIME_CONDITIONAL_ROUTING.get())
+				.setIcon(getContentIcon((optionsItem.getActiveIconId())))
+				.setTitle(getString(R.string.temporary_conditional_routing))
+				.setLayoutId(R.layout.bottom_sheet_item_with_switch_56dp)
+				.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						boolean enabled = !settings.ENABLE_TIME_CONDITIONAL_ROUTING.get();
+						settings.ENABLE_TIME_CONDITIONAL_ROUTING.set(enabled);
+						timeConditionalRoutingItem[0].setChecked(enabled);
+						app.getRoutingHelper().recalculateRouteDueToSettingsChange();
+					}
+				})
+				.create();
+		return timeConditionalRoutingItem[0];
 	}
 
 	private BaseBottomSheetItem createShowAlongTheRouteItem(final LocalRoutingParameter optionsItem) {
@@ -455,6 +478,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 				ShowAlongTheRouteItem.KEY,
 				GeneralRouter.ALLOW_PRIVATE,
 				GeneralRouter.USE_SHORTEST_WAY,
+				TimeConditionalRoutingItem.KEY,
 				DividerItem.KEY,
 				GpxLocalRoutingParameter.KEY,
 				OtherSettingsRoutingParameter.KEY,
@@ -467,6 +491,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 				GeneralRouter.ALLOW_MOTORWAYS,
 				AvoidRoadsRoutingParameter.KEY,
 				ShowAlongTheRouteItem.KEY,
+				TimeConditionalRoutingItem.KEY,
 				DividerItem.KEY,
 				GpxLocalRoutingParameter.KEY,
 				OtherSettingsRoutingParameter.KEY,
@@ -477,6 +502,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 				DividerItem.KEY,
 				AvoidRoadsRoutingParameter.KEY,
 				ShowAlongTheRouteItem.KEY,
+				TimeConditionalRoutingItem.KEY,
 				DividerItem.KEY,
 				GpxLocalRoutingParameter.KEY,
 				OtherSettingsRoutingParameter.KEY,
@@ -487,12 +513,14 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 				AvoidPTTypesRoutingParameter.KEY,
 				// ShowAlongTheRouteItem.KEY,
 				// DividerItem.KEY,
+				TimeConditionalRoutingItem.KEY,
 				OtherSettingsRoutingParameter.KEY),
 
 		OTHER(MuteSoundRoutingParameter.KEY,
 				DividerItem.KEY,
 				AvoidRoadsRoutingParameter.KEY,
 				ShowAlongTheRouteItem.KEY,
+				TimeConditionalRoutingItem.KEY,
 				DividerItem.KEY,
 				GpxLocalRoutingParameter.KEY,
 				OtherSettingsRoutingParameter.KEY,

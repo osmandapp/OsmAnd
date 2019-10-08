@@ -28,6 +28,7 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.OsmandSettings.AngularConstants;
 import net.osmand.plus.OsmandSettings.RulerMode;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -43,7 +44,7 @@ public class RulerControlLayer extends OsmandMapLayer {
 	private static final long DELAY_BEFORE_DRAW = 500;
 	private static final int TEXT_SIZE = 14;
 	private static final int DISTANCE_TEXT_SIZE = 16;
-	private static final int COMPASS_CIRCLE_ID = 2;
+	private static final float COMPASS_CIRCLE_FITTING_RADIUS_COEF = 1.25f;
 
 	private final MapActivity mapActivity;
 	private OsmandApplication app;
@@ -277,9 +278,10 @@ public class RulerControlLayer extends OsmandMapLayer {
 					resetDrawingPaths();
 				}
 				RenderingLineAttributes attrs = mode == RulerMode.FIRST ? circleAttrs : circleAttrsAlt;
+				int compassCircleId = getCompassCircleId(tb, center);
 				for (int i = 1; i <= cacheDistances.size(); i++) {
-					if (showCompass && i == COMPASS_CIRCLE_ID) {
-						drawCompassCircle(canvas, tb, center, attrs);
+					if (showCompass && i == compassCircleId) {
+						drawCompassCircle(canvas, tb, compassCircleId, center, attrs);
 					} else {
 						drawCircle(canvas, tb, i, center, attrs);
 					}
@@ -291,6 +293,39 @@ public class RulerControlLayer extends OsmandMapLayer {
 	public boolean rulerModeOn() {
 		return mapActivity.getMapLayers().getMapWidgetRegistry().isVisible("ruler") &&
 				rightWidgetsPanel.getVisibility() == View.VISIBLE;
+	}
+
+	private int getCompassCircleId(RotatedTileBox tileBox, QuadPoint center) {
+		int compassCircleId = 2;
+		float radiusLength = radius * compassCircleId;
+		float top = center.y - radiusLength;
+		float bottom = center.y + radiusLength;
+		float left = center.x - radiusLength;
+		float right = center.x + radiusLength;
+
+		int width = tileBox.getPixWidth();
+		int height = tileBox.getPixHeight();
+
+		if (top < 0) {
+			top = 0;
+		}
+		if (bottom > height) {
+			bottom = height;
+		}
+		if (left < 0) {
+			left = 0;
+		}
+		if (right > width) {
+			right = width;
+		}
+		int horizontal = (int) (bottom - top) / 2;
+		int vertical = (int) (right - left) / 2;
+		int minFittingRadius = Math.min(horizontal, vertical);
+		if (radiusLength > minFittingRadius * COMPASS_CIRCLE_FITTING_RADIUS_COEF) {
+			compassCircleId = 1;
+		}
+
+		return compassCircleId;
 	}
 
 	private void updateHeading() {
@@ -416,7 +451,6 @@ public class RulerControlLayer extends OsmandMapLayer {
 				cacheTileX = tb.getCenterTileX();
 				cacheTileY = tb.getCenterTileY();
 				cacheMapDensity = mapDensity.get();
-				cacheDistances.clear();
 				updateDistance(tb);
 			}
 		}
@@ -450,6 +484,7 @@ public class RulerControlLayer extends OsmandMapLayer {
 	}
 
 	private void updateText() {
+		cacheDistances.clear();
 		double maxCircleRadius = maxRadius;
 		int i = 1;
 		while ((maxCircleRadius -= radius) > 0) {
@@ -512,10 +547,10 @@ public class RulerControlLayer extends OsmandMapLayer {
 		return new float[]{x1, y1, x2, y2};
 	}
 
-	private void drawCompassCircle(Canvas canvas, RotatedTileBox tileBox, QuadPoint center,
+	private void drawCompassCircle(Canvas canvas, RotatedTileBox tileBox,int circleNumber, QuadPoint center,
 	                               RenderingLineAttributes attrs) {
 		if (!tileBox.isZoomAnimated()) {
-			float radiusLength = radius * COMPASS_CIRCLE_ID;
+			float radiusLength = radius * circleNumber;
 			float innerRadiusLength = radiusLength - attrs.paint.getStrokeWidth() / 2;
 
 			updateArcShader(radiusLength, center);
@@ -541,8 +576,8 @@ public class RulerControlLayer extends OsmandMapLayer {
 			canvas.drawPath(arrow, triangleHeadingPaint);
 			canvas.rotate(-cachedHeading, center.x, center.y);
 
-			String distance = cacheDistances.get(COMPASS_CIRCLE_ID - 1);
-			String heading = OsmAndFormatter.getFormattedAzimuth(cachedHeading, app) + " " + getCardinalDirectionForDegrees(cachedHeading);
+			String distance = cacheDistances.get(circleNumber - 1);
+			String heading = OsmAndFormatter.getFormattedAzimuth(cachedHeading, AngularConstants.DEGREES360) + " " + getCardinalDirectionForDegrees(cachedHeading);
 			float[] textCoords = calculateTextCoords(distance, heading, radiusLength + AndroidUtils.dpToPx(app, 16), center, attrs);
 			canvas.rotate(-tileBox.getRotate(), center.x, center.y);
 

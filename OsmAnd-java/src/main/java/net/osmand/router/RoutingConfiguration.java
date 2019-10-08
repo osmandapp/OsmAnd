@@ -46,7 +46,10 @@ public class RoutingConfiguration {
 	
 	// 1.5 Recalculate distance help
 	public float recalculateDistance = 20000f;
-
+	
+	// 1.6 Time to calculate all access restrictions based on conditions
+	public long routeCalculationTime = 0;
+	
 	public static class Builder {
 		// Design time storage
 		private String defaultRouter = "";
@@ -66,6 +69,7 @@ public class RoutingConfiguration {
 		public RoutingConfiguration build(String router, int memoryLimitMB, Map<String, String> params) {
 			return build(router, null, memoryLimitMB, params);
 		}
+		
 		public RoutingConfiguration build(String router, Double direction, int memoryLimitMB, Map<String, String> params) {
 			if (!routers.containsKey(router)) {
 				router = defaultRouter;
@@ -96,7 +100,6 @@ public class RoutingConfiguration {
 			}
 			i.planRoadDirection = parseSilentInt(getAttribute(i.router, "planRoadDirection"), i.planRoadDirection);
 //			i.planRoadDirection = 1;
-			
 			return i;
 		}
 		

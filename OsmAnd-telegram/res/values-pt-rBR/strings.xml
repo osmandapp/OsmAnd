@@ -244,4 +244,9 @@
     <string name="gpx_settings">Configurações de GPX</string>
     <string name="timeline_no_data_descr">Nós não coletamos dados para o dia selecionado</string>
     <string name="timeline_no_data">Sem dados</string>
+    <string name="shared_string_end">Fim</string>
+    <string name="shared_string_start">Iniciar</string>
+    <string name="shared_string_apply">Aplicar</string>
+    <string name="set_time_timeline_descr">Selecionar a hora para exibir</string>
+    <string name="start_end_date">Data de início - fim</string>
 </resources>

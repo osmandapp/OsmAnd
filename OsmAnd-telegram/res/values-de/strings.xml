@@ -72,7 +72,7 @@
     <string name="authentication_code">Authentifizierungscode</string>
     <string name="authentication_code_descr">Telegram hat Ihnen einen Code für OsmAnd zur Anmeldung an Ihrem Konto gesendet.</string>
     <string name="enter_password">Passwort eingeben</string>
-    <string name="shared_string_login">Anmeldung</string>
+    <string name="shared_string_login">Anmelden</string>
     <string name="shared_string_logout">Abmelden</string>
     <string name="not_logged_in">Sie sind nicht angemeldet</string>
     <string name="shared_string_continue">Fortfahren</string>
@@ -242,4 +242,11 @@
     <string name="min_logging_speed">Minimale Protokollierungsgeschwindigkeit</string>
     <string name="min_logging_speed_descr">Filter: keine Protokollierung unter der gewählten Geschwindigkeit</string>
     <string name="gpx_settings">GPX-Einstellungen</string>
+    <string name="timeline_no_data_descr">Für den ausgewählten Tag gibt es keine Datenaufzeichnungen</string>
+    <string name="timeline_no_data">Keine Daten</string>
+    <string name="shared_string_end">Ende</string>
+    <string name="shared_string_start">Start</string>
+    <string name="start_end_date">Start — Ende Datum</string>
+    <string name="shared_string_apply">Anwenden</string>
+    <string name="set_time_timeline_descr">Dauer der Anzeige auswählen</string>
 </resources>

@@ -22,13 +22,12 @@ import net.osmand.plus.transport.TransportStopType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-
-import gnu.trove.list.array.TLongArrayList;
 
 public class TransportStopController extends MenuController {
 
@@ -124,22 +123,16 @@ public class TransportStopController extends MenuController {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			OsmandApplication app = mapActivity.getMyApplication();
-			List<TransportIndexRepository> reps = app.getResourceManager().searchTransportRepositories(transportStop.getLocation().getLatitude(),
-					transportStop.getLocation().getLongitude());
-
 			boolean useEnglishNames = app.getSettings().usingEnglishNames();
 			if (transportStop.getTransportStopAggregated() == null) {
 				processTransportStopAggregated(app, transportStop);
 			}
-			for (TransportIndexRepository t : reps) {
-				if (t.acceptTransportStop(transportStop)) {
-					ArrayList<TransportStop> transportStopsSameExit = new ArrayList<TransportStop>(transportStop.getLocalTransportStops());
-					ArrayList<TransportStop> nearbyTransportStops = new ArrayList<TransportStop>(transportStop.getNearbyTransportStops());
+			ArrayList<TransportStop> transportStopsSameExit = new ArrayList<>(transportStop.getLocalTransportStops());
+			ArrayList<TransportStop> nearbyTransportStops = new ArrayList<>(transportStop.getNearbyTransportStops());
 
-					addTransportStopRoutes(transportStopsSameExit, routesOnTheSameExit, useEnglishNames, t);
-					addTransportStopRoutes(nearbyTransportStops, routesNearby, useEnglishNames, t);
-				}
-			}
+			addTransportStopRoutes(app, transportStopsSameExit, routesOnTheSameExit, useEnglishNames);
+			addTransportStopRoutes(app, nearbyTransportStops, routesNearby, useEnglishNames);
+
 			sortTransportStopRoutes(routesOnTheSameExit);
 			sortTransportStopRoutes(routesNearby);
 		}
@@ -166,16 +159,16 @@ public class TransportStopController extends MenuController {
 		});
 	}
 
-	private void addTransportStopRoutes(List<TransportStop> stops, List<TransportStopRoute> routes, boolean useEnglishNames, TransportIndexRepository t) {
+	private void addTransportStopRoutes(OsmandApplication app, List<TransportStop> stops, List<TransportStopRoute> routes, boolean useEnglishNames) {
 		for (TransportStop tstop : stops) {
-			if (!tstop.isDeleted() && tstop.hasReferencesToRoutes()) {
-				addRoutes(routes, useEnglishNames, t, tstop, transportStop, (int) MapUtils.getDistance(tstop.getLocation(), transportStop.getLocation()));
+			if (tstop.hasReferencesToRoutesMap()) {
+				addRoutes(app, routes, useEnglishNames, tstop, transportStop, (int) MapUtils.getDistance(tstop.getLocation(), transportStop.getLocation()));
 			}
 		}
 	}
 
-	private void addRoutes(List<TransportStopRoute> routes, boolean useEnglishNames, TransportIndexRepository t, TransportStop s, TransportStop refStop, int dist) {
-		Collection<TransportRoute> rts = t.getRouteForStop(s);
+	private void addRoutes(OsmandApplication app, List<TransportStopRoute> routes, boolean useEnglishNames, TransportStop s, TransportStop refStop, int dist) {
+		List<TransportRoute> rts = app.getResourceManager().getRoutesForStop(s);
 		if (rts != null) {
 			for (TransportRoute rs : rts) {
 				boolean routeAlreadyAdded = checkSameRoute(routes, rs);
@@ -198,7 +191,7 @@ public class TransportStopController extends MenuController {
 		}
 	}
 
-	public static void sortTransportStops(@NonNull LatLon latLon, List<TransportStop> transportStops) {
+	private static void sortTransportStops(@NonNull LatLon latLon, List<TransportStop> transportStops) {
 		for (TransportStop transportStop : transportStops) {
 			transportStop.distance = (int) MapUtils.getDistance(latLon, transportStop.getLocation());
 		}
@@ -211,26 +204,14 @@ public class TransportStopController extends MenuController {
 		});
 	}
 
-	@NonNull
-	public static List<TransportStop> findTransportStopsAt(OsmandApplication app, double latitude, double longitude, int radiusMeters) {
-		ArrayList<TransportStop> transportStops = new ArrayList<>();
-		List<TransportIndexRepository> reps = app.getResourceManager().searchTransportRepositories(latitude, longitude);
-
-		TLongArrayList addedTransportStops = new TLongArrayList();
-		for (TransportIndexRepository t : reps) {
-			ArrayList<TransportStop> stops = new ArrayList<>();
-			QuadRect ll = MapUtils.calculateLatLonBbox(latitude, longitude, radiusMeters);
-			t.searchTransportStops(ll.top, ll.left, ll.bottom, ll.right, -1, stops, null);
-			for (TransportStop transportStop : stops) {
-				if (!addedTransportStops.contains(transportStop.getId())) {
-					addedTransportStops.add(transportStop.getId());
-					if (!transportStop.isDeleted()) {
-						transportStops.add(transportStop);
-					}
-				}
-			}
+	@Nullable
+	private static List<TransportStop> findTransportStopsAt(OsmandApplication app, double latitude, double longitude, int radiusMeters) {
+		QuadRect ll = MapUtils.calculateLatLonBbox(latitude, longitude, radiusMeters);
+		try {
+			return app.getResourceManager().searchTransportSync(ll.top, ll.left, ll.bottom, ll.right, null);
+		} catch (IOException e) {
+			return null;
 		}
-		return transportStops;
 	}
 
 	@Nullable
@@ -241,6 +222,9 @@ public class TransportStopController extends MenuController {
 		LatLon loc = amenity.getLocation();
 		int radiusMeters = isSubwayEntrance ? SHOW_SUBWAY_STOPS_FROM_ENTRANCES_RADIUS_METERS : SHOW_STOPS_RADIUS_METERS;
 		List<TransportStop> transportStops = findTransportStopsAt(app, loc.getLatitude(), loc.getLongitude(), radiusMeters);
+		if (transportStops == null) {
+			return null;
+		}
 		sortTransportStops(loc, transportStops);
 
 		if (isSubwayEntrance) {
@@ -275,20 +259,25 @@ public class TransportStopController extends MenuController {
 		return null;
 	}
 
-	public static void processTransportStopAggregated(OsmandApplication app, TransportStop transportStop) {
+	private static void processTransportStopAggregated(OsmandApplication app, TransportStop transportStop) {
 		TransportStopAggregated stopAggregated = new TransportStopAggregated();
 		transportStop.setTransportStopAggregated(stopAggregated);
-		stopAggregated.addLocalTransportStop(transportStop);
-
+		TransportStop localStop = null;
 		LatLon loc = transportStop.getLocation();
 		List<TransportStop> transportStops = findTransportStopsAt(app, loc.getLatitude(), loc.getLongitude(), SHOW_STOPS_RADIUS_METERS);
-
-		for (TransportStop stop : transportStops) {
-			stopAggregated.addNearbyTransportStop(stop);
+		if (transportStops != null) {
+			for (TransportStop stop : transportStops) {
+				if (localStop == null && transportStop.equals(stop)) {
+					localStop = stop;
+				} else {
+					stopAggregated.addNearbyTransportStop(stop);
+				}
+			}
 		}
+		stopAggregated.addLocalTransportStop(localStop == null ? transportStop : localStop);
 	}
 
-	public static TransportStopAggregated processTransportStopsForAmenity(List<TransportStop> transportStops, Amenity amenity) {
+	private static TransportStopAggregated processTransportStopsForAmenity(List<TransportStop> transportStops, Amenity amenity) {
 		TransportStopAggregated stopAggregated = new TransportStopAggregated();
 		stopAggregated.setAmenity(amenity);
 
@@ -311,7 +300,7 @@ public class TransportStopController extends MenuController {
 		return stopAggregated;
 	}
 
-	public static boolean checkSameRoute(List<TransportStopRoute> stopRoutes, TransportRoute route) {
+	private static boolean checkSameRoute(List<TransportStopRoute> stopRoutes, TransportRoute route) {
 		for (TransportStopRoute stopRoute : stopRoutes) {
 			if (stopRoute.route.compareRoute(route)) {
 				return true;

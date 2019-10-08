@@ -8,6 +8,7 @@
     android:paddingTop="24dp">
 
     <TextView
+        android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/dialog_add_action_title"
@@ -36,6 +37,6 @@
         android:text="@string/shared_string_dismiss"
         android:layout_gravity="right"
         android:background="?attr/selectableItemBackground"
-        android:textColor="@color/active_color_primary_light"
+        android:textColor="?attr/color_dialog_buttons"
         android:textAllCaps="true"/>
 </LinearLayout>

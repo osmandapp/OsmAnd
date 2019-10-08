@@ -53,8 +53,10 @@
         android:background="?attr/bg_color">
 
         <LinearLayout
+            android:id="@+id/showOnMapContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
             android:orientation="horizontal"
             android:gravity="center_vertical">
 
@@ -81,6 +83,10 @@
                     android:id="@+id/showOnMapToggle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
                     android:paddingLeft="16dp"
                     android:paddingRight="8dp"/>
 

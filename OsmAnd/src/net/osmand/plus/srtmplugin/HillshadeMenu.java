@@ -97,7 +97,7 @@ public class HillshadeMenu {
 					R.color.active_color_primary_dark : R.color.active_color_primary_light;
 		} else {
 			toggleIconId = R.drawable.ic_action_hide;
-			toggleIconColorId = nightMode ? 0 : R.color.icon_color_default_light;
+			toggleIconColorId = nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light;
 		}
 		contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setTitleId(toggleActionStringId, mapActivity)

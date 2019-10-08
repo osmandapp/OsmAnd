@@ -2644,7 +2644,7 @@
     <string name="poi_wiki_lang_ne">Nepalese wiki</string>
     <string name="poi_wiki_lang_scn">Siciliaanse wiki</string>
     <string name="poi_wiki_lang_mn">Mongoolse wiki</string>
-    <string name="poi_payment_token_yes">Tekens</string>
+    <string name="poi_payment_token_yes">Munten</string>
     <string name="poi_payment_token_no">Munten niet geaccepteerd</string>
     <string name="poi_bridge_movable_drawbridge">Beweegbare brug type: draaibrug</string>
     <string name="poi_bridge_movable_retractable">Beweegbare brug type: intrekbaar</string>
@@ -2667,7 +2667,7 @@
     <string name="poi_wiki_lang_ml">Malayalam wiki</string>
     <string name="poi_wiki_lang_mr">Marathi wiki</string>
     <string name="poi_wiki_lang_war">Waray wiki</string>
-    <string name="poi_payment_icsf_yes"></string>
+    <string name="poi_payment_icsf_yes"/>
     <string name="poi_shelter_type_sun_shelter">Zonnescherm</string>
     <string name="poi_bridge_structure_truss">Brugstructuur: gebonden hout</string>
     <string name="poi_surface_grass_paver">Wegoppervlak: grasswegdek</string>
@@ -2739,4 +2739,29 @@
     <string name="poi_health_specialty_pathology_yes">Anatomische pathologie</string>
     <string name="poi_health_specialty_oncology_yes">Oncologie</string>
     <string name="poi_health_specialty_obstetrics_postnatal_yes">Obstetrie (post-nataal)</string>
+    <string name="poi_health_specialty_addiction_medicine_yes">Verslavingszorg</string>
+    <string name="poi_capacity_beds">Capaciteit (bedden)</string>
+    <string name="poi_dispensing_yes">Ja</string>
+    <string name="poi_organic_yes">Ja</string>
+    <string name="poi_organic_no">Nee</string>
+    <string name="poi_fast_food_cafeteria">Ja</string>
+    <string name="poi_beds">Bedden</string>
+    <string name="poi_bulk_purchase_yes">Ja</string>
+    <string name="poi_park_ride_yes">Ja</string>
+    <string name="poi_climbing_crag">Ja</string>
+    <string name="reddit">Reddit</string>
+    <string name="poi_historic_tank">Historische tank</string>
+    <string name="poi_source_biomass">Energiebron: biomassa</string>
+    <string name="poi_access_disabled">Gehandicaptentoegang</string>
+    <string name="poi_snowmobile_yes">Ja</string>
+    <string name="poi_bus_yes">Ja</string>
+    <string name="poi_caravan_yes">Ja</string>
+    <string name="poi_motorhome_yes">Ja</string>
+    <string name="poi_trailer_yes">Ja</string>
+    <string name="poi_motorcycle_yes">Ja</string>
+    <string name="poi_moped_yes">Ja</string>
+    <string name="poi_mofa_yes">Ja</string>
+    <string name="poi_hgv_yes">Ja</string>
+    <string name="poi_goods_yes">Ja</string>
+    <string name="poi_disabled_yes">Ja</string>
 </resources>

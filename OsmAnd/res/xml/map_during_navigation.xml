@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+	android:title="@string/map_during_navigation">
+
+	<Preference
+		android:key="map_during_navigation_info"
+		android:layout="@layout/preference_info"
+		android:selectable="false"
+		android:title="@string/map_during_navigation_info" />
+
+	<net.osmand.plus.settings.preferences.ListPreferenceEx
+		android:key="auto_follow_route"
+		android:layout="@layout/preference_with_descr"
+		android:title="@string/choose_auto_follow_route" />
+
+	<net.osmand.plus.settings.preferences.ListPreferenceEx
+		android:key="auto_zoom_map_on_off"
+		android:layout="@layout/preference_with_descr"
+		android:title="@string/auto_zoom_map" />
+
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="snap_to_road"
+		android:layout="@layout/preference_dialog_and_switch"
+		android:summaryOff="@string/shared_string_off"
+		android:summaryOn="@string/shared_string_on"
+		android:title="@string/snap_to_road" />
+
+	<net.osmand.plus.settings.preferences.ListPreferenceEx
+		android:key="speed_for_map_to_direction_of_movement"
+		android:layout="@layout/preference_with_descr"
+		android:title="@string/map_orientation_change_in_accordance_with_speed" />
+
+</PreferenceScreen>

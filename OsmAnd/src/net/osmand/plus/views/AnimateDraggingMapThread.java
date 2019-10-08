@@ -180,6 +180,7 @@ public class AnimateDraggingMapThread {
 
 	public void startMoving(final double finalLat, final double finalLon, final int endZoom,
 							final boolean notifyListener, final Runnable finishAnimationCallback) {
+		boolean wasAnimating = isAnimating();
 		stopAnimatingSync();
 
 		final RotatedTileBox rb = tileView.getCurrentRotatedTileBox().copy();
@@ -187,22 +188,12 @@ public class AnimateDraggingMapThread {
 		double startLon = rb.getLongitude();
 		final int startZoom = rb.getZoom();
 		final double startZoomFP = rb.getZoomFloatPart();
-
-		boolean skipAnimation = false;
-		float mStX = rb.getPixXFromLatLon(startLat, startLon) - rb.getPixXFromLatLon(finalLat, finalLon);
-		float mStY = rb.getPixYFromLatLon(startLat, startLon) - rb.getPixYFromLatLon(finalLat, finalLon);
-		while (Math.abs(mStX) + Math.abs(mStY) > 1200) {
-			rb.setZoom(rb.getZoom() - 1);
-			if (rb.getZoom() <= 4) {
-				skipAnimation = true;
-			}
-			mStX = rb.getPixXFromLatLon(startLat, startLon) - rb.getPixXFromLatLon(finalLat, finalLon);
-			mStY = rb.getPixYFromLatLon(startLat, startLon) - rb.getPixYFromLatLon(finalLat, finalLon);
-		}
-		final int moveZoom = rb.getZoom();
+		float[] mSt = new float[2];
+		final int moveZoom = calculateMoveZoom(rb, finalLat, finalLon, mSt);
+		boolean skipAnimation = moveZoom == 0;
 		// check if animation needed
 		skipAnimation = skipAnimation || (Math.abs(moveZoom - startZoom) >= 3 || Math.abs(endZoom - moveZoom) > 3);
-		if (skipAnimation) {
+		if (skipAnimation || wasAnimating) {
 			tileView.setLatLonAnimate(finalLat, finalLon, notifyListener);
 			tileView.setFractionalZoom(endZoom, 0, notifyListener);
 			if (finishAnimationCallback != null) {
@@ -219,7 +210,7 @@ public class AnimateDraggingMapThread {
 		final float mMoveY = rb.getPixYFromLatLon(startLat, startLon) - rb.getPixYFromLatLon(finalLat, finalLon);
 
 		final boolean doNotUseAnimations = tileView.getSettings().DO_NOT_USE_ANIMATIONS.get();
-		final float animationTime = doNotUseAnimations ? 1 : Math.max(450, (Math.abs(mStX) + Math.abs(mStY)) / 1200f * MOVE_MOVE_ANIMATION_TIME);
+		final float animationTime = doNotUseAnimations ? 1 : Math.max(450, (Math.abs(mSt[0]) + Math.abs(mSt[1])) / 1200f * MOVE_MOVE_ANIMATION_TIME);
 
 		startThreadAnimating(new Runnable() {
 
@@ -246,6 +237,30 @@ public class AnimateDraggingMapThread {
 				pendingRotateAnimation();
 			}
 		});
+	}
+
+	public int calculateMoveZoom(RotatedTileBox rb, final double finalLat, final double finalLon, float[] mSt) {
+		if (rb == null) {
+			rb = tileView.getCurrentRotatedTileBox().copy();
+		}
+		double startLat = rb.getLatitude();
+		double startLon = rb.getLongitude();
+
+		boolean skipAnimation = false;
+		if (mSt == null) {
+			mSt = new float[2];
+		}
+		mSt[0] = rb.getPixXFromLatLon(startLat, startLon) - rb.getPixXFromLatLon(finalLat, finalLon);
+		mSt[1] = rb.getPixYFromLatLon(startLat, startLon) - rb.getPixYFromLatLon(finalLat, finalLon);
+		while (Math.abs(mSt[0]) + Math.abs(mSt[1]) > 1200) {
+			rb.setZoom(rb.getZoom() - 1);
+			if (rb.getZoom() <= 4) {
+				skipAnimation = true;
+			}
+			mSt[0] = rb.getPixXFromLatLon(startLat, startLon) - rb.getPixXFromLatLon(finalLat, finalLon);
+			mSt[1] = rb.getPixYFromLatLon(startLat, startLon) - rb.getPixYFromLatLon(finalLat, finalLon);
+		}
+		return skipAnimation ? 0 : rb.getZoom();
 	}
 
 	private void animatingRotateInThread(float rotate, float animationTime, boolean notify) {

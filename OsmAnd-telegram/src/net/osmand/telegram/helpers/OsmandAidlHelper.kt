@@ -127,6 +127,10 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 				contextMenuButtonsListener!!.onContextMenuButtonClicked(buttonId, pointId, layerId)
 			}
 		}
+
+		override fun onVoiceRouterNotify(params: OnVoiceNavigationParams?) {
+
+		}
 	}
 
 	fun setSearchCompleteListener(mSearchCompleteListener: SearchCompleteListener) {
@@ -1043,6 +1047,16 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 		return false
 	}
 
+	fun clearNavDrawerItems(appPackage: String): Boolean {
+		if (mIOsmAndAidlInterface != null) {
+			try {
+				return mIOsmAndAidlInterface!!.setNavDrawerItems(SetNavDrawerItemsParams(appPackage, emptyList()))
+			} catch (e: RemoteException) {
+				e.printStackTrace()
+			}
+		}
+		return false
+	}
 
 	/**
 	 * Put navigation on pause.
@@ -1216,5 +1230,19 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 			}
 		}
 		return false
+	}
+
+	fun getGpxColor(filename: String): String? {
+		if (mIOsmAndAidlInterface != null) {
+			try {
+				val gpxColorParams = GpxColorParams(filename)
+				if (mIOsmAndAidlInterface!!.getGpxColor(gpxColorParams)) {
+					return gpxColorParams.gpxColor
+				}
+			} catch (e: RemoteException) {
+				e.printStackTrace()
+			}
+		}
+		return null
 	}
 }

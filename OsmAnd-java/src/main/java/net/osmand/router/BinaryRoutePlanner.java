@@ -69,10 +69,8 @@ public class BinaryRoutePlanner {
 			RouteSegment recalculationEnd ) throws InterruptedException, IOException {
 		// measure time
 		ctx.timeToLoad = 0;
-		ctx.visitedSegments = 0;
 		ctx.memoryOverhead = 1000;
-		ctx.timeToCalculate = System.nanoTime();
-
+		ctx.visitedSegments = 0;
 
 		// Initializing priority queue to visit way segments 
 		Comparator<RouteSegment> nonHeuristicSegmentsComparator = new NonHeuristicSegmentsComparator();
@@ -123,7 +121,7 @@ public class BinaryRoutePlanner {
 			if (ctx.memoryOverhead > ctx.config.memoryLimitation * 0.95) {
 				throw new IllegalStateException("There is no enough memory " + ctx.config.memoryLimitation / (1 << 20) + " Mb");
 			}
-			ctx.visitedSegments++;
+			ctx.visitedSegments ++;
 			if (forwardSearch) {
 				boolean doNotAddIntersections = onlyBackward;
 				processRouteSegment(ctx, false, graphDirectSegments, visitedDirectSegments,
@@ -167,6 +165,7 @@ public class BinaryRoutePlanner {
 				throw new InterruptedException("Route calculation interrupted");
 			}
 		}
+		ctx.visitedSegments = visitedDirectSegments.size() + visitedOppositeSegments.size();
 		printDebugMemoryInformation(ctx, graphDirectSegments, graphReverseSegments, visitedDirectSegments, visitedOppositeSegments);
 		return finalSegment;
 	}
@@ -372,13 +371,13 @@ public class BinaryRoutePlanner {
 			TLongObjectHashMap<RouteSegment> visitedDirectSegments,TLongObjectHashMap<RouteSegment> visitedOppositeSegments) {
 		printInfo("Time to calculate : " + (System.nanoTime() - ctx.timeToCalculate) / 1e6 + 
 				", time to load : " + ctx.timeToLoad / 1e6 + ", time to load headers : " + ctx.timeToLoadHeaders / 1e6 + 
-				", time to calc dev : " + ctx.timeNanoToCalcDeviation/ 1e6);
+				", time to calc dev : " + ctx.timeNanoToCalcDeviation / 1e6);
 		int maxLoadedTiles = Math.max(ctx.maxLoadedTiles, ctx.getCurrentlyLoadedTiles());
 		printInfo("Current loaded tiles : " + ctx.getCurrentlyLoadedTiles() + ", maximum loaded tiles " + maxLoadedTiles);
 		printInfo("Loaded tiles " + ctx.loadedTiles + " (distinct " + ctx.distinctLoadedTiles + "), unloaded tiles " + ctx.unloadedTiles +
 				", loaded more than once same tiles "
 				+ ctx.loadedPrevUnloadedTiles);
-		printInfo("Visited roads " + ctx.visitedSegments + ", relaxed roads " + ctx.relaxedSegments);
+		printInfo("Visited segments " + ctx.visitedSegments + ", relaxed roads " + ctx.relaxedSegments);
 		if (graphDirectSegments != null && graphReverseSegments != null) {
 			printInfo("Priority queues sizes : " + graphDirectSegments.size() + "/" + graphReverseSegments.size());
 		}

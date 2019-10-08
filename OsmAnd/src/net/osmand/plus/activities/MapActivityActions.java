@@ -23,6 +23,9 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import net.osmand.AndroidUtils;
+import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
@@ -36,9 +39,6 @@ import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.ContextMenuItem.ItemBuilder;
-import net.osmand.GPXUtilities;
-import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
@@ -58,10 +58,12 @@ import net.osmand.plus.mapmarkers.MapMarkersDialogFragment;
 import net.osmand.plus.mapmarkers.MarkersPlanRouteContext;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
+import net.osmand.plus.profiles.SettingsProfileActivity;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routepreparationmenu.WaypointsFragment;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.settings.BaseSettingsFragment;
 import net.osmand.plus.views.BaseMapLayer;
 import net.osmand.plus.views.MapControlsLayer;
 import net.osmand.plus.views.MapTileLayer;
@@ -70,6 +72,7 @@ import net.osmand.plus.wikivoyage.WikivoyageWelcomeDialogFragment;
 import net.osmand.plus.wikivoyage.data.TravelDbHelper;
 import net.osmand.plus.wikivoyage.explore.WikivoyageExploreActivity;
 import net.osmand.router.GeneralRouter;
+import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
@@ -79,8 +82,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import static net.osmand.plus.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_ADD_GPX_WAYPOINT;
-import static net.osmand.plus.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_DIRECTIONS_FROM_ID;
+import static net.osmand.plus.ContextMenuAdapter.PROFILES_CHOSEN_PROFILE_TAG;
+import static net.osmand.plus.ContextMenuAdapter.PROFILES_CONTROL_BUTTON_TAG;
+import static net.osmand.plus.ContextMenuAdapter.PROFILES_NORMAL_PROFILE_TAG;
 import static net.osmand.plus.OsmAndCustomizationConstants.DRAWER_CONFIGURE_MAP_ID;
 import static net.osmand.plus.OsmAndCustomizationConstants.DRAWER_CONFIGURE_SCREEN_ID;
 import static net.osmand.plus.OsmAndCustomizationConstants.DRAWER_DASHBOARD_ID;
@@ -96,6 +100,8 @@ import static net.osmand.plus.OsmAndCustomizationConstants.DRAWER_PLUGINS_ID;
 import static net.osmand.plus.OsmAndCustomizationConstants.DRAWER_SEARCH_ID;
 import static net.osmand.plus.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
 import static net.osmand.plus.OsmAndCustomizationConstants.DRAWER_TRAVEL_GUIDES_ID;
+import static net.osmand.plus.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_ADD_GPX_WAYPOINT;
+import static net.osmand.plus.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_DIRECTIONS_FROM_ID;
 import static net.osmand.plus.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_EDIT_GPX_WP;
 import static net.osmand.plus.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MEASURE_DISTANCE;
 import static net.osmand.plus.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_SEARCH_NEARBY;
@@ -109,7 +115,7 @@ public class MapActivityActions implements DialogProvider {
 	public static final String KEY_NAME = "name";
 
 	public static final String KEY_ZOOM = "zoom";
-	
+
 	public static final int REQUEST_LOCATION_FOR_DIRECTIONS_NAVIGATION_PERMISSION = 203;
 
 	// Constants for determining the order of items in the additional actions context menu
@@ -126,6 +132,9 @@ public class MapActivityActions implements DialogProvider {
 	private static final int DIALOG_RELOAD_TITLE = 103;
 
 	private static final int DIALOG_SAVE_DIRECTIONS = 106;
+	
+	private static final int DRAWER_MODE_NORMAL = 0;
+	private static final int DRAWER_MODE_SWITCH_PROFILE = 1;
 
 	// make static
 	private static Bundle dialogBundle = new Bundle();
@@ -137,6 +146,8 @@ public class MapActivityActions implements DialogProvider {
 	@NonNull
 	private ImageView drawerLogoHeader;
 	private View drawerOsmAndFooter;
+	
+	private int drawerMode = DRAWER_MODE_NORMAL;
 
 	public MapActivityActions(MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
@@ -144,7 +155,7 @@ public class MapActivityActions implements DialogProvider {
 		routingHelper = mapActivity.getMyApplication().getRoutingHelper();
 		drawerLogoHeader = new ImageView(mapActivity);
 		drawerLogoHeader.setPadding(-AndroidUtils.dpToPx(mapActivity, 8f), AndroidUtils.dpToPx(mapActivity, 16f), 0,
-						0);
+				0);
 		drawerOsmAndFooter = mapActivity.getLayoutInflater().inflate(R.layout.powered_by_osmand_item, null);
 	}
 
@@ -625,11 +636,76 @@ public class MapActivityActions implements DialogProvider {
 		}
 	}
 
-
 	public ContextMenuAdapter createMainOptionsMenu() {
 		final OsmandMapTileView mapView = mapActivity.getMapView();
 		final OsmandApplication app = mapActivity.getMyApplication();
 		ContextMenuAdapter optionsMenuHelper = new ContextMenuAdapter();
+		boolean nightMode = getMyApplication().getDaynightHelper().isNightModeForMapControls();
+		
+		if (drawerMode == DRAWER_MODE_SWITCH_PROFILE) {
+			return createSwitchProfileOptionsMenu(app, optionsMenuHelper, nightMode);
+		}
+		return createNormalOptionsMenu(app, optionsMenuHelper, nightMode);
+	}
+
+	private ContextMenuAdapter createSwitchProfileOptionsMenu(final OsmandApplication app, ContextMenuAdapter optionsMenuHelper, boolean nightMode) {
+		drawerMode = DRAWER_MODE_NORMAL;
+		createProfilesController(app, optionsMenuHelper, nightMode, true);
+		
+		List<ApplicationMode> activeModes = ApplicationMode.values(app);
+		ApplicationMode currentMode = app.getSettings().APPLICATION_MODE.get();
+
+		String modeDescription;
+		
+		for (final ApplicationMode appMode : activeModes) {
+			if (appMode.isCustomProfile()) {
+				modeDescription = String.format(app.getString(R.string.profile_type_descr_string),
+						Algorithms.capitalizeFirstLetterAndLowercase(appMode.getParent().toHumanString(app)));
+			} else {
+				modeDescription = getString(R.string.profile_type_base_string);
+			}
+
+			int tag = currentMode.equals(appMode) ? PROFILES_CHOSEN_PROFILE_TAG : PROFILES_NORMAL_PROFILE_TAG;
+
+			optionsMenuHelper.addItem(new ItemBuilder().setLayout(R.layout.profile_list_item)
+					.setIcon(appMode.getIconRes())
+					.setColor(appMode.getIconColorInfo().getColor(nightMode))
+					.setTag(tag)
+					.setTitle(appMode.toHumanString(app))
+					.setDescription(modeDescription)
+					.setListener(new ItemClickListener() {
+						@Override
+						public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked, int[] viewCoordinates) {
+							app.getSettings().APPLICATION_MODE.set(appMode);
+							updateDrawerMenu();
+							return false;
+						}
+					})
+					.createItem());
+		}
+		
+		int activeColorPrimaryResId = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
+		optionsMenuHelper.addItem(new ItemBuilder().setLayout(R.layout.profile_list_item)
+				.setColor(activeColorPrimaryResId)
+				.setTag(PROFILES_CONTROL_BUTTON_TAG)
+				.setTitle(getString(R.string.shared_string_manage))
+				.setListener(new ItemClickListener() {
+					@Override
+					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked, int[] viewCoordinates) {
+						Intent intent = new Intent(app, SettingsProfileActivity.class);
+						intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+						app.startActivity(intent);
+						return true;
+					}
+				})
+				.createItem());
+		
+		return optionsMenuHelper;
+	}
+
+	private ContextMenuAdapter createNormalOptionsMenu(final OsmandApplication app, ContextMenuAdapter optionsMenuHelper, boolean nightMode) {
+		
+		createProfilesController(app, optionsMenuHelper, nightMode, false);
 
 		optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.home, mapActivity)
 				.setId(DRAWER_DASHBOARD_ID)
@@ -685,7 +761,7 @@ public class MapActivityActions implements DialogProvider {
 					}
 				}).createItem());
 
-		
+
 		optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.get_directions, mapActivity)
 				.setId(DRAWER_DIRECTIONS_ID)
 				.setIcon(R.drawable.ic_action_gdirections_dark)
@@ -826,6 +902,7 @@ public class MapActivityActions implements DialogProvider {
 					}
 				}).createItem());
 
+		/*
 		optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.shared_string_settings, mapActivity)
 				.setId(DRAWER_SETTINGS_ID)
 				.setIcon(R.drawable.ic_action_settings)
@@ -837,6 +914,18 @@ public class MapActivityActions implements DialogProvider {
 								.getSettingsActivity());
 						settings.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 						mapActivity.startActivity(settings);
+						return true;
+					}
+				}).createItem());
+		*/
+		optionsMenuHelper.addItem(new ItemBuilder().setTitle(getString(R.string.shared_string_settings))
+				.setId(DRAWER_SETTINGS_ID + ".new")
+				.setIcon(R.drawable.ic_action_settings)
+				.setListener(new ItemClickListener() {
+					@Override
+					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
+						app.logEvent("drawer_settings_new_open");
+						mapActivity.showSettings();
 						return true;
 					}
 				}).createItem());
@@ -886,6 +975,47 @@ public class MapActivityActions implements DialogProvider {
 		optionsMenuHelper.addItem(divider.createItem());
 
 		return optionsMenuHelper;
+	}
+
+	private void createProfilesController(final OsmandApplication app, ContextMenuAdapter optionsMenuHelper, boolean nightMode, boolean listExpanded) {
+		//switch profile button
+		ApplicationMode currentMode = app.getSettings().APPLICATION_MODE.get();
+		String modeDescription;
+		if (currentMode.isCustomProfile()) {
+			modeDescription = String.format(app.getString(R.string.profile_type_descr_string),
+					Algorithms.capitalizeFirstLetterAndLowercase(currentMode.getParent().toHumanString(app)));
+		} else {
+			modeDescription = getString(R.string.profile_type_base_string);
+		}
+		int icArrowResId = listExpanded ? R.drawable.ic_action_arrow_drop_up : R.drawable.ic_action_arrow_drop_down;
+		final int nextMode = listExpanded ? DRAWER_MODE_NORMAL : DRAWER_MODE_SWITCH_PROFILE;
+		optionsMenuHelper.addItem(new ItemBuilder().setLayout(R.layout.main_menu_drawer_btn_switch_profile)
+				.setIcon(currentMode.getIconRes())
+				.setSecondaryIcon(icArrowResId)
+				.setColor(currentMode.getIconColorInfo().getColor(nightMode))
+				.setTitle(currentMode.toHumanString(app))
+				.setDescription(modeDescription)
+				.setListener(new ItemClickListener() {
+					@Override
+					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked, int[] viewCoordinates) {
+						drawerMode = nextMode;
+						updateDrawerMenu();
+						return false;
+					}
+				})
+				.createItem());
+		optionsMenuHelper.addItem(new ItemBuilder().setLayout(R.layout.main_menu_drawer_btn_configure_profile)
+				.setColor(currentMode.getIconColorInfo().getColor(nightMode))
+				.setTitle(getString(R.string.configure_profile))
+				.setListener(new ItemClickListener() {
+					@Override
+					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked, int[] viewCoordinates) {
+						mapActivity.dismissSettingsScreens();
+						BaseSettingsFragment.showInstance(mapActivity, BaseSettingsFragment.SettingsScreenType.CONFIGURE_PROFILE);
+						return true;
+					}
+				})
+				.createItem());
 	}
 
 	public void openIntermediatePointsDialog() {

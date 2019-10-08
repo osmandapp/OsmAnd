@@ -169,7 +169,7 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 	public void onDestroyView() {
 		super.onDestroyView();
 		if (menu != null) {
-			menu.onDismiss(getCurrentMenuState());
+			menu.onDismiss(this, getCurrentMenuState(), null, false);
 		}
 	}
 
@@ -250,6 +250,14 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 		menuTitleHeight = view.findViewById(R.id.route_menu_top_shadow_all).getHeight()
 				+ view.findViewById(R.id.control_buttons).getHeight()
 				- view.findViewById(R.id.buttons_shadow).getHeight();
+		LinearLayout cardsContainer = getCardsContainer();
+		if (menu != null && cardsContainer != null && cardsContainer.getChildCount() > 0 && menu.isRouteSelected()) {
+			View topRouteCard = cardsContainer.getChildAt(0);
+			View badgesView = topRouteCard.findViewById(R.id.routes_badges);
+			View badgesPaddingView = topRouteCard.findViewById(R.id.badges_padding);
+			int paddingHeight = badgesPaddingView != null ? badgesPaddingView.getHeight() : 0;
+			menuTitleHeight += badgesView != null ? badgesView.getBottom() + paddingHeight : 0;
+		}
 		super.calculateLayout(view, initLayout);
 	}
 
@@ -349,7 +357,7 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 
 	private boolean isPublicTransportMode() {
 		OsmandApplication app = getMyApplication();
-		return app != null && app.getRoutingHelper().getAppMode() == ApplicationMode.PUBLIC_TRANSPORT;
+		return app != null && app.getRoutingHelper().isPublicTransportMode();
 	}
 	
 	public void updateRouteCalculationProgress(int progress) {
@@ -396,10 +404,10 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 		}
 		ProgressBar progressBarButton = (ProgressBar) view.findViewById(R.id.progress_bar_button);
 		if (progressBarButton != null) {
-			progressBarButton.setProgress(isPublicTransportMode() ? 0 : 100);
+			progressBarButton.setProgress(0);
 		}
 		TextViewExProgress textViewExProgress = (TextViewExProgress) view.findViewById(R.id.start_button_descr);
-		textViewExProgress.percent = isPublicTransportMode() ? 0 : 1;
+		textViewExProgress.percent = 0;
 	}
 
 	public void show(MapActivity mapActivity) {

@@ -366,6 +366,7 @@ public class MapWidgetRegistry {
 				}).setLayout(R.layout.list_item_text_button).createItem());
 		addControlId(map, cm, R.string.map_widget_transparent, settings.TRANSPARENT_MAP_THEME);
 		addControlId(map, cm, R.string.always_center_position_on_map, settings.CENTER_POSITION_ON_MAP);
+		addControlId(map, cm, R.string.show_lanes, settings.SHOW_LANES);
 	}
 
 	public void updateMapMarkersMode(MapActivity mapActivity) {

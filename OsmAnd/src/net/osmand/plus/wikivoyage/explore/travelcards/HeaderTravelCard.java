@@ -25,8 +25,11 @@ public class HeaderTravelCard extends BaseTravelCard {
 		if (viewHolder instanceof HeaderTravelVH) {
 			final HeaderTravelVH holder = (HeaderTravelVH) viewHolder;
 			holder.title.setText(title);
+			int primaryTextColor = getResolvedColor(getPrimaryTextColorRes());
+			holder.title.setTextColor(primaryTextColor);
 			if (articleItemCount > 0) {
 				holder.description.setText(String.valueOf(articleItemCount));
+				holder.description.setTextColor(primaryTextColor);
 				holder.description.setVisibility(View.VISIBLE);
 			} else {
 				holder.description.setVisibility(View.INVISIBLE);

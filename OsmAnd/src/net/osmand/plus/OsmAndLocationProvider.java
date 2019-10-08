@@ -761,6 +761,9 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	
 	
 	public void setLocationFromService(net.osmand.Location location, boolean continuous) {
+		if (locationSimulation.isRouteAnimating()) {
+			return;
+		}
 		// if continuous notify about lost location
 		if (continuous) {
 			scheduleCheckIfGpsLost(location);

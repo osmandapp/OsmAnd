@@ -313,6 +313,7 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 		if (listAdapter != null) {
 			List<QuickSearchListItem> list = new ArrayList<>(listItems);
 			if (list.size() > 0) {
+				showResult = false;
 				list.add(0, new QuickSearchTopShadowListItem(getMyApplication()));
 				list.add(new QuickSearchBottomShadowListItem(getMyApplication()));
 			}

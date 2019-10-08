@@ -2434,7 +2434,7 @@
     <string name="poi_vacuum_cleaner_no">Без пыласоса</string>
     <string name="poi_amenity_vacuum_cleaner">Пыласос</string>
     <string name="poi_sport_free_flying">Вольны палёт (спорт)</string>
-    <string name="poi_bicycle_repair_station">Стойка для рамонту ровараў</string>
+    <string name="poi_bicycle_repair_station">Стойка для рамонту ровараў; стойка для самастойнага рамонту ровараў</string>
     <string name="poi_water_tap">Вадаправодны кран</string>
     <string name="poi_button_operated_yes">Уключаецца кнопкай: так</string>
     <string name="poi_button_operated_no">Уключаецца кнопкай: не</string>
@@ -3604,4 +3604,12 @@
     <string name="poi_charcoal_pile">Куча вуголля</string>
     <string name="poi_hookah_lounge">Кальянная</string>
     <string name="poi_source_biomass">Крыніца энергіі: біямаса</string>
+    <string name="poi_snowmobile_filter">Даступна для снегаходаў</string>
+    <string name="poi_access_bus">Даступна для аўтобусаў</string>
+    <string name="poi_access_caravan">Даступна для прычапных дамоў на колах</string>
+    <string name="poi_access_motorhome">Даступна для дамоў на колах</string>
+    <string name="poi_access_trailer">Даступна для трэйлераў</string>
+    <string name="poi_access_motorcycle">Даступна для матацыклаў</string>
+    <string name="poi_access_moped">Даступна для мапедаў</string>
+    <string name="poi_taxi_office">Офіс таксі</string>
 </resources>

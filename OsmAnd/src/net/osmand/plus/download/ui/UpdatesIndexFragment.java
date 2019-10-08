@@ -19,6 +19,7 @@ import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.util.Algorithms;
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBar;
@@ -189,10 +190,13 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		ActionBar actionBar = getMyActivity().getSupportActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+		OsmandApplication app = getMyApplication();
 
-		if (getMyApplication().getAppCustomization().showDownloadExtraActions()) {
+		if (app.getAppCustomization().showDownloadExtraActions()) {
+			int colorResId = app.getSettings().isLightContent() ? R.color.active_buttons_and_links_text_light : R.color.active_buttons_and_links_text_dark;
 			MenuItem item = menu.add(0, RELOAD_ID, 0, R.string.shared_string_refresh);
-			item.setIcon(R.drawable.ic_action_refresh_dark);
+			Drawable icRefresh = app.getUIUtilities().getIcon(R.drawable.ic_action_refresh_dark, colorResId);
+			item.setIcon(icRefresh);
 			MenuItemCompat.setShowAsAction(item, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 		}
 	}

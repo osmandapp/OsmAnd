@@ -255,7 +255,7 @@ public class WaypointHelper {
 
 	public boolean isTypeEnabled(int type) {
 		if (type == ALARMS) {
-			return app.getSettings().SHOW_TRAFFIC_WARNINGS.getModeValue(appMode);
+			return app.getSettings().SHOW_ROUTING_ALARMS.get() && app.getSettings().SHOW_TRAFFIC_WARNINGS.getModeValue(appMode);
 		} else if (type == POI) {
 			return app.getSettings().SHOW_NEARBY_POI.getModeValue(appMode);
 		} else if (type == FAVORITES) {
@@ -620,7 +620,8 @@ public class WaypointHelper {
 		AlarmInfo prevSpeedCam = null;
 		for (AlarmInfo i : route.getAlarmInfo()) {
 			if (i.getType() == AlarmInfoType.SPEED_CAMERA) {
-				if (app.getSettings().SHOW_CAMERAS.getModeValue(mode) || app.getSettings().SPEAK_SPEED_CAMERA.getModeValue(mode)) {
+				if (app.getSettings().SHOW_ROUTING_ALARMS.get() && app.getSettings().SHOW_CAMERAS.getModeValue(mode)
+						|| app.getSettings().SPEAK_SPEED_CAMERA.getModeValue(mode)) {
 					LocationPointWrapper lw = new LocationPointWrapper(route, ALARMS, i, 0, i.getLocationIndex());
 					if(prevSpeedCam != null &&  
 							MapUtils.getDistance(prevSpeedCam.getLatitude(), prevSpeedCam.getLongitude(), 
@@ -633,7 +634,8 @@ public class WaypointHelper {
 					}
 				}
 			} else {
-				if (app.getSettings().SHOW_TRAFFIC_WARNINGS.getModeValue(mode) || app.getSettings().SPEAK_TRAFFIC_WARNINGS.getModeValue(mode)) {
+				if (app.getSettings().SHOW_ROUTING_ALARMS.get() && app.getSettings().SHOW_TRAFFIC_WARNINGS.getModeValue(mode)
+						|| app.getSettings().SPEAK_TRAFFIC_WARNINGS.getModeValue(mode)) {
 					LocationPointWrapper lw = new LocationPointWrapper(route, ALARMS, i, 0, i.getLocationIndex());
 					lw.setAnnounce(app.getSettings().SPEAK_TRAFFIC_WARNINGS.get());
 					array.add(lw);

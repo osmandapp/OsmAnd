@@ -241,4 +241,11 @@
     <string name="min_logging_speed">Velocidad mínima de registro</string>
     <string name="min_logging_speed_descr">Filtro: sin registro por debajo de la velocidad elegida</string>
     <string name="gpx_settings">Ajustes de GPX</string>
+    <string name="timeline_no_data_descr">No hemos recopilado datos para este día</string>
+    <string name="timeline_no_data">Sin datos</string>
+    <string name="shared_string_end">Fin</string>
+    <string name="shared_string_start">Inicio</string>
+    <string name="shared_string_apply">Aplicar</string>
+    <string name="set_time_timeline_descr">Elige la hora de visualización</string>
+    <string name="start_end_date">Fecha de inicio — fin</string>
 </resources>

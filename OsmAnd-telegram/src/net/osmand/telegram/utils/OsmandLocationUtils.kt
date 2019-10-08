@@ -8,6 +8,7 @@ import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.helpers.LocationMessages
 import net.osmand.telegram.helpers.LocationMessages.BufferMessage
 import net.osmand.telegram.helpers.LocationMessages.LocationMessage
+import net.osmand.telegram.helpers.ShowLocationHelper
 import net.osmand.telegram.helpers.TelegramHelper
 import net.osmand.telegram.helpers.TelegramUiHelper
 import net.osmand.util.GeoPointParserUtil
@@ -420,6 +421,7 @@ object OsmandLocationUtils {
 		var previousTime: Long = -1
 		var previousChatId: Long = -1
 		var previousUserId = -1
+		var previousDeviceName = ""
 		var segment: GPXUtilities.TrkSegment? = null
 		var track: GPXUtilities.Track? = null
 		var gpx: GPXUtilities.GPXFile? = null
@@ -428,15 +430,16 @@ object OsmandLocationUtils {
 		items.forEach {
 			val userId = it.userId
 			val chatId = it.chatId
+			val deviceName = it.deviceName
 			val time = it.time
-			if (previousTime >= time) {
-				return@forEach
-			}
-			countedLocations++
-			if (previousUserId != userId || (newGpxPerChat && previousChatId != chatId)) {
+			if (previousUserId != userId || previousDeviceName != deviceName || (newGpxPerChat && previousChatId != chatId)) {
 				gpx = GPXUtilities.GPXFile(app.packageName).apply {
 					metadata = GPXUtilities.Metadata().apply {
-						name = getGpxFileNameForUserId(app, userId, time)
+						name = getGpxFileNameForUserId(app, userId, chatId, time)
+					}
+					val colorIndex = app.settings.getLiveTrackInfo(userId, chatId, deviceName)?.colorIndex ?: -1
+					if (colorIndex != -1) {
+						extensionsToWrite["color"] = ShowLocationHelper.GPX_COLORS[colorIndex]
 					}
 				}
 				previousTime = 0
@@ -444,6 +447,10 @@ object OsmandLocationUtils {
 				segment = null
 				dataTracks.add(gpx!!)
 			}
+			if (previousTime >= time) {
+				return@forEach
+			}
+			countedLocations++
 			val pt = GPXUtilities.WptPt()
 			pt.lat = it.lat
 			pt.lon = it.lon
@@ -472,6 +479,7 @@ object OsmandLocationUtils {
 			previousTime = time
 			previousUserId = userId
 			previousChatId = chatId
+			previousDeviceName = deviceName
 		}
 
 		return dataTracks
@@ -485,15 +493,15 @@ object OsmandLocationUtils {
 		}
 	}
 
-	fun getGpxFileNameForUserId(app: TelegramApplication, userId: Int, time: Long): String {
+	fun getGpxFileNameForUserId(app: TelegramApplication, userId: Int, chatId: Long, time: Long): String {
 		var userName = userId.toString()
-		try {
-			val user = app.telegramHelper.getUser(userId)
-			if (user != null) {
-				userName = TelegramUiHelper.getUserName(user)
-			}
-		} catch (e: NumberFormatException) {
-			//ignore
+		val user = app.telegramHelper.getUser(userId)
+		if (user != null) {
+			userName = TelegramUiHelper.getUserName(user)
+		}
+		val chat = app.telegramHelper.getChat(chatId)
+		if (chat != null && app.telegramHelper.isGroup(chat)) {
+			return "${userName}_${chat.title}_${UTC_DATE_FORMAT.format(Date(time))}"
 		}
 		return "${userName}_${UTC_DATE_FORMAT.format(Date(time))}"
 	}

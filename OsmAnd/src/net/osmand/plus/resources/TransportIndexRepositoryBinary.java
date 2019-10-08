@@ -58,19 +58,23 @@ public class TransportIndexRepositoryBinary implements TransportIndexRepository 
 	}
 
 	@Override
-	public synchronized List<TransportRoute> getRouteForStop(TransportStop stop){
-		try {
-			Collection<TransportRoute> res = getOpenFile().getTransportRoutes(stop.getReferencesToRoutes()).valueCollection();
+	public synchronized List<TransportRoute> getRoutesForStop(TransportStop stop) {
+		return getRoutesForReferences(stop.getReferencesToRoutes());
+	}
 
-			if(res != null){
-				List<TransportRoute> lst =  new ArrayList<>(res);
+	@Override
+	public List<TransportRoute> getRoutesForReferences(int[] referencesToRoutes) {
+		try {
+			Collection<TransportRoute> res = getOpenFile().getTransportRoutes(referencesToRoutes).valueCollection();
+			if (res != null) {
+				List<TransportRoute> lst = new ArrayList<>(res);
 				Collections.sort(lst, new Comparator<TransportRoute>() {
 					@Override
 					public int compare(TransportRoute o1, TransportRoute o2) {
 						int i1 = Algorithms.extractFirstIntegerNumber(o1.getRef());
 						int i2 = Algorithms.extractFirstIntegerNumber(o2.getRef());
-						int r = Integer.compare(i1, i2);
-						if( r == 0){
+						int r = Algorithms.compare(i1, i2);
+						if (r == 0) {
 							r = Algorithms.compare(o1.getName(), o2.getName());
 						}
 						return r;
@@ -83,7 +87,7 @@ public class TransportIndexRepositoryBinary implements TransportIndexRepository 
 		}
 		return Collections.emptyList();
 	}
-	
+
 	@Override
 	public boolean acceptTransportStop(TransportStop stop) {
 		return resource.getShallowReader().transportStopBelongsTo(stop);

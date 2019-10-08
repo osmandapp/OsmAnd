@@ -1311,9 +1311,12 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		super.onResume();
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			if (!menu.isActive() || (mapActivity.getMapRouteInfoMenu().isVisible()) || MapRouteInfoMenu.chooseRoutesVisible || MapRouteInfoMenu.waypointsVisible) {
+			if (!menu.isActive() || (mapActivity.getMapRouteInfoMenu().isVisible()) || MapRouteInfoMenu.waypointsVisible) {
 				dismissMenu();
 				return;
+			}
+			if (MapRouteInfoMenu.chooseRoutesVisible) {
+				mapActivity.getChooseRouteFragment().dismiss();
 			}
 			updateLocationViewCache = mapActivity.getMyApplication().getUIUtilities().getUpdateLocationViewCache();
 			mapActivity.getMapViewTrackingUtilities().setContextMenu(menu);
@@ -1465,7 +1468,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 						@Override
 						public void onClick(View v) {
 							dismissMenu();
-							ChooseRouteFragment.showFromRouteInfo(requireMyActivity().getSupportFragmentManager(),
+							ChooseRouteFragment.showInstance(requireMyActivity().getSupportFragmentManager(),
 									requireMyApplication().getRoutingHelper().getTransportRoutingHelper().getCurrentRoute(),
 									ContextMenuFragment.MenuState.FULL_SCREEN);
 							/* fit route segment on map
@@ -1695,7 +1698,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 
 	public void centerMarkerLocation() {
 		centered = true;
-		showOnMap(menu.getLatLon(), true, true, false, getZoom());
+		showOnMap(menu.getLatLon(), true, false, getZoom());
 	}
 
 	private int getZoom() {
@@ -1719,8 +1722,8 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		cp.setCenterLocation(0.5f, map.getMapPosition() == OsmandSettings.BOTTOM_CONSTANT ? 0.15f : 0.5f);
 		cp.setLatLonCenter(flat, flon);
 		cp.setZoom(zoom);
-		flat = cp.getLatFromPixel(cp.getPixWidth() / 2, cp.getPixHeight() / 2);
-		flon = cp.getLonFromPixel(cp.getPixWidth() / 2, cp.getPixHeight() / 2);
+		flat = cp.getLatFromPixel(cp.getPixWidth() / 2f, cp.getPixHeight() / 2f);
+		flon = cp.getLonFromPixel(cp.getPixWidth() / 2f, cp.getPixHeight() / 2f);
 
 		if (updateOrigXY) {
 			origMarkerX = cp.getCenterPixelX();
@@ -1729,21 +1732,22 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		return new LatLon(flat, flon);
 	}
 
-	private void showOnMap(LatLon latLon, boolean updateCoords, boolean needMove, boolean alreadyAdjusted, int zoom) {
+	private void showOnMap(LatLon latLon, boolean updateCoords, boolean alreadyAdjusted, int zoom) {
 		AnimateDraggingMapThread thread = map.getAnimatedDraggingThread();
+		int calculatedZoom = menu.isZoomOutOnly() ? thread.calculateMoveZoom(null, latLon.getLatitude(), latLon.getLongitude(), null) : 0;
+		if (calculatedZoom > 0) {
+			zoom = Math.min(zoom, calculatedZoom);
+		}
+		menu.setZoomOutOnly(false);
 		LatLon calcLatLon = calculateCenterLatLon(latLon, zoom, updateCoords);
 		if (updateCoords) {
 			mapCenter = calcLatLon;
 			menu.setMapCenter(mapCenter);
 		}
-
 		if (!alreadyAdjusted) {
 			calcLatLon = getAdjustedMarkerLocation(getPosY(), calcLatLon, true, zoom);
 		}
-
-		if (needMove) {
-			thread.startMoving(calcLatLon.getLatitude(), calcLatLon.getLongitude(), zoom, true);
-		}
+		thread.startMoving(calcLatLon.getLatitude(), calcLatLon.getLongitude(), zoom, true);
 	}
 
 	private void setAddressLocation() {
@@ -2018,7 +2022,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 		}
 
 		if (animated) {
-			showOnMap(latlon, false, true, true, zoom);
+			showOnMap(latlon, false, true, zoom);
 		} else {
 			if (dZoom != 0) {
 				map.setIntZoom(zoom);

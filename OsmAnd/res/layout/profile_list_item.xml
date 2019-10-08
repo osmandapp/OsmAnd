@@ -22,6 +22,12 @@
 		android:layout_height="wrap_content"
 		android:orientation="vertical">
 
+		<View
+			android:id="@+id/divider_up"
+			android:layout_width="match_parent"
+			android:layout_height="1dp"
+			android:background="?attr/list_divider" />
+		
 		<LinearLayout
 			android:layout_width="match_parent"
 			android:layout_height="@dimen/setting_profile_item_height"
@@ -51,7 +57,7 @@
 					android:ellipsize="end"
 					android:maxLines="1"
 					android:textSize="@dimen/default_desc_text_size"
-					android:textColor="@color/description_font_and_bottom_sheet_icons"
+					android:textColor="?android:textColorSecondary"
 					tools:text="Type: Bicycle" />
 
 			</LinearLayout>

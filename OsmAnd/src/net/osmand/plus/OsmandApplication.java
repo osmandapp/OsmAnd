@@ -242,7 +242,7 @@ public class OsmandApplication extends MultiDexApplication {
         if(RateUsBottomSheetDialog.shouldShow(this)) {
             osmandSettings.RATE_US_STATE.set(RateUsBottomSheetDialog.RateUsState.IGNORED);
         }
-        getNotificationHelper().removeNotifications();
+        getNotificationHelper().removeNotifications(false);
 	}
 
 	public RendererRegistry getRendererRegistry() {
@@ -991,14 +991,18 @@ public class OsmandApplication extends MultiDexApplication {
 		}
 	}
 
-	public void restartApp(Context ctx) {
+	public void restartApp(final Context ctx) {
 		AlertDialog.Builder bld = new AlertDialog.Builder(ctx);
 		bld.setMessage(R.string.restart_is_required);
 		bld.setPositiveButton(R.string.shared_string_ok, new OnClickListener() {
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				android.os.Process.killProcess(android.os.Process.myPid());
+				if (ctx instanceof MapActivity) {
+					MapActivity.doRestart(ctx);
+				} else {
+					android.os.Process.killProcess(android.os.Process.myPid());
+				}
 			}
 		});
 		bld.show();
@@ -1009,9 +1013,13 @@ public class OsmandApplication extends MultiDexApplication {
 	}
 
 	public void sendCrashLog() {
-		Intent intent = new Intent(Intent.ACTION_SEND);
-		intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"crash@osmand.net"}); 
 		File file = getAppPath(OsmandApplication.EXCEPTION_PATH);
+		sendCrashLog(file);
+	}
+
+	public void sendCrashLog(File file) {
+		Intent intent = new Intent(Intent.ACTION_SEND);
+		intent.putExtra(Intent.EXTRA_EMAIL, new String[] {"crash@osmand.net"});
 		intent.putExtra(Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(this, file));
 		intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 		intent.setType("vnd.android.cursor.dir/email"); 

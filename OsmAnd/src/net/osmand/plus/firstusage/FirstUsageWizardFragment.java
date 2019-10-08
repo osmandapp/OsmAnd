@@ -559,7 +559,7 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 
 			List<BinaryMapDataObject> mapDataObjects = null;
 			try {
-				mapDataObjects = osmandRegions.queryBbox(point31x, point31x, point31y, point31y);
+				mapDataObjects = osmandRegions.query(point31x, point31x, point31y, point31y);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

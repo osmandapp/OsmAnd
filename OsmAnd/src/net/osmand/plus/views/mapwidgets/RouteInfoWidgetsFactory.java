@@ -25,6 +25,7 @@ import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
+import net.osmand.StateChangedListener;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
@@ -663,6 +664,17 @@ public class RouteInfoWidgetsFactory {
 		final TextInfoWidget bearingControl = new TextInfoWidget(map) {
 			private int cachedDegrees;
 			private float MIN_SPEED_FOR_HEADING = 1f;
+			private boolean angularUnitTypeChanged = false;
+			private StateChangedListener<OsmandSettings.AngularConstants> listener = new StateChangedListener<OsmandSettings.AngularConstants>() {
+				@Override
+				public void stateChanged(OsmandSettings.AngularConstants change) {
+					angularUnitTypeChanged = true;
+				}
+			};
+			
+			{
+				getOsmandApplication().getSettings().ANGULAR_UNITS.addListener(listener);
+			}
 
 			private LatLon getNextTargetPoint() {
 				List<TargetPoint> points = getOsmandApplication().getTargetPointsHelper().getIntermediatePointsWithTarget();
@@ -675,7 +687,8 @@ public class RouteInfoWidgetsFactory {
 				boolean modeChanged = setIcons(relative ? relativeBearingResId : bearingResId, relative ? relativeBearingNightResId : bearingNightResId);
 				setContentTitle(relative ? R.string.map_widget_bearing : R.string.map_widget_magnetic_bearing);
 				int b = getBearing(relative);
-				if (degreesChanged(cachedDegrees, b) || modeChanged) {
+				if (angularUnitTypeChanged || degreesChanged(cachedDegrees, b) || modeChanged) {
+					angularUnitTypeChanged = false;
 					cachedDegrees = b;
 					if (b != -1000) {
 						setText(OsmAndFormatter.getFormattedAzimuth(b, getOsmandApplication()) + (relative ? "" : " M"), null);
@@ -1235,13 +1248,14 @@ public class RouteInfoWidgetsFactory {
 		}
 		
 		public boolean updateInfo(DrawSettings drawSettings) {
+			boolean showRoutingAlarms = settings.SHOW_ROUTING_ALARMS.get();
 			boolean trafficWarnings = settings.SHOW_TRAFFIC_WARNINGS.get();
 			boolean cams = settings.SHOW_CAMERAS.get();
 			boolean peds = settings.SHOW_PEDESTRIAN.get();
 			boolean tunnels = settings.SHOW_TUNNELS.get();
 			boolean visible = false;
 			if ((rh.isFollowingMode() || trackingUtilities.isMapLinkedToLocation())
-					&& (trafficWarnings || cams)) {
+					&& showRoutingAlarms && (trafficWarnings || cams)) {
 				AlarmInfo alarm;
 				if(rh.isFollowingMode() && !rh.isDeviatedFromRoute() && rh.getCurrentGPXRoute() == null) {
 					alarm = wh.getMostImportantAlarm(settings.METRIC_SYSTEM.get(), cams);

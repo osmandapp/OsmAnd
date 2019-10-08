@@ -687,7 +687,7 @@
     <string name="vector_data_missing">البيانات المحلية (التي لا تحتاج الى ربط بالانترنت ) غير موجودة على بطاقة الذاكرة. يرجى إعادة تحميلها بغرض إستخدام الخرائط من دون إتصال.</string>
     <string name="local_index_gpx_info_show">"
 \n
-\nاضغط باستمرار لعرض الخيارات"</string>
+\nاضغط مطولا لعرض الخيارات"</string>
     <string name="local_index_installed"> الإصدار المحلي</string>
     <string name="local_index_items_backuped">تم تعطيل %1$d من %2$d خريطة</string>
     <string name="local_index_items_deleted">تم حذف %1$d من %2$d عنصر</string>
@@ -839,7 +839,7 @@
     <string name="loading_smth">جاري التحميل %1$s …</string>
     <string name="selected_gpx_info_show">"
 \n
-\nاضغط باستمرار للرؤية على الخريطة"</string>
+\nاضغط مطولا للرؤية على الخريطة"</string>
     <string name="rendering_value_pink_name">وردي</string>
     <string name="rendering_value_brown_name">بني</string>
     <string name="always_center_position_on_map">الموقع في المنتصف</string>
@@ -878,7 +878,7 @@
     <string name="android_19_location_disabled">منذ نسخة أندرويد كتكات 4.4، لا يمكنك تحميل أو تحديث الخرائط في مكان التخزين السابق (%s). هل تريد التغيير إلى مكان مسموح ونسخ كل الملفات إليه ؟ ملاحظات: 1-الملفات القديمة ستبقى كما هي (يمكن حذفها يدويا). 2-لايمكن مشاركة الملفات بين OsmAnd و +OsmAnd في مكان التخزين الجديد.</string>
     <string name="copying_osmand_one_file_descr">ينسخ الملف (%s) إلى مساره الجديد…</string>
     <string name="arrival_distance">تنبيه الوصول</string>
-    <string name="arrival_distance_descr">التنبيه عند الوصول إلى الوجهة.</string>
+    <string name="arrival_distance_descr">متى تريد إعلان الوصول؟</string>
     <string name="keep_informing_never">أبداً</string>
     <string name="specified_dir_doesnt_exist">تعذر العثور على المجلد المحدد.</string>
     <string name="application_dir">مجلد البيانات</string>
@@ -1036,7 +1036,7 @@
     <string name="proxy_pref_descr">إعداد اتصال إنترنت بالبروكسي</string>
     <string name="settings_privacy">الخصوصية :</string>
     <string name="shared_string_gpx_points">النقاط</string>
-    <string name="navigation_over_track">اختر مسار</string>
+    <string name="navigation_over_track">بدء الملاحة على طول المسار؟</string>
     <string name="avoid_roads_msg">يمكنك تشغيل مسار بديل بتحديد طرق متجنبة</string>
     <string name="rendering_attr_roadStyle_name">نمط الطريق</string>
     <string name="rendering_value__name">الافتراضي</string>
@@ -2160,7 +2160,8 @@
     <string name="quick_action_sh_poi_descr">يمكنك إضافة فئة أو أكثر لنقاط الإهتمام و القيام بعرضها أو إخفاءها على الخريطة.</string>
     <string name="quick_action_map_underlay_switch">الخريطة السفلية: %s</string>
     <string name="navigate_point_olc">رمز التَّمَوْضُع المفتوح</string>
-    <string name="navigate_point_olc_info_invalid">خطآ في الرمز المفتوح للتَّمَوْضُع</string>
+    <string name="navigate_point_olc_info_invalid">خطأ في OLC
+\n</string>
     <string name="quick_action_btn_tutorial_descr">قم بالضغط على الزر لفترة أطوَل ثم اسحبه لتغيير مكانه على الشاشة</string>
     <string name="rendering_attr_depthContours_name">محيطات الأعماق البحرية</string>
     <string name="auto_split_recording_title">تقسيم المسارات آلياً إلى أجزاء بعد كل فراغ</string>
@@ -2917,21 +2918,23 @@
     <string name="rendering_attr_highway_class_path_name">مسار</string>
     <string name="rendering_attr_highway_class_cycleway_name">طريق الدراجات</string>
     <string name="rendering_attr_undefined_name">غير محدد</string>
-    <string name="release_3_3">" • شاشة اتجاهات جديدة تعرض أزرار وجهة المنزل والعمل ، واختصار المسار السابق ، وقائمة مسارات وعلامات GPX النشطة ، وسجل البحث.
+    <string name="release_3_3">• شاشة اتجاهات جديدة تعرض أزرار وجهة المنزل والعمل ، واختصار المسار السابق ، وقائمة مسارات وعلامات GPX النشطة ، وسجل البحث. 
 \n
-\n  • معلومات إضافية تحت تفاصيل الطريق: أنواع الطرق ، السطح ، الانحدار ، النعومة.
+\n  • معلومات إضافية تحت تفاصيل الطريق: أنواع الطرق ، السطح ، الانحدار ، النعومة. 
 \n
-\n  • التنقل في وسائل النقل العام التي تدعم جميع أنواع النقل: المترو والحافلات والترام ، إلخ.
+\n  • التنقل في وسائل النقل العام التي تدعم جميع أنواع النقل: المترو والحافلات والترام ، إلخ. 
 \n
-\n  • إجراء سريع جديد لعرض/إخفاء المسارات وأنماط النهار/الليل.
+\n  • إجراء سريع جديد لعرض/إخفاء المسارات وأنماط النهار/الليل. 
 \n
-\n  • المناطق الثابتة المعروضة كما غمرت المياه في ألمانيا وجنوب أفريقيا وكيبيك.
+\n  • المناطق الثابتة المعروضة كما غمرت المياه في ألمانيا وجنوب أفريقيا وكيبيك. 
 \n
-\n  • دعم إضافي لاستيراد KML و KMZ .
+\n  • دعم إضافي لاستيراد KML و KMZ . 
 \n
-\n • تعطل ثابت عند فتح بعض محطات النقل العام.
+\n • تعطل ثابت عند فتح بعض محطات النقل العام. 
 \n
-\n  • تمت إزالة تحليلات Facebook و Firebase من الإصدار المجاني (لا يتضمنها OsmAnd+)"</string>
+\n  • تمت إزالة تحليلات Facebook و Firebase من الإصدار المجاني (لا يتضمنها OsmAnd+)
+\n
+\n</string>
     <string name="use_osm_live_public_transport_description">تمكين تغييرات النقل العام OsmAnd Live.</string>
     <string name="use_osm_live_public_transport">OsmAnd Live وسائل النقل العام</string>
     <string name="routing_attr_avoid_sett_name">تجنب الحصى والطرق المرصوفة</string>
@@ -2942,11 +2945,13 @@
     <string name="routing_attr_avoid_subway_description">تجنب مترو الانفاق والنقل بالسكك الحديدية خفيفة الوزن</string>
     <string name="routing_attr_avoid_ferry_name">تجنب العبارات</string>
     <string name="routing_attr_avoid_ferry_description">تجنب العبارات</string>
-    <string name="release_3_3_7">• عرض الوقت بين التنقلات في وسائل النقل العام
+    <string name="release_3_3_7">• عرض الوقت بين التنقلات في وسائل النقل العام 
 \n
-\n• تصحيح واجهة المستخدم للحصول على تفاصيل الطريق
+\n• تصحيح واجهة المستخدم للحصول على تفاصيل الطريق 
 \n
-\n• إصلاح السمة الداكنة في قائمة الاتجاه وتفاصيل الطريق
+\n• إصلاح السمة الداكنة في قائمة الاتجاه وتفاصيل الطريق 
 \n
-\n• عرض السمت في قياس المسافة</string>
+\n• عرض السمت في قياس المسافة
+\n
+\n</string>
 </resources>

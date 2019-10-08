@@ -46,7 +46,6 @@ public class NotificationHelper {
 		all.add(downloadNotification);
 	}
 
-	@NonNull
 	public Notification buildTopNotification() {
 		OsmandNotification notification = acquireTopNotification();
 		if (notification != null) {
@@ -56,10 +55,10 @@ public class NotificationHelper {
 			if (notificationBuilder != null) {
 				return notificationBuilder.build();
 			} else {
-				return buildErrorNotification();
+				return null;
 			}
 		} else {
-			return buildErrorNotification();
+			return null;
 		}
 	}
 
@@ -68,7 +67,7 @@ public class NotificationHelper {
 		return downloadNotification.buildNotification(false).build();
 	}
 
-	private Notification buildErrorNotification() {
+	public Notification buildErrorNotification() {
 		removeNotification(errorNotification.getType());
 		setTopNotification(errorNotification);
 		return errorNotification.buildNotification(false).build();
@@ -155,9 +154,11 @@ public class NotificationHelper {
 		}
 	}
 
-	public void removeNotifications() {
+	public void removeNotifications(boolean inactiveOnly) {
 		for (OsmandNotification notification : all) {
-			notification.removeNotification();
+			if (!inactiveOnly || !notification.isActive()) {
+				notification.removeNotification();
+			}
 		}
 	}
 

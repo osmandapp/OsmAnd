@@ -63,14 +63,14 @@ object OsmandFormatter {
 		}
 	}
 
-	fun getFormattedTime(milliseconds: Long, useCurrentTime: Boolean = true): String {
+	fun getFormattedTime(milliseconds: Long, useCurrentTime: Boolean = true, short: Boolean = false): String {
 		val calendar = Calendar.getInstance()
 		if (useCurrentTime) {
 			calendar.timeInMillis = System.currentTimeMillis() + milliseconds
 		} else {
 			calendar.timeInMillis = milliseconds
 		}
-		return if (isSameDay(calendar, Calendar.getInstance())) {
+		return if (isSameDay(calendar, Calendar.getInstance()) || short) {
 			SimpleDateFormat(SIMPLE_TIME_OF_DAY_FORMAT, Locale.getDefault()).format(calendar.time)
 		} else {
 			SimpleDateFormat(SIMPLE_TIME_OF_DAY_FORMAT, Locale.getDefault()).format(calendar.time) +

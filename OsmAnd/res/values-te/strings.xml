@@ -16,4 +16,27 @@
     <string name="shared_string_height">ఎత్తు</string>
     <string name="swap_start_and_destination">గమ్యస్థానము మూలాస్థానమును ఒకదానికి ఒకటి మార్చు</string>
     <string name="add_destination_point">గమ్యస్థానమును జోడించండి</string>
+    <string name="shared_string_min_speed">కనిష్ట వేగం</string>
+    <string name="shared_string_max_speed">ఘరిష్ట వేగం</string>
+    <string name="minmax_speed_dialog_title">కనిష్ట లేదా ఘరిష్ట వేగాన్ని సముదాయం చేయండి</string>
+    <string name="shared_string_crash">కూలీపొవు</string>
+    <string name="app_mode_scooter">మోటారు బండి</string>
+    <string name="app_mode_offroad">దారికి దూరంగ</string>
+    <string name="routing_attr_max_num_changes_description">గరిష్ట సంఖ్యలొ మర్పులను పేర్కొనండి</string>
+    <string name="routing_attr_max_num_changes_name">మార్పుల సంఖ్య</string>
+    <string name="turn_screen_on_router">మలుపులో మెల్కొలపండి</string>
+    <string name="turn_screen_on_time_descr">"తెర  మీద  చేసే సమయన్ని సముదాయం  చేయండి"</string>
+    <string name="rendering_attr_winter_road_name">శీతాకాలపు దారి</string>
+    <string name="rendering_attr_ice_road_name">మంచు దారి</string>
+    <string name="routeInfo_winter_ice_road_name">శీతకాలం మరియు మంచు దారులు</string>
+    <string name="rendering_attr_tracktype_grade1_name">మెరుగైన</string>
+    <string name="rendering_attr_tracktype_grade4_name">ఎక్కువగ మ్రుదువైనది</string>
+    <string name="rendering_attr_tracktype_grade5_name">మ్రుదువైన</string>
+    <string name="routeInfo_tracktype_name">ధ్రుడవైన ఉపరితలం</string>
+    <string name="shared_string_open_track">తెరుచుకున్న మార్గం</string>
+    <string name="gpx_join_gaps">ఖాలీలు నింపుము</string>
+    <string name="app_mode_camper">మకాం వేసే వ్యక్తి</string>
+    <string name="shared_string_default">సమయంలోగా చెల్లించకపోవుట</string>
+    <string name="app_mode_campervan">తాత్కాలిక హడ్డులు ఎంచుకో</string>
+    <string name="temporary_conditional_routing">తాత్కాలిక హద్దులు ఎన్నుకో</string>
 </resources>

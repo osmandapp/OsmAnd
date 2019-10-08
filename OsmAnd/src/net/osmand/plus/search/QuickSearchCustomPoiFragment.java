@@ -2,10 +2,12 @@ package net.osmand.plus.search;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
@@ -57,6 +59,7 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 	private TextView barTitle;
 	private TextView barButton;
 	private boolean editMode;
+	private boolean isLightTheme;
 
 
 	public QuickSearchCustomPoiFragment() {
@@ -69,7 +72,7 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		boolean isLightTheme =
+		isLightTheme =
 				getMyApplication().getSettings().OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_THEME;
 		int themeId = isLightTheme ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme;
 		setStyle(STYLE_NO_FRAME, themeId);
@@ -97,7 +100,9 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 		view = inflater.inflate(R.layout.search_custom_poi, container, false);
 
 		Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
-		toolbar.setNavigationIcon(app.getUIUtilities().getIcon(R.drawable.ic_action_remove_dark));
+		Drawable icClose = app.getUIUtilities().getIcon(R.drawable.ic_action_remove_dark,
+				isLightTheme ? R.color.active_buttons_and_links_text_light : R.color.active_buttons_and_links_text_dark);
+		toolbar.setNavigationIcon(icClose);
 		toolbar.setNavigationContentDescription(R.string.shared_string_close);
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override
@@ -105,6 +110,8 @@ public class QuickSearchCustomPoiFragment extends DialogFragment {
 				dismiss();
 			}
 		});
+		toolbar.setBackgroundColor(ContextCompat.getColor(app, isLightTheme ? R.color.app_bar_color_light : R.color.app_bar_color_dark));
+		toolbar.setTitleTextColor(ContextCompat.getColor(app, isLightTheme ? R.color.active_buttons_and_links_text_light : R.color.active_buttons_and_links_text_dark));
 
 		TextView title = (TextView) view.findViewById(R.id.title);
 		if (editMode) {

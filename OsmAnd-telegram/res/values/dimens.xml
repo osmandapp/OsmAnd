@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<dimen name="content_padding_tiny">2dp</dimen>
 	<dimen name="content_padding_small">4dp</dimen>
 	<dimen name="content_padding_half">8dp</dimen>
 	<dimen name="content_padding_standard">16dp</dimen>
@@ -54,7 +55,7 @@
 	<dimen name="my_location_text_sides_margin">32dp</dimen>
 	<dimen name="my_location_user_icon_size">60dp</dimen>
 
-	<dimen name="timeline_user_icon_size">56dp</dimen>
+	<dimen name="timeline_user_icon_size">84dp</dimen>
 	<dimen name="timeline_time_buttons_height">50dp</dimen>
 
 	<dimen name="disable_sharing_image_height">132dp</dimen>
@@ -76,6 +77,8 @@
 
 	<dimen name="proxy_save_button_height">60dp</dimen>
 
+	<dimen name="map_bottom_padding">18dp</dimen>
+	<dimen name="map_height">112dp</dimen>
 	<!-- Text sizes -->
 
 	<dimen name="dialog_title_text_size">22sp</dimen>
@@ -88,6 +91,7 @@
 
 	<dimen name="list_item_title_text_size">16sp</dimen>
 	<dimen name="list_item_description_text_size">13sp</dimen>
+	<dimen name="list_item_description_text_size_small">12sp</dimen>
 
 	<dimen name="text_button_text_size">15sp</dimen>
 

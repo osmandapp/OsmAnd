@@ -254,7 +254,7 @@
     <string name="add_favorite_dialog_default_favourite_name">Menyif</string>
     <string name="favourites_context_menu_add">Rnu d amenyaf</string>
     <string name="favourites">Imenyafen</string>
-    <string name="empty_state_favourites">Rnu γer imenyafen</string>
+    <string name="empty_state_favourites">Rnu ɣer imenyafen</string>
     <string name="wrong_input">Yir anekcam</string>
     <string name="shared_string_options">Iγewwaṛen</string>
     <string name="mapillary_menu_title_username">Isem n useqdac</string>
@@ -657,4 +657,15 @@
     <string name="parked_at">Sers deg</string>
     <string name="without_time_limit">Ulac tilist deg wakud</string>
     <string name="group_deleted">Agraw ittwakes</string>
+    <string name="shared_string_example">Amedya</string>
+    <string name="change_default_settings">Beddl iɣewwaṛen imezwar</string>
+    <string name="discard_changes">Suref i usnifel</string>
+    <string name="apply_to_current_profile">"Snes i umaɣnu amiran  %1$s"</string>
+    <string name="apply_to_all_profiles">Snes i imavnuyen meṛṛa</string>
+    <string name="start_up_message_pref">Izen n usenker</string>
+    <string name="appearance">Arwes</string>
+    <string name="configure_profile">Sbadu amaɣnu</string>
+    <string name="switch_profile">Beddel amaɣnu</string>
+    <string name="application_profile_changed">Amaɣnu n usnas ittwabddel ɣer \"%s\"</string>
+    <string name="rendering_value_black_name">Aberkan</string>
 </resources>

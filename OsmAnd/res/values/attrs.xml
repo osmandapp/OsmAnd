@@ -18,6 +18,8 @@
 		<attr name="expandable_list_item_background" format="color"/>
 		<attr name="expandable_list_background" format="color"/>
 		<attr name="bg_color" format="reference" />
+	    <attr name="bg_circle" format="reference"/>
+	    <attr name="btn_round" format="reference" />
         <attr name="btn_round_border" format="reference" />
 		<attr name="btn_round_border_2" format="reference" />
 		<attr name="bg_card" format="reference" />
@@ -57,6 +59,7 @@
         <attr name="search_tabbar_layout_theme" format="reference"/>
         <attr name="toolbar_theme" format="reference"/>
         <attr name="new_app_theme" format="reference"/>
+	    <attr name="app_bar_primary_item_color" format="color"/>
 
         <attr name="divider_color" format="reference" />
         <attr name="contextMenuButtonColor" format="reference" />

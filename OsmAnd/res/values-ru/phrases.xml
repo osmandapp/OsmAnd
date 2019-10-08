@@ -2489,7 +2489,7 @@
 	<string name="poi_vacuum_cleaner_no">Без пылесоса</string>
 	<string name="poi_amenity_vacuum_cleaner">Пылесос</string>
 	<string name="poi_sport_free_flying">Свободный полёт (спорт)</string>
-	<string name="poi_bicycle_repair_station">Стойка для ремонта велосипедов</string>
+	<string name="poi_bicycle_repair_station">Стойка для ремонта велосипедов;Стойка для самостоятельного ремонта велосипедов</string>
 	<string name="poi_water_tap">Водопроводный кран</string>
 	<string name="poi_button_operated_yes">Включается кнопкой: да</string>
 	<string name="poi_button_operated_no">Включается кнопкой: нет</string>
@@ -3475,5 +3475,17 @@
 	<string name="poi_historic_tank">Танк</string>
 
 	<string name="poi_hookah_lounge">Кальянная</string>
+
+	<string name="poi_taxi_office">Офис такси</string>
+
+	<string name="poi_cellar_entrance">Вход в погреб</string>
+
+	<string name="poi_craft_builder">Строитель</string>
+	<string name="poi_craft_distillery">Винокурня</string>
+	<string name="poi_craft_joiner">Столяр</string>
+	<string name="poi_craft_floorer">Укладчик полов</string>
+	<string name="poi_craft_bakery">Пекарня</string>
+	<string name="poi_craft_cabinet_maker">Краснодеревщик</string>
+
 
 </resources>

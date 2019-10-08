@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+	android:title="@string/turn_screen_on">
+
+	<Preference
+		android:key="turn_screen_on_info"
+		android:layout="@layout/preference_info"
+		android:persistent="false"
+		android:selectable="false"
+		android:title="@string/turn_screen_on_info" />
+
+	<net.osmand.plus.settings.preferences.ListPreferenceEx
+		android:key="turn_screen_on_time_int"
+		android:layout="@layout/preference_with_descr"
+		android:title="@string/wake_time" />
+
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="turn_screen_on_sensor"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_off"
+		android:summaryOn="@string/shared_string_on"
+		android:title="@string/turn_screen_on_sensor" />
+
+</PreferenceScreen>

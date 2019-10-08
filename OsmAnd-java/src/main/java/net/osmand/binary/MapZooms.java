@@ -125,7 +125,7 @@ public class MapZooms {
 	}
 
 	private static MapZooms DEFAULT = null;
-	public static String MAP_ZOOMS_DEFAULT = "11;12;13-14;15-";
+	public static String MAP_ZOOMS_DEFAULT = "9-10;11-12;13-14;15-";
 	public static MapZooms getDefault(){
 		if(DEFAULT == null){
 			DEFAULT = parseZooms(MAP_ZOOMS_DEFAULT);

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
+import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.data.Amenity;
@@ -25,13 +27,17 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.myplaces.FavoritesActivity;
+import net.osmand.plus.routing.TransportRoutingHelper;
 import net.osmand.plus.widgets.TextViewEx;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
+import java.io.IOException;
 import java.util.List;
 
 public class FavouritePointMenuBuilder extends MenuBuilder {
+
+	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(FavouritePointMenuBuilder.class);
 
 	private final FavouritePoint fav;
 	private Object originObject;
@@ -199,26 +205,31 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 	}
 
 	private TransportStop findTransportStop(String nameStringEn, double lat, double lon) {
-
 		QuadRect rect = MapUtils.calculateLatLonBbox(lat, lon, 15);
-		List<TransportStop> res = app.getResourceManager().searchTransportSync(rect.top, rect.left,
-				rect.bottom, rect.right, new ResultMatcher<TransportStop>() {
+		List<TransportStop> res = null;
+		try {
+			res = app.getResourceManager().searchTransportSync(rect.top, rect.left,
+					rect.bottom, rect.right, new ResultMatcher<TransportStop>() {
 
-					@Override
-					public boolean publish(TransportStop object) {
-						return true;
-					}
+						@Override
+						public boolean publish(TransportStop object) {
+							return true;
+						}
 
-					@Override
-					public boolean isCancelled() {
-						return false;
-					}
-				});
-
-		for (TransportStop stop : res) {
-			String stringEn = stop.toStringEn();
-			if (stringEn.equals(nameStringEn)) {
-				return stop;
+						@Override
+						public boolean isCancelled() {
+							return false;
+						}
+					});
+		} catch (IOException e) {
+			LOG.error(e.getMessage(), e);
+		}
+		if (res != null) {
+			for (TransportStop stop : res) {
+				String stringEn = stop.toStringEn();
+				if (stringEn.equals(nameStringEn)) {
+					return stop;
+				}
 			}
 		}
 		return null;

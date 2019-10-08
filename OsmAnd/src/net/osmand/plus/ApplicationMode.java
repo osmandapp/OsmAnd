@@ -140,7 +140,7 @@ public class ApplicationMode {
 		ApplicationMode[] navigationSet2 = new ApplicationMode[]{PEDESTRIAN, PUBLIC_TRANSPORT, AIRCRAFT};
 
 		regWidgetVisibility(WIDGET_NEXT_TURN, navigationSet1);
-		regWidgetVisibility(WIDGET_NEXT_TURN, navigationSet2);
+		regWidgetVisibility(WIDGET_NEXT_TURN_SMALL, navigationSet2);
 		regWidgetVisibility(WIDGET_NEXT_NEXT_TURN, navigationSet1);
 		regWidgetAvailability(WIDGET_NEXT_TURN, exceptDefault);
 		regWidgetAvailability(WIDGET_NEXT_TURN_SMALL, exceptDefault);

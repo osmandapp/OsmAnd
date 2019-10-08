@@ -48,11 +48,13 @@
 		</LinearLayout>
 
 		<View
+			android:id="@+id/default_speed_div"
 			android:layout_width="match_parent"
 			android:layout_height="1dp"
 			android:background="?attr/dashboard_divider" />
 
 		<LinearLayout
+			android:id="@+id/default_speed_container"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:orientation="vertical"
@@ -68,11 +70,13 @@
 		</LinearLayout>
 
 		<View
+			android:id="@+id/max_speed_div"
 			android:layout_width="match_parent"
 			android:layout_height="1dp"
 			android:background="?attr/dashboard_divider" />
 
 		<LinearLayout
+			android:id="@+id/max_speed_container"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:orientation="vertical"

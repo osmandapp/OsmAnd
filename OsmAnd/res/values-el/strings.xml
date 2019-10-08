@@ -417,9 +417,9 @@
 \n\tΓια να τους χρησιμοποιήσετε ενεργοποιήστε \'Μενού\' → \'Διαμόρφωση χάρτη\' → \'Προέλευση χάρτη…\' → \'Διανυσματικοί χάρτες χωρίς σύνδεση\'.</string>
     <string name="choose_audio_stream">Έξοδος φωνητικής καθοδήγησης</string>
     <string name="choose_audio_stream_descr">Επιλέξτε το ηχείο αναπαραγωγής της φωνητικής καθοδήγησης.</string>
-    <string name="voice_stream_voice_call">Ήχος κλήσης τηλεφώνου (επίσης για διακοπή στερεοφωνικών αυτοκινήτου μπλουτούθ)</string>
+    <string name="voice_stream_voice_call">Ήχος κλήσης τηλεφώνου (για διακοπή στερεοφωνικών αυτοκινήτου μπλουτούθ)</string>
     <string name="voice_stream_notification">Ήχος ειδοποίησης</string>
-    <string name="voice_stream_music">Ήχος πολυμέσων/μουσικής</string>
+    <string name="voice_stream_music">Ήχος πολυμέσων/πλοήγησης</string>
     <string name="warning_tile_layer_not_downloadable">Η εφαρμογή δεν μπορεί να κατεβάσει τη στρώση χάρτη %1$s, η επανεγκατάστασή της μπορεί να βοηθήσει.</string>
     <string name="overlay_transparency_descr">Τροποποίηση διαφάνειας επικάλυψης.</string>
     <string name="overlay_transparency">Διαφάνεια επικάλυψης</string>
@@ -1212,7 +1212,7 @@
     <string name="lang_al">Αλβανικά</string>
     <string name="lang_ar">Αραβικά</string>
     <string name="lang_fa">Περσικά</string>
-    <string name="lang_sr">Σερβικά</string>
+    <string name="lang_sr">Σερβικά (κυριλλικά)</string>
     <string name="lang_zh_cn">Κινέζικα (Απλοποιημένα)</string>
     <string name="lang_zh_tw">Κινέζικα (Παραδοσιακά)</string>
     <string name="arrival_distance_factor_early">Νωρίς</string>
@@ -2229,7 +2229,7 @@
     <string name="simulate_your_location_stop_descr">Παύση προσομοίωσης της θέσης σας.</string>
     <string name="simulate_your_location_descr">Προσομοίωση της θέσης σας χρησιμοποιώντας υπολογισμένη διαδρομή ή καταγεγραμμένο ίχνος GPX.</string>
     <string name="looking_up_address">Αναζήτηση διεύθυνσης</string>
-    <string name="av_locations_descr">Αρχείο GPX με σημείωση τοποθεσιών.</string>
+    <string name="av_locations_descr">Αρχείο GPX με τοποθεσίες.</string>
     <string name="download_live_updates">Ζωντανές ενημερώσεις</string>
     <string name="rendering_attr_currentTrackColor_description">Χρώμα GPX</string>
     <string name="rendering_attr_currentTrackWidth_description">Πλάτος GPX</string>
@@ -3029,7 +3029,7 @@
     <string name="quick_action_switch_day_mode">Κατάσταση ημέρας</string>
     <string name="quick_action_switch_night_mode">Κατάσταση νύχτας</string>
     <string name="quick_action_day_night_switch_mode">Εναλλαγή κατάστασης ημέρας/νύχτας</string>
-    <string name="routeInfo_roadClass_name">Κλάση</string>
+    <string name="routeInfo_roadClass_name">Τύπος δρόμου</string>
     <string name="routeInfo_surface_name">Επιφάνεια</string>
     <string name="routeInfo_smoothness_name">Ομαλότητα</string>
     <string name="routeInfo_steepness_name">Απότομη κλίση</string>
@@ -3037,4 +3037,249 @@
     <string name="run_full_osmand_header">Να εκκινήσει το OsmAnd;</string>
     <string name="routing_attr_avoid_sett_name">Αποφυγή βοτσάλων και πλακών</string>
     <string name="routing_attr_avoid_sett_description">Αποφυγή βοτσάλων και πλακών</string>
+    <string name="shared_string_min_speed">Ελαχ. ταχύτητα</string>
+    <string name="shared_string_max_speed">Μεγ. ταχύτητα</string>
+    <string name="default_speed_setting_title">Προεπιλεγμένη ταχύτητα</string>
+    <string name="default_speed_setting_descr">Αλλαγή ρυθμίσεων προεπιλεγμένης ταχύτητας</string>
+    <string name="minmax_speed_dialog_title">Ορισμός ελαχ/μεγ ταχύτητας</string>
+    <string name="default_speed_dialog_msg">Χρησιμοποιείται για τον υπολογισμό του αναμενόμενου χρόνου άφιξης κατά τη διαδρομή</string>
+    <string name="new_profile">Νέα κατατομή (προφίλ)</string>
+    <string name="shared_string_crash">Κατάρρευση</string>
+    <string name="app_mode_ufo">ΑΤΙΑ</string>
+    <string name="release_3_4">• Κατατομές (προφίλ) εφαρμογής: δημιουργήστε μια προσαρμοσμένη κατατομή για τις δικές σας ανάγκες, με προσαρμοσμένο εικονίδιο και χρώμα
+\n
+\n • Τώρα, προσαρμόστε οποιεσδήποτε προεπιλογές και μεγ/ελαχ ταχύτητα της κατατομής
+\n
+\n • Προστέθηκε γραφικό στοιχείο για τις τρέχουσες συντεταγμένες
+\n
+\n • Προστέθηκαν επιλογές για την εμφάνιση πυξίδας και χάρακα ακτίνας στον χάρτη
+\n
+\n • Διόρθωση παρασκηνίου καταγραφής ίχνους
+\n
+\n • Βελτιωμένες λήψεις παρασκηνίου χάρτη
+\n
+\n • Επιστροφή της επιλογής \'Ενεργοποίηση οθόνης\'
+\n
+\n • Διόρθωση επιλογής γλώσσας της βικιπαίδειας
+\n
+\n • Διόρθωση συμπεριφοράς πλήκτρου πυξίδας κατά την πλοήγηση
+\n
+\n • Άλλες διορθώσεις σφαλμάτων
+\n
+\n</string>
+    <string name="app_mode_personal_transporter">Προσωπικός μεταφορέας</string>
+    <string name="app_mode_monowheel">Μονός τροχός</string>
+    <string name="app_mode_scooter">Βέσπα</string>
+    <string name="precision_hdop_and_vdop">Οριζόντια ακρίβεια: %1$s, κάθετη: %2$s</string>
+    <string name="precision_hdop">Οριζόντια ακρίβεια: %s</string>
+    <string name="app_mode_offroad">Εκτός δρόμου</string>
+    <string name="edit_profile_setup_title">Κατατομή (προφίλ) ρύθμισης</string>
+    <string name="edit_profile_setup_subtitle">Η κατατομή (προφίλ) κρατά τις δικές της ρυθμίσεις</string>
+    <string name="edit_profile_setup_map_subtitle">Επιλέξτε τις προεπιλεγμένες επιλογές χάρτη για την κατατομή (προφίλ)</string>
+    <string name="edit_profile_screen_options_subtitle">Επιλέξτε τις προεγκατεστημένες επιλογές ως κατατομή</string>
+    <string name="edit_profile_nav_settings_subtitle">Επιλέξτε τις προεπιλεγμένες ρυθμίσεις πλοήγησης ως κατατομή</string>
+    <string name="routing_attr_max_num_changes_description">Καθορίστε τον μέγιστο αριθμό αλλαγών</string>
+    <string name="routing_attr_max_num_changes_name">Αριθμός αλλαγών</string>
+    <string name="turn_screen_on_router">Ενεργοποίηση στη στροφή</string>
+    <string name="turn_screen_on_time_descr">Ορίστε τον χρόνο ενεργοποίησης της οθόνης.</string>
+    <string name="turn_screen_on_sensor">Χρήση του αισθητήρα προσέγγισης</string>
+    <string name="turn_screen_on_sensor_descr">Κουνήστε το χέρι σας πάνω από την κορυφή της οθόνης για να ενεργοποιήσετε την οθόνη κατά την πλοήγηση.</string>
+    <string name="turn_on_profile_desc">Για να χρησιμοποιήσετε αυτήν τη ρύθμιση, ενεργοποιήστε τουλάχιστον μία κατατομή (προφίλ) εφαρμογής.</string>
+    <string name="rendering_attr_winter_road_name">Χειμερινός δρόμος</string>
+    <string name="rendering_attr_ice_road_name">Παγωμένος δρόμος</string>
+    <string name="routeInfo_winter_ice_road_name">Χειμερινοί και παγωμένοι δρόμοι</string>
+    <string name="rendering_attr_tracktype_grade1_name">Στερεός (πλακοστρωμένος)</string>
+    <string name="rendering_attr_tracktype_grade2_name">Στερεός (μη πλακοστρωμένος)</string>
+    <string name="rendering_attr_tracktype_grade3_name">Κυρίως στερεός</string>
+    <string name="rendering_attr_tracktype_grade4_name">Κυρίως μαλακός</string>
+    <string name="rendering_attr_tracktype_grade5_name">Μαλακός</string>
+    <string name="routeInfo_tracktype_name">Στερεότητα επιφανείας</string>
+    <string name="shared_string_file_is_saved">Το %s είναι αποθηκευμένο</string>
+    <string name="shared_string_open_track">Ανοίξτε το ίχνος</string>
+    <string name="shared_string_track_is_saved">Το %s του ίχνους είναι αποθηκευμένο</string>
+    <string name="gpx_join_gaps">Ένωση κενών</string>
+    <string name="app_mode_camper">Τροχόσπιτο</string>
+    <string name="app_mode_campervan">Τροχόσπιτο</string>
+    <string name="rendering_attr_showLez_description">Να εμφανίζονται οι ζώνες χαμηλής εκπομπής στον χάρτη. Δεν επηρεάζει τη διαδρομή.</string>
+    <string name="rendering_attr_showLez_name">Να εμφανίζονται οι ζώνες χαμηλής εκπομπής</string>
+    <string name="temporary_conditional_routing">Λάβετε υπόψη τους προσωρινούς περιορισμούς</string>
+    <string name="shared_string_default">Προεπιλεγμένο</string>
+    <string name="app_mode_pickup_truck">Ημιφορτηγό</string>
+    <string name="day">Ημέρα</string>
+    <string name="days_2_4">Ημέρες</string>
+    <string name="days_5">Ημέρες</string>
+    <string name="week">Εβδομάδα</string>
+    <string name="weeks_2_4">Εβδομάδες</string>
+    <string name="weeks_5">Εβδομάδες</string>
+    <string name="month">Μήνας</string>
+    <string name="months_2_4">Μήνες</string>
+    <string name="months_5">Μήνες</string>
+    <string name="year">Έτος</string>
+    <string name="years_2_4">Έτη</string>
+    <string name="years_5">Έτη</string>
+    <string name="months_3">Τρεις μήνες</string>
+    <string name="price_free">Δωρεάν</string>
+    <string name="get_free_trial_title">Ξεκινήστε την ελεύθερη δοκιμή σας %1$d %2$s.</string>
+    <string name="get_discount_first_part">%1$s για τους πρώτους %2$s</string>
+    <string name="get_discount_first_few_part">%1$s για τους πρώτους %2$s</string>
+    <string name="get_discount_second_part">έπειτα %1$s</string>
+    <string name="cancel_subscription">Ακύρωση συνδρομής</string>
+    <string name="price_and_discount">%1$s • Εξοικονομήστε %2$s</string>
+    <string name="searching_gps">Αναζήτηση GPS</string>
+    <string name="coordinates_widget">Γραφικό στοιχείο συντεταγμένων</string>
+    <string name="rate_dialog_descr">Παρακαλούμε, δώστε μας τα 30 δευτερόλεπτα στέλνοντας την ανάδραση σας και αξιολογώντας την εργασία μας στο Google Play.</string>
+    <string name="button_rate">Αξιολόγηση</string>
+    <string name="shared_string_privacy_policy">Πολιτική απορρήτου</string>
+    <string name="help_us_make_osmand_better">"Βοηθήστε μας να βελτιώσουμε το  OsmAnd!"</string>
+    <string name="make_osmand_better_descr">"Να επιτρέπεται στο OsmAnd να συλλέγει και να επεξεργάζεται ανώνυμα δεδομένα χρήσης της εφαρμογής. Δεν συλλέγουμε, ούτε αποθηκεύουμε δεδομένα για την τοποθεσία σας, ή για τις τοποθεσίες που κοιτάτε στον χάρτη.
+\n
+\nΜπορείτε να αλλάξετε την επιλογή σας  οποτεδήποτε στο Ρυθμίσεις &gt; Ιδιωτικότητα και ασφάλεια."</string>
+    <string name="choose_data_to_share">Επιλέξτε τον τύπο των δεδομένων που θέλετε να μοιραστείτε:</string>
+    <string name="downloaded_maps">Μεταφορτωμένους χάρτες</string>
+    <string name="visited_screens">Οθόνες που επισκεφτήκατε</string>
+    <string name="collected_data_descr">Καθορίστε ποια δεδομένα θα επιτρέπεται να μοιραστείτε με το OsmAnd.</string>
+    <string name="downloaded_maps_collect_descr">Μας βοηθά να καταλάβουμε ποιοι χάρτες, σε ποιες περιοχές και χώρες είναι οι οι πιο δημοφιλείς.</string>
+    <string name="visited_screens_collect_descr">Βοηθήστε μας να καταλάβουμε ποια γνωρίσματα του OsmAnd είναι τα πιο δημοφιλή.</string>
+    <string name="privacy_and_security_change_descr">Πληκτρολογώντας \"Επιτρέπεται\" συμφωνείτε με το %1$s</string>
+    <string name="settings_privacy_and_security">Ιδιωτικότητα και ασφάλεια</string>
+    <string name="settings_privacy_and_security_desc">Επιλέξτε ποια δεδομένα θα μοιραζόσαστε με μας</string>
+    <string name="shared_string_no_thank_you">Όχι, ευχαριστώ</string>
+    <string name="shared_string_allow">Να επιτρέπεται</string>
+    <string name="profile_name_hint">Όνομα κατατομής (προφίλ)</string>
+    <string name="nav_type_hint">Τύπος πλοήγησης</string>
+    <string name="app_mode_taxi">Ταξί</string>
+    <string name="app_mode_shuttle_bus">Λεωφορείο κλειστής διαδρομής</string>
+    <string name="app_mode_subway">Μετρό</string>
+    <string name="app_mode_horse">Άλογο</string>
+    <string name="app_mode_helicopter">Ελικόπτερο</string>
+    <string name="osmand_routing_promo">Μπορείτε να προσθέσετε τη δική σας τροποποιημένη έκδοση του αρχείου routing.xml στο ..osmand/routing</string>
+    <string name="app_mode_skiing">Χιονοδρομία</string>
+    <string name="base_profile_descr_ski">Χιονοδρομία</string>
+    <string name="show_compass_ruler">Εμφάνιση χάρακα πυξίδας</string>
+    <string name="hide_compass_ruler">Απόκρυψη χάρακα πυξίδας</string>
+    <string name="select_icon_profile_dialog_title">Επιλογή εικονιδίου</string>
+    <string name="settings_routing_mode_string">Κατάσταση: %s</string>
+    <string name="settings_derived_routing_mode_string">Κατάσταση χρήστη, παραγόμενη από: %s</string>
+    <string name="routing_profile_ski">Σκι</string>
+    <string name="profile_type_descr_string">Τύπος: %s</string>
+    <string name="profile_type_base_string">Κατατομή (προφίλ) βάσης</string>
+    <string name="profile_alert_need_routing_type_title">Επιλέξτε τύπο πλοήγησης</string>
+    <string name="profile_alert_need_routing_type_msg">Παρακαλούμε, επιλέξτε έναν τύπο πλοήγησης για τη νέα κατατομή εφαρμογής</string>
+    <string name="profile_alert_need_profile_name_title">Εισάγετε το όνομα κατατομής</string>
+    <string name="profile_alert_need_profile_name_msg">Το όνομα κατατομής (προφίλ) δεν μπορεί να είναι κενό!</string>
+    <string name="profile_alert_duplicate_name_title">Διπλό όνομα</string>
+    <string name="profile_alert_duplicate_name_msg">Υπάρχει ήδη κατατομή με αυτό το όνομα</string>
+    <string name="profile_alert_cant_delete_base">Δεν μπορείτε να διαγράψετε τις κατατομές βάσης του OsmAnd</string>
+    <string name="profile_alert_need_save_title">Αποθήκευση αλλαγών</string>
+    <string name="profile_alert_need_save_msg">Χρειάζεται να αποθηκεύσετε τις αλλαγές στην κατατομή πριν να συνεχίσετε</string>
+    <string name="profile_alert_delete_title">Διαγραφή κατατομής (προφίλ)</string>
+    <string name="profile_alert_delete_msg">Είσαστε σίγουροι ότι θέλετε να διαγράψετε την κατατομή %s</string>
+    <string name="select_base_profile_dialog_title">Επιλέξτε μια κατατομή (προφίλ) βάσης</string>
+    <string name="select_base_profile_dialog_message">Βασίστε την προσαρμοσμένη σας κατατομή (προφίλ) σε μία από τις προεπιλεγμένες κατατομές της εφαρμογής , αυτό καθορίζει τη βασική εγκατάσταση όπως ορατότητα των γραφικών στοιχείων και μονάδες ταχύτητας και απόστασης. Αυτές είναι οι προεπιλεγμένες κατατομές της εφαρμογής, μαζί με παραδείγματα προσαρμοσμένων κατατομών που μπορούν να επεκταθούν σε:</string>
+    <string name="select_nav_profile_dialog_title">Επιλέξτε τύπο πλοήγησης</string>
+    <string name="base_profile_descr_car">Αυτοκίνητο, φορτηγό, μηχανή</string>
+    <string name="base_profile_descr_bicycle">Ποδήλατο βουνού, παπάκι, άλογο</string>
+    <string name="base_profile_descr_pedestrian">Περπάτημα, πεζοπορία, τρέξιμο</string>
+    <string name="base_profile_descr_public_transport">Όλα τα είδη δημόσιων συγκοινωνιών</string>
+    <string name="base_profile_descr_boat">Πλοίο, κωπηλασία, ιστιοπλοΐα</string>
+    <string name="base_profile_descr_aircraft">Αεροπλάνο, ανεμοπορία</string>
+    <string name="routing_profile_geocoding">Γεωκωδικοποίηση</string>
+    <string name="routing_profile_straightline">Ευθεία γραμμή</string>
+    <string name="routing_profile_broutrer">Γεφυροδρομολογητής (χωρίς σύνδεση)</string>
+    <string name="osmand_default_routing">Δρομολόγηση OsmAnd</string>
+    <string name="custom_routing">Προσαρμοσμένη κατατομή (προφίλ) δρομολόγησης</string>
+    <string name="special_routing_type">Ειδική δρομολόγηση</string>
+    <string name="third_party_routing_type">Δρομολόγηση τρίτων</string>
+    <string name="application_profiles_descr">Επιλέξτε τις κατατομές (προφίλ) που θα είναι ορατές στην εφαρμογή.</string>
+    <string name="application_profiles">Κατατομές (προφίλ) εφαρμογής</string>
+    <string name="quick_action_need_to_add_item_to_list">Χρειάζεται να προσθέσετε τουλάχιστον ένα στοιχείο στον κατάλογο ρυθμίσεων Quick Action</string>
+    <string name="routing_attr_piste_type_downhill_name">Αλπική/κατηφορική χιονοδρομία</string>
+    <string name="routing_attr_piste_type_downhill_description">Πίστες για αλπική ή κατηφορική χιονοδρομία και πρόσβαση σε αναβατόρια.</string>
+    <string name="routing_attr_piste_type_nordic_name">Εκτός πίστας/σκανδιναβική χιονοδρομία</string>
+    <string name="routing_attr_piste_type_nordic_description">Πίστες για σκανδιναβική ή εκτός δρόμου χιονοδρομία.</string>
+    <string name="routing_attr_piste_type_skitour_name">Χιονοδρομικές βόλτες</string>
+    <string name="routing_attr_piste_type_skitour_description">Διαδρομές για χιονοδρομικές βόλτες.</string>
+    <string name="routing_attr_piste_type_sled_name">Έλκηθρο</string>
+    <string name="routing_attr_piste_type_sled_description">Πίστες για χρήση ελκήθρων.</string>
+    <string name="routing_attr_allow_intermediate_name">Να επιτρέπονται ενδιάμεσες διαδρομές</string>
+    <string name="routing_attr_allow_intermediate_description">Πιο δύσκολες διαδρομές με πιο απότομα τμήματα. Γενικά, πρέπει να αποφεύγονται μερικά εμπόδια.</string>
+    <string name="routing_attr_allow_advanced_name">Να επιτρέπονται προχωρημένες διαδρομές</string>
+    <string name="routing_attr_allow_advanced_description">Δύσκολες διαδρομές, με επικίνδυνα εμπόδια και απότομα τμήματα.</string>
+    <string name="routing_attr_allow_expert_name">Να επιτρέπονται ειδικές διαδρομές</string>
+    <string name="routing_attr_allow_expert_description">Πολύ δύσκολες διαδρομές, με επικίνδυνα εμπόδια και περιβάλλον.</string>
+    <string name="routing_attr_allow_skating_only_name">Να επιτρέπονται μόνο διαδρομές με πατίνια</string>
+    <string name="routing_attr_allow_skating_only_description">Μόνο καθαρισμένες διαδρομές για ελεύθερη τεχνοτροπία ή πατίνια, χωρίς κλασικά μονοπάτια.</string>
+    <string name="routing_attr_allow_classic_only_name">Να επιτρέπονται μόνο κλασικές διαδρομές</string>
+    <string name="process_downloading_service">Υπηρεσία μεταφόρτωσης του OsmAnd</string>
+    <string name="shared_string_color_magenta">Ματζέντα</string>
+    <string name="shared_string_icon">Εικονίδιο</string>
+    <string name="collected_data">Δεδομένα που συλλέξατε</string>
+    <string name="press_again_to_change_the_map_orientation">Πατήστε ξανά για να αλλάξετε τον προσανατολισμό του χάρτη</string>
+    <string name="last_launch_crashed">Η τελευταία έκδοση του OsmAnd απέτυχε. Παρακαλούμε, βοηθήστε μας να βελτιώσουμε το OsmAnd γνωστοποιώντας το μήνυμα σφάλματος.</string>
+    <string name="rendering_attr_highway_class_track_grade1_name">Βαθμίδα 1</string>
+    <string name="rendering_attr_highway_class_track_grade2_name">Βαθμίδα 2</string>
+    <string name="rendering_attr_highway_class_track_grade3_name">Βαθμίδα 3</string>
+    <string name="rendering_attr_highway_class_track_grade4_name">Βαθμίδα 4</string>
+    <string name="rendering_attr_highway_class_track_grade5_name">Βαθμίδα 5</string>
+    <string name="external_input_device">Εξωτερικές συσκευές εισόδου</string>
+    <string name="external_input_device_descr">Επιλέξτε μια συσκευή όπως γενικό πληκτρολόγιο ή WunderLINQ για εξωτερικά στοιχεία ελέγχου.</string>
+    <string name="sett_no_ext_input">Κανένα</string>
+    <string name="sett_generic_ext_input">Γενικό πληκτρολόγιο</string>
+    <string name="sett_wunderlinq_ext_input">WunderLINQ</string>
+    <string name="sett_parrot_ext_input">Parrot</string>
+    <string name="new_route_calculated_dist_dbg">Διαδρομή: απόσταση %s, χρόνος δρομολογητή %s 
+\nΥπολογισμός: %.1f sec, %d δρόμοι, %d πλακάκια)</string>
+    <string name="lang_oc">Οξιτανικά</string>
+    <string name="app_mode_wagon">Οικογενειακό αυτοκίνητο</string>
+    <string name="get_discount_title">Αποκτήστε το %1$d %2$s με έκπτωση %3$s.</string>
+    <string name="routing_attr_allow_classic_only_description">Καθαρισμένες διαδρομές για κλασική μορφή μόνο, χωρίς μονοπάτια με πατίνια. Αυτό περιλαμβάνει καθαρισμένες διαδρομές από μικρότερο χιονοόχημα με πιο χαλαρή πίστα και ίχνη που έγιναν από χιονοδρόμους.</string>
+    <string name="routing_attr_difficulty_preference_name">Προτιμώμενη δυσκολία</string>
+    <string name="routing_attr_difficulty_preference_description">Προτιμήστε διαδρομές αυτής της δυσκολίας, αν και η διαδρομή σε πιο δύσκολες ή εύκολες πίστες είναι ακόμα εφικτές, εάν είναι πιο σύντομες.</string>
+    <string name="routing_attr_freeride_policy_name">Εκτός πίστας</string>
+    <string name="routing_attr_freeride_policy_description">Ελεύθερες καθώς και εκτός πίστας διαδρομές είναι ανεπίσημες και περάσματα. Συνήθως ακαθάριστες, ασυντήρητες από τους υπεύθυνους και μη ελεγμένες το πρωί. Μπαίνετε με δικό σας κίνδυνο.</string>
+    <string name="configure_profile_info">Όλες οι παρακάτω ρυθμίσεις επηρεάζουν μόνο το επιλεγμένο προφίλ.</string>
+    <string name="utm_format_descr">Το OsmAnd χρησιμοποιεί το πρότυπο UTM, το οποίο είναι παρόμοιο αλλά όχι ίδιο με το UTM NATO πρότυπο.</string>
+    <string name="shared_string_example">Παράδειγμα</string>
+    <string name="navigate_point_format_utm">Πρότυπο UTM</string>
+    <string name="navigate_point_format_olc">Άνοιγμα κωδικού θέσης</string>
+    <string name="coordinates_format_info">Το επιλεγμένο πρότυπο θα εφαρμοστεί σε όλες τις τοποθεσίες στην εφαρμογή.</string>
+    <string name="pref_selected_by_default_for_profiles">Η ρύθμιση αυτή επιλέγεται από προεπιλογή για προφίλ: %s</string>
+    <string name="change_default_settings">Αλλαγή προεπιλεγμένων ρυθμίσεων</string>
+    <string name="discard_changes">Απόρριψη αλλαγών</string>
+    <string name="apply_to_current_profile">Εφαρμογή στο τρέχον %1$s προφίλ</string>
+    <string name="apply_to_all_profiles">Εφαρμογή σε όλα τα προφίλ</string>
+    <string name="start_up_message_pref">Εκκίνηση μηνύματος</string>
+    <string name="analytics_pref_title">Αναλυτικά στοιχεία</string>
+    <string name="turn_screen_on_info">Εμφάνιση χάρτη κατά την πλοήγηση πάνω από την οθόνη κλειδώματος.</string>
+    <string name="route_parameters_info">Αυτές οι ρυθμίσεις επηρεάζουν την δημιουργία της διαδρομής. Θα εφαρμοστεί μόνο στο επιλεγμένο προφίλ: %1$s.</string>
+    <string name="wake_time">Ώρα αφύπνισης</string>
+    <string name="units_and_formats">Μονάδες μέτρησης και φορμά</string>
+    <string name="appearance">Εμφάνιση</string>
+    <string name="map_look_descr">εικονίδια, widgets</string>
+    <string name="map_look">Εμφάνιση χάρτη</string>
+    <string name="list_of_installed_plugins">Λίστα εγκατεστημένων πρόσθετων</string>
+    <string name="configure_navigation">Ρυθμίσεις πλοήγησης</string>
+    <string name="general_settings_profile_descr">Θέμα εφαρμογής, μονάδες, περιοχή</string>
+    <string name="configure_profile">Ρυθμίστε το προφίλ</string>
+    <string name="screen_alerts_descr">Οι προειδοποιήσεις θα εμφανίζονται στην αριστερή κάτω γωνία της οθόνης κατά τη διάρκεια της πλοήγησης.</string>
+    <string name="switch_profile">Εναλλαγή προφίλ</string>
+    <string name="language_and_output">Γλώσσα και έξοδος</string>
+    <string name="reset_to_default">Επαναφορά προεπιλογών</string>
+    <string name="manage_profiles_descr">Δημιουργία, εισαγωγή, επεξεργασία προφίλ</string>
+    <string name="manage_profiles">Διαχείριση προφίλ εφαρμογής…</string>
+    <string name="osmand_settings_descr">Επηρεάζει όλη την εφαρμογή</string>
+    <string name="osmand_settings">Ρυθμίσεις OsmAnd</string>
+    <string name="copy_from_other_profile">Αντιγραφή από άλλο προφίλ</string>
+    <string name="turn_screen_on">Ενεργοποίηση οθόνης</string>
+    <string name="map_during_navigation_info">Χάρτης κατά τη διάρκεια της πλοήγησης</string>
+    <string name="map_during_navigation">Χάρτης κατά τη διάρκεια της πλοήγησης</string>
+    <string name="shared_string_other">Άλλα</string>
+    <string name="vehicle_parameters_descr">Βάρος, ύψος, ταχύτητα</string>
+    <string name="vehicle_parameters">Παράμετροι οχήματος</string>
+    <string name="voice_announces_info">Οι φωνητικές κλήσεις αναπαράγονται μόνο κατά τη διάρκεια της πλοήγησης.</string>
+    <string name="voice_announces_descr">Οδηγίες πλοήγησης και ανακοινώσεις</string>
+    <string name="voice_announces">Η φωνή ανακοινώνει</string>
+    <string name="screen_alerts">Προειδοποιήσεις οθόνης</string>
+    <string name="route_parameters_descr">Ρύθμιση παραμέτρων διαδρομής</string>
+    <string name="route_parameters">Παράμετροι διαδρομής</string>
 </resources>

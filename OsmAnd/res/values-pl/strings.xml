@@ -103,9 +103,9 @@
 \tAby jej użyć, proszę wybrać „Menu” → „Skonfiguruj mapę” → „Zasób mapy…” → „Wektorowe mapy offline”.</string>
     <string name="choose_audio_stream">Wyjście dźwięku nawigacji głosowej</string>
     <string name="choose_audio_stream_descr">Wybierz głośnik, aby odtworzyć wskazówki głosowe.</string>
-    <string name="voice_stream_voice_call">Kanał głosowy (także przerywa odtwarzanie muzyki z głośników)</string>
+    <string name="voice_stream_voice_call">Kanał głosowy (przerywa odtwarzanie muzyki z głośników)</string>
     <string name="voice_stream_notification">Kanał powiadomień</string>
-    <string name="voice_stream_music">Kanał media/music</string>
+    <string name="voice_stream_music">Media/Dźwięk nawigacji</string>
     <string name="warning_tile_layer_not_downloadable">Aplikacja nie może pobrać warstwy %1$s, spróbuj ją przeinstalować.</string>
     <string name="overlay_transparency_descr">Zmień przezroczystość warstwy.</string>
     <string name="overlay_transparency">Przezroczystość warstwy</string>
@@ -1286,7 +1286,7 @@
     <string name="lang_ar">Arabski</string>
     <string name="lang_fa">Perski</string>
     <string name="lang_sc">Sardyński</string>
-    <string name="lang_sr">Serbski</string>
+    <string name="lang_sr">Serbski (cyrylica)</string>
     <string name="lang_zh_cn">Chiński (uproszczony)</string>
     <string name="lang_zh_tw">Chiński (tradycyjny)</string>
     <string name="rendering_attr_subwayMode_name">Linie metra</string>
@@ -1653,7 +1653,7 @@ Długość %2$s</string>
     <string name="poi_dialog_poi_type">Rodzaj użytecznego miejsca</string>
     <string name="poi_action_delete">usuń</string>
     <string name="building_number">Numer budynku</string>
-    <string name="av_locations_descr">Plik śladu GPX z notatkami o położeniach.</string>
+    <string name="av_locations_descr">Plik GPX z lokalizacjami.</string>
     <string name="rendering_value_boldOutline_name">Pogrubione kontury</string>
     <string name="download_live_updates">Aktualizowanie na bieżąco</string>
     <string name="commit_poi">Wyślij użyteczne miejsce</string>
@@ -2879,14 +2879,14 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="mapillary_menu_title_pano">Wyświetlaj tylko obrazy 360°</string>
     <string name="shared_string_launch">Włącz</string>
     <string name="lang_gn_py">Guarani</string>
-    <string name="run_full_osmand_msg">Korzystasz z mapy {0}, która jest udostępniona przez OsmAnd. Czy chcesz włączyć pełną wersję OsmAnd\?</string>
+    <string name="run_full_osmand_msg">Korzystasz z mapy {0}, która jest udostępniona przez OsmAnd. Włączyć pełną wersję OsmAnd\?</string>
     <string name="run_full_osmand_header">Włączyć OsmAnd\?</string>
     <string name="cubic_m">m³</string>
     <string name="metric_ton">t</string>
     <string name="shared_string_capacity">Pojemność</string>
     <string name="shared_string_width">Szerokość</string>
     <string name="shared_string_height">Wysokość</string>
-    <string name="swap_start_and_destination">Odwróć start i cel</string>
+    <string name="swap_start_and_destination">Odwróć początek i cel</string>
     <string name="add_destination_point">Dodaj cel trasy</string>
     <string name="add_intermediate_point">Dodaj punkt pośredni</string>
     <string name="add_start_point">Dodaj punkt początkowy</string>
@@ -2898,9 +2898,9 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="waiting_for_route_calculation">Wyznaczanie trasy…</string>
     <string name="app_mode_public_transport">Transport publiczny</string>
     <string name="avoid_roads_descr">Proszę wybrać na mapie lub z poniższej listy, drogę omijaną podczas nawigacji:</string>
-    <string name="show_along_the_route">Pokaż na trasie</string>
+    <string name="show_along_the_route">Wyświetlanie wzdłuż trasy</string>
     <string name="simulate_navigation">Symulacja nawigacji</string>
-    <string name="choose_track_file_to_follow">Wybierz plik trasy do śledzenia</string>
+    <string name="choose_track_file_to_follow">Wybiera plik śladu do podążania</string>
     <string name="voice_announcements">Komunikaty głosowe</string>
     <string name="intermediate_destinations">Pośrednie cele podróży</string>
     <string name="arrive_at_time">Dotarcie do celu o %1$s</string>
@@ -2908,8 +2908,8 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="quick_action_switch_day_mode">Tryb Dzienny</string>
     <string name="quick_action_switch_night_mode">Tryb Nocny</string>
     <string name="quick_action_day_night_switch_mode">Zmień tryb Dzienny/Nocny</string>
-    <string name="routeInfo_roadClass_name">Kategoria</string>
-    <string name="routeInfo_surface_name">Powierzchnia</string>
+    <string name="routeInfo_roadClass_name">Rodzaj drogi</string>
+    <string name="routeInfo_surface_name">Nawierzchnia</string>
     <string name="routeInfo_smoothness_name">Wygładzanie</string>
     <string name="routeInfo_steepness_name">Nachylenie</string>
     <string name="add_home">Dodaj dom</string>
@@ -2917,12 +2917,12 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="work_button">Praca</string>
     <string name="time_of_day">Pora dnia</string>
     <string name="by_transport_type">Użyto %1$s</string>
-    <string name="step_by_step">Krok po kroku</string>
-    <string name="routeInfo_road_types_name">Typy dróg</string>
+    <string name="step_by_step">Szczegółowe wskazówki</string>
+    <string name="routeInfo_road_types_name">Rodzaje dróg</string>
     <string name="exit_at">Opuść na</string>
     <string name="sit_on_the_stop">Tablica na przystanku</string>
     <string name="shared_string_swap">Wymień</string>
-    <string name="show_more">Pokaż więcej</string>
+    <string name="show_more">Wyświetl więcej</string>
     <string name="tracks_on_map">Wyświetlane ślady</string>
     <string name="quick_action_show_hide_gpx_tracks">Przełącz widoczność śladów GPX</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Naciśnięcie przycisku pokaże lub ukryje wybrane ślady GPX na mapie</string>
@@ -2971,8 +2971,8 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="rendering_attr_smoothness_very_horrible_name">Bardzo okropna</string>
     <string name="rendering_attr_smoothness_impassable_name">Nieprzejezdna</string>
     <string name="rendering_attr_highway_class_motorway_name">Autostrada</string>
-    <string name="rendering_attr_highway_class_state_road_name">Droga krajowa</string>
-    <string name="rendering_attr_highway_class_road_name">Droga</string>
+    <string name="rendering_attr_highway_class_state_road_name">Krajowa</string>
+    <string name="rendering_attr_highway_class_road_name">Szosa</string>
     <string name="rendering_attr_highway_class_street_name">Ulica</string>
     <string name="rendering_attr_highway_class_service_name">Dojazdowa</string>
     <string name="rendering_attr_highway_class_footway_name">Chodnik</string>
@@ -2981,7 +2981,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="rendering_attr_highway_class_steps_name">Schody</string>
     <string name="rendering_attr_highway_class_path_name">Ścieżka</string>
     <string name="rendering_attr_highway_class_cycleway_name">Droga rowerowa</string>
-    <string name="rendering_attr_undefined_name">Niezdefiniowane</string>
+    <string name="rendering_attr_undefined_name">Niezdefiniowana</string>
     <string name="release_3_3">• Nowy ekran \"Kierunki\": Pokazuje przyciski kierunku domu i pracy, skrót do \"poprzednich tras\", listę aktywnych śladów GPX i znaczników, historię wyszukiwania
 \n
 \n • Dodatkowe informacje w \"Szczegółach drogi\": typy dróg, nawierzchnia, stromość, gładkość
@@ -3039,14 +3039,14 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="files_present">%1$d pliki (%2$s) są obecne w poprzednim położeniu „%3$s”.</string>
     <string name="move_maps">Przenieś mapy</string>
     <string name="dont_move_maps">Nie przenoś</string>
-    <string name="public_transport_ped_route_title">Trasa pieszo wynosi około %1$s i może być szybsza niż transportem publicznym</string>
+    <string name="public_transport_ped_route_title">Długość trasa pieszej wynosi około %1$s i może być ona szybsza niż transportem publicznym</string>
     <string name="public_transport_no_route_title">Niestety OsmAnd nie mógł znaleźć trasy odpowiedniej dla wybranych ustawień.</string>
     <string name="public_transport_try_ped">Wypróbuj nawigację pieszą.</string>
     <string name="public_transport_try_change_settings">Spróbuj zmienić ustawienia.</string>
     <string name="public_transport_calc_pedestrian">Oblicz trasę pieszą</string>
     <string name="public_transport_type">Rodzaj transportu</string>
     <string name="searching_gps">Wyszukiwanie GPS</string>
-    <string name="coordinates_widget">Widget współrzędne</string>
+    <string name="coordinates_widget">Widżet współrzędnych</string>
     <string name="rate_dialog_descr">Daj nam 30 sekund, podziel się opinią i oceń naszą pracę w Google Play.</string>
     <string name="button_rate">Oceń</string>
     <string name="shared_string_privacy_policy">Polityka prywatności</string>
@@ -3074,17 +3074,17 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="app_mode_subway">Metro</string>
     <string name="app_mode_horse">Konie</string>
     <string name="app_mode_helicopter">Śmigłowiec</string>
-    <string name="osmand_routing_promo">Możesz dodać własną zmodyfikowaną wersję pliku routing.xml do ..osmand/routing</string>
+    <string name="osmand_routing_promo">Można dodać własną, zmodyfikowaną wersję pliku routing.xml do ..osmand/routing</string>
     <string name="app_mode_skiing">Jazda na nartach</string>
     <string name="base_profile_descr_ski">Jazda na nartach</string>
-    <string name="show_compass_ruler">Pokaż linijkę kompasu</string>
-    <string name="hide_compass_ruler">Ukryć linijkę kompasu</string>
+    <string name="show_compass_ruler">Wyświetl linijkę kompasu</string>
+    <string name="hide_compass_ruler">Ukryj linijkę kompasu</string>
     <string name="select_icon_profile_dialog_title">Wybierz ikonę</string>
     <string name="settings_routing_mode_string">Tryb: %s</string>
     <string name="settings_derived_routing_mode_string">Tryb użytkownika, pochodzący z: %s</string>
     <string name="routing_profile_ski">Narty</string>
     <string name="profile_type_descr_string">Typ: %s</string>
-    <string name="profile_type_base_string">Profil Baza</string>
+    <string name="profile_type_base_string">Profil bazowy</string>
     <string name="profile_alert_need_routing_type_title">Wybierz typ nawigacji</string>
     <string name="profile_alert_need_routing_type_msg">Proszę wybrać rodzaj nawigacji do nowego profilu aplikacji</string>
     <string name="profile_alert_need_profile_name_title">Podaj nazwę profilu</string>
@@ -3095,14 +3095,14 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="profile_alert_need_save_title">Zapisz zmiany</string>
     <string name="profile_alert_need_save_msg">Przed kontynuowaniem należy zapisać zmiany w profilu</string>
     <string name="profile_alert_delete_title">Usuń profil</string>
-    <string name="profile_alert_delete_msg">Czy na pewno chcesz usunąć profil %s\?</string>
-    <string name="select_base_profile_dialog_title">Wybierz profil bazowy</string>
-    <string name="select_base_profile_dialog_message">Niestandardowy profil aplikacji powinien być oparty na jednym z domyślnych profili aplikacji. Wybrany profil definiuje podstawowe ustawienia: ustawienia widżetów, jednostek prędkości i odległości. W łańcuchu poniżej Nazwa Profilu można dowiedzieć się, które profile nawigacyjne są odpowiednie dla każdego profilu aplikacji.</string>
+    <string name="profile_alert_delete_msg">Usunąć profil %s\?</string>
+    <string name="select_base_profile_dialog_title">Wybór profilu bazowego</string>
+    <string name="select_base_profile_dialog_message">Profil dostosowany można oprzeć na jednym z domyślnych profili aplikacji. Określają one podstawowe ustawienia, takie jak domyślna widoczność widżetów i jednostek prędkości i odległości. Są to domyślne profile aplikacji, wraz z przykładami profili dostosowanych, które można rozszerzyć na:</string>
     <string name="select_nav_profile_dialog_title">Wybierz typ nawigacji</string>
     <string name="base_profile_descr_car">Samochód, ciężarówka, motocykl</string>
     <string name="base_profile_descr_bicycle">Rower górski, motorower, koń</string>
     <string name="base_profile_descr_pedestrian">Spacer, wędrówka piesza, bieganie</string>
-    <string name="base_profile_descr_public_transport">Wszystkie typy PT</string>
+    <string name="base_profile_descr_public_transport">Wszystkie rodzaje transportu publicznego</string>
     <string name="base_profile_descr_boat">Statek, wioślarstwo, żeglarstwo</string>
     <string name="base_profile_descr_aircraft">Samolot, szybownictwo</string>
     <string name="routing_profile_geocoding">Geokodowanie</string>
@@ -3111,11 +3111,11 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="osmand_default_routing">OsmAnd trasa</string>
     <string name="custom_routing">Niestandardowy profil routingu</string>
     <string name="special_routing_type">Wyznaczanie tras specjalnych</string>
-    <string name="application_profiles_descr">Wybierz profile, które mają być widoczne w aplikacji.</string>
+    <string name="application_profiles_descr">Wybiera profile widoczne w aplikacji.</string>
     <string name="application_profiles">Profile aplikacji</string>
     <string name="zoom_by_wunderlinq_descr">Zmień powiększenie mapy, pokręć kółkiem w górę i w dół. Escape powraca do aplikacji WunderLINQ.</string>
     <string name="zoom_by_wunderlinq">Użyj WunderLINQ do kontroli</string>
-    <string name="quick_action_need_to_add_item_to_list">Musisz dodać co najmniej jeden element do listy w Ustawieniach Szybkiej Akcji</string>
+    <string name="quick_action_need_to_add_item_to_list">Należy dodać co najmniej jeden element do listy w ustawieniach szybkiej czynności</string>
     <string name="routing_attr_piste_type_downhill_description">Stoki narciarskie do narciarstwa alpejskiego i zjazdowego oraz dostęp do wyciągów narciarskich.</string>
     <string name="routing_attr_piste_type_nordic_name">Narty biegowe/nordic ski</string>
     <string name="routing_attr_piste_type_nordic_description">Trasy do narciarstwa klasycznego lub biegowego.</string>
@@ -3156,17 +3156,17 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="app_mode_personal_transporter">Transporter osobisty</string>
     <string name="precision_hdop_and_vdop">Precyzja w poziomie: %1$s, w pionie: %2$s</string>
     <string name="precision_hdop">Precyzja w poziomie: %s</string>
-    <string name="app_mode_offroad">Offroad</string>
+    <string name="app_mode_offroad">off-road</string>
     <string name="edit_profile_setup_subtitle">Profil zachowa własne ustawienia</string>
-    <string name="edit_profile_setup_map_subtitle">Wybierz domyślne opcje mapy dla profilu</string>
-    <string name="edit_profile_screen_options_subtitle">Wybierz domyślne opcje ekranu dla profilu</string>
-    <string name="edit_profile_nav_settings_subtitle">Wybierz domyślne ustawienia nawigacji dla profilu</string>
+    <string name="edit_profile_setup_map_subtitle">Wybiera domyślne opcje mapy dla profilu</string>
+    <string name="edit_profile_screen_options_subtitle">Wybiera domyślne opcje ekranu dla profilu</string>
+    <string name="edit_profile_nav_settings_subtitle">Wybiera domyślne ustawienia nawigacji dla profilu</string>
     <string name="routing_attr_max_num_changes_description">Określ maksymalną liczbę zmian</string>
     <string name="routing_attr_max_num_changes_name">Liczba zmian</string>
     <string name="turn_screen_on_router">Przebudzaj przed zakrętem</string>
     <string name="turn_screen_on_time_descr">Ustaw czas, przez który ekran zostanie włączony.</string>
     <string name="turn_screen_on_sensor">Użyj czujnika bliskości</string>
-    <string name="turn_screen_on_sensor_descr">Pomachaj ręką nad górną częścią ekranu, aby włączyć ekran podczas nawigacji.</string>
+    <string name="turn_screen_on_sensor_descr">Umożliwia włączenie ekran podczas nawigacji machając nad nim ręką.</string>
     <string name="external_input_device">Zewnętrzne urządzenia wejściowe</string>
     <string name="external_input_device_descr">Wybierz urządzenie takie jak zwykła klawiatura lub WundeRLINQ do sterowania zewnętrznego.</string>
     <string name="sett_no_ext_input">Brak</string>
@@ -3183,7 +3183,119 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="rendering_attr_tracktype_grade4_name">Głównie miękkie</string>
     <string name="rendering_attr_tracktype_grade5_name">Miękkie</string>
     <string name="routeInfo_tracktype_name">Trwałość powierzchni</string>
-    <string name="shared_string_file_is_saved">%s jest zapisany</string>
+    <string name="shared_string_file_is_saved">Zapisano %s</string>
     <string name="shared_string_open_track">Otwórz ślad</string>
-    <string name="shared_string_track_is_saved">Ślad %s jest zapisany</string>
+    <string name="shared_string_track_is_saved">Zapisano ślad %s</string>
+    <string name="release_3_4">• Profile aplikacji: Stwórz własny profil dla własnych potrzeb, z niestandardową ikoną i kolorem 
+\n 
+\n• Teraz można dostosować domyślne ustawienia dowolnego profilu i prędkości min/max 
+\n 
+\n• Dodano widget dla bieżących współrzędnych 
+\n 
+\n• Dodano opcje pokazania kompasu i linijki promienia na mapie 
+\n 
+\n• Napraw Rejestrowanie śladu tła 
+\n 
+\n• Ulepszone pliki do pobrania mapy w tle 
+\n 
+\n• Zwrócona opcja \"Turn Screen on\" 
+\n 
+\n• Poprawiono wybór języka Wikipedii 
+\n 
+\n• Poprawiono zachowanie przycisku kompasu podczas nawigacji 
+\n 
+\n• Inne poprawki błędów
+\n
+\n</string>
+    <string name="edit_profile_setup_title">Konfiguracja profilu</string>
+    <string name="rendering_attr_highway_class_track_grade1_name">Klasa 1</string>
+    <string name="rendering_attr_highway_class_track_grade2_name">Klasa 2</string>
+    <string name="rendering_attr_highway_class_track_grade3_name">Klasa 3</string>
+    <string name="rendering_attr_highway_class_track_grade4_name">Klasa 4</string>
+    <string name="rendering_attr_highway_class_track_grade5_name">Klasa 5</string>
+    <string name="app_mode_camper">Kamper</string>
+    <string name="app_mode_campervan">Samochód kempingowy</string>
+    <string name="rendering_attr_showLez_description">Wyświetl strefy niskiej emisji na mapie. Nie ma to wpływu na przebieg trasy.</string>
+    <string name="rendering_attr_showLez_name">Wyświetl strefy niskiej emisji</string>
+    <string name="temporary_conditional_routing">Rozpatrywanie tymczasowych ograniczeń</string>
+    <string name="third_party_routing_type">Wyznaczanie tras przez inne osoby</string>
+    <string name="app_mode_monowheel">Monocykl</string>
+    <string name="shared_string_default">Domyślnie</string>
+    <string name="gpx_join_gaps">Połącz luki</string>
+    <string name="lang_oc">Prowansalski</string>
+    <string name="app_mode_wagon">Wóz</string>
+    <string name="app_mode_pickup_truck">Pickup</string>
+    <string name="day">Dzień</string>
+    <string name="days_2_4">Dni</string>
+    <string name="days_5">Dni</string>
+    <string name="week">Tydzień</string>
+    <string name="weeks_2_4">Tygodnie</string>
+    <string name="weeks_5">Tygodni</string>
+    <string name="month">Miesiąc</string>
+    <string name="year">Rok</string>
+    <string name="months_3">Trzy miesiące</string>
+    <string name="get_free_trial_title">Rozpocznij bezpłatny okres próbny %1$d %2$s.</string>
+    <string name="get_discount_first_part">%1$s dla pierwszych %2$s</string>
+    <string name="cancel_subscription">Anuluj subskrypcję</string>
+    <string name="price_and_discount">%1$s • Zapisz %2$s</string>
+    <string name="months_2_4">Miesiące</string>
+    <string name="months_5">Miesięcy</string>
+    <string name="years_2_4">Lata</string>
+    <string name="years_5">Lat</string>
+    <string name="price_free">Darmowe</string>
+    <string name="configure_profile_info">Wszystkie poniższe ustawienia dotyczą tylko wybranego profilu.</string>
+    <string name="utm_format_descr">OsmAnd używa formatu UTM Standard, który jest podobny, ale nie taki sam, jak format UTM Nato.</string>
+    <string name="shared_string_example">Przykład</string>
+    <string name="navigate_point_format_utm">UTM Standard</string>
+    <string name="coordinates_format_info">Wybrany format będzie używany do wszystkich miejsc w aplikacji.</string>
+    <string name="start_up_message_pref">Komunikat początkowy</string>
+    <string name="configure_profile">Skonfiguruj profil</string>
+    <string name="switch_profile">Przełącz profil</string>
+    <string name="application_profile_changed">Zmieniono profil aplikacji na „%s”</string>
+    <string name="pref_selected_by_default_for_profiles">To ustawienie jest wybrane jako domyślne dla profilów: %s</string>
+    <string name="change_default_settings">Zmienianie domyślnych ustawień</string>
+    <string name="discard_changes">Odrzuć zmiany</string>
+    <string name="apply_to_current_profile">Zastosuj w aktualnym profilu %1$s</string>
+    <string name="apply_to_all_profiles">Zastosuj we wszystkich profilach</string>
+    <string name="units_and_formats">Jednostki i formaty</string>
+    <string name="appearance">Wygląd</string>
+    <string name="map_look_descr">ikony, widżety</string>
+    <string name="map_look">Wygląd mapy</string>
+    <string name="list_of_installed_plugins">Lista zainstalowanych wtyczek</string>
+    <string name="general_settings_profile_descr">Styl aplikacji, jednostki, region</string>
+    <string name="osmand_settings">Ustawienia OsmAnd</string>
+    <string name="copy_from_other_profile">Skopiuj z innego profilu</string>
+    <string name="vehicle_parameters_descr">Ciężar, wysokość, prędkość</string>
+    <string name="vehicle_parameters">Parametry pojazdu</string>
+    <string name="voice_announces_info">Komunikaty głosowe są odtwarzane tylko podczas nawigowania.</string>
+    <string name="voice_announces">Komunikaty głosowe</string>
+    <string name="screen_alerts">Ostrzeżenia ekranowe</string>
+    <string name="route_parameters">Parametry trasy</string>
+    <string name="manage_profiles_descr">Tworzy, importuje, modyfikuje profile</string>
+    <string name="manage_profiles">Zarządzaj profilami aplikacji…</string>
+    <string name="new_route_calculated_dist_dbg">Trasa: dystans %s, czas routera %s 
+\nObliczanie: %.1f sek., %d dróg, %d płytek)</string>
+    <string name="get_discount_first_few_part">%1$s dla pierwszych %2$s</string>
+    <string name="get_discount_second_part">następnie %1$s</string>
+    <string name="navigate_point_format_olc">Otwórz kod lokalizacji</string>
+    <string name="analytics_pref_title">Analityka</string>
+    <string name="turn_screen_on_info">Wyświetlaj mapę podczas nawigacji nad ekranem blokady.</string>
+    <string name="route_parameters_info">Ustawienia te mają wpływ na konstrukcję trasy. Będzie stosowany tylko do wybranego profilu: %1$s.</string>
+    <string name="wake_time">Czas wybudzenia</string>
+    <string name="configure_navigation">Konfiguracja nawigacji</string>
+    <string name="screen_alerts_descr">Alerty będą wyświetlane w lewym dolnym rogu ekranu podczas nawigacji.</string>
+    <string name="reset_to_default">Przywróć ustawienia domyślne</string>
+    <string name="osmand_settings_descr">Ma wpływ na całą aplikację</string>
+    <string name="turn_screen_on">Włącz ekran</string>
+    <string name="map_during_navigation_info">Mapa podczas nawigacji</string>
+    <string name="map_during_navigation">Mapa podczas nawigacji</string>
+    <string name="shared_string_other">Inne</string>
+    <string name="voice_announces_descr">Instrukcja nawigacyjna i komunikaty</string>
+    <string name="route_parameters_descr">Konfigurowanie parametrów trasy</string>
+    <string name="logcat_buffer">Bufor katalogu dziennika</string>
+    <string name="get_discount_title">Uzyskaj %1$d %2$s taniej o %3$s.</string>
+    <string name="language_and_output">Język i wyjście</string>
+    <string name="plugins_settings">Ustawienia wtyczki</string>
+    <string name="shared_string_by_default">Domyślnie</string>
+    <string name="download_detailed_map">Pobierz szczegółową mapę %S, aby zobaczyć ten obszar.</string>
 </resources>

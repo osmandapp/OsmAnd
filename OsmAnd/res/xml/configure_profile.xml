@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:title="@string/configure_profile">
+
+	<Preference
+		android:key="configure_profile_info"
+		android:layout="@layout/preference_info_descr"
+		android:persistent="false"
+		android:selectable="false"
+		android:title="@string/configure_profile_info" />
+
+	<Preference
+		android:key="general_settings"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		android:summary="@string/general_settings_profile_descr"
+		android:title="@string/general_settings_2"
+		app:fragment="net.osmand.plus.settings.GeneralProfileSettingsFragment"
+		tools:icon="@drawable/ic_action_settings" />
+
+	<Preference
+		android:key="navigation_settings"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		android:summary="@string/configure_navigation"
+		android:title="@string/routing_settings_2"
+		app:fragment="net.osmand.plus.settings.NavigationFragment"
+		tools:icon="@drawable/ic_action_gdirections_dark" />
+
+	<Preference
+		android:key="configure_map"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		android:summary="@string/map_look_descr"
+		android:title="@string/configure_map"
+		tools:icon="@drawable/ic_action_layers_dark" />
+
+	<Preference
+		android:key="configure_screen"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		android:summary="@string/edit_profile_screen_options_subtitle"
+		android:title="@string/map_widget_config"
+		tools:icon="@drawable/ic_configure_screen_dark" />
+
+	<Preference
+		android:layout="@layout/list_item_divider"
+		android:selectable="false" />
+
+	<PreferenceCategory
+		android:key="plugin_settings"
+		android:layout="@layout/preference_category_with_descr"
+		android:summary="@string/list_of_installed_plugins"
+		android:title="@string/plugins_settings" />
+
+	<Preference
+		android:layout="@layout/card_bottom_divider"
+		android:selectable="false" />
+
+</PreferenceScreen>

@@ -129,7 +129,7 @@ public class DashPluginsFragment extends DashBaseFragment {
 
 		ImageButton logoView = (ImageButton) pluginView.findViewById(R.id.plugin_logo);
 		if (plugin.isActive()) {
-			logoView.setBackgroundResource(R.drawable.bg_plugin_logo_enabled);
+			logoView.setBackgroundResource(R.drawable.bg_plugin_logo_enabled_light);
 			logoView.setContentDescription(getString(R.string.shared_string_disable));
 		} else {
 			TypedArray attributes = getActivity().getTheme().obtainStyledAttributes(

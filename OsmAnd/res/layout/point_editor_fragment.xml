@@ -242,7 +242,7 @@
                 android:id="@+id/buttons_top_border"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/divider_color"/>
+                android:background="?attr/divider_color"/>
 
             <LinearLayout
                 android:id="@+id/buttons_layout"

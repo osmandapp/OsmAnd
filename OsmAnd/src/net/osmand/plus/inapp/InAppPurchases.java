@@ -1,19 +1,29 @@
 package net.osmand.plus.inapp;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
-import android.text.style.StyleSpan;
+import android.text.style.ForegroundColorSpan;
 
+import com.android.billingclient.api.SkuDetails;
+
+import net.osmand.AndroidUtils;
+import net.osmand.Period;
+import net.osmand.Period.PeriodUnit;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
-import net.osmand.plus.inapp.util.SkuDetails;
+import net.osmand.plus.helpers.FontCache;
+import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 import net.osmand.util.Algorithms;
 
 import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Currency;
@@ -122,13 +132,29 @@ public class InAppPurchases {
 		return liveUpdates;
 	}
 
-	public List<InAppPurchase> getAllInAppPurchases() {
+	public List<InAppPurchase> getAllInAppPurchases(boolean includeSubscriptions) {
 		List<InAppPurchase> purchases = new ArrayList<>();
 		purchases.add(fullVersion);
 		purchases.add(depthContours);
 		purchases.add(contourLines);
-		purchases.addAll(liveUpdates.getAllSubscriptions());
+		if (includeSubscriptions) {
+			purchases.addAll(liveUpdates.getAllSubscriptions());
+		}
 		return purchases;
+	}
+
+	public List<InAppSubscription> getAllInAppSubscriptions() {
+		return liveUpdates.getAllSubscriptions();
+	}
+
+	@Nullable
+	public InAppSubscription getInAppSubscriptionBySku(@NonNull String sku) {
+		for (InAppSubscription s : liveUpdates.getAllSubscriptions()) {
+			if (sku.startsWith(s.getSkuNoVersion())) {
+				return s;
+			}
+		}
+		return null;
 	}
 
 	public boolean isFullVersion(String sku) {
@@ -162,7 +188,7 @@ public class InAppPurchases {
 		private List<InAppSubscription> subscriptions;
 
 		InAppSubscriptionList(@NonNull InAppSubscription[] subscriptionsArray) {
-			this.subscriptions = Arrays.asList(subscriptionsArray);;
+			this.subscriptions = Arrays.asList(subscriptionsArray);
 		}
 
 		private List<InAppSubscription> getSubscriptions() {
@@ -420,12 +446,204 @@ public class InAppPurchases {
 		}
 	}
 
+	public static class InAppSubscriptionIntroductoryInfo {
+
+		private InAppSubscription subscription;
+
+		private String introductoryPrice;
+		private long introductoryPriceAmountMicros;
+		private String introductoryPeriodString;
+		private int introductoryCycles;
+
+		private double introductoryPriceValue;
+		private Period introductoryPeriod;
+
+		public InAppSubscriptionIntroductoryInfo(@NonNull InAppSubscription subscription,
+												 String introductoryPrice,
+												 long introductoryPriceAmountMicros,
+												 String introductoryPeriodString,
+												 String introductoryCycles) throws ParseException {
+			this.subscription = subscription;
+			this.introductoryPrice = introductoryPrice;
+			this.introductoryPriceAmountMicros = introductoryPriceAmountMicros;
+			this.introductoryPeriodString = introductoryPeriodString;
+			try {
+				this.introductoryCycles = Integer.parseInt(introductoryCycles);
+			} catch (NumberFormatException e) {
+				throw new ParseException("Cannot parse introductoryCycles = " + introductoryCycles, 0);
+			}
+			introductoryPriceValue = introductoryPriceAmountMicros / 1000000d;
+			introductoryPeriod = Period.parse(introductoryPeriodString);
+		}
+
+		public String getIntroductoryPrice() {
+			return introductoryPrice;
+		}
+
+		public long getIntroductoryPriceAmountMicros() {
+			return introductoryPriceAmountMicros;
+		}
+
+		public String getIntroductoryPeriodString() {
+			return introductoryPeriodString;
+		}
+
+		public int getIntroductoryCycles() {
+			return introductoryCycles;
+		}
+
+		public double getIntroductoryPriceValue() {
+			return introductoryPriceValue;
+		}
+
+		public double getIntroductoryMonthlyPriceValue() {
+			return introductoryPriceValue /
+					(introductoryPeriod.getUnit().getMonthsValue() * introductoryPeriod.getNumberOfUnits());
+		}
+
+		public Period getIntroductoryPeriod() {
+			return introductoryPeriod;
+		}
+
+		public long getTotalPeriods() {
+			return introductoryPeriod.getNumberOfUnits() * introductoryCycles;
+		}
+
+		private String getTotalUnitsString(@NonNull Context ctx, boolean original) {
+			String unitStr = "";
+			Period subscriptionPeriod = subscription.getSubscriptionPeriod();
+			PeriodUnit unit = original && subscriptionPeriod != null ? subscriptionPeriod.getUnit() : introductoryPeriod.getUnit();
+			long totalPeriods = original && subscriptionPeriod != null ? subscriptionPeriod.getNumberOfUnits() : getTotalPeriods();
+			switch (unit) {
+				case YEAR:
+					unitStr = ctx.getString(R.string.year);
+					break;
+				case MONTH:
+					if (totalPeriods == 1) {
+						unitStr = ctx.getString(R.string.month);
+					} else if (totalPeriods < 5) {
+						unitStr = ctx.getString(R.string.months_2_4);
+					} else {
+						unitStr = ctx.getString(R.string.months_5);
+					}
+					break;
+				case WEEK:
+					if (totalPeriods == 1) {
+						unitStr = ctx.getString(R.string.week);
+					} else if (totalPeriods < 5) {
+						unitStr = ctx.getString(R.string.weeks_2_4);
+					} else {
+						unitStr = ctx.getString(R.string.weeks_5);
+					}
+					break;
+				case DAY:
+					if (totalPeriods == 1) {
+						unitStr = ctx.getString(R.string.day);
+					} else if (totalPeriods < 5) {
+						unitStr = ctx.getString(R.string.days_2_4);
+					} else {
+						unitStr = ctx.getString(R.string.days_5);
+					}
+					break;
+			}
+			return unitStr;
+		}
+
+		private String getUnitString(@NonNull Context ctx) {
+			PeriodUnit unit = introductoryPeriod.getUnit();
+			switch (unit) {
+				case YEAR:
+					return ctx.getString(R.string.year);
+				case MONTH:
+					return ctx.getString(R.string.month);
+				case WEEK:
+					return ctx.getString(R.string.week);
+				case DAY:
+					return ctx.getString(R.string.day);
+			}
+			return "";
+		}
+
+		private String getDisountPeriodString(String unitStr, long totalPeriods) {
+			if (totalPeriods == 1)
+				return unitStr;
+			if (AndroidUtils.isRTL()) {
+				return unitStr + " " + totalPeriods;
+			} else {
+				return totalPeriods + " " + unitStr;
+			}
+		}
+
+		public CharSequence getDescriptionTitle(@NonNull Context ctx) {
+			long totalPeriods = getTotalPeriods();
+			String unitStr = getTotalUnitsString(ctx, false).toLowerCase();
+			int discountPercent = subscription.getDiscountPercent(null);
+			return ctx.getString(R.string.get_discount_title, totalPeriods, unitStr, discountPercent + "%");
+		}
+
+		public CharSequence getFormattedDescription(@NonNull Context ctx, @ColorInt int textColor) {
+			long totalPeriods = getTotalPeriods();
+			String singleUnitStr = getUnitString(ctx).toLowerCase();
+			String unitStr = getTotalUnitsString(ctx, false).toLowerCase();
+			long numberOfUnits = introductoryPeriod.getNumberOfUnits();
+			Period subscriptionPeriod = subscription.getSubscriptionPeriod();
+			long originalNumberOfUnits = subscriptionPeriod != null ? subscriptionPeriod.getNumberOfUnits() : 1;
+			String originalUnitsStr = getTotalUnitsString(ctx, true).toLowerCase();
+			String originalPriceStr = subscription.getPrice(ctx);
+			String priceStr = introductoryPrice;
+
+			String pricePeriod;
+			String originalPricePeriod;
+
+			if (AndroidUtils.isRTL()) {
+				pricePeriod = singleUnitStr + " / " + priceStr;
+				originalPricePeriod = originalUnitsStr + " / " + originalPriceStr;
+				if (numberOfUnits > 1) {
+					pricePeriod = unitStr + " " + numberOfUnits + " / " + priceStr;
+				}
+				if (originalNumberOfUnits == 3 && subscriptionPeriod.getUnit() == PeriodUnit.MONTH) {
+					originalPricePeriod = ctx.getString(R.string.months_3).toLowerCase() + " / " + originalPriceStr;
+				} else if (originalNumberOfUnits > 1) {
+					originalPricePeriod = originalUnitsStr + " " + originalNumberOfUnits + " / " + originalPriceStr;
+				}
+			} else {
+				pricePeriod = priceStr + " / " + singleUnitStr;
+				originalPricePeriod = originalPriceStr + " / " + originalUnitsStr;
+				if (numberOfUnits > 1) {
+					pricePeriod = priceStr + " / " + numberOfUnits + " " + unitStr;
+				}
+				if (originalNumberOfUnits == 3 && subscriptionPeriod.getUnit() == PeriodUnit.MONTH) {
+					originalPricePeriod = originalPriceStr + " / " + ctx.getString(R.string.months_3).toLowerCase();
+				} else if (originalNumberOfUnits > 1) {
+					originalPricePeriod = originalPriceStr + " / " + originalNumberOfUnits + " " + originalUnitsStr;
+				}
+			}
+			String periodPriceStr = introductoryCycles == 1 ? priceStr : pricePeriod;
+
+			int firstPartRes = totalPeriods == 1 ? R.string.get_discount_first_part : R.string.get_discount_first_few_part;
+			SpannableStringBuilder mainPart = new SpannableStringBuilder(ctx.getString(firstPartRes, periodPriceStr, getDisountPeriodString(unitStr, totalPeriods)));
+			SpannableStringBuilder thenPart = new SpannableStringBuilder(ctx.getString(R.string.get_discount_second_part, originalPricePeriod));
+			Typeface typefaceRegular = FontCache.getRobotoRegular(ctx);
+			Typeface typefaceBold = FontCache.getRobotoMedium(ctx);
+			mainPart.setSpan(new ForegroundColorSpan(textColor), 0, mainPart.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			mainPart.setSpan(new CustomTypefaceSpan(typefaceBold), 0, mainPart.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			int secondaryTextColor = Color.argb(128, Color.red(textColor), Color.green(textColor), Color.blue(textColor));
+			thenPart.setSpan(new ForegroundColorSpan(secondaryTextColor), 0, thenPart.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			thenPart.setSpan(new CustomTypefaceSpan(typefaceRegular), 0, thenPart.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+			return new SpannableStringBuilder(mainPart).append("\n").append(thenPart);
+		}
+	}
+
 	public static abstract class InAppSubscription extends InAppPurchase {
 
 		private Map<String, InAppSubscription> upgrades = new ConcurrentHashMap<>();
 		private String skuNoVersion;
-		private String subscriptionPeriod;
+		private String subscriptionPeriodString;
+		private Period subscriptionPeriod;
 		private boolean upgrade = false;
+
+		private InAppSubscriptionIntroductoryInfo introductoryInfo;
 
 		InAppSubscription(@NonNull String skuNoVersion, int version) {
 			super(skuNoVersion + "_v" + version);
@@ -475,12 +693,36 @@ public class InAppPurchases {
 			return skuNoVersion;
 		}
 
-		public String getSubscriptionPeriod() {
+		@Nullable
+		public String getSubscriptionPeriodString() {
+			return subscriptionPeriodString;
+		}
+
+		@Nullable
+		public Period getSubscriptionPeriod() {
 			return subscriptionPeriod;
 		}
 
-		public void setSubscriptionPeriod(String subscriptionPeriod) {
-			this.subscriptionPeriod = subscriptionPeriod;
+		public void setSubscriptionPeriodString(String subscriptionPeriodString) throws ParseException {
+			this.subscriptionPeriodString = subscriptionPeriodString;
+			this.subscriptionPeriod = Period.parse(subscriptionPeriodString);
+		}
+
+		public InAppSubscriptionIntroductoryInfo getIntroductoryInfo() {
+			/*
+			try {
+				if (subscriptionPeriod != null && subscriptionPeriod.getUnit() == PeriodUnit.YEAR) {
+					introductoryInfo = new InAppSubscriptionIntroductoryInfo(this, "30 грн.", 30000000L, "P1Y", "1");
+				}
+			} catch (ParseException e) {
+				//
+			}
+			*/
+			return introductoryInfo;
+		}
+
+		public void setIntroductoryInfo(InAppSubscriptionIntroductoryInfo introductoryInfo) {
+			this.introductoryInfo = introductoryInfo;
 		}
 
 		@Override
@@ -497,12 +739,34 @@ public class InAppPurchases {
 			}
 		}
 
+		public CharSequence getDescription(@NonNull Context ctx, @Nullable InAppSubscription monthlyLiveUpdates) {
+			CharSequence descr = getDescription(ctx);
+			int discountPercent = getDiscountPercent(monthlyLiveUpdates);
+			return discountPercent > 0 ? ctx.getString(R.string.price_and_discount, descr, discountPercent + "%") : descr;
+		}
+
 		public CharSequence getRenewDescription(@NonNull Context ctx) {
 			return "";
 		}
 
 		@Nullable
 		protected abstract InAppSubscription newInstance(@NonNull String sku);
+
+		public int getDiscountPercent(@Nullable InAppSubscription monthlyLiveUpdates) {
+			double monthlyPriceValue = getMonthlyPriceValue();
+			if (monthlyLiveUpdates != null) {
+				double regularMonthlyPrice = monthlyLiveUpdates.getPriceValue();
+				if (regularMonthlyPrice > 0 && monthlyPriceValue > 0 && monthlyPriceValue < regularMonthlyPrice) {
+					return (int) ((1 - monthlyPriceValue / regularMonthlyPrice) * 100d);
+				}
+			} else if (introductoryInfo != null) {
+				double introductoryMonthlyPrice = introductoryInfo.getIntroductoryMonthlyPriceValue();
+				if (introductoryMonthlyPrice > 0 && monthlyPriceValue > 0 && monthlyPriceValue > introductoryMonthlyPrice) {
+					return (int) ((1 - introductoryMonthlyPrice / monthlyPriceValue) * 100d);
+				}
+			}
+			return 0;
+		}
 	}
 
 	public static class InAppPurchaseFullVersion extends InAppPurchase {
@@ -614,14 +878,6 @@ public class InAppPurchases {
 		@Override
 		public CharSequence getTitle(Context ctx) {
 			return ctx.getString(R.string.osm_live_payment_monthly_title);
-		}
-
-		@Override
-		public CharSequence getDescription(@NonNull Context ctx) {
-			CharSequence descr = super.getDescription(ctx);
-			SpannableStringBuilder text = new SpannableStringBuilder(descr).append(". ").append(ctx.getString(R.string.osm_live_payment_contribute_descr));
-			text.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), descr.length() + 1, text.length() - 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-			return text;
 		}
 
 		@Override
