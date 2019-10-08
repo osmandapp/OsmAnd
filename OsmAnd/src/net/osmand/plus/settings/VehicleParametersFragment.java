@@ -46,6 +46,10 @@ public class VehicleParametersFragment extends BaseSettingsFragment {
 				if (vehicleWeight != null) {
 					setupCustomRoutingPropertyPref(vehicleWeight);
 				}
+				GeneralRouter.RoutingParameter vehicleWidth = parameters.get(GeneralRouter.VEHICLE_WIDTH);
+				if (vehicleWidth != null) {
+					setupCustomRoutingPropertyPref(vehicleWidth);
+				}
 				if (router.getProfile() != GeneralRouter.GeneralRouterProfile.PUBLIC_TRANSPORT) {
 					setupDefaultSpeedPref();
 				}
@@ -111,6 +115,8 @@ public class VehicleParametersFragment extends BaseSettingsFragment {
 				return getIcon(R.drawable.ic_action_height_limit);
 			case GeneralRouter.VEHICLE_WEIGHT:
 				return getIcon(R.drawable.ic_action_weight_limit);
+			case GeneralRouter.VEHICLE_WIDTH:
+				return getIcon(R.drawable.ic_action_width_limit);
 			default:
 				return null;
 		}

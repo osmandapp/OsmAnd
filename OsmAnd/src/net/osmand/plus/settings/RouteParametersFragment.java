@@ -133,6 +133,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 					} else if (!param.equals(GeneralRouter.USE_SHORTEST_WAY)
 							&& !param.equals(GeneralRouter.VEHICLE_HEIGHT)
 							&& !param.equals(GeneralRouter.VEHICLE_WEIGHT)
+							&& !param.equals(GeneralRouter.VEHICLE_WIDTH)
 							&& !RoutingOptionsHelper.DRIVING_STYLE.equals(routingParameter.getGroup())) {
 						otherRoutingParameters.add(routingParameter);
 					}
