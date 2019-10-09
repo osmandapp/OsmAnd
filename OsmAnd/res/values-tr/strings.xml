@@ -2391,7 +2391,7 @@
     <string name="shared_string_current">Geçerli</string>
     <string name="last_intermediate_dest_description">Ara durak ekler</string>
     <string name="shared_string_gpx_files">GPX dosyaları</string>
-    <string name="files_moved">%1$d dosyaları taşındı (%2$s).</string>
+    <string name="files_moved">%1$d dosya taşındı (%2$s).</string>
     <string name="files_copied">%1$d dosya kopyalandı (%2$s).</string>
     <string name="files_failed">%1$d dosya kopyalanamadı (%2$s).</string>
     <string name="dont_move_maps">Taşıma</string>
@@ -2901,7 +2901,7 @@
     <string name="coord_input_save_as_track">Yol-izi olarak kaydet</string>
     <string name="coord_input_save_as_track_descr">%1$s nokta eklediniz. Bir dosya adı yazın ve \"Kaydet\"e dokunun.</string>
     <string name="send_search_query_description">Konumunuzun yanı sıra arama sorgunuzu göndereceğiz: <b>\"%1$s\"</b>.<br/>
-        <br/>Hiçbir kişisel bilgi toplanmamakta, arama verileri yalnızca arama algoritmasını geliştirmek için kullanılmaktadır. <br/>
+        <br/>Hiçbir kişisel bilgi toplanmamakta, arama verileri yalnızca arama algoritmasını geliştirmek için kullanılmaktadır.<br/>
     </string>
     <string name="increase_search_radius_to">Arama yarıçapını %1$s değerine yükseltin</string>
     <string name="ask_for_location_permission">Lütfen devam etmek için OsmAnd\'a konum erişim izni verin.</string>
@@ -3000,4 +3000,277 @@
     <string name="rendering_attr_highway_class_track_grade4_name">4. sınıf</string>
     <string name="rendering_attr_highway_class_track_grade5_name">5. sınıf</string>
     <string name="lang_oc">Oksitanca</string>
+    <string name="driving_region_australia">Avustralya</string>
+    <string name="quick_action_item_action">%d eylemi</string>
+    <string name="quick_action_item_screen">%d ekranı</string>
+    <string name="quick_action_add_marker">Harita işaretleyici ekle</string>
+    <string name="quick_action_add_poi">POI ekle</string>
+    <string name="quick_action_map_style">Harita stilini değiştir</string>
+    <string name="quick_action_map_style_switch">Harita stili \"%s\" olarak değiştirildi.</string>
+    <string name="quick_action_navigation_voice_off">Sesi Aç</string>
+    <string name="quick_action_navigation_voice_on">Sesi Kapat</string>
+    <string name="quick_action_add_gpx">GPX ara noktası ekle</string>
+    <string name="quick_action_edit_action">Eylemi düzenle</string>
+    <string name="quick_actions_delete">Eylemi sil</string>
+    <string name="quick_actions_delete_text">\"%s\" eylemini silmek istediğinize emin misiniz\?</string>
+    <string name="quick_favorites_name_preset">İsim hazır ayarı</string>
+    <string name="favorite_autofill_toast_text">" kaydedildi "</string>
+    <string name="favorite_empty_place_name">Yer</string>
+    <string name="quick_action_duplicate">Hızlı eylem adı yinelenen</string>
+    <string name="quick_action_showhide_favorites_title">Sık Kullanılanları göster/gizle</string>
+    <string name="quick_action_favorites_show">Sık Kullanılanları göster</string>
+    <string name="quick_action_favorites_hide">Sık Kullanılanları gizle</string>
+    <string name="quick_action_showhide_poi_title">POI göster/gizle</string>
+    <string name="quick_action_poi_show">%1$ göster</string>
+    <string name="quick_action_poi_hide">%1$ gizle</string>
+    <string name="quick_action_add_category">Kategori ekle</string>
+    <string name="quick_action_add_configure_map">Haritayı yapılandır</string>
+    <string name="quick_action_add_navigation">Navigasyon</string>
+    <string name="quick_action_bug_message">Mesaj</string>
+    <string name="quick_action_poi_list">POI listesi</string>
+    <string name="quick_action_map_style_action">Harita stili ekle</string>
+    <string name="quick_action_empty_param_error">Tüm parametreleri doldur</string>
+    <string name="quick_action_map_styles">Harita stilleri</string>
+    <string name="quick_action_map_overlay">Harita üst katmanını değiştir</string>
+    <string name="quick_action_map_overlay_title">Harita üst katmanları</string>
+    <string name="quick_action_map_overlay_action">Üst katman ekle</string>
+    <string name="quick_action_map_underlay">Harita alt katmanını değiştir</string>
+    <string name="quick_action_map_underlay_title">Harita alt katmanları</string>
+    <string name="quick_action_map_underlay_action">Alt katman ekle</string>
+    <string name="quick_action_map_source">Harita kaynağını değiştir</string>
+    <string name="quick_action_map_source_title">Harita kaynakları</string>
+    <string name="quick_action_map_source_action">Harita kaynağı ekle</string>
+    <string name="quick_action_map_source_switch">Harita kaynağı \"%s\" olarak değiştirildi.</string>
+    <string name="quick_action_add_marker_descr">Bu eylem butonuna basmak, ekranın ortasındaki konuma bir harita işaretleyici ekler.</string>
+    <string name="quick_action_add_gpx_descr">Bu eylem butonuna basmak, ekranın ortasına bir GPX ara noktası ekleyecektir.</string>
+    <string name="quick_action_take_audio_note_descr">Bu eylem butonuna basmak, ekranın ortasına sesli bir not ekler.</string>
+    <string name="quick_action_take_video_note_descr">Bu eylem butonuna basmak, ekranın ortasına bir video notu ekler.</string>
+    <string name="quick_action_take_photo_note_descr">Bu eylem butonuna basmak, ekranın ortasına bir fotoğraf notu ekler.</string>
+    <string name="quick_action_add_osm_bug_descr">Bu eylem butonuna basmak, ekranın ortasına bir OSM notu ekler.</string>
+    <string name="quick_action_add_poi_descr">Bu eylem butonuna basmak, ekranın ortasına bir POI ekler.</string>
+    <string name="quick_action_navigation_voice_descr">Bu eylem butonuna basmak, navigasyon sırasında sesli yönlendirmeyi devre dışı bırakır veya etkinleştirir.</string>
+    <string name="quick_action_add_parking_descr">Bu eylem butonuna basmak, ekranın ortasına bir park yeri ekler.</string>
+    <string name="quick_action_showhide_favorites_descr">Bu eylem butonuna basmak, haritada Sık Kullanılan noktaları gösterir veya gizler.</string>
+    <string name="quick_action_showhide_poi_descr">Bu eylem butonuna düğmesine basmak, haritada POI\'leri gösterir veya gizler.</string>
+    <string name="quick_action_bug_descr">Bu mesaj yorum alanına dahil edilmiştir.</string>
+    <string name="quick_action_category_descr">Sık Kullanılanı kaydetmek için kategoriyi seçin.</string>
+    <string name="quick_action_gpx_category_descr">İsteğe bağlı bir kategori seçin.</string>
+    <string name="quick_action_fav_name_descr">Adresi veya yer adını kullanmak için boş bırakın.</string>
+    <string name="quick_action_interim_dialog">Geçici bir iletişim kutusu göster</string>
+    <string name="quick_action_map_overlay_switch">Harita üst katmanı \"%s\" olarak değiştirildi.</string>
+    <string name="quick_action_map_underlay_switch">Harita alt katmanı \"%s\" olarak değiştirildi.</string>
+    <string name="quick_action_page_list_descr">Bu eylem butonuna basmak, aşağıdaki listeyi sayfalar halinde gösterir.</string>
+    <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) ücretsiz, dünya çapında ve yüksek kaliteli OpenStreetMap (OSM) verilerine erişim sağlayan bir harita ve navigasyon uygulamasıdır.
+\n
+\n Sesli ve optik yönlendiricinin, POI\'leri (ilgi çekici noktaları) görüntülemenin, GPX yol-izleri oluşturma ve yönetmenin, eşyükselti çizgileri görselleştirme ve irtifa bilgilerinin (eklenti aracılığıyla), sürüş, bisiklet, yaya modları arasında seçim yapmanın, OSM düzenleme ve daha pek çok seçeneğin tadını çıkarın.</string>
+    <string name="osmand_extended_description_part3">Harita
+\n • Çevrenizdeki POI\'leri (ilgi çekici noktalar) gösterir
+\n • Haritayı hareket yönünüze (veya pusulaya) göre ayarlar
+\n • Bulunduğunuz yeri ve aradığınız yönü gösterir
+\n • Arkadaşlarınızın sizi bulabilmesi için konumunuzu paylaşın
+\n • En önemli yerlerinizi \'Sık kullanılanlar\'da saklar
+\n • Haritada adların nasıl görüntüleneceğini seçmenize izin verir: İngilizce, yerel veya fonetik yazım
+\n • Özel çevrimiçi döşemeleri, uydu görüntüsünü (Bing\'den), tur/navigasyon GPX yol-izleri gibi farklı üst katmanları ve ayarlanabilir şeffaflığı olan ek katmanları görüntüler
+\n</string>
+    <string name="osmand_extended_description_part4">Kayak yapma
+\n OsmAnd kayak haritaları eklentisi, kayak pistlerini karmaşıklık seviyesi ve asansörlerin ve diğer tesislerin konumu gibi bazı ek bilgileri ile birlikte görmenizi sağlar.</string>
+    <string name="osmand_extended_description_part6">Yürüyüş, doğa yürüyüşü, şehir turu
+\n • Harita size yürüyüş ve doğa yürüyüşü yollarını gösterir.
+\n • Tercih ettiğiniz dilde Wikipedia, şehir gezisi sırasında size çok şey söyleyebilir
+\n • Hat isimleri de dahil olmak üzere toplu taşıma durakları (otobüs, tramvay, tren) yeni bir şehirde gezinmeye yardımcı olur
+\n • Yaya modunda GPS navigasyonu, yürüyüş yollarını kullanarak rotanızı oluşturur
+\n • Bir GPX rotası yükleyin ve izleyin veya kendinizinkini kaydedin ve paylaşın.
+\n</string>
+    <string name="osmand_extended_description_part7">OSM\'ye katkıda bulunun
+\n • Veri hatalarını bildirin
+\n • Doğrudan uygulamadan GPX yol-izlerini OSM\'ye yükleyin
+\n • POI ekleyin ve onları doğrudan OSM’ye yükleyin (veya çevrimdışıysa daha sonra)
+\n</string>
+    <string name="osmand_extended_description_part8">OsmAnd aktif olarak geliştirilen açık kaynaklı bir yazılımdır. Herkes hataları bildirerek, çevirileri iyileştirerek veya yeni özellikler kodlayarak uygulamaya katkıda bulunabilir. Ek olarak, proje kodlama ve yeni işlevselliklerin test edilmesine fon sağlama konusunda finansal katkılara dayanmaktadır.
+\n Yaklaşık harita kapsamı ve kalitesi:
+\n • Batı Avrupa: ****
+\n • Doğu Avrupa: ***
+\n • Rusya: ***
+\n • Kuzey Amerika: ***
+\n • Güney Amerika: **
+\n • Asya: **
+\n • Japonya ve Kore: ***
+\n • Orta Doğu: **
+\n • Afrika: **
+\n • Antarktika: *
+\n Dünyadaki çoğu ülke indirmeye hazır!
+\n Ülkenizde güvenilir bir kılavuz edinin - Fransa, Almanya, Meksika, İngiltere, İspanya, Hollanda, ABD, Rusya, Brezilya veya başka bir ülke.</string>
+    <string name="osmand_plus_extended_description_part2">Navigasyon
+\n • Çevrimiçi (hızlı) veya çevrimdışı çalışır (yurtdışındayken dolaşım ücreti almaz)
+\n • Adım adım sesli yönlendirme (kaydedilmiş ve sentezlenmiş sesler)
+\n • İsteğe bağlı şerit kılavuzu, cadde adı ekranı ve tahmini varış zamanı
+\n • Seyahat planınızdaki ara noktaları destekler
+\n • Rotadan her saptığınızda otomatik yeniden rota hesaplama
+\n • Yerleri adrese göre, türe göre (ör. Restoran, otel, benzin istasyonu, müze) veya coğrafi koordinatlarla arayın
+\n</string>
+    <string name="osmand_plus_extended_description_part3">Harita Görüntüleme
+\n • Konumunuzu ve yönünüzü gösterin
+\n • İsteğe bağlı olarak resmi pusulaya veya hareket yönünüze göre hizalayın
+\n • En önemli yerlerinizi Sık Kullanılanlar olarak kaydedin
+\n • Çevrenizdeki POI\'leri (ilgi çekici noktalar) görüntüleyin
+\n • Özel çevrimiçi döşemeleri, uydu görüntüsünü (Bing\'den), tur/gezinme GPX parkurları gibi farklı üst katmanları ve ayarlanabilir şeffaflığı olan ek katmanları görüntüleyin
+\n • İsteğe bağlı olarak yer adlarını İngilizce, yerel veya fonetik yazım biçiminde görüntüleyin
+\n</string>
+    <string name="osmand_plus_extended_description_part4">OSM ve Wikipedia Verilerini Kullanın
+\n • Dünyanın en iyi iş birliğine dayalı projelerinden yüksek kalitede bilgi
+\n • Her ülke veya bölge için mevcut OSM verileri
+\n • Wikipedia POI\'leri, gezi için harika
+\n • Doğrudan uygulamadan sınırsız ücretsiz indirme
+\n • En az ayda bir kez güncellenen kompakt çevrimdışı vektör haritaları
+\n
+\n • Tam bölge verileri ve sadece yol ağı arasında seçim (Örnek: Japonya\'nın tamamı 700 MB iken sadece yol ağı için 200 MB\'dır)</string>
+    <string name="osmand_plus_extended_description_part5">Güvenlik özellikleri
+\n • İsteğe bağlı otomatik gece/gündüz görünümü değiştirme
+\n • İsteğe bağlı hız sınırı göstergesi, aşmanız halinde hatırlatma ile birlikte
+\n • İsteğe bağlı hıza göre yakınlaştırma
+\n • Arkadaşlarınızın sizi bulabilmesi için konumunuzu paylaşma
+\n</string>
+    <string name="osmand_plus_extended_description_part6">Bisiklet ve Yaya Özellikleri
+\n • Açık hava etkinlikleri için mükemmel olan yaya, yürüyüş ve bisiklet yollarını görüntüleme
+\n • Bisiklet ve yaya için özel yönlendirme ve görüntüleme modları
+\n • İsteğe bağlı hat isimleri dahil toplu taşıma durakları (otobüs, tramvay, tren)
+\n • İsteğe bağlı yerel GPX dosyasına veya çevrimiçi hizmete gezi kaydı
+\n • İsteğe bağlı hız ve irtifa göstergesi
+\n • Eşyükselti çizgileri ve tepe gölgelendirme (ek eklenti aracılığıyla) gösterimi</string>
+    <string name="osmand_plus_extended_description_part7">Doğrudan OSM\'ye katkıda bulunun
+\n • Veri hatalarını bildirin
+\n • Doğrudan uygulamadan GPX yol-izlerini OSM\'ye yükleyin
+\n • POI ekleyin ve onları doğrudan OSM’ye yükleyin (veya çevrimdışıysa daha sonra)
+\n • İsteğe bağlı arka plan modunda da gezi kaydı (cihaz uyku modundayken)
+\n OsmAnd aktif olarak geliştirilen açık kaynaklı bir yazılımdır. Herkes hataları bildirerek, çevirileri iyileştirerek veya yeni özellikler kodlayarak uygulamaya katkıda bulunabilir. Ek olarak, proje kodlama ve yeni işlevselliklerin test edilmesine fon sağlama konusunda finansal katkılara dayanmaktadır.
+\n</string>
+    <string name="osmand_plus_extended_description_part8">Yaklaşık harita kapsamı ve kalitesi:
+\n • Batı Avrupa: ****
+\n • Doğu Avrupa: ***
+\n • Rusya: ***
+\n • Kuzey Amerika: ***
+\n • Güney Amerika: **
+\n • Asya: **
+\n • Japonya ve Kore: ***
+\n • Orta Doğu: **
+\n • Afrika: **
+\n • Antarktika: *
+\n Dünya üzerindeki çoğu ülke indirme olarak mevcut
+\n Afganistan\'dan Zimbabve\'ye, Avustralya\'dan ABD\'ye. Arjantin, Brezilya, Kanada, Fransa, Almanya, Meksika, İngiltere, İspanya, …
+\n</string>
+    <string name="save_poi_too_many_uppercase">İsim çok fazla büyük harf içermektedir. Devam et\?</string>
+    <string name="route_is_too_long_v2">Uzun mesafeler için: 10 dakika içinde hiçbir rota bulunmuyorsa, lütfen ara hedefleri ekleyin.</string>
+    <string name="live_monitoring_max_interval_to_send">Çevrimiçi izleme için zaman tamponu</string>
+    <string name="live_monitoring_max_interval_to_send_desrc">Bağlantı olmadan gönderilecek konumları tutmak için bir zaman tamponu belirtin</string>
+    <string name="mappilary_no_internet_desc">Mapillary\'daki fotoğrafları görüntülemek için İnternete bağlı olmanız gerekmektedir.</string>
+    <string name="retry">Tekrar dene</string>
+    <string name="add_waypoint">Ara Nokta Ekle</string>
+    <string name="save_gpx_waypoint">GPX Ara Noktasını Kaydet</string>
+    <string name="save_route_point">Rota Noktasını Kaydet</string>
+    <string name="waypoint_one">1. ara nokta</string>
+    <string name="route_point_one">1. rota noktası</string>
+    <string name="add_route_points">Rota Noktaları Ekle</string>
+    <string name="add_line">Hat Ekle</string>
+    <string name="empty_state_my_tracks">GPX dosyaları ekle</string>
+    <string name="empty_state_my_tracks_desc">GPX dosyalarını içe aktarın veya yol-izlerini kaydedin.</string>
+    <string name="empty_state_favourites">Sık Kullanılanlara ekle</string>
+    <string name="empty_state_favourites_desc">Sık Kullanılanları içe aktarın veya haritadaki işaretleme noktalarından ekleyin.</string>
+    <string name="import_track">GPX dosyasını içe aktar</string>
+    <string name="import_track_desc">%1$s dosyası ara noktalar içermiyor, yol-izi olarak içe aktar\?</string>
+    <string name="move_point">Hareket Noktası</string>
+    <string name="add_segment_to_the_track">GPX dosyasına ekle</string>
+    <string name="osm_recipients_label">OSM alıcıları</string>
+    <string name="total_donations">Toplam bağış</string>
+    <string name="day_off_label">kapalı</string>
+    <string name="winter_and_ski_renderer">Kış ve kayak</string>
+    <string name="touring_view_renderer">Gezi görünümü</string>
+    <string name="nautical_renderer">Deniz</string>
+    <string name="copy_location_name">Nokta/POI adını kopyala</string>
+    <string name="toast_empty_name_error">İsimsiz konum</string>
+    <string name="tunnel_warning">İleride tünel var</string>
+    <string name="show_tunnels">Tüneller</string>
+    <string name="download_wikipedia_description">Çevrimdışı okumak için Wikipedia makalelerini %1$s için indirin.</string>
+    <string name="download_wikipedia_label">Wikipedia verilerini indir</string>
+    <string name="open_in_browser_wiki">Makaleyi çevrimiçi aç</string>
+    <string name="open_in_browser_wiki_description">Makaleyi bir web tarayıcısında görüntüleyin.</string>
+    <string name="download_wiki_region_placeholder">bu bölge</string>
+    <string name="wiki_article_search_text">İlgili wiki makalesi aranıyor</string>
+    <string name="wiki_article_not_found">Makale bulunamadı</string>
+    <string name="how_to_open_wiki_title">Wikipedia makaleleri nasıl açılır\?</string>
+    <string name="access_intermediate_arrival_time">Orta varış zamanı</string>
+    <string name="map_widget_intermediate_time">Orta zaman</string>
+    <string name="test_voice_desrc">Bir butona dokunun ve eksik veya hatalı komutları belirlemek için ilgili sesli uyarıyı dinleyin.</string>
+    <string name="run_full_osmand_msg">OsmAnd tarafından desteklenen {0} Haritasını kullanıyorsunuz. OsmAnd\'ın tam sürümünü başlatmak ister misiniz\?</string>
+    <string name="run_full_osmand_header">OsmAnd\'ı başlat\?</string>
+    <string name="quick_action_switch_day_night_descr">Bu eylem butonuna basmak, OsmAnd için Gündüz ve Gece modları arasında geçiş yapar</string>
+    <string name="quick_action_switch_day_mode">Gündüz Modu</string>
+    <string name="quick_action_switch_night_mode">Gece modu</string>
+    <string name="quick_action_day_night_switch_mode">Gündüz/Gece modunu değiştir</string>
+    <string name="routing_attr_avoid_sett_name">Parke ve kaldırım taşından kaçının</string>
+    <string name="quick_action_need_to_add_item_to_list">\'Hızlı Eylem\' Ayarlarında listelemek için en az bir Öge eklemeniz gerekmektedir</string>
+    <string name="routing_attr_piste_type_downhill_name">Alp/yokuş aşağı kayak</string>
+    <string name="routing_attr_piste_type_downhill_description">Alp veya yokuş aşağı kayak ve kayak teleferiklerine erişim için yamaçlar.</string>
+    <string name="routing_attr_piste_type_nordic_name">Kros/İskandinav kayak</string>
+    <string name="routing_attr_piste_type_nordic_description">İskandinav veya kros kayağı pistleri.</string>
+    <string name="routing_attr_piste_type_skitour_name">Kayak turu</string>
+    <string name="routing_attr_piste_type_skitour_description">Kayak turu rotaları.</string>
+    <string name="routing_attr_piste_type_sled_name">Kızak</string>
+    <string name="routing_attr_piste_type_sled_description">Kızak kullanımı için yokuşlar.</string>
+    <string name="routing_attr_allow_intermediate_name">Ara rotalara izin ver</string>
+    <string name="routing_attr_allow_intermediate_description">Daha dik bölümlere sahip daha zor rotalar. Genellikle kaçınılması gereken bazı engeller.</string>
+    <string name="routing_attr_allow_advanced_name">İleri seviyedeki rotalara izin ver</string>
+    <string name="routing_attr_allow_advanced_description">Tehlikeli engeller ve dik bölümlere sahip zorlu rotalar.</string>
+    <string name="routing_attr_allow_expert_name">Uzman rotalara izin ver</string>
+    <string name="routing_attr_allow_expert_description">Tehlikeli engeller ve çevreye sahip son derece zor rotalar.</string>
+    <string name="routing_attr_allow_skating_only_name">Sadece-paten rotalarına izin ver</string>
+    <string name="routing_attr_allow_skating_only_description">Klasik yollar olmadan serbest stil ya da sadece paten için düzenlenmiş rotalar.</string>
+    <string name="routing_attr_allow_classic_only_name">Sadece-klasik rotalarına izin ver</string>
+    <string name="routing_attr_allow_classic_only_description">Paten yolları olmadan sadece klasik stil için düzenlenmiş rotalar. Buna daha gevşek bir palete sahip daha küçük bir kar arabasıyla düzenlenen rotalar ve kayakçılar tarafından manuel olarak yapılan pistler dahildir.</string>
+    <string name="routing_attr_difficulty_preference_name">Tercih edilen zorluk</string>
+    <string name="routing_attr_difficulty_preference_description">Daha zor ya da daha kolay pistler üzerinde yönlendirme daha kısa ise hala mümkün olmasına rağmen, bu zorluktaki yolları tercih edin.</string>
+    <string name="routing_attr_freeride_policy_name">Pist dışı</string>
+    <string name="routing_attr_freeride_policy_description">Serbest ve pist dışı sürüşler, resmi olmayan yollar ve geçitlerdir. Tipik olarak düzenlenmemiş, yetkililer tarafından bakımı yapılmamış ve akşamları kontrol edilmemiştir. Riski göze alarak girin.</string>
+    <string name="external_input_device">Harici giriş cihazları</string>
+    <string name="external_input_device_descr">Harici kontroller için genel klavye veya WunderLINQ gibi bir cihaz seçin.</string>
+    <string name="sett_no_ext_input">Yok</string>
+    <string name="sett_generic_ext_input">Genel Klavye</string>
+    <string name="sett_wunderlinq_ext_input">WunderLINQ</string>
+    <string name="sett_parrot_ext_input">Parrot</string>
+    <string name="routeInfo_roadClass_name">Yol türü</string>
+    <string name="routeInfo_surface_name">Yüzey</string>
+    <string name="routeInfo_smoothness_name">Pürüzsüzlük</string>
+    <string name="routeInfo_steepness_name">Diklik</string>
+    <string name="new_route_calculated_dist_dbg">Rota: mesafe %s, yönlendirici zamanı %s 
+\nHesaplama: %.1f sn, %d yol, %d döşeme)</string>
+    <string name="change_data_storage_full_description">OsmAnd veri dosyaları yeni hedefe taşınsın mı\?
+\n%1$s &gt; %2$s</string>
+    <string name="data_storage_preference_summary">%1$s • Kullanılan %2$s GB</string>
+    <string name="data_storage_space_description">Boş %1$s • %2$s / %3$s GB</string>
+    <string name="enter_path_to_folder">Klasörün yolunu girin</string>
+    <string name="shared_string_select_folder">Klasör seç</string>
+    <string name="paste_Osmand_data_folder_path">OsmAnd verilerinin bulunduğu klasörün yolunu yapıştırın</string>
+    <string name="change_osmand_data_folder_question">OsmAnd veri klasörü değiştirilsin mi\?</string>
+    <string name="move_maps_to_new_destination">Yeni hedefe taşı</string>
+    <string name="internal_app_storage_description">Dahili depolama, kullanıcılardan ve diğer uygulamalardan gizlenir, böylece OsmAnd dışında kimse verilerinize erişemez</string>
+    <string name="change_data_storage_folder">Veri depolama klasörünü değiştir</string>
+    <string name="rendering_attr_piste_type_snow_park_name">Kar parkı</string>
+    <string name="rendering_attr_piste_type_sleigh_name">Atlı kızak</string>
+    <string name="rendering_attr_piste_type_sled_name">Kızak</string>
+    <string name="rendering_attr_piste_type_hike_name">Yürüyüş</string>
+    <string name="rendering_attr_piste_type_connection_name">Bağlantı</string>
+    <string name="rendering_attr_piste_type_skitour_name">Kayak turu</string>
+    <string name="rendering_attr_piste_type_downhill_name">Yokuş aşağı</string>
+    <string name="rendering_attr_piste_type_nordic_name">Nord</string>
+    <string name="routeInfo_piste_type_name">Pist tipi</string>
+    <string name="rendering_attr_piste_difficulty_novice_name">Acemi</string>
+    <string name="rendering_attr_piste_difficulty_easy_name">Kolay</string>
+    <string name="rendering_attr_piste_difficulty_intermediate_name">Orta düzey</string>
+    <string name="rendering_attr_piste_difficulty_advanced_name">İleri</string>
+    <string name="rendering_attr_piste_difficulty_expert_name">Uzman</string>
+    <string name="rendering_attr_piste_difficulty_freeride_name">Serbest sürüş</string>
+    <string name="rendering_attr_piste_difficulty_extreme_name">Ekstrem</string>
+    <string name="rendering_attr_piste_difficulty_undefined_name">Tanımlanmamış</string>
+    <string name="routeInfo_piste_difficulty_name">Pist zorluğu</string>
+    <string name="routing_attr_width_name">Genişlik sınırı</string>
+    <string name="routing_attr_width_description">Rotalarda izin verilen araç genişlik sınırını belirtin.</string>
 </resources>

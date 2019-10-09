@@ -3257,4 +3257,6 @@
     <string name="logcat_buffer">Буфер Logcat</string>
     <string name="plugins_settings">Настройки плагинов</string>
     <string name="language_and_output">Язык и вывод</string>
+    <string name="change_data_storage_full_description">Переместите файлы данных OsmAnd в новое место назначения\?
+\n%1$s &gt; %2$s</string>
 </resources>

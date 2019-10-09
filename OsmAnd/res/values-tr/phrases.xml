@@ -1192,4 +1192,12 @@
     <string name="poi_access_motorcycle">Motosiklet erişimi</string>
     <string name="poi_access_moped">Moped erişimi</string>
     <string name="poi_access_disabled">Engelli erişimi</string>
+    <string name="poi_bunker_silo">Bunker silosu</string>
+    <string name="poi_food_court">Yemek bölümü</string>
+    <string name="poi_craft_metal_construction">Metal konstrüksiyon zanaatı</string>
+    <string name="poi_car_pooling">Sürüş paylaşım noktası</string>
+    <string name="poi_park_ride">Park ve sürüş</string>
+    <string name="poi_access_mofa">Mofa erişimi</string>
+    <string name="poi_access_hgv">Ağır vasıta erişimi</string>
+    <string name="poi_access_goods">Hafif ticari araç erişimi</string>
 </resources>
