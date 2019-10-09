@@ -399,8 +399,8 @@
     <string name="none_selected_gpx">Não há arquivos GPX selecionados. Selecione um com um toque longo.</string>
     <string name="local_index_select_gpx_file">Selecione para mostrar</string>
     <string name="gpx_split_interval">Intervalo de divisão</string>
-    <string name="sort_by_distance">Ordenar por distância</string>
-    <string name="sort_by_name">Ordenar por nome</string>
+    <string name="sort_by_distance">Por distância</string>
+    <string name="sort_by_name">Por nome</string>
     <string name="show_zoom_buttons_navigation_descr">Mostrar botões de zoom durante a navegação.</string>
     <string name="show_zoom_buttons_navigation">Mostrar botões de zoom</string>
     <string name="save_as_favorites_points">Salvar como grupo do Favoritos</string>
