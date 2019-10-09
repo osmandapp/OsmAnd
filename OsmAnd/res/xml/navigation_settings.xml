@@ -10,7 +10,7 @@
             android:title="@string/fast_route_mode"/>
         <Preference
             android:key="avoid_in_routing"
-            android:summary="@string/avoid_in_routing_descr"
+            android:summary="@string/avoid_in_routing_descr_"
             android:title="@string/avoid_in_routing_title"/>
         <Preference
             android:key="prefer_in_routing"

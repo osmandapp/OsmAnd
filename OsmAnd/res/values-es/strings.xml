@@ -5,7 +5,6 @@
     <string name="avoid_unpaved">Evitar caminos sin asfaltar</string>
     <string name="avoid_ferries">Evitar ferris</string>
     <string name="avoid_in_routing_title">Evitar…</string>
-    <string name="avoid_in_routing_descr">Evita caminos con peajes, sin pavimentar, transbordadores o ferris y otros.</string>
     <string name="show_warnings_title">Mostrar alertas…</string>
     <string name="show_warnings_descr">Configura advertencias de tráfico (límites de velocidad, paradas forzosas, badenes, túneles), radares de velocidad, e información de carriles.</string>
     <string name="map_widget_fluorescent">Rutas fluorescentes</string>

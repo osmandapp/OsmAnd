@@ -1499,7 +1499,6 @@
     <string name="avoid_unpaved">Խուսափել չմշակված ճանապարհներից</string>
     <string name="avoid_ferries">Խուսափել լաստանավերից</string>
     <string name="avoid_in_routing_title">Երթուղին կառուցման ժամանակ խուսափել…</string>
-    <string name="avoid_in_routing_descr">Խուսափել վճարովի ճանապարհներից, երկաթգծերից և լաստանավերից։</string>
     <string name="map_widget_fluorescent">Լյումինեսցենտային երթուղիներ</string>
     <string name="map_widget_show_ruler">Քանոն</string>
     <string name="map_widget_view_direction">Տեսակետի ուղղությունը</string>

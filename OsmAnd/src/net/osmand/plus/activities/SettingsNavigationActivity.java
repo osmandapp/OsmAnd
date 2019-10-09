@@ -345,7 +345,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 				if (avoidParameters.size() > 0) {
 					avoidRouting = new Preference(this);
 					avoidRouting.setTitle(R.string.avoid_in_routing_title);
-					avoidRouting.setSummary(R.string.avoid_in_routing_descr);
+					avoidRouting.setSummary(R.string.avoid_in_routing_descr_);
 					avoidRouting.setOnPreferenceClickListener(this);
 					cat.addPreference(avoidRouting);
 				}

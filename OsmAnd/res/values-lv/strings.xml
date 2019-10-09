@@ -767,7 +767,6 @@
     <string name="avoid_unpaved">Izvairīties no grants ceļiem</string>
     <string name="avoid_ferries">Izvairīties no pārceltuvēm</string>
     <string name="avoid_in_routing_title">Izvairīties no…</string>
-    <string name="avoid_in_routing_descr">Izvairīties no maksas vai grants ceļiem un prāmjiem.</string>
     <string name="show_warnings_title">Rādīt signālus…</string>
     <string name="show_warnings_descr">Satiksmes ierobežojumus (ātruma limitus, stopzīmes, rampas), gājēju pārejas, fotoradarus, ceļa joslas</string>
     <string name="map_widget_fluorescent">Fluorescējošs maršruts</string>

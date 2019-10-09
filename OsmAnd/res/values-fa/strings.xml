@@ -109,7 +109,6 @@
     <string name="map_widget_next_next_turn">دومین پیچ بعدی</string>
     <string name="map_widget_mini_route">نقشه مسیر کوچک</string>
     <string name="avoid_in_routing_title">پرهیز از…</string>
-    <string name="avoid_in_routing_descr">مثلاً، از جاده‌های عوارضی‌دار، جاده‌های روسازی‌نشده و فرابَرها پرهیز شود.</string>
     <string name="bg_service_screen_lock_toast">صفحه قفل شد</string>
     <string name="show_cameras">دوربین‌های کنترل سرعت</string>
     <string name="show_traffic_warnings">هشدارهای ترافیکی</string>

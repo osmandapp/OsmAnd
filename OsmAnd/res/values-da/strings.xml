@@ -146,7 +146,6 @@
     <string name="avoid_unpaved">Undgå grusveje</string>
     <string name="avoid_ferries">Undgå færger</string>
     <string name="avoid_in_routing_title">Undgå…</string>
-    <string name="avoid_in_routing_descr">Undgå fx. betalingsveje, grusveje, færger.</string>
     <string name="map_widget_fluorescent">Fluorescerende ruter</string>
     <string name="map_widget_show_ruler">Lineal</string>
     <string name="map_widget_view_direction">Synsretning</string>

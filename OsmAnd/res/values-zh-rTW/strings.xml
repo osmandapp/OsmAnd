@@ -98,7 +98,6 @@
     <string name="avoid_unpaved">避開未鋪面道路</string>
     <string name="avoid_ferries">避開渡輪</string>
     <string name="avoid_in_routing_title">避開…</string>
-    <string name="avoid_in_routing_descr">避開例如收費道路、顛頗路面、渡輪。</string>
     <string name="map_widget_fluorescent">螢光導航路線</string>
     <string name="map_widget_show_ruler">比例尺</string>
     <string name="map_widget_view_direction">目視方向</string>

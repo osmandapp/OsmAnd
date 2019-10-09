@@ -461,7 +461,6 @@
     <string name="avoid_unpaved">" ടാര്‍ ചെയ്യാത്ത(പാകാത്ത) റോഡുകള്‍ ഒഴിവാക്കുക "</string>
     <string name="avoid_ferries">"കടത്ത്  ഒഴിവാക്കുക"</string>
     <string name="avoid_in_routing_title">ഒഴിവാക്കുക…</string>
-    <string name="avoid_in_routing_descr">"ടോള്‍ റോഡുകള്‍ , ടാര്‍ ചെയ്യാത്ത(പാകാത്ത) റോഡുകള്‍, കടത്ത് .... എന്നിവ ഒഴിവാക്കുക "</string>
     <string name="avoid_toll_roads">ടോള്‍ റോഡുകള്‍ ഒഴിവാക്കുക</string>
     <string name="asap">"സംഭവ്യമായ അത്രയും വേഗതയില്‍ "</string>
     <string name="accessibility_mode">പ്രാപ്യത വിധം</string>

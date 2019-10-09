@@ -150,7 +150,6 @@
     <string name="poi_context_menu_delete">Брисање POI</string>
     <string name="rotate_map_none_opt">Без ротације (север је увек горе)</string>
     <string name="rotate_map_to_bearing">Оријентација карте</string>
-    <string name="avoid_in_routing_descr">Избегавај на прм. наплатне рампе, неасфалтиране путеве, трајекте.</string>
     <string name="map_widget_show_ruler">Лењир</string>
     <string name="shared_string_import">Увези</string>
     <string name="error_occurred_loading_gpx">GPX не може да се учита</string>

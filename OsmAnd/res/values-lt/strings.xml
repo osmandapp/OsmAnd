@@ -773,7 +773,6 @@ Tam prireiks {1} MB pastoviam saugojimui.
     <string name="avoid_unpaved">Vengti negrįstų kelių</string>
     <string name="avoid_ferries">Vengti keltų</string>
     <string name="avoid_in_routing_title">Vengti…</string>
-    <string name="avoid_in_routing_descr">Vengti mokamų, negrįstų kelių ir keltų.</string>
     <string name="show_warnings_title">Rodyti įspėjimus…</string>
     <string name="show_warnings_descr">Rodyti srauto perspėjimus (greičio ribojimus, greičio ribojimo gūbrelius, tunelius), greičio matuoklių aptikimo pranešimus, kelio juostos informaciją.</string>
     <string name="map_widget_fluorescent">Fluorescenciniai maršrutai</string>

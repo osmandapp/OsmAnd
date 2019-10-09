@@ -294,7 +294,6 @@
     <string name="avoid_in_routing_title">Izogibanje …</string>
     <string name="avoid_ferries">Izogni se trajektom</string>
     <string name="avoid_unpaved">Izogni se neasfaltiranim potem</string>
-    <string name="avoid_in_routing_descr">Izogibanje cestninam, makadamskim potem, trajektom.</string>
     <string name="map_widget_fluorescent">Fluorescentne poti</string>
     <string name="map_widget_show_ruler">Merilo</string>
     <string name="map_widget_view_direction">Smer gledanja</string>

@@ -89,7 +89,6 @@
     <string name="avoid_unpaved">تجنب الطرق غير المعبدة</string>
     <string name="avoid_ferries">تجنب العبارات</string>
     <string name="avoid_in_routing_title">التجنب</string>
-    <string name="avoid_in_routing_descr">تجنب الطرق ذات الرسوم، وغير المعبدة، والعبارات</string>
     <string name="gps_wakeup_interval">GPS إيقاظ الفاصل الزمني: %s</string>
     <string name="int_continuosly">متواصل</string>
     <string name="screen_is_locked">لفتح قفل الشاشة اضغط على أيقونة القفل</string>

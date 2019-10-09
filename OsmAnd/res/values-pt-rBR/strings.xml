@@ -612,7 +612,6 @@
     <string name="day_night_info_description">Nascer do Sol: %1$s
 Pôr do Sol: %2$s</string>
     <string name="avoid_unpaved">Evitar vias não pavimentadas</string>
-    <string name="avoid_in_routing_descr">Evitar p.ex. vias pedagiadas, não pavimentadas, balsas.</string>
     <string name="bg_service_sleep_mode_off">Ativar\n modo segundo plano</string>
     <string name="show_cameras">Radares</string>
     <string name="show_traffic_warnings">Alertas de trânsito</string>

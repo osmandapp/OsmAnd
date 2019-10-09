@@ -809,7 +809,6 @@ Lon %2$s</string>
     <string name="avoid_unpaved">Evitar caminos sin pavimentar</string>
     <string name="avoid_ferries">Evitar ferris</string>
     <string name="avoid_in_routing_title">Evitar…</string>
-    <string name="avoid_in_routing_descr">Evita caminos con peajes, sin pavimentar, transbordadores o ferris y otros.</string>
     <string name="map_widget_fluorescent">Rutas fluorescentes</string>
     <string name="map_widget_show_ruler">Escala</string>
     <string name="map_widget_view_direction">Dirección de visualización</string>

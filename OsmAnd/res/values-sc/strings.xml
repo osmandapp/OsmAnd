@@ -465,7 +465,6 @@
     <string name="avoid_unpaved">Instransi sos caminos no asfaltados</string>
     <string name="avoid_ferries">Istransi sos traghetos</string>
     <string name="avoid_in_routing_title">Istransi…</string>
-    <string name="avoid_in_routing_descr">Istransi pro es. sos caminos a pagamentu, sos isterrados, sos traghetos.</string>
     <string name="map_widget_fluorescent">Camineras fluorescentes</string>
     <string name="map_widget_show_ruler">Righellu</string>
     <string name="map_widget_view_direction">Diretzione de sa visuale</string>
