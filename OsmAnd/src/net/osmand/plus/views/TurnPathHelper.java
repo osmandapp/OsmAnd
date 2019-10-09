@@ -579,7 +579,8 @@ public class TurnPathHelper {
 			if (secondTurnType == 0) {
 				turnResource = new TurnResource(firstTurnType, false, false, leftSide);
 			} else if (secondTurnType == TurnType.C || thirdTurnType == TurnType.C
-					|| secondTurnType == TurnType.TSLL || secondTurnType == TurnType.TSLR) {
+					|| ((firstTurnType == TurnType.TL || firstTurnType == TurnType.TR)
+					&& (secondTurnType == TurnType.TSLL || secondTurnType == TurnType.TSLR))) {
 				turnResource = new TurnResource(firstTurnType, true, false, leftSide);
 			} else {
 				if (firstTurnType == TurnType.TU || firstTurnType == TurnType.TRU) {
