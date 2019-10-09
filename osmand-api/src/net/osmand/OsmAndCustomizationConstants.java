@@ -1,4 +1,4 @@
-package net.osmand.plus;
+package net.osmand;
 
 public interface OsmAndCustomizationConstants {
 

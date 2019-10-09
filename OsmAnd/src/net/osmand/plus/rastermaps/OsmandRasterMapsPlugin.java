@@ -46,10 +46,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static net.osmand.plus.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_DOWNLOAD_MAP;
-import static net.osmand.plus.OsmAndCustomizationConstants.OVERLAY_MAP;
-import static net.osmand.plus.OsmAndCustomizationConstants.UNDERLAY_MAP;
-import static net.osmand.plus.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_UPDATE_MAP;
+import static net.osmand.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_DOWNLOAD_MAP;
+import static net.osmand.OsmAndCustomizationConstants.OVERLAY_MAP;
+import static net.osmand.OsmAndCustomizationConstants.UNDERLAY_MAP;
+import static net.osmand.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_UPDATE_MAP;
 
 public class OsmandRasterMapsPlugin extends OsmandPlugin {
 	public static final String ID = "osmand.rastermaps";

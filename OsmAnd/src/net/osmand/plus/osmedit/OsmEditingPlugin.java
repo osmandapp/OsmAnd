@@ -47,12 +47,12 @@ import org.apache.commons.logging.Log;
 
 import java.util.List;
 
-import static net.osmand.plus.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_CREATE_POI;
-import static net.osmand.plus.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MODIFY_OSM_CHANGE;
-import static net.osmand.plus.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MODIFY_OSM_NOTE;
-import static net.osmand.plus.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MODIFY_POI;
-import static net.osmand.plus.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_OPEN_OSM_NOTE;
-import static net.osmand.plus.OsmAndCustomizationConstants.OSM_NOTES;
+import static net.osmand.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_CREATE_POI;
+import static net.osmand.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MODIFY_OSM_CHANGE;
+import static net.osmand.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MODIFY_OSM_NOTE;
+import static net.osmand.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MODIFY_POI;
+import static net.osmand.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_OPEN_OSM_NOTE;
+import static net.osmand.OsmAndCustomizationConstants.OSM_NOTES;
 
 
 public class OsmEditingPlugin extends OsmandPlugin {

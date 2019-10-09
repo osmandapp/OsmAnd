@@ -1,4 +1,4 @@
-package net.osmand.aidl;
+package net.osmand;
 
 public interface OsmandAidlConstants {
 
