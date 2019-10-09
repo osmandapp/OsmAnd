@@ -3314,4 +3314,26 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="paste_Osmand_data_folder_path">Límdu slóð á möppuna með OsmAnd-gögnum</string>
     <string name="change_osmand_data_folder_question">Skipta um OsmAnd-gagnamöppu\?</string>
     <string name="move_maps_to_new_destination">Færa á nýja staðinn</string>
+    <string name="internal_app_storage_description">Innri gagnageymsla, falin fyrir notandanum og öðrum forritum þannig að enginn nema OsmAnd getur fengið aðgang að gögnunum þínum</string>
+    <string name="change_data_storage_folder">Breyta gagnageymslumöppu</string>
+    <string name="rendering_attr_piste_type_snow_park_name">Snjógerði</string>
+    <string name="rendering_attr_piste_type_sleigh_name">Sleðar</string>
+    <string name="rendering_attr_piste_type_sled_name">Snjóþotur</string>
+    <string name="rendering_attr_piste_type_hike_name">Gönguferðir</string>
+    <string name="rendering_attr_piste_type_connection_name">Tenging</string>
+    <string name="rendering_attr_piste_type_skitour_name">Skíðaferðir</string>
+    <string name="rendering_attr_piste_type_downhill_name">Brun</string>
+    <string name="rendering_attr_piste_type_nordic_name">Gönguskíði</string>
+    <string name="routeInfo_piste_type_name">Gerð brautar</string>
+    <string name="rendering_attr_piste_difficulty_novice_name">Byrjendur</string>
+    <string name="rendering_attr_piste_difficulty_easy_name">Auðvelt</string>
+    <string name="rendering_attr_piste_difficulty_intermediate_name">Miðlungs</string>
+    <string name="rendering_attr_piste_difficulty_advanced_name">Vanir</string>
+    <string name="rendering_attr_piste_difficulty_expert_name">Mjög vanir</string>
+    <string name="rendering_attr_piste_difficulty_freeride_name">Frjáls aðferð</string>
+    <string name="rendering_attr_piste_difficulty_extreme_name">Ofur</string>
+    <string name="rendering_attr_piste_difficulty_undefined_name">Óskilgreint</string>
+    <string name="routeInfo_piste_difficulty_name">Erfiðleikastig brautar</string>
+    <string name="routing_attr_width_name">Takmörkun breiddar</string>
+    <string name="routing_attr_width_description">Tilgreindu takmörk á breidd farartækja á leiðum.</string>
 </resources>
