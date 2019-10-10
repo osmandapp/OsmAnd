@@ -945,7 +945,6 @@
     <string name="avoid_unpaved">비포장 도로 회피</string>
     <string name="avoid_ferries">뱃길 회피</string>
     <string name="avoid_in_routing_title">회피하기…</string>
-    <string name="avoid_in_routing_descr">유료도로, 비포장, 뱃길 회피하기</string>
     <string name="map_widget_fluorescent">깜박이는 경로</string>
     <string name="map_widget_show_ruler">축척(Ruler)</string>
     <string name="map_widget_view_direction">방향 보기</string>

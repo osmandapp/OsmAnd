@@ -631,7 +631,6 @@ Zachod: %2$s</string>
     <string name="avoid_unpaved">Paźbiahać daroh biez pakryćcia</string>
     <string name="avoid_ferries">Paźbiahać paromaŭ</string>
     <string name="avoid_in_routing_title">Paźbiahać…</string>
-    <string name="avoid_in_routing_descr">Pazbiahać, napryklad, platnych i daroh biez pakryccia, paromaŭ.</string>
     <string name="map_widget_fluorescent">Lumіniescentnyja maršruty</string>
     <string name="map_widget_show_ruler">Liniejka</string>
     <string name="map_widget_view_direction">Kіrunak pohladu</string>

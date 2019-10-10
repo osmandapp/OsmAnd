@@ -295,7 +295,6 @@
     <string name="avoid_unpaved">Saihestu asfaltatu gabeko bideak</string>
     <string name="avoid_ferries">Saihestu ferryak</string>
     <string name="avoid_in_routing_title">Saihestu…</string>
-    <string name="avoid_in_routing_descr">Saihestu adibidez bidesariak, asfaltatu gabekoak, ferryak.</string>
     <string name="map_widget_fluorescent">Ibilbide fluoreszenteak</string>
     <string name="map_widget_show_ruler">Erregela</string>
     <string name="map_widget_view_direction">Ikuspegiaren norabidea</string>

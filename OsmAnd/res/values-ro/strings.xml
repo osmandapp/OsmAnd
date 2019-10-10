@@ -68,7 +68,6 @@
     <string name="avoid_unpaved">Evită drumurile nepavate</string>
     <string name="avoid_ferries">Evită ferry</string>
     <string name="avoid_in_routing_title">Evitare drumuri…</string>
-    <string name="avoid_in_routing_descr">Evită drumuri cu taxă, nepavate, ferry</string>
     <string name="map_widget_fluorescent">Rute fluorescente</string>
     <string name="map_widget_show_ruler">Scara hărții</string>
     <string name="map_widget_view_direction">Direcția de deplasare</string>

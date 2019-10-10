@@ -1103,7 +1103,6 @@ Lon: %2$s</string>
     <string name="avoid_unpaved">Eviti tervojojn</string>
     <string name="avoid_ferries">Eviti pramojn</string>
     <string name="avoid_in_routing_title">Eviti…</string>
-    <string name="avoid_in_routing_descr">Eviti ekz. pagendajn vojojn, tervojojn, pramojn.</string>
     <string name="map_widget_fluorescent">Rebrilaj kursoj</string>
     <string name="map_widget_view_direction">Viddirekto</string>
     <string name="map_widget_transparent">Diafanaj fenestraĵoj</string>

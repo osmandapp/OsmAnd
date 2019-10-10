@@ -36,7 +36,6 @@
     <string name="avoid_unpaved">Undvik oasfalterade vägar</string>
     <string name="avoid_ferries">Undvik färjor</string>
     <string name="avoid_in_routing_title">Undvik…</string>
-    <string name="avoid_in_routing_descr">Undvik t.ex. vägtullar, oasfalterade vägar, färjor.</string>
     <string name="map_widget_show_ruler">Linjal</string>
     <string name="map_widget_view_direction">Färdriktning</string>
     <string name="map_widget_transparent">Genomskinliga widgetar</string>

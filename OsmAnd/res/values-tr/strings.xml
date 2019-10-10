@@ -210,7 +210,6 @@
     <string name="avoid_unpaved">Asfaltsız yollardan kaçın</string>
     <string name="avoid_ferries">Feribotlardan kaçın</string>
     <string name="avoid_in_routing_title">Kaçın…</string>
-    <string name="avoid_in_routing_descr">Örn. paralı yollardan, asfaltsız yollardan, feribotlardan kaçının.</string>
     <string name="map_widget_fluorescent">Floresan rotalar</string>
     <string name="map_widget_show_ruler">Cetvel</string>
     <string name="map_widget_transparent">Şeffaf widget\'lar</string>

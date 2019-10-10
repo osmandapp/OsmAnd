@@ -174,7 +174,6 @@
 	<string name="rotate_map_none_opt">Bez rotacije (sever je gore)</string>
 	<string name="rotate_map_to_bearing">Orjentacija mape</string>
 	
-	<string name="avoid_in_routing_descr">Izbegavaj naplatne rampe, ne asfaltirane puteve, trajekte</string>
 	<string name="map_widget_show_ruler">Lenjir</string>
 	
 	<string name="shared_string_import">Uvezi</string>

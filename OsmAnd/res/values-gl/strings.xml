@@ -560,7 +560,6 @@
     <string name="avoid_unpaved">Evita-las estradas sen asfaltar</string>
     <string name="avoid_ferries">Evita-los ferris</string>
     <string name="avoid_in_routing_title">Evitar…</string>
-    <string name="avoid_in_routing_descr">Evitar estradas de portaxe ou peaxe, sen asfaltar ou ferris e outros.</string>
     <string name="map_widget_fluorescent">Rotas fluorescentes</string>
     <string name="map_widget_show_ruler">Regra</string>
     <string name="map_widget_view_direction">Dirección da vista</string>

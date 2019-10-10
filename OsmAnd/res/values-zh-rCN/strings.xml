@@ -38,7 +38,6 @@
     <string name="recalculate_route_to_your_location">運輸方式：</string>
     <string name="select_navigation_mode">選擇傳輸模式</string>
     <string name="map_widget_renderer">地图风格</string>
-    <string name="avoid_in_routing_descr">避开收费公路、土路、渡轮</string>
     <string name="map_widget_fluorescent">熒光路線</string>
     <string name="map_widget_show_ruler">統治者</string>
     <string name="map_widget_view_direction">觀察方向</string>

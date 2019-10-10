@@ -903,7 +903,6 @@
 <string name="avoid_unpaved">მოუკირწყლავი გზებისათვის თავის არიდება</string>
 <string name="avoid_ferries">ბორნისათვის თავის არიდება</string>
 <string name="avoid_in_routing_title">თავის არიდება…</string>
-<string name="avoid_in_routing_descr">ცუდი გზებისათვის თავის არიდება</string>
 <string name="show_warnings_title">გაფრთხილებების ჩვენება…</string>
 <string name="show_warnings_descr">სიჩქარის ლიმიტის, კამერებისა და საცობების ჩვენება</string>
 <string name="map_widget_fluorescent">მანათობელი გზები</string>

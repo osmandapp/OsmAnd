@@ -786,7 +786,6 @@
     <string name="avoid_unpaved">Evitar estradas não pavimentadas</string>
     <string name="avoid_ferries">Evite ferries</string>
     <string name="avoid_in_routing_title">Evitar…</string>
-    <string name="avoid_in_routing_descr">Evitar por exemplo estradas com portagem, não pavimentadas, balsas.</string>
     <string name="map_widget_fluorescent">Rotas fluorescentes</string>
     <string name="map_widget_show_ruler">Regua</string>
     <string name="map_widget_view_direction">A direção da visão</string>

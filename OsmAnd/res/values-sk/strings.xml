@@ -40,7 +40,6 @@
     <string name="avoid_unpaved">Nespevneným cestám</string>
     <string name="avoid_ferries">Trajektom</string>
     <string name="avoid_in_routing_title">Vyhnúť sa…</string>
-    <string name="avoid_in_routing_descr">Obísť napr. spoplatnené cesty, nespevnené cesty, trajekty.</string>
     <string name="show_warnings_title">Zobraziť varovania…</string>
     <string name="show_warnings_descr">Nastaviť dopravné varovania (rýchlostné obmedzenia, značky stop, spomaľovače, tunely), rýchlostné radary a jazdné pruhy.</string>
     <string name="map_widget_fluorescent">Fluorescentné trasy</string>

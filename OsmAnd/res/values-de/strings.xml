@@ -928,7 +928,6 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
     <string name="avoid_unpaved">Unbefestigte Wege vermeiden</string>
     <string name="avoid_ferries">Fähren vermeiden</string>
     <string name="avoid_in_routing_title">Vermeiden von …</string>
-    <string name="avoid_in_routing_descr">Mautstraßen, unbefestigte Straßen, Fähren, usw. vermeiden.</string>
     <string name="map_widget_fluorescent">Routen in Leuchtfarbe</string>
     <string name="map_widget_show_ruler">Maßstab</string>
     <string name="map_widget_view_direction">Blickrichtung einblenden</string>

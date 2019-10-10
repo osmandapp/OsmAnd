@@ -779,7 +779,6 @@
     <string name="avoid_unpaved">Dróg nieutwardzonych</string>
     <string name="avoid_ferries">Promów</string>
     <string name="avoid_in_routing_title">Omijanie…</string>
-    <string name="avoid_in_routing_descr">Unika m.in. dróg płatnych, nieutwardzonych, promów.</string>
     <string name="show_warnings_title">Wyświetlanie ostrzeżeń…</string>
     <string name="show_warnings_descr">Wyświetla ostrzeżenia ruchu drogowego (ograniczenia prędkości, znaki \"stop\", progi zwalniające, tunele), ostrzeżenia o fotoradarach i informacje o pasach ruchu.</string>
     <string name="osmand_short_description_80_chars">Mapy dla całego świata i nawigacja działająca w oparciu o stacjonarne jak i sieciowe mapy OSM</string>
