@@ -13,8 +13,33 @@
     <string name="shared_string_go">သွားမည်</string>
     <string name="shared_string_previous">အလျင်က</string>
     <string name="search_radius_proximity">အတွင်း</string>
-    <string name="cancel_navigation">လမ်းညွှန်ခြင်းရပ်ထား</string>
+    <string name="cancel_navigation">လမ်းညွှန်ခြင်းရပ်မြည်</string>
     <string name="day_night_info">နေ့/ည ပတ်သက်သောအချက်များ</string>
     <string name="daynight_mode_auto">နေထွက်/နေဝင်</string>
     <string name="poi">POI</string>
+    <string name="shared_string_back">နောက်သို့</string>
+    <string name="get_unlimited_access">အကန့်အသတ်မဲ့သုံးခွင့်ရှိ</string>
+    <string name="price_free">အလကား</string>
+    <string name="configure_profile_info">အောက်ဖော်ပြပါ settings အားလုံးသည်ရွေးချယ်ထားသောပရိုဖိုင်းကိုသာထိခိုက်သည်။</string>
+    <string name="shared_string_example">ဥပမာ</string>
+    <string name="change_default_settings">မူလက settings များကိုပြောင်းမြည်</string>
+    <string name="discard_changes">ပြောင်းလဲထားချက်များကို ဖယ်ရှားမြည်</string>
+    <string name="wake_time">နိုးချိန်</string>
+    <string name="configure_profile">ပရိုဖိုင်းကိုပြုပြင်မြည်</string>
+    <string name="switch_profile">ပရိုဖိုင်းကိုပြောင်းလဲမည်</string>
+    <string name="change_data_storage_full_description">OsmAnd အချက်အလက်ဖိုင်များကိုနေရာအသစ်သို့ရွှေ့ပါ။
+\n% 1 $ s&gt;% 2 $ s</string>
+    <string name="data_storage_preference_summary">%1$s • သုံးပြီး %2$s GB</string>
+    <string name="data_storage_space_description">"နေရာလွပ်  %1$s • %2$s / %3$s GB"</string>
+    <string name="enter_path_to_folder">folder ကိုရှိနေရာကိုရိုက်ထည့်ပါ</string>
+    <string name="shared_string_select_folder">ဖိုလ်ဒါကိုရွေးပါ</string>
+    <string name="paste_Osmand_data_folder_path">OsmAnd ဒေတာရှိသော ဖိုလ်ဒါနေရာကိုကူးထည့်ပါ</string>
+    <string name="change_osmand_data_folder_question">OsmAnd data folder ကိုပြောင်းမြည်\?</string>
+    <string name="move_maps_to_new_destination">နေရာအသစ်ကိုပြောင်းမြည်</string>
+    <string name="change_data_storage_folder">OsmAnd data folder ကိုပြောင်းမြည်</string>
+    <string name="rendering_attr_piste_type_snow_park_name">နှင်းပန်းခြံ</string>
+    <string name="rendering_attr_piste_type_hike_name">ခရီးဝေးလမ်းရှောက်</string>
+    <string name="rendering_attr_piste_type_downhill_name">တောင်ဂုံးဆင်း</string>
+    <string name="routeInfo_piste_type_name">"နှင်းတောင်ပေါ်  ski စီးလမ်းအမြိုး"</string>
+    <string name="rendering_attr_piste_difficulty_easy_name">လွယ်တယ်</string>
 </resources>
