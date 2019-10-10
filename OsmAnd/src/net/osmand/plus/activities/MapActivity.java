@@ -50,9 +50,8 @@ import net.osmand.SecondSplashScreenFragment;
 import net.osmand.StateChangedListener;
 import net.osmand.ValueHolder;
 import net.osmand.access.MapAccessibilityActions;
+import net.osmand.aidl.AidlMapPointWrapper;
 import net.osmand.aidl.OsmandAidlApi.AMapPointUpdateListener;
-import net.osmand.aidl.map.ALatLon;
-import net.osmand.aidl.maplayer.point.AMapPoint;
 import net.osmand.core.android.AtlasMapRendererView;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -1923,13 +1922,12 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	@Override
-	public void onAMapPointUpdated(final AMapPoint point, String layerId) {
+	public void onAMapPointUpdated(final AidlMapPointWrapper point, String layerId) {
 		if (canUpdateAMapPointMenu(point, layerId)) {
 			app.runInUIThread(new Runnable() {
 				@Override
 				public void run() {
-					ALatLon loc = point.getLocation();
-					LatLon latLon = new LatLon(loc.getLatitude(), loc.getLongitude());
+					LatLon latLon = point.getLocation();
 					PointDescription pointDescription = new PointDescription(PointDescription.POINT_TYPE_MARKER, point.getFullName());
 					mapContextMenu.update(latLon, pointDescription, point);
 					mapContextMenu.centerMarkerLocation();
@@ -1938,12 +1936,12 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 	}
 
-	private boolean canUpdateAMapPointMenu(AMapPoint point, String layerId) {
+	private boolean canUpdateAMapPointMenu(AidlMapPointWrapper point, String layerId) {
 		Object object = mapContextMenu.getObject();
-		if (!mapContextMenu.isVisible() || !(object instanceof AMapPoint)) {
+		if (!mapContextMenu.isVisible() || !(object instanceof AidlMapPointWrapper)) {
 			return false;
 		}
-		AMapPoint oldPoint = (AMapPoint) object;
+		AidlMapPointWrapper oldPoint = (AidlMapPointWrapper) object;
 		return oldPoint.getLayerId().equals(layerId) && oldPoint.getId().equals(point.getId());
 	}
 

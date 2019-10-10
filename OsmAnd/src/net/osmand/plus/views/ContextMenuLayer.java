@@ -25,7 +25,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.RenderingContext;
-import net.osmand.aidl.maplayer.point.AMapPoint;
+import net.osmand.aidl.AidlMapPointWrapper;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.core.jni.AmenitySymbolsProvider.AmenitySymbolsGroup;
 import net.osmand.core.jni.AreaI;
@@ -205,7 +205,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				RenderedObject r = (RenderedObject) selectedObject;
 				x = r.getX();
 				y = r.getY();
-			} else if (selectedObject instanceof AMapPoint) {
+			} else if (selectedObject instanceof AidlMapPointWrapper) {
 				markerCustomized = true;
 			}
 			if (x != null && y != null && x.size() > 2) {

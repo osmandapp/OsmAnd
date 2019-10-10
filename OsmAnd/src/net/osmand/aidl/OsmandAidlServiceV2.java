@@ -14,73 +14,75 @@ import net.osmand.PlatformUtil;
 import net.osmand.aidl.OsmandAidlApi.GpxBitmapCreatedCallback;
 import net.osmand.aidl.OsmandAidlApi.OsmandAppInitCallback;
 import net.osmand.aidl.OsmandAidlApi.SearchCompleteCallback;
-import net.osmand.aidl.calculateroute.CalculateRouteParams;
-import net.osmand.aidl.contextmenu.ContextMenuButtonsParams;
-import net.osmand.aidl.contextmenu.RemoveContextMenuButtonsParams;
-import net.osmand.aidl.contextmenu.UpdateContextMenuButtonsParams;
-import net.osmand.aidl.copyfile.CopyFileParams;
-import net.osmand.aidl.customization.CustomizationInfoParams;
-import net.osmand.aidl.customization.OsmandSettingsInfoParams;
-import net.osmand.aidl.customization.OsmandSettingsParams;
-import net.osmand.aidl.customization.SetWidgetsParams;
-import net.osmand.aidl.favorite.AFavorite;
-import net.osmand.aidl.favorite.AddFavoriteParams;
-import net.osmand.aidl.favorite.RemoveFavoriteParams;
-import net.osmand.aidl.favorite.UpdateFavoriteParams;
-import net.osmand.aidl.favorite.group.AFavoriteGroup;
-import net.osmand.aidl.favorite.group.AddFavoriteGroupParams;
-import net.osmand.aidl.favorite.group.RemoveFavoriteGroupParams;
-import net.osmand.aidl.favorite.group.UpdateFavoriteGroupParams;
-import net.osmand.aidl.gpx.AGpxBitmap;
-import net.osmand.aidl.gpx.AGpxFile;
-import net.osmand.aidl.gpx.ASelectedGpxFile;
-import net.osmand.aidl.gpx.CreateGpxBitmapParams;
-import net.osmand.aidl.gpx.GpxColorParams;
-import net.osmand.aidl.gpx.HideGpxParams;
-import net.osmand.aidl.gpx.ImportGpxParams;
-import net.osmand.aidl.gpx.RemoveGpxParams;
-import net.osmand.aidl.gpx.ShowGpxParams;
-import net.osmand.aidl.gpx.StartGpxRecordingParams;
-import net.osmand.aidl.gpx.StopGpxRecordingParams;
-import net.osmand.aidl.map.ALatLon;
-import net.osmand.aidl.map.SetMapLocationParams;
-import net.osmand.aidl.maplayer.AddMapLayerParams;
-import net.osmand.aidl.maplayer.RemoveMapLayerParams;
-import net.osmand.aidl.maplayer.UpdateMapLayerParams;
-import net.osmand.aidl.maplayer.point.AddMapPointParams;
-import net.osmand.aidl.maplayer.point.RemoveMapPointParams;
-import net.osmand.aidl.maplayer.point.ShowMapPointParams;
-import net.osmand.aidl.maplayer.point.UpdateMapPointParams;
-import net.osmand.aidl.mapmarker.AMapMarker;
-import net.osmand.aidl.mapmarker.AddMapMarkerParams;
-import net.osmand.aidl.mapmarker.RemoveMapMarkerParams;
-import net.osmand.aidl.mapmarker.RemoveMapMarkersParams;
-import net.osmand.aidl.mapmarker.UpdateMapMarkerParams;
-import net.osmand.aidl.mapwidget.AddMapWidgetParams;
-import net.osmand.aidl.mapwidget.RemoveMapWidgetParams;
-import net.osmand.aidl.mapwidget.UpdateMapWidgetParams;
-import net.osmand.aidl.navdrawer.NavDrawerFooterParams;
-import net.osmand.aidl.navdrawer.NavDrawerHeaderParams;
-import net.osmand.aidl.navdrawer.NavDrawerItem;
-import net.osmand.aidl.navdrawer.SetNavDrawerItemsParams;
-import net.osmand.aidl.navigation.ANavigationUpdateParams;
-import net.osmand.aidl.navigation.ANavigationVoiceRouterMessageParams;
-import net.osmand.aidl.navigation.MuteNavigationParams;
-import net.osmand.aidl.navigation.NavigateGpxParams;
-import net.osmand.aidl.navigation.NavigateParams;
-import net.osmand.aidl.navigation.NavigateSearchParams;
-import net.osmand.aidl.navigation.PauseNavigationParams;
-import net.osmand.aidl.navigation.ResumeNavigationParams;
-import net.osmand.aidl.navigation.StopNavigationParams;
-import net.osmand.aidl.navigation.UnmuteNavigationParams;
-import net.osmand.aidl.note.StartAudioRecordingParams;
-import net.osmand.aidl.note.StartVideoRecordingParams;
-import net.osmand.aidl.note.StopRecordingParams;
-import net.osmand.aidl.note.TakePhotoNoteParams;
-import net.osmand.aidl.plugins.PluginParams;
-import net.osmand.aidl.search.SearchParams;
-import net.osmand.aidl.search.SearchResult;
-import net.osmand.aidl.tiles.ASqliteDbFile;
+import net.osmand.aidl2.IOsmAndAidlCallback;
+import net.osmand.aidl2.IOsmAndAidlInterface;
+import net.osmand.aidl2.calculateroute.CalculateRouteParams;
+import net.osmand.aidl2.contextmenu.ContextMenuButtonsParams;
+import net.osmand.aidl2.contextmenu.RemoveContextMenuButtonsParams;
+import net.osmand.aidl2.contextmenu.UpdateContextMenuButtonsParams;
+import net.osmand.aidl2.copyfile.CopyFileParams;
+import net.osmand.aidl2.customization.CustomizationInfoParams;
+import net.osmand.aidl2.customization.OsmandSettingsInfoParams;
+import net.osmand.aidl2.customization.OsmandSettingsParams;
+import net.osmand.aidl2.customization.SetWidgetsParams;
+import net.osmand.aidl2.favorite.AFavorite;
+import net.osmand.aidl2.favorite.AddFavoriteParams;
+import net.osmand.aidl2.favorite.RemoveFavoriteParams;
+import net.osmand.aidl2.favorite.UpdateFavoriteParams;
+import net.osmand.aidl2.favorite.group.AFavoriteGroup;
+import net.osmand.aidl2.favorite.group.AddFavoriteGroupParams;
+import net.osmand.aidl2.favorite.group.RemoveFavoriteGroupParams;
+import net.osmand.aidl2.favorite.group.UpdateFavoriteGroupParams;
+import net.osmand.aidl2.gpx.AGpxBitmap;
+import net.osmand.aidl2.gpx.AGpxFile;
+import net.osmand.aidl2.gpx.ASelectedGpxFile;
+import net.osmand.aidl2.gpx.CreateGpxBitmapParams;
+import net.osmand.aidl2.gpx.GpxColorParams;
+import net.osmand.aidl2.gpx.HideGpxParams;
+import net.osmand.aidl2.gpx.ImportGpxParams;
+import net.osmand.aidl2.gpx.RemoveGpxParams;
+import net.osmand.aidl2.gpx.ShowGpxParams;
+import net.osmand.aidl2.gpx.StartGpxRecordingParams;
+import net.osmand.aidl2.gpx.StopGpxRecordingParams;
+import net.osmand.aidl2.map.ALatLon;
+import net.osmand.aidl2.map.SetMapLocationParams;
+import net.osmand.aidl2.maplayer.AddMapLayerParams;
+import net.osmand.aidl2.maplayer.RemoveMapLayerParams;
+import net.osmand.aidl2.maplayer.UpdateMapLayerParams;
+import net.osmand.aidl2.maplayer.point.AddMapPointParams;
+import net.osmand.aidl2.maplayer.point.RemoveMapPointParams;
+import net.osmand.aidl2.maplayer.point.ShowMapPointParams;
+import net.osmand.aidl2.maplayer.point.UpdateMapPointParams;
+import net.osmand.aidl2.mapmarker.AMapMarker;
+import net.osmand.aidl2.mapmarker.AddMapMarkerParams;
+import net.osmand.aidl2.mapmarker.RemoveMapMarkerParams;
+import net.osmand.aidl2.mapmarker.RemoveMapMarkersParams;
+import net.osmand.aidl2.mapmarker.UpdateMapMarkerParams;
+import net.osmand.aidl2.mapwidget.AddMapWidgetParams;
+import net.osmand.aidl2.mapwidget.RemoveMapWidgetParams;
+import net.osmand.aidl2.mapwidget.UpdateMapWidgetParams;
+import net.osmand.aidl2.navdrawer.NavDrawerFooterParams;
+import net.osmand.aidl2.navdrawer.NavDrawerHeaderParams;
+import net.osmand.aidl2.navdrawer.NavDrawerItem;
+import net.osmand.aidl2.navdrawer.SetNavDrawerItemsParams;
+import net.osmand.aidl2.navigation.ANavigationUpdateParams;
+import net.osmand.aidl2.navigation.ANavigationVoiceRouterMessageParams;
+import net.osmand.aidl2.navigation.MuteNavigationParams;
+import net.osmand.aidl2.navigation.NavigateGpxParams;
+import net.osmand.aidl2.navigation.NavigateParams;
+import net.osmand.aidl2.navigation.NavigateSearchParams;
+import net.osmand.aidl2.navigation.PauseNavigationParams;
+import net.osmand.aidl2.navigation.ResumeNavigationParams;
+import net.osmand.aidl2.navigation.StopNavigationParams;
+import net.osmand.aidl2.navigation.UnmuteNavigationParams;
+import net.osmand.aidl2.note.StartAudioRecordingParams;
+import net.osmand.aidl2.note.StartVideoRecordingParams;
+import net.osmand.aidl2.note.StopRecordingParams;
+import net.osmand.aidl2.note.TakePhotoNoteParams;
+import net.osmand.aidl2.plugins.PluginParams;
+import net.osmand.aidl2.search.SearchParams;
+import net.osmand.aidl2.search.SearchResult;
+import net.osmand.aidl2.tiles.ASqliteDbFile;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmandApplication;
@@ -99,7 +101,7 @@ import static net.osmand.OsmandAidlConstants.MIN_UPDATE_TIME_MS;
 import static net.osmand.OsmandAidlConstants.MIN_UPDATE_TIME_MS_ERROR;
 import static net.osmand.OsmandAidlConstants.UNKNOWN_API_ERROR;
 
-public class OsmandAidlService extends Service implements AidlCallbackListener {
+public class OsmandAidlServiceV2 extends Service implements AidlCallbackListenerV2 {
 
 	private static final Log LOG = PlatformUtil.getLog(OsmandAidlService.class);
 
@@ -110,7 +112,7 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 
 	private Map<Long, AidlCallbackParams> callbacks = new ConcurrentHashMap<>();
 	private Handler mHandler = null;
-	HandlerThread mHandlerThread = new HandlerThread("OsmAndAidlServiceThread");
+	HandlerThread mHandlerThread = new HandlerThread("OsmAndAidlServiceV2Thread");
 
 	private final AtomicLong aidlCallbackId = new AtomicLong(0);
 
@@ -120,7 +122,7 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 
 	@Nullable
 	private OsmandAidlApi getApi(String reason) {
-		LOG.info("Request AIDL API for " + reason);
+		LOG.info("Request AIDL API V2 for " + reason);
 		OsmandAidlApi api = getApp().getAidlApi();
 		String pack = getApp().getPackageManager().getNameForUid(Binder.getCallingUid());
 		if (pack != null && !pack.equals(getApp().getPackageName()) && !api.isAppEnabled(pack)) {
@@ -143,7 +145,7 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 		super.onCreate();
 		OsmandAidlApi api = getApi("setting_listener");
 		if (api != null) {
-			api.aidlCallbackListener = this;
+			api.aidlCallbackListenerV2 = this;
 		}
 	}
 
@@ -154,7 +156,7 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 		callbacks.clear();
 		OsmandAidlApi api = getApi("clear_listener");
 		if (api != null) {
-			api.aidlCallbackListener = null;
+			api.aidlCallbackListenerV2 = null;
 		}
 		mHandlerThread.quit();
 	}
@@ -193,7 +195,7 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 	private final IOsmAndAidlInterface.Stub mBinder = new IOsmAndAidlInterface.Stub() {
 
 		private void handleException(Exception e) {
-			LOG.error("AIDL e.getMessage()", e);
+			LOG.error("AIDL V2 e.getMessage()", e);
 		}
 
 		@Override
@@ -206,7 +208,6 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 				return false;
 			}
 		}
-
 
 		@Override
 		public boolean addFavoriteGroup(AddFavoriteGroupParams params) {
@@ -537,7 +538,7 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 			try {
 				OsmandAidlApi api = getApi("getActiveGpx");
 				if (api != null && files != null) {
-					return api.getActiveGpx(files);
+					return api.getActiveGpxV2(files);
 				}
 				return false;
 			} catch (Exception e) {
@@ -551,7 +552,7 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 			try {
 				OsmandAidlApi api = getApi("getImportedGpx");
 				if (api != null && files != null) {
-					return api.getImportedGpx(files);
+					return api.getImportedGpxV2(files);
 				}
 				return false;
 			} catch (Exception e) {
@@ -591,58 +592,7 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 
 		@Override
 		public boolean calculateRoute(CalculateRouteParams params) {
-			try {
-				if (params == null || params.getEndPoint() == null) {
-					return false;
-				} else {
-				/*
-				final TargetPointsHelper targets = app.getTargetPointsHelper();
-				targets.removeAllWayPoints(false, true);
-
-				List<ALatLon> intermediatePoints = params.getIntermediatePoints();
-				List<String> intermediateNames = params.getIntermediateNames();
-				ALatLon intermediatePoint;
-				String intermediateName;
-				for (int i = 0; i < intermediatePoints.size(); i++ ) {
-					intermediatePoint = intermediatePoints.get(i);
-					if (i < intermediateNames.size()) {
-						intermediateName = intermediateNames.get(i);
-					} else {
-						intermediateName = "";
-					}
-					if (intermediateName == null) {
-						intermediateName = "";
-					}
-					targets.navigateToPoint(
-							new LatLon(intermediatePoint.getLatitude(), intermediatePoint.getLongitude()),
-							false, -1, new PointDescription(PointDescription.POINT_TYPE_LOCATION, intermediateName));
-				}
-
-				PointDescription endPointDescription = null;
-				if (params.getEndPointName() != null) {
-					endPointDescription = new PointDescription(PointDescription.POINT_TYPE_LOCATION, params.getEndPointName());
-				}
-				targets.navigateToPoint(
-						new LatLon(params.getEndPoint().getLatitude(), params.getEndPoint().getLongitude()),
-						true, -1, endPointDescription);
-
-				LatLon startPoint = null;
-				if (params.getStartPoint() != null) {
-					startPoint = new LatLon(params.getStartPoint().getLatitude(), params.getStartPoint().getLongitude());
-				}
-				PointDescription startPointDescription = null;
-				if (params.getStartPointName() != null) {
-					startPointDescription = new PointDescription(PointDescription.POINT_TYPE_LOCATION, params.getStartPointName());
-				}
-
-				//mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, startPoint, startPointDescription, true, false);
-				*/
-					return true;
-				}
-			} catch (Exception e) {
-				handleException(e);
-				return false;
-			}
+			return false;
 		}
 
 		@Override
@@ -987,7 +937,7 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 		public boolean getSqliteDbFiles(List<ASqliteDbFile> files) {
 			try {
 				OsmandAidlApi api = getApi("getSqliteDbFiles");
-				return api != null && api.getSqliteDbFiles(files);
+				return api != null && api.getSqliteDbFilesV2(files);
 			} catch (Exception e) {
 				handleException(e);
 				return false;
@@ -998,7 +948,7 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 		public boolean getActiveSqliteDbFiles(List<ASqliteDbFile> files) {
 			try {
 				OsmandAidlApi api = getApi("getActiveSqliteDbFiles");
-				return api != null && api.getActiveSqliteDbFiles(files);
+				return api != null && api.getActiveSqliteDbFilesV2(files);
 			} catch (Exception e) {
 				handleException(e);
 				return false;
@@ -1217,7 +1167,7 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 			try {
 				OsmandAidlApi api = getApi("setCustomization");
 				if (api != null && params != null) {
-					OsmandAidlService.this.setCustomization(api, params);
+					OsmandAidlServiceV2.this.setCustomization(api, params);
 					return true;
 				}
 				return false;
