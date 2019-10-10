@@ -77,7 +77,6 @@ import net.osmand.aidlapi.customization.CustomizationInfoParams;
 import net.osmand.aidlapi.gpx.AGpxFile;
 import net.osmand.aidlapi.gpx.AGpxFileDetails;
 import net.osmand.aidlapi.gpx.CreateGpxBitmapParams;
-import net.osmand.aidlapi.gpx.GpxColorParams;
 
 import net.osmand.aidlapi.tiles.ASqliteDbFile;
 
@@ -832,18 +831,4 @@ interface IOsmAndAidlInterface {
      * Empty class of params
      */
     boolean removeAllActiveMapMarkers(in RemoveMapMarkersParams params);
-
-    /**
-    * Method to get color name for gpx.
-    *
-    * @param fileName (String) - name of gpx file.
-    *
-    * @param gpxColor (String) - color name of gpx. Can be one of: "red", "orange", "lightblue",
-    *                                              "blue", "purple", "translucent_red", "translucent_orange",
-    *                                              "translucent_lightblue", "translucent_blue", "translucent_purple"
-    * Which used in {@link #importGpx(in ImportGpxParams params) importGpx}
-    * Or color hex if gpx has custom color.
-    *
-    */
-    boolean getGpxColor(inout GpxColorParams params);
 }

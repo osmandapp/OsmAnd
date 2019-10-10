@@ -37,7 +37,6 @@ import net.osmand.aidlapi.gpx.AGpxBitmap;
 import net.osmand.aidlapi.gpx.AGpxFile;
 import net.osmand.aidlapi.gpx.ASelectedGpxFile;
 import net.osmand.aidlapi.gpx.CreateGpxBitmapParams;
-import net.osmand.aidlapi.gpx.GpxColorParams;
 import net.osmand.aidlapi.gpx.HideGpxParams;
 import net.osmand.aidlapi.gpx.ImportGpxParams;
 import net.osmand.aidlapi.gpx.RemoveGpxParams;
@@ -96,6 +95,10 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
+import static net.osmand.aidl.OsmandAidlApi.KEY_ON_CONTEXT_MENU_BUTTONS_CLICK;
+import static net.osmand.aidl.OsmandAidlApi.KEY_ON_NAV_DATA_UPDATE;
+import static net.osmand.aidl.OsmandAidlApi.KEY_ON_UPDATE;
+import static net.osmand.aidl.OsmandAidlApi.KEY_ON_VOICE_MESSAGE;
 import static net.osmand.aidlapi.OsmandAidlConstants.CANNOT_ACCESS_API_ERROR;
 import static net.osmand.aidlapi.OsmandAidlConstants.MIN_UPDATE_TIME_MS;
 import static net.osmand.aidlapi.OsmandAidlConstants.MIN_UPDATE_TIME_MS_ERROR;
@@ -104,11 +107,6 @@ import static net.osmand.aidlapi.OsmandAidlConstants.UNKNOWN_API_ERROR;
 public class OsmandAidlServiceV2 extends Service implements AidlCallbackListenerV2 {
 
 	private static final Log LOG = PlatformUtil.getLog(OsmandAidlService.class);
-
-	public static final int KEY_ON_UPDATE = 1;
-	public static final int KEY_ON_NAV_DATA_UPDATE = 2;
-	public static final int KEY_ON_CONTEXT_MENU_BUTTONS_CLICK = 4;
-	public static final int KEY_ON_VOICE_MESSAGE = 5;
 
 	private Map<Long, AidlCallbackParams> callbacks = new ConcurrentHashMap<>();
 	private Handler mHandler = null;
@@ -1205,21 +1203,6 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 			try {
 				OsmandAidlApi api = getApi("removeAllActiveMapMarkers");
 				return api != null && api.removeAllActiveMapMarkers();
-			} catch (Exception e) {
-				handleException(e);
-				return false;
-			}
-		}
-
-		@Override
-		public boolean getGpxColor(GpxColorParams params) {
-			try {
-				OsmandAidlApi api = getApi("getGpxColor");
-				if (api != null && params != null) {
-					String colorName = api.getGpxColor(params.getFileName());
-					params.setGpxColor(colorName);
-				}
-				return false;
 			} catch (Exception e) {
 				handleException(e);
 				return false;

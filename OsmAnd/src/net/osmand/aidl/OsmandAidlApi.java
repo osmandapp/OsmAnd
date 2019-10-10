@@ -109,14 +109,16 @@ import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_PART_SIZE_LIMIT_E
 import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_UNSUPPORTED_FILE_TYPE_ERROR;
 import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_WRITE_LOCK_ERROR;
 import static net.osmand.aidlapi.OsmandAidlConstants.OK_RESPONSE;
-import static net.osmand.aidl.OsmandAidlService.KEY_ON_CONTEXT_MENU_BUTTONS_CLICK;
-import static net.osmand.aidl.OsmandAidlService.KEY_ON_NAV_DATA_UPDATE;
-import static net.osmand.aidl.OsmandAidlService.KEY_ON_VOICE_MESSAGE;
 
 public class OsmandAidlApi {
 
 	AidlCallbackListener aidlCallbackListener = null;
 	AidlCallbackListenerV2 aidlCallbackListenerV2 = null;
+
+	public static final int KEY_ON_UPDATE = 1;
+	public static final int KEY_ON_NAV_DATA_UPDATE = 2;
+	public static final int KEY_ON_CONTEXT_MENU_BUTTONS_CLICK = 4;
+	public static final int KEY_ON_VOICE_MESSAGE = 5;
 
 	private static final Log LOG = PlatformUtil.getLog(OsmandAidlApi.class);
 	private static final String AIDL_REFRESH_MAP = "aidl_refresh_map";
@@ -1441,12 +1443,17 @@ public class OsmandAidlApi {
 				boolean active = app.getSelectedGpxHelper().getSelectedFileByPath(file.getAbsolutePath()) != null;
 				long modifiedTime = dataItem.getFileLastModifiedTime();
 				long fileSize = file.length();
+				int color = dataItem.getColor();
+				String colorName = "";
+				if (color != 0) {
+					colorName = ConfigureMapMenu.GpxAppearanceAdapter.parseTrackColorName(app.getRendererRegistry().getCurrentSelectedRenderer(), color);
+				}
 				net.osmand.aidlapi.gpx.AGpxFileDetails details = null;
 				GPXTrackAnalysis analysis = dataItem.getAnalysis();
 				if (analysis != null) {
 					details = createGpxFileDetailsV2(analysis);
 				}
-				files.add(new net.osmand.aidlapi.gpx.AGpxFile(fileName, modifiedTime, fileSize, active, details));
+				files.add(new net.osmand.aidlapi.gpx.AGpxFile(fileName, modifiedTime, fileSize, active, colorName, details));
 			}
 		}
 		return true;

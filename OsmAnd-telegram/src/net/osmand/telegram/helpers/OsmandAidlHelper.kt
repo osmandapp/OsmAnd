@@ -1231,18 +1231,4 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 		}
 		return false
 	}
-
-	fun getGpxColor(filename: String): String? {
-		if (mIOsmAndAidlInterface != null) {
-			try {
-				val gpxColorParams = GpxColorParams(filename)
-				if (mIOsmAndAidlInterface!!.getGpxColor(gpxColorParams)) {
-					return gpxColorParams.gpxColor
-				}
-			} catch (e: RemoteException) {
-				e.printStackTrace()
-			}
-		}
-		return null
-	}
 }

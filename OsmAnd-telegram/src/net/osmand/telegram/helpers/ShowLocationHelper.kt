@@ -301,7 +301,7 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 			val aGpxFile = importedGpxFiles.firstOrNull { it.fileName == name }
 
 			if (aGpxFile != null) {
-				val color = osmandAidlHelper.getGpxColor(aGpxFile.fileName)
+				val color = aGpxFile.color
 				if (!color.isNullOrEmpty()) {
 					gpxFile.extensionsToWrite["color"] = color
 				}

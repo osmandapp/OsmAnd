@@ -94,6 +94,10 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
+import static net.osmand.aidl.OsmandAidlApi.KEY_ON_CONTEXT_MENU_BUTTONS_CLICK;
+import static net.osmand.aidl.OsmandAidlApi.KEY_ON_NAV_DATA_UPDATE;
+import static net.osmand.aidl.OsmandAidlApi.KEY_ON_UPDATE;
+import static net.osmand.aidl.OsmandAidlApi.KEY_ON_VOICE_MESSAGE;
 import static net.osmand.aidlapi.OsmandAidlConstants.CANNOT_ACCESS_API_ERROR;
 import static net.osmand.aidlapi.OsmandAidlConstants.MIN_UPDATE_TIME_MS;
 import static net.osmand.aidlapi.OsmandAidlConstants.MIN_UPDATE_TIME_MS_ERROR;
@@ -102,11 +106,6 @@ import static net.osmand.aidlapi.OsmandAidlConstants.UNKNOWN_API_ERROR;
 public class OsmandAidlService extends Service implements AidlCallbackListener {
 
 	private static final Log LOG = PlatformUtil.getLog(OsmandAidlService.class);
-
-	public static final int KEY_ON_UPDATE = 1;
-	public static final int KEY_ON_NAV_DATA_UPDATE = 2;
-	public static final int KEY_ON_CONTEXT_MENU_BUTTONS_CLICK = 4;
-	public static final int KEY_ON_VOICE_MESSAGE = 5;
 
 	private Map<Long, AidlCallbackParams> callbacks = new ConcurrentHashMap<>();
 	private Handler mHandler = null;
