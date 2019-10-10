@@ -42,7 +42,7 @@ public class OnSaveCurrentTrackFragment extends BottomSheetDialogFragment {
 			dismiss();
 		}
 
-		final File f = new File (app.getAppCustomization().getTracksDir() +"/"+ savedGpxName + ".gpx");
+		final File f = new File (app.getAppCustomization().getTracksDir(), savedGpxName + ".gpx");
 		final boolean nightMode = !app.getSettings().isLightContent();
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 		View mainView = View
