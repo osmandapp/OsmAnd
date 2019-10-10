@@ -1228,15 +1228,16 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 	};
 
 	private void setCustomization(OsmandAidlApi api, CustomizationInfoParams params) {
-		OsmandSettingsParams settingsParams = params.getSettingsParams();
-		if (settingsParams != null) {
-			api.customizeOsmandSettings(settingsParams.getSharedPreferencesName(), settingsParams.getBundle());
-		}
 		NavDrawerHeaderParams navDrawerHeaderParams = params.getNavDrawerHeaderParams();
 		NavDrawerFooterParams navDrawerFooterParams = params.getNavDrawerFooterParams();
 		SetNavDrawerItemsParams navDrawerItemsParams = params.getNavDrawerItemsParams();
 
 		setNavDrawerParams(api, navDrawerHeaderParams, navDrawerFooterParams, navDrawerItemsParams);
+
+		OsmandSettingsParams settingsParams = params.getSettingsParams();
+		if (settingsParams != null) {
+			api.customizeOsmandSettings(settingsParams.getSharedPreferencesName(), settingsParams.getBundle());
+		}
 
 		ArrayList<SetWidgetsParams> visibilityWidgetsParams = params.getVisibilityWidgetsParams();
 		ArrayList<SetWidgetsParams> availabilityWidgetsParams = params.getAvailabilityWidgetsParams();
