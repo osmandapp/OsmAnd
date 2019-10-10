@@ -18,7 +18,7 @@ public class ADirectionInfo extends AidlParams {
 	}
 
 	protected ADirectionInfo(Parcel in) {
-		super(in);
+		readFromParcel(in);
 	}
 
 	public static final Creator<ADirectionInfo> CREATOR = new Creator<ADirectionInfo>() {

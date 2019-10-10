@@ -16,7 +16,7 @@ public class RemoveContextMenuButtonsParams extends AidlParams {
 	}
 
 	public RemoveContextMenuButtonsParams(Parcel in) {
-		super(in);
+		readFromParcel(in);
 	}
 
 	public static final Creator<RemoveContextMenuButtonsParams> CREATOR = new Creator<RemoveContextMenuButtonsParams>() {

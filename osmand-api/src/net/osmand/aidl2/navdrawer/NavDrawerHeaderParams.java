@@ -39,7 +39,7 @@ public class NavDrawerHeaderParams extends AidlParams {
 	}
 
 	public NavDrawerHeaderParams(Parcel in) {
-		super(in);
+		readFromParcel(in);
 	}
 
 	public static final Creator<NavDrawerHeaderParams> CREATOR = new Creator<NavDrawerHeaderParams>() {

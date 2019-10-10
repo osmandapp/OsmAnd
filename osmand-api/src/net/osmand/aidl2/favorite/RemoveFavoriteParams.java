@@ -14,7 +14,7 @@ public class RemoveFavoriteParams extends AidlParams {
 	}
 
 	public RemoveFavoriteParams(Parcel in) {
-		super(in);
+		readFromParcel(in);
 	}
 
 	public static final Creator<RemoveFavoriteParams> CREATOR = new Creator<RemoveFavoriteParams>() {

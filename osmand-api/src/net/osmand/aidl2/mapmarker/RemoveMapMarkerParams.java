@@ -21,7 +21,7 @@ public class RemoveMapMarkerParams extends AidlParams {
 	}
 
 	public RemoveMapMarkerParams(Parcel in) {
-		super(in);
+		readFromParcel(in);
 	}
 
 	public static final Creator<RemoveMapMarkerParams> CREATOR = new Creator<RemoveMapMarkerParams>() {

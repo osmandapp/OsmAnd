@@ -20,7 +20,7 @@ public class SetNavDrawerItemsParams extends AidlParams {
 	}
 
 	protected SetNavDrawerItemsParams(Parcel in) {
-		super(in);
+		readFromParcel(in);
 	}
 
 	public String getAppPackage() {

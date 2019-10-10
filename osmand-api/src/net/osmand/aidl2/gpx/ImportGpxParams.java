@@ -39,7 +39,7 @@ public class ImportGpxParams extends AidlParams {
 	}
 
 	public ImportGpxParams(Parcel in) {
-		super(in);
+		readFromParcel(in);
 	}
 
 	public static final Creator<ImportGpxParams> CREATOR = new Creator<ImportGpxParams>() {

@@ -14,7 +14,7 @@ public class UpdateMapLayerParams extends AidlParams {
 	}
 
 	public UpdateMapLayerParams(Parcel in) {
-		super(in);
+		readFromParcel(in);
 	}
 
 	public static final Creator<UpdateMapLayerParams> CREATOR = new Creator<UpdateMapLayerParams>() {

@@ -28,7 +28,7 @@ public class AContextMenuButton extends AidlParams {
 	}
 
 	protected AContextMenuButton(Parcel in) {
-		super(in);
+		readFromParcel(in);
 	}
 
 	public static final Creator<AContextMenuButton> CREATOR = new Creator<AContextMenuButton>() {
@@ -78,8 +78,8 @@ public class AContextMenuButton extends AidlParams {
 		bundle.putString("rightTextCaption", rightTextCaption);
 		bundle.putString("leftIconName", leftIconName);
 		bundle.putString("rightIconName", rightIconName);
-		bundle.putBoolean("needColorizeIcon ", needColorizeIcon);
-		bundle.putBoolean("enabled ", enabled);
+		bundle.putBoolean("needColorizeIcon", needColorizeIcon);
+		bundle.putBoolean("enabled", enabled);
 	}
 
 	@Override

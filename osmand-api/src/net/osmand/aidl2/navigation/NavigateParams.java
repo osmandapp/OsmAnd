@@ -30,7 +30,7 @@ public class NavigateParams extends AidlParams {
 	}
 
 	public NavigateParams(Parcel in) {
-		super(in);
+		readFromParcel(in);
 	}
 
 	public static final Creator<NavigateParams> CREATOR = new Creator<NavigateParams>() {

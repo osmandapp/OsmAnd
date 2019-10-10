@@ -16,7 +16,7 @@ public class StartVideoRecordingParams extends AidlParams {
 	}
 
 	public StartVideoRecordingParams(Parcel in) {
-		super(in);
+		readFromParcel(in);
 	}
 
 	public static final Creator<StartVideoRecordingParams> CREATOR = new Creator<StartVideoRecordingParams>() {

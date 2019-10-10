@@ -15,7 +15,7 @@ public class ANavigationUpdateParams extends AidlParams {
 	}
 
 	protected ANavigationUpdateParams(Parcel in) {
-		super(in);
+		readFromParcel(in);
 	}
 
 	public static final Creator<ANavigationUpdateParams> CREATOR = new Creator<ANavigationUpdateParams>() {

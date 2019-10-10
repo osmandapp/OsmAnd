@@ -14,7 +14,7 @@ public class AddFavoriteGroupParams extends AidlParams {
 	}
 
 	public AddFavoriteGroupParams(Parcel in) {
-		super(in);
+		readFromParcel(in);
 	}
 
 	public static final Creator<AddFavoriteGroupParams> CREATOR = new Creator<AddFavoriteGroupParams>() {

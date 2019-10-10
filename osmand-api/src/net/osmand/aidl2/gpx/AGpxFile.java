@@ -24,7 +24,7 @@ public class AGpxFile extends AidlParams {
 	}
 
 	public AGpxFile(Parcel in) {
-		super(in);
+		readFromParcel(in);
 	}
 
 	public static final Creator<AGpxFile> CREATOR = new Creator<AGpxFile>() {

@@ -11,7 +11,7 @@ public class StartGpxRecordingParams extends AidlParams {
 	}
 
 	public StartGpxRecordingParams(Parcel in) {
-		super(in);
+		readFromParcel(in);
 	}
 
 	public static final Creator<StartGpxRecordingParams> CREATOR = new Creator<StartGpxRecordingParams>() {

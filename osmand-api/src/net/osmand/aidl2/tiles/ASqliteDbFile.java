@@ -21,7 +21,7 @@ public class ASqliteDbFile extends AidlParams {
 	}
 
 	public ASqliteDbFile(Parcel in) {
-		super(in);
+		readFromParcel(in);
 	}
 
 	public static final Creator<ASqliteDbFile> CREATOR = new Creator<ASqliteDbFile>() {

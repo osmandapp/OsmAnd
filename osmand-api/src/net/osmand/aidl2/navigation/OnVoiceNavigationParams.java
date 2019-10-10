@@ -27,7 +27,7 @@ public class OnVoiceNavigationParams extends AidlParams {
 	}
 
 	public OnVoiceNavigationParams(Parcel in) {
-		super(in);
+		readFromParcel(in);
 	}
 
 	public static final Creator<OnVoiceNavigationParams> CREATOR = new Creator<OnVoiceNavigationParams>() {

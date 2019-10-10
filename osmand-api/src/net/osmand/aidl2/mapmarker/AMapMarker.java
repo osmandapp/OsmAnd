@@ -23,7 +23,7 @@ public class AMapMarker extends AidlParams {
 	}
 
 	public AMapMarker(Parcel in) {
-		super(in);
+		readFromParcel(in);
 	}
 
 	public static final Creator<AMapMarker> CREATOR = new Creator<AMapMarker>() {

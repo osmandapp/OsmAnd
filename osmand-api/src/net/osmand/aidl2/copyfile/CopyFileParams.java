@@ -21,7 +21,7 @@ public class CopyFileParams extends AidlParams {
 	}
 
 	protected CopyFileParams(Parcel in) {
-		super(in);
+		readFromParcel(in);
 	}
 
 	public static final Creator<CopyFileParams> CREATOR = new Creator<CopyFileParams>() {

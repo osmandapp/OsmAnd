@@ -14,7 +14,7 @@ public class ShowGpxParams extends AidlParams {
 	}
 
 	public ShowGpxParams(Parcel in) {
-		super(in);
+		readFromParcel(in);
 	}
 
 	public static final Creator<ShowGpxParams> CREATOR = new Creator<ShowGpxParams>() {

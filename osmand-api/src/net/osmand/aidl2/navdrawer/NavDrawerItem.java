@@ -26,7 +26,7 @@ public class NavDrawerItem extends AidlParams {
 	}
 
 	protected NavDrawerItem(Parcel in) {
-		super(in);
+		readFromParcel(in);
 	}
 
 	public static final Creator<NavDrawerItem> CREATOR = new Creator<NavDrawerItem>() {

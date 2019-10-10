@@ -14,7 +14,7 @@ public class RemoveMapWidgetParams extends AidlParams {
 	}
 
 	public RemoveMapWidgetParams(Parcel in) {
-		super(in);
+		readFromParcel(in);
 	}
 
 	public static final Creator<RemoveMapWidgetParams> CREATOR = new Creator<RemoveMapWidgetParams>() {

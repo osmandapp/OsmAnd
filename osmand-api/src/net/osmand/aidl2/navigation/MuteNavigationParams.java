@@ -10,7 +10,7 @@ public class MuteNavigationParams extends AidlParams {
 	}
 
 	public MuteNavigationParams(Parcel in) {
-		super(in);
+		readFromParcel(in);
 	}
 
 	public static final Creator<MuteNavigationParams> CREATOR = new Creator<MuteNavigationParams>() {

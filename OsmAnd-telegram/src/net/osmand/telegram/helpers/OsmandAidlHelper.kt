@@ -7,44 +7,44 @@ import android.content.ServiceConnection
 import android.net.Uri
 import android.os.IBinder
 import android.os.RemoteException
-import net.osmand.aidl.IOsmAndAidlCallback
-import net.osmand.aidl.IOsmAndAidlInterface
-import net.osmand.aidl.contextmenu.AContextMenuButton
-import net.osmand.aidl.contextmenu.ContextMenuButtonsParams
-import net.osmand.aidl.contextmenu.RemoveContextMenuButtonsParams
-import net.osmand.aidl.favorite.AFavorite
-import net.osmand.aidl.favorite.AddFavoriteParams
-import net.osmand.aidl.favorite.RemoveFavoriteParams
-import net.osmand.aidl.favorite.UpdateFavoriteParams
-import net.osmand.aidl.favorite.group.AFavoriteGroup
-import net.osmand.aidl.favorite.group.AddFavoriteGroupParams
-import net.osmand.aidl.favorite.group.RemoveFavoriteGroupParams
-import net.osmand.aidl.favorite.group.UpdateFavoriteGroupParams
-import net.osmand.aidl.gpx.*
-import net.osmand.aidl.map.ALatLon
-import net.osmand.aidl.map.SetMapLocationParams
-import net.osmand.aidl.maplayer.AMapLayer
-import net.osmand.aidl.maplayer.AddMapLayerParams
-import net.osmand.aidl.maplayer.RemoveMapLayerParams
-import net.osmand.aidl.maplayer.UpdateMapLayerParams
-import net.osmand.aidl.maplayer.point.*
-import net.osmand.aidl.mapmarker.AMapMarker
-import net.osmand.aidl.mapmarker.AddMapMarkerParams
-import net.osmand.aidl.mapmarker.RemoveMapMarkerParams
-import net.osmand.aidl.mapmarker.UpdateMapMarkerParams
-import net.osmand.aidl.mapwidget.AMapWidget
-import net.osmand.aidl.mapwidget.AddMapWidgetParams
-import net.osmand.aidl.mapwidget.RemoveMapWidgetParams
-import net.osmand.aidl.mapwidget.UpdateMapWidgetParams
-import net.osmand.aidl.navdrawer.NavDrawerItem
-import net.osmand.aidl.navdrawer.SetNavDrawerItemsParams
-import net.osmand.aidl.navigation.*
-import net.osmand.aidl.note.StartAudioRecordingParams
-import net.osmand.aidl.note.StartVideoRecordingParams
-import net.osmand.aidl.note.StopRecordingParams
-import net.osmand.aidl.note.TakePhotoNoteParams
-import net.osmand.aidl.search.SearchParams
-import net.osmand.aidl.search.SearchResult
+import net.osmand.aidl2.IOsmAndAidlCallback
+import net.osmand.aidl2.IOsmAndAidlInterface
+import net.osmand.aidl2.contextmenu.AContextMenuButton
+import net.osmand.aidl2.contextmenu.ContextMenuButtonsParams
+import net.osmand.aidl2.contextmenu.RemoveContextMenuButtonsParams
+import net.osmand.aidl2.favorite.AFavorite
+import net.osmand.aidl2.favorite.AddFavoriteParams
+import net.osmand.aidl2.favorite.RemoveFavoriteParams
+import net.osmand.aidl2.favorite.UpdateFavoriteParams
+import net.osmand.aidl2.favorite.group.AFavoriteGroup
+import net.osmand.aidl2.favorite.group.AddFavoriteGroupParams
+import net.osmand.aidl2.favorite.group.RemoveFavoriteGroupParams
+import net.osmand.aidl2.favorite.group.UpdateFavoriteGroupParams
+import net.osmand.aidl2.gpx.*
+import net.osmand.aidl2.map.ALatLon
+import net.osmand.aidl2.map.SetMapLocationParams
+import net.osmand.aidl2.maplayer.AMapLayer
+import net.osmand.aidl2.maplayer.AddMapLayerParams
+import net.osmand.aidl2.maplayer.RemoveMapLayerParams
+import net.osmand.aidl2.maplayer.UpdateMapLayerParams
+import net.osmand.aidl2.maplayer.point.*
+import net.osmand.aidl2.mapmarker.AMapMarker
+import net.osmand.aidl2.mapmarker.AddMapMarkerParams
+import net.osmand.aidl2.mapmarker.RemoveMapMarkerParams
+import net.osmand.aidl2.mapmarker.UpdateMapMarkerParams
+import net.osmand.aidl2.mapwidget.AMapWidget
+import net.osmand.aidl2.mapwidget.AddMapWidgetParams
+import net.osmand.aidl2.mapwidget.RemoveMapWidgetParams
+import net.osmand.aidl2.mapwidget.UpdateMapWidgetParams
+import net.osmand.aidl2.navdrawer.NavDrawerItem
+import net.osmand.aidl2.navdrawer.SetNavDrawerItemsParams
+import net.osmand.aidl2.navigation.*
+import net.osmand.aidl2.note.StartAudioRecordingParams
+import net.osmand.aidl2.note.StartVideoRecordingParams
+import net.osmand.aidl2.note.StopRecordingParams
+import net.osmand.aidl2.note.TakePhotoNoteParams
+import net.osmand.aidl2.search.SearchParams
+import net.osmand.aidl2.search.SearchResult
 import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.helpers.ShowLocationHelper.Companion.MAP_LAYER_ID
 import java.io.File
@@ -263,7 +263,7 @@ class OsmandAidlHelper(private val app: TelegramApplication) {
 
 	private fun bindService(packageName: String): Boolean {
 		return if (mIOsmAndAidlInterface == null) {
-			val intent = Intent("net.osmand.aidl.OsmandAidlService")
+			val intent = Intent("net.osmand.aidl.OsmandAidlServiceV2")
 			intent.`package` = packageName
 			app.bindService(intent, mConnection, Context.BIND_AUTO_CREATE)
 		} else {

@@ -39,7 +39,7 @@ public class CalculateRouteParams extends AidlParams {
 	}
 
 	public CalculateRouteParams(Parcel in) {
-		super(in);
+		readFromParcel(in);
 	}
 
 	public static final Creator<CalculateRouteParams> CREATOR = new Creator<CalculateRouteParams>() {

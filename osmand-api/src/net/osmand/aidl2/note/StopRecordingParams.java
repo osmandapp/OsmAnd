@@ -11,7 +11,7 @@ public class StopRecordingParams extends AidlParams {
 	}
 
 	public StopRecordingParams(Parcel in) {
-		super(in);
+		readFromParcel(in);
 	}
 
 	public static final Creator<StopRecordingParams> CREATOR = new Creator<StopRecordingParams>() {

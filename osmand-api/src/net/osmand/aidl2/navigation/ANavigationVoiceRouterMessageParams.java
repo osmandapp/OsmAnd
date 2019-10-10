@@ -15,7 +15,7 @@ public class ANavigationVoiceRouterMessageParams extends AidlParams {
 	}
 
 	protected ANavigationVoiceRouterMessageParams(Parcel in) {
-		super(in);
+		readFromParcel(in);
 	}
 
 	public static final Creator<ANavigationVoiceRouterMessageParams> CREATOR = new Creator<ANavigationVoiceRouterMessageParams>() {

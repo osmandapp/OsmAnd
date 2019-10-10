@@ -27,7 +27,7 @@ public class AFavorite extends AidlParams {
 	}
 
 	public AFavorite(Parcel in) {
-		super(in);
+		readFromParcel(in);
 	}
 
 	public static final Creator<AFavorite> CREATOR = new Creator<AFavorite>() {

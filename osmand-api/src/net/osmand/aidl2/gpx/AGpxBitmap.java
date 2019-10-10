@@ -16,7 +16,7 @@ public class AGpxBitmap extends AidlParams {
 	}
 
 	public AGpxBitmap(Parcel in) {
-		super(in);
+		readFromParcel(in);
 	}
 
 	public Bitmap getBitmap() {

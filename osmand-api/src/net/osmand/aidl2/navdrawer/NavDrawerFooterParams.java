@@ -39,7 +39,7 @@ public class NavDrawerFooterParams extends AidlParams {
 	}
 
 	protected NavDrawerFooterParams(Parcel in) {
-		super(in);
+		readFromParcel(in);
 	}
 
 	public static final Creator<NavDrawerFooterParams> CREATOR = new Creator<NavDrawerFooterParams>() {

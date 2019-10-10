@@ -14,7 +14,7 @@ public class AddMapMarkerParams extends AidlParams {
 	}
 
 	public AddMapMarkerParams(Parcel in) {
-		super(in);
+		readFromParcel(in);
 	}
 
 	public static final Creator<AddMapMarkerParams> CREATOR = new Creator<AddMapMarkerParams>() {

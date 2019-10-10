@@ -16,7 +16,7 @@ public class TakePhotoNoteParams extends AidlParams {
 	}
 
 	public TakePhotoNoteParams(Parcel in) {
-		super(in);
+		readFromParcel(in);
 	}
 
 	public static final Creator<TakePhotoNoteParams> CREATOR = new Creator<TakePhotoNoteParams>() {

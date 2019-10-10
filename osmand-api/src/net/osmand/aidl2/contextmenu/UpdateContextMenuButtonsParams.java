@@ -14,7 +14,7 @@ public class UpdateContextMenuButtonsParams extends AidlParams {
 	}
 
 	public UpdateContextMenuButtonsParams(Parcel in) {
-		super(in);
+		readFromParcel(in);
 	}
 
 	public static final Creator<UpdateContextMenuButtonsParams> CREATOR = new Creator<UpdateContextMenuButtonsParams>() {

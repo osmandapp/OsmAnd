@@ -22,7 +22,7 @@ public class SetWidgetsParams extends AidlParams {
 	}
 
 	public SetWidgetsParams(Parcel in) {
-		super(in);
+		readFromParcel(in);
 	}
 
 	public static final Creator<SetWidgetsParams> CREATOR = new Creator<SetWidgetsParams>() {

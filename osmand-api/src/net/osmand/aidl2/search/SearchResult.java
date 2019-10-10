@@ -33,7 +33,7 @@ public class SearchResult extends AidlParams {
 	}
 
 	public SearchResult(Parcel in) {
-		super(in);
+		readFromParcel(in);
 	}
 
 	public static final Creator<SearchResult> CREATOR = new Creator<SearchResult>() {

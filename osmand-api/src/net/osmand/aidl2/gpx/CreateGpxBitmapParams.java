@@ -34,7 +34,7 @@ public class CreateGpxBitmapParams extends AidlParams {
 	}
 
 	public CreateGpxBitmapParams(Parcel in) {
-		super(in);
+		readFromParcel(in);
 	}
 
 	public static final Creator<CreateGpxBitmapParams> CREATOR = new Creator<CreateGpxBitmapParams>() {

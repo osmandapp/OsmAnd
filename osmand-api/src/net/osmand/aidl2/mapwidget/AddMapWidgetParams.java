@@ -14,7 +14,7 @@ public class AddMapWidgetParams extends AidlParams {
 	}
 
 	public AddMapWidgetParams(Parcel in) {
-		super(in);
+		readFromParcel(in);
 	}
 
 	public static final Creator<AddMapWidgetParams> CREATOR = new Creator<AddMapWidgetParams>() {

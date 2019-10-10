@@ -16,7 +16,7 @@ public class UpdateFavoriteGroupParams extends AidlParams {
 	}
 
 	public UpdateFavoriteGroupParams(Parcel in) {
-		super(in);
+		readFromParcel(in);
 	}
 
 	public static final Creator<UpdateFavoriteGroupParams> CREATOR = new Creator<UpdateFavoriteGroupParams>() {

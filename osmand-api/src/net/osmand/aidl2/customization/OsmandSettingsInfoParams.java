@@ -15,7 +15,7 @@ public class OsmandSettingsInfoParams extends AidlParams {
 	}
 
 	public OsmandSettingsInfoParams(Parcel in) {
-		super(in);
+		readFromParcel(in);
 	}
 
 	public static final Creator<OsmandSettingsInfoParams> CREATOR = new Creator<OsmandSettingsInfoParams>() {

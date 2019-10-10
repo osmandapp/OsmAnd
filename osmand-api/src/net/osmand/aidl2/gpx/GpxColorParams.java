@@ -25,7 +25,7 @@ public class GpxColorParams extends AidlParams {
 	}
 
 	public GpxColorParams(Parcel in) {
-		super(in);
+		readFromParcel(in);
 	}
 
 	public static final Creator<GpxColorParams> CREATOR = new Creator<GpxColorParams>() {

@@ -16,7 +16,7 @@ public class ALatLon extends AidlParams {
 	}
 
 	public ALatLon(Parcel in) {
-		super(in);
+		readFromParcel(in);
 	}
 
 	public static final Creator<ALatLon> CREATOR = new Creator<ALatLon>() {

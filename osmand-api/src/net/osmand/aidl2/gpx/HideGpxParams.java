@@ -14,7 +14,7 @@ public class HideGpxParams extends AidlParams {
 	}
 
 	public HideGpxParams(Parcel in) {
-		super(in);
+		readFromParcel(in);
 	}
 
 	public static final Creator<HideGpxParams> CREATOR = new Creator<HideGpxParams>() {

@@ -32,7 +32,7 @@ public class AMapWidget extends AidlParams {
 	}
 
 	public AMapWidget(Parcel in) {
-		super(in);
+		readFromParcel(in);
 	}
 
 	public static final Creator<AMapWidget> CREATOR = new Creator<AMapWidget>() {

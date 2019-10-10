@@ -11,7 +11,7 @@ public class PauseNavigationParams extends AidlParams {
 	}
 
 	public PauseNavigationParams(Parcel in) {
-		super(in);
+		readFromParcel(in);
 	}
 
 	public static final Creator<PauseNavigationParams> CREATOR = new Creator<PauseNavigationParams>() {

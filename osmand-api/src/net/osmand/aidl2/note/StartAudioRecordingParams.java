@@ -16,7 +16,7 @@ public class StartAudioRecordingParams extends AidlParams {
 	}
 
 	public StartAudioRecordingParams(Parcel in) {
-		super(in);
+		readFromParcel(in);
 	}
 
 	public static final Creator<StartAudioRecordingParams> CREATOR = new Creator<StartAudioRecordingParams>() {

@@ -47,7 +47,7 @@ public class AMapPoint extends AidlParams {
 	}
 
 	public AMapPoint(Parcel in) {
-		super(in);
+		readFromParcel(in);
 	}
 
 	public static final Creator<AMapPoint> CREATOR = new Creator<AMapPoint>() {

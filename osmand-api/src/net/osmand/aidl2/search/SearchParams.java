@@ -28,7 +28,7 @@ public class SearchParams extends AidlParams {
 	}
 
 	public SearchParams(Parcel in) {
-		super(in);
+		readFromParcel(in);
 	}
 
 	public static final Creator<SearchParams> CREATOR = new Creator<SearchParams>() {

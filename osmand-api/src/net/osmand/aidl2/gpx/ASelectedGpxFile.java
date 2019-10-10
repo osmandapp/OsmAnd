@@ -26,7 +26,7 @@ public class ASelectedGpxFile extends AidlParams {
 	}
 
 	public ASelectedGpxFile(Parcel in) {
-		super(in);
+		readFromParcel(in);
 	}
 
 	public static final Creator<ASelectedGpxFile> CREATOR = new Creator<ASelectedGpxFile>() {

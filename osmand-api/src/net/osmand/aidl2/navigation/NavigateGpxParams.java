@@ -23,7 +23,7 @@ public class NavigateGpxParams extends AidlParams {
 	}
 
 	public NavigateGpxParams(Parcel in) {
-		super(in);
+		readFromParcel(in);
 	}
 
 	public static final Creator<NavigateGpxParams> CREATOR = new Creator<NavigateGpxParams>() {

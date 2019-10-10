@@ -11,7 +11,7 @@ public class StopNavigationParams extends AidlParams {
 	}
 
 	public StopNavigationParams(Parcel in) {
-		super(in);
+		readFromParcel(in);
 	}
 
 	public static final Creator<StopNavigationParams> CREATOR = new Creator<StopNavigationParams>() {

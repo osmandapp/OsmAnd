@@ -18,7 +18,7 @@ public class AFavoriteGroup extends AidlParams {
 	}
 
 	public AFavoriteGroup(Parcel in) {
-		super(in);
+		readFromParcel(in);
 	}
 
 	public static final Creator<AFavoriteGroup> CREATOR = new Creator<AFavoriteGroup>() {

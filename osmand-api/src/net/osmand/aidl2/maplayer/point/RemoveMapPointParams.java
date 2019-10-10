@@ -16,7 +16,7 @@ public class RemoveMapPointParams extends AidlParams {
 	}
 
 	public RemoveMapPointParams(Parcel in) {
-		super(in);
+		readFromParcel(in);
 	}
 
 	public static final Creator<RemoveMapPointParams> CREATOR = new Creator<RemoveMapPointParams>() {

@@ -70,7 +70,7 @@ public class CustomizationInfoParams extends AidlParams {
 	}
 
 	public CustomizationInfoParams(Parcel in) {
-		super(in);
+		readFromParcel(in);
 	}
 
 	public static final Creator<CustomizationInfoParams> CREATOR = new Creator<CustomizationInfoParams>() {

@@ -24,7 +24,7 @@ public class PluginParams extends AidlParams {
 	}
 
 	protected PluginParams(Parcel in) {
-		super(in);
+		readFromParcel(in);
 	}
 
 	@Override

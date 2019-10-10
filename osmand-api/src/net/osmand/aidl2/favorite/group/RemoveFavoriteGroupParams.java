@@ -14,7 +14,7 @@ public class RemoveFavoriteGroupParams extends AidlParams {
 	}
 
 	public RemoveFavoriteGroupParams(Parcel in) {
-		super(in);
+		readFromParcel(in);
 	}
 
 	public static final Creator<RemoveFavoriteGroupParams> CREATOR = new Creator<RemoveFavoriteGroupParams>() {

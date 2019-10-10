@@ -14,7 +14,7 @@ public class RemoveGpxParams extends AidlParams {
 	}
 
 	public RemoveGpxParams(Parcel in) {
-		super(in);
+		readFromParcel(in);
 	}
 
 	public static final Creator<RemoveGpxParams> CREATOR = new Creator<RemoveGpxParams>() {

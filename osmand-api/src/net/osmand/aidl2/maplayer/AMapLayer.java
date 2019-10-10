@@ -38,7 +38,7 @@ public class AMapLayer extends AidlParams {
 	}
 
 	public AMapLayer(Parcel in) {
-		super(in);
+		readFromParcel(in);
 	}
 
 	public static final Creator<AMapLayer> CREATOR = new Creator<AMapLayer>() {

@@ -20,7 +20,7 @@ public class SetMapLocationParams extends AidlParams {
 	}
 
 	public SetMapLocationParams(Parcel in) {
-		super(in);
+		readFromParcel(in);
 	}
 
 	public static final Creator<SetMapLocationParams> CREATOR = new Creator<SetMapLocationParams>() {

@@ -34,7 +34,7 @@ public class ContextMenuButtonsParams extends AidlParams {
 	}
 
 	public ContextMenuButtonsParams(Parcel in) {
-		super(in);
+		readFromParcel(in);
 	}
 
 	public static final Creator<ContextMenuButtonsParams> CREATOR = new Creator<ContextMenuButtonsParams>() {

@@ -11,7 +11,7 @@ public class StopGpxRecordingParams extends AidlParams {
 	}
 
 	public StopGpxRecordingParams(Parcel in) {
-		super(in);
+		readFromParcel(in);
 	}
 
 	public static final Creator<StopGpxRecordingParams> CREATOR = new Creator<StopGpxRecordingParams>() {

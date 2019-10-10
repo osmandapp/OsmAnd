@@ -11,7 +11,7 @@ public class UnmuteNavigationParams extends AidlParams {
 	}
 
 	public UnmuteNavigationParams(Parcel in) {
-		super(in);
+		readFromParcel(in);
 	}
 
 	public static final Creator<UnmuteNavigationParams> CREATOR = new Creator<UnmuteNavigationParams>() {

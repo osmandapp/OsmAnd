@@ -11,7 +11,7 @@ public class ResumeNavigationParams extends AidlParams {
 	}
 
 	public ResumeNavigationParams(Parcel in) {
-		super(in);
+		readFromParcel(in);
 	}
 
 	public static final Creator<ResumeNavigationParams> CREATOR = new Creator<ResumeNavigationParams>() {
