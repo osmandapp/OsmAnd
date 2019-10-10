@@ -3333,4 +3333,34 @@
     <string name="shared_string_by_default">به‌طور پیشفرض</string>
     <string name="download_detaile_map">برای دیدن این منطقه، نقشهٔ باجزئیات %s را دانلود کنید.</string>
     <string name="download_detailed_map">برای دیدن این منطقه، نقشهٔ باجزئیات %s را دانلود کنید.</string>
+    <string name="change_data_storage_full_description">فایل‌های دادهٔ OsmAnd را به مقصد جدید انتقال می‌دهید؟
+\n%1$s &gt; %2$s</string>
+    <string name="data_storage_preference_summary">%1$s • پُر %2$s گ‌ب</string>
+    <string name="data_storage_space_description">خالی %1$s • %2$s از %3$s گ‌ب</string>
+    <string name="enter_path_to_folder">مسیر پوشه را وارد کنید</string>
+    <string name="shared_string_select_folder">انتخاب پوشه</string>
+    <string name="paste_Osmand_data_folder_path">مسیر پوشهٔ داده‌های OsmAnd را درج کنید</string>
+    <string name="change_osmand_data_folder_question">پوشهٔ داده‌های OsmAnd تغییر کند؟</string>
+    <string name="move_maps_to_new_destination">انتقال به مقصد جدید</string>
+    <string name="internal_app_storage_description">ذخیره‌گاه داخلی از کاربر و سایر برنامک‌ها پنهان است، بنابراین جز OsmAnd کسی به داده‌های شما دسترسی نخواهد داشت</string>
+    <string name="change_data_storage_folder">تغییر پوشهٔ ذخیره‌سازی داده‌ها</string>
+    <string name="rendering_attr_piste_type_snow_park_name">پارک برفی</string>
+    <string name="rendering_attr_piste_type_sleigh_name">سورتمه کالسکه‌ای</string>
+    <string name="rendering_attr_piste_type_sled_name">سورتمه</string>
+    <string name="rendering_attr_piste_type_hike_name"></string>
+    <string name="rendering_attr_piste_type_skitour_name">تور اسکی</string>
+    <string name="rendering_attr_piste_type_downhill_name">دان‌هیل</string>
+    <string name="rendering_attr_piste_type_nordic_name">نوردیک</string>
+    <string name="routeInfo_piste_type_name">نوع پیست</string>
+    <string name="rendering_attr_piste_difficulty_novice_name">مبتدی</string>
+    <string name="rendering_attr_piste_difficulty_easy_name">آسان</string>
+    <string name="rendering_attr_piste_difficulty_intermediate_name">متوسط</string>
+    <string name="rendering_attr_piste_difficulty_advanced_name">دشوار</string>
+    <string name="rendering_attr_piste_difficulty_expert_name">حرفه‌ای</string>
+    <string name="rendering_attr_piste_difficulty_freeride_name">آزادرانی</string>
+    <string name="rendering_attr_piste_difficulty_extreme_name">خیلی دشوار</string>
+    <string name="rendering_attr_piste_difficulty_undefined_name">نامشخص</string>
+    <string name="routeInfo_piste_difficulty_name">دشواری پیست</string>
+    <string name="routing_attr_width_name">محدودیت عرض</string>
+    <string name="routing_attr_width_description">محدودیت پهنای وسیله در مسیرها را مشخص کنید.</string>
 </resources>
