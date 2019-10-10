@@ -33,7 +33,7 @@ public class AidlMapPointWrapper {
 		params = aMapPoint.getParams();
 	}
 
-	public AidlMapPointWrapper(net.osmand.aidl2.maplayer.point.AMapPoint aMapPoint) {
+	public AidlMapPointWrapper(net.osmand.aidlapi.maplayer.point.AMapPoint aMapPoint) {
 		id = aMapPoint.getId();
 		shortName = aMapPoint.getShortName();
 		fullName = aMapPoint.getFullName();
@@ -41,7 +41,7 @@ public class AidlMapPointWrapper {
 		layerId = aMapPoint.getLayerId();
 		color = aMapPoint.getColor();
 
-		net.osmand.aidl2.map.ALatLon aLatLon = aMapPoint.getLocation();
+		net.osmand.aidlapi.map.ALatLon aLatLon = aMapPoint.getLocation();
 		location = new LatLon(aLatLon.getLatitude(), aLatLon.getLongitude());
 		details = aMapPoint.getDetails();
 		params = aMapPoint.getParams();

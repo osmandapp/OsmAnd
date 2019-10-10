@@ -43,7 +43,7 @@ public class AidlMapLayerWrapper {
 		}
 	}
 
-	public AidlMapLayerWrapper(net.osmand.aidl2.maplayer.AMapLayer aMapLayer) {
+	public AidlMapLayerWrapper(net.osmand.aidlapi.maplayer.AMapLayer aMapLayer) {
 		id = aMapLayer.getId();
 		name = aMapLayer.getName();
 		zOrder = aMapLayer.getZOrder();
@@ -55,9 +55,9 @@ public class AidlMapLayerWrapper {
 		bigPointMinZoom = aMapLayer.getBigPointMinZoom();
 		bigPointMaxZoom = aMapLayer.getBigPointMaxZoom();
 
-		List<net.osmand.aidl2.maplayer.point.AMapPoint> pointList = aMapLayer.getPoints();
+		List<net.osmand.aidlapi.maplayer.point.AMapPoint> pointList = aMapLayer.getPoints();
 		if (pointList != null) {
-			for (net.osmand.aidl2.maplayer.point.AMapPoint p : pointList) {
+			for (net.osmand.aidlapi.maplayer.point.AMapPoint p : pointList) {
 				this.points.put(p.getId(), new AidlMapPointWrapper(p));
 			}
 		}

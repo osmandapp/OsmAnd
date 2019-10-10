@@ -1,6 +1,6 @@
 package net.osmand.aidl;
 
-import net.osmand.aidl2.IOsmAndAidlCallback;
+import net.osmand.aidlapi.IOsmAndAidlCallback;
 
 import java.util.Map;
 

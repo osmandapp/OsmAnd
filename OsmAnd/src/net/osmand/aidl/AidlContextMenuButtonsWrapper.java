@@ -35,15 +35,15 @@ public class AidlContextMenuButtonsWrapper {
 		}
 	}
 
-	public AidlContextMenuButtonsWrapper(net.osmand.aidl2.contextmenu.ContextMenuButtonsParams params) {
+	public AidlContextMenuButtonsWrapper(net.osmand.aidlapi.contextmenu.ContextMenuButtonsParams params) {
 		id = params.getId();
 		appPackage = params.getAppPackage();
 		layerId = params.getLayerId();
 		callbackId = params.getCallbackId();
 		pointsIds = params.getPointsIds();
 
-		net.osmand.aidl2.contextmenu.AContextMenuButton leftButton = params.getLeftButton();
-		net.osmand.aidl2.contextmenu.AContextMenuButton rightButton = params.getRightButton();
+		net.osmand.aidlapi.contextmenu.AContextMenuButton leftButton = params.getLeftButton();
+		net.osmand.aidlapi.contextmenu.AContextMenuButton rightButton = params.getRightButton();
 		if (leftButton != null) {
 			this.leftButton = new AidlContextMenuButtonWrapper(leftButton);
 		}

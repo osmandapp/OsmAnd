@@ -28,7 +28,7 @@ public class AidlMapWidgetWrapper {
 		this.intentOnClick = aMapWidget.getIntentOnClick();
 	}
 
-	public AidlMapWidgetWrapper(net.osmand.aidl2.mapwidget.AMapWidget aMapWidget) {
+	public AidlMapWidgetWrapper(net.osmand.aidlapi.mapwidget.AMapWidget aMapWidget) {
 		this.id = aMapWidget.getId();
 		this.menuIconName = aMapWidget.getMenuIconName();
 		this.menuTitle = aMapWidget.getMenuTitle();

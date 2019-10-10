@@ -101,14 +101,14 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
 
-import static net.osmand.OsmandAidlConstants.COPY_FILE_IO_ERROR;
-import static net.osmand.OsmandAidlConstants.COPY_FILE_MAX_LOCK_TIME_MS;
-import static net.osmand.OsmandAidlConstants.COPY_FILE_PARAMS_ERROR;
-import static net.osmand.OsmandAidlConstants.COPY_FILE_PART_SIZE_LIMIT;
-import static net.osmand.OsmandAidlConstants.COPY_FILE_PART_SIZE_LIMIT_ERROR;
-import static net.osmand.OsmandAidlConstants.COPY_FILE_UNSUPPORTED_FILE_TYPE_ERROR;
-import static net.osmand.OsmandAidlConstants.COPY_FILE_WRITE_LOCK_ERROR;
-import static net.osmand.OsmandAidlConstants.OK_RESPONSE;
+import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_IO_ERROR;
+import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_MAX_LOCK_TIME_MS;
+import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_PARAMS_ERROR;
+import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_PART_SIZE_LIMIT;
+import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_PART_SIZE_LIMIT_ERROR;
+import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_UNSUPPORTED_FILE_TYPE_ERROR;
+import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_WRITE_LOCK_ERROR;
+import static net.osmand.aidlapi.OsmandAidlConstants.OK_RESPONSE;
 import static net.osmand.aidl.OsmandAidlService.KEY_ON_CONTEXT_MENU_BUTTONS_CLICK;
 import static net.osmand.aidl.OsmandAidlService.KEY_ON_NAV_DATA_UPDATE;
 import static net.osmand.aidl.OsmandAidlService.KEY_ON_VOICE_MESSAGE;
@@ -1414,7 +1414,7 @@ public class OsmandAidlApi {
 		return true;
 	}
 
-	boolean getActiveGpxV2(List<net.osmand.aidl2.gpx.ASelectedGpxFile> files) {
+	boolean getActiveGpxV2(List<net.osmand.aidlapi.gpx.ASelectedGpxFile> files) {
 		List<SelectedGpxFile> selectedGpxFiles = app.getSelectedGpxHelper().getSelectedGPXFiles();
 		String gpxPath = app.getAppPath(IndexConstants.GPX_INDEX_DIR).getAbsolutePath();
 		for (SelectedGpxFile selectedGpxFile : selectedGpxFiles) {
@@ -1426,13 +1426,13 @@ public class OsmandAidlApi {
 				}
 				long modifiedTime = gpxFile.modifiedTime;
 				long fileSize = new File(gpxFile.path).length();
-				files.add(new net.osmand.aidl2.gpx.ASelectedGpxFile(path, modifiedTime, fileSize, createGpxFileDetailsV2(selectedGpxFile.getTrackAnalysis())));
+				files.add(new net.osmand.aidlapi.gpx.ASelectedGpxFile(path, modifiedTime, fileSize, createGpxFileDetailsV2(selectedGpxFile.getTrackAnalysis())));
 			}
 		}
 		return true;
 	}
 
-	boolean getImportedGpxV2(List<net.osmand.aidl2.gpx.AGpxFile> files) {
+	boolean getImportedGpxV2(List<net.osmand.aidlapi.gpx.AGpxFile> files) {
 		List<GpxDataItem> gpxDataItems = app.getGpxDatabase().getItems();
 		for (GpxDataItem dataItem : gpxDataItems) {
 			File file = dataItem.getFile();
@@ -1441,12 +1441,12 @@ public class OsmandAidlApi {
 				boolean active = app.getSelectedGpxHelper().getSelectedFileByPath(file.getAbsolutePath()) != null;
 				long modifiedTime = dataItem.getFileLastModifiedTime();
 				long fileSize = file.length();
-				net.osmand.aidl2.gpx.AGpxFileDetails details = null;
+				net.osmand.aidlapi.gpx.AGpxFileDetails details = null;
 				GPXTrackAnalysis analysis = dataItem.getAnalysis();
 				if (analysis != null) {
 					details = createGpxFileDetailsV2(analysis);
 				}
-				files.add(new net.osmand.aidl2.gpx.AGpxFile(fileName, modifiedTime, fileSize, active, details));
+				files.add(new net.osmand.aidlapi.gpx.AGpxFile(fileName, modifiedTime, fileSize, active, details));
 			}
 		}
 		return true;
@@ -1524,7 +1524,7 @@ public class OsmandAidlApi {
 		return true;
 	}
 
-	private boolean getSqliteDbFilesV2(List<net.osmand.aidl2.tiles.ASqliteDbFile> fileNames, boolean activeOnly) {
+	private boolean getSqliteDbFilesV2(List<net.osmand.aidlapi.tiles.ASqliteDbFile> fileNames, boolean activeOnly) {
 		File tilesPath = app.getAppPath(IndexConstants.TILES_INDEX_DIR);
 		if (tilesPath.canRead()) {
 			File[] files = tilesPath.listFiles();
@@ -1536,7 +1536,7 @@ public class OsmandAidlApi {
 					if (tileFile.isFile() && !fileNameLC.startsWith("hillshade") && fileNameLC.endsWith(SQLiteTileSource.EXT)) {
 						boolean active = fileName.equals(activeFile);
 						if (!activeOnly || active) {
-							fileNames.add(new net.osmand.aidl2.tiles.ASqliteDbFile(fileName, tileFile.lastModified(), tileFile.length(), active));
+							fileNames.add(new net.osmand.aidlapi.tiles.ASqliteDbFile(fileName, tileFile.lastModified(), tileFile.length(), active));
 						}
 					}
 				}
@@ -1553,11 +1553,11 @@ public class OsmandAidlApi {
 		return getSqliteDbFiles(fileNames, true);
 	}
 
-	boolean getSqliteDbFilesV2(List<net.osmand.aidl2.tiles.ASqliteDbFile> fileNames) {
+	boolean getSqliteDbFilesV2(List<net.osmand.aidlapi.tiles.ASqliteDbFile> fileNames) {
 		return getSqliteDbFilesV2(fileNames, false);
 	}
 
-	boolean getActiveSqliteDbFilesV2(List<net.osmand.aidl2.tiles.ASqliteDbFile> fileNames) {
+	boolean getActiveSqliteDbFilesV2(List<net.osmand.aidlapi.tiles.ASqliteDbFile> fileNames) {
 		return getSqliteDbFilesV2(fileNames, true);
 	}
 
@@ -1972,7 +1972,7 @@ public class OsmandAidlApi {
 					}
 				}
 				if (aidlCallbackListenerV2 != null) {
-					net.osmand.aidl2.navigation.ADirectionInfo directionInfo = new net.osmand.aidl2.navigation.ADirectionInfo(-1, -1, false);
+					net.osmand.aidlapi.navigation.ADirectionInfo directionInfo = new net.osmand.aidlapi.navigation.ADirectionInfo(-1, -1, false);
 					RoutingHelper rh = app.getRoutingHelper();
 					if (rh.isDeviatedFromRoute()) {
 						directionInfo.setTurnType(TurnType.OFFR);
@@ -2024,7 +2024,7 @@ public class OsmandAidlApi {
 					for (OsmandAidlServiceV2.AidlCallbackParams cb : aidlCallbackListenerV2.getAidlCallbacks().values()) {
 						if (!aidlCallbackListenerV2.getAidlCallbacks().isEmpty() && (cb.getKey() & KEY_ON_VOICE_MESSAGE) > 0) {
 							try {
-								cb.getCallback().onVoiceRouterNotify(new net.osmand.aidl2.navigation.OnVoiceNavigationParams(cmds, played));
+								cb.getCallback().onVoiceRouterNotify(new net.osmand.aidlapi.navigation.OnVoiceNavigationParams(cmds, played));
 							} catch (Exception e) {
 								LOG.error(e.getMessage(), e);
 							}
@@ -2326,8 +2326,8 @@ public class OsmandAidlApi {
 				a.points, a.wptPoints, a.wptCategoryNames);
 	}
 
-	private static net.osmand.aidl2.gpx.AGpxFileDetails createGpxFileDetailsV2(@NonNull GPXTrackAnalysis a) {
-		return new net.osmand.aidl2.gpx.AGpxFileDetails(a.totalDistance, a.totalTracks, a.startTime, a.endTime,
+	private static net.osmand.aidlapi.gpx.AGpxFileDetails createGpxFileDetailsV2(@NonNull GPXTrackAnalysis a) {
+		return new net.osmand.aidlapi.gpx.AGpxFileDetails(a.totalDistance, a.totalTracks, a.startTime, a.endTime,
 				a.timeSpan, a.timeMoving, a.totalDistanceMoving, a.diffElevationUp, a.diffElevationDown,
 				a.avgElevation, a.minElevation, a.maxElevation, a.minSpeed, a.maxSpeed, a.avgSpeed,
 				a.points, a.wptPoints, a.wptCategoryNames);

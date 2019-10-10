@@ -18,7 +18,7 @@ import android.text.TextUtils;
 import net.osmand.AndroidUtils;
 import net.osmand.aidl.AidlMapLayerWrapper;
 import net.osmand.aidl.AidlMapPointWrapper;
-import net.osmand.aidl2.maplayer.point.AMapPoint;
+import net.osmand.aidlapi.maplayer.point.AMapPoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;

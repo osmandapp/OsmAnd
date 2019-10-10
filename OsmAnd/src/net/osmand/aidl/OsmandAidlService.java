@@ -94,10 +94,10 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
-import static net.osmand.OsmandAidlConstants.CANNOT_ACCESS_API_ERROR;
-import static net.osmand.OsmandAidlConstants.MIN_UPDATE_TIME_MS;
-import static net.osmand.OsmandAidlConstants.MIN_UPDATE_TIME_MS_ERROR;
-import static net.osmand.OsmandAidlConstants.UNKNOWN_API_ERROR;
+import static net.osmand.aidlapi.OsmandAidlConstants.CANNOT_ACCESS_API_ERROR;
+import static net.osmand.aidlapi.OsmandAidlConstants.MIN_UPDATE_TIME_MS;
+import static net.osmand.aidlapi.OsmandAidlConstants.MIN_UPDATE_TIME_MS_ERROR;
+import static net.osmand.aidlapi.OsmandAidlConstants.UNKNOWN_API_ERROR;
 
 public class OsmandAidlService extends Service implements AidlCallbackListener {
 

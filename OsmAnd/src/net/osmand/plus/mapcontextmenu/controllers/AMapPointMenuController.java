@@ -13,7 +13,7 @@ import android.util.Pair;
 import net.osmand.aidl.AidlContextMenuButtonWrapper;
 import net.osmand.aidl.AidlContextMenuButtonsWrapper;
 import net.osmand.aidl.AidlMapPointWrapper;
-import net.osmand.aidl2.maplayer.point.AMapPoint;
+import net.osmand.aidlapi.maplayer.point.AMapPoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmAndFormatter;

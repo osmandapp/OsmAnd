@@ -6,10 +6,10 @@ import android.os.AsyncTask
 import android.text.TextUtils
 import net.osmand.GPXUtilities
 import net.osmand.PlatformUtil
-import net.osmand.aidl2.gpx.AGpxFile
-import net.osmand.aidl2.map.ALatLon
-import net.osmand.aidl2.maplayer.point.AMapPoint
-import net.osmand.aidl2.mapmarker.AMapMarker
+import net.osmand.aidlapi.gpx.AGpxFile
+import net.osmand.aidlapi.map.ALatLon
+import net.osmand.aidlapi.maplayer.point.AMapPoint
+import net.osmand.aidlapi.mapmarker.AMapMarker
 import net.osmand.telegram.R
 import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.helpers.OsmandAidlHelper.ContextMenuButtonsListener

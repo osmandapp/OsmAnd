@@ -24,7 +24,7 @@ public class AidlContextMenuButtonWrapper {
 		enabled = aContextMenuButton.isEnabled();
 	}
 
-	public AidlContextMenuButtonWrapper(net.osmand.aidl2.contextmenu.AContextMenuButton aContextMenuButton) {
+	public AidlContextMenuButtonWrapper(net.osmand.aidlapi.contextmenu.AContextMenuButton aContextMenuButton) {
 		buttonId = aContextMenuButton.getButtonId();
 		leftTextCaption = aContextMenuButton.getLeftTextCaption();
 		rightTextCaption = aContextMenuButton.getRightTextCaption();
