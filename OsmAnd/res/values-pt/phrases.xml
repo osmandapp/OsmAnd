@@ -1221,7 +1221,7 @@
     <string name="poi_route_hiking_rwn_poi">Rota regional de caminhada</string>
     <string name="poi_route_hiking_lwn_poi">Rota local de caminhada</string>
     <string name="poi_route_hiking_ref_poi">Referência de rota de caminhada</string>
-    <string name="poi_opening_hours">Horário de funcionamento</string>
+    <string name="poi_opening_hours">Horas de abertura</string>
     <string name="poi_collection_times">Horário de coleta</string>
     <string name="poi_description">Descrição</string>
     <string name="poi_phone">Telefone</string>
@@ -2014,7 +2014,7 @@
     <string name="poi_service_bicycle_second_hand_no">Venda de bicicletas de segunda mão: não</string>
     <string name="poi_service_bicycle_charging_yes">Cobrança: sim</string>
     <string name="poi_service_bicycle_charging_no">Cobrança: não</string>
-    <string name="poi_bicycle_repair_station">Estação de auto-reparo de bicicletas</string>
+    <string name="poi_bicycle_repair_station">Estação de reparação de bicicletas; Estação da auto-reparação da bicicleta</string>
     <string name="poi_wildlife_hide">Observatório de vida selvagem</string>
     <string name="poi_training_language">Treinamento: idioma</string>
     <string name="poi_training_music">Treinamento: música</string>
@@ -3704,4 +3704,10 @@
     <string name="poi_disabled_designated">Designado</string>
     <string name="poi_cellar_entrance">Entrada da adega</string>
     <string name="poi_health_food">Alimentação saudável</string>
+    <string name="poi_craft_builder">Construtor</string>
+    <string name="poi_craft_distillery">Destilaria</string>
+    <string name="poi_craft_joiner">Marceneiro</string>
+    <string name="poi_craft_floorer">Assentador de piso</string>
+    <string name="poi_craft_bakery">Padaria</string>
+    <string name="poi_craft_cabinet_maker">Marceneiro</string>
 </resources>

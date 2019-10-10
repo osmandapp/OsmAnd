@@ -578,7 +578,9 @@ public class TurnPathHelper {
 		if (turnIndex == FIRST_TURN) {
 			if (secondTurnType == 0) {
 				turnResource = new TurnResource(firstTurnType, false, false, leftSide);
-			} else if (secondTurnType == TurnType.C || thirdTurnType == TurnType.C) {
+			} else if (secondTurnType == TurnType.C || thirdTurnType == TurnType.C
+					|| ((firstTurnType == TurnType.TL || firstTurnType == TurnType.TR)
+					&& (secondTurnType == TurnType.TSLL || secondTurnType == TurnType.TSLR))) {
 				turnResource = new TurnResource(firstTurnType, true, false, leftSide);
 			} else {
 				if (firstTurnType == TurnType.TU || firstTurnType == TurnType.TRU) {
@@ -591,12 +593,16 @@ public class TurnPathHelper {
 			if (TurnType.isLeftTurn(firstTurnType) && TurnType.isLeftTurn(secondTurnType)) {
 				if (TurnType.isSlightTurn(firstTurnType)) {
 					turnResource = new TurnResource(secondTurnType, true, false, leftSide);
+				} else if (TurnType.isSlightTurn(secondTurnType)) {
+					turnResource = new TurnResource(secondTurnType, false, false, leftSide);
 				} else {
 					turnResource = null;
 				}
 			} else if (TurnType.isRightTurn(firstTurnType) && TurnType.isRightTurn(secondTurnType)) {
 				if (TurnType.isSlightTurn(firstTurnType)) {
 					turnResource = new TurnResource(secondTurnType, true, false, leftSide);
+				} else if (TurnType.isSlightTurn(secondTurnType)) {
+					turnResource = new TurnResource(secondTurnType, false, false, leftSide);
 				} else {
 					turnResource = null;
 				}
