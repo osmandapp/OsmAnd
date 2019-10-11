@@ -3272,4 +3272,5 @@
     <string name="routeInfo_piste_difficulty_name">Pist zorluğu</string>
     <string name="routing_attr_width_name">Genişlik sınırı</string>
     <string name="routing_attr_width_description">Rotalarda izin verilen araç genişlik sınırını belirtin.</string>
+    <string name="avoid_in_routing_descr_">Belirli rotalardan ve yol türlerinden kaçının</string>
 </resources>
