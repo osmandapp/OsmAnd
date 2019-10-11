@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 
 group = 'com.github.osmandapp'
-version = '2.0'
+version = '2.0.1'
 
 android {
     compileSdkVersion 27
@@ -14,7 +14,13 @@ android {
         versionCode 2
         versionName "2.0"
     }
-
+    buildTypes {
+        release {
+        }
+    }
+    lintOptions {
+        abortOnError false
+    }
     sourceSets {
         main {
             manifest.srcFile "AndroidManifest.xml"
@@ -27,18 +33,4 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:support-annotations:27.1.1'
-}
-
-task sourcesJar(type: Jar) {
-    classifier = 'sources'
-    from android.sourceSets.main.java.sourceFiles
-}
-
-task classesJar(type: Jar) {
-    from "$buildDir/intermediates/classes/release"
-}
-
-artifacts {
-    archives classesJar
-    archives sourcesJar
 }
