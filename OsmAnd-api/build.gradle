@@ -1,4 +1,7 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+
+group='net.OsmAnd.OsmAnd-api'
 
 android {
     compileSdkVersion 27
