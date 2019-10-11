@@ -1013,4 +1013,5 @@
     <string name="poi_maxweight">Pes maximau</string>
     <string name="poi_height">Autor</string>
     <string name="poi_width">Amplor</string>
+    <string name="poi_ele">Autor subre lo nivèu de mar</string>
 </resources>
