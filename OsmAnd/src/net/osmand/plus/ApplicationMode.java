@@ -183,6 +183,10 @@ public class ApplicationMode {
 	public static class ApplicationModeBuilder {
 		private ApplicationMode applicationMode;
 
+		public ApplicationMode getApplicationMode() {
+			return applicationMode;
+		}
+
 		private ApplicationMode reg() {
 			values.add(applicationMode);
 			defaultValues.add(applicationMode);
@@ -347,7 +351,7 @@ public class ApplicationMode {
 	}
 
 	public static ApplicationModeBuilder createCustomMode(ApplicationMode parent, String userProfileTitle, String stringKey) {
-		return create(parent,-1, stringKey).userProfileTitle(userProfileTitle);
+		return create(parent, -1, stringKey).userProfileTitle(userProfileTitle);
 	}
 
 
@@ -622,6 +626,31 @@ public class ApplicationMode {
 		}
 	}
 
+	public static ApplicationModeBuilder fromJson(OsmandApplication app, String json) {
+		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+		ApplicationModeBean mb = gson.fromJson(json, ApplicationModeBean.class);
+
+		ApplicationModeBuilder b = createCustomMode(valueOfStringKey(mb.parent, CAR),
+				mb.userProfileName, mb.stringKey);
+		b.setRouteService(mb.routeService).setRoutingProfile(mb.routingProfile);
+		b.icon(app, mb.iconName);
+		b.setColor(mb.iconColor);
+		return b;
+	}
+
+	public String toJson() {
+		ApplicationModeBean mb = new ApplicationModeBean();
+		mb.userProfileName = userProfileName;
+		mb.iconColor = iconColor;
+		mb.iconName = iconResName;
+		mb.parent = parentAppMode != null ? parentAppMode.getStringKey() : null;
+		mb.stringKey = stringKey;
+		mb.routeService = routeService;
+		mb.routingProfile = routingProfile;
+		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+		return gson.toJson(mb);
+	}
+
 	private static void initCustomModes(OsmandApplication app){
 		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 		Type t = new TypeToken<ArrayList<ApplicationModeBean>>() {}.getType();
@@ -639,7 +668,6 @@ public class ApplicationMode {
 		}
 
 	}
-
 
 	private static void saveCustomModeToSettings(OsmandSettings settings){
 		List<ApplicationModeBean> customModes = new ArrayList<>();

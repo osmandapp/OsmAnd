@@ -686,15 +686,9 @@ public class OsmandSettings {
 					set(parseString(globalValue));
 				}
 			} else {
-				Object jsonModeValuesObj = json.get(getId());
-				if (jsonModeValuesObj instanceof JSONObject) {
-					JSONObject jsonModeValues = (JSONObject) jsonModeValuesObj;
-					for (ApplicationMode m : ApplicationMode.allPossibleValues()) {
-						String modeValue = jsonModeValues.getString(m.getStringKey());
-						if (modeValue != null) {
-							setModeValue(m, parseString(modeValue));
-						}
-					}
+				String modeValue = json.getString(getId());
+				if (modeValue != null) {
+					setModeValue(appMode, parseString(modeValue));
 				}
 			}
 		}
