@@ -3308,4 +3308,5 @@ Pôr do Sol: %2$s</string>
     <string name="routeInfo_piste_difficulty_name">Dificuldade da pista</string>
     <string name="routing_attr_width_name">Limite de largura</string>
     <string name="routing_attr_width_description">Especifique o limite permitido de largura do veículo nas rotas.</string>
+    <string name="avoid_in_routing_descr_">Evitar certas rotas e tipos de estradas</string>
 </resources>
