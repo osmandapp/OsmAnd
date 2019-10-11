@@ -1,7 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
 
-group = 'com.github.osmand'
+group = 'com.github.osmandapp'
 version = '2.0'
 
 android {
