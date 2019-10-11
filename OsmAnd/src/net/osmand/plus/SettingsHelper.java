@@ -2,6 +2,7 @@ package net.osmand.plus;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
@@ -49,6 +50,7 @@ public class SettingsHelper {
 	private Activity activity;
 
 	private boolean importing;
+	private boolean importSuspended;
 	private ImportAsyncTask importTask;
 
 	public SettingsHelper(OsmandApplication app) {
@@ -68,6 +70,10 @@ public class SettingsHelper {
 
 	public void resetActivity(Activity activity) {
 		if (this.activity == activity) {
+			if (importing) {
+				importTask.suspendImport();
+				importSuspended = true;
+			}
 			this.activity = null;
 		}
 	}
@@ -104,6 +110,9 @@ public class SettingsHelper {
 
 		@NonNull
 		public abstract String getName();
+
+		@NonNull
+		public abstract String getPublicName(@NonNull Context ctx);
 
 		@NonNull
 		public abstract String getFileName();
@@ -232,23 +241,29 @@ public class SettingsHelper {
 			if (Algorithms.isEmpty(jsonStr)) {
 				throw new IllegalArgumentException("Cannot find json body");
 			}
-			JSONObject json;
+			final JSONObject json;
 			try {
 				json = new JSONObject(jsonStr);
 			} catch (JSONException e) {
 				throw new IllegalArgumentException("Json parse error", e);
 			}
-			Map<String, OsmandPreference<?>> prefs = settings.getRegisteredPreferences();
-			Iterator<String> iter = json.keys();
-			while (iter.hasNext()) {
-				String key = iter.next();
-				OsmandPreference<?> p = prefs.get(key);
-				try {
-					readPreferenceFromJson(p, json);
-				} catch (JSONException e) {
-					LOG.error("Failed to read preference: " + p.getId(), e);
+			settings.getContext().runInUIThread(new Runnable() {
+				@Override
+				public void run() {
+					Map<String, OsmandPreference<?>> prefs = settings.getRegisteredPreferences();
+					Iterator<String> iter = json.keys();
+					while (iter.hasNext()) {
+						String key = iter.next();
+						OsmandPreference<?> p = prefs.get(key);
+						try {
+							readPreferenceFromJson(p, json);
+						} catch (JSONException e) {
+							LOG.error("Failed to read preference: " + p.getId(), e);
+						}
+					}
 				}
-			}
+			});
+
 		}
 	}
 
@@ -298,6 +313,12 @@ public class SettingsHelper {
 		@Override
 		public String getName() {
 			return "general_settings";
+		}
+
+		@NonNull
+		@Override
+		public String getPublicName(@NonNull Context ctx) {
+			return ctx.getString(R.string.general_settings_2);
 		}
 
 		@NonNull
@@ -357,6 +378,18 @@ public class SettingsHelper {
 
 		@NonNull
 		@Override
+		public String getPublicName(@NonNull Context ctx) {
+			if (appMode.isCustomProfile()) {
+				return appMode.getCustomProfileName();
+			} else if (appMode.getNameKeyResource() != -1) {
+				return ctx.getString(appMode.getNameKeyResource());
+			} else {
+				return getName();
+			}
+		}
+
+		@NonNull
+		@Override
 		public String getFileName() {
 			return "profile_" + getName() + ".json";
 		}
@@ -364,7 +397,11 @@ public class SettingsHelper {
 		void readFromJson(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
 			String appModeJson = json.getString("appMode");
 			builder = ApplicationMode.fromJson(app, appModeJson);
-			this.appMode = builder.getApplicationMode();
+			ApplicationMode appMode = builder.getApplicationMode();
+			if (!appMode.isCustomProfile()) {
+				appMode = ApplicationMode.valueOfStringKey(appMode.getStringKey(), appMode);
+			}
+			this.appMode = appMode;
 		}
 
 		@Override
@@ -374,7 +411,9 @@ public class SettingsHelper {
 
 		@Override
 		public void apply() {
-			appMode = ApplicationMode.saveCustomProfile(builder, getSettings().getContext());
+			if (appMode.isCustomProfile()) {
+				appMode = ApplicationMode.saveCustomProfile(builder, getSettings().getContext());
+			}
 		}
 
 		@Override
@@ -474,6 +513,12 @@ public class SettingsHelper {
 		@Override
 		public String getName() {
 			return name;
+		}
+
+		@NonNull
+		@Override
+		public String getPublicName(@NonNull Context ctx) {
+			return getName();
 		}
 
 		@Override
@@ -583,10 +628,14 @@ public class SettingsHelper {
 					OutputStream output = new FileOutputStream(file);
 					byte[] buffer = new byte[BUFFER];
 					int count;
-					while ((count = inputStream.read(buffer)) != -1) {
-						output.write(buffer, 0, count);
+					try {
+						while ((count = inputStream.read(buffer)) != -1) {
+							output.write(buffer, 0, count);
+						}
+						output.flush();
+					} finally {
+						Algorithms.closeStream(output);
 					}
-					output.flush();
 				}
 			};
 		}
@@ -770,7 +819,7 @@ public class SettingsHelper {
 						LOG.error("Error parsing items: " + itemsJson, e);
 						throw new IllegalArgumentException("No items");
 					}
-					while ((entry = zis.getNextEntry()) != null && !collecting) {
+					while (!collecting && (entry = zis.getNextEntry()) != null) {
 						String fileName = entry.getName();
 						SettingsItem item = itemsFactory.getItemByFileName(fileName);
 						if (item != null) {
@@ -805,6 +854,8 @@ public class SettingsHelper {
 		private SettingsImporter importer;
 		private List<SettingsItem> items;
 		private List<SettingsItem> processedItems = new ArrayList<>();
+		private SettingsItem currentItem;
+		private AlertDialog dialog;
 
 		ImportAsyncTask(@NonNull File zipFile) {
 			this.zipFile = zipFile;
@@ -817,6 +868,7 @@ public class SettingsHelper {
 				finishImport(false);
 			}
 			importing = true;
+			importSuspended = false;
 			importTask = this;
 		}
 
@@ -844,43 +896,72 @@ public class SettingsHelper {
 			if (activity == null) {
 				return;
 			}
-			if (items.size() == 0) {
+			if (items.size() == 0 && !importSuspended) {
 				if (processedItems.size() > 0) {
 					new ImportItemsAsyncTask(zipFile, processedItems).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 				} else {
 					finishImport(false);
 				}
+				return;
 			}
-			final SettingsItem item = items.remove(0);
-			if (item.exists()) {
-				switch (item.getType()) {
-					case PROFILE: {
-						AlertDialog.Builder b = new AlertDialog.Builder(activity);
-						b.setMessage("Profile \"" + item.getName() + "\" is already exists. Overwrite?");
-						b.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
-							@Override
-							public void onClick(DialogInterface dialog, int which) {
-								acceptItem(item);
-							}
-						});
-						b.setNegativeButton(R.string.shared_string_no, new DialogInterface.OnClickListener() {
-							@Override
-							public void onClick(DialogInterface dialog, int which) {
-								processNextItem();
-							}
-						});
-						b.setCancelable(false);
-						b.show();
-						break;
+			final SettingsItem item;
+			if (importSuspended && currentItem != null) {
+				item = currentItem;
+			} else if (items.size() > 0) {
+				item = items.remove(0);
+				currentItem = item;
+			} else {
+				item = null;
+			}
+			importSuspended = false;
+			if (item != null) {
+				if (item.exists()) {
+					switch (item.getType()) {
+						case PROFILE: {
+							AlertDialog.Builder b = new AlertDialog.Builder(activity);
+							b.setMessage("Profile \"" + item.getPublicName(app) + "\" is already exists. Overwrite?");
+							b.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									acceptItem(item);
+								}
+							});
+							b.setNegativeButton(R.string.shared_string_no, new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog, int which) {
+									processNextItem();
+								}
+							});
+							b.setOnDismissListener(new DialogInterface.OnDismissListener() {
+								@Override
+								public void onDismiss(DialogInterface dialog) {
+									ImportAsyncTask.this.dialog = null;
+								}
+							});
+							b.setCancelable(false);
+							dialog = b.show();
+							break;
+						}
+						case FILE:
+							// overwrite now
+							acceptItem(item);
+							break;
+						default:
+							acceptItem(item);
+							break;
 					}
-					case FILE:
-						break;
-					default:
-						acceptItem(item);
-						break;
+				} else {
+					acceptItem(item);
 				}
 			} else {
-				acceptItem(item);
+				processNextItem();
+			}
+		}
+
+		private void suspendImport() {
+			if (dialog != null) {
+				dialog.dismiss();
+				dialog = null;
 			}
 		}
 
@@ -925,6 +1006,7 @@ public class SettingsHelper {
 
 	private void finishImport(boolean success) {
 		importing = false;
+		importSuspended = false;
 		importTask = null;
 		if (success) {
 			app.showShortToastMessage("Import succeed");

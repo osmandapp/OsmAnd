@@ -630,7 +630,7 @@ public class ApplicationMode {
 		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 		ApplicationModeBean mb = gson.fromJson(json, ApplicationModeBean.class);
 
-		ApplicationModeBuilder b = createCustomMode(valueOfStringKey(mb.parent, CAR),
+		ApplicationModeBuilder b = createCustomMode(valueOfStringKey(mb.parent, null),
 				mb.userProfileName, mb.stringKey);
 		b.setRouteService(mb.routeService).setRoutingProfile(mb.routingProfile);
 		b.icon(app, mb.iconName);
