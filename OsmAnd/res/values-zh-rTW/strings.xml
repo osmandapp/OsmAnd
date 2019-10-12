@@ -3280,4 +3280,36 @@
     <string name="plugins_settings">外掛程式設定</string>
     <string name="shared_string_by_default">預設值</string>
     <string name="download_detailed_map">下載更詳細的 %s 地圖以檢視此區域。</string>
+    <string name="change_data_storage_full_description">移動 OsmAnd 資料檔案到新目的地？
+\n%1$s &gt; %2$s</string>
+    <string name="data_storage_preference_summary">%1$s • 已使用 %2$s GB</string>
+    <string name="data_storage_space_description">剩餘 %1$s • %2$s / %3$s GB</string>
+    <string name="enter_path_to_folder">輸入到資料夾的路徑</string>
+    <string name="shared_string_select_folder">選取資料夾</string>
+    <string name="paste_Osmand_data_folder_path">貼上有 OsmAnd 資料的資料夾路徑</string>
+    <string name="change_osmand_data_folder_question">變更 OsmAnd 資料夾？</string>
+    <string name="move_maps_to_new_destination">移動到新目的地</string>
+    <string name="internal_app_storage_description">內部儲存空間，對其他使用者與其他應用程式隱藏，所以除了 OsmAnd 以外都不能存取您的資料</string>
+    <string name="change_data_storage_folder">變更資料儲存資料夾</string>
+    <string name="rendering_attr_piste_type_snow_park_name">雪園</string>
+    <string name="rendering_attr_piste_type_sleigh_name">雪橇</string>
+    <string name="rendering_attr_piste_type_sled_name">平底雪橇</string>
+    <string name="rendering_attr_piste_type_hike_name">遠足</string>
+    <string name="rendering_attr_piste_type_connection_name">連線</string>
+    <string name="rendering_attr_piste_type_skitour_name">滑雪旅行</string>
+    <string name="rendering_attr_piste_type_downhill_name">下坡</string>
+    <string name="rendering_attr_piste_type_nordic_name">北歐風</string>
+    <string name="routeInfo_piste_type_name">軌道類型</string>
+    <string name="rendering_attr_piste_difficulty_novice_name">新手</string>
+    <string name="rendering_attr_piste_difficulty_easy_name">簡單</string>
+    <string name="rendering_attr_piste_difficulty_intermediate_name">中等</string>
+    <string name="rendering_attr_piste_difficulty_advanced_name">進階</string>
+    <string name="rendering_attr_piste_difficulty_expert_name">專家</string>
+    <string name="rendering_attr_piste_difficulty_freeride_name">自由滑雪</string>
+    <string name="rendering_attr_piste_difficulty_extreme_name">極度</string>
+    <string name="rendering_attr_piste_difficulty_undefined_name">未定義</string>
+    <string name="routeInfo_piste_difficulty_name">滑雪難度</string>
+    <string name="routing_attr_width_name">寬度限制</string>
+    <string name="routing_attr_width_description">在路線當指定允許的車輛寬度限制。</string>
+    <string name="avoid_in_routing_descr_">避開特定路線與道路類型</string>
 </resources>
