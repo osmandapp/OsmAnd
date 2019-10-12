@@ -3328,4 +3328,5 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="routeInfo_piste_difficulty_name">Pisten-Schwierigkeitsgrad</string>
     <string name="routing_attr_width_name">Breitenbegrenzung</string>
     <string name="routing_attr_width_description">Geben Sie die zulässige Fahrzeugbreitenbegrenzung auf Routen an.</string>
+    <string name="avoid_in_routing_descr_">Vermeiden von bestimmten Routen und Straßentypen</string>
 </resources>
