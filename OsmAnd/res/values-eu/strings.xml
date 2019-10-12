@@ -2904,7 +2904,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="waiting_for_route_calculation">Ibilbidea kalkulatzen…</string>
     <string name="show_along_the_route">Erakutsi ibilbidean zehar</string>
     <string name="choose_track_file_to_follow">Hautatu lorratz fitxategia jarraitzeko</string>
-    <string name="routeInfo_roadClass_name">Klasea</string>
+    <string name="routeInfo_roadClass_name">Errepide mota</string>
     <string name="routeInfo_surface_name">Gainazala</string>
     <string name="routeInfo_smoothness_name">Lausotasuna</string>
     <string name="routeInfo_steepness_name">Aldapa</string>
@@ -2917,7 +2917,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="use_osm_live_public_transport">OsmAnd Live garraio publikoa</string>
     <string name="time_of_day">Eguneko ordua</string>
     <string name="by_transport_type">Egilea: %1$s</string>
-    <string name="step_by_step">Urratsez urrats</string>
+    <string name="step_by_step">Biraz bira</string>
     <string name="routeInfo_road_types_name">Bide motak</string>
     <string name="exit_at">Irten hemen</string>
     <string name="sit_on_the_stop">Muntatu honako geltokian</string>
@@ -3181,6 +3181,132 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="select_base_profile_dialog_message">"Oinarritu zure  profil pertsonala lehenetsitako aplikazio profil  batean, hau da, oinarrizko konfigurazioa, widgeten eta abiadura eta distantziaren lehenetsitako ikusgarritasuna definitzen duena. Hauek dira aplikazio profil lehenetsiak, profil pertsonalizatuen adibideekin batera:"</string>
     <string name="app_mode_scooter">Motoa</string>
     <string name="shared_string_default">Lehenetsia</string>
-    <string name="day"/>
+    <string name="day">Egun</string>
     <string name="days_2_4">Egunak</string>
+    <string name="release_3_4">• Aplikazioaren profilak: sortu profil pertsonalizatua zure beharretarako, ikono eta kolore pertsonalizatuarekin
+\n
+\n • Aldatu edozein profileko lehenetsitako abiadura maximo eta minimoa
+\n
+\n • Uneko koordenatuen trepeta gehitu da
+\n
+\n • Mapan ipar-orratza eta erradioen erregela erakusteko aukerak gehitu dira
+\n
+\n • Lorratza bigarren planoan gordetzea konponduta
+\n
+\n • Bigarren planoan mapak deskargatzea hobetua
+\n
+\n • \'Piztu pantaila\' aukera itzuli da
+\n
+\n • Wikipediaren hizkuntza hautaketa konpondu da
+\n
+\n • Nabigazioan ipar-orratzaren botoiaren portaera konpondu da
+\n
+\n • Arazo konponketa gehiago
+\n
+\n</string>
+    <string name="new_route_calculated_dist_dbg">Ibilbidea: distantzia %s, iraupena %s 
+\nKalkulua: %.1f s, %d errepide, %d lauza)</string>
+    <string name="lang_oc">Okzitaniera</string>
+    <string name="app_mode_wagon">Bagoia</string>
+    <string name="days_5">Egun</string>
+    <string name="week">Aste</string>
+    <string name="weeks_2_4">Aste</string>
+    <string name="weeks_5">Aste</string>
+    <string name="month">Hilabete</string>
+    <string name="months_2_4">Hilabete</string>
+    <string name="months_5">Hilabete</string>
+    <string name="year">Urte</string>
+    <string name="years_2_4">Urte</string>
+    <string name="years_5">Urte</string>
+    <string name="months_3">Hiru hilabete</string>
+    <string name="price_free">Doan</string>
+    <string name="get_discount_title">Eskuratu %1$d %2$s %3$s(e)ko deskontuarekin.</string>
+    <string name="get_free_trial_title">Hasi zure %1$d %2$s doako proba.</string>
+    <string name="get_discount_first_part">%1$s lehen %2$s</string>
+    <string name="get_discount_first_few_part">%1$s lehen %2$s</string>
+    <string name="get_discount_second_part">gero %1$s</string>
+    <string name="cancel_subscription">Ezeztatu harpidetza</string>
+    <string name="price_and_discount">%1$s • Aurreztu %2$s</string>
+    <string name="configure_profile_info">Beheko ezarpen guztiak aukeratutako profilari eragiten diote besterik ez.</string>
+    <string name="utm_format_descr">OsmAnd-ek UTM Estandarra formatua darabil, UTN Nato formatua antzekoa da baina ez berdina.</string>
+    <string name="shared_string_example">Adibidea</string>
+    <string name="navigate_point_format_utm">UTM Estandarra</string>
+    <string name="navigate_point_format_olc">Ireki kokaleku kodea</string>
+    <string name="coordinates_format_info">Hautatutako formatua aplikazioko toki guztietan aplikatuko da.</string>
+    <string name="pref_selected_by_default_for_profiles">Ezarpen hau lehenetsita hautatuta dago profiletan: %s</string>
+    <string name="change_default_settings">Aldatu lehenetsitako ezarpenak</string>
+    <string name="discard_changes">Baztertu aldaketak</string>
+    <string name="apply_to_current_profile">"Aplikatu uneko  %1s profilari"</string>
+    <string name="apply_to_all_profiles">Aplikatu profil guztiei</string>
+    <string name="start_up_message_pref">Hasierako mezua</string>
+    <string name="analytics_pref_title">Analitikak</string>
+    <string name="turn_screen_on_info">Erakutsi mapa nabigazioan zehar blokeo pantailaren gainean.</string>
+    <string name="route_parameters_info">Ezarpen hauek ibilbidearen sorrerari eragiten diote. Hautatutako profilean besterik ez dira aplikatuko: %1$s.</string>
+    <string name="wake_time">Esnatze ordua</string>
+    <string name="units_and_formats">Unitate eta formatuak</string>
+    <string name="appearance">Itxura</string>
+    <string name="map_look_descr">Maparen itxura</string>
+    <string name="map_look">Maparen bista</string>
+    <string name="list_of_installed_plugins">Instalatutako gehigarrien zerrenda</string>
+    <string name="configure_navigation">Konfiguratu nabigazioa</string>
+    <string name="general_settings_profile_descr">Aplikazioaren gaia, unitateak, eskualdea</string>
+    <string name="configure_profile">Konfiguratu profila</string>
+    <string name="screen_alerts_descr">Alertak pantailaren behe-ezkerreko erpinean erakutsiko dira nabigazioan.</string>
+    <string name="switch_profile">Aldatu profila</string>
+    <string name="language_and_output">Hizkuntza eta irteera</string>
+    <string name="reset_to_default">Leheneratu lehenetsikoetara</string>
+    <string name="manage_profiles_descr">Sortu, inportatu, editatu profilak</string>
+    <string name="manage_profiles">Kudeatu aplikazioaren profilak…</string>
+    <string name="osmand_settings_descr">Aplikazio osoari eragiten dio</string>
+    <string name="osmand_settings">OsmAnd ezarpenak</string>
+    <string name="copy_from_other_profile">Kopiatu beste profiletik</string>
+    <string name="turn_screen_on">Piztu pantaila</string>
+    <string name="map_during_navigation_info">Mapa nabigazioan zehar</string>
+    <string name="map_during_navigation">Mapa nabigazioan zehar</string>
+    <string name="shared_string_other">Beste bat</string>
+    <string name="vehicle_parameters_descr">Pisua, altuera, abiadura</string>
+    <string name="vehicle_parameters">Ibilgailuaren parametroak</string>
+    <string name="voice_announces_info">Ahots iragarpenak nabigazioan zehar egiten dira soilik.</string>
+    <string name="voice_announces_descr">Nabigazio argibideak eta iragarpenak</string>
+    <string name="voice_announces">Ahots iragarpenak</string>
+    <string name="screen_alerts">Pantailako alertak</string>
+    <string name="route_parameters_descr">Konfiguratu ibilbidearen parametroak</string>
+    <string name="route_parameters">Ibilbidearen parametroak</string>
+    <string name="application_profile_changed">Aplikazioaren profila \"%s\" izatera aldatu da</string>
+    <string name="logcat_buffer">Logcat bufferra</string>
+    <string name="plugins_settings">Gehigarriaren ezarpenak</string>
+    <string name="shared_string_by_default">Lehenetsita</string>
+    <string name="download_detailed_map">Deskargatu %s(e)ko mapa xehetsua ingurune hau ikusteko.</string>
+    <string name="change_data_storage_full_description">Eraman OsmAnd datu fitxategiak xede berrira\?
+\n%1$s &gt; %2$s</string>
+    <string name="data_storage_preference_summary">%1$s • Erabilita %2$s GB</string>
+    <string name="data_storage_space_description">Libre %1$s • %2$s / %3$s GB</string>
+    <string name="enter_path_to_folder">Sartu karpetara bidea</string>
+    <string name="shared_string_select_folder">Hautatu karpeta</string>
+    <string name="paste_Osmand_data_folder_path">Itsatsi OsmAnd datuak dituen karpetara bidea</string>
+    <string name="change_osmand_data_folder_question">Aldatu OsmAnd datuen karpeta\?</string>
+    <string name="move_maps_to_new_destination">Eraman xede berrira</string>
+    <string name="internal_app_storage_description">Barne biltegiratzea, erabiltzaileari eta beste aplikazioei ezkutatuta, OsmAnd aplikazioa ez den beste inork ezin ditu zure datuak atzitu</string>
+    <string name="change_data_storage_folder">Aldatu datuak biltegiratzeko karpeta</string>
+    <string name="rendering_attr_piste_type_snow_park_name">Elur parkea</string>
+    <string name="rendering_attr_piste_type_sleigh_name">Lera</string>
+    <string name="rendering_attr_piste_type_sled_name">Lera</string>
+    <string name="rendering_attr_piste_type_hike_name">Ibilaldia</string>
+    <string name="rendering_attr_piste_type_connection_name">Konexioa</string>
+    <string name="rendering_attr_piste_type_skitour_name">Eski ibilaldia</string>
+    <string name="rendering_attr_piste_type_downhill_name">Maldan behera</string>
+    <string name="rendering_attr_piste_type_nordic_name">Nordikoa</string>
+    <string name="routeInfo_piste_type_name">Pista mota</string>
+    <string name="rendering_attr_piste_difficulty_novice_name">Hasiberria</string>
+    <string name="rendering_attr_piste_difficulty_easy_name">Erraza</string>
+    <string name="rendering_attr_piste_difficulty_intermediate_name">Tartekoa</string>
+    <string name="rendering_attr_piste_difficulty_advanced_name">Aurreratua</string>
+    <string name="rendering_attr_piste_difficulty_expert_name">Aditua</string>
+    <string name="rendering_attr_piste_difficulty_freeride_name">Ibilbide librea</string>
+    <string name="rendering_attr_piste_difficulty_extreme_name">Muturrekoa</string>
+    <string name="rendering_attr_piste_difficulty_undefined_name">Zehaztu gabea</string>
+    <string name="routeInfo_piste_difficulty_name">Pistaren zailtasuna</string>
+    <string name="routing_attr_width_name">Zabalera muga</string>
+    <string name="routing_attr_width_description">Zehaztu baimendutako ibilgailuaren zabalera muga ibilbideetan.</string>
+    <string name="avoid_in_routing_descr_">Saihestu ibilbide eta errepide mota batzuk</string>
 </resources>

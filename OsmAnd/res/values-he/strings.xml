@@ -3308,4 +3308,5 @@
     <string name="routeInfo_piste_difficulty_name">דרגת קושי מסלול</string>
     <string name="routing_attr_width_name">מגבלת רוחב</string>
     <string name="routing_attr_width_description">ציון מגבלת רוחב מכונית אפשרי בנתיבים.</string>
+    <string name="avoid_in_routing_descr_">הימנעות מסוגים מסוימים של מסלולים וכבישים</string>
 </resources>
