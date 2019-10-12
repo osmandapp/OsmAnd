@@ -3272,7 +3272,7 @@
     <string name="price_and_discount">%1$s • %2$s ارزان‌تر</string>
     <string name="configure_profile_info">همهٔ تنظیمات زیر فقط روی پروفایل انتخاب‌شده اثر می‌گذارند.</string>
     <string name="shared_string_example">مثال</string>
-    <string name="navigate_point_format_utm">استاندارد UTM</string>
+    <string name="navigate_point_format_utm">UTM Standard</string>
     <string name="navigate_point_format_olc">کد مکانی باز (OLC)</string>
     <string name="coordinates_format_info">قالب انتخابی در همه‌جای برنامه به کار خواهد رفت.</string>
     <string name="start_up_message_pref">پیام راه‌اندازی</string>
