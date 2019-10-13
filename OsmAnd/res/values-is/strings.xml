@@ -3335,4 +3335,5 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="routeInfo_piste_difficulty_name">Erfiðleikastig brautar</string>
     <string name="routing_attr_width_name">Takmörkun breiddar</string>
     <string name="routing_attr_width_description">Tilgreindu takmörk á breidd farartækja á leiðum.</string>
+    <string name="avoid_in_routing_descr_">Forðast tilteknar leiðir og gerðir af vegum</string>
 </resources>
