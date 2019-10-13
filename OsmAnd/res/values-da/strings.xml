@@ -3328,4 +3328,5 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="routeInfo_piste_difficulty_name">Pistesværhedsgrad</string>
     <string name="routing_attr_width_name">Breddegrænse</string>
     <string name="routing_attr_width_description">Angiv tilladt køretøjsbredde på ruter.</string>
+    <string name="avoid_in_routing_descr_">Undgå visse ruter og vejtyper</string>
 </resources>
