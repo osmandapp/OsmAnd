@@ -374,9 +374,16 @@ public class OpeningHoursParser {
 			String openingTime = "";
 			ArrayList<OpeningHoursRule> rules = getRules(sequenceIndex);
 			cal.add(Calendar.DAY_OF_MONTH, 1);
+			Calendar openingTimeCal = null;
 			for (OpeningHoursRule r : rules) {
 				if (r.containsDay(cal) && r.containsMonth(cal)) {
-					openingTime = r.getTime(cal, false, WITHOUT_TIME_LIMIT, true);
+					if (r.containsDay(cal) && r.containsMonth(cal)) {
+						String time = r.getTime(cal, false, WITHOUT_TIME_LIMIT, true);
+						if (Algorithms.isEmpty(time) || openingTimeCal == null || cal.before(openingTimeCal)) {
+							openingTime = time;
+						}
+						openingTimeCal = (Calendar) cal.clone();
+					}
 				}
 			}
 			return openingTime;
@@ -1622,7 +1629,8 @@ public class OpeningHoursParser {
 		TOKEN_HOLIDAY(7),
 		TOKEN_DAY_WEEK(7),
 		TOKEN_HOUR_MINUTES (8),
-		TOKEN_OFF_ON(9);
+		TOKEN_OFF_ON(9),
+		TOKEN_COMMENT(10);
 
 		public final int ord;
 
@@ -1666,22 +1674,8 @@ public class OpeningHoursParser {
 	}
 
 	public static void parseRuleV2(String r, int sequenceIndex, List<OpeningHoursRule> rules) {
-		String comment = null;
-		int q1Index = r.indexOf('"');
-		if (q1Index >= 0) {
-			int q2Index = r.indexOf('"', q1Index + 1);
-			if (q2Index >= 0) {
-				comment = r.substring(q1Index + 1, q2Index);
-				String a = r.substring(0, q1Index);
-				String b = "";
-				if (r.length() > q2Index + 1) {
-					b = r.substring(q2Index + 1);
-				}
-				r = a + b;
-			}
-		}
-		r = r.toLowerCase().trim();
-		
+		r = r.trim();
+
 		final String[] daysStr = new String[]{"mo", "tu", "we", "th", "fr", "sa", "su"};
 		final String[] monthsStr = new String[]{"jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"};
 		final String[] holidayStr = new String[]{"ph", "sh", "easter"};
@@ -1690,10 +1684,9 @@ public class OpeningHoursParser {
 		String endOfDay = "24:00";
 		r = r.replace('(', ' '); // avoid "(mo-su 17:00-20:00"
 		r = r.replace(')', ' ');
-		String localRuleString = r.replaceAll("sunset", sunset).replaceAll("sunrise", sunrise)
+		String localRuleString = r.replaceAll("(?i)sunset", sunset).replaceAll("(?i)sunrise", sunrise)
 				.replaceAll("\\+", "-" + endOfDay);
 		BasicOpeningHourRule basic = new BasicOpeningHourRule(sequenceIndex);
-		basic.setComment(comment);
 		boolean[] days = basic.getDays();
 		boolean[] months = basic.getMonths();
 		//boolean[][] dayMonths = basic.getDayMonths();
@@ -1707,6 +1700,8 @@ public class OpeningHoursParser {
 		}
 		List<Token> tokens = new ArrayList<>();
 		int startWord = 0;
+		StringBuilder commentStr = new StringBuilder();
+		boolean comment = false;
 		for (int i = 0; i <= localRuleString.length(); i++) {
 			char ch = i == localRuleString.length() ? ' ' : localRuleString.charAt(i);
 			boolean delimiter = false;
@@ -1719,11 +1714,25 @@ public class OpeningHoursParser {
 				del = new Token(TokenType.TOKEN_DASH, "-");
 			} else if (ch == ',') {
 				del = new Token(TokenType.TOKEN_COMMA, ",");
+			} else if (ch == '"') {
+				if (comment) {
+					if (commentStr.length() > 0) {
+						tokens.add(new Token(TokenType.TOKEN_COMMENT, commentStr.toString()));
+					}
+					startWord = i + 1;
+					commentStr.setLength(0);
+					comment = false;
+				} else {
+					comment = true;
+					continue;
+				}
 			}
-			if (delimiter || del != null) {
+			if (comment) {
+				commentStr.append(ch);
+			} else if (delimiter || del != null) {
 				String wrd = localRuleString.substring(startWord, i).trim();
-				if(wrd.length() > 0) {
-					tokens.add(new Token(TokenType.TOKEN_UNKNOWN, wrd));
+				if (wrd.length() > 0) {
+					tokens.add(new Token(TokenType.TOKEN_UNKNOWN, wrd.toLowerCase()));
 				}
 				startWord = i + 1;
 				if (del != null) {
@@ -1920,6 +1929,11 @@ public class OpeningHoursParser {
 					Token[] l = listOfPairs.get(0);
 					if (l[0] != null && l[0].mainNumber == 0) {
 						basic.off = true;
+					}
+				} else if (currentParse == TokenType.TOKEN_COMMENT) {
+					Token[] l = listOfPairs.get(0);
+					if (l[0] != null && !Algorithms.isEmpty(l[0].text)) {
+						basic.comment = l[0].text;
 					}
 				} else if (currentParse == TokenType.TOKEN_YEAR) {
 					Token[] l = listOfPairs.get(0);
