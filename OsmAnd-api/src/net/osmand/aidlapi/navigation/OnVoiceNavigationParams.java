@@ -42,6 +42,14 @@ public class OnVoiceNavigationParams extends AidlParams {
 		}
 	};
 
+	public List<String> getCommands() {
+		return cmds;
+	}
+
+	public List<String> getPlayed() {
+		return played;
+	}
+
 	@Override
 	public void writeToBundle(Bundle bundle) {
 		bundle.putStringArrayList("cmds", cmds);
