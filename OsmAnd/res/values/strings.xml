@@ -74,7 +74,7 @@
     <string name="years_2_4">Years</string>
     <string name="years_5">Years</string>
     <string name="months_3">Three months</string>
-    <string name="price_free">Gratis</string>
+    <string name="price_free">Free</string>
     <string name="get_discount_title">Get %1$d %2$s at %3$s off.</string>
     <string name="get_free_trial_title">Start your %1$d %2$s gratis trial.</string>
     <string name="get_discount_first_part">%1$s for the first %2$s</string>
