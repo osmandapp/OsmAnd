@@ -866,7 +866,7 @@ Lon %2$s</string>
     <string name="osmand_parking_lim_text">Tiempo limitado</string>
     <string name="osmand_parking_no_lim_text">Tiempo ilimitado</string>
     <string name="osmand_parking_add_event">Añadir una notificación al calendario</string>
-    <string name="osmand_parking_time_limit">Estacionamiento de tiempo limitado</string>
+    <string name="osmand_parking_time_limit">Tiempo limitado</string>
     <string name="osmand_parking_time_no_limit">Estacionamiento de tiempo ilimitado</string>
     <string name="osmand_parking_position_description">Ubicación del vehículo estacionado. %1$s</string>
     <string name="osmand_parking_position_description_add">Buscar el vehículo a las:</string>
@@ -3045,10 +3045,10 @@ Lon %2$s</string>
     <string name="button_rate">Valorar</string>
     <string name="shared_string_privacy_policy">Política de privacidad</string>
     <string name="help_us_make_osmand_better">¡Ayúdanos a mejorar OsmAnd!</string>
-    <string name="make_osmand_better_descr">Permitir a OsmAnd recopilar y procesar datos de uso anónimos de la aplicación. No recopilamos ni almacenamos datos sobre la ubicación, ni sobre las ubicaciones que ve en el mapa. 
+    <string name="make_osmand_better_descr">Permite a OsmAnd recopilar y procesar datos de uso anónimos de la aplicación. No recopilamos ni almacenamos datos sobre la ubicación, ni sobre las ubicaciones que ve en el mapa. 
 \n 
 \nPuedes cambiar la selección en cualquier momento en «Ajustes &gt; Privacidad y seguridad».</string>
-    <string name="choose_data_to_share">Elegir los tipos de datos a compartir:</string>
+    <string name="choose_data_to_share">Elige los tipos de datos a compartir:</string>
     <string name="downloaded_maps">Mapas descargados</string>
     <string name="visited_screens">Pantallas visitadas</string>
     <string name="colleted_data">Datos recopilados</string>
@@ -3057,7 +3057,7 @@ Lon %2$s</string>
     <string name="visited_screens_collect_descr">Nos ayuda a entender qué características de OsmAnd son las más populares.</string>
     <string name="privacy_and_security_change_descr">Al pulsar en «Permitir», aceptas nuestras %1$s</string>
     <string name="settings_privacy_and_security">Privacidad y seguridad</string>
-    <string name="settings_privacy_and_security_desc">Elegir los datos a compartir con nosotros</string>
+    <string name="settings_privacy_and_security_desc">Elige los datos a compartir con nosotros</string>
     <string name="shared_string_no_thank_you">No, gracias</string>
     <string name="shared_string_allow">Permitir</string>
     <string name="profile_name_hint">Nombre del perfil</string>

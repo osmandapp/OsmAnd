@@ -435,7 +435,7 @@
     <string name="accessibility_mode">Irisgarritasun modua</string>
     <string name="accessibility_mode_descr">Ezgaitasunak dituzten erabiltzaileentzako ezaugarriak gaitzen ditu.</string>
     <string name="shared_string_on">On</string>
-    <string name="shared_string_off">Ezgaituta</string>
+    <string name="shared_string_off">Desgaituta</string>
     <string name="accessibility_default">Android sistemako ezarpenaren arabera</string>
     <string name="backToMenu">Itzuli menura</string>
     <string name="zoomOut">Urrundu</string>
@@ -1650,9 +1650,9 @@ Eskuragarri {2} MB besterik ez daude.</string>
     <string name="move_marker_bottom_sheet_title">Mugitu mapa markatzailearen posizioa aldatzeko</string>
     <!-- string name="lat_lon_pattern">Lat: %1$.5f Lon: %2$.5f</string -->
     <string name="follow_us">Jarraitu gaitzazu</string>
-    <string name="access_direction_audio_feedback">Audio bidezko argibideak</string>
+    <string name="access_direction_audio_feedback">Audio bidezko jarraibideak</string>
     <string name="access_direction_audio_feedback_descr">Helburura norabidearen berri eman soinu bidez.</string>
-    <string name="access_direction_haptic_feedback">Argibide haptikoak</string>
+    <string name="access_direction_haptic_feedback">Jarraibide haptikoak</string>
     <string name="access_direction_haptic_feedback_descr">Helburura norabidearen berri eman dardararen bidez.</string>
     <string name="use_osm_live_routing_description">Gaitu nabigazioa OSM Live aldaketentzako (beta).</string>
     <string name="use_osm_live_routing">OsmAnd Live nabigazioa</string>
@@ -2274,7 +2274,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="fonts_header">Maparen letra-tipoak</string>
     <string name="shared_string_paused">Pausatua</string>
     <string name="osmand_extended_description_part1">"OsmAnd (OSM Automated Navigation Directions) mapa eta nabigazio aplikazio bat da. Doako, mundu osoko eta kalitate altuko OpenStreetMap (OSM) mapak eskura jartzen dizkizuna. 
-\n 
+\n
 \nGozatu ahots bidezko nabigazioa edo nabigazio grafikoa, ikusi interesezko puntuak (POI),  sortu eta kudeatu GPX lorratzak, erabili sestra-kurbak eta garaiera datuak (gehigarri baten bidez), aukeratu kotxe, bizikleta eta oinezko moduen artean, editatu OSM, eta askoz gehiago."</string>
     <string name="type_address">Idatzi helbidea</string>
     <string name="osmand_extended_description_part2">GPS nabigazioa 
@@ -3309,4 +3309,22 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="routing_attr_width_name">Zabalera muga</string>
     <string name="routing_attr_width_description">Zehaztu baimendutako ibilgailuaren zabalera muga ibilbideetan.</string>
     <string name="avoid_in_routing_descr_">Saihestu ibilbide eta errepide mota batzuk</string>
+    <string name="release_3_3">"• \'Jarraibideak\' pantaila berria: Etxea eta lana botoiak bistaratzen ditu, \'aurreko ibilbidea\' lasterbidea, GPX lorratz eta markatzaile aktiboen zerrenda, bilaketa historiala
+\n
+\n • Informazio gehigarria \'Ibilbidearen xehetasunak\' atalean: errepide motak, zoladura, maldak, xamurtasuna
+\n
+\n • Garraio publiko bidezko nabigazioak mota guztietako garraioak onartzen ditu: metroa, autobusa, tranbia, eta abar
+\n
+\n • Ekintza azkar berria lorratzak erakutzi edo ezkutatzeko eta egun7gau moduetarako
+\n
+\n • Alemania, Hego Afrika eta Quebec-en urpetuta agertzen ziren zonaldeak konponduta
+\n
+\n •  KML eta KMZ inportaziorako euskarri gehigarria
+\n
+\n • Garraio publiko batzuk irekitzean gertatzen ziren kraskatzeak konponduta
+\n
+\n • Facebook eta Firebase analitikak kendu dira doako bertsiotik (OsmAnd+ bertsioak ez ditu)
+\n
+\n"</string>
+    <string name="app_mode_pickup_truck">Kamioneta irekia</string>
 </resources>

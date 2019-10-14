@@ -3299,7 +3299,7 @@ Lon %2$s</string>
     <string name="wake_time">Hora de espertado</string>
     <string name="units_and_formats">Unidades e formatos</string>
     <string name="appearance">Aparencia</string>
-    <string name="map_look_descr">iconas, trebellos</string>
+    <string name="map_look_descr">Aparencia do mapa</string>
     <string name="map_look">Aparencia do mapa</string>
     <string name="list_of_installed_plugins">Listaxe de engadidos instalados</string>
     <string name="configure_navigation">Configurar a navegación</string>
@@ -3331,4 +3331,37 @@ Lon %2$s</string>
     <string name="shared_string_by_default">Predefinido</string>
     <string name="plugins_settings">Axustes do engadido</string>
     <string name="download_detaile_map">Baixa o mapa detallado de %s, para poder ollar esta área.</string>
+    <string name="download_detailed_map">Baixa o mapa detallado de %s para ollar esta área.</string>
+    <string name="change_data_storage_full_description">Mover os ficheiros de datos do OsmAnd ó novo destino\? 
+\n%1$s &gt; %2$s</string>
+    <string name="data_storage_preference_summary">%1$s • Empregado %2$s GB</string>
+    <string name="data_storage_space_description">Libre %1$s • %2$s / %3$s GB</string>
+    <string name="enter_path_to_folder">Insire a ruta do cartafol</string>
+    <string name="shared_string_select_folder">Escoller cartafol</string>
+    <string name="paste_Osmand_data_folder_path">Colar ou pegar a ruta do cartafol cos datos do OsmAnd</string>
+    <string name="change_osmand_data_folder_question">Mudar o cartafol de datos do OsmAnd\?</string>
+    <string name="move_maps_to_new_destination">Mover ó novo destino</string>
+    <string name="internal_app_storage_description">Almacenamento interno, agochado para o usuario e outras aplicacións, para que ninguén agás o OsmAnd poida acceder ós teus datos</string>
+    <string name="change_data_storage_folder">Mudar o cartafol de almacenamento dos datos</string>
+    <string name="rendering_attr_piste_type_snow_park_name">Parque de neve</string>
+    <string name="rendering_attr_piste_type_sleigh_name">Zorra</string>
+    <string name="rendering_attr_piste_type_sled_name">Zorra</string>
+    <string name="rendering_attr_piste_type_hike_name">Camiñada</string>
+    <string name="rendering_attr_piste_type_connection_name">Conexión</string>
+    <string name="rendering_attr_piste_type_skitour_name">Esquí de travesía</string>
+    <string name="rendering_attr_piste_type_downhill_name">Descendemento</string>
+    <string name="rendering_attr_piste_type_nordic_name">Nórdico</string>
+    <string name="routeInfo_piste_type_name">Tipo de pista</string>
+    <string name="rendering_attr_piste_difficulty_novice_name">Novato</string>
+    <string name="rendering_attr_piste_difficulty_easy_name">Doado</string>
+    <string name="rendering_attr_piste_difficulty_intermediate_name">Intermedio</string>
+    <string name="rendering_attr_piste_difficulty_advanced_name">Avanzado</string>
+    <string name="rendering_attr_piste_difficulty_expert_name">Experto</string>
+    <string name="rendering_attr_piste_difficulty_freeride_name">Estilo libre</string>
+    <string name="rendering_attr_piste_difficulty_extreme_name">Extremo</string>
+    <string name="rendering_attr_piste_difficulty_undefined_name">Indefinido</string>
+    <string name="routeInfo_piste_difficulty_name">Dificuldade da pista</string>
+    <string name="routing_attr_width_name">Límite de largura</string>
+    <string name="routing_attr_width_description">Especifica o límite permitido de largura do vehículo nas rutas.</string>
+    <string name="avoid_in_routing_descr_">Evitar certas rutas e tipos de estradas</string>
 </resources>
