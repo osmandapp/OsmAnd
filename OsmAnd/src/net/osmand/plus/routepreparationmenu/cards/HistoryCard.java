@@ -2,6 +2,7 @@ package net.osmand.plus.routepreparationmenu.cards;
 
 import android.annotation.SuppressLint;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
 import android.support.v7.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -125,5 +126,13 @@ public class HistoryCard extends BaseCard {
 		}
 
 		((TextView) view.findViewById(R.id.gpx_card_title)).setText(R.string.shared_string_history);
+	}
+
+	@Override
+	public void applyState(@NonNull BaseCard card) {
+		super.applyState(card);
+		if (card instanceof HistoryCard) {
+			limit = ((HistoryCard) card).limit;
+		}
 	}
 }

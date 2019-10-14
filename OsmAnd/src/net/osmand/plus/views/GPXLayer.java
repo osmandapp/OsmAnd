@@ -30,7 +30,6 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
@@ -292,8 +291,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 			for (SelectedGpxFile g : selectedGPXFiles) {
 				List<GpxDisplayGroup> groups = g.getDisplayGroups();
 				if (groups != null && !groups.isEmpty()) {
-					GpxDataItem gpxDataItem = view.getApplication().getGpxDatabase().getItem(new File(g.getGpxFile().path));
-					int color = gpxDataItem != null ? gpxDataItem.getColor() : 0;
+					int color = g.getGpxFile().getColor(0);
 					if (color == 0) {
 						color = g.getModifiableGpxFile().getColor(0);
 					}
@@ -437,11 +435,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	private void drawXAxisPoints(Canvas canvas, RotatedTileBox tileBox) {
 		int color = trackChartPoints.getSegmentColor();
 		if (color == 0) {
-			GpxDataItem gpxDataItem = null;
-			if (!trackChartPoints.getGpx().showCurrentTrack) {
-				gpxDataItem = view.getApplication().getGpxDatabase().getItem(new File(trackChartPoints.getGpx().path));
-			}
-			color = gpxDataItem != null ? gpxDataItem.getColor() : 0;
+			color = trackChartPoints.getGpx().getColor(0);
 			if (trackChartPoints.getGpx().showCurrentTrack) {
 				color = currentTrackColor;
 			}
@@ -522,13 +516,9 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 
 	private void drawSelectedFileSegments(SelectedGpxFile selectedGpxFile, boolean currentTrack, Canvas canvas,
 										  RotatedTileBox tileBox, DrawSettings settings) {
-		GpxDataItem gpxDataItem = null;
-		if (!currentTrack) {
-			gpxDataItem = view.getApplication().getGpxDatabase().getItem(new File(selectedGpxFile.getGpxFile().path));
-		}
 		List<TrkSegment> segments = selectedGpxFile.getPointsToDisplay();
 		for (TrkSegment ts : segments) {
-			int color = gpxDataItem != null ? gpxDataItem.getColor() : 0;
+			int color = selectedGpxFile.getGpxFile().getColor(0);
 			if (currentTrack) {
 				color = currentTrackColor;
 			}
