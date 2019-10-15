@@ -83,8 +83,8 @@
     <string name="gps_network_not_enabled">Nun s\'activó\'l serviciu d\'allugamientu. ¿Activalu\?</string>
     <string name="shared_string_wikipedia">Wikipedia</string>
     <string name="local_indexes_cat_wiki">Wikipedia</string>
-    <string name="application_dir_change_warning3">¿Copiar los ficheros d\'OsmAnd al destín nuevu\?</string>
-    <string name="copying_osmand_file_failed">Falló la copia de ficheros</string>
+    <string name="application_dir_change_warning3">¿Mover los ficheros d\'OsmAnd al destín nuevu\?</string>
+    <string name="copying_osmand_file_failed">Fallu al mover los ficheros</string>
     <string name="storage_directory_external">Almacenamientu esternu</string>
     <string name="storage_directory_multiuser">Almacenamientu multiusuariu</string>
     <string name="storage_directory_default">Memoria interna</string>
@@ -100,7 +100,7 @@
     <string name="shared_string_ellipsis">…</string>
     <string name="routing_settings_2">Axustes de la navegación</string>
     <string name="general_settings_2">Axustes xenerales</string>
-    <string name="shared_string_ok">Val</string>
+    <string name="shared_string_ok">Aceutar</string>
     <string name="shared_string_cancel">Encaboxar</string>
     <string name="shared_string_yes">Sí</string>
     <string name="shared_string_do_not_use">Nun usar</string>
@@ -273,7 +273,7 @@
     <string name="lang_ro">Rumanu</string>
     <string name="lang_ru">Rusu</string>
     <string name="lang_sc">Sardu</string>
-    <string name="lang_sr">Serbiu</string>
+    <string name="lang_sr">Serbiu (cirílicu)</string>
     <string name="lang_zh_cn">Chinu simplificáu</string>
     <string name="lang_sk">Eslovacu</string>
     <string name="lang_sl">Eslovenu</string>
@@ -828,7 +828,7 @@
     <string name="ascent_descent">Ascendente/descendente</string>
     <string name="home">Panel</string>
     <string name="always_center_position_on_map">Amosar la posición nel centru siempres</string>
-    <string name="lang_sr_latn">Serbiu llatín</string>
+    <string name="lang_sr_latn">Serbiu (llatín)</string>
     <string name="lang_zh_hk">Chinu (Ḥong Kong)</string>
     <string name="lang_gn_py">Guaraní</string>
     <string name="route_descr_select_destination">Esbilla\'l destín</string>
@@ -1345,7 +1345,7 @@
     <string name="rendering_attr_surface_concrete_name">Formigón</string>
     <string name="rendering_attr_surface_gravel_name">Grava</string>
     <string name="rendering_attr_surface_fine_gravel_name">Grava fino</string>
-    <string name="step_by_step">Pasu a pasu</string>
+    <string name="step_by_step">Xiru a xiru</string>
     <string name="start_search_from_city">Esbillar primero la ciudá</string>
     <string name="modify_the_search_query">Modifica la consulta de gueta.</string>
     <string name="type_city_town">Teclexa una ciudá o villa</string>
@@ -1373,7 +1373,7 @@
     <string name="route_head">De frente</string>
     <string name="app_mode_pedestrian">Andadura</string>
     <string name="routeInfo_surface_name">Superficie</string>
-    <string name="angular_measeurement">Unidaes de midida angular</string>
+    <string name="angular_measeurement">Unidá angular</string>
     <string name="angular_measeurement_descr">Camuda en qué se mide l\'acimut.</string>
     <string name="previous_route">Ruta anterior</string>
     <string name="on_foot">A pie</string>
@@ -1389,4 +1389,15 @@
 \nL\'allugamientu y el tiempu son visibles nel panel d\'OsmAnd amás de nun widget na pantalla del mapa. Pue amestase una alarma al calendariu d\'Android como recordatoriu.</string>
     <string name="localization_pref_title">Traducción</string>
     <string name="plan_route">Planificar una ruta</string>
+    <string name="shared_string_search">Guetar</string>
+    <string name="searching_gps">Guetando GPS</string>
+    <string name="days_2_4">Díes</string>
+    <string name="price_free">De baldre</string>
+    <string name="get_discount_title">Consigui %1$d %2$s con un %3$s de descuentu.</string>
+    <string name="get_discount_first_part">%1$s los primeros %2$s</string>
+    <string name="get_discount_first_few_part">%1$s los primeros %2$s</string>
+    <string name="get_discount_second_part">llueu %1$s</string>
+    <string name="configure_profile_info">Tolos axustes qu\'apaecen darréu afeuten únicamente al perfil escoyíu.</string>
+    <string name="shared_string_example">Exemplu</string>
+    <string name="wake_time">Hora d\'activamientu</string>
 </resources>
