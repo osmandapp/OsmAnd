@@ -631,7 +631,7 @@
     <string name="favorite_delete_multiple">%1$d Sık Kullanılan ve %2$d Sık Kullanılan grubu sileceksiniz. Emin misiniz\?</string>
     <string name="local_index_gpx_info_show">"
 \n
-\nAyarlar için ekrana uzun basın"</string>
+\nAyarlar için uzun basın"</string>
     <string name="local_index_installed">Yerel Versiyon</string>
     <string name="local_index_items_backuped">%1$d/%2$d öge devre dışı bırakıldı.</string>
     <string name="local_index_items_deleted">%1$d/%2$d öge silindi.</string>
