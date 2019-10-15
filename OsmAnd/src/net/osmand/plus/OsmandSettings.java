@@ -1079,7 +1079,6 @@ public class OsmandSettings {
 	public final CommonPreference<Boolean> SHOW_DASHBOARD_ON_START = new BooleanPreference("should_show_dashboard_on_start", false).makeGlobal();
 	public final CommonPreference<Boolean> SHOW_DASHBOARD_ON_MAP_SCREEN = new BooleanPreference("show_dashboard_on_map_screen", false).makeGlobal();
 	public final CommonPreference<Boolean> SHOW_OSMAND_WELCOME_SCREEN = new BooleanPreference("show_osmand_welcome_screen", true).makeGlobal();
-
 	public final CommonPreference<String> API_NAV_DRAWER_ITEMS_JSON = new StringPreference("api_nav_drawer_items_json", "{}").makeGlobal();
 	public final CommonPreference<String> API_CONNECTED_APPS_JSON = new StringPreference("api_connected_apps_json", "[]") {
 		@Override
@@ -2988,10 +2987,8 @@ public class OsmandSettings {
 	}
 
 	{
-		CommonPreference<String> pref = getCustomRenderProperty("appMode");
-		pref.setModeDefaultValue(ApplicationMode.CAR, "car");
-		pref.setModeDefaultValue(ApplicationMode.PEDESTRIAN, "pedestrian");
-		pref.setModeDefaultValue(ApplicationMode.BICYCLE, "bicycle");
+		getCustomRenderProperty("appMode");
+		getCustomRenderProperty("defAppMode");
 	}
 
 	Map<String, CommonPreference<Boolean>> customBooleanRendersProps = new LinkedHashMap<String, OsmandSettings.CommonPreference<Boolean>>();
