@@ -3723,4 +3723,5 @@
     <string name="poi_craft_floorer">Pamentadore</string>
     <string name="poi_craft_bakery">Furru de su pane</string>
     <string name="poi_craft_cabinet_maker">Ebanista</string>
+    <string name="poi_charge">Tarifa</string>
 </resources>
