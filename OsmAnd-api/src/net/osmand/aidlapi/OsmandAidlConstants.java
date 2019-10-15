@@ -27,7 +27,7 @@ public interface OsmandAidlConstants {
 	int TURN_TYPE_TSLR = 6; // turn slightly right
 	int TURN_TYPE_TSHR = 7; // turn sharply right
 	int TURN_TYPE_KL = 8; // keep left
-	int TURN_TYPE_KR = 9; // keep right//$NON-NLS-1$
+	int TURN_TYPE_KR = 9; // keep right
 	int TURN_TYPE_TU = 10; // U-turn
 	int TURN_TYPE_TRU = 11; // Right U-turn
 	int TURN_TYPE_OFFR = 12; // Off route
