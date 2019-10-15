@@ -455,7 +455,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 
 	@Override
 	public int getLogoResourceId() {
-		return R.drawable.ic_action_bug_dark;
+		return R.drawable.ic_action_openstreetmap_logo;
 	}
 
 	@Override
