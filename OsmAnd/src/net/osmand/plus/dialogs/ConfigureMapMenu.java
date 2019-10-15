@@ -1176,6 +1176,7 @@ public class ConfigureMapMenu {
 
 	private boolean isPropertyAccepted(RenderingRuleProperty p) {
 		return !(p.getAttrName().equals(RenderingRuleStorageProperties.A_APP_MODE) ||
+				p.getAttrName().equals(RenderingRuleStorageProperties.A_BASE_APP_MODE) ||
 				p.getAttrName().equals(RenderingRuleStorageProperties.A_ENGINE_V1) ||
 				p.getAttrName().equals(HIKING_ROUTES_OSMC_ATTR) ||
 				p.getAttrName().equals(ROAD_STYLE_ATTR) ||

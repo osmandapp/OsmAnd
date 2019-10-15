@@ -2982,10 +2982,8 @@ public class OsmandSettings {
 	}
 
 	{
-		CommonPreference<String> pref = getCustomRenderProperty("appMode");
-		pref.setModeDefaultValue(ApplicationMode.CAR, "car");
-		pref.setModeDefaultValue(ApplicationMode.PEDESTRIAN, "pedestrian");
-		pref.setModeDefaultValue(ApplicationMode.BICYCLE, "bicycle");
+		getCustomRenderProperty("appMode");
+		getCustomRenderProperty("defAppMode");
 	}
 
 	Map<String, CommonPreference<Boolean>> customBooleanRendersProps = new LinkedHashMap<String, OsmandSettings.CommonPreference<Boolean>>();

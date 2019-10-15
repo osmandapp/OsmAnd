@@ -10,6 +10,7 @@ public class RenderingRuleStorageProperties {
 	public static final String UI_CATEGORY_HIDDEN = "ui_hidden";
 	public static final String A_ENGINE_V1 = "engine_v1";
 	public static final String A_APP_MODE= "appMode";
+	public static final String A_BASE_APP_MODE = "baseAppMode";
 	
 	public static final String A_DEFAULT_COLOR = "defaultColor";
 	public static final String A_SHADOW_RENDERING = "shadowRendering";
