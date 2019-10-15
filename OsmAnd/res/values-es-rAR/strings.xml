@@ -3323,4 +3323,7 @@ Lon %2$s</string>
     <string name="routing_attr_width_name">Límite de anchura</string>
     <string name="routing_attr_width_description">Especifica el límite de anchura del vehículo permitido en rutas.</string>
     <string name="avoid_in_routing_descr_">Evita ciertas rutas y tipos de caminos</string>
+    <string name="app_mode_utv">En paralelo</string>
+    <string name="rendering_attr_piste_difficulty_aerialway_name">Vía aérea</string>
+    <string name="rendering_attr_piste_difficulty_connection_name">Conexión</string>
 </resources>
