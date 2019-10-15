@@ -1738,5 +1738,5 @@
     <string name="poi_seamark_clearance_height_closed">Açıklık yüksekliği (kapalı)</string>
     <string name="poi_seamark_clearance_height_open">Açıklık yüksekliği (açık)</string>
     <string name="poi_seamark_clearance_width">Açıklık genişliği</string>
-    <string name="poi_payment_coins_0_5">0.5 $ madeni para</string>
+    <string name="poi_payment_coins_0_5">0.5$ madeni para</string>
 </resources>
