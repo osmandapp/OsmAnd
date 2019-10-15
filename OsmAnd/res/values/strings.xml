@@ -11,6 +11,8 @@
 	Thx - Hardy
 
 -->
+    <string name="rendering_attr_piste_difficulty_aerialway_name">Aerialway</string>
+    <string name="rendering_attr_piste_difficulty_connection_name">Connection</string>
     <string name="avoid_in_routing_descr_">Avoid certain routes and road types</string>
     <string name="change_data_storage_full_description">Move OsmAnd data files to the new destination?\n%1$s > %2$s</string>
     <string name="data_storage_preference_summary">%1$s  •  Used %2$s GB</string>
