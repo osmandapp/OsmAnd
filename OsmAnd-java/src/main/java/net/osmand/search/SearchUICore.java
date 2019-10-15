@@ -872,9 +872,11 @@ public class SearchUICore {
 			if (st1 != st2) {
 				return Algorithms.compare(st1, st2);
 			}
+			String localeName1 = o1.localeName == null ? "" : o1.localeName;
+			String localeName2 = o2.localeName == null ? "" : o2.localeName;
 			if (o1.parentSearchResult != null && o2.parentSearchResult != null) {
 				if (o1.parentSearchResult == o2.parentSearchResult) {
-					int cmp = collator.compare(o1.localeName, o2.localeName);
+					int cmp = collator.compare(localeName1, localeName2);
 					if (cmp != 0) {
 						return cmp;
 					}
@@ -883,7 +885,7 @@ public class SearchUICore {
 				double s2 = o2.getSearchDistance(loc, 1);
 				return Double.compare(s1, s2);
 			}
-			int cmp = collator.compare(o1.localeName, o2.localeName);
+			int cmp = collator.compare(localeName1, localeName2);
 			if (cmp != 0) {
 				return cmp;
 			}
@@ -893,12 +895,12 @@ public class SearchUICore {
 				Amenity a2 = (Amenity) o2.object;
 				String type1 = a1.getType().getKeyName();
 				String type2 = a2.getType().getKeyName();
-				String subType1 = a1.getSubType();
-				String subType2 = a2.getSubType();
 				cmp = collator.compare(type1, type2);
 				if (cmp != 0) {
 					return cmp;
 				}
+				String subType1 = a1.getSubType() == null ? "" : a1.getSubType();
+				String subType2 = a2.getSubType() == null ? "" : a2.getSubType();
 				cmp = collator.compare(subType1, subType2);
 				if (cmp != 0) {
 					return cmp;

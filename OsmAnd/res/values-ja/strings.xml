@@ -716,7 +716,6 @@ POIの更新は利用できません</string>
     <string name="avoid_unpaved">未舗装の道路を使用しない</string>
     <string name="avoid_ferries">フェリーを使用しない</string>
     <string name="avoid_in_routing_title">使用しない道路の指定…</string>
-    <string name="avoid_in_routing_descr">有料道路、未舗装道路、フェリー等、使用しない経路を設定します</string>
     <string name="map_widget_fluorescent">使用ルートを明滅させる</string>
     <string name="map_widget_show_ruler">距離測定</string>
     <string name="map_widget_view_direction">視線方向</string>

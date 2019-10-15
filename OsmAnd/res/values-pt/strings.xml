@@ -786,7 +786,6 @@
     <string name="avoid_unpaved">Evitar estradas não pavimentadas</string>
     <string name="avoid_ferries">Evite ferries</string>
     <string name="avoid_in_routing_title">Evitar…</string>
-    <string name="avoid_in_routing_descr">Evitar por exemplo estradas com portagem, não pavimentadas, balsas.</string>
     <string name="map_widget_fluorescent">Rotas fluorescentes</string>
     <string name="map_widget_show_ruler">Regua</string>
     <string name="map_widget_view_direction">A direção da visão</string>
@@ -1476,7 +1475,7 @@
     <string name="m_s">m/s</string>
     <string name="shared_string_trip_recording">Gravar viagem</string>
     <string name="shared_string_navigation">Navegação</string>
-    <string name="nm">mni</string>
+    <string name="nm">mn</string>
     <string name="shared_string_update">Atualizar</string>
     <string name="please_specify_poi_type_only_from_list">Por favor especifique o tipo de POI correto ou ignore-o.</string>
     <string name="access_from_map_description">O botão do menu lança o painel de controlo em vez do menu</string>
@@ -2915,7 +2914,7 @@
     <string name="save_poi_value_exceed_length_title">Comprimento do valor de \"%s</string>
     <string name="public_transport_warning_descr_blog">Saiba mais sobre como o OsmAnd calcula as rotas no nosso blogue.</string>
     <string name="public_transport_warning_title">A navegação em transportes públicos está atualmente em testes beta, podem ocorrer erros e imprecisões.</string>
-    <string name="add_intermediate">Adicionar ponto intermédio</string>
+    <string name="add_intermediate">Adicionar ponto intermediário</string>
     <string name="transfers_size">%1$d transbordos</string>
     <string name="add_start_and_end_points">Adicionar pontos de início e fim</string>
     <string name="route_add_start_point">Adicionar ponto de partida</string>
@@ -3320,4 +3319,5 @@
     <string name="routeInfo_piste_difficulty_name">Dificuldade da pista</string>
     <string name="routing_attr_width_name">Limite de largura</string>
     <string name="routing_attr_width_description">Especifique o limite permitido de largura do veículo nas rotas.</string>
+    <string name="avoid_in_routing_descr_">Evitar determinadas categorias de rotas e estradas</string>
 </resources>

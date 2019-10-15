@@ -473,7 +473,6 @@
     <string name="avoid_unpaved">Njewobkrućene puće wobeńć</string>
     <string name="avoid_ferries">Přewozy wobeńć</string>
     <string name="avoid_in_routing_title">Wobeńdź…</string>
-    <string name="avoid_in_routing_descr">Wěsty typy pućow wobeńć.</string>
     <string name="map_widget_show_ruler">Měra</string>
     <string name="map_widget_view_direction">Směr hladanja pokazać</string>
     <string name="bg_service_sleep_mode_off">Słužbu w pozadku\n zapinyć</string>

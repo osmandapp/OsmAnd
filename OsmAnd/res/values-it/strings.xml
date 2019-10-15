@@ -750,7 +750,6 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="avoid_unpaved">Evita le strade non asfaltate</string>
     <string name="avoid_ferries">Evita i traghetti</string>
     <string name="avoid_in_routing_title">Evita…</string>
-    <string name="avoid_in_routing_descr">Evita es. strade a pagamento, sterrate, traghetti.</string>
     <string name="show_warnings_title">Mostra avvisi…</string>
     <string name="show_warnings_descr">Configura gli avvisi sul traffico (limiti velocità, fermate forzate, dossi rallentatori, tunnel), avvisi autovelox e indicazioni di corsia.</string>
     <string name="map_widget_fluorescent">Itinerari fluorescenti</string>
@@ -3253,7 +3252,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="analytics_pref_title">Statistiche</string>
     <string name="turn_screen_on_info">Mostra la mappa durante la navigazione sopra al salvaschermo</string>
     <string name="route_parameters_info">Queste impostazioni riguardano il calcolo del percorso. Verranno applicate solo al profilo: %1$s.</string>
-    <string name="wake_time">Ora di risveglio</string>
+    <string name="wake_time">Tempo di accensione</string>
     <string name="units_and_formats">Unità e formati</string>
     <string name="appearance">Aspetto</string>
     <string name="map_look_descr">Icone, widget</string>

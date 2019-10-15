@@ -1139,7 +1139,6 @@ Sólsetur: %2$s</string>
     <string name="avoid_unpaved">Forðast vegi með óbundnu slitlagi</string>
     <string name="avoid_ferries">Forðast ferjur</string>
     <string name="avoid_in_routing_title">Forðast…</string>
-    <string name="avoid_in_routing_descr">Forðast t.d. gjaldskyldu, óbundið slitlag, ferjur.</string>
     <string name="map_widget_transparent">Gegnsæir viðmótshlutar</string>
     <string name="bg_service_sleep_mode_off">Keyra
  forrit í bakgrunni</string>
@@ -3336,4 +3335,5 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="routeInfo_piste_difficulty_name">Erfiðleikastig brautar</string>
     <string name="routing_attr_width_name">Takmörkun breiddar</string>
     <string name="routing_attr_width_description">Tilgreindu takmörk á breidd farartækja á leiðum.</string>
+    <string name="avoid_in_routing_descr_">Forðast tilteknar leiðir og gerðir af vegum</string>
 </resources>

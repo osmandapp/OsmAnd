@@ -73,7 +73,6 @@
     <string name="avoid_unpaved">Αποφυγή χωματόδρομων</string>
     <string name="avoid_ferries">Αποφυγή πορθμείων</string>
     <string name="avoid_in_routing_title">Αποφυγή…</string>
-    <string name="avoid_in_routing_descr">Αποφυγή π.χ.: διοδίων, χωματόδρομων, πορθμείων.</string>
     <string name="map_widget_fluorescent">Φωτεινές διαδρομές</string>
     <string name="map_widget_show_ruler">Χάρακας</string>
     <string name="map_widget_view_direction">Κατεύθυνση επισκόπησης</string>

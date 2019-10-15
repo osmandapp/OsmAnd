@@ -539,10 +539,6 @@ public class OsmandSettings {
 			return this;
 		}
 
-		public boolean isGlobal() {
-			return global;
-		}
-
 		public CommonPreference<T> cache() {
 			cache = true;
 			return this;
@@ -665,48 +661,46 @@ public class OsmandSettings {
 		@Override
 		public boolean writeToJson(JSONObject json, ApplicationMode appMode) throws JSONException {
 			if (appMode != null) {
-				if (isSetForMode(appMode)) {
-					json.put(getId(), asStringModeValue(appMode));
+				if (!global) {
+					String value = asStringModeValue(appMode);
+					if (value != null) {
+						json.put(getId(), value);
+					}
 					return true;
 				}
 			} else if (global) {
-				if (isSet()) {
-					json.put(getId(), asString());
-					return true;
+				String value = asString();
+				if (value != null) {
+					json.put(getId(), value);
 				}
+				return true;
 			}
 			return false;
 		}
 
 		@Override
 		public void readFromJson(JSONObject json, ApplicationMode appMode) throws JSONException {
-			if (isGlobal()) {
+			if (appMode != null) {
+				if (!global) {
+					String modeValue = json.getString(getId());
+					setModeValue(appMode, parseString(modeValue));
+				}
+			} else if (global) {
 				String globalValue = json.getString(getId());
-				if (globalValue != null) {
-					set(parseString(globalValue));
-				}
-			} else {
-				Object jsonModeValuesObj = json.get(getId());
-				if (jsonModeValuesObj instanceof JSONObject) {
-					JSONObject jsonModeValues = (JSONObject) jsonModeValuesObj;
-					for (ApplicationMode m : ApplicationMode.allPossibleValues()) {
-						String modeValue = jsonModeValues.getString(m.getStringKey());
-						if (modeValue != null) {
-							setModeValue(m, parseString(modeValue));
-						}
-					}
-				}
+				set(parseString(globalValue));
 			}
 		}
 
 		@Override
 		public String asString() {
-			return get().toString();
+			T o = get();
+			return o != null ? o.toString() : null;
 		}
 
 		@Override
 		public String asStringModeValue(ApplicationMode m) {
-			return getModeValue(m).toString();
+			T v = getModeValue(m);
+			return v != null ? v.toString() : null;
 		}
 	}
 

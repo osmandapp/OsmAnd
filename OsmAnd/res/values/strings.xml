@@ -11,6 +11,10 @@
 	Thx - Hardy
 
 -->
+    <string name="app_mode_utv">Side by Side</string>
+    <string name="rendering_attr_piste_difficulty_aerialway_name">Aerialway</string>
+    <string name="rendering_attr_piste_difficulty_connection_name">Connection</string>
+    <string name="avoid_in_routing_descr_">Avoid certain routes and road types</string>
     <string name="change_data_storage_full_description">Move OsmAnd data files to the new destination?\n%1$s > %2$s</string>
     <string name="data_storage_preference_summary">%1$s  •  Used %2$s GB</string>
     <string name="data_storage_space_description">Free %1$s  •  %2$s / %3$s GB</string>
@@ -2396,7 +2400,6 @@
     <string name="avoid_unpaved">Avoid unpaved roads</string>
     <string name="avoid_ferries">Avoid ferries</string>
     <string name="avoid_in_routing_title">Avoid…</string>
-    <string name="avoid_in_routing_descr">Avoid e.g. toll roads, unpaved, ferries.</string>
     <string name="map_widget_fluorescent">Fluorescent routes</string>
     <string name="map_widget_show_ruler">Ruler</string>
     <string name="map_widget_view_direction">Viewing direction</string>

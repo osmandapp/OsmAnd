@@ -772,7 +772,6 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="avoid_unpaved">Éviter les voies non revêtues</string>
     <string name="avoid_ferries">Éviter les ferries</string>
     <string name="avoid_in_routing_title">Éviter</string>
-    <string name="avoid_in_routing_descr">Éviter les routes à péage, les voies non revêtues, les bateaux ferries.</string>
     <string name="show_warnings_title">Alertes visuelles…</string>
     <string name="show_warnings_descr">Paramétrer les avertissements de circulation (limites de vitesse, stops, ralentisseurs, tunnels), les radars et les informations sur les voies de circulation.</string>
     <string name="map_widget_fluorescent">Itinéraires fluorescents</string>
@@ -3291,4 +3290,5 @@ représentant la zone : %1$s x %2$s</string>
     <string name="routing_attr_width_name">Limite de largeur</string>
     <string name="routing_attr_width_description">Indique la limite de largeur autorisée sur les itinéraires.</string>
     <string name="internal_app_storage_description">Stockage interne, masqué à l\'utilisateur ainsi qu\'aux autres applications ce qui signifie que seul OsmAnd peut accéder à vos données</string>
+    <string name="avoid_in_routing_descr_">Éviter certains types de route</string>
 </resources>

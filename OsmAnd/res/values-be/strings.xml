@@ -294,7 +294,6 @@
     <string name="avoid_unpaved">Пазбягаць дарог без пакрыцця</string>
     <string name="avoid_ferries">Пазбягаць паромаў</string>
     <string name="avoid_in_routing_title">Пазбягаць…</string>
-    <string name="avoid_in_routing_descr">Пазбягаць, напрыклад, платных і дарог без пакрыцця, паромаў.</string>
     <string name="map_widget_fluorescent">Люмінесцэнтныя маршруты</string>
     <string name="map_widget_show_ruler">Лінейка</string>
     <string name="map_widget_view_direction">Накірунак погляду</string>

@@ -769,7 +769,6 @@ Proporcionális memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</str
     <string name="bg_service_sleep_mode_off">Futtatás\n háttérben</string>
     <string name="bg_service_sleep_mode_on">Háttérben futás\n leállítása</string>
     <string name="avoid_in_routing_title">Elkerülés…</string>
-    <string name="avoid_in_routing_descr">Például fizetős utak, kompok, földutak elkerülése.</string>
     <string name="show_warnings_title">Figyelmeztetések megjelenítése…</string>
     <string name="show_warnings_descr">Közlekedési figyelmeztetések (sebességkorlátozás, közúti ellenőrzés, fekvőrendőr, alagút), traffipaxriasztás és sávinformációk.</string>
     <string name="map_widget_fluorescent">Élénk színű utak</string>

@@ -108,7 +108,6 @@
     <string name="avoid_unpaved">Izbjegavaj neasfaltirane ceste</string>
     <string name="avoid_ferries">Izbjegavaj trajekte</string>
     <string name="avoid_in_routing_title">Izbjegavati…</string>
-    <string name="avoid_in_routing_descr">Izbjegavaj ceste s naplatom cestarine, neasfaltirane ceste, trajekte</string>
     <string name="map_widget_view_direction">Smjer kretanja</string>
     <string name="map_widget_transparent">Transparentna tema</string>
     <string name="bg_service_sleep_mode_off">Omogući\n stanje mirovanja</string>

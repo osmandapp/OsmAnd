@@ -1103,7 +1103,6 @@
     <string name="avoid_unpaved">Избегать проселочных дорог</string>
     <string name="avoid_ferries">Избегать паромов</string>
     <string name="avoid_in_routing_title">Избегать при прокладке маршрута…</string>
-    <string name="avoid_in_routing_descr">Избегать платных и проселочных дорог, паромов.</string>
     <string name="show_warnings_descr">Настройка оповещений (ограничения скорости, вынужденные остановки, искусственные неровности, тоннели), камеры скорости, информацию о полосах.</string>
     <string name="map_widget_fluorescent">Флуоресцентные маршруты</string>
     <string name="show_warnings_title">Показывать сигналы…</string>

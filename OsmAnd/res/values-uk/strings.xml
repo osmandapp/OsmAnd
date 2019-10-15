@@ -904,7 +904,6 @@
     <string name="avoid_unpaved">Уникати польових доріг</string>
     <string name="avoid_ferries">Уникати поромів</string>
     <string name="avoid_in_routing_title">Уникати…</string>
-    <string name="avoid_in_routing_descr">Уникати, наприклад, платні дороги, дороги без покриття, пороми.</string>
     <string name="map_widget_fluorescent">Флуоресцентні маршрути</string>
     <string name="map_widget_show_ruler">Лінійка</string>
     <string name="map_widget_transparent">Прозорі віджети</string>

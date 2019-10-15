@@ -64,7 +64,6 @@
     <string name="avoid_unpaved">המנעות מדרכים שאינן סלולות</string>
     <string name="avoid_ferries">המנעות ממעבורות</string>
     <string name="avoid_in_routing_title">המנעות…</string>
-    <string name="avoid_in_routing_descr">הימנעות מכבישי אגרה, בלתי סלולים ומעבורות למשל.</string>
     <string name="map_widget_show_ruler">סרגל</string>
     <string name="map_widget_view_direction">כיוון הצפייה</string>
     <string name="map_widget_transparent">וידג׳טים שקופים</string>
@@ -3309,4 +3308,5 @@
     <string name="routeInfo_piste_difficulty_name">דרגת קושי מסלול</string>
     <string name="routing_attr_width_name">מגבלת רוחב</string>
     <string name="routing_attr_width_description">ציון מגבלת רוחב מכונית אפשרי בנתיבים.</string>
+    <string name="avoid_in_routing_descr_">הימנעות מסוגים מסוימים של מסלולים וכבישים</string>
 </resources>
