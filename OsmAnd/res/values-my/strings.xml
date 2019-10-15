@@ -110,7 +110,7 @@
     <string name="utm_format_descr">OsmAnd သည် UTM Standard format ကိုအသုံးပြုသည် UTM Nato format နှင့်ဆင်တူသော်လည်းမတူပါ။</string>
     <string name="navigate_point_format_utm">UTM စံသတ်မှတ်ချက်</string>
     <string name="coordinates_format_info">ရွေးချယ်ထားသည့်ပုံစံသည် application နေရာအားလုံးသို့သက်ရောက်လိမ့်မည်။</string>
-    <string name="pref_selected_by_default_for_profiles">ဤသတ်မှတ်ချက်ကိုပရိုဖိုင်း % s အတွက်ပုံမှန်အားဖြင့်ရွေးထားသည်</string>
+    <string name="pref_selected_by_default_for_profiles">ဤသတ်မှတ်ချက်ကိုပရိုဖိုင်း %s အတွက်ပုံမှန်အားဖြင့်ရွေးထားသည်</string>
     <string name="apply_to_current_profile">လက်ရှိပရိုဖိုင်း %1$s ကိုပြုပြင်မြည်</string>
     <string name="apply_to_all_profiles">ပရိုဖိုင်းအားလုံးကိုပြောင်းလဲမည်</string>
     <string name="start_up_message_pref">စစခြင်းမက်ဆေ့ခ်ျ</string>
