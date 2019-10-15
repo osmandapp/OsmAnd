@@ -3329,4 +3329,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="routing_attr_width_name">Breddegrænse</string>
     <string name="routing_attr_width_description">Angiv tilladt køretøjsbredde på ruter.</string>
     <string name="avoid_in_routing_descr_">Undgå visse ruter og vejtyper</string>
+    <string name="app_mode_utv">Side om side</string>
+    <string name="rendering_attr_piste_difficulty_aerialway_name">Lift</string>
+    <string name="rendering_attr_piste_difficulty_connection_name">Forbindelse</string>
 </resources>
