@@ -37,6 +37,14 @@ public class OnVoiceNavigationParams implements Parcelable {
 		}
 	};
 
+	public List<String> getCommands() {
+		return cmds;
+	}
+
+	public List<String> getPlayed() {
+		return played;
+	}
+
 	@Override
 	public void writeToParcel(Parcel out, int flags) {
 		out.writeStringList(cmds);

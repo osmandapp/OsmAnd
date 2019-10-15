@@ -16,13 +16,6 @@ import android.widget.ArrayAdapter;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.aidl.OsmandAidlApi;
-import net.osmand.aidl.customization.CustomizationInfoParams;
-import net.osmand.aidl.customization.OsmandSettingsParams;
-import net.osmand.aidl.customization.SetWidgetsParams;
-import net.osmand.aidl.navdrawer.NavDrawerFooterParams;
-import net.osmand.aidl.navdrawer.NavDrawerHeaderParams;
-import net.osmand.aidl.navdrawer.SetNavDrawerItemsParams;
-import net.osmand.aidl.plugins.PluginParams;
 import net.osmand.data.LocationPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.PluginsActivity;
@@ -52,7 +45,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import static net.osmand.plus.OsmAndCustomizationConstants.DRAWER_ITEM_ID_SCHEME;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_ITEM_ID_SCHEME;
 
 public class OsmAndAppCustomization {
 
@@ -63,7 +56,10 @@ public class OsmAndAppCustomization {
 
 	private Bitmap navDrawerLogo;
 	private ArrayList<String> navDrawerParams;
-	private NavDrawerFooterParams navDrawerFooterParams;
+
+	private String navDrawerFooterIntent;
+	private String navDrawerFooterAppName;
+	private String navDrawerFooterPackageName;
 
 	private Set<String> featuresEnabledIds = new HashSet<>();
 	private Set<String> featuresDisabledIds = new HashSet<>();
@@ -253,13 +249,15 @@ public class OsmAndAppCustomization {
 		return true;
 	}
 
-	public boolean setNavDrawerFooterParams(NavDrawerFooterParams params) {
-		navDrawerFooterParams = params;
+	public boolean setNavDrawerFooterParams(String uri, @Nullable String packageName, @Nullable String intent) {
+		navDrawerFooterAppName = uri;
+		navDrawerFooterIntent = intent;
+		navDrawerFooterPackageName = packageName;
 		return true;
 	}
 
-	public NavDrawerFooterParams getNavFooterParams() {
-		return navDrawerFooterParams;
+	public String getNavFooterAppName() {
+		return navDrawerFooterAppName;
 	}
 
 	public void setFeaturesEnabledIds(@NonNull Collection<String> ids) {
@@ -300,89 +298,6 @@ public class OsmAndAppCustomization {
 		return set;
 	}
 
-	public void regWidgetsVisibility(@NonNull ArrayList<SetWidgetsParams> visibilityWidgetsParams) {
-		for (SetWidgetsParams setWidgetsParams : visibilityWidgetsParams) {
-			regWidgetVisibility(setWidgetsParams.getWidgetKey(), setWidgetsParams.getAppModesKeys());
-		}
-	}
-
-	public void regWidgetsAvailability(@NonNull ArrayList<SetWidgetsParams> availabilityWidgetsParams) {
-		for (SetWidgetsParams setWidgetsParams : availabilityWidgetsParams) {
-			regWidgetAvailability(setWidgetsParams.getWidgetKey(), setWidgetsParams.getAppModesKeys());
-		}
-	}
-
-	public void setCustomization(CustomizationInfoParams params) {
-		OsmandSettingsParams settingsParams = params.getSettingsParams();
-		if (settingsParams != null) {
-			customizeOsmandSettings(settingsParams.getSharedPreferencesName(), settingsParams.getBundle());
-		}
-		NavDrawerHeaderParams navDrawerHeaderParams = params.getNavDrawerHeaderParams();
-		NavDrawerFooterParams navDrawerFooterParams = params.getNavDrawerFooterParams();
-		SetNavDrawerItemsParams navDrawerItemsParams = params.getNavDrawerItemsParams();
-
-		setNavDrawerParams(navDrawerHeaderParams, navDrawerFooterParams, navDrawerItemsParams);
-
-		ArrayList<SetWidgetsParams> visibilityWidgetsParams = params.getVisibilityWidgetsParams();
-		ArrayList<SetWidgetsParams> availabilityWidgetsParams = params.getAvailabilityWidgetsParams();
-
-		setWidgetsParams(visibilityWidgetsParams, availabilityWidgetsParams);
-
-		ArrayList<PluginParams> pluginsParams = params.getPluginsParams();
-		if (pluginsParams != null) {
-			changePluginsStatus(pluginsParams);
-		}
-
-		List<String> enabledIds = params.getFeaturesEnabledIds();
-		List<String> disabledIds = params.getFeaturesDisabledIds();
-
-		setFeaturesIds(enabledIds, disabledIds);
-
-		List<String> enabledPatterns = params.getFeaturesEnabledPatterns();
-		List<String> disabledPatterns = params.getFeaturesDisabledPatterns();
-
-		setFeaturesPatterns(enabledPatterns, disabledPatterns);
-	}
-
-	public void setNavDrawerParams(NavDrawerHeaderParams navDrawerHeaderParams, NavDrawerFooterParams navDrawerFooterParams, SetNavDrawerItemsParams navDrawerItemsParams) {
-		if (navDrawerHeaderParams != null) {
-			setNavDrawerLogoWithParams(navDrawerHeaderParams.getImageUri(), navDrawerHeaderParams.getPackageName(), navDrawerHeaderParams.getIntent());
-		}
-		if (navDrawerFooterParams != null) {
-			setNavDrawerFooterParams(navDrawerFooterParams);
-		}
-		if (navDrawerItemsParams != null) {
-			setNavDrawerItems(navDrawerItemsParams.getAppPackage(), navDrawerItemsParams.getItems());
-		}
-	}
-
-	public void setWidgetsParams(ArrayList<SetWidgetsParams> visibilityWidgetsParams, ArrayList<SetWidgetsParams> availabilityWidgetsParams) {
-		if (visibilityWidgetsParams != null) {
-			regWidgetsVisibility(visibilityWidgetsParams);
-		}
-		if (availabilityWidgetsParams != null) {
-			regWidgetsAvailability(availabilityWidgetsParams);
-		}
-	}
-
-	public void setFeaturesIds(List<String> enabledIds, List<String> disabledIds) {
-		if (enabledIds != null) {
-			setFeaturesEnabledIds(enabledIds);
-		}
-		if (disabledIds != null) {
-			setFeaturesDisabledIds(disabledIds);
-		}
-	}
-
-	public void setFeaturesPatterns(List<String> enabledPatterns, List<String> disabledPatterns) {
-		if (enabledPatterns != null) {
-			setFeaturesEnabledPatterns(enabledPatterns);
-		}
-		if (disabledPatterns != null) {
-			setFeaturesDisabledPatterns(disabledPatterns);
-		}
-	}
-
 	public boolean isWidgetVisible(@NonNull String key, ApplicationMode appMode) {
 		Set<ApplicationMode> set = widgetsVisibilityMap.get(key);
 		if (set == null) {
@@ -404,25 +319,19 @@ public class OsmAndAppCustomization {
 		return setNavDrawerLogo(imageUri, packageName, intent);
 	}
 
-	public void changePluginsStatus(List<PluginParams> pluginsParams) {
-		for (PluginParams pluginParams : pluginsParams) {
-			changePluginStatus(pluginParams);
-		}
-	}
-
-	public boolean changePluginStatus(PluginParams params) {
-		if (params.getNewState() == 0) {
+	public boolean changePluginStatus(String pluginId, int newState) {
+		if (newState == 0) {
 			for (OsmandPlugin plugin : OsmandPlugin.getEnabledPlugins()) {
-				if (plugin.getId().equals(params.getPluginId())) {
+				if (plugin.getId().equals(pluginId)) {
 					OsmandPlugin.enablePlugin(null, app, plugin, false);
 				}
 			}
 			return true;
 		}
 
-		if (params.getNewState() == 1) {
+		if (newState == 1) {
 			for (OsmandPlugin plugin : OsmandPlugin.getAvailablePlugins()) {
-				if (plugin.getId().equals(params.getPluginId())) {
+				if (plugin.getId().equals(pluginId)) {
 					OsmandPlugin.enablePlugin(null, app, plugin, true);
 				}
 			}
@@ -432,7 +341,7 @@ public class OsmAndAppCustomization {
 		return false;
 	}
 
-	public boolean setNavDrawerItems(String appPackage, List<net.osmand.aidl.navdrawer.NavDrawerItem> items) {
+	public boolean setNavDrawerItems(String appPackage, List<NavDrawerItem> items) {
 		if (!TextUtils.isEmpty(appPackage) && items != null) {
 			clearNavDrawerItems(appPackage);
 			if (items.isEmpty()) {
@@ -441,11 +350,9 @@ public class OsmAndAppCustomization {
 			List<NavDrawerItem> newItems = new ArrayList<>(MAX_NAV_DRAWER_ITEMS_PER_APP);
 			boolean success = true;
 			for (int i = 0; i < items.size() && i <= MAX_NAV_DRAWER_ITEMS_PER_APP; i++) {
-				net.osmand.aidl.navdrawer.NavDrawerItem item = items.get(i);
-				String name = item.getName();
-				String uri = item.getUri();
-				if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(uri)) {
-					newItems.add(new NavDrawerItem(name, uri, item.getIconName(), item.getFlags()));
+				NavDrawerItem item = items.get(i);
+				if (!TextUtils.isEmpty(item.name) && !TextUtils.isEmpty(item.uri)) {
+					newItems.add(item);
 				} else {
 					success = false;
 					break;
@@ -654,7 +561,7 @@ public class OsmAndAppCustomization {
 		this.listeners.remove(listener);
 	}
 
-	private static class NavDrawerItem {
+	public static class NavDrawerItem {
 
 		static final String NAME_KEY = "name";
 		static final String URI_KEY = "uri";
@@ -666,7 +573,7 @@ public class OsmAndAppCustomization {
 		private String iconName;
 		private int flags;
 
-		NavDrawerItem(String name, String uri, String iconName, int flags) {
+		public NavDrawerItem(String name, String uri, String iconName, int flags) {
 			this.name = name;
 			this.uri = uri;
 			this.iconName = iconName;

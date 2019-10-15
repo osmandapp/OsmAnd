@@ -9,7 +9,6 @@ import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
@@ -52,7 +51,6 @@ import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
-import net.osmand.plus.routepreparationmenu.ChooseRouteFragment;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu.PointType;
 import net.osmand.plus.routing.RoutingHelper;
@@ -65,14 +63,14 @@ import java.util.List;
 
 import gnu.trove.list.array.TIntArrayList;
 
-import static net.osmand.plus.OsmAndCustomizationConstants.BACK_TO_LOC_HUD_ID;
-import static net.osmand.plus.OsmAndCustomizationConstants.COMPASS_HUD_ID;
-import static net.osmand.plus.OsmAndCustomizationConstants.LAYERS_HUD_ID;
-import static net.osmand.plus.OsmAndCustomizationConstants.MENU_HUD_ID;
-import static net.osmand.plus.OsmAndCustomizationConstants.QUICK_SEARCH_HUD_ID;
-import static net.osmand.plus.OsmAndCustomizationConstants.ROUTE_PLANNING_HUD_ID;
-import static net.osmand.plus.OsmAndCustomizationConstants.ZOOM_IN_HUD_ID;
-import static net.osmand.plus.OsmAndCustomizationConstants.ZOOM_OUT_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.BACK_TO_LOC_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.COMPASS_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.LAYERS_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MENU_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.QUICK_SEARCH_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.ROUTE_PLANNING_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_IN_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_OUT_HUD_ID;
 
 public class MapControlsLayer extends OsmandMapLayer {
 

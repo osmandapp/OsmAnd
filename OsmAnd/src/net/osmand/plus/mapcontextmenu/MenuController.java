@@ -2,9 +2,7 @@ package net.osmand.plus.mapcontextmenu;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.StateListDrawable;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
@@ -17,13 +15,11 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
 
-import java.util.Map;
-import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.PlatformUtil;
-import net.osmand.aidl.maplayer.point.AMapPoint;
+import net.osmand.aidl.AidlMapPointWrapper;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.binary.RouteDataObject;
@@ -211,8 +207,8 @@ public abstract class MenuController extends BaseMenuController implements Colla
 				menuController = new TransportRouteController(mapActivity, pointDescription, (TransportStopRoute) object);
 			} else if (object instanceof TransportStop) {
 				menuController = new TransportStopController(mapActivity, pointDescription, (TransportStop) object);
-			} else if (object instanceof AMapPoint) {
-				menuController = new AMapPointMenuController(mapActivity, pointDescription, (AMapPoint) object);
+			} else if (object instanceof AidlMapPointWrapper) {
+				menuController = new AMapPointMenuController(mapActivity, pointDescription, (AidlMapPointWrapper) object);
 			} else if (object instanceof LatLon) {
 				if (pointDescription.isParking()) {
 					menuController = new ParkingPositionMenuController(mapActivity, pointDescription);

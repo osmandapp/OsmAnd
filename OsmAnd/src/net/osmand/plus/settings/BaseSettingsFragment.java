@@ -60,7 +60,7 @@ import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
-import static net.osmand.plus.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
 
 public abstract class BaseSettingsFragment extends PreferenceFragmentCompat implements OnPreferenceChangeListener,
 		OnPreferenceClickListener, AppModeChangedListener {
