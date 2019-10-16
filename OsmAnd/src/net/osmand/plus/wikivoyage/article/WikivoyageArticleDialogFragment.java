@@ -92,8 +92,9 @@ public class WikivoyageArticleDialogFragment extends WikiArticleBaseDialogFragme
 
 		setupToolbar((Toolbar) mainView.findViewById(R.id.toolbar));
 
+		int appBarTextColor = nightMode ? R.color.wikivoyage_app_bar_text_dark : R.color.wikivoyage_app_bar_text_light;
 		articleToolbarText = (TextView) mainView.findViewById(R.id.article_toolbar_text);
-		articleToolbarText.setTextColor(ContextCompat.getColor(getContext(), R.color.text_color_primary_dark));
+		articleToolbarText.setTextColor(ContextCompat.getColor(getContext(), appBarTextColor));
 		ColorStateList selectedLangColorStateList = AndroidUtils.createPressedColorStateList(
 				getContext(), nightMode,
 				R.color.icon_color_default_light, R.color.wikivoyage_active_light,
