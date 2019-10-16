@@ -337,6 +337,7 @@ public class DataStorageItemsHolder implements Parcelable {
 					if (!matched) {
 						otherMemory.addBytes(f.length());
 					}
+					publishProgress();
 				}
 			}
 		}
@@ -369,6 +370,7 @@ public class DataStorageItemsHolder implements Parcelable {
 						} else {
 							otherMemory.addBytes(file.length());
 						}
+						publishProgress();
 					}
 				}
 			}
