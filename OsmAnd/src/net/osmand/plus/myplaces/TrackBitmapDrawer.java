@@ -158,6 +158,7 @@ public class TrackBitmapDrawer {
 					.setLocation(clat, clon)
 					.setZoom(15)
 					.density(density)
+					.setMapDensity(density)
 					.setPixelDimensions(widthPixels, heightPixels, 0.5f, 0.5f);
 
 			rotatedTileBox = boxBuilder.build();
