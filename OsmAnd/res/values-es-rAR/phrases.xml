@@ -3732,4 +3732,5 @@
     <string name="poi_craft_floorer">Constructor de pisos</string>
     <string name="poi_craft_bakery">Taller de panadería</string>
     <string name="poi_craft_cabinet_maker">Ebanista</string>
+    <string name="poi_charge">Cargo</string>
 </resources>

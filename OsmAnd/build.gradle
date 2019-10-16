@@ -433,6 +433,7 @@ task appStart(type: Exec) {
 
 dependencies {
 	implementation project(path: ':OsmAnd-java', configuration: 'android')
+	implementation project(':OsmAnd-api')
 	implementation 'com.android.support:multidex:1.0.1'
 	implementation 'com.android.support:gridlayout-v7:27.1.1'
 	implementation 'com.android.support:cardview-v7:27.1.1'

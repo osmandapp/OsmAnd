@@ -294,7 +294,6 @@
     <string name="avoid_unpaved">Пазбягаць дарог без пакрыцця</string>
     <string name="avoid_ferries">Пазбягаць паромаў</string>
     <string name="avoid_in_routing_title">Пазбягаць…</string>
-    <string name="avoid_in_routing_descr">Пазбягаць, напрыклад, платных і дарог без пакрыцця, паромаў.</string>
     <string name="map_widget_fluorescent">Люмінесцэнтныя маршруты</string>
     <string name="map_widget_show_ruler">Лінейка</string>
     <string name="map_widget_view_direction">Накірунак погляду</string>
@@ -3289,4 +3288,10 @@
     <string name="route_parameters_descr">Наладзіць параметры маршруту</string>
     <string name="route_parameters">Параметры маршруту</string>
     <string name="shared_string_by_default">Прадвызначана</string>
+    <string name="change_data_storage_full_description">Перамясціць файлы даных OsmAnd у новае месца\?
+\n%1$s &gt; %2$s</string>
+    <string name="data_storage_preference_summary">%1$s • выкарыстоўваецца %2$s Гб</string>
+    <string name="data_storage_space_description">Вольна %1$s • %2$s / %3$s Гб</string>
+    <string name="enter_path_to_folder">Увядзіце шлях да каталога</string>
+    <string name="shared_string_select_folder">Абраць каталог</string>
 </resources>

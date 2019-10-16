@@ -1103,7 +1103,6 @@ Lon: %2$s</string>
     <string name="avoid_unpaved">Eviti tervojojn</string>
     <string name="avoid_ferries">Eviti pramojn</string>
     <string name="avoid_in_routing_title">Eviti…</string>
-    <string name="avoid_in_routing_descr">Eviti ekz. pagendajn vojojn, tervojojn, pramojn.</string>
     <string name="map_widget_fluorescent">Rebrilaj kursoj</string>
     <string name="map_widget_view_direction">Viddirekto</string>
     <string name="map_widget_transparent">Diafanaj fenestraĵoj</string>
@@ -3241,7 +3240,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="wake_time">Tempo de irado</string>
     <string name="units_and_formats">Unuoj kaj formoj</string>
     <string name="appearance">Aspekto</string>
-    <string name="map_look_descr">Emblemoj, fenestraĵoj</string>
+    <string name="map_look_descr">Alĝustigi mapon</string>
     <string name="map_look">Map‑aspekto</string>
     <string name="list_of_installed_plugins">Listo de instalitaj kromprogramoj</string>
     <string name="configure_navigation">Alĝustigi navigadon</string>
@@ -3272,4 +3271,37 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="logcat_buffer">Bufro logcat</string>
     <string name="plugins_settings">Agordoj pri kromprogramo</string>
     <string name="shared_string_by_default">Implicite</string>
+    <string name="download_detailed_map">Elŝutu la detalan mapon %s, por vidi tiun ĉi areon.</string>
+    <string name="change_data_storage_full_description">Ĉu movi datum‑dosierojn OsmAnd al la nova loko\?
+\n%1$s → %2$s</string>
+    <string name="data_storage_preference_summary">%1$s • uzita: %2$s GB</string>
+    <string name="data_storage_space_description">Libera: %1$s • %2$s / %3$s GB</string>
+    <string name="enter_path_to_folder">Entajpu dosier‑indikon</string>
+    <string name="shared_string_select_folder">Elektu dosierujon</string>
+    <string name="paste_Osmand_data_folder_path">Algluu dosier‑indikon por dosierujo de OsmAnd‑datumoj</string>
+    <string name="change_osmand_data_folder_question">Ĉu ŝanĝi datum‑dosierujon OsmAnd\?</string>
+    <string name="move_maps_to_new_destination">Movi al la nova loko</string>
+    <string name="internal_app_storage_description">Interna konservejo, kaŝita de uzanto kaj de aliaj aplikaĵoj, do nur OsmAnd povas aliri viajn datumojn</string>
+    <string name="change_data_storage_folder">Ŝanĝi dosierujon por konservi datumojn</string>
+    <string name="rendering_attr_piste_type_snow_park_name">neĝ‑parko</string>
+    <string name="rendering_attr_piste_type_sleigh_name">glitveturado (tirata de hundoj)</string>
+    <string name="rendering_attr_piste_type_sled_name">glitveturado (motora)</string>
+    <string name="rendering_attr_piste_type_hike_name">marŝado</string>
+    <string name="rendering_attr_piste_type_connection_name">konekto</string>
+    <string name="rendering_attr_piste_type_skitour_name">ski‑ekskurso</string>
+    <string name="rendering_attr_piste_type_downhill_name">alpa (malsuprenira)</string>
+    <string name="rendering_attr_piste_type_nordic_name">nordia (skikurada)</string>
+    <string name="routeInfo_piste_type_name">Speco de skivojo</string>
+    <string name="rendering_attr_piste_difficulty_novice_name">facilega (por novuloj)</string>
+    <string name="rendering_attr_piste_difficulty_easy_name">facila</string>
+    <string name="rendering_attr_piste_difficulty_intermediate_name">meza</string>
+    <string name="rendering_attr_piste_difficulty_advanced_name">malfacila</string>
+    <string name="rendering_attr_piste_difficulty_expert_name">malfacilega</string>
+    <string name="rendering_attr_piste_difficulty_freeride_name">tre malfacilega</string>
+    <string name="rendering_attr_piste_difficulty_extreme_name">ekstrema</string>
+    <string name="rendering_attr_piste_difficulty_undefined_name">nedifinita</string>
+    <string name="routeInfo_piste_difficulty_name">Facilo de skivojo</string>
+    <string name="routing_attr_width_name">Limigo de larĝo</string>
+    <string name="routing_attr_width_description">Difini permesatan limigon de larĝo de veturilo.</string>
+    <string name="avoid_in_routing_descr_">Eviti difinitajn kursojn kaj specojn de vojoj</string>
 </resources>

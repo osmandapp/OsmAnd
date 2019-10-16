@@ -39,7 +39,7 @@ import java.text.MessageFormat;
 import java.util.List;
 
 import static android.content.Intent.ACTION_VIEW;
-import static net.osmand.plus.OsmAndCustomizationConstants.MAPILLARY;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAPILLARY;
 
 public class MapillaryPlugin extends OsmandPlugin {
 	public static final String ID = "osmand.mapillary";

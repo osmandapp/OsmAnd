@@ -10,9 +10,10 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Pair;
 
-import net.osmand.aidl.contextmenu.AContextMenuButton;
-import net.osmand.aidl.contextmenu.ContextMenuButtonsParams;
-import net.osmand.aidl.maplayer.point.AMapPoint;
+import net.osmand.aidl.AidlContextMenuButtonWrapper;
+import net.osmand.aidl.AidlContextMenuButtonsWrapper;
+import net.osmand.aidl.AidlMapPointWrapper;
+import net.osmand.aidlapi.maplayer.point.AMapPoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmAndFormatter;
@@ -24,7 +25,6 @@ import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.widgets.tools.CropCircleTransformation;
 import net.osmand.util.Algorithms;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,19 +35,19 @@ public class AMapPointMenuController extends MenuController {
 	private static final float NO_VALUE = -1;
 	private static final int NO_ICON = 0;
 
-	private AMapPoint point;
+	private AidlMapPointWrapper point;
 
 	private Drawable pointDrawable;
 
-	public AMapPointMenuController(@NonNull MapActivity mapActivity, @NonNull PointDescription pointDescription, @NonNull final AMapPoint point) {
+	public AMapPointMenuController(@NonNull MapActivity mapActivity, @NonNull PointDescription pointDescription, @NonNull final AidlMapPointWrapper point) {
 		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
 		this.point = point;
 		pointDrawable = getPointDrawable();
 		final OsmandApplication app = mapActivity.getMyApplication();
-		Map<String, ContextMenuButtonsParams> buttonsParamsMap = app.getAidlApi().getContextMenuButtonsParams();
+		Map<String, AidlContextMenuButtonsWrapper> buttonsParamsMap = app.getAidlApi().getContextMenuButtonsParams();
 		if (!buttonsParamsMap.isEmpty()) {
 			additionalButtonsControllers = new ArrayList<>();
-			for (ContextMenuButtonsParams buttonsParams : buttonsParamsMap.values()) {
+			for (AidlContextMenuButtonsWrapper buttonsParams : buttonsParamsMap.values()) {
 				List<String> pointsIds = buttonsParams.getPointsIds();
 				if (((pointsIds == null || pointsIds.isEmpty()) || pointsIds.contains(point.getId())) || buttonsParams.getLayerId().equals(point.getLayerId())) {
 					long callbackId = buttonsParams.getCallbackId();
@@ -61,8 +61,8 @@ public class AMapPointMenuController extends MenuController {
 
 	@Override
 	protected void setObject(Object object) {
-		if (object instanceof AMapPoint) {
-			this.point = (AMapPoint) object;
+		if (object instanceof AidlMapPointWrapper) {
+			this.point = (AidlMapPointWrapper) object;
 		}
 	}
 
@@ -179,7 +179,7 @@ public class AMapPointMenuController extends MenuController {
 		return false;
 	}
 
-	private TitleButtonController createAdditionButtonController(final AContextMenuButton contextMenuButton, final long callbackId) {
+	private TitleButtonController createAdditionButtonController(final AidlContextMenuButtonWrapper contextMenuButton, final long callbackId) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity == null || contextMenuButton == null) {
 			return null;

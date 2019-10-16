@@ -117,7 +117,11 @@ public class OpeningHoursParserTest {
 		try {
 			Locale.setDefault(Locale.forLanguageTag("en-US"));
 
-			OpeningHours hours = parseOpenedHours("2019 Apr 1 - 2020 Apr 1");
+			OpeningHours hours = parseOpenedHours("Mo-Fr 08:00-12:30, Mo-We 12:30-16:30 \"Sur rendez-vous\", Fr 12:30-15:30 \"Sur rendez-vous\"");
+			System.out.println(hours);
+			testInfo("13.10.2019 18:00", hours, "Will open tomorrow at 08:00");
+
+			hours = parseOpenedHours("2019 Apr 1 - 2020 Apr 1");
 			System.out.println(hours);
 			testOpened("01.04.2018 15:00", hours, false);
 			testOpened("01.04.2019 15:00", hours, true);

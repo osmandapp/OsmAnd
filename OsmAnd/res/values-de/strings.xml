@@ -928,7 +928,6 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
     <string name="avoid_unpaved">Unbefestigte Wege vermeiden</string>
     <string name="avoid_ferries">Fähren vermeiden</string>
     <string name="avoid_in_routing_title">Vermeiden von …</string>
-    <string name="avoid_in_routing_descr">Mautstraßen, unbefestigte Straßen, Fähren, usw. vermeiden.</string>
     <string name="map_widget_fluorescent">Routen in Leuchtfarbe</string>
     <string name="map_widget_show_ruler">Maßstab</string>
     <string name="map_widget_view_direction">Blickrichtung einblenden</string>
@@ -3263,7 +3262,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="wake_time">Aufwachzeit</string>
     <string name="units_and_formats">Einheiten und Formate</string>
     <string name="appearance">Aussehen</string>
-    <string name="map_look_descr">Symbole, Widgets</string>
+    <string name="map_look_descr">Kartendarstellung</string>
     <string name="map_look">Kartendarstellung</string>
     <string name="list_of_installed_plugins">Liste installierter Module</string>
     <string name="configure_navigation">Navigation konfigurieren</string>
@@ -3297,4 +3296,37 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="plugins_settings">Plugin-Einstellungen</string>
     <string name="shared_string_by_default">Standardmäßig</string>
     <string name="download_detaile_map">"Detaillierte Karte %s  herunterladen, um diesen Bereich zu sehen."</string>
+    <string name="download_detailed_map">Laden Sie die detaillierte %s-Karte herunter, um diesen Bereich zu sehen.</string>
+    <string name="change_data_storage_full_description">OsmAnd-Datendateien an das neue Ziel verschieben\?
+\n%1 s &gt; %2 s</string>
+    <string name="data_storage_preference_summary">%1$s • Verwendet %2$s GB</string>
+    <string name="data_storage_space_description">Frei %1$s • %2$s / %3$s GB</string>
+    <string name="enter_path_to_folder">Geben Sie den Pfad zum Ordner ein</string>
+    <string name="shared_string_select_folder">Ordner auswählen</string>
+    <string name="paste_Osmand_data_folder_path">Einfügen des Pfades zum Ordner mit OsmAnd-Daten</string>
+    <string name="change_osmand_data_folder_question">OsmAnd-Datenordner ändern\?</string>
+    <string name="move_maps_to_new_destination">Zum neuen Ziel verschieben</string>
+    <string name="internal_app_storage_description">Interner Speicher, versteckt vor Benutzern und anderen Anwendungen, sodass niemand außer OsmAnd Zugriff auf Ihre Daten erhalten kann</string>
+    <string name="change_data_storage_folder">Ändern des Datenspeicherordners</string>
+    <string name="rendering_attr_piste_type_snow_park_name">Winter-Funpark</string>
+    <string name="rendering_attr_piste_type_sleigh_name">Schlitten</string>
+    <string name="rendering_attr_piste_type_sled_name">Schlitten</string>
+    <string name="rendering_attr_piste_type_hike_name">Wandern</string>
+    <string name="rendering_attr_piste_type_connection_name">Verbindung</string>
+    <string name="rendering_attr_piste_type_skitour_name">Skitour</string>
+    <string name="rendering_attr_piste_type_downhill_name">Downhill</string>
+    <string name="rendering_attr_piste_type_nordic_name">Nordisch</string>
+    <string name="routeInfo_piste_type_name">Pistentyp</string>
+    <string name="rendering_attr_piste_difficulty_novice_name">Anfänger</string>
+    <string name="rendering_attr_piste_difficulty_easy_name">Einfach</string>
+    <string name="rendering_attr_piste_difficulty_intermediate_name">Mittel</string>
+    <string name="rendering_attr_piste_difficulty_advanced_name">Fortgeschritten</string>
+    <string name="rendering_attr_piste_difficulty_expert_name">Experte</string>
+    <string name="rendering_attr_piste_difficulty_freeride_name">Freeride</string>
+    <string name="rendering_attr_piste_difficulty_extreme_name">Extrem</string>
+    <string name="rendering_attr_piste_difficulty_undefined_name">Undefiniert</string>
+    <string name="routeInfo_piste_difficulty_name">Pisten-Schwierigkeitsgrad</string>
+    <string name="routing_attr_width_name">Breitenbegrenzung</string>
+    <string name="routing_attr_width_description">Geben Sie die zulässige Fahrzeugbreitenbegrenzung auf Routen an.</string>
+    <string name="avoid_in_routing_descr_">Vermeiden von bestimmten Routen und Straßentypen</string>
 </resources>

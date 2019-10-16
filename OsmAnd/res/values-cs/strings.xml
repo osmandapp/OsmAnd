@@ -770,7 +770,6 @@ Proporcionální paměť %4$s MB (limit Androidu %5$s MB, Dalvik %6$s MB).</stri
     <string name="avoid_unpaved">Vyhnout se nezpevněným cestám</string>
     <string name="avoid_ferries">Vyhnout se trajektům</string>
     <string name="avoid_in_routing_title">Vyhnout se…</string>
-    <string name="avoid_in_routing_descr">Vyhnout se např. trajektům, placeným a nezpevněným cestám.</string>
     <string name="show_warnings_title">Zobrazit upozornění…</string>
     <string name="show_warnings_descr">Nastavit dopravní varování (omezení rychlosti, značky stop, retardéry, tunely), rychlostní radary a jízdní pruhy.</string>
     <string name="map_widget_show_ruler">Měřítko</string>

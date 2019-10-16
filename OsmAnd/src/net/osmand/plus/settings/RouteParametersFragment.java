@@ -133,6 +133,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 					} else if (!param.equals(GeneralRouter.USE_SHORTEST_WAY)
 							&& !param.equals(GeneralRouter.VEHICLE_HEIGHT)
 							&& !param.equals(GeneralRouter.VEHICLE_WEIGHT)
+							&& !param.equals(GeneralRouter.VEHICLE_WIDTH)
 							&& !RoutingOptionsHelper.DRIVING_STYLE.equals(routingParameter.getGroup())) {
 						otherRoutingParameters.add(routingParameter);
 					}
@@ -141,8 +142,8 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 					MultiSelectBooleanPreference avoidRouting = new MultiSelectBooleanPreference(app);
 					avoidRouting.setKey(AVOID_ROUTING_PARAMETER_PREFIX);
 					avoidRouting.setTitle(R.string.avoid_in_routing_title);
-					avoidRouting.setSummary(R.string.avoid_in_routing_descr);
-					avoidRouting.setDescription(R.string.avoid_in_routing_descr);
+					avoidRouting.setSummary(R.string.avoid_in_routing_descr_);
+					avoidRouting.setDescription(R.string.avoid_in_routing_descr_);
 					avoidRouting.setLayoutResource(R.layout.preference_with_descr);
 					avoidRouting.setIcon(getRoutingPrefIcon(AVOID_ROUTING_PARAMETER_PREFIX));
 

@@ -473,8 +473,11 @@ public class GPXDatabase {
 	}
 
 	public boolean updateAnalysis(GpxDataItem item, GPXTrackAnalysis a) {
+		if (a == null) {
+			return false;
+		}
 		SQLiteConnection db = openConnection(false);
-		if (db != null && a != null) {
+		if (db != null) {
 			try {
 				String fileName = getFileName(item.file);
 				String fileDir = getFileDir(item.file);

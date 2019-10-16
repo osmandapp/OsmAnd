@@ -46,7 +46,6 @@
     <string name="avoid_unpaved">Vältä päällystämättömiä teitä</string>
     <string name="avoid_ferries">Vältä lauttoja</string>
     <string name="avoid_in_routing_title">Vältä…</string>
-    <string name="avoid_in_routing_descr">Vältä tietulleja, päällystämättömiä, lauttoja</string>
     <string name="map_widget_fluorescent">Valaistut tiet</string>
     <string name="map_widget_show_ruler">Viivoitin</string>
     <string name="map_widget_view_direction">Katseen suunta</string>

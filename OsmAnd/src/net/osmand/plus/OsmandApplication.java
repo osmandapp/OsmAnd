@@ -136,6 +136,7 @@ public class OsmandApplication extends MultiDexApplication {
 	InAppPurchaseHelper inAppPurchaseHelper;
 	MapViewTrackingUtilities mapViewTrackingUtilities;
 	LockHelper lockHelper;
+	SettingsHelper settingsHelper;
 
 	private RoutingConfiguration.Builder routingConfig;
 	private Locale preferredLocale = null;
@@ -333,6 +334,10 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public LockHelper getLockHelper() {
 		return lockHelper;
+	}
+
+	public SettingsHelper getSettingsHelper() {
+		return settingsHelper;
 	}
 
 	public synchronized DownloadIndexesThread getDownloadThread() {

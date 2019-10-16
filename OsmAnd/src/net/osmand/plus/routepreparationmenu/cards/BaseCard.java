@@ -65,6 +65,10 @@ public abstract class BaseCard {
 		}
 	}
 
+	public void applyState(@NonNull BaseCard card) {
+		// non implemented
+	}
+
 	public CardListener getListener() {
 		return listener;
 	}

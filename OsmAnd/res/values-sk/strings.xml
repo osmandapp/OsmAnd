@@ -40,7 +40,6 @@
     <string name="avoid_unpaved">Nespevneným cestám</string>
     <string name="avoid_ferries">Trajektom</string>
     <string name="avoid_in_routing_title">Vyhnúť sa…</string>
-    <string name="avoid_in_routing_descr">Obísť napr. spoplatnené cesty, nespevnené cesty, trajekty.</string>
     <string name="show_warnings_title">Zobraziť varovania…</string>
     <string name="show_warnings_descr">Nastaviť dopravné varovania (rýchlostné obmedzenia, značky stop, spomaľovače, tunely), rýchlostné radary a jazdné pruhy.</string>
     <string name="map_widget_fluorescent">Fluorescentné trasy</string>
@@ -1077,7 +1076,7 @@ Proporčná pamäť %4$s MB (Limit Androidu %5$s MB, Dalvik %6$s MB).</string>
     <string name="routing_attr_avoid_motorway_name">Vyhnúť sa diaľniciam</string>
     <string name="routing_attr_avoid_motorway_description">Vyhnúť sa diaľniciam</string>
     <string name="routing_attr_weight_name">Hmotnostný limit</string>
-    <string name="routing_attr_weight_description">Zadajte povolenú hmotnosť vozidla na cestách.</string>
+    <string name="routing_attr_weight_description">Zadajte hmotnosť vozidla, ktorá musí byť povolená na cestách.</string>
     <string name="select_gpx">Vybrať GPX…</string>
     <string name="route_descr_select_destination">Vybrať cieľ</string>
     <string name="route_preferences">Predvoľby trasy</string>
@@ -3279,4 +3278,36 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="plugins_settings">Nastavenia modulu</string>
     <string name="shared_string_by_default">Predvolene</string>
     <string name="download_detailed_map">Pre zobrazenie tejto oblasti si stiahnite podrobnú mapu %s.</string>
+    <string name="change_data_storage_full_description">Presunúť dátové súbory OsmAnd do nového umiestnenia\?
+\n%1$s &gt; %2$s</string>
+    <string name="data_storage_preference_summary">%1$s • Použité %2$s GB</string>
+    <string name="data_storage_space_description">Voľné %1$s • %2$s / %3$s GB</string>
+    <string name="enter_path_to_folder">Zadajte cestu k priečinku</string>
+    <string name="shared_string_select_folder">Zvoľte priečinok</string>
+    <string name="paste_Osmand_data_folder_path">Vložte cestu k priečinku s dátami OsmAnd</string>
+    <string name="change_osmand_data_folder_question">Zmeniť dátový priečinok OsmAnd\?</string>
+    <string name="move_maps_to_new_destination">Presunúť do nového umiestnenia</string>
+    <string name="internal_app_storage_description">Interné úložisko, skryté pred používateľom a inými aplikáciami, kde k dátam môže pristupovať len OsmAnd</string>
+    <string name="change_data_storage_folder">Zmeniť priečinok na ukladanie dát</string>
+    <string name="rendering_attr_piste_type_snow_park_name">Areál zimných športov</string>
+    <string name="rendering_attr_piste_type_sleigh_name">Sane v záprahu</string>
+    <string name="rendering_attr_piste_type_sled_name">Sánkovanie</string>
+    <string name="rendering_attr_piste_type_hike_name">Putovanie</string>
+    <string name="rendering_attr_piste_type_connection_name">Spojnica</string>
+    <string name="rendering_attr_piste_type_skitour_name">Lyžiarsky okruh</string>
+    <string name="rendering_attr_piste_type_downhill_name">Zjazd</string>
+    <string name="rendering_attr_piste_type_nordic_name">Beh na lyžiach</string>
+    <string name="routeInfo_piste_type_name">Typ zjazdovky</string>
+    <string name="rendering_attr_piste_difficulty_novice_name">Pre začiatočníkov</string>
+    <string name="rendering_attr_piste_difficulty_easy_name">Ľahká</string>
+    <string name="rendering_attr_piste_difficulty_intermediate_name">Stredná</string>
+    <string name="rendering_attr_piste_difficulty_advanced_name">Pokročilí</string>
+    <string name="rendering_attr_piste_difficulty_expert_name">Pre expertov</string>
+    <string name="rendering_attr_piste_difficulty_freeride_name">Voľný zjazd</string>
+    <string name="rendering_attr_piste_difficulty_extreme_name">Extrémna</string>
+    <string name="rendering_attr_piste_difficulty_undefined_name">Neurčená</string>
+    <string name="routeInfo_piste_difficulty_name">Obtiažnosť zjazdovky</string>
+    <string name="routing_attr_width_name">Limit šírky</string>
+    <string name="routing_attr_width_description">Zadajte šírku vozidla, ktorá musí byť povolená na cestách.</string>
+    <string name="avoid_in_routing_descr_">Vyhnúť sa niektorým trasám a typom ciest</string>
 </resources>

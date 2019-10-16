@@ -18,7 +18,7 @@ import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.TextInfoWidget;
 
-import static net.osmand.plus.OsmAndCustomizationConstants.DRAWER_BUILDS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_BUILDS_ID;
 
 public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	private static final String ID = "osmand.development";

@@ -42,11 +42,20 @@ import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -60,6 +69,8 @@ import java.util.Set;
 import java.util.StringTokenizer;
 
 public class OsmandSettings {
+
+	public static final int VERSION = 1;
 
 	public interface OsmandPreference<T> {
 		T get();
@@ -83,6 +94,16 @@ public class OsmandSettings {
 		boolean isSet();
 
 		boolean isSetForMode(ApplicationMode m);
+
+		boolean writeToJson(JSONObject json, ApplicationMode appMode) throws JSONException;
+
+		void readFromJson(JSONObject json, ApplicationMode appMode) throws JSONException;
+
+		String asString();
+
+		String asStringModeValue(ApplicationMode m);
+
+		T parseString(String s);
 	}
 
 	private abstract class PreferenceWithListener<T> implements OsmandPreference<T> {
@@ -170,6 +191,10 @@ public class OsmandSettings {
 		currentMode = readApplicationMode();
 		profilePreferences = getProfilePreferences(currentMode);
 		registeredPreferences.put(APPLICATION_MODE.getId(), APPLICATION_MODE);
+	}
+
+	public Map<String, OsmandPreference<?>> getRegisteredPreferences() {
+		return Collections.unmodifiableMap(registeredPreferences);
 	}
 
 	private static final String SETTING_CUSTOMIZED_ID = "settings_customized";
@@ -387,7 +412,52 @@ public class OsmandSettings {
 		public boolean setModeValue(ApplicationMode m, ApplicationMode obj) {
 			throw new UnsupportedOperationException();
 		}
+
+		@Override
+		public boolean writeToJson(JSONObject json, ApplicationMode appMode) throws JSONException {
+			return writeAppModeToJson(json, this);
+		}
+
+		@Override
+		public void readFromJson(JSONObject json, ApplicationMode appMode) throws JSONException {
+			readAppModeFromJson(json, this);
+		}
+
+		@Override
+		public String asString() {
+			return appModeToString(get());
+		}
+
+		@Override
+		public String asStringModeValue(ApplicationMode m) {
+			return appModeToString(m);
+		}
+
+		@Override
+		public ApplicationMode parseString(String s) {
+			return appModeFromString(s);
+		}
 	};
+
+	private String appModeToString(ApplicationMode appMode) {
+		return appMode.getStringKey();
+	}
+
+	private ApplicationMode appModeFromString(String s) {
+		return ApplicationMode.valueOfStringKey(s, ApplicationMode.DEFAULT);
+	}
+
+	private boolean writeAppModeToJson(JSONObject json, OsmandPreference<ApplicationMode> appModePref) throws JSONException {
+		json.put(appModePref.getId(), appModePref.asString());
+		return true;
+	}
+
+	private void readAppModeFromJson(JSONObject json, OsmandPreference<ApplicationMode> appModePref) throws JSONException {
+		String s = json.getString(appModePref.getId());
+		if (s != null) {
+			appModePref.set(appModePref.parseString(s));
+		}
+	}
 
 	public ApplicationMode getApplicationMode() {
 		return APPLICATION_MODE.get();
@@ -587,6 +657,51 @@ public class OsmandSettings {
 		public boolean isSetForMode(ApplicationMode mode) {
 			return settingsAPI.contains(getProfilePreferences(mode), getId());
 		}
+
+		@Override
+		public boolean writeToJson(JSONObject json, ApplicationMode appMode) throws JSONException {
+			if (appMode != null) {
+				if (!global) {
+					String value = asStringModeValue(appMode);
+					if (value != null) {
+						json.put(getId(), value);
+					}
+					return true;
+				}
+			} else if (global) {
+				String value = asString();
+				if (value != null) {
+					json.put(getId(), value);
+				}
+				return true;
+			}
+			return false;
+		}
+
+		@Override
+		public void readFromJson(JSONObject json, ApplicationMode appMode) throws JSONException {
+			if (appMode != null) {
+				if (!global) {
+					String modeValue = json.getString(getId());
+					setModeValue(appMode, parseString(modeValue));
+				}
+			} else if (global) {
+				String globalValue = json.getString(getId());
+				set(parseString(globalValue));
+			}
+		}
+
+		@Override
+		public String asString() {
+			T o = get();
+			return o != null ? o.toString() : null;
+		}
+
+		@Override
+		public String asStringModeValue(ApplicationMode m) {
+			T v = getModeValue(m);
+			return v != null ? v.toString() : null;
+		}
 	}
 
 	public class BooleanPreference extends CommonPreference<Boolean> {
@@ -604,6 +719,11 @@ public class OsmandSettings {
 		@Override
 		protected boolean setValue(Object prefs, Boolean val) {
 			return settingsAPI.edit(prefs).putBoolean(getId(), val).commit();
+		}
+
+		@Override
+		public Boolean parseString(String s) {
+			return Boolean.parseBoolean(s);
 		}
 	}
 
@@ -645,6 +765,10 @@ public class OsmandSettings {
 			return settingsAPI.edit(prefs).putInt(getId(), val).commit();
 		}
 
+		@Override
+		public Integer parseString(String s) {
+			return Integer.parseInt(s);
+		}
 	}
 
 	private class LongPreference extends CommonPreference<Long> {
@@ -664,6 +788,10 @@ public class OsmandSettings {
 			return settingsAPI.edit(prefs).putLong(getId(), val).commit();
 		}
 
+		@Override
+		public Long parseString(String s) {
+			return Long.parseLong(s);
+		}
 	}
 
 	private class FloatPreference extends CommonPreference<Float> {
@@ -683,6 +811,10 @@ public class OsmandSettings {
 			return settingsAPI.edit(prefs).putFloat(getId(), val).commit();
 		}
 
+		@Override
+		public Float parseString(String s) {
+			return Float.parseFloat(s);
+		}
 	}
 
 	public class StringPreference extends CommonPreference<String> {
@@ -701,6 +833,10 @@ public class OsmandSettings {
 			return settingsAPI.edit(prefs).putString(getId(), (val != null) ? val.trim() : val).commit();
 		}
 
+		@Override
+		public String parseString(String s) {
+			return s;
+		}
 	}
 	
 	public class ListStringPreference extends StringPreference {
@@ -752,8 +888,6 @@ public class OsmandSettings {
 			}
 			return false;
 		}
-
-
 	}
 
 	public class EnumIntPreference<E extends Enum<E>> extends CommonPreference<E> {
@@ -784,6 +918,25 @@ public class OsmandSettings {
 			return settingsAPI.edit(prefs).putInt(getId(), val.ordinal()).commit();
 		}
 
+		@Override
+		public String asString() {
+			return get().name();
+		}
+
+		@Override
+		public String asStringModeValue(ApplicationMode m) {
+			return getModeValue(m).name();
+		}
+
+		@Override
+		public E parseString(String s) {
+			for (E value : values) {
+				if (value.name().equals(s)) {
+					return value;
+				}
+			}
+			return null;
+		}
 	}
 	///////////// PREFERENCES classes ////////////////
 
@@ -959,6 +1112,31 @@ public class OsmandSettings {
 
 			return valueSaved;
 		}
+
+		@Override
+		public boolean writeToJson(JSONObject json, ApplicationMode appMode) throws JSONException {
+			return writeAppModeToJson(json, this);
+		}
+
+		@Override
+		public void readFromJson(JSONObject json, ApplicationMode appMode) throws JSONException {
+			readAppModeFromJson(json, this);
+		}
+
+		@Override
+		public String asString() {
+			return appModeToString(get());
+		}
+
+		@Override
+		public String asStringModeValue(ApplicationMode m) {
+			return appModeToString(m);
+		}
+
+		@Override
+		public ApplicationMode parseString(String s) {
+			return appModeFromString(s);
+		}
 	};
 
 	public final OsmandPreference<ApplicationMode> LAST_ROUTE_APPLICATION_MODE = new CommonPreference<ApplicationMode>("last_route_application_mode_backup_string", ApplicationMode.DEFAULT) {
@@ -975,6 +1153,31 @@ public class OsmandSettings {
 		@Override
 		protected boolean setValue(Object prefs, ApplicationMode val) {
 			return settingsAPI.edit(prefs).putString(getId(), val.getStringKey()).commit();
+		}
+
+		@Override
+		public boolean writeToJson(JSONObject json, ApplicationMode appMode) throws JSONException {
+			return writeAppModeToJson(json, this);
+		}
+
+		@Override
+		public void readFromJson(JSONObject json, ApplicationMode appMode) throws JSONException {
+			readAppModeFromJson(json, this);
+		}
+
+		@Override
+		public String asString() {
+			return appModeToString(get());
+		}
+
+		@Override
+		public String asStringModeValue(ApplicationMode m) {
+			return appModeToString(m);
+		}
+
+		@Override
+		public ApplicationMode parseString(String s) {
+			return appModeFromString(s);
 		}
 	};
 
@@ -2779,10 +2982,8 @@ public class OsmandSettings {
 	}
 
 	{
-		CommonPreference<String> pref = getCustomRenderProperty("appMode");
-		pref.setModeDefaultValue(ApplicationMode.CAR, "car");
-		pref.setModeDefaultValue(ApplicationMode.PEDESTRIAN, "pedestrian");
-		pref.setModeDefaultValue(ApplicationMode.BICYCLE, "bicycle");
+		getCustomRenderProperty("appMode");
+		getCustomRenderProperty("defAppMode");
 	}
 
 	Map<String, CommonPreference<Boolean>> customBooleanRendersProps = new LinkedHashMap<String, OsmandSettings.CommonPreference<Boolean>>();
@@ -3063,20 +3264,24 @@ public class OsmandSettings {
 	}
 
 	public enum SpeedConstants {
-		KILOMETERS_PER_HOUR(R.string.km_h, R.string.si_kmh),
-		MILES_PER_HOUR(R.string.mile_per_hour, R.string.si_mph),
-		METERS_PER_SECOND(R.string.m_s, R.string.si_m_s),
-		MINUTES_PER_MILE(R.string.min_mile, R.string.si_min_m),
-		MINUTES_PER_KILOMETER(R.string.min_km, R.string.si_min_km),
-		NAUTICALMILES_PER_HOUR(R.string.nm_h, R.string.si_nm_h);
+		KILOMETERS_PER_HOUR(R.string.km_h, R.string.si_kmh, false),
+		MILES_PER_HOUR(R.string.mile_per_hour, R.string.si_mph, true),
+		METERS_PER_SECOND(R.string.m_s, R.string.si_m_s, false),
+		MINUTES_PER_MILE(R.string.min_mile, R.string.si_min_m, true),
+		MINUTES_PER_KILOMETER(R.string.min_km, R.string.si_min_km, false),
+		NAUTICALMILES_PER_HOUR(R.string.nm_h, R.string.si_nm_h, true);
 
-		private final int key;
-		private int descr;
+		public final int key;
+		public final int descr;
+		public final boolean imperial;
 
-		SpeedConstants(int key, int descr) {
+		SpeedConstants(int key, int descr, boolean imperial) {
 			this.key = key;
 			this.descr = descr;
+			this.imperial = imperial;
 		}
+
+
 
 		public String toHumanString(Context ctx) {
 			return ctx.getString(descr);

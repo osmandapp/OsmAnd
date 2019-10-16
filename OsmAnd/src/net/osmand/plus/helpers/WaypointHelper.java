@@ -15,6 +15,7 @@ import net.osmand.osm.PoiType;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
@@ -169,11 +170,11 @@ public class WaypointHelper {
 		return found;
 	}
 
-	public AlarmInfo getMostImportantAlarm(MetricsConstants mc, boolean showCameras) {
+	public AlarmInfo getMostImportantAlarm(MetricsConstants mc, OsmandSettings.SpeedConstants sc, boolean showCameras) {
 		Location lastProjection = app.getRoutingHelper().getLastProjection();
 		float mxspeed = route.getCurrentMaxSpeed();
 		float delta = app.getSettings().SPEED_LIMIT_EXCEED.get() / 3.6f;
-		AlarmInfo speedAlarm = createSpeedAlarm(mc, mxspeed, lastProjection, delta);
+		AlarmInfo speedAlarm = createSpeedAlarm(mc, sc, mxspeed, lastProjection, delta);
 		if (speedAlarm != null) {
 			getVoiceRouter().announceSpeedAlarm(speedAlarm.getIntValue(), lastProjection.getSpeed());
 		}
@@ -266,10 +267,11 @@ public class WaypointHelper {
 		return true;
 	}
 
-	public AlarmInfo calculateMostImportantAlarm(RouteDataObject ro, Location loc, MetricsConstants mc, boolean showCameras) {
+	public AlarmInfo calculateMostImportantAlarm(RouteDataObject ro, Location loc, MetricsConstants mc,
+												 OsmandSettings.SpeedConstants sc, boolean showCameras) {
 		float mxspeed = ro.getMaximumSpeed(ro.bearingVsRouteDirection(loc));
 		float delta = app.getSettings().SPEED_LIMIT_EXCEED.get() / 3.6f;
-		AlarmInfo speedAlarm = createSpeedAlarm(mc, mxspeed, loc, delta);
+		AlarmInfo speedAlarm = createSpeedAlarm(mc, sc, mxspeed, loc, delta);
 		if (speedAlarm != null) {
 			getVoiceRouter().announceSpeedAlarm(speedAlarm.getIntValue(), loc.getSpeed());
 			return speedAlarm;
@@ -306,12 +308,12 @@ public class WaypointHelper {
 		return null;
 	}
 
-	private static AlarmInfo createSpeedAlarm(MetricsConstants mc, float mxspeed, Location loc, float delta) {
+	private static AlarmInfo createSpeedAlarm(MetricsConstants mc, OsmandSettings.SpeedConstants sc, float mxspeed, Location loc, float delta) {
 		AlarmInfo speedAlarm = null;
 		if (mxspeed != 0 && loc != null && loc.hasSpeed() && mxspeed != RouteDataObject.NONE_MAX_SPEED) {
 			if (loc.getSpeed() > mxspeed + delta) {
 				int speed;
-				if (mc == MetricsConstants.KILOMETERS_AND_METERS) {
+				if (sc.imperial) {
 					speed = Math.round(mxspeed * 3.6f);
 				} else {
 					speed = Math.round(mxspeed * 3.6f / 1.6f);

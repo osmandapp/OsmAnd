@@ -1,6 +1,7 @@
 package net.osmand.plus.routepreparationmenu.cards;
 
 import android.annotation.SuppressLint;
+import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
@@ -147,5 +148,13 @@ public class TracksCard extends BaseCard {
 
 		((TextView) view.findViewById(R.id.gpx_card_title)).setText(
 				String.format("%s (%d)", app.getString(R.string.tracks_on_map), list.size()));
+	}
+
+	@Override
+	public void applyState(@NonNull BaseCard card) {
+		super.applyState(card);
+		if (card instanceof TracksCard) {
+			showLimited = ((TracksCard) card).showLimited;
+		}
 	}
 }

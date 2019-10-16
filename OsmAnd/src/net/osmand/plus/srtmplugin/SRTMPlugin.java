@@ -29,8 +29,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static net.osmand.plus.OsmAndCustomizationConstants.CONTOUR_LINES;
-import static net.osmand.plus.OsmAndCustomizationConstants.HILLSHADE_LAYER;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTOUR_LINES;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.HILLSHADE_LAYER;
 
 public class SRTMPlugin extends OsmandPlugin {
 

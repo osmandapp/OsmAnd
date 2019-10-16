@@ -70,27 +70,27 @@ import java.util.Map;
 
 import gnu.trove.list.array.TIntArrayList;
 
-import static net.osmand.plus.OsmAndCustomizationConstants.APP_PROFILES_ID;
-import static net.osmand.plus.OsmAndCustomizationConstants.CUSTOM_RENDERING_ITEMS_ID_SCHEME;
-import static net.osmand.plus.OsmAndCustomizationConstants.DETAILS_ID;
-import static net.osmand.plus.OsmAndCustomizationConstants.FAVORITES_ID;
-import static net.osmand.plus.OsmAndCustomizationConstants.GPX_FILES_ID;
-import static net.osmand.plus.OsmAndCustomizationConstants.HIDE_ID;
-import static net.osmand.plus.OsmAndCustomizationConstants.MAP_LANGUAGE_ID;
-import static net.osmand.plus.OsmAndCustomizationConstants.MAP_MAGNIFIER_ID;
-import static net.osmand.plus.OsmAndCustomizationConstants.MAP_MARKERS_ID;
-import static net.osmand.plus.OsmAndCustomizationConstants.MAP_MODE_ID;
-import static net.osmand.plus.OsmAndCustomizationConstants.MAP_RENDERING_CATEGORY_ID;
-import static net.osmand.plus.OsmAndCustomizationConstants.MAP_SOURCE_ID;
-import static net.osmand.plus.OsmAndCustomizationConstants.MAP_STYLE_ID;
-import static net.osmand.plus.OsmAndCustomizationConstants.POI_OVERLAY_ID;
-import static net.osmand.plus.OsmAndCustomizationConstants.POI_OVERLAY_LABELS_ID;
-import static net.osmand.plus.OsmAndCustomizationConstants.ROAD_STYLE_ID;
-import static net.osmand.plus.OsmAndCustomizationConstants.ROUTES_ID;
-import static net.osmand.plus.OsmAndCustomizationConstants.SHOW_CATEGORY_ID;
-import static net.osmand.plus.OsmAndCustomizationConstants.TEXT_SIZE_ID;
-import static net.osmand.plus.OsmAndCustomizationConstants.TRANSPORT_ID;
-import static net.osmand.plus.OsmAndCustomizationConstants.TRANSPORT_RENDERING_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.APP_PROFILES_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.CUSTOM_RENDERING_ITEMS_ID_SCHEME;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DETAILS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.FAVORITES_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.GPX_FILES_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.HIDE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_LANGUAGE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_MAGNIFIER_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_MARKERS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_MODE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_RENDERING_CATEGORY_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_SOURCE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_STYLE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.POI_OVERLAY_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.POI_OVERLAY_LABELS_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.ROAD_STYLE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.ROUTES_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.SHOW_CATEGORY_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.TEXT_SIZE_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.TRANSPORT_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.TRANSPORT_RENDERING_ID;
 import static net.osmand.plus.srtmplugin.SRTMPlugin.CONTOUR_DENSITY_ATTR;
 import static net.osmand.plus.srtmplugin.SRTMPlugin.CONTOUR_LINES_ATTR;
 import static net.osmand.plus.srtmplugin.SRTMPlugin.CONTOUR_LINES_SCHEME_ATTR;
@@ -1176,6 +1176,7 @@ public class ConfigureMapMenu {
 
 	private boolean isPropertyAccepted(RenderingRuleProperty p) {
 		return !(p.getAttrName().equals(RenderingRuleStorageProperties.A_APP_MODE) ||
+				p.getAttrName().equals(RenderingRuleStorageProperties.A_BASE_APP_MODE) ||
 				p.getAttrName().equals(RenderingRuleStorageProperties.A_ENGINE_V1) ||
 				p.getAttrName().equals(HIKING_ROUTES_OSMC_ATTR) ||
 				p.getAttrName().equals(ROAD_STYLE_ATTR) ||

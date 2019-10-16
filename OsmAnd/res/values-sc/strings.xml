@@ -465,7 +465,6 @@
     <string name="avoid_unpaved">Instransi sos caminos no asfaltados</string>
     <string name="avoid_ferries">Istransi sos traghetos</string>
     <string name="avoid_in_routing_title">Istransi…</string>
-    <string name="avoid_in_routing_descr">Istransi pro es. sos caminos a pagamentu, sos isterrados, sos traghetos.</string>
     <string name="map_widget_fluorescent">Camineras fluorescentes</string>
     <string name="map_widget_show_ruler">Righellu</string>
     <string name="map_widget_view_direction">Diretzione de sa visuale</string>
@@ -3298,4 +3297,37 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="shared_string_by_default">Predefinidu</string>
     <string name="plugins_settings">Impostatziones de s\'estensione</string>
     <string name="download_detaile_map">Iscàrriga sa mapa de %s fata a sa minuda pro pompiare cust\'àrea.</string>
+    <string name="download_detailed_map">Iscàrriga sa mapa de %s fata a sa minuda pro pompiare cust\'àrea.</string>
+    <string name="change_data_storage_full_description">Tramudare sos datos de OsmAnd in sa destinatzione noa\?
+\n%1$s &gt; %2$s</string>
+    <string name="data_storage_preference_summary">%1$s • Impreados: %2$s GB</string>
+    <string name="data_storage_space_description">Lìberos: %1$s • %2$s / %3$s GB</string>
+    <string name="enter_path_to_folder">Inserta s\'àndala pro sa cartella</string>
+    <string name="shared_string_select_folder">Ischerta sa cartella</string>
+    <string name="paste_Osmand_data_folder_path">Incolla s\'àndala pro sa cartella cun sos datos de OsmAnd</string>
+    <string name="change_osmand_data_folder_question">Mudare sa cartella de sos datos de OsmAnd\?</string>
+    <string name="move_maps_to_new_destination">Tràmuda a sa destinatzione noa</string>
+    <string name="internal_app_storage_description">Memòria interna, cuada dae s\'impreadore e dae sas àteras aplicatziones, in manera chi nemos francu OsmAnd potzat tènnere atzessu a sos datos tuos</string>
+    <string name="change_data_storage_folder">Muda sa cartella de archiviatzione de datos de OsmAnd</string>
+    <string name="rendering_attr_piste_type_snow_park_name">Parcu de nie</string>
+    <string name="rendering_attr_piste_type_sleigh_name">Islita tragiada</string>
+    <string name="rendering_attr_piste_type_sled_name">Islita</string>
+    <string name="rendering_attr_piste_type_hike_name">Escursionismu</string>
+    <string name="rendering_attr_piste_type_connection_name">Connessione</string>
+    <string name="rendering_attr_piste_type_skitour_name">Iscì-alpinismu</string>
+    <string name="rendering_attr_piste_type_downhill_name">Iscì alpinu</string>
+    <string name="rendering_attr_piste_type_nordic_name">Iscì nòrdicu</string>
+    <string name="routeInfo_piste_type_name">Casta de pista</string>
+    <string name="rendering_attr_piste_difficulty_novice_name">Printzipiantes</string>
+    <string name="rendering_attr_piste_difficulty_easy_name">Fàtzile</string>
+    <string name="rendering_attr_piste_difficulty_intermediate_name">Intermèdia</string>
+    <string name="rendering_attr_piste_difficulty_advanced_name">Avantzada</string>
+    <string name="rendering_attr_piste_difficulty_expert_name">Espertos</string>
+    <string name="rendering_attr_piste_difficulty_freeride_name">Movimentu lìberu (freeride)</string>
+    <string name="rendering_attr_piste_difficulty_extreme_name">Estrema</string>
+    <string name="rendering_attr_piste_difficulty_undefined_name">Non dessinida</string>
+    <string name="routeInfo_piste_difficulty_name">Dificultade de sa pista</string>
+    <string name="routing_attr_width_name">Lìmite de largària</string>
+    <string name="routing_attr_width_description">Dislinda su lìmite de largària permìtidu in sas àndalas.</string>
+    <string name="avoid_in_routing_descr_">Istransi castas isseberadas de àndalas e caminos</string>
 </resources>

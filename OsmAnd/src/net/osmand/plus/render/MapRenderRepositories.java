@@ -66,7 +66,6 @@ import android.os.Looper;
 import android.widget.Toast;
 
 public class MapRenderRepositories {
-
 	// It is needed to not draw object twice if user have map index that intersects by boundaries
 	public static boolean checkForDuplicateObjectIds = true;
 	
@@ -644,9 +643,17 @@ public class MapRenderRepositories {
 			// find selected rendering type
 			OsmandApplication app = ((OsmandApplication) context.getApplicationContext());
 			boolean nightMode = app.getDaynightHelper().isNightMode();
+
 			// boolean moreDetail = prefs.SHOW_MORE_MAP_DETAIL.get();
 			RenderingRulesStorage storage = app.getRendererRegistry().getCurrentSelectedRenderer();
+			prefs.getCustomRenderProperty("appMode").setModeValue(prefs.APPLICATION_MODE.get(),
+					app.getSettings().APPLICATION_MODE.get().getStringKey());
+			prefs.getCustomRenderProperty("baseAppMode").setModeValue(prefs.APPLICATION_MODE.get(),
+					app.getSettings().APPLICATION_MODE.get().getParent() != null
+							? prefs.APPLICATION_MODE.get().getParent().getStringKey()
+							: prefs.APPLICATION_MODE.get().getStringKey());
 			RenderingRuleSearchRequest renderingReq = getSearchRequestWithAppliedCustomRules(storage, nightMode);
+
 			renderingReq.saveState();
 			NativeOsmandLibrary nativeLib = !prefs.SAFE_MODE.get() ? NativeOsmandLibrary.getLibrary(storage, context) : null;
 

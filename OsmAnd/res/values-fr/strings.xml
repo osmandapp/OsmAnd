@@ -772,7 +772,6 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="avoid_unpaved">Éviter les voies non revêtues</string>
     <string name="avoid_ferries">Éviter les ferries</string>
     <string name="avoid_in_routing_title">Éviter</string>
-    <string name="avoid_in_routing_descr">Éviter les routes à péage, les voies non revêtues, les bateaux ferries.</string>
     <string name="show_warnings_title">Alertes visuelles…</string>
     <string name="show_warnings_descr">Paramétrer les avertissements de circulation (limites de vitesse, stops, ralentisseurs, tunnels), les radars et les informations sur les voies de circulation.</string>
     <string name="map_widget_fluorescent">Itinéraires fluorescents</string>
@@ -3260,4 +3259,38 @@ représentant la zone : %1$s x %2$s</string>
     <string name="shared_string_by_default">Par défaut</string>
     <string name="download_detaile_map">Téléchargez la carte détaillée de %s pour voir cette zone.</string>
     <string name="download_detailed_map">Télécharger la carte détaillée %s pour voir cette zone.</string>
+    <string name="change_data_storage_full_description">Déplacer les fichiers de données OsmAnd vers la nouvelle destination \?
+\n%1$s &gt; %2$s</string>
+    <string name="data_storage_preference_summary">%1$s • %2$s GB utilisés</string>
+    <string name="data_storage_space_description">Libre %1$s • %2$s / %3$s GB</string>
+    <string name="enter_path_to_folder">Saisissez le chemin du dossier</string>
+    <string name="shared_string_select_folder">Sélectionner le dossier</string>
+    <string name="paste_Osmand_data_folder_path">Coller le chemin du dossier contenant les données OsmAnd</string>
+    <string name="change_osmand_data_folder_question">Modifier le dossier des données OsmAnd \?</string>
+    <string name="move_maps_to_new_destination">Déplacer vers la nouvelle destination</string>
+    <string name="change_data_storage_folder">Modifier le dossier de stockage des données</string>
+    <string name="rendering_attr_piste_type_snow_park_name">Snow park</string>
+    <string name="rendering_attr_piste_type_sleigh_name">Traîneau</string>
+    <string name="rendering_attr_piste_type_sled_name">Luge</string>
+    <string name="rendering_attr_piste_type_hike_name">Randonnée</string>
+    <string name="rendering_attr_piste_type_connection_name">Liaison</string>
+    <string name="rendering_attr_piste_type_skitour_name">Skitour</string>
+    <string name="rendering_attr_piste_type_downhill_name">Descente</string>
+    <string name="rendering_attr_piste_type_nordic_name">Nordique</string>
+    <string name="routeInfo_piste_type_name">Type de piste</string>
+    <string name="rendering_attr_piste_difficulty_novice_name">Débutant</string>
+    <string name="rendering_attr_piste_difficulty_easy_name">Facile</string>
+    <string name="rendering_attr_piste_difficulty_intermediate_name">Intermédiaire</string>
+    <string name="rendering_attr_piste_difficulty_advanced_name">Avancé</string>
+    <string name="rendering_attr_piste_difficulty_expert_name">Expert</string>
+    <string name="rendering_attr_piste_difficulty_freeride_name">Freeride</string>
+    <string name="rendering_attr_piste_difficulty_extreme_name">Extrême</string>
+    <string name="rendering_attr_piste_difficulty_undefined_name">Non défini</string>
+    <string name="routeInfo_piste_difficulty_name">Difficulté de la piste</string>
+    <string name="routing_attr_width_name">Limite de largeur</string>
+    <string name="routing_attr_width_description">Indique la limite de largeur autorisée sur les itinéraires.</string>
+    <string name="internal_app_storage_description">Stockage interne, masqué à l\'utilisateur ainsi qu\'aux autres applications ce qui signifie que seul OsmAnd peut accéder à vos données</string>
+    <string name="avoid_in_routing_descr_">Éviter certains types de route</string>
+    <string name="app_mode_utv">Côte à côte</string>
+    <string name="rendering_attr_piste_difficulty_connection_name">Connexion</string>
 </resources>
