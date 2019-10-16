@@ -123,7 +123,7 @@
     <string name="language_and_output">ဘာသာစကားနှင့်ထွက်ရှိမှု</string>
     <string name="reset_to_default">မူလပုံမှန်ကိုပြန်ပြောင်းမြည်</string>
     <string name="manage_profiles_descr">profile များကိုဖန်တီးခြင်း၊ တင်သွင်းခြင်း၊ တည်းဖြတ်ခြင်း</string>
-    <string name="application_profile_changed">Application ပရိုဖိုင်းကို \"% s\" သို့ပြောင်းခဲ့သည်</string>
+    <string name="application_profile_changed">Application ပရိုဖိုင်းကို \"%s\" သို့ပြောင်းခဲ့သည်</string>
     <string name="shared_string_by_default">မူလပုံမှန်</string>
     <string name="download_detailed_map">ဤဒေသရဲ့အသေးစိတ်% s မြေပုံကို download ပြီးကြည့်ပါ။</string>
     <string name="internal_app_storage_description">သုံးစွဲသူနှင့်အခြားအက်ပလီကေးရှင်းများမှသိမ်းဆည်းထားသောအတွင်းသိုလှောင်မှုဖြစ်သောကြောင့် OsmAnd မှလွဲ၍ မည်သူမျှသင့်အချက်အလက်များကိုလက်လှမ်းမမီနိုင်ပါ</string>
