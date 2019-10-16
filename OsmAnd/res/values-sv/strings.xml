@@ -2929,4 +2929,5 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="application_profile_changed">Programprofil ändrat till \"%s\"</string>
     <string name="logcat_buffer">Logcat-buffert</string>
     <string name="plugins_settings">Tilläggsinställningar</string>
+    <string name="app_mode_utv">Sida vid sida</string>
 </resources>

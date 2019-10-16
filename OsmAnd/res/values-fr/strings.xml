@@ -3291,4 +3291,6 @@ représentant la zone : %1$s x %2$s</string>
     <string name="routing_attr_width_description">Indique la limite de largeur autorisée sur les itinéraires.</string>
     <string name="internal_app_storage_description">Stockage interne, masqué à l\'utilisateur ainsi qu\'aux autres applications ce qui signifie que seul OsmAnd peut accéder à vos données</string>
     <string name="avoid_in_routing_descr_">Éviter certains types de route</string>
+    <string name="app_mode_utv">Côte à côte</string>
+    <string name="rendering_attr_piste_difficulty_connection_name">Connexion</string>
 </resources>

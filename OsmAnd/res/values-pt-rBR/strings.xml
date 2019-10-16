@@ -2792,8 +2792,8 @@ Pôr do Sol: %2$s</string>
     <string name="shared_string_world">Mundo</string>
     <string name="thank_you_for_feedback">Obrigado por seus comentários</string>
     <string name="poi_cannot_be_found">Nó ou caminho não pode ser encontrado.</string>
-    <string name="search_no_results_feedback">Nenhum resultado de pesquisa\?
-\nMande-nos o seu comentário</string>
+    <string name="search_no_results_feedback">Nenhum resultado de pesquisa\? 
+\nMande-nos o seu feedback</string>
     <string name="commiting_way">Enviando caminho…</string>
     <string name="increase_search_radius_to">Aumentar raio de pesquisa para %1$s</string>
     <string name="send_search_query">Enviar consulta de pesquisa?</string>
@@ -2828,8 +2828,8 @@ Pôr do Sol: %2$s</string>
     <string name="osm_live_payment_monthly_title">Mensal</string>
     <string name="osm_live_payment_3_months_title">A cada três meses</string>
     <string name="osm_live_payment_annual_title">Anualmente</string>
-    <string name="osm_live_payment_month_cost_descr">%1$s ao mês</string>
-    <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s ao mês</string>
+    <string name="osm_live_payment_month_cost_descr">%1$s / mês</string>
+    <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / mês</string>
     <string name="osm_live_payment_discount_descr">Menos %1$s.</string>
     <string name="osm_live_payment_current_subscription">Assinatura atual</string>
     <string name="osm_live_payment_renews_monthly">Renova mensalmente</string>
@@ -3309,4 +3309,7 @@ Pôr do Sol: %2$s</string>
     <string name="routing_attr_width_name">Limite de largura</string>
     <string name="routing_attr_width_description">Especifique o limite permitido de largura do veículo nas rotas.</string>
     <string name="avoid_in_routing_descr_">Evitar certas rotas e tipos de estradas</string>
+    <string name="app_mode_utv">Lado a lado</string>
+    <string name="rendering_attr_piste_difficulty_aerialway_name">Maneira aérea</string>
+    <string name="rendering_attr_piste_difficulty_connection_name">Conexão</string>
 </resources>
