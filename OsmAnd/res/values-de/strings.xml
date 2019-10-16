@@ -3329,4 +3329,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="routing_attr_width_name">Breitenbegrenzung</string>
     <string name="routing_attr_width_description">Geben Sie die zulässige Fahrzeugbreitenbegrenzung auf Routen an.</string>
     <string name="avoid_in_routing_descr_">Vermeiden von bestimmten Routen und Straßentypen</string>
+    <string name="app_mode_utv">Nebeneinander</string>
+    <string name="rendering_attr_piste_difficulty_aerialway_name">Seilbahn</string>
+    <string name="rendering_attr_piste_difficulty_connection_name">Verbindung</string>
 </resources>
