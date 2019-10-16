@@ -3287,7 +3287,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="rendering_attr_piste_type_sleigh_name">glitveturado (tirata de hundoj)</string>
     <string name="rendering_attr_piste_type_sled_name">glitveturado (motora)</string>
     <string name="rendering_attr_piste_type_hike_name">marŝado</string>
-    <string name="rendering_attr_piste_type_connection_name">konekto</string>
+    <string name="rendering_attr_piste_type_connection_name">ligilo</string>
     <string name="rendering_attr_piste_type_skitour_name">ski‑ekskurso</string>
     <string name="rendering_attr_piste_type_downhill_name">alpa (malsuprenira)</string>
     <string name="rendering_attr_piste_type_nordic_name">nordia (skikurada)</string>
@@ -3304,4 +3304,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="routing_attr_width_name">Limigo de larĝo</string>
     <string name="routing_attr_width_description">Difini permesatan limigon de larĝo de veturilo.</string>
     <string name="avoid_in_routing_descr_">Eviti difinitajn kursojn kaj specojn de vojoj</string>
+    <string name="app_mode_utv">Ĉiuteren‑veturilo (UTV)</string>
+    <string name="rendering_attr_piste_difficulty_aerialway_name">kablovojo</string>
+    <string name="rendering_attr_piste_difficulty_connection_name">ligilo</string>
 </resources>
