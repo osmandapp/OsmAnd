@@ -119,7 +119,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 			clearParameters();
 			if (router != null) {
 				Map<String, GeneralRouter.RoutingParameter> parameters = router.getParameters();
-				if (parameters.containsKey(GeneralRouter.USE_SHORTEST_WAY)) {
+				if (!am.isDerivedRoutingFrom(ApplicationMode.CAR)) {
 					screen.addPreference(fastRoute);
 				}
 				for (Map.Entry<String, GeneralRouter.RoutingParameter> e : parameters.entrySet()) {
@@ -133,7 +133,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 						reliefFactorParameters.add(routingParameter);
 					} else if (DRIVING_STYLE.equals(routingParameter.getGroup())) {
 						drivingStyleParameters.add(routingParameter);
-					} else if (!param.equals(GeneralRouter.USE_SHORTEST_WAY)
+					} else if ((!param.equals(GeneralRouter.USE_SHORTEST_WAY) || am.isDerivedRoutingFrom(ApplicationMode.CAR))
 							&& !param.equals(GeneralRouter.VEHICLE_HEIGHT)
 							&& !param.equals(GeneralRouter.VEHICLE_WEIGHT)
 							&& !param.equals(GeneralRouter.VEHICLE_WIDTH)) {
@@ -272,6 +272,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 	private void clearParameters() {
 		avoidParameters.clear();
 		preferParameters.clear();
+		drivingStyleParameters.clear();
 		reliefFactorParameters.clear();
 		otherRoutingParameters.clear();
 	}
@@ -280,6 +281,8 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 		switch (prefId) {
 			case GeneralRouter.ALLOW_PRIVATE:
 				return getIcon(R.drawable.ic_action_private_access);
+			case GeneralRouter.USE_SHORTEST_WAY:
+				return getContentIcon(R.drawable.ic_action_fuel);
 			case AVOID_ROUTING_PARAMETER_PREFIX:
 				return getContentIcon(R.drawable.ic_action_alert);
 			case DRIVING_STYLE:
