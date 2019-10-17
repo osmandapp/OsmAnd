@@ -3294,7 +3294,7 @@ Lon %2$s</string>
     <string name="change_data_storage_full_description">¿Mover los archivos de datos de OsmAnd al nuevo destino\?
 \n%1$s &gt; %2$s</string>
     <string name="data_storage_preference_summary">%1$s • Usado %2$s GB</string>
-    <string name="data_storage_space_description">Libre %1$s • %2$s / %3$s GB</string>
+    <string name="data_storage_space_description">Libre %1$s GB • Total %2$s GB</string>
     <string name="enter_path_to_folder">Ingresa la ruta a la carpeta</string>
     <string name="shared_string_select_folder">Elegir carpeta</string>
     <string name="paste_Osmand_data_folder_path">Pegar la ruta a la carpeta con los datos de OsmAnd</string>
@@ -3326,4 +3326,12 @@ Lon %2$s</string>
     <string name="app_mode_utv">En paralelo</string>
     <string name="rendering_attr_piste_difficulty_aerialway_name">Vía aérea</string>
     <string name="rendering_attr_piste_difficulty_connection_name">Conexión</string>
+    <string name="shared_string_calculate">Calcular</string>
+    <string name="shared_string_osmand_usage">Uso de OsmAnd</string>
+    <string name="shared_sting_tiles">Teselas</string>
+    <string name="shared_string_maps">Mapas</string>
+    <string name="shared_string_memory_tb_desc">%1$s TB</string>
+    <string name="shared_string_memory_gb_desc">%1$s GB</string>
+    <string name="shared_string_memory_mb_desc">%1$s MB</string>
+    <string name="shared_string_memory_kb_desc">%1$s KB</string>
 </resources>
