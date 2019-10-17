@@ -45,17 +45,11 @@ import net.osmand.util.Algorithms;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
@@ -158,7 +152,6 @@ public class OsmandSettings {
 	private PreferencesDataStore dataStore;
 	private SettingsAPI settingsAPI;
 	private Object globalPreferences;
-	private Object defaultProfilePreferences;
 	private Object profilePreferences;
 	private ApplicationMode currentMode;
 	private Map<String, OsmandPreference<?>> registeredPreferences =
@@ -187,7 +180,6 @@ public class OsmandSettings {
 
 	private void initPrefs() {
 		globalPreferences = settingsAPI.getPreferenceObject(getSharedPreferencesName(null));
-		defaultProfilePreferences = getProfilePreferences(ApplicationMode.DEFAULT);
 		currentMode = readApplicationMode();
 		profilePreferences = getProfilePreferences(currentMode);
 		registeredPreferences.put(APPLICATION_MODE.getId(), APPLICATION_MODE);
@@ -587,11 +579,7 @@ public class OsmandSettings {
 			if (pt != null) {
 				return getProfileDefaultValue(pt);
 			}
-			if (settingsAPI.contains(defaultProfilePreferences, getId())) {
-				return getValue(defaultProfilePreferences, defaultValue);
-			} else {
-				return defaultValue;
-			}
+			return defaultValue;
 		}
 
 		protected T getDefaultValue() {
