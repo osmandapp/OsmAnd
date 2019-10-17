@@ -3733,4 +3733,6 @@
     <string name="poi_craft_floorer">Gulvlægger</string>
     <string name="poi_craft_bakery">Bager</string>
     <string name="poi_craft_cabinet_maker">Møbelsnedker</string>
+    <string name="poi_charge">Gebyr</string>
+    <string name="poi_pet_grooming">Kæledyrspleje</string>
 </resources>
