@@ -3059,11 +3059,11 @@
     <string name="move_maps">Переместить карты</string>
     <string name="dont_move_maps">Не перемещать</string>
     <string name="public_transport_ped_route_title">Маршрут пешком составляет примерно %1$s и он может быть быстрее, чем на общественном транспорте</string>
-    <string name="shared_string_privacy_policy">Политика конфиденциальности</string>
+    <string name="shared_string_privacy_policy">политикой конфиденциальности</string>
     <string name="help_us_make_osmand_better">Помогите нам сделать OsmAnd лучше!</string>
-    <string name="make_osmand_better_descr">Разрешить OsmAnd собирать и обрабатывать анонимные данные об использовании приложения. Мы не собираем и не храним данные о вашем местоположении или о местоположениях, которые вы просматриваете на карте. 
-\n
-\nВы всегда можете изменить свой выбор в Настройки &gt; Конфиденциальность и безопасность.</string>
+    <string name="make_osmand_better_descr">"Разрешите OsmAnd собирать и обрабатывать анонимные данные об использовании приложения. Мы не собираем и не храним данные о вашем местоположении или о любых местах, которые вы просматриваете на карте.  
+\n 
+\nВы можете изменить свой выбор в любое время в Настройки &gt; Конфиденциальность и безопасность."</string>
     <string name="choose_data_to_share">Выберите тип данных, которыми вы хотите поделиться:</string>
     <string name="downloaded_maps">Загруженные карты</string>
     <string name="visited_screens">Посещаемые экраны</string>
@@ -3071,7 +3071,7 @@
     <string name="collected_data_descr">Список данных, которыми вы хотите поделиться с OsmAnd.</string>
     <string name="downloaded_maps_collect_descr">Мы собираем эти данные, чтобы понять, какие регионы и страны наиболее популярны.</string>
     <string name="visited_screens_collect_descr">Мы собираем эти данные, чтобы понять какие функции OsmAnd наиболее популярны.</string>
-    <string name="privacy_and_security_change_descr">Нажимая кнопку \"Разрешить\", вы соглашаетесь с нашими %1$s</string>
+    <string name="privacy_and_security_change_descr">Нажимая кнопку \"Разрешить\", вы соглашаетесь с нашей %1$s</string>
     <string name="settings_privacy_and_security">Конфиденциальность и безопасность</string>
     <string name="shared_string_no_thank_you">Нет, спасибо</string>
     <string name="shared_string_allow">Разрешить</string>
@@ -3224,7 +3224,7 @@
     <string name="application_profile_changed">Профиль изменён на\"%s\"</string>
     <string name="configure_profile_info">Все приведенные ниже настройки относятся только к выбранному профилю.</string>
     <string name="units_and_formats">Единицы измерения и форматы</string>
-    <string name="map_look_descr">иконки, виджеты</string>
+    <string name="map_look_descr">Внешний вид карты</string>
     <string name="list_of_installed_plugins">Список установленных плагинов</string>
     <string name="general_settings_profile_descr">Тема приложения, единицы измерения, регион</string>
     <string name="manage_profiles_descr">Создание, импорт и редактирование профилей</string>
@@ -3239,7 +3239,7 @@
     <string name="appearance">Внешний вид</string>
     <string name="configure_navigation">Настроить навигацию</string>
     <string name="screen_alerts_descr">Оповещения будут отображаться в левом нижнем углу экрана во время навигации.</string>
-    <string name="osmand_settings_descr">Влияет на всё приложение</string>
+    <string name="osmand_settings_descr">Влияют на всё приложение</string>
     <string name="osmand_settings">Настройки OsmAnd</string>
     <string name="copy_from_other_profile">Копировать из другого профиля</string>
     <string name="turn_screen_on">Включить экран</string>
@@ -3258,4 +3258,15 @@
     <string name="language_and_output">Язык и вывод</string>
     <string name="change_data_storage_full_description">Переместите файлы данных OsmAnd в новое место назначения\?
 \n%1$s &gt; %2$s</string>
+    <string name="shared_string_by_default">По умолчанию</string>
+    <string name="data_storage_preference_summary">%1$s • Использовано %2$s ГБ</string>
+    <string name="data_storage_space_description">"Свободно  %1$s • %2$s / %3$s ГБ"</string>
+    <string name="enter_path_to_folder">Введите путь к папке</string>
+    <string name="shared_string_select_folder">Выберите папку</string>
+    <string name="paste_Osmand_data_folder_path">Вставить путь к папке с данными OsmAnd</string>
+    <string name="change_osmand_data_folder_question">Изменить папку данных OsmAnd\?</string>
+    <string name="move_maps_to_new_destination">Переместить в новое место назначения</string>
+    <string name="internal_app_storage_description">Внутреннее хранилище, скрытое от пользователя и других приложений, поэтому никто, кроме OsmAnd не может получить доступ к вашим данным</string>
+    <string name="change_data_storage_folder">Изменение папку хранения данных</string>
+    <string name="avoid_in_routing_descr_">Избегать определенные маршруты и типы дорог</string>
 </resources>

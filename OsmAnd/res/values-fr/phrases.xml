@@ -3632,4 +3632,14 @@
     <string name="poi_goods_yes">Oui</string>
     <string name="poi_goods_designated">Accès conçu pour les fauteuils roulants</string>
     <string name="poi_disabled_yes">Oui</string>
+    <string name="poi_glacier_type_hanging">suspendu</string>
+    <string name="poi_motorcar_yes">accès-voiture :</string>
+    <string name="poi_motorcar_private">accès-voiture : privé</string>
+    <string name="poi_motorcar_no">accès-voiture : impossible</string>
+    <string name="poi_motorcar_permissive">accès-voiture : possible</string>
+    <string name="poi_motorcar_customers">accès-voiture : clients</string>
+    <string name="poi_motor_vehicle_yes">accès-voiture : autorisé</string>
+    <string name="poi_motor_vehicle_private">Accès-voiture : privé</string>
+    <string name="poi_motor_vehicle_delivery">Accès-véhicules : livraison</string>
+    <string name="poi_motor_vehicle_agricultural">Accès-véhicules : agricoles</string>
 </resources>
