@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="?attr/list_background_color">
+
+	<View
+		android:id="@+id/topSpace"
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/content_padding_half" />
+
+	<View
+		android:id="@+id/divider"
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:background="?attr/dashboard_divider"
+		android:focusable="false" />
+
+	<View
+		android:id="@+id/bottomSpace"
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/content_padding_half" />
+
+</LinearLayout>

@@ -5,7 +5,6 @@ import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -46,39 +45,61 @@ import java.util.Locale;
 
 import static net.osmand.plus.settings.DataStorageItemsHolder.INTERNAL_STORAGE;
 import static net.osmand.plus.settings.DataStorageItemsHolder.MANUALLY_SPECIFIED;
+import static net.osmand.plus.settings.DataStorageItemsHolder.TILES_MEMORY;
 import static net.osmand.plus.settings.bottomsheets.ChangeDataStorageBottomSheet.CHOSEN_DIRECTORY;
 import static net.osmand.plus.settings.bottomsheets.ChangeDataStorageBottomSheet.MOVE_DATA;
 import static net.osmand.plus.settings.bottomsheets.SelectFolderBottomSheet.PATH_CHANGED;
 import static net.osmand.plus.settings.bottomsheets.SelectFolderBottomSheet.NEW_PATH;
 
-public class DataStorageFragment extends BaseSettingsFragment {
+public class DataStorageFragment extends BaseSettingsFragment implements DataStorageItemsHolder.UpdateMemoryInfoUIAdapter {
 
 	private final static String CHANGE_DIRECTORY_BUTTON = "change_directory";
+	private final static String OSMAND_USAGE = "osmand_usage";
+	private final static String CALCULATE_TILES_BTN_PRESSED = "calculate_tiles_btn_pressed";
+	private final static String ITEMS_HOLDER = "items_holder";
 
 	private ArrayList<DataStorageMenuItem> menuItems;
+	private ArrayList<DataStorageMemoryItem> memoryItems;
 	private ArrayList<CheckBoxPreference> dataStorageRadioButtonsGroup;
 	private Preference changeButton;
 	private DataStorageMenuItem currentDataStorage;
 	private String tmpManuallySpecifiedPath;
 	private DataStorageItemsHolder itemsHolder;
+	private boolean calculateTilesBtnPressed;
+	
+	private DataStorageItemsHolder.RefreshMemoryUsedInfo calculateMemoryTask;
+	private DataStorageItemsHolder.RefreshMemoryUsedInfo calculateTilesMemoryTask;
 
 	private OsmandApplication app;
 	private OsmandActionBarActivity activity;
 	private OsmandSettings settings;
 
 	@Override
-	protected void setupPreferences() {
+	public void onCreate(Bundle savedInstanceState) {
 		app = getMyApplication();
 		activity = getMyActivity();
+		settings = app.getSettings();
+		if (savedInstanceState != null) {
+			calculateTilesBtnPressed = savedInstanceState.getBoolean(CALCULATE_TILES_BTN_PRESSED);
+			itemsHolder = savedInstanceState.getParcelable(ITEMS_HOLDER);
+		}
+		if (itemsHolder == null) {
+			refreshDataInfo();
+		}
+		super.onCreate(savedInstanceState);
+	}
+	
+	@Override
+	protected void setupPreferences() {
+		
 		PreferenceScreen screen = getPreferenceScreen();
 
-		if (screen == null || app == null || activity == null) {
+		if (screen == null || itemsHolder == null) {
 			return;
 		}
-		settings = app.getSettings();
 
-		itemsHolder = DataStorageItemsHolder.refreshInfo(app);
 		menuItems = itemsHolder.getStorageItems();
+		memoryItems = itemsHolder.getMemoryInfoItems();
 		dataStorageRadioButtonsGroup = new ArrayList<>();
 
 		for (DataStorageMenuItem item : menuItems) {
@@ -174,13 +195,24 @@ public class DataStorageFragment extends BaseSettingsFragment {
 	}
 
 	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putBoolean(CALCULATE_TILES_BTN_PRESSED, calculateTilesBtnPressed);
+		outState.putParcelable(ITEMS_HOLDER, itemsHolder);
+	}
+
+	@Override
 	protected void onBindPreferenceViewHolder(Preference preference, PreferenceViewHolder holder) {
 		super.onBindPreferenceViewHolder(preference, holder);
 		String key = preference.getKey();
 		if (key == null) {
 			return;
 		}
-		View itemView = holder.itemView;
+		int activeColorResId = isNightMode() ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
+		int activeColor = ContextCompat.getColor(app, activeColorResId);
+		int primaryTextColorResId = isNightMode() ? R.color.text_color_primary_dark : R.color.text_color_primary_light;
+		int primaryTextColor = ContextCompat.getColor(app, primaryTextColorResId);
+		final View itemView = holder.itemView;
 		if (preference instanceof CheckBoxPreference) {
 			DataStorageMenuItem item = itemsHolder.getStorage(key);
 			if (item != null) {
@@ -222,13 +254,57 @@ public class DataStorageFragment extends BaseSettingsFragment {
 		} else if (key.equals(CHANGE_DIRECTORY_BUTTON)) {
 			ImageView icon = itemView.findViewById(R.id.button_icon);
 			TextView title = itemView.findViewById(R.id.button_text);
-			int colorResId = isNightMode() ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
-			int color = ContextCompat.getColor(app, colorResId);
-			Drawable drawable = UiUtilities.getColoredSelectableDrawable(app, color, 0.3f);
+			Drawable drawable = UiUtilities.getColoredSelectableDrawable(app, activeColor, 0.3f);
 			AndroidUtils.setBackground(itemView, drawable);
 			icon.setVisibility(View.INVISIBLE);
 			title.setText(R.string.shared_string_change);
+		} else if(key.equals(OSMAND_USAGE)) {
+			long totalUsageBytes = 0;
+			for (DataStorageMemoryItem mi : memoryItems) {
+				totalUsageBytes += mi.getUsedMemoryBytes();
+			}
+			TextView tvSummary = itemView.findViewById(R.id.summary);
+			tvSummary.setText(getFormattedMemoryUsedInfo(totalUsageBytes));
+		} else {
+			for (DataStorageMemoryItem mi : memoryItems) {
+				if (key.equals(mi.getKey())) {
+					TextView tvMemory = itemView.findViewById(R.id.memory);
+					String summary = "";
+					int color = 0;
+					if (mi.getKey().equals(TILES_MEMORY) && !calculateTilesBtnPressed) {
+						summary = getString(R.string.shared_string_calculate);
+						color = activeColor;
+						tvMemory.setOnClickListener(new View.OnClickListener() {
+							@Override
+							public void onClick(View v) {
+								calculateTilesBtnPressed = true;
+								calculateTilesMemoryTask = itemsHolder.calculateTilesMemoryUsed(DataStorageFragment.this);
+								updateAllSettings();
+							}
+						});
+					} else {
+						tvMemory.setOnClickListener(null);
+						color = primaryTextColor;
+						summary = getFormattedMemoryUsedInfo(mi.getUsedMemoryBytes());
+					}
+					tvMemory.setTextColor(color);
+					tvMemory.setText(summary);
+				}
+			}
 		}
+	}
+
+	@Override
+	public void onDestroy() {
+		if (!activity.isChangingConfigurations()) {
+			if (calculateMemoryTask != null) {
+				calculateMemoryTask.cancel(true);
+			}
+			if (calculateTilesMemoryTask != null) {
+				calculateTilesMemoryTask.cancel(true);
+			}
+		}
+		super.onDestroy();
 	}
 
 	private void updateView(String key) {
@@ -348,7 +424,14 @@ public class DataStorageFragment extends BaseSettingsFragment {
 			Toast.makeText(activity, R.string.specified_directiory_not_writeable,
 					Toast.LENGTH_LONG).show();
 		}
+		refreshDataInfo();
 		updateAllSettings();
+	}
+	
+	private void refreshDataInfo() {
+		calculateTilesBtnPressed = false;
+		itemsHolder = DataStorageItemsHolder.refreshInfo(app);
+		calculateMemoryTask = itemsHolder.calculateMemoryUsedInfo(this);
 	}
 
 	private String getSpaceDescription(String path) {
@@ -362,8 +445,27 @@ public class DataStorageFragment extends BaseSettingsFragment {
 			DecimalFormat formatter = new DecimalFormat("#.##");
 			return String.format(getString(R.string.data_storage_space_description),
 					formatter.format(AndroidUtils.getFreeSpaceGb(dir)),
-					formatter.format(AndroidUtils.getUsedSpaceGb(dir)),
 					formatter.format(AndroidUtils.getTotalSpaceGb(dir)));
+		}
+		return "";
+	}
+	
+	private String getFormattedMemoryUsedInfo(long bytes) {
+		int type  = 1;
+		double used = (double) bytes / 1024;
+		while (used > 1024) {
+			++type;
+			used = used / 1024;
+		}
+		String formattedUsed = new DecimalFormat("#.##").format(used);
+		if (type == 1) {
+			return String.format(getString(R.string.shared_string_memory_kb_desc), formattedUsed);
+		} else if (type == 2) {
+			return String.format(getString(R.string.shared_string_memory_mb_desc), formattedUsed);
+		} else if (type == 3){
+			return String.format(getString(R.string.shared_string_memory_gb_desc), formattedUsed);
+		} else if (type == 4){
+			return String.format(getString(R.string.shared_string_memory_tb_desc), formattedUsed);
 		}
 		return "";
 	}
@@ -372,6 +474,11 @@ public class DataStorageFragment extends BaseSettingsFragment {
 		new ReloadData(activity, getMyApplication()).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
 	}
 
+	@Override
+	public void onMemoryInfoUpdate() {
+		updateAllSettings();
+	}
+	
 	public static class MoveFilesToDifferentDirectory extends AsyncTask<Void, Void, Boolean> {
 
 		protected WeakReference<OsmandActionBarActivity> activity;
