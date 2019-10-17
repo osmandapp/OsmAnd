@@ -120,37 +120,37 @@ public class DataStorageMenuItem implements Parcelable, Cloneable {
 		@IdRes
 		private int iconResId;
 
-		public DataStorageMenuItemBuilder buildKey(String key) {
+		public DataStorageMenuItemBuilder setKey(String key) {
 			this.key = key;
 			return this;
 		}
 
-		public DataStorageMenuItemBuilder buildType(int type) {
+		public DataStorageMenuItemBuilder setType(int type) {
 			this.type = type;
 			return this;
 		}
 
-		public DataStorageMenuItemBuilder buildTitle(String title) {
+		public DataStorageMenuItemBuilder setTitle(String title) {
 			this.title = title;
 			return this;
 		}
 
-		public DataStorageMenuItemBuilder buildDescription(String description) {
+		public DataStorageMenuItemBuilder setDescription(String description) {
 			this.description = description;
 			return this;
 		}
 
-		public DataStorageMenuItemBuilder buildDirectory(String directory) {
+		public DataStorageMenuItemBuilder setDirectory(String directory) {
 			this.directory = directory;
 			return this;
 		}
 
-		public DataStorageMenuItemBuilder buildIconResId(int iconResId) {
+		public DataStorageMenuItemBuilder setIconResId(int iconResId) {
 			this.iconResId = iconResId;
 			return this;
 		}
 
-		public DataStorageMenuItem build() {
+		public DataStorageMenuItem createItem() {
 			return new DataStorageMenuItem(key, type, title, description, directory, iconResId);
 		}
 	}
@@ -158,12 +158,12 @@ public class DataStorageMenuItem implements Parcelable, Cloneable {
 	@Override
 	public Object clone() throws CloneNotSupportedException {
 		return DataStorageMenuItem.builder()
-				.buildKey(this.key)
-				.buildTitle(this.title)
-				.buildDescription(this.description)
-				.buildDirectory(this.directory)
-				.buildType(this.type)
-				.buildIconResId(this.iconResId)
-				.build();
+				.setKey(this.key)
+				.setTitle(this.title)
+				.setDescription(this.description)
+				.setDirectory(this.directory)
+				.setType(this.type)
+				.setIconResId(this.iconResId)
+				.createItem();
 	}
 }
