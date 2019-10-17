@@ -81,13 +81,13 @@ public class DataStorageItemsHolder implements Parcelable {
 			iconId = R.drawable.ic_action_phone;
 
 			DataStorageMenuItem internalStorageItem = DataStorageMenuItem.builder()
-					.buildKey(INTERNAL_STORAGE)
-					.buildTitle(app.getString(R.string.storage_directory_internal_app))
-					.buildDirectory(path)
-					.buildDescription(app.getString(R.string.internal_app_storage_description))
-					.buildType(OsmandSettings.EXTERNAL_STORAGE_TYPE_INTERNAL_FILE)
-					.buildIconResId(iconId)
-					.build();
+					.setKey(INTERNAL_STORAGE)
+					.setTitle(app.getString(R.string.storage_directory_internal_app))
+					.setDirectory(path)
+					.setDescription(app.getString(R.string.internal_app_storage_description))
+					.setType(OsmandSettings.EXTERNAL_STORAGE_TYPE_INTERNAL_FILE)
+					.setIconResId(iconId)
+					.createItem();
 			addItem(internalStorageItem);
 
 			//shared_storage
@@ -96,12 +96,12 @@ public class DataStorageItemsHolder implements Parcelable {
 			iconId = R.drawable.ic_action_phone;
 
 			DataStorageMenuItem sharedStorageItem = DataStorageMenuItem.builder()
-					.buildKey(SHARED_STORAGE)
-					.buildTitle(app.getString(R.string.storage_directory_shared))
-					.buildDirectory(path)
-					.buildType(OsmandSettings.EXTERNAL_STORAGE_TYPE_DEFAULT)
-					.buildIconResId(iconId)
-					.build();
+					.setKey(SHARED_STORAGE)
+					.setTitle(app.getString(R.string.storage_directory_shared))
+					.setDirectory(path)
+					.setType(OsmandSettings.EXTERNAL_STORAGE_TYPE_DEFAULT)
+					.setIconResId(iconId)
+					.createItem();
 			addItem(sharedStorageItem);
 
 			//external storage
@@ -115,12 +115,12 @@ public class DataStorageItemsHolder implements Parcelable {
 						path = dir.getAbsolutePath();
 						iconId = getIconForStorageType(dir);
 						DataStorageMenuItem externalStorageItem = DataStorageMenuItem.builder()
-								.buildKey(EXTERNAL_STORAGE + i)
-								.buildTitle(app.getString(R.string.storage_directory_external) + " " + i)
-								.buildDirectory(path)
-								.buildType(OsmandSettings.EXTERNAL_STORAGE_TYPE_EXTERNAL_FILE)
-								.buildIconResId(iconId)
-								.build();
+								.setKey(EXTERNAL_STORAGE + i)
+								.setTitle(app.getString(R.string.storage_directory_external) + " " + i)
+								.setDirectory(path)
+								.setType(OsmandSettings.EXTERNAL_STORAGE_TYPE_EXTERNAL_FILE)
+								.setIconResId(iconId)
+								.createItem();
 						addItem(externalStorageItem);
 					}
 				}
@@ -137,12 +137,12 @@ public class DataStorageItemsHolder implements Parcelable {
 						path = dir.getAbsolutePath();
 						iconId = getIconForStorageType(dir);
 						DataStorageMenuItem multiuserStorageItem = DataStorageMenuItem.builder()
-								.buildKey(MULTIUSER_STORAGE + i)
-								.buildTitle(app.getString(R.string.storage_directory_multiuser) + " " + i)
-								.buildDirectory(path)
-								.buildType(OsmandSettings.EXTERNAL_STORAGE_TYPE_OBB)
-								.buildIconResId(iconId)
-								.build();
+								.setKey(MULTIUSER_STORAGE + i)
+								.setTitle(app.getString(R.string.storage_directory_multiuser) + " " + i)
+								.setDirectory(path)
+								.setType(OsmandSettings.EXTERNAL_STORAGE_TYPE_OBB)
+								.setIconResId(iconId)
+								.createItem();
 						addItem(multiuserStorageItem);
 					}
 				}
@@ -151,12 +151,12 @@ public class DataStorageItemsHolder implements Parcelable {
 
 		//manually specified storage
 		manuallySpecified = DataStorageMenuItem.builder()
-				.buildKey(MANUALLY_SPECIFIED)
-				.buildTitle(app.getString(R.string.storage_directory_manual))
-				.buildDirectory(currentStoragePath)
-				.buildType(OsmandSettings.EXTERNAL_STORAGE_TYPE_SPECIFIED)
-				.buildIconResId(R.drawable.ic_action_folder)
-				.build();
+				.setKey(MANUALLY_SPECIFIED)
+				.setTitle(app.getString(R.string.storage_directory_manual))
+				.setDirectory(currentStoragePath)
+				.setType(OsmandSettings.EXTERNAL_STORAGE_TYPE_SPECIFIED)
+				.setIconResId(R.drawable.ic_action_folder)
+				.createItem();
 		menuItems.add(manuallySpecified);
 
 		if (currentDataStorage == null) {
@@ -168,42 +168,42 @@ public class DataStorageItemsHolder implements Parcelable {
 
 	private void initMemoryUsed(OsmandApplication app) {
 		mapsMemory = DataStorageMemoryItem.builder()
-				.buildKey(MAPS_MEMORY)
-				.buildExtensions(IndexConstants.BINARY_MAP_INDEX_EXT, IndexConstants.BINARY_MAP_INDEX_EXT_ZIP)
-				.buildDirectories(
+				.setKey(MAPS_MEMORY)
+				.setExtensions(IndexConstants.BINARY_MAP_INDEX_EXT, IndexConstants.BINARY_MAP_INDEX_EXT_ZIP)
+				.setDirectories(
 						app.getAppPath(IndexConstants.MAPS_PATH).getAbsolutePath(),
 						app.getAppPath(IndexConstants.ROADS_INDEX_DIR).getAbsolutePath(),
 						app.getAppPath(IndexConstants.SRTM_INDEX_DIR).getAbsolutePath(),
 						app.getAppPath(IndexConstants.WIKI_INDEX_DIR).getAbsolutePath(),
 						app.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR).getAbsolutePath(),
 						app.getAppPath(IndexConstants.BACKUP_INDEX_DIR).getAbsolutePath())
-				.build();
+				.createItem();
 		memoryItems.add(mapsMemory);
 
 		tracksMemory = DataStorageMemoryItem.builder()
-				.buildKey(TRACKS_MEMORY)
-//				.buildExtensions(".gpx", ".gpx.bz2")
-				.buildDirectories(app.getAppPath(IndexConstants.GPX_INDEX_DIR).getAbsolutePath())
-				.build();
+				.setKey(TRACKS_MEMORY)
+//				.setExtensions(".gpx", ".gpx.bz2")
+				.setDirectories(app.getAppPath(IndexConstants.GPX_INDEX_DIR).getAbsolutePath())
+				.createItem();
 		memoryItems.add(tracksMemory);
 
 		notesMemory = DataStorageMemoryItem.builder()
-				.buildKey(NOTES_MEMORY)
-//				.buildExtensions("")
-				.buildDirectories(app.getAppPath(IndexConstants.AV_INDEX_DIR).getAbsolutePath())
-				.build();
+				.setKey(NOTES_MEMORY)
+//				.setExtensions("")
+				.setDirectories(app.getAppPath(IndexConstants.AV_INDEX_DIR).getAbsolutePath())
+				.createItem();
 		memoryItems.add(notesMemory);
 
 		tilesMemory = DataStorageMemoryItem.builder()
-				.buildKey(TILES_MEMORY)
-//				.buildExtensions("")
-				.buildDirectories(app.getAppPath(IndexConstants.TILES_INDEX_DIR).getAbsolutePath())
-				.build();
+				.setKey(TILES_MEMORY)
+//				.setExtensions("")
+				.setDirectories(app.getAppPath(IndexConstants.TILES_INDEX_DIR).getAbsolutePath())
+				.createItem();
 		memoryItems.add(tilesMemory);
 
 		otherMemory = DataStorageMemoryItem.builder()
-				.buildKey(OTHER_MEMORY)
-				.build();
+				.setKey(OTHER_MEMORY)
+				.createItem();
 		memoryItems.add(otherMemory);
 	}
 

@@ -91,27 +91,27 @@ public class DataStorageMemoryItem implements Parcelable {
 		private String[] directories;
 		private long usedMemoryBytes;
 
-		public DataStorageMemoryItemBuilder buildKey(String key) {
+		public DataStorageMemoryItemBuilder setKey(String key) {
 			this.key = key;
 			return this;
 		}
 
-		public DataStorageMemoryItemBuilder buildExtensions(String ... extensions) {
+		public DataStorageMemoryItemBuilder setExtensions(String ... extensions) {
 			this.extensions = extensions;
 			return this;
 		}
 		
-		public DataStorageMemoryItemBuilder buildDirectories(String ... directories) {
+		public DataStorageMemoryItemBuilder setDirectories(String ... directories) {
 			this.directories = directories;
 			return this;
 		}
 		
-		public DataStorageMemoryItemBuilder buildUsedMemoryBytes(long usedMemoryBytes) {
+		public DataStorageMemoryItemBuilder setUsedMemoryBytes(long usedMemoryBytes) {
 			this.usedMemoryBytes = usedMemoryBytes;
 			return this;
 		}
 		
-		public DataStorageMemoryItem build() {
+		public DataStorageMemoryItem createItem() {
 			return new DataStorageMemoryItem(key, extensions, usedMemoryBytes, directories);
 		}
 	}
