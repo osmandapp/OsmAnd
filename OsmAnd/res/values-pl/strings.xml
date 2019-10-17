@@ -3299,11 +3299,11 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="download_detailed_map">Pobierz szczegółową mapę %S, aby zobaczyć ten obszar.</string>
     <string name="change_data_storage_full_description">Przenieść pliki danych OsmAnd do nowego położenia\?
 \n%1$s &gt; %2$s</string>
-    <string name="data_storage_preference_summary">"%1$s •  Użyto %2$s GB"</string>
+    <string name="data_storage_preference_summary">%1$s • Zajęte %2$s GB</string>
     <string name="data_storage_space_description">Wolne %1$s • %2$s / %3$s GB</string>
     <string name="enter_path_to_folder">Proszę wprowadzić ścieżkę do katalogu</string>
-    <string name="shared_string_select_folder">Wybierz folder</string>
-    <string name="paste_Osmand_data_folder_path">Wklej ścieżkę do folderu z danymi OsmAnd</string>
+    <string name="shared_string_select_folder">Wybierz katalog</string>
+    <string name="paste_Osmand_data_folder_path">Wklej ścieżkę do katalogu z danymi OsmAnd</string>
     <string name="change_osmand_data_folder_question">Zmienić katalog danych OsmAnd\?</string>
     <string name="move_maps_to_new_destination">Przenieś do nowego miejsca przeznaczenia</string>
     <string name="internal_app_storage_description">Wewnętrzna pamięć masowa, ukryta przed użytkownikiem i innymi aplikacjami, dzięki czemu nikt oprócz OsmAnd nie może uzyskać dostępu do Twoich danych</string>

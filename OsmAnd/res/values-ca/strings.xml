@@ -3276,4 +3276,9 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="change_osmand_data_folder_question">Voleu canviar la carpeta de dades de OsmAnd\?</string>
     <string name="move_maps_to_new_destination">Desplaça a la nova destinació</string>
     <string name="avoid_in_routing_descr_">Evita determinades rutes i tipus de carretera</string>
+    <string name="internal_app_storage_description">Emmagatzematge intern, amagat a l\'usuari i a les altres aplicacions, de manera que només OsmAnd pot accedir a les vostres dades</string>
+    <string name="change_data_storage_folder">Canvia la carpeta d\'emmagatzematge de dades</string>
+    <string name="rendering_attr_piste_type_snow_park_name">Parc de neu</string>
+    <string name="rendering_attr_piste_type_sleigh_name">Trineu</string>
+    <string name="app_mode_utv">Costat a costat</string>
 </resources>
