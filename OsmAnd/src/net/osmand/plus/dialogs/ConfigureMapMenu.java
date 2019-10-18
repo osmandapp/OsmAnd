@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.view.ContextThemeWrapper;
 import android.support.v7.widget.AppCompatCheckedTextView;
 import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
@@ -114,6 +115,8 @@ public class ConfigureMapMenu {
 
 	public ContextMenuAdapter createListAdapter(final MapActivity ma) {
 		OsmandApplication app = ma.getMyApplication();
+		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+		int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 		ContextMenuAdapter adapter = new ContextMenuAdapter();
 		adapter.setDefaultLayoutId(R.layout.list_item_icon_and_menu);
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
@@ -138,8 +141,8 @@ public class ConfigureMapMenu {
 				}
 			}
 		}
-		createLayersItems(customRules, adapter, ma);
-		createRenderingAttributeItems(customRules, adapter, ma);
+		createLayersItems(customRules, adapter, ma, themeRes);
+		createRenderingAttributeItems(customRules, adapter, ma, themeRes, nightMode);
 
 		return adapter;
 	}
@@ -284,7 +287,7 @@ public class ConfigureMapMenu {
 		}
 	}
 
-	private void createLayersItems(List<RenderingRuleProperty> customRules, ContextMenuAdapter adapter, final MapActivity activity) {
+	private void createLayersItems(List<RenderingRuleProperty> customRules, ContextMenuAdapter adapter, final MapActivity activity, final int themeRes) {
 		final OsmandApplication app = activity.getMyApplication();
 		final OsmandSettings settings = app.getSettings();
 		LayerMenuListener l = new LayerMenuListener(activity, adapter);
@@ -398,7 +401,7 @@ public class ConfigureMapMenu {
 					}
 
 					private void showTransportDialog(final ArrayAdapter<ContextMenuItem> ad, final int pos) {
-						final AlertDialog.Builder b = new AlertDialog.Builder(activity);
+						final AlertDialog.Builder b = new AlertDialog.Builder(new ContextThemeWrapper(activity, themeRes));
 						b.setTitle(activity.getString(R.string.rendering_category_transport));
 
 						final int[] iconIds = new int[transportPrefs.size()];
@@ -425,7 +428,7 @@ public class ConfigureMapMenu {
 							}
 						}
 
-						adapter = new ArrayAdapter<CharSequence>(activity, R.layout.popup_list_item_icon24_and_menu, R.id.title, vals) {
+						adapter = new ArrayAdapter<CharSequence>(new ContextThemeWrapper(activity, themeRes), R.layout.popup_list_item_icon24_and_menu, R.id.title, vals) {
 							@NonNull
 							@Override
 							public View getView(final int position, View convertView, ViewGroup parent) {
@@ -545,7 +548,8 @@ public class ConfigureMapMenu {
 	}
 
 	private void createRenderingAttributeItems(List<RenderingRuleProperty> customRules,
-											   final ContextMenuAdapter adapter, final MapActivity activity) {
+											   final ContextMenuAdapter adapter, final MapActivity activity,
+	                                           final int themeRes, final boolean nightMode) {
 		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.map_widget_map_rendering, activity)
 				.setId(MAP_RENDERING_CATEGORY_ID)
 				.setCategory(true).setLayout(R.layout.list_group_title_with_switch).createItem());
@@ -570,7 +574,7 @@ public class ConfigureMapMenu {
 					public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> ad, int itemId,
 													  final int pos, boolean isChecked, int[] viewCoordinates) {
 						final OsmandMapTileView view = activity.getMapView();
-						AlertDialog.Builder bld = new AlertDialog.Builder(view.getContext());
+						AlertDialog.Builder bld = new AlertDialog.Builder(new ContextThemeWrapper(view.getContext(), themeRes));
 						bld.setTitle(R.string.daynight);
 						final String[] items = new String[OsmandSettings.DayNightMode.values().length];
 						for (int i = 0; i < items.length; i++) {
@@ -608,7 +612,7 @@ public class ConfigureMapMenu {
 													  final int pos, boolean isChecked, int[] viewCoordinates) {
 						final OsmandMapTileView view = activity.getMapView();
 						final OsmandSettings.OsmandPreference<Float> mapDensity = view.getSettings().MAP_DENSITY;
-						final AlertDialog.Builder bld = new AlertDialog.Builder(view.getContext());
+						AlertDialog.Builder bld = new AlertDialog.Builder(new ContextThemeWrapper(view.getContext(), themeRes));
 						int p = (int) (mapDensity.get() * 100);
 						final TIntArrayList tlist = new TIntArrayList(new int[]{25, 33, 50, 75, 100, 125, 150, 200, 300, 400});
 						final List<String> values = new ArrayList<>();
@@ -658,7 +662,7 @@ public class ConfigureMapMenu {
 				}).createItem());
 
 		ContextMenuItem props;
-		props = createRenderingProperty(customRules, adapter, activity, R.drawable.ic_action_intersection, ROAD_STYLE_ATTR, ROAD_STYLE_ID);
+		props = createRenderingProperty(customRules, adapter, activity, R.drawable.ic_action_intersection, ROAD_STYLE_ATTR, ROAD_STYLE_ID, themeRes);
 		if (props != null) {
 			adapter.addItem(props);
 		}
@@ -671,7 +675,7 @@ public class ConfigureMapMenu {
 					public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> ad, int itemId,
 													  final int pos, boolean isChecked, int[] viewCoordinates) {
 						final OsmandMapTileView view = activity.getMapView();
-						AlertDialog.Builder b = new AlertDialog.Builder(view.getContext());
+						AlertDialog.Builder b = new AlertDialog.Builder(new ContextThemeWrapper(view.getContext(), themeRes));
 						// test old descr as title
 						b.setTitle(R.string.text_size);
 						final Float[] txtValues = new Float[]{0.75f, 1f, 1.25f, 1.5f, 2f, 3f};
@@ -711,7 +715,7 @@ public class ConfigureMapMenu {
 					public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> ad, int itemId,
 													  final int pos, boolean isChecked, int[] viewCoordinates) {
 						final OsmandMapTileView view = activity.getMapView();
-						final AlertDialog.Builder b = new AlertDialog.Builder(view.getContext());
+						AlertDialog.Builder b = new AlertDialog.Builder(new ContextThemeWrapper(view.getContext(), themeRes));
 
 						b.setTitle(activity.getString(R.string.map_locale));
 
@@ -735,7 +739,7 @@ public class ConfigureMapMenu {
 							}
 						};
 
-						final ArrayAdapter<CharSequence> singleChoiceAdapter = new ArrayAdapter<CharSequence>(activity, R.layout.single_choice_switch_item, R.id.text1, txtValues) {
+						final ArrayAdapter<CharSequence> singleChoiceAdapter = new ArrayAdapter<CharSequence>(new ContextThemeWrapper(view.getContext(), themeRes), R.layout.single_choice_switch_item, R.id.text1, txtValues) {
 							@NonNull
 							@Override
 							public View getView(int position, View convertView, ViewGroup parent) {
@@ -794,17 +798,17 @@ public class ConfigureMapMenu {
 				}).createItem());
 
 		props = createProperties(customRules, null, R.string.rendering_category_transport, R.drawable.ic_action_bus_dark,
-				"transport", null, adapter, activity, true, TRANSPORT_RENDERING_ID);
+				"transport", null, adapter, activity, true, TRANSPORT_RENDERING_ID, themeRes, nightMode);
 		if (props != null) {
 			adapter.addItem(props);
 		}
 		props = createProperties(customRules, null, R.string.rendering_category_details, R.drawable.ic_action_layers_dark,
-				"details", null, adapter, activity, true, DETAILS_ID);
+				"details", null, adapter, activity, true, DETAILS_ID, themeRes, nightMode);
 		if (props != null) {
 			adapter.addItem(props);
 		}
 		props = createProperties(customRules, null, R.string.rendering_category_hide, R.drawable.ic_action_hide,
-				"hide", null, adapter, activity, true, HIDE_ID);
+				"hide", null, adapter, activity, true, HIDE_ID, themeRes, nightMode);
 		if (props != null) {
 			adapter.addItem(props);
 		}
@@ -816,7 +820,7 @@ public class ConfigureMapMenu {
 			}
 		}
 		props = createProperties(customRules, customRulesIncluded, R.string.rendering_category_routes, R.drawable.ic_action_map_routes,
-				"routes", null, adapter, activity, true, ROUTES_ID);
+				"routes", null, adapter, activity, true, ROUTES_ID, themeRes, nightMode);
 		if (props != null) {
 			adapter.addItem(props);
 		}
@@ -824,7 +828,7 @@ public class ConfigureMapMenu {
 		if (getCustomRenderingPropertiesSize(customRules) > 0) {
 			adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.rendering_category_others, activity)
 					.setCategory(true).setLayout(R.layout.list_group_title_with_switch).createItem());
-			createCustomRenderingProperties(adapter, activity, customRules);
+			createCustomRenderingProperties(adapter, activity, customRules, themeRes);
 		}
 	}
 
@@ -879,7 +883,9 @@ public class ConfigureMapMenu {
 											 final ContextMenuAdapter adapter,
 											 final MapActivity activity,
 											 final boolean useDescription,
-											 final String id) {
+											 final String id,
+	                                         final int themeRes,
+	                                         final boolean nightMode) {
 
 		final List<RenderingRuleProperty> ps = new ArrayList<>();
 		final List<OsmandSettings.CommonPreference<Boolean>> prefs = new ArrayList<>();
@@ -928,7 +934,7 @@ public class ConfigureMapMenu {
 						activity.getMapLayers().updateLayers(activity.getMapView());
 					} else {
 						showPreferencesDialog(adapter, a, pos, activity, activity.getString(strId), ps, prefs,
-								useDescription, defaultSettings, true, customRulesIncluded);
+								useDescription, defaultSettings, true, customRulesIncluded, themeRes, nightMode);
 					}
 					return false;
 				}
@@ -968,7 +974,7 @@ public class ConfigureMapMenu {
 					public boolean onRowItemClick(ArrayAdapter<ContextMenuItem> a, View view, int itemId,
 												  int pos) {
 						showPreferencesDialog(adapter, a, pos, activity, activity.getString(strId), ps, prefs,
-								useDescription, defaultSettings, false, customRulesIncluded);
+								useDescription, defaultSettings, false, customRulesIncluded, themeRes, nightMode);
 						return false;
 					}
 				});
@@ -1010,9 +1016,11 @@ public class ConfigureMapMenu {
 										 final boolean useDescription,
 										 ListStringPreference defaultSettings,
 										 boolean useDefault,
-										 final List<RenderingRuleProperty> customRulesIncluded) {
+										 final List<RenderingRuleProperty> customRulesIncluded,
+	                                     final int themeRes,
+	                                     final boolean nightMode) {
 
-		AlertDialog.Builder bld = new AlertDialog.Builder(activity);
+		AlertDialog.Builder bld = new AlertDialog.Builder(new ContextThemeWrapper(activity, themeRes));
 		boolean[] checkedItems = new boolean[prefs.size()];
 		final boolean[] tempPrefs = new boolean[prefs.size()];
 		for (int i = 0; i < prefs.size(); i++) {
@@ -1095,8 +1103,7 @@ public class ConfigureMapMenu {
 					final OsmandSettings.CommonPreference<String> pref = activity.getMyApplication().getSettings()
 							.getCustomRenderProperty(p.getAttrName());
 
-					LayoutInflater inflater = activity.getLayoutInflater();
-					View spinnerView = inflater.inflate(R.layout.spinner_rule_layout, null);
+					View spinnerView = View.inflate(new ContextThemeWrapper(activity, themeRes), R.layout.spinner_rule_layout, null);
 					TextView title = (TextView) spinnerView.findViewById(R.id.title);
 					final Spinner spinner = (Spinner) spinnerView.findViewById(R.id.spinner);
 					TextView description = (TextView) spinnerView.findViewById(R.id.description);
@@ -1125,7 +1132,7 @@ public class ConfigureMapMenu {
 								p.getPossibleValues()[j]);
 					}
 
-					StringSpinnerArrayAdapter arrayAdapter = new StringSpinnerArrayAdapter(activity);
+					StringSpinnerArrayAdapter arrayAdapter = new StringSpinnerArrayAdapter(activity, nightMode);
 					for (String val : possibleValuesString) {
 						arrayAdapter.add(val);
 					}
@@ -1189,10 +1196,10 @@ public class ConfigureMapMenu {
 	}
 
 	private void createCustomRenderingProperties(final ContextMenuAdapter adapter, final MapActivity activity,
-												 List<RenderingRuleProperty> customRules) {
+												 List<RenderingRuleProperty> customRules, final int themeRes) {
 		for (final RenderingRuleProperty p : customRules) {
 			if (isPropertyAccepted(p)) {
-				adapter.addItem(createRenderingProperty(adapter, activity, 0, p, CUSTOM_RENDERING_ITEMS_ID_SCHEME + p.getName()));
+				adapter.addItem(createRenderingProperty(adapter, activity, 0, p, CUSTOM_RENDERING_ITEMS_ID_SCHEME + p.getName(), themeRes));
 			}
 		}
 	}
@@ -1209,17 +1216,19 @@ public class ConfigureMapMenu {
 
 	private ContextMenuItem createRenderingProperty(final List<RenderingRuleProperty> customRules,
 													final ContextMenuAdapter adapter, final MapActivity activity,
-													@DrawableRes final int icon, final String attrName, String id) {
+													@DrawableRes final int icon, final String attrName, String id,
+	                                                final int themeRes) {
 		for (final RenderingRuleProperty p : customRules) {
 			if (p.getAttrName().equals(attrName)) {
-				return createRenderingProperty(adapter, activity, icon, p, id);
+				return createRenderingProperty(adapter, activity, icon, p, id, themeRes);
 			}
 		}
 		return null;
 	}
 
 	private ContextMenuItem createRenderingProperty(final ContextMenuAdapter adapter, final MapActivity activity,
-										 @DrawableRes final int icon, final RenderingRuleProperty p, final String id) {
+										 @DrawableRes final int icon, final RenderingRuleProperty p, final String id,
+	                                                final int themeRes) {
 		final OsmandMapTileView view = activity.getMapView();
 		String propertyName = SettingsActivity.getStringPropertyName(view.getContext(), p.getAttrName(),
 				p.getName());
@@ -1259,7 +1268,7 @@ public class ConfigureMapMenu {
 						@Override
 						public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> ad,
 														  final int itemId, final int pos, boolean isChecked, int[] viewCoordinates) {
-							AlertDialog.Builder b = new AlertDialog.Builder(view.getContext());
+							AlertDialog.Builder b = new AlertDialog.Builder(new ContextThemeWrapper(view.getContext(), themeRes));
 							// test old descr as title
 							b.setTitle(propertyDescr);
 
@@ -1310,13 +1319,13 @@ public class ConfigureMapMenu {
 
 	private class StringSpinnerArrayAdapter extends ArrayAdapter<String> {
 
-		private boolean lightTheme;
+		private boolean nightMode;
 
-		public StringSpinnerArrayAdapter(Context context) {
+		public StringSpinnerArrayAdapter(Context context, boolean nightMode) {
 			super(context, android.R.layout.simple_spinner_item);
 			setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 			OsmandApplication app = (OsmandApplication )getContext().getApplicationContext();
-			lightTheme = app.getSettings().isLightContent();
+			this.nightMode = nightMode;
 		}
 
 		@Override
@@ -1325,7 +1334,7 @@ public class ConfigureMapMenu {
 
 			String text = getItem(position);
 			label.setText(text);
-			label.setTextColor(!lightTheme ?
+			label.setTextColor(nightMode ?
 					ContextCompat.getColorStateList(getContext(), R.color.text_color_primary_dark) : ContextCompat.getColorStateList(getContext(), R.color.text_color_primary_light));
 			return label;
 		}
@@ -1336,7 +1345,7 @@ public class ConfigureMapMenu {
 
 			String text = getItem(position);
 			label.setText(text);
-			label.setTextColor(!lightTheme ?
+			label.setTextColor(nightMode ?
 						ContextCompat.getColorStateList(getContext(), R.color.text_color_primary_dark) : ContextCompat.getColorStateList(getContext(), R.color.text_color_primary_light));
 
 			return label;
