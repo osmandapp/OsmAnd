@@ -23,6 +23,7 @@ import android.support.v7.widget.SwitchCompat;
 import android.text.SpannableString;
 import android.text.style.StyleSpan;
 import android.util.TypedValue;
+import android.view.ContextThemeWrapper;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -219,7 +220,8 @@ public class GpxUiHelper {
 	}
 
 	public static AlertDialog selectGPXFiles(List<String> selectedGpxList, final Activity activity,
-											 final CallbackWithObject<GPXFile[]> callbackWithObject) {
+											 final CallbackWithObject<GPXFile[]> callbackWithObject, 
+											 int dialogThemeRes) {
 		OsmandApplication app = (OsmandApplication) activity.getApplication();
 		final File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
 		final List<GPXInfo> allGpxList = getSortedGPXFilesInfo(dir, selectedGpxList, false);
@@ -229,11 +231,13 @@ public class GpxUiHelper {
 		allGpxList.add(0, new GPXInfo(activity.getString(R.string.show_current_gpx_title), 0, 0));
 
 		final ContextMenuAdapter adapter = createGpxContextMenuAdapter(allGpxList, selectedGpxList, true);
-		return createDialog(activity, true, true, true, callbackWithObject, allGpxList, adapter);
+		return createDialog(activity, true, true, true, callbackWithObject, allGpxList, adapter, dialogThemeRes);
 	}
 
 	public static AlertDialog selectGPXFile(final Activity activity,
-											final boolean showCurrentGpx, final boolean multipleChoice, final CallbackWithObject<GPXFile[]> callbackWithObject) {
+											final boolean showCurrentGpx, final boolean multipleChoice, 
+											final CallbackWithObject<GPXFile[]> callbackWithObject, boolean nightMode) {
+		int dialogThemeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 		OsmandApplication app = (OsmandApplication) activity.getApplication();
 		final File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
 		final List<GPXInfo> list = getSortedGPXFilesInfo(dir, null, false);
@@ -246,7 +250,7 @@ public class GpxUiHelper {
 			}
 
 			final ContextMenuAdapter adapter = createGpxContextMenuAdapter(list, null, showCurrentGpx);
-			return createDialog(activity, showCurrentGpx, multipleChoice, false, callbackWithObject, list, adapter);
+			return createDialog(activity, showCurrentGpx, multipleChoice, false, callbackWithObject, list, adapter, dialogThemeRes);
 		}
 		return null;
 	}
@@ -439,11 +443,12 @@ public class GpxUiHelper {
 											final boolean showAppearanceSetting,
 											final CallbackWithObject<GPXFile[]> callbackWithObject,
 											final List<GPXInfo> list,
-											final ContextMenuAdapter adapter) {
+											final ContextMenuAdapter adapter,
+	                                        final int themeRes) {
 		final OsmandApplication app = (OsmandApplication) activity.getApplication();
 		final DateFormat dateFormat = android.text.format.DateFormat.getMediumDateFormat(activity);
 		final File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
-		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+		AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(activity, themeRes));
 		final int layout = R.layout.gpx_track_item;
 		final Map<String, String> gpxAppearanceParams = new HashMap<>();
 
@@ -479,7 +484,7 @@ public class GpxUiHelper {
 				View v = convertView;
 				boolean checkLayout = getItemViewType(position) == 0;
 				if (v == null) {
-					v = activity.getLayoutInflater().inflate(layout, null);
+					v = View.inflate(new ContextThemeWrapper(activity, themeRes), layout, null);
 				}
 
 				if (dataItems == null) {
@@ -546,7 +551,7 @@ public class GpxUiHelper {
 				if (trackWidthProp == null || trackColorProp == null) {
 					builder.setTitle(R.string.show_gpx);
 				} else {
-					final View apprTitleView = activity.getLayoutInflater().inflate(R.layout.select_gpx_appearance_title, null);
+					final View apprTitleView = View.inflate(new ContextThemeWrapper(activity, themeRes), R.layout.select_gpx_appearance_title, null);
 
 					final OsmandSettings.CommonPreference<String> prefWidth
 							= app.getSettings().getCustomRenderProperty(CURRENT_TRACK_WIDTH_ATTR);
@@ -558,14 +563,14 @@ public class GpxUiHelper {
 					apprTitleView.findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
 						@Override
 						public void onClick(View v) {
-							final ListPopupWindow popup = new ListPopupWindow(activity);
+							final ListPopupWindow popup = new ListPopupWindow(new ContextThemeWrapper(activity, themeRes));
 							popup.setAnchorView(apprTitleView);
 							popup.setContentWidth(AndroidUtils.dpToPx(activity, 200f));
 							popup.setModal(true);
 							popup.setDropDownGravity(Gravity.RIGHT | Gravity.TOP);
 							popup.setVerticalOffset(AndroidUtils.dpToPx(activity, -48f));
 							popup.setHorizontalOffset(AndroidUtils.dpToPx(activity, -6f));
-							final GpxAppearanceAdapter gpxApprAdapter = new GpxAppearanceAdapter(activity,
+							final GpxAppearanceAdapter gpxApprAdapter = new GpxAppearanceAdapter(new ContextThemeWrapper(activity, themeRes),
 									gpxAppearanceParams.containsKey(CURRENT_TRACK_COLOR_ATTR) ? gpxAppearanceParams.get(CURRENT_TRACK_COLOR_ATTR) : prefColor.get(),
 									GpxAppearanceAdapter.GpxAppearanceAdapterType.TRACK_WIDTH_COLOR);
 							popup.setAdapter(gpxApprAdapter);
@@ -669,7 +674,7 @@ public class GpxUiHelper {
 					if (position == 0 && showCurrentGpx && item.getSelected()) {
 						OsmandMonitoringPlugin monitoringPlugin = OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class);
 						if (monitoringPlugin == null) {
-							AlertDialog.Builder confirm = new AlertDialog.Builder(activity);
+							AlertDialog.Builder confirm = new AlertDialog.Builder(new ContextThemeWrapper(activity, themeRes));
 							confirm.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 								@Override
 								public void onClick(DialogInterface dialog, int which) {

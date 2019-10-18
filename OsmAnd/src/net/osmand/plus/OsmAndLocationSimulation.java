@@ -16,6 +16,7 @@ import android.widget.Toast;
 import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities;
 import net.osmand.Location;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
 
@@ -78,6 +79,7 @@ public class OsmAndLocationSimulation {
 				public void onClick(DialogInterface dialog, int which) {
 					boolean gpxNavigation = radioGPX.isChecked();
 					if (gpxNavigation) {
+						boolean nightMode = ma instanceof MapActivity ? app.getDaynightHelper().isNightModeForMapControls() : !app.getSettings().isLightContent();
 						GpxUiHelper.selectGPXFile(ma, false, false, new CallbackWithObject<GPXUtilities.GPXFile[]>() {
 							@Override
 							public boolean processResult(GPXUtilities.GPXFile[] result) {
@@ -88,7 +90,7 @@ public class OsmAndLocationSimulation {
 								}
 								return true;
 							}
-						});
+						}, nightMode);
 					} else {
 						List<Location> currentRoute = app.getRoutingHelper().getCurrentCalculatedRoute();
 						if (currentRoute.isEmpty()) {

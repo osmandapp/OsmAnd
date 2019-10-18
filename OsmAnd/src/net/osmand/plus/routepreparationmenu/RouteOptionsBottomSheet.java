@@ -412,7 +412,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 				routingHelper.recalculateRouteDueToSettingsChange();
 				return true;
 			}
-		});
+		}, nightMode);
 	}
 
 	private void showOptionsMenu(final TextView gpxSpinner) {
