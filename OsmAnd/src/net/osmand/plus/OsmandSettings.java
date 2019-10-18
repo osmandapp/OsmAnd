@@ -279,7 +279,7 @@ public class OsmandSettings {
 					}
 				}
 				if (metricSystem != null) {
-					METRIC_SYSTEM.set(metricSystem);
+					METRIC_SYSTEM.setModeValue(mode, metricSystem);
 					return true;
 				}
 			} else if (preference == SPEED_SYSTEM) {
@@ -298,7 +298,7 @@ public class OsmandSettings {
 					}
 				}
 				if (speedSystem != null) {
-					SPEED_SYSTEM.set(speedSystem);
+					SPEED_SYSTEM.setModeValue(mode, speedSystem);
 					return true;
 				}
 			} else if (preference instanceof BooleanPreference) {
