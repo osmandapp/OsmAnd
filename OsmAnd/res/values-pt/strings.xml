@@ -208,7 +208,7 @@
     <string name="search_history_int_streets">Interseção : {0} x {1} dans {2}</string>
     <string name="search_history_building">Edifício : {0}, {1}, {2}</string>
     <string name="favorite">Favorito</string>
-    <string name="shared_string_clear_all">Apagar tudo</string>
+    <string name="shared_string_clear_all">Limpar tudo</string>
     <string name="shared_string_history">Histórico</string>
     <string name="uploading_data">Enviando dados…</string>
     <string name="uploading">Enviando…</string>
@@ -3291,7 +3291,7 @@
     <string name="change_data_storage_full_description">Mover ficheiros de dados OsmAnd para o novo destino\?
 \n%1$s &gt; %2$s</string>
     <string name="data_storage_preference_summary">%1$s • Usado %2$s GB</string>
-    <string name="data_storage_space_description">Livre %1$s • %2$s / %3$s GB</string>
+    <string name="data_storage_space_description">Livre %1$s GB • Total %2$s GB</string>
     <string name="enter_path_to_folder">Insira o caminho para a pasta</string>
     <string name="shared_string_select_folder">Selecionar pasta</string>
     <string name="paste_Osmand_data_folder_path">Colar caminho para a pasta com dados OsmAnd</string>
@@ -3320,4 +3320,14 @@
     <string name="routing_attr_width_name">Limite de largura</string>
     <string name="routing_attr_width_description">Especifique o limite permitido de largura do veículo nas rotas.</string>
     <string name="avoid_in_routing_descr_">Evitar determinadas categorias de rotas e estradas</string>
+    <string name="app_mode_utv">Lado a Lado</string>
+    <string name="rendering_attr_piste_difficulty_connection_name">Conexão</string>
+    <string name="shared_string_calculate">Calcular</string>
+    <string name="shared_string_osmand_usage">Uso de OsmAnd</string>
+    <string name="shared_sting_tiles">Azulejos</string>
+    <string name="shared_string_maps">Mapas</string>
+    <string name="shared_string_memory_tb_desc">%1$s TB</string>
+    <string name="shared_string_memory_gb_desc">%1$s GB</string>
+    <string name="shared_string_memory_mb_desc">%1$s MB</string>
+    <string name="shared_string_memory_kb_desc">%1$s KB</string>
 </resources>
