@@ -235,7 +235,7 @@
     <string name="profile_alert_need_save_title">ပြောင်းလဲမှုများကိုသိမ်းပါ</string>
     <string name="profile_alert_need_save_msg">ရှေ့ဆက်မသွားမီပရိုဖိုင်းသို့ပြောင်းလဲမှုများကိုအရင်သိမ်းထားရန်လိုအပ်သည်</string>
     <string name="profile_alert_delete_title">ပရိုဖိုင်းကိုဖျက်မည်</string>
-    <string name="profile_alert_delete_msg">% s ပရိုဖိုင်းကိုသင်ဖျက်လိုကြောင်းသေချာပါလား</string>
+    <string name="profile_alert_delete_msg">%s ပရိုဖိုင်းကိုသင်ဖျက်လိုကြောင်းသေချာပါလား</string>
     <string name="select_base_profile_dialog_title">အခြေခံပရိုဖိုင်းကိုရွေးချယ်ပါ</string>
     <string name="select_nav_profile_dialog_title">လမ်းညွှန်အမျိုးအစားကိုရွေးပါ</string>
     <string name="base_profile_descr_car">ကား၊ ထရပ်ကား၊ ဆိုင်ကယ်</string>
