@@ -3275,7 +3275,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="change_data_storage_full_description">Ĉu movi datum‑dosierojn OsmAnd al la nova loko\?
 \n%1$s → %2$s</string>
     <string name="data_storage_preference_summary">%1$s • uzita: %2$s GB</string>
-    <string name="data_storage_space_description">Libera: %1$s • %2$s / %3$s GB</string>
+    <string name="data_storage_space_description">Libera: %1$s GB • Tute: %2$s GB</string>
     <string name="enter_path_to_folder">Entajpu dosier‑indikon</string>
     <string name="shared_string_select_folder">Elektu dosierujon</string>
     <string name="paste_Osmand_data_folder_path">Algluu dosier‑indikon por dosierujo de OsmAnd‑datumoj</string>
@@ -3307,4 +3307,12 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="app_mode_utv">Ĉiuteren‑veturilo (UTV)</string>
     <string name="rendering_attr_piste_difficulty_aerialway_name">kablovojo</string>
     <string name="rendering_attr_piste_difficulty_connection_name">ligilo</string>
+    <string name="shared_string_calculate">Kalkuli</string>
+    <string name="shared_string_osmand_usage">Uzado de OsmAnd</string>
+    <string name="shared_sting_tiles">Kaheloj</string>
+    <string name="shared_string_maps">Mapoj</string>
+    <string name="shared_string_memory_tb_desc">%1$s TB</string>
+    <string name="shared_string_memory_gb_desc">%1$s GB</string>
+    <string name="shared_string_memory_mb_desc">%1$s MB</string>
+    <string name="shared_string_memory_kb_desc">%1$s kB</string>
 </resources>

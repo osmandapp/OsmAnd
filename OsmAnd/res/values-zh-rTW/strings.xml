@@ -1437,7 +1437,7 @@
     <string name="shared_string_deselect">取消選擇</string>
     <string name="shared_string_deselect_all">取消全選</string>
     <string name="shared_string_clear">清除</string>
-    <string name="shared_string_clear_all">全部清除</string>
+    <string name="shared_string_clear_all">清除全部</string>
     <string name="shared_string_save">儲存</string>
     <string name="shared_string_save_as_gpx">另存為新的 GPX 檔案</string>
     <string name="shared_string_rename">更名</string>
@@ -3283,7 +3283,7 @@
     <string name="change_data_storage_full_description">移動 OsmAnd 資料檔案到新目的地？
 \n%1$s &gt; %2$s</string>
     <string name="data_storage_preference_summary">%1$s • 已使用 %2$s GB</string>
-    <string name="data_storage_space_description">剩餘 %1$s • %2$s / %3$s GB</string>
+    <string name="data_storage_space_description">剩餘 %1$s GB • 總共 %2$s GB</string>
     <string name="enter_path_to_folder">輸入到資料夾的路徑</string>
     <string name="shared_string_select_folder">選取資料夾</string>
     <string name="paste_Osmand_data_folder_path">貼上有 OsmAnd 資料的資料夾路徑</string>
@@ -3312,4 +3312,15 @@
     <string name="routing_attr_width_name">寬度限制</string>
     <string name="routing_attr_width_description">在路線當指定允許的車輛寬度限制。</string>
     <string name="avoid_in_routing_descr_">避開特定路線與道路類型</string>
+    <string name="app_mode_utv">並排</string>
+    <string name="rendering_attr_piste_difficulty_aerialway_name">空中航道</string>
+    <string name="rendering_attr_piste_difficulty_connection_name">連線</string>
+    <string name="shared_string_calculate">計算</string>
+    <string name="shared_string_osmand_usage">OsmAnd 用法</string>
+    <string name="shared_sting_tiles">圖磚</string>
+    <string name="shared_string_maps">地圖</string>
+    <string name="shared_string_memory_tb_desc">%1$s TB</string>
+    <string name="shared_string_memory_gb_desc">%1$s GB</string>
+    <string name="shared_string_memory_mb_desc">%1$s MB</string>
+    <string name="shared_string_memory_kb_desc">%1$s KB</string>
 </resources>

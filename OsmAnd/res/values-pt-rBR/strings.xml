@@ -349,7 +349,7 @@
     <string name="edit_tilesource_successfully">A fonte da quadrícula %1$s foi salva</string>
     <string name="speak_traffic_warnings">Moderadores de tráfego</string>
     <string name="context_menu_item_directions_from">Rota a partir daqui</string>
-    <string name="app_mode_default">Explorar</string>
+    <string name="app_mode_default">Explorar mapa</string>
     <string name="local_indexes_cat_av">Dados de Áudio/Vídeo</string>
     <string name="stop_routing_confirm">Confirma que quer parar a navegação?</string>
     <string name="int_hour">h</string>
@@ -359,7 +359,7 @@
     <string name="shared_string_all">Todos</string>
     <string name="shared_string_waypoints">Marcos do trajeto</string>
     <string name="download_additional_maps">Baixar mapas que faltam %1$s (%2$d MB)?</string>
-    <string name="rendering_value_browse_map_name">Explorar</string>
+    <string name="rendering_value_browse_map_name">Explorar mapa</string>
     <string name="rendering_value_car_name">Carro</string>
     <string name="rendering_value_bicycle_name">Bicicleta</string>
     <string name="rendering_value_pedestrian_name">A pé</string>
@@ -2582,7 +2582,7 @@ Pôr do Sol: %2$s</string>
     <string name="osm_notes">Notas OSM</string>
     <string name="will_open_tomorrow_at">Abre amanhã às</string>
     <string name="rendering_attr_hidePOILabels_name">Rótulos POI</string>
-    <string name="day_off_label">desligado</string>
+    <string name="day_off_label">fechado</string>
     <string name="winter_and_ski_renderer">Inverno e esqui</string>
     <string name="touring_view_renderer">Vista de turismo</string>
     <string name="nautical_renderer">Náutico</string>
@@ -3280,7 +3280,7 @@ Pôr do Sol: %2$s</string>
     <string name="change_data_storage_full_description">Mover arquivos de dados OsmAnd para o novo destino\?
 \n%1$s &gt; %2$s</string>
     <string name="data_storage_preference_summary">%1$s • Usado %2$s GB</string>
-    <string name="data_storage_space_description">Livre %1$s • %2$s / %3$s GB</string>
+    <string name="data_storage_space_description">Livre %1$s GB • Total %2$s GB</string>
     <string name="enter_path_to_folder">Digite o caminho para a pasta</string>
     <string name="shared_string_select_folder">Selecionar pasta</string>
     <string name="paste_Osmand_data_folder_path">Cole o caminho para a pasta com os dados OsmAnd</string>
@@ -3312,4 +3312,12 @@ Pôr do Sol: %2$s</string>
     <string name="app_mode_utv">Lado a lado</string>
     <string name="rendering_attr_piste_difficulty_aerialway_name">Maneira aérea</string>
     <string name="rendering_attr_piste_difficulty_connection_name">Conexão</string>
+    <string name="shared_string_calculate">Calcular</string>
+    <string name="shared_string_osmand_usage">Uso do Osmand</string>
+    <string name="shared_sting_tiles">Azulejos</string>
+    <string name="shared_string_maps">Mapas</string>
+    <string name="shared_string_memory_tb_desc">%1$s TB</string>
+    <string name="shared_string_memory_gb_desc">%1$s GB</string>
+    <string name="shared_string_memory_mb_desc">%1$s MB</string>
+    <string name="shared_string_memory_kb_desc">%1$s KB</string>
 </resources>

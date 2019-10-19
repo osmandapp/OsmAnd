@@ -3300,7 +3300,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="change_data_storage_full_description">Przenieść pliki danych OsmAnd do nowego położenia\?
 \n%1$s &gt; %2$s</string>
     <string name="data_storage_preference_summary">%1$s • Zajęte %2$s GB</string>
-    <string name="data_storage_space_description">Wolne %1$s • %2$s / %3$s GB</string>
+    <string name="data_storage_space_description">Wolne %1$s GB • Ogółem %2$s GB</string>
     <string name="enter_path_to_folder">Proszę wprowadzić ścieżkę do katalogu</string>
     <string name="shared_string_select_folder">Wybierz katalog</string>
     <string name="paste_Osmand_data_folder_path">Wklej ścieżkę do katalogu z danymi OsmAnd</string>
@@ -3328,4 +3328,14 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="routing_attr_width_name">Granica szerokości</string>
     <string name="routing_attr_width_description">Określ dozwoloną szerokość pojazdu na trasach.</string>
     <string name="avoid_in_routing_descr_">Unikaj określonych tras i typów dróg</string>
+    <string name="app_mode_utv">Strona po stronie</string>
+    <string name="rendering_attr_piste_difficulty_aerialway_name">Lotnisko</string>
+    <string name="rendering_attr_piste_difficulty_connection_name">Połączenia</string>
+    <string name="shared_string_calculate">Oblicz</string>
+    <string name="shared_string_osmand_usage">Użyj OsmAnd</string>
+    <string name="shared_string_maps">Mapy</string>
+    <string name="shared_string_memory_tb_desc">%1$s TB</string>
+    <string name="shared_string_memory_gb_desc">%1$s GB</string>
+    <string name="shared_string_memory_mb_desc">%1$s MB</string>
+    <string name="shared_string_memory_kb_desc">%1$s KB</string>
 </resources>

@@ -3729,4 +3729,5 @@
     <string name="poi_craft_bakery">Backstube</string>
     <string name="poi_craft_cabinet_maker">Möbeltischler</string>
     <string name="poi_charge">Gebühr</string>
+    <string name="poi_pet_grooming">Haustierpflege</string>
 </resources>

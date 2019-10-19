@@ -3262,7 +3262,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="change_data_storage_full_description">Déplacer les fichiers de données OsmAnd vers la nouvelle destination \?
 \n%1$s &gt; %2$s</string>
     <string name="data_storage_preference_summary">%1$s • %2$s GB utilisés</string>
-    <string name="data_storage_space_description">Libre %1$s • %2$s / %3$s GB</string>
+    <string name="data_storage_space_description">Libre %1$s GB • Total %2$s GB</string>
     <string name="enter_path_to_folder">Saisissez le chemin du dossier</string>
     <string name="shared_string_select_folder">Sélectionner le dossier</string>
     <string name="paste_Osmand_data_folder_path">Coller le chemin du dossier contenant les données OsmAnd</string>
@@ -3293,4 +3293,13 @@ représentant la zone : %1$s x %2$s</string>
     <string name="avoid_in_routing_descr_">Éviter certains types de route</string>
     <string name="app_mode_utv">Côte à côte</string>
     <string name="rendering_attr_piste_difficulty_connection_name">Connexion</string>
+    <string name="rendering_attr_piste_difficulty_aerialway_name">Transport aérien</string>
+    <string name="shared_string_calculate">Calculer</string>
+    <string name="shared_string_osmand_usage">Utilisation d\'OsmAnd</string>
+    <string name="shared_sting_tiles">Tuiles</string>
+    <string name="shared_string_maps">Cartes</string>
+    <string name="shared_string_memory_tb_desc">%1$s TB</string>
+    <string name="shared_string_memory_gb_desc">%1$s GB</string>
+    <string name="shared_string_memory_mb_desc">%1$s MB</string>
+    <string name="shared_string_memory_kb_desc">%1$s KB</string>
 </resources>
