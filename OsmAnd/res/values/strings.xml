@@ -18,7 +18,7 @@
     <string name="application_profile_changed">App profile changed to \"%s\"</string>
     <string name="switch_profile">Switch profile</string>
     <string name="configure_profile">Configure profile</string>
-    <string name="configure_profile_info">Only the current profile affect the settings below.</string>
+    <string name="configure_profile_info">Settings for the selected profile:</string>
     <string name="utm_format_descr">OsmAnd uses UTM Standard format, which is similar but not identical to UTM NATO format.</string>
     <string name="shared_string_example">Example</string>
     <string name="navigate_point_format_utm">UTM Standard</string>
@@ -31,8 +31,8 @@
     <string name="apply_to_all_profiles">Apply to all profiles</string>
     <string name="start_up_message_pref">Start-up message</string>
     <string name="analytics_pref_title">Analytics</string>
-    <string name="turn_screen_on_info">Show map above lock screen during navigation.</string>
-    <string name="route_parameters_info">These settings affect routing, for the selected profile: %1$s.</string>
+    <string name="turn_screen_on_info">Show map on the lock screen during navigation.</string>
+    <string name="route_parameters_info">Settings for routing in the selected profile: %1$s.</string>
     <string name="wake_time">Wake time</string>
     <string name="units_and_formats">Units &amp; formats</string>
     <string name="appearance">Appearance</string>
@@ -56,7 +56,7 @@
     <string name="vehicle_parameters_descr">Weight, height, speed</string>
     <string name="vehicle_parameters">Vehicle parameters</string>
     <string name="voice_announces_info">Voice announcements only happen during navigation.</string>
-    <string name="voice_announces_descr">Navigation instruction and announcements</string>
+    <string name="voice_announces_descr">Navigation instructions and announcements</string>
     <string name="voice_announces">Voice announcements</string>
     <string name="screen_alerts">Screen alerts</string>
     <string name="route_parameters_descr">Configure route parameters</string>
@@ -212,7 +212,7 @@
     <string name="application_profiles_descr">Select the profiles to be visible in the app.</string>
     <string name="application_profiles">App profiles</string>
     <string name="searching_gps">Searching GPS</string>
-    <string name="coordinates_widget">Coordinate widget</string>
+    <string name="coordinates_widget">Coordinates widget</string>
     <string name="files_moved">Moved %1$d files (%2$s).</string>
     <string name="files_copied">Copied %1$d files (%2$s).</string>
     <string name="files_failed">Could not copy %1$d files (%2$s).</string>
