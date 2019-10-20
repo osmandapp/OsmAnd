@@ -3280,7 +3280,7 @@
     <string name="change_data_storage_full_description">להעביר את קובצי הנתונים של OsmAnd ליעד החדש\?
 \n%1$s &gt; %2$s</string>
     <string name="data_storage_preference_summary">%1$s ‏• %2$s ג״ב מנוצלים</string>
-    <string name="data_storage_space_description">%1$s פנויים • %2$s /‏ %3$s ג״ב</string>
+    <string name="data_storage_space_description">%1$s ג״ב פנויים • סה״כ %2$s ג״ב</string>
     <string name="enter_path_to_folder">נא לספק נתיב לתיקייה</string>
     <string name="shared_string_select_folder">בחירת תיקייה</string>
     <string name="paste_Osmand_data_folder_path">נא להדביק את הנתיב לתיקייה עם הנתונים של OsmAnd</string>
@@ -3309,4 +3309,15 @@
     <string name="routing_attr_width_name">מגבלת רוחב</string>
     <string name="routing_attr_width_description">ציון מגבלת רוחב מכונית אפשרי בנתיבים.</string>
     <string name="avoid_in_routing_descr_">הימנעות מסוגים מסוימים של מסלולים וכבישים</string>
+    <string name="app_mode_utv">זה לצד זה</string>
+    <string name="rendering_attr_piste_difficulty_aerialway_name">דרך אווירית</string>
+    <string name="rendering_attr_piste_difficulty_connection_name">חיבור</string>
+    <string name="shared_string_calculate">חישוב</string>
+    <string name="shared_string_osmand_usage">שימוש ב־OsmAnd</string>
+    <string name="shared_sting_tiles">אריחים</string>
+    <string name="shared_string_maps">מפות</string>
+    <string name="shared_string_memory_tb_desc">%1$s ט״ב</string>
+    <string name="shared_string_memory_gb_desc">%1$s ג״ב</string>
+    <string name="shared_string_memory_mb_desc">%1$s מ״ב</string>
+    <string name="shared_string_memory_kb_desc">%1$s ק״ב</string>
 </resources>
