@@ -12,7 +12,7 @@
     <string name="poi_air_transport">Lufttransport</string>
     <string name="poi_water_transport">Transport på vatten</string>
     <string name="poi_bicycle_transport">Transport med cykel</string>
-    <string name="poi_filling_station">Bensinstation</string>
+    <string name="poi_filling_station">Tankstation</string>
     <string name="poi_aerialway_transport">Luftvägstransport</string>
     <string name="poi_node_networks">Nätverksnoder för hajk/cykling</string>
     <string name="poi_fuel_type">Bränsletyp</string>
@@ -936,7 +936,7 @@
     <string name="poi_car_sharing">Samåkning</string>
     <string name="poi_boat_sharing">Båtdelning</string>
     <string name="poi_dock">Kaj</string>
-    <string name="poi_toilets">Toalett</string>
+    <string name="poi_toilets">Vilorum;Toaletter</string>
     <string name="poi_shower">Dusch</string>
     <string name="poi_sauna">Bastu</string>
     <string name="poi_brothel">Bordell</string>
@@ -2002,7 +2002,7 @@
     <string name="poi_service_bicycle_second_hand_no">Butikshandel med begagnade cyklar: nej</string>
     <string name="poi_service_bicycle_charging_yes">Laddning: ja</string>
     <string name="poi_service_bicycle_charging_no">Laddning: nej</string>
-    <string name="poi_bicycle_repair_station">Cykel-själv-reparation station</string>
+    <string name="poi_bicycle_repair_station">Cykelreparationsstation; Cykel självreparationsstation</string>
     <string name="poi_wildlife_hide">Plats för att observera vilda djur</string>
     <string name="poi_training_language">Utbildning: språk</string>
     <string name="poi_training_music">Utbildning: musik</string>
@@ -2582,7 +2582,7 @@
     <string name="poi_free_flying_hanggliding_yes">Hanggliding</string>
     <string name="poi_free_flying_hanggliding_no">Hanggliding: nej</string>
     <string name="poi_free_flying_rigid_yes">Stelt</string>
-    <string name="poi_free_flying_rigid_no"/>
+    <string name="poi_free_flying_rigid_no">Fritt flygande styv: nej</string>
     <string name="poi_free_flying_site_orientation_n">Frittflygandeorientering: N</string>
     <string name="poi_free_flying_site_orientation_ne">Frittflygandeorientering: NÖ</string>
     <string name="poi_free_flying_site_orientation_e">Frittflygandeorientering: Ö</string>
