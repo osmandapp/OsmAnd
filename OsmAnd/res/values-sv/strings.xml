@@ -2786,7 +2786,7 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="choose_data_to_share">Välj vilken typ av data du vill dela:</string>
     <string name="downloaded_maps">Kartor nedladdade</string>
     <string name="visited_screens">Besökta skärmar</string>
-    <string name="collected_data_descr">Lista över data du vill dela med OsmAnd.</string>
+    <string name="collected_data_descr">Definiera vilka data du tillåter OsmAnd att dela.</string>
     <string name="downloaded_maps_collect_descr">Vi samlar in dessa data för att förstå kartorna över vilka regioner och länder som är mest populära.</string>
     <string name="visited_screens_collect_descr">Vi samlar in dessa data för att förstå de mest populära funktionerna i OsmAnd.</string>
     <string name="privacy_and_security_change_descr">Genom att klicka på \"Tillåt\" godkänner du våra %1$s</string>
