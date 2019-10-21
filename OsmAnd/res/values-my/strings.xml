@@ -251,4 +251,25 @@
     <string name="special_routing_type">အထူးလမ်းကြောင်း</string>
     <string name="application_profiles_descr">အက်ပလီကေးရှင်းထဲတွင်မြင်နိုင်သောပရိုဖိုင်းများကိုရွေးချယ်ပါ။</string>
     <string name="application_profiles">အက်ပလီကေးရှင်းပရိုဖိုင်းများ</string>
+    <string name="transfers_size">%1$d လွှဲပြောင်းမှု</string>
+    <string name="add_start_and_end_points">အစနှင့်အဆုံးမှတ်နေရာများကိုထည့်ပါ</string>
+    <string name="route_add_start_point">အစနေရာထည့်ပါ</string>
+    <string name="route_descr_select_start_point">အစနေရာကိုရွေးပါ</string>
+    <string name="rendering_attr_surface_unpaved_name">လမ်းခင်းမရှိ</string>
+    <string name="rendering_attr_surface_sand_name">သဲ</string>
+    <string name="rendering_attr_surface_grass_name">မြက်ပင်</string>
+    <string name="rendering_attr_surface_grass_paver_name">မြက်ခင်းပုံ</string>
+    <string name="rendering_attr_surface_ground_name">မြေပြင်</string>
+    <string name="rendering_attr_surface_dirt_name">ဖုန်</string>
+    <string name="rendering_attr_surface_mud_name">ရွှံ့</string>
+    <string name="rendering_attr_surface_ice_name">ရေခဲပြင်</string>
+    <string name="rendering_attr_surface_salt_name">ဆားငန်</string>
+    <string name="rendering_attr_surface_snow_name">နှင်း</string>
+    <string name="rendering_attr_surface_asphalt_name">ကတ္တရာ</string>
+    <string name="rendering_attr_surface_paved_name">လမ်းခင်း</string>
+    <string name="rendering_attr_surface_concrete_name">ကွန်ကရစ်</string>
+    <string name="rendering_attr_surface_cobblestone_name">လမ်းခင်းကျောက်ခဲ</string>
+    <string name="rendering_attr_surface_paving_stones_name">ကျောက်ပြားခင်း</string>
+    <string name="public_transport_warning_title">ပြည်သူပို့ဆောင်ရေးလမ်းညွှန်သည်လက်ရှိတွင် beta စမ်းသပ်ခြင်းဖြစ်၍၊ အမှားအယွင်းများနှင့်အမှားများရှိနိင်သည်။</string>
+    <string name="add_intermediate">ကြားရပ်နေရာထည့်ပါ</string>
 </resources>
