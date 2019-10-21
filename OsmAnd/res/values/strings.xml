@@ -11,7 +11,8 @@
 	Thx - Hardy
 
 -->
-
+    <string name="update_all_maps">Update all maps</string>
+    <string name="update_all_maps_q">Are you sure you want to update all (%1$d) maps?</string>
     <string name="track_storage_directory">Track Storage Directory</string>
     <string name="track_storage_directory_descrp">Tracks can be stored in rec folder or in monthly or daily folders.</string>
     <string name="store_tracks_in_rec_directory">Store recorded tracks in rec folder</string>
