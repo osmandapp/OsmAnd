@@ -38,8 +38,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.render.RenderingIcons;
-import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.IRouteInformationListener;
+import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.MapTextLayer.MapTextProvider;
 import net.osmand.util.Algorithms;
 
@@ -149,7 +149,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		if (objects != null) {
 			int ex = (int) point.x;
 			int ey = (int) point.y;
-			final int rp = getRadiusPoi(tb);
+			final int rp = getRadiusPoi(null, tb);
 			int compare = rp;
 			int radius = rp * 3 / 2;
 			try {
@@ -185,8 +185,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		mapTextLayer = view.getLayerByClass(MapTextLayer.class);
 	}
 
-
-	public int getRadiusPoi(RotatedTileBox tb) {
+	public int getRadiusPoi(Amenity amenity, RotatedTileBox tb) {
 		int r;
 		final double zoom = tb.getZoom();
 		if (zoom < startZoom) {
@@ -200,7 +199,12 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 		} else {
 			r = 18;
 		}
-		return (int) (r * view.getScaleCoefficient());
+
+		int radiusPoi = (int) (r * view.getScaleCoefficient());
+		if (amenity != null && isPresentInFullObjects(amenity.getLocation())) {
+			radiusPoi += poiBackground.getHeight() / 2 - poiBackgroundSmall.getHeight() / 2;
+		}
+		return radiusPoi;
 	}
 
 	@Override
@@ -406,7 +410,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 
 	@Override
 	public int getTextShift(Amenity o, RotatedTileBox rb) {
-		return getRadiusPoi(rb);
+		return getRadiusPoi(o, rb);
 	}
 
 	@Override
