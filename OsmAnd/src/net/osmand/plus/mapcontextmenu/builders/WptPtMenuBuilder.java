@@ -8,10 +8,10 @@ import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import net.osmand.data.LatLon;
-import net.osmand.data.PointDescription;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.WptPt;
+import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmAndAppCustomization;
@@ -30,6 +30,7 @@ import java.util.Date;
 import java.util.List;
 
 public class WptPtMenuBuilder extends MenuBuilder {
+
 	private final WptPt wpt;
 
 	public WptPtMenuBuilder(@NonNull MapActivity mapActivity, final @NonNull WptPt wpt) {
@@ -47,6 +48,13 @@ public class WptPtMenuBuilder extends MenuBuilder {
 	protected void buildTopInternal(View view) {
 		super.buildTopInternal(view);
 		buildWaypointsView(view);
+	}
+
+	@Override
+	protected void buildDescription(View view) {
+		if (!Algorithms.isEmpty(wpt.desc)) {
+			buildDescriptionRow(view, app.getString(R.string.shared_string_description), wpt.desc, 0, 10, true);
+		}
 	}
 
 	@Override
@@ -92,16 +100,7 @@ public class WptPtMenuBuilder extends MenuBuilder {
 	}
 	
 	protected void prepareDescription(final WptPt wpt, View view) {
-		if (!Algorithms.isEmpty(wpt.desc)) {
-			final View row = buildRow(view, R.drawable.ic_action_note_dark, null, wpt.desc, 0, false, null, true, 10, false, null, false);
-			row.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					POIMapLayer.showDescriptionDialog(row.getContext(), app, wpt.desc,
-							row.getResources().getString(R.string.shared_string_description));
-				}
-			});
-		}
+
 	}
 
 	private void buildWaypointsView(View view) {
