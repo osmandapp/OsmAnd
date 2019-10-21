@@ -2756,7 +2756,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="open_wikipedia_link_online_description">Le lien s\'ouvrira dans votre navigateur Internet.</string>
     <string name="read_wikipedia_offline_description">Abonnez-vous à OsmAnd Live pour lire les articles Wikipedia et Wikivoyage hors-ligne.</string>
     <string name="how_to_open_link">Comment ouvrir le lien ?</string>
-    <string name="read_wikipedia_offline">Lisez Wikipédia hors-ligne</string>
+    <string name="read_wikipedia_offline">Consultez Wikipédia hors-ligne</string>
     <string name="download_all">Télécharger tout</string>
     <string name="hide_full_description">Masquer la description complète</string>
     <string name="show_full_description">Afficher la description complète</string>
