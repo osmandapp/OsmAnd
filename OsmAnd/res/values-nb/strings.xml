@@ -768,9 +768,9 @@
     <string name="show_more_map_detail_descr">Vis noen vektorkartdetaljer (veier etc.) allerede ved lavere zoomnivåer.</string>
     <string name="choose_audio_stream">Utdata for taleveiledning</string>
     <string name="choose_audio_stream_descr">Velg høyttaleren til å avspille taleveiledningen.</string>
-    <string name="voice_stream_voice_call">Telefonanropslyd (også for å avbryte bluetooth-bilstereo)</string>
+    <string name="voice_stream_voice_call">Telefonanropslyd (for å avbryte Blåtanns-bilstereo)</string>
     <string name="voice_stream_notification">Varslingslyd</string>
-    <string name="voice_stream_music">Media-/musikklyd</string>
+    <string name="voice_stream_music">Media-/navigasjonslyd</string>
     <string name="level_to_switch_vector_raster_descr">Bruk rasterkart for alt utover dette nivået.</string>
     <string name="level_to_switch_vector_raster">Minste vektorielle forstørrelsesnivå</string>
     <string name="incomplete_locale">ufullstendig</string>
@@ -806,7 +806,7 @@
     <string name="rendering_value_pink_name">Rosa</string>
     <string name="rendering_value_brown_name">Brun</string>
     <string name="use_points_as_intermediates">Beregn rute mellom punkter</string>
-    <string name="lang_sr">Serbisk</string>
+    <string name="lang_sr">Serbisk (kyrillisk)</string>
     <string name="lang_zh_cn">Kinesisk (forenklet)</string>
     <string name="lang_zh_tw">Kinesisk (tradisjonell)</string>
     <string name="keep_and_add_destination_point">Legg til som påfølgende reisemål</string>
@@ -1761,7 +1761,7 @@
     <string name="si_nm_h">Nautisk mil i timen (knop)</string>
     <string name="simulate_your_location_stop_descr">Stopp simulering av din posisjon.</string>
     <string name="simulate_your_location_descr">Simuler din posisjon ved bruk av en beregnet rute eller et GPX-spor som er tatt opp.</string>
-    <string name="av_locations_descr">GPX-fil med plasseringsnotater.</string>
+    <string name="av_locations_descr">GPX-fil med plasseringer.</string>
     <string name="rendering_attr_currentTrackColor_description">GPX-farge</string>
     <string name="archive_wikipedia_data">Du har gamle, inkompatible Wikipediadata. Arkiver disse?</string>
     <string name="download_wikipedia_files">Last ned ytterligere Wikipedia-data (%1$s MB)?</string>
@@ -2426,7 +2426,7 @@
     <string name="will_open_on">Åpner</string>
     <string name="shared_string_without_name">Uten navn</string>
     <string name="lang_lo">Laotisk</string>
-    <string name="lang_sr_latn">Serbisk (Latin)</string>
+    <string name="lang_sr_latn">Serbisk (latinsk)</string>
     <string name="update_poi_does_not_change_indexes">Interessepunktendringer i programmet påvirker ikke nedlastede kartfiler, endringer lagres som en fil på enheten din i stedet.</string>
     <string name="si_mi_feet">Eng. mil/fot</string>
     <string name="si_mi_yard">Eng. mil/yard</string>
@@ -2901,7 +2901,7 @@
     <string name="shared_string_capacity">Kapasitet</string>
     <string name="shared_string_width">Bredde</string>
     <string name="shared_string_height">Høyde</string>
-    <string name="routeInfo_roadClass_name">Klasse</string>
+    <string name="routeInfo_roadClass_name">Veitype</string>
     <string name="routeInfo_surface_name">Overflate</string>
     <string name="routeInfo_smoothness_name">Jevnhet</string>
     <string name="routeInfo_steepness_name">Stigning</string>
@@ -3045,15 +3045,15 @@
     <string name="button_rate">Vurder</string>
     <string name="shared_string_privacy_policy">Personvernspraksis</string>
     <string name="help_us_make_osmand_better">Hjelp oss å forbedre OsmAnd.</string>
-    <string name="make_osmand_better_descr">Tillat OsmAnd å samle inn og behandle anonym programbruksdata. Vi samler ikke inn eller lagrer data om din plassering, eller om plasseringene du ser på på kartet.
-\n
+    <string name="make_osmand_better_descr">Tillat OsmAnd å samle inn og behandle anonym programbruksdata. Vi samler ikke inn eller lagrer data om din plassering, eller om plasseringer ser på på kartet. 
+\n 
 \nDu kan alltid endre ditt valg i Innstillinger &gt; Personvern og sikkerhet.</string>
     <string name="choose_data_to_share">Velg hvilken type data du ønsker å dele:</string>
     <string name="downloaded_maps">Nedlastede kart</string>
     <string name="visited_screens">Besøkte skjermer</string>
-    <string name="collected_data_descr">Liste over data du ønsker å dele med OsmAnd.</string>
-    <string name="downloaded_maps_collect_descr">Denne dataen samles inn for å forstå hvilke kart og hvilke regioner og land som er mest populære.</string>
-    <string name="visited_screens_collect_descr">Denne dataen samles inn for å forstå hvilke funksjoner i OsmAnd som er mest populære.</string>
+    <string name="collected_data_descr">Definer hvilken data du ønsker å dele med OsmAnd.</string>
+    <string name="downloaded_maps_collect_descr">Hjelp oss å forstå hvilke kart over hvilke regioner og land som er mest populære.</string>
+    <string name="visited_screens_collect_descr">Hjelp oss å forstå hvilke OsmAnd-funksjoner som er mest populære.</string>
     <string name="privacy_and_security_change_descr">Ved å trykke \"Tillat\", samtykker du til vår %1$s</string>
     <string name="settings_privacy_and_security">Personvern og sikkerhet</string>
     <string name="settings_privacy_and_security_desc">Velg data til deling</string>
@@ -3064,7 +3064,7 @@
     <string name="app_mode_taxi">Drosje</string>
     <string name="app_mode_horse">Hest</string>
     <string name="app_mode_helicopter">Helikopter</string>
-    <string name="osmand_routing_promo">Du kan legge til din egen endrede versjon av routing.xml til i ..osmand/routing</string>
+    <string name="osmand_routing_promo">Du kan legge til din egen endrede versjon av filen routing.xml til i ..osmand/routing</string>
     <string name="app_mode_skiing">Skikjøring</string>
     <string name="base_profile_descr_ski">Skikjøring</string>
     <string name="show_compass_ruler">Vis kompasslinjal</string>
@@ -3076,16 +3076,16 @@
     <string name="profile_type_descr_string">Type: %s</string>
     <string name="profile_type_base_string">Grunnprofil</string>
     <string name="profile_alert_need_routing_type_title">Velg navigasjonstype</string>
-    <string name="profile_alert_need_routing_type_msg">Du må velge navigasjonstype for å opprette en ny programprofil</string>
+    <string name="profile_alert_need_routing_type_msg">Du må velge navigasjonstype for den nye programprofilen</string>
     <string name="profile_alert_need_profile_name_title">Skriv inn profilnavn</string>
     <string name="profile_alert_need_profile_name_msg">Profilnavn kan ikke være tomt.</string>
     <string name="profile_alert_duplicate_name_title">Duplikatnavn</string>
     <string name="profile_alert_duplicate_name_msg">Det finnes allerede en profil med dette navnet</string>
-    <string name="profile_alert_cant_delete_base">Du kan ikke slette OsmAnd-grunnprofiler</string>
+    <string name="profile_alert_cant_delete_base">Du kan ikke slette OsmAnd sine grunnprofiler</string>
     <string name="profile_alert_need_save_title">Lagre endringer</string>
     <string name="profile_alert_need_save_msg">Du må lagre endringer før du kan fortsette</string>
     <string name="profile_alert_delete_title">Slett profil</string>
-    <string name="profile_alert_delete_msg">Er du sikker på at du ønsker å slette profilen %s</string>
+    <string name="profile_alert_delete_msg">Er du sikker på at du ønsker å slette %s-profilen</string>
     <string name="select_base_profile_dialog_title">Velg grunnprofil</string>
     <string name="select_nav_profile_dialog_title">Velg navigasjonstype</string>
     <string name="base_profile_descr_car">Bil, lastebil, motorsykkel</string>
@@ -3115,7 +3115,7 @@
     <string name="process_downloading_service">OsmAnd nedlastingstjeneste</string>
     <string name="shared_string_color_magenta">Magenta</string>
     <string name="shared_string_icon">Ikon</string>
-    <string name="collected_data">Innsamlet data</string>
+    <string name="collected_data">Data innsamlet</string>
     <string name="press_again_to_change_the_map_orientation">Trykk igjen for å endre kartorientering</string>
     <string name="app_mode_offroad">Terreng</string>
     <string name="edit_profile_setup_title">Sett opp profil</string>
@@ -3218,11 +3218,31 @@
     <string name="vehicle_parameters">Kjøretøyparameter</string>
     <string name="screen_alerts">Skjermvarsler</string>
     <string name="logcat_buffer">Logcat-mellomlager</string>
-    <string name="map_look_descr">ikoner, miniprogrammer</string>
+    <string name="map_look_descr">Kartutseende</string>
     <string name="map_look">Kartutseende</string>
     <string name="general_settings_profile_descr">Programdrakt, enheter, region</string>
     <string name="language_and_output">Språk og utdata</string>
     <string name="plugins_settings">Programtilleggsinnstillinger</string>
     <string name="shared_string_by_default">Som forvalg</string>
     <string name="download_detaile_map">Last ned detaljert %s-kart, for å vise dette området.</string>
+    <string name="sett_no_ext_input">Ingen</string>
+    <string name="change_data_storage_full_description">Flytt OsmAnd-datafiler til det nye målet\?
+\n%1$s &gt; %2$s</string>
+    <string name="data_storage_preference_summary">%1$s • %2$s GB brukt</string>
+    <string name="data_storage_space_description">%1$s GB ledig • %2$s GB totalt</string>
+    <string name="shared_string_select_folder">Velg mappe</string>
+    <string name="change_osmand_data_folder_question">Endre OsmAnd-datamappe\?</string>
+    <string name="move_maps_to_new_destination">Flytt til det nye målet</string>
+    <string name="routing_attr_width_name">Breddebegrensning</string>
+    <string name="routing_attr_width_description">Velg tillatt kjøretøybredde på ruter.</string>
+    <string name="avoid_in_routing_descr_">Unngå visse ruter og veityper</string>
+    <string name="app_mode_utv">Side om side</string>
+    <string name="shared_string_calculate">Beregn</string>
+    <string name="shared_string_osmand_usage">OsmAnd-bruk</string>
+    <string name="shared_sting_tiles">Flis</string>
+    <string name="shared_string_maps">Kart</string>
+    <string name="shared_string_memory_tb_desc">%1$s TB</string>
+    <string name="shared_string_memory_gb_desc">%1$s GB</string>
+    <string name="shared_string_memory_mb_desc">%1$s MB</string>
+    <string name="shared_string_memory_kb_desc">%1$s KB</string>
 </resources>

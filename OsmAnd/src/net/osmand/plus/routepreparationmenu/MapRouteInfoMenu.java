@@ -498,6 +498,17 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		updateCards();
 	}
 
+	private void applyCardsState(@NonNull List<BaseCard> newCards, @NonNull List<BaseCard> prevCards) {
+		for (BaseCard newCard : newCards) {
+			for (BaseCard prevCard : prevCards) {
+				if (newCard.getClass() == prevCard.getClass()) {
+					newCard.applyState(prevCard);
+					break;
+				}
+			}
+		}
+	}
+
 	private void updateCards() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity == null) {
@@ -510,7 +521,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
 		RoutingHelper routingHelper = app.getRoutingHelper();
 
-		menuCards.clear();
+		List<BaseCard> menuCards = new ArrayList<>();
 
 		boolean bottomShadowVisible = true;
 		if (isBasicRouteCalculated()) {
@@ -646,6 +657,8 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				}
 			}
 		}
+		applyCardsState(menuCards, this.menuCards);
+		this.menuCards = menuCards;
 		setBottomShadowVisible(bottomShadowVisible);
 		setupCards();
 	}
@@ -2188,6 +2201,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			app.getRoutingHelper().removeListener(this);
 		}
 		removeTargetPointListener();
+		menuCards = new ArrayList<>();
 	}
 
 	public boolean needShowMenu() {

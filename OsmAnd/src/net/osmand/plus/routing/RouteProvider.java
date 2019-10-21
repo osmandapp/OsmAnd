@@ -958,14 +958,16 @@ public class RouteProvider {
 		gpx.tracks.add(track);
 		TrkSegment trkSegment = new TrkSegment();
 		track.segments.add(trkSegment);
-		int cRoute = currentRoute;
-		int cDirInfo = currentDirectionInfo;
+
+		if (routeNodes == null || routeNodes.isEmpty()) {
+			return gpx;
+		}
 
 		// Save the start point to gpx file's trkpt section unless already contained
 		WptPt startpoint = new WptPt();
 		TargetPoint sc = helper.getPointToStart();
 		int routePointOffsetAdjusted = 0;
-		if (sc != null && ((float) sc.getLatitude() != (float) routeNodes.get(cRoute).getLatitude() || (float) sc.getLongitude() != (float) routeNodes.get(cRoute).getLongitude())){
+		if (sc != null && ((float) sc.getLatitude() != (float) routeNodes.get(currentRoute).getLatitude() || (float) sc.getLongitude() != (float) routeNodes.get(currentRoute).getLongitude())){
 			startpoint.lat = sc.getLatitude();
 			startpoint.lon = sc.getLongitude();
 			trkSegment.points.add(startpoint);
@@ -977,7 +979,7 @@ public class RouteProvider {
 			routePointOffsetAdjusted = 1;
 		}
 
-		for (int i = cRoute; i< routeNodes.size(); i++) {
+		for (int i = currentRoute; i< routeNodes.size(); i++) {
 			Location loc = routeNodes.get(i);
 			WptPt pt = new WptPt();
 			pt.lat = loc.getLatitude();
@@ -994,52 +996,54 @@ public class RouteProvider {
 			trkSegment.points.add(pt);
 		}
 
-		Route route = new Route();
-		route.name = name;
-		gpx.routes.add(route);
-		for (int i = cDirInfo; i < directionInfo.size(); i++) {
-			RouteDirectionInfo dirInfo = directionInfo.get(i);
-			if (dirInfo.routePointOffset - routePointOffsetAdjusted >= cRoute) {
-				if (dirInfo.getTurnType() != null && !dirInfo.getTurnType().isSkipToSpeak() &&
-						dirInfo.routePointOffset - routePointOffsetAdjusted < routeNodes.size()) {
-					Location loc = routeNodes.get(dirInfo.routePointOffset - routePointOffsetAdjusted);
-					WptPt pt = new WptPt();
-					pt.lat = loc.getLatitude();
-					pt.lon = loc.getLongitude();
+		if (directionInfo != null && !directionInfo.isEmpty()) {
+			Route route = new Route();
+			route.name = name;
+			gpx.routes.add(route);
+			for (int i = currentDirectionInfo; i < directionInfo.size(); i++) {
+				RouteDirectionInfo dirInfo = directionInfo.get(i);
+				if (dirInfo.routePointOffset - routePointOffsetAdjusted >= currentRoute) {
+					if (dirInfo.getTurnType() != null && !dirInfo.getTurnType().isSkipToSpeak() &&
+							dirInfo.routePointOffset - routePointOffsetAdjusted < routeNodes.size()) {
+						Location loc = routeNodes.get(dirInfo.routePointOffset - routePointOffsetAdjusted);
+						WptPt pt = new WptPt();
+						pt.lat = loc.getLatitude();
+						pt.lon = loc.getLongitude();
 
-					// Collect distances and times for subsequent suppressed turns
-					int collectedDistance = 0;
-					int collectedTime = 0;
-					for (int j = i + 1; j < directionInfo.size(); j++) {
-						if (directionInfo.get(j).getTurnType() != null && directionInfo.get(j).getTurnType().isSkipToSpeak()) {
-							collectedDistance += directionInfo.get(j).getDistance();
-							collectedTime += directionInfo.get(j).getExpectedTime();
-						} else {
-							break;
+						// Collect distances and times for subsequent suppressed turns
+						int collectedDistance = 0;
+						int collectedTime = 0;
+						for (int j = i + 1; j < directionInfo.size(); j++) {
+							if (directionInfo.get(j).getTurnType() != null && directionInfo.get(j).getTurnType().isSkipToSpeak()) {
+								collectedDistance += directionInfo.get(j).getDistance();
+								collectedTime += directionInfo.get(j).getExpectedTime();
+							} else {
+								break;
+							}
 						}
-					}
-					pt.desc = dirInfo.getDescriptionRoute(ctx, collectedDistance + dirInfo.getDistance());
-					Map<String, String> extensions = pt.getExtensionsToWrite();
-					extensions.put("time", (collectedTime + dirInfo.getExpectedTime()) + "");
-					int turnType = dirInfo.getTurnType().getValue();
-					if (TurnType.C != turnType) {
-						extensions.put("turn", dirInfo.getTurnType().toXmlString());
-						extensions.put("turn-angle", dirInfo.getTurnType().getTurnAngle() + "");
-					}
-					extensions.put("offset", (dirInfo.routePointOffset - cRoute) + "");
+						pt.desc = dirInfo.getDescriptionRoute(ctx, collectedDistance + dirInfo.getDistance());
+						Map<String, String> extensions = pt.getExtensionsToWrite();
+						extensions.put("time", (collectedTime + dirInfo.getExpectedTime()) + "");
+						int turnType = dirInfo.getTurnType().getValue();
+						if (TurnType.C != turnType) {
+							extensions.put("turn", dirInfo.getTurnType().toXmlString());
+							extensions.put("turn-angle", dirInfo.getTurnType().getTurnAngle() + "");
+						}
+						extensions.put("offset", (dirInfo.routePointOffset - currentRoute) + "");
 
-					// Issue #2894
-					if (dirInfo.getRef() != null && !"null".equals(dirInfo.getRef())) {
-						extensions.put("ref", dirInfo.getRef() + "");
-					}
-					if (dirInfo.getStreetName() != null && !"null".equals(dirInfo.getStreetName())) {
-						extensions.put("street-name", dirInfo.getStreetName() + "");
-					}
-					if (dirInfo.getDestinationName() != null && !"null".equals(dirInfo.getDestinationName())) {
-						extensions.put("dest", dirInfo.getDestinationName() + "");
-					}
+						// Issue #2894
+						if (dirInfo.getRef() != null && !"null".equals(dirInfo.getRef())) {
+							extensions.put("ref", dirInfo.getRef() + "");
+						}
+						if (dirInfo.getStreetName() != null && !"null".equals(dirInfo.getStreetName())) {
+							extensions.put("street-name", dirInfo.getStreetName() + "");
+						}
+						if (dirInfo.getDestinationName() != null && !"null".equals(dirInfo.getDestinationName())) {
+							extensions.put("dest", dirInfo.getDestinationName() + "");
+						}
 
-					route.points.add(pt);
+						route.points.add(pt);
+					}
 				}
 			}
 		}

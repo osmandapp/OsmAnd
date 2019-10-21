@@ -1,7 +1,7 @@
 package net.osmand.plus.parkingpoint;
 
 
-import static net.osmand.plus.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MARK_AS_PARKING_LOC;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MARK_AS_PARKING_LOC;
 
 import android.app.Activity;
 import android.content.DialogInterface;

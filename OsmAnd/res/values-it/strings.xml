@@ -3252,7 +3252,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="analytics_pref_title">Statistiche</string>
     <string name="turn_screen_on_info">Mostra la mappa durante la navigazione sopra al salvaschermo</string>
     <string name="route_parameters_info">Queste impostazioni riguardano il calcolo del percorso. Verranno applicate solo al profilo: %1$s.</string>
-    <string name="wake_time">Ora di risveglio</string>
+    <string name="wake_time">Tempo di accensione</string>
     <string name="units_and_formats">Unità e formati</string>
     <string name="appearance">Aspetto</string>
     <string name="map_look_descr">Icone, widget</string>

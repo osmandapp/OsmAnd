@@ -17,6 +17,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.SettingsBaseActivity;
+import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.util.SunriseSunset;
 
 import java.text.SimpleDateFormat;
@@ -36,6 +37,15 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 
 		cat.addPreference(createCheckBoxPreference(settings.USE_OPENGL_RENDER,
 				R.string.use_opengl_render,R.string.use_opengl_render_descr));
+
+		CheckBoxPreference nativeCheckbox = createCheckBoxPreference(settings.SAFE_MODE, R.string.safe_mode,
+				R.string.safe_mode_description);
+		// disable the checkbox if the library cannot be used
+		if ((NativeOsmandLibrary.isLoaded() && !NativeOsmandLibrary.isSupported()) || settings.NATIVE_RENDERING_FAILED.get()) {
+			nativeCheckbox.setEnabled(false);
+			nativeCheckbox.setChecked(true);
+		}
+		cat.addPreference(nativeCheckbox);
 
 		PreferenceCategory navigation = new PreferenceCategory(this);
 		navigation.setTitle(R.string.routing_settings);

@@ -48,6 +48,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 		setupUnitsOfLengthPref();
 		setupCoordinatesFormatPref();
 		setupAngularUnitsPref();
+		setupSpeedSystemPref();
 
 		setupKalmanFilterPref();
 		setupMagneticFieldSensorPref();
@@ -202,7 +203,24 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 		ListPreferenceEx angularUnits = (ListPreferenceEx) findPreference(settings.ANGULAR_UNITS.getId());
 		angularUnits.setEntries(entries);
 		angularUnits.setEntryValues(entryValues);
-		angularUnits.setIcon(getContentIcon(R.drawable.ic_action_angular_unit));
+		angularUnits.setIcon(getIcon(R.drawable.ic_action_angular_unit));
+	}
+
+	private void setupSpeedSystemPref() {
+		OsmandSettings.SpeedConstants[] speedConstants = OsmandSettings.SpeedConstants.values();
+		String[] entries = new String[speedConstants.length];
+		Integer[] entryValues = new Integer[speedConstants.length];
+
+		for (int i = 0; i < entries.length; i++) {
+			entries[i] = speedConstants[i].toHumanString(app);
+			entryValues[i] = speedConstants[i].ordinal();
+		}
+
+		ListPreferenceEx speedSystem = (ListPreferenceEx) findPreference(settings.SPEED_SYSTEM.getId());
+		speedSystem.setEntries(entries);
+		speedSystem.setEntryValues(entryValues);
+		speedSystem.setDescription(R.string.default_speed_system_descr);
+		speedSystem.setIcon(getContentIcon(R.drawable.ic_action_speed));
 	}
 
 	private void setupKalmanFilterPref() {

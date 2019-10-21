@@ -496,12 +496,12 @@ public class TargetPointsHelper {
 		updateRouteAndRefresh(updateRoute);
 	}
 
-	public void removeWayPoint(boolean updateRoute, int index){
+	public void removeWayPoint(boolean updateRoute, int index) {
+		int sz = intermediatePoints.size();
 		if (index < 0) {
 			cancelTargetPointAddressRequest();
 			settings.clearPointToNavigate();
 			pointToNavigate = null;
-			int sz = intermediatePoints.size();
 			if (sz > 0) {
 				settings.deleteIntermediatePoint(sz - 1);
 				pointToNavigate = intermediatePoints.remove(sz - 1);
@@ -510,7 +510,7 @@ public class TargetPointsHelper {
 						pointToNavigate.pointDescription);
 				lookupAddressForPointToNavigate();
 			}
-		} else {
+		} else if (sz > index) {
 			settings.deleteIntermediatePoint(index);
 			TargetPoint targetPoint = intermediatePoints.remove(index);
 			cancelPointAddressRequests(targetPoint.point);

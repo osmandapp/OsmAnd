@@ -631,7 +631,7 @@
     <string name="favorite_delete_multiple">%1$d Sık Kullanılan ve %2$d Sık Kullanılan grubu sileceksiniz. Emin misiniz\?</string>
     <string name="local_index_gpx_info_show">"
 \n
-\nAyarlar için ekrana uzun basın"</string>
+\nAyarlar için uzun basın"</string>
     <string name="local_index_installed">Yerel Versiyon</string>
     <string name="local_index_items_backuped">%1$d/%2$d öge devre dışı bırakıldı.</string>
     <string name="local_index_items_deleted">%1$d/%2$d öge silindi.</string>
@@ -3244,7 +3244,7 @@
     <string name="change_data_storage_full_description">OsmAnd veri dosyaları yeni hedefe taşınsın mı\?
 \n%1$s &gt; %2$s</string>
     <string name="data_storage_preference_summary">%1$s • Kullanılan %2$s GB</string>
-    <string name="data_storage_space_description">Boş %1$s • %2$s / %3$s GB</string>
+    <string name="data_storage_space_description">Boş %1$s GB • Toplam %2$s GB</string>
     <string name="enter_path_to_folder">Klasörün yolunu girin</string>
     <string name="shared_string_select_folder">Klasör seç</string>
     <string name="paste_Osmand_data_folder_path">OsmAnd verilerinin bulunduğu klasörün yolunu yapıştırın</string>
@@ -3272,4 +3272,16 @@
     <string name="routeInfo_piste_difficulty_name">Pist zorluğu</string>
     <string name="routing_attr_width_name">Genişlik sınırı</string>
     <string name="routing_attr_width_description">Rotalarda izin verilen araç genişlik sınırını belirtin.</string>
+    <string name="avoid_in_routing_descr_">Belirli rotalardan ve yol türlerinden kaçının</string>
+    <string name="app_mode_utv">Yan yana</string>
+    <string name="rendering_attr_piste_difficulty_aerialway_name">Hava yolu</string>
+    <string name="rendering_attr_piste_difficulty_connection_name">Bağlantı</string>
+    <string name="shared_string_calculate">Hesapla</string>
+    <string name="shared_string_osmand_usage">OsmAnd Kullanımı</string>
+    <string name="shared_sting_tiles">Döşemeler</string>
+    <string name="shared_string_maps">Haritalar</string>
+    <string name="shared_string_memory_tb_desc">%1$s TB</string>
+    <string name="shared_string_memory_gb_desc">%1$s GB</string>
+    <string name="shared_string_memory_mb_desc">%1$s MB</string>
+    <string name="shared_string_memory_kb_desc">%1$s KB</string>
 </resources>

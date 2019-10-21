@@ -25,7 +25,7 @@ public class OsmandRestoreOrExitDialog extends BottomSheetDialogFragment {
 		View view = getActivity().getLayoutInflater()
 				.inflate(R.layout.dash_restore_osmand_fragment, container, false);
 		try {
-			clientAppTitle = getMyApplication().getAppCustomization().getNavFooterParams().getAppName();
+			clientAppTitle = getMyApplication().getAppCustomization().getNavFooterAppName();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

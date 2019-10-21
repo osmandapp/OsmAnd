@@ -91,7 +91,7 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import static net.osmand.plus.OsmAndCustomizationConstants.RECORDING_LAYER;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.RECORDING_LAYER;
 
 
 public class AudioVideoNotesPlugin extends OsmandPlugin {

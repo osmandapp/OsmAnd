@@ -572,7 +572,7 @@ public class GpxSelectionHelper {
 		app.getSettings().SELECTED_GPX.set(ar.toString());
 	}
 
-	private SelectedGpxFile selectGpxFileImpl(GPXFile gpx, boolean show, boolean notShowNavigationDialog, boolean syncGroup, boolean selectedByUser) {
+	private SelectedGpxFile selectGpxFileImpl(GPXFile gpx, GpxDataItem dataItem, boolean show, boolean notShowNavigationDialog, boolean syncGroup, boolean selectedByUser) {
 		boolean displayed;
 		SelectedGpxFile sf;
 		if (gpx != null && gpx.showCurrentTrack) {
@@ -588,6 +588,9 @@ public class GpxSelectionHelper {
 			displayed = sf != null;
 			if (show && sf == null) {
 				sf = new SelectedGpxFile();
+				if (dataItem != null && dataItem.getColor() != 0) {
+					gpx.setColor(dataItem.getColor());
+				}
 				sf.setGpxFile(gpx);
 				sf.notShowNavigationDialog = notShowNavigationDialog;
 				sf.selectedByUser = selectedByUser;
@@ -612,20 +615,18 @@ public class GpxSelectionHelper {
 		return selectGpxFile(gpx, show, notShowNavigationDialog, true, true, true);
 	}
 
-	public SelectedGpxFile selectGpxFile(GPXFile gpx, boolean show, boolean notShowNavigationDialog, boolean syncGroup, boolean selectedByUser) {
-		SelectedGpxFile sf = selectGpxFileImpl(gpx, show, notShowNavigationDialog, syncGroup, selectedByUser);
+	public SelectedGpxFile selectGpxFile(GPXFile gpx, GpxDataItem dataItem, boolean show, boolean notShowNavigationDialog, boolean syncGroup, boolean selectedByUser) {
+		SelectedGpxFile sf = selectGpxFileImpl(gpx, dataItem, show, notShowNavigationDialog, syncGroup, selectedByUser);
 		saveCurrentSelections();
 		return sf;
 	}
 
 	public SelectedGpxFile selectGpxFile(GPXFile gpx, boolean show, boolean notShowNavigationDialog, boolean syncGroup, boolean selectedByUser, boolean canAddToMarkers) {
-		if (canAddToMarkers && show) {
-			GPXDatabase.GpxDataItem dataItem = app.getGpxDatabase().getItem(new File(gpx.path));
-			if (dataItem != null && dataItem.isShowAsMarkers()) {
-				app.getMapMarkersHelper().addOrEnableGroup(gpx);
-			}
+		GpxDataItem dataItem = app.getGpxDatabase().getItem(new File(gpx.path));
+		if (canAddToMarkers && show && dataItem != null && dataItem.isShowAsMarkers()) {
+			app.getMapMarkersHelper().addOrEnableGroup(gpx);
 		}
-		return selectGpxFile(gpx, show, notShowNavigationDialog, syncGroup, selectedByUser);
+		return selectGpxFile(gpx, dataItem, show, notShowNavigationDialog, syncGroup, selectedByUser);
 	}
 
 	public void clearPoints(GPXFile gpxFile) {

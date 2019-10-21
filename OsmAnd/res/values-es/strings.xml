@@ -3039,7 +3039,7 @@
     <string name="routing_attr_avoid_train_description">Evita usar los trenes</string>
     <string name="routing_attr_avoid_subway_name">Evitar metros</string>
     <string name="routing_attr_avoid_subway_description">Evita transporte en metro y en tren ligero</string>
-    <string name="routing_attr_avoid_ferry_name">Evitar los ferris</string>
+    <string name="routing_attr_avoid_ferry_name">Evitar ferris</string>
     <string name="routing_attr_avoid_ferry_description">Evita usar los ferris o transbordadores</string>
     <string name="release_3_3_7">• Mostrar el tiempo entre transbordos en transporte público
 \n
@@ -3255,8 +3255,8 @@
     <string name="price_free">Gratis</string>
     <string name="get_discount_title">Consigue %1$d %2$s con un %3$s de descuento.</string>
     <string name="get_free_trial_title">Empieza tu %1$d %2$s de prueba gratis.</string>
-    <string name="get_discount_first_part">%1$s para el primer %2$s</string>
-    <string name="get_discount_first_few_part">%1$s para el primer %2$s</string>
+    <string name="get_discount_first_part">%1$s durante el primer %2$s</string>
+    <string name="get_discount_first_few_part">%1$s durante el primer %2$s</string>
     <string name="get_discount_second_part">luego %1$s</string>
     <string name="cancel_subscription">Cancelar la suscripción</string>
     <string name="price_and_discount">%1$s • Ahorra %2$s</string>
@@ -3275,7 +3275,7 @@
     <string name="analytics_pref_title">Analítica</string>
     <string name="turn_screen_on_info">Mostrar mapa durante la navegación por encima de la pantalla de bloqueo.</string>
     <string name="route_parameters_info">Estos ajustes afectan a la construcción de la ruta. Se aplicará solo al perfil seleccionado: %1$s.</string>
-    <string name="wake_time">Hora de despertar</string>
+    <string name="wake_time">Tiempo de encendido</string>
     <string name="units_and_formats">Unidades y formatos</string>
     <string name="appearance">Apariencia</string>
     <string name="map_look_descr">Apariencia del mapa</string>
@@ -3306,4 +3306,25 @@
     <string name="route_parameters_descr">Configura los parámetros de ruta</string>
     <string name="route_parameters">Parámetros de ruta</string>
     <string name="application_profile_changed">Perfil de aplicación cambiado a \"%s\"</string>
+    <string name="plugins_settings">Ajustes de plugin</string>
+    <string name="shared_string_by_default">Por defecto</string>
+    <string name="download_detailed_map">Descarga el mapa detallado de %s para ver este área.</string>
+    <string name="data_storage_preference_summary">%1$s • Usado %2$s GB</string>
+    <string name="data_storage_space_description">Libre %1$s • %2$s / %3$s GB</string>
+    <string name="shared_string_select_folder">Seleccionar carpeta</string>
+    <string name="move_maps_to_new_destination">Mover al nuevo destino</string>
+    <string name="change_data_storage_folder">Cambiar la carpeta de almacenamiento de datos</string>
+    <string name="rendering_attr_piste_type_snow_park_name">Parque de nieve</string>
+    <string name="rendering_attr_piste_type_sleigh_name">Trineo</string>
+    <string name="rendering_attr_piste_type_sled_name">Trineo</string>
+    <string name="routeInfo_piste_type_name">Tipo de pista</string>
+    <string name="rendering_attr_piste_difficulty_novice_name">Principiante</string>
+    <string name="rendering_attr_piste_difficulty_easy_name">Fácil</string>
+    <string name="rendering_attr_piste_difficulty_intermediate_name">Intermedia</string>
+    <string name="rendering_attr_piste_difficulty_expert_name">Experto</string>
+    <string name="rendering_attr_piste_difficulty_extreme_name">Extrema</string>
+    <string name="rendering_attr_piste_difficulty_undefined_name">Indefinida</string>
+    <string name="routeInfo_piste_difficulty_name">Dificultad de pista</string>
+    <string name="routing_attr_width_name">Límite de anchura</string>
+    <string name="routing_attr_width_description">Especifica el límite permitido de anchura del vehículo en rutas.</string>
 </resources>

@@ -128,7 +128,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 					myLocation != null && isSmallSpeedForDirectionOfMovement(myLocation, speedForDirectionOfMovement);
 			if ((settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_COMPASS || (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_BEARING && smallSpeedForDirectionOfMovement)) && !routePlanningMode) {
 				if (Math.abs(MapUtils.degreesDiff(mapView.getRotate(), -val)) > 1.0) {
-					mapView.setRotate(-val);
+					mapView.setRotate(-val, false);
 				}
 			} else if (showViewAngle && headingChanged) {
 				mapView.refreshMap();
@@ -208,7 +208,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 						mapView.getAnimatedDraggingThread().startZooming(zoom.first, zoom.second, false);
 					}
 					if (rotation != null) {
-						mapView.setRotate(rotation);
+						mapView.setRotate(rotation, false);
 					}
 					mapView.setLatLon(location.getLatitude(), location.getLongitude());
 				}
@@ -264,7 +264,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	public void updateSettings(){
 		if (mapView != null) {
 			if (settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_NONE || routePlanningMode) {
-				mapView.setRotate(0);
+				mapView.setRotate(0, true);
 			}
 			mapView.setMapPosition(settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_BEARING
 					&& !routePlanningMode

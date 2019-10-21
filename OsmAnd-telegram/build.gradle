@@ -138,6 +138,7 @@ afterEvaluate {
 dependencies {
 	implementation project(path: ':OsmAnd-java', configuration: 'android')
 	implementation fileTree(dir: 'libs', include: ['*.jar'])
+	implementation project(':OsmAnd-api')
 
 	implementation( "org.jetbrains.kotlin:kotlin-stdlib:1.2.71") {
 		exclude group: 'org.jetbrains', module: 'annotations'

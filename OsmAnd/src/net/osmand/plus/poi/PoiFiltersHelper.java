@@ -369,6 +369,7 @@ public class PoiFiltersHelper {
 	}
 
 	public void loadSelectedPoiFilters() {
+		selectedPoiFilters.clear();
 		Set<String> filters = application.getSettings().getSelectedPoiFilters();
 		for (String f : filters) {
 			PoiUIFilter filter = getFilterById(f);

@@ -53,6 +53,11 @@
 		android:layout="@layout/preference_with_descr"
 		android:title="@string/angular_measeurement" />
 
+	<net.osmand.plus.settings.preferences.ListPreferenceEx
+		android:key="default_speed_system"
+		android:layout="@layout/preference_with_descr"
+		android:title="@string/default_speed_system" />
+
 	<Preference
 		android:layout="@layout/simple_divider_item"
 		android:selectable="false" />

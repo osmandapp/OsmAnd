@@ -2,6 +2,44 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
 	android:title="@string/application_dir">
 
+	<Preference
+		android:key="osmand_usage"
+		android:layout="@layout/preference_category_with_right_text"
+		android:title="@string/shared_string_osmand_usage" />
+	
+	<Preference
+		android:key="maps_memory_used"
+		android:layout="@layout/data_storage_memory_used_item" 
+		android:icon="@drawable/ic_map"
+		android:title="@string/shared_string_maps"/>
+
+	<Preference
+		android:key="tracks_memory_used"
+		android:layout="@layout/data_storage_memory_used_item"
+		android:icon="@drawable/ic_action_polygom_dark"
+		android:title="@string/shared_string_gpx_tracks"/>
+
+	<Preference
+		android:key="notes_memory_used"
+		android:layout="@layout/data_storage_memory_used_item"
+		android:icon="@drawable/ic_action_photo_dark"
+		android:title="@string/audionotes_plugin_name"/>
+
+	<Preference
+		android:key="tiles_memory_used"
+		android:layout="@layout/data_storage_memory_used_item"
+		android:icon="@drawable/ic_world_globe_dark"
+		android:title="@string/shared_sting_tiles"/>
+
+	<Preference
+		android:key="other_memory_used"
+		android:layout="@layout/data_storage_memory_used_item"
+		android:icon="@drawable/ic_action_folder"
+		android:title="@string/shared_string_other"/>
+	
+	<Preference
+		android:layout="@layout/divider_padding_half" />
+
 	<PreferenceCategory
 		android:key="application_profiles"
 		android:layout="@layout/preference_category_with_descr"

@@ -3329,4 +3329,5 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="routeInfo_piste_difficulty_name">Dificultade de sa pista</string>
     <string name="routing_attr_width_name">Lìmite de largària</string>
     <string name="routing_attr_width_description">Dislinda su lìmite de largària permìtidu in sas àndalas.</string>
+    <string name="avoid_in_routing_descr_">Istransi castas isseberadas de àndalas e caminos</string>
 </resources>

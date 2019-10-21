@@ -47,12 +47,12 @@ import org.apache.commons.logging.Log;
 
 import java.util.List;
 
-import static net.osmand.plus.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_CREATE_POI;
-import static net.osmand.plus.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MODIFY_OSM_CHANGE;
-import static net.osmand.plus.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MODIFY_OSM_NOTE;
-import static net.osmand.plus.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MODIFY_POI;
-import static net.osmand.plus.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_OPEN_OSM_NOTE;
-import static net.osmand.plus.OsmAndCustomizationConstants.OSM_NOTES;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_CREATE_POI;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MODIFY_OSM_CHANGE;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MODIFY_OSM_NOTE;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MODIFY_POI;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_OPEN_OSM_NOTE;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.OSM_NOTES;
 
 
 public class OsmEditingPlugin extends OsmandPlugin {
@@ -455,7 +455,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 
 	@Override
 	public int getLogoResourceId() {
-		return R.drawable.ic_action_bug_dark;
+		return R.drawable.ic_action_openstreetmap_logo;
 	}
 
 	@Override
