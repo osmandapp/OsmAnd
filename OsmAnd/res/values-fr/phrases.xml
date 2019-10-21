@@ -1917,7 +1917,7 @@
     <string name="poi_telescope_usage_research">Usage : recherche</string>
     <string name="poi_observatory_type_espionage">Usage : espionnage</string>
     <string name="poi_observatory_type_meteorological">Météorologique</string>
-    <string name="poi_voltage">Voltage</string>
+    <string name="poi_voltage">Tension électrique</string>
     <string name="poi_generator_output_electricity">Puissance de sortie</string>
     <string name="poi_pumping_station">Station de pompage</string>
     <string name="poi_display_yes">Affichage : oui</string>
@@ -3637,9 +3637,16 @@
     <string name="poi_motorcar_private">accès-voiture : privé</string>
     <string name="poi_motorcar_no">accès-voiture : impossible</string>
     <string name="poi_motorcar_permissive">accès-voiture : possible</string>
-    <string name="poi_motorcar_customers">accès-voiture : clients</string>
+    <string name="poi_motorcar_customers">Accès aux automobiles:forestiers</string>
     <string name="poi_motor_vehicle_yes">accès-voiture : autorisé</string>
     <string name="poi_motor_vehicle_private">Accès-voiture : privé</string>
-    <string name="poi_motor_vehicle_delivery">Accès-véhicules : livraison</string>
+    <string name="poi_motor_vehicle_delivery">Accès aux véhicules à moteur : livraison</string>
     <string name="poi_motor_vehicle_agricultural">Accès-véhicules : agricoles</string>
+    <string name="poi_motorcar_destination">Accès aux automobiles:riverains</string>
+    <string name="poi_motorcar_forestry">Accès aux automobiles:forestiers</string>
+    <string name="poi_motor_vehicle_destination">Accès aux véhicules à moteurs:riverains</string>
+    <string name="poi_motor_vehicle_permissive">Accès véhicule à moteur:toléré</string>
+    <string name="poi_motor_vehicle_customers">Accès au véhicule à moteur:clients</string>
+    <string name="poi_motor_vehicle_military">Accès aux véhicules à moteur:militaires</string>
+    <string name="poi_motor_vehicle_forestry">Accès aux véhicules à moteurs:forestiers</string>
 </resources>
