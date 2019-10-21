@@ -16,17 +16,21 @@ import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.view.Window;
 
+import static net.osmand.plus.OsmandSettings.DAILY_DIRECTORY;
+import static net.osmand.plus.OsmandSettings.MONTHLY_DIRECTORY;
+import static net.osmand.plus.OsmandSettings.REC_DIRECTORY;
+
 
 public class SettingsMonitoringActivity extends SettingsBaseActivity {
 	private CheckBoxPreference routeServiceEnabled;
 	private BroadcastReceiver broadcastReceiver;
-	
+
 	public static final int[] BG_SECONDS = new int[]{0, 30, 60, 90};
 	public static final int[] BG_MINUTES = new int[]{2, 3, 5, 10, 15, 30, 60, 90};
 	private static final int[] SECONDS = OsmandMonitoringPlugin.SECONDS;
 	private static final int[] MINUTES = OsmandMonitoringPlugin.MINUTES;
 	private static final int[] MAX_INTERVAL_TO_SEND_MINUTES = OsmandMonitoringPlugin.MAX_INTERVAL_TO_SEND_MINUTES;
-	
+
 	public SettingsMonitoringActivity() {
 		super(true);
 	}
@@ -39,7 +43,7 @@ public class SettingsMonitoringActivity extends SettingsBaseActivity {
 		setProgressVisibility(false);
 		getToolbar().setTitle(R.string.monitoring_settings);
 		PreferenceScreen grp = getPreferenceScreen();
-		
+
 		createLoggingSection(grp);
 		createLiveSection(grp);
 		createNotificationSection(grp);
@@ -87,15 +91,15 @@ public class SettingsMonitoringActivity extends SettingsBaseActivity {
 				R.string.save_track_to_gpx_descrp));
 		cat.addPreference(createTimeListPreference(settings.SAVE_TRACK_INTERVAL, SECONDS,
 				MINUTES, 1000, R.string.save_track_interval, R.string.save_track_interval_descr));
-		String[] names;  
+		String[] names;
 		Float[] floatValues;
 		floatValues = new Float[] {0.f, 2.0f, 5.0f, 10.0f, 20.0f, 30.0f, 50.0f};
 		names = new String[floatValues.length];
 		names[0] = getString(R.string.shared_string_not_selected);
 		for(int i = 1; i < floatValues.length; i++) {
-			names[i] = floatValues[i].intValue() + " " + getString(R.string.m); 
+			names[i] = floatValues[i].intValue() + " " + getString(R.string.m);
 		}
-		cat.addPreference(createListPreference(settings.SAVE_TRACK_MIN_DISTANCE, names, floatValues,  
+		cat.addPreference(createListPreference(settings.SAVE_TRACK_MIN_DISTANCE, names, floatValues,
 				R.string.save_track_min_distance, R.string.save_track_min_distance_descr));
 		floatValues = new Float[] {0.f, 1.0f, 2.0f, 5.0f, 10.0f, 15.0f, 20.0f, 50.0f, 100.0f};
 		names = new String[floatValues.length];
@@ -103,7 +107,7 @@ public class SettingsMonitoringActivity extends SettingsBaseActivity {
 		for(int i = 1; i < floatValues.length; i++) {
 			names[i] = floatValues[i].intValue() + " " + getString(R.string.m) + "  (" + Math.round(floatValues[i]/0.3048f) + " " + getString(R.string.foot) + ")";
 		}
-		cat.addPreference(createListPreference(settings.SAVE_TRACK_PRECISION, names, floatValues,  
+		cat.addPreference(createListPreference(settings.SAVE_TRACK_PRECISION, names, floatValues,
 				R.string.save_track_precision, R.string.save_track_precision_descr));
 		floatValues = new Float[] {0.f, 0.000001f, 1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f};
 		names = new String[floatValues.length];
@@ -113,14 +117,20 @@ public class SettingsMonitoringActivity extends SettingsBaseActivity {
 			names[i] = floatValues[i].intValue() + " " + getString(R.string.km_h);
 			floatValues[i] = floatValues[i] / 3.6f;
 		}
-		cat.addPreference(createListPreference(settings.SAVE_TRACK_MIN_SPEED, names, floatValues,  
+		cat.addPreference(createListPreference(settings.SAVE_TRACK_MIN_SPEED, names, floatValues,
 				R.string.save_track_min_speed, R.string.save_track_min_speed_descr));
 		cat.addPreference(createCheckBoxPreference(settings.AUTO_SPLIT_RECORDING, R.string.auto_split_recording_title,
 				R.string.auto_split_recording_descr));
 		cat.addPreference(createCheckBoxPreference(settings.DISABLE_RECORDING_ONCE_APP_KILLED, R.string.disable_recording_once_app_killed,
 				R.string.disable_recording_once_app_killed_descrp));
-		cat.addPreference(createCheckBoxPreference(settings.STORE_TRACKS_IN_MONTHLY_DIRECTORIES, R.string.store_tracks_in_monthly_directories,
-				R.string.store_tracks_in_monthly_directories_descrp));
+
+		Integer[] intValues = new Integer[]{REC_DIRECTORY, MONTHLY_DIRECTORY, DAILY_DIRECTORY};
+		names = new String[intValues.length];
+		names[0] = getString(R.string.store_tracks_in_rec_directory);
+		names[1] = getString(R.string.store_tracks_in_monthly_directories);
+		names[2] = getString(R.string.store_tracks_in_daily_directories);
+		cat.addPreference(createListPreference(settings.TRACK_STORAGE_DIRECTORY, names, intValues,
+				R.string.track_storage_directory, R.string.track_storage_directory_descrp));
 	}
 
 
@@ -129,7 +139,7 @@ public class SettingsMonitoringActivity extends SettingsBaseActivity {
 		cat = new PreferenceCategory(this);
 		cat.setTitle(R.string.live_monitoring_m);
 		grp.addPreference(cat);
-		
+
 		cat.addPreference(createEditTextPreference(settings.LIVE_MONITORING_URL, R.string.live_monitoring_url,
 				R.string.live_monitoring_url_descr));
 		final CheckBoxPreference liveMonitoring = createCheckBoxPreference(settings.LIVE_MONITORING, R.string.live_monitoring_m,
@@ -154,12 +164,12 @@ public class SettingsMonitoringActivity extends SettingsBaseActivity {
 
 	public void updateAllSettings() {
 		super.updateAllSettings();
-		
+
 		if(routeServiceEnabled != null) {
 			routeServiceEnabled.setChecked(getMyApplication().getNavigationService() != null);
 		}
 	}
-	
+
 	private void saveCurrentTracks(final SavingTrackHelper helper) {
 		setProgressVisibility(true);
 		getMyApplication().getTaskManager().runInBackground(new OsmAndTaskRunnable<Void, Void, Void>() {
@@ -178,7 +188,7 @@ public class SettingsMonitoringActivity extends SettingsBaseActivity {
 
 		}, (Void) null);
 	}
-	
+
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
@@ -187,7 +197,7 @@ public class SettingsMonitoringActivity extends SettingsBaseActivity {
 			broadcastReceiver = null;
 		}
 	}
-	
+
 	
 	
 	

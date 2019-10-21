@@ -1494,9 +1494,13 @@ public class OsmandSettings {
 		SAVE_TRACK_TO_GPX.setModeDefaultValue(ApplicationMode.PEDESTRIAN, false);
 	}
 
+	public static final Integer REC_DIRECTORY = 0;
+	public static final Integer MONTHLY_DIRECTORY = 1;
+	public static final Integer DAILY_DIRECTORY = 2;
+
 	public final CommonPreference<Boolean> DISABLE_RECORDING_ONCE_APP_KILLED = new BooleanPreference("disable_recording_once_app_killed", false).makeGlobal();
 
-	public final CommonPreference<Boolean> STORE_TRACKS_IN_MONTHLY_DIRECTORIES = new BooleanPreference("store_tracks_in_monthly_directories", false).makeGlobal();
+	public final CommonPreference<Integer> TRACK_STORAGE_DIRECTORY = new IntPreference("track_storage_directory", 0).makeGlobal();
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> FAST_ROUTE_MODE = new BooleanPreference("fast_route_mode", true).makeProfile();

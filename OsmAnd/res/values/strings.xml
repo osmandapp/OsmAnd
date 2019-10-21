@@ -11,6 +11,12 @@
 	Thx - Hardy
 
 -->
+
+    <string name="track_storage_directory">Track Storage Directory</string>
+    <string name="track_storage_directory_descrp">Tracks can be stored in rec folder or in monthly or daily folders.</string>
+    <string name="store_tracks_in_rec_directory">Store recorded tracks in rec folder</string>
+    <string name="store_tracks_in_daily_directories">Store recorded tracks in daily folders</string>
+    <string name="store_tracks_in_daily_directories_descrp">Store recorded tracks in sub-folders per recording day (like 2018-01-01).</string>
     <string name="shared_string_calculate">Calculate</string>
     <string name="shared_string_osmand_usage">OsmAnd Usage</string>
     <string name="shared_sting_tiles">Tiles</string>
