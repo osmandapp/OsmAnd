@@ -11,6 +11,11 @@
 	Thx - Hardy
 
 -->
+    <string name="track_storage_directory">Track Storage Directory</string>
+    <string name="track_storage_directory_descrp">Tracks can be stored in rec folder or in monthly or daily folders.</string>
+    <string name="store_tracks_in_rec_directory">Store recorded tracks in rec folder</string>
+    <string name="store_tracks_in_daily_directories">Store recorded tracks in daily folders</string>
+    <string name="store_tracks_in_daily_directories_descrp">Store recorded tracks in sub-folders per recording day (like 2018-01-01).</string>
     <string name="avoid_in_routing_descr_">Avoid certain routes and road types</string>
     <string name="change_data_storage_full_description">Move OsmAnd data files to the new destination?\n%1$s > %2$s</string>
     <string name="data_storage_preference_summary">%1$s  •  Used %2$s GB</string>
@@ -739,13 +744,8 @@
     <string name="quick_action_show_navigation_finish_dialog">Show \'Navigation finished\' dialog</string>
     <string name="quick_action_start_stop_navigation">Start/stop navigation</string>
     <string name="quick_action_start_stop_navigation_descr">Tap this button to start or end the navigation.</string>
-    <string name="track_storage_directory">Track Storage Directory</string>
-    <string name="track_storage_directory_descrp">Tracks can be stored in rec folder or in monthly or daily folders.</string>
-    <string name="store_tracks_in_rec_directory">Store recorded tracks in rec folder</string>
     <string name="store_tracks_in_monthly_directories">Store recorded tracks in monthly folders</string>
     <string name="store_tracks_in_monthly_directories_descrp">Store recorded tracks in sub-folders per recording month (like 2018-01).</string>
-    <string name="store_tracks_in_daily_directories">Store recorded tracks in daily folders</string>
-    <string name="store_tracks_in_daily_directories_descrp">Store recorded tracks in sub-folders per recording day (like 2018-01-01).</string>
     <string name="shared_string_reset">Reset</string>
     <string name="shared_string_reload">Reload</string>
     <string name="mapillary_menu_descr_tile_cache">Reload tiles to see up to date data.</string>
