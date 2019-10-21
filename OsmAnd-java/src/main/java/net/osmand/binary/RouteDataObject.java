@@ -469,8 +469,6 @@ public class RouteDataObject {
 		}
 		return pointNameTypes[ind];
 	}
-	
-	
 
 	public int[] getPointTypes(int ind) {
 		if (pointTypes == null || ind >= pointTypes.length) {
@@ -489,22 +487,57 @@ public class RouteDataObject {
 			RouteTypeRule r = region.quickGetEncodingRule(types[i]);
 			if (r != null && r.conditional()) {
 				int vl = r.conditionalValue(conditionalTime);
-				if(vl != 0) {
+				if (vl != 0) {
 					RouteTypeRule rtr = region.quickGetEncodingRule(vl);
 					String nonCondTag = rtr.getTag();
 					int ks;
-					for(ks = 0; ks < types.length; ks++) {
+					for (ks = 0; ks < types.length; ks++) {
 						RouteTypeRule toReplace = region.quickGetEncodingRule(types[ks]);
-						if(toReplace != null && toReplace.getTag().equals(nonCondTag)) {
+						if (toReplace != null && toReplace.getTag().equals(nonCondTag)) {
 							break;
 						}
 					}
-					if(ks == types.length) {
+					if (ks == types.length) {
 						int[] ntypes = new int[types.length + 1];
 						System.arraycopy(types, 0, ntypes, 0, types.length);
 						types = ntypes;
 					}
 					types[ks] = vl;
+				}
+			}
+		}
+
+		if (pointTypes != null) {
+			for (int i = 0; i < pointTypes.length; i++) {
+				if (pointTypes[i] != null) {
+					int[] pTypes = pointTypes[i];
+					int pSz = pTypes.length;
+					if (pSz > 0) {
+						for (int j = 0; j < pSz; j++) {
+							RouteTypeRule r = region.quickGetEncodingRule(pTypes[j]);
+							if (r != null && r.conditional()) {
+								int vl = r.conditionalValue(conditionalTime);
+								if (vl != 0) {
+									RouteTypeRule rtr = region.quickGetEncodingRule(vl);
+									String nonCondTag = rtr.getTag();
+									int ks;
+									for (ks = 0; ks < pointTypes[i].length; ks++) {
+										RouteTypeRule toReplace = region.quickGetEncodingRule(pointTypes[i][j]);
+										if (toReplace != null && toReplace.getTag().contentEquals(nonCondTag)) {
+											break;
+										}
+									}
+									if (ks == pTypes.length) {
+										int[] ntypes = new int[pTypes.length + 1];
+										System.arraycopy(pTypes, 0, ntypes, 0, pTypes.length);
+										pTypes = ntypes;
+									}
+									pTypes[ks] = vl;
+								}
+							}
+						}
+					}
+					pointTypes[i] = pTypes;
 				}
 			}
 		}
