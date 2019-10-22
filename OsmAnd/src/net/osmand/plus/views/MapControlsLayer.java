@@ -75,9 +75,9 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_OUT_HUD_ID;
 public class MapControlsLayer extends OsmandMapLayer {
 
 	private static final int TIMEOUT_TO_SHOW_BUTTONS = 7000;
-	public static final int REQUEST_LOCATION_FOR_NAVIGATION_PERMISSION = 200;
-	public static final int REQUEST_LOCATION_FOR_NAVIGATION_FAB_PERMISSION = 201;
-	public static final int REQUEST_LOCATION_FOR_ADD_DESTINATION_PERMISSION = 202;
+	private static final int REQUEST_LOCATION_FOR_NAVIGATION_PERMISSION = 200;
+	private static final int REQUEST_LOCATION_FOR_NAVIGATION_FAB_PERMISSION = 201;
+	private static final int REQUEST_LOCATION_FOR_ADD_DESTINATION_PERMISSION = 202;
 
 	private static final int COMPASS_PRESSED_TIME_INTERVAL_MS = 5000;
 
@@ -1278,21 +1278,25 @@ public class MapControlsLayer extends OsmandMapLayer {
 	}
 
 	public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-		if (grantResults.length > 0) {
-			if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-				switch (requestCode) {
-					case REQUEST_LOCATION_FOR_NAVIGATION_PERMISSION:
-						onNavigationClick();
-						break;
-					case REQUEST_LOCATION_FOR_NAVIGATION_FAB_PERMISSION:
-						navigateButton();
-						break;
-					case REQUEST_LOCATION_FOR_ADD_DESTINATION_PERMISSION:
-						addDestination(requestedLatLon);
-						break;
+		if ((requestCode == REQUEST_LOCATION_FOR_NAVIGATION_PERMISSION
+				|| requestCode == REQUEST_LOCATION_FOR_NAVIGATION_FAB_PERMISSION
+				|| requestCode == REQUEST_LOCATION_FOR_ADD_DESTINATION_PERMISSION)) {
+			if (grantResults.length > 0) {
+				if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+					switch (requestCode) {
+						case REQUEST_LOCATION_FOR_NAVIGATION_PERMISSION:
+							onNavigationClick();
+							break;
+						case REQUEST_LOCATION_FOR_NAVIGATION_FAB_PERMISSION:
+							navigateButton();
+							break;
+						case REQUEST_LOCATION_FOR_ADD_DESTINATION_PERMISSION:
+							addDestination(requestedLatLon);
+							break;
+					}
+				} else if (grantResults[0] == PackageManager.PERMISSION_DENIED) {
+					app.showToastMessage(R.string.ask_for_location_permission);
 				}
-			} else if (grantResults[0] == PackageManager.PERMISSION_DENIED) {
-				app.showToastMessage(R.string.ask_for_location_permission);
 			}
 		}
 	}

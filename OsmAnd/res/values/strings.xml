@@ -14,7 +14,7 @@
     <string name="shared_string_memory_used_tb_desc">Used %1$s TB</string>
     <string name="shared_string_memory_used_gb_desc">Used %1$s GB</string>
     <string name="shared_string_memory_used_mb_desc">Used %1$s MB</string>
-    <string name="shared_string_memory_used_kb_desc">Used %1$s KB</string>
+    <string name="shared_string_memory_used_kb_desc">Used %1$s kB</string>
     <string name="contour_lines_and_hillshade">Contour lines and Hillshade</string>
     <string name="shared_string_calculate">Calculate</string>
     <string name="shared_string_osmand_usage">OsmAnd Usage</string>
@@ -23,7 +23,7 @@
     <string name="shared_string_memory_tb_desc">%1$s TB</string>
     <string name="shared_string_memory_gb_desc">%1$s GB</string>
     <string name="shared_string_memory_mb_desc">%1$s MB</string>
-    <string name="shared_string_memory_kb_desc">%1$s KB</string>
+    <string name="shared_string_memory_kb_desc">%1$s kB</string>
     <string name="app_mode_utv">Side by Side</string>
     <string name="rendering_attr_piste_difficulty_aerialway_name">Aerialway</string>
     <string name="rendering_attr_piste_difficulty_connection_name">Connection</string>

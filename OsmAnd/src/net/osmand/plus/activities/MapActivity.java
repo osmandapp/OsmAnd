@@ -162,9 +162,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
-import static net.osmand.plus.views.MapControlsLayer.REQUEST_LOCATION_FOR_ADD_DESTINATION_PERMISSION;
-import static net.osmand.plus.views.MapControlsLayer.REQUEST_LOCATION_FOR_NAVIGATION_FAB_PERMISSION;
-import static net.osmand.plus.views.MapControlsLayer.REQUEST_LOCATION_FOR_NAVIGATION_PERMISSION;
 
 public class MapActivity extends OsmandActionBarActivity implements DownloadEvents,
 		OnRequestPermissionsResultCallback, IRouteInformationListener, AMapPointUpdateListener,
@@ -1868,9 +1865,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			OsmandPlugin.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
 			MapControlsLayer mcl = mapView.getLayerByClass(MapControlsLayer.class);
-			if (mcl != null && (requestCode == REQUEST_LOCATION_FOR_NAVIGATION_PERMISSION
-					|| requestCode == REQUEST_LOCATION_FOR_NAVIGATION_FAB_PERMISSION
-					|| requestCode == REQUEST_LOCATION_FOR_ADD_DESTINATION_PERMISSION)) {
+			if (mcl != null) {
 				mcl.onRequestPermissionsResult(requestCode, permissions, grantResults);
 			}
 
