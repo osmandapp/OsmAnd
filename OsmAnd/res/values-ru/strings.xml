@@ -3259,8 +3259,8 @@
     <string name="change_data_storage_full_description">Переместите файлы данных OsmAnd в новое место назначения\?
 \n%1$s &gt; %2$s</string>
     <string name="shared_string_by_default">По умолчанию</string>
-    <string name="data_storage_preference_summary">%1$s • Использовано %2$s ГБ</string>
-    <string name="data_storage_space_description">"Свободно  %1$s • %2$s / %3$s ГБ"</string>
+    <string name="data_storage_preference_summary">%1$s • %2$s</string>
+    <string name="data_storage_space_description">"Свободно %1$s ГБ • Всего %2$s ГБ"</string>
     <string name="enter_path_to_folder">Введите путь к папке</string>
     <string name="shared_string_select_folder">Выберите папку</string>
     <string name="paste_Osmand_data_folder_path">Вставить путь к папке с данными OsmAnd</string>
