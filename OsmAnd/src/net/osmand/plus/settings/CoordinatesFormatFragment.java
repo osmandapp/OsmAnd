@@ -8,15 +8,10 @@ import android.support.v7.preference.CheckBoxPreference;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.support.v7.preference.PreferenceViewHolder;
-import android.text.Layout;
-import android.text.Selection;
-import android.text.Spannable;
-import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextPaint;
 import android.text.style.ClickableSpan;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
 
@@ -26,6 +21,7 @@ import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.bottomsheets.ChangeGeneralProfilesPrefBottomSheet;
+import net.osmand.plus.widgets.tools.ClickableSpanTouchListener;
 import net.osmand.plus.wikipedia.WikipediaDialogFragment;
 
 
@@ -72,51 +68,9 @@ public class CoordinatesFormatFragment extends BaseSettingsFragment {
 		if (UTM_FORMAT.equals(preference.getKey())) {
 			TextView summaryView = (TextView) holder.findViewById(android.R.id.summary);
 			if (summaryView != null) {
-				summaryView.setOnTouchListener(getSummaryTouchListener());
+				summaryView.setOnTouchListener(new ClickableSpanTouchListener());
 			}
 		}
-	}
-
-	private View.OnTouchListener getSummaryTouchListener() {
-		return new View.OnTouchListener() {
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				int action = event.getAction();
-
-				if (action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_DOWN) {
-					TextView widget = (TextView) v;
-
-					int x = (int) event.getX();
-					int y = (int) event.getY();
-
-					x -= widget.getTotalPaddingLeft();
-					y -= widget.getTotalPaddingTop();
-
-					x += widget.getScrollX();
-					y += widget.getScrollY();
-
-					Layout layout = widget.getLayout();
-					int line = layout.getLineForVertical(y);
-					int off = layout.getOffsetForHorizontal(line, x);
-
-					Spannable spannable = new SpannableString(widget.getText());
-					ClickableSpan[] links = spannable.getSpans(off, off, ClickableSpan.class);
-
-					if (links.length != 0) {
-						if (action == MotionEvent.ACTION_UP) {
-							links[0].onClick(widget);
-						} else {
-							Selection.setSelection(spannable, spannable.getSpanStart(links[0]), spannable.getSpanEnd(links[0]));
-						}
-						return true;
-					} else {
-						Selection.removeSelection(spannable);
-					}
-				}
-
-				return false;
-			}
-		};
 	}
 
 	private CharSequence getCoordinatesFormatSummary(Location loc, int format) {
