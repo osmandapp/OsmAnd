@@ -11,6 +11,8 @@
 	Thx - Hardy
 
 -->
+    <string name="routing_attr_prefer_unpaved_name">Prefer unpaved roads</string>
+    <string name="routing_attr_prefer_unpaved_description">Prefer unpaved roads.</string>
     <string name="update_all_maps">Update all maps</string>
     <string name="update_all_maps_q">Are you sure you want to update all (%1$d) maps?</string>
     <string name="track_storage_directory">Track Storage Directory</string>
