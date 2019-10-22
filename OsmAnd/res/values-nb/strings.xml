@@ -3228,7 +3228,7 @@
     <string name="sett_no_ext_input">Ingen</string>
     <string name="change_data_storage_full_description">Flytt OsmAnd-datafiler til det nye målet\?
 \n%1$s &gt; %2$s</string>
-    <string name="data_storage_preference_summary">%1$s • %2$s GB brukt</string>
+    <string name="data_storage_preference_summary">%1$s • %2$s</string>
     <string name="data_storage_space_description">%1$s GB ledig • %2$s GB totalt</string>
     <string name="shared_string_select_folder">Velg mappe</string>
     <string name="change_osmand_data_folder_question">Endre OsmAnd-datamappe\?</string>
