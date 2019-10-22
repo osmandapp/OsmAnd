@@ -28,8 +28,6 @@
     <string name="configure_profile">ပရိုဖိုင်းကိုပြုပြင်မြည်</string>
     <string name="switch_profile">ပရိုဖိုင်းကိုပြောင်းလဲမည်</string>
     <string name="change_data_storage_full_description">OsmAnd အချက်အလက်ဖိုင်များကိုနေရာအသစ်သို့ရွှေ့ပါ။ \n%1$s &gt; %2$s</string>
-    <string name="data_storage_preference_summary">%1$s • သုံးပြီး %2$s GB</string>
-    <string name="data_storage_space_description">"နေရာလွပ်  %1$s • %2$s / %3$s GB"</string>
     <string name="enter_path_to_folder">folder ကိုရှိနေရာကိုရိုက်ထည့်ပါ</string>
     <string name="shared_string_select_folder">ဖိုလ်ဒါကိုရွေးပါ</string>
     <string name="paste_Osmand_data_folder_path">OsmAnd ဒေတာရှိသော ဖိုလ်ဒါနေရာကိုကူးထည့်ပါ</string>

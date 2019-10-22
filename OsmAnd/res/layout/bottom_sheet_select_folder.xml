@@ -9,7 +9,8 @@
 	<net.osmand.plus.widgets.OsmandTextFieldBoxes
 		android:id="@+id/edit_text_otfb"
 		android:layout_width="match_parent"
-		android:layout_height="@dimen/dialog_button_ex_height"
+		android:layout_height="wrap_content"
+		android:minHeight="@dimen/dialog_button_ex_height"
 		android:layout_marginTop="@dimen/text_margin_small"
 		android:paddingLeft="@dimen/content_padding"
 		android:paddingRight="@dimen/content_padding"
@@ -19,10 +20,11 @@
 
 		<studio.carbonylgroup.textfieldboxes.ExtendedEditText
 			android:id="@+id/text"
+			android:inputType="textMultiLine|textNoSuggestions"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:layout_gravity="center_vertical"
-			android:maxLines="1"
+			android:maxLines="10"
 			android:textColor="?android:textColorPrimary"
 			tools:text="Folder path ... " />
 

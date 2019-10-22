@@ -3300,8 +3300,6 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="download_detailed_map">Iscàrriga sa mapa de %s fata a sa minuda pro pompiare cust\'àrea.</string>
     <string name="change_data_storage_full_description">Tramudare sos datos de OsmAnd in sa destinatzione noa\?
 \n%1$s &gt; %2$s</string>
-    <string name="data_storage_preference_summary">%1$s • Impreados: %2$s GB</string>
-    <string name="data_storage_space_description">Lìberos: %1$s • %2$s / %3$s GB</string>
     <string name="enter_path_to_folder">Inserta s\'àndala pro sa cartella</string>
     <string name="shared_string_select_folder">Ischerta sa cartella</string>
     <string name="paste_Osmand_data_folder_path">Incolla s\'àndala pro sa cartella cun sos datos de OsmAnd</string>

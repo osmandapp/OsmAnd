@@ -4,14 +4,19 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class DataStorageMemoryItem implements Parcelable {
+	public final static int EXTENSIONS = 0;
+	public final static int PREFIX = 1;
+	
 	private String key;
 	private String[] extensions;
-	private String[] directories;
+	private String[] prefixes;
+	private Directory[] directories;
 	private long usedMemoryBytes;
 
-	private DataStorageMemoryItem(String key, String[] extensions, long usedMemoryBytes, String[] directories) {
+	private DataStorageMemoryItem(String key, String[] extensions, String[] prefixes, long usedMemoryBytes, Directory[] directories) {
 		this.key = key;
 		this.extensions = extensions;
+		this.prefixes = prefixes;
 		this.usedMemoryBytes = usedMemoryBytes;
 		this.directories = directories;
 	}
@@ -19,7 +24,8 @@ public class DataStorageMemoryItem implements Parcelable {
 	private DataStorageMemoryItem(Parcel in) {
 		key = in.readString();
 		in.readStringArray(extensions);
-		in.readStringArray(directories);
+		in.writeStringArray(prefixes);
+		directories = (Directory[]) in.readArray(Directory.class.getClassLoader());
 		usedMemoryBytes = in.readLong();
 	}
 
@@ -35,10 +41,6 @@ public class DataStorageMemoryItem implements Parcelable {
 		this.key = key;
 	}
 
-	public void setUsedMemoryBytes(long usedMemoryBytes) {
-		this.usedMemoryBytes = usedMemoryBytes;
-	}
-	
 	public static DataStorageMemoryItemBuilder builder() {
 		return new DataStorageMemoryItemBuilder();
 	}
@@ -47,16 +49,16 @@ public class DataStorageMemoryItem implements Parcelable {
 		return extensions;
 	}
 
-	public void setExtensions(String[] extensions) {
-		this.extensions = extensions;
+	public String[] getPrefixes() {
+		return prefixes;
 	}
 
-	public String[] getDirectories() {
+	public Directory[] getDirectories() {
 		return directories;
 	}
 
-	public void setDirectories(String[] directories) {
-		this.directories = directories;
+	public void addBytes(long bytes) {
+		this.usedMemoryBytes += bytes;
 	}
 
 	@Override
@@ -68,7 +70,8 @@ public class DataStorageMemoryItem implements Parcelable {
 	public void writeToParcel(Parcel dest, int flags) {
 		dest.writeString(key);
 		dest.writeStringArray(extensions);
-		dest.writeStringArray(directories);
+		dest.writeStringArray(prefixes);
+		dest.writeArray(directories);
 		dest.writeLong(usedMemoryBytes);
 	}
 
@@ -88,7 +91,8 @@ public class DataStorageMemoryItem implements Parcelable {
 	public static class DataStorageMemoryItemBuilder {
 		private String key;
 		private String[] extensions;
-		private String[] directories;
+		private String[] prefixes;
+		private Directory[] directories;
 		private long usedMemoryBytes;
 
 		public DataStorageMemoryItemBuilder setKey(String key) {
@@ -100,8 +104,13 @@ public class DataStorageMemoryItem implements Parcelable {
 			this.extensions = extensions;
 			return this;
 		}
+
+		public DataStorageMemoryItemBuilder setPrefixes(String ... prefixes) {
+			this.prefixes = prefixes;
+			return this;
+		}
 		
-		public DataStorageMemoryItemBuilder setDirectories(String ... directories) {
+		public DataStorageMemoryItemBuilder setDirectories(Directory ... directories) {
 			this.directories = directories;
 			return this;
 		}
@@ -112,11 +121,70 @@ public class DataStorageMemoryItem implements Parcelable {
 		}
 		
 		public DataStorageMemoryItem createItem() {
-			return new DataStorageMemoryItem(key, extensions, usedMemoryBytes, directories);
+			return new DataStorageMemoryItem(key, extensions, prefixes, usedMemoryBytes, directories);
 		}
 	}
 	
-	public void addBytes(long bytes) {
-		this.usedMemoryBytes += bytes;
+	public static class Directory implements Parcelable {
+		private String absolutePath;
+		private boolean goDeeper;
+		private int checkingType;
+		private boolean skipOther;
+
+		@Override
+		public int describeContents() {
+			return 0;
+		}
+
+		@Override
+		public void writeToParcel(Parcel dest, int flags) {
+			dest.writeString(absolutePath);
+			dest.writeInt(goDeeper ? 1 : 0);
+			dest.writeInt(checkingType);
+			dest.writeInt(skipOther ? 1 : 0);
+		}
+
+		public Directory(String absolutePath, boolean goDeeper, int checkingType, boolean skipOther) {
+			this.absolutePath = absolutePath;
+			this.goDeeper = goDeeper;
+			this.checkingType = checkingType;
+			this.skipOther = skipOther;
+		}
+
+		public String getAbsolutePath() {
+			return absolutePath;
+		}
+
+		public boolean isGoDeeper() {
+			return goDeeper;
+		}
+
+		public int getCheckingType() {
+			return checkingType;
+		}
+
+		public boolean isSkipOther() {
+			return skipOther;
+		}
+
+		private Directory(Parcel in) {
+			absolutePath = in.readString();
+			goDeeper = in.readInt() == 1;
+			checkingType = in.readInt();
+			skipOther = in.readInt() == 1;
+		}
+
+		public static final Parcelable.Creator<Directory> CREATOR = new Parcelable.Creator<Directory>() {
+
+			@Override
+			public Directory createFromParcel(Parcel source) {
+				return new Directory(source);
+			}
+
+			@Override
+			public Directory[] newArray(int size) {
+				return new Directory[size];
+			}
+		};
 	}
 }

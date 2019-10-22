@@ -75,9 +75,9 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_OUT_HUD_ID;
 public class MapControlsLayer extends OsmandMapLayer {
 
 	private static final int TIMEOUT_TO_SHOW_BUTTONS = 7000;
-	private static final int REQUEST_LOCATION_FOR_NAVIGATION_PERMISSION = 200;
-	private static final int REQUEST_LOCATION_FOR_NAVIGATION_FAB_PERMISSION = 201;
-	private static final int REQUEST_LOCATION_FOR_ADD_DESTINATION_PERMISSION = 202;
+	public static final int REQUEST_LOCATION_FOR_NAVIGATION_PERMISSION = 200;
+	public static final int REQUEST_LOCATION_FOR_NAVIGATION_FAB_PERMISSION = 201;
+	public static final int REQUEST_LOCATION_FOR_ADD_DESTINATION_PERMISSION = 202;
 
 	private static final int COMPASS_PRESSED_TIME_INTERVAL_MS = 5000;
 

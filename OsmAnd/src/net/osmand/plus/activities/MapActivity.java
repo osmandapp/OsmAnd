@@ -128,6 +128,7 @@ import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchTab;
 import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchType;
 import net.osmand.plus.settings.BaseSettingsFragment;
 import net.osmand.plus.settings.BaseSettingsFragment.SettingsScreenType;
+import net.osmand.plus.settings.DataStorageFragment;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.MapControlsLayer;
@@ -161,6 +162,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
+import static net.osmand.plus.views.MapControlsLayer.REQUEST_LOCATION_FOR_ADD_DESTINATION_PERMISSION;
+import static net.osmand.plus.views.MapControlsLayer.REQUEST_LOCATION_FOR_NAVIGATION_FAB_PERMISSION;
+import static net.osmand.plus.views.MapControlsLayer.REQUEST_LOCATION_FOR_NAVIGATION_PERMISSION;
 
 public class MapActivity extends OsmandActionBarActivity implements DownloadEvents,
 		OnRequestPermissionsResultCallback, IRouteInformationListener, AMapPointUpdateListener,
@@ -1864,11 +1868,21 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			OsmandPlugin.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
 			MapControlsLayer mcl = mapView.getLayerByClass(MapControlsLayer.class);
-			if (mcl != null) {
+			if (mcl != null && (requestCode == REQUEST_LOCATION_FOR_NAVIGATION_PERMISSION
+					|| requestCode == REQUEST_LOCATION_FOR_NAVIGATION_FAB_PERMISSION
+					|| requestCode == REQUEST_LOCATION_FOR_ADD_DESTINATION_PERMISSION)) {
 				mcl.onRequestPermissionsResult(requestCode, permissions, grantResults);
 			}
 
-			if (requestCode == DownloadActivity.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE
+			if (requestCode == DataStorageFragment.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE
+					&& grantResults.length > 0 && permissions.length > 0
+					&& Manifest.permission.WRITE_EXTERNAL_STORAGE.equals(permissions[0])) {
+				if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+					Toast.makeText(this,
+							R.string.missing_write_external_storage_permission,
+							Toast.LENGTH_LONG).show();
+				}
+			} else if (requestCode == DownloadActivity.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE
 					&& grantResults.length > 0 && permissions.length > 0
 					&& Manifest.permission.WRITE_EXTERNAL_STORAGE.equals(permissions[0])) {
 				permissionAsked = true;

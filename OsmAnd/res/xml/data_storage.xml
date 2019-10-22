@@ -14,6 +14,12 @@
 		android:title="@string/shared_string_maps"/>
 
 	<Preference
+		android:key="contour_lines_and_hillshade_memory"
+		android:layout="@layout/data_storage_memory_used_item"
+		android:icon="@drawable/ic_map"
+		android:title="@string/contour_lines_and_hillshade"/>
+	
+	<Preference
 		android:key="tracks_memory_used"
 		android:layout="@layout/data_storage_memory_used_item"
 		android:icon="@drawable/ic_action_polygom_dark"
@@ -36,9 +42,6 @@
 		android:layout="@layout/data_storage_memory_used_item"
 		android:icon="@drawable/ic_action_folder"
 		android:title="@string/shared_string_other"/>
-	
-	<Preference
-		android:layout="@layout/divider_padding_half" />
 
 	<PreferenceCategory
 		android:key="application_profiles"

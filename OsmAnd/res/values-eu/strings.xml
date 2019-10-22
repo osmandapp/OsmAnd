@@ -3279,8 +3279,6 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="download_detailed_map">Deskargatu %s(e)ko mapa xehetsua ingurune hau ikusteko.</string>
     <string name="change_data_storage_full_description">Eraman OsmAnd datu fitxategiak xede berrira\?
 \n%1$s &gt; %2$s</string>
-    <string name="data_storage_preference_summary">%1$s • Erabilita %2$s GB</string>
-    <string name="data_storage_space_description">Libre %1$s • %2$s / %3$s GB</string>
     <string name="enter_path_to_folder">Sartu karpetara bidea</string>
     <string name="shared_string_select_folder">Hautatu karpeta</string>
     <string name="paste_Osmand_data_folder_path">Itsatsi OsmAnd datuak dituen karpetara bidea</string>
