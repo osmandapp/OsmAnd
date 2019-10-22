@@ -3718,4 +3718,6 @@
     <string name="poi_craft_floorer">Construtor de chans</string>
     <string name="poi_craft_bakery">Obradoiro de panadaría</string>
     <string name="poi_craft_cabinet_maker">Ebanista</string>
+    <string name="poi_charge">Carga</string>
+    <string name="poi_pet_grooming">Coidado de mascotas</string>
 </resources>

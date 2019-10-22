@@ -3271,4 +3271,15 @@
     <string name="routing_attr_width_name">Genişlik sınırı</string>
     <string name="routing_attr_width_description">Rotalarda izin verilen araç genişlik sınırını belirtin.</string>
     <string name="avoid_in_routing_descr_">Belirli rotalardan ve yol türlerinden kaçının</string>
+    <string name="app_mode_utv">Yan yana</string>
+    <string name="rendering_attr_piste_difficulty_aerialway_name">Hava yolu</string>
+    <string name="rendering_attr_piste_difficulty_connection_name">Bağlantı</string>
+    <string name="shared_string_calculate">Hesapla</string>
+    <string name="shared_string_osmand_usage">OsmAnd Kullanımı</string>
+    <string name="shared_sting_tiles">Döşemeler</string>
+    <string name="shared_string_maps">Haritalar</string>
+    <string name="shared_string_memory_tb_desc">%1$s TB</string>
+    <string name="shared_string_memory_gb_desc">%1$s GB</string>
+    <string name="shared_string_memory_mb_desc">%1$s MB</string>
+    <string name="shared_string_memory_kb_desc">%1$s KB</string>
 </resources>

@@ -745,6 +745,13 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 			case NAUTICALMILES_PER_HOUR:
 				ratio[0] = 3600 / OsmAndFormatter.METERS_IN_ONE_NAUTICALMILE;
 				break;
+			case MINUTES_PER_MILE:
+				ratio[0] = 3600 / OsmAndFormatter.METERS_IN_ONE_MILE;
+				speedUnits = activity.getString(R.string.mile_per_hour);
+				break;
+			case METERS_PER_SECOND:
+				ratio[0] = 1;
+				break;
 		}
 
 		float settingsMinSpeed = settings.MIN_SPEED.get();

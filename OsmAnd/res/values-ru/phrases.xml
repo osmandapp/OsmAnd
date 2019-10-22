@@ -603,7 +603,7 @@
 	<string name="poi_crematorium">Крематорий</string>
 	<string name="poi_internet_cafe">Интернет-кафе;Интернет-салон;Киберкафе</string>
 	<string name="poi_bank">Банк</string>
-	<string name="poi_amenity_atm">Банкомат</string>
+	<string name="poi_atm">Банкомат</string>
 	<string name="poi_money_lender">Ростовщик</string>
 	<string name="poi_pawnbroker">Ломбард</string>
 	<string name="poi_bureau_de_change">Обмен валют</string>
@@ -2426,7 +2426,7 @@
 	<string name="poi_inscription_e">Надпись:З</string>
 	<string name="poi_inscription_ne">Надпись:СЗ</string>
 	<string name="poi_construction_yes">В процессе строительства</string>
-	<string name="poi_additional_atm_yes">С банкоматом</string>
+	<string name="poi_atm_yes">С банкоматом;Банкомат</string>
 	<string name="poi_atm_no">Без банкомата</string>
 	<string name="poi_firepit">Место для разведения огня</string>
 	<string name="poi_street_cabinet">Распределительный шкаф</string>

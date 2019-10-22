@@ -2460,8 +2460,13 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="max_min">max/min</string>
     <string name="shared_string_reset">Zurücksetzen</string>
     <string name="ascent_descent">Aufstieg/Abstieg</string>
+    <string name="track_storage_directory">Track Speicherort</string>
+    <string name="track_storage_directory_descrp">Tracks können im Rec Ordner oder in Monats- bzw. Tagesordnern gespeichert werden.</string>
+    <string name="store_tracks_in_rec_directory">Aufgezeichnete Tracks im Rec Ordner speichern</string>
     <string name="store_tracks_in_monthly_directories">Aufgezeichnete Tracks in Monatsordnern speichern</string>
     <string name="store_tracks_in_monthly_directories_descrp">Aufgezeichnete Tracks in nach Aufzeichnungsmonat benannten Unterordnern speichern (z. B. 2018-01).</string>
+    <string name="store_tracks_in_daily_directories">Aufgezeichnete Tracks in Tagesordnern speichern</string>
+    <string name="store_tracks_in_daily_directories_descrp">Aufgezeichnete Tracks in nach Aufzeichnungstag benannten Unterordnern speichern (z. B. 2018-01).</string>
     <string name="map_widget_ruler_control">Zirkel</string>
     <string name="of">%1$d von %2$d</string>
     <string name="moving_time">Zeit in Bewegung</string>
@@ -3327,4 +3332,14 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="routing_attr_width_name">Breitenbegrenzung</string>
     <string name="routing_attr_width_description">Geben Sie die zulässige Fahrzeugbreitenbegrenzung auf Routen an.</string>
     <string name="avoid_in_routing_descr_">Vermeiden von bestimmten Routen und Straßentypen</string>
+    <string name="app_mode_utv">Nebeneinander</string>
+    <string name="rendering_attr_piste_difficulty_aerialway_name">Seilbahn</string>
+    <string name="rendering_attr_piste_difficulty_connection_name">Verbindung</string>
+    <string name="shared_string_calculate">Berechnen</string>
+    <string name="shared_string_osmand_usage">OsmAnd Nutzung</string>
+    <string name="shared_string_maps">Karten</string>
+    <string name="shared_string_memory_tb_desc">%1$s TB</string>
+    <string name="shared_string_memory_gb_desc">%1$s GB</string>
+    <string name="shared_string_memory_mb_desc">%1$s MB</string>
+    <string name="shared_string_memory_kb_desc">%1$s KB</string>
 </resources>

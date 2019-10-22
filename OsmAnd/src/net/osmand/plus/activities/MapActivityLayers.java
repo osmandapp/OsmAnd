@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -91,6 +92,9 @@ public class MapActivityLayers {
 	private MapWidgetRegistry mapWidgetRegistry;
 	private QuickActionRegistry quickActionRegistry;
 	private MeasurementToolLayer measurementToolLayer;
+	
+	private boolean nightMode;
+	private int themeRes;
 
 	private StateChangedListener<Integer> transparencyListener;
 
@@ -98,6 +102,8 @@ public class MapActivityLayers {
 		this.activity = activity;
 		this.mapWidgetRegistry = new MapWidgetRegistry(activity.getMyApplication());
 		this.quickActionRegistry = new QuickActionRegistry(activity.getMyApplication().getSettings());
+		this.nightMode = activity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
+		this.themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 	}
 
 	public QuickActionRegistry getQuickActionRegistry() {
@@ -266,7 +272,7 @@ public class MapActivityLayers {
 				return true;
 			}
 		};
-		return GpxUiHelper.selectGPXFiles(files, activity, callbackWithObject);
+		return GpxUiHelper.selectGPXFiles(files, activity, callbackWithObject, themeRes);
 	}
 
 
@@ -283,8 +289,8 @@ public class MapActivityLayers {
 		}
 		list.add(poiFilters.getCustomPOIFilter());
 
-		final ArrayAdapter<ContextMenuItem> listAdapter = adapter.createListAdapter(activity, app.getSettings().isLightContent());
-		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+		final ArrayAdapter<ContextMenuItem> listAdapter = adapter.createListAdapter(activity, !nightMode);
+		AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(activity, themeRes));
 		final ListView listView = new ListView(activity);
 		listView.setDivider(null);
 		listView.setClickable(true);
@@ -361,9 +367,8 @@ public class MapActivityLayers {
 			addFilterToList(adapter, list, f, false);
 		}
 
-		final ArrayAdapter<ContextMenuItem> listAdapter =
-				adapter.createListAdapter(activity, app.getSettings().isLightContent());
-		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+		final ArrayAdapter<ContextMenuItem> listAdapter = adapter.createListAdapter(activity, !nightMode);
+		AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(activity, themeRes));
 		builder.setAdapter(listAdapter, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
