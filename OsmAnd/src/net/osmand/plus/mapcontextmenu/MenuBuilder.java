@@ -59,6 +59,7 @@ import net.osmand.plus.transport.TransportStopRoute;
 import net.osmand.plus.views.POIMapLayer;
 import net.osmand.plus.views.TransportStopsLayer;
 import net.osmand.plus.widgets.TextViewEx;
+import net.osmand.plus.widgets.tools.ClickableSpanTouchListener;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -578,15 +579,15 @@ public class MenuBuilder {
 		llText.setLayoutParams(llTextViewParams);
 		ll.addView(llText);
 
-		// Text prefix
+		TextViewEx textPrefixView = null;
 		if (!Algorithms.isEmpty(textPrefix)) {
-			TextView textPrefixView = new TextView(view.getContext());
+			textPrefixView = new TextViewEx(view.getContext());
 			LinearLayout.LayoutParams llTextParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 			llTextParams.setMargins(icon == null ? dpToPx(16f) : 0, dpToPx(8f), 0, 0);
 			textPrefixView.setLayoutParams(llTextParams);
+			textPrefixView.setTypeface(FontCache.getRobotoRegular(view.getContext()));
 			textPrefixView.setTextSize(12);
 			textPrefixView.setTextColor(app.getResources().getColor(light ? R.color.text_color_secondary_light: R.color.text_color_secondary_dark));
-			textPrefixView.setEllipsize(TextUtils.TruncateAt.END);
 			textPrefixView.setMinLines(1);
 			textPrefixView.setMaxLines(1);
 			textPrefixView.setText(textPrefix);
@@ -596,30 +597,30 @@ public class MenuBuilder {
 		// Primary text
 		TextViewEx textView = new TextViewEx(view.getContext());
 		LinearLayout.LayoutParams llTextParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-		llTextParams.setMargins(icon != null ? 0 : dpToPx(16f), dpToPx(secondaryText != null ? 10f : 8f), 0, dpToPx(secondaryText != null ? 6f : 8f));
+		llTextParams.setMargins(icon != null ? 0 : dpToPx(16f), dpToPx(textPrefixView != null ? 2f : (secondaryText != null ? 10f : 8f)), 0, dpToPx(secondaryText != null ? 6f : 8f));
 		textView.setLayoutParams(llTextParams);
 		textView.setTypeface(FontCache.getRobotoRegular(view.getContext()));
 		textView.setTextSize(16);
 		textView.setTextColor(app.getResources().getColor(light ? R.color.text_color_primary_light : R.color.text_color_primary_dark));
 		textView.setText(text);
 
-		if (textColor > 0) {
-			textView.setTextColor(view.getResources().getColor(textColor));
-		}
-
 		int linkTextColor = ContextCompat.getColor(view.getContext(), light ? R.color.ctx_menu_bottom_view_url_color_light : R.color.ctx_menu_bottom_view_url_color_dark);
 
 		if (isUrl || isNumber || isEmail) {
 			textView.setTextColor(linkTextColor);
-		} else if (needLinks) {
-			Linkify.addLinks(textView, Linkify.ALL);
-			textView.setLinksClickable(true);
+		} else if (needLinks && Linkify.addLinks(textView, Linkify.ALL)) {
+			textView.setMovementMethod(null);
 			textView.setLinkTextColor(linkTextColor);
+			textView.setOnTouchListener(new ClickableSpanTouchListener());
 			AndroidUtils.removeLinkUnderline(textView);
 		}
 		if (textLinesLimit > 0) {
 			textView.setMinLines(1);
 			textView.setMaxLines(textLinesLimit);
+			textView.setEllipsize(TextUtils.TruncateAt.END);
+		}
+		if (textColor > 0) {
+			textView.setTextColor(view.getResources().getColor(textColor));
 		}
 		llText.addView(textView);
 
