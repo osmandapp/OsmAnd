@@ -256,6 +256,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 					secondPart.setVisibility(View.VISIBLE);
 					String space = getSpaceDescription(item.getDirectory());
 					if (!space.equals("")) {
+						space = space.replaceAll(" • ", "  •  ");
 						tvSummary.setText(space);
 						tvSummary.setVisibility(View.VISIBLE);
 					} else {

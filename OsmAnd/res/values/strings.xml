@@ -29,8 +29,8 @@
     <string name="rendering_attr_piste_difficulty_connection_name">Connection</string>
     <string name="avoid_in_routing_descr_">Avoid certain routes and road types</string>
     <string name="change_data_storage_full_description">Move OsmAnd data files to the new destination?\n%1$s > %2$s</string>
-    <string name="data_storage_preference_summary">%1$s\t•\t%2$s</string>
-    <string name="data_storage_space_description">Free %1$s GB\t•\tTotal %2$s GB</string>
+    <string name="data_storage_preference_summary">%1$s • %2$s</string>
+    <string name="data_storage_space_description">Free %1$s GB • Total %2$s GB</string>
     <string name="enter_path_to_folder">Enter path to the folder</string>
     <string name="shared_string_select_folder">Select folder</string>
     <string name="paste_Osmand_data_folder_path">Paste path to the folder with OsmAnd data</string>

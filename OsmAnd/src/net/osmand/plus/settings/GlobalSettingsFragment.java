@@ -151,6 +151,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment implements Send
 			String summary = String.format(getString(R.string.data_storage_preference_summary),
 					currentStorage.getTitle(),
 					sTotalUsed);
+			summary = summary.replaceAll(" • ", "  •  ");
 			externalStorageDir.setSummary(summary);
 		} else {
 			externalStorageDir.setSummary(currentStorage.getTitle());
