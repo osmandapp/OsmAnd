@@ -3274,8 +3274,6 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="download_detailed_map">Elŝutu la detalan mapon %s, por vidi tiun ĉi areon.</string>
     <string name="change_data_storage_full_description">Ĉu movi datum‑dosierojn OsmAnd al la nova loko\?
 \n%1$s → %2$s</string>
-    <string name="data_storage_preference_summary">%1$s • uzita: %2$s GB</string>
-    <string name="data_storage_space_description">Libera: %1$s GB • Tute: %2$s GB</string>
     <string name="enter_path_to_folder">Entajpu dosier‑indikon</string>
     <string name="shared_string_select_folder">Elektu dosierujon</string>
     <string name="paste_Osmand_data_folder_path">Algluu dosier‑indikon por dosierujo de OsmAnd‑datumoj</string>

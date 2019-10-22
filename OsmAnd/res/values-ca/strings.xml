@@ -3268,8 +3268,6 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="route_parameters">Paràmetres de la ruta</string>
     <string name="change_data_storage_full_description">Voleu moure els arxius de dades OsmAnd a una nova destinació\?
 \n%1$s &gt; %2$s</string>
-    <string name="data_storage_preference_summary">%1$s • Usat %2$s GB</string>
-    <string name="data_storage_space_description">Lliure %1$s • %2$s / %3$s GB</string>
     <string name="enter_path_to_folder">Introduïu el camí a la carpeta</string>
     <string name="shared_string_select_folder">Seleccioneu la carpeta</string>
     <string name="paste_Osmand_data_folder_path">Enganxa el camí a la carpeta amb les dades d\'OsmAnd</string>

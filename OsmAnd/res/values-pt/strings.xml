@@ -3290,8 +3290,6 @@
     <string name="download_detailed_map">Descarregue o mapa detalhado de %s para ver esta área.</string>
     <string name="change_data_storage_full_description">Mover ficheiros de dados OsmAnd para o novo destino\?
 \n%1$s &gt; %2$s</string>
-    <string name="data_storage_preference_summary">%1$s • Usado %2$s GB</string>
-    <string name="data_storage_space_description">Livre %1$s GB • Total %2$s GB</string>
     <string name="enter_path_to_folder">Insira o caminho para a pasta</string>
     <string name="shared_string_select_folder">Selecionar pasta</string>
     <string name="paste_Osmand_data_folder_path">Colar caminho para a pasta com dados OsmAnd</string>

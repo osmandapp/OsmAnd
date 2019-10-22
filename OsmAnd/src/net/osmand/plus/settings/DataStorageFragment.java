@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -27,6 +28,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.ProgressImplementation;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.settings.bottomsheets.ChangeDataStorageBottomSheet;
@@ -43,16 +45,18 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Locale;
 
-import static net.osmand.plus.settings.DataStorageItemsHolder.INTERNAL_STORAGE;
-import static net.osmand.plus.settings.DataStorageItemsHolder.MANUALLY_SPECIFIED;
-import static net.osmand.plus.settings.DataStorageItemsHolder.TILES_MEMORY;
+import static net.osmand.plus.settings.DataStorageHelper.INTERNAL_STORAGE;
+import static net.osmand.plus.settings.DataStorageHelper.MANUALLY_SPECIFIED;
+import static net.osmand.plus.settings.DataStorageHelper.OTHER_MEMORY;
+import static net.osmand.plus.settings.DataStorageHelper.TILES_MEMORY;
 import static net.osmand.plus.settings.bottomsheets.ChangeDataStorageBottomSheet.CHOSEN_DIRECTORY;
 import static net.osmand.plus.settings.bottomsheets.ChangeDataStorageBottomSheet.MOVE_DATA;
 import static net.osmand.plus.settings.bottomsheets.SelectFolderBottomSheet.PATH_CHANGED;
 import static net.osmand.plus.settings.bottomsheets.SelectFolderBottomSheet.NEW_PATH;
 
-public class DataStorageFragment extends BaseSettingsFragment implements DataStorageItemsHolder.UpdateMemoryInfoUIAdapter {
-
+public class DataStorageFragment extends BaseSettingsFragment implements DataStorageHelper.UpdateMemoryInfoUIAdapter {
+	public final static int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 500;
+	
 	private final static String CHANGE_DIRECTORY_BUTTON = "change_directory";
 	private final static String OSMAND_USAGE = "osmand_usage";
 	private final static String CALCULATE_TILES_BTN_PRESSED = "calculate_tiles_btn_pressed";
@@ -64,11 +68,11 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 	private Preference changeButton;
 	private DataStorageMenuItem currentDataStorage;
 	private String tmpManuallySpecifiedPath;
-	private DataStorageItemsHolder itemsHolder;
+	private DataStorageHelper itemsHolder;
 	private boolean calculateTilesBtnPressed;
 	
-	private DataStorageItemsHolder.RefreshMemoryUsedInfo calculateMemoryTask;
-	private DataStorageItemsHolder.RefreshMemoryUsedInfo calculateTilesMemoryTask;
+	private DataStorageHelper.RefreshMemoryUsedInfo calculateMemoryTask;
+	private DataStorageHelper.RefreshMemoryUsedInfo calculateTilesMemoryTask;
 
 	private OsmandApplication app;
 	private OsmandActionBarActivity activity;
@@ -180,7 +184,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 								&& !DownloadActivity.hasPermissionToWriteExternalStorage(activity)) {
 							ActivityCompat.requestPermissions(activity,
 									new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-									DownloadActivity.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
+									DataStorageFragment.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
 						} else if (key.equals(MANUALLY_SPECIFIED)) {
 							showFolderSelectionDialog();
 						} else {
@@ -212,6 +216,14 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 		int activeColor = ContextCompat.getColor(app, activeColorResId);
 		int primaryTextColorResId = isNightMode() ? R.color.text_color_primary_dark : R.color.text_color_primary_light;
 		int primaryTextColor = ContextCompat.getColor(app, primaryTextColorResId);
+
+		String[] memoryUnitsFormats = new String[] {
+				getString(R.string.shared_string_memory_kb_desc),
+				getString(R.string.shared_string_memory_mb_desc),
+				getString(R.string.shared_string_memory_gb_desc),
+				getString(R.string.shared_string_memory_tb_desc)
+		};
+		
 		final View itemView = holder.itemView;
 		if (preference instanceof CheckBoxPreference) {
 			DataStorageMenuItem item = itemsHolder.getStorage(key);
@@ -243,7 +255,13 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 					divider.setVisibility(View.VISIBLE);
 					secondPart.setVisibility(View.VISIBLE);
 					String space = getSpaceDescription(item.getDirectory());
-					tvSummary.setText(space);
+					if (!space.equals("")) {
+						space = space.replaceAll(" • ", "  •  ");
+						tvSummary.setText(space);
+						tvSummary.setVisibility(View.VISIBLE);
+					} else {
+						tvSummary.setVisibility(View.GONE);
+					}
 					if (currentKey.equals(INTERNAL_STORAGE)) {
 						tvAdditionalDescription.setText(item.getDescription());
 					} else {
@@ -259,12 +277,9 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 			icon.setVisibility(View.INVISIBLE);
 			title.setText(R.string.shared_string_change);
 		} else if(key.equals(OSMAND_USAGE)) {
-			long totalUsageBytes = 0;
-			for (DataStorageMemoryItem mi : memoryItems) {
-				totalUsageBytes += mi.getUsedMemoryBytes();
-			}
+			long totalUsageBytes = itemsHolder.getTotalUsedBytes();
 			TextView tvSummary = itemView.findViewById(R.id.summary);
-			tvSummary.setText(getFormattedMemoryUsedInfo(totalUsageBytes));
+			tvSummary.setText(DataStorageHelper.getFormattedMemoryInfo(totalUsageBytes, memoryUnitsFormats));
 		} else {
 			for (DataStorageMemoryItem mi : memoryItems) {
 				if (key.equals(mi.getKey())) {
@@ -285,7 +300,13 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 					} else {
 						tvMemory.setOnClickListener(null);
 						color = primaryTextColor;
-						summary = getFormattedMemoryUsedInfo(mi.getUsedMemoryBytes());
+						summary = DataStorageHelper.getFormattedMemoryInfo(mi.getUsedMemoryBytes(), memoryUnitsFormats);
+					}
+					View divider = itemView.findViewById(R.id.divider);
+					if (mi.getKey().equals(OTHER_MEMORY)) {
+						divider.setVisibility(View.VISIBLE);
+					} else {
+						divider.setVisibility(View.GONE);
 					}
 					tvMemory.setTextColor(color);
 					tvMemory.setText(summary);
@@ -416,7 +437,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 			app.setExternalStorageDirectory(type, newDirectory);
 			reloadData();
 			if (silentRestart) {
-				android.os.Process.killProcess(android.os.Process.myPid());
+				MapActivity.doRestart(activity);
 			} else {
 				app.restartApp(activity);
 			}
@@ -430,7 +451,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 	
 	private void refreshDataInfo() {
 		calculateTilesBtnPressed = false;
-		itemsHolder = DataStorageItemsHolder.refreshInfo(app);
+		itemsHolder = DataStorageHelper.refreshInfo(app);
 		calculateMemoryTask = itemsHolder.calculateMemoryUsedInfo(this);
 	}
 
@@ -443,29 +464,14 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 		}
 		if (dir.exists()) {
 			DecimalFormat formatter = new DecimalFormat("#.##");
+			float freeSpace = AndroidUtils.getFreeSpaceGb(dir);
+			float totalSpace = AndroidUtils.getTotalSpaceGb(dir);
+			if (freeSpace < 0 || totalSpace < 0) {
+				return "";
+			}
 			return String.format(getString(R.string.data_storage_space_description),
-					formatter.format(AndroidUtils.getFreeSpaceGb(dir)),
-					formatter.format(AndroidUtils.getTotalSpaceGb(dir)));
-		}
-		return "";
-	}
-	
-	private String getFormattedMemoryUsedInfo(long bytes) {
-		int type  = 1;
-		double used = (double) bytes / 1024;
-		while (used > 1024) {
-			++type;
-			used = used / 1024;
-		}
-		String formattedUsed = new DecimalFormat("#.##").format(used);
-		if (type == 1) {
-			return String.format(getString(R.string.shared_string_memory_kb_desc), formattedUsed);
-		} else if (type == 2) {
-			return String.format(getString(R.string.shared_string_memory_mb_desc), formattedUsed);
-		} else if (type == 3){
-			return String.format(getString(R.string.shared_string_memory_gb_desc), formattedUsed);
-		} else if (type == 4){
-			return String.format(getString(R.string.shared_string_memory_tb_desc), formattedUsed);
+					formatter.format(freeSpace),
+					formatter.format(totalSpace));
 		}
 		return "";
 	}
@@ -477,6 +483,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 	@Override
 	public void onMemoryInfoUpdate() {
 		updateAllSettings();
+		app.getSettings().OSMAND_USAGE_SPACE.set(itemsHolder.getTotalUsedBytes());
 	}
 	
 	public static class MoveFilesToDifferentDirectory extends AsyncTask<Void, Void, Boolean> {

@@ -3335,8 +3335,6 @@
     <string name="download_detailed_map">برای دیدن این منطقه، نقشهٔ باجزئیات %s را دانلود کنید.</string>
     <string name="change_data_storage_full_description">فایل‌های دادهٔ OsmAnd را به مقصد جدید انتقال می‌دهید؟
 \n%1$s &gt; %2$s</string>
-    <string name="data_storage_preference_summary">%1$s • %2$s گ‌ب استفاده شده</string>
-    <string name="data_storage_space_description">خالی %1$s • %2$s از %3$s گ‌ب</string>
     <string name="enter_path_to_folder">مسیر پوشه را وارد کنید</string>
     <string name="shared_string_select_folder">انتخاب پوشه</string>
     <string name="paste_Osmand_data_folder_path">مسیر پوشهٔ داده‌های OsmAnd را درج کنید</string>

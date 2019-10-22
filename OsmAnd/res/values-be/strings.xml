@@ -3290,8 +3290,6 @@
     <string name="shared_string_by_default">Прадвызначана</string>
     <string name="change_data_storage_full_description">Перамясціць файлы даных OsmAnd у новае месца\?
 \n%1$s &gt; %2$s</string>
-    <string name="data_storage_preference_summary">%1$s • выкарыстоўваецца %2$s Гб</string>
-    <string name="data_storage_space_description">Вольна %1$s • %2$s / %3$s Гб</string>
     <string name="enter_path_to_folder">Увядзіце шлях да каталога</string>
     <string name="shared_string_select_folder">Абраць каталог</string>
 </resources>

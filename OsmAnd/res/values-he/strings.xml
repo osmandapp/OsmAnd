@@ -3279,8 +3279,6 @@
     <string name="routing_attr_freeride_policy_name">ללא מסלול</string>
     <string name="change_data_storage_full_description">להעביר את קובצי הנתונים של OsmAnd ליעד החדש\?
 \n%1$s &gt; %2$s</string>
-    <string name="data_storage_preference_summary">%1$s ‏• %2$s ג״ב מנוצלים</string>
-    <string name="data_storage_space_description">%1$s ג״ב פנויים • סה״כ %2$s ג״ב</string>
     <string name="enter_path_to_folder">נא לספק נתיב לתיקייה</string>
     <string name="shared_string_select_folder">בחירת תיקייה</string>
     <string name="paste_Osmand_data_folder_path">נא להדביק את הנתיב לתיקייה עם הנתונים של OsmAnd</string>

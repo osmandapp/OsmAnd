@@ -1984,6 +1984,7 @@ public class OsmandSettings {
 	public static final int EXTERNAL_STORAGE_TYPE_INTERNAL_FILE = 2; // ctx.getFilesDir()
 	public static final int EXTERNAL_STORAGE_TYPE_OBB = 3; // ctx.getObbDirs
 	public static final int EXTERNAL_STORAGE_TYPE_SPECIFIED = 4;
+	public final OsmandPreference<Long> OSMAND_USAGE_SPACE = new LongPreference("osmand_usage_space", 0).makeGlobal();
 
 
 	public void freezeExternalStorageDirectory() {

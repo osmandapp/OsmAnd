@@ -3309,8 +3309,6 @@
     <string name="plugins_settings">Ajustes de plugin</string>
     <string name="shared_string_by_default">Por defecto</string>
     <string name="download_detailed_map">Descarga el mapa detallado de %s para ver este área.</string>
-    <string name="data_storage_preference_summary">%1$s • Usado %2$s GB</string>
-    <string name="data_storage_space_description">Libre %1$s • %2$s / %3$s GB</string>
     <string name="shared_string_select_folder">Seleccionar carpeta</string>
     <string name="move_maps_to_new_destination">Mover al nuevo destino</string>
     <string name="change_data_storage_folder">Cambiar la carpeta de almacenamiento de datos</string>

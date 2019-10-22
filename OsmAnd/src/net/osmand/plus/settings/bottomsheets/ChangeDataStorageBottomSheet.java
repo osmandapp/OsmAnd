@@ -24,7 +24,7 @@ import org.apache.commons.logging.Log;
 
 import java.io.File;
 
-import static net.osmand.plus.settings.DataStorageItemsHolder.MANUALLY_SPECIFIED;
+import static net.osmand.plus.settings.DataStorageHelper.MANUALLY_SPECIFIED;
 
 public class ChangeDataStorageBottomSheet extends BasePreferenceBottomSheet {
 

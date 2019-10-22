@@ -3299,8 +3299,6 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="download_detailed_map">Hent detaljeret %s kort, for at se området.</string>
     <string name="change_data_storage_full_description">Flyt datafiler til den nye destination\?
 \n%1$s&gt;%2$s</string>
-    <string name="data_storage_preference_summary">%1$s • Anvendt %2$s GB</string>
-    <string name="data_storage_space_description">Tilgængeligt %1$s GB • Total %2$s GB</string>
     <string name="enter_path_to_folder">Indtast sti til mappen</string>
     <string name="shared_string_select_folder">Vælg mappe</string>
     <string name="paste_Osmand_data_folder_path">Indsæt sti til mappen med data</string>

@@ -1278,21 +1278,25 @@ public class MapControlsLayer extends OsmandMapLayer {
 	}
 
 	public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-		if (grantResults.length > 0) {
-			if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-				switch (requestCode) {
-					case REQUEST_LOCATION_FOR_NAVIGATION_PERMISSION:
-						onNavigationClick();
-						break;
-					case REQUEST_LOCATION_FOR_NAVIGATION_FAB_PERMISSION:
-						navigateButton();
-						break;
-					case REQUEST_LOCATION_FOR_ADD_DESTINATION_PERMISSION:
-						addDestination(requestedLatLon);
-						break;
+		if ((requestCode == REQUEST_LOCATION_FOR_NAVIGATION_PERMISSION
+				|| requestCode == REQUEST_LOCATION_FOR_NAVIGATION_FAB_PERMISSION
+				|| requestCode == REQUEST_LOCATION_FOR_ADD_DESTINATION_PERMISSION)) {
+			if (grantResults.length > 0) {
+				if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+					switch (requestCode) {
+						case REQUEST_LOCATION_FOR_NAVIGATION_PERMISSION:
+							onNavigationClick();
+							break;
+						case REQUEST_LOCATION_FOR_NAVIGATION_FAB_PERMISSION:
+							navigateButton();
+							break;
+						case REQUEST_LOCATION_FOR_ADD_DESTINATION_PERMISSION:
+							addDestination(requestedLatLon);
+							break;
+					}
+				} else if (grantResults[0] == PackageManager.PERMISSION_DENIED) {
+					app.showToastMessage(R.string.ask_for_location_permission);
 				}
-			} else if (grantResults[0] == PackageManager.PERMISSION_DENIED) {
-				app.showToastMessage(R.string.ask_for_location_permission);
 			}
 		}
 	}

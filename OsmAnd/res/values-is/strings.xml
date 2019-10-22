@@ -3306,8 +3306,6 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="download_detailed_map">Sæktu nákvæma %s kortið til að skoða þetta svæði.</string>
     <string name="change_data_storage_full_description">Færa gagnaskrár OsmAnd á nýjan stað\?
 \n%1$s &gt; %2$s</string>
-    <string name="data_storage_preference_summary">%1$s • Notuð %2$s GB</string>
-    <string name="data_storage_space_description">Laust %1$s • %2$s / %3$s GB</string>
     <string name="enter_path_to_folder">Settu inn slóð á möppu</string>
     <string name="shared_string_select_folder">Veldu möppu</string>
     <string name="paste_Osmand_data_folder_path">Límdu slóð á möppuna með OsmAnd-gögnum</string>

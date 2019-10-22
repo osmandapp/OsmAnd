@@ -3299,8 +3299,6 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="download_detailed_map">Pobierz szczegółową mapę %S, aby zobaczyć ten obszar.</string>
     <string name="change_data_storage_full_description">Przenieść pliki danych OsmAnd do nowego położenia\?
 \n%1$s &gt; %2$s</string>
-    <string name="data_storage_preference_summary">%1$s • Zajęte %2$s GB</string>
-    <string name="data_storage_space_description">Wolne %1$s GB • Ogółem %2$s GB</string>
     <string name="enter_path_to_folder">Proszę wprowadzić ścieżkę do katalogu</string>
     <string name="shared_string_select_folder">Wybierz katalog</string>
     <string name="paste_Osmand_data_folder_path">Wklej ścieżkę do katalogu z danymi OsmAnd</string>

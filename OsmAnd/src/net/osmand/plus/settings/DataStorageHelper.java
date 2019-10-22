@@ -12,9 +12,14 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 
 import java.io.File;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-public class DataStorageItemsHolder implements Parcelable {
+import static net.osmand.plus.settings.DataStorageMemoryItem.Directory;
+import static net.osmand.plus.settings.DataStorageMemoryItem.EXTENSIONS;
+import static net.osmand.plus.settings.DataStorageMemoryItem.PREFIX;
+
+public class DataStorageHelper implements Parcelable {
 	public final static String INTERNAL_STORAGE = "internal_storage";
 	public final static String EXTERNAL_STORAGE = "external_storage";
 	public final static String SHARED_STORAGE = "shared_storage";
@@ -22,6 +27,7 @@ public class DataStorageItemsHolder implements Parcelable {
 	public final static String MANUALLY_SPECIFIED = "manually_specified";
 
 	public final static String MAPS_MEMORY = "maps_memory_used";
+	public final static String SRTM_AND_HILLSHADE_MEMORY = "contour_lines_and_hillshade_memory";
 	public final static String TRACKS_MEMORY = "tracks_memory_used";
 	public final static String NOTES_MEMORY = "notes_memory_used";
 	public final static String TILES_MEMORY = "tiles_memory_used";
@@ -33,6 +39,7 @@ public class DataStorageItemsHolder implements Parcelable {
 
 	private ArrayList<DataStorageMemoryItem> memoryItems = new ArrayList<>();
 	private DataStorageMemoryItem mapsMemory;
+	private DataStorageMemoryItem srtmAndHillshadeMemory;
 	private DataStorageMemoryItem tracksMemory;
 	private DataStorageMemoryItem notesMemory;
 	private DataStorageMemoryItem tilesMemory;
@@ -41,12 +48,12 @@ public class DataStorageItemsHolder implements Parcelable {
 	private int currentStorageType;
 	private String currentStoragePath;
 
-	private DataStorageItemsHolder(OsmandApplication app) {
+	private DataStorageHelper(OsmandApplication app) {
 		prepareData(app);
 	}
 
-	public static DataStorageItemsHolder refreshInfo(OsmandApplication app) {
-		return new DataStorageItemsHolder(app);
+	public static DataStorageHelper refreshInfo(OsmandApplication app) {
+		return new DataStorageHelper(app);
 	}
 
 	private void prepareData(OsmandApplication app) {
@@ -169,35 +176,47 @@ public class DataStorageItemsHolder implements Parcelable {
 	private void initMemoryUsed(OsmandApplication app) {
 		mapsMemory = DataStorageMemoryItem.builder()
 				.setKey(MAPS_MEMORY)
-				.setExtensions(IndexConstants.BINARY_MAP_INDEX_EXT, IndexConstants.BINARY_MAP_INDEX_EXT_ZIP)
+				.setExtensions(IndexConstants.BINARY_MAP_INDEX_EXT)
 				.setDirectories(
-						app.getAppPath(IndexConstants.MAPS_PATH).getAbsolutePath(),
-						app.getAppPath(IndexConstants.ROADS_INDEX_DIR).getAbsolutePath(),
-						app.getAppPath(IndexConstants.SRTM_INDEX_DIR).getAbsolutePath(),
-						app.getAppPath(IndexConstants.WIKI_INDEX_DIR).getAbsolutePath(),
-						app.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR).getAbsolutePath(),
-						app.getAppPath(IndexConstants.BACKUP_INDEX_DIR).getAbsolutePath())
+						new Directory(app.getAppPath(IndexConstants.MAPS_PATH).getAbsolutePath(), false, EXTENSIONS, false),
+						new Directory(app.getAppPath(IndexConstants.ROADS_INDEX_DIR).getAbsolutePath(), true, EXTENSIONS, false),
+						new Directory(app.getAppPath(IndexConstants.WIKI_INDEX_DIR).getAbsolutePath(), true, EXTENSIONS, false),
+						new Directory(app.getAppPath(IndexConstants.WIKIVOYAGE_INDEX_DIR).getAbsolutePath(), true, EXTENSIONS, false),
+						new Directory(app.getAppPath(IndexConstants.BACKUP_INDEX_DIR).getAbsolutePath(), true, EXTENSIONS, false))
 				.createItem();
 		memoryItems.add(mapsMemory);
+
+		srtmAndHillshadeMemory = DataStorageMemoryItem.builder()
+				.setKey(SRTM_AND_HILLSHADE_MEMORY)
+				.setExtensions(IndexConstants.BINARY_SRTM_MAP_INDEX_EXT)
+				.setDirectories(
+						new Directory(app.getAppPath(IndexConstants.SRTM_INDEX_DIR).getAbsolutePath(), true, EXTENSIONS, false),
+						new Directory(app.getAppPath(IndexConstants.TILES_INDEX_DIR).getAbsolutePath(), false, PREFIX, true))
+				.setPrefixes("Hillshade")
+				.createItem();
+		memoryItems.add(srtmAndHillshadeMemory);
 
 		tracksMemory = DataStorageMemoryItem.builder()
 				.setKey(TRACKS_MEMORY)
 //				.setExtensions(".gpx", ".gpx.bz2")
-				.setDirectories(app.getAppPath(IndexConstants.GPX_INDEX_DIR).getAbsolutePath())
+				.setDirectories(
+						new Directory(app.getAppPath(IndexConstants.GPX_INDEX_DIR).getAbsolutePath(), true, EXTENSIONS, false))
 				.createItem();
 		memoryItems.add(tracksMemory);
 
 		notesMemory = DataStorageMemoryItem.builder()
 				.setKey(NOTES_MEMORY)
 //				.setExtensions("")
-				.setDirectories(app.getAppPath(IndexConstants.AV_INDEX_DIR).getAbsolutePath())
+				.setDirectories(
+						new Directory(app.getAppPath(IndexConstants.AV_INDEX_DIR).getAbsolutePath(), true, EXTENSIONS, false))
 				.createItem();
 		memoryItems.add(notesMemory);
 
 		tilesMemory = DataStorageMemoryItem.builder()
 				.setKey(TILES_MEMORY)
 //				.setExtensions("")
-				.setDirectories(app.getAppPath(IndexConstants.TILES_INDEX_DIR).getAbsolutePath())
+				.setDirectories(
+						new Directory(app.getAppPath(IndexConstants.TILES_INDEX_DIR).getAbsolutePath(), true, EXTENSIONS, false))
 				.createItem();
 		memoryItems.add(tilesMemory);
 
@@ -255,14 +274,14 @@ public class DataStorageItemsHolder implements Parcelable {
 
 	public RefreshMemoryUsedInfo calculateMemoryUsedInfo(UpdateMemoryInfoUIAdapter listener) {
 		File rootDir = new File(currentStoragePath);
-		RefreshMemoryUsedInfo task = new RefreshMemoryUsedInfo(listener, otherMemory, rootDir, tilesMemory.getDirectories());
-		task.execute(mapsMemory, tracksMemory, notesMemory);
+		RefreshMemoryUsedInfo task = new RefreshMemoryUsedInfo(listener, otherMemory, rootDir, null, null);
+		task.execute(mapsMemory, srtmAndHillshadeMemory, tracksMemory, notesMemory);
 		return task;
 	}
 
 	public RefreshMemoryUsedInfo calculateTilesMemoryUsed(UpdateMemoryInfoUIAdapter listener) {
-		File rootDir = new File(tilesMemory.getDirectories()[0]);
-		RefreshMemoryUsedInfo task = new RefreshMemoryUsedInfo(listener, otherMemory, rootDir);
+		File rootDir = new File(tilesMemory.getDirectories()[0].getAbsolutePath());
+		RefreshMemoryUsedInfo task = new RefreshMemoryUsedInfo(listener, otherMemory, rootDir, null, srtmAndHillshadeMemory.getPrefixes());
 		task.execute(tilesMemory);
 		return task;
 	}
@@ -272,77 +291,123 @@ public class DataStorageItemsHolder implements Parcelable {
 		private File rootDir;
 		private DataStorageMemoryItem otherMemory;
 		private String[] directoriesToAvoid;
+		private String[] prefixesToAvoid;
 
-		public RefreshMemoryUsedInfo(UpdateMemoryInfoUIAdapter listener, DataStorageMemoryItem otherMemory, File rootDir, String... directoriesToAvoid) {
+		public RefreshMemoryUsedInfo(UpdateMemoryInfoUIAdapter listener, DataStorageMemoryItem otherMemory, File rootDir, String[] directoriesToAvoid, String[] prefixesToAvoid) {
 			this.listener = listener;
 			this.otherMemory = otherMemory;
 			this.rootDir = rootDir;
 			this.directoriesToAvoid = directoriesToAvoid;
+			this.prefixesToAvoid = prefixesToAvoid;
 		}
 
 		@Override
 		protected Void doInBackground(DataStorageMemoryItem... items) {
-			if (items.length == 1) {
-				DataStorageMemoryItem item = items[0];
-				item.addBytes(getDirectorySize(rootDir, item.getExtensions()));
-			} else {
-				calculateMultiTypes(items);
+			if (rootDir.canRead()) {
+				calculateMultiTypes(rootDir, items);
 			}
 			return null;
 		}
 
-		private void calculateMultiTypes(DataStorageMemoryItem[] items) {
-			File[] files = rootDir.listFiles();
+		private void calculateMultiTypes(File rootDir, DataStorageMemoryItem... items) {
+			File[] subFiles = rootDir.listFiles();
 
-			for (File f : files) {
-				boolean matched = false;
-				if (f.isDirectory()) {
-					boolean avoid = false;
-					for (String directoryToAvoid : directoriesToAvoid) {
-						if (f.getAbsolutePath().equals(directoryToAvoid)) {
-							avoid = true;
-							break;
+			for (File file : subFiles) {
+				if (isCancelled()) {
+					break;
+				}
+				nextFile : {
+					if (file.isDirectory()) {
+						//check current directory should be avoid
+						if (directoriesToAvoid != null) {
+							for (String directoryToAvoid : directoriesToAvoid) {
+								if (file.getAbsolutePath().equals(directoryToAvoid)) {
+									break nextFile;
+								}
+							}
 						}
-					}
-					if (!avoid) {
+						//check current directory matched items type
 						for (DataStorageMemoryItem item : items) {
-							String[] directories = item.getDirectories();
-							if (directories != null) {
-								for (String directory : directories) {
-									if (f.getAbsolutePath().equals(directory)) {
-										item.addBytes(getDirectorySize(f, item.getExtensions()));
-										matched = true;
-										break;
+							Directory[] directories = item.getDirectories();
+							if (directories == null) {
+								continue;
+							}
+							for (Directory dir : directories) {
+								if (file.getAbsolutePath().equals(dir.getAbsolutePath())
+										|| (file.getAbsolutePath().startsWith(dir.getAbsolutePath()) && dir.isGoDeeper())) {
+									calculateMultiTypes(file, items);
+									break nextFile;
+								}
+							}
+						}
+						//current directory did not match to any type
+						otherMemory.addBytes(getDirectorySize(file));
+					} else if (file.isFile()) {
+						//check current file should be avoid
+						if (prefixesToAvoid != null) {
+							for (String prefixToAvoid : prefixesToAvoid) {
+								if (file.getName().toLowerCase().startsWith(prefixToAvoid.toLowerCase())) {
+									break nextFile;
+								}
+							}
+						}
+						//check current file matched items type
+						for (DataStorageMemoryItem item : items) {
+							Directory[] directories = item.getDirectories();
+							if (directories == null) {
+								continue;
+							}
+							for (Directory dir : directories) {
+								if (rootDir.getAbsolutePath().equals(dir.getAbsolutePath())
+										|| (rootDir.getAbsolutePath().startsWith(dir.getAbsolutePath()) && dir.isGoDeeper())) {
+									int checkingType = dir.getCheckingType();
+									switch (checkingType) {
+										case EXTENSIONS : {
+											String[] extensions = item.getExtensions();
+											if (extensions != null) {
+												for (String extension : extensions) {
+													if (file.getAbsolutePath().endsWith(extension)) {
+														item.addBytes(file.length());
+														break nextFile;
+													}
+												}
+											} else {
+												item.addBytes(file.length());
+												break nextFile;
+											}
+											break ;
+										}
+										case PREFIX : {
+											String[] prefixes = item.getPrefixes();
+											if (prefixes != null) {
+												for (String prefix : prefixes) {
+													if (file.getName().toLowerCase().startsWith(prefix.toLowerCase())) {
+														item.addBytes(file.length());
+														break nextFile;
+													}
+												}
+											} else {
+												item.addBytes(file.length());
+												break nextFile;
+											}
+											break ;
+										}
+									}
+									if (dir.isSkipOther()) {
+										break nextFile;
 									}
 								}
 							}
 						}
-						if (!matched) {
-							otherMemory.addBytes(getDirectorySize(f, null));
-						}
+						//current file did not match any type
+						otherMemory.addBytes(file.length());
 					}
-				} else if (f.isFile()) {
-					for (DataStorageMemoryItem item : items) {
-						String[] extensions = item.getExtensions();
-						if (extensions != null) {
-							for (String extension : extensions) {
-								if (f.getAbsolutePath().endsWith(extension)) {
-									item.addBytes(f.length());
-									matched = true;
-									break;
-								}
-							}
-						}
-					}
-					if (!matched) {
-						otherMemory.addBytes(f.length());
-					}
-					publishProgress();
 				}
+				publishProgress();
 			}
 		}
 
-		private long getDirectorySize(File dir, String[] extensions) {
+		private long getDirectorySize(File dir) {
 			long bytes = 0;
 			if (dir.isDirectory()) {
 				File[] files = dir.listFiles();
@@ -351,26 +416,9 @@ public class DataStorageItemsHolder implements Parcelable {
 						break;
 					}
 					if (file.isDirectory()) {
-						bytes += getDirectorySize(file, extensions);
+						bytes += getDirectorySize(file);
 					} else if (file.isFile()) {
-						//check file extension
-						boolean matched = false;
-						if (extensions != null) {
-							for (String extension : extensions) {
-								if (file.getName().endsWith(extension)) {
-									matched = true;
-									break;
-								}
-							}
-						} else {
-							matched = true;
-						}
-						if (matched) {
-							bytes += file.length();
-						} else {
-							otherMemory.addBytes(file.length());
-						}
-						publishProgress();
+						bytes += file.length();
 					}
 				}
 			}
@@ -394,6 +442,28 @@ public class DataStorageItemsHolder implements Parcelable {
 		}
 	}
 
+	public long getTotalUsedBytes() {
+		long total = 0;
+		if (memoryItems != null && memoryItems.size() > 0) {
+			for (DataStorageMemoryItem mi : memoryItems) {
+				total += mi.getUsedMemoryBytes();
+			}
+			return total;
+		}
+		return -1;
+	}
+
+	public static String getFormattedMemoryInfo(long bytes, String[] formatStrings) {
+		int type = 0;
+		double memory = (double) bytes / 1024;
+		while (memory > 1024 && type < formatStrings.length) {
+			++type;
+			memory = memory / 1024;
+		}
+		String formattedUsed = new DecimalFormat("#.##").format(memory);
+		return String.format(formatStrings[type], formattedUsed);
+	}
+
 	public interface UpdateMemoryInfoUIAdapter {
 
 		void onMemoryInfoUpdate();
@@ -405,7 +475,7 @@ public class DataStorageItemsHolder implements Parcelable {
 		return 0;
 	}
 
-	private DataStorageItemsHolder(Parcel in) {
+	private DataStorageHelper(Parcel in) {
 		menuItems = in.readArrayList(DataStorageMenuItem.class.getClassLoader());
 		currentDataStorage = in.readParcelable(DataStorageMenuItem.class.getClassLoader());
 		memoryItems = in.readArrayList(DataStorageMemoryItem.class.getClassLoader());
@@ -422,16 +492,16 @@ public class DataStorageItemsHolder implements Parcelable {
 		dest.writeString(currentStoragePath);
 	}
 
-	public static final Parcelable.Creator<DataStorageItemsHolder> CREATOR = new Parcelable.Creator<DataStorageItemsHolder>() {
+	public static final Parcelable.Creator<DataStorageHelper> CREATOR = new Parcelable.Creator<DataStorageHelper>() {
 
 		@Override
-		public DataStorageItemsHolder createFromParcel(Parcel source) {
-			return new DataStorageItemsHolder(source);
+		public DataStorageHelper createFromParcel(Parcel source) {
+			return new DataStorageHelper(source);
 		}
 
 		@Override
-		public DataStorageItemsHolder[] newArray(int size) {
-			return new DataStorageItemsHolder[size];
+		public DataStorageHelper[] newArray(int size) {
+			return new DataStorageHelper[size];
 		}
 	};
 }

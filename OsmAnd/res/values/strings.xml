@@ -11,6 +11,12 @@
 	Thx - Hardy
 
 -->
+
+    <string name="shared_string_memory_used_tb_desc">Used %1$s TB</string>
+    <string name="shared_string_memory_used_gb_desc">Used %1$s GB</string>
+    <string name="shared_string_memory_used_mb_desc">Used %1$s MB</string>
+    <string name="shared_string_memory_used_kb_desc">Used %1$s kB</string>
+    <string name="contour_lines_and_hillshade">Contour lines and Hillshade</string>
     <string name="routing_attr_prefer_unpaved_name">Prefer unpaved roads</string>
     <string name="routing_attr_prefer_unpaved_description">Prefer unpaved roads.</string>
     <string name="update_all_maps">Update all maps</string>
@@ -27,14 +33,14 @@
     <string name="shared_string_memory_tb_desc">%1$s TB</string>
     <string name="shared_string_memory_gb_desc">%1$s GB</string>
     <string name="shared_string_memory_mb_desc">%1$s MB</string>
-    <string name="shared_string_memory_kb_desc">%1$s KB</string>
+    <string name="shared_string_memory_kb_desc">%1$s kB</string>
     <string name="app_mode_utv">Side by Side</string>
     <string name="rendering_attr_piste_difficulty_aerialway_name">Aerialway</string>
     <string name="rendering_attr_piste_difficulty_connection_name">Connection</string>
     <string name="avoid_in_routing_descr_">Avoid certain routes and road types</string>
     <string name="change_data_storage_full_description">Move OsmAnd data files to the new destination?\n%1$s > %2$s</string>
-    <string name="data_storage_preference_summary">%1$s  •  Used %2$s GB</string>
-    <string name="data_storage_space_description">Free %1$s GB  •  Total %2$s GB</string>
+    <string name="data_storage_preference_summary">%1$s • %2$s</string>
+    <string name="data_storage_space_description">Free %1$s GB • Total %2$s GB</string>
     <string name="enter_path_to_folder">Enter path to the folder</string>
     <string name="shared_string_select_folder">Select folder</string>
     <string name="paste_Osmand_data_folder_path">Paste path to the folder with OsmAnd data</string>

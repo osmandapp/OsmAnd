@@ -155,7 +155,7 @@ public class SelectFolderBottomSheet extends BasePreferenceBottomSheet {
 	protected void onRightBottomButtonClick() {
 		Fragment fragment = getTargetFragment();
 		if (fragment instanceof BaseSettingsFragment) {
-			String newPath = editText.getText().toString();
+			String newPath = editText.getText().toString().trim();
 			if (!newPath.equals("")) {
 				boolean pathChanged = !newPath.equals(currentPath);
 				Bundle bundle = new Bundle();

@@ -7,7 +7,6 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.SwitchPreferenceCompat;
 import android.util.Pair;
 
-import net.osmand.AndroidUtils;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -16,9 +15,6 @@ import net.osmand.plus.activities.SettingsGeneralActivity;
 import net.osmand.plus.dialogs.SendAnalyticsBottomSheetDialogFragment;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
-
-import java.io.File;
-import java.text.DecimalFormat;
 
 
 public class GlobalSettingsFragment extends BaseSettingsFragment implements SendAnalyticsBottomSheetDialogFragment.OnSendAnalyticsPrefsUpdate, OnPreferenceChanged {
@@ -141,14 +137,25 @@ public class GlobalSettingsFragment extends BaseSettingsFragment implements Send
 		Preference externalStorageDir = (Preference) findPreference(OsmandSettings.EXTERNAL_STORAGE_DIR);
 		externalStorageDir.setIcon(getContentIcon(R.drawable.ic_action_folder));
 
-		DataStorageItemsHolder holder = DataStorageItemsHolder.refreshInfo(app);
+		DataStorageHelper holder = DataStorageHelper.refreshInfo(app);
 		DataStorageMenuItem currentStorage = holder.getCurrentStorage();
-		File dir = new File(currentStorage.getDirectory());
-		DecimalFormat formatter = new DecimalFormat("#.##");
-		String summary = String.format(getString(R.string.data_storage_preference_summary),
-						currentStorage.getTitle(),
-						formatter.format(AndroidUtils.getUsedSpaceGb(dir)));
-		externalStorageDir.setSummary(summary);
+		long totalUsed = app.getSettings().OSMAND_USAGE_SPACE.get();
+		if (totalUsed > 0) {
+			String[] usedMemoryFormats = new String[] {
+					getString(R.string.shared_string_memory_used_kb_desc),
+					getString(R.string.shared_string_memory_used_mb_desc),
+					getString(R.string.shared_string_memory_used_gb_desc),
+					getString(R.string.shared_string_memory_used_tb_desc)
+			};
+			String sTotalUsed = DataStorageHelper.getFormattedMemoryInfo(totalUsed, usedMemoryFormats);
+			String summary = String.format(getString(R.string.data_storage_preference_summary),
+					currentStorage.getTitle(),
+					sTotalUsed);
+			summary = summary.replaceAll(" • ", "  •  ");
+			externalStorageDir.setSummary(summary);
+		} else {
+			externalStorageDir.setSummary(currentStorage.getTitle());
+		}
 	}
 
 	private void setupSendAnonymousDataPref() {

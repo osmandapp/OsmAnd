@@ -128,6 +128,7 @@ import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchTab;
 import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchType;
 import net.osmand.plus.settings.BaseSettingsFragment;
 import net.osmand.plus.settings.BaseSettingsFragment.SettingsScreenType;
+import net.osmand.plus.settings.DataStorageFragment;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.MapControlsLayer;
@@ -1868,7 +1869,15 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				mcl.onRequestPermissionsResult(requestCode, permissions, grantResults);
 			}
 
-			if (requestCode == DownloadActivity.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE
+			if (requestCode == DataStorageFragment.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE
+					&& grantResults.length > 0 && permissions.length > 0
+					&& Manifest.permission.WRITE_EXTERNAL_STORAGE.equals(permissions[0])) {
+				if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+					Toast.makeText(this,
+							R.string.missing_write_external_storage_permission,
+							Toast.LENGTH_LONG).show();
+				}
+			} else if (requestCode == DownloadActivity.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE
 					&& grantResults.length > 0 && permissions.length > 0
 					&& Manifest.permission.WRITE_EXTERNAL_STORAGE.equals(permissions[0])) {
 				permissionAsked = true;

@@ -3282,8 +3282,6 @@
     <string name="download_detailed_map">下載更詳細的 %s 地圖以檢視此區域。</string>
     <string name="change_data_storage_full_description">移動 OsmAnd 資料檔案到新目的地？
 \n%1$s &gt; %2$s</string>
-    <string name="data_storage_preference_summary">%1$s • 已使用 %2$s GB</string>
-    <string name="data_storage_space_description">剩餘 %1$s GB • 總共 %2$s GB</string>
     <string name="enter_path_to_folder">輸入到資料夾的路徑</string>
     <string name="shared_string_select_folder">選取資料夾</string>
     <string name="paste_Osmand_data_folder_path">貼上有 OsmAnd 資料的資料夾路徑</string>
