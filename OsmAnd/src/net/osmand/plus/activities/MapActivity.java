@@ -649,7 +649,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			}
 		}
 		if (mapContextMenu.isVisible() && mapContextMenu.isClosable()) {
-			if (mapContextMenu.getCurrentMenuState() != MenuState.HEADER_ONLY) {
+			if (mapContextMenu.getCurrentMenuState() != MenuState.HEADER_ONLY && !isLandscapeLayout()) {
 				mapContextMenu.openMenuHeaderOnly();
 			} else {
 				mapContextMenu.close();

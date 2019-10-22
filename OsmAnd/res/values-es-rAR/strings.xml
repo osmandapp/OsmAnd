@@ -3324,4 +3324,12 @@ Lon %2$s</string>
     <string name="app_mode_utv">En paralelo</string>
     <string name="rendering_attr_piste_difficulty_aerialway_name">Vía aérea</string>
     <string name="rendering_attr_piste_difficulty_connection_name">Conexión</string>
+    <string name="shared_string_calculate">Calcular</string>
+    <string name="shared_string_osmand_usage">Uso de OsmAnd</string>
+    <string name="shared_sting_tiles">Teselas</string>
+    <string name="shared_string_maps">Mapas</string>
+    <string name="shared_string_memory_tb_desc">%1$s TB</string>
+    <string name="shared_string_memory_gb_desc">%1$s GB</string>
+    <string name="shared_string_memory_mb_desc">%1$s MB</string>
+    <string name="shared_string_memory_kb_desc">%1$s KB</string>
 </resources>

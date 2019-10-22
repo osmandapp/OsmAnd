@@ -19,10 +19,12 @@ import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.util.Algorithms;
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -154,7 +156,21 @@ public class UpdatesIndexFragment extends OsmAndListFragment implements Download
 			updateAllButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					getMyActivity().startDownload(indexItems.toArray(new IndexItem[indexItems.size()]));
+					if (indexItems.size() > 3) {
+						AlertDialog.Builder dialog = new AlertDialog.Builder(getMyActivity());
+						dialog.setTitle(R.string.update_all_maps);
+						dialog.setMessage(getString(R.string.update_all_maps_q, indexItems.size()));
+						dialog.setNegativeButton(R.string.shared_string_cancel, null);
+						dialog.setPositiveButton(R.string.update, new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								getMyActivity().startDownload(indexItems.toArray(new IndexItem[indexItems.size()]));
+							}
+						});
+						dialog.create().show();
+					} else {
+						getMyActivity().startDownload(indexItems.toArray(new IndexItem[indexItems.size()]));
+					}
 				}
 			});
 		}

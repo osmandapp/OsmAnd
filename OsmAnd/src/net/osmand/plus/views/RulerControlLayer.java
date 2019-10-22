@@ -64,6 +64,7 @@ public class RulerControlLayer extends OsmandMapLayer {
 	private QuadPoint cacheCenter;
 	private float cacheMapDensity;
 	private OsmandSettings.OsmandPreference<Float> mapDensity;
+	private OsmandSettings.MetricsConstants cacheMetricSystem;
 	private int cacheIntZoom;
 	private double cacheTileX;
 	private double cacheTileY;
@@ -127,7 +128,8 @@ public class RulerControlLayer extends OsmandMapLayer {
 	public void initLayer(final OsmandMapTileView view) {
 		app = mapActivity.getMyApplication();
 		this.view = view;
-		mapDensity = mapActivity.getMyApplication().getSettings().MAP_DENSITY;
+		mapDensity = app.getSettings().MAP_DENSITY;
+		cacheMetricSystem = app.getSettings().METRIC_SYSTEM.get();
 		cacheMapDensity = mapDensity.get();
 		cacheDistances = new ArrayList<>();
 		cacheCenter = new QuadPoint();
@@ -443,10 +445,13 @@ public class RulerControlLayer extends OsmandMapLayer {
 				updateCenter(tb, center);
 			}
 
-			boolean move = tb.getZoom() != cacheIntZoom || Math.abs(tb.getCenterTileX() - cacheTileX) > 1 ||
-					Math.abs(tb.getCenterTileY() - cacheTileY) > 1 || mapDensity.get() != cacheMapDensity;
+			OsmandSettings.MetricsConstants currentMetricSystem = app.getSettings().METRIC_SYSTEM.get();
+			boolean updateCache = tb.getZoom() != cacheIntZoom || Math.abs(tb.getCenterTileX() - cacheTileX) > 1
+					|| Math.abs(tb.getCenterTileY() - cacheTileY) > 1 || mapDensity.get() != cacheMapDensity
+					|| cacheMetricSystem != currentMetricSystem;
 
-			if (!tb.isZoomAnimated() && move) {
+			if (!tb.isZoomAnimated() && updateCache) {
+				cacheMetricSystem = currentMetricSystem;
 				cacheIntZoom = tb.getZoom();
 				cacheTileX = tb.getCenterTileX();
 				cacheTileY = tb.getCenterTileY();

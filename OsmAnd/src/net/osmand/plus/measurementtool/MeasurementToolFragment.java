@@ -885,7 +885,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 			}
 		};
 
-		return GpxUiHelper.selectGPXFile(mapActivity, false, false, callbackWithObject);
+		return GpxUiHelper.selectGPXFile(mapActivity, false, false, callbackWithObject, nightMode);
 	}
 
 	private void applyMovePointMode() {
