@@ -2686,7 +2686,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="shared_string_explore">Explorer</string>
     <string name="use_two_digits_longitude">Utiliser une longitude à 2 chiffres</string>
     <string name="wikivoyage_search_hint">Rechercher : Pays, Ville, Département</string>
-    <string name="shared_string_read">Lu</string>
+    <string name="shared_string_read">Lire</string>
     <string name="article_removed">Article supprimé</string>
     <string name="shared_string_contents">Contenus</string>
     <string name="download_maps_travel">Guides de voyage</string>
@@ -2756,7 +2756,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="open_wikipedia_link_online_description">Le lien s\'ouvrira dans votre navigateur Internet.</string>
     <string name="read_wikipedia_offline_description">Abonnez-vous à OsmAnd Live pour lire les articles Wikipedia et Wikivoyage hors-ligne.</string>
     <string name="how_to_open_link">Comment ouvrir le lien ?</string>
-    <string name="read_wikipedia_offline">Lisez Wikipedia hors-ligne</string>
+    <string name="read_wikipedia_offline">Consultez Wikipédia hors-ligne</string>
     <string name="download_all">Télécharger tout</string>
     <string name="hide_full_description">Masquer la description complète</string>
     <string name="show_full_description">Afficher la description complète</string>
@@ -3110,7 +3110,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="make_osmand_better_descr">Autoriser OsmAnd à collecter et analyser des données anonymes d\'utilisation de l\'application. Nous ne collectons aucune donnée liée à votre position et aucun emplacement consulté sur la carte.
 \n
 \nVous pouvez changer d\'avis à tout moment dans Paramètres &gt; Vie privée et Sécurité.</string>
-    <string name="downloaded_maps_collect_descr">Nous collectons ces données pour connaitre les pays et régions les plus populaires.</string>
+    <string name="downloaded_maps_collect_descr">Nous collectons ces données pour connaître les pays et régions les plus populaires.</string>
     <string name="privacy_and_security_change_descr">En sélectionnant \"Autoriser\" vous acceptez nos %1$s.</string>
     <string name="settings_derived_routing_mode_string">Mode utilisateur, dérive de : %s</string>
     <string name="profile_alert_need_routing_type_msg">Merci de sélectionner un type de navigation pour le nouveau profil</string>
@@ -3291,7 +3291,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="avoid_in_routing_descr_">Éviter certains types de route</string>
     <string name="app_mode_utv">Côte à côte</string>
     <string name="rendering_attr_piste_difficulty_connection_name">Connexion</string>
-    <string name="rendering_attr_piste_difficulty_aerialway_name">Transport aérien</string>
+    <string name="rendering_attr_piste_difficulty_aerialway_name">Transport par câble aérien</string>
     <string name="shared_string_calculate">Calculer</string>
     <string name="shared_string_osmand_usage">Utilisation d\'OsmAnd</string>
     <string name="shared_sting_tiles">Tuiles</string>

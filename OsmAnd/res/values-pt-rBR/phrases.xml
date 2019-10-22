@@ -2486,7 +2486,7 @@
     <string name="poi_religion_type">Religião</string>
     <string name="poi_denomination">Denominação</string>
     <string name="poi_information_type">Tipo</string>
-    <string name="poi_information_contents">Conteúdos</string>
+    <string name="poi_information_contents">Conteúdo</string>
     <string name="poi_clock_option">Adicional</string>
     <string name="poi_resort_type">Tipo</string>
     <string name="poi_theatre_genre">Gênero</string>
@@ -3169,8 +3169,8 @@
     <string name="poi_motorcycle_parts_no">Peças: não</string>
     <string name="poi_motorcycle_tyres_yes">Pneus</string>
     <string name="poi_motorcycle_tyres_no">Pneus: não</string>
-    <string name="poi_motorcycle_clothes_yes">Roupas para moto</string>
-    <string name="poi_motorcycle_clothes_no">Roupas para moto: não</string>
+    <string name="poi_motorcycle_clothes_yes">Roupas para motociclistas</string>
+    <string name="poi_motorcycle_clothes_no">Roupas para motociclistas: não</string>
     <string name="poi_motorcycle_type_scooter">Lambreta</string>
     <string name="poi_motorcycle_type_sportbike">Esportiva</string>
     <string name="poi_motorcycle_type_chopper">Chopper</string>

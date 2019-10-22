@@ -3710,4 +3710,7 @@
     <string name="poi_craft_floorer">Assentador de piso</string>
     <string name="poi_craft_bakery">Padaria</string>
     <string name="poi_craft_cabinet_maker">Marceneiro</string>
+    <string name="poi_charge">Cobrança</string>
+    <string name="poi_pet_grooming">Asseio de animais</string>
+    <string name="poi_atm_yes">Caixa automática: sim</string>
 </resources>

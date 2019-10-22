@@ -2776,17 +2776,17 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="voice_announcements">Röstmeddelanden</string>
     <string name="intermediate_destinations">Mellanliggande destinationer</string>
     <string name="arrive_at_time">Ankomst klockan %1$s</string>
-    <string name="rate_dialog_descr">Vänligen ge oss 30 sekunder, dela återkoppling och betygsätt vårt arbete på Google Play.</string>
+    <string name="rate_dialog_descr">Vänligen ge oss 30 sekunder genom att dela din återkoppling och betygsätta vårt arbete på Google Play.</string>
     <string name="button_rate">Betygsätt</string>
     <string name="shared_string_privacy_policy">Sekretesspolicy</string>
     <string name="help_us_make_osmand_better">Hjälp oss att göra OsmAnd bättre!</string>
-    <string name="make_osmand_better_descr">Tillåt OsmAnd att samla in och bearbeta anonyma användningsdata. Vi samlar inte in eller lagrar data om din plats, eller om de platser som du ser på kartan.
-\n
-\nDu kan alltid ändra ditt val i Inställningar &gt; Sekretess och säkerhet.</string>
+    <string name="make_osmand_better_descr">Tillåt OsmAnd att samla in och bearbeta anonyma applikationsanvändningsdata. Vi samlar inte in eller lagrar data om din position, eller om några platser du ser på kartan. 
+\n 
+\nDu kan när som helst ändra ditt val i Inställningar &gt; Sekretess och säkerhet.</string>
     <string name="choose_data_to_share">Välj vilken typ av data du vill dela:</string>
-    <string name="downloaded_maps">Hämtade Kartor</string>
+    <string name="downloaded_maps">Kartor nedladdade</string>
     <string name="visited_screens">Besökta skärmar</string>
-    <string name="collected_data_descr">Lista över data du vill dela med OsmAnd.</string>
+    <string name="collected_data_descr">Definiera vilka data du tillåter OsmAnd att dela.</string>
     <string name="downloaded_maps_collect_descr">Vi samlar in dessa data för att förstå kartorna över vilka regioner och länder som är mest populära.</string>
     <string name="visited_screens_collect_descr">Vi samlar in dessa data för att förstå de mest populära funktionerna i OsmAnd.</string>
     <string name="privacy_and_security_change_descr">Genom att klicka på \"Tillåt\" godkänner du våra %1$s</string>
@@ -2899,7 +2899,7 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="wake_time">Vakentid</string>
     <string name="units_and_formats">Enheter &amp; format</string>
     <string name="appearance">Utseende</string>
-    <string name="map_look_descr">ikoner, moduler</string>
+    <string name="map_look_descr">Kartans utseende</string>
     <string name="map_look">Kartans utseende</string>
     <string name="list_of_installed_plugins">Lista med installerade tillägg</string>
     <string name="configure_navigation">Konfigurera navigation</string>
