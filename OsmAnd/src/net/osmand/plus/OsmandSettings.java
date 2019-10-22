@@ -239,6 +239,20 @@ public class OsmandSettings {
 		return registeredPreferences.get(key);
 	}
 
+	public boolean setSharedGeneralPreference(String key, Object value) {
+		OsmandPreference<?> preference = registeredPreferences.get(key);
+		if (preference != null) {
+			for (ApplicationMode mode : ApplicationMode.values(ctx)) {
+				settingsAPI.edit(getProfilePreferences(mode)).remove(key).commit();
+			}
+			if (preference instanceof CommonPreference) {
+				((CommonPreference) preference).cachedValue = null;
+			}
+			return setPreference(key, value, ApplicationMode.DEFAULT);
+		}
+		return false;
+	}
+
 	public boolean setPreference(String key, Object value) {
 		return setPreference(key, value, APPLICATION_MODE.get());
 	}
@@ -516,6 +530,7 @@ public class OsmandSettings {
 	public abstract class CommonPreference<T> extends PreferenceWithListener<T> {
 		private final String id;
 		private boolean global;
+		private boolean general;
 		private T cachedValue;
 		private Object cachedPreference;
 		private boolean cache;
@@ -541,6 +556,11 @@ public class OsmandSettings {
 
 		public CommonPreference<T> makeProfile() {
 			global = false;
+			return this;
+		}
+
+		public CommonPreference<T> makeGeneral() {
+			general = true;
 			return this;
 		}
 
@@ -582,7 +602,7 @@ public class OsmandSettings {
 			if (pt != null) {
 				return getProfileDefaultValue(pt);
 			}
-			if (settingsAPI.contains(defaultProfilePreferences, getId())) {
+			if (general && settingsAPI.contains(defaultProfilePreferences, getId())) {
 				return getValue(defaultProfilePreferences, defaultValue);
 			} else {
 				return defaultValue;
@@ -1179,7 +1199,7 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> FIRST_MAP_IS_DOWNLOADED = new BooleanPreference(
 			"first_map_is_downloaded", false);
 
-	public final CommonPreference<Boolean> DRIVING_REGION_AUTOMATIC = new BooleanPreference("driving_region_automatic", true).makeProfile().cache();
+	public final CommonPreference<Boolean> DRIVING_REGION_AUTOMATIC = new BooleanPreference("driving_region_automatic", true).makeProfile().makeGeneral().cache();
 	public final OsmandPreference<DrivingRegion> DRIVING_REGION = new EnumIntPreference<DrivingRegion>(
 			"default_driving_region", DrivingRegion.EUROPE_ASIA, DrivingRegion.values()) {
 		protected boolean setValue(Object prefs, DrivingRegion val) {
@@ -1211,7 +1231,7 @@ public class OsmandSettings {
 			return DrivingRegion.EUROPE_ASIA;
 		}
 
-	}.makeProfile().cache();
+	}.makeProfile().makeGeneral().cache();
 
 	public final CommonPreference<Boolean> METRIC_SYSTEM_CHANGED_MANUALLY = new BooleanPreference("metric_system_changed_manually", false).makeGlobal();
 
@@ -1223,7 +1243,7 @@ public class OsmandSettings {
 			return DRIVING_REGION.get().defMetrics;
 		}
 
-	}.makeProfile();
+	}.makeProfile().makeGeneral();
 
 	//public final OsmandPreference<Integer> COORDINATES_FORMAT = new IntPreference("coordinates_format", PointDescription.FORMAT_DEGREES).makeGlobal();
 
@@ -1233,7 +1253,7 @@ public class OsmandSettings {
 		protected AngularConstants getValue(Object prefs, AngularConstants defaultValue) {
 			return super.getValue(prefs, defaultValue);
 		}
-	}.makeProfile();
+	}.makeProfile().makeGeneral();
 
 
 	public final OsmandPreference<SpeedConstants> SPEED_SYSTEM = new EnumIntPreference<SpeedConstants>(
@@ -1263,7 +1283,7 @@ public class OsmandSettings {
 
 		;
 
-	}.makeProfile();
+	}.makeProfile().makeGeneral();
 
 
 	// this value string is synchronized with settings_pref.xml preference name
@@ -1327,8 +1347,8 @@ public class OsmandSettings {
 		new BooleanAccessibilityPreference("direction_haptic_feedback", false).makeGlobal();
 
 	// magnetic field doesn'torkmost of the time on some phones
-	public final OsmandPreference<Boolean> USE_MAGNETIC_FIELD_SENSOR_COMPASS = new BooleanPreference("use_magnetic_field_sensor_compass", false).makeProfile().cache();
-	public final OsmandPreference<Boolean> USE_KALMAN_FILTER_FOR_COMPASS = new BooleanPreference("use_kalman_filter_compass", true).makeProfile().cache();
+	public final OsmandPreference<Boolean> USE_MAGNETIC_FIELD_SENSOR_COMPASS = new BooleanPreference("use_magnetic_field_sensor_compass", false).makeProfile().makeGeneral().cache();
+	public final OsmandPreference<Boolean> USE_KALMAN_FILTER_FOR_COMPASS = new BooleanPreference("use_kalman_filter_compass", true).makeProfile().makeGeneral().cache();
 
 	public final OsmandPreference<Boolean> DO_NOT_SHOW_STARTUP_MESSAGES = new BooleanPreference("do_not_show_startup_messages", false).makeGlobal().cache();
 	public final OsmandPreference<Boolean> DO_NOT_USE_ANIMATIONS = new BooleanPreference("do_not_use_animations", false).makeProfile().cache();
@@ -1339,7 +1359,7 @@ public class OsmandSettings {
 	public final OsmandPreference<Integer> SEND_ANONYMOUS_DATA_REQUESTS_COUNT = new IntPreference("send_anonymous_data_requests_count", 0).makeGlobal().cache();
 	public final OsmandPreference<Integer> SEND_ANONYMOUS_DATA_LAST_REQUEST_NS = new IntPreference("send_anonymous_data_last_request_ns", -1).makeGlobal().cache();
 
-	public final OsmandPreference<Boolean> MAP_EMPTY_STATE_ALLOWED = new BooleanPreference("map_empty_state_allowed", true).makeProfile().cache();
+	public final OsmandPreference<Boolean> MAP_EMPTY_STATE_ALLOWED = new BooleanPreference("map_empty_state_allowed", true).makeProfile().makeGeneral().cache();
 
 
 	public final CommonPreference<Float> TEXT_SCALE = new FloatPreference("text_scale", 1f).makeProfile().cache();
@@ -1684,7 +1704,7 @@ public class OsmandSettings {
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Integer> MAP_SCREEN_ORIENTATION =
-			new IntPreference("map_screen_orientation", -1/*ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED*/).makeProfile();
+			new IntPreference("map_screen_orientation", -1/*ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED*/).makeProfile().makeGeneral();
 
 	// this value string is synchronized with settings_pref.xml preference name
 //	public final CommonPreference<Boolean> SHOW_VIEW_ANGLE = new BooleanPreference("show_view_angle", false).makeProfile().cache();
@@ -1741,7 +1761,7 @@ public class OsmandSettings {
 	public static final int ROTATE_MAP_BEARING = 1;
 	public static final int ROTATE_MAP_COMPASS = 2;
 	public final CommonPreference<Integer> ROTATE_MAP =
-			new IntPreference("rotate_map", ROTATE_MAP_NONE).makeProfile().cache();
+			new IntPreference("rotate_map", ROTATE_MAP_NONE).makeProfile().makeGeneral().cache();
 
 	{
 		ROTATE_MAP.setModeDefaultValue(ApplicationMode.CAR, ROTATE_MAP_BEARING);
@@ -1853,7 +1873,7 @@ public class OsmandSettings {
 
 	public final OsmandPreference<Boolean> ANIMATE_MY_LOCATION = new BooleanPreference("animate_my_location", true).makeProfile().cache();
 
-	public final OsmandPreference<Integer> EXTERNAL_INPUT_DEVICE = new IntPreference("external_input_device", 0).makeProfile();
+	public final OsmandPreference<Integer> EXTERNAL_INPUT_DEVICE = new IntPreference("external_input_device", 0).makeProfile().makeGeneral();
 
 	public final OsmandPreference<Boolean> ROUTE_MAP_MARKERS_START_MY_LOC = new BooleanPreference("route_map_markers_start_my_loc", false).makeGlobal().cache();
 	public final OsmandPreference<Boolean> ROUTE_MAP_MARKERS_ROUND_TRIP = new BooleanPreference("route_map_markers_round_trip", false).makeGlobal().cache();
@@ -3042,7 +3062,7 @@ public class OsmandSettings {
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<String> CONTRIBUTION_INSTALL_APP_DATE = new StringPreference("CONTRIBUTION_INSTALL_APP_DATE", null).makeGlobal();
 
-	public final OsmandPreference<Integer> COORDINATES_FORMAT = new IntPreference("coordinates_format", PointDescription.FORMAT_DEGREES).makeProfile();
+	public final OsmandPreference<Integer> COORDINATES_FORMAT = new IntPreference("coordinates_format", PointDescription.FORMAT_DEGREES).makeProfile().makeGeneral();
 
 	public final OsmandPreference<Boolean> FOLLOW_THE_ROUTE = new BooleanPreference("follow_to_route", false).makeGlobal();
 	public final OsmandPreference<String> FOLLOW_THE_GPX_ROUTE = new StringPreference("follow_gpx", null).makeGlobal();
@@ -3108,7 +3128,7 @@ public class OsmandSettings {
 			new IntPreference("FAVORITES_TAB", 0).makeGlobal().cache();
 
 	public final CommonPreference<Integer> OSMAND_THEME =
-			new IntPreference("osmand_theme", OSMAND_LIGHT_THEME).makeProfile().cache();
+			new IntPreference("osmand_theme", OSMAND_LIGHT_THEME).makeProfile().makeGeneral().cache();
 
 	public boolean isLightActionBar() {
 		return isLightContent();

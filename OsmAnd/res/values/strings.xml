@@ -11,7 +11,8 @@
 	Thx - Hardy
 
 -->
-
+    <string name="apply_preference_to_all_profiles">You can apply this change to all profiles or only to selected.</string>
+    <string name="shared_preference">Shared</string>
     <string name="shared_string_memory_used_tb_desc">Used %1$s TB</string>
     <string name="shared_string_memory_used_gb_desc">Used %1$s GB</string>
     <string name="shared_string_memory_used_mb_desc">Used %1$s MB</string>

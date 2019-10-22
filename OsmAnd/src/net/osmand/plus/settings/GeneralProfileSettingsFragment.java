@@ -21,6 +21,7 @@ import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MapViewTrackingUtilities;
@@ -82,8 +83,8 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 			if (TextUtils.isEmpty(summary)) {
 				summary = preference.getSummary();
 			}
-			if (!osmandPreference.isSetForMode(getSelectedAppMode())) {
-				String baseString = getString(R.string.shared_string_by_default) + ": %s";
+			if (!osmandPreference.isSetForMode(getSelectedAppMode()) || getSelectedAppMode().equals(ApplicationMode.DEFAULT)) {
+				String baseString = getString(R.string.shared_preference) + ": %s";
 				summary = AndroidUtils.getStyledString(baseString, summary, new CustomTypefaceSpan(FontCache.getRobotoMedium(app)), null);
 			}
 			summaryView.setText(summary);
@@ -336,16 +337,11 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 
 	@Override
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
-		OsmandSettings.OsmandPreference pref = settings.getPreference(preference.getKey());
-		if (pref != null && !pref.isSetForMode(getSelectedAppMode())) {
-			FragmentManager fragmentManager = getFragmentManager();
-			if (fragmentManager != null) {
-				ChangeGeneralProfilesPrefBottomSheet.showInstance(fragmentManager, preference.getKey(), newValue, this, false);
-			}
-			return false;
+		FragmentManager fragmentManager = getFragmentManager();
+		if (fragmentManager != null) {
+			ChangeGeneralProfilesPrefBottomSheet.showInstance(fragmentManager, preference.getKey(), newValue, this, false);
 		}
-
-		return true;
+		return false;
 	}
 
 	@Override
