@@ -500,6 +500,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 		private long copiedSize;
 		private int failedCount;
 		private long failedSize;
+		private String exceptionMessage;
 
 		public MoveFilesToDifferentDirectory(OsmandActionBarActivity activity, File from, File to) {
 			this.activity = new WeakReference<>(activity);
@@ -561,7 +562,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 				if (result.booleanValue() && runOnSuccess != null) {
 					runOnSuccess.run();
 				} else if (!result.booleanValue()) {
-					Toast.makeText(ctx, R.string.shared_string_io_error, Toast.LENGTH_LONG).show();
+					Toast.makeText(ctx, ctx.getString(R.string.shared_string_io_error) + ": " + exceptionMessage, Toast.LENGTH_LONG).show();
 				}
 			}
 			try {
@@ -633,6 +634,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 			try {
 				movingFiles(from, to, 0);
 			} catch (IOException e) {
+				exceptionMessage = e.getMessage();
 				return false;
 			}
 			return true;
