@@ -76,20 +76,22 @@ public class WikivoyageWptPtMenuBuilder extends WptPtMenuBuilder {
 	}
 
 	private HashMap<String, String> getDescriptionTokens(String desc, String... allowedKeys) {
-		String[] tokens = desc.split("\n");
 		HashMap<String, String> mTokens = new HashMap<>();
-		for (String token : tokens) {
-			boolean matched = false;
-			for (String key : allowedKeys) {
-				if (token.startsWith(key)) {
-					matched = true;
-					String value = token.substring(key.length()).trim();
-					mTokens.put(key, value);
+		if (!Algorithms.isEmpty(desc)) {
+			String[] tokens = desc.split("\n");
+			for (String token : tokens) {
+				boolean matched = false;
+				for (String key : allowedKeys) {
+					if (token.startsWith(key)) {
+						matched = true;
+						String value = token.substring(key.length()).trim();
+						mTokens.put(key, value);
+					}
 				}
-			}
-			if (!matched) {
-				String s = mTokens.get(KEY_DESCRIPTION);
-				mTokens.put(KEY_DESCRIPTION, s != null ? s + "\n" + token : token);
+				if (!matched) {
+					String s = mTokens.get(KEY_DESCRIPTION);
+					mTokens.put(KEY_DESCRIPTION, s != null ? s + "\n" + token : token);
+				}
 			}
 		}
 		return mTokens;
