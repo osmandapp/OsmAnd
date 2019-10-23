@@ -145,43 +145,15 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 					screen.addPreference(drivingStyleRouting);
 				}
 				if (avoidParameters.size() > 0) {
-					MultiSelectBooleanPreference avoidRouting = new MultiSelectBooleanPreference(app);
-					avoidRouting.setKey(AVOID_ROUTING_PARAMETER_PREFIX);
-					avoidRouting.setTitle(R.string.avoid_in_routing_title);
-					avoidRouting.setSummary(R.string.avoid_in_routing_descr_);
-					avoidRouting.setDescription(R.string.avoid_in_routing_descr_);
-					avoidRouting.setLayoutResource(R.layout.preference_with_descr);
-					avoidRouting.setIcon(getRoutingPrefIcon(AVOID_ROUTING_PARAMETER_PREFIX));
-
-					String[] entries = new String[avoidParameters.size()];
-					String[] prefsIds = new String[avoidParameters.size()];
-					Set<String> enabledPrefsIds = new HashSet<>();
-
-					for (int i = 0; i < avoidParameters.size(); i++) {
-						GeneralRouter.RoutingParameter p = avoidParameters.get(i);
-						BooleanPreference booleanRoutingPref = (BooleanPreference) settings.getCustomRoutingBooleanProperty(p.getId(), p.getDefaultBoolean());
-
-						entries[i] = SettingsBaseActivity.getRoutingStringPropertyName(app, p.getId(), p.getName());
-						prefsIds[i] = booleanRoutingPref.getId();
-
-						if (booleanRoutingPref.get()) {
-							enabledPrefsIds.add(booleanRoutingPref.getId());
-						}
-					}
-
-					avoidRouting.setEntries(entries);
-					avoidRouting.setEntryValues(prefsIds);
-					avoidRouting.setValues(enabledPrefsIds);
-
+					String title = getString(R.string.avoid_in_routing_title);
+					String descr = getString(R.string.avoid_in_routing_descr_);
+					MultiSelectBooleanPreference avoidRouting = createRoutingBooleanMultiSelectPref(AVOID_ROUTING_PARAMETER_PREFIX, title, descr, avoidParameters);
 					screen.addPreference(avoidRouting);
 				}
 				if (preferParameters.size() > 0) {
-					Preference preferRouting = new Preference(app);
-					preferRouting.setKey(PREFER_ROUTING_PARAMETER_PREFIX);
-					preferRouting.setTitle(R.string.prefer_in_routing_title);
-					preferRouting.setSummary(R.string.prefer_in_routing_descr);
-					preferRouting.setLayoutResource(R.layout.preference_with_descr);
-					preferRouting.setIconSpaceReserved(true);
+					String title = getString(R.string.prefer_in_routing_title);
+					String descr = getString(R.string.prefer_in_routing_descr);
+					MultiSelectBooleanPreference preferRouting = createRoutingBooleanMultiSelectPref(PREFER_ROUTING_PARAMETER_PREFIX, title, descr, preferParameters);
 					screen.addPreference(preferRouting);
 				}
 				if (reliefFactorParameters.size() > 0) {
@@ -267,6 +239,38 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 		routingListPref.setIcon(getRoutingPrefIcon(groupKey));
 
 		return routingListPref;
+	}
+
+	private MultiSelectBooleanPreference createRoutingBooleanMultiSelectPref(String groupKey, String title, String descr, List<GeneralRouter.RoutingParameter> routingParameters) {
+		MultiSelectBooleanPreference multiSelectPref = new MultiSelectBooleanPreference(app);
+		multiSelectPref.setKey(groupKey);
+		multiSelectPref.setTitle(title);
+		multiSelectPref.setSummary(descr);
+		multiSelectPref.setDescription(descr);
+		multiSelectPref.setLayoutResource(R.layout.preference_with_descr);
+		multiSelectPref.setIcon(getRoutingPrefIcon(groupKey));
+
+		String[] entries = new String[routingParameters.size()];
+		String[] prefsIds = new String[routingParameters.size()];
+		Set<String> enabledPrefsIds = new HashSet<>();
+
+		for (int i = 0; i < routingParameters.size(); i++) {
+			GeneralRouter.RoutingParameter p = routingParameters.get(i);
+			BooleanPreference booleanRoutingPref = (BooleanPreference) settings.getCustomRoutingBooleanProperty(p.getId(), p.getDefaultBoolean());
+
+			entries[i] = SettingsBaseActivity.getRoutingStringPropertyName(app, p.getId(), p.getName());
+			prefsIds[i] = booleanRoutingPref.getId();
+
+			if (booleanRoutingPref.get()) {
+				enabledPrefsIds.add(booleanRoutingPref.getId());
+			}
+		}
+
+		multiSelectPref.setEntries(entries);
+		multiSelectPref.setEntryValues(prefsIds);
+		multiSelectPref.setValues(enabledPrefsIds);
+
+		return multiSelectPref;
 	}
 
 	private void clearParameters() {
