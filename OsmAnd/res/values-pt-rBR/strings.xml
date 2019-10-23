@@ -3317,5 +3317,21 @@ Pôr do Sol: %2$s</string>
     <string name="shared_string_memory_tb_desc">%1$s TB</string>
     <string name="shared_string_memory_gb_desc">%1$s GB</string>
     <string name="shared_string_memory_mb_desc">%1$s MB</string>
-    <string name="shared_string_memory_kb_desc">%1$s KB</string>
+    <string name="shared_string_memory_kb_desc">%1$s kB</string>
+    <string name="data_storage_preference_summary">%1$s • %2$s</string>
+    <string name="data_storage_space_description">Livre %1$s GB • Total %2$s GB</string>
+    <string name="track_storage_directory">Diretório de armazenamento de trilhas</string>
+    <string name="track_storage_directory_descrp">As faixas podem ser armazenadas na pasta rec ou em pastas mensais ou diárias.</string>
+    <string name="store_tracks_in_rec_directory">Armazenar faixas gravadas na pasta rec</string>
+    <string name="store_tracks_in_daily_directories">Armazenar faixas gravadas em pastas diárias</string>
+    <string name="store_tracks_in_daily_directories_descrp">"Armazenaras caminhos  gravadas em subpastas por dia de gravação (como 01-01-2018)."</string>
+    <string name="shared_string_memory_used_tb_desc">Usado %1$s TB</string>
+    <string name="shared_string_memory_used_gb_desc">Usado %1$s GB</string>
+    <string name="shared_string_memory_used_mb_desc">Usado %1$s MB</string>
+    <string name="shared_string_memory_used_kb_desc">Usado %1$s kB</string>
+    <string name="contour_lines_and_hillshade">Curvas de nível e Sombras de relevo</string>
+    <string name="routing_attr_prefer_unpaved_name">Preferir estradas não pavimentadas</string>
+    <string name="routing_attr_prefer_unpaved_description">Preferir estradas não pavimentadas.</string>
+    <string name="update_all_maps">Atualizar todos os mapas</string>
+    <string name="update_all_maps_q">Tem certeza de que deseja atualizar todos os mapas (%1$d)\?</string>
 </resources>

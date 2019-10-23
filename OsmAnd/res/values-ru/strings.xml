@@ -3269,4 +3269,8 @@
     <string name="internal_app_storage_description">Внутреннее хранилище, скрытое от пользователя и других приложений, поэтому никто, кроме OsmAnd не может получить доступ к вашим данным</string>
     <string name="change_data_storage_folder">Изменение папку хранения данных</string>
     <string name="avoid_in_routing_descr_">Избегать определенные маршруты и типы дорог</string>
+    <string name="shared_string_memory_used_tb_desc">Использовано %1$sТБ</string>
+    <string name="shared_string_memory_used_gb_desc">Использовано %1$s ГБ</string>
+    <string name="shared_string_memory_used_mb_desc">Использовано %1$s МБ</string>
+    <string name="shared_string_memory_used_kb_desc">Использовано %1$s кБ</string>
 </resources>
