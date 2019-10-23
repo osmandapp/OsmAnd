@@ -3312,4 +3312,5 @@ représentant la zone : %1$s x %2$s</string>
     <string name="routing_attr_prefer_unpaved_description">Privilégier les routes non revêtues.</string>
     <string name="update_all_maps">Mettre à jour toutes les cartes</string>
     <string name="update_all_maps_q">Êtes-vous certain de vouloir mettre à jour les (%1$d) cartes \?</string>
+    <string name="track_storage_directory_descrp">Les traces peuvent être enregistrée dans le dossier rec ou dans des dossiers mensuels ou journaliers.</string>
 </resources>
