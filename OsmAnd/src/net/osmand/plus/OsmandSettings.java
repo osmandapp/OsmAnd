@@ -231,6 +231,21 @@ public class OsmandSettings {
 		return globalPreferences != null && globalPreferences.getBoolean(SETTING_CUSTOMIZED_ID, false);
 	}
 
+	public void migrateGlobalPrefsToProfile() {
+		SharedPreferences sharedPreferences = (SharedPreferences) globalPreferences;
+		Map<String, ?> map = sharedPreferences.getAll();
+		for (String key : map.keySet()) {
+			OsmandPreference pref = getPreference(key);
+			if (pref instanceof CommonPreference) {
+				CommonPreference commonPreference = (CommonPreference) pref;
+				if (!commonPreference.global && !commonPreference.isSetForMode(ApplicationMode.DEFAULT)) {
+					setPreference(key, map.get(key), ApplicationMode.DEFAULT);
+					settingsAPI.edit(globalPreferences).remove(key).commit();
+				}
+			}
+		}
+	}
+
 	public Object getProfilePreferences(ApplicationMode mode) {
 		return settingsAPI.getPreferenceObject(getSharedPreferencesName(mode));
 	}

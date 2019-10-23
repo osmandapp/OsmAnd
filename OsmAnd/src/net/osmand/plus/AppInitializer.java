@@ -93,6 +93,8 @@ public class AppInitializer implements IProgress {
 	public static final int VERSION_2_3 = 23;
 	// 32 - 3.2
 	public static final int VERSION_3_2 = 32;
+	// 35 - 3.5
+	public static final int VERSION_3_5 = 35;
 
 
 	public static final boolean TIPS_AND_TRICKS = false;
@@ -187,6 +189,9 @@ public class AppInitializer implements IProgress {
 			} else if (prevAppVersion < VERSION_3_2) {
 				app.getSettings().BILLING_PURCHASE_TOKENS_SENT.set("");
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, VERSION_3_2).commit();
+			} else if (prevAppVersion < VERSION_3_5) {
+				app.getSettings().migrateGlobalPrefsToProfile();
+				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, VERSION_3_5).commit();
 			}
 			startPrefs.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
 			appVersionChanged = true;
