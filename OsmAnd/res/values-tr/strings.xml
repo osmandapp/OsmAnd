@@ -3281,5 +3281,21 @@
     <string name="shared_string_memory_tb_desc">%1$s TB</string>
     <string name="shared_string_memory_gb_desc">%1$s GB</string>
     <string name="shared_string_memory_mb_desc">%1$s MB</string>
-    <string name="shared_string_memory_kb_desc">%1$s KB</string>
+    <string name="shared_string_memory_kb_desc">%1$s kB</string>
+    <string name="data_storage_preference_summary">%1$s • %2$s</string>
+    <string name="data_storage_space_description">Boş %1$s GB • Toplam %2$s GB</string>
+    <string name="track_storage_directory">Yol-izi Depolama Dizini</string>
+    <string name="track_storage_directory_descrp">Yol-izleri rec dizininde ya da aylık veya günlük dizinlerde depolanabilir.</string>
+    <string name="store_tracks_in_rec_directory">Kaydedilen yol-izlerini rec dizininde depola</string>
+    <string name="store_tracks_in_daily_directories">Kaydedilen yol-izlerini günlük dizinlerde depola</string>
+    <string name="store_tracks_in_daily_directories_descrp">Kaydedilen yol-izlerini kayıt gününe göre alt-dizinlerde depola (2018-01-01 gibi).</string>
+    <string name="shared_string_memory_used_tb_desc">Kullanılan %1$s TB</string>
+    <string name="shared_string_memory_used_gb_desc">Kullanılan %1$s GB</string>
+    <string name="shared_string_memory_used_mb_desc">Kullanılan %1$s MB</string>
+    <string name="shared_string_memory_used_kb_desc">Kullanılan %1$s kB</string>
+    <string name="contour_lines_and_hillshade">Eşyükselti çizgileri ve Tepe gölgeleri</string>
+    <string name="routing_attr_prefer_unpaved_name">Asfaltsız yolları tercih edin</string>
+    <string name="routing_attr_prefer_unpaved_description">Asfaltsız yolları tercih edin.</string>
+    <string name="update_all_maps">Tüm haritaları güncelle</string>
+    <string name="update_all_maps_q">Tüm (%1$d) haritaları güncellemek istediğinizden emin misiniz\?</string>
 </resources>

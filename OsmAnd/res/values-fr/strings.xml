@@ -3299,5 +3299,17 @@ représentant la zone : %1$s x %2$s</string>
     <string name="shared_string_memory_tb_desc">%1$s TB</string>
     <string name="shared_string_memory_gb_desc">%1$s GB</string>
     <string name="shared_string_memory_mb_desc">%1$s MB</string>
-    <string name="shared_string_memory_kb_desc">%1$s KB</string>
+    <string name="shared_string_memory_kb_desc">%1$s kB</string>
+    <string name="data_storage_preference_summary">%1$s • %2$s</string>
+    <string name="data_storage_space_description">Libre %1$s GB • Total %2$s GB</string>
+    <string name="track_storage_directory">Surveiller le dossier de stockage</string>
+    <string name="shared_string_memory_used_tb_desc">%1$s TB utilisés</string>
+    <string name="shared_string_memory_used_gb_desc">%1$s GB utilisés</string>
+    <string name="shared_string_memory_used_mb_desc">%1$s MB utilisés</string>
+    <string name="shared_string_memory_used_kb_desc">%1$s kB utilisés</string>
+    <string name="contour_lines_and_hillshade">Courbes de niveaux et Ombrage du relief</string>
+    <string name="routing_attr_prefer_unpaved_name">Privilégier les routes non revêtues</string>
+    <string name="routing_attr_prefer_unpaved_description">Privilégier les routes non revêtues.</string>
+    <string name="update_all_maps">Mettre à jour toutes les cartes</string>
+    <string name="update_all_maps_q">Êtes-vous certain de vouloir mettre à jour les (%1$d) cartes \?</string>
 </resources>

@@ -3318,4 +3318,14 @@
     <string name="shared_string_memory_gb_desc">%1$s ג״ב</string>
     <string name="shared_string_memory_mb_desc">%1$s מ״ב</string>
     <string name="shared_string_memory_kb_desc">%1$s ק״ב</string>
+    <string name="track_storage_directory">תיקיית אחסון מסלולים</string>
+    <string name="shared_string_memory_used_tb_desc">%1$s ט״ב בשימוש</string>
+    <string name="shared_string_memory_used_gb_desc">%1$s ג״ב בשימוש</string>
+    <string name="shared_string_memory_used_mb_desc">%1$s מ״ב בשימוש</string>
+    <string name="shared_string_memory_used_kb_desc">%1$s ק״ב בשימוש</string>
+    <string name="contour_lines_and_hillshade">קווי מתאר והצללות תוואי שטח</string>
+    <string name="routing_attr_prefer_unpaved_name">להעדיף דרכים בלתי סלולות</string>
+    <string name="routing_attr_prefer_unpaved_description">להעדיף דרכים בלתי סלולות.</string>
+    <string name="update_all_maps">עדכון כל המפות</string>
+    <string name="update_all_maps_q">לעדכן את כל (%1$d) המפות\?</string>
 </resources>
