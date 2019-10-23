@@ -9,8 +9,6 @@ import android.view.View;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings.CommonPreference;
-import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
@@ -35,12 +33,7 @@ public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSh
 		if (app == null || args == null || newValue == null || !args.containsKey(PREFERENCE_ID)) {
 			return;
 		}
-
 		final String prefId = args.getString(PREFERENCE_ID);
-		CommonPreference pref = getPreference(prefId);
-		if (pref == null) {
-			return;
-		}
 
 		items.add(new TitleItem(getString(R.string.change_default_settings)));
 		items.add(new LongDescriptionItem(getString(R.string.apply_preference_to_all_profiles)));
@@ -52,13 +45,8 @@ public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSh
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						boolean valueSaved = app.getSettings().setSharedGeneralPreference(prefId, newValue);
-						if (valueSaved) {
-							BaseSettingsFragment target = (BaseSettingsFragment) getTargetFragment();
-							if (target != null) {
-								target.updateAllSettings();
-							}
-						}
+						app.getSettings().setSharedGeneralPreference(prefId, newValue);
+						updateTargetSettings();
 						dismiss();
 					}
 				})
@@ -75,10 +63,7 @@ public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSh
 					@Override
 					public void onClick(View v) {
 						app.getSettings().setPreference(prefId, newValue);
-						BaseSettingsFragment target = (BaseSettingsFragment) getTargetFragment();
-						if (target != null) {
-							target.updateAllSettings();
-						}
+						updateTargetSettings();
 						dismiss();
 					}
 				})
@@ -92,6 +77,7 @@ public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSh
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
+						updateTargetSettings();
 						dismiss();
 					}
 				})
@@ -104,16 +90,11 @@ public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSh
 		return true;
 	}
 
-	private CommonPreference getPreference(String prefId) {
-		OsmandApplication app = getMyApplication();
-		if (app != null) {
-			OsmandPreference pref = app.getSettings().getPreference(prefId);
-			if (pref instanceof CommonPreference) {
-				return (CommonPreference) pref;
-			}
+	private void updateTargetSettings() {
+		BaseSettingsFragment target = (BaseSettingsFragment) getTargetFragment();
+		if (target != null) {
+			target.updateAllSettings();
 		}
-
-		return null;
 	}
 
 	public static void showInstance(@NonNull FragmentManager fm, String prefId, Object newValue, Fragment target, boolean usedOnMap) {

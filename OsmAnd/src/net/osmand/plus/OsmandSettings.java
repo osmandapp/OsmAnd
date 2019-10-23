@@ -241,14 +241,21 @@ public class OsmandSettings {
 
 	public boolean setSharedGeneralPreference(String key, Object value) {
 		OsmandPreference<?> preference = registeredPreferences.get(key);
-		if (preference != null) {
-			for (ApplicationMode mode : ApplicationMode.values(ctx)) {
-				settingsAPI.edit(getProfilePreferences(mode)).remove(key).commit();
+		if (preference instanceof CommonPreference) {
+			CommonPreference commonPref = (CommonPreference) preference;
+			if (commonPref.general) {
+				for (ApplicationMode mode : ApplicationMode.values(ctx)) {
+					if (commonPref.isSetForMode(mode)) {
+						settingsAPI.edit(getProfilePreferences(mode)).remove(key).commit();
+					}
+				}
+				boolean valueSaved = setPreference(key, value, ApplicationMode.DEFAULT);
+				if (valueSaved) {
+					commonPref.cachedValue = null;
+				}
+
+				return valueSaved;
 			}
-			if (preference instanceof CommonPreference) {
-				((CommonPreference) preference).cachedValue = null;
-			}
-			return setPreference(key, value, ApplicationMode.DEFAULT);
 		}
 		return false;
 	}
