@@ -11,7 +11,16 @@
 	Thx - Hardy
 
 -->
-
+    <string name="release_3_5">
+    • Updated application and profile Settings. Convenient arrangement of settings by type, ability to customize each profile\n\n
+    • New map download dialog that suggests a map to download while browsing\n\n
+    • Night theme fixes\n\n
+    • Fixed few routing issues around the world\n\n
+    • Updated basemap with more detailed road network\n\n
+    • Fixed flooded areas around the world\n\n
+    • Ski routing: added height profile and route complexity to the route details\n\n
+    • Other bug fixes\n\n
+    </string>
     <string name="shared_string_memory_used_tb_desc">Used %1$s TB</string>
     <string name="shared_string_memory_used_gb_desc">Used %1$s GB</string>
     <string name="shared_string_memory_used_mb_desc">Used %1$s MB</string>
