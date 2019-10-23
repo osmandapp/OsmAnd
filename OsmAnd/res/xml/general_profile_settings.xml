@@ -18,6 +18,13 @@
 		android:layout="@layout/preference_with_descr"
 		android:title="@string/rotate_map_to_bearing" />
 
+	<SwitchPreferenceCompat
+		android:key="center_position_on_map"
+		android:layout="@layout/preference_switch_with_descr"
+		android:summaryOff="@string/shared_string_off"
+		android:summaryOn="@string/shared_string_on"
+		android:title="@string/always_center_position_on_map" />
+
 	<net.osmand.plus.settings.preferences.ListPreferenceEx
 		android:key="map_screen_orientation"
 		android:layout="@layout/preference_with_descr"

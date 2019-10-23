@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceViewHolder;
+import android.support.v7.preference.SwitchPreferenceCompat;
 import android.support.v7.preference.TwoStatePreference;
 import android.support.v7.widget.AppCompatCheckedTextView;
 import android.support.v7.widget.SwitchCompat;
@@ -43,6 +44,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 	protected void setupPreferences() {
 		setupAppThemePref();
 		setupRotateMapPref();
+		setupCenterPositionOnMapPref();
 		setupMapScreenOrientationPref();
 
 		setupDrivingRegionPref();
@@ -135,6 +137,16 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 			default:
 				return getIcon(R.drawable.ic_action_direction_compass);
 		}
+	}
+
+	private void setupCenterPositionOnMapPref() {
+		SwitchPreferenceCompat centerPositionOnMap = (SwitchPreferenceCompat) findPreference(settings.CENTER_POSITION_ON_MAP.getId());
+		centerPositionOnMap.setIcon(getCenterPositionOnMapIcon());
+	}
+
+
+	private Drawable getCenterPositionOnMapIcon() {
+		return getContentIcon(settings.CENTER_POSITION_ON_MAP.get() ? R.drawable.ic_action_display_position_center : R.drawable.ic_action_display_position_bottom);
 	}
 
 	private void setupMapScreenOrientationPref() {
@@ -354,6 +366,8 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 				preference.setIcon(getRotateMapIcon());
 			} else if (settings.MAP_SCREEN_ORIENTATION.getId().equals(prefId)) {
 				preference.setIcon(getMapScreenOrientationIcon());
+			} else if (settings.CENTER_POSITION_ON_MAP.getId().equals(prefId)) {
+				preference.setIcon(getCenterPositionOnMapIcon());
 			}
 		}
 	}
