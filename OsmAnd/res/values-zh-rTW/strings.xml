@@ -3320,5 +3320,21 @@
     <string name="shared_string_memory_tb_desc">%1$s TB</string>
     <string name="shared_string_memory_gb_desc">%1$s GB</string>
     <string name="shared_string_memory_mb_desc">%1$s MB</string>
-    <string name="shared_string_memory_kb_desc">%1$s KB</string>
+    <string name="shared_string_memory_kb_desc">%1$s kB</string>
+    <string name="data_storage_preference_summary">%1$s • %2$s</string>
+    <string name="data_storage_space_description">剩餘 %1$s GB • 總共 %2$s GB</string>
+    <string name="track_storage_directory">軌跡儲存目錄</string>
+    <string name="track_storage_directory_descrp">軌跡可以儲存在 rec 資料夾或每月或每日資料夾。</string>
+    <string name="store_tracks_in_rec_directory">將已紀錄的軌跡存在 rec 資料夾中</string>
+    <string name="store_tracks_in_daily_directories">將已紀錄的軌跡存在每日資料夾中</string>
+    <string name="store_tracks_in_daily_directories_descrp">將已紀錄的軌姬儲存在紀錄日期的子資料夾中（如 2018-01-01）。</string>
+    <string name="shared_string_memory_used_tb_desc">已用 %1$s TB</string>
+    <string name="shared_string_memory_used_gb_desc">已用 %1$s GB</string>
+    <string name="shared_string_memory_used_mb_desc">已用 %1$s MB</string>
+    <string name="shared_string_memory_used_kb_desc">已用 %1$s kB</string>
+    <string name="contour_lines_and_hillshade">等高線與地形陰影</string>
+    <string name="routing_attr_prefer_unpaved_name">偏好未鋪設路面</string>
+    <string name="routing_attr_prefer_unpaved_description">偏好未鋪設路面。</string>
+    <string name="update_all_maps">更新所有地圖</string>
+    <string name="update_all_maps_q">您確定您想要更新所有 (%1$d) 地圖嗎？</string>
 </resources>

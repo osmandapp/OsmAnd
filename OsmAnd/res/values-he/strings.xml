@@ -3328,4 +3328,10 @@
     <string name="routing_attr_prefer_unpaved_description">להעדיף דרכים בלתי סלולות.</string>
     <string name="update_all_maps">עדכון כל המפות</string>
     <string name="update_all_maps_q">לעדכן את כל (%1$d) המפות\?</string>
+    <string name="data_storage_preference_summary">%1$s • %2$s</string>
+    <string name="data_storage_space_description">%1$s ג״ב פנויים • %2$s ג״ב סה״כ</string>
+    <string name="track_storage_directory_descrp">ניתן לאחסן מסלולים בתיקיית rec או בתיקיות חודשיות או יומיות.</string>
+    <string name="store_tracks_in_rec_directory">אחסון מסלולים שהוקלטו בתיקיית rec</string>
+    <string name="store_tracks_in_daily_directories">אחסון מסלולים שהוקלטו בתיקיות יומיות</string>
+    <string name="store_tracks_in_daily_directories_descrp">אחסון מסלולים שהוקלטו בתת־תיקיות לפי יום ההקלטה (למשל: 2019-01-01).</string>
 </resources>

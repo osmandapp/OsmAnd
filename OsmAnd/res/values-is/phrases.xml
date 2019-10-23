@@ -3710,4 +3710,7 @@
     <string name="poi_craft_floorer">Gólflagnafyrirtæki</string>
     <string name="poi_craft_bakery">Bökunarfyrirtæki</string>
     <string name="poi_craft_cabinet_maker">Skápasmíði</string>
+    <string name="poi_charge">Gjald</string>
+    <string name="poi_pet_grooming">Snyrting fyrir gæludýr</string>
+    <string name="poi_atm_yes">Hraðbanki: já</string>
 </resources>

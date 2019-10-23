@@ -382,7 +382,7 @@
     <string name="local_openstreetmap_delete">حذف اصلاحات</string>
     <string name="local_openstreetmap_descr_title">ویرایش ناهمزمان OSM:</string>
     <string name="free_version_message">شما می‌توانید %1$s نقشه دانلود یا به‌روز کنید.</string>
-    <string name="free_version_title">نسخهٔ رایگان</string>
+    <string name="free_version_title">‎نسخهٔ رایگان</string>
     <string name="poi_context_menu_showdescription">نمایش توضیحات POI.</string>
     <string name="index_name_north_america">آمریکای شمالی</string>
     <string name="index_name_us">آمریکای شمالی - ایالات متحده</string>
@@ -682,8 +682,8 @@
     <string name="osmand_service">حالت پس‌زمینه</string>
     <string name="osmand_service_descr">زمانی که صفحه خاموش است OsmAnd در پس‌زمینه کار می‌کند.</string>
     <string name="download_files_not_enough_space">فضای کافی برای دانلود %1$s مگابایت وجود ندارد (خالی: %2$s).</string>
-    <string name="download_files_question_space">آیا {0} فایل را دانلود می‌کنید؟
-\nحافظهٔ استفاده شده {1} مگابایت است. (حافظهٔ قابل‌استفاده {2} مگابایت است.)</string>
+    <string name="download_files_question_space">آیا {0} فایل را دانلود می‌کنید؟ 
+\nفضای ذخیرهٔ استفاده‌شده {1} مگابایت است. (فضای قابل‌استفاده {2} مگابایت است.)</string>
     <string name="use_transparent_map_theme">پوستهٔ شفاف</string>
     <string name="native_library_not_supported">کتابخانهٔ بومی بر روی این دستگاه پشتیبانی نمی‌شود.</string>
     <string name="init_native_library">مقداردهی اولیهٔ کتابخانهٔ بومی…</string>
@@ -843,7 +843,7 @@
     <string name="voice_data_corrupted">دادهٔ گفتاری انتخاب‌شده خراب است</string>
     <string name="voice_data_unavailable">دادهٔ گفتاری انتخاب‌شده موجود نیست</string>
     <string name="sd_mounted_ro">کارت حافظه در حالت فقط‌خواندنی است. 
-\nبا این حساب تنها می‌توانید نقشه‌هایی را ببینید که قبلاً دریافت شده‌اند و نمی‌توانید مناطق جدیدی را دانلود کنید.</string>
+\nفقط می‌توانید نقشه‌هایی را ببینید که قبلاً دریافت شده‌اند و نمی‌توانید مناطق جدیدی را دانلود کنید.</string>
     <string name="process_navigation_service">خدمات ناوبری OsmAnd</string>
     <string name="background_service_int_descr">بازهٔ بیدارباش سرویس پس‌زمینه را تنظیم کنید.</string>
     <string name="background_service_int">بازهٔ زمانی بیدارباش GPS</string>
@@ -1367,7 +1367,7 @@
     <string name="online_map">نقشهٔ آنلاین</string>
     <string name="roads_only">فقط راه‌ها</string>
     <string name="rendering_attr_pisteRoutes_name">سراشیبی‌های اسکی</string>
-    <string name="device_memory">حافظهٔ دستگاه</string>
+    <string name="device_memory">‎حافظهٔ دستگاه</string>
     <string name="rendering_attr_pisteGrooming_name">آماده‌سازی پیست</string>
     <string name="plugin_ski_name">نمای اسکی برای نقشه</string>
     <string name="plugin_nautical_name">نمای دریایی نقشه</string>
@@ -2134,7 +2134,7 @@
     <string name="downloads">دانلودها</string>
     <string name="confirm_download_roadmaps">نقشهٔ فقط-جاده لازم نیست، زیرا نقشهٔ استاندارد (کامل) را دارید. هنوز مایلید که دانلودش کنید؟</string>
     <string name="value_downloaded_of_max">%1$.1f از %2$.1f مگابایت</string>
-    <string name="file_size_in_mb">‎%.1f MB</string>
+    <string name="file_size_in_mb">%.1f مگابایت</string>
     <string name="update_all">به‌روزرسانی همه (%1$s مگابایت)</string>
     <string name="free_downloads_used">دانلودهای رایگان استفاده‌شده</string>
     <string name="free_downloads_used_description">تعداد دانلودهای رایگان باقیمانده را نشان می‌دهد.</string>
@@ -3363,26 +3363,26 @@
     <string name="routing_attr_width_description">محدودیت پهنای وسیله در مسیرها را مشخص کنید.</string>
     <string name="avoid_in_routing_descr_">از مسیرهای بخصوص و انواع جاده‌ها بپرهیزید</string>
     <string name="data_storage_preference_summary">%1$s • %2$s</string>
-    <string name="data_storage_space_description">خالی ‎%1$s GB • کل ‎%2$s GB</string>
+    <string name="data_storage_space_description">خالی %1$s گیگابایت • کل %2$s گیگابایت</string>
     <string name="app_mode_utv">پهلو به پهلو</string>
     <string name="rendering_attr_piste_difficulty_aerialway_name">راه هوایی</string>
     <string name="shared_string_calculate">محاسبه</string>
     <string name="shared_string_osmand_usage">کارکرد OsmAnd</string>
     <string name="shared_sting_tiles">کاشی‌ها</string>
     <string name="shared_string_maps">نقشه‌ها</string>
-    <string name="shared_string_memory_tb_desc">‎%1$s TB</string>
-    <string name="shared_string_memory_gb_desc">‎%1$s GB</string>
-    <string name="shared_string_memory_mb_desc">‎%1$s MB</string>
-    <string name="shared_string_memory_kb_desc">‎%1$s kB</string>
+    <string name="shared_string_memory_tb_desc">%1$s ترابایت</string>
+    <string name="shared_string_memory_gb_desc">%1$s گیگابایت</string>
+    <string name="shared_string_memory_mb_desc">%1$s مگابایت</string>
+    <string name="shared_string_memory_kb_desc">%1$s کیلوبایت</string>
     <string name="track_storage_directory">پوشهٔ ذخیره‌سازی رد</string>
     <string name="track_storage_directory_descrp">ردها را می‌توانید در پوشهٔ rec یا پوشه‌های ماهانه یا روزانه ذخیره کنید.</string>
     <string name="store_tracks_in_rec_directory">ردهای ضبط‌شده در پوشهٔ rec ذخیره شوند</string>
     <string name="store_tracks_in_daily_directories">ردهای ضبط‌شده در پوشه‌های روزانه ذخیره شوند</string>
     <string name="store_tracks_in_daily_directories_descrp">ردهای ضبط‌شده در زیرپوشهٔ مخصوص آن روز ذخیره می‌شود (مانند ‎2018-01-01).</string>
-    <string name="shared_string_memory_used_tb_desc">استفاده‌شده ‎%1$s TB</string>
-    <string name="shared_string_memory_used_gb_desc">استفاده‌شده ‎%1$s GB</string>
-    <string name="shared_string_memory_used_mb_desc">استفاده‌شده ‎%1$s MB</string>
-    <string name="shared_string_memory_used_kb_desc">استفاده‌شده ‎%1$s kB</string>
+    <string name="shared_string_memory_used_tb_desc">استفاده‌شده %1$s ترابایت</string>
+    <string name="shared_string_memory_used_gb_desc">استفاده‌شده %1$s گیگابایت</string>
+    <string name="shared_string_memory_used_mb_desc">استفاده‌شده %1$s مگابایت</string>
+    <string name="shared_string_memory_used_kb_desc">استفاده‌شده %1$s کیلوبایت</string>
     <string name="contour_lines_and_hillshade">سایه‌روشن و منحنی‌های میزان</string>
     <string name="routing_attr_prefer_unpaved_name">ترجیح جاده‌های روسازی‌نشده</string>
     <string name="routing_attr_prefer_unpaved_description">جاده‌های روسازی‌نشده را ترجیح می‌دهم.</string>
