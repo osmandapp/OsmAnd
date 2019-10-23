@@ -239,8 +239,10 @@ public class OsmandSettings {
 			if (pref instanceof CommonPreference) {
 				CommonPreference commonPreference = (CommonPreference) pref;
 				if (!commonPreference.global && !commonPreference.isSetForMode(ApplicationMode.DEFAULT)) {
-					setPreference(key, map.get(key), ApplicationMode.DEFAULT);
-					settingsAPI.edit(globalPreferences).remove(key).commit();
+					boolean valueSaved = setPreference(key, map.get(key), ApplicationMode.DEFAULT);
+					if (valueSaved) {
+						settingsAPI.edit(globalPreferences).remove(key).commit();
+					}
 				}
 			}
 		}
@@ -629,6 +631,14 @@ public class OsmandSettings {
 			} else {
 				return defaultValue;
 			}
+		}
+
+		public boolean hasDefaultValues() {
+			return defaultValues != null && !defaultValues.isEmpty();
+		}
+
+		public boolean hasDefaultValueForMode(ApplicationMode mode) {
+			return defaultValues != null && defaultValues.containsKey(mode);
 		}
 
 		protected T getDefaultValue() {

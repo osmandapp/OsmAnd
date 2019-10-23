@@ -24,6 +24,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.helpers.FontCache;
@@ -75,7 +76,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 
 		OsmandSettings.OsmandPreference osmandPreference = settings.getPreference(prefId);
 		TextView summaryView = (TextView) holder.findViewById(android.R.id.summary);
-		if (osmandPreference != null && summaryView != null) {
+		if (osmandPreference instanceof CommonPreference && summaryView != null) {
 			CharSequence summary = null;
 
 			if (preference instanceof TwoStatePreference) {
@@ -85,7 +86,10 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 			if (TextUtils.isEmpty(summary)) {
 				summary = preference.getSummary();
 			}
-			if (!osmandPreference.isSetForMode(getSelectedAppMode()) || getSelectedAppMode().equals(ApplicationMode.DEFAULT)) {
+			ApplicationMode selectedMode = getSelectedAppMode();
+			CommonPreference commonPref = (CommonPreference) osmandPreference;
+			if (!commonPref.hasDefaultValueForMode(selectedMode)
+					&& (!commonPref.isSetForMode(selectedMode) || getSelectedAppMode().equals(ApplicationMode.DEFAULT))) {
 				String baseString = getString(R.string.shared_preference) + ": %s";
 				summary = AndroidUtils.getStyledString(baseString, summary, new CustomTypefaceSpan(FontCache.getRobotoMedium(app)), null);
 			}
@@ -349,11 +353,18 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 
 	@Override
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
-		FragmentManager fragmentManager = getFragmentManager();
-		if (fragmentManager != null) {
-			ChangeGeneralProfilesPrefBottomSheet.showInstance(fragmentManager, preference.getKey(), newValue, this, false);
+		String prefId = preference.getKey();
+
+		OsmandSettings.OsmandPreference pref = settings.getPreference(prefId);
+		if (pref instanceof CommonPreference && !((CommonPreference) pref).hasDefaultValueForMode(getSelectedAppMode())) {
+			FragmentManager fragmentManager = getFragmentManager();
+			if (fragmentManager != null) {
+				ChangeGeneralProfilesPrefBottomSheet.showInstance(fragmentManager, prefId, newValue, this, false);
+			}
+			return false;
 		}
-		return false;
+
+		return true;
 	}
 
 	@Override
