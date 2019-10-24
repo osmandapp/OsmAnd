@@ -16,10 +16,12 @@ import java.util.List;
 public class GPXDatabase {
 
 	private static final String DB_NAME = "gpx_database";
-	private static final int DB_VERSION = 8;
+	private static final int DB_VERSION = 9;
 	private static final String GPX_TABLE_NAME = "gpxTable";
 	private static final String GPX_COL_NAME = "fileName";
 	private static final String GPX_COL_DIR = "fileDir";
+	private static final String GPX_INDEX_NAME_DIR = "indexNameDir";
+
 	private static final String GPX_COL_TOTAL_DISTANCE = "totalDistance";
 	private static final String GPX_COL_TOTAL_TRACKS = "totalTracks";
 	private static final String GPX_COL_START_TIME = "startTime";
@@ -294,6 +296,7 @@ public class GPXDatabase {
 					" SET " + GPX_COL_SHOW_AS_MARKERS + " = ? " +
 					"WHERE " + GPX_COL_SHOW_AS_MARKERS + " IS NULL", new Object[]{0});
 		}
+		db.execSQL("CREATE INDEX IF NOT EXISTS " + GPX_INDEX_NAME_DIR + " ON " + GPX_TABLE_NAME + " (" + GPX_COL_NAME + ", " + GPX_COL_DIR + ");");
 	}
 
 	private boolean updateLastModifiedTime(GpxDataItem item) {
@@ -455,8 +458,8 @@ public class GPXDatabase {
 					new Object[]{ fileName, fileDir, a.totalDistance, a.totalTracks, a.startTime, a.endTime,
 							a.timeSpan, a.timeMoving, a.totalDistanceMoving, a.diffElevationUp, a.diffElevationDown,
 							a.avgElevation, a.minElevation, a.maxElevation, a.maxSpeed, a.avgSpeed, a.points, a.wptPoints,
-							color, item.file.lastModified(), item.splitType, item.splitInterval, item.apiImported ? 1 : 0, item.showAsMarkers ? 1 : 0,
-							Algorithms.encodeStringSet(item.analysis.wptCategoryNames)});
+							color, item.file.lastModified(), item.splitType, item.splitInterval, item.apiImported ? 1 : 0,
+							Algorithms.encodeStringSet(item.analysis.wptCategoryNames), item.showAsMarkers ? 1 : 0});
 		} else {
 			db.execSQL("INSERT INTO " + GPX_TABLE_NAME + "(" +
 							GPX_COL_NAME + ", " +
