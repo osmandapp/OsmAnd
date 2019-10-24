@@ -3321,10 +3321,10 @@ Pôr do Sol: %2$s</string>
     <string name="data_storage_preference_summary">%1$s • %2$s</string>
     <string name="data_storage_space_description">Livre %1$s GB • Total %2$s GB</string>
     <string name="track_storage_directory">Diretório de armazenamento de trilhas</string>
-    <string name="track_storage_directory_descrp">As faixas podem ser armazenadas na pasta rec ou em pastas mensais ou diárias.</string>
-    <string name="store_tracks_in_rec_directory">Armazenar faixas gravadas na pasta rec</string>
-    <string name="store_tracks_in_daily_directories">Armazenar faixas gravadas em pastas diárias</string>
-    <string name="store_tracks_in_daily_directories_descrp">"Armazenaras caminhos  gravadas em subpastas por dia de gravação (como 01-01-2018)."</string>
+    <string name="track_storage_directory_descrp">As trilhas podem ser armazenadas na pasta \"rec\" ou em pastas mensais ou diárias.</string>
+    <string name="store_tracks_in_rec_directory">Armazenar trilhas gravadas na pasta \"rec\"</string>
+    <string name="store_tracks_in_daily_directories">Armazenar trilhas gravadas em pastas diárias</string>
+    <string name="store_tracks_in_daily_directories_descrp">Armazenar as trilhas gravadas em subpastas por dia de gravação (como 2018-01-01).</string>
     <string name="shared_string_memory_used_tb_desc">Usado %1$s TB</string>
     <string name="shared_string_memory_used_gb_desc">Usado %1$s GB</string>
     <string name="shared_string_memory_used_mb_desc">Usado %1$s MB</string>

@@ -3726,4 +3726,5 @@
     <string name="poi_craft_cabinet_maker">櫥櫃製造商</string>
     <string name="poi_charge">充電</string>
     <string name="poi_pet_grooming">寵物美容</string>
+    <string name="poi_atm_yes">ATM：是</string>
 </resources>
