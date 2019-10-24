@@ -3337,4 +3337,21 @@
     <string name="routing_attr_prefer_unpaved_description">偏好未鋪設路面。</string>
     <string name="update_all_maps">更新所有地圖</string>
     <string name="update_all_maps_q">您確定您想要更新所有 (%1$d) 地圖嗎？</string>
+    <string name="release_3_5">• 更新的應用程式與設定檔設定。方便地按照類型排列，並可自訂每個設定檔
+\n
+\n • 新的在瀏覽時建議下載地圖的對話框
+\n
+\n • 夜間主題修復
+\n
+\n • 修復世界各地的路徑規劃問題
+\n
+\n • 更新有更詳細路網的底圖
+\n
+\n • 修復世界各地淹水的地方
+\n
+\n • 滑雪路徑：新增高度設定檔與路徑複雜度到路徑詳細資訊中
+\n
+\n • 其他臭蟲修復
+\n
+\n</string>
 </resources>
