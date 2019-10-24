@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceViewHolder;
+import android.support.v7.preference.SwitchPreferenceCompat;
 import android.support.v7.preference.TwoStatePreference;
 import android.support.v7.widget.AppCompatCheckedTextView;
 import android.support.v7.widget.SwitchCompat;
@@ -21,7 +22,9 @@ import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.helpers.FontCache;
@@ -42,6 +45,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 	protected void setupPreferences() {
 		setupAppThemePref();
 		setupRotateMapPref();
+		setupCenterPositionOnMapPref();
 		setupMapScreenOrientationPref();
 
 		setupDrivingRegionPref();
@@ -72,7 +76,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 
 		OsmandSettings.OsmandPreference osmandPreference = settings.getPreference(prefId);
 		TextView summaryView = (TextView) holder.findViewById(android.R.id.summary);
-		if (osmandPreference != null && summaryView != null) {
+		if (osmandPreference instanceof CommonPreference && summaryView != null) {
 			CharSequence summary = null;
 
 			if (preference instanceof TwoStatePreference) {
@@ -82,8 +86,11 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 			if (TextUtils.isEmpty(summary)) {
 				summary = preference.getSummary();
 			}
-			if (!osmandPreference.isSetForMode(getSelectedAppMode())) {
-				String baseString = getString(R.string.shared_string_by_default) + ": %s";
+			ApplicationMode selectedMode = getSelectedAppMode();
+			CommonPreference commonPref = (CommonPreference) osmandPreference;
+			if (!commonPref.hasDefaultValueForMode(selectedMode)
+					&& (!commonPref.isSetForMode(selectedMode) || getSelectedAppMode().equals(ApplicationMode.DEFAULT))) {
+				String baseString = getString(R.string.shared_preference) + ": %s";
 				summary = AndroidUtils.getStyledString(baseString, summary, new CustomTypefaceSpan(FontCache.getRobotoMedium(app)), null);
 			}
 			summaryView.setText(summary);
@@ -134,6 +141,16 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 			default:
 				return getIcon(R.drawable.ic_action_direction_compass);
 		}
+	}
+
+	private void setupCenterPositionOnMapPref() {
+		SwitchPreferenceCompat centerPositionOnMap = (SwitchPreferenceCompat) findPreference(settings.CENTER_POSITION_ON_MAP.getId());
+		centerPositionOnMap.setIcon(getCenterPositionOnMapIcon());
+	}
+
+
+	private Drawable getCenterPositionOnMapIcon() {
+		return getContentIcon(settings.CENTER_POSITION_ON_MAP.get() ? R.drawable.ic_action_display_position_center : R.drawable.ic_action_display_position_bottom);
 	}
 
 	private void setupMapScreenOrientationPref() {
@@ -336,11 +353,13 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 
 	@Override
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
-		OsmandSettings.OsmandPreference pref = settings.getPreference(preference.getKey());
-		if (pref != null && !pref.isSetForMode(getSelectedAppMode())) {
+		String prefId = preference.getKey();
+
+		OsmandSettings.OsmandPreference pref = settings.getPreference(prefId);
+		if (pref instanceof CommonPreference && !((CommonPreference) pref).hasDefaultValueForMode(getSelectedAppMode())) {
 			FragmentManager fragmentManager = getFragmentManager();
 			if (fragmentManager != null) {
-				ChangeGeneralProfilesPrefBottomSheet.showInstance(fragmentManager, preference.getKey(), newValue, this, false);
+				ChangeGeneralProfilesPrefBottomSheet.showInstance(fragmentManager, prefId, newValue, this, false);
 			}
 			return false;
 		}
@@ -358,6 +377,8 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 				preference.setIcon(getRotateMapIcon());
 			} else if (settings.MAP_SCREEN_ORIENTATION.getId().equals(prefId)) {
 				preference.setIcon(getMapScreenOrientationIcon());
+			} else if (settings.CENTER_POSITION_ON_MAP.getId().equals(prefId)) {
+				preference.setIcon(getCenterPositionOnMapIcon());
 			}
 		}
 	}

@@ -119,13 +119,9 @@ public class CoordinatesFormatFragment extends BaseSettingsFragment {
 		int newFormat = getCoordinatesFormatForKey(key);
 		if (newFormat != -1) {
 			ApplicationMode selectedAppMode = getSelectedAppMode();
-			if (settings.COORDINATES_FORMAT.isSetForMode(selectedAppMode)) {
-				if (!settings.COORDINATES_FORMAT.getModeValue(selectedAppMode).equals(newFormat)) {
-					settings.COORDINATES_FORMAT.set(newFormat);
-					updateSelectedFormatPrefs(key);
-					return true;
-				}
-			} else {
+			if (!settings.COORDINATES_FORMAT.getModeValue(selectedAppMode).equals(newFormat)) {
+				updateSelectedFormatPrefs(key);
+
 				FragmentManager fragmentManager = getFragmentManager();
 				if (fragmentManager != null) {
 					ChangeGeneralProfilesPrefBottomSheet.showInstance(fragmentManager, settings.COORDINATES_FORMAT.getId(), newFormat, this, false);
