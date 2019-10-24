@@ -340,14 +340,16 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 	public void backToLocationImpl(int zoom, boolean forceZoom) {
 		if (mapView != null) {
 			OsmAndLocationProvider locationProvider = app.getLocationProvider();
+			net.osmand.Location lastKnownLocation = locationProvider.getLastKnownLocation();
+			net.osmand.Location lastStaleKnownLocation = locationProvider.getLastStaleKnownLocation();
+			net.osmand.Location location = lastKnownLocation != null ? lastKnownLocation : lastStaleKnownLocation;
 			if (!isMapLinkedToLocation()) {
 				setMapLinkedToLocation(true);
-				net.osmand.Location lastKnownLocation = locationProvider.getLastKnownLocation();
-				if (lastKnownLocation != null) {
+				if (location != null) {
 					AnimateDraggingMapThread thread = mapView.getAnimatedDraggingThread();
 					int fZoom = mapView.getZoom() < zoom && (forceZoom || app.getSettings().AUTO_ZOOM_MAP.get()) ? zoom : mapView.getZoom();
 					movingToMyLocation = true;
-					thread.startMoving(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(),
+					thread.startMoving(location.getLatitude(), location.getLongitude(),
 							fZoom, false, new Runnable() {
 								@Override
 								public void run() {
@@ -357,7 +359,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 				}
 				mapView.refreshMap();
 			}
-			if (locationProvider.getLastKnownLocation() == null) {
+			if (location == null) {
 				app.showToastMessage(R.string.unknown_location);
 			}
 		}
