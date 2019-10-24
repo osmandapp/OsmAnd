@@ -3354,4 +3354,21 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="routing_attr_prefer_unpaved_description">Unbefestigte Straßen bevorzugen.</string>
     <string name="update_all_maps">Alle Karten aktualisieren</string>
     <string name="update_all_maps_q">Sind Sie sicher, dass Sie alle (%1$d) Karten aktualisieren möchten\?</string>
+    <string name="release_3_5">• Verbesserte Anwendungs- und Profileinstellungen. Komfortable Anordnung der Einstellungen nach Typ, Möglichkeit, jedes Profil anzupassen
+\n
+\n • Neuer Karten-Download-Dialog, der während des Stöberns eine Karte zum Download vorschlägt
+\n
+\n • Korrekturen am Nachtmodus
+\n
+\n • Behebung einiger Probleme mit der Routenführung rund um den Globus
+\n
+\n • Verbesserte Basiskarte mit detailierterem Straßennetz
+\n
+\n • Überschwemmungsgebiete auf der Welt korrigiert
+\n
+\n • Ski-Routing: Höhenprofil und Routenschwierigkeitsgrad in den Routendetails ergänzt
+\n
+\n • Weitere Fehlerlösungen
+\n
+\n</string>
 </resources>
