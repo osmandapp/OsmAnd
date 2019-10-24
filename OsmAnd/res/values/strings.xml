@@ -13,6 +13,8 @@
 -->
     <string name="apply_preference_to_all_profiles">You can apply this change to all profiles or only to selected.</string>
     <string name="shared_preference">Shared</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_name">Prefer unpaved roads</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_description">Prefer unpaved roads.</string>
     <string name="release_3_5">
     • Updated application and profile Settings: Settings are now arrangement by type. Each profile can be customized separately.\n\n
     • New map download dialog which suggests a map to download while browsing\n\n
