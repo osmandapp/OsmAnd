@@ -3273,4 +3273,7 @@
     <string name="shared_string_memory_used_gb_desc">Использовано %1$s ГБ</string>
     <string name="shared_string_memory_used_mb_desc">Использовано %1$s МБ</string>
     <string name="shared_string_memory_used_kb_desc">Использовано %1$s кБ</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_name">Предпочитать дороги без покрытия</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_description">Предпочитать дороги без покрытия</string>
+
 </resources>
