@@ -3349,7 +3349,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="shared_string_memory_used_gb_desc">%1$s GB verwendet</string>
     <string name="shared_string_memory_used_mb_desc">%1$s MB verwendet</string>
     <string name="shared_string_memory_used_kb_desc">%1$s kB verwendet</string>
-    <string name="contour_lines_and_hillshade">Konturlinien und Hillshade</string>
+    <string name="contour_lines_and_hillshade">Höhenlinien und Schummerung</string>
     <string name="routing_attr_prefer_unpaved_name">Unbefestigte Straßen bevorzugen</string>
     <string name="routing_attr_prefer_unpaved_description">Unbefestigte Straßen bevorzugen.</string>
     <string name="update_all_maps">Alle Karten aktualisieren</string>
