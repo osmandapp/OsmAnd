@@ -3081,7 +3081,7 @@
     <string name="public_transport_calc_pedestrian">محاسبهٔ مسیر پیاده</string>
     <string name="public_transport_type">نوع حمل‌ونقل</string>
     <string name="send_log">ارسال گزارش</string>
-    <string name="searching_gps">جست‌وجوی GPS</string>
+    <string name="searching_gps">جست‌وجوی GPS‏</string>
     <string name="coordinates_widget">ابزارک مختصات</string>
     <string name="rate_dialog_descr">لطفاً ۳۰ ثانیه از وقت خود را به ما بدهید و در گوگل‌پلی به کارمان نظر و امتیاز بدهید.</string>
     <string name="button_rate">امتیاز</string>
@@ -3332,7 +3332,7 @@
     <string name="logcat_buffer">بافر لاگ‌کت</string>
     <string name="shared_string_by_default">پیشفرض</string>
     <string name="download_detaile_map">برای دیدن این منطقه، نقشهٔ باجزئیات %s را دانلود کنید.</string>
-    <string name="download_detailed_map">برای دیدن این منطقه، نقشهٔ باجزئیات %s را دانلود کنید.</string>
+    <string name="download_detailed_map">برای دیدن این منطقه، نقشهٔ پرجزئیات %s را دانلود کنید.</string>
     <string name="change_data_storage_full_description">فایل‌های دادهٔ OsmAnd را به مقصد جدید انتقال می‌دهید؟
 \n%1$s &gt; %2$s</string>
     <string name="enter_path_to_folder">مسیر پوشه را وارد کنید</string>
@@ -3388,4 +3388,21 @@
     <string name="routing_attr_prefer_unpaved_description">جاده‌های روسازی‌نشده را ترجیح می‌دهم.</string>
     <string name="update_all_maps">به‌روزرسانی همهٔ نقشه‌ها</string>
     <string name="update_all_maps_q">آیا همهٔ نقشه‌ها (%1$d) را به‌روز می‌کنید؟</string>
+    <string name="release_3_5">"•  تنظیمات برنامه و پروفایل‌ها به‌روز شد: آرایش دسترس‌پذیرتر تنظیمات بر اساس نوع و امکان شخصی‌سازی هر پروفایل.
+\n
+\n• کادر جدیدی برای دانلود نقشه اضافه شده که هنگام مرور، نقشه‌ها را پیشنهاد می‌کند.
+\n
+\n• اصلاحاتی در پوستهٔ شب انجام شد.
+\n
+\n• چند ایراد مسیریابی در سراسر جهان رفع شد.
+\n
+\n• نقشهٔ پایه با جزئیات بیشتر از شبکهٔ راه‌ها به‌روز شد.
+\n
+\n• مناطق آب‌گرفته در سراسر جهان اصلاح شد.
+\n
+\n• مسیریابی اسکی: پروفایل ارتفاعی و دشواری مسیر به جزئیات مسیرها افزوده شد.
+\n
+\n• اصلاح سایر باگ‌ها
+\n
+\n"</string>
 </resources>
