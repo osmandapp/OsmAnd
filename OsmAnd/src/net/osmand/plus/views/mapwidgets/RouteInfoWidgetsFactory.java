@@ -1258,8 +1258,7 @@ public class RouteInfoWidgetsFactory {
 					&& showRoutingAlarms && (trafficWarnings || cams)) {
 				AlarmInfo alarm;
 				if(rh.isFollowingMode() && !rh.isDeviatedFromRoute() && rh.getCurrentGPXRoute() == null) {
-					alarm = wh.getMostImportantAlarm(settings.METRIC_SYSTEM.get(),
-							settings.SPEED_SYSTEM.get(), cams);
+					alarm = wh.getMostImportantAlarm(settings.SPEED_SYSTEM.get(), cams);
 				} else {
 					RouteDataObject ro = locationProvider.getLastKnownRouteSegment();
 					Location loc = locationProvider.getLastKnownLocation();
