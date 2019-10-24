@@ -2923,7 +2923,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="tracks_on_map">Rastas ammustradas</string>
     <string name="time_of_day">Ora de sa die</string>
     <string name="by_transport_type">Tràmite %1$s</string>
-    <string name="step_by_step">Passu pro passu</string>
+    <string name="step_by_step">Bortada pro bortada</string>
     <string name="routeInfo_road_types_name">Casta de àndalas</string>
     <string name="exit_at">Essi in</string>
     <string name="sit_on_the_stop">Sede·ti in sa firmada</string>
@@ -3269,7 +3269,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="route_parameters_info">Custas impostatziones pertocant a su càlculu de s\'àndala. Ant a bènnere aplicadas petzi a custu profilu: %1$s.</string>
     <string name="wake_time">Tempus de ischidada</string>
     <string name="units_and_formats">Unidades e formados</string>
-    <string name="map_look_descr">iconas, widgets</string>
+    <string name="map_look_descr">Aparèntzia de sa mapa</string>
     <string name="map_look">Aparèntzia de sa mapa</string>
     <string name="configure_navigation">Cunfigura sa navigatzione</string>
     <string name="general_settings_profile_descr">Tema de s\'aplicatzione, unidades, regione</string>
@@ -3328,4 +3328,48 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="routing_attr_width_name">Lìmite de largària</string>
     <string name="routing_attr_width_description">Dislinda su lìmite de largària permìtidu in sas àndalas.</string>
     <string name="avoid_in_routing_descr_">Istransi castas isseberadas de àndalas e caminos</string>
+    <string name="data_storage_preference_summary">%1$s • %2$s</string>
+    <string name="data_storage_space_description">Lìberu %1$s GB • Totale %2$s GB</string>
+    <string name="app_mode_utv">Costa a costa</string>
+    <string name="rendering_attr_piste_difficulty_aerialway_name">Isciovia</string>
+    <string name="rendering_attr_piste_difficulty_connection_name">Connessione</string>
+    <string name="shared_string_calculate">Càlcula</string>
+    <string name="shared_string_osmand_usage">Impreu de OsmAnd</string>
+    <string name="shared_sting_tiles">Tasseddos</string>
+    <string name="shared_string_maps">Mapas</string>
+    <string name="shared_string_memory_tb_desc">%1$s TB</string>
+    <string name="shared_string_memory_gb_desc">%1$s GB</string>
+    <string name="shared_string_memory_mb_desc">%1$s MB</string>
+    <string name="shared_string_memory_kb_desc">%1$s kB</string>
+    <string name="track_storage_directory">Cartella de sarvamentu de sos arrastamentos</string>
+    <string name="track_storage_directory_descrp">Sas rastas podent èssere sarvadas in sa cartella de registratzione (rec) o in cartellas pro cada die o mese.</string>
+    <string name="store_tracks_in_rec_directory">Sarva sas rastas registradas in sa cartella rec</string>
+    <string name="store_tracks_in_daily_directories">Sarva sas rastas registradas in cartellas diferentes pro cada die</string>
+    <string name="store_tracks_in_daily_directories_descrp">Sarva sas rastas registradas in suta-cartellas diferentes pro die de registratzione (es. 2018-01-01).</string>
+    <string name="shared_string_memory_used_tb_desc">%1$s TB impreados</string>
+    <string name="shared_string_memory_used_gb_desc">%1$s GB impreados</string>
+    <string name="shared_string_memory_used_mb_desc">%1$s MB impreados</string>
+    <string name="shared_string_memory_used_kb_desc">%1$s kB impreados</string>
+    <string name="contour_lines_and_hillshade">Curvas de livellu e umbradura de sos rilievos</string>
+    <string name="routing_attr_prefer_unpaved_name">Privilègia sos caminos non apamentados</string>
+    <string name="routing_attr_prefer_unpaved_description">Privilègia sos caminos non apamentados.</string>
+    <string name="update_all_maps">Agiorna totu sas mapas</string>
+    <string name="update_all_maps_q">Ses seguru de chèrrere agiornare totu (%1$d) sas mapas\?</string>
+    <string name="release_3_5">• Impostatziones de s\'aplicatzione e de profilu agiornadas. Partzidura discansosa de sas impostatziones pro casta e possibilidade de personalizare cada profilu
+\n
+\n • Diàlogu de iscarrigamentu nou chi cussigiat una mapa de iscarrigare durante s\'esploratzione
+\n
+\n • Acontzos a su tema pro sa note
+\n
+\n • Problemas de s\'àndalas in totu su mundu acontzados
+\n
+\n • Mapa de base agiornada cun una retza de caminos fata prus a sa minuda
+\n
+\n • Àreas alluvionadas de su mundu acontzadas
+\n
+\n • Càlculu de sas àndalas pro s\'iscì: profilu de artària e cumplessidade de s\'àndalas annànghidos a sos detàllios de s\'àndala
+\n
+\n • Àteros errores acontzados
+\n
+\n</string>
 </resources>
