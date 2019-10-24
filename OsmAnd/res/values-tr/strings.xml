@@ -3298,4 +3298,21 @@
     <string name="routing_attr_prefer_unpaved_description">Asfaltsız yolları tercih edin.</string>
     <string name="update_all_maps">Tüm haritaları güncelle</string>
     <string name="update_all_maps_q">Tüm (%1$d) haritaları güncellemek istediğinizden emin misiniz\?</string>
+    <string name="release_3_5">• Güncellenmiş uygulama ve profil ayarları. Türlere göre ayarların uygun şekilde düzenlenmesi, her profili kişiselleştirme imkanı
+\n
+\n • Gezinirken indirilecek bir haritayı öneren yeni harita indirme iletişim kutusu
+\n
+\n • Gece teması düzeltmeleri
+\n
+\n • Dünyanın çeşitli yerlerindeki birkaç yönlendirme sorunu düzeltildi
+\n
+\n • Daha ayrıntılı yol ağıyla güncellenmiş temel harita
+\n
+\n • Dünyanın çeşitli yerlerinde su altındaki alanlar düzeltildi
+\n
+\n • Kayak rotası: rota detaylarına yükseklik profili ve rota karmaşıklığı eklendi
+\n
+\n • Diğer hata düzeltmeleri
+\n
+\n</string>
 </resources>
