@@ -552,10 +552,10 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 			if (activity != null) {
 				RecyclerView.LayoutParams layoutParams = (RecyclerView.LayoutParams) view.getLayoutParams();
 				if (AndroidUiHelper.isOrientationPortrait(getActivity())) {
-					layoutParams.width = AndroidUtils.getScreenWidth(activity) / 2;
+					layoutParams.width = (int) (AndroidUtils.getScreenWidth(activity) / 2.5);
 				} else {
 					// 11.5dp is the shadow width
-					layoutParams.width = (getResources().getDimensionPixelSize(R.dimen.landscape_bottom_sheet_dialog_fragment_width) / 2) - AndroidUtils.dpToPx(activity, 11.5f);
+					layoutParams.width = (int) ((getResources().getDimensionPixelSize(R.dimen.landscape_bottom_sheet_dialog_fragment_width) / 2.5) - AndroidUtils.dpToPx(activity, 11.5f));
 				}
 				view.setLayoutParams(layoutParams);
 			}
