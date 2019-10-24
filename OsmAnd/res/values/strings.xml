@@ -12,10 +12,10 @@
 
 -->
     <string name="release_3_5">
-    • Updated application and profile Settings. Convenient arrangement of settings by type, ability to customize each profile\n\n
-    • New map download dialog that suggests a map to download while browsing\n\n
+    • Updated application and profile Settings: Settings are now arrangement by type. Each profile can be customized separately.\n\n
+    • New map download dialog which suggests a map to download while browsing\n\n
     • Night theme fixes\n\n
-    • Fixed few routing issues around the world\n\n
+    • Fixed several routing issues around the world\n\n
     • Updated basemap with more detailed road network\n\n
     • Fixed flooded areas around the world\n\n
     • Ski routing: added height profile and route complexity to the route details\n\n
