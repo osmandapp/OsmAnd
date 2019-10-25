@@ -318,12 +318,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		mapLayers.createLayers(mapView);
 		createProgressBarForRouting();
 		updateStatusBarColor();
-		// This situtation could be when navigation suddenly crashed and after restarting
-		// it tries to continue the last route
-		if (settings.FOLLOW_THE_ROUTE.get() && !app.getRoutingHelper().isRouteCalculated()
-				&& !app.getRoutingHelper().isRouteBeingCalculated()) {
-			FailSafeFuntions.restoreRoutingMode(this);
-		} else if (!app.getRoutingHelper().isRoutePlanningMode()
+
+		if ((app.getRoutingHelper().isRouteCalculated() || app.getRoutingHelper().isRouteBeingCalculated())
+				&& !app.getRoutingHelper().isRoutePlanningMode()
 				&& !settings.FOLLOW_THE_ROUTE.get()
 				&& app.getTargetPointsHelper().getAllPoints().size() > 0) {
 			app.getRoutingHelper().clearCurrentRoute(null, new ArrayList<LatLon>());
@@ -423,6 +420,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 					if (event == InitEvents.FAVORITES_INITIALIZED) {
 						refreshMap();
 					}
+					if (event == InitEvents.ROUTING_CONFIG_INITIALIZED) {
+						checkRestoreRoutingMode();
+					}
 				}
 
 				@Override
@@ -441,6 +441,17 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			getMyApplication().checkApplicationIsBeingInitialized(this, initListener);
 		} else {
 			setupOpenGLView(true);
+			checkRestoreRoutingMode();
+		}
+	}
+
+	private void checkRestoreRoutingMode() {
+		// This situation could be when navigation suddenly crashed and after restarting
+		// it tries to continue the last route
+		if (settings.FOLLOW_THE_ROUTE.get()
+				&& !app.getRoutingHelper().isRouteCalculated()
+				&& !app.getRoutingHelper().isRouteBeingCalculated()) {
+			FailSafeFuntions.restoreRoutingMode(MapActivity.this);
 		}
 	}
 
