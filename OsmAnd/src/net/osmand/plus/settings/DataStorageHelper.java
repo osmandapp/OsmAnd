@@ -2,8 +2,6 @@ package net.osmand.plus.settings;
 
 import android.os.AsyncTask;
 import android.os.Build;
-import android.os.Parcel;
-import android.os.Parcelable;
 
 import net.osmand.IndexConstants;
 import net.osmand.ValueHolder;
@@ -15,11 +13,12 @@ import java.io.File;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
+import static net.osmand.plus.settings.DataStorageFragment.UI_REFRESH_TIME_MS;
 import static net.osmand.plus.settings.DataStorageMemoryItem.Directory;
 import static net.osmand.plus.settings.DataStorageMemoryItem.EXTENSIONS;
 import static net.osmand.plus.settings.DataStorageMemoryItem.PREFIX;
 
-public class DataStorageHelper implements Parcelable {
+public class DataStorageHelper {
 	public final static String INTERNAL_STORAGE = "internal_storage";
 	public final static String EXTERNAL_STORAGE = "external_storage";
 	public final static String SHARED_STORAGE = "shared_storage";
@@ -48,12 +47,8 @@ public class DataStorageHelper implements Parcelable {
 	private int currentStorageType;
 	private String currentStoragePath;
 
-	private DataStorageHelper(OsmandApplication app) {
+	public DataStorageHelper(OsmandApplication app) {
 		prepareData(app);
-	}
-
-	public static DataStorageHelper refreshInfo(OsmandApplication app) {
-		return new DataStorageHelper(app);
 	}
 
 	private void prepareData(OsmandApplication app) {
@@ -274,14 +269,14 @@ public class DataStorageHelper implements Parcelable {
 
 	public RefreshMemoryUsedInfo calculateMemoryUsedInfo(UpdateMemoryInfoUIAdapter listener) {
 		File rootDir = new File(currentStoragePath);
-		RefreshMemoryUsedInfo task = new RefreshMemoryUsedInfo(listener, otherMemory, rootDir, null, null);
+		RefreshMemoryUsedInfo task = new RefreshMemoryUsedInfo(listener, otherMemory, rootDir, null, null, OTHER_MEMORY);
 		task.execute(mapsMemory, srtmAndHillshadeMemory, tracksMemory, notesMemory);
 		return task;
 	}
 
 	public RefreshMemoryUsedInfo calculateTilesMemoryUsed(UpdateMemoryInfoUIAdapter listener) {
 		File rootDir = new File(tilesMemory.getDirectories()[0].getAbsolutePath());
-		RefreshMemoryUsedInfo task = new RefreshMemoryUsedInfo(listener, otherMemory, rootDir, null, srtmAndHillshadeMemory.getPrefixes());
+		RefreshMemoryUsedInfo task = new RefreshMemoryUsedInfo(listener, otherMemory, rootDir, null, srtmAndHillshadeMemory.getPrefixes(), TILES_MEMORY);
 		task.execute(tilesMemory);
 		return task;
 	}
@@ -292,17 +287,21 @@ public class DataStorageHelper implements Parcelable {
 		private DataStorageMemoryItem otherMemory;
 		private String[] directoriesToAvoid;
 		private String[] prefixesToAvoid;
+		private String taskKey;
+		private long lastRefreshTime;
 
-		public RefreshMemoryUsedInfo(UpdateMemoryInfoUIAdapter listener, DataStorageMemoryItem otherMemory, File rootDir, String[] directoriesToAvoid, String[] prefixesToAvoid) {
+		public RefreshMemoryUsedInfo(UpdateMemoryInfoUIAdapter listener, DataStorageMemoryItem otherMemory, File rootDir, String[] directoriesToAvoid, String[] prefixesToAvoid, String taskKey) {
 			this.listener = listener;
 			this.otherMemory = otherMemory;
 			this.rootDir = rootDir;
 			this.directoriesToAvoid = directoriesToAvoid;
 			this.prefixesToAvoid = prefixesToAvoid;
+			this.taskKey = taskKey;
 		}
 
 		@Override
 		protected Void doInBackground(DataStorageMemoryItem... items) {
+			lastRefreshTime = System.currentTimeMillis();
 			if (rootDir.canRead()) {
 				calculateMultiTypes(rootDir, items);
 			}
@@ -334,9 +333,13 @@ public class DataStorageHelper implements Parcelable {
 							}
 							for (Directory dir : directories) {
 								if (file.getAbsolutePath().equals(dir.getAbsolutePath())
-										|| (file.getAbsolutePath().startsWith(dir.getAbsolutePath()) && dir.isGoDeeper())) {
-									calculateMultiTypes(file, items);
-									break nextFile;
+										|| (file.getAbsolutePath().startsWith(dir.getAbsolutePath()))) {
+									if (dir.isGoDeeper()) {
+										calculateMultiTypes(file, items);
+										break nextFile;
+									} else if (dir.isSkipOther()) {
+										break nextFile;
+									}
 								}
 							}
 						}
@@ -403,7 +406,7 @@ public class DataStorageHelper implements Parcelable {
 						otherMemory.addBytes(file.length());
 					}
 				}
-				publishProgress();
+				refreshUI();
 			}
 		}
 
@@ -437,7 +440,15 @@ public class DataStorageHelper implements Parcelable {
 		protected void onPostExecute(Void aVoid) {
 			super.onPostExecute(aVoid);
 			if (listener != null) {
-				listener.onMemoryInfoUpdate();
+				listener.onFinishUpdating(taskKey);
+			}
+		}
+		
+		private void refreshUI() {
+			long currentTime = System.currentTimeMillis();
+			if ((currentTime - lastRefreshTime) > UI_REFRESH_TIME_MS) {
+				lastRefreshTime = currentTime;
+				publishProgress();
 			}
 		}
 	}
@@ -467,41 +478,8 @@ public class DataStorageHelper implements Parcelable {
 	public interface UpdateMemoryInfoUIAdapter {
 
 		void onMemoryInfoUpdate();
+		
+		void onFinishUpdating(String taskKey);
 
 	}
-
-	@Override
-	public int describeContents() {
-		return 0;
-	}
-
-	private DataStorageHelper(Parcel in) {
-		menuItems = in.readArrayList(DataStorageMenuItem.class.getClassLoader());
-		currentDataStorage = in.readParcelable(DataStorageMenuItem.class.getClassLoader());
-		memoryItems = in.readArrayList(DataStorageMemoryItem.class.getClassLoader());
-		currentStorageType = in.readInt();
-		currentStoragePath = in.readString();
-	}
-
-	@Override
-	public void writeToParcel(Parcel dest, int flags) {
-		dest.writeArray(menuItems.toArray());
-		dest.writeParcelable(currentDataStorage, flags);
-		dest.writeArray(memoryItems.toArray());
-		dest.writeInt(currentStorageType);
-		dest.writeString(currentStoragePath);
-	}
-
-	public static final Parcelable.Creator<DataStorageHelper> CREATOR = new Parcelable.Creator<DataStorageHelper>() {
-
-		@Override
-		public DataStorageHelper createFromParcel(Parcel source) {
-			return new DataStorageHelper(source);
-		}
-
-		@Override
-		public DataStorageHelper[] newArray(int size) {
-			return new DataStorageHelper[size];
-		}
-	};
 }

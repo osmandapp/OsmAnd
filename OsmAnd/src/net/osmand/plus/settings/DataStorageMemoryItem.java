@@ -1,9 +1,6 @@
 package net.osmand.plus.settings;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
-public class DataStorageMemoryItem implements Parcelable {
+public class DataStorageMemoryItem {
 	public final static int EXTENSIONS = 0;
 	public final static int PREFIX = 1;
 	
@@ -19,14 +16,6 @@ public class DataStorageMemoryItem implements Parcelable {
 		this.prefixes = prefixes;
 		this.usedMemoryBytes = usedMemoryBytes;
 		this.directories = directories;
-	}
-
-	private DataStorageMemoryItem(Parcel in) {
-		key = in.readString();
-		in.readStringArray(extensions);
-		in.writeStringArray(prefixes);
-		directories = (Directory[]) in.readArray(Directory.class.getClassLoader());
-		usedMemoryBytes = in.readLong();
 	}
 
 	public String getKey() {
@@ -60,33 +49,6 @@ public class DataStorageMemoryItem implements Parcelable {
 	public void addBytes(long bytes) {
 		this.usedMemoryBytes += bytes;
 	}
-
-	@Override
-	public int describeContents() {
-		return 0;
-	}
-
-	@Override
-	public void writeToParcel(Parcel dest, int flags) {
-		dest.writeString(key);
-		dest.writeStringArray(extensions);
-		dest.writeStringArray(prefixes);
-		dest.writeArray(directories);
-		dest.writeLong(usedMemoryBytes);
-	}
-
-	public static final Parcelable.Creator<DataStorageMemoryItem> CREATOR = new Parcelable.Creator<DataStorageMemoryItem>() {
-
-		@Override
-		public DataStorageMemoryItem createFromParcel(Parcel source) {
-			return new DataStorageMemoryItem(source);
-		}
-
-		@Override
-		public DataStorageMemoryItem[] newArray(int size) {
-			return new DataStorageMemoryItem[size];
-		}
-	};
 
 	public static class DataStorageMemoryItemBuilder {
 		private String key;
@@ -125,24 +87,11 @@ public class DataStorageMemoryItem implements Parcelable {
 		}
 	}
 	
-	public static class Directory implements Parcelable {
+	public static class Directory {
 		private String absolutePath;
 		private boolean goDeeper;
 		private int checkingType;
 		private boolean skipOther;
-
-		@Override
-		public int describeContents() {
-			return 0;
-		}
-
-		@Override
-		public void writeToParcel(Parcel dest, int flags) {
-			dest.writeString(absolutePath);
-			dest.writeInt(goDeeper ? 1 : 0);
-			dest.writeInt(checkingType);
-			dest.writeInt(skipOther ? 1 : 0);
-		}
 
 		public Directory(String absolutePath, boolean goDeeper, int checkingType, boolean skipOther) {
 			this.absolutePath = absolutePath;
@@ -166,25 +115,5 @@ public class DataStorageMemoryItem implements Parcelable {
 		public boolean isSkipOther() {
 			return skipOther;
 		}
-
-		private Directory(Parcel in) {
-			absolutePath = in.readString();
-			goDeeper = in.readInt() == 1;
-			checkingType = in.readInt();
-			skipOther = in.readInt() == 1;
-		}
-
-		public static final Parcelable.Creator<Directory> CREATOR = new Parcelable.Creator<Directory>() {
-
-			@Override
-			public Directory createFromParcel(Parcel source) {
-				return new Directory(source);
-			}
-
-			@Override
-			public Directory[] newArray(int size) {
-				return new Directory[size];
-			}
-		};
 	}
 }

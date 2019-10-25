@@ -137,7 +137,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment implements Send
 		Preference externalStorageDir = (Preference) findPreference(OsmandSettings.EXTERNAL_STORAGE_DIR);
 		externalStorageDir.setIcon(getContentIcon(R.drawable.ic_action_folder));
 
-		DataStorageHelper holder = DataStorageHelper.refreshInfo(app);
+		DataStorageHelper holder = new DataStorageHelper(app);
 		DataStorageMenuItem currentStorage = holder.getCurrentStorage();
 		long totalUsed = app.getSettings().OSMAND_USAGE_SPACE.get();
 		if (totalUsed > 0) {

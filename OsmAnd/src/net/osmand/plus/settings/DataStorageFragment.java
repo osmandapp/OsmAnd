@@ -5,7 +5,6 @@ import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -56,11 +55,10 @@ import static net.osmand.plus.settings.bottomsheets.SelectFolderBottomSheet.NEW_
 
 public class DataStorageFragment extends BaseSettingsFragment implements DataStorageHelper.UpdateMemoryInfoUIAdapter {
 	public final static int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 500;
+	public final static int UI_REFRESH_TIME_MS = 500;
 	
 	private final static String CHANGE_DIRECTORY_BUTTON = "change_directory";
 	private final static String OSMAND_USAGE = "osmand_usage";
-	private final static String CALCULATE_TILES_BTN_PRESSED = "calculate_tiles_btn_pressed";
-	private final static String ITEMS_HOLDER = "items_holder";
 
 	private ArrayList<DataStorageMenuItem> menuItems;
 	private ArrayList<DataStorageMemoryItem> memoryItems;
@@ -68,7 +66,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 	private Preference changeButton;
 	private DataStorageMenuItem currentDataStorage;
 	private String tmpManuallySpecifiedPath;
-	private DataStorageHelper itemsHolder;
+	private DataStorageHelper dataStorageHelper;
 	private boolean calculateTilesBtnPressed;
 	
 	private DataStorageHelper.RefreshMemoryUsedInfo calculateMemoryTask;
@@ -76,18 +74,13 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 
 	private OsmandApplication app;
 	private OsmandActionBarActivity activity;
-	private OsmandSettings settings;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		app = getMyApplication();
 		activity = getMyActivity();
-		settings = app.getSettings();
-		if (savedInstanceState != null) {
-			calculateTilesBtnPressed = savedInstanceState.getBoolean(CALCULATE_TILES_BTN_PRESSED);
-			itemsHolder = savedInstanceState.getParcelable(ITEMS_HOLDER);
-		}
-		if (itemsHolder == null) {
+		if (dataStorageHelper == null) {
+			setRetainInstance(true);
 			refreshDataInfo();
 		}
 		super.onCreate(savedInstanceState);
@@ -98,12 +91,12 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 		
 		PreferenceScreen screen = getPreferenceScreen();
 
-		if (screen == null || itemsHolder == null) {
+		if (screen == null || dataStorageHelper == null) {
 			return;
 		}
 
-		menuItems = itemsHolder.getStorageItems();
-		memoryItems = itemsHolder.getMemoryInfoItems();
+		menuItems = dataStorageHelper.getStorageItems();
+		memoryItems = dataStorageHelper.getMemoryInfoItems();
 		dataStorageRadioButtonsGroup = new ArrayList<>();
 
 		for (DataStorageMenuItem item : menuItems) {
@@ -115,7 +108,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 			dataStorageRadioButtonsGroup.add(preference);
 		}
 
-		currentDataStorage = itemsHolder.getCurrentStorage();
+		currentDataStorage = dataStorageHelper.getCurrentStorage();
 
 		changeButton = new Preference(app);
 		changeButton.setKey(CHANGE_DIRECTORY_BUTTON);
@@ -163,7 +156,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 					if (tmpManuallySpecifiedPath != null) {
 						DataStorageMenuItem manuallySpecified = null;
 						try {
-							manuallySpecified = (DataStorageMenuItem) itemsHolder.getManuallySpecified().clone();
+							manuallySpecified = (DataStorageMenuItem) dataStorageHelper.getManuallySpecified().clone();
 							manuallySpecified.setDirectory(tmpManuallySpecifiedPath);
 						} catch (CloneNotSupportedException e) {
 							return false;
@@ -177,7 +170,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 			//show necessary dialog
 			String key = preference.getKey();
 			if (key != null) {
-				DataStorageMenuItem newDataStorage = itemsHolder.getStorage(key);
+				DataStorageMenuItem newDataStorage = dataStorageHelper.getStorage(key);
 				if (newDataStorage != null) {
 					if (!currentDataStorage.getKey().equals(newDataStorage.getKey())) {
 						if (newDataStorage.getType() == OsmandSettings.EXTERNAL_STORAGE_TYPE_DEFAULT
@@ -196,13 +189,6 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 			}
 		}
 		return false;
-	}
-
-	@Override
-	public void onSaveInstanceState(Bundle outState) {
-		super.onSaveInstanceState(outState);
-		outState.putBoolean(CALCULATE_TILES_BTN_PRESSED, calculateTilesBtnPressed);
-		outState.putParcelable(ITEMS_HOLDER, itemsHolder);
 	}
 
 	@Override
@@ -226,7 +212,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 		
 		final View itemView = holder.itemView;
 		if (preference instanceof CheckBoxPreference) {
-			DataStorageMenuItem item = itemsHolder.getStorage(key);
+			DataStorageMenuItem item = dataStorageHelper.getStorage(key);
 			if (item != null) {
 				TextView tvTitle = itemView.findViewById(android.R.id.title);
 				TextView tvSummary = itemView.findViewById(R.id.summary);
@@ -277,7 +263,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 			icon.setVisibility(View.INVISIBLE);
 			title.setText(R.string.shared_string_change);
 		} else if(key.equals(OSMAND_USAGE)) {
-			long totalUsageBytes = itemsHolder.getTotalUsedBytes();
+			long totalUsageBytes = dataStorageHelper.getTotalUsedBytes();
 			TextView tvSummary = itemView.findViewById(R.id.summary);
 			tvSummary.setText(DataStorageHelper.getFormattedMemoryInfo(totalUsageBytes, memoryUnitsFormats));
 		} else {
@@ -293,7 +279,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 							@Override
 							public void onClick(View v) {
 								calculateTilesBtnPressed = true;
-								calculateTilesMemoryTask = itemsHolder.calculateTilesMemoryUsed(DataStorageFragment.this);
+								calculateTilesMemoryTask = dataStorageHelper.calculateTilesMemoryUsed(DataStorageFragment.this);
 								updateAllSettings();
 							}
 						});
@@ -340,7 +326,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 	}
 
 	private void showFolderSelectionDialog() {
-		DataStorageMenuItem manuallySpecified = itemsHolder.getManuallySpecified();
+		DataStorageMenuItem manuallySpecified = dataStorageHelper.getManuallySpecified();
 		if (manuallySpecified != null) {
 			SelectFolderBottomSheet.showInstance(getFragmentManager(), manuallySpecified.getKey(),
 					manuallySpecified.getDirectory(), DataStorageFragment.this,
@@ -451,8 +437,8 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 	
 	private void refreshDataInfo() {
 		calculateTilesBtnPressed = false;
-		itemsHolder = DataStorageHelper.refreshInfo(app);
-		calculateMemoryTask = itemsHolder.calculateMemoryUsedInfo(this);
+		dataStorageHelper = new DataStorageHelper(app);
+		calculateMemoryTask = dataStorageHelper.calculateMemoryUsedInfo(this);
 	}
 
 	private String getSpaceDescription(String path) {
@@ -483,9 +469,16 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 	@Override
 	public void onMemoryInfoUpdate() {
 		updateAllSettings();
-		app.getSettings().OSMAND_USAGE_SPACE.set(itemsHolder.getTotalUsedBytes());
 	}
 	
+	@Override
+	public void onFinishUpdating(String taskKey) {
+		updateAllSettings();
+		if (taskKey != null && taskKey.equals(TILES_MEMORY)) {
+			app.getSettings().OSMAND_USAGE_SPACE.set(dataStorageHelper.getTotalUsedBytes());
+		}
+	}
+
 	public static class MoveFilesToDifferentDirectory extends AsyncTask<Void, Void, Boolean> {
 
 		protected WeakReference<OsmandActionBarActivity> activity;
