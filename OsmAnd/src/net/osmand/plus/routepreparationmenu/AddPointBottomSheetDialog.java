@@ -3,7 +3,6 @@ package net.osmand.plus.routepreparationmenu;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -550,6 +549,15 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 			view.setOnClickListener(listener);
 			Activity activity = getActivity();
 			if (activity != null) {
+				TextView title = view.findViewById(R.id.title);
+				TextView description = view.findViewById(R.id.description);
+
+				int titleHeight = AndroidUtils.getTextHeight(title.getPaint());
+				int descriptionHeight = AndroidUtils.getTextHeight(description.getPaint());
+				int minTextHeight = titleHeight + descriptionHeight * 2;
+				if (view.getHeight() < minTextHeight) {
+					view.setMinimumHeight(minTextHeight);
+				}
 				RecyclerView.LayoutParams layoutParams = (RecyclerView.LayoutParams) view.getLayoutParams();
 				if (AndroidUiHelper.isOrientationPortrait(getActivity())) {
 					layoutParams.width = (int) (AndroidUtils.getScreenWidth(activity) / 2.5);
