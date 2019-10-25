@@ -83,6 +83,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 		activity = getMyActivity();
 		settings = app.getSettings();
 		if (itemsHolder == null) {
+			setRetainInstance(true);
 			refreshDataInfo();
 		}
 		super.onCreate(savedInstanceState);
@@ -312,7 +313,6 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 			if (calculateTilesMemoryTask != null) {
 				calculateTilesMemoryTask.cancel(true);
 			}
-			setRetainInstance(false);
 		}
 		super.onDestroy();
 	}
@@ -439,7 +439,6 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 	}
 	
 	private void refreshDataInfo() {
-		setRetainInstance(true);
 		calculateTilesBtnPressed = false;
 		itemsHolder = DataStorageHelper.refreshInfo(app);
 		calculateMemoryTask = itemsHolder.calculateMemoryUsedInfo(this);
