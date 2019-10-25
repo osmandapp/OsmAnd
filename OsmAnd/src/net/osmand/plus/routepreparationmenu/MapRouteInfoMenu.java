@@ -824,7 +824,8 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		if (mapActivity == null || mainView == null) {
 			return;
 		}
-		final ApplicationMode am = mapActivity.getMyApplication().getRoutingHelper().getAppMode();
+		OsmandApplication app = mapActivity.getMyApplication();
+		final ApplicationMode am = app.getRoutingHelper().getAppMode();
 		final Set<ApplicationMode> selected = new HashSet<>();
 		selected.add(am);
 		ViewGroup vg = (ViewGroup) mainView.findViewById(R.id.app_modes);
@@ -843,7 +844,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				}
 			}
 		};
-		final List<ApplicationMode> values = new ArrayList<ApplicationMode>(ApplicationMode.values(mapActivity.getMyApplication()));
+		final List<ApplicationMode> values = new ArrayList<ApplicationMode>(ApplicationMode.values(app));
 		values.remove(ApplicationMode.DEFAULT);
 
 		if (values.size() > 0 && !values.contains(am)) {
@@ -866,8 +867,8 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		boolean firstMode = true;
 		while (iterator.hasNext()) {
 			ApplicationMode mode = iterator.next();
-			View toggle = AppModeDialog.createToggle(mapActivity.getLayoutInflater(), (OsmandApplication) mapActivity.getApplication(),
-					R.layout.mode_view_route_preparation, (LinearLayout) ll.findViewById(R.id.app_modes_content), mode, true);
+			View toggle = AppModeDialog.createToggle(mapActivity.getLayoutInflater(), app, R.layout.mode_view_route_preparation,
+					(LinearLayout) ll.findViewById(R.id.app_modes_content), mode, true);
 
 			if (firstMode && toggle.getLayoutParams() instanceof ViewGroup.MarginLayoutParams) {
 				firstMode = false;
@@ -882,10 +883,11 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			buttons[k++] = toggle;
 		}
 		for (int i = 0; i < buttons.length; i++) {
-			AppModeDialog.updateButtonStateForRoute((OsmandApplication) mapActivity.getApplication(), values, selected, listener, buttons, i, true, true, nightMode);
+			AppModeDialog.updateButtonStateForRoute(app, values, selected, listener, buttons, i, true, true, nightMode);
 		}
 
-		final ApplicationMode activeMode = app.getSettings().getApplicationMode();
+		final ApplicationMode activeMode = app.getRoutingHelper().getAppMode();
+
 		final int idx = values.indexOf(activeMode);
 
 		OnGlobalLayoutListener globalListener = new OnGlobalLayoutListener() {
