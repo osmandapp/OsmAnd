@@ -3308,4 +3308,48 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="routing_attr_width_name">Limit šírky</string>
     <string name="routing_attr_width_description">Zadajte šírku vozidla, ktorá musí byť povolená na cestách.</string>
     <string name="avoid_in_routing_descr_">Vyhnúť sa niektorým trasám a typom ciest</string>
+    <string name="data_storage_preference_summary">%1$s • %2$s</string>
+    <string name="data_storage_space_description">Voľné %1$s GB • Celkom %2$s GB</string>
+    <string name="app_mode_utv">Terénna úžitková štvorkolka</string>
+    <string name="rendering_attr_piste_difficulty_aerialway_name">Lanovka</string>
+    <string name="rendering_attr_piste_difficulty_connection_name">Spojnica</string>
+    <string name="shared_string_calculate">Vypočítať</string>
+    <string name="shared_string_osmand_usage">Využitie OsmAndom</string>
+    <string name="shared_sting_tiles">Dlaždice</string>
+    <string name="shared_string_maps">Mapy</string>
+    <string name="shared_string_memory_tb_desc">%1$s TB</string>
+    <string name="shared_string_memory_gb_desc">%1$s GB</string>
+    <string name="shared_string_memory_mb_desc">%1$s MB</string>
+    <string name="shared_string_memory_kb_desc">%1$s kB</string>
+    <string name="track_storage_directory">Priečinok na ukladanie stôp</string>
+    <string name="track_storage_directory_descrp">Stopy môžu byť ukladané v priečinku \'rec\' alebo v mesačných či denných priečinkoch.</string>
+    <string name="store_tracks_in_rec_directory">Ukladať zaznamenané stopy v priečinku \'rec\'</string>
+    <string name="store_tracks_in_daily_directories">Ukladať zaznamenané stopy v denných priečinkoch</string>
+    <string name="store_tracks_in_daily_directories_descrp">"Ukladať zaznamenané stopy podpriečinkoch za každý deň (napr.  2018-01-01)."</string>
+    <string name="shared_string_memory_used_tb_desc">Použité %1$s TB</string>
+    <string name="shared_string_memory_used_gb_desc">Použité %1$s GB</string>
+    <string name="shared_string_memory_used_mb_desc">Použité %1$s MB</string>
+    <string name="shared_string_memory_used_kb_desc">Použité %1$s kB</string>
+    <string name="contour_lines_and_hillshade">Vrstevnice a tieňované svahy</string>
+    <string name="routing_attr_prefer_unpaved_name">Preferovať nespevnené cesty</string>
+    <string name="routing_attr_prefer_unpaved_description">Preferovať cesty s nespevneným povrchom.</string>
+    <string name="update_all_maps">Aktualizovať všetky mapy</string>
+    <string name="update_all_maps_q">Naozaj chcete aktualizovať všetky (%1$d) mapy\?</string>
+    <string name="release_3_5">• Vylepšené nastavenia aplikácie a profilov. Pohodlné usporiadanie nastavení podľa typu a možnosť upravenia každého profilu
+\n
+\n • Nový dialóg sťahovania máp, ktorý navrhuje mapy na stiahnutie počas prehliadania
+\n
+\n • Opravy nočného vzhľadu
+\n
+\n • Opravené niektoré chyby navigácie
+\n
+\n • Aktualizovaná základná mapa s podrobnejšou cestnou sieťou
+\n
+\n • Opravené \'zaplavené\' územia po svete
+\n
+\n • Lyžiarska navigácia: do detailov trasy bol pridaný výškový profil a obtiažnosť
+\n
+\n • Opravy iných chýb
+\n
+\n</string>
 </resources>
