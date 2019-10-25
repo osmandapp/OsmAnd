@@ -421,13 +421,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 						refreshMap();
 					}
 					if (event == InitEvents.ROUTING_CONFIG_INITIALIZED) {
-						// This situation could be when navigation suddenly crashed and after restarting
-						// it tries to continue the last route
-						if (settings.FOLLOW_THE_ROUTE.get()
-								&& !app.getRoutingHelper().isRouteCalculated()
-								&& !app.getRoutingHelper().isRouteBeingCalculated()) {
-							FailSafeFuntions.restoreRoutingMode(MapActivity.this);
-						}
+						checkRestoreRoutingMode();
 					}
 				}
 
@@ -447,6 +441,17 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			getMyApplication().checkApplicationIsBeingInitialized(this, initListener);
 		} else {
 			setupOpenGLView(true);
+			checkRestoreRoutingMode();
+		}
+	}
+
+	private void checkRestoreRoutingMode() {
+		// This situation could be when navigation suddenly crashed and after restarting
+		// it tries to continue the last route
+		if (settings.FOLLOW_THE_ROUTE.get()
+				&& !app.getRoutingHelper().isRouteCalculated()
+				&& !app.getRoutingHelper().isRouteBeingCalculated()) {
+			FailSafeFuntions.restoreRoutingMode(MapActivity.this);
 		}
 	}
 
