@@ -3,7 +3,6 @@ package net.osmand.plus.routepreparationmenu;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -552,10 +551,10 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 			if (activity != null) {
 				RecyclerView.LayoutParams layoutParams = (RecyclerView.LayoutParams) view.getLayoutParams();
 				if (AndroidUiHelper.isOrientationPortrait(getActivity())) {
-					layoutParams.width = AndroidUtils.getScreenWidth(activity) / 2;
+					layoutParams.width = (int) (AndroidUtils.getScreenWidth(activity) / 2.5);
 				} else {
 					// 11.5dp is the shadow width
-					layoutParams.width = (getResources().getDimensionPixelSize(R.dimen.landscape_bottom_sheet_dialog_fragment_width) / 2) - AndroidUtils.dpToPx(activity, 11.5f);
+					layoutParams.width = (int) ((getResources().getDimensionPixelSize(R.dimen.landscape_bottom_sheet_dialog_fragment_width) / 2.5) - AndroidUtils.dpToPx(activity, 11.5f));
 				}
 				view.setLayoutParams(layoutParams);
 			}
@@ -583,6 +582,26 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 
 		FavoritesItemsAdapter(OsmandApplication app, List<Object> items) {
 			super(app, items);
+		}
+
+		@NonNull
+		@Override
+		public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+			RecyclerView.ViewHolder viewHolder = super.onCreateViewHolder(viewGroup, viewType);
+
+			TextView title = viewHolder.itemView.findViewById(R.id.title);
+			TextView description = viewHolder.itemView.findViewById(R.id.description);
+			if (title != null && description != null) {
+				int titleHeight = AndroidUtils.getTextHeight(title.getPaint());
+				int descriptionHeight = AndroidUtils.getTextHeight(description.getPaint());
+				int minTextHeight = titleHeight + descriptionHeight * 2;
+				int defaultItemHeight = viewGroup.getContext().getResources().getDimensionPixelSize(R.dimen.bottom_sheet_selected_item_title_height);
+				if (defaultItemHeight < minTextHeight) {
+					viewHolder.itemView.setMinimumHeight(minTextHeight);
+				}
+			}
+
+			return viewHolder;
 		}
 
 		@Override

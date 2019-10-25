@@ -388,13 +388,18 @@ public class AndroidUtils {
 				: ctx.getResources().getColor(R.color.text_color_secondary_light));
 	}
 
-
 	public static int getTextWidth(float textSize, String text) {
 		Paint paint = new Paint();
 		paint.setTextSize(textSize);
 		return (int) paint.measureText(text);
 	}
-	
+
+	public static int getTextHeight(Paint paint) {
+		Paint.FontMetrics fm = paint.getFontMetrics();
+		float height = fm.bottom - fm.top;
+		return (int) height;
+	}
+
 	public static int dpToPx(Context ctx, float dp) {
 		Resources r = ctx.getResources();
 		return (int) TypedValue.applyDimension(
