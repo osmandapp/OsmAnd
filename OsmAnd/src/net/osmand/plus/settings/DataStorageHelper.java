@@ -47,12 +47,8 @@ public class DataStorageHelper {
 	private int currentStorageType;
 	private String currentStoragePath;
 
-	private DataStorageHelper(OsmandApplication app) {
+	public DataStorageHelper(OsmandApplication app) {
 		prepareData(app);
-	}
-
-	public static DataStorageHelper refreshInfo(OsmandApplication app) {
-		return new DataStorageHelper(app);
 	}
 
 	private void prepareData(OsmandApplication app) {
