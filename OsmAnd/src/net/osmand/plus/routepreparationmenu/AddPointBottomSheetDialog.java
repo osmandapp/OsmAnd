@@ -549,15 +549,6 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 			view.setOnClickListener(listener);
 			Activity activity = getActivity();
 			if (activity != null) {
-				TextView title = view.findViewById(R.id.title);
-				TextView description = view.findViewById(R.id.description);
-
-				int titleHeight = AndroidUtils.getTextHeight(title.getPaint());
-				int descriptionHeight = AndroidUtils.getTextHeight(description.getPaint());
-				int minTextHeight = titleHeight + descriptionHeight * 2;
-				if (view.getHeight() < minTextHeight) {
-					view.setMinimumHeight(minTextHeight);
-				}
 				RecyclerView.LayoutParams layoutParams = (RecyclerView.LayoutParams) view.getLayoutParams();
 				if (AndroidUiHelper.isOrientationPortrait(getActivity())) {
 					layoutParams.width = (int) (AndroidUtils.getScreenWidth(activity) / 2.5);
@@ -591,6 +582,25 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 
 		FavoritesItemsAdapter(OsmandApplication app, List<Object> items) {
 			super(app, items);
+		}
+
+		@NonNull
+		@Override
+		public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+			RecyclerView.ViewHolder viewHolder = super.onCreateViewHolder(viewGroup, viewType);
+
+			TextView title = viewHolder.itemView.findViewById(R.id.title);
+			TextView description = viewHolder.itemView.findViewById(R.id.description);
+			if (title != null && description != null) {
+				int titleHeight = AndroidUtils.getTextHeight(title.getPaint());
+				int descriptionHeight = AndroidUtils.getTextHeight(description.getPaint());
+				int minTextHeight = titleHeight + descriptionHeight * 2;
+				if (viewHolder.itemView.getHeight() < minTextHeight) {
+					viewHolder.itemView.setMinimumHeight(minTextHeight);
+				}
+			}
+
+			return viewHolder;
 		}
 
 		@Override
