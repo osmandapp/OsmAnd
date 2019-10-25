@@ -274,14 +274,14 @@ public class DataStorageHelper implements Parcelable {
 
 	public RefreshMemoryUsedInfo calculateMemoryUsedInfo(UpdateMemoryInfoUIAdapter listener) {
 		File rootDir = new File(currentStoragePath);
-		RefreshMemoryUsedInfo task = new RefreshMemoryUsedInfo(listener, otherMemory, rootDir, null, null);
+		RefreshMemoryUsedInfo task = new RefreshMemoryUsedInfo(listener, otherMemory, rootDir, null, null, OTHER_MEMORY);
 		task.execute(mapsMemory, srtmAndHillshadeMemory, tracksMemory, notesMemory);
 		return task;
 	}
 
 	public RefreshMemoryUsedInfo calculateTilesMemoryUsed(UpdateMemoryInfoUIAdapter listener) {
 		File rootDir = new File(tilesMemory.getDirectories()[0].getAbsolutePath());
-		RefreshMemoryUsedInfo task = new RefreshMemoryUsedInfo(listener, otherMemory, rootDir, null, srtmAndHillshadeMemory.getPrefixes());
+		RefreshMemoryUsedInfo task = new RefreshMemoryUsedInfo(listener, otherMemory, rootDir, null, srtmAndHillshadeMemory.getPrefixes(), TILES_MEMORY);
 		task.execute(tilesMemory);
 		return task;
 	}
@@ -293,12 +293,13 @@ public class DataStorageHelper implements Parcelable {
 		private String[] directoriesToAvoid;
 		private String[] prefixesToAvoid;
 
-		public RefreshMemoryUsedInfo(UpdateMemoryInfoUIAdapter listener, DataStorageMemoryItem otherMemory, File rootDir, String[] directoriesToAvoid, String[] prefixesToAvoid) {
+		public RefreshMemoryUsedInfo(UpdateMemoryInfoUIAdapter listener, DataStorageMemoryItem otherMemory, File rootDir, String[] directoriesToAvoid, String[] prefixesToAvoid, String taskKey) {
 			this.listener = listener;
 			this.otherMemory = otherMemory;
 			this.rootDir = rootDir;
 			this.directoriesToAvoid = directoriesToAvoid;
 			this.prefixesToAvoid = prefixesToAvoid;
+			this.taskKey = taskKey;
 		}
 
 		@Override
@@ -437,7 +438,7 @@ public class DataStorageHelper implements Parcelable {
 		protected void onPostExecute(Void aVoid) {
 			super.onPostExecute(aVoid);
 			if (listener != null) {
-				listener.onMemoryInfoUpdate();
+				listener.onFinishUpdating(taskKey);
 			}
 		}
 	}
@@ -467,6 +468,8 @@ public class DataStorageHelper implements Parcelable {
 	public interface UpdateMemoryInfoUIAdapter {
 
 		void onMemoryInfoUpdate();
+		
+		void onFinishUpdating(String taskKey);
 
 	}
 

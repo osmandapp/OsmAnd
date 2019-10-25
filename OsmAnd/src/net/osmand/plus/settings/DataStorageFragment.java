@@ -324,6 +324,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 			if (calculateTilesMemoryTask != null) {
 				calculateTilesMemoryTask.cancel(true);
 			}
+			setRetainInstance(false);
 		}
 		super.onDestroy();
 	}
@@ -450,6 +451,7 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 	}
 	
 	private void refreshDataInfo() {
+		setRetainInstance(true);
 		calculateTilesBtnPressed = false;
 		itemsHolder = DataStorageHelper.refreshInfo(app);
 		calculateMemoryTask = itemsHolder.calculateMemoryUsedInfo(this);
@@ -483,9 +485,16 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 	@Override
 	public void onMemoryInfoUpdate() {
 		updateAllSettings();
-		app.getSettings().OSMAND_USAGE_SPACE.set(itemsHolder.getTotalUsedBytes());
 	}
 	
+	@Override
+	public void onFinishUpdating(String taskKey) {
+		updateAllSettings();
+		if (taskKey != null && taskKey.equals(TILES_MEMORY)) {
+			app.getSettings().OSMAND_USAGE_SPACE.set(itemsHolder.getTotalUsedBytes());
+		}
+	}
+
 	public static class MoveFilesToDifferentDirectory extends AsyncTask<Void, Void, Boolean> {
 
 		protected WeakReference<OsmandActionBarActivity> activity;
