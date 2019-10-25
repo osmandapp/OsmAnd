@@ -56,6 +56,7 @@ import static net.osmand.plus.settings.bottomsheets.SelectFolderBottomSheet.NEW_
 
 public class DataStorageFragment extends BaseSettingsFragment implements DataStorageHelper.UpdateMemoryInfoUIAdapter {
 	public final static int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 500;
+	public final static int UI_REFRESH_TIME_MS = 500;
 	
 	private final static String CHANGE_DIRECTORY_BUTTON = "change_directory";
 	private final static String OSMAND_USAGE = "osmand_usage";

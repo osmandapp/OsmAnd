@@ -292,6 +292,23 @@ public class DataStorageHelper implements Parcelable {
 		private DataStorageMemoryItem otherMemory;
 		private String[] directoriesToAvoid;
 		private String[] prefixesToAvoid;
+		private String taskKey;
+		private boolean refreshing = false;
+
+		private Runnable refreshingTimer = new Runnable() {
+			
+			@Override
+			public void run() {
+				try {
+					Thread.sleep(DataStorageFragment.UI_REFRESH_TIME_MS);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				refreshing = false;
+				publishProgress();
+			}
+			
+		};
 
 		public RefreshMemoryUsedInfo(UpdateMemoryInfoUIAdapter listener, DataStorageMemoryItem otherMemory, File rootDir, String[] directoriesToAvoid, String[] prefixesToAvoid, String taskKey) {
 			this.listener = listener;
@@ -335,9 +352,13 @@ public class DataStorageHelper implements Parcelable {
 							}
 							for (Directory dir : directories) {
 								if (file.getAbsolutePath().equals(dir.getAbsolutePath())
-										|| (file.getAbsolutePath().startsWith(dir.getAbsolutePath()) && dir.isGoDeeper())) {
-									calculateMultiTypes(file, items);
-									break nextFile;
+										|| (file.getAbsolutePath().startsWith(dir.getAbsolutePath()))) {
+									if (dir.isGoDeeper()) {
+										calculateMultiTypes(file, items);
+										break nextFile;
+									} else if (dir.isSkipOther()) {
+										break nextFile;
+									}
 								}
 							}
 						}
@@ -404,7 +425,7 @@ public class DataStorageHelper implements Parcelable {
 						otherMemory.addBytes(file.length());
 					}
 				}
-				publishProgress();
+				refreshUI();
 			}
 		}
 
@@ -439,6 +460,13 @@ public class DataStorageHelper implements Parcelable {
 			super.onPostExecute(aVoid);
 			if (listener != null) {
 				listener.onFinishUpdating(taskKey);
+			}
+		}
+		
+		private void refreshUI() {
+			if (!refreshing) {
+				refreshing = true;
+				new Thread(refreshingTimer).start();
 			}
 		}
 	}
