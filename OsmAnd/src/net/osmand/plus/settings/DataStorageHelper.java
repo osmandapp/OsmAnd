@@ -2,8 +2,6 @@ package net.osmand.plus.settings;
 
 import android.os.AsyncTask;
 import android.os.Build;
-import android.os.Parcel;
-import android.os.Parcelable;
 
 import net.osmand.IndexConstants;
 import net.osmand.ValueHolder;
@@ -20,7 +18,7 @@ import static net.osmand.plus.settings.DataStorageMemoryItem.Directory;
 import static net.osmand.plus.settings.DataStorageMemoryItem.EXTENSIONS;
 import static net.osmand.plus.settings.DataStorageMemoryItem.PREFIX;
 
-public class DataStorageHelper implements Parcelable {
+public class DataStorageHelper {
 	public final static String INTERNAL_STORAGE = "internal_storage";
 	public final static String EXTERNAL_STORAGE = "external_storage";
 	public final static String SHARED_STORAGE = "shared_storage";
@@ -488,39 +486,4 @@ public class DataStorageHelper implements Parcelable {
 		void onFinishUpdating(String taskKey);
 
 	}
-
-	@Override
-	public int describeContents() {
-		return 0;
-	}
-
-	private DataStorageHelper(Parcel in) {
-		menuItems = in.readArrayList(DataStorageMenuItem.class.getClassLoader());
-		currentDataStorage = in.readParcelable(DataStorageMenuItem.class.getClassLoader());
-		memoryItems = in.readArrayList(DataStorageMemoryItem.class.getClassLoader());
-		currentStorageType = in.readInt();
-		currentStoragePath = in.readString();
-	}
-
-	@Override
-	public void writeToParcel(Parcel dest, int flags) {
-		dest.writeArray(menuItems.toArray());
-		dest.writeParcelable(currentDataStorage, flags);
-		dest.writeArray(memoryItems.toArray());
-		dest.writeInt(currentStorageType);
-		dest.writeString(currentStoragePath);
-	}
-
-	public static final Parcelable.Creator<DataStorageHelper> CREATOR = new Parcelable.Creator<DataStorageHelper>() {
-
-		@Override
-		public DataStorageHelper createFromParcel(Parcel source) {
-			return new DataStorageHelper(source);
-		}
-
-		@Override
-		public DataStorageHelper[] newArray(int size) {
-			return new DataStorageHelper[size];
-		}
-	};
 }

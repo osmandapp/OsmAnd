@@ -60,8 +60,6 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 	
 	private final static String CHANGE_DIRECTORY_BUTTON = "change_directory";
 	private final static String OSMAND_USAGE = "osmand_usage";
-	private final static String CALCULATE_TILES_BTN_PRESSED = "calculate_tiles_btn_pressed";
-	private final static String ITEMS_HOLDER = "items_holder";
 
 	private ArrayList<DataStorageMenuItem> menuItems;
 	private ArrayList<DataStorageMemoryItem> memoryItems;
@@ -84,10 +82,6 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 		app = getMyApplication();
 		activity = getMyActivity();
 		settings = app.getSettings();
-		if (savedInstanceState != null) {
-			calculateTilesBtnPressed = savedInstanceState.getBoolean(CALCULATE_TILES_BTN_PRESSED);
-			itemsHolder = savedInstanceState.getParcelable(ITEMS_HOLDER);
-		}
 		if (itemsHolder == null) {
 			refreshDataInfo();
 		}
@@ -197,13 +191,6 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 			}
 		}
 		return false;
-	}
-
-	@Override
-	public void onSaveInstanceState(Bundle outState) {
-		super.onSaveInstanceState(outState);
-		outState.putBoolean(CALCULATE_TILES_BTN_PRESSED, calculateTilesBtnPressed);
-		outState.putParcelable(ITEMS_HOLDER, itemsHolder);
 	}
 
 	@Override
