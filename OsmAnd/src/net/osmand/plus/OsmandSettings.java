@@ -1411,7 +1411,7 @@ public class OsmandSettings {
 
 	public final OsmandPreference<Boolean> SHOW_MAPILLARY = new BooleanPreference("show_mapillary", false).makeProfile();
 	public final OsmandPreference<Boolean> MAPILLARY_FIRST_DIALOG_SHOWN = new BooleanPreference("mapillary_first_dialog_shown", false).makeGlobal();
-	public final OsmandPreference<Boolean> ONLINE_PHOTOS_ROW_COLLAPSED = new BooleanPreference("mapillary_menu_collapsed", false).makeGlobal();
+	public final OsmandPreference<Boolean> ONLINE_PHOTOS_ROW_COLLAPSED = new BooleanPreference("mapillary_menu_collapsed", true).makeGlobal();
 	public final OsmandPreference<Boolean> WEBGL_SUPPORTED = new BooleanPreference("webgl_supported", true).makeGlobal();
 
 	// this value string is synchronized with settings_pref.xml preference name
