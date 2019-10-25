@@ -130,7 +130,7 @@ public class AppInitializer implements IProgress {
 		FAVORITES_INITIALIZED, NATIVE_INITIALIZED,
 		NATIVE_OPEN_GLINITIALIZED,
 		TASK_CHANGED, MAPS_INITIALIZED, POI_TYPES_INITIALIZED, ASSETS_COPIED, INIT_RENDERERS,
-		RESTORE_BACKUPS, INDEX_REGION_BOUNDARIES, SAVE_GPX_TRACKS, LOAD_GPX_TRACKS
+		RESTORE_BACKUPS, INDEX_REGION_BOUNDARIES, SAVE_GPX_TRACKS, LOAD_GPX_TRACKS, ROUTING_CONFIG_INITIALIZED
 	}
 
 	public interface AppInitializeListener {
@@ -588,6 +588,7 @@ public class AppInitializer implements IProgress {
 			protected void onPostExecute(Builder builder) {
 				super.onPostExecute(builder);
 				app.updateRoutingConfig(builder);
+				notifyEvent(InitEvents.ROUTING_CONFIG_INITIALIZED);
 			}
 		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
