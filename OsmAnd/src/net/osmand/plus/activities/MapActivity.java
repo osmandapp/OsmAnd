@@ -319,7 +319,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		createProgressBarForRouting();
 		updateStatusBarColor();
 
-		if (!app.getRoutingHelper().isRoutePlanningMode()
+		if ((app.getRoutingHelper().isRouteCalculated() || app.getRoutingHelper().isRouteBeingCalculated())
+				&& !app.getRoutingHelper().isRoutePlanningMode()
 				&& !settings.FOLLOW_THE_ROUTE.get()
 				&& app.getTargetPointsHelper().getAllPoints().size() > 0) {
 			app.getRoutingHelper().clearCurrentRoute(null, new ArrayList<LatLon>());
