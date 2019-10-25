@@ -595,7 +595,8 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 				int titleHeight = AndroidUtils.getTextHeight(title.getPaint());
 				int descriptionHeight = AndroidUtils.getTextHeight(description.getPaint());
 				int minTextHeight = titleHeight + descriptionHeight * 2;
-				if (viewHolder.itemView.getHeight() < minTextHeight) {
+				int defaultItemHeight = viewGroup.getContext().getResources().getDimensionPixelSize(R.dimen.bottom_sheet_selected_item_title_height);
+				if (defaultItemHeight < minTextHeight) {
 					viewHolder.itemView.setMinimumHeight(minTextHeight);
 				}
 			}
