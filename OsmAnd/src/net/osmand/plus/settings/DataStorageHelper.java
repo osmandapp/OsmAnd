@@ -15,6 +15,7 @@ import java.io.File;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
+import static net.osmand.plus.settings.DataStorageFragment.UI_REFRESH_TIME_MS;
 import static net.osmand.plus.settings.DataStorageMemoryItem.Directory;
 import static net.osmand.plus.settings.DataStorageMemoryItem.EXTENSIONS;
 import static net.osmand.plus.settings.DataStorageMemoryItem.PREFIX;
@@ -293,22 +294,7 @@ public class DataStorageHelper implements Parcelable {
 		private String[] directoriesToAvoid;
 		private String[] prefixesToAvoid;
 		private String taskKey;
-		private boolean refreshing = false;
-
-		private Runnable refreshingTimer = new Runnable() {
-			
-			@Override
-			public void run() {
-				try {
-					Thread.sleep(DataStorageFragment.UI_REFRESH_TIME_MS);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-				refreshing = false;
-				publishProgress();
-			}
-			
-		};
+		private long lastRefreshTime;
 
 		public RefreshMemoryUsedInfo(UpdateMemoryInfoUIAdapter listener, DataStorageMemoryItem otherMemory, File rootDir, String[] directoriesToAvoid, String[] prefixesToAvoid, String taskKey) {
 			this.listener = listener;
@@ -321,6 +307,7 @@ public class DataStorageHelper implements Parcelable {
 
 		@Override
 		protected Void doInBackground(DataStorageMemoryItem... items) {
+			lastRefreshTime = System.currentTimeMillis();
 			if (rootDir.canRead()) {
 				calculateMultiTypes(rootDir, items);
 			}
@@ -464,9 +451,10 @@ public class DataStorageHelper implements Parcelable {
 		}
 		
 		private void refreshUI() {
-			if (!refreshing) {
-				refreshing = true;
-				new Thread(refreshingTimer).start();
+			long currentTime = System.currentTimeMillis();
+			if ((currentTime - lastRefreshTime) > UI_REFRESH_TIME_MS) {
+				lastRefreshTime = currentTime;
+				publishProgress();
 			}
 		}
 	}
