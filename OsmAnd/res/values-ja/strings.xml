@@ -596,7 +596,7 @@ POIの更新は利用できません</string>
     <string name="download_hillshade_maps">陰影起伏図</string>
     <string name="local_indexes_cat_srtm">等高線</string>
     <string name="local_indexes_cat_av">音声/動画データ</string>
-    <string name="stop_routing_confirm">検索したルートを却下してナビゲーションを終了しますか？</string>
+    <string name="stop_routing_confirm">ナビゲーションを停止させますか？</string>
     <string name="clear_dest_confirm">本当に目的地(とその経由地点)を削除しますか？</string>
     <string name="precise_routing_mode_descr">グリッチ無しの正確なルート計算を有効化します。現段階では距離が限定されて尚且つ遅いです。</string>
     <string name="precise_routing_mode">正確なルーティング(アルファ)</string>
