@@ -235,7 +235,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 					GPXFile gpx = data.get(f);
 					GPXTrackAnalysis analysis = gpx.getAnalysis(fout.lastModified());
 					GpxDataItem item = new GpxDataItem(fout, analysis);
-					ctx.getGpxDatabase().add(item);
+					ctx.getGpxDbHelper().add(item);
 				}
 			}
 		}

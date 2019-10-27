@@ -482,7 +482,7 @@ public class AppInitializer implements IProgress {
 		app.notificationHelper = startupInit(new NotificationHelper(app), NotificationHelper.class);
 		app.liveMonitoringHelper = startupInit(new LiveMonitoringHelper(app), LiveMonitoringHelper.class);
 		app.selectedGpxHelper = startupInit(new GpxSelectionHelper(app, app.savingTrackHelper), GpxSelectionHelper.class);
-		app.gpxDatabase = startupInit(new GPXDatabase(app), GPXDatabase.class);
+		app.gpxDbHelper = startupInit(new GpxDbHelper(app), GpxDbHelper.class);
 		app.favorites = startupInit(new FavouritesDbHelper(app), FavouritesDbHelper.class);
 		app.waypointHelper = startupInit(new WaypointHelper(app), WaypointHelper.class);
 		app.aidlApi = startupInit(new OsmandAidlApi(app), OsmandAidlApi.class);
@@ -669,6 +669,7 @@ public class AppInitializer implements IProgress {
 			notifyEvent(InitEvents.NATIVE_INITIALIZED);
 
 			app.favorites.loadFavorites();
+			app.gpxDbHelper.loadGpxItems();
 			notifyEvent(InitEvents.FAVORITES_INITIALIZED);
 			app.poiFilters.reloadAllPoiFilters();
 			app.poiFilters.loadSelectedPoiFilters();

@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.R;
@@ -28,7 +27,6 @@ public class TracksCard extends BaseCard {
 
 	private List<GPXFile> gpxFiles;
 	private boolean showLimited = true;
-	private List<GpxDataItem> dataItems;
 
 	private static class GpxItem {
 		String title;
@@ -45,7 +43,6 @@ public class TracksCard extends BaseCard {
 	public TracksCard(MapActivity mapActivity, List<GPXFile> gpxFiles) {
 		super(mapActivity);
 		this.gpxFiles = gpxFiles;
-		this.dataItems = app.getGpxDatabase().getItems();
 	}
 
 	@Override
@@ -54,12 +51,7 @@ public class TracksCard extends BaseCard {
 	}
 
 	private GpxDataItem getDataItem(GPXInfo info) {
-		for (GpxDataItem item : dataItems) {
-			if (item.getFile().getAbsolutePath().endsWith(info.getFileName())) {
-				return item;
-			}
-		}
-		return null;
+		return app.getGpxDbHelper().getItem(new File(info.getFileName()));
 	}
 
 	@SuppressLint("DefaultLocale")

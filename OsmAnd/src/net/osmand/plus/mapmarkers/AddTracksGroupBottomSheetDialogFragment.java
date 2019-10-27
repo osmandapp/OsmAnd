@@ -3,6 +3,7 @@ package net.osmand.plus.mapmarkers;
 import android.annotation.SuppressLint;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -13,8 +14,9 @@ import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.IndexConstants;
-import net.osmand.plus.GPXDatabase;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
+import net.osmand.plus.GpxDbHelper;
+import net.osmand.plus.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -24,18 +26,47 @@ import net.osmand.plus.mapmarkers.adapters.TracksGroupsAdapter;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class AddTracksGroupBottomSheetDialogFragment extends AddGroupBottomSheetDialogFragment {
+
+	private OsmandApplication app;
+	private GpxDbHelper dbHelper;
 
 	private ProcessGpxTask asyncProcessor;
 	private List<GpxDataItem> gpxList;
 
+	private ProgressBar progressBar;
+	private RecyclerView recyclerView;
+	private TextView lookingForTracksText;
+
+	private GpxDataItemCallback gpxDataItemCallback = new GpxDataItemCallback() {
+		@Override
+		public boolean isCancelled() {
+			ProcessGpxTask processor = asyncProcessor;
+			return processor == null || processor.isCancelled();
+		}
+
+		@Override
+		public void onGpxDataItemReady(GpxDataItem item) {
+			populateList(item);
+			if (dbHelper.isRead()) {
+				onListPopulated();
+			}
+		}
+	};
+
 	@Override
-	public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
+
+		app = requiredMyApplication();
+		dbHelper = app.getGpxDbHelper();
+
+		progressBar = (ProgressBar) mainView.findViewById(R.id.progress_bar);
+		recyclerView = (RecyclerView) mainView.findViewById(R.id.groups_recycler_view);
+		lookingForTracksText = (TextView) mainView.findViewById(R.id.looking_for_tracks_text);
+
 		asyncProcessor = new ProcessGpxTask();
 		asyncProcessor.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
@@ -82,22 +113,32 @@ public class AddTracksGroupBottomSheetDialogFragment extends AddGroupBottomSheet
 		dismiss();
 	}
 
-	@SuppressLint("StaticFieldLeak")
-	public class ProcessGpxTask extends AsyncTask<Void, GpxDataItem, Void> {
-
-		private OsmandApplication app = getMyApplication();
-		private Map<File, GpxDataItem> processedDataFiles = new HashMap<>();
-		private GPXDatabase db = app.getGpxDatabase();
-		private ProgressBar progressBar = (ProgressBar) mainView.findViewById(R.id.progress_bar);
-		private RecyclerView recyclerView = (RecyclerView) mainView.findViewById(R.id.groups_recycler_view);
-		private TextView lookingForTracksText = (TextView) mainView.findViewById(R.id.looking_for_tracks_text);
-
-		ProcessGpxTask() {
-			List<GpxDataItem> dataItems = db.getItems();
-			for (GpxDataItem item : dataItems) {
-				processedDataFiles.put(item.getFile(), item);
+	private void populateList(GpxDataItem item) {
+		if (item != null && item.getFile() != null) {
+			GPXTrackAnalysis analysis = item.getAnalysis();
+			if (analysis != null && analysis.wptPoints > 0) {
+				int index = gpxList.indexOf(item);
+				if (index != -1) {
+					gpxList.set(index, item);
+				} else {
+					gpxList.add(item);
+				}
 			}
 		}
+	}
+
+	private void onListPopulated() {
+		asyncProcessor = null;
+
+		adapter.notifyDataSetChanged();
+		progressBar.setVisibility(View.GONE);
+		lookingForTracksText.setVisibility(View.GONE);
+		recyclerView.setVisibility(View.VISIBLE);
+		setupHeightAndBackground(getView());
+	}
+
+	@SuppressLint("StaticFieldLeak")
+	private class ProcessGpxTask extends AsyncTask<Void, GpxDataItem, Void> {
 
 		@Override
 		protected void onPreExecute() {
@@ -131,25 +172,8 @@ public class AddTracksGroupBottomSheetDialogFragment extends AddGroupBottomSheet
 							gpxFile.getName() : gpxSubfolder + "/" + gpxFile.getName();
 					processGPXFolder(gpxFile, sub);
 				} else if (gpxFile.isFile() && gpxFile.getName().toLowerCase().endsWith(".gpx")) {
-					GpxDataItem item = processedDataFiles.get(gpxFile);
-					GPXTrackAnalysis itemAnalysis = item != null ? item.getAnalysis() : null;
-					if (item == null
-							|| item.getFileLastModifiedTime() != gpxFile.lastModified()
-							|| itemAnalysis == null
-							|| itemAnalysis.wptCategoryNames == null) {
-						GPXFile f = GPXUtilities.loadGPXFile(gpxFile);
-						GPXTrackAnalysis analysis = f.getAnalysis(gpxFile.lastModified());
-						if (item == null) {
-							item = new GpxDataItem(gpxFile, analysis);
-							db.add(item);
-						} else {
-							db.updateAnalysis(item, analysis);
-						}
-					}
-					processedDataFiles.put(gpxFile, item);
-					if (itemAnalysis != null && itemAnalysis.wptPoints > 0) {
-						gpxList.add(item);
-					}
+					GpxDataItem item = dbHelper.getItem(gpxFile, gpxDataItemCallback);
+					publishProgress(item);
 				}
 				if (isCancelled()) {
 					break;
@@ -158,13 +182,18 @@ public class AddTracksGroupBottomSheetDialogFragment extends AddGroupBottomSheet
 		}
 
 		@Override
+		protected void onProgressUpdate(GpxDataItem... items) {
+			GpxDataItem item = items[0];
+			if (item != null) {
+				populateList(item);
+			}
+		}
+
+		@Override
 		protected void onPostExecute(Void aVoid) {
-			asyncProcessor = null;
-			adapter.notifyDataSetChanged();
-			progressBar.setVisibility(View.GONE);
-			lookingForTracksText.setVisibility(View.GONE);
-			recyclerView.setVisibility(View.VISIBLE);
-			setupHeightAndBackground(getView());
+			if (dbHelper.isRead()) {
+				onListPopulated();
+			}
 		}
 	}
 }

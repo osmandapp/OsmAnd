@@ -152,29 +152,27 @@ public class GpxSelectionHelper {
 	}
 
 	public void processSplit() {
-		List<GpxDataItem> items = app.getGpxDatabase().getItems();
+		List<GpxDataItem> items = app.getGpxDbHelper().getSplitItems();
 		for (GpxDataItem dataItem : items) {
-			if (dataItem.getSplitType() != 0) {
-				SelectedGpxFile selectedGpxFile = getSelectedFileByPath(dataItem.getFile().getAbsolutePath());
-				if (selectedGpxFile != null && selectedGpxFile.getGpxFile() != null) {
-					GPXFile gpxFile = selectedGpxFile.getGpxFile();
-					List<GpxDisplayGroup> groups = app.getSelectedGpxHelper().collectDisplayGroups(gpxFile);
-					if (dataItem.getSplitType() == GPXDatabase.GPX_SPLIT_TYPE_NO_SPLIT) {
-						for (GpxDisplayGroup model : groups) {
-							model.noSplit(app);
-						}
-						selectedGpxFile.setDisplayGroups(groups);
-					} else if (dataItem.getSplitType() == GPXDatabase.GPX_SPLIT_TYPE_DISTANCE) {
-						for (GpxDisplayGroup model : groups) {
-							model.splitByDistance(app, dataItem.getSplitInterval());
-						}
-						selectedGpxFile.setDisplayGroups(groups);
-					} else if (dataItem.getSplitType() == GPXDatabase.GPX_SPLIT_TYPE_TIME) {
-						for (GpxDisplayGroup model : groups) {
-							model.splitByTime(app, (int) dataItem.getSplitInterval());
-						}
-						selectedGpxFile.setDisplayGroups(groups);
+			SelectedGpxFile selectedGpxFile = getSelectedFileByPath(dataItem.getFile().getAbsolutePath());
+			if (selectedGpxFile != null && selectedGpxFile.getGpxFile() != null) {
+				GPXFile gpxFile = selectedGpxFile.getGpxFile();
+				List<GpxDisplayGroup> groups = app.getSelectedGpxHelper().collectDisplayGroups(gpxFile);
+				if (dataItem.getSplitType() == GPXDatabase.GPX_SPLIT_TYPE_NO_SPLIT) {
+					for (GpxDisplayGroup model : groups) {
+						model.noSplit(app);
 					}
+					selectedGpxFile.setDisplayGroups(groups);
+				} else if (dataItem.getSplitType() == GPXDatabase.GPX_SPLIT_TYPE_DISTANCE) {
+					for (GpxDisplayGroup model : groups) {
+						model.splitByDistance(app, dataItem.getSplitInterval());
+					}
+					selectedGpxFile.setDisplayGroups(groups);
+				} else if (dataItem.getSplitType() == GPXDatabase.GPX_SPLIT_TYPE_TIME) {
+					for (GpxDisplayGroup model : groups) {
+						model.splitByTime(app, (int) dataItem.getSplitInterval());
+					}
+					selectedGpxFile.setDisplayGroups(groups);
 				}
 			}
 		}
@@ -622,7 +620,7 @@ public class GpxSelectionHelper {
 	}
 
 	public SelectedGpxFile selectGpxFile(GPXFile gpx, boolean show, boolean notShowNavigationDialog, boolean syncGroup, boolean selectedByUser, boolean canAddToMarkers) {
-		GpxDataItem dataItem = app.getGpxDatabase().getItem(new File(gpx.path));
+		GpxDataItem dataItem = app.getGpxDbHelper().getItem(new File(gpx.path));
 		if (canAddToMarkers && show && dataItem != null && dataItem.isShowAsMarkers()) {
 			app.getMapMarkersHelper().addOrEnableGroup(gpx);
 		}

@@ -1210,11 +1210,11 @@ public class OsmandAidlApi {
 		if (!destinationExists) {
 			GpxDataItem gpxDataItem = new GpxDataItem(destination, col);
 			gpxDataItem.setApiImported(true);
-			app.getGpxDatabase().add(gpxDataItem);
+			app.getGpxDbHelper().add(gpxDataItem);
 		} else {
-			GpxDataItem item = app.getGpxDatabase().getItem(destination);
+			GpxDataItem item = app.getGpxDbHelper().getItem(destination);
 			if (item != null) {
-				app.getGpxDatabase().updateColor(item, col);
+				app.getGpxDbHelper().updateColor(item, col);
 			}
 		}
 		final GpxSelectionHelper helper = app.getSelectedGpxHelper();
@@ -1435,7 +1435,7 @@ public class OsmandAidlApi {
 	}
 
 	boolean getImportedGpxV2(List<net.osmand.aidlapi.gpx.AGpxFile> files) {
-		List<GpxDataItem> gpxDataItems = app.getGpxDatabase().getItems();
+		List<GpxDataItem> gpxDataItems = app.getGpxDbHelper().getItems();
 		for (GpxDataItem dataItem : gpxDataItems) {
 			File file = dataItem.getFile();
 			if (file.exists()) {
@@ -1460,7 +1460,7 @@ public class OsmandAidlApi {
 	}
 
 	boolean getImportedGpx(List<AGpxFile> files) {
-		List<GpxDataItem> gpxDataItems = app.getGpxDatabase().getItems();
+		List<GpxDataItem> gpxDataItems = app.getGpxDbHelper().getItems();
 		for (GpxDataItem dataItem : gpxDataItems) {
 			File file = dataItem.getFile();
 			if (file.exists()) {
@@ -1480,7 +1480,7 @@ public class OsmandAidlApi {
 	}
 
 	String getGpxColor(String gpxFileName) {
-		List<GpxDataItem> gpxDataItems = app.getGpxDatabase().getItems();
+		List<GpxDataItem> gpxDataItems = app.getGpxDbHelper().getItems();
 		for (GpxDataItem dataItem : gpxDataItems) {
 			File file = dataItem.getFile();
 			if (file.exists()) {
@@ -1499,10 +1499,10 @@ public class OsmandAidlApi {
 		if (!Algorithms.isEmpty(fileName)) {
 			final File f = app.getAppPath(IndexConstants.GPX_INDEX_DIR + fileName);
 			if (f.exists()) {
-				GpxDataItem item = app.getGpxDatabase().getItem(f);
+				GpxDataItem item = app.getGpxDbHelper().getItem(f);
 				if (item != null && item.isApiImported()) {
 					Algorithms.removeAllFiles(f);
-					app.getGpxDatabase().remove(f);
+					app.getGpxDbHelper().remove(f);
 					return true;
 				}
 			}

@@ -116,7 +116,6 @@ public class OsmandApplication extends MultiDexApplication {
 	FavouritesDbHelper favorites;
 	CommandPlayer player;
 	GpxSelectionHelper selectedGpxHelper;
-	GPXDatabase gpxDatabase;
 	SavingTrackHelper savingTrackHelper;
 	AnalyticsHelper analyticsHelper;
 	NotificationHelper notificationHelper;
@@ -137,6 +136,7 @@ public class OsmandApplication extends MultiDexApplication {
 	MapViewTrackingUtilities mapViewTrackingUtilities;
 	LockHelper lockHelper;
 	SettingsHelper settingsHelper;
+	GpxDbHelper gpxDbHelper;
 
 	private RoutingConfiguration.Builder routingConfig;
 	private Locale preferredLocale = null;
@@ -316,8 +316,8 @@ public class OsmandApplication extends MultiDexApplication {
 		return selectedGpxHelper;
 	}
 
-	public GPXDatabase getGpxDatabase() {
-		return gpxDatabase;
+	public GpxDbHelper getGpxDbHelper() {
+		return gpxDbHelper;
 	}
 
 	public FavouritesDbHelper getFavorites() {

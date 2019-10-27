@@ -337,7 +337,7 @@ public class TrackActivity extends TabActivity {
 
 	private void onGPXFileReady(@Nullable GPXFile gpxFile) {
 		setGpx(gpxFile);
-		setGpxDataItem(file != null ? app.getGpxDatabase().getItem(file) : null);
+		setGpxDataItem(file != null ? app.getGpxDbHelper().getItem(file) : null);
 
 		WindowManager mgr = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
 		if (gpxFile != null && mgr != null) {
