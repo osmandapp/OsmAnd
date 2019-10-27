@@ -200,7 +200,7 @@
     <string name="shared_string_help">Hilfe</string>
     <string name="accessibility_mode">Barrierefreiheit-Modus</string>
     <string name="accessibility_mode_descr">Schaltet die Eingabehilfen-Funktionen für beeinträchtige Benutzer ein.</string>
-    <string name="shared_string_on">An</string>
+    <string name="shared_string_on">Ein</string>
     <string name="shared_string_off">Aus</string>
     <string name="accessibility_default">Wie Android Systemeinstellung</string>
     <string name="backToMenu">Zurück zum Menü</string>
