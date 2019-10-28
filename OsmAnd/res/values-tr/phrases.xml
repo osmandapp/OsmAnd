@@ -1901,4 +1901,16 @@
     <string name="poi_bin_yes">Sepet ile</string>
     <string name="poi_bin_no">Sepet olmadan</string>
     <string name="poi_diaper_table_count">Bebek bezi masası sayısı</string>
+    <string name="poi_internet_access_type_wlan">Wi-Fi</string>
+    <string name="poi_internet_access_type_terminal">Terminal</string>
+    <string name="poi_internet_access_type_wired">Kablolu</string>
+    <string name="poi_internet_access_type_public">İnternet erişim tipi: genel</string>
+    <string name="poi_internet_access_type_service">İnternet erişim tipi: servis</string>
+    <string name="poi_internet_access_type_no">İnternet erişimi yok</string>
+    <string name="poi_maxwidth">Maksimum genişlik</string>
+    <string name="poi_iata">IATA kodu</string>
+    <string name="poi_icao">ICAO kodu</string>
+    <string name="poi_faa">FAA kodu</string>
+    <string name="poi_artwork_type_sculpture">Sanat eseri türü: heykel</string>
+    <string name="poi_internet_access_type_yes">İnternet erişimi var</string>
 </resources>

@@ -3279,4 +3279,21 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="rendering_attr_piste_type_snow_park_name">Parc de neu</string>
     <string name="rendering_attr_piste_type_sleigh_name">Trineu</string>
     <string name="app_mode_utv">Costat a costat</string>
+    <string name="release_3_5">"• S\'ha actualitzat la configuració de l\'aplicació  i dels perfils. Convenient arrangement of settings by type, ability to customize each profile
+\n
+\n • Diàleg nou de baixades de mapa que suggereix un mapa per baixar-lo mentre es navega
+\n
+\n • Correccions al tema nocturn
+\n
+\n • Corregits problemes de ruta a tot el món
+\n
+\n • S\'ha actualitzat el mapa base amb una xarxa de vies més detallat
+\n
+\n • S\'han corregit les àrees inundades de tot el món
+\n
+\n • Rutes d\'esquí: s\'han afegit perfils d\'alçada i de complexitat de la ruta en els detalls de ruta
+\n
+\n • Altres correccions d\'errors
+\n
+\n"</string>
 </resources>
