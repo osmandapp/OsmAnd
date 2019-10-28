@@ -626,8 +626,8 @@
     <string name="shared_string_help">Aide</string>
     <string name="accessibility_mode">Mode accessibilité</string>
     <string name="accessibility_mode_descr">Active les fonctionnalités d\'accessibilité.</string>
-    <string name="shared_string_on">Oui</string>
-    <string name="shared_string_off">Non</string>
+    <string name="shared_string_on">Actif</string>
+    <string name="shared_string_off">Inactif</string>
     <string name="accessibility_default">Selon les paramètres Android</string>
     <string name="backToMenu">Retour au menu</string>
     <string name="zoomOut">Zoom -</string>
@@ -3333,4 +3333,8 @@ représentant la zone : %1$s x %2$s</string>
 \n • Other bug fixes
 \n
 \n</string>
+    <string name="apply_preference_to_all_profiles">Vous pouvez appliquer cette modification à tous les profils ou uniquement aux profils sélectionnés.</string>
+    <string name="shared_preference">Partagé</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_name">Privilégier les routes non pavées</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_description">Privilégier les routes non pavées.</string>
 </resources>
