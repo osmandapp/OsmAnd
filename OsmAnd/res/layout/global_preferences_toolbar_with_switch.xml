@@ -32,8 +32,7 @@
 			<net.osmand.plus.widgets.TextViewEx
 				android:id="@+id/toolbar_title"
 				android:layout_width="wrap_content"
-				android:layout_height="match_parent"
-				android:gravity="center_vertical"
+				android:layout_height="wrap_content"
 				android:paddingLeft="@dimen/content_padding"
 				android:paddingRight="@dimen/content_padding"
 				android:textColor="?attr/app_bar_primary_item_color"

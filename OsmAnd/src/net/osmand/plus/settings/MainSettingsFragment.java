@@ -62,7 +62,7 @@ public class MainSettingsFragment extends BaseSettingsFragment {
 
 	private void setupManageProfilesPref() {
 		Preference manageProfiles = findPreference("manage_profiles");
-		manageProfiles.setIcon(getIcon(R.drawable.ic_action_manage_profiles));
+		manageProfiles.setIcon(getContentIcon(R.drawable.ic_action_manage_profiles));
 		manageProfiles.setFragment(SettingsProfileFragment.class.getName());
 	}
 

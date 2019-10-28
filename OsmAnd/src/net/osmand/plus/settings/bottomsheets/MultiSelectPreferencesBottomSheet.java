@@ -42,35 +42,13 @@ public class MultiSelectPreferencesBottomSheet extends BasePreferenceBottomSheet
 	private boolean prefChanged;
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-
-		multiSelectBooleanPreference = getListPreference();
-		if (savedInstanceState == null) {
-			if (multiSelectBooleanPreference.getEntries() == null || multiSelectBooleanPreference.getPrefsIds() == null) {
-				LOG.error("MultiSelectListPreference requires an entries array and an entryValues array.");
-				return;
-			}
-			enabledPrefs.clear();
-			enabledPrefs.addAll(multiSelectBooleanPreference.getValues());
-			prefChanged = false;
-			entries = multiSelectBooleanPreference.getEntries();
-			prefsIds = multiSelectBooleanPreference.getPrefsIds();
-		} else {
-			enabledPrefs.clear();
-			enabledPrefs.addAll(savedInstanceState.getStringArrayList(ENABLED_PREFERENCES_IDS));
-			prefChanged = savedInstanceState.getBoolean(PREFERENCE_CHANGED, false);
-			entries = savedInstanceState.getCharSequenceArray(PREFERENCES_ENTRIES);
-			prefsIds = savedInstanceState.getStringArray(PREFERENCES_IDS);
-		}
-	}
-
-	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		final OsmandApplication app = getMyApplication();
-		if (app == null || multiSelectBooleanPreference == null || prefsIds == null || entries == null) {
+		multiSelectBooleanPreference = getListPreference();
+		if (app == null || multiSelectBooleanPreference == null) {
 			return;
 		}
+		readSavedState(savedInstanceState);
 
 		String title = multiSelectBooleanPreference.getDialogTitle().toString();
 		items.add(new TitleItem(title));
@@ -149,6 +127,26 @@ public class MultiSelectPreferencesBottomSheet extends BasePreferenceBottomSheet
 
 	private MultiSelectBooleanPreference getListPreference() {
 		return (MultiSelectBooleanPreference) getPreference();
+	}
+
+	private void readSavedState(Bundle savedInstanceState) {
+		if (savedInstanceState == null) {
+			if (multiSelectBooleanPreference.getEntries() == null || multiSelectBooleanPreference.getPrefsIds() == null) {
+				LOG.error("MultiSelectListPreference requires an entries array and an entryValues array.");
+				return;
+			}
+			enabledPrefs.clear();
+			enabledPrefs.addAll(multiSelectBooleanPreference.getValues());
+			prefChanged = false;
+			entries = multiSelectBooleanPreference.getEntries();
+			prefsIds = multiSelectBooleanPreference.getPrefsIds();
+		} else {
+			enabledPrefs.clear();
+			enabledPrefs.addAll(savedInstanceState.getStringArrayList(ENABLED_PREFERENCES_IDS));
+			prefChanged = savedInstanceState.getBoolean(PREFERENCE_CHANGED, false);
+			entries = savedInstanceState.getCharSequenceArray(PREFERENCES_ENTRIES);
+			prefsIds = savedInstanceState.getStringArray(PREFERENCES_IDS);
+		}
 	}
 
 	public static boolean showInstance(@NonNull FragmentManager fragmentManager, String prefId, Fragment target, boolean usedOnMap) {

@@ -28,6 +28,7 @@ public class ProxySettingsFragment extends BaseSettingsFragment {
 
 		setupProxyHostPref();
 		setupProxyPortPref();
+		enableDisablePreferences(settings.ENABLE_PROXY.get());
 	}
 
 	@Override
