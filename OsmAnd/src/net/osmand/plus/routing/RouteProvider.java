@@ -720,7 +720,7 @@ public class RouteProvider {
 		RoutingConfiguration cf = config.build( params.mode.getRoutingProfile(), params.start.hasBearing() ?
 				params.start.getBearing() / 180d * Math.PI : null, 
 				memoryLimit, paramsR);
-		if(settings.ENABLE_TIME_CONDITIONAL_ROUTING.get()) {
+		if(settings.ENABLE_TIME_CONDITIONAL_ROUTING.getModeValue(params.mode)) {
 			cf.routeCalculationTime = System.currentTimeMillis();
 		}
 		return cf;
