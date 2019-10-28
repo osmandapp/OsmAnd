@@ -3720,4 +3720,5 @@
     <string name="poi_craft_cabinet_maker">Ebanista</string>
     <string name="poi_charge">Carga</string>
     <string name="poi_pet_grooming">Coidado de mascotas</string>
+    <string name="poi_atm_yes">Caixeiro automático: si</string>
 </resources>
