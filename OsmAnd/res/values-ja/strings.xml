@@ -3318,7 +3318,7 @@ POIの更新は利用できません</string>
     <string name="shared_string_memory_used_kb_desc">%1$s kB 使用</string>
     <string name="contour_lines_and_hillshade">等高線と陰影起伏図</string>
     <string name="routing_attr_prefer_unpaved_name">未舗装道路を優先</string>
-    <string name="routing_attr_prefer_unpaved_description">未舗装道路を好む場合の設定です。</string>
+    <string name="routing_attr_prefer_unpaved_description">未舗装道路を好んで進みたい場合の設定です。</string>
     <string name="update_all_maps">すべてのマップを更新</string>
     <string name="update_all_maps_q">すべてのマップ(%1$d個)を更新しますか？</string>
     <string name="release_3_5">• アプリケーションとプロファイルの設定を更新。移動手段に即した各設定、各プロファイルのカスタマイズ機能を搭載
@@ -3338,4 +3338,37 @@ POIの更新は利用できません</string>
 \n• その他バグ修正など
 \n
 \n</string>
+    <string name="day">日</string>
+    <string name="days_2_4">日</string>
+    <string name="days_5">日</string>
+    <string name="week">週</string>
+    <string name="weeks_2_4">週</string>
+    <string name="weeks_5">週</string>
+    <string name="month">月</string>
+    <string name="months_2_4">月</string>
+    <string name="months_5">月</string>
+    <string name="year">年</string>
+    <string name="years_2_4">年</string>
+    <string name="months_3">三ヶ月</string>
+    <string name="price_free">無料</string>
+    <string name="screen_alerts_descr">ナビゲーション中のアラート(注意や警告)は、画面の左下に表示されます。</string>
+    <string name="language_and_output">言語と出力</string>
+    <string name="reset_to_default">標準設定に戻す</string>
+    <string name="manage_profiles_descr">プロファイルの作成、インポート、編集</string>
+    <string name="manage_profiles">アプリケーションプロファイルの管理…</string>
+    <string name="osmand_settings_descr">アプリケーション全体に影響します</string>
+    <string name="osmand_settings">OsmAnd設定</string>
+    <string name="copy_from_other_profile">他のプロファイルからコピー</string>
+    <string name="turn_screen_on">画面をオンに</string>
+    <string name="map_during_navigation_info">ナビゲーション中のマップ表示</string>
+    <string name="map_during_navigation">ナビゲーション中のマップ表示</string>
+    <string name="shared_string_other">その他</string>
+    <string name="vehicle_parameters_descr">重量、高さ、速度</string>
+    <string name="vehicle_parameters">車両パラメーター</string>
+    <string name="voice_announces_info">音声案内は、ナビゲーション中にのみ再生されます。</string>
+    <string name="voice_announces_descr">ナビゲーション指示と音声案内</string>
+    <string name="voice_announces">音声案内</string>
+    <string name="screen_alerts">画面アラート</string>
+    <string name="route_parameters_descr">ルートパラメーターの構成</string>
+    <string name="route_parameters">ルートパラメーター</string>
 </resources>
