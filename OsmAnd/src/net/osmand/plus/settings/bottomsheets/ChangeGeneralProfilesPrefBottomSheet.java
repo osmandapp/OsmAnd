@@ -18,22 +18,30 @@ import net.osmand.plus.settings.BaseSettingsFragment;
 
 import org.apache.commons.logging.Log;
 
+import java.io.Serializable;
+
 public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSheet {
 
 	public static final String TAG = ChangeGeneralProfilesPrefBottomSheet.class.getSimpleName();
 
 	private static final Log LOG = PlatformUtil.getLog(ChangeGeneralProfilesPrefBottomSheet.class);
 
-	private Object newValue;
+	private static final String NEW_VALUE_KEY = "new_value_key";
+
+	private Serializable newValue;
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		final OsmandApplication app = getMyApplication();
 		Bundle args = getArguments();
-		if (app == null || args == null || newValue == null || !args.containsKey(PREFERENCE_ID)) {
+		if (app == null || args == null) {
 			return;
 		}
 		final String prefId = args.getString(PREFERENCE_ID);
+		newValue = args.getSerializable(NEW_VALUE_KEY);
+		if (newValue == null || prefId == null) {
+			return;
+		}
 
 		items.add(new TitleItem(getString(R.string.change_default_settings)));
 		items.add(new LongDescriptionItem(getString(R.string.apply_preference_to_all_profiles)));
@@ -90,6 +98,12 @@ public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSh
 		return true;
 	}
 
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putSerializable(NEW_VALUE_KEY, newValue);
+	}
+
 	private void updateTargetSettings() {
 		BaseSettingsFragment target = (BaseSettingsFragment) getTargetFragment();
 		if (target != null) {
@@ -97,16 +111,16 @@ public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSh
 		}
 	}
 
-	public static void showInstance(@NonNull FragmentManager fm, String prefId, Object newValue, Fragment target, boolean usedOnMap) {
+	public static void showInstance(@NonNull FragmentManager fm, String prefId, Serializable newValue, Fragment target, boolean usedOnMap) {
 		try {
 			if (fm.findFragmentByTag(ChangeGeneralProfilesPrefBottomSheet.TAG) == null) {
 				Bundle args = new Bundle();
 				args.putString(PREFERENCE_ID, prefId);
+				args.putSerializable(NEW_VALUE_KEY, newValue);
 
 				ChangeGeneralProfilesPrefBottomSheet fragment = new ChangeGeneralProfilesPrefBottomSheet();
 				fragment.setArguments(args);
 				fragment.setUsedOnMap(usedOnMap);
-				fragment.newValue = newValue;
 				fragment.setTargetFragment(target, 0);
 				fragment.show(fm, ChangeGeneralProfilesPrefBottomSheet.TAG);
 			}

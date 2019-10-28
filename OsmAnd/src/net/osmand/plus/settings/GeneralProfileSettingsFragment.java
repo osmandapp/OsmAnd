@@ -33,6 +33,7 @@ import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -358,8 +359,8 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 		OsmandSettings.OsmandPreference pref = settings.getPreference(prefId);
 		if (pref instanceof CommonPreference && !((CommonPreference) pref).hasDefaultValueForMode(getSelectedAppMode())) {
 			FragmentManager fragmentManager = getFragmentManager();
-			if (fragmentManager != null) {
-				ChangeGeneralProfilesPrefBottomSheet.showInstance(fragmentManager, prefId, newValue, this, false);
+			if (fragmentManager != null && newValue instanceof Serializable) {
+				ChangeGeneralProfilesPrefBottomSheet.showInstance(fragmentManager, prefId, (Serializable) newValue, this, false);
 			}
 			return false;
 		}
