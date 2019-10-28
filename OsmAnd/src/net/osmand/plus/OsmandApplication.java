@@ -451,7 +451,7 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public void initVoiceCommandPlayer(final Activity uiContext, ApplicationMode applicationMode,
 									   boolean warningNoneProvider, Runnable run, boolean showDialog, boolean force) {
-		String voiceProvider = osmandSettings.VOICE_PROVIDER.get();
+		String voiceProvider = osmandSettings.VOICE_PROVIDER.getModeValue(applicationMode);
 		if (voiceProvider == null || OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(voiceProvider)) {
 			if (warningNoneProvider && voiceProvider == null) {
 				final AlertDialog.Builder builder = new AlertDialog.Builder(uiContext);
