@@ -6,7 +6,10 @@ APP_SHORT_COMMANDS := true
 APP_PLATFORM := android-14
 
 NDK_TOOLCHAIN_VERSION := clang
-APP_ABI := x86 armeabi-v7a arm64-v8a
+APP_ABI := x86 armeabi-v7a arm64-v8a x86_64
+ifdef ARM_ONLY
+    APP_ABI := armeabi-v7a arm64-v8a
+endif 
 ifdef ARMV7_ONLY
     APP_ABI := armeabi-v7a
 endif 
@@ -14,7 +17,7 @@ ifdef ARM64_ONLY
     APP_ABI := arm64-v8a
 endif
 ifdef X86_ONLY
-    APP_ABI := x86
+    APP_ABI := x86 x86_64
 endif
 
 # APP_ABI := armeabi-v7a
