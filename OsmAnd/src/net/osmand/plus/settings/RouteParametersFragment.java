@@ -284,7 +284,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 	private Drawable getRoutingPrefIcon(String prefId) {
 		switch (prefId) {
 			case GeneralRouter.ALLOW_PRIVATE:
-				return getIcon(R.drawable.ic_action_private_access);
+				return getContentIcon(R.drawable.ic_action_private_access);
 			case GeneralRouter.USE_SHORTEST_WAY:
 				return getContentIcon(R.drawable.ic_action_fuel);
 			case AVOID_ROUTING_PARAMETER_PREFIX:
@@ -292,7 +292,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 			case DRIVING_STYLE:
 				return getContentIcon(R.drawable.ic_action_bicycle_dark);
 			case "fast_route_mode":
-				return getIcon(R.drawable.ic_action_fastest_route);
+				return getContentIcon(R.drawable.ic_action_fastest_route);
 			case "enable_time_conditional_routing":
 				return getContentIcon(R.drawable.ic_action_road_works_dark);
 			default:
