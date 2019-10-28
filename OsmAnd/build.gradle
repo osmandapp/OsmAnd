@@ -141,10 +141,16 @@ android {
 				abiFilter 'x86'
 			}
 		}
+		x86_64 {
+			dimension "abi"
+			ndk {
+				abiFilter 'x86_64'
+			}
+		}
 		fat {
 			dimension "abi"
 			ndk {
-				abiFilters 'arm64-v8a', 'x86', 'armeabi-v7a'
+				abiFilters 'arm64-v8a', 'x86', 'x86_64', 'armeabi-v7a'
 			}
 		}
 
