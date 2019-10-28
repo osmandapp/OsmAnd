@@ -60,6 +60,8 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.MapTileDownloader.DownloadRequest;
 import net.osmand.map.MapTileDownloader.IMapDownloaderCallback;
+import net.osmand.map.TileSourceManager;
+import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
@@ -151,6 +153,7 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -290,7 +293,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 		dashboardOnMap.createDashboardView();
 		checkAppInitialization();
-		parseLaunchIntentLocation();
+		parseLaunchIntents();
 		mapView.setTrackBallDelegate(new OsmandMapTileView.OnTrackBallListener() {
 			@Override
 			public boolean onTrackBallEvent(MotionEvent e) {
@@ -696,7 +699,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	@Override
 	protected void onRestart() {
 		super.onRestart();
-		parseLaunchIntentLocation();
+		parseLaunchIntents();
 	}
 
 	@Override
@@ -1634,8 +1637,15 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		return mapViewTrackingUtilities;
 	}
 
+	private boolean parseLaunchIntents() {
+		boolean applied = parseLocationIntent();
+		if (!applied) {
+			applied = parseTileSourceIntent();
+		}
+		return applied;
+	}
 
-	protected void parseLaunchIntentLocation() {
+	private boolean parseLocationIntent() {
 		Intent intent = getIntent();
 		if (intent != null && intent.getData() != null) {
 			Uri data = intent.getData();
@@ -1658,8 +1668,38 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 					}
 				}
 				setIntent(null);
+				return true;
 			}
 		}
+		return false;
+	}
+
+	private boolean parseTileSourceIntent() {
+		Intent intent = getIntent();
+		if (intent != null && intent.getData() != null) {
+			Uri data = intent.getData();
+			if (("http".equalsIgnoreCase(data.getScheme()) || "https".equalsIgnoreCase(data.getScheme())) && data.getHost() != null && data.getHost().contains("osmand.net") &&
+					data.getPath() != null && data.getPath().startsWith("/add-tile-source")) {
+				Map<String, String> attrs = new HashMap<>();
+				for (String name : data.getQueryParameterNames()) {
+					attrs.put(name, data.getQueryParameter(name));
+				}
+				if (!attrs.isEmpty()) {
+					try {
+						TileSourceTemplate r = TileSourceManager.createTileSourceTemplate(attrs);
+						if (r != null && settings.installTileSource(r)) {
+							Toast.makeText(this, getString(R.string.edit_tilesource_successfully, r.getName()),
+									Toast.LENGTH_SHORT).show();
+						}
+					} catch (Exception e) {
+						LOG.error("parseAddTileSourceIntent error", e);
+					}
+				}
+				setIntent(null);
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public MapActivityActions getMapActions() {
