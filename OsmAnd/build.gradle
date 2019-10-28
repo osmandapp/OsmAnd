@@ -138,13 +138,13 @@ android {
 		x86 {
 			dimension "abi"
 			ndk {
-				abiFilter 'x86'
+				abiFilter 'x86', 'x86_64'
 			}
 		}
-		x86_64 {
+		armonly {
 			dimension "abi"
 			ndk {
-				abiFilter 'x86_64'
+				abiFilter 'arm64-v8a', 'armeabi-v7a'
 			}
 		}
 		fat {
@@ -393,6 +393,9 @@ task buildOsmAndCore(type: Exec) {
 		}
 		if(tskReqStr.contains("armv7")) {
 			flavour = flavour.length() == 0 ? "ARMV7_ONLY" : ""
+		}
+		if(tskReqStr.contains("armonly")) {
+			flavour = flavour.length() == 0 ? "ARM_ONLY" : ""
 		}
 		if(tskReqStr.contains("x86")) {
 			flavour = flavour.length() == 0 ? "X86_ONLY" : ""
