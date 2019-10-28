@@ -165,6 +165,12 @@ public class AmenityMenuController extends MenuController {
 				return name + " (" + ref + ")";
 			}
 		}
+		if (Algorithms.isEmpty(name) && amenity.getSubType().equalsIgnoreCase("atm")) {
+			String operator = amenity.getAdditionalInfo("operator");
+			if (!Algorithms.isEmpty(operator)) {
+				name = operator;
+			}
+		}
 		return name;
 	}
 
