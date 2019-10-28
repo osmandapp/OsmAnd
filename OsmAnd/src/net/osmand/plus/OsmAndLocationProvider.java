@@ -764,6 +764,9 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		if (locationSimulation.isRouteAnimating()) {
 			return;
 		}
+		if (location != null) {
+			notifyGpsLocationRecovered();
+		}
 		// if continuous notify about lost location
 		if (continuous) {
 			scheduleCheckIfGpsLost(location);
@@ -779,21 +782,15 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	}
 
 	private void setLocation(net.osmand.Location location) {
-		if(location == null){
+		if (location == null) {
 			updateGPSInfo(null);
 		}
 
-		if(location != null) {
+		if (location != null) {
 			// // use because there is a bug on some devices with location.getTime()
 			lastTimeLocationFixed = System.currentTimeMillis();
 			simulatePosition = null;
-			if(gpsSignalLost) {
-				gpsSignalLost = false;
-				final RoutingHelper routingHelper = app.getRoutingHelper();
-				if (routingHelper.isFollowingMode() && routingHelper.getLeftDistance() > 0) {
-					routingHelper.getVoiceRouter().gpsLocationRecover();
-				}
-			}
+			notifyGpsLocationRecovered();
 		}
 		enhanceLocation(location);
 		scheduleCheckIfGpsLost(location);
@@ -821,6 +818,16 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		
 		// Update information
 		updateLocation(this.location);
+	}
+
+	private void notifyGpsLocationRecovered() {
+		if (gpsSignalLost) {
+			gpsSignalLost = false;
+			final RoutingHelper routingHelper = app.getRoutingHelper();
+			if (routingHelper.isFollowingMode() && routingHelper.getLeftDistance() > 0) {
+				routingHelper.getVoiceRouter().gpsLocationRecover();
+			}
+		}
 	}
 
 	private void enhanceLocation(net.osmand.Location location) {
