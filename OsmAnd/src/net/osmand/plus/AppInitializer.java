@@ -457,7 +457,12 @@ public class AppInitializer implements IProgress {
 	public void onCreateApplication() {
 		// always update application mode to default
 		OsmandSettings osmandSettings = app.getSettings();
-		if (!osmandSettings.FOLLOW_THE_ROUTE.get()) {
+		if (osmandSettings.FOLLOW_THE_ROUTE.get()) {
+			ApplicationMode savedMode = osmandSettings.readApplicationMode();
+			if (!osmandSettings.APPLICATION_MODE.get().getStringKey().equals(savedMode.getStringKey())) {
+				osmandSettings.APPLICATION_MODE.set(savedMode);
+			}
+		} else {
 			osmandSettings.APPLICATION_MODE.set(osmandSettings.DEFAULT_APPLICATION_MODE.get());
 		}
 		startTime = System.currentTimeMillis();
