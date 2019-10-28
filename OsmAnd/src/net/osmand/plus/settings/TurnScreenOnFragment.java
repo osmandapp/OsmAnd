@@ -24,6 +24,7 @@ public class TurnScreenOnFragment extends BaseSettingsFragment {
 
 		setupTurnScreenOnTimePref();
 		setupTurnScreenOnSensorPref();
+		enableDisablePreferences(settings.TURN_SCREEN_ON_ENABLED.get());
 	}
 
 	@Override

@@ -38,6 +38,7 @@ public class ScreenAlertsFragment extends BaseSettingsFragment {
 		showTunnels.setIcon(getIcon(R.drawable.list_warnings_tunnel));
 
 		setupScreenAlertsImage();
+		enableDisablePreferences(settings.SHOW_ROUTING_ALARMS.get());
 	}
 
 	@Override
