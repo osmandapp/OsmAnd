@@ -596,7 +596,7 @@ POIの更新は利用できません</string>
     <string name="download_hillshade_maps">陰影起伏図</string>
     <string name="local_indexes_cat_srtm">等高線</string>
     <string name="local_indexes_cat_av">音声/動画データ</string>
-    <string name="stop_routing_confirm">検索したルートを却下してナビゲーションを終了しますか？</string>
+    <string name="stop_routing_confirm">ナビゲーションを停止させますか？</string>
     <string name="clear_dest_confirm">本当に目的地(とその経由地点)を削除しますか？</string>
     <string name="precise_routing_mode_descr">グリッチ無しの正確なルート計算を有効化します。現段階では距離が限定されて尚且つ遅いです。</string>
     <string name="precise_routing_mode">正確なルーティング(アルファ)</string>
@@ -3236,4 +3236,106 @@ POIの更新は利用できません</string>
     <string name="routing_attr_freeride_policy_name">ゲレンデ外</string>
     <string name="routing_attr_freeride_policy_description">フリーライドやゲレンデ外は非公式のルートです。通常は手入れされていないうえ、職員によってメンテナンスされておらずクローズ時間にもチェックされません。禁止されている場所には決して入らず自己責任で利用してください。</string>
     <string name="routeInfo_roadClass_name">道路種別</string>
+    <string name="configure_profile_info">ここでなされた設定は、選択したプロファイル使用時のみ反映されます。</string>
+    <string name="utm_format_descr">UTM Nato形式に似ていますが、OsmAndはUTMの標準フォーマットを使用しています。</string>
+    <string name="shared_string_example">例</string>
+    <string name="navigate_point_format_utm">UTM標準</string>
+    <string name="navigate_point_format_olc">Open Location Code(OLC)</string>
+    <string name="coordinates_format_info">選択した形式は、アプリ内すべての場面に適用されます。</string>
+    <string name="pref_selected_by_default_for_profiles">標準プロファイル設定: %s</string>
+    <string name="change_default_settings">デフォルト設定の変更</string>
+    <string name="discard_changes">変更を取消</string>
+    <string name="apply_to_current_profile">この選択を%1$sプロファイルに適用</string>
+    <string name="apply_to_all_profiles">すべてのプロファイルに適用</string>
+    <string name="start_up_message_pref">起動メッセージ</string>
+    <string name="analytics_pref_title">解析</string>
+    <string name="turn_screen_on_info">ナビゲーション中ではロック画面上でも地図を表示します。</string>
+    <string name="route_parameters_info">これらの設定は選択したプロファイル\"%1$s\"にのみ適用され、ルート検索時に反映されます。</string>
+    <string name="wake_time">起床時間</string>
+    <string name="units_and_formats">単位と形式</string>
+    <string name="appearance">外観</string>
+    <string name="map_look_descr">マップの見た目に関する設定です</string>
+    <string name="map_look">マップ外観</string>
+    <string name="list_of_installed_plugins">インストール済みプラグインリスト</string>
+    <string name="configure_navigation">ナビゲーション設定</string>
+    <string name="general_settings_profile_descr">アプリテーマ、ユニット、リージョン</string>
+    <string name="configure_profile">プロファイルの構築</string>
+    <string name="switch_profile">プロファイル切替</string>
+    <string name="application_profile_changed">アプリケーションプロファイルが\"%s\"に切り替えられました</string>
+    <string name="logcat_buffer">Logcat用バッファー</string>
+    <string name="plugins_settings">プラグイン設定</string>
+    <string name="shared_string_by_default">標準設定</string>
+    <string name="download_detailed_map">このエリアを表示するには、より詳細な%s ップをダウンロードしてください。</string>
+    <string name="change_data_storage_full_description">OsmAndデータファイルを新しい保存場所に移動しますか？
+\n%1$s &gt; %2$s</string>
+    <string name="data_storage_preference_summary">%1$s • %2$s</string>
+    <string name="data_storage_space_description">空き容量 %1$s GB • 総容量 %2$s GB</string>
+    <string name="enter_path_to_folder">フォルダーのパスを入力</string>
+    <string name="shared_string_select_folder">フォルダーを選択</string>
+    <string name="paste_Osmand_data_folder_path">OsmAndデータのあるフォルダーへのパスを貼りつけ</string>
+    <string name="change_osmand_data_folder_question">OsmAndデータフォルダーを変更しますか？</string>
+    <string name="move_maps_to_new_destination">新しい保存場所に移動する</string>
+    <string name="internal_app_storage_description">ユーザーや他アプリから隠されている内部ストレージ。他のユーザーやOsmAnd以外のアプリからはアクセスできません</string>
+    <string name="change_data_storage_folder">データ保存フォルダーを変更</string>
+    <string name="rendering_attr_piste_type_snow_park_name">雪遊び広場</string>
+    <string name="rendering_attr_piste_type_sleigh_name">牽引式そり乗り場</string>
+    <string name="rendering_attr_piste_type_sled_name">そり専用ゲレンデ</string>
+    <string name="rendering_attr_piste_type_hike_name">ノルディックスキーまたはハイキング用ゲレンデ</string>
+    <string name="rendering_attr_piste_type_connection_name">リフト間接続</string>
+    <string name="rendering_attr_piste_type_skitour_name">スキーツアー用コース</string>
+    <string name="rendering_attr_piste_type_downhill_name">ダウンヒル</string>
+    <string name="rendering_attr_piste_type_nordic_name">ノルディック用</string>
+    <string name="routeInfo_piste_type_name">ゲレンデタイプ</string>
+    <string name="rendering_attr_piste_difficulty_novice_name">初心者向け</string>
+    <string name="rendering_attr_piste_difficulty_easy_name">初級者向け</string>
+    <string name="rendering_attr_piste_difficulty_intermediate_name">中級者向け</string>
+    <string name="rendering_attr_piste_difficulty_advanced_name">上級者向け</string>
+    <string name="rendering_attr_piste_difficulty_expert_name">熟練者向け</string>
+    <string name="rendering_attr_piste_difficulty_freeride_name">フリーライド用</string>
+    <string name="rendering_attr_piste_difficulty_extreme_name">エクストリーム用</string>
+    <string name="rendering_attr_piste_difficulty_undefined_name">定義なし</string>
+    <string name="routeInfo_piste_difficulty_name">ゲレンデ難易度</string>
+    <string name="avoid_in_routing_descr_">特定のルートや特定の道路種別を避けるよう設定ができます</string>
+    <string name="app_mode_utv">横並び(サイドバイサイド)形式</string>
+    <string name="rendering_attr_piste_difficulty_aerialway_name">索道(リフトやロープウェイなど)</string>
+    <string name="rendering_attr_piste_difficulty_connection_name">リフト間接続</string>
+    <string name="shared_string_calculate">計算</string>
+    <string name="shared_string_osmand_usage">OsmAndの使い方</string>
+    <string name="shared_sting_tiles">タイル</string>
+    <string name="shared_string_maps">マップ</string>
+    <string name="shared_string_memory_tb_desc">%1$s TB</string>
+    <string name="shared_string_memory_gb_desc">%1$s GB</string>
+    <string name="shared_string_memory_mb_desc">%1$s MB</string>
+    <string name="shared_string_memory_kb_desc">%1$s kB</string>
+    <string name="track_storage_directory">経路保存フォルダー</string>
+    <string name="track_storage_directory_descrp">記録した経路は保存フォルダー内に月または日付ごとに分けて保存ができます。</string>
+    <string name="store_tracks_in_rec_directory">記録した経路はRECフォルダーに保存</string>
+    <string name="store_tracks_in_daily_directories">記録した経路は日付ごとのフォルダーに保存</string>
+    <string name="store_tracks_in_daily_directories_descrp">記録した経路は日付ごとにサブフォルダー(例: 2018-01-01)へ保存されます。</string>
+    <string name="shared_string_memory_used_tb_desc">%1$s TB使用</string>
+    <string name="shared_string_memory_used_gb_desc">%1$s GB使用</string>
+    <string name="shared_string_memory_used_mb_desc">%1$s MB使用</string>
+    <string name="shared_string_memory_used_kb_desc">%1$s kB 使用</string>
+    <string name="contour_lines_and_hillshade">等高線と陰影起伏図</string>
+    <string name="routing_attr_prefer_unpaved_name">未舗装道路を優先</string>
+    <string name="routing_attr_prefer_unpaved_description">未舗装道路を好む場合の設定です。</string>
+    <string name="update_all_maps">すべてのマップを更新</string>
+    <string name="update_all_maps_q">すべてのマップ(%1$d個)を更新しますか？</string>
+    <string name="release_3_5">• アプリケーションとプロファイルの設定を更新。移動手段に即した各設定、各プロファイルのカスタマイズ機能を搭載
+\n
+\n• ダウンロードすべきマップを提案する新しいダウンロードダイアログの採用
+\n
+\n• 夜間テーマの修正
+\n
+\n• 各国においていくつかのルーティングに関する問題の修正
+\n
+\n• ベースマップをより詳細な道路網のものに更新
+\n
+\n• 各国の浸水地域を修正
+\n
+\n• スキー用ルーティング: ルート詳細に高さに関するプロファイルとルート難易度を追加
+\n
+\n• その他バグ修正など
+\n
+\n</string>
 </resources>

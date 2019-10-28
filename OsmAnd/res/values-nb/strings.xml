@@ -3245,4 +3245,5 @@
     <string name="shared_string_memory_gb_desc">%1$s GB</string>
     <string name="shared_string_memory_mb_desc">%1$s MB</string>
     <string name="shared_string_memory_kb_desc">%1$s KB</string>
+    <string name="lang_oc">Oksitansk</string>
 </resources>

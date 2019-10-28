@@ -3335,5 +3335,40 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="shared_string_memory_tb_desc">%1$s TB</string>
     <string name="shared_string_memory_gb_desc">%1$s GB</string>
     <string name="shared_string_memory_mb_desc">%1$s MB</string>
-    <string name="shared_string_memory_kb_desc">%1$s KB</string>
+    <string name="shared_string_memory_kb_desc">%1$s kB</string>
+    <string name="data_storage_preference_summary">%1$s • %2$s</string>
+    <string name="data_storage_space_description">Wolne %1$s GB • Razem %2$s GB</string>
+    <string name="rendering_attr_piste_type_skitour_name">Wycieczka</string>
+    <string name="shared_sting_tiles">Kafelki</string>
+    <string name="track_storage_directory">Śledź katalog pamięci</string>
+    <string name="track_storage_directory_descrp">Ślady mogą być przechowywane w folderze rec lub w folderach miesięcznych lub dziennych.</string>
+    <string name="store_tracks_in_rec_directory">Przechowuj nagrane ślady w folderze rec</string>
+    <string name="store_tracks_in_daily_directories">Przechowuj nagrane ślady w folderach dziennych</string>
+    <string name="store_tracks_in_daily_directories_descrp">Przechowuj nagrane ślady w podfolderach na dzień nagrania (np. 2018-01-01).</string>
+    <string name="shared_string_memory_used_tb_desc">Wykorzystuje %1$s TB</string>
+    <string name="shared_string_memory_used_gb_desc">Wykorzystuje %1$s GB</string>
+    <string name="shared_string_memory_used_mb_desc">Wykorzystuje %1$s MB</string>
+    <string name="shared_string_memory_used_kb_desc">Wykorzystuje %1$s kB</string>
+    <string name="contour_lines_and_hillshade">Linie konturowe i Hillshade</string>
+    <string name="routing_attr_prefer_unpaved_name">Preferuj drogi nieutwardzone</string>
+    <string name="routing_attr_prefer_unpaved_description">Preferuj drogi nieutwardzone.</string>
+    <string name="update_all_maps">Zaktualizuj wszystkie mapy</string>
+    <string name="update_all_maps_q">Czy na pewno chcesz zaktualizować wszystkie mapy (%1$d\?</string>
+    <string name="release_3_5">• Zaktualizowano ustawienia aplikacji i profilu. Wygodny układ ustawień według rodzaju, możliwość dostosowania każdego profilu
+\n
+\n • Nowe okno dialogowe pobierania mapy, które sugeruje pobranie mapy podczas przeglądania
+\n
+\n • Poprawki motywów nocnych
+\n
+\n • Naprawiono kilka problemów z routingiem na całym świecie
+\n
+\n • Zaktualizowana mapa bazowa z bardziej szczegółową siecią dróg
+\n
+\n • Naprawiono zalane obszary na całym świecie
+\n
+\n • Trasy narciarskie: dodano profil wysokości i złożoność trasy do szczegółów trasy
+\n
+\n • Inne poprawki błędów
+\n
+\n</string>
 </resources>

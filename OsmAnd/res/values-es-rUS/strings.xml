@@ -3322,4 +3322,48 @@ Lon %2$s</string>
     <string name="routing_attr_width_name">Límite de anchura</string>
     <string name="routing_attr_width_description">Especifica el límite de anchura del vehículo permitido en rutas.</string>
     <string name="avoid_in_routing_descr_">Evita ciertas rutas y tipos de caminos</string>
+    <string name="data_storage_preference_summary">%1$s • %2$s</string>
+    <string name="data_storage_space_description">Libre %1$s GB • Total %2$s GB</string>
+    <string name="app_mode_utv">En paralelo</string>
+    <string name="rendering_attr_piste_difficulty_aerialway_name">Vía aérea</string>
+    <string name="rendering_attr_piste_difficulty_connection_name">Conexión</string>
+    <string name="shared_string_calculate">Calcular</string>
+    <string name="shared_string_osmand_usage">Uso de OsmAnd</string>
+    <string name="shared_sting_tiles">Teselas</string>
+    <string name="shared_string_maps">Mapas</string>
+    <string name="shared_string_memory_tb_desc">%1$s TB</string>
+    <string name="shared_string_memory_gb_desc">%1$s GB</string>
+    <string name="shared_string_memory_mb_desc">%1$s MB</string>
+    <string name="shared_string_memory_kb_desc">%1$s kB</string>
+    <string name="track_storage_directory">Directorio de almacenamiento de trazas</string>
+    <string name="track_storage_directory_descrp">Las trazas pueden almacenarse en una carpeta de grabación o en carpetas mensuales o diarias.</string>
+    <string name="store_tracks_in_rec_directory">Almacenar las trazas grabadas en la carpeta de grabación</string>
+    <string name="store_tracks_in_daily_directories">Almacenar las trazas grabadas en carpetas diarias</string>
+    <string name="store_tracks_in_daily_directories_descrp">Almacena las trazas grabadas en subcarpetas por día de grabación (como 2018-01-01).</string>
+    <string name="shared_string_memory_used_tb_desc">Usado %1$s TB</string>
+    <string name="shared_string_memory_used_gb_desc">Usado %1$s GB</string>
+    <string name="shared_string_memory_used_mb_desc">Usado %1$s MB</string>
+    <string name="shared_string_memory_used_kb_desc">Usado %1$s kB</string>
+    <string name="contour_lines_and_hillshade">Curvas de nivel y sombreados</string>
+    <string name="routing_attr_prefer_unpaved_name">Preferir caminos sin pavimentar</string>
+    <string name="routing_attr_prefer_unpaved_description">Prefiere caminos sin pavimentar.</string>
+    <string name="update_all_maps">Actualizar todos los mapas</string>
+    <string name="update_all_maps_q">¿Actualizar todos los mapas (%1$d)\?</string>
+    <string name="release_3_5">• Ajustes de la aplicación y del perfil actualizados. Cómoda distribución de los ajustes por tipo y posibilidad de personalizar cada perfil
+\n
+\n • Nuevo cuadro de diálogo de descarga de mapas que sugiere un mapa para descargar mientras se navega
+\n
+\n • Arreglos en el tema nocturno
+\n
+\n • Se corrigieron algunos problemas de enrutamiento en todo el mundo
+\n
+\n • Se ha actualizado el mapa base con más detalles en la red de caminos.
+\n
+\n • Se corrigieron las zonas inundadas en todo el mundo
+\n
+\n • Enrutamiento de esquí: perfil de altura y complejidad de la ruta añadidos a los detalles de la ruta
+\n
+\n • Otras correcciones de errores
+\n
+\n</string>
 </resources>

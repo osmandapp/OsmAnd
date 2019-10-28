@@ -2437,8 +2437,8 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="mapillary_menu_title_username">Uzantnomo</string>
     <string name="mapillary_menu_filter_description">Filtri bildojn laŭ alŝutinto, laŭ dato aŭ laŭ tipo; aktivaj nur je pligrandigo.</string>
     <string name="shared_string_reset">Reagordi</string>
-    <string name="store_tracks_in_monthly_directories">Konservi registritajn spurojn en monataj dosierujoj</string>
-    <string name="store_tracks_in_monthly_directories_descrp">Konservi registritajn spurojn en dosierujoj por registrita monato (kiel 2018-01).</string>
+    <string name="store_tracks_in_monthly_directories">Konservi spurojn en monataj dosierujoj</string>
+    <string name="store_tracks_in_monthly_directories_descrp">Konservi registritajn spurojn en subdosierujoj laŭ monato (ekz. 2018-01).</string>
     <string name="average">Mezumo</string>
     <string name="of">%1$d el %2$d</string>
     <string name="ascent_descent">Supreniroj/malsupreniroj</string>
@@ -3313,4 +3313,37 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="shared_string_memory_gb_desc">%1$s GB</string>
     <string name="shared_string_memory_mb_desc">%1$s MB</string>
     <string name="shared_string_memory_kb_desc">%1$s kB</string>
+    <string name="data_storage_preference_summary">%1$s • %2$s</string>
+    <string name="data_storage_space_description">Libera: %1$s GB • Tute: %2$s GB</string>
+    <string name="track_storage_directory">Dosierujo por konservi spurojn</string>
+    <string name="track_storage_directory_descrp">Povas konservi registritajn spurojn en unu dosierujo aŭ en dosierujoj laŭ monato aŭ tago.</string>
+    <string name="store_tracks_in_rec_directory">Konservi spurojn en unu dosierujo</string>
+    <string name="store_tracks_in_daily_directories">Konservi spurojn en tagaj dosierujoj</string>
+    <string name="store_tracks_in_daily_directories_descrp">Konservi registritajn spurojn en subdosierujoj laǔ tago (ekz. 2018-01-01).</string>
+    <string name="shared_string_memory_used_tb_desc">Uzita: %1$s TB</string>
+    <string name="shared_string_memory_used_gb_desc">Uzita %1$s GB</string>
+    <string name="shared_string_memory_used_mb_desc">Uzita %1$s MB</string>
+    <string name="shared_string_memory_used_kb_desc">Uzita %1$s kB</string>
+    <string name="contour_lines_and_hillshade">Nivelkurboj kaj nivelombrumo</string>
+    <string name="routing_attr_prefer_unpaved_name">Preferi tervojojn</string>
+    <string name="routing_attr_prefer_unpaved_description">Preferi vojojn sen firma pavimo.</string>
+    <string name="update_all_maps">Ĝisdatigi ĉiujn mapojn</string>
+    <string name="update_all_maps_q">Ĉu vi certe volas ĝisdatigi ĉiujn (%1$d) mapojn\?</string>
+    <string name="release_3_5">"• ĝisdatigitaj agordoj de aplikaĵo kaj de profiloj: oportuna ordigo laŭ speco, eblaĵo alĝustigi ĉiun profilon
+\n
+\n• nova ekrano de map‑elŝuto, propono elŝuti rilatan mapon dum foliumi mapon
+\n
+\n•  plibonigoj al nokta reĝimo
+\n
+\n•  riparitaj kelkaj problemoj pri difinado de vojo
+\n
+\n•  aktualigita fundamenta mapo de mondo, pli detala reto de vojoj
+\n
+\n•  riparitaj problemoj pri superakvitaj arenoj tra la mondo
+\n
+\n•  skiado: aldonita profilo de altitudo kaj kompliko de skivojo al detaloj pri skivojo
+\n
+\n•  riparoj de aliaj eraroj
+\n
+\n"</string>
 </resources>

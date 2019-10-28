@@ -2188,7 +2188,7 @@
     <string name="poi_surface_snow">Superfìtzie: nie</string>
     <string name="poi_service_bicycle_charging_yes">Càrriga: eja</string>
     <string name="poi_service_bicycle_charging_no">Càrriga: nono</string>
-    <string name="poi_bicycle_repair_station">Istatzione pro s\'acontzu a sa sola de bitzicletas</string>
+    <string name="poi_bicycle_repair_station">Istatzione pro s\'acontzu de bitzicletas;Istatzione pro s\'acontzu a sa sola de bitzicletas</string>
     <string name="poi_emergency_infrastructure">Infrastrutura de emergèntzia</string>
     <string name="poi_archery">Tiru cun s\'arcu</string>
     <string name="poi_ice_hockey">Hockey in s\'astra</string>
@@ -3724,4 +3724,6 @@
     <string name="poi_craft_bakery">Furru de su pane</string>
     <string name="poi_craft_cabinet_maker">Ebanista</string>
     <string name="poi_charge">Tarifa</string>
+    <string name="poi_pet_grooming">Toeletadura pro animales domèsticos</string>
+    <string name="poi_atm_yes">ATM: eja</string>
 </resources>

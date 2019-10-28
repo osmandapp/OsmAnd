@@ -1076,7 +1076,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="animate_routing_route_not_calculated">Veuillez d\'abord calculer un itinéraire</string>
     <string name="animate_routing_route">Simulation de l\'itinéraire calculé </string>
     <string name="animate_routing_gpx">Simulation suivant une trace GPX</string>
-    <string name="local_osm_changes_delete_all_confirm">Vous allez supprimer %1$d modifications OSM. Êtes-vous certains \?</string>
+    <string name="local_osm_changes_delete_all_confirm">Vous allez supprimer %1$d modifications OSM. Êtes-vous certain \?</string>
     <string name="shared_string_delete_all">Supprimer tout</string>
     <string name="app_mode_hiking">Randonnée</string>
     <string name="app_mode_motorcycle">Moto</string>
@@ -1550,7 +1550,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="local_indexes_cat_wiki">Wikipédia</string>
     <string name="download_wikipedia_maps">Wikipédia</string>
     <string name="shared_string_import2osmand">Importer dans OsmAnd</string>
-    <string name="local_recordings_delete_all_confirm">Vous allez supprimer %1$d notes. Êtes-vous certains \?</string>
+    <string name="local_recordings_delete_all_confirm">Vous allez supprimer %1$d notes. Êtes-vous certain \?</string>
     <string name="gps_network_not_enabled">Le service de localisation est arrêté. Souhaitez-vous l’activer ?</string>
     <string name="disable_recording_once_app_killed_descrp">Met en pause l\'enregistrement de la trace GPX lors de l\'arrêt d\'OsmAnd (via les applications récentes) et supprime l\'icône OsmAnd de la barre de notification Android.</string>
     <string name="disable_recording_once_app_killed">Interdire la journalisation autonome</string>
@@ -3316,4 +3316,21 @@ représentant la zone : %1$s x %2$s</string>
     <string name="store_tracks_in_rec_directory">Enregistrer les traces dans le dossier rec</string>
     <string name="store_tracks_in_daily_directories">Enregistrer les traces dans des dossiers journaliers</string>
     <string name="store_tracks_in_daily_directories_descrp">Enregistrer les traces dans des sous-dossiers journaliers (par exemple 2019-01-01).</string>
+    <string name="release_3_5">• Updated application and profile Settings. Convenient arrangement of settings by type, ability to customize each profile
+\n
+\n • New map download dialog that suggests a map to download while browsing
+\n
+\n • Night theme fixes
+\n
+\n • Fixed few routing issues around the world
+\n
+\n • Updated basemap with more detailed road network
+\n
+\n • Fixed flooded areas around the world
+\n
+\n • Ski routing: added height profile and route complexity to the route details
+\n
+\n • Other bug fixes
+\n
+\n</string>
 </resources>

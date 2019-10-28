@@ -3345,4 +3345,21 @@
     <string name="routing_attr_prefer_unpaved_description">Preferir estradas não pavimentadas.</string>
     <string name="update_all_maps">Atualizar todos os mapas</string>
     <string name="update_all_maps_q">Tem certeza de que deseja atualizar todos os mapas (%1$d)\?</string>
+    <string name="release_3_5">"- Configurações de aplicativo e perfil atualizados. Arranjo conveniente de configurações por tipo, com capacidade de personalizar cada perfil
+\n
+\n - Nova caixa de diálogo de descarregamento de mapas que sugere um mapa para descarregamento durante a navegação
+\n
+\n - Correções do tema noturno
+\n
+\n -  Poucos problemas de roteamento em todo o mundo corrigidos
+\n
+\n - Basemap atualizado com uma rede rodoviária mais detalhada
+\n
+\n - Áreas inundadas corrigidas em todo o mundo
+\n
+\n - Roteamento de esqui: perfil de altura e complexidade da rota adicionados aos detalhes da rota
+\n
+\n - Outras correções de bugs
+\n
+\n"</string>
 </resources>

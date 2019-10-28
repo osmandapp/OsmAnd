@@ -755,7 +755,7 @@
     <string name="index_item_world_basemap">Светска карта</string>
     <string name="index_item_world_ski">Небеска карта</string>
     <string name="lang_bs">Бошњачки</string>
-    <string name="lang_sr">Српски</string>
+    <string name="lang_sr">Српски (ћирилица)</string>
     <string name="lang_sl">Словеначки</string>
     <string name="keep_and_add_destination_point">Додај као пролазно одредиште</string>
     <string name="route_descr_select_destination">Изаберите одредиште</string>
@@ -1104,7 +1104,7 @@
     <string name="application_dir_description">Изаберите где желите складиштити карте и остале податке.</string>
     <string name="interrupt_music_descr">Потпуно зауставља било какву музику приликом гласовних упита (не само да је утишава).</string>
     <string name="interrupt_music">Заустави музику</string>
-    <string name="voice_stream_music">Звук садржаја/музике</string>
+    <string name="voice_stream_music">Звук мултимедије/навођења</string>
     <string name="no_map_markers_found">Молим, додајте ознаке карата на карти</string>
     <string name="map_markers_other">Остале ознаке</string>
     <string name="add_points_to_map_markers_q">Додати све тачке у ознаке на карти?</string>
@@ -2915,7 +2915,7 @@
     <string name="voice_announcements">Гласовне најаве</string>
     <string name="intermediate_destinations">Успутна одредишта</string>
     <string name="arrive_at_time">"Долазак у %1$s "</string>
-    <string name="routeInfo_roadClass_name">Класа</string>
+    <string name="routeInfo_roadClass_name">Тип пута</string>
     <string name="routeInfo_surface_name">Подлога</string>
     <string name="routeInfo_smoothness_name">Углачаност</string>
     <string name="routeInfo_steepness_name">Нагиб</string>
@@ -2981,7 +2981,7 @@
     <string name="rendering_attr_undefined_name">Недефинисано</string>
     <string name="time_of_day">Доба дана</string>
     <string name="by_transport_type">До %1$s</string>
-    <string name="step_by_step">Корак по корак</string>
+    <string name="step_by_step">Корак-по-корак</string>
     <string name="routeInfo_road_types_name">Типови путева</string>
     <string name="exit_at">Излаз на</string>
     <string name="shared_string_swap">Замени</string>
@@ -3146,4 +3146,230 @@
     <string name="rendering_attr_showLez_description">Прикажи зоне ниске емисије загађења. Не утиче на рутирање.</string>
     <string name="rendering_attr_showLez_name">Прикажи зоне ниске емисије загађења</string>
     <string name="temporary_conditional_routing">Укључи у обзир и привремена ограничења</string>
+    <string name="release_3_3">• Нови екран за \'Упутства\': Приказује дугмиће за одредиште Кућа и Посао, \'претходна стаза\' пречицу, списак активних GPX стаза и маркера, историјат претраге
+\n
+\n • Додатне информације испод \'Детаљи пута\': тип пута, подлога, нагиб, углачаност
+\n
+\n • Навођење јавним превозом са подршком за свакакве типове превоза: метро, аутобус, трамвај, итд.
+\n
+\n • Нова брза радња за приказивање/скривање путања и дневног/ноћног режима
+\n
+\n • Исправљене области приказане као поплављене у Немачкој, Јужној Африци и Квебеку
+\n
+\n • Додатна подршка за увоз KML и KMZ фајлова
+\n
+\n • Исправке рушења приликом отварања некиј станица јавног превоза
+\n
+\n • Уклоњена Facebook и Firebase аналитика из бесплатне верзије (OsmAnd+ је не укључује)
+\n
+\n</string>
+    <string name="rate_dialog_descr">Посветите нам 30 секунди тако што ћете поделити Ваше искуство са нама и оценити наш рад на Google Play продавници.</string>
+    <string name="make_osmand_better_descr">Дозволи OsmAnd апликацији да сакупља и обрађује анонимне податке о коришћењу апликације. Не сакупљамо нити складиштимо податке о Вашој локацији, или о било којој локацији коју гледате на карти.
+\n
+\nМожете променити Ваш избор у сваком тренутку са Поставке &gt; Приватност и Безбедност.</string>
+    <string name="osmand_routing_promo">Можете додати Вашу сопствену измењену верзију фајла routing.xml у ..osmand/routing</string>
+    <string name="show_compass_ruler">Прикажи лењир компас</string>
+    <string name="hide_compass_ruler">Сакриј лењир компас</string>
+    <string name="select_base_profile_dialog_message">Базирајте Ваш произвољни профил на једном од подразумеваних профила, овим се одређују основне поставке као што су подразуемвана видљивост справица или јединице брзине и даљине. Ово су подразумевани апликативни профили, заједно са примерима произвољних профила којима се може проширити:</string>
+    <string name="quick_action_need_to_add_item_to_list">Морате додати бар једну ставку на поставкама у Брзим радњама</string>
+    <string name="routing_attr_piste_type_downhill_name">Алпско/спуст скијање</string>
+    <string name="routing_attr_piste_type_downhill_description">Падине алпског скијања или спуста и приступ ски лифтовима.</string>
+    <string name="routing_attr_piste_type_nordic_name">Крос-кантри/нордијско скијање</string>
+    <string name="routing_attr_piste_type_nordic_description">Путеви за нордијско или крос-кантри скијање.</string>
+    <string name="routing_attr_piste_type_skitour_name">Ски туре</string>
+    <string name="routing_attr_piste_type_skitour_description">Путање ски тура.</string>
+    <string name="routing_attr_piste_type_sled_name">Санке</string>
+    <string name="routing_attr_piste_type_sled_description">Падине за санкање.</string>
+    <string name="routing_attr_allow_intermediate_name">Дозволи успутне путеве</string>
+    <string name="routing_attr_allow_intermediate_description">Тежи путеви са стрмијим деловима. Генерално гледано, неке препреке које треба избегавати.</string>
+    <string name="routing_attr_allow_advanced_name">Дозволи напредне путеве</string>
+    <string name="routing_attr_allow_advanced_description">Тежи путеви, са опасним препрекама и стрмим деловима.</string>
+    <string name="routing_attr_allow_expert_name">Дозволи експертске путеве</string>
+    <string name="routing_attr_allow_expert_description">Ужасно тешки путеви, са опасним препрекама и околином.</string>
+    <string name="routing_attr_allow_skating_only_name">Дозволи путеве само за клизање</string>
+    <string name="routing_attr_allow_skating_only_description">Путеви спремљени за слободни стил или само клизање без класичних путања.</string>
+    <string name="routing_attr_allow_classic_only_name">Дозволи само класичне путеве</string>
+    <string name="routing_attr_allow_classic_only_description">Стазе припремљене за класични стил без путева за клизање. Ово укључује и стате припремљене малим возилима за снег и путањама које су скијаши направили.</string>
+    <string name="routing_attr_difficulty_preference_description">Преферирај стазе ове тежине, али остави могуће навођење преко тежих или лакших стаза ако је краће.</string>
+    <string name="release_3_4">• Апликативни профили: креирање произвољних профила за сопствене потребе, са произвољном иконицом и бојом
+\n
+\n • Постави произвољне мин/макс брзине на подразумеване профиле
+\n
+\n • Додата справица за тренутне координате
+\n
+\n • Додата опција да се приказује компас и лењир за пречник на карти
+\n
+\n • Поправљено позадинско логовање путања
+\n
+\n • Унапређено позадинско преузимање карата
+\n
+\n • Враћена опција \'Укључивање екрана\'
+\n
+\n • Поправљен избор језика на Википедији
+\n
+\n • Исправљено понашање дугмета за компас приликом навођења
+\n
+\n • Остале исправке грешака
+\n
+\n</string>
+    <string name="rendering_attr_highway_class_track_grade1_name">Квалитет 1</string>
+    <string name="rendering_attr_highway_class_track_grade2_name">Квалитет 2</string>
+    <string name="rendering_attr_highway_class_track_grade3_name">Квалитет 3</string>
+    <string name="rendering_attr_highway_class_track_grade4_name">Квалитет 4</string>
+    <string name="rendering_attr_highway_class_track_grade5_name">Квалитет 5</string>
+    <string name="external_input_device_descr">Одаберите уређај као што је тастатура или WunderLINQ за контролу споља.</string>
+    <string name="shared_string_open_track">Отвори путању</string>
+    <string name="shared_string_track_is_saved">Путања %s сачувана</string>
+    <string name="gpx_join_gaps">Спој размаке</string>
+    <string name="shared_string_default">Подразумевано</string>
+    <string name="new_route_calculated_dist_dbg">Пут: удаљеност %s, време пута %s 
+\nРачуница: %.1f сек %d пута, %d сличица)</string>
+    <string name="lang_oc">Окситански</string>
+    <string name="app_mode_wagon">Вагон</string>
+    <string name="app_mode_pickup_truck">Камион доставе</string>
+    <string name="day">Дан</string>
+    <string name="days_2_4">Дана</string>
+    <string name="days_5">Дана</string>
+    <string name="week">Недеља</string>
+    <string name="weeks_2_4">Недеље</string>
+    <string name="weeks_5">Недеља</string>
+    <string name="month">Месец</string>
+    <string name="months_2_4">Месеца</string>
+    <string name="months_5">Месеци</string>
+    <string name="year">Година</string>
+    <string name="years_2_4">Године</string>
+    <string name="years_5">Година</string>
+    <string name="months_3">Три месеца</string>
+    <string name="price_free">Бесплатно</string>
+    <string name="get_discount_title">Набавите %1$d %2$s за %3$s ниже.</string>
+    <string name="get_free_trial_title">Започните %1$d %2$s бесплатну пробу.</string>
+    <string name="get_discount_first_part">%1$s првих %2$s</string>
+    <string name="get_discount_first_few_part">%1$s првих %2$s</string>
+    <string name="get_discount_second_part">онда %1$s</string>
+    <string name="cancel_subscription">Поништи претплату</string>
+    <string name="price_and_discount">%1$s • Уштеди %2$s</string>
+    <string name="configure_profile_info">Све поставке испод дотичу само одабрани профил.</string>
+    <string name="utm_format_descr">OsmAnd користи UTM Standard format који је сличан, али није истоветан као UTM Nato format.</string>
+    <string name="shared_string_example">Пример</string>
+    <string name="navigate_point_format_utm">UTM Standard</string>
+    <string name="navigate_point_format_olc">Отворени код локације (OLC)</string>
+    <string name="coordinates_format_info">Означени формат ће бити примењен на сва места у апликацији.</string>
+    <string name="pref_selected_by_default_for_profiles">Ова поставка је подразумевано одабрана за профиле: %s</string>
+    <string name="change_default_settings">Промени подразумеване поставке</string>
+    <string name="discard_changes">Одбаци промене</string>
+    <string name="apply_to_current_profile">Примени на тренутни профил %1$s</string>
+    <string name="apply_to_all_profiles">Примени на све профиле</string>
+    <string name="start_up_message_pref">Порука по отварању</string>
+    <string name="analytics_pref_title">Аналитике</string>
+    <string name="turn_screen_on_info">Прикажи карту за време навођења изнад закључаног екрана.</string>
+    <string name="route_parameters_info">Ове поставке утичу на креирање пута. Биће примењене само на означени профил: %1$s.</string>
+    <string name="wake_time">Време буђења</string>
+    <string name="units_and_formats">Јединице &amp; формати</string>
+    <string name="appearance">Изглед</string>
+    <string name="map_look_descr">Изглед карте</string>
+    <string name="map_look">Изглед карте</string>
+    <string name="list_of_installed_plugins">Списак инсталираних додатака</string>
+    <string name="configure_navigation">Подеси навођење</string>
+    <string name="general_settings_profile_descr">Тема апликације, јединице, регија</string>
+    <string name="configure_profile">Конфигуриши профил</string>
+    <string name="screen_alerts_descr">Упозорења ће за време навођења бити приказивана у доњем левом углу екрана.</string>
+    <string name="switch_profile">Замени профил</string>
+    <string name="language_and_output">Језик и улаз</string>
+    <string name="reset_to_default">Ресетуј на подразумевано</string>
+    <string name="manage_profiles_descr">Направи, увези, измени профиле</string>
+    <string name="manage_profiles">Управљај апликативним профилима…</string>
+    <string name="osmand_settings_descr">Утиче на целу апликацију</string>
+    <string name="osmand_settings">Osmand поставке</string>
+    <string name="copy_from_other_profile">Копирај из другог профила</string>
+    <string name="turn_screen_on">Укључивање екрана</string>
+    <string name="map_during_navigation_info">Карта за време навођења</string>
+    <string name="map_during_navigation">Карта за време навођења</string>
+    <string name="shared_string_other">Остало</string>
+    <string name="vehicle_parameters_descr">Тежина, висина, брзина</string>
+    <string name="vehicle_parameters">Параметри возика</string>
+    <string name="voice_announces_info">Гласовна обавештења се пуштају само за време навођења.</string>
+    <string name="voice_announces_descr">Инструкције и обавештења приликом навођења</string>
+    <string name="voice_announces">Гласовна обавештења</string>
+    <string name="screen_alerts">Упозорења на екрану</string>
+    <string name="route_parameters_descr">Конфигуриши параметре пута</string>
+    <string name="route_parameters">Параметри пута</string>
+    <string name="application_profile_changed">Апликативни профил промењен на „%s“</string>
+    <string name="logcat_buffer">Logcat бафер</string>
+    <string name="plugins_settings">Поставке додатака</string>
+    <string name="shared_string_by_default">Подразумевано</string>
+    <string name="download_detailed_map">Преузми детаљну карту места %s, да видите ову област.</string>
+    <string name="change_data_storage_full_description">Премести OsmAnd фајлове података на ново одредиште\?
+\n%1$s &gt; %2$s</string>
+    <string name="data_storage_preference_summary">%1$s • %2$s</string>
+    <string name="data_storage_space_description">Слободно %1$s GB • Укупно %2$s GB</string>
+    <string name="enter_path_to_folder">Унесите путању до фасцикле</string>
+    <string name="shared_string_select_folder">Одаберите фасциклу</string>
+    <string name="paste_Osmand_data_folder_path">Уметни путању до фасцикле са OsmAnd подацима</string>
+    <string name="change_osmand_data_folder_question">Промени OsmAnd фасциклу са подацима\?</string>
+    <string name="move_maps_to_new_destination">Премести на ново одредиште</string>
+    <string name="internal_app_storage_description">Интерно складиште, скривено од корисника и других апликација, тако да нико осим OsmAnd-а нема приступ Вашим подацима</string>
+    <string name="change_data_storage_folder">Промени фасциклу складишта података</string>
+    <string name="rendering_attr_piste_type_snow_park_name">Зимски парк</string>
+    <string name="rendering_attr_piste_type_sleigh_name">Саонице</string>
+    <string name="rendering_attr_piste_type_sled_name">Санке</string>
+    <string name="rendering_attr_piste_type_hike_name">Пешачење</string>
+    <string name="rendering_attr_piste_type_connection_name">PisteВеза</string>
+    <string name="rendering_attr_piste_type_skitour_name">Скитура</string>
+    <string name="rendering_attr_piste_type_downhill_name">Низбрдо</string>
+    <string name="rendering_attr_piste_type_nordic_name">Нордијска</string>
+    <string name="routeInfo_piste_type_name">Тип стазе</string>
+    <string name="rendering_attr_piste_difficulty_novice_name">Почетничка</string>
+    <string name="rendering_attr_piste_difficulty_easy_name">Лака</string>
+    <string name="rendering_attr_piste_difficulty_intermediate_name">Средња</string>
+    <string name="rendering_attr_piste_difficulty_advanced_name">Напредна</string>
+    <string name="rendering_attr_piste_difficulty_expert_name">Експертска</string>
+    <string name="rendering_attr_piste_difficulty_freeride_name">Слободна вожња</string>
+    <string name="rendering_attr_piste_difficulty_extreme_name">Екстремна</string>
+    <string name="rendering_attr_piste_difficulty_undefined_name">Недефинисано</string>
+    <string name="routeInfo_piste_difficulty_name">Тежина стазе</string>
+    <string name="routing_attr_width_name">Ограничење ширине</string>
+    <string name="routing_attr_width_description">Назначите дозвољену ширину возила на путу.</string>
+    <string name="avoid_in_routing_descr_">Избегавај одређене путеве и типове путева</string>
+    <string name="app_mode_utv">Упоредно</string>
+    <string name="rendering_attr_piste_difficulty_aerialway_name">Ваздушни пут</string>
+    <string name="rendering_attr_piste_difficulty_connection_name">Веза</string>
+    <string name="shared_string_calculate">Израчунај</string>
+    <string name="shared_string_osmand_usage">Коришћење OsmAnd-а</string>
+    <string name="shared_sting_tiles">Сличице</string>
+    <string name="shared_string_maps">Карте</string>
+    <string name="shared_string_memory_tb_desc">%1$s TB</string>
+    <string name="shared_string_memory_gb_desc">%1$s GB</string>
+    <string name="shared_string_memory_mb_desc">%1$s MB</string>
+    <string name="shared_string_memory_kb_desc">%1$s kB</string>
+    <string name="track_storage_directory">Складишни директоријум стаза</string>
+    <string name="track_storage_directory_descrp">Стазе могу бити складиштене у фасциклу за снимање или у месечним или дневним фасциклама.</string>
+    <string name="store_tracks_in_rec_directory">Прикажи снимљене стазе у фасцикли за снимање</string>
+    <string name="store_tracks_in_daily_directories">Ускладишти снимљене стазе у дневним фасциклама</string>
+    <string name="store_tracks_in_daily_directories_descrp">Складишти снимљене стазе у подфасцикле по дану снимања (нпр. 2018-01-01).</string>
+    <string name="shared_string_memory_used_tb_desc">Искоришћено %1$s TB</string>
+    <string name="shared_string_memory_used_gb_desc">Искоришћено %1$s GB</string>
+    <string name="shared_string_memory_used_mb_desc">Искоришћено %1$s MB</string>
+    <string name="shared_string_memory_used_kb_desc">Искоришћено %1$s kB</string>
+    <string name="contour_lines_and_hillshade">Изохипсе и рељеф</string>
+    <string name="routing_attr_prefer_unpaved_name">Предност неасфалтираним путевима</string>
+    <string name="routing_attr_prefer_unpaved_description">Предност неасфалтираним путевима.</string>
+    <string name="update_all_maps">Ажурирај све карте</string>
+    <string name="update_all_maps_q">Да ли сте сигурни да желите да ажурирате све (%1$d) карте\?</string>
+    <string name="release_3_5">• Ажуриране поставке апликација и профила. Згодно ређање поставки по њиховом типу, и могућности да мењају сваки профил
+\n
+\n • Нови дијалог за преузимање карти који препоручује карте за преузимање док се разгледа карта
+\n
+\n • Поправке за ноћну тему
+\n
+\n • Исправљено неколико грешака у навигацији свуда по свету
+\n
+\n • Ажурирана основна карта са детаљнијом мрежом путева
+\n
+\n • Пправљене поплављене области свуда по свету
+\n
+\n • Ски навигација: додати висински профили и комплексност стаза приликом гледања детаља стаза
+\n
+\n • Остале исправке грешака
+\n
+\n</string>
 </resources>

@@ -3348,4 +3348,21 @@ Lon %2$s</string>
     <string name="routing_attr_prefer_unpaved_description">Prefiere caminos sin pavimentar.</string>
     <string name="update_all_maps">Actualizar todos los mapas</string>
     <string name="update_all_maps_q">¿Actualizar todos los mapas (%1$d)\?</string>
+    <string name="release_3_5">• Ajustes de la aplicación y del perfil actualizados. Cómoda distribución de los ajustes por tipo y posibilidad de personalizar cada perfil
+\n
+\n • Nuevo cuadro de diálogo de descarga de mapas que sugiere un mapa para descargar mientras se navega
+\n
+\n • Arreglos en el tema nocturno
+\n
+\n • Se corrigieron algunos problemas de enrutamiento en todo el mundo
+\n
+\n • Se ha actualizado el mapa base con más detalles en la red de caminos.
+\n
+\n • Se corrigieron las zonas inundadas en todo el mundo
+\n
+\n • Enrutamiento de esquí: perfil de altura y complejidad de la ruta añadidos a los detalles de la ruta
+\n
+\n • Otras correcciones de errores
+\n
+\n</string>
 </resources>

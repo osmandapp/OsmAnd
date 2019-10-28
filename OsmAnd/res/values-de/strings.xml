@@ -200,7 +200,7 @@
     <string name="shared_string_help">Hilfe</string>
     <string name="accessibility_mode">Barrierefreiheit-Modus</string>
     <string name="accessibility_mode_descr">Schaltet die Eingabehilfen-Funktionen für beeinträchtige Benutzer ein.</string>
-    <string name="shared_string_on">An</string>
+    <string name="shared_string_on">Ein</string>
     <string name="shared_string_off">Aus</string>
     <string name="accessibility_default">Wie Android Systemeinstellung</string>
     <string name="backToMenu">Zurück zum Menü</string>
@@ -3349,9 +3349,26 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="shared_string_memory_used_gb_desc">%1$s GB verwendet</string>
     <string name="shared_string_memory_used_mb_desc">%1$s MB verwendet</string>
     <string name="shared_string_memory_used_kb_desc">%1$s kB verwendet</string>
-    <string name="contour_lines_and_hillshade">Konturlinien und Hillshade</string>
+    <string name="contour_lines_and_hillshade">Höhenlinien und Schummerung</string>
     <string name="routing_attr_prefer_unpaved_name">Unbefestigte Straßen bevorzugen</string>
     <string name="routing_attr_prefer_unpaved_description">Unbefestigte Straßen bevorzugen.</string>
     <string name="update_all_maps">Alle Karten aktualisieren</string>
     <string name="update_all_maps_q">Sind Sie sicher, dass Sie alle (%1$d) Karten aktualisieren möchten\?</string>
+    <string name="release_3_5">• Verbesserte Anwendungs- und Profileinstellungen. Komfortable Anordnung der Einstellungen nach Typ, Möglichkeit, jedes Profil anzupassen
+\n
+\n • Neuer Karten-Download-Dialog, der während des Stöberns eine Karte zum Download vorschlägt
+\n
+\n • Korrekturen am Nachtmodus
+\n
+\n • Behebung einiger Probleme mit der Routenführung rund um den Globus
+\n
+\n • Verbesserte Basiskarte mit detailierterem Straßennetz
+\n
+\n • Überschwemmungsgebiete auf der Welt korrigiert
+\n
+\n • Ski-Routing: Höhenprofil und Routenschwierigkeitsgrad in den Routendetails ergänzt
+\n
+\n • Weitere Fehlerlösungen
+\n
+\n</string>
 </resources>

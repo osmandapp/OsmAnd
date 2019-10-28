@@ -60,7 +60,7 @@
     <string name="favorite_group_name">Имя группы</string>
     <string name="change_color">Изменить цвет</string>
     <string name="edit_name">Изменить имя</string>
-    <string name="route_is_too_long_v2">Возможно, потребуется очень много времени для локального (оффлайн) расчета маршрута. Пожалуйста, добавьте один или более промежуточных пунктов на маршруте, если расчет не закончен через 10 или более минут.</string>
+    <string name="route_is_too_long_v2">Для больших расстояний: пожалуйста, добавьте промежуточные пункты назначения, если маршрут не найден в течение 10 минут.</string>
     <string name="routing_attr_allow_private_name">Разрешить частный доступ</string>
     <string name="routing_attr_allow_private_description">Разрешить доступ на частную территорию.</string>
     <string name="shared_string_overview">Обзор</string>
@@ -611,7 +611,7 @@
     <string name="version_index_is_not_supported">Версия локальной карты \"\"{0}\"\" не поддерживается</string>
     <string name="osmand_routing_experimental">Автономная навигация OsmAnd является экспериментальной и не работает на расстояния более 20 километров.\n\nВ этом случае для прокладывания маршрута используется online-сервис CloudMade.</string>
     <string name="specified_dir_doesnt_exist">Невозможно найти указанную директорию.</string>
-    <string name="application_dir">Каталог для хранения данных</string>
+    <string name="application_dir">Каталог хранилища данных</string>
     <string name="osmand_net_previously_installed">У вас имеется предыдущая версия OsmAnd. Все локальные данные поддерживаются новой версией. Однако избранные точки нужно выгрузить из предыдущей версии приложения и загрузить в новую.</string>
     <string name="build_installed">Сборка {0} успешно установлена ({1}).</string>
     <string name="downloading_build">Загружается сборка…</string>
@@ -1541,7 +1541,7 @@
     <string name="lang_ar">Арабский</string>
     <string name="lang_fa">Персидский</string>
     <string name="lang_sc">Сардинский</string>
-    <string name="lang_sr">Сербский</string>
+    <string name="lang_sr">Сербский (кириллица)</string>
     <string name="lang_zh_cn">Китайский (упрощенный)</string>
     <string name="lang_zh_tw">Китайский (традиционный)</string>
     <string name="rendering_attr_subwayMode_name">Маршруты метро</string>
@@ -1591,7 +1591,7 @@
     <string name="traffic_warning_stop">Знак остановки</string>
     <string name="traffic_warning_calming">Снизьте скорость</string>
     <string name="traffic_warning_speed_camera">Скоростной радар</string>
-    <string name="traffic_warning">Ограничение скорости</string>
+    <string name="traffic_warning">Дорожные предупреждения</string>
     <string name="speed_limit_exceed_message">Выберите допустимое значение превышения скорости выше которого вы получите голосовое предупреждение.</string>
     <string name="speed_limit_exceed">Допустимое превышение скорости</string>
     <string name="fav_point_emoticons_message">Название избранной точки было изменено на %1$s для возможности сохранения строки со смайликом в файл.</string>
@@ -1682,8 +1682,8 @@
     <string name="remove_the_tag">УДАЛИТЬ ТЕГ</string>
     <string name="edit_group">Редактировать группу</string>
     <string name="plugin_install_needs_network">Вам необходимо Интернет соединение для установки этого плагина.</string>
-    <string name="shared_string_enable">Включить</string>
-    <string name="shared_string_disable">Отключить</string>
+    <string name="shared_string_enable">Вкл.</string>
+    <string name="shared_string_disable">Выкл.</string>
     <string name="get_plugin">Получить</string>
     <string name="plugin_ski_name">Лыжные карты</string>
     <string name="plugin_nautical_name">Морские карты</string>
@@ -1824,11 +1824,11 @@
     <string name="storage_directory_manual">Указать вручную</string>
     <string name="storage_directory">Хранилище карт</string>
     <string name="shared_string_copy">Копировать</string>
-    <string name="application_dir_change_warning3">Скопировать файлы данных Osmand в новое место назначения\?</string>
+    <string name="application_dir_change_warning3">Переместить файлы данных Osmand в новое место назначения\?</string>
     <string name="search_poi_category_hint">Напечатайте для поиска</string>
     <string name="rendering_attr_hideHouseNumbers_name">Номера домов</string>
     <string name="routing_attr_avoid_borders_description">Избегать пересечения национальных границ</string>
-    <string name="routing_attr_height_name">Ограничение высоты</string>
+    <string name="routing_attr_height_name">Ограничение по высоте</string>
     <string name="routing_attr_height_description">Укажите высоту автомобиля для учета при построении маршрута.</string>
     <string name="use_fast_recalculation">Умный перерасчет маршрута</string>
     <string name="use_fast_recalculation_desc">Перерасчет только начальной части маршрута для длительных поездок.</string>
@@ -2922,7 +2922,7 @@
     <string name="on_foot">пешком</string>
     <string name="show_along_the_route">Показывать вдоль маршрута</string>
     <string name="routeInfo_surface_name">Поверхность</string>
-    <string name="routeInfo_roadClass_name">Класс</string>
+    <string name="routeInfo_roadClass_name">Тип дороги</string>
     <string name="routeInfo_steepness_name">Крутизна</string>
     <string name="add_home">Добавить дом</string>
     <string name="add_work">Добавить работу</string>
@@ -3020,7 +3020,7 @@
     <string name="routing_attr_avoid_sett_name">Избегать булыжники и брусчатку</string>
     <string name="routing_attr_avoid_sett_description">Избегать булыжники и брусчатку</string>
     <string name="shared_string_milliradians">Миллирадианы</string>
-    <string name="angular_measeurement">Угловые единицы измерения</string>
+    <string name="angular_measeurement">Угловые единицы</string>
     <string name="angular_measeurement_descr">Изменить, в чем измеряется азимут.</string>
     <string name="shared_string_degrees">Градусы</string>
     <string name="routing_attr_avoid_tram_name">Избегать трамваев</string>
@@ -3058,10 +3058,11 @@
     <string name="files_present">%1$d файлов (%2$s) присутствуют в предыдущем местоположении \'%3$s\'.</string>
     <string name="move_maps">Переместить карты</string>
     <string name="dont_move_maps">Не перемещать</string>
-    <string name="public_transport_ped_route_title">Маршрут пешком составляет примерно %1$s и он может быть быстрее, чем на общественном транспорте</string>
+    <string name="public_transport_ped_route_title">Маршрут пешком составляет примерно %1$s и может быть быстрее, чем на общественном транспорте</string>
     <string name="shared_string_privacy_policy">политикой конфиденциальности</string>
     <string name="help_us_make_osmand_better">Помогите нам сделать OsmAnd лучше!</string>
     <string name="make_osmand_better_descr">"Разрешите OsmAnd собирать и обрабатывать анонимные данные об использовании приложения. Мы не собираем и не храним данные о вашем местоположении или о любых местах, которые вы просматриваете на карте.  
+\n
 \n 
 \nВы можете изменить свой выбор в любое время в Настройки &gt; Конфиденциальность и безопасность."</string>
     <string name="choose_data_to_share">Выберите тип данных, которыми вы хотите поделиться:</string>
@@ -3069,8 +3070,8 @@
     <string name="visited_screens">Посещаемые экраны</string>
     <string name="colleted_data">Собранные данные</string>
     <string name="collected_data_descr">Список данных, которыми вы хотите поделиться с OsmAnd.</string>
-    <string name="downloaded_maps_collect_descr">Мы собираем эти данные, чтобы понять, какие регионы и страны наиболее популярны.</string>
-    <string name="visited_screens_collect_descr">Мы собираем эти данные, чтобы понять какие функции OsmAnd наиболее популярны.</string>
+    <string name="downloaded_maps_collect_descr">Помогает нам понять, какие карты регионов и стран наиболее популярны.</string>
+    <string name="visited_screens_collect_descr">Помогает нам понять, какие функции OsmAnd наиболее популярны.</string>
     <string name="privacy_and_security_change_descr">Нажимая кнопку \"Разрешить\", вы соглашаетесь с нашей %1$s</string>
     <string name="settings_privacy_and_security">Конфиденциальность и безопасность</string>
     <string name="shared_string_no_thank_you">Нет, спасибо</string>
@@ -3092,7 +3093,7 @@
     <string name="profile_alert_need_profile_name_msg">Имя профиля не должно быть пустым!</string>
     <string name="profile_alert_duplicate_name_msg">Уже есть профиль с таким именем</string>
     <string name="rate_dialog_descr">Пожалуйста, уделите нам 30 секунд, оставьте отзыв и оцените нашу работу в Google Play.</string>
-    <string name="settings_privacy_and_security_desc">Выберите ваши данные, чтобы поделиться с нами</string>
+    <string name="settings_privacy_and_security_desc">Выберите данные, которые будут нам доступны</string>
     <string name="app_mode_skiing">Лыжи</string>
     <string name="base_profile_descr_ski">Лыжи</string>
     <string name="profile_alert_cant_delete_base">Вы не можете удалить базовые профили OsmAnd</string>
@@ -3117,11 +3118,11 @@
     <string name="shared_string_icon">Значок</string>
     <string name="collected_data">Собранные данные</string>
     <string name="press_again_to_change_the_map_orientation">Нажмите еще раз, чтобы изменить ориентацию карты</string>
-    <string name="last_launch_crashed">"Последний запуск OsmAnd завершился с ошибкой. Помогите нам улучшить OsmAnd. Пожалуйста, поделитесь с  нами сообщением об ошибке."</string>
+    <string name="last_launch_crashed">Последний запуск OsmAnd завершился с ошибкой. Пожалуйста, помогите нам улучшить OsmAnd, поделившись сообщением об ошибке.</string>
     <string name="settings_routing_mode_string">Режим: %s</string>
     <string name="settings_derived_routing_mode_string">Режим пользователя, полученный из: %s</string>
     <string name="profile_alert_duplicate_name_title">Повторяющееся имя</string>
-    <string name="routing_profile_broutrer">BRouter (Оффлайн)</string>
+    <string name="routing_profile_broutrer">BRouter (оффлайн)</string>
     <string name="routing_attr_piste_type_downhill_name">Альпийские/горные лыжи</string>
     <string name="routing_attr_piste_type_downhill_description">Склоны для катания на альпийских или горных лыжах и доступ к подъемникам.</string>
     <string name="routing_attr_piste_type_skitour_name">Лыжные туры</string>
@@ -3256,18 +3257,18 @@
     <string name="logcat_buffer">Буфер Logcat</string>
     <string name="plugins_settings">Настройки плагинов</string>
     <string name="language_and_output">Язык и вывод</string>
-    <string name="change_data_storage_full_description">Переместите файлы данных OsmAnd в новое место назначения\?
+    <string name="change_data_storage_full_description">Переместить файлы данных OsmAnd в новое место назначения\? 
 \n%1$s &gt; %2$s</string>
     <string name="shared_string_by_default">По умолчанию</string>
     <string name="data_storage_preference_summary">%1$s • %2$s</string>
     <string name="data_storage_space_description">"Свободно %1$s ГБ • Всего %2$s ГБ"</string>
     <string name="enter_path_to_folder">Введите путь к папке</string>
     <string name="shared_string_select_folder">Выберите папку</string>
-    <string name="paste_Osmand_data_folder_path">Вставить путь к папке с данными OsmAnd</string>
+    <string name="paste_Osmand_data_folder_path">Вставите путь к папке с данными OsmAnd</string>
     <string name="change_osmand_data_folder_question">Изменить папку данных OsmAnd\?</string>
     <string name="move_maps_to_new_destination">Переместить в новое место назначения</string>
     <string name="internal_app_storage_description">Внутреннее хранилище, скрытое от пользователя и других приложений, поэтому никто, кроме OsmAnd не может получить доступ к вашим данным</string>
-    <string name="change_data_storage_folder">Изменение папку хранения данных</string>
+    <string name="change_data_storage_folder">Изменение папки хранилища данных</string>
     <string name="avoid_in_routing_descr_">Избегать определенные маршруты и типы дорог</string>
     <string name="shared_string_memory_used_tb_desc">Использовано %1$sТБ</string>
     <string name="shared_string_memory_used_gb_desc">Использовано %1$s ГБ</string>
@@ -3275,5 +3276,47 @@
     <string name="shared_string_memory_used_kb_desc">Использовано %1$s кБ</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">Предпочитать дороги без покрытия</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">Предпочитать дороги без покрытия</string>
-
+    <string name="shared_string_other">Прочее</string>
+    <string name="download_detailed_map">Загрузить подробную карту %s, чтобы просмотреть эту область.</string>
+    <string name="rendering_attr_piste_type_snow_park_name">Снежный парк</string>
+    <string name="rendering_attr_piste_type_sleigh_name">Сани</string>
+    <string name="routeInfo_piste_difficulty_name">Сложность трассы</string>
+    <string name="routing_attr_width_name">Ограничение по ширине</string>
+    <string name="routing_attr_width_description">Укажите ширину автомобиля для учета при построении маршрута.</string>
+    <string name="app_mode_utv">Мотовездеход</string>
+    <string name="shared_string_calculate">Рассчитать</string>
+    <string name="shared_string_osmand_usage">Использовано OsmAnd</string>
+    <string name="shared_sting_tiles">Тайлы</string>
+    <string name="shared_string_maps">Карты</string>
+    <string name="shared_string_memory_tb_desc">%1$s ТБ</string>
+    <string name="shared_string_memory_gb_desc">%1$s ГБ</string>
+    <string name="shared_string_memory_mb_desc">%1$s МБ</string>
+    <string name="shared_string_memory_kb_desc">%1$s кБ</string>
+    <string name="track_storage_directory">Каталог хранилища треков</string>
+    <string name="track_storage_directory_descrp">Треки могут храниться в папке rec или в ежемесячных или ежедневных папках.</string>
+    <string name="store_tracks_in_rec_directory">Сохранять записанные треки в папку rec</string>
+    <string name="store_tracks_in_daily_directories">Сохранять записанные треки в папках подневно</string>
+    <string name="store_tracks_in_daily_directories_descrp">Сохранять записанные треки в подпапках в день записи (например, 2018-01-01).</string>
+    <string name="update_all_maps">Обновить все карты</string>
+    <string name="release_3_5">• Обновлены настройки приложения и профиля. Удобное расположение настроек по типу, возможность настройки каждого профиля
+\n
+\n • Новый диалог загрузки карты, предлагающий загрузить карту во время просмотра
+\n
+\n • Исправление темной темы
+\n
+\n • Исправлено несколько проблем с маршрутизацией по всему миру
+\n
+\n • Обновленная базовая карта с более подробной дорожной сетью
+\n
+\n • Исправлены затопленные районы по всему миру
+\n
+\n • Горнолыжная трасса: добавлены высотный профиль и сложность маршрута
+\n
+\n • Другие исправления ошибок
+\n
+\n</string>
+    <string name="contour_lines_and_hillshade">Контурные линии и затенение рельефа</string>
+    <string name="routing_attr_prefer_unpaved_name">Предпочитать грунтовые дороги</string>
+    <string name="routing_attr_prefer_unpaved_description">Предпочитать грунтовые дороги.</string>
+    <string name="update_all_maps_q">Вы уверены, что хотите обновить все карты (%1$d)\?</string>
 </resources>
