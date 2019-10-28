@@ -51,7 +51,7 @@ android {
 		versionName "3.5.0"
 		versionName System.getenv("APK_VERSION")? System.getenv("APK_VERSION").toString(): versionName
 		versionName System.getenv("APK_VERSION_SUFFIX")? versionName + System.getenv("APK_VERSION_SUFFIX").toString(): versionName
-		ndk.abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86' ,'x86_64'
+		
 
 	}
 
@@ -140,13 +140,13 @@ android {
 		x86 {
 			dimension "abi"
 			ndk {
-				abiFilter 'x86', 'x86_64'
+				abiFilters 'x86', 'x86_64'
 			}
 		}
 		armonly {
 			dimension "abi"
 			ndk {
-				abiFilter 'arm64-v8a', 'armeabi-v7a'
+				abiFilters 'arm64-v8a', 'armeabi-v7a'
 			}
 		}
 		fat {
