@@ -114,6 +114,7 @@ import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.measurementtool.NewGpxData;
 import net.osmand.plus.profiles.EditProfileFragment;
+import net.osmand.plus.quickaction.QuickActionListFragment;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routepreparationmenu.ChooseRouteFragment;
@@ -682,8 +683,13 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			prevActivityIntent = null;
 			return;
 		}
-		if (getMapView().getLayerByClass(MapQuickActionLayer.class).onBackPressed())
+		if (getMapView().getLayerByClass(MapQuickActionLayer.class).onBackPressed()) {
 			return;
+		}
+		QuickActionListFragment quickActionListFragment = getQuickActionListFragment();
+		if ( quickActionListFragment!=null && quickActionListFragment.isVisible()) {
+			this.getDashboard().setDashboardVisibility(true, DashboardType.CONFIGURE_SCREEN, null);
+		}
 
 		super.onBackPressed();
 	}
@@ -2279,6 +2285,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	public EditProfileFragment getEditProfileFragment() {
 		Fragment fragment = getSupportFragmentManager().findFragmentByTag(EditProfileFragment.TAG);
 		return fragment != null && !fragment.isDetached() && !fragment.isRemoving() ? (EditProfileFragment) fragment : null;
+	}
+
+	public QuickActionListFragment getQuickActionListFragment() {
+		Fragment fragment = getSupportFragmentManager().findFragmentByTag(QuickActionListFragment.TAG);
+		return fragment != null && !fragment.isDetached() && !fragment.isRemoving() ? (QuickActionListFragment) fragment : null;
 	}
 
 	public boolean isTopToolbarActive() {
