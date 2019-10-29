@@ -44,10 +44,11 @@ public class SRTMPlugin extends OsmandPlugin {
 	public static final String CONTOUR_DENSITY_ATTR = "contourDensity";
 
 	private OsmandApplication app;
+	private OsmandSettings settings;
+
 	private boolean paid;
 	private HillshadeLayer hillshadeLayer;
-	private CommonPreference<Boolean> HILLSHADE;
-	
+
 	@Override
 	public String getId() {
 		return paid ? ID : FREE_ID;
@@ -55,7 +56,7 @@ public class SRTMPlugin extends OsmandPlugin {
 
 	public SRTMPlugin(OsmandApplication app) {
 		this.app = app;
-		HILLSHADE = app.getSettings().registerBooleanPreference("hillshade_layer", true);
+		settings = app.getSettings();
 	}
 	
 	@Override
@@ -106,19 +107,34 @@ public class SRTMPlugin extends OsmandPlugin {
 		if (hillshadeLayer != null) {
 			activity.getMapView().removeLayer(hillshadeLayer);
 		}
-		if (HILLSHADE.get()) {
+		if (settings.HILLSHADE.get()) {
 			hillshadeLayer = new HillshadeLayer(activity, this);
 			activity.getMapView().addLayer(hillshadeLayer, 0.6f);
 		}
 	}
 
 	public boolean isHillShadeLayerEnabled() {
-		return HILLSHADE.get();
+		return settings.HILLSHADE.get();
+	}
+
+	public static boolean isContourLinesLayerEnabled(OsmandApplication app) {
+		boolean contourLinesEnabled = false;
+
+		RenderingRuleProperty contourLinesProp = app.getRendererRegistry().getCustomRenderingRuleProperty(CONTOUR_LINES_ATTR);
+		if (contourLinesProp != null) {
+			final OsmandSettings.CommonPreference<String> pref = app.getSettings().getCustomRenderProperty(contourLinesProp.getAttrName());
+			if (!Algorithms.isEmpty(pref.get())) {
+				contourLinesEnabled = !pref.get().equals(CONTOUR_LINES_DISABLED_VALUE);
+			} else {
+				contourLinesEnabled = !contourLinesProp.getDefaultValueDescription().equals(CONTOUR_LINES_DISABLED_VALUE);
+			}
+		}
+		return contourLinesEnabled;
 	}
 
 	@Override
 	public void updateLayers(OsmandMapTileView mapView, MapActivity activity) {
-		if (HILLSHADE.get() && isActive()) {
+		if (settings.HILLSHADE.get() && isActive()) {
 			if (hillshadeLayer == null) {
 				registerLayers(activity);
 			}
@@ -160,9 +176,7 @@ public class SRTMPlugin extends OsmandPlugin {
 						public void run() {
 							RenderingRuleProperty contourLinesProp = app.getRendererRegistry().getCustomRenderingRuleProperty(CONTOUR_LINES_ATTR);
 							if (contourLinesProp != null) {
-								OsmandSettings settings = app.getSettings();
-								final OsmandSettings.CommonPreference<String> pref =
-										settings.getCustomRenderProperty(contourLinesProp.getAttrName());
+								final OsmandSettings.CommonPreference<String> pref = settings.getCustomRenderProperty(contourLinesProp.getAttrName());
 								boolean selected = !pref.get().equals(CONTOUR_LINES_DISABLED_VALUE);
 
 								SRTMPlugin plugin = OsmandPlugin.getPlugin(SRTMPlugin.class);
@@ -187,7 +201,7 @@ public class SRTMPlugin extends OsmandPlugin {
 					toggleHillshade(mapActivity, isChecked, new Runnable() {
 						@Override
 						public void run() {
-							boolean selected = HILLSHADE.get();
+							boolean selected = settings.HILLSHADE.get();
 							SRTMPlugin plugin = OsmandPlugin.getPlugin(SRTMPlugin.class);
 							if (selected && plugin != null && !plugin.isActive() && !plugin.needsInstallation()) {
 								OsmandPlugin.enablePlugin(mapActivity, mapActivity.getMyApplication(), plugin, true);
@@ -210,14 +224,8 @@ public class SRTMPlugin extends OsmandPlugin {
 
 		RenderingRuleProperty contourLinesProp = app.getRendererRegistry().getCustomRenderingRuleProperty(CONTOUR_LINES_ATTR);
 		if (contourLinesProp != null) {
-			final OsmandSettings.CommonPreference<String> pref =
-					app.getSettings().getCustomRenderProperty(contourLinesProp.getAttrName());
-			boolean contourLinesSelected;
-			if (!Algorithms.isEmpty(pref.get())) {
-				contourLinesSelected = !pref.get().equals(CONTOUR_LINES_DISABLED_VALUE);
-			} else {
-				contourLinesSelected = !contourLinesProp.getDefaultValueDescription().equals(CONTOUR_LINES_DISABLED_VALUE);
-			}
+			final OsmandSettings.CommonPreference<String> pref = settings.getCustomRenderProperty(contourLinesProp.getAttrName());
+			boolean contourLinesSelected = isContourLinesLayerEnabled(app);
 			String descr = getPrefDescription(app, contourLinesProp, pref);
 			adapter.addItem(new ContextMenuItem.ItemBuilder()
 					.setId(CONTOUR_LINES)
@@ -230,11 +238,12 @@ public class SRTMPlugin extends OsmandPlugin {
 					.setPosition(12)
 					.setListener(listener).createItem());
 		}
+		boolean hillshadeEnabled = settings.HILLSHADE.get();
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setId(HILLSHADE_LAYER)
 				.setTitleId(R.string.layer_hillshade, mapActivity)
-				.setSelected(HILLSHADE.get())
-				.setColor(HILLSHADE.get() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
+				.setSelected(hillshadeEnabled)
+				.setColor(hillshadeEnabled ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setIcon(R.drawable.ic_action_hillshade_dark)
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
 				.setListener(listener)
@@ -247,9 +256,7 @@ public class SRTMPlugin extends OsmandPlugin {
 								   final Runnable callback) {
 		RenderingRuleProperty contourLinesProp = app.getRendererRegistry().getCustomRenderingRuleProperty(CONTOUR_LINES_ATTR);
 		if (contourLinesProp != null) {
-			OsmandSettings settings = app.getSettings();
-			final OsmandSettings.CommonPreference<String> pref =
-					settings.getCustomRenderProperty(contourLinesProp.getAttrName());
+			final OsmandSettings.CommonPreference<String> pref = settings.getCustomRenderProperty(contourLinesProp.getAttrName());
 			CommonPreference<String> zoomSetting = settings.CONTOUR_LINES_ZOOM;
 			if (!isChecked) {
 				zoomSetting.set(pref.get());
@@ -271,7 +278,7 @@ public class SRTMPlugin extends OsmandPlugin {
 	public void toggleHillshade(final MapActivity activity,
 								   final boolean isChecked,
 								   final Runnable callback) {
-		HILLSHADE.set(isChecked);
+		settings.HILLSHADE.set(isChecked);
 		if (callback != null) {
 			callback.run();
 		}
