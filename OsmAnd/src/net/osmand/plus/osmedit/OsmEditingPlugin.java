@@ -52,6 +52,7 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_M
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MODIFY_OSM_NOTE;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MODIFY_POI;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_OPEN_OSM_NOTE;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.OSM_EDITS;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.OSM_NOTES;
 
 
@@ -140,8 +141,12 @@ public class OsmEditingPlugin extends OsmandPlugin {
 			if (osmBugsLayer == null) {
 				registerLayers(activity);
 			}
-			if (!mapView.getLayers().contains(osmEditsLayer)) {
-				activity.getMapView().addLayer(osmEditsLayer, 3.5f);
+			if (mapView.getLayers().contains(osmEditsLayer) != settings.SHOW_OSM_EDITS.get()) {
+				if (settings.SHOW_OSM_EDITS.get()) {
+					mapView.addLayer(osmEditsLayer, 3.5f);
+				} else {
+					mapView.removeLayer(osmEditsLayer);
+				}
 			}
 			if (mapView.getLayers().contains(osmBugsLayer) != settings.SHOW_OSM_BUGS.get()) {
 				if (settings.SHOW_OSM_BUGS.get()) {
@@ -337,6 +342,28 @@ public class OsmEditingPlugin extends OsmandPlugin {
 					}
 				})
 				.setPosition(16)
+				.createItem());
+
+		adapter.addItem(new ContextMenuItem.ItemBuilder()
+				.setId(OSM_EDITS)
+				.setTitleId(R.string.layer_osm_edits, mapActivity)
+				.setSelected(settings.SHOW_OSM_EDITS.get())
+				.setIcon(R.drawable.ic_action_openstreetmap_logo)
+				.setColor(settings.SHOW_OSM_EDITS.get() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
+				.setListener(new ContextMenuAdapter.OnRowItemClick() {
+					@Override
+					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
+						if (itemId == R.string.layer_osm_edits) {
+							OsmandSettings.OsmandPreference<Boolean> showOsmEdits = settings.SHOW_OSM_EDITS;
+							showOsmEdits.set(isChecked);
+							adapter.getItem(pos).setColorRes(showOsmEdits.get() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+							adapter.notifyDataSetChanged();
+							updateLayers(mapActivity.getMapView(), mapActivity);
+						}
+						return true;
+					}
+				})
+				.setPosition(17)
 				.createItem());
 	}
 

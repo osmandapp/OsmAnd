@@ -40,6 +40,7 @@ public interface OsmAndCustomizationConstants {
 	String RECORDING_LAYER = SHOW_ITEMS_ID_SCHEME + "recording_layer";
 	String MAPILLARY = SHOW_ITEMS_ID_SCHEME + "mapillary";
 	String OSM_NOTES = SHOW_ITEMS_ID_SCHEME + "osm_notes";
+	String OSM_EDITS = SHOW_ITEMS_ID_SCHEME + "osm_edits";
 	String OVERLAY_MAP = SHOW_ITEMS_ID_SCHEME + "overlay_map";
 	String UNDERLAY_MAP = SHOW_ITEMS_ID_SCHEME + "underlay_map";
 	String CONTOUR_LINES = SHOW_ITEMS_ID_SCHEME + "contour_lines";
