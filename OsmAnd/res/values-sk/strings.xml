@@ -3352,4 +3352,8 @@ Zodpovedá oblasti: %1$s x %2$s</string>
 \n • Opravy iných chýb
 \n
 \n</string>
+    <string name="apply_preference_to_all_profiles">Túto zmenu môžete aplikovať na zvolený profil alebo na všetky.</string>
+    <string name="shared_preference">Zdieľané</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_name">Preferovať nespevnené cesty</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_description">Preferovať cesty s nespevneným povrchom.</string>
 </resources>
