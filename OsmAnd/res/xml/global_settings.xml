@@ -46,6 +46,7 @@
 		android:icon="@drawable/ic_action_notification"
 		android:key="do_not_show_startup_messages"
 		android:layout="@layout/preference_switch_with_descr"
+		android:persistent="false"
 		android:summaryOff="@string/shared_string_off"
 		android:summaryOn="@string/shared_string_on"
 		android:title="@string/start_up_message_pref" />
