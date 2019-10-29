@@ -3351,4 +3351,8 @@ Pôr do Sol: %2$s</string>
 \n  • Outras correções de bugs
 \n
 \n"</string>
+    <string name="apply_preference_to_all_profiles">Você pode aplicar essa alteração a todos os perfis ou apenas aos selecionados.</string>
+    <string name="shared_preference">Compartilhado</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_name">Preferir estradas não pavimentadas</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_description">Preferir estradas não pavimentadas.</string>
 </resources>
