@@ -2851,10 +2851,8 @@
     <string name="unlimited_downloads">Sınırsız indirme</string>
     <string name="wikipedia_offline">Çevrimdışı Wikipedia</string>
     <string name="unlock_all_features">Tüm OsmAnd özelliklerinin kilidini açın</string>
-    <string name="monthly_map_updates">Harita güncellemeleri: <b>her ay</b>
-    </string>
-    <string name="daily_map_updates">Harita güncellemeleri: <b>her saat</b>
-    </string>
+    <string name="monthly_map_updates">Harita güncellemeleri: <b>her ay</b></string>
+    <string name="daily_map_updates">Harita güncellemeleri: <b>her saat</b></string>
     <string name="travel_card_update_descr">Yeni Wikivoyage verileri mevcut, keyfini çıkarmak için güncelleyin.</string>
     <string name="travel_card_download_descr">İnternet bağlantısı olmadan dünyadaki yerler hakkındaki makaleleri görüntülemek için Wikivoyage seyahat rehberlerini indirin.</string>
     <string name="update_is_available">Güncelleme mevcut</string>
@@ -2899,9 +2897,7 @@
     <string name="error_notification_desc">Lütfen bu bildirimin ekran görüntüsünü support@osmand.net adresine gönderin</string>
     <string name="coord_input_save_as_track">Yol-izi olarak kaydet</string>
     <string name="coord_input_save_as_track_descr">%1$s nokta eklediniz. Bir dosya adı yazın ve \"Kaydet\"e dokunun.</string>
-    <string name="send_search_query_description">Konumunuzun yanı sıra arama sorgunuzu göndereceğiz: <b>\"%1$s\"</b>.<br/>
-        <br/>Hiçbir kişisel bilgi toplanmamakta, arama verileri yalnızca arama algoritmasını geliştirmek için kullanılmaktadır.<br/>
-    </string>
+    <string name="send_search_query_description">Konumunuzun yanı sıra arama sorgunuzu göndereceğiz: <b>\"%1$s\"</b>.<br/><br/> Hiçbir kişisel bilgi toplanmamakta, arama verileri yalnızca arama algoritmasını geliştirmek için kullanılmaktadır.<br/></string>
     <string name="increase_search_radius_to">Arama yarıçapını %1$s değerine yükseltin</string>
     <string name="ask_for_location_permission">Lütfen devam etmek için OsmAnd\'a konum erişim izni verin.</string>
     <string name="rendering_value_black_name">Siyah</string>
@@ -3315,4 +3311,8 @@
 \n • Diğer hata düzeltmeleri
 \n
 \n</string>
+    <string name="apply_preference_to_all_profiles">Bu değişikliği tüm profillere veya yalnızca seçili olanlara uygulayabilirsiniz.</string>
+    <string name="shared_preference">Paylaşılan</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_name">Asfaltsız yolları tercih edin</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_description">Asfaltsız yolları tercih edin.</string>
 </resources>
