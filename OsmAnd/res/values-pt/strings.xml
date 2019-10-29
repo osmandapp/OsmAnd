@@ -2136,9 +2136,7 @@
 \nDê-nos a sua opinião</string>
     <string name="commiting_way">Cometendo caminho…</string>
     <string name="increase_search_radius_to">Aumentar o raio de pesquisa para %1$s</string>
-    <string name="send_search_query_description">Enviaremos a sua consulta de pesquisa: <b>\"%1$s\"</b> e a sua localização.<br/>
-        <br/> Nenhuma informação pessoal é recolhida. Os dados de pesquisa só servem para melhorar o algoritmo de pesquisa.<br/>
-    </string>
+    <string name="send_search_query_description"> string name=\"lat_lon_pattern\"&gt;Lat: %1$.5f Lon: %2$.5f&lt;/string </string>
     <string name="send_search_query">Enviar a consulta de pesquisa?</string>
     <string name="shared_string_world">Mundo</string>
     <string name="point_deleted">Ponto %1$s eliminado</string>
@@ -3362,4 +3360,8 @@
 \n - Outras correções de bugs
 \n
 \n"</string>
+    <string name="apply_preference_to_all_profiles">Pode aplicar essa modificação a todos os perfis ou apenas aos selecionados.</string>
+    <string name="shared_preference">Partilhado</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_name">Preferir estradas não pavimentadas</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_description">Preferir estradas não pavimentadas.</string>
 </resources>

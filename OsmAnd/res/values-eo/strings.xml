@@ -3346,4 +3346,8 @@ Indikas lokon:  %1$s x %2$s"</string>
 \n•  riparoj de aliaj eraroj
 \n
 \n"</string>
+    <string name="apply_preference_to_all_profiles">Vi povas apliki tiun ĉi ŝanĝon al ĉiuj profiloj aŭ nur al la elektitaj.</string>
+    <string name="shared_preference">Komuna</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_name">Preferi tervojojn</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_description">Preferi vojojn sen firma pavimo.</string>
 </resources>

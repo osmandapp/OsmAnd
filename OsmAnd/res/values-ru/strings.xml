@@ -3319,4 +3319,6 @@
     <string name="routing_attr_prefer_unpaved_name">Предпочитать грунтовые дороги</string>
     <string name="routing_attr_prefer_unpaved_description">Предпочитать грунтовые дороги.</string>
     <string name="update_all_maps_q">Вы уверены, что хотите обновить все карты (%1$d)\?</string>
+    <string name="apply_preference_to_all_profiles">Вы можете применить это изменение ко всем профилям или только к выбранным.</string>
+    <string name="shared_preference">Общий</string>
 </resources>

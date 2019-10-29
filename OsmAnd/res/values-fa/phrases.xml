@@ -121,7 +121,7 @@
     <string name="poi_service_tyres">پنچرگیری</string>
     <string name="poi_vehicle_inspection">معاینه فنی خودرو</string>
     <string name="poi_car_wash">کارواش</string>
-    <string name="poi_fuel">پمپ بنزین; جایگاه سوخت; جایگاه سوخت‌گیری; جایگاه</string>
+    <string name="poi_fuel">پمپ بنزین; جایگاه سوخت; جایگاه سوخت‌گیری</string>
     <string name="poi_electricity_combined_charging">ایستگاه شارژ</string>
     <string name="poi_vehicle_ramp">سطح شیب دار خودرو</string>
     <string name="poi_compressed_air">هوای فشرده</string>
@@ -665,7 +665,7 @@
     <string name="poi_aerialway_bicycle">حمل‌ونقل دوچرخه</string>
     <string name="poi_aerialway_heating">گرمایش</string>
     <string name="poi_pump">پنجرگیری دوچرخه</string>
-    <string name="poi_observatory_designation">رصدخانه</string>
+    <string name="poi_observatory_designation"></string>
     <string name="poi_pharmacy_dispensing">داروخانه</string>
     <string name="poi_star_rating">رتبه‌بندی ستاره‌ای</string>
     <string name="poi_clock_option">تنظیمات ساعت</string>
@@ -754,7 +754,7 @@
     <string name="poi_emergency">اورژانس</string>
     <string name="poi_transportation">حمل و نقل</string>
     <string name="poi_road_obstacle">مانع جاده</string>
-    <string name="poi_filling_station">پمپ بنزین</string>
+    <string name="poi_filling_station">جایگاه سوخت</string>
     <string name="poi_animal_shelter_type">حیوانات مجاز</string>
     <string name="poi_personal_transport">حمل و نقل شخصی</string>
     <string name="poi_public_transport">حمل و نقل عمومی</string>
