@@ -152,14 +152,14 @@ public class ApplicationMode {
 		regWidgetVisibility(WIDGET_TIME, all);
 		regWidgetVisibility(WIDGET_INTERMEDIATE_TIME, all);
 		regWidgetVisibility(WIDGET_SPEED, CAR, BICYCLE, BOAT, SKI, PUBLIC_TRANSPORT, AIRCRAFT);
-		regWidgetVisibility(WIDGET_MAX_SPEED, CAR);
+		regWidgetVisibility(WIDGET_MAX_SPEED, CAR, DEFAULT);
 		regWidgetVisibility(WIDGET_ALTITUDE, PEDESTRIAN, BICYCLE);
 		regWidgetAvailability(WIDGET_INTERMEDIATE_DISTANCE, all);
 		regWidgetAvailability(WIDGET_DISTANCE, all);
 		regWidgetAvailability(WIDGET_TIME, all);
 		regWidgetAvailability(WIDGET_INTERMEDIATE_TIME, all);
 		regWidgetAvailability(WIDGET_SPEED, all);
-		regWidgetAvailability(WIDGET_MAX_SPEED, CAR);
+		regWidgetAvailability(WIDGET_MAX_SPEED, CAR, DEFAULT);
 		regWidgetAvailability(WIDGET_ALTITUDE, all);
 
 
