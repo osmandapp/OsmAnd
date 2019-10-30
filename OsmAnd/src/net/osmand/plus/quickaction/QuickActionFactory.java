@@ -17,8 +17,11 @@ import net.osmand.plus.parkingpoint.ParkingAction;
 import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
 import net.osmand.plus.quickaction.actions.AddOSMBugAction;
 import net.osmand.plus.quickaction.actions.AddPOIAction;
+import net.osmand.plus.quickaction.actions.ContourLinesAction;
+import net.osmand.plus.quickaction.actions.DayNightModeAction;
 import net.osmand.plus.quickaction.actions.FavoriteAction;
 import net.osmand.plus.quickaction.actions.GPXAction;
+import net.osmand.plus.quickaction.actions.HillshadeAction;
 import net.osmand.plus.quickaction.actions.MapOverlayAction;
 import net.osmand.plus.quickaction.actions.MapSourceAction;
 import net.osmand.plus.quickaction.actions.MapStyleAction;
@@ -36,8 +39,8 @@ import net.osmand.plus.quickaction.actions.ShowHideFavoritesAction;
 import net.osmand.plus.quickaction.actions.ShowHideGpxTracksAction;
 import net.osmand.plus.quickaction.actions.ShowHideOSMBugAction;
 import net.osmand.plus.quickaction.actions.ShowHidePoiAction;
-import net.osmand.plus.quickaction.actions.DayNightModeAction;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
+import net.osmand.plus.srtmplugin.SRTMPlugin;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -119,6 +122,11 @@ public class QuickActionFactory {
 			quickActions.add(new MapSourceAction());
 			quickActions.add(new MapOverlayAction());
 			quickActions.add(new MapUnderlayAction());
+		}
+
+		if (OsmandPlugin.getEnabledPlugin(SRTMPlugin.class) != null) {
+			quickActions.add(new ContourLinesAction());
+			quickActions.add(new HillshadeAction());
 		}
 
 		quickActions.add(new DayNightModeAction());
@@ -246,6 +254,12 @@ public class QuickActionFactory {
 			case ShowHideGpxTracksAction.TYPE:
 				return new ShowHideGpxTracksAction();
 
+			case ContourLinesAction.TYPE:
+				return new ContourLinesAction();
+
+			case HillshadeAction.TYPE:
+				return new HillshadeAction();
+
 			default:
 				return new QuickAction();
 		}
@@ -332,6 +346,12 @@ public class QuickActionFactory {
 
 			case ShowHideGpxTracksAction.TYPE:
 				return new ShowHideGpxTracksAction(quickAction);
+
+			case ContourLinesAction.TYPE:
+				return new ContourLinesAction(quickAction);
+
+			case HillshadeAction.TYPE:
+				return new HillshadeAction(quickAction);
 
 			default:
 				return quickAction;
@@ -420,6 +440,12 @@ public class QuickActionFactory {
 			case ShowHideGpxTracksAction.TYPE:
 				return R.drawable.ic_gpx_track;
 
+			case ContourLinesAction.TYPE:
+				return R.drawable.ic_plugin_srtm;
+
+			case HillshadeAction.TYPE:
+				return R.drawable.ic_action_hillshade_dark;
+
 			default:
 				return R.drawable.ic_action_plus;
 		}
@@ -507,6 +533,12 @@ public class QuickActionFactory {
 			case ShowHideGpxTracksAction.TYPE:
 				return R.string.quick_action_show_hide_gpx_tracks;
 
+			case ContourLinesAction.TYPE:
+				return R.string.quick_action_show_hide_contour_lines;
+
+			case HillshadeAction.TYPE:
+				return R.string.quick_action_show_hide_hillshade;
+
 			default:
 				return R.string.quick_action_new_action;
 		}
@@ -534,6 +566,8 @@ public class QuickActionFactory {
 			case NavResumePauseAction.TYPE:
 			case DayNightModeAction.TYPE:
 			case ShowHideGpxTracksAction.TYPE:
+			case ContourLinesAction.TYPE:
+			case HillshadeAction.TYPE:
 				return false;
 
 			default:

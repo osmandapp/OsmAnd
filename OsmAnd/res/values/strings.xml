@@ -12,6 +12,14 @@
 
 -->
     <string name="layer_osm_edits">OSM Edits</string>
+    <string name="quick_action_contour_lines_descr">Tapping this action button shows or hides contour lines on the map</string>
+    <string name="quick_action_contour_lines_show">Show contour lines</string>
+    <string name="quick_action_contour_lines_hide">Hide contour lines</string>
+    <string name="quick_action_show_hide_contour_lines">Show/Hide contour lines</string>
+    <string name="quick_action_hillshade_descr">Tapping this action button shows or hides hillshade on the map</string>
+    <string name="quick_action_hillshade_show">Show hillshade</string>
+    <string name="quick_action_hillshade_hide">Hide hillshade</string>
+    <string name="quick_action_show_hide_hillshade">Show/Hide hillshade</string>
     <string name="apply_preference_to_all_profiles">You can apply this change to all profiles or only to selected.</string>
     <string name="shared_preference">Shared</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">Prefer unpaved roads</string>

@@ -182,6 +182,7 @@ public abstract class OsmandPlugin {
 					LOG.error("Plugin initialization failed " + plugin.getId(), e);
 				}
 			} else if (plugin.isActive()) {
+				plugin.disable(app);
 				plugin.setActive(false);
 			}
 		}
