@@ -1707,6 +1707,7 @@ public class OsmandSettings {
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> SHOW_OSM_BUGS = new BooleanPreference("show_osm_bugs", false).makeGlobal();
 
+	public final OsmandPreference<Boolean> SHOW_OSM_EDITS = new BooleanPreference("show_osm_edits", true).makeProfile().cache();
 
 	public final CommonPreference<Boolean> SHOW_CLOSED_OSM_BUGS = new BooleanPreference("show_closed_osm_bugs", false).makeGlobal();
 	public final CommonPreference<Integer> SHOW_OSM_BUGS_MIN_ZOOM = new IntPreference("show_osm_bugs_min_zoom", 8).makeGlobal();
