@@ -277,7 +277,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 					}
 				}
 			}
-			if (indexItem != null && name != null) {
+			if (indexItem != null && !Algorithms.isEmpty(name)) {
 				showDownloadMapToolbar(indexItem, name);
 			} else {
 				hideDownloadMapToolbar();

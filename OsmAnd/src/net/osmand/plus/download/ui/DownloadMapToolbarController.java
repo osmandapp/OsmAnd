@@ -21,6 +21,7 @@ import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
 import net.osmand.plus.widgets.style.CustomTypefaceSpan;
+import net.osmand.util.Algorithms;
 
 public class DownloadMapToolbarController extends TopToolbarController {
 
@@ -85,15 +86,15 @@ public class DownloadMapToolbarController extends TopToolbarController {
 	}
 
 	private void refreshView() {
-		if (regionName != null) {
+		if (!Algorithms.isEmpty(regionName)) {
 			String descriptionText = String.format(mapActivity.getString(R.string.download_detailed_map), regionName);
 			int startIndex = descriptionText.indexOf(regionName);
 			int endIndex = startIndex + regionName.length();
-
 			SpannableStringBuilder description = new SpannableStringBuilder(descriptionText);
-			Typeface typeface = FontCache.getRobotoMedium(mapActivity);
-			description.setSpan(new CustomTypefaceSpan(typeface), startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-
+			if (startIndex != -1 && endIndex != -1) {
+				Typeface typeface = FontCache.getRobotoMedium(mapActivity);
+				description.setSpan(new CustomTypefaceSpan(typeface), startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			}
 			tvDescription.setText(description);
 		}
 
