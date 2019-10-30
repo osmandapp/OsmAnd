@@ -11,6 +11,8 @@
 	Thx - Hardy
 
 -->
+    <string name="swap_two_places">Swap %1$s and %2$s</string>
+    <string name="route_start_point">Starting point</string>
     <string name="layer_osm_edits">OSM Edits</string>
     <string name="quick_action_contour_lines_descr">Tapping this action button shows or hides contour lines on the map</string>
     <string name="quick_action_contour_lines_show">Show contour lines</string>
