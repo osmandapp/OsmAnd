@@ -76,7 +76,7 @@
     <string name="months_3">Three months</string>
     <string name="price_free">Free</string>
     <string name="get_discount_title">Get %1$d %2$s at %3$s off.</string>
-    <string name="get_free_trial_title">Start your %1$d %2$s gratis trial.</string>
+    <string name="get_free_trial_title">Start your %1$d %2$s free trial.</string>
     <string name="get_discount_first_part">%1$s for the first %2$s</string>
     <string name="get_discount_first_few_part">%1$s for the first %2$s</string>
     <string name="get_discount_second_part">then %1$s</string>
@@ -111,9 +111,9 @@
     <string name="app_mode_offroad">Offroad</string>
     <string name="edit_profile_setup_title">Set up profile</string>
     <string name="edit_profile_setup_subtitle">The profile keeps its own settings</string>
-    <string name="edit_profile_setup_map_subtitle">Select default map options for the profile</string>
-    <string name="edit_profile_screen_options_subtitle">Select default screen options for the profile</string>
-    <string name="edit_profile_nav_settings_subtitle">Select default navigation settings for the profile</string>
+    <string name="edit_profile_setup_map_subtitle">Select map options for the profile</string>
+    <string name="edit_profile_screen_options_subtitle">Select screen options for the profile</string>
+    <string name="edit_profile_nav_settings_subtitle">Select navigation settings for the profile</string>
     <string name="routing_attr_max_num_changes_description">Specify upper limit of changes</string>
     <string name="routing_attr_max_num_changes_name">Number of changes</string>
     <string name="app_mode_ufo">UFO</string>
@@ -162,7 +162,7 @@
     <string name="privacy_and_security_change_descr">By tapping \"Allow\", you agree with our %1$s</string>
     <string name="settings_privacy_and_security">Privacy and security</string>
     <string name="settings_privacy_and_security_desc">Select what data you share</string>
-    <string name="shared_string_no_thank_you">No</string>
+    <string name="shared_string_no_thank_you">No, thanks</string>
     <string name="shared_string_allow">Allow</string>
     <string name="profile_name_hint">Profile name</string>
     <string name="nav_type_hint">Navigation type</string>
