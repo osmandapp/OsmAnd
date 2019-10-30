@@ -457,6 +457,7 @@
                         android:layout_width="@dimen/map_address_height"
                         android:layout_height="@dimen/map_address_height"
                         android:background="@drawable/btn_circle_transparent"
+                        android:layout_gravity="center_vertical"
                         android:src="@drawable/ic_overflow_menu_white"/>
 
                     <ImageButton
@@ -465,6 +466,7 @@
                         android:layout_width="@dimen/map_address_height"
                         android:layout_height="@dimen/map_address_height"
                         android:background="@drawable/btn_circle_transparent"
+                        android:layout_gravity="center_vertical"
                         android:src="@drawable/ic_action_test_light"/>
                 </LinearLayout>
             </FrameLayout>
