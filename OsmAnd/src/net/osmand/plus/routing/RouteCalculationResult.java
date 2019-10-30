@@ -1021,6 +1021,10 @@ public class RouteCalculationResult {
 		return 0;
 	}
 	
+	public boolean isPointPassed(int locationIndex) {
+		return locationIndex <= currentRoute;
+	}
+	
 	public int getDistanceToFinish(Location fromLoc) {
 		if(listDistance != null && currentRoute < listDistance.length){
 			int dist = listDistance[currentRoute];
