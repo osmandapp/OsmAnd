@@ -375,9 +375,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (removeFragment(PlanRouteFragment.TAG)) {
 			app.getMapMarkersHelper().getPlanRouteContext().setFragmentVisible(true);
 		}
-		if (trackDetailsMenu.isVisible()) {
-			trackDetailsMenu.dismiss(false);
-		}
 		removeFragment(ImportGpxBottomSheetDialogFragment.TAG);
 		removeFragment(AdditionalActionsBottomSheetDialogFragment.TAG);
 		super.onSaveInstanceState(outState);
@@ -1442,6 +1439,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private void onPauseActivity() {
 		if (!app.getRoutingHelper().isRouteWasFinished()) {
 			DestinationReachedMenu.resetShownState();
+		}
+		if (trackDetailsMenu.isVisible()) {
+			trackDetailsMenu.dismiss(false);
 		}
 		pendingPause = false;
 		mapView.setOnDrawMapListener(null);
