@@ -106,6 +106,10 @@ public class WaypointHelper {
 	public int getRouteDistance(LocationPointWrapper point) {
 		return route.getDistanceToPoint(point.routeIndex);
 	}
+	
+	public boolean isPointPassed(LocationPointWrapper point) {
+		return route.isPointPassed(point.routeIndex);
+	}
 
 	public void removeVisibleLocationPoint(LocationPointWrapper lp) {
 		if (lp.type < locationPoints.size()) {

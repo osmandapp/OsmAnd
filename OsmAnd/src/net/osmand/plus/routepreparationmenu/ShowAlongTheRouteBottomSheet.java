@@ -35,12 +35,13 @@ import net.osmand.plus.helpers.WaypointDialogHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.routing.IRouteInformationListener;
+import net.osmand.plus.routing.IRoutingDataUpdateListener;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment implements IRouteInformationListener {
+public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment implements IRouteInformationListener, IRoutingDataUpdateListener {
 
 	public static final String TAG = "ShowAlongTheRouteBottomSheet";
 
@@ -149,10 +150,11 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 				if (tp != null && tp.size() > 0) {
 					for (int j = 0; j < tp.size(); j++) {
 						WaypointHelper.LocationPointWrapper pointWrapper = tp.get(j);
-						PointItem subheaderItem = new PointItem(pointWrapper.type);
-
-						headerItem.subItems.add(subheaderItem);
-						subheaderItem.point = pointWrapper;
+						if (!waypointHelper.isPointPassed(pointWrapper)) {
+							PointItem subheaderItem = new PointItem(pointWrapper.type);
+							subheaderItem.point = pointWrapper;
+							headerItem.subItems.add(subheaderItem);
+						}
 					}
 				}
 			} else {
@@ -182,12 +184,14 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 	public void onPause() {
 		super.onPause();
 		app.getRoutingHelper().removeListener(this);
+		app.getRoutingHelper().removeRouteDataListener(this);
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
 		app.getRoutingHelper().addListener(this);
+		app.getRoutingHelper().addRouteDataListener(this);
 		if (expandIndex != -1) {
 			expListView.expandGroup(expandIndex);
 			setupHeightAndBackground(getView());
@@ -201,6 +205,11 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 			adapter.notifyDataSetChanged();
 			setupHeightAndBackground(getView());
 		}
+	}
+
+	@Override
+	public void onRoutingDataUpdate() {
+		updateAdapter();
 	}
 
 	class ExpandableListAdapter extends OsmandBaseExpandableListAdapter {
