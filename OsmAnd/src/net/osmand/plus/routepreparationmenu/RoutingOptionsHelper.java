@@ -177,8 +177,9 @@ public class RoutingOptionsHelper {
 
 	public void applyVoiceProvider(MapActivity mapActivity, String provider) {
 		OsmandApplication app = mapActivity.getMyApplication();
-		app.getSettings().VOICE_PROVIDER.set(provider);
-		app.initVoiceCommandPlayer(mapActivity, app.getRoutingHelper().getAppMode(), false, null, true, false);
+		ApplicationMode selectedAppMode = app.getRoutingHelper().getAppMode();
+		app.getSettings().VOICE_PROVIDER.setModeValue(selectedAppMode, provider);
+		app.initVoiceCommandPlayer(mapActivity, selectedAppMode, false, null, true, false);
 	}
 
 	public Set<String> getVoiceFiles(Activity activity) {
