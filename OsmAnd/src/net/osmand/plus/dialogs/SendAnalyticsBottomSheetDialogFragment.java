@@ -54,8 +54,16 @@ public class SendAnalyticsBottomSheetDialogFragment extends MenuBottomSheetDialo
 
 		items.add(new SubtitleDividerItem(context));
 
-		sendAnonymousMapDownloadsData = app.getSettings().SEND_ANONYMOUS_MAP_DOWNLOADS_DATA.get();
-		sendAnonymousAppUsageData = app.getSettings().SEND_ANONYMOUS_APP_USAGE_DATA.get();
+		if (app.getSettings().SEND_ANONYMOUS_MAP_DOWNLOADS_DATA.isSet()) {
+			sendAnonymousMapDownloadsData = app.getSettings().SEND_ANONYMOUS_MAP_DOWNLOADS_DATA.get();
+		} else {
+			sendAnonymousMapDownloadsData = true;
+		}
+		if (app.getSettings().SEND_ANONYMOUS_APP_USAGE_DATA.isSet()) {
+			sendAnonymousAppUsageData = app.getSettings().SEND_ANONYMOUS_APP_USAGE_DATA.get();
+		} else {
+			sendAnonymousAppUsageData = true;
+		}
 		final BottomSheetItemWithCompoundButton[] downloadedMapsItem = new BottomSheetItemWithCompoundButton[1];
 		downloadedMapsItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
 				.setChecked(sendAnonymousMapDownloadsData)
