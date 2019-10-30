@@ -39,13 +39,13 @@
     <string name="stop_routing_confirm">آیا ناوبری را قطع می‌کنید؟</string>
     <string name="clear_dest_confirm">آیا از پاک‌کردن مقصد (و مقصدهای میانی) مطمئن هستید؟</string>
     <string name="intermediate_points_change_order">تغییر ترتیب</string>
-    <string name="av_def_action_video">ضبط ویدئو</string>
-    <string name="av_def_action_audio">ضبط صدا</string>
+    <string name="av_def_action_video">فیلم‌برداری</string>
+    <string name="av_def_action_audio">صدابرداری</string>
     <string name="av_video_format_descr">قالب خروجی ویدئو را انتخاب کنید.</string>
     <string name="av_video_format">قالب خروجی ویدئو</string>
     <string name="av_settings">تنظیمات صدا/ویدئو</string>
     <string name="av_use_external_recorder">استفاده از ضبط‌کنندهٔ سیستم</string>
-    <string name="av_use_external_camera_descr">برای عکس‌گرفتن از برنامهٔ خود دستگاه استفاده شود.</string>
+    <string name="av_use_external_camera_descr">برای عکس‌برداری از برنامهٔ سیستم استفاده شود.</string>
     <string name="av_use_external_camera">از برنامهٔ دوربین استفاده کن</string>
     <string name="av_settings_descr">تنظیمات صدا و ویدئو را پیکربندی کنید.</string>
     <string name="recording_error">ضبط ناموفق بود</string>
@@ -166,7 +166,7 @@
     <string name="cancel_route">حذف مسیر</string>
     <string name="max_speed_none">هیچ‌کدام</string>
     <string name="dropbox_plugin_name">افزونهٔ دراپ‌باکس</string>
-    <string name="av_use_external_recorder_descr">برای ویدئو از ضبط‌کنندهٔ خود دستگاه استفاده شود.</string>
+    <string name="av_use_external_recorder_descr">برای فیلم‌برداری از ضبط‌کنندهٔ سیستم استفاده شود.</string>
     <string name="recording_open_external_player">بازکردن پخش‌کنندهٔ خارجی</string>
     <string name="recording_unavailable">موجود نیست</string>
     <string name="map_widget_distancemeasurement">اندازه‌گیری مسافت</string>
@@ -523,7 +523,7 @@
     <string name="local_indexes_cat_srtm">منحنی‌های میزان</string>
     <string name="precise_routing_mode_descr">محاسبهٔ مسیرهایی دقیق و بدون اشکال. البته این حالت محدودیت مسافت دارد و کُند است.</string>
     <string name="recording_context_menu_show">نشان بده</string>
-    <string name="av_def_action_picture">عکس‌گرفتن</string>
+    <string name="av_def_action_picture">عکس‌برداری</string>
     <string name="recording_context_menu_precord">یادداشت عکسی</string>
     <string name="dropbox_plugin_description">با افزونهٔ دراپ‌باکس ردها و یادداشت‌های صوتی/تصویری را با حساب دراپ‌باکس خود همگام کنید.</string>
     <string name="srtm_paid_version_msg">لطفاً افزونهٔ منحنی‌های میزان را بخرید تا به توسعهٔ بیشتر نرم‌افزار کمک کنید.</string>
@@ -578,7 +578,7 @@
     <string name="settings_preset">پروفایل پیش‌فرض</string>
     <string name="settings_preset_descr">نمای نقشه و تنظیمات ناوبری برای هر پروفایل جداگانه ذخیره می‌شود. پروفایل پیش‌فرض خود را اینجا تنظیم کنید.</string>
     <string name="osmand_background_plugin_description">تنظیمات مربوط به فعال‌سازی ردگیری و ناوبری در پس‌زمینه را نشان می‌دهد که با ارسال پیام‌های بیدارباش متناوب به جی‌پی‌اس دستگاه این کار را انجام می‌دهد (با نمایشگر خاموش).</string>
-    <string name="av_def_action_choose">انتخاب برحسب تقاضا</string>
+    <string name="av_def_action_choose">انتخاب هنگام استفاده</string>
     <string name="audionotes_location_not_defined">مکانی برای یادداشت‌گذاری تعیین نشده. 
 \nمکانی را مشخص و از منوی زمینه اقدام کنید.</string>
     <string name="rendering_attr_showRoadMaps_description">انتخاب کنید نقشه‌های فقط-جاده چه زمانی نشان داده شود:</string>
@@ -586,14 +586,14 @@
     <string name="ending_point_too_far">نقطهٔ پایانی از نزدیک‌ترین جاده خیلی دور است.</string>
     <string name="map_widget_vector_attributes">خصوصیات رندر نقشه</string>
     <string name="av_photo_play_sound_descr">هنگام عکس‌برداری صدای شاتر پخش شود یا خیر.</string>
-    <string name="av_camera_focus">نوع فوکوس دوربین</string>
-    <string name="av_camera_focus_descr">نوع فوکوس داخلی دوربین را انتخاب کنید.</string>
+    <string name="av_camera_focus">شیوهٔ فوکوس دوربین</string>
+    <string name="av_camera_focus_descr">حالت فوکوس داخلی دوربین را انتخاب کنید.</string>
     <string name="av_camera_focus_auto">خودکار</string>
     <string name="av_camera_focus_hiperfocal">فراکانونی</string>
     <string name="av_camera_focus_edof">عمق میدان گسترده (EDOF)</string>
-    <string name="av_camera_focus_infinity">روی بینهایت تنظیم شده</string>
+    <string name="av_camera_focus_infinity">تنظیم روی بینهایت</string>
     <string name="av_camera_focus_macro">حالت ماکرو (از نزدیک)</string>
-    <string name="av_camera_focus_continuous">دوربین پیوسته فوکوس را تنظیم می‌کند</string>
+    <string name="av_camera_focus_continuous">دوربین فوکوس را پیوسته تنظیم کند</string>
     <string name="choose_intersected_street">تقاطع را انتخاب کنید</string>
     <string name="osm_settings">ویرایش نقشهٔ OSM</string>
     <string name="save_current_track_descr">رد جاری را همین حالا در قالب فایل GPX ذخیره کن.</string>
@@ -3405,4 +3405,8 @@
 \n• اصلاح سایر باگ‌ها
 \n
 \n"</string>
+    <string name="apply_preference_to_all_profiles">این تنظیم را می‌توانید بر همهٔ پروفایل‌ها یا فقط بر پروفایل انتخاب‌شده به کار ببندید.</string>
+    <string name="shared_preference">مشترک</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_name">ترجیح جاده‌های روسازی‌نشده</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_description">جاده‌های روسازی‌نشده را ترجیح می‌دهم.</string>
 </resources>

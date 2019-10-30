@@ -3372,5 +3372,42 @@ Lon %2$s</string>
     <string name="shared_string_memory_tb_desc">%1$s TB</string>
     <string name="shared_string_memory_gb_desc">%1$s GB</string>
     <string name="shared_string_memory_mb_desc">%1$s MB</string>
-    <string name="shared_string_memory_kb_desc">%1$s KB</string>
+    <string name="shared_string_memory_kb_desc">%1$s kB</string>
+    <string name="data_storage_preference_summary">%1$s • %2$s</string>
+    <string name="data_storage_space_description">Libre %1$s GB • Total %2$s GB</string>
+    <string name="track_storage_directory">Cartafol de almacenamento de pistas</string>
+    <string name="track_storage_directory_descrp">As pistas poden almacenarse nun cartafol de gravación, en cartafoles mensuais ou diarios.</string>
+    <string name="store_tracks_in_rec_directory">Almacenar as pistas gravadas no cartafol de gravación</string>
+    <string name="store_tracks_in_daily_directories">Almacenar as pistas gravadas en cartafoles diarios</string>
+    <string name="store_tracks_in_daily_directories_descrp">Almacena as pistas gravadas en subcartafoles por día de gravación (coma 2018-01-01).</string>
+    <string name="shared_string_memory_used_tb_desc">Usado %1$s TB</string>
+    <string name="shared_string_memory_used_gb_desc">Usado %1$s GB</string>
+    <string name="shared_string_memory_used_mb_desc">Usado %1$s GB</string>
+    <string name="shared_string_memory_used_kb_desc">Usado %1$s kB</string>
+    <string name="contour_lines_and_hillshade">Curvas do nivel e Sombras do relevo</string>
+    <string name="routing_attr_prefer_unpaved_name">Preferir estradas sen pavementar</string>
+    <string name="routing_attr_prefer_unpaved_description">Preferir estradas sen pavementar.</string>
+    <string name="update_all_maps">Actualizar todos os mapas</string>
+    <string name="update_all_maps_q">Actualizar todos os mapas (%1$d)\?</string>
+    <string name="release_3_5">• Axustes da aplicación e do perfil actualizados. Cómoda distribución dos axustes por tipo e posibilidade de personalizar cada perfil 
+\n 
+\n • Novo cadro de diálogo de descarga de mapas que suxire un mapa para baixar mentras se procura un 
+\n 
+\n • Arranxos no tema de noite 
+\n 
+\n • Corrixíronse algúns problemas de enrutamento en todo o mundo 
+\n 
+\n • Actualizouse o mapa de base con máis detalles na rede de estradas 
+\n 
+\n • Corrixíronse as zonas inundadas en todo o mundo 
+\n 
+\n • Enrutamento de esquí: perfil de altura e complexidade da ruta engadidos ós detalles da ruta 
+\n 
+\n • Outras correccións de erros
+\n
+\n</string>
+    <string name="apply_preference_to_all_profiles">Podes aplicar esta mudanza a todos os perfís ou só ós escollidos.</string>
+    <string name="shared_preference">Compartillado</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_name">Preferir estradas sen pavementar</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_description">Preferir estradas sen pavementar.</string>
 </resources>

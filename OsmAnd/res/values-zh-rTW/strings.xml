@@ -3354,4 +3354,8 @@
 \n • 其他臭蟲修復
 \n
 \n</string>
+    <string name="apply_preference_to_all_profiles">您可以套用此變更到所有設定或只套用到選定的。</string>
+    <string name="shared_preference">共享</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_name">偏好未鋪設的路面</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_description">偏好未鋪設的路面。</string>
 </resources>

@@ -3371,4 +3371,8 @@ Abgedeckte Fläche: %1$s x %2$s</string>
 \n • Weitere Fehlerlösungen
 \n
 \n</string>
+    <string name="apply_preference_to_all_profiles">Sie können diese Änderung auf alle oder nur auf ausgewählte Profile anwenden.</string>
+    <string name="shared_preference">Geteilt</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_name">Unbefestigte Straßen bevorzugen</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_description">Unbefestigte Straßen bevorzugen.</string>
 </resources>

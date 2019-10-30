@@ -3371,4 +3371,13 @@ POIの更新は利用できません</string>
     <string name="screen_alerts">画面アラート</string>
     <string name="route_parameters_descr">ルートパラメーターの構成</string>
     <string name="route_parameters">ルートパラメーター</string>
+    <string name="gpx_join_gaps">ギャップを埋める</string>
+    <string name="app_mode_wagon">ワゴン車</string>
+    <string name="app_mode_pickup_truck">ピックアップトラック</string>
+    <string name="years_5">年</string>
+    <string name="cancel_subscription">サブスクリプションの解除</string>
+    <string name="apply_preference_to_all_profiles">ここでなされた変更は、すべてのプロファイルまたは選択したプロファイルのみにも適用できます。</string>
+    <string name="shared_preference">シェア</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_name">未舗装道路を優先</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_description">未舗装道路を優先してルートを検索します。</string>
 </resources>

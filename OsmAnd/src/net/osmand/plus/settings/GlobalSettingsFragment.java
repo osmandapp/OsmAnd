@@ -30,6 +30,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment implements Send
 		setupExternalStorageDirPref();
 
 		setupSendAnonymousDataPref();
+		setupShowStartupMessagesPref();
 		setupEnableProxyPref();
 	}
 
@@ -66,6 +67,11 @@ public class GlobalSettingsFragment extends BaseSettingsFragment implements Send
 				}
 			}
 			return false;
+		} else if (prefId.equals(settings.DO_NOT_SHOW_STARTUP_MESSAGES.getId())) {
+			if (newValue instanceof Boolean) {
+				boolean enabled = !(Boolean) newValue;
+				return settings.DO_NOT_SHOW_STARTUP_MESSAGES.set(enabled);
+			}
 		}
 
 		return super.onPreferenceChange(preference, newValue);
@@ -162,6 +168,13 @@ public class GlobalSettingsFragment extends BaseSettingsFragment implements Send
 		boolean enabled = settings.SEND_ANONYMOUS_MAP_DOWNLOADS_DATA.get() || settings.SEND_ANONYMOUS_APP_USAGE_DATA.get();
 
 		SwitchPreferenceCompat sendAnonymousData = (SwitchPreferenceCompat) findPreference(SEND_ANONYMOUS_DATA_PREF_ID);
+		sendAnonymousData.setChecked(enabled);
+	}
+
+	private void setupShowStartupMessagesPref() {
+		boolean enabled = !settings.DO_NOT_SHOW_STARTUP_MESSAGES.get(); // pref ui was inverted
+
+		SwitchPreferenceCompat sendAnonymousData = (SwitchPreferenceCompat) findPreference(settings.DO_NOT_SHOW_STARTUP_MESSAGES.getId());
 		sendAnonymousData.setChecked(enabled);
 	}
 
