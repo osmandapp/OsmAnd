@@ -3303,7 +3303,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="download_detaile_map">"Detaillierte Karte %s  herunterladen, um diesen Bereich zu sehen."</string>
     <string name="download_detailed_map">Laden Sie die detaillierte %s-Karte herunter, um diesen Bereich zu sehen.</string>
     <string name="change_data_storage_full_description">OsmAnd-Datendateien an das neue Ziel verschieben\?
-\n%1 s &gt; %2 s</string>
+\n%1$s &gt; %2$s</string>
     <string name="enter_path_to_folder">Geben Sie den Pfad zum Ordner ein</string>
     <string name="shared_string_select_folder">Ordner auswählen</string>
     <string name="paste_Osmand_data_folder_path">Einfügen des Pfades zum Ordner mit OsmAnd-Daten</string>
