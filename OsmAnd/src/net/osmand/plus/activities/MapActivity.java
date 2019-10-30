@@ -116,6 +116,7 @@ import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.measurementtool.NewGpxData;
 import net.osmand.plus.profiles.EditProfileFragment;
+import net.osmand.plus.quickaction.QuickActionListFragment;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routepreparationmenu.ChooseRouteFragment;
@@ -234,7 +235,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private boolean stopped = true;
 
 	private ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
-	
+
 	private LockHelper lockHelper;
 
 	@Override
@@ -256,7 +257,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		trackDetailsMenu.setMapActivity(this);
 
 		super.onCreate(savedInstanceState);
-		
+
 		if (Version.isHuawei(getMyApplication())) {
 			HuaweiDrmHelper.check(this);
 		}
@@ -355,7 +356,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		registerReceiver(screenOffReceiver, filter);
 
 		app.getAidlApi().onCreateMapActivity(this);
-		
+
 		lockHelper.setLockUIAdapter(this);
 
 		mIsDestroyed = false;
@@ -685,8 +686,13 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			prevActivityIntent = null;
 			return;
 		}
-		if (getMapView().getLayerByClass(MapQuickActionLayer.class).onBackPressed())
+		if (getMapView().getLayerByClass(MapQuickActionLayer.class).onBackPressed()) {
 			return;
+		}
+		QuickActionListFragment quickActionListFragment = getQuickActionListFragment();
+		if ( quickActionListFragment != null && quickActionListFragment.isVisible()) {
+			this.getDashboard().setDashboardVisibility(true, DashboardType.CONFIGURE_SCREEN, null);
+		}
 
 		super.onBackPressed();
 	}
@@ -1398,7 +1404,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			atlasMapRendererView.handleOnDestroy();
 		}
 		lockHelper.setLockUIAdapter(null);
-		
+
 		mIsDestroyed = true;
 	}
 
@@ -2297,28 +2303,32 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public QuickSearchDialogFragment getQuickSearchDialogFragment() {
-		Fragment fragment = getSupportFragmentManager().findFragmentByTag(QuickSearchDialogFragment.TAG);
-		return fragment != null && !fragment.isDetached() && !fragment.isRemoving() ? (QuickSearchDialogFragment) fragment : null;
+		return getFragment(QuickSearchDialogFragment.TAG);
 	}
 
 	public PlanRouteFragment getPlanRouteFragment() {
-		Fragment fragment = getSupportFragmentManager().findFragmentByTag(PlanRouteFragment.TAG);
-		return fragment != null && !fragment.isDetached() && !fragment.isRemoving() ? (PlanRouteFragment) fragment : null;
+		return getFragment(PlanRouteFragment.TAG);
 	}
 
 	public MeasurementToolFragment getMeasurementToolFragment() {
-		Fragment fragment = getSupportFragmentManager().findFragmentByTag(MeasurementToolFragment.TAG);
-		return fragment != null && !fragment.isDetached() && !fragment.isRemoving() ? (MeasurementToolFragment) fragment : null;
+		return getFragment(MeasurementToolFragment.TAG);
 	}
 
 	public ChooseRouteFragment getChooseRouteFragment() {
-		Fragment fragment = getSupportFragmentManager().findFragmentByTag(ChooseRouteFragment.TAG);
-		return fragment != null && !fragment.isDetached() && !fragment.isRemoving() ? (ChooseRouteFragment) fragment : null;
+		return getFragment(ChooseRouteFragment.TAG);
 	}
 
 	public EditProfileFragment getEditProfileFragment() {
-		Fragment fragment = getSupportFragmentManager().findFragmentByTag(EditProfileFragment.TAG);
-		return fragment != null && !fragment.isDetached() && !fragment.isRemoving() ? (EditProfileFragment) fragment : null;
+		return getFragment(EditProfileFragment.TAG);
+	}
+
+	public QuickActionListFragment getQuickActionListFragment() {
+		return  getFragment(QuickActionListFragment.TAG);
+	}
+
+	<T> T getFragment(String fragmentTag){
+		Fragment fragment = getSupportFragmentManager().findFragmentByTag(fragmentTag);
+		return fragment != null && !fragment.isDetached() && !fragment.isRemoving() ? (T) fragment : null;
 	}
 
 	public boolean isTopToolbarActive() {
