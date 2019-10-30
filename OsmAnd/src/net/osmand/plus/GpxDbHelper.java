@@ -129,7 +129,7 @@ public class GpxDbHelper {
 
 	public GpxDataItem getItem(File file, @Nullable GpxDataItemCallback callback) {
 		GpxDataItem item = itemsCache.get(file);
-		if (item == null && !isGpxReading(file)) {
+		if ((item == null || item.getAnalysis() == null) && !isGpxReading(file)) {
 			readGpxItem(file, item, callback);
 		}
 		return item;
