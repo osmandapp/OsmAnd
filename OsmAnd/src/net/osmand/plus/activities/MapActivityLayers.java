@@ -93,17 +93,12 @@ public class MapActivityLayers {
 	private QuickActionRegistry quickActionRegistry;
 	private MeasurementToolLayer measurementToolLayer;
 	
-	private boolean nightMode;
-	private int themeRes;
-
 	private StateChangedListener<Integer> transparencyListener;
 
 	public MapActivityLayers(MapActivity activity) {
 		this.activity = activity;
 		this.mapWidgetRegistry = new MapWidgetRegistry(activity.getMyApplication());
 		this.quickActionRegistry = new QuickActionRegistry(activity.getMyApplication().getSettings());
-		this.nightMode = activity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
-		this.themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 	}
 
 	public QuickActionRegistry getQuickActionRegistry() {
@@ -272,7 +267,7 @@ public class MapActivityLayers {
 				return true;
 			}
 		};
-		return GpxUiHelper.selectGPXFiles(files, activity, callbackWithObject, themeRes);
+		return GpxUiHelper.selectGPXFiles(files, activity, callbackWithObject, getThemeRes(getApplication()));
 	}
 
 
@@ -289,8 +284,8 @@ public class MapActivityLayers {
 		}
 		list.add(poiFilters.getCustomPOIFilter());
 
-		final ArrayAdapter<ContextMenuItem> listAdapter = adapter.createListAdapter(activity, !nightMode);
-		AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(activity, themeRes));
+		final ArrayAdapter<ContextMenuItem> listAdapter = adapter.createListAdapter(activity, !isNightMode(app));
+		AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(activity, getThemeRes(app)));
 		final ListView listView = new ListView(activity);
 		listView.setDivider(null);
 		listView.setClickable(true);
@@ -367,8 +362,8 @@ public class MapActivityLayers {
 			addFilterToList(adapter, list, f, false);
 		}
 
-		final ArrayAdapter<ContextMenuItem> listAdapter = adapter.createListAdapter(activity, !nightMode);
-		AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(activity, themeRes));
+		final ArrayAdapter<ContextMenuItem> listAdapter = adapter.createListAdapter(activity, !isNightMode(app));
+		AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(activity, getThemeRes(app)));
 		builder.setAdapter(listAdapter, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -583,6 +578,16 @@ public class MapActivityLayers {
 		}
 	}
 
+	private boolean isNightMode(OsmandApplication app) {
+		if (app == null) {
+			return false;
+		}
+		return app.getDaynightHelper().isNightModeForMapControls();
+	}
+	
+	private int getThemeRes(OsmandApplication app) {
+		return isNightMode(app) ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
+	}
 
 	private String getString(int resId) {
 		return activity.getString(resId);
