@@ -3360,4 +3360,34 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="routing_attr_prefer_unpaved_description">Velja frekar vegi með óbundnu slitlagi.</string>
     <string name="update_all_maps">Uppfæra öll kort</string>
     <string name="update_all_maps_q">Ertu viss um að þú viljir uppfæra öll (%1$d) kort\?</string>
+    <string name="release_3_5">• Uppfærðar stillingar fyrir forrit og notkunarsnið: Stillingar eru núna flokkaðar eftir gerð þeirra. Hægt er að sérsníða hvert notkunarsnið sérstaklega.
+\n
+\n • Nýr niðurhalsgluggi fyrir landakort sem stingur upp á hvaða kort ætti að sækja
+\n
+\n • Lagfæringar á næturþema
+\n
+\n • Löguð vandamál við leiðagerð víðsvegar um heiminn
+\n
+\n • Uppfært grunnkort með nákvæmara vegakerfi
+\n
+\n • Lagfærð flóðasvæði víðsvegar um heiminn
+\n
+\n • Skíðaleiðir: bætt við hæðarsniði og flækjustigi leiða í nákvæmari eiginleika leiðar
+\n
+\n • Auk ýmissa annarra lagfæringa
+\n
+\n</string>
+    <string name="apply_preference_to_all_profiles">Þú getur virkjað þessa breytingu í öll notkunarsnið eða einungis þau sem eru valin.</string>
+    <string name="shared_preference">Sameiginlegt</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_name">Velja vegi með óbundnu slitlagi</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_description">Velja frekar vegi með óbundnu slitlagi.</string>
+    <string name="layer_osm_edits">OSM-breytingar</string>
+    <string name="quick_action_contour_lines_descr">Ef ýtt er á þennan aðgerðahnapp mun það birta eða fela hæðarlínur á kortinu</string>
+    <string name="quick_action_contour_lines_show">Birta hæðarlínur</string>
+    <string name="quick_action_contour_lines_hide">Fela hæðarlínur</string>
+    <string name="quick_action_show_hide_contour_lines">Birta/Fela hæðarlínur</string>
+    <string name="quick_action_hillshade_descr">Ef ýtt er á þennan aðgerðahnapp mun það birta eða fela hæðaskyggingu á kortinu</string>
+    <string name="quick_action_hillshade_show">Birta hæðaskyggingu</string>
+    <string name="quick_action_hillshade_hide">Fela hæðaskyggingu</string>
+    <string name="quick_action_show_hide_hillshade">Birta/Fela hæðaskyggingu</string>
 </resources>

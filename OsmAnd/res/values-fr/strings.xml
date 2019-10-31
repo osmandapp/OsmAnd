@@ -3336,4 +3336,13 @@ représentant la zone : %1$s x %2$s</string>
     <string name="shared_preference">Partagé</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">Privilégier les routes non pavées</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">Privilégier les routes non pavées.</string>
+    <string name="layer_osm_edits">Modifications OSM</string>
+    <string name="quick_action_contour_lines_descr">Ce bouton affiche ou masque les courbes de niveaux sur la carte</string>
+    <string name="quick_action_contour_lines_show">Afficher les courbes de niveaux</string>
+    <string name="quick_action_contour_lines_hide">Masquer les courbes de niveaux</string>
+    <string name="quick_action_show_hide_contour_lines">Afficher/Masquer les courbes de niveaux</string>
+    <string name="quick_action_hillshade_descr">Ce bouton affiche ou masque l\'ombrage du relief sur la carte</string>
+    <string name="quick_action_hillshade_show">Afficher l\'ombrage du relief</string>
+    <string name="quick_action_hillshade_hide">Masquer l\'ombrage du relief</string>
+    <string name="quick_action_show_hide_hillshade">Afficher/Masquer l\'ombrage du relief</string>
 </resources>

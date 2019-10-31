@@ -3354,4 +3354,9 @@
     <string name="shared_preference">משותף</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">להעדיף דרכים לא סלולות</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">להעדיף דרכים לא סלולות.</string>
+    <string name="layer_osm_edits">עריכות OSM</string>
+    <string name="quick_action_contour_lines_descr">נגיעה בכפתור פעולה זה מציגה או מסתירה קווי מתאר במפה</string>
+    <string name="quick_action_contour_lines_show">הצגת קווי מתאר</string>
+    <string name="quick_action_contour_lines_hide">הסתרת קווי מתאר</string>
+    <string name="quick_action_show_hide_contour_lines">הצגה/הסתרה של קווי מתאר</string>
 </resources>

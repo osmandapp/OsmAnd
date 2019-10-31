@@ -374,7 +374,7 @@ POIの更新は利用できません</string>
     <string name="auto_zoom_map">マップを自動ズーム</string>
     <string name="additional_settings">追加設定</string>
     <string name="settings_preset_descr">マップの表示とナビゲーション設定はプロファイルごとに記憶されます。標準で使用するプロファイルを指定してください</string>
-    <string name="settings_preset">標準プロファイル</string>
+    <string name="settings_preset">デフォルト表示プロファイル</string>
     <string name="shared_string_settings">設定</string>
     <string name="save_current_track_descr">現在の経路を今すぐメモリーカードに保存します。</string>
     <string name="save_current_track">現在の経路を保存</string>
@@ -3235,19 +3235,19 @@ POIの更新は利用できません</string>
     <string name="routing_attr_freeride_policy_name">ゲレンデ外</string>
     <string name="routing_attr_freeride_policy_description">フリーライドやゲレンデ外は非公式のルートです。通常は手入れされていないうえ、職員によってメンテナンスされておらずクローズ時間にもチェックされません。禁止されている場所には決して入らず自己責任で利用してください。</string>
     <string name="routeInfo_roadClass_name">道路種別</string>
-    <string name="configure_profile_info">ここでなされた設定は、選択したプロファイル使用時のみ反映されます。</string>
+    <string name="configure_profile_info">ここでなされた設定は、選択されたプロファイル使用時に反映されます。</string>
     <string name="utm_format_descr">UTM Nato形式に似ていますが、OsmAndはUTMの標準フォーマットを使用しています。</string>
     <string name="shared_string_example">例</string>
     <string name="navigate_point_format_utm">UTM標準</string>
     <string name="navigate_point_format_olc">Open Location Code(OLC)</string>
     <string name="coordinates_format_info">選択した形式は、アプリ内すべての場面に適用されます。</string>
-    <string name="pref_selected_by_default_for_profiles">標準プロファイル設定: %s</string>
+    <string name="pref_selected_by_default_for_profiles">この設定で選択されたプロファイル\"%s\"が起動時にデフォルト表示されます</string>
     <string name="change_default_settings">デフォルト設定の変更</string>
     <string name="discard_changes">変更を取消</string>
     <string name="apply_to_current_profile">この選択を%1$sプロファイルに適用</string>
     <string name="apply_to_all_profiles">すべてのプロファイルに適用</string>
     <string name="start_up_message_pref">起動メッセージ</string>
-    <string name="analytics_pref_title">解析</string>
+    <string name="analytics_pref_title">ユーザー解析</string>
     <string name="turn_screen_on_info">ナビゲーション中ではロック画面上でも地図を表示します。</string>
     <string name="route_parameters_info">これらの設定は選択したプロファイル\"%1$s\"にのみ適用され、ルート検索時に反映されます。</string>
     <string name="wake_time">起床時間</string>
@@ -3376,7 +3376,7 @@ POIの更新は利用できません</string>
     <string name="years_5">年</string>
     <string name="cancel_subscription">サブスクリプションの解除</string>
     <string name="apply_preference_to_all_profiles">ここでなされた変更は、すべてのプロファイルまたは選択したプロファイルのみにも適用できます。</string>
-    <string name="shared_preference">シェア</string>
+    <string name="shared_preference">現在の設定</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">未舗装道路を優先</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">未舗装道路を優先してルートを検索します。</string>
     <string name="osm_recipients_label">OSM受信者</string>
@@ -3385,4 +3385,16 @@ POIの更新は利用できません</string>
     <string name="price_and_discount">%1$s • %2$s 割引</string>
     <string name="routing_attr_width_name">幅制限</string>
     <string name="routing_attr_width_description">ルート検索時に考慮する車幅を指定します。</string>
+    <string name="route_way">道</string>
+    <string name="sit_on_the_stop">停留所標識</string>
+    <string name="lang_oc">オック語</string>
+    <string name="layer_osm_edits">OSM編集域</string>
+    <string name="quick_action_contour_lines_descr">このアクションボタンをタップすると、マップ上の等高線の表示／非表示を切り替えられます</string>
+    <string name="quick_action_contour_lines_show">等高線を表示</string>
+    <string name="quick_action_contour_lines_hide">等高線を非表示</string>
+    <string name="quick_action_show_hide_contour_lines">等高線を表示／非表示</string>
+    <string name="quick_action_hillshade_descr">このアクションボタンをタップすると、マップ上の陰影起伏図の表示／非表示を切り替えられます</string>
+    <string name="quick_action_hillshade_show">陰影起伏図を表示</string>
+    <string name="quick_action_hillshade_hide">陰影起伏図を非表示</string>
+    <string name="quick_action_show_hide_hillshade">陰影起伏図の表示／非表示</string>
 </resources>
