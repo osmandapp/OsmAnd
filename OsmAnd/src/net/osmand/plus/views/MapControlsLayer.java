@@ -35,6 +35,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmAndLocationProvider;
+import net.osmand.plus.OsmAndLocationSimulation;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
@@ -722,7 +723,14 @@ public class MapControlsLayer extends OsmandMapLayer {
 				routingHelper.setRoutePlanningMode(false);
 				mapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
 				app.getRoutingHelper().notifyIfRouteIsCalculated();
-				routingHelper.setCurrentLocation(app.getLocationProvider().getLastKnownLocation(), false);
+				if (!app.getSettings().SIMULATE_NAVIGATION.get()) {
+					routingHelper.setCurrentLocation(app.getLocationProvider().getLastKnownLocation(), false);
+				} else if (routingHelper.isRouteCalculated() && !routingHelper.isRouteBeingCalculated()) {
+					OsmAndLocationSimulation sim = app.getLocationProvider().getLocationSimulation();
+					if (!sim.isRouteAnimating()) {
+						sim.startStopRouteAnimation(mapActivity);
+					}
+				}
 			}
 		}
 	}

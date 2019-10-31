@@ -1368,6 +1368,7 @@
     <string name="favourites_edit_dialog_title">Favorite info</string>
     <string name="simulate_your_location_stop_descr">Stop simulating your position.</string>
     <string name="simulate_your_location_descr">Simulate your position using a calculated route or a recorded GPX track.</string>
+    <string name="simulate_your_location_gpx_descr">Simulate your position using a recorded GPX track.</string>
     <string name="looking_up_address">Looking up address</string>
     <string name="av_locations_descr">GPX file with locations.</string>
     <string name="av_locations">Locations</string>

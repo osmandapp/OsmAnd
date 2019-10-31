@@ -74,6 +74,7 @@ import net.osmand.plus.MapMarkersHelper.MapMarkerChangedListener;
 import net.osmand.plus.OnDismissDialogFragmentListener;
 import net.osmand.plus.OsmAndAppCustomization.OsmAndAppCustomizationListener;
 import net.osmand.plus.OsmAndConstants;
+import net.osmand.plus.OsmAndLocationSimulation;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
@@ -2121,6 +2122,12 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 					}
 				}
 				mapView.fitRectToMap(left, right, top, bottom, tileBoxWidthPx, tileBoxHeightPx, 0);
+			}
+		}
+		if (app.getSettings().SIMULATE_NAVIGATION.get()) {
+			OsmAndLocationSimulation sim = app.getLocationProvider().getLocationSimulation();
+			if (newRoute && rh.isFollowingMode() && !sim.isRouteAnimating()) {
+				sim.startStopRouteAnimation(this);
 			}
 		}
 	}

@@ -16,6 +16,7 @@ import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmAndLocationProvider;
+import net.osmand.plus.OsmAndLocationSimulation;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
@@ -88,9 +89,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 			} else if (optionsItem instanceof ShowAlongTheRouteItem) {
 				items.add(createShowAlongTheRouteItem(optionsItem));
 			} else if (optionsItem instanceof RouteSimulationItem) {
-				if (OsmandPlugin.getEnabledPlugin(OsmandDevelopmentPlugin.class) != null) {
-					items.add(createRouteSimulationItem(optionsItem));
-				}
+				items.add(createRouteSimulationItem(optionsItem));
 			} else if (optionsItem instanceof AvoidPTTypesRoutingParameter) {
 				items.add(createAvoidPTTypesItem(optionsItem));
 			} else if (optionsItem instanceof AvoidRoadsRoutingParameter) {
@@ -206,19 +205,30 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	private BaseBottomSheetItem createRouteSimulationItem(final LocalRoutingParameter optionsItem) {
-		return new SimpleBottomSheetItem.Builder()
+		final BottomSheetItemWithCompoundButton[] simulateNavigationItem = new BottomSheetItemWithCompoundButton[1];
+		simulateNavigationItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
+				.setChecked(settings.SIMULATE_NAVIGATION.get())
 				.setIcon(getContentIcon(R.drawable.ic_action_start_navigation))
 				.setTitle(getString(R.string.simulate_navigation))
-				.setLayoutId(R.layout.bottom_sheet_item_simple_56dp)
+//				.setDescription(app.getLocationProvider().getLocationSimulation().isRouteAnimating()
+//						? R.string.simulate_your_location_stop_descr : R.string.simulate_your_location_descr)
+				.setLayoutId(R.layout.bottom_sheet_item_with_switch_56dp)
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
-					public void onClick(View view) {
-						final OsmAndLocationProvider loc = app.getLocationProvider();
-						loc.getLocationSimulation().startStopRouteAnimation(getActivity());
-						dismiss();
+					public void onClick(View v) {
+						boolean enabled = !settings.SIMULATE_NAVIGATION.get();
+						settings.SIMULATE_NAVIGATION.set(enabled);
+						simulateNavigationItem[0].setChecked(enabled);
+						OsmAndLocationSimulation sim = app.getLocationProvider().getLocationSimulation();
+						if (sim.isRouteAnimating()) {
+							sim.startStopRouteAnimation(getActivity());
+						} else if (routingHelper.isFollowingMode() && routingHelper.isRouteCalculated() && !routingHelper.isRouteBeingCalculated()) {
+							sim.startStopRouteAnimation(getActivity());
+						}
 					}
 				})
 				.create();
+		return simulateNavigationItem[0];
 	}
 
 

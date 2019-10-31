@@ -54,60 +54,73 @@ public class OsmAndLocationSimulation {
 	
 	public void startStopRouteAnimation(final Activity ma, final Runnable runnable) {
 		if (!isRouteAnimating()) {
-			AlertDialog.Builder builder = new AlertDialog.Builder(ma);
-			builder.setTitle(R.string.animate_route);
+			if (app.getSettings().SIMULATE_NAVIGATION_GPX.get()) {
+				AlertDialog.Builder builder = new AlertDialog.Builder(ma);
+				builder.setTitle(R.string.animate_route);
 
-			final View view = ma.getLayoutInflater().inflate(R.layout.animate_route, null);
-			final View gpxView = ((LinearLayout) view.findViewById(R.id.layout_animate_gpx));
-			final RadioButton radioGPX = (RadioButton) view.findViewById(R.id.radio_gpx);
-			radioGPX.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+				final View view = ma.getLayoutInflater().inflate(R.layout.animate_route, null);
+				final View gpxView = ((LinearLayout) view.findViewById(R.id.layout_animate_gpx));
+				final RadioButton radioGPX = (RadioButton) view.findViewById(R.id.radio_gpx);
+				radioGPX.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
-				@Override
-				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-					gpxView.setVisibility(isChecked ? View.VISIBLE : View.GONE);
-				}
-			});
+					@Override
+					public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+						gpxView.setVisibility(isChecked ? View.VISIBLE : View.GONE);
+					}
+				});
 
-			((TextView) view.findViewById(R.id.MinSpeedup)).setText("1"); //$NON-NLS-1$
-			((TextView) view.findViewById(R.id.MaxSpeedup)).setText("4"); //$NON-NLS-1$
-			final SeekBar speedup = (SeekBar) view.findViewById(R.id.Speedup);
-			speedup.setMax(3);
-			builder.setView(view);
-			builder.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
+				((TextView) view.findViewById(R.id.MinSpeedup)).setText("1"); //$NON-NLS-1$
+				((TextView) view.findViewById(R.id.MaxSpeedup)).setText("4"); //$NON-NLS-1$
+				final SeekBar speedup = (SeekBar) view.findViewById(R.id.Speedup);
+				speedup.setMax(3);
+				builder.setView(view);
+				builder.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					boolean gpxNavigation = radioGPX.isChecked();
-					if (gpxNavigation) {
-						boolean nightMode = ma instanceof MapActivity ? app.getDaynightHelper().isNightModeForMapControls() : !app.getSettings().isLightContent();
-						GpxUiHelper.selectGPXFile(ma, false, false, new CallbackWithObject<GPXUtilities.GPXFile[]>() {
-							@Override
-							public boolean processResult(GPXUtilities.GPXFile[] result) {
-								GPXRouteParamsBuilder builder = new GPXRouteParamsBuilder(result[0], app.getSettings());
-								startAnimationThread(app, builder.getPoints(), true, speedup.getProgress() + 1);
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						boolean gpxNavigation = radioGPX.isChecked();
+						if (gpxNavigation) {
+							boolean nightMode = ma instanceof MapActivity ? app.getDaynightHelper().isNightModeForMapControls() : !app.getSettings().isLightContent();
+							GpxUiHelper.selectGPXFile(ma, false, false, new CallbackWithObject<GPXUtilities.GPXFile[]>() {
+								@Override
+								public boolean processResult(GPXUtilities.GPXFile[] result) {
+									GPXRouteParamsBuilder builder = new GPXRouteParamsBuilder(result[0], app.getSettings());
+									startAnimationThread(app, builder.getPoints(), true, speedup.getProgress() + 1);
+									if (runnable != null) {
+										runnable.run();
+									}
+									return true;
+								}
+							}, nightMode);
+						} else {
+							List<Location> currentRoute = app.getRoutingHelper().getCurrentCalculatedRoute();
+							if (currentRoute.isEmpty()) {
+								Toast.makeText(app, R.string.animate_routing_route_not_calculated,
+										Toast.LENGTH_LONG).show();
+							} else {
+								startAnimationThread(app, new ArrayList<Location>(currentRoute), false, 1);
 								if (runnable != null) {
 									runnable.run();
 								}
-								return true;
-							}
-						}, nightMode);
-					} else {
-						List<Location> currentRoute = app.getRoutingHelper().getCurrentCalculatedRoute();
-						if (currentRoute.isEmpty()) {
-							Toast.makeText(app, R.string.animate_routing_route_not_calculated,
-									Toast.LENGTH_LONG).show();
-						} else {
-							startAnimationThread(app, new ArrayList<Location>(currentRoute), false, 1);
-							if (runnable != null) {
-								runnable.run();
 							}
 						}
-					}
 
+					}
+				});
+				builder.setNegativeButton(R.string.shared_string_cancel, null);
+				builder.show();
+			} else {
+				List<Location> currentRoute = app.getRoutingHelper().getCurrentCalculatedRoute();
+				if (currentRoute.isEmpty()) {
+					Toast.makeText(app, R.string.animate_routing_route_not_calculated,
+							Toast.LENGTH_LONG).show();
+				} else {
+					startAnimationThread(app, new ArrayList<Location>(currentRoute), false, 1);
+					if (runnable != null) {
+						runnable.run();
+					}
 				}
-			});
-			builder.setNegativeButton(R.string.shared_string_cancel, null);
-			builder.show();
+			}
 		} else {
 			stop();
 		}
