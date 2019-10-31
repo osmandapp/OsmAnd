@@ -2878,7 +2878,6 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="shared_string_launch">Abiatu</string>
     <string name="run_full_osmand_msg">OsmAnd darabilen {0} mapa erabiltzen ari zara eta. OsmAnd bertsio osoa abiatu nahi duzu\?</string>
     <string name="run_full_osmand_header">Abiatu OsmAnd\?</string>
-    <string name="swap_start_and_destination">Aldatu jatorria eta helburua</string>
     <string name="add_destination_point">Gehitu helburua</string>
     <string name="add_intermediate_point">Gehitu tarteko puntua</string>
     <string name="add_start_point">Gehitu abiapuntua</string>

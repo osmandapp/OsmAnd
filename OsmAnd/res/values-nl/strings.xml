@@ -2856,7 +2856,6 @@ voor Gebied: %1$s x %2$s</string>
     <string name="shared_string_capacity">Capaciteit</string>
     <string name="shared_string_width">Breedte</string>
     <string name="shared_string_height">Hoogte</string>
-    <string name="swap_start_and_destination">Wissel vertrekpunt en bestemming</string>
     <string name="add_destination_point">Voeg bestemming toe</string>
     <string name="add_intermediate_point">Voeg tussenpunt toe</string>
     <string name="add_start_point">Voeg vertrekpunt toe</string>

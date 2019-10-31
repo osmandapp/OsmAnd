@@ -2858,7 +2858,6 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="download_wikipedia_description">Prejmite prispevke z Wikipedija o %1$s za pregled brez povezave.</string>
     <string name="test_voice_desrc">Pritisnite na gumb in poslušajte glasovni odziv za ugotavljanje manjkajočih oziroma napačnih navodil.</string>
     <string name="osm_live_subscriptions">Naročnine</string>
-    <string name="swap_start_and_destination">Zamenjaj začetek in konec poti</string>
     <string name="add_destination_point">Dodaj cilj</string>
     <string name="add_intermediate_point">Dodaj vmesni cilj</string>
     <string name="add_start_point">Dodaj začetno točko</string>

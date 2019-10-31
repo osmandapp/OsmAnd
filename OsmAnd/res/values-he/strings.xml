@@ -2869,7 +2869,6 @@
     <string name="run_full_osmand_msg">המפה שבשימוש היא {0} שמוגשת על ידי OsmAnd. להפעיל את הגרסה המלאה של OsmAnd\?</string>
     <string name="run_full_osmand_header">להפעיל את OsmAnd\?</string>
     <string name="lang_gn_py">גוארני</string>
-    <string name="swap_start_and_destination">החלפת היעד עם המוצא</string>
     <string name="add_destination_point">הוספת יעד</string>
     <string name="add_intermediate_point">הוספת נקודת ביניים</string>
     <string name="add_start_point">הוספת נקודת התחלה</string>

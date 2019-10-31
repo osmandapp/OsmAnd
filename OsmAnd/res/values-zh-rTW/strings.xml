@@ -2863,7 +2863,6 @@
     <string name="run_full_osmand_msg">您正在使用裝有 OsmAnd 的 {0} 地圖。是否要啟動完整版本的 OsmAnd？</string>
     <string name="run_full_osmand_header">啟動 OsmAnd？</string>
     <string name="lang_gn_py">瓜拉尼語</string>
-    <string name="swap_start_and_destination">替換開始和目的地</string>
     <string name="add_destination_point">增加目的地</string>
     <string name="add_intermediate_point">增加中轉</string>
     <string name="add_start_point">新增起始點</string>

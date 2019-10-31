@@ -2864,7 +2864,6 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="quick_action_switch_day_mode">Taga reĝimo</string>
     <string name="quick_action_switch_night_mode">Nokta reĝimo</string>
     <string name="quick_action_day_night_switch_mode">Taga/nokta reĝimo</string>
-    <string name="swap_start_and_destination">Interŝanĝi komencon por celo</string>
     <string name="add_destination_point">Aldoni celon</string>
     <string name="add_intermediate_point">Aldoni intercelon</string>
     <string name="add_start_point">Aldoni komencpunkton</string>

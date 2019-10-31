@@ -11,8 +11,6 @@
 	Thx - Hardy
 
 -->
-    <string name="swap_two_places">Swap %1$s and %2$s</string>
-    <string name="route_start_point">Starting point</string>
     <string name="layer_osm_edits">OSM Edits</string>
     <string name="quick_action_contour_lines_descr">Tapping this action button shows or hides contour lines on the map</string>
     <string name="quick_action_contour_lines_show">Show contour lines</string>
@@ -424,7 +422,7 @@
     <string name="shared_string_capacity">Сapacity</string>
     <string name="shared_string_width">Width</string>
     <string name="shared_string_height">Height</string>
-    <string name="swap_start_and_destination">Swap start and destination</string>
+    <string name="swap_start_and_destination">Swap <b>start</b> and <b>destination</b></string>
     <string name="add_destination_point">Add destination</string>
     <string name="add_intermediate_point">Add intermediate</string>
     <string name="add_start_point">Add starting point</string>

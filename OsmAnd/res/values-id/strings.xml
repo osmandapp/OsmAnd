@@ -727,7 +727,6 @@
     <string name="powered_by_osmand">Oleh OsmAnd</string>
     <string name="osm_live_subscriptions">Langganan</string>
     <string name="mapillary_menu_title_pano">Tampilkan hanya gambar 360°</string>
-    <string name="swap_start_and_destination">Tukar awal dan tujuan</string>
     <string name="add_destination_point">Tambah tujuan</string>
     <string name="add_start_point">Tambah titik awal</string>
     <string name="on_foot">Berjalan kaki</string>

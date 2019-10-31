@@ -159,7 +159,6 @@
     <string name="shared_string_capacity">Capacitat</string>
     <string name="shared_string_width">Ample</string>
     <string name="shared_string_height">Auçada</string>
-    <string name="swap_start_and_destination">Inversar partença e destinacion</string>
     <string name="add_destination_point">Ajustar una destinacion</string>
     <string name="add_intermediate_point">Ajustar un ponch intermediari</string>
     <string name="add_start_point">Ajustar un ponch de partença</string>

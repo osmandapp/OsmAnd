@@ -2875,7 +2875,6 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="shared_string_capacity">Abjom</string>
     <string name="shared_string_width">Šyrynia</string>
     <string name="shared_string_height">Vyšynia</string>
-    <string name="swap_start_and_destination">Pamianiać miescami pačatkovy punkt i punkt pryznačennia</string>
     <string name="add_destination_point">Dadać punkt pryznačennia</string>
     <string name="add_intermediate_point">Dadać pramiežkavy punkt</string>
     <string name="add_start_point">Dadać pačatkovy punkt</string>

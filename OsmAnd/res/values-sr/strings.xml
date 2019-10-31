@@ -2897,7 +2897,7 @@
     <string name="shared_string_capacity">Капацитет</string>
     <string name="shared_string_width">Ширина</string>
     <string name="shared_string_height">Висина</string>
-    <string name="swap_start_and_destination">Замени почетак и циљ</string>
+    <string name="swap_start_and_destination">Замени <b>почетак</b> и <b>циљ</b></string>
     <string name="add_destination_point">Додај одредиште</string>
     <string name="add_intermediate_point">Додај успутну станицу</string>
     <string name="add_start_point">Додај почетну тачку</string>

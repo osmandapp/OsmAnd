@@ -2891,7 +2891,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="quick_action_switch_night_mode">Nacht-Modus</string>
     <string name="quick_action_day_night_switch_mode">Schalter Tag/Nacht Modus</string>
     <string name="run_full_osmand_msg">Sie verwenden {0} Karte, die von OsmAnd unterstützt wird. Möchten Sie die OsmAnd Vollversion starten\?</string>
-    <string name="swap_start_and_destination">Start und Ziel tauschen</string>
+    <string name="swap_start_and_destination"><b>Start</b> und <b>Ziel</b> tauschen</string>
     <string name="add_destination_point">Ziel hinzufügen</string>
     <string name="add_intermediate_point">Zwischenpunkt hinzufügen</string>
     <string name="add_start_point">Startpunkt hinzufügen</string>
