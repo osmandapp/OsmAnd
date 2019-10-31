@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -91,7 +92,7 @@ public class MapActivityLayers {
 	private MapWidgetRegistry mapWidgetRegistry;
 	private QuickActionRegistry quickActionRegistry;
 	private MeasurementToolLayer measurementToolLayer;
-
+	
 	private StateChangedListener<Integer> transparencyListener;
 
 	public MapActivityLayers(MapActivity activity) {
@@ -266,7 +267,7 @@ public class MapActivityLayers {
 				return true;
 			}
 		};
-		return GpxUiHelper.selectGPXFiles(files, activity, callbackWithObject);
+		return GpxUiHelper.selectGPXFiles(files, activity, callbackWithObject, getThemeRes(getApplication()));
 	}
 
 
@@ -283,8 +284,8 @@ public class MapActivityLayers {
 		}
 		list.add(poiFilters.getCustomPOIFilter());
 
-		final ArrayAdapter<ContextMenuItem> listAdapter = adapter.createListAdapter(activity, app.getSettings().isLightContent());
-		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+		final ArrayAdapter<ContextMenuItem> listAdapter = adapter.createListAdapter(activity, !isNightMode(app));
+		AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(activity, getThemeRes(app)));
 		final ListView listView = new ListView(activity);
 		listView.setDivider(null);
 		listView.setClickable(true);
@@ -361,9 +362,8 @@ public class MapActivityLayers {
 			addFilterToList(adapter, list, f, false);
 		}
 
-		final ArrayAdapter<ContextMenuItem> listAdapter =
-				adapter.createListAdapter(activity, app.getSettings().isLightContent());
-		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+		final ArrayAdapter<ContextMenuItem> listAdapter = adapter.createListAdapter(activity, !isNightMode(app));
+		AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(activity, getThemeRes(app)));
 		builder.setAdapter(listAdapter, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
@@ -462,7 +462,7 @@ public class MapActivityLayers {
 
 		final List<Entry<String, String>> entriesMapList = new ArrayList<>(entriesMap.entrySet());
 
-		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+		AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(activity, getThemeRes(getApplication())));
 
 		String selectedTileSourceKey = settings.MAP_TILE_SOURCES.get();
 
@@ -578,6 +578,16 @@ public class MapActivityLayers {
 		}
 	}
 
+	private boolean isNightMode(OsmandApplication app) {
+		if (app == null) {
+			return false;
+		}
+		return app.getDaynightHelper().isNightModeForMapControls();
+	}
+	
+	private int getThemeRes(OsmandApplication app) {
+		return isNightMode(app) ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
+	}
 
 	private String getString(int resId) {
 		return activity.getString(resId);

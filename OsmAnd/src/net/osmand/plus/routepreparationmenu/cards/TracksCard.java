@@ -1,6 +1,7 @@
 package net.osmand.plus.routepreparationmenu.cards;
 
 import android.annotation.SuppressLint;
+import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
@@ -9,8 +10,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.IndexConstants;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -27,7 +28,6 @@ public class TracksCard extends BaseCard {
 
 	private List<GPXFile> gpxFiles;
 	private boolean showLimited = true;
-	private List<GpxDataItem> dataItems;
 
 	private static class GpxItem {
 		String title;
@@ -44,7 +44,6 @@ public class TracksCard extends BaseCard {
 	public TracksCard(MapActivity mapActivity, List<GPXFile> gpxFiles) {
 		super(mapActivity);
 		this.gpxFiles = gpxFiles;
-		this.dataItems = app.getGpxDatabase().getItems();
 	}
 
 	@Override
@@ -53,12 +52,7 @@ public class TracksCard extends BaseCard {
 	}
 
 	private GpxDataItem getDataItem(GPXInfo info) {
-		for (GpxDataItem item : dataItems) {
-			if (item.getFile().getAbsolutePath().endsWith(info.getFileName())) {
-				return item;
-			}
-		}
-		return null;
+		return app.getGpxDbHelper().getItem(new File(app.getAppPath(IndexConstants.GPX_INDEX_DIR), info.getFileName()));
 	}
 
 	@SuppressLint("DefaultLocale")
@@ -147,5 +141,13 @@ public class TracksCard extends BaseCard {
 
 		((TextView) view.findViewById(R.id.gpx_card_title)).setText(
 				String.format("%s (%d)", app.getString(R.string.tracks_on_map), list.size()));
+	}
+
+	@Override
+	public void applyState(@NonNull BaseCard card) {
+		super.applyState(card);
+		if (card instanceof TracksCard) {
+			showLimited = ((TracksCard) card).showLimited;
+		}
 	}
 }

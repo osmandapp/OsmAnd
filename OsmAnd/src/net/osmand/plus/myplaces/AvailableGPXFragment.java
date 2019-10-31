@@ -55,12 +55,13 @@ import net.osmand.data.PointDescription;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
 import net.osmand.plus.ContextMenuItem;
-import net.osmand.plus.GPXDatabase;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
+import net.osmand.plus.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -92,7 +93,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -117,7 +117,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 	private Set<Integer> selectedGroups = new LinkedHashSet<>();
 	private ActionMode actionMode;
 	private LoadGpxTask asyncLoader;
-	private ProcessGpxTask asyncProcessor;
 	private GpxIndexesAdapter allGpxAdapter;
 	private static MessageFormat formatMb = new MessageFormat("{0, number,##.#} MB", Locale.US);
 	private ContextMenuAdapter optionsMenuAdapter;
@@ -193,8 +192,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				allGpxAdapter.refreshSelected();
 				allGpxAdapter.notifyDataSetChanged();
 			}
-			asyncProcessor = new ProcessGpxTask();
-			asyncProcessor.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 		}
 		updateCurrentTrack();
 
@@ -209,10 +206,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		updateEnable = false;
 		if (operationTask != null) {
 			operationTask.cancel(true);
-		}
-		if (asyncProcessor != null) {
-			asyncProcessor.cancel(false);
-			asyncProcessor = null;
 		}
 		if (actionMode != null) {
 			actionMode.finish();
@@ -410,10 +403,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 	public void reloadTracks() {
 		asyncLoader = new LoadGpxTask();
 		asyncLoader.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, getActivity());
-		if (asyncProcessor == null) {
-			asyncProcessor = new ProcessGpxTask();
-			asyncProcessor.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-		}
 	}
 
 	@Override
@@ -830,7 +819,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 											} else if (destFolder.mkdirs()) {
 												File dest = new File(destFolder, info.fileName);
 												if (info.file.renameTo(dest)) {
-													app.getGpxDatabase().rename(info.file, dest);
+													app.getGpxDbHelper().rename(info.file, dest);
 													asyncLoader = new LoadGpxTask();
 													asyncLoader.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, getActivity());
 												} else {
@@ -853,7 +842,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 						Toast.makeText(app, R.string.file_with_name_already_exists, Toast.LENGTH_LONG).show();
 					} else {
 						if (info.file.renameTo(dest)) {
-							app.getGpxDatabase().rename(info.file, dest);
+							app.getGpxDbHelper().rename(info.file, dest);
 							asyncLoader = new LoadGpxTask();
 							asyncLoader.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, getActivity());
 						} else {
@@ -994,6 +983,37 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		int corruptedColor;
 		private SearchFilter filter;
 
+		private GpxInfoViewCallback updateGpxCallback = new GpxInfoViewCallback() {
+
+			private static final int UPDATE_GPX_ITEM_MSG_ID = OsmAndConstants.UI_HANDLER_LOCATION_SERVICE + 5;
+			private static final long MIN_UPDATE_INTERVAL = 500;
+
+			private long lastUpdateTime;
+
+			private Runnable updateItemsProc = new Runnable() {
+				@Override
+				public void run() {
+					if (updateEnable) {
+						lastUpdateTime = System.currentTimeMillis();
+						allGpxAdapter.notifyDataSetChanged();
+					}
+				}
+			};
+
+			@Override
+			public boolean isCancelled() {
+				return !updateEnable;
+			}
+
+			@Override
+			public void onGpxDataItemChanged(GpxDataItem item) {
+				if (System.currentTimeMillis() - lastUpdateTime > MIN_UPDATE_INTERVAL) {
+					updateItemsProc.run();
+				}
+				app.runMessageInUIThreadAndCancelPrevious(UPDATE_GPX_ITEM_MSG_ID, updateItemsProc, MIN_UPDATE_INTERVAL);
+			}
+		};
+
 		public GpxIndexesAdapter(Context ctx) {
 			warningColor = ContextCompat.getColor(ctx, R.color.color_warning);
 			TypedArray ta = ctx.getTheme().obtainStyledAttributes(new int[]{android.R.attr.textColorPrimary});
@@ -1102,7 +1122,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				LayoutInflater inflater = getActivity().getLayoutInflater();
 				v = inflater.inflate(R.layout.dash_gpx_track_item, parent, false);
 			}
-			updateGpxInfoView(v, child, app, false);
+			updateGpxInfoView(v, child, app, false, updateGpxCallback);
 
 			ImageView icon = (ImageView) v.findViewById(R.id.icon);
 			ImageButton options = (ImageButton) v.findViewById(R.id.options);
@@ -1409,7 +1429,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		});
 
 		GPXTrackAnalysis analysis;
-		if ((analysis = getGpxTrackAnalysis(gpxInfo, app)) != null) {
+		if ((analysis = getGpxTrackAnalysis(gpxInfo, app, null)) != null) {
 			if (analysis.totalDistance != 0 && !gpxInfo.currentlyRecordingTrack) {
 				item = optionsMenu.getMenu().add(R.string.analyze_on_map).setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_info_dark));
 				item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
@@ -1439,7 +1459,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				LocalIndexesFragment.renameFile(getActivity(), gpxInfo.file, new RenameCallback() {
 					@Override
 					public void renamedTo(File file) {
-						app.getGpxDatabase().rename(gpxInfo.file, file);
+						app.getGpxDbHelper().rename(gpxInfo.file, file);
 						asyncLoader = new LoadGpxTask();
 						asyncLoader.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, getActivity());
 					}
@@ -1508,7 +1528,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				if (!isCancelled() && (info.gpx == null || !info.gpx.showCurrentTrack)) {
 					boolean successfull;
 					successfull = Algorithms.removeAllFiles(info.file);
-					app.getGpxDatabase().remove(info.file);
+					app.getGpxDbHelper().remove(info.file);
 					total++;
 					if (successfull) {
 						count++;
@@ -1588,80 +1608,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 						getMyApplication().getSettings().getLastKnownMapZoom());
 				MapActivity.launchMapActivityMoveToTop(getActivity());
 			}
-		}
-	}
-
-	public class ProcessGpxTask extends AsyncTask<Void, GpxDataItem, Void> {
-
-		private Map<File, GpxDataItem> processedDataFiles = new HashMap<>();
-		private GPXDatabase db = app.getGpxDatabase();
-
-		ProcessGpxTask() {
-			List<GpxDataItem> dataItems = db.getItems();
-			for (GpxDataItem item : dataItems) {
-				processedDataFiles.put(item.getFile(), item);
-			}
-		}
-
-		@Override
-		protected Void doInBackground(Void... params) {
-
-			File gpxPath = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
-			if (gpxPath.canRead()) {
-				processGPXFolder(gpxPath, "");
-			}
-			return null;
-		}
-
-		private File[] listFilesSorted(File dir) {
-			File[] listFiles = dir.listFiles();
-			if (listFiles == null) {
-				return new File[0];
-			}
-			Arrays.sort(listFiles);
-			return listFiles;
-		}
-
-		private void processGPXFolder(File gpxPath, String gpxSubfolder) {
-			for (File gpxFile : listFilesSorted(gpxPath)) {
-				if (gpxFile.isDirectory()) {
-					String sub = gpxSubfolder.length() == 0 ?
-							gpxFile.getName() : gpxSubfolder + "/" + gpxFile.getName();
-					processGPXFolder(gpxFile, sub);
-				} else if (gpxFile.isFile() && gpxFile.getName().toLowerCase().endsWith(".gpx")) {
-					GpxDataItem item = processedDataFiles.get(gpxFile);
-					GPXTrackAnalysis itemAnalysis = item != null ? item.getAnalysis() : null;
-					if (item == null
-							|| item.getFileLastModifiedTime() != gpxFile.lastModified()
-							|| itemAnalysis == null
-							|| itemAnalysis.wptCategoryNames == null) {
-						GPXFile f = GPXUtilities.loadGPXFile(gpxFile);
-						GPXTrackAnalysis analysis = f.getAnalysis(gpxFile.lastModified());
-						if (item == null) {
-							item = new GpxDataItem(gpxFile, analysis);
-							db.add(item);
-						} else {
-							db.updateAnalysis(item, analysis);
-						}
-					}
-					processedDataFiles.put(gpxFile, item);
-					publishProgress(item);
-				}
-				if (isCancelled()) {
-					break;
-				}
-			}
-		}
-
-		@Override
-		protected void onProgressUpdate(GpxDataItem... items) {
-			allGpxAdapter.notifyDataSetChanged();
-		}
-
-		@Override
-		protected void onPostExecute(Void aVoid) {
-			asyncProcessor = null;
-			listView.setEmptyView(emptyView);
 		}
 	}
 
@@ -1819,7 +1765,14 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		}
 	}
 
-	public static void updateGpxInfoView(View v, GpxInfo child, OsmandApplication app, boolean isDashItem) {
+	public interface GpxInfoViewCallback {
+
+		boolean isCancelled();
+
+		void onGpxDataItemChanged(GpxDataItem item);
+	}
+
+	public static void updateGpxInfoView(View v, GpxInfo child, OsmandApplication app, boolean isDashItem, @Nullable GpxInfoViewCallback callback) {
 		TextView viewName = ((TextView) v.findViewById(R.id.name));
 		if (!isDashItem) {
 			v.findViewById(R.id.divider_list).setVisibility(View.VISIBLE);
@@ -1843,7 +1796,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		if (getSelectedGpxFile(child, app) != null) {
 			icon.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_polygom_dark, R.color.color_distance));
 		}
-		GPXTrackAnalysis analysis = getGpxTrackAnalysis(child, app);
+		GPXTrackAnalysis analysis = getGpxTrackAnalysis(child, app, callback);
 		boolean sectionRead = analysis == null;
 		if (sectionRead) {
 			v.findViewById(R.id.read_section).setVisibility(View.GONE);
@@ -1911,15 +1864,29 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 	}
 
 	@Nullable
-	private static GPXTrackAnalysis getGpxTrackAnalysis(GpxInfo gpxInfo, OsmandApplication app) {
+	private static GPXTrackAnalysis getGpxTrackAnalysis(GpxInfo gpxInfo, OsmandApplication app, @Nullable final GpxInfoViewCallback callback) {
 		SelectedGpxFile sgpx = getSelectedGpxFile(gpxInfo, app);
 		GPXTrackAnalysis analysis = null;
 		if (sgpx != null) {
 			analysis = sgpx.getTrackAnalysis();
 		} else if (gpxInfo.currentlyRecordingTrack) {
 			analysis = app.getSavingTrackHelper().getCurrentTrack().getTrackAnalysis();
-		} else {
-			GpxDataItem dataItem = gpxInfo.file == null ? null : app.getGpxDatabase().getItem(gpxInfo.file);
+		} else if (gpxInfo.file != null) {
+			GpxDataItemCallback analyserCallback = null;
+			if (callback != null) {
+				analyserCallback = new GpxDataItemCallback() {
+					@Override
+					public boolean isCancelled() {
+						return callback.isCancelled();
+					}
+
+					@Override
+					public void onGpxDataItemReady(GpxDataItem item) {
+						callback.onGpxDataItemChanged(item);
+					}
+				};
+			}
+			GpxDataItem dataItem = app.getGpxDbHelper().getItem(gpxInfo.file, analyserCallback);
 			if (dataItem != null) {
 				analysis = dataItem.getAnalysis();
 			}

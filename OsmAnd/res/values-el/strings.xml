@@ -73,7 +73,6 @@
     <string name="avoid_unpaved">Αποφυγή χωματόδρομων</string>
     <string name="avoid_ferries">Αποφυγή πορθμείων</string>
     <string name="avoid_in_routing_title">Αποφυγή…</string>
-    <string name="avoid_in_routing_descr">Αποφυγή π.χ.: διοδίων, χωματόδρομων, πορθμείων.</string>
     <string name="map_widget_fluorescent">Φωτεινές διαδρομές</string>
     <string name="map_widget_show_ruler">Χάρακας</string>
     <string name="map_widget_view_direction">Κατεύθυνση επισκόπησης</string>
@@ -3005,7 +3004,6 @@
     <string name="shared_string_capacity">Χωρητικότητα</string>
     <string name="shared_string_width">Πλάτος</string>
     <string name="shared_string_height">Ύψος</string>
-    <string name="swap_start_and_destination">Εναλλαγή έναρξης και προορισμού</string>
     <string name="add_destination_point">Προσθήκη προορισμού</string>
     <string name="add_intermediate_point">Προσθήκη ενδιάμεσου σημείου</string>
     <string name="add_start_point">Προσθήκη σημείου έναρξης</string>

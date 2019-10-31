@@ -40,7 +40,6 @@
     <string name="avoid_unpaved">Nespevneným cestám</string>
     <string name="avoid_ferries">Trajektom</string>
     <string name="avoid_in_routing_title">Vyhnúť sa…</string>
-    <string name="avoid_in_routing_descr">Obísť napr. spoplatnené cesty, nespevnené cesty, trajekty.</string>
     <string name="show_warnings_title">Zobraziť varovania…</string>
     <string name="show_warnings_descr">Nastaviť dopravné varovania (rýchlostné obmedzenia, značky stop, spomaľovače, tunely), rýchlostné radary a jazdné pruhy.</string>
     <string name="map_widget_fluorescent">Fluorescentné trasy</string>
@@ -1077,7 +1076,7 @@ Proporčná pamäť %4$s MB (Limit Androidu %5$s MB, Dalvik %6$s MB).</string>
     <string name="routing_attr_avoid_motorway_name">Vyhnúť sa diaľniciam</string>
     <string name="routing_attr_avoid_motorway_description">Vyhnúť sa diaľniciam</string>
     <string name="routing_attr_weight_name">Hmotnostný limit</string>
-    <string name="routing_attr_weight_description">Zadajte povolenú hmotnosť vozidla na cestách.</string>
+    <string name="routing_attr_weight_description">Zadajte hmotnosť vozidla, ktorá musí byť povolená na cestách.</string>
     <string name="select_gpx">Vybrať GPX…</string>
     <string name="route_descr_select_destination">Vybrať cieľ</string>
     <string name="route_preferences">Predvoľby trasy</string>
@@ -2872,7 +2871,6 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="shared_string_capacity">Kapacita</string>
     <string name="shared_string_width">Šírka</string>
     <string name="shared_string_height">Výška</string>
-    <string name="swap_start_and_destination">Vymeniť štart a cieľ</string>
     <string name="add_destination_point">Pridať cieľ</string>
     <string name="add_intermediate_point">Pridať medzicieľ</string>
     <string name="add_start_point">Pridať štartovací bod</string>
@@ -3216,4 +3214,145 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="get_discount_second_part">potom %@</string>
     <string name="cancel_subscription">Zrušiť predplatné</string>
     <string name="price_and_discount">%1$s • Ušetrite %2$s</string>
+    <string name="day">Deň</string>
+    <string name="days_2_4">Dni</string>
+    <string name="days_5">Dní</string>
+    <string name="week">Týždeň</string>
+    <string name="weeks_2_4">Týždne</string>
+    <string name="weeks_5">Týždňov</string>
+    <string name="month">Mesiac</string>
+    <string name="months_2_4">Mesiace</string>
+    <string name="months_5">Mesiacov</string>
+    <string name="year">Rok</string>
+    <string name="years_2_4">Roky</string>
+    <string name="years_5">Rokov</string>
+    <string name="months_3">Tri mesiace</string>
+    <string name="configure_profile_info">Všetky nasledovné nastavenia ovplyvnia len zvolený profil.</string>
+    <string name="utm_format_descr">OsmAnd používa formát UTM Standard, ktorý je podobný ale nie identický s formátom UTM Nato.</string>
+    <string name="shared_string_example">Príklad</string>
+    <string name="navigate_point_format_utm">UTM Standard</string>
+    <string name="navigate_point_format_olc">Open Location Code</string>
+    <string name="coordinates_format_info">Zvolený formát bude použitý na všetkých miestach aplikácie.</string>
+    <string name="pref_selected_by_default_for_profiles">Toto nastavenie bude predvolené v profiloch: %s</string>
+    <string name="change_default_settings">Zmeniť predvolené nastavenia</string>
+    <string name="discard_changes">Zahodiť zmeny</string>
+    <string name="apply_to_current_profile">Použiť na aktuálny profil %1$s</string>
+    <string name="apply_to_all_profiles">Použiť na všetky profily</string>
+    <string name="start_up_message_pref">Správa po spustení</string>
+    <string name="analytics_pref_title">Analýzy</string>
+    <string name="turn_screen_on_info">Zobraziť mapu počas navigácie nad zamknutou obrazovkou.</string>
+    <string name="route_parameters_info">Tieto nastavenia ovplyvnia tvorbu trasy. Použijú sa len na zvolený profil: %1$s.</string>
+    <string name="wake_time">Čas zobudenia</string>
+    <string name="units_and_formats">Jednotky &amp; formáty</string>
+    <string name="appearance">Zobrazenie</string>
+    <string name="map_look_descr">Zobrazenie mapy</string>
+    <string name="map_look">Vzhľad mapy</string>
+    <string name="list_of_installed_plugins">Zoznam nainštalovaných modulov</string>
+    <string name="configure_navigation">Nastaviť navigáciu</string>
+    <string name="general_settings_profile_descr">Vzhľad aplikácie, jednotky, oblasť</string>
+    <string name="configure_profile">Nastaviť profil</string>
+    <string name="screen_alerts_descr">Varovania budú zobrazené počas navigácie v ľavom dolnom rohu obrazovky.</string>
+    <string name="switch_profile">Prepnúť profil</string>
+    <string name="language_and_output">Jazyk a výstup</string>
+    <string name="reset_to_default">Obnoviť do základného nastavenia</string>
+    <string name="manage_profiles_descr">Vytvoriť, importovať, upraviť profily</string>
+    <string name="manage_profiles">Spravovať profily aplikácie…</string>
+    <string name="osmand_settings_descr">Ovplyvní celú aplikáciu</string>
+    <string name="osmand_settings">Nastavenia OsmAnd</string>
+    <string name="copy_from_other_profile">Kopírovať z iného profilu</string>
+    <string name="turn_screen_on">Zapnúť obrazovku</string>
+    <string name="map_during_navigation_info">Mapa počas navigácie</string>
+    <string name="map_during_navigation">Mapa počas navigácie</string>
+    <string name="shared_string_other">Iné</string>
+    <string name="vehicle_parameters_descr">Hmotnosť, výška, rýchlosť</string>
+    <string name="vehicle_parameters">Parametre vozidla</string>
+    <string name="voice_announces_info">Hlasové oznámenia sú prehrávané len počas navigácie.</string>
+    <string name="voice_announces_descr">Navigačné pokyny a oznámenia</string>
+    <string name="voice_announces">Hlasové oznámenia</string>
+    <string name="screen_alerts">Varovania na obrazovke</string>
+    <string name="route_parameters_descr">Nastaviť parametre trasy</string>
+    <string name="route_parameters">Parametre trasy</string>
+    <string name="application_profile_changed">Profil aplikáce sa zmenil na \"%s\"</string>
+    <string name="logcat_buffer">Zásobník logcat</string>
+    <string name="plugins_settings">Nastavenia modulu</string>
+    <string name="shared_string_by_default">Predvolene</string>
+    <string name="download_detailed_map">Pre zobrazenie tejto oblasti si stiahnite podrobnú mapu %s.</string>
+    <string name="change_data_storage_full_description">Presunúť dátové súbory OsmAnd do nového umiestnenia\?
+\n%1$s &gt; %2$s</string>
+    <string name="enter_path_to_folder">Zadajte cestu k priečinku</string>
+    <string name="shared_string_select_folder">Zvoľte priečinok</string>
+    <string name="paste_Osmand_data_folder_path">Vložte cestu k priečinku s dátami OsmAnd</string>
+    <string name="change_osmand_data_folder_question">Zmeniť dátový priečinok OsmAnd\?</string>
+    <string name="move_maps_to_new_destination">Presunúť do nového umiestnenia</string>
+    <string name="internal_app_storage_description">Interné úložisko, skryté pred používateľom a inými aplikáciami, kde k dátam môže pristupovať len OsmAnd</string>
+    <string name="change_data_storage_folder">Zmeniť priečinok na ukladanie dát</string>
+    <string name="rendering_attr_piste_type_snow_park_name">Areál zimných športov</string>
+    <string name="rendering_attr_piste_type_sleigh_name">Sane v záprahu</string>
+    <string name="rendering_attr_piste_type_sled_name">Sánkovanie</string>
+    <string name="rendering_attr_piste_type_hike_name">Putovanie</string>
+    <string name="rendering_attr_piste_type_connection_name">Spojnica</string>
+    <string name="rendering_attr_piste_type_skitour_name">Lyžiarsky okruh</string>
+    <string name="rendering_attr_piste_type_downhill_name">Zjazd</string>
+    <string name="rendering_attr_piste_type_nordic_name">Beh na lyžiach</string>
+    <string name="routeInfo_piste_type_name">Typ zjazdovky</string>
+    <string name="rendering_attr_piste_difficulty_novice_name">Pre začiatočníkov</string>
+    <string name="rendering_attr_piste_difficulty_easy_name">Ľahká</string>
+    <string name="rendering_attr_piste_difficulty_intermediate_name">Stredná</string>
+    <string name="rendering_attr_piste_difficulty_advanced_name">Pokročilí</string>
+    <string name="rendering_attr_piste_difficulty_expert_name">Pre expertov</string>
+    <string name="rendering_attr_piste_difficulty_freeride_name">Voľný zjazd</string>
+    <string name="rendering_attr_piste_difficulty_extreme_name">Extrémna</string>
+    <string name="rendering_attr_piste_difficulty_undefined_name">Neurčená</string>
+    <string name="routeInfo_piste_difficulty_name">Obtiažnosť zjazdovky</string>
+    <string name="routing_attr_width_name">Limit šírky</string>
+    <string name="routing_attr_width_description">Zadajte šírku vozidla, ktorá musí byť povolená na cestách.</string>
+    <string name="avoid_in_routing_descr_">Vyhnúť sa niektorým trasám a typom ciest</string>
+    <string name="data_storage_preference_summary">%1$s • %2$s</string>
+    <string name="data_storage_space_description">Voľné %1$s GB • Celkom %2$s GB</string>
+    <string name="app_mode_utv">Terénna úžitková štvorkolka</string>
+    <string name="rendering_attr_piste_difficulty_aerialway_name">Lanovka</string>
+    <string name="rendering_attr_piste_difficulty_connection_name">Spojnica</string>
+    <string name="shared_string_calculate">Vypočítať</string>
+    <string name="shared_string_osmand_usage">Využitie OsmAndom</string>
+    <string name="shared_sting_tiles">Dlaždice</string>
+    <string name="shared_string_maps">Mapy</string>
+    <string name="shared_string_memory_tb_desc">%1$s TB</string>
+    <string name="shared_string_memory_gb_desc">%1$s GB</string>
+    <string name="shared_string_memory_mb_desc">%1$s MB</string>
+    <string name="shared_string_memory_kb_desc">%1$s kB</string>
+    <string name="track_storage_directory">Priečinok na ukladanie stôp</string>
+    <string name="track_storage_directory_descrp">Stopy môžu byť ukladané v priečinku \'rec\' alebo v mesačných či denných priečinkoch.</string>
+    <string name="store_tracks_in_rec_directory">Ukladať zaznamenané stopy v priečinku \'rec\'</string>
+    <string name="store_tracks_in_daily_directories">Ukladať zaznamenané stopy v denných priečinkoch</string>
+    <string name="store_tracks_in_daily_directories_descrp">"Ukladať zaznamenané stopy podpriečinkoch za každý deň (napr.  2018-01-01)."</string>
+    <string name="shared_string_memory_used_tb_desc">Použité %1$s TB</string>
+    <string name="shared_string_memory_used_gb_desc">Použité %1$s GB</string>
+    <string name="shared_string_memory_used_mb_desc">Použité %1$s MB</string>
+    <string name="shared_string_memory_used_kb_desc">Použité %1$s kB</string>
+    <string name="contour_lines_and_hillshade">Vrstevnice a tieňované svahy</string>
+    <string name="routing_attr_prefer_unpaved_name">Preferovať nespevnené cesty</string>
+    <string name="routing_attr_prefer_unpaved_description">Preferovať cesty s nespevneným povrchom.</string>
+    <string name="update_all_maps">Aktualizovať všetky mapy</string>
+    <string name="update_all_maps_q">Naozaj chcete aktualizovať všetky (%1$d) mapy\?</string>
+    <string name="release_3_5">• Vylepšené nastavenia aplikácie a profilov. Pohodlné usporiadanie nastavení podľa typu a možnosť upravenia každého profilu
+\n
+\n • Nový dialóg sťahovania máp, ktorý navrhuje mapy na stiahnutie počas prehliadania
+\n
+\n • Opravy nočného vzhľadu
+\n
+\n • Opravené niektoré chyby navigácie
+\n
+\n • Aktualizovaná základná mapa s podrobnejšou cestnou sieťou
+\n
+\n • Opravené \'zaplavené\' územia po svete
+\n
+\n • Lyžiarska navigácia: do detailov trasy bol pridaný výškový profil a obtiažnosť
+\n
+\n • Opravy iných chýb
+\n
+\n</string>
+    <string name="apply_preference_to_all_profiles">Túto zmenu môžete aplikovať na zvolený profil alebo na všetky.</string>
+    <string name="shared_preference">Zdieľané</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_name">Preferovať nespevnené cesty</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_description">Preferovať cesty s nespevneným povrchom.</string>
 </resources>

@@ -254,7 +254,6 @@
     <string name="avoid_unpaved">Само асфалтирани пътища</string>
     <string name="avoid_ferries">Без фериботи</string>
     <string name="avoid_in_routing_title">Избягване на…</string>
-    <string name="avoid_in_routing_descr">Избягване на платени пътища, пътища без настилка, фериботи</string>
     <string name="map_widget_fluorescent">Светещи маршрути</string>
     <string name="map_widget_show_ruler">Линийка</string>
 

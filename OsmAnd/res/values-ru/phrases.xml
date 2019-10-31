@@ -603,7 +603,7 @@
 	<string name="poi_crematorium">Крематорий</string>
 	<string name="poi_internet_cafe">Интернет-кафе;Интернет-салон;Киберкафе</string>
 	<string name="poi_bank">Банк</string>
-	<string name="poi_amenity_atm">Банкомат</string>
+	<string name="poi_atm">Банкомат</string>
 	<string name="poi_money_lender">Ростовщик</string>
 	<string name="poi_pawnbroker">Ломбард</string>
 	<string name="poi_bureau_de_change">Обмен валют</string>
@@ -2426,7 +2426,7 @@
 	<string name="poi_inscription_e">Надпись:З</string>
 	<string name="poi_inscription_ne">Надпись:СЗ</string>
 	<string name="poi_construction_yes">В процессе строительства</string>
-	<string name="poi_additional_atm_yes">С банкоматом</string>
+	<string name="poi_atm_yes">С банкоматом;Банкомат</string>
 	<string name="poi_atm_no">Без банкомата</string>
 	<string name="poi_firepit">Место для разведения огня</string>
 	<string name="poi_street_cabinet">Распределительный шкаф</string>
@@ -2489,7 +2489,7 @@
 	<string name="poi_vacuum_cleaner_no">Без пылесоса</string>
 	<string name="poi_amenity_vacuum_cleaner">Пылесос</string>
 	<string name="poi_sport_free_flying">Свободный полёт (спорт)</string>
-	<string name="poi_bicycle_repair_station">Стойка для ремонта велосипедов</string>
+	<string name="poi_bicycle_repair_station">Стойка для ремонта велосипедов;Стойка для самостоятельного ремонта велосипедов</string>
 	<string name="poi_water_tap">Водопроводный кран</string>
 	<string name="poi_button_operated_yes">Включается кнопкой: да</string>
 	<string name="poi_button_operated_no">Включается кнопкой: нет</string>
@@ -3487,5 +3487,6 @@
 	<string name="poi_craft_bakery">Пекарня</string>
 	<string name="poi_craft_cabinet_maker">Краснодеревщик</string>
 
+	<string name="poi_charge">Сумма оплаты</string>
 
 </resources>

@@ -192,7 +192,6 @@ S\'ocuparà una memòria de {1} MB
     <string name="day_night_info">Informació de dia/nit</string>
     <string name="show_lanes">Carrils</string>
     <string name="avoid_ferries">Evita els ferris</string>
-    <string name="avoid_in_routing_descr">Evita p. ex. vies de peatge, no pavimentades, ferris.</string>
     <string name="osmand_parking_warning_text">S\'ha afegit una notificació a la vostra agenda perquè traieu el vostre cotxe. Hi seguirà fins que l\'elimineu manualment.</string>
     <string name="route_kl">Mantingueu-vos a l\'esquerra i continueu</string>
     <string name="route_kr">Mantingueu-vos a la dreta i continueu</string>
@@ -2897,7 +2896,6 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="quick_action_switch_day_mode">Mode Diürn</string>
     <string name="quick_action_switch_night_mode">Mode Nocturn</string>
     <string name="quick_action_day_night_switch_mode">Canvia mode Diürn/Nocturn</string>
-    <string name="swap_start_and_destination">Bescanvia sortida i arribada</string>
     <string name="add_destination_point">Afegeix destinació</string>
     <string name="add_intermediate_point">Afegeix punt intermedi</string>
     <string name="add_start_point">Afegeix el punt inicial</string>
@@ -3264,4 +3262,37 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="switch_profile">Canvia de perfil</string>
     <string name="application_profile_changed">El perfil de l\'aplicació ha canviat a \"%s\"</string>
     <string name="plugins_settings">Configuració del connector</string>
+    <string name="shared_string_by_default">Predeterminat</string>
+    <string name="download_detaile_map">Baixeu el mapa detallat %s per veure aquesta àrea.</string>
+    <string name="route_parameters">Paràmetres de la ruta</string>
+    <string name="change_data_storage_full_description">Voleu moure els arxius de dades OsmAnd a una nova destinació\?
+\n%1$s &gt; %2$s</string>
+    <string name="enter_path_to_folder">Introduïu el camí a la carpeta</string>
+    <string name="shared_string_select_folder">Seleccioneu la carpeta</string>
+    <string name="paste_Osmand_data_folder_path">Enganxa el camí a la carpeta amb les dades d\'OsmAnd</string>
+    <string name="change_osmand_data_folder_question">Voleu canviar la carpeta de dades de OsmAnd\?</string>
+    <string name="move_maps_to_new_destination">Desplaça a la nova destinació</string>
+    <string name="avoid_in_routing_descr_">Evita determinades rutes i tipus de carretera</string>
+    <string name="internal_app_storage_description">Emmagatzematge intern, amagat a l\'usuari i a les altres aplicacions, de manera que només OsmAnd pot accedir a les vostres dades</string>
+    <string name="change_data_storage_folder">Canvia la carpeta d\'emmagatzematge de dades</string>
+    <string name="rendering_attr_piste_type_snow_park_name">Parc de neu</string>
+    <string name="rendering_attr_piste_type_sleigh_name">Trineu</string>
+    <string name="app_mode_utv">Costat a costat</string>
+    <string name="release_3_5">"• S\'ha actualitzat la configuració de l\'aplicació  i dels perfils. Convenient arrangement of settings by type, ability to customize each profile
+\n
+\n • Diàleg nou de baixades de mapa que suggereix un mapa per baixar-lo mentre es navega
+\n
+\n • Correccions al tema nocturn
+\n
+\n • Corregits problemes de ruta a tot el món
+\n
+\n • S\'ha actualitzat el mapa base amb una xarxa de vies més detallat
+\n
+\n • S\'han corregit les àrees inundades de tot el món
+\n
+\n • Rutes d\'esquí: s\'han afegit perfils d\'alçada i de complexitat de la ruta en els detalls de ruta
+\n
+\n • Altres correccions d\'errors
+\n
+\n"</string>
 </resources>

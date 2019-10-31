@@ -901,7 +901,7 @@ public class RouteCalculationResult {
 					nextInd++;
 				}
 			}
-			int dist = listDistance[currentRoute];
+			int dist = getListDistance(currentRoute);
 			if (fromLoc != null) {
 				dist += fromLoc.distanceTo(locations.get(currentRoute));
 			}
@@ -910,9 +910,9 @@ public class RouteCalculationResult {
 				if (directions.get(nextInd).routePointOffset <= currentRoute
 						&& currentRoute <= directions.get(nextInd).routeEndPointOffset)
 					// We are not into a puntual direction.
-					dist -= listDistance[directions.get(nextInd).routeEndPointOffset];
+					dist -= getListDistance(directions.get(nextInd).routeEndPointOffset);
 				else
-					dist -= listDistance[directions.get(nextInd).routePointOffset];
+					dist -= getListDistance(directions.get(nextInd).routePointOffset);
 			}
 			if(intermediatePoints != null && nextIntermediate < intermediatePoints.length) {
 				info.intermediatePoint = intermediatePoints[nextIntermediate] == nextInd;
@@ -930,7 +930,7 @@ public class RouteCalculationResult {
 	/*public */NextDirectionInfo getNextRouteDirectionInfoAfter(NextDirectionInfo prev, NextDirectionInfo next, boolean toSpeak) {
 		int dirInfo = prev.directionInfoInd;
 		if (dirInfo < directions.size() && prev.directionInfo != null) {
-			int dist = listDistance[prev.directionInfo.routePointOffset];
+			int dist = getListDistance(prev.directionInfo.routePointOffset);
 			int nextInd = dirInfo + 1;
 			if (toSpeak) {
 				while (nextInd < directions.size()) {
@@ -943,7 +943,7 @@ public class RouteCalculationResult {
 			}
 			if (nextInd < directions.size()) {
 				next.directionInfo = directions.get(nextInd);
-				dist -= listDistance[directions.get(nextInd).routePointOffset];
+				dist -= getListDistance(directions.get(nextInd).routePointOffset);
 			}
 			if(intermediatePoints != null && nextIntermediate < intermediatePoints.length) {
 				next.intermediatePoint = intermediatePoints[nextIntermediate] == nextInd;
@@ -1021,6 +1021,10 @@ public class RouteCalculationResult {
 		return 0;
 	}
 	
+	public boolean isPointPassed(int locationIndex) {
+		return locationIndex <= currentRoute;
+	}
+	
 	public int getDistanceToFinish(Location fromLoc) {
 		if(listDistance != null && currentRoute < listDistance.length){
 			int dist = listDistance[currentRoute];
@@ -1044,7 +1048,7 @@ public class RouteCalculationResult {
 				return 0;
 			} else {
 				int directionInd = intermediatePoints[nextIntermediate];
-				return dist - listDistance[directions.get(directionInd).routePointOffset];	
+				return dist - getListDistance(directions.get(directionInd).routePointOffset);
 			}
 		}
 		return 0;
@@ -1072,9 +1076,9 @@ public class RouteCalculationResult {
 			RouteDirectionInfo current = directions.get(currentDirectionInfo);
 			time = current.afterLeftTime;
 			
-			int distanceToNextTurn = listDistance[currentRoute];
+			int distanceToNextTurn = getListDistance(currentRoute);
 			if(currentDirectionInfo + 1 < directions.size()) {
-				distanceToNextTurn -= listDistance[directions.get(currentDirectionInfo + 1).routePointOffset];
+				distanceToNextTurn -= getListDistance(directions.get(currentDirectionInfo + 1).routePointOffset);
 			}
 			Location l = locations.get(currentRoute);
 			if(fromLoc != null){
@@ -1092,6 +1096,9 @@ public class RouteCalculationResult {
 		return getLeftTime(fromLoc) - directions.get(intermediatePoints[nextIntermediate]).afterLeftTime;
 	}
 
+	private int getListDistance(int index) {
+		return listDistance.length > index ? listDistance[index] : 0;
+	}
 	
 	public static class NextDirectionInfo {
 		public RouteDirectionInfo directionInfo;

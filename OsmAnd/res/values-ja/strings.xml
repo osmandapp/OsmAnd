@@ -217,7 +217,7 @@ MB)をダウンロードしますか?</string>
     <string name="use_trackball">トラックボールを使用</string>
     <string name="background_service_wait_int_descr">位置修正用の待ち時間をセットします</string>
     <string name="background_service_wait_int">待ち時間</string>
-    <string name="where_am_i">現在地を表示\?</string>
+    <string name="where_am_i">現在地を表示</string>
     <string name="process_navigation_service">OsmAnd ナビゲーションサービス</string>
     <string name="network_provider">ネットワーク</string>
     <string name="gps_provider">GPS</string>
@@ -374,7 +374,7 @@ POIの更新は利用できません</string>
     <string name="auto_zoom_map">マップを自動ズーム</string>
     <string name="additional_settings">追加設定</string>
     <string name="settings_preset_descr">マップの表示とナビゲーション設定はプロファイルごとに記憶されます。標準で使用するプロファイルを指定してください</string>
-    <string name="settings_preset">標準プロファイル</string>
+    <string name="settings_preset">デフォルト表示プロファイル</string>
     <string name="shared_string_settings">設定</string>
     <string name="save_current_track_descr">現在の経路を今すぐメモリーカードに保存します。</string>
     <string name="save_current_track">現在の経路を保存</string>
@@ -596,7 +596,7 @@ POIの更新は利用できません</string>
     <string name="download_hillshade_maps">陰影起伏図</string>
     <string name="local_indexes_cat_srtm">等高線</string>
     <string name="local_indexes_cat_av">音声/動画データ</string>
-    <string name="stop_routing_confirm">検索したルートを却下してナビゲーションを終了しますか？</string>
+    <string name="stop_routing_confirm">ナビゲーションを停止させますか？</string>
     <string name="clear_dest_confirm">本当に目的地(とその経由地点)を削除しますか？</string>
     <string name="precise_routing_mode_descr">グリッチ無しの正確なルート計算を有効化します。現段階では距離が限定されて尚且つ遅いです。</string>
     <string name="precise_routing_mode">正確なルーティング(アルファ)</string>
@@ -716,7 +716,6 @@ POIの更新は利用できません</string>
     <string name="avoid_unpaved">未舗装の道路を使用しない</string>
     <string name="avoid_ferries">フェリーを使用しない</string>
     <string name="avoid_in_routing_title">使用しない道路の指定…</string>
-    <string name="avoid_in_routing_descr">有料道路、未舗装道路、フェリー等、使用しない経路を設定します</string>
     <string name="map_widget_fluorescent">使用ルートを明滅させる</string>
     <string name="map_widget_show_ruler">距離測定</string>
     <string name="map_widget_view_direction">視線方向</string>
@@ -1231,7 +1230,7 @@ POIの更新は利用できません</string>
     <string name="keep_informing">ナビゲーション指示の繰り返し</string>
     <string name="keep_informing_descr">ナビゲーション指示を繰り返す間隔を設定します</string>
     <string name="arrival_distance">目的地周辺でのアナウンスタイミング</string>
-    <string name="arrival_distance_descr">目的地周辺でのアナウンスをするタイミングを設定します\?</string>
+    <string name="arrival_distance_descr">目的地周辺でのアナウンスをするタイミングを設定します。</string>
     <string name="always_center_position_on_map">移動時、現在地を画面中央よりに表示</string>
     <string name="voice_pref_title">音声関連設定</string>
     <string name="misc_pref_title">その他の設定</string>
@@ -2916,7 +2915,6 @@ POIの更新は利用できません</string>
     <string name="shared_string_capacity">容量</string>
     <string name="shared_string_width">幅</string>
     <string name="shared_string_height">高さ</string>
-    <string name="swap_start_and_destination">出発地点と目的地を入れ替える</string>
     <string name="add_destination_point">目的地の追加</string>
     <string name="add_intermediate_point">経由地点の追加</string>
     <string name="add_start_point">出発地点の追加</string>
@@ -3030,14 +3028,14 @@ POIの更新は利用できません</string>
     <string name="rendering_attr_surface_compacted_name">砂利や土などの圧縮舗装</string>
     <string name="routing_attr_avoid_sett_name">石畳や敷石の道を避ける</string>
     <string name="routing_attr_avoid_sett_description">移動時に石畳や敷石の道を通らないようにします</string>
-    <string name="rendering_attr_smoothness_excellent_name">ローラーブレードやスケボーができる滑らかさ</string>
-    <string name="rendering_attr_smoothness_good_name">ロードバイクを含め車両全般が走行可能</string>
+    <string name="rendering_attr_smoothness_excellent_name">ローラーブレードやスケボーなども走行可</string>
+    <string name="rendering_attr_smoothness_good_name">ロードバイクを含め車両全般が走行可</string>
     <string name="rendering_attr_smoothness_intermediate_name">シティバイク、スポーツカー、車椅子、スクーター及びオフロードバイクや車も走行可能</string>
-    <string name="rendering_attr_smoothness_bad_name">クロスバイク、普通車、人力車などなら走行可能</string>
-    <string name="rendering_attr_smoothness_very_bad_name">車高の高い車、軽装オフロード車なら走行可能</string>
-    <string name="rendering_attr_smoothness_horrible_name">重装備のオフロード車なら走行可能</string>
-    <string name="rendering_attr_smoothness_very_horrible_name">トラクター、ATV、戦車、MTBなど荒れた道でも問題無いもののみ走行可能</string>
-    <string name="rendering_attr_smoothness_impassable_name">2輪4輪問わず車両は走行不可能</string>
+    <string name="rendering_attr_smoothness_bad_name">クロスバイク、普通車、人力車などなら走行可</string>
+    <string name="rendering_attr_smoothness_very_bad_name">車高の高い車、軽装オフロード車なら走行可</string>
+    <string name="rendering_attr_smoothness_horrible_name">重装備のオフロード車なら走行可</string>
+    <string name="rendering_attr_smoothness_very_horrible_name">トラクター、ATV、戦車、MTBなど荒れた道でも問題無いもののみ走行可</string>
+    <string name="rendering_attr_smoothness_impassable_name">2輪4輪問わず車両は走行不可</string>
     <string name="rendering_attr_highway_class_motorway_name">高速道路、自動車専用道路</string>
     <string name="rendering_attr_highway_class_street_name">街路</string>
     <string name="rendering_attr_highway_class_footway_name">歩道</string>
@@ -3237,4 +3235,166 @@ POIの更新は利用できません</string>
     <string name="routing_attr_freeride_policy_name">ゲレンデ外</string>
     <string name="routing_attr_freeride_policy_description">フリーライドやゲレンデ外は非公式のルートです。通常は手入れされていないうえ、職員によってメンテナンスされておらずクローズ時間にもチェックされません。禁止されている場所には決して入らず自己責任で利用してください。</string>
     <string name="routeInfo_roadClass_name">道路種別</string>
+    <string name="configure_profile_info">ここでなされた設定は、選択されたプロファイル使用時に反映されます。</string>
+    <string name="utm_format_descr">UTM Nato形式に似ていますが、OsmAndはUTMの標準フォーマットを使用しています。</string>
+    <string name="shared_string_example">例</string>
+    <string name="navigate_point_format_utm">UTM標準</string>
+    <string name="navigate_point_format_olc">Open Location Code(OLC)</string>
+    <string name="coordinates_format_info">選択した形式は、アプリ内すべての場面に適用されます。</string>
+    <string name="pref_selected_by_default_for_profiles">この設定で選択されたプロファイル\"%s\"が起動時にデフォルト表示されます</string>
+    <string name="change_default_settings">デフォルト設定の変更</string>
+    <string name="discard_changes">変更を取消</string>
+    <string name="apply_to_current_profile">この選択を%1$sプロファイルに適用</string>
+    <string name="apply_to_all_profiles">すべてのプロファイルに適用</string>
+    <string name="start_up_message_pref">起動メッセージ</string>
+    <string name="analytics_pref_title">ユーザー解析</string>
+    <string name="turn_screen_on_info">ナビゲーション中ではロック画面上でも地図を表示します。</string>
+    <string name="route_parameters_info">これらの設定は選択したプロファイル\"%1$s\"にのみ適用され、ルート検索時に反映されます。</string>
+    <string name="wake_time">起床時間</string>
+    <string name="units_and_formats">単位と形式</string>
+    <string name="appearance">外観</string>
+    <string name="map_look_descr">マップの見た目に関する設定です</string>
+    <string name="map_look">マップ外観</string>
+    <string name="list_of_installed_plugins">インストール済みプラグインリスト</string>
+    <string name="configure_navigation">ナビゲーション設定</string>
+    <string name="general_settings_profile_descr">アプリテーマ、ユニット、リージョン</string>
+    <string name="configure_profile">プロファイルの構築</string>
+    <string name="switch_profile">プロファイル切替</string>
+    <string name="application_profile_changed">アプリケーションプロファイルが\"%s\"に切り替えられました</string>
+    <string name="logcat_buffer">Logcat用バッファー</string>
+    <string name="plugins_settings">プラグイン設定</string>
+    <string name="shared_string_by_default">標準設定</string>
+    <string name="download_detailed_map">このエリアを表示するには、より詳細な%s ップをダウンロードしてください。</string>
+    <string name="change_data_storage_full_description">OsmAndデータファイルを新しい保存場所に移動しますか？
+\n%1$s &gt; %2$s</string>
+    <string name="data_storage_preference_summary">%1$s • %2$s</string>
+    <string name="data_storage_space_description">空き容量 %1$s GB • 総容量 %2$s GB</string>
+    <string name="enter_path_to_folder">フォルダーのパスを入力</string>
+    <string name="shared_string_select_folder">フォルダーを選択</string>
+    <string name="paste_Osmand_data_folder_path">OsmAndデータのあるフォルダーへのパスを貼りつけ</string>
+    <string name="change_osmand_data_folder_question">OsmAndデータフォルダーを変更しますか？</string>
+    <string name="move_maps_to_new_destination">新しい保存場所に移動する</string>
+    <string name="internal_app_storage_description">ユーザーや他アプリから隠されている内部ストレージ。他のユーザーやOsmAnd以外のアプリからはアクセスできません</string>
+    <string name="change_data_storage_folder">データ保存フォルダーを変更</string>
+    <string name="rendering_attr_piste_type_snow_park_name">雪遊び広場</string>
+    <string name="rendering_attr_piste_type_sleigh_name">牽引式そり乗り場</string>
+    <string name="rendering_attr_piste_type_sled_name">そり専用ゲレンデ</string>
+    <string name="rendering_attr_piste_type_hike_name">ノルディックスキーまたはハイキング用ゲレンデ</string>
+    <string name="rendering_attr_piste_type_connection_name">リフト間接続</string>
+    <string name="rendering_attr_piste_type_skitour_name">スキーツアー用コース</string>
+    <string name="rendering_attr_piste_type_downhill_name">ダウンヒル</string>
+    <string name="rendering_attr_piste_type_nordic_name">ノルディック用</string>
+    <string name="routeInfo_piste_type_name">ゲレンデタイプ</string>
+    <string name="rendering_attr_piste_difficulty_novice_name">初心者向け</string>
+    <string name="rendering_attr_piste_difficulty_easy_name">初級者向け</string>
+    <string name="rendering_attr_piste_difficulty_intermediate_name">中級者向け</string>
+    <string name="rendering_attr_piste_difficulty_advanced_name">上級者向け</string>
+    <string name="rendering_attr_piste_difficulty_expert_name">熟練者向け</string>
+    <string name="rendering_attr_piste_difficulty_freeride_name">フリーライド用</string>
+    <string name="rendering_attr_piste_difficulty_extreme_name">エクストリーム用</string>
+    <string name="rendering_attr_piste_difficulty_undefined_name">定義なし</string>
+    <string name="routeInfo_piste_difficulty_name">ゲレンデ難易度</string>
+    <string name="avoid_in_routing_descr_">特定のルートや特定の道路種別を避けるよう設定ができます</string>
+    <string name="app_mode_utv">横並び(サイドバイサイド)形式</string>
+    <string name="rendering_attr_piste_difficulty_aerialway_name">索道(リフトやロープウェイなど)</string>
+    <string name="rendering_attr_piste_difficulty_connection_name">リフト間接続</string>
+    <string name="shared_string_calculate">計算</string>
+    <string name="shared_string_osmand_usage">OsmAndの使い方</string>
+    <string name="shared_sting_tiles">タイル</string>
+    <string name="shared_string_maps">マップ</string>
+    <string name="shared_string_memory_tb_desc">%1$s TB</string>
+    <string name="shared_string_memory_gb_desc">%1$s GB</string>
+    <string name="shared_string_memory_mb_desc">%1$s MB</string>
+    <string name="shared_string_memory_kb_desc">%1$s kB</string>
+    <string name="track_storage_directory">経路保存フォルダー</string>
+    <string name="track_storage_directory_descrp">記録した経路は保存フォルダー内に月または日付ごとに分けて保存ができます。</string>
+    <string name="store_tracks_in_rec_directory">記録した経路はRECフォルダーに保存</string>
+    <string name="store_tracks_in_daily_directories">記録した経路は日付ごとのフォルダーに保存</string>
+    <string name="store_tracks_in_daily_directories_descrp">記録した経路は日付ごとにサブフォルダー(例: 2018-01-01)へ保存されます。</string>
+    <string name="shared_string_memory_used_tb_desc">%1$s TB使用</string>
+    <string name="shared_string_memory_used_gb_desc">%1$s GB使用</string>
+    <string name="shared_string_memory_used_mb_desc">%1$s MB使用</string>
+    <string name="shared_string_memory_used_kb_desc">%1$s kB 使用</string>
+    <string name="contour_lines_and_hillshade">等高線と陰影起伏図</string>
+    <string name="routing_attr_prefer_unpaved_name">未舗装道路を優先</string>
+    <string name="routing_attr_prefer_unpaved_description">未舗装道路を好んで進みたい場合の設定です。</string>
+    <string name="update_all_maps">すべてのマップを更新</string>
+    <string name="update_all_maps_q">すべてのマップ(%1$d個)を更新しますか？</string>
+    <string name="release_3_5">• アプリケーションとプロファイルの設定を更新。移動手段に即した各設定、各プロファイルのカスタマイズ機能を搭載
+\n
+\n• ダウンロードすべきマップを提案する新しいダウンロードダイアログの採用
+\n
+\n• 夜間テーマの修正
+\n
+\n• 各国においていくつかのルーティングに関する問題の修正
+\n
+\n• ベースマップをより詳細な道路網のものに更新
+\n
+\n• 各国の浸水地域を修正
+\n
+\n• スキー用ルーティング: ルート詳細に高さに関するプロファイルとルート難易度を追加
+\n
+\n• その他バグ修正など
+\n
+\n</string>
+    <string name="day">日</string>
+    <string name="days_2_4">日</string>
+    <string name="days_5">日</string>
+    <string name="week">週</string>
+    <string name="weeks_2_4">週</string>
+    <string name="weeks_5">週</string>
+    <string name="month">月</string>
+    <string name="months_2_4">月</string>
+    <string name="months_5">月</string>
+    <string name="year">年</string>
+    <string name="years_2_4">年</string>
+    <string name="months_3">三ヶ月</string>
+    <string name="price_free">無料</string>
+    <string name="screen_alerts_descr">ナビゲーション中のアラート(注意や警告)は、画面の左下に表示されます。</string>
+    <string name="language_and_output">言語と出力</string>
+    <string name="reset_to_default">標準設定に戻す</string>
+    <string name="manage_profiles_descr">プロファイルの作成、インポート、編集</string>
+    <string name="manage_profiles">アプリケーションプロファイルの管理…</string>
+    <string name="osmand_settings_descr">アプリケーション全体に影響します</string>
+    <string name="osmand_settings">OsmAnd設定</string>
+    <string name="copy_from_other_profile">他のプロファイルからコピー</string>
+    <string name="turn_screen_on">画面をオンに</string>
+    <string name="map_during_navigation_info">ナビゲーション中のマップ表示</string>
+    <string name="map_during_navigation">ナビゲーション中のマップ表示</string>
+    <string name="shared_string_other">その他</string>
+    <string name="vehicle_parameters_descr">重量、高さ、速度</string>
+    <string name="vehicle_parameters">車両パラメーター</string>
+    <string name="voice_announces_info">音声案内は、ナビゲーション中にのみ再生されます。</string>
+    <string name="voice_announces_descr">ナビゲーション指示と音声案内</string>
+    <string name="voice_announces">音声案内</string>
+    <string name="screen_alerts">画面アラート</string>
+    <string name="route_parameters_descr">ルートパラメーターの構成</string>
+    <string name="route_parameters">ルートパラメーター</string>
+    <string name="gpx_join_gaps">ギャップを埋める</string>
+    <string name="app_mode_wagon">ワゴン車</string>
+    <string name="app_mode_pickup_truck">ピックアップトラック</string>
+    <string name="years_5">年</string>
+    <string name="cancel_subscription">サブスクリプションの解除</string>
+    <string name="apply_preference_to_all_profiles">ここでなされた変更は、すべてのプロファイルまたは選択したプロファイルのみにも適用できます。</string>
+    <string name="shared_preference">現在の設定</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_name">未舗装道路を優先</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_description">未舗装道路を優先してルートを検索します。</string>
+    <string name="osm_recipients_label">OSM受信者</string>
+    <string name="new_route_calculated_dist_dbg">"ルート: 距離 %s、検索時間  %s
+\n検索時間: %.1f秒、道 %d、タイル %d"</string>
+    <string name="price_and_discount">%1$s • %2$s 割引</string>
+    <string name="routing_attr_width_name">幅制限</string>
+    <string name="routing_attr_width_description">ルート検索時に考慮する車幅を指定します。</string>
+    <string name="route_way">道</string>
+    <string name="sit_on_the_stop">停留所標識</string>
+    <string name="lang_oc">オック語</string>
+    <string name="layer_osm_edits">OSM編集域</string>
+    <string name="quick_action_contour_lines_descr">このアクションボタンをタップすると、マップ上の等高線の表示／非表示を切り替えられます</string>
+    <string name="quick_action_contour_lines_show">等高線を表示</string>
+    <string name="quick_action_contour_lines_hide">等高線を非表示</string>
+    <string name="quick_action_show_hide_contour_lines">等高線を表示／非表示</string>
+    <string name="quick_action_hillshade_descr">このアクションボタンをタップすると、マップ上の陰影起伏図の表示／非表示を切り替えられます</string>
+    <string name="quick_action_hillshade_show">陰影起伏図を表示</string>
+    <string name="quick_action_hillshade_hide">陰影起伏図を非表示</string>
+    <string name="quick_action_show_hide_hillshade">陰影起伏図の表示／非表示</string>
 </resources>

@@ -64,7 +64,6 @@
     <string name="avoid_unpaved">המנעות מדרכים שאינן סלולות</string>
     <string name="avoid_ferries">המנעות ממעבורות</string>
     <string name="avoid_in_routing_title">המנעות…</string>
-    <string name="avoid_in_routing_descr">הימנעות מכבישי אגרה, בלתי סלולים ומעבורות למשל.</string>
     <string name="map_widget_show_ruler">סרגל</string>
     <string name="map_widget_view_direction">כיוון הצפייה</string>
     <string name="map_widget_transparent">וידג׳טים שקופים</string>
@@ -2870,7 +2869,6 @@
     <string name="run_full_osmand_msg">המפה שבשימוש היא {0} שמוגשת על ידי OsmAnd. להפעיל את הגרסה המלאה של OsmAnd\?</string>
     <string name="run_full_osmand_header">להפעיל את OsmAnd\?</string>
     <string name="lang_gn_py">גוארני</string>
-    <string name="swap_start_and_destination">החלפת היעד עם המוצא</string>
     <string name="add_destination_point">הוספת יעד</string>
     <string name="add_intermediate_point">הוספת נקודת ביניים</string>
     <string name="add_start_point">הוספת נקודת התחלה</string>
@@ -3227,7 +3225,7 @@
     <string name="wake_time">זמן התעוררות</string>
     <string name="units_and_formats">יחידות ותבניות</string>
     <string name="appearance">מראה</string>
-    <string name="map_look_descr">סמלים, וידג׳טים</string>
+    <string name="map_look_descr">מראה המפה</string>
     <string name="map_look">מראה המפה</string>
     <string name="list_of_installed_plugins">רשימת התוספים המותקנים</string>
     <string name="configure_navigation">הגדרת ניווט</string>
@@ -3273,4 +3271,92 @@
     <string name="pref_selected_by_default_for_profiles">הגדרה זו נבחרת כבררת מחדל על הפרופילים: %s</string>
     <string name="change_default_settings">החלפת הגדרות בררת מחדל</string>
     <string name="logcat_buffer">"זיכרון זמני  יומנים"</string>
+    <string name="shared_string_by_default">כבררת מחדל</string>
+    <string name="plugins_settings">הגדרות תוסף</string>
+    <string name="download_detaile_map">הורדת המפה המפורטת %s, כדי לצפות באזור זה.</string>
+    <string name="download_detailed_map">הורדת מפת %s מפורטת כדי לצפות באזור הזה.</string>
+    <string name="routing_attr_freeride_policy_name">ללא מסלול</string>
+    <string name="change_data_storage_full_description">להעביר את קובצי הנתונים של OsmAnd ליעד החדש\?
+\n%1$s &gt; %2$s</string>
+    <string name="enter_path_to_folder">נא לספק נתיב לתיקייה</string>
+    <string name="shared_string_select_folder">בחירת תיקייה</string>
+    <string name="paste_Osmand_data_folder_path">נא להדביק את הנתיב לתיקייה עם הנתונים של OsmAnd</string>
+    <string name="change_osmand_data_folder_question">להחליף את תיקיית הנתונים של OsmAnd\?</string>
+    <string name="move_maps_to_new_destination">העברה ליעד החדש</string>
+    <string name="internal_app_storage_description">אחסון פנימי, נסתר מהמשתמש ומיישומונים אחרים, לכן אף אחד למעט OsmAnd יכולים לגשת לנתונים שלך</string>
+    <string name="change_data_storage_folder">החלפת תיקיית אחסון הנתונים</string>
+    <string name="rendering_attr_piste_type_snow_park_name">פארק שלג</string>
+    <string name="rendering_attr_piste_type_sleigh_name">מזחלת נגררת</string>
+    <string name="rendering_attr_piste_type_sled_name">מזחלת עצמאית</string>
+    <string name="rendering_attr_piste_type_hike_name">טיול</string>
+    <string name="rendering_attr_piste_type_connection_name">חיבור</string>
+    <string name="rendering_attr_piste_type_skitour_name">סיור סקי</string>
+    <string name="rendering_attr_piste_type_downhill_name">במורד ההר</string>
+    <string name="rendering_attr_piste_type_nordic_name">נורדי</string>
+    <string name="routeInfo_piste_type_name">סוג מסלול</string>
+    <string name="rendering_attr_piste_difficulty_novice_name">מתחילים</string>
+    <string name="rendering_attr_piste_difficulty_easy_name">קל</string>
+    <string name="rendering_attr_piste_difficulty_intermediate_name">בינוניים</string>
+    <string name="rendering_attr_piste_difficulty_advanced_name">מתקדמים</string>
+    <string name="rendering_attr_piste_difficulty_expert_name">מומחים</string>
+    <string name="rendering_attr_piste_difficulty_freeride_name">גלישה חופשית</string>
+    <string name="rendering_attr_piste_difficulty_extreme_name">אקסטרים</string>
+    <string name="rendering_attr_piste_difficulty_undefined_name">אין הגדרה</string>
+    <string name="routeInfo_piste_difficulty_name">דרגת קושי מסלול</string>
+    <string name="routing_attr_width_name">מגבלת רוחב</string>
+    <string name="routing_attr_width_description">ציון מגבלת רוחב מכונית אפשרי בנתיבים.</string>
+    <string name="avoid_in_routing_descr_">הימנעות מסוגים מסוימים של מסלולים וכבישים</string>
+    <string name="app_mode_utv">זה לצד זה</string>
+    <string name="rendering_attr_piste_difficulty_aerialway_name">דרך אווירית</string>
+    <string name="rendering_attr_piste_difficulty_connection_name">חיבור</string>
+    <string name="shared_string_calculate">חישוב</string>
+    <string name="shared_string_osmand_usage">שימוש ב־OsmAnd</string>
+    <string name="shared_sting_tiles">אריחים</string>
+    <string name="shared_string_maps">מפות</string>
+    <string name="shared_string_memory_tb_desc">%1$s ט״ב</string>
+    <string name="shared_string_memory_gb_desc">%1$s ג״ב</string>
+    <string name="shared_string_memory_mb_desc">%1$s מ״ב</string>
+    <string name="shared_string_memory_kb_desc">%1$s ק״ב</string>
+    <string name="track_storage_directory">תיקיית אחסון מסלולים</string>
+    <string name="shared_string_memory_used_tb_desc">%1$s ט״ב בשימוש</string>
+    <string name="shared_string_memory_used_gb_desc">%1$s ג״ב בשימוש</string>
+    <string name="shared_string_memory_used_mb_desc">%1$s מ״ב בשימוש</string>
+    <string name="shared_string_memory_used_kb_desc">%1$s ק״ב בשימוש</string>
+    <string name="contour_lines_and_hillshade">קווי מתאר והצללות תוואי שטח</string>
+    <string name="routing_attr_prefer_unpaved_name">להעדיף דרכים בלתי סלולות</string>
+    <string name="routing_attr_prefer_unpaved_description">להעדיף דרכים בלתי סלולות.</string>
+    <string name="update_all_maps">עדכון כל המפות</string>
+    <string name="update_all_maps_q">לעדכן את כל (%1$d) המפות\?</string>
+    <string name="data_storage_preference_summary">%1$s • %2$s</string>
+    <string name="data_storage_space_description">%1$s ג״ב פנויים • %2$s ג״ב סה״כ</string>
+    <string name="track_storage_directory_descrp">ניתן לאחסן מסלולים בתיקיית rec או בתיקיות חודשיות או יומיות.</string>
+    <string name="store_tracks_in_rec_directory">אחסון מסלולים שהוקלטו בתיקיית rec</string>
+    <string name="store_tracks_in_daily_directories">אחסון מסלולים שהוקלטו בתיקיות יומיות</string>
+    <string name="store_tracks_in_daily_directories_descrp">אחסון מסלולים שהוקלטו בתת־תיקיות לפי יום ההקלטה (למשל: 2019-01-01).</string>
+    <string name="release_3_5">• הגדרות הפרופיל של היישומון עודכנו: מעתה ההגדרות מסודרות לפי סוג. ניתן להתאים כל פרופיל בנפרד.
+\n
+\n • חלונית הורדת מפה חדשה שמציעה להוריד מפה בזמן עיון
+\n
+\n • תיקונים לערכת העיצוב הלילית
+\n
+\n • תוקנו בעיות ניווט ברחבי העולם
+\n
+\n • בסיס המפה עודכן לשיפור פירוט רשת הכבישים
+\n
+\n • שיפור מיפוי האזורים המוצפים ברחבי העולם
+\n
+\n • ניווט סקי: נוספו פרופיל גובה ומורכבות מסלול לפרטי המסלול
+\n
+\n • תיקוני תקלות נוספים
+\n
+\n</string>
+    <string name="apply_preference_to_all_profiles">ניתן להחיל את השינוי הזה לכל הפרופילים או רק לאלו שנבחרו.</string>
+    <string name="shared_preference">משותף</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_name">להעדיף דרכים לא סלולות</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_description">להעדיף דרכים לא סלולות.</string>
+    <string name="layer_osm_edits">עריכות OSM</string>
+    <string name="quick_action_contour_lines_descr">נגיעה בכפתור פעולה זה מציגה או מסתירה קווי מתאר במפה</string>
+    <string name="quick_action_contour_lines_show">הצגת קווי מתאר</string>
+    <string name="quick_action_contour_lines_hide">הסתרת קווי מתאר</string>
+    <string name="quick_action_show_hide_contour_lines">הצגה/הסתרה של קווי מתאר</string>
 </resources>

@@ -1103,7 +1103,6 @@ Lon: %2$s</string>
     <string name="avoid_unpaved">Eviti tervojojn</string>
     <string name="avoid_ferries">Eviti pramojn</string>
     <string name="avoid_in_routing_title">Eviti…</string>
-    <string name="avoid_in_routing_descr">Eviti ekz. pagendajn vojojn, tervojojn, pramojn.</string>
     <string name="map_widget_fluorescent">Rebrilaj kursoj</string>
     <string name="map_widget_view_direction">Viddirekto</string>
     <string name="map_widget_transparent">Diafanaj fenestraĵoj</string>
@@ -2438,8 +2437,8 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="mapillary_menu_title_username">Uzantnomo</string>
     <string name="mapillary_menu_filter_description">Filtri bildojn laŭ alŝutinto, laŭ dato aŭ laŭ tipo; aktivaj nur je pligrandigo.</string>
     <string name="shared_string_reset">Reagordi</string>
-    <string name="store_tracks_in_monthly_directories">Konservi registritajn spurojn en monataj dosierujoj</string>
-    <string name="store_tracks_in_monthly_directories_descrp">Konservi registritajn spurojn en dosierujoj por registrita monato (kiel 2018-01).</string>
+    <string name="store_tracks_in_monthly_directories">Konservi spurojn en monataj dosierujoj</string>
+    <string name="store_tracks_in_monthly_directories_descrp">Konservi registritajn spurojn en subdosierujoj laŭ monato (ekz. 2018-01).</string>
     <string name="average">Mezumo</string>
     <string name="of">%1$d el %2$d</string>
     <string name="ascent_descent">Supreniroj/malsupreniroj</string>
@@ -2865,7 +2864,6 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="quick_action_switch_day_mode">Taga reĝimo</string>
     <string name="quick_action_switch_night_mode">Nokta reĝimo</string>
     <string name="quick_action_day_night_switch_mode">Taga/nokta reĝimo</string>
-    <string name="swap_start_and_destination">Interŝanĝi komencon por celo</string>
     <string name="add_destination_point">Aldoni celon</string>
     <string name="add_intermediate_point">Aldoni intercelon</string>
     <string name="add_start_point">Aldoni komencpunkton</string>
@@ -3241,7 +3239,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="wake_time">Tempo de irado</string>
     <string name="units_and_formats">Unuoj kaj formoj</string>
     <string name="appearance">Aspekto</string>
-    <string name="map_look_descr">Emblemoj, fenestraĵoj</string>
+    <string name="map_look_descr">Alĝustigi mapon</string>
     <string name="map_look">Map‑aspekto</string>
     <string name="list_of_installed_plugins">Listo de instalitaj kromprogramoj</string>
     <string name="configure_navigation">Alĝustigi navigadon</string>
@@ -3271,4 +3269,84 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="application_profile_changed">Profilo de aplikaĵo ŝanĝita al “%s”</string>
     <string name="logcat_buffer">Bufro logcat</string>
     <string name="plugins_settings">Agordoj pri kromprogramo</string>
+    <string name="shared_string_by_default">Implicite</string>
+    <string name="download_detailed_map">Elŝutu la detalan mapon %s, por vidi tiun ĉi areon.</string>
+    <string name="change_data_storage_full_description">Ĉu movi datum‑dosierojn OsmAnd al la nova loko\?
+\n%1$s → %2$s</string>
+    <string name="enter_path_to_folder">Entajpu dosier‑indikon</string>
+    <string name="shared_string_select_folder">Elektu dosierujon</string>
+    <string name="paste_Osmand_data_folder_path">Algluu dosier‑indikon por dosierujo de OsmAnd‑datumoj</string>
+    <string name="change_osmand_data_folder_question">Ĉu ŝanĝi datum‑dosierujon OsmAnd\?</string>
+    <string name="move_maps_to_new_destination">Movi al la nova loko</string>
+    <string name="internal_app_storage_description">Interna konservejo, kaŝita de uzanto kaj de aliaj aplikaĵoj, do nur OsmAnd povas aliri viajn datumojn</string>
+    <string name="change_data_storage_folder">Ŝanĝi dosierujon por konservi datumojn</string>
+    <string name="rendering_attr_piste_type_snow_park_name">neĝ‑parko</string>
+    <string name="rendering_attr_piste_type_sleigh_name">glitveturado (tirata de hundoj)</string>
+    <string name="rendering_attr_piste_type_sled_name">glitveturado (motora)</string>
+    <string name="rendering_attr_piste_type_hike_name">marŝado</string>
+    <string name="rendering_attr_piste_type_connection_name">ligilo</string>
+    <string name="rendering_attr_piste_type_skitour_name">ski‑ekskurso</string>
+    <string name="rendering_attr_piste_type_downhill_name">alpa (malsuprenira)</string>
+    <string name="rendering_attr_piste_type_nordic_name">nordia (skikurada)</string>
+    <string name="routeInfo_piste_type_name">Speco de skivojo</string>
+    <string name="rendering_attr_piste_difficulty_novice_name">facilega (por novuloj)</string>
+    <string name="rendering_attr_piste_difficulty_easy_name">facila</string>
+    <string name="rendering_attr_piste_difficulty_intermediate_name">meza</string>
+    <string name="rendering_attr_piste_difficulty_advanced_name">malfacila</string>
+    <string name="rendering_attr_piste_difficulty_expert_name">malfacilega</string>
+    <string name="rendering_attr_piste_difficulty_freeride_name">tre malfacilega</string>
+    <string name="rendering_attr_piste_difficulty_extreme_name">ekstrema</string>
+    <string name="rendering_attr_piste_difficulty_undefined_name">nedifinita</string>
+    <string name="routeInfo_piste_difficulty_name">Facilo de skivojo</string>
+    <string name="routing_attr_width_name">Limigo de larĝo</string>
+    <string name="routing_attr_width_description">Difini permesatan limigon de larĝo de veturilo.</string>
+    <string name="avoid_in_routing_descr_">Eviti difinitajn kursojn kaj specojn de vojoj</string>
+    <string name="app_mode_utv">Ĉiuteren‑veturilo (UTV)</string>
+    <string name="rendering_attr_piste_difficulty_aerialway_name">kablovojo</string>
+    <string name="rendering_attr_piste_difficulty_connection_name">ligilo</string>
+    <string name="shared_string_calculate">Kalkuli</string>
+    <string name="shared_string_osmand_usage">Uzado de OsmAnd</string>
+    <string name="shared_sting_tiles">Kaheloj</string>
+    <string name="shared_string_maps">Mapoj</string>
+    <string name="shared_string_memory_tb_desc">%1$s TB</string>
+    <string name="shared_string_memory_gb_desc">%1$s GB</string>
+    <string name="shared_string_memory_mb_desc">%1$s MB</string>
+    <string name="shared_string_memory_kb_desc">%1$s kB</string>
+    <string name="data_storage_preference_summary">%1$s • %2$s</string>
+    <string name="data_storage_space_description">Libera: %1$s GB • Tute: %2$s GB</string>
+    <string name="track_storage_directory">Dosierujo por konservi spurojn</string>
+    <string name="track_storage_directory_descrp">Povas konservi registritajn spurojn en unu dosierujo aŭ en dosierujoj laŭ monato aŭ tago.</string>
+    <string name="store_tracks_in_rec_directory">Konservi spurojn en unu dosierujo</string>
+    <string name="store_tracks_in_daily_directories">Konservi spurojn en tagaj dosierujoj</string>
+    <string name="store_tracks_in_daily_directories_descrp">Konservi registritajn spurojn en subdosierujoj laǔ tago (ekz. 2018-01-01).</string>
+    <string name="shared_string_memory_used_tb_desc">Uzita: %1$s TB</string>
+    <string name="shared_string_memory_used_gb_desc">Uzita %1$s GB</string>
+    <string name="shared_string_memory_used_mb_desc">Uzita %1$s MB</string>
+    <string name="shared_string_memory_used_kb_desc">Uzita %1$s kB</string>
+    <string name="contour_lines_and_hillshade">Nivelkurboj kaj nivelombrumo</string>
+    <string name="routing_attr_prefer_unpaved_name">Preferi tervojojn</string>
+    <string name="routing_attr_prefer_unpaved_description">Preferi vojojn sen firma pavimo.</string>
+    <string name="update_all_maps">Ĝisdatigi ĉiujn mapojn</string>
+    <string name="update_all_maps_q">Ĉu vi certe volas ĝisdatigi ĉiujn (%1$d) mapojn\?</string>
+    <string name="release_3_5">"• ĝisdatigitaj agordoj de aplikaĵo kaj de profiloj: oportuna ordigo laŭ speco, eblaĵo alĝustigi ĉiun profilon
+\n
+\n• nova ekrano de map‑elŝuto, propono elŝuti rilatan mapon dum foliumi mapon
+\n
+\n•  plibonigoj al nokta reĝimo
+\n
+\n•  riparitaj kelkaj problemoj pri difinado de vojo
+\n
+\n•  aktualigita fundamenta mapo de mondo, pli detala reto de vojoj
+\n
+\n•  riparitaj problemoj pri superakvitaj arenoj tra la mondo
+\n
+\n•  skiado: aldonita profilo de altitudo kaj kompliko de skivojo al detaloj pri skivojo
+\n
+\n•  riparoj de aliaj eraroj
+\n
+\n"</string>
+    <string name="apply_preference_to_all_profiles">Vi povas apliki tiun ĉi ŝanĝon al ĉiuj profiloj aŭ nur al la elektitaj.</string>
+    <string name="shared_preference">Komuna</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_name">Preferi tervojojn</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_description">Preferi vojojn sen firma pavimo.</string>
 </resources>

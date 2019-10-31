@@ -36,7 +36,6 @@
     <string name="avoid_unpaved">Undvik oasfalterade vägar</string>
     <string name="avoid_ferries">Undvik färjor</string>
     <string name="avoid_in_routing_title">Undvik…</string>
-    <string name="avoid_in_routing_descr">Undvik t.ex. vägtullar, oasfalterade vägar, färjor.</string>
     <string name="map_widget_show_ruler">Linjal</string>
     <string name="map_widget_view_direction">Färdriktning</string>
     <string name="map_widget_transparent">Genomskinliga widgetar</string>
@@ -2759,7 +2758,6 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="shared_string_capacity">Kapacitet</string>
     <string name="shared_string_width">Bredd</string>
     <string name="shared_string_height">Höjd</string>
-    <string name="swap_start_and_destination">Växla start och mål</string>
     <string name="add_destination_point">Lägg till destination</string>
     <string name="add_intermediate_point">Lägg till hållplats</string>
     <string name="add_start_point">Lägg till startpunkt</string>
@@ -2777,32 +2775,32 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="voice_announcements">Röstmeddelanden</string>
     <string name="intermediate_destinations">Mellanliggande destinationer</string>
     <string name="arrive_at_time">Ankomst klockan %1$s</string>
-    <string name="rate_dialog_descr">Vänligen ge oss 30 sekunder, dela återkoppling och betygsätt vårt arbete på Google Play.</string>
+    <string name="rate_dialog_descr">Vänligen ge oss 30 sekunder genom att dela din återkoppling och betygsätta vårt arbete på Google Play.</string>
     <string name="button_rate">Betygsätt</string>
     <string name="shared_string_privacy_policy">Sekretesspolicy</string>
     <string name="help_us_make_osmand_better">Hjälp oss att göra OsmAnd bättre!</string>
-    <string name="make_osmand_better_descr">Tillåt OsmAnd att samla in och bearbeta anonyma användningsdata. Vi samlar inte in eller lagrar data om din plats, eller om de platser som du ser på kartan.
-\n
-\nDu kan alltid ändra ditt val i Inställningar &gt; Sekretess och säkerhet.</string>
+    <string name="make_osmand_better_descr">Tillåt OsmAnd att samla in och bearbeta anonyma applikationsanvändningsdata. Vi samlar inte in eller lagrar data om din position, eller om några platser du ser på kartan. 
+\n 
+\nDu kan när som helst ändra ditt val i Inställningar &gt; Sekretess och säkerhet.</string>
     <string name="choose_data_to_share">Välj vilken typ av data du vill dela:</string>
-    <string name="downloaded_maps">Hämtade Kartor</string>
+    <string name="downloaded_maps">Kartor nedladdade</string>
     <string name="visited_screens">Besökta skärmar</string>
-    <string name="collected_data_descr">Lista över data du vill dela med OsmAnd.</string>
-    <string name="downloaded_maps_collect_descr">Vi samlar in dessa data för att förstå kartorna över vilka regioner och länder som är mest populära.</string>
-    <string name="visited_screens_collect_descr">Vi samlar in dessa data för att förstå de mest populära funktionerna i OsmAnd.</string>
-    <string name="privacy_and_security_change_descr">Genom att klicka på \"Tillåt\" godkänner du våra %1$s</string>
-    <string name="settings_privacy_and_security">Integritet och säkerhet</string>
-    <string name="settings_privacy_and_security_desc">Välj dina data för att dela med oss</string>
+    <string name="collected_data_descr">Definiera vilka data du tillåter OsmAnd att dela.</string>
+    <string name="downloaded_maps_collect_descr">Hjälper oss att förstå vilka kartor över vilka regioner och länder som är de mest populära.</string>
+    <string name="visited_screens_collect_descr">Hjälper oss att förstå vilka OsmAnd-funktioner som är de mest populära.</string>
+    <string name="privacy_and_security_change_descr">Genom att trycka på \"Tillåt\" godkänner du våra %1$s</string>
+    <string name="settings_privacy_and_security">Sekretess och säkerhet</string>
+    <string name="settings_privacy_and_security_desc">Välj vilka data du delar med oss</string>
     <string name="shared_string_no_thank_you">Nej, tack</string>
     <string name="shared_string_allow">Tillåt</string>
     <string name="profile_name_hint">Profilnamn</string>
-    <string name="nav_type_hint">Navigationstyp</string>
+    <string name="nav_type_hint">Navigeringstyp</string>
     <string name="app_mode_taxi">Taxi</string>
     <string name="app_mode_shuttle_bus">Pendelbuss</string>
     <string name="app_mode_subway">Tunnelbana</string>
     <string name="app_mode_horse">Häst</string>
     <string name="app_mode_helicopter">Helikopter</string>
-    <string name="osmand_routing_promo">Du kan lägga till egen modifierad version av routing.xml till ..osmand/routing</string>
+    <string name="osmand_routing_promo">Du kan lägga till din egenmodifierade version av filen routing.xml i ..osmand/routing</string>
     <string name="app_mode_skiing">Skidning</string>
     <string name="base_profile_descr_ski">Skidning</string>
     <string name="select_icon_profile_dialog_title">Välj ikon</string>
@@ -2812,7 +2810,7 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="profile_type_descr_string">Typ: %s</string>
     <string name="profile_type_base_string">Basprofil</string>
     <string name="profile_alert_need_routing_type_title">Välj navigeringstyp</string>
-    <string name="profile_alert_need_routing_type_msg">Du måste välja Navigeringstyp för att skapa ny applikationsprofil</string>
+    <string name="profile_alert_need_routing_type_msg">Välj en navigeringstyp för den nya applikationsprofilen</string>
     <string name="profile_alert_need_profile_name_title">Ange profilnamn</string>
     <string name="profile_alert_need_profile_name_msg">Profilnamnet ska inte vara tomt!</string>
     <string name="profile_alert_duplicate_name_msg">Det finns redan profil med sådant namn</string>
@@ -2900,7 +2898,7 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="wake_time">Vakentid</string>
     <string name="units_and_formats">Enheter &amp; format</string>
     <string name="appearance">Utseende</string>
-    <string name="map_look_descr">ikoner, moduler</string>
+    <string name="map_look_descr">Kartans utseende</string>
     <string name="map_look">Kartans utseende</string>
     <string name="list_of_installed_plugins">Lista med installerade tillägg</string>
     <string name="configure_navigation">Konfigurera navigation</string>
@@ -2930,4 +2928,5 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="application_profile_changed">Programprofil ändrat till \"%s\"</string>
     <string name="logcat_buffer">Logcat-buffert</string>
     <string name="plugins_settings">Tilläggsinställningar</string>
+    <string name="app_mode_utv">Sida vid sida</string>
 </resources>

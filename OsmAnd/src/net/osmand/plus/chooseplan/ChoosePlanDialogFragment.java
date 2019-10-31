@@ -197,6 +197,12 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 				dismiss();
 			}
 		});
+		view.findViewById(R.id.button_restore).setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				purchaseHelper.requestInventory();
+			}
+		});
 
 		ViewGroup infoContainer = (ViewGroup) view.findViewById(R.id.info_container);
 		TextViewEx infoDescription = (TextViewEx) view.findViewById(R.id.info_description);
@@ -329,9 +335,11 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 	@SuppressLint("CutPasteId")
 	private void setupOsmLiveCardButtons(boolean progress) {
 		final Context ctx = getContext();
-		if (ctx == null) {
+		View view = getView();
+		if (ctx == null || view == null) {
 			return;
 		}
+		view.findViewById(R.id.button_restore).setEnabled(!progress);
 		if (progress) {
 			if (osmLiveCardButtonsContainer != null) {
 				osmLiveCardButtonsContainer.setVisibility(View.GONE);
@@ -639,6 +647,10 @@ public abstract class ChoosePlanDialogFragment extends BaseOsmAndDialogFragment 
 
 	@Override
 	public void onGetItems() {
+		OsmandApplication app = getMyApplication();
+		if (app != null && InAppPurchaseHelper.isSubscribedToLiveUpdates(app)) {
+			dismiss();
+		}
 	}
 
 	@Override

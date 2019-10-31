@@ -381,12 +381,12 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 												if (clr != 0 && sf.getModifiableGpxFile() != null) {
 													sf.getModifiableGpxFile().setColor(clr);
 													if (getGpxDataItem() != null) {
-														app.getGpxDatabase().updateColor(getGpxDataItem(), clr);
+														app.getGpxDbHelper().updateColor(getGpxDataItem(), clr);
 													}
 												}
 											}
 										} else if (getGpxDataItem() != null) {
-											app.getGpxDatabase().updateColor(getGpxDataItem(), clr);
+											app.getGpxDbHelper().updateColor(getGpxDataItem(), clr);
 										}
 										if (gpx != null && gpx.showCurrentTrack) {
 											app.getSettings().CURRENT_TRACK_COLOR.set(clr);
@@ -846,7 +846,7 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 		}
 		GpxDataItem item = getGpxDataItem();
 		if (item != null) {
-			app.getGpxDatabase().updateSplit(item, splitType, splitInterval);
+			app.getGpxDbHelper().updateSplit(item, splitType, splitInterval);
 		}
 	}
 

@@ -3727,4 +3727,12 @@
     <string name="poi_disabled_designated">Udpeget</string>
     <string name="poi_cellar_entrance">Kælderindgang</string>
     <string name="poi_health_food">Helsekost</string>
+    <string name="poi_craft_builder">Bygger</string>
+    <string name="poi_craft_distillery">Destilleri</string>
+    <string name="poi_craft_joiner">Snedker</string>
+    <string name="poi_craft_floorer">Gulvlægger</string>
+    <string name="poi_craft_bakery">Bager</string>
+    <string name="poi_craft_cabinet_maker">Møbelsnedker</string>
+    <string name="poi_charge">Gebyr</string>
+    <string name="poi_pet_grooming">Kæledyrspleje</string>
 </resources>

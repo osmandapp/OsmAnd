@@ -904,7 +904,6 @@
     <string name="avoid_unpaved">Уникати польових доріг</string>
     <string name="avoid_ferries">Уникати поромів</string>
     <string name="avoid_in_routing_title">Уникати…</string>
-    <string name="avoid_in_routing_descr">Уникати, наприклад, платні дороги, дороги без покриття, пороми.</string>
     <string name="map_widget_fluorescent">Флуоресцентні маршрути</string>
     <string name="map_widget_show_ruler">Лінійка</string>
     <string name="map_widget_transparent">Прозорі віджети</string>
@@ -1923,7 +1922,7 @@
     <string name="osm_live_not_active">Не активний</string>
     <string name="osm_live_enter_email">Будь ласка, введіть дійсну електронну адресу</string>
     <string name="osm_live_subscription_settings">Налаштування підписки</string>
-    <string name="select_map_marker">Виберіть позначку</string>
+    <string name="select_map_marker">Оберіть позначку на мапі</string>
     <string name="upload_anonymously">Вивантажено анонімно</string>
     <string name="show_transparency_seekbar">Показати прозору пошукову панель</string>
     <string name="report">Звіт</string>
@@ -2907,7 +2906,7 @@
     <string name="shared_string_capacity">Об\'єм</string>
     <string name="shared_string_width">Ширина</string>
     <string name="shared_string_height">Висота</string>
-    <string name="swap_start_and_destination">Поміняти місцями пункти відправлення та призначення</string>
+    <string name="swap_start_and_destination">Поміняти місцями пункти <b>відправлення</b> та <b>призначення</b></string>
     <string name="add_destination_point">Додати пункт призначення</string>
     <string name="add_intermediate_point">Додати проміжний пункт</string>
     <string name="add_start_point">Додати пункт відправлення</string>
@@ -3303,4 +3302,5 @@
     <string name="voice_announces_descr">Інструкції і попередження при навігації</string>
     <string name="logcat_buffer">Буфер logcat</string>
     <string name="plugins_settings">Налаштування втулка</string>
+    <string name="shared_string_by_default">Типово</string>
 </resources>

@@ -22,6 +22,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.IBinder;
 import android.os.PowerManager;
+import android.os.StatFs;
 import android.support.annotation.AttrRes;
 import android.support.annotation.ColorInt;
 import android.support.annotation.ColorRes;
@@ -387,13 +388,18 @@ public class AndroidUtils {
 				: ctx.getResources().getColor(R.color.text_color_secondary_light));
 	}
 
-
 	public static int getTextWidth(float textSize, String text) {
 		Paint paint = new Paint();
 		paint.setTextSize(textSize);
 		return (int) paint.measureText(text);
 	}
-	
+
+	public static int getTextHeight(Paint paint) {
+		Paint.FontMetrics fm = paint.getFontMetrics();
+		float height = fm.bottom - fm.top;
+		return (int) height;
+	}
+
 	public static int dpToPx(Context ctx, float dp) {
 		Resources r = ctx.getResources();
 		return (int) TypedValue.applyDimension(
@@ -585,6 +591,28 @@ public class AndroidUtils {
 		} else {
 			return baseString;
 		}
+	}
+
+	public static float getFreeSpaceGb(File dir) {
+		if (dir.canRead()) {
+			StatFs fs = new StatFs(dir.getAbsolutePath());
+			return (float) (fs.getBlockSize()) * fs.getAvailableBlocks() / (1 << 30);
+		}
+		return -1;
+	}
+
+	public static float getTotalSpaceGb(File dir) {
+		if (dir.canRead()) {
+			return (float) (dir.getTotalSpace()) / (1 << 30);
+		}
+		return -1;
+	}
+
+	public static float getUsedSpaceGb(File dir) {
+		if (dir.canRead()) {
+			return getTotalSpaceGb(dir) - getFreeSpaceGb(dir);
+		}
+		return -1;
 	}
 
 	public static CharSequence getStyledString(CharSequence baseString, CharSequence stringToInsertAndStyle,

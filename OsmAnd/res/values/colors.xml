@@ -12,15 +12,15 @@
 	<color name="divider_color_light">#e6e6e6</color>
 	<color name="divider_color_dark">#2c3033</color>
 	<color name="activity_background_color_light">#f0f0f0</color>
-	<color name="activity_background_color_dark">#17181a</color>
+	<color name="activity_background_color_dark">#121212</color>
 	<color name="activity_background_transparent_color_light">#eaf0f0f0</color>
 	<color name="activity_background_transparent_color_dark">#ea17181a</color>
 	<color name="list_background_color_light">#ffffff</color>
-	<color name="list_background_color_dark">#222526</color>
+	<color name="list_background_color_dark">#1E1F20</color>
 	<color name="app_bar_color_light">#ff8800</color>
-	<color name="app_bar_color_dark">#101112</color>
+	<color name="app_bar_color_dark">#252727</color>
 	<color name="status_bar_color_light">#e68200</color>
-	<color name="status_bar_color_dark">#101112</color>
+	<color name="status_bar_color_dark">#232525</color>
 
 	<color name="active_buttons_and_links_bg_pressed_light">#0f67eb</color>
 	<color name="active_buttons_and_links_bg_pressed_dark">#b87114</color>

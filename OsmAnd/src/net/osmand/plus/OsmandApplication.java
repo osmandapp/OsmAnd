@@ -116,7 +116,6 @@ public class OsmandApplication extends MultiDexApplication {
 	FavouritesDbHelper favorites;
 	CommandPlayer player;
 	GpxSelectionHelper selectedGpxHelper;
-	GPXDatabase gpxDatabase;
 	SavingTrackHelper savingTrackHelper;
 	AnalyticsHelper analyticsHelper;
 	NotificationHelper notificationHelper;
@@ -136,6 +135,8 @@ public class OsmandApplication extends MultiDexApplication {
 	InAppPurchaseHelper inAppPurchaseHelper;
 	MapViewTrackingUtilities mapViewTrackingUtilities;
 	LockHelper lockHelper;
+	SettingsHelper settingsHelper;
+	GpxDbHelper gpxDbHelper;
 
 	private RoutingConfiguration.Builder routingConfig;
 	private Locale preferredLocale = null;
@@ -315,8 +316,8 @@ public class OsmandApplication extends MultiDexApplication {
 		return selectedGpxHelper;
 	}
 
-	public GPXDatabase getGpxDatabase() {
-		return gpxDatabase;
+	public GpxDbHelper getGpxDbHelper() {
+		return gpxDbHelper;
 	}
 
 	public FavouritesDbHelper getFavorites() {
@@ -333,6 +334,10 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public LockHelper getLockHelper() {
 		return lockHelper;
+	}
+
+	public SettingsHelper getSettingsHelper() {
+		return settingsHelper;
 	}
 
 	public synchronized DownloadIndexesThread getDownloadThread() {
@@ -444,9 +449,9 @@ public class OsmandApplication extends MultiDexApplication {
 		return player;
 	}
 
-	public void initVoiceCommandPlayer(final Activity uiContext, ApplicationMode applicationMode,
-									   boolean warningNoneProvider, Runnable run, boolean showDialog, boolean force) {
-		String voiceProvider = osmandSettings.VOICE_PROVIDER.get();
+	public void initVoiceCommandPlayer(final Activity uiContext, final ApplicationMode applicationMode,
+	                                   boolean warningNoneProvider, Runnable run, boolean showDialog, boolean force) {
+		String voiceProvider = osmandSettings.VOICE_PROVIDER.getModeValue(applicationMode);
 		if (voiceProvider == null || OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(voiceProvider)) {
 			if (warningNoneProvider && voiceProvider == null) {
 				final AlertDialog.Builder builder = new AlertDialog.Builder(uiContext);
@@ -490,7 +495,7 @@ public class OsmandApplication extends MultiDexApplication {
 				builder.setNeutralButton(R.string.shared_string_do_not_use, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialogInterface, int i) {
-						osmandSettings.VOICE_PROVIDER.set(OsmandSettings.VOICE_PROVIDER_NOT_USE);
+						osmandSettings.VOICE_PROVIDER.setModeValue(applicationMode, OsmandSettings.VOICE_PROVIDER_NOT_USE);
 					}
 				});
 

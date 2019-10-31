@@ -23,6 +23,7 @@ import android.support.v7.widget.SwitchCompat;
 import android.text.SpannableString;
 import android.text.style.StyleSpan;
 import android.util.TypedValue;
+import android.view.ContextThemeWrapper;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,7 +73,10 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
+import net.osmand.plus.GpxDbHelper;
+import net.osmand.plus.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -219,7 +223,8 @@ public class GpxUiHelper {
 	}
 
 	public static AlertDialog selectGPXFiles(List<String> selectedGpxList, final Activity activity,
-											 final CallbackWithObject<GPXFile[]> callbackWithObject) {
+											 final CallbackWithObject<GPXFile[]> callbackWithObject, 
+											 int dialogThemeRes) {
 		OsmandApplication app = (OsmandApplication) activity.getApplication();
 		final File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
 		final List<GPXInfo> allGpxList = getSortedGPXFilesInfo(dir, selectedGpxList, false);
@@ -229,11 +234,13 @@ public class GpxUiHelper {
 		allGpxList.add(0, new GPXInfo(activity.getString(R.string.show_current_gpx_title), 0, 0));
 
 		final ContextMenuAdapter adapter = createGpxContextMenuAdapter(allGpxList, selectedGpxList, true);
-		return createDialog(activity, true, true, true, callbackWithObject, allGpxList, adapter);
+		return createDialog(activity, true, true, true, callbackWithObject, allGpxList, adapter, dialogThemeRes);
 	}
 
 	public static AlertDialog selectGPXFile(final Activity activity,
-											final boolean showCurrentGpx, final boolean multipleChoice, final CallbackWithObject<GPXFile[]> callbackWithObject) {
+											final boolean showCurrentGpx, final boolean multipleChoice, 
+											final CallbackWithObject<GPXFile[]> callbackWithObject, boolean nightMode) {
+		int dialogThemeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 		OsmandApplication app = (OsmandApplication) activity.getApplication();
 		final File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
 		final List<GPXInfo> list = getSortedGPXFilesInfo(dir, null, false);
@@ -246,7 +253,7 @@ public class GpxUiHelper {
 			}
 
 			final ContextMenuAdapter adapter = createGpxContextMenuAdapter(list, null, showCurrentGpx);
-			return createDialog(activity, showCurrentGpx, multipleChoice, false, callbackWithObject, list, adapter);
+			return createDialog(activity, showCurrentGpx, multipleChoice, false, callbackWithObject, list, adapter, dialogThemeRes);
 		}
 		return null;
 	}
@@ -433,24 +440,77 @@ public class GpxUiHelper {
 		return dlg;
 	}
 
+	private static class DialogGpxDataItemCallback implements GpxDataItemCallback {
+		private static final int UPDATE_GPX_ITEM_MSG_ID = OsmAndConstants.UI_HANDLER_LOCATION_SERVICE + 6;
+		private static final long MIN_UPDATE_INTERVAL = 500;
+
+		private OsmandApplication app;
+		private long lastUpdateTime;
+		private boolean updateEnable = true;
+		private ArrayAdapter<String> listAdapter;
+
+		DialogGpxDataItemCallback(OsmandApplication app) {
+			this.app = app;
+		}
+
+		public boolean isUpdateEnable() {
+			return updateEnable;
+		}
+
+		public void setUpdateEnable(boolean updateEnable) {
+			this.updateEnable = updateEnable;
+		}
+
+		public ArrayAdapter<String> getListAdapter() {
+			return listAdapter;
+		}
+
+		public void setListAdapter(ArrayAdapter<String> listAdapter) {
+			this.listAdapter = listAdapter;
+		}
+
+		private Runnable updateItemsProc = new Runnable() {
+			@Override
+			public void run() {
+				if (updateEnable) {
+					lastUpdateTime = System.currentTimeMillis();
+					listAdapter.notifyDataSetChanged();
+				}
+			}
+		};
+
+		@Override
+		public boolean isCancelled() {
+			return !updateEnable;
+		}
+
+		@Override
+		public void onGpxDataItemReady(GpxDataItem item) {
+			if (System.currentTimeMillis() - lastUpdateTime > MIN_UPDATE_INTERVAL) {
+				updateItemsProc.run();
+			}
+			app.runMessageInUIThreadAndCancelPrevious(UPDATE_GPX_ITEM_MSG_ID, updateItemsProc, MIN_UPDATE_INTERVAL);
+		}
+	}
+
 	private static AlertDialog createDialog(final Activity activity,
 											final boolean showCurrentGpx,
 											final boolean multipleChoice,
 											final boolean showAppearanceSetting,
 											final CallbackWithObject<GPXFile[]> callbackWithObject,
 											final List<GPXInfo> list,
-											final ContextMenuAdapter adapter) {
+											final ContextMenuAdapter adapter,
+	                                        final int themeRes) {
 		final OsmandApplication app = (OsmandApplication) activity.getApplication();
 		final DateFormat dateFormat = android.text.format.DateFormat.getMediumDateFormat(activity);
 		final File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
-		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+		AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(activity, themeRes));
 		final int layout = R.layout.gpx_track_item;
 		final Map<String, String> gpxAppearanceParams = new HashMap<>();
+		final DialogGpxDataItemCallback gpxDataItemCallback = new DialogGpxDataItemCallback(app);
 
 		final ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(activity, layout, R.id.title,
 				adapter.getItemNames()) {
-
-			List<GpxDataItem> dataItems = null;
 
 			@Override
 			public int getItemViewType(int position) {
@@ -463,32 +523,25 @@ public class GpxUiHelper {
 			}
 
 			private GpxDataItem getDataItem(GPXInfo info) {
-				if (dataItems != null) {
-					for (GpxDataItem item : dataItems) {
-						if (item.getFile().getAbsolutePath().endsWith(info.fileName)) {
-							return item;
-						}
-					}
-				}
-				return null;
+				return app.getGpxDbHelper().getItem(
+						new File(app.getAppPath(IndexConstants.GPX_INDEX_DIR), info.getFileName()),
+						gpxDataItemCallback);
 			}
 
 			@Override
-			public View getView(final int position, View convertView, ViewGroup parent) {
+			@NonNull
+			public View getView(final int position, View convertView, @NonNull ViewGroup parent) {
 				// User super class to create the View
 				View v = convertView;
 				boolean checkLayout = getItemViewType(position) == 0;
 				if (v == null) {
-					v = activity.getLayoutInflater().inflate(layout, null);
-				}
-
-				if (dataItems == null) {
-					dataItems = app.getGpxDatabase().getItems();
+					v = View.inflate(new ContextThemeWrapper(activity, themeRes), layout, null);
 				}
 
 				final ContextMenuItem item = adapter.getItem(position);
 				GPXInfo info = list.get(position);
-				updateGpxInfoView(v, item.getTitle(), info, getDataItem(info), showCurrentGpx && position == 0, app);
+				boolean currentlyRecordingTrack = showCurrentGpx && position == 0;
+				updateGpxInfoView(v, item.getTitle(), info, currentlyRecordingTrack ? null : getDataItem(info), currentlyRecordingTrack, app);
 
 				if (item.getSelected() == null) {
 					v.findViewById(R.id.check_item).setVisibility(View.GONE);
@@ -530,6 +583,7 @@ public class GpxUiHelper {
 			public void onClick(DialogInterface dialog, int position) {
 			}
 		};
+		gpxDataItemCallback.setListAdapter(listAdapter);
 		builder.setAdapter(listAdapter, onClickListener);
 		if (multipleChoice) {
 			if (showAppearanceSetting) {
@@ -546,7 +600,7 @@ public class GpxUiHelper {
 				if (trackWidthProp == null || trackColorProp == null) {
 					builder.setTitle(R.string.show_gpx);
 				} else {
-					final View apprTitleView = activity.getLayoutInflater().inflate(R.layout.select_gpx_appearance_title, null);
+					final View apprTitleView = View.inflate(new ContextThemeWrapper(activity, themeRes), R.layout.select_gpx_appearance_title, null);
 
 					final OsmandSettings.CommonPreference<String> prefWidth
 							= app.getSettings().getCustomRenderProperty(CURRENT_TRACK_WIDTH_ATTR);
@@ -558,14 +612,14 @@ public class GpxUiHelper {
 					apprTitleView.findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
 						@Override
 						public void onClick(View v) {
-							final ListPopupWindow popup = new ListPopupWindow(activity);
+							final ListPopupWindow popup = new ListPopupWindow(new ContextThemeWrapper(activity, themeRes));
 							popup.setAnchorView(apprTitleView);
 							popup.setContentWidth(AndroidUtils.dpToPx(activity, 200f));
 							popup.setModal(true);
 							popup.setDropDownGravity(Gravity.RIGHT | Gravity.TOP);
 							popup.setVerticalOffset(AndroidUtils.dpToPx(activity, -48f));
 							popup.setHorizontalOffset(AndroidUtils.dpToPx(activity, -6f));
-							final GpxAppearanceAdapter gpxApprAdapter = new GpxAppearanceAdapter(activity,
+							final GpxAppearanceAdapter gpxApprAdapter = new GpxAppearanceAdapter(new ContextThemeWrapper(activity, themeRes),
 									gpxAppearanceParams.containsKey(CURRENT_TRACK_COLOR_ATTR) ? gpxAppearanceParams.get(CURRENT_TRACK_COLOR_ATTR) : prefColor.get(),
 									GpxAppearanceAdapter.GpxAppearanceAdapterType.TRACK_WIDTH_COLOR);
 							popup.setAdapter(gpxApprAdapter);
@@ -669,7 +723,7 @@ public class GpxUiHelper {
 					if (position == 0 && showCurrentGpx && item.getSelected()) {
 						OsmandMonitoringPlugin monitoringPlugin = OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class);
 						if (monitoringPlugin == null) {
-							AlertDialog.Builder confirm = new AlertDialog.Builder(activity);
+							AlertDialog.Builder confirm = new AlertDialog.Builder(new ContextThemeWrapper(activity, themeRes));
 							confirm.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 								@Override
 								public void onClick(DialogInterface dialog, int which) {
@@ -714,6 +768,12 @@ public class GpxUiHelper {
 						}
 					});
 				}
+			}
+		});
+		dlg.setOnDismissListener(new DialogInterface.OnDismissListener() {
+			@Override
+			public void onDismiss(DialogInterface dialog) {
+				gpxDataItemCallback.setUpdateEnable(false);
 			}
 		});
 		dlg.show();

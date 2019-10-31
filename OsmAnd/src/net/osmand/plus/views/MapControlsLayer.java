@@ -9,7 +9,6 @@ import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
@@ -36,6 +35,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmAndLocationProvider;
+import net.osmand.plus.OsmAndLocationSimulation;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
@@ -52,7 +52,6 @@ import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
-import net.osmand.plus.routepreparationmenu.ChooseRouteFragment;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu.PointType;
 import net.osmand.plus.routing.RoutingHelper;
@@ -65,14 +64,14 @@ import java.util.List;
 
 import gnu.trove.list.array.TIntArrayList;
 
-import static net.osmand.plus.OsmAndCustomizationConstants.BACK_TO_LOC_HUD_ID;
-import static net.osmand.plus.OsmAndCustomizationConstants.COMPASS_HUD_ID;
-import static net.osmand.plus.OsmAndCustomizationConstants.LAYERS_HUD_ID;
-import static net.osmand.plus.OsmAndCustomizationConstants.MENU_HUD_ID;
-import static net.osmand.plus.OsmAndCustomizationConstants.QUICK_SEARCH_HUD_ID;
-import static net.osmand.plus.OsmAndCustomizationConstants.ROUTE_PLANNING_HUD_ID;
-import static net.osmand.plus.OsmAndCustomizationConstants.ZOOM_IN_HUD_ID;
-import static net.osmand.plus.OsmAndCustomizationConstants.ZOOM_OUT_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.BACK_TO_LOC_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.COMPASS_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.LAYERS_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MENU_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.QUICK_SEARCH_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.ROUTE_PLANNING_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_IN_HUD_ID;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.ZOOM_OUT_HUD_ID;
 
 public class MapControlsLayer extends OsmandMapLayer {
 
@@ -724,7 +723,14 @@ public class MapControlsLayer extends OsmandMapLayer {
 				routingHelper.setRoutePlanningMode(false);
 				mapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
 				app.getRoutingHelper().notifyIfRouteIsCalculated();
-				routingHelper.setCurrentLocation(app.getLocationProvider().getLastKnownLocation(), false);
+				if (!app.getSettings().SIMULATE_NAVIGATION.get()) {
+					routingHelper.setCurrentLocation(app.getLocationProvider().getLastKnownLocation(), false);
+				} else if (routingHelper.isRouteCalculated() && !routingHelper.isRouteBeingCalculated()) {
+					OsmAndLocationSimulation sim = app.getLocationProvider().getLocationSimulation();
+					if (!sim.isRouteAnimating()) {
+						sim.startStopRouteAnimation(mapActivity);
+					}
+				}
 			}
 		}
 	}
@@ -1280,21 +1286,25 @@ public class MapControlsLayer extends OsmandMapLayer {
 	}
 
 	public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-		if (grantResults.length > 0) {
-			if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-				switch (requestCode) {
-					case REQUEST_LOCATION_FOR_NAVIGATION_PERMISSION:
-						onNavigationClick();
-						break;
-					case REQUEST_LOCATION_FOR_NAVIGATION_FAB_PERMISSION:
-						navigateButton();
-						break;
-					case REQUEST_LOCATION_FOR_ADD_DESTINATION_PERMISSION:
-						addDestination(requestedLatLon);
-						break;
+		if ((requestCode == REQUEST_LOCATION_FOR_NAVIGATION_PERMISSION
+				|| requestCode == REQUEST_LOCATION_FOR_NAVIGATION_FAB_PERMISSION
+				|| requestCode == REQUEST_LOCATION_FOR_ADD_DESTINATION_PERMISSION)) {
+			if (grantResults.length > 0) {
+				if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+					switch (requestCode) {
+						case REQUEST_LOCATION_FOR_NAVIGATION_PERMISSION:
+							onNavigationClick();
+							break;
+						case REQUEST_LOCATION_FOR_NAVIGATION_FAB_PERMISSION:
+							navigateButton();
+							break;
+						case REQUEST_LOCATION_FOR_ADD_DESTINATION_PERMISSION:
+							addDestination(requestedLatLon);
+							break;
+					}
+				} else if (grantResults[0] == PackageManager.PERMISSION_DENIED) {
+					app.showToastMessage(R.string.ask_for_location_permission);
 				}
-			} else if (grantResults[0] == PackageManager.PERMISSION_DENIED) {
-				app.showToastMessage(R.string.ask_for_location_permission);
 			}
 		}
 	}

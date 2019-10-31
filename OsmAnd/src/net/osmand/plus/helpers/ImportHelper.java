@@ -17,8 +17,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.text.SpannableStringBuilder;
-import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.Toast;
@@ -47,7 +45,6 @@ import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerHalfItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.ShortDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
-import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.Algorithms;
@@ -630,11 +627,11 @@ public class ImportHelper {
 					File file = new File(gpxFile.path);
 					if (!destinationExists) {
 						GPXDatabase.GpxDataItem item = new GPXDatabase.GpxDataItem(file, gpxFile.getColor(0));
-						app.getGpxDatabase().add(item);
+						app.getGpxDbHelper().add(item);
 					} else {
-						GPXDatabase.GpxDataItem item = app.getGpxDatabase().getItem(file);
+						GPXDatabase.GpxDataItem item = app.getGpxDbHelper().getItem(file);
 						if (item != null) {
-							app.getGpxDatabase().clearAnalysis(item);
+							app.getGpxDbHelper().clearAnalysis(item);
 						}
 					}
 

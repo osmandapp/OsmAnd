@@ -376,7 +376,7 @@ public class RoutePreferencesMenu {
 				mapActivity.getRoutingHelper().recalculateRouteDueToSettingsChange();
 				return true;
 			}
-		});
+		}, app.getDaynightHelper().isNightModeForMapControls());
 	}
 
 	private void updateSpinnerItems(final TextView gpxSpinner) {

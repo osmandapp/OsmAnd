@@ -199,6 +199,7 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 					if (status != TextToSpeech.SUCCESS) {
 						ttsVoiceStatus = "NO INIT SUCCESS";
 						internalClear();
+						((OsmandApplication) ctx.getApplicationContext()).showToastMessage(ctx.getString(R.string.tts_initialization_error));
 					} else if (mTts != null) {
 						speechAllowed = true;
 						switch (mTts.isLanguageAvailable(newLocale)) {

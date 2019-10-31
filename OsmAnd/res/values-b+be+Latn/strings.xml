@@ -631,7 +631,6 @@ Zachod: %2$s</string>
     <string name="avoid_unpaved">Paźbiahać daroh biez pakryćcia</string>
     <string name="avoid_ferries">Paźbiahać paromaŭ</string>
     <string name="avoid_in_routing_title">Paźbiahać…</string>
-    <string name="avoid_in_routing_descr">Pazbiahać, napryklad, platnych i daroh biez pakryccia, paromaŭ.</string>
     <string name="map_widget_fluorescent">Lumіniescentnyja maršruty</string>
     <string name="map_widget_show_ruler">Liniejka</string>
     <string name="map_widget_view_direction">Kіrunak pohladu</string>
@@ -2876,7 +2875,6 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="shared_string_capacity">Abjom</string>
     <string name="shared_string_width">Šyrynia</string>
     <string name="shared_string_height">Vyšynia</string>
-    <string name="swap_start_and_destination">Pamianiać miescami pačatkovy punkt i punkt pryznačennia</string>
     <string name="add_destination_point">Dadać punkt pryznačennia</string>
     <string name="add_intermediate_point">Dadać pramiežkavy punkt</string>
     <string name="add_start_point">Dadać pačatkovy punkt</string>

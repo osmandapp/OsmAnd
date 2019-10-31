@@ -89,7 +89,6 @@
     <string name="avoid_unpaved">تجنب الطرق غير المعبدة</string>
     <string name="avoid_ferries">تجنب العبارات</string>
     <string name="avoid_in_routing_title">التجنب</string>
-    <string name="avoid_in_routing_descr">تجنب الطرق ذات الرسوم، وغير المعبدة، والعبارات</string>
     <string name="gps_wakeup_interval">GPS إيقاظ الفاصل الزمني: %s</string>
     <string name="int_continuosly">متواصل</string>
     <string name="screen_is_locked">لفتح قفل الشاشة اضغط على أيقونة القفل</string>
@@ -2841,7 +2840,6 @@
     <string name="routeInfo_steepness_name">الوعورة</string>
     <string name="run_full_osmand_msg">كنت تستخدم {0} الخريطة وهي مدعومة من osmand.هل تريد من osmand إطلاق النسخة الكاملة؟</string>
     <string name="run_full_osmand_header">تشغيل osmand؟</string>
-    <string name="swap_start_and_destination">تبديل البداية والوجهة</string>
     <string name="time_of_day">الوقت من اليوم</string>
     <string name="by_transport_type">بواسطة %1$s</string>
     <string name="step_by_step">خطوة بخطوة</string>

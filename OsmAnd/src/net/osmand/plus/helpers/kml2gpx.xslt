@@ -143,6 +143,14 @@
 					</xsl:if>
 				</xsl:if>
 
+				<xsl:if test="kml:LineString/kml:coordinates">
+					<trk>
+						<trkseg>
+							<csvattributes><xsl:value-of select="kml:LineString/kml:coordinates"/></csvattributes>
+						</trkseg>
+					</trk>
+				</xsl:if>
+
 				<xsl:if test="kml:MultiGeometry/kml:LineString/kml:coordinates">
 					<trk>
 						<trkseg>

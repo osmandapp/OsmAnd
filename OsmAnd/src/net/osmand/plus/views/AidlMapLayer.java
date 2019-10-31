@@ -16,9 +16,9 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
 import net.osmand.AndroidUtils;
-import net.osmand.aidl.map.ALatLon;
-import net.osmand.aidl.maplayer.AMapLayer;
-import net.osmand.aidl.maplayer.point.AMapPoint;
+import net.osmand.aidl.AidlMapLayerWrapper;
+import net.osmand.aidl.AidlMapPointWrapper;
+import net.osmand.aidlapi.maplayer.point.AMapPoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
@@ -39,7 +39,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider, MapTextLayer.MapTextProvider<AMapPoint> {
+public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider, MapTextLayer.MapTextProvider<AidlMapPointWrapper> {
 
 	private static final float POINT_IMAGE_VERTICAL_OFFSET = 0.91f;
 
@@ -51,7 +51,7 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 	private final MapActivity map;
 	private OsmandMapTileView view;
 
-	private AMapLayer aidlLayer;
+	private AidlMapLayerWrapper aidlLayer;
 
 	private Paint pointInnerCircle;
 	private Paint pointOuterCircle;
@@ -75,9 +75,9 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 	private Map<String, Bitmap> pointImages = new ConcurrentHashMap<>();
 
 	private Set<String> imageRequests = new HashSet<>();
-	private List<AMapPoint> displayedPoints = new ArrayList<>();
+	private List<AidlMapPointWrapper> displayedPoints = new ArrayList<>();
 
-	public AidlMapLayer(MapActivity map, AMapLayer aidlLayer) {
+	public AidlMapLayer(MapActivity map, AidlMapLayerWrapper aidlLayer) {
 		this.map = map;
 		this.aidlLayer = aidlLayer;
 	}
@@ -140,8 +140,8 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 		canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 
 		String selectedPointId = getSelectedContextMenuPointId();
-		for (AMapPoint point : aidlLayer.getPoints()) {
-			ALatLon l = point.getLocation();
+		for (AidlMapPointWrapper point : aidlLayer.getPoints()) {
+			LatLon l = point.getLocation();
 			if (l != null) {
 				int x = (int) tileBox.getPixXFromLatLon(l.getLatitude(), l.getLongitude());
 				int y = (int) tileBox.getPixYFromLatLon(l.getLatitude(), l.getLongitude());
@@ -169,7 +169,7 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 		mapTextLayer.putData(this, displayedPoints);
 	}
 
-	private void drawPoint(Canvas canvas, int x, int y, RotatedTileBox tb, AMapPoint point, Bitmap image, boolean selected) {
+	private void drawPoint(Canvas canvas, int x, int y, RotatedTileBox tb, AidlMapPointWrapper point, Bitmap image, boolean selected) {
 		if (image == null) {
 			image = placeholder;
 		}
@@ -205,8 +205,8 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 	private String getSelectedContextMenuPointId() {
 		MapContextMenu mapContextMenu = map.getContextMenu();
 		Object object = mapContextMenu.getObject();
-		if (mapContextMenu.isVisible() && object instanceof AMapPoint) {
-			AMapPoint aMapPoint = (AMapPoint) object;
+		if (mapContextMenu.isVisible() && object instanceof AidlMapPointWrapper) {
+			AidlMapPointWrapper aMapPoint = (AidlMapPointWrapper) object;
 			return aMapPoint.getId();
 		}
 		return null;
@@ -226,7 +226,7 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 		return rect;
 	}
 
-	private boolean isStale(AMapPoint point) {
+	private boolean isStale(AidlMapPointWrapper point) {
 		return Boolean.parseBoolean(point.getParams().get(AMapPoint.POINT_STALE_LOC_PARAM));
 	}
 
@@ -251,7 +251,7 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 
 	@Override
 	public boolean isObjectClickable(Object o) {
-		return o instanceof AMapPoint;
+		return o instanceof AidlMapPointWrapper;
 	}
 
 	@Override
@@ -266,40 +266,33 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 
 	@Override
 	public LatLon getObjectLocation(Object o) {
-		if (o instanceof AMapPoint) {
-			ALatLon loc = ((AMapPoint) o).getLocation();
-			if (loc != null) {
-				return new LatLon(loc.getLatitude(), loc.getLongitude());
-			}
+		if (o instanceof AidlMapPointWrapper) {
+			return ((AidlMapPointWrapper) o).getLocation();
 		}
 		return null;
 	}
 
 	@Override
 	public PointDescription getObjectName(Object o) {
-		if (o instanceof AMapPoint) {
-			return new PointDescription(PointDescription.POINT_TYPE_MARKER, ((AMapPoint) o).getFullName());
+		if (o instanceof AidlMapPointWrapper) {
+			return new PointDescription(PointDescription.POINT_TYPE_MARKER, ((AidlMapPointWrapper) o).getFullName());
 		} else {
 			return null;
 		}
 	}
 
 	@Nullable
-	public AMapPoint getPoint(@NonNull String id) {
+	public AidlMapPointWrapper getPoint(@NonNull String id) {
 		return aidlLayer.getPoint(id);
 	}
 
 	@Override
-	public LatLon getTextLocation(AMapPoint o) {
-		ALatLon loc = o.getLocation();
-		if (loc != null) {
-			return new LatLon(loc.getLatitude(), loc.getLongitude());
-		}
-		return null;
+	public LatLon getTextLocation(AidlMapPointWrapper o) {
+		return o.getLocation();
 	}
 
 	@Override
-	public int getTextShift(AMapPoint o, RotatedTileBox rb) {
+	public int getTextShift(AidlMapPointWrapper o, RotatedTileBox rb) {
 		if (pointsType == PointsType.STANDARD) {
 			return (int) (getRadiusPoi(rb) * 1.5);
 		} else if (pointsType == PointsType.CIRCLE) {
@@ -313,7 +306,7 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 	}
 
 	@Override
-	public String getText(AMapPoint o) {
+	public String getText(AidlMapPointWrapper o) {
 		return o.getShortName();
 	}
 
@@ -376,13 +369,13 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 		return r * 3 / 2;
 	}
 
-	private void getFromPoint(RotatedTileBox tb, PointF point, List<? super AMapPoint> points) {
+	private void getFromPoint(RotatedTileBox tb, PointF point, List<? super AidlMapPointWrapper> points) {
 		if (view != null) {
 			int ex = (int) point.x;
 			int ey = (int) point.y;
 			int radius = getPointRadius(tb);
-			for (AMapPoint p : aidlLayer.getPoints()) {
-				ALatLon position = p.getLocation();
+			for (AidlMapPointWrapper p : aidlLayer.getPoints()) {
+				LatLon position = p.getLocation();
 				if (position != null) {
 					int x = (int) tb.getPixXFromLatLon(position.getLatitude(), position.getLongitude());
 					int y = (int) tb.getPixYFromLatLon(position.getLatitude(), position.getLongitude());

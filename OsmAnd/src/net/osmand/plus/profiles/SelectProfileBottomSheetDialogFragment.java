@@ -267,6 +267,7 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 		icons.add(new IconResWithDescr(R.drawable.ic_action_camper, R.string.app_mode_camper, "ic_action_camper", false));
 		icons.add(new IconResWithDescr(R.drawable.ic_action_pickup_truck, R.string.app_mode_pickup_truck, "ic_action_pickup_truck", false));
 		icons.add(new IconResWithDescr(R.drawable.ic_action_wagon, R.string.app_mode_wagon, "ic_action_wagon", false));
+		icons.add(new IconResWithDescr(R.drawable.ic_action_utv, R.string.app_mode_utv, "ic_action_utv", false));
 		return icons;
 	}
 

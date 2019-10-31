@@ -142,7 +142,7 @@
     <string name="shared_string_status">Статус</string>
     <string name="no_gps_connection">Отсутствует GPS</string>
     <string name="no_internet_connection">Отсутствует интернет</string>
-    <string name="shared_string_disable">Отключить</string>
+    <string name="shared_string_disable">Выкл.</string>
     <string name="shared_string_save">Сохранить</string>
     <string name="add_device">Добавить устройство</string>
     <string name="go_to_settings">Перейти в настройки</string>
@@ -230,4 +230,5 @@
     <string name="timeline_no_data">Нет данных</string>
     <string name="shared_string_apply">Применить</string>
     <string name="start_end_date">Дата начала - окончания</string>
+    <string name="shared_string_enable">Вкл.</string>
 </resources>

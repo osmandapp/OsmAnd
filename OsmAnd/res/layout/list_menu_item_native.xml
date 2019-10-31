@@ -27,7 +27,7 @@
         android:layout_weight="1"
         android:gravity="center_vertical"
         android:text="@string/layer_poi"
-        android:textColor="?android:textColorSecondary"
+        android:textColor="?android:textColorPrimary"
         android:textSize="@dimen/default_list_text_size"/>
 
     <android.support.v7.widget.AppCompatImageView

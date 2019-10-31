@@ -370,9 +370,9 @@ public class MapMarkersHelper {
 	}
 
 	private void updateGpxShowAsMarkers(File file) {
-		GPXDatabase.GpxDataItem dataItem = ctx.getGpxDatabase().getItem(file);
+		GPXDatabase.GpxDataItem dataItem = ctx.getGpxDbHelper().getItem(file);
 		if (dataItem != null) {
-			ctx.getGpxDatabase().updateShowAsMarkers(dataItem, true);
+			ctx.getGpxDbHelper().updateShowAsMarkers(dataItem, true);
 			dataItem.setShowAsMarkers(true);
 		}
 	}

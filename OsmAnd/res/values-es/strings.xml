@@ -5,7 +5,6 @@
     <string name="avoid_unpaved">Evitar caminos sin asfaltar</string>
     <string name="avoid_ferries">Evitar ferris</string>
     <string name="avoid_in_routing_title">Evitar…</string>
-    <string name="avoid_in_routing_descr">Evita caminos con peajes, sin pavimentar, transbordadores o ferris y otros.</string>
     <string name="show_warnings_title">Mostrar alertas…</string>
     <string name="show_warnings_descr">Configura advertencias de tráfico (límites de velocidad, paradas forzosas, badenes, túneles), radares de velocidad, e información de carriles.</string>
     <string name="map_widget_fluorescent">Rutas fluorescentes</string>
@@ -2904,7 +2903,6 @@
     <string name="quick_action_switch_day_mode">Modo diurno</string>
     <string name="quick_action_switch_night_mode">Modo nocturno</string>
     <string name="quick_action_day_night_switch_mode">Alternar modos diurno/nocturno</string>
-    <string name="swap_start_and_destination">Intercambiar inicio y destino</string>
     <string name="add_destination_point">Añadir destino</string>
     <string name="add_intermediate_point">Añadir punto intermedio</string>
     <string name="add_start_point">Añadir punto de partida</string>
@@ -3040,7 +3038,7 @@
     <string name="routing_attr_avoid_train_description">Evita usar los trenes</string>
     <string name="routing_attr_avoid_subway_name">Evitar metros</string>
     <string name="routing_attr_avoid_subway_description">Evita transporte en metro y en tren ligero</string>
-    <string name="routing_attr_avoid_ferry_name">Evitar los ferris</string>
+    <string name="routing_attr_avoid_ferry_name">Evitar ferris</string>
     <string name="routing_attr_avoid_ferry_description">Evita usar los ferris o transbordadores</string>
     <string name="release_3_3_7">• Mostrar el tiempo entre transbordos en transporte público
 \n
@@ -3254,11 +3252,11 @@
     <string name="years_5">Años</string>
     <string name="months_3">Tres meses</string>
     <string name="price_free">Gratis</string>
-    <string name="get_discount_title">Consigue %1$d %2$s a %3$s de descuento.</string>
+    <string name="get_discount_title">Consigue %1$d %2$s con un %3$s de descuento.</string>
     <string name="get_free_trial_title">Empieza tu %1$d %2$s de prueba gratis.</string>
-    <string name="get_discount_first_part">%1$s para el primer %2$s</string>
-    <string name="get_discount_first_few_part">%1$s para el primer %2$s</string>
-    <string name="get_discount_second_part">a continuación, %1$s</string>
+    <string name="get_discount_first_part">%1$s durante el primer %2$s</string>
+    <string name="get_discount_first_few_part">%1$s durante el primer %2$s</string>
+    <string name="get_discount_second_part">luego %1$s</string>
     <string name="cancel_subscription">Cancelar la suscripción</string>
     <string name="price_and_discount">%1$s • Ahorra %2$s</string>
     <string name="configure_profile_info">Todas las opciones que figuran a continuación afectan únicamente al perfil seleccionado.</string>
@@ -3276,10 +3274,10 @@
     <string name="analytics_pref_title">Analítica</string>
     <string name="turn_screen_on_info">Mostrar mapa durante la navegación por encima de la pantalla de bloqueo.</string>
     <string name="route_parameters_info">Estos ajustes afectan a la construcción de la ruta. Se aplicará solo al perfil seleccionado: %1$s.</string>
-    <string name="wake_time">Hora de despertar</string>
+    <string name="wake_time">Tiempo de encendido</string>
     <string name="units_and_formats">Unidades y formatos</string>
     <string name="appearance">Apariencia</string>
-    <string name="map_look_descr">iconos, controles</string>
+    <string name="map_look_descr">Apariencia del mapa</string>
     <string name="map_look">Vista del mapa</string>
     <string name="list_of_installed_plugins">Lista de complementos instalados</string>
     <string name="configure_navigation">Configurar la navegación</string>
@@ -3307,4 +3305,63 @@
     <string name="route_parameters_descr">Configura los parámetros de ruta</string>
     <string name="route_parameters">Parámetros de ruta</string>
     <string name="application_profile_changed">Perfil de aplicación cambiado a \"%s\"</string>
+    <string name="plugins_settings">Ajustes de plugin</string>
+    <string name="shared_string_by_default">Por defecto</string>
+    <string name="download_detailed_map">Descarga el mapa detallado de %s para ver este área.</string>
+    <string name="shared_string_select_folder">Seleccionar carpeta</string>
+    <string name="move_maps_to_new_destination">Mover al nuevo destino</string>
+    <string name="change_data_storage_folder">Cambiar la carpeta de almacenamiento de datos</string>
+    <string name="rendering_attr_piste_type_snow_park_name">Parque de nieve</string>
+    <string name="rendering_attr_piste_type_sleigh_name">Trineo</string>
+    <string name="rendering_attr_piste_type_sled_name">Trineo</string>
+    <string name="routeInfo_piste_type_name">Tipo de pista</string>
+    <string name="rendering_attr_piste_difficulty_novice_name">Principiante</string>
+    <string name="rendering_attr_piste_difficulty_easy_name">Fácil</string>
+    <string name="rendering_attr_piste_difficulty_intermediate_name">Intermedia</string>
+    <string name="rendering_attr_piste_difficulty_expert_name">Experto</string>
+    <string name="rendering_attr_piste_difficulty_extreme_name">Extrema</string>
+    <string name="rendering_attr_piste_difficulty_undefined_name">Indefinida</string>
+    <string name="routeInfo_piste_difficulty_name">Dificultad de pista</string>
+    <string name="routing_attr_width_name">Límite de anchura</string>
+    <string name="routing_attr_width_description">Especifica el límite permitido de anchura del vehículo en rutas.</string>
+    <string name="release_3_5">• Ajustes de la aplicación y del perfil actualizados. Cómoda distribución de los ajustes por tipo y posibilidad de personalizar cada perfil
+\n
+\n • Nuevo cuadro de diálogo de descarga de mapas que sugiere un mapa para descargar mientras se navega
+\n
+\n • Arreglos en el tema nocturno
+\n
+\n • Se corrigieron algunos problemas de enrutamiento en todo el mundo
+\n
+\n • Se ha actualizado el mapa base con más detalles en la red de caminos.
+\n
+\n • Se corrigieron las zonas inundadas en todo el mundo
+\n
+\n • Enrutamiento de esquí: perfil de altura y complejidad de la ruta añadidos a los detalles de la ruta
+\n
+\n • Otras correcciones de errores
+\n
+\n</string>
+    <string name="change_data_storage_full_description">"Mover los archivos de datos de OsmAnd  al nuevo destino\?
+\n%1$s &gt; %2$s"</string>
+    <string name="data_storage_preference_summary">%1$s • %2$s</string>
+    <string name="data_storage_space_description">Libre %1$s GB • Total %2$s GB</string>
+    <string name="change_osmand_data_folder_question">¿Cambiar la carpeta de datos de Osmand\?</string>
+    <string name="rendering_attr_piste_type_hike_name">Caminata</string>
+    <string name="rendering_attr_piste_type_connection_name">Conexión</string>
+    <string name="avoid_in_routing_descr_">Evitar ciertas rutas y tipos de carreteras</string>
+    <string name="rendering_attr_piste_difficulty_connection_name">Conexión</string>
+    <string name="shared_string_calculate">Calcular</string>
+    <string name="shared_string_maps">Mapas</string>
+    <string name="shared_string_memory_tb_desc">%1$s TB</string>
+    <string name="shared_string_memory_gb_desc">%1$s GB</string>
+    <string name="shared_string_memory_mb_desc">%1$s MB</string>
+    <string name="shared_string_memory_kb_desc">%1$s kB</string>
+    <string name="shared_string_memory_used_tb_desc">Usado %1$s TB</string>
+    <string name="shared_string_memory_used_gb_desc">Usado %1$s GB</string>
+    <string name="shared_string_memory_used_mb_desc">Usado %1$s MB</string>
+    <string name="shared_string_memory_used_kb_desc">Usado %1$s kB</string>
+    <string name="routing_attr_prefer_unpaved_name">Preferir caminos sin asfaltar</string>
+    <string name="routing_attr_prefer_unpaved_description">Preferir caminos sin asfaltar.</string>
+    <string name="update_all_maps">Actualizar todos los mapas</string>
+    <string name="update_all_maps_q">¿Estás seguro de que quieres actualizar todos (%1$d) los mapas\?</string>
 </resources>

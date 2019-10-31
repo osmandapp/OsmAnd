@@ -142,4 +142,12 @@ public class MapMarkersCard extends BaseCard {
 
 		((TextView) view.findViewById(R.id.gpx_card_title)).setText(R.string.map_markers);
 	}
+
+	@Override
+	public void applyState(@NonNull BaseCard card) {
+		super.applyState(card);
+		if (card instanceof MapMarkersCard) {
+			showLimited = ((MapMarkersCard) card).showLimited;
+		}
+	}
 }

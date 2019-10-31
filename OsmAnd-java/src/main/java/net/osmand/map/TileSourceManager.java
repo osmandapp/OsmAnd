@@ -486,7 +486,7 @@ public class TileSourceManager {
 		return templates;
 	}
 	
-	private static TileSourceTemplate createTileSourceTemplate(Map<String, String> attrs) {
+	public static TileSourceTemplate createTileSourceTemplate(Map<String, String> attrs) {
 		TileSourceTemplate template = null;
 		String rule = attrs.get("rule");
 		if(rule == null){

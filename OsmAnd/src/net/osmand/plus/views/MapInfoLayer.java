@@ -2,6 +2,7 @@ package net.osmand.plus.views;
 
 
 import android.graphics.Canvas;
+import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -129,8 +130,13 @@ public class MapInfoLayer extends OsmandMapLayer {
 		return topToolbarView == null ? null : topToolbarView.getTopController();
 	}
 
+	@Nullable
 	public TopToolbarController getTopToolbarController(TopToolbarControllerType type) {
 		return topToolbarView == null ? null : topToolbarView.getController(type);
+	}
+
+	public boolean isTopToolbarViewVisible() {
+		return topToolbarView != null && topToolbarView.isTopToolbarViewVisible();
 	}
 
 	public void registerAllControls(){

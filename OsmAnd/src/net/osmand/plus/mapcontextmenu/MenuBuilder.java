@@ -56,8 +56,10 @@ import net.osmand.plus.mapcontextmenu.builders.cards.NoImagesCard;
 import net.osmand.plus.mapcontextmenu.controllers.TransportStopController;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.plus.transport.TransportStopRoute;
+import net.osmand.plus.views.POIMapLayer;
 import net.osmand.plus.views.TransportStopsLayer;
 import net.osmand.plus.widgets.TextViewEx;
+import net.osmand.plus.widgets.tools.ClickableSpanTouchListener;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -471,6 +473,7 @@ public class MenuBuilder {
 	}
 
 	protected void buildTopInternal(View view) {
+		buildDescription(view);
 		if (showLocalTransportRoutes()) {
 			buildRow(view, 0, null, app.getString(R.string.transport_Routes), 0, true, getCollapsableTransportStopRoutesView(view.getContext(), false, false),
 					false, 0, false, null, true);
@@ -481,6 +484,9 @@ public class MenuBuilder {
 			buildRow(view, 0, null, routesWithingDistance, 0, true, collapsableView,
 					false, 0, false, null, true);
 		}
+	}
+
+	protected void buildDescription(View view){
 	}
 
 	protected void buildAfter(View view) {
@@ -505,20 +511,20 @@ public class MenuBuilder {
 	public View buildRow(final View view, Drawable icon, final String buttonText, final String text, int textColor, String secondaryText,
 	                     boolean collapsable, final CollapsableView collapsableView, boolean needLinks,
 	                     int textLinesLimit, boolean isUrl, OnClickListener onClickListener, boolean matchWidthDivider) {
-		return buildRow(view, icon, buttonText, text, textColor, secondaryText, collapsable, collapsableView,
+		return buildRow(view, icon, buttonText, null, text, textColor, secondaryText, collapsable, collapsableView,
 				needLinks, textLinesLimit, isUrl, false, false, onClickListener, matchWidthDivider);
 	}
 
 	public View buildRow(View view, int iconId, String buttonText, String text, int textColor,
 	                     boolean collapsable, final CollapsableView collapsableView,
 	                     boolean needLinks, int textLinesLimit, boolean isUrl, boolean isNumber, boolean isEmail, OnClickListener onClickListener, boolean matchWidthDivider) {
-		return buildRow(view, iconId == 0 ? null : getRowIcon(iconId), buttonText, text, textColor, null, collapsable, collapsableView,
+		return buildRow(view, iconId == 0 ? null : getRowIcon(iconId), buttonText, null, text, textColor, null, collapsable, collapsableView,
 				needLinks, textLinesLimit, isUrl, isNumber, isEmail, onClickListener, matchWidthDivider);
 	}
 
-	public View buildRow(final View view, Drawable icon, final String buttonText, final String text, int textColor, String secondaryText,
-							boolean collapsable, final CollapsableView collapsableView, boolean needLinks,
-							int textLinesLimit, boolean isUrl, boolean isNumber, boolean isEmail, OnClickListener onClickListener, boolean matchWidthDivider) {
+	public View buildRow(final View view, Drawable icon, final String buttonText, final String textPrefix, final String text,
+	                     int textColor, String secondaryText, boolean collapsable, final CollapsableView collapsableView, boolean needLinks,
+	                     int textLinesLimit, boolean isUrl, boolean isNumber, boolean isEmail, OnClickListener onClickListener, boolean matchWidthDivider) {
 
 		if (!isFirstRow()) {
 			buildRowDivider(view);
@@ -537,7 +543,8 @@ public class MenuBuilder {
 		ll.setOnLongClickListener(new View.OnLongClickListener() {
 			@Override
 			public boolean onLongClick(View v) {
-				copyToClipboard(text, view.getContext());
+				String textToCopy = Algorithms.isEmpty(textPrefix) ? text : textPrefix + ": " + text;
+				copyToClipboard(textToCopy, view.getContext());
 				return true;
 			}
 		});
@@ -572,30 +579,46 @@ public class MenuBuilder {
 		llText.setLayoutParams(llTextViewParams);
 		ll.addView(llText);
 
+		TextViewEx textPrefixView = null;
+		if (!Algorithms.isEmpty(textPrefix)) {
+			textPrefixView = new TextViewEx(view.getContext());
+			LinearLayout.LayoutParams llTextParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+			llTextParams.setMargins(icon == null ? dpToPx(16f) : 0, dpToPx(8f), 0, 0);
+			textPrefixView.setLayoutParams(llTextParams);
+			textPrefixView.setTypeface(FontCache.getRobotoRegular(view.getContext()));
+			textPrefixView.setTextSize(12);
+			textPrefixView.setTextColor(app.getResources().getColor(light ? R.color.text_color_secondary_light: R.color.text_color_secondary_dark));
+			textPrefixView.setMinLines(1);
+			textPrefixView.setMaxLines(1);
+			textPrefixView.setText(textPrefix);
+			llText.addView(textPrefixView);
+		}
+
 		// Primary text
 		TextViewEx textView = new TextViewEx(view.getContext());
 		LinearLayout.LayoutParams llTextParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-		llTextParams.setMargins(icon != null ? 0 : dpToPx(16f), dpToPx(secondaryText != null ? 10f : 8f), 0, dpToPx(secondaryText != null ? 6f : 8f));
+		llTextParams.setMargins(icon != null ? 0 : dpToPx(16f), dpToPx(textPrefixView != null ? 2f : (secondaryText != null ? 10f : 8f)), 0, dpToPx(secondaryText != null ? 6f : 8f));
 		textView.setLayoutParams(llTextParams);
 		textView.setTypeface(FontCache.getRobotoRegular(view.getContext()));
 		textView.setTextSize(16);
 		textView.setTextColor(app.getResources().getColor(light ? R.color.text_color_primary_light : R.color.text_color_primary_dark));
+		textView.setText(text);
 
 		int linkTextColor = ContextCompat.getColor(view.getContext(), light ? R.color.ctx_menu_bottom_view_url_color_light : R.color.ctx_menu_bottom_view_url_color_dark);
 
 		if (isUrl || isNumber || isEmail) {
 			textView.setTextColor(linkTextColor);
-		} else if (needLinks) {
-			Linkify.addLinks(textView, Linkify.ALL);
-			textView.setLinksClickable(true);
+		} else if (needLinks && Linkify.addLinks(textView, Linkify.ALL)) {
+			textView.setMovementMethod(null);
 			textView.setLinkTextColor(linkTextColor);
+			textView.setOnTouchListener(new ClickableSpanTouchListener());
 			AndroidUtils.removeLinkUnderline(textView);
 		}
 		if (textLinesLimit > 0) {
 			textView.setMinLines(1);
 			textView.setMaxLines(textLinesLimit);
+			textView.setEllipsize(TextUtils.TruncateAt.END);
 		}
-		textView.setText(text);
 		if (textColor > 0) {
 			textView.setTextColor(view.getResources().getColor(textColor));
 		}
@@ -706,7 +729,21 @@ public class MenuBuilder {
 
 		return ll;
 	}
-	
+
+	public View buildDescriptionRow(final View view, final String textPrefix, final String description, int textColor,
+	                                int textLinesLimit, boolean matchWidthDivider) {
+		OnClickListener clickListener = new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				POIMapLayer.showDescriptionDialog(view.getContext(), app, description, textPrefix);
+			}
+		};
+
+		return buildRow(view, null, null, textPrefix, description, textColor,
+				null, false, null, true, textLinesLimit,
+				false, false, false, clickListener, matchWidthDivider);
+	}
+
 	protected void showDialog(String text, final String actionType, final String dataPrefix, final View v) {
 		final String[] items = text.split("[,;]");
 		final Intent intent = new Intent(actionType);

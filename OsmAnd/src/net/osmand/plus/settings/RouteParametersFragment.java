@@ -15,7 +15,6 @@ import net.osmand.plus.OsmandSettings.BooleanPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.SettingsBaseActivity;
 import net.osmand.plus.activities.SettingsNavigationActivity;
-import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper;
 import net.osmand.plus.routing.RouteProvider;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.MultiSelectBooleanPreference;
@@ -30,6 +29,7 @@ import java.util.Map;
 import java.util.Set;
 
 import static net.osmand.plus.activities.SettingsNavigationActivity.getRouter;
+import static net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.DRIVING_STYLE;
 
 public class RouteParametersFragment extends BaseSettingsFragment {
 
@@ -43,6 +43,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 
 	private List<GeneralRouter.RoutingParameter> avoidParameters = new ArrayList<GeneralRouter.RoutingParameter>();
 	private List<GeneralRouter.RoutingParameter> preferParameters = new ArrayList<GeneralRouter.RoutingParameter>();
+	private List<GeneralRouter.RoutingParameter> drivingStyleParameters = new ArrayList<GeneralRouter.RoutingParameter>();
 	private List<GeneralRouter.RoutingParameter> reliefFactorParameters = new ArrayList<GeneralRouter.RoutingParameter>();
 	private List<GeneralRouter.RoutingParameter> otherRoutingParameters = new ArrayList<GeneralRouter.RoutingParameter>();
 
@@ -118,7 +119,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 			clearParameters();
 			if (router != null) {
 				Map<String, GeneralRouter.RoutingParameter> parameters = router.getParameters();
-				if (parameters.containsKey(GeneralRouter.USE_SHORTEST_WAY)) {
+				if (!am.isDerivedRoutingFrom(ApplicationMode.CAR)) {
 					screen.addPreference(fastRoute);
 				}
 				for (Map.Entry<String, GeneralRouter.RoutingParameter> e : parameters.entrySet()) {
@@ -130,75 +131,34 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 						preferParameters.add(routingParameter);
 					} else if (RELIEF_SMOOTHNESS_FACTOR.equals(routingParameter.getGroup())) {
 						reliefFactorParameters.add(routingParameter);
-					} else if (!param.equals(GeneralRouter.USE_SHORTEST_WAY)
+					} else if (DRIVING_STYLE.equals(routingParameter.getGroup())) {
+						drivingStyleParameters.add(routingParameter);
+					} else if ((!param.equals(GeneralRouter.USE_SHORTEST_WAY) || am.isDerivedRoutingFrom(ApplicationMode.CAR))
 							&& !param.equals(GeneralRouter.VEHICLE_HEIGHT)
 							&& !param.equals(GeneralRouter.VEHICLE_WEIGHT)
-							&& !RoutingOptionsHelper.DRIVING_STYLE.equals(routingParameter.getGroup())) {
+							&& !param.equals(GeneralRouter.VEHICLE_WIDTH)) {
 						otherRoutingParameters.add(routingParameter);
 					}
 				}
+				if (drivingStyleParameters.size() > 0) {
+					ListPreferenceEx drivingStyleRouting = createRoutingBooleanListPreference(DRIVING_STYLE, drivingStyleParameters);
+					screen.addPreference(drivingStyleRouting);
+				}
 				if (avoidParameters.size() > 0) {
-					MultiSelectBooleanPreference avoidRouting = new MultiSelectBooleanPreference(app);
-					avoidRouting.setKey(AVOID_ROUTING_PARAMETER_PREFIX);
-					avoidRouting.setTitle(R.string.avoid_in_routing_title);
-					avoidRouting.setSummary(R.string.avoid_in_routing_descr);
-					avoidRouting.setDescription(R.string.avoid_in_routing_descr);
-					avoidRouting.setLayoutResource(R.layout.preference_with_descr);
-					avoidRouting.setIcon(getRoutingPrefIcon(AVOID_ROUTING_PARAMETER_PREFIX));
-
-					String[] entries = new String[avoidParameters.size()];
-					String[] prefsIds = new String[avoidParameters.size()];
-					Set<String> enabledPrefsIds = new HashSet<>();
-
-					for (int i = 0; i < avoidParameters.size(); i++) {
-						GeneralRouter.RoutingParameter p = avoidParameters.get(i);
-						BooleanPreference booleanRoutingPref = (BooleanPreference) settings.getCustomRoutingBooleanProperty(p.getId(), p.getDefaultBoolean());
-
-						entries[i] = SettingsBaseActivity.getRoutingStringPropertyName(app, p.getId(), p.getName());
-						prefsIds[i] = booleanRoutingPref.getId();
-
-						if (booleanRoutingPref.get()) {
-							enabledPrefsIds.add(booleanRoutingPref.getId());
-						}
-					}
-
-					avoidRouting.setEntries(entries);
-					avoidRouting.setEntryValues(prefsIds);
-					avoidRouting.setValues(enabledPrefsIds);
-
+					String title = getString(R.string.avoid_in_routing_title);
+					String descr = getString(R.string.avoid_in_routing_descr_);
+					MultiSelectBooleanPreference avoidRouting = createRoutingBooleanMultiSelectPref(AVOID_ROUTING_PARAMETER_PREFIX, title, descr, avoidParameters);
 					screen.addPreference(avoidRouting);
 				}
 				if (preferParameters.size() > 0) {
-					Preference preferRouting = new Preference(app);
-					preferRouting.setKey(PREFER_ROUTING_PARAMETER_PREFIX);
-					preferRouting.setTitle(R.string.prefer_in_routing_title);
-					preferRouting.setSummary(R.string.prefer_in_routing_descr);
-					preferRouting.setLayoutResource(R.layout.preference_with_descr);
-					preferRouting.setIconSpaceReserved(true);
+					String title = getString(R.string.prefer_in_routing_title);
+					String descr = getString(R.string.prefer_in_routing_descr);
+					MultiSelectBooleanPreference preferRouting = createRoutingBooleanMultiSelectPref(PREFER_ROUTING_PARAMETER_PREFIX, title, descr, preferParameters);
 					screen.addPreference(preferRouting);
 				}
 				if (reliefFactorParameters.size() > 0) {
-					String defaultTitle = Algorithms.capitalizeFirstLetterAndLowercase(RELIEF_SMOOTHNESS_FACTOR.replace('_', ' '));
-					String title = SettingsBaseActivity.getRoutingStringPropertyName(app, RELIEF_SMOOTHNESS_FACTOR, defaultTitle);
-
-					Object[] entryValues = new Object[reliefFactorParameters.size()];
-					String[] entries = new String[entryValues.length];
-
-					String selectedParameterId = null;
-					for (int i = 0; i < reliefFactorParameters.size(); i++) {
-						GeneralRouter.RoutingParameter parameter = reliefFactorParameters.get(i);
-						entryValues[i] = parameter.getId();
-						entries[i] = SettingsNavigationActivity.getRoutinParameterTitle(app, parameter);
-						if (SettingsNavigationActivity.isRoutingParameterSelected(settings, am, parameter)) {
-							selectedParameterId = parameter.getId();
-						}
-					}
-
-					ListPreferenceEx reliefFactorRouting = createListPreferenceEx(RELIEF_SMOOTHNESS_FACTOR, entries, entryValues, title, R.layout.preference_with_descr);
-					reliefFactorRouting.setPersistent(false);
-					reliefFactorRouting.setValue(selectedParameterId);
+					ListPreferenceEx reliefFactorRouting = createRoutingBooleanListPreference(RELIEF_SMOOTHNESS_FACTOR, reliefFactorParameters);
 					reliefFactorRouting.setDescription(R.string.relief_smoothness_factor_descr);
-					reliefFactorRouting.setIconSpaceReserved(true);
 
 					screen.addPreference(reliefFactorRouting);
 				}
@@ -242,13 +202,12 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
 		String key = preference.getKey();
 
-		if (RELIEF_SMOOTHNESS_FACTOR.equals(key)) {
-			if (newValue instanceof String) {
-				String selectedParameterId = (String) newValue;
-				for (GeneralRouter.RoutingParameter parameter : reliefFactorParameters) {
-					String parameterId = parameter.getId();
-					SettingsNavigationActivity.setRoutingParameterSelected(settings, getSelectedAppMode(), parameterId, parameter.getDefaultBoolean(), parameterId.equals(selectedParameterId));
-				}
+		if ((RELIEF_SMOOTHNESS_FACTOR.equals(key) || DRIVING_STYLE.equals(key)) && newValue instanceof String) {
+			String selectedParameterId = (String) newValue;
+			List<GeneralRouter.RoutingParameter> routingParameters = DRIVING_STYLE.equals(key) ? drivingStyleParameters : reliefFactorParameters;
+			for (GeneralRouter.RoutingParameter parameter : routingParameters) {
+				String parameterId = parameter.getId();
+				SettingsNavigationActivity.setRoutingParameterSelected(settings, getSelectedAppMode(), parameterId, parameter.getDefaultBoolean(), parameterId.equals(selectedParameterId));
 			}
 			return true;
 		}
@@ -256,9 +215,68 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 		return super.onPreferenceChange(preference, newValue);
 	}
 
+	private ListPreferenceEx createRoutingBooleanListPreference(String groupKey, List<GeneralRouter.RoutingParameter> routingParameters) {
+		String defaultTitle = Algorithms.capitalizeFirstLetterAndLowercase(groupKey.replace('_', ' '));
+		String title = SettingsBaseActivity.getRoutingStringPropertyName(app, groupKey, defaultTitle);
+		ApplicationMode am = settings.getApplicationMode();
+
+		Object[] entryValues = new Object[routingParameters.size()];
+		String[] entries = new String[entryValues.length];
+
+		String selectedParameterId = null;
+		for (int i = 0; i < routingParameters.size(); i++) {
+			GeneralRouter.RoutingParameter parameter = routingParameters.get(i);
+			entryValues[i] = parameter.getId();
+			entries[i] = SettingsNavigationActivity.getRoutinParameterTitle(app, parameter);
+			if (SettingsNavigationActivity.isRoutingParameterSelected(settings, am, parameter)) {
+				selectedParameterId = parameter.getId();
+			}
+		}
+
+		ListPreferenceEx routingListPref = createListPreferenceEx(groupKey, entries, entryValues, title, R.layout.preference_with_descr);
+		routingListPref.setPersistent(false);
+		routingListPref.setValue(selectedParameterId);
+		routingListPref.setIcon(getRoutingPrefIcon(groupKey));
+
+		return routingListPref;
+	}
+
+	private MultiSelectBooleanPreference createRoutingBooleanMultiSelectPref(String groupKey, String title, String descr, List<GeneralRouter.RoutingParameter> routingParameters) {
+		MultiSelectBooleanPreference multiSelectPref = new MultiSelectBooleanPreference(app);
+		multiSelectPref.setKey(groupKey);
+		multiSelectPref.setTitle(title);
+		multiSelectPref.setSummary(descr);
+		multiSelectPref.setDescription(descr);
+		multiSelectPref.setLayoutResource(R.layout.preference_with_descr);
+		multiSelectPref.setIcon(getRoutingPrefIcon(groupKey));
+
+		String[] entries = new String[routingParameters.size()];
+		String[] prefsIds = new String[routingParameters.size()];
+		Set<String> enabledPrefsIds = new HashSet<>();
+
+		for (int i = 0; i < routingParameters.size(); i++) {
+			GeneralRouter.RoutingParameter p = routingParameters.get(i);
+			BooleanPreference booleanRoutingPref = (BooleanPreference) settings.getCustomRoutingBooleanProperty(p.getId(), p.getDefaultBoolean());
+
+			entries[i] = SettingsBaseActivity.getRoutingStringPropertyName(app, p.getId(), p.getName());
+			prefsIds[i] = booleanRoutingPref.getId();
+
+			if (booleanRoutingPref.get()) {
+				enabledPrefsIds.add(booleanRoutingPref.getId());
+			}
+		}
+
+		multiSelectPref.setEntries(entries);
+		multiSelectPref.setEntryValues(prefsIds);
+		multiSelectPref.setValues(enabledPrefsIds);
+
+		return multiSelectPref;
+	}
+
 	private void clearParameters() {
 		avoidParameters.clear();
 		preferParameters.clear();
+		drivingStyleParameters.clear();
 		reliefFactorParameters.clear();
 		otherRoutingParameters.clear();
 	}
@@ -266,11 +284,15 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 	private Drawable getRoutingPrefIcon(String prefId) {
 		switch (prefId) {
 			case GeneralRouter.ALLOW_PRIVATE:
-				return getIcon(R.drawable.ic_action_private_access);
+				return getContentIcon(R.drawable.ic_action_private_access);
+			case GeneralRouter.USE_SHORTEST_WAY:
+				return getContentIcon(R.drawable.ic_action_fuel);
 			case AVOID_ROUTING_PARAMETER_PREFIX:
 				return getContentIcon(R.drawable.ic_action_alert);
+			case DRIVING_STYLE:
+				return getContentIcon(R.drawable.ic_action_bicycle_dark);
 			case "fast_route_mode":
-				return getIcon(R.drawable.ic_action_fastest_route);
+				return getContentIcon(R.drawable.ic_action_fastest_route);
 			case "enable_time_conditional_routing":
 				return getContentIcon(R.drawable.ic_action_road_works_dark);
 			default:

@@ -1139,7 +1139,6 @@ Sólsetur: %2$s</string>
     <string name="avoid_unpaved">Forðast vegi með óbundnu slitlagi</string>
     <string name="avoid_ferries">Forðast ferjur</string>
     <string name="avoid_in_routing_title">Forðast…</string>
-    <string name="avoid_in_routing_descr">Forðast t.d. gjaldskyldu, óbundið slitlag, ferjur.</string>
     <string name="map_widget_transparent">Gegnsæir viðmótshlutar</string>
     <string name="bg_service_sleep_mode_off">Keyra
  forrit í bakgrunni</string>
@@ -2892,7 +2891,6 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="shared_string_capacity">Rýmd</string>
     <string name="shared_string_width">Breidd</string>
     <string name="shared_string_height">Hæð</string>
-    <string name="swap_start_and_destination">Skipta á upphafi og áfangastað</string>
     <string name="add_destination_point">Bæta við áfangastað</string>
     <string name="add_intermediate_point">Bæta við milliáfanga</string>
     <string name="add_start_point">Bæta við upphafspunkti</string>
@@ -2919,8 +2917,8 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="routeInfo_surface_name">Yfirborð</string>
     <string name="routeInfo_smoothness_name">Áferð</string>
     <string name="routeInfo_steepness_name">Bratti</string>
-    <string name="add_home">Bæta við heima</string>
-    <string name="add_work">Bæta við vinnu</string>
+    <string name="add_home">Bæta við \"Heim\"</string>
+    <string name="add_work">Bæta við \"Vinna\"</string>
     <string name="work_button">Vinna</string>
     <string name="previous_route">Fyrri leið</string>
     <string name="add_destination_query">Bættu fyrst við áfangastað</string>
@@ -3272,7 +3270,7 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="wake_time">Vökutími</string>
     <string name="units_and_formats">Einingar og snið þeirra</string>
     <string name="appearance">Útlit</string>
-    <string name="map_look_descr">táknmyndir, viðmótshlutar (widgets)</string>
+    <string name="map_look_descr">Útlit landakorts</string>
     <string name="map_look">Útlit korts</string>
     <string name="list_of_installed_plugins">Listi yfir uppsettar viðbætur</string>
     <string name="configure_navigation">Stilla leiðsögn</string>
@@ -3302,4 +3300,94 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="application_profile_changed">Forritssniði breytt í \"%s\"</string>
     <string name="logcat_buffer">Logcat biðminni</string>
     <string name="plugins_settings">Stillingar á forritsviðbót</string>
+    <string name="shared_string_by_default">Sjálfgefið</string>
+    <string name="download_detaile_map">Sæktu nákvæma %s kortið til að skoða þetta svæði.</string>
+    <string name="download_detailed_map">Sæktu nákvæma %s kortið til að skoða þetta svæði.</string>
+    <string name="change_data_storage_full_description">Færa gagnaskrár OsmAnd á nýjan stað\?
+\n%1$s &gt; %2$s</string>
+    <string name="enter_path_to_folder">Settu inn slóð á möppu</string>
+    <string name="shared_string_select_folder">Veldu möppu</string>
+    <string name="paste_Osmand_data_folder_path">Límdu slóð á möppuna með OsmAnd-gögnum</string>
+    <string name="change_osmand_data_folder_question">Skipta um OsmAnd-gagnamöppu\?</string>
+    <string name="move_maps_to_new_destination">Færa á nýja staðinn</string>
+    <string name="internal_app_storage_description">Innri gagnageymsla, falin fyrir notandanum og öðrum forritum þannig að enginn nema OsmAnd getur fengið aðgang að gögnunum þínum</string>
+    <string name="change_data_storage_folder">Breyta gagnageymslumöppu</string>
+    <string name="rendering_attr_piste_type_snow_park_name">Snjógerði</string>
+    <string name="rendering_attr_piste_type_sleigh_name">Sleðar</string>
+    <string name="rendering_attr_piste_type_sled_name">Snjóþotur</string>
+    <string name="rendering_attr_piste_type_hike_name">Gönguferðir</string>
+    <string name="rendering_attr_piste_type_connection_name">Tenging</string>
+    <string name="rendering_attr_piste_type_skitour_name">Skíðaferðir</string>
+    <string name="rendering_attr_piste_type_downhill_name">Brun</string>
+    <string name="rendering_attr_piste_type_nordic_name">Gönguskíði</string>
+    <string name="routeInfo_piste_type_name">Gerð brautar</string>
+    <string name="rendering_attr_piste_difficulty_novice_name">Byrjendur</string>
+    <string name="rendering_attr_piste_difficulty_easy_name">Auðvelt</string>
+    <string name="rendering_attr_piste_difficulty_intermediate_name">Miðlungs</string>
+    <string name="rendering_attr_piste_difficulty_advanced_name">Vanir</string>
+    <string name="rendering_attr_piste_difficulty_expert_name">Mjög vanir</string>
+    <string name="rendering_attr_piste_difficulty_freeride_name">Frjáls aðferð</string>
+    <string name="rendering_attr_piste_difficulty_extreme_name">Ofur</string>
+    <string name="rendering_attr_piste_difficulty_undefined_name">Óskilgreint</string>
+    <string name="routeInfo_piste_difficulty_name">Erfiðleikastig brautar</string>
+    <string name="routing_attr_width_name">Takmörkun breiddar</string>
+    <string name="routing_attr_width_description">Tilgreindu takmörk á breidd farartækja á leiðum.</string>
+    <string name="avoid_in_routing_descr_">Forðast tilteknar leiðir og gerðir af vegum</string>
+    <string name="data_storage_preference_summary">%1$s • %2$s</string>
+    <string name="data_storage_space_description">Laust %1$s GB • Alls %2$s GB</string>
+    <string name="app_mode_utv">Hlið við hlið</string>
+    <string name="rendering_attr_piste_difficulty_aerialway_name">Víralyfta</string>
+    <string name="rendering_attr_piste_difficulty_connection_name">Tenging</string>
+    <string name="shared_string_calculate">Reikna</string>
+    <string name="shared_string_osmand_usage">Notkun OsmAnd</string>
+    <string name="shared_sting_tiles">Kortatíglar</string>
+    <string name="shared_string_maps">Kort</string>
+    <string name="shared_string_memory_tb_desc">%1$s TB</string>
+    <string name="shared_string_memory_gb_desc">%1$s GB</string>
+    <string name="shared_string_memory_mb_desc">%1$s MB</string>
+    <string name="shared_string_memory_kb_desc">%1$s kB</string>
+    <string name="track_storage_directory">Geymslumappa fyrir ferla</string>
+    <string name="track_storage_directory_descrp">Ferla er hægt að geyma í rec-möppunni eða í mánaðarlegum eða daglegum möppum.</string>
+    <string name="store_tracks_in_rec_directory">Geymdu skráða ferla í rec-möppu</string>
+    <string name="store_tracks_in_daily_directories">Geyma skráða ferla í daglegum möppum</string>
+    <string name="store_tracks_in_daily_directories_descrp">Geyma skráða ferla í undirmöppum á hvern upptökudag (eins og t.d. 2018-01-01).</string>
+    <string name="shared_string_memory_used_tb_desc">Notað %1$s TB</string>
+    <string name="shared_string_memory_used_gb_desc">Notað %1$s GB</string>
+    <string name="shared_string_memory_used_mb_desc">Notað %1$s MB</string>
+    <string name="shared_string_memory_used_kb_desc">Notað %1$s kB</string>
+    <string name="contour_lines_and_hillshade">Hæðarlínur og hæðaskygging</string>
+    <string name="routing_attr_prefer_unpaved_name">Velja vegi með óbundnu slitlagi</string>
+    <string name="routing_attr_prefer_unpaved_description">Velja frekar vegi með óbundnu slitlagi.</string>
+    <string name="update_all_maps">Uppfæra öll kort</string>
+    <string name="update_all_maps_q">Ertu viss um að þú viljir uppfæra öll (%1$d) kort\?</string>
+    <string name="release_3_5">• Uppfærðar stillingar fyrir forrit og notkunarsnið: Stillingar eru núna flokkaðar eftir gerð þeirra. Hægt er að sérsníða hvert notkunarsnið sérstaklega.
+\n
+\n • Nýr niðurhalsgluggi fyrir landakort sem stingur upp á hvaða kort ætti að sækja
+\n
+\n • Lagfæringar á næturþema
+\n
+\n • Löguð vandamál við leiðagerð víðsvegar um heiminn
+\n
+\n • Uppfært grunnkort með nákvæmara vegakerfi
+\n
+\n • Lagfærð flóðasvæði víðsvegar um heiminn
+\n
+\n • Skíðaleiðir: bætt við hæðarsniði og flækjustigi leiða í nákvæmari eiginleika leiðar
+\n
+\n • Auk ýmissa annarra lagfæringa
+\n
+\n</string>
+    <string name="apply_preference_to_all_profiles">Þú getur virkjað þessa breytingu í öll notkunarsnið eða einungis þau sem eru valin.</string>
+    <string name="shared_preference">Sameiginlegt</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_name">Velja vegi með óbundnu slitlagi</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_description">Velja frekar vegi með óbundnu slitlagi.</string>
+    <string name="layer_osm_edits">OSM-breytingar</string>
+    <string name="quick_action_contour_lines_descr">Ef ýtt er á þennan aðgerðahnapp mun það birta eða fela hæðarlínur á kortinu</string>
+    <string name="quick_action_contour_lines_show">Birta hæðarlínur</string>
+    <string name="quick_action_contour_lines_hide">Fela hæðarlínur</string>
+    <string name="quick_action_show_hide_contour_lines">Birta/Fela hæðarlínur</string>
+    <string name="quick_action_hillshade_descr">Ef ýtt er á þennan aðgerðahnapp mun það birta eða fela hæðaskyggingu á kortinu</string>
+    <string name="quick_action_hillshade_show">Birta hæðaskyggingu</string>
+    <string name="quick_action_hillshade_hide">Fela hæðaskyggingu</string>
+    <string name="quick_action_show_hide_hillshade">Birta/Fela hæðaskyggingu</string>
 </resources>

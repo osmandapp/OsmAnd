@@ -30,6 +30,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment implements Send
 		setupExternalStorageDirPref();
 
 		setupSendAnonymousDataPref();
+		setupShowStartupMessagesPref();
 		setupEnableProxyPref();
 	}
 
@@ -66,6 +67,11 @@ public class GlobalSettingsFragment extends BaseSettingsFragment implements Send
 				}
 			}
 			return false;
+		} else if (prefId.equals(settings.DO_NOT_SHOW_STARTUP_MESSAGES.getId())) {
+			if (newValue instanceof Boolean) {
+				boolean enabled = !(Boolean) newValue;
+				return settings.DO_NOT_SHOW_STARTUP_MESSAGES.set(enabled);
+			}
 		}
 
 		return super.onPreferenceChange(preference, newValue);
@@ -137,12 +143,38 @@ public class GlobalSettingsFragment extends BaseSettingsFragment implements Send
 		Preference externalStorageDir = (Preference) findPreference(OsmandSettings.EXTERNAL_STORAGE_DIR);
 		externalStorageDir.setIcon(getContentIcon(R.drawable.ic_action_folder));
 
+		DataStorageHelper holder = new DataStorageHelper(app);
+		DataStorageMenuItem currentStorage = holder.getCurrentStorage();
+		long totalUsed = app.getSettings().OSMAND_USAGE_SPACE.get();
+		if (totalUsed > 0) {
+			String[] usedMemoryFormats = new String[] {
+					getString(R.string.shared_string_memory_used_kb_desc),
+					getString(R.string.shared_string_memory_used_mb_desc),
+					getString(R.string.shared_string_memory_used_gb_desc),
+					getString(R.string.shared_string_memory_used_tb_desc)
+			};
+			String sTotalUsed = DataStorageHelper.getFormattedMemoryInfo(totalUsed, usedMemoryFormats);
+			String summary = String.format(getString(R.string.data_storage_preference_summary),
+					currentStorage.getTitle(),
+					sTotalUsed);
+			summary = summary.replaceAll(" • ", "  •  ");
+			externalStorageDir.setSummary(summary);
+		} else {
+			externalStorageDir.setSummary(currentStorage.getTitle());
+		}
 	}
 
 	private void setupSendAnonymousDataPref() {
 		boolean enabled = settings.SEND_ANONYMOUS_MAP_DOWNLOADS_DATA.get() || settings.SEND_ANONYMOUS_APP_USAGE_DATA.get();
 
 		SwitchPreferenceCompat sendAnonymousData = (SwitchPreferenceCompat) findPreference(SEND_ANONYMOUS_DATA_PREF_ID);
+		sendAnonymousData.setChecked(enabled);
+	}
+
+	private void setupShowStartupMessagesPref() {
+		boolean enabled = !settings.DO_NOT_SHOW_STARTUP_MESSAGES.get(); // pref ui was inverted
+
+		SwitchPreferenceCompat sendAnonymousData = (SwitchPreferenceCompat) findPreference(settings.DO_NOT_SHOW_STARTUP_MESSAGES.getId());
 		sendAnonymousData.setChecked(enabled);
 	}
 

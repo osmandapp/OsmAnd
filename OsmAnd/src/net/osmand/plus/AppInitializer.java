@@ -93,6 +93,8 @@ public class AppInitializer implements IProgress {
 	public static final int VERSION_2_3 = 23;
 	// 32 - 3.2
 	public static final int VERSION_3_2 = 32;
+	// 35 - 3.5
+	public static final int VERSION_3_5 = 35;
 
 
 	public static final boolean TIPS_AND_TRICKS = false;
@@ -104,7 +106,7 @@ public class AppInitializer implements IProgress {
 	private static final String VERSION_INSTALLED = "VERSION_INSTALLED"; //$NON-NLS-1$
 	private static final String EXCEPTION_FILE_SIZE = "EXCEPTION_FS"; //$NON-NLS-1$
 
-	public static final String LATEST_CHANGES_URL = "https://osmand.net/blog/osmand-3-4-released";
+	public static final String LATEST_CHANGES_URL = "https://osmand.net/blog/osmand-3-5-released";
 //	public static final String LATEST_CHANGES_URL = null; // not enough to read
 	public static final int APP_EXIT_CODE = 4;
 	public static final String APP_EXIT_KEY = "APP_EXIT_KEY";
@@ -128,7 +130,7 @@ public class AppInitializer implements IProgress {
 		FAVORITES_INITIALIZED, NATIVE_INITIALIZED,
 		NATIVE_OPEN_GLINITIALIZED,
 		TASK_CHANGED, MAPS_INITIALIZED, POI_TYPES_INITIALIZED, ASSETS_COPIED, INIT_RENDERERS,
-		RESTORE_BACKUPS, INDEX_REGION_BOUNDARIES, SAVE_GPX_TRACKS, LOAD_GPX_TRACKS
+		RESTORE_BACKUPS, INDEX_REGION_BOUNDARIES, SAVE_GPX_TRACKS, LOAD_GPX_TRACKS, ROUTING_CONFIG_INITIALIZED
 	}
 
 	public interface AppInitializeListener {
@@ -187,6 +189,9 @@ public class AppInitializer implements IProgress {
 			} else if (prevAppVersion < VERSION_3_2) {
 				app.getSettings().BILLING_PURCHASE_TOKENS_SENT.set("");
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, VERSION_3_2).commit();
+			} else if (prevAppVersion < VERSION_3_5) {
+				app.getSettings().migrateGlobalPrefsToProfile();
+				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, VERSION_3_5).commit();
 			}
 			startPrefs.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
 			appVersionChanged = true;
@@ -452,7 +457,12 @@ public class AppInitializer implements IProgress {
 	public void onCreateApplication() {
 		// always update application mode to default
 		OsmandSettings osmandSettings = app.getSettings();
-		if (!osmandSettings.FOLLOW_THE_ROUTE.get()) {
+		if (osmandSettings.FOLLOW_THE_ROUTE.get()) {
+			ApplicationMode savedMode = osmandSettings.readApplicationMode();
+			if (!osmandSettings.APPLICATION_MODE.get().getStringKey().equals(savedMode.getStringKey())) {
+				osmandSettings.APPLICATION_MODE.set(savedMode);
+			}
+		} else {
 			osmandSettings.APPLICATION_MODE.set(osmandSettings.DEFAULT_APPLICATION_MODE.get());
 		}
 		startTime = System.currentTimeMillis();
@@ -477,7 +487,7 @@ public class AppInitializer implements IProgress {
 		app.notificationHelper = startupInit(new NotificationHelper(app), NotificationHelper.class);
 		app.liveMonitoringHelper = startupInit(new LiveMonitoringHelper(app), LiveMonitoringHelper.class);
 		app.selectedGpxHelper = startupInit(new GpxSelectionHelper(app, app.savingTrackHelper), GpxSelectionHelper.class);
-		app.gpxDatabase = startupInit(new GPXDatabase(app), GPXDatabase.class);
+		app.gpxDbHelper = startupInit(new GpxDbHelper(app), GpxDbHelper.class);
 		app.favorites = startupInit(new FavouritesDbHelper(app), FavouritesDbHelper.class);
 		app.waypointHelper = startupInit(new WaypointHelper(app), WaypointHelper.class);
 		app.aidlApi = startupInit(new OsmandAidlApi(app), OsmandAidlApi.class);
@@ -499,6 +509,8 @@ public class AppInitializer implements IProgress {
 		}
 		app.travelDbHelper = startupInit(app.travelDbHelper, TravelDbHelper.class);
 		app.lockHelper = startupInit(new LockHelper(app), LockHelper.class);
+		app.settingsHelper = startupInit(new SettingsHelper(app), SettingsHelper.class);
+
 
 		initOpeningHoursParser();
 	}
@@ -581,6 +593,7 @@ public class AppInitializer implements IProgress {
 			protected void onPostExecute(Builder builder) {
 				super.onPostExecute(builder);
 				app.updateRoutingConfig(builder);
+				notifyEvent(InitEvents.ROUTING_CONFIG_INITIALIZED);
 			}
 		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
@@ -661,6 +674,7 @@ public class AppInitializer implements IProgress {
 			notifyEvent(InitEvents.NATIVE_INITIALIZED);
 
 			app.favorites.loadFavorites();
+			app.gpxDbHelper.loadGpxItems();
 			notifyEvent(InitEvents.FAVORITES_INITIALIZED);
 			app.poiFilters.reloadAllPoiFilters();
 			app.poiFilters.loadSelectedPoiFilters();

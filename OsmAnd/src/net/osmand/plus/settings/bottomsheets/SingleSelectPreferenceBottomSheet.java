@@ -28,21 +28,16 @@ public class SingleSelectPreferenceBottomSheet extends BasePreferenceBottomSheet
 	private int selectedEntryIndex = -1;
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		listPreference = getListPreference();
-		if (savedInstanceState != null) {
-			selectedEntryIndex = savedInstanceState.getInt(SELECTED_ENTRY_INDEX_KEY);
-		} else if (listPreference != null) {
-			selectedEntryIndex = listPreference.findIndexOfValue(listPreference.getValue());
-		}
-	}
-
-	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		Context ctx = getContext();
+		listPreference = getListPreference();
 		if (ctx == null || listPreference == null || listPreference.getEntries() == null || listPreference.getEntryValues() == null) {
 			return;
+		}
+		if (savedInstanceState != null) {
+			selectedEntryIndex = savedInstanceState.getInt(SELECTED_ENTRY_INDEX_KEY);
+		} else {
+			selectedEntryIndex = listPreference.findIndexOfValue(listPreference.getValue());
 		}
 
 		String title = listPreference.getDialogTitle().toString();
