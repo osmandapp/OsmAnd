@@ -3321,4 +3321,12 @@
     <string name="update_all_maps_q">Вы уверены, что хотите обновить все карты (%1$d)\?</string>
     <string name="apply_preference_to_all_profiles">Вы можете применить это изменение ко всем профилям или только к выбранным.</string>
     <string name="shared_preference">Общий</string>
+    <string name="quick_action_contour_lines_descr">Нажатие на кнопку действия отобразит или скроет контурные линии</string>
+    <string name="quick_action_contour_lines_show">Показать контурные линии</string>
+    <string name="quick_action_contour_lines_hide">Скрыть контурные линии</string>
+    <string name="quick_action_show_hide_contour_lines">Показать/скрыть контурные линии</string>
+    <string name="quick_action_hillshade_descr">Нажатие на кнопку действия отобразит или скроет затенение рельефа</string>
+    <string name="quick_action_hillshade_show">Показать затенение рельефа</string>
+    <string name="quick_action_hillshade_hide">Скрыть затенение рельефа</string>
+    <string name="quick_action_show_hide_hillshade">Показать/скрыть затенение рельефа</string>
 </resources>
