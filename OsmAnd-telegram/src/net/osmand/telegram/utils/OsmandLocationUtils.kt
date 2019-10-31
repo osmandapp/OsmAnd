@@ -68,8 +68,8 @@ object OsmandLocationUtils {
 			try {
 				val content = message.content
 				when {
-					replyMarkup.rows[0].size > 1 -> deviceName = replyMarkup.rows[0][1].text.split("\\s".toRegex())[1]
 					content is TdApi.MessageText -> deviceName = content.text.text.lines().firstOrNull()?.removePrefix(DEVICE_PREFIX) ?: ""
+					content is TdApi.MessageLocation && replyMarkup.rows[0].size > 1 -> deviceName = replyMarkup.rows[0][0].text.split("\\s".toRegex())[1]
 					content is MessageOsmAndBotLocation -> deviceName = content.deviceName
 				}
 			} catch (e: Exception) {
