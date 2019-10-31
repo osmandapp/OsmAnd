@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.IndexConstants;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -51,7 +52,7 @@ public class TracksCard extends BaseCard {
 	}
 
 	private GpxDataItem getDataItem(GPXInfo info) {
-		return app.getGpxDbHelper().getItem(new File(info.getFileName()));
+		return app.getGpxDbHelper().getItem(new File(app.getAppPath(IndexConstants.GPX_INDEX_DIR), info.getFileName()));
 	}
 
 	@SuppressLint("DefaultLocale")
