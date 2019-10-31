@@ -462,7 +462,7 @@ public class MapActivityLayers {
 
 		final List<Entry<String, String>> entriesMapList = new ArrayList<>(entriesMap.entrySet());
 
-		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+		AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(activity, getThemeRes(getApplication())));
 
 		String selectedTileSourceKey = settings.MAP_TILE_SOURCES.get();
 
