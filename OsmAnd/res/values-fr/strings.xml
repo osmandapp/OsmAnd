@@ -3345,4 +3345,5 @@ représentant la zone : %1$s x %2$s</string>
     <string name="quick_action_hillshade_show">Afficher l\'ombrage du relief</string>
     <string name="quick_action_hillshade_hide">Masquer l\'ombrage du relief</string>
     <string name="quick_action_show_hide_hillshade">Afficher/Masquer l\'ombrage du relief</string>
+    <string name="swap_start_and_destination"> string name=\"lat_lon_pattern\"&gt;Lat. : %1$.5f Lon. : %2$.5f&lt;/string </string>
 </resources>
