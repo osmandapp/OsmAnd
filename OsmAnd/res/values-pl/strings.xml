@@ -3370,4 +3370,16 @@ Reprezentuje obszar: %1$s x %2$s</string>
 \n • Inne poprawki błędów
 \n
 \n</string>
+    <string name="swap_start_and_destination"> string name=\"lat_lon_pattern\"&gt;Długość: %1$.5f Szerokość: %2$.5f&lt;/string </string>
+    <string name="apply_preference_to_all_profiles">Możesz zastosować tę zmianę do wszystkich profili lub tylko do wybranych.</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_name">Preferuj drogi nieutwardzone</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_description">Preferuj drogi nieutwardzone.</string>
+    <string name="layer_osm_edits">Zmiany OSM</string>
+    <string name="quick_action_contour_lines_descr">Naciśnięcie tego przycisku akcji powoduje wyświetlenie lub ukrycie linii konturów na mapie</string>
+    <string name="quick_action_contour_lines_show">Pokaż linie konturu</string>
+    <string name="quick_action_contour_lines_hide">Ukryj linie konturu</string>
+    <string name="quick_action_show_hide_contour_lines">Pokaż/Ukryj linie konturu</string>
+    <string name="quick_action_hillshade_show">Pokaż cieniowania terenu</string>
+    <string name="quick_action_hillshade_hide">Ukryj cieniowania terenu</string>
+    <string name="quick_action_show_hide_hillshade">Pokaż/Ukryj cieniowania terenu</string>
 </resources>
