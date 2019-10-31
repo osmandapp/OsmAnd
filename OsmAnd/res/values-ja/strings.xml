@@ -217,7 +217,7 @@ MB)をダウンロードしますか?</string>
     <string name="use_trackball">トラックボールを使用</string>
     <string name="background_service_wait_int_descr">位置修正用の待ち時間をセットします</string>
     <string name="background_service_wait_int">待ち時間</string>
-    <string name="where_am_i">現在地を表示\?</string>
+    <string name="where_am_i">現在地を表示</string>
     <string name="process_navigation_service">OsmAnd ナビゲーションサービス</string>
     <string name="network_provider">ネットワーク</string>
     <string name="gps_provider">GPS</string>
@@ -1230,7 +1230,7 @@ POIの更新は利用できません</string>
     <string name="keep_informing">ナビゲーション指示の繰り返し</string>
     <string name="keep_informing_descr">ナビゲーション指示を繰り返す間隔を設定します</string>
     <string name="arrival_distance">目的地周辺でのアナウンスタイミング</string>
-    <string name="arrival_distance_descr">目的地周辺でのアナウンスをするタイミングを設定します\?</string>
+    <string name="arrival_distance_descr">目的地周辺でのアナウンスをするタイミングを設定します。</string>
     <string name="always_center_position_on_map">移動時、現在地を画面中央よりに表示</string>
     <string name="voice_pref_title">音声関連設定</string>
     <string name="misc_pref_title">その他の設定</string>
@@ -3029,14 +3029,14 @@ POIの更新は利用できません</string>
     <string name="rendering_attr_surface_compacted_name">砂利や土などの圧縮舗装</string>
     <string name="routing_attr_avoid_sett_name">石畳や敷石の道を避ける</string>
     <string name="routing_attr_avoid_sett_description">移動時に石畳や敷石の道を通らないようにします</string>
-    <string name="rendering_attr_smoothness_excellent_name">ローラーブレードやスケボーができる滑らかさ</string>
-    <string name="rendering_attr_smoothness_good_name">ロードバイクを含め車両全般が走行可能</string>
+    <string name="rendering_attr_smoothness_excellent_name">ローラーブレードやスケボーなども走行可</string>
+    <string name="rendering_attr_smoothness_good_name">ロードバイクを含め車両全般が走行可</string>
     <string name="rendering_attr_smoothness_intermediate_name">シティバイク、スポーツカー、車椅子、スクーター及びオフロードバイクや車も走行可能</string>
-    <string name="rendering_attr_smoothness_bad_name">クロスバイク、普通車、人力車などなら走行可能</string>
-    <string name="rendering_attr_smoothness_very_bad_name">車高の高い車、軽装オフロード車なら走行可能</string>
-    <string name="rendering_attr_smoothness_horrible_name">重装備のオフロード車なら走行可能</string>
-    <string name="rendering_attr_smoothness_very_horrible_name">トラクター、ATV、戦車、MTBなど荒れた道でも問題無いもののみ走行可能</string>
-    <string name="rendering_attr_smoothness_impassable_name">2輪4輪問わず車両は走行不可能</string>
+    <string name="rendering_attr_smoothness_bad_name">クロスバイク、普通車、人力車などなら走行可</string>
+    <string name="rendering_attr_smoothness_very_bad_name">車高の高い車、軽装オフロード車なら走行可</string>
+    <string name="rendering_attr_smoothness_horrible_name">重装備のオフロード車なら走行可</string>
+    <string name="rendering_attr_smoothness_very_horrible_name">トラクター、ATV、戦車、MTBなど荒れた道でも問題無いもののみ走行可</string>
+    <string name="rendering_attr_smoothness_impassable_name">2輪4輪問わず車両は走行不可</string>
     <string name="rendering_attr_highway_class_motorway_name">高速道路、自動車専用道路</string>
     <string name="rendering_attr_highway_class_street_name">街路</string>
     <string name="rendering_attr_highway_class_footway_name">歩道</string>
@@ -3380,4 +3380,10 @@ POIの更新は利用できません</string>
     <string name="shared_preference">シェア</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">未舗装道路を優先</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">未舗装道路を優先してルートを検索します。</string>
+    <string name="osm_recipients_label">OSM受信者</string>
+    <string name="new_route_calculated_dist_dbg">"ルート: 距離 %s、検索時間  %s
+\n検索時間: %.1f秒、道 %d、タイル %d"</string>
+    <string name="price_and_discount">%1$s • %2$s 割引</string>
+    <string name="routing_attr_width_name">幅制限</string>
+    <string name="routing_attr_width_description">ルート検索時に考慮する車幅を指定します。</string>
 </resources>
