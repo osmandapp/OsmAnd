@@ -2879,7 +2879,6 @@
     <string name="quick_action_switch_night_mode">Nattmodus</string>
     <string name="quick_action_day_night_switch_mode">Veksle dag-/nattmodus</string>
     <string name="app_mode_public_transport">Offentlig transport</string>
-    <string name="swap_start_and_destination">Bytt utgangspunkt og reisemål</string>
     <string name="add_destination_point">Legg til reisemål</string>
     <string name="add_intermediate_point">Legg til mellomliggende</string>
     <string name="add_start_point">Legg til startpunkt</string>

@@ -2907,7 +2907,6 @@ Lon %2$s</string>
     <string name="shared_string_capacity">Capacidade</string>
     <string name="shared_string_width">Anchura</string>
     <string name="shared_string_height">Altura</string>
-    <string name="swap_start_and_destination">Trocar inicio e destino</string>
     <string name="add_destination_point">Engadir destino</string>
     <string name="add_intermediate_point">Engadir punto intermedio</string>
     <string name="add_start_point">Engadir punto de partida</string>

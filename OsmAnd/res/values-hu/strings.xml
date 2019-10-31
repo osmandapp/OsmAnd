@@ -2774,7 +2774,6 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="shared_string_capacity">Kapacitás</string>
     <string name="shared_string_width">Szélesség</string>
     <string name="shared_string_height">Magasság</string>
-    <string name="swap_start_and_destination">Kiindulási és célpont felcserélése</string>
     <string name="add_destination_point">Célpont hozzáadása</string>
     <string name="add_intermediate_point">Köztes célpont hozzáadása</string>
     <string name="add_start_point">Kiindulópont hozzáadása</string>

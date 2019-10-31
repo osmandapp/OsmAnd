@@ -2885,7 +2885,6 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="shared_string_capacity">Pojemność</string>
     <string name="shared_string_width">Szerokość</string>
     <string name="shared_string_height">Wysokość</string>
-    <string name="swap_start_and_destination">Odwróć początek i cel</string>
     <string name="add_destination_point">Dodaj cel trasy</string>
     <string name="add_intermediate_point">Dodaj punkt pośredni</string>
     <string name="add_start_point">Dodaj punkt początkowy</string>

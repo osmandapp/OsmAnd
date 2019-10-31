@@ -2882,7 +2882,7 @@
     <string name="shared_string_capacity">Аб’ём</string>
     <string name="shared_string_width">Шырыня</string>
     <string name="shared_string_height">Вышыня</string>
-    <string name="swap_start_and_destination">Памяняць месцамі пачатковы пункт і пункт прызначэння</string>
+    <string name="swap_start_and_destination">Памяняць месцамі <b>пачатковы пункт</b> і <b>пункт прызначэння</b></string>
     <string name="add_destination_point">Дадаць пункт прызначэння</string>
     <string name="add_intermediate_point">Дадаць прамежкавы пункт</string>
     <string name="add_start_point">Дадаць пачатковы пункт</string>

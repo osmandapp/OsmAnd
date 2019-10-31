@@ -2871,7 +2871,6 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="shared_string_capacity">Kapacita</string>
     <string name="shared_string_width">Šírka</string>
     <string name="shared_string_height">Výška</string>
-    <string name="swap_start_and_destination">Vymeniť štart a cieľ</string>
     <string name="add_destination_point">Pridať cieľ</string>
     <string name="add_intermediate_point">Pridať medzicieľ</string>
     <string name="add_start_point">Pridať štartovací bod</string>

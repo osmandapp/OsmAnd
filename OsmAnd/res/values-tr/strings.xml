@@ -2915,7 +2915,6 @@
     <string name="powered_by_osmand">OsmAnd tarafından</string>
     <string name="shared_string_launch">Başlat</string>
     <string name="lang_gn_py">Guaraní dili</string>
-    <string name="swap_start_and_destination">Başlangıç ve varış yerini değiştir</string>
     <string name="intermediate_waypoint">Ara nokta</string>
     <string name="transfers">Transferler</string>
     <string name="on_foot">Yürüyerek</string>

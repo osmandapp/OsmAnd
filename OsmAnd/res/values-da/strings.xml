@@ -2902,7 +2902,6 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="shared_string_height">Højde</string>
     <string name="route_way">Vej</string>
     <string name="choose_track_file_to_follow">Vælg den sporfil, der skal følges</string>
-    <string name="swap_start_and_destination">Skift start og destination</string>
     <string name="voice_announcements">Stemmemeddelelser</string>
     <string name="arrive_at_time">Ankommer %1$s</string>
     <string name="quick_action_switch_day_night_descr">Tryk på genvejsknappen skifter mellem dag- og nattilstand</string>

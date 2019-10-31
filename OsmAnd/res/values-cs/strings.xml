@@ -2860,7 +2860,6 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="shared_string_capacity">Kapacita</string>
     <string name="shared_string_width">Šířka</string>
     <string name="shared_string_height">Výška</string>
-    <string name="swap_start_and_destination">Prohodit start a cíl</string>
     <string name="add_destination_point">Přidat cíl</string>
     <string name="add_intermediate_point">Přidat mezicíl</string>
     <string name="add_start_point">Přidat počáteční bod</string>

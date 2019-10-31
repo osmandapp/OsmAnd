@@ -2860,7 +2860,6 @@ Pôr do Sol: %2$s</string>
     <string name="mapillary_menu_title_pano">Exibir só imagens 360°</string>
     <string name="shared_string_launch">Iniciar</string>
     <string name="run_full_osmand_header">Iniciar OsmAnd\?</string>
-    <string name="swap_start_and_destination">Inverter partida e destino</string>
     <string name="add_destination_point">Adicionar destino</string>
     <string name="add_intermediate_point">Adicionar intermediário</string>
     <string name="add_start_point">Adicionar ponto de partida</string>

@@ -2906,7 +2906,7 @@
     <string name="shared_string_capacity">Об\'єм</string>
     <string name="shared_string_width">Ширина</string>
     <string name="shared_string_height">Висота</string>
-    <string name="swap_start_and_destination">Поміняти місцями пункти відправлення та призначення</string>
+    <string name="swap_start_and_destination">Поміняти місцями пункти <b>відправлення</b> та <b>призначення</b></string>
     <string name="add_destination_point">Додати пункт призначення</string>
     <string name="add_intermediate_point">Додати проміжний пункт</string>
     <string name="add_start_point">Додати пункт відправлення</string>

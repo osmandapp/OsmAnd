@@ -2758,7 +2758,6 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="shared_string_capacity">Kapacitet</string>
     <string name="shared_string_width">Bredd</string>
     <string name="shared_string_height">Höjd</string>
-    <string name="swap_start_and_destination">Växla start och mål</string>
     <string name="add_destination_point">Lägg till destination</string>
     <string name="add_intermediate_point">Lägg till hållplats</string>
     <string name="add_start_point">Lägg till startpunkt</string>

@@ -422,7 +422,7 @@
     <string name="shared_string_capacity">Сapacity</string>
     <string name="shared_string_width">Width</string>
     <string name="shared_string_height">Height</string>
-    <string name="swap_start_and_destination">Swap start and destination</string>
+    <string name="swap_start_and_destination">Swap <b>start</b> and <b>destination</b></string>
     <string name="add_destination_point">Add destination</string>
     <string name="add_intermediate_point">Add intermediate</string>
     <string name="add_start_point">Add starting point</string>

@@ -2668,7 +2668,6 @@ No Afganistānas līdz Zimbabvei, no Austrālijas līdz ASV, Argentīna, Brazīl
     <string name="osm_live_payment_contribute_descr">Daļa no iemaksām aiziet OpenStreetMap izstrādātājiem.</string>
     <string name="powered_by_osmand">Izstrādāts ar OsmAnd</string>
     <string name="osm_live_subscriptions">Abonomenti</string>
-    <string name="swap_start_and_destination">Samainīt vietām startu ar galamērķi</string>
     <string name="add_destination_point">Pievienot galamērķi</string>
     <string name="add_intermediate_point">Pievienot starppunktu</string>
     <string name="add_start_point">Pievienot starta punktu</string>

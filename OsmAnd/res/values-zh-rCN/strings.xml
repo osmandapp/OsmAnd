@@ -2558,7 +2558,6 @@
     <string name="tunnel_warning">前方隧道</string>
     <string name="show_tunnels">隧道</string>
     <string name="download_wikipedia_description">下载 %1$s 的维基百科条目以离线阅读。</string>
-    <string name="swap_start_and_destination">交换出发地和目的地</string>
     <string name="add_destination_point">添加目的地</string>
     <string name="mapillary_menu_title_pano">仅显示 360° 图像</string>
     <string name="wiki_article_search_text">搜索对应的维基条目</string>

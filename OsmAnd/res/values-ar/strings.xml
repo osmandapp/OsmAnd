@@ -2840,7 +2840,6 @@
     <string name="routeInfo_steepness_name">الوعورة</string>
     <string name="run_full_osmand_msg">كنت تستخدم {0} الخريطة وهي مدعومة من osmand.هل تريد من osmand إطلاق النسخة الكاملة؟</string>
     <string name="run_full_osmand_header">تشغيل osmand؟</string>
-    <string name="swap_start_and_destination">تبديل البداية والوجهة</string>
     <string name="time_of_day">الوقت من اليوم</string>
     <string name="by_transport_type">بواسطة %1$s</string>
     <string name="step_by_step">خطوة بخطوة</string>

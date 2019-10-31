@@ -2897,7 +2897,7 @@
     <string name="lang_gn_py">Гуарани</string>
     <string name="run_full_osmand_msg">Вы используете {0} карту, которая поставляется OsmAnd. Хотите запустить полную версию Osmand\?</string>
     <string name="run_full_osmand_header">Запустить OsmAnd\?</string>
-    <string name="swap_start_and_destination">Поменять местами пункты отправления и назначения</string>
+    <string name="swap_start_and_destination">Поменять местами пункты <b>отправления</b> и <b>назначения</b></string>
     <string name="add_destination_point">Добавить пункт назначения</string>
     <string name="add_intermediate_point">Добавить промежуточный пункт</string>
     <string name="add_start_point">Добавить пункт отправления</string>

@@ -2878,7 +2878,6 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="shared_string_capacity">Capacità</string>
     <string name="shared_string_width">Larghezza</string>
     <string name="shared_string_height">Altezza</string>
-    <string name="swap_start_and_destination">Inverti partenza e destinazione</string>
     <string name="add_destination_point">Aggiungi destinazione</string>
     <string name="add_intermediate_point">Aggiungi punto intermedio</string>
     <string name="add_start_point">Aggiungi punto di partenza</string>

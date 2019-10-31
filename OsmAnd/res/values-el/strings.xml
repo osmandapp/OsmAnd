@@ -3004,7 +3004,6 @@
     <string name="shared_string_capacity">Χωρητικότητα</string>
     <string name="shared_string_width">Πλάτος</string>
     <string name="shared_string_height">Ύψος</string>
-    <string name="swap_start_and_destination">Εναλλαγή έναρξης και προορισμού</string>
     <string name="add_destination_point">Προσθήκη προορισμού</string>
     <string name="add_intermediate_point">Προσθήκη ενδιάμεσου σημείου</string>
     <string name="add_start_point">Προσθήκη σημείου έναρξης</string>

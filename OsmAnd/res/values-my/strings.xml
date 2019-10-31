@@ -308,7 +308,6 @@
     <string name="osm_live_payment_header">သင့်အတွက်အဆင်ပြေမည့်ငွေပေးချေမှုကာလကိုရွေးချယ်ပါ။</string>
     <string name="osm_live_payment_contribute_descr">၀င်ငွေ၏တစိတ်တပိုင်းသည် OpenStreetMap ထောက်ပံ့သူများထံသို့သွားသည်။</string>
     <string name="powered_by_osmand">OsmAnd မှ</string>
-    <string name="swap_start_and_destination">ခရီးအစနဲ့အဆုံးပြောင်း</string>
     <string name="add_destination_point">ဦး တည်ရာကိုထည့်ပါ</string>
     <string name="add_intermediate_point">ကြားရပ်နေရာထည့်ပါ</string>
     <string name="add_start_point">အစနေရာထည့်ပါ</string>

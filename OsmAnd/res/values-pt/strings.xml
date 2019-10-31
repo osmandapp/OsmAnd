@@ -2882,7 +2882,6 @@
     <string name="shared_string_capacity">Capacidade</string>
     <string name="shared_string_width">Largura</string>
     <string name="shared_string_height">Altura</string>
-    <string name="swap_start_and_destination">Inverter o início e o destino</string>
     <string name="add_destination_point">Adicionar destino</string>
     <string name="add_intermediate_point">Adicionar ponto intermédio</string>
     <string name="add_start_point">Adicionar ponto de partida</string>
