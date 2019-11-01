@@ -23,6 +23,7 @@
 			android:layout_marginStart="64dp"
 			android:layout_weight="1"
 			android:text="@string/search_radius_proximity"
+			android:textColor="?android:textColorPrimary"
 			android:textSize="@dimen/default_desc_text_size" />
 
 		<net.osmand.plus.widgets.TextViewEx
@@ -43,6 +44,7 @@
 		android:id="@+id/bottom_divider"
 		android:layout_width="match_parent"
 		android:layout_height="1dp"
-		android:layout_marginTop="8dp" />
+		android:layout_marginTop="8dp"
+		android:background="?attr/divider_color_basic" />
 
 </LinearLayout>

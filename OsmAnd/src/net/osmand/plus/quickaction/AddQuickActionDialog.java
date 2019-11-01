@@ -6,7 +6,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.view.ContextThemeWrapper;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +17,7 @@ import android.widget.TextView;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 
 import java.util.List;
@@ -39,9 +39,7 @@ public class AddQuickActionDialog extends DialogFragment {
         OsmandApplication application = (OsmandApplication) getActivity().getApplication();
         isLightContent = application.getSettings().isLightContent() && !application.getDaynightHelper().isNightMode();
 
-        return new Dialog(new ContextThemeWrapper(getActivity(), isLightContent
-                ? R.style.Dialog90Light
-                : R.style.Dialog90Dark), getTheme());
+        return new Dialog(UiUtilities.getThemedContext(getActivity(), !isLightContent, R.style.Dialog90Light, R.style.Dialog90Dark), getTheme());
     }
 
     @Nullable

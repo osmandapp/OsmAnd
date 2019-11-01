@@ -454,9 +454,10 @@ public class OsmandApplication extends MultiDexApplication {
 		String voiceProvider = osmandSettings.VOICE_PROVIDER.getModeValue(applicationMode);
 		if (voiceProvider == null || OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(voiceProvider)) {
 			if (warningNoneProvider && voiceProvider == null) {
-				final AlertDialog.Builder builder = new AlertDialog.Builder(uiContext);
+				boolean nightMode = daynightHelper.isNightModeForMapControls();
+				final AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(uiContext, nightMode));
 
-				View view = uiContext.getLayoutInflater().inflate(R.layout.select_voice_first, null);
+				View view = UiUtilities.getInflater(uiContext, nightMode).inflate(R.layout.select_voice_first, null);
 
 				((ImageView) view.findViewById(R.id.icon))
 						.setImageDrawable(getUIUtilities().getIcon(R.drawable.ic_action_volume_up, getSettings().isLightContent()));

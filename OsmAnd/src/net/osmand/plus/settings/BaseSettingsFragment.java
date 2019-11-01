@@ -147,8 +147,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 
 	@Override
 	public RecyclerView onCreateRecyclerView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
-		Context themedContext = new ContextThemeWrapper(getActivity(), themeRes);
-		LayoutInflater themedInflater = inflater.cloneInContext(themedContext);
+		LayoutInflater themedInflater = UiUtilities.getInflater(getActivity(), nightMode);
 
 		RecyclerView recyclerView = super.onCreateRecyclerView(themedInflater, parent, savedInstanceState);
 		recyclerView.setPadding(0, 0, 0, AndroidUtils.dpToPx(app, 80));
@@ -302,8 +301,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		AppBarLayout appBarLayout = (AppBarLayout) view.findViewById(R.id.appbar);
 		ViewCompat.setElevation(appBarLayout, 5.0f);
 
-		Context themedContext = new ContextThemeWrapper(getActivity(), themeRes);
-		View toolbarContainer = inflater.cloneInContext(themedContext).inflate(currentScreenType.toolbarResId, appBarLayout);
+		View toolbarContainer = UiUtilities.getInflater(getActivity(), nightMode).inflate(currentScreenType.toolbarResId, appBarLayout);
 
 		TextView toolbarTitle = (TextView) view.findViewById(R.id.toolbar_title);
 		toolbarTitle.setText(getPreferenceScreen().getTitle());

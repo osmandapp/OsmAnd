@@ -25,6 +25,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsBaseActivity;
 import net.osmand.plus.activities.SettingsNavigationActivity;
@@ -306,17 +307,20 @@ public class RoutingOptionsHelper {
 		if (selectedIndex == -1) {
 			selectedIndex = 0;
 		}
-		AlertDialog.Builder builder = new AlertDialog.Builder(mapActivity);
+
+		final boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+		Context themedContext = UiUtilities.getThemedContext(mapActivity, nightMode);
+		AlertDialog.Builder builder = new AlertDialog.Builder(themedContext);
 		final int layout = R.layout.list_menu_item_native_singlechoice;
 
-		final ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(mapActivity, layout, R.id.text1, adapter.getItemNames()) {
+		final ArrayAdapter<String> listAdapter = new ArrayAdapter<String>(themedContext, layout, R.id.text1, adapter.getItemNames()) {
 			@NonNull
 			@Override
-			public View getView(final int position, View convertView, ViewGroup parent) {
+			public View getView(final int position, View convertView, @NonNull ViewGroup parent) {
 				// User super class to create the View
 				View v = convertView;
 				if (v == null) {
-					v = mapActivity.getLayoutInflater().inflate(layout, null);
+					v = UiUtilities.getInflater(mapActivity, nightMode).inflate(layout, parent, false);
 				}
 				final ContextMenuItem item = adapter.getItem(position);
 				TextView tv = (TextView) v.findViewById(R.id.text1);

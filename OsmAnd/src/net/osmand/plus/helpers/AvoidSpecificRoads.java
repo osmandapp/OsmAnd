@@ -1,5 +1,6 @@
 package net.osmand.plus.helpers;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.DrawableRes;
@@ -7,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -25,6 +27,7 @@ import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.routing.RoutingHelper;
@@ -58,16 +61,19 @@ public class AvoidSpecificRoads {
 		}
 	}
 
-	private ArrayAdapter<LatLon> createAdapter(final MapActivity ctx) {
+	private ArrayAdapter<LatLon> createAdapter(MapActivity mapActivity, boolean nightMode) {
 		final ArrayList<LatLon> points = new ArrayList<>(impassableRoads.keySet());
-		final LatLon mapLocation = ctx.getMapLocation();
-		return new ArrayAdapter<LatLon>(ctx, R.layout.waypoint_reached, R.id.title, points) {
+		final LatLon mapLocation = mapActivity.getMapLocation();
+		final LayoutInflater inflater = UiUtilities.getInflater(mapActivity, nightMode);
+		Context themedContext = UiUtilities.getThemedContext(mapActivity, nightMode);
+
+		return new ArrayAdapter<LatLon>(themedContext, R.layout.waypoint_reached, R.id.title, points) {
 			@NonNull
 			@Override
 			public View getView(final int position, View convertView, @NonNull ViewGroup parent) {
 				View v = convertView;
 				if (v == null || v.findViewById(R.id.info_close) == null) {
-					v = ctx.getLayoutInflater().inflate(R.layout.waypoint_reached, parent, false);
+					v = inflater.inflate(R.layout.waypoint_reached, parent, false);
 				}
 				final LatLon item = getItem(position);
 				v.findViewById(R.id.all_points).setVisibility(View.GONE);
@@ -158,12 +164,15 @@ public class AvoidSpecificRoads {
 	}
 
 	public void showDialog(@NonNull final MapActivity mapActivity) {
-		AlertDialog.Builder bld = new AlertDialog.Builder(mapActivity);
+		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+		Context themedContext = UiUtilities.getThemedContext(mapActivity, nightMode);
+
+		AlertDialog.Builder bld = new AlertDialog.Builder(themedContext);
 		bld.setTitle(R.string.impassable_road);
 		if (impassableRoads.isEmpty()) {
 			bld.setMessage(R.string.avoid_roads_msg);
 		} else {
-			final ArrayAdapter<LatLon> listAdapter = createAdapter(mapActivity);
+			final ArrayAdapter<LatLon> listAdapter = createAdapter(mapActivity, nightMode);
 			bld.setAdapter(listAdapter, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {

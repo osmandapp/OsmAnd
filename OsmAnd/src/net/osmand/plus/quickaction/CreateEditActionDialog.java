@@ -9,7 +9,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.view.ContextThemeWrapper;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -21,9 +20,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 
 /**
@@ -72,9 +71,7 @@ public class CreateEditActionDialog extends DialogFragment {
         OsmandApplication application = (OsmandApplication) getActivity().getApplication();
         isLightContent = application.getSettings().isLightContent() && !application.getDaynightHelper().isNightMode();
 
-        Dialog dialog = new Dialog(new ContextThemeWrapper(getActivity(), isLightContent
-                ? R.style.Dialog90Light
-                : R.style.Dialog90Dark), getTheme());
+        Dialog dialog = new Dialog(UiUtilities.getThemedContext(getActivity(), !isLightContent, R.style.Dialog90Light, R.style.Dialog90Dark), getTheme());
 
         dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
 

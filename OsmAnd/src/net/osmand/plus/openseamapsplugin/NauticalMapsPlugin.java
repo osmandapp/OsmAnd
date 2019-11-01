@@ -6,11 +6,14 @@ import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
+
 import net.osmand.IndexConstants;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.render.RendererRegistry;
@@ -57,14 +60,20 @@ public class NauticalMapsPlugin extends OsmandPlugin {
 
 	@Override
 	public boolean init(@NonNull final OsmandApplication app, final Activity activity) {
-		if(activity != null) {
+		if (activity != null) {
 			addBoatProfile(true);
 			// called from UI 
-			previousRenderer = app.getSettings().RENDERER.get(); 
+			previousRenderer = app.getSettings().RENDERER.get();
 			app.getSettings().RENDERER.set(RendererRegistry.NAUTICAL_RENDER);
-			if(!app.getResourceManager().getIndexFileNames().containsKey(DownloadResources.WORLD_SEAMARKS_NAME+
-					 IndexConstants.BINARY_MAP_INDEX_EXT)){
-				AlertDialog.Builder dlg = new AlertDialog.Builder(activity);
+			if (!app.getResourceManager().getIndexFileNames().containsKey(DownloadResources.WORLD_SEAMARKS_NAME +
+					IndexConstants.BINARY_MAP_INDEX_EXT)) {
+				boolean nightMode;
+				if (activity instanceof MapActivity) {
+					nightMode = app.getDaynightHelper().isNightModeForMapControls();
+				} else {
+					nightMode = !app.getSettings().isLightContent();
+				}
+				AlertDialog.Builder dlg = new AlertDialog.Builder(UiUtilities.getThemedContext(activity, nightMode));
 				dlg.setMessage(net.osmand.plus.R.string.nautical_maps_missing);
 				dlg.setPositiveButton(R.string.shared_string_ok, new OnClickListener() {
 					

@@ -7,9 +7,7 @@ import android.content.DialogInterface.OnClickListener;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AlertDialog;
-import android.util.DisplayMetrics;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
@@ -30,6 +28,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.SavingTrackHelper.SaveGpxResult;
@@ -264,8 +263,13 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 
 	public void controlDialog(final Activity activity, final boolean showTrackSelection) {
 		final boolean wasTrackMonitored = settings.SAVE_GLOBAL_TRACK_TO_GPX.get();
-		
-		AlertDialog.Builder bld = new AlertDialog.Builder(activity);
+		boolean nightMode;
+		if (activity instanceof MapActivity) {
+			nightMode = app.getDaynightHelper().isNightModeForMapControls();
+		} else {
+			nightMode = !app.getSettings().isLightContent();
+		}
+		AlertDialog.Builder bld = new AlertDialog.Builder(UiUtilities.getThemedContext(activity, nightMode));
 		final TIntArrayList items = new TIntArrayList();
 		if (wasTrackMonitored) {
 			items.add(R.string.gpx_monitoring_stop);
@@ -435,14 +439,18 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 	public static void showIntervalChooseDialog(final Context uiCtx, final String patternMsg,
 												String title, final int[] seconds, final int[] minutes,
 												final ValueHolder<Boolean> choice, final ValueHolder<Integer> v,
-												final boolean showTrackSelection, OnClickListener onclick){
-		AlertDialog.Builder dlg = new AlertDialog.Builder(uiCtx);
+												final boolean showTrackSelection, OnClickListener onclick) {
+		final OsmandApplication app = (OsmandApplication) uiCtx.getApplicationContext();
+		boolean nightMode;
+		if (uiCtx instanceof MapActivity) {
+			nightMode = app.getDaynightHelper().isNightModeForMapControls();
+		} else {
+			nightMode = !app.getSettings().isLightContent();
+		}
+		Context themedContext = UiUtilities.getThemedContext(uiCtx, nightMode);
+		AlertDialog.Builder dlg = new AlertDialog.Builder(themedContext);
 		dlg.setTitle(title);
-		WindowManager mgr = (WindowManager) uiCtx.getSystemService(Context.WINDOW_SERVICE);
-		DisplayMetrics dm = new DisplayMetrics();
-		mgr.getDefaultDisplay().getMetrics(dm);
-		LinearLayout ll = createIntervalChooseLayout(uiCtx, patternMsg, seconds, minutes,
-				choice, v, showTrackSelection, dm);
+		LinearLayout ll = createIntervalChooseLayout(themedContext, patternMsg, seconds, minutes, choice, v, showTrackSelection, nightMode);
 		dlg.setView(ll);
 		dlg.setPositiveButton(R.string.shared_string_ok, onclick);
 		dlg.setNegativeButton(R.string.shared_string_cancel, null);
@@ -453,7 +461,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 														  final String patternMsg, final int[] seconds,
 														  final int[] minutes, final ValueHolder<Boolean> choice,
 														  final ValueHolder<Integer> v,
-														  final boolean showTrackSelection, DisplayMetrics dm) {
+														  final boolean showTrackSelection, boolean nightMode) {
 		LinearLayout ll = new LinearLayout(uiCtx);
 		final int dp24 = AndroidUtils.dpToPx(uiCtx, 24f);
 		final int dp8 = AndroidUtils.dpToPx(uiCtx, 8f);
@@ -531,14 +539,11 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 
 		if (showTrackSelection) {
 			final OsmandApplication app = (OsmandApplication) uiCtx.getApplicationContext();
-			boolean light = app.getSettings().isLightContent();
 			View divider = new View(uiCtx);
-			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT,
-					AndroidUtils.dpToPx(uiCtx, 1f));
+			LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, AndroidUtils.dpToPx(uiCtx, 1f));
 			lp.setMargins(0, dp8 * 2, 0, 0);
 			divider.setLayoutParams(lp);
-			divider.setBackgroundColor(uiCtx.getResources().getColor(
-					light ? R.color.divider_color_light : R.color.divider_color_dark));
+			divider.setBackgroundColor(uiCtx.getResources().getColor(nightMode ? R.color.divider_color_dark : R.color.divider_color_light));
 			ll.addView(divider);
 
 			final CheckBox cb = new CheckBox(uiCtx);

@@ -370,11 +370,15 @@ public class UiUtilities {
 		}
 	}
 
-	public static Context getThemedContext(Context context, boolean nightMode) {
-		return new ContextThemeWrapper(context, !nightMode ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme);
-	}
-
 	public static LayoutInflater getInflater(Context ctx, boolean nightMode) {
 		return LayoutInflater.from(getThemedContext(ctx, nightMode));
+	}
+
+	public static Context getThemedContext(Context context, boolean nightMode) {
+		return getThemedContext(context, nightMode, R.style.OsmandLightTheme, R.style.OsmandDarkTheme);
+	}
+
+	public static Context getThemedContext(Context context, boolean nightMode, int lightStyle, int darkStyle) {
+		return new ContextThemeWrapper(context, nightMode ? darkStyle : lightStyle);
 	}
 }
