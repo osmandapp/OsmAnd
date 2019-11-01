@@ -1638,7 +1638,7 @@ Lon %2$s</string>
     <string name="rendering_value_translucent_blue_name">Transparentes Blau</string>
     <string name="rendering_value_purple_name">Lila</string>
     <string name="rendering_value_translucent_purple_name">Transparentes Lila</string>
-    <string name="restart_is_required">Die App manuell neu starten um alle Änderungen umzusetzen.</string>
+    <string name="restart_is_required">Neustart erforderlich um die Änderung umzusetzen.</string>
     <string name="lang_bpy">Bishnupriya</string>
     <string name="lang_nv">Navajo</string>
     <string name="lang_vo">Volapük</string>
