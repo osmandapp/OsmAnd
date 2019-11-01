@@ -126,6 +126,7 @@
 	<string name="poi_access_hgv">HGV access</string>
 	<string name="poi_access_goods">Light goods vehicles access</string>
 	<string name="poi_access_disabled">Disabled access</string>
+	<string name="poi_cash_withdrawal_bank_card">Cash withdrawal</string>
 
 <!--  categories -->
 	<string name="poi_shop">Store</string>
@@ -4110,5 +4111,24 @@
 	<string name="poi_charge">Charge</string>
 
 	<string name="poi_pet_grooming">Pet grooming</string>
+
+	<string name="poi_cash_withdrawal_yes">Cash withdrawal: yes</string>
+	<string name="poi_cash_withdrawal">Cash withdrawal</string>
+	<string name="poi_cash_withdrawal_operator">Cash withdrawal operator</string>
+	<string name="poi_cash_withdrawal_type_checkout">Cash withdrawal type: checkout</string>
+	<string name="poi_cash_withdrawal_type_self_checkout">Cash withdrawal type: self checkout</string>
+	<string name="poi_cash_withdrawal_limit">Cash withdrawal limit</string>
+	<string name="poi_cash_withdrawal_currency">Cash withdrawal currency</string>
+	<string name="poi_cash_withdrawal_purchase_required_yes">Cash withdrawal: purchase required</string>
+	<string name="poi_cash_withdrawal_purchase_required_no">Cash withdrawal: no purchase required</string>
+	<string name="poi_cash_withdrawal_fee_yes">Cash withdrawal fee: yes</string>
+	<string name="poi_cash_withdrawal_fee_no">Cash withdrawal fee: no</string>
+	<string name="poi_cash_withdrawal_purchase_minimum">Cash withdrawal: minimum purchase</string>
+	<string name="poi_cash_withdrawal_foreign_cards">Cash withdrawal: foreign cards</string>
+
+	<string name="poi_cash_withdrawal_postfinance_card">Postfinance card</string>
+	<string name="poi_cash_withdrawal_migros_bank">Migros bank</string>
+	<string name="poi_cash_withdrawal_girocard">Girocard</string>
+	<string name="poi_cash_withdrawal_postbank">Postbank</string>
 
 </resources>
