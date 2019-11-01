@@ -794,8 +794,8 @@
     <string name="navigate_point_latitude">Breitengrad</string>
     <string name="navigate_point_longitude">Längengrad</string>
     <string name="navigate_point_format_D">DDD.DDDDD</string>
-    <string name="navigate_point_format_DM">DDD MM.MMMMM</string>
-    <string name="navigate_point_format_DMS">DDD MM SS.SSSSS</string>
+    <string name="navigate_point_format_DM">DDD MM.MMM</string>
+    <string name="navigate_point_format_DMS">DDD MM SS.S</string>
     <string name="shared_string_show_on_map">Auf Karte anzeigen</string>
     <string name="search_address_top_text">Adresseingabe</string>
     <string name="search_address_region">Region</string>
@@ -3257,9 +3257,9 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="navigate_point_format_utm">UTM Standard</string>
     <string name="coordinates_format_info">Das gewählte Format wird an allen Stellen in der App angewandt.</string>
     <string name="pref_selected_by_default_for_profiles">Für Profile wird als Vorgabe diese Einstellung gewählt: %s</string>
-    <string name="change_default_settings">Voreinstellungen ändern</string>
-    <string name="discard_changes">Änderungen verwerfen</string>
-    <string name="apply_to_current_profile">Auf aktuelles Profil „%1$s“ anwenden</string>
+    <string name="change_default_settings">Einstellung ändern</string>
+    <string name="discard_changes">Änderung verwerfen</string>
+    <string name="apply_to_current_profile">Nur auf „%1$s“ anwenden</string>
     <string name="apply_to_all_profiles">Auf alle Profile anwenden</string>
     <string name="analytics_pref_title">Analyseinstrumente</string>
     <string name="turn_screen_on_info">Karte während der Navigation über Sperrbildschirm anzeigen.</string>
@@ -3371,7 +3371,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
 \n • Weitere Fehlerlösungen
 \n
 \n</string>
-    <string name="apply_preference_to_all_profiles">Sie können diese Änderung auf alle oder nur auf ausgewählte Profile anwenden.</string>
+    <string name="apply_preference_to_all_profiles">Sie können diese Änderung auf alle oder nur auf das ausgewählte Profile anwenden.</string>
     <string name="shared_preference">Geteilt</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">Unbefestigte Straßen bevorzugen</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">Unbefestigte Straßen bevorzugen.</string>

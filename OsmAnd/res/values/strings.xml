@@ -21,7 +21,7 @@
     <string name="quick_action_hillshade_show">Show hillshade</string>
     <string name="quick_action_hillshade_hide">Hide hillshade</string>
     <string name="quick_action_show_hide_hillshade">Show/Hide hillshade</string>
-    <string name="apply_preference_to_all_profiles">You can apply this change to all profiles or only to selected.</string>
+    <string name="apply_preference_to_all_profiles">You can apply this change to all profiles or only to the currently selected one.</string>
     <string name="shared_preference">Shared</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">Prefer unpaved roads</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">Prefer unpaved roads.</string>
@@ -103,9 +103,9 @@
     <string name="navigate_point_format_olc">Open Location Code</string>
     <string name="coordinates_format_info">The selected format will be applied throughout the app.</string>
     <string name="pref_selected_by_default_for_profiles">This setting is selected by default for profiles: %s</string>
-    <string name="change_default_settings">Change default settings</string>
-    <string name="discard_changes">Discard changes</string>
-    <string name="apply_to_current_profile">Apply to current %1$s profile</string>
+    <string name="change_default_settings">Change setting</string>
+    <string name="discard_changes">Discard change</string>
+    <string name="apply_to_current_profile">Apply only to \"%1$s\"</string>
     <string name="apply_to_all_profiles">Apply to all profiles</string>
     <string name="start_up_message_pref">Start-up message</string>
     <string name="analytics_pref_title">Analytics</string>
@@ -3121,9 +3121,9 @@
     <string name="navigate_point_top_text">Input latitude &amp; longitude in the selected format (D - degrees, M - minutes, S - seconds)</string>
     <string name="navigate_point_latitude">Latitude</string>
     <string name="navigate_point_longitude">Longitude</string>
-    <string name="navigate_point_format_D">DDD.DD</string>
-    <string name="navigate_point_format_DM">DDD MM.MM</string>
-    <string name="navigate_point_format_DMS">DDD MM SS.SS</string>
+    <string name="navigate_point_format_D">DDD.DDDDD</string>
+    <string name="navigate_point_format_DM">DDD MM.MMM</string>
+    <string name="navigate_point_format_DMS">DDD MM SS.S</string>
     <string name="search_address_top_text">Address</string>
     <string name="search_address_region">Region</string>
     <string name="search_address_city">City</string>
