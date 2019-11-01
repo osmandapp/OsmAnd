@@ -39,7 +39,7 @@
     <string name="shared_string_memory_used_gb_desc">Used %1$s GB</string>
     <string name="shared_string_memory_used_mb_desc">Used %1$s MB</string>
     <string name="shared_string_memory_used_kb_desc">Used %1$s kB</string>
-    <string name="contour_lines_and_hillshade">Contour lines and Hillshade</string>
+    <string name="contour_lines_and_hillshade">Contour lines and hillshade</string>
     <string name="routing_attr_prefer_unpaved_name">Prefer unpaved roads</string>
     <string name="routing_attr_prefer_unpaved_description">Prefer unpaved roads.</string>
     <string name="update_all_maps">Update all maps</string>
@@ -50,7 +50,7 @@
     <string name="store_tracks_in_daily_directories">Record tracks in daily folders</string>
     <string name="store_tracks_in_daily_directories_descrp">Record tracks in sub-folders per recording day (like 2018-01-01).</string>
     <string name="shared_string_calculate">Calculate</string>
-    <string name="shared_string_osmand_usage">OsmAnd Usage</string>
+    <string name="shared_string_osmand_usage">OsmAnd usage</string>
     <string name="shared_sting_tiles">Tiles</string>
     <string name="shared_string_maps">Maps</string>
     <string name="shared_string_memory_tb_desc">%1$s TB</string>
@@ -69,7 +69,7 @@
     <string name="paste_Osmand_data_folder_path">Paste path to the folder with OsmAnd data</string>
     <string name="change_osmand_data_folder_question">Change OsmAnd data folder?</string>
     <string name="move_maps_to_new_destination">Move to the new destination</string>
-    <string name="internal_app_storage_description">Internal storage, hidden from user and other apps, so no one except OsmAnd can access your data</string>
+    <string name="internal_app_storage_description">Internal storage, hidden from user and other apps, exclusively accessible to OsmAnd</string>
     <string name="change_data_storage_folder">Change data storage folder</string>
     <string name="rendering_attr_piste_type_snow_park_name">Terrain park</string>
     <string name="rendering_attr_piste_type_sleigh_name">Sleigh</string>
@@ -97,7 +97,7 @@
     <string name="switch_profile">Switch profile</string>
     <string name="configure_profile">Configure profile</string>
     <string name="configure_profile_info">Settings for profile:</string>
-    <string name="utm_format_descr">OsmAnd uses UTM Standard format, which is similar but not identical to UTM NATO format.</string>
+    <string name="utm_format_descr">OsmAnd uses the UTM Standard, which is similar but not identical to the UTM NATO format.</string>
     <string name="shared_string_example">Example</string>
     <string name="navigate_point_format_utm">UTM Standard</string>
     <string name="navigate_point_format_olc">Open Location Code</string>
@@ -110,7 +110,7 @@
     <string name="start_up_message_pref">Start-up message</string>
     <string name="analytics_pref_title">Analytics</string>
     <string name="turn_screen_on_info">Show map on the lock screen during navigation.</string>
-    <string name="route_parameters_info">Settings for routing in the selected profile: %1$s.</string>
+    <string name="route_parameters_info">Settings for routing in the selected profile \"%1$s\".</string>
     <string name="wake_time">Wake time</string>
     <string name="units_and_formats">Units &amp; formats</string>
     <string name="appearance">Appearance</string>
@@ -119,14 +119,14 @@
     <string name="list_of_installed_plugins">Installed plugins</string>
     <string name="configure_navigation">Configure navigation</string>
     <string name="general_settings_profile_descr">App theme, units, region</string>
-    <string name="screen_alerts_descr">Alerts will be shown in the bottom left during navigation.</string>
+    <string name="screen_alerts_descr">Alerts are shown in the bottom left during navigation.</string>
     <string name="language_and_output">Language and output</string>
     <string name="reset_to_default">Reset to default</string>
     <string name="manage_profiles_descr">Create, import, edit profiles</string>
     <string name="manage_profiles">Manage app profiles…</string>
-    <string name="osmand_settings_descr">Affects the entire app</string>
+    <string name="osmand_settings_descr">Effective for the entire app</string>
     <string name="osmand_settings">OsmAnd settings</string>
-    <string name="copy_from_other_profile">Copy from other profile</string>
+    <string name="copy_from_other_profile">Copy from another profile</string>
     <string name="turn_screen_on">Turn screen on</string>
     <string name="map_during_navigation_info">Map during navigation</string>
     <string name="map_during_navigation">Map during navigation</string>
@@ -165,11 +165,11 @@
     <string name="shared_string_default">Default</string>
     <string name="gpx_join_gaps">Join gaps</string>
     <string name="app_mode_camper">Camper</string>
-    <string name="app_mode_campervan">Campervan</string>
-    <string name="rendering_attr_showLez_description">Show Low Emission zones on the map. Does not affect routing.</string>
+    <string name="app_mode_campervan">Campervan (RV)</string>
+    <string name="rendering_attr_showLez_description">Show Low Emission Zones on the map. Does not affect routing.</string>
     <string name="rendering_attr_showLez_name">Show Low Emission Zones</string>
     <string name="temporary_conditional_routing">Consider temporary limitations</string>
-    <string name="turn_on_profile_desc">Please turn on at least one app profile, to use this setting.</string>
+    <string name="turn_on_profile_desc">Please turn on at least one app profile to use this setting.</string>
     <string name="rendering_attr_winter_road_name">Winter road</string>
     <string name="rendering_attr_ice_road_name">Ice road</string>
     <string name="routeInfo_winter_ice_road_name">Winter and ice roads</string>
