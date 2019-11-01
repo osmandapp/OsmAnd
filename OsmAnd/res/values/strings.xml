@@ -3121,9 +3121,9 @@
     <string name="navigate_point_top_text">Input latitude &amp; longitude in the selected format (D - degrees, M - minutes, S - seconds)</string>
     <string name="navigate_point_latitude">Latitude</string>
     <string name="navigate_point_longitude">Longitude</string>
-    <string name="navigate_point_format_D">DDD.DD</string>
-    <string name="navigate_point_format_DM">DDD MM.MM</string>
-    <string name="navigate_point_format_DMS">DDD MM SS.SS</string>
+    <string name="navigate_point_format_D">DDD.DDDDD</string>
+    <string name="navigate_point_format_DM">DDD MM.MMM</string>
+    <string name="navigate_point_format_DMS">DDD MM SS.S</string>
     <string name="search_address_top_text">Select address</string>
     <string name="search_address_region">Region</string>
     <string name="search_address_city">City</string>
