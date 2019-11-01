@@ -169,7 +169,7 @@
     <string name="poi_bridge">پل</string>
     <string name="poi_speed_camera">دوربین سرعت</string>
     <string name="poi_turning_circle">محوطه دور زدن</string>
-    <string name="poi_motorway_junction">محل اتصال بزرگراه</string>
+    <string name="poi_motorway_junction">تقاطع آزادراه</string>
     <string name="poi_water_well">آب آشامیدنی</string>
     <string name="poi_standpipe">پایه لوله</string>
     <string name="poi_water_works">سیستم آبرسانی</string>
@@ -665,7 +665,7 @@
     <string name="poi_aerialway_bicycle">حمل‌ونقل دوچرخه</string>
     <string name="poi_aerialway_heating">گرمایش</string>
     <string name="poi_pump">پنجرگیری دوچرخه</string>
-    <string name="poi_observatory_designation"></string>
+    <string name="poi_observatory_designation"/>
     <string name="poi_pharmacy_dispensing">داروخانه</string>
     <string name="poi_star_rating">رتبه‌بندی ستاره‌ای</string>
     <string name="poi_clock_option">تنظیمات ساعت</string>

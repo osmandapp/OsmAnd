@@ -3337,4 +3337,51 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="shared_string_memory_gb_desc">%1$s GB</string>
     <string name="shared_string_memory_mb_desc">%1$s MB</string>
     <string name="shared_string_memory_kb_desc">%1$s KB</string>
+    <string name="swap_start_and_destination"> string name=\"map_legend_item_description\"&gt;Signaturforklaring til OsmAnd standard kortformat, internetforbindelse er nødvendig&lt;/string </string>
+    <string name="data_storage_preference_summary">%1$s • %2$s</string>
+    <string name="data_storage_space_description">%1$s GB ledig • %2$s GB totalt</string>
+    <string name="track_storage_directory">Overvåg lagringsmappen</string>
+    <string name="track_storage_directory_descrp">Spor kan gemmes i optagemappen eller i månedlige eller daglige mapper.</string>
+    <string name="store_tracks_in_rec_directory">Gem optagede spor i optagemappen</string>
+    <string name="store_tracks_in_daily_directories">Gem optagede spor i daglige mapper</string>
+    <string name="store_tracks_in_daily_directories_descrp">Gem optagede spor i undermapper pr. optagelsesdag (fx. 2018-01-01).</string>
+    <string name="shared_string_memory_used_tb_desc">%1$s TB brugt</string>
+    <string name="shared_string_memory_used_gb_desc">%1$s GB brugt</string>
+    <string name="shared_string_memory_used_mb_desc">%1$s MB brugt</string>
+    <string name="shared_string_memory_used_kb_desc">%1$s kB brugt</string>
+    <string name="contour_lines_and_hillshade">Højdekurver og reliefskygger</string>
+    <string name="routing_attr_prefer_unpaved_name">Foretræk ikke-asfalterede veje</string>
+    <string name="routing_attr_prefer_unpaved_description">Foretræk ikke-asfalterede veje.</string>
+    <string name="update_all_maps">Opdater alle kort</string>
+    <string name="update_all_maps_q">Bekræft opdatering alle (%1 $ d) kort\?</string>
+    <string name="release_3_5">"• Opdaterede program-og profilindstillinger: indstillinger er nu arrangement efter type. Hver profil kan tilpasses separat.
+\n
+\n• Ny  dialog til hentning af kort, foreslår et kort ved visning
+\n
+\n• Nattema rettelser
+\n
+\n• Løste flere routing problemer i hele verden
+\n
+\n• Opdateret højdekurvekort med mere detaljeret vejnet
+\n
+\n• Rettet oversvømmede områder rundt om i verden
+\n
+\n• Ski routing: tilføjet højdeprofil og rute kompleksitet til rutedetaljer
+\n
+\n• Andre fejlrettelser
+\n
+\n"</string>
+    <string name="apply_preference_to_all_profiles">Anvend ændringer på alle profiler eller kun på valgte.</string>
+    <string name="shared_preference">Delt</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_name">Foretræk ikke-asfalterede veje</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_description">Foretræk ikke-asfalterede veje.</string>
+    <string name="layer_osm_edits">OSM redigeringer</string>
+    <string name="quick_action_contour_lines_descr">Tryk på genvejsknappen viser eller skjuler højdekurver på kortet</string>
+    <string name="quick_action_contour_lines_show">Vis højdekurver</string>
+    <string name="quick_action_contour_lines_hide">Skjul højdekurver</string>
+    <string name="quick_action_show_hide_contour_lines">Vis/Skjul højdekurver</string>
+    <string name="quick_action_hillshade_descr">Tryk på genvejsknappenviser eller skjuler reliefskygger på kortet</string>
+    <string name="quick_action_hillshade_show">Vis reliefskygger</string>
+    <string name="quick_action_hillshade_hide">Skjul reliefskygger</string>
+    <string name="quick_action_show_hide_hillshade">Vis/skjul reliefskygger</string>
 </resources>

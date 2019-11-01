@@ -3245,4 +3245,10 @@
     <string name="shared_string_memory_mb_desc">%1$s MB</string>
     <string name="shared_string_memory_kb_desc">%1$s KB</string>
     <string name="lang_oc">Oksitansk</string>
+    <string name="manage_profiles_descr">Opprett, importer, rediger profiler</string>
+    <string name="manage_profiles">Håndter programprofiler…</string>
+    <string name="osmand_settings_descr">Har innvirkning på hele programmet</string>
+    <string name="shared_string_other">Annet</string>
+    <string name="shared_preference">Delt</string>
+    <string name="layer_osm_edits">OSM-redigeringer</string>
 </resources>

@@ -3272,7 +3272,7 @@ Pôr do Sol: %2$s</string>
     <string name="route_parameters">Parâmetros de rota</string>
     <string name="application_profile_changed">Perfil do aplicativo alterado para \"%s\"</string>
     <string name="logcat_buffer">Buffer de Logcat</string>
-    <string name="shared_string_by_default">Pré-definido</string>
+    <string name="shared_string_by_default">Predefinido</string>
     <string name="plugins_settings">Configurações do plugin</string>
     <string name="download_detaile_map">Faça o download do mapa %s detalhado, para visualizar esta área.</string>
     <string name="download_detailed_map">Faça o download do mapa %s detalhado, para visualizar esta área.</string>
@@ -3354,4 +3354,14 @@ Pôr do Sol: %2$s</string>
     <string name="shared_preference">Compartilhado</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">Preferir estradas não pavimentadas</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">Preferir estradas não pavimentadas.</string>
+    <string name="swap_start_and_destination"> string name=\"lat_lon_pattern\"&gt;Lat: %1$.5f Lon: %2$.5f&lt;/string </string>
+    <string name="layer_osm_edits">Edições OSM</string>
+    <string name="quick_action_contour_lines_descr">Tocar neste botão de ação mostra ou oculta linhas de contorno no mapa</string>
+    <string name="quick_action_contour_lines_show">Mostrar curvas de nível</string>
+    <string name="quick_action_contour_lines_hide">Ocultar linhas de contorno</string>
+    <string name="quick_action_show_hide_contour_lines">Mostrar/ocultar linhas de contorno</string>
+    <string name="quick_action_hillshade_descr">Tocar neste botão de ação mostra ou oculta uma colina no mapa</string>
+    <string name="quick_action_hillshade_show">Mostrar colina</string>
+    <string name="quick_action_hillshade_hide">Ocultar colina</string>
+    <string name="quick_action_show_hide_hillshade">Mostrar/ocultar colina</string>
 </resources>
