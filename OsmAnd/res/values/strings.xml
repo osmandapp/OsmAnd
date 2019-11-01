@@ -32,7 +32,7 @@
     • Fixed several routing issues around the world\n\n
     • Updated basemap with more detailed road network\n\n
     • Fixed flooded areas around the world\n\n
-    • Ski routing: Added height profile and route complexity to the route details\n\n
+    • Ski routing: Added elevation profile and route complexity to the route details\n\n
     • Other bugfixes\n\n
     </string>
     <string name="shared_string_memory_used_tb_desc">Used %1$s TB</string>
@@ -455,7 +455,7 @@
     <string name="osm_live_payment_renews_quarterly">Renews quarterly</string>
     <string name="osm_live_payment_renews_annually">Renews annually</string>
     <string name="default_price_currency_format">%1$.2f %2$s</string>
-    <string name="osm_live_payment_header">Payment frequency:</string>
+    <string name="osm_live_payment_header">Payment interval:</string>
     <string name="osm_live_payment_contribute_descr">Donations help fund OpenStreetMap cartography.</string>
     <string name="markers_remove_dialog_msg">Delete map marker \'%s\'?</string>
     <string name="edit_map_marker">Edit map marker</string>
@@ -468,7 +468,7 @@
     <string name="more_transport_on_stop_hint">More transport available from this stop.</string>
     <string name="ask_for_location_permission">Please grant OsmAnd location access to continue.</string>
     <string name="thank_you_for_feedback">Thank you for your feedback</string>
-    <string name="poi_cannot_be_found">Could not find node or waypoint.</string>
+    <string name="poi_cannot_be_found">Could not find node or way.</string>
     <string name="search_no_results_feedback">No search results?\nProvide feedback</string>
     <!-- string name="release_3_2_pre">
     • Fixed crash on startup that occurred on some devices\n\n
@@ -506,12 +506,12 @@
     <string name="hide_full_description">Hide full description</string>
     <string name="show_full_description">Show full description</string>
     <string name="off_road_render_descr">For off-road driving based on \'Topo\' style and for use with green satellite images as an underlay. Reduced main road thickness, increased thickness of tracks, paths, bicycle and other routes.</string>
-    <string name="nautical_render_descr">For nautical navigation, features buoys, lighthouses, riverways, sea lanes and marks, harbors, seamark services, and depth contours.</string>
-    <string name="ski_map_render_descr">For skiing, features pistes, ski-lifts, cross country tracks, etc. Dims secondary map objects.</string>
+    <string name="nautical_render_descr">For nautical navigation. Features buoys, lighthouses, riverways, sea lanes and marks, harbors, seamark services, and depth contours.</string>
+    <string name="ski_map_render_descr">For skiing. Features pistes, ski-lifts, cross country tracks, etc. Dims secondary map objects.</string>
     <string name="light_rs_render_descr">Simple driving style. Gentle night mode, contour lines, contrasting orange styled roads, dims secondary map objects.</string>
     <string name="topo_render_descr">For hiking, trekking, and nature cycling. Readable outdoors. Contrasting roads and natural objects, different route types, advanced contour line options, extra details. Adjusting "Surface integrity" distinguishes road quality. No night mode.</string>
     <string name="mapnik_render_descr">Old default \'Mapnik\'-style. Similar colors to \'Mapnik\'.</string>
-    <string name="touring_view_render_descr">Touring style with high contrast and maximum detail. In<cludes all options of the OsmAnd default style, while displaying as much detail as possible, in particular roads, paths, and other ways to travel. Clear \"touring atlas\" distinction between road types. Suitable for day, night, and outdoor use.</string>
+    <string name="touring_view_render_descr">Touring style with high contrast and maximum detail. Includes all options of the OsmAnd default style, while displaying as much detail as possible, in particular roads, paths, and other ways to travel. Clear \"touring atlas\" distinction between road types. Suitable for day, night, and outdoor use.</string>
     <string name="default_render_descr">General purpose style. Dense cities shown cleanly. Features contour lines, routes, surface quality, access restrictions, road shields, paths rendering according to SAC scale, whitewater sports items.</string>
     <string name="open_wikipedia_link_online">Open Wikipedia link online</string>
     <string name="open_wikipedia_link_online_description">The link will be opened in a web browser.</string>
@@ -573,7 +573,7 @@
     <string name="download_maps_travel">Travel guides</string>
     <string name="shared_string_wikivoyage">Wikivoyage</string>
     <string name="article_removed">Article removed</string>
-    <string name="wikivoyage_search_hint">Search for country, city or province</string>
+    <string name="wikivoyage_search_hint">Search for country, city, or province</string>
     <string name="shared_string_read">Read</string>
     <string name="saved_articles">Bookmarked articles</string>
     <string name="shared_string_explore">Explore</string>
@@ -1045,7 +1045,7 @@
     <string name="get_it">Get it</string>
     <string name="get_for">Get for %1$s</string>
     <string name="get_for_month">Get for %1$s month</string>
-    <string name="osm_live_banner_desc">Get unlimited map downloads, addimg weekly, daily, or even hourly updates.</string>
+    <string name="osm_live_banner_desc">Get unlimited map downloads, adding weekly, daily, or even hourly updates.</string>
     <string name="osmand_plus_banner_desc">Unlimited map downloads, updates, and Wikipedia plugin.</string>
     <string name="si_mi_meters">Miles/meters</string>
     <string name="skip_map_downloading">Skip downloading maps</string>
@@ -1061,7 +1061,7 @@
     <string name="storage_place_description">OsmAnd\'s data storage (for maps, GPX files, etc.): %1$s.</string>
     <string name="give_permission">Grant permission</string>
     <string name="allow_access_location">Allow location access</string>
-    <string name="first_usage_greeting">Offline directions and discovery</string>
+    <string name="first_usage_greeting">Get directions and discover new places without an Internet connection</string>
     <string name="search_my_location">Find my position</string>
     <string name="update_all_maps_now">Update all maps now?</string>
     <string name="clear_tile_data">Clear all tiles</string>
@@ -1628,7 +1628,7 @@
 	</string>
     <string name="plugin_ski_name">Ski map view</string>
     <string name="plugin_ski_descr">This plugin for OsmAnd puts at your fingertips details of global downhill ski slopes, cross country ski runs, Alpine ski routes, cable cars and ski lifts. Routes and pistes are shown color-coded by difficulty, and depicted in a special \'Winter\' map style which assimilates a snow-colored winter landscape.
-		\n\nActivating this view changes the map style to \'Winter and ski\', showing all landscape features under wintry conditions. This view can be reverted by either de-activating it again here, or by changing the \'Map style\' under \'Set up map\' as desired.
+		\n\nActivating this view changes the map style to \'Winter and ski\', showing all landscape features under wintry conditions. This view can be reverted by either de-activating it again here, or by changing the \'Map style\' under \'Configure map\' as desired.
 	</string>
     <string name="audionotes_plugin_name">Audio/video notes</string>
     <string name="audionotes_plugin_description">The Audio/video notes plugin provides the functionality to take audio/photography/video notes during a trip, using either a button on the map, or directly the context menu for any position on the map.</string>
@@ -2106,7 +2106,7 @@
     <string name="sett_wunderlinq_ext_input">WunderLINQ</string>
     <string name="sett_parrot_ext_input">Parrot</string>
     <string name="accessibility_options">Accessibility options</string>
-    <string name="select_address_activity">Choose address</string>
+    <string name="select_address_activity">Specify address</string>
     <string name="favourites_list_activity">Select Favorite</string>
     <string name="local_openstreetmap_act_title">OSM modifications</string>
     <string name="layer_hillshade">Hillshade layer</string>
@@ -2547,7 +2547,7 @@
     <string name="confirm_interrupt_download">Cancel download?</string>
     <!-- Use ← for RTL languages -->
     <string name="first_time_msg">Thank you for using OsmAnd. Download regional data for offline use via \'Settings\' → \'Manage map files\' to view maps, locate addresses, look up POIs, find public transport and more.</string>
-    <string name="basemap_was_selected_to_download">The basemap is in the download queue for basic functionality.</string>
+    <string name="basemap_was_selected_to_download">The basemap needed to provide basic functionality is in the download queue.</string>
     <string name="local_indexes_cat_tile">Online and cached tile maps</string>
     <string name="local_indexes_cat_map">Standard maps (vector)</string>
     <string name="index_settings_descr">Download and manage offline map files stored on your device.</string>
@@ -2711,7 +2711,7 @@
     <string name="file_can_not_be_renamed">Could not rename file.</string>
     <string name="file_with_name_already_exists">A file with that name already exists.</string>
     <string name="shared_string_gpx_route">GPX route</string>
-    <string name="poi_query_by_name_matches_categories">Found several such POI categories.</string>
+    <string name="poi_query_by_name_matches_categories">Found several related POI categories.</string>
     <string name="data_to_search_poi_not_available">Download offline data to search for POIs.</string>
     <string name="poi_filter_by_name">Search by name</string>
     <string name="old_poi_file_should_be_deleted">The POI data file \'%1$s\' is redundant and can be deleted.</string>
@@ -2784,7 +2784,7 @@
     <!-- Use ← for RTL languages -->
     <string name="switch_to_vector_map_to_see">Offline vector map present for this location. \n\t\n\tTo use activate \'Menu\' → \'Configure map\' → \'Map Source…\' → \'Offline vector maps\'.</string>
     <string name="choose_audio_stream">Voice guidance output</string>
-    <string name="choose_audio_stream_descr">Choose loudspeaker for voice guidance.</string>
+    <string name="choose_audio_stream_descr">Select loudspeaker for voice guidance.</string>
     <string name="voice_stream_voice_call">Phone call audio (to interrupt car Bluetooth stereos)</string>
     <string name="voice_stream_notification">Notification audio</string>
     <string name="voice_stream_music">Media/navigation audio</string>
@@ -2877,7 +2877,7 @@
     <string name="gps_status_app_not_found">GPS status app not installed. Search in market?</string>
     <!-- Use ← for RTL languages -->
     <string name="voice_is_not_available_msg">No voice guidance available, please go to \'Settings\' → \'Navigation settings\', choose the profile → \'Voice guidance\' and select or download a voice announcement package.</string>
-    <string name="voice_is_not_available_title">Select a voice guidance package</string>
+    <string name="voice_is_not_available_title">Select a voice announcement package</string>
     <string name="daynight_mode_day">Day</string>
     <string name="daynight_mode_night">Night</string>
     <string name="daynight_mode_auto">Sunrise/sunset</string>
@@ -3118,7 +3118,7 @@
     <string name="app_mode_pedestrian">Walking</string>
     <string name="position_on_map_center">Center</string>
     <string name="position_on_map_bottom">Bottom</string>
-    <string name="navigate_point_top_text">Input latitude &amp; longitude in the this format (D - degrees, M - minutes, S - seconds)</string>
+    <string name="navigate_point_top_text">Input latitude &amp; longitude in the selected format (D - degrees, M - minutes, S - seconds)</string>
     <string name="navigate_point_latitude">Latitude</string>
     <string name="navigate_point_longitude">Longitude</string>
     <string name="navigate_point_format_D">DDD.DD</string>
@@ -3232,7 +3232,7 @@
     <string name="later">Later</string>
     <string name="get_full_version">Full version</string>
     <string name="downloads">Downloads</string>
-    <string name="confirm_download_roadmaps">>The roads-only map is not needed, since you have the standard (full) map. Download it anyway?</string>
+    <string name="confirm_download_roadmaps">The roads-only map is not needed, since you have the standard (full) map. Download it anyway?</string>
     <string name="value_downloaded_of_max">%1$.1f of %2$.1f MB</string>
     <string name="file_size_in_mb">%.1f MB</string>
     <string name="update_all">Update all (%1$s MB)</string>
@@ -3275,7 +3275,7 @@
     <string name="last_update">Last update: %s</string>
     <string name="update_time">Update time</string>
     <string name="updates_size">Update size</string>
-    <string name="last_map_change">"Last map change: %s</string>
+    <string name="last_map_change">"Last map change: %s"</string>
     <string name="hourly">Hourly</string>
     <string name="daily">Daily</string>
     <string name="weekly">Weekly</string>
