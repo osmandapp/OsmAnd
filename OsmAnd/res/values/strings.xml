@@ -26,7 +26,7 @@
     <string name="routing_attr_driving_style_prefer_unpaved_name">Prefer unpaved roads</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">Prefer unpaved roads.</string>
     <string name="release_3_5">
-    • Updated application and profile Settings: Settings are now arrangement by type. Each profile can be customized separately.\n\n
+    • Updated application and profile settings: Settings are now arranged by type. Each profile can be customized separately.\n\n
     • New map download dialog which suggests a map to download while browsing\n\n
     • Night theme fixes\n\n
     • Fixed several routing issues around the world\n\n
