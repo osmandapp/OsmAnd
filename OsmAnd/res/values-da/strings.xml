@@ -3353,7 +3353,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="routing_attr_prefer_unpaved_name">Foretræk ikke-asfalterede veje</string>
     <string name="routing_attr_prefer_unpaved_description">Foretræk ikke-asfalterede veje.</string>
     <string name="update_all_maps">Opdater alle kort</string>
-    <string name="update_all_maps_q">Bekræft opdatering alle (%1 $ d) kort\?</string>
+    <string name="update_all_maps_q">Bekræft opdatering alle (%1$d) kort\?</string>
     <string name="release_3_5">"• Opdaterede program-og profilindstillinger: indstillinger er nu arrangement efter type. Hver profil kan tilpasses separat.
 \n
 \n• Ny  dialog til hentning af kort, foreslår et kort ved visning
