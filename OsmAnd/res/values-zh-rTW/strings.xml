@@ -3357,4 +3357,14 @@
     <string name="shared_preference">共享</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">偏好未鋪設的路面</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">偏好未鋪設的路面。</string>
+    <string name="swap_start_and_destination"> string name=\"map_legend_item_description\"&gt;圖例為 OsmAnd 預設的地圖樣式，網路需連接以去顯示&lt;/string </string>
+    <string name="layer_osm_edits">OSM 編輯</string>
+    <string name="quick_action_contour_lines_descr">輕點此動作按鈕以在地圖上顯示或隱藏等高線</string>
+    <string name="quick_action_contour_lines_show">顯示等高線</string>
+    <string name="quick_action_contour_lines_hide">隱藏等高線</string>
+    <string name="quick_action_show_hide_contour_lines">顯示／隱藏等高線</string>
+    <string name="quick_action_hillshade_descr">輕點此動作按鈕以在地圖上顯示或隱藏地形陰影</string>
+    <string name="quick_action_hillshade_show">顯示地形陰影</string>
+    <string name="quick_action_hillshade_hide">隱藏地形陰影</string>
+    <string name="quick_action_show_hide_hillshade">顯示／隱藏地形陰影</string>
 </resources>
