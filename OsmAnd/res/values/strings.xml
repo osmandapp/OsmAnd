@@ -1777,11 +1777,11 @@
     <string name="voice_provider_descr">Select the voice guidance for navigation.</string>
     <string name="voice_provider">Voice guidance</string>
     <string name="enable_proxy_title">Enable HTTP proxy</string>
-    <string name="enable_proxy_descr">Set up a HTTP proxy for all network requests.</string>
+    <string name="enable_proxy_descr">Configure an HTTP proxy for all network requests.</string>
     <string name="proxy_host_title">Proxy Host</string>
-    <string name="proxy_host_descr">Set up your proxy\'s hostname (e.g. 127.0.0.1).</string>
+    <string name="proxy_host_descr">Specify your proxy\'s hostname (e.g. 127.0.0.1).</string>
     <string name="proxy_port_title">Proxy Port</string>
-    <string name="proxy_port_descr">Set up your proxy\'s port number (e.g. 8118).</string>
+    <string name="proxy_port_descr">Specify your proxy\'s port number (e.g. 8118).</string>
     <string name="monitoring_settings">Trip recording</string>
     <string name="monitoring_settings_descr">Set up how to record your trips.</string>
     <string name="int_hour">h</string>
