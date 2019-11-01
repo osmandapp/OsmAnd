@@ -2850,9 +2850,9 @@
     <string name="send_search_query">عبارت جست‌وجویتان ارسال شود؟</string>
     <string name="increase_search_radius_to">افزایش شعاع جست‌وجو به %1$s</string>
     <string name="thank_you_for_feedback">سپاسگزاریم که نظر دادید</string>
-    <string name="poi_cannot_be_found">گره یا راه پیدا نمی‌شود.</string>
-    <string name="search_no_results_feedback">چیزی پیدا نشد؟
-\nنظرتان را به ما بگویید</string>
+    <string name="poi_cannot_be_found">گره یا راه پیدا نشد.</string>
+    <string name="search_no_results_feedback">چیزی پیدا نشد؟ 
+\nبازخورد بدهید</string>
     <string name="release_3_1">"• ناوبری: اصلاح نوار پیشرفت، تعویض فوریِ نقاط ابتدا و انتهای مسیر
 \n
 \n • نشانه‌های نقشه: اصلاح خاموش/روشن‌کردن گروه‌ها، امکان مخفی‌سازی نشانه‌ها روی نقشه
@@ -2907,9 +2907,9 @@
     <string name="osm_live_payment_renews_quarterly">هر سه ماه تمدید می‌شود</string>
     <string name="osm_live_payment_renews_annually">هر سال تمدید می‌شود</string>
     <string name="default_price_currency_format">%1$.2f %2$s</string>
-    <string name="osm_live_payment_header">دورهٔ پرداخت مناسب خود را برگزینید:</string>
+    <string name="osm_live_payment_header">دورهٔ پرداخت</string>
     <string name="osm_live_payment_contribute_descr">بخشی از درآمد به مشارکت‌کنندگان اوپن‌استریت‌مپ اهدا می‌شود.</string>
-    <string name="more_transport_on_stop_hint">در این ایستگاه حمل‌ونقل بیشتری وجود دارد.</string>
+    <string name="more_transport_on_stop_hint">از این ایستگاه حمل‌ونقل بیشتری وجود دارد.</string>
     <string name="osm_live_subscriptions">اشتراک‌ها</string>
     <string name="powered_by_osmand">از OsmAnd</string>
     <string name="mapillary_menu_title_pano">فقط نمایش عکس‌های ۳۶۰ درجه</string>
@@ -2985,9 +2985,9 @@
     <string name="use_osm_live_public_transport_description">حمل‌ونقل عمومی با استفاده از به‌روزرسانی‌های OsmAnd Live فعال شود.</string>
     <string name="use_osm_live_public_transport">حمل‌ونقل عمومی با OsmAnd Live</string>
     <string name="transfers_size">%1$d انتقال</string>
-    <string name="add_start_and_end_points">افزودن نقاط مبدأ و مقصد</string>
+    <string name="add_start_and_end_points">افزودن مبدأ و مقصد</string>
     <string name="route_add_start_point">افزودن مبدأ</string>
-    <string name="route_descr_select_start_point">انتخاب نقطهٔ شروع</string>
+    <string name="route_descr_select_start_point">انتخاب نقطهٔ مبدأ</string>
     <string name="rendering_attr_surface_unpaved_name">روسازی‌نشده</string>
     <string name="rendering_attr_surface_dirt_name">خاک</string>
     <string name="rendering_attr_surface_mud_name">گِل</string>
@@ -3019,7 +3019,7 @@
     <string name="rendering_attr_smoothness_impassable_name">غیرقابل‌عبور</string>
     <string name="rendering_attr_highway_class_motorway_name">آزادراه</string>
     <string name="rendering_attr_highway_class_street_name">خیابان</string>
-    <string name="public_transport_warning_descr_blog">برای آشنایی با روش محاسبهٔ مسیر در OsmAnd وبلاگ ما را ببینید.</string>
+    <string name="public_transport_warning_descr_blog">در وبلاگ ما دربارهٔ مسیریابی OsmAnd بیشتر بخوانید.</string>
     <string name="public_transport_warning_title">ناوبری حمل‌ونقل عمومی هم‌اکنون آزمایش بتا را سپری می‌کند و بعید نیست که خطاها و نقایصی داشته باشد.</string>
     <string name="add_intermediate">افزودن نقطهٔ میانی</string>
     <string name="rendering_attr_surface_sand_name">ماسه</string>
@@ -3035,8 +3035,7 @@
     <string name="rendering_attr_undefined_name">نامشخص</string>
     <string name="rendering_attr_highway_class_state_road_name">جادهٔ استانی</string>
     <string name="shared_string_walk">پیاده</string>
-    <string name="save_poi_value_exceed_length">مقدار تگ «%s» نباید بیش از ۲۵۵ نویسه باشد.
-\nلطفاً پیش از ادامه، آن را اصلاح کنید.</string>
+    <string name="save_poi_value_exceed_length">مقدار تگ «%s» را به کمتر از ۲۵۵ نویسه برسانید.</string>
     <string name="save_poi_value_exceed_length_title">طول مقدار «%s»</string>
     <string name="avoid_pt_types_descr">انواع روش‌های حمل‌ونقل که می‌خواهید در مسیریابی نباشند را انتخاب کنید:</string>
     <string name="avoid_pt_types">پرهیز از روش‌های حمل‌ونقل…</string>
@@ -3047,17 +3046,17 @@
     <string name="shared_string_milliradians">میلی‌رادیان</string>
     <string name="angular_measeurement">یکای زاویه</string>
     <string name="angular_measeurement_descr">واحد اندازه‌گیری سمت (azimuth) را مشخص کنید.</string>
-    <string name="routing_attr_avoid_tram_name">پرهیز از تراموا</string>
+    <string name="routing_attr_avoid_tram_name">بدون تراموا</string>
     <string name="routing_attr_avoid_tram_description">از تراموا پرهیز شود</string>
-    <string name="routing_attr_avoid_bus_name">پرهیز از اتوبوس</string>
+    <string name="routing_attr_avoid_bus_name">بدون اتوبوس</string>
     <string name="routing_attr_avoid_bus_description">از اتوبوس و اتوبوس برقی پرهیز شود</string>
-    <string name="routing_attr_avoid_share_taxi_name">پرهیز از تاکسی اشتراکی</string>
+    <string name="routing_attr_avoid_share_taxi_name">بدون تاکسی اشتراکی</string>
     <string name="routing_attr_avoid_share_taxi_description">از تاکسی اشتراکی پرهیز شود</string>
-    <string name="routing_attr_avoid_train_name">پرهیز از قطار</string>
+    <string name="routing_attr_avoid_train_name">بدون قطار</string>
     <string name="routing_attr_avoid_train_description">از قطار پرهیز شود</string>
-    <string name="routing_attr_avoid_subway_name">پرهیز از مترو</string>
+    <string name="routing_attr_avoid_subway_name">بدون مترو</string>
     <string name="routing_attr_avoid_subway_description">از مترو و حمل‌ونقل ریلی سبک پرهیز شود</string>
-    <string name="routing_attr_avoid_ferry_name">پرهیز از فرابر</string>
+    <string name="routing_attr_avoid_ferry_name">بدون فرابر</string>
     <string name="routing_attr_avoid_ferry_description">از فرابر پرهیز شود</string>
     <string name="release_3_3_7">• نمایش زمان بین انتقال‌ها در حمل‌ونقل عمومی
 \n
@@ -3069,7 +3068,7 @@
 \n</string>
     <string name="files_moved">%1$d فایل منتقل شد (%2$s).</string>
     <string name="files_copied">%1$d فایل کپی شد (%2$s).</string>
-    <string name="files_failed">کپی %1$d فایل (%2$s) ناموفق بود.</string>
+    <string name="files_failed">نمی‌توان %1$d فایل (%2$s) را کپی کرد.</string>
     <string name="files_present">%1$d فایل (%2$s) در مکان قبلی وجود دارد: \'%3$s\'</string>
     <string name="move_maps">نقشه‌ها را منتقل کن</string>
     <string name="dont_move_maps">منتقل نکن</string>
@@ -3082,21 +3081,21 @@
     <string name="send_log">ارسال گزارش</string>
     <string name="searching_gps">جست‌وجوی GPS‏</string>
     <string name="coordinates_widget">ابزارک مختصات</string>
-    <string name="rate_dialog_descr">لطفاً ۳۰ ثانیه از وقت خود را به ما بدهید و در گوگل‌پلی به کارمان نظر و امتیاز بدهید.</string>
-    <string name="button_rate">امتیاز</string>
+    <string name="rate_dialog_descr">لطفاً در گوگل‌پلی دربارهٔ کار ما نظر و امتیاز بدهید.</string>
+    <string name="button_rate">باشد</string>
     <string name="shared_string_privacy_policy">سیاست حریم خصوصی</string>
-    <string name="help_us_make_osmand_better">یاری‌مان کنید تا OsmAnd را بهتر کنیم!</string>
-    <string name="make_osmand_better_descr">به OsmAnd اجازه بدهید دربارهٔ نحوهٔ استفاده از برنامه داده‌های ناشناس جمع‌آوری و پردازش کند. ما دربارهٔ موقعیت شما، یا دربارهٔ جاهایی که روی نقشه می‌بینید داده‌ای جمع‌آوری یا ذخیره نمی‌کنیم.
+    <string name="help_us_make_osmand_better">یاری‌مان کنید تا OsmAnd را بهتر کنیم</string>
+    <string name="make_osmand_better_descr">به OsmAnd اجازه بدهید دربارهٔ نحوهٔ استفاده از برنامه داده‌های ناشناس جمع‌آوری و پردازش کند. دربارهٔ موقعیت شما یا جاهایی که روی نقشه می‌بینید داده‌ای جمع‌آوری نمی‌کنیم.
 \n
-\nهر زمان که بخواهید می‌توانید انتخاب خود را از بخش «تنظیمات &gt; حریم خصوصی و امنیت» تغییر دهید.</string>
-    <string name="choose_data_to_share">چه داده‌هایی را مایل هستید به اشتراک بگذارید:</string>
+\nهمواره می‌توانید این تنظیم را از بخش «تنظیمات ← حریم خصوصی و امنیت» تغییر دهید.</string>
+    <string name="choose_data_to_share">چه نوع داده‌هایی را مایل هستید به اشتراک بگذارید:</string>
     <string name="downloaded_maps">نقشه‌هایی که دانلود کرده‌اید</string>
     <string name="visited_screens">صفحه‌هایی که دیده‌اید</string>
     <string name="collected_data_descr">"مشخص کنید OsmAnd مجاز است چه داده‌هایی را  به اشتراک بگذارد."</string>
-    <string name="downloaded_maps_collect_descr">کمک می‌کند تا بدانیم محبوب‌ترین نقشه‌ها از چه مناطق و کشورهایی است.</string>
-    <string name="visited_screens_collect_descr">کمک می‌کند تا بدانیم محبوب‌ترین قابلیت‌های OsmAnd کدام است.</string>
+    <string name="downloaded_maps_collect_descr">کمک می‌کند تا محبوبیت نقشه‌های کشوری و منطقه‌ای را بدانیم.</string>
+    <string name="visited_screens_collect_descr">کمک می‌کند تا محبوبیت قابلیت‌های OsmAnd را بدانیم.</string>
     <string name="settings_privacy_and_security">حریم خصوصی و امنیت</string>
-    <string name="shared_string_no_thank_you">نه، متشکرم</string>
+    <string name="shared_string_no_thank_you">خیر، سپاسگزارم</string>
     <string name="profile_name_hint">نام پروفایل</string>
     <string name="nav_type_hint">نوع ناوبری</string>
     <string name="app_mode_taxi">تاکسی</string>
@@ -3112,14 +3111,14 @@
     <string name="profile_alert_need_routing_type_title">انتخاب نوع ناوبری</string>
     <string name="profile_alert_need_routing_type_msg">"لطفاً یکی از  انواع ناوبری را برای پروفایل جدید برنامه انتخاب کنید"</string>
     <string name="profile_alert_need_profile_name_title">نام پروفایل را بنویسید</string>
-    <string name="profile_alert_need_profile_name_msg">نام پروفایل نباید خالی بماند!</string>
+    <string name="profile_alert_need_profile_name_msg">ابتدا باید یک نام برای پروفایل انتخاب کنید.</string>
     <string name="profile_alert_duplicate_name_title">نام تکراری</string>
     <string name="profile_alert_duplicate_name_msg">پروفایلی با همین نام وجود دارد</string>
     <string name="profile_alert_cant_delete_base">نمی‌توانید پروفایل‌های پایه‌ای OsmAnd را حذف کنید</string>
     <string name="profile_alert_need_save_title">ذخیرهٔ تغییرات</string>
-    <string name="profile_alert_need_save_msg">پیش از ادامه لازم است تغییرات پروفایل را ذخیره کنید</string>
+    <string name="profile_alert_need_save_msg">ابتدا تغییرات پروفایل را ذخیره کنید</string>
     <string name="profile_alert_delete_title">حذف پروفایل</string>
-    <string name="profile_alert_delete_msg">آیا از حذف پروفایل %s اطمینان دارید</string>
+    <string name="profile_alert_delete_msg">آیا از حذف پروفایل «%s» اطمینان دارید</string>
     <string name="select_base_profile_dialog_title">یک پروفایل پایه انتخاب کنید</string>
     <string name="select_base_profile_dialog_message">پروفایل سفارشی خود را بر پایهٔ یکی از پروفایل‌های برنامه بسازید. با این کار برخی چیزهای ابتدایی مانند نمایانی ابزارک‌ها و یکای سرعت و مسافت تنظیم می‌شود. 
 \nپروفایل‌های پیشفرض برنامه و چند نمونه پروفایل سفارشی که بر پایهٔ آن‌ها ساخته شده، در زیر آمده:</string>
@@ -3141,42 +3140,54 @@
     <string name="default_speed_setting_title">سرعت پیشفرض</string>
     <string name="default_speed_setting_descr">تنظیمات سرعت پیشفرض را تغییر دهید</string>
     <string name="minmax_speed_dialog_title">سرعت حداقل/حداکثر را تنظیم کنید</string>
-    <string name="default_speed_dialog_msg">برای پیش‌بینی زمان رسیدن در هنگام مسیریابی استفاده می‌شود</string>
+    <string name="default_speed_dialog_msg">برای پیش‌بینی زمان رسیدن استفاده می‌شود</string>
     <string name="new_profile">پروفایل جدید</string>
     <string name="last_launch_crashed">آخرین اجرای OsmAnd با شکست مواجه شد. لطفاً با ارسال پیغام خطا ما را در بهبود OsmAnd یاری کنید.</string>
     <string name="release_3_4">"• پروفایل‌های برنامه: متناسب با نیاز خود پروفایل سفارشی بسازید؛ با رنگ و نماد دلخواه 
+\n
 \n 
+\n
 \n • برای هر پروفایل پیشفرض‌ها و سرعت‌های حداقل/حداکثر  را به‌دلخواه تنظیم کنید 
-\n 
-\n • یک ابزارک برای نمایش مختصات کنونی اضافه شد
-\n 
-\n • گزینه‌های جدید برای نمایش قطب‌نما و خط‌کش شعاعی روی نقشه اضافه شد
-\n 
-\n • ردنگاری در پس‌زمینه اصلاح شد
 \n
+\n 
+\n
+\n • یک ابزارک برای نمایش مختصات کنونی اضافه شد 
+\n 
+\n
+\n • گزینه‌های جدید برای نمایش قطب‌نما و خط‌کش شعاعی روی نقشه اضافه شد 
+\n 
+\n
+\n • ردنگاری در پس‌زمینه اصلاح شد 
+\n 
 \n• دانلود نقشه در پس‌زمینه بهبود یافت 
-\n 
-\n• گزینهٔ «نمایشگر روشن شود» برگردانده شد
 \n
+\n 
+\n
+\n• گزینهٔ «نمایشگر روشن شود» برگردانده شد 
+\n 
 \n • انتخاب زبان ویکی‌پدیا اصلاح شد 
+\n
 \n 
+\n
 \n • رفتار دکمهٔ قطب‌نما در هنگام مسیریابی اصلاح شد 
+\n
 \n 
+\n
 \n •  اصلاح سایر باگ‌ها
 \n
 \n"</string>
     <string name="app_mode_offroad">آفرود</string>
     <string name="edit_profile_setup_title">تنظیم پروفایل</string>
     <string name="edit_profile_setup_subtitle">پروفایل تنظیمات خودش را نگه می‌دارد</string>
-    <string name="edit_profile_setup_map_subtitle">انتخاب گزینه‌های پیشفرض نقشه برای پروفایل</string>
-    <string name="edit_profile_screen_options_subtitle">گزینه‌های پیشفرض صفحه برای این پروفایل</string>
-    <string name="edit_profile_nav_settings_subtitle">انتخاب تنظیمات پیشفرض ناوبری برای پروفایل</string>
+    <string name="edit_profile_setup_map_subtitle">انتخاب گزینه‌های نقشه برای این پروفایل</string>
+    <string name="edit_profile_screen_options_subtitle">انتخاب گزینه‌های صفحه برای این پروفایل</string>
+    <string name="edit_profile_nav_settings_subtitle">انتخاب تنظیمات ناوبری برای این پروفایل</string>
     <string name="app_mode_ufo">بشقاب‌پرنده</string>
     <string name="app_mode_personal_transporter">رانَک</string>
     <string name="app_mode_monowheel">یکچرخه</string>
     <string name="app_mode_scooter">اسکوتر</string>
-    <string name="privacy_and_security_change_descr">با زدن روی «اجازه می‌دهم» %1$s ما را می‌پذیرید</string>
-    <string name="settings_privacy_and_security_desc">انتخاب داده‌هایی که با ما به اشتراک می‌گذارید</string>
+    <string name="privacy_and_security_change_descr">اگر %1$s ما را می‌پذیرید «اجازه می‌دهم» را برگزینید</string>
+    <string name="settings_privacy_and_security_desc">انتخاب داده‌هایی که به اشتراک می‌گذارید</string>
     <string name="shared_string_allow">اجازه می‌دهم</string>
     <string name="osmand_routing_promo">"می‌توانید نسخهٔ اصلاح‌شدهٔ خودتان از فایل  routing.xml را در ‎..osmand/routing اضافه کنید"</string>
     <string name="show_compass_ruler">با درجه‌بندی قطب‌نما</string>
@@ -3184,7 +3195,7 @@
     <string name="settings_routing_mode_string">حالت: %s</string>
     <string name="settings_derived_routing_mode_string">حالت کاربر، بر پایهٔ: %s</string>
     <string name="profile_type_descr_string">نوع: %s</string>
-    <string name="base_profile_descr_bicycle">MTB، موتور گازی، اسب</string>
+    <string name="base_profile_descr_bicycle">دوچرخه کوهستان، موتور گازی، اسب</string>
     <string name="base_profile_descr_public_transport">همهٔ انواع وسایل نقلیهٔ عمومی</string>
     <string name="base_profile_descr_boat">کشتی، روئینگ، بادبانی‌رانی</string>
     <string name="application_profiles_descr">پروفایل‌ها را انتخاب کنید تا در برنامه فعال شوند.</string>
@@ -3204,7 +3215,7 @@
     <string name="precision_hdop_and_vdop">"دقت افقی:  %1$s، عمودی:  %2$s"</string>
     <string name="precision_hdop">دقت افقی: %s</string>
     <string name="turn_screen_on_router">بیدارباش سر پیچ</string>
-    <string name="turn_screen_on_time_descr">زمان روشن‌شدن نمایشگر را تنظیم کنید.</string>
+    <string name="turn_screen_on_time_descr">مدت روشن‌ماندن نمایشگر را تنظیم کنید.</string>
     <string name="turn_screen_on_sensor">استفاده از حسگر مجاورت</string>
     <string name="turn_screen_on_sensor_descr">در هنگام ناوبری، دست خود را بر فراز نمایشگر تکان دهید تا نمایشگر روشن شود.</string>
     <string name="rendering_attr_highway_class_track_grade1_name">سطح ۱</string>
@@ -3269,7 +3280,7 @@
     <string name="get_discount_second_part">سپس %1$s</string>
     <string name="cancel_subscription">لغو اشتراک</string>
     <string name="price_and_discount">%1$s • %2$s ارزان‌تر</string>
-    <string name="configure_profile_info">همهٔ تنظیمات زیر فقط روی پروفایل انتخاب‌شده اثر می‌گذارند.</string>
+    <string name="configure_profile_info">تنظیمات برای پروفایل:</string>
     <string name="shared_string_example">مثال</string>
     <string name="navigate_point_format_utm">UTM Standard</string>
     <string name="navigate_point_format_olc">Open Location Code</string>
@@ -3279,7 +3290,7 @@
     <string name="units_and_formats">یکاها و قالب‌ها</string>
     <string name="appearance">ظاهر</string>
     <string name="map_look">چهرهٔ نقشه</string>
-    <string name="list_of_installed_plugins">فهرست افزونه‌های نصب‌شده</string>
+    <string name="list_of_installed_plugins">افزونه‌های نصب‌شده</string>
     <string name="configure_navigation">پیکربندی ناوبری</string>
     <string name="screen_alerts_descr">در هنگام ناوبری، هشدارها در گوشهٔ پایین چپ ظاهر می‌شوند.</string>
     <string name="switch_profile">تعویض پروفایل</string>
@@ -3300,8 +3311,8 @@
     <string name="routing_attr_allow_skating_only_description">مسیرهای آماده‌شده برای سبک آزاد یا فقط-اسکیت. بدون مسیرهای کلاسیک.</string>
     <string name="routing_attr_allow_classic_only_description">"مسیرهایی که فقط برای سبک کلاسیک آماده شده  و مسیر اسکیت ندارند. مسیرهای سُست‌تر و آماده‌شده با برف‌روهای کوچک‌تر و مسیرهای دست‌ساز اسکی‌بازان را نیز شامل می‌شود."</string>
     <string name="external_input_device_descr">یک دستگاه مانند صفحه‌کلید معمولی یا WunderLINQ را برای کنترل خارجی انتخاب کنید.</string>
-    <string name="utm_format_descr">‏OsmAnd از قالب UTM Standard استفاده می‌کند که مشابه (اما نه یکسان) با قالب UTM Nato است.</string>
-    <string name="apply_to_current_profile">به‌کارگیری برای پروفایل کنونی: %1$s</string>
+    <string name="utm_format_descr">‏OsmAnd از قالب UTM Standard استفاده می‌کند که مشابه (اما نه یکسان) با UTM Nato است.</string>
+    <string name="apply_to_current_profile">به‌کارگیری فقط برای «%1$s»</string>
     <string name="apply_to_all_profiles">به‌کارگیری برای همهٔ پروفایل‌ها</string>
     <string name="map_look_descr">ظاهر نقشه</string>
     <string name="general_settings_profile_descr">پوستهٔ برنامه، یکاها، منطقه</string>
@@ -3312,10 +3323,10 @@
     <string name="screen_alerts">هشدارهای تصویری</string>
     <string name="application_profile_changed">پروفایل برنامه به «%s» تغییر کرد</string>
     <string name="pref_selected_by_default_for_profiles">این تنظیم به‌طور پیشفرض برای این پروفایل‌ها انتخاب شده: %s</string>
-    <string name="change_default_settings">تغییر تنظیمات پیشفرض</string>
-    <string name="discard_changes">انصراف از تغییرات</string>
+    <string name="change_default_settings">تغییر تنظیم</string>
+    <string name="discard_changes">انصراف از تغییر</string>
     <string name="turn_screen_on_info">در هنگام ناوبری، نقشه را روی صفحهٔ قفل نمایش بده.</string>
-    <string name="route_parameters_info">این تنظیمات بر مسیریابی اثرگذار است. فقط برای پروفایل انتخاب‌شده به کار گرفته خواهد شد: %1$s.</string>
+    <string name="route_parameters_info">تنظیمات مسیریابی برای پروفایل انتخاب‌شده: %1$s.</string>
     <string name="turn_screen_on">نمایشگر روشن شود</string>
     <string name="map_during_navigation_info">نقشه در هنگام ناوبری</string>
     <string name="map_during_navigation">نقشه در هنگام ناوبری</string>
@@ -3335,11 +3346,11 @@
     <string name="change_data_storage_full_description">فایل‌های دادهٔ OsmAnd را به مقصد جدید انتقال می‌دهید؟
 \n%1$s &gt; %2$s</string>
     <string name="enter_path_to_folder">مسیر پوشه را وارد کنید</string>
-    <string name="shared_string_select_folder">انتخاب پوشه</string>
+    <string name="shared_string_select_folder">پوشه…</string>
     <string name="paste_Osmand_data_folder_path">مسیر پوشهٔ داده‌های OsmAnd را درج کنید</string>
     <string name="change_osmand_data_folder_question">پوشهٔ داده‌های OsmAnd تغییر کند؟</string>
     <string name="move_maps_to_new_destination">انتقال به مقصد جدید</string>
-    <string name="internal_app_storage_description">ذخیره‌گاه داخلی از کاربر و سایر برنامک‌ها پنهان است، بنابراین جز OsmAnd کسی به داده‌های شما دسترسی نخواهد داشت</string>
+    <string name="internal_app_storage_description">ذخیره‌گاه داخلی از کاربر و سایر برنامک‌ها پنهان است، منحصراً OsmAnd به آن دسترسی دارد</string>
     <string name="change_data_storage_folder">تغییر پوشهٔ ذخیره‌سازی داده‌ها</string>
     <string name="rendering_attr_piste_type_snow_park_name">پارک برفی</string>
     <string name="rendering_attr_piste_type_sleigh_name">سورتمه کالسکه‌ای</string>
@@ -3362,7 +3373,7 @@
     <string name="routing_attr_width_description">محدودیت پهنای وسیله در مسیرها را مشخص کنید.</string>
     <string name="avoid_in_routing_descr_">از مسیرهای بخصوص و انواع جاده‌ها بپرهیزید</string>
     <string name="data_storage_preference_summary">%1$s • %2$s</string>
-    <string name="data_storage_space_description">خالی %1$s گیگابایت • کل %2$s گیگابایت</string>
+    <string name="data_storage_space_description">%1$s گیگابایت خالی (از %2$s گیگابایت)</string>
     <string name="app_mode_utv">پهلو به پهلو</string>
     <string name="rendering_attr_piste_difficulty_aerialway_name">راه هوایی</string>
     <string name="shared_string_calculate">محاسبه</string>
@@ -3374,10 +3385,10 @@
     <string name="shared_string_memory_mb_desc">%1$s مگابایت</string>
     <string name="shared_string_memory_kb_desc">%1$s کیلوبایت</string>
     <string name="track_storage_directory">پوشهٔ ذخیره‌سازی رد</string>
-    <string name="track_storage_directory_descrp">ردها را می‌توانید در پوشهٔ rec یا پوشه‌های ماهانه یا روزانه ذخیره کنید.</string>
-    <string name="store_tracks_in_rec_directory">ردهای ضبط‌شده در پوشهٔ rec ذخیره شوند</string>
-    <string name="store_tracks_in_daily_directories">ردهای ضبط‌شده در پوشه‌های روزانه ذخیره شوند</string>
-    <string name="store_tracks_in_daily_directories_descrp">ردهای ضبط‌شده در زیرپوشهٔ مخصوص آن روز ذخیره می‌شود (مانند ‎2018-01-01).</string>
+    <string name="track_storage_directory_descrp">ردها را می‌توانید در پوشهٔ rec، پوشه‌های ماهانه یا روزانه ذخیره کنید.</string>
+    <string name="store_tracks_in_rec_directory">ردها در پوشهٔ rec ذخیره شوند</string>
+    <string name="store_tracks_in_daily_directories">ردها در پوشه‌های روزانه ذخیره شوند</string>
+    <string name="store_tracks_in_daily_directories_descrp">ردها در زیرپوشهٔ مخصوص همان روز ذخیره شود (مانند ‎2018-01-01).</string>
     <string name="shared_string_memory_used_tb_desc">استفاده‌شده %1$s ترابایت</string>
     <string name="shared_string_memory_used_gb_desc">استفاده‌شده %1$s گیگابایت</string>
     <string name="shared_string_memory_used_mb_desc">استفاده‌شده %1$s مگابایت</string>
@@ -3387,20 +3398,20 @@
     <string name="routing_attr_prefer_unpaved_description">جاده‌های روسازی‌نشده را ترجیح می‌دهم.</string>
     <string name="update_all_maps">به‌روزرسانی همهٔ نقشه‌ها</string>
     <string name="update_all_maps_q">آیا همهٔ نقشه‌ها (%1$d) را به‌روز می‌کنید؟</string>
-    <string name="release_3_5">"•  تنظیمات برنامه و پروفایل‌ها به‌روز شد: آرایش دسترس‌پذیرتر تنظیمات بر اساس نوع و امکان شخصی‌سازی هر پروفایل.
-\n
-\n• کادر جدیدی برای دانلود نقشه اضافه شده که هنگام مرور، نقشه‌ها را پیشنهاد می‌کند.
-\n
-\n• اصلاحاتی در پوستهٔ شب انجام شد.
-\n
-\n• چند ایراد مسیریابی در سراسر جهان رفع شد.
-\n
-\n• نقشهٔ پایه با جزئیات بیشتر از شبکهٔ راه‌ها به‌روز شد.
-\n
-\n• مناطق آب‌گرفته در سراسر جهان اصلاح شد.
-\n
-\n• مسیریابی اسکی: پروفایل ارتفاعی و دشواری مسیر به جزئیات مسیرها افزوده شد.
-\n
+    <string name="release_3_5">"•  تنظیمات برنامه و پروفایل‌ها به‌روز شد: تنظیمات بر اساس نوع مرتب شده‌اند و امکان شخصی‌سازی هر پروفایل اضافه شده است.
+\n 
+\n• کادر جدیدی برای دانلود نقشه اضافه شده که هنگام مرور، نقشه‌ها را پیشنهاد می‌کند. 
+\n 
+\n• اصلاحاتی در پوستهٔ شب انجام شد. 
+\n 
+\n• چند ایراد مسیریابی در سراسر جهان رفع شد. 
+\n 
+\n• نقشهٔ پایه با جزئیات بیشتر از شبکهٔ راه‌ها به‌روز شد. 
+\n 
+\n• مناطق آب‌گرفته در سراسر جهان اصلاح شد. 
+\n 
+\n• مسیریابی اسکی: پروفایل ارتفاعی و دشواری مسیر به جزئیات مسیرها افزوده شد. 
+\n 
 \n• اصلاح سایر باگ‌ها
 \n
 \n"</string>
@@ -3418,4 +3429,5 @@
     <string name="quick_action_hillshade_hide">پنهان‌کردن سایه‌روشن‌ها</string>
     <string name="quick_action_show_hide_hillshade">آشکار/پنهان کردن سایه‌روشن‌ها</string>
     <string name="swap_start_and_destination"> string name=\"lat_lon_pattern\"&gt;طول: %1$.5f عرض: %2$.5f&lt;/string </string>
+    <string name="tts_initialization_error">راه‌اندازی موتور متن به گفتار ناموفق بود</string>
 </resources>
