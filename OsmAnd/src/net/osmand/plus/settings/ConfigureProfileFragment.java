@@ -45,6 +45,7 @@ import static net.osmand.plus.profiles.EditProfileFragment.MAP_CONFIG;
 import static net.osmand.plus.profiles.EditProfileFragment.OPEN_CONFIG_ON_MAP;
 import static net.osmand.plus.profiles.EditProfileFragment.SCREEN_CONFIG;
 import static net.osmand.plus.profiles.EditProfileFragment.SELECTED_ITEM;
+import static net.osmand.plus.profiles.SettingsProfileFragment.PROFILE_STRING_KEY;
 
 public class ConfigureProfileFragment extends BaseSettingsFragment {
 
@@ -245,6 +246,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 		final Class<? extends Activity> settingsActivity = plugin.getSettingsActivity();
 		if (settingsActivity != null && !plugin.needsInstallation()) {
 			intent = new Intent(getContext(), settingsActivity);
+			intent.putExtra(PROFILE_STRING_KEY, getSelectedAppMode().getStringKey());
 		} else {
 			intent = new Intent(getContext(), PluginActivity.class);
 			intent.putExtra(PluginActivity.EXTRA_PLUGIN_ID, plugin.getId());
