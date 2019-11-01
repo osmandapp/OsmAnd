@@ -3410,7 +3410,7 @@
     <string name="run_full_osmand_header">Launch OsmAnd?</string>
     <string name="routing_attr_avoid_sett_name">No cobblestone or sett</string>
     <string name="routing_attr_avoid_sett_description">Avoids cobblestone and sett</string>
-    <string name="quick_action_need_to_add_item_to_list">Add at-least one item to the list in the '\Quick action\' settings</string>
+    <string name="quick_action_need_to_add_item_to_list">Add at least one item to the list in the \'Quick action\' settings</string>
     <string name="routing_attr_piste_type_downhill_name">Alpine/downhill ski</string>
     <string name="routing_attr_piste_type_downhill_description">Slopes for alpine or downhill skiing and access to ski lifts.</string>
     <string name="routing_attr_piste_type_nordic_name">Cross country/nordic ski</string>
