@@ -461,7 +461,7 @@
     <string name="edit_map_marker">Edit map marker</string>
     <string name="third_party_application">Third-party app</string>
     <string name="search_street">Search street</string>
-    <string name="start_search_from_city">Select the city first</string>
+    <string name="start_search_from_city">First specify city/town/locality</string>
     <string name="shared_string_restore">Restore</string>
     <string name="keep_passed_markers_descr">Markers added as a group of Favorites or GPX waypoints marked "Passed" will remain on the map. If the group is not active, the markers will disappear from the map.</string>
     <string name="keep_passed_markers">Keep passed markers on the map</string>
@@ -853,11 +853,11 @@
     <string name="select_street">Select street</string>
     <string name="shared_string_in_name">in %1$s</string>
     <string name="type_address">Type address</string>
-    <string name="type_city_town">Type city or town</string>
+    <string name="type_city_town">Type city/town/locality</string>
     <string name="type_postcode">Type postcode</string>
     <string name="nearest_cities">Nearest cities</string>
     <string name="select_city">Select city</string>
-    <string name="select_postcode">Select postcode</string>
+    <string name="select_postcode">Postcode search</string>
     <string name="quick_action_auto_zoom">Auto zoom map on/off</string>
     <string name="quick_action_auto_zoom_desc">Tapping this action button turns on/off auto zoom map according to your speed.</string>
     <string name="quick_action_auto_zoom_on">Enable auto zoom map</string>

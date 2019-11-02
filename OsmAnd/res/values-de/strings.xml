@@ -2395,7 +2395,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="type_postcode">Postleitzahl eingeben</string>
     <string name="nearest_cities">Nächstgelegene Orte</string>
     <string name="select_city">Ort wählen</string>
-    <string name="select_postcode">Postleitzahl wählen</string>
+    <string name="select_postcode">Postleitzahlensuche</string>
     <string name="select_street">Straße wählen</string>
     <string name="shared_string_in_name">in %1$s</string>
     <string name="type_address">Adresse eingeben</string>
