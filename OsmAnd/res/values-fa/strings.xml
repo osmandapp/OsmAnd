@@ -3101,7 +3101,7 @@
     <string name="routing_profile_ski">اسکی</string>
     <string name="profile_type_base_string">پروفایل پایه</string>
     <string name="profile_alert_need_routing_type_title">انتخاب نوع ناوبری</string>
-    <string name="profile_alert_need_routing_type_msg">"لطفاً یکی از  انواع ناوبری را برای پروفایل جدید برنامه انتخاب کنید"</string>
+    <string name="profile_alert_need_routing_type_msg">لطفاً یکی از انواع ناوبری را برای پروفایل جدید برنامه انتخاب کنید</string>
     <string name="profile_alert_need_profile_name_title">نام پروفایل را بنویسید</string>
     <string name="profile_alert_need_profile_name_msg">ابتدا باید یک نام برای پروفایل انتخاب کنید.</string>
     <string name="profile_alert_duplicate_name_title">نام تکراری</string>
@@ -3135,11 +3135,11 @@
     <string name="default_speed_dialog_msg">برای پیش‌بینی زمان رسیدن استفاده می‌شود</string>
     <string name="new_profile">پروفایل جدید</string>
     <string name="last_launch_crashed">آخرین اجرای OsmAnd با شکست مواجه شد. لطفاً با ارسال پیغام خطا ما را در بهبود OsmAnd یاری کنید.</string>
-    <string name="release_3_4">"• پروفایل‌های برنامه: متناسب با نیاز خود پروفایل سفارشی بسازید؛ با رنگ و نماد دلخواه 
+    <string name="release_3_4">• پروفایل‌های برنامه: متناسب با نیاز خود پروفایل سفارشی بسازید؛ با رنگ و نماد دلخواه 
 \n
 \n 
 \n
-\n • برای هر پروفایل پیشفرض‌ها و سرعت‌های حداقل/حداکثر  را به‌دلخواه تنظیم کنید 
+\n • برای هر پروفایل پیشفرض‌ها و سرعت‌های حداقل/حداکثر را به‌دلخواه تنظیم کنید 
 \n
 \n 
 \n
@@ -3165,9 +3165,9 @@
 \n
 \n 
 \n
-\n •  اصلاح سایر باگ‌ها
+\n • اصلاح سایر باگ‌ها
 \n
-\n"</string>
+\n</string>
     <string name="app_mode_offroad">آفرود</string>
     <string name="edit_profile_setup_title">تنظیم پروفایل</string>
     <string name="edit_profile_setup_subtitle">پروفایل تنظیمات خودش را نگه می‌دارد</string>
@@ -3204,7 +3204,7 @@
     <string name="routing_attr_freeride_policy_name">آزاد (بیرون پیست)</string>
     <string name="routing_attr_freeride_policy_description">مسیرهای آزادرانی و مسیرهای بیرون پیست غیررسمی هستند. معمولاً به‌طور رسمی آماده‌سازی و نگهداری نمی‌شوند و پس از تعطیلی وارسی نمی‌شوند. با مسئولیت خودتان وارد شوید.</string>
     <string name="press_again_to_change_the_map_orientation">دوباره بزنید تا جهت نقشه را عوض کنید</string>
-    <string name="precision_hdop_and_vdop">"دقت افقی:  %1$s، عمودی:  %2$s"</string>
+    <string name="precision_hdop_and_vdop">دقت افقی: %1$s، عمودی: %2$s</string>
     <string name="precision_hdop">دقت افقی: %s</string>
     <string name="turn_screen_on_router">بیدارباش سر پیچ</string>
     <string name="turn_screen_on_time_descr">مدت روشن‌ماندن نمایشگر را تنظیم کنید.</string>
@@ -3390,7 +3390,7 @@
     <string name="routing_attr_prefer_unpaved_description">جاده‌های روسازی‌نشده را ترجیح می‌دهم.</string>
     <string name="update_all_maps">به‌روزرسانی همهٔ نقشه‌ها</string>
     <string name="update_all_maps_q">آیا همهٔ نقشه‌ها (%1$d) را به‌روز می‌کنید؟</string>
-    <string name="release_3_5">"•  تنظیمات برنامه و پروفایل‌ها به‌روز شد: تنظیمات بر اساس نوع مرتب شده‌اند و امکان شخصی‌سازی هر پروفایل اضافه شده است.
+    <string name="release_3_5">• تنظیمات برنامه و پروفایل‌ها به‌روز شد: تنظیمات بر اساس نوع مرتب شده‌اند و امکان شخصی‌سازی هر پروفایل اضافه شده است.
 \n 
 \n• کادر جدیدی برای دانلود نقشه اضافه شده که هنگام مرور، نقشه‌ها را پیشنهاد می‌کند. 
 \n 
@@ -3406,7 +3406,7 @@
 \n 
 \n• اصلاح سایر باگ‌ها
 \n
-\n"</string>
+\n</string>
     <string name="apply_preference_to_all_profiles">این تنظیم را می‌توانید بر همهٔ پروفایل‌ها یا فقط بر پروفایل انتخاب‌شده به کار ببندید.</string>
     <string name="shared_preference">مشترک</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">ترجیح جاده‌های روسازی‌نشده</string>
