@@ -356,8 +356,8 @@
     <string name="poi_office_administrative">Escritório administrativo</string>
     <string name="poi_customs">Aduana</string>
     <string name="poi_city">Cidade grande</string>
-    <string name="poi_town">Cidade pequena</string>
-    <string name="poi_village">Povoado</string>
+    <string name="poi_town">Cidade menor</string>
+    <string name="poi_village">Vila/Cidade pequena</string>
     <string name="poi_hamlet">Lugarejo</string>
     <string name="poi_isolated_dwelling">Moradia isolada</string>
     <string name="poi_suburb">Bairro</string>
