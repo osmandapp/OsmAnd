@@ -2286,7 +2286,7 @@
     <string name="quick_action_bug_descr">Denne meldingen inkluderes i kommentarfeltet.</string>
     <string name="mappilary_no_internet_desc">Du må være koblet til Internett for å vise bilder fra Mapillary.</string>
     <string name="hillshade_menu_download_descr">Last ned relieffskyggeoverleggskartet for denne regionen for å se relieffskygger på kartet.</string>
-    <string name="hillshade_purchase_header">Kjøp og installer programtillegget for koter for å se relieffskygger på kartet</string>
+    <string name="hillshade_purchase_header">Installer programtillegget for koter for å se relieffskygger på kartet.</string>
     <string name="enter_new_name">Oppfør nytt navn</string>
     <string name="shared_string_back">Tilbake</string>
     <string name="waypoints_added_to_map_markers">Rutepunkter lagt til kartmarkører</string>
@@ -3256,4 +3256,20 @@
     <string name="shared_string_other">Annet</string>
     <string name="shared_preference">Delt</string>
     <string name="layer_osm_edits">OSM-redigeringer</string>
+    <string name="new_route_calculated_dist_dbg">Rute: Distanse %s, rutingstid %s 
+\nUtregning: %.1f sec, %d veier, %d flis)</string>
+    <string name="contour_lines_and_hillshade">Koter og relieffskygge</string>
+    <string name="update_all_maps">Oppdater alle kart</string>
+    <string name="update_all_maps_q">Er du sikker på at du vil oppdatere alle (%1$d) kart\?</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_name">Foretrekk veier uten dekke</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_description">Foretrekk veier uten dekke.</string>
+    <string name="quick_action_contour_lines_show">Vis koter</string>
+    <string name="quick_action_contour_lines_hide">Skjul koter</string>
+    <string name="quick_action_show_hide_contour_lines">Vis/skjul koter</string>
+    <string name="quick_action_hillshade_descr">Å trykke på denne handlingsknappen viser eller skjuler relieffskygge på kartet</string>
+    <string name="quick_action_hillshade_show">Vis relieffskygge</string>
+    <string name="quick_action_hillshade_hide">Skjul relieffskygge</string>
+    <string name="quick_action_show_hide_hillshade">Vis/skjul relieffskygge</string>
+    <string name="tts_initialization_error">Kan ikke starte tekst-til-tale -motor</string>
+    <string name="simulate_your_location_gpx_descr">Simuler din posisjon ved bru av et innspilt GPX-spor.</string>
 </resources>
