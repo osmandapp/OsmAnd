@@ -1757,7 +1757,7 @@
     <string name="fav_point_emoticons_message">Sık Kullanılan adı, emoticon içeren metni dosyaya kaydetmek için %1$s olarak değiştirildi.</string>
     <string name="print_route">Yazdırma yolu</string>
     <string name="fav_point_dublicate">Yinelenen Sık Kullanılan adı belirtildi</string>
-    <string name="fav_point_dublicate_message">Sık Kullanılan, yinelemeyi önlemek için %1$ olarak yeniden adlandırıldı.</string>
+    <string name="fav_point_dublicate_message">Sık Kullanılan, yinelemeyi önlemek için %1$s olarak yeniden adlandırıldı.</string>
     <string name="traffic_warning_border_control">Sınır kontrolü</string>
     <string name="traffic_warning_payment">Gişe</string>
     <string name="traffic_warning_calming">Trafik-hızı-yavaşlatıcı-düzenek</string>
