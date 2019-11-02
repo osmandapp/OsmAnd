@@ -1913,4 +1913,5 @@
     <string name="poi_faa">FAA kodu</string>
     <string name="poi_artwork_type_sculpture">Sanat eseri türü: heykel</string>
     <string name="poi_internet_access_type_yes">İnternet erişimi var</string>
+    <string name="poi_cash_withdrawal_bank_card">Nakit para çekme</string>
 </resources>
