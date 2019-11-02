@@ -2529,7 +2529,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Éviter les routes sur glace, les fjords</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">Éviter les routes sur glace et les fjords.</string>
     <string name="make_round_trip">Faire une boucle</string>
-    <string name="osn_modify_dialog_error">Impossible de modifier la note</string>
+    <string name="osn_modify_dialog_error">Impossible de modifier la note.</string>
     <string name="osn_modify_dialog_title">Modifier la note</string>
     <string name="context_menu_item_modify_note">Modifier la note OSM</string>
     <string name="make_round_trip_descr">Copier le Départ en tant que Destination.</string>
@@ -2578,7 +2578,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="show_guide_line_descr">Afficher les instructions de guidage de votre position vers les marques actives.</string>
     <string name="show_arrows_descr">Afficher une ou deux flèches indiquant la direction vers les marques actives.</string>
     <string name="distance_indication_descr">Indiquez comment afficher la distance avec les marques actives.</string>
-    <string name="active_markers_descr">Sélectionnez le nombre d\'indications de direction à afficher.</string>
+    <string name="active_markers_descr">Indiquez le nombre d\'indications de direction à afficher :</string>
     <string name="shared_string_more_without_dots">Plus</string>
     <string name="looking_for_tracks_with_waypoints">Recherche de fichiers de trace GPX avec points de passage</string>
     <string name="empty_state_osm_edits">Créer et modifier des éléments OSM</string>
@@ -2854,9 +2854,9 @@ représentant la zone : %1$s x %2$s</string>
     <string name="quick_action_switch_night_mode">Mode Nuit</string>
     <string name="quick_action_day_night_switch_mode">Bascule les modes Jour / Nuit</string>
     <string name="lang_gn_py">Guarani</string>
-    <string name="add_destination_point">Ajouter destination</string>
+    <string name="add_destination_point">Définir l\'arrivée</string>
     <string name="add_intermediate_point">Ajouter étape</string>
-    <string name="add_start_point">Ajouter départ</string>
+    <string name="add_start_point">Définir le départ</string>
     <string name="intermediate_waypoint">Étape</string>
     <string name="transfers">transferts</string>
     <string name="on_foot">à pied</string>
@@ -2884,7 +2884,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="add_work">Ajouter travail</string>
     <string name="work_button">Travail</string>
     <string name="previous_route">Itinéraire précédent</string>
-    <string name="add_destination_query">Veuillez commencer en ajoutant une Destination</string>
+    <string name="add_destination_query">Veuillez commencer par ajouter une Destination</string>
     <string name="shared_string_swap">Permuter</string>
     <string name="show_more">Afficher plus</string>
     <string name="tracks_on_map">Traces affichées</string>
@@ -2977,7 +2977,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="routing_attr_avoid_train_name">Éviter le train</string>
     <string name="routing_attr_avoid_train_description">Éviter le train</string>
     <string name="routing_attr_avoid_subway_name">Éviter le métro</string>
-    <string name="routing_attr_avoid_subway_description">Éviter le métro et les transports ferrés</string>
+    <string name="routing_attr_avoid_subway_description">Évite le métro et les transports ferrés</string>
     <string name="routing_attr_avoid_ferry_name">Éviter le ferry</string>
     <string name="routing_attr_avoid_ferry_description">Éviter le ferry</string>
     <string name="release_3_3_7">• Affichage du temps d\'attente lors des correspondances
@@ -3072,7 +3072,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="routing_attr_max_num_changes_name">Nombre de correspondances</string>
     <string name="turn_screen_on_sensor">Utiliser le capteur de proximité</string>
     <string name="sett_no_ext_input">Aucun</string>
-    <string name="routing_attr_freeride_policy_description">Le freeride et le hors-piste sont des itinéraires non-officiels. Ils ne sont généralement pas damés ni maintenus par les autorités et ne sont pas contrôlés en fin de journée. Entrez à vos risques et périls.</string>
+    <string name="routing_attr_freeride_policy_description">Le freeride et le hors-piste sont des itinéraires non-officiels qui ne sont généralement ni damés ni entretenus et ne sont pas contrôlés en fin de journée par les autorités. Entrez à vos risques et périls.</string>
     <string name="default_speed_setting_descr">Modifiez les paramètres de vitesse par défaut</string>
     <string name="app_mode_ufo">OVNI</string>
     <string name="app_mode_personal_transporter">Gyropode</string>
@@ -3124,7 +3124,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="third_party_routing_type">Calcul d\'itinéraire tiers</string>
     <string name="application_profiles_descr">Sélectionnez les profils affichés dans l\'application.</string>
     <string name="application_profiles">Profils de l\'application</string>
-    <string name="quick_action_need_to_add_item_to_list">Vous devez définir au moins une action pour la barre d\'Actions rapides</string>
+    <string name="quick_action_need_to_add_item_to_list">Ajoutez au moins une action à la barre d\'Actions rapides</string>
     <string name="routing_attr_piste_type_downhill_name">Ski alpin / ski de descente</string>
     <string name="routing_attr_piste_type_downhill_description">Pistes de ski et accès aux remontées mécaniques.</string>
     <string name="routing_attr_piste_type_nordic_name">Ski de randonnée et ski nordique</string>

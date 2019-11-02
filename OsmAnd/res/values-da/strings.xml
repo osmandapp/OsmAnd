@@ -3179,9 +3179,9 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="app_mode_offroad">Offroad</string>
     <string name="edit_profile_setup_title">Opsætning af profil</string>
     <string name="edit_profile_setup_subtitle">Profilen bevarer sine egne indstillinger</string>
-    <string name="edit_profile_setup_map_subtitle">Vælg standardkortindstillinger for profil</string>
-    <string name="edit_profile_screen_options_subtitle">Vælg standardskærmindstillinger for profil</string>
-    <string name="edit_profile_nav_settings_subtitle">Vælg standardnavigationsindstillinger for profil</string>
+    <string name="edit_profile_setup_map_subtitle">Vælg kortindstillinger for profilen</string>
+    <string name="edit_profile_screen_options_subtitle">Vælg skærmindstillinger for profilen</string>
+    <string name="edit_profile_nav_settings_subtitle">Vælg navigationsindstillinger for profilen</string>
     <string name="routing_attr_max_num_changes_description">Angiv det maksimale antal skift</string>
     <string name="routing_attr_max_num_changes_name">Antal skift</string>
     <string name="turn_screen_on_router">Vågn op ved retningsændring</string>
@@ -3238,22 +3238,22 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="years_5">År</string>
     <string name="months_3">Tre måneder</string>
     <string name="price_free">Gratis</string>
-    <string name="get_discount_title">Hent %d%@ med %d%% rabat.</string>
-    <string name="get_free_trial_title">Start %d%@ gratis prøveversion.</string>
+    <string name="get_discount_title">Få %1$d %2$s med %3$s rabat.</string>
+    <string name="get_free_trial_title">Start %1$d %2$s gratis prøveperiode.</string>
     <string name="get_discount_first_part">%1$s for første %2$s</string>
     <string name="get_discount_first_few_part">%1$s for første %2$s</string>
     <string name="get_discount_second_part">derefter %1$s</string>
     <string name="cancel_subscription">Annuller abonnement</string>
     <string name="price_and_discount">%1$s • Spar %2$s</string>
-    <string name="utm_format_descr">OsmAnd bruger UTM standardformat, som er tilsvarende, men ikke identisk med UTM NATO format.</string>
+    <string name="utm_format_descr">OsmAnd bruger UTM standard, som er tilsvarende, men ikke identisk med UTM NATO format.</string>
     <string name="shared_string_example">Eksempel</string>
     <string name="navigate_point_format_utm">UTM standard</string>
     <string name="navigate_point_format_olc">Open Location Code (OLC)</string>
     <string name="coordinates_format_info">Det valgte format vil blive anvendt alle steder i programmet.</string>
     <string name="pref_selected_by_default_for_profiles">Indstillingen er valgt som standard for profiler: %s</string>
-    <string name="change_default_settings">Skift standardindstillinger</string>
-    <string name="discard_changes">Kassér ændringer</string>
-    <string name="apply_to_current_profile">Anvend på den aktuelle %1$s profil</string>
+    <string name="change_default_settings">Skift indstilling</string>
+    <string name="discard_changes">Kassér ændring</string>
+    <string name="apply_to_current_profile">Anvend kun for \"%1$s\"</string>
     <string name="apply_to_all_profiles">Anvend på alle profiler</string>
     <string name="start_up_message_pref">Startmeddelelse</string>
     <string name="turn_screen_on_info">Vis kort under navigationen ovenpå låseskærmen.</string>
@@ -3263,7 +3263,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="appearance">Udseende</string>
     <string name="map_look_descr">Kortets udseende</string>
     <string name="map_look">Kortets udseende</string>
-    <string name="list_of_installed_plugins">Liste over installerede udvidelser</string>
+    <string name="list_of_installed_plugins">Installerede udvidelser</string>
     <string name="configure_navigation">Konfigurer navigation</string>
     <string name="general_settings_profile_descr">Tema, enheder, region</string>
     <string name="configure_profile">Konfigurer profil</string>
@@ -3275,20 +3275,20 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="manage_profiles">Administrer programprofiler…</string>
     <string name="osmand_settings_descr">Påvirker hele programmet</string>
     <string name="osmand_settings">Indstillinger</string>
-    <string name="copy_from_other_profile">Kopiér fra anden profil</string>
+    <string name="copy_from_other_profile">Kopiér fra en anden profil</string>
     <string name="turn_screen_on">Tænd for skærmen</string>
     <string name="map_during_navigation_info">Kort under navigationen</string>
     <string name="map_during_navigation">Kort under navigationen</string>
     <string name="shared_string_other">Andre</string>
     <string name="vehicle_parameters_descr">Vægt, højde, hastighed</string>
-    <string name="vehicle_parameters">Køretøjets parametre</string>
+    <string name="vehicle_parameters">Køretøjsparametre</string>
     <string name="voice_announces_info">Stemmemeddelelser afspilles kun under navigation.</string>
     <string name="voice_announces_descr">Navigation instruktion og meddelelser</string>
     <string name="voice_announces">Talevejledning</string>
     <string name="screen_alerts">Alarmer på skærmen</string>
-    <string name="route_parameters_descr">Konfiguration af ruteparametre</string>
+    <string name="route_parameters_descr">Konfigurer ruteparametre</string>
     <string name="route_parameters">Ruteparametre</string>
-    <string name="configure_profile_info">Alle indstillinger nedenfor påvirker kun den valgte profil.</string>
+    <string name="configure_profile_info">Indstillinger for profil:</string>
     <string name="analytics_pref_title">Analyser</string>
     <string name="application_profile_changed">Programprofil ændret til \"%s\"</string>
     <string name="logcat_buffer">Logcat-buffer</string>
@@ -3299,7 +3299,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="change_data_storage_full_description">Flyt datafiler til den nye destination\?
 \n%1$s&gt;%2$s</string>
     <string name="enter_path_to_folder">Indtast sti til mappen</string>
-    <string name="shared_string_select_folder">Vælg mappe</string>
+    <string name="shared_string_select_folder">Mappe…</string>
     <string name="paste_Osmand_data_folder_path">Indsæt sti til mappen med data</string>
     <string name="change_osmand_data_folder_question">Skift datamappe\?</string>
     <string name="move_maps_to_new_destination">Flyt til den nye destination</string>
@@ -3337,9 +3337,9 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="shared_string_memory_gb_desc">%1$s GB</string>
     <string name="shared_string_memory_mb_desc">%1$s MB</string>
     <string name="shared_string_memory_kb_desc">%1$s KB</string>
-    <string name="swap_start_and_destination"> string name=\"map_legend_item_description\"&gt;Signaturforklaring til OsmAnd standard kortformat, internetforbindelse er nødvendig&lt;/string </string>
+    <string name="swap_start_and_destination"></string>
     <string name="data_storage_preference_summary">%1$s • %2$s</string>
-    <string name="data_storage_space_description">%1$s GB ledig • %2$s GB totalt</string>
+    <string name="data_storage_space_description">%1$s GB ledig (af %2$s GB)</string>
     <string name="track_storage_directory">Overvåg lagringsmappen</string>
     <string name="track_storage_directory_descrp">Spor kan gemmes i optagemappen eller i månedlige eller daglige mapper.</string>
     <string name="store_tracks_in_rec_directory">Gem optagede spor i optagemappen</string>
@@ -3371,7 +3371,7 @@ Repræsenterer område: %1$s x %2$s</string>
 \n• Andre fejlrettelser
 \n
 \n"</string>
-    <string name="apply_preference_to_all_profiles">Anvend ændringer på alle profiler eller kun på valgte.</string>
+    <string name="apply_preference_to_all_profiles">"Anvend ændringer på alle profiler eller kun på  den aktuelt valgte."</string>
     <string name="shared_preference">Delt</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">Foretræk ikke-asfalterede veje</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">Foretræk ikke-asfalterede veje.</string>
@@ -3379,7 +3379,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="quick_action_contour_lines_descr">Tryk på genvejsknappen viser eller skjuler højdekurver på kortet</string>
     <string name="quick_action_contour_lines_show">Vis højdekurver</string>
     <string name="quick_action_contour_lines_hide">Skjul højdekurver</string>
-    <string name="quick_action_show_hide_contour_lines">Vis/Skjul højdekurver</string>
+    <string name="quick_action_show_hide_contour_lines">Vis/skjul højdekurver</string>
     <string name="quick_action_hillshade_descr">Tryk på genvejsknappenviser eller skjuler reliefskygger på kortet</string>
     <string name="quick_action_hillshade_show">Vis reliefskygger</string>
     <string name="quick_action_hillshade_hide">Skjul reliefskygger</string>

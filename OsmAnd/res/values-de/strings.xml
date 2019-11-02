@@ -2461,8 +2461,8 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="shared_string_reset">Zurücksetzen</string>
     <string name="ascent_descent">Aufstieg/Abstieg</string>
     <string name="track_storage_directory">Track Speicherordner</string>
-    <string name="track_storage_directory_descrp">Tracks können im Rec Ordner oder in Monats- bzw. Tagesordnern gespeichert werden.</string>
-    <string name="store_tracks_in_rec_directory">Aufgezeichnete Tracks im Rec Ordner speichern</string>
+    <string name="track_storage_directory_descrp">Tracks können im Rec-Ordner, in Monats- oder Tagesordnern gespeichert werden.</string>
+    <string name="store_tracks_in_rec_directory">Aufgezeichnete Tracks im Rec-Ordner speichern</string>
     <string name="store_tracks_in_monthly_directories">Aufgezeichnete Tracks in Monatsordnern speichern</string>
     <string name="store_tracks_in_monthly_directories_descrp">Aufgezeichnete Tracks in nach Aufzeichnungsmonat benannten Unterordnern speichern (z. B. 2018-01).</string>
     <string name="store_tracks_in_daily_directories">Aufgezeichnete Tracks in Tagesordnern speichern</string>
@@ -2557,7 +2557,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="map_orientation_change_in_accordance_with_speed">Kartenausrichtungsgrenzwert</string>
     <string name="map_orientation_change_in_accordance_with_speed_descr">Auswählen, bei welcher Geschwindigkeit die Kartenausrichtung von \'Nach Bewegungsrichtung\' auf \'Nach Kompass\' umschaltet.</string>
     <string name="marker_moved_to_history">Kartenmarkierung in den Verlauf verschoben</string>
-    <string name="osn_modify_dialog_error">Notiz konnte nicht geändert werden</string>
+    <string name="osn_modify_dialog_error">Notiz konnte nicht geändert werden.</string>
     <string name="osn_modify_dialog_title">Notiz ändern</string>
     <string name="context_menu_item_modify_note">OSM-Notiz ändern</string>
     <string name="make_round_trip_descr">Kopie des Startpunkts als Ziel hinzufügen.</string>
@@ -2605,7 +2605,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="shared_string_gpx_waypoints">Track Wegpunkte</string>
     <string name="modify_the_search_query">Suchanfrage verändern.</string>
     <string name="empty_state_osm_edits">Erstellen oder ändern von OSM-Objekten</string>
-    <string name="empty_state_osm_edits_descr">OSM-POI erstellen oder verändern, OSM-Notizen eröffnen oder bearbeiten, und aufgezeichnete GPX-Dateien hinzufügen.</string>
+    <string name="empty_state_osm_edits_descr">OSM-POIs erstellen oder verändern, OSM-Notizen eröffnen oder bearbeiten, und aufgezeichnete GPX-Dateien hinzufügen.</string>
     <string name="shared_string_deleted">Gelöscht</string>
     <string name="shared_string_edited">Bearbeitet</string>
     <string name="shared_string_added">Hinzugefügt</string>
@@ -2653,7 +2653,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="show_guide_line_descr">Richtungsanzeiger von Ihrem Standort zu aktiven Markierungspunkten einblenden.</string>
     <string name="show_arrows_descr">Ein oder zwei Pfeile anzeigen, die die Richtung zu den aktiven Markierungen angeben.</string>
     <string name="distance_indication_descr">Wählen Sie aus, wie der Abstand zu aktiven Markierungen angezeigt werden soll.</string>
-    <string name="active_markers_descr">Wählen Sie aus, wie viele Richtungsanzeiger angezeigt werden sollen.</string>
+    <string name="active_markers_descr">Wählen Sie die Anzahl der Fahrtrichtungsanzeiger:</string>
     <string name="osm_recipient_stat">%1$s bearbeitet, Summe %2$s mBTC</string>
     <string name="osm_recipients_label">OSM-Empfänger</string>
     <string name="total_donations">Spenden insgesamt</string>
@@ -2687,8 +2687,8 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="enter_the_file_name">Dateinamen eingeben.</string>
     <string name="map_import_error">Fehler beim Kartenimport</string>
     <string name="map_imported_successfully">Karte importiert</string>
-    <string name="distance_farthest">Entfernung: entfernteste zuerst</string>
-    <string name="distance_nearest">Entfernung: nächstgelegene zuerst</string>
+    <string name="distance_farthest">Entfernteste zuerst</string>
+    <string name="distance_nearest">Nächstgelegene zuerst</string>
     <string name="enter_lon">Längengrad eingeben</string>
     <string name="enter_lat">Breitengrad eingeben</string>
     <string name="enter_lat_and_lon">Längen- und Breitengrad eingeben</string>
@@ -2713,7 +2713,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="select_waypoints_category_description">Fügen Sie alle Wegpunkte des Tracks hinzu oder wählen Sie einzelne Kategorien aus.</string>
     <string name="shared_string_total">Total</string>
     <string name="use_two_digits_longitude">Zweistelligen Längengrad verwenden</string>
-    <string name="wikivoyage_search_hint">Suche: Land, Stadt, Provinz</string>
+    <string name="wikivoyage_search_hint">Suche nach Land, Stadt oder Provinz</string>
     <string name="shared_string_read">Lesen</string>
     <string name="saved_articles">Artikel mit Lesezeichen</string>
     <string name="shared_string_explore">Durchsuchen</string>
@@ -2729,7 +2729,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="online_webpage_warning">Seite ist nur online abrufbar. Im Webbrowser öffnen?</string>
     <string name="delete_search_history">Suchverlauf löschen</string>
     <string name="purchase_dialog_travel_description">Für die Offline Reiseführerfunktionalität, kaufen Sie einen der folgenden Artikel:</string>
-    <string name="purchase_dialog_subtitle">Passenden Artikel auswählen:</string>
+    <string name="purchase_dialog_subtitle">Passenden Artikel auswählen</string>
     <string name="shared_string_dont">Nicht</string>
     <string name="shared_string_do">Tun</string>
     <string name="shared_string_only_with_wifi">Nur mit WLAN</string>
@@ -2744,15 +2744,14 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="download_file">Datei herunterladen</string>
     <string name="start_editing_card_image_text">Der kostenlose weltweite Reiseführer, den jeder bearbeiten kann.</string>
     <string name="welcome_to_open_beta_description">Die Reisefüher basieren derzeit auf Wikivoyage. Testen Sie alle Funktionen während des Open-Beta-Tests kostenlos. Danach steht die Reisefüherfunktionalität den Abonnenten von OsmAnd Unlimited und den Besitzern von OsmAnd+ zur Verfügung.</string>
-    <string name="start_editing_card_description">Sie können und sollten Artikel auf Wikivoyage bearbeiten. Teilen Sie Wissen, Erfahrung, Talent und Ihre Aufmerksamkeit</string>
+    <string name="start_editing_card_description">Sie können und sollten Artikel auf Wikivoyage bearbeiten. Teilen Sie Wissen, Erfahrung, Talent und Ihre Aufmerksamkeit.</string>
     <string name="start_editing">Bearbeitung starten</string>
     <string name="get_unlimited_access">Erhalten Sie unbegrenzten Zugang</string>
     <string name="welcome_to_open_beta">Willkommen zur Open Beta</string>
     <string name="wikivoyage_travel_guide">Reiseführer</string>
     <string name="wikivoyage_travel_guide_descr">Führt innerhalb von OsmAnd ohne Internetverbindung zu den interessantesten Orten der Welt.</string>
-    <string name="monthly_map_updates">Kartenaktualisierungen: <b>jeden Monat</b>
-    </string>
-    <string name="daily_map_updates">Kartenaktualisierungen: <b>jede Stunde</b>
+    <string name="monthly_map_updates"> string name=\"route_descr_current_location\"&gt;Aktueller Standort&lt;/string </string>
+    <string name="daily_map_updates">&lt;b&gt; Stündliche &lt;/ b&gt; Kartenaktualisierungen<b>jede Stunde</b>
     </string>
     <string name="in_app_purchase">In-App-Kauf</string>
     <string name="in_app_purchase_desc">Einmalige Zahlung</string>
@@ -2791,16 +2790,15 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="download_all">Alles herunterladen</string>
     <string name="hide_full_description">Vollständige Beschreibung ausblenden</string>
     <string name="show_full_description">Vollständige Beschreibung anzeigen</string>
-    <string name="nautical_render_descr">Nautischer Navigationsstil. Hauptmerkmale: Bojen, Leuchttürme, Flussläufe, Seewege und Markierungen, Häfen, Seezeichendienste, Tiefenlinien.</string>
-    <string name="ski_map_render_descr">Stil für Skifahrer. Hauptmerkmale: Zweckdienliches Rendern von Pisten, Liften und anderen Einrichtungen beim Skifahren. Weniger störende sekundäre Kartenobjekte.</string>
-    <string name="light_rs_render_descr">Einfacher und kontrastreicher Stil für die Navigation im Auto. Schonend für die Augen im Nachtmodus. Hauptmerkmale: Konturlinien, Straßendarstellung in kontrastreichem Orange, weniger störende sekundäre Kartenobjekte.</string>
-    <string name="topo_render_descr">Kontraststil für Wandern, Trekking und Radfahren in der Natur. Gute Lesbarkeit bei komplexer Außenbeleuchtung. Hauptmerkmale: Kontrastreiche Straßen und natürliche Objekte, verschiedene Arten von Routen, Höhenlinien mit erweiterten Einstellungen, mehr Details bei entsprechenden Zoomstufen als der Standardstil. Die Option Oberflächenintegrität ermöglicht die Unterscheidung der Straßenoberflächenqualität. Kein Nachtmodus.</string>
-    <string name="mapnik_render_descr">Alter \'Mapnik\'-Stil, Standard-Rendering-Stil. Hauptmerkmale: Die Farben ähneln dem Mapnik-Stil.</string>
-    <string name="default_render_descr">Universeller Stil. Vereinfachte, sauberere Darstellung in dicht besiedelten Städten. Hauptmerkmale: Höhenlinien, Routen, Oberflächenqualität, Zufahrtsbeschränkungen, Straßenschilder, Wegeführung nach SAC-Skala, Wildwassersportmerkmale.</string>
+    <string name="nautical_render_descr">Für nautische Navigation. Hauptmerkmale: Bojen, Leuchttürme, Flussläufe, Seewege und Markierungen, Häfen, Seezeichendienste und Tiefenlinien.</string>
+    <string name="ski_map_render_descr">Für Skifahrer. Enthält Pisten, Lifte, Langlaufloipen und mehr. Weniger störende sekundäre Kartenobjekte.</string>
+    <string name="light_rs_render_descr">Einfacher Kartenstil für die Navigation im Auto. Sanfter Nachtmodus, Höhenlinien, kontrastreiche orangefarbene Straßen, dunkelt sekundäre Kartenobjekte ab.</string>
+    <string name="topo_render_descr">Für Wanderungen, Trekking und Naturradtouren. Im Freien lesbar. Kontrastreiche Straßen und Naturobjekte, verschiedene Routentypen, erweiterte Höhenlinienoptionen, zusätzliche Details. Die Einstellung der Oberflächenintegrität unterscheidet die Straßenqualität. Kein Nachtmodus.</string>
+    <string name="mapnik_render_descr">Alter \'Mapnik\'-Stil. Farben ähnlich dem Mapnik-Stil.</string>
+    <string name="default_render_descr">Universeller Stil. Klare Darstellung dicht besiedelter Städte. Hauptmerkmale: Höhenlinien, Routen, Oberflächenqualität, Zufahrtsbeschränkungen, Straßenschilder, Wegeführung nach SAC-Skala, Wildwassersportmerkmale.</string>
     <string name="shared_string_bookmark">Lesezeichen</string>
-    <string name="off_road_render_descr">Geeignet für den Einsatz im Gelände. Geeignet für die Verwendung mit grünen Satellitenbildern als Unterlagekarte. Wichtige Punkte: Reduzierte Hauptstraßendicke, erhöhte Dicke von Strecken, Wegen, Fahrrädern und anderen Routen. Basiert auf dem \'Topo\'-Stil.</string>
-    <string name="touring_view_render_descr">Hoch detaillierter Stil für Touringzwecke. Enthält alle Konfigurationsoptionen des Standardstils. 
-\nZusätzlich: Zeigt so viele Details wie möglich an, insbesondere alle Straßen, Wege und andere Reisemöglichkeiten. Klare visuelle Unterscheidung zwischen den verschiedenen Straßentypen, ähnlich vielen Tourenatlanten. Kontrastreiches Farbschema für den Außenbereich, Tag- und Nachtmodus.</string>
+    <string name="off_road_render_descr">Für den Einsatz im Gelände basierend auf dem \'Topo\'-Kartenstil und zur Verwendung mit grünen Satellitenbildern als Unterlagekarte. Reduzierte Hauptstraßendicke, erhöhte Dicke von Strecken, Wegen, Fahrrädern und anderen Routen.</string>
+    <string name="touring_view_render_descr">Touring-Stil mit hohem Kontrast und maximalen Details. Enthält alle Optionen des OsmAnd-Standardstils und zeigt dabei so viele Details wie möglich an, insbesondere Straßen, Pfade und andere Verkehrswege. Klare Unterscheidung zwischen den Straßentypen durch den \"Touring-Atlas\". Geeignet für den Einsatz bei Tag, Nacht und im Freien.</string>
     <string name="access_intermediate_arrival_time">Ankunftszeit Zwischenziel</string>
     <string name="map_widget_intermediate_time">Reisezeit Zwischenziel</string>
     <string name="unirs_render_descr">Änderung des Standardstils, um den Kontrast von Fußgänger- und Fahrradwegen zu erhöhen. Verwendet Legacy Mapnik Farben.</string>
@@ -2813,9 +2811,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="coord_input_save_as_track">Als Track speichern</string>
     <string name="coord_input_save_as_track_descr">Sie haben %1$s Punkte hinzugefügt. Geben Sie einen Dateinamen ein und klicken Sie auf \"Speichern\".</string>
     <string name="point_deleted">Punkt %1$s gelöscht</string>
-    <string name="send_search_query_description">Es wird Ihre Suchanfrage: <b>\"%1$s\"</b>, sowie Ihr Standort gesendet.<br/>
-        <br/> Keine persönlichen Daten werden gesammelt, Suchdaten werden nur zur Verbesserung des Suchalgorithmus verwendet.<br/>
-    </string>
+    <string name="send_search_query_description"> string name=\"route_descr_current_location\"&gt;Aktueller Standort&lt;/string </string>
     <string name="search_no_results_description">Keine Ergebnisse?
 \nNehmen Sie Kontakt mit uns auf.</string>
     <string name="send_search_query">Suchanfrage senden?</string>
@@ -2858,7 +2854,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="ask_for_location_permission">Bitte gewähren Sie OsmAnd Standortzugriff, um fortzufahren.</string>
     <string name="rendering_value_black_name">Schwarz</string>
     <string name="search_street">Straße suchen</string>
-    <string name="start_search_from_city">Zunächst den Ort wählen</string>
+    <string name="start_search_from_city">Geben Sie zuerst Stadt/Ort/Ortschaft an</string>
     <string name="shared_string_restore">Wiederherstellen</string>
     <string name="keep_passed_markers_descr">Markierungen, die als Gruppe von Favoriten oder GPX-Wegpunkten hinzugefügt wurden, die als \'Passiert\' markiert sind, bleiben auf der Karte erhalten. Wenn die Gruppe nicht aktiv ist, verschwinden die Marker von der Karte.</string>
     <string name="keep_passed_markers">Passierte Markierungen auf der Karte behalten</string>
@@ -2878,8 +2874,8 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="osm_live_payment_renews_quarterly">Verlängert sich vierteljährlich</string>
     <string name="osm_live_payment_renews_annually">Verlängert sich jährlich</string>
     <string name="default_price_currency_format">%1$.2f %2$s</string>
-    <string name="osm_live_payment_header">Wählen Sie den für Sie passenden Zahlungszeitraum aus:</string>
-    <string name="osm_live_payment_contribute_descr">Ein Teil der Einnahmen geht an OpenStreetMap-Mitwirkende.</string>
+    <string name="osm_live_payment_header">Zahlungsintervall:</string>
+    <string name="osm_live_payment_contribute_descr">Spenden helfen bei der Finanzierung der OpenStreetMap-Kartographie.</string>
     <string name="powered_by_osmand">Von OsmAnd</string>
     <string name="osm_live_subscriptions">Abonnements</string>
     <string name="mapillary_menu_title_pano">Nur 360°-Bilder anzeigen</string>
@@ -2892,9 +2888,9 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="quick_action_day_night_switch_mode">Schalter Tag/Nacht Modus</string>
     <string name="run_full_osmand_msg">Sie verwenden {0} Karte, die von OsmAnd unterstützt wird. Möchten Sie die OsmAnd Vollversion starten\?</string>
     <string name="swap_start_and_destination"><b>Start</b> und <b>Ziel</b> tauschen</string>
-    <string name="add_destination_point">Ziel hinzufügen</string>
+    <string name="add_destination_point">Ziel festlegen</string>
     <string name="add_intermediate_point">Zwischenpunkt hinzufügen</string>
-    <string name="add_start_point">Startpunkt hinzufügen</string>
+    <string name="add_start_point">Startpunkt festlegen</string>
     <string name="intermediate_waypoint">Zwischenpunkt</string>
     <string name="transfers">Umstiege</string>
     <string name="on_foot">Zu Fuß</string>
@@ -2921,7 +2917,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="add_home">Zuhause hinzufügen</string>
     <string name="add_work">Arbeitsadresse hinzufügen</string>
     <string name="work_button">Arbeit</string>
-    <string name="add_destination_query">Bitte fügen Sie zuerst das Ziel hinzu</string>
+    <string name="add_destination_query">Bitte legen Sie zuerst das Ziel fest</string>
     <string name="previous_route">Vorherige Route</string>
     <string name="shared_string_swap">Tauschen</string>
     <string name="show_more">Mehr anzeigen</string>
@@ -3008,8 +3004,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="avoid_pt_types_descr">Wählen Sie öffentliche Verkehrsmittel aus, die Sie für die Navigation vermeiden möchten:</string>
     <string name="avoid_pt_types">Verkehrsmittel ausschließen…</string>
     <string name="shared_string_walk">Gehen</string>
-    <string name="save_poi_value_exceed_length">Die maximale Länge des Tags \"%s\" beträgt 255 Zeichen. 
-\nBitte kürzen Sie diesen, um fortzufahren.</string>
+    <string name="save_poi_value_exceed_length">Kürzen sie die Länge des Tags \"%s\" auf weniger als 255 Zeichen.</string>
     <string name="save_poi_value_exceed_length_title">Länge des \"%s\" Wertes</string>
     <string name="quick_action_day_night_mode">%s Modus</string>
     <string name="routing_attr_avoid_sett_name">Kopfsteinpflaster und Pflastersteine vermeiden</string>
@@ -3018,18 +3013,18 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="shared_string_milliradians">Milliradiant</string>
     <string name="angular_measeurement">Winkeleinheit</string>
     <string name="angular_measeurement_descr">Ändern, in welcher Einheit Azimut gemessen wird.</string>
-    <string name="routing_attr_avoid_tram_name">Straßenbahnen meiden</string>
-    <string name="routing_attr_avoid_tram_description">Straßenbahnen meiden</string>
-    <string name="routing_attr_avoid_bus_name">Busse meiden</string>
-    <string name="routing_attr_avoid_bus_description">Busse und Oberleitungsbusse meiden</string>
-    <string name="routing_attr_avoid_share_taxi_name">Sammeltaxi meiden</string>
-    <string name="routing_attr_avoid_share_taxi_description">Sammeltaxi meiden</string>
-    <string name="routing_attr_avoid_train_name">Züge meiden</string>
-    <string name="routing_attr_avoid_train_description">Züge meiden</string>
-    <string name="routing_attr_avoid_subway_name">U-Bahnen meiden</string>
-    <string name="routing_attr_avoid_subway_description">U-Bahnen und leichten Schienenverkehr meiden</string>
-    <string name="routing_attr_avoid_ferry_name">Fähren meiden</string>
-    <string name="routing_attr_avoid_ferry_description">Fähren meiden</string>
+    <string name="routing_attr_avoid_tram_name">Keine Straßenbahnen</string>
+    <string name="routing_attr_avoid_tram_description">Vermeidet Straßenbahnen</string>
+    <string name="routing_attr_avoid_bus_name">Keine Busse</string>
+    <string name="routing_attr_avoid_bus_description">Vermeidet Busse und Oberleitungsbusse</string>
+    <string name="routing_attr_avoid_share_taxi_name">Kein Sammeltaxi</string>
+    <string name="routing_attr_avoid_share_taxi_description">Vermeidet Sammeltaxi</string>
+    <string name="routing_attr_avoid_train_name">Keine Züge</string>
+    <string name="routing_attr_avoid_train_description">Vermeidet Züge</string>
+    <string name="routing_attr_avoid_subway_name">Keine U-Bahnen</string>
+    <string name="routing_attr_avoid_subway_description">Vermeidet U-Bahnen und leichten Schienenverkehr</string>
+    <string name="routing_attr_avoid_ferry_name">Keine Fähren</string>
+    <string name="routing_attr_avoid_ferry_description">Vermeidet Fähren</string>
     <string name="release_3_3_7">• Anzeige der Umsteigezeiten in öffentlichen Verkehrsmitteln 
 \n 
 \n• Korrigierte Benutzeroberfläche für die Routendetails 
@@ -3054,8 +3049,8 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="public_transport_no_route_title">Leider konnte OsmAnd keine für Ihre Einstellungen geeignete Route finden.</string>
     <string name="searching_gps">Suche GPS</string>
     <string name="coordinates_widget">Koordinaten-Widget</string>
-    <string name="rate_dialog_descr">Bitte geben Sie uns 30 Sekunden, in denen Sie Ihr Feedback abgeben und unsere Arbeit auf Google Play bewerten.</string>
-    <string name="button_rate">Bewerten</string>
+    <string name="rate_dialog_descr">Bitte geben Sie uns Feedback und bewerten Sie unsere Arbeit auf Google Play.</string>
+    <string name="button_rate">OK</string>
     <string name="shared_string_privacy_policy">Datenschutzrichtlinie</string>
     <string name="help_us_make_osmand_better">Helfen Sie uns, OsmAnd besser zu machen</string>
     <string name="make_osmand_better_descr">Gestatten Sie OsmAnd, anonyme App-Nutzungsdaten zu sammeln und zu verarbeiten. Wir sammeln und speichern keine Daten zu Ihrem Standort oder zu irgendwelchen Orten, die Sie sich auf der Karte ansehen. 
@@ -3065,13 +3060,13 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="downloaded_maps">Heruntergeladene Karten</string>
     <string name="visited_screens">Besuchte Bildschirme</string>
     <string name="collected_data_descr">Definieren Sie welche Daten Sie OsmAnd erlauben zu teilen.</string>
-    <string name="downloaded_maps_collect_descr">Helfen Sie uns herauszufinden, welche Karten welcher Regionen und Länder die beliebtesten sind.</string>
+    <string name="downloaded_maps_collect_descr">Helfen Sie uns, die Beliebtheit von Karten für Länder und Regionen herauszufinden.</string>
     <string name="visited_screens_collect_descr">Helfen Sie uns, die Beliebtheit von OsmAnd-Funktionen zu verstehen.</string>
-    <string name="privacy_and_security_change_descr">Durch das Antippen von \"Genehmigen\" willigen Sie in unsere %1$s ein</string>
+    <string name="privacy_and_security_change_descr">Auf \"Erlauben\" tippen wenn Sie mit %1$s einverstanden sind</string>
     <string name="settings_privacy_and_security">Datenschutz und Sicherheit</string>
-    <string name="settings_privacy_and_security_desc">Wählen Sie die Daten, die Sie uns freigeben möchten</string>
+    <string name="settings_privacy_and_security_desc">Wählen Sie, welche Daten sie freigeben möchten</string>
     <string name="shared_string_no_thank_you">Nein, danke</string>
-    <string name="shared_string_allow">Genehmigen</string>
+    <string name="shared_string_allow">Erlauben</string>
     <string name="profile_name_hint">Profilname</string>
     <string name="nav_type_hint">Navigationsart</string>
     <string name="app_mode_taxi">Taxi</string>
@@ -3084,19 +3079,19 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="select_icon_profile_dialog_title">Symbol auswählen</string>
     <string name="routing_profile_ski">Ski</string>
     <string name="profile_alert_need_profile_name_title">Profilnamen eingeben</string>
-    <string name="profile_alert_need_profile_name_msg">Der Profilname sollte nicht leer sein!</string>
+    <string name="profile_alert_need_profile_name_msg">Sie müssen zuerst einen Profilnamen angeben.</string>
     <string name="profile_alert_duplicate_name_title">Name bereits in Verwendung</string>
     <string name="profile_alert_duplicate_name_msg">Es gibt bereits ein Profil mit diesem Namen</string>
     <string name="profile_alert_cant_delete_base">Das OsmAnd-Basisprofil kann nicht gelöscht werden</string>
     <string name="profile_alert_need_save_title">Änderungen speichern</string>
-    <string name="profile_alert_need_save_msg">Sie müssen die Änderungen am Profil speichern, bevor Sie fortfahren</string>
+    <string name="profile_alert_need_save_msg">Änderungen am Profil zuerst speichern</string>
     <string name="profile_alert_delete_title">Profil löschen</string>
-    <string name="profile_alert_delete_msg">Möchten Sie das Profil %s wirklich löschen\?</string>
+    <string name="profile_alert_delete_msg">Möchten Sie das Profil \"%s\" wirklich löschen\?</string>
     <string name="select_base_profile_dialog_title">Ein Basisprofil auswählen</string>
     <string name="select_base_profile_dialog_message">Bauen Sie ein eigenes Anwendungsprofil auf einem der Standardprofile der App auf. Dieses bestimmt die Grundeinstellungen wie Voreinstellungen zur Sichtbarkeit von Widgets und die Einheiten für Geschwindigkeit und Entfernungen. Dies sind die App-Standardprofile zusammen mit Beispielen für eigene Anwendungsprofile, die erweitert werden können:</string>
     <string name="select_nav_profile_dialog_title">Navigationsart auswählen</string>
     <string name="base_profile_descr_car">Auto, LKW, Motorrad</string>
-    <string name="base_profile_descr_bicycle">MTB, Moped, Pferd</string>
+    <string name="base_profile_descr_bicycle">Mountainbike, Moped, Pferd</string>
     <string name="base_profile_descr_pedestrian">Gehen, Wandern, Laufen</string>
     <string name="base_profile_descr_public_transport">Alle ÖPV-Arten</string>
     <string name="base_profile_descr_boat">Schiff, Rudern, Segeln</string>
@@ -3110,7 +3105,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="profile_type_descr_string">Typ: %s</string>
     <string name="profile_type_base_string">Basisprofil</string>
     <string name="profile_alert_need_routing_type_title">Navigationsart auswählen</string>
-    <string name="profile_alert_need_routing_type_msg">Bitte wählen Sie eine Navigationsart für das neue Anwendungsprofil aus</string>
+    <string name="profile_alert_need_routing_type_msg">Bitte wählen Sie eine Navigationsart für das neue App-Profil aus</string>
     <string name="routing_profile_geocoding">Geokodierung</string>
     <string name="routing_profile_straightline">Direkte Verbindungslinie</string>
     <string name="routing_profile_broutrer">BRouter (offline)</string>
@@ -3119,7 +3114,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="special_routing_type">Spezielles Routing</string>
     <string name="third_party_routing_type">Routing von Drittanbietern</string>
     <string name="application_profiles_descr">Wählen Sie die Profile aus, die in der App sichtbar sein sollen.</string>
-    <string name="application_profiles">Anwendungsprofile</string>
+    <string name="application_profiles">App-Profile</string>
     <string name="zoom_by_wunderlinq_descr">Ändern Sie den Kartenzoom, indem Sie mit dem Rad nach oben und unten scrollen. Escape bringt Sie zurück zur WunderLINQ App.</string>
     <string name="zoom_by_wunderlinq">WunderLINQ zur Kontrolle verwenden</string>
     <string name="routing_attr_piste_type_skitour_name">Skitouren</string>
@@ -3156,20 +3151,24 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="new_profile">Neues Profil</string>
     <string name="shared_string_crash">Absturz</string>
     <string name="last_launch_crashed">Der letzte Start von OsmAnd ist fehlgeschlagen. Bitte helfen Sie uns, OsmAnd zu verbessern, indem Sie uns über diesen Fehler informieren.</string>
-    <string name="release_3_4">"• Anwendungsprofile: Benutzerdefiniertes Profil nach den eigenen Bedürfnissen mit benutzerdefiniertem Symbol und in eigener Farbe anlegen. 
-\n 
-\n• Benutzerdefinierte Standard- und Min/Max-Geschwindigkeiten für jedes Profil jetzt möglich
-\n 
+    <string name="release_3_4">"• App-Profile: Benutzerdefiniertes Profil nach den eigenen Bedürfnissen mit benutzerdefiniertem Symbol und in eigener Farbe anlegen.
+\n
+\n• Benutzerdefinierte Standard- und Min/Max-Geschwindigkeiten für jedes Profil jetzt möglich 
+\n
 \n•  Widgets mit aktuellen Koordinaten hinzugefügt
-\n 
-\n• Optionen für die Anzeige des Kompass auf der Karte mit einem Radiuslineal ergänzt. 
-\n 
-\n• Verbesserte Kartendownloads im Hintergrund 
-\n 
-\n• Die Sprachauswahl in Wikipedia wurde korrigiert 
-\n 
-\n• Das Verhalten der Kompasstaste während der Navigation wurde korrigiert 
-\n 
+\n
+\n• Optionen für die Anzeige des Kompass auf der Karte mit einem Radiuslineal ergänzt
+\n
+\n• Track-Aufnahmen im Hintergrund korrigiert
+\n
+\n• Verbesserte Kartendownloads im Hintergrund
+\n
+\n• \"Bildschirm einschalten\"-Option wieder hinzugefügt
+\n
+\n• Die Sprachauswahl in Wikipedia wurde korrigiert
+\n
+\n• Das Verhalten der Kompasstaste während der Navigation wurde korrigiert
+\n
 \n• weitere Fehlerbehebungen
 \n
 \n"</string>
@@ -3184,17 +3183,17 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="app_mode_personal_transporter">Segway Personal Transporter</string>
     <string name="edit_profile_setup_title">Profil einrichten</string>
     <string name="edit_profile_setup_subtitle">Das Profil behält seine eigenen Einstellungen bei</string>
-    <string name="edit_profile_setup_map_subtitle">Standardkartenoptionen für das Profil auswählen</string>
-    <string name="edit_profile_screen_options_subtitle">Standardbildschirmoptionen für Profil auswählen</string>
-    <string name="edit_profile_nav_settings_subtitle">Wählen Sie Ihre Standardeinstellungen für die Navigationsprofile</string>
+    <string name="edit_profile_setup_map_subtitle">Kartenoptionen für das Profil auswählen</string>
+    <string name="edit_profile_screen_options_subtitle">Bildschirmoptionen für das Profil auswählen</string>
+    <string name="edit_profile_nav_settings_subtitle">Navigationseinstellungen für das Profil auswählen</string>
     <string name="routing_attr_max_num_changes_description">Bestimmen Sie die maximale Anzahl an Umstiegen</string>
     <string name="routing_attr_max_num_changes_name">Anzahl der Umstiege</string>
     <string name="app_mode_offroad">Offroad</string>
     <string name="external_input_device">Externe Eingabegeräte</string>
     <string name="turn_screen_on_router">Bei Richtungsänderung aufwecken</string>
-    <string name="turn_screen_on_time_descr">Zeitdauer festlegen, für die der Bildschirm eingeschaltet wird.</string>
+    <string name="turn_screen_on_time_descr">Stellen Sie ein, wie lange der Bildschirm eingeschaltet bleiben soll.</string>
     <string name="turn_screen_on_sensor">Annäherungssensor verwenden</string>
-    <string name="turn_screen_on_sensor_descr">Streichen Sie mit der Hand über die Oberfläche des Bildschirms, um ihn während der Navigation einzuschalten.</string>
+    <string name="turn_screen_on_sensor_descr">Streichen Sie mit der Hand über den oberen Teil des Bildschirms, um ihn während der Navigation einzuschalten.</string>
     <string name="turn_on_profile_desc">Bitte wenigstens ein App-Profil einschalten, um diese Einstellung zu verwenden.</string>
     <string name="rendering_attr_winter_road_name">Schneepiste</string>
     <string name="rendering_attr_ice_road_name">Eispiste</string>
@@ -3249,21 +3248,21 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="cancel_subscription">Abonnement beenden</string>
     <string name="price_and_discount">%1$s • Spare %2$s</string>
     <string name="get_discount_title">%1$d %2$s mit %3$s Rabatt erhalten.</string>
-    <string name="get_discount_first_part">%1$s zuerst %2$s</string>
-    <string name="get_discount_first_few_part">%1$s zuerst %2$s</string>
+    <string name="get_discount_first_part">%1$s für die ersten %2$s</string>
+    <string name="get_discount_first_few_part">%1$s für die ersten %2$s</string>
     <string name="configure_profile_info">Einstellungen für Profil:</string>
-    <string name="utm_format_descr">OsmAnd verwendet das UTM-Standardformat, das dem UTM-NATO-Format ähnlich ist, aber nicht mit ihm übereinstimmt.</string>
+    <string name="utm_format_descr">OsmAnd verwendet den UTM-Standard, welches ähnlich aber nicht identisch zum UTM-NATO-Format ist.</string>
     <string name="shared_string_example">Beispiel</string>
     <string name="navigate_point_format_utm">UTM Standard</string>
-    <string name="coordinates_format_info">Das gewählte Format wird an allen Stellen in der App angewandt.</string>
+    <string name="coordinates_format_info">Das gewählte Format wird in der gesamten App angewandt.</string>
     <string name="pref_selected_by_default_for_profiles">Für Profile wird als Vorgabe diese Einstellung gewählt: %s</string>
     <string name="change_default_settings">Einstellung ändern</string>
     <string name="discard_changes">Änderung verwerfen</string>
     <string name="apply_to_current_profile">Nur auf „%1$s“ anwenden</string>
     <string name="apply_to_all_profiles">Auf alle Profile anwenden</string>
     <string name="analytics_pref_title">Analyseinstrumente</string>
-    <string name="turn_screen_on_info">Karte während der Navigation über Sperrbildschirm anzeigen.</string>
-    <string name="route_parameters_info">Diese Einstellungen betreffen die Routenplanung. Sie werden nur auf das ausgewählte Profil „%1$s“ angewandt.</string>
+    <string name="turn_screen_on_info">Karte während der Navigation auf Sperrbildschirm anzeigen.</string>
+    <string name="route_parameters_info">Einstellungen für die Routenplanung des gewählten Profils „%1$s“.</string>
     <string name="wake_time">Aufwachzeit</string>
     <string name="units_and_formats">Einheiten und Formate</string>
     <string name="appearance">Aussehen</string>
@@ -3288,10 +3287,10 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="route_parameters">Routenparameter</string>
     <string name="navigate_point_format_olc">Standortkodierung öffnen</string>
     <string name="start_up_message_pref">Begrüßungsnachricht</string>
-    <string name="screen_alerts_descr">Warnungen werden während der Navigation in der linken, unteren Bildschirmecke angezeigt.</string>
+    <string name="screen_alerts_descr">Warnungen werden während der Navigation unten links angezeigt.</string>
     <string name="map_during_navigation">Karte während Navigation</string>
     <string name="shared_string_other">Weitere</string>
-    <string name="voice_announces_info">Sprachansagen werden nur während der Navigation abgespielt.</string>
+    <string name="voice_announces_info">Sprachansagen finden nur während der Navigation statt.</string>
     <string name="voice_announces_descr">Navigationsanweisungen und -ansagen</string>
     <string name="voice_announces">Sprachansagen</string>
     <string name="screen_alerts">Bildschirmwarnungen</string>
@@ -3344,7 +3343,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="shared_string_memory_kb_desc">%1$s kB</string>
     <string name="shared_sting_tiles">Kacheln</string>
     <string name="data_storage_preference_summary">%1$s • %2$s</string>
-    <string name="data_storage_space_description">%1$s GB frei - Insgesamt %2$s GB</string>
+    <string name="data_storage_space_description">%1$s GB frei (von %2$s GB)</string>
     <string name="shared_string_memory_used_tb_desc">%1$s TB verwendet</string>
     <string name="shared_string_memory_used_gb_desc">%1$s GB verwendet</string>
     <string name="shared_string_memory_used_mb_desc">%1$s MB verwendet</string>

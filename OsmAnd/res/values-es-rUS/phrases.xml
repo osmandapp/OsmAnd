@@ -313,7 +313,7 @@
     <string name="poi_prosecutor">Fiscal</string>
     <string name="poi_pension_fund">Seguridad social;Fondo de pensiones</string>
     <string name="poi_migration">Migración</string>
-    <string name="poi_tax_inspection">Inspección fiscal;Fiscalización (AFIP)</string>
+    <string name="poi_tax_inspection">Inspección fiscal;Fiscalización (AFIP);Centro de impuestos</string>
     <string name="poi_office_administrative">Oficina administrativa</string>
     <string name="poi_customs">Aduana</string>
     <string name="poi_city">Ciudad</string>
@@ -3735,4 +3735,22 @@
     <string name="poi_charge">Cargo</string>
     <string name="poi_pet_grooming">Cuidado de mascotas</string>
     <string name="poi_atm_yes">Cajero automático: sí</string>
+    <string name="poi_cash_withdrawal_bank_card">Retiro de efectivo</string>
+    <string name="poi_cash_withdrawal_yes">Retiro de efectivo: sí</string>
+    <string name="poi_cash_withdrawal">Retiro de efectivo</string>
+    <string name="poi_cash_withdrawal_operator">Operador del retiro de efectivo</string>
+    <string name="poi_cash_withdrawal_type_checkout">Tipo de retiro de efectivo: pago</string>
+    <string name="poi_cash_withdrawal_type_self_checkout">Tipo de retiro de efectivo: autopago</string>
+    <string name="poi_cash_withdrawal_limit">Límite de retiro de efectivo</string>
+    <string name="poi_cash_withdrawal_currency">Moneda de retiro de efectivo</string>
+    <string name="poi_cash_withdrawal_purchase_required_yes">Retiro de efectivo: se requiere compra</string>
+    <string name="poi_cash_withdrawal_purchase_required_no">Retiro de efectivo: no se requiere compra</string>
+    <string name="poi_cash_withdrawal_fee_yes">Cargo por retiro de efectivo: sí</string>
+    <string name="poi_cash_withdrawal_fee_no">Cargo por retiro de efectivo: no</string>
+    <string name="poi_cash_withdrawal_purchase_minimum">Retiro de efectivo: compra mínima</string>
+    <string name="poi_cash_withdrawal_foreign_cards">Retiro de efectivo: tarjetas extranjeras</string>
+    <string name="poi_cash_withdrawal_postfinance_card">Tarjeta post-finanzas</string>
+    <string name="poi_cash_withdrawal_migros_bank">Banco Migros</string>
+    <string name="poi_cash_withdrawal_girocard">Girocard</string>
+    <string name="poi_cash_withdrawal_postbank">Postbanco</string>
 </resources>
