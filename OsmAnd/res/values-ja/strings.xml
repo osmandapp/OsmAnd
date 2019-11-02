@@ -447,7 +447,7 @@ POIの更新は利用できません</string>
     <string name="context_menu_item_create_poi">POIを作成</string>
     <string name="shared_string_yes">はい</string>
     <string name="shared_string_cancel">キャンセル</string>
-    <string name="shared_string_apply">決定</string>
+    <string name="shared_string_apply">確定</string>
     <string name="shared_string_add">追加</string>
     <string name="shared_string_no">いいえ</string>
     <string name="add_favorite_dialog_top_text">お気に入りの名前を入力</string>
@@ -638,7 +638,7 @@ POIの更新は利用できません</string>
     <string name="recording_description">記録中 %1$s %3$s %2$s</string>
     <string name="recording_default_name">記録中</string>
     <string name="shared_string_control_stop">停止</string>
-    <string name="shared_string_control_start">実行</string>
+    <string name="shared_string_control_start">スタート地点</string>
     <string name="map_widget_av_notes">音声/動画メモ</string>
     <string name="osmand_srtm_short_description_80_chars">オフライン等高線のためのOsmAndプラグイン</string>
     <string name="map_widget_distancemeasurement">距離の測定</string>
@@ -807,7 +807,7 @@ POIの更新は利用できません</string>
     <string name="transport_search_desc">公共交通機関検索</string>
     <string name="favourites_search_desc">お気に入り検索</string>
     <string name="offline_navigation_not_available">OsmAndオフラインナビゲーションが一時的に利用できません。</string>
-    <string name="unknown_from_location">出発点は、まだ決定されていません</string>
+    <string name="unknown_from_location">出発地点が、まだ確定されていません</string>
     <string name="basemap_was_selected_to_download">ベースマップはアプリケーションの動作に必要なので、ダウンロード候補として選択されました。</string>
     <string name="local_indexes_cat_tile">オンライン(またはキャッシュ済み)タイルマップ</string>
     <string name="local_indexes_cat_map">標準マップ(ベクター形式)</string>
@@ -2558,7 +2558,7 @@ POIの更新は利用できません</string>
     <string name="none_point_error">少なくとも1つのポイントを追加してください。</string>
     <string name="enter_gpx_name">GPXファイル名:</string>
     <string name="show_on_map_after_saving">保存後マップ上に表示</string>
-    <string name="measurement_tool_action_bar">マップを閲覧してポイントを追加</string>
+    <string name="measurement_tool_action_bar">閲覧マップから計測したい各地点を選択</string>
     <string name="measurement_tool">距離測定</string>
     <string name="quick_action_resume_pause_navigation">ナビゲーションの再開/一時停止</string>
     <string name="quick_action_resume_pause_navigation_descr">このボタンをタップすることでナビゲーションを一時停止または再開できます。</string>
@@ -3242,7 +3242,7 @@ POIの更新は利用できません</string>
     <string name="navigate_point_format_olc">Open Location Code(OLC)</string>
     <string name="coordinates_format_info">選択した形式は、アプリ内すべての場面に適用されます。</string>
     <string name="pref_selected_by_default_for_profiles">この設定で選択されたプロファイル\"%s\"が起動時にデフォルト表示されます</string>
-    <string name="change_default_settings">デフォルト設定の変更</string>
+    <string name="change_default_settings">設定の変更</string>
     <string name="discard_changes">変更を取消</string>
     <string name="apply_to_current_profile">この選択を%1$sプロファイルに適用</string>
     <string name="apply_to_all_profiles">すべてのプロファイルに適用</string>
