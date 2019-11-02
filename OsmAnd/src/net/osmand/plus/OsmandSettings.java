@@ -1535,10 +1535,10 @@ public class OsmandSettings {
 	public static final String SAVE_CURRENT_TRACK = "save_current_track"; //$NON-NLS-1$
 
 	public final CommonPreference<Boolean> SAVE_GLOBAL_TRACK_TO_GPX = new BooleanPreference("save_global_track_to_gpx", false).makeGlobal().cache();
-	public final CommonPreference<Integer> SAVE_GLOBAL_TRACK_INTERVAL = new IntPreference("save_global_track_interval", 5000).makeGlobal().cache();
-	public final CommonPreference<Boolean> SAVE_GLOBAL_TRACK_REMEMBER = new BooleanPreference("save_global_track_remember", false).makeGlobal().cache();
+	public final CommonPreference<Integer> SAVE_GLOBAL_TRACK_INTERVAL = new IntPreference("save_global_track_interval", 5000).makeProfile().makeGeneral().cache();
+	public final CommonPreference<Boolean> SAVE_GLOBAL_TRACK_REMEMBER = new BooleanPreference("save_global_track_remember", false).makeProfile().makeGeneral().cache();
 	// this value string is synchronized with settings_pref.xml preference name
-	public final CommonPreference<Boolean> SAVE_TRACK_TO_GPX = new BooleanPreference("save_track_to_gpx", false).makeProfile().cache();
+	public final CommonPreference<Boolean> SAVE_TRACK_TO_GPX = new BooleanPreference("save_track_to_gpx", false).makeProfile().makeGeneral().cache();
 
 	{
 		SAVE_TRACK_TO_GPX.setModeDefaultValue(ApplicationMode.CAR, false);
@@ -1550,9 +1550,9 @@ public class OsmandSettings {
 	public static final Integer MONTHLY_DIRECTORY = 1;
 	public static final Integer DAILY_DIRECTORY = 2;
 
-	public final CommonPreference<Boolean> DISABLE_RECORDING_ONCE_APP_KILLED = new BooleanPreference("disable_recording_once_app_killed", false).makeGlobal();
+	public final CommonPreference<Boolean> DISABLE_RECORDING_ONCE_APP_KILLED = new BooleanPreference("disable_recording_once_app_killed", false).makeProfile().makeGeneral();
 
-	public final CommonPreference<Integer> TRACK_STORAGE_DIRECTORY = new IntPreference("track_storage_directory", 0).makeGlobal();
+	public final CommonPreference<Integer> TRACK_STORAGE_DIRECTORY = new IntPreference("track_storage_directory", 0).makeProfile().makeGeneral();
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> FAST_ROUTE_MODE = new BooleanPreference("fast_route_mode", true).makeProfile();
@@ -1660,7 +1660,7 @@ public class OsmandSettings {
 	public final CommonPreference<Integer> CURRENT_TRACK_COLOR = new IntPreference("current_track_color", 0).makeGlobal().cache();
 
 	// this value string is synchronized with settings_pref.xml preference name
-	public final CommonPreference<Integer> SAVE_TRACK_INTERVAL = new IntPreference("save_track_interval", 5000).makeProfile();
+	public final CommonPreference<Integer> SAVE_TRACK_INTERVAL = new IntPreference("save_track_interval", 5000).makeProfile().makeGeneral();
 
 	{
 		SAVE_TRACK_INTERVAL.setModeDefaultValue(ApplicationMode.CAR, 3000);
@@ -1669,40 +1669,40 @@ public class OsmandSettings {
 	}
 	
 	// Please note that SAVE_TRACK_MIN_DISTANCE, SAVE_TRACK_PRECISION, SAVE_TRACK_MIN_SPEED should all be "0" for the default profile, as we have no interface to change them
-	public final CommonPreference<Float> SAVE_TRACK_MIN_DISTANCE = new FloatPreference("save_track_min_distance", 0).makeGlobal();
+	public final CommonPreference<Float> SAVE_TRACK_MIN_DISTANCE = new FloatPreference("save_track_min_distance", 0).makeProfile().makeGeneral();
 	//{
 	//	SAVE_TRACK_MIN_DISTANCE.setModeDefaultValue(ApplicationMode.CAR, 5.f);
 	//	SAVE_TRACK_MIN_DISTANCE.setModeDefaultValue(ApplicationMode.BICYCLE, 5.f);
 	//	SAVE_TRACK_MIN_DISTANCE.setModeDefaultValue(ApplicationMode.PEDESTRIAN, 5.f);
 	//}
-	public final CommonPreference<Float> SAVE_TRACK_PRECISION = new FloatPreference("save_track_precision", 50.0f).makeGlobal();
+	public final CommonPreference<Float> SAVE_TRACK_PRECISION = new FloatPreference("save_track_precision", 50.0f).makeProfile().makeGeneral();
 	//{
 //		SAVE_TRACK_PRECISION.setModeDefaultValue(ApplicationMode.CAR, 50.f);
 //		SAVE_TRACK_PRECISION.setModeDefaultValue(ApplicationMode.BICYCLE, 50.f);
 //		SAVE_TRACK_PRECISION.setModeDefaultValue(ApplicationMode.PEDESTRIAN, 50.f);
 	//}
-	public final CommonPreference<Float> SAVE_TRACK_MIN_SPEED = new FloatPreference("save_track_min_speed", 0.f).makeGlobal();
+	public final CommonPreference<Float> SAVE_TRACK_MIN_SPEED = new FloatPreference("save_track_min_speed", 0.f).makeProfile().makeGeneral();
 	//{
 	//	SAVE_TRACK_MIN_SPEED.setModeDefaultValue(ApplicationMode.CAR, 2.f);
 	//	SAVE_TRACK_MIN_SPEED.setModeDefaultValue(ApplicationMode.BICYCLE, 1.f);
 //		SAVE_TRACK_MIN_SPEED.setModeDefaultValue(ApplicationMode.PEDESTRIAN, 0.f);
 	//}
-	public final CommonPreference<Boolean> AUTO_SPLIT_RECORDING = new BooleanPreference("auto_split_recording", true).makeGlobal();
+	public final CommonPreference<Boolean> AUTO_SPLIT_RECORDING = new BooleanPreference("auto_split_recording", true).makeProfile().makeGeneral();
 
-	public final CommonPreference<Boolean> SHOW_TRIP_REC_NOTIFICATION = new BooleanPreference("show_trip_recording_notification", true).makeGlobal();
-
-	// this value string is synchronized with settings_pref.xml preference name
-	public final CommonPreference<Boolean> LIVE_MONITORING = new BooleanPreference("live_monitoring", false).makeGlobal();
+	public final CommonPreference<Boolean> SHOW_TRIP_REC_NOTIFICATION = new BooleanPreference("show_trip_recording_notification", true).makeProfile().makeGeneral();
 
 	// this value string is synchronized with settings_pref.xml preference name
-	public final CommonPreference<Integer> LIVE_MONITORING_INTERVAL = new IntPreference("live_monitoring_interval", 5000).makeGlobal();
+	public final CommonPreference<Boolean> LIVE_MONITORING = new BooleanPreference("live_monitoring", false).makeProfile().makeGeneral();
 
 	// this value string is synchronized with settings_pref.xml preference name
-	public final CommonPreference<Integer> LIVE_MONITORING_MAX_INTERVAL_TO_SEND = new IntPreference("live_monitoring_maximum_interval_to_send", 900000).makeGlobal();
+	public final CommonPreference<Integer> LIVE_MONITORING_INTERVAL = new IntPreference("live_monitoring_interval", 5000).makeProfile().makeGeneral();
+
+	// this value string is synchronized with settings_pref.xml preference name
+	public final CommonPreference<Integer> LIVE_MONITORING_MAX_INTERVAL_TO_SEND = new IntPreference("live_monitoring_maximum_interval_to_send", 900000).makeProfile().makeGeneral();
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<String> LIVE_MONITORING_URL = new StringPreference("live_monitoring_url",
-			"https://example.com?lat={0}&lon={1}&timestamp={2}&hdop={3}&altitude={4}&speed={5}").makeGlobal();
+			"https://example.com?lat={0}&lon={1}&timestamp={2}&hdop={3}&altitude={4}&speed={5}").makeProfile().makeGeneral();
 
 	public final CommonPreference<String> GPS_STATUS_APP = new StringPreference("gps_status_app", "").makeGlobal();
 

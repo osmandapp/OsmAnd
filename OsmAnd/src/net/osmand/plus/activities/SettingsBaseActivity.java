@@ -354,10 +354,14 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 		if (profileSettings) {
 			modes.clear();
 			findViewById(R.id.selector_shadow).setVisibility(View.VISIBLE);
-			for (ApplicationMode a : ApplicationMode.values(app)) {
-				if (a != ApplicationMode.DEFAULT) {
-					modes.add(a);
+			if (this instanceof SettingsNavigationActivity) {
+				for (ApplicationMode a : ApplicationMode.values(app)) {
+					if (a != ApplicationMode.DEFAULT) {
+						modes.add(a);
+					}
 				}
+			} else {
+				modes.addAll(ApplicationMode.values(app));
 			}
 
 			getTypeButton().setVisibility(View.VISIBLE);
@@ -378,18 +382,16 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 
 	    final List<ProfileDataObject> activeModes = new ArrayList<>();
 	    for (ApplicationMode am : ApplicationMode.values(getMyApplication())) {
-		    boolean isSelected = false;
-	    	if (am == selectedAppMode) {
-			    isSelected = true;
-		    }
-	    	if (am != ApplicationMode.DEFAULT) {
+		    boolean isSelected = am == selectedAppMode;
+
+		    if (am != ApplicationMode.DEFAULT || !(this instanceof SettingsNavigationActivity)) {
 			    activeModes.add(new ProfileDataObject(
-				    am.toHumanString(getMyApplication()),
-					getAppModeDescription(am),
-				    am.getStringKey(),
-				    am.getIconRes(),
-				    isSelected,
-				    am.getIconColorInfo()
+					    am.toHumanString(getMyApplication()),
+					    getAppModeDescription(am),
+					    am.getStringKey(),
+					    am.getIconRes(),
+					    isSelected,
+					    am.getIconColorInfo()
 			    ));
 		    }
 	    }
@@ -584,6 +586,10 @@ public abstract class SettingsBaseActivity extends ActionBarPreferenceActivity
 			return changed;
 		}
 		return true;
+	}
+
+	protected Map<String, Map<String, ?>> getListPrefValues() {
+		return listPrefValues;
 	}
 
 	protected OsmandApplication getMyApplication() {
