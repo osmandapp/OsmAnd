@@ -2903,7 +2903,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="sit_on_the_stop">Panneau d\'affichage à l\'arrêt</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Appuyez sur ce bouton pour afficher / masquer les traces GPX sélectionnées</string>
     <string name="transfers_size">%1$d transferts</string>
-    <string name="add_start_and_end_points">Ajouter des points de départ et d\'arrivée</string>
+    <string name="add_start_and_end_points">Ajouter un point de départ et d\'arrivée</string>
     <string name="route_add_start_point">Ajouter un point de départ</string>
     <string name="route_descr_select_start_point">Sélectionnez un point de départ</string>
     <string name="rendering_attr_surface_unpaved_name">Non revêtu</string>
@@ -2949,7 +2949,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="rendering_attr_surface_paving_stones_name">Pavés réguliers</string>
     <string name="rendering_attr_surface_pebblestone_name">Galets</string>
     <string name="rendering_attr_surface_compacted_name">Compacté</string>
-    <string name="public_transport_warning_descr_blog">Pour savoir comment OsmAnd calcule les routes, visitez notre blog.</string>
+    <string name="public_transport_warning_descr_blog">Pour savoir comment OsmAnd calcule les itinéraires, visitez notre blog.</string>
     <string name="public_transport_warning_title">Les itinéraires en transports publics sont actuellement en phase de test. Des erreurs ou des imprécisions peuvent avoir lieu.</string>
     <string name="add_intermediate">Ajouter un point intermédiaire</string>
     <string name="shared_string_walk">Marche</string>
@@ -2998,7 +2998,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="files_moved">%1$d fichiers déplacés (%2$s).</string>
     <string name="files_copied">%1$d fichiers copiés (%2$s).</string>
     <string name="files_failed">Impossible de copier %1$d fichiers (%2$s).</string>
-    <string name="files_present">%1$d fichiers (%2$s) sont présents à l\'emplacement précédent \'%3$s\'.</string>
+    <string name="files_present">%1$d fichiers (%2$s) sont présents dans l\'emplacement précédent \'%3$s\'.</string>
     <string name="move_maps">Déplacer les cartes</string>
     <string name="dont_move_maps">Ne pas déplacer</string>
     <string name="public_transport_ped_route_title">L\'itinéraire piéton est approximativement de %1$s et peut-être plus rapide qu\'en transport public</string>
@@ -3010,13 +3010,13 @@ représentant la zone : %1$s x %2$s</string>
     <string name="searching_gps">Recherche des satellites</string>
     <string name="coordinates_widget">Gadget de coordonnées</string>
     <string name="shared_string_privacy_policy">Politique de confidentialité</string>
-    <string name="help_us_make_osmand_better">Aidez-nous à améliorer OsmAnd !</string>
+    <string name="help_us_make_osmand_better">Aidez-nous à améliorer OsmAnd</string>
     <string name="choose_data_to_share">Choisissez le type de données que vous souhaitez partager :</string>
     <string name="downloaded_maps">Cartes téléchargées</string>
     <string name="visited_screens">Écrans visités</string>
     <string name="collected_data_descr">Définissez quelles données vous autorisez OsmAnd à partager.</string>
     <string name="settings_privacy_and_security">Vie privée et Sécurité</string>
-    <string name="settings_privacy_and_security_desc">Sélectionnez les données que vous souhaitez partager avec nous</string>
+    <string name="settings_privacy_and_security_desc">Sélectionnez les données que vous souhaitez partager</string>
     <string name="shared_string_no_thank_you">Non, merci</string>
     <string name="shared_string_allow">Autoriser</string>
     <string name="profile_name_hint">Nom du profil</string>
@@ -3037,13 +3037,13 @@ représentant la zone : %1$s x %2$s</string>
     <string name="profile_alert_need_save_title">Enregistrer les modifications</string>
     <string name="profile_alert_need_save_msg">Vous devez enregistrer les modifications apportées au profil avant de continuer</string>
     <string name="profile_alert_delete_title">Supprimer le profil</string>
-    <string name="profile_alert_delete_msg">Êtes-vous certain de vouloir supprimer le profil %s \?</string>
+    <string name="profile_alert_delete_msg">Êtes-vous certain de vouloir supprimer le profil \"%s\" \?</string>
     <string name="select_base_profile_dialog_title">Sélectionnez un profil de base</string>
     <string name="shared_string_color_magenta">Magenta</string>
     <string name="shared_string_icon">icône</string>
     <string name="collected_data">Données collectées</string>
-    <string name="rate_dialog_descr">Merci de nous consacrer 30 secondes en ajoutant un commentaire et en évaluant notre travail sur Google Play.</string>
-    <string name="button_rate">Noter</string>
+    <string name="rate_dialog_descr">Merci de nous donner votre avis et d\'évaluer notre travail sur Google Play.</string>
+    <string name="button_rate">OK</string>
     <string name="visited_screens_collect_descr">Aidez-nous à analyser quelles sont les fonctions d\'OsmAnd les plus utilisées.</string>
     <string name="select_icon_profile_dialog_title">Sélectionnez une icône</string>
     <string name="profile_alert_need_profile_name_msg">Le nom du profil ne peut pas être vide !</string>
@@ -3068,7 +3068,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="new_profile">Nouveau profil</string>
     <string name="app_mode_monowheel">Mono-roue</string>
     <string name="app_mode_scooter">Scooter</string>
-    <string name="precision_hdop_and_vdop">Précision, horizontale : %1$s, verticale : %2$s</string>
+    <string name="precision_hdop_and_vdop">Précision horizontale : %1$s, Précision verticale : %2$s</string>
     <string name="precision_hdop">Précision horizontale : %s</string>
     <string name="app_mode_offroad">Hors route</string>
     <string name="routing_attr_max_num_changes_name">Nombre de correspondances</string>
@@ -3080,12 +3080,12 @@ représentant la zone : %1$s x %2$s</string>
     <string name="app_mode_personal_transporter">Gyropode</string>
     <string name="edit_profile_setup_title">Paramétrez le profil</string>
     <string name="edit_profile_setup_subtitle">Le profil conserve ses paramètres</string>
-    <string name="edit_profile_setup_map_subtitle">Sélectionnez les paramètres de carte par défaut pour ce profil</string>
-    <string name="edit_profile_screen_options_subtitle">Sélectionnez les paramètres d\'affichage écran par défaut pour ce profil</string>
-    <string name="edit_profile_nav_settings_subtitle">Sélectionnez les paramètres de navigation par défaut pour ce profil</string>
+    <string name="edit_profile_setup_map_subtitle">Sélectionnez les paramètres de la carte pour ce profil</string>
+    <string name="edit_profile_screen_options_subtitle">Sélectionnez les paramètres d\'affichage écran pour ce profil</string>
+    <string name="edit_profile_nav_settings_subtitle">Sélectionnez les paramètres de navigation pour ce profil</string>
     <string name="routing_attr_max_num_changes_description">Indiquez le nombre maximum de correspondances</string>
     <string name="turn_screen_on_router">Allumer lors des changements de direction</string>
-    <string name="turn_screen_on_time_descr">Définissez la durée pendant laquelle l\'écran restera allumé.</string>
+    <string name="turn_screen_on_time_descr">Définir la durée pendant laquelle l\'écran restera allumé.</string>
     <string name="turn_screen_on_sensor_descr">Agitez la main en haut de l\'écran pour allumer l\'écran pendant la navigation.</string>
     <string name="rendering_attr_winter_road_name">Route sur neige</string>
     <string name="rendering_attr_ice_road_name">Route sur glace</string>
@@ -3099,9 +3099,9 @@ représentant la zone : %1$s x %2$s</string>
     <string name="shared_string_file_is_saved">Gain de %s</string>
     <string name="shared_string_open_track">Ouvrir la trace</string>
     <string name="shared_string_track_is_saved">Trace %s enregistrée</string>
-    <string name="default_speed_dialog_msg">Utilisé pour estimer l\'heure d\'arrivée pendant la navigation</string>
+    <string name="default_speed_dialog_msg">Utilisé pour estimer l\'heure d\'arrivée</string>
     <string name="shared_string_crash">Oups</string>
-    <string name="last_launch_crashed">Le dernier lancement d\'OsmAnd a échoué. Aidez-nous à améliorer OsmAnd en nous envoyant le message d\'erreur.</string>
+    <string name="last_launch_crashed">La dernière utilisation d\'OsmAnd a planté. Aidez-nous à améliorer OsmAnd en nous envoyant le message d\'erreur.</string>
     <string name="app_mode_shuttle_bus">Bus navette</string>
     <string name="base_profile_descr_ski">Ski</string>
     <string name="show_compass_ruler">Afficher la boussole</string>
@@ -3109,7 +3109,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="make_osmand_better_descr">Autoriser OsmAnd à collecter et analyser des données anonymes d\'utilisation de l\'application. Nous ne collectons aucune donnée liée à votre position et aucun emplacement consulté sur la carte.
 \n
 \nVous pouvez changer d\'avis à tout moment dans Paramètres &gt; Vie privée et Sécurité.</string>
-    <string name="downloaded_maps_collect_descr">Nous collectons ces données pour connaître les pays et régions les plus populaires.</string>
+    <string name="downloaded_maps_collect_descr">Aidez nous à connaître les pays et régions les plus populaires.</string>
     <string name="privacy_and_security_change_descr">En sélectionnant \"Autoriser\" vous acceptez nos %1$s.</string>
     <string name="settings_derived_routing_mode_string">Mode utilisateur, dérive de : %s</string>
     <string name="profile_alert_need_routing_type_msg">Merci de sélectionner un type de navigation pour le nouveau profil</string>
@@ -3142,23 +3142,23 @@ représentant la zone : %1$s x %2$s</string>
     <string name="routing_attr_allow_classic_only_description">Pistes de ski de fond (inclus les pistes tracées par le passage des skieurs).</string>
     <string name="routing_attr_difficulty_preference_name">Difficulté préférée</string>
     <string name="routing_attr_difficulty_preference_description">Privilégier les itinéraires avec ce niveau de difficulté (un itinéraire plus difficile ou pus facile est toujours possible s\'il est plus court).</string>
-    <string name="release_3_4">• Profils d\'application : créez un profil personnalisé pour vos propres besoins, avec une icône et une couleur personnalisées
+    <string name="release_3_4">• Profils d\'application : créez un profil personnalisé pour vos propres besoins, avec une icône et une couleur personnalisées 
 \n 
-\n• Personnalisez maintenant les paramètres par défaut et la vitesse min/max de n\'importe quel profil
+\n• Personnalisez maintenant les paramètres par défaut et la vitesse min/max de n\'importe quel profil 
 \n 
-\n• Ajout d\'un widget pour les coordonnées actuelles
+\n• Ajout d\'un widget pour les coordonnées actuelles 
 \n 
-\n• Ajout d\'options pour afficher la boussole et une règle de rayon sur la carte
+\n• Ajout d\'options pour afficher la boussole et une règle de rayon sur la carte 
 \n 
-\n• Correction de l\'enregistrement de la trace en arrière-plan
+\n• Correction de l\'enregistrement de la trace en arrière-plan 
 \n 
-\n• Téléchargements de cartes en arrière-plan améliorés
+\n• Téléchargements de cartes en arrière-plan améliorés 
 \n 
-\n• Retour de l\'option \"Allumer l\'écran\"
+\n• Retour de l\'option \"Allumer l\'écran\" 
 \n 
-\n• Correction de la sélection de la langue Wikipédia
+\n• Correction de la sélection de la langue Wikipédia 
 \n 
-\n• Correction du comportement du bouton de la boussole pendant la navigation
+\n• Correction du comportement du bouton de la boussole pendant la navigation 
 \n 
 \n• Diverses corrections d\'anomalies
 \n
@@ -3179,7 +3179,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="gpx_join_gaps">Relier les trous</string>
     <string name="app_mode_camper">Campeur</string>
     <string name="app_mode_campervan">Caravane</string>
-    <string name="rendering_attr_showLez_description">Afficher les zones à faibles émissions sur la carte (n\'influe pas sur l\'itinéraire).</string>
+    <string name="rendering_attr_showLez_description">Afficher les zones à faible émission sur la carte (n\'influe pas sur l\'itinéraire).</string>
     <string name="rendering_attr_showLez_name">Afficher les zones à faibles émissions</string>
     <string name="new_route_calculated_dist_dbg">Itinéraire : distance %s, durée %s 
 \nCalculs : %.1f secondes, %d routes, %d tuiles)</string>
@@ -3208,19 +3208,19 @@ représentant la zone : %1$s x %2$s</string>
     <string name="price_and_discount">%1$s • Économisez %2$s</string>
     <string name="shared_string_example">Exemple</string>
     <string name="navigate_point_format_utm">UTM Standard</string>
-    <string name="coordinates_format_info">Le format sélectionné sera effectif pour toute l\'application.</string>
+    <string name="coordinates_format_info">Le format sélectionné sera effectif dans toute l\'application.</string>
     <string name="pref_selected_by_default_for_profiles">Ce paramètre est sélectionné par défaut dans les profils : %s</string>
-    <string name="change_default_settings">Modifier les paramètres par défaut</string>
-    <string name="discard_changes">Ignorer les modifications</string>
-    <string name="apply_to_current_profile">Appliquer au profil actuel %1$s</string>
+    <string name="change_default_settings">Modifier le paramètre</string>
+    <string name="discard_changes">Ignorer la modification</string>
+    <string name="apply_to_current_profile">Appliquer uniquement à \"%1$s\"</string>
     <string name="apply_to_all_profiles">Appliquer à tous les profils</string>
     <string name="start_up_message_pref">Message au démarrage</string>
     <string name="units_and_formats">Unités et Formats</string>
     <string name="appearance">Apparence</string>
-    <string name="list_of_installed_plugins">Liste des greffons installés</string>
+    <string name="list_of_installed_plugins">Greffons installés</string>
     <string name="configure_navigation">Paramétrer la navigation</string>
     <string name="configure_profile">Paramétrer le profil</string>
-    <string name="screen_alerts_descr">Les alertes s’afficheront en bas à gauche de l\'écran pendant la navigation.</string>
+    <string name="screen_alerts_descr">Les alertes s’affichent en bas à gauche de l\'écran pendant la navigation.</string>
     <string name="switch_profile">Basculer de profil</string>
     <string name="language_and_output">Langue et sortie</string>
     <string name="manage_profiles_descr">Créer, importer et modifier les profils</string>
@@ -3234,15 +3234,15 @@ représentant la zone : %1$s x %2$s</string>
     <string name="shared_string_other">Autre</string>
     <string name="vehicle_parameters_descr">Poids, hauteur, vitesse</string>
     <string name="vehicle_parameters">Caractéristiques du véhicule</string>
-    <string name="voice_announces_info">Les annonces vocales ne sont faites que pendant la navigation.</string>
+    <string name="voice_announces_info">Les annonces vocales n\'ont lieu que pendant la navigation.</string>
     <string name="voice_announces_descr">Instructions de navigation et annonces</string>
     <string name="voice_announces">Annonces vocales</string>
-    <string name="configure_profile_info">Tous les paramètres ci-dessous ne s\'appliquent qu\'au profil sélectionné.</string>
-    <string name="utm_format_descr">OsmAnd utilise le format Standard UTM qui est comparable mais pas identique au format UTM de l\'OTAN.</string>
+    <string name="configure_profile_info">Paramètres du profil :</string>
+    <string name="utm_format_descr">OsmAnd utilise le Standard UTM qui est comparable mais pas identique au format UTM de l\'OTAN.</string>
     <string name="navigate_point_format_olc">Ouvrir le code de lieu</string>
     <string name="analytics_pref_title">Analyses</string>
     <string name="turn_screen_on_info">Afficher la carte sur l\'écran de verrouillage pendant la navigation.</string>
-    <string name="route_parameters_info">Ces paramètres influencent le calcul de l\'itinéraire et s\'appliqueront au profil : %1$s.</string>
+    <string name="route_parameters_info">Paramètres de calcul d\'itinéraire pour le profil sélectionné : \"%1$s\".</string>
     <string name="wake_time">Heure de réveil</string>
     <string name="map_look_descr">Apparence de la carte</string>
     <string name="map_look">Apparence de la carte</string>
@@ -3251,7 +3251,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="screen_alerts">Alertes visuelles</string>
     <string name="route_parameters_descr">Définir les paramètres de l\'itinéraire</string>
     <string name="route_parameters">Paramètres de l\'itinéraire</string>
-    <string name="application_profile_changed">Profil de l\'application basculé à \"%s\"</string>
+    <string name="application_profile_changed">Profil de l\'appli basculé à \"%s\"</string>
     <string name="logcat_buffer">Buffer Logcat</string>
     <string name="plugins_settings">Paramètres du greffon</string>
     <string name="get_discount_title">Payez %1$d %2$s et gagnez %3$s.</string>
@@ -3261,7 +3261,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="change_data_storage_full_description">Déplacer les fichiers de données OsmAnd vers la nouvelle destination \?
 \n%1$s &gt; %2$s</string>
     <string name="enter_path_to_folder">Saisissez le chemin du dossier</string>
-    <string name="shared_string_select_folder">Sélectionner le dossier</string>
+    <string name="shared_string_select_folder">Dossier…</string>
     <string name="paste_Osmand_data_folder_path">Coller le chemin du dossier contenant les données OsmAnd</string>
     <string name="change_osmand_data_folder_question">Modifier le dossier des données OsmAnd \?</string>
     <string name="move_maps_to_new_destination">Déplacer vers la nouvelle destination</string>
@@ -3300,8 +3300,8 @@ représentant la zone : %1$s x %2$s</string>
     <string name="shared_string_memory_mb_desc">%1$s MB</string>
     <string name="shared_string_memory_kb_desc">%1$s kB</string>
     <string name="data_storage_preference_summary">%1$s • %2$s</string>
-    <string name="data_storage_space_description">Libre %1$s GB • Total %2$s GB</string>
-    <string name="track_storage_directory">Surveiller le dossier de stockage</string>
+    <string name="data_storage_space_description">%1$s GB libre (sur %2$s GB)</string>
+    <string name="track_storage_directory">Dossier de stockage des traces</string>
     <string name="shared_string_memory_used_tb_desc">%1$s TB utilisés</string>
     <string name="shared_string_memory_used_gb_desc">%1$s GB utilisés</string>
     <string name="shared_string_memory_used_mb_desc">%1$s MB utilisés</string>
@@ -3311,28 +3311,28 @@ représentant la zone : %1$s x %2$s</string>
     <string name="routing_attr_prefer_unpaved_description">Privilégier les routes non revêtues.</string>
     <string name="update_all_maps">Mettre à jour toutes les cartes</string>
     <string name="update_all_maps_q">Êtes-vous certain de vouloir mettre à jour les (%1$d) cartes \?</string>
-    <string name="track_storage_directory_descrp">Les traces peuvent être enregistrée dans le dossier rec ou dans des dossiers mensuels ou journaliers.</string>
-    <string name="store_tracks_in_rec_directory">Enregistrer les traces dans le dossier rec</string>
+    <string name="track_storage_directory_descrp">Les traces peuvent être enregistrées dans le dossier \'rec\' ou dans des dossiers mensuels ou journaliers.</string>
+    <string name="store_tracks_in_rec_directory">Enregistrer les traces dans le dossier \'rec\'</string>
     <string name="store_tracks_in_daily_directories">Enregistrer les traces dans des dossiers journaliers</string>
     <string name="store_tracks_in_daily_directories_descrp">Enregistrer les traces dans des sous-dossiers journaliers (par exemple 2019-01-01).</string>
-    <string name="release_3_5">• Updated application and profile Settings. Convenient arrangement of settings by type, ability to customize each profile
+    <string name="release_3_5">• Updated app and profile settings: Settings are now arranged by type. Each profile can be customized separately.
 \n
-\n • New map download dialog that suggests a map to download while browsing
+\n • New map download dialog suggesting a map to download while browsing
 \n
 \n • Night theme fixes
 \n
-\n • Fixed few routing issues around the world
+\n • Fixed several routing issues around the world
 \n
 \n • Updated basemap with more detailed road network
 \n
 \n • Fixed flooded areas around the world
 \n
-\n • Ski routing: added height profile and route complexity to the route details
+\n • Ski routing: Added elevation profile and route complexity to the route details
 \n
-\n • Other bug fixes
+\n • Other bugfixes
 \n
 \n</string>
-    <string name="apply_preference_to_all_profiles">Vous pouvez appliquer cette modification à tous les profils ou uniquement aux profils sélectionnés.</string>
+    <string name="apply_preference_to_all_profiles">Vous pouvez appliquer cette modification à tous les profils ou uniquement aux profils sélectionnés actuellement.</string>
     <string name="shared_preference">Partagé</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">Privilégier les routes non pavées</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">Privilégier les routes non pavées.</string>
@@ -3346,4 +3346,6 @@ représentant la zone : %1$s x %2$s</string>
     <string name="quick_action_hillshade_hide">Masquer l\'ombrage du relief</string>
     <string name="quick_action_show_hide_hillshade">Afficher/Masquer l\'ombrage du relief</string>
     <string name="swap_start_and_destination"> string name=\"lat_lon_pattern\"&gt;Lat. : %1$.5f Lon. : %2$.5f&lt;/string </string>
+    <string name="tts_initialization_error">Impossible de démarrer le moteur de synthèse vocale</string>
+    <string name="simulate_your_location_gpx_descr">Simulez votre position à l\'aide d\'une trace GPX enregistrée.</string>
 </resources>

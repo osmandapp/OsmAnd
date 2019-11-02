@@ -2460,7 +2460,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="max_min">max/min</string>
     <string name="shared_string_reset">Zurücksetzen</string>
     <string name="ascent_descent">Aufstieg/Abstieg</string>
-    <string name="track_storage_directory">Track Speicherort</string>
+    <string name="track_storage_directory">Track Speicherordner</string>
     <string name="track_storage_directory_descrp">Tracks können im Rec Ordner oder in Monats- bzw. Tagesordnern gespeichert werden.</string>
     <string name="store_tracks_in_rec_directory">Aufgezeichnete Tracks im Rec Ordner speichern</string>
     <string name="store_tracks_in_monthly_directories">Aufgezeichnete Tracks in Monatsordnern speichern</string>
@@ -2931,7 +2931,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="step_by_step">Schritt für Schritt</string>
     <string name="routeInfo_road_types_name">Straßentypen</string>
     <string name="quick_action_show_hide_gpx_tracks">GPX-Tracks ein-/ausblenden</string>
-    <string name="quick_action_show_hide_gpx_tracks_descr">Dücken dieser Aktionstaste blendet ausgewählte GPX-Tracks auf der Karte ein oder aus</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Drücken dieser Aktionstaste blendet ausgewählte GPX-Tracks auf der Karte ein oder aus</string>
     <string name="quick_action_gpx_tracks_hide">GPX-Tracks ausblenden</string>
     <string name="quick_action_gpx_tracks_show">GPX-Tracks einblenden</string>
     <string name="exit_at">Aussteigen bei</string>
@@ -3057,7 +3057,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="rate_dialog_descr">Bitte geben Sie uns 30 Sekunden, in denen Sie Ihr Feedback abgeben und unsere Arbeit auf Google Play bewerten.</string>
     <string name="button_rate">Bewerten</string>
     <string name="shared_string_privacy_policy">Datenschutzrichtlinie</string>
-    <string name="help_us_make_osmand_better">Helfen Sie uns, OsmAnd besser zu machen!</string>
+    <string name="help_us_make_osmand_better">Helfen Sie uns, OsmAnd besser zu machen</string>
     <string name="make_osmand_better_descr">Gestatten Sie OsmAnd, anonyme App-Nutzungsdaten zu sammeln und zu verarbeiten. Wir sammeln und speichern keine Daten zu Ihrem Standort oder zu irgendwelchen Orten, die Sie sich auf der Karte ansehen. 
 \n 
 \nSie können Ihre Auswahl jederzeit in den Einstellungen &gt; Datenschutz und Sicherheit ändern.</string>
@@ -3066,7 +3066,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="visited_screens">Besuchte Bildschirme</string>
     <string name="collected_data_descr">Definieren Sie welche Daten Sie OsmAnd erlauben zu teilen.</string>
     <string name="downloaded_maps_collect_descr">Helfen Sie uns herauszufinden, welche Karten welcher Regionen und Länder die beliebtesten sind.</string>
-    <string name="visited_screens_collect_descr">Helfen Sie un, zu verstehen, welche Funktionen von OsmAnd die beliebtesten sind.</string>
+    <string name="visited_screens_collect_descr">Helfen Sie uns, die Beliebtheit von OsmAnd-Funktionen zu verstehen.</string>
     <string name="privacy_and_security_change_descr">Durch das Antippen von \"Genehmigen\" willigen Sie in unsere %1$s ein</string>
     <string name="settings_privacy_and_security">Datenschutz und Sicherheit</string>
     <string name="settings_privacy_and_security_desc">Wählen Sie die Daten, die Sie uns freigeben möchten</string>
@@ -3152,7 +3152,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="default_speed_setting_title">Standardtempo</string>
     <string name="default_speed_setting_descr">Einstellungen des Standardtempos ändern</string>
     <string name="minmax_speed_dialog_title">Min/Max Tempo einstellen</string>
-    <string name="default_speed_dialog_msg">Wird zur Berechnung der erwarteten Ankunftszeit während der Navigation verwendet</string>
+    <string name="default_speed_dialog_msg">Wird zur Berechnung der erwarteten Ankunftszeit verwendet</string>
     <string name="new_profile">Neues Profil</string>
     <string name="shared_string_crash">Absturz</string>
     <string name="last_launch_crashed">Der letzte Start von OsmAnd ist fehlgeschlagen. Bitte helfen Sie uns, OsmAnd zu verbessern, indem Sie uns über diesen Fehler informieren.</string>
@@ -3195,7 +3195,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="turn_screen_on_time_descr">Zeitdauer festlegen, für die der Bildschirm eingeschaltet wird.</string>
     <string name="turn_screen_on_sensor">Annäherungssensor verwenden</string>
     <string name="turn_screen_on_sensor_descr">Streichen Sie mit der Hand über die Oberfläche des Bildschirms, um ihn während der Navigation einzuschalten.</string>
-    <string name="turn_on_profile_desc">Bitte wenigstens ein Anwendungsprofil einschalten, um diese Einstellung zu verwenden.</string>
+    <string name="turn_on_profile_desc">Bitte wenigstens ein App-Profil einschalten, um diese Einstellung zu verwenden.</string>
     <string name="rendering_attr_winter_road_name">Schneepiste</string>
     <string name="rendering_attr_ice_road_name">Eispiste</string>
     <string name="routeInfo_winter_ice_road_name">Schnee- und Eispisten</string>
@@ -3251,7 +3251,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="get_discount_title">%1$d %2$s mit %3$s Rabatt erhalten.</string>
     <string name="get_discount_first_part">%1$s zuerst %2$s</string>
     <string name="get_discount_first_few_part">%1$s zuerst %2$s</string>
-    <string name="configure_profile_info">Alle Einstellungen unten betreffen nur das ausgewählte Profil.</string>
+    <string name="configure_profile_info">Einstellungen für Profil:</string>
     <string name="utm_format_descr">OsmAnd verwendet das UTM-Standardformat, das dem UTM-NATO-Format ähnlich ist, aber nicht mit ihm übereinstimmt.</string>
     <string name="shared_string_example">Beispiel</string>
     <string name="navigate_point_format_utm">UTM Standard</string>
@@ -3269,7 +3269,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="appearance">Aussehen</string>
     <string name="map_look_descr">Kartendarstellung</string>
     <string name="map_look">Kartendarstellung</string>
-    <string name="list_of_installed_plugins">Liste installierter Module</string>
+    <string name="list_of_installed_plugins">Installierte Module</string>
     <string name="configure_navigation">Navigation konfigurieren</string>
     <string name="general_settings_profile_descr">App-Design, Einheiten, Region</string>
     <string name="configure_profile">Profil konfigurieren</string>
@@ -3296,7 +3296,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="voice_announces">Sprachansagen</string>
     <string name="screen_alerts">Bildschirmwarnungen</string>
     <string name="route_parameters_descr">Routenparameter konfigurieren</string>
-    <string name="application_profile_changed">Anwendungsprofilwechsel auf „%s“</string>
+    <string name="application_profile_changed">App-Profil geändert zu „%s“</string>
     <string name="logcat_buffer">Logcat-Puffer</string>
     <string name="plugins_settings">Plugin-Einstellungen</string>
     <string name="shared_string_by_default">Standardmäßig</string>
@@ -3305,11 +3305,11 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="change_data_storage_full_description">OsmAnd-Datendateien an das neue Ziel verschieben\?
 \n%1$s &gt; %2$s</string>
     <string name="enter_path_to_folder">Geben Sie den Pfad zum Ordner ein</string>
-    <string name="shared_string_select_folder">Ordner auswählen</string>
+    <string name="shared_string_select_folder">Ordner…</string>
     <string name="paste_Osmand_data_folder_path">Einfügen des Pfades zum Ordner mit OsmAnd-Daten</string>
     <string name="change_osmand_data_folder_question">OsmAnd-Datenordner ändern\?</string>
     <string name="move_maps_to_new_destination">Zum neuen Ziel verschieben</string>
-    <string name="internal_app_storage_description">Interner Speicher, versteckt vor Benutzern und anderen Anwendungen, sodass niemand außer OsmAnd Zugriff auf Ihre Daten erhalten kann</string>
+    <string name="internal_app_storage_description">Interner Speicher, versteckt vor Benutzern und anderen Anwendungen, exklusiv für OsmAnd zugänglich</string>
     <string name="change_data_storage_folder">Ändern des Datenspeicherordners</string>
     <string name="rendering_attr_piste_type_snow_park_name">Winter-Funpark</string>
     <string name="rendering_attr_piste_type_sleigh_name">Schlitten</string>
@@ -3336,7 +3336,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="rendering_attr_piste_difficulty_aerialway_name">Seilbahn</string>
     <string name="rendering_attr_piste_difficulty_connection_name">Verbindung</string>
     <string name="shared_string_calculate">Berechnen</string>
-    <string name="shared_string_osmand_usage">OsmAnd Nutzung</string>
+    <string name="shared_string_osmand_usage">OsmAnd-Nutzung</string>
     <string name="shared_string_maps">Karten</string>
     <string name="shared_string_memory_tb_desc">%1$s TB</string>
     <string name="shared_string_memory_gb_desc">%1$s GB</string>
@@ -3354,20 +3354,20 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="routing_attr_prefer_unpaved_description">Unbefestigte Straßen bevorzugen.</string>
     <string name="update_all_maps">Alle Karten aktualisieren</string>
     <string name="update_all_maps_q">Sind Sie sicher, dass Sie alle (%1$d) Karten aktualisieren möchten\?</string>
-    <string name="release_3_5">• Verbesserte Anwendungs- und Profileinstellungen. Komfortable Anordnung der Einstellungen nach Typ, Möglichkeit, jedes Profil anzupassen
-\n
-\n • Neuer Karten-Download-Dialog, der während des Stöberns eine Karte zum Download vorschlägt
-\n
-\n • Korrekturen am Nachtmodus
-\n
-\n • Behebung einiger Probleme mit der Routenführung rund um den Globus
-\n
-\n • Verbesserte Basiskarte mit detailierterem Straßennetz
-\n
-\n • Überschwemmungsgebiete auf der Welt korrigiert
-\n
-\n • Ski-Routing: Höhenprofil und Routenschwierigkeitsgrad in den Routendetails ergänzt
-\n
+    <string name="release_3_5">• Verbesserte Anwendungs- und Profileinstellungen. Komfortable Anordnung der Einstellungen nach Typ, Möglichkeit, jedes Profil anzupassen 
+\n 
+\n • Neuer Karten-Download-Dialog, der während des Stöberns eine Karte zum Download vorschlägt 
+\n 
+\n • Korrekturen am Nachtmodus 
+\n 
+\n • Behebung einiger Probleme mit der Routenführung rund um den Globus 
+\n 
+\n • Verbesserte Basiskarte mit detailierterem Straßennetz 
+\n 
+\n • Überschwemmungsgebiete auf der Welt korrigiert 
+\n 
+\n • Ski-Routing: Höhenprofil und Routenschwierigkeitsgrad in den Routendetails ergänzt 
+\n 
 \n • Weitere Fehlerlösungen
 \n
 \n</string>
@@ -3375,4 +3375,15 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="shared_preference">Geteilt</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">Unbefestigte Straßen bevorzugen</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">Unbefestigte Straßen bevorzugen.</string>
+    <string name="layer_osm_edits">OSM-Bearbeitungen</string>
+    <string name="quick_action_contour_lines_descr">Drücken dieser Aktionstaste blendet Höhenlinien auf der Karte ein oder aus</string>
+    <string name="quick_action_contour_lines_show">Höhenlinien anzeigen</string>
+    <string name="quick_action_contour_lines_hide">Höhenlinien ausblenden</string>
+    <string name="quick_action_show_hide_contour_lines">Höhenlinien ein-/ausblenden</string>
+    <string name="quick_action_hillshade_descr">Drücken dieser Aktionstaste blendet Schummerungen auf der Karte ein oder aus</string>
+    <string name="quick_action_hillshade_show">Schummerung anzeigen</string>
+    <string name="quick_action_hillshade_hide">Schummerung ausblenden</string>
+    <string name="quick_action_show_hide_hillshade">Schummerung ein-/ausblenden</string>
+    <string name="tts_initialization_error">Text-to-Speech-Engine kann nicht gestartet werden</string>
+    <string name="simulate_your_location_gpx_descr">Simulation Ihrer Position mit einem aufgezeichneten GPX-Track.</string>
 </resources>
