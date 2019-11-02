@@ -286,7 +286,7 @@
     <string name="routing_attr_no_new_routing_description">Não use as regras de roteamento introduzidas na v1.9.</string>
     <string name="dash_download_new_one">Baixar um novo mapa</string>
     <string name="map_update">Atualizações disponíveis para %1$s mapa(s)</string>
-    <string name="fav_point_dublicate_message">O nome do favorito já está em uso, mudamos para %1$s a fim de evitar nomes duplicados.</string>
+    <string name="fav_point_dublicate_message">Favorito renomeado para %1$s para evitar duplicação.</string>
     <string name="traffic_warning_speed_camera">Radar</string>
     <string name="speak_favorites">Favoritos próximos</string>
     <string name="proxy_host_title">Servidor Proxy</string>
@@ -1279,7 +1279,7 @@ Pôr do Sol: %2$s</string>
     <string name="daynight_mode_day">Dia</string>
     <string name="daynight_mode_night">Noite</string>
     <string name="daynight_mode_sensor">Sensor de luz</string>
-    <string name="daynight_descr">Definir regra para alternar entre o modo dia e noite.</string>
+    <string name="daynight_descr">Ajuste a alternância entre os modos noite e dia.</string>
     <string name="daynight">Modo dia/noite</string>
     <string name="download_files_question">Baixar {0} arquivo(s) ({1} MB)?</string>
     <string name="items_were_selected">{0} elemento(s) selecionado(s)</string>
@@ -1512,7 +1512,7 @@ Pôr do Sol: %2$s</string>
     <string name="poi_error_poi_not_found">Nó não pode ser encontrado ou POI não é um único nó</string>
     <string name="poi_remove_confirm_template">Apagar {0} (comentário)\?</string>
     <string name="poi_remove_title">Apagar POI</string>
-    <string name="poi_remove_success">POI excluído</string>
+    <string name="poi_remove_success">Excluído</string>
     <string name="poi_action_add">adicionar</string>
     <string name="poi_action_change">modificar</string>
     <string name="poi_action_succeded_template">Ação {0} bem sucedida.</string>
@@ -1526,12 +1526,12 @@ Pôr do Sol: %2$s</string>
     <string name="default_buttons_commit">Enviar</string>
     <string name="filter_current_poiButton">Filtro</string>
     <string name="edit_filter_save_as_menu_item">Salvar como</string>
-    <string name="edit_filter_delete_dialog_title">Apagar filtro selecionado?</string>
+    <string name="edit_filter_delete_dialog_title">Apagar este filtro\?</string>
     <string name="edit_filter_delete_message">Filtro {0} foi excluído</string>
     <string name="edit_filter_create_message">Filtro {0} foi criado</string>
     <string name="email">e-mail</string>
     <string name="av_camera_focus">Tipo de foco da câmera</string>
-    <string name="av_camera_focus_descr">Selecionar o modo de foco da câmera interna.</string>
+    <string name="av_camera_focus_descr">Modo de foco da câmera:</string>
     <string name="av_camera_focus_auto">Foco automático</string>
     <string name="av_camera_focus_hiperfocal">Foco hiperfocal</string>
     <string name="av_camera_focus_edof">Profundidade de visão estendida (EDOF)</string>
@@ -1723,7 +1723,7 @@ Pôr do Sol: %2$s</string>
     <string name="region_maps">Mapas regionais</string>
     <string name="srtm_plugin_disabled">Curvas de nível desativadas</string>
     <string name="favorite_category_add_new">Adicionar novo</string>
-    <string name="favorite_category_select">Selecione categoria</string>
+    <string name="favorite_category_select">Escolha categoria</string>
     <string name="default_speed_system_descr">Defina a unidade de velocidade.</string>
     <string name="default_speed_system">Unidade de velocidade</string>
     <string name="nm">mn</string>
@@ -2060,7 +2060,7 @@ Pôr do Sol: %2$s</string>
     <string name="improve_coverage_install_mapillary_desc">Instale Mapillary para adicionar uma ou mais fotos para este local do mapa.</string>
     <string name="online_photos">Fotos on-line</string>
     <string name="shared_string_add_photos">Adicionar fotos</string>
-    <string name="no_photos_descr">Não temos fotos para este local.</string>
+    <string name="no_photos_descr">Não há fotos aqui.</string>
     <string name="mapillary_action_descr">Contribuir com suas próprias vistas de rua deste local através do Mapillary.</string>
     <string name="mapillary_widget">Ferramenta Mapillary</string>
     <string name="mapillary_widget_descr">Permite contribuições rápidas ao Mapillary.</string>
@@ -2802,10 +2802,10 @@ Pôr do Sol: %2$s</string>
     <string name="edit_map_marker">Editar marcador de mapa</string>
     <string name="third_party_application">Aplicativo de terceiros</string>
     <string name="search_street">Pesquisar rua</string>
-    <string name="start_search_from_city">Selecione a cidade primeiro</string>
+    <string name="start_search_from_city">Primeiro especifique a cidade/vila/localidade</string>
     <string name="shared_string_restore">Restaurar</string>
     <string name="rendering_value_black_name">Preto</string>
-    <string name="more_transport_on_stop_hint">Esta parada tem outros meios de transporte.</string>
+    <string name="more_transport_on_stop_hint">Outros transportes disponíveis nesta parada.</string>
     <string name="keep_passed_markers">Manter os marcadores visitados no mapa</string>
     <string name="keep_passed_markers_descr">Marcadores adicionados como grupo de Favoritos ou pontos de passagem GPX marcados como Visitado permanecerão no mapa. Se o grupo não estiver ativo, os marcadores desaparecerão do mapa.</string>
     <string name="release_3_2_pre">• Corrigida a falha na inicialização que ocorria em alguns dispositivos. 
@@ -2837,8 +2837,8 @@ Pôr do Sol: %2$s</string>
     <string name="osm_live_payment_renews_quarterly">Renova trimestralmente</string>
     <string name="powered_by_osmand">Por OsmAnd</string>
     <string name="default_price_currency_format">%1$,2f %2$s</string>
-    <string name="osm_live_payment_header">Selecione o período de pagamento conveniente para você:</string>
-    <string name="osm_live_payment_contribute_descr">Parte da renda vai para os contribuidores do OpenStreetMap.</string>
+    <string name="osm_live_payment_header">Período de pagamento:</string>
+    <string name="osm_live_payment_contribute_descr">As doações ajudam a financiar a cartografia do OpenStreetMap.</string>
     <string name="release_3_1">• Navegação: Corrige barra de progresso, inversão rápida de início e fim de rota 
 \n 
 \n• Marcadores de mapa: Corrige ligar/desligar grupos, habilidade para ocultar os marcadores do mapa 
@@ -2860,9 +2860,9 @@ Pôr do Sol: %2$s</string>
     <string name="mapillary_menu_title_pano">Exibir só imagens 360°</string>
     <string name="shared_string_launch">Iniciar</string>
     <string name="run_full_osmand_header">Iniciar OsmAnd\?</string>
-    <string name="add_destination_point">Adicionar destino</string>
+    <string name="add_destination_point">Defina destino</string>
     <string name="add_intermediate_point">Adicionar intermediário</string>
-    <string name="add_start_point">Adicionar ponto de partida</string>
+    <string name="add_start_point">Defina o ponto de partida</string>
     <string name="intermediate_waypoint">Ponto intermediário</string>
     <string name="transfers">transferências</string>
     <string name="on_foot">a pé</string>
@@ -2873,7 +2873,7 @@ Pôr do Sol: %2$s</string>
     <string name="avoid_roads_descr">Selecione uma estrada que você deseja evitar durante a navegação, no mapa ou na lista abaixo:</string>
     <string name="show_along_the_route">Mostrar ao longo da rota</string>
     <string name="simulate_navigation">Simular navegação</string>
-    <string name="choose_track_file_to_follow">Escolha arquivo de trilha para seguir</string>
+    <string name="choose_track_file_to_follow">Escolha o arquivo de trilha para seguir</string>
     <string name="voice_announcements">Avisos por voz</string>
     <string name="intermediate_destinations">Destinos intermediários</string>
     <string name="arrive_at_time">Chega às %1$s</string>
@@ -2892,7 +2892,7 @@ Pôr do Sol: %2$s</string>
     <string name="routeInfo_surface_name">Superfície</string>
     <string name="routeInfo_smoothness_name">Suavidade</string>
     <string name="routeInfo_steepness_name">Inclinação</string>
-    <string name="add_destination_query">Por favor adicione o primeiro destino</string>
+    <string name="add_destination_query">Por favor, primeiro adicione o destino</string>
     <string name="previous_route">Rota anterior</string>
     <string name="add_home">Adicionar casa</string>
     <string name="add_work">Adicionar trabalho</string>
@@ -2906,7 +2906,7 @@ Pôr do Sol: %2$s</string>
     <string name="routeInfo_road_types_name">Tipos de estrada</string>
     <string name="exit_at">Desembarque em</string>
     <string name="sit_on_the_stop">Embarque na parada</string>
-    <string name="quick_action_show_hide_gpx_tracks">Mostrar/Ocultar faixas GPX</string>
+    <string name="quick_action_show_hide_gpx_tracks">Mostrar/ocultar faixas GPX</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Tocar neste botão de ação mostra ou oculta faixas GPX selecionadas no mapa</string>
     <string name="quick_action_gpx_tracks_hide">Ocultar faixas de GPX</string>
     <string name="quick_action_gpx_tracks_show">Mostrar faixas GPX</string>
@@ -2966,9 +2966,9 @@ Pôr do Sol: %2$s</string>
     <string name="rendering_attr_highway_class_cycleway_name">Ciclovia</string>
     <string name="rendering_attr_undefined_name">Não definido</string>
     <string name="transfers_size">%1$d transferências</string>
-    <string name="add_start_and_end_points">Adicionar pontos inicial e final</string>
-    <string name="route_add_start_point">Adicionar ponto inicial</string>
-    <string name="route_descr_select_start_point">Selecionar o ponto inicial</string>
+    <string name="add_start_and_end_points">Adicione partida e destino</string>
+    <string name="route_add_start_point">Adicione ponto de partida</string>
+    <string name="route_descr_select_start_point">Selecione ponto de partida</string>
     <string name="rendering_attr_surface_grass_paver_name">Pavimentadora de grama</string>
     <string name="rendering_attr_surface_ground_name">Chão</string>
     <string name="rendering_attr_surface_dirt_name">Terra (lamacenta)</string>
@@ -2979,8 +2979,7 @@ Pôr do Sol: %2$s</string>
     <string name="public_transport_warning_title">A navegação de transporte público está atualmente em teste beta, espere erros e imprecisões.</string>
     <string name="add_intermediate">Adicionar ponto intermediário</string>
     <string name="shared_string_walk">Ande</string>
-    <string name="save_poi_value_exceed_length">O comprimento máximo da etiqueta \"%s\" é 255 caracteres. 
-\nPor favor, encurte para continuar.</string>
+    <string name="save_poi_value_exceed_length">Reduza o comprimento da tag \"%s\" para menos de 255 caracteres.</string>
     <string name="save_poi_value_exceed_length_title">Comprimento do valor \"%s\"</string>
     <string name="avoid_pt_types_descr">Selecione os tipos de transporte público a evitar para navegação:</string>
     <string name="avoid_pt_types">Evite os tipos de transporte…</string>
@@ -3078,7 +3077,7 @@ Pôr do Sol: %2$s</string>
     <string name="select_base_profile_dialog_message">Baseie seu perfil personalizado em um dos perfis padrões do aplicativo, os quais definem a configuração básica, como a visibilidade padrão de widgets e unidades de velocidade e distância. Abaixo estão os perfis padrões do aplicativo juntamente com exemplos de perfis personalizados para os quais eles podem ser estendidos:</string>
     <string name="select_nav_profile_dialog_title">Escolher o tipo de navegação</string>
     <string name="base_profile_descr_car">Carro, caminhão, motocicleta</string>
-    <string name="base_profile_descr_bicycle">MTB, ciclomotor, cavalo</string>
+    <string name="base_profile_descr_bicycle">Mountain bike, ciclomotor, cavalo</string>
     <string name="base_profile_descr_pedestrian">Andando a pé, caminhada, corrida</string>
     <string name="base_profile_descr_public_transport">Transporte público (todos)</string>
     <string name="base_profile_descr_boat">Navio, remo, vela</string>
