@@ -3380,8 +3380,8 @@ POIの更新は利用できません</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">未舗装道路を優先</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">未舗装道路を優先してルートを検索します。</string>
     <string name="osm_recipients_label">OSM受信者</string>
-    <string name="new_route_calculated_dist_dbg">"ルート: 距離 %s、検索時間  %s
-\n検索時間: %.1f秒、道 %d、タイル %d"</string>
+    <string name="new_route_calculated_dist_dbg">ルート: 距離 %s、検索時間 %s 
+\n検索時間: %.1f秒、道 %d、タイル %d</string>
     <string name="price_and_discount">%1$s • %2$s 割引</string>
     <string name="routing_attr_width_name">幅制限</string>
     <string name="routing_attr_width_description">ルート検索時に考慮する車幅を指定します。</string>
