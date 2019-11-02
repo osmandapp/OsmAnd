@@ -3289,7 +3289,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="change_data_storage_full_description">Przenieść pliki danych OsmAnd do nowego położenia\?
 \n%1$s &gt; %2$s</string>
     <string name="enter_path_to_folder">Proszę wprowadzić ścieżkę do katalogu</string>
-    <string name="shared_string_select_folder">Folder…</string>
+    <string name="shared_string_select_folder">Katalog…</string>
     <string name="paste_Osmand_data_folder_path">Wklej ścieżkę do katalogu z danymi OsmAnd</string>
     <string name="change_osmand_data_folder_question">Zmienić katalog danych OsmAnd\?</string>
     <string name="move_maps_to_new_destination">Przenieś do nowego miejsca przeznaczenia</string>
