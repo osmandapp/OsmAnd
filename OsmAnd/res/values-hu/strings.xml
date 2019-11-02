@@ -3188,4 +3188,11 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="shared_preference">Megosztott</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">Burkolatlan utak előnyben részesítése</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">Burkolatlan utak előnyben részesítése.</string>
+    <string name="osmand_settings_descr">Az egész alkalmazás beállításait módosítja</string>
+    <string name="osmand_settings">OsmAnd beállítások</string>
+    <string name="shared_string_calculate">Kiszámít</string>
+    <string name="layer_osm_edits">OSM szerkesztések</string>
+    <string name="quick_action_contour_lines_descr">A műveletgombra koppintás megjeleníti vagy elrejti a szintvonalakat a térképen</string>
+    <string name="quick_action_hillshade_descr">A műveletgombra koppintás megjeleníti vagy elrejti a domborzatárnyékolást a térképen</string>
+    <string name="tts_initialization_error">Szövegfelolvasó motor indítása sikertelen</string>
 </resources>
