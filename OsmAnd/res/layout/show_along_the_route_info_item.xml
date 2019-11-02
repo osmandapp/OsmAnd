@@ -24,6 +24,7 @@
 		android:id="@+id/bottom_divider"
 		android:layout_width="match_parent"
 		android:layout_height="1dp"
-		android:layout_marginTop="8dp" />
+		android:layout_marginTop="8dp"
+		android:background="?attr/divider_color_basic" />
 
 </LinearLayout>

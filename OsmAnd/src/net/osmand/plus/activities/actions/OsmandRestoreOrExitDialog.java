@@ -9,10 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import java.text.MessageFormat;
+
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.helpers.FontCache;
+
+import java.text.MessageFormat;
 
 public class OsmandRestoreOrExitDialog extends BottomSheetDialogFragment {
 
@@ -20,10 +23,9 @@ public class OsmandRestoreOrExitDialog extends BottomSheetDialogFragment {
 
 	@Nullable
 	@Override
-	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		View view = getActivity().getLayoutInflater()
-				.inflate(R.layout.dash_restore_osmand_fragment, container, false);
+	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		boolean nightMode = getMyApplication().getDaynightHelper().isNightModeForMapControls();
+		View view = UiUtilities.getInflater(getActivity(), nightMode).inflate(R.layout.dash_restore_osmand_fragment, container, false);
 		try {
 			clientAppTitle = getMyApplication().getAppCustomization().getNavFooterAppName();
 		} catch (Exception e) {

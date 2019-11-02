@@ -1,8 +1,6 @@
 package net.osmand.plus.parkingpoint;
 
 
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MARK_AS_PARKING_LOC;
-
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -28,6 +26,7 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
@@ -38,6 +37,8 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.TextInfoWidget;
 
 import java.util.Calendar;
+
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MARK_AS_PARKING_LOC;
 
 /**
  * 
@@ -298,7 +299,8 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	 * @param choose
 	 */
 	void showSetTimeLimitDialog(final MapActivity mapActivity, final DialogInterface choose) {
-		final View setTimeParking = mapActivity.getLayoutInflater().inflate(R.layout.parking_set_time_limit, null);
+		boolean nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
+		final View setTimeParking = UiUtilities.getInflater(mapActivity, nightMode).inflate(R.layout.parking_set_time_limit, null);
 		AlertDialog.Builder setTime = new AlertDialog.Builder(mapActivity);
 		setTime.setView(setTimeParking);
 		setTime.setTitle(mapActivity.getString(R.string.osmand_parking_time_limit_title));

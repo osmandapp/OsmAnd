@@ -56,6 +56,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.TabActivity.TabItem;
@@ -786,9 +787,10 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	}
 
 	private void chooseDefaultAction(final double lat, final double lon, final MapActivity mapActivity) {
-		AlertDialog.Builder ab = new AlertDialog.Builder(mapActivity);
+		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+		AlertDialog.Builder ab = new AlertDialog.Builder(UiUtilities.getThemedContext(mapActivity, nightMode));
 		ab.setItems(
-				new String[]{mapActivity.getString(R.string.recording_context_menu_arecord),
+				new String[] {mapActivity.getString(R.string.recording_context_menu_arecord),
 						mapActivity.getString(R.string.recording_context_menu_vrecord),
 						mapActivity.getString(R.string.recording_context_menu_precord),}, new OnClickListener() {
 					@Override

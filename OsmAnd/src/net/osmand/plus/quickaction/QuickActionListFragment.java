@@ -2,7 +2,6 @@ package net.osmand.plus.quickaction;
 
 import android.content.DialogInterface;
 import android.content.res.Resources;
-import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,7 +10,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.view.ContextThemeWrapper;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -27,6 +25,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 
@@ -40,27 +39,26 @@ import static android.util.TypedValue.COMPLEX_UNIT_DIP;
  * Created by okorsun on 20.12.16.
  */
 
-public class QuickActionListFragment extends BaseOsmAndFragment implements QuickActionRegistry.QuickActionUpdatesListener{
+public class QuickActionListFragment extends BaseOsmAndFragment implements QuickActionRegistry.QuickActionUpdatesListener {
 
     public static final String TAG = QuickActionListFragment.class.getSimpleName();
 
-    RecyclerView         quickActionRV;
-    FloatingActionButton fab;
+    private RecyclerView quickActionRV;
+    private FloatingActionButton fab;
 
-    QuickActionAdapter  adapter;
-    ItemTouchHelper     touchHelper;
-    QuickActionRegistry quickActionRegistry;
-    
+    private QuickActionAdapter adapter;
+    private ItemTouchHelper touchHelper;
+    private QuickActionRegistry quickActionRegistry;
+
     private boolean isLightContent;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-        View view = inflater.inflate(R.layout.quick_action_list, container, false);
-        
         isLightContent = getMyApplication().getSettings().isLightContent();
-        
+
+        View view = UiUtilities.getInflater(getContext(), !isLightContent).inflate(R.layout.quick_action_list, container, false);
+
         quickActionRV = (RecyclerView) view.findViewById(R.id.recycler_view);
         fab = (FloatingActionButton) view.findViewById(R.id.fabButton);
 
@@ -112,8 +110,8 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
     }
 
     private void setUpToolbar(View view) {
-        Toolbar  toolbar = (Toolbar) view.findViewById(R.id.custom_toolbar);
-        Drawable back = getMyApplication().getUIUtilities().getIcon(R.drawable.ic_arrow_back, 
+        Toolbar toolbar = (Toolbar) view.findViewById(R.id.custom_toolbar);
+        Drawable back = getMyApplication().getUIUtilities().getIcon(R.drawable.ic_arrow_back,
                 isLightContent ? R.color.active_buttons_and_links_text_light : R.color.active_buttons_and_links_text_dark);
         toolbar.setNavigationIcon(back);
         toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
@@ -124,7 +122,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
             }
         });
         toolbar.setTitle(R.string.configure_screen_quick_action);
-        toolbar.setTitleTextColor(ContextCompat.getColor(getContext(), 
+        toolbar.setTitleTextColor(ContextCompat.getColor(getContext(),
                 isLightContent ? R.color.color_white : R.color.text_color_primary_dark));
     }
 
@@ -144,28 +142,26 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
         quickActionRegistry.setUpdatesListener(null);
     }
 
-	@Override
-	protected boolean isFullScreenAllowed() {
-		return false;
-	}
+    @Override
+    protected boolean isFullScreenAllowed() {
+        return false;
+    }
 
-	@Override
-	public int getStatusBarColorId() {
-		return getSettings().isLightContent() ? R.color.status_bar_color_light : R.color.status_bar_color_dark;
-	}
+    @Override
+    public int getStatusBarColorId() {
+        return isLightContent ? R.color.status_bar_color_light : R.color.status_bar_color_dark;
+    }
 
-	private MapActivity getMapActivity() {
+    private MapActivity getMapActivity() {
         return (MapActivity) getActivity();
     }
 
-    private void saveQuickActions(){
+    private void saveQuickActions() {
         quickActionRegistry.updateQuickActions(adapter.getQuickActions());
     }
 
     void createAndShowDeleteDialog(final int itemPosition, final String itemName) {
-        boolean isLightContent = getMyApplication().getSettings().isLightContent();
-        AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(getContext(), 
-                isLightContent ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme));
+        AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(getContext(), !isLightContent));
         builder.setTitle(R.string.quick_actions_delete);
         builder.setMessage(getResources().getString(R.string.quick_actions_delete_text, itemName));
         builder.setIcon(getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_delete_dark));
@@ -192,7 +188,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
     }
 
     public class QuickActionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements QuickActionItemTouchHelperCallback.OnItemMoveCallback {
-        public static final int SCREEN_ITEM_TYPE   = 1;
+        public static final int SCREEN_ITEM_TYPE = 1;
         public static final int SCREEN_HEADER_TYPE = 2;
 
         private static final int ITEMS_IN_GROUP = 6;
@@ -206,7 +202,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+            LayoutInflater inflater = UiUtilities.getInflater(parent.getContext(), isLightContent);
             if (viewType == SCREEN_ITEM_TYPE)
                 return new QuickActionItemVH(inflater.inflate(R.layout.quick_action_list_item, parent, false));
             else
@@ -215,8 +211,8 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 
         @Override
         public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
-            int               viewType = getItemViewType(position);
-            final QuickAction item     = QuickActionFactory.produceAction(itemsList.get(position));
+            int viewType = getItemViewType(position);
+            final QuickAction item = QuickActionFactory.produceAction(itemsList.get(position));
 
             if (viewType == SCREEN_ITEM_TYPE) {
                 final QuickActionItemVH itemVH = (QuickActionItemVH) holder;
@@ -298,15 +294,15 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
             notifyItemRangeChanged(position, itemsList.size() - position);
 
             int lastPosition = itemsList.size() - 1;
-            if (getItemViewType(lastPosition) == SCREEN_HEADER_TYPE){
+            if (getItemViewType(lastPosition) == SCREEN_HEADER_TYPE) {
                 itemsList.remove(lastPosition);
                 notifyItemRemoved(lastPosition);
             }
         }
 
         private void showFABIfNotScrollable() {
-            LinearLayoutManager layoutManager           = (LinearLayoutManager) quickActionRV.getLayoutManager();
-            int                 lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition();
+            LinearLayoutManager layoutManager = (LinearLayoutManager) quickActionRV.getLayoutManager();
+            int lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition();
             if ((lastVisibleItemPosition == itemsList.size() - 1 || lastVisibleItemPosition == itemsList.size()) &&
                     layoutManager.findFirstVisibleItemPosition() == 0 &&
                     fab.getVisibility() != View.VISIBLE ||
@@ -372,7 +368,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
                 return false;
             else {
                 int selectedPosition = viewHolder.getAdapterPosition();
-                int targetPosition   = target.getAdapterPosition();
+                int targetPosition = target.getAdapterPosition();
                 Log.v(TAG, "selected: " + selectedPosition + ", target: " + targetPosition);
 
                 if (selectedPosition < 0 || targetPosition < 0)
@@ -400,10 +396,10 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
         }
 
         public class QuickActionItemVH extends RecyclerView.ViewHolder {
-            public TextView  title;
-            public TextView  subTitle;
+            public TextView title;
+            public TextView subTitle;
             public ImageView icon;
-            public View      divider;
+            public View divider;
             public ImageView handleView;
             public ImageView closeBtn;
             public View container;

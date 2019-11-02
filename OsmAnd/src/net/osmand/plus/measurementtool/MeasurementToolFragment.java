@@ -23,7 +23,6 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.TypedValue;
-import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,19 +36,20 @@ import android.widget.Toast;
 
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
-import net.osmand.IndexConstants;
-import net.osmand.data.LatLon;
-import net.osmand.plus.ApplicationMode;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.Route;
 import net.osmand.GPXUtilities.Track;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
+import net.osmand.IndexConstants;
+import net.osmand.data.LatLon;
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TrackActivity;
@@ -190,21 +190,19 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 
 		editingCtx.getCommandManager().resetMeasurementLayer(measurementLayer);
 		nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
-		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
-		final int backgroundColor = ContextCompat.getColor(getActivity(),
-				nightMode ? R.color.activity_background_color_dark : R.color.activity_background_color_light);
-		portrait = AndroidUiHelper.isOrientationPortrait(getActivity());
+		portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
 
 		upIcon = getContentIcon(R.drawable.ic_action_arrow_up);
 		downIcon = getContentIcon(R.drawable.ic_action_arrow_down);
 		pointsSt = getString(R.string.shared_string_gpx_points).toLowerCase();
 
-		View view = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_measurement_tool, null);
+		View view = UiUtilities.getInflater(getContext(), nightMode).inflate(R.layout.fragment_measurement_tool, null);
 
 		mainView = view.findViewById(R.id.main_view);
 		AndroidUtils.setBackground(mapActivity, mainView, nightMode, R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);
 		pointsListContainer = view.findViewById(R.id.points_list_container);
 		if (portrait && pointsListContainer != null) {
+			final int backgroundColor = ContextCompat.getColor(mapActivity, nightMode ? R.color.activity_background_color_dark : R.color.activity_background_color_light);
 			pointsListContainer.setBackgroundColor(backgroundColor);
 		}
 
@@ -367,7 +365,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 				String azimuthStr = OsmAndFormatter.getFormattedAzimuth(bearing, getMyApplication());
 				distanceToCenterTv.setText(String.format(" – %1$s • %2$s", distStr, azimuthStr));
 				TextViewCompat.setAutoSizeTextTypeUniformWithConfiguration(
-					distanceToCenterTv, 12, 18, 2, TypedValue.COMPLEX_UNIT_SP
+						distanceToCenterTv, 12, 18, 2, TypedValue.COMPLEX_UNIT_SP
 				);
 			}
 		});
@@ -421,7 +419,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 			public void onClick(View v) {
 				if (editingCtx.getPointsCount() > 0) {
 					if (newGpxData != null && newGpxData.getActionType() == NewGpxData.ActionType.EDIT_SEGMENT
-						&& editingCtx.isInSnapToRoadMode()) {
+							&& editingCtx.isInSnapToRoadMode()) {
 						if (mapActivity != null && measurementLayer != null) {
 							if (editingCtx.getPointsCount() > 0) {
 								openSaveAsNewTrackMenu(mapActivity);
@@ -1156,8 +1154,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			final File dir = mapActivity.getMyApplication().getAppPath(IndexConstants.GPX_INDEX_DIR);
-			final LayoutInflater inflater = mapActivity.getLayoutInflater();
-			final View view = inflater.inflate(R.layout.save_gpx_dialog, null);
+			final View view = UiUtilities.getInflater(mapActivity, nightMode).inflate(R.layout.save_gpx_dialog, null);
 			final EditText nameEt = (EditText) view.findViewById(R.id.gpx_name_et);
 			final TextView warningTextView = (TextView) view.findViewById(R.id.file_exists_text_view);
 			final SwitchCompat showOnMapToggle = (SwitchCompat) view.findViewById(R.id.toggle_show_on_map);
@@ -1175,7 +1172,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 			nameEt.setSelection(displayedName.length());
 			final boolean[] textChanged = new boolean[1];
 
-			AlertDialog.Builder builder = new AlertDialog.Builder(mapActivity)
+			AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(mapActivity, nightMode))
 					.setTitle(R.string.enter_gpx_name)
 					.setView(view)
 					.setPositiveButton(R.string.shared_string_save, new DialogInterface.OnClickListener() {
@@ -1271,7 +1268,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 				TrkSegment after = editingCtx.getAfterTrkSegmentLine();
 				if (gpx == null) {
 					toSave = new File(dir, fileName);
-					String trackName = fileName.substring(0,fileName.length()-GPX_SUFFIX.length());
+					String trackName = fileName.substring(0, fileName.length() - GPX_SUFFIX.length());
 					GPXFile gpx = new GPXFile(Version.getFullVersion(activity.getMyApplication()));
 					if (measurementLayer != null) {
 						if (saveType == SaveType.LINE) {
@@ -1509,11 +1506,10 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 				dismiss(mapActivity);
 				return;
 			}
-			AlertDialog.Builder builder = new AlertDialog.Builder(mapActivity);
+			AlertDialog.Builder builder = new AlertDialog.Builder(UiUtilities.getThemedContext(mapActivity, nightMode));
 			if (editingCtx.getNewGpxData() == null) {
 				final File dir = mapActivity.getMyApplication().getAppPath(IndexConstants.GPX_INDEX_DIR);
-				final LayoutInflater inflater = mapActivity.getLayoutInflater();
-				final View view = inflater.inflate(R.layout.close_measurement_tool_dialog, null);
+				final View view = UiUtilities.getInflater(mapActivity, nightMode).inflate(R.layout.close_measurement_tool_dialog, null);
 				final SwitchCompat showOnMapToggle = (SwitchCompat) view.findViewById(R.id.toggle_show_on_map);
 
 				builder.setView(view);
