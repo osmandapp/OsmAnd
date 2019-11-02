@@ -2594,7 +2594,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="notes_by_date">Notes par date</string>
     <string name="by_date">Par date</string>
     <string name="by_type">Par type</string>
-    <string name="modify_the_search_query">Modifier la recherche.</string>
+    <string name="modify_the_search_query">Modifier votre recherche.</string>
     <string name="release_3_0">• Nouveauté : guides de voyage hors ligne. Les données sont fournies par Wikivoyage
 \n 
 \n• Wikipedia : nouvelle apparence, liens cliquables, affichage des images
@@ -2652,7 +2652,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="last_intermediate_dest_description">Ajoute une étape</string>
     <string name="first_intermediate_dest_description">Ajoute comme première étape</string>
     <string name="subsequent_dest_description">Monter et définir comme destination</string>
-    <string name="make_as_start_point">Utiliser comme point de départ</string>
+    <string name="make_as_start_point">Utiliser ce point comme départ</string>
     <string name="map_import_error">Erreur d\'import de la carte</string>
     <string name="map_imported_successfully">Carte importée</string>
     <string name="enter_the_file_name">Saisissez le nom du fichier.</string>
@@ -2671,8 +2671,8 @@ représentant la zone : %1$s x %2$s</string>
     <string name="enter_lon">Saisissez la longitude</string>
     <string name="enter_lat">Saisissez la latitude</string>
     <string name="enter_lat_and_lon">Saisissez la latitude et la longitude</string>
-    <string name="distance_farthest">Distance : Le plus loin en premier</string>
-    <string name="distance_nearest">Distance : Le plus proche en premier</string>
+    <string name="distance_farthest">Le plus lointain en premier</string>
+    <string name="distance_nearest">Le plus proche en premier</string>
     <string name="rendering_attr_whiteWaterSports_name">Sports d\'eau douce</string>
     <string name="group_deleted">Groupe supprimé</string>
     <string name="clear_all_intermediates">Effacer toutes les étapes</string>
@@ -2685,7 +2685,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="saved_articles">Articles favoris</string>
     <string name="shared_string_explore">Explorer</string>
     <string name="use_two_digits_longitude">Utiliser une longitude à 2 chiffres</string>
-    <string name="wikivoyage_search_hint">Rechercher : Pays, Ville, Département</string>
+    <string name="wikivoyage_search_hint">Rechercher par Pays, Ville, Département</string>
     <string name="shared_string_read">Lire</string>
     <string name="article_removed">Article supprimé</string>
     <string name="shared_string_contents">Contenus</string>
@@ -2707,7 +2707,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="shared_string_travel_book">Carnet de voyage</string>
     <string name="download_images">Télécharger les images</string>
     <string name="purchase_dialog_title">Sélectionnez un abonnement</string>
-    <string name="purchase_dialog_subtitle">Sélectionnez l\'élément adapté :</string>
+    <string name="purchase_dialog_subtitle">Sélectionnez l\'élément adapté</string>
     <string name="purchase_dialog_travel_description">Achetez l\'une des options suivantes pour obtenir la fonctionnalité guide de voyage hors ligne :</string>
     <string name="wikivoyage_travel_guide_descr">Guides des lieux les plus intéressants au monde depuis OsmAnd et sans connexion Internet.</string>
     <string name="wikivoyage_travel_guide">Guides de voyage</string>
@@ -2719,17 +2719,15 @@ représentant la zone : %1$s x %2$s</string>
     <string name="unlimited_downloads">Téléchargements illimités</string>
     <string name="wikipedia_offline">Wikipedia hors-ligne</string>
     <string name="unlock_all_features">Activez toutes les fonctionnalités d\'OsmAnd</string>
-    <string name="monthly_map_updates">Mise à jour des cartes : <b>Tous les mois</b>
-    </string>
-    <string name="daily_map_updates">Mise à jour des cartes : <b>Toutes les heures</b>
-    </string>
+    <string name="monthly_map_updates"> string name=\"lat_lon_pattern\"&gt;Lat. : %1$.5f Lon. : %2$.5f&lt;/string </string>
+    <string name="daily_map_updates"> string name=\"lat_lon_pattern\"&gt;Lat. : %1$.5f Lon. : %2$.5f&lt;/string </string>
     <string name="in_app_purchase_desc_ex">La validité de votre achat sera permanente.</string>
     <string name="travel_card_update_descr">Mise à jour disponible, téléchargez les données Wikivoyage et profitez.</string>
     <string name="travel_card_download_descr">Téléchargez les guides Wikivoyage pour consulter des articles sur les lieux sans connexion Internet.</string>
     <string name="update_is_available">Mise à jour disponible</string>
     <string name="download_file">Télécharger le fichier</string>
     <string name="start_editing_card_image_text">Le guide de voyage mondial et gratuit que chacun peut améliorer.</string>
-    <string name="start_editing_card_description">Vous pouvez contribuer aux articles sur Wikivoyage et ainsi partager vos connaissances, vos expériences et votre talent</string>
+    <string name="start_editing_card_description">Vous pouvez contribuer aux articles sur Wikivoyage et ainsi partager vos connaissances, vos expériences et votre talent.</string>
     <string name="start_editing">Démarrer les modifications</string>
     <string name="get_unlimited_access">Obtenir un accès illimité</string>
     <string name="welcome_to_open_beta">Bienvenue dans cette bêta ouverte !</string>
@@ -2803,7 +2801,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="increase_search_radius_to">Augmenter le rayon de recherche à %1$s</string>
     <string name="thank_you_for_feedback">Merci pour vos retours</string>
     <string name="poi_cannot_be_found">Nœud ou Route introuvable.</string>
-    <string name="search_no_results_feedback">Aucun résultat pour cette recherche \? 
+    <string name="search_no_results_feedback">Aucun résultat de recherche \? 
 \nSignalez-le nous</string>
     <string name="test_voice_desrc">Appuyez sur un bouton pour écoutez l\'annonce vocale correspondante afin d\'identifier les annonces erronées ou manquantes.</string>
     <string name="release_3_2_pre">• Correction du plantage au démarrage survenant pour certains appareils
@@ -2822,7 +2820,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="commiting_way">Envoi de la direction…</string>
     <string name="ask_for_location_permission">Avant de poursuivre, veuillez accorder à OsmAnd l\'autorisation d’utiliser votre position.</string>
     <string name="rendering_value_black_name">Noir</string>
-    <string name="more_transport_on_stop_hint">Il y a d\'autres moyens de transport à cet arrêt.</string>
+    <string name="more_transport_on_stop_hint">Autres moyens de transport disponibles à cet arrêt.</string>
     <string name="search_street">Rechercher une rue</string>
     <string name="start_search_from_city">Recherche par ville</string>
     <string name="shared_string_restore">Restaurer</string>
@@ -2840,7 +2838,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="osm_live_payment_current_subscription">Abonnement en cours</string>
     <string name="default_price_currency_format">%1$.2f %2$s</string>
     <string name="osm_live_payment_header">Sélectionnez l\'abonnement qui vous convient :</string>
-    <string name="osm_live_payment_contribute_descr">Une partie des revenus est reversée aux contributeurs OpenStreetMap.</string>
+    <string name="osm_live_payment_contribute_descr">Les dons financent la cartographie OpenStreetMap.</string>
     <string name="osm_live_plan_pricing">Abonnements &amp; tarifs</string>
     <string name="osm_live_payment_renews_monthly">Tous les mois</string>
     <string name="osm_live_payment_renews_quarterly">Tous les trimestres</string>
@@ -3110,7 +3108,7 @@ représentant la zone : %1$s x %2$s</string>
 \n
 \nVous pouvez changer d\'avis à tout moment dans Paramètres &gt; Vie privée et Sécurité.</string>
     <string name="downloaded_maps_collect_descr">Aidez nous à connaître les pays et régions les plus populaires.</string>
-    <string name="privacy_and_security_change_descr">En sélectionnant \"Autoriser\" vous acceptez nos %1$s.</string>
+    <string name="privacy_and_security_change_descr">Appuyez sur \"Autoriser\" pour accepter nos %1$s</string>
     <string name="settings_derived_routing_mode_string">Mode utilisateur, dérive de : %s</string>
     <string name="profile_alert_need_routing_type_msg">Merci de sélectionner un type de navigation pour le nouveau profil</string>
     <string name="turn_on_profile_desc">Merci d\'activer au moins un profil pour utiliser cette option.</string>
