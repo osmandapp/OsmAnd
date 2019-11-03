@@ -326,7 +326,7 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 	//public static final int BT_SCO_DELAY = 1500;
 
 	// This only needed for init debugging in TestVoiceActivity:
-	public static String btScoInit = "";
+	public static String btScoInit = "-";
 
 	private synchronized boolean toggleBtSco(boolean on) {
 	// Hardy, 2016-07-03: Establish a low quality BT SCO (Synchronous Connection-Oriented) link to interrupt e.g. a car stereo FM radio
