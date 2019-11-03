@@ -448,12 +448,18 @@ public class OsmandSettings {
 
 		@Override
 		public boolean writeToJson(JSONObject json, ApplicationMode appMode) throws JSONException {
-			return writeAppModeToJson(json, this);
+			if (appMode == null) {
+				return writeAppModeToJson(json, this);
+			} else {
+				return true;
+			}
 		}
 
 		@Override
 		public void readFromJson(JSONObject json, ApplicationMode appMode) throws JSONException {
-			readAppModeFromJson(json, this);
+			if (appMode == null) {
+				readAppModeFromJson(json, this);
+			}
 		}
 
 		@Override
@@ -1162,12 +1168,18 @@ public class OsmandSettings {
 
 		@Override
 		public boolean writeToJson(JSONObject json, ApplicationMode appMode) throws JSONException {
-			return writeAppModeToJson(json, this);
+			if (appMode == null) {
+				return writeAppModeToJson(json, this);
+			} else {
+				return true;
+			}
 		}
 
 		@Override
 		public void readFromJson(JSONObject json, ApplicationMode appMode) throws JSONException {
-			readAppModeFromJson(json, this);
+			if (appMode == null) {
+				readAppModeFromJson(json, this);
+			}
 		}
 
 		@Override
@@ -1204,12 +1216,18 @@ public class OsmandSettings {
 
 		@Override
 		public boolean writeToJson(JSONObject json, ApplicationMode appMode) throws JSONException {
-			return writeAppModeToJson(json, this);
+			if (appMode == null) {
+				return writeAppModeToJson(json, this);
+			} else {
+				return true;
+			}
 		}
 
 		@Override
 		public void readFromJson(JSONObject json, ApplicationMode appMode) throws JSONException {
-			readAppModeFromJson(json, this);
+			if (appMode == null) {
+				readAppModeFromJson(json, this);
+			}
 		}
 
 		@Override

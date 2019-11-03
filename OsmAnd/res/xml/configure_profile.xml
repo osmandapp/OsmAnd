@@ -56,6 +56,29 @@
 		android:title="@string/plugins_settings" />
 
 	<Preference
+		android:layout="@layout/list_item_divider"
+		android:selectable="false" />
+
+	<PreferenceCategory
+		android:key="settings_actions"
+		android:layout="@layout/preference_category_with_descr"
+		android:title="@string/shared_string_actions" />
+
+	<Preference
+		android:key="export_profile"
+		android:layout="@layout/preference_button"
+		android:persistent="false"
+		android:title="@string/export_profile"
+		tools:icon="@drawable/ic_action_app_configuration" />
+
+	<Preference
+		android:key="export_profile_descr"
+		android:layout="@layout/preference_info_descr_with_title"
+		android:title="@string/profile_import"
+		android:summary="@string/profile_import_descr"
+		android:selectable="false" />
+
+	<Preference
 		android:layout="@layout/card_bottom_divider"
 		android:selectable="false" />
 
