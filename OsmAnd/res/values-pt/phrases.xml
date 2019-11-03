@@ -3713,4 +3713,22 @@
     <string name="poi_charge">Cobrança</string>
     <string name="poi_pet_grooming">Asseio de animais</string>
     <string name="poi_atm_yes">Caixa automática: sim</string>
+    <string name="poi_cash_withdrawal_bank_card">Levantamento de dinheiro</string>
+    <string name="poi_cash_withdrawal_yes">Levantamento de dinheiro: sim</string>
+    <string name="poi_cash_withdrawal">Levantamento de dinheiro</string>
+    <string name="poi_cash_withdrawal_operator">Operador de levantamento de dinheiro</string>
+    <string name="poi_cash_withdrawal_type_checkout">Tipo de levantamento de dinheiro: finalização</string>
+    <string name="poi_cash_withdrawal_type_self_checkout">Tipo de levantamento de dinheiro: finalização automática</string>
+    <string name="poi_cash_withdrawal_limit">Limite de levantamento de dinheiro</string>
+    <string name="poi_cash_withdrawal_currency">Moeda de levantamento de dinheiro</string>
+    <string name="poi_cash_withdrawal_purchase_required_yes">Levantamento de dinheiro: compra necessária</string>
+    <string name="poi_cash_withdrawal_purchase_required_no">Levantamento de dinheiro: sem necessidade de compra</string>
+    <string name="poi_cash_withdrawal_fee_yes">Taxa de levantamento de dinheiro: sim</string>
+    <string name="poi_cash_withdrawal_fee_no">Taxa de levantamento de dinheiro: não</string>
+    <string name="poi_cash_withdrawal_purchase_minimum">Levantamento de dinheiro: compra mínima</string>
+    <string name="poi_cash_withdrawal_foreign_cards">Levantamento de dinheiro: cartões estrangeiros</string>
+    <string name="poi_cash_withdrawal_postfinance_card">Cartão Postfinance</string>
+    <string name="poi_cash_withdrawal_migros_bank">Banco Migros</string>
+    <string name="poi_cash_withdrawal_girocard">Girocard</string>
+    <string name="poi_cash_withdrawal_postbank">Postbank</string>
 </resources>
