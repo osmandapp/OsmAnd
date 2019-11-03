@@ -13,12 +13,12 @@
 -->
     <string name="export_profile">Export profile</string>
     <string name="exported_osmand_profile">OsmAnd profile: %1$s</string>
-    <string name="overwrite_profile_q">Profile \'%1$s\' is already exists. Overwrite?</string>
-    <string name="export_profile_failed">Failed to export profile</string>
+    <string name="overwrite_profile_q">Profile \'%1$s\' already exists. Overwrite?</string>
+    <string name="export_profile_failed">Failed to export profile.</string>
     <string name="profile_import">Profile Import:</string>
-    <string name="profile_import_descr">Select a file on the device and open it with OsmAnd, the profile will be imported into application.</string>
+    <string name="profile_import_descr">To import a profile, select its file on the device and open it with OsmAnd.</string>
     <string name="file_import_error">%1$s import error: %2$s</string>
-    <string name="file_imported_successfully">%1$s imported successfully</string>
+    <string name="file_imported_successfully">%1$s successfully imported.</string>
     <string name="tts_initialization_error">Cannot start text-to-speech engine</string>
     <string name="layer_osm_edits">OSM Edits</string>
     <string name="quick_action_contour_lines_descr">Tapping this action button shows or hides contour lines on the map</string>
