@@ -723,7 +723,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 				routingHelper.setRoutePlanningMode(false);
 				mapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
 				app.getRoutingHelper().notifyIfRouteIsCalculated();
-				if (!app.getSettings().SIMULATE_NAVIGATION.get()) {
+				if (!app.getSettings().simulateNavigation) {
 					routingHelper.setCurrentLocation(app.getLocationProvider().getLastKnownLocation(), false);
 				} else if (routingHelper.isRouteCalculated() && !routingHelper.isRouteBeingCalculated()) {
 					OsmAndLocationSimulation sim = app.getLocationProvider().getLocationSimulation();

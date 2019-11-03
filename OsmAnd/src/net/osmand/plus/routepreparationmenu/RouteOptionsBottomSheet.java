@@ -15,10 +15,8 @@ import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities;
 import net.osmand.plus.ApplicationMode;
-import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationSimulation;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -30,7 +28,6 @@ import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerStartItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
-import net.osmand.plus.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.AvoidPTTypesRoutingParameter;
 import net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.AvoidRoadsRoutingParameter;
@@ -207,7 +204,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 	private BaseBottomSheetItem createRouteSimulationItem(final LocalRoutingParameter optionsItem) {
 		final BottomSheetItemWithCompoundButton[] simulateNavigationItem = new BottomSheetItemWithCompoundButton[1];
 		simulateNavigationItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
-				.setChecked(settings.SIMULATE_NAVIGATION.get())
+				.setChecked(settings.simulateNavigation)
 				.setIcon(getContentIcon(R.drawable.ic_action_start_navigation))
 				.setTitle(getString(R.string.simulate_navigation))
 //				.setDescription(app.getLocationProvider().getLocationSimulation().isRouteAnimating()
@@ -216,8 +213,8 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						boolean enabled = !settings.SIMULATE_NAVIGATION.get();
-						settings.SIMULATE_NAVIGATION.set(enabled);
+						boolean enabled = !settings.simulateNavigation;
+						settings.simulateNavigation = enabled;
 						simulateNavigationItem[0].setChecked(enabled);
 						OsmAndLocationSimulation sim = app.getLocationProvider().getLocationSimulation();
 						if (sim.isRouteAnimating()) {
