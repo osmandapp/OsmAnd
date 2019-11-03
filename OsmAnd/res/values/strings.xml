@@ -135,7 +135,7 @@
     <string name="vehicle_parameters">Vehicle parameters</string>
     <string name="voice_announces_info">Voice announcements only happen during navigation.</string>
     <string name="voice_announces_descr">Navigation instructions and announcements</string>
-    <string name="voice_announces">Voice announcements</string>
+    <string name="voice_announces">Voice prompts</string>
     <string name="screen_alerts">Screen alerts</string>
     <string name="route_parameters_descr">Configure route parameters</string>
     <string name="route_parameters">Route parameters</string>
@@ -438,7 +438,7 @@
     <string name="show_along_the_route">Show along the route</string>
     <string name="simulate_navigation">Simulate navigation</string>
     <string name="choose_track_file_to_follow">Select track file to follow</string>
-    <string name="voice_announcements">Voice announcements</string>
+    <string name="voice_announcements">Voice prompts</string>
     <string name="intermediate_destinations">Intermediate destinations</string>
     <string name="arrive_at_time">Arrive at %1$s</string>
     <string name="osm_live_subscriptions">Subscriptions</string>
@@ -1080,7 +1080,7 @@
     <!-- string name="release_2_4">
 	\u2022 New very powerful free text search\n\n
 	\u2022 Car audio system / speaker phone integration via Bluetooth\n\n
-	\u2022 Improved route guidance, voice announcements, and turn lane indication\n\n
+	\u2022 Improved route guidance, voice prompting, and turn lane indication\n\n
 	\u2022 Improved transport layer with route rendering\n\n
 	\u2022 Added more locales and now support regional locales\n\n
 	\u2022 Many other improvements and bugfixes\n\n
@@ -1641,7 +1641,7 @@
     <string name="osmand_accessibility_description">This plugin makes the device\'s accessibility features available directly in OsmAnd. It facilitates e.g. adjusting the speech rate for text-to-speech voices, configuring directional-pad screen navigation, using a trackball for zoom control, or text-to-speech feedback, for example to auto announcing your position.</string>
     <string name="osm_settings">OSM editing</string>
     <string name="osm_editing_plugin_description">Via this plugin OsmAnd can be used to make OSM contributions like creating or modifying OSM POI objects, opening or commenting OSM Notes, and contributing recorded GPX files. OSM is a community driven, global public domain mapping project. For details please refer to https://openstreetmap.org. Active participation is appreciated, and contributions can be made directly from OsmAnd, if you specify your personal OSM credentials in the app.</string>
-    <string name="osmand_development_plugin_description">This plugin displays settings for development and debugging features like to test or simulate routing, the rendering performance, or voice announcements. These settings are intended for developers and are not needed for the general user.</string>
+    <string name="osmand_development_plugin_description">This plugin displays settings for development and debugging features like to test or simulate routing, the rendering performance, or voice prompting. These settings are intended for developers and are not needed for the general user.</string>
     <string name="debugging_and_development">OsmAnd development</string>
     <string name="rename_failed">Renaming failed.</string>
     <string name="days_behind">days behind</string>
@@ -2239,7 +2239,7 @@
     <string name="auto_zoom_map">Auto zoom map</string>
     <string name="snap_to_road_descr">Snap position to roads during navigation.</string>
     <string name="snap_to_road">Snap to road</string>
-    <string name="interrupt_music_descr">Voice announcements pause music playback.</string>
+    <string name="interrupt_music_descr">Voice prompts pause music playback.</string>
     <string name="interrupt_music">Pause music</string>
     <string name="osmand_play_title_30_chars">OsmAnd Maps &amp; Navigation</string>
     <string name="osmand_short_description_80_chars">Global mobile map viewing and navigation for offline and online OSM maps</string>
@@ -2561,7 +2561,7 @@
     <string name="vector_maps_may_display_faster_on_some_devices">Vector maps likely display faster. May not work well on some devices.</string>
     <string name="play_commands_of_currently_selected_voice">Select a voice and test by playing announcements:</string>
     <string name="native_rendering">Native rendering</string>
-    <string name="test_voice_prompts">Test voice announcements</string>
+    <string name="test_voice_prompts">Test voice prompts</string>
     <string name="switch_to_raster_map_to_see">Download an offline vector map for this location in \'Settings\' (\'Manage map files\'), or switch to the \'Online maps\' plugin.</string>
     <string name="send_files_to_osm">Send GPX files to OSM?</string>
     <string name="gpx_visibility_txt">Visibility</string>
@@ -2665,8 +2665,8 @@
     <string name="index_name_oceania">Australia and Oceania</string>
     <string name="index_name_other">Worldwide and topic maps</string>
     <string name="index_name_wiki">Worldwide Wikipedia POIs</string>
-    <string name="index_name_voice">Voice announcements (recorded, limited features)</string>
-    <string name="index_name_tts_voice">Voice announcements (TTS, preferred)</string>
+    <string name="index_name_voice">Voice prompts (recorded, limited features)</string>
+    <string name="index_name_tts_voice">Voice prompts (TTS, preferred)</string>
     <string name="amenity_type_osmwiki">Wikipedia (offline)</string>
     <string name="amenity_type_user_defined">User defined</string>
     <string name="fav_export_confirmation">File containing previously exported Favorites already exists. Replace it?</string>
@@ -2762,8 +2762,8 @@
     <string name="local_index_transport_data">Public transport data</string>
     <string name="local_index_map_data">Map data</string>
     <string name="local_indexes_cat_backup">Deactivated</string>
-    <string name="local_indexes_cat_tts">Voice announcements (TTS)</string>
-    <string name="local_indexes_cat_voice">Voice announcements (recorded)</string>
+    <string name="local_indexes_cat_tts">Voice prompts (TTS)</string>
+    <string name="local_indexes_cat_voice">Voice prompts (recorded)</string>
     <!-- string name="local_indexes_cat_gpx">GPX data</string -->
     <string name="local_indexes_cat_poi">POI data</string>
     <string name="ttsvoice">TTS voice</string>
@@ -2876,8 +2876,8 @@
     <string name="select_build_to_install">Select the OsmAnd build to install</string>
     <string name="gps_status_app_not_found">GPS status app not installed. Search in market?</string>
     <!-- Use ← for RTL languages -->
-    <string name="voice_is_not_available_msg">No voice guidance available, please go to \'Settings\' → \'Navigation settings\', select the profile → \'Voice guidance\' and select or download a voice announcement package.</string>
-    <string name="voice_is_not_available_title">Select a voice announcement package</string>
+    <string name="voice_is_not_available_msg">No voice guidance available, please go to \'Settings\' → \'Navigation settings\', select the profile → \'Voice guidance\' and select or download a voice prompt package.</string>
+    <string name="voice_is_not_available_title">Select a voice prompt package</string>
     <string name="daynight_mode_day">Day</string>
     <string name="daynight_mode_night">Night</string>
     <string name="daynight_mode_auto">Sunrise/sunset</string>
@@ -2911,7 +2911,7 @@
     <string name="transport_searching_route">Transport results ({0} to destination):</string>
     <string name="transport_search_again">Reset transport search</string>
     <string name="voice">Recorded voice</string>
-    <string name="voices">Voice announcements</string>
+    <string name="voices">Voice prompts</string>
     <string name="no_vector_map_loaded">Vector maps were not loaded</string>
     <!-- string name="map_route_by_gpx">Navigate using GPX</string-->
     <string name="gpx_files_not_found">No GPX files found in the tracks folder</string>
@@ -2970,7 +2970,7 @@
     <string name="voice_data_initializing">Initializing voice data…</string>
     <string name="voice_data_not_supported">Unsupported version of voice data</string>
     <string name="voice_data_corrupted">Specified voice data is corrupted</string>
-    <string name="voice_data_unavailable">Selected voice announcement package is not available</string>
+    <string name="voice_data_unavailable">Selected voice prompt package is not available</string>
     <string name="sd_unmounted">Memory card not accessible.\nYou won\'t be able to see maps or find things.</string>
     <string name="sd_mounted_ro">Memory card read-only.\nIt is now only possible to see the preloaded map, not download new areas.</string>
     <string name="unzipping_file">Unzipping file…</string>
