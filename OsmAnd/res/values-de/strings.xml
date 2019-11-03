@@ -10,7 +10,7 @@
     <string name="regions">Regionen</string>
     <string name="region_maps">Regionsweite Karten</string>
     <string name="world_maps">Weltweite Karten</string>
-    <string name="gps_network_not_enabled">Kein Standortdienst aktiviert. Aktivieren?</string>
+    <string name="gps_network_not_enabled">Standortservice ist deaktiviert. Einschalten\?</string>
     <string name="disable_recording_once_app_killed">Eigenständige Streckenaufzeichnung unterbinden</string>
     <string name="disable_recording_once_app_killed_descrp">Die GPX-Aufzeichnung wird angehalten, wenn OsmAnd beendet wird (über „zuletzt verwendete Apps“). (Die Hintergrunddienst-Anzeige verschwindet aus der Android-Benachrichtigungsleiste.)</string>
     <string name="shared_string_import2osmand">Nach OsmAnd importieren</string>
@@ -26,7 +26,7 @@
     <string name="traffic_warning_calming">Verkehrsberuhigung</string>
     <string name="traffic_warning_speed_camera">Geschwindigkeitskontrolle</string>
     <string name="traffic_warning">Verkehrswarnung</string>
-    <string name="speak_favorites">Nahegelegene Favoriten</string>
+    <string name="speak_favorites">Favoriten in der Nähe</string>
     <string name="speak_poi">Nahegelegene POI</string>
     <string name="confirm_every_run">Immer fragen</string>
     <string name="save_global_track_interval_descr">Aufzeichnungsintervall für die generelle Track-Aufzeichnung festlegen (via Schaltfläche \'GPX-Aufzeichnung\' auf dem Kartenbildschirm).</string>
@@ -820,7 +820,7 @@
     <string name="osb_comment_dialog_message">Nachricht</string>
     <string name="osb_comment_dialog_author">Autor</string>
     <string name="osb_comment_dialog_success">Kommentar hinzugefügt</string>
-    <string name="osb_comment_dialog_error">Kommentar konnte nicht hinzugefügt werden</string>
+    <string name="osb_comment_dialog_error">Kommentar konnte nicht hinzugefügt werden.</string>
     <string name="poi_edit_title">POI bearbeiten</string>
     <string name="poi_create_title">POI erstellen</string>
     <string name="poi_error_poi_not_found">Punkt wurde nicht gefunden oder das Objekt besteht aus mehreren Punkten, was noch nicht unterstützt wird.</string>
@@ -1066,7 +1066,7 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
     <string name="use_magnetic_sensor">Magnetsensor verwenden</string>
     <string name="local_indexes_cat_srtm">Höhenlinien</string>
     <string name="wait_current_task_finished">Bitte warten Sie, der laufende Task wird beendet</string>
-    <string name="shared_string_downloading">Herunterladen</string>
+    <string name="shared_string_downloading">Herunterladen…</string>
     <string name="local_osm_changes_backup_successful">OSM-Änderungsdatei erzeugt %1$s</string>
     <string name="local_osm_changes_backup_failed">OSM-Änderungen konnten nicht gesichert werden</string>
     <string name="local_osm_changes_backup">Als OSM-Änderung sichern</string>
@@ -1533,7 +1533,7 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
     <string name="welcome_header">Willkommen</string>
     <string name="current_route">Aktuelle Route</string>
     <string name="mark_to_delete">Zum Löschen markieren</string>
-    <string name="local_osm_changes_upload_all_confirm">Sie laden %1$d Änderung(en) zu OSM hoch. Fortfahren?</string>
+    <string name="local_osm_changes_upload_all_confirm">Sind Sie sicher, dass Sie %1$d Änderung(en) zu OSM hochladen möchten\?</string>
     <string name="confirmation_to_clear_history">Verlauf löschen?</string>
     <string name="osmand_parking_hour">h</string>
     <string name="osmand_parking_minute">min</string>
@@ -1642,7 +1642,7 @@ Lon %2$s</string>
     <string name="lang_vo">Volapük</string>
     <string name="lang_new">Newar / Nepal Bhase</string>
     <string name="lang_ceb">Cebuano</string>
-    <string name="local_recordings_delete_all_confirm">%1$d Notizen werden gelöscht. Fortfahren?</string>
+    <string name="local_recordings_delete_all_confirm">Sind Sie sicher, dass Sie %1$d Notizen löschen möchten\?</string>
     <string name="lang_te">Telugu</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Einfärbung gemäß Routennetzwerk</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Einfärbung gemäß OSMC Wandersymbol</string>
@@ -1668,8 +1668,8 @@ Lon %2$s</string>
     <string name="shared_string_card_was_hidden">Karte wurde versteckt</string>
     <string name="offline_maps_and_navigation">Offline-Karten\n&amp; Navigation</string>
     <string name="commit_poi">POI übermitteln</string>
-    <string name="routing_attr_avoid_shuttle_train_name">Pendelzug vermeiden</string>
-    <string name="routing_attr_avoid_shuttle_train_description">Pendelzug vermeiden</string>
+    <string name="routing_attr_avoid_shuttle_train_name">Kein Shuttlezug</string>
+    <string name="routing_attr_avoid_shuttle_train_description">Vermeidet die Nutzung von Shuttlezügen</string>
     <string name="plugin_settings">Erweiterungen</string>
     <string name="building_number">Hausnummer</string>
     <string name="opening_at">geöffnet ab</string>
@@ -1759,7 +1759,7 @@ Lon %2$s</string>
     <string name="contact_us">Kontakt</string>
     <string name="map_legend">Kartenlegende</string>
     <string name="access_from_map_description">Menütaste startet die Übersichtsseite, nicht das Menü</string>
-    <string name="show_on_start_description">\"Aus\" startet direkt die Kartenansicht.</string>
+    <string name="show_on_start_description">\'Aus\' startet die Karte direkt.</string>
     <string name="copied_to_clipboard">In die Zwischenablage kopiert</string>
     <string name="osm_save_offline">Offline speichern</string>
     <string name="osm_edit_modified_poi">Geänderter OSM-POI</string>
@@ -1775,9 +1775,9 @@ Lon %2$s</string>
     <string name="osn_reopen_dialog_title">Notiz wieder öffnen</string>
     <string name="osn_close_dialog_title">Notiz schließen</string>
     <string name="osn_add_dialog_success">Notiz erstellt</string>
-    <string name="osn_add_dialog_error">Notiz konnte nicht erstellt werden</string>
+    <string name="osn_add_dialog_error">Notiz konnte nicht erstellt werden.</string>
     <string name="osn_close_dialog_success">Notiz geschlossen</string>
-    <string name="osn_close_dialog_error">Notiz konnte nicht geschlossen werden</string>
+    <string name="osn_close_dialog_error">Notiz konnte nicht geschlossen werden.</string>
     <string name="context_menu_item_delete_waypoint">GPX-Wegpunkt löschen?</string>
     <string name="context_menu_item_edit_waypoint">GPX-Wegpunkt bearbeiten</string>
     <string name="lang_fy">Westfriesisch</string>
@@ -2081,7 +2081,7 @@ Lon %2$s</string>
     <string name="gpx_logging_no_data">Keine Daten</string>
     <string name="shared_string_trip">Strecke</string>
     <string name="shared_string_record">Aufzeichnen</string>
-    <string name="trip_rec_notification_settings">Aufnahme-Schnellstart aktivieren</string>
+    <string name="trip_rec_notification_settings">Schnellaufzeichnung einschalten</string>
     <string name="trip_rec_notification_settings_desc">Anzeige einer Systembenachrichtigung zum Starten der Streckenaufzeichnung.</string>
     <string name="shared_string_notifications">Benachrichtigungen</string>
     <string name="gpx_appearance">Aussehen</string>
