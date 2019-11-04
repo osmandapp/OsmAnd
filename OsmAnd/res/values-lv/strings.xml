@@ -2634,9 +2634,8 @@ No Afganistānas līdz Zimbabvei, no Austrālijas līdz ASV, Argentīna, Brazīl
     <string name="coord_input_save_as_track_descr">Jūs pievienojāt %1$s punktus. Ievadiet faila vārdu un nospiediet \"Saglabāt\".</string>
     <string name="point_deleted">Punkts %1$s izdzēsts</string>
     <string name="shared_string_world">Pasaule</string>
-    <string name="send_search_query_description">Mēs nosūtīsim jūsu meklēšanas pieprasījumu: <b>\"%1$s\"</b>, kā arī atrašanās vietas datus. <br/>
-        <br/>"  Personīgā informācija netiks iekļauta, šie dati tiks izmantoti vienīgi meklēšanas algoritma uzlabošanai. "<br/>
-    </string>
+    <string name="send_search_query_description">Mēs nosūtīsim jūsu meklēšanas pieprasījumu: \"%1$s\", kā arī atrašanās vietas datus. \n
+        \n"  Personīgā informācija netiks iekļauta, šie dati tiks izmantoti vienīgi meklēšanas algoritma uzlabošanai. "</string>
     <string name="send_search_query">Sūtīt meklēšanas pieprasījumu\?</string>
     <string name="thank_you_for_feedback">Paldies par Jūsu atsauksmi</string>
     <string name="poi_cannot_be_found">Vietu vai objektu nevar atrast.</string>
@@ -3032,10 +3031,8 @@ No Afganistānas līdz Zimbabvei, no Austrālijas līdz ASV, Argentīna, Brazīl
     <string name="unlimited_downloads">Neierobežotas lejupielādes</string>
     <string name="wikipedia_offline">Vikipēdija bezsaistē</string>
     <string name="unlock_all_features">Atbloķēt visas OsmAnd iespējas</string>
-    <string name="monthly_map_updates">Kartes atjauninājumi: <b>ikmēneša</b>
-    </string>
-    <string name="daily_map_updates">Kartes atjauninājumi: <b>katru stundu</b>
-    </string>
+    <string name="monthly_map_updates">Kartes atjauninājumi: ikmēneša</string>
+    <string name="daily_map_updates">Kartes atjauninājumi: katru stundu</string>
     <string name="travel_card_update_descr">Ir pieejami jauni Vikiceļojumu dati, veiciet atjaunināšanu.</string>
     <string name="travel_card_download_descr">Lejupielādējiet Vikiceļojumu tūrismu gidus, lai lasītu rakstus par vietām pasaulē bez pieslēgšanās internetam.</string>
     <string name="update_is_available">Pieejams atjauninājums</string>

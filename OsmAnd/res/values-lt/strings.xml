@@ -2476,10 +2476,8 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="get_unlimited_access">Gauti neribotą prieigą</string>
     <string name="welcome_to_open_beta">Sveiki atvykę į atvirą beta testavimą</string>
     <string name="wikivoyage_travel_guide">Kelionių vadovas</string>
-    <string name="monthly_map_updates">Žemėlapis atnaujinamas: <b>kas mėnesį</b>
-    </string>
-    <string name="daily_map_updates">Žemėlapis atnaujinamas: <b>kas valandą</b>
-    </string>
+    <string name="monthly_map_updates">Žemėlapis atnaujinamas: kas mėnesį</string>
+    <string name="daily_map_updates">Žemėlapis atnaujinamas: kas valandą</string>
     <string name="in_app_purchase_desc">Vienkartinis mokestis</string>
     <string name="purchase_unlim_title">Pirkti - %1$s</string>
     <string name="purchase_subscription_title">Prenumeruoti - %1$s</string>

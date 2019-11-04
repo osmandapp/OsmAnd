@@ -2519,9 +2519,8 @@
     <string name="open_in_browser_wiki">在线打开条目</string>
     <string name="wiki_article_not_found">未找到条目</string>
     <string name="increase_search_radius_to">增大搜索半径至 %1$s</string>
-    <string name="send_search_query_description">我们将会发送您的搜索请求：<b>\"%1$s\"</b>，以及您的位置。<br/>
-        <br/>我们不会搜集您的个人信息，我们只需要搜索数据以改进搜索算法。<br/>
-    </string>
+    <string name="send_search_query_description">我们将会发送您的搜索请求：\"%1$s\"，以及您的位置。\n
+        \n我们不会搜集您的个人信息，我们只需要搜索数据以改进搜索算法。</string>
     <string name="send_search_query">发送搜索请求？</string>
     <string name="search_street">搜索街道</string>
     <string name="start_search_from_city">请先选择城市</string>

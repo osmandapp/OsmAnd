@@ -2769,8 +2769,8 @@
     <string name="unlimited_downloads">دانلود نامحدود</string>
     <string name="wikipedia_offline">ویکی‌پدیای آفلاین</string>
     <string name="unlock_all_features">قفل‌گشایی از همهٔ قابلیت‌های OsmAnd</string>
-    <string name="monthly_map_updates"> string name=\"lat_lon_pattern\"&gt;طول: %1$.5f عرض: %2$.5f&lt;/string </string>
-    <string name="daily_map_updates"> string name=\"lat_lon_pattern\"&gt;طول: %1$.5f عرض: %2$.5f&lt;/string </string>
+    <string name="monthly_map_updates">به‌روزرسانی نقشه: ماهانه</string>
+    <string name="daily_map_updates">به‌روزرسانی نقشه: ساعتی</string>
     <string name="paid_app">برنامهٔ پولی</string>
     <string name="paid_plugin">افزونهٔ پولی</string>
     <string name="travel_card_update_descr">داده‌های تازهٔ ویکی‌سفر منتشر شده. به‌روز کنید و لذت ببرید.</string>
@@ -2830,7 +2830,6 @@
     <string name="coord_input_save_as_track_descr">%1$s نقطه افزودید. نام فایل را بنویسید و روی «ذخیره» بزنید.</string>
     <string name="point_deleted">نقطهٔ %1$s پاک شد</string>
     <string name="shared_string_world">جهان</string>
-    <string name="send_search_query_description"> string name=\"lat_lon_pattern\"&gt;طول: %1$.5f عرض: %2$.5f&lt;/string </string>
     <string name="search_no_results_description">چیزی پیدا نشد؟
 \nدر این باره با ما صحبت کنید.</string>
     <string name="send_search_query">عبارت جست‌وجویتان ارسال شود؟</string>
@@ -3402,7 +3401,6 @@
     <string name="quick_action_hillshade_show">نشان‌دادن سایه‌روشن‌ها</string>
     <string name="quick_action_hillshade_hide">پنهان‌کردن سایه‌روشن‌ها</string>
     <string name="quick_action_show_hide_hillshade">آشکار/پنهان کردن سایه‌روشن‌ها</string>
-    <string name="swap_start_and_destination"> string name=\"lat_lon_pattern\"&gt;طول: %1$.5f عرض: %2$.5f&lt;/string </string>
     <string name="tts_initialization_error">راه‌اندازی موتور متن به گفتار ناموفق بود</string>
     <string name="simulate_your_location_gpx_descr">موقعیت خود را با استفاده از یک رد GPX ضبط‌شده شبیه‌سازی کنید.</string>
 </resources>

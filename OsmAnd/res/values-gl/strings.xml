@@ -2516,9 +2516,8 @@ Lon %2$s</string>
 \n 
 \n • Outras correccións de erros 
 \n</string>
-    <string name="send_search_query_description">Mandaremos a consulta da procura: <b>«%1$s»</b>, así coma a ubicación.<br/>
-        <br/> Non recompilamos información persoal, só precisamos datos das procuras para mellorares o algoritmo da procura.<br/>
-    </string>
+    <string name="send_search_query_description">Mandaremos a consulta da procura: «%1$s», así coma a ubicación.\n
+        \n Non recompilamos información persoal, só precisamos datos das procuras para mellorares o algoritmo da procura.</string>
     <string name="send_search_query">Enviar consulta da procura\?</string>
     <string name="point_deleted">Punto %1$s eliminado</string>
     <string name="coord_input_edit_point">Editar punto</string>
@@ -2560,10 +2559,8 @@ Lon %2$s</string>
     <string name="get_unlimited_access">Obter acceso ilimitado</string>
     <string name="welcome_to_open_beta">Benvido á beta aberta</string>
     <string name="wikivoyage_travel_guide">Guieiros de viaxe</string>
-    <string name="monthly_map_updates">Actualizacións do mapa: <b>cada mes</b>
-    </string>
-    <string name="daily_map_updates">Actualizacións do mapa: <b>cada hora</b>
-    </string>
+    <string name="monthly_map_updates">Actualizacións do mapa: cada mes</string>
+    <string name="daily_map_updates">Actualizacións do mapa: cada hora</string>
     <string name="in_app_purchase">Pagamentos na aplicación</string>
     <string name="in_app_purchase_desc">Pagamento só unha vez</string>
     <string name="in_app_purchase_desc_ex">Unha vez mercado, ficará de xeito permanente dispoñíbel pra ti.</string>

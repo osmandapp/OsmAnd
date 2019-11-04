@@ -2721,10 +2721,8 @@
     <string name="wikivoyage_travel_guide">Турыстычны даведнік</string>
     <string name="osmand_team">Каманда OsmAnd</string>
     <string name="wikivoyage_travel_guide_descr">Дапаможнік па самым цікавым месцам на планеце ўнутры OsmAnd без злучэння з Інтэрнэтам.</string>
-    <string name="monthly_map_updates">Абнаўленні мапаў: <b>штомесяц</b>
-    </string>
-    <string name="daily_map_updates">Абнаўленні мапаў: <b>штогадзінна</b>
-    </string>
+    <string name="monthly_map_updates">Абнаўленні мапаў: штомесяц</string>
+    <string name="daily_map_updates">Абнаўленні мапаў: штогадзінна</string>
     <string name="in_app_purchase">Пакупка ў дадатку</string>
     <string name="in_app_purchase_desc">Разавы плацёж</string>
     <string name="in_app_purchase_desc_ex">Аднойчы набыты, будзе заўсёды даступны для вас.</string>
@@ -2802,9 +2800,8 @@
     <string name="coord_input_save_as_track_descr">Вы дадалі %1$s пунктаў. Увядзіце назву файла і націсніце \"захаваць\".</string>
     <string name="point_deleted">Пункт %1$s выдалены</string>
     <string name="shared_string_world">Свет</string>
-    <string name="send_search_query_description">Мы адправім ваш пашуковы запыт <b>«%1$s»</b>, а таксама вашае месцазнаходжанне. <br/>
-        <br/> Збіраюцца толькі неперасанальныя даныя, даныя пошуку выкарыстоўваюцца толькі для таго, каб палепшыць алгарытм пошуку.<br/>
-    </string>
+    <string name="send_search_query_description">Мы адправім ваш пашуковы запыт «%1$s», а таксама вашае месцазнаходжанне. \n
+        \n Збіраюцца толькі неперасанальныя даныя, даныя пошуку выкарыстоўваюцца толькі для таго, каб палепшыць алгарытм пошуку.</string>
     <string name="search_no_results_description">Няма вынікаў?
 \nРаспавядзіце нам аб гэтым.</string>
     <string name="send_search_query">Адправіць пашуковы запыт?</string>
@@ -2882,7 +2879,7 @@
     <string name="shared_string_capacity">Аб’ём</string>
     <string name="shared_string_width">Шырыня</string>
     <string name="shared_string_height">Вышыня</string>
-    <string name="swap_start_and_destination">Памяняць месцамі <b>пачатковы пункт</b> і <b>пункт прызначэння</b></string>
+    <string name="swap_start_and_destination">Памяняць месцамі пачатковы пункт і пункт прызначэння</string>
     <string name="add_destination_point">Дадаць пункт прызначэння</string>
     <string name="add_intermediate_point">Дадаць прамежкавы пункт</string>
     <string name="add_start_point">Дадаць пачатковы пункт</string>

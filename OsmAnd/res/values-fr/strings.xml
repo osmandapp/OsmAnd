@@ -2723,8 +2723,8 @@ représentant la zone : %1$s x %2$s</string>
     <string name="unlimited_downloads">Téléchargements illimités</string>
     <string name="wikipedia_offline">Wikipedia hors-ligne</string>
     <string name="unlock_all_features">Activez toutes les fonctionnalités d\'OsmAnd</string>
-    <string name="monthly_map_updates"> string name=\"lat_lon_pattern\"&gt;Lat. : %1$.5f Lon. : %2$.5f&lt;/string </string>
-    <string name="daily_map_updates"> string name=\"lat_lon_pattern\"&gt;Lat. : %1$.5f Lon. : %2$.5f&lt;/string </string>
+    <string name="monthly_map_updates">Mise à jour des cartes : Tous les mois</string>
+    <string name="daily_map_updates">Mise à jour des cartes : Toutes les heures</string>
     <string name="in_app_purchase_desc_ex">La validité de votre achat sera permanente.</string>
     <string name="travel_card_update_descr">Mise à jour disponible, téléchargez les données Wikivoyage et profitez.</string>
     <string name="travel_card_download_descr">Téléchargez les guides Wikivoyage pour consulter des articles sur les lieux sans connexion Internet.</string>
@@ -2784,9 +2784,8 @@ représentant la zone : %1$s x %2$s</string>
     <string name="coord_input_save_as_track_descr">Vous avez ajouté %1$s points. Donnez un nom au fichier et cliquez sur Enregistrer.</string>
     <string name="point_deleted">Point %1$s supprimé</string>
     <string name="shared_string_world">Monde</string>
-    <string name="send_search_query_description">Vous êtes sur le point d\'envoyer la recherche : <b>\"%1$s\"</b> ainsi que votre position.<br/>
-        <br/>Aucune donnée personnelle ne sera envoyée. Ces informations seront utilisées afin d\'améliorer l\'algorithme de recherche.<br/>
-    </string>
+    <string name="send_search_query_description">Vous êtes sur le point d\'envoyer la recherche : \"%1$s\" ainsi que votre position.\n
+        \nAucune donnée personnelle ne sera envoyée. Ces informations seront utilisées afin d\'améliorer l\'algorithme de recherche.</string>
     <string name="search_no_results_description">Aucun résultat ?
 \nSignalez-le nous.</string>
     <string name="send_search_query">Envoyez votre recherche ?</string>
@@ -3346,7 +3345,6 @@ représentant la zone : %1$s x %2$s</string>
     <string name="quick_action_hillshade_show">Afficher l\'ombrage du relief</string>
     <string name="quick_action_hillshade_hide">Masquer l\'ombrage du relief</string>
     <string name="quick_action_show_hide_hillshade">Afficher/Masquer l\'ombrage du relief</string>
-    <string name="swap_start_and_destination"> string name=\"lat_lon_pattern\"&gt;Lat. : %1$.5f Lon. : %2$.5f&lt;/string </string>
     <string name="tts_initialization_error">Impossible de démarrer le moteur de synthèse vocale</string>
     <string name="simulate_your_location_gpx_descr">Simulez votre position à l\'aide d\'une trace GPX enregistrée.</string>
 </resources>

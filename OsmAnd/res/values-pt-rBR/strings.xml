@@ -2677,8 +2677,8 @@ Pôr do Sol: %2$s</string>
     <string name="get_unlimited_access">Obtenha acesso ilimitado</string>
     <string name="wikivoyage_travel_guide">Guias de Viagem</string>
     <string name="wikivoyage_travel_guide_descr">Explore os guias Wikivoyage para os lugares mais interessantes do planeta no OsmAnd sem precisar de conexão com a internet.</string>
-    <string name="monthly_map_updates"> string name=\"lat_lon_pattern\"&gt;Lat: %1$.5f Lon: %2$.5f&lt;/string </string>
-    <string name="daily_map_updates"> string name=\"lat_lon_pattern\"&gt;Lat: %1$.5f Lon: %2$.5f&lt;/string </string>
+	<string name="monthly_map_updates">Atualizações de mapa: mensal</string>
+	<string name="daily_map_updates">Atualizações de mapa: a cada hora</string>
     <string name="in_app_purchase">Compra no aplicativo</string>
     <string name="in_app_purchase_desc">Pagamento uma só vez</string>
     <string name="in_app_purchase_desc_ex">Uma vez adquirido, ele sempre será disponível para você.</string>
@@ -2851,7 +2851,8 @@ Pôr do Sol: %2$s</string>
 \n 
 \n• Outras correções de bugs 
 \n</string>
-    <string name="send_search_query_description"> string name=\"lat_lon_pattern\"&gt;Lat: %1$.5f Lon: %2$.5f&lt;/string </string>
+    <string name="send_search_query_description">Enviaremos a sua pesquisa: \"%1$s\", bem como a sua localização.
+        \nNenhuma informação pessoal é coletada, os dados de pesquisa são usados apenas para melhorar o algoritmo de pesquisa.</string>
     <string name="osm_live_subscriptions">Assinaturas</string>
     <string name="mapillary_menu_title_pano">Exibir só imagens 360°</string>
     <string name="shared_string_launch">Iniciar</string>
@@ -3349,7 +3350,6 @@ Pôr do Sol: %2$s</string>
     <string name="shared_preference">Compartilhado</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">Preferir estradas não pavimentadas</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">Preferir estradas não pavimentadas.</string>
-    <string name="swap_start_and_destination"> string name=\"lat_lon_pattern\"&gt;Lat: %1$.5f Lon: %2$.5f&lt;/string </string>
     <string name="layer_osm_edits">Edições OSM</string>
     <string name="quick_action_contour_lines_descr">Tocar neste botão de ação mostra ou oculta linhas de contorno no mapa</string>
     <string name="quick_action_contour_lines_show">Mostrar curvas de nível</string>

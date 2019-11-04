@@ -2682,10 +2682,8 @@ POIの更新は利用できません</string>
     <string name="start_editing">編集を開始</string>
     <string name="get_unlimited_access">制限のないアクセス権の取得</string>
     <string name="wikivoyage_travel_guide">旅行ガイド</string>
-    <string name="monthly_map_updates">マップ更新: <b>毎月</b>
-    </string>
-    <string name="daily_map_updates">マップ更新: <b>毎時</b>
-    </string>
+    <string name="monthly_map_updates">マップ更新: 毎月</string>
+    <string name="daily_map_updates">マップ更新: 毎時</string>
     <string name="unlimited_downloads">無制限ダウンロード</string>
     <string name="wikipedia_offline">オフライン版Wikipedia</string>
     <string name="purchase_dialog_travel_description">オフラインでの旅行ガイド機能を有効にするには、次のいずれかを購入してください:</string>
@@ -2727,9 +2725,8 @@ POIの更新は利用できません</string>
     <string name="commiting_way">コミットする方法…</string>
     <string name="increase_search_radius_to">検索半径を%1$sに増やす</string>
     <string name="send_search_query_description">
-        <b>\"%1$s\"</b>とあなたの現在地を検索クエリとして送信します。<br/>
-        <br/>個人情報は収集されず、検索データは検索アルゴリズムを改善するためにのみ使用されます。<br/>
-    </string>
+        \"%1$s\"とあなたの現在地を検索クエリとして送信します。\n
+        \n個人情報は収集されず、検索データは検索アルゴリズムを改善するためにのみ使用されます。</string>
     <string name="shared_string_world">世界規模</string>
     <string name="point_deleted">%1$s地点を削除しました</string>
     <string name="how_to_open_link">リンクを開くには？</string>

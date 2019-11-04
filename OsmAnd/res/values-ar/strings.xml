@@ -2623,10 +2623,8 @@
     <string name="get_unlimited_access">تحصل على نفاذ بلا حدود</string>
     <string name="welcome_to_open_beta">مرحبا بكم على النسخة التجريبية المفتوحة</string>
     <string name="wikivoyage_travel_guide">أدلة السفر</string>
-    <string name="monthly_map_updates">تحديثات الخريطة:<b> كل شهر</b>
-    </string>
-    <string name="daily_map_updates">تحديثات الخريطة: <b>كل ساعة</b>
-    </string>
+    <string name="monthly_map_updates">تحديثات الخريطة: كل شهر</string>
+    <string name="daily_map_updates">تحديثات الخريطة: كل ساعة</string>
     <string name="purchase_unlim_title">شراء - %1$s</string>
     <string name="purchase_subscription_title">الاشتراك - %1$s</string>
     <string name="wikivoyage_offline">ويكي الرحلات دون اتصال</string>
@@ -2786,8 +2784,8 @@
     <string name="voice_announcements">إعلام صوتي</string>
     <string name="intermediate_destinations">الوجهات المتوسطة</string>
     <string name="arrive_at_time">الوصول عند %1$s</string>
-    <string name="send_search_query_description">سوف نرسل استعلام بحثك: <b>\"%1$s\"</b>, وكذلك موقعك.<br/>
-        <br/> لا يتم جمع أي معلومات شخصية ، ولا يتم استخدام بيانات البحث إلا لتحسين البحث.<br/>
+    <string name="send_search_query_description">سوف نرسل استعلام بحثك: \"%1$s\", وكذلك موقعك.\n
+        \n لا يتم جمع أي معلومات شخصية ، ولا يتم استخدام بيانات البحث إلا لتحسين البحث.\n
     </string>
     <string name="off_road_render_descr">مناسبة للاستخدام أثناء القيادة على الطرق الوعرة. مناسب للاستخدام مع صور الأقمار الصناعية الخضراء كمخطط موضعها. النقاط الرئيسية: تخفيض سمك الطريق الرئيسية، وزيادة سمك المسارات والمسارات ودراجات وطرق أخرى. استناداً إلى نمط \'Topo\'.</string>
     <string name="nautical_render_descr">نمط التنقل بحرية. الميزات الرئيسية: العوامات، المنارات، ريفيروايس، والخدمات البحر الممرات وعلامات، والمرافئ، سامارك، ملامح العمق.</string>

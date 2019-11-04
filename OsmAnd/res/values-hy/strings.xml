@@ -2546,9 +2546,8 @@
     <string name="start_editing">Սկսել խմբագրելը</string>
     <string name="get_unlimited_access">Ստանալ անսահմանափակ մուտք</string>
     <string name="welcome_to_open_beta">Բարի գալուստ բաց բետա տարբերակ</string>
-    <string name="monthly_map_updates">Քարտեզի թարմացումներ`<b>ամսական</b>
-    </string>
-    <string name="daily_map_updates">Քարտեզի թարմացումները`<b>ամեն ժամ</b> m</string>
+    <string name="monthly_map_updates">Քարտեզի թարմացումներ`ամսական</string>
+    <string name="daily_map_updates">Քարտեզի թարմացումները`ամեն ժամ m</string>
     <string name="in_app_purchase">Գնում հավելվածում</string>
     <string name="in_app_purchase_desc">Մեկանգամյա վճարում</string>
     <string name="in_app_purchase_desc_ex">Մի անգամ գնելուց հետո այն մշտապես մատչելի կլինի ձեզ համար:</string>
@@ -2689,9 +2688,8 @@
 \n "</string>
     <string name="commiting_way">Ճանապարհի ուղղում…</string>
     <string name="increase_search_radius_to">Ավելացնել որոնման շառավիղը</string>
-    <string name="send_search_query_description">Մենք կուղարկենք ձեր որոնման հարցումը՝ <b>\"%1$s\"</b>, ինչպես նաև ձեր գտնվելու վայրը։ <br/>
-        <br/>" Մենք  չենք հավաքում անձնական տեղեկություններ, որոնման տվյալները օգտագործվում են միայն, որոնման ալգորիթմը բարելավելու համար:"<br/>
-    </string>
+    <string name="send_search_query_description">Մենք կուղարկենք ձեր որոնման հարցումը՝ \"%1$s\", ինչպես նաև ձեր գտնվելու վայրը։ \n
+        \n" Մենք  չենք հավաքում անձնական տեղեկություններ, որոնման տվյալները օգտագործվում են միայն, որոնման ալգորիթմը բարելավելու համար:"</string>
     <string name="send_search_query">Ուղարկեք որոնման հարցումը\?</string>
     <string name="shared_string_world">Աշխարհ</string>
     <string name="point_deleted">Կետը %1$s հեռացված է</string>

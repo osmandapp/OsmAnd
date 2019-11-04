@@ -2722,10 +2722,8 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="purchase_dialog_title">Hautatu plana</string>
     <string name="purchase_dialog_travel_description">Erosi hauetako bat lineaz kanpoko bidai-giden funtzioa eskuratzeko:</string>
     <string name="purchase_dialog_subtitle">Hautatu elementu egokia:</string>
-    <string name="monthly_map_updates">Mapen eguneraketak: <b>Hilero</b>
-    </string>
-    <string name="daily_map_updates">Mapen eguneraketak: <b>Orduero</b>
-    </string>
+    <string name="monthly_map_updates">Mapen eguneraketak: Hilero</string>
+    <string name="daily_map_updates">Mapen eguneraketak: Orduero</string>
     <string name="in_app_purchase">Aplikazio barneko erosketa</string>
     <string name="in_app_purchase_desc">Ordainketa bakarra</string>
     <string name="in_app_purchase_desc_ex">Behin erosita, beti izango duzu eskuragarri.</string>
@@ -2806,9 +2804,8 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="point_deleted">%1$s puntua ezabatuta</string>
     <string name="shared_string_world">Mundua</string>
     <string name="increase_search_radius_to">Handitu bilaketa-erradioa %1$s-ra</string>
-    <string name="send_search_query_description">Zure bilaketa <b>\"%1$s\"</b> eta kokapena bidaliko dugu. <br/>
-        <br/>Ez da informazio pertsonala biltzen, bilaketen datuak algoritmoa hobetzeko biltzen ditugu.<br/>
-    </string>
+    <string name="send_search_query_description">Zure bilaketa \"%1$s\" eta kokapena bidaliko dugu. \n
+        \nEz da informazio pertsonala biltzen, bilaketen datuak algoritmoa hobetzeko biltzen ditugu.</string>
     <string name="search_no_results_description">Emaitzarik ez?
 \nEman iezaguzu horren berri.</string>
     <string name="send_search_query">Bilaketa-kontsulta bidali?</string>

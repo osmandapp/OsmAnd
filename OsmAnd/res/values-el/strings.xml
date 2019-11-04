@@ -2724,10 +2724,8 @@
     <string name="purchase_dialog_title">Επιλογή σχεδίου</string>
     <string name="purchase_dialog_travel_description">Αγοράσετε ένα από τα παρακάτω για να πάρετε τη λειτουργία οδηγού ταξιδιών χωρίς σύνδεση :</string>
     <string name="purchase_dialog_subtitle">Επιλέξτε κατάλληλο στοιχείο:</string>
-    <string name="monthly_map_updates">Ενημερώσεις χαρτών: <b>κάθε μήνα</b>
-    </string>
-    <string name="daily_map_updates">Ενημερώσεις χαρτών: <b>κάθε ώρα</b>
-    </string>
+    <string name="monthly_map_updates">Ενημερώσεις χαρτών: κάθε μήνα</string>
+    <string name="daily_map_updates">Ενημερώσεις χαρτών: κάθε ώρα</string>
     <string name="in_app_purchase">Αγορά μέσω της εφαρμογής</string>
     <string name="in_app_purchase_desc">Εφάπαξ πληρωμή</string>
     <string name="in_app_purchase_desc_ex">Μόλις αγοραστεί, θα είναι μονίμως διαθέσιμη για σας.</string>
@@ -2817,9 +2815,8 @@
 \n</string>
     <string name="commiting_way">Υποβολή διαδρομής…</string>
     <string name="increase_search_radius_to">Αύξηση ακτίνας αναζήτησης σε %1$s</string>
-    <string name="send_search_query_description">Θα σας στείλουμε το ερώτημα αναζήτησής σας:<b>\"%1$s\"</b>,καθώς και την τοποθεσία σας.<br/>
-        <br/> Δεν συλλέγουμε προσωπικές πληροφορίες, τα δεδομένα αναζήτησης χρησιμοποιούνται μόνο για να βελτιώσουμε τον αλγόριθμο αναζήτησης.<br/>
-    </string>
+    <string name="send_search_query_description">Θα σας στείλουμε το ερώτημα αναζήτησής σας:\"%1$s\",καθώς και την τοποθεσία σας.\n
+        \n Δεν συλλέγουμε προσωπικές πληροφορίες, τα δεδομένα αναζήτησης χρησιμοποιούνται μόνο για να βελτιώσουμε τον αλγόριθμο αναζήτησης.</string>
     <string name="send_search_query">Αποστολή ερωτήματος αναζήτησης;</string>
     <string name="shared_string_world">Κόσμος</string>
     <string name="test_voice_desrc">Πιέστε ένα κουμπί και ακούστε την αντίστοιχη φωνητική προτροπή για να ταυτοποιήσετε ελλειπείς ή λανθασμένες προτροπές.</string>

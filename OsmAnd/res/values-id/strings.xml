@@ -656,10 +656,8 @@
     <string name="unlimited_downloads">Unduhan tidak terbatas</string>
     <string name="wikipedia_offline">Wikipedia luring</string>
     <string name="unlock_all_features">Buka semua fitur OsmAnd</string>
-    <string name="monthly_map_updates">Pembaruan peta: <b>setiap bulan</b>
-    </string>
-    <string name="daily_map_updates">Pembaruan peta: <b>setiap jam</b>
-    </string>
+    <string name="monthly_map_updates">Pembaruan peta: setiap bulan</string>
+    <string name="daily_map_updates">Pembaruan peta: setiap jam</string>
     <string name="travel_card_update_descr">Data baru Wikivoyage telah tersedia, perbarui dan nikmatilah.</string>
     <string name="travel_card_download_descr">Unduh panduan perjalanan Wikivoyage untuk melihat artikel tentang tempat diseluruh dunia tanpa perlu tersambung ke jaringan internet.</string>
     <string name="update_is_available">Tersedia pembaruan</string>
@@ -698,9 +696,8 @@
     <string name="coord_input_add_point">Tambah titik</string>
     <string name="point_deleted">Titik %1$s dihapus</string>
     <string name="shared_string_world">Dunia</string>
-    <string name="send_search_query_description">Kami akan kirim kata pencarian anda: <b>\"%1$s\"</b>, dan juga lokasi anda.<br/>
-        <br/>Tidak ada info personal yang dikumpulkan, data pencarian hanya digunakan untuk meningkatkan algoritma pencarian.<br/>
-    </string>
+    <string name="send_search_query_description">Kami akan kirim kata pencarian anda: \"%1$s\", dan juga lokasi anda.\n
+        \nTidak ada info personal yang dikumpulkan, data pencarian hanya digunakan untuk meningkatkan algoritma pencarian.</string>
     <string name="send_search_query">Kirim kata pencarian\?</string>
     <string name="thank_you_for_feedback">Terima kasih untuk masukan anda</string>
     <string name="search_no_results_feedback">Tidak menemukan apa-apa\?

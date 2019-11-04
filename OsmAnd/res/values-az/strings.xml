@@ -2074,9 +2074,8 @@
     <string name="error_notification_desc">Bu bildirişin ekran şəklini support@osmand.net ünvanına göndərin</string>
     <string name="get_osmand_live">Bütün xüsusiyyətləri açmaq üçün OsmAnd Live əldə edin: Limitsiz endirmələr ilə günlük xəritəsi yeniləmələri, bütün pullu və pulsuz qoşmalar, Vikipediya, Vikisəyahət və daha çoxu.</string>
     <string name="thank_you_for_feedback">Əks əlaqə üçün təşəkkürlər</string>
-    <string name="send_search_query_description">Axtarış sorğunuzu göndərəcəyik: <b>\"%1$s\"</b>, eləcə də məkanınızı.<br/>
-        <br/> Şəxsi məlumatları toplamırıq, yalnız axtarış alqoritmini yaxşılaşdırmaq üçün axtarış məlumatlarına ehtiyacımız var.<br/>
-    </string>
+    <string name="send_search_query_description">Axtarış sorğunuzu göndərəcəyik: \"%1$s\", eləcə də məkanınızı.\n
+        \n Şəxsi məlumatları toplamırıq, yalnız axtarış alqoritmini yaxşılaşdırmaq üçün axtarış məlumatlarına ehtiyacımız var.</string>
     <string name="send_search_query">Axtarış sorğusu göndərilsin?</string>
     <string name="shared_string_world">Dünya</string>
     <string name="read_wikipedia_offline_description">Vikipediya və Vikisəyahət məqalələrini oflayn oxumaq üçün OsmAnd Live abunəliyi alın.</string>
@@ -2084,10 +2083,8 @@
     <string name="show_images">Şəkilləri göstər</string>
     <string name="purchase_cancelled_dialog_title">OsmAnd Live abunəliyinizi ləğv etdiniz</string>
     <string name="osmand_team">OsmAnd komandası</string>
-    <string name="monthly_map_updates">Xəritə yeniləmələri: <b>hər ay</b>
-    </string>
-    <string name="daily_map_updates">Xəritə yeniləmələri: <b>hər saat</b>
-    </string>
+    <string name="monthly_map_updates">Xəritə yeniləmələri: hər ay</string>
+    <string name="daily_map_updates">Xəritə yeniləmələri: hər saat</string>
     <string name="in_app_purchase">Proqram daxili alışlar</string>
     <string name="wikivoyage_offline">Vikisəyahət oflayn</string>
     <string name="wikipedia_offline">Vikipediya oflayn</string>

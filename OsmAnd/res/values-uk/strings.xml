@@ -2769,17 +2769,14 @@
 \n• Інші виправлення помилок
 \n</string>
     <string name="increase_search_radius_to">Збільшити радіус пошуку до %1$s</string>
-    <string name="send_search_query_description">Ми відправимо Ваш пошуковий запит: <b>\"%1$s\"</b>, а також Ваше місцерозташування. <br/>
-        <br/> Особиста інформація не накопичується, пошукові дані використовуються лише для покращення алгоритму пошуку.<br/>
-    </string>
+    <string name="send_search_query_description">Ми відправимо Ваш пошуковий запит: \"%1$s\", а також Ваше місцерозташування. \n
+        \n Особиста інформація не накопичується, пошукові дані використовуються лише для покращення алгоритму пошуку.</string>
     <string name="search_no_results_description">Немає результатів?
 \nРозкажіть нам про це.</string>
     <string name="send_search_query">Надіслати пошуковий запит?</string>
     <string name="shared_string_world">Світ</string>
-    <string name="monthly_map_updates">Оновлення мап: <b>щомісячне</b>
-    </string>
-    <string name="daily_map_updates">Оновлення мап: <b>щогодинне</b>
-    </string>
+    <string name="monthly_map_updates">Оновлення мап: щомісячне</string>
+    <string name="daily_map_updates">Оновлення мап: щогодинне</string>
     <string name="in_app_purchase">Купівля в додатку</string>
     <string name="in_app_purchase_desc">Одноразовий платіж</string>
     <string name="in_app_purchase_desc_ex">Після покупки він буде завжди доступний для вас.</string>
@@ -2906,7 +2903,7 @@
     <string name="shared_string_capacity">Об\'єм</string>
     <string name="shared_string_width">Ширина</string>
     <string name="shared_string_height">Висота</string>
-    <string name="swap_start_and_destination">Поміняти місцями пункти <b>відправлення</b> та <b>призначення</b></string>
+    <string name="swap_start_and_destination">Поміняти місцями пункти відправлення та призначення</string>
     <string name="add_destination_point">Додати пункт призначення</string>
     <string name="add_intermediate_point">Додати проміжний пункт</string>
     <string name="add_start_point">Додати пункт відправлення</string>

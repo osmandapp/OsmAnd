@@ -1375,10 +1375,8 @@
     <string name="start_editing">Započnite uređivanje</string>
     <string name="get_unlimited_access">Neograničen pristup</string>
     <string name="wikivoyage_travel_guide">Turistički vodiči</string>
-    <string name="monthly_map_updates">Ažuriranja karata: <b>svaki mjesec</b>
-    </string>
-    <string name="daily_map_updates">Ažuriranja karata: <b>svaki sat</b>
-    </string>
+    <string name="monthly_map_updates">Ažuriranja karata: svaki mjesec</string>
+    <string name="daily_map_updates">Ažuriranja karata: svaki sat</string>
     <string name="in_app_purchase_desc">Jednokratno plaćanje</string>
     <string name="purchase_unlim_title">Kupi - %1$s</string>
     <string name="purchase_subscription_title">Pretplatite se - %1$s</string>

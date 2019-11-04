@@ -204,8 +204,8 @@
 	<string name="download_file">Lae fail alla</string>
     <string name="start_editing">Alusta muutmist</string>
     <string name="get_unlimited_access">Hangi piiramatu ligipääs</string>
-    <string name="monthly_map_updates">Kaardiuuendused: <b>iga kuu</b></string>
-    <string name="daily_map_updates">Kaardiuuendused: <b>iga tund</b></string>
+    <string name="monthly_map_updates">Kaardiuuendused: iga kuu</string>
+    <string name="daily_map_updates">Kaardiuuendused: iga tund</string>
     <string name="in_app_purchase">Rakenduse sisene ost</string>
     <string name="in_app_purchase_desc">Ühekordne makse</string>
     <string name="purchase_unlim_title">Osta - %1$s</string>

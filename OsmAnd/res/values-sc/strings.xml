@@ -2733,10 +2733,8 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="shared_string_contents">Cuntenutu</string>
     <string name="use_two_digits_longitude">Imprea una longitùdine a duas tzìfras</string>
     <string name="index_item_world_wikivoyage">Artìculos mondiales de Wikivoyage</string>
-    <string name="monthly_map_updates">Agiornamentos de sas mapas: <b>cada mese</b>
-    </string>
-    <string name="daily_map_updates">Agiornamentos de sas mapas: <b>cada ora</b>
-    </string>
+    <string name="monthly_map_updates">Agiornamentos de sas mapas: cada mese</string>
+    <string name="daily_map_updates">Agiornamentos de sas mapas: cada ora</string>
     <string name="in_app_purchase">Còmporas in intro de s\'aplicatzione</string>
     <string name="in_app_purchase_desc">Pagamentu ùnicu</string>
     <string name="in_app_purchase_desc_ex">A pustis de sa còmpora at a èssere disponìbile pro semper.</string>
@@ -2807,9 +2805,8 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="coord_input_save_as_track_descr">As annantu %1$s puntos. Iscrie unu nùmene pro su documentu e incarca \"Sarva\".</string>
     <string name="point_deleted">Puntu %1$s iscantzelladu</string>
     <string name="shared_string_world">Mundu</string>
-    <string name="send_search_query_description">Amos a imbiare sos tèrmines de sa chirca tua: <b>\"%1$s\"</b>, in paris cun sa positzione tua.<br/>
-        <br/> Non benit collida peruna informatzione personale, sos datos de chirca benint impreados petzi pro megiorare s\'algoritmu de chirca.<br/>
-    </string>
+    <string name="send_search_query_description">Amos a imbiare sos tèrmines de sa chirca tua: \"%1$s\", in paris cun sa positzione tua.\n
+        \n Non benit collida peruna informatzione personale, sos datos de chirca benint impreados petzi pro megiorare s\'algoritmu de chirca.</string>
     <string name="search_no_results_description">Perunu risultadu?
 \nFaghide·nos·lu ischire.</string>
     <string name="send_search_query">Imbiare sos tèrmines de chirca?</string>

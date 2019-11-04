@@ -2741,8 +2741,8 @@ Lon %2$s</string>
     <string name="unlimited_downloads">Descargas ilimitadas</string>
     <string name="wikipedia_offline">Wikipedia sin conexión</string>
     <string name="unlock_all_features">Desbloquear todas las características de OsmAnd</string>
-    <string name="monthly_map_updates"> string name=\"lat_lon_pattern\"&gt;Lat: %1$.5f Lon: %2$.5f&lt;/string </string>
-    <string name="daily_map_updates"> string name=\"lat_lon_pattern\"&gt;Lat: %1$.5f Lon: %2$.5f&lt;/string </string>
+    <string name="monthly_map_updates">Actualizaciones del mapa: cada mes</string>
+    <string name="daily_map_updates">Actualizaciones del mapa: cada hora</string>
     <string name="travel_card_update_descr">Nuevos datos disponibles de Wikiviajes, actualiza para disfrutar de ellos.</string>
     <string name="travel_card_download_descr">Descarga las guías turísticas de Wikiviajes para ver artículos sobre lugares alrededor del mundo, sin una conexión a Internet.</string>
     <string name="update_is_available">Actualización disponible</string>
@@ -2801,7 +2801,8 @@ Lon %2$s</string>
     <string name="coord_input_save_as_track_descr">Añadiste %1$s puntos. Escribe un nombre de archivo y pulsa en «Guardar».</string>
     <string name="point_deleted">Punto %1$s borrado</string>
     <string name="shared_string_world">Mundo</string>
-    <string name="send_search_query_description"> string name=\"lat_lon_pattern\"&gt;Lat: %1$.5f Lon: %2$.5f&lt;/string </string>
+    <string name="send_search_query_description">Enviaremos la consulta de búsqueda: «%1$s», así como la ubicación.
+        \nNo se recopilan datos personales, los datos de búsqueda sólo se utilizan para mejorar el algoritmo de búsqueda.</string>
     <string name="search_no_results_description">¿Sin resultados?
 \nCuéntanos sobre esto.</string>
     <string name="send_search_query">¿Enviar consulta de búsqueda?</string>
@@ -3372,7 +3373,6 @@ Lon %2$s</string>
     <string name="quick_action_hillshade_show">Mostrar sombreados</string>
     <string name="quick_action_hillshade_hide">Ocultar sombreados</string>
     <string name="quick_action_show_hide_hillshade">Alternar sombreados</string>
-    <string name="swap_start_and_destination"> string name=\"lat_lon_pattern\"&gt;Lat: %1$.5f Lon: %2$.5f&lt;/string </string>
     <string name="tts_initialization_error">Imposible iniciar el motor de habla sintetizada</string>
     <string name="simulate_your_location_gpx_descr">Simular la ubicación usando una traza GPX grabada.</string>
 </resources>

@@ -2718,10 +2718,8 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="download_file">Stáhnout soubor</string>
     <string name="start_editing">Začít s úpravami</string>
     <string name="get_unlimited_access">Získejte neomezený přístup</string>
-    <string name="monthly_map_updates">Aktualizace map: <b>každý měsíc</b>
-    </string>
-    <string name="daily_map_updates">Aktualizace map: <b>každou hodinu</b>
-    </string>
+    <string name="monthly_map_updates">Aktualizace map: každý měsíc</string>
+    <string name="daily_map_updates">Aktualizace map: každou hodinu</string>
     <string name="download_wikipedia_description">Stáhnout články Wikipedie pro %1$s a číst je v režimu offline.</string>
     <string name="download_wikipedia_label">Stahování dat z Wikipedie</string>
     <string name="open_in_browser_wiki">Otevřít článek online</string>
@@ -2764,9 +2762,8 @@ Zobrazená oblast: %1$s x %2$s</string>
 \n</string>
     <string name="commiting_way">Odesílání cesty…</string>
     <string name="increase_search_radius_to">Zvětšit okruh hledání na %1$s</string>
-    <string name="send_search_query_description">Bude odeslán váš dotaz pro vyhledávání: <b>\"%1$s\"</b> a také vaše poloha. <br/>
-        <br/> Nedochází k žádnému shromažďování osobních údajů. Zaslaná data slouží pouze k vylepšení vyhledávacího algoritmu.<br/>
-    </string>
+    <string name="send_search_query_description">Bude odeslán váš dotaz pro vyhledávání: \"%1$s\" a také vaše poloha. \n
+        \n Nedochází k žádnému shromažďování osobních údajů. Zaslaná data slouží pouze k vylepšení vyhledávacího algoritmu.</string>
     <string name="send_search_query">Odeslat data?</string>
     <string name="shared_string_world">Celý svět</string>
     <string name="point_deleted">Bod %1$s byl smazán</string>

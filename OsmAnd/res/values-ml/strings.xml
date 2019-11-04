@@ -1841,9 +1841,8 @@
 \n"</string>
     <string name="commiting_way">വഴി ഉള്‍പെടുത്തുക…</string>
     <string name="increase_search_radius_to">"തിരച്ചില്‍  വൃത്തം  %1$s ലേക്ക് കൂട്ടുക "</string>
-    <string name="send_search_query_description">"ഞങ്ങള്‍ നിങ്ങളൂടെ ചോദ്യം:  "<b>\"%1$s\"</b> , നിങ്ങളൂടെ സ്ഥാനം എന്നിവ അയക്കും. <br/>
-        <br/> ഞങ്ങള്‍ നിങ്ങളൂടെ പേര്‍സണല്‍ ആയിട്ടുള്ള ഒരു വിവരവും ശേഖരിക്കുന്നില്ല , തെരച്ചില്‍ വിവരങ്ങള്‍ , സേര്‍ച്ച് അല്‍ഗോരിതം നന്നാക്കാനായ് മാത്രമാണ് ഉപയോഗിക്കുന്നത്.<br/>
-    </string>
+    <string name="send_search_query_description">"ഞങ്ങള്‍ നിങ്ങളൂടെ ചോദ്യം:  "\"%1$s\" , നിങ്ങളൂടെ സ്ഥാനം എന്നിവ അയക്കും. \n
+        \n ഞങ്ങള്‍ നിങ്ങളൂടെ പേര്‍സണല്‍ ആയിട്ടുള്ള ഒരു വിവരവും ശേഖരിക്കുന്നില്ല , തെരച്ചില്‍ വിവരങ്ങള്‍ , സേര്‍ച്ച് അല്‍ഗോരിതം നന്നാക്കാനായ് മാത്രമാണ് ഉപയോഗിക്കുന്നത്.</string>
     <string name="send_search_query">തെരച്ചില്‍ ചോദ്യം അയക്കട്ടെ\?</string>
     <string name="shared_string_world">ലോകം</string>
     <string name="point_deleted">"%1$s പോയിന്റ് മായിച്ചിരിക്കുന്നു "</string>
@@ -2652,10 +2651,8 @@
     <string name="purchase_subscription_title">വരിക്കാരനാകാം - %1$s</string>
     <string name="wikivoyage_offline">ഓഫ്‌ലൈന്‍ വിക്കിവൊയേജ്</string>
     <string name="unlock_all_features">എല്ലാ OsmAnd സവിശേഷതകളും അൺലോക്കുചെയ്യുക</string>
-    <string name="monthly_map_updates">മാപ്പ് അപ്ഡേറ്റുകൾ: &lt;b&gt; എല്ലാ മാസവും &lt;/ b&gt;<b>every month</b>
-    </string>
-    <string name="daily_map_updates">മാപ്പ് അപ്ഡേറ്റുകൾ: &lt;b&gt; ഓരോ മണിക്കൂറും &lt;/ b&gt;<b>every hour</b>
-    </string>
+    <string name="monthly_map_updates">മാപ്പ് അപ്ഡേറ്റുകൾ: &lt;b&gt; എല്ലാ മാസവും &lt;/ b&gt;every month</string>
+    <string name="daily_map_updates">മാപ്പ് അപ്ഡേറ്റുകൾ: &lt;b&gt; ഓരോ മണിക്കൂറും &lt;/ b&gt;every hour</string>
     <string name="start_editing_card_image_text">ആർക്കും എഡിറ്റുചെയ്യാൻ കഴിയുന്ന സ്വതന്ത്ര ലോകവ്യാപക യാത്ര ഗൈഡ്.</string>
     <string name="welcome_to_open_beta_description">"ട്രാവൽ ഗൈഡുകൾ നിലവിൽ വിക്കിവൊയേജ് അടിസ്ഥാനമാക്കിയുള്ളതാണ്. ബീറ്റ ടെസ്റ്റിംഗ് സമയത്ത് എല്ലാ സവിശേഷതകളും സൗജന്യ മായ് പരിശോധിക്കുക. അതിനുശേഷം| ഓസ് ആൻഡ് അൺലിംനെറ്റിന്റെ ഉടമസ്ഥർക്കും ഓസ്മണ്ട്+  (എഫ്-ഡ്രോയ്ഡ് ഉള്‍പ്പടെ) ഉടമസ്ഥർക്കും യാത്രാ ഗൈഡുകൾ ലഭ്യമാകും."</string>
     <string name="start_editing_card_description">വിക്കിവൊയേജിലെ ഏതൊരു ആർട്ടിക്കിളും നിങ്ങള്‍ക്ക് തിരുത്താം. അറിവ്| അനുഭവം| കഴിവുകൾ| നിങ്ങളുടെ ശ്രദ്ധ എന്നിവ പങ്കിടാം</string>

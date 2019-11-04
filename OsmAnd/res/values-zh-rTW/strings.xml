@@ -2724,8 +2724,8 @@
     <string name="unlimited_downloads">無限制的下載</string>
     <string name="wikipedia_offline">離線維基百科</string>
     <string name="unlock_all_features">解鎖所有 OsmAnd 功能</string>
-    <string name="monthly_map_updates"> string name=\"map_legend_item_description\"&gt;圖例為 OsmAnd 預設的地圖樣式，網路需連接以去顯示&lt;/string </string>
-    <string name="daily_map_updates"> string name=\"map_legend_item_description\"&gt;圖例為 OsmAnd 預設的地圖樣式，網路需連接以去顯示&lt;/string </string>
+    <string name="monthly_map_updates">地圖更新：每個月</string>
+    <string name="daily_map_updates">地圖更新：每小時</string>
     <string name="paid_app">付費應用程式</string>
     <string name="paid_plugin">付費外掛程式</string>
     <string name="travel_card_update_descr">有新的維基導遊資料可用，更新以享用它們。</string>
@@ -2785,7 +2785,7 @@
     <string name="coord_input_save_as_track_descr">您已新增了 %1$s 標點。輸入檔案名稱並輕點「儲存」。</string>
     <string name="point_deleted">已刪除標點 %1$s</string>
     <string name="shared_string_world">世界</string>
-    <string name="send_search_query_description"> string name=\"map_legend_item_description\"&gt;圖例為 OsmAnd 預設的地圖樣式，網路需連接以去顯示&lt;/string </string>
+    <string name="send_search_query_description">我們將送出您的搜尋查詢：\"%1$s\"，以及您的位置。\n不會蒐集個人自訊，搜尋資料僅會用於改善搜尋演算法</string>
     <string name="search_no_results_description">沒有結果？
 \n告訴我們這件事。</string>
     <string name="send_search_query">送出搜尋查詢？</string>
@@ -3349,7 +3349,6 @@
     <string name="shared_preference">共享</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">偏好無鋪面道路</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">偏好無鋪面道路。</string>
-    <string name="swap_start_and_destination"> string name=\"map_legend_item_description\"&gt;圖例為 OsmAnd 預設的地圖樣式，網路需連接以去顯示&lt;/string </string>
     <string name="layer_osm_edits">OSM 編輯</string>
     <string name="quick_action_contour_lines_descr">輕點此動作按鈕以在地圖上顯示或隱藏等高線</string>
     <string name="quick_action_contour_lines_show">顯示等高線</string>

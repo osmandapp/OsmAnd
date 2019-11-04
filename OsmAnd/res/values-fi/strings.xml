@@ -2071,10 +2071,8 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="get_unlimited_access">Hanki rajaton pääsy</string>
     <string name="welcome_to_open_beta">Tervetuloa avoimeen betaan</string>
     <string name="wikivoyage_travel_guide">Matkaoppaat</string>
-    <string name="monthly_map_updates">Karttapäivitykset: <b>joka kuukausi</b>
-    </string>
-    <string name="daily_map_updates">Karttapäivitykset: <b>joka tunti</b>
-    </string>
+    <string name="monthly_map_updates">Karttapäivitykset: joka kuukausi</string>
+    <string name="daily_map_updates">Karttapäivitykset: joka tunti</string>
     <string name="in_app_purchase">Sovelluksensisäinen ostos</string>
     <string name="in_app_purchase_desc">Kertamaksu</string>
     <string name="shared_string_dont">Älä</string>

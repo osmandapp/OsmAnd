@@ -2693,11 +2693,9 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="download_file">Prejmi datoteko</string>
     <string name="get_unlimited_access">Pridobitev neomejenega dostopa</string>
     <string name="wikivoyage_travel_guide">Popotniški vodniki</string>
-    <string name="monthly_map_updates">Posodobitve zemljevida: <b>vsak mesec</b>
-    </string>
+    <string name="monthly_map_updates">Posodobitve zemljevida: vsak mesec</string>
     <string name="start_editing">Začni urejanje</string>
-    <string name="daily_map_updates">Posodobitve zemljevida: <b>vsako uro</b>
-    </string>
+    <string name="daily_map_updates">Posodobitve zemljevida: vsako uro</string>
     <string name="in_app_purchase">Nakup v programu</string>
     <string name="in_app_purchase_desc">Enkratno plačilo</string>
     <string name="purchase_unlim_title">Kupi - %1$s</string>
@@ -2829,9 +2827,8 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="access_intermediate_arrival_time">Vmesni čas prihoda</string>
     <string name="map_widget_intermediate_time">Vmesni čas</string>
     <string name="ask_for_location_permission">Program zahteva dostop do storitev geolociranja.</string>
-    <string name="send_search_query_description">Poslana bo iskalna poizvedba <b>»%1$s«</b> in podatek trenutnega mesta.<br/>
-        <br/> Osebnih podatki se ne zbirajo, zabeleženi so le uporabljeni iskalni nizi za izboljšanje algoritma iskanja.<br/>
-    </string>
+    <string name="send_search_query_description">Poslana bo iskalna poizvedba »%1$s« in podatek trenutnega mesta.\n
+        \n Osebnih podatki se ne zbirajo, zabeleženi so le uporabljeni iskalni nizi za izboljšanje algoritma iskanja.</string>
     <string name="get_osmand_live">Naročite se na storitev OsmAnd Live za dostop do vseh zmožnosti: dnevnih posodobitev zemljevidov brez omejitev prejema, plačljive vstavke, povezave do vsebin Wikipedije in Wikivoyage in še mnogo več.</string>
     <string name="unirs_render_descr">Prilagoditev privzetega sloga prikaza za povečanje kontrasta pešpoti in kolesarskih stez. Prilagojene so privzete barve sloga Mapnik.</string>
     <string name="off_road_render_descr">Uporabno pri vožnji po neoznačenih poteh. Omogoča uporabo satelitskih posnetkov kot podlage zemljevidu. Debelina glavnih poti je zmanjšana, povečana pa je debelina pešpoti, kolesarskih prog, gozdnih gazi in drugih neopredeljivih povezav. Zasnova temelji na slogu »Topo«.</string>
