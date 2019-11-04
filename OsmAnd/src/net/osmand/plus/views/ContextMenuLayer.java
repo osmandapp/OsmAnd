@@ -974,8 +974,12 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				}
 			}
 		}
-		if (!processed && activity.getMyApplication().getSettings().MAP_EMPTY_STATE_ALLOWED.get()) {
-			activity.getMapLayers().getMapControlsLayer().switchMapControlsVisibility(true);
+		if (!processed) {
+			MapControlsLayer mapControlsLayer = activity.getMapLayers().getMapControlsLayer();
+			if (mapControlsLayer != null && (!mapControlsLayer.isMapControlsVisible()
+					|| activity.getMyApplication().getSettings().MAP_EMPTY_STATE_ALLOWED.get())) {
+				mapControlsLayer.switchMapControlsVisibility(true);
+			}
 		}
 		return false;
 	}

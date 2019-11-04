@@ -1190,9 +1190,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public void readLocationToShow() {
-		if (!getDashboard().isVisible()) {
-			mapLayers.getMapControlsLayer().showMapControlsIfHidden();
-		}
+		showMapControls();
 
 		LatLon cur = new LatLon(mapView.getLatitude(), mapView.getLongitude());
 		LatLon latLonToShow = settings.getAndClearMapLocationToShow();
@@ -1482,6 +1480,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (mapLayers.getMapQuickActionLayer() != null) {
 			mapLayers.getMapQuickActionLayer().refreshLayer();
 		}
+		MapControlsLayer mapControlsLayer = mapLayers.getMapControlsLayer();
+		if (mapControlsLayer != null && (!mapControlsLayer.isMapControlsVisible() && !settings.MAP_EMPTY_STATE_ALLOWED.get())) {
+			showMapControls();
+		}
+
 		mapLayers.updateLayers(mapView);
 		mapActions.updateDrawerMenu();
 		mapView.setComplexZoom(mapView.getZoom(), mapView.getSettingsMapDensity());
@@ -1634,6 +1637,12 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				}
 			}
 		}, 2500);
+	}
+
+	public void showMapControls() {
+		if (!getDashboard().isVisible() && mapLayers.getMapControlsLayer() != null) {
+			mapLayers.getMapControlsLayer().showMapControlsIfHidden();
+		}
 	}
 
 	public OsmandMapTileView getMapView() {
