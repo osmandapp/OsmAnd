@@ -257,7 +257,6 @@
         <item name="dlg_btn_stroked">@drawable/dlg_btn_stroked_light</item>
         <item name="profile_save_btn">@drawable/btn_round_profile_blue</item>
         <item name="profile_cancel_btn">@drawable/btn_round_profile_gray</item>
-        <item name="android:textColor">@color/text_color_primary_light</item>
 
         <item name="buttonBarNegativeButtonStyle">@style/DialogButtonStyleLight</item>
         <item name="buttonBarPositiveButtonStyle">@style/DialogButtonStyleLight</item>
@@ -287,6 +286,7 @@
     </style>
 
     <style name="OsmandLightTheme.NoActionbar.Preferences">
+        <item name="android:textColor">@color/text_color_primary_light</item>
         <item name="android:textColorSecondary">@color/text_color_secondary_light</item>
         <item name="android:listDivider">@color/divider_color_light</item>
         <item name="android:dividerHeight">1dp</item>
@@ -357,6 +357,7 @@
     </style>
 
     <style name="OsmandDarkTheme.NoActionbar.Preferences">
+        <item name="android:textColor">@color/text_color_primary_dark</item>
         <item name="android:textColorSecondary">@color/text_color_secondary_dark</item>
         <item name="android:listDivider">@color/divider_color_dark</item>
         <item name="android:dividerHeight">1dp</item>
@@ -520,7 +521,6 @@
         <item name="dlg_btn_stroked">@drawable/dlg_btn_stroked_dark</item>
         <item name="profile_save_btn">@drawable/btn_round_profile_night</item>
         <item name="profile_cancel_btn">@drawable/btn_round_profile_gray_n</item>
-        <item name="android:textColor">@color/text_color_primary_dark</item>
 
         <item name="buttonBarNegativeButtonStyle">@style/DialogButtonStyleDark</item>
         <item name="buttonBarPositiveButtonStyle">@style/DialogButtonStyleDark</item>
