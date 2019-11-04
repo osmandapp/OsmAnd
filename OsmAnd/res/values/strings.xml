@@ -14,18 +14,18 @@
     <string name="export_profile">Export profile</string>
     <string name="exported_osmand_profile">OsmAnd profile: %1$s</string>
     <string name="overwrite_profile_q">Profile \'%1$s\' already exists. Overwrite?</string>
-    <string name="export_profile_failed">Failed to export profile.</string>
-    <string name="profile_import">Profile Import:</string>
+    <string name="export_profile_failed">Could not export profile.</string>
+    <string name="profile_import">Profile import:</string>
     <string name="profile_import_descr">To import a profile, select its file on the device and open it with OsmAnd.</string>
     <string name="file_import_error">%1$s import error: %2$s</string>
     <string name="file_imported_successfully">%1$s successfully imported.</string>
     <string name="tts_initialization_error">Cannot start text-to-speech engine</string>
     <string name="layer_osm_edits">OSM Edits</string>
-    <string name="quick_action_contour_lines_descr">Tapping this action button shows or hides contour lines on the map</string>
+    <string name="quick_action_contour_lines_descr">A toggle to show or hide contour lines on the map.</string>
     <string name="quick_action_contour_lines_show">Show contour lines</string>
     <string name="quick_action_contour_lines_hide">Hide contour lines</string>
     <string name="quick_action_show_hide_contour_lines">Show/hide contour lines</string>
-    <string name="quick_action_hillshade_descr">Tapping this action button shows or hides hillshade on the map</string>
+    <string name="quick_action_hillshade_descr">A toggle to show or hide hillshade on the map.</string>
     <string name="quick_action_hillshade_show">Show hillshade</string>
     <string name="quick_action_hillshade_hide">Hide hillshade</string>
     <string name="quick_action_show_hide_hillshade">Show/hide hillshade</string>
@@ -210,7 +210,7 @@
         • Added options to show the compass and a radius ruler on the map\n\n
         • Fix background track logging\n\n
         • Improved background map downloads\n\n
-        • Returned \'Turn screen On\' option\n\n
+        • Returned \'Turn screen on\' option\n\n
         • Fixed Wikipedia language selection\n\n
         • Fixed compass button behavior during navigation\n\n
         • Other bugfixes\n\n
@@ -418,7 +418,7 @@
     <string name="show_more">Show more</string>
     <string name="tracks_on_map">Displayed tracks</string>
     <string name="quick_action_show_hide_gpx_tracks">Show/hide GPX tracks</string>
-    <string name="quick_action_show_hide_gpx_tracks_descr">Tapping this action button shows or hides selected GPX tracks on the map</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">A toggle to show or hide selected GPX tracks on the map.</string>
     <string name="quick_action_gpx_tracks_hide">Hide GPX Tracks</string>
     <string name="quick_action_gpx_tracks_show">Show GPX Tracks</string>
     <string name="add_destination_query">Please set the destination first</string>
@@ -458,7 +458,7 @@
     <string name="osm_live_payment_month_cost_descr">%1$s / month</string>
     <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / month</string>
     <string name="osm_live_payment_discount_descr">Save %1$s.</string>
-	<string name="osm_live_payment_current_subscription">Current subscription</string>
+    <string name="osm_live_payment_current_subscription">Current subscription</string>
     <string name="osm_live_payment_renews_monthly">Renews monthly</string>
     <string name="osm_live_payment_renews_quarterly">Renews quarterly</string>
     <string name="osm_live_payment_renews_annually">Renews annually</string>
@@ -628,7 +628,7 @@
     <string name="shared_string_gpx_file">GPX file</string>
     <string name="osc_file">OSC file</string>
     <string name="choose_file_type">Select filetype</string>
-    <string name="osm_edits_export_desc">Select the export type: OSM notes, POI, or both.</string>
+    <string name="osm_edits_export_desc">Select the export type: OSM notes, POIs, or both.</string>
     <string name="all_data">All data</string>
     <string name="osm_notes">OSM Notes</string>
     <string name="will_open_tomorrow_at">Opens tomorrow at</string>
@@ -838,7 +838,7 @@
     <string name="quick_action_showhide_osmbugs_title">Toggle OSM Notes</string>
     <string name="quick_action_osmbugs_show">Show OSM Notes</string>
     <string name="quick_action_osmbugs_hide">Hide OSM Notes</string>
-    <string name="quick_action_showhide_osmbugs_descr">Tapping this action button shows or hides OSM Notes on the map.</string>
+    <string name="quick_action_showhide_osmbugs_descr">A toggle ro show or hide OSM Notes on the map.</string>
     <string name="sorted_by_distance">Sorted by distance</string>
     <string name="search_favorites">Search in Favorites</string>
     <string name="hillshade_menu_download_descr">Download the \'Hillshade Overlay\' map to show vertical shading.</string>
@@ -867,15 +867,15 @@
     <string name="select_city">Select city</string>
     <string name="select_postcode">Postcode search</string>
     <string name="quick_action_auto_zoom">Auto zoom map on/off</string>
-    <string name="quick_action_auto_zoom_desc">Tapping this action button turns on/off auto zoom map according to your speed.</string>
+    <string name="quick_action_auto_zoom_desc">A toggle to turn on/off auto map zoom according to your speed.</string>
     <string name="quick_action_auto_zoom_on">Enable auto zoom map</string>
     <string name="quick_action_auto_zoom_off">Disable auto zoom map</string>
     <string name="quick_action_add_destination">Set destination</string>
     <string name="quick_action_replace_destination">Replace destination</string>
     <string name="quick_action_add_first_intermediate">Add first intermediate</string>
-    <string name="quick_action_add_destination_desc">Tapping this action button makes the screen center the route destination, any previously selected destination becomes the last intermediate destination.</string>
+    <string name="quick_action_add_destination_desc">A button to make the screen center the route destination, any previously selected destination becomes the last intermediate destination.</string>
     <string name="quick_action_replace_destination_desc">Tapping this action button makes the screen center the new route destination, replacing the previously selected destination (if any).</string>
-    <string name="quick_action_add_first_intermediate_desc">Tapping this action button makes the screen center the first intermediate destination.</string>
+    <string name="quick_action_add_first_intermediate_desc">A button to make the screen center the first intermediate destination.</string>
     <string name="no_overlay">No overlay</string>
     <string name="no_underlay">No underlay</string>
     <string name="subscribe_email_error">Error</string>
@@ -1841,7 +1841,7 @@
     <string name="rendering_attr_showCycleRoutes_name">Show cycle routes</string>
     <string name="no_index_file_to_download">Downloads not found, please check your connection to the Internet.</string>
     <string name="select_index_file_to_download">Nothing was found. If you can\'t find your region, you can make it yourself (see https://osmand.net).</string>
-    <string name="none_selected_gpx">Dpecify a GPX file by long-tapping first.</string>
+    <string name="none_selected_gpx">Specify a GPX file by long-tapping first.</string>
     <string name="local_index_select_gpx_file">Select a track</string>
     <string name="gpx_split_interval">Split interval</string>
     <string name="sort_by_distance">Sort by distance</string>
@@ -2159,7 +2159,7 @@
     <string name="av_settings">Audio/video settings</string>
     <string name="recording_error">Recording failed</string>
     <string name="recording_camera_not_available">Camera not available</string>
-    <string name="recording_is_recorded">Recording Audio/video. Stop by tapping the AV widget.</string>
+    <string name="recording_is_recorded">Recording audio/video. Stop by tapping the AV widget.</string>
     <string name="recording_playing">An audio from the specified recording is being played.\n%1$s</string>
     <string name="recording_open_external_player">Open external player</string>
     <string name="recording_delete_confirm">Delete this item?</string>
@@ -3318,26 +3318,26 @@
     <string name="quick_actions_delete_text">Are you sure you want to delete the action \"%s\"?</string>
     <string name="quick_favorites_show_favorites_dialog">Show Favorites dialog</string>
     <string name="quick_favorites_name_preset">Name preset</string>
-    <string name="quick_action_add_marker_descr">Tapping this action button adds a map marker at the screen center location.</string>
-    <string name="quick_action_add_gpx_descr">Tapping this action button will add a GPX waypoint in the middle of the screen.</string>
-    <string name="quick_action_take_audio_note_descr">Tapping this action button adds an audio note in the middle of the screen.</string>
-    <string name="quick_action_take_video_note_descr">Tapping this action button adds a video note in the middle of the screen.</string>
-    <string name="quick_action_take_photo_note_descr">Tapping this action button adds a photo note in the middle of the screen.</string>
-    <string name="quick_action_add_osm_bug_descr">Tapping this action button adds an OSM note in the middle of the screen.</string>
-    <string name="quick_action_add_poi_descr">Tapping this action button adds a POI in the middle of the screen.</string>
-    <string name="quick_action_navigation_voice_descr">Tapping this action button disables or enables voice guidance during navigation.</string>
-    <string name="quick_action_add_parking_descr">Tapping this action button adds a parking location in the middle of the screen.</string>
-    <string name="quick_action_switch_day_night_descr">Tapping this action button switch between Day and Night modes for OsmAnd</string>
-    <string name="quick_action_switch_day_mode">Day Mode</string>
-    <string name="quick_action_switch_night_mode">Night Mode</string>
-    <string name="quick_action_day_night_switch_mode">Switch Day/Night mode</string>
+    <string name="quick_action_add_marker_descr">A button to add a map marker at the screen center location.</string>
+    <string name="quick_action_add_gpx_descr">A button to add a GPX waypoint in the middle of the screen.</string>
+    <string name="quick_action_take_audio_note_descr">A button to add an audio note in the middle of the screen.</string>
+    <string name="quick_action_take_video_note_descr">A button to add a video note in the middle of the screen.</string>
+    <string name="quick_action_take_photo_note_descr">A button to add a photo note in the middle of the screen.</string>
+    <string name="quick_action_add_osm_bug_descr">A button to add an OSM note in the middle of the screen.</string>
+    <string name="quick_action_add_poi_descr">A button to add a POI in the middle of the screen.</string>
+    <string name="quick_action_navigation_voice_descr">A toggle to disable or enable voice guidance during navigation.</string>
+    <string name="quick_action_add_parking_descr">A button to add a parking location in the middle of the screen.</string>
+    <string name="quick_action_switch_day_night_descr">A toggle to switch between day and night modes for OsmAnd.</string>
+    <string name="quick_action_switch_day_mode">Day mode</string>
+    <string name="quick_action_switch_night_mode">Night mode</string>
+    <string name="quick_action_day_night_switch_mode">Switch day/night mode</string>
     <string name="quick_action_interim_dialog">Show an interim dialog</string>
     <string name="favorite_autofill_toast_text">" saved to "</string>
     <string name="favorite_empty_place_name">Place</string>
     <string name="quick_action_duplicates">Quick action renamed to %1$s to avoid duplication.</string>
     <string name="quick_action_duplicate">Quick action name duplicate</string>
-    <string name="quick_action_showhide_favorites_descr">Tapping this action button shows or hides the Favorite points on the map.</string>
-    <string name="quick_action_showhide_poi_descr">Tapping this action button shows or hides POIs on the map.</string>
+    <string name="quick_action_showhide_favorites_descr">A toggle to show or hide the Favorite points on the map.</string>
+    <string name="quick_action_showhide_poi_descr">A toggle to show or hide POIs on the map.</string>
     <string name="quick_action_showhide_favorites_title">Show/hide Favorites</string>
     <string name="quick_action_favorites_show">Show Favorites</string>
     <string name="quick_action_favorites_hide">Hide Favorites</string>
@@ -3355,7 +3355,7 @@
     <string name="quick_action_gpx_category_descr">Choose an optional category.</string>
     <string name="quick_action_poi_list">POI list</string>
     <string name="quick_action_sh_poi_descr">Add one or more POI categories to display on the map.</string>
-    <string name="quick_action_page_list_descr">Tapping this action button pages through the list below.</string>
+    <string name="quick_action_page_list_descr">A button to page through the list below.</string>
     <string name="quick_action_map_style_action">Add a map style</string>
     <string name="quick_action_empty_param_error">Fill out all parameters</string>
     <string name="quick_action_map_styles">Map styles</string>
