@@ -202,7 +202,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
 
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            LayoutInflater inflater = UiUtilities.getInflater(parent.getContext(), isLightContent);
+            LayoutInflater inflater = UiUtilities.getInflater(parent.getContext(), !isLightContent);
             if (viewType == SCREEN_ITEM_TYPE)
                 return new QuickActionItemVH(inflater.inflate(R.layout.quick_action_list_item, parent, false));
             else
