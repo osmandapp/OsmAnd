@@ -976,7 +976,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		}
 		if (!processed) {
 			MapControlsLayer mapControlsLayer = activity.getMapLayers().getMapControlsLayer();
-			if (!mapControlsLayer.isMapControlsVisible() || activity.getMyApplication().getSettings().MAP_EMPTY_STATE_ALLOWED.get()) {
+			if (mapControlsLayer != null && (!mapControlsLayer.isMapControlsVisible()
+					|| activity.getMyApplication().getSettings().MAP_EMPTY_STATE_ALLOWED.get())) {
 				mapControlsLayer.switchMapControlsVisibility(true);
 			}
 		}
