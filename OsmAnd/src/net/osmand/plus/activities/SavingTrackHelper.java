@@ -200,7 +200,6 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 
 				// save file
 				for (final String f : data.keySet()) {
-					log.debug("Filename: " + f);
 					File fout = new File(dir, f + ".gpx"); //$NON-NLS-1$
 					if (!data.get(f).isEmpty()) {
 						WptPt pt = data.get(f).findPointToShow();
