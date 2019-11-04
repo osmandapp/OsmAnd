@@ -2264,10 +2264,8 @@
     <string name="point_deleted">Punctul %1$s șters</string>
     <string name="coord_input_save_as_track">Salvați ca și traseu</string>
     <string name="get_osmand_live">Obțineți OsmAnd Live pentru a debloca toate funcționalitățiile: actualizări zilnice a hărților cu descărcări nelimitate, toate pluginurile contra-cost și gratuite, Wikipedia, Wikivoyage și multe altele.</string>
-    <string name="monthly_map_updates">Actualizări de hărți: <b>în fiecare lună</b>
-    </string>
-    <string name="daily_map_updates">Actualizări de hărți: <b>fiecare oră</b>
-    </string>
+    <string name="monthly_map_updates">Actualizări de hărți: în fiecare lună</string>
+    <string name="daily_map_updates">Actualizări de hărți: fiecare oră</string>
     <string name="in_app_purchase_desc">O singură plată</string>
     <string name="in_app_purchase_desc_ex">Odată achiziționat, acesta va fi permanent disponibil pentru dvs.</string>
     <string name="contour_lines_hillshade_maps">Hărți cu Linii de contur și Relief</string>

@@ -2675,8 +2675,8 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="get_unlimited_access">Ottieni l\'accesso illimitato</string>
     <string name="welcome_to_open_beta">Benvenuti alla open beta</string>
     <string name="wikivoyage_travel_guide">Guide Viaggi</string>
-    <string name="monthly_map_updates"> string name=\"lat_lon_pattern\"&gt;Lat: %1$.5f Lon: %2$.5f&lt;/string </string>
-    <string name="daily_map_updates"> string name=\"lat_lon_pattern\"&gt;Lat: %1$.5f Lon: %2$.5f&lt;/string </string>
+    <string name="monthly_map_updates">Aggiornamento della mappa: mensile</string>
+    <string name="daily_map_updates">Aggiornamento della mappa: orario</string>
     <string name="in_app_purchase">Acquisto In-app</string>
     <string name="in_app_purchase_desc">Pagamento unico</string>
     <string name="in_app_purchase_desc_ex">Una volta acquistato, sarà permanentemente a vostra disposizione.</string>
@@ -2814,7 +2814,8 @@ Rappresenta l\'area: %1$s x %2$s</string>
 \n</string>
     <string name="commiting_way">Sottoponi la via…</string>
     <string name="increase_search_radius_to">Aumenta il raggio di ricerca a %1$s</string>
-    <string name="send_search_query_description"> string name=\"lat_lon_pattern\"&gt;Lat: %1$.5f Lon: %2$.5f&lt;/string </string>
+    <string name="send_search_query_description">Invieremo la tua ricerca \"%1$s\" oltre alla tua localizzazione.
+	    \nNon raccogliamo informazioni personali, i dati delle ricerche sono usati per migliorare l\'algoritmo di ricerca</string>
     <string name="send_search_query">Inviare i dati delle ricerche?</string>
     <string name="shared_string_world">Mondo</string>
     <string name="point_deleted">Punto %1$s eliminato</string>
@@ -3278,7 +3279,6 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="screen_alerts">Avvisi sullo schermo</string>
     <string name="route_parameters_descr">Configura i parametri del percorso</string>
     <string name="route_parameters">Parametri del percorso</string>
-    <string name="swap_start_and_destination"> string name=\"lat_lon_pattern\"&gt;Lat: %1$.5f Lon: %2$.5f&lt;/string </string>
     <string name="routing_attr_allow_skating_only_description">Percorsi preparati solo per il freestyle o il pattinaggio senza piste classiche.</string>
     <string name="routing_attr_allow_classic_only_description">Percorsi preparati solo per lo stile classico senza piste di pattinaggio. Include i percorsi preparati da una motoslitta più piccola con piste sciolte e piste fatte manualmente dagli sciatori.</string>
     <string name="logcat_buffer">Logcat buffer</string>

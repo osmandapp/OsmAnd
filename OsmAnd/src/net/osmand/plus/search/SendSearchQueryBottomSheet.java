@@ -51,9 +51,9 @@ public class SendSearchQueryBottomSheet extends MenuBottomSheetDialogFragment {
 		final TextView textView = (TextView) View.inflate(new ContextThemeWrapper(getContext(), themeRes),
 				R.layout.send_missing_search_query_tv, null);
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-			textView.setText(Html.fromHtml(getString(R.string.send_search_query_description, searchQuery), android.text.Html.FROM_HTML_MODE_LEGACY));
+			textView.setText(getString(R.string.send_search_query_description, searchQuery));
 		} else {
-			textView.setText(Html.fromHtml(getString(R.string.send_search_query_description, searchQuery)));
+			textView.setText(getString(R.string.send_search_query_description, searchQuery));
 		}
 		BaseBottomSheetItem sendSearchQueryDescription = new SimpleBottomSheetItem.Builder().setCustomView(textView)
 				.create();

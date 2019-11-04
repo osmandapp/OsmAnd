@@ -2754,10 +2754,8 @@
     <string name="purchase_dialog_subtitle">Elegir el elemento adecuado:</string>
     <string name="wikivoyage_travel_guide_descr">Las guías de los lugares más interesantes del planeta, dentro de OsmAnd y sin conexión a Internet.</string>
     <string name="wikivoyage_travel_guide">Guías turísticas</string>
-    <string name="monthly_map_updates">Actualizaciones del mapa: <b>cada mes</b>
-    </string>
-    <string name="daily_map_updates">Actualizaciones del mapa: <b>cada hora</b>
-    </string>
+    <string name="monthly_map_updates">Actualizaciones del mapa: cada mes</string>
+    <string name="daily_map_updates">Actualizaciones del mapa: cada hora</string>
     <string name="in_app_purchase">Compras en la aplicación</string>
     <string name="in_app_purchase_desc">Único pago</string>
     <string name="in_app_purchase_desc_ex">Una vez comprado, estará permanentemente disponible para ti.</string>
@@ -2826,9 +2824,8 @@
     <string name="quick_action_edit_actions">Editar acciones</string>
     <string name="point_deleted">Punto %1$s borrado</string>
     <string name="shared_string_world">Mundo</string>
-    <string name="send_search_query_description">Enviaremos la consulta de búsqueda: <b>«%1$s»</b>, así como la ubicación.<br/>
-        <br/> No se recopilan datos personales, los datos de búsqueda sólo se utilizan para mejorar el algoritmo de búsqueda.<br/>
-    </string>
+    <string name="send_search_query_description">Enviaremos la consulta de búsqueda: «%1$s», así como la ubicación.\n
+        \n No se recopilan datos personales, los datos de búsqueda sólo se utilizan para mejorar el algoritmo de búsqueda.</string>
     <string name="search_no_results_description">¿Sin resultados?
 \nCuéntanos sobre esto.</string>
     <string name="send_search_query">¿Enviar consulta de búsqueda?</string>

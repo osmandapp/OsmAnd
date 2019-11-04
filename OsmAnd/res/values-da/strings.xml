@@ -2733,10 +2733,8 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="purchase_dialog_title">Vælg abonnement</string>
     <string name="purchase_dialog_travel_description">Køb en af følgende for at læse rejseartikler offline:</string>
     <string name="purchase_dialog_subtitle">Vælg passende emne:</string>
-    <string name="monthly_map_updates">Opdatering af kort: <b>hver måned</b>
-    </string>
-    <string name="daily_map_updates">Opdatering af kort: <b>hver time</b>
-    </string>
+    <string name="monthly_map_updates">Opdatering af kort: hver måned</string>
+    <string name="daily_map_updates">Opdatering af kort: hver time</string>
     <string name="in_app_purchase">Køb i programmet</string>
     <string name="in_app_purchase_desc">Engangsbetaling</string>
     <string name="purchase_unlim_title">Køb - %1$s</string>
@@ -2807,9 +2805,8 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="coord_input_save_as_track_descr">%1$s punkter tilføjet. Indtast et filnavn og tryk på “Gem“.</string>
     <string name="point_deleted">Punkt %1$s er blevet slettet</string>
     <string name="shared_string_world">Verden</string>
-    <string name="send_search_query_description">Send søgestrengen: <b>\"%1$s\"</b> samt lokationen.<br/>
-        <br/>Der indsamles ingen personlige oplysninger, søgedata bruges kun til at forbedre søgealgoritmen.<br/>
-    </string>
+    <string name="send_search_query_description">Send søgestrengen: \"%1$s\" samt lokationen.\n
+        \nDer indsamles ingen personlige oplysninger, søgedata bruges kun til at forbedre søgealgoritmen.</string>
     <string name="search_no_results_description">Ingen resultater?
 \nRapporter det.</string>
     <string name="send_search_query">Send søgeforespørgsel?</string>

@@ -2732,8 +2732,8 @@ Lon %2$s</string>
     <string name="purchase_dialog_subtitle">Elegir el elemento adecuado</string>
     <string name="wikivoyage_travel_guide_descr">Las guías de los lugares más interesantes del planeta, dentro de OsmAnd y sin conexión a Internet.</string>
     <string name="wikivoyage_travel_guide">Guías turísticas</string>
-    <string name="monthly_map_updates"> string name=\"lat_lon_pattern\"&gt;Lat: %1$.5f Lon: %2$.5f&lt;/string </string>
-    <string name="daily_map_updates"> string name=\"lat_lon_pattern\"&gt;Lat: %1$.5f Lon: %2$.5f&lt;/string </string>
+    <string name="monthly_map_updates">Actualizaciones del mapa: cada mes</string>
+    <string name="daily_map_updates">Actualizaciones del mapa: cada hora</string>
     <string name="in_app_purchase">Compras en la aplicación</string>
     <string name="in_app_purchase_desc">Único pago</string>
     <string name="in_app_purchase_desc_ex">Una vez comprado, estará permanentemente disponible para ti.</string>
@@ -2801,7 +2801,8 @@ Lon %2$s</string>
     <string name="coord_input_save_as_track_descr">Añadiste %1$s puntos. Escribe un nombre de archivo y pulsa en «Guardar».</string>
     <string name="point_deleted">Punto %1$s borrado</string>
     <string name="shared_string_world">Mundo</string>
-    <string name="send_search_query_description"> string name=\"lat_lon_pattern\"&gt;Lat: %1$.5f Lon: %2$.5f&lt;/string </string>
+    <string name="send_search_query_description">Enviaremos la consulta de búsqueda: «%1$s», así como la ubicación.
+        \nNo se recopilan datos personales, los datos de búsqueda sólo se utilizan para mejorar el algoritmo de búsqueda.</string>
     <string name="search_no_results_description">¿Sin resultados?
 \nCuéntanos sobre esto.</string>
     <string name="send_search_query">¿Enviar consulta de búsqueda?</string>
@@ -3363,7 +3364,6 @@ Lon %2$s</string>
     <string name="shared_preference">Compartido</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">Preferir caminos sin pavimentar</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">Prefiere caminos sin pavimentar.</string>
-    <string name="swap_start_and_destination"> string name=\"lat_lon_pattern\"&gt;Lat: %1$.5f Lon: %2$.5f&lt;/string </string>
     <string name="layer_osm_edits">Ediciones de OSM</string>
     <string name="quick_action_contour_lines_descr">Al pulsar este botón de acción se muestran u ocultan las curvas de nivel en el mapa</string>
     <string name="quick_action_contour_lines_show">Mostrar curvas de nivel</string>

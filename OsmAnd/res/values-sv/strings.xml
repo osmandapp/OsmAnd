@@ -2580,10 +2580,8 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="welcome_to_open_beta">Välkommen till öppen beta</string>
     <string name="wikivoyage_travel_guide">Reseguider</string>
     <string name="wikivoyage_travel_guide_descr">Guider till de mest intressanta platserna i världen, inuti OsmAnd, utan en internetanslutning.</string>
-    <string name="monthly_map_updates">Kartuppdateringar: <b>varje månad</b>
-    </string>
-    <string name="daily_map_updates">Kartuppdateringar: <b>varje timme</b>
-    </string>
+    <string name="monthly_map_updates">Kartuppdateringar: varje månad</string>
+    <string name="daily_map_updates">Kartuppdateringar: varje timme</string>
     <string name="in_app_purchase">Köp i app</string>
     <string name="in_app_purchase_desc">Engångsbetalning</string>
     <string name="in_app_purchase_desc_ex">När det väl är köpt, blir det permanent tillgängligt för dig.</string>
@@ -2719,9 +2717,8 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="send_search_query">Skicka sökförfråga?</string>
     <string name="shared_string_world">Värld</string>
     <string name="ask_for_location_permission">Ge OsmAnd tillstånd för plats för att fortsätta.</string>
-    <string name="send_search_query_description">Vi skickar din sökfråga: <b>\"%1$s\"</b>, såväl som din plats.<br/>
-        <br/> Vi samlar inte in personlig information, vi behöver bara sökdata för att förbättra sökalgoritmen.<br/>
-    </string>
+    <string name="send_search_query_description">Vi skickar din sökfråga: \"%1$s\", såväl som din plats.\n
+        \n Vi samlar inte in personlig information, vi behöver bara sökdata för att förbättra sökalgoritmen.</string>
     <string name="third_party_application">Tredjepartsprogram</string>
     <string name="search_street">Sök gata</string>
     <string name="start_search_from_city">Välj en stad först</string>

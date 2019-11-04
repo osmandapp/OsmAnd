@@ -2619,8 +2619,8 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="online_webpage_warning">Strona jest dostępna tylko w trybie online. Otworzyć ją w przeglądarce internetowej?</string>
     <string name="delete_search_history">Usuń historię wyszukiwania</string>
     <string name="download_images">Pobieranie obrazów</string>
-    <string name="monthly_map_updates"> string name=\"lat_lon_pattern\"&gt;Długość: %1$.5f Szerokość: %2$.5f&lt;/string </string>
-    <string name="daily_map_updates"> string name=\"lat_lon_pattern\"&gt;Długość: %1$.5f Szerokość: %2$.5f&lt;/string </string>
+    <string name="monthly_map_updates">Uaktualnienia map: każdego miesiąca</string>
+    <string name="daily_map_updates">Uaktualnienia map: co godzinę</string>
     <string name="wikivoyage_offline">Wikipodróże offline</string>
     <string name="unlimited_downloads">Nieograniczone pobieranie</string>
     <string name="images_cache">Pamięć podręczna obrazów</string>
@@ -2760,7 +2760,8 @@ Reprezentuje obszar: %1$s x %2$s</string>
 \n• Inne poprawki błędów
 \n</string>
     <string name="increase_search_radius_to">Zwiększ promień wyszukiwania do %1$s</string>
-    <string name="send_search_query_description"> string name=\"lat_lon_pattern\"&gt;Długość: %1$.5f Szerokość: %2$.5f&lt;/string </string>
+    <string name="send_search_query_description">Zostaną wysłane informacje o zapytaniu: „%1$s” i położeniu.
+        \nInformacje osobiste nie są gromadzone, dane wyszukiwania są używane tylko do poprawienia algorytmu wyszukiwania.</string>
     <string name="search_no_results_description">Brak wyników?
 \nPowiedz nam o tym.</string>
     <string name="send_search_query">Wysłać zapytanie?</string>
@@ -3357,7 +3358,6 @@ Reprezentuje obszar: %1$s x %2$s</string>
 \n • Inne poprawki błędów
 \n
 \n</string>
-    <string name="swap_start_and_destination"> string name=\"lat_lon_pattern\"&gt;Długość: %1$.5f Szerokość: %2$.5f&lt;/string </string>
     <string name="apply_preference_to_all_profiles">Można wprowadzić tę zmianę we wszystkich profilach lub tylko w obecnie wybranym.</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">Preferowanie nieutwardzonych dróg</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">Preferuje drogi nieutwardzone.</string>

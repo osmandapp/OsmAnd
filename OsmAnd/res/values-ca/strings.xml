@@ -2746,10 +2746,8 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="start_editing">Comença l\'edició</string>
     <string name="get_unlimited_access">Assoliu accés il·limitat</string>
     <string name="welcome_to_open_beta">Benvingut a la beta oberta</string>
-    <string name="monthly_map_updates">Actualitzacions del mapa: <b>cada mes</b>
-    </string>
-    <string name="daily_map_updates">Actualitzacions del mapa: <b>cada hora</b>
-    </string>
+    <string name="monthly_map_updates">Actualitzacions del mapa: cada mes</string>
+    <string name="daily_map_updates">Actualitzacions del mapa: cada hora</string>
     <string name="download_wikipedia_description">Baixeu els articles de la Viquipèdia per %1$s per llegir-los fora de línia.</string>
     <string name="download_wikipedia_label">Baixa dades de la Viquipèdia</string>
     <string name="open_in_browser_wiki">Obre l\'article en línia</string>
@@ -2811,9 +2809,8 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="coord_input_save_as_track_descr">Heu afegit %1$s punts. Introduïu un nom de fitxer i premeu \"Desa\".</string>
     <string name="point_deleted">El punt %1$s s\'ha esborrat</string>
     <string name="shared_string_world">Mundial</string>
-    <string name="send_search_query_description">Enviarem la vostra consulta de cerca: <b>\"%1$s\"</b>, així com la vostra ubicació.<br/>
-        <br/> No es recull informació personal, només les dades utilitzades en la cerca per millorar-ne l\'algorisme.<br/>
-    </string>
+    <string name="send_search_query_description">Enviarem la vostra consulta de cerca: \"%1$s\", així com la vostra ubicació.\n
+        \n No es recull informació personal, només les dades utilitzades en la cerca per millorar-ne l\'algorisme.</string>
     <string name="search_no_results_description">Cap resultat?
 \nParleu-nos-en al respecte.</string>
     <string name="send_search_query">Voleu enviar la consulta de cerca?</string>

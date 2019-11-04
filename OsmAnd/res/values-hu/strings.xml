@@ -2607,10 +2607,8 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="paid_plugin">Fizetős bővítmény</string>
     <string name="update_is_available">Frissítés érhető el</string>
     <string name="download_file">Fájl letöltése</string>
-    <string name="monthly_map_updates">Térképfrissítés: <b>havonta</b>
-    </string>
-    <string name="daily_map_updates">Térképfrissítés: <b>óránként</b>
-    </string>
+    <string name="monthly_map_updates">Térképfrissítés: havonta</string>
+    <string name="daily_map_updates">Térképfrissítés: óránként</string>
     <string name="in_app_purchase">Alkalmazáson belüli vásárlás</string>
     <string name="in_app_purchase_desc">Egyszeri fizetés</string>
     <string name="in_app_purchase_desc_ex">Ha egyszer megveszed, mindig elérhető lesz számodra.</string>
@@ -2793,9 +2791,8 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="arrive_at_time">Érkezés ekkor: %1$s</string>
     <string name="powered_by_osmand">Az OsmAndtól</string>
     <string name="third_party_application">Harmadik féltől származó alkalmazás</string>
-    <string name="send_search_query_description">Elküldjük a keresésed: <b>„%1$s”</b>, valamint a tartózkodási helyed.<br/>
-        <br/> Nem gyűjtünk személyes adatokat, a keresési adatokat csak a kereső algoritmus fejlesztéséhez használjuk.<br/>
-    </string>
+    <string name="send_search_query_description">Elküldjük a keresésed: „%1$s”, valamint a tartózkodási helyed.\n
+        \n Nem gyűjtünk személyes adatokat, a keresési adatokat csak a kereső algoritmus fejlesztéséhez használjuk.</string>
     <string name="transport_nearby_routes">Ezen belül:</string>
     <string name="shared_string_launch">Indítás</string>
     <string name="lang_gn_py">guarani</string>

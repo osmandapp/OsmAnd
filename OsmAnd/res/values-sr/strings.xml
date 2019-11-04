@@ -2415,10 +2415,8 @@
     <string name="how_to_open_wiki_title">Како да отворите чланке са Википедије?</string>
     <string name="welcome_to_open_beta_description">Туристички водичи су тренутно базирани на Wikivoyage-у. Тестирајте све функционалности бесплатно. После тога, туристички водичи ће бити доступни само претплатницима на OsmAnd Unlimited и власницима OsmAnd+-а.</string>
     <string name="start_editing_card_description">Можете и требали бисте да мењате било који чланак на Wikivoyage-у, а и надамо се да хоћете. Делите Ваше знање, искуство, таленат и пажњу</string>
-    <string name="monthly_map_updates">Ажурирања карти: <b>сваког месеца</b>
-    </string>
-    <string name="daily_map_updates">Ажурирања карти: <b>сваког сата</b>
-    </string>
+    <string name="monthly_map_updates">Ажурирања карти: сваког месеца</string>
+    <string name="daily_map_updates">Ажурирања карти: сваког сата</string>
     <string name="wikivoyage_offline">Wikivoyage ван мреже</string>
     <string name="wikipedia_offline">Википедија ван мреже</string>
     <string name="contour_lines_hillshade_maps">Карте изохипси и рељефа</string>
@@ -2808,9 +2806,8 @@
 \nОвај поглед се може искључити тако што се или овде деактивира, или тако што се, по жељи, промени \"Стил карте\" под \"Подеси карту\".</string>
     <string name="point_deleted">Тачка %1$s обрисана</string>
     <string name="shared_string_world">Свет</string>
-    <string name="send_search_query_description">Послаћемо упит Ваше претраге: <b>\"%1$s\"</b>, као и Вашу локацију.<br/>
-        <br/> Не сакупљамо личне податке, само нам требају подаци о претрагама да бисмо побољшавали алгоритам претраге.<br/>
-    </string>
+    <string name="send_search_query_description">Послаћемо упит Ваше претраге: \"%1$s\", као и Вашу локацију.\n
+        \n Не сакупљамо личне податке, само нам требају подаци о претрагама да бисмо побољшавали алгоритам претраге.</string>
     <string name="search_no_results_description">Нема резултата?
 \nРеците нам о овоме.</string>
     <string name="send_search_query">Пошаљи упит претраге?</string>
@@ -2897,7 +2894,7 @@
     <string name="shared_string_capacity">Капацитет</string>
     <string name="shared_string_width">Ширина</string>
     <string name="shared_string_height">Висина</string>
-    <string name="swap_start_and_destination">Замени <b>почетак</b> и <b>циљ</b></string>
+    <string name="swap_start_and_destination">Замени почетак и циљ</string>
     <string name="add_destination_point">Додај одредиште</string>
     <string name="add_intermediate_point">Додај успутну станицу</string>
     <string name="add_start_point">Додај почетну тачку</string>

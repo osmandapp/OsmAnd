@@ -683,9 +683,8 @@
     <string name="search_no_results_feedback">¿Nun hai resultaos de gueta\?
 \nComéntanoslo</string>
     <string name="increase_search_radius_to">Aumentar el radiu de gueta hasta %1$s</string>
-    <string name="send_search_query_description">Vamos unviar la consulta <b>«%1$s»</b> amás del to allugamientu. <br/>
-        <br/>Nun recoyemos la información personal, namái precisamos estos datos p\'ameyorar l\'algoritmu de gueta.<br/>
-    </string>
+    <string name="send_search_query_description">Vamos unviar la consulta «%1$s» amás del to allugamientu. \n
+        \nNun recoyemos la información personal, namái precisamos estos datos p\'ameyorar l\'algoritmu de gueta.</string>
     <string name="send_search_query">¿Unviar la consulta de gueta\?</string>
     <string name="shared_string_world">Mundu</string>
     <string name="coord_input_save_as_track_descr">Amestesti %1$s puntos. Teclexa un nome y toca «Guardar».</string>
@@ -717,10 +716,8 @@
     <string name="start_editing">Apenzar la edición</string>
     <string name="welcome_to_open_beta">Afáyate na beta abierta</string>
     <string name="wikivoyage_travel_guide_descr">Guíes de los llugares más interesantes del planeta, dientro d\'OsmAnd, ensin conexón a internet.</string>
-    <string name="monthly_map_updates">Anovamientos del mapa: <b>cada mes</b>
-    </string>
-    <string name="daily_map_updates">Anovamientos del mapa: <b>cada hora</b>
-    </string>
+    <string name="monthly_map_updates">Anovamientos del mapa: cada mes</string>
+    <string name="daily_map_updates">Anovamientos del mapa: cada hora</string>
     <string name="wikivoyage_offline">Wikivoyage fuera de llinia</string>
     <string name="unlimited_downloads">Descargues ensin llende</string>
     <string name="wikipedia_offline">Wikipedia fuera de llinia</string>

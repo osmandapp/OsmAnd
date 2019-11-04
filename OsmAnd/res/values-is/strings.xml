@@ -2749,8 +2749,8 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="unlimited_downloads">Ótakmörkuð niðurhöl</string>
     <string name="wikipedia_offline">Wikipedia ónettengt</string>
     <string name="unlock_all_features">Aflæsa öllum eiginleikum OsmAnd</string>
-    <string name="monthly_map_updates"><b>Mánaðarlegar</b> uppfærslur korta</string>
-    <string name="daily_map_updates">Uppfærslur korta <b>á klukkustundar fresti</b></string>
+    <string name="monthly_map_updates">Mánaðarlegar uppfærslur korta</string>
+    <string name="daily_map_updates">Uppfærslur korta á klukkustundar fresti</string>
     <string name="popular_destinations">Vinsælir áfangastaðir</string>
     <string name="paid_app">Greitt forrit</string>
     <string name="paid_plugin">Greidd forritsviðbót</string>
@@ -2826,7 +2826,8 @@ Stendur fyrir svæði: %1$s x %2$s</string>
 \n
 \n"</string>
     <string name="increase_search_radius_to">Auka leitarradíus í %1$s</string>
-    <string name="send_search_query_description">Leitarfyrirspurn þín verður send til: <b>\"%1$s\"</b>, ásamt staðsetningu þinni.<br/> <br/> Persónulegum upplýsingum er ekki safnað, þessi gögn eru notuð til að bæta útreikninga leitarinnar.<br/></string>
+    <string name="send_search_query_description">Leitarfyrirspurn þín verður send til: \"%1$s\", ásamt staðsetningu þinni.\n
+        \n Persónulegum upplýsingum er ekki safnað, þessi gögn eru notuð til að bæta útreikninga leitarinnar.</string>
     <string name="search_no_results_description">Engar niðurstöður?
 \nSegðu okkur meira um þetta.</string>
     <string name="send_search_query">Senda leitarfyrirspurn?</string>
@@ -3385,7 +3386,7 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="quick_action_hillshade_show">Birta hæðaskyggingu</string>
     <string name="quick_action_hillshade_hide">Fela hæðaskyggingu</string>
     <string name="quick_action_show_hide_hillshade">Birta/Fela hæðaskyggingu</string>
-    <string name="swap_start_and_destination">Skipta á <b>upphafi</b> og <b>áfangastað</b></string>
+    <string name="swap_start_and_destination">Skipta á upphafi og áfangastað</string>
     <string name="tts_initialization_error">Gat ekki ræst talgervil</string>
     <string name="simulate_your_location_gpx_descr">Herma eftir staðsetningu þinni með áður skráðum GPX-ferli.</string>
 </resources>

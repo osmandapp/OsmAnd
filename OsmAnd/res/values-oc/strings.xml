@@ -260,10 +260,8 @@
     <string name="download_file">Descargar lo fichier</string>
     <string name="start_editing">Començar l\'edicion</string>
     <string name="wikivoyage_travel_guide">Guida de viatge</string>
-    <string name="monthly_map_updates">Actualizacion de la mapa: <b>cada mes</b>
-    </string>
-    <string name="daily_map_updates">Actualizacion de la mapa: <b>cada ora</b>
-    </string>
+    <string name="monthly_map_updates">Actualizacion de la mapa: cada mes</string>
+    <string name="daily_map_updates">Actualizacion de la mapa: cada ora</string>
     <string name="in_app_purchase">Comprés dins l\'aplicacion</string>
     <string name="in_app_purchase_desc">Pagament unic</string>
     <string name="purchase_unlim_title">Crompar - %1$s</string>

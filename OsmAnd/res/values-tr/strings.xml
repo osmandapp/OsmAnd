@@ -2851,8 +2851,8 @@
     <string name="unlimited_downloads">Sınırsız indirme</string>
     <string name="wikipedia_offline">Çevrimdışı Wikipedia</string>
     <string name="unlock_all_features">Tüm OsmAnd özelliklerinin kilidini açın</string>
-    <string name="monthly_map_updates"><b>Aylık</b> harita güncellemeleri</string>
-    <string name="daily_map_updates"><b>Saatlik</b> harita güncellemeleri</string>
+    <string name="monthly_map_updates">Aylık harita güncellemeleri</string>
+    <string name="daily_map_updates">Saatlik harita güncellemeleri</string>
     <string name="travel_card_update_descr">Yeni Wikivoyage verileri mevcut, keyfini çıkarmak için güncelleyin.</string>
     <string name="travel_card_download_descr">İnternet bağlantısı olmadan dünyadaki yerler hakkındaki makaleleri görüntülemek için Wikivoyage seyahat rehberlerini indirin.</string>
     <string name="update_is_available">Güncelleme mevcut</string>
@@ -2897,7 +2897,7 @@
     <string name="error_notification_desc">Lütfen bu bildirimin ekran görüntüsünü support@osmand.net adresine gönderin</string>
     <string name="coord_input_save_as_track">Yol-izi olarak kaydet</string>
     <string name="coord_input_save_as_track_descr">%1$s nokta eklediniz. Bir dosya adı yazın ve \"Kaydet\"e dokunun.</string>
-    <string name="send_search_query_description">Arama sorgunuz, konumunuzla birlikte <b>\"%1$s\"</b> adresine gönderilecektir.<br/><br/> Kişisel bilgiler toplanmamakta, yalnızca aramayı geliştirmek için gereken arama verileri gönderilmektedir.<br/></string>
+    <string name="send_search_query_description">Arama sorgunuz, konumunuzla birlikte \"%1$s\" adresine gönderilecektir.\n\n Kişisel bilgiler toplanmamakta, yalnızca aramayı geliştirmek için gereken arama verileri gönderilmektedir.\n</string>
     <string name="increase_search_radius_to">Arama yarıçapını %1$s’ye genişlet</string>
     <string name="ask_for_location_permission">Lütfen devam etmek için OsmAnd\'a konum erişim izni verin.</string>
     <string name="rendering_value_black_name">Siyah</string>
@@ -3313,7 +3313,7 @@
     <string name="shared_preference">Paylaşılan</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">Asfaltsız yolları tercih edin</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">Asfaltsız yolları tercih edin.</string>
-    <string name="swap_start_and_destination"><b>Başlangıç</b> ve <b>varış yerini</b> değiştir</string>
+    <string name="swap_start_and_destination">Başlangıç ve varış yerini değiştir</string>
     <string name="layer_osm_edits">OSM Düzenlemeleri</string>
     <string name="quick_action_contour_lines_descr">Bu eylem düğmesine basmak, haritadaki eş yükselti çizgilerini gösterir veya gizler</string>
     <string name="quick_action_contour_lines_show">Eş yükselti çizgilerini göster</string>

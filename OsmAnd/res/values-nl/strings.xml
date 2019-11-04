@@ -2565,10 +2565,8 @@ voor Gebied: %1$s x %2$s</string>
     <string name="welcome_to_open_beta">Welkom bij de open beta</string>
     <string name="wikivoyage_travel_guide">Reisgids</string>
     <string name="wikivoyage_travel_guide_descr">Voert je binnen OsmAnd naar de meest interessante plaatsen op aarde, zonder internetverbinding.</string>
-    <string name="monthly_map_updates">Kaartupdates: <b>Elke maand</b>
-    </string>
-    <string name="daily_map_updates">Kaartupdates: <b>Elk uur</b>
-    </string>
+    <string name="monthly_map_updates">Kaartupdates: Elke maand</string>
+    <string name="daily_map_updates">Kaartupdates: Elk uur</string>
     <string name="in_app_purchase">"In-app aankopen "</string>
     <string name="in_app_purchase_desc">"Eenmalige betaling "</string>
     <string name="in_app_purchase_desc_ex">Na de aankoop, is het permanent voor je beschikbaar.</string>
@@ -2705,9 +2703,8 @@ voor Gebied: %1$s x %2$s</string>
     <string name="search_no_results_feedback">Geen zoekresultaten ?
 \nGeef ons jouw feedback</string>
     <string name="increase_search_radius_to">Vergroot het zoekgebied tot %1$s</string>
-    <string name="send_search_query_description">We gebruiken uw zoekterm: <b>\"%1$s\"</b>, en uw locatie.<br/>
-        <br/> om ons zoekalgoritme te verbeteren. We verzamelen geen persoonlijke informatie <br/>
-    </string>
+    <string name="send_search_query_description">We gebruiken uw zoekterm: \"%1$s\", en uw locatie.\n
+        \n om ons zoekalgoritme te verbeteren. We verzamelen geen persoonlijke informatie</string>
     <string name="send_search_query">Zoekterm versturen\?</string>
     <string name="shared_string_world">Wereld</string>
     <string name="shared_string_gpx_files">GPX bestanden</string>

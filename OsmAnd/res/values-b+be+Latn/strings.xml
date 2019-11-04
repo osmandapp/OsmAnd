@@ -2742,10 +2742,8 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="welcome_to_open_beta">Vitajem u adkrytym beta-testavanni</string>
     <string name="wikivoyage_travel_guide">Turystyčny daviednik</string>
     <string name="wikivoyage_travel_guide_descr">Kiraŭnictva pa samym cikavym miescam na planiecie ŭnutny OsmAnd biez zlučennia z Internetam.</string>
-    <string name="monthly_map_updates">Abnaŭlienni map: <b>štomiesiačna</b>
-    </string>
-    <string name="daily_map_updates">Abnaŭlienni map: <b>štohadzinna</b>
-    </string>
+    <string name="monthly_map_updates">Abnaŭlienni map: štomiesiačna</string>
+    <string name="daily_map_updates">Abnaŭlienni map: štohadzinna</string>
     <string name="in_app_purchase">Pakupka ŭ prahramie</string>
     <string name="in_app_purchase_desc">Razavy placiož</string>
     <string name="in_app_purchase_desc_ex">Adnojčy nabyty, heta budzie zaŭsiody dastupny dlia vas.</string>
@@ -2797,9 +2795,8 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="coord_input_save_as_track_descr">Vy dadali %1$s kropak. Uviadzicie nazvu fajla i nacisnicie «zachavać».</string>
     <string name="point_deleted">Kropka %1$s vydalienaja</string>
     <string name="shared_string_world">Sviet</string>
-    <string name="send_search_query_description">My adpravim vaš pašukovy zapyt <b>«%1$s»</b>, a taksama vašaje miescaznachodžannie. <br/>
-        <br/> Zbirajucca toĺki niepierasanaĺnyja danyja, danyja pošuku vykarystoŭvajucca toĺki dlia taho, kab paliepšyć alharytm pošuku.<br/>
-\n </string>
+    <string name="send_search_query_description">My adpravim vaš pašukovy zapyt «%1$s», a taksama vašaje miescaznachodžannie. \n
+        \n Zbirajucca toĺki niepierasanaĺnyja danyja, danyja pošuku vykarystoŭvajucca toĺki dlia taho, kab paliepšyć alharytm pošuku.</string>
     <string name="search_no_results_description">Niama vynikaŭ?
 \nRaspaviadzicie nam ab hetym.</string>
     <string name="send_search_query">Adpravić pašukovy zapyt?</string>

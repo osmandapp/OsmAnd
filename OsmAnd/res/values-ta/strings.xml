@@ -32,8 +32,8 @@
 \n</string>
     <string name="commiting_way">உறுதி செய்வதற்கான வழி…</string>
     <string name="increase_search_radius_to">தேடுதல் வட்டத்தை %1$s ஆக கூட்டவும்</string>
-    <string name="send_search_query_description">நாங்கள் உங்களின் தேடல்: <b>1\"%1$s\"</b>2, மற்றும் இருப்பிடத்தை அனுப்புவோம்.<br/>3<br/>"4 நாங்கள் உங்களது தனிப்பட்ட விவரத்தை  சேகரிக்க மாட்டோம், எங்களுடைய தேடுதல் 
-\n வழிமுறையை மேம்படுத்த உங்களின் தேடுதல் தகவல் தேவை படுகிறது ."<br/>5</string>
+    <string name="send_search_query_description">நாங்கள் உங்களின் தேடல்: 1\"%1$s\"2, மற்றும் இருப்பிடத்தை அனுப்புவோம்.\n3\n"4 நாங்கள் உங்களது தனிப்பட்ட விவரத்தை  சேகரிக்க மாட்டோம், எங்களுடைய தேடுதல்
+\n வழிமுறையை மேம்படுத்த உங்களின் தேடுதல் தகவல் தேவை படுகிறது ."\n5</string>
     <string name="shared_string_world">உலகம்</string>
     <string name="point_deleted">புள்ளி %1$s நீக்கப்பட்டது</string>
     <string name="coord_input_add_point">புள்ளியே சேர்க்க</string>
@@ -69,9 +69,9 @@
     <string name="welcome_to_open_beta">திறந்த பீட்டாவை வரவேற்கிறோம்</string>
     <string name="wikivoyage_travel_guide">பயண வழிகாட்டிகள்</string>
     <string name="wikivoyage_travel_guide_descr">இணையத்தில் ஒரு இணைப்பு இல்லாமல், கிரகதில் உள்ள மிகவும் சுவாரஸ்யமான இடங்களுக்கு OsmAnd உள்ளே வழிகாட்டபட்டுளது.</string>
-    <string name="monthly_map_updates">வரைபட புதுப்பிப்புகள்: <b>1 எல்லா மாதமும்</b>2</string>
-    <string name="daily_map_updates">வரைபட புதுப்பிப்புகள்:<b>1 எல்லா
-\nமணிநேரமும் </b>2</string>
+    <string name="monthly_map_updates">வரைபட புதுப்பிப்புகள்: 1 எல்லா மாதமும்2</string>
+    <string name="daily_map_updates">வரைபட புதுப்பிப்புகள்:1 எல்லா
+\nமணிநேரமும் 2</string>
     <string name="shared_string_result">முடிவு</string>
     <string name="use_two_digits_longitude">இரட்டை இலக்கு தீர்க்கரேகையை பயன்படுத்துக</string>
     <string name="shared_string_travel_guides">பயண வழிகாட்டிகள்</string>

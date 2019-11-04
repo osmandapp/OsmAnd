@@ -2136,7 +2136,8 @@
 \nDê-nos a sua opinião</string>
     <string name="commiting_way">Cometendo caminho…</string>
     <string name="increase_search_radius_to">Aumentar o raio de pesquisa para %1$s</string>
-    <string name="send_search_query_description"> string name=\"lat_lon_pattern\"&gt;Lat: %1$.5f Lon: %2$.5f&lt;/string </string>
+    <string name="send_search_query_description">Enviaremos a sua consulta de pesquisa: \"%1$s\" e a sua localização.
+        \nNenhuma informação pessoal é recolhida. Os dados de pesquisa só servem para melhorar o algoritmo de pesquisa.</string>
     <string name="send_search_query">Enviar a consulta de pesquisa?</string>
     <string name="shared_string_world">Mundo</string>
     <string name="point_deleted">Ponto %1$s eliminado</string>
@@ -2240,10 +2241,8 @@
     <string name="welcome_to_open_beta">Bem-vindo ao beta aberto</string>
     <string name="wikivoyage_travel_guide">Guias de viagem</string>
     <string name="wikivoyage_travel_guide_descr">Guias para os lugares mais interessantes do mundo dentro do OsmAnd, sem uma conexão com a Internet.</string>
-    <string name="monthly_map_updates">Atualizações de mapa: <b>a cada mês</b>
-    </string>
-    <string name="daily_map_updates">Atualizações de mapa: <b>a cada hora</b>
-    </string>
+    <string name="monthly_map_updates">Atualizações de mapa: a cada mês</string>
+    <string name="daily_map_updates">Atualizações de mapa: a cada hora</string>
     <string name="in_app_purchase">Compra na aplicação</string>
     <string name="in_app_purchase_desc">Pagamento de uma só vez</string>
     <string name="in_app_purchase_desc_ex">Uma vez comprado, estará sempre disponível para si.</string>

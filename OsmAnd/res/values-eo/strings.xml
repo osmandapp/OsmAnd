@@ -2725,10 +2725,8 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="unlimited_downloads">Senlimaj elŝutoj</string>
     <string name="wikipedia_offline">Vikipedio eksterrete</string>
     <string name="unlock_all_features">Malŝlosi ĉiujn eblojn de OsmAnd</string>
-    <string name="monthly_map_updates">Map-ĝisdatigoj: <b>ĉiumonate</b>
-    </string>
-    <string name="daily_map_updates">Map-ĝisdatigoj: <b>ĉiuhore</b>
-    </string>
+    <string name="monthly_map_updates">Map-ĝisdatigoj: ĉiumonate</string>
+    <string name="daily_map_updates">Map-ĝisdatigoj: ĉiuhore</string>
     <string name="osmand_team">OsmAnd-teamo</string>
     <string name="popular_destinations">Popularaj vojaĝ-celoj</string>
     <string name="paid_app">Pagenda aplikaĵo</string>
@@ -2787,9 +2785,8 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="coord_input_save_as_track_descr">Vi aldonis %1$s punktojn. Entajpu dosiernomon kaj frapetu “konservi”.</string>
     <string name="point_deleted">Forigis la punkton %1$s</string>
     <string name="shared_string_world">Mondo</string>
-    <string name="send_search_query_description">Ni sendos vian serĉ-peton: <b>“%1$s”</b> kun via pozicio.<br/>
-        <br/>Neniuj personaj informoj estos senditaj, serĉ-datumoj estos uzataj nur por plibonigi la algoritmon.<br/>
-    </string>
+    <string name="send_search_query_description">Ni sendos vian serĉ-peton: “%1$s” kun via pozicio.\n
+        \nNeniuj personaj informoj estos senditaj, serĉ-datumoj estos uzataj nur por plibonigi la algoritmon.</string>
     <string name="search_no_results_description">Neniuj rezultoj?
 \nSciigu nin pri tio.</string>
     <string name="send_search_query">Ĉu sendi serĉ-peton?</string>
@@ -3349,7 +3346,6 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="shared_preference">Komuna</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">Preferi tervojojn</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">Preferi vojojn sen firma pavimo.</string>
-    <string name="swap_start_and_destination"> string name=\"lat_lon_pattern\"&gt;Lat: %1$.5f Lon: %2$.5f&lt;/string </string>
     <string name="layer_osm_edits">OSM‑redaktoj</string>
     <string name="quick_action_contour_lines_descr">Frapetu tiun ĉi ag‑butonon por montri/kaŝi nivelkurbojn sur la mapo.</string>
     <string name="quick_action_contour_lines_show">Montri nivelkurbojn</string>
