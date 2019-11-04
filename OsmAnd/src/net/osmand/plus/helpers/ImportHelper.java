@@ -672,8 +672,9 @@ public class ImportHelper {
 	private String saveImport(final GPXFile gpxFile, String fileName, final boolean useImportDir) {
 		final String warning;
 
+		final WptPt pt = gpxFile.findPointToShow();
+
 		if(fileName == null) {
-			WptPt pt = gpxFile.findPointToShow();
 			fileName = new SimpleDateFormat("yyyy-MM-dd_HH-mm_EEE", Locale.US).format(new Date(pt.time));
 		}
 
@@ -689,7 +690,6 @@ public class ImportHelper {
 			//noinspection ResultOfMethodCallIgnored
 			importDir.mkdirs();
 			if (importDir.exists() && importDir.isDirectory() && importDir.canWrite()) {
-				final WptPt pt = gpxFile.findPointToShow();
 				final File toWrite = getFileToSave(fileName, importDir, pt);
 				boolean destinationExists = toWrite.exists();
 				Exception e = GPXUtilities.writeGpxFile(toWrite, gpxFile);
