@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:drawable="@drawable/btn_round_p" android:state_pressed="true"/>
-    <item android:drawable="@drawable/btn_round_n"/>
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/map_widget_light_pressed" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/map_widget_light_trans" />
+        </shape>
+    </item>
 
 </selector>

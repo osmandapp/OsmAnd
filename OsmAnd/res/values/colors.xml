@@ -128,7 +128,7 @@
 	<color name="map_widget_dark_stroke">#80ffffff</color>
 	<color name="map_widget_dark_pressed">#80aaaaaa</color>
 	<color name="map_widget_light_trans">#80ffffff</color>
-	<color name="map_widget_light_pressed">#e5e5e5</color>
+	<color name="map_widget_light_pressed">#80aaaaaa</color>
 	<color name="map_widget_blue">#536dfe</color>
 	<color name="map_widget_blue_pressed">#485dd9</color>
 	<color name="map_button_icon_color_light">#727272</color>

@@ -45,6 +45,7 @@
 	<dimen name="map_button_rect_rad">3dp</dimen>
 
 	<dimen name="map_widget_icon_margin">3dp</dimen>
+	<dimen name="map_widget_icon_margin_left">9dp</dimen>
 
 	<dimen name="widget_turn_lane_size">54dp</dimen>
 	<dimen name="widget_turn_lane_border">9dp</dimen>
