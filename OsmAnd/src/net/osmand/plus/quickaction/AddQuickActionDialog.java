@@ -53,7 +53,7 @@ public class AddQuickActionDialog extends DialogFragment {
                 .getQuickActionRegistry()
                 .getQuickActions();
 
-        View root = inflater.inflate(R.layout.quick_action_add_dialog, container, false);
+        View root = UiUtilities.getInflater(getActivity(), !isLightContent).inflate(R.layout.quick_action_add_dialog, container, false);
         Adapter adapter = new Adapter(QuickActionFactory.produceTypeActionsListWithHeaders(active));
 
         TextView tvTitle = root.findViewById(R.id.tvTitle);
