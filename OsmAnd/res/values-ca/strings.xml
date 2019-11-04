@@ -64,7 +64,7 @@
     <string name="route_roundabout">Rotonda: Preneu la %1$d sortida i continueu</string>
     <string name="rendering_attr_noPolygons_name">Polígons</string>
     <string name="rendering_attr_appMode_name">Mode de renderització</string>
-    <string name="rendering_attr_contourLines_name">Mostra les línies de contorn</string>
+    <string name="rendering_attr_contourLines_name">Mostra les corbes de nivell</string>
     <string name="rendering_attr_hmRendered_description">Augmenta la quantitat de detalls mostrats al mapa.</string>
     <string name="rendering_attr_hmRendered_name">Mostra més detalls al mapa</string>
     <string name="navigate_point_format">Format</string>
@@ -3268,31 +3268,84 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="change_data_storage_full_description">Voleu moure els arxius de dades OsmAnd a una nova destinació\?
 \n%1$s &gt; %2$s</string>
     <string name="enter_path_to_folder">Introduïu el camí a la carpeta</string>
-    <string name="shared_string_select_folder">Seleccioneu la carpeta</string>
+    <string name="shared_string_select_folder">Carpeta…</string>
     <string name="paste_Osmand_data_folder_path">Enganxa el camí a la carpeta amb les dades d\'OsmAnd</string>
     <string name="change_osmand_data_folder_question">Voleu canviar la carpeta de dades de OsmAnd\?</string>
     <string name="move_maps_to_new_destination">Desplaça a la nova destinació</string>
     <string name="avoid_in_routing_descr_">Evita determinades rutes i tipus de carretera</string>
-    <string name="internal_app_storage_description">Emmagatzematge intern, amagat a l\'usuari i a les altres aplicacions, de manera que només OsmAnd pot accedir a les vostres dades</string>
+    <string name="internal_app_storage_description">Emmagatzematge intern, amagat a l\'usuari i a les altres aplicacions i que només OsmAnd hi pot accedir</string>
     <string name="change_data_storage_folder">Canvia la carpeta d\'emmagatzematge de dades</string>
-    <string name="rendering_attr_piste_type_snow_park_name">Parc de neu</string>
+    <string name="rendering_attr_piste_type_snow_park_name">Pista de terra</string>
     <string name="rendering_attr_piste_type_sleigh_name">Trineu</string>
     <string name="app_mode_utv">Costat a costat</string>
-    <string name="release_3_5">"• S\'ha actualitzat la configuració de l\'aplicació  i dels perfils. Convenient arrangement of settings by type, ability to customize each profile
-\n
-\n • Diàleg nou de baixades de mapa que suggereix un mapa per baixar-lo mentre es navega
-\n
-\n • Correccions al tema nocturn
-\n
-\n • Corregits problemes de ruta a tot el món
-\n
-\n • S\'ha actualitzat el mapa base amb una xarxa de vies més detallat
-\n
-\n • S\'han corregit les àrees inundades de tot el món
-\n
-\n • Rutes d\'esquí: s\'han afegit perfils d\'alçada i de complexitat de la ruta en els detalls de ruta
-\n
+    <string name="release_3_5">• S\'ha actualitzat la configuració de l\'aplicació i dels perfils: La configuració s\'agrupa per tipus. Cada perfil es pot ajustar independentment.
+\n 
+\n • Diàleg nou de baixades de mapa que suggereix un mapa per baixar-lo mentre es navega 
+\n 
+\n • Correccions al tema nocturn 
+\n 
+\n • Corregits problemes de ruta a tot el món 
+\n 
+\n • S\'ha actualitzat el mapa base amb una xarxa de vies més detallat 
+\n 
+\n • S\'han corregit les àrees inundades de tot el món 
+\n 
+\n • Rutes d\'esquí: s\'han afegit perfils d\'alçada i de dificultat de la ruta en els detalls de ruta 
+\n 
 \n • Altres correccions d\'errors
 \n
-\n"</string>
+\n</string>
+    <string name="configure_profile_info">Configuració del perfil:</string>
+    <string name="download_detailed_map">Baixeu el mapa de %s detallat per veure aquesta àrea.</string>
+    <string name="data_storage_preference_summary">%1$s • %2$s</string>
+    <string name="data_storage_space_description">%1$s GB lliures(de %2$s GB)</string>
+    <string name="rendering_attr_piste_type_connection_name">Connexió</string>
+    <string name="rendering_attr_piste_type_downhill_name">Descens</string>
+    <string name="rendering_attr_piste_type_nordic_name">Nòrdic</string>
+    <string name="routeInfo_piste_type_name">Tipus de pista</string>
+    <string name="rendering_attr_piste_difficulty_novice_name">Novell</string>
+    <string name="rendering_attr_piste_difficulty_easy_name">Fàcil</string>
+    <string name="rendering_attr_piste_difficulty_intermediate_name">Intermèdia</string>
+    <string name="rendering_attr_piste_difficulty_advanced_name">Avançada</string>
+    <string name="rendering_attr_piste_difficulty_expert_name">Expert</string>
+    <string name="rendering_attr_piste_difficulty_freeride_name">Lliure</string>
+    <string name="rendering_attr_piste_difficulty_extreme_name">Extrema</string>
+    <string name="rendering_attr_piste_difficulty_undefined_name">Indefinida</string>
+    <string name="routeInfo_piste_difficulty_name">Dificultat de la pista</string>
+    <string name="rendering_attr_piste_difficulty_connection_name">Connexió</string>
+    <string name="shared_string_calculate">Calcula</string>
+    <string name="shared_string_osmand_usage">Ús d\'OsmAnd</string>
+    <string name="shared_string_maps">Mapes</string>
+    <string name="shared_string_memory_tb_desc">%1$s TB</string>
+    <string name="shared_string_memory_gb_desc">%1$s GB</string>
+    <string name="shared_string_memory_mb_desc">%1$s MB</string>
+    <string name="shared_string_memory_kb_desc">%1$s kB</string>
+    <string name="track_storage_directory">Carpeta d\'emmagatzematge de traces</string>
+    <string name="track_storage_directory_descrp">Les traces es poden emmagatzemar a la carpeta \'rec\', a les carpetes mensuals o a les diàries.</string>
+    <string name="store_tracks_in_rec_directory">Enregistra les traces a la carpeta \'rec\'</string>
+    <string name="store_tracks_in_daily_directories">Enregistra les traces a les carpetes diàries</string>
+    <string name="store_tracks_in_daily_directories_descrp">Enregistra les traces en carpetes segons el dia d\'enregistrament (tipus 2019-01-01).</string>
+    <string name="shared_string_memory_used_tb_desc">%1$s TB utilitzats</string>
+    <string name="shared_string_memory_used_gb_desc">%1$s GB utilitzats</string>
+    <string name="shared_string_memory_used_mb_desc">%1$s MB utilitzats</string>
+    <string name="shared_string_memory_used_kb_desc">%1$s kB utilitzats</string>
+    <string name="contour_lines_and_hillshade">Corbes de nivell i ombrejat de relleu</string>
+    <string name="routing_attr_prefer_unpaved_name">Millor les carreteres sense asfaltar</string>
+    <string name="routing_attr_prefer_unpaved_description">Millor les carreteres sense asfaltar.</string>
+    <string name="update_all_maps">Actualitza tots els mapes</string>
+    <string name="update_all_maps_q">Esteu segur que voleu actualitzar tots els mapes (%1$d)\?</string>
+    <string name="apply_preference_to_all_profiles">Podeu aplicar aquest canvi a tots els perfils o només al que ara tingueu seleccionat.</string>
+    <string name="shared_preference">Compartit</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_name">Millor les carreteres sense asfaltar</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_description">Millor les carreteres sense asfaltar.</string>
+    <string name="layer_osm_edits">Edicions d\'OSM</string>
+    <string name="quick_action_contour_lines_descr">Prement aquest botó d\'acció es mostren o amaguen les corbes de nivell en el mapa</string>
+    <string name="quick_action_contour_lines_show">Mostra les corbes de nivell</string>
+    <string name="quick_action_contour_lines_hide">Amaga les corbes de nivell</string>
+    <string name="quick_action_show_hide_contour_lines">Mostra/Amaga les corbes de nivell</string>
+    <string name="quick_action_hillshade_descr">Prement aquest botó d\'acció es mostra o s\'amaga l\'ombrejat de relleu al mapa</string>
+    <string name="quick_action_hillshade_show">Mostra l\'ombrejat de relleu</string>
+    <string name="quick_action_hillshade_hide">Amaga l\'ombrejat de relleu</string>
+    <string name="quick_action_show_hide_hillshade">Mostra/Amaga l\'ombrejat de relleu</string>
+    <string name="tts_initialization_error">No es pot iniciar el sistema text a veu</string>
 </resources>

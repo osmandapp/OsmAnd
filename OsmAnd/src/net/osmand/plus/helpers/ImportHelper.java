@@ -37,6 +37,7 @@ import net.osmand.plus.GPXDatabase;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.SettingsHelper.SettingsImportListener;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -154,6 +155,8 @@ public class ImportHelper {
 			handleObfImport(intentUri, fileName);
 		} else if (fileName != null && fileName.endsWith(IndexConstants.SQLITE_EXT)) {
 			handleSqliteTileImport(intentUri, fileName);
+		} else if (fileName != null && fileName.endsWith(IndexConstants.OSMAND_SETTINGS_FILE_EXT)) {
+			handleOsmAndSettingsImport(intentUri, fileName);
 		} else {
 			handleFavouritesImport(intentUri, fileName, saveFile, useImportDir, false);
 		}
@@ -431,7 +434,7 @@ public class ImportHelper {
 
 			@Override
 			protected String doInBackground(Void... voids) {
-				String error = copyFile(getObfDestFile(name), obfFile);
+				String error = copyFile(getObfDestFile(name), obfFile, false);
 				if (error == null) {
 					app.getResourceManager().reloadIndexes(IProgress.EMPTY_PROGRESS, new ArrayList<String>());
 					app.getDownloadThread().updateLoadedFiles();
@@ -461,8 +464,8 @@ public class ImportHelper {
 	}
 
 	@Nullable
-	private String copyFile(@NonNull File dest, @NonNull Uri uri) {
-		if (dest.exists()) {
+	private String copyFile(@NonNull File dest, @NonNull Uri uri, boolean overwrite) {
+		if (dest.exists() && !overwrite) {
 			return app.getString(R.string.file_with_name_already_exists);
 		}
 		String error = null;
@@ -518,7 +521,7 @@ public class ImportHelper {
 
 			@Override
 			protected String doInBackground(Void... voids) {
-				return copyFile(app.getAppPath(IndexConstants.TILES_INDEX_DIR + name), uri);
+				return copyFile(app.getAppPath(IndexConstants.TILES_INDEX_DIR + name), uri, false);
 			}
 
 			@Override
@@ -541,6 +544,69 @@ public class ImportHelper {
 				}
 			}
 		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+	}
+
+	@SuppressLint("StaticFieldLeak")
+	private void handleOsmAndSettingsImport(final Uri uri, final String name) {
+		final AsyncTask<Void, Void, String> settingsImportTask = new AsyncTask<Void, Void, String>() {
+
+			ProgressDialog progress;
+
+			@Override
+			protected void onPreExecute() {
+				progress = ProgressDialog.show(activity, app.getString(R.string.loading_smth, ""), app.getString(R.string.loading_data));
+			}
+
+			@Override
+			protected String doInBackground(Void... voids) {
+				File tempDir = app.getAppPath(IndexConstants.TEMP_DIR);
+				if (!tempDir.exists()) {
+					tempDir.mkdirs();
+				}
+				File dest = new File(tempDir, name);
+				return copyFile(dest, uri, true);
+			}
+
+			@Override
+			protected void onPostExecute(String error) {
+				File tempDir = app.getAppPath(IndexConstants.TEMP_DIR);
+				File file = new File(tempDir, name);
+				if (error == null && file.exists()) {
+					app.getSettingsHelper().importSettings(file, new SettingsImportListener() {
+						@Override
+						public void onSettingsImportFinished(boolean succeed, boolean empty) {
+							if (isActivityNotDestroyed(activity)) {
+								progress.dismiss();
+							}
+							if (succeed) {
+								app.showShortToastMessage(app.getString(R.string.file_imported_successfully, name));
+							} else if (!empty) {
+								app.showShortToastMessage(app.getString(R.string.file_import_error, name, app.getString(R.string.shared_string_unexpected_error)));
+							}
+						}
+					});
+				} else {
+					if (isActivityNotDestroyed(activity)) {
+						progress.dismiss();
+					}
+					app.showShortToastMessage(app.getString(R.string.file_import_error, name, error));
+				}
+			}
+		};
+		if (app.isApplicationInitializing()) {
+			app.getAppInitializer().addListener(new AppInitializer.AppInitializeListener() {
+				@Override
+				public void onProgress(AppInitializer init, AppInitializer.InitEvents event) {
+				}
+
+				@Override
+				public void onFinish(AppInitializer init) {
+					settingsImportTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+				}
+			});
+		} else {
+			settingsImportTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		}
 	}
 
 	private boolean isActivityNotDestroyed(Activity activity) {

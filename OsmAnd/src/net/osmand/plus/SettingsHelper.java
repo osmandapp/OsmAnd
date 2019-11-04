@@ -33,6 +33,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -40,6 +41,31 @@ import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
+
+import static net.osmand.IndexConstants.OSMAND_SETTINGS_FILE_EXT;
+
+/*
+	Usage:
+
+	SettingsHelper helper = app.getSettingsHelper();
+	File file = new File(app.getAppPath(null), "settings.zip");
+
+	List<SettingsItem> items = new ArrayList<>();
+	items.add(new GlobalSettingsItem(app.getSettings()));
+	items.add(new ProfileSettingsItem(app.getSettings(), ApplicationMode.DEFAULT));
+	items.add(new ProfileSettingsItem(app.getSettings(), ApplicationMode.CAR));
+	items.add(new ProfileSettingsItem(app.getSettings(), ApplicationMode.PEDESTRIAN));
+	items.add(new ProfileSettingsItem(app.getSettings(), ApplicationMode.BICYCLE));
+	items.add(new FileSettingsItem(app, new File(app.getAppPath(GPX_INDEX_DIR), "Day 2.gpx")));
+	items.add(new FileSettingsItem(app, new File(app.getAppPath(GPX_INDEX_DIR), "Day 3.gpx")));
+	items.add(new FileSettingsItem(app, new File(app.getAppPath(RENDERERS_DIR), "default.render.xml")));
+	items.add(new DataSettingsItem(new byte[] {'t', 'e', 's', 't', '1'}, "data1"));
+	items.add(new DataSettingsItem(new byte[] {'t', 'e', 's', 't', '2'}, "data2"));
+
+	helper.exportSettings(file, items);
+
+	helper.importSettings(file);
+ */
 
 public class SettingsHelper {
 
@@ -52,6 +78,14 @@ public class SettingsHelper {
 	private boolean importing;
 	private boolean importSuspended;
 	private ImportAsyncTask importTask;
+
+	public interface SettingsImportListener {
+		void onSettingsImportFinished(boolean succeed, boolean empty);
+	}
+
+	public interface SettingsExportListener {
+		void onSettingsExportFinished(@NonNull File file, boolean succeed);
+	}
 
 	public SettingsHelper(OsmandApplication app) {
 		this.app = app;
@@ -255,10 +289,14 @@ public class SettingsHelper {
 					while (iter.hasNext()) {
 						String key = iter.next();
 						OsmandPreference<?> p = prefs.get(key);
-						try {
-							readPreferenceFromJson(p, json);
-						} catch (JSONException e) {
-							LOG.error("Failed to read preference: " + p.getId(), e);
+						if (p != null) {
+							try {
+								readPreferenceFromJson(p, json);
+							} catch (Exception e) {
+								LOG.error("Failed to read preference: " + key, e);
+							}
+						} else {
+							LOG.warn("No preference while importing settings: " + key);
 						}
 					}
 				}
@@ -734,7 +772,7 @@ public class SettingsHelper {
 			additionalParams.put(key, value);
 		}
 
-		void exportSettings(File zipFile) throws JSONException, IOException {
+		void exportSettings(File file) throws JSONException, IOException {
 			JSONObject json = new JSONObject();
 			json.put("osmand_settings_version", OsmandSettings.VERSION);
 			for (Map.Entry<String, String> param : additionalParams.entrySet()) {
@@ -745,7 +783,7 @@ public class SettingsHelper {
 				itemsJson.put(new JSONObject(item.toJson()));
 			}
 			json.put("items", itemsJson);
-			OutputStream os = new BufferedOutputStream(new FileOutputStream(zipFile), BUFFER);
+			OutputStream os = new BufferedOutputStream(new FileOutputStream(file), BUFFER);
 			ZipOutputStream zos = new ZipOutputStream(os);
 			try {
 				ZipEntry entry = new ZipEntry("items.json");
@@ -775,15 +813,15 @@ public class SettingsHelper {
 			this.app = app;
 		}
 
-		List<SettingsItem> collectItems(@NonNull File zipFile) throws IllegalArgumentException, IOException {
-			return processItems(zipFile, null);
+		List<SettingsItem> collectItems(@NonNull File file) throws IllegalArgumentException, IOException {
+			return processItems(file, null);
 		}
 
-		void importItems(@NonNull File zipFile, @NonNull List<SettingsItem> items) throws IllegalArgumentException, IOException {
-			processItems(zipFile, items);
+		void importItems(@NonNull File file, @NonNull List<SettingsItem> items) throws IllegalArgumentException, IOException {
+			processItems(file, items);
 		}
 
-		private List<SettingsItem> processItems(@NonNull File zipFile, @Nullable List<SettingsItem> items) throws IllegalArgumentException, IOException {
+		private List<SettingsItem> processItems(@NonNull File file, @Nullable List<SettingsItem> items) throws IllegalArgumentException, IOException {
 			boolean collecting = items == null;
 			if (collecting) {
 				items = new ArrayList<>();
@@ -792,7 +830,7 @@ public class SettingsHelper {
 					throw new IllegalArgumentException("No items");
 				}
 			}
-			ZipInputStream zis = new ZipInputStream(new FileInputStream(zipFile));
+			ZipInputStream zis = new ZipInputStream(new FileInputStream(file));
 			InputStream ois = new BufferedInputStream(zis);
 			try {
 				ZipEntry entry = zis.getNextEntry();
@@ -850,22 +888,25 @@ public class SettingsHelper {
 	@SuppressLint("StaticFieldLeak")
 	private class ImportAsyncTask extends AsyncTask<Void, Void, List<SettingsItem>> {
 
-		private File zipFile;
+		private File file;
+		private SettingsImportListener listener;
 		private SettingsImporter importer;
 		private List<SettingsItem> items;
 		private List<SettingsItem> processedItems = new ArrayList<>();
 		private SettingsItem currentItem;
 		private AlertDialog dialog;
 
-		ImportAsyncTask(@NonNull File zipFile) {
-			this.zipFile = zipFile;
+		ImportAsyncTask(@NonNull File settingsFile,
+						@Nullable SettingsImportListener listener) {
+			this.file = settingsFile;
+			this.listener = listener;
 			importer = new SettingsImporter(app);
 		}
 
 		@Override
 		protected void onPreExecute() {
 			if (importing) {
-				finishImport(false);
+				finishImport(listener, false, false);
 			}
 			importing = true;
 			importSuspended = false;
@@ -875,11 +916,11 @@ public class SettingsHelper {
 		@Override
 		protected List<SettingsItem> doInBackground(Void... voids) {
 			try {
-				return importer.collectItems(zipFile);
+				return importer.collectItems(file);
 			} catch (IllegalArgumentException e) {
-				LOG.error("Failed to collect items from: " + zipFile.getName(), e);
+				LOG.error("Failed to collect items from: " + file.getName(), e);
 			} catch (IOException e) {
-				LOG.error("Failed to collect items from: " + zipFile.getName(), e);
+				LOG.error("Failed to collect items from: " + file.getName(), e);
 			}
 			return null;
 		}
@@ -898,9 +939,9 @@ public class SettingsHelper {
 			}
 			if (items.size() == 0 && !importSuspended) {
 				if (processedItems.size() > 0) {
-					new ImportItemsAsyncTask(zipFile, processedItems).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+					new ImportItemsAsyncTask(file, listener, processedItems).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 				} else {
-					finishImport(false);
+					finishImport(listener, false, true);
 				}
 				return;
 			}
@@ -919,7 +960,7 @@ public class SettingsHelper {
 					switch (item.getType()) {
 						case PROFILE: {
 							AlertDialog.Builder b = new AlertDialog.Builder(activity);
-							b.setMessage("Profile \"" + item.getPublicName(app) + "\" is already exists. Overwrite?");
+							b.setMessage(activity.getString(R.string.overwrite_profile_q, item.getPublicName(app)));
 							b.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 								@Override
 								public void onClick(DialogInterface dialog, int which) {
@@ -976,42 +1017,44 @@ public class SettingsHelper {
 	private class ImportItemsAsyncTask extends AsyncTask<Void, Void, Boolean> {
 
 		private SettingsImporter importer;
-		private File zipFile;
+		private File file;
+		private SettingsImportListener listener;
 		private List<SettingsItem> items;
 
-		ImportItemsAsyncTask(@NonNull File zipFile, @NonNull List<SettingsItem> items) {
+		ImportItemsAsyncTask(@NonNull File file,
+							 @Nullable SettingsImportListener listener,
+							 @NonNull List<SettingsItem> items) {
 			importer = new SettingsImporter(app);
-			this.zipFile = zipFile;
+			this.file = file;
+			this.listener = listener;
 			this.items = items;
 		}
 
 		@Override
 		protected Boolean doInBackground(Void... voids) {
 			try {
-				importer.importItems(zipFile, items);
+				importer.importItems(file, items);
 				return true;
 			} catch (IllegalArgumentException e) {
-				LOG.error("Failed to import items from: " + zipFile.getName(), e);
+				LOG.error("Failed to import items from: " + file.getName(), e);
 			} catch (IOException e) {
-				LOG.error("Failed to import items from: " + zipFile.getName(), e);
+				LOG.error("Failed to import items from: " + file.getName(), e);
 			}
 			return false;
 		}
 
 		@Override
 		protected void onPostExecute(Boolean success) {
-			finishImport(success);
+			finishImport(listener, success, false);
 		}
 	}
 
-	private void finishImport(boolean success) {
+	private void finishImport(@Nullable SettingsImportListener listener, boolean success, boolean empty) {
 		importing = false;
 		importSuspended = false;
 		importTask = null;
-		if (success) {
-			app.showShortToastMessage("Import succeed");
-		} else {
-			app.showShortToastMessage("Import failed");
+		if (listener != null) {
+			listener.onSettingsImportFinished(success, empty);
 		}
 	}
 
@@ -1019,10 +1062,14 @@ public class SettingsHelper {
 	private class ExportAsyncTask extends AsyncTask<Void, Void, Boolean> {
 
 		private SettingsExporter exporter;
-		private File zipFile;
+		private File file;
+		private SettingsExportListener listener;
 
-		ExportAsyncTask(@NonNull File zipFile, @NonNull List<SettingsItem> items) {
-			this.zipFile = zipFile;
+		ExportAsyncTask(@NonNull File settingsFile,
+						@Nullable SettingsExportListener listener,
+						@NonNull List<SettingsItem> items) {
+			this.file = settingsFile;
+			this.listener = listener;
 			this.exporter = new SettingsExporter();
 			for (SettingsItem item : items) {
 				exporter.addSettingsItem(item);
@@ -1032,31 +1079,38 @@ public class SettingsHelper {
 		@Override
 		protected Boolean doInBackground(Void... voids) {
 			try {
-				exporter.exportSettings(zipFile);
+				exporter.exportSettings(file);
 				return true;
 			} catch (JSONException e) {
-				LOG.error("Failed to export items to: " + zipFile.getName(), e);
+				LOG.error("Failed to export items to: " + file.getName(), e);
 			} catch (IOException e) {
-				LOG.error("Failed to export items to: " + zipFile.getName(), e);
+				LOG.error("Failed to export items to: " + file.getName(), e);
 			}
 			return false;
 		}
 
 		@Override
 		protected void onPostExecute(Boolean success) {
-			if (success) {
-				app.showShortToastMessage("Export succeed");
-			} else {
-				app.showShortToastMessage("Export failed");
+			if (listener != null) {
+				listener.onSettingsExportFinished(file, success);
 			}
 		}
 	}
 
-	public void importSettings(@NonNull File zipFile) {
-		new ImportAsyncTask(zipFile).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+	public void importSettings(@NonNull File settingsFile,
+							   @Nullable SettingsImportListener listener) {
+		new ImportAsyncTask(settingsFile, listener).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
-	public void exportSettings(@NonNull File zipFile, @NonNull List<SettingsItem> items) {
-		new ExportAsyncTask(zipFile, items).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+	public void exportSettings(@NonNull File fileDir, @NonNull String fileName,
+							   @Nullable SettingsExportListener listener,
+							   @NonNull List<SettingsItem> items) {
+		new ExportAsyncTask(new File(fileDir, fileName + OSMAND_SETTINGS_FILE_EXT), listener, items)
+				.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+	}
+
+	public void exportSettings(@NonNull File fileDir, @NonNull String fileName, @Nullable SettingsExportListener listener,
+							   @NonNull SettingsItem... items) {
+		exportSettings(fileDir, fileName, listener, new ArrayList<>(Arrays.asList(items)));
 	}
 }

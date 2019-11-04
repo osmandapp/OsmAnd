@@ -423,7 +423,7 @@
     <string name="layer_overlay">מפה עליונה…</string>
     <string name="shared_string_none">ללא</string>
     <string name="map_overlay">מפה עליונה</string>
-    <string name="map_overlay_descr">נא לבחור במפה עליונה.</string>
+    <string name="map_overlay_descr">נא לבחור במפה עליונה</string>
     <string name="tile_source_already_installed">המפה כבר מותקנת, ה‚הגדרות’ יעודכנו.</string>
     <string name="select_tile_source_to_install">יש לבחור ב(אריחי) מפה להתקנה או עדכון.</string>
     <string name="internet_not_available">לא ניתן לבצע את הפעולה ללא חיבור לאינטרנט.</string>
@@ -435,7 +435,7 @@
     <string name="search_offline_geo_error">לא ניתן לנתח את הפריט הגאוגרפי ‚%s’.</string>
     <string name="search_osm_offline">חיפוש לפי מיקום גאוגרפי</string>
     <string name="system_locale">מערכת</string>
-    <string name="preferred_locale_descr">נא לבחור את שפת התצוגה (תחול לאחר הפעלה מחדש של OsmAnd).</string>
+    <string name="preferred_locale_descr">שפת תצוגת היישומון (תחול לאחר הפעלה מחדש של OsmAnd).</string>
     <string name="preferred_locale">שפת התצוגה</string>
     <string name="shared_string_next">הבא</string>
     <string name="shared_string_previous">הקודם</string>
@@ -507,16 +507,16 @@
     <string name="install_selected_build">להתקין את OsmAnd‏ - {0} מתוך {1}‏ {2} מ״ב ?</string>
     <string name="loading_builds_failed">קבלת רשימת הבניות של OsmAnd נכשלה</string>
     <string name="loading_builds">הבניות של OsmAnd נטענות…</string>
-    <string name="select_build_to_install">יש לבחור את אחת הבניות של OsmAnd להתקנה</string>
+    <string name="select_build_to_install">יש לבחור בנייה של OsmAnd להתקנה</string>
     <string name="contribution_activity">התקנת הגרסה</string>
     <string name="gps_status_app_not_found">יישומון מצב ה־GPS לא מותקן. לחפש בחנות?</string>
-    <string name="voice_is_not_available_msg">אין קריינות זמינה. נא לגשת ל‚הגדרות’ ← ‚הגדרות ניווט’ ← ‚קריינות’ ולבחור או להוריד חבילת קריינות.</string>
-    <string name="voice_is_not_available_title">לא נבחר ניווט קולי</string>
+    <string name="voice_is_not_available_msg">אין קריינות זמינה. נא לגשת ל‚הגדרות’ ← ‚הגדרות ניווט’, לבחור פרופיל ← ‚קריינות’ ולבחור או להוריד חבילת קריינות.</string>
+    <string name="voice_is_not_available_title">נא לבחור חבילת קריינות</string>
     <string name="daynight_mode_day">יום</string>
     <string name="daynight_mode_night">לילה</string>
     <string name="daynight_mode_auto">זריחה/שקיעה</string>
     <string name="daynight_mode_sensor">חיישן אור</string>
-    <string name="daynight_descr">נא לבחור כלל להחלפה בין מצבי לילה ויום.</string>
+    <string name="daynight_descr">התאמת ההחלפה בין מצבי לילה ויום.</string>
     <string name="daynight">מצב יום/לילה</string>
     <string name="download_files_question">האם להוריד {0} קבצים ({1} מ״ב)?</string>
     <string name="items_were_selected">נבחרו {0} פריטים</string>
@@ -527,16 +527,16 @@
     <string name="fast_route_mode_descr">יש להפעיל כדי לחשב את המסלול המהיר ביותר או להשבית כדי לקבל את המסלול החסכוני ביותר.</string>
     <string name="tiles_to_download_estimated_size">ברמת תקריב {0} יש להוריד {1} אריחים ({2} מ״ב)</string>
     <string name="shared_string_download_map">הורדת המפה</string>
-    <string name="select_max_zoom_preload_area">יש לבחור את רמת התקריב המרבית כדי לטעון מראש</string>
+    <string name="select_max_zoom_preload_area">רמת התקריב המרבית כדי לטעון מראש</string>
     <string name="maps_could_not_be_downloaded">לא ניתן להוריד מפה זאת</string>
     <string name="continuous_rendering">עיבוד תמונה רציף</string>
     <string name="continuous_rendering_descr">הצגת עיבוד תמונה רציף במקום תמונה אחת בכל פעם.</string>
-    <string name="rendering_exception">לא ניתן לצייר את השטח הנבחר</string>
+    <string name="rendering_exception">לא ניתן לצייר את השטח הנבחר.</string>
     <string name="show_point_options">שימוש במיקום…</string>
     <string name="renderer_load_sucess">תכונת העיבוד נטענה</string>
-    <string name="renderer_load_exception">לא ניתן לטעון את מנגנון העיבוד</string>
+    <string name="renderer_load_exception">לא ניתן לטעון את מנגנון העיבוד.</string>
     <string name="renderers">תכונת עיבוד וקטורים</string>
-    <string name="renderers_descr">נא לבחור את הופעת תכונת העיבוד.</string>
+    <string name="renderers_descr">נא לבחור את הופעת תכונת העיבוד</string>
     <string name="poi_context_menu_website">הצגת אתר הנ״ע</string>
     <string name="poi_context_menu_call">הצגת טלפון הנ״ע</string>
     <string name="website">אתר</string>
@@ -552,7 +552,7 @@
     <string name="no_vector_map_loaded">המפות הווקטוריות לא נטענו</string>
     <string name="gpx_files_not_found">לא נמצאו קובצי GPX בתיקיית המסלולים</string>
     <string name="layer_gpx_layer">קובצי GPX…</string>
-    <string name="error_reading_gpx">לא ניתן לקרוא את נתוני ה־GPX</string>
+    <string name="error_reading_gpx">לא ניתן לקרוא את נתוני ה־GPX.</string>
     <string name="vector_data">מפות וקטוריות בלתי מקוונות</string>
     <string name="transport_context_menu">חיפוש תחבורה בתחנה</string>
     <string name="poi_context_menu_modify">שינוי נ״ע</string>
@@ -560,7 +560,7 @@
     <string name="rotate_map_compass_opt">כיוון מצפן</string>
     <string name="rotate_map_bearing_opt">כיוון התנועה</string>
     <string name="rotate_map_none_opt">לא לסובב (הצפון תמיד למעלה)</string>
-    <string name="rotate_map_to_bearing_descr">יש לבחור את יישור מסך המפה.</string>
+    <string name="rotate_map_to_bearing_descr">יישור המפה:</string>
     <string name="rotate_map_to_bearing">יישור המפה</string>
     <string name="show_route">פרטי המסלול</string>
     <string name="fav_imported_sucessfully">המועדפים יובאו</string>
@@ -568,7 +568,7 @@
     <string name="fav_saved_sucessfully">המועדפים נשמרו אל {0}</string>
     <string name="no_fav_to_save">אין נקודות מועדפות לשמירה</string>
     <string name="shared_string_import">יבוא</string>
-    <string name="error_occurred_loading_gpx">לא ניתן לטעון את ה־GPX</string>
+    <string name="error_occurred_loading_gpx">לא ניתן לטעון את ה־GPX.</string>
     <string name="send_report">שליחת דיווח</string>
     <string name="none_region_found">לא ניתן למצוא מפות שהתקבלו בכרטיס הזיכרון.</string>
     <string name="poi_namefinder_query_empty">יש להקליד כדי למצוא נ״ע</string>
@@ -608,7 +608,7 @@
     <string name="gps_provider">רכיב איכון</string>
     <string name="int_seconds">שניות</string>
     <string name="int_min">דקות</string>
-    <string name="background_service_int_descr">הגדרת הפסקות שינה שמשמשות את שירות מצב הרקע.</string>
+    <string name="background_service_int_descr">הפסקות שינה שמשמשות את שירות מצב הרקע:</string>
     <string name="background_service_int">הפרשי התעוררות GPS</string>
     <string name="update_poi_error_local">לא ניתן לעדכן את רשימת הנ״ע המקומית</string>
     <string name="update_poi_error_loading">לא ניתן לטעון נתונים מהשרת</string>
@@ -3213,7 +3213,7 @@
     <string name="month">חודש</string>
     <string name="months_2_4">חודשיים</string>
     <string name="months_5">חודשים</string>
-    <string name="configure_profile_info">כל ההגדרות שלהלן משפיעות על הפרופיל הנבחר בלבד.</string>
+    <string name="configure_profile_info">הגדרות לפרופיל:</string>
     <string name="shared_string_example">דוגמה</string>
     <string name="discard_changes">התעלמות מהשינויים</string>
     <string name="apply_to_current_profile">להחיל על הפרופיל הנוכחי %1$s</string>
@@ -3270,7 +3270,7 @@
     <string name="coordinates_format_info">התצורה הנבחרת תחול על כל המיקומים ביישומון.</string>
     <string name="pref_selected_by_default_for_profiles">הגדרה זו נבחרת כבררת מחדל על הפרופילים: %s</string>
     <string name="change_default_settings">החלפת הגדרות בררת מחדל</string>
-    <string name="logcat_buffer">"זיכרון זמני  יומנים"</string>
+    <string name="logcat_buffer">זיכרון זמני של Logcat</string>
     <string name="shared_string_by_default">כבררת מחדל</string>
     <string name="plugins_settings">הגדרות תוסף</string>
     <string name="download_detaile_map">הורדת המפה המפורטת %s, כדי לצפות באזור זה.</string>
@@ -3279,13 +3279,13 @@
     <string name="change_data_storage_full_description">להעביר את קובצי הנתונים של OsmAnd ליעד החדש\?
 \n%1$s &gt; %2$s</string>
     <string name="enter_path_to_folder">נא לספק נתיב לתיקייה</string>
-    <string name="shared_string_select_folder">בחירת תיקייה</string>
+    <string name="shared_string_select_folder">תיקייה…</string>
     <string name="paste_Osmand_data_folder_path">נא להדביק את הנתיב לתיקייה עם הנתונים של OsmAnd</string>
     <string name="change_osmand_data_folder_question">להחליף את תיקיית הנתונים של OsmAnd\?</string>
     <string name="move_maps_to_new_destination">העברה ליעד החדש</string>
-    <string name="internal_app_storage_description">אחסון פנימי, נסתר מהמשתמש ומיישומונים אחרים, לכן אף אחד למעט OsmAnd יכולים לגשת לנתונים שלך</string>
+    <string name="internal_app_storage_description">אחסון פנימי, נסתר מהמשתמש ומיישומונים אחרים, נגיש ל־OsmAnd בלבד</string>
     <string name="change_data_storage_folder">החלפת תיקיית אחסון הנתונים</string>
-    <string name="rendering_attr_piste_type_snow_park_name">פארק שלג</string>
+    <string name="rendering_attr_piste_type_snow_park_name">פארק גלישה על שלג</string>
     <string name="rendering_attr_piste_type_sleigh_name">מזחלת נגררת</string>
     <string name="rendering_attr_piste_type_sled_name">מזחלת עצמאית</string>
     <string name="rendering_attr_piste_type_hike_name">טיול</string>
@@ -3328,29 +3328,29 @@
     <string name="update_all_maps">עדכון כל המפות</string>
     <string name="update_all_maps_q">לעדכן את כל (%1$d) המפות\?</string>
     <string name="data_storage_preference_summary">%1$s • %2$s</string>
-    <string name="data_storage_space_description">%1$s ג״ב פנויים • %2$s ג״ב סה״כ</string>
-    <string name="track_storage_directory_descrp">ניתן לאחסן מסלולים בתיקיית rec או בתיקיות חודשיות או יומיות.</string>
-    <string name="store_tracks_in_rec_directory">אחסון מסלולים שהוקלטו בתיקיית rec</string>
-    <string name="store_tracks_in_daily_directories">אחסון מסלולים שהוקלטו בתיקיות יומיות</string>
-    <string name="store_tracks_in_daily_directories_descrp">אחסון מסלולים שהוקלטו בתת־תיקיות לפי יום ההקלטה (למשל: 2019-01-01).</string>
-    <string name="release_3_5">• הגדרות הפרופיל של היישומון עודכנו: מעתה ההגדרות מסודרות לפי סוג. ניתן להתאים כל פרופיל בנפרד.
-\n
-\n • חלונית הורדת מפה חדשה שמציעה להוריד מפה בזמן עיון
-\n
-\n • תיקונים לערכת העיצוב הלילית
-\n
-\n • תוקנו בעיות ניווט ברחבי העולם
-\n
-\n • בסיס המפה עודכן לשיפור פירוט רשת הכבישים
-\n
-\n • שיפור מיפוי האזורים המוצפים ברחבי העולם
-\n
-\n • ניווט סקי: נוספו פרופיל גובה ומורכבות מסלול לפרטי המסלול
-\n
+    <string name="data_storage_space_description">%1$s ג״ב פנויים (מתוך %2$s ג״ב)</string>
+    <string name="track_storage_directory_descrp">ניתן לאחסן מסלולים בתיקיית ‚rec’ או בתיקיות חודשיות או יומיות.</string>
+    <string name="store_tracks_in_rec_directory">אחסון מסלולים לתיקיית ‚rec’</string>
+    <string name="store_tracks_in_daily_directories">אחסון מסלולים לתיקיות יומיות</string>
+    <string name="store_tracks_in_daily_directories_descrp">אחסון מסלולים לתת־תיקיות לפי יום ההקלטה (למשל: 2019-01-01).</string>
+    <string name="release_3_5">• הגדרות הפרופיל של היישומון עודכנו: מעתה ההגדרות מסודרות לפי סוג. ניתן להתאים כל פרופיל בנפרד. 
+\n 
+\n • חלונית הורדת מפה חדשה שמציעה להוריד מפה בזמן עיון 
+\n 
+\n • תיקונים לערכת העיצוב הלילית 
+\n 
+\n • תוקנו בעיות ניווט ברחבי העולם 
+\n 
+\n • בסיס המפה עודכן לשיפור פירוט רשת הכבישים 
+\n 
+\n • שיפור מיפוי האזורים המוצפים ברחבי העולם 
+\n 
+\n • ניווט סקי: נוספו פרופיל רום ומורכבות מסלול לפרטי המסלול 
+\n 
 \n • תיקוני תקלות נוספים
 \n
 \n</string>
-    <string name="apply_preference_to_all_profiles">ניתן להחיל את השינוי הזה לכל הפרופילים או רק לאלו שנבחרו.</string>
+    <string name="apply_preference_to_all_profiles">ניתן להחיל את השינוי הזה לכל הפרופילים או רק לזה שנבחר.</string>
     <string name="shared_preference">משותף</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">להעדיף דרכים לא סלולות</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">להעדיף דרכים לא סלולות.</string>
@@ -3363,4 +3363,7 @@
     <string name="quick_action_hillshade_show">הצגת הצללה</string>
     <string name="quick_action_hillshade_hide">הסתרת הצללה</string>
     <string name="quick_action_show_hide_hillshade">הצגה/הסתרה של הצללה</string>
+    <string name="swap_start_and_destination">החלפה בין ה<b>התחלה</b> לבין ה<b>יעד</b></string>
+    <string name="tts_initialization_error">לא ניתן להפעיל מנוע המרת טקסט לדיבור</string>
+    <string name="simulate_your_location_gpx_descr">הדמיית המיקום שלך באמצעות מסלול GPX שהוקלט מראש.</string>
 </resources>

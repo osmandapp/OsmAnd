@@ -1,24 +1,43 @@
 package net.osmand.plus.monitoring;
 
 
-import net.osmand.plus.OsmAndTaskManager.OsmAndTaskRunnable;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.activities.SavingTrackHelper;
-import net.osmand.plus.activities.SettingsBaseActivity;
-import net.osmand.plus.OsmAndFormatter;
 import android.content.BroadcastReceiver;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
+import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
+import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
+import android.text.SpannableString;
+import android.text.style.StyleSpan;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.ArrayAdapter;
+import android.widget.TextView;
+
+import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmAndTaskManager.OsmAndTaskRunnable;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
+import net.osmand.plus.activities.SavingTrackHelper;
+import net.osmand.plus.activities.SettingsBaseActivity;
+
+import java.util.Map;
 
 import static net.osmand.plus.OsmandSettings.DAILY_DIRECTORY;
 import static net.osmand.plus.OsmandSettings.MONTHLY_DIRECTORY;
 import static net.osmand.plus.OsmandSettings.REC_DIRECTORY;
+import static net.osmand.plus.profiles.SettingsProfileFragment.PROFILE_STRING_KEY;
 
 
 public class SettingsMonitoringActivity extends SettingsBaseActivity {
@@ -47,8 +66,15 @@ public class SettingsMonitoringActivity extends SettingsBaseActivity {
 		createLoggingSection(grp);
 		createLiveSection(grp);
 		createNotificationSection(grp);
-		selectAppModeDialog().show();
-    }
+
+		Intent intent = getIntent();
+		if (intent != null && intent.hasExtra(PROFILE_STRING_KEY)) {
+			String modeName = intent.getStringExtra(PROFILE_STRING_KEY);
+			selectedAppMode = ApplicationMode.valueOfStringKey(modeName, ApplicationMode.CAR);
+		} else {
+			selectAppModeDialog().show();
+		}
+	}
 
 
 	private void createLoggingSection(PreferenceScreen grp) {
@@ -198,7 +224,62 @@ public class SettingsMonitoringActivity extends SettingsBaseActivity {
 		}
 	}
 
-	
-	
-	
+	@Override
+	public boolean onPreferenceChange(Preference preference, Object newValue) {
+		String prefId = preference.getKey();
+		if (preference instanceof ListPreference) {
+			int ind = ((ListPreference) preference).findIndexOfValue((String) newValue);
+			CharSequence entry = ((ListPreference) preference).getEntries()[ind];
+			Map<String, ?> map = getListPrefValues().get(prefId);
+			if (map != null) {
+				newValue = map.get(entry);
+			}
+		}
+		showConfirmDialog(prefId, newValue);
+		return false;
+	}
+
+	protected void showConfirmDialog(final String prefId, final Object newValue) {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle(R.string.change_default_settings);
+
+		String appModeName = selectedAppMode.toHumanString(this);
+		String currentModeText = getString(R.string.apply_to_current_profile, appModeName);
+		int start = currentModeText.indexOf(appModeName);
+
+		SpannableString[] strings = new SpannableString[2];
+		strings[0] = new SpannableString(getString(R.string.apply_to_all_profiles));
+		strings[1] = new SpannableString(currentModeText);
+		strings[1].setSpan(new StyleSpan(Typeface.BOLD), start, start + appModeName.length(), 0);
+
+		final LayoutInflater themedInflater = UiUtilities.getInflater(this, !settings.isLightContent());
+		final ArrayAdapter<SpannableString> singleChoiceAdapter = new ArrayAdapter<SpannableString>(this, R.layout.simple_list_menu_item, R.id.title, strings) {
+			@NonNull
+			@Override
+			public View getView(int position, View convertView, @NonNull ViewGroup parent) {
+				View v = convertView;
+				if (v == null) {
+					v = themedInflater.inflate(R.layout.simple_list_menu_item, parent, false);
+				}
+				TextView title = (TextView) v.findViewById(R.id.title);
+				title.setText(getItem(position));
+				return v;
+			}
+		};
+
+		builder.setAdapter(singleChoiceAdapter, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				if (which == 0) {
+					settings.setSharedGeneralPreference(prefId, newValue);
+				} else {
+					settings.setPreference(prefId, newValue);
+				}
+				updateAllSettings();
+			}
+		});
+
+		builder.setNegativeButton(R.string.discard_changes, null);
+		builder.show();
+	}
 }

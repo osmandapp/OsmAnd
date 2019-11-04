@@ -68,8 +68,8 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 	// TODO: We could actually remove v102 support, I am done updating all existing 35 TTS voices to v103. Hardy, July 2016
 	private static final Log log = PlatformUtil.getLog(TTSCommandPlayerImpl.class);
 	private static TextToSpeech mTts;
-	private static String ttsVoiceStatus = "";
-	private static String ttsVoiceUsed = "";
+	private static String ttsVoiceStatus = "-";
+	private static String ttsVoiceUsed = "-";
 	private Context mTtsContext;
 	private HashMap<String, String> params = new HashMap<String, String>();
 	private VoiceRouter vrt;
@@ -175,8 +175,8 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 		}
 		if (mTts == null) {
 			mTtsContext = ctx;
-			ttsVoiceStatus = "";
-			ttsVoiceUsed = "";
+			ttsVoiceStatus = "-";
+			ttsVoiceUsed = "-";
 			ttsRequests = 0;
 			final float speechRate = cSpeechRate;
 
@@ -220,7 +220,7 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 							case TextToSpeech.LANG_AVAILABLE:
 								ttsVoiceStatus = newLocale.getDisplayName() + ": LANG_AVAILABLE";
 							case TextToSpeech.LANG_COUNTRY_AVAILABLE:
-								ttsVoiceStatus = "".equals(ttsVoiceStatus) ? newLocale.getDisplayName() + ": LANG_COUNTRY_AVAILABLE" : ttsVoiceStatus;
+								ttsVoiceStatus = "-".equals(ttsVoiceStatus) ? newLocale.getDisplayName() + ": LANG_COUNTRY_AVAILABLE" : ttsVoiceStatus;
 							case TextToSpeech.LANG_COUNTRY_VAR_AVAILABLE:
 								try {
 									mTts.setLanguage(newLocale);
@@ -235,7 +235,7 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 								if(speechRate != 1) {
 									mTts.setSpeechRate(speechRate);
 								}
-								ttsVoiceStatus = "".equals(ttsVoiceStatus) ? newLocale.getDisplayName() + ": LANG_COUNTRY_VAR_AVAILABLE" : ttsVoiceStatus;
+								ttsVoiceStatus = "-".equals(ttsVoiceStatus) ? newLocale.getDisplayName() + ": LANG_COUNTRY_VAR_AVAILABLE" : ttsVoiceStatus;
 								ttsVoiceUsed = getVoiceUsed();
 								break;
 							case TextToSpeech.LANG_NOT_SUPPORTED:
@@ -320,8 +320,8 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 		}
 		abandonAudioFocus();
 		mTtsContext = null;
-		ttsVoiceStatus = "";
-		ttsVoiceUsed = "";
+		ttsVoiceStatus = "-";
+		ttsVoiceUsed = "-";
 	}
 	
 	@Override

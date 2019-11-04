@@ -10,6 +10,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.ColorRes;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
@@ -25,6 +26,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
+import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.aidl.OsmandAidlApi;
 import net.osmand.aidl.OsmandAidlApi.ConnectedApp;
@@ -32,6 +34,9 @@ import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.SettingsHelper;
+import net.osmand.plus.SettingsHelper.ProfileSettingsItem;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.PluginActivity;
 import net.osmand.plus.helpers.FontCache;
@@ -39,22 +44,26 @@ import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 
 import org.apache.commons.logging.Log;
 
+import java.io.File;
 import java.util.List;
 
 import static net.osmand.plus.profiles.EditProfileFragment.MAP_CONFIG;
 import static net.osmand.plus.profiles.EditProfileFragment.OPEN_CONFIG_ON_MAP;
 import static net.osmand.plus.profiles.EditProfileFragment.SCREEN_CONFIG;
 import static net.osmand.plus.profiles.EditProfileFragment.SELECTED_ITEM;
+import static net.osmand.plus.profiles.SettingsProfileFragment.PROFILE_STRING_KEY;
 
 public class ConfigureProfileFragment extends BaseSettingsFragment {
 
 	public static final String TAG = ConfigureProfileFragment.class.getSimpleName();
 
-	private static final Log log = PlatformUtil.getLog(ConfigureProfileFragment.class);
+	private static final Log LOG = PlatformUtil.getLog(ConfigureProfileFragment.class);
 
 	private static final String PLUGIN_SETTINGS = "plugin_settings";
+	private static final String SETTINGS_ACTIONS = "settings_actions";
 	private static final String CONFIGURE_MAP = "configure_map";
 	private static final String CONFIGURE_SCREEN = "configure_screen";
+	private static final String EXPORT_PROFILE = "export_profile";
 
 	@ColorRes
 	protected int getBackgroundColorRes() {
@@ -160,6 +169,11 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 
 		setupConnectedAppsPref(pluginSettings);
 		setupOsmandPluginsPref(pluginSettings);
+
+		PreferenceCategory settingsActions = (PreferenceCategory) findPreference(SETTINGS_ACTIONS);
+		settingsActions.setIconSpaceReserved(false);
+
+		setupExportProfilePref();
 	}
 
 	private void setupNavigationSettingsPref() {
@@ -194,6 +208,28 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 		intent.putExtra(OPEN_CONFIG_ON_MAP, SCREEN_CONFIG);
 		intent.putExtra(SELECTED_ITEM, getSelectedAppMode().getStringKey());
 		configureMap.setIntent(intent);
+	}
+
+	private void setupExportProfilePref() {
+		Preference exportProfile = findPreference(EXPORT_PROFILE);
+		exportProfile.setIcon(app.getUIUtilities().getIcon(R.drawable.ic_action_app_configuration,
+				isNightMode() ? R.color.active_color_primary_dark : R.color.active_color_primary_light));
+	}
+
+	private void shareProfile(@NonNull File file, @NonNull ApplicationMode profile) {
+		try {
+			Context ctx = requireContext();
+			final Intent sendIntent = new Intent();
+			sendIntent.setAction(Intent.ACTION_SEND);
+			sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.exported_osmand_profile, profile.toHumanString(ctx)));
+			sendIntent.putExtra(Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(getMyApplication(), file));
+			sendIntent.setType("*/*");
+			sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+			startActivity(sendIntent);
+		} catch (Exception e) {
+			app.showToastMessage(R.string.export_profile_failed);
+			LOG.error("Share profile error", e);
+		}
 	}
 
 	private void setupConnectedAppsPref(PreferenceCategory preferenceCategory) {
@@ -245,6 +281,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 		final Class<? extends Activity> settingsActivity = plugin.getSettingsActivity();
 		if (settingsActivity != null && !plugin.needsInstallation()) {
 			intent = new Intent(getContext(), settingsActivity);
+			intent.putExtra(PROFILE_STRING_KEY, getSelectedAppMode().getStringKey());
 		} else {
 			intent = new Intent(getContext(), PluginActivity.class);
 			intent.putExtra(PluginActivity.EXTRA_PLUGIN_ID, plugin.getId());
@@ -268,9 +305,27 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 								.commitAllowingStateLoss();
 					}
 				} catch (Exception e) {
-					log.error(e);
+					LOG.error(e);
 				}
 			}
+		} else if (EXPORT_PROFILE.equals(prefId)) {
+			Context ctx = requireContext();
+			final ApplicationMode profile = getSelectedAppMode();
+			File tempDir = app.getAppPath(IndexConstants.TEMP_DIR);
+			if (!tempDir.exists()) {
+				tempDir.mkdirs();
+			}
+			String fileName = profile.toHumanString(ctx);
+			app.getSettingsHelper().exportSettings(tempDir, fileName, new SettingsHelper.SettingsExportListener() {
+				@Override
+				public void onSettingsExportFinished(@NonNull File file, boolean succeed) {
+					if (succeed) {
+						shareProfile(file, profile);
+					} else {
+						app.showToastMessage(R.string.export_profile_failed);
+					}
+				}
+			}, new ProfileSettingsItem(app.getSettings(), profile));
 		}
 
 		return super.onPreferenceClick(preference);

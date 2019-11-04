@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:background="?attr/list_background_color"
+	android:gravity="center_vertical">
+
+	<LinearLayout
+		android:id="@+id/selectable_list_item"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:minHeight="@dimen/bottom_sheet_list_item_height"
+		tools:background="?android:attr/selectableItemBackground">
+
+		<FrameLayout
+			android:id="@+id/icon_container"
+			android:layout_width="@dimen/route_info_toolbar_button_size"
+			android:layout_height="@dimen/route_info_toolbar_button_size"
+			android:layout_gravity="center"
+			android:layout_marginLeft="@dimen/content_padding_half"
+			android:layout_marginTop="@dimen/content_padding_half"
+			android:layout_marginRight="@dimen/content_padding_half"
+			android:layout_marginBottom="@dimen/content_padding_half">
+
+			<ImageView
+				android:id="@android:id/icon"
+				android:layout_width="@dimen/standard_icon_size"
+				android:layout_height="@dimen/standard_icon_size"
+				android:layout_gravity="center"
+				tools:tint="?colorAccent"
+				tools:src="@drawable/ic_action_car_dark" />
+
+		</FrameLayout>
+
+		<LinearLayout
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:layout_weight="1"
+			android:orientation="vertical"
+			android:paddingLeft="@dimen/content_padding"
+			android:paddingRight="@dimen/content_padding">
+
+			<net.osmand.plus.widgets.TextViewEx
+				android:id="@android:id/title"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:ellipsize="marquee"
+				android:fadingEdge="horizontal"
+				android:singleLine="true"
+				android:textColor="?colorAccent"
+				android:textSize="@dimen/default_list_text_size"
+				osmand:typeface="@string/font_roboto_medium"
+				tools:text="Button text"/>
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+</LinearLayout>

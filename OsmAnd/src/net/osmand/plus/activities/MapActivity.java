@@ -2124,7 +2124,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				mapView.fitRectToMap(left, right, top, bottom, tileBoxWidthPx, tileBoxHeightPx, 0);
 			}
 		}
-		if (app.getSettings().SIMULATE_NAVIGATION.get()) {
+		if (app.getSettings().simulateNavigation) {
 			OsmAndLocationSimulation sim = app.getLocationProvider().getLocationSimulation();
 			if (newRoute && rh.isFollowingMode() && !sim.isRouteAnimating()) {
 				sim.startStopRouteAnimation(this);

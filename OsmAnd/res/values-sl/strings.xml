@@ -3262,4 +3262,6 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="screen_alerts_descr">Med navigacijo bodo opozorila prikazana na levem spodnjem robu zaslona.</string>
     <string name="logcat_buffer">Medpomnilnik Logcat</string>
     <string name="plugins_settings">Nastavitve vstavka</string>
+    <string name="layer_osm_edits">Urejanja OSM</string>
+    <string name="tts_initialization_error">Programnika za izgovorjavo besedila ni mogoče začeti</string>
 </resources>

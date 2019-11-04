@@ -64,11 +64,6 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 				R.string.use_osm_live_public_transport,
 				R.string.use_osm_live_public_transport_description));
 
-		navigation.addPreference(createCheckBoxPreference(settings.SIMULATE_NAVIGATION_GPX,
-				R.string.simulate_your_location,
-				R.string.simulate_your_location_gpx_descr));
-
-		/*
 		pref = new Preference(this);
 		final Preference simulate = pref;
 		final OsmAndLocationSimulation sim = getMyApplication().getLocationProvider().getLocationSimulation();
@@ -77,7 +72,7 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 			@Override
 			public void run() {
 				simulate.setSummary(sim.isRouteAnimating() ?
-						R.string.simulate_your_location_stop_descr : R.string.simulate_your_location_descr);
+						R.string.simulate_your_location_stop_descr : R.string.simulate_your_location_gpx_descr);
 			}
 		};
 		pref.setTitle(R.string.simulate_your_location);
@@ -87,12 +82,11 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 			@Override
 			public boolean onPreferenceClick(Preference preference) {
 				updateTitle.run();
-				sim.startStopRouteAnimation(SettingsDevelopmentActivity.this, updateTitle);
+				sim.startStopRouteAnimation(SettingsDevelopmentActivity.this, true, updateTitle);
 				return true;
 			}
 		});
 		navigation.addPreference(pref);
-		*/
 
 		PreferenceCategory debug = new PreferenceCategory(this);
 		debug.setTitle(R.string.debugging_and_development);
