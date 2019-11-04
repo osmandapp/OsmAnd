@@ -1725,12 +1725,12 @@ public class OsmandSettings {
 	public final CommonPreference<String> GPS_STATUS_APP = new StringPreference("gps_status_app", "").makeGlobal();
 
 	// this value string is synchronized with settings_pref.xml preference name
-	public final OsmandPreference<Boolean> SHOW_OSM_BUGS = new BooleanPreference("show_osm_bugs", false).makeGlobal();
+	public final OsmandPreference<Boolean> SHOW_OSM_BUGS = new BooleanPreference("show_osm_bugs", false).makeProfile().cache();
 
 	public final OsmandPreference<Boolean> SHOW_OSM_EDITS = new BooleanPreference("show_osm_edits", true).makeProfile().cache();
 
-	public final CommonPreference<Boolean> SHOW_CLOSED_OSM_BUGS = new BooleanPreference("show_closed_osm_bugs", false).makeGlobal();
-	public final CommonPreference<Integer> SHOW_OSM_BUGS_MIN_ZOOM = new IntPreference("show_osm_bugs_min_zoom", 8).makeGlobal();
+	public final CommonPreference<Boolean> SHOW_CLOSED_OSM_BUGS = new BooleanPreference("show_closed_osm_bugs", false).makeProfile().cache();
+	public final CommonPreference<Integer> SHOW_OSM_BUGS_MIN_ZOOM = new IntPreference("show_osm_bugs_min_zoom", 8).makeProfile().cache();
 
 	public final CommonPreference<String> MAP_INFO_CONTROLS = new StringPreference("map_info_controls", "").makeProfile();
 	{
@@ -1744,7 +1744,7 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> DEBUG_RENDERING_INFO = new BooleanPreference("debug_rendering", false).makeGlobal();
 
 	// this value string is synchronized with settings_pref.xml preference name
-	public final OsmandPreference<Boolean> SHOW_FAVORITES = new BooleanPreference("show_favorites", true).makeGlobal().cache();
+	public final OsmandPreference<Boolean> SHOW_FAVORITES = new BooleanPreference("show_favorites", true).makeProfile().cache();
 
 	public final CommonPreference<Boolean> SHOW_ZOOM_BUTTONS_NAVIGATION = new BooleanPreference("show_zoom_buttons_navigation", false).makeProfile().cache();
 
@@ -1874,7 +1874,7 @@ public class OsmandSettings {
 
 	public final CommonPreference<Boolean> HILLSHADE = new BooleanPreference("hillshade_layer", true).makeProfile();
 
-	public final CommonPreference<String> CONTOUR_LINES_ZOOM = new StringPreference("contour_lines_zoom", null).makeGlobal().cache();
+	public final CommonPreference<String> CONTOUR_LINES_ZOOM = new StringPreference("contour_lines_zoom", null).makeProfile().cache();
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<String> MAP_OVERLAY = new StringPreference("map_overlay", null).makeProfile().cache();
@@ -1883,12 +1883,10 @@ public class OsmandSettings {
 	public final CommonPreference<String> MAP_UNDERLAY = new StringPreference("map_underlay", null).makeProfile().cache();
 
 	// this value string is synchronized with settings_pref.xml preference name
-	public final CommonPreference<Integer> MAP_OVERLAY_TRANSPARENCY = new IntPreference("overlay_transparency",
-			100).makeGlobal().cache();
+	public final CommonPreference<Integer> MAP_OVERLAY_TRANSPARENCY = new IntPreference("overlay_transparency", 100).makeProfile().cache();
 
 	// this value string is synchronized with settings_pref.xml preference name
-	public final CommonPreference<Integer> MAP_TRANSPARENCY = new IntPreference("map_transparency",
-			255).makeGlobal().cache();
+	public final CommonPreference<Integer> MAP_TRANSPARENCY = new IntPreference("map_transparency", 255).makeProfile().cache();
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<String> MAP_TILE_SOURCES = new StringPreference("map_tile_sources",
@@ -2832,34 +2830,35 @@ public class OsmandSettings {
 	public static final String QUICK_FAB_MARGIN_X_LANDSCAPE_MARGIN = "quick_fab_margin_x_landscape_margin";
 	public static final String QUICK_FAB_MARGIN_Y_LANDSCAPE_MARGIN = "quick_fab_margin_y_landscape_margin";
 
-	public final CommonPreference<String> QUICK_ACTION = new StringPreference("quick_action_new", "").makeGlobal();
+	public final CommonPreference<String> QUICK_ACTION = new StringPreference("quick_action_new", "").makeProfile();
 
 	public final CommonPreference<String> QUICK_ACTION_LIST = new StringPreference("quick_action_list", "").makeGlobal();
 
 	public final CommonPreference<Boolean> IS_QUICK_ACTION_TUTORIAL_SHOWN = new BooleanPreference("quick_action_tutorial", false).makeGlobal();
 
+	private final CommonPreference<Integer> QUICK_ACTION_FAB_MARGIN_X_PORTRAIT = new IntPreference(QUICK_FAB_MARGIN_X_PORTRAIT_MARGIN, 0).makeProfile();
+	private final CommonPreference<Integer> QUICK_ACTION_FAB_MARGIN_Y_PORTRAIT = new IntPreference(QUICK_FAB_MARGIN_Y_PORTRAIT_MARGIN, 0).makeProfile();
+	private final CommonPreference<Integer> QUICK_ACTION_FAB_MARGIN_X_LANDSCAPE_MARGIN = new IntPreference(QUICK_FAB_MARGIN_X_LANDSCAPE_MARGIN, 0).makeProfile();
+	private final CommonPreference<Integer> QUICK_ACTION_FAB_MARGIN_Y_LANDSCAPE_MARGIN = new IntPreference(QUICK_FAB_MARGIN_Y_LANDSCAPE_MARGIN, 0).makeProfile();
+
 	public boolean setPortraitFabMargin(int x, int y) {
-		return settingsAPI.edit(globalPreferences).putInt(QUICK_FAB_MARGIN_X_PORTRAIT_MARGIN, x)
-				.putInt(QUICK_FAB_MARGIN_Y_PORTRAIT_MARGIN, y).commit();
+		return QUICK_ACTION_FAB_MARGIN_X_PORTRAIT.set(x) && QUICK_ACTION_FAB_MARGIN_Y_PORTRAIT.set(y);
 	}
 
 	public boolean setLandscapeFabMargin(int x, int y) {
-		return settingsAPI.edit(globalPreferences).putInt(QUICK_FAB_MARGIN_X_LANDSCAPE_MARGIN, x)
-				.putInt(QUICK_FAB_MARGIN_Y_LANDSCAPE_MARGIN, y).commit();
+		return QUICK_ACTION_FAB_MARGIN_X_LANDSCAPE_MARGIN.set(x) && QUICK_ACTION_FAB_MARGIN_Y_LANDSCAPE_MARGIN.set(y);
 	}
 
 	public Pair<Integer, Integer> getPortraitFabMargin() {
-		if (settingsAPI.contains(globalPreferences, QUICK_FAB_MARGIN_X_PORTRAIT_MARGIN) && settingsAPI.contains(globalPreferences, QUICK_FAB_MARGIN_Y_PORTRAIT_MARGIN)) {
-			return new Pair<>(settingsAPI.getInt(globalPreferences, QUICK_FAB_MARGIN_X_PORTRAIT_MARGIN, 0),
-					settingsAPI.getInt(globalPreferences, QUICK_FAB_MARGIN_Y_PORTRAIT_MARGIN, 0));
+		if (QUICK_ACTION_FAB_MARGIN_X_PORTRAIT.isSet() && QUICK_ACTION_FAB_MARGIN_Y_PORTRAIT.isSet()) {
+			return new Pair<>(QUICK_ACTION_FAB_MARGIN_X_PORTRAIT.get(), QUICK_ACTION_FAB_MARGIN_Y_PORTRAIT.get());
 		}
 		return null;
 	}
 
 	public Pair<Integer, Integer> getLandscapeFabMargin() {
-		if (settingsAPI.contains(globalPreferences, QUICK_FAB_MARGIN_X_LANDSCAPE_MARGIN) && settingsAPI.contains(globalPreferences, QUICK_FAB_MARGIN_Y_LANDSCAPE_MARGIN)) {
-			return new Pair<>(settingsAPI.getInt(globalPreferences, QUICK_FAB_MARGIN_X_LANDSCAPE_MARGIN, 0),
-					settingsAPI.getInt(globalPreferences, QUICK_FAB_MARGIN_Y_LANDSCAPE_MARGIN, 0));
+		if (QUICK_ACTION_FAB_MARGIN_X_LANDSCAPE_MARGIN.isSet() && QUICK_ACTION_FAB_MARGIN_Y_LANDSCAPE_MARGIN.isSet()) {
+			return new Pair<>(QUICK_ACTION_FAB_MARGIN_X_LANDSCAPE_MARGIN.get(), QUICK_ACTION_FAB_MARGIN_Y_LANDSCAPE_MARGIN.get());
 		}
 		return null;
 	}
@@ -3134,13 +3133,13 @@ public class OsmandSettings {
 			(ListStringPreference) new ListStringPreference("transport_default_settings", "transportStops", ",").makeProfile();
 	
 	public final OsmandPreference<Boolean> SHOW_ARRIVAL_TIME_OTHERWISE_EXPECTED_TIME =
-			new BooleanPreference("show_arrival_time", true).makeGlobal();
+			new BooleanPreference("show_arrival_time", true).makeProfile();
 
 	public final OsmandPreference<Boolean> SHOW_INTERMEDIATE_ARRIVAL_TIME_OTHERWISE_EXPECTED_TIME =
-			new BooleanPreference("show_intermediate_arrival_time", true).makeGlobal();
+			new BooleanPreference("show_intermediate_arrival_time", true).makeProfile();
 
 	public final OsmandPreference<Boolean> SHOW_RELATIVE_BEARING_OTHERWISE_REGULAR_BEARING =
-			new BooleanPreference("show_relative_bearing", true).makeGlobal();
+			new BooleanPreference("show_relative_bearing", true).makeProfile();
 
 	public final OsmandPreference<Long> AGPS_DATA_LAST_TIME_DOWNLOADED =
 			new LongPreference("agps_data_downloaded", 0).makeGlobal();
