@@ -669,10 +669,15 @@ public class ImportHelper {
 		}
 	}
 
-	private String saveImport(final GPXFile gpxFile, final String fileName, final boolean useImportDir) {
+	private String saveImport(final GPXFile gpxFile, String fileName, final boolean useImportDir) {
 		final String warning;
 
-		if (gpxFile.isEmpty() || fileName == null) {
+		if(fileName == null) {
+			WptPt pt = gpxFile.findPointToShow();
+			fileName = new SimpleDateFormat("yyyy-MM-dd_HH-mm_EEE", Locale.US).format(new Date(pt.time));
+		}
+
+		if (gpxFile.isEmpty()) {
 			warning = app.getString(R.string.error_reading_gpx);
 		} else {
 			final File importDir;
