@@ -207,11 +207,12 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 						String fileName = f + "_" + new SimpleDateFormat("HH-mm_EEE", Locale.US).format(new Date(pt.time)); //$NON-NLS-1$
 						Integer track_storage_directory = ctx.getSettings().TRACK_STORAGE_DIRECTORY.get();
 						if (track_storage_directory != OsmandSettings.REC_DIRECTORY) {
-							SimpleDateFormat dateDirFormat = new SimpleDateFormat("yyyy-MM");
+							SimpleDateFormat monthDirFormat = new SimpleDateFormat("yyyy-MM");
+							String dateDirName = monthDirFormat.format(new Date(pt.time));
 							if (track_storage_directory == OsmandSettings.DAILY_DIRECTORY) {
-								dateDirFormat = new SimpleDateFormat("yyyy-MM-dd");
+								SimpleDateFormat dayDirFormat = new SimpleDateFormat("yyyy-MM-dd");
+								dateDirName = dateDirName + File.separator + dayDirFormat.format(new Date(pt.time));
 							}
-							String dateDirName = dateDirFormat.format(new Date(pt.time));
 							File dateDir = new File(dir, dateDirName);
 							dateDir.mkdirs();
 							if (dateDir.exists()) {
