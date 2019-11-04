@@ -36,6 +36,7 @@ import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.GPXDatabase;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.SettingsHelper.SettingsImportListener;
 import net.osmand.plus.activities.MapActivity;
@@ -669,7 +670,7 @@ public class ImportHelper {
 		}
 	}
 
-	private String saveImport(final GPXFile gpxFile, final String fileName, final boolean useImportDir) {
+	private String saveImport(final GPXFile gpxFile, String fileName, final boolean useImportDir) {
 		final String warning;
 
 		if (gpxFile.isEmpty() || fileName == null) {
@@ -685,6 +686,20 @@ public class ImportHelper {
 			importDir.mkdirs();
 			if (importDir.exists() && importDir.isDirectory() && importDir.canWrite()) {
 				final WptPt pt = gpxFile.findPointToShow();
+				Integer track_storage_directory = app.getSettings().TRACK_STORAGE_DIRECTORY.get();
+				if (track_storage_directory != OsmandSettings.REC_DIRECTORY) {
+					SimpleDateFormat monthDirFormat = new SimpleDateFormat("yyyy-MM");
+					String dateDirName = monthDirFormat.format(new Date(pt.time));
+					if (track_storage_directory == OsmandSettings.DAILY_DIRECTORY) {
+						SimpleDateFormat dayDirFormat = new SimpleDateFormat("yyyy-MM-dd");
+						dateDirName = dateDirName + File.separator + dayDirFormat.format(new Date(pt.time));
+					}
+					File dateDir = new File(importDir, dateDirName);
+					dateDir.mkdirs();
+					if (dateDir.exists()) {
+						fileName = dateDirName + File.separator + fileName;
+					}
+				}
 				final File toWrite = getFileToSave(fileName, importDir, pt);
 				boolean destinationExists = toWrite.exists();
 				Exception e = GPXUtilities.writeGpxFile(toWrite, gpxFile);
