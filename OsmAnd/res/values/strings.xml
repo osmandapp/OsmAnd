@@ -838,7 +838,7 @@
     <string name="quick_action_showhide_osmbugs_title">Toggle OSM Notes</string>
     <string name="quick_action_osmbugs_show">Show OSM Notes</string>
     <string name="quick_action_osmbugs_hide">Hide OSM Notes</string>
-    <string name="quick_action_showhide_osmbugs_descr">A toggle ro show or hide OSM Notes on the map.</string>
+    <string name="quick_action_showhide_osmbugs_descr">A toggle to show or hide OSM Notes on the map.</string>
     <string name="sorted_by_distance">Sorted by distance</string>
     <string name="search_favorites">Search in Favorites</string>
     <string name="hillshade_menu_download_descr">Download the \'Hillshade Overlay\' map to show vertical shading.</string>
