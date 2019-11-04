@@ -39,6 +39,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -716,7 +717,7 @@ public class WaypointsFragment extends BaseOsmAndFragment implements ObservableS
 		final OsmandApplication app = mapActivity.getMyApplication();
 		final WaypointDialogHelper helper = mapActivity.getDashboard().getWaypointDialogHelper();
 		if (v == null || v.findViewById(R.id.info_close) == null) {
-			v = mapActivity.getLayoutInflater().inflate(R.layout.route_waypoint_item, null);
+			v = UiUtilities.getInflater(mapActivity, nightMode).inflate(R.layout.route_waypoint_item, null);
 		}
 		v.setBackgroundColor(ContextCompat.getColor(mapActivity, nightMode ? R.color.card_and_list_background_dark : R.color.card_and_list_background_light));
 		updatePointInfoView(mapActivity, v, point, true, nightMode, edit, false);

@@ -1,6 +1,7 @@
 package net.osmand.plus.mapmarkers;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
@@ -35,6 +36,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.MapMarkersMode;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -61,7 +63,7 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 		final OsmandSettings settings = getSettings();
 		helpImgHeight = getResources().getDimensionPixelSize(R.dimen.action_bar_image_height);
 
-		mainView = inflater.inflate(R.layout.fragment_direction_indication_dialog, container);
+		mainView = UiUtilities.getInflater(getContext(), !settings.isLightContent()).inflate(R.layout.fragment_direction_indication_dialog, container);
 
 		Toolbar toolbar = (Toolbar) mainView.findViewById(R.id.toolbar);
 		toolbar.setNavigationIcon(getIconsCache().getIcon(R.drawable.ic_arrow_back));
@@ -114,20 +116,21 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 		menuTv.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
+				Context themedContext = UiUtilities.getThemedContext(getActivity(), !settings.isLightContent());
 				CharSequence[] titles = getMenuTitles();
 				Paint paint = new Paint();
 				paint.setTextSize(getResources().getDimensionPixelSize(R.dimen.default_list_text_size));
 				float titleTextWidth = Math.max(paint.measureText(titles[0].toString()), paint.measureText(titles[1].toString()));
-				float itemWidth = titleTextWidth + AndroidUtils.dpToPx(getActivity(), 32);
-				float minWidth = AndroidUtils.dpToPx(getActivity(), 100);
-				final ListPopupWindow listPopupWindow = new ListPopupWindow(getActivity());
+				float itemWidth = titleTextWidth + AndroidUtils.dpToPx(themedContext, 32);
+				float minWidth = AndroidUtils.dpToPx(themedContext, 100);
+				final ListPopupWindow listPopupWindow = new ListPopupWindow(themedContext);
 				listPopupWindow.setAnchorView(menuTv);
 				listPopupWindow.setContentWidth((int) (Math.max(itemWidth, minWidth)));
 				listPopupWindow.setDropDownGravity(Gravity.END | Gravity.TOP);
-				listPopupWindow.setHorizontalOffset(AndroidUtils.dpToPx(getActivity(), 8));
+				listPopupWindow.setHorizontalOffset(AndroidUtils.dpToPx(themedContext, 8));
 				listPopupWindow.setVerticalOffset(-menuTv.getHeight());
 				listPopupWindow.setModal(true);
-				listPopupWindow.setAdapter(new ArrayAdapter<>(getActivity(), R.layout.popup_list_text_item, titles));
+				listPopupWindow.setAdapter(new ArrayAdapter<>(themedContext, R.layout.popup_list_text_item, titles));
 				listPopupWindow.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 					@Override
 					public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

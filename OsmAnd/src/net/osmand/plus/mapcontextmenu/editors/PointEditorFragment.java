@@ -3,7 +3,6 @@ package net.osmand.plus.mapcontextmenu.editors;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -28,6 +27,7 @@ import android.widget.TextView;
 import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.widgets.AutoCompleteTextViewEx;
@@ -44,7 +44,8 @@ public abstract class PointEditorFragment extends BaseOsmAndFragment {
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
 
-		view = inflater.inflate(R.layout.point_editor_fragment, container, false);
+		boolean nightMode = !getMyApplication().getSettings().isLightContent();
+		view = UiUtilities.getInflater(getContext(), nightMode).inflate(R.layout.point_editor_fragment, container, false);
 
 		PointEditor editor = getEditor();
 		if (editor == null) {

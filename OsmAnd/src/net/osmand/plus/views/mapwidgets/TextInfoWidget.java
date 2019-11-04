@@ -1,8 +1,5 @@
 package net.osmand.plus.views.mapwidgets;
 
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import android.app.Activity;
 import android.graphics.Paint.Style;
 import android.graphics.Typeface;
@@ -15,6 +12,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
+import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 
 public class TextInfoWidget  {
 
@@ -38,7 +40,7 @@ public class TextInfoWidget  {
 
 	public TextInfoWidget(Activity activity) {
 		app = (OsmandApplication) activity.getApplication();
-		view = activity.getLayoutInflater().inflate(R.layout.map_hud_widget, null);
+		view = UiUtilities.getInflater(activity, isNight).inflate(R.layout.map_hud_widget, null);
 		bottomLayout = (ViewGroup) view.findViewById(R.id.widget_bottom_layout);
 		topImageView = (ImageView) view.findViewById(R.id.widget_top_icon);
 		topTextView = (TextView) view.findViewById(R.id.widget_top_icon_text);
