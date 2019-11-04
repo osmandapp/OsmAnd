@@ -43,7 +43,7 @@ android {
 	}
 
 	defaultConfig {
-		minSdkVersion System.getenv("MIN_SDK_VERSION") ? System.getenv("MIN_SDK_VERSION").toInteger() : 14
+		minSdkVersion System.getenv("MIN_SDK_VERSION") ? System.getenv("MIN_SDK_VERSION").toInteger() : 15
 		targetSdkVersion 28
 		versionCode 350
 		versionCode System.getenv("APK_NUMBER_VERSION") ? System.getenv("APK_NUMBER_VERSION").toInteger() : versionCode

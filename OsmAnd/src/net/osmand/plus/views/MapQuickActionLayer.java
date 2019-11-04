@@ -137,6 +137,9 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
         setLayerState(false);
         isLayerOn = quickActionRegistry.isQuickActionOn();
         setupQuickActionBtnVisibility();
+        if (isLayerOn) {
+            setQuickActionButtonMargin();
+        }
     }
 
     private boolean showTutorialIfNeeded() {
