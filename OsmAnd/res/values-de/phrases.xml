@@ -613,7 +613,7 @@
     <string name="poi_aquarium">Aquarium</string>
     <string name="poi_team_handball">Handball</string>
     <string name="poi_shop">Geschäft</string>
-    <string name="poi_shop_food">Gemischtwarengeschäft und Supermarkt</string>
+    <string name="poi_shop_food">Lebensmittelgeschäft und Supermarkt</string>
     <string name="poi_emergency">Notfall</string>
     <string name="poi_road_obstacle">Straßenhindernis</string>
     <string name="poi_filling_station">Tankstelle</string>
@@ -3616,7 +3616,7 @@
     <string name="poi_access_mofa">Zufahrt Mofa</string>
     <string name="poi_access_hgv">Zufahrt LKW</string>
     <string name="poi_access_goods">Zufahrt leichter Lieferfahrzeuge</string>
-    <string name="poi_access_disabled">Zugang Behinderte</string>
+    <string name="poi_access_disabled">Behindertengerechter Zugang</string>
     <string name="poi_taxi_office">Taxibüro</string>
     <string name="poi_vehicle_yes">Zufahrt Fahrzeuge: ja</string>
     <string name="poi_vehicle_private">Zufahrt Fahrzeuge: privat</string>
@@ -3731,4 +3731,20 @@
     <string name="poi_charge">Gebühr</string>
     <string name="poi_pet_grooming">Haustierpflege</string>
     <string name="poi_atm_yes">Geldausgabeautomat: ja</string>
+    <string name="poi_cash_withdrawal_bank_card">Bargeldbezug</string>
+    <string name="poi_cash_withdrawal_yes">Bargeldbezug: ja</string>
+    <string name="poi_cash_withdrawal">Bargeldbezug</string>
+    <string name="poi_cash_withdrawal_operator">Betreiber der Bargeldauszahlungen</string>
+    <string name="poi_cash_withdrawal_type_checkout">Bargeldbezugsart: Kasse</string>
+    <string name="poi_cash_withdrawal_type_self_checkout">Bargeldbezugsart: Selbstzahlerkasse</string>
+    <string name="poi_cash_withdrawal_limit">Bargeldbezugslimit</string>
+    <string name="poi_cash_withdrawal_currency">Bargeldbezugswährung</string>
+    <string name="poi_cash_withdrawal_purchase_required_yes">Bargeldbezug: Kauf erforderlich</string>
+    <string name="poi_cash_withdrawal_purchase_required_no">Bargeldbezug: kein Kauf erforderlich</string>
+    <string name="poi_cash_withdrawal_fee_yes">Bargeldbezugsgebühr: ja</string>
+    <string name="poi_cash_withdrawal_fee_no">Bargeldbezugsgebühr: nein</string>
+    <string name="poi_cash_withdrawal_purchase_minimum">Bargeldbezug: Mindesteinkauf</string>
+    <string name="poi_cash_withdrawal_foreign_cards">Bargeldbezug: fremde Karten</string>
+    <string name="poi_cash_withdrawal_girocard">Girokarte</string>
+    <string name="poi_cash_withdrawal_postbank">Postbank</string>
 </resources>

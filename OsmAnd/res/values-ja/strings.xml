@@ -3053,9 +3053,9 @@ POIの更新は利用できません</string>
     <string name="application_profiles">各プロファイルの設定</string>
     <string name="collected_data">収集されるデータ</string>
     <string name="shared_string_crash">動作停止エラー</string>
-    <string name="last_launch_crashed">前回OsmAndの起動に失敗しました。エラー内容を送信し、OsmAndの改善にご協力ください。</string>
+    <string name="last_launch_crashed">前回OsmAndの実行中にクラッシュしました。エラー内容を送信し、OsmAndの改善にご協力ください。</string>
     <string name="coordinates_widget">座標ウィジェット</string>
-    <string name="settings_privacy_and_security_desc">私たちと共有しても良いと判断するデータを選択します</string>
+    <string name="settings_privacy_and_security_desc">共有しても良いと判断するデータを選択します</string>
     <string name="osmand_routing_promo">osmand/routing内のrouting.xmlを編集することで調整したプロファイルを追加することができます</string>
     <string name="select_icon_profile_dialog_title">アイコン選択</string>
     <string name="profile_type_base_string">基本プロファイル</string>
@@ -3063,26 +3063,26 @@ POIの更新は利用できません</string>
     <string name="shared_string_min_speed">最低速度</string>
     <string name="shared_string_max_speed">最高速度</string>
     <string name="default_speed_setting_title">標準速度</string>
-    <string name="default_speed_dialog_msg">ルート検索時に到着予定時刻を割り出すために使用されます</string>
+    <string name="default_speed_dialog_msg">予想到着時間の計算に使用します</string>
     <string name="app_mode_offroad">オフロード</string>
     <string name="edit_profile_setup_title">プロファイルの個別設定</string>
     <string name="edit_profile_setup_subtitle">設定した値は各プロファイルごとに保持されます</string>
-    <string name="edit_profile_setup_map_subtitle">このプロファイルで使用する標準のマップ設定を選択します</string>
-    <string name="edit_profile_screen_options_subtitle">このプロファイルで使用する標準の画面設定を選択します</string>
-    <string name="edit_profile_nav_settings_subtitle">このプロファイルで使用する標準のナビゲーション設定を選択します</string>
-    <string name="routing_attr_max_num_changes_description">最大乗り換え数を指定します</string>
+    <string name="edit_profile_setup_map_subtitle">このプロファイルで使用するマップ設定を選択します</string>
+    <string name="edit_profile_screen_options_subtitle">このプロファイルで使用するマップ設定を選択します</string>
+    <string name="edit_profile_nav_settings_subtitle">このプロファイルで使用するナビゲーション設定を選択します</string>
+    <string name="routing_attr_max_num_changes_description">乗り換えの上限を指定します</string>
     <string name="routing_attr_max_num_changes_name">乗り換え数</string>
     <string name="turn_screen_on_router">方向転換時に起動</string>
-    <string name="turn_screen_on_time_descr">画面がオンになる時間を設定します。</string>
+    <string name="turn_screen_on_time_descr">画面がオンになる時間を調整できます。</string>
     <string name="turn_screen_on_sensor">近接センサーを使用</string>
-    <string name="turn_screen_on_sensor_descr">ナビゲート中に画面の上で手を振ると、画面をオンにします。</string>
+    <string name="turn_screen_on_sensor_descr">ナビゲーション中に画面の上に手をかざすと、画面をオンにします。</string>
     <string name="external_input_device">外部入力機器</string>
     <string name="external_input_device_descr">外部コントロールに用いる汎用キーボードやWunderLINQなどのデバイスを選択してください。</string>
     <string name="sett_no_ext_input">使用しない</string>
     <string name="sett_generic_ext_input">汎用キーボード</string>
     <string name="sett_wunderlinq_ext_input">WunderLINQ</string>
     <string name="sett_parrot_ext_input">Parrot</string>
-    <string name="turn_on_profile_desc">この設定を使用するには、少なくとも1つのアプリケーションプロファイルをオンにしてください。</string>
+    <string name="turn_on_profile_desc">この設定を使用するには、少なくとも1つのプロファイルを有効にしてください。</string>
     <string name="rendering_attr_winter_road_name">冬期道路</string>
     <string name="rendering_attr_ice_road_name">アイスロード</string>
     <string name="routeInfo_winter_ice_road_name">冬期道路およびアイスロード</string>
@@ -3115,17 +3115,17 @@ POIの更新は利用できません</string>
     <string name="public_transport_calc_pedestrian">徒歩移動でのルートを計算</string>
     <string name="public_transport_type">交通機関の種類</string>
     <string name="searching_gps">GPS検索</string>
-    <string name="rate_dialog_descr">あなたからのフィードバック共有や、Google Playで私たちの成果を評価するためにあなたの30秒を分けてください。</string>
-    <string name="button_rate">レート</string>
+    <string name="rate_dialog_descr">フィードバックの共有や、Google Playでの評価をお願いします。</string>
+    <string name="button_rate">OK</string>
     <string name="help_us_make_osmand_better">OsmAndの改善にご協力ください</string>
-    <string name="make_osmand_better_descr">OsmAndに匿名のアプリケーション使用状況データの収集と処理を許可します。利用者の位置やマップ上で見た場所についてのデータは収集や保存はしません。
-\n
+    <string name="make_osmand_better_descr">OsmAndで匿名アプリ使用データの収集および処理できるようにします。マップに表示されている自分の位置や場所に関するデータは収集されません。
+\n 
 \n[設定]＞[プライバシーとセキュリティ]からいつでも設定を変更できます。</string>
-    <string name="choose_data_to_share">どの種類のデータを共有するかを選択:</string>
+    <string name="choose_data_to_share">共有するデータの種類を選択:</string>
     <string name="collected_data_descr">OsmAndで共有を許可するデータを定義します。</string>
-    <string name="downloaded_maps_collect_descr">どの地域や国のどの地図が最も需要があるのかを把握するのに役立ちます。</string>
-    <string name="visited_screens_collect_descr">どのOsmAnd機能が最も需要があるのかを把握するのに役立ちます。</string>
-    <string name="privacy_and_security_change_descr">\"許可\"をタップすると、我々が提示した%1$sに同意したとみなされます。</string>
+    <string name="downloaded_maps_collect_descr">どの国や地域の地図が需要が高いのかを把握するのに役立ちます。</string>
+    <string name="visited_screens_collect_descr">どのOsmAnd機能の需要が高いのかを把握するのに役立ちます。</string>
+    <string name="privacy_and_security_change_descr">%1$sに同意する場合は、[許可]をタップします</string>
     <string name="shared_string_no_thank_you">いいえ、結構です</string>
     <string name="shared_string_allow">許可</string>
     <string name="profile_name_hint">プロファイル名</string>
@@ -3144,21 +3144,21 @@ POIの更新は利用できません</string>
     <string name="routing_profile_ski">スキー</string>
     <string name="profile_type_descr_string">タイプ:%s</string>
     <string name="profile_alert_need_routing_type_title">ナビゲーションタイプを選択</string>
-    <string name="profile_alert_need_routing_type_msg">新規アプリケーションプロファイルのナビゲーションタイプを選択してください</string>
+    <string name="profile_alert_need_routing_type_msg">新規アプリプロファイルのナビゲーションタイプを選択してください</string>
     <string name="profile_alert_need_profile_name_title">プロファイル名を入力</string>
-    <string name="profile_alert_need_profile_name_msg">プロファイル名が入力されていません！</string>
+    <string name="profile_alert_need_profile_name_msg">最初にプロファイル名を指定する必要があります。</string>
     <string name="profile_alert_duplicate_name_title">名前の重複</string>
     <string name="profile_alert_duplicate_name_msg">そのプロファイル名は既に使用されています</string>
     <string name="profile_alert_cant_delete_base">OsmAndの基本プロファイルは削除できません</string>
     <string name="profile_alert_need_save_title">変更の保存</string>
-    <string name="profile_alert_need_save_msg">続行するにはプロファイルへの変更を保存する必要があります</string>
+    <string name="profile_alert_need_save_msg">一旦プロファイルへ変更を保存する必要があります</string>
     <string name="profile_alert_delete_title">プロファイルの削除</string>
-    <string name="profile_alert_delete_msg">プロファイル %s を削除してよろしいですか？</string>
+    <string name="profile_alert_delete_msg">プロファイル 『%s』 を削除してよろしいですか？</string>
     <string name="select_base_profile_dialog_title">ベースプロファイルの選択</string>
     <string name="select_base_profile_dialog_message">カスタムプロファイルは標準のアプリケーションプロファイルを元に作成します。ウィジェットなどの表示設定や速度と距離の単位などの標準設定をプロファイルごとに定義可能です。これらは標準のアプリプロファイルを基本としており、今後それらと共に拡張される可能性があります:</string>
     <string name="select_nav_profile_dialog_title">ナビゲーションタイプの選択</string>
     <string name="base_profile_descr_car">乗用車,トラック,オートバイ</string>
-    <string name="base_profile_descr_bicycle">MTB,モペッド(ペダル付き原動機付自転車),馬</string>
+    <string name="base_profile_descr_bicycle">マウンテンバイク、モペッド(ペダル付き原動機付自転車)、馬</string>
     <string name="base_profile_descr_pedestrian">徒歩,ハイキング,ランニング</string>
     <string name="base_profile_descr_public_transport">すべての公共交通機関</string>
     <string name="base_profile_descr_boat">エンジン付き船舶,漕ぎボート,帆船</string>
@@ -3177,31 +3177,31 @@ POIの更新は利用できません</string>
     <string name="minmax_speed_dialog_title">最低/最高速度を設定</string>
     <string name="new_profile">新規プロファイル</string>
     <string name="app_mode_ufo">UFO(未確認飛行物体)</string>
-    <string name="release_3_4">• アプリケーションプロファイル機能:数種類のアイコンと色を使い、利用者のニーズに合ったカスタムプロファイルを作成可能に
-\n
-\n• すべてのプロファイルで標準速度および最低/最高速度を任意設定可能に
-\n
-\n• 座標用ウィジェットの追加
-\n
-\n• マップ上にコンパスと半径定規を表示するオプションの追加
-\n
-\n• バックグラウンドで動く経路記録機能を修正
-\n
-\n• マップのバックグラウンドダウンロードの改善
-\n
-\n• 方向転換時の画面ON機能の復活
-\n
-\n• ウィキペディアの言語選択を修正
-\n
-\n• ナビゲーション中のコンパスボタンの動作を修正
-\n
+    <string name="release_3_4">• アプリプロファイル機能:数種類のアイコンと色を使い、利用者のニーズに合ったカスタムプロファイルを作成可能に 
+\n 
+\n• すべてのプロファイルで標準速度および最低/最高速度を任意設定可能に 
+\n 
+\n• 座標用ウィジェットの追加 
+\n 
+\n• マップ上にコンパスと半径定規を表示するオプションの追加 
+\n 
+\n• バックグラウンドで動く経路記録機能を修正 
+\n 
+\n• マップのバックグラウンドダウンロードの改善 
+\n 
+\n• 方向転換時の画面ON機能の復活 
+\n 
+\n• ウィキペディアの言語選択を修正 
+\n 
+\n• ナビゲーション中のコンパスボタンの動作を修正 
+\n 
 \n• その他のバグ修正
 \n
 \n</string>
     <string name="app_mode_personal_transporter">個人輸送業者</string>
     <string name="app_mode_monowheel">モノホイール</string>
     <string name="app_mode_scooter">スクーター</string>
-    <string name="precision_hdop_and_vdop">"精度 水平方向: %1$s,  垂直方向:%2$s"</string>
+    <string name="precision_hdop_and_vdop">"精度 水平: %1$s,  垂直:%2$s"</string>
     <string name="precision_hdop">水平精度: %s</string>
     <string name="rendering_attr_highway_class_track_grade1_name">グレード1</string>
     <string name="rendering_attr_highway_class_track_grade2_name">グレード2</string>
@@ -3235,21 +3235,21 @@ POIの更新は利用できません</string>
     <string name="routing_attr_freeride_policy_name">ゲレンデ外</string>
     <string name="routing_attr_freeride_policy_description">フリーライドやゲレンデ外は非公式のルートです。通常は手入れされていないうえ、職員によってメンテナンスされておらずクローズ時間にもチェックされません。禁止されている場所には決して入らず自己責任で利用してください。</string>
     <string name="routeInfo_roadClass_name">道路種別</string>
-    <string name="configure_profile_info">ここでなされた設定は、選択されたプロファイル使用時に反映されます。</string>
-    <string name="utm_format_descr">UTM Nato形式に似ていますが、OsmAndはUTMの標準フォーマットを使用しています。</string>
+    <string name="configure_profile_info">設定プロファイル:</string>
+    <string name="utm_format_descr">OsmAndは座標形式の一つとしてUTM標準形式を使用します。これはUTM NATO形式と似ていますが異なるものなのでご注意ください。</string>
     <string name="shared_string_example">例</string>
     <string name="navigate_point_format_utm">UTM標準</string>
     <string name="navigate_point_format_olc">Open Location Code(OLC)</string>
-    <string name="coordinates_format_info">選択した形式は、アプリ内すべての場面に適用されます。</string>
+    <string name="coordinates_format_info">ここで選択した形式はアプリ全体に適用されます。</string>
     <string name="pref_selected_by_default_for_profiles">この設定で選択されたプロファイル\"%s\"が起動時にデフォルト表示されます</string>
     <string name="change_default_settings">設定の変更</string>
-    <string name="discard_changes">変更を取消</string>
-    <string name="apply_to_current_profile">この選択を%1$sプロファイルに適用</string>
+    <string name="discard_changes">変更を破棄</string>
+    <string name="apply_to_current_profile">この選択を『%1$s』に適用</string>
     <string name="apply_to_all_profiles">すべてのプロファイルに適用</string>
     <string name="start_up_message_pref">起動メッセージ</string>
     <string name="analytics_pref_title">ユーザー解析</string>
-    <string name="turn_screen_on_info">ナビゲーション中ではロック画面上でも地図を表示します。</string>
-    <string name="route_parameters_info">これらの設定は選択したプロファイル\"%1$s\"にのみ適用され、ルート検索時に反映されます。</string>
+    <string name="turn_screen_on_info">ナビゲーション中はロック画面にも地図を表示します。</string>
+    <string name="route_parameters_info">選択したプロファイル『%1$s』用のルーティングの設定です。</string>
     <string name="wake_time">起床時間</string>
     <string name="units_and_formats">単位と形式</string>
     <string name="appearance">外観</string>
@@ -3268,13 +3268,13 @@ POIの更新は利用できません</string>
     <string name="change_data_storage_full_description">OsmAndデータファイルを新しい保存場所に移動しますか？
 \n%1$s &gt; %2$s</string>
     <string name="data_storage_preference_summary">%1$s • %2$s</string>
-    <string name="data_storage_space_description">空き容量 %1$s GB • 総容量 %2$s GB</string>
+    <string name="data_storage_space_description">空き容量 %1$s GB(総容量 %2$s GB)</string>
     <string name="enter_path_to_folder">フォルダーのパスを入力</string>
-    <string name="shared_string_select_folder">フォルダーを選択</string>
+    <string name="shared_string_select_folder">フォルダー…</string>
     <string name="paste_Osmand_data_folder_path">OsmAndデータのあるフォルダーへのパスを貼りつけ</string>
     <string name="change_osmand_data_folder_question">OsmAndデータフォルダーを変更しますか？</string>
     <string name="move_maps_to_new_destination">新しい保存場所に移動する</string>
-    <string name="internal_app_storage_description">ユーザーや他アプリから隠されている内部ストレージ。他のユーザーやOsmAnd以外のアプリからはアクセスできません</string>
+    <string name="internal_app_storage_description">OsmAndのみがアクセス可能な、ユーザーおよびその他のアプリからは見えない内部ストレージ</string>
     <string name="change_data_storage_folder">データ保存フォルダーを変更</string>
     <string name="rendering_attr_piste_type_snow_park_name">雪遊び広場</string>
     <string name="rendering_attr_piste_type_sleigh_name">牽引式そり乗り場</string>
@@ -3307,10 +3307,10 @@ POIの更新は利用できません</string>
     <string name="shared_string_memory_mb_desc">%1$s MB</string>
     <string name="shared_string_memory_kb_desc">%1$s kB</string>
     <string name="track_storage_directory">経路保存フォルダー</string>
-    <string name="track_storage_directory_descrp">記録した経路は保存フォルダー内に月または日付ごとに分けて保存ができます。</string>
-    <string name="store_tracks_in_rec_directory">記録した経路はRECフォルダーに保存</string>
-    <string name="store_tracks_in_daily_directories">記録した経路は日付ごとのフォルダーに保存</string>
-    <string name="store_tracks_in_daily_directories_descrp">記録した経路は日付ごとにサブフォルダー(例: 2018-01-01)へ保存されます。</string>
+    <string name="track_storage_directory_descrp">記録した経路はrecフォルダー内に、月または日付ごとに分けて保存ができます。</string>
+    <string name="store_tracks_in_rec_directory">記録経路は『rec』フォルダーに保存</string>
+    <string name="store_tracks_in_daily_directories">記録経路は日付ごとのフォルダーに保存</string>
+    <string name="store_tracks_in_daily_directories_descrp">記録経路は日付ごとにサブフォルダー(例: 2018-01-01)へ保存されます</string>
     <string name="shared_string_memory_used_tb_desc">%1$s TB使用</string>
     <string name="shared_string_memory_used_gb_desc">%1$s GB使用</string>
     <string name="shared_string_memory_used_mb_desc">%1$s MB使用</string>
@@ -3320,20 +3320,20 @@ POIの更新は利用できません</string>
     <string name="routing_attr_prefer_unpaved_description">未舗装道路を好んで進みたい場合の設定です。</string>
     <string name="update_all_maps">すべてのマップを更新</string>
     <string name="update_all_maps_q">すべてのマップ(%1$d個)を更新しますか？</string>
-    <string name="release_3_5">• アプリケーションとプロファイルの設定を更新。移動手段に即した各設定、各プロファイルのカスタマイズ機能を搭載
-\n
-\n• ダウンロードすべきマップを提案する新しいダウンロードダイアログの採用
-\n
-\n• 夜間テーマの修正
-\n
-\n• 各国においていくつかのルーティングに関する問題の修正
-\n
-\n• ベースマップをより詳細な道路網のものに更新
-\n
-\n• 各国の浸水地域を修正
-\n
-\n• スキー用ルーティング: ルート詳細に高さに関するプロファイルとルート難易度を追加
-\n
+    <string name="release_3_5">• アプリとプロファイルの設定を更新: 設定はタイプごとに整理され、各プロファイルは個別カスタマイズ可能に。
+\n 
+\n• ブラウジング中にダウンロードすべきマップを提案する新しいマップダウンロードダイアログの採用
+\n 
+\n• 夜間テーマの修正 
+\n 
+\n• 各国においていくつかのルーティングに関する問題の修正 
+\n 
+\n• ベースマップをより詳細な道路網のものに更新 
+\n 
+\n• 各国の浸水地域を修正 
+\n 
+\n• スキー用ルーティング: ルートの詳細に標高プロファイルとルートの複雑さを追加しました
+\n 
 \n• その他バグ修正など
 \n
 \n</string>
@@ -3350,12 +3350,12 @@ POIの更新は利用できません</string>
     <string name="years_2_4">年</string>
     <string name="months_3">三ヶ月</string>
     <string name="price_free">無料</string>
-    <string name="screen_alerts_descr">ナビゲーション中のアラート(注意や警告)は、画面の左下に表示されます。</string>
+    <string name="screen_alerts_descr">アラート(警告、注意)は、ナビゲーション中に画面左下に表示されます。</string>
     <string name="language_and_output">言語と出力</string>
     <string name="reset_to_default">標準設定に戻す</string>
     <string name="manage_profiles_descr">プロファイルの作成、インポート、編集</string>
-    <string name="manage_profiles">アプリケーションプロファイルの管理…</string>
-    <string name="osmand_settings_descr">アプリケーション全体に影響します</string>
+    <string name="manage_profiles">アプリプロファイルの管理…</string>
+    <string name="osmand_settings_descr">アプリ全体に反映されます</string>
     <string name="osmand_settings">OsmAnd設定</string>
     <string name="copy_from_other_profile">他のプロファイルからコピー</string>
     <string name="turn_screen_on">画面をオンに</string>
@@ -3375,7 +3375,7 @@ POIの更新は利用できません</string>
     <string name="app_mode_pickup_truck">ピックアップトラック</string>
     <string name="years_5">年</string>
     <string name="cancel_subscription">サブスクリプションの解除</string>
-    <string name="apply_preference_to_all_profiles">ここでなされた変更は、すべてのプロファイルまたは選択したプロファイルのみにも適用できます。</string>
+    <string name="apply_preference_to_all_profiles">ここでの変更はすべてのプロファイルに適用することも、現在選択されているプロファイルにのみ適用することもできます。</string>
     <string name="shared_preference">現在の設定</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">未舗装道路を優先</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">未舗装道路を優先してルートを検索します。</string>
@@ -3397,4 +3397,5 @@ POIの更新は利用できません</string>
     <string name="quick_action_hillshade_show">陰影起伏図を表示</string>
     <string name="quick_action_hillshade_hide">陰影起伏図を非表示</string>
     <string name="quick_action_show_hide_hillshade">陰影起伏図の表示／非表示</string>
+    <string name="tts_initialization_error">テキスト読み上げエンジンを起動できません</string>
 </resources>

@@ -1970,14 +1970,14 @@ Pôr do Sol: %2$s</string>
     <string name="total_distance">Distância total</string>
     <string name="shared_string_slope">Inclinação</string>
     <string name="open_street_map_login_and_pass">Usuário e senha do OpenStreetMap</string>
-    <string name="osn_modify_dialog_error">Não foi possível modificar a nota</string>
+    <string name="osn_modify_dialog_error">Não foi possível modificar a nota.</string>
     <string name="osn_modify_dialog_title">Modificar anotação</string>
     <string name="context_menu_item_modify_note">Modificar anotação do OSM</string>
-    <string name="make_round_trip_descr">Adicionar cópia do ponto de partida como destino.</string>
+    <string name="make_round_trip_descr">Adicionar uma cópia do ponto de partida como destino.</string>
     <string name="shared_string_markers">Marcadores</string>
     <string name="coordinates_format">Formato das coordenadas</string>
     <string name="use_system_keyboard">Usar teclado do sistema</string>
-    <string name="fast_coordinates_input_descr">Escolha o formato de inserção de coordenadas. Você sempre pode alterá-la tocando em \'Opções\'.</string>
+    <string name="fast_coordinates_input_descr">Selecione o formato de inserção de coordenadas. Você sempre pode alterá-la tocando em \'Opções\'.</string>
     <string name="fast_coordinates_input">Inserção de coordenadas rápida</string>
     <string name="use_location">Usar posição</string>
     <string name="add_location_as_first_point_descr">Adicione sua posição como ponto de partida para planejar a rota perfeita.</string>
@@ -1991,10 +1991,10 @@ Pôr do Sol: %2$s</string>
     <string name="move_to_history">Mover para o histórico</string>
     <string name="group_will_be_removed_after_restart">O grupo será excluído na próxima vez em que reiniciar o aplicativo.</string>
     <string name="show_arrows_on_the_map">Mostrar setas no mapa</string>
-    <string name="remove_from_map_markers">Excluir dos marcadores de mapa</string>
-    <string name="descendingly">decrescente</string>
-    <string name="ascendingly">ascendente</string>
-    <string name="date_added">Data adicionada</string>
+    <string name="remove_from_map_markers">Remover dos \'Marcadores de mapa\'</string>
+    <string name="descendingly">Z-A</string>
+    <string name="ascendingly">A-Z</string>
+    <string name="date_added">Adicionado</string>
     <string name="order_by">Ordenar por:</string>
     <string name="marker_show_distance_descr">Selecionar como indicar distância e orientação para marcadores de mapa na tela do mapa:</string>
     <string name="map_orientation_change_in_accordance_with_speed_descr">Selecione a velocidade em que a orientação muda de \'Na direção do movimento\' para \'Na direção da bússola\'.</string>
@@ -2051,7 +2051,7 @@ Pôr do Sol: %2$s</string>
     <string name="mapillary_menu_title_username">Nome de usuário</string>
     <string name="mapillary_menu_filter_description">Filtrar imagens por quem enviou, por data ou por tipo. Ativo só com um zoom bem próximo.</string>
     <string name="shared_string_permissions">Permissões</string>
-    <string name="import_gpx_failed_descr">O OsmAnd não pôde importar o arquivo. Favor verificar se o OsmAnd tem permissão para ler arquivo de sua localização.</string>
+    <string name="import_gpx_failed_descr">Não foi possível importar o arquivo. Por favor, assegure que OsmAnd tem permissão para lê-lo.</string>
     <string name="distance_moving">Distância corrigida</string>
     <string name="mapillary_image">Imagem do Mapillary</string>
     <string name="open_mapillary">Abrir o Mapillary</string>
@@ -2087,7 +2087,7 @@ Pôr do Sol: %2$s</string>
     <string name="srtm_color_scheme">Esquema de cores</string>
     <string name="make_round_trip">Fazer viagem de ida e volta</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Evitar estradas de gelo, vaus</string>
-    <string name="routing_attr_avoid_ice_roads_fords_description">Evitar estradas de gelo e vaus.</string>
+    <string name="routing_attr_avoid_ice_roads_fords_description">Evita estradas de gelo e vaus.</string>
     <string name="map_orientation_change_in_accordance_with_speed">Limite para orientação do mapa</string>
     <string name="quick_action_show_navigation_finish_dialog">Exibir \'Navegação finalizada\'</string>
     <string name="mapillary_menu_title_tile_cache">Cache de quadrícula</string>
@@ -2130,9 +2130,9 @@ Pôr do Sol: %2$s</string>
     <string name="waypoints_added_to_map_markers">Pontos de passagem adicionados nos marcadores de mapa</string>
     <string name="show_passed">Mostrar o que passou</string>
     <string name="hide_passed">Ocultar o que passou</string>
-    <string name="modify_the_search_query">Modificar a consulta de pesquisa.</string>
+    <string name="modify_the_search_query">Modifique a sua pesquisa.</string>
     <string name="empty_state_osm_edits">Criar ou modificar objetos OSM</string>
-    <string name="empty_state_osm_edits_descr">Criar ou modificar POI do OSM, abrir ou comentar sobre Notas do OSM, e contribuir com arquivos GPX gravados.</string>
+    <string name="empty_state_osm_edits_descr">Criar ou modificar POIs do OSM, abrir ou comentar sobre Notas do OSM, e contribuir com arquivos GPX gravados.</string>
     <string name="shared_string_deleted">Excluído</string>
     <string name="shared_string_edited">Editado</string>
     <string name="shared_string_added">Adicionado</string>
@@ -2566,10 +2566,10 @@ Pôr do Sol: %2$s</string>
 \n</string>
     <string name="lang_lo">Laociano</string>
     <string name="show_closed_notes">Mostrar notas encerradas</string>
-    <string name="switch_osm_notes_visibility_desc">Mostrar/Ocultar notas OSM no mapa.</string>
+    <string name="switch_osm_notes_visibility_desc">Mostrar/ocultar notas OSM no mapa.</string>
     <string name="shared_string_gpx_file">Arquivo GPX</string>
     <string name="osc_file">Arquivo OSC</string>
-    <string name="choose_file_type">Escolha o tipo de arquivo</string>
+    <string name="choose_file_type">Selecione o tipo de arquivo</string>
     <string name="show_tunnels">Túneis</string>
     <string name="shared_string_current">Atual</string>
     <string name="last_intermediate_dest_description">Adiciona parada intermediária</string>
@@ -2589,8 +2589,8 @@ Pôr do Sol: %2$s</string>
     <string name="copy_location_name">Copiar nome de Ponto/POI</string>
     <string name="toast_empty_name_error">Localização sem nome</string>
     <string name="tunnel_warning">Túnel à frente</string>
-    <string name="distance_farthest">Distância: o mais distante primeiro</string>
-    <string name="distance_nearest">Distância: o mais próximo primeiro</string>
+    <string name="distance_farthest">O mais distante primeiro</string>
+    <string name="distance_nearest">O mais próximo primeiro</string>
     <string name="enter_lon">Digite a longitude</string>
     <string name="enter_lat">Digite a latitude</string>
     <string name="enter_lat_and_lon">Digite a latitude e longitude</string>
@@ -2651,7 +2651,7 @@ Pôr do Sol: %2$s</string>
     <string name="download_maps_travel">Guias de viagem</string>
     <string name="shared_string_wikivoyage">Wikivoyage</string>
     <string name="article_removed">Artigo excluído</string>
-    <string name="wikivoyage_search_hint">Pesquisar: país, cidade, estado</string>
+    <string name="wikivoyage_search_hint">Pesquisar país, cidade ou estado</string>
     <string name="shared_string_read">Ler</string>
     <string name="saved_articles">Artigos marcados</string>
     <string name="shared_string_explore">Explorar</string>
@@ -2677,10 +2677,8 @@ Pôr do Sol: %2$s</string>
     <string name="get_unlimited_access">Obtenha acesso ilimitado</string>
     <string name="wikivoyage_travel_guide">Guias de Viagem</string>
     <string name="wikivoyage_travel_guide_descr">Explore os guias Wikivoyage para os lugares mais interessantes do planeta no OsmAnd sem precisar de conexão com a internet.</string>
-    <string name="monthly_map_updates">Atualizações de mapa: <b>mensal</b>
-    </string>
-    <string name="daily_map_updates">Atualizações de mapa: <b>a cada hora</b>
-    </string>
+    <string name="monthly_map_updates"> string name=\"lat_lon_pattern\"&gt;Lat: %1$.5f Lon: %2$.5f&lt;/string </string>
+    <string name="daily_map_updates"> string name=\"lat_lon_pattern\"&gt;Lat: %1$.5f Lon: %2$.5f&lt;/string </string>
     <string name="in_app_purchase">Compra no aplicativo</string>
     <string name="in_app_purchase_desc">Pagamento uma só vez</string>
     <string name="in_app_purchase_desc_ex">Uma vez adquirido, ele sempre será disponível para você.</string>
@@ -2691,7 +2689,7 @@ Pôr do Sol: %2$s</string>
     <string name="wikipedia_offline">Wikipédia offline</string>
     <string name="contour_lines_hillshade_maps">Mapas de curvas de nível e sombras de relevo</string>
     <string name="purchase_dialog_title">Escolher plano</string>
-    <string name="purchase_dialog_subtitle">Escolha o item adequado:</string>
+    <string name="purchase_dialog_subtitle">Escolha o item adequado</string>
     <string name="download_wikipedia_label">Baixar dados da Wikipédia</string>
     <string name="open_in_browser_wiki">Abrir artigo online</string>
     <string name="open_in_browser_wiki_description">Veja o artigo em um navegador.</string>
@@ -2723,22 +2721,22 @@ Pôr do Sol: %2$s</string>
     <string name="get_osmand_live">Adquira OsmAnd Live para desbloquear todos estes recursos:
 \nAtualização diária de mapa com downloads ilimitados, todos os plugins grátis e pagos, Wikipédia, Wikivoyage e muito mais.</string>
     <string name="unirs_render_descr">Modificação do estilo padrão para aumentar o contraste de vias de pedestre e bicicleta. Usa as cores Mapnik antigo.</string>
-    <string name="off_road_render_descr">Adequado para uso durante a condução off-road e com imagens de satélite verde usadas como mapa de fundo. Pontos-chave: espessura de vias principais reduzida, maior espessura de caminhos, trilhas, ciclovias e outras rotas. Baseado no estilo \'Topo\'.</string>
-    <string name="nautical_render_descr">Estilo de navegação náutica. Principais características: boias, faróis, rios, rotas e marcas marítimas, portos, serviços de balizamento, batimetria.</string>
-    <string name="light_rs_render_descr">Estilo simples e contrastante para navegação do carro. Cômodo aos olhos no modo noturno. Principais características: curvas de nível, estradas em laranja contrastante, objetos secundários menos distrativos.</string>
+    <string name="off_road_render_descr">Para condução off-road com base no estilo \"Topo\" e para utilização com imagens de satélite verdes como mapa de fundo. Espessura de via principal reduzido, espessura das trilhas, caminhos, ciclovias e outras vias aumentado.</string>
+    <string name="nautical_render_descr">Para navegação náutica. Apresenta boias, faróis, vias fluviais, vias e sinais marítimos, portos, serviços de navegação e curvas batimétricas.</string>
+    <string name="light_rs_render_descr">Estilo de condução simples. Modo noturno suave, curvas de nível, estradas em laranja contrastante, escurece objetos secundários do mapa.</string>
     <string name="open_wikipedia_link_online">Abrir link da Wikipedia online</string>
     <string name="read_wikipedia_offline_description">Assine OsmAnd Live para ler artigos da Wikipédia e Wikivoyage offline.</string>
-    <string name="ski_map_render_descr">Estilo esqui. Principais características: processa pistas, teleféricos e outros recursos de esqui de forma conveniente. Objetos de mapa secundário menos distrativos.</string>
+    <string name="ski_map_render_descr">Para esquiar. Possui pistas, teleféricos, pistas de esqui, pistas de cross country, etc. Escurece objetos secundários do mapa.</string>
     <string name="error_notification_desc">Favor enviar uma captura de tela desta notificação para support@osmand.net</string>
     <string name="quick_action_edit_actions">Editar ações</string>
-    <string name="start_editing_card_description">Você pode e é convidado a editar qualquer artigo do Wikivoyage. Compartilhe conhecimento, experiência, talento e sua atenção</string>
+    <string name="start_editing_card_description">Você pode e é convidado a editar qualquer artigo do Wikivoyage. Compartilhe conhecimento, experiência, talento e sua atenção.</string>
     <string name="coord_input_edit_point">Editar ponto</string>
     <string name="coord_input_add_point">Adicionar ponto</string>
     <string name="coord_input_save_as_track">Salvar como trilha</string>
     <string name="coord_input_save_as_track_descr">Você adicionou %1$s pontos. Digite um nome de arquivo e toque em \"Salvar\".</string>
-    <string name="topo_render_descr">Estilo de contraste projetado principalmente para caminhadas, trekking e ciclismo na natureza. Boa legibilidade sob iluminação externa complexa. Principais características: estradas e objetos naturais contrastantes, diferentes tipos de rotas, curvas de nível com configurações avançadas, mais detalhes conforme níveis de zoom do que o estilo padrão. Opção de integridade de superfície permite distinguir a qualidade de superfície da estrada. Sem modo noite.</string>
-    <string name="mapnik_render_descr">Antigo estilo de renderização padrão do \'Mapnik\'. Principais características: as cores são similares ao estilo \'Mapnik\'.</string>
-    <string name="default_render_descr">Estilo de uso geral. Renderização simplificada mais limpa em cidades densamente povoadas. Principais características: curvas de nível, rotas, qualidade de superfície, restrições de acesso, escudos rodoviários, renderização de caminhos de acordo com a escala SAC, características de esporte em corredeiras.</string>
+    <string name="topo_render_descr">Para caminhadas, trekking e ciclismo na natureza. Legível ao ar livre. Estradas e objetos naturais contrastantes, diferentes tipos de rotas, opções avançadas de curvas de nível, detalhes extras. O ajuste da integridade da superfície distingue a qualidade da estrada. Sem modo noturno.</string>
+    <string name="mapnik_render_descr">Antigo estilo padrão \'Mapnik\'. Cores parecidas com \'Mapnik\'.</string>
+    <string name="default_render_descr">Estilo de uso geral. Cidades densas mostradas de forma limpa. Apresenta curvas de nível, rotas, qualidade da superfície, restrições de acesso, símbolos de estrada, caminhos renderizados conforme a escala SAC, itens de esporte em corredeiras.</string>
     <string name="osmand_extended_description_part8">OsmAnd é um software aberto desenvolvido ativamente. Todos podem contribuir para o app reportando bugs, melhorando traduções ou programando novas funcionalidades. Além disso, o projeto conta com contribuições financeiras para financiar a programação e testes de novas funcionalidades.
 \nCobertura de mapa e qualidade aproximada:
 \n• Europa Ocidental: ****
@@ -2753,7 +2751,7 @@ Pôr do Sol: %2$s</string>
 \n• Antártida: *
 \nA maioria dos países ao redor do globo é disponível para download!
 \nObtenha um navegador confiável em seu país - seja ele França, Alemanha, México, Reino Unido, Espanha, Holanda, EUA, Rússia, Brasil ou qualquer outro.</string>
-    <string name="touring_view_render_descr">Estilo de elevado detalhe para fins de turismo. Inclui todas as opções de configuração de estilo padrão, além disso: exibe o máximo de detalhes possível, em particular todas as estradas, caminhos e outras maneiras de viajar. Distinção visual claro entre todos os tipos de caminhos diferentes, similar a muitos atlas turismo. Esquema de cores de alto contraste para uso ao ar livre, modo dia e noite.</string>
+    <string name="touring_view_render_descr">Estilo de turismo com alto contraste e máximo detalhe. Inclui todas as opções do estilo OsmAnd padrão, enquanto exibe o máximo de detalhes, em particular estradas, caminhos e outras formas de viajar. Distinção clara do \"atlas turístico\" entre os tipos de estradas. Adequado para uso diurno, noturno e ao ar livre.</string>
     <string name="wikivoyage_download_pics_descr">Imagens do artigo podem ser baixadas para uso offline.
 \nSempre disponível em \'Explorar\' → \'Opções\'.</string>
     <string name="osmand_extended_description_part2">Navegação GPS
@@ -2791,9 +2789,9 @@ Pôr do Sol: %2$s</string>
     <string name="point_deleted">Ponto %1$s foi excluído</string>
     <string name="shared_string_world">Mundo</string>
     <string name="thank_you_for_feedback">Obrigado por seus comentários</string>
-    <string name="poi_cannot_be_found">Nó ou caminho não pode ser encontrado.</string>
+    <string name="poi_cannot_be_found">Não foi possível encontrar o nó ou o caminho.</string>
     <string name="search_no_results_feedback">Nenhum resultado de pesquisa\? 
-\nMande-nos o seu feedback</string>
+\nMande-nos o seu comentário</string>
     <string name="commiting_way">Enviando caminho…</string>
     <string name="increase_search_radius_to">Aumentar raio de pesquisa para %1$s</string>
     <string name="send_search_query">Enviar consulta de pesquisa?</string>
@@ -2853,9 +2851,7 @@ Pôr do Sol: %2$s</string>
 \n 
 \n• Outras correções de bugs 
 \n</string>
-    <string name="send_search_query_description">Enviaremos a sua pesquisa: <b>\"%1$s\"</b>, bem como a sua localização.<br/>
-        <br/> Nenhuma informação pessoal é coletada, os dados de pesquisa são usados apenas para melhorar o algoritmo de pesquisa.<br/>
-    </string>
+    <string name="send_search_query_description"> string name=\"lat_lon_pattern\"&gt;Lat: %1$.5f Lon: %2$.5f&lt;/string </string>
     <string name="osm_live_subscriptions">Assinaturas</string>
     <string name="mapillary_menu_title_pano">Exibir só imagens 360°</string>
     <string name="shared_string_launch">Iniciar</string>
@@ -2975,7 +2971,7 @@ Pôr do Sol: %2$s</string>
     <string name="rendering_attr_surface_mud_name">Lama</string>
     <string name="rendering_attr_surface_salt_name">Sal</string>
     <string name="rendering_attr_highway_class_bridleway_name">Estrada equestre</string>
-    <string name="public_transport_warning_descr_blog">Saiba mais sobre como OsmAnd calcula as rotas em nosso blog.</string>
+    <string name="public_transport_warning_descr_blog">Leia mais sobre o roteamento OsmAnd em nosso blog.</string>
     <string name="public_transport_warning_title">A navegação de transporte público está atualmente em teste beta, espere erros e imprecisões.</string>
     <string name="add_intermediate">Adicionar ponto intermediário</string>
     <string name="shared_string_walk">Ande</string>
@@ -3014,7 +3010,7 @@ Pôr do Sol: %2$s</string>
     <string name="files_moved">Arquivos %1$d movidos (%2$s).</string>
     <string name="files_copied">Arquivos %1$d copiados (%2$s).</string>
     <string name="files_failed">Não pode copiar %1$d arquivos (%2$s).</string>
-    <string name="files_present">"%1$d  arquivos (%2$s) estão presentes no local anterior \'%3$s\'."</string>
+    <string name="files_present">%1$d arquivos (%2$s) estão presentes no local anterior \'%3$s\'.</string>
     <string name="move_maps">Mover mapas</string>
     <string name="dont_move_maps">Não Mover</string>
     <string name="public_transport_ped_route_title">A rota a pé é de aproximadamente %1$s e pode ser mais rápida do que por transporte público</string>
@@ -3029,9 +3025,9 @@ Pôr do Sol: %2$s</string>
     <string name="button_rate">OK</string>
     <string name="shared_string_privacy_policy">Política de privacidade</string>
     <string name="help_us_make_osmand_better">Ajude-nos a fazer o OsmAnd melhor</string>
-    <string name="make_osmand_better_descr">Permita OsmAnd coletar e processar dados de uso de aplicativos anônimos. Não coletamos ou guardamos dados sobre sua posição, ou sobre quaisquer locais que você visualize no mapa.
+    <string name="make_osmand_better_descr">Permita OsmAnd coletar e processar dados anônimos de uso do aplicativo. Não são recolhidos dados sobre a sua posição ou localidades que você vê no mapa.
 \n
-\nVocê pode alterar sua seleção a qualquer momento em Configurações &gt; Privacidade e Segurança.</string>
+\nConfigure a qualquer momento em \'Configurações\' → \'Privacidade e Segurança\'.</string>
     <string name="choose_data_to_share">Escolha o tipo de dados que você deseja compartilhar:</string>
     <string name="downloaded_maps">Mapas baixados</string>
     <string name="visited_screens">Telas visitadas</string>
@@ -3093,7 +3089,7 @@ Pôr do Sol: %2$s</string>
     <string name="application_profiles">Perfis de aplicação</string>
     <string name="zoom_by_wunderlinq_descr">Altere o zoom do mapa rolando a roda para cima e para baixo. Escape retorna para o aplicativo WunderLINQ.</string>
     <string name="zoom_by_wunderlinq">Use o WunderLINQ para controle</string>
-    <string name="quick_action_need_to_add_item_to_list">Você precisa adicionar pelo menos um item a ser listado nas configurações de ação rápida</string>
+    <string name="quick_action_need_to_add_item_to_list">Adicione ao menos um item à lista nas configurações de \'Ação rápida\'</string>
     <string name="routing_attr_piste_type_downhill_name">Esqui alpino/de declínio</string>
     <string name="routing_attr_piste_type_downhill_description">Pistas de esqui alpino ou de declínio e acesso a teleféricos.</string>
     <string name="routing_attr_piste_type_nordic_name">Cross country/esqui nórdico</string>

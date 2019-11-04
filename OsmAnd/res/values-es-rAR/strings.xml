@@ -904,7 +904,7 @@ Lon %2$s</string>
     <string name="transport_search_desc">Buscar transporte público</string>
     <string name="favourites_search_desc">Una forma de buscar Favoritos</string>
     <string name="offline_navigation_not_available">La navegación sin conexión de OsmAnd, no está disponible temporalmente.</string>
-    <string name="left_side_navigation">Conducir por la izquierda</string>
+    <string name="left_side_navigation">Circular por la izquierda</string>
     <string name="left_side_navigation_descr">Para países donde la gente conduce por el lado izquierdo del camino.</string>
     <string name="local_index_description">Pulsa cualquier objeto para ver más detalles, mantén pulsado para desactivar o borrar. Datos en el dispositivo actualmente (%1$s libre):</string>
     <string name="unknown_from_location">Punto de partida indeterminado</string>
@@ -1028,7 +1028,7 @@ Lon %2$s</string>
     <string name="index_name_oceania">Australia y Oceanía</string>
     <string name="index_name_other">Mapas mundiales y temáticos</string>
     <string name="index_name_wiki">Wikipedia mundial</string>
-    <string name="index_name_voice">Voces grabadas (funciones limitadas)</string>
+    <string name="index_name_voice">Avisos por voz (grabados, funciones limitadas)</string>
     <string name="index_name_tts_voice">Avisos por voz (TTS, preferido)</string>
     <string name="amenity_type_osmwiki">Wikipedia (sin conexión)</string>
     <string name="amenity_type_user_defined">Definido por el usuario</string>
@@ -2237,7 +2237,7 @@ Lon %2$s</string>
     <string name="parking_options">Opciones de estacionamiento</string>
     <string name="full_version_thanks">Gracias por comprar la versión de pago de OsmAnd.</string>
     <string name="routing_attr_relief_smoothness_factor_name">Elegir la fluctuación de elevación</string>
-    <string name="right_side_navigation">Tráfico por la derecha</string>
+    <string name="right_side_navigation">Circular por la derecha</string>
     <string name="driving_region_automatic">Automático</string>
     <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions, y en español, Guía de Navegación Automatizada de OSM) es una aplicación de mapa y navegación con acceso a los datos libres de OpenStreetMap (OSM), en todo el mundo y de alta calidad.
 \n
