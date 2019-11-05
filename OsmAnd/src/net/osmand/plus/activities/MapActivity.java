@@ -167,6 +167,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
+import static net.osmand.plus.OsmandSettings.GENERIC_EXTERNAL_DEVICE;
+import static net.osmand.plus.OsmandSettings.PARROT_EXTERNAL_DEVICE;
+import static net.osmand.plus.OsmandSettings.WUNDERLINQ_EXTERNAL_DEVICE;
 
 public class MapActivity extends OsmandActionBarActivity implements DownloadEvents,
 		OnRequestPermissionsResultCallback, IRouteInformationListener, AMapPointUpdateListener,
@@ -1565,7 +1568,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			// repeat count 0 doesn't work for samsung, 1 doesn't work for lg
 			toggleDrawer();
 			return true;
-		} else if (settings.EXTERNAL_INPUT_DEVICE.get() == 3) {
+		} else if (settings.EXTERNAL_INPUT_DEVICE.get() == PARROT_EXTERNAL_DEVICE) {
 			// Parrot device has only dpad left and right
 			if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT) {
 				changeZoom(-1);
@@ -1574,7 +1577,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				changeZoom(1);
 				return true;
 			}
-		} else if (settings.EXTERNAL_INPUT_DEVICE.get() == 2) {
+		} else if (settings.EXTERNAL_INPUT_DEVICE.get() == WUNDERLINQ_EXTERNAL_DEVICE) {
 			// WunderLINQ device, motorcycle smart phone control
 			if (keyCode == KeyEvent.KEYCODE_DPAD_DOWN) {
 				changeZoom(-1);
@@ -1589,7 +1592,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				startActivity(intent);
 				return true;
 			}
-		} else if (settings.EXTERNAL_INPUT_DEVICE.get() == 1) {
+		} else if (settings.EXTERNAL_INPUT_DEVICE.get() == GENERIC_EXTERNAL_DEVICE) {
 			final int scrollingUnit = 15;
 			if (keyCode == KeyEvent.KEYCODE_MINUS) {
 				changeZoom(-1);
