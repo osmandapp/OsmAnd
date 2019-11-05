@@ -16,6 +16,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AlertDialog.Builder;
 import android.support.v7.widget.SwitchCompat;
@@ -118,6 +120,19 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 		View view = inflater.inflate(R.layout.fragment_live_updates, container, false);
 		listView = (ExpandableListView) view.findViewById(android.R.id.list);
 
+		final OsmandApplication app = getMyApplication();
+		boolean nightMode = !app.getSettings().isLightContent();
+		final SwipeRefreshLayout swipeRefresh = view.findViewById(R.id.swipe_refresh);
+		int swipeColor = ContextCompat.getColor(app, nightMode ? R.color.osmand_orange_dark : R.color.osmand_orange);
+		swipeRefresh.setColorSchemeColors(swipeColor);
+		swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+			@Override
+			public void onRefresh() {
+				adapter.showUpdateDialog();
+				swipeRefresh.setRefreshing(false);
+			}
+		});
+		
 		View bottomShadowView = inflater.inflate(R.layout.card_bottom_divider, listView, false);
 		if (!showSettingsOnly) {
 			listView.addFooterView(bottomShadowView);
@@ -426,21 +441,29 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppPurc
 		private void switchOnLiveUpdates(final OsmandSettings settings) {
 			settings.IS_LIVE_UPDATES_ON.set(true);
 			enableLiveUpdates(true);
+			showUpdateDialog();
+		}
+		
+		private void showUpdateDialog() {
 			if(dataShouldUpdate.size() > 0) {
-				Builder bld = new AlertDialog.Builder(getActivity());
-				bld.setMessage(R.string.update_all_maps_now);
-				bld.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
-					
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						for (LocalIndexInfo li : dataShouldUpdate) {
-							runLiveUpdate(getMyApplication(), li.getFileName(), false);
+				if (dataShouldUpdate.size() == 1) {
+					runLiveUpdate(getMyApplication(), dataShouldUpdate.get(0).getFileName(), false);
+				} else {
+					Builder bld = new AlertDialog.Builder(getActivity());
+					bld.setMessage(R.string.update_all_maps_now);
+					bld.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
+
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							for (LocalIndexInfo li : dataShouldUpdate) {
+								runLiveUpdate(getMyApplication(), li.getFileName(), false);
+							}
+							notifyDataSetChanged();
 						}
-						notifyDataSetChanged();
-					}
-				});
-				bld.setNegativeButton(R.string.shared_string_no, null);
-				bld.show();
+					});
+					bld.setNegativeButton(R.string.shared_string_no, null);
+					bld.show();
+				}
 			}
 		}
 		
