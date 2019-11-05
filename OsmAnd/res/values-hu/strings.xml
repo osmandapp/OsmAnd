@@ -3214,4 +3214,17 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="quick_action_hillshade_show">Domborzatárnyékolás megjelenítése</string>
     <string name="quick_action_hillshade_hide">Domborzatárnyékolás elrejtése</string>
     <string name="quick_action_show_hide_hillshade">Domborzatárnyékolás megjelenítése/elrejtése</string>
+    <string name="track_storage_directory">Nyomvonal tárolási könyvtára</string>
+    <string name="track_storage_directory_descrp">A nyomvonalak a \'rec\' könyvtárban tárolhatók, havi vagy napi bontás szerinti könyvtárakban.</string>
+    <string name="store_tracks_in_rec_directory">Nyomvonalak rögzítése a \'rec\' könyvtárba</string>
+    <string name="store_tracks_in_daily_directories">Nyomvonalak rögzítése napi bontású könyvtárakba</string>
+    <string name="store_tracks_in_daily_directories_descrp">Nyomvonalak rögzítése alkönyvtárakba a rögzítés napja szerint (pl. 2018-01-01).</string>
+    <string name="export_profile">Profil exportálása</string>
+    <string name="exported_osmand_profile">OsmAnd profil: %1$s</string>
+    <string name="overwrite_profile_q">\'%1$s\' profil már létezik. Felülírod\?</string>
+    <string name="export_profile_failed">Profil exportálása sikertelen.</string>
+    <string name="profile_import">Profil importálás:</string>
+    <string name="profile_import_descr">Profil importálásához válaszd ki a megfelelő fájlt a készüléken és nyisd meg az OsmAnd-dal.</string>
+    <string name="file_import_error">%1$s importálás hiba: %2$s</string>
+    <string name="file_imported_successfully">%1$s sikeresen importálva.</string>
 </resources>
