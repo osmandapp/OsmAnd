@@ -3329,4 +3329,11 @@
     <string name="quick_action_hillshade_show">Показать затенение рельефа</string>
     <string name="quick_action_hillshade_hide">Скрыть затенение рельефа</string>
     <string name="quick_action_show_hide_hillshade">Показать/скрыть затенение рельефа</string>
+    <string name="export_profile">Экспорт профиля</string>
+    <string name="exported_osmand_profile">Профиль OsmAnd: %1$s</string>
+    <string name="overwrite_profile_q">Профиль \'%1$s\' уже существует. Перезаписать\?</string>
+    <string name="export_profile_failed">Не удалось экспортировать профиль.</string>
+    <string name="profile_import">Импорт профиля:</string>
+    <string name="profile_import_descr">Чтобы импортировать профиль, выберите его файл на устройстве и откройте его с помощью OsmAnd.</string>
+    <string name="file_imported_successfully">%1$s успешно импортирован.</string>
 </resources>
