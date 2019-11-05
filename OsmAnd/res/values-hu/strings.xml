@@ -496,7 +496,7 @@ Ehhez {1} MB helyre van szükség.
     <string name="max_level_download_tile">Maximális online nagyítás</string>
     <string name="max_level_download_tile_descr">Ne töltsön le online térképcsempéket ezen nagyítási szint felett.</string>
     <string name="route_general_information">Teljes távolság %1$s, utazási idő %2$d óra %3$d perc.</string>
-    <string name="router_service_descr">Online vagy offline útvonaltervező szolgáltatás kiválasztása.</string>
+    <string name="router_service_descr">Online vagy offline útvonaltervező szolgáltatás.</string>
     <string name="router_service">Útvonaltervező szolgáltatás</string>
     <string name="sd_dir_not_accessible">Az adattárolási könyvtár nem érhető el a memóriakártyán!</string>
     <string name="download_question">Letöltés {0} - {1} ?</string>
@@ -528,9 +528,9 @@ Ehhez {1} MB helyre van szükség.
     <string name="loading_cities">Települések betöltése…</string>
     <string name="poi">POI</string>
     <string name="error_occurred_saving_gpx">A GPX fájlt nem sikerült menteni</string>
-    <string name="error_calculating_route">Nem sikerült útvonalat tervezni</string>
-    <string name="error_calculating_route_occured">Nem sikerült útvonalat tervezni</string>
-    <string name="empty_route_calculated">Üres útvonal lett tervezve</string>
+    <string name="error_calculating_route">Nem sikerült útvonalat tervezni.</string>
+    <string name="error_calculating_route_occured">Nem sikerült útvonalat tervezni.</string>
+    <string name="empty_route_calculated">Üres útvonal lett tervezve.</string>
     <string name="new_route_calculated_dist">Új útvonal tervezve, távolság</string>
     <string name="arrived_at_destination">Megérkeztél a célponthoz</string>
     <string name="invalid_locations">Érvénytelen koordináták</string>
@@ -553,9 +553,9 @@ Ehhez {1} MB helyre van szükség.
     <string name="shared_string_settings">Beállítások</string>
     <string name="save_current_track_descr">Jelenlegi nyomvonal mentése GPX fájlba most.</string>
     <string name="save_current_track">Jelenlegi nyomvonal mentése</string>
-    <string name="save_track_interval_descr">Válassz naplózási időközt a navigáció alatti útvonalrögzítéshez.</string>
+    <string name="save_track_interval_descr">Add meg a naplózási időközt a navigáció alatti útvonalrögzítéshez</string>
     <string name="save_track_interval">Rögzítési sűrűség navigáció közben</string>
-    <string name="save_track_to_gpx_descrp">Navigáció közben a GPX útvonal automatikusan mentődik az OsmAnd „tracks” könyvtárába.</string>
+    <string name="save_track_to_gpx_descrp">Navigáció közben a GPX útvonal automatikusan mentésre kerül az OsmAnd „tracks” könyvtárába.</string>
     <string name="save_track_to_gpx">Nyomvonal automatikus felvétele navigáció közben</string>
     <string name="update_tile">Térkép frissítése</string>
     <string name="reload_tile">Térképcsempe újratöltése</string>
@@ -734,7 +734,7 @@ Ehhez {1} MB helyre van szükség.
     <string name="native_app_allocated_memory_descr">Alkalmazás által lefoglalt összes natív memória %1$s MB (Dalvik %2$s MB, egyéb %3$s MB).
 Proporcionális memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</string>
     <string name="native_app_allocated_memory">Összes natív memória</string>
-    <string name="select_animate_speedup">Útvonalszimuláció sebessége</string>
+    <string name="select_animate_speedup">Útvonalszimuláció sebessége:</string>
     <string name="osmand_parking_hours">Óra</string>
     <string name="osmand_parking_minutes">Perc</string>
     <string name="osmand_parking_position_description_add_time">Autó leparkolva:</string>
@@ -1189,8 +1189,8 @@ Proporcionális memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</str
     <string name="interrupt_music">Zene szüneteltetése</string>
     <string name="share_route_as_gpx">Útvonal megosztása GPX-ben</string>
     <string name="share_route_subject">OsmAnd segítségével megosztott útvonal</string>
-    <string name="arrival_distance">Megérkezés bemondása</string>
-    <string name="arrival_distance_descr">Milyen korán szeretnéd hallani a megérkezés bejelentését?</string>
+    <string name="arrival_distance">Érkezés bemondása</string>
+    <string name="arrival_distance_descr">Milyen korán szeretnéd hallani az érkezés bejelentését\?</string>
     <string name="keep_informing_never">Csak kézzel (koppintás a nyílra)</string>
     <string name="keep_informing_descr">Navigációs utasítások újra bemondása rendszeres időközönként.</string>
     <string name="keep_informing">Navigációs utasítások ismétlése</string>
@@ -2062,7 +2062,7 @@ Jelenleg csak {2} MB érhető el.</string>
     <string name="gpx_add_track">További hozzáadása…</string>
     <string name="gpx_appearance">Megjelenés</string>
     <string name="trip_rec_notification_settings">Felvétel gyors indításának engedélyezése</string>
-    <string name="trip_rec_notification_settings_desc">Az útvonalrögzítés megindítását lehetővé tevő rendszerértesítés megjelenítése.</string>
+    <string name="trip_rec_notification_settings_desc">Az útvonalrögzítést lehetővé tevő rendszerértesítés megjelenítése.</string>
     <string name="shared_string_notifications">Értesítések</string>
     <string name="shared_string_pause">Szünet</string>
     <string name="shared_string_trip">Túra</string>
@@ -2298,7 +2298,7 @@ Kérlek adj meg egy teljes kódot</string>
 \n
 \nÉlvezd a hangalapú és vizuális navigációs szolgáltatást, tekints meg érdekes helyeket (POI-kat), hozz létre és kezelj GPX nyomvonalakat, szintvonalak és magasságinformációk használatával (egy plugin segítségével), válassz az autós, kerékpáros és gyalogos üzemmód közül, szerkessz OSM-et és használd ki a számos egyéb lehetőséget.</string>
     <string name="save_poi_too_many_uppercase">A név túl sok nagybetűt tartalmaz. Folytatod?</string>
-    <string name="private_access_routing_req">A célpont korlátozott hozzáférésű területen található. Engedélyezed a magánutakat is ennél az útvonaltervnél\?</string>
+    <string name="private_access_routing_req">A célpont korlátozott hozzáférésű területen található. Engedélyezed a magánutak használatát ennél az útvonaltervnél\?</string>
     <string name="restart_search">Keresés újraindítása</string>
     <string name="increase_search_radius">Keresett terület szélesítése</string>
     <string name="nothing_found">"Nincs találat "</string>
@@ -2681,7 +2681,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="get_osmand_live">Az összes funkció feloldásához szerezz be OsmAnd Live-ot: Napi térképfrissítés korlátlan számú letöltéssel, összes fizetős és ingyenes bővítmény, Wikipédia, Wikivoyage és sok más.</string>
     <string name="unirs_render_descr">Az alapértelmezett stílus módosítása a gyalogos és kerékpáros utak kontrasztosabb megjelenítése érdekében. Mapnik színeket használ.</string>
     <string name="off_road_render_descr">Off-road vezetéshez hasznos. Alkalmas arra, hogy zöld műholdképeket tegyél alá háttérnek. Főbb tulajdonságok: vékonyabb főutak, vastagabb földutak, ösvények, kerékpárutak és egyéb utak. A „Topo” stíluson alapul.</string>
-    <string name="nautical_render_descr">Hajózási navigációs stílus. Főbb tulajdonságok: bóják, világítótornyok, folyók, tengeri útvonalak és jelzések, kikötők, hajózási jelzések, mélységvonalak.</string>
+    <string name="nautical_render_descr">Hajózási navigációhoz. Főbb tulajdonságok: bóják, világítótornyok, folyók, tengeri útvonalak és jelzések, kikötők, hajózási jelzések, mélységvonalak.</string>
     <string name="ski_map_render_descr">Téli sort stílus. Főbb tulajdonságok: megjeleníti a sípályákat, sílifteket és egyéb objektumokat kényelmes módon. A többi térképobjektum kevésbé zavaróan jelenik meg.</string>
     <string name="light_rs_render_descr">Egyszerű és kontrasztos stílus autós navigációhoz. Éjszakai módban kellemes a szemnek. Főbb jellemzők: szintvonalak, kontrasztos narancs színű utak, a kevésbé zavaró egyéb térképobjektumok.</string>
     <string name="topo_render_descr">Kontrasztos stílus első sorban túrázáshoz, kiránduláshoz, kerékpározáshoz a természetben. Jól látható erős fényben. Főbb jellemzők: Kontrasztos utak és természeti objektumok, haladó beállítási lehetőség utakhoz és szintvonalakhoz, több részlet az alapértelmezett stílus azonos nagyítási szintjéhez képest. A burkolatállapot opció lehetővé teszi az utak állapotának megkülönböztetését. Nincs éjszakai mód.</string>
@@ -2922,7 +2922,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="avoid_pt_types_descr">A navigáció során elkerülendő közlekedési módok kijelölése:</string>
     <string name="avoid_pt_types">Közlekedési módok elkerülése…</string>
     <string name="shared_string_walk">Séta</string>
-    <string name="public_transport_warning_descr_blog">Az OsmAnd útvonalszámításának módjáról a blogunkon olvashat.</string>
+    <string name="public_transport_warning_descr_blog">Az OsmAnd útvonalszámításának módjáról a blogunkon olvashatsz.</string>
     <string name="public_transport_warning_title">A tömegközlekedési útvonaltervezés jelenleg bétatesztelési fázisban van, hibák és pontatlanságok előfordulhatnak.</string>
     <string name="add_intermediate">Köztes pont megadása</string>
     <string name="transfers_size">%1$d átszállás</string>
@@ -3065,7 +3065,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="default_speed_setting_title">Alapértelmezett sebesség</string>
     <string name="default_speed_setting_descr">Alapértelmezett sebességek beállításainak módosítása</string>
     <string name="minmax_speed_dialog_title">Legkisebb/legnagyobb sebesség beállítása</string>
-    <string name="default_speed_dialog_msg">Az útvonaltervezés során a megérkezés várható idejének kiszámításához szükséges</string>
+    <string name="default_speed_dialog_msg">Az érkezés várható idejének kiszámításához szükséges</string>
     <string name="new_profile">Új profil</string>
     <string name="shared_string_crash">Összeomlás</string>
     <string name="last_launch_crashed">Az OsmAnd legutóbbi indítása nem sikerült. Kérjük, a hibaüzenet megosztásával segítsen az OsmAnd javításában.</string>
@@ -3080,8 +3080,8 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="edit_profile_setup_map_subtitle">A profil alapértelmezett térképbeállításainak kijelölése</string>
     <string name="edit_profile_screen_options_subtitle">A profil alapértelmezett képernyő-beállításainak kijelölése</string>
     <string name="edit_profile_nav_settings_subtitle">A profil alapértelmezett navigációs beállításainak kijelölése</string>
-    <string name="routing_attr_max_num_changes_description">A módosítások legnagyobb számának megadása</string>
-    <string name="routing_attr_max_num_changes_name">Módosítások száma</string>
+    <string name="routing_attr_max_num_changes_description">Az átszállások legnagyobb számának megadása</string>
+    <string name="routing_attr_max_num_changes_name">Átszállások száma</string>
     <string name="turn_screen_on_router">Bekapcsolás irányváltáskor</string>
     <string name="turn_screen_on_time_descr">A képernyő kikapcsolásáig hátralévő idő beállítása.</string>
     <string name="turn_screen_on_sensor">Közelségérzékelő használata</string>
@@ -3133,16 +3133,16 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="routing_attr_difficulty_preference_description">Az ilyen nehézségű pályák részesülnek előnyben, azonban az útvonalba továbbra is bekerülhetnek nehezebb vagy könnyebb pályák, ha úgy rövidebb.</string>
     <string name="routing_attr_freeride_policy_name">Pályán kívül</string>
     <string name="routing_attr_freeride_policy_description">A freeride és pályán kívüli utak nem hivatalos útvonalak és átjárók. Általában nem egyengetik el őket, nincsenek karbantartva, este pedig nem ellenőrzik őket. Belépés csak saját felelősségre.</string>
-    <string name="configure_profile_info">"Az összes alábbi beállítás  csak a kiválasztott profil beállításait módosítja."</string>
+    <string name="configure_profile_info">Profil beállításai:</string>
     <string name="coordinates_format_info">A kiválasztott formátum az alkalmazás összes területén alkalmazva lesz.</string>
-    <string name="change_default_settings">Alapértelmezett beállítások módosítása</string>
-    <string name="discard_changes">Változtatások elvetése</string>
-    <string name="apply_to_current_profile">Alkalmazás a jelenlegi %1$s profilra</string>
+    <string name="change_default_settings">Beállítás módosítása</string>
+    <string name="discard_changes">Változtatás elvetése</string>
+    <string name="apply_to_current_profile">Alkalmazás csak erre: %1$s</string>
     <string name="apply_to_all_profiles">Alkalmazás az összes profilra</string>
     <string name="start_up_message_pref">Indítási üzenet</string>
     <string name="analytics_pref_title">Analitika</string>
-    <string name="turn_screen_on_info">Térkép megjelenítése navigáció közben a lezárási képernyő felett.</string>
-    <string name="route_parameters_info">Ezek a beállítások az útvonaltervezést befolyásolják. A kiválasztott profilban kerülnek alkalmazásra: %1$s.</string>
+    <string name="turn_screen_on_info">Térkép megjelenítésea a lezárási képernyő felett navigáció közben.</string>
+    <string name="route_parameters_info">Útvonaltervezési beállítások erre a profilra: %1$s.</string>
     <string name="wake_time">Felébresztési idő</string>
     <string name="units_and_formats">Mértékegységek és formátumok</string>
     <string name="appearance">Megjelenés</string>
@@ -3151,7 +3151,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="configure_navigation">Navigáció testreszabása</string>
     <string name="general_settings_profile_descr">Téma, mértékegység, régió</string>
     <string name="configure_profile">Profil testreszabása</string>
-    <string name="screen_alerts_descr">A riasztások a képernyő bal alsó sarkában fognak megjelenni a navigáció közben.</string>
+    <string name="screen_alerts_descr">A riasztások a képernyő bal alsó sarkában jelennek meg a navigáció közben.</string>
     <string name="language_and_output">Nyelv és kimenet</string>
     <string name="manage_profiles_descr">Profilok létrehozása, importálása, szerkesztése</string>
     <string name="manage_profiles">Alkalmazásprofilok kezelése…</string>
@@ -3184,7 +3184,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="contour_lines_and_hillshade">Szintvonalak és domborzatárnyékolás</string>
     <string name="routing_attr_prefer_unpaved_name">Burkolatlan utak előnyben részesítése</string>
     <string name="routing_attr_prefer_unpaved_description">Burkolatlan utak előnyben részesítése.</string>
-    <string name="apply_preference_to_all_profiles">Ezt a módosítást alkalmazhatod az összes profilra vagy csak a kiválasztottra.</string>
+    <string name="apply_preference_to_all_profiles">Ezt a módosítást alkalmazhatod az összes profilra vagy csak a jelenleg kiválasztottra.</string>
     <string name="shared_preference">Megosztott</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">Burkolatlan utak előnyben részesítése</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">Burkolatlan utak előnyben részesítése.</string>
@@ -3192,8 +3192,8 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="osmand_settings">OsmAnd beállítások</string>
     <string name="shared_string_calculate">Kiszámít</string>
     <string name="layer_osm_edits">OSM szerkesztések</string>
-    <string name="quick_action_contour_lines_descr">A műveletgombra koppintás megjeleníti vagy elrejti a szintvonalakat a térképen</string>
-    <string name="quick_action_hillshade_descr">A műveletgombra koppintás megjeleníti vagy elrejti a domborzatárnyékolást a térképen</string>
+    <string name="quick_action_contour_lines_descr">Egy kapcsoló, ami megjeleníti vagy elrejti a szintvonalakat a térképen.</string>
+    <string name="quick_action_hillshade_descr">Egy kapcsoló, ami megjeleníti vagy elrejti a domborzatárnyékolást a térképen.</string>
     <string name="tts_initialization_error">Szövegfelolvasó motor indítása sikertelen</string>
     <string name="data_storage_preference_summary">%1$s • %2$s</string>
     <string name="data_storage_space_description">%1$s GB szabad (%2$s GB-ból)</string>
@@ -3227,4 +3227,6 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="profile_import_descr">Profil importálásához válaszd ki a megfelelő fájlt a készüléken és nyisd meg az OsmAnd-dal.</string>
     <string name="file_import_error">%1$s importálás hiba: %2$s</string>
     <string name="file_imported_successfully">%1$s sikeresen importálva.</string>
+    <string name="app_mode_utv">Egymás mellett</string>
+    <string name="rendering_attr_piste_difficulty_aerialway_name"></string>
 </resources>
