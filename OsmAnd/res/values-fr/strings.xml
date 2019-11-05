@@ -145,7 +145,7 @@
     <string name="installing_new_resources">Dépaquetage de nouvelles données…</string>
     <string name="internet_connection_required_for_online_route">Vous avez sélectionné un moteur de calcul d\'itinéraire en ligne, mais il n\'y a aucune connexion Internet.</string>
     <string name="tts_language_not_supported_title">Langue non disponible</string>
-    <string name="tts_language_not_supported">La langue sélectionnée n\'est pas disponible dans le moteur de synthèse vocale installé. Voulez-vous rechercher d\'autres moteurs de synthèse vocale sur Google Play ? Sinon la langue par défaut sera utilisée.</string>
+    <string name="tts_language_not_supported">La langue sélectionnée n\'est pas disponible dans le moteur de synthèse vocale installé. Souhaitez-vous rechercher d\'autres moteurs de synthèse vocale sur Google Play \? Sinon la langue par défaut sera utilisée.</string>
     <string name="tts_missing_language_data_title">Données manquantes</string>
     <string name="tts_missing_language_data">Souhaitez-vous installer la langue sélectionnée depuis Google Play ?</string>
     <string name="gpx_option_reverse_route">Inverser l\'itinéraire GPX</string>
@@ -343,9 +343,9 @@
     <string name="gps_provider">GPS</string>
     <string name="int_seconds">secondes</string>
     <string name="int_min">min.</string>
-    <string name="background_service_int_descr">Définissez un intervalle d\'actualisation de votre position lors de l\'exécution en tâche de fond</string>
+    <string name="background_service_int_descr">Intervalle d\'actualisation de votre position lors de l\'exécution en arrière-plan :</string>
     <string name="background_service_int">Intervalle de réveil du GPS</string>
-    <string name="background_service_provider_descr">Sélectionnez une source de géolocalisation pour le service arrière-plan.</string>
+    <string name="background_service_provider_descr">Sélectionnez une méthode de géolocalisation pour le service arrière-plan :</string>
     <string name="background_service_provider">Fournisseur de géolocalisation</string>
     <string name="background_router_service_descr">Suit votre position lorsque l\'écran est éteint.</string>
     <string name="background_router_service">Exécuter OsmAnd en tâche de fond</string>
@@ -507,7 +507,7 @@
     <string name="map_view_3d">Vue 3D</string>
     <string name="show_poi_over_map_description">Afficher la sur-couche des derniers points d\'intérêt utilisés.</string>
     <string name="show_poi_over_map">Afficher la sur-couche points d\'intérêt</string>
-    <string name="map_tile_source_descr">Sélectionnez la source des cartes dites tuiles (en ligne ou en cache).</string>
+    <string name="map_tile_source_descr">Sélectionnez la source des cartes : en ligne ou tuiles en cache</string>
     <string name="map_tile_source">Carte en ligne (tuiles)</string>
     <string name="map_source">Source cartographique</string>
     <string name="use_internet">Utiliser Internet</string>
@@ -792,42 +792,45 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="osmand_plus_short_description_80_chars">OsmAnd est un logiciel libre de navigation pouvant fonctionner avec des cartes hors-ligne ou en ligne</string>
     <string name="snap_to_road_descr">Déplacer la position sur la route en cours de navigation.</string>
     <string name="snap_to_road">Déplacer sur la route</string>
-    <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Navigation Directions)
-\n
-\nOsmAnd est un logiciel libre de navigation par satellites utilisant les données du projet OpenStreetMap (OSM). Toutes les données (cartes vectorielles ou à base de tuiles) peuvent être stockées dans la mémoire de l\'appareil pour un usage hors-ligne. OsmAnd permet également le suivi d\'itinéraires en ligne et hors-ligne en fournissant des instructions visuelles et vocales pas à pas.
-\n
-\nFonctionnalités principales :
-\n- Fonctionne complètement hors-ligne
-\n- Cartes hors-lignes dans un format compact (vectoriel) disponibles pour le monde entier
-\n- Téléchargement des cartes pour un pays ou une région directement depuis l\'application
-\n- Possibilité de superposer plusieurs couches, telles que des traces GPX ou de navigation, des points d\'intérêt (PI), des favoris, des courbes de niveaux, les arrêts de transport public et bien d\'autres cartes avec une transparence personnalisable
-\n- Recherche hors-ligne d\'adresses et de lieux (PI)
-\n- Navigation hors-ligne sur des distances moyennes
-\n- Mode voiture, vélo et piéton
-\n- Option de vue jour/nuit automatique
-\n- Option de zoom automatique adapté à la vitesse de déplacement
-\n- Orientation automatique de la carte (fixe, boussole, direction du déplacement).
-\n
-\nLimitations de cette version gratuite d\'OsmAnd :
-\n- Nombre limité de téléchargements
-\n- Pas d\'accès aux points d\'intérêt Wikipédia hors-ligne.
-\n
+    <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Navigation Directions) 
+\n 
+\nOsmAnd est un logiciel libre de navigation par satellites utilisant les données du projet OpenStreetMap (OSM). Toutes les données (cartes vectorielles ou à base de tuiles) peuvent être stockées dans la mémoire de l\'appareil pour un usage hors-ligne. OsmAnd permet également le suivi d\'itinéraires en ligne et hors-ligne en fournissant des instructions visuelles et vocales pas à pas. 
+\n 
+\nFonctionnalités principales : 
+\n- Fonctionne complètement hors-ligne 
+\n- Cartes hors-lignes dans un format compact (vectoriel) disponibles pour le monde entier 
+\n- Téléchargement des cartes pour un pays ou une région directement depuis l\'application 
+\n- Possibilité de superposer plusieurs couches, telles que des traces GPX ou de navigation, des points d\'intérêt (PI), des favoris, des courbes de niveaux, les arrêts de transport public et bien d\'autres cartes avec une transparence personnalisable 
+\n- Recherche hors-ligne d\'adresses et de lieux (PI) 
+\n- Navigation hors-ligne sur des distances moyennes 
+\n- Mode voiture, vélo et piéton 
+\n- Option de vue jour/nuit automatique 
+\n- Option de zoom automatique adapté à la vitesse de déplacement 
+\n- Orientation automatique de la carte (fixe, boussole, direction du déplacement)
+\n- Affichage des limitations de vitesse et des voies de circulation à l\'approche des bifurcations
+\n- Guidage vocale par voix enregistrée ou voix de synthèse.
+\n 
+\nLimitations de cette version gratuite d\'OsmAnd : 
+\n- Nombre limité de téléchargements 
+\n- Pas d\'accès aux points d\'intérêt Wikipédia hors-ligne. 
+\n 
 \nOsmAnd et le développement de nouvelles fonctionnalités dépendent de vos contributions. Vous pouvez acheté la version payante OsmAnd+ ou faire un don en vous rendant sur https://osmand.net.</string>
-    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OpenStreetMap Automated Navigation and Directions)
-\n
+    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OpenStreetMap Automated Navigation and Directions) 
+\n 
 \nOsmAnd+ est un logiciel open source de navigation utilisant les données cartographiques d\'OpenStreetMap. Toutes les données (cartes vectorielles ou à base de tuiles) peuvent être stockées sur l\'appareil pour un usage hors-ligne. En plus de la consultation des cartes, OsmAnd permet la navigation grâce à des instructions détaillées à l\'écran et à un guidage vocal. 
 \n 
 \nOsmAnd+, version payante de l\'application, n\'est pas limitée en nombre de téléchargements et permet d\'obtenir de nouvelles cartes, des mises à jour de cartes existantes ou encore des greffons et d\'autres données (courbes de niveaux, ...). En achetant OsmAnd+ vous contribuez au projet et financez le développement de nouvelles fonctionnalités. 
 \n 
 \nFonctionnalités principales : 
-\n- Fonctionne complètement hors-ligne (après téléchargement des cartes sur l\'appareil)
+\n- Fonctionne complètement hors-ligne (après téléchargement des cartes sur l\'appareil) 
 \n- Téléchargement illimité des cartes pour un pays ou une région directement depuis l\'application 
 \n- Points d\'intérêt Wikipédia hors-ligne, idéal pour les visites touristiques 
 \n- Possibilité de superposer plusieurs couches, telles que des traces, des points d\'intérêt, des favoris, des courbes de niveau, les transports public et bien d\'autres cartes (pistes de ski, chemins de randonnée, circuits à vélo, balisage maritime ...) avec une transparence personnalisable 
 \n- Recherche hors-ligne d\'adresses et de points d\'intérêt 
 \n- Navigation hors-ligne sur des itinéraires de moyenne distance 
 \n- Plusieurs modes de navigation : voiture, cycliste et piéton 
-\n- Options : vue jour/nuit automatique, zoom automatique adaptée à la vitesse, plusieurs modes d\'orientation de la carte (fixe ou suivant le déplacement), affichage des voies de circulation, guidage vocal par voix enregistrées ou par synthèse vocale.</string>
+\n- Options : vue jour/nuit automatique, zoom automatique adaptée à la vitesse, plusieurs modes d\'orientation de la carte (fixe ou suivant le déplacement), affichage des voies de circulation, guidage vocal par voix enregistrée ou par synthèse vocale.
+\n</string>
     <string name="avoid_motorway">Éviter les autoroutes</string>
     <string name="context_menu_item_last_intermediate_point">Ajouter comme dernière étape</string>
     <string name="context_menu_item_first_intermediate_point">Ajouter comme première étape</string>
@@ -888,7 +891,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="download_select_map_types">Autres cartes</string>
     <string name="download_srtm_maps">Courbes de niveau</string>
     <string name="index_srtm_parts">parties</string>
-    <string name="audionotes_location_not_defined">La position associée à la note n\'est pas encore définie. Utilisez le menu \"Utiliser la position...\" pour définir une position pour cette note.</string>
+    <string name="audionotes_location_not_defined">Appuyez sur \"Utiliser la position...\" pour ajouter une note sur le point.</string>
     <string name="map_widget_audionotes">Notes audio</string>
     <string name="audionotes_plugin_description">Ce greffon permet de prendre des notes (photos, audios ou vidéos) sur un itinéraire soit en utilisant un bouton affiché sur la carte, soit directement depuis le menu contextuel de n\'importe quel point sur la carte.</string>
     <string name="audionotes_plugin_name">Notes audio/vidéo</string>
@@ -899,7 +902,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="map_widget_distancemeasurement">Mesure de distance</string>
     <string name="av_def_action_video">Enregistrer une vidéo</string>
     <string name="av_def_action_audio">Enregistrer une note audio</string>
-    <string name="av_widget_action_descr">Sélectionner l\'action par défaut du gadget.</string>
+    <string name="av_widget_action_descr">Action par défaut du gadget :</string>
     <string name="av_widget_action">Action par défaut du gadget</string>
     <string name="av_video_format_descr">Format de sortie vidéo :</string>
     <string name="av_video_format">Format d\'enregistrement vidéo de sortie</string>
@@ -909,7 +912,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="av_settings">Paramètres audio/vidéo </string>
     <string name="recording_error">Échec d\'enregistrement</string>
     <string name="recording_camera_not_available">Caméra non disponible</string>
-    <string name="recording_is_recorded">En cours d\'enregistrement Audio/vidéo. Arrêt par appui sur le gadget Audio/vidéo.</string>
+    <string name="recording_is_recorded">Enregistrement Audio/vidéo en cours. Arrêtez en appuyant sur le gadget Audio/vidéo.</string>
     <string name="recording_playing">La note audio de l\'enregistrement spécifié est en cours de lecture.\n%1$s</string>
     <string name="recording_open_external_player">Ouvrir dans un lecteur externe</string>
     <string name="recording_delete_confirm">Supprimer cet élément ?</string>
@@ -1043,7 +1046,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="edit_tilesource_elliptic_tile">Mercator elliptique</string>
     <string name="edit_tilesource_choose_existing">Sélectionner existant…</string>
     <string name="maps_define_edit">Définir/Éditer…</string>
-    <string name="speak_descr">Annoncer les noms de rue, les avertissements (stops, ralentisseurs, radars), les limites de vitesse.</string>
+    <string name="speak_descr">Paramétrer les annonces des noms de rue, alertes de circulation (bouchons, ralentissements), radars, limites de vitesse.</string>
     <string name="new_directions_point_dialog">Vous avez déjà défini des étapes intermédiaires.</string>
     <string name="context_menu_item_directions_to">Itinéraire vers</string>
     <string name="context_menu_item_directions_from">Itinéraire depuis</string>
@@ -1178,7 +1181,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="voice_pref_title">Voix</string>
     <string name="misc_pref_title">Divers</string>
     <string name="localization_pref_title">Paramètres régionaux</string>
-    <string name="interrupt_music_descr">Les annonces vocales stoppent la musique.</string>
+    <string name="interrupt_music_descr">Les annonces vocales interrompent la musique.</string>
     <string name="interrupt_music">Interrompre la musique</string>
     <string name="share_route_as_gpx">Partager l\'itinéraire au format GPX</string>
     <string name="share_route_subject">Itinéraire partagé grâce à OsmAnd</string>
@@ -2176,7 +2179,7 @@ Merci d\'indiquer un code long</string>
 représentant la zone : %1$s x %2$s</string>
     <string name="auto_split_recording_title">Découper automatiquement les enregistrements</string>
     <string name="auto_split_recording_descr">Débuter un nouveau segment après une interruption de 6 min, une nouvelle trace après 2 h ou un nouveau fichier en cas de changement de date.</string>
-    <string name="quick_action_page_list_descr">Un appui sur ce bouton d\'action fera défiler la liste.</string>
+    <string name="quick_action_page_list_descr">Bouton pour faire défiler la liste ci-dessous.</string>
     <string name="rendering_attr_depthContours_description">Afficher les lignes et points de sonde.</string>
     <string name="rendering_attr_depthContours_name">Lignes de sonde maritimes</string>
     <string name="routing_attr_height_obstacles_name">Utiliser les données d\'altitude</string>
@@ -2803,7 +2806,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="poi_cannot_be_found">Nœud ou Route introuvable.</string>
     <string name="search_no_results_feedback">Aucun résultat de recherche \? 
 \nSignalez-le nous</string>
-    <string name="test_voice_desrc">Appuyez sur un bouton pour écoutez l\'annonce vocale correspondante afin d\'identifier les annonces erronées ou manquantes.</string>
+    <string name="test_voice_desrc">Appuyez sur un bouton pour écoutez l\'annonce vocale correspondante afin d\'identifier les annonces erronées ou manquantes</string>
     <string name="release_3_2_pre">• Correction du plantage au démarrage survenant pour certains appareils
 \n
 \n• Marques : affichage des marques traversées
@@ -3166,7 +3169,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="rendering_attr_highway_class_track_grade4_name">Niveau 4</string>
     <string name="rendering_attr_highway_class_track_grade5_name">Niveau 5</string>
     <string name="external_input_device">Périphériques externes d\'entrée</string>
-    <string name="external_input_device_descr">"Sélectionnez un périphérique externe comme un clavier générique ou  un WunderLINQ pour utiliser l\'application."</string>
+    <string name="external_input_device_descr">Sélectionnez un périphérique externe de contrôle comme un clavier ou un WunderLINQ.</string>
     <string name="sett_generic_ext_input">Clavier</string>
     <string name="sett_wunderlinq_ext_input">WunderLINQ</string>
     <string name="sett_parrot_ext_input">Parrot</string>
