@@ -1556,6 +1556,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	@Override
 	public boolean onKeyUp(int keyCode, KeyEvent event) {
+		final int scrollingUnit = 15;
 		if (keyCode == KeyEvent.KEYCODE_DPAD_CENTER) {
 			if (!app.accessibilityEnabled()) {
 				mapActions.contextMenuPoint(mapView.getLatitude(), mapView.getLongitude());
@@ -1593,7 +1594,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				return true;
 			}
 		} else if (settings.EXTERNAL_INPUT_DEVICE.get() == GENERIC_EXTERNAL_DEVICE) {
-			final int scrollingUnit = 15;
 			if (keyCode == KeyEvent.KEYCODE_MINUS) {
 				changeZoom(-1);
 				return true;
@@ -1615,8 +1615,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			}
 		} else if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT || keyCode == KeyEvent.KEYCODE_DPAD_RIGHT
 				|| keyCode == KeyEvent.KEYCODE_DPAD_DOWN || keyCode == KeyEvent.KEYCODE_DPAD_UP) {
-			int dx = keyCode == KeyEvent.KEYCODE_DPAD_RIGHT ? 15 : (keyCode == KeyEvent.KEYCODE_DPAD_LEFT ? -15 : 0);
-			int dy = keyCode == KeyEvent.KEYCODE_DPAD_DOWN ? 15 : (keyCode == KeyEvent.KEYCODE_DPAD_UP ? -15 : 0);
+			int dx = keyCode == KeyEvent.KEYCODE_DPAD_RIGHT ? scrollingUnit : (keyCode == KeyEvent.KEYCODE_DPAD_LEFT ? -scrollingUnit : 0);
+			int dy = keyCode == KeyEvent.KEYCODE_DPAD_DOWN ? scrollingUnit : (keyCode == KeyEvent.KEYCODE_DPAD_UP ? -scrollingUnit : 0);
 			scrollMap(dx, dy);
 			return true;
 		} else if (OsmandPlugin.onMapActivityKeyUp(this, keyCode)) {
