@@ -1590,26 +1590,43 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				return true;
 			}
 		} else if (settings.EXTERNAL_INPUT_DEVICE.get() == 1) {
-			if (keyCode == KeyEvent.KEYCODE_DPAD_DOWN) {
+			final int scrollingUnit = 15;
+			if (keyCode == KeyEvent.KEYCODE_MINUS) {
 				changeZoom(-1);
 				return true;
-			} else if (keyCode == KeyEvent.KEYCODE_DPAD_UP) {
+			} else if (keyCode == KeyEvent.KEYCODE_PLUS) {
 				changeZoom(1);
+				return true;
+			} else if (keyCode == KeyEvent.KEYCODE_DPAD_DOWN) {
+				scrollMap(0, -scrollingUnit);
+				return true;
+			} else if (keyCode == KeyEvent.KEYCODE_DPAD_UP) {
+				scrollMap(0, scrollingUnit);
+				return true;
+			} else if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT) {
+				scrollMap(-scrollingUnit, 0);
+				return true;
+			} else if (keyCode == KeyEvent.KEYCODE_DPAD_RIGHT) {
+				scrollMap(scrollingUnit, 0);
 				return true;
 			}
 		} else if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT || keyCode == KeyEvent.KEYCODE_DPAD_RIGHT
 				|| keyCode == KeyEvent.KEYCODE_DPAD_DOWN || keyCode == KeyEvent.KEYCODE_DPAD_UP) {
 			int dx = keyCode == KeyEvent.KEYCODE_DPAD_RIGHT ? 15 : (keyCode == KeyEvent.KEYCODE_DPAD_LEFT ? -15 : 0);
 			int dy = keyCode == KeyEvent.KEYCODE_DPAD_DOWN ? 15 : (keyCode == KeyEvent.KEYCODE_DPAD_UP ? -15 : 0);
-			final RotatedTileBox tb = mapView.getCurrentRotatedTileBox();
-			final QuadPoint cp = tb.getCenterPixelPoint();
-			final LatLon l = tb.getLatLonFromPixel(cp.x + dx, cp.y + dy);
-			setMapLocation(l.getLatitude(), l.getLongitude());
+			scrollMap(dx, dy);
 			return true;
 		} else if (OsmandPlugin.onMapActivityKeyUp(this, keyCode)) {
 			return true;
 		}
 		return super.onKeyUp(keyCode, event);
+	}
+	
+	private void scrollMap(int dx, int dy) {
+		final RotatedTileBox tb = mapView.getCurrentRotatedTileBox();
+		final QuadPoint cp = tb.getCenterPixelPoint();
+		final LatLon l = tb.getLatLonFromPixel(cp.x + dx, cp.y + dy);
+		setMapLocation(l.getLatitude(), l.getLongitude());
 	}
 
 	public void checkExternalStorage() {
