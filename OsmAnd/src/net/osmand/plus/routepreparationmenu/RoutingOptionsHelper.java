@@ -62,19 +62,11 @@ public class RoutingOptionsHelper {
 	private OsmandApplication app;
 	private OsmandSettings settings;
 
-	Map<ApplicationMode, RouteMenuAppModes> modes = new HashMap<>();
+	private Map<ApplicationMode, RouteMenuAppModes> modes = new HashMap<>();
 
 	public RoutingOptionsHelper(OsmandApplication application) {
 		app = application;
 		settings = app.getSettings();
-
-		addRouteMenuAppModes(ApplicationMode.CAR, PermanentAppModeOptions.CAR.routingParameters);
-		addRouteMenuAppModes(ApplicationMode.BICYCLE, PermanentAppModeOptions.BICYCLE.routingParameters);
-		addRouteMenuAppModes(ApplicationMode.PEDESTRIAN, PermanentAppModeOptions.PEDESTRIAN.routingParameters);
-		addRouteMenuAppModes(ApplicationMode.PUBLIC_TRANSPORT, PermanentAppModeOptions.PUBLIC_TRANSPORT.routingParameters);
-		addRouteMenuAppModes(ApplicationMode.BOAT, PermanentAppModeOptions.BOAT.routingParameters);
-		addRouteMenuAppModes(ApplicationMode.AIRCRAFT, PermanentAppModeOptions.AIRCRAFT.routingParameters);
-		addRouteMenuAppModes(ApplicationMode.SKI, PermanentAppModeOptions.SKI.routingParameters);
 	}
 
 	private void addRouteMenuAppModes(ApplicationMode am, List<String> routingParameters) {
@@ -92,6 +84,13 @@ public class RoutingOptionsHelper {
 			list.add(parameter);
 			modes.put(applicationMode, new RouteMenuAppModes(applicationMode, list));
 		}
+	}
+
+	public RouteMenuAppModes getRouteMenuAppMode(ApplicationMode appMode) {
+		if (!modes.containsKey(appMode)) {
+			addRouteMenuAppModes(appMode, getRoutingParametersForProfileType(appMode));
+		}
+		return modes.get(appMode);
 	}
 
 	public void switchSound() {
@@ -1010,5 +1009,28 @@ public class RoutingOptionsHelper {
 		PermanentAppModeOptions(String... routingParameters) {
 			this.routingParameters = Arrays.asList(routingParameters);
 		}
+	}
+	
+	private List<String> getRoutingParametersForProfileType(ApplicationMode appMode) {
+		if (appMode != null) {
+			if (appMode.isDerivedRoutingFrom(ApplicationMode.CAR)) {
+				return PermanentAppModeOptions.CAR.routingParameters;
+			} else if (appMode.isDerivedRoutingFrom(ApplicationMode.BICYCLE)) {
+				return PermanentAppModeOptions.BICYCLE.routingParameters;
+			} else if (appMode.isDerivedRoutingFrom(ApplicationMode.PEDESTRIAN)) {
+				return PermanentAppModeOptions.PEDESTRIAN.routingParameters;
+			} else if (appMode.isDerivedRoutingFrom(ApplicationMode.PUBLIC_TRANSPORT)) {
+				return PermanentAppModeOptions.PUBLIC_TRANSPORT.routingParameters;
+			} else if (appMode.isDerivedRoutingFrom(ApplicationMode.BOAT)) {
+				return PermanentAppModeOptions.BOAT.routingParameters;
+			} else if (appMode.isDerivedRoutingFrom(ApplicationMode.AIRCRAFT)) {
+				return PermanentAppModeOptions.AIRCRAFT.routingParameters;
+			} else if (appMode.isDerivedRoutingFrom(ApplicationMode.SKI)) {
+				return PermanentAppModeOptions.SKI.routingParameters;
+			} else {
+				return new ArrayList<>();
+			}
+		}
+		return null;
 	}
 }

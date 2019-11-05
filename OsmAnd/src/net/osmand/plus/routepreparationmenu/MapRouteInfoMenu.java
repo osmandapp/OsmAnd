@@ -576,7 +576,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				}
 				bottomShadowVisible = routes.size() == 0;
 			} else {
-				RouteMenuAppModes mode = app.getRoutingOptionsHelper().modes.get(routingHelper.getAppMode());
+				RouteMenuAppModes mode = app.getRoutingOptionsHelper().getRouteMenuAppMode(routingHelper.getAppMode());
 				boolean avoidPTTypesCustomized = false;
 				for (LocalRoutingParameter parameter : mode.parameters) {
 					if (parameter instanceof AvoidPTTypesRoutingParameter) {
@@ -916,7 +916,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		final OsmandApplication app = mapActivity.getMyApplication();
 		RoutingHelper routingHelper = app.getRoutingHelper();
 		final ApplicationMode applicationMode = routingHelper.getAppMode();
-		final RouteMenuAppModes mode = app.getRoutingOptionsHelper().modes.get(applicationMode);
+		final RouteMenuAppModes mode = app.getRoutingOptionsHelper().getRouteMenuAppMode(applicationMode);
 
 		updateControlButtons(mapActivity, mainView);
 		LinearLayout optionsButton = (LinearLayout) mainView.findViewById(R.id.map_options_route_button);
