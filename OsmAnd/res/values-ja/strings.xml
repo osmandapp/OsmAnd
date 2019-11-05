@@ -2971,7 +2971,7 @@ POIの更新は利用できません</string>
     <string name="add_work">職場の追加</string>
     <string name="work_button">職場</string>
     <string name="routing_attr_avoid_tram_name">路面電車を使わない</string>
-    <string name="routing_attr_avoid_tram_description">移動手段に路面電車を使用しません</string>
+    <string name="routing_attr_avoid_tram_description">移動手段に路面電車を使いません</string>
     <string name="routing_attr_avoid_bus_name">バスを使わない</string>
     <string name="routing_attr_avoid_bus_description">移動手段にバスおよびトロリーバスを使いません</string>
     <string name="routing_attr_avoid_share_taxi_name">乗合タクシーを使わない</string>
@@ -3050,7 +3050,7 @@ POIの更新は利用できません</string>
     <string name="downloaded_maps">ダウンロードしたマップ</string>
     <string name="visited_screens">アクセスした画面</string>
     <string name="application_profiles_descr">アプリ内で使用する移動手段別プロファイルの設定をします。</string>
-    <string name="application_profiles">各プロファイルの設定</string>
+    <string name="application_profiles">アプリプロファイル</string>
     <string name="collected_data">収集されるデータ</string>
     <string name="shared_string_crash">動作停止エラー</string>
     <string name="last_launch_crashed">前回OsmAndの実行中にクラッシュしました。エラー内容を送信し、OsmAndの改善にご協力ください。</string>
@@ -3104,8 +3104,8 @@ POIの更新は利用できません</string>
     <string name="send_log">ログの送信</string>
     <string name="files_moved">%1$d個のファイルを移動しました。(%2$s)</string>
     <string name="files_copied">%1$d個のファイルをコピーしました。(%2$s)</string>
-    <string name="files_failed">%1$d個のファイルのコピーに失敗しました。(%2$s)</string>
-    <string name="files_present">%1$d個のファイル(%2$s)は、以前の場所\'%3$s\'に残っています。</string>
+    <string name="files_failed">%1$d個のファイルがコピーできませんでした。(%2$s)</string>
+    <string name="files_present">%1$d個のファイル(%2$s)は、以前の場所[%3$s]に残っています。</string>
     <string name="move_maps">移動させる</string>
     <string name="dont_move_maps">移動しない</string>
     <string name="public_transport_ped_route_title">徒歩でのルートは約%1$sで、公共交通機関の利用よりも速い可能性があります</string>
@@ -3201,7 +3201,7 @@ POIの更新は利用できません</string>
     <string name="app_mode_personal_transporter">個人輸送業者</string>
     <string name="app_mode_monowheel">モノホイール</string>
     <string name="app_mode_scooter">スクーター</string>
-    <string name="precision_hdop_and_vdop">"精度 水平: %1$s,  垂直:%2$s"</string>
+    <string name="precision_hdop_and_vdop">"水平精度: %1$s,  垂直:%2$s"</string>
     <string name="precision_hdop">水平精度: %s</string>
     <string name="rendering_attr_highway_class_track_grade1_name">グレード1</string>
     <string name="rendering_attr_highway_class_track_grade2_name">グレード2</string>
@@ -3366,7 +3366,7 @@ POIの更新は利用できません</string>
     <string name="vehicle_parameters">車両パラメーター</string>
     <string name="voice_announces_info">音声案内は、ナビゲーション中にのみ再生されます。</string>
     <string name="voice_announces_descr">ナビゲーション指示と音声案内</string>
-    <string name="voice_announces">音声案内</string>
+    <string name="voice_announces">音声案内文字列</string>
     <string name="screen_alerts">画面アラート</string>
     <string name="route_parameters_descr">ルートパラメーターの構成</string>
     <string name="route_parameters">ルートパラメーター</string>
@@ -3389,13 +3389,21 @@ POIの更新は利用できません</string>
     <string name="sit_on_the_stop">停留所標識</string>
     <string name="lang_oc">オック語</string>
     <string name="layer_osm_edits">OSM編集域</string>
-    <string name="quick_action_contour_lines_descr">このアクションボタンをタップすると、マップ上の等高線の表示／非表示を切り替えられます</string>
+    <string name="quick_action_contour_lines_descr">マップ上の等高線の表示／非表示を切り替えられます。</string>
     <string name="quick_action_contour_lines_show">等高線を表示</string>
     <string name="quick_action_contour_lines_hide">等高線を非表示</string>
     <string name="quick_action_show_hide_contour_lines">等高線を表示／非表示</string>
-    <string name="quick_action_hillshade_descr">このアクションボタンをタップすると、マップ上の陰影起伏図の表示／非表示を切り替えられます</string>
+    <string name="quick_action_hillshade_descr">マップ上の陰影起伏図の表示／非表示を切り替えられます。</string>
     <string name="quick_action_hillshade_show">陰影起伏図を表示</string>
     <string name="quick_action_hillshade_hide">陰影起伏図を非表示</string>
     <string name="quick_action_show_hide_hillshade">陰影起伏図の表示／非表示</string>
     <string name="tts_initialization_error">テキスト読み上げエンジンを起動できません</string>
+    <string name="export_profile">プロファイルのエクスポート</string>
+    <string name="exported_osmand_profile">OsmAndプロファイル:%1$s</string>
+    <string name="overwrite_profile_q">『%1$s』というプロファイルは既に存在します。上書きしますか？</string>
+    <string name="export_profile_failed">プロファイルをエクスポートできませんでした。</string>
+    <string name="profile_import">インポートするプロファイル:</string>
+    <string name="profile_import_descr">OsmAndにて端末内のファイルを選択し開くことで、プロファイルをインポートできます。</string>
+    <string name="file_import_error">【%1$s】インポートエラー: %2$s</string>
+    <string name="file_imported_successfully">%1$sのインポートに成功しました。</string>
 </resources>
