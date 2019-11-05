@@ -167,6 +167,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
+import static net.osmand.plus.OsmandSettings.GENERIC_EXTERNAL_DEVICE;
+import static net.osmand.plus.OsmandSettings.PARROT_EXTERNAL_DEVICE;
+import static net.osmand.plus.OsmandSettings.WUNDERLINQ_EXTERNAL_DEVICE;
 
 public class MapActivity extends OsmandActionBarActivity implements DownloadEvents,
 		OnRequestPermissionsResultCallback, IRouteInformationListener, AMapPointUpdateListener,
@@ -1553,6 +1556,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	@Override
 	public boolean onKeyUp(int keyCode, KeyEvent event) {
+		final int scrollingUnit = 15;
 		if (keyCode == KeyEvent.KEYCODE_DPAD_CENTER) {
 			if (!app.accessibilityEnabled()) {
 				mapActions.contextMenuPoint(mapView.getLatitude(), mapView.getLongitude());
@@ -1565,7 +1569,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			// repeat count 0 doesn't work for samsung, 1 doesn't work for lg
 			toggleDrawer();
 			return true;
-		} else if (settings.EXTERNAL_INPUT_DEVICE.get() == 3) {
+		} else if (settings.EXTERNAL_INPUT_DEVICE.get() == PARROT_EXTERNAL_DEVICE) {
 			// Parrot device has only dpad left and right
 			if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT) {
 				changeZoom(-1);
@@ -1574,7 +1578,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				changeZoom(1);
 				return true;
 			}
-		} else if (settings.EXTERNAL_INPUT_DEVICE.get() == 2) {
+		} else if (settings.EXTERNAL_INPUT_DEVICE.get() == WUNDERLINQ_EXTERNAL_DEVICE) {
 			// WunderLINQ device, motorcycle smart phone control
 			if (keyCode == KeyEvent.KEYCODE_DPAD_DOWN) {
 				changeZoom(-1);
@@ -1589,27 +1593,43 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				startActivity(intent);
 				return true;
 			}
-		} else if (settings.EXTERNAL_INPUT_DEVICE.get() == 1) {
-			if (keyCode == KeyEvent.KEYCODE_DPAD_DOWN) {
+		} else if (settings.EXTERNAL_INPUT_DEVICE.get() == GENERIC_EXTERNAL_DEVICE) {
+			if (keyCode == KeyEvent.KEYCODE_MINUS) {
 				changeZoom(-1);
 				return true;
-			} else if (keyCode == KeyEvent.KEYCODE_DPAD_UP) {
+			} else if (keyCode == KeyEvent.KEYCODE_PLUS) {
 				changeZoom(1);
+				return true;
+			} else if (keyCode == KeyEvent.KEYCODE_DPAD_DOWN) {
+				scrollMap(0, scrollingUnit);
+				return true;
+			} else if (keyCode == KeyEvent.KEYCODE_DPAD_UP) {
+				scrollMap(0, -scrollingUnit);
+				return true;
+			} else if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT) {
+				scrollMap(-scrollingUnit, 0);
+				return true;
+			} else if (keyCode == KeyEvent.KEYCODE_DPAD_RIGHT) {
+				scrollMap(scrollingUnit, 0);
 				return true;
 			}
 		} else if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT || keyCode == KeyEvent.KEYCODE_DPAD_RIGHT
 				|| keyCode == KeyEvent.KEYCODE_DPAD_DOWN || keyCode == KeyEvent.KEYCODE_DPAD_UP) {
-			int dx = keyCode == KeyEvent.KEYCODE_DPAD_RIGHT ? 15 : (keyCode == KeyEvent.KEYCODE_DPAD_LEFT ? -15 : 0);
-			int dy = keyCode == KeyEvent.KEYCODE_DPAD_DOWN ? 15 : (keyCode == KeyEvent.KEYCODE_DPAD_UP ? -15 : 0);
-			final RotatedTileBox tb = mapView.getCurrentRotatedTileBox();
-			final QuadPoint cp = tb.getCenterPixelPoint();
-			final LatLon l = tb.getLatLonFromPixel(cp.x + dx, cp.y + dy);
-			setMapLocation(l.getLatitude(), l.getLongitude());
+			int dx = keyCode == KeyEvent.KEYCODE_DPAD_RIGHT ? scrollingUnit : (keyCode == KeyEvent.KEYCODE_DPAD_LEFT ? -scrollingUnit : 0);
+			int dy = keyCode == KeyEvent.KEYCODE_DPAD_DOWN ? scrollingUnit : (keyCode == KeyEvent.KEYCODE_DPAD_UP ? -scrollingUnit : 0);
+			scrollMap(dx, dy);
 			return true;
 		} else if (OsmandPlugin.onMapActivityKeyUp(this, keyCode)) {
 			return true;
 		}
 		return super.onKeyUp(keyCode, event);
+	}
+	
+	private void scrollMap(int dx, int dy) {
+		final RotatedTileBox tb = mapView.getCurrentRotatedTileBox();
+		final QuadPoint cp = tb.getCenterPixelPoint();
+		final LatLon l = tb.getLatLonFromPixel(cp.x + dx, cp.y + dy);
+		setMapLocation(l.getLatitude(), l.getLongitude());
 	}
 
 	public void checkExternalStorage() {
