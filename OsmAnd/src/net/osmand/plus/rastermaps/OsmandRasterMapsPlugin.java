@@ -49,9 +49,9 @@ import java.util.List;
 import java.util.Map;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_DOWNLOAD_MAP;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_UPDATE_MAP;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.OVERLAY_MAP;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.UNDERLAY_MAP;
-import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_UPDATE_MAP;
 
 public class OsmandRasterMapsPlugin extends OsmandPlugin {
 	public static final String ID = "osmand.rastermaps";
@@ -152,6 +152,8 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		} else if(settings.LAYER_TRANSPARENCY_SEEKBAR_MODE.get() == LayerTransparencySeekbarMode.OVERLAY &&
 				overlayLayer.getMap() != null) {
 			layers.getMapControlsLayer().showTransparencyBar(settings.MAP_OVERLAY_TRANSPARENCY, true);
+		} else {
+			layers.getMapControlsLayer().hideTransparencyBar();
 		}
 		layers.updateMapSource(mapView, settingsToWarnAboutMap);
 	}
