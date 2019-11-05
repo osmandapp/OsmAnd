@@ -62,15 +62,11 @@ public class RoutingOptionsHelper {
 	private OsmandApplication app;
 	private OsmandSettings settings;
 
-	Map<ApplicationMode, RouteMenuAppModes> modes = new HashMap<>();
+	private Map<ApplicationMode, RouteMenuAppModes> modes = new HashMap<>();
 
 	public RoutingOptionsHelper(OsmandApplication application) {
 		app = application;
 		settings = app.getSettings();
-
-		for (ApplicationMode activeMode : ApplicationMode.values(app)) {
-			addRouteMenuAppModes(activeMode, getRoutingParametersForProfileType(activeMode));
-		}
 	}
 
 	private void addRouteMenuAppModes(ApplicationMode am, List<String> routingParameters) {
@@ -88,6 +84,13 @@ public class RoutingOptionsHelper {
 			list.add(parameter);
 			modes.put(applicationMode, new RouteMenuAppModes(applicationMode, list));
 		}
+	}
+
+	public RouteMenuAppModes getRouteMenuAppMode(ApplicationMode appMode) {
+		if (!modes.containsKey(appMode)) {
+			addRouteMenuAppModes(appMode, getRoutingParametersForProfileType(appMode));
+		}
+		return modes.get(appMode);
 	}
 
 	public void switchSound() {
