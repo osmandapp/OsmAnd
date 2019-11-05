@@ -948,7 +948,7 @@ Proporcionális memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</str
     <string name="recording_context_menu_precord">Fénykép készítése</string>
     <string name="download_hillshade_maps">Domborzatárnyékolás</string>
     <string name="support_new_features_descr">Adományozz, hogy új funkciók kerülhessenek az alkalmazásba.</string>
-    <string name="av_use_external_camera_descr">Rendszeralkalmazás használata fotózáshoz.</string>
+    <string name="av_use_external_camera_descr">Rendszeralkalmazás használata fényképezéshez.</string>
     <string name="av_use_external_camera">Kamera alkalmazás használata</string>
     <string name="index_name_openmaps">OpenMaps EU</string>
     <string name="max_speed_none">nincs</string>
@@ -2112,7 +2112,7 @@ Jelenleg csak {2} MB érhető el.</string>
     <string name="quick_action_map_style_switch">A térképstílus erre módosult: „%s”.</string>
     <string name="quick_action_take_audio_note">Új hangjegyzet</string>
     <string name="quick_action_take_video_note">Új videojegyzet</string>
-    <string name="quick_action_take_photo_note">Új fotójegyzet</string>
+    <string name="quick_action_take_photo_note">Új fényképjegyzet</string>
     <string name="quick_action_add_osm_bug">OSM Jegyzet készítése</string>
     <string name="quick_action_navigation_voice">Hang be/ki</string>
     <string name="quick_action_navigation_voice_off">Hang visszakapcsolása</string>
@@ -2134,15 +2134,15 @@ Jelenleg csak {2} MB érhető el.</string>
     <string name="quick_action_take_photo_note_descr">A műveletgombra koppintás hozzáad egy fényképes jegyzetet a képernyő közepén található helyhez.</string>
     <string name="quick_action_add_osm_bug_descr">A műveletgombra koppintás hozzáad egy OSM Jegyzetet a képernyő közepén található helyhez.</string>
     <string name="quick_action_add_poi_descr">A műveletgombra koppintás POI-t hoz létre a képernyő közepén található helyen.</string>
-    <string name="quick_action_navigation_voice_descr">A műveletgombra koppintás be- és kikapcsolja a navigáció közbeni hangutasításokat.</string>
+    <string name="quick_action_navigation_voice_descr">Egy kapcsoló, ami be- és kikapcsolja a navigáció közbeni hangutasításokat.</string>
     <string name="quick_action_add_parking_descr">A műveletgombra koppintás megjelöli a parkolási helyet a képernyő közepén található helyen.</string>
     <string name="quick_action_interim_dialog">Ideiglenes dialógusablak megjelenítése</string>
     <string name="favorite_autofill_toast_text">" elmentve ide: "</string>
     <string name="favorite_empty_place_name">Hely</string>
     <string name="quick_action_duplicates">A megadott gyorsművelet név már használatban van, a duplikáció elkerülése érdekében erre módosult: %1$s.</string>
     <string name="quick_action_duplicate">Gyors művelet név duplikátum</string>
-    <string name="quick_action_showhide_favorites_descr">A műveletgombra koppintás elrejti vagy megjeleníti a Kedvenc helyeket a térképen.</string>
-    <string name="quick_action_showhide_poi_descr">A műveletgombra koppintás elrejti vagy megjeleníti a POI-kat a térképen.</string>
+    <string name="quick_action_showhide_favorites_descr">Egy kapcsoló, ami megjeleníti vagy elrejti a Kedvenc helyeket a térképen.</string>
+    <string name="quick_action_showhide_poi_descr">Egy kapcsoló, ami megjeleníti vagy elrejti a POI-kat a térképen.</string>
     <string name="quick_action_showhide_favorites_title">Kedvencek megjelenítése/elrejtése</string>
     <string name="quick_action_favorites_show">Kedvencek megjelenítése</string>
     <string name="quick_action_favorites_hide">Kedvencek elrejtése</string>
@@ -2240,7 +2240,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="type_postcode">Add meg az irányítószámot</string>
     <string name="nearest_cities">Közeli települések</string>
     <string name="quick_action_auto_zoom">Térkép automatikus nagyítása be/ki</string>
-    <string name="quick_action_auto_zoom_desc">A műveletgombra koppintás ki- és bekapcsolja a térkép sebességtől függő automatikus nagyítását.</string>
+    <string name="quick_action_auto_zoom_desc">Egy kapcsoló, ami be- és kikapcsolja a térkép sebességtől függő automatikus nagyítását.</string>
     <string name="quick_action_auto_zoom_on">Automatikus térképnagyítás engedélyezése</string>
     <string name="quick_action_auto_zoom_off">Térkép automatikus nagyításának kikapcsolása</string>
     <string name="quick_action_add_destination">Célpont hozzáadása</string>
@@ -2273,7 +2273,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="quick_action_showhide_osmbugs_title">OSM Jegyzetek ki/bekapcsolása</string>
     <string name="quick_action_osmbugs_show">OSM Jegyzetek megjelenítése</string>
     <string name="quick_action_osmbugs_hide">OSM Jegyzetek elrejtése</string>
-    <string name="quick_action_showhide_osmbugs_descr">A műveletgombra koppintás megjeleníti vagy elrejti az OSM jegyzeteket a térképen.</string>
+    <string name="quick_action_showhide_osmbugs_descr">Egy kapcsoló, ami megjeleníti vagy elrejti az OSM jegyzeteket a térképen.</string>
     <string name="sorted_by_distance">Távolság szerinti sorrendben</string>
     <string name="search_favorites">Kedvencek keresése</string>
     <string name="hillshade_menu_download_descr">A domborzat megjelenítéséhez le kell tölteni a régió domborzatárnyékolás térképet.</string>
@@ -2309,8 +2309,8 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="mapillary_action_descr">Add hozzá a saját fényképedet a hely utcanézetéről a Mapillaryvel.</string>
     <string name="mapillary_widget">Mapillary vezérlőgomb</string>
     <string name="mapillary_widget_descr">Gyors Mapillary közreműködést tesz lehetővé.</string>
-    <string name="mapillary_descr">Online utcaszintű fotók mindenkinek. Fedezz fel helyeket, vegyél benne részt, fotózd le a világot.</string>
-    <string name="plugin_mapillary_descr">Utcaszintű fotók mindenkinek. Fedezz fel helyeket, vegyél benne részt, fotózd le a világot.</string>
+    <string name="mapillary_descr">Online utcaszintű fényképek mindenkinek. Fedezz fel helyeket, vegyél benne részt, fényképezd le a világot.</string>
+    <string name="plugin_mapillary_descr">Utcaszintű fényképek mindenkinek. Fedezz fel helyeket, vegyél benne részt, fényképezd le a világot.</string>
     <string name="osmand_extended_description_part4">Síelés
 \nAz OsmAnd sítérkép bővítménye lehetővé teszi a sípályák megjelenítését nehézség szerint, valamint további információkat, mint például a felvonók helyét, és más berendezéseket.</string>
     <string name="online_photos">Online fényképek</string>
@@ -2476,7 +2476,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="one_tap_active_descr">Koppints a térképen egy jelölőre, hogy az aktív jelölők tetejére mozgasd anélkül, hogy megnyitnád a környezeti menüt.</string>
     <string name="one_tap_active">Aktiválás egy koppintással</string>
     <string name="empty_state_av_notes">Készíts jegyzeteket!</string>
-    <string name="empty_state_av_notes_desc">Hang-, video-, vagy fotójegyzet hozzáadása a térkép bármely pontjához, a vezérlőgombbal vagy környezeti menüből.</string>
+    <string name="empty_state_av_notes_desc">Hang-, video-, vagy fényképjegyzet hozzáadása a térkép bármely pontjához, a vezérlőgombbal vagy környezeti menüből.</string>
     <string name="notes_by_date">Jegyzetek dátum szerint</string>
     <string name="by_date">Dátum szerint</string>
     <string name="by_type">Típus szerint</string>
@@ -2860,7 +2860,7 @@ Kérlek adj meg egy teljes kódot</string>
 \n • Az útvonalterv újratervezésre kerül, ha eltérsz attól
 \n • Célkeresés cím, típus (például: parkoló, étterem, hotel, benzinkút, múzeum), vagy földrajzi koordináták szerint
 \n "</string>
-    <string name="quick_action_switch_day_night_descr">A műveletgombra koppintás vált a Nappali és Éjszaki módok között az OsmAndban</string>
+    <string name="quick_action_switch_day_night_descr">Egy kapcsoló, ami vált a Nappali és Éjszaki módok között az OsmAndban</string>
     <string name="quick_action_switch_day_mode">Nappali mód</string>
     <string name="quick_action_switch_night_mode">Éjszakai mód</string>
     <string name="quick_action_day_night_switch_mode">Váltás a Nappali/Éjszakai mód között</string>
@@ -2881,7 +2881,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="routeInfo_road_types_name">Úttípusok</string>
     <string name="exit_at">Szálljon le itt:</string>
     <string name="quick_action_show_hide_gpx_tracks">GPX nyomvonalak megjelenítése/elrejtése</string>
-    <string name="quick_action_show_hide_gpx_tracks_descr">A műveletgombra koppintás elrejti vagy megjeleníti a GPX nyomvonalakat a térképen</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Egy kapcsoló, ami megjeleníti vagy elrejti a GPX nyomvonalakat a térképen</string>
     <string name="quick_action_gpx_tracks_hide">GPX nyomvonalak elrejtése</string>
     <string name="quick_action_gpx_tracks_show">GPX nyomvonalak megjelenítése</string>
     <string name="add_destination_query">Először jelöljön ki egy célpontot</string>
@@ -3007,8 +3007,8 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="searching_gps">Műholdak keresése</string>
     <string name="coordinates_widget">Koordináta-widget</string>
     <string name="keep_passed_markers_descr">Az Kedvencek csoportjaként vagy GPX útpontként hozzáadott és elhagyottként megjelölt jelölők a térképen maradnak. A jelölők akkor tűnnek el a térképről, ha a csoport nem aktív (ki van kapcsolva).</string>
-    <string name="rate_dialog_descr">Kérjünk, szánjon ránk 30 másodpercet, és adjon visszajelzést vagy értékelést a Google Play-en.</string>
-    <string name="button_rate">Értékelés</string>
+    <string name="rate_dialog_descr">Kérlek, adj visszajelzést vagy értékelést a Google Play-en.</string>
+    <string name="button_rate">OK</string>
     <string name="shared_string_privacy_policy">Adatvédelmi irányelvek</string>
     <string name="help_us_make_osmand_better">Segítsen, hogy jobbá tehessük az OsmAndot!</string>
     <string name="make_osmand_better_descr">Engedélyezze, hogy az OsmAnd névtelen alkalmazáshasználati adatokat gyűjtsön és dolgozzon fel. Nem gyűjtünk vagy tárolunk adatokat a helyzetéről vagy az Ön által a térképen megtekintett helyekről.
@@ -3068,7 +3068,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="default_speed_dialog_msg">Az érkezés várható idejének kiszámításához szükséges</string>
     <string name="new_profile">Új profil</string>
     <string name="shared_string_crash">Összeomlás</string>
-    <string name="last_launch_crashed">Az OsmAnd legutóbbi indítása nem sikerült. Kérjük, a hibaüzenet megosztásával segítsen az OsmAnd javításában.</string>
+    <string name="last_launch_crashed">Az OsmAnd a legutóbbi futtatáskor összeomlott. Kérjük, a hibaüzenet megosztásával segítsen az OsmAnd javításában.</string>
     <string name="app_mode_ufo">UFO (azonosítatlan repülő tárgy)</string>
     <string name="app_mode_personal_transporter">Personal transporter (pl. Segway)</string>
     <string name="app_mode_monowheel">Egykerekű</string>
@@ -3077,9 +3077,9 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="precision_hdop">Pontosság: vízszintesen %s</string>
     <string name="edit_profile_setup_title">Profil beállítása</string>
     <string name="edit_profile_setup_subtitle">A profil megőrzi a saját beállításait</string>
-    <string name="edit_profile_setup_map_subtitle">A profil alapértelmezett térképbeállításainak kijelölése</string>
-    <string name="edit_profile_screen_options_subtitle">A profil alapértelmezett képernyő-beállításainak kijelölése</string>
-    <string name="edit_profile_nav_settings_subtitle">A profil alapértelmezett navigációs beállításainak kijelölése</string>
+    <string name="edit_profile_setup_map_subtitle">A profil térképbeállításainak kijelölése</string>
+    <string name="edit_profile_screen_options_subtitle">A profil képernyő-beállításainak kijelölése</string>
+    <string name="edit_profile_nav_settings_subtitle">A profil navigációs beállításainak kijelölése</string>
     <string name="routing_attr_max_num_changes_description">Az átszállások legnagyobb számának megadása</string>
     <string name="routing_attr_max_num_changes_name">Átszállások száma</string>
     <string name="turn_screen_on_router">Bekapcsolás irányváltáskor</string>
@@ -3228,5 +3228,5 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="file_import_error">%1$s importálás hiba: %2$s</string>
     <string name="file_imported_successfully">%1$s sikeresen importálva.</string>
     <string name="app_mode_utv">Egymás mellett</string>
-    <string name="rendering_attr_piste_difficulty_aerialway_name"></string>
+    <string name="rendering_attr_piste_difficulty_aerialway_name"/>
 </resources>
