@@ -1413,8 +1413,8 @@
     <string name="poi_payment_notes_no">Banknoten nicht akzeptiert</string>
     <string name="poi_payment_cash_yes">Bargeld</string>
     <string name="poi_payment_cash_no">Bargeld nicht akzeptiert</string>
-    <string name="poi_payment_debit_cards_yes">EC-Karten</string>
-    <string name="poi_payment_debit_cards_no">Debit Karte nicht akzeptiert</string>
+    <string name="poi_payment_debit_cards_yes">Debitkarten</string>
+    <string name="poi_payment_debit_cards_no">Debitkarten nicht akzeptiert</string>
     <string name="poi_payment_bitcoin_yes">Bitcoin</string>
     <string name="poi_payment_bitcoin_no">Bitcoin nicht akzeptiert</string>
     <string name="poi_payment_visa_yes">Visa</string>
@@ -1660,8 +1660,8 @@
     <string name="poi_payment_cheque_no">Schecks nicht akzeptiert</string>
     <string name="poi_payment_pikepass_yes">PIKEPASS</string>
     <string name="poi_payment_pikepass_no">PIKEPASS nicht akzeptiert</string>
-    <string name="poi_payment_visa_debit_yes">Visa Debit Karten</string>
-    <string name="poi_payment_visa_debit_no">Visa Debit Karten nicht akzeptiert</string>
+    <string name="poi_payment_visa_debit_yes">Visa-Debitkarten</string>
+    <string name="poi_payment_visa_debit_no">Visa-Debitkarten nicht akzeptiert</string>
     <string name="poi_payment_cryptocurrencies_no">Kryptowährung nicht akzeptiert</string>
     <string name="poi_payment_others_yes">Andere Zahlungsmittel</string>
     <string name="poi_payment_others_no">Andere Zahlungsmittel nicht akzeptiert</string>
@@ -3747,4 +3747,6 @@
     <string name="poi_cash_withdrawal_foreign_cards">Bargeldbezug: fremde Karten</string>
     <string name="poi_cash_withdrawal_girocard">Girokarte</string>
     <string name="poi_cash_withdrawal_postbank">Postbank</string>
+    <string name="poi_cash_withdrawal_postfinance_card">PostFinance Card</string>
+    <string name="poi_cash_withdrawal_migros_bank">Migros Bank</string>
 </resources>
