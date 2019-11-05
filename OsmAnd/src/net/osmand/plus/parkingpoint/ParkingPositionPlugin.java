@@ -440,34 +440,36 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 			
 			@Override
 			public boolean updateInfo(DrawSettings drawSettings) {
-				LatLon parkingPoint = parkingLayer.getParkingPoint();
-				if( parkingPoint != null && !map.getRoutingHelper().isFollowingMode()) {
-					OsmandMapTileView view = map.getMapView();
-					int d = 0;
-					if (d == 0) {
-						net.osmand.Location.distanceBetween(view.getLatitude(), view.getLongitude(), parkingPoint.getLatitude(), parkingPoint.getLongitude(), calculations);
-						d = (int) calculations[0];
-					}
-					if (distChanged(cachedMeters, d)) {
-						cachedMeters = d;
-						if (cachedMeters <= 20) {
-							cachedMeters = 0;
-							setText(null, null);
-						} else {
-							String ds = OsmAndFormatter.getFormattedDistance(cachedMeters, map.getMyApplication());
-							int ls = ds.lastIndexOf(' ');
-							if (ls == -1) {
-								setText(ds, null);
-							} else {
-								setText(ds.substring(0, ls), ds.substring(ls + 1));
-							}
+				if (parkingLayer != null) {
+					LatLon parkingPoint = parkingLayer.getParkingPoint();
+					if (parkingPoint != null && !map.getRoutingHelper().isFollowingMode()) {
+						OsmandMapTileView view = map.getMapView();
+						int d = 0;
+						if (d == 0) {
+							net.osmand.Location.distanceBetween(view.getLatitude(), view.getLongitude(), parkingPoint.getLatitude(), parkingPoint.getLongitude(), calculations);
+							d = (int) calculations[0];
 						}
+						if (distChanged(cachedMeters, d)) {
+							cachedMeters = d;
+							if (cachedMeters <= 20) {
+								cachedMeters = 0;
+								setText(null, null);
+							} else {
+								String ds = OsmAndFormatter.getFormattedDistance(cachedMeters, map.getMyApplication());
+								int ls = ds.lastIndexOf(' ');
+								if (ls == -1) {
+									setText(ds, null);
+								} else {
+									setText(ds.substring(0, ls), ds.substring(ls + 1));
+								}
+							}
+							return true;
+						}
+					} else if (cachedMeters != 0) {
+						cachedMeters = 0;
+						setText(null, null);
 						return true;
 					}
-				} else if (cachedMeters != 0) {
-					cachedMeters = 0;
-					setText(null, null);
-					return true;
 				}
 				return false;
 			}		
