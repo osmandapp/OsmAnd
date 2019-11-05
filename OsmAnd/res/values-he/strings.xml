@@ -2607,8 +2607,6 @@
     <string name="hillshade_layer_disabled">מפת ההצללה מושבתת</string>
     <string name="app_mode_hiking">טיול רגלי</string>
     <string name="quick_action_duplicates">שם הפעולה המהירה כבר נמצא בשימוש, הוא הוחלף בשם %1$s כדי להמנע מכפילות.</string>
-    <string name="monthly_map_updates">עדכוני מפה: כל חודש</string>
-    <string name="daily_map_updates">עדכוני מפה: כל שעה</string>
     <string name="in_app_purchase">רכישות בתוך היישומון</string>
     <string name="in_app_purchase_desc">תשלום חד־פעמי</string>
     <string name="in_app_purchase_desc_ex">לאחר הרכישה, הזמינות אליך תהיה לצמיתות.</string>
@@ -2796,8 +2794,6 @@
     <string name="coord_input_save_as_track_descr">הוספת %1$s נקודות. נא להקליד שם קובץ וללחוץ על ‚שמירה’.</string>
     <string name="point_deleted">הנקודה %1$s נמחקה</string>
     <string name="shared_string_world">עולם</string>
-    <string name="send_search_query_description">אנו נשלח את שאילתת החיפוש שלך: ”%1$s„, לרבות המקום שלך.\n
-        \n לא נאספים פרטים אישיים, נתוני חיפושים משמשים לטובת שיפור אלגוריתם החיפוש.</string>
     <string name="search_no_results_description">אין תוצאות?
 \nנשמח לקבל דיווח על כך.</string>
     <string name="send_search_query">לשלוח את שאילתת החיפוש?</string>
@@ -3360,7 +3356,6 @@
     <string name="quick_action_hillshade_show">הצגת הצללה</string>
     <string name="quick_action_hillshade_hide">הסתרת הצללה</string>
     <string name="quick_action_show_hide_hillshade">הצגה/הסתרה של הצללה</string>
-    <string name="swap_start_and_destination">החלפה בין ההתחלה לבין היעד</string>
     <string name="tts_initialization_error">לא ניתן להפעיל מנוע המרת טקסט לדיבור</string>
     <string name="simulate_your_location_gpx_descr">הדמיית המיקום שלך באמצעות מסלול GPX שהוקלט מראש.</string>
 </resources>
