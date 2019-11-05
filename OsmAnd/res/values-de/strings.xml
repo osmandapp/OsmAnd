@@ -2114,7 +2114,7 @@ Lon %2$s</string>
     <string name="quick_action_add_marker">Kartenmarker hinzufügen</string>
     <string name="quick_action_add_poi">POI hinzufügen</string>
     <string name="quick_action_map_style">Kartendarstellung ändern</string>
-    <string name="quick_action_map_style_switch">Kartendarstellung wurde zu “%s“ gewechselt.</string>
+    <string name="quick_action_map_style_switch">Kartendarstellung geändert zu “%s“.</string>
     <string name="quick_action_take_audio_note">Neue Audio-Notiz</string>
     <string name="quick_action_take_video_note">Neue Video-Notiz</string>
     <string name="quick_action_take_photo_note">Neue Foto-Notiz</string>
@@ -2171,7 +2171,7 @@ Lon %2$s</string>
     <string name="quick_action_add_gpx_descr">Taste, um einen GPX-Wegpunkt am Bildschirmmittelpunkt einzufügen.</string>
     <string name="quick_action_add_osm_bug_descr">Taste, um eine OSM-Notiz am Bildschirmmittelpunkt einzufügen.</string>
     <string name="quick_action_add_poi_descr">Taste, um einen POI am Bildschirmmittelpunkt einzufügen.</string>
-    <string name="quick_action_navigation_voice_descr">Drücken dieser Aktionstaste deaktiviert oder aktiviert die Sprachansagen bei der Navigation.</string>
+    <string name="quick_action_navigation_voice_descr">Umschalter, um die Sprachansagen während der Navigation ein- oder auszuschalten.</string>
     <string name="quick_action_add_parking_descr">Taste, um eine Parkposition am Bildschirmmittelpunkt einzufügen.</string>
     <string name="quick_action_interim_dialog">Dialog zum Bearbeiten zeigen</string>
     <string name="favorite_autofill_toast_text">" gespeichert unter "</string>
@@ -2193,7 +2193,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="auto_split_recording_title">Aufzeichnungen bei Lücken automatisch trennen</string>
     <string name="auto_split_recording_descr">Nach 6 min Pause neues Segment, nach 2 h neuen Track und nach Pause mit Datumsänderung neue Datei beginnen.</string>
     <string name="navigate_point_olc">Offener Standortcode (OLC)</string>
-    <string name="quick_action_page_list_descr">Drücken dieser Aktionstaste blättert die untere Liste durch.</string>
+    <string name="quick_action_page_list_descr">Taste, um durch die Liste unten zu blättern.</string>
     <string name="routing_attr_height_obstacles_name">Höhendaten berücksichtigen</string>
     <string name="routing_attr_height_obstacles_description">Faktor im Geländeprofil (über SRTM, ASTER und EU-DEM Daten).</string>
     <string name="rendering_attr_depthContours_name">Nautische Tiefenlinien</string>
@@ -2478,7 +2478,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Zeitpuffer festlegen, in dem zu sendende Positionen erhalten bleiben sollen, wenn keine Verbindung besteht</string>
     <string name="measurement_tool">Entfernungsmesser</string>
     <string name="measurement_tool_action_bar">Erkunden Sie die Karte und fügen Sie Punkte hinzu</string>
-    <string name="mappilary_no_internet_desc">Sie benötigen eine Internetverbindung, um Fotos von Mapillary ansehen zu können.</string>
+    <string name="mappilary_no_internet_desc">Fotos von Mapillary sind nur online verfügbar.</string>
     <string name="retry">Wiederholen</string>
     <string name="none_point_error">Bitte mindestens einen Punkt hinzufügen.</string>
     <string name="enter_gpx_name">GPX Dateiname:</string>
@@ -2661,7 +2661,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="winter_and_ski_renderer">Winter und Ski</string>
     <string name="touring_view_renderer">Tourenansicht</string>
     <string name="nautical_renderer">Nautisch</string>
-    <string name="copy_location_name">Punkt/POI-Name kopieren</string>
+    <string name="copy_location_name">Ort/POI-Name kopieren</string>
     <string name="toast_empty_name_error">Unbenannter Ort</string>
     <string name="show_closed_notes">Geschlossene Notizen anzeigen</string>
     <string name="switch_osm_notes_visibility_desc">OSM-Notizen auf der Karte ein-/ausblenden.</string>
@@ -3002,8 +3002,8 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="save_poi_value_exceed_length">Kürzen sie die Länge des Tags \"%s\" auf weniger als 255 Zeichen.</string>
     <string name="save_poi_value_exceed_length_title">Länge des \"%s\" Wertes</string>
     <string name="quick_action_day_night_mode">%s Modus</string>
-    <string name="routing_attr_avoid_sett_name">Kopfsteinpflaster und Pflastersteine vermeiden</string>
-    <string name="routing_attr_avoid_sett_description">Vermeiden Sie Kopfsteinpflaster und Pflastersteine</string>
+    <string name="routing_attr_avoid_sett_name">Kein Kopfsteinpflaster oder Pflastersteine</string>
+    <string name="routing_attr_avoid_sett_description">Vermeidet Kopfsteinpflaster und Pflastersteine</string>
     <string name="shared_string_degrees">Grad</string>
     <string name="shared_string_milliradians">Milliradiant</string>
     <string name="angular_measeurement">Winkeleinheit</string>
