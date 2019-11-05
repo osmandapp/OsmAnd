@@ -40,7 +40,7 @@ public class GpxNotification extends OsmandNotification {
 
 			@Override
 			public void onReceive(Context context, Intent intent) {
-				final OsmandMonitoringPlugin plugin = OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class);
+				final OsmandMonitoringPlugin plugin = OsmandPlugin.getPlugin(OsmandMonitoringPlugin.class);
 				if (plugin != null) {
 					plugin.saveCurrentTrack();
 					if (!app.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get()) {
@@ -54,7 +54,7 @@ public class GpxNotification extends OsmandNotification {
 
 			@Override
 			public void onReceive(Context context, Intent intent) {
-				final OsmandMonitoringPlugin plugin = OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class);
+				final OsmandMonitoringPlugin plugin = OsmandPlugin.getPlugin(OsmandMonitoringPlugin.class);
 				if (plugin != null) {
 					plugin.startGPXMonitoring(null);
 					plugin.updateControl();
@@ -66,7 +66,7 @@ public class GpxNotification extends OsmandNotification {
 
 			@Override
 			public void onReceive(Context context, Intent intent) {
-				final OsmandMonitoringPlugin plugin = OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class);
+				final OsmandMonitoringPlugin plugin = OsmandPlugin.getPlugin(OsmandMonitoringPlugin.class);
 				if (plugin != null) {
 					plugin.stopRecording();
 					plugin.updateControl();
@@ -95,7 +95,7 @@ public class GpxNotification extends OsmandNotification {
 
 	@Override
 	public boolean isEnabled() {
-		return OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null;
+		return app.getSavingTrackHelper().getIsRecording() || OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null;
 	}
 
 	@Override

@@ -1499,6 +1499,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			}
 		});
 		getMapView().refreshMap(true);
+		getMyApplication().getNotificationHelper().refreshNotifications();
 	}
 
 	public void updateMapSettings() {

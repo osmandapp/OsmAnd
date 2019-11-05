@@ -5,22 +5,20 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.text.format.DateFormat;
 
-import net.osmand.PlatformUtil;
-import net.osmand.data.LatLon;
-import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.GPXUtilities.Track;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
+import net.osmand.PlatformUtil;
+import net.osmand.data.LatLon;
+import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.Version;
-import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.notifications.OsmandNotification.NotificationType;
 import net.osmand.util.MapUtils;
 
@@ -409,30 +407,27 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		long locationTime = System.currentTimeMillis();
 		OsmandSettings settings = ctx.getSettings();
 		boolean record = false;
-		if(location != null &&
-				OsmAndLocationProvider.isNotSimulatedLocation(location) ) {
-			if (OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null) {
-				if (settings.SAVE_TRACK_TO_GPX.get()
-						&& locationTime - lastTimeUpdated > settings.SAVE_TRACK_INTERVAL.get()
-						&& ctx.getRoutingHelper().isFollowingMode()) {
-					record = true;
-				} else if (settings.SAVE_GLOBAL_TRACK_TO_GPX.get()
-						&& locationTime - lastTimeUpdated > settings.SAVE_GLOBAL_TRACK_INTERVAL.get()) {
-					record = true;
-				}
-				float minDistance = settings.SAVE_TRACK_MIN_DISTANCE.get();
-				if(minDistance > 0 && lastPoint != null && MapUtils.getDistance(lastPoint, location.getLatitude(), location.getLongitude()) < 
-						minDistance) {
-					record = false;
-				}
-				float precision = settings.SAVE_TRACK_PRECISION.get();
-				if(precision > 0 && (!location.hasAccuracy() || location.getAccuracy() > precision)) {
-					record = false;
-				}
-				float minSpeed = settings.SAVE_TRACK_MIN_SPEED.get();
-				if(minSpeed > 0 && (!location.hasSpeed() || location.getSpeed() < minSpeed)) {
-					record = false;
-				}
+		if (location != null && OsmAndLocationProvider.isNotSimulatedLocation(location)) {
+			if (settings.SAVE_TRACK_TO_GPX.get()
+					&& locationTime - lastTimeUpdated > settings.SAVE_TRACK_INTERVAL.get()
+					&& ctx.getRoutingHelper().isFollowingMode()) {
+				record = true;
+			} else if (settings.SAVE_GLOBAL_TRACK_TO_GPX.get()
+					&& locationTime - lastTimeUpdated > settings.SAVE_GLOBAL_TRACK_INTERVAL.get()) {
+				record = true;
+			}
+			float minDistance = settings.SAVE_TRACK_MIN_DISTANCE.get();
+			if (minDistance > 0 && lastPoint != null && MapUtils.getDistance(lastPoint, location.getLatitude(), location.getLongitude()) <
+					minDistance) {
+				record = false;
+			}
+			float precision = settings.SAVE_TRACK_PRECISION.get();
+			if (precision > 0 && (!location.hasAccuracy() || location.getAccuracy() > precision)) {
+				record = false;
+			}
+			float minSpeed = settings.SAVE_TRACK_MIN_SPEED.get();
+			if (minSpeed > 0 && (!location.hasSpeed() || location.getSpeed() < minSpeed)) {
+				record = false;
 			}
 		}
 		if (record) {
@@ -654,13 +649,8 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	}
 
 	public boolean getIsRecording() {
-		if (OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null) {
-			if (ctx.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get() ||
-					(ctx.getSettings().SAVE_TRACK_TO_GPX.get() && ctx.getRoutingHelper().isFollowingMode())) {
-				return true;
-			}
-		}
-		return false;
+		return ctx.getSettings().SAVE_GLOBAL_TRACK_TO_GPX.get() ||
+				(ctx.getSettings().SAVE_TRACK_TO_GPX.get() && ctx.getRoutingHelper().isFollowingMode());
 	}
 
 	public float getDistance() {
