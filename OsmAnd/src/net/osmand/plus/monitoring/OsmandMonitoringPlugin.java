@@ -320,7 +320,9 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 						}
 					});
 				}
-				monitoringControl.updateInfo(null);
+				if (monitoringControl != null) {
+					monitoringControl.updateInfo(null);
+				}
 			}
 		};
 		if(strings.length == 1) {
