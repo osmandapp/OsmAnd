@@ -229,6 +229,9 @@ public class GPXDatabase {
 
 	SQLiteConnection openConnection(boolean readonly) {
 		SQLiteConnection conn = context.getSQLiteAPI().getOrCreateDatabase(DB_NAME, readonly);
+		if (conn == null) {
+			return null;
+		}
 		if (conn.getVersion() < DB_VERSION) {
 			if (readonly) {
 				conn.close();
