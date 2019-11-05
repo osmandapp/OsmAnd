@@ -24,7 +24,7 @@ import android.widget.TextView
 import android.widget.Toast
 import net.osmand.GPXUtilities
 import net.osmand.PlatformUtil
-import net.osmand.aidlapi.gpx.AGpxBitmap
+import net.osmand.aidl.gpx.AGpxBitmap
 import net.osmand.telegram.R
 import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.TelegramSettings

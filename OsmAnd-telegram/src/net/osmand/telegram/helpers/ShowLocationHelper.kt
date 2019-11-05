@@ -6,10 +6,10 @@ import android.os.AsyncTask
 import android.text.TextUtils
 import net.osmand.GPXUtilities
 import net.osmand.PlatformUtil
-import net.osmand.aidlapi.gpx.AGpxFile
-import net.osmand.aidlapi.map.ALatLon
-import net.osmand.aidlapi.maplayer.point.AMapPoint
-import net.osmand.aidlapi.mapmarker.AMapMarker
+import net.osmand.aidl.gpx.AGpxFile
+import net.osmand.aidl.map.ALatLon
+import net.osmand.aidl.maplayer.point.AMapPoint
+import net.osmand.aidl.mapmarker.AMapMarker
 import net.osmand.telegram.R
 import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.helpers.OsmandAidlHelper.ContextMenuButtonsListener
@@ -301,7 +301,7 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 			val aGpxFile = importedGpxFiles.firstOrNull { it.fileName == name }
 
 			if (aGpxFile != null) {
-				val color = aGpxFile.color
+				val color = osmandAidlHelper.getGpxColor(aGpxFile.fileName)
 				if (!color.isNullOrEmpty()) {
 					gpxFile.extensionsToWrite["color"] = color
 				}
