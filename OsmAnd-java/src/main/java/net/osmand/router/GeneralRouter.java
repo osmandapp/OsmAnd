@@ -396,7 +396,7 @@ public class GeneralRouter implements VehicleRouter {
 	@Override
 	public float defineRoutingSpeed(RouteDataObject road) {
 		float spd = getObjContext(RouteDataObjectAttribute.ROAD_SPEED).evaluateFloat(road, defaultSpeed);
-		return spd;
+		return Math.max(Math.min(spd, maxSpeed), minSpeed);
 	}
 	
 	
