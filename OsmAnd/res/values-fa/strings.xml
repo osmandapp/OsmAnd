@@ -2769,8 +2769,6 @@
     <string name="unlimited_downloads">دانلود نامحدود</string>
     <string name="wikipedia_offline">ویکی‌پدیای آفلاین</string>
     <string name="unlock_all_features">قفل‌گشایی از همهٔ قابلیت‌های OsmAnd</string>
-    <string name="monthly_map_updates">به‌روزرسانی نقشه: ماهانه</string>
-    <string name="daily_map_updates">به‌روزرسانی نقشه: ساعتی</string>
     <string name="paid_app">برنامهٔ پولی</string>
     <string name="paid_plugin">افزونهٔ پولی</string>
     <string name="travel_card_update_descr">داده‌های تازهٔ ویکی‌سفر منتشر شده. به‌روز کنید و لذت ببرید.</string>

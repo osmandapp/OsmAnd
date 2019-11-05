@@ -11,6 +11,8 @@
 	Thx - Hardy
 
 -->
+    <string name="swap_two_places">Swap %1$s and %2$s</string>
+    <string name="route_start_point">Starting point</string>
     <string name="export_profile">Export profile</string>
     <string name="exported_osmand_profile">OsmAnd profile: %1$s</string>
     <string name="overwrite_profile_q">Profile \'%1$s\' already exists. Overwrite?</string>

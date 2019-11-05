@@ -2651,8 +2651,8 @@
     <string name="purchase_subscription_title">വരിക്കാരനാകാം - %1$s</string>
     <string name="wikivoyage_offline">ഓഫ്‌ലൈന്‍ വിക്കിവൊയേജ്</string>
     <string name="unlock_all_features">എല്ലാ OsmAnd സവിശേഷതകളും അൺലോക്കുചെയ്യുക</string>
-    <string name="monthly_map_updates">മാപ്പ് അപ്ഡേറ്റുകൾ: &lt;b&gt; എല്ലാ മാസവും &lt;/ b&gt;every month</string>
-    <string name="daily_map_updates">മാപ്പ് അപ്ഡേറ്റുകൾ: &lt;b&gt; ഓരോ മണിക്കൂറും &lt;/ b&gt;every hour</string>
+    <string name="monthly_map_updates">മാപ്പ് അപ്ഡേറ്റുകൾ: എല്ലാ മാസവും every month</string>
+    <string name="daily_map_updates">മാപ്പ് അപ്ഡേറ്റുകൾ: ഓരോ മണിക്കൂറും every hour</string>
     <string name="start_editing_card_image_text">ആർക്കും എഡിറ്റുചെയ്യാൻ കഴിയുന്ന സ്വതന്ത്ര ലോകവ്യാപക യാത്ര ഗൈഡ്.</string>
     <string name="welcome_to_open_beta_description">"ട്രാവൽ ഗൈഡുകൾ നിലവിൽ വിക്കിവൊയേജ് അടിസ്ഥാനമാക്കിയുള്ളതാണ്. ബീറ്റ ടെസ്റ്റിംഗ് സമയത്ത് എല്ലാ സവിശേഷതകളും സൗജന്യ മായ് പരിശോധിക്കുക. അതിനുശേഷം| ഓസ് ആൻഡ് അൺലിംനെറ്റിന്റെ ഉടമസ്ഥർക്കും ഓസ്മണ്ട്+  (എഫ്-ഡ്രോയ്ഡ് ഉള്‍പ്പടെ) ഉടമസ്ഥർക്കും യാത്രാ ഗൈഡുകൾ ലഭ്യമാകും."</string>
     <string name="start_editing_card_description">വിക്കിവൊയേജിലെ ഏതൊരു ആർട്ടിക്കിളും നിങ്ങള്‍ക്ക് തിരുത്താം. അറിവ്| അനുഭവം| കഴിവുകൾ| നിങ്ങളുടെ ശ്രദ്ധ എന്നിവ പങ്കിടാം</string>

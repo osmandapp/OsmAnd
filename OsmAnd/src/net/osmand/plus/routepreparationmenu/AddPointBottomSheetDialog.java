@@ -318,7 +318,19 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 	private void createSwitchStartAndEndItem() {
 		final View switchStartAndEndView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.bottom_sheet_item_simple_56dp, null);
 		TextView title = (TextView) switchStartAndEndView.findViewById(R.id.title);
-		title.setText(R.string.swap_start_and_destination);
+
+		String start = getString(R.string.route_start_point).toLowerCase();
+		String destination = getString(R.string.route_descr_destination).toLowerCase();
+		String titleS = getString(R.string.swap_two_places, start, destination);
+		SpannableString titleSpan = new SpannableString(titleS);
+		int startIndex = titleS.indexOf(start);
+		int destinationIndex = titleS.indexOf(destination);
+		if (startIndex != -1 && destinationIndex != -1) {
+			Typeface typeface = FontCache.getRobotoMedium(getContext());
+			titleSpan.setSpan(new CustomTypefaceSpan(typeface), startIndex, startIndex + start.length(), 0);
+			titleSpan.setSpan(new CustomTypefaceSpan(typeface), destinationIndex, destinationIndex + destination.length(), 0);
+		}
+		title.setText(titleSpan);
 
 		BaseBottomSheetItem switchStartAndEndItem = new SimpleBottomSheetItem.Builder()
 				.setIcon(getContentIcon(R.drawable.ic_action_change_navigation_points))
