@@ -774,7 +774,7 @@ POIの更新は利用できません</string>
     <string name="osmand_parking_time_limit">時間制限ありの駐車場</string>
     <string name="osmand_parking_time_no_limit">時間制限なしの駐車場</string>
     <string name="osmand_parking_position_description">あなたの駐車位置:%1$s</string>
-    <string name="osmand_parking_position_description_add">駐車時刻:</string>
+    <string name="osmand_parking_position_description_add">駐車上限時刻:</string>
     <string name="osmand_parking_pm">午後</string>
     <string name="osmand_parking_am">午前</string>
     <string name="osmand_parking_position_name">駐車場</string>
@@ -1251,7 +1251,7 @@ POIの更新は利用できません</string>
     <string name="lang_eu">バスク語</string>
     <string name="lang_be">ベラルーシ語</string>
     <string name="lang_bs">ボスニア語</string>
-    <string name="rendering_attr_coloredBuildings_name">タイプ別に建物に着色</string>
+    <string name="rendering_attr_coloredBuildings_name">タイプ別で建物に着色</string>
     <string name="continue_navigation">ナビゲーションを継続</string>
     <string name="pause_navigation">ナビを一時停止</string>
     <string name="lang_bg">ブルガリア語</string>
@@ -1453,7 +1453,7 @@ POIの更新は利用できません</string>
     <string name="osm_edits">OSM の編集</string>
     <string name="osmand_parking_hour">時間</string>
     <string name="osmand_parking_minute">分</string>
-    <string name="osmand_parking_time_left">残り時間</string>
+    <string name="osmand_parking_time_left">駐車可能です</string>
     <string name="parking_place_limited">駐車場の制限時間</string>
     <string name="your_edits">あなたの編集</string>
     <string name="waypoint_visit_after">後で立ち寄る</string>
@@ -2818,8 +2818,8 @@ POIの更新は利用できません</string>
 \n• 距離測定:コンテキストメニューに\"距離測定\"ボタンを追加 
 \n</string>
     <string name="what_is_here">要項:</string>
-    <string name="parked_at">駐車した場所</string>
-    <string name="pick_up_till">以下までに回収</string>
+    <string name="parked_at">駐車開始時刻</string>
+    <string name="pick_up_till">駐車上限時刻</string>
     <string name="without_time_limit">時間制限なし</string>
     <string name="context_menu_read_full_article">記事の全文を読む</string>
     <string name="open_from">開店時間</string>
@@ -2867,8 +2867,8 @@ POIの更新は利用できません</string>
     <string name="markers_remove_dialog_msg">マップマーカー「%s」を削除しますか？</string>
     <string name="edit_map_marker">マップマーカーの編集</string>
     <string name="third_party_application">サードパーティーアプリ</string>
-    <string name="search_street">指定エリアの道路を検索</string>
-    <string name="start_search_from_city">最初に都市を選択</string>
+    <string name="search_street">道路検索エリア</string>
+    <string name="start_search_from_city">都市/町/地域から検索</string>
     <string name="keep_passed_markers_descr">GPX経由地点のマーカーで通過済みのマーカーをグループとしてお気に入りに追加します。それらグループマーカーはアクティブにはならずマップ上から削除されます。</string>
     <string name="keep_passed_markers">通過済みマーカーをマップ上に保持</string>
     <string name="more_transport_on_stop_hint">この乗降場(停留所)では複数の交通機関へ乗り入れが可能です。</string>
@@ -2970,11 +2970,11 @@ POIの更新は利用できません</string>
     <string name="step_by_step">ターンバイターン</string>
     <string name="add_work">職場の追加</string>
     <string name="work_button">職場</string>
-    <string name="routing_attr_avoid_tram_name">路面電車を使用しない</string>
+    <string name="routing_attr_avoid_tram_name">路面電車を使わない</string>
     <string name="routing_attr_avoid_tram_description">移動手段に路面電車を使用しません</string>
-    <string name="routing_attr_avoid_bus_name">バスを使用しない</string>
+    <string name="routing_attr_avoid_bus_name">バスを使わない</string>
     <string name="routing_attr_avoid_bus_description">移動手段にバスおよびトロリーバスを使いません</string>
-    <string name="routing_attr_avoid_share_taxi_name">乗合タクシーを使用しない</string>
+    <string name="routing_attr_avoid_share_taxi_name">乗合タクシーを使わない</string>
     <string name="routing_attr_avoid_share_taxi_description">移動手段に乗り合いタクシーを使いません</string>
     <string name="routing_attr_avoid_train_name">鉄道を使わない</string>
     <string name="routing_attr_avoid_train_description">移動手段に鉄道を使いません</string>
@@ -3173,7 +3173,7 @@ POIの更新は利用できません</string>
     <string name="process_downloading_service">OsmAndダウンロード機能</string>
     <string name="shared_string_color_magenta">マゼンタ</string>
     <string name="press_again_to_change_the_map_orientation">もう一度タップするとマップの向きが変わります</string>
-    <string name="default_speed_setting_descr">デフォルトの速度設定を変更</string>
+    <string name="default_speed_setting_descr">デフォルトの速度設定を変更します</string>
     <string name="minmax_speed_dialog_title">最低/最高速度を設定</string>
     <string name="new_profile">新規プロファイル</string>
     <string name="app_mode_ufo">UFO(未確認飛行物体)</string>
@@ -3239,7 +3239,7 @@ POIの更新は利用できません</string>
     <string name="utm_format_descr">OsmAndは座標形式の一つとしてUTM標準形式を使用します。これはUTM NATO形式と似ていますが異なるものなのでご注意ください。</string>
     <string name="shared_string_example">例</string>
     <string name="navigate_point_format_utm">UTM標準</string>
-    <string name="navigate_point_format_olc">Open Location Code(OLC)</string>
+    <string name="navigate_point_format_olc">オープンロケーションコード(OLC)</string>
     <string name="coordinates_format_info">ここで選択した形式はアプリ全体に適用されます。</string>
     <string name="pref_selected_by_default_for_profiles">この設定で選択されたプロファイル\"%s\"が起動時にデフォルト表示されます</string>
     <string name="change_default_settings">設定の変更</string>
