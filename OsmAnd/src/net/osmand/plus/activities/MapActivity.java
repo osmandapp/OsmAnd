@@ -1598,10 +1598,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				changeZoom(1);
 				return true;
 			} else if (keyCode == KeyEvent.KEYCODE_DPAD_DOWN) {
-				scrollMap(0, -scrollingUnit);
+				scrollMap(0, scrollingUnit);
 				return true;
 			} else if (keyCode == KeyEvent.KEYCODE_DPAD_UP) {
-				scrollMap(0, scrollingUnit);
+				scrollMap(0, -scrollingUnit);
 				return true;
 			} else if (keyCode == KeyEvent.KEYCODE_DPAD_LEFT) {
 				scrollMap(-scrollingUnit, 0);
