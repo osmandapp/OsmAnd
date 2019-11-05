@@ -105,28 +105,28 @@
     <string name="snap_to_road">Auf Straße einrasten</string>
     <string name="osmand_play_title_30_chars">OsmAnd Karten &amp; Navigation</string>
     <string name="osmand_short_description_80_chars">Globale Landkarten- und Navigationsanwendung für Offline- und Online-OSM-Karten</string>
-    <string name="osmand_long_description_1000_chars">"OsmAnd (OSM Automated Navigation Directions) 
+    <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Navigation Directions)
 \n
-\n OsmAnd ist eine Open-Source Software Navigationsapp mit Zugriff auf eine große Vielfalt öffentlich zugänglicher OpenStreetMap-(OSM)-Karten weltweit. Alle Karten (Vektor- oder Kachelformate) können lokal auf der Speicherkarte abgelegt und offline verwendet werden. OsmAnd bietet ferner eine Offline- und Online-Routing-Funktion inklusive Sprachnavigation. 
+\nOsmAnd ist eine Open-Source Software Navigationsapp mit Zugriff auf eine große Vielfalt öffentlich zugänglicher OpenStreetMap-(OSM)-Karten weltweit. Alle Karten (Vektor- oder Kachelformate) können lokal auf der Speicherkarte abgelegt und offline verwendet werden. OsmAnd bietet ferner eine Offline- und Online-Routing-Funktion inklusive Sprachnavigation.
 \n
-\n Einige der Kernfunktionen: 
-\n - Komplette Offline-Funktionalität (Kartenmaterial kann auf dem Gerät abgelegt werden) 
-\n - Kompakte Vektorkarten für die ganze Welt verfügbar 
-\n - Direktes Herunterladen von Länder- oder Regionenkarten aus der App heraus 
-\n - Darstellung mehrerer überlagerter Kartenschichten wie GPX oder Navigations-Tracks, POIs (Points of Interest), Favoriten, Höhenlinien, ÖPNV-Haltestellen, zusätzliche Karten mit wählbarer Transparenz 
-\n - Offline Adress- und POI-Suche 
-\n - Offlinenavigation für mittelstrecken Distanzen 
-\n - Auto-, Fahrrad- und Fußgänger-Modus wahlweise mit: 
-\n  - automatischer Tag-Nacht-Umschaltung der Anzeige 
-\n  - geschwindigkeitsabhängigem Kartenmaßstab 
-\n  - Kartenausrichtung nach Kompass oder Bewegungsrichtung 
-\n  - Fahrspuranzeige, Geschwindigkeitswarnung, aufgenommenen oder TTS-Sprachansagen 
-\n
-\n Einschränkungen dieser kostenlosen Version von OsmAnd: 
+\nEinige der Kernfunktionen:
+\n- Komplette Offline-Funktionalität (Kartenmaterial kann auf dem Gerät abgelegt werden)
+\n- Kompakte Vektorkarten für die ganze Welt verfügbar
+\n- Direktes Herunterladen von Länder- oder Regionenkarten aus der App heraus
+\n- Darstellung mehrerer überlagerter Kartenschichten wie GPX oder Navigations-Tracks, POIs (Points of Interest), Favoriten, Höhenlinien, ÖPNV-Haltestellen, zusätzliche Karten mit wählbarer Transparenz
+\n- Offline Adress- und POI-Suche
+\n- Offlinenavigation für mittelstrecken Distanzen
+\n- Auto-, Fahrrad- und Fußgänger-Modus wahlweise mit:
+\n - automatischer Tag-Nacht-Umschaltung der Anzeige
+\n - geschwindigkeitsabhängigem Kartenmaßstab
+\n - Kartenausrichtung nach Kompass oder Bewegungsrichtung
+\n - Fahrspuranzeige, Geschwindigkeitswarnung, aufgenommenen oder TTS-Sprachansagen
+\n 
+\n Einschränkungen dieser kostenlosen Version von OsmAnd:
 \n - Begrenzte Anzahl der Kartendownloads
-\n - Kein Offline-Zugriff auf Wikipedia POIs 
-\n
-\n OsmAnd wird aktiv weiterentwickelt und das Projekt benötigt Mittel für die Entwicklung, die Komplettierung und den Test (Fahrten) neuer Funktionen. Bitte erwägen Sie den Kauf von OsmAnd+, die Förderung spezieller Funktionen oder eine allgemeine Spende auf https://osmand.net."</string>
+\n - Kein Offline-Zugriff auf Wikipedia POIs
+\n 
+\n OsmAnd wird aktiv weiterentwickelt und das Projekt benötigt Mittel für die Entwicklung, die Komplettierung und den Test neuer Funktionen. Bitte erwägen Sie den Kauf von OsmAnd+, die Förderung spezieller Funktionen oder eine allgemeine Spende auf https://osmand.net.</string>
     <string name="osmand_plus_play_title_30_chars">OsmAnd+ Karten &amp; Navigation</string>
     <string name="osmand_plus_short_description_80_chars">Globale Landkarten- und Navigationsanwendung für Offline- und Online-OSM-Karten</string>
     <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions) 
@@ -934,7 +934,7 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
     <string name="map_widget_transparent">Transparente Widgets</string>
     <string name="gps_wakeup_interval">GPS-Aufwachintervall: %s</string>
     <string name="int_continuosly">Kontinuierlich</string>
-    <string name="screen_is_locked">"Zum Entsperren auf das  Schloss-Symbol tippen"</string>
+    <string name="screen_is_locked">Zum Entsperren auf das Schloss-Symbol tippen</string>
     <string name="filterpoi_activity">POI-Filter erstellen</string>
     <string name="email">E-Mail</string>
     <string name="add_tag">Eintrag hinzufügen</string>
@@ -2830,7 +2830,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="search_no_results_feedback">Keine Suchergebnisse?
 \nGeben Sie uns eine Rückmeldung</string>
     <string name="commiting_way">Übertrage Weg…</string>
-    <string name="test_voice_desrc">Tippen Sie auf eine Schaltfläche und hören Sie sich die entsprechende Sprachausgabe an, um fehlende oder fehlerhafte Anweisungen zu erkennen.</string>
+    <string name="test_voice_desrc">Tippen Sie auf eine Schaltfläche und hören Sie sich die entsprechende Sprachausgabe an, um fehlende oder fehlerhafte Anweisungen zu erkennen</string>
     <string name="release_3_2_pre">• Absturz beim Start behoben, der bei manchen Geräten auftrat 
 \n 
 \n• Neue Funktion für Markierungen: Anzeigen bereits passierter Markierungen
