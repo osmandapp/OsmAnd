@@ -32,10 +32,12 @@ public class LiveUpdatesHelper {
 	public static final int DEFAULT_LAST_CHECK = -1;
 
 	private static <T> OsmandSettings.CommonPreference<T> checkPref(OsmandSettings.CommonPreference<T> p) {
-		if(p.isSet()) {
+		if (p.isSet()) {
 			T vl = p.get();
 			p = p.makeGlobal();
-			p.set(vl);
+			if (!p.isSet()) {
+				p.set(vl);
+			}
 		} else {
 			p = p.makeGlobal();
 		}
