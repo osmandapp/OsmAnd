@@ -755,51 +755,82 @@ Lon %2$s</string>
     <string name="interrupt_music">Pausar música</string>
     <string name="osmand_play_title_30_chars">Navegación y Mapas OsmAnd</string>
     <string name="osmand_short_description_80_chars">Visor y navegador móvil global de mapas OSM con y sin conexión</string>
-    <string name="osmand_long_description_1000_chars">"OsmAnd (OSM Automated Navigation Directions, y en español, Guía de Navegación Automatizada de OSM) 
+    <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Navigation Directions, y en español, Guía de Navegación Automatizada de OSM) 
+\n
 \n
 \nOsmAnd es un software de navegación de código abierto con acceso a una amplia variedad de datos globales de OpenStreetMap (OSM). Todos los datos del mapa (vectores y teselas) pueden ser almacenados en la memoria del teléfono para su uso sin conexión. También ofrece funcionalidades de rutas con y sin conexión, incluyendo indicaciones giro-a-giro por voz. 
 \n
 \n
+\n
 \n Algunas de las funciones fundamentales: 
+\n
 \n - Completa funcionalidad sin conexión (almacena los mapas vectoriales o teselas descargados en la memoria del dispositivo) 
+\n
 \n - Mapas vectoriales compactos disponibles de todo el planeta 
+\n
 \n - Descarga de mapas por país o región directamente desde la aplicación 
+\n
 \n - Posibilidad de superponer varias capas de mapa, como GPX o rutas de navegación, Puntos de Interés (PDI), Favoritos, curvas de nivel, paradas de transporte público, mapas adicionales con transparencia personalizable 
+\n
 \n - Búsqueda sin conexión de direcciones y lugares (PDI) 
+\n
 \n - Navegación sin conexión para distancias de rango medio 
+\n
 \n - Modos de automóvil, bicicleta y peatón con opcional: 
+\n
 \n - Cambio automático de modo diurno/nocturno 
-\n  - Zoom del mapa según la velocidad 
-\n  - Alineación del mapa, según la brújula o dirección del movimiento 
-\n  - Indicación de carriles, visualización de límites de velocidad, voces grabadas y sintetizadas 
+\n
+\n - Zoom del mapa según la velocidad 
+\n
+\n - Alineación del mapa, según la brújula o dirección del movimiento 
+\n
+\n - Indicación de carriles, visualización de límites de velocidad, voces grabadas y sintetizadas 
+\n
 \n
 \n Limitaciones de la versión gratuita de OsmAnd: 
+\n
 \n - Limitado número de mapas descargados 
+\n
 \n - Sin acceso a los PDI descargados de Wikipedia. 
 \n
-\n Los PDI de OsmAnd están siendo desarrollados activamente. Nuestro proyecto y su continuo progreso, se basa en contribuciones económicas para desarrollar y probar nuevas funcionalidades. Por favor, considera comprar OsmAnd+, financiar nuevas funciones o hacer una donación general en https://osmand.net."</string>
+\n
+\n Los PDI de OsmAnd están siendo desarrollados activamente. Nuestro proyecto y su continuo progreso, se basa en contribuciones económicas para desarrollar y probar nuevas funcionalidades. Por favor, considera comprar OsmAnd+, financiar nuevas funciones o hacer una donación general en https://osmand.net.</string>
     <string name="osmand_plus_play_title_30_chars">Navegación y Mapas OsmAnd+</string>
     <string name="osmand_plus_short_description_80_chars">Visor y navegador móvil global de mapas OSM con y sin conexión</string>
-    <string name="osmand_plus_long_description_1000_chars">"OsmAnd+ (OSM Automated Navigation Directions, y en español, Guía de Navegación Automatizada de OSM) 
+    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions, y en español, Guía de Navegación Automatizada de OSM) 
+\n
 \n
 \nOsmAnd+ es un software de navegación de código abierto con acceso a una amplia variedad de datos globales de OpenStreetMap (OSM). Todos los datos del mapa (vectores y teselas), pueden ser almacenados en la memoria del teléfono para su uso sin conexión. Ofrece funcionalidades de rutas con y sin conexión, incluyendo guía de giro-a-giro por voz. 
 \n
+\n
 \n OsmAnd+ es la versión de pago de la aplicación, comprándola das soporte al proyecto, financias el desarrollo de nuevas funciones, y recibes las últimas actualizaciones. 
 \n
+\n
 \n Algunas de las funciones fundamentales: 
+\n
 \n - Completa funcionalidad sin conexión (guarda los mapas vectoriales o teselas descargados en el almacenamiento del dispositivo) 
+\n
 \n - Mapas mundiales vectoriales compactos disponibles 
+\n
 \n - Descarga ilimitada de mapas de países o regiones directamente desde la aplicación 
+\n
 \n - Posibilidad de superponer varias capas de mapa, como GPX o rutas de navegación, Puntos de Interés, Favoritos, curvas de nivel, paradas de transporte público, mapas adicionales con transparencia personalizable 
 \n
+\n
 \n - Búsqueda sin conexión de direcciones y lugares (PDI) 
+\n
 \n - Rutas sin conexión para distancias de rango medio 
+\n
 \n - Modos de automóvil, bicicleta y peatón con opcional: 
+\n
 \n - Cambio automático de modo diurno/nocturno 
+\n
 \n - Zoom del mapa según la velocidad 
-\n  - Alineación del mapa, según brújula o dirección del movimiento 
-\n  - Indicación de carriles, mostrar límites de velocidad, voces grabadas y sintetizadas
-\n"</string>
+\n
+\n - Alineación del mapa, según brújula o dirección del movimiento 
+\n
+\n - Indicación de carriles, mostrar límites de velocidad, voces grabadas y sintetizadas
+\n</string>
     <string name="filterpoi_activity">Crear filtro PDI</string>
     <string name="recalculate_route_to_your_location">Modo transporte:</string>
     <string name="select_navigation_mode">Modo de transporte:</string>
@@ -2296,12 +2327,18 @@ Lon %2$s</string>
 \n 
 \n ¡Más países alrededor del globo están disponibles para descargar! 
 \n Obtén un navegador confiable en tu país - ya sea Francia, Alemania, México, Reino Unido, España, Países bajos, Estados Unidos, Rusia, Brasil o cualquier otro.</string>
-    <string name="osmand_plus_extended_description_part2">"Navegación GPS 
-\n • Funciona en línea (rápido) o sin conexión (sin cargos de roaming al viajar al extranjero) 
-\n • Guía por voz giro-a-giro (voces grabadas y sintetizadas) 
-\n • (Opcional) Guía de carriles, nombres de calles y tiempo estimado al destino 
-\n • Soporta puntos intermedios en el itinerario 
-\n • La ruta se recalcula al salirse de la misma  
+    <string name="osmand_plus_extended_description_part2">"Navegación GPS
+\n
+\n • Funciona en línea (rápido) o sin conexión (sin cargos de roaming al viajar al extranjero)
+\n
+\n • Guía por voz giro-a-giro (voces grabadas y sintetizadas)
+\n
+\n • (Opcional) Guía de carriles, nombres de calles y tiempo estimado al destino
+\n
+\n • Soporta puntos intermedios en el itinerario
+\n
+\n • La ruta se recalcula al salirse de la misma
+\n
 \n • Busca destinos por dirección, por tipo (por ejemplo: Restaurantes, hoteles, gasolineras, museos), o por coordenada geográfica "</string>
     <string name="osmand_plus_extended_description_part3">Vista del mapa 
 \n • Muestra tu ubicación y orientación 
