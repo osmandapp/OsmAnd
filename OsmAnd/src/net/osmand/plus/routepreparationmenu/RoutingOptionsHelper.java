@@ -281,7 +281,9 @@ public class RoutingOptionsHelper {
 				updateRoutingParameterIcons(item);
 				list.add(item);
 				if (item instanceof GpxLocalRoutingParameter) {
-					list.addAll(getGpxAndOsmandRouterParameters(am));
+					list.addAll(getGpxRouterParameters());
+				} else if (item instanceof TimeConditionalRoutingItem) {
+					list.addAll(getOsmandRouterParameters(am));
 				}
 			}
 		}
@@ -425,19 +427,22 @@ public class RoutingOptionsHelper {
 		return list;
 	}
 
-	public List<LocalRoutingParameter> getGpxAndOsmandRouterParameters(ApplicationMode am) {
-		final OsmandSettings settings = app.getSettings();
+	public List<LocalRoutingParameter> getOsmandRouterParameters(ApplicationMode am) {
+		OsmandSettings settings = app.getSettings();
 		List<LocalRoutingParameter> list = new ArrayList<LocalRoutingParameter>();
-		RouteProvider.GPXRouteParamsBuilder rparams = app.getRoutingHelper().getCurrentGPXRoute();
 		boolean osmandRouter = am.getRouteService() == RouteProvider.RouteService.OSMAND;
 		if (!osmandRouter) {
 			list.add(new OtherLocalRoutingParameter(R.string.calculate_osmand_route_without_internet,
-					app.getString(R.string.calculate_osmand_route_without_internet), settings.GPX_ROUTE_CALC_OSMAND_PARTS
-					.get()));
+					app.getString(R.string.calculate_osmand_route_without_internet), settings.GPX_ROUTE_CALC_OSMAND_PARTS.get()));
 			list.add(new OtherLocalRoutingParameter(R.string.fast_route_mode, app.getString(R.string.fast_route_mode),
 					settings.FAST_ROUTE_MODE.get()));
-			return list;
 		}
+		return list;
+	}
+
+	public List<LocalRoutingParameter> getGpxRouterParameters() {
+		List<LocalRoutingParameter> list = new ArrayList<LocalRoutingParameter>();
+		RouteProvider.GPXRouteParamsBuilder rparams = app.getRoutingHelper().getCurrentGPXRoute();
 		if (rparams != null) {
 			GPXUtilities.GPXFile fl = rparams.getFile();
 			if (fl.hasRtePt()) {
@@ -458,8 +463,13 @@ public class RoutingOptionsHelper {
 	}
 
 	public List<LocalRoutingParameter> getRoutingParametersInner(ApplicationMode am) {
+		boolean osmandRouter = am.getRouteService() == RouteProvider.RouteService.OSMAND;
+		if (!osmandRouter) {
+			return getOsmandRouterParameters(am);
+		}
+
 		RouteProvider.GPXRouteParamsBuilder rparams = app.getRoutingHelper().getCurrentGPXRoute();
-		List<LocalRoutingParameter> list = new ArrayList<LocalRoutingParameter>(getGpxAndOsmandRouterParameters(am));
+		List<LocalRoutingParameter> list = new ArrayList<LocalRoutingParameter>(getGpxRouterParameters());
 		GeneralRouter rm = SettingsNavigationActivity.getRouter(app.getRoutingConfig(), am);
 		if (rm == null || (rparams != null && !rparams.isCalculateOsmAndRoute()) && !rparams.getFile().hasRtePt()) {
 			return list;

@@ -384,7 +384,11 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 
 	private List<LocalRoutingParameter> getRoutingParameters(ApplicationMode applicationMode) {
 		List<String> routingParameters;
-		if (applicationMode.isDerivedRoutingFrom(ApplicationMode.CAR)) {
+
+		boolean osmandRouter = applicationMode.getRouteService() == RouteProvider.RouteService.OSMAND;
+		if (!osmandRouter) {
+			routingParameters = AppModeOptions.OTHER.routingParameters;
+		} else if (applicationMode.isDerivedRoutingFrom(ApplicationMode.CAR)) {
 			routingParameters = AppModeOptions.CAR.routingParameters;
 		} else if (applicationMode.isDerivedRoutingFrom(ApplicationMode.BICYCLE)) {
 			routingParameters = AppModeOptions.BICYCLE.routingParameters;
