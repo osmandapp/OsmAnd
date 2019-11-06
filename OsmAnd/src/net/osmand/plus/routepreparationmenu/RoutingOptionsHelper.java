@@ -1012,7 +1012,8 @@ public class RoutingOptionsHelper {
 		PUBLIC_TRANSPORT(MuteSoundRoutingParameter.KEY, AvoidPTTypesRoutingParameter.KEY),
 		BOAT(MuteSoundRoutingParameter.KEY),
 		AIRCRAFT(MuteSoundRoutingParameter.KEY),
-		SKI(MuteSoundRoutingParameter.KEY, DRIVING_STYLE, GeneralRouter.USE_HEIGHT_OBSTACLES);
+		SKI(MuteSoundRoutingParameter.KEY, DRIVING_STYLE, GeneralRouter.USE_HEIGHT_OBSTACLES),
+		OTHER(MuteSoundRoutingParameter.KEY);
 
 		List<String> routingParameters;
 
@@ -1023,7 +1024,10 @@ public class RoutingOptionsHelper {
 	
 	private List<String> getRoutingParametersForProfileType(ApplicationMode appMode) {
 		if (appMode != null) {
-			if (appMode.isDerivedRoutingFrom(ApplicationMode.CAR)) {
+			boolean osmandRouter = appMode.getRouteService() == RouteProvider.RouteService.OSMAND;
+			if (!osmandRouter) {
+				return PermanentAppModeOptions.OTHER.routingParameters;
+			} else if (appMode.isDerivedRoutingFrom(ApplicationMode.CAR)) {
 				return PermanentAppModeOptions.CAR.routingParameters;
 			} else if (appMode.isDerivedRoutingFrom(ApplicationMode.BICYCLE)) {
 				return PermanentAppModeOptions.BICYCLE.routingParameters;
@@ -1038,7 +1042,7 @@ public class RoutingOptionsHelper {
 			} else if (appMode.isDerivedRoutingFrom(ApplicationMode.SKI)) {
 				return PermanentAppModeOptions.SKI.routingParameters;
 			} else {
-				return new ArrayList<>();
+				return PermanentAppModeOptions.OTHER.routingParameters;
 			}
 		}
 		return null;
