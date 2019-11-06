@@ -1144,7 +1144,7 @@
     <string name="always_center_position_on_map">位置顯示始終處於中心</string>
     <string name="voice_pref_title">聲音</string>
     <string name="localization_pref_title">在地化</string>
-    <string name="interrupt_music_descr">語音通報會暫停音樂播放。</string>
+    <string name="interrupt_music_descr">語音提示會暫停音樂播放。</string>
     <string name="interrupt_music">暫停音樂</string>
     <string name="misc_pref_title">雜項</string>
     <string name="share_route_as_gpx">以 GPX 檔案分享路線</string>
@@ -2150,22 +2150,22 @@
     <string name="dialog_add_action_title">增加動作</string>
     <string name="quick_actions_delete">刪除動作</string>
     <string name="quick_actions_delete_text">您確定要刪除動作 \"%s\" 嗎？</string>
-    <string name="quick_action_add_marker_descr">輕點這個動作按鈕會在螢幕中央的位置增加一個地圖記號。</string>
-    <string name="quick_action_add_gpx_descr">輕點這個動作按鈕將會在螢幕中間增加一個 GPX 航點。</string>
-    <string name="quick_action_take_audio_note_descr">輕點這個動作按鈕會在螢幕中間增加一個音訊注解。</string>
-    <string name="quick_action_take_video_note_descr">輕點這個動作按鈕會在螢幕中間增加一個視訊注解。</string>
-    <string name="quick_action_take_photo_note_descr">輕點這個動作按鈕會在螢幕中間增加一個照片注解。</string>
-    <string name="quick_action_add_osm_bug_descr">輕點這個動作按鈕會在螢幕中間增加一個 OSM 註解。</string>
-    <string name="quick_action_add_poi_descr">輕點這個動作按鈕會在螢幕中間增加一個 POI。</string>
+    <string name="quick_action_add_marker_descr">在畫面中央新增地圖標記的按鈕。</string>
+    <string name="quick_action_add_gpx_descr">在畫面中央新增 GPX 路點的按鈕。</string>
+    <string name="quick_action_take_audio_note_descr">在畫面中央新增音訊註記的按鈕。</string>
+    <string name="quick_action_take_video_note_descr">在畫面中央新增視訊註記的按鈕。</string>
+    <string name="quick_action_take_photo_note_descr">在畫面中央新增照片註記的按鈕。</string>
+    <string name="quick_action_add_osm_bug_descr">在畫面中央新增 OSM 註記的按鈕。</string>
+    <string name="quick_action_add_poi_descr">在畫面中央新增 POI 的按鈕。</string>
     <string name="navigate_point_olc">打開位置編碼(OLC)</string>
     <string name="navigate_point_olc_info_invalid">無效的 OLC
 </string>
-    <string name="quick_action_navigation_voice_descr">輕點這個動作按鈕會停用或啟用導航期間的語音導引。</string>
-    <string name="quick_action_add_parking_descr">輕點這個動作按鈕會在螢幕中間增加一個停車位置。</string>
+    <string name="quick_action_navigation_voice_descr">在導航時停用或啟用語音導航的開關。</string>
+    <string name="quick_action_add_parking_descr">在畫面中央新增停車位置的按鈕。</string>
     <string name="quick_action_duplicates">快速動作已重新命名為 %1$s 以避免重複。</string>
     <string name="quick_action_duplicate">快速動作的名稱重複</string>
-    <string name="quick_action_showhide_favorites_descr">輕點這個動作按鈕會在地圖上顯示或隱藏我的收藏標點。</string>
-    <string name="quick_action_showhide_poi_descr">輕點這個動作按鈕會在地圖上顯示或隱藏 POI。</string>
+    <string name="quick_action_showhide_favorites_descr">在地圖上顯示或隱藏最愛標點的開關。</string>
+    <string name="quick_action_showhide_poi_descr">在地圖上顯示或隱藏 POI 的開關。</string>
     <string name="quick_action_map_overlay_switch">地圖覆蓋層變更為「%s」。</string>
     <string name="quick_action_map_underlay_switch">地圖底層變更為「%s」。</string>
     <string name="shared_string_action_name">動作名稱</string>
@@ -2173,7 +2173,7 @@
 請提供完整的編碼</string>
     <string name="navigate_point_olc_info_area">有效完整的 OLC
 代表區域：%1$s x %2$s</string>
-    <string name="quick_action_page_list_descr">輕點這個動作按鈕會直達下面的清單。</string>
+    <string name="quick_action_page_list_descr">用於翻閱下方列表的按鈕。</string>
     <string name="auto_split_recording_title">自動分割錄製之後的間隙</string>
     <string name="auto_split_recording_descr">如果日期已更改，開始新區段在6分鐘後的間隔，新軌跡在2小時後的間隔，或新檔案在更長的間隔之後。</string>
     <string name="rendering_attr_depthContours_description">顯示等深線和標記。</string>
@@ -2370,12 +2370,12 @@
 \n
 \n
 \n一些主要特點：</string>
-    <string name="quick_action_auto_zoom_desc">輕點這個動作按鈕的開啟/關閉會根據您的速度自動縮放地圖。</string>
+    <string name="quick_action_auto_zoom_desc">根據您的速度自動縮放地圖功能的開關。</string>
     <string name="shared_string_overview">概要</string>
     <string name="quick_action_replace_destination_desc">輕點此動作按鈕，會在螢幕中央新增路線的目的地，替換先前所選擇的目的地(如果有的話)。</string>
-    <string name="quick_action_add_first_intermediate_desc">輕點此動作按鈕，會在螢幕中央做出第一個中轉地點。</string>
+    <string name="quick_action_add_first_intermediate_desc">將第一個中轉目的地置於您的畫面中央的按鈕。</string>
     <string name="depth_contour_descr">海洋等深線和海洋標記。</string>
-    <string name="quick_action_add_destination_desc">輕點此動作按鈕，會在螢幕中央做出路線的目的地，任何之前所選擇的目的地，將成為最後的中轉地點。</string>
+    <string name="quick_action_add_destination_desc">將路徑終點置於您的畫面中央的按鈕，任何先前選取的目的地都會變成最後的中轉目的地。</string>
     <string name="subscribe_email_desc">訂閱我們有關應用程式折扣的郵寄名單並獲得三次以上的地圖下載！</string>
     <string name="animate_my_location">以動畫顯示自己的位置</string>
     <string name="animate_my_location_desc">在導航時將「我的位置」開啟動畫平移。</string>
@@ -2400,7 +2400,7 @@
     <string name="quick_action_osmbugs_show">顯示 OSM 註解</string>
     <string name="quick_action_osmbugs_hide">隱藏 OSM 註解</string>
     <string name="search_favorites">在我的最愛中搜尋</string>
-    <string name="quick_action_showhide_osmbugs_descr">輕點這個動作按鈕會在地圖上顯示或隱藏 OSM 註解。</string>
+    <string name="quick_action_showhide_osmbugs_descr">在地圖上顯示或隱藏 OSM 註記的開關。</string>
     <string name="private_access_routing_req">您的目的地位處私人通路的區域。本次旅程允許使用私人道路嗎？</string>
     <string name="restart_search">重新開始搜尋</string>
     <string name="increase_search_radius">增加搜尋半徑</string>
@@ -2648,7 +2648,7 @@
     <string name="shared_string_gpx_file">GPX 檔案</string>
     <string name="osc_file">OSC 檔案</string>
     <string name="choose_file_type">選取檔案類型</string>
-    <string name="osm_edits_export_desc">選擇匯出類型：OSM 註解、POI 或著兩者。</string>
+    <string name="osm_edits_export_desc">選擇匯出類型：OSM 註解、POI 或著兩者皆有。</string>
     <string name="all_data">所有的資料</string>
     <string name="osm_notes">OSM 註解</string>
     <string name="tunnel_warning">前方有隧道</string>
@@ -2875,10 +2875,10 @@
     <string name="show_along_the_route">在路徑旁顯示</string>
     <string name="simulate_navigation">模擬導航</string>
     <string name="choose_track_file_to_follow">選取要跟隨的軌跡檔案</string>
-    <string name="voice_announcements">語音通知</string>
+    <string name="voice_announcements">語音提示</string>
     <string name="intermediate_destinations">中轉地點</string>
     <string name="arrive_at_time">到達 %1$s</string>
-    <string name="quick_action_switch_day_night_descr">輕觸此動作按鈕以在 OsmAnd 的日間與夜間模式間切換</string>
+    <string name="quick_action_switch_day_night_descr">輕觸此動作按鈕以在 OsmAnd 的日間與夜間模式間切換。</string>
     <string name="quick_action_switch_day_mode">日間模式</string>
     <string name="quick_action_switch_night_mode">夜間模式</string>
     <string name="quick_action_day_night_switch_mode">切換日間／夜間模式</string>
@@ -2901,7 +2901,7 @@
     <string name="exit_at">出口於</string>
     <string name="sit_on_the_stop">站點的座位</string>
     <string name="quick_action_show_hide_gpx_tracks">顯示／隱藏 GPX 軌跡</string>
-    <string name="quick_action_show_hide_gpx_tracks_descr">點選此動作按鈕在地圖上顯示或隱藏選定的 GPX 軌跡</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">點選此動作按鈕在地圖上顯示或隱藏選定的 GPX 軌跡。</string>
     <string name="quick_action_gpx_tracks_hide">隱藏 GPX 軌跡</string>
     <string name="quick_action_gpx_tracks_show">顯示 GPX 軌跡</string>
     <string name="send_log">傳送紀錄檔</string>
@@ -3262,7 +3262,7 @@
     <string name="vehicle_parameters">車輛參數</string>
     <string name="voice_announces_info">僅在導航時播放語音通知。</string>
     <string name="voice_announces_descr">導航指示與通知</string>
-    <string name="voice_announces">語音通知</string>
+    <string name="voice_announces">語音提示</string>
     <string name="screen_alerts">畫面警告</string>
     <string name="route_parameters_descr">設定路徑參數</string>
     <string name="route_parameters">路徑參數</string>
@@ -3350,14 +3350,22 @@
     <string name="routing_attr_driving_style_prefer_unpaved_name">偏好無鋪面道路</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">偏好無鋪面道路。</string>
     <string name="layer_osm_edits">OSM 編輯</string>
-    <string name="quick_action_contour_lines_descr">輕點此動作按鈕以在地圖上顯示或隱藏等高線</string>
+    <string name="quick_action_contour_lines_descr">輕點此動作按鈕以在地圖上顯示或隱藏等高線。</string>
     <string name="quick_action_contour_lines_show">顯示等高線</string>
     <string name="quick_action_contour_lines_hide">隱藏等高線</string>
     <string name="quick_action_show_hide_contour_lines">顯示／隱藏等高線</string>
-    <string name="quick_action_hillshade_descr">輕點此動作按鈕以在地圖上顯示或隱藏地形陰影</string>
+    <string name="quick_action_hillshade_descr">輕點此動作按鈕以在地圖上顯示或隱藏地形陰影。</string>
     <string name="quick_action_hillshade_show">顯示地形陰影</string>
     <string name="quick_action_hillshade_hide">隱藏地形陰影</string>
     <string name="quick_action_show_hide_hillshade">顯示／隱藏地形陰影</string>
     <string name="tts_initialization_error">無法啟動文字轉語音引擎</string>
     <string name="simulate_your_location_gpx_descr">使用已紀錄的 GPX 軌跡模擬您的位置。</string>
+    <string name="export_profile">匯出設定檔</string>
+    <string name="exported_osmand_profile">OsmAnd 設定檔：%1$s</string>
+    <string name="overwrite_profile_q">設定檔「%1$s」已存在。覆寫？</string>
+    <string name="export_profile_failed">無法匯出設定檔。</string>
+    <string name="profile_import">設定檔匯入：</string>
+    <string name="profile_import_descr">要匯入設定檔，在裝置上選取其檔案並使用 OsmAnd 開啟。</string>
+    <string name="file_import_error">%1$s 匯入錯誤：%2$s</string>
+    <string name="file_imported_successfully">%1$s 成功匯入。</string>
 </resources>

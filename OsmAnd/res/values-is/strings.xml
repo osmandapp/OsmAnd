@@ -2760,7 +2760,7 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="download_file">Sækja skrá</string>
     <string name="start_editing_card_image_text">Frjálsa ferðagreinasafnið sem allir geta lagað og breytt.</string>
     <string name="welcome_to_open_beta_description">Ferðaupplýsingar eru byggðar á Wikivoyage. Á meðan opnum forprófunum stendur hefurðu tækifæri til að meta alla eiginleikans ókeypis og án kvaða. Eftir að forprófunum lýkur, munu ferðaupplýsingar standa áskrifendum OsmAnd Unlimited og eigendum OsmAnd+ til boða.</string>
-    <string name="start_editing_card_description">Þú getur breytt hvaða grein sem er á Wikivoyage. Við þörfnumst þekkingar þinnar, reynslu, hæfileika og áhuga þíns</string>
+    <string name="start_editing_card_description">Þú getur breytt hvaða grein sem er á Wikivoyage. Við þörfnumst þekkingar þinnar, reynslu, hæfileika og áhuga þíns.</string>
     <string name="start_editing">Hefja breytingar</string>
     <string name="get_unlimited_access">Fáðu ótakmarkaðan aðgang</string>
     <string name="welcome_to_open_beta">Velkomin í opnu beta-þróunarútgáfuna</string>
@@ -3095,7 +3095,7 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="profile_alert_duplicate_name_msg">Þegar er til notkunarsnið með þessu nafni</string>
     <string name="profile_alert_cant_delete_base">Þú getur ekki eytt grunnsniðum OsmAnd</string>
     <string name="profile_alert_need_save_msg">Vistaðu breytingar á notkunarsniðinu áður en haldið er áfram</string>
-    <string name="profile_alert_delete_msg">Ertu viss um að þú viljir eyða notkunarsniðinu \"%s\"\?</string>
+    <string name="profile_alert_delete_msg">Ertu viss um að þú viljir eyða notkunarsniðinu \"%s\"</string>
     <string name="select_base_profile_dialog_title">Veldu grunnsnið</string>
     <string name="base_profile_descr_car">Bílar, trukkar, mótorhjól</string>
     <string name="base_profile_descr_bicycle">Fjallahjól, skellinöðrur, hestar</string>
@@ -3389,4 +3389,12 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="swap_start_and_destination">Skipta á upphafi og áfangastað</string>
     <string name="tts_initialization_error">Gat ekki ræst talgervil</string>
     <string name="simulate_your_location_gpx_descr">Herma eftir staðsetningu þinni með áður skráðum GPX-ferli.</string>
+    <string name="export_profile">Flytja út snið</string>
+    <string name="exported_osmand_profile">OsmAnd-snið: %1$s</string>
+    <string name="overwrite_profile_q">Sniðið \'%1$s\' er þegar til staðar. Skrifa yfir það\?</string>
+    <string name="export_profile_failed">Gat ekki flutt út sniðið.</string>
+    <string name="profile_import">Flytja inn sniðið:</string>
+    <string name="profile_import_descr">Til að flytja inn snið skaltu velja sniðskrána á tækinu og opna hana með OsmAnd.</string>
+    <string name="file_import_error">Villa í innflutningi %1$s: %2$s</string>
+    <string name="file_imported_successfully">Það tókst að flytja %1$s inn.</string>
 </resources>

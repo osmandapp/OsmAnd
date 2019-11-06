@@ -751,15 +751,14 @@ Lon %2$s</string>
     <string name="auto_zoom_map">Zoom automático del mapa</string>
     <string name="snap_to_road_descr">Ajusta la ubicación al camino durante la navegación.</string>
     <string name="snap_to_road">Ajustar al camino</string>
-    <string name="interrupt_music_descr">Los avisos por voz pausan la reproducción de música.</string>
+    <string name="interrupt_music_descr">Las indicaciones por voz pausan la reproducción de música.</string>
     <string name="interrupt_music">Pausar música</string>
     <string name="osmand_play_title_30_chars">Navegación y Mapas OsmAnd</string>
     <string name="osmand_short_description_80_chars">Visor y navegador móvil global de mapas OSM con y sin conexión</string>
-    <string name="osmand_long_description_1000_chars">"OsmAnd (OSM Automated Navigation Directions, y en español, Guía de Navegación Automatizada de OSM) 
-\n
+    <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Navigation Directions, y en español, Guía de Navegación Automatizada de OSM) 
+\n 
 \nOsmAnd es un software de navegación de código abierto con acceso a una amplia variedad de datos globales de OpenStreetMap (OSM). Todos los datos del mapa (vectores y teselas) pueden ser almacenados en la memoria del teléfono para su uso sin conexión. También ofrece funcionalidades de rutas con y sin conexión, incluyendo indicaciones giro-a-giro por voz. 
-\n
-\n
+\n 
 \n Algunas de las funciones fundamentales: 
 \n - Completa funcionalidad sin conexión (almacena los mapas vectoriales o teselas descargados en la memoria del dispositivo) 
 \n - Mapas vectoriales compactos disponibles de todo el planeta 
@@ -769,37 +768,37 @@ Lon %2$s</string>
 \n - Navegación sin conexión para distancias de rango medio 
 \n - Modos de automóvil, bicicleta y peatón con opcional: 
 \n - Cambio automático de modo diurno/nocturno 
-\n  - Zoom del mapa según la velocidad 
-\n  - Alineación del mapa, según la brújula o dirección del movimiento 
-\n  - Indicación de carriles, visualización de límites de velocidad, voces grabadas y sintetizadas 
+\n - Zoom del mapa según la velocidad 
+\n - Alineación del mapa, según la brújula o dirección del movimiento 
+\n - Indicación de carriles, visualización de límites de velocidad, voces grabadas y sintetizadas 
 \n
 \n Limitaciones de la versión gratuita de OsmAnd: 
 \n - Limitado número de mapas descargados 
 \n - Sin acceso a los PDI descargados de Wikipedia. 
-\n
-\n Los PDI de OsmAnd están siendo desarrollados activamente. Nuestro proyecto y su continuo progreso, se basa en contribuciones económicas para desarrollar y probar nuevas funcionalidades. Por favor, considera comprar OsmAnd+, financiar nuevas funciones o hacer una donación general en https://osmand.net."</string>
+\n 
+\n Los PDI de OsmAnd están siendo desarrollados activamente. Nuestro proyecto y su continuo progreso, se basa en contribuciones económicas para desarrollar y probar nuevas funcionalidades. Por favor, considera comprar OsmAnd+, financiar nuevas funciones o hacer una donación general en https://osmand.net.</string>
     <string name="osmand_plus_play_title_30_chars">Navegación y Mapas OsmAnd+</string>
     <string name="osmand_plus_short_description_80_chars">Visor y navegador móvil global de mapas OSM con y sin conexión</string>
-    <string name="osmand_plus_long_description_1000_chars">"OsmAnd+ (OSM Automated Navigation Directions, y en español, Guía de Navegación Automatizada de OSM) 
-\n
+    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions, y en español, Guía de Navegación Automatizada de OSM) 
+\n 
 \nOsmAnd+ es un software de navegación de código abierto con acceso a una amplia variedad de datos globales de OpenStreetMap (OSM). Todos los datos del mapa (vectores y teselas), pueden ser almacenados en la memoria del teléfono para su uso sin conexión. Ofrece funcionalidades de rutas con y sin conexión, incluyendo guía de giro-a-giro por voz. 
-\n
+\n 
 \n OsmAnd+ es la versión de pago de la aplicación, comprándola das soporte al proyecto, financias el desarrollo de nuevas funciones, y recibes las últimas actualizaciones. 
-\n
+\n 
 \n Algunas de las funciones fundamentales: 
 \n - Completa funcionalidad sin conexión (guarda los mapas vectoriales o teselas descargados en el almacenamiento del dispositivo) 
 \n - Mapas mundiales vectoriales compactos disponibles 
 \n - Descarga ilimitada de mapas de países o regiones directamente desde la aplicación 
 \n - Posibilidad de superponer varias capas de mapa, como GPX o rutas de navegación, Puntos de Interés, Favoritos, curvas de nivel, paradas de transporte público, mapas adicionales con transparencia personalizable 
-\n
+\n 
 \n - Búsqueda sin conexión de direcciones y lugares (PDI) 
 \n - Rutas sin conexión para distancias de rango medio 
 \n - Modos de automóvil, bicicleta y peatón con opcional: 
 \n - Cambio automático de modo diurno/nocturno 
 \n - Zoom del mapa según la velocidad 
-\n  - Alineación del mapa, según brújula o dirección del movimiento 
-\n  - Indicación de carriles, mostrar límites de velocidad, voces grabadas y sintetizadas
-\n"</string>
+\n - Alineación del mapa, según brújula o dirección del movimiento 
+\n - Indicación de carriles, mostrar límites de velocidad, voces grabadas y sintetizadas
+\n</string>
     <string name="filterpoi_activity">Crear filtro PDI</string>
     <string name="recalculate_route_to_your_location">Modo transporte:</string>
     <string name="select_navigation_mode">Modo de transporte:</string>
@@ -926,7 +925,7 @@ Lon %2$s</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Los mapas vectoriales pueden mostrarse más rápido. Puede no funcionar correctamente en algunos dispositivos.</string>
     <string name="play_commands_of_currently_selected_voice">Elige una voz y reproduce pruebas de los avisos:</string>
     <string name="native_rendering">Dibujo nativo</string>
-    <string name="test_voice_prompts">Probar avisos por voz</string>
+    <string name="test_voice_prompts">Probar indicaciones por voz</string>
     <string name="switch_to_raster_map_to_see">Descargar un mapa vectorial sin conexión de esta ubicación en «Ajustes → Gestionar mapas», o cambiar al complemento «Mapas en línea».</string>
     <string name="send_files_to_osm">¿Enviar archivos GPX a OSM?</string>
     <string name="gpx_visibility_txt">Visibilidad</string>
@@ -1028,8 +1027,8 @@ Lon %2$s</string>
     <string name="index_name_oceania">Australia y Oceanía</string>
     <string name="index_name_other">Mapas mundiales y temáticos</string>
     <string name="index_name_wiki">Wikipedia mundial</string>
-    <string name="index_name_voice">Avisos por voz (grabados, funciones limitadas)</string>
-    <string name="index_name_tts_voice">Avisos por voz (TTS, preferido)</string>
+    <string name="index_name_voice">Indicaciones por voz (grabadas, funciones limitadas)</string>
+    <string name="index_name_tts_voice">Indicaciones por voz (TTS, preferido)</string>
     <string name="amenity_type_osmwiki">Wikipedia (sin conexión)</string>
     <string name="amenity_type_user_defined">Definido por el usuario</string>
     <string name="fav_export_confirmation">Ya existe un archivo con los Favoritos exportados previamente. ¿Quieres sustituirlo?</string>
@@ -1124,8 +1123,8 @@ Lon %2$s</string>
     <string name="local_index_transport_data">Datos de transporte público</string>
     <string name="local_index_map_data">Datos de mapa</string>
     <string name="local_indexes_cat_backup">Desactivado</string>
-    <string name="local_indexes_cat_tts">Avisos por voz (TTS)</string>
-    <string name="local_indexes_cat_voice">Avisos por voz (grabados)</string>
+    <string name="local_indexes_cat_tts">Indicaciones por voz (TTS)</string>
+    <string name="local_indexes_cat_voice">Indicaciones por voz (grabadas)</string>
     <string name="local_indexes_cat_poi">Datos de PDI</string>
     <string name="ttsvoice">Voz TTS</string>
     <string name="search_offline_clear_search">Nueva búsqueda</string>
@@ -1243,8 +1242,8 @@ Lon %2$s</string>
     <string name="loading_builds">Cargando compilaciones de OsmAnd…</string>
     <string name="select_build_to_install">Instalar compilación de OsmAnd</string>
     <string name="gps_status_app_not_found">La aplicación «GPS Status» no está instalada. ¿Buscar en la tienda de aplicaciones?</string>
-    <string name="voice_is_not_available_msg">Sin indicaciones por voz disponible, vaya a «Ajustes» → «Ajustes de navegación», elige el perfil → «Indicaciones por voz» y luego elige o descarga un paquete de avisos por voz.</string>
-    <string name="voice_is_not_available_title">Elige un paquete de avisos por voz</string>
+    <string name="voice_is_not_available_msg">Sin indicaciones por voz disponible, vaya a «Ajustes» → «Ajustes de navegación», elige el perfil → «Indicaciones por voz» y luego elige o descarga un paquete de indicaciones por voz.</string>
+    <string name="voice_is_not_available_title">Elige un paquete de indicaciones por voz</string>
     <string name="daynight_mode_day">Diurno</string>
     <string name="daynight_mode_night">Nocturno</string>
     <string name="daynight_mode_auto">Alba/ocaso</string>
@@ -1278,7 +1277,7 @@ Lon %2$s</string>
     <string name="transport_searching_route">Resultados de transporte ({0} al destino):</string>
     <string name="transport_search_again">Reiniciar búsqueda de transporte</string>
     <string name="voice">Voz grabada</string>
-    <string name="voices">Avisos por voz</string>
+    <string name="voices">Indicaciones por voz</string>
     <string name="no_vector_map_loaded">Los mapas vectoriales no están cargados</string>
     <string name="gpx_files_not_found">Sin archivos GPX en la carpeta de trazas</string>
     <string name="layer_gpx_layer">Archivos GPX…</string>
@@ -1336,7 +1335,7 @@ Lon %2$s</string>
     <string name="voice_data_initializing">Inicializando datos de voz…</string>
     <string name="voice_data_not_supported">Versión no soportada de datos de voz</string>
     <string name="voice_data_corrupted">El dato de voz indicado está corrupto</string>
-    <string name="voice_data_unavailable">Paquete de avisos por voz elegido, no disponible</string>
+    <string name="voice_data_unavailable">Paquete de Indicaciones por voz elegida, no disponible</string>
     <string name="sd_unmounted">Tarjeta de memoria inaccesible. 
 \nNo podrás ver mapas ni encontrar cosas.</string>
     <string name="sd_mounted_ro">Tarjeta de memoria en sólo lectura. 
@@ -2131,21 +2130,21 @@ Lon %2$s</string>
     <string name="quick_favorites_show_favorites_dialog">Mostrar diálogo de Favoritos</string>
     <string name="quick_favorites_name_preset">Nombre predefinido</string>
     <string name="shared_string_action_name">Nombre de la acción</string>
-    <string name="quick_action_add_marker_descr">Este botón de acción, añade un marcador en el centro de la pantalla.</string>
-    <string name="quick_action_add_gpx_descr">Este botón de acción, añade un punto de referencia GPX en el centro de la pantalla.</string>
-    <string name="quick_action_take_audio_note_descr">Este botón de acción, añade una nota de audio en el centro de la pantalla.</string>
-    <string name="quick_action_take_video_note_descr">Este botón de acción, añade una nota de video en el centro de la pantalla.</string>
-    <string name="quick_action_take_photo_note_descr">Este botón de acción, añade una nota fotográfica en el centro de la pantalla.</string>
-    <string name="quick_action_add_osm_bug_descr">Este botón de acción, añade una nota de OSM en el centro de la pantalla.</string>
-    <string name="quick_action_add_poi_descr">Este botón de acción, añade un PDI en el centro de la pantalla.</string>
-    <string name="quick_action_navigation_voice_descr">Este botón de acción, des/activa las indicaciones por voz durante la navegación.</string>
-    <string name="quick_action_add_parking_descr">Este botón de acción, añade la ubicación del estacionamiento en el centro de la pantalla.</string>
+    <string name="quick_action_add_marker_descr">Un botón que añade un marcador en el centro de la pantalla.</string>
+    <string name="quick_action_add_gpx_descr">Un botón que añade un punto de referencia GPX en el centro de la pantalla.</string>
+    <string name="quick_action_take_audio_note_descr">Un botón que añade una nota de audio en el centro de la pantalla.</string>
+    <string name="quick_action_take_video_note_descr">Un botón que añade una nota de video en el centro de la pantalla.</string>
+    <string name="quick_action_take_photo_note_descr">Un botón que añade una nota fotográfica en el centro de la pantalla.</string>
+    <string name="quick_action_add_osm_bug_descr">Un botón que añade una nota de OSM en el centro de la pantalla.</string>
+    <string name="quick_action_add_poi_descr">Un botón que añade un PDI en el centro de la pantalla.</string>
+    <string name="quick_action_navigation_voice_descr">Un botón que des/activa las indicaciones por voz durante la navegación.</string>
+    <string name="quick_action_add_parking_descr">Un botón que añade la ubicación del estacionamiento en el centro de la pantalla.</string>
     <string name="favorite_autofill_toast_text">" guardado como "</string>
     <string name="favorite_empty_place_name">Lugar</string>
     <string name="quick_action_duplicates">Acción rápida renombrada a «%1$s» para evitar duplicados.</string>
     <string name="quick_action_duplicate">Nombre de la acción rápida duplicado</string>
-    <string name="quick_action_showhide_favorites_descr">Este botón de acción, muestra u oculta los Favoritos en el mapa.</string>
-    <string name="quick_action_showhide_poi_descr">Este botón de acción, muestra u oculta los PDI en el mapa.</string>
+    <string name="quick_action_showhide_favorites_descr">Un botón que muestra u oculta los Favoritos en el mapa.</string>
+    <string name="quick_action_showhide_poi_descr">Un botón que muestra u oculta los PDI en el mapa.</string>
     <string name="quick_action_showhide_favorites_title">Alternar vista de Favoritos</string>
     <string name="quick_action_favorites_show">Mostrar Favoritos</string>
     <string name="quick_action_favorites_hide">Ocultar Favoritos</string>
@@ -2188,7 +2187,7 @@ Lon %2$s</string>
 \nProporciona un código completo</string>
     <string name="navigate_point_olc_info_area">OLC completo y válido.
 \nÁrea representada: %1$s x %2$s</string>
-    <string name="quick_action_page_list_descr">Este botón de acción, muestra la siguiente lista.</string>
+    <string name="quick_action_page_list_descr">Un botón que muestra la siguiente lista.</string>
     <string name="auto_split_recording_title">División automática de grabaciones en intervalos</string>
     <string name="auto_split_recording_descr">Iniciar nuevo segmento luego de un hueco de 6 min, nueva traza luego de un hueco de 2 h, o nuevo archivo luego de un hueco más largo si ha cambiado la fecha.</string>
     <string name="rendering_attr_depthContours_description">Mostrar curvas y puntos de profundidad.</string>
@@ -2374,15 +2373,15 @@ Lon %2$s</string>
     <string name="no_overlay">Sin superposición</string>
     <string name="no_underlay">Sin subyacencia</string>
     <string name="quick_action_auto_zoom">Alternar zoom automático del mapa</string>
-    <string name="quick_action_auto_zoom_desc">Este botón de acción, alterna el zoom automático del mapa de acuerdo a la velocidad.</string>
+    <string name="quick_action_auto_zoom_desc">Un botón que alterna el zoom automático del mapa de acuerdo a la velocidad.</string>
     <string name="quick_action_auto_zoom_on">Activar zoom automático del mapa</string>
     <string name="quick_action_auto_zoom_off">Desactivar zoom automático del mapa</string>
     <string name="quick_action_add_destination">Definir destino</string>
     <string name="quick_action_replace_destination">Reemplazar destino</string>
     <string name="quick_action_add_first_intermediate">Añadir primer destino intermedio</string>
-    <string name="quick_action_add_destination_desc">Este botón de acción, añade un destino de ruta en el centro de la pantalla. Cualquier destino previamente elegido, se mueve como último destino intermedio.</string>
+    <string name="quick_action_add_destination_desc">Un botón que añade el destino de la ruta en el centro de la pantalla, cualquier destino previamente elegido se convierte en el último destino intermedio.</string>
     <string name="quick_action_replace_destination_desc">Este botón de acción, añade un nuevo destino de ruta en el centro de la pantalla, reemplazando el anterior destino (si existe).</string>
-    <string name="quick_action_add_first_intermediate_desc">Este botón de acción, añade el primer destino intermedio en el centro de la pantalla.</string>
+    <string name="quick_action_add_first_intermediate_desc">Un botón que añade el primer destino intermedio en el centro de la pantalla.</string>
     <string name="shared_string_paused">Pausado</string>
     <string name="type_city_town">Escribe la ciudad, pueblo o localidad</string>
     <string name="type_postcode">Escribe el código postal</string>
@@ -2414,7 +2413,7 @@ Lon %2$s</string>
     <string name="quick_action_showhide_osmbugs_title">Alternar notas de OSM</string>
     <string name="quick_action_osmbugs_show">Mostrar notas de OSM</string>
     <string name="quick_action_osmbugs_hide">Ocultar notas de OSM</string>
-    <string name="quick_action_showhide_osmbugs_descr">Este botón de acción, muestra u oculta las notas de OSM en el mapa.</string>
+    <string name="quick_action_showhide_osmbugs_descr">Un botón que muestra u oculta las notas de OSM en el mapa.</string>
     <string name="sorted_by_distance">Ordenados por distancia</string>
     <string name="search_favorites">Buscar en Favoritos</string>
     <string name="restart_search">Reiniciar búsqueda</string>
@@ -2873,7 +2872,7 @@ Lon %2$s</string>
     <string name="run_full_osmand_msg">Estás utilizando el mapa «{0}» que funciona con OsmAnd. ¿Quieres ejecutar la versión completa de OsmAnd\?</string>
     <string name="run_full_osmand_header">¿Ejecutar OsmAnd\?</string>
     <string name="lang_gn_py">Guaraní</string>
-    <string name="quick_action_switch_day_night_descr">Este botón de acción, alterna entre el modo «Diurno» y «Nocturno» para OsmAnd</string>
+    <string name="quick_action_switch_day_night_descr">Un botón que alterna entre el modo «Diurno» y «Nocturno» para OsmAnd.</string>
     <string name="quick_action_switch_day_mode">Modo diurno</string>
     <string name="quick_action_switch_night_mode">Modo nocturno</string>
     <string name="quick_action_day_night_switch_mode">Alternar modos diurno/nocturno</string>
@@ -2891,7 +2890,7 @@ Lon %2$s</string>
     <string name="show_along_the_route">Mostrar a lo largo de la ruta</string>
     <string name="simulate_navigation">Simular navegación</string>
     <string name="choose_track_file_to_follow">Elige el archivo de la traza a seguir</string>
-    <string name="voice_announcements">Anuncios de voz</string>
+    <string name="voice_announcements">Indicaciones por voz</string>
     <string name="intermediate_destinations">Destinos intermedios</string>
     <string name="arrive_at_time">Llegará a las %1$s</string>
     <string name="cubic_m">m³</string>
@@ -2918,7 +2917,7 @@ Lon %2$s</string>
     <string name="exit_at">Bajarse en</string>
     <string name="sit_on_the_stop">Esperar en la parada</string>
     <string name="quick_action_show_hide_gpx_tracks">Alternar vista de trazas GPX</string>
-    <string name="quick_action_show_hide_gpx_tracks_descr">Este botón de acción, muestra u oculta las trazas GPX elegidas en el mapa</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Un botón que muestra u oculta las trazas GPX elegidas en el mapa.</string>
     <string name="quick_action_gpx_tracks_hide">Ocultar trazas GPX</string>
     <string name="quick_action_gpx_tracks_show">Mostrar trazas GPX</string>
     <string name="release_3_3">• Nueva pantalla «Direcciones»: Muestra los botones de destino «Casa» y «Trabajo», el atajo de la «ruta anterior», la lista de trazas, marcadores GPX activos y el historial de búsqueda.
@@ -3276,7 +3275,7 @@ Lon %2$s</string>
     <string name="vehicle_parameters">Parámetros del vehículo</string>
     <string name="voice_announces_info">Los anuncios de voz solo se realizan durante la navegación.</string>
     <string name="voice_announces_descr">Instrucciones de navegación y anuncios</string>
-    <string name="voice_announces">Anuncios de voz</string>
+    <string name="voice_announces">Indicaciones por voz</string>
     <string name="screen_alerts">Alertas de pantalla</string>
     <string name="route_parameters_descr">Configurar parámetros de ruta</string>
     <string name="route_parameters">Parámetros de ruta</string>
@@ -3365,14 +3364,22 @@ Lon %2$s</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">Preferir caminos sin pavimentar</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">Prefiere caminos sin pavimentar.</string>
     <string name="layer_osm_edits">Ediciones de OSM</string>
-    <string name="quick_action_contour_lines_descr">Al pulsar este botón de acción se muestran u ocultan las curvas de nivel en el mapa</string>
+    <string name="quick_action_contour_lines_descr">Un botón que muestra u oculta las curvas de nivel en el mapa.</string>
     <string name="quick_action_contour_lines_show">Mostrar curvas de nivel</string>
     <string name="quick_action_contour_lines_hide">Ocultar curvas de nivel</string>
     <string name="quick_action_show_hide_contour_lines">Alternar curvas de nivel</string>
-    <string name="quick_action_hillshade_descr">Al pulsar este botón de acción muestra u oculta la sombra de una colina en el mapa</string>
+    <string name="quick_action_hillshade_descr">Un botón que muestra u oculta la sombra de una colina en el mapa.</string>
     <string name="quick_action_hillshade_show">Mostrar sombreados</string>
     <string name="quick_action_hillshade_hide">Ocultar sombreados</string>
     <string name="quick_action_show_hide_hillshade">Alternar sombreados</string>
     <string name="tts_initialization_error">Imposible iniciar el motor de habla sintetizada</string>
     <string name="simulate_your_location_gpx_descr">Simular la ubicación usando una traza GPX grabada.</string>
+    <string name="export_profile">Exportar perfil</string>
+    <string name="exported_osmand_profile">Perfil de OsmAnd: %1$s</string>
+    <string name="overwrite_profile_q">El perfil «%1$s» ya existe. ¿Sobreescribir\?</string>
+    <string name="export_profile_failed">No se pudo exportar el perfil.</string>
+    <string name="profile_import">Importar perfil:</string>
+    <string name="profile_import_descr">Para importar un perfil, elige el archivo en el dispositivo y ábrelo con OsmAnd.</string>
+    <string name="file_import_error">Error de importación de %1$s: %2$s</string>
+    <string name="file_imported_successfully">%1$s importados con éxito.</string>
 </resources>

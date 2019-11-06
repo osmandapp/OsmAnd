@@ -796,7 +796,7 @@ Pôr do Sol: %2$s</string>
     <string name="zxing_barcode_scanner_not_found">Aplicativo Barcode Scanner da ZXing não está instalado. Pesquisar na Google Play\?</string>
     <string name="shared_location">Posição compartilhada</string>
     <string name="osmand_parking_lim_text">Tempo limitado</string>
-    <string name="left_side_navigation">tráfego de mão esquerda</string>
+    <string name="left_side_navigation">Condução pela esquerda</string>
     <string name="index_settings_descr">Baixar e gerenciar mapas armazenados no seu aparelho.</string>
     <string name="plugins_screen">Complementos</string>
     <string name="support_new_features">Apoiar novos recursos</string>
@@ -2061,7 +2061,7 @@ Pôr do Sol: %2$s</string>
     <string name="online_photos">Fotos on-line</string>
     <string name="shared_string_add_photos">Adicionar fotos</string>
     <string name="no_photos_descr">Não há fotos aqui.</string>
-    <string name="mapillary_action_descr">Contribuir com suas próprias vistas de rua deste local através do Mapillary.</string>
+    <string name="mapillary_action_descr">Compartilhe a sua vista ao nível da rua através do Mapillary.</string>
     <string name="mapillary_widget">Ferramenta Mapillary</string>
     <string name="mapillary_widget_descr">Permite contribuições rápidas ao Mapillary.</string>
     <string name="mapillary_descr">Fotos ao nível da rua, online, para todos. Descobrir lugares, colaborar, capturar o mundo.</string>
@@ -2114,7 +2114,7 @@ Pôr do Sol: %2$s</string>
     <string name="quick_action_auto_zoom_desc">Tocar neste botão de ação irá ligar/desligar o zoom automático do mapa de acordo com sua velocidade.</string>
     <string name="quick_action_auto_zoom_on">Ativar zoom automático do mapa</string>
     <string name="quick_action_auto_zoom_off">Desativar zoom automático do mapa</string>
-    <string name="quick_action_add_destination">Adicionar destino</string>
+    <string name="quick_action_add_destination">Defina destino</string>
     <string name="quick_action_replace_destination">Substituir destino</string>
     <string name="quick_action_add_first_intermediate">Adicione o primeiro intermediário</string>
     <string name="show_map">Exibir mapa</string>
@@ -2200,7 +2200,7 @@ Pôr do Sol: %2$s</string>
     <string name="shared_string_visible">Visível</string>
     <string name="restore_purchases">Restaurar compras</string>
     <string name="fonts_header">Fontes de mapa</string>
-    <string name="right_side_navigation">Condução pela faixa da direita</string>
+    <string name="right_side_navigation">Condução pela direita</string>
     <string name="driving_region_automatic">Automático</string>
     <string name="do_not_send_anonymous_app_usage">Não enviar estatísticas de uso de aplicativo anônimas</string>
     <string name="parking_options">Opções de estacionamento</string>
@@ -2285,7 +2285,7 @@ Pôr do Sol: %2$s</string>
     <string name="empty_state_av_notes_desc">Adicione nota de áudio, vídeo ou foto em qualquer ponto do mapa, usando o widget ou o menu de contexto.</string>
     <string name="quick_action_add_destination_desc">Tocar neste botão de ação marcará o centro da tela como o destino da rota, qualquer destino anteriormente definido se torna o último destino intermediário.</string>
     <string name="quick_action_replace_destination_desc">Tocar no botão de ação marcará o centro da tela como novo destino da rota, substituindo o destino selecionado anteriormente (se houver).</string>
-    <string name="quick_action_add_first_intermediate_desc">Tocar neste botão de ação adicionará o primeiro ponto intermédio no centro da tela.</string>
+    <string name="quick_action_add_first_intermediate_desc">Um botão para adicionar no centro da tela o primeiro destino intermédio.</string>
     <string name="subscribe_email_desc">Assine a nossa lista de discussão sobre descontos do aplicativo e obtenha mais 3 downloads de mapa!</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd coleta informações sobre quais partes do aplicativo você abrir. A sua localização nunca é enviada, nem qualquer coisa digitada no aplicativo ou detalhes das áreas que você visualizar, pesquisar ou baixar.</string>
     <string name="auto_split_recording_title">Autodividir gravações após um intervalo</string>
@@ -3361,4 +3361,12 @@ Pôr do Sol: %2$s</string>
     <string name="quick_action_show_hide_hillshade">Mostrar/ocultar colina</string>
     <string name="tts_initialization_error">Não é possível iniciar o mecanismo de conversão de texto em fala</string>
     <string name="simulate_your_location_gpx_descr">Simule sua posição usando um rasteador GPX gravada.</string>
+    <string name="export_profile">Exportar perfil</string>
+    <string name="exported_osmand_profile">Perfil OsmAnd: %1$s</string>
+    <string name="overwrite_profile_q">O perfil \'%1$s\' já existe. Substituir\?</string>
+    <string name="export_profile_failed">Não foi possível exportar o perfil.</string>
+    <string name="profile_import">Importação de perfil:</string>
+    <string name="profile_import_descr">Para importar um perfil, selecione seu arquivo no dispositivo e abra-o com OsmAnd.</string>
+    <string name="file_import_error">Erro de importação %1$s: %2$s</string>
+    <string name="file_imported_successfully">%1$s importado com sucesso.</string>
 </resources>

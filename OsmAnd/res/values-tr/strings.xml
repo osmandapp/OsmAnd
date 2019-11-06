@@ -258,8 +258,8 @@
     <string name="index_name_germany">Avrupa - Almanya</string>
     <string name="index_name_africa">Afrika</string>
     <string name="index_name_asia">Asya</string>
-    <string name="index_name_voice">Sesli duyurular (kaydedilmiş, sınırlı özellikler)</string>
-    <string name="index_name_tts_voice">Sesli duyurular (TTS, tercih edilen)</string>
+    <string name="index_name_voice">Sesli uyarılar (kaydedilmiş, sınırlı özellikler)</string>
+    <string name="index_name_tts_voice">Sesli uyarılar (TTS, tercih edilen)</string>
     <string name="amenity_type_osmwiki">Wikipedia (çevrim dışı)</string>
     <string name="amenity_type_user_defined">Kullanıcı tanımlı</string>
     <string name="settings_preset">Varsayılan profil</string>
@@ -304,7 +304,7 @@
     <string name="amenity_type_finance">Finans</string>
     <string name="amenity_type_healthcare">Sağlık</string>
     <string name="amenity_type_other">Diğer</string>
-    <string name="voice_is_not_available_title">Bir sesli duyuru paketi seçin</string>
+    <string name="voice_is_not_available_title">Bir sesli uyarı paketi seçin</string>
     <string name="daynight_mode_day">Gündüz</string>
     <string name="daynight_mode_night">Gece</string>
     <string name="daynight_mode_auto">Gündoğumu/günbatımı</string>
@@ -469,7 +469,7 @@
 \n 
 \nDöşeme (tile) haritalar doğrudan çevrimiçi kaynaklardan edinilebilir, ya da çeşitli 3. parti harita hazırlama araçları tarafından üretilebilen bir SQLite veritabanı olarak çevrimdışı kullanım için (ve manuel olarak OsmAnd\'ın veri klasörüne kopyalanabilir) hazırlanabilir.</string>
     <string name="osmand_accessibility_description">Bu eklenti, cihazın erişilebilirlik özelliklerini doğrudan OsmAnd\'da kullanılabilir kılar. Örneğin; metin okuma sesleri için konuşma hızını ayarlamak, yön tuş takımı ekranı navigasyonunu yapılandırmak, zoom kontrolü için hareket topunu kullanmak veya örneğin konumunuzu otomatik olarak bildirmek için metinden konuşmaya geri bildirim.</string>
-    <string name="osmand_development_plugin_description">Bu eklent, yönlendirme, görüntü oluşturma performansı veya sesli duyuruları test ya da simüle etmek gibi geliştirme ve hata ayıklama özellikleri için ayarları görüntüler. Bu ayarlar geliştiricilere yöneliktir ve genel kullanıcı için gerekli değildir.</string>
+    <string name="osmand_development_plugin_description">Bu eklenti, yönlendirme, görüntü oluşturma performansı veya sesli uyarıları test ya da simüle etmek gibi geliştirme ve hata ayıklama özellikleri için ayarları görüntüler. Bu ayarlar geliştiricilere yöneliktir ve genel kullanıcı için gerekli değildir.</string>
     <string name="plugins_screen">Eklentiler</string>
     <string name="prefs_plugins_descr">Eklentiler gelişmiş ayarları ve ek işlevselliği etkinleştirir.</string>
     <string name="prefs_plugins">Eklentiler</string>
@@ -478,7 +478,7 @@
     <string name="play_commands_of_currently_selected_voice">Bir ses seçin ve duyuruları oynayarak test edin:</string>
     <string name="debugging_and_development">OsmAnd gelişimi</string>
     <string name="native_rendering">Yerel render etme</string>
-    <string name="test_voice_prompts">Sesli duyuruları test et</string>
+    <string name="test_voice_prompts">Sesli uyarıları test et</string>
     <string name="switch_to_raster_map_to_see">Bu konum için \'Ayarlar\' (\'Harita dosyalarını yönet\') kısmından çevrimdışı bir vektör haritası indirin veya \'Çevrimiçi haritalar\' eklentisine geçin.</string>
     <string name="send_files_to_osm">GPX dosyalarını OSM ye gönder?</string>
     <string name="gpx_visibility_txt">Görünürlük</string>
@@ -644,8 +644,8 @@
     <string name="local_index_transport_data">Toplu taşıma verileri</string>
     <string name="local_index_map_data">Harita Verisi</string>
     <string name="local_indexes_cat_backup">Pasifleştir</string>
-    <string name="local_indexes_cat_tts">Sesli duyurular (TTS)</string>
-    <string name="local_indexes_cat_voice">Sesli duyurular (kaydedilmiş)</string>
+    <string name="local_indexes_cat_tts">Sesli uyarılar (TTS)</string>
+    <string name="local_indexes_cat_voice">Sesli uyarılar (kaydedilmiş)</string>
     <string name="local_indexes_cat_poi">POI Verisi</string>
     <string name="ttsvoice">TTS sesi</string>
     <string name="trace_rendering">Hata ayıklama bilgisi dönüştürülüyor</string>
@@ -800,7 +800,7 @@
     <string name="loading_builds_failed">OsmAnd yapı listesi alınırken başarısız olundu</string>
     <string name="loading_builds">OsmAnd yapıları yükleniyor…</string>
     <string name="select_build_to_install">Yüklenecek OsmAnd yapısını seçin</string>
-    <string name="voice_is_not_available_msg">Sesli yönlendirme mevcut değil, lütfen \'Ayarlar\' → \'Navigasyon ayarları\' seçeneğine gidin, profil → \'Sesli rehberlik\' seçeneğini seçin ve bir sesli duyuru paketi seçin veya indirin.</string>
+    <string name="voice_is_not_available_msg">Sesli yönlendirme mevcut değil, lütfen \'Ayarlar\' → \'Navigasyon ayarları\' seçeneğine gidin, profil → \'Sesli rehberlik\' seçeneğini seçin ve bir sesli uyarı paketi seçin veya indirin.</string>
     <string name="daynight_mode_sensor">Işık algılayıcısı</string>
     <string name="daynight_descr">Gece ve gündüz modu arasında geçişi ayarlayın.</string>
     <string name="download_files_question">{0} dosya indirilecek ({1} MB)?</string>
@@ -847,7 +847,7 @@
     <string name="voice_data_initializing">Ses verisi yükleniyor…</string>
     <string name="voice_data_not_supported">Ses verisinin desteklenmeyen sürümü</string>
     <string name="voice_data_corrupted">Belirtilen ses verisi hatalı</string>
-    <string name="voice_data_unavailable">Seçilen sesli duyuru paketi mevcut değil</string>
+    <string name="voice_data_unavailable">Seçilen sesli uyarı paketi mevcut değil</string>
     <string name="sd_unmounted">Hafıza kartı erişilebilir değil.
 \nHaritaları göremez veya bir şeyler bulamazsınız.</string>
     <string name="sd_mounted_ro">Hafıza kartı salt okunur.
@@ -1465,7 +1465,7 @@
     <string name="route_head">Baş</string>
     <string name="map_screen_orientation">Ekran yönlendirme</string>
     <string name="no_address_found">Hiçbir adres belirlenmedi</string>
-    <string name="voices">Sesli duyurular</string>
+    <string name="voices">Sesli uyarılar</string>
     <string name="layer_gpx_layer">GPX dosyaları…</string>
     <string name="transport_context_menu">Durakta ulaşım aracı ara</string>
     <string name="rotate_map_to_bearing">Harita yönlendirme</string>
@@ -1527,7 +1527,7 @@
     <string name="rendering_attr_hikingRoutesOSMC_name">Sembol bindirme Yürüyüş</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">OSMC izlerine göre yolları oluşturun.</string>
     <string name="monitoring_control_start">GPX</string>
-    <string name="interrupt_music_descr">Sesli duyurular müzik çalmayı duraklatır.</string>
+    <string name="interrupt_music_descr">Sesli uyarılar müzik çalmayı duraklatır.</string>
     <string name="interrupt_music">Müziği duraklat</string>
     <string name="download_wikipedia_maps">Wikipedia</string>
     <string name="use_displayed_track_for_navigation">Navigasyon için gösterilen rotayı kullan\?</string>
@@ -1993,7 +1993,7 @@
     <string name="quick_action_showhide_osmbugs_title">OSM Notlarını Göster / Gizle</string>
     <string name="quick_action_osmbugs_show">OSM Notlarını Göster</string>
     <string name="quick_action_osmbugs_hide">OSM Notlarını Gizle</string>
-    <string name="quick_action_showhide_osmbugs_descr">Eylem düğmesine dokunulduğunda, OSM Notları haritada gösterilir veya gizlenir.</string>
+    <string name="quick_action_showhide_osmbugs_descr">Haritada OSM Notlarını göstermek veya gizlemek için bir geçiş.</string>
     <string name="sorted_by_distance">Mesafeye göre sıralandı</string>
     <string name="quick_action_btn_tutorial_descr">Düğmeye uzunca basıp sürüklemek, ekrandaki konumunu değiştirir.</string>
     <string name="restart_search">Aramayı yeniden başlat</string>
@@ -2297,11 +2297,11 @@
     <string name="map_widget_ruler_control">Yarıçap cetveli</string>
     <string name="mapillary_action_descr">Sokak düzeyinde görüşünüzü Mapillary ile paylaşın.</string>
     <string name="type_city_town">Şehir/kasaba/bölgeyi yazın</string>
-    <string name="quick_action_auto_zoom_desc">Bu eylem butonuna dokunmak, otomatik zoom haritasını hızınıza göre açar/kapatır.</string>
+    <string name="quick_action_auto_zoom_desc">Hızınıza göre otomatik harita yakınlaştırmayı açmak/kapatmak için bir geçiş.</string>
     <string name="quick_action_add_first_intermediate">Seyahatteki ilk ara-noktayı ekleyin</string>
-    <string name="quick_action_add_destination_desc">Bu eylem butonuna dokunmak, ekranın ortasını rota hedefi haline getirir, daha önce seçilen herhangi bir hedef, son ara hedef haline gelir.</string>
+    <string name="quick_action_add_destination_desc">Ekranın rota hedefini ortalamasını sağlayan bir buton, önceden seçilmiş herhangi bir hedef, son ara hedef haline gelir.</string>
     <string name="quick_action_replace_destination_desc">Bu eylem butonuna dokunmak, ekranın ortasını daha önce seçilen hedefi (varsa) değiştirerek yeni rota hedefi haline getirir.</string>
-    <string name="quick_action_add_first_intermediate_desc">Bu eylem butonuna dokunmak, ekranın merkezini ilk ara hedef haline getirir.</string>
+    <string name="quick_action_add_first_intermediate_desc">Ekranın ilk ara varış yerini ortalamasını sağlayan bir düğme.</string>
     <string name="right_side_navigation">Sağdan akan trafik</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">Tepelikli</string>
     <string name="routing_attr_relief_smoothness_factor_plains_name">Az tepelikli</string>
@@ -2475,7 +2475,7 @@
     <string name="app_mode_public_transport">Toplu taşıma</string>
     <string name="show_along_the_route">Rotayı göster</string>
     <string name="simulate_navigation">Navigasyonu simüle et</string>
-    <string name="voice_announcements">Sesli yönlendirmeler</string>
+    <string name="voice_announcements">Sesli uyarılar</string>
     <string name="intermediate_destinations">Ara varış noktaları</string>
     <string name="osm_live_subscriptions">Açıklamalar</string>
     <string name="osm_live_payment_monthly_title">Aylık</string>
@@ -2649,7 +2649,7 @@
 \n 
 \n • Arka plan harita indirmeleri iyileştirildi 
 \n 
-\n • \'Ekranı Aç\' seçeneği geri döndü 
+\n • \'Ekranı aç\' seçeneği geri döndü 
 \n 
 \n • Wikipedia dil seçimi düzeltildi 
 \n 
@@ -2722,7 +2722,7 @@
     <string name="vehicle_parameters">Araç parametreleri</string>
     <string name="voice_announces_info">Sesli duyurular sadece navigasyon sırasında gerçekleşir.</string>
     <string name="voice_announces_descr">Navigasyon talimatları ve duyurular</string>
-    <string name="voice_announces">Sesli duyurular</string>
+    <string name="voice_announces">Sesli uyarılar</string>
     <string name="screen_alerts">Ekran uyarıları</string>
     <string name="route_parameters_descr">Rota parametrelerini yapılandır</string>
     <string name="route_parameters">Rota parametreleri</string>
@@ -2822,7 +2822,7 @@
     <string name="osc_file_desc">OSC - OpenStreetMap’e aktarmak için uygundur.</string>
     <string name="osc_file">OSC dosyası</string>
     <string name="choose_file_type">Dosya türünü seçin</string>
-    <string name="osm_edits_export_desc">Dışa aktarma türünü seçin: OSM notları, POI veya her ikisi de.</string>
+    <string name="osm_edits_export_desc">Dışa aktarma türünü seçin: OSM notları, POI\'ler veya her ikisi de.</string>
     <string name="all_data">Bütün veriler</string>
     <string name="osm_notes">OSM Notları</string>
     <string name="first_intermediate_dest_description">İlk durağı ekler</string>
@@ -2931,7 +2931,7 @@
     <string name="step_by_step">Adım adım</string>
     <string name="exit_at">Burada çık</string>
     <string name="sit_on_the_stop">Durakta bin</string>
-    <string name="quick_action_show_hide_gpx_tracks_descr">Bu eylem butonuna basmak, haritada seçilen GPX yol-izlerini gösterir ya da gizler</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Haritada seçilen GPX yol-izlerini göstermek veya gizlemek için bir geçiş.</string>
     <string name="add_destination_query">Lütfen önce hedefi ayarlayın</string>
     <string name="release_3_3">• Yeni \'Yol Tarifleri\' ekranı: Ev ve İş hedefi düğmelerini, \'önceki rota\' kısayolunu, etkin GPX yol-izlerinin ve işaretleyicilerin listesini, arama geçmişini görüntüler
 \n
@@ -3034,17 +3034,17 @@
     <string name="quick_action_map_source_title">Harita kaynakları</string>
     <string name="quick_action_map_source_action">Harita kaynağı ekle</string>
     <string name="quick_action_map_source_switch">Harita kaynağı \"%s\" olarak değiştirildi.</string>
-    <string name="quick_action_add_marker_descr">Bu eylem butonuna basmak, ekranın ortasındaki konuma bir harita işaretleyici ekler.</string>
-    <string name="quick_action_add_gpx_descr">Bu eylem butonuna basmak, ekranın ortasına bir GPX ara noktası ekleyecektir.</string>
-    <string name="quick_action_take_audio_note_descr">Bu eylem butonuna basmak, ekranın ortasına sesli bir not ekler.</string>
-    <string name="quick_action_take_video_note_descr">Bu eylem butonuna basmak, ekranın ortasına bir video notu ekler.</string>
-    <string name="quick_action_take_photo_note_descr">Bu eylem butonuna basmak, ekranın ortasına bir fotoğraf notu ekler.</string>
-    <string name="quick_action_add_osm_bug_descr">Bu eylem butonuna basmak, ekranın ortasına bir OSM notu ekler.</string>
-    <string name="quick_action_add_poi_descr">Bu eylem butonuna basmak, ekranın ortasına bir POI ekler.</string>
-    <string name="quick_action_navigation_voice_descr">Bu eylem butonuna basmak, navigasyon sırasında sesli yönlendirmeyi devre dışı bırakır veya etkinleştirir.</string>
-    <string name="quick_action_add_parking_descr">Bu eylem butonuna basmak, ekranın ortasına bir park yeri ekler.</string>
-    <string name="quick_action_showhide_favorites_descr">Bu eylem butonuna basmak, haritada Sık Kullanılan noktaları gösterir veya gizler.</string>
-    <string name="quick_action_showhide_poi_descr">Bu eylem butonuna düğmesine basmak, haritada POI\'leri gösterir veya gizler.</string>
+    <string name="quick_action_add_marker_descr">Ekranın merkezindeki konuma harita işaretleyici eklemek için bir buton.</string>
+    <string name="quick_action_add_gpx_descr">Ekranın ortasına bir GPX ara noktası eklemek için bir buton.</string>
+    <string name="quick_action_take_audio_note_descr">Ekranın ortasına sesli bir not eklemek için bir buton.</string>
+    <string name="quick_action_take_video_note_descr">Ekranın ortasına bir video notu eklemek için bir buton.</string>
+    <string name="quick_action_take_photo_note_descr">Ekranın ortasına bir fotoğraf notu eklemek için bir buton.</string>
+    <string name="quick_action_add_osm_bug_descr">Ekranın ortasına bir OSM notu eklemek için bir buton.</string>
+    <string name="quick_action_add_poi_descr">Ekranın ortasına bir POI eklemek için bir buton.</string>
+    <string name="quick_action_navigation_voice_descr">Navigasyon sırasında sesli yönlendirmeyi devre dışı bırakmak veya etkinleştirmek için bir geçiş.</string>
+    <string name="quick_action_add_parking_descr">Ekranın ortasına bir park yeri eklemek için bir buton.</string>
+    <string name="quick_action_showhide_favorites_descr">Haritadaki Sık Kullanılan noktaları göstermek veya gizlemek için bir geçiş.</string>
+    <string name="quick_action_showhide_poi_descr">Haritada POI\'leri göstermek veya gizlemek için bir geçiş.</string>
     <string name="quick_action_bug_descr">Bu mesaj yorum alanına dahil edilmiştir.</string>
     <string name="quick_action_category_descr">Sık Kullanılanın kaydedileceği kategori:</string>
     <string name="quick_action_gpx_category_descr">İsteğe bağlı bir kategori seçin.</string>
@@ -3052,7 +3052,7 @@
     <string name="quick_action_interim_dialog">Geçici bir iletişim kutusu göster</string>
     <string name="quick_action_map_overlay_switch">Harita üst katmanı \"%s\" olarak değiştirildi.</string>
     <string name="quick_action_map_underlay_switch">Harita alt katmanı \"%s\" olarak değiştirildi.</string>
-    <string name="quick_action_page_list_descr">Bu eylem butonuna basmak, aşağıdaki listeyi sayfalar halinde gösterir.</string>
+    <string name="quick_action_page_list_descr">Aşağıdaki listede gezinmek için bir buton.</string>
     <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) ücretsiz, dünya çapında ve yüksek kaliteli OpenStreetMap (OSM) verilerine erişim sağlayan bir harita ve navigasyon uygulamasıdır.
 \n
 \n Sesli ve optik yönlendiricinin, POI\'leri (ilgi çekici noktaları) görüntülemenin, GPX yol-izleri oluşturma ve yönetmenin, eşyükselti çizgileri görselleştirme ve irtifa bilgilerinin (eklenti aracılığıyla), sürüş, bisiklet, yaya modları arasında seçim yapmanın, OSM düzenleme ve daha pek çok seçeneğin tadını çıkarın.</string>
@@ -3195,10 +3195,10 @@
     <string name="test_voice_desrc">Bir butona dokunun ve eksik veya hatalı olup olmadığını duymak için ilgili sesli uyarıyı dinleyin</string>
     <string name="run_full_osmand_msg">OsmAnd tarafından desteklenen {0} Haritasını kullanıyorsunuz. OsmAnd\'ın tam sürümünü başlatmak ister misiniz\?</string>
     <string name="run_full_osmand_header">OsmAnd\'ı başlat\?</string>
-    <string name="quick_action_switch_day_night_descr">Bu eylem butonuna basmak, OsmAnd için Gündüz ve Gece modları arasında geçiş yapar</string>
-    <string name="quick_action_switch_day_mode">Gündüz Modu</string>
+    <string name="quick_action_switch_day_night_descr">OsmAnd için gündüz ve gece modları arasında geçiş yapmak için bir geçiş.</string>
+    <string name="quick_action_switch_day_mode">Gündüz modu</string>
     <string name="quick_action_switch_night_mode">Gece modu</string>
-    <string name="quick_action_day_night_switch_mode">Gündüz/Gece modunu değiştir</string>
+    <string name="quick_action_day_night_switch_mode">Gündüz/gece modunu değiştir</string>
     <string name="routing_attr_avoid_sett_name">Parke veya kaldırım taşı yok</string>
     <string name="quick_action_need_to_add_item_to_list">\'Hızlı eylem\' ayarlarında listeye en az bir öge ekleyin</string>
     <string name="routing_attr_piste_type_downhill_name">Alp/yokuş aşağı kayak</string>
@@ -3315,14 +3315,22 @@
     <string name="routing_attr_driving_style_prefer_unpaved_description">Asfaltsız yolları tercih edin.</string>
     <string name="swap_start_and_destination">Başlangıç ve varış yerini değiştir</string>
     <string name="layer_osm_edits">OSM Düzenlemeleri</string>
-    <string name="quick_action_contour_lines_descr">Bu eylem düğmesine basmak, haritadaki eş yükselti çizgilerini gösterir veya gizler</string>
+    <string name="quick_action_contour_lines_descr">Haritada eş yükselti çizgilerini göstermek veya gizlemek için bir geçiş.</string>
     <string name="quick_action_contour_lines_show">Eş yükselti çizgilerini göster</string>
     <string name="quick_action_contour_lines_hide">Eş yükselti çizgilerini gizle</string>
     <string name="quick_action_show_hide_contour_lines">Eş yükselti çizgilerini göster/gizle</string>
-    <string name="quick_action_hillshade_descr">Bu eylem butonuna basmak, haritada tepe gölgesini gösterir veya gizler</string>
+    <string name="quick_action_hillshade_descr">Haritada tepe gölgesini göstermek veya gizlemek için bir geçiş.</string>
     <string name="quick_action_hillshade_show">Tepe gölgesini göster</string>
     <string name="quick_action_hillshade_hide">Tepe gölgesini gizle</string>
     <string name="quick_action_show_hide_hillshade">Tepe gölgesini göster/gizle</string>
     <string name="tts_initialization_error">Metinden konuşmaya motoru başlatılamıyor</string>
     <string name="simulate_your_location_gpx_descr">Kayıtlı bir GPX yol-izini kullanarak konumunuzu simüle edin.</string>
+    <string name="export_profile">Profili dışa aktar</string>
+    <string name="exported_osmand_profile">OsmAnd profili: %1$s</string>
+    <string name="overwrite_profile_q">\'%1$s\' profili zaten var. Üzerine yazılsın mı\?</string>
+    <string name="export_profile_failed">Profil dışa aktarılamadı.</string>
+    <string name="profile_import">Profil içe aktarma:</string>
+    <string name="profile_import_descr">Bir profili içe aktarmak için, cihazdaki dosyasını seçin ve OsmAnd ile açın.</string>
+    <string name="file_import_error">%1$s içe aktarma hatası: %2$s</string>
+    <string name="file_imported_successfully">%1$s başarıyla içe aktarıldı.</string>
 </resources>

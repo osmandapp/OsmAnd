@@ -322,4 +322,19 @@
     <string name="choose_track_file_to_follow">အသုံးပြုချင်သောလမ်းကြောင်းဖိုင်ရွေးပါ</string>
     <string name="voice_announcements">အသံကြေငြာချက်များ</string>
     <string name="intermediate_destinations">ကြားရပ်နေရာများ</string>
+    <string name="point_deleted">အမှတ် %1$s ဖျက်ပြီးပါပြီ</string>
+    <string name="shared_string_world">ကမ္ဘာကြီး</string>
+    <string name="send_search_query">ရှာဖွေမှုကိုပို့မလား\?</string>
+    <string name="thank_you_for_feedback">သင်၏အကြံပြုချက်အတွက်ကျေးဇူးတင်ပါသည်</string>
+    <string name="search_no_results_feedback">ရှာဖွေမှုရလဒ်မရှိပါ။
+\nတုံ့ပြန်ချက်ပေးပါ</string>
+    <string name="more_transport_on_stop_hint">ဒီမှတ်တိုင်မှသယ်ယူပို့ဆောင်ရေးပိုများနိုင်သည်။</string>
+    <string name="search_street">လမ်းရှာပါ</string>
+    <string name="start_search_from_city">မြို့ / မြို့နယ် / နေရာကို ဦး စွာဖော်ပြပါ</string>
+    <string name="keep_passed_markers">မြေပုံပေါ်တွင်ဖြတ်ခဲ့သောအမှတ်များသိမ်းထား</string>
+    <string name="in_app_purchase_desc">တစ်ကြိမ်တည်းငွေပေးချေမှု</string>
+    <string name="in_app_purchase_desc_ex">၀ယ်သည်နှင့်တပြိုင်နက်၎င်းကိုသင်အမြဲတမ်းရရှိနိုင်လိမ့်မည်။</string>
+    <string name="purchase_unlim_title">၀ယ်ပါ - %1$s</string>
+    <string name="daily_map_updates"><b> နာရီ ပိုင်း</b> မြေပုံမွမ်းမံမှုများ</string>
+    <string name="wikivoyage_travel_guide">ခရီးသွားသူလမ်းညွှန်များ</string>
 </resources>

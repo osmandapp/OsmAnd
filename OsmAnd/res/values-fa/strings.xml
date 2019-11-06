@@ -2693,7 +2693,7 @@
     <string name="shared_string_gpx_file">فایل GPX</string>
     <string name="osc_file">فایل OSC</string>
     <string name="choose_file_type">انتخاب قالب فایل</string>
-    <string name="osm_edits_export_desc">نوع خروجی را انتخاب کنید: یادداشت‌های OSM،‏ POI یا هر دو.</string>
+    <string name="osm_edits_export_desc">نوع خروجی را انتخاب کنید: یادداشت‌های OSM،‏ POIها یا هر دو.</string>
     <string name="all_data">همهٔ داده‌ها</string>
     <string name="osm_notes">یادداشت‌های OSM</string>
     <string name="tunnel_warning">تونل</string>
@@ -3401,4 +3401,5 @@
     <string name="quick_action_show_hide_hillshade">آشکار/پنهان کردن سایه‌روشن‌ها</string>
     <string name="tts_initialization_error">راه‌اندازی موتور متن به گفتار ناموفق بود</string>
     <string name="simulate_your_location_gpx_descr">موقعیت خود را با استفاده از یک رد GPX ضبط‌شده شبیه‌سازی کنید.</string>
+    <string name="exported_osmand_profile">پروفایل OsmAnd:‏ %1$s</string>
 </resources>
