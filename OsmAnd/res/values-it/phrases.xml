@@ -158,7 +158,7 @@
     <string name="poi_cricket_nets">Campo da cricket circondato da reti</string>
     <string name="poi_driving_school">Scuola guida</string>
     <string name="poi_school">Scuola</string>
-    <string name="poi_kindergarten">Parco giochi</string>
+    <string name="poi_kindergarten">Scuola d\'infanzia</string>
     <string name="poi_college">Università</string>
     <string name="poi_university">Università</string>
     <string name="poi_social_facility">Struttura che fornisce servizi sociali</string>
@@ -2603,4 +2603,17 @@
     <string name="poi_goods_designated">indicato</string>
     <string name="poi_disabled_yes">sì</string>
     <string name="poi_disabled_designated">indicato</string>
+    <string name="poi_denomination_united_methodist">Metodista unita</string>
+    <string name="poi_snowmobile_filter">Accesso alle motoslitte</string>
+    <string name="poi_access_bus">Accesso agli autobus</string>
+    <string name="poi_access_caravan">Accesso alle roulotte</string>
+    <string name="poi_access_motorhome">Accesso ai camper</string>
+    <string name="poi_access_trailer">Accesso con rimorchio</string>
+    <string name="poi_access_motorcycle">Accesso alle motociclette</string>
+    <string name="poi_access_moped">Accesso ai ciclomotori</string>
+    <string name="poi_access_mofa">Accesso ai mofa</string>
+    <string name="poi_access_hgv">Accesso ai mezzi pesanti</string>
+    <string name="poi_access_goods">Accesso ai veicoli commerciali leggeri</string>
+    <string name="poi_access_disabled">Accesso ai mezzi per disabili</string>
+    <string name="poi_cash_withdrawal_bank_card">Prelievo di contanti</string>
 </resources>
