@@ -2114,6 +2114,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (mapRouteInfoMenu.isSelectFromMapTouch()) {
 			return;
 		}
+		refreshMap();
 		RoutingHelper rh = app.getRoutingHelper();
 		if (newRoute && rh.isRoutePlanningMode() && mapView != null) {
 			Location lt = rh.getLastProjection();
