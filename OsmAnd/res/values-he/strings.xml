@@ -2797,7 +2797,7 @@
     <string name="search_no_results_description">אין תוצאות?
 \nנשמח לקבל דיווח על כך.</string>
     <string name="send_search_query">לשלוח את שאילתת החיפוש?</string>
-    <string name="increase_search_radius_to">הגדלת רדיוס החיפוש ל־%1$s</string>
+    <string name="increase_search_radius_to">הרחבת רדיוס החיפוש ל־%1$s</string>
     <string name="commiting_way">הדרך נשלחת…</string>
     <string name="release_3_1">• ניווט: תיקון סרגל ההתקדמות, החלפה מהירה בין נקודות ההתחלה והסיום של המסלול
 \n
@@ -2834,7 +2834,7 @@
     <string name="rendering_value_black_name">שחור</string>
     <string name="more_transport_on_stop_hint">יש תחבורה נוספת בתחנה הזו.</string>
     <string name="search_street">חיפוש רחוב</string>
-    <string name="start_search_from_city">נא לבחור עיר תחילה</string>
+    <string name="start_search_from_city">נא לבחור עיר/יישוב/אזור תחילה</string>
     <string name="shared_string_restore">שחזור</string>
     <string name="keep_passed_markers_descr">סמנים נוספים כקבוצות של מועדפים או נקודות דרך GPX שמסומנות ככאלו שעברת יישארו על המפה. אם הקבוצה אינה פעילה, הסמנים ייעלמו מהמפה.</string>
     <string name="keep_passed_markers">להשאיר סמנים שעברת בהם על המפה</string>
@@ -2853,7 +2853,7 @@
     <string name="osm_live_payment_renews_quarterly">מתחדש רבעונית</string>
     <string name="osm_live_payment_renews_annually">מתחדש שנתית</string>
     <string name="default_price_currency_format">%1$.2f %2$s</string>
-    <string name="osm_live_payment_header">נא לבחור את מחזור התשלום המועדף עליך:</string>
+    <string name="osm_live_payment_header">מחזור תשלום:</string>
     <string name="osm_live_payment_contribute_descr">חלק מההכנסות נתרמות לטובת מתנדבי OpenStreetMap.</string>
     <string name="powered_by_osmand">על ידי OsmAnd</string>
     <string name="osm_live_subscriptions">מינויים</string>
@@ -2862,9 +2862,9 @@
     <string name="run_full_osmand_msg">המפה שבשימוש היא {0} שמוגשת על ידי OsmAnd. להפעיל את הגרסה המלאה של OsmAnd\?</string>
     <string name="run_full_osmand_header">להפעיל את OsmAnd\?</string>
     <string name="lang_gn_py">גוארני</string>
-    <string name="add_destination_point">הוספת יעד</string>
+    <string name="add_destination_point">הגדרת יעד</string>
     <string name="add_intermediate_point">הוספת נקודת ביניים</string>
-    <string name="add_start_point">הוספת נקודת התחלה</string>
+    <string name="add_start_point">הגדרת נקודת התחלה</string>
     <string name="intermediate_waypoint">נקודת ביניים</string>
     <string name="transfers">החלפות</string>
     <string name="on_foot">ברגל</string>
@@ -2875,8 +2875,8 @@
     <string name="avoid_roads_descr">נא לבחור דרך להימנע ממנה במהלך ניווט, אפשר במפה או ברשימה שלהלן:</string>
     <string name="show_along_the_route">הצגה לאורך המסלול</string>
     <string name="simulate_navigation">הדמיית ניווט</string>
-    <string name="choose_track_file_to_follow">נא לבחור קובץ מסלול להצגה</string>
-    <string name="voice_announcements">הכרזות קוליות</string>
+    <string name="choose_track_file_to_follow">נא לבחור קובץ מסלול למעקב</string>
+    <string name="voice_announcements">הנחיות קוליות</string>
     <string name="intermediate_destinations">יעדי ביניים</string>
     <string name="arrive_at_time">הגעה ב־%1$s</string>
     <string name="quick_action_switch_day_night_descr">נגיעה בכפתור פעולה זה תחליף בין מצבי יום ולילה עבור OsmAnd</string>
@@ -2896,7 +2896,7 @@
     <string name="add_work">הוספת עבודה</string>
     <string name="work_button">עבודה</string>
     <string name="previous_route">נתיב קודם</string>
-    <string name="add_destination_query">נא להוסיף יעד תחילה</string>
+    <string name="add_destination_query">נא להגדיר את היעד תחילה</string>
     <string name="shared_string_swap">החלפה</string>
     <string name="show_more">הצגת עוד</string>
     <string name="tracks_on_map">עקבות מוצגים</string>
@@ -2912,9 +2912,9 @@
     <string name="use_osm_live_public_transport_description">הפעלת תחבורה ציבורית לשינויים ב־OsmAnd החי.</string>
     <string name="use_osm_live_public_transport">OsmAnd חי תחבורה ציבורית</string>
     <string name="transfers_size">%1$d העברות</string>
-    <string name="add_start_and_end_points">הוספת נקודות התחלה וסיום</string>
-    <string name="route_add_start_point">הוספת נקודת התחלה</string>
-    <string name="route_descr_select_start_point">בחירת נקודת התחלה</string>
+    <string name="add_start_and_end_points">הוספת נקודות יציאה ויעד</string>
+    <string name="route_add_start_point">הוספת נקודת יציאה</string>
+    <string name="route_descr_select_start_point">בחירת נקודת יציאה</string>
     <string name="rendering_attr_surface_unpaved_name">בלתי סלול</string>
     <string name="rendering_attr_surface_sand_name">חול</string>
     <string name="rendering_attr_surface_grass_name">דשא</string>
@@ -2940,8 +2940,7 @@
     <string name="avoid_pt_types_descr">נא לבחור סוגי תחבורה ציבורית להימנע מהם בתכנון מסלול:</string>
     <string name="avoid_pt_types">הימנעות מסוגי תחבורה ציבורית…</string>
     <string name="shared_string_walk">הליכה</string>
-    <string name="save_poi_value_exceed_length">האורך המרבי לתגית „%s” הוא 255 תווים. 
-\nנא לקצר כדי להמשיך.</string>
+    <string name="save_poi_value_exceed_length">נא לקצר את אורך התגית „%s” ל־255 תווים ומטה.</string>
     <string name="save_poi_value_exceed_length_title">אורך הערך „%s”</string>
     <string name="public_transport_warning_descr_blog">מידע נוסף על האופן בו OsmAnd מחשב מסלולים בבלוג שלנו.</string>
     <string name="public_transport_warning_title">ניווט עם תחבורה ציבורית נמצא כרגע בשלבי ניסוי, עלולים להופיע שגיאות ואי־דיוקים.</string>
@@ -2991,18 +2990,18 @@
     <string name="angular_measeurement_descr">החלפת יחידת המידה לאזימוט.</string>
     <string name="routing_attr_avoid_sett_name">הימנעות מריצוף חלוקי נחל ואבנים משתלבות</string>
     <string name="routing_attr_avoid_sett_description">הימנעות מריצוף חלוקי נחל ואבנים משתלבות</string>
-    <string name="routing_attr_avoid_tram_name">הימנעות מחשמליות</string>
-    <string name="routing_attr_avoid_tram_description">הימנעות מחשמליות</string>
-    <string name="routing_attr_avoid_bus_name">הימנעות מאוטובוסים</string>
-    <string name="routing_attr_avoid_bus_description">הימנעות מאוטובוסים ומטרוליבוסים</string>
-    <string name="routing_attr_avoid_share_taxi_name">הימנעות ממוניות שירות</string>
-    <string name="routing_attr_avoid_share_taxi_description">הימנעות ממוניות שירות</string>
-    <string name="routing_attr_avoid_train_name">הימנעות מרכבות</string>
-    <string name="routing_attr_avoid_train_description">הימנעות מרכבות</string>
-    <string name="routing_attr_avoid_subway_name">הימנעות מרכבות תחתיות</string>
-    <string name="routing_attr_avoid_subway_description">הימנעות מרכבות תחתיות ומרכבות קלות</string>
-    <string name="routing_attr_avoid_ferry_name">הימנעות ממעבורות</string>
-    <string name="routing_attr_avoid_ferry_description">הימנעות ממעבורות</string>
+    <string name="routing_attr_avoid_tram_name">ללא חשמליות</string>
+    <string name="routing_attr_avoid_tram_description">נמנע מחשמליות</string>
+    <string name="routing_attr_avoid_bus_name">ללא אוטובוסים</string>
+    <string name="routing_attr_avoid_bus_description">נמנע מאוטובוסים ומטרוליבוסים</string>
+    <string name="routing_attr_avoid_share_taxi_name">ללא מוניות שירות</string>
+    <string name="routing_attr_avoid_share_taxi_description">נמנע ממוניות שירות</string>
+    <string name="routing_attr_avoid_train_name">ללא רכבות</string>
+    <string name="routing_attr_avoid_train_description">נמנע מרכבות</string>
+    <string name="routing_attr_avoid_subway_name">ללא רכבות תחתיות</string>
+    <string name="routing_attr_avoid_subway_description">נמנע מרכבות תחתיות ומרכבות קלות</string>
+    <string name="routing_attr_avoid_ferry_name">ללא מעבורות</string>
+    <string name="routing_attr_avoid_ferry_description">נמנע ממעבורות</string>
     <string name="release_3_3_7">• הצגת הזמן בין ההחלפות בתחבורה הציבורית
 \n
 \n • מנשק המשתמש תוקן עבור פרטי המסלול
@@ -3018,9 +3017,9 @@
     <string name="files_present">%1$d קבצים (%2$s) נמצאים במיקום הקודם ‚%3$s’.</string>
     <string name="move_maps">להעביר מפות</string>
     <string name="dont_move_maps">לא להעביר</string>
-    <string name="public_transport_ped_route_title">זמן ההגעה בהליכה הוא בערך %1$s וייתכן שתחבורה ציבורית תקצר אותו</string>
+    <string name="public_transport_ped_route_title">זמן ההגעה בהליכה הוא בערך %1$s שזה כנראה פחות זמן מהגעה בתחבורה ציבורית</string>
     <string name="public_transport_no_route_title">לרוע המזל, OsmAnd לא הצליח למצוא מסלול שמתאים להגדרות שלך.</string>
-    <string name="public_transport_try_ped">מוטב לנסות ניווט להולכי רגל.</string>
+    <string name="public_transport_try_ped">התנסות בניווט להולכי רגל.</string>
     <string name="public_transport_try_change_settings">מוטב לנסות לשנות את ההגדרות.</string>
     <string name="public_transport_calc_pedestrian">חישוב מסלול להולכי רגל</string>
     <string name="public_transport_type">סוג תחבורה</string>
@@ -3057,40 +3056,40 @@
     <string name="precision_hdop">דיוק אופקי: %s</string>
     <string name="app_mode_offroad">שטח</string>
     <string name="edit_profile_setup_title">הקמת פרופיל</string>
-    <string name="edit_profile_setup_subtitle">לפרופיל יש הגדרות משלו</string>
-    <string name="edit_profile_setup_map_subtitle">יש לבחור את מפת בררת המחדל לפרופיל</string>
-    <string name="edit_profile_screen_options_subtitle">נא לבחור את הגדרות בררת המחדל למסך עבור הפרופיל</string>
-    <string name="edit_profile_nav_settings_subtitle">נא לבחור את הגדרות הניווט כבררת מחדל עבור פרופיל</string>
-    <string name="routing_attr_max_num_changes_description">ציון מספר השינויים המרבי</string>
+    <string name="edit_profile_setup_subtitle">הפרופיל שומר הגדרות משלו</string>
+    <string name="edit_profile_setup_map_subtitle">יש לבחור אפשרויות מפה לפרופיל</string>
+    <string name="edit_profile_screen_options_subtitle">נא לבחור הגדרות מסך לפרופיל</string>
+    <string name="edit_profile_nav_settings_subtitle">נא לבחור הגדרות ניווט לפרופיל</string>
+    <string name="routing_attr_max_num_changes_description">ציון הסף העליון לשינויים</string>
     <string name="routing_attr_max_num_changes_name">מספר החלפות</string>
     <string name="turn_screen_on_router">להתעורר בפניות</string>
-    <string name="turn_screen_on_time_descr">להגדיר את זמן התעוררות המסך.</string>
+    <string name="turn_screen_on_time_descr">להגדיר את זמן פעילות המסך.</string>
     <string name="turn_screen_on_sensor">להשתמש בחיישן מרחק</string>
-    <string name="turn_screen_on_sensor_descr">יש לנופף ביד מול החלק העליון של חזית המכשיר כדי להדליק את המסך בזמן ניווט.</string>
+    <string name="turn_screen_on_sensor_descr">יש לנופף ביד מול החלק העליון של חזית המכשיר כדי להדליק אותו בזמן ניווט.</string>
     <string name="shared_string_track_is_saved">המסלול %s נשמר</string>
     <string name="profile_alert_cant_delete_base">לא ניתן למחוק את הפרופילים הבסיסיים של OsmAnd</string>
     <string name="profile_alert_need_save_title">שמירת שינויים</string>
-    <string name="profile_alert_need_save_msg">עליך לשמור את השינויים לפרופיל כדי להמשיך</string>
+    <string name="profile_alert_need_save_msg">עליך לשמור את השינויים לפרופיל תחילה</string>
     <string name="profile_alert_delete_title">מחיקת פרופיל</string>
-    <string name="profile_alert_delete_msg">למחוק את הפרופיל %s\?</string>
+    <string name="profile_alert_delete_msg">למחוק את הפרופיל „%s”</string>
     <string name="select_base_profile_dialog_title">בחירת פרופיל בסיס</string>
     <string name="process_downloading_service">שירות ההורדות של OsmAnd</string>
     <string name="press_again_to_change_the_map_orientation">יש לגעת שוב כדי לשנות את כיוון המפה</string>
-    <string name="default_speed_dialog_msg">משמש לחישוב מועד ההגעה הצפוי במהלך הניווט</string>
+    <string name="default_speed_dialog_msg">משמש לחישוב מועד ההגעה הצפוי</string>
     <string name="new_profile">פרופיל חדש</string>
     <string name="shared_string_crash">קריסה</string>
-    <string name="last_launch_crashed">הטעינה האחרונה של OsmAnd נכשלה. נא לסייע לנו לשפר את OsmAnd על ידי שיתוף הודעת השגיאה.</string>
-    <string name="button_rate">דירוג</string>
+    <string name="last_launch_crashed">הטעינה האחרונה של OsmAnd קרסה. נא לסייע לנו לשפר את OsmAnd על ידי שיתוף הודעת השגיאה.</string>
+    <string name="button_rate">אישור</string>
     <string name="shared_string_privacy_policy">מדיניות פרטיות</string>
-    <string name="help_us_make_osmand_better">נשמח לקבל סיוע בשיפור OsmAnd!</string>
+    <string name="help_us_make_osmand_better">נשמח לקבל סיוע בשיפור OsmAnd</string>
     <string name="choose_data_to_share">נא לבחור את סוג הנתונים שברצונך לשתף:</string>
     <string name="downloaded_maps">מפות התקבלו</string>
     <string name="visited_screens">מסכים בהם ביקרת</string>
     <string name="collected_data_descr">נא לציין איזה סוג של מידע מוסכם עליך לשתף עם OsmAnd.</string>
-    <string name="visited_screens_collect_descr">מסייע לנו להבין אילו תכונות של OsmAnd הן הנפוצות ביותר.</string>
+    <string name="visited_screens_collect_descr">מסייע לנו להבין את הפופולריות של תכונות OsmAnd.</string>
     <string name="privacy_and_security_change_descr">נגיעה ב„הרשאה” מביעה את הסכמתך עם %1$s שלנו</string>
     <string name="settings_privacy_and_security">פרטיות ואבטחה</string>
-    <string name="settings_privacy_and_security_desc">נא לבחור אילו נתונים ישותפו אתנו</string>
+    <string name="settings_privacy_and_security_desc">נא לבחור אילו נתונים לשתף</string>
     <string name="shared_string_no_thank_you">לא, תודה</string>
     <string name="shared_string_allow">הרשאה</string>
     <string name="profile_name_hint">שם הפרופיל</string>
@@ -3113,7 +3112,7 @@
     <string name="profile_alert_need_routing_type_title">בחירת סוג ניווט</string>
     <string name="profile_alert_need_routing_type_msg">נא לבחור בסוג ניווט לפרופיל החדש ביישומון</string>
     <string name="profile_alert_need_profile_name_title">נא להקליד שם פרופיל</string>
-    <string name="profile_alert_need_profile_name_msg">שם הפרופיל לא אמור להישאר ריק!</string>
+    <string name="profile_alert_need_profile_name_msg">עליך לציין שם פרופיל תחילה.</string>
     <string name="profile_alert_duplicate_name_title">שם כפול</string>
     <string name="profile_alert_duplicate_name_msg">כבר יש פרופיל בשם הזה</string>
     <string name="shared_string_color_magenta">מג׳נטה</string>
@@ -3121,12 +3120,12 @@
     <string name="collected_data">נתונים שנאספו</string>
     <string name="gpx_join_gaps">צירוף מרווחים</string>
     <string name="app_mode_camper">מחנאות</string>
-    <string name="app_mode_campervan">רכב מחנאות</string>
+    <string name="app_mode_campervan">רכב מחנאות (קרוואן)</string>
     <string name="rendering_attr_showLez_description">הצגת אזורים עם פליטה נמוכה במפה. לא משפיע על הניווט.</string>
     <string name="rendering_attr_showLez_name">הצגת אזורים עם פליטה נמוכה</string>
     <string name="temporary_conditional_routing">התייחסות למגבלות זמניות</string>
-    <string name="rate_dialog_descr">נא להקדיש לנו 30 שניות כדי לשתף אתנו את המשוב והדירוג שלך על עבודתנו ב־Google Play.</string>
-    <string name="downloaded_maps_collect_descr">מסייע לנו להבין אילו מפות באילו אזורים ומדינות הן הפופולריות ביותר.</string>
+    <string name="rate_dialog_descr">נא לשתף אתנו את המשוב והדירוג שלך על עבודתנו ב־Google Play.</string>
+    <string name="downloaded_maps_collect_descr">מסייע לנו להבין פופולריות לפי מדינה ואזור.</string>
     <string name="osmand_routing_promo">באפשרותך להוסיף גרסה משופצת משלך ל־routing.xml תחת ‎..osmand/routing</string>
     <string name="select_nav_profile_dialog_title">בחירת סוג ניווט</string>
     <string name="base_profile_descr_car">מכונית, משאית, אופנוע</string>
@@ -3172,24 +3171,24 @@
     <string name="routing_attr_piste_type_nordic_name">סקי למרחקים/נורדי</string>
     <string name="routing_attr_piste_type_nordic_description">מסלולים לסקי נורדי או למרחקים.</string>
     <string name="routing_attr_allow_intermediate_description">מסלולים קשים יותר עם מקטעים יותר תלולים. בדרך כלל עם מכשולים שרצוי להימנע מהם.</string>
-    <string name="release_3_4">• פרופילי יישומון: יצירת פרופיל שמותאם אישית לצרכיך, עם סמל וצבע לבחירתך
-\n
-\n • מעתה ניתן להתאים לפרופיל את המהירות המרבית/מזערית ואת בררת המחדל
-\n
-\n • נוסף וידג׳ט לנקודות הציון הנוכחיות
-\n
-\n • נוספו אפשרויות להצגת מצפן וסרגל רדיוס במפה
-\n
-\n • תיקון תיעוד מסלול ברקע
-\n
-\n • שיפור הורדות רקע של מפות
-\n
-\n • הוחזרה האפשרות ‚הפעלת המסך’
-\n
-\n • תוקנה בחירת השפות בוויקיפדיה
-\n
-\n • תוקנה התנהגות כפתור המצפן במהלך ניווט
-\n
+    <string name="release_3_4">• פרופילי יישומון: יצירת פרופיל שמותאם אישית לצרכיך, עם סמל וצבע לבחירתך 
+\n 
+\n • מעתה ניתן להתאים לפרופיל את המהירות המרבית/מזערית ואת בררת המחדל 
+\n 
+\n • נוסף וידג׳ט לנקודות הציון הנוכחיות 
+\n 
+\n • נוספו אפשרויות להצגת מצפן וסרגל רדיוס במפה 
+\n 
+\n • תיקון תיעוד מסלול ברקע 
+\n 
+\n • שיפור הורדות רקע של מפות 
+\n 
+\n • הוחזרה האפשרות ‚הפעלת המסך’ 
+\n 
+\n • תוקנה בחירת השפות בוויקיפדיה 
+\n 
+\n • תוקנה התנהגות כפתור המצפן במהלך ניווט 
+\n 
 \n • תיקוני תקלות נוספים
 \n
 \n</string>
@@ -3230,7 +3229,7 @@
     <string name="reset_to_default">איפוס לבררת מחדל</string>
     <string name="manage_profiles_descr">יצירה, ייבוא ועריכת פרופילים</string>
     <string name="manage_profiles">ניהולי פרופילי יישומון…</string>
-    <string name="osmand_settings_descr">השפעה על היישומון כולו</string>
+    <string name="osmand_settings_descr">חל על היישומון כולו</string>
     <string name="osmand_settings">הגדרות OsmAnd</string>
     <string name="copy_from_other_profile">העתקה מפרופיל אחר</string>
     <string name="turn_screen_on">הפעלת המסך</string>
@@ -3241,7 +3240,7 @@
     <string name="vehicle_parameters">מאפייני כלי הרכב</string>
     <string name="voice_announces_info">הכרזות קוליות מושמעות רק במהלך הניווט.</string>
     <string name="voice_announces_descr">הנחיות והכרזות ניווט</string>
-    <string name="voice_announces">הכרזות קוליות</string>
+    <string name="voice_announces">הנחיות קוליות</string>
     <string name="screen_alerts">התראות מסך</string>
     <string name="route_parameters_descr">הגדרת מאפייני מסלול</string>
     <string name="route_parameters">מאפייני מסלול</string>
@@ -3358,4 +3357,16 @@
     <string name="quick_action_show_hide_hillshade">הצגה/הסתרה של הצללה</string>
     <string name="tts_initialization_error">לא ניתן להפעיל מנוע המרת טקסט לדיבור</string>
     <string name="simulate_your_location_gpx_descr">הדמיית המיקום שלך באמצעות מסלול GPX שהוקלט מראש.</string>
+    <string name="swap_start_and_destination">החלפה בין התחלה ליעד</string>
+    <string name="export_profile">ייצוא פרופיל</string>
+    <string name="exported_osmand_profile">פרופיל OsmAnd:‏ %1$s</string>
+    <string name="overwrite_profile_q">פרופיל בשם ‚%1$s’ כבר קיים. לדרוס\?</string>
+    <string name="export_profile_failed">לא ניתן לייצא פרופיל.</string>
+    <string name="profile_import">ייבוא פרופיל:</string>
+    <string name="profile_import_descr">כדי לייבא פרופיל, יש לבחור את הקובץ שלו ולפתוח אותו עם OsmAnd.</string>
+    <string name="file_import_error">שגיאת ייבוא %1$s:‏ %2$s</string>
+    <string name="file_imported_successfully">הייבוא של %1$s הצליח.</string>
+    <string name="rendering_value_white_name">לבן</string>
+    <string name="swap_two_places">החלפה בין %1$s לבין %2$s</string>
+    <string name="route_start_point">נקודת התחלה</string>
 </resources>
