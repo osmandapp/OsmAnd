@@ -3197,7 +3197,7 @@ POIの更新は利用できません</string>
     <string name="app_mode_personal_transporter">個人輸送業者</string>
     <string name="app_mode_monowheel">モノホイール</string>
     <string name="app_mode_scooter">スクーター</string>
-    <string name="precision_hdop_and_vdop">"水平精度: %1$s,  垂直:%2$s"</string>
+    <string name="precision_hdop_and_vdop">水平精度: %1$s, 垂直:%2$s</string>
     <string name="precision_hdop">水平精度: %s</string>
     <string name="rendering_attr_highway_class_track_grade1_name">グレード1</string>
     <string name="rendering_attr_highway_class_track_grade2_name">グレード2</string>
@@ -3402,5 +3402,5 @@ POIの更新は利用できません</string>
     <string name="profile_import_descr">OsmAndにて端末内のファイルを選択し開くことで、プロファイルをインポートできます。</string>
     <string name="file_import_error">【%1$s】インポートエラー: %2$s</string>
     <string name="file_imported_successfully">%1$sのインポートに成功しました。</string>
-    <string name="swap_start_and_destination">" string name=\"lat_lon_pattern\"&gt;\"緯度:%1$.5f  経度:%2$.5f\"&lt;/string "</string>
+    <string name="swap_start_and_destination">string name=\"lat_lon_pattern\"&gt;\"緯度:%1$.5f 経度:%2$.5f\"&lt;/string</string>
 </resources>
