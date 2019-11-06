@@ -3268,4 +3268,7 @@
     <string name="quick_action_show_hide_hillshade">Vis/skjul relieffskygge</string>
     <string name="tts_initialization_error">Kan ikke starte tekst-til-tale -motor</string>
     <string name="simulate_your_location_gpx_descr">Simuler din posisjon ved bru av et innspilt GPX-spor.</string>
+    <string name="exported_osmand_profile">OsmAnd-profil: %1$s</string>
+    <string name="profile_import">Profil-import:</string>
+    <string name="rendering_value_white_name">Hvit</string>
 </resources>
