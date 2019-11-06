@@ -3489,4 +3489,16 @@
 
 	<string name="poi_charge">Сумма оплаты</string>
 
+	<string name="poi_bath_type">Тип</string>
+	<string name="poi_bath_open_air">На открытом воздухе</string>
+	<string name="poi_bath_type_hot_spring">Горячие источники</string>
+	<string name="poi_bath_type_onsen">Онсэн</string>
+	<string name="poi_bath_type_hammam">Хаммам</string>
+	<string name="poi_bath_type_thermal">Термальные</string>
+	<string name="poi_bath_type_river">Река</string>
+	<string name="poi_bath_type_lake">Озеро</string>
+	<string name="poi_bath_type_foot_bath">Баня для ног</string>
+	<string name="poi_bath_open_air_yes">Да</string>
+	<string name="poi_bath_open_air_no">Нет</string>
+
 </resources>

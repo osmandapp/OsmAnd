@@ -127,6 +127,8 @@
 	<string name="poi_access_goods">Light goods vehicles access</string>
 	<string name="poi_access_disabled">Disabled access</string>
 	<string name="poi_cash_withdrawal_bank_card">Cash withdrawal</string>
+	<string name="poi_bath_type">Type</string>
+	<string name="poi_bath_open_air">Open air</string>
 
 <!--  categories -->
 	<string name="poi_shop">Store</string>
@@ -4130,5 +4132,15 @@
 	<string name="poi_cash_withdrawal_migros_bank">Migros bank</string>
 	<string name="poi_cash_withdrawal_girocard">Girocard</string>
 	<string name="poi_cash_withdrawal_postbank">Postbank</string>
+
+	<string name="poi_bath_type_hot_spring">Hot spring</string>
+	<string name="poi_bath_type_onsen">Onsen</string>
+	<string name="poi_bath_type_hammam">Hammam</string>
+	<string name="poi_bath_type_thermal">Thermal</string>
+	<string name="poi_bath_type_river">River</string>
+	<string name="poi_bath_type_lake">Lake</string>
+	<string name="poi_bath_type_foot_bath">Foot bath</string>
+	<string name="poi_bath_open_air_yes">Yes</string>
+	<string name="poi_bath_open_air_no">No</string>
 
 </resources>
