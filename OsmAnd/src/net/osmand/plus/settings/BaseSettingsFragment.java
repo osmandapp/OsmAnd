@@ -428,6 +428,17 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		updatePreferencesScreen();
 	}
 
+	public boolean shouldDismissOnChange() {
+		return false;
+	}
+
+	public void dismiss() {
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			activity.getSupportFragmentManager().popBackStack();
+		}
+	}
+
 	protected void enableDisablePreferences(boolean enable) {
 		PreferenceScreen screen = getPreferenceScreen();
 		if (screen != null) {

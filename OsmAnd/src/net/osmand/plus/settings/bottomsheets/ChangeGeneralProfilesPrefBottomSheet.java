@@ -54,7 +54,7 @@ public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSh
 					@Override
 					public void onClick(View v) {
 						app.getSettings().setSharedGeneralPreference(prefId, newValue);
-						updateTargetSettings();
+						updateTargetSettings(false);
 						dismiss();
 					}
 				})
@@ -71,7 +71,7 @@ public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSh
 					@Override
 					public void onClick(View v) {
 						app.getSettings().setPreference(prefId, newValue);
-						updateTargetSettings();
+						updateTargetSettings(false);
 						dismiss();
 					}
 				})
@@ -85,7 +85,7 @@ public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSh
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						updateTargetSettings();
+						updateTargetSettings(true);
 						dismiss();
 					}
 				})
@@ -104,10 +104,23 @@ public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSh
 		outState.putSerializable(NEW_VALUE_KEY, newValue);
 	}
 
-	private void updateTargetSettings() {
+	private void updateTargetSettings(boolean discard) {
 		BaseSettingsFragment target = (BaseSettingsFragment) getTargetFragment();
 		if (target != null) {
 			target.updateAllSettings();
+			if (!discard) {
+				if (target.shouldDismissOnChange()) {
+					target.dismiss();
+				}
+				FragmentManager manager = getFragmentManager();
+				if (manager != null) {
+					BasePreferenceBottomSheet preferenceBottomSheet =
+							BasePreferenceBottomSheet.findPreferenceBottomSheet(manager, getPrefId());
+					if (preferenceBottomSheet != null && preferenceBottomSheet.shouldDismissOnChange()) {
+						preferenceBottomSheet.dismiss();
+					}
+				}
+			}
 		}
 	}
 
