@@ -3067,7 +3067,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="collected_data_descr">Definiu quines dades permeteu que OsmAnd comparteixi.</string>
     <string name="downloaded_maps_collect_descr">Ajudeu-nos a determinar la popularitat dels mapes de països i de regions.</string>
     <string name="visited_screens_collect_descr">Ajudeu-nos a determinar la popularitat de les característiques d\'OsmAnd.</string>
-    <string name="privacy_and_security_change_descr">"Premeu \"Permet\" si accepteu la nostra  %1$s"</string>
+    <string name="privacy_and_security_change_descr">Premeu \"Permet\" si accepteu la nostra %1$s</string>
     <string name="settings_privacy_and_security">Privadesa i seguretat</string>
     <string name="settings_privacy_and_security_desc">Trieu quines dades compartiu</string>
     <string name="shared_string_no_thank_you">No, gràcies</string>
