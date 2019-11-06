@@ -54,7 +54,7 @@
     <string name="user_password">Votre mot de passe OSM</string>
     <string name="osmand_service">Mode tâche de fond</string>
     <string name="osmand_service_descr">OsmAnd s\'exécute en tâche de fond, écran éteint.</string>
-    <string name="switch_to_raster_map_to_see">Aucune carte vectorielle hors-ligne n\'est actuellement présente pour cet emplacement. Vous pouvez en télécharger une ou basculer sur les cartes en ligne en activant le greffon des cartes en ligne.</string>
+    <string name="switch_to_raster_map_to_see">Téléchargez une carte vectorielle hors-ligne pour ce lieu (depuis \'Paramètres\' &gt; \'Gérer les cartes\') ou utilisez le greffon \"cartes en ligne\".</string>
     <string name="download_files_not_enough_space">Il n\'y a pas suffisamment d\'espace pour télécharger %1$s MB (disponible : %2$s).</string>
     <string name="download_files_question_space">Télécharger {0} fichier(s) \? {1} Mo sur {2} Mo seront utilisés.</string>
     <string name="use_transparent_map_theme">Thème de transparence</string>
@@ -143,7 +143,7 @@
     <string name="trace_rendering">Infos de débogage du rendu</string>
     <string name="trace_rendering_descr">Afficher les performances du rendu.</string>
     <string name="installing_new_resources">Dépaquetage de nouvelles données…</string>
-    <string name="internet_connection_required_for_online_route">Vous avez sélectionné un moteur de calcul d\'itinéraire en ligne, mais il n\'y a aucune connexion Internet.</string>
+    <string name="internet_connection_required_for_online_route">Le calcul d\'itinéraire en ligne est sélectionné mais une connexion Internet est indispensable pour qu\'il fonctionne.</string>
     <string name="tts_language_not_supported_title">Langue non disponible</string>
     <string name="tts_language_not_supported">La langue sélectionnée n\'est pas disponible dans le moteur de synthèse vocale installé. Souhaitez-vous rechercher d\'autres moteurs de synthèse vocale sur Google Play \? Sinon la langue par défaut sera utilisée.</string>
     <string name="tts_missing_language_data_title">Données manquantes</string>
@@ -276,7 +276,7 @@
     <string name="fast_route_mode_descr">Activer pour calculer l\'itinéraire le plus rapide ou Désactiver pour calculer l\'itinéraire le plus économe en carburant</string>
     <string name="tiles_to_download_estimated_size">Le zoom {0} télécharge {1} tuiles ({2} Mb)</string>
     <string name="shared_string_download_map">Télécharger une carte</string>
-    <string name="select_max_zoom_preload_area">Sélectionnez le zoom maximum pour précharger la zone visible</string>
+    <string name="select_max_zoom_preload_area">Zoom maximal à précharger</string>
     <string name="maps_could_not_be_downloaded">Impossible de télécharger cette carte</string>
     <string name="continuous_rendering">Affichage continu</string>
     <string name="continuous_rendering_descr">Affichage continu plutôt qu\'image par image</string>
@@ -788,7 +788,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="filterpoi_activity">Créer un filtre de points d\'intérêt</string>
     <string name="map_widget_renderer">Style de la carte</string>
     <string name="int_continuosly">En continu</string>
-    <string name="osmand_short_description_80_chars">OsmAnd est un logiciel libre de navigation pouvant fonctionner avec des cartes hors-ligne ou en ligne.</string>
+    <string name="osmand_short_description_80_chars">Logiciel de cartographie et de navigation fonctionnant avec des cartes OSM hors-ligne et en ligne</string>
     <string name="osmand_plus_short_description_80_chars">OsmAnd est un logiciel libre de navigation pouvant fonctionner avec des cartes hors-ligne ou en ligne</string>
     <string name="snap_to_road_descr">Déplacer la position sur la route en cours de navigation.</string>
     <string name="snap_to_road">Déplacer sur la route</string>
@@ -2370,7 +2370,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="open_mapillary">Ouvrir Mapillary</string>
     <string name="improve_coverage_mapillary">Améliorez la couverture photo avec Mapillary</string>
     <string name="improve_coverage_install_mapillary_desc">Installez Mapillary pour ajouter une ou plusieurs photos à cet emplacement de la carte.</string>
-    <string name="mapillary_action_descr">Participez en ajoutant vos photos détaillées sur Mapillary.</string>
+    <string name="mapillary_action_descr">Partagez vos photos de rue via Mapillary.</string>
     <string name="mapillary_widget">Gadget Mapillary</string>
     <string name="mapillary_widget_descr">Permet de contribuer facilement à Mapillary.</string>
     <string name="mapillary_descr">Des photos détaillées en ligne pour tous. Découvrez des lieux, collaborez, capturez le monde.</string>
@@ -3179,7 +3179,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="shared_string_default">Par défaut</string>
     <string name="gpx_join_gaps">Relier les trous</string>
     <string name="app_mode_camper">Campeur</string>
-    <string name="app_mode_campervan">Caravane</string>
+    <string name="app_mode_campervan">Camping-car</string>
     <string name="rendering_attr_showLez_description">Afficher les zones à faible émission sur la carte (n\'influe pas sur l\'itinéraire).</string>
     <string name="rendering_attr_showLez_name">Afficher les zones à faibles émissions</string>
     <string name="new_route_calculated_dist_dbg">Itinéraire : distance %s, durée %s 
@@ -3356,4 +3356,8 @@ représentant la zone : %1$s x %2$s</string>
     <string name="profile_import_descr">Pour importer un profil, sélectionnez le fichier sur l\'appareil et ouvrez le avec OsmAnd.</string>
     <string name="file_import_error">"import  de %1$s, erreur : %2$s"</string>
     <string name="file_imported_successfully">%1$s importé avec succès.</string>
+    <string name="swap_start_and_destination">Inverser Départ et Arrivée</string>
+    <string name="rendering_value_white_name">Blanc</string>
+    <string name="swap_two_places">Inverser %1$s et %2$s</string>
+    <string name="route_start_point">Point de départ</string>
 </resources>
