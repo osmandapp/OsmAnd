@@ -281,7 +281,9 @@ public class RoutingOptionsHelper {
 				updateRoutingParameterIcons(item);
 				list.add(item);
 				if (item instanceof GpxLocalRoutingParameter) {
-					list.addAll(getGpxAndOsmandRouterParameters(am));
+					list.addAll(getGpxRouterParameters(am));
+				} else if (item instanceof TimeConditionalRoutingItem) {
+					list.addAll(getOsmandRouterParameters(am));
 				}
 			}
 		}
@@ -425,20 +427,24 @@ public class RoutingOptionsHelper {
 		return list;
 	}
 
-	public List<LocalRoutingParameter> getGpxAndOsmandRouterParameters(ApplicationMode am) {
-		final OsmandSettings settings = app.getSettings();
+	public List<LocalRoutingParameter> getOsmandRouterParameters(ApplicationMode am) {
+		OsmandSettings settings = app.getSettings();
 		List<LocalRoutingParameter> list = new ArrayList<LocalRoutingParameter>();
-		RouteProvider.GPXRouteParamsBuilder rparams = app.getRoutingHelper().getCurrentGPXRoute();
 		boolean osmandRouter = am.getRouteService() == RouteProvider.RouteService.OSMAND;
 		if (!osmandRouter) {
 			list.add(new OtherLocalRoutingParameter(R.string.calculate_osmand_route_without_internet,
-					app.getString(R.string.calculate_osmand_route_without_internet), settings.GPX_ROUTE_CALC_OSMAND_PARTS
-					.get()));
+					app.getString(R.string.calculate_osmand_route_without_internet), settings.GPX_ROUTE_CALC_OSMAND_PARTS.get()));
 			list.add(new OtherLocalRoutingParameter(R.string.fast_route_mode, app.getString(R.string.fast_route_mode),
 					settings.FAST_ROUTE_MODE.get()));
-			return list;
 		}
-		if (rparams != null) {
+		return list;
+	}
+
+	public List<LocalRoutingParameter> getGpxRouterParameters(ApplicationMode am) {
+		List<LocalRoutingParameter> list = new ArrayList<LocalRoutingParameter>();
+		RouteProvider.GPXRouteParamsBuilder rparams = app.getRoutingHelper().getCurrentGPXRoute();
+		boolean osmandRouter = am.getRouteService() == RouteProvider.RouteService.OSMAND;
+		if (rparams != null && osmandRouter) {
 			GPXUtilities.GPXFile fl = rparams.getFile();
 			if (fl.hasRtePt()) {
 				list.add(new OtherLocalRoutingParameter(R.string.use_points_as_intermediates,
@@ -458,8 +464,13 @@ public class RoutingOptionsHelper {
 	}
 
 	public List<LocalRoutingParameter> getRoutingParametersInner(ApplicationMode am) {
+		boolean osmandRouter = am.getRouteService() == RouteProvider.RouteService.OSMAND;
+		if (!osmandRouter) {
+			return getOsmandRouterParameters(am);
+		}
+
 		RouteProvider.GPXRouteParamsBuilder rparams = app.getRoutingHelper().getCurrentGPXRoute();
-		List<LocalRoutingParameter> list = new ArrayList<LocalRoutingParameter>(getGpxAndOsmandRouterParameters(am));
+		List<LocalRoutingParameter> list = new ArrayList<LocalRoutingParameter>(getGpxRouterParameters(am));
 		GeneralRouter rm = SettingsNavigationActivity.getRouter(app.getRoutingConfig(), am);
 		if (rm == null || (rparams != null && !rparams.isCalculateOsmAndRoute()) && !rparams.getFile().hasRtePt()) {
 			return list;
@@ -1002,7 +1013,8 @@ public class RoutingOptionsHelper {
 		PUBLIC_TRANSPORT(MuteSoundRoutingParameter.KEY, AvoidPTTypesRoutingParameter.KEY),
 		BOAT(MuteSoundRoutingParameter.KEY),
 		AIRCRAFT(MuteSoundRoutingParameter.KEY),
-		SKI(MuteSoundRoutingParameter.KEY, DRIVING_STYLE, GeneralRouter.USE_HEIGHT_OBSTACLES);
+		SKI(MuteSoundRoutingParameter.KEY, DRIVING_STYLE, GeneralRouter.USE_HEIGHT_OBSTACLES),
+		OTHER(MuteSoundRoutingParameter.KEY);
 
 		List<String> routingParameters;
 
@@ -1010,10 +1022,13 @@ public class RoutingOptionsHelper {
 			this.routingParameters = Arrays.asList(routingParameters);
 		}
 	}
-	
+
 	private List<String> getRoutingParametersForProfileType(ApplicationMode appMode) {
 		if (appMode != null) {
-			if (appMode.isDerivedRoutingFrom(ApplicationMode.CAR)) {
+			boolean osmandRouter = appMode.getRouteService() == RouteProvider.RouteService.OSMAND;
+			if (!osmandRouter) {
+				return PermanentAppModeOptions.OTHER.routingParameters;
+			} else if (appMode.isDerivedRoutingFrom(ApplicationMode.CAR)) {
 				return PermanentAppModeOptions.CAR.routingParameters;
 			} else if (appMode.isDerivedRoutingFrom(ApplicationMode.BICYCLE)) {
 				return PermanentAppModeOptions.BICYCLE.routingParameters;
@@ -1028,7 +1043,7 @@ public class RoutingOptionsHelper {
 			} else if (appMode.isDerivedRoutingFrom(ApplicationMode.SKI)) {
 				return PermanentAppModeOptions.SKI.routingParameters;
 			} else {
-				return new ArrayList<>();
+				return PermanentAppModeOptions.OTHER.routingParameters;
 			}
 		}
 		return null;
