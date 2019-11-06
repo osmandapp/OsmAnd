@@ -2878,7 +2878,7 @@
     <string name="voice_announcements">語音提示</string>
     <string name="intermediate_destinations">中轉地點</string>
     <string name="arrive_at_time">到達 %1$s</string>
-    <string name="quick_action_switch_day_night_descr">切換 OsmAnd 日夜模式的開關。</string>
+    <string name="quick_action_switch_day_night_descr">輕觸此動作按鈕以在 OsmAnd 的日間與夜間模式間切換。</string>
     <string name="quick_action_switch_day_mode">日間模式</string>
     <string name="quick_action_switch_night_mode">夜間模式</string>
     <string name="quick_action_day_night_switch_mode">切換日間／夜間模式</string>
@@ -2901,7 +2901,7 @@
     <string name="exit_at">出口於</string>
     <string name="sit_on_the_stop">站點的座位</string>
     <string name="quick_action_show_hide_gpx_tracks">顯示／隱藏 GPX 軌跡</string>
-    <string name="quick_action_show_hide_gpx_tracks_descr">在地圖上顯示或隱藏 GPX 軌跡的開關。</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">點選此動作按鈕在地圖上顯示或隱藏選定的 GPX 軌跡。</string>
     <string name="quick_action_gpx_tracks_hide">隱藏 GPX 軌跡</string>
     <string name="quick_action_gpx_tracks_show">顯示 GPX 軌跡</string>
     <string name="send_log">傳送紀錄檔</string>
@@ -3351,11 +3351,11 @@
     <string name="routing_attr_driving_style_prefer_unpaved_description">偏好無鋪面道路。</string>
     <string name="swap_start_and_destination"> string name=\"map_legend_item_description\"&gt;圖例為 OsmAnd 預設的地圖樣式，網路需連接以去顯示&lt;/string </string>
     <string name="layer_osm_edits">OSM 編輯</string>
-    <string name="quick_action_contour_lines_descr">在地圖上顯示或隱藏等高線的開關。</string>
+    <string name="quick_action_contour_lines_descr">輕點此動作按鈕以在地圖上顯示或隱藏等高線。</string>
     <string name="quick_action_contour_lines_show">顯示等高線</string>
     <string name="quick_action_contour_lines_hide">隱藏等高線</string>
     <string name="quick_action_show_hide_contour_lines">顯示／隱藏等高線</string>
-    <string name="quick_action_hillshade_descr">在地圖上顯示或隱藏地形陰影的開關。</string>
+    <string name="quick_action_hillshade_descr">輕點此動作按鈕以在地圖上顯示或隱藏地形陰影。</string>
     <string name="quick_action_hillshade_show">顯示地形陰影</string>
     <string name="quick_action_hillshade_hide">隱藏地形陰影</string>
     <string name="quick_action_show_hide_hillshade">顯示／隱藏地形陰影</string>
@@ -3363,7 +3363,7 @@
     <string name="simulate_your_location_gpx_descr">使用已紀錄的 GPX 軌跡模擬您的位置。</string>
     <string name="export_profile">匯出設定檔</string>
     <string name="exported_osmand_profile">OsmAnd 設定檔：%1$s</string>
-    <string name="overwrite_profile_q">設定檔「%1$s」已存在。要覆寫嗎？</string>
+    <string name="overwrite_profile_q">設定檔「%1$s」已存在。覆寫？</string>
     <string name="export_profile_failed">無法匯出設定檔。</string>
     <string name="profile_import">設定檔匯入：</string>
     <string name="profile_import_descr">要匯入設定檔，在裝置上選取其檔案並使用 OsmAnd 開啟。</string>
