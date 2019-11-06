@@ -35,7 +35,6 @@
     <string name="re_send_location">שליחת המיקום מחדש</string>
     <string name="last_available_location">המיקום האחרון הזמין</string>
     <string name="sharing_status">מצב שיתוף</string>
-    <string name="sharing_enabled">שיתוף: פעיל</string>
     <string name="shared_string_status">מצב</string>
     <string name="no_gps_connection">אין חיבור ל־GPS</string>
     <string name="no_internet_connection">אין חיבור לאינטרנט</string>

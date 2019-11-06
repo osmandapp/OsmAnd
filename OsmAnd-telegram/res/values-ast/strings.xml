@@ -65,7 +65,8 @@
     <string name="sharing_in_background">Compartición en segundu planu</string>
     <string name="go_to_settings">Dir a Axustes</string>
     <string name="shared_string_later">Más sero</string>
-    <string name="sharing_enabled">Compartición: Activada</string>
+    <string name="location_sharing_status">Compartición: %1$s</string>
+    <string name="shared_string_enabled">Activada</string>
     <string name="no_gps_connection">Nun hai conexón al GPS</string>
     <string name="no_internet_connection">Nun hai conexón a internet</string>
     <string name="add_device">Amestar un preséu</string>

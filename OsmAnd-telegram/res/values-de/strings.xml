@@ -6,7 +6,8 @@
     <string name="not_found_yet">Noch nicht gefunden</string>
     <string name="re_send_location">Position neu senden</string>
     <string name="sharing_status">Freigabestatus</string>
-    <string name="sharing_enabled">Teilen: Aktiviert</string>
+    <string name="location_sharing_status">Teilen: %1$s</string>
+    <string name="shared_string_enabled">Aktiviert</string>
     <string name="shared_string_status">Status</string>
     <string name="no_gps_connection">Kein GPS-Signal</string>
     <string name="no_internet_connection">Keine Internetverbindung</string>

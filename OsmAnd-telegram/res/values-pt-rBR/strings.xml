@@ -36,7 +36,8 @@
     <string name="re_send_location">Reenvie o local</string>
     <string name="last_available_location">Última localização disponível</string>
     <string name="sharing_status">Status de compartilhamento</string>
-    <string name="sharing_enabled">Compartilhamento: Ativado</string>
+    <string name="location_sharing_status">Compartilhamento: %1$s</string>
+    <string name="shared_string_enabled">Ativado</string>
     <string name="shared_string_status">Status</string>
     <string name="no_gps_connection">Sem conexão GPS</string>
     <string name="no_internet_connection">Sem conexão com a internet</string>

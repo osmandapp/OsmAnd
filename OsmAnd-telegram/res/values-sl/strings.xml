@@ -25,7 +25,8 @@
     <string name="re_send_location">Ponovno pošiljanje trenutnega mesta</string>
     <string name="last_available_location">Zadnje določeno mesto</string>
     <string name="sharing_status">Objavljanje stanja</string>
-    <string name="sharing_enabled">Objavljanje: omogočeno</string>
+    <string name="location_sharing_status">Objavljanje: %1$s</string>
+    <string name="shared_string_enabled">omogočeno</string>
     <string name="shared_string_status">Stanje</string>
     <string name="no_gps_connection">Ni povezave z GPS</string>
     <string name="no_internet_connection">Ni vzpostavljene internetne povezave</string>

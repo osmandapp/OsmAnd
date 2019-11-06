@@ -103,7 +103,8 @@
     <string name="re_send_location">Torna a enviar la ubicació</string>
     <string name="last_available_location">Última ubicació disponible</string>
     <string name="sharing_status">Estat de la compartició</string>
-    <string name="sharing_enabled">Compartició: activada</string>
+    <string name="location_sharing_status">Compartició: %1$s</string>
+    <string name="shared_string_enabled">activada</string>
     <string name="shared_string_status">Estat</string>
     <string name="no_gps_connection">No hi ha connexió GPS</string>
     <string name="no_internet_connection">No hi ha connexió a internet</string>
