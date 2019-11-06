@@ -11,6 +11,8 @@
 	Thx - Hardy
 
 -->
+    <string name="rendering_value_white_name">White</string>
+    <string name="rendering_value_yellow_name">Yellow</string>
     <string name="swap_two_places">Swap %1$s and %2$s</string>
     <string name="route_start_point">Starting point</string>
     <string name="export_profile">Export profile</string>

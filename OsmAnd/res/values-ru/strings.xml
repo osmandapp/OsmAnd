@@ -3335,4 +3335,6 @@
     <string name="profile_import">Импорт профиля:</string>
     <string name="profile_import_descr">Чтобы импортировать профиль, выберите его файл на устройстве и откройте его с помощью OsmAnd.</string>
     <string name="file_imported_successfully">%1$s успешно импортирован.</string>
+    <string name="rendering_value_white_name">Белый</string>
+    <string name="rendering_value_yellow_name">Желтый</string>
 </resources>
