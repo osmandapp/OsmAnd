@@ -138,7 +138,8 @@
     <string name="re_send_location">Отправить местоположение</string>
     <string name="last_available_location">Последнее местоположение</string>
     <string name="sharing_status">Статус отправки</string>
-    <string name="sharing_enabled">Трансляция: включена</string>
+    <string name="location_sharing_status">Трансляция: %1$s</string>
+    <string name="shared_string_enabled">включена</string>
     <string name="shared_string_status">Статус</string>
     <string name="no_gps_connection">Отсутствует GPS</string>
     <string name="no_internet_connection">Отсутствует интернет</string>

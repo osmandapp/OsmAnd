@@ -150,12 +150,13 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 		}
 
 		mainView.findViewById<TextView>(R.id.status_title).apply {
-			val sharingStatus = getString(R.string.sharing_enabled)
+			val enabled = getString(R.string.shared_string_enabled)
+			val sharingStatus = getString(R.string.location_sharing_status, enabled)
 			val spannable = SpannableString(sharingStatus)
-			spannable.setSpan(
-				ForegroundColorSpan(app.uiUtils.getActiveColor()),
-				sharingStatus.indexOf(" "), sharingStatus.length, 0
-			)
+			val start = sharingStatus.indexOf(enabled)
+			if (start != -1) {
+				spannable.setSpan(ForegroundColorSpan(app.uiUtils.getActiveColor()), start, start + enabled.length, 0)
+			}
 			text = spannable
 		}
 

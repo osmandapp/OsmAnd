@@ -67,7 +67,8 @@
     <string name="re_send_location">Torra a imbiare sa positzione</string>
     <string name="last_available_location">Ùrtima positzione disponìbile</string>
     <string name="sharing_status">Istadu de cumpartzidura</string>
-    <string name="sharing_enabled">Cumpartzidura: Abilitada</string>
+    <string name="location_sharing_status">Cumpartzidura: %1$s</string>
+    <string name="shared_string_enabled">Abilitada</string>
     <string name="no_gps_connection">Peruna connessione GPS</string>
     <string name="no_internet_connection">Peruna connessione a ìnternet</string>
     <string name="add_device">Annanghe unu dispositivu</string>

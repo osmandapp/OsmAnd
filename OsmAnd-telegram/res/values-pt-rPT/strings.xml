@@ -165,7 +165,8 @@
     <string name="logout_from_osmand_telegram_descr">Tem certeza de que deseja sair do OsmAnd Tracker para que você não possa compartilhar o local ou ver a localização de outras pessoas\?</string>
     <string name="proxy_server">Servidor</string>
     <string name="si_m_s">Metros por segundo</string>
-    <string name="sharing_enabled">Compartilhamento: Ativado</string>
+    <string name="location_sharing_status">Compartilhamento: %1$s</string>
+    <string name="shared_string_enabled">Ativado</string>
     <string name="by_name">Por nome</string>
     <string name="gps_and_location">Posição</string>
     <string name="last_response">Última resposta</string>

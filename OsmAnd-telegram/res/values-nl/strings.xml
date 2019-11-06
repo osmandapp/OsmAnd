@@ -67,7 +67,8 @@
     <string name="re_send_location">Herzend locatie</string>
     <string name="last_available_location">Laatst beschikbare locatie</string>
     <string name="sharing_status">Delen status</string>
-    <string name="sharing_enabled">Delen: Ingeschakeld</string>
+    <string name="location_sharing_status">Delen: %1$s</string>
+    <string name="shared_string_enabled">Ingeschakeld</string>
     <string name="shared_string_status">Status</string>
     <string name="no_gps_connection">Geen GPS verbinding</string>
     <string name="no_internet_connection">Geen internet verbinding</string>

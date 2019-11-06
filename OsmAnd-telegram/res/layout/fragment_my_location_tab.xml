@@ -127,7 +127,7 @@
 					android:textColor="@color/app_bar_title_light"
 					android:textSize="@dimen/title_text_size"
 					app:typeface="@string/font_roboto_mono_bold"
-					tools:text="@string/sharing_enabled" />
+					tools:text="Sharing: Enabled" />
 
 				<ImageView
 					android:id="@+id/options_title"

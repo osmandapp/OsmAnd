@@ -31,7 +31,8 @@
     <string name="re_send_location">Invia nuovamente la posizione</string>
     <string name="last_available_location">Ultima posizione disponibile</string>
     <string name="sharing_status">Condivisione dello stato</string>
-    <string name="sharing_enabled">Condivisione: Attivata</string>
+    <string name="location_sharing_status">Condivisione: %1$s</string>
+    <string name="shared_string_enabled">Attivata</string>
     <string name="shared_string_status">Stato</string>
     <string name="no_gps_connection">Nessuna connessione GPS</string>
     <string name="no_internet_connection">Nessuna connessione ad Internet</string>
