@@ -3381,4 +3381,5 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="quick_action_hillshade_show">Vis reliefskygger</string>
     <string name="quick_action_hillshade_hide">Skjul reliefskygger</string>
     <string name="quick_action_show_hide_hillshade">Vis/skjul reliefskygger</string>
+    <string name="rendering_value_white_name">Hvid</string>
 </resources>
