@@ -1246,7 +1246,7 @@
     <string name="poi_windfall">吹落的果實</string>
     <string name="poi_dead_wood">枯木</string>
     <string name="poi_passing_place">避讓車處</string>
-    <string name="poi_level">等級</string>
+    <string name="poi_level">樓層</string>
     <string name="poi_rtsa_scale">RTSA 的難度</string>
     <string name="poi_pump_yes">泵浦</string>
     <string name="poi_piste_difficulty_easy">容易</string>
@@ -3513,7 +3513,7 @@
     <string name="poi_hazard_flood">洪水危害</string>
     <string name="poi_hazard_minefield">雷區</string>
     <string name="poi_ruins">廢墟</string>
-    <string name="poi_license_classes">許可等級</string>
+    <string name="poi_license_classes">授權條款類別</string>
     <string name="poi_hill">爬坡道</string>
     <string name="poi_shoe_repair">修鞋店</string>
     <string name="poi_bulk_purchase_yes">是</string>
