@@ -1323,7 +1323,7 @@
     <string name="map_update">有 %1$s 個地圖可更新</string>
     <string name="search_for">查詢</string>
     <string name="coordinates">座標</string>
-    <string name="home_button">首頁</string>
+    <string name="home_button">家</string>
     <string name="error_avoid_specific_road">沒發現支道</string>
     <string name="everything_up_to_date">全部都是最新的檔案</string>
     <string name="use_opengl_render">使用 OpenGL 繪製</string>
@@ -2785,7 +2785,9 @@
     <string name="coord_input_save_as_track_descr">您已新增了 %1$s 標點。輸入檔案名稱並輕點「儲存」。</string>
     <string name="point_deleted">已刪除標點 %1$s</string>
     <string name="shared_string_world">世界</string>
-    <string name="send_search_query_description">我們將送出您的搜尋查詢：\"%1$s\"，以及您的位置。\n不會蒐集個人自訊，搜尋資料僅會用於改善搜尋演算法</string>
+    <string name="send_search_query_description">您的搜尋將會被傳送到：「%1$s」，與您的位置一起。
+\n
+\n不會蒐集個人資訊，僅需要用來改進搜尋的搜尋資料。</string>
     <string name="search_no_results_description">沒有結果？
 \n告訴我們這件事。</string>
     <string name="send_search_query">送出搜尋查詢？</string>
@@ -3368,4 +3370,8 @@
     <string name="profile_import_descr">要匯入設定檔，在裝置上選取其檔案並使用 OsmAnd 開啟。</string>
     <string name="file_import_error">%1$s 匯入錯誤：%2$s</string>
     <string name="file_imported_successfully">%1$s 成功匯入。</string>
+    <string name="swap_start_and_destination">交換起點與終點</string>
+    <string name="rendering_value_white_name">白</string>
+    <string name="swap_two_places">交換 %1$s 與 %2$s</string>
+    <string name="route_start_point">起點</string>
 </resources>
