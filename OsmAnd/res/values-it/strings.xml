@@ -3134,7 +3134,6 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="base_profile_descr_aircraft">Aereo, volo a vela</string>
     <string name="routing_profile_geocoding">Geocodifica</string>
     <string name="routing_profile_broutrer">BRouter (offline)</string>
-    <string name="default_speed_dialog_msg">Utilizzata per calcolare l\'ora di arrivo prevista</string>
     <string name="osmand_default_routing">Calcolo percorso OsmAnd</string>
     <string name="custom_routing">Profilo personalizzato di calcolo del percorso</string>
     <string name="routing_attr_piste_type_downhill_name">Sci alpino/sci downhill</string>

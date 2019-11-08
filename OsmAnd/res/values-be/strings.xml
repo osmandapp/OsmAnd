@@ -3086,7 +3086,6 @@
     <string name="default_speed_setting_title">Прадвызначаная хуткасць</string>
     <string name="default_speed_setting_descr">Змяніць налады прадвызначанай хуткасці</string>
     <string name="minmax_speed_dialog_title">Вызначыць мінімальную / максімальную хуткасць</string>
-    <string name="default_speed_dialog_msg">Выкарыстоўваецца для разліку прыблізнага часу прыбыцця</string>
     <string name="new_profile">Новы профіль</string>
     <string name="shared_string_crash">Крушэнне</string>
     <string name="last_launch_crashed">Апошні запуск OsmAnd завяршыўся хібай. Калі ласка, адпраўце паведамленне памылкі, каб палепшыць дадатак.</string>

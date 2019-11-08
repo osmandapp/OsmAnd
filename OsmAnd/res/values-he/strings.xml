@@ -3076,7 +3076,6 @@
     <string name="select_base_profile_dialog_title">בחירת פרופיל בסיס</string>
     <string name="process_downloading_service">שירות ההורדות של OsmAnd</string>
     <string name="press_again_to_change_the_map_orientation">יש לגעת שוב כדי לשנות את כיוון המפה</string>
-    <string name="default_speed_dialog_msg">משמש לחישוב מועד ההגעה הצפוי במהלך הניווט</string>
     <string name="new_profile">פרופיל חדש</string>
     <string name="shared_string_crash">קריסה</string>
     <string name="last_launch_crashed">הטעינה האחרונה של OsmAnd נכשלה. נא לסייע לנו לשפר את OsmAnd על ידי שיתוף הודעת השגיאה.</string>

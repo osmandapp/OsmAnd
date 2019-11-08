@@ -3123,7 +3123,6 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="default_speed_setting_title">Lehenetsitako abiadura</string>
     <string name="default_speed_setting_descr">Aldatu lehenetsitako abiadura-ezarpenak</string>
     <string name="minmax_speed_dialog_title">Ezarri gutxieneko/gehieneko abiadurak</string>
-    <string name="default_speed_dialog_msg">Erabili ibilbide-kalkuluetan estimatutako iritsiera ordua kalkulatzeko</string>
     <string name="new_profile">Profil berria</string>
     <string name="shared_string_crash">Kraskatzea</string>
     <string name="last_launch_crashed">Aurreko OsmAnd abioak huts egin du. Lagundu gaitzazu OsmAnd hobetzen errore mezua partekatuz.</string>

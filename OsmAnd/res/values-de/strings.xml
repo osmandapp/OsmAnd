@@ -3143,7 +3143,6 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="default_speed_setting_title">Standardtempo</string>
     <string name="default_speed_setting_descr">Einstellungen des Standardtempos ändern</string>
     <string name="minmax_speed_dialog_title">Min/Max Tempo einstellen</string>
-    <string name="default_speed_dialog_msg">Wird zur Berechnung der erwarteten Ankunftszeit verwendet</string>
     <string name="new_profile">Neues Profil</string>
     <string name="shared_string_crash">Absturz</string>
     <string name="last_launch_crashed">Der letzte Start von OsmAnd ist fehlgeschlagen. Bitte helfen Sie uns, OsmAnd zu verbessern, indem Sie uns über diesen Fehler informieren.</string>

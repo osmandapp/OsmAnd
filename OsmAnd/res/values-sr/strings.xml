@@ -3100,7 +3100,6 @@
     <string name="default_speed_setting_title">Подразумевана брзина</string>
     <string name="default_speed_setting_descr">Промени подешавања подразумеване брзине</string>
     <string name="minmax_speed_dialog_title">Постави мин/макс брзину</string>
-    <string name="default_speed_dialog_msg">Користи се да израчуна очекивано време доласка код рутирања</string>
     <string name="new_profile">Нови профил</string>
     <string name="shared_string_crash">Рушење</string>
     <string name="last_launch_crashed">Последње покретање апликације није успело. Помозите нам да побољшамо OsmAnd тако што ћете поделити поруку о грешци са нама.</string>

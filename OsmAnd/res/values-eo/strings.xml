@@ -3122,7 +3122,6 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="default_speed_setting_title">Kutima rapido</string>
     <string name="default_speed_setting_descr">Difini kutiman rapidon</string>
     <string name="minmax_speed_dialog_title">Agordi min./maks. rapidon</string>
-    <string name="default_speed_dialog_msg">Uzata por kalkuli esperatan tempon de alveno dum navigadi</string>
     <string name="new_profile">Nova profilo</string>
     <string name="shared_string_crash">Paneo</string>
     <string name="last_launch_crashed">La antaŭa starto de OsmAnd paneis. Helpu al ni plibonigi la aplikaĵon per sendi mesaĝon pri eraro.</string>

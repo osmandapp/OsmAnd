@@ -3123,7 +3123,6 @@ Pôr do Sol: %2$s</string>
     <string name="default_speed_setting_title">Velocidade padrão</string>
     <string name="default_speed_setting_descr">Altere as configurações de velocidade padrão</string>
     <string name="minmax_speed_dialog_title">Defina velocidade mínima/máxima</string>
-    <string name="default_speed_dialog_msg">Usado para calcular a hora de chegada prevista</string>
     <string name="new_profile">Novo perfil</string>
     <string name="shared_string_crash">Erro</string>
     <string name="last_launch_crashed">A última execução do OsmAnd falhou. Ajude-nos a melhorar o OsmAnd compartilhando a mensagem de erro.</string>

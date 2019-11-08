@@ -3138,7 +3138,6 @@
     <string name="default_speed_setting_title">Velocidade predefinida</string>
     <string name="default_speed_setting_descr">Alterar as predefinições de velocidade</string>
     <string name="minmax_speed_dialog_title">Definir a velocidade mínima/máxima</string>
-    <string name="default_speed_dialog_msg">Usado para calcular o tempo de chegada previsto durante o roteiro</string>
     <string name="new_profile">Novo perfil</string>
     <string name="shared_string_crash">Travou</string>
     <string name="last_launch_crashed">O último lançamento de OsmAnd falhou. Por favor ajude-nos a melhorar o OsmAnd enviando-nos uma mensagem de erro.</string>

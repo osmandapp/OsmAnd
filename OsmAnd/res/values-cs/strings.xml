@@ -3106,7 +3106,6 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="default_speed_setting_title">Výchozí rychlost</string>
     <string name="default_speed_setting_descr">Změnit výchozí nastavení rychlosti</string>
     <string name="minmax_speed_dialog_title">Nastavit min/max rychlost</string>
-    <string name="default_speed_dialog_msg">Použito pro výpočet očekávaného času příjezu v průběhu navigace</string>
     <string name="new_profile">Nový profil</string>
     <string name="shared_string_crash">Pád</string>
     <string name="last_launch_crashed">Poslední spuštění OsmAnd se nezdařilo. Prosíme, pomozte nám zlepšit OsmAnd sdílením chybové zprávy.</string>

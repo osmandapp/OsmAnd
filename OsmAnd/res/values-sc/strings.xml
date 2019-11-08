@@ -3135,7 +3135,6 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="default_speed_setting_title">Letresa predefinida</string>
     <string name="default_speed_setting_descr">Muda sas impostatziones predefinidas de lestresa</string>
     <string name="minmax_speed_dialog_title">Imposta sa lestresa mìnima/màssima</string>
-    <string name="default_speed_dialog_msg">Impreada pro calculare s\'ora de arribu prevìdida</string>
     <string name="new_profile">Profilu nou</string>
     <string name="shared_string_crash">Errore</string>
     <string name="last_launch_crashed">S\'ùrtima sessione de OsmAnd s\'est serrada. Pro praghere agiuda·nos a megiorare OsmAnd cumpartzende su messàgiu de errore.</string>

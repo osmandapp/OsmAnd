@@ -3111,7 +3111,6 @@
     <string name="default_speed_setting_title">Типова швидкість</string>
     <string name="default_speed_setting_descr">Змінити налаштування типової швидкості</string>
     <string name="minmax_speed_dialog_title">Встановити мінімальну/максимальну швидкість</string>
-    <string name="default_speed_dialog_msg">Використовується для розрахунку очікуваного часу прибуття під час слідування по маршруту</string>
     <string name="new_profile">Новий профіль</string>
     <string name="shared_string_crash">Збій</string>
     <string name="last_launch_crashed">Під час останнього запуску OsmAnd сталася помилка. Допоможіть нам покращити OsmAnd - надішліть повідомлення про помилку.</string>

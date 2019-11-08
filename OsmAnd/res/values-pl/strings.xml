@@ -3136,7 +3136,6 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="app_mode_scooter">Skuter</string>
     <string name="default_speed_setting_descr">Zmień domyślne ustawienia prędkości</string>
     <string name="minmax_speed_dialog_title">Ustaw prędkość minimalną/maksymalną</string>
-    <string name="default_speed_dialog_msg">Służy do obliczania oczekiwanego czasu przybycia</string>
     <string name="shared_string_crash">Błąd</string>
     <string name="app_mode_ufo">UFO</string>
     <string name="app_mode_personal_transporter">Transporter osobisty</string>
