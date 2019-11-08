@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
@@ -16,11 +17,13 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.text.SpannableString;
 import android.text.style.StyleSpan;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import net.osmand.plus.ApplicationMode;
@@ -241,7 +244,6 @@ public class SettingsMonitoringActivity extends SettingsBaseActivity {
 
 	protected void showConfirmDialog(final String prefId, final Object newValue) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle(R.string.change_default_settings);
 
 		String appModeName = selectedAppMode.toHumanString(this);
 		String currentModeText = getString(R.string.apply_to_current_profile, appModeName);
@@ -252,17 +254,35 @@ public class SettingsMonitoringActivity extends SettingsBaseActivity {
 		strings[1] = new SpannableString(currentModeText);
 		strings[1].setSpan(new StyleSpan(Typeface.BOLD), start, start + appModeName.length(), 0);
 
-		final LayoutInflater themedInflater = UiUtilities.getInflater(this, !settings.isLightContent());
-		final ArrayAdapter<SpannableString> singleChoiceAdapter = new ArrayAdapter<SpannableString>(this, R.layout.simple_list_menu_item, R.id.title, strings) {
+		final int[] icons = new int[2];
+		icons[0] = R.drawable.ic_action_copy;
+		icons[1] = selectedAppMode.getIconRes();
+		
+		final boolean nightMode = !settings.isLightContent();
+		final OsmandApplication app = getMyApplication();
+		final LayoutInflater themedInflater = UiUtilities.getInflater(this, nightMode);
+
+		//set up dialog title
+		View dialogTitle = themedInflater.inflate(R.layout.bottom_sheet_item_simple, null);
+		dialogTitle.findViewById(R.id.icon).setVisibility(View.GONE);
+		TextView tvTitle = dialogTitle.findViewById(R.id.title);
+		tvTitle.setText(R.string.change_default_settings);
+		int textSize = (int) app.getResources().getDimension(R.dimen.dialog_header_text_size);
+		tvTitle.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize);
+		builder.setCustomTitle(dialogTitle);
+		
+		final ArrayAdapter<SpannableString> singleChoiceAdapter = new ArrayAdapter<SpannableString>(this, R.layout.bottom_sheet_item_simple, R.id.title, strings) {
 			@NonNull
 			@Override
 			public View getView(int position, View convertView, @NonNull ViewGroup parent) {
 				View v = convertView;
 				if (v == null) {
-					v = themedInflater.inflate(R.layout.simple_list_menu_item, parent, false);
+					v = themedInflater.inflate(R.layout.bottom_sheet_item_simple, parent, false);
 				}
-				TextView title = (TextView) v.findViewById(R.id.title);
-				title.setText(getItem(position));
+				int activeColor = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
+				Drawable icon = app.getUIUtilities().getIcon(icons[position], activeColor);
+				((TextView) v.findViewById(R.id.title)).setText(getItem(position));
+				((ImageView) v.findViewById(R.id.icon)).setImageDrawable(icon);
 				return v;
 			}
 		};
@@ -280,6 +300,8 @@ public class SettingsMonitoringActivity extends SettingsBaseActivity {
 		});
 
 		builder.setNegativeButton(R.string.discard_changes, null);
-		builder.show();
+		AlertDialog dialog = builder.create();
+		dialog.getListView().setDividerHeight(0);
+		dialog.show();
 	}
 }
