@@ -3137,7 +3137,6 @@ Lon %2$s</string>
     <string name="default_speed_setting_title">Velocidade predefinida</string>
     <string name="default_speed_setting_descr">Mudar os axustes da velocidade predefinida</string>
     <string name="minmax_speed_dialog_title">Estabelecer velocidade mínima/máxima</string>
-    <string name="default_speed_dialog_msg">Emprégase para calcular a hora de chegada prevista durante a rota</string>
     <string name="new_profile">Novo perfil</string>
     <string name="shared_string_crash">Erro</string>
     <string name="last_launch_crashed">O último lanzamento do OsmAnd fallou. Axúdanos a mellorar o OsmAnd compartillando a mensaxe de erro.</string>

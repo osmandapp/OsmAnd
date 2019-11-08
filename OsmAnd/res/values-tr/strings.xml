@@ -2574,7 +2574,6 @@
     <string name="default_speed_setting_title">Öntanımlı hız</string>
     <string name="default_speed_setting_descr">Öntanımlı hız ayarlarını değiştir</string>
     <string name="minmax_speed_dialog_title">En düşük/en yüksek hız ayarı</string>
-    <string name="default_speed_dialog_msg">Tahmini varış zamanını hesaplamak için kullanılır</string>
     <string name="new_profile">Yeni profil</string>
     <string name="shared_string_crash">Çökme</string>
     <string name="app_mode_personal_transporter">Kişisel taşıyıcı</string>

@@ -3148,7 +3148,6 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="default_speed_setting_title">Sjálfgefinn hraði</string>
     <string name="default_speed_setting_descr">Breyta stillingum með sjálfgefnum hraða</string>
     <string name="minmax_speed_dialog_title">Setja hámarks-/lágmarkshraða</string>
-    <string name="default_speed_dialog_msg">Notað til að reikna út væntanlegan komutíma</string>
     <string name="new_profile">Nýtt notkunarsnið</string>
     <string name="shared_string_crash">Hrun</string>
     <string name="last_launch_crashed">Seinasta keyrsla OsmAnd mistókst. Hjálpaðu okkur að bæta OsmAnd með því að senda okkur villuboðin.</string>

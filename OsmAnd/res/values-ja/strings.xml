@@ -3059,7 +3059,6 @@ POIの更新は利用できません</string>
     <string name="shared_string_min_speed">最低速度</string>
     <string name="shared_string_max_speed">最高速度</string>
     <string name="default_speed_setting_title">標準速度</string>
-    <string name="default_speed_dialog_msg">予想到着時間の計算に使用します</string>
     <string name="app_mode_offroad">オフロード</string>
     <string name="edit_profile_setup_title">プロファイルの個別設定</string>
     <string name="edit_profile_setup_subtitle">設定した値は各プロファイルごとに保持されます</string>

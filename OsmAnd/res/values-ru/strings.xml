@@ -3139,7 +3139,6 @@
     <string name="shared_string_max_speed">Макс. скорость</string>
     <string name="default_speed_setting_title">Скорость по умолчанию</string>
     <string name="default_speed_setting_descr">Изменение настроек скорости по умолчанию</string>
-    <string name="default_speed_dialog_msg">Используется для расчета ожидаемого времени прибытия во время навигации</string>
     <string name="new_profile">Новый профиль</string>
     <string name="release_3_4">• Профили приложения: создайте свой собственный профиль в соответствии с вашими потребностями, используя специальный значок и цвет. 
 \n 

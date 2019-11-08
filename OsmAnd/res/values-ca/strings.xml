@@ -3148,7 +3148,6 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="default_speed_setting_title">Velocitat predeterminada</string>
     <string name="default_speed_setting_descr">Canvieu la configuració predeterminada de velocitat</string>
     <string name="minmax_speed_dialog_title">Configuració de la velocitat mínima/màxima</string>
-    <string name="default_speed_dialog_msg">S\'utilitza per calcular l\'hora d\'arribada prevista en la navegació</string>
     <string name="new_profile">Nou perfil</string>
     <string name="shared_string_crash">Accident</string>
     <string name="last_launch_crashed">La darrera execució d\'OsmAnd va fallar. Ajudeu-nos a millorar OsmAnd compartint el missatge d\'error.</string>

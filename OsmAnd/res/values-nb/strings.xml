@@ -3140,7 +3140,6 @@
     <string name="default_speed_setting_title">Standardhastighet</string>
     <string name="default_speed_setting_descr">Endre forvalgte hastighetsinnstillinger</string>
     <string name="minmax_speed_dialog_title">Sett min/maks -hastighet</string>
-    <string name="default_speed_dialog_msg">Brukt for utregning av forventet ankomsttid</string>
     <string name="new_profile">Ny profil</string>
     <string name="shared_string_crash">Kræsj</string>
     <string name="last_launch_crashed">OsmAnd kræsjet tidligere. Hjelp til å forbedre OsmAnd ved å dele feilmeldingen.</string>

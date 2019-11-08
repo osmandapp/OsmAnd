@@ -3123,7 +3123,6 @@
     <string name="default_speed_setting_title">Velocidad por defecto</string>
     <string name="default_speed_setting_descr">Cambiar la configuración de velocidad por defecto</string>
     <string name="minmax_speed_dialog_title">Establecer velocidad mín/máx</string>
-    <string name="default_speed_dialog_msg">Se usa para calcular la hora estimada de llegada durante el enrutamiento</string>
     <string name="new_profile">Nuevo perfil</string>
     <string name="last_launch_crashed">OsmAnd falló la última vez. Por favor ayúdanos a mejorar OsmAnd compartiendo el mensaje de error.</string>
     <string name="select_icon_profile_dialog_title">Seleccionar icono</string>

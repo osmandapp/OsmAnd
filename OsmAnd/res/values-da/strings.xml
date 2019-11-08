@@ -3144,7 +3144,6 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="default_speed_setting_title">Standardhastighed</string>
     <string name="default_speed_setting_descr">Ændre standardhastighedsindstillinger</string>
     <string name="minmax_speed_dialog_title">Indstil min/maks hastighed</string>
-    <string name="default_speed_dialog_msg">Bruges til at beregne den forventede ankomsttid under routing</string>
     <string name="new_profile">Ny profil</string>
     <string name="shared_string_crash">Nedbrud</string>
     <string name="last_launch_crashed">Den sidste start af OsmAnd mislykkedes. Hjælp med at forbedre OsmAnd ved at dele fejlmeddelelsen.</string>

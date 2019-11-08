@@ -3121,7 +3121,6 @@
     <string name="default_speed_setting_title">預設速度</string>
     <string name="default_speed_setting_descr">變更預設速度設定</string>
     <string name="minmax_speed_dialog_title">設定最小／最大速度</string>
-    <string name="default_speed_dialog_msg">用於計算預計到達時間</string>
     <string name="new_profile">新設定檔</string>
     <string name="shared_string_crash">當機</string>
     <string name="last_launch_crashed">OsmAnd 上次當機了。請透過分享錯誤訊息給我們來協助改善 OsmAnd。</string>

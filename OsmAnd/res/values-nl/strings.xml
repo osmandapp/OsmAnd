@@ -2933,7 +2933,6 @@ voor Gebied: %1$s x %2$s</string>
     <string name="base_profile_descr_ski">Skiën</string>
     <string name="shared_string_min_speed">Minimumsnelheid</string>
     <string name="shared_string_max_speed">Maximumsnelheid</string>
-    <string name="default_speed_dialog_msg">Gebruikt bij het berekenen van de verwachte aankomsttijd</string>
     <string name="new_profile">Nieuw profiel</string>
     <string name="app_mode_ufo">UFO</string>
     <string name="route_way">Weg</string>

@@ -414,7 +414,6 @@
     <string name="default_speed_setting_title">Velocitat per defaut</string>
     <string name="default_speed_setting_descr">Modificar lei reglatges de la velocitat per defaut</string>
     <string name="minmax_speed_dialog_title">Fixar la velocitat min/max</string>
-    <string name="default_speed_dialog_msg">Emplegat per calcular l\'ora d\'arribada prevista dau temps dau camin</string>
     <string name="new_profile">Perfiu novèu</string>
     <string name="shared_string_crash">Auvari</string>
     <string name="last_launch_crashed">Falhida dau darrier lançament d\'OsmAnd. Ajudatz-nos a melhorar OsmAnd. Saretz brave de nos avisar per un messatge d\'error.</string>

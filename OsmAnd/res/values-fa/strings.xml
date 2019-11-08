@@ -3123,7 +3123,6 @@
     <string name="default_speed_setting_title">سرعت پیشفرض</string>
     <string name="default_speed_setting_descr">تنظیمات سرعت پیشفرض را تغییر دهید</string>
     <string name="minmax_speed_dialog_title">سرعت حداقل/حداکثر را تنظیم کنید</string>
-    <string name="default_speed_dialog_msg">برای پیش‌بینی زمان رسیدن استفاده می‌شود</string>
     <string name="new_profile">پروفایل جدید</string>
     <string name="last_launch_crashed">آخرین اجرای OsmAnd با شکست مواجه شد. لطفاً با ارسال پیغام خطا ما را در بهبود OsmAnd یاری کنید.</string>
     <string name="release_3_4">• پروفایل‌های برنامه: متناسب با نیاز خود پروفایل سفارشی بسازید؛ با رنگ و نماد دلخواه 

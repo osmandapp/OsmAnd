@@ -3079,7 +3079,6 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="default_speed_setting_title">Privzeta hitrost</string>
     <string name="default_speed_setting_descr">Spremeni privzete nastavitve hitrosti</string>
     <string name="minmax_speed_dialog_title">Nastavitev najmanjše/največje hitrosti</string>
-    <string name="default_speed_dialog_msg">Uporablja se med izračunom pričakovanega časa prihoda med usmerjanjem</string>
     <string name="new_profile">Nov profil</string>
     <string name="last_launch_crashed">Med zadnjim zagonom programa OsmAnd je prišlo do napake. S posredovanjem sporočila o napaki pomagate pri izboljšanju programa.</string>
     <string name="app_mode_ufo">Štopanje NLP (brisača obvezna)</string>

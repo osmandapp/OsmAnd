@@ -3037,7 +3037,6 @@
     <string name="default_speed_setting_title">Προεπιλεγμένη ταχύτητα</string>
     <string name="default_speed_setting_descr">Αλλαγή ρυθμίσεων προεπιλεγμένης ταχύτητας</string>
     <string name="minmax_speed_dialog_title">Ορισμός ελαχ/μεγ ταχύτητας</string>
-    <string name="default_speed_dialog_msg">Χρησιμοποιείται για τον υπολογισμό του αναμενόμενου χρόνου άφιξης κατά τη διαδρομή</string>
     <string name="new_profile">Νέα κατατομή (προφίλ)</string>
     <string name="shared_string_crash">Κατάρρευση</string>
     <string name="app_mode_ufo">ΑΤΙΑ</string>

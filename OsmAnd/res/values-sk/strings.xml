@@ -3124,7 +3124,6 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="default_speed_setting_title">Predvolená rýchlosť</string>
     <string name="default_speed_setting_descr">Zmeniť predvoľby rýchlosti</string>
     <string name="minmax_speed_dialog_title">Nastaviť min./max. rýchlosť</string>
-    <string name="default_speed_dialog_msg">Používa sa na výpočet očakávaného času príjazdu počas navigovania</string>
     <string name="new_profile">Nový profil</string>
     <string name="shared_string_crash">Pád aplikácie</string>
     <string name="last_launch_crashed">Posledné spustenie OsmAnd zlyhalo. Prosíme pomôžte nám vylepšiť OsmAnd zdieľaním správy o chybe.</string>

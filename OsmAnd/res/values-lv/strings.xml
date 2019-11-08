@@ -2590,7 +2590,6 @@ No Afganistānas līdz Zimbabvei, no Austrālijas līdz ASV, Argentīna, Brazīl
     <string name="default_speed_setting_title">Noklusētais ātrums</string>
     <string name="default_speed_setting_descr">Mainīt noklusētā ātruma iestatījumus</string>
     <string name="minmax_speed_dialog_title">Iestatīt min./maks. ātrumu</string>
-    <string name="default_speed_dialog_msg">Aprēķina paredzamo ierašanās laiku maršruta laikā</string>
     <string name="new_profile">Jauns profils</string>
     <string name="last_launch_crashed">"Pēdējā OsmAnd palaišana beidzās ar avāriju.  Palīdziet uzlabot OsmAnd, nosūtot kļūdas ziņojumu."</string>
     <string name="app_mode_ufo">NLO</string>

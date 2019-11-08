@@ -3062,7 +3062,6 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="default_speed_setting_title">Alapértelmezett sebesség</string>
     <string name="default_speed_setting_descr">Alapértelmezett sebességek beállításainak módosítása</string>
     <string name="minmax_speed_dialog_title">Legkisebb/legnagyobb sebesség beállítása</string>
-    <string name="default_speed_dialog_msg">Az érkezés várható idejének kiszámításához szükséges</string>
     <string name="new_profile">Új profil</string>
     <string name="shared_string_crash">Összeomlás</string>
     <string name="last_launch_crashed">Az OsmAnd a legutóbbi futtatáskor összeomlott. Kérjük, a hibaüzenet megosztásával segítsen az OsmAnd javításában.</string>

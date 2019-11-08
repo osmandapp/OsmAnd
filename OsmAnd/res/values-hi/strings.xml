@@ -120,7 +120,6 @@
     <string name="default_speed_setting_title">डिफ़ॉल्ट गति</string>
     <string name="default_speed_setting_descr">डिफ़ॉल्ट गति सेटिंग्स बदलें</string>
     <string name="minmax_speed_dialog_title">न्यूनतम / अधिकतम गति सेट करें</string>
-    <string name="default_speed_dialog_msg">राउटिंग के दौरान अपेक्षित आगमन समय की गणना करने के लिए उपयोग किया जाता है</string>
     <string name="new_profile">नई प्रोफ़ाइल</string>
     <string name="shared_string_crash">दुर्घटना</string>
     <string name="last_launch_crashed">OsmAnd का पिछला लॉन्च विफल रहा। कृपया त्रुटि संदेश साझा करके OsmAnd को बेहतर बनाने में हमारी मदद करें।</string>
