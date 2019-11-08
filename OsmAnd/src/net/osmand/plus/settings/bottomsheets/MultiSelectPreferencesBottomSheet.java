@@ -13,6 +13,7 @@ import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.LongDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.settings.OnPreferenceChanged;
 import net.osmand.plus.settings.preferences.MultiSelectBooleanPreference;
 import net.osmand.util.Algorithms;
 
@@ -119,6 +120,11 @@ public class MultiSelectPreferencesBottomSheet extends BasePreferenceBottomSheet
 			final Set<String> values = enabledPrefs;
 			if (multiSelectBooleanPreference.callChangeListener(values)) {
 				multiSelectBooleanPreference.setValues(values);
+
+				Fragment target = getTargetFragment();
+				if (target instanceof OnPreferenceChanged) {
+					((OnPreferenceChanged) target).onPreferenceChanged(multiSelectBooleanPreference.getKey());
+				}
 			}
 		}
 		prefChanged = false;
