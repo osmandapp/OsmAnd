@@ -2872,7 +2872,7 @@ Lon %2$s</string>
     <string name="run_full_osmand_msg">Estás utilizando el mapa «{0}» que funciona con OsmAnd. ¿Quieres ejecutar la versión completa de OsmAnd\?</string>
     <string name="run_full_osmand_header">¿Ejecutar OsmAnd\?</string>
     <string name="lang_gn_py">Guaraní</string>
-    <string name="quick_action_switch_day_night_descr">Un botón que alterna entre el modo «Diurno» y «Nocturno» para OsmAnd.</string>
+    <string name="quick_action_switch_day_night_descr">Un botón que alterna entre el modo diurno y nocturno para OsmAnd.</string>
     <string name="quick_action_switch_day_mode">Modo diurno</string>
     <string name="quick_action_switch_night_mode">Modo nocturno</string>
     <string name="quick_action_day_night_switch_mode">Alternar modos diurno/nocturno</string>
@@ -3385,4 +3385,5 @@ Lon %2$s</string>
     <string name="rendering_value_white_name">Blanco</string>
     <string name="swap_two_places">Alternar %1$s y %2$s</string>
     <string name="route_start_point">Punto de partida</string>
+    <string name="default_speed_dialog_msg">Se utiliza para estimar la hora de llegada en el caso de caminos de tipo desconocido y para limitar la velocidad en todos los caminos (podría cambiarse la ruta)</string>
 </resources>
