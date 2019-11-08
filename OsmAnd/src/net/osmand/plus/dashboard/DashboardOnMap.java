@@ -913,7 +913,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 			Animator circleAnimator = ViewAnimationUtils.createCircularReveal(content, centerX, centerY, initialRadius, finalRadius);
 			animators.add(circleAnimator);
 		}
-		float initialValueScale = show ? 0f : 1f;
+		final float initialValueScale = show ? 0f : 1f;
 		float finalValueScale = show ? 1f : 0f;
 		animators.add(ObjectAnimator.ofFloat(content, View.SCALE_X, initialValueScale, finalValueScale));
 		animators.add(ObjectAnimator.ofFloat(content, View.SCALE_Y, initialValueScale, finalValueScale));
@@ -946,6 +946,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, IRouteInfo
 					content.setTranslationX(0);
 					content.setTranslationY(0);
 					toolbar.setTranslationY(0);
+					content.setScaleX(initialValueScale);
+					content.setScaleY(initialValueScale);
 				}
 			}
 		});

@@ -639,16 +639,19 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	private void animateMapControls(final boolean show) {
 		final View mapHudButtonsOverlay = mapActivity.findViewById(R.id.MapHudButtonsOverlay);
-		View mapHudButtonsTop = mapActivity.findViewById(R.id.MapHudButtonsOverlayTop);
-		View mapHudButtonsBottom = mapActivity.findViewById(R.id.MapHudButtonsOverlayBottom);
-		View mapHudButtonsQuickActions = mapActivity.findViewById(R.id.MapHudButtonsOverlayQuickActions);
-		AnimatorSet set = new AnimatorSet();
-		float transTopInitial = show ? -mapHudButtonsTop.getHeight() : 0;
+		final View mapHudButtonsTop = mapActivity.findViewById(R.id.MapHudButtonsOverlayTop);
+		final View mapHudButtonsBottom = mapActivity.findViewById(R.id.MapHudButtonsOverlayBottom);
+		final View mapHudButtonsQuickActions = mapActivity.findViewById(R.id.MapHudButtonsOverlayQuickActions);
+
+		final float transTopInitial = show ? -mapHudButtonsTop.getHeight() : 0;
+		final float transBottomInitial = show ? mapHudButtonsBottom.getHeight() : 0;
+		final float alphaInitial = show ? 0f : 1f;
+
 		float transTopFinal = show ? 0 : -mapHudButtonsTop.getHeight();
-		float transBottomInitial = show ? mapHudButtonsBottom.getHeight() : 0;
 		float transBottomFinal = show ? 0 : mapHudButtonsBottom.getHeight();
-		float alphaInitial = show ? 0f : 1f;
 		float alphaFinal = show ? 1f : 0f;
+
+		AnimatorSet set = new AnimatorSet();
 		set.setDuration(300).playTogether(
 				ObjectAnimator.ofFloat(mapHudButtonsTop, View.TRANSLATION_Y, transTopInitial, transTopFinal),
 				ObjectAnimator.ofFloat(mapHudButtonsBottom, View.TRANSLATION_Y, transBottomInitial, transBottomFinal),
@@ -668,6 +671,9 @@ public class MapControlsLayer extends OsmandMapLayer {
 				super.onAnimationEnd(animation);
 				if (!show) {
 					mapHudButtonsOverlay.setVisibility(View.INVISIBLE);
+					mapHudButtonsTop.setTranslationY(transTopInitial);
+					mapHudButtonsBottom.setTranslationY(transBottomInitial);
+					mapHudButtonsQuickActions.setAlpha(alphaInitial);
 				}
 				mapActivity.updateStatusBarColor();
 			}
