@@ -286,6 +286,8 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 			}
 			recalculateRoute();
 			return true;
+		} else if (GeneralRouter.USE_SHORTEST_WAY.equals(key) && newValue instanceof Boolean) {
+			return app.getSettings().FAST_ROUTE_MODE.setModeValue(getSelectedAppMode(), !(Boolean) newValue);
 		}
 
 		return super.onPreferenceChange(preference, newValue);
