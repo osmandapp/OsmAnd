@@ -3383,4 +3383,5 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="rendering_value_white_name">Biały</string>
     <string name="swap_two_places">Zamień %1$s i %2$s</string>
     <string name="route_start_point">Początek trasy</string>
+    <string name="default_speed_dialog_msg">Służy do szacowania czasu przyjazdu dla nieznanego rodzaju dróg i ograniczenia prędkości na wszystkich drogach (może zmienić trasę)</string>
 </resources>
