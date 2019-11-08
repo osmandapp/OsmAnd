@@ -3412,4 +3412,14 @@ Lon %2$s</string>
     <string name="quick_action_show_hide_hillshade">Alternar sombreados</string>
     <string name="tts_initialization_error">Imposible iniciar el motor de habla sintetizada</string>
     <string name="simulate_your_location_gpx_descr">Simular la ubicación usando una traza GPX grabada.</string>
+    <string name="export_profile">Exportar perfil</string>
+    <string name="exported_osmand_profile">Perfil de OsmAnd: %1$s</string>
+    <string name="overwrite_profile_q">El perfil «%1$s» ya existe. ¿Sobrescribir\?</string>
+    <string name="export_profile_failed">No se pudo exportar el perfil.</string>
+    <string name="profile_import">Importar perfil:</string>
+    <string name="profile_import_descr">Para importar un perfil, elige el archivo en el dispositivo y ábrelo con OsmAnd.</string>
+    <string name="file_import_error">Error de importación de %1$s: %2$s</string>
+    <string name="rendering_value_white_name">Blanco</string>
+    <string name="swap_two_places">Alternar %1$s y %2$s</string>
+    <string name="route_start_point">Punto de partida</string>
 </resources>
