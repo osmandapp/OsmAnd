@@ -348,4 +348,20 @@
     <string name="select_travel_book">ခရီးသွားစာအုပ်ရွေးပါ</string>
     <string name="shared_string_travel_book">ခရီးသွားစာအုပ်</string>
     <string name="download_images">ပုံများကူးယူပါ</string>
+    <string name="dd_mm_ss_format">DD°MM′SS″</string>
+    <string name="dd_dddddd_format">DD.DDDDDD°</string>
+    <string name="enter_lon">လောင်ဂျီတွဒ်ထည့်ပါ</string>
+    <string name="enter_lat">လတ္တီတွဒ်ထည့်ပါ</string>
+    <string name="enter_lat_and_lon">လတ္တီတွဒ်နှင့်လောင်ဂျီတွဒ်ထည့်ပါ</string>
+    <string name="distance_farthest">အဝေးဆုံးပထမ</string>
+    <string name="distance_nearest">အနီးဆုံးပထမ</string>
+    <string name="group_deleted">အုပ်စုဖျက်ပြီးပါပြီ</string>
+    <string name="clear_all_intermediates">ကြားရပ်နေရာအားလုံးကိုရှင်းလင်းပါ</string>
+    <string name="shared_string_total">စုစုပေါင်း</string>
+    <string name="nothing_found_in_radius">ဘာတစ်ခုမှရှာမရပါ။</string>
+    <string name="waypoints_removed_from_map_markers">Waypoints များကိုမြေပုံအမှတ်အသားမှဖယ်ရှားထားသည်</string>
+    <string name="use_two_digits_longitude">ဂဏန်းနှစ်လုံးလောင်ဂျီတွဒ်ကိုသုံးပါ</string>
+    <string name="shared_string_result">ရလဒ်</string>
+    <string name="shared_string_contents">မာတိကာ</string>
+    <string name="shared_string_travel_guides">ခရီးသွားလမ်းညွှန်များ</string>
 </resources>
