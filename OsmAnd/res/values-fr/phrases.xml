@@ -3658,4 +3658,24 @@
     <string name="poi_craft_bakery">Boulangerie (atelier)</string>
     <string name="poi_craft_cabinet_maker">Ébéniste</string>
     <string name="poi_pet_grooming">Toilettage pour animaux domestiques</string>
+    <string name="poi_hgv_private">Accès poids lourds : privé</string>
+    <string name="poi_hgv_no">Accès poids lourds : non</string>
+    <string name="poi_hgv_discouraged">Accès poids lourds : déconseillé</string>
+    <string name="poi_hgv_unsuitable">Accès poids lourds : inadapté</string>
+    <string name="poi_goods_no">Accès véhicules légers : non</string>
+    <string name="poi_motorcycle_private">Accès motos : privé</string>
+    <string name="poi_motorcycle_no">Accès motos : non</string>
+    <string name="poi_bicycle_private">Accès à vélo : privé</string>
+    <string name="poi_bicycle_permissive">Accès à vélo : permissif</string>
+    <string name="poi_bicycle_customers">Accès à vélo : clients</string>
+    <string name="poi_horse_private">Accès à cheval : privé</string>
+    <string name="poi_horse_permissive">Accès à cheval : permissif</string>
+    <string name="poi_foot_yes">Accès piétonnier : oui</string>
+    <string name="poi_foot_private">Accès piétonnier : privé</string>
+    <string name="poi_foot_no">Accès piétonnier : non</string>
+    <string name="poi_foot_permissive">Accès piétonnier : permissif</string>
+    <string name="poi_foot_customers">Accès piétonnier : clients</string>
+    <string name="poi_caravan_no">Accès caravane : non</string>
+    <string name="poi_motorhome_no">Accès camping-car : non</string>
+    <string name="poi_cash_withdrawal_bank_card">Retrait d\'espèces</string>
 </resources>

@@ -3381,4 +3381,8 @@ Lon %2$s</string>
     <string name="profile_import_descr">Para importar un perfil, elige el archivo en el dispositivo y ábrelo con OsmAnd.</string>
     <string name="file_import_error">Error de importación de %1$s: %2$s</string>
     <string name="file_imported_successfully">%1$s importados con éxito.</string>
+    <string name="swap_start_and_destination">Intercambiar inicio y destino</string>
+    <string name="rendering_value_white_name">Blanco</string>
+    <string name="swap_two_places">Alternar %1$s y %2$s</string>
+    <string name="route_start_point">Punto de partida</string>
 </resources>

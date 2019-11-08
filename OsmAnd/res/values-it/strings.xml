@@ -2814,8 +2814,8 @@ Rappresenta l\'area: %1$s x %2$s</string>
 \n</string>
     <string name="commiting_way">Sottoponi la via…</string>
     <string name="increase_search_radius_to">Aumenta il raggio di ricerca a %1$s</string>
-    <string name="send_search_query_description">Invieremo la tua ricerca \"%1$s\" oltre alla tua localizzazione.
-	    \nNon raccogliamo informazioni personali, i dati delle ricerche sono usati per migliorare l\'algoritmo di ricerca</string>
+    <string name="send_search_query_description">Invieremo la tua ricerca, assieme alla tua localizzazione a: \"%1$s\". 
+\nNon raccogliamo informazioni personali, i dati delle ricerche sono usati per migliorare l\'algoritmo di ricerca.</string>
     <string name="send_search_query">Inviare i dati delle ricerche?</string>
     <string name="shared_string_world">Mondo</string>
     <string name="point_deleted">Punto %1$s eliminato</string>

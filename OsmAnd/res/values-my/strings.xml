@@ -337,4 +337,15 @@
     <string name="purchase_unlim_title">၀ယ်ပါ - %1$s</string>
     <string name="daily_map_updates"><b> နာရီ ပိုင်း</b> မြေပုံမွမ်းမံမှုများ</string>
     <string name="wikivoyage_travel_guide">ခရီးသွားသူလမ်းညွှန်များ</string>
+    <string name="wikivoyage_search_hint">တိုင်းပြည်၊ မြို့၊ သို့မဟုတ်ပြည်နယ်ကိုရှာပါ</string>
+    <string name="shared_string_read">ဖတ်ပါ</string>
+    <string name="download_maps_travel">ခရီးသွားသူလမ်းညွှန်များ</string>
+    <string name="online_webpage_warning">စာမျက်နှာကိုအွန်လိုင်းသာရနိုင်သည်။ web browser ဖွင့်ရမလား\?</string>
+    <string name="shared_string_do">လုပ်ပါ</string>
+    <string name="shared_string_only_with_wifi">Wi-Fi ပေါ်မှသာ</string>
+    <string name="wikivoyage_download_pics">ပုံများကူးယူပါ</string>
+    <string name="shared_string_wifi_only">Wi-Fi ပေါ်မှသာ</string>
+    <string name="select_travel_book">ခရီးသွားစာအုပ်ရွေးပါ</string>
+    <string name="shared_string_travel_book">ခရီးသွားစာအုပ်</string>
+    <string name="download_images">ပုံများကူးယူပါ</string>
 </resources>

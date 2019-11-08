@@ -3137,7 +3137,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="apply_to_all_profiles">Alkalmazás az összes profilra</string>
     <string name="start_up_message_pref">Indítási üzenet</string>
     <string name="analytics_pref_title">Analitika</string>
-    <string name="turn_screen_on_info">Térkép megjelenítésea a lezárási képernyő felett navigáció közben.</string>
+    <string name="turn_screen_on_info">Térkép megjelenítése a lezárási képernyő felett navigáció közben.</string>
     <string name="route_parameters_info">Útvonaltervezési beállítások erre a profilra: %1$s.</string>
     <string name="wake_time">Felébresztési idő</string>
     <string name="units_and_formats">Mértékegységek és formátumok</string>
@@ -3225,4 +3225,12 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="file_imported_successfully">%1$s sikeresen importálva.</string>
     <string name="app_mode_utv">Egymás mellett</string>
     <string name="rendering_attr_piste_difficulty_aerialway_name"/>
+    <string name="swap_start_and_destination">Kiindulási és célpont felcserélése</string>
+    <string name="switch_profile">Profil váltás</string>
+    <string name="application_profile_changed">Alkalmazás profi módosítva erre: %s</string>
+    <string name="change_data_storage_full_description">Áthelyezed az OsmAnd fájlokat az új helyre\?
+\n%1$s &gt; %2$s</string>
+    <string name="rendering_value_white_name">Fehér</string>
+    <string name="swap_two_places">%1$s és %2$s felcserélése</string>
+    <string name="route_start_point">Kiindulópont</string>
 </resources>
