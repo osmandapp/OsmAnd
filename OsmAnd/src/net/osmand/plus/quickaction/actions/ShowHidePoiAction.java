@@ -100,6 +100,8 @@ public class ShowHidePoiAction extends QuickAction {
 	@Override
 	public void execute(MapActivity activity) {
 
+		activity.closeQuickSearch();
+
 		PoiFiltersHelper pf = activity.getMyApplication().getPoiFilters();
 		List<PoiUIFilter> poiFilters = loadPoiFilters(activity.getMyApplication().getPoiFilters());
 
