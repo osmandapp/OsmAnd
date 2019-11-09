@@ -9,6 +9,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.SettingsBaseActivity;
 import net.osmand.plus.routing.RouteProvider.RouteService;
+import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.router.GeneralRouter;
 
@@ -17,7 +18,7 @@ import java.util.Map;
 import static net.osmand.plus.activities.SettingsNavigationActivity.getRouter;
 import static net.osmand.plus.activities.SettingsNavigationActivity.showSeekbarSettingsDialog;
 
-public class VehicleParametersFragment extends BaseSettingsFragment {
+public class VehicleParametersFragment extends BaseSettingsFragment implements OnPreferenceChanged {
 
 	public static final String TAG = VehicleParametersFragment.class.getSimpleName();
 
@@ -105,6 +106,19 @@ public class VehicleParametersFragment extends BaseSettingsFragment {
 			return true;
 		}
 		return super.onPreferenceClick(preference);
+	}
+
+	@Override
+	public void onPreferenceChanged(String prefId) {
+		recalculateRoute();
+	}
+
+	private void recalculateRoute() {
+		RoutingHelper routingHelper = app.getRoutingHelper();
+		if (getSelectedAppMode().equals(routingHelper.getAppMode())
+				&& (routingHelper.isRouteCalculated() || routingHelper.isRouteBeingCalculated())) {
+			routingHelper.recalculateRouteDueToSettingsChange();
+		}
 	}
 
 	private Drawable getPreferenceIcon(String prefId) {

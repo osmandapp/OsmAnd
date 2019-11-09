@@ -2,12 +2,14 @@ package net.osmand.plus.settings;
 
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.widget.ImageView;
 
+import net.osmand.StateChangedListener;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -16,10 +18,13 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.SettingsBaseActivity;
 import net.osmand.plus.activities.SettingsNavigationActivity;
 import net.osmand.plus.routing.RouteProvider;
+import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.MultiSelectBooleanPreference;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.router.GeneralRouter;
+import net.osmand.router.GeneralRouter.RoutingParameter;
+import net.osmand.router.GeneralRouter.RoutingParameterType;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -31,7 +36,7 @@ import java.util.Set;
 import static net.osmand.plus.activities.SettingsNavigationActivity.getRouter;
 import static net.osmand.plus.routepreparationmenu.RoutingOptionsHelper.DRIVING_STYLE;
 
-public class RouteParametersFragment extends BaseSettingsFragment {
+public class RouteParametersFragment extends BaseSettingsFragment implements OnPreferenceChanged {
 
 	public static final String TAG = RouteParametersFragment.class.getSimpleName();
 
@@ -41,12 +46,32 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 	private static final String ROUTE_PARAMETERS_IMAGE = "route_parameters_image";
 	private static final String RELIEF_SMOOTHNESS_FACTOR = "relief_smoothness_factor";
 
-	private List<GeneralRouter.RoutingParameter> avoidParameters = new ArrayList<GeneralRouter.RoutingParameter>();
-	private List<GeneralRouter.RoutingParameter> preferParameters = new ArrayList<GeneralRouter.RoutingParameter>();
-	private List<GeneralRouter.RoutingParameter> drivingStyleParameters = new ArrayList<GeneralRouter.RoutingParameter>();
-	private List<GeneralRouter.RoutingParameter> reliefFactorParameters = new ArrayList<GeneralRouter.RoutingParameter>();
-	private List<GeneralRouter.RoutingParameter> otherRoutingParameters = new ArrayList<GeneralRouter.RoutingParameter>();
+	private List<RoutingParameter> avoidParameters = new ArrayList<RoutingParameter>();
+	private List<RoutingParameter> preferParameters = new ArrayList<RoutingParameter>();
+	private List<RoutingParameter> drivingStyleParameters = new ArrayList<RoutingParameter>();
+	private List<RoutingParameter> reliefFactorParameters = new ArrayList<RoutingParameter>();
+	private List<RoutingParameter> otherRoutingParameters = new ArrayList<RoutingParameter>();
 
+	private StateChangedListener<Boolean> booleanRoutingPrefListener;
+	private StateChangedListener<String> customRoutingPrefListener;
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+
+		booleanRoutingPrefListener = new StateChangedListener<Boolean>() {
+			@Override
+			public void stateChanged(Boolean change) {
+				recalculateRoute();
+			}
+		};
+		customRoutingPrefListener = new StateChangedListener<String>() {
+			@Override
+			public void stateChanged(String change) {
+				recalculateRoute();
+			}
+		};
+	}
 
 	@Override
 	protected void setupPreferences() {
@@ -118,13 +143,13 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 			GeneralRouter router = getRouter(getMyApplication().getRoutingConfig(), am);
 			clearParameters();
 			if (router != null) {
-				Map<String, GeneralRouter.RoutingParameter> parameters = router.getParameters();
+				Map<String, RoutingParameter> parameters = router.getParameters();
 				if (!am.isDerivedRoutingFrom(ApplicationMode.CAR)) {
 					screen.addPreference(fastRoute);
 				}
-				for (Map.Entry<String, GeneralRouter.RoutingParameter> e : parameters.entrySet()) {
+				for (Map.Entry<String, RoutingParameter> e : parameters.entrySet()) {
 					String param = e.getKey();
-					GeneralRouter.RoutingParameter routingParameter = e.getValue();
+					RoutingParameter routingParameter = e.getValue();
 					if (param.startsWith(AVOID_ROUTING_PARAMETER_PREFIX)) {
 						avoidParameters.add(routingParameter);
 					} else if (param.startsWith(PREFER_ROUTING_PARAMETER_PREFIX)) {
@@ -162,11 +187,11 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 
 					screen.addPreference(reliefFactorRouting);
 				}
-				for (GeneralRouter.RoutingParameter p : otherRoutingParameters) {
+				for (RoutingParameter p : otherRoutingParameters) {
 					String title = SettingsBaseActivity.getRoutingStringPropertyName(app, p.getId(), p.getName());
 					String description = SettingsBaseActivity.getRoutingStringPropertyDescription(app, p.getId(), p.getDescription());
 
-					if (p.getType() == GeneralRouter.RoutingParameterType.BOOLEAN) {
+					if (p.getType() == RoutingParameterType.BOOLEAN) {
 						OsmandSettings.OsmandPreference pref = settings.getCustomRoutingBooleanProperty(p.getId(), p.getDefaultBoolean());
 
 						SwitchPreferenceEx switchPreferenceEx = (SwitchPreferenceEx) createSwitchPreferenceEx(pref.getId(), title, description, R.layout.preference_with_descr_dialog_and_switch);
@@ -184,7 +209,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 						for (Object o : vls) {
 							svlss[i++] = o.toString();
 						}
-						OsmandSettings.OsmandPreference pref = settings.getCustomRoutingProperty(p.getId(), p.getType() == GeneralRouter.RoutingParameterType.NUMERIC ? "0.0" : "-");
+						OsmandSettings.OsmandPreference pref = settings.getCustomRoutingProperty(p.getId(), p.getType() == RoutingParameterType.NUMERIC ? "0.0" : "-");
 
 						ListPreferenceEx listPreferenceEx = (ListPreferenceEx) createListPreferenceEx(pref.getId(), p.getPossibleValueDescriptions(), svlss, title, R.layout.preference_with_descr);
 						listPreferenceEx.setDescription(description);
@@ -199,23 +224,81 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 	}
 
 	@Override
+	public void onResume() {
+		super.onResume();
+		addRoutingPrefListeners();
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		removeRoutingPrefListeners();
+	}
+
+	@Override
+	public void onAppModeChanged() {
+		removeRoutingPrefListeners();
+		super.onAppModeChanged();
+		addRoutingPrefListeners();
+	}
+
+	private void addRoutingPrefListeners() {
+		settings.FAST_ROUTE_MODE.addListener(booleanRoutingPrefListener);
+		settings.ENABLE_TIME_CONDITIONAL_ROUTING.addListener(booleanRoutingPrefListener);
+
+		for (RoutingParameter parameter : otherRoutingParameters) {
+			if (parameter.getType() == RoutingParameterType.BOOLEAN) {
+				OsmandSettings.CommonPreference<Boolean> pref = settings.getCustomRoutingBooleanProperty(parameter.getId(), parameter.getDefaultBoolean());
+				pref.addListener(booleanRoutingPrefListener);
+			} else {
+				OsmandSettings.CommonPreference<String> pref = settings.getCustomRoutingProperty(parameter.getId(), parameter.getType() == RoutingParameterType.NUMERIC ? "0.0" : "-");
+				pref.addListener(customRoutingPrefListener);
+			}
+		}
+	}
+
+	private void removeRoutingPrefListeners() {
+		settings.FAST_ROUTE_MODE.removeListener(booleanRoutingPrefListener);
+		settings.ENABLE_TIME_CONDITIONAL_ROUTING.removeListener(booleanRoutingPrefListener);
+
+		for (RoutingParameter parameter : otherRoutingParameters) {
+			if (parameter.getType() == RoutingParameterType.BOOLEAN) {
+				OsmandSettings.CommonPreference<Boolean> pref = settings.getCustomRoutingBooleanProperty(parameter.getId(), parameter.getDefaultBoolean());
+				pref.removeListener(booleanRoutingPrefListener);
+			} else {
+				OsmandSettings.CommonPreference<String> pref = settings.getCustomRoutingProperty(parameter.getId(), parameter.getType() == RoutingParameterType.NUMERIC ? "0.0" : "-");
+				pref.removeListener(customRoutingPrefListener);
+			}
+		}
+	}
+
+	@Override
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
 		String key = preference.getKey();
 
 		if ((RELIEF_SMOOTHNESS_FACTOR.equals(key) || DRIVING_STYLE.equals(key)) && newValue instanceof String) {
+			ApplicationMode appMode = getSelectedAppMode();
 			String selectedParameterId = (String) newValue;
-			List<GeneralRouter.RoutingParameter> routingParameters = DRIVING_STYLE.equals(key) ? drivingStyleParameters : reliefFactorParameters;
-			for (GeneralRouter.RoutingParameter parameter : routingParameters) {
-				String parameterId = parameter.getId();
-				SettingsNavigationActivity.setRoutingParameterSelected(settings, getSelectedAppMode(), parameterId, parameter.getDefaultBoolean(), parameterId.equals(selectedParameterId));
+			List<RoutingParameter> routingParameters = DRIVING_STYLE.equals(key) ? drivingStyleParameters : reliefFactorParameters;
+			for (RoutingParameter p : routingParameters) {
+				String parameterId = p.getId();
+				SettingsNavigationActivity.setRoutingParameterSelected(settings, appMode, parameterId, p.getDefaultBoolean(), parameterId.equals(selectedParameterId));
 			}
+			recalculateRoute();
 			return true;
 		}
 
 		return super.onPreferenceChange(preference, newValue);
 	}
 
-	private ListPreferenceEx createRoutingBooleanListPreference(String groupKey, List<GeneralRouter.RoutingParameter> routingParameters) {
+	@Override
+	public void onPreferenceChanged(String prefId) {
+		if (AVOID_ROUTING_PARAMETER_PREFIX.equals(prefId) || PREFER_ROUTING_PARAMETER_PREFIX.equals(prefId)) {
+			recalculateRoute();
+		}
+	}
+
+	private ListPreferenceEx createRoutingBooleanListPreference(String groupKey, List<RoutingParameter> routingParameters) {
 		String defaultTitle = Algorithms.capitalizeFirstLetterAndLowercase(groupKey.replace('_', ' '));
 		String title = SettingsBaseActivity.getRoutingStringPropertyName(app, groupKey, defaultTitle);
 		ApplicationMode am = settings.getApplicationMode();
@@ -225,7 +308,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 
 		String selectedParameterId = null;
 		for (int i = 0; i < routingParameters.size(); i++) {
-			GeneralRouter.RoutingParameter parameter = routingParameters.get(i);
+			RoutingParameter parameter = routingParameters.get(i);
 			entryValues[i] = parameter.getId();
 			entries[i] = SettingsNavigationActivity.getRoutinParameterTitle(app, parameter);
 			if (SettingsNavigationActivity.isRoutingParameterSelected(settings, am, parameter)) {
@@ -241,7 +324,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 		return routingListPref;
 	}
 
-	private MultiSelectBooleanPreference createRoutingBooleanMultiSelectPref(String groupKey, String title, String descr, List<GeneralRouter.RoutingParameter> routingParameters) {
+	private MultiSelectBooleanPreference createRoutingBooleanMultiSelectPref(String groupKey, String title, String descr, List<RoutingParameter> routingParameters) {
 		MultiSelectBooleanPreference multiSelectPref = new MultiSelectBooleanPreference(app);
 		multiSelectPref.setKey(groupKey);
 		multiSelectPref.setTitle(title);
@@ -255,7 +338,7 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 		Set<String> enabledPrefsIds = new HashSet<>();
 
 		for (int i = 0; i < routingParameters.size(); i++) {
-			GeneralRouter.RoutingParameter p = routingParameters.get(i);
+			RoutingParameter p = routingParameters.get(i);
 			BooleanPreference booleanRoutingPref = (BooleanPreference) settings.getCustomRoutingBooleanProperty(p.getId(), p.getDefaultBoolean());
 
 			entries[i] = SettingsBaseActivity.getRoutingStringPropertyName(app, p.getId(), p.getName());
@@ -271,6 +354,14 @@ public class RouteParametersFragment extends BaseSettingsFragment {
 		multiSelectPref.setValues(enabledPrefsIds);
 
 		return multiSelectPref;
+	}
+
+	private void recalculateRoute() {
+		RoutingHelper routingHelper = app.getRoutingHelper();
+		if (getSelectedAppMode().equals(routingHelper.getAppMode())
+				&& (routingHelper.isRouteCalculated() || routingHelper.isRouteBeingCalculated())) {
+			routingHelper.recalculateRouteDueToSettingsChange();
+		}
 	}
 
 	private void clearParameters() {

@@ -11,6 +11,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.LongDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.settings.OnPreferenceChanged;
 import net.osmand.plus.settings.preferences.EditTextPreferenceEx;
 import net.osmand.util.Algorithms;
 
@@ -71,6 +72,11 @@ public class EditTextPreferenceBottomSheet extends BasePreferenceBottomSheet {
 			String value = editText.getText().toString();
 			if (editTextPreference.callChangeListener(value)) {
 				editTextPreference.setText(value);
+
+				Fragment target = getTargetFragment();
+				if (target instanceof OnPreferenceChanged) {
+					((OnPreferenceChanged) target).onPreferenceChanged(editTextPreference.getKey());
+				}
 			}
 		}
 

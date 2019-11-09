@@ -22,6 +22,7 @@ import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.settings.OnPreferenceChanged;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 
 import org.apache.commons.logging.Log;
@@ -68,6 +69,11 @@ public class BooleanPreferenceBottomSheet extends BasePreferenceBottomSheet {
 							switchPreference.setChecked(newValue);
 							preferenceBtn[0].setTitle(newValue ? on : off);
 							preferenceBtn[0].setChecked(newValue);
+
+							Fragment target = getTargetFragment();
+							if (target instanceof OnPreferenceChanged) {
+								((OnPreferenceChanged) target).onPreferenceChanged(switchPreference.getKey());
+							}
 						}
 					}
 				})
