@@ -445,7 +445,7 @@
     <string name="map_view_3d">3D-kartvisning</string>
     <string name="show_poi_over_map_description">Vis sist valgte interessepunktsoverlegg.</string>
     <string name="show_poi_over_map">Vis interessepunktoverlegg</string>
-    <string name="map_tile_source_descr">Velg kilde for nettbaserte eller hurtigbufrede kart.</string>
+    <string name="map_tile_source_descr">Velg kilde for nettbaserte eller hurtigbufrede kart</string>
     <string name="map_tile_source">Fliskartkilde</string>
     <string name="map_source">Kartkilde</string>
     <string name="use_internet">Bruk Internett</string>
@@ -999,7 +999,7 @@
     <string name="pref_overlay">Overlegg/Underlag</string>
     <string name="layer_underlay">Underlagskart…</string>
     <string name="map_underlay">Underlagskart</string>
-    <string name="map_underlay_descr">Velg underlagskart.</string>
+    <string name="map_underlay_descr">Velg underlagskart</string>
     <string name="layer_overlay">Overleggskart…</string>
     <string name="map_overlay">Overleggskart</string>
     <string name="map_overlay_descr">Velg overleggskartet.</string>
@@ -1435,7 +1435,7 @@
     <string name="local_openstreetmap_act_title">OSM-endringer</string>
     <string name="download_wikipedia_maps">Wikipedia</string>
     <string name="intermediate_points_change_order">Endre rekkefølge</string>
-    <string name="av_def_action_choose">På forespørsel</string>
+    <string name="av_def_action_choose">På forespørsel\?</string>
     <string name="av_def_action_video">Ta opp video</string>
     <string name="av_def_action_audio">Ta opp lyd</string>
     <string name="recording_context_menu_delete">Slett opptak</string>
@@ -1980,7 +1980,7 @@
     <string name="quick_action_map_style_action">Legg til en kartstil</string>
     <string name="quick_action_poi_list">Interessepunktliste</string>
     <string name="quick_action_sh_poi_descr">Legg til én eller flere interessepunktkategorier som skal vises på kartet.</string>
-    <string name="quick_action_category_descr">Kategori å lagre favoritten i.</string>
+    <string name="quick_action_category_descr">Kategori å lagre favoritten i:</string>
     <string name="quick_action_add_navigation">Navigering</string>
     <string name="quick_action_add_configure_map">Kartinnstilling</string>
     <string name="quick_action_add_category">Legg til en kategori</string>
@@ -2814,7 +2814,7 @@
     <string name="commiting_way">Sender inn vei…</string>
     <string name="send_search_query_description">Vi kommer til å sende inn ditt søk \"%1$s\", sammen med din plassering.
         \nIngen personlig informasjon samles inn, søkedata brukes kun for å forbedre søkealgoritmen.</string>
-    <string name="test_voice_desrc">Trykk på en knapp og lytt til tilhørende talemelding for å se om den mangler eller har feil.</string>
+    <string name="test_voice_desrc">Trykk på en knapp og lytt til tilhørende talemelding for å se om den mangler eller har feil</string>
     <string name="release_3_2_pre">• Fikset krasj ved oppstart som skjedde på noen enheter
 \n
 \n • Ny mulighet med markører: vis markører som allerede er passert
@@ -3128,8 +3128,8 @@
     <string name="routing_attr_piste_type_skitour_name">Skigåing</string>
     <string name="routing_attr_piste_type_skitour_description">Ruter for skigåing.</string>
     <string name="routing_attr_allow_intermediate_name">Tillat mellomliggende ruter</string>
-    <string name="routing_attr_allow_intermediate_description">Flere vanskelige ruter med brattere deler. Generelt noen hindringer å unngå.</string>
-    <string name="routing_attr_allow_advanced_description">Vanskelige ruter, med farlige hindre og bratte deler.</string>
+    <string name="routing_attr_allow_intermediate_description">Vanskeligere ruter med brattere partier. Generelt noen hindringer som bør unngås.</string>
+    <string name="routing_attr_allow_advanced_description">Vanskelige ruter, med farlige hindringer og bratte partier.</string>
     <string name="routing_attr_allow_expert_description">Ekstremt vanskelige ruter, med farlige hindringer og omgivelser.</string>
     <string name="routing_attr_allow_skating_only_description">Ruter forberedt for fristil eller kun skøyting, uten klassiske spor.</string>
     <string name="routing_attr_allow_classic_only_description">Ruter forberedt for kun klassisk, uten skøytemuligheter. Dette inkluderer ruter forberedt av en mindre snøskuter med løsere løype og spor laget manuelt av skigåere.</string>
@@ -3243,7 +3243,7 @@
     <string name="shared_string_memory_tb_desc">%1$s TB</string>
     <string name="shared_string_memory_gb_desc">%1$s GB</string>
     <string name="shared_string_memory_mb_desc">%1$s MB</string>
-    <string name="shared_string_memory_kb_desc">%1$s KB</string>
+    <string name="shared_string_memory_kb_desc">%1$s kB</string>
     <string name="lang_oc">Oksitansk</string>
     <string name="manage_profiles_descr">Opprett, importer, rediger profiler</string>
     <string name="manage_profiles">Håndter programprofiler…</string>
@@ -3266,8 +3266,47 @@
     <string name="quick_action_hillshade_hide">Skjul relieffskygge</string>
     <string name="quick_action_show_hide_hillshade">Vis/skjul relieffskygge</string>
     <string name="tts_initialization_error">Kan ikke starte tekst-til-tale -motor</string>
-    <string name="simulate_your_location_gpx_descr">Simuler din posisjon ved bru av et innspilt GPX-spor.</string>
+    <string name="simulate_your_location_gpx_descr">Simuler posisjonen din ved bruk av et innspilt GPX-spor.</string>
     <string name="exported_osmand_profile">OsmAnd-profil: %1$s</string>
     <string name="profile_import">Profil-import:</string>
     <string name="rendering_value_white_name">Hvit</string>
+    <string name="default_speed_dialog_msg">Brukes til å estimere ankomsttid for ukjente veityper og for å begrense farten på alle veier (kan endre rute)</string>
+    <string name="track_storage_directory">Spor-lagringsmappe</string>
+    <string name="track_storage_directory_descrp">Spor kan lagres i \'rec\'-mappen, månedlige eller daglige mapper.</string>
+    <string name="store_tracks_in_rec_directory">Ta opp spor til \'rec\'-mappen</string>
+    <string name="store_tracks_in_daily_directories">Ta opp spor i daglige mapper</string>
+    <string name="store_tracks_in_daily_directories_descrp">Ta opp spor i undermapper for hver forskjellig dag (som 2018-01-01).</string>
+    <string name="shared_string_memory_used_tb_desc">Brukt %1$s TB</string>
+    <string name="shared_string_memory_used_gb_desc">Brukt %1$s GB</string>
+    <string name="shared_string_memory_used_mb_desc">Brukt %1$s MB</string>
+    <string name="shared_string_memory_used_kb_desc">Brukt %1$s kB</string>
+    <string name="routing_attr_prefer_unpaved_name">Foretrekk uasfalterte veier</string>
+    <string name="routing_attr_prefer_unpaved_description">Foretrekk veier uten fast dekke.</string>
+    <string name="release_3_5">• Oppdaterte app- og profilinnstillinger: Innstillinger er nå ordnet etter type. Hver profil kan tilpasses separat.
+\n
+\n • Ny kartnedlasting-dialog foreslår et kart til nedlasting mens man navigerer
+\n
+\n • Natt-tema fikser
+\n
+\n • Fikset flere feilruter rundt om i verden
+\n
+\n • Oppdaterte grunnkartet med mer detaljert veinettverk
+\n
+\n • Fikset oversvømte områder rundt om i verden.
+\n
+\n • Ski-navigasjon: La til høydeprofil og rutekompleksitet til rutedetaljene
+\n
+\n • Andre små rettelser
+\n
+\n</string>
+    <string name="apply_preference_to_all_profiles">Du kan bruke denne endringen på alle profilene eller bare den nåværende profilen.</string>
+    <string name="quick_action_contour_lines_descr">En bryter for å vise eller skjule høydekurver på kartet.</string>
+    <string name="export_profile">Eksporter profil</string>
+    <string name="overwrite_profile_q">Profilen \'%1$s\' eksisterer allerede. Skrive over\?</string>
+    <string name="export_profile_failed">Kunne ikke eksportere profil.</string>
+    <string name="profile_import_descr">For å importere en profil, velg filen på enheten og åpne den med OsmAnd.</string>
+    <string name="file_import_error">%1$s feil under import: %2$s</string>
+    <string name="file_imported_successfully">%1$s ble importert.</string>
+    <string name="swap_two_places">Bytt %1$s og %2$s</string>
+    <string name="route_start_point">Startpunkt</string>
 </resources>

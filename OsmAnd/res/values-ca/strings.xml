@@ -1441,8 +1441,8 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="version_settings">Versions</string>
     <string name="rendering_attr_streetLighting_name">Enllumenat dels carrers</string>
     <string name="gps_status">Estat del GPS</string>
-    <string name="parking_place">Aparcament alternatiu</string>
-    <string name="remove_the_tag">Treure l\'etiqueta</string>
+    <string name="parking_place">Lloc per aparcar</string>
+    <string name="remove_the_tag">Treu l\'etiqueta</string>
     <string name="shared_string_disabled">Desactivat</string>
     <string name="shared_string_enabled">Activat</string>
     <string name="edit_group">Edició del grup</string>
@@ -3021,9 +3021,9 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="routing_attr_avoid_sett_description">Evita els empedrats i els llambordins</string>
     <string name="routing_attr_avoid_tram_name">Evita el tram</string>
     <string name="routing_attr_avoid_tram_description">Evita el tram</string>
-    <string name="routing_attr_avoid_bus_name">Evita l\'autobús</string>
+    <string name="routing_attr_avoid_bus_name">Sense autobús</string>
     <string name="routing_attr_avoid_bus_description">Evita autobús i troleibús</string>
-    <string name="routing_attr_avoid_share_taxi_name">Evita el taxi compartit</string>
+    <string name="routing_attr_avoid_share_taxi_name">Sense taxi compartit</string>
     <string name="routing_attr_avoid_share_taxi_description">Evita el taxi compartit</string>
     <string name="routing_attr_avoid_train_name">Evita el tren</string>
     <string name="routing_attr_avoid_train_description">Evita el tren</string>
@@ -3048,16 +3048,16 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="dont_move_maps">No moguis</string>
     <string name="public_transport_ped_route_title">La ruta a peu triga aproximadament %1$s i es pot escurçar utilitzant transport públic</string>
     <string name="public_transport_no_route_title">Per desgràcia, OsmAnd no ha pogut trobar una ruta adient amb els vostres paràmetres.</string>
-    <string name="public_transport_try_ped">Proveu la navegació per vianants.</string>
+    <string name="public_transport_try_ped">Proveu la navegació caminant.</string>
     <string name="public_transport_try_change_settings">Proveu a canviar els paràmetres.</string>
-    <string name="public_transport_calc_pedestrian">Calcula la ruta per vianants</string>
+    <string name="public_transport_calc_pedestrian">Calcula una ruta caminant</string>
     <string name="public_transport_type">Tipus de transport</string>
     <string name="searching_gps">Buscant GPS</string>
     <string name="coordinates_widget">Giny de coordenades</string>
-    <string name="rate_dialog_descr">Dediqueu-nos 30 segons, si us plau, per comentar i puntuar la nostra feina a Google Play.</string>
-    <string name="button_rate">Puntua</string>
+    <string name="rate_dialog_descr">Si us plau, comenteu que us sembla i puntueu la nostra feina a Google Play.</string>
+    <string name="button_rate">D\'acord</string>
     <string name="shared_string_privacy_policy">Política de privadesa</string>
-    <string name="help_us_make_osmand_better">Ajudeu-nos a fer millor l\'OsmAnd!</string>
+    <string name="help_us_make_osmand_better">Ajudeu-nos a millorar OsmAnd!</string>
     <string name="make_osmand_better_descr">Autoritzeu a OsmAnd a recopilar i processar dades anònimes d\'ús de l\'aplicació. No recopilarem ni emmagatzemarem dades sobre la vostra ubicació ni dels llocs que consulteu al mapa. 
 \n 
 \nPodeu canviar aquesta opció quan vulgueu a Configuració &gt; Privadesa i seguretat.</string>
@@ -3122,9 +3122,9 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="edit_profile_setup_subtitle">El perfil conserva la seva pròpia configuració</string>
     <string name="precision_hdop_and_vdop">Precisió horitzontal: %1$s, vertical: %2$s</string>
     <string name="precision_hdop">Precisió horitzontal: %s</string>
-    <string name="edit_profile_setup_map_subtitle">Seleccioneu les opcions de mapa predeterminades per al perfil</string>
-    <string name="edit_profile_screen_options_subtitle">Seleccioneu les opcions de pantalla predeterminades per al perfil</string>
-    <string name="edit_profile_nav_settings_subtitle">Seleccioneu la configuració de navegació predeterminada per al perfil</string>
+    <string name="edit_profile_setup_map_subtitle">Seleccioneu les opcions de mapa per al perfil</string>
+    <string name="edit_profile_screen_options_subtitle">Seleccioneu les opcions de pantalla per al perfil</string>
+    <string name="edit_profile_nav_settings_subtitle">Seleccioneu la configuració de navegació per al perfil</string>
     <string name="routing_attr_max_num_changes_description">Especifiqueu el nombre màxim de canvis</string>
     <string name="routing_attr_max_num_changes_name">Nombre de canvis</string>
     <string name="app_mode_scooter">Escúter</string>
@@ -3151,22 +3151,24 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="new_profile">Nou perfil</string>
     <string name="shared_string_crash">Accident</string>
     <string name="last_launch_crashed">La darrera execució d\'OsmAnd va fallar. Ajudeu-nos a millorar OsmAnd compartint el missatge d\'error.</string>
-    <string name="release_3_4">• Perfils d\'aplicació: creeu un perfil personalitzat segons el que us calgui, amb icona i colors a mida
+    <string name="release_3_4">• Perfils d\'aplicació: Creeu un perfil personalitzat segons el que us calgui, amb icona i colors a mida 
+\n 
+\n • Ara podeu modificar els valors predeterminats de qualsevol perfil i les velocitats mínima/màxima 
+\n 
+\n • S\'ha afegit una extensió amb les coordenades actuals 
+\n 
+\n • Noves opcions per mostrar la brúixola i un regle radial en el mapa 
+\n 
+\n • S\'ha arreglat el registre de traçat en segon pla 
+\n 
+\n • Baixada de mapes en segon pla millorada 
+\n 
+\n • Ha tornat l\'opció \'Activa la pantalla\' 
 \n
-\n • Ara podeu modificar els valors predeterminats de qualsevol perfil i les velocitats mínima/màxima
-\n
-\n • S\'ha afegit una extensió amb les coordenades actuals
-\n
-\n • Noves opcions per mostrar la brúixola i un regle radial en el mapa
-\n
-\n • S\'ha arreglat el registre de traçat en segon pla
-\n
-\n • Baixada de mapes en segon pla millorada
-\n
-\n • Selecció de la llengua de Viquipèdia arreglada
-\n
-\n • S\'ha arreglat el comportament del botó de la brúixola en navegació
-\n
+\n • Selecció de la llengua de Viquipèdia arreglada 
+\n 
+\n • S\'ha arreglat el comportament del botó de la brúixola en navegació 
+\n 
 \n • Altres correccions d\'errors
 \n
 \n</string>
@@ -3174,7 +3176,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="routing_attr_allow_classic_only_name">Restringeix a rutes clàssiques</string>
     <string name="routing_attr_difficulty_preference_name">Dificultat preferida</string>
     <string name="routing_attr_difficulty_preference_description">Preferència per les rutes amb aquesta dificultat, però si són més curtes també altres rutes més senzilles o més complicades.</string>
-    <string name="turn_screen_on_time_descr">Defineix el temps que la pantalla estarà engegada.</string>
+    <string name="turn_screen_on_time_descr">Ajusteu quan temps estarà engegada la pantalla.</string>
     <string name="turn_screen_on_sensor">Utilitza el sensor de proximitat</string>
     <string name="base_profile_descr_bicycle">Bicicleta de muntanya, ciclomotor, cavall</string>
     <string name="routing_profile_broutrer">BRouter (fora de línia)</string>
@@ -3190,7 +3192,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="routing_attr_freeride_policy_name">Fora de pista</string>
     <string name="app_mode_ufo">Ovni</string>
     <string name="app_mode_monowheel">Monocicle</string>
-    <string name="turn_screen_on_sensor_descr">Mogueu la mà sobre la part superior de la pantalla per a activar la pantalla durant la navegació.</string>
+    <string name="turn_screen_on_sensor_descr">Mogueu la mà a la part superior de la pantalla per a activar-la durant la navegació.</string>
     <string name="rendering_attr_highway_class_track_grade1_name">Grau 1</string>
     <string name="rendering_attr_highway_class_track_grade2_name">Grau 2</string>
     <string name="rendering_attr_highway_class_track_grade3_name">Grau 3</string>
@@ -3335,11 +3337,11 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">Millor les carreteres sense asfaltar</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">Millor les carreteres sense asfaltar.</string>
     <string name="layer_osm_edits">Edicions d\'OSM</string>
-    <string name="quick_action_contour_lines_descr">Prement aquest botó d\'acció es mostren o amaguen les corbes de nivell en el mapa</string>
+    <string name="quick_action_contour_lines_descr">Un commutador per mostrar o amagar les corbes de nivell en el mapa</string>
     <string name="quick_action_contour_lines_show">Mostra les corbes de nivell</string>
     <string name="quick_action_contour_lines_hide">Amaga les corbes de nivell</string>
     <string name="quick_action_show_hide_contour_lines">Mostra/amaga les corbes de nivell</string>
-    <string name="quick_action_hillshade_descr">Prement aquest botó d\'acció es mostra o s\'amaga l\'ombrejat de relleu al mapa</string>
+    <string name="quick_action_hillshade_descr">Un commutador per mostrar o amagar l\'ombrejat de relleu al mapa</string>
     <string name="quick_action_hillshade_show">Mostra l\'ombrejat de relleu</string>
     <string name="quick_action_hillshade_hide">Amaga l\'ombrejat de relleu</string>
     <string name="quick_action_show_hide_hillshade">Mostra/amaga l\'ombrejat de relleu</string>
@@ -3382,4 +3384,18 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="screen_alerts">Alertes de pantalla</string>
     <string name="route_parameters_descr">Configura els paràmetres de la ruta</string>
     <string name="rendering_attr_piste_type_hike_name">Senderisme</string>
+    <string name="default_speed_dialog_msg">"S\'utilitza per estimar l\'hora d\'arribada per carreteres de tipus desconegut  i per limitar la velocitat a totes les vies (podria canviar la ruta)"</string>
+    <string name="shared_string_other">Altres</string>
+    <string name="shared_sting_tiles">Tessel·les</string>
+    <string name="export_profile">Exporta el perfil</string>
+    <string name="exported_osmand_profile">Perfil d\'OsmAnd: %1$s</string>
+    <string name="overwrite_profile_q">El perfil \'%1$s\' ja existeix. El voleu sobreescriure\?</string>
+    <string name="export_profile_failed">No s\'ha pogut exportar el perfil.</string>
+    <string name="profile_import">Importa el perfil:</string>
+    <string name="profile_import_descr">Per importar un perfil, seleccioneu el seu arxiu en el dispositiu i obriu-lo amb OsmAnd.</string>
+    <string name="file_import_error">Error d\'importació de %1$s: %2$s</string>
+    <string name="file_imported_successfully">S\'ha importat correctament %1$s.</string>
+    <string name="rendering_value_white_name">Blanc</string>
+    <string name="swap_two_places">Bescanvia %1$s i %2$s</string>
+    <string name="route_start_point">Punt d\'inici</string>
 </resources>

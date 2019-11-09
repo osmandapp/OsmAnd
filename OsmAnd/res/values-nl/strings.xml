@@ -2217,7 +2217,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="quick_action_auto_zoom_desc">Een druk op op de sneltoets zet de automatische zoom volgens de snelheid aan of uit.</string>
     <string name="quick_action_auto_zoom_on">Autozoom aan</string>
     <string name="quick_action_auto_zoom_off">Autozoom uit</string>
-    <string name="quick_action_add_destination">Bestemming toevoegen</string>
+    <string name="quick_action_add_destination">Bestemming instellen</string>
     <string name="quick_action_replace_destination">Bestemming vervangen</string>
     <string name="quick_action_add_first_intermediate">Eerste Tussenpunt toevoegen</string>
     <string name="quick_action_add_destination_desc">Een druk op de sneltoets voegt het midden van het scherm toe als bestemming. De vorige bestemming wordt het laatste tussenpunt.</string>
@@ -2853,9 +2853,9 @@ voor Gebied: %1$s x %2$s</string>
     <string name="shared_string_capacity">Capaciteit</string>
     <string name="shared_string_width">Breedte</string>
     <string name="shared_string_height">Hoogte</string>
-    <string name="add_destination_point">Voeg bestemming toe</string>
+    <string name="add_destination_point">Stel de bestemming in</string>
     <string name="add_intermediate_point">Voeg tussenpunt toe</string>
-    <string name="add_start_point">Voeg vertrekpunt toe</string>
+    <string name="add_start_point">Stel het vertrekpunt in</string>
     <string name="intermediate_waypoint">Tussenpunt</string>
     <string name="on_foot">Te voet</string>
     <string name="points_of_interests">Interessepunten (POI)</string>
@@ -2866,7 +2866,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="simulate_navigation">Simuleer navigatie</string>
     <string name="choose_track_file_to_follow">Kies het te volgen track bestand</string>
     <string name="voice_announcements">Stem instructies</string>
-    <string name="intermediate_destinations">Tussen bestemmingen</string>
+    <string name="intermediate_destinations">Tussenpunten</string>
     <string name="arrive_at_time">Aankomst om %1$s</string>
     <string name="shared_string_launch">Open</string>
     <string name="quick_action_switch_day_night_descr">Tik deze knop om te wisselen tussen de Osmand Dag en Nacht modus</string>
@@ -3069,4 +3069,22 @@ voor Gebied: %1$s x %2$s</string>
     <string name="shared_preference">Gedeeld</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">Voorkeur voor onverharde wegen</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">Voorkeur voor onverharde wegen.</string>
+    <string name="change_data_storage_full_description">OsmAnd databestanden naar de nieuwe locatie kopiëren\?
+\n%1$s &gt; %2$s</string>
+    <string name="enter_path_to_folder">Voer het pad naar de map in</string>
+    <string name="shared_string_select_folder">Map…</string>
+    <string name="move_maps_to_new_destination">Naar nieuwe locatie verplaatsen</string>
+    <string name="internal_app_storage_description">Interne opslag, verborgen voor de gebruiker en andere apps, enkel toegankelijk voor OsmAnd</string>
+    <string name="tts_initialization_error">Kan tekst-naar-spraak service niet starten</string>
+    <string name="export_profile">Exporteer profiel</string>
+    <string name="exported_osmand_profile">OsmAnd profiel: %1$s</string>
+    <string name="overwrite_profile_q">Profiel \'%1$s\' bestaat al. Overschrijven\?</string>
+    <string name="export_profile_failed">Profiel kon niet geëxporteerd worden.</string>
+    <string name="profile_import">Profiel importeren:</string>
+    <string name="profile_import_descr">Om een profiel te importeren selecteer je het bestand op het apparaat en open je dat met OsmAnd.</string>
+    <string name="file_import_error">%1$s importeerfout: %2$s</string>
+    <string name="file_imported_successfully">%1$s succesvol geïmporteerd.</string>
+    <string name="rendering_value_white_name">Wit</string>
+    <string name="swap_two_places">Wissel %1$s en %2$s om</string>
+    <string name="route_start_point">Vertrekpunt</string>
 </resources>
