@@ -594,6 +594,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 				} else {
 					mapActivity.changeZoom(1, System.currentTimeMillis());
 				}
+				lastZoom = System.currentTimeMillis();
 			}
 		});
 		final View.OnLongClickListener listener = MapControlsLayer.getOnClickMagnifierListener(view);
@@ -609,6 +610,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 					return;
 				}
 				mapActivity.changeZoom(-1, System.currentTimeMillis());
+				lastZoom = System.currentTimeMillis();
 			}
 		});
 		zoomOutButton.setOnLongClickListener(listener);
@@ -817,18 +819,15 @@ public class MapControlsLayer extends OsmandMapLayer {
 		quickSearchHud.updateVisibility(!routeDialogOpened && !trackDialogOpened && !isInMeasurementToolMode() && !isInPlanRouteMode()
 				&& !contextMenuOpened && !isInChoosingRoutesMode() && !isInWaypointsChoosingMode());
 
-		if (!routePlanningMode && !routeFollowingMode) {
-			if (mapView.isZooming()) {
-				lastZoom = System.currentTimeMillis();
-			}
-			//if (!mapView.isZooming() || !OsmandPlugin.isDevelopment()) {
-			if ((System.currentTimeMillis() - lastZoom > 1000) || !OsmandPlugin.isDevelopment()) {
-				zoomText.setVisibility(View.GONE);
-			} else {
-				zoomText.setVisibility(View.VISIBLE);
-				zoomText.setTextColor(textColor);
-				zoomText.setText(getZoomLevel(tileBox));
-			}
+		if (mapView.isZooming()) {
+			lastZoom = System.currentTimeMillis();
+		}
+		if ((System.currentTimeMillis() - lastZoom > 1000) || !OsmandPlugin.isDevelopment()) {
+			zoomText.setVisibility(View.GONE);
+		} else {
+			zoomText.setVisibility(View.VISIBLE);
+			zoomText.setTextColor(textColor);
+			zoomText.setText(getZoomLevel(tileBox));
 		}
 
 		mapRouteInfoMenu.setVisible(showRouteCalculationControls);
