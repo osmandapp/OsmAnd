@@ -11,6 +11,8 @@
 	Thx - Hardy
 
 -->
+    <string name="track_saved">Track saved</string>
+    <string name="empty_filename">File name is empty</string>
     <string name="default_speed_dialog_msg">Used to estimate arrival time for unknown type of roads and to limit speed for all roads (could change the route)</string>
     <string name="rendering_value_white_name">White</string>
     <string name="swap_two_places">Swap %1$s and %2$s</string>
