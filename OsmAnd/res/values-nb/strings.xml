@@ -445,7 +445,7 @@
     <string name="map_view_3d">3D-kartvisning</string>
     <string name="show_poi_over_map_description">Vis sist valgte interessepunktsoverlegg.</string>
     <string name="show_poi_over_map">Vis interessepunktoverlegg</string>
-    <string name="map_tile_source_descr">Velg kilde for nettbaserte eller hurtigbufrede kart.</string>
+    <string name="map_tile_source_descr">Velg kilde for nettbaserte eller hurtigbufrede kart</string>
     <string name="map_tile_source">Fliskartkilde</string>
     <string name="map_source">Kartkilde</string>
     <string name="use_internet">Bruk Internett</string>
@@ -999,7 +999,7 @@
     <string name="pref_overlay">Overlegg/Underlag</string>
     <string name="layer_underlay">Underlagskart…</string>
     <string name="map_underlay">Underlagskart</string>
-    <string name="map_underlay_descr">Velg underlagskart.</string>
+    <string name="map_underlay_descr">Velg underlagskart</string>
     <string name="layer_overlay">Overleggskart…</string>
     <string name="map_overlay">Overleggskart</string>
     <string name="map_overlay_descr">Velg overleggskartet.</string>
@@ -1435,7 +1435,7 @@
     <string name="local_openstreetmap_act_title">OSM-endringer</string>
     <string name="download_wikipedia_maps">Wikipedia</string>
     <string name="intermediate_points_change_order">Endre rekkefølge</string>
-    <string name="av_def_action_choose">På forespørsel</string>
+    <string name="av_def_action_choose">På forespørsel\?</string>
     <string name="av_def_action_video">Ta opp video</string>
     <string name="av_def_action_audio">Ta opp lyd</string>
     <string name="recording_context_menu_delete">Slett opptak</string>
@@ -1980,7 +1980,7 @@
     <string name="quick_action_map_style_action">Legg til en kartstil</string>
     <string name="quick_action_poi_list">Interessepunktliste</string>
     <string name="quick_action_sh_poi_descr">Legg til én eller flere interessepunktkategorier som skal vises på kartet.</string>
-    <string name="quick_action_category_descr">Kategori å lagre favoritten i.</string>
+    <string name="quick_action_category_descr">Kategori å lagre favoritten i:</string>
     <string name="quick_action_add_navigation">Navigering</string>
     <string name="quick_action_add_configure_map">Kartinnstilling</string>
     <string name="quick_action_add_category">Legg til en kategori</string>
@@ -2814,7 +2814,7 @@
     <string name="commiting_way">Sender inn vei…</string>
     <string name="send_search_query_description">Vi kommer til å sende inn ditt søk \"%1$s\", sammen med din plassering.
         \nIngen personlig informasjon samles inn, søkedata brukes kun for å forbedre søkealgoritmen.</string>
-    <string name="test_voice_desrc">Trykk på en knapp og lytt til tilhørende talemelding for å se om den mangler eller har feil.</string>
+    <string name="test_voice_desrc">Trykk på en knapp og lytt til tilhørende talemelding for å se om den mangler eller har feil</string>
     <string name="release_3_2_pre">• Fikset krasj ved oppstart som skjedde på noen enheter
 \n
 \n • Ny mulighet med markører: vis markører som allerede er passert
@@ -3128,8 +3128,8 @@
     <string name="routing_attr_piste_type_skitour_name">Skigåing</string>
     <string name="routing_attr_piste_type_skitour_description">Ruter for skigåing.</string>
     <string name="routing_attr_allow_intermediate_name">Tillat mellomliggende ruter</string>
-    <string name="routing_attr_allow_intermediate_description">Flere vanskelige ruter med brattere deler. Generelt noen hindringer å unngå.</string>
-    <string name="routing_attr_allow_advanced_description">Vanskelige ruter, med farlige hindre og bratte deler.</string>
+    <string name="routing_attr_allow_intermediate_description">Vanskeligere ruter med brattere partier. Generelt noen hindringer som bør unngås.</string>
+    <string name="routing_attr_allow_advanced_description">Vanskelige ruter, med farlige hindringer og bratte partier.</string>
     <string name="routing_attr_allow_expert_description">Ekstremt vanskelige ruter, med farlige hindringer og omgivelser.</string>
     <string name="routing_attr_allow_skating_only_description">Ruter forberedt for fristil eller kun skøyting, uten klassiske spor.</string>
     <string name="routing_attr_allow_classic_only_description">Ruter forberedt for kun klassisk, uten skøytemuligheter. Dette inkluderer ruter forberedt av en mindre snøskuter med løsere løype og spor laget manuelt av skigåere.</string>
@@ -3266,7 +3266,7 @@
     <string name="quick_action_hillshade_hide">Skjul relieffskygge</string>
     <string name="quick_action_show_hide_hillshade">Vis/skjul relieffskygge</string>
     <string name="tts_initialization_error">Kan ikke starte tekst-til-tale -motor</string>
-    <string name="simulate_your_location_gpx_descr">Simuler din posisjon ved bru av et innspilt GPX-spor.</string>
+    <string name="simulate_your_location_gpx_descr">Simuler posisjonen din ved bruk av et innspilt GPX-spor.</string>
     <string name="exported_osmand_profile">OsmAnd-profil: %1$s</string>
     <string name="profile_import">Profil-import:</string>
     <string name="rendering_value_white_name">Hvit</string>
