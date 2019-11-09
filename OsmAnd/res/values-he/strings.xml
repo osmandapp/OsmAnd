@@ -44,7 +44,7 @@
     <string name="show_warnings_descr">הגדרת אזהרות תנועה (הגבלות מהירות, עצירות מחייבות, פסי האטה, מנהרות), אזהרת מצלמות מהירות ופרטי נתיב.</string>
     <string name="use_compass_navigation_descr">יש להשתמש במצפן כאשר לא מזוהה עצם מנחה.</string>
     <string name="use_compass_navigation">להשתמש במצפן</string>
-    <string name="avoid_motorway">להמנע מדרכים לממונעים</string>
+    <string name="avoid_motorway">ללא כבישים סלולים</string>
     <string name="auto_zoom_map_descr">תקריב המפה בהתאמה אוטומטית למהירות (בעוד שהמפה מסתנכרנת עם המיקום הנוכחי).</string>
     <string name="auto_zoom_map">שינוי תקריב אוטומטי במפה</string>
     <string name="snap_to_road_descr">הצמדת המיקום לדרכים במהלך הניווט.</string>
@@ -140,7 +140,7 @@
     <string name="osmand_parking_am">AM</string>
     <string name="osmand_parking_position_name">מקום חנייה</string>
     <string name="osmand_parking_plugin_description">תוסף מיקום החנייה מאפשר לך לשמור איפה רכבך חנה וכמה זמן נותר לחנייה (אם יש מגבלת זמן). 
-\nהמיקום והשעה מופיעים בלוח הבקרה של OsmAnd וגם בחלונית על מסך המפה. ניתן להוסיף התרעה ליומן של Android כתזכורת.</string>
+\nהמיקום והשעה מופיעים בלוח הבקרה של OsmAnd וגם בחלונית על המפה. ניתן להוסיף התרעה ליומן של Android כתזכורת.</string>
     <string name="osmand_parking_plugin_name">מיקום החנייה</string>
     <string name="context_menu_item_add_parking_point">סימון כמקום חנייה</string>
     <string name="context_menu_item_delete_parking_point">מחיקת סימון חנייה</string>
@@ -173,10 +173,10 @@
     <string name="map_online_data_descr">שימוש במפות מקוונות (הורדה ואחסון אריחי המפה בכרטיס הזיכרון).</string>
     <string name="shared_string_online_maps">מפות מקוונות</string>
     <string name="online_map_settings_descr">הגדרת מקורות אריחי מפה מקוונים או שמורים.</string>
-    <string name="osmand_rastermaps_plugin_description">עם התוסף הזה ניתן לגשת למגוון סוגים של מפות מקוונות (נקראות גם אריחים או מעובדות), מאריחים מוגדרים מראש של OpenStreetMap (כמו למשל Mapnik) עד תמונות לוויין ושכבות מיוחדות כגון מפות מזג אוויר, מפות אקלים, מפות גאולוגיות, מפות הצללה ועוד.
-\n
-\nכל אחת מהמפות האלה יכולה לשמש בתור המפה הראשית (בסיס) שתוצג במסך המפה של OsmAnd או כשכבה מעל או מתחת למפת בסיס אחרת (כמו המפות התקניות הבלתי מקוונות של OsmAnd). כדי שניתן היה לראות את המפות שמתחת, ניתן להסתיר פריטים מסוימים במפות הווקטורים של OsmAnd דרך התפריט ‚הגדרת מפה’ לפי דרישתך.
-\n
+    <string name="osmand_rastermaps_plugin_description">עם התוסף הזה ניתן לגשת למגוון סוגים של מפות מקוונות (נקראות גם אריחים או מעובדות), מאריחים מוגדרים מראש של OpenStreetMap (כמו למשל Mapnik) עד תמונות לוויין ושכבות מיוחדות כגון מפות מזג אוויר, מפות אקלים, מפות גאולוגיות, מפות הצללה ועוד. 
+\n 
+\nכל אחת מהמפות האלה יכולה לשמש בתור המפה הראשית (בסיס) שתוצג במפה של OsmAnd או כשכבה מעל או מתחת למפת בסיס אחרת (כמו המפות התקניות הבלתי מקוונות של OsmAnd). כדי שניתן היה לראות את המפות שמתחת, ניתן להסתיר פריטים מסוימים במפות הווקטורים של OsmAnd דרך התפריט ‚הגדרת מפה’ לפי דרישתך. 
+\n 
 \nמפות אריחים ניתן להוריד ישירות ממקורות מקוונים או שניתן להכין אותן לשימוש בלתי מקוון (ולהעתיק אותן לתיקיית הנתונים של OsmAnd) כמסד נתונים מסוג SQLite אותו ניתן לייצר על ידי מגוון כלי צד־שלישי להכנת מפות.</string>
     <string name="osmand_background_plugin_description">הצגת הגדרות להפעלת מעקב וניווט במצב רקע על ידי השכמת התקן ה־GPS מדי פעם בפעם (בזמן שהמסך כבוי).</string>
     <string name="osmand_accessibility_description">תוסף זה הופך את תכונות הנגישות של ההתקן לזמינות ישירות ב־OsmAnd. התוסף מאפשר להגדיר את מהירות הדיבור של מנגנון הטקסט לדיבור, להגדיר ניווט בעזרת חצים על המסך, להשתמש בכדור מעקב לשליטה בתקריב או משוב של טקסט לדיבור, למשל לצורך הכרזה על המיקום שלך אוטומטית.</string>
@@ -730,7 +730,7 @@
     <string name="save_current_track_descr">שמירת המסלול הנוכחי כקובץ GPX כעת.</string>
     <string name="save_current_track">שמירת המסלול הנוכחי</string>
     <string name="save_track_interval">מרווח בין השמירות ליומן במהלך ניווט</string>
-    <string name="save_track_interval_descr">נא לבחור את ההפרש בין הצבת המיקום בטוויית דרכים.</string>
+    <string name="save_track_interval_descr">נא לציין את ההפרש בין הצבת המיקום בטוויית דרכים</string>
     <string name="save_track_to_gpx_descrp">מסלול GPX יישמר אוטומטית לתיקיית המסלולים במהלך הניווט.</string>
     <string name="save_track_to_gpx">הקלטת המסלול אוטומטית במהלך הניווט</string>
     <string name="update_tile">עדכון המפה</string>
@@ -804,7 +804,7 @@
     <string name="osb_comment_dialog_message">הודעה</string>
     <string name="osb_comment_dialog_author">שם היוצר</string>
     <string name="osb_comment_dialog_success">נוספה תגובה</string>
-    <string name="osb_comment_dialog_error">לא ניתן להוסיף תגובה</string>
+    <string name="osb_comment_dialog_error">לא ניתן להוסיף תגובה.</string>
     <string name="poi_edit_title">עריכת נ״ע</string>
     <string name="poi_create_title">יצירת נ״ע</string>
     <string name="poi_error_poi_not_found">לא ניתן למצוא את המפרק או שהמתחם מורכב ממספר מפרקים, מצב שלא נתמך עדיין.</string>
@@ -878,7 +878,7 @@
     <string name="download_regular_maps">מפה תקנית</string>
     <string name="download_roads_only_maps">מפה עם דרכים בלבד</string>
     <string name="incomplete_locale">חלקי</string>
-    <string name="search_villages_and_postcodes">חיפוש עוד כפרים/מיקוד</string>
+    <string name="search_villages_and_postcodes">חיפוש עוד כפרים/מיקודים</string>
     <string name="no_buildings_found">לא נמצאו בניינים.</string>
     <string name="route_descr_lat_lon">רוחב %1$.3f אורך %2$.3f</string>
     <string name="map_widget_max_speed">מהירות מותרת</string>
@@ -893,9 +893,9 @@
     <string name="srtm_plugin_name">קווי מתאר</string>
     <string name="download_select_map_types">מפות אחרות</string>
     <string name="download_srtm_maps">מפות SRTM</string>
-    <string name="audionotes_location_not_defined">המיקום לא מוגדר עדיין לצורכי שמירת הערות. יש לבחור ב„שימוש במיקום…” כדי להקצות הערה למיקום שצוין.</string>
+    <string name="audionotes_location_not_defined">יש לגעת ב‚שימוש במיקום…’ כדי להוסיף הערה למיקום.</string>
     <string name="map_widget_audionotes">הערות קוליות</string>
-    <string name="audionotes_plugin_description">תוסף ההערות הקוליות/בווידאו מספק תכונה להקליט שמע או לצלם תמונות/סרטונים במהלך טיול, או באמצעות כפתור על מסך המפה או ישירות מתפריט ההקשר של כל מיקום במפה.</string>
+    <string name="audionotes_plugin_description">תוסף ההערות הקוליות/בווידאו מספק תכונה להקליט שמע או לצלם תמונות/סרטונים במהלך טיול, או באמצעות כפתור על המפה או ישירות מתפריט ההקשר של כל מיקום במפה.</string>
     <string name="audionotes_plugin_name">תוסף הערות קוליות</string>
     <string name="osmand_srtm_short_description_80_chars">תוסף ל־OsmAnd לקווי מתאר בלתי מקוונים</string>
     <string name="map_widget_distancemeasurement">מדידת מרחק</string>
@@ -907,7 +907,7 @@
     <string name="recording_context_menu_arecord">הקלטת הערה קולית</string>
     <string name="recording_context_menu_vrecord">צילום הערת וידאו</string>
     <string name="layer_recordings">שכבת ההקלטה</string>
-    <string name="recording_can_not_be_played">לא ניתן לנגן את ההקלטה</string>
+    <string name="recording_can_not_be_played">לא ניתן לנגן את ההקלטה.</string>
     <string name="recording_context_menu_delete">מחיקת הקלטה</string>
     <string name="recording_context_menu_play">נגינה</string>
     <string name="recording_description">מתבצעת הקלטה %1$s %3$s %2$s</string>
@@ -917,13 +917,13 @@
     <string name="map_widget_av_notes">הערות קוליות</string>
     <string name="av_def_action_video">הקלטת וידאו</string>
     <string name="av_def_action_audio">הקלטת שמע</string>
-    <string name="av_widget_action_descr">בחירת פעולת הווידג׳ט כבררת המחדל.</string>
+    <string name="av_widget_action_descr">פעולת הווידג׳ט כבררת מחדל:</string>
     <string name="av_widget_action">פעולת הווידג׳ט כבררת המחדל</string>
-    <string name="av_video_format_descr">נא לבחור את תבנית פלט הווידאו.</string>
+    <string name="av_video_format_descr">תצורת פלט הווידאו:</string>
     <string name="av_video_format">תבנית פלט וידאו</string>
     <string name="av_use_external_recorder_descr">שימוש במקליט המערכת עבור וידאו.</string>
     <string name="av_use_external_recorder">שימוש במקליט חיצוני</string>
-    <string name="av_settings_descr">הגדרת תצורת השמע והווידאו.</string>
+    <string name="av_settings_descr">הגדרת השמע והווידאו.</string>
     <string name="av_settings">הגדרות שמע/וידאו</string>
     <string name="recording_error">הקלטה נכשלה</string>
     <string name="recording_camera_not_available">מצלמה אינה זמינה</string>
@@ -953,7 +953,7 @@
     <string name="prefer_motorways">העדפת כבישים סלולים</string>
     <string name="prefer_in_routing_title">העדפה…</string>
     <string name="prefer_in_routing_descr">העדפת כבישים סלולים.</string>
-    <string name="av_def_action_choose">נא לבחור בקשה</string>
+    <string name="av_def_action_choose">לפי בקשה\?</string>
     <string name="item_checked">לאחר בדיקה</string>
     <string name="item_unchecked">ללא בדיקה</string>
     <string name="shared_string_map">מפה</string>
@@ -966,10 +966,10 @@
     <string name="hno">מספר הבית</string>
     <string name="monitoring_settings">הקלטת טיולים</string>
     <string name="monitoring_settings_descr">ניתן להגדיר כיצד לשמור את הטיולים שלך.</string>
-    <string name="choose_osmand_theme_descr">בחירת המראה של היישומון.</string>
+    <string name="choose_osmand_theme_descr">התאמת מראה היישומון.</string>
     <string name="choose_osmand_theme">ערכת עיצוב ליישום</string>
     <string name="accessibility_options">אפשרויות נגישות</string>
-    <string name="select_address_activity">נא לבחור בכתובת</string>
+    <string name="select_address_activity">נא לציין כתובת</string>
     <string name="favourites_list_activity">נא לבחור במועדף</string>
     <string name="local_openstreetmap_act_title">שינויים ב־OSM</string>
     <string name="shared_string_more_actions">פעולות אחרות</string>
@@ -987,7 +987,7 @@
     <string name="use_kalman_filter_compass_descr">הפחתת רעש בקריאות המצפן אך תתווסף התמדה.</string>
     <string name="local_indexes_cat_srtm">קווי מתאר</string>
     <string name="wait_current_task_finished">נא להמתין להשלמת המשימה הנוכחית</string>
-    <string name="shared_string_downloading">בהורדה</string>
+    <string name="shared_string_downloading">בהורדה…</string>
     <string name="delete_point">מחיקת נקודה</string>
     <string name="plugin_distance_point_time">זמן</string>
     <string name="plugin_distance_point_hdop">דיוק</string>
@@ -1009,12 +1009,12 @@
 \n * נגיעה ארוכה על נקודה כדי לצפות ולצרף תיאור.
 \n * יש לגעת בווידג׳ט המדידה כדי לצפות בפעולות נוספות.</string>
     <string name="local_osm_changes_backup_successful">קובץ השינוי ב־OSM נוצר %1$s</string>
-    <string name="local_osm_changes_backup_failed">לא ניתן לגבות את השינויים ב־OSM</string>
+    <string name="local_osm_changes_backup_failed">לא ניתן לגבות את השינויים ב־OSM.</string>
     <string name="local_osm_changes_backup">גיבוי כשינוי ב־OSM</string>
     <string name="search_street_in_neighborhood_cities">חיפוש אחר הרחוב בערים סמוכות</string>
     <string name="intermediate_items_sort_return">סדר מיטבי של יעדי הביניים על הנתיב אל היעד.</string>
     <string name="intermediate_items_sort_by_distance">סידור דלת לדלת</string>
-    <string name="please_select_address">נא לבחור בעיר או ברחוב תחילה</string>
+    <string name="please_select_address">נא להגדיר עיר או רחוב תחילה</string>
     <string name="context_menu_item_destination_point">הגדרה כיעד</string>
     <string name="destination_point">יעד %1$s</string>
     <string name="available_maps">מפות זמינות</string>
@@ -1031,9 +1031,9 @@
     <string name="select_voice_provider_descr">יש לבחור או להוריד הנחיה קולית עבור שפתך.</string>
     <string name="impassable_road_desc">בחירת דרכים מהן יש להימנע במהלך הניווט.</string>
     <string name="shared_string_sound">קול</string>
-    <string name="no_location_permission">ליישום אין הרשאה להשתמש בנתוני המיקום.</string>
-    <string name="no_camera_permission">ליישומון אין הרשאה להשתמש במצלמה.</string>
-    <string name="no_microphone_permission">ליישומון אין הרשאה להשתמש במיקרופון.</string>
+    <string name="no_location_permission">הענקת גישה לנתוני מיקום.</string>
+    <string name="no_camera_permission">הענקת גישה למצלמה.</string>
+    <string name="no_microphone_permission">הענקת גישה למיקרופון.</string>
     <string name="route_distance">מרחק:</string>
     <string name="route_duration">זמן:</string>
     <string name="shared_string_near">ליד</string>
@@ -1097,7 +1097,7 @@
     <string name="wrong_user_name">שם המשתמש שגוי</string>
     <string name="shared_string_to">עד</string>
     <string name="mapillary_menu_date_from">מ־</string>
-    <string name="mapillary_menu_descr_dates">הצגת תמונות שנוספו בלבד</string>
+    <string name="mapillary_menu_descr_dates">להציג תמונות שנוספו בלבד</string>
     <string name="mapillary_menu_title_dates">תאריך</string>
     <string name="mapillary_menu_edit_text_hint">הקלדת שם משתמש</string>
     <string name="mapillary_menu_descr_username">הצגת תמונות שנוספו רק על ידי</string>
@@ -1105,7 +1105,7 @@
     <string name="mapillary_menu_filter_description">ניתן לסנן תמונות לפי השולח, לפי תאריך או לפי סוג. פעיל רק במבט מקרוב.</string>
     <string name="map_widget_ruler_control">מד זווית</string>
     <string name="shared_string_permissions">הרשאות</string>
-    <string name="import_gpx_failed_descr">ל־OsmAnd אין אפשרות לייבא את הקובץ. נא לוודא של־OsmAnd יש הרשאה לקרוא קבצים מהמיקום הזה.</string>
+    <string name="import_gpx_failed_descr">לא ניתן לייבא את הקובץ. נא לוודא של־OsmAnd יש הרשאה לקרוא אותו.</string>
     <string name="distance_moving">המרחק תוקן</string>
     <string name="quick_action_resume_pause_navigation">הפסקה/המשך בניווט</string>
     <string name="quick_action_resume_pause_navigation_descr">יש לגעת בכפתור זה כדי להמשיך את הניווט.</string>
@@ -1120,33 +1120,33 @@
     <string name="improve_coverage_install_mapillary_desc">ניתן להתקין את Mapillary כדי להוסיף תמונה אחת או יותר למיקום הזה במפה.</string>
     <string name="online_photos">תמונות מקוונות</string>
     <string name="shared_string_add_photos">הוספת תמונות</string>
-    <string name="no_photos_descr">אין לנו תמונות של המיקום הזה.</string>
-    <string name="mapillary_action_descr">ניתן לתרום נופים משלך ברמת הרחוב למיקום זה עם Mapillary.</string>
+    <string name="no_photos_descr">אין כאן תמונות.</string>
+    <string name="mapillary_action_descr">ניתן לשתף תמונות מנקודת המבט של הרחוב דרך Mapillary.</string>
     <string name="mapillary_widget">וידג׳ט Mapillary</string>
     <string name="mapillary_widget_descr">מאפשר תרומה במהירות ל־Mapillary.</string>
     <string name="mapillary_descr">תמונות מקוונות ברמת רחוב לכולם. היכרות עם מקומות חדשים, שיתוף פעולה וצילום העולם.</string>
     <string name="mapillary">Mapillary</string>
     <string name="plugin_mapillary_descr">תמונות ברמת הרחוב לכולם. להכיר מקומות, לשתף פעולה ולצלם את העולם.</string>
-    <string name="private_access_routing_req">היעד שלך ממוקם באיזור עם גישה פרטית. לאשר גישה לכבישים הפרטיים לצורך טיול זה?</string>
+    <string name="private_access_routing_req">היעד שלך ממוקם באיזור עם גישה פרטית. לאשר שימוש בכבישים פרטיים לצורך טיול זה\?</string>
     <string name="restart_search">חיפוש מחדש</string>
     <string name="increase_search_radius">הגדלת רדיוס החיפוש</string>
     <string name="nothing_found">לא נמצא כלום</string>
-    <string name="nothing_found_descr">יש לשנות את הביטוי לחיפוש או להגדיל את רדיוס טווח החיפוש.</string>
+    <string name="nothing_found_descr">עריכת החיפוש או הגדלת הטווח.</string>
     <string name="quick_action_showhide_osmbugs_title">הצגה/הסתרה של הערות OSM</string>
     <string name="quick_action_osmbugs_show">הצגת הערות OSM</string>
     <string name="quick_action_osmbugs_hide">הסתרת הערות OSM</string>
-    <string name="quick_action_showhide_osmbugs_descr">נגיעה בכפתור הפעולה גורמת להצגה או להסתרה של הערות OSM על המפה.</string>
+    <string name="quick_action_showhide_osmbugs_descr">בורר להצגה או להסתרה של הערות OSM על המפה.</string>
     <string name="sorted_by_distance">מסודר לפי מרחק</string>
     <string name="search_favorites">חיפוש במועדפים</string>
     <string name="none_selected_gpx">לא נבחרו קובצי GPX. ניתן לבחור אחד בלחיצה ארוכה.</string>
-    <string name="local_index_select_gpx_file">יש לבחור כדי להציג</string>
+    <string name="local_index_select_gpx_file">יש לבחור מסלול</string>
     <string name="gpx_split_interval">משך פיצול</string>
     <string name="sort_by_distance">סידור לפי מרחק</string>
     <string name="sort_by_name">סידור לפי שם</string>
     <string name="show_zoom_buttons_navigation_descr">הצגת כפתורי תקריב במהלך ניווט.</string>
     <string name="show_zoom_buttons_navigation">הצגת כפתורי תקריב</string>
     <string name="save_as_favorites_points">שמירה כקבוצת מועדפים</string>
-    <string name="select_destination_and_intermediate_points">בחירת יעדים</string>
+    <string name="select_destination_and_intermediate_points">הגדרת יעדים</string>
     <string name="layer_amenity_label">תוויות שכבת על לנקודות עניין</string>
     <string name="loading_smth">%1$s בטעינה…</string>
     <string name="map_widget_plain_time">הזמן הנוכחי</string>
@@ -1247,19 +1247,19 @@
     <string name="use_displayed_track_for_navigation">להשתמש במסלול המוצג לניווט?</string>
     <string name="keep_and_add_destination_point">הוספת יעד ביניים</string>
     <string name="select_gpx">בחירת GPX…</string>
-    <string name="route_descr_select_destination">בחירת יעד</string>
+    <string name="route_descr_select_destination">הגדרת יעד</string>
     <string name="route_preferences">העדפות הנתיב</string>
     <string name="route_info">פרטי המסלול</string>
-    <string name="routing_attr_avoid_toll_name">הימנעות מכבישי אגרה</string>
-    <string name="routing_attr_avoid_toll_description">הימנעות מכבישי אגרה</string>
-    <string name="routing_attr_avoid_unpaved_name">הימנעות מכבישים בלתי סלולים</string>
-    <string name="routing_attr_avoid_unpaved_description">הימנעות מכבישים בלתי סלולים.</string>
-    <string name="routing_attr_avoid_ferries_name">הימנעות ממעבורות</string>
-    <string name="routing_attr_avoid_ferries_description">הימנעות ממעבורות</string>
-    <string name="routing_attr_avoid_stairs_name">הימנעות ממדרגות</string>
-    <string name="routing_attr_avoid_stairs_description">הימנעות ממדרגות</string>
-    <string name="routing_attr_avoid_borders_name">הימנעות ממעברי גבול</string>
-    <string name="routing_attr_avoid_borders_description">הימנעות ממעבר גבולות בין מדינות</string>
+    <string name="routing_attr_avoid_toll_name">ללא כבישי אגרה</string>
+    <string name="routing_attr_avoid_toll_description">נמנע מכבישי אגרה</string>
+    <string name="routing_attr_avoid_unpaved_name">ללא כבישים בלתי סלולים</string>
+    <string name="routing_attr_avoid_unpaved_description">נמנע מכבישים בלתי סלולים</string>
+    <string name="routing_attr_avoid_ferries_name">ללא מעבורות</string>
+    <string name="routing_attr_avoid_ferries_description">נמנע ממעבורות</string>
+    <string name="routing_attr_avoid_stairs_name">ללא מדרגות</string>
+    <string name="routing_attr_avoid_stairs_description">נמנע ממדרגות</string>
+    <string name="routing_attr_avoid_borders_name">ללא מעברי גבול</string>
+    <string name="routing_attr_avoid_borders_description">נמנע ממעבר גבולות בין מדינות</string>
     <string name="routing_attr_weight_name">הגבלת משקל</string>
     <string name="routing_attr_weight_description">ציון מגבלה מותרת למשקל רכב במסלולים.</string>
     <string name="routing_attr_height_name">מגבלת גובה</string>
@@ -1277,7 +1277,7 @@
     <string name="disable_complex_routing">השבתת ניתוב מורכב</string>
     <string name="app_modes_choose">פרופילי יישומון</string>
     <string name="map_widget_map_rendering">עיבוד מפה</string>
-    <string name="make_round_trip_descr">הוספת עותק של נקודת ההתחלה כיעד.</string>
+    <string name="make_round_trip_descr">הוספת עותק של נקודת היציאה כיעד.</string>
     <string name="shared_string_markers">סמנים</string>
     <string name="use_system_keyboard">שימוש במקלדת המערכת</string>
     <string name="use_location">שימוש במיקום</string>
@@ -1302,7 +1302,7 @@
     <string name="show_map">הצגת מפה</string>
     <string name="route_is_calculated">הנתיב מחושב</string>
     <string name="round_trip">הלוך וחזור</string>
-    <string name="osn_modify_dialog_error">לא ניתן לערוך הערה</string>
+    <string name="osn_modify_dialog_error">לא ניתן לערוך הערה.</string>
     <string name="osn_modify_dialog_title">שינוי הערה</string>
     <string name="context_menu_item_modify_note">שינוי הערה ב־OSM</string>
     <string name="make_round_trip">מסלול הלוך וחזור</string>
@@ -1311,7 +1311,7 @@
     <string name="tap_on_map_to_hide_interface_descr">נגיעה במפה מחליפה את תצוגת הכפתורים והווידג׳טים.</string>
     <string name="appearance_on_the_map">הופעה על המפה</string>
     <string name="add_track_to_markers_descr">נא לבחור מסלול כדי להוסיף את נקודות הדרך שלו לסמנים.</string>
-    <string name="add_favourites_group_to_markers_descr">נא לבחור קטגוריה במועדפים להוספה לסמנים.</string>
+    <string name="add_favourites_group_to_markers_descr">נא לבחור קטגוריה של מועדפים להוספה לסמנים.</string>
     <string name="shared_string_gpx_waypoints">נקודות דרך במסלול</string>
     <string name="favourites_group">קטגוריית מועדפים</string>
     <string name="add_group">הוספת קבוצה</string>
@@ -1325,7 +1325,7 @@
     <string name="show_guide_line_descr">הצגת קווי כיוון מהמיקום שלך למיקומי הסמנים הפעילים.</string>
     <string name="show_arrows_descr">הצגת חץ או שניים המציינים את כיוון הסמנים הפעילים.</string>
     <string name="distance_indication_descr">ניתן לבחור כיצד להציג את המרחק עד לסמנים הפעילים.</string>
-    <string name="active_markers_descr">נא לבחור כמה מחווני כיוון יופיעו.</string>
+    <string name="active_markers_descr">ציון כמות מחווני כיוון:</string>
     <string name="digits_quantity">כמות הספרות העשרוניות</string>
     <string name="shared_string_right">ימין</string>
     <string name="shared_string_left">שמאל</string>
@@ -1340,7 +1340,7 @@
     <string name="fast_coordinates_input">קלט נקודות ציון מהיר</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">הימנעות מכבישי קרח, מעברי מים</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">הימנעות מכבישי קרח וממעברים על מים זורמים.</string>
-    <string name="add_location_as_first_point_descr">ניתן להוסיף את המיקום שלך כנקודת ההתחלה כדי לתכנן את המסלול המושלם.</string>
+    <string name="add_location_as_first_point_descr">ניתן להוסיף את המיקום שלך כנקודת היציאה כדי לתכנן את המסלול המושלם.</string>
     <string name="coordinate_input">קלט נקודות ציון</string>
     <string name="marker_save_as_track_descr">ייצוא הסמנים שלך לקובץ ה־GPX הבא:</string>
     <string name="group_will_be_removed_after_restart">הקבוצה תוסר לאחר ההפעלה הבאה של היישומון.</string>
@@ -1530,9 +1530,9 @@
     <string name="enable_proxy_title">הפעלת מתווך HTTP</string>
     <string name="enable_proxy_descr">הגדרת מתווך HTTP לכל בקשות הרשת.</string>
     <string name="proxy_host_title">מארח מתווך</string>
-    <string name="proxy_host_descr">הגדרת שם המארח של המתווך שלך (למשל 127.0.0.1).</string>
+    <string name="proxy_host_descr">ציון שם המארח של המתווך שלך (למשל 127.0.0.1).</string>
     <string name="proxy_port_title">פתחת מתווך</string>
-    <string name="proxy_port_descr">הגדרת מספר הפתחה של המתווך שלך (למשל 8118).</string>
+    <string name="proxy_port_descr">ציון מספר הפתחה של המתווך שלך (למשל 8118).</string>
     <string name="int_hour">שע׳</string>
     <string name="duration">משך</string>
     <string name="distance">מרחק</string>
@@ -1547,7 +1547,7 @@
     <string name="download_additional_maps">להוריד את המפות החסרות %1$s ‏(%2$d מ״ב)?</string>
     <string name="rendering_value_browse_map_name">עיון במפה</string>
     <string name="rendering_value_car_name">מכונית</string>
-    <string name="rendering_value_pedestrian_name">הולך רגל</string>
+    <string name="rendering_value_pedestrian_name">ברגל</string>
     <string name="rendering_attr_coloredBuildings_name">צביעת בניינים לפי סוג</string>
     <string name="continue_navigation">להמשיך בניווט</string>
     <string name="pause_navigation">להשהות את הניווט</string>
@@ -1756,19 +1756,19 @@
     <string name="favorite_group_name">שם הקבוצה</string>
     <string name="change_color">החלפת צבע</string>
     <string name="edit_name">עריכת השם</string>
-    <string name="animate_my_location">הנפשת המיקום שלי</string>
+    <string name="animate_my_location">הנפשת המיקום העצמי</string>
     <string name="shared_string_overview">סקירה</string>
     <string name="select_street">בחירת רחוב</string>
     <string name="type_address">נא להקליד כתובת</string>
-    <string name="type_city_town">נא להקליד עיר</string>
+    <string name="type_city_town">נא להקליד עיר/מועצה/אזור</string>
     <string name="type_postcode">נא להקליד מיקוד</string>
     <string name="nearest_cities">הערים הקרובות</string>
     <string name="select_city">נא לבחור עיר</string>
-    <string name="select_postcode">נא לבחור מיקוד</string>
+    <string name="select_postcode">חיפוש מיקוד</string>
     <string name="quick_action_auto_zoom">הפעלה/כיבוי של תקריב מפה אוטומטי</string>
     <string name="quick_action_auto_zoom_on">הפעלת תקריב אוטומטי במפה</string>
     <string name="quick_action_auto_zoom_off">השבתת תקריב אוטומטי במפה</string>
-    <string name="quick_action_add_destination">הוספת יעד</string>
+    <string name="quick_action_add_destination">הגדרת יעד</string>
     <string name="quick_action_replace_destination">החלפת יעד</string>
     <string name="quick_action_add_first_intermediate">הוספת נקודת ביניים ראשונה</string>
     <string name="subscribe_email_error">שגיאה</string>
@@ -1811,10 +1811,10 @@
     <string name="contact_us">יצירת קשר</string>
     <string name="map_legend">מקרא מפה</string>
     <string name="show_arrows_on_the_map">הצגת חצים על המפה</string>
-    <string name="remove_from_map_markers">הסרה מסמני המפה</string>
-    <string name="descendingly">יורד</string>
-    <string name="ascendingly">עולה</string>
-    <string name="date_added">תאריך ההוספה</string>
+    <string name="remove_from_map_markers">הסרה מ‚סמני המפה’</string>
+    <string name="descendingly">ת-א</string>
+    <string name="ascendingly">א-ת</string>
+    <string name="date_added">נוסף</string>
     <string name="order_by">סידור לפי:</string>
     <string name="looking_for_tracks_with_waypoints">מתבצע חיפוש אחר מסלולים עם נקודות דרך</string>
     <string name="shared_string_more_without_dots">עוד</string>
@@ -1823,7 +1823,7 @@
     <string name="osn_reopen_dialog_title">פתיחת הערה מחדש</string>
     <string name="osn_close_dialog_title">סגירת הערה</string>
     <string name="osn_add_dialog_success">נוצרה הערה</string>
-    <string name="osn_add_dialog_error">לא ניתן ליצור הערה</string>
+    <string name="osn_add_dialog_error">לא ניתן ליצור הערה.</string>
     <string name="marker_show_distance_descr">נא לבחור כיצד לציין את המרחק והכיוון לסמני המפה במסך המפה:</string>
     <string name="map_orientation_change_in_accordance_with_speed">סף כיווניות מפה</string>
     <string name="all_markers_moved_to_history">כל סמני המפה הועברה להיסטוריה</string>
@@ -1835,10 +1835,10 @@
     <string name="make_active">הגדרה כפעיל</string>
     <string name="today">היום</string>
     <string name="yesterday">אתמול</string>
-    <string name="quick_action_auto_zoom_desc">נגיעה בכפתור הפעולה מכבה/מפעילה את התקריב במפה בהתאם למהירות שלך.</string>
-    <string name="quick_action_add_destination_desc">נגיעה בכפתור הפעולה ממרכזת את המפה סביב נקודת היעד, יעד שנבחר קודם לכן יהפוך להיות נקודת הביניים האחרונה.</string>
+    <string name="quick_action_auto_zoom_desc">בורר לכיבוי/הפעלה של התקריב האוטומטי במפה בהתאם למהירות שלך.</string>
+    <string name="quick_action_add_destination_desc">כפתור למירכוז המפה סביב יעד המסלול, יעד כלשהו שנבחר קודם לכן יהפוך להיות נקודת הביניים האחרונה.</string>
     <string name="quick_action_replace_destination_desc">נגיעה בכפתור הפעולה מחליפה את מרכז המסך ליעד הנתיב החדש תוך החלפת כל יעד קודם (אם היה כזה).</string>
-    <string name="quick_action_add_first_intermediate_desc">נגיעה בכפתור פעולה זה מכוונת את מרכז המסך ליעד הביניים הראשון.</string>
+    <string name="quick_action_add_first_intermediate_desc">כפתור זה מכוון את מרכז המסך ליעד הביניים הראשון.</string>
     <string name="no_overlay">אין שכבת על</string>
     <string name="no_underlay">אין שכבה תחתונה</string>
     <string name="finish_navigation">סיום הניווט</string>
@@ -1850,9 +1850,9 @@
     <string name="open_street_map_login_and_pass">שם משתמש וססמה ב־OpenStreetMap</string>
     <string name="donations">תרומות</string>
     <string name="number_of_recipients">מספר הנמענים</string>
-    <string name="osm_editors_ranking">דירוגי עורכים ב־OSM</string>
+    <string name="osm_editors_ranking">דירוג עורך ב־OSM</string>
     <string name="osm_live_subscribe_btn">עריכת מינוי</string>
-    <string name="osm_live_email_desc">נדרש כדי לספק לך מידע על תרומות.</string>
+    <string name="osm_live_email_desc">נדרש כדי לעדכן אותך על התרומות שלך.</string>
     <string name="osm_live_user_public_name">שם ציבורי</string>
     <string name="osm_live_hide_user_name">לא להציג את השם שלי בדוחות</string>
     <string name="osm_live_support_region">אזור תמיכה</string>
@@ -1864,7 +1864,7 @@
     <string name="select_map_marker">בחירת סמן מפה</string>
     <string name="upload_anonymously">העלאה אלמונית</string>
     <string name="osn_close_dialog_success">ההערה נסגרה</string>
-    <string name="osn_close_dialog_error">לא ניתן לסגור הערה</string>
+    <string name="osn_close_dialog_error">לא ניתן לסגור הערה.</string>
     <string name="osb_author_dialog_password">ססמה ל־OSM (רשות)</string>
     <string name="shared_string_commit">הגשה</string>
     <string name="context_menu_item_delete_waypoint">למחוק נקודת דרך GPX?</string>
@@ -1918,13 +1918,13 @@
     <string name="simulate_your_location_descr">הדמיית המיקום שלך באמצעות נתיב מחושב או מסלול GPX מוקלט.</string>
     <string name="looking_up_address">הכתובת בחיפוש</string>
     <string name="av_locations_descr">קובץ GPX עם מיקומים.</string>
-    <string name="routing_attr_avoid_shuttle_train_name">התעלמות מרכבות שאטל</string>
-    <string name="routing_attr_avoid_shuttle_train_description">הימנעות מרכבות שאטל</string>
+    <string name="routing_attr_avoid_shuttle_train_name">ללא רכבות שאטל</string>
+    <string name="routing_attr_avoid_shuttle_train_description">מונע שימוש ברכבות שאטל</string>
     <string name="rendering_value_boldOutline_name">קו מתאר מודגש</string>
     <string name="lang_new">נווארית / נפאל בהאסה</string>
     <string name="archive_wikipedia_data">יש לך נתונים מיושנים ובלתי תואמים של ויקיפדיה שאינם נתמכים. להעביר אותם לארכיון?</string>
     <string name="download_wikipedia_files">להוריד נתונים נוספים מוויקיפדיה (%1$s מ״ב)?</string>
-    <string name="gps_network_not_enabled">שירות המיקום אינו פעיל. להפעיל אותו?</string>
+    <string name="gps_network_not_enabled">שירות המיקום כבוי. להפעיל אותו\?</string>
     <string name="disable_recording_once_app_killed">מניעת רישום עצמאי</string>
     <string name="shared_string_import2osmand">ייבוא ל־OsmAnd</string>
     <string name="read_full_article">קריאת הכתבה המלאה (מקוון)</string>
@@ -1966,8 +1966,8 @@
     <string name="current_route">הנתיב הנוכחי</string>
     <string name="osm_changes_added_to_local_edits">השינויים ב־OSM נוספו לערכת השינויים המקומית</string>
     <string name="mark_to_delete">סימון למחיקה</string>
-    <string name="local_recordings_delete_all_confirm">פעולה זו תוביל למחיקת %1$d הערות. להמשיך?</string>
-    <string name="local_osm_changes_upload_all_confirm">פעולה זו תעלה %1$d שינויים ל־OSM. להמשיך?</string>
+    <string name="local_recordings_delete_all_confirm">למחוק %1$d הערות\?</string>
+    <string name="local_osm_changes_upload_all_confirm">להעלות %1$d שינויים ל־OSM\?</string>
     <string name="confirmation_to_clear_history">לפנות את ההיסטוריה?</string>
     <string name="dash_download_msg_none">להוריד מפות בלתי מקוונות?</string>
     <string name="dash_download_msg">הורדת %1$s מפות</string>
@@ -1985,7 +1985,7 @@
     <string name="rendering_attr_shareTaxiRoutes_name">נתיבי מוניות שירות</string>
     <string name="rendering_attr_trolleybusRoutes_name">נתיבי טרוליבוס</string>
     <string name="speed_limit_exceed_message">נא לבחור סף סובלנות להגבלת מהירות, מעל הסף הזה תושמע אזהרה קולית.</string>
-    <string name="fav_point_dublicate_message">שם המועדף שצוין כבר בשימוש, השתנה לשם %1$s כדי להימנע מכפילות.</string>
+    <string name="fav_point_dublicate_message">שם המועדף השתנה לכדי %1$s כדי להימנע מכפילות.</string>
     <string name="text_size_descr">הגדרת גודל הטקסט במפה.</string>
     <string name="save_global_track_interval">הפרשי רישום באופן כללי</string>
     <string name="interrupt_music">השהיית מוזיקה</string>
@@ -2026,7 +2026,7 @@
     <string name="shared_string_slope">מדרון</string>
     <string name="add_new_folder">הוספת תיקייה חדשה</string>
     <string name="points_delete_multiple_succesful">הנקודות נמחקו.</string>
-    <string name="points_delete_multiple">פעולה זו תוביל למחיקתן של %1$d נקודות. להמשיך?</string>
+    <string name="points_delete_multiple">למחוק %1$d נקודות\?</string>
     <string name="route_points_category_name">פניות שיש לקחת בנתיב הזה</string>
     <string name="shared_string_gpx_track">מסלול</string>
     <string name="max_speed">מהירות מרבית</string>
@@ -2106,7 +2106,7 @@
     <string name="shared_string_do_not_use">לא להשתמש</string>
     <string name="shared_string_enable">הפעלה</string>
     <string name="shared_string_disable">השבתה</string>
-    <string name="shared_string_enabled">פועל</string>
+    <string name="shared_string_enabled">מופעל</string>
     <string name="shared_string_disabled">מושבת</string>
     <string name="shared_string_selected">נבחר</string>
     <string name="shared_string_selected_lowercase">נבחרו</string>
@@ -2156,7 +2156,7 @@
     <string name="shared_string_end_time">הגעה</string>
     <string name="shared_string_color">צבע</string>
     <string name="select_gpx_folder">בחירת תיקיית קובצי GPX</string>
-    <string name="file_can_not_be_moved">אי אפשר להעביר את הקובץ.</string>
+    <string name="file_can_not_be_moved">לא ניתן להעביר קובץ.</string>
     <string name="shared_string_move">העברה</string>
     <string name="shared_string_gpx_tracks">מסלולים</string>
     <string name="routing_attr_driving_style_name">סגנון נהיגה</string>
@@ -2220,7 +2220,7 @@
     <string name="working_days">ימי עבודה</string>
     <string name="recent_places">מקומות אחרונים</string>
     <string name="favourites">מועדפים</string>
-    <string name="modify_the_search_query">עריכת שאילתת החיפוש.</string>
+    <string name="modify_the_search_query">שינוי החיפוש שלך.</string>
     <string name="altitude_range">טווח גבהים</string>
     <string name="routing_attr_relief_smoothness_factor_name">בחירת תנודת גובה</string>
     <string name="routing_attr_height_obstacles_name">שימוש בנתוני עלייה</string>
@@ -2237,15 +2237,15 @@
     <string name="legacy_search">חיפוש מיושן</string>
     <string name="show_legacy_search">הצגת חיפוש מיושן</string>
     <string name="show_legacy_search_desc">הוספת החיפוש המיושן לרשימת המגירות.</string>
-    <string name="routing_attr_allow_motorway_name">לאפשר דרכים סלולות</string>
-    <string name="routing_attr_allow_motorway_description">לאפשר דרכים סלולות.</string>
+    <string name="routing_attr_allow_motorway_name">להשתמש בדרכים סלולות</string>
+    <string name="routing_attr_allow_motorway_description">מאפשר דרכים סלולות.</string>
     <string name="wiki_around">ערכי ויקיפדיה בקרבת מקום</string>
-    <string name="search_map_hint">חיפוש עיר או אזור</string>
+    <string name="search_map_hint">עיר או מחוז</string>
     <string name="route_roundabout_short">יש לצאת ביציאה מס׳ %1$d ולהמשיך</string>
     <string name="upload_poi">העלאת נקודות עניין</string>
     <string name="route_calculation">חישוב נתיב</string>
     <string name="gpx_no_tracks_title_folder">ניתן גם להוסיף קובצי GPX לתיקייה</string>
-    <string name="trip_rec_notification_settings">הפעלת התחלת הקלטה מהירה</string>
+    <string name="trip_rec_notification_settings">הפעלת הקלטה מהירה</string>
     <string name="saved_at_time">נשמר כעת תחת: %1$s</string>
     <string name="poi_deleted_localy">נקודת העניין תימחק לאחר העלאת השינויים שלך</string>
     <string name="show_gpx">הצגת נתוני GPX</string>
@@ -2341,7 +2341,7 @@
     <string name="get_it">הרשמה</string>
     <string name="get_for">הרשמה למשך %1$s</string>
     <string name="get_for_month">הרשמה למשך חודש</string>
-    <string name="osm_live_banner_desc">קבלת כמות הורדות בלתי מוגבלת ועדכונים מפות בתדירות שהיא יותר מפעם בחודש: שבועית, יומית או שעתית.</string>
+    <string name="osm_live_banner_desc">קבלת כמות הורדות בלתי מוגבלת תוך הוספת עדכונים ברמה שבועית, יומית או שעתית.</string>
     <string name="osmand_plus_banner_desc">עדכונים והורדות של המפה באופן בלתי מוגבל לרבות תוסף ויקיפדיה.</string>
     <string name="si_mi_meters">מיילים/מטרים</string>
     <string name="skip_map_downloading">דילוג על הורדת המפות</string>
@@ -2381,9 +2381,9 @@
     <string name="gpx_info_asc_altitude">עלייה/ירידה: %1$s</string>
     <string name="routing_attr_prefer_motorway_name">העדפת כבישים סלולים</string>
     <string name="routing_attr_prefer_motorway_description">העדפת כבישים סלולים</string>
-    <string name="routing_attr_avoid_motorway_name">הימנעות מכבישים סלולים</string>
-    <string name="routing_attr_avoid_motorway_description">הימנעות מכבישים סלולים</string>
-    <string name="interrupt_music_descr">הנחיות קוליות משהות, לא רק מנמיכות, מוזיקה שברקע.</string>
+    <string name="routing_attr_avoid_motorway_name">ללא כבישים סלולים</string>
+    <string name="routing_attr_avoid_motorway_description">נמנע מכבישים סלולים</string>
+    <string name="interrupt_music_descr">הנחיות קוליות משהות מוזיקה שברקע.</string>
     <string name="osmand_extended_description_part7">תרומה ל־OSM
 \n • דיווח על תקלה בנתונים
 \n • העלאת מסלולי GPX ישירות מהיישומון אל OSM
@@ -2410,14 +2410,14 @@
     <string name="enter_the_file_name">נא להקליד שם קובץ.</string>
     <string name="map_import_error">שגיאת ייבוא למפה</string>
     <string name="map_imported_successfully">המפה יובאה</string>
-    <string name="make_as_start_point">סימון כנקודת התחלה</string>
+    <string name="make_as_start_point">סימון זאת כנקודת היציאה</string>
     <string name="shared_string_current">נוכחית</string>
     <string name="last_intermediate_dest_description">הוספת עצירת ביניים</string>
     <string name="first_intermediate_dest_description">הוספת העצירה הראשונה</string>
     <string name="subsequent_dest_description">העברת היעד מעלה ויצירתו</string>
     <string name="show_closed_notes">הצגת הערות סגורות</string>
-    <string name="distance_farthest">מרחק: הרחוק ביותר בהתחלה</string>
-    <string name="distance_nearest">מרחק: הקרוב ביותר בהתחלה</string>
+    <string name="distance_farthest">הרחוק ביותר בהתחלה</string>
+    <string name="distance_nearest">הקרוב ביותר בהתחלה</string>
     <string name="group_deleted">קבוצה נמחקה</string>
     <string name="clear_all_intermediates">מחיקת כל נקודות הביניים</string>
     <string name="enter_lon">נא להזין קו אורך</string>
@@ -2453,14 +2453,14 @@
     <string name="shared_string_gpx_file">קובץ GPX</string>
     <string name="osc_file">קובץ OSC</string>
     <string name="choose_file_type">נא לבחור את סוג הקובץ</string>
-    <string name="osm_edits_export_desc">נא לבחור את סוג הייצור: הערות OSM, נקודות עניין או גם וגם.</string>
+    <string name="osm_edits_export_desc">נא לבחור את סוג הייצוא: הערות OSM, נקודות עניין או גם וגם.</string>
     <string name="all_data">כל הנתונים</string>
     <string name="osm_notes">הערות OSM</string>
     <string name="parked_at">מיקום החנייה</string>
     <string name="track_points_category_name">נקודות דרך, נקודות עניין, תכונות עם שם</string>
     <string name="shared_string_time_span">מסגרת זמן</string>
     <string name="upload_osm_note_description">ניתן להעלות את הערות ה־OSM שלך באופן אנונימי או על ידי שימוש בפרופיל שלך ב־OpenStreetMap.org.</string>
-    <string name="trip_rec_notification_settings_desc">הצגת התראת מערכת שמאפשרת לך להתחיל הקלטת טיול.</string>
+    <string name="trip_rec_notification_settings_desc">הצגת התראת מערכת שמאפשרת הקלטת טיול.</string>
     <string name="shared_string_paused">הופסק</string>
     <string name="shared_string_recorded">הוקלט</string>
     <string name="rendering_attr_contourColorScheme_description">ערכת הצבעים של קווי המתאר</string>
@@ -2494,13 +2494,13 @@
     <string name="min_mile">דק׳/מ׳</string>
     <string name="min_km">דק׳/ק״מ</string>
     <string name="lang_lo">לאו</string>
-    <string name="wikivoyage_search_hint">חיפוש: מדינה, עיר, מחוז</string>
+    <string name="wikivoyage_search_hint">חיפוש אחר מדינה, עיר או מחוז</string>
     <string name="saved_articles">ערכים שנוספו למועדפים</string>
     <string name="shared_string_explore">סיור</string>
     <string name="access_disable_offroute_recalc">אין אפשרות לחישוב מסלול מחדש לאחר עזיבת המסלול</string>
     <string name="access_disable_offroute_recalc_descr">אין אפשרות לחישוב המסלול מחדש לאחר חריגה מהמסלול.</string>
     <string name="download_files_error_not_enough_space">אין מספיק מקום! שטח האחסון הנדרש הוא {3} מ״ב באופן זמני, {1} מ״ב באופן קבוע. השטח הזמין הוא {2} מ״ב בלבד.</string>
-    <string name="fav_point_dublicate">שם נקודה מועדפת כפול</string>
+    <string name="fav_point_dublicate">צוין שם כפול למועדף</string>
     <string name="shared_string_read">נקרא</string>
     <string name="shared_string_contents">תכנים</string>
     <string name="transport_nearby_routes">בסביבת</string>
@@ -2515,14 +2515,14 @@
     <string name="download_maps_travel">מדריכי תיירות</string>
     <string name="shared_string_wikivoyage">ויקימסע</string>
     <string name="article_removed">המאמר הוסר</string>
-    <string name="fav_point_emoticons_message">שם המועדף השתנה לביטוי %1$s כדי להתאים כראוי לשמירת המחרוזת עם הרגשונים לקובץ.</string>
+    <string name="fav_point_emoticons_message">שם המועדף השתנה לביטוי ‚%1$s’ כדי לשמור את המחרוזת עם הרגשונים לקובץ.</string>
     <string name="save_track_interval_globally">הפרשי רישום</string>
     <string name="rendering_attr_hideWoodScrubs_name">עצים וצמחיה נמוכה</string>
     <string name="shared_string_waypoint">נקודת דרך</string>
     <string name="delay_navigation_start">התחלת הנחייה לפי פניות אוטומטית</string>
     <string name="gpx_timespan">טווח זמן: %1$s</string>
     <string name="index_item_world_seamarks">נקודות ציון ימיות</string>
-    <string name="app_modes_choose_descr">נא לבחור את הפרופילים שיופיעו ביישומון.</string>
+    <string name="app_modes_choose_descr">נא לבחור את הפרופילים שיופיעו.</string>
     <string name="base_world_map">מפת בסיס עולמית</string>
     <string name="map_widget_fps_info">פרטי ניפוי שגיאות לתמונות לשנייה</string>
     <string name="osmand_plus_extended_description_part5">תכונות בטיחות
@@ -2600,7 +2600,7 @@
     <string name="favorite_autofill_toast_text">" נשמר אל "</string>
     <string name="purchase_dialog_title">נא לבחור בתכנית</string>
     <string name="purchase_dialog_travel_description">עליך לרכוש את אחד מהפריטים הבאים כדי לקבל את תכונת הדרכות התיירות:</string>
-    <string name="purchase_dialog_subtitle">נא לבחור את הפריט המתאים:</string>
+    <string name="purchase_dialog_subtitle">נא לבחור את הפריט המתאים</string>
     <string name="rendering_attr_depthContours_name">קווי עומק ימיים</string>
     <string name="download_files_question_space_with_temp">להוריד {0} קבצים? המקום שינוצל באחסון הוא {3} מ״ב באופן זמני, {1} מ״ב באופן קבוע. ({2} מ״ב פנויים.)</string>
     <string name="world_map_download_descr">מפת הבסיס העולמית (המכסה את כל העולם ברמות תקריב נמוכות) חסרה או שאינה עדכנית. נא לשקול להוריד אותה כדי לקבל סקירה גלובלית.</string>
@@ -2616,7 +2616,7 @@
     <string name="unlimited_downloads">הורדות ללא הגבלה</string>
     <string name="wikipedia_offline">ויקיפדיה בלתי מקוונת</string>
     <string name="unlock_all_features">שחרור כל התכונות של OsmAnd</string>
-    <string name="android_19_location_disabled">החל מגרסה 4.4 של Android ‏(KitKat) לא ניתן להוריד ולעדכן מפות לתיקיית האחסון הישנה (%s). להעתיק את כל הקבצים של OsmAnd למיקום האחסון החדש? 
+    <string name="android_19_location_disabled">בגרסה 4.4 של Android ‏(KitKat) ואילך תיקיית האחסון הישנה (%s) אינה תקפה עוד. להעתיק את כל הקבצים של OsmAnd למיקום האחסון החדש\? 
 \n הערה 1: הקבצים הקודמים שלך יישארו כמו שהם (ניתן יהיה למחוק אותם ידנית). 
 \n הערה 2: במיקום האחסון החדש לא תהיה אפשרות לשתף קבצים בין OsmAnd לבין OsmAnd+‎.</string>
     <string name="osmand_extended_description_part1">OsmAnd ‏(OSM Automated Navigation Directions - ניווט והכוונה אוטומטיים) הוא יישומון מפה וניווט עם גישה לנתוני OpenStreetMap (OSM) החופשיים, הבינלאומיים באיכות גבוהה.
@@ -2630,7 +2630,7 @@
     <string name="download_file">הורדת קובץ</string>
     <string name="start_editing_card_image_text">מדריך התיירות המקוון שכל אחד יכול לערוך.</string>
     <string name="welcome_to_open_beta_description">מדריכי התיירות מבוססים על ויקימסע. ניתן לבדוק את כל האפשרויות במהלך הבטא הפתוחה בחינם. לאחר סיום תקופת הבטא, מדריכי התיירות יהיו זמינים לנרשמי OsmAnd ללא הגבלה ולבעלי OsmAnd+‎.</string>
-    <string name="start_editing_card_description">ניתן וכדאי לערוך כל ערך בוויקימסע. השיתוף דורש את הידע, הניסיון, הכישרון ואת תשומת הלב שלך</string>
+    <string name="start_editing_card_description">ניתן וכדאי לערוך כל ערך בוויקימסע. השיתוף דורש את הידע, הניסיון, הכישרון ואת תשומת הלב שלך.</string>
     <string name="start_editing">להתחיל בעריכה</string>
     <string name="get_unlimited_access">קבלת גישה בלתי מוגבלת</string>
     <string name="welcome_to_open_beta">ברוך בואך לבטא הפתוחה</string>
@@ -2639,17 +2639,17 @@
     <string name="contour_lines_hillshade_maps">קווי מתאר ומפות הצללה</string>
     <string name="popular_destinations">יעדים נפוצים</string>
     <string name="osm_live_header">מינוי זה מאפשר לך לקבל עדכונים שעתיים של כל המפות ברחבי העולם. חלק מההכנסה חוזר אל קהילת OSM והוא מוענק לכל תורם OSM. אם OsmAnd ו־OSM נושאים חן בעיניך וברצונך לתמוך ולהיתמך על ידיהם, זו הדרך המושלמת לעשות זאת.</string>
-    <string name="record_plugin_description">תוסף זה מפעיל את התכונה להקלטת ולשמירת המסלולים שלך על ידי נגיעה באופן ידני בווידג׳ט רישום ה־GPX במסך המפה, או גם לערוך רישום של כל נתיבי הניווט שלך לקובץ GPX.
-\n
+    <string name="record_plugin_description">תוסף זה מפעיל את התכונה להקלטת ולשמירת המסלולים שלך על ידי נגיעה באופן ידני בווידג׳ט רישום ה־GPX במפה, או גם לערוך רישום של כל נתיבי הניווט שלך לקובץ GPX. 
+\n 
 \nניתן לשתף נתיבים מוקלטים עם חבריך או להשתמש בהם כתרומה ל־OSM. אתלטים יכולים להשתמש במסלולים מוקלטים כדי לעקוב אחר האימונים שלהם. ניתן לבצע ניתוח מסלול בסיסי ישירות ב־OsmAnd, כמו זמני הקפה, מהירות ממוצעת וכו׳, כמו כן, ניתן לנתח את המסלולים בשלב מאוחר יותר על ידי כלי ניתוח מיוחדים מגורמי צד־שלישי.</string>
     <string name="watch">צפייה</string>
-    <string name="save_global_track_interval_descr">נא לבחור מרווח בין הקלטות כלליות של מסלול (מופעל דרך וידג׳ט ה־GPX על המפה).</string>
+    <string name="save_global_track_interval_descr">נא לציין מרווח בין הקלטות כלליות של מסלול (מופעל דרך וידג׳ט ה־GPX על המפה).</string>
     <string name="transport_nearby_routes_within">נתיבים קרובים בטווח של עד</string>
     <string name="disable_recording_once_app_killed_descrp">רישום ה־GPX יושהה כאשר היישומון ייסגר (דרך היישומונים האחרונים). (התראות הרקע של OsmAnd תיעלמנה מסרגל ההודעות של Android.)</string>
     <string name="action_create">פעולת יצירה</string>
     <string name="action_modify">פעולת שינוי</string>
     <string name="action_delete">פעולת מחיקה</string>
-    <string name="save_track_to_gpx_globally_descr">ניתן להפעיל או לכבאות את רישום המיקום הכללי לקובץ GPX בעזרת הווידג׳ט לרישום GPX על מסך המפה.</string>
+    <string name="save_track_to_gpx_globally_descr">ניתן להפעיל או לכבאות את רישום המיקום הכללי לקובץ GPX בעזרת הווידג׳ט לרישום GPX על המפה.</string>
     <string name="osmand_extended_description_part2">ניווט עם GPS 
 \n • בחירה בין מצב בלתי מקוון (ללא עלויות נדידה בעת שהיה בחו״ל) לבין מצב מקוון (מהיר יותר) 
 \n • הנחייה קולית פנייה אחר פנייה (קולות מוקלטים או מעובדים) 
@@ -2772,11 +2772,11 @@
     <string name="edit_tilesource_elliptic_tile">היטל כדורי</string>
     <string name="hide_full_description">הסתרת התיאור המלא</string>
     <string name="show_full_description">הצגת התיאור המלא</string>
-    <string name="nautical_render_descr">סגנון לניווט ימי. תכונות מפתח: מצופים, מגדלורים, מסלולי נהרות, סימונים ומסלולים לניווט בים, מעגנים, שירותי סימונים ימיים, קווי מתאר לתיאור עומק.</string>
+    <string name="nautical_render_descr">לניווט ימי. לרבות מצופים, מגדלורים, מסלולי נהרות, סימונים ומסלולים לניווט בים, מעגנים, שירותי סימונים ימיים וקווי מתאר לתיאור עומק.</string>
     <string name="ski_map_render_descr">סגנון גלישת סקי. תכונות מפתח: עיבוד מסלולי גלישה, מעליות סקי ותכונות סקי נוספות בדרך נוחה. עצמים משניים במפה פחות מושכים תשומת לב.</string>
-    <string name="light_rs_render_descr">סגנון פשוט וחד לניווט עם מכונית. נוח לצפייה במצב לילה. תכונות מפתח: קווי מתאר, כבישים בניגודיות גבוהה ובכתום, פריטים משניים במפה פחות מושכים תשומת לב.</string>
+    <string name="light_rs_render_descr">סגנון נהיגה פשוט. מצב לילה עדין, לרבות קווי מתאר, כבישים בניגודיות גבוהה ובכתום, פריטים משניים במפה מעומעמים.</string>
     <string name="topo_render_descr">סגנונות ניגודיות תוכננו בעיקר לטובת טיולי הרים, מסלולי טיול ורכיבה על אופניים בטבע. תצוגה מותאמת לקריאה בתנאי תאורת חוץ מורכבים. תכונות מפתח: ניגודיות בין דרכים לעצמים בטבע, סוגים שונים של מסלולים, קווי מתאר עם הגדרות מתקדמות, פרטים נוספים ברמות תקריב מתואמות מעבר לסגנון בררת המחדל. אפשרות שלמות משטח מאפשרת להבדיל בין דרכים עם איכות משטח שונה. אין מצב לילה.</string>
-    <string name="mapnik_render_descr">סגנון עיבוד מפה בתצורת ‚Mapnik’. תכונות מפתח: הצבעים דומים לסגנון של ‚Mapnik’.</string>
+    <string name="mapnik_render_descr">סגנון ‚Mapnik’ מיושן כבררת מחדל. הצבעים דומים ל־‚Mapnik’.</string>
     <string name="default_render_descr">סגנון מטרה כללית. עיבוד נקי יותר בערים מאוכלסות לעייפה. תכונות מפתח: קווי מתאר, שלמות המשטח, הגבלות גישה, סימוני מספרי כבישים, עיבוד נתיבים לפי מדד SAC, תכונות ספורט מים לבנים.</string>
     <string name="shared_string_bookmark">סימנייה</string>
     <string name="off_road_render_descr">מתאים לנהיגת שטח. מתאים לשימוש עם תמונות לוויין ירוקות כמפה בשכבה שמתחת. נקודות מפתח: דרכים ראשיות צרות יותר, המסלולים, דרכי הגישה, מסלולי האופניים ודרכים נוספות עבים יותר.</string>
@@ -2832,7 +2832,7 @@
 \n"</string>
     <string name="ask_for_location_permission">נא להעניק ל־OsmAnd גישה למיקום כדי להמשיך.</string>
     <string name="rendering_value_black_name">שחור</string>
-    <string name="more_transport_on_stop_hint">יש תחבורה נוספת בתחנה הזו.</string>
+    <string name="more_transport_on_stop_hint">תחבורה נוספת עוברת בתחנה הזו.</string>
     <string name="search_street">חיפוש רחוב</string>
     <string name="start_search_from_city">נא לבחור עיר/יישוב/אזור תחילה</string>
     <string name="shared_string_restore">שחזור</string>
@@ -2854,7 +2854,7 @@
     <string name="osm_live_payment_renews_annually">מתחדש שנתית</string>
     <string name="default_price_currency_format">%1$.2f %2$s</string>
     <string name="osm_live_payment_header">מחזור תשלום:</string>
-    <string name="osm_live_payment_contribute_descr">חלק מההכנסות נתרמות לטובת מתנדבי OpenStreetMap.</string>
+    <string name="osm_live_payment_contribute_descr">התורמות מסייעות במימון מאמצי המיפוי של OpenStreetMap.</string>
     <string name="powered_by_osmand">על ידי OsmAnd</string>
     <string name="osm_live_subscriptions">מינויים</string>
     <string name="mapillary_menu_title_pano">הצגת תמונות 360° בלבד</string>
@@ -2906,7 +2906,7 @@
     <string name="routeInfo_road_types_name">סוגי כבישים</string>
     <string name="exit_at">לצאת ב־</string>
     <string name="quick_action_show_hide_gpx_tracks">הצגה/הסתרה של מסלולי GPX</string>
-    <string name="quick_action_show_hide_gpx_tracks_descr">נגיעה בכפתור פעולה זה מציגה או מסתירה את מסלולי ה־GPX הנבחרים במפה</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">בורר להצגה או הסתרה של מסלולי ה־GPX הנבחרים במפה.</string>
     <string name="quick_action_gpx_tracks_hide">הסתרת מסלולי GPX</string>
     <string name="quick_action_gpx_tracks_show">הצגת מסלולי GPX</string>
     <string name="use_osm_live_public_transport_description">הפעלת תחבורה ציבורית לשינויים ב־OsmAnd החי.</string>
@@ -2942,7 +2942,7 @@
     <string name="shared_string_walk">הליכה</string>
     <string name="save_poi_value_exceed_length">נא לקצר את אורך התגית „%s” ל־255 תווים ומטה.</string>
     <string name="save_poi_value_exceed_length_title">אורך הערך „%s”</string>
-    <string name="public_transport_warning_descr_blog">מידע נוסף על האופן בו OsmAnd מחשב מסלולים בבלוג שלנו.</string>
+    <string name="public_transport_warning_descr_blog">מידע נוסף על הניווט עם OsmAnd ניתן למצוא בבלוג שלנו.</string>
     <string name="public_transport_warning_title">ניווט עם תחבורה ציבורית נמצא כרגע בשלבי ניסוי, עלולים להופיע שגיאות ואי־דיוקים.</string>
     <string name="add_intermediate">הוספת נקודת ביניים</string>
     <string name="rendering_attr_surface_dirt_name">עפר</string>
@@ -3026,9 +3026,9 @@
     <string name="searching_gps">בחיפוש אחר GPS</string>
     <string name="coordinates_widget">וידג׳ט נקודות ציון</string>
     <string name="external_input_device">התקני קלט חיצוניים</string>
-    <string name="external_input_device_descr">נא לבחור התקן בתור מקלדת גנרית או WunderLINQ כפקדים חיצוניים.</string>
+    <string name="external_input_device_descr">נא לבחור התקן שליטה חיצוני כגון מקלדת או WunderLINQ.</string>
     <string name="sett_no_ext_input">ללא</string>
-    <string name="sett_generic_ext_input">מקלדת גנרית</string>
+    <string name="sett_generic_ext_input">מקלדת</string>
     <string name="sett_wunderlinq_ext_input">WunderLINQ</string>
     <string name="sett_parrot_ext_input">Parrot</string>
     <string name="turn_on_profile_desc">נא להפעיל לפחות פרופיל יישומון אחד כדי להשתמש בהגדרה הזו.</string>
@@ -3075,7 +3075,7 @@
     <string name="select_base_profile_dialog_title">בחירת פרופיל בסיס</string>
     <string name="process_downloading_service">שירות ההורדות של OsmAnd</string>
     <string name="press_again_to_change_the_map_orientation">יש לגעת שוב כדי לשנות את כיוון המפה</string>
-    <string name="default_speed_dialog_msg">משמש לחישוב מועד ההגעה הצפוי</string>
+    <string name="default_speed_dialog_msg">משמש להערכת מועד ההגעה הצפוי בסוגי דרכים בלתי מוכרים ולמגבלות מהירות לכל הדרכים (עשוי להשפיע על המסלול)</string>
     <string name="new_profile">פרופיל חדש</string>
     <string name="shared_string_crash">קריסה</string>
     <string name="last_launch_crashed">הטעינה האחרונה של OsmAnd קרסה. נא לסייע לנו לשפר את OsmAnd על ידי שיתוף הודעת השגיאה.</string>
@@ -3347,11 +3347,11 @@
     <string name="routing_attr_driving_style_prefer_unpaved_name">להעדיף דרכים לא סלולות</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">להעדיף דרכים לא סלולות.</string>
     <string name="layer_osm_edits">עריכות OSM</string>
-    <string name="quick_action_contour_lines_descr">נגיעה בכפתור פעולה זה מציגה או מסתירה קווי מתאר במפה</string>
+    <string name="quick_action_contour_lines_descr">בורר להצגה או להסתרה של קווי מתאר במפה.</string>
     <string name="quick_action_contour_lines_show">הצגת קווי מתאר</string>
     <string name="quick_action_contour_lines_hide">הסתרת קווי מתאר</string>
     <string name="quick_action_show_hide_contour_lines">הצגה/הסתרה של קווי מתאר</string>
-    <string name="quick_action_hillshade_descr">נגיעה בכפתור פעולה זה מציגה או מסתירה הצללה במפה</string>
+    <string name="quick_action_hillshade_descr">בורר להצגה או הסתרה של הצללה במפה.</string>
     <string name="quick_action_hillshade_show">הצגת הצללה</string>
     <string name="quick_action_hillshade_hide">הסתרת הצללה</string>
     <string name="quick_action_show_hide_hillshade">הצגה/הסתרה של הצללה</string>
@@ -3369,4 +3369,9 @@
     <string name="rendering_value_white_name">לבן</string>
     <string name="swap_two_places">החלפה בין %1$s לבין %2$s</string>
     <string name="route_start_point">נקודת התחלה</string>
+    <string name="monthly_map_updates">עדכונים חודשיים למפה</string>
+    <string name="daily_map_updates">עדכונים שעתיים למפה</string>
+    <string name="send_search_query_description">שאילתת החיפוש שלך תישלח אל: „%1$s”, בצירוף המיקום שלך.
+\n
+\n לא נאספים פרטים אישיים, רק הנתונים שנחוצים לשיפור החיפוש.</string>
 </resources>
