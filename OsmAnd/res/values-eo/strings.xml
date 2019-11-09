@@ -2829,7 +2829,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="rendering_value_black_name">Nigra</string>
     <string name="more_transport_on_stop_hint">Estas pliaj transportiloj ĉe tiu ĉi haltejo.</string>
     <string name="search_street">Serĉi straton</string>
-    <string name="start_search_from_city">Elekti urbon</string>
+    <string name="start_search_from_city">Elekti urbon/lokon</string>
     <string name="shared_string_restore">Restarigi</string>
     <string name="keep_passed_markers_descr">Markoj aldonitaj kiel grupo de ŝatataj aŭ pasigitaj GPX-navigadpunktoj restos sur la mapo. Se la grupo estas malaktiva, ĝiaj markoj malaperos de la mapo.</string>
     <string name="keep_passed_markers">Ne kaŝi pasigitajn map-markojn de la mapo</string>
@@ -2848,8 +2848,8 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="osm_live_payment_renews_quarterly">Reaboni ĉiukvaronjare</string>
     <string name="osm_live_payment_renews_annually">Reaboni ĉiujare</string>
     <string name="default_price_currency_format">%1$,2f %2$s</string>
-    <string name="osm_live_payment_header">Elektu la plej oportunan pagmanieron por vi:</string>
-    <string name="osm_live_payment_contribute_descr">Parto de enspezoj transdoniĝas al OpenStreetMap-kontribuantoj.</string>
+    <string name="osm_live_payment_header">Intertempo de pagoj:</string>
+    <string name="osm_live_payment_contribute_descr">Donacoj helpos fondi kartografion de OpenStreetMap.</string>
     <string name="powered_by_osmand">De OsmAnd</string>
     <string name="osm_live_subscriptions">Abonoj</string>
     <string name="mapillary_menu_title_pano">Montri nur bildojn 360°</string>
@@ -2861,9 +2861,9 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="quick_action_switch_day_mode">Taga reĝimo</string>
     <string name="quick_action_switch_night_mode">Nokta reĝimo</string>
     <string name="quick_action_day_night_switch_mode">Taga/nokta reĝimo</string>
-    <string name="add_destination_point">Aldoni celon</string>
+    <string name="add_destination_point">Elekti celon</string>
     <string name="add_intermediate_point">Aldoni intercelon</string>
-    <string name="add_start_point">Aldoni komencpunkton</string>
+    <string name="add_start_point">Elekti komencpunkton</string>
     <string name="intermediate_waypoint">Intercelo</string>
     <string name="transfers">transveturiliĝoj</string>
     <string name="on_foot">piede</string>
@@ -2902,7 +2902,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="exit_at">Eliru ĉe</string>
     <string name="sit_on_the_stop">Atendu ĉe haltejo</string>
     <string name="quick_action_show_hide_gpx_tracks">Montri/kaŝi GPX-spurojn</string>
-    <string name="quick_action_show_hide_gpx_tracks_descr">Frapetu tiun ĉi ag-butonon por montri/kaŝi elektitajn GPX-spurojn sur la mapo.</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Frapetu por montri/kaŝi elektitajn GPX-spurojn sur la mapo.</string>
     <string name="quick_action_gpx_tracks_hide">Kaŝi GPX-spurojn</string>
     <string name="quick_action_gpx_tracks_show">Montri GPX-spurojn</string>
     <string name="release_3_3">• nova ekrano “navigi”: butonoj por navigi al hejmo aŭ laborejo, butono “antaŭa kurso”, listo de aktivaj GPX-spuroj kaj map-markoj, serĉ-historio
@@ -2923,7 +2923,7 @@ Indikas lokon:  %1$s x %2$s"</string>
 \n</string>
     <string name="use_osm_live_public_transport_description">Aktivigi publikan transporton por ŝanĝoj OsmAnd Live.</string>
     <string name="use_osm_live_public_transport">Publika transporto OsmAnd Live</string>
-    <string name="public_transport_warning_descr_blog">Legu pli pri kiel OsmAnd kalkulas kursojn ĉe nia taglibro (angle aŭ ruse).</string>
+    <string name="public_transport_warning_descr_blog">Pliaj informoj pri kiel OsmAnd difinas kursojn estas legeblaj ĉe nia taglibro.</string>
     <string name="public_transport_warning_title">Navigado per la publika transporto nun estas en beta-testado, eraroj kaj malprecizoj povas okazi.</string>
     <string name="add_intermediate">Aldoni intercelon</string>
     <string name="transfers_size">%1$d transveturiliĝoj</string>
@@ -2974,8 +2974,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="rendering_attr_highway_class_cycleway_name">Biciklvojoj</string>
     <string name="rendering_attr_undefined_name">Nedifinitaj</string>
     <string name="shared_string_walk">Iru</string>
-    <string name="save_poi_value_exceed_length">Valoro de la etikedo “%s” ne povas troigi 255 signojn.
-\nBonvolu redakti ĝin antaŭ pluigi.</string>
+    <string name="save_poi_value_exceed_length">Mallongigu la etikedon“%s” por estu pli mallonga ol 255 signoj.</string>
     <string name="save_poi_value_exceed_length_title">Longo de valoro “%s”</string>
     <string name="avoid_pt_types_descr">Elektu specojn de publik-transportiloj por eviti dum navigado:</string>
     <string name="avoid_pt_types">Eviti transportilojn…</string>
@@ -2986,17 +2985,17 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="angular_measeurement_descr">Elekti mezurunuon por azimuto.</string>
     <string name="routing_attr_avoid_sett_name">Eviti malglatan ŝtonpavimon</string>
     <string name="routing_attr_avoid_sett_description">Eviti rulŝtonajn kahelojn kaj kvadratajn ŝtonojn</string>
-    <string name="routing_attr_avoid_tram_name">Eviti tramojn</string>
+    <string name="routing_attr_avoid_tram_name">Sen tramoj</string>
     <string name="routing_attr_avoid_tram_description">Eviti tramojn</string>
-    <string name="routing_attr_avoid_bus_name">Eviti aŭtobusojn</string>
+    <string name="routing_attr_avoid_bus_name">Sen busoj</string>
     <string name="routing_attr_avoid_bus_description">Eviti aŭtobusojn kaj trolebusojn</string>
-    <string name="routing_attr_avoid_share_taxi_name">Eviti komunajn taksiojn</string>
+    <string name="routing_attr_avoid_share_taxi_name">Sen komunaj taksioj</string>
     <string name="routing_attr_avoid_share_taxi_description">Eviti komunajn taksiojn (aŭtobusetojn)</string>
-    <string name="routing_attr_avoid_train_name">Eviti trajnojn</string>
+    <string name="routing_attr_avoid_train_name">Sen trajnoj</string>
     <string name="routing_attr_avoid_train_description">Eviti vagonarojn</string>
-    <string name="routing_attr_avoid_subway_name">Eviti metroojn</string>
+    <string name="routing_attr_avoid_subway_name">Sen metrooj</string>
     <string name="routing_attr_avoid_subway_description">Eviti subterajn vagonarojn kaj fervojon malpezan</string>
-    <string name="routing_attr_avoid_ferry_name">Eviti pramojn</string>
+    <string name="routing_attr_avoid_ferry_name">Sen pramoj</string>
     <string name="routing_attr_avoid_ferry_description">Eviti pramojn</string>
     <string name="release_3_3_7">• montri tempon inter transveturiliĝoj de publika transporto 
 \n 
@@ -3010,8 +3009,8 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="send_log">Sendi erar‑protokolon</string>
     <string name="files_moved">Movis %1$d dosierojn (%2$s).</string>
     <string name="files_copied">Kopiis %1$d dosierojn (%2$s).</string>
-    <string name="files_failed">Fiaskis kopii %1$d dosierojn (%2$s).</string>
-    <string name="files_present">%1$d dosieroj (%2$s) estas en la antaŭa loko: %3$s.</string>
+    <string name="files_failed">Ne povis kopii %1$d dosierojn (%2$s).</string>
+    <string name="files_present">%1$d dosieroj (%2$s) estas en la antaŭa loko: “%3$s”.</string>
     <string name="move_maps">Movi mapojn</string>
     <string name="dont_move_maps">Ne movi</string>
     <string name="public_transport_ped_route_title">Tiu ĉi kurso perpiede estas proksimume %1$s kaj povas esti pli rapida ol per publika transporto</string>
@@ -3023,20 +3022,20 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="searching_gps">Determinado de pozicio…</string>
     <string name="coordinates_widget">Fenestraĵo de koordinatoj</string>
     <string name="press_again_to_change_the_map_orientation">Frapetu ree por ŝanĝi map‑orientiĝon</string>
-    <string name="rate_dialog_descr">Bonvolu dediĉi 30 sekundojn por kunhavigi vian opinion kaj taksi nian laboron ĉe Google Play.</string>
-    <string name="button_rate">Taksi</string>
+    <string name="rate_dialog_descr">Bonvolu kunhavigi vian opinion kaj taksi nian laboron ĉe Google Play.</string>
+    <string name="button_rate">Bone</string>
     <string name="shared_string_privacy_policy">privatecan politikon</string>
     <string name="help_us_make_osmand_better">Helpu al ni igi OsmAnd pli bona!</string>
-    <string name="make_osmand_better_descr">Bonvolu permesi al OsmAnd kolekti kaj pritrakti anonimajn datumojn pri uzado de la aplikaĵo. Ni ne kolektos kaj konservos datumojn pri via pozicio aŭ pri foliumataj lokoj sur la mapo.
-\n 
-\nVi povas ŝanĝi vian elekton per agordoj → privateco kaj sekureco.</string>
+    <string name="make_osmand_better_descr">Bonvolu permesi al OsmAnd kolekti kaj pritrakti anonimajn datumojn pri uzado. Neniuj datumoj pri via pozicio kaj pri foliumataj lokoj estas kolektataj.
+\n
+\nŜanĝebla en “agordoj” → “privateco kaj sekureco“.</string>
     <string name="choose_data_to_share">Elektu datumojn por kunhavigi:</string>
     <string name="downloaded_maps">Elŝutitaj mapoj</string>
     <string name="visited_screens">Vidigitaj ekranoj</string>
     <string name="collected_data_descr">Elekti datumojn por kunhavigi al programistoj de OsmAnd.</string>
-    <string name="downloaded_maps_collect_descr">Helpu al ni scii pri mapoj de kiuj regionoj kaj landoj estas la plej popularaj.</string>
-    <string name="visited_screens_collect_descr">Helpu al ni scii pri kiuj eblaĵoj de OsmAnd estas la plej uzataj.</string>
-    <string name="privacy_and_security_change_descr">Frapetu “permesi” por akcepti nian %1$s</string>
+    <string name="downloaded_maps_collect_descr">Helpu al ni scii pri populareco de mapoj de landoj kaj regionoj.</string>
+    <string name="visited_screens_collect_descr">Helpu al ni scii pri populareco de eblaĵoj de OsmAnd.</string>
+    <string name="privacy_and_security_change_descr">Frapetu “permesi” se vi akceptas nian %1$s</string>
     <string name="settings_privacy_and_security">Privateco kaj sekureco</string>
     <string name="settings_privacy_and_security_desc">Elekti datumojn por kunhavigi kun ni</string>
     <string name="shared_string_no_thank_you">Ne, mi ne volas</string>
@@ -3062,19 +3061,19 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="profile_alert_need_routing_type_title">Elektu specon de navigado</string>
     <string name="profile_alert_need_routing_type_msg">Bonvolu elekti specon de navigo por la nova aplikaĵa profilo</string>
     <string name="profile_alert_need_profile_name_title">Entajpu nomon por profilo</string>
-    <string name="profile_alert_need_profile_name_msg">Nomo de profilo ne estu malplena!</string>
+    <string name="profile_alert_need_profile_name_msg">Unue devas enigi nomon por profilo.</string>
     <string name="profile_alert_duplicate_name_title">Nomo neebla</string>
     <string name="profile_alert_duplicate_name_msg">Jam ekzistas profilo kun la sama nomo</string>
     <string name="profile_alert_cant_delete_base">Ne eblas forigi implicitajn profilojn de OsmAnd</string>
     <string name="profile_alert_need_save_title">Konservi ŝanĝojn</string>
-    <string name="profile_alert_need_save_msg">Vi devas konservi ŝanĝojn al la profilo antaŭ pluigi</string>
+    <string name="profile_alert_need_save_msg">Unue konservu ŝanĝojn al la profilo</string>
     <string name="profile_alert_delete_title">Forigi profilon</string>
     <string name="profile_alert_delete_msg">Ĉu vi certe volas forigi la profilon “%s”\?</string>
     <string name="select_base_profile_dialog_title">Elektu bazan profilon</string>
     <string name="select_base_profile_dialog_message">Via propra profilo estos bazita sur iu implicita aplikaĵa profilo, kiu difinos bazajn agordojn kiel videblon de fenestraĵoj, unuojn de rapido kaj distanco. Jen implicitaj profiloj kaj ekzemplaj profiloj por krei:</string>
     <string name="select_nav_profile_dialog_title">Elektu navigadan profilon</string>
     <string name="base_profile_descr_car">Aŭto, kamiono, motorciklo</string>
-    <string name="base_profile_descr_bicycle">Biciklo, malgranda motorbiciklo, ĉevalo</string>
+    <string name="base_profile_descr_bicycle">Biciklo, motorbiciklo, ĉevalo</string>
     <string name="base_profile_descr_pedestrian">Promenado, marŝado, kurado</string>
     <string name="base_profile_descr_public_transport">Ĉiuj specoj de publika transporto</string>
     <string name="base_profile_descr_boat">Ŝipo, remado, velado</string>
@@ -3124,7 +3123,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="minmax_speed_dialog_title">Agordi min./maks. rapidon</string>
     <string name="new_profile">Nova profilo</string>
     <string name="shared_string_crash">Paneo</string>
-    <string name="last_launch_crashed">La antaŭa starto de OsmAnd paneis. Helpu al ni plibonigi la aplikaĵon per sendi mesaĝon pri eraro.</string>
+    <string name="last_launch_crashed">OsmAnd paneis dum la antaŭa starto. Helpu al ni plibonigi la aplikaĵon per sendi mesaĝon pri eraro.</string>
     <string name="app_mode_ufo">NIFO</string>
     <string name="release_3_4">• profiloj de aplikaĵo: krei profilojn laŭ viaj bezonoj kun propra emblemo kaj koloro 
 \n 
@@ -3150,16 +3149,16 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="precision_hdop">Precizo horizontale: %s</string>
     <string name="app_mode_offroad">Ekstervoja aŭtomobilo</string>
     <string name="edit_profile_setup_title">Agordi profilon</string>
-    <string name="edit_profile_setup_subtitle">Ĉiu profilo havas siajn proprajn agordojn</string>
-    <string name="edit_profile_setup_map_subtitle">Elekti implicitajn agordojn pri mapo por profilo</string>
-    <string name="edit_profile_screen_options_subtitle">Elekti implicitajn agordojn pri ekrano por profilo</string>
-    <string name="edit_profile_nav_settings_subtitle">Elekti implicitajn agordojn pri navigado por profilo</string>
+    <string name="edit_profile_setup_subtitle">La profilo konservos siajn proprajn agordojn</string>
+    <string name="edit_profile_setup_map_subtitle">Elekti agordojn pri mapo por la profilo</string>
+    <string name="edit_profile_screen_options_subtitle">Elekti agordojn pri ekrano por la profilo</string>
+    <string name="edit_profile_nav_settings_subtitle">Elekti agordojn pri navigado por la profilo</string>
     <string name="routing_attr_max_num_changes_description">Difini maksimuman nombron da ŝanĝoj de transportiloj</string>
     <string name="routing_attr_max_num_changes_name">Nombro da transveturiliĝoj</string>
     <string name="turn_screen_on_router">Teni ekranon ŝaltita</string>
-    <string name="turn_screen_on_time_descr">Agordi tempon post kiu la ekrano malŝaltiĝos.</string>
+    <string name="turn_screen_on_time_descr">Agordi por kiom longe la ekrano estos ŝaltita.</string>
     <string name="turn_screen_on_sensor">Uzi proksimec‑sentilon</string>
-    <string name="turn_screen_on_sensor_descr">Svingu vian manon antaŭ la ekrano por ŝalti la ekranon dum navigi.</string>
+    <string name="turn_screen_on_sensor_descr">Svingu vian manon antaŭ la ekrano por ŝalti ĝin dum navigi.</string>
     <string name="rendering_attr_highway_class_track_grade1_name">Firma</string>
     <string name="rendering_attr_highway_class_track_grade2_name">Plejparte firma</string>
     <string name="rendering_attr_highway_class_track_grade3_name">Mezkvalita</string>
@@ -3367,4 +3366,5 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="rendering_value_white_name">Blanka</string>
     <string name="swap_two_places">Anstataŭigi %1$s per %2$s</string>
     <string name="route_start_point">Komencpunkto</string>
+    <string name="swap_start_and_destination">Anstataŭigi komencpunkton per celo</string>
 </resources>
