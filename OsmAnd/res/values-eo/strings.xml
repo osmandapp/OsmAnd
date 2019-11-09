@@ -3187,7 +3187,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="gpx_join_gaps">Kombini interspacojn</string>
     <string name="app_mode_camper">Kampad‑postveturilo</string>
     <string name="app_mode_campervan">Kampad‑veturilo</string>
-    <string name="rendering_attr_showLez_description">Montri zonojn nur por malalte aer‑malpurigantaj veturiloj. Ne influas voj‑difinadon.</string>
+    <string name="rendering_attr_showLez_description">Montri zonojn nur por malalte aer‑malpurigantaj veturiloj. Ne influas al difinado de kurso.</string>
     <string name="rendering_attr_showLez_name">Montri zonojn de restrikta emisio (LEZ)</string>
     <string name="temporary_conditional_routing">Konsideri portempajn limigojn</string>
     <string name="shared_string_default">Implicita</string>
@@ -3212,36 +3212,36 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="price_free">senpaga</string>
     <string name="get_discount_title">Akiru %1$d %2$s kun rabato %$3$s.</string>
     <string name="get_free_trial_title">Ekigu %1$d %2$s senpagan provperiodon.</string>
-    <string name="get_discount_first_part">%1$s por unua %2$s</string>
-    <string name="get_discount_first_few_part">%1$s por unuaj %2$s</string>
+    <string name="get_discount_first_part">%1$s por la unua %2$s</string>
+    <string name="get_discount_first_few_part">%1$s por la unuaj %2$s</string>
     <string name="get_discount_second_part">sekve %1$s</string>
     <string name="cancel_subscription">Rezigni abonon</string>
     <string name="price_and_discount">%1$s • konservu %2$s</string>
-    <string name="configure_profile_info">Ĉiuj subaj agordoj aplikiĝas nur al la elektita profilo.</string>
+    <string name="configure_profile_info">Agordoj por profilo:</string>
     <string name="utm_format_descr">OsmAnd uzas la formon UTM Norma, kiu estas simila, sed ne identa kun la formo UTM NATO.</string>
     <string name="shared_string_example">Ekzemplo</string>
     <string name="navigate_point_format_utm">UTM Norma</string>
     <string name="navigate_point_format_olc">Malferma pozicia kodo (OLC)</string>
-    <string name="coordinates_format_info">La elektita formo estos aplikita al ĉiuj lokoj en la aplikaĵo.</string>
+    <string name="coordinates_format_info">La elektita formo estos aplikita al la tuta aplikaĵo.</string>
     <string name="pref_selected_by_default_for_profiles">Tiu ĉi agordo estas implicita por profiloj: %s</string>
-    <string name="change_default_settings">Ŝanĝi implicitajn agordojn</string>
+    <string name="change_default_settings">Ŝanĝi agordojn</string>
     <string name="discard_changes">Rezigni ŝanĝojn</string>
-    <string name="apply_to_current_profile">Apliki al la nuna profilo %1$s</string>
+    <string name="apply_to_current_profile">Apliki nur al “%1$s”</string>
     <string name="apply_to_all_profiles">Apliki al ĉiuj profiloj</string>
     <string name="start_up_message_pref">Mesaĝo je starto</string>
     <string name="analytics_pref_title">Analiziloj</string>
-    <string name="turn_screen_on_info">Montri mapon dum navigado sur la ŝlos‑ekrano.</string>
-    <string name="route_parameters_info">Tiuj ĉi agordoj influas difinadon de kurso. Estos aplikitaj nur al la elektita profilo: %1$s.</string>
+    <string name="turn_screen_on_info">Montri mapon sur la ŝlos‑ekrano dum navigado.</string>
+    <string name="route_parameters_info">Agordoj pri kurs‑difinado por la elektita profilo “%1$s”.</string>
     <string name="wake_time">Tempo de irado</string>
     <string name="units_and_formats">Unuoj kaj formoj</string>
     <string name="appearance">Aspekto</string>
     <string name="map_look_descr">Alĝustigi mapon</string>
     <string name="map_look">Map‑aspekto</string>
-    <string name="list_of_installed_plugins">Listo de instalitaj kromprogramoj</string>
+    <string name="list_of_installed_plugins">Instalitaj kromprogramoj</string>
     <string name="configure_navigation">Alĝustigi navigadon</string>
     <string name="general_settings_profile_descr">Etoso, unuoj, regiono</string>
     <string name="configure_profile">Agordi profilon</string>
-    <string name="screen_alerts_descr">Avertoj montriĝos ĉe maldekstra suba angulo de la ekrano dum navigado.</string>
+    <string name="screen_alerts_descr">Avertoj montriĝas ĉe maldekstra suba angulo dum navigado.</string>
     <string name="switch_profile">Ŝanĝi profilon</string>
     <string name="language_and_output">Lingvo kaj eligo</string>
     <string name="reset_to_default">Restarigi implicitajn</string>
@@ -3270,11 +3270,11 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="change_data_storage_full_description">Ĉu movi datum‑dosierojn OsmAnd al la nova loko\?
 \n%1$s → %2$s</string>
     <string name="enter_path_to_folder">Entajpu dosier‑indikon</string>
-    <string name="shared_string_select_folder">Elektu dosierujon</string>
+    <string name="shared_string_select_folder">Dosierujo…</string>
     <string name="paste_Osmand_data_folder_path">Algluu dosier‑indikon por dosierujo de OsmAnd‑datumoj</string>
     <string name="change_osmand_data_folder_question">Ĉu ŝanĝi datum‑dosierujon OsmAnd\?</string>
     <string name="move_maps_to_new_destination">Movi al la nova loko</string>
-    <string name="internal_app_storage_description">Interna konservejo, kaŝita de uzanto kaj de aliaj aplikaĵoj, do nur OsmAnd povas aliri viajn datumojn</string>
+    <string name="internal_app_storage_description">Interna konservejo, kaŝita de uzanto kaj de aliaj aplikaĵoj, nur alirebla al OsmAnd</string>
     <string name="change_data_storage_folder">Ŝanĝi dosierujon por konservi datumojn</string>
     <string name="rendering_attr_piste_type_snow_park_name">neĝ‑parko</string>
     <string name="rendering_attr_piste_type_sleigh_name">glitveturado (tirata de hundoj)</string>
@@ -3309,10 +3309,10 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="shared_string_memory_mb_desc">%1$s MB</string>
     <string name="shared_string_memory_kb_desc">%1$s kB</string>
     <string name="data_storage_preference_summary">%1$s • %2$s</string>
-    <string name="data_storage_space_description">Libera: %1$s GB • Tute: %2$s GB</string>
+    <string name="data_storage_space_description">Libera: %1$s GB (el %2$s GB)</string>
     <string name="track_storage_directory">Dosierujo por konservi spurojn</string>
-    <string name="track_storage_directory_descrp">Povas konservi registritajn spurojn en unu dosierujo aŭ en dosierujoj laŭ monato aŭ tago.</string>
-    <string name="store_tracks_in_rec_directory">Konservi spurojn en unu dosierujo</string>
+    <string name="track_storage_directory_descrp">Povas konservi registritajn spurojn la dosierujo “rec” aŭ en dosierujoj laŭ monato aŭ tago.</string>
+    <string name="store_tracks_in_rec_directory">Konservi spurojn en dosierujo “rec”</string>
     <string name="store_tracks_in_daily_directories">Konservi spurojn en tagaj dosierujoj</string>
     <string name="store_tracks_in_daily_directories_descrp">Konservi registritajn spurojn en subdosierujoj laǔ tago (ekz. 2018-01-01).</string>
     <string name="shared_string_memory_used_tb_desc">Uzita: %1$s TB</string>
@@ -3324,34 +3324,47 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="routing_attr_prefer_unpaved_description">Preferi vojojn sen firma pavimo.</string>
     <string name="update_all_maps">Ĝisdatigi ĉiujn mapojn</string>
     <string name="update_all_maps_q">Ĉu vi certe volas ĝisdatigi ĉiujn (%1$d) mapojn\?</string>
-    <string name="release_3_5">"• ĝisdatigitaj agordoj de aplikaĵo kaj de profiloj: oportuna ordigo laŭ speco, eblaĵo alĝustigi ĉiun profilon
+    <string name="release_3_5">"• ĝisdatigitaj agordoj de aplikaĵo kaj de profiloj: oportuna ordigo laŭ speco, eblaĵo alĝustigi ĉiun profilon 
 \n
-\n• nova ekrano de map‑elŝuto, propono elŝuti rilatan mapon dum foliumi mapon
+\n• nova ekrano de map‑elŝuto, propono elŝuti rilatan mapon dum foliumi mapon 
 \n
-\n•  plibonigoj al nokta reĝimo
+\n•  plibonigoj al nokta reĝimo 
 \n
-\n•  riparitaj kelkaj problemoj pri difinado de vojo
+\n•  riparitaj kelkaj problemoj pri difinado de vojo 
 \n
-\n•  aktualigita fundamenta mapo de mondo, pli detala reto de vojoj
+\n•  aktualigita fundamenta mapo de mondo, pli detala reto de vojoj 
 \n
-\n•  riparitaj problemoj pri superakvitaj arenoj tra la mondo
+\n•  riparitaj problemoj pri superakvitaj arenoj tra la mondo 
 \n
-\n•  skiado: aldonita profilo de altitudo kaj kompliko de skivojo al detaloj pri skivojo
+\n•  skiado: aldonita profilo de altitudo kaj kompliko de skivojo al detaloj pri skivojo 
 \n
 \n•  riparoj de aliaj eraroj
 \n
 \n"</string>
-    <string name="apply_preference_to_all_profiles">Vi povas apliki tiun ĉi ŝanĝon al ĉiuj profiloj aŭ nur al la elektitaj.</string>
+    <string name="apply_preference_to_all_profiles">Vi povas apliki tiun ĉi ŝanĝon al ĉiuj profiloj aŭ nur al la elektita profilo.</string>
     <string name="shared_preference">Komuna</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">Preferi tervojojn</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">Preferi vojojn sen firma pavimo.</string>
     <string name="layer_osm_edits">OSM‑redaktoj</string>
-    <string name="quick_action_contour_lines_descr">Frapetu tiun ĉi ag‑butonon por montri/kaŝi nivelkurbojn sur la mapo.</string>
+    <string name="quick_action_contour_lines_descr">Frapetu por montri/kaŝi nivelkurbojn sur la mapo.</string>
     <string name="quick_action_contour_lines_show">Montri nivelkurbojn</string>
     <string name="quick_action_contour_lines_hide">Kaŝi nivelkurbojn</string>
     <string name="quick_action_show_hide_contour_lines">Montri/kaŝi nivelkurbojn</string>
-    <string name="quick_action_hillshade_descr">Frapetu tiun ĉi ag‑butonon por montri/kaŝi nivelombrumon (reliefon) sur la mapo.</string>
+    <string name="quick_action_hillshade_descr">Frapetu por montri/kaŝi nivelombrumon (reliefon) sur la mapo.</string>
     <string name="quick_action_hillshade_show">Montri nivelombrumon</string>
     <string name="quick_action_hillshade_hide">Kaŝi nivelombrumon</string>
     <string name="quick_action_show_hide_hillshade">Montri/kaŝi nivelombrumon</string>
+    <string name="default_speed_dialog_msg">Uzata por antaŭkalkuli tempon de alveno por vojoj de nekonata speco kaj por limigi rapidon por ĉiuj vojoj (povas ŝanĝi kurson)</string>
+    <string name="tts_initialization_error">Ne povas ekigi parolsintezilon</string>
+    <string name="export_profile">Elporti profilon</string>
+    <string name="exported_osmand_profile">Profilo OsmAnd: %1$s</string>
+    <string name="overwrite_profile_q">Profilo “%1$s” jam ekzistas. Ĉu anstataŭigi ĝin\?</string>
+    <string name="export_profile_failed">Ne povas elporti profilon.</string>
+    <string name="profile_import">Enporti profilon:</string>
+    <string name="profile_import_descr">Por enporti profilon, elektu ĝian dosieron kaj malfermu ĝin per OsmAnd.</string>
+    <string name="file_import_error">Eraro dum enporti %1$s: %2$s</string>
+    <string name="file_imported_successfully">Sukcese enportita: %1$s.</string>
+    <string name="rendering_value_white_name">Blanka</string>
+    <string name="swap_two_places">Anstataŭigi %1$s per %2$s</string>
+    <string name="route_start_point">Komencpunkto</string>
 </resources>
