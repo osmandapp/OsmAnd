@@ -36,6 +36,7 @@ import net.osmand.plus.myplaces.AvailableGPXFragment;
 import net.osmand.plus.myplaces.AvailableGPXFragment.GpxInfo;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
+import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -170,6 +171,10 @@ public class OnSaveCurrentTrackFragment extends BottomSheetDialogFragment {
 		File savedFile = new File(app.getAppCustomization().getTracksDir(), savedGpxName + ".gpx");
 		if (savedGpxName.equalsIgnoreCase(newGpxName)) {
 			return savedFile;
+		}
+		if (Algorithms.isEmpty(newGpxName)) {
+			Toast.makeText(app, R.string.empty_filename, Toast.LENGTH_LONG).show();
+			return null;
 		}
 		return LocalIndexesFragment.renameGpxFile(app, savedFile, newGpxName + ".gpx", null);
 	}
