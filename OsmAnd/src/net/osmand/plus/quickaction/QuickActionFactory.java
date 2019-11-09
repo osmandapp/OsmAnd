@@ -30,6 +30,7 @@ import net.osmand.plus.quickaction.actions.MarkerAction;
 import net.osmand.plus.quickaction.actions.NavAddDestinationAction;
 import net.osmand.plus.quickaction.actions.NavAddFirstIntermediateAction;
 import net.osmand.plus.quickaction.actions.NavAutoZoomMapAction;
+import net.osmand.plus.quickaction.actions.NavDirectionsFromAction;
 import net.osmand.plus.quickaction.actions.NavReplaceDestinationAction;
 import net.osmand.plus.quickaction.actions.NavResumePauseAction;
 import net.osmand.plus.quickaction.actions.NavStartStopAction;
@@ -133,6 +134,7 @@ public class QuickActionFactory {
 
 
 		QuickAction voice = new NavVoiceAction();
+		QuickAction directionFrom = new NavDirectionsFromAction();
 		QuickAction addDestination = new NavAddDestinationAction();
 		QuickAction addFirstIntermediate = new NavAddFirstIntermediateAction();
 		QuickAction replaceDestination = new NavReplaceDestinationAction();
@@ -144,6 +146,9 @@ public class QuickActionFactory {
 
 		if (!voice.hasInstanceInList(active)) {
 			navigationQuickActions.add(voice);
+		}
+		if (!directionFrom.hasInstanceInList(active)) {
+			navigationQuickActions.add(directionFrom);
 		}
 		if (!addDestination.hasInstanceInList(active)) {
 			navigationQuickActions.add(addDestination);
@@ -229,6 +234,9 @@ public class QuickActionFactory {
 
 			case MapUnderlayAction.TYPE:
 				return new MapUnderlayAction();
+
+			case NavDirectionsFromAction.TYPE:
+				return new NavDirectionsFromAction();
 
 			case NavAddDestinationAction.TYPE:
 				return new NavAddDestinationAction();
@@ -323,6 +331,9 @@ public class QuickActionFactory {
 			case MapUnderlayAction.TYPE:
 				return new MapUnderlayAction(quickAction);
 
+			case NavDirectionsFromAction.TYPE:
+				return new NavDirectionsFromAction(quickAction);
+
 			case NavAddDestinationAction.TYPE:
 				return new NavAddDestinationAction(quickAction);
 
@@ -415,6 +426,9 @@ public class QuickActionFactory {
 
 			case MapUnderlayAction.TYPE:
 				return R.drawable.ic_layer_bottom_dark;
+
+			case NavDirectionsFromAction.TYPE:
+				return R.drawable.ic_action_route_direction_from_here;
 
 			case NavAddDestinationAction.TYPE:
 				return R.drawable.ic_action_point_add_destination;
@@ -512,6 +526,9 @@ public class QuickActionFactory {
 			case DayNightModeAction.TYPE:
 				return R.string.quick_action_day_night_switch_mode;
 
+			case NavDirectionsFromAction.TYPE:
+				return R.string.context_menu_item_directions_from;
+
 			case NavAddDestinationAction.TYPE:
 				return R.string.quick_action_add_destination;
 
@@ -557,6 +574,7 @@ public class QuickActionFactory {
 			case TakePhotoNoteAction.TYPE:
 			case TakeVideoNoteAction.TYPE:
 			case NavVoiceAction.TYPE:
+			case NavDirectionsFromAction.TYPE:
 			case NavAddDestinationAction.TYPE:
 			case NavAddFirstIntermediateAction.TYPE:
 			case NavReplaceDestinationAction.TYPE:
