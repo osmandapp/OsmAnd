@@ -3243,7 +3243,7 @@
     <string name="shared_string_memory_tb_desc">%1$s TB</string>
     <string name="shared_string_memory_gb_desc">%1$s GB</string>
     <string name="shared_string_memory_mb_desc">%1$s MB</string>
-    <string name="shared_string_memory_kb_desc">%1$s KB</string>
+    <string name="shared_string_memory_kb_desc">%1$s kB</string>
     <string name="lang_oc">Oksitansk</string>
     <string name="manage_profiles_descr">Opprett, importer, rediger profiler</string>
     <string name="manage_profiles">Håndter programprofiler…</string>
@@ -3270,4 +3270,43 @@
     <string name="exported_osmand_profile">OsmAnd-profil: %1$s</string>
     <string name="profile_import">Profil-import:</string>
     <string name="rendering_value_white_name">Hvit</string>
+    <string name="default_speed_dialog_msg">Brukes til å estimere ankomsttid for ukjente veityper og for å begrense farten på alle veier (kan endre rute)</string>
+    <string name="track_storage_directory">Spor-lagringsmappe</string>
+    <string name="track_storage_directory_descrp">Spor kan lagres i \'rec\'-mappen, månedlige eller daglige mapper.</string>
+    <string name="store_tracks_in_rec_directory">Ta opp spor til \'rec\'-mappen</string>
+    <string name="store_tracks_in_daily_directories">Ta opp spor i daglige mapper</string>
+    <string name="store_tracks_in_daily_directories_descrp">Ta opp spor i undermapper for hver forskjellig dag (som 2018-01-01).</string>
+    <string name="shared_string_memory_used_tb_desc">Brukt %1$s TB</string>
+    <string name="shared_string_memory_used_gb_desc">Brukt %1$s GB</string>
+    <string name="shared_string_memory_used_mb_desc">Brukt %1$s MB</string>
+    <string name="shared_string_memory_used_kb_desc">Brukt %1$s kB</string>
+    <string name="routing_attr_prefer_unpaved_name">Foretrekk uasfalterte veier</string>
+    <string name="routing_attr_prefer_unpaved_description">Foretrekk veier som ikke er av solid underlag.</string>
+    <string name="release_3_5">• Oppdaterte app- og profilinnstillinger: Innstillinger er nå ordnet etter type. Hver profil kan tilpasses separat.
+\n
+\n • Ny kartnedlasting-dialog foreslår et kart til nedlasting mens man navigerer
+\n
+\n • Natt-tema fikser
+\n
+\n • Fikset flere feilruter rundt om i verden
+\n
+\n • Oppdaterte grunnkartet med mer detaljert veinettverk
+\n
+\n • Fikset oversvømte områder rundt om i verden.
+\n
+\n • Ski-navigasjon: La til høydeprofil og rutekompleksitet til rutedetaljene
+\n
+\n • Andre små rettelser
+\n
+\n</string>
+    <string name="apply_preference_to_all_profiles">Du kan bruke denne endringen på alle profilene eller bare den nåværende profilen.</string>
+    <string name="quick_action_contour_lines_descr">En bryter for å vise eller skjule høydekurver på kartet.</string>
+    <string name="export_profile">Eksporter profil</string>
+    <string name="overwrite_profile_q">Profilen \'%1$s\' eksisterer allerede. Skrive over\?</string>
+    <string name="export_profile_failed">Kunne ikke eksportere profil.</string>
+    <string name="profile_import_descr">For å importere en profil, velg filen på enheten og åpne den med OsmAnd.</string>
+    <string name="file_import_error">%1$s feil under import: %2$s</string>
+    <string name="file_imported_successfully">%1$s ble importert.</string>
+    <string name="swap_two_places">Bytt %1$s og %2$s</string>
+    <string name="route_start_point">Startpunkt</string>
 </resources>
