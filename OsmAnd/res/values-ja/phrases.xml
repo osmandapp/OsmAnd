@@ -1792,7 +1792,7 @@
     <string name="poi_service_bicycle_chaintool_no">チェーン整備工具:無し</string>
     <string name="poi_service_bicycle_second_hand_yes">中古自転車の販売</string>
     <string name="poi_service_bicycle_second_hand_no">中古自転車の販売:無し</string>
-    <string name="poi_bicycle_repair_station">自転車セルフ修理所</string>
+    <string name="poi_bicycle_repair_station">自転車修理ステーション;自転車セルフ修理所</string>
     <string name="poi_ramp_bicycle_yes">自転車用スロープ:有り</string>
     <string name="poi_ramp_bicycle_no">自転車用スロープ:無し</string>
     <string name="poi_bicycle_parking_lockers">ロッカー式</string>
@@ -3560,4 +3560,25 @@
     <string name="poi_hazard_flood">洪水危険域</string>
     <string name="poi_hazard_minefield">地雷、地雷原</string>
     <string name="poi_ruins">廃墟(歴史的なものも含む)</string>
+    <string name="poi_health_specialty_radiotherapy_yes">放射線療法</string>
+    <string name="poi_climbing_crag_filter">岩山登山</string>
+    <string name="poi_climbing_crag">可</string>
+    <string name="reddit">Reddit</string>
+    <string name="poi_historic_tank">歴史的な戦車</string>
+    <string name="poi_source_biomass">動力源:バイオマス燃料</string>
+    <string name="poi_snowmobile_filter">スノーモービルでのアクセス</string>
+    <string name="poi_access_bus">バスでのアクセス</string>
+    <string name="poi_access_caravan">キャラバンカーでのアクセス</string>
+    <string name="poi_access_motorhome">キャンピングカーでのアクセス</string>
+    <string name="poi_access_trailer">トレーラーでのアクセス</string>
+    <string name="poi_access_motorcycle">オートバイでのアクセス</string>
+    <string name="poi_access_moped">モペッド(ペダル付きバイク)でのアクセス</string>
+    <string name="poi_access_mofa">モーファ(低出力のオートバイまたは自転車)でのアクセス</string>
+    <string name="poi_access_hgv">HGV(重量積載物車両)でのアクセス</string>
+    <string name="poi_access_goods">軽貨物車でのアクセス</string>
+    <string name="poi_access_disabled">アクセス不可</string>
+    <string name="poi_atm_yes">ATM:有り</string>
+    <string name="poi_cash_withdrawal_bank_card">現金引き出し機(CD・キャッシュディスペンサー)</string>
+    <string name="poi_bath_type">タイプ</string>
+    <string name="poi_bath_open_air">露天</string>
 </resources>
