@@ -239,8 +239,14 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private boolean stopped = true;
 
 	private ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
-
 	private LockHelper lockHelper;
+
+	private StateChangedListener<Integer> mapScreenOrientationSettingListener = new StateChangedListener<Integer>() {
+		@Override
+		public void stateChanged(Integer change) {
+			applyScreenOrientation();
+		}
+	};
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -951,10 +957,15 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			if (SecondSplashScreenFragment.VISIBLE) {
 				dismissSecondSplashScreen();
 			}
-			//setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
-			if (settings.MAP_SCREEN_ORIENTATION.get() != getRequestedOrientation()) {
-				setRequestedOrientation(settings.MAP_SCREEN_ORIENTATION.get());
-			}
+			applyScreenOrientation();
+		}
+
+		settings.MAP_SCREEN_ORIENTATION.addListener(mapScreenOrientationSettingListener);
+	}
+
+	public void applyScreenOrientation() {
+		if (settings.MAP_SCREEN_ORIENTATION.get() != getRequestedOrientation()) {
+			setRequestedOrientation(settings.MAP_SCREEN_ORIENTATION.get());
 		}
 	}
 
@@ -1060,10 +1071,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			if (fragment != null) {
 				getSupportFragmentManager().beginTransaction().remove(fragment).commitAllowingStateLoss();
 			}
-			//setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
-			if (app.getSettings().MAP_SCREEN_ORIENTATION.get() != getRequestedOrientation()) {
-				setRequestedOrientation(app.getSettings().MAP_SCREEN_ORIENTATION.get());
-			}
+			applyScreenOrientation();
 		}
 	}
 
@@ -1439,6 +1447,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	private void onPauseActivity() {
+		settings.MAP_SCREEN_ORIENTATION.removeListener(mapScreenOrientationSettingListener);
 		if (!app.getRoutingHelper().isRouteWasFinished()) {
 			DestinationReachedMenu.resetShownState();
 		}
@@ -1499,6 +1508,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			}
 		});
 		getMapView().refreshMap(true);
+		applyScreenOrientation();
 		getMyApplication().getNotificationHelper().refreshNotifications();
 	}
 
