@@ -104,6 +104,7 @@
     <string name="quick_action_replace_destination">Заменить пункт назначения</string>
     <string name="quick_action_add_first_intermediate">Добавить первую промежуточную точку</string>
     <string name="quick_action_add_destination_desc">Нажатие на кнопку действия добавит пункт назначения по центру экрана, любой ранее выбранный пункт назначения станет последним промежуточным пунктом.</string>
+    <string name="quick_action_directions_from_desc">Нажатие на кнопку действия добавит пункт отправления по центру экрана и проложит путь до ранее выбранного пункта назначения или откроет диалог для выбора пункта назначения если он отсутствует на карте.</string>
     <string name="quick_action_replace_destination_desc">Нажатие на кнопку действия установит пункт назначения по центру экрана, заменив ранее выбранный пункт назначения (если такой был).</string>
     <string name="quick_action_add_first_intermediate_desc">Нажатие на кнопку действия добавит по центру экрана первую промежуточную точку маршрута.</string>
     <string name="no_overlay">Нет покрытия</string>
