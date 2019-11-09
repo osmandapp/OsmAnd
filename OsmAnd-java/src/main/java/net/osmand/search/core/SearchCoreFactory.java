@@ -705,7 +705,7 @@ public class SearchCoreFactory {
 						List<PoiType> additionals = pt.getPoiAdditionals();
 						if (additionals != null) {
 							for (PoiType a : additionals) {
-								if (!a.isReference() && !results.contains(a)) {
+								if (!results.contains(a)) {
 									String enTranslation = a.getEnTranslation().toLowerCase();
 									if (!"yes".equals(enTranslation) && !"no".equals(enTranslation)
 											&& (nm.matches(enTranslation) || nm.matches(a.getTranslation()) || nm.matches(a.getSynonyms()))) {
