@@ -2160,7 +2160,7 @@ POIの更新は利用できません</string>
     <string name="quick_action_add_poi_descr">画面中央アイコンの地点にPOIが追加されます。</string>
     <string name="quick_action_navigation_voice_descr">アクションボタンをタップするとナビゲーション中の案内音声ON/OFF切替が出来ます。</string>
     <string name="quick_action_add_parking_descr">画面中央アイコンの地点を駐車場所として設定します。</string>
-    <string name="quick_action_interim_dialog">実行時、下の『名前とカテゴリー入力ダイアログ』を表示する</string>
+    <string name="quick_action_interim_dialog">実行時に入力画面を表示</string>
     <string name="favorite_empty_place_name">場所</string>
     <string name="quick_action_duplicates">重複を避けるためにクイックアクション名は[%1$s]に変更されました。</string>
     <string name="quick_action_duplicate">クイックアクション名の重複</string>
@@ -2408,7 +2408,7 @@ POIの更新は利用できません</string>
     <string name="translit_name_if_miss">%1$sの名前が欠落している場合、(他の文字で)翻字します</string>
     <string name="translit_names">名称を翻字</string>
     <string name="private_access_routing_req">目的地が専有エリア(私有地)内にあります。専有道路あるいは私道を通ることを許可しますか？</string>
-    <string name="quick_action_page_list_descr">アクションボタンをタップすると以下のリスト順にマップスタイルを変更します。</string>
+    <string name="quick_action_page_list_descr">作成したリスト順にマップスタイルを変更します。</string>
     <string name="nothing_found">見つかりませんでした</string>
     <string name="nothing_found_descr">検索単語を変更したり、検索の距離を広げてみてください。</string>
     <string name="increase_search_radius">検索範囲を広げる</string>
@@ -2694,7 +2694,7 @@ POIの更新は利用できません</string>
     <string name="shared_string_explore">探索</string>
     <string name="shared_string_travel_guides">旅行ガイド</string>
     <string name="index_item_world_wikivoyage">Wikivoyageの全世界記事</string>
-    <string name="mappilary_no_internet_desc">Mapillaryに登録されているストリート写真を見るためにはインターネットに接続する必要があります。</string>
+    <string name="mappilary_no_internet_desc">Mapillaryの写真はオンラインでのみ表示できます。</string>
     <string name="download_wikipedia_description">%1$sに関するWikipediaの記事をダウンロードしてオフラインで読むことができます。</string>
     <string name="thank_you_for_feedback">あなたからのフィードバックに感謝いたします</string>
     <string name="poi_cannot_be_found">ノードまたは通じる道が見つかりませんでした。</string>
@@ -2839,14 +2839,14 @@ POIの更新は利用できません</string>
     <string name="waypoint_one">経由地点 1</string>
     <string name="route_point_one">ルートポイント 1</string>
     <string name="empty_state_favourites">お気に入りの追加</string>
-    <string name="empty_state_favourites_desc">お気に入りのインポート、またはマップ上でマークした地点を追加します。</string>
+    <string name="empty_state_favourites_desc">お気に入りからインポートするか、マップ上でマークした地点を追加します。</string>
     <string name="move_point">ポイントの移動</string>
     <string name="total_donations">寄付総額</string>
     <string name="day_off_label">オフ</string>
     <string name="winter_and_ski_renderer">冬期およびスキー</string>
     <string name="touring_view_renderer">ツーリングビュー</string>
     <string name="nautical_renderer">海洋</string>
-    <string name="copy_location_name">ポイント/POI名称のコピー</string>
+    <string name="copy_location_name">場所/POI名称のコピー</string>
     <string name="toast_empty_name_error">名前の付けられていない場所</string>
     <string name="tunnel_warning">前方にトンネル有り</string>
     <string name="download_wikipedia_label">Wikipediaデータのダウンロード</string>
@@ -2867,7 +2867,7 @@ POIの更新は利用できません</string>
     <string name="wiki_article_search_text">対応するwiki記事から検索</string>
     <string name="wiki_article_not_found">記事が見つかりませんでした</string>
     <string name="how_to_open_wiki_title">どの方法でWikipedia記事を開きますか？</string>
-    <string name="test_voice_desrc">ボタンをタップし対応する音声案内を実際に聞いてみて、欠落しているか間違っている文字列や案内用語を特定します。</string>
+    <string name="test_voice_desrc">ボタンをタップし対応する音声プロンプトを聞いて、欠落しているかなど問題の有無を確かめます</string>
     <string name="shared_string_restore">通過前に戻す</string>
     <string name="map_widget_intermediate_time">中間経由地点までの移動時間</string>
     <string name="release_3_3">• 新しい案内画面の採用: 事前に設定した自宅と職場をワンタップで目的地とするボタンの追加、「前回のルート」ショートカット、アクティブなGPX経路とマーカーのリスト、検索履歴など
@@ -3051,7 +3051,7 @@ POIの更新は利用できません</string>
     <string name="shared_string_min_speed">最低速度</string>
     <string name="shared_string_max_speed">最高速度</string>
     <string name="default_speed_setting_title">標準移動速度</string>
-    <string name="default_speed_dialog_msg">予想到着時間の計算に使用します</string>
+    <string name="default_speed_dialog_msg">道路種別や制限速度が不明な道などを含むすべての場合に備えて、予想到着時間の計算に使用します</string>
     <string name="app_mode_offroad">オフロード</string>
     <string name="edit_profile_setup_title">プロファイルの個別設定</string>
     <string name="edit_profile_setup_subtitle">設定した値は各プロファイルごとに保持されます</string>
@@ -3399,4 +3399,5 @@ POIの更新は利用できません</string>
     <string name="rendering_value_white_name">白</string>
     <string name="swap_two_places">%1$sと%2$sを入れ替え</string>
     <string name="route_start_point">出発地点</string>
+    <string name="get_discount_title">%1$dを%2$で入手 、いまなら%3$s割引です。</string>
 </resources>
