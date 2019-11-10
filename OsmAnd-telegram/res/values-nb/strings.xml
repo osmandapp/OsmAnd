@@ -121,13 +121,11 @@
     <string name="si_kmh">Kilometer i timen</string>
     <string name="si_m_s">Meter i sekunder</string>
     <string name="si_min_km">Minutter per kilometer</string>
-    <string name="si_nm_h">Nautiske mil per time (knop)</string>
+    <string name="si_nm_h">Nautiske mil i timen (knop)</string>
     <string name="shared_string_hour_short">t</string>
     <string name="shared_string_minute_short">min</string>
     <string name="shared_string_second_short">sek</string>
-    <string name="welcome_descr">
-        <b>OsmAnd-sporer</b> lar deg dele din posisjon og se andres i OsmAnd.<br/>
-        <br/>Programmet belager seg på Telegram-API-et, så du må ha en Telegram-konto.</string>
+    <string name="welcome_descr"><b>OsmAnd-sporer</b> lar deg dele din posisjon og se andres i OsmAnd.<br/> <br/>Programmet belager seg på Telegram-API-et, så du må ha en Telegram-konto.</string>
     <string name="my_location">Min posisjon</string>
     <string name="last_updated_location">Sist oppdaterte posisjon:</string>
     <string name="successfully_sent_and_updated">Sendt og oppdatert</string>
