@@ -3374,4 +3374,6 @@
     <string name="send_search_query_description">שאילתת החיפוש שלך תישלח אל: „%1$s”, בצירוף המיקום שלך.
 \n
 \n לא נאספים פרטים אישיים, רק הנתונים שנחוצים לשיפור החיפוש.</string>
+    <string name="track_saved">המסלול נשמר</string>
+    <string name="empty_filename">שם הקובץ ריק</string>
 </resources>
