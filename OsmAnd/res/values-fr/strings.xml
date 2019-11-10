@@ -1240,7 +1240,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="sort_by_distance">Trier par distance</string>
     <string name="sort_by_name">Trier par nom</string>
     <string name="no_index_file_to_download">Aucun téléchargement trouvé, veuillez vérifier votre connexion Internet.</string>
-    <string name="none_selected_gpx">Specifier an fichier GPX en appuyant d\'abord longuement dessus.</string>
+    <string name="none_selected_gpx">Sélectionnez un fichier GPX par un appui long.</string>
     <string name="local_index_select_gpx_file">Sélectionnez une trace</string>
     <string name="keep_navigation_service">Conserver</string>
     <string name="stop_navigation_service">Arrêter</string>
@@ -2765,13 +2765,13 @@ représentant la zone : %1$s x %2$s</string>
     <string name="show_full_description">Afficher la description complète</string>
     <string name="nautical_render_descr">Pour la navigation en mer et en rivière. Fonctions clés : bouées, phares, balises, chenaux de navigation, ports, lignes de sonde.</string>
     <string name="ski_map_render_descr">Sports d\'hiver. Fonctions clés : tracés et difficultés des pistes de ski, remontées mécaniques, courses hors-piste, rendu hivernal et masquage des objets secondaires.</string>
-    <string name="light_rs_render_descr">Style de conduite simple. Mode nuit léger. Fonctions clés : routes orangées et contrastées, objets secondaires masqués.</string>
+    <string name="light_rs_render_descr">Style simple pour la conduite. Mode nuit doux, courbes de niveaux, routes contrastées de couleur orange, objets secondaires masqués.</string>
     <string name="mapnik_render_descr">Ancien rendu par défaut \'Mapnik\'. Fonctions clés : couleurs identiques au style \'Mapnik\'.</string>
-    <string name="default_render_descr">Style générique. Rendu simplifié pour des cartes claires en zone urbaine. Fonctions clés : routes, restrictions d\'accès, revêtement des routes, chemins identifiés sur l\'échelle SAC.</string>
+    <string name="default_render_descr">Style générique. Zones urbaines affichées clairement, courbes de niveaux, routes et revêtement des routes, restrictions d\'accès, chemins identifiés sur l\'échelle SAC.</string>
     <string name="shared_string_bookmark">Favori</string>
-    <string name="topo_render_descr">Style contrasté pour les activités en milieu naturel (randonnée, VTT). Lisibilité optimisée pour l\'extérieur. Fonctions clés : éléments naturels contrastés, distinction des types et des revêtements des routes, courbes de niveaux (option avancée), affichage de détails lors des zooms. Mode nuit.</string>
-    <string name="off_road_render_descr">Pour la conduite sur les voies basées sur le style \"Topo\", avec une sous-couche de carte images satellite. Largeur réduite pour les routes, largeur augmentée pour les chemins et autres pistes.</string>
-    <string name="touring_view_render_descr">Style très détaillé pour le tourisme. Inclus tous les affichages du style par défaut plus : détails supplémentaires sur les routes, chemins et tous les itinéraires permettant de voyager. Distinction visuelle claire des différents types de routes. Thème coloré et contrasté adapté à un usage en extérieur. Mode jour / nuit.</string>
+    <string name="topo_render_descr">Pour les activités en extérieur (randonnée, VTT). Lisibilité optimisée pour l\'extérieur, routes et éléments naturels contrastés, distinction des types de routes en fonction de leur qualité, options avancées pour les courbes de niveaux, nombreux détails. Pas de mode nuit.</string>
+    <string name="off_road_render_descr">Pour la conduite sur voies non revêtues. Style basé sur le style \"Topo\" et à utiliser avec la sous-couche verte d\'images satellites. Largeur réduite pour les routes, largeur augmentée pour les chemins et autres pistes.</string>
+    <string name="touring_view_render_descr">Style très détaillé pour le tourisme. Inclus tous les caractéristiques du style OsmAnd par défaut plus : information les plus détaillées possibles sur les routes, chemins, sentiers et tous les moyens permettant de se déplacer. Distinction visuelle claire des différents types de routes. Adapté à un usage en extérieur, de jour comme de nuit.</string>
     <string name="access_intermediate_arrival_time">Heure d\'arrivée à l\'étape</string>
     <string name="map_widget_intermediate_time">Heure d\'arrivée à l\'étape</string>
     <string name="unirs_render_descr">Modification du style par défaut pour augmenter le contraste des voies piétonnes et cyclables. Utilise les couleurs héritées de Mapnik.</string>
@@ -3315,21 +3315,21 @@ représentant la zone : %1$s x %2$s</string>
     <string name="store_tracks_in_rec_directory">Enregistrer les traces dans le dossier \'rec\'</string>
     <string name="store_tracks_in_daily_directories">Enregistrer les traces dans des dossiers journaliers</string>
     <string name="store_tracks_in_daily_directories_descrp">Enregistrer les traces dans des sous-dossiers journaliers (par exemple 2019-01-01).</string>
-    <string name="release_3_5">• Updated app and profile settings: Settings are now arranged by type. Each profile can be customized separately.
-\n
-\n • New map download dialog suggesting a map to download while browsing
-\n
-\n • Night theme fixes
-\n
-\n • Fixed several routing issues around the world
-\n
-\n • Updated basemap with more detailed road network
-\n
-\n • Fixed flooded areas around the world
-\n
-\n • Ski routing: Added elevation profile and route complexity to the route details
-\n
-\n • Other bugfixes
+    <string name="release_3_5">• Mise à jour des paramètres de l\'application et des profiles : les paramètres sont désormais organisés par type ; chaque profile peut être paramétré indépendamment.
+\n 
+\n • Fenêtre suggérant le téléchargement de carte lors du déplacement sur la carte
+\n 
+\n • Correction du mode nuit
+\n 
+\n • Correction de plusieurs problèmes sur le calcul d\'itinéraire
+\n 
+\n • Mise à jour de la carte de base avec un réseau routier plus détaillé
+\n 
+\n • Correction du flou sur certains zones
+\n 
+\n • Itinéraire à ski : ajout du profile d\'altitude et de la complexité de l\'itinéraire dans le détail de l\'itinéraire
+\n 
+\n • Corrections de bugs.
 \n
 \n</string>
     <string name="apply_preference_to_all_profiles">Vous pouvez appliquer cette modification à tous les profils ou uniquement aux profils sélectionnés actuellement.</string>
@@ -3359,7 +3359,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="rendering_value_white_name">Blanc</string>
     <string name="swap_two_places">Inverser %1$s et %2$s</string>
     <string name="route_start_point">Point de départ</string>
-    <string name="default_speed_dialog_msg">Utilisé pour estimer l\'heure d\'arrivée pour un type de route inconnu et pour limiter la vitesse sur toutes les routes (pourrait changer l\'itinéraire)</string>
-    <string name="track_saved">Piste sauvegardée</string>
-    <string name="empty_filename">Le nom du fichier est vide</string>
+    <string name="default_speed_dialog_msg">Utilisé pour estimer l\'heure d\'arrivée pour les types de route inconnus et pour limiter la vitesse sur toutes les routes (ce qui peut modifier le calcul d\'itinéraire)</string>
+    <string name="track_saved">Trace enregistrée</string>
+    <string name="empty_filename">Le nom du fichier n\'est pas renseigné</string>
 </resources>
