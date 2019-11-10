@@ -3270,43 +3270,56 @@
     <string name="exported_osmand_profile">OsmAnd-profil: %1$s</string>
     <string name="profile_import">Profil-import:</string>
     <string name="rendering_value_white_name">Hvit</string>
-    <string name="default_speed_dialog_msg">Brukes til å estimere ankomsttid for ukjente veityper og for å begrense farten på alle veier (kan endre rute)</string>
+    <string name="default_speed_dialog_msg">Brukes til å estimere ankomsttid for ukjente veityper, og for å begrense farten på alle veier (kan endre rute)</string>
     <string name="track_storage_directory">Spor-lagringsmappe</string>
     <string name="track_storage_directory_descrp">Spor kan lagres i \'rec\'-mappen, månedlige eller daglige mapper.</string>
     <string name="store_tracks_in_rec_directory">Ta opp spor til \'rec\'-mappen</string>
     <string name="store_tracks_in_daily_directories">Ta opp spor i daglige mapper</string>
     <string name="store_tracks_in_daily_directories_descrp">Ta opp spor i undermapper for hver forskjellig dag (som 2018-01-01).</string>
-    <string name="shared_string_memory_used_tb_desc">Brukt %1$s TB</string>
-    <string name="shared_string_memory_used_gb_desc">Brukt %1$s GB</string>
-    <string name="shared_string_memory_used_mb_desc">Brukt %1$s MB</string>
-    <string name="shared_string_memory_used_kb_desc">Brukt %1$s kB</string>
-    <string name="routing_attr_prefer_unpaved_name">Foretrekk uasfalterte veier</string>
+    <string name="shared_string_memory_used_tb_desc">%1$s TB brukt</string>
+    <string name="shared_string_memory_used_gb_desc">%1$s GB brukt</string>
+    <string name="shared_string_memory_used_mb_desc">%1$s MB brukt</string>
+    <string name="shared_string_memory_used_kb_desc">%1$s kB brukt</string>
+    <string name="routing_attr_prefer_unpaved_name">Foretrekk veier uten fast dekke</string>
     <string name="routing_attr_prefer_unpaved_description">Foretrekk veier uten fast dekke.</string>
-    <string name="release_3_5">• Oppdaterte app- og profilinnstillinger: Innstillinger er nå ordnet etter type. Hver profil kan tilpasses separat.
-\n
-\n • Ny kartnedlasting-dialog foreslår et kart til nedlasting mens man navigerer
-\n
-\n • Natt-tema fikser
-\n
-\n • Fikset flere feilruter rundt om i verden
-\n
-\n • Oppdaterte grunnkartet med mer detaljert veinettverk
-\n
-\n • Fikset oversvømte områder rundt om i verden.
-\n
-\n • Ski-navigasjon: La til høydeprofil og rutekompleksitet til rutedetaljene
-\n
-\n • Andre små rettelser
+    <string name="release_3_5">• Oppdaterte program- og profilinnstillinger: Innstillinger er nå ordnet etter type. Hver profil kan tilpasses separat. 
+\n 
+\n • Ny kartnedlasting-dialog foreslår et kart til nedlasting mens man utforsker 
+\n 
+\n • Nattdraktfikser
+\n 
+\n • Flere rutingsproblemer rundt om i verden fikset
+\n 
+\n • Oppdatert grunnkartet med mer detaljert veinettverk 
+\n 
+\n • Fikset oversvømte områder rundt om i verden. 
+\n 
+\n • Ski-navigasjon: Tillagt høydeprofil og rutekompleksitet i rutedetaljer 
+\n 
+\n • Andre småfikser
 \n
 \n</string>
-    <string name="apply_preference_to_all_profiles">Du kan bruke denne endringen på alle profilene eller bare den nåværende profilen.</string>
-    <string name="quick_action_contour_lines_descr">En bryter for å vise eller skjule høydekurver på kartet.</string>
+    <string name="apply_preference_to_all_profiles">Du kan bruke denne endringen på alle profilene, eller bare den nåværende.</string>
+    <string name="quick_action_contour_lines_descr">En bryter for å vise eller skjule koter på kartet.</string>
     <string name="export_profile">Eksporter profil</string>
-    <string name="overwrite_profile_q">Profilen \'%1$s\' eksisterer allerede. Skrive over\?</string>
+    <string name="overwrite_profile_q">Overskriv profilen «%1$s» som finnes allerede\?</string>
     <string name="export_profile_failed">Kunne ikke eksportere profil.</string>
     <string name="profile_import_descr">For å importere en profil, velg filen på enheten og åpne den med OsmAnd.</string>
     <string name="file_import_error">%1$s feil under import: %2$s</string>
     <string name="file_imported_successfully">%1$s ble importert.</string>
     <string name="swap_two_places">Bytt %1$s og %2$s</string>
     <string name="route_start_point">Startpunkt</string>
+    <string name="rendering_attr_ice_road_name">Isvei</string>
+    <string name="routeInfo_winter_ice_road_name">Vinter- og isveier</string>
+    <string name="enter_path_to_folder">Skriv inn sti til mappen</string>
+    <string name="paste_Osmand_data_folder_path">Lim inn sti til mappen inneholdende OsmAnd-data</string>
+    <string name="internal_app_storage_description">Internlagring, skjult fra bruker og andre programmer, kun tilgjengelig for OsmAnd</string>
+    <string name="change_data_storage_folder">Endre datalagringsmappe</string>
+    <string name="rendering_attr_piste_type_snow_park_name">Snøpark</string>
+    <string name="rendering_attr_piste_type_nordic_name">Langrenn</string>
+    <string name="routeInfo_piste_type_name">Løypetype</string>
+    <string name="rendering_attr_piste_difficulty_aerialway_name">Taubane</string>
+    <string name="rendering_attr_piste_difficulty_connection_name">Overgang</string>
+    <string name="track_saved">Spor lagret</string>
+    <string name="empty_filename">Filnavnet er tomt</string>
 </resources>
