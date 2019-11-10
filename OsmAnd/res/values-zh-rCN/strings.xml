@@ -2778,4 +2778,19 @@
     <string name="routing_attr_prefer_unpaved_description">偏好未铺装道路。</string>
     <string name="update_all_maps">更新所有地图</string>
     <string name="update_all_maps_q">您确认要更新全部（%1$d）地图吗？</string>
+    <string name="default_speed_dialog_msg">用于估算未知类型道路的到达时间并限制所有道路的速度（可能会更改路线）</string>
+    <string name="tts_initialization_error">无法启动TTS引擎</string>
+    <string name="export_profile">导出配置文件</string>
+    <string name="exported_osmand_profile">OsmAnd配置文件： %1$s</string>
+    <string name="overwrite_profile_q">配置文件\"%1$s\"已存在。覆盖？</string>
+    <string name="export_profile_failed">无法导出配置文件。</string>
+    <string name="profile_import">配置文件导入：</string>
+    <string name="profile_import_descr">要导入配置文件，请在设备上选择其文件，然后使用OsmAnd打开它。</string>
+    <string name="file_import_error">%1$s 导入错误：%2$s</string>
+    <string name="file_imported_successfully">%1$s 已成功导入。</string>
+    <string name="rendering_value_white_name">白色</string>
+    <string name="swap_two_places">交换 %1$s 和 %2$s</string>
+    <string name="route_start_point">起点</string>
+    <string name="track_saved">追踪已保存</string>
+    <string name="empty_filename">文件名为空</string>
 </resources>

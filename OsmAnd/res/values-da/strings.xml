@@ -3333,7 +3333,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="shared_string_memory_gb_desc">%1$s GB</string>
     <string name="shared_string_memory_mb_desc">%1$s MB</string>
     <string name="shared_string_memory_kb_desc">%1$s KB</string>
-    <string name="swap_start_and_destination"/>
+    <string name="swap_start_and_destination">Skift start og destination</string>
     <string name="data_storage_preference_summary">%1$s • %2$s</string>
     <string name="data_storage_space_description">%1$s GB ledig (af %2$s GB)</string>
     <string name="track_storage_directory">Overvåg lagringsmappen</string>
@@ -3381,4 +3381,18 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="quick_action_hillshade_hide">Skjul reliefskygger</string>
     <string name="quick_action_show_hide_hillshade">Vis/skjul reliefskygger</string>
     <string name="rendering_value_white_name">Hvid</string>
+    <string name="tts_initialization_error">Kan ikke starte tekst-til-tale-program</string>
+    <string name="simulate_your_location_gpx_descr">Simuler positionen ved hjælp af et optaget GPX-spor.</string>
+    <string name="export_profile">Eksportér profil</string>
+    <string name="exported_osmand_profile">OsmAnd profil: %1$s</string>
+    <string name="overwrite_profile_q">Profilen \'%1$s\' findes allerede. Overskriv\?</string>
+    <string name="export_profile_failed">Profilen kunne ikke eksporteres.</string>
+    <string name="profile_import">Profilimport:</string>
+    <string name="profile_import_descr">For at importere en profil, vælg filen på enheden og åbn den med OsmAnd.</string>
+    <string name="file_import_error">%1$s importfejl: %2$s</string>
+    <string name="file_imported_successfully">%1$s blev importeret.</string>
+    <string name="swap_two_places">Byt %1$s og %2$s</string>
+    <string name="route_start_point">Udgangspunkt</string>
+    <string name="track_saved">Sporet er gemt</string>
+    <string name="empty_filename">Filnavnet er tomt</string>
 </resources>
