@@ -1368,7 +1368,7 @@ public class OsmandSettings {
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> USE_TRACKBALL_FOR_MOVEMENTS =
-			new BooleanPreference("use_trackball_for_movements", true).makeGlobal();
+			new BooleanPreference("use_trackball_for_movements", true).makeProfile().makeGeneral();
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> ACCESSIBILITY_SMART_AUTOANNOUNCE =
