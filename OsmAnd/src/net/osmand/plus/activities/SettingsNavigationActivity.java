@@ -796,7 +796,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 			}
 		});
 		builder.setNegativeButton(R.string.shared_string_cancel, null);
-		builder.setNeutralButton("Revert", new OnClickListener() {
+		builder.setNeutralButton(R.string.shared_string_revert, new OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				mode.resetDefaultSpeed(app);
