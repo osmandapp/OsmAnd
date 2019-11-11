@@ -26,10 +26,10 @@ import android.support.v7.preference.Preference.OnPreferenceClickListener;
 import android.support.v7.preference.PreferenceFragmentCompat;
 import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceGroupAdapter;
+import android.support.v7.preference.PreferenceManager;
 import android.support.v7.preference.PreferenceScreen;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.support.v7.preference.SwitchPreferenceCompat;
-import android.support.v7.view.ContextThemeWrapper;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -123,6 +123,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	}
 
 	@Override
+	@SuppressLint("RestrictedApi")
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		nightMode = !settings.isLightContent();
 		themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
@@ -130,7 +131,16 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		View view = super.onCreateView(inflater, container, savedInstanceState);
 		if (view != null) {
 			AndroidUtils.addStatusBarPadding21v(getContext(), view);
-			updateAllSettings();
+			if (getPreferenceScreen() != null) {
+				PreferenceManager prefManager = getPreferenceManager();
+				PreferenceScreen preferenceScreen = prefManager.inflateFromResource(prefManager.getContext(), currentScreenType.preferencesResId, null);
+				if (prefManager.setPreferences(preferenceScreen)) {
+					setupPreferences();
+					registerPreferences(preferenceScreen);
+				}
+			} else {
+				updateAllSettings();
+			}
 			createToolbar(inflater, view);
 			setDivider(null);
 			view.setBackgroundColor(ContextCompat.getColor(app, getBackgroundColorRes()));
