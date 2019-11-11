@@ -2806,7 +2806,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="coord_input_save_as_track">Als Track speichern</string>
     <string name="coord_input_save_as_track_descr">Sie haben %1$s Punkte hinzugefügt. Geben Sie einen Dateinamen ein und klicken Sie auf \"Speichern\".</string>
     <string name="point_deleted">Punkt %1$s gelöscht</string>
-    <string name="send_search_query_description">Ihre Suchanfrage wird an: \"%1 s\" gesendet, zusammen mit Ihrem Standort.
+    <string name="send_search_query_description">Ihre Suchanfrage wird an: \"%1$s\" gesendet, zusammen mit Ihrem Standort.
 \n
 \nPersönliche Informationen werden nicht gesammelt, sondern nur Suchdaten, die zur Verbesserung der Suche benötigt werden.</string>
     <string name="search_no_results_description">Keine Ergebnisse?
