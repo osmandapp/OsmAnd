@@ -233,7 +233,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 
 						if (tileBox.containsPoint(x, y, iconSize)) {
 							if (intersects(boundIntersections, x, y, iconSize, iconSize) ||
-									(app.getSettings().SHOW_NEARBY_POI.get() && wph.isRouteCalculated() && !wph.isPointNoPassed(o))) {
+									(app.getSettings().SHOW_NEARBY_POI.get() && wph.isRouteCalculated() && !wph.isAmenityNoPassed(o))) {
 								canvas.drawBitmap(poiBackgroundSmall, x - poiBackgroundSmall.getWidth() / 2, y - poiBackgroundSmall.getHeight() / 2, paintIconBackground);
 								smallObjectsLatLon.add(new LatLon(o.getLocation().getLatitude(),
 										o.getLocation().getLongitude()));

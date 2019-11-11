@@ -111,7 +111,7 @@ public class WaypointHelper {
 		return route.isPointPassed(point.routeIndex);
 	}
 	
-	public boolean isPointNoPassed(Amenity a) {
+	public boolean isAmenityNoPassed(Amenity a) {
 		if (a != null) {
 			List<LocationPointWrapper> points = locationPoints.get(POI);
 			for (LocationPointWrapper point : points) {
