@@ -196,7 +196,7 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 	}
 
 	private Drawable getIconForSortButton() {
-		return getIcon(sortDirection ? R.drawable.ic_action_sort_reverse_order : R.drawable.ic_action_list_sort,
+		return getIcon(sortDirection ? R.drawable.ic_action_list_sort_asc : R.drawable.ic_action_list_sort,
 				nightMode ? R.color.multi_selection_menu_close_btn_dark : R.color.multi_selection_menu_close_btn_light);
 	}
 
