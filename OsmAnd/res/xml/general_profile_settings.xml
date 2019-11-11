@@ -107,4 +107,11 @@
 		android:layout="@layout/preference_with_descr_dialog_and_switch"
 		android:title="@string/external_input_device" />
 
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="use_trackball_for_movements"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_off"
+		android:summaryOn="@string/shared_string_on"
+		android:title="@string/use_trackball" />
+
 </PreferenceScreen>
