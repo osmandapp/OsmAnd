@@ -996,7 +996,17 @@ public class OsmandSettings {
 	public static final String NUMBER_OF_FREE_DOWNLOADS_ID = "free_downloads_v3";
 
 	// this value string is synchronized with settings_pref.xml preference name
-	private final OsmandPreference<String> PLUGINS = new StringPreference("enabled_plugins", MapillaryPlugin.ID).makeProfile();
+	private final OsmandPreference<String> PLUGINS = new StringPreference("enabled_plugins", MapillaryPlugin.ID) {
+		@Override
+		public String getProfileDefaultValue(ApplicationMode mode) {
+			ApplicationMode parent = mode.getParent();
+			if (parent != null && isSetForMode(parent)) {
+				return getModeValue(parent);
+			} else {
+				return super.getProfileDefaultValue(mode);
+			}
+		}
+	}.makeProfile();
 
 	public Set<String> getEnabledPlugins() {
 		String plugs = PLUGINS.get();

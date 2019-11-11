@@ -1267,6 +1267,7 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 				if (api != null && params != null) {
 					String colorName = api.getGpxColor(params.getFileName());
 					params.setGpxColor(colorName);
+					return true;
 				}
 				return false;
 			} catch (Exception e) {
