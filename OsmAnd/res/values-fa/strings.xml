@@ -3411,7 +3411,7 @@
 \nاطلاعات خصوصی جمع‌آوری نمی‌شود. فقط داده‌های جست‌وجو برای بهبود الگوریتم جست‌وجو موردنیاز است.</string>
     <string name="swap_start_and_destination">تعویض شروع و مقصد</string>
     <string name="export_profile">برون‌ریزی پروفایل</string>
-    <string name="overwrite_profile_q">پروفایل «%1$s» وجود دارد . به‌جای آن ذخیره شود؟</string>
+    <string name="overwrite_profile_q">پروفایل «%1$s» وجود دارد. جای آن نوشته شود؟</string>
     <string name="export_profile_failed">برون‌ریزی پروفایل ناموفق بود.</string>
     <string name="profile_import">درون‌ریزی پروفایل:</string>
     <string name="profile_import_descr">برای درون‌ریزی یک پروفایل، فایل آن را از روی دستگاه انتخاب و با OsmAnd باز کنید.</string>

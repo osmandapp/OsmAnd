@@ -1240,7 +1240,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="sort_by_distance">Trier par distance</string>
     <string name="sort_by_name">Trier par nom</string>
     <string name="no_index_file_to_download">Aucun téléchargement trouvé, veuillez vérifier votre connexion Internet.</string>
-    <string name="none_selected_gpx">"Aucun fichier GPX sélectionné. Appuyez  longuement sur un fichier pour le sélectionner."</string>
+    <string name="none_selected_gpx">Specifier an fichier GPX en appuyant d\'abord longuement dessus.</string>
     <string name="local_index_select_gpx_file">Sélectionnez une trace</string>
     <string name="keep_navigation_service">Conserver</string>
     <string name="stop_navigation_service">Arrêter</string>
@@ -1892,7 +1892,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="osm_live_region_desc">Une partie de vos dons seront distribués aux utilisateurs OSM ayant soumis des mises à jour dans cette région.</string>
     <string name="avoid_road">Éviter la route</string>
     <string name="osm_editors_ranking">Classement des éditeurs OSM</string>
-    <string name="osm_live_email_desc">Requis pour vous fournir des informations sur les contributions.</string>
+    <string name="osm_live_email_desc">Requis pour mettre à jour vos contributions.</string>
     <string name="osm_live_user_public_name">Nom affiché</string>
     <string name="osm_live_hide_user_name">Ne pas afficher mon nom dans les rapports</string>
     <string name="osm_live_support_region">Région supportée</string>
@@ -2765,12 +2765,12 @@ représentant la zone : %1$s x %2$s</string>
     <string name="show_full_description">Afficher la description complète</string>
     <string name="nautical_render_descr">Pour la navigation en mer et en rivière. Fonctions clés : bouées, phares, balises, chenaux de navigation, ports, lignes de sonde.</string>
     <string name="ski_map_render_descr">Sports d\'hiver. Fonctions clés : tracés et difficultés des pistes de ski, remontées mécaniques, courses hors-piste, rendu hivernal et masquage des objets secondaires.</string>
-    <string name="light_rs_render_descr">Style simple et contrasté pour la navigation en voiture. Mode nuit doux. Fonctions clés : routes orangées et contrastées, objets secondaires masqués.</string>
+    <string name="light_rs_render_descr">Style de conduite simple. Mode nuit léger. Fonctions clés : routes orangées et contrastées, objets secondaires masqués.</string>
     <string name="mapnik_render_descr">Ancien rendu par défaut \'Mapnik\'. Fonctions clés : couleurs identiques au style \'Mapnik\'.</string>
     <string name="default_render_descr">Style générique. Rendu simplifié pour des cartes claires en zone urbaine. Fonctions clés : routes, restrictions d\'accès, revêtement des routes, chemins identifiés sur l\'échelle SAC.</string>
     <string name="shared_string_bookmark">Favori</string>
     <string name="topo_render_descr">Style contrasté pour les activités en milieu naturel (randonnée, VTT). Lisibilité optimisée pour l\'extérieur. Fonctions clés : éléments naturels contrastés, distinction des types et des revêtements des routes, courbes de niveaux (option avancée), affichage de détails lors des zooms. Mode nuit.</string>
-    <string name="off_road_render_descr">Adapté pour conduite sur les voies non revêtues, avec une sous-couche de carte images satellite. Fonction clefs : largeur réduite pour les routes, largeur augmentée pour les chemins et autres pistes. Basé sur le style \"Topo\".</string>
+    <string name="off_road_render_descr">Pour la conduite sur les voies basées sur le style \"Topo\", avec une sous-couche de carte images satellite. Largeur réduite pour les routes, largeur augmentée pour les chemins et autres pistes.</string>
     <string name="touring_view_render_descr">Style très détaillé pour le tourisme. Inclus tous les affichages du style par défaut plus : détails supplémentaires sur les routes, chemins et tous les itinéraires permettant de voyager. Distinction visuelle claire des différents types de routes. Thème coloré et contrasté adapté à un usage en extérieur. Mode jour / nuit.</string>
     <string name="access_intermediate_arrival_time">Heure d\'arrivée à l\'étape</string>
     <string name="map_widget_intermediate_time">Heure d\'arrivée à l\'étape</string>
@@ -3353,10 +3353,13 @@ représentant la zone : %1$s x %2$s</string>
     <string name="export_profile_failed">Impossible d\'exporter le profil.</string>
     <string name="profile_import">Importer le profil :</string>
     <string name="profile_import_descr">Pour importer un profil, sélectionnez le fichier sur l\'appareil et ouvrez le avec OsmAnd.</string>
-    <string name="file_import_error">"import  de %1$s, erreur : %2$s"</string>
+    <string name="file_import_error">%1$s Erreur d\'importation : %2$s</string>
     <string name="file_imported_successfully">%1$s importé avec succès.</string>
     <string name="swap_start_and_destination">Inverser Départ et Arrivée</string>
     <string name="rendering_value_white_name">Blanc</string>
     <string name="swap_two_places">Inverser %1$s et %2$s</string>
     <string name="route_start_point">Point de départ</string>
+    <string name="default_speed_dialog_msg">Utilisé pour estimer l\'heure d\'arrivée pour un type de route inconnu et pour limiter la vitesse sur toutes les routes (pourrait changer l\'itinéraire)</string>
+    <string name="track_saved">Piste sauvegardée</string>
+    <string name="empty_filename">Le nom du fichier est vide</string>
 </resources>

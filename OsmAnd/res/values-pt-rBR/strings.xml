@@ -326,7 +326,7 @@
     <string name="voice_provider">Instruções por voz</string>
     <string name="proxy_host_descr">Configurar o hostname do seu proxy (p. ex., 127.0.0.1).</string>
     <string name="proxy_port_title">Porta do proxy</string>
-    <string name="proxy_port_descr">Configurar o número da porta do seu proxy (p. ex. 8118).</string>
+    <string name="proxy_port_descr">Especificar o número da porta do seu proxy (p. ex. 8118).</string>
     <string name="monitoring_settings">Gravação de viagem</string>
     <string name="monitoring_settings_descr">Configurar como gravar suas viagens.</string>
     <string name="gpx_option_calculate_first_last_segment">Calcular rota para o primeiro e último segmento</string>
@@ -404,7 +404,7 @@
     <string name="show_zoom_buttons_navigation_descr">Mostrar botões de zoom durante a navegação.</string>
     <string name="show_zoom_buttons_navigation">Mostrar botões de zoom</string>
     <string name="save_as_favorites_points">Salvar como grupo do Favoritos</string>
-    <string name="select_destination_and_intermediate_points">Selecionar destinos</string>
+    <string name="select_destination_and_intermediate_points">Defina destinos</string>
     <string name="layer_amenity_label">Rótulos de sobreposição do ponto</string>
     <string name="loading_smth">Carregando %1$s…</string>
     <string name="map_widget_plain_time">Hora atual</string>
@@ -507,7 +507,7 @@
     <string name="calculate_osmand_route_without_internet">"Cálculo offline do segmento de rota OsmAnd "</string>
     <string name="keep_and_add_destination_point">Adicionar como destino seguinte</string>
     <string name="select_gpx">Selecionar GPX…</string>
-    <string name="route_descr_select_destination">Selecionar destino</string>
+    <string name="route_descr_select_destination">Defina o destino</string>
     <string name="route_preferences">Preferências de rota</string>
     <string name="route_info">Informações da rota</string>
     <string name="routing_attr_avoid_ferries_name">Evitar balsas</string>
@@ -729,10 +729,10 @@ Pôr do Sol: %2$s</string>
     <string name="intermediate_point">Destino intermediário %1$s</string>
     <string name="map_widget_intermediate_distance">Destino intermediário</string>
     <string name="use_compass_navigation">Usar bússola</string>
-    <string name="avoid_motorway">Evitar autoestradas</string>
+    <string name="avoid_motorway">Sem autoestradas</string>
     <string name="auto_zoom_map_descr">Nível de zoom em função da sua velocidade (enquanto o mapa é sincronizado com a posição atual).</string>
     <string name="auto_zoom_map">Zoom automático</string>
-    <string name="interrupt_music_descr">Interromper a música quando fazer anúncio.</string>
+    <string name="interrupt_music_descr">Interromper a música quando avisar.</string>
     <string name="interrupt_music">Pausar música</string>
     <string name="osmand_play_title_30_chars">OsmAnd Mapas &amp; Navegação</string>
     <string name="osmand_plus_play_title_30_chars">OsmAnd+ Mapas &amp; Navegação</string>
@@ -1319,14 +1319,14 @@ Pôr do Sol: %2$s</string>
     <string name="rotate_map_compass_opt">Na direção da bússola</string>
     <string name="rotate_map_bearing_opt">Na direção do movimento</string>
     <string name="rotate_map_none_opt">Não gire (o norte sempre para cima)</string>
-    <string name="rotate_map_to_bearing_descr">Selecionar o alinhamento do mapa.</string>
+    <string name="rotate_map_to_bearing_descr">Alinhamento do mapa:</string>
     <string name="rotate_map_to_bearing">Orientação do mapa</string>
     <string name="show_route">Detalhes da rota</string>
     <string name="fav_imported_sucessfully">Favoritos importados</string>
     <string name="import_file_favourites">Salvar dados como arquivo GPX ou importar pontos para os \'Favoritos\'\?</string>
     <string name="fav_file_to_load_not_found">O arquivo GPX contendo os favoritos não foi encontrado em {0}</string>
     <string name="share_fav_subject">Favoritos compartilhados via OsmAnd</string>
-    <string name="error_occurred_loading_gpx">Não foi possível carregar o GPX</string>
+    <string name="error_occurred_loading_gpx">Não foi possível carregar o GPX.</string>
     <string name="send_report">Enviar o relatório</string>
     <string name="none_region_found">Não foi possível encontrar nenhum mapa baixado no cartão de memória.</string>
     <string name="poi_namefinder_query_empty">Digite para encontrar um POI</string>
@@ -1484,10 +1484,10 @@ Pôr do Sol: %2$s</string>
     <string name="navigate_point_top_text">Insira a latitude e longitude no formato selecionado (G - graus, M - minutos, S - segundos)</string>
     <string name="navigate_point_latitude">Latitude</string>
     <string name="navigate_point_longitude">Longitude</string>
-    <string name="navigate_point_format_D">GGG.GG</string>
-    <string name="navigate_point_format_DM">GGG MM.MM</string>
-    <string name="navigate_point_format_DMS">GGG MM SS.SS</string>
-    <string name="search_address_top_text">Escolher endereço</string>
+    <string name="navigate_point_format_D">GGG.GGGGG</string>
+    <string name="navigate_point_format_DM">GGG MM.MMM</string>
+    <string name="navigate_point_format_DMS">GGG MM SS.S</string>
+    <string name="search_address_top_text">Endereço</string>
     <string name="search_address_region">País</string>
     <string name="search_address_city">Cidade</string>
     <string name="search_address_street">Rua</string>
@@ -1539,14 +1539,14 @@ Pôr do Sol: %2$s</string>
     <string name="av_camera_focus_macro">Foco macro (close-up)</string>
     <string name="av_camera_focus_continuous">A câmera tenta focar continuamente</string>
     <string name="av_photo_play_sound">Som ao fotografar</string>
-    <string name="av_photo_play_sound_descr">Escolher se tocará som quando tirar fotos.</string>
+    <string name="av_photo_play_sound_descr">Definir se tocará som quando tirar fotos.</string>
     <string name="av_camera_pic_size">Tamanho da foto</string>
     <string name="av_camera_pic_size_descr">Selecionar tamanho de imagem da foto.</string>
     <string name="navigation_intent_invalid">Formato inválido: %s</string>
     <string name="plugin_install_needs_network">Você precisa estar conectado à Internet para instalar este plugin.</string>
     <string name="get_plugin">Obter</string>
     <string name="shared_string_logoff">Desconectar</string>
-    <string name="routing_attr_avoid_borders_description">Evitar cruzar fronteiras nacionais</string>
+    <string name="routing_attr_avoid_borders_description">Evita cruzamentos de fronteiras nacionais</string>
     <string name="routing_attr_height_name">Limite de altura</string>
     <string name="routing_attr_height_description">Especifique a altura permitida do veículo nas rotas.</string>
     <string name="use_fast_recalculation">Recálculo de rota inteligente</string>
@@ -1818,7 +1818,7 @@ Pôr do Sol: %2$s</string>
     <string name="route_distance">Distância:</string>
     <string name="route_duration">Tempo:</string>
     <string name="missing_write_external_storage_permission">OsmAnd não tem permissão para usar o cartão de memória</string>
-    <string name="no_location_permission">O aplicativo não tem permissão para acessar os dados de localização.</string>
+    <string name="no_location_permission">Conceder acesso aos dados de localização.</string>
     <string name="no_camera_permission">App não tem permissão para acessar a câmera.</string>
     <string name="no_microphone_permission">App não tem permissão para acessar o microfone.</string>
     <string name="impassable_road_desc">Escolha as vias que quer evitar durante a navegação.</string>
@@ -1878,13 +1878,13 @@ Pôr do Sol: %2$s</string>
     <string name="map_markers">Marcadores de mapa</string>
     <string name="map_marker">Marcador de mapa</string>
     <string name="consider_turning_polygons_off">É recomendável desativar a visualização de polígonos.</string>
-    <string name="rendering_attr_showMtbRoutes_name">Mostrar rotas MTB</string>
+    <string name="rendering_attr_showMtbRoutes_name">Mostrar trilhas de mountain bike</string>
     <string name="active_markers">Ativar marcadores</string>
     <string name="shared_string_topbar">Barra superior</string>
     <string name="recalculate_route">Recalcular rota</string>
     <string name="donations">Doações</string>
     <string name="number_of_recipients">Número de destinatários</string>
-    <string name="osm_editors_ranking">Ranking de editores de OSM</string>
+    <string name="osm_editors_ranking">Ranking de editores OSM</string>
     <string name="map_widget_battery">Nível da bateria</string>
     <string name="move_marker_bottom_sheet_title">Mova o mapa para reposicionar o marcador</string>
     <!-- string name="lat_lon_pattern">Lat: %1$.5f Lon: %2$.5f</string -->
@@ -1928,7 +1928,7 @@ Pôr do Sol: %2$s</string>
     <string name="clear_tile_data">Limpar quadrículas</string>
     <string name="replace_favorite_confirmation">Você tem certeza que deseja substituir o Favorito %1$s?</string>
     <string name="shared_string_change">Mudar</string>
-    <string name="coords_search">Busca de coordenadas</string>
+    <string name="coords_search">Busca por coordenadas</string>
     <string name="advanced_coords_search">Busca avançada de coordenadas</string>
     <string name="back_to_search">Voltar para as buscas</string>
     <string name="confirmation_to_delete_history_items">Remover os itens selecionados do \'Histórico\'?</string>
@@ -2100,7 +2100,7 @@ Pôr do Sol: %2$s</string>
     <string name="change_color">Alterar cor</string>
     <string name="edit_name">Editar nome</string>
     <string name="animate_my_location">Animar minha posição</string>
-    <string name="animate_my_location_desc">Ativar animação de deslizamento de mapa da \'Minha Posição\' durante a navegação.</string>
+    <string name="animate_my_location_desc">Ativar animação de deslocamento de mapa da \'Minha posição\' durante a navegação.</string>
     <string name="shared_string_overview">Visão geral</string>
     <string name="select_street">Selecionar rua</string>
     <string name="shared_string_in_name">em %1$s</string>
@@ -2111,7 +2111,7 @@ Pôr do Sol: %2$s</string>
     <string name="select_city">Selecionar cidade</string>
     <string name="select_postcode">Busca por CEP</string>
     <string name="quick_action_auto_zoom">Zoom automático do mapa ligar/desligar</string>
-    <string name="quick_action_auto_zoom_desc">Tocar neste botão de ação irá ligar/desligar o zoom automático do mapa de acordo com sua velocidade.</string>
+    <string name="quick_action_auto_zoom_desc">Um botão para ativar/desativar o zoom automático do mapa conforme a sua velocidade.</string>
     <string name="quick_action_auto_zoom_on">Ativar zoom automático do mapa</string>
     <string name="quick_action_auto_zoom_off">Desativar zoom automático do mapa</string>
     <string name="quick_action_add_destination">Defina destino</string>
@@ -2258,7 +2258,7 @@ Pôr do Sol: %2$s</string>
     <string name="gpx_no_tracks_title_folder">Você pode também adicionar arquivos GPX na pasta</string>
     <string name="gpx_add_track">Adicionar…</string>
     <string name="gpx_appearance">Aparência</string>
-    <string name="trip_rec_notification_settings">Habilitar gravação de início rápido</string>
+    <string name="trip_rec_notification_settings">Ativar gravação rápida</string>
     <string name="shared_string_notifications">Notificações</string>
     <string name="shared_string_continue">Continuar</string>
     <string name="shared_string_pause">Pausar</string>
@@ -2272,7 +2272,7 @@ Pôr do Sol: %2$s</string>
     <string name="save_track_min_distance_descr">Filtro: Definir distância mínima de um ponto para registrar o próximo.</string>
     <string name="save_track_precision_descr">Filtro: Não registrar a menos que esta precisão é alcançada.</string>
     <string name="christmas_poi">POI de Natal</string>
-    <string name="christmas_desc_q">Mostrar POI de Natal?</string>
+    <string name="christmas_desc_q">Mostrar POIs de Natal\?</string>
     <string name="rendering_value_light_brown_name">Marrom claro</string>
     <string name="rendering_value_dark_brown_name">Marrom escuro</string>
     <string name="rendering_attr_contourColorScheme_name">Esquema de cores das curvas de nível</string>
@@ -2283,7 +2283,7 @@ Pôr do Sol: %2$s</string>
     <string name="import_track_desc">Arquivo %1$s não possui pontos de passagem, importe-o como uma trilha?</string>
     <string name="add_segment_to_the_track">Adicionar a um arquivo GPX</string>
     <string name="empty_state_av_notes_desc">Adicione nota de áudio, vídeo ou foto em qualquer ponto do mapa, usando o widget ou o menu de contexto.</string>
-    <string name="quick_action_add_destination_desc">Tocar neste botão de ação marcará o centro da tela como o destino da rota, qualquer destino anteriormente definido se torna o último destino intermediário.</string>
+    <string name="quick_action_add_destination_desc">Um botão que marca o centro da tela como o destino da rota, qualquer destino anteriormente selecionado se torna o último destino intermediário.</string>
     <string name="quick_action_replace_destination_desc">Tocar no botão de ação marcará o centro da tela como novo destino da rota, substituindo o destino selecionado anteriormente (se houver).</string>
     <string name="quick_action_add_first_intermediate_desc">Um botão para adicionar no centro da tela o primeiro destino intermédio.</string>
     <string name="subscribe_email_desc">Assine a nossa lista de discussão sobre descontos do aplicativo e obtenha mais 3 downloads de mapa!</string>
@@ -2291,8 +2291,8 @@ Pôr do Sol: %2$s</string>
     <string name="auto_split_recording_title">Autodividir gravações após um intervalo</string>
     <string name="auto_split_recording_descr">Iniciar novo segmento após intervalo de 6 min, uma nova trilha após intervalo de 2 h, ou um novo arquivo depois de um longo intervalo se a data foi alterada.</string>
     <string name="upload_osm_note_description">Envie sua Nota OSM anonimamente ou através do seu perfil do OpenStreetMap.org.</string>
-    <string name="trip_rec_notification_settings_desc">Exiba uma notificação de sistema que permite iniciar a gravação de viagem.</string>
-    <string name="christmas_desc">Antecipando os feriados de Natal e ano novo, você pode optar por exibir o POI associado com o Natal: árvores de Natal, mercados, etc.</string>
+    <string name="trip_rec_notification_settings_desc">Exibir uma notificação do sistema permitindo a gravação de viagem.</string>
+    <string name="christmas_desc">Antecipando os feriados de Natal e ano novo, você pode optar por exibir POIs relacionados ao Natal, como árvores de Natal, mercados, etc.</string>
     <string name="osm_live_payment_desc">Assinatura cobrada mensalmente. Pode ser cancelada no Google Play a qualquer momento.</string>
     <string name="donation_to_osm_desc">Parte de sua doação é enviada aos usuários do OSM que enviam alterações ao OpenStreetMap. O custo da assinatura permanece o mesmo.</string>
     <string name="osm_live_subscription_desc">A assinatura permite atualizações a cada hora, diariamente e semanais, e downloads ilimitados para todos os mapas globalmente.</string>
@@ -2330,10 +2330,10 @@ Pôr do Sol: %2$s</string>
     <string name="avoid_road">Evitar estrada</string>
     <string name="osm_live_subscription">Assinatura OsmAnd Live</string>
     <string name="osm_live_subscribe_btn">Assinar</string>
-    <string name="osm_live_user_public_name">Nome Público</string>
+    <string name="osm_live_user_public_name">Nome público</string>
     <string name="osm_live_hide_user_name">Não mostre meu nome em relatórios</string>
     <string name="osm_live_support_region">Região de suporte</string>
-    <string name="osm_live_month_cost">Custo mensal</string>
+    <string name="osm_live_month_cost">Custo por mês</string>
     <string name="osm_live_month_cost_desc">Pagamento mensal</string>
     <string name="osm_live_active">Ativo</string>
     <string name="osm_live_not_active">Inativo</string>
@@ -2368,7 +2368,7 @@ Pôr do Sol: %2$s</string>
     <string name="osm_user_stat">Edições %1$s, classificação %2$s, total de edições %3$s</string>
     <string name="osm_recipient_stat">Edições %1$s, soma de %2$s mBTC</string>
     <string name="osm_live_email_desc">Necessário para fornecer-lhe informações sobre as contribuições.</string>
-    <string name="osm_live_enter_user_name">Por favor, digite o nome público</string>
+    <string name="osm_live_enter_user_name">Por favor, digite um nome público</string>
     <string name="osm_live_thanks">Obrigado por apoiar o OsmAnd!
 \nPara ativar todos os novos recursos você precisa reiniciar o OsmAnd.</string>
     <string name="osm_live_region_desc">Parte da sua doação será enviada para os usuários OSM que enviam alterações para o mapa da região.</string>
@@ -2446,8 +2446,8 @@ Pôr do Sol: %2$s</string>
 \n• Assinatura OsmAnd Live agora suporta todas as funcionalidades do OsmAnd.
 \n</string>
     <string name="route_points_category_name">Converte como visitado nesta rota</string>
-    <string name="download_files_error_not_enough_space">Não há espaço suficiente! O espaço de armazenamento necessário é {3} MB temporariamente, {1} MB permanentemente. O espaço disponível é de apenas {2} MB.</string>
-    <string name="download_files_question_space_with_temp">Baixar {0} arquivo(s)\? O espaço de armazenamento usado é de {3} MB temporariamente, {1} MB permanentemente. ({2} MB de espaço disponível.)</string>
+    <string name="download_files_error_not_enough_space">Não há espaço suficiente! {3} MB é necessário temporariamente, {1} MB permanentemente. (Apenas {2} MB disponível.)</string>
+    <string name="download_files_question_space_with_temp">Baixar {0} arquivo(s)\? {3} MB é usado temporariamente, {1} MB permanentemente. (De {2} MB.)</string>
     <string name="lang_hsb">Alto sorábio</string>
     <string name="lang_kab">Cabila</string>
     <string name="lang_ber">Berberes</string>
@@ -2800,7 +2800,7 @@ Pôr do Sol: %2$s</string>
     <string name="edit_map_marker">Editar marcador de mapa</string>
     <string name="third_party_application">Aplicativo de terceiros</string>
     <string name="search_street">Pesquisar rua</string>
-    <string name="start_search_from_city">Primeiro especifique a cidade/vila/localidade</string>
+    <string name="start_search_from_city">Especifique outra cidade/vila/localidade</string>
     <string name="shared_string_restore">Restaurar</string>
     <string name="rendering_value_black_name">Preto</string>
     <string name="more_transport_on_stop_hint">Outros transportes disponíveis nesta parada.</string>
@@ -2981,8 +2981,8 @@ Pôr do Sol: %2$s</string>
     <string name="avoid_pt_types_descr">Selecione os tipos de transporte público a evitar para navegação:</string>
     <string name="avoid_pt_types">Evite os tipos de transporte…</string>
     <string name="quick_action_day_night_mode">Modo %s</string>
-    <string name="routing_attr_avoid_sett_name">Evitar pavimento de pedras irregulares e paralelepípedo</string>
-    <string name="routing_attr_avoid_sett_description">Evitar pavimento de pedras irregulares e paralelepípedo</string>
+    <string name="routing_attr_avoid_sett_name">Sem pedras irregulares ou paralelepípedo</string>
+    <string name="routing_attr_avoid_sett_description">Evita pavimento de pedras irregulares e paralelepípedo</string>
     <string name="shared_string_degrees">Graus</string>
     <string name="shared_string_milliradians">Milirradianos</string>
     <string name="angular_measeurement">Unidade angular</string>
@@ -3372,4 +3372,5 @@ Pôr do Sol: %2$s</string>
     <string name="rendering_value_white_name">Branco</string>
     <string name="swap_two_places">Trocar %1$s e %2$s</string>
     <string name="route_start_point">Ponto de partida</string>
+    <string name="default_speed_dialog_msg">Usado para estimar a hora de chegada para tipos de estradas desconhecidos e para limitar a velocidade para todas as estradas (pode alterar a rota)</string>
 </resources>

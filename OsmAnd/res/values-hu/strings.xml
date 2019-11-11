@@ -2966,7 +2966,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="rendering_attr_smoothness_very_horrible_name">Rettenetes</string>
     <string name="rendering_attr_smoothness_impassable_name">Járhatatlan</string>
     <string name="rendering_attr_highway_class_motorway_name">Autópálya</string>
-    <string name="rendering_attr_highway_class_state_road_name">Állami út</string>
+    <string name="rendering_attr_highway_class_state_road_name">Főút</string>
     <string name="rendering_attr_highway_class_road_name">Út</string>
     <string name="rendering_attr_highway_class_street_name">Utca</string>
     <string name="rendering_attr_highway_class_service_name">Szervizút</string>
@@ -3233,4 +3233,5 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="rendering_value_white_name">Fehér</string>
     <string name="swap_two_places">%1$s és %2$s felcserélése</string>
     <string name="route_start_point">Kiindulópont</string>
+    <string name="default_speed_dialog_msg">Célja az érkezési idő becslése ismeretlen típusú utak esetén, valamint a sebesség korlátozása valamennyi úttípus esetén (az útvonalat befolyásolhatja)</string>
 </resources>

@@ -3370,4 +3370,18 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="quick_action_show_hide_hillshade">Mostra/nascondi l\'ombreggiatura dei rilievi</string>
     <string name="tts_initialization_error">Impossibile avviare il motore dal-testo-alla-voce</string>
     <string name="simulate_your_location_gpx_descr">Simula la mia posizione utilizzando una traccia GPX registrata.</string>
+    <string name="default_speed_dialog_msg">Utilizzata per stimare l\'orario d\'arrivo per le strade di tipo sconosciute e come limite di velocità per tutte le strade (può influenzare il calcolo del percorso)</string>
+    <string name="export_profile">Esporta il profilo</string>
+    <string name="exported_osmand_profile">Profilo OsmAnd: %1$s</string>
+    <string name="overwrite_profile_q">Il profilo \'%1$s\' c\'è già. Sovrascriverlo\?</string>
+    <string name="export_profile_failed">Esportazione del profilo non riuscita.</string>
+    <string name="profile_import">Importa il profilo:</string>
+    <string name="profile_import_descr">Per importare un profilo scegli il relativo file nel dispositivo e aprilo con OsmAnd.</string>
+    <string name="file_import_error">%1$s errore importazione: %2$s</string>
+    <string name="file_imported_successfully">%1$s importato con successo.</string>
+    <string name="rendering_value_white_name">Bianco</string>
+    <string name="swap_two_places">Inverti %1$s e %2$s</string>
+    <string name="route_start_point">Partenza</string>
+    <string name="track_saved">Traccia salvata</string>
+    <string name="empty_filename">Nome del file vuoto</string>
 </resources>

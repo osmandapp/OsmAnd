@@ -1459,7 +1459,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				LocalIndexesFragment.renameFile(getActivity(), gpxInfo.file, new RenameCallback() {
 					@Override
 					public void renamedTo(File file) {
-						app.getGpxDbHelper().rename(gpxInfo.file, file);
 						asyncLoader = new LoadGpxTask();
 						asyncLoader.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, getActivity());
 					}

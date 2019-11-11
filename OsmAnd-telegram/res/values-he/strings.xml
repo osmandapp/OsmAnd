@@ -247,4 +247,6 @@
     <string name="shared_string_apply">החלה</string>
     <string name="set_time_timeline_descr">בחירת זמן להצגה</string>
     <string name="start_end_date">תאריך התחלה - סיום</string>
+    <string name="location_sharing_status">משותף: %1$s</string>
+    <string name="shared_string_enabled">מופעל</string>
 </resources>

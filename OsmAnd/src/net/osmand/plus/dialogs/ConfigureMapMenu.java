@@ -55,10 +55,12 @@ import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRuleStorageProperties;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
+import net.osmand.util.SunriseSunset;
 
 import org.apache.commons.logging.Log;
 
 import java.io.File;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -580,6 +582,16 @@ public class ConfigureMapMenu {
 						for (int i = 0; i < items.length; i++) {
 							items[i] = OsmandSettings.DayNightMode.values()[i].toHumanString(activity
 									.getMyApplication());
+						}
+
+						SunriseSunset sunriseSunset = activity.getMyApplication().getDaynightHelper().getSunriseSunset();
+						if (sunriseSunset != null) {
+							DateFormat dateFormat = DateFormat.getTimeInstance(DateFormat.SHORT);
+							String sunriseSunsetTime = "\n" + dateFormat.format(activity.getMyApplication()
+									.getDaynightHelper().getSunriseSunset().getSunrise()) + "/" +
+									dateFormat.format(activity.getMyApplication()
+											.getDaynightHelper().getSunriseSunset().getSunset());
+							items[0] += sunriseSunsetTime;
 						}
 						int i = view.getSettings().DAYNIGHT_MODE.get().ordinal();
 						bld.setSingleChoiceItems(items, i, new DialogInterface.OnClickListener() {

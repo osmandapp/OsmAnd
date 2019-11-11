@@ -3,54 +3,85 @@
 	xmlns:osmand="http://schemas.android.com/apk/res-auto"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
-	xmlns:tools="http://schemas.android.com/tools"
 	android:background="?attr/bg_color"
 	android:orientation="vertical">
-	
-		<TextView
-			android:id="@+id/saved_track_name_string"
-			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
-			android:padding="@dimen/content_padding"
-			tools:text="Track 2019-02-26 12-52 saved"
-			android:textColor="?android:textColorPrimary"
-			android:textSize="@dimen/default_list_text_size"/>
 
-
-	<LinearLayout
-		android:orientation="horizontal"
+	<net.osmand.plus.widgets.TextViewEx
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:paddingBottom="@dimen/content_padding_small">
+		android:padding="@dimen/content_padding"
+		android:text="@string/track_saved"
+		android:textColor="?android:textColorPrimary"
+		android:textSize="@dimen/default_list_text_size"
+		osmand:typeface="@string/font_roboto_medium" />
 
-		<Button
-			android:id="@+id/open_track_button"
-			android:background="?attr/dlg_btn_secondary"
+	<net.osmand.plus.widgets.OsmandTextFieldBoxes
+		android:id="@+id/name_text_box"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:paddingStart="@dimen/content_padding"
+		android:paddingLeft="@dimen/content_padding"
+		android:paddingEnd="@dimen/content_padding"
+		android:paddingRight="@dimen/content_padding"
+		android:paddingBottom="@dimen/content_padding_small"
+		osmand:hasClearButton="true"
+		osmand:labelText="@string/gpx_file_name">
+
+		<studio.carbonylgroup.textfieldboxes.ExtendedEditText
+			android:id="@+id/name_edit_text"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:imeOptions="actionDone"
+			android:inputType="text"
+			android:maxLines="1" />
+
+	</net.osmand.plus.widgets.OsmandTextFieldBoxes>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal">
+
+		<TextView
 			android:layout_width="0dp"
-			android:layout_height="@dimen/bottom_sheet_cancel_button_height_small"
+			android:layout_height="wrap_content"
 			android:layout_weight="1"
-			android:text="@string/shared_string_open_track"
-			android:textColor="?attr/dlg_btn_secondary_text"
-			android:textSize="@dimen/default_desc_text_size"
-			android:textAllCaps="false"
-			android:layout_marginLeft="@dimen/bottom_sheet_content_margin"
-			android:layout_marginRight="@dimen/bottom_sheet_content_margin_small"
-
-			/>
-
-		<Button
-			android:id="@+id/show_on_map_button"
-			android:background="?attr/dlg_btn_primary"
-			android:layout_width="0dp"
-			android:layout_height="@dimen/bottom_sheet_cancel_button_height_small"
-			android:layout_weight="1"
+			android:padding="@dimen/content_padding"
 			android:text="@string/shared_string_show_on_map"
-			android:textAllCaps="false"
-			android:textColor="?attr/dlg_btn_primary_text"
-			android:textSize="@dimen/default_desc_text_size"
-			android:layout_marginLeft="@dimen/bottom_sheet_content_margin_small"
-			android:layout_marginRight="@dimen/bottom_sheet_content_margin"
-			/>
+			android:textColor="?android:textColorPrimary"
+			android:textSize="@dimen/default_list_text_size" />
+
+		<android.support.v7.widget.SwitchCompat
+			android:id="@+id/btn_show_on_map"
+			android:layout_width="wrap_content"
+			android:layout_height="match_parent"
+			android:checked="true"
+			android:padding="@dimen/content_padding" />
 
 	</LinearLayout>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		android:paddingLeft="@dimen/content_padding"
+		android:paddingTop="@dimen/content_padding_small"
+		android:paddingRight="@dimen/content_padding"
+		android:paddingBottom="@dimen/content_padding_small">
+
+		<include
+			android:id="@+id/open_track_button"
+			layout="@layout/bottom_sheet_dialog_button" />
+
+		<View
+			android:id="@+id/buttons_divider"
+			android:layout_width="@dimen/content_padding"
+			android:layout_height="match_parent" />
+
+		<include
+			android:id="@+id/close_button"
+			layout="@layout/bottom_sheet_dialog_button" />
+
+	</LinearLayout>
+
 </LinearLayout>

@@ -445,7 +445,7 @@
     <string name="map_view_3d">3D-kartvisning</string>
     <string name="show_poi_over_map_description">Vis sist valgte interessepunktsoverlegg.</string>
     <string name="show_poi_over_map">Vis interessepunktoverlegg</string>
-    <string name="map_tile_source_descr">Velg kilde for nettbaserte eller hurtigbufrede kart.</string>
+    <string name="map_tile_source_descr">Velg kilde for nettbaserte eller hurtigbufrede kart</string>
     <string name="map_tile_source">Fliskartkilde</string>
     <string name="map_source">Kartkilde</string>
     <string name="use_internet">Bruk Internett</string>
@@ -999,7 +999,7 @@
     <string name="pref_overlay">Overlegg/Underlag</string>
     <string name="layer_underlay">Underlagskart…</string>
     <string name="map_underlay">Underlagskart</string>
-    <string name="map_underlay_descr">Velg underlagskart.</string>
+    <string name="map_underlay_descr">Velg underlagskart</string>
     <string name="layer_overlay">Overleggskart…</string>
     <string name="map_overlay">Overleggskart</string>
     <string name="map_overlay_descr">Velg overleggskartet.</string>
@@ -1435,7 +1435,7 @@
     <string name="local_openstreetmap_act_title">OSM-endringer</string>
     <string name="download_wikipedia_maps">Wikipedia</string>
     <string name="intermediate_points_change_order">Endre rekkefølge</string>
-    <string name="av_def_action_choose">På forespørsel</string>
+    <string name="av_def_action_choose">På forespørsel\?</string>
     <string name="av_def_action_video">Ta opp video</string>
     <string name="av_def_action_audio">Ta opp lyd</string>
     <string name="recording_context_menu_delete">Slett opptak</string>
@@ -1980,7 +1980,7 @@
     <string name="quick_action_map_style_action">Legg til en kartstil</string>
     <string name="quick_action_poi_list">Interessepunktliste</string>
     <string name="quick_action_sh_poi_descr">Legg til én eller flere interessepunktkategorier som skal vises på kartet.</string>
-    <string name="quick_action_category_descr">Kategori å lagre favoritten i.</string>
+    <string name="quick_action_category_descr">Kategori å lagre favoritten i:</string>
     <string name="quick_action_add_navigation">Navigering</string>
     <string name="quick_action_add_configure_map">Kartinnstilling</string>
     <string name="quick_action_add_category">Legg til en kategori</string>
@@ -2814,7 +2814,7 @@
     <string name="commiting_way">Sender inn vei…</string>
     <string name="send_search_query_description">Vi kommer til å sende inn ditt søk \"%1$s\", sammen med din plassering.
         \nIngen personlig informasjon samles inn, søkedata brukes kun for å forbedre søkealgoritmen.</string>
-    <string name="test_voice_desrc">Trykk på en knapp og lytt til tilhørende talemelding for å se om den mangler eller har feil.</string>
+    <string name="test_voice_desrc">Trykk på en knapp og lytt til tilhørende talemelding for å se om den mangler eller har feil</string>
     <string name="release_3_2_pre">• Fikset krasj ved oppstart som skjedde på noen enheter
 \n
 \n • Ny mulighet med markører: vis markører som allerede er passert
@@ -3128,8 +3128,8 @@
     <string name="routing_attr_piste_type_skitour_name">Skigåing</string>
     <string name="routing_attr_piste_type_skitour_description">Ruter for skigåing.</string>
     <string name="routing_attr_allow_intermediate_name">Tillat mellomliggende ruter</string>
-    <string name="routing_attr_allow_intermediate_description">Flere vanskelige ruter med brattere deler. Generelt noen hindringer å unngå.</string>
-    <string name="routing_attr_allow_advanced_description">Vanskelige ruter, med farlige hindre og bratte deler.</string>
+    <string name="routing_attr_allow_intermediate_description">Vanskeligere ruter med brattere partier. Generelt noen hindringer som bør unngås.</string>
+    <string name="routing_attr_allow_advanced_description">Vanskelige ruter, med farlige hindringer og bratte partier.</string>
     <string name="routing_attr_allow_expert_description">Ekstremt vanskelige ruter, med farlige hindringer og omgivelser.</string>
     <string name="routing_attr_allow_skating_only_description">Ruter forberedt for fristil eller kun skøyting, uten klassiske spor.</string>
     <string name="routing_attr_allow_classic_only_description">Ruter forberedt for kun klassisk, uten skøytemuligheter. Dette inkluderer ruter forberedt av en mindre snøskuter med løsere løype og spor laget manuelt av skigåere.</string>
@@ -3243,7 +3243,7 @@
     <string name="shared_string_memory_tb_desc">%1$s TB</string>
     <string name="shared_string_memory_gb_desc">%1$s GB</string>
     <string name="shared_string_memory_mb_desc">%1$s MB</string>
-    <string name="shared_string_memory_kb_desc">%1$s KB</string>
+    <string name="shared_string_memory_kb_desc">%1$s kB</string>
     <string name="lang_oc">Oksitansk</string>
     <string name="manage_profiles_descr">Opprett, importer, rediger profiler</string>
     <string name="manage_profiles">Håndter programprofiler…</string>
@@ -3266,8 +3266,129 @@
     <string name="quick_action_hillshade_hide">Skjul relieffskygge</string>
     <string name="quick_action_show_hide_hillshade">Vis/skjul relieffskygge</string>
     <string name="tts_initialization_error">Kan ikke starte tekst-til-tale -motor</string>
-    <string name="simulate_your_location_gpx_descr">Simuler din posisjon ved bru av et innspilt GPX-spor.</string>
+    <string name="simulate_your_location_gpx_descr">Simuler posisjonen din ved bruk av et innspilt GPX-spor.</string>
     <string name="exported_osmand_profile">OsmAnd-profil: %1$s</string>
     <string name="profile_import">Profil-import:</string>
     <string name="rendering_value_white_name">Hvit</string>
+    <string name="default_speed_dialog_msg">Brukes til å estimere ankomsttid for ukjente veityper, og for å begrense farten på alle veier (kan endre rute)</string>
+    <string name="track_storage_directory">Spor-lagringsmappe</string>
+    <string name="track_storage_directory_descrp">Spor kan lagres i \'rec\'-mappen, månedlige eller daglige mapper.</string>
+    <string name="store_tracks_in_rec_directory">Ta opp spor til \'rec\'-mappen</string>
+    <string name="store_tracks_in_daily_directories">Ta opp spor i daglige mapper</string>
+    <string name="store_tracks_in_daily_directories_descrp">Ta opp spor i undermapper for hver forskjellig dag (som 2018-01-01).</string>
+    <string name="shared_string_memory_used_tb_desc">%1$s TB brukt</string>
+    <string name="shared_string_memory_used_gb_desc">%1$s GB brukt</string>
+    <string name="shared_string_memory_used_mb_desc">%1$s MB brukt</string>
+    <string name="shared_string_memory_used_kb_desc">%1$s kB brukt</string>
+    <string name="routing_attr_prefer_unpaved_name">Foretrekk veier uten fast dekke</string>
+    <string name="routing_attr_prefer_unpaved_description">Foretrekk veier uten fast dekke.</string>
+    <string name="release_3_5">• Oppdaterte program- og profilinnstillinger: Innstillinger er nå ordnet etter type. Hver profil kan tilpasses separat. 
+\n 
+\n • Ny kartnedlasting-dialog foreslår et kart til nedlasting mens man utforsker 
+\n 
+\n • Nattdraktfikser
+\n 
+\n • Flere rutingsproblemer rundt om i verden fikset
+\n 
+\n • Oppdatert grunnkartet med mer detaljert veinettverk 
+\n 
+\n • Fikset oversvømte områder rundt om i verden. 
+\n 
+\n • Ski-navigasjon: Tillagt høydeprofil og rutekompleksitet i rutedetaljer 
+\n 
+\n • Andre småfikser
+\n
+\n</string>
+    <string name="apply_preference_to_all_profiles">Du kan bruke denne endringen på alle profilene, eller bare den nåværende.</string>
+    <string name="quick_action_contour_lines_descr">En bryter for å vise eller skjule koter på kartet.</string>
+    <string name="export_profile">Eksporter profil</string>
+    <string name="overwrite_profile_q">Overskriv profilen «%1$s» som finnes allerede\?</string>
+    <string name="export_profile_failed">Kunne ikke eksportere profil.</string>
+    <string name="profile_import_descr">For å importere en profil, velg filen på enheten og åpne den med OsmAnd.</string>
+    <string name="file_import_error">%1$s feil under import: %2$s</string>
+    <string name="file_imported_successfully">%1$s ble importert.</string>
+    <string name="swap_two_places">Bytt %1$s og %2$s</string>
+    <string name="route_start_point">Startpunkt</string>
+    <string name="rendering_attr_ice_road_name">Isvei</string>
+    <string name="routeInfo_winter_ice_road_name">Vinter- og isveier</string>
+    <string name="enter_path_to_folder">Skriv inn sti til mappen</string>
+    <string name="paste_Osmand_data_folder_path">Lim inn sti til mappen inneholdende OsmAnd-data</string>
+    <string name="internal_app_storage_description">Internlagring, skjult fra bruker og andre programmer, kun tilgjengelig for OsmAnd</string>
+    <string name="change_data_storage_folder">Endre datalagringsmappe</string>
+    <string name="rendering_attr_piste_type_snow_park_name">Snøpark</string>
+    <string name="rendering_attr_piste_type_nordic_name">Langrenn</string>
+    <string name="routeInfo_piste_type_name">Løypetype</string>
+    <string name="rendering_attr_piste_difficulty_aerialway_name">Taubane</string>
+    <string name="rendering_attr_piste_difficulty_connection_name">Overgang</string>
+    <string name="track_saved">Spor lagret</string>
+    <string name="empty_filename">Filnavnet er tomt</string>
+    <string name="swap_start_and_destination">Bytt start og mål</string>
+    <string name="turn_screen_on_router">Vekk for sving</string>
+    <string name="turn_screen_on_time_descr">Juster hvor lenge skjermen skal forbli påslått.</string>
+    <string name="turn_screen_on_sensor">Bruk nærhetssensor.</string>
+    <string name="turn_screen_on_sensor_descr">Vift hånden din over toppen av skjermen for å skru den på under navigasjon.</string>
+    <string name="rendering_attr_highway_class_track_grade1_name">Klasse 1</string>
+    <string name="rendering_attr_highway_class_track_grade2_name">Klasse 2</string>
+    <string name="rendering_attr_highway_class_track_grade3_name">Klasse 3</string>
+    <string name="rendering_attr_highway_class_track_grade4_name">Klasse 4</string>
+    <string name="rendering_attr_highway_class_track_grade5_name">Klasse 5</string>
+    <string name="sett_parrot_ext_input">Parrot</string>
+    <string name="turn_on_profile_desc">Skru på minst én programprofil for å bruke denne innstillingen.</string>
+    <string name="rendering_attr_winter_road_name">Vintervei</string>
+    <string name="rendering_attr_tracktype_grade1_name">Fast (asfaltert)</string>
+    <string name="rendering_attr_tracktype_grade2_name">Fast (uasfaltert)</string>
+    <string name="rendering_attr_tracktype_grade3_name">For det meste fast</string>
+    <string name="rendering_attr_tracktype_grade4_name">For det meste mykt</string>
+    <string name="rendering_attr_tracktype_grade5_name">Mykt</string>
+    <string name="routeInfo_tracktype_name">Flatefasthet</string>
+    <string name="shared_string_open_track">Åpne spor</string>
+    <string name="shared_string_track_is_saved">Sporet %s ble lagret</string>
+    <string name="gpx_join_gaps">Fjern mellomrom</string>
+    <string name="app_mode_camper">Campingvogn</string>
+    <string name="app_mode_campervan">Bobil</string>
+    <string name="rendering_attr_showLez_description">Vis lavutslippssoner på kartet. Har ikke innvirkning på ruting.</string>
+    <string name="rendering_attr_showLez_name">Vis lavutslippssoner</string>
+    <string name="temporary_conditional_routing">Ta hensyn til midlertidige begrensninger</string>
+    <string name="app_mode_wagon">Vogn</string>
+    <string name="app_mode_pickup_truck">Pickup</string>
+    <string name="get_discount_title">Kjøp %1$d %2$s med %3$s rabatt.</string>
+    <string name="get_free_trial_title">Start din %1$d %2$s gratis prøveperiode.</string>
+    <string name="get_discount_first_part">%1$s de første %2$s</string>
+    <string name="get_discount_first_few_part">%1$s de første %2$s</string>
+    <string name="get_discount_second_part">så %1$s</string>
+    <string name="configure_profile_info">Innstillinger for profil:</string>
+    <string name="utm_format_descr">OsmAnd bruker UTM-standard, som ligner, men ikke er helt identisk med UTM NATO-format.</string>
+    <string name="navigate_point_format_olc">Åpen plasseringskode (OLC)</string>
+    <string name="coordinates_format_info">Valgt format vil benyttes i programmet.</string>
+    <string name="pref_selected_by_default_for_profiles">Denne innstillingen er valgt som forvalg for profiler: %s</string>
+    <string name="apply_to_current_profile">Bruk kun for «%1$s»</string>
+    <string name="apply_to_all_profiles">Bruk for alle profiler</string>
+    <string name="analytics_pref_title">Analyseinstrumenter</string>
+    <string name="turn_screen_on_info">Vis kart på låseskjermen under navigering.</string>
+    <string name="route_parameters_info">Innstillinger for ruting i valgt profil «%1$s».</string>
+    <string name="wake_time">Oppetid</string>
+    <string name="screen_alerts_descr">Varsler vises nede til venstre under navigering.</string>
+    <string name="map_during_navigation_info">Kart under navigasjon</string>
+    <string name="map_during_navigation">Kart under navigasjon</string>
+    <string name="voice_announces_info">Stemmekunngjøringer finner kun sted under navigasjon.</string>
+    <string name="voice_announces_descr">Navigasjonsinstruks og kunngjøringer</string>
+    <string name="voice_announces">Stemmekunngjøringer</string>
+    <string name="route_parameters_descr">Sett opp ruteparameter</string>
+    <string name="route_parameters">Ruteparameter</string>
+    <string name="download_detailed_map">Last ned detaljert %s-kart for å vise dette området.</string>
+    <string name="rendering_attr_piste_type_sleigh_name">Slede</string>
+    <string name="rendering_attr_piste_type_sled_name">Akebrett</string>
+    <string name="rendering_attr_piste_type_hike_name">Fottur</string>
+    <string name="rendering_attr_piste_type_connection_name">Forbindelse</string>
+    <string name="rendering_attr_piste_type_skitour_name">Skitur</string>
+    <string name="rendering_attr_piste_type_downhill_name">Alpint</string>
+    <string name="rendering_attr_piste_difficulty_novice_name">Begynner</string>
+    <string name="rendering_attr_piste_difficulty_easy_name">Enkelt</string>
+    <string name="rendering_attr_piste_difficulty_intermediate_name">Middels</string>
+    <string name="rendering_attr_piste_difficulty_advanced_name">Avansert</string>
+    <string name="rendering_attr_piste_difficulty_expert_name">Ekspert</string>
+    <string name="rendering_attr_piste_difficulty_freeride_name">Frikjøring</string>
+    <string name="rendering_attr_piste_difficulty_extreme_name">Ekstremkjøring</string>
+    <string name="rendering_attr_piste_difficulty_undefined_name">Udefinert</string>
+    <string name="routeInfo_piste_difficulty_name">Løypevanskelighetsgrad</string>
 </resources>
