@@ -1253,7 +1253,7 @@ public class OsmandSettings {
 	public final OsmandPreference<DrivingRegion> DRIVING_REGION = new EnumIntPreference<DrivingRegion>(
 			"default_driving_region", DrivingRegion.EUROPE_ASIA, DrivingRegion.values()) {
 		protected boolean setValue(Object prefs, DrivingRegion val) {
-			if (val != null && !METRIC_SYSTEM_CHANGED_MANUALLY.get()) {
+			if (val != null) {
 				METRIC_SYSTEM.set(val.defMetrics);
 			}
 			return super.setValue(prefs, val);
@@ -1282,8 +1282,6 @@ public class OsmandSettings {
 		}
 
 	}.makeProfile().makeGeneral().cache();
-
-	public final CommonPreference<Boolean> METRIC_SYSTEM_CHANGED_MANUALLY = new BooleanPreference("metric_system_changed_manually", false).makeGlobal();
 
 	// this value string is synchronized with settings_pref.xml preference name
 	// cache of metrics constants as they are used very often

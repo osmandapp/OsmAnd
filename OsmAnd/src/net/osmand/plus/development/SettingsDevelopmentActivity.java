@@ -109,7 +109,6 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 				settings.FIRST_MAP_IS_DOWNLOADED.set(false);
 				settings.MAPILLARY_FIRST_DIALOG_SHOWN.set(false);
 				settings.WEBGL_SUPPORTED.set(true);
-				settings.METRIC_SYSTEM_CHANGED_MANUALLY.set(false);
 				settings.WIKI_ARTICLE_SHOW_IMAGES_ASKED.set(false);
 
 				getMyApplication().showToastMessage(R.string.shared_string_ok);
