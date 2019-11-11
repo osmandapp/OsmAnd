@@ -110,6 +110,20 @@ public class WaypointHelper {
 	public boolean isPointPassed(LocationPointWrapper point) {
 		return route.isPointPassed(point.routeIndex);
 	}
+	
+	public boolean isAmenityNoPassed(Amenity a) {
+		if (a != null) {
+			List<LocationPointWrapper> points = locationPoints.get(POI);
+			for (LocationPointWrapper point : points) {
+				if (point.point instanceof AmenityLocationPoint) {
+					if (a.equals(((AmenityLocationPoint) point.point).a)) {
+						return !isPointPassed(point);
+					}
+				}
+			}
+		}
+		return false;
+	}
 
 	public void removeVisibleLocationPoint(LocationPointWrapper lp) {
 		if (lp.type < locationPoints.size()) {
