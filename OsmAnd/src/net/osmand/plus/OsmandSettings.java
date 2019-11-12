@@ -1140,8 +1140,13 @@ public class OsmandSettings {
 	public final CommonPreference<String> API_NAV_DRAWER_ITEMS_JSON = new StringPreference("api_nav_drawer_items_json", "{}").makeGlobal();
 	public final CommonPreference<String> API_CONNECTED_APPS_JSON = new StringPreference("api_connected_apps_json", "[]") {
 		@Override
-		public String getModeValue(ApplicationMode mode) {
-			return getValue(getProfilePreferences(mode), "[]");
+		public String getProfileDefaultValue(ApplicationMode mode) {
+			ApplicationMode parent = mode.getParent();
+			if (parent != null && isSetForMode(parent)) {
+				return getModeValue(parent);
+			} else {
+				return super.getProfileDefaultValue(mode);
+			}
 		}
 	}.makeProfile();
 
