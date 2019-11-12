@@ -2293,6 +2293,7 @@
     <string name="quick_action_replace_destination">Замінити пункт призначення</string>
     <string name="quick_action_add_first_intermediate">Додати першу проміжну точку</string>
     <string name="quick_action_add_destination_desc">Натискання на кнопку дії додасть пункт призначення в центр екрану, раніше встановлений пункт призначення стає останнім проміжним пунктом.</string>
+    <string name="quick_action_directions_from_desc">Натискання на кнопку дії встановить пункт відправлення в центр екрану та прокладе шлях до раніше обраного пункту призначення або відкриє діалог для вибору пункту призначення якщо він відсутній на мапі.</string>
     <string name="quick_action_replace_destination_desc">Натискання на кнопку дії встановить пункт призначення в центр екрану, замінивши раніше обраний пункт призначення (якщо такий був).</string>
     <string name="quick_action_add_first_intermediate_desc">Натискання на кнопку дії додасть в центр екрану першу проміжну точку маршруту.</string>
     <string name="no_overlay">Мапа покриття вимкнена</string>
