@@ -36,11 +36,12 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.SettingsHelper;
 import net.osmand.plus.SettingsHelper.ProfileSettingsItem;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.PluginActivity;
 import net.osmand.plus.helpers.FontCache;
+import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
+import net.osmand.plus.skimapsplugin.SkiMapsPlugin;
 
 import org.apache.commons.logging.Log;
 
@@ -258,6 +259,9 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 		}
 		List<OsmandPlugin> plugins = OsmandPlugin.getVisiblePlugins();
 		for (OsmandPlugin plugin : plugins) {
+			if (plugin instanceof SkiMapsPlugin || plugin instanceof NauticalMapsPlugin) {
+				continue;
+			}
 			SwitchPreferenceEx preference = new SwitchPreferenceEx(ctx);
 			preference.setPersistent(false);
 			preference.setKey(plugin.getId());
