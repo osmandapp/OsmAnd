@@ -450,6 +450,10 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		}
 	}
 
+	public void updateSetting(String prefId) {
+		updateAllSettings();
+	}
+
 	public void updateAllSettings() {
 		PreferenceScreen screen = getPreferenceScreen();
 		if (screen != null) {

@@ -107,7 +107,7 @@ public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSh
 	private void updateTargetSettings(boolean discard) {
 		BaseSettingsFragment target = (BaseSettingsFragment) getTargetFragment();
 		if (target != null) {
-			target.updateAllSettings();
+			target.updateSetting(getPrefId());
 			if (!discard) {
 				if (target.shouldDismissOnChange()) {
 					target.dismiss();

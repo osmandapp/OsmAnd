@@ -402,4 +402,13 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 			}
 		}
 	}
+
+	@Override
+	public void updateSetting(String prefId) {
+		if (settings.OSMAND_THEME.getId().equals(prefId)) {
+			recreate();
+			return;
+		}
+		super.updateSetting(prefId);
+	}
 }
