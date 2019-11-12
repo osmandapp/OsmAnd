@@ -157,7 +157,8 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 
 	private void openPopUpMenu(View v, final BottomSheetItemTitleWithTwoButtons title) {
 		UiUtilities iconsCache = getMyApplication().getUIUtilities();
-		final PopupMenu optionsMenu = new PopupMenu(getActivity(), v, Gravity.TOP);
+		final PopupMenu optionsMenu = new PopupMenu(
+				new ContextThemeWrapper(v.getContext(), themeRes), v, Gravity.TOP);
 		DirectionsDialogs.setupPopUpMenuIcon(optionsMenu);
 		MenuItem item;
 		for (final SortByType i : SortByType.values()) {
