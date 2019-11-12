@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<string name="app_mode_bus">Bus</string>
- 	<string name="app_mode_train">Ćah</string>
+    <string name="app_mode_bus">Bus</string>
+    <string name="app_mode_train">Ćah</string>
     <string name="map_widget_battery">Staw baterije</string>
     <string name="move_marker_bottom_sheet_title">Pohibńće kartu, zo by so pozicija pokazowaka změniła</string>
     <!-- string name="lat_lon_pattern">šěr: %1$.5f doł: %2$.5f</string -->
     <string name="follow_us">Slědujće nas</string>
-	<string name="use_osm_live_routing">OsmAnd live-nawigacija</string>
+    <string name="use_osm_live_routing">OsmAnd live-nawigacija</string>
     <string name="access_no_destination">Žadyn cil wubrany njeje</string>
     <string name="access_disable_offroute_recalc">Čaru znowa njewobličić, hdyž sy ju wopušćił(a)</string>
     <string name="access_default_color">Standardna barba</string>
@@ -16,7 +16,6 @@
     <string name="access_hint_enter_description">Zapodajće wopisanje.</string>
     <string name="access_empty_list">Prózdna lisćina</string>
     <string name="access_shared_string_not_installed">Njeinstalowane</string>
-    
     <string name="shared_string_move_up">Horje</string>
     <string name="shared_string_move_down">Dele</string>
     <string name="finish_navigation">Nawigaciju zakónčić</string>
@@ -85,7 +84,6 @@
     <string name="osb_comment_dialog_author">Mjeno awtora</string>
     <string name="osb_comment_dialog_error">Njemóžach komentar přidać</string>
     <string name="osb_comment_dialog_success">Komentar je so přidał</string>
-
     <string name="context_menu_item_delete_waypoint">GPX-dypk wotstronić?</string>
     <string name="context_menu_item_edit_waypoint">GPX-dypk wobdźěłać</string>
     <string name="shared_string_location">městno</string>
@@ -100,7 +98,6 @@
     <string name="shared_string_update">Aktualizowanje</string>
     <string name="shared_string_upload">Nahrać</string>
     <string name="osm_edit_created_poi">OSM POI-dypk wutworjeny</string>
-
     <string name="world_map_download_descr">Zakładna karta swěta pobrachuje abo njeje aktualna. Prošu sćehńće ju za globalny přehlad.</string>
     <string name="shared_string_qr_code">QR-kod</string>
     <string name="map_downloaded">Karta sćehnjena</string>
@@ -237,7 +234,6 @@
     <string name="dash_download_new_one">Nowu kartu sćahnyć</string>
     <string name="map_locale">Rěč na karće</string>
     <string name="rendering_attr_transportStops_name">Zastanišća</string>
-
     <string name="download_tab_updates">Aktualizacije</string>
     <string name="no_internet_connection">Sćehnjenje njeje móžne, prošu přepruwujće swój internetny zwisk.</string>
     <string name="everything_up_to_date">Wšě dataje aktualne</string>
@@ -252,7 +248,6 @@
     <string name="traffic_warning_border_control">Hranična kontrola</string>
     <string name="traffic_warning_speed_camera">Błyskač</string>
     <string name="voice_provider_descr">Rěčny paket za nawigaciju wubrać.</string>
-
     <string name="enable_proxy_title">HTTP-proxy zapinyć</string>
     <string name="enable_proxy_descr">HTTP-proxy za wšě naprašowanja syće aktiwěrować.</string>
     <string name="proxy_host_title">Proxy-Host</string>
@@ -337,8 +332,6 @@
     <string name="index_name_italy">Europa - Italska</string>
     <string name="index_name_gb">Europa - Wulka Britaniska</string>
     <string name="route_descr_select_destination">Cil wubrać</string>
-    
-    
     <string name="routing_attr_avoid_toll_name">Mawtowe dróhi wobeńć</string>
     <string name="routing_attr_avoid_toll_description">Mawtowe dróhi wobeńć</string>
     <string name="routing_attr_avoid_unpaved_name">Njewobkrućene puće wobeńć</string>
@@ -380,7 +373,6 @@
     <string name="route_to">do:</string>
     <string name="route_via">přez:</string>
     <string name="route_from">z(e):</string>
-
     <string name="app_mode_default">Kartu wobhladać</string>
     <string name="settings_preset">Standardny profil</string>
     <string name="settings_preset_descr">Napohlad karty a nastajenja nawigacije składuja so za kóždy wužiwarski profil. Postajće tu waš standardny profil.</string>
@@ -425,7 +417,6 @@
     <string name="context_menu_item_first_intermediate_point">Jako prěni mjezycil postajić</string>
     <string name="add_as_last_destination_point">Jako posledni mjezycil postajić</string>
     <string name="add_as_first_destination_point">Jako prěni mjezycil postajić</string>
-
     <string name="replace_destination_point">Cil narunać</string>
     <string name="new_destination_point_dialog">Cil bu hižo postajeny:</string>
     <string name="shared_string_target_points">Cile</string>
@@ -460,8 +451,7 @@
     <string name="interrupt_music">Wothrawanje hudźby přetorhować</string>
     <string name="osmand_play_title_30_chars">OsmAnd karty a nawigacija</string>
     <string name="osmand_short_description_80_chars">Globalna kartowa a nawigaciska słužba za OSM-karty (online a offline)</string>
-	<string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Navigation Directions) OsmAnd je wotewrjena nawigaciska słužba z přistupom na wulku wšelakorosć globalnych datow OpenStreetMap (OSM). Wšě kartowe daty (wektorowe formaty abo kartowe kachlicy) hodźa so za offline-wužiwanje na Wašej składowanskej karće składować. OsmAnd poskići nimo toho nawigacisku słužbu z hłosowymi připowědźemi. Někotre centralne funkcije: - funguje dospołnje tež online (karty hodźa so składować na nastroju) - kompaktne wektorowe karty za cyły swět steja k dispoziciji - sćehnjenje kartow je móžne direktnje z aplikacije - wjacore kartowe runiny hodźa so runočasnje pokazować (n.př. GPX-tracks, nawigaciske čary, zajimawostki (POI), fawority, zastanišća zjawneho transporta a přidatne karty - offline-pytanje za adresami a městnami (POI) - offline-nawigacija za krótke čary (eksperimentalnje) - modusy za awta, kolesa a pěškow z: - móžnym awtomatiskim měnjenjom mjez dnjowym/nócnym modusom - móžnym awtomatiskim zoomom wotpowědujo spěšnosći - móžnym awtomatiskim wusměrjenjom karty wotpowědujo kompasej abo směrej pohibowanja - informacijemi wo dowolenej spěšnosći, jězbnych ćěrjach a błyskačach Wobmjezowanja tuteje bjezpłatneje wersije OsmAnd: - ličba offline-kartow je wobmjezowana - žadyn přistup k offline-dypkam (POI) Wikipedije OsmAnd so aktiwnje dale wuwiwa a projekt trjeba pjenježne srědki za wuwiwanje, wudospołnjenje a testowanje (jězby) nowych funkcijow. Prošu přemyslće, hač njebyšće chcył(a) kupić OsmAnd+ z dalšimi funkcijemi abo podpěrać OsmAnd z darom pod osmand.net.</string>
-	
+    <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Navigation Directions) OsmAnd je wotewrjena nawigaciska słužba z přistupom na wulku wšelakorosć globalnych datow OpenStreetMap (OSM). Wšě kartowe daty (wektorowe formaty abo kartowe kachlicy) hodźa so za offline-wužiwanje na Wašej składowanskej karće składować. OsmAnd poskići nimo toho nawigacisku słužbu z hłosowymi připowědźemi. Někotre centralne funkcije: - funguje dospołnje tež online (karty hodźa so składować na nastroju) - kompaktne wektorowe karty za cyły swět steja k dispoziciji - sćehnjenje kartow je móžne direktnje z aplikacije - wjacore kartowe runiny hodźa so runočasnje pokazować (n.př. GPX-tracks, nawigaciske čary, zajimawostki (POI), fawority, zastanišća zjawneho transporta a přidatne karty - offline-pytanje za adresami a městnami (POI) - offline-nawigacija za krótke čary (eksperimentalnje) - modusy za awta, kolesa a pěškow z: - móžnym awtomatiskim měnjenjom mjez dnjowym/nócnym modusom - móžnym awtomatiskim zoomom wotpowědujo spěšnosći - móžnym awtomatiskim wusměrjenjom karty wotpowědujo kompasej abo směrej pohibowanja - informacijemi wo dowolenej spěšnosći, jězbnych ćěrjach a błyskačach Wobmjezowanja tuteje bjezpłatneje wersije OsmAnd: - ličba offline-kartow je wobmjezowana - žadyn přistup k offline-dypkam (POI) Wikipedije OsmAnd so aktiwnje dale wuwiwa a projekt trjeba pjenježne srědki za wuwiwanje, wudospołnjenje a testowanje (jězby) nowych funkcijow. Prošu přemyslće, hač njebyšće chcył(a) kupić OsmAnd+ z dalšimi funkcijemi abo podpěrać OsmAnd z darom pod osmand.net.</string>
     <string name="filterpoi_activity">POI-filter postajić</string>
     <string name="recalculate_route_to_your_location">Wužiwarski profil:</string>
     <string name="select_navigation_mode">Wužiwarski profil wubrać</string>
@@ -512,7 +502,7 @@
     <string name="poi_search_desc">Pytanje za zajimawostkami (POI)</string>
     <string name="address_search_desc">Pytanje za adresu</string>
     <string name="navpoint_search_desc">Koordinaty</string>
-    <string name="transport_search_desc">Pytanje za zjawnym transportom</string>
+    <string name="transport_search_desc">Pytanje za zjawnym wobchadom</string>
     <string name="favourites_search_desc">Móžnosć pytanja za faworitami</string>
     <string name="offline_navigation_not_available">OsmAnd offline-nawigacija tuchwilu přistupna njeje.</string>
     <string name="unknown_location">Stejišćo hišće njenamakane</string>
@@ -522,7 +512,6 @@
     <string name="default_buttons_support">OsmAnd podpěrać</string>
     <string name="support_new_features">Nowe funkcije podpěrać</string>
     <string name="back_to_location">Wróćo k stejišću</string>
-
     <string name="north">sewjer</string>
     <string name="north_east">sewjerowuchod</string>
     <string name="east">wuchod</string>
@@ -586,7 +575,6 @@
     <string name="city_type_village">Wjes</string>
     <string name="city_type_town">Město</string>
     <string name="city_type_city">Wulkoměsto</string>
-
     <string name="poi_filter_by_name">Za mjenom pytać</string>
     <string name="search_position_current_location_search">Stejišćo so pyta…</string>
     <string name="search_position_current_location_found">Moje stejišćo (namakane)</string>
@@ -609,7 +597,7 @@
     <string name="local_index_mi_backup">Wupinyć</string>
     <string name="local_index_poi_data">POI-daty</string>
     <string name="local_index_address_data">Adresowe daty</string>
-    <string name="local_index_transport_data">Daty wo zjawnym transporće</string>
+    <string name="local_index_transport_data">Daty wo zjawnym wobchadźe</string>
     <string name="local_index_map_data">Kartowe daty</string>
     <string name="local_indexes_cat_tts">Hłosowe připowědźe (TTS)</string>
     <string name="local_indexes_cat_voice">Hłosowe připowědźe (nahrate)</string>
@@ -665,7 +653,7 @@
     <string name="rendering_exception">Njemóžach wubranu kónčinu rysować</string>
     <string name="poi_context_menu_website">POI-webstronu pokazać</string>
     <string name="poi_context_menu_call">Telefonowe čisło pokazać</string>
-    <string name="context_menu_item_search_transport">Zjawny transport pytać</string>
+    <string name="context_menu_item_search_transport">Zjawny wobchad pytać</string>
     <string name="voice">Připowědź</string>
     <string name="voices">Připowědźe</string>
     <string name="error_reading_gpx">Njemóžach GPX-daty čitać</string>
@@ -680,8 +668,6 @@
     <string name="error_occurred_loading_gpx">Njemóžach začitać GPX</string>
     <string name="send_report">Rozprawu pósłać</string>
     <string name="any_poi">Wšě</string>
-    
-    
     <string name="layer_map">Kartowe žórło…</string>
     <string name="menu_layers">Kartowe runiny</string>
     <string name="context_menu_item_search_poi">POI pytać</string>
@@ -698,12 +684,12 @@
     <string name="sd_mounted_ro">SD-karta je škitana.
 \nTuchwilu je jenož sćehnjena karta widźeć a sćehnjenje nowych kónčin njeje móžno.</string>
     <string name="unzipping_file">Wupakuju dataju…</string>
-    <string name="route_tr">Doprawa, potom</string>
-    <string name="route_tshr">Połnje doprawa, potom</string>
-    <string name="route_tslr">Połdoprawa, potom</string>
-    <string name="route_tl">Dolěwa, potom</string>
-    <string name="route_tshl">Połnje dolěwa, potom</string>
-    <string name="route_tsll">Połdolěwa, potom</string>
+    <string name="route_tr">naprawo, potom</string>
+    <string name="route_tshr">połnje naprawo, potom</string>
+    <string name="route_tslr">poł naprawo, potom</string>
+    <string name="route_tl">nalěwo, potom</string>
+    <string name="route_tshl">połnje nalěwo, potom</string>
+    <string name="route_tsll">poł nalěwo, potom</string>
     <string name="route_tu">So zawróćić</string>
     <string name="route_head">Runjewon</string>
     <string name="first_time_continue">Dale</string>
@@ -827,7 +813,6 @@
     <string name="search_address_building">Twarjenje</string>
     <string name="search_address_building_option">Twarjenje</string>
     <string name="context_menu_item_update_map">Zaktualizuj kartu</string>
-
     <string name="context_menu_item_create_poi">POI dodać</string>
     <string name="add_favorite_dialog_top_text">Zapodaj mjeno faworita</string>
     <string name="add_favorite_dialog_default_favourite_name">Faworit</string>
@@ -853,7 +838,6 @@
     <string name="try_again">Znowa spytać</string>
     <string name="error_message_pattern">Zmylk: {0}</string>
     <string name="dahboard_options_dialog_title">Konfigurować dashboard</string>
-
     <string name="shared_string_undo">Cofnyć</string>
     <string name="shared_string_skip">přeskočić</string>
     <string name="commit_poi">POI sposrědkować</string>
@@ -874,9 +858,7 @@
     <string name="value_downloaded_of_max">%1$.1f wot %2$.1f MB</string>
     <string name="update_all">Zaktualizuj wšě (%1$s MB)</string>
     <string name="free_downloads_used">Wužiwane bjezpłatne sćehnjenja</string>
-
     <string name="application_dir_description">Wubjer městno za składowanje kartowych datajow a druhich datow.</string>
-
     <string name="enter_country_name">Zapodaj mjeno kraja</string>
     <string name="new_version">Nowa wersija</string>
     <string name="begin_with_osmand_menu_group">Prěnje kroki z OsmAnd</string>
@@ -884,7 +866,7 @@
     <string name="instalation_troubleshooting_item">Instalacija a rozrisowanje problemow</string>
     <string name="versions_item">Wersije</string>
     <string name="map_legend">Legenda karty</string>
-<string name="current_track">Tuchwilna čara</string>
+    <string name="current_track">Tuchwilna čara</string>
     <string name="change_markers_position">Poziciju chorhojčki změnić</string>
     <string name="lang_es_us">španišćina (Amerika)</string>
     <string name="lang_ast">asturišćina</string>
@@ -895,7 +877,7 @@
     <string name="storage_directory_card">Składowanska karta</string>
     <string name="coords_format">Format koordinatow</string>
     <string name="coords_format_descr">Format za geografiske koordinaty.</string>
-<string name="mapillary">Mapillary</string>
+    <string name="mapillary">Mapillary</string>
     <string name="shared_string_reload">wobnowić</string>
     <string name="wrong_user_name">Wopačne wužiwarske mjeno</string>
     <string name="mapillary_menu_date_from">Wot</string>
@@ -905,7 +887,6 @@
     <string name="shared_string_install">Instalować</string>
     <string name="shared_string_add_photos">Wobrazy přidać</string>
     <string name="no_photos_descr">Za tute městno fota nimamy.</string>
-    
     <string name="save_as_route_point">Jako dypki na čarje składować</string>
     <string name="save_as_line">Jako liniju składować</string>
     <string name="route_point">dypk na čarje</string>
@@ -1015,7 +996,6 @@
     <string name="gpx_no_tracks_title">Hišće žane GPX-dataje nimaš</string>
     <string name="gpx_add_track">Wjace dodać…</string>
     <string name="gpx_appearance">Napohlad</string>
-    
     <string name="shared_string_notifications">Zdźělenki</string>
     <string name="shared_string_continue">Pokročić</string>
     <string name="shared_string_paused">Přetorhnjene</string>
@@ -1042,7 +1022,6 @@
     <string name="rendering_attr_noPolygons_name">Polygony</string>
     <string name="rendering_attr_contourLines_name">Wysokostne linije pokazać</string>
     <string name="get_directions">Nawigacija</string>
-    
     <string name="add_point_before">Předchadny dypk dodać</string>
     <string name="add_point_after">Přichodny dypk dodać</string>
     <string name="quick_action_start_stop_navigation">Nawigaciju zahajić/přetorhnyć</string>
@@ -1082,8 +1061,8 @@
     <string name="favorite_delete_multiple">Chceš %1$d faworit(ow) a %2$d skupin faworitow wotstronić. Sy sej wěsty/a?</string>
     <string name="basemap_missing">Sćehń sej zakładnu kartu swěta za přehlad cyłeho swěta na niskich zoom-runinach.</string>
     <string name="enter_new_name">Nowe mjeno zapodać</string>
-	<string name="shared_string_back">wróćo</string>
-	<string name="show_map">Kartu pokazać</string>
+    <string name="shared_string_back">wróćo</string>
+    <string name="show_map">Kartu pokazać</string>
     <string name="osn_modify_dialog_title">Noticu wobdźěłać</string>
     <string name="context_menu_item_modify_note">OSM-noticu wobdźěłać</string>
     <string name="coordinates_format">Format koordinatow</string>
@@ -1252,8 +1231,8 @@
     <string name="import_as_gpx">Jako GPX-dataju importować</string>
     <string name="import_as_favorites">Jako faworit importować</string>
     <string name="import_file">Dataju importować</string>
-	<string name="shared_string_view">Wobhladać</string>
-	<string name="wrong_format">Wopačny format</string>
+    <string name="shared_string_view">Wobhladać</string>
+    <string name="wrong_format">Wopačny format</string>
     <string name="shared_string_road">Dróha</string>
     <string name="route_is_calculated">Čara je so wobličiła</string>
     <string name="plan_route_no_markers_toast">Dyrbiš znajmjeńša jednu chorhojčku dodać, zo by móhł(a) tutu funkciju wužić.</string>
@@ -1299,7 +1278,6 @@
     <string name="shared_string_places">Městna</string>
     <string name="shared_string_search">Pytać</string>
     <string name="shared_string_message">Zdźělenka</string>
-    
     <string name="osmand_parking_hour">h</string>
     <string name="osmand_parking_minute">mjeńš</string>
     <string name="osmand_parking_time_left">wyše</string>
@@ -1351,8 +1329,8 @@
     <string name="go_to_next_field">Přichodne polo</string>
     <string name="tap_on_map_to_hide_interface">połna wobrazowka</string>
     <string name="wrong_input">Wopačne zapodaće</string>
-	<string name="waypoints_added_to_map_markers">Pućne dypki su so přidali ke chorhojčkam</string>
-	<string name="make_round_trip_descr">Kopiju wuchadźišća jako cil přidać.</string>
+    <string name="waypoints_added_to_map_markers">Pućne dypki su so přidali ke chorhojčkam</string>
+    <string name="make_round_trip_descr">Kopiju wuchadźišća jako cil přidać.</string>
     <string name="shared_string_markers">Chorhojčki</string>
     <string name="fast_coordinates_input_descr">Format zapodaća koordinatow wubrać. Móžeš jón přeco změnić pod \"Nastajenja\".</string>
     <string name="marker_save_as_track">Jako GPX-dataju składować</string>
@@ -1460,7 +1438,7 @@
     <string name="av_def_action_audio">Awdio nahrać</string>
     <string name="network_provider">syć</string>
     <string name="show_tunnels">Tunle</string>
-<string name="shared_string_current">tuchwilu</string>
+    <string name="shared_string_current">tuchwilu</string>
     <string name="save_current_track_descr">Tuchwilnu čaru nětko jako GPX-dataju składować.</string>
     <string name="save_current_track">Tuchwilnu čaru składować</string>
     <string name="map_widget_plain_time">Tuchwilny čas</string>
@@ -1512,11 +1490,11 @@
     <string name="distance_farthest">Zdalenosć: najdalši jako prěni</string>
     <string name="distance_nearest">Zdalenosć: najbliši jako prěni</string>
     <string name="enter_lat_and_lon">Šěrinu a dołhotu zapodać</string>
-	<string name="east_abbreviation">W</string>
-	<string name="west_abbreviation">Z</string>
-	<string name="south_abbreviation">J</string>
-	<string name="north_abbreviation">S</string>
-	<string name="transport_nearby_routes_within">Bliske linije we wokruhu</string>
+    <string name="east_abbreviation">W</string>
+    <string name="west_abbreviation">Z</string>
+    <string name="south_abbreviation">J</string>
+    <string name="north_abbreviation">S</string>
+    <string name="transport_nearby_routes_within">Bliske linije we wokruhu</string>
     <string name="map_imported_successfully">Karta importěrowana</string>
     <string name="osm_live_banner_desc">Za njewobmjezowane sćehnjenje kartow a aktualizacije husćišo hač jónu wob měsac: tydźensce, wšědnje abo hodźinsce.</string>
     <string name="save_global_track_interval">Powšitkowny interwal nahrawanja</string>
@@ -1525,4 +1503,31 @@
     <string name="save_track_interval">Interwal nahrawanja w běhu nawigacije</string>
     <string name="save_track_interval_descr">Wuběr interwal za nahrawanje čary w běhu nawigacije.</string>
     <string name="gpx_start_new_segment">Nowy wotrězk zahajić</string>
-    </resources>
+    <string name="rendering_attr_publicTransportMode_name">Bus, trolleybus, shuttle</string>
+    <string name="app_modes_choose">Profile aplikacije</string>
+    <string name="app_mode_boat">Čołm</string>
+    <string name="app_mode_public_transport">Zjawny wobchad</string>
+    <string name="base_profile_descr_ski">Sněhakowanje</string>
+    <string name="select_icon_profile_dialog_title">Wubjer symbol</string>
+    <string name="settings_routing_mode_string">Modus: %s</string>
+    <string name="profile_type_descr_string">Typ: %s</string>
+    <string name="profile_type_base_string">zakładny profil</string>
+    <string name="profile_alert_need_routing_type_title">Wubjer wašnje nawigacije</string>
+    <string name="profile_alert_need_profile_name_title">Zapodaj mjeno profila</string>
+    <string name="profile_alert_need_profile_name_msg">Dyrbiš najprjedy profilowe mjeno zapodać.</string>
+    <string name="profile_alert_duplicate_name_msg">Profil z tutym mjenom hižo eksistuje</string>
+    <string name="profile_alert_cant_delete_base">Njemóžeš zakładny profile w OsmAnd wotstronić</string>
+    <string name="profile_alert_need_save_title">Změny składować</string>
+    <string name="profile_alert_need_save_msg">Składuj najprjedy změny profila</string>
+    <string name="profile_alert_delete_title">Profil wotstronić</string>
+    <string name="profile_alert_delete_msg">Sy sej wěsty/a, zo chceš profil \"%s\" wotstronić</string>
+    <string name="select_base_profile_dialog_title">Wubjer zakładny profil</string>
+    <string name="select_nav_profile_dialog_title">Wubjer wašnje nawigacije</string>
+    <string name="base_profile_descr_car">Awto, LKW, motorske</string>
+    <string name="base_profile_descr_bicycle">Koleso, moped, kóń</string>
+    <string name="base_profile_descr_pedestrian">Běžeć, pućować, běhać</string>
+    <string name="base_profile_descr_boat">Łódź, wjesłowanje, płachtakowanje</string>
+    <string name="application_profiles">Profile aplikacije</string>
+    <string name="shared_string_icon">Symbol</string>
+    <string name="manage_profiles">Profile aplikacije zarjadować…</string>
+</resources>
