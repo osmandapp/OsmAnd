@@ -58,11 +58,12 @@ public class SelectAppModesBottomSheetDialogFragment extends AppModesBottomSheet
 		dismiss();
 	}
 
-	public static void showInstance(@NonNull FragmentManager fm, Fragment target) {
+	public static void showInstance(@NonNull FragmentManager fm, Fragment target, boolean usedOnMap) {
 		try {
 			if (fm.findFragmentByTag(SelectAppModesBottomSheetDialogFragment.TAG) == null) {
 				SelectAppModesBottomSheetDialogFragment fragment = new SelectAppModesBottomSheetDialogFragment();
 				fragment.setTargetFragment(target, 0);
+				fragment.setUsedOnMap(usedOnMap);
 				fragment.show(fm, SelectAppModesBottomSheetDialogFragment.TAG);
 			}
 		} catch (RuntimeException e) {
