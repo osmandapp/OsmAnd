@@ -2086,7 +2086,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			Fragment fragment = Fragment.instantiate(this, fragmentName);
 
 			getSupportFragmentManager().beginTransaction()
-					.replace(R.id.fragmentContainer, fragment, fragment.getClass().getSimpleName())
+					.replace(R.id.fragmentContainer, fragment, fragment.getClass().getName())
 					.addToBackStack(DRAWER_SETTINGS_ID + ".new")
 					.commit();
 
