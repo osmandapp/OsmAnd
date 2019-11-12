@@ -1041,7 +1041,7 @@
     <string name="download_type_to_filter">فیلتر</string>
     <string name="transport_context_menu">جست‌وجوی حمل‌ونقل در ایستگاه</string>
     <string name="rotate_map_to_bearing_descr">نحوهٔ چرخش نقشه:</string>
-    <string name="layer_poi">لایهٔ نقاط POI…</string>
+    <string name="layer_poi">لایهٔ POI…</string>
     <string name="gps_provider">GPS</string>
     <string name="route_head">ادامه دهید به</string>
     <string name="opening_hours_not_supported">قالب ساعت کاری تغییردادنی نیست.</string>
@@ -3422,4 +3422,7 @@
     <string name="route_start_point">نقطهٔ شروع</string>
     <string name="track_saved">رد ذخیره شد</string>
     <string name="empty_filename">نام فایل تهی است</string>
+    <string name="default_speed_dialog_msg">برای تخمین زمان رسیدن هنگام پیمودن راه‌های ناشناخته و برای محدودکردن سرعت در همهٔ راه‌ها (ممکن است مسیر را تغییر دهد) استفاده می‌شود</string>
+    <string name="shared_string_revert">بازنشانی</string>
+    <string name="quick_action_directions_from_desc">با لمس این دکمهٔ عملیاتی، نقطهٔ مبدأ در مرکز صفحه قرار می‌گیرد و مسیر تا مقصد محاسبه می‌شود یا اگر نشانگری برای مقصد نباشد، کادری برای انتخاب مقصد باز می‌شود.</string>
 </resources>
