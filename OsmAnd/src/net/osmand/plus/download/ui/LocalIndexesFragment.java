@@ -234,7 +234,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 			String fn = FileNameTranslationHelper.getFileName(getActivity(),
 					getMyApplication().getResourceManager().getOsmandRegions(),
 					info.getFileName());
-			confirm.setMessage(getString(R.string.delete_confirmation_msg, fn));
+			confirm.setMessage(getString(R.string.clear_confirmation_msg, fn));
 			confirm.show();
 		} else if (resId == R.string.local_index_mi_restore) {
 			new LocalIndexOperationTask(getDownloadActivity(), listAdapter, LocalIndexOperationTask.RESTORE_OPERATION).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, info);
