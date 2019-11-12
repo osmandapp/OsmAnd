@@ -125,9 +125,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	@Override
 	@SuppressLint("RestrictedApi")
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		nightMode = !settings.isLightContent();
-		themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
-
+		updateTheme();
 		View view = super.onCreateView(inflater, container, savedInstanceState);
 		if (view != null) {
 			AndroidUtils.addStatusBarPadding21v(getContext(), view);
@@ -145,8 +143,15 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 			setDivider(null);
 			view.setBackgroundColor(ContextCompat.getColor(app, getBackgroundColorRes()));
 		}
-
 		return view;
+	}
+
+	private boolean updateTheme() {
+		boolean nightMode = !settings.isLightContent();
+		boolean changed = this.nightMode != nightMode;
+		this.nightMode = nightMode;
+		this.themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
+		return changed;
 	}
 
 	@Override
@@ -157,11 +162,9 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 
 	@Override
 	public RecyclerView onCreateRecyclerView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
-		LayoutInflater themedInflater = UiUtilities.getInflater(getActivity(), nightMode);
-
+		LayoutInflater themedInflater = UiUtilities.getInflater(getActivity(), isNightMode());
 		RecyclerView recyclerView = super.onCreateRecyclerView(themedInflater, parent, savedInstanceState);
 		recyclerView.setPadding(0, 0, 0, AndroidUtils.dpToPx(app, 80));
-
 		return recyclerView;
 	}
 
@@ -285,8 +288,25 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 
 	@Override
 	public void onAppModeChanged() {
-		updateToolbar();
-		updateAllSettings();
+		if (updateTheme()) {
+			recreate();
+		} else {
+			updateToolbar();
+			updateAllSettings();
+		}
+	}
+
+	public void recreate() {
+		FragmentActivity activity = getActivity();
+		if (activity != null) {
+			Fragment fragment = Fragment.instantiate(activity, currentScreenType.fragmentName);
+			FragmentManager fm = activity.getSupportFragmentManager();
+			fm.popBackStack();
+			fm.beginTransaction()
+					.replace(R.id.fragmentContainer, fragment, fragment.getClass().getName())
+					.addToBackStack(DRAWER_SETTINGS_ID + ".new")
+					.commit();
+		}
 	}
 
 	protected abstract void setupPreferences();
@@ -311,7 +331,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		AppBarLayout appBarLayout = (AppBarLayout) view.findViewById(R.id.appbar);
 		ViewCompat.setElevation(appBarLayout, 5.0f);
 
-		View toolbarContainer = UiUtilities.getInflater(getActivity(), nightMode).inflate(currentScreenType.toolbarResId, appBarLayout);
+		View toolbarContainer = UiUtilities.getInflater(getActivity(), isNightMode()).inflate(currentScreenType.toolbarResId, appBarLayout);
 
 		TextView toolbarTitle = (TextView) view.findViewById(R.id.toolbar_title);
 		toolbarTitle.setText(getPreferenceScreen().getTitle());
@@ -334,7 +354,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 				public void onClick(View v) {
 					FragmentManager fragmentManager = getFragmentManager();
 					if (fragmentManager != null) {
-						SelectAppModesBottomSheetDialogFragment.showInstance(fragmentManager, BaseSettingsFragment.this);
+						SelectAppModesBottomSheetDialogFragment.showInstance(fragmentManager, BaseSettingsFragment.this, false);
 					}
 				}
 			});
@@ -433,7 +453,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	public void updateAllSettings() {
 		PreferenceScreen screen = getPreferenceScreen();
 		if (screen != null) {
-			getPreferenceScreen().removeAll();
+			screen.removeAll();
 		}
 		updatePreferencesScreen();
 	}
