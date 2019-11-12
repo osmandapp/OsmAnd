@@ -122,7 +122,7 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 	private OsmandAidlApi getApi(String reason) {
 		LOG.info("Request AIDL API V2 for " + reason);
 		OsmandAidlApi api = getApp().getAidlApi();
-		String pack = getApp().getPackageManager().getNameForUid(Binder.getCallingUid());
+		String pack = getCallingAppPackName();
 		if (pack != null && !pack.equals(getApp().getPackageName()) && !api.isAppEnabled(pack)) {
 			return null;
 		}
@@ -157,6 +157,10 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 			api.aidlCallbackListenerV2 = null;
 		}
 		mHandlerThread.quit();
+	}
+
+	private String getCallingAppPackName() {
+		return getApp().getPackageManager().getNameForUid(Binder.getCallingUid());
 	}
 
 	private long getCallbackId() {
@@ -449,7 +453,8 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 		public boolean addMapLayer(AddMapLayerParams params) {
 			try {
 				OsmandAidlApi api = getApi("addMapLayer");
-				return params != null && api != null && api.addMapLayer(new AidlMapLayerWrapper(params.getLayer()));
+				String pack = getCallingAppPackName();
+				return params != null && api != null && api.addMapLayer(pack, new AidlMapLayerWrapper(params.getLayer()));
 			} catch (Exception e) {
 				handleException(e);
 				return false;
