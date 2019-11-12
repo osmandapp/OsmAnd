@@ -364,4 +364,11 @@
     <string name="shared_string_result">ရလဒ်</string>
     <string name="shared_string_contents">မာတိကာ</string>
     <string name="shared_string_travel_guides">ခရီးသွားလမ်းညွှန်များ</string>
+    <string name="dd_ddddd_format">DD.DDDDD °</string>
+    <string name="dd_mm_mmmm_format">DD ° MM.MMMM ′</string>
+    <string name="dd_mm_mmm_format">ဒီဂျီဒီဂရီ MM.MMM ′</string>
+    <string name="east_abbreviation">အရှေ့</string>
+    <string name="west_abbreviation">အနောက်</string>
+    <string name="south_abbreviation">တောင်</string>
+    <string name="north_abbreviation">မြောက်</string>
 </resources>

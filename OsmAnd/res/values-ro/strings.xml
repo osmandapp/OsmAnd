@@ -2131,8 +2131,8 @@
     <string name="routing_attr_avoid_tram_description">Evită tramvaiele</string>
     <string name="routing_attr_avoid_bus_name">Evită autobuzele</string>
     <string name="routing_attr_avoid_bus_description">Evită autobuzele și troleibuzele</string>
-    <string name="routing_attr_avoid_share_taxi_name">Evită taxi-urile partajate</string>
-    <string name="routing_attr_avoid_share_taxi_description">Evită taxi-urile partajate</string>
+    <string name="routing_attr_avoid_share_taxi_name">Evită taxi-urile</string>
+    <string name="routing_attr_avoid_share_taxi_description">Evită taxi-urile</string>
     <string name="routing_attr_avoid_train_name">Evită trenurile</string>
     <string name="routing_attr_avoid_train_description">Evită trenurile</string>
     <string name="routing_attr_avoid_subway_name">Evită metro-urile</string>
@@ -2209,7 +2209,7 @@
     <string name="quick_action_show_hide_gpx_tracks">Afișați/Ascundeți traseele GPX</string>
     <string name="quick_action_gpx_tracks_hide">Ascundeți traseele GPX</string>
     <string name="quick_action_gpx_tracks_show">Afișați traseele GPX</string>
-    <string name="add_destination_query">Vă rugăm să adăugați destinația mai întâi</string>
+    <string name="add_destination_query">Selectați destinația mai întâi</string>
     <string name="previous_route">Ruta anterioară</string>
     <string name="add_home">Adăugați acasă</string>
     <string name="add_work">Adăugați serviciu</string>
@@ -2218,8 +2218,8 @@
     <string name="shared_string_capacity">Capacitate</string>
     <string name="shared_string_width">Lățime</string>
     <string name="shared_string_height">Înălțime</string>
-    <string name="add_destination_point">Adăugați destinație</string>
-    <string name="add_intermediate_point">Adăugați intermediar</string>
+    <string name="add_destination_point">Adăugați destinația</string>
+    <string name="add_intermediate_point">Adăugați punct intermediar</string>
     <string name="add_start_point">Adăugați punctul de plecare</string>
     <string name="intermediate_waypoint">Punct intermediar</string>
     <string name="transfers">Transferuri</string>
@@ -2231,7 +2231,7 @@
     <string name="avoid_roads_descr">Selectați un drum pe care doriți să îl evitați în timpul navigării, fie pe hartă, fie din lista de mai jos:</string>
     <string name="show_along_the_route">Afișați de-a lungul rutei</string>
     <string name="simulate_navigation">Simulați navigația</string>
-    <string name="choose_track_file_to_follow">Alegeți fișierul traseu pe care să-l urmăriți</string>
+    <string name="choose_track_file_to_follow">Alegeți un fisier ca traseu, pe care să-l urmăriți</string>
     <string name="voice_announcements">Anunțuri vocale</string>
     <string name="intermediate_destinations">Destinații intermediare</string>
     <string name="arrive_at_time">Sosire la %1$s</string>
@@ -2257,7 +2257,7 @@
     <string name="search_street">Căutați strada</string>
     <string name="start_search_from_city">Selectați mai întâi orașul</string>
     <string name="shared_string_restore">Restaurați</string>
-    <string name="ask_for_location_permission">"Acordați OsmAnd acces la locația  pentru a continua."</string>
+    <string name="ask_for_location_permission">"Acordați OsmAnd acces la locație  pentru a continua."</string>
     <string name="thank_you_for_feedback">Mulțumim pentru părerea dvs</string>
     <string name="increase_search_radius_to">Creșteți raza de căutare la %1$s</string>
     <string name="shared_string_world">Lume</string>
@@ -2321,7 +2321,7 @@
     <string name="visited_screens_collect_descr">Colectăm aceste date pentru a înțelege cele mai populare caracteristici ale lui OsmAnd.</string>
     <string name="privacy_and_security_change_descr">Făcând click pe \"Permiteți\" sunteți de acord cu %1$s</string>
     <string name="settings_privacy_and_security">Confidențialitate și Securitate</string>
-    <string name="settings_privacy_and_security_desc">Alegeți datele dvs. pentru a fi distribuite cu noi</string>
+    <string name="settings_privacy_and_security_desc">Alegeți datele dvs. pentru a fi distribuite</string>
     <string name="shared_string_no_thank_you">Nu, mulțumesc</string>
     <string name="shared_string_allow">Permiteți</string>
     <string name="profile_name_hint">Nume profil</string>
@@ -2343,11 +2343,11 @@
     <string name="profile_alert_need_routing_type_title">Selectați tipul navigației</string>
     <string name="profile_alert_need_profile_name_title">Introduceți numele profilului</string>
     <string name="profile_alert_need_profile_name_msg">Numele profilului nu trebuie să fie gol!</string>
-    <string name="profile_alert_duplicate_name_title">Nume duplicat</string>
+    <string name="profile_alert_duplicate_name_title">Nume deja existent</string>
     <string name="profile_alert_duplicate_name_msg">Există deja un profil cu un astfel de nume</string>
     <string name="profile_alert_cant_delete_base">Nu puteți șterge profile de bază OsmAnd</string>
     <string name="profile_alert_need_save_title">Salvați modificările</string>
-    <string name="profile_alert_need_save_msg">Trebuie să salvați modificările la profil înainte de a continua</string>
+    <string name="profile_alert_need_save_msg">"Trebuie să salvați modificările  profilului înainte de a continua"</string>
     <string name="profile_alert_delete_title">Ștergeți profilul</string>
     <string name="profile_alert_delete_msg">Sigur doriți să ștergeți profilul %s</string>
     <string name="select_base_profile_dialog_title">Selectați profilul de bază</string>
@@ -2356,7 +2356,7 @@
     <string name="base_profile_descr_bicycle">MTB, Moped, Cal</string>
     <string name="base_profile_descr_pedestrian">Plimbări, Drumeții, Alergare</string>
     <string name="base_profile_descr_boat">Navă, Canotaj, Navigație</string>
-    <string name="base_profile_descr_aircraft">Avion, Planare</string>
+    <string name="base_profile_descr_aircraft">Avion, Planor</string>
     <string name="routing_profile_geocoding">Geocodare</string>
     <string name="routing_profile_straightline">Linie dreaptă</string>
     <string name="osmand_default_routing">Rutare OsmAnd</string>
@@ -2405,4 +2405,15 @@
     <string name="file_imported_successfully">Fisier Incarcat cu succes.</string>
     <string name="rendering_value_white_name">Alb</string>
     <string name="route_start_point">Punct de plecare</string>
+    <string name="unirs_render_descr">Modifica stilul implicit pentru a crește contrastul dintre drumurile pietonale și biciclete. Utilizează culori Mapnik.</string>
+    <string name="error_notification_desc">"Trimite o copie a  ecranului al acestei notificări către suport@osmand.net"</string>
+    <string name="coord_input_save_as_track_descr">Ai adăugat puncte%1$s. Scrie un nume de fișier și apăsați \"Salvează\".</string>
+    <string name="send_search_query_description">Cererea de căutare va fi trimisă la: \"%1$s\", împreună cu locația dumneavoastră.
+\nInformaţiile personale nu sunt colectate, doar datele de căutare necesare pentru a îmbunătăţi căutarea.</string>
+    <string name="send_search_query">Trimiţi interogare de căutare\?</string>
+    <string name="search_no_results_feedback">Nu există Rezultate\? Oferiți feedback</string>
+    <string name="more_transport_on_stop_hint">Mai multe optiuni de transport disponibile de la această oprire.</string>
+    <string name="keep_passed_markers_descr">Marcajele adăugate ca grup de Favorite sau GPX waypoints marcate vor rămâne pe hartă.Dacă grupul nu este activ, markerii vor dispărea din hartă.</string>
+    <string name="keep_passed_markers">Păstraţi markerii trecuţi pe hartă</string>
+    <string name="swap_start_and_destination">Schimba adresa de început și de sfârșit</string>
 </resources>

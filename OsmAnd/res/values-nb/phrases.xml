@@ -1353,4 +1353,5 @@
     <string name="poi_access_moped">Mopedadkomst</string>
     <string name="poi_access_disabled">Handicapadkomst</string>
     <string name="poi_health_food">Helsekost</string>
+    <string name="reddit">Reddit</string>
 </resources>

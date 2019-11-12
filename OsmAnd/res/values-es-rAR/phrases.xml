@@ -3753,4 +3753,15 @@
     <string name="poi_cash_withdrawal_migros_bank">Banco Migros</string>
     <string name="poi_cash_withdrawal_girocard">Girocard</string>
     <string name="poi_cash_withdrawal_postbank">Postbanco</string>
+    <string name="poi_bath_type">Tipo de baño</string>
+    <string name="poi_bath_open_air">Al aire libre</string>
+    <string name="poi_bath_type_hot_spring">Fuente termal</string>
+    <string name="poi_bath_type_onsen">Onsen (japonés)</string>
+    <string name="poi_bath_type_hammam">Hammam (turco)</string>
+    <string name="poi_bath_type_thermal">Térmico</string>
+    <string name="poi_bath_type_river">Río</string>
+    <string name="poi_bath_type_lake">Lago</string>
+    <string name="poi_bath_type_foot_bath">Baño de pies</string>
+    <string name="poi_bath_open_air_yes">Sí</string>
+    <string name="poi_bath_open_air_no">No</string>
 </resources>

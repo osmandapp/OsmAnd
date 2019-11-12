@@ -43,7 +43,7 @@
     <string name="current_route">Rota atual</string>
     <string name="osm_changes_added_to_local_edits">Mudanças no OSM adicionadas ao conjunto de alterações locais</string>
     <string name="mark_to_delete">Selecione para apagar</string>
-    <string name="local_osm_changes_upload_all_confirm">Você enviará %1$d alterações ao OSM. Tem certeza?</string>
+    <string name="local_osm_changes_upload_all_confirm">Tem certeza de que deseja fazer upload de %1$d alteração(ões) para o OSM\?</string>
     <string name="confirmation_to_clear_history">Limpar o histórico\?</string>
     <string name="delay_to_start_navigation_descr">Especifique o tempo de espera para permanecer na tela de planejamento de rota.</string>
     <string name="delay_to_start_navigation">Iniciar orientação de curva a curva depois de…</string>
@@ -272,9 +272,9 @@
     <string name="map_widget_left">Painel esquerdo</string>
     <string name="configure_map">Configurar mapa</string>
     <string name="search_radius_proximity">Cerca de</string>
-    <string name="anonymous_user_hint">Um usuário anônimo não pode:
-\n- Criar grupos;
-\n- Sincronizar aparelhos e grupos com o servidor;
+    <string name="anonymous_user_hint">Usuários anônimos não podem: 
+\n- Criar grupos; 
+\n- Sincronizar aparelhos e grupos com o servidor; 
 \n- Gerenciar grupos e aparelhos no painel de controle do website.</string>
     <string name="anonymous_user">Usuário anônimo</string>
     <string name="logged_as">Conectado como %1$s</string>
@@ -1055,7 +1055,7 @@ Pôr do Sol: %2$s</string>
 \n</string>
     <string name="init_native_library">Iniciando a biblioteca nativa…</string>
     <string name="download_files_not_enough_space">Não há espaço livre suficiente para baixar %1$s MB (disponível: %2$s).</string>
-    <string name="download_files_question_space">Baixar {0} arquivo(s)? Espaço de armazenamento utilizado é {1} MB. (Espaço disponível é {2} MB.)</string>
+    <string name="download_files_question_space">Baixar {0} arquivo(s)\? {1} MB (de {2} MB) será usado.</string>
     <string name="use_transparent_map_theme">Tema transparente</string>
     <string name="native_library_not_supported">Biblioteca nativa não é suportada neste aparelho.</string>
     <string name="choose_auto_follow_route">Centrar visualização do mapa</string>
@@ -1561,9 +1561,9 @@ Pôr do Sol: %2$s</string>
     <string name="local_indexes_cat_wiki">Wikipédia</string>
     <string name="download_wikipedia_maps">Wikipédia</string>
     <string name="shared_string_import2osmand">Importar para OsmAnd</string>
-    <string name="local_recordings_delete_all_confirm">Você vai apagar %1$d notas. Tem certeza?</string>
+    <string name="local_recordings_delete_all_confirm">Tem certeza de que deseja apagar %1$d notas\?</string>
     <string name="disable_recording_once_app_killed">Impedir o registro autônomo</string>
-    <string name="gps_network_not_enabled">Serviço de localização não ativado. Quer ligá-lo\?</string>
+    <string name="gps_network_not_enabled">O serviço de localização está desligado. Deseja ligar\?</string>
     <string name="disable_recording_once_app_killed_descrp">Pausará o registro de GPX após o encerramento do app (via apps recentes). (Indicação de OsmAnd em segundo plano desaparecerá da barra de notificação do Android.)</string>
     <string name="archive_wikipedia_data">Você tem dados da Wikipédia antigos e incompatíveis. Quer arquivá-los\?</string>
     <string name="download_wikipedia_files">Baixar dados adicionais da Wikipédia (%1$s MB)\?</string>
@@ -1819,8 +1819,8 @@ Pôr do Sol: %2$s</string>
     <string name="route_duration">Tempo:</string>
     <string name="missing_write_external_storage_permission">OsmAnd não tem permissão para usar o cartão de memória</string>
     <string name="no_location_permission">Conceder acesso aos dados de localização.</string>
-    <string name="no_camera_permission">App não tem permissão para acessar a câmera.</string>
-    <string name="no_microphone_permission">App não tem permissão para acessar o microfone.</string>
+    <string name="no_camera_permission">Concede acesso à câmera.</string>
+    <string name="no_microphone_permission">Concede acesso ao microfone.</string>
     <string name="impassable_road_desc">Escolha as vias que quer evitar durante a navegação.</string>
     <string name="shared_string_sound">Som</string>
     <string name="live_updates">Atualização ao vivo</string>
@@ -1910,7 +1910,7 @@ Pôr do Sol: %2$s</string>
     <string name="osmand_plus_banner_desc">Download ilimitado de mapas, atualizações e plugin Wikipédia.</string>
     <string name="si_mi_meters">Milhas/metros</string>
     <string name="skip_map_downloading">Pular download de mapas</string>
-    <string name="skip_map_downloading_desc">Você não possui mapas offlines. Você pode escolher um mapa da lista ou baixar mapas mais tarde pelo \'Menu - %1$s\'.</string>
+    <string name="skip_map_downloading_desc">Você não possui mapas offlines. Você pode selecionar um mapa da lista ou baixar mapas mais tarde pelo \'Menu - %1$s\'.</string>
     <string name="search_another_country">Selecione um outro local</string>
     <string name="search_map">Procurando mapas…</string>
     <string name="first_usage_wizard_desc">Deixe o OsmAnd determinar o seu local e sugerir mapas da região para baixar.</string>
@@ -2299,7 +2299,7 @@ Pôr do Sol: %2$s</string>
     <string name="get_it">Adquira já</string>
     <string name="get_for">Adquira por %1$s</string>
     <string name="get_for_month">Adquira por %1$s mês</string>
-    <string name="osm_live_banner_desc">Obtenha downloads ilimitados de mapa e atualizações de mapas mais de uma vez por mês: semanalmente, a cada dia ou hora.</string>
+    <string name="osm_live_banner_desc">Obtenha downloads ilimitados de mapas, adicionando atualizações semanais, diárias e a cada hora.</string>
     <string name="quick_action_add_gpx_descr">Tocar no botão de ação adicionará um ponto de passagem GPX no meio da tela.</string>
     <string name="av_locations_all_desc">Arquivo GPX com coordenadas e dados de todas as notas.</string>
     <string name="storage_place_description">Armazenamento de dados do OsmAnd (para mapas, arquivos GPX, etc.): %1$s.</string>
@@ -2367,7 +2367,7 @@ Pôr do Sol: %2$s</string>
     <string name="full_report">Relatório completo</string>
     <string name="osm_user_stat">Edições %1$s, classificação %2$s, total de edições %3$s</string>
     <string name="osm_recipient_stat">Edições %1$s, soma de %2$s mBTC</string>
-    <string name="osm_live_email_desc">Necessário para fornecer-lhe informações sobre as contribuições.</string>
+    <string name="osm_live_email_desc">Necessário para informar você sobre as suas contribuições.</string>
     <string name="osm_live_enter_user_name">Por favor, digite um nome público</string>
     <string name="osm_live_thanks">Obrigado por apoiar o OsmAnd!
 \nPara ativar todos os novos recursos você precisa reiniciar o OsmAnd.</string>
@@ -3373,4 +3373,6 @@ Pôr do Sol: %2$s</string>
     <string name="swap_two_places">Trocar %1$s e %2$s</string>
     <string name="route_start_point">Ponto de partida</string>
     <string name="default_speed_dialog_msg">Usado para estimar a hora de chegada para tipos de estradas desconhecidos e para limitar a velocidade para todas as estradas (pode alterar a rota)</string>
+    <string name="track_saved">Trilha salva</string>
+    <string name="empty_filename">O nome do arquivo está vazio</string>
 </resources>

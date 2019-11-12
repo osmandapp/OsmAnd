@@ -425,7 +425,7 @@
     <string name="shared_string_selected_lowercase">ischertau</string>
     <string name="local_index_gpx_info_show">"
 \n
-\nMantene incarcadu pro sas optziones"</string>
+\nIncarca a longu pro sas optziones"</string>
     <string name="gpx_info_subtracks">Suta-rastas: %1$s</string>
     <string name="gpx_info_waypoints">Puntos de coladòrgiu: %1$s</string>
     <string name="gpx_info_distance">Distàntzia: %1$s (%2$s points)</string>
@@ -3359,7 +3359,7 @@ Pro praghere iscrie su còdighe intreu</string>
 \n • Àteros errores acontzados
 \n
 \n</string>
-    <string name="swap_start_and_destination"> string name=\"lat_lon_pattern\"&gt;Lat: %1$.5f Lon: %2$.5f&lt;/string </string>
+    <string name="swap_start_and_destination">Cuncàmbia s\'orìgine e sa destinatzione</string>
     <string name="apply_preference_to_all_profiles">Podes aplicare custa modìfica a totu sos profilos o a su chi est ischertadu ebbia.</string>
     <string name="shared_preference">Cumpartzidu</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">Privilègia sos caminos non apamentados</string>
@@ -3379,8 +3379,14 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="exported_osmand_profile">Profilu de OsmAnd: %1$s</string>
     <string name="overwrite_profile_q">Su profilu \'%1$s\' esistit giai. Lu cheres subra-iscrìere\?</string>
     <string name="export_profile_failed">Esportatzione de su profilu fallida.</string>
-    <string name="profile_import">Importatzione de su profilu:</string>
+    <string name="profile_import">Importa su profilu:</string>
     <string name="profile_import_descr">Pro importare unu profilu ischerta su documentu suo in su dispositivu e aberi·lu cun OsmAnd.</string>
-    <string name="file_import_error">%1$s errore de importatzione: %2$s</string>
+    <string name="file_import_error">Errore de importatzione de %1$s: %2$s</string>
     <string name="file_imported_successfully">%1$s importadu chene problemas.</string>
+    <string name="default_speed_dialog_msg">Impreadu pro fàghere un\'isrìtima de s\'ora de arribu pro castas disconnotas de caminu e pro limitare sa lestresa pro totu sos caminos (diat pòdere mudare s\'àndala)</string>
+    <string name="rendering_value_white_name">Biancu</string>
+    <string name="swap_two_places">Cuncàmbia %1$s e %2$s</string>
+    <string name="route_start_point">Puntu de incumintzu</string>
+    <string name="track_saved">Rasta sarvada</string>
+    <string name="empty_filename">Su nùmene de su documentu est bòidu</string>
 </resources>

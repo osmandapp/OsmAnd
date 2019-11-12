@@ -3420,4 +3420,6 @@
     <string name="rendering_value_white_name">سفید</string>
     <string name="swap_two_places">تعویض %1$s و %2$s</string>
     <string name="route_start_point">نقطهٔ شروع</string>
+    <string name="track_saved">رد ذخیره شد</string>
+    <string name="empty_filename">نام فایل تهی است</string>
 </resources>
