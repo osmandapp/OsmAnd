@@ -3390,6 +3390,6 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="file_import_error">%1$s Importfehler: %2$s</string>
     <string name="file_imported_successfully">%1$s erfolgreich importiert.</string>
     <string name="rendering_value_white_name">Weiß</string>
-    <string name="swap_two_places">%1 und %2 s tauschen</string>
+    <string name="swap_two_places">%1$s und %2$s tauschen</string>
     <string name="route_start_point">Startpunkt</string>
 </resources>
