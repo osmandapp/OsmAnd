@@ -31,8 +31,8 @@ public class SelectProfileMenuAdapter extends AbstractProfileMenuAdapter<SelectP
 	private static final Log LOG = PlatformUtil.getLog(SelectProfileMenuAdapter.class);
 
 	private List<Object> items = new ArrayList<>();
-	@Nullable
 	private final OsmandApplication app;
+	private ApplicationMode appMode;
 	@ColorRes
 	private int selectedIconColorRes;
 	private boolean bottomButton;
@@ -41,13 +41,15 @@ public class SelectProfileMenuAdapter extends AbstractProfileMenuAdapter<SelectP
 
 	private boolean nightMode;
 
-	public SelectProfileMenuAdapter(List<ApplicationMode> items, OsmandApplication app,
-	                                String bottomButtonText, boolean nightMode) {
+	public SelectProfileMenuAdapter(List<ApplicationMode> items, @NonNull OsmandApplication app,
+	                                String bottomButtonText, boolean nightMode,
+									@Nullable ApplicationMode appMode) {
 		this.items.addAll(items);
 		if (bottomButton) {
 			this.items.add(BUTTON_ITEM);
 		}
 		this.app = app;
+		this.appMode = appMode != null ? appMode : app.getSettings().getApplicationMode();
 		this.bottomButton = !Algorithms.isEmpty(bottomButtonText);
 		this.bottomButtonText = bottomButtonText;
 		this.nightMode = nightMode;
@@ -103,7 +105,7 @@ public class SelectProfileMenuAdapter extends AbstractProfileMenuAdapter<SelectP
 			
 			//set up cell color
 			int colorNoAlpha = ContextCompat.getColor(app, profileColorResId);
-			boolean selectedMode = app.getSettings().APPLICATION_MODE.get() == item;
+			boolean selectedMode = appMode == item;
 			Drawable drawable = UiUtilities.getColoredSelectableDrawable(app, colorNoAlpha, 0.3f);
 
 			if (selectedMode) {

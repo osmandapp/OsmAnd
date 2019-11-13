@@ -379,7 +379,8 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 		if (pref instanceof CommonPreference && !((CommonPreference) pref).hasDefaultValueForMode(getSelectedAppMode())) {
 			FragmentManager fragmentManager = getFragmentManager();
 			if (fragmentManager != null && newValue instanceof Serializable) {
-				ChangeGeneralProfilesPrefBottomSheet.showInstance(fragmentManager, prefId, (Serializable) newValue, this, false);
+				ChangeGeneralProfilesPrefBottomSheet.showInstance(fragmentManager, prefId,
+						(Serializable) newValue, this, false, getSelectedAppMode());
 			}
 			return false;
 		}

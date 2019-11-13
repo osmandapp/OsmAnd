@@ -2,6 +2,7 @@ package net.osmand.plus.settings.bottomsheets;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
@@ -61,7 +62,7 @@ public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSh
 				.create();
 		items.add(applyToAllProfiles);
 
-		ApplicationMode selectedAppMode = getMyApplication().getSettings().APPLICATION_MODE.get();
+		ApplicationMode selectedAppMode = getAppMode();
 
 		BaseBottomSheetItem applyToCurrentProfile = new SimpleBottomSheetItem.Builder()
 				.setTitle(getString(R.string.apply_to_current_profile, selectedAppMode.toHumanString(app)))
@@ -70,7 +71,7 @@ public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSh
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						app.getSettings().setPreference(prefId, newValue);
+						app.getSettings().setPreference(prefId, newValue, getAppMode());
 						updateTargetSettings(false);
 						dismiss();
 					}
@@ -124,7 +125,8 @@ public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSh
 		}
 	}
 
-	public static void showInstance(@NonNull FragmentManager fm, String prefId, Serializable newValue, Fragment target, boolean usedOnMap) {
+	public static void showInstance(@NonNull FragmentManager fm, String prefId, Serializable newValue, Fragment target,
+									boolean usedOnMap, @Nullable ApplicationMode appMode) {
 		try {
 			if (fm.findFragmentByTag(ChangeGeneralProfilesPrefBottomSheet.TAG) == null) {
 				Bundle args = new Bundle();
@@ -134,6 +136,7 @@ public class ChangeGeneralProfilesPrefBottomSheet extends BasePreferenceBottomSh
 				ChangeGeneralProfilesPrefBottomSheet fragment = new ChangeGeneralProfilesPrefBottomSheet();
 				fragment.setArguments(args);
 				fragment.setUsedOnMap(usedOnMap);
+				fragment.setAppMode(appMode);
 				fragment.setTargetFragment(target, 0);
 				fragment.show(fm, ChangeGeneralProfilesPrefBottomSheet.TAG);
 			}

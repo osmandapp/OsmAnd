@@ -3,10 +3,12 @@ package net.osmand.plus.settings.bottomsheets;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.widget.EditText;
 
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.R;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.LongDescriptionItem;
@@ -87,7 +89,8 @@ public class EditTextPreferenceBottomSheet extends BasePreferenceBottomSheet {
 		return (EditTextPreferenceEx) getPreference();
 	}
 
-	public static boolean showInstance(@NonNull FragmentManager fragmentManager, String key, Fragment target, boolean usedOnMap) {
+	public static boolean showInstance(@NonNull FragmentManager fragmentManager, String key, Fragment target,
+									   boolean usedOnMap, @Nullable ApplicationMode appMode) {
 		try {
 			Bundle args = new Bundle();
 			args.putString(PREFERENCE_ID, key);
@@ -95,6 +98,7 @@ public class EditTextPreferenceBottomSheet extends BasePreferenceBottomSheet {
 			EditTextPreferenceBottomSheet fragment = new EditTextPreferenceBottomSheet();
 			fragment.setArguments(args);
 			fragment.setUsedOnMap(usedOnMap);
+			fragment.setAppMode(appMode);
 			fragment.setTargetFragment(target, 0);
 			fragment.show(fragmentManager, TAG);
 			return true;
