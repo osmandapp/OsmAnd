@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 
 import org.apache.commons.logging.Log;
@@ -45,14 +46,15 @@ public class SelectAppModesBottomSheetDialogFragment extends AppModesBottomSheet
 	}
 
 	@Override
-	public void onProfilePressed(ApplicationMode item) {
-		if (!(item == getMyApplication().getSettings().APPLICATION_MODE.get())) {
-			getMyApplication().getSettings().APPLICATION_MODE.set(item);
+	public void onProfilePressed(ApplicationMode appMode) {
+		OsmandSettings settings = getMyApplication().getSettings();
+		if (appMode != settings.APPLICATION_MODE.get()) {
+			settings.APPLICATION_MODE.set(appMode);
 
 			Fragment targetFragment = getTargetFragment();
 			if (targetFragment instanceof AppModeChangedListener) {
 				AppModeChangedListener listener = (AppModeChangedListener) targetFragment;
-				listener.onAppModeChanged();
+				listener.onAppModeChanged(appMode);
 			}
 		}
 		dismiss();
@@ -72,6 +74,6 @@ public class SelectAppModesBottomSheetDialogFragment extends AppModesBottomSheet
 	}
 
 	public interface AppModeChangedListener {
-		void onAppModeChanged();
+		void onAppModeChanged(ApplicationMode appMode);
 	}
 }
