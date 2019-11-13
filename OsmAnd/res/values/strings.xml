@@ -11,6 +11,7 @@
 	Thx - Hardy
 
 -->
+    <string name="clear_confirmation_msg">Clear %1$s?</string>
     <string name="shared_string_revert">Revert</string>
     <string name="track_saved">Track saved</string>
     <string name="empty_filename">File name is empty</string>
