@@ -1,5 +1,6 @@
 package net.osmand.plus.quickaction.actions;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -36,7 +37,6 @@ import net.osmand.osm.edit.Entity;
 import net.osmand.osm.edit.Node;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.osmedit.EditPoiData;
@@ -49,6 +49,7 @@ import net.osmand.plus.osmedit.OsmPoint;
 import net.osmand.plus.osmedit.dialogs.PoiSubTypeDialogFragment;
 import net.osmand.plus.quickaction.CreateEditActionDialog;
 import net.osmand.plus.quickaction.QuickAction;
+import net.osmand.plus.render.RenderingIcons;
 import net.osmand.util.Algorithms;
 
 import java.lang.reflect.Type;
@@ -77,6 +78,29 @@ public class AddPOIAction extends QuickAction {
 
 	public AddPOIAction(QuickAction quickAction) {
 		super(quickAction);
+	}
+
+	@Override
+	public int getIconRes(Context context) {
+		if (context instanceof MapActivity) {
+			final OsmandApplication application = (OsmandApplication) (context).getApplicationContext();
+			final MapPoiTypes poiTypes = application.getPoiTypes();
+			final Map<String, PoiType> allTranslatedNames = poiTypes.getAllTranslatedNames(true);
+			PoiCategory category = getCategory(allTranslatedNames);
+
+			if (category != null) {
+
+				category.getIconKeyName();
+
+				String res = category.getIconKeyName();
+				if (res instanceof String && RenderingIcons.containsBigIcon(res)) {
+					return RenderingIcons.getBigIconResourceId(res);
+				} else {
+					return super.getIconRes();
+				}
+			}
+		}
+		return super.getIconRes();
 	}
 
 	@Override
