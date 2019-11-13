@@ -99,6 +99,7 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SEARCH_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_TRAVEL_GUIDES_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_ADD_GPX_WAYPOINT;
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_AVOID_ROAD;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_DIRECTIONS_FROM_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_EDIT_GPX_WP;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_MEASURE_DISTANCE;
@@ -126,6 +127,7 @@ public class MapActivityActions implements DialogProvider {
 	public static final int EDIT_GPX_WAYPOINT_ITEM_ORDER = 9000;
 	public static final int ADD_GPX_WAYPOINT_ITEM_ORDER = 9000;
 	public static final int MEASURE_DISTANCE_ITEM_ORDER = 13000;
+	public static final int AVOID_ROAD_ITEM_ORDER = 14000;
 
 	private static final int DIALOG_ADD_FAVORITE = 100;
 	private static final int DIALOG_REPLACE_FAVORITE = 101;
@@ -390,6 +392,13 @@ public class MapActivityActions implements DialogProvider {
 				.setOrder(MEASURE_DISTANCE_ITEM_ORDER)
 				.createItem());
 
+		adapter.addItem(itemBuilder
+				.setTitleId(R.string.avoid_road, mapActivity)
+				.setId(MAP_CONTEXT_MENU_AVOID_ROAD)
+				.setIcon(R.drawable.ic_action_alert)
+				.setOrder(AVOID_ROAD_ITEM_ORDER)
+				.createItem());
+
 		adapter.sortItemsByOrder();
 
 		final ArrayAdapter<ContextMenuItem> listAdapter =
@@ -417,6 +426,8 @@ public class MapActivityActions implements DialogProvider {
 				} else if (standardId == R.string.measurement_tool) {
 					mapActivity.getContextMenu().close();
 					MeasurementToolFragment.showInstance(mapActivity.getSupportFragmentManager(), new LatLon(latitude, longitude));
+				} else if (standardId == R.string.avoid_road) {
+					getMyApplication().getAvoidSpecificRoads().addImpassableRoad(mapActivity, new LatLon(latitude, longitude), true, false);
 				}
 			}
 		});
