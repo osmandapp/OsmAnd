@@ -11,6 +11,7 @@
 	Thx - Hardy
 
 -->
+    <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Show node network cycle routes</string>
     <string name="clear_confirmation_msg">Clear %1$s?</string>
     <string name="shared_string_revert">Revert</string>
     <string name="track_saved">Track saved</string>
