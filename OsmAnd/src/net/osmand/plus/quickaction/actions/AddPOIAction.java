@@ -71,6 +71,8 @@ public class AddPOIAction extends QuickAction {
 
 	private transient EditText title;
 	private transient String prevType = "";
+	private transient MapPoiTypes poiTypes;
+	private transient Map<String, PoiType> allTranslatedNames;
 
 	public AddPOIAction() {
 		super(TYPE);
@@ -80,26 +82,31 @@ public class AddPOIAction extends QuickAction {
 		super(quickAction);
 	}
 
+	private MapPoiTypes getPoiTypes(Context context) {
+		if (poiTypes == null) {
+			final OsmandApplication application = (OsmandApplication) (context).getApplicationContext();
+			poiTypes = application.getPoiTypes();
+		}
+		return poiTypes;
+	}
+
+	private Map<String, PoiType> getAllTranslatedNames(Context context) {
+		if (allTranslatedNames == null) {
+			allTranslatedNames = getPoiTypes(context).getAllTranslatedNames(true);
+		}
+		return allTranslatedNames;
+	}
+
 	@Override
 	public int getIconRes(Context context) {
-		if (context instanceof MapActivity) {
-			final OsmandApplication application = (OsmandApplication) (context).getApplicationContext();
-			final MapPoiTypes poiTypes = application.getPoiTypes();
-			final Map<String, PoiType> allTranslatedNames = poiTypes.getAllTranslatedNames(true);
-			PoiCategory category = getCategory(allTranslatedNames);
-
+		PoiCategory category = getCategory(getAllTranslatedNames(context));
 			if (category != null) {
-
 				category.getIconKeyName();
-
 				String res = category.getIconKeyName();
-				if (res instanceof String && RenderingIcons.containsBigIcon(res)) {
+				if (res != null && RenderingIcons.containsBigIcon(res)) {
 					return RenderingIcons.getBigIconResourceId(res);
-				} else {
-					return super.getIconRes();
 				}
 			}
-		}
 		return super.getIconRes();
 	}
 
@@ -206,17 +213,14 @@ public class AddPOIAction extends QuickAction {
 		final LinearLayout editTagsLineaLayout =
 				(LinearLayout) view.findViewById(R.id.editTagsList);
 
-		final MapPoiTypes poiTypes = application.getPoiTypes();
-		final Map<String, PoiType> allTranslatedNames = poiTypes.getAllTranslatedNames(true);
 		final TagAdapterLinearLayoutHack mAdapter = new TagAdapterLinearLayoutHack(editTagsLineaLayout, getTagsFromParams(), deleteDrawable);
 		// It is possible to not restart initialization every time, and probably move initialization to appInit
-		Map<String, PoiType> translatedTypes = poiTypes.getAllTranslatedNames(true);
 		HashSet<String> tagKeys = new HashSet<>();
 		HashSet<String> valueKeys = new HashSet<>();
-		for (AbstractPoiType abstractPoiType : translatedTypes.values()) {
+		for (AbstractPoiType abstractPoiType : getAllTranslatedNames(application).values()) {
 			addPoiToStringSet(abstractPoiType, tagKeys, valueKeys);
 		}
-		addPoiToStringSet(poiTypes.getOtherMapCategory(), tagKeys, valueKeys);
+		addPoiToStringSet(getPoiTypes(activity).getOtherMapCategory(), tagKeys, valueKeys);
 		tagKeys.addAll(EditPoiDialogFragment.BASIC_TAGS);
 		mAdapter.setTagData(tagKeys.toArray(new String[tagKeys.size()]));
 		mAdapter.setValueData(valueKeys.toArray(new String[valueKeys.size()]));
@@ -261,7 +265,7 @@ public class AddPOIAction extends QuickAction {
 			public void afterTextChanged(Editable s) {
 				String tp = s.toString();
 				putTagIntoParams(POI_TYPE_TAG, tp);
-				PoiCategory category = getCategory(allTranslatedNames);
+				PoiCategory category = getCategory(getAllTranslatedNames(application));
 
 				if (category != null) {
 					poiTypeTextInputLayout.setHint(category.getTranslation());
@@ -294,8 +298,8 @@ public class AddPOIAction extends QuickAction {
 					if (event.getX() >= (editText.getRight()
 							- editText.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width()
 							- editText.getPaddingRight())) {
-						PoiCategory category = getCategory(allTranslatedNames);
-						PoiCategory tempPoiCategory = (category != null) ? category : poiTypes.getOtherPoiCategory();
+						PoiCategory category = getCategory(getAllTranslatedNames(activity));
+						PoiCategory tempPoiCategory = (category != null) ? category : getPoiTypes(activity).getOtherPoiCategory();
 						PoiSubTypeDialogFragment f =
 								PoiSubTypeDialogFragment.createInstance(tempPoiCategory);
 						f.setOnItemSelectListener(new PoiSubTypeDialogFragment.OnItemSelectListener() {
@@ -315,7 +319,7 @@ public class AddPOIAction extends QuickAction {
 			}
 		});
 
-		setUpAdapterForPoiTypeEditText(activity, allTranslatedNames, poiTypeEditText);
+		setUpAdapterForPoiTypeEditText(activity, getAllTranslatedNames(activity), poiTypeEditText);
 
 		ImageButton onlineDocumentationButton =
 				(ImageButton) view.findViewById(R.id.onlineDocumentationButton);
