@@ -3,7 +3,7 @@
     <string name="transport_nearby_routes">အတွင်း</string>
     <string name="make_as_start_point">ဒီနေရာကိုအစထားမယ်</string>
     <string name="shared_string_current">ယခု</string>
-    <string name="open_from">ဒီကစပြီးဖွင့်</string>
+    <string name="open_from">စပြီးဖွင့်ချိန်</string>
     <string name="shared_string_road">လမ်း</string>
     <string name="shared_string_options">ရွေးချယ်ရန်</string>
     <string name="road_blocked">လမ်းပိတ်သည်</string>
@@ -384,4 +384,26 @@
     <string name="map_imported_successfully">မြေပုံတင်သွင်းလိုက်ပြည်</string>
     <string name="enter_the_file_name">ဖိုင်အမည်ရိုက်ထည့်ပါ။</string>
     <string name="shared_string_gpx_file">GPX ဖိုင်</string>
+    <string name="will_open_tomorrow_at">မနက်ဖြန်ဖွင့်ချိန်</string>
+    <string name="rendering_attr_hidePOILabels_name">POI တံဆိပ်များ</string>
+    <string name="shared_string_without_name">နာမည်မရှိဘဲ</string>
+    <string name="what_is_here">ဒီမှာဘာလဲ:</string>
+    <string name="parked_at">မှာရပ်တယ်</string>
+    <string name="pick_up_till">သည်အထိကောက်ယူ</string>
+    <string name="without_time_limit">အချိန်ကန့်သတ်ခြင်းမရှိ</string>
+    <string name="context_menu_read_full_article">ဆောင်းပါးအပြည့်အစုံကိုဖတ်ပါ</string>
+    <string name="context_menu_read_article">ဆောင်းပါးဖတ်သည်</string>
+    <string name="context_menu_points_of_group">အုပ်စုထဲကအမှတ်အားလုံး</string>
+    <string name="open_till">နောက်ဆုံးဖွင့်ချိန်</string>
+    <string name="will_close_at">ပိတ်ချိန်</string>
+    <string name="will_open_at">ဖွင့်ချိန်</string>
+    <string name="will_open_on">ဖွင့်ချိန်</string>
+    <string name="additional_actions">အပိုလုပ်ဆောင်မှုများ</string>
+    <string name="av_locations_all_desc">ကိုသြဒီနိတ်များနှင့်မှတ်စုအားလုံး၏အချက်အလက်များပါသော GPX ဖိုင်။</string>
+    <string name="shared_string_actions">လုပ်ဆောင်ချက်များ</string>
+    <string name="shared_string_marker">အမှတ်အသား</string>
+    <string name="empty_state_osm_edits">OSM အရာဝတ္ထုများကိုဖန်တီးခြင်းသို့မဟုတ်ပြုပြင်ခြင်း</string>
+    <string name="shared_string_deleted">ဖျက်လိုက်သည်</string>
+    <string name="shared_string_edited">တည်းဖြတ်သည်</string>
+    <string name="shared_string_added">ထည့်သည်</string>
 </resources>
