@@ -66,6 +66,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		OnPreferenceClickListener, AppModeChangedListener {
 
 	private static final Log LOG = PlatformUtil.getLog(BaseSettingsFragment.class);
+	private static final String APP_MODE_KEY = "app_mode_key";
 
 	protected OsmandApplication app;
 	protected OsmandSettings settings;
@@ -73,6 +74,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 
 	protected int themeRes;
 
+	private ApplicationMode appMode;
 	private SettingsScreenType currentScreenType;
 
 	private int statusBarColor = -1;
@@ -113,6 +115,16 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	public void onCreate(Bundle savedInstanceState) {
 		app = requireMyApplication();
 		settings = app.getSettings();
+		Bundle args = getArguments();
+		if (savedInstanceState != null) {
+			appMode = ApplicationMode.valueOfStringKey(savedInstanceState.getString(APP_MODE_KEY), null);
+		}
+		if (appMode == null && args != null) {
+			appMode = ApplicationMode.valueOfStringKey(args.getString(APP_MODE_KEY), null);
+		}
+		if (appMode == null) {
+			appMode = settings.getApplicationMode();
+		}
 		super.onCreate(savedInstanceState);
 		currentScreenType = getCurrentScreenType();
 	}
@@ -183,6 +195,12 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 				}
 			}
 		};
+	}
+
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		outState.putString(APP_MODE_KEY, appMode.getStringKey());
+		super.onSaveInstanceState(outState);
 	}
 
 	@Override
@@ -287,7 +305,8 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	}
 
 	@Override
-	public void onAppModeChanged() {
+	public void onAppModeChanged(ApplicationMode appMode) {
+		this.appMode = appMode;
 		if (updateTheme()) {
 			recreate();
 		} else {
@@ -296,10 +315,17 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		}
 	}
 
+	public Bundle buildArguments() {
+		Bundle args = new Bundle();
+		args.putString(APP_MODE_KEY, appMode.getStringKey());
+		return args;
+	}
+
 	public void recreate() {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
 			Fragment fragment = Fragment.instantiate(activity, currentScreenType.fragmentName);
+			fragment.setArguments(buildArguments());
 			FragmentManager fm = activity.getSupportFragmentManager();
 			fm.popBackStack();
 			fm.beginTransaction()
@@ -520,7 +546,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	}
 
 	public ApplicationMode getSelectedAppMode() {
-		return settings.APPLICATION_MODE.get();
+		return appMode;
 	}
 
 	public boolean isNightMode() {
@@ -681,9 +707,17 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	}
 
 	public static boolean showInstance(FragmentActivity activity, SettingsScreenType screenType) {
+		return showInstance(activity, screenType, null);
+	}
+
+	public static boolean showInstance(FragmentActivity activity, SettingsScreenType screenType, @Nullable ApplicationMode appMode) {
 		try {
 			Fragment fragment = Fragment.instantiate(activity, screenType.fragmentName);
-
+			Bundle args = new Bundle();
+			if (appMode != null) {
+				args.putString(APP_MODE_KEY, appMode.getStringKey());
+			}
+			fragment.setArguments(args);
 			activity.getSupportFragmentManager().beginTransaction()
 					.replace(R.id.fragmentContainer, fragment, screenType.fragmentName)
 					.addToBackStack(DRAWER_SETTINGS_ID + ".new")

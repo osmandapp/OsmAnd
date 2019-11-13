@@ -136,10 +136,10 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		fastRoute.setSummaryOn(R.string.shared_string_enable);
 		fastRoute.setSummaryOff(R.string.shared_string_disable);
 
-		if (app.getSettings().getApplicationMode().getRouteService() != RouteProvider.RouteService.OSMAND) {
+		ApplicationMode am = getSelectedAppMode();
+		if (am.getRouteService() != RouteProvider.RouteService.OSMAND) {
 			screen.addPreference(fastRoute);
 		} else {
-			ApplicationMode am = app.getSettings().getApplicationMode();
 			GeneralRouter router = getRouter(getMyApplication().getRoutingConfig(), am);
 			clearParameters();
 			if (router != null) {
@@ -236,9 +236,9 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 	}
 
 	@Override
-	public void onAppModeChanged() {
+	public void onAppModeChanged(ApplicationMode appMode) {
 		removeRoutingPrefListeners();
-		super.onAppModeChanged();
+		super.onAppModeChanged(appMode);
 		addRoutingPrefListeners();
 	}
 
@@ -303,7 +303,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 	private ListPreferenceEx createRoutingBooleanListPreference(String groupKey, List<RoutingParameter> routingParameters) {
 		String defaultTitle = Algorithms.capitalizeFirstLetterAndLowercase(groupKey.replace('_', ' '));
 		String title = SettingsBaseActivity.getRoutingStringPropertyName(app, groupKey, defaultTitle);
-		ApplicationMode am = settings.getApplicationMode();
+		ApplicationMode am = getSelectedAppMode();
 
 		Object[] entryValues = new Object[routingParameters.size()];
 		String[] entries = new String[entryValues.length];
