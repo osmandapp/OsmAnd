@@ -3424,4 +3424,8 @@ Lon %2$s</string>
     <string name="swap_start_and_destination">Intercambiar inicio y destino</string>
     <string name="default_speed_dialog_msg">Se utiliza para estimar la hora de llegada en el caso de los tipos de caminos desconocido y para limitar la velocidad en todos los caminos (podría cambiarse la ruta)</string>
     <string name="file_imported_successfully">%1$s importados con éxito.</string>
+    <string name="track_saved">Traza guardada</string>
+    <string name="empty_filename">Nombre del archivo vacío</string>
+    <string name="shared_string_revert">Revertir</string>
+    <string name="quick_action_directions_from_desc">Un botón para centrar en la pantalla el punto de partida y calcular la ruta hacia el destino o abre un cuadro de diálogo para elegir el destino si el marcador no está en el mapa.</string>
 </resources>
