@@ -104,6 +104,12 @@ public abstract class OsmandPlugin {
 		return installURL;
 	}
 
+	/**
+	 * Plugin was installed
+	 */
+	public void onInstall(@NonNull OsmandApplication app, @Nullable Activity activity) {
+	}
+
 	public void disable(OsmandApplication app) {
 	}
 
@@ -159,13 +165,7 @@ public abstract class OsmandPlugin {
 	private static void activatePlugins(OsmandApplication app, Set<String> enabledPlugins) {
 		for (OsmandPlugin plugin : allPlugins) {
 			if (enabledPlugins.contains(plugin.getId()) || plugin.isActive()) {
-				try {
-					if (plugin.init(app, null)) {
-						plugin.setActive(true);
-					}
-				} catch (Exception e) {
-					LOG.error("Plugin initialization failed " + plugin.getId(), e);
-				}
+				initPlugin(app, plugin);
 			}
 		}
 	}
@@ -174,13 +174,7 @@ public abstract class OsmandPlugin {
 		Set<String> enabledPlugins = app.getSettings().getEnabledPlugins();
 		for (OsmandPlugin plugin : allPlugins) {
 			if (enabledPlugins.contains(plugin.getId())) {
-				try {
-					if (plugin.init(app, null)) {
-						plugin.setActive(true);
-					}
-				} catch (Exception e) {
-					LOG.error("Plugin initialization failed " + plugin.getId(), e);
-				}
+				initPlugin(app, plugin);
 			} else if (plugin.isActive()) {
 				plugin.setActive(false);
 				plugin.disable(app);
@@ -188,11 +182,20 @@ public abstract class OsmandPlugin {
 		}
 	}
 
+	private static void initPlugin(OsmandApplication app, OsmandPlugin plugin) {
+		try {
+			if (plugin.init(app, null)) {
+				plugin.setActive(true);
+			}
+		} catch (Exception e) {
+			LOG.error("Plugin initialization failed " + plugin.getId(), e);
+		}
+	}
+
 	private static void checkMarketPlugin(@NonNull OsmandApplication app, @NonNull Set<String> enabledPlugins,
 										  @NonNull OsmandPlugin plugin, boolean paid, String id, String id2) {
 		boolean marketEnabled = Version.isMarketEnabled(app);
-		boolean pckg = isPackageInstalled(id, app) || isPackageInstalled(id2, app)
-				|| InAppPurchaseHelper.isSubscribedToLiveUpdates(app);
+		boolean pckg = checkPackage(app, id, id2);
 		if ((Version.isDeveloperVersion(app) || !Version.isProductionVersion(app)) && !paid) {
 			// for test reasons
 			marketEnabled = false;
@@ -212,6 +215,45 @@ public abstract class OsmandPlugin {
 				allPlugins.add(plugin);
 			}
 		}
+	}
+
+	public static void checkInstalledMarketPlugins(@NonNull OsmandApplication app, @Nullable Activity activity) {
+		List<OsmandPlugin> installedPlugins = new ArrayList<OsmandPlugin>();
+		for (OsmandPlugin osmandPlugin : OsmandPlugin.getAvailablePlugins()) {
+			if (osmandPlugin.getInstallURL() != null) {
+				boolean pckg = false;
+				if (osmandPlugin instanceof SRTMPlugin) {
+					pckg = checkPackage(app, OsmandPlugin.SRTM_PLUGIN_COMPONENT_PAID, OsmandPlugin.SRTM_PLUGIN_COMPONENT);
+				} else if (osmandPlugin instanceof NauticalMapsPlugin) {
+					pckg = checkPackage(app, NauticalMapsPlugin.COMPONENT, null);
+				} else if (osmandPlugin instanceof SkiMapsPlugin) {
+					pckg = checkPackage(app, SkiMapsPlugin.COMPONENT, null);
+				} else if (osmandPlugin instanceof ParkingPositionPlugin) {
+					pckg = checkPackage(app, ParkingPositionPlugin.PARKING_PLUGIN_COMPONENT, null);
+				}
+				if (pckg) {
+					installedPlugins.add(osmandPlugin);
+				}
+			}
+		}
+		for (OsmandPlugin osmandPlugin : installedPlugins) {
+			osmandPlugin.setInstallURL(null);
+			osmandPlugin.onInstall(app, activity);
+
+			String pluginId = osmandPlugin.getId();
+			for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
+				Set<String> plugins = app.getSettings().getPluginsForMode(mode);
+				if (!plugins.contains("-" + pluginId) && !plugins.contains(pluginId)) {
+					app.getSettings().enablePluginForMode(pluginId, true, mode);
+				}
+			}
+			initPlugin(app, osmandPlugin);
+		}
+	}
+
+	private static boolean checkPackage(OsmandApplication app, String id, String id2) {
+		return isPackageInstalled(id, app) || isPackageInstalled(id2, app)
+				|| InAppPurchaseHelper.isSubscribedToLiveUpdates(app);
 	}
 
 	public static boolean enablePlugin(@Nullable Activity activity, OsmandApplication app, OsmandPlugin plugin, boolean enable) {
