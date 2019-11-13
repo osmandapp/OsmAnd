@@ -371,4 +371,17 @@
     <string name="west_abbreviation">အနောက်</string>
     <string name="south_abbreviation">တောင်</string>
     <string name="north_abbreviation">မြောက်</string>
+    <string name="last_intermediate_dest_description">ကြားရပ်နေရာထည့်သည်</string>
+    <string name="first_intermediate_dest_description">အစနေရာထည့်ပါ</string>
+    <string name="show_closed_notes">ပိတ်ထားသောမှတ်စုများကိုပြပါ</string>
+    <string name="switch_osm_notes_visibility_desc">မြေပုံပေါ်တွင် OSM မှတ်စုများကိုပြသ / ဝှက်ပါ။</string>
+    <string name="osc_file">OSC ဖိုင်</string>
+    <string name="choose_file_type">filetype ကိုရွေးပါ</string>
+    <string name="osm_edits_export_desc">Export အမျိုးအစားကိုရွေးပါ။ OSM note, POIs (သို့) နှစ်ခုလုံးကိုရွေးပါ။</string>
+    <string name="all_data">ဒေတာအားလုံး</string>
+    <string name="osm_notes">OSM မှတ်စုများ</string>
+    <string name="map_import_error">မြေပုံတင်သွင်းမှုအမှား</string>
+    <string name="map_imported_successfully">မြေပုံတင်သွင်းလိုက်ပြည်</string>
+    <string name="enter_the_file_name">ဖိုင်အမည်ရိုက်ထည့်ပါ။</string>
+    <string name="shared_string_gpx_file">GPX ဖိုင်</string>
 </resources>

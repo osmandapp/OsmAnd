@@ -260,8 +260,8 @@
     <string name="local_openstreetmap_uploading">מתבצעת שליחה…</string>
     <string name="local_openstreetmap_were_uploaded">{0} נ״ע/הערות נשלחו</string>
     <string name="local_openstreetmap_uploadall">לשלוח הכול</string>
-    <string name="local_openstreetmap_upload">שליחת השינויים ל־OSM</string>
-    <string name="local_openstreetmap_delete">מחיקת השינוי</string>
+    <string name="local_openstreetmap_upload">שליחת העריכה ל־OSM</string>
+    <string name="local_openstreetmap_delete">מחיקת העריכה</string>
     <string name="local_openstreetmap_descr_title">עריכה בלתי מתואמת של OSM:</string>
     <string name="local_openstreetmap_settings">נ״ע/הערות של OSM נשמרו בהתקן</string>
     <string name="local_openstreetmap_settings_descr">הצגה וניהול של נ״ע/הערות שנשמרו במסד נתונים בהתקן.</string>
@@ -333,7 +333,7 @@
     <string name="file_with_name_already_exists">כבר קיים קובץ בשם הזה.</string>
     <string name="shared_string_gpx_route">מסלול GPX</string>
     <string name="poi_query_by_name_matches_categories">נמצאו מספר קטגוריות נ״ע התואמות לשאילתה :</string>
-    <string name="data_to_search_poi_not_available">נתונים מקומיים לחיפוש נ״ע לא קיים.</string>
+    <string name="data_to_search_poi_not_available">להוריד נתונים בלתי מקוונים כדי לחפש נקודות עניין.</string>
     <string name="poi_filter_by_name">חיפוש לפי שם</string>
     <string name="old_poi_file_should_be_deleted">קובץ נתוני הנ״ע \'%1$s\' אינו נחוץ עוד וניתן למחוק אותו.</string>
     <string name="update_poi_file_not_found">קובץ מקומי לתחזוקת שינויי נ״ע לא נמצא ולא ניתן ליצור אותו.</string>
@@ -632,7 +632,7 @@
     <string name="voice_data_initializing">נתוני הקול מאותחלים…</string>
     <string name="voice_data_not_supported">גרסת נתוני הקול אינה נתמכת</string>
     <string name="voice_data_corrupted">נתוני הקול שצוינו פגומים</string>
-    <string name="voice_data_unavailable">נתוני הקול שצוינו אינם זמינים</string>
+    <string name="voice_data_unavailable">חבילת הקריינות שנבחרה אינה זמינה</string>
     <string name="sd_unmounted">כרטיס הזיכרון אינו נגיש.
 \nלא תהיה לך אפשרות לצפות במפות או לחפש דברים.</string>
     <string name="sd_mounted_ro">כרטיס הזיכרון הוא לקריאה בלבד. 
@@ -688,7 +688,7 @@
     <string name="update_existing">החלפה</string>
     <string name="only_show">להציג בלבד</string>
     <string name="follow">התחלת הנחייה</string>
-    <string name="mark_final_location_first">נא לבחור את היעד תחילה</string>
+    <string name="mark_final_location_first">נא להגדיר את היעד תחילה</string>
     <string name="get_directions">הכוונה</string>
     <string name="opening_hours">שעות הפתיחה</string>
     <string name="background_service_wait_int">זמן ההמתנה המרבי לתיקון</string>
@@ -710,9 +710,9 @@
     <string name="error_calculating_route_occured">לא ניתן לחשב מסלול.</string>
     <string name="empty_route_calculated">המסלול שחושב ריק.</string>
     <string name="new_route_calculated_dist">המסלול החדש חושב, מרחק</string>
-    <string name="arrived_at_destination">הגעת ליעדך</string>
+    <string name="arrived_at_destination">הגעת ליעד.</string>
     <string name="invalid_locations">נקודות ציון שגויות</string>
-    <string name="go_back_to_osmand">חזרה למפה של OsmAnd</string>
+    <string name="go_back_to_osmand">חזרה למפה</string>
     <string name="shared_string_close">סגירה</string>
     <string name="loading_data">הנתונים נטענים…</string>
     <string name="reading_indexes">המידע המקומי נקרא…</string>
@@ -778,11 +778,11 @@
     <string name="navigate_point_top_text">נא להזין רוחב ואורך במבנה הנבחר (D - מעלות, M - דקות, S - שניות)</string>
     <string name="navigate_point_latitude">רוחב</string>
     <string name="navigate_point_longitude">אורך</string>
-    <string name="navigate_point_format_D">DDD.DD</string>
-    <string name="navigate_point_format_DM">DDD MM.MM</string>
-    <string name="navigate_point_format_DMS">DDD MM SS.SS</string>
+    <string name="navigate_point_format_D">DDD.DDDDD</string>
+    <string name="navigate_point_format_DM">DDD MM.MMM</string>
+    <string name="navigate_point_format_DMS">DDD MM SS.S</string>
     <string name="shared_string_show_on_map">הצגה במפה</string>
-    <string name="search_address_top_text">נא לבחור בכתובת</string>
+    <string name="search_address_top_text">כתובת</string>
     <string name="search_address_region">אזור</string>
     <string name="search_address_city">עיר</string>
     <string name="search_address_street">רחוב</string>
@@ -826,9 +826,9 @@
     <string name="shared_string_clear">איפוס</string>
     <string name="filter_current_poiButton">מסנן</string>
     <string name="edit_filter_save_as_menu_item">שמירה בשם</string>
-    <string name="edit_filter_delete_dialog_title">האם למחוק את המסנן הנבחר?</string>
-    <string name="edit_filter_delete_message">המסנן {0} נמחק</string>
-    <string name="edit_filter_create_message">המסנן {0} נוצר</string>
+    <string name="edit_filter_delete_dialog_title">למחוק מסנן זה\?</string>
+    <string name="edit_filter_delete_message">המסנן ‚{0}’ נמחק</string>
+    <string name="edit_filter_create_message">המסנן ‚{0}’ נוצר</string>
     <string name="email">דוא״ל</string>
     <string name="search_history_street">רחוב:\n {0}, {1}</string>
     <string name="osmand_plus_long_description_1000_chars">"OsmAnd+‎ ‏(OSM הכוונת ניווט אוטומטית)
@@ -1662,8 +1662,8 @@
     <string name="quick_action_navigation_voice_descr">בורר להשבתה או הפעלה של הנחייה קולית במהלך ניווט.</string>
     <string name="quick_action_add_parking_descr">כפתור להוספת מקום חנייה במרכז המסך.</string>
     <string name="favorite_empty_place_name">מיקום</string>
-    <string name="quick_action_showhide_favorites_descr">נגיעה בכפתור הפעולה מציגה או מסתירה את הנקודות המועדפות במפה.</string>
-    <string name="quick_action_showhide_poi_descr">נגיעה בכפתור הפעולה מציגה או מסתירה נקודות עניין במפה.</string>
+    <string name="quick_action_showhide_favorites_descr">בורר להצגה או הסתרה של הנקודות המועדפות במפה.</string>
+    <string name="quick_action_showhide_poi_descr">בורר להצגה או הסתרה של נקודות עניין במפה.</string>
     <string name="quick_action_showhide_favorites_title">הצגה/הסתרה של מועדפים</string>
     <string name="quick_action_favorites_show">הצגת מועדפים</string>
     <string name="quick_action_favorites_hide">הסתרת מועדפים</string>
@@ -1677,7 +1677,7 @@
     <string name="quick_action_fav_name_descr">יש להשאיר ריק כדי להשתמש בכתובת או בשם המקום.</string>
     <string name="quick_action_bug_descr">הודעה זו מתווספת לשדה ההערה.</string>
     <string name="quick_action_bug_message">הודעה</string>
-    <string name="quick_action_category_descr">נא לבחור את הקטגוריה בה יישמר המועדף.</string>
+    <string name="quick_action_category_descr">קטגוריה לשמירת המועדף:</string>
     <string name="quick_action_gpx_category_descr">נא לבחור קטגוריית רשות.</string>
     <string name="quick_action_poi_list">רשימת נקודות עניין</string>
     <string name="quick_action_sh_poi_descr">ניתן להוסיף קטגוריה אחת או יותר של נקודות עניין להצגה במפה.</string>
@@ -2499,7 +2499,7 @@
     <string name="shared_string_explore">סיור</string>
     <string name="access_disable_offroute_recalc">אין אפשרות לחישוב מסלול מחדש לאחר עזיבת המסלול</string>
     <string name="access_disable_offroute_recalc_descr">אין אפשרות לחישוב המסלול מחדש לאחר חריגה מהמסלול.</string>
-    <string name="download_files_error_not_enough_space">אין מספיק מקום! נחוצים {3} מ״ב באופן זמני, {1} מ״ב באופן קבוע. (יש רק {2} מ״ב זמינים).</string>
+    <string name="download_files_error_not_enough_space">אין מספיק מקום! נחוצים {3} מ״ב באופן זמני, {1} מ״ב באופן קבוע. (יש רק {2} מ״ב זמינים.)</string>
     <string name="fav_point_dublicate">צוין שם כפול למועדף</string>
     <string name="shared_string_read">נקרא</string>
     <string name="shared_string_contents">תכנים</string>
@@ -2879,7 +2879,7 @@
     <string name="voice_announcements">הנחיות קוליות</string>
     <string name="intermediate_destinations">יעדי ביניים</string>
     <string name="arrive_at_time">הגעה ב־%1$s</string>
-    <string name="quick_action_switch_day_night_descr">נגיעה בכפתור פעולה זה תחליף בין מצבי יום ולילה עבור OsmAnd</string>
+    <string name="quick_action_switch_day_night_descr">בורר להחלפה בין מצבי יום ולילה עבור OsmAnd.</string>
     <string name="quick_action_switch_day_mode">מצב יום</string>
     <string name="quick_action_switch_night_mode">מצב לילה</string>
     <string name="quick_action_day_night_switch_mode">החלפה בין מצבי יום/לילה</string>
@@ -3376,4 +3376,5 @@
 \n לא נאספים פרטים אישיים, רק הנתונים שנחוצים לשיפור החיפוש.</string>
     <string name="track_saved">המסלול נשמר</string>
     <string name="empty_filename">שם הקובץ ריק</string>
+    <string name="shared_string_revert">החזרה</string>
 </resources>
