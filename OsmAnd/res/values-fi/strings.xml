@@ -2046,7 +2046,7 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="coord_input_edit_point">Muokkaa pistettä</string>
     <string name="coord_input_add_point">Lisää piste</string>
     <string name="coord_input_save_as_track">Tallenna jälkenä</string>
-    <string name="coord_input_save_as_track_descr">Lisäsit %1 pistettä. Kirjoita tiedostonimi ja paina \"Tallenna\".</string>
+    <string name="coord_input_save_as_track_descr">Lisäsit %1$s pistettä. Kirjoita tiedostonimi ja paina \"Tallenna\".</string>
     <string name="error_notification_desc">Ole ystävällinen ja lähetä tästä ilmoituksesta ruutukaappaus osoitteeseen support@osmand.net</string>
     <string name="get_osmand_live">Hanki OsmAnd Live avataksesi kaikki toiminnot: Voit ladata rajattomasti päivittäisiä karttapäivityksiä, käyttää kaikkia ilmaisia sekä maksullisia plugineja, Wikipediaa, Wikivoyagea ja paljon muuta.</string>
     <string name="unirs_render_descr">Oletustyylin muunnos, joka lisää jalkakäytävien ja pyöräteiden kontrastia. Käyttää vanhoja Mapnikin värejä.</string>
