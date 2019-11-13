@@ -66,6 +66,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		OnPreferenceClickListener, AppModeChangedListener {
 
 	private static final Log LOG = PlatformUtil.getLog(BaseSettingsFragment.class);
+	private static final String APP_MODE_KEY = "app_mode_key";
 
 	protected OsmandApplication app;
 	protected OsmandSettings settings;
@@ -73,6 +74,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 
 	protected int themeRes;
 
+	private ApplicationMode appMode;
 	private SettingsScreenType currentScreenType;
 
 	private int statusBarColor = -1;
@@ -113,13 +115,23 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	public void onCreate(Bundle savedInstanceState) {
 		app = requireMyApplication();
 		settings = app.getSettings();
+		Bundle args = getArguments();
+		if (savedInstanceState != null) {
+			appMode = ApplicationMode.valueOfStringKey(savedInstanceState.getString(APP_MODE_KEY), null);
+		}
+		if (appMode == null && args != null) {
+			appMode = ApplicationMode.valueOfStringKey(args.getString(APP_MODE_KEY), null);
+		}
+		if (appMode == null) {
+			appMode = settings.getApplicationMode();
+		}
 		super.onCreate(savedInstanceState);
 		currentScreenType = getCurrentScreenType();
 	}
 
 	@Override
 	public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-		getPreferenceManager().setPreferenceDataStore(settings.getDataStore());
+		getPreferenceManager().setPreferenceDataStore(settings.getDataStore(getSelectedAppMode()));
 	}
 
 	@Override
@@ -183,6 +195,12 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 				}
 			}
 		};
+	}
+
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		outState.putString(APP_MODE_KEY, appMode.getStringKey());
+		super.onSaveInstanceState(outState);
 	}
 
 	@Override
@@ -273,21 +291,23 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 			return;
 		}
 
+		ApplicationMode appMode = getSelectedAppMode();
 		if (preference instanceof ListPreferenceEx) {
-			SingleSelectPreferenceBottomSheet.showInstance(fragmentManager, preference.getKey(), this, false);
+			SingleSelectPreferenceBottomSheet.showInstance(fragmentManager, preference.getKey(), this, false, appMode);
 		} else if (preference instanceof SwitchPreferenceEx) {
-			BooleanPreferenceBottomSheet.showInstance(fragmentManager, preference.getKey(), this, false);
+			BooleanPreferenceBottomSheet.showInstance(fragmentManager, preference.getKey(), this, false, appMode);
 		} else if (preference instanceof EditTextPreference) {
-			EditTextPreferenceBottomSheet.showInstance(fragmentManager, preference.getKey(), this, false);
+			EditTextPreferenceBottomSheet.showInstance(fragmentManager, preference.getKey(), this, false, appMode);
 		} else if (preference instanceof MultiSelectBooleanPreference) {
-			MultiSelectPreferencesBottomSheet.showInstance(fragmentManager, preference.getKey(), this, false);
+			MultiSelectPreferencesBottomSheet.showInstance(fragmentManager, preference.getKey(), this, false, appMode);
 		} else {
 			super.onDisplayPreferenceDialog(preference);
 		}
 	}
 
 	@Override
-	public void onAppModeChanged() {
+	public void onAppModeChanged(ApplicationMode appMode) {
+		this.appMode = appMode;
 		if (updateTheme()) {
 			recreate();
 		} else {
@@ -296,10 +316,17 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		}
 	}
 
+	public Bundle buildArguments() {
+		Bundle args = new Bundle();
+		args.putString(APP_MODE_KEY, appMode.getStringKey());
+		return args;
+	}
+
 	public void recreate() {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
 			Fragment fragment = Fragment.instantiate(activity, currentScreenType.fragmentName);
+			fragment.setArguments(buildArguments());
 			FragmentManager fm = activity.getSupportFragmentManager();
 			fm.popBackStack();
 			fm.beginTransaction()
@@ -354,7 +381,8 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 				public void onClick(View v) {
 					FragmentManager fragmentManager = getFragmentManager();
 					if (fragmentManager != null) {
-						SelectAppModesBottomSheetDialogFragment.showInstance(fragmentManager, BaseSettingsFragment.this, false);
+						SelectAppModesBottomSheetDialogFragment.showInstance(fragmentManager,
+								BaseSettingsFragment.this, false, getSelectedAppMode(), false);
 					}
 				}
 			});
@@ -520,7 +548,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	}
 
 	public ApplicationMode getSelectedAppMode() {
-		return settings.APPLICATION_MODE.get();
+		return appMode;
 	}
 
 	public boolean isNightMode() {
@@ -681,9 +709,17 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	}
 
 	public static boolean showInstance(FragmentActivity activity, SettingsScreenType screenType) {
+		return showInstance(activity, screenType, null);
+	}
+
+	public static boolean showInstance(FragmentActivity activity, SettingsScreenType screenType, @Nullable ApplicationMode appMode) {
 		try {
 			Fragment fragment = Fragment.instantiate(activity, screenType.fragmentName);
-
+			Bundle args = new Bundle();
+			if (appMode != null) {
+				args.putString(APP_MODE_KEY, appMode.getStringKey());
+			}
+			fragment.setArguments(args);
 			activity.getSupportFragmentManager().beginTransaction()
 					.replace(R.id.fragmentContainer, fragment, screenType.fragmentName)
 					.addToBackStack(DRAWER_SETTINGS_ID + ".new")

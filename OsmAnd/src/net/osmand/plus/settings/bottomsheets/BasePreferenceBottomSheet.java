@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.preference.DialogPreference.TargetFragment;
 import android.support.v7.preference.Preference;
 
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 
 import java.util.List;
@@ -14,9 +15,35 @@ import java.util.List;
 public abstract class BasePreferenceBottomSheet extends MenuBottomSheetDialogFragment {
 
 	public static final String PREFERENCE_ID = "preference_id";
+	private static final String APP_MODE_KEY = "app_mode_key";
 
 	private String prefId;
 	private Preference preference;
+	private ApplicationMode appMode;
+
+	protected void setAppMode(ApplicationMode appMode) {
+		this.appMode = appMode;
+	}
+
+	public ApplicationMode getAppMode() {
+		return appMode != null ? appMode : requiredMyApplication().getSettings().getApplicationMode();
+	}
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		if (savedInstanceState != null) {
+			appMode = ApplicationMode.valueOfStringKey(savedInstanceState.getString(APP_MODE_KEY), null);
+		}
+	}
+
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		if (appMode != null) {
+			outState.putString(APP_MODE_KEY, appMode.getStringKey());
+		}
+	}
 
 	public String getPrefId() {
 		if (prefId == null) {

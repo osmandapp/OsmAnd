@@ -33,7 +33,7 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 		vehicleParametersInfo.setIcon(getContentIcon(R.drawable.ic_action_info_dark));
 		vehicleParametersInfo.setTitle(getString(R.string.route_parameters_info, getSelectedAppMode().toHumanString(getContext())));
 
-		RouteService routeService = app.getSettings().getApplicationMode().getRouteService();
+		RouteService routeService = getSelectedAppMode().getRouteService();
 		if (routeService == RouteService.OSMAND) {
 			GeneralRouter router = getRouter(app.getRoutingConfig(), getSelectedAppMode());
 			if (router != null) {
@@ -101,7 +101,7 @@ public class VehicleParametersFragment extends BaseSettingsFragment implements O
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
 		if (preference.getKey().equals(GeneralRouter.DEFAULT_SPEED)) {
-			RouteService routeService = app.getSettings().getApplicationMode().getRouteService();
+			RouteService routeService = getSelectedAppMode().getRouteService();
 			showSeekbarSettingsDialog(getActivity(), routeService == RouteService.STRAIGHT);
 			return true;
 		}
