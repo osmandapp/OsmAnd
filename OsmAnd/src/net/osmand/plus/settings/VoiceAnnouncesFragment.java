@@ -230,7 +230,7 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 				startActivity(intent);
 			} else if (newValue instanceof String) {
 				settings.VOICE_PROVIDER.set((String) newValue);
-				app.initVoiceCommandPlayer(getActivity(), getSelectedAppMode(), false, null, true, false);
+				app.initVoiceCommandPlayer(getActivity(), getSelectedAppMode(), false, null, true, false, false);
 			}
 			return true;
 		}

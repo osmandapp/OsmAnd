@@ -450,7 +450,7 @@ public class OsmandApplication extends MultiDexApplication {
 	}
 
 	public void initVoiceCommandPlayer(final Activity uiContext, final ApplicationMode applicationMode,
-	                                   boolean warningNoneProvider, Runnable run, boolean showDialog, boolean force) {
+	                                   boolean warningNoneProvider, Runnable run, boolean showDialog, boolean force, final boolean applyAllModes) {
 		String voiceProvider = osmandSettings.VOICE_PROVIDER.getModeValue(applicationMode);
 		if (voiceProvider == null || OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(voiceProvider)) {
 			if (warningNoneProvider && voiceProvider == null) {
@@ -489,14 +489,20 @@ public class OsmandApplication extends MultiDexApplication {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						if (!Algorithms.isEmpty(firstSelectedVoiceProvider)) {
-							routingOptionsHelper.applyVoiceProvider((MapActivity) uiContext, firstSelectedVoiceProvider);
+							routingOptionsHelper.applyVoiceProvider((MapActivity) uiContext, firstSelectedVoiceProvider, applyAllModes);
 						}
 					}
 				});
 				builder.setNeutralButton(R.string.shared_string_do_not_use, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialogInterface, int i) {
-						osmandSettings.VOICE_PROVIDER.setModeValue(applicationMode, OsmandSettings.VOICE_PROVIDER_NOT_USE);
+						if (applyAllModes) {
+							for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
+								osmandSettings.VOICE_PROVIDER.setModeValue(mode, OsmandSettings.VOICE_PROVIDER_NOT_USE);
+							}
+						} else {
+							osmandSettings.VOICE_PROVIDER.setModeValue(applicationMode, OsmandSettings.VOICE_PROVIDER_NOT_USE);
+						}
 					}
 				});
 

@@ -69,7 +69,7 @@ public class RoutePreferencesMenu {
 		routingOptionsHelper.selectVoiceGuidance(mapActivity, new CallbackWithObject<String>() {
 			@Override
 			public boolean processResult(String result) {
-				routingOptionsHelper.applyVoiceProvider(mapActivity, result);
+				routingOptionsHelper.applyVoiceProvider(mapActivity, result, false);
 				updateParameters();
 				return true;
 			}
