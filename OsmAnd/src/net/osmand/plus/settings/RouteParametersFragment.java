@@ -170,9 +170,16 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 					screen.addPreference(drivingStyleRouting);
 				}
 				if (avoidParameters.size() > 0) {
-					String title = getString(R.string.avoid_in_routing_title);
-					String descr = getString(R.string.avoid_in_routing_descr_);
-					MultiSelectBooleanPreference avoidRouting = createRoutingBooleanMultiSelectPref(AVOID_ROUTING_PARAMETER_PREFIX, title, descr, avoidParameters);
+					String title;
+					String description;
+					if (am.isDerivedRoutingFrom(ApplicationMode.PUBLIC_TRANSPORT)) {
+						title = getString(R.string.avoid_pt_types);
+						description = getString(R.string.avoid_pt_types_descr);
+					} else {
+						title = getString(R.string.impassable_road);
+						description = getString(R.string.avoid_in_routing_descr_);
+					}
+					MultiSelectBooleanPreference avoidRouting = createRoutingBooleanMultiSelectPref(AVOID_ROUTING_PARAMETER_PREFIX, title, description, avoidParameters);
 					screen.addPreference(avoidRouting);
 				}
 				if (preferParameters.size() > 0) {
