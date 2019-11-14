@@ -722,7 +722,7 @@
     <string name="osmand_parking_position_name">Miejsce parkowania</string>
     <string name="osmand_parking_plugin_description">Pozwala zapisać, gdzie został zaparkowany samochód oraz ile pozostało czasu parkowania, jeśli jest on ograniczony.
 \nMiejsce parkowania oraz czas można znaleźć na karcie w panelu oraz na widżecie mapy. Wtyczka może dodać powiadomienie i przypomnienie do kalendarza.</string>
-    <string name="osmand_parking_plugin_name">Miejsce parkowania</string>
+    <string name="osmand_parking_plugin_name">Miejsce parkingowe</string>
     <string name="context_menu_item_add_parking_point">Oznacz położenie parkowania</string>
     <string name="context_menu_item_delete_parking_point">Usuń znacznik parkowania</string>
     <string name="starting_point_too_far">Początek trasy znajduje się zbyt daleko od najbliższej drogi.</string>
@@ -2239,7 +2239,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="no_overlay">Brak nakładki</string>
     <string name="no_underlay">Brak podkładu</string>
     <string name="subscribe_email_error">Błąd</string>
-    <string name="quick_action_add_destination">Dodaj cel trasy</string>
+    <string name="quick_action_add_destination">Ustaw cel podróży</string>
     <string name="quick_action_replace_destination">Zastąp cel trasy</string>
     <string name="quick_action_auto_zoom_on">Włącz automatyczne przybliżanie mapy</string>
     <string name="quick_action_auto_zoom_off">Wyłącz automatyczne przybliżanie mapy</string>
@@ -2248,13 +2248,13 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="quick_action_auto_zoom_desc">Naciśnięcie przycisku włącza/wyłącza automatyczne przybliżanie mapy zależne od prędkości ruchu.</string>
     <string name="quick_action_add_destination_desc">Naciśnięcie przycisku ustali cel trasy w położeniu na środku ekranu, a poprzednio ustalony cel zamieni na ostatni cel pośredni.</string>
     <string name="quick_action_replace_destination_desc">Naciśnięcie przycisku ustali nowy cel podróży w położeniu na środku ekranu, zastępując poprzednio wybrany cel (jeśli jest).</string>
-    <string name="quick_action_add_first_intermediate_desc">Naciśnięcie przycisku ustali pierwszy cel pośredni trasy w położeniu na środku ekranu.</string>
+    <string name="quick_action_add_first_intermediate_desc">Przycisk służący do ustawiania środka ekranu jako pierwszego pośredniego celu podróży.</string>
     <string name="type_address">Wprowadź adres</string>
     <string name="type_city_town">Wprowadź miasto</string>
     <string name="type_postcode">Wprowadź kod pocztowy</string>
     <string name="nearest_cities">Pobliskie miasta</string>
     <string name="select_city">Wybierz miasto</string>
-    <string name="select_postcode">Wybierz kod pocztowy</string>
+    <string name="select_postcode">Szukaj kodu pocztowego</string>
     <string name="subscribe_email_desc">Zapisz się do naszej subskrypcji dotyczącej rabatów na aplikację i zgarnij 3 dodatkowe pobrania map!</string>
     <string name="depth_contour_descr">Mapy przedstawiające punkty głębokości i poziomice dna morskiego.</string>
     <string name="sea_depth_thanks">Dziękujemy za zakup map batymetrycznych</string>
@@ -2443,7 +2443,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="coordinate_input">Wprowadź współrzędne</string>
     <string name="shared_string_markers">Znaczniki</string>
     <string name="coordinates_format">Format współrzędnych</string>
-    <string name="fast_coordinates_input_descr">Proszę wybrać format współrzędnych. Zawsze można go zmienić za naciskając \"Opcje\".</string>
+    <string name="fast_coordinates_input_descr">Wybierz format wprowadzania współrzędnych. Można go zmienić poprzez naciśnięcie przycisku „Opcje”.</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Omijanie lodowych dróg i brodów</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">Omijaj drogi lodowe i brody.</string>
     <string name="use_location">Użyj położenia</string>
@@ -2540,12 +2540,12 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="last_intermediate_dest_description">Dodaje cel pośredni</string>
     <string name="first_intermediate_dest_description">Dodaje pierwszy cel pośredni</string>
     <string name="show_closed_notes">Wyświetl zamknięte uwagi</string>
-    <string name="switch_osm_notes_visibility_desc">Przełącza wyświetlanie uwag OSM na mapie.</string>
+    <string name="switch_osm_notes_visibility_desc">Pokaż/ukryj uwagi OSM na mapie.</string>
     <string name="gpx_file_desc">GPX - odpowiedni do eksportowania danych do JOSM i innych edytorów OSM.</string>
     <string name="osc_file_desc">OSC - odpowiedni do eksportowania danych do OpenStreetMap.</string>
     <string name="shared_string_gpx_file">Plik GPX</string>
     <string name="osc_file">Plik OSC</string>
-    <string name="choose_file_type">Wybierz rodzaj pliku</string>
+    <string name="choose_file_type">Wybierz typ pliku</string>
     <string name="all_data">Wszystkie dane</string>
     <string name="osm_notes">Notatki OSM</string>
     <string name="av_locations_selected_desc">Plik GPX ze współrzędnymi i danymi wybranych notatek.</string>
@@ -2887,7 +2887,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="avoid_roads_descr">Proszę wybrać na mapie lub z poniższej listy, drogę omijaną podczas nawigacji:</string>
     <string name="show_along_the_route">Wyświetlanie wzdłuż trasy</string>
     <string name="simulate_navigation">Symulacja nawigacji</string>
-    <string name="choose_track_file_to_follow">Wybiera plik śladu do podążania</string>
+    <string name="choose_track_file_to_follow">Wybierz plik śladu do podążania</string>
     <string name="voice_announcements">Komunikaty głosowe</string>
     <string name="intermediate_destinations">Pośrednie cele podróży</string>
     <string name="arrive_at_time">Dotarcie do celu o %1$s</string>
@@ -3183,7 +3183,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
 \n 
 \n• Ulepszone pliki do pobrania mapy w tle 
 \n 
-\n• Zwrócona opcja \"Turn Screen on\" 
+\n• Zwrócona opcja \"Włącz ekran\" 
 \n 
 \n• Poprawiono wybór języka Wikipedii 
 \n 
@@ -3384,4 +3384,10 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="swap_two_places">Zamień %1$s i %2$s</string>
     <string name="route_start_point">Początek trasy</string>
     <string name="default_speed_dialog_msg">Służy do szacowania czasu przyjazdu dla nieznanego rodzaju dróg i ograniczenia prędkości na wszystkich drogach (może zmienić trasę)</string>
+    <string name="swap_start_and_destination">Zamień początek i miejsce docelowe</string>
+    <string name="track_saved">Zapisano ślad</string>
+    <string name="empty_filename">Nazwa pliku jest pusta</string>
+    <string name="shared_string_revert">Przywróć</string>
+    <string name="quick_action_directions_from_desc">Przycisk służący do ustawienia środka ekranu jako punktu wyjazdu i obliczenia trasy do miejsca docelowego lub otwarcia okna dialogowego w celu wybrania miejsca docelowego, jeśli znacznik miejsca docelowego nie znajduje się na mapie.</string>
+    <string name="clear_confirmation_msg">Wyczyścić %1$s\?</string>
 </resources>
