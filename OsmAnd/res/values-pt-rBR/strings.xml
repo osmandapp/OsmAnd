@@ -147,7 +147,7 @@
 \n 
 \nQuadrículas de mapas podem ser obtidas diretamente através de fontes online ou podem ser preparados para uso offline (e copiadas manualmente para o diretório de dados do OsmAnd) como um banco de dados sqlite, que pode ser produzido por uma variedade de ferramentas de terceiros para preparação de mapas.</string>
     <string name="record_plugin_name">Gravação de viagem</string>
-    <string name="record_plugin_description">Este plugin ativa a funcionalidade de gravar e salvar suas trilhas manualmente tocando o widget de registro de GPX na tela do mapa ou também registrar automaticamente todas as suas rotas de navegação para um arquivo GPX. 
+    <string name="record_plugin_description">Este plugin ativa a funcionalidade de gravar e salvar suas trilhas manualmente tocando o widget de registro de GPX no mapa ou também registrar automaticamente todas as suas rotas de navegação para um arquivo GPX. 
 \n 
 \nTrilhas gravadas podem ser compartilhadas com seus amigos ou serem usadas para contribuições ao OSM. Atletas podem usar trilhas gravadas para monitorar seus treinos. Algumas análises básicas da trilha podem ser feitas diretamente no OsmAnd, como tempos de percurso, velocidade média, etc. E, claro, trilhas também podem ser analisadas depois em ferramentas de terceiros.</string>
     <string name="srtm_paid_version_title">Plugin de curvas de nível</string>
@@ -177,7 +177,7 @@
 \n 
 \nAtivando esta visão muda o estilo de mapa de \'Inverno e esqui\', mostrando todas as características da paisagem em condições invernais. Essa visão pode ser revertida desativando aqui ou alterando o \'Estilo de mapa\' em \'Configurar mapa\' quando desejado.</string>
     <string name="audionotes_plugin_name">Notas de áudio/vídeo</string>
-    <string name="audionotes_plugin_description">O plugin de notas de áudio/vídeo fornece a funcionalidade para tomar notas de áudio/fotografia/vídeo durante uma viagem, usando um botão na tela do mapa ou diretamente do menu de contexto para qualquer posição no mapa.</string>
+    <string name="audionotes_plugin_description">O plugin de notas de áudio/vídeo fornece a funcionalidade para tomar notas de áudio/fotografia/vídeo durante uma viagem, usando um botão no mapa ou diretamente do menu de contexto para qualquer posição no mapa.</string>
     <string name="osmand_parking_plugin_name">Estacionamento</string>
     <string name="osmand_distance_planning_plugin_name">Calculadora de distância e ferramenta de planeamento</string>
     <string name="osmand_distance_planning_plugin_description">Este plugin fornece um widget de mapa que permite a criação de caminhos tocando no mapa ou usando ou modificando arquivos GPX existentes, para planejar uma viagem e medir a distância entre pontos. Os resultados podem ser salvos como um arquivo GPX, que mais tarde pode ser usado para orientação.</string>
@@ -212,8 +212,8 @@
     <string name="srtm_plugin_description">Este plugin fornece curvas de nível e camada de sombras de relevo por cima do mapa padrão do OsmAnd. Esta funcionalidade será muito apreciada por atletas, viajantes e qualquer interessado na estrutura de relevo da paisagem. (Por favor, note que as curvas de nível e/ou dados de relevo são downloads adicionais separados disponíveis depois de ativar o plugin.)
 \n 
 \nOs dados globais (entre as latitudes 70° norte e 70° sul) são baseados em medições do SRTM (Shuttle Radar Topography Mission) e ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), um instrumento de imagens Terra, o satélite principal do Sistema de Observação da Terra da NASA. ASTER é um esforço conjunto da NASA, do Ministério da Economia, Comércio e Indústria do Japão (METI) e do Sistema Espacial Japonês (J-spacesystems).</string>
-    <string name="osmand_parking_plugin_description">Este plugin grava onde o seu carro foi estacionado e quanto tempo de estacionamento resta (se houver um limite de tempo).
-\nA localização e o tempo ficam visíveis no painel de controle do OsmAnd e em um widget na tela do mapa. Um alarme pode ser adicionado ao calendário Android como lembrete.</string>
+    <string name="osmand_parking_plugin_description">Este plugin marca onde o seu carro foi estacionado e quanto tempo de estacionamento resta (se houver um limite de tempo). 
+\nA localização e o tempo ficam visíveis no painel de controle do OsmAnd e em um widget no mapa. Um alarme pode ser adicionado ao calendário Android como lembrete.</string>
     <string name="osm_editing_plugin_description">Este plugin do OsmAnd pode ser usado para fazer contribuições ao OSM como criar ou modificar POI, abrir ou comentar Notas OSM e contribuir com arquivos GPX gravados. OSM é um projeto de mapeamento mundial dirigido pela comunidade e de domínio público. Para mais detalhes, consulte https://openstreetmap.org. Participação ativa é apreciada e as contribuições podem ser feitas diretamente do OsmAnd, se você especificar suas credenciais pessoais de OSM no app.</string>
     <string name="osmand_development_plugin_description">Este plugin exibe configurações de desenvolvimento e recursos de depuração como testar ou simular o roteamento, o desempenho de renderização ou instruções de voz. Essas configurações são destinadas a desenvolvedores e não são necessárias para o usuário comum.</string>
     <string name="proxy_pref_descr">Especifique um servidor proxy.</string>
@@ -279,8 +279,8 @@
     <string name="anonymous_user">Usuário anônimo</string>
     <string name="logged_as">Conectado como %1$s</string>
     <string name="speed_limit_exceed">Tolerância do limite de velocidade</string>
-    <string name="speed_limit_exceed_message">Selecione a margem de tolerância de limite de velocidade, acima do qual você receberá um aviso de voz.</string>
-    <string name="fav_point_emoticons_message">O nome do Favorito foi modificado para %1$s para facilitar salvar corretamente a sequência de caracteres com emoticons para um arquivo.</string>
+    <string name="speed_limit_exceed_message">Escolha a margem de tolerância de limite de velocidade, acima do qual você receberá um aviso de voz.</string>
+    <string name="fav_point_emoticons_message">Favorito renomeado para \'%1$s\' para salvar a sequência de caracteres contendo emoticons em um arquivo.</string>
     <string name="speak_title">Anunciar…</string>
     <string name="show_pedestrian_warnings">Faixas de pedestre</string>
     <string name="routing_attr_no_new_routing_description">Não use as regras de roteamento introduzidas na v1.9.</string>
@@ -308,23 +308,23 @@
     <string name="sleep_mode_stop_dialog">Parar o modo em segundo plano do GPS?</string>
     <string name="stop_navigation_service">Parar</string>
     <string name="confirm_every_run">Sempre perguntar</string>
-    <string name="save_global_track_interval_descr">Escolha o intervalo de registo para a gravação geral da pista (ativado via widget de registo GPX no mapa).</string>
+    <string name="save_global_track_interval_descr">Especifique o intervalo de registo para a gravação geral da pista (ativado via widget de registo GPX no mapa).</string>
     <string name="save_global_track_interval">Intervalo de registro geral</string>
     <string name="background_service_int">Intervalo de ativação do GPS</string>
     <string name="enable_sleep_mode">Ativar o modo de GPS em segundo plano</string>
     <string name="save_track_to_gpx_globally">Registrar trilha em arquivo GPX</string>
     <string name="save_track_to_gpx_globally_headline">Registro de trilha sob demanda</string>
-    <string name="save_track_to_gpx_globally_descr">Posição geral de registro para um arquivo GPX pode ser ativada ou desativada usando o widget de registro de GPX na tela do mapa.</string>
+    <string name="save_track_to_gpx_globally_descr">Posição geral de registro para um arquivo GPX pode ser ativada ou desativada usando o widget de registro de GPX no mapa.</string>
     <string name="save_current_track_descr">Salvar a trilha atual como arquivo GPX agora.</string>
     <string name="save_current_track">Salvar a trilha atual</string>
     <string name="save_track_to_gpx">Auto-registrar a trilha durante a navegação</string>
     <string name="save_track_to_gpx_descrp">A trilha GPX será salva automaticamente no diretório de trilhas durante a navegação.</string>
     <string name="save_track_interval_globally">Intervalo de registro</string>
     <string name="save_track_interval">Intervalo de registro durante a navegação</string>
-    <string name="save_track_interval_descr">Escolher o intervalo de registro para a gravação de trilha durante a navegação.</string>
+    <string name="save_track_interval_descr">Especifique o intervalo de registro para a gravação de trilha durante a navegação</string>
     <string name="voice_provider_descr">Selecione a voz para instruções de navegação.</string>
     <string name="voice_provider">Instruções por voz</string>
-    <string name="proxy_host_descr">Configurar o hostname do seu proxy (p. ex., 127.0.0.1).</string>
+    <string name="proxy_host_descr">Especifique o hostname do seu proxy (p. ex., 127.0.0.1).</string>
     <string name="proxy_port_title">Porta do proxy</string>
     <string name="proxy_port_descr">Especificar o número da porta do seu proxy (p. ex. 8118).</string>
     <string name="monitoring_settings">Gravação de viagem</string>
@@ -333,8 +333,8 @@
     <string name="use_displayed_track_for_navigation">Use a trilha mostrada para navegação\?</string>
     <string name="routing_attr_prefer_motorway_name">Preferir Autoestradas</string>
     <string name="routing_attr_prefer_motorway_description">Preferir autoestradas na rota</string>
-    <string name="routing_attr_avoid_toll_name">Evitar pedágios</string>
-    <string name="routing_attr_avoid_toll_description">Evitar estradas com pedágio</string>
+    <string name="routing_attr_avoid_toll_name">Sem pedágios</string>
+    <string name="routing_attr_avoid_toll_description">Evita estradas com pedágio</string>
     <string name="routing_attr_avoid_unpaved_name">Evitar vias não pavimentadas</string>
     <string name="routing_attr_avoid_unpaved_description">Evitar estradas não pavimentadas.</string>
     <string name="routing_attr_avoid_ferries_description">Evitar as balsas</string>
@@ -396,8 +396,8 @@
     <string name="rendering_attr_showCycleRoutes_name">Mostrar rotas para bicicletas</string>
     <string name="no_index_file_to_download">Downloads não encontrados. Por favor, verifique sua conexão com a Internet.</string>
     <string name="select_index_file_to_download">Nada foi encontrado. Se você não encontrar a sua região, você pode criá-la (veja https://osmand.net).</string>
-    <string name="none_selected_gpx">Não há arquivos GPX selecionados. Selecione um com um toque longo.</string>
-    <string name="local_index_select_gpx_file">Selecione para mostrar</string>
+    <string name="none_selected_gpx">Especifique um arquivo GPX com um toque longo primeiro.</string>
+    <string name="local_index_select_gpx_file">Selecione uma trilha</string>
     <string name="gpx_split_interval">Intervalo de divisão</string>
     <string name="sort_by_distance">Por distância</string>
     <string name="sort_by_name">Por nome</string>
@@ -1675,7 +1675,7 @@ Pôr do Sol: %2$s</string>
     <string name="map_downloaded">Mapa baixado</string>
     <string name="please_specify_poi_type_only_from_list">Especifique o tipo correto de POI ou ignore.</string>
     <string name="access_from_map">Acessar a partir do mapa</string>
-    <string name="show_on_start_description">\'Desligado\' lança diretamente para a tela do mapa.</string>
+    <string name="show_on_start_description">\'Desligado\' lança o mapa diretamente.</string>
     <string name="copied_to_clipboard">Copiado para a área de transferência</string>
     <string name="access_from_map_description">O botão menu inicia o painel, não em vez do menu</string>
     <string name="osm_save_offline">Salvar offline</string>
@@ -3375,4 +3375,5 @@ Pôr do Sol: %2$s</string>
     <string name="default_speed_dialog_msg">Usado para estimar a hora de chegada para tipos de estradas desconhecidos e para limitar a velocidade para todas as estradas (pode alterar a rota)</string>
     <string name="track_saved">Trilha salva</string>
     <string name="empty_filename">O nome do arquivo está vazio</string>
+    <string name="shared_string_revert">Reverter</string>
 </resources>

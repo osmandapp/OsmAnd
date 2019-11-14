@@ -3119,4 +3119,5 @@ voor Gebied: %1$s x %2$s</string>
     <string name="application_profile_changed">Profiel gewijzigd naar \"%s\"</string>
     <string name="layer_osm_edits">OSM-aanpassingen</string>
     <string name="empty_filename">Bestandsnaam is leeg</string>
+    <string name="shared_string_revert">Herstel</string>
 </resources>

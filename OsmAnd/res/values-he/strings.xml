@@ -49,11 +49,11 @@
     <string name="auto_zoom_map">שינוי תקריב אוטומטי במפה</string>
     <string name="snap_to_road_descr">הצמדת המיקום לדרכים במהלך הניווט.</string>
     <string name="snap_to_road">הצמדה לדרך</string>
-    <string name="osmand_short_description_80_chars">OsmAnd הנו יישום ניווט בקוד פתוח עבור מפות מקוונות ובלתי מקוונות</string>
+    <string name="osmand_short_description_80_chars">OsmAnd הנו יישומון צפייה במפות וניווט עם מפות מקוונות ובלתי מקוונות של OSM</string>
     <string name="osmand_plus_short_description_80_chars">OsmAnd הנו יישום ניווט בקוד פתוח עבור מפות מקוונות ובלתי מקוונות</string>
     <string name="filterpoi_activity">יצירת מסנן נ״ע</string>
     <string name="recalculate_route_to_your_location">מצב תעבורה:</string>
-    <string name="select_navigation_mode">בחירת מצב תעבורה</string>
+    <string name="select_navigation_mode">מצב תעבורה:</string>
     <string name="day_night_info_description">זריחה : %1$s
 \nשקיעה : %2$s</string>
     <string name="day_night_info">פרטי יום/לילה</string>
@@ -61,8 +61,8 @@
     <string name="map_widget_renderer">סגנון עיבוד התמונה</string>
     <string name="layer_map_appearance">הגדרת המסך</string>
     <string name="show_lanes">נתיבים</string>
-    <string name="avoid_unpaved">המנעות מדרכים שאינן סלולות</string>
-    <string name="avoid_ferries">המנעות ממעבורות</string>
+    <string name="avoid_unpaved">ללא דרכים בלתי סלולות</string>
+    <string name="avoid_ferries">ללא מעבורות</string>
     <string name="avoid_in_routing_title">המנעות…</string>
     <string name="map_widget_show_ruler">סרגל</string>
     <string name="map_widget_view_direction">כיוון הצפייה</string>
@@ -73,11 +73,11 @@
 \n הפעלה ברקע</string>
     <string name="gps_wakeup_interval">הפרשי התעוררות של רכיב האיכון: %s</string>
     <string name="int_continuosly">רציף</string>
-    <string name="screen_is_locked">לשחרור המסך יש לגעת בסמל המנעול</string>
+    <string name="screen_is_locked">לשחרור יש לגעת בסמל המנעול</string>
     <string name="map_widget_top_text">שם הרחוב</string>
     <string name="map_widget_config">מסך ההגדרות</string>
     <string name="map_widget_back_to_loc">איפה אני</string>
-    <string name="map_widget_lock_screen">נעילת המסך</string>
+    <string name="map_widget_lock_screen">נעילה</string>
     <string name="map_widget_compass">מצפן</string>
     <string name="map_widget_reset">איפוס לבררת המחדל</string>
     <string name="map_widget_parking">חנייה</string>
@@ -96,35 +96,35 @@
     <string name="offline_navigation_not_available">ניווט בלתי מקוון ב־OsmAnd אינו זמין נכון לעכשיו.</string>
     <string name="left_side_navigation">כיוון תנועה שמאלי</string>
     <string name="left_side_navigation_descr">מדינות בהן נוהגים בצד השמאלי של הדרך (לא תקף לישראל).</string>
-    <string name="unknown_from_location">נקודת ההתחלה לא נקבעה עדיין</string>
+    <string name="unknown_from_location">נקודת היציאה לא נקבעה עדיין</string>
     <string name="unknown_location">המיקום עדיין לא ידוע</string>
-    <string name="modify_transparency">שינוי השקיפות (0 - שקוף, 255 - אטום)</string>
-    <string name="confirm_interrupt_download">לבטל את הורדת הקובץ?</string>
+    <string name="modify_transparency">הגדרת השקיפות (0 - שקוף, 255 - אטום)</string>
+    <string name="confirm_interrupt_download">לבטל הורדה\?</string>
     <string name="map_widget_fluorescent">הארת מסלולים</string>
     <string name="map_widget_time">משך הנסיעה</string>
     <string name="map_widget_mini_route">מפת מסלול ממוזערת</string>
-    <string name="bg_service_screen_lock">נעילת המסך</string>
-    <string name="bg_service_screen_unlock">שחרור המסך</string>
+    <string name="bg_service_screen_lock">נעילה</string>
+    <string name="bg_service_screen_unlock">שחרור</string>
     <string name="bg_service_screen_lock_toast">המסך נעול</string>
     <string name="bg_service_interval">הגדרת משך התעוררות:</string>
     <string name="show_cameras">מכמונות מהירות</string>
     <string name="show_traffic_warnings">אזהרות תנועה</string>
-    <string name="avoid_toll_roads">הימנעות מכבישי אגרה</string>
+    <string name="avoid_toll_roads">ללא כבישי אגרה</string>
     <string name="continue_follow_previous_route_auto">להמשיך לעקוב אחר ניווט קודם שלא הושלם? (%1$s שניות)</string>
     <string name="route_updated_loc_found">בהמתנה למיקום לצורך חישוב הנתיב</string>
     <string name="osmand_parking_hours">שעות</string>
     <string name="osmand_parking_minutes">דקות</string>
     <string name="osmand_parking_position_description_add_time">הרכב חונה במיקום</string>
-    <string name="select_animate_speedup">בחירת מהירות הדמיית הנתיב</string>
+    <string name="select_animate_speedup">מהירות הדמיית המסלול:</string>
     <string name="global_app_allocated_memory_descr">הזיכרון המוקצה: %1$s מ״ב (המגבלה של Android:‏ %2$s מ״ב, Dalvik‏: %3$s מ״ב).</string>
     <string name="global_app_allocated_memory">הזיכרון המוקצה</string>
     <string name="native_app_allocated_memory_descr">סך כל הזיכרון הטבעי שמוקצה על ידי היישום: %1$s מ״ב (Dalvik‏: %2$s מ״ב, אחרים: %3$s מ״ב). זיכרון יחסי: %4$s מ״ב (המגבלה של Android:‏ %5$s מ״ב, Dalvik‏: %6$s מ״ב).</string>
     <string name="native_app_allocated_memory">סך כל הזיכרון הטבעי</string>
-    <string name="starting_point_too_far">נקודת ההתחלה רחוקה מדי מהדרך הקרובה אליה ביותר.</string>
+    <string name="starting_point_too_far">נקודת היציאה רחוקה מדי מהדרך הקרובה אליה ביותר.</string>
     <string name="shared_location">מיקום משותף</string>
     <string name="osmand_parking_event">איסוף הרכב מהחנייה</string>
     <string name="osmand_parking_warning">אזהרה</string>
-    <string name="osmand_parking_warning_text">נוספה התראה לאיסוף הרכב שלך ליומן שלך. ההתראה תישאר שם עד למחיקתה ידנית.</string>
+    <string name="osmand_parking_warning_text">נוספה התראה לאיסוף הרכב שלך ליומן שלך וניתן יהיה לערוך או להסיר אותה משם.</string>
     <string name="osmand_parking_time_limit_title">הגדרת מגבלת זמן לחנייה</string>
     <string name="osmand_parking_delete_confirm">להסיר את סמן מיקום חניית כלי הרכב?</string>
     <string name="osmand_parking_delete">מחיקת סמן חנייה</string>
@@ -172,7 +172,7 @@
     <string name="map_online_data">מפות מקוונות ואריחים</string>
     <string name="map_online_data_descr">שימוש במפות מקוונות (הורדה ואחסון אריחי המפה בכרטיס הזיכרון).</string>
     <string name="shared_string_online_maps">מפות מקוונות</string>
-    <string name="online_map_settings_descr">הגדרת מקורות אריחי מפה מקוונים או שמורים.</string>
+    <string name="online_map_settings_descr">בחירת מקורות אריחי מפה מקוונים או שמורים.</string>
     <string name="osmand_rastermaps_plugin_description">עם התוסף הזה ניתן לגשת למגוון סוגים של מפות מקוונות (נקראות גם אריחים או מעובדות), מאריחים מוגדרים מראש של OpenStreetMap (כמו למשל Mapnik) עד תמונות לוויין ושכבות מיוחדות כגון מפות מזג אוויר, מפות אקלים, מפות גאולוגיות, מפות הצללה ועוד. 
 \n 
 \nכל אחת מהמפות האלה יכולה לשמש בתור המפה הראשית (בסיס) שתוצג במפה של OsmAnd או כשכבה מעל או מתחת למפת בסיס אחרת (כמו המפות התקניות הבלתי מקוונות של OsmAnd). כדי שניתן היה לראות את המפות שמתחת, ניתן להסתיר פריטים מסוימים במפות הווקטורים של OsmAnd דרך התפריט ‚הגדרת מפה’ לפי דרישתך. 
@@ -186,11 +186,11 @@
     <string name="prefs_plugins">מנהל התוספים</string>
     <string name="osm_editing_plugin_description">הצגת ההגדרות שנדרשות לטובת משוב ל־OSM כמו איסוף / שינוי פריטי נ״ע של OSM, פתיחה של / תגובה על הערות ב־OSM ותרומה של קובצי GPX מוקלטים (נדרשים פרטי גישה ל־OSM).</string>
     <string name="vector_maps_may_display_faster_on_some_devices">יתכן שמפות וקטוריות יוצגו מהר יותר. עם זאת לא בטוח שיעבדו כראוי על חלק מההתקנים.</string>
-    <string name="play_commands_of_currently_selected_voice">נא לבחור בקריינות ולבדוק על ידי השמעת ההנחיות הקוליות</string>
+    <string name="play_commands_of_currently_selected_voice">נא לבחור בקריינות ולבדוק על ידי השמעת ההנחיות הקוליות:</string>
     <string name="debugging_and_development">פיתוח OsmAnd</string>
     <string name="native_rendering">עיבוד תמונה טבעי</string>
     <string name="test_voice_prompts">בדיקת ההכרזות הקוליות</string>
-    <string name="switch_to_raster_map_to_see">אין מפה וקטורית בלתי מקוונת לאזור זה. ניתן להוריד אחת ב‚הגדרות’ (‚ניהול קובצי מפה’) או לעבור ל‚מפות מקוונות’.</string>
+    <string name="switch_to_raster_map_to_see">ניתן להוריד מפה וקטורית בלתי מקוונת למיקום זה ב‚הגדרות’ (‚ניהול קובצי מפה’) או לעבור לתוסף ‚מפות מקוונות’.</string>
     <string name="send_files_to_osm">האם לשלוח את קובצי ה־GPX ל־OSM?</string>
     <string name="gpx_visibility_txt">הופעה</string>
     <string name="gpx_tags_txt">תגיות</string>
@@ -260,8 +260,8 @@
     <string name="local_openstreetmap_uploading">מתבצעת שליחה…</string>
     <string name="local_openstreetmap_were_uploaded">{0} נ״ע/הערות נשלחו</string>
     <string name="local_openstreetmap_uploadall">לשלוח הכול</string>
-    <string name="local_openstreetmap_upload">שליחת השינויים ל־OSM</string>
-    <string name="local_openstreetmap_delete">מחיקת השינוי</string>
+    <string name="local_openstreetmap_upload">שליחת העריכה ל־OSM</string>
+    <string name="local_openstreetmap_delete">מחיקת העריכה</string>
     <string name="local_openstreetmap_descr_title">עריכה בלתי מתואמת של OSM:</string>
     <string name="local_openstreetmap_settings">נ״ע/הערות של OSM נשמרו בהתקן</string>
     <string name="local_openstreetmap_settings_descr">הצגה וניהול של נ״ע/הערות שנשמרו במסד נתונים בהתקן.</string>
@@ -332,8 +332,8 @@
     <string name="file_can_not_be_renamed">לא ניתן לשנות את שם הקובץ.</string>
     <string name="file_with_name_already_exists">כבר קיים קובץ בשם הזה.</string>
     <string name="shared_string_gpx_route">מסלול GPX</string>
-    <string name="poi_query_by_name_matches_categories">נמצאו מספר קטגוריות נ״ע התואמות לשאילתה :</string>
-    <string name="data_to_search_poi_not_available">נתונים מקומיים לחיפוש נ״ע לא קיים.</string>
+    <string name="poi_query_by_name_matches_categories">נמצאו מספר קטגוריות נ״ע קשורות.</string>
+    <string name="data_to_search_poi_not_available">להוריד נתונים בלתי מקוונים כדי לחפש נקודות עניין.</string>
     <string name="poi_filter_by_name">חיפוש לפי שם</string>
     <string name="old_poi_file_should_be_deleted">קובץ נתוני הנ״ע \'%1$s\' אינו נחוץ עוד וניתן למחוק אותו.</string>
     <string name="update_poi_file_not_found">קובץ מקומי לתחזוקת שינויי נ״ע לא נמצא ולא ניתן ליצור אותו.</string>
@@ -399,7 +399,7 @@
     <string name="installing_new_resources">הנתונים החדשים נפרסים…</string>
     <string name="internet_connection_required_for_online_route">ניווט מקוון לא עובד ללא חיבור לאינטרנט.</string>
     <string name="tts_language_not_supported_title">שפה בלתי נתמכת</string>
-    <string name="tts_language_not_supported">השפה הנבחרת אינה נתמכת על ידי המנגנון הממיר טקסט לדיבור. לגשת לחנות כדי לחפש אחר מנגנון המרה אחר? בכל מצב אחר ייעשה שימוש בשפות הקיימות.</string>
+    <string name="tts_language_not_supported">השפה הנבחרת אינה נתמכת על ידי המנגנון של Android הממיר טקסט לדיבור (TTS) המותקן, ייעשה שימוש בשפת ההמרה במקום. לחפש מנוע המרה אחר של טקסט לדיבור בחנות\?</string>
     <string name="tts_missing_language_data_title">חסרים נתונים</string>
     <string name="tts_missing_language_data">לגשת לחנות להוריד את השפה הנבחרת?</string>
     <string name="gpx_option_reverse_route">היפוך כיוון ה־GPX</string>
@@ -632,7 +632,7 @@
     <string name="voice_data_initializing">נתוני הקול מאותחלים…</string>
     <string name="voice_data_not_supported">גרסת נתוני הקול אינה נתמכת</string>
     <string name="voice_data_corrupted">נתוני הקול שצוינו פגומים</string>
-    <string name="voice_data_unavailable">נתוני הקול שצוינו אינם זמינים</string>
+    <string name="voice_data_unavailable">חבילת הקריינות שנבחרה אינה זמינה</string>
     <string name="sd_unmounted">כרטיס הזיכרון אינו נגיש.
 \nלא תהיה לך אפשרות לצפות במפות או לחפש דברים.</string>
     <string name="sd_mounted_ro">כרטיס הזיכרון הוא לקריאה בלבד. 
@@ -688,7 +688,7 @@
     <string name="update_existing">החלפה</string>
     <string name="only_show">להציג בלבד</string>
     <string name="follow">התחלת הנחייה</string>
-    <string name="mark_final_location_first">נא לבחור את היעד תחילה</string>
+    <string name="mark_final_location_first">נא להגדיר את היעד תחילה</string>
     <string name="get_directions">הכוונה</string>
     <string name="opening_hours">שעות הפתיחה</string>
     <string name="background_service_wait_int">זמן ההמתנה המרבי לתיקון</string>
@@ -710,9 +710,9 @@
     <string name="error_calculating_route_occured">לא ניתן לחשב מסלול.</string>
     <string name="empty_route_calculated">המסלול שחושב ריק.</string>
     <string name="new_route_calculated_dist">המסלול החדש חושב, מרחק</string>
-    <string name="arrived_at_destination">הגעת ליעדך</string>
+    <string name="arrived_at_destination">הגעת ליעד.</string>
     <string name="invalid_locations">נקודות ציון שגויות</string>
-    <string name="go_back_to_osmand">חזרה למפה של OsmAnd</string>
+    <string name="go_back_to_osmand">חזרה למפה</string>
     <string name="shared_string_close">סגירה</string>
     <string name="loading_data">הנתונים נטענים…</string>
     <string name="reading_indexes">המידע המקומי נקרא…</string>
@@ -778,11 +778,11 @@
     <string name="navigate_point_top_text">נא להזין רוחב ואורך במבנה הנבחר (D - מעלות, M - דקות, S - שניות)</string>
     <string name="navigate_point_latitude">רוחב</string>
     <string name="navigate_point_longitude">אורך</string>
-    <string name="navigate_point_format_D">DDD.DD</string>
-    <string name="navigate_point_format_DM">DDD MM.MM</string>
-    <string name="navigate_point_format_DMS">DDD MM SS.SS</string>
+    <string name="navigate_point_format_D">DDD.DDDDD</string>
+    <string name="navigate_point_format_DM">DDD MM.MMM</string>
+    <string name="navigate_point_format_DMS">DDD MM SS.S</string>
     <string name="shared_string_show_on_map">הצגה במפה</string>
-    <string name="search_address_top_text">נא לבחור בכתובת</string>
+    <string name="search_address_top_text">כתובת</string>
     <string name="search_address_region">אזור</string>
     <string name="search_address_city">עיר</string>
     <string name="search_address_street">רחוב</string>
@@ -826,51 +826,52 @@
     <string name="shared_string_clear">איפוס</string>
     <string name="filter_current_poiButton">מסנן</string>
     <string name="edit_filter_save_as_menu_item">שמירה בשם</string>
-    <string name="edit_filter_delete_dialog_title">האם למחוק את המסנן הנבחר?</string>
-    <string name="edit_filter_delete_message">המסנן {0} נמחק</string>
-    <string name="edit_filter_create_message">המסנן {0} נוצר</string>
+    <string name="edit_filter_delete_dialog_title">למחוק מסנן זה\?</string>
+    <string name="edit_filter_delete_message">המסנן ‚{0}’ נמחק</string>
+    <string name="edit_filter_create_message">המסנן ‚{0}’ נוצר</string>
     <string name="email">דוא״ל</string>
     <string name="search_history_street">רחוב:\n {0}, {1}</string>
-    <string name="osmand_plus_long_description_1000_chars">"OsmAnd+‎ ‏(OSM הכוונת ניווט אוטומטית)
-\n OsmAnd+‎ הנו יישום ניווט בקוד פתוח עם גישה למגוון רחב של נתונים מ־OpenStreetMap‏ (OSM). ניתן לשמור את כל נתוני המפה על כרטיס הזיכרון של הטלפון לצורך שימוש ללא אינטרנט. OsmAnd מציעה גם תכונת טוויית מסלול הפועלת עם וללא אינטרנט וכוללת הנחייה קולית לכל פנייה ופנייה.
-\n
-\n OsmAnd+‎ הנה הגרסה בתשלום של היישום, רכישת גרסה זו מהווה הבעת תמיכה במיזם, מימון פיתוח של תכונות חדשות ומבטיחה קבלת עדכונים במהירות.
-\n
-\n חלק מתכונות הליבה:
-\n - הפעלה ללא אינטרנט (איחסון וקטורים או אריחי מפות שהתקבלו לתיקייה נבחרת)
-\n - מפות וקטוריות דחוסות זמינות לכל חלקי העולם
-\n - הורדה בלתי מוגבלת של מפות לפי מדינה או אזור ישירות מהיישום
-\n - תכונת ויקיפדיה בלתי מקוונת (הורדת נ״ע מוויקיפדיה), מושלם לטיולים
-\n - יצירת מערום של מספר שכבות של מפות, כמו GPX או דרכי ניווט, נקודות עניין, מועדפים, קווי מתאר, תחנות של תחבורה ציבורית, מפות נוספות עם שקיפות מותאמת
-\n
-\n - חיפוש בלתי מקוון של כתובות ומקומות (נ״ע)
-\n - תכנון מסלול לטווחים קצרים ללא חיבור לאינטרנט (ניסיוני)
-\n - מצבים לרכבים, אופניים והליכה ברגל עם:
-\n - החלפה אוטומטית בין מצבי יום/לילה
-\n - הגדרת תקריב מתכוונן בהתאם למהירות
-\n - יישור המפה בהתאם למצפן או לכיוון התנועה
-\n - הנחיות מעבר בין נתיבים, הצגת הגבלת מהירות, קולות הנחיה כטקסט לדיבור או בהקלטה "</string>
-    <string name="osmand_long_description_1000_chars">OsmAnd ‏(OSM הכוונת ניווט אוטומטית)
-\n
-\n OsmAnd הנו יישום ניווט בקוד פתוח עם גישה למגוון רחב של נתונים מ־OpenStreetMap‏ (OSM). ניתן לשמור את כל נתוני המפה על כרטיס הזיכרון של הטלפון לצורך שימוש ללא אינטרנט. OsmAnd מציעה גם תכונת טוויית מסלול הפועלת עם וללא אינטרנט וכוללת הנחייה קולית לכל פנייה ופנייה.
-\n
-\n חלק מתכונות הליבה: - אפשרות להפעלה ללא אינטרנט (איחסון וקטורים או אריחי מפות שהתקבלו לתיקייה נבחרת)
-\n - מפות וקטוריות דחוסות זמינות לכל חלקי העולם
-\n - הורדה בלתי מוגבלת של מפות לפי מדינה או אזור ישירות מהיישום
-\n - תכונת ויקיפדיה בלתי מקוונת (הורדת נ״ע מוויקיפדיה), מושלם לטיולים
-\n - יצירת מערום של מספר שכבות של מפות, כמו GPX או דרכי ניווט, נקודות עניין, מועדפים, קווי מתאר, תחנות של תחבורה ציבורית, מפות נוספות עם שקיפות מותאמת
-\n - חיפוש בלתי מקוון של כתובות ומקומות (נ״ע)
-\n - תכנון מסלול לטווחים קצרים ללא חיבור לאינטרנט (ניסיוני)
-\n - מצבים לרכבים, אופניים והליכה ברגל עם:
-\n - החלפה אוטומטית בין מצבי יום/לילה
-\n - הגדרת תקריב מתכוונן בהתאם למהירות
-\n - יישור המפה בהתאם למצפן או לכיוון התנועה
+    <string name="osmand_plus_long_description_1000_chars">OsmAnd+‎ ‏(OSM הכוונת ניווט אוטומטית) 
+\n OsmAnd+‎ הנו יישום ניווט בקוד פתוח עם גישה למגוון רחב של נתונים מ־OpenStreetMap‏ (OSM). ניתן לשמור את כל נתוני המפה על כרטיס הזיכרון של הטלפון לצורך שימוש ללא אינטרנט. OsmAnd מציעה גם תכונת טוויית מסלול הפועלת עם וללא אינטרנט וכוללת הנחייה קולית לכל פנייה ופנייה. 
+\n 
+\n OsmAnd+‎ הנה הגרסה בתשלום של היישום, רכישת גרסה זו מהווה הבעת תמיכה במיזם, מימון פיתוח של תכונות חדשות ומבטיחה קבלת עדכונים במהירות. 
+\n 
+\n חלק מתכונות הליבה: 
+\n - הפעלה ללא אינטרנט (איחסון וקטורים או אריחי מפות שהתקבלו לתיקייה נבחרת) 
+\n - מפות וקטוריות דחוסות זמינות לכל חלקי העולם 
+\n - הורדה בלתי מוגבלת של מפות לפי מדינה או אזור ישירות מהיישום 
+\n - תכונת ויקיפדיה בלתי מקוונת (הורדת נ״ע מוויקיפדיה), מושלם לטיולים 
+\n - יצירת מערום של מספר שכבות של מפות, כמו GPX או דרכי ניווט, נקודות עניין, מועדפים, קווי מתאר, תחנות של תחבורה ציבורית, מפות נוספות עם שקיפות מותאמת 
+\n 
+\n - חיפוש בלתי מקוון של כתובות ומקומות (נ״ע) 
+\n - תכנון מסלול לטווחים קצרים ללא חיבור לאינטרנט (ניסיוני) 
+\n - מצבים לרכבים, אופניים והליכה ברגל עם: 
+\n - החלפה אוטומטית בין מצבי יום/לילה 
+\n - הגדרת תקריב מתכוונן בהתאם למהירות 
+\n - יישור המפה בהתאם למצפן או לכיוון התנועה 
 \n - הנחיות מעבר בין נתיבים, הצגת הגבלת מהירות, קולות הנחיה כטקסט לדיבור או בהקלטה
-\n
-\n מגבלות של גרסה חופשית זו של OsmAnd:
-\n - מספר הורדות המפה מוגבלות
-\n - אין גישה לנ״ע בוויקיפדיה באופן בלתי מקוון.
-\n
+\n</string>
+    <string name="osmand_long_description_1000_chars">OsmAnd ‏(OSM הכוונת ניווט אוטומטית) 
+\n 
+\n OsmAnd הנו יישום ניווט בקוד פתוח עם גישה למגוון רחב של נתונים מ־OpenStreetMap‏ (OSM). ניתן לשמור את כל נתוני המפה על כרטיס הזיכרון של הטלפון לצורך שימוש ללא אינטרנט. OsmAnd מציעה גם תכונת טוויית מסלול הפועלת עם וללא אינטרנט וכוללת הנחייה קולית לכל פנייה ופנייה. 
+\n 
+\n חלק מתכונות הליבה: - אפשרות להפעלה ללא אינטרנט (איחסון וקטורים או אריחי מפות שהתקבלו לתיקייה נבחרת) 
+\n - מפות וקטוריות דחוסות זמינות לכל חלקי העולם 
+\n - הורדה בלתי מוגבלת של מפות לפי מדינה או אזור ישירות מהיישומון 
+\n - תכונת ויקיפדיה בלתי מקוונת (הורדת נ״ע מוויקיפדיה), מושלם לטיולים 
+\n - יצירת מערום של מספר שכבות של מפות, כמו GPX או דרכי ניווט, נקודות עניין, מועדפים, קווי מתאר, תחנות של תחבורה ציבורית, מפות נוספות עם שקיפות מותאמת 
+\n - חיפוש בלתי מקוון של כתובות ומקומות (נ״ע) 
+\n - תכנון מסלול לטווחים קצרים ללא חיבור לאינטרנט (ניסיוני) 
+\n - מצבים לרכבים, אופניים והליכה ברגל עם: 
+\n - החלפה אוטומטית בין מצבי יום/לילה 
+\n - הגדרת תקריב מתכוונן בהתאם למהירות 
+\n - יישור המפה בהתאם למצפן או לכיוון התנועה 
+\n - הנחיות מעבר בין נתיבים, הצגת הגבלת מהירות, קולות הנחיה כטקסט לדיבור או בהקלטה 
+\n 
+\n מגבלות של גרסה חופשית זו של OsmAnd: 
+\n - מספר הורדות המפה מוגבלות 
+\n - אין גישה לנ״ע בוויקיפדיה באופן בלתי מקוון. 
+\n 
 \n התכנית OsmAnd נמצאת בפיתוח פעיל והמיזם שלנו והמשך התהליך נתמך על תרומות כלכליות למימון הפיתוח והבדיקות של התכונות החדשות. נא לשקול לקנות את OsmAnd+‎ או לממן תכונות חדשות באופן נקודתי או לתרום תרומה כללית דרך https://osmand.net.</string>
     <string name="rendering_attr_showRoadMaps_description">נא לבחור מתי להציג מפות לדרכים בלבד:</string>
     <string name="rendering_attr_showRoadMaps_name">מפות לדרכים בלבד</string>
@@ -1138,7 +1139,7 @@
     <string name="quick_action_showhide_osmbugs_descr">בורר להצגה או להסתרה של הערות OSM על המפה.</string>
     <string name="sorted_by_distance">מסודר לפי מרחק</string>
     <string name="search_favorites">חיפוש במועדפים</string>
-    <string name="none_selected_gpx">לא נבחרו קובצי GPX. ניתן לבחור אחד בלחיצה ארוכה.</string>
+    <string name="none_selected_gpx">יש לציין GPX בלחיצה ארוכה תחילה.</string>
     <string name="local_index_select_gpx_file">יש לבחור מסלול</string>
     <string name="gpx_split_interval">משך פיצול</string>
     <string name="sort_by_distance">סידור לפי מרחק</string>
@@ -1405,7 +1406,7 @@
     <string name="rendering_value_translucent_pink_name">ורוד שקוף למחצה</string>
     <string name="rendering_value_brown_name">חום</string>
     <string name="rendering_value_translucent_purple_name">חציל שקוף למחצה</string>
-    <string name="restart_is_required">נדרשת הפעלה ידנית מחדש של היישומון כדי להחיל את כל השינויים.</string>
+    <string name="restart_is_required">נדרשת הפעלה מחדש כדי להחיל את השינוי.</string>
     <string name="light_theme">בהיר</string>
     <string name="dark_theme">כהה</string>
     <string name="lang_pms">פיימונטית</string>
@@ -1662,8 +1663,8 @@
     <string name="quick_action_navigation_voice_descr">בורר להשבתה או הפעלה של הנחייה קולית במהלך ניווט.</string>
     <string name="quick_action_add_parking_descr">כפתור להוספת מקום חנייה במרכז המסך.</string>
     <string name="favorite_empty_place_name">מיקום</string>
-    <string name="quick_action_showhide_favorites_descr">נגיעה בכפתור הפעולה מציגה או מסתירה את הנקודות המועדפות במפה.</string>
-    <string name="quick_action_showhide_poi_descr">נגיעה בכפתור הפעולה מציגה או מסתירה נקודות עניין במפה.</string>
+    <string name="quick_action_showhide_favorites_descr">בורר להצגה או הסתרה של הנקודות המועדפות במפה.</string>
+    <string name="quick_action_showhide_poi_descr">בורר להצגה או הסתרה של נקודות עניין במפה.</string>
     <string name="quick_action_showhide_favorites_title">הצגה/הסתרה של מועדפים</string>
     <string name="quick_action_favorites_show">הצגת מועדפים</string>
     <string name="quick_action_favorites_hide">הסתרת מועדפים</string>
@@ -1677,7 +1678,7 @@
     <string name="quick_action_fav_name_descr">יש להשאיר ריק כדי להשתמש בכתובת או בשם המקום.</string>
     <string name="quick_action_bug_descr">הודעה זו מתווספת לשדה ההערה.</string>
     <string name="quick_action_bug_message">הודעה</string>
-    <string name="quick_action_category_descr">נא לבחור את הקטגוריה בה יישמר המועדף.</string>
+    <string name="quick_action_category_descr">קטגוריה לשמירת המועדף:</string>
     <string name="quick_action_gpx_category_descr">נא לבחור קטגוריית רשות.</string>
     <string name="quick_action_poi_list">רשימת נקודות עניין</string>
     <string name="quick_action_sh_poi_descr">ניתן להוסיף קטגוריה אחת או יותר של נקודות עניין להצגה במפה.</string>
@@ -2282,7 +2283,7 @@
     <string name="local_index_tile_data_name">נתוני אריח: %1$s</string>
     <string name="edit_tilesource_successfully">מקור האריחים %1$s נשמר</string>
     <string name="driving_region_descr">נא לבחור את איזור הנהיגה: ארה״ב, אירופה, הממלכה המאוחדת, אסיה ואחרות.</string>
-    <string name="speak_descr">יש להגדיר כדי לצורך הקראה של שמות רחובות, אזהרות תנועה (עצירות מאולצות, פסי האטה), אזהרות על מצלמות מהירות, מגבלת מהירות.</string>
+    <string name="speak_descr">הגדרת הקראה של שמות רחובות, אזהרות תנועה (עצירות מאולצות, פסי האטה), אזהרות על מצלמות מהירות, מגבלת מהירות.</string>
     <string name="animate_my_location_desc">הפעלת הנפשת גלישת מפה של ה‚מיקום שלי’ במהלך ניווט.</string>
     <string name="shared_string_in_name">ב־%1$s</string>
     <string name="one_tap_active_descr">ניתן לגעת בסמן על המפה כדי להעביר אותו לראש הסמנים הפעילים מבלי לפתוח את תפריט ההקשר.</string>
@@ -2433,7 +2434,7 @@
     <string name="map_preferred_locale">שפת המפה המועדפת</string>
     <string name="local_map_names">שמות מקומיים</string>
     <string name="index_item_nation_addresses">כתובות בפריסה ארצית</string>
-    <string name="local_osm_changes_delete_all_confirm">פעולה זו תוביל למחיקה של %1$d שינויים ב־OSM. להמשיך?</string>
+    <string name="local_osm_changes_delete_all_confirm">למחוק %1$d שינויים ל־OSM\?</string>
     <string name="day_off_label">‏‏כבוי</string>
     <string name="winter_and_ski_renderer">חורף וסקי</string>
     <string name="tunnel_warning">מנהרה לפניך</string>
@@ -2499,7 +2500,7 @@
     <string name="shared_string_explore">סיור</string>
     <string name="access_disable_offroute_recalc">אין אפשרות לחישוב מסלול מחדש לאחר עזיבת המסלול</string>
     <string name="access_disable_offroute_recalc_descr">אין אפשרות לחישוב המסלול מחדש לאחר חריגה מהמסלול.</string>
-    <string name="download_files_error_not_enough_space">אין מספיק מקום! נחוצים {3} מ״ב באופן זמני, {1} מ״ב באופן קבוע. (יש רק {2} מ״ב זמינים).</string>
+    <string name="download_files_error_not_enough_space">אין מספיק מקום! נחוצים {3} מ״ב באופן זמני, {1} מ״ב באופן קבוע. (יש רק {2} מ״ב זמינים.)</string>
     <string name="fav_point_dublicate">צוין שם כפול למועדף</string>
     <string name="shared_string_read">נקרא</string>
     <string name="shared_string_contents">תכנים</string>
@@ -2606,7 +2607,7 @@
     <string name="world_map_download_descr">מפת הבסיס העולמית (המכסה את כל העולם ברמות תקריב נמוכות) חסרה או שאינה עדכנית. נא לשקול להוריד אותה כדי לקבל סקירה גלובלית.</string>
     <string name="hillshade_layer_disabled">מפת ההצללה מושבתת</string>
     <string name="app_mode_hiking">טיול רגלי</string>
-    <string name="quick_action_duplicates">שם הפעולה המהירה כבר נמצא בשימוש, הוא הוחלף בשם %1$s כדי להמנע מכפילות.</string>
+    <string name="quick_action_duplicates">שם הפעולה המהירה הוחלף בשם %1$s כדי להימנע מכפילות.</string>
     <string name="in_app_purchase">רכישות בתוך היישומון</string>
     <string name="in_app_purchase_desc">תשלום חד־פעמי</string>
     <string name="in_app_purchase_desc_ex">לאחר הרכישה, הזמינות אליך תהיה לצמיתות.</string>
@@ -2676,22 +2677,22 @@
 \n • ניווט מחדש אוטומטית במקרה של סטייה מהמסלול
 \n • חיפוש מקומות לפי כתובת, סוג (למשל: מסעדה, מלון, תחנת דלק, מוזיאון), או נקודות ציון גאוגרפיות
 \n</string>
-    <string name="osmand_plus_extended_description_part3">צפייה במפה
-\n • הצגת המיקום והכיוון שלך
-\n • יישור התמונה לפי המצפן או כיוון התנועה שלך לבחירתך
-\n • שמירת המקומות החשובים בעיניך כמועדפים
-\n • הצגת נ״ע (נקודות עניין) סביבך
+    <string name="osmand_plus_extended_description_part3">צפייה במפה 
+\n • הצגת המיקום והכיוון שלך 
+\n • יישור התמונה לפי המצפן או כיוון התנועה שלך לבחירתך 
+\n • שמירת המקומות החשובים בעיניך כמועדפים 
+\n • הצגת נ״ע (נקודות עניין) סביבך 
 \n • הצגת אריחים מקוונים מיוחדים, תצוגת לוויין (מ־Bing), שכבות שונות כגון מסלולי GPX לצורך סיור/ניווט ושכבות נוספות עם שקיפות מתכווננת 
 \n • הצגת שמות המקומות באנגלית, בשמות המקומיים או בתעתיק לפי צליל לבחירתך
 \n</string>
-    <string name="osmand_plus_extended_description_part4">שימוש במידע מ־OSM ומוויקיפדיה
-\n • מידע באיכות גבוהה ממיזמי השותפות הטובים בעולם
-\n • נתוני OSM זמינים לפי מדינה או איזור
-\n • נקודות עניין של ויקיפדיה, נהדר למגוון תצפיות
-\n • הורדות בלתי מוגבלות בחינם, ישירות מהיישומון
-\n • מפות וקטוריות מצומצמות שמתעדכנות לפחות פעם בחודש
-\n
-\n • בחירה בין כל נתוני האיזור לבין מערכת הדרכים (לדוגמה: הנפח של כל הנתונים על יפן הוא 700 מ״ב לעומת 200 מ״ב לנתוני הדרכים בלבד)</string>
+    <string name="osmand_plus_extended_description_part4">שימוש במידע מ־OSM ומוויקיפדיה 
+\n • מידע באיכות גבוהה ממיזמי השותפות הטובים בעולם 
+\n • נתוני OSM זמינים לפי מדינה או אזור 
+\n • נקודות עניין של ויקיפדיה, נהדר למגוון תצפיות 
+\n • הורדות בלתי מוגבלות בחינם, ישירות מהיישומון 
+\n • מפות וקטוריות מצומצמות שמתעדכנות לפחות פעם בחודש 
+\n 
+\n • בחירה בין כל נתוני האזור לבין מערכת הדרכים (לדוגמה: הנפח של כל הנתונים על יפן הוא 700 מ״ב לעומת 200 מ״ב לנתוני הדרכים בלבד)</string>
     <string name="shared_string_release">מועד ההפצה</string>
     <string name="download_wikipedia_description">ניתן להוריד את הערכים בוויקיפדיה על %1$s כדי לקרוא אותם ללא חיבור לאינטרנט.</string>
     <string name="download_wikipedia_label">הורדת נתונים מוויקיפדיה</string>
@@ -2777,7 +2778,7 @@
     <string name="light_rs_render_descr">סגנון נהיגה פשוט. מצב לילה עדין, לרבות קווי מתאר, כבישים בניגודיות גבוהה ובכתום, פריטים משניים במפה מעומעמים.</string>
     <string name="topo_render_descr">סגנונות ניגודיות תוכננו בעיקר לטובת טיולי הרים, מסלולי טיול ורכיבה על אופניים בטבע. תצוגה מותאמת לקריאה בתנאי תאורת חוץ מורכבים. תכונות מפתח: ניגודיות בין דרכים לעצמים בטבע, סוגים שונים של מסלולים, קווי מתאר עם הגדרות מתקדמות, פרטים נוספים ברמות תקריב מתואמות מעבר לסגנון בררת המחדל. אפשרות שלמות משטח מאפשרת להבדיל בין דרכים עם איכות משטח שונה. אין מצב לילה.</string>
     <string name="mapnik_render_descr">סגנון ‚Mapnik’ מיושן כבררת מחדל. הצבעים דומים ל־‚Mapnik’.</string>
-    <string name="default_render_descr">סגנון מטרה כללית. עיבוד נקי יותר בערים מאוכלסות לעייפה. תכונות מפתח: קווי מתאר, שלמות המשטח, הגבלות גישה, סימוני מספרי כבישים, עיבוד נתיבים לפי מדד SAC, תכונות ספורט מים לבנים.</string>
+    <string name="default_render_descr">סגנון מטרה כללית. ערים צפופות מופיעות בצורה נקייה. תכונות מפתח: קווי מתאר, שלמות המשטח, הגבלות גישה, סימוני מספרי כבישים, עיבוד נתיבים לפי מדד SAC, פריטי ספורט מים לבנים.</string>
     <string name="shared_string_bookmark">סימנייה</string>
     <string name="off_road_render_descr">מתאים לנהיגת שטח. מתאים לשימוש עם תמונות לוויין ירוקות כמפה בשכבה שמתחת. נקודות מפתח: דרכים ראשיות צרות יותר, המסלולים, דרכי הגישה, מסלולי האופניים ודרכים נוספות עבים יותר.</string>
     <string name="touring_view_render_descr">סגנון פירוט מדויק לטובת תיירות. כולל את כל אפשרויות התצוגה של בררת המחדל, בנוסף: מציג כמה שיותר פרטים ככל הניתן, במיוחד את כל הדרכים, השבילים ודרכי טיול נוספות. הבחנה חזותית ברורה בין כל סוגי הדרכים השונים, העלאת זיכרונות בתצורת אטלסים לתיירות. ערכת צבעים בניגודיות גבוהה לשימוש בחוץ לצד מצבי יום ולילה.</string>
@@ -2879,7 +2880,7 @@
     <string name="voice_announcements">הנחיות קוליות</string>
     <string name="intermediate_destinations">יעדי ביניים</string>
     <string name="arrive_at_time">הגעה ב־%1$s</string>
-    <string name="quick_action_switch_day_night_descr">נגיעה בכפתור פעולה זה תחליף בין מצבי יום ולילה עבור OsmAnd</string>
+    <string name="quick_action_switch_day_night_descr">בורר להחלפה בין מצבי יום ולילה עבור OsmAnd.</string>
     <string name="quick_action_switch_day_mode">מצב יום</string>
     <string name="quick_action_switch_night_mode">מצב לילה</string>
     <string name="quick_action_day_night_switch_mode">החלפה בין מצבי יום/לילה</string>
@@ -3376,4 +3377,7 @@
 \n לא נאספים פרטים אישיים, רק הנתונים שנחוצים לשיפור החיפוש.</string>
     <string name="track_saved">המסלול נשמר</string>
     <string name="empty_filename">שם הקובץ ריק</string>
+    <string name="shared_string_revert">החזרה</string>
+    <string name="quick_action_directions_from_desc">כפתור למרכוז נקודת היציאה במסך וחישוב המסלול ליעד או לפתוח תיבת דו־שיח לבחירת היעד אם סמן היעד לא במפה.</string>
+    <string name="clear_confirmation_msg">למחוק %1$s\?</string>
 </resources>
