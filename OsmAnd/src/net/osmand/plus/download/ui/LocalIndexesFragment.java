@@ -17,7 +17,9 @@ import net.osmand.AndroidUtils;
 import net.osmand.Collator;
 import net.osmand.IndexConstants;
 import net.osmand.OsmAndCollator;
+import net.osmand.ResultMatcher;
 import net.osmand.map.ITileSource;
+import net.osmand.map.TileSourceManager;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
 import net.osmand.plus.ContextMenuItem;
@@ -36,6 +38,7 @@ import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.resources.IncrementalChangesManager;
 import net.osmand.util.Algorithms;
 import android.app.Activity;
@@ -236,6 +239,20 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 					info.getFileName());
 			confirm.setMessage(getString(R.string.clear_confirmation_msg, fn));
 			confirm.show();
+		} else if (resId == R.string.maps_define_edit) {
+			OsmandRasterMapsPlugin.defineNewEditLayer(getDownloadActivity(),
+					new ResultMatcher<TileSourceManager.TileSourceTemplate>() {
+				@Override
+				public boolean isCancelled() {
+					return false;
+				}
+
+				@Override
+				public boolean publish(TileSourceManager.TileSourceTemplate object) {
+					getDownloadActivity().reloadLocalIndexes();
+					return true;
+				}
+			});
 		} else if (resId == R.string.local_index_mi_restore) {
 			new LocalIndexOperationTask(getDownloadActivity(), listAdapter, LocalIndexOperationTask.RESTORE_OPERATION).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, info);
 		} else if (resId == R.string.shared_string_delete) {
@@ -780,7 +797,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 				}
 
 				AlertDialog.Builder builder = new AlertDialog.Builder(getDownloadActivity());
-				builder.setMessage(getString(R.string.local_index_action_do, actionButton.toLowerCase(), selectedItems.size()));
+				builder.setMessage(getString(R.string.local_index_action_do, actionButton.toLowerCase(), String.valueOf(selectedItems.size())));
 				builder.setPositiveButton(actionButton, listener);
 				builder.setNegativeButton(R.string.shared_string_cancel, null);
 				builder.show();
@@ -1234,6 +1251,18 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 				@Override
 				public boolean onMenuItemClick(MenuItem item) {
 					performBasicOperation(R.string.clear_tile_data, info);
+					return true;
+				}
+			});	
+		}
+		if (info.getType() == LocalIndexType.TILES_DATA && (info.getAttachedObject() instanceof ITileSource) &&
+				((ITileSource) info.getAttachedObject()).couldBeDownloadedFromInternet()) {
+			item = optionsMenu.getMenu().add(R.string.maps_define_edit)
+					.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_type_edit));
+			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+				@Override
+				public boolean onMenuItemClick(MenuItem item) {
+					performBasicOperation(R.string.maps_define_edit, info);
 					return true;
 				}
 			});	
