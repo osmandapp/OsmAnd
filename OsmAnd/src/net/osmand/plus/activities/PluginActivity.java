@@ -110,7 +110,7 @@ public class PluginActivity extends OsmandActionBarActivity {
 	protected void onResume() {
 		super.onResume();
 		OsmandApplication app = getMyApplication();
-		OsmandPlugin.checkInstalledMarketPlugins(app,this);
+		OsmandPlugin.checkInstalledMarketPlugins(app, this);
 		updateState();
 	}
 

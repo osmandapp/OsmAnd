@@ -58,7 +58,7 @@ public class PluginsActivity extends OsmandListActivity {
 	protected void onResume() {
 		super.onResume();
 		OsmandApplication app = getMyApplication();
-		OsmandPlugin.checkInstalledMarketPlugins(app,this);
+		OsmandPlugin.checkInstalledMarketPlugins(app, this);
 		getListAdapter().notifyDataSetChanged();
 	}
 

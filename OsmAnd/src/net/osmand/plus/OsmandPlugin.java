@@ -137,32 +137,33 @@ public abstract class OsmandPlugin {
 	}
 
 	public static void initPlugins(@NonNull OsmandApplication app) {
-		OsmandSettings settings = app.getSettings();
-		Set<String> enabledPlugins = settings.getEnabledPlugins();
-
 		allPlugins.clear();
 		allPlugins.add(new MapillaryPlugin(app));
-		enabledPlugins.add(MapillaryPlugin.ID);
+
+		if (!app.getSettings().getPlugins().contains(MapillaryPlugin.ID)) {
+			app.getSettings().enablePlugin(MapillaryPlugin.ID, true);
+		}
 
 		allPlugins.add(new OsmandRasterMapsPlugin(app));
 		allPlugins.add(new OsmandMonitoringPlugin(app));
-		checkMarketPlugin(app, enabledPlugins, new SRTMPlugin(app), true, SRTM_PLUGIN_COMPONENT_PAID, SRTM_PLUGIN_COMPONENT);
+		checkMarketPlugin(app, new SRTMPlugin(app), true, SRTM_PLUGIN_COMPONENT_PAID, SRTM_PLUGIN_COMPONENT);
 
 		// ? questionable - definitely not market plugin
 //		checkMarketPlugin(app, enabledPlugins, new TouringViewPlugin(app), false, TouringViewPlugin.COMPONENT, null);
-		checkMarketPlugin(app, enabledPlugins, new NauticalMapsPlugin(app), false, NauticalMapsPlugin.COMPONENT, null);
-		checkMarketPlugin(app, enabledPlugins, new SkiMapsPlugin(app), false, SkiMapsPlugin.COMPONENT, null);
+		checkMarketPlugin(app, new NauticalMapsPlugin(app), false, NauticalMapsPlugin.COMPONENT, null);
+		checkMarketPlugin(app, new SkiMapsPlugin(app), false, SkiMapsPlugin.COMPONENT, null);
 
 		allPlugins.add(new AudioVideoNotesPlugin(app));
-		checkMarketPlugin(app, enabledPlugins, new ParkingPositionPlugin(app), false, ParkingPositionPlugin.PARKING_PLUGIN_COMPONENT, null);
+		checkMarketPlugin(app, new ParkingPositionPlugin(app), false, ParkingPositionPlugin.PARKING_PLUGIN_COMPONENT, null);
 		allPlugins.add(new AccessibilityPlugin(app));
 		allPlugins.add(new OsmEditingPlugin(app));
 		allPlugins.add(new OsmandDevelopmentPlugin(app));
 
-		activatePlugins(app, enabledPlugins);
+		activatePlugins(app);
 	}
 
-	private static void activatePlugins(OsmandApplication app, Set<String> enabledPlugins) {
+	private static void activatePlugins(OsmandApplication app) {
+		Set<String> enabledPlugins = app.getSettings().getEnabledPlugins();
 		for (OsmandPlugin plugin : allPlugins) {
 			if (enabledPlugins.contains(plugin.getId()) || plugin.isActive()) {
 				initPlugin(app, plugin);
@@ -171,6 +172,7 @@ public abstract class OsmandPlugin {
 	}
 
 	public static void updateActivatedPlugins(OsmandApplication app) {
+		checkMarketPlugins(app);
 		Set<String> enabledPlugins = app.getSettings().getEnabledPlugins();
 		for (OsmandPlugin plugin : allPlugins) {
 			if (enabledPlugins.contains(plugin.getId())) {
@@ -192,8 +194,15 @@ public abstract class OsmandPlugin {
 		}
 	}
 
-	private static void checkMarketPlugin(@NonNull OsmandApplication app, @NonNull Set<String> enabledPlugins,
-										  @NonNull OsmandPlugin plugin, boolean paid, String id, String id2) {
+	private static void checkMarketPlugin(@NonNull OsmandApplication app, @NonNull OsmandPlugin plugin,
+	                                      boolean paid, String id, String id2) {
+		if (updateMarketPlugin(app, plugin, paid, id, id2)) {
+			allPlugins.add(plugin);
+		}
+	}
+
+	private static boolean updateMarketPlugin(@NonNull OsmandApplication app, @NonNull OsmandPlugin plugin,
+	                                          boolean paid, String id, String id2) {
 		boolean marketEnabled = Version.isMarketEnabled(app);
 		boolean pckg = checkPackage(app, id, id2);
 		if ((Version.isDeveloperVersion(app) || !Version.isProductionVersion(app)) && !paid) {
@@ -202,52 +211,61 @@ public abstract class OsmandPlugin {
 		}
 		if (pckg || (!marketEnabled && !paid)) {
 			if (pckg && !app.getSettings().getPlugins().contains("-" + plugin.getId())) {
+				app.getSettings().enablePlugin(plugin.getId(), true);
 				plugin.setActive(true);
 			}
-			allPlugins.add(plugin);
+			plugin.setInstallURL(null);
+			return true;
 		} else {
 			if (marketEnabled) {
 				plugin.setActive(false);
 				if (!app.getSettings().getPlugins().contains("-" + plugin.getId())) {
-					enabledPlugins.remove(plugin.getId());
+					app.getSettings().enablePlugin(plugin.getId(), false);
 				}
 				plugin.setInstallURL(Version.getUrlWithUtmRef(app, id));
-				allPlugins.add(plugin);
+				return true;
 			}
+		}
+		return false;
+	}
+
+	private static void checkMarketPlugins(@NonNull OsmandApplication app) {
+		SRTMPlugin srtmPlugin = OsmandPlugin.getPlugin(SRTMPlugin.class);
+		if (srtmPlugin != null) {
+			updateMarketPlugin(app, srtmPlugin, true, SRTM_PLUGIN_COMPONENT_PAID, SRTM_PLUGIN_COMPONENT);
+		}
+		NauticalMapsPlugin nauticalMapsPlugin = OsmandPlugin.getPlugin(NauticalMapsPlugin.class);
+		if (nauticalMapsPlugin != null) {
+			updateMarketPlugin(app, nauticalMapsPlugin, false, NauticalMapsPlugin.COMPONENT, null);
+		}
+		SkiMapsPlugin skiMapsPlugin = OsmandPlugin.getPlugin(SkiMapsPlugin.class);
+		if (skiMapsPlugin != null) {
+			updateMarketPlugin(app, skiMapsPlugin, false, SkiMapsPlugin.COMPONENT, null);
+		}
+		ParkingPositionPlugin parkingPlugin = OsmandPlugin.getPlugin(ParkingPositionPlugin.class);
+		if (parkingPlugin != null) {
+			updateMarketPlugin(app, parkingPlugin, false, ParkingPositionPlugin.PARKING_PLUGIN_COMPONENT, null);
 		}
 	}
 
 	public static void checkInstalledMarketPlugins(@NonNull OsmandApplication app, @Nullable Activity activity) {
-		List<OsmandPlugin> installedPlugins = new ArrayList<OsmandPlugin>();
-		for (OsmandPlugin osmandPlugin : OsmandPlugin.getAvailablePlugins()) {
-			if (osmandPlugin.getInstallURL() != null) {
+		for (OsmandPlugin plugin : OsmandPlugin.getAvailablePlugins()) {
+			if (plugin.getInstallURL() != null) {
 				boolean pckg = false;
-				if (osmandPlugin instanceof SRTMPlugin) {
-					pckg = checkPackage(app, OsmandPlugin.SRTM_PLUGIN_COMPONENT_PAID, OsmandPlugin.SRTM_PLUGIN_COMPONENT);
-				} else if (osmandPlugin instanceof NauticalMapsPlugin) {
+				if (plugin instanceof SRTMPlugin) {
+					pckg = checkPackage(app, SRTM_PLUGIN_COMPONENT_PAID, SRTM_PLUGIN_COMPONENT);
+				} else if (plugin instanceof NauticalMapsPlugin) {
 					pckg = checkPackage(app, NauticalMapsPlugin.COMPONENT, null);
-				} else if (osmandPlugin instanceof SkiMapsPlugin) {
+				} else if (plugin instanceof SkiMapsPlugin) {
 					pckg = checkPackage(app, SkiMapsPlugin.COMPONENT, null);
-				} else if (osmandPlugin instanceof ParkingPositionPlugin) {
+				} else if (plugin instanceof ParkingPositionPlugin) {
 					pckg = checkPackage(app, ParkingPositionPlugin.PARKING_PLUGIN_COMPONENT, null);
 				}
 				if (pckg) {
-					installedPlugins.add(osmandPlugin);
+					plugin.onInstall(app, activity);
+					initPlugin(app, plugin);
 				}
 			}
-		}
-		for (OsmandPlugin osmandPlugin : installedPlugins) {
-			osmandPlugin.setInstallURL(null);
-			osmandPlugin.onInstall(app, activity);
-
-			String pluginId = osmandPlugin.getId();
-			for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
-				Set<String> plugins = app.getSettings().getPluginsForMode(mode);
-				if (!plugins.contains("-" + pluginId) && !plugins.contains(pluginId)) {
-					app.getSettings().enablePluginForMode(pluginId, true, mode);
-				}
-			}
-			initPlugin(app, osmandPlugin);
 		}
 	}
 
