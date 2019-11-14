@@ -102,7 +102,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment implements Send
 		if (app == null) {
 			return;
 		}
-		ApplicationMode selectedMode = settings.DEFAULT_APPLICATION_MODE.get();
+		ApplicationMode selectedMode = getSelectedAppMode();
 
 		ApplicationMode[] appModes = ApplicationMode.values(app).toArray(new ApplicationMode[0]);
 		String[] entries = new String[appModes.length];

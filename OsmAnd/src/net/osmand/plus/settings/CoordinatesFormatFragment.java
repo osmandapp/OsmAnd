@@ -121,7 +121,8 @@ public class CoordinatesFormatFragment extends BaseSettingsFragment {
 
 				FragmentManager fragmentManager = getFragmentManager();
 				if (fragmentManager != null) {
-					ChangeGeneralProfilesPrefBottomSheet.showInstance(fragmentManager, settings.COORDINATES_FORMAT.getId(), newFormat, this, false);
+					ChangeGeneralProfilesPrefBottomSheet.showInstance(fragmentManager,
+							settings.COORDINATES_FORMAT.getId(), newFormat, this, false, getSelectedAppMode());
 				}
 			}
 		}

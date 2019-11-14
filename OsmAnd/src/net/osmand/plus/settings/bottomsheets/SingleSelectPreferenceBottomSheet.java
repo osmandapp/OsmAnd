@@ -3,11 +3,13 @@ package net.osmand.plus.settings.bottomsheets;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.R;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
@@ -122,7 +124,8 @@ public class SingleSelectPreferenceBottomSheet extends BasePreferenceBottomSheet
 		return (ListPreferenceEx) getPreference();
 	}
 
-	public static boolean showInstance(@NonNull FragmentManager fragmentManager, String key, Fragment target, boolean usedOnMap) {
+	public static boolean showInstance(@NonNull FragmentManager fragmentManager, String key, Fragment target,
+									   boolean usedOnMap, @Nullable ApplicationMode appMode) {
 		try {
 			Bundle args = new Bundle();
 			args.putString(PREFERENCE_ID, key);
@@ -130,6 +133,7 @@ public class SingleSelectPreferenceBottomSheet extends BasePreferenceBottomSheet
 			SingleSelectPreferenceBottomSheet fragment = new SingleSelectPreferenceBottomSheet();
 			fragment.setArguments(args);
 			fragment.setUsedOnMap(usedOnMap);
+			fragment.setAppMode(appMode);
 			fragment.setTargetFragment(target, 0);
 			fragment.show(fragmentManager, TAG);
 			return true;

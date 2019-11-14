@@ -131,7 +131,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 
 	@Override
 	public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
-		getPreferenceManager().setPreferenceDataStore(settings.getDataStore());
+		getPreferenceManager().setPreferenceDataStore(settings.getDataStore(getSelectedAppMode()));
 	}
 
 	@Override
@@ -291,14 +291,15 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 			return;
 		}
 
+		ApplicationMode appMode = getSelectedAppMode();
 		if (preference instanceof ListPreferenceEx) {
-			SingleSelectPreferenceBottomSheet.showInstance(fragmentManager, preference.getKey(), this, false);
+			SingleSelectPreferenceBottomSheet.showInstance(fragmentManager, preference.getKey(), this, false, appMode);
 		} else if (preference instanceof SwitchPreferenceEx) {
-			BooleanPreferenceBottomSheet.showInstance(fragmentManager, preference.getKey(), this, false);
+			BooleanPreferenceBottomSheet.showInstance(fragmentManager, preference.getKey(), this, false, appMode);
 		} else if (preference instanceof EditTextPreference) {
-			EditTextPreferenceBottomSheet.showInstance(fragmentManager, preference.getKey(), this, false);
+			EditTextPreferenceBottomSheet.showInstance(fragmentManager, preference.getKey(), this, false, appMode);
 		} else if (preference instanceof MultiSelectBooleanPreference) {
-			MultiSelectPreferencesBottomSheet.showInstance(fragmentManager, preference.getKey(), this, false);
+			MultiSelectPreferencesBottomSheet.showInstance(fragmentManager, preference.getKey(), this, false, appMode);
 		} else {
 			super.onDisplayPreferenceDialog(preference);
 		}
@@ -380,7 +381,8 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 				public void onClick(View v) {
 					FragmentManager fragmentManager = getFragmentManager();
 					if (fragmentManager != null) {
-						SelectAppModesBottomSheetDialogFragment.showInstance(fragmentManager, BaseSettingsFragment.this, false);
+						SelectAppModesBottomSheetDialogFragment.showInstance(fragmentManager,
+								BaseSettingsFragment.this, false, getSelectedAppMode(), false);
 					}
 				}
 			});

@@ -13,6 +13,7 @@ import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Environment;
 import android.support.annotation.DrawableRes;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.v4.util.Pair;
@@ -149,7 +150,6 @@ public class OsmandSettings {
 
 	/// Settings variables
 	private final OsmandApplication ctx;
-	private PreferencesDataStore dataStore;
 	private SettingsAPI settingsAPI;
 	private Object defaultProfilePreferences;
 	private Object globalPreferences;
@@ -166,7 +166,6 @@ public class OsmandSettings {
 	protected OsmandSettings(OsmandApplication clientContext, SettingsAPI settinsAPI) {
 		ctx = clientContext;
 		this.settingsAPI = settinsAPI;
-		dataStore = new PreferencesDataStore();
 		initPrefs();
 	}
 
@@ -174,7 +173,6 @@ public class OsmandSettings {
 		ctx = clientContext;
 		this.settingsAPI = settinsAPI;
 		CUSTOM_SHARED_PREFERENCES_NAME = CUSTOM_SHARED_PREFERENCES_PREFIX + sharedPreferencesName;
-		dataStore = new PreferencesDataStore();
 		initPrefs();
 		setCustomized();
 	}
@@ -210,8 +208,8 @@ public class OsmandSettings {
 		return settingsAPI;
 	}
 
-	public PreferencesDataStore getDataStore() {
-		return dataStore;
+	public PreferencesDataStore getDataStore(@Nullable ApplicationMode appMode) {
+		return new PreferencesDataStore(appMode != null ? appMode : APPLICATION_MODE.get());
 	}
 
 	public static String getSharedPreferencesName(ApplicationMode mode) {
@@ -3507,38 +3505,44 @@ public class OsmandSettings {
 
 	public class PreferencesDataStore extends PreferenceDataStore {
 
+		private ApplicationMode appMode;
+
+		public PreferencesDataStore(@NonNull ApplicationMode appMode) {
+			this.appMode = appMode;
+		}
+
 		@Override
 		public void putString(String key, @Nullable String value) {
-			setPreference(key, value);
+			setPreference(key, value, appMode);
 		}
 
 		@Override
 		public void putStringSet(String key, @Nullable Set<String> values) {
-			setPreference(key, values);
+			setPreference(key, values, appMode);
 		}
 
 		@Override
 		public void putInt(String key, int value) {
-			setPreference(key, value);
+			setPreference(key, value, appMode);
 		}
 
 		@Override
 		public void putLong(String key, long value) {
-			setPreference(key, value);
+			setPreference(key, value, appMode);
 		}
 
 		@Override
 		public void putFloat(String key, float value) {
-			setPreference(key, value);
+			setPreference(key, value, appMode);
 		}
 
 		@Override
 		public void putBoolean(String key, boolean value) {
-			setPreference(key, value);
+			setPreference(key, value, appMode);
 		}
 
 		public void putValue(String key, Object value) {
-			setPreference(key, value);
+			setPreference(key, value, appMode);
 		}
 
 		@Nullable
@@ -3546,9 +3550,9 @@ public class OsmandSettings {
 		public String getString(String key, @Nullable String defValue) {
 			OsmandPreference preference = getPreference(key);
 			if (preference instanceof StringPreference) {
-				return ((StringPreference) preference).get();
+				return ((StringPreference) preference).getModeValue(appMode);
 			} else {
-				Object value = preference.get();
+				Object value = preference.getModeValue(appMode);
 				if (value != null) {
 					return value.toString();
 				}
@@ -3566,7 +3570,7 @@ public class OsmandSettings {
 		public int getInt(String key, int defValue) {
 			OsmandPreference preference = getPreference(key);
 			if (preference instanceof IntPreference) {
-				return ((IntPreference) preference).get();
+				return ((IntPreference) preference).getModeValue(appMode);
 			}
 			return defValue;
 		}
@@ -3575,7 +3579,7 @@ public class OsmandSettings {
 		public long getLong(String key, long defValue) {
 			OsmandPreference preference = getPreference(key);
 			if (preference instanceof LongPreference) {
-				return ((LongPreference) preference).get();
+				return ((LongPreference) preference).getModeValue(appMode);
 			}
 			return defValue;
 		}
@@ -3584,7 +3588,7 @@ public class OsmandSettings {
 		public float getFloat(String key, float defValue) {
 			OsmandPreference preference = getPreference(key);
 			if (preference instanceof FloatPreference) {
-				return ((FloatPreference) preference).get();
+				return ((FloatPreference) preference).getModeValue(appMode);
 			}
 			return defValue;
 		}
@@ -3593,7 +3597,7 @@ public class OsmandSettings {
 		public boolean getBoolean(String key, boolean defValue) {
 			OsmandPreference preference = getPreference(key);
 			if (preference instanceof BooleanPreference) {
-				return ((BooleanPreference) preference).get();
+				return ((BooleanPreference) preference).getModeValue(appMode);
 			}
 			return defValue;
 		}
@@ -3602,7 +3606,7 @@ public class OsmandSettings {
 		public Object getValue(String key, Object defValue) {
 			OsmandPreference preference = getPreference(key);
 			if (preference != null) {
-				return preference.get();
+				return preference.getModeValue(appMode);
 			}
 			return defValue;
 		}
