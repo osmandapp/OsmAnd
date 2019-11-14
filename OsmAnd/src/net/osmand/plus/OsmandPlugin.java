@@ -23,6 +23,7 @@ import net.osmand.plus.activities.TabActivity.TabItem;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.development.OsmandDevelopmentPlugin;
+import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
@@ -41,11 +42,15 @@ import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 public abstract class OsmandPlugin {
+
+	public static final String PLUGIN_ID_KEY = "plugin_id";
+
 	private static List<OsmandPlugin> allPlugins = new ArrayList<OsmandPlugin>();
 	private static final Log LOG = PlatformUtil.getLog(OsmandPlugin.class);
 
@@ -102,6 +107,14 @@ public abstract class OsmandPlugin {
 
 	public String getInstallURL() {
 		return installURL;
+	}
+
+	public List<ApplicationMode> getAddedAppModes() {
+		return Collections.emptyList();
+	}
+
+	public List<IndexItem> getSuggestedMaps() {
+		return Collections.emptyList();
 	}
 
 	/**

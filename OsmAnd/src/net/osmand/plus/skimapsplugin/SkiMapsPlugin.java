@@ -3,11 +3,18 @@ package net.osmand.plus.skimapsplugin;
 import android.app.Activity;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.dialogs.PluginInstalledBottomSheetDialog;
+
+import java.util.Collections;
+import java.util.List;
 
 public class SkiMapsPlugin extends OsmandPlugin {
 
@@ -58,7 +65,17 @@ public class SkiMapsPlugin extends OsmandPlugin {
 	@Override
 	public void onInstall(@NonNull OsmandApplication app, @Nullable Activity activity) {
 		ApplicationMode.changeProfileAvailability(ApplicationMode.SKI, true, app);
-		app.getSettings().APPLICATION_MODE.set(ApplicationMode.SKI);
+		if (activity instanceof FragmentActivity) {
+			FragmentManager fragmentManager = ((FragmentActivity) activity).getSupportFragmentManager();
+			if (fragmentManager != null) {
+				PluginInstalledBottomSheetDialog.showInstance(fragmentManager, getId(), activity instanceof MapActivity);
+			}
+		}
+	}
+
+	@Override
+	public List<ApplicationMode> getAddedAppModes() {
+		return Collections.singletonList(ApplicationMode.SKI);
 	}
 
 	@Override

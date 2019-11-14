@@ -6,6 +6,8 @@ import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
 
 import net.osmand.IndexConstants;
@@ -15,8 +17,12 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.dialogs.PluginInstalledBottomSheetDialog;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadResources;
+
+import java.util.Collections;
+import java.util.List;
 
 
 public class NauticalMapsPlugin extends OsmandPlugin {
@@ -89,7 +95,17 @@ public class NauticalMapsPlugin extends OsmandPlugin {
 	@Override
 	public void onInstall(@NonNull OsmandApplication app, @Nullable Activity activity) {
 		ApplicationMode.changeProfileAvailability(ApplicationMode.BOAT, true, app);
-		app.getSettings().APPLICATION_MODE.set(ApplicationMode.BOAT);
+		if (activity instanceof FragmentActivity) {
+			FragmentManager fragmentManager = ((FragmentActivity) activity).getSupportFragmentManager();
+			if (fragmentManager != null) {
+				PluginInstalledBottomSheetDialog.showInstance(fragmentManager, getId(), activity instanceof MapActivity);
+			}
+		}
+	}
+
+	@Override
+	public List<ApplicationMode> getAddedAppModes() {
+		return Collections.singletonList(ApplicationMode.BOAT);
 	}
 	
 	@Override
