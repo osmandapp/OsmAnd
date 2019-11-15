@@ -1056,6 +1056,9 @@ public class ResourceManager {
 	////////////////////////////////////////////// Closing methods ////////////////////////////////////////////////
 	
 	public void closeFile(String fileName) {
+		if (amenityRepositories.get(fileName) != null) {
+			amenityRepositories.get(fileName).close();
+		}
 		amenityRepositories.remove(fileName);
 		addressMap.remove(fileName);
 		transportRepositories.remove(fileName);
