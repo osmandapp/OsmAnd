@@ -185,10 +185,12 @@ public class AppInitializer implements IProgress {
 			}
 			if(prevAppVersion < VERSION_2_3) {
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, VERSION_2_3).commit();
-			} else if (prevAppVersion < VERSION_3_2) {
+			}
+			if (prevAppVersion < VERSION_3_2) {
 				app.getSettings().BILLING_PURCHASE_TOKENS_SENT.set("");
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, VERSION_3_2).commit();
-			} else if (prevAppVersion < VERSION_3_5 || Version.getAppVersion(app).equals("3.5.3")) {
+			}
+			if (prevAppVersion < VERSION_3_5 || Version.getAppVersion(app).equals("3.5.3")) {
 				app.getSettings().migrateGlobalPrefsToProfile();
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, VERSION_3_5).commit();
 			}

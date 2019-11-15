@@ -53,7 +53,7 @@ public class CoordinatesFormatFragment extends BaseSettingsFragment {
 		utmPref.setSummary(getCoordinatesFormatSummary(loc, PointDescription.UTM_FORMAT));
 		olcPref.setSummary(getCoordinatesFormatSummary(loc, PointDescription.OLC_FORMAT));
 
-		int currentFormat = settings.COORDINATES_FORMAT.get();
+		int currentFormat = settings.COORDINATES_FORMAT.getModeValue(getSelectedAppMode());
 		String currentPrefKey = getCoordinatesKeyForFormat(currentFormat);
 		updateSelectedFormatPrefs(currentPrefKey);
 	}

@@ -159,7 +159,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	}
 
 	private boolean updateTheme() {
-		boolean nightMode = !settings.isLightContent();
+		boolean nightMode = !settings.isLightContentForMode(getSelectedAppMode());
 		boolean changed = this.nightMode != nightMode;
 		this.nightMode = nightMode;
 		this.themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
@@ -311,6 +311,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		if (updateTheme()) {
 			recreate();
 		} else {
+			getPreferenceManager().setPreferenceDataStore(settings.getDataStore(appMode));
 			updateToolbar();
 			updateAllSettings();
 		}

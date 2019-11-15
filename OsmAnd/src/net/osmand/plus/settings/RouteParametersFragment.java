@@ -346,6 +346,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		String[] prefsIds = new String[routingParameters.size()];
 		Set<String> enabledPrefsIds = new HashSet<>();
 
+		ApplicationMode selectedMode = getSelectedAppMode();
 		for (int i = 0; i < routingParameters.size(); i++) {
 			RoutingParameter p = routingParameters.get(i);
 			BooleanPreference booleanRoutingPref = (BooleanPreference) settings.getCustomRoutingBooleanProperty(p.getId(), p.getDefaultBoolean());
@@ -353,7 +354,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 			entries[i] = SettingsBaseActivity.getRoutingStringPropertyName(app, p.getId(), p.getName());
 			prefsIds[i] = booleanRoutingPref.getId();
 
-			if (booleanRoutingPref.get()) {
+			if (booleanRoutingPref.getModeValue(selectedMode)) {
 				enabledPrefsIds.add(booleanRoutingPref.getId());
 			}
 		}

@@ -35,6 +35,11 @@ public abstract class BasePreferenceBottomSheet extends MenuBottomSheetDialogFra
 		if (savedInstanceState != null) {
 			appMode = ApplicationMode.valueOfStringKey(savedInstanceState.getString(APP_MODE_KEY), null);
 		}
+		if (usedOnMap) {
+			nightMode = requiredMyApplication().getDaynightHelper().isNightModeForMapControlsForProfile(getAppMode());
+		} else {
+			nightMode = !requiredMyApplication().getSettings().isLightContentForMode(getAppMode());
+		}
 	}
 
 	@Override

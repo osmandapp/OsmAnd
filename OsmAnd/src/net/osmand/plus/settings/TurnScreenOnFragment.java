@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
@@ -24,7 +25,7 @@ public class TurnScreenOnFragment extends BaseSettingsFragment {
 
 		setupTurnScreenOnTimePref();
 		setupTurnScreenOnSensorPref();
-		enableDisablePreferences(settings.TURN_SCREEN_ON_ENABLED.get());
+		enableDisablePreferences(settings.TURN_SCREEN_ON_ENABLED.getModeValue(getSelectedAppMode()));
 	}
 
 	@Override
@@ -34,8 +35,9 @@ public class TurnScreenOnFragment extends BaseSettingsFragment {
 		view.findViewById(R.id.toolbar_switch_container).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				boolean checked = !settings.TURN_SCREEN_ON_ENABLED.get();
-				settings.TURN_SCREEN_ON_ENABLED.set(checked);
+				ApplicationMode selectedMode = getSelectedAppMode();
+				boolean checked = !settings.TURN_SCREEN_ON_ENABLED.getModeValue(selectedMode);
+				settings.TURN_SCREEN_ON_ENABLED.setModeValue(selectedMode, checked);
 				updateToolbarSwitch();
 				enableDisablePreferences(checked);
 			}
@@ -53,7 +55,7 @@ public class TurnScreenOnFragment extends BaseSettingsFragment {
 		if (view == null) {
 			return;
 		}
-		boolean checked = settings.TURN_SCREEN_ON_ENABLED.get();
+		boolean checked = settings.TURN_SCREEN_ON_ENABLED.getModeValue(getSelectedAppMode());
 
 		int color = checked ? getActiveProfileColor() : ContextCompat.getColor(app, R.color.preference_top_switch_off);
 		View switchContainer = view.findViewById(R.id.toolbar_switch_container);

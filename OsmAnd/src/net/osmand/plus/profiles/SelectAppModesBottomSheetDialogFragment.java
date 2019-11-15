@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentManager;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 
@@ -36,8 +37,14 @@ public class SelectAppModesBottomSheetDialogFragment extends AppModesBottomSheet
 			appMode = ApplicationMode.valueOfStringKey(savedInstanceState.getString(APP_MODE_KEY), null);
 			appModeChangeable = savedInstanceState.getBoolean(APP_MODE_CHANGEABLE_KEY);
 		}
+		OsmandApplication app = requiredMyApplication();
 		if (appMode == null) {
-			appMode = requiredMyApplication().getSettings().getApplicationMode();
+			appMode = app.getSettings().getApplicationMode();
+		}
+		if (usedOnMap) {
+			nightMode = app.getDaynightHelper().isNightModeForMapControlsForProfile(getAppMode());
+		} else {
+			nightMode = !app.getSettings().isLightContentForMode(getAppMode());
 		}
 	}
 
