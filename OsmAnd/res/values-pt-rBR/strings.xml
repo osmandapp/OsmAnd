@@ -1433,7 +1433,7 @@ Pôr do Sol: %2$s</string>
     <string name="error_calculating_route_occured">Não foi possível calcular a rota.</string>
     <string name="empty_route_calculated">A rota calculada está vazia.</string>
     <string name="new_route_calculated_dist">Nova rota calculada, distância</string>
-    <string name="arrived_at_destination">Você chegou</string>
+    <string name="arrived_at_destination">Você chegou.</string>
     <string name="invalid_locations">Coordenadas inválidas</string>
     <string name="go_back_to_osmand">Voltar ao mapa</string>
     <string name="loading_data">Carregando dados…</string>
