@@ -100,8 +100,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 
 	private boolean isNew = false;
 	private boolean isUserProfile = false;
-	private boolean isDataChanged = false;
-	private boolean isCancelAllowed = true;
+	private boolean dataChanged = false;
 	private boolean nightMode;
 
 	private SelectProfileListener navTypeListener = null;
@@ -189,14 +188,14 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		int startIconId = profile.iconId;
 
 		if (isNew) {
-			isDataChanged = true;
+			dataChanged = true;
 			startIconId = profile.parent.getIconRes();
 			profile.iconId = startIconId;
 			profile.iconStringName = profile.parent.getIconName();
 		} else if (isUserProfile) {
 			title = profile.userProfileTitle;
 			profileNameEt.setText(title);
-			isDataChanged = false;
+			dataChanged = false;
 		} else if (profile.stringKeyName != -1) {
 			title = getResources().getString(profile.stringKeyName);
 			profileNameEt.setText(title);
@@ -276,7 +275,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 			@Override
 			public void afterTextChanged(Editable s) {
 				profile.userProfileTitle = s.toString();
-				isCancelAllowed = false;
+				dataChanged = true;
 
 				updateToolbar(s.toString());
 			}
@@ -342,7 +341,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 					popupWindow.setOnItemClickListener(new OnItemClickListener() {
 						@Override
 						public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-							isDataChanged = true;
+							dataChanged = true;
 							profile.iconColor = ProfileIconColors.values()[position];
 							profileIcon.setImageDrawable(app.getUIUtilities().getIcon(profile.iconId, profile.iconColor.getColor(nightMode)));
 							colorSample.setImageDrawable(app.getUIUtilities().getIcon(R.drawable.ic_action_circle, profile.iconColor.getColor(nightMode)));
@@ -367,7 +366,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		profileConfigBtn.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (isDataChanged) {
+				if (dataChanged) {
 					needSaveDialog();
 				} else if (getSettings() != null) {
 					activateMode(mode);
@@ -467,7 +466,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 	}
 
 	public boolean onBackPressedAllowed() {
-		return isCancelAllowed;
+		return !dataChanged;
 	}
 
 	SelectProfileListener getIconListener() {
@@ -475,7 +474,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 			iconIdListener = new SelectProfileListener() {
 				@Override
 				public void onSelectedType(int pos, String stringRes) {
-					isDataChanged = true;
+					dataChanged = true;
 					profile.iconId = pos;
 					profile.iconStringName = stringRes;
 					profileIcon.setImageDrawable(app.getUIUtilities().getIcon(pos,
@@ -496,6 +495,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 						.get(pos).getStringKey();
 					setupBaseProfileView(key);
 					profile.parent = ApplicationMode.valueOfStringKey(key, ApplicationMode.DEFAULT);
+					dataChanged = true;
 				}
 			};
 		}
@@ -531,7 +531,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 	}
 
 	void updateRoutingProfile(int pos) {
-		isDataChanged = true;
+		dataChanged = true;
 		for (int i = 0; i < routingProfileDataObjects.size(); i++) {
 			if (i == pos) {
 				routingProfileDataObjects.get(i).setSelected(true);
@@ -603,7 +603,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 				baseModeIcon.setImageDrawable(
 					app.getUIUtilities().getIcon(am.getIconRes(), R.color.icon_color_default_light));
 				baseModeTitle.setText(Algorithms.capitalizeFirstLetter(am.toHumanString(app)));
-				isDataChanged = false;
+				dataChanged = false;
 			}
 		}
 	}
@@ -678,8 +678,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		if (!ApplicationMode.values(app).contains(mode)) {
 			ApplicationMode.changeProfileAvailability(mode, true, getMyApplication());
 		}
-		isDataChanged = false;
-		isCancelAllowed = true;
+		dataChanged = false;
 		return true;
 	}
 
@@ -708,7 +707,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		bld.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				isCancelAllowed = true;
+				dataChanged = false;
 				activity.onBackPressed();
 			}
 		});
