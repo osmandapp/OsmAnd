@@ -3337,4 +3337,11 @@
     <string name="rendering_value_white_name">Beyaz</string>
     <string name="swap_two_places">%1$s ile %2$s\'i değiştir</string>
     <string name="route_start_point">Başlangıç noktası</string>
+    <string name="default_speed_dialog_msg">Bilinmeyen yol türleri için varış zamanını tahmin etmek ve tüm yollar için hızı sınırlamak için kullanılır (rotayı değiştirebilir)</string>
+    <string name="track_saved">Yol izi kaydedildi</string>
+    <string name="empty_filename">Dosya adı boş</string>
+    <string name="shared_string_revert">Eski haline döndür</string>
+    <string name="quick_action_directions_from_desc">Başlangıç noktasını ekranın merkezi yapan ve hedefe giden rotayı hesaplayan veya hedef işaretleyici haritada değilse, hedefi seçmek için bir iletişim kutusu açan bir buton.</string>
+    <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Düğüm ağı bisiklet rotalarını göster</string>
+    <string name="clear_confirmation_msg">%1$s\'i temizle\?</string>
 </resources>

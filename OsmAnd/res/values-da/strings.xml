@@ -2388,7 +2388,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="quick_action_auto_zoom_on">"Aktiver automatisk  kortzoom"</string>
     <string name="quick_action_auto_zoom_off">"Deaktiver automatisk  kortzoom"</string>
     <string name="shared_string_paused">Pauset</string>
-    <string name="type_city_town">Indtast by eller bydel</string>
+    <string name="type_city_town">Indtast by/bydel/sted</string>
     <string name="type_postcode">Indtast postnummer</string>
     <string name="nearest_cities">Nærmeste byer</string>
     <string name="select_city">Vælg by</string>
@@ -2425,7 +2425,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="increase_search_radius">Øg søgeradius</string>
     <string name="nothing_found">Fandt intet</string>
     <string name="nothing_found_descr">Ændr søgningen eller øg søgeradius.</string>
-    <string name="private_access_routing_req">Destinationen ligger i et område med privat adgang. Giv adgang til de private veje for denne tur?</string>
+    <string name="private_access_routing_req">Destinationen ligger i et område med privat adgang. Tillad brug af private veje til turen\?</string>
     <string name="mapillary">Mapillary</string>
     <string name="mapillary_widget">Mapillary-modul</string>
     <string name="mapillary_widget_descr">Tillader hurtige bidrag til Mapillary.</string>
@@ -2434,7 +2434,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="mapillary_action_descr">Bidrag med egne billeder af stedet på gadeniveau via Mapillary.</string>
     <string name="plugin_mapillary_descr">Fotos på gadeniveau for alle. Opdag steder, samarbejd, indfang verden.</string>
     <string name="online_photos">Online-fotos</string>
-    <string name="no_photos_descr">Vi har ingen billeder fra dette sted.</string>
+    <string name="no_photos_descr">Ingen billeder her.</string>
     <string name="shared_string_install">Installer</string>
     <string name="improve_coverage_mapillary">Forbedr fotodækningen med Mapillary</string>
     <string name="improve_coverage_install_mapillary_desc">Installer Mapillary for at tilføje et eller flere billeder til denne placering.</string>
@@ -2452,7 +2452,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="mapillary_menu_descr_username">Se kun billeder tilføjet af</string>
     <string name="mapillary_menu_title_username">Brugernavn</string>
     <string name="mapillary_menu_filter_description">Filtrer billeder efter indsender, dato eller type. Kun aktiv for højere zoomniveauer.</string>
-    <string name="mapillary_menu_descr_dates">Se kun de billeder, der er tilføjet</string>
+    <string name="mapillary_menu_descr_dates">Vis kun billeder, der er tilføjet</string>
     <string name="shared_string_reload">Genindlæs</string>
     <string name="mapillary_menu_descr_tile_cache">Genindlæs kortbrikker for at se opdaterede data.</string>
     <string name="mapillary_menu_title_tile_cache">Kortbrikmellemlager (cache)</string>
@@ -2527,17 +2527,17 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="passed">Sidst anvendt: %1$s</string>
     <string name="make_active">Aktivér</string>
     <string name="marker_show_distance_descr">Vælg hvordan afstanden og retningen til kortmarkører på kortet skal angives:</string>
-    <string name="remove_from_map_markers">Fjern fra kortmarkører</string>
-    <string name="descendingly">faldende</string>
-    <string name="ascendingly">stigende</string>
-    <string name="date_added">Dato tilføjet</string>
+    <string name="remove_from_map_markers">Fjern fra \'Kortmarkører\'</string>
+    <string name="descendingly">Z-A</string>
+    <string name="ascendingly">A-Z</string>
+    <string name="date_added">Tilføjet</string>
     <string name="order_by">Sorter efter:</string>
     <string name="show_guide_line">Vis retningsbestemte linjer</string>
     <string name="show_arrows_on_the_map">Vis pile på kortet</string>
     <string name="show_passed">Vis passerede</string>
     <string name="hide_passed">Skjul passerede</string>
     <string name="use_location">Brug position</string>
-    <string name="add_location_as_first_point_descr">Tilføj position som startpunkt til planlægning af den perfekte rute.</string>
+    <string name="add_location_as_first_point_descr">Tilføj position som udgangspunkt til planlægning af den perfekte rute.</string>
     <string name="my_location">Min position</string>
     <string name="shared_string_finish">Afslut</string>
     <string name="plan_route">Planlæg rute</string>
@@ -2552,11 +2552,11 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="use_system_keyboard">Brug systemets tastatur</string>
     <string name="fast_coordinates_input_descr">Vælg format for koordinatindtastning. Kan altid ændres ved at trykke på \'Indstillinger\'.</string>
     <string name="fast_coordinates_input">Hurtig koordinatindtastning</string>
-    <string name="routing_attr_avoid_ice_roads_fords_name">Undgå isglatte veje, vadesteder</string>
-    <string name="routing_attr_avoid_ice_roads_fords_description">Undgå isglatte veje og vadesteder.</string>
+    <string name="routing_attr_avoid_ice_roads_fords_name">Ingen isglatte veje eller vadesteder</string>
+    <string name="routing_attr_avoid_ice_roads_fords_description">Undgår isglatte veje og vadesteder.</string>
     <string name="make_round_trip_descr">"Tilføj kopi af udgangspunkt  som destination."</string>
     <string name="make_round_trip">Foretag rundtur</string>
-    <string name="osn_modify_dialog_error">Kunne ikke ændre note</string>
+    <string name="osn_modify_dialog_error">Kunne ikke ændre note.</string>
     <string name="osn_modify_dialog_title">Ændr note</string>
     <string name="context_menu_item_modify_note">Ændr OSM-note</string>
     <string name="rendering_value_darkyellow_name">Mørkegul</string>
@@ -2592,9 +2592,9 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="show_guide_line_descr">Vis retningsbestemt linje fra position til de aktive markørplaceringer.</string>
     <string name="show_arrows_descr">Vis en eller to pile der angiver retningen til de aktive markører.</string>
     <string name="distance_indication_descr">Vælg hvordan afstanden til de aktive markører skal vises.</string>
-    <string name="active_markers_descr">Vælg hvor mange retningsindikatorer der skal vises.</string>
+    <string name="active_markers_descr">Angiv antal retningsindikatorer:</string>
     <string name="add_track_to_markers_descr">Vælg et spor for at tilføje dens rutepunkter til markører.</string>
-    <string name="add_favourites_group_to_markers_descr">Vælg en Favoritkategori, der skal tilføjes markørerne.</string>
+    <string name="add_favourites_group_to_markers_descr">Vælg en katagori af Favoriter, der skal tilføjes markørerne.</string>
     <string name="shared_string_gpx_waypoints">Sporrutepunkter</string>
     <string name="favourites_group">Favoritkategori</string>
     <string name="add_group">Tilføj en gruppe</string>
@@ -2668,7 +2668,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="shared_string_gpx_file">GPX-fil</string>
     <string name="osc_file">OSC-fil</string>
     <string name="choose_file_type">Vælg filtype</string>
-    <string name="osm_edits_export_desc">Vælg eksporttype: OSM-noter, IP, eller begge.</string>
+    <string name="osm_edits_export_desc">Vælg eksporttype: OSM-noter, IP\'er, eller begge.</string>
     <string name="all_data">Alle data</string>
     <string name="osm_notes">OSM-noter</string>
     <string name="tunnel_warning">Tunnel forude</string>
@@ -2677,7 +2677,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="last_intermediate_dest_description">Tilføjer et mellemliggende stop</string>
     <string name="first_intermediate_dest_description">Tilføjer første stop</string>
     <string name="subsequent_dest_description">Flyt destination op og opret den</string>
-    <string name="make_as_start_point">Gør til startpunktet</string>
+    <string name="make_as_start_point">Gør til udgangspunkt</string>
     <string name="dd_mm_ss_format">GG°MM′SS″</string>
     <string name="dd_dddddd_format">GG.GGGGGG°</string>
     <string name="dd_ddddd_format">GG.GGGGG°</string>
@@ -2696,8 +2696,8 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="enter_lon">Indtast længdegrad</string>
     <string name="enter_lat">Indtast breddegrad</string>
     <string name="enter_lat_and_lon">Indtast længde- og breddegrad</string>
-    <string name="distance_farthest">Afstand: længst væk først</string>
-    <string name="distance_nearest">Afstand: nærmeste først</string>
+    <string name="distance_farthest">Længst væk først</string>
+    <string name="distance_nearest">Nærmeste først</string>
     <string name="nothing_found_in_radius">Kunne ikke finde noget:</string>
     <string name="select_waypoints_category_description">Tilføj alle sporets rutepunkter, eller vælg forskellige kategorier.</string>
     <string name="shared_string_total">I alt</string>
@@ -2708,7 +2708,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="shared_string_travel_guides">Rejseguider</string>
     <string name="shared_string_result">Resultat</string>
     <string name="use_two_digits_longitude">Brug tocifret længdegrad</string>
-    <string name="wikivoyage_search_hint">Søg: land, by, region</string>
+    <string name="wikivoyage_search_hint">Søg efter land, by, region</string>
     <string name="shared_string_read">Læs</string>
     <string name="saved_articles">Artikler med bogmærker</string>
     <string name="shared_string_explore">Udforsk</string>
@@ -2732,9 +2732,9 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="download_images">Hent billeder</string>
     <string name="purchase_dialog_title">Vælg abonnement</string>
     <string name="purchase_dialog_travel_description">Køb en af følgende for at læse rejseartikler offline:</string>
-    <string name="purchase_dialog_subtitle">Vælg passende emne:</string>
-    <string name="monthly_map_updates">Opdatering af kort: hver måned</string>
-    <string name="daily_map_updates">Opdatering af kort: hver time</string>
+    <string name="purchase_dialog_subtitle">Vælg passende emne</string>
+    <string name="monthly_map_updates">Månedlige kortopdateringer</string>
+    <string name="daily_map_updates">Kortopdateringer hver time</string>
     <string name="in_app_purchase">Køb i programmet</string>
     <string name="in_app_purchase_desc">Engangsbetaling</string>
     <string name="purchase_unlim_title">Køb - %1$s</string>
@@ -2755,7 +2755,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="download_file">Hent fil</string>
     <string name="start_editing_card_image_text">Den gratis verdensomspændende rejseguide, som alle kan redigere.</string>
     <string name="welcome_to_open_beta_description">Rejseguide er baseret på Wikivoyage. Test alle funktionerne gratis i den åbne beta. Bagefter vil rejseguider være tilgængelig for abonnenter af OsmAnd ubegrænset og ejere af OsmAnd+.</string>
-    <string name="start_editing_card_description">Du kan og bør redigere en artikel på Wikivoyage. Del viden, erfaringer, talent og din opmærksomhed</string>
+    <string name="start_editing_card_description">Du kan og bør redigere en artikel på Wikivoyage. Del viden, erfaringer, talent og din opmærksomhed.</string>
     <string name="start_editing">Begynd redigering</string>
     <string name="get_unlimited_access">Få ubegrænset adgang</string>
     <string name="welcome_to_open_beta">Velkommen til den åbne beta</string>
@@ -2783,11 +2783,11 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="read_wikipedia_offline">Læs Wikipedia offline</string>
     <string name="hide_full_description">Skjul fuld beskrivelse</string>
     <string name="show_full_description">Vis fuld beskrivelse</string>
-    <string name="nautical_render_descr">Nautisk navigationsstil. Hovedtræk: bøjer, fyrtårne, vandveje, sejlruter og sømærker, havne, søfartstjenester, dybdekonturer.</string>
+    <string name="nautical_render_descr">Til maritim navigation. Funktioner: bøjer, fyrtårne, vandveje, sejlruter og sømærker, havne, søfartstjenester og dybdekonturer.</string>
     <string name="ski_map_render_descr">Stilart til skiløb. Hovedtræk: visning af pister, skilifte og andre skifaciliteter på en praktisk måde. Færre distraherende sekundære objekter på kortet.</string>
     <string name="light_rs_render_descr">Enkel og kontrastrig stilart til bilnavigation. Skånsom for øjnene i nat-tilstand. Hovedtræk: højdekurver, veje med kontrast i orange, færre distraherende sekundære kortobjekter.</string>
     <string name="topo_render_descr">Kontraststilart designet primært til gåture, vandring og cykling i naturen. God læsbarhed ved kompleks udendørs belysning. Hovedtræk: Kontrastrige veje og naturlige objekter, forskellige typer ruter, højdekurver med avancerede indstillinger, flere detaljer i de tilsvarende zoomniveauer end i standard stilart. Overfladevalg gør det muligt at skelne mellem veje med forskellig overfladekvalitet. Ingen nat-tilstand.</string>
-    <string name="mapnik_render_descr">"Gammel \'Mapnik\' standard renderingstilart. Hovedtræk: farver svarer til  \'Mapnik\'-stilart."</string>
+    <string name="mapnik_render_descr">"Gammel standard \'Mapnik\' stilart. Farver svarer til  \'Mapnik\'."</string>
     <string name="default_render_descr">Generel stilart. Forenklet rendering i tæt befolkede byer. Hovedtræk: højdekurver, ruter, vejbelægning, adgangsbegrænsninger, vejskilte, visning af stier i henhold til SAC-skalaen, rafting funktioner.</string>
     <string name="touring_view_render_descr">Detaljeret stilart til touring. Indeholder alle indstillingsmuligheder fra standardstil, desuden: viser så mange detaljer som muligt, navnlig alle veje, stier og andre måder at rejse på. En Klar visuel sondring mellem alle forskellige vejtyper, minder om mange vejkort. Farveskema med høj kontrast til udendørs brug, dag og nat stilstand.</string>
     <string name="shared_string_bookmark">Bogmærke</string>
@@ -2805,8 +2805,9 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="coord_input_save_as_track_descr">%1$s punkter tilføjet. Indtast et filnavn og tryk på “Gem“.</string>
     <string name="point_deleted">Punkt %1$s er blevet slettet</string>
     <string name="shared_string_world">Verden</string>
-    <string name="send_search_query_description">Send søgestrengen: \"%1$s\" samt lokationen.\n
-        \nDer indsamles ingen personlige oplysninger, søgedata bruges kun til at forbedre søgealgoritmen.</string>
+    <string name="send_search_query_description">Send søgestrengen: \"%1$s\" samt lokationen.
+\n 
+\nDer indsamles ingen personlige oplysninger, kun søgedata, der er nødvendige for at forbedre søgningen.</string>
     <string name="search_no_results_description">Ingen resultater?
 \nRapporter det.</string>
     <string name="send_search_query">Send søgeforespørgsel?</string>
@@ -2824,7 +2825,7 @@ Repræsenterer område: %1$s x %2$s</string>
 \n
 \n• Andre fejlrettelser 
 \n</string>
-    <string name="increase_search_radius_to">Forøg søgeradius til %1$s</string>
+    <string name="increase_search_radius_to">Udvid søgeradius til %1$s</string>
     <string name="thank_you_for_feedback">Tak for tilbagemelding</string>
     <string name="poi_cannot_be_found">Node eller vej kan ikke findes.</string>
     <string name="search_no_results_feedback">Ingen søgeresultater?
@@ -2847,12 +2848,12 @@ Repræsenterer område: %1$s x %2$s</string>
 \n</string>
     <string name="ask_for_location_permission">Giv OsmAnd adgang til placering for at fortsætte.</string>
     <string name="rendering_value_black_name">Sort</string>
-    <string name="more_transport_on_stop_hint">Der er flere transportmidler ved dette stop.</string>
+    <string name="more_transport_on_stop_hint">Der er flere forbindelser ved dette stop.</string>
     <string name="markers_remove_dialog_msg">Slet kortmarkør \'%s\'\?</string>
     <string name="edit_map_marker">Rediger kortmarkør</string>
     <string name="third_party_application">Tredjepartsprogram</string>
     <string name="search_street">Søg efter gade</string>
-    <string name="start_search_from_city">Vælg en by først</string>
+    <string name="start_search_from_city">Indtast først by/bydel/sted</string>
     <string name="shared_string_restore">Gendan</string>
     <string name="keep_passed_markers_descr">Markører tilføjet som en gruppe af favoritter eller GPX rutepunkter markeret passeret vil forblive på kortet. Hvis gruppen ikke er aktiv, vil mærkerne forsvinde fra kortet.</string>
     <string name="keep_passed_markers">Behold passerede markører på kortet</string>
@@ -2868,8 +2869,8 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="osm_live_payment_renews_quarterly">Fornyes kvartalsvis</string>
     <string name="osm_live_payment_renews_annually">Fornyes hvert år</string>
     <string name="default_price_currency_format">%1$.2f %2$s</string>
-    <string name="osm_live_payment_header">Vælg en passende betalingsperiode:</string>
-    <string name="osm_live_payment_contribute_descr">En del af indtægterne går til OpenStreetMap bidragsydere.</string>
+    <string name="osm_live_payment_header">Betalingsinterval:</string>
+    <string name="osm_live_payment_contribute_descr">Donationer er med til at finansiere OpenStreetMap kortlægning.</string>
     <string name="powered_by_osmand">Af OsmAnd</string>
     <string name="osm_live_subscriptions">Abonnementer</string>
     <string name="mapillary_menu_title_pano">Vis kun 360° billeder</string>

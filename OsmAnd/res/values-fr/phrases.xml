@@ -3678,4 +3678,14 @@
     <string name="poi_caravan_no">Accès caravane : non</string>
     <string name="poi_motorhome_no">Accès camping-car : non</string>
     <string name="poi_cash_withdrawal_bank_card">Retrait d\'espèces</string>
+    <string name="poi_hgv_agricultural">Accès poids lourds : agricole</string>
+    <string name="poi_moped_no">Accès mobylette : non</string>
+    <string name="poi_mofa_no">Accès petites mobylettes : non</string>
+    <string name="poi_bicycle_dismount">Accès bicyclette : tenue à la main</string>
+    <string name="poi_bicycle_destination">Accès bicyclette : transit local</string>
+    <string name="poi_horse_destination">Accès à cheval : transit local</string>
+    <string name="poi_atm_yes">DAB : oui</string>
+    <string name="poi_bath_type">Type</string>
+    <string name="poi_bath_open_air">Plein-air</string>
+    <string name="poi_bath_type_lake">Lac</string>
 </resources>
