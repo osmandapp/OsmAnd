@@ -32,7 +32,7 @@
     <string name="last_available_location">Апошняе даступнае месца</string>
     <string name="sharing_status">"Статус абмену "</string>
     <string name="location_sharing_status">Абмен: %1$s</string>
-    <string name="shared_string_enabled">Уключаны</string>
+    <string name="shared_string_enabled">Уключана</string>
     <string name="shared_string_status">Статус</string>
     <string name="no_gps_connection">Злучэнне з GPS адсутнічае</string>
     <string name="no_internet_connection">Злучэнне з Інтэрнэтам адсутнічае</string>
