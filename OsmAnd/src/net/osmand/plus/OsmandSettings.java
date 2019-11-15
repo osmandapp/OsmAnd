@@ -236,8 +236,14 @@ public class OsmandSettings {
 			OsmandPreference pref = getPreference(key);
 			if (pref instanceof CommonPreference) {
 				CommonPreference commonPreference = (CommonPreference) pref;
-				if (!commonPreference.global && !commonPreference.isSetForMode(ApplicationMode.DEFAULT)) {
-					boolean valueSaved = setPreference(key, map.get(key), ApplicationMode.DEFAULT);
+				if (!commonPreference.global) {
+					List<ApplicationMode> modes = commonPreference.general ? Collections.singletonList(ApplicationMode.DEFAULT) : ApplicationMode.allPossibleValues();
+					boolean valueSaved = false;
+					for (ApplicationMode mode : modes) {
+						if (!commonPreference.isSetForMode(mode)) {
+							valueSaved = setPreference(key, map.get(key), mode) || valueSaved;
+						}
+					}
 					if (valueSaved) {
 						settingsAPI.edit(globalPreferences).remove(key).commit();
 					}
