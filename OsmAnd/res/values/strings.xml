@@ -11,6 +11,9 @@
 	Thx - Hardy
 
 -->
+    <string name="download_map_dialog">Download map dialog</string>
+    <string name="dialogs_and_notifications_title">Dialogs and notifications</string>
+    <string name="dialogs_and_notifications_descr">Control popups, dialogs and notifications that OsmAnd show during usage.</string>
     <string name="suggested_maps">Suggested maps</string>
     <string name="suggested_maps_descr">Those maps are required to use with plugin</string>
     <string name="added_profiles">Added profiles</string>
