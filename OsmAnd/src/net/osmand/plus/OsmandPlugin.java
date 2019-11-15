@@ -11,6 +11,7 @@ import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
 
@@ -23,6 +24,7 @@ import net.osmand.plus.activities.TabActivity.TabItem;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.development.OsmandDevelopmentPlugin;
+import net.osmand.plus.dialogs.PluginInstalledBottomSheetDialog;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
@@ -121,6 +123,12 @@ public abstract class OsmandPlugin {
 	 * Plugin was installed
 	 */
 	public void onInstall(@NonNull OsmandApplication app, @Nullable Activity activity) {
+		if (activity instanceof FragmentActivity) {
+			FragmentManager fragmentManager = ((FragmentActivity) activity).getSupportFragmentManager();
+			if (fragmentManager != null) {
+				PluginInstalledBottomSheetDialog.showInstance(fragmentManager, getId(), activity instanceof MapActivity);
+			}
+		}
 	}
 
 	public void disable(OsmandApplication app) {
@@ -264,19 +272,30 @@ public abstract class OsmandPlugin {
 	public static void checkInstalledMarketPlugins(@NonNull OsmandApplication app, @Nullable Activity activity) {
 		for (OsmandPlugin plugin : OsmandPlugin.getAvailablePlugins()) {
 			if (plugin.getInstallURL() != null) {
-				boolean pckg = false;
 				if (plugin instanceof SRTMPlugin) {
-					pckg = checkPackage(app, SRTM_PLUGIN_COMPONENT_PAID, SRTM_PLUGIN_COMPONENT);
+					if (checkPackage(app, SRTM_PLUGIN_COMPONENT_PAID, SRTM_PLUGIN_COMPONENT)
+							&& updateMarketPlugin(app, plugin, true, SRTM_PLUGIN_COMPONENT_PAID, SRTM_PLUGIN_COMPONENT)) {
+						plugin.onInstall(app, activity);
+						initPlugin(app, plugin);
+					}
 				} else if (plugin instanceof NauticalMapsPlugin) {
-					pckg = checkPackage(app, NauticalMapsPlugin.COMPONENT, null);
+					if (checkPackage(app, NauticalMapsPlugin.COMPONENT, null)
+							&& updateMarketPlugin(app, plugin, false, NauticalMapsPlugin.COMPONENT, null)) {
+						plugin.onInstall(app, activity);
+						initPlugin(app, plugin);
+					}
 				} else if (plugin instanceof SkiMapsPlugin) {
-					pckg = checkPackage(app, SkiMapsPlugin.COMPONENT, null);
+					if (checkPackage(app, SkiMapsPlugin.COMPONENT, null)
+							&& updateMarketPlugin(app, plugin, false, SkiMapsPlugin.COMPONENT, null)) {
+						plugin.onInstall(app, activity);
+						initPlugin(app, plugin);
+					}
 				} else if (plugin instanceof ParkingPositionPlugin) {
-					pckg = checkPackage(app, ParkingPositionPlugin.PARKING_PLUGIN_COMPONENT, null);
-				}
-				if (pckg) {
-					plugin.onInstall(app, activity);
-					initPlugin(app, plugin);
+					if (checkPackage(app, ParkingPositionPlugin.PARKING_PLUGIN_COMPONENT, null)
+							&& updateMarketPlugin(app, plugin, false, ParkingPositionPlugin.PARKING_PLUGIN_COMPONENT, null)) {
+						plugin.onInstall(app, activity);
+						initPlugin(app, plugin);
+					}
 				}
 			}
 		}

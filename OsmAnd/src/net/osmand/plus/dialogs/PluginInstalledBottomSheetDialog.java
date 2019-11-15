@@ -72,7 +72,11 @@ public class PluginInstalledBottomSheetDialog extends MenuBottomSheetDialogFragm
 			return;
 		}
 
-		items.add(new TitleItem(getString(R.string.new_plugin_added)));
+		BaseBottomSheetItem titleItem = new TitleItem.Builder()
+				.setTitle(getString(R.string.new_plugin_added))
+				.setLayoutId(R.layout.bottom_sheet_item_title_big)
+				.create();
+		items.add(titleItem);
 
 		BaseBottomSheetItem pluginTitle = new SimpleBottomSheetItem.Builder()
 				.setTitle(plugin.getName())
@@ -178,10 +182,13 @@ public class PluginInstalledBottomSheetDialog extends MenuBottomSheetDialogFragm
 
 		items.add(new DividerItem(getContext()));
 
+		View categoryView = UiUtilities.getInflater(getContext(), nightMode).inflate(R.layout.bottom_sheet_item_with_descr_56dp, null);
+		categoryView.findViewById(R.id.icon).setVisibility(View.GONE);
+
 		BaseBottomSheetItem addedAppProfiles = new BottomSheetItemWithDescription.Builder()
 				.setDescription(getString(R.string.added_profiles_descr))
 				.setTitle(getString(R.string.added_profiles))
-				.setLayoutId(R.layout.bottom_sheet_item_with_descr_56dp)
+				.setCustomView(categoryView)
 				.create();
 		items.add(addedAppProfiles);
 
@@ -211,10 +218,13 @@ public class PluginInstalledBottomSheetDialog extends MenuBottomSheetDialogFragm
 
 		items.add(new DividerItem(getContext()));
 
+		View categoryView = UiUtilities.getInflater(getContext(), nightMode).inflate(R.layout.bottom_sheet_item_with_descr_56dp, null);
+		categoryView.findViewById(R.id.icon).setVisibility(View.GONE);
+
 		BaseBottomSheetItem addedAppProfiles = new BottomSheetItemWithDescription.Builder()
 				.setDescription(getString(R.string.suggested_maps_descr))
 				.setTitle(getString(R.string.suggested_maps))
-				.setLayoutId(R.layout.bottom_sheet_item_with_descr_56dp)
+				.setCustomView(categoryView)
 				.create();
 		items.add(addedAppProfiles);
 

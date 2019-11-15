@@ -4,9 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -24,7 +21,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.dashboard.DashboardOnMap;
-import net.osmand.plus.dialogs.PluginInstalledBottomSheetDialog;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadResources;
@@ -111,16 +107,6 @@ public class SRTMPlugin extends OsmandPlugin {
 			}
 		}
 		return true;
-	}
-
-	@Override
-	public void onInstall(@NonNull OsmandApplication app, @Nullable Activity activity) {
-		if (activity instanceof FragmentActivity) {
-			FragmentManager fragmentManager = ((FragmentActivity) activity).getSupportFragmentManager();
-			if (fragmentManager != null) {
-				PluginInstalledBottomSheetDialog.showInstance(fragmentManager, getId(), activity instanceof MapActivity);
-			}
-		}
 	}
 
 	@Override
