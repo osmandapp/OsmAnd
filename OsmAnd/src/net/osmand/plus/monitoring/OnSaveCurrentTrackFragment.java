@@ -25,7 +25,6 @@ import android.widget.Toast;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.UiUtilities.DialogButtonType;
@@ -42,16 +41,20 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.logging.Log;
 import static net.osmand.plus.download.ui.LocalIndexesFragment.ILLEGAL_FILE_NAME_CHARACTERS;
 
 public class OnSaveCurrentTrackFragment extends BottomSheetDialogFragment {
 
 	public static final String TAG = "OnSaveCurrentTrackBottomSheetFragment";
-	public static final String SAVED_TRACKS_KEY = "saved_track_filename";
+	public static final String DIRECTORY_KEY = "saved_track_directory";
+	public static final String FILENAME_KEY = "saved_track_filename";
 
 	private boolean showOnMap = true;
 	private boolean openTrack = false;
+	private File dir;
 	private File file;
+	private String savedGpxDir = "";
 	private String savedGpxName = "";
 	private String newGpxName = "";
 
@@ -60,18 +63,19 @@ public class OnSaveCurrentTrackFragment extends BottomSheetDialogFragment {
 	public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		final OsmandApplication app = requiredMyApplication();
 		Bundle args = getArguments();
-		if (args != null && args.containsKey(SAVED_TRACKS_KEY)) {
-			ArrayList<String> savedGpxNames = args.getStringArrayList(SAVED_TRACKS_KEY);
-			if (savedGpxNames != null && savedGpxNames.size() > 0) {
-				savedGpxName = savedGpxNames.get(savedGpxNames.size() - 1);
-				newGpxName = savedGpxName;
-			}
+		if ((savedGpxName = getArgumentForKey(args, FILENAME_KEY)) != "") {
+			newGpxName = savedGpxName;
 		} else {
 			dismiss();
 		}
 
+		dir = app.getAppCustomization().getTracksDir();
+		if ((savedGpxDir = getArgumentForKey(args, DIRECTORY_KEY)) != "") {
+			dir = new File(dir, savedGpxDir);
+		}
+
 		Context ctx = requireContext();
-		file = new File(app.getAppCustomization().getTracksDir(), savedGpxName + ".gpx");
+		file = new File(dir, savedGpxName + ".gpx");
 		final boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
 		final int textPrimaryColor = nightMode ? R.color.text_color_primary_dark : R.color.text_color_primary_light;
 		View mainView = UiUtilities.getInflater(ctx, nightMode).inflate(R.layout.fragment_on_save_current_track, container);
@@ -168,7 +172,11 @@ public class OnSaveCurrentTrackFragment extends BottomSheetDialogFragment {
 
 	private File renameGpxFile() {
 		OsmandApplication app = requiredMyApplication();
-		File savedFile = new File(app.getAppCustomization().getTracksDir(), savedGpxName + ".gpx");
+		dir = app.getAppCustomization().getTracksDir();
+		if (savedGpxDir != "") {
+			dir = new File(dir, savedGpxDir);
+		}
+		File savedFile = new File(dir, savedGpxName + ".gpx");
 		if (savedGpxName.equalsIgnoreCase(newGpxName)) {
 			return savedFile;
 		}
@@ -202,10 +210,22 @@ public class OnSaveCurrentTrackFragment extends BottomSheetDialogFragment {
 		}
 	}
 
-	public static void showInstance(FragmentManager fragmentManager, List<String> filenames) {
+	private String getArgumentForKey(Bundle args, String KEY) {
+		String toReturn = "";
+		if (args != null && args.containsKey(KEY)) {
+			ArrayList<String> tempString = args.getStringArrayList(KEY);
+			if (tempString != null && tempString.size() > 0) {
+				toReturn = tempString.get(tempString.size() - 1);
+			}
+		}
+		return toReturn;
+	}
+
+	public static void showInstance(FragmentManager fragmentManager, List<String> directories, List<String> filenames) {
 		OnSaveCurrentTrackFragment f = new OnSaveCurrentTrackFragment();
 		Bundle b = new Bundle();
-		b.putStringArrayList(SAVED_TRACKS_KEY, new ArrayList<>(filenames));
+		b.putStringArrayList(DIRECTORY_KEY, new ArrayList<>(directories));
+		b.putStringArrayList(FILENAME_KEY, new ArrayList<>(filenames));
 		f.setArguments(b);
 		f.show(fragmentManager, TAG);
 	}
