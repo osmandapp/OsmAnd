@@ -3045,7 +3045,7 @@
     <string name="app_mode_offroad">Бездарожжа</string>
     <string name="edit_profile_setup_title">Наладзіць профіль</string>
     <string name="edit_profile_setup_subtitle">У кожнага профілю свае налады</string>
-    <string name="turn_screen_on_time_descr">Вызначце час, цягам якога экран уключыцца.</string>
+    <string name="turn_screen_on_time_descr">Вызначце час, цягам якога экран не будзе выключацца.</string>
     <string name="turn_screen_on_sensor">Выкарыстоўваць датчык адлегласці</string>
     <string name="turn_screen_on_sensor_descr">Правядзіце рукой па верхняй частцы экрана, каб уключыць яго падчас навігацыі.</string>
     <string name="rendering_attr_winter_road_name">Зімовая дарога</string>
@@ -3063,9 +3063,9 @@
     <string name="app_mode_ufo">НЛА</string>
     <string name="precision_hdop_and_vdop">Дакладнасць па гарызанталі: %1$s, па вертыкалі: %2$s</string>
     <string name="precision_hdop">Дакладнасць па гарызанталі: %s</string>
-    <string name="edit_profile_setup_map_subtitle">Абярыце прадвызначаныя параметры мапы для профілю</string>
-    <string name="edit_profile_screen_options_subtitle">Абярыце прадвызначаныя параметры экрана для профілю</string>
-    <string name="edit_profile_nav_settings_subtitle">Абярыце прадвызначаныя налады навігацыі для профілю</string>
+    <string name="edit_profile_setup_map_subtitle">Абярыце параметры мапы для профілю</string>
+    <string name="edit_profile_screen_options_subtitle">Абярыце параметры экрана для профілю</string>
+    <string name="edit_profile_nav_settings_subtitle">Абярыце налады навігацыі для профілю</string>
     <string name="routing_attr_max_num_changes_description">Вызначце максімальную колькасць змен</string>
     <string name="routing_attr_max_num_changes_name">Колькасць змен</string>
     <string name="rate_dialog_descr">Калі ласка, выдаткуйце нам 30 секунд, пакінце водгук і ацаніце нашу працу на Google Play.</string>
@@ -3161,7 +3161,7 @@
     <string name="sett_generic_ext_input">Універсальны Клавіятура</string>
     <string name="sett_wunderlinq_ext_input">WunderLINQ</string>
     <string name="sett_parrot_ext_input">Parrot</string>
-    <string name="turn_on_profile_desc">Калі ласка, ўключыце па меншай меры адзін профіль праграмы, каб выкарыстоўваць гэты параметр.</string>
+    <string name="turn_on_profile_desc">Калі ласка, ўключыце па меншай меры адзін профіль дадатку, каб выкарыстоўваць гэты параметр.</string>
     <string name="gpx_join_gaps">Абраць gaps</string>
     <string name="app_mode_camper">Прычэп</string>
     <string name="rendering_attr_showLez_description">Паказваць на мапе зоны з нізкім узроўнем выкідаў. Не ўплывае на маршрутызацыю.</string>
@@ -3190,23 +3190,23 @@
     <string name="get_discount_second_part">пасля %1$s</string>
     <string name="cancel_subscription">Скасаваць падпіску</string>
     <string name="price_and_discount">%1$s • Эканомія %2$s</string>
-    <string name="configure_profile_info">Усе пададзеныя ніжэй налады датычацца толькі абранага профілю.</string>
-    <string name="utm_format_descr">OsmAnd выкарыстоўвае фармат UTM Standard, які падобны, але не ідэнтычны фармату UTM Nato.</string>
+    <string name="configure_profile_info">Налады для профілю:</string>
+    <string name="utm_format_descr">OsmAnd выкарыстоўвае фармат UTM Standard, які падобны, але не ідэнтычны фармату UTM NATO.</string>
     <string name="shared_string_example">Прыклад</string>
     <string name="configure_profile">Налады профілю</string>
     <string name="switch_profile">Змяніць профіль</string>
     <string name="logcat_buffer">Буфер logcat</string>
     <string name="navigate_point_format_utm">UTM Standard</string>
     <string name="navigate_point_format_olc">Адкрыты код месцазнаходжання (OLC)</string>
-    <string name="coordinates_format_info">Абраны фармат будзе ужыты да ўсіх мясцін у дадатку.</string>
+    <string name="coordinates_format_info">Абраны фармат будзе ужыты да ўсяго дадатку.</string>
     <string name="pref_selected_by_default_for_profiles">Параметр прадвызначана абраны для профіляў: %s</string>
-    <string name="change_default_settings">Змяніць прадвызначаныя налады</string>
+    <string name="change_default_settings">Змяніць налады</string>
     <string name="discard_changes">Адкінуць змены</string>
-    <string name="apply_to_current_profile">Ужыць да бягучага профілю %1$s</string>
+    <string name="apply_to_current_profile">Ужыць толькі да \"%1$s\"</string>
     <string name="apply_to_all_profiles">Ужыць да ўсіх профіляў</string>
     <string name="start_up_message_pref">Паведамленне падчас запуску</string>
     <string name="analytics_pref_title">Аналітыка</string>
-    <string name="application_profile_changed">Профіль зменены на \"%s\"</string>
+    <string name="application_profile_changed">Профіль дадатку зменены на \"%s\"</string>
     <string name="plugins_settings">Налады ўбудоў</string>
     <string name="base_profile_descr_pedestrian">Шпацыры, паходы, бег</string>
     <string name="base_profile_descr_boat">Карабель, веславанне, парусны спорт</string>
@@ -3230,19 +3230,19 @@
     <string name="routing_attr_freeride_policy_description">Freerides і offpiste - неафіцыйныя маршруты і праходы. Як правіла, недагледжаныя, неразмечаныя, не асвятляюцца ўвечары. Будзьце вельмі ўважлівымі.</string>
     <string name="release_3_4">• Профілі дадатку: стварыце ўласны профіль адпаведна вашых патрэб, выкарыстаўшы адмысловыя значок і колер. 
 \n 
-\n • Для профіляў дададзеныя прадвызначаныя налады і мінімальная / максімальная хуткасць
+\n • Для профіляў дададзеныя прадвызначаныя налады і мінімальная / максімальная хуткасць 
 \n 
-\n • Дададзены віджэт з бягучымі каардынатамі
+\n • Дададзены віджэт з бягучымі каардынатамі 
 \n 
 \n • Дададзены параметры для адлюстравання на мапе компаса і радыуснай лінейкі 
 \n 
-\n • Палепшана загрузка мапаў у фонавым рэжыме
+\n • Палепшана загрузка мапаў у фонавым рэжыме 
 \n 
 \n • Вернуты параметр \"Уключыць экран\" 
 \n 
-\n • Выпраўлены выбар мовы Вікіпедыі
+\n • Выпраўлены выбар мовы Вікіпедыі 
 \n 
-\n • Выпраўлены паводзіны кнопкі компаса падчас навігацыі
+\n • Выпраўлены паводзіны кнопкі компаса падчас навігацыі 
 \n 
 \n • Выпраўленні памылак
 \n
@@ -3254,13 +3254,13 @@
     <string name="lang_oc">Аксітанская</string>
     <string name="app_mode_pickup_truck">Пікап</string>
     <string name="turn_screen_on_info">Паказваць мапу падчас навігацыі па-над заблакаваным экранам.</string>
-    <string name="route_parameters_info">Гэтыя налады ўплываюць на пабудову маршруту. Ужываюцца толькі да абранага профілю: %1$s.</string>
+    <string name="route_parameters_info">Налады пабудовы маршруту абранага профілю \"%1$s\".</string>
     <string name="wake_time">Час абуджэння</string>
     <string name="units_and_formats">Адзінкі вымярэння і фарматы</string>
     <string name="appearance">Выгляд</string>
-    <string name="map_look_descr">значкі, віджэты</string>
+    <string name="map_look_descr">Выгляд мапы</string>
     <string name="map_look">Выгляд мапы</string>
-    <string name="list_of_installed_plugins">Спіс усталяваных убудоў</string>
+    <string name="list_of_installed_plugins">Усталяваныя убудовы</string>
     <string name="configure_navigation">Наладзіць навігацыю</string>
     <string name="general_settings_profile_descr">Тэма дадатку, адзінкі вымярэння, рэгіён</string>
     <string name="screen_alerts_descr">Апавяшчэнні будуць паказвацца падчас навігацыі ў левым ніжнім куце экрана.</string>
@@ -3279,7 +3279,7 @@
     <string name="vehicle_parameters">Параметры аўтамабіля</string>
     <string name="voice_announces_info">Галасавыя апавяшчэнні прайграюцца толькі падчас навігацыі.</string>
     <string name="voice_announces_descr">Навігацыйныя інструкцыі і апавяшчэнні</string>
-    <string name="voice_announces">Галасавыя апавяшчэнні</string>
+    <string name="voice_announces">Галасавыя падказкі</string>
     <string name="screen_alerts">Экранныя апавяшчэнні</string>
     <string name="route_parameters_descr">Наладзіць параметры маршруту</string>
     <string name="route_parameters">Параметры маршруту</string>
@@ -3287,5 +3287,7 @@
     <string name="change_data_storage_full_description">Перамясціць файлы даных OsmAnd у новае месца\?
 \n%1$s &gt; %2$s</string>
     <string name="enter_path_to_folder">Увядзіце шлях да каталога</string>
-    <string name="shared_string_select_folder">Абраць каталог</string>
+    <string name="shared_string_select_folder">Каталог…</string>
+    <string name="data_storage_preference_summary">%1$s • %2$s</string>
+    <string name="data_storage_space_description">Вольна %1$s Гб (з %2$s Гб)</string>
 </resources>

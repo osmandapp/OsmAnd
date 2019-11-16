@@ -2421,7 +2421,7 @@
     <string name="route_descr_select_start_point">Kalkış noktasını seç</string>
     <string name="rendering_attr_surface_unpaved_name">Kaplamasız</string>
     <string name="rendering_attr_surface_sand_name">Kum</string>
-    <string name="rendering_attr_surface_grass_name">Çimen</string>
+    <string name="rendering_attr_surface_grass_name">Çim</string>
     <string name="rendering_attr_surface_ground_name">Zemin</string>
     <string name="rendering_attr_surface_mud_name">Çamur</string>
     <string name="rendering_attr_surface_ice_name">Buz</string>
@@ -2954,7 +2954,7 @@
     <string name="use_osm_live_public_transport_description">OsmAnd Live değişiklikleri için toplu taşıma araçlarını etkinleştirin.</string>
     <string name="use_osm_live_public_transport">OsmAnd Live toplu taşıma</string>
     <string name="transfers_size">%1$d transfer</string>
-    <string name="rendering_attr_surface_grass_paver_name">Çimen kaldırım</string>
+    <string name="rendering_attr_surface_grass_paver_name">Çim kaldırım</string>
     <string name="rendering_attr_surface_dirt_name">Toprak</string>
     <string name="rendering_attr_surface_sett_name">Kaldırım taşı</string>
     <string name="rendering_attr_smoothness_impassable_name">Geçilmez</string>

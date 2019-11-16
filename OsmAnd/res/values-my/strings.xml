@@ -335,7 +335,8 @@
     <string name="in_app_purchase_desc">တစ်ကြိမ်တည်းငွေပေးချေမှု</string>
     <string name="in_app_purchase_desc_ex">၀ယ်သည်နှင့်တပြိုင်နက်၎င်းကိုသင်အမြဲတမ်းရရှိနိုင်လိမ့်မည်။</string>
     <string name="purchase_unlim_title">၀ယ်ပါ - %1$s</string>
-    <string name="daily_map_updates"><b> နာရီ ပိုင်း</b> မြေပုံမွမ်းမံမှုများ</string>
+    <string name="daily_map_updates">
+        <b> နာရီ ပိုင်း</b> မြေပုံမွမ်းမံမှုများ</string>
     <string name="wikivoyage_travel_guide">ခရီးသွားသူလမ်းညွှန်များ</string>
     <string name="wikivoyage_search_hint">တိုင်းပြည်၊ မြို့၊ သို့မဟုတ်ပြည်နယ်ကိုရှာပါ</string>
     <string name="shared_string_read">ဖတ်ပါ</string>
@@ -406,4 +407,6 @@
     <string name="shared_string_deleted">ဖျက်လိုက်သည်</string>
     <string name="shared_string_edited">တည်းဖြတ်သည်</string>
     <string name="shared_string_added">ထည့်သည်</string>
+    <string name="empty_state_av_notes">မှတ်စုယူပါ။</string>
+    <string name="empty_state_av_notes_desc">အသံ၊ ဗွီဒီယိုသို့မဟုတ်ဓာတ်ပုံမှတ်စုကိုဝစ်ဂျက် (သို့) ဆက်စပ်မီနူးကို သုံး၍ မြေပုံပေါ်ရှိအမှတ်အားလုံးကိုထည့်ပါ။</string>
 </resources>

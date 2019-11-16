@@ -3372,7 +3372,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="tts_initialization_error">Nie można uruchomić mechanizmu zamiany tekstu na mowę</string>
     <string name="shared_preference">Wspólne</string>
     <string name="simulate_your_location_gpx_descr">Symuluje położenie używając zarejestrowanego śladu GPX.</string>
-    <string name="export_profile">Wyeksportuj profil</string>
+    <string name="export_profile">Eksportuj profil</string>
     <string name="exported_osmand_profile">Profil OsmAnd: %1$s</string>
     <string name="overwrite_profile_q">Profil „%1$s” już istnieje. Zastąpić go\?</string>
     <string name="export_profile_failed">Nie udało się wyeksportować profilu.</string>
