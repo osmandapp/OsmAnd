@@ -2075,7 +2075,7 @@ Pôr do Sol: %2$s</string>
     <string name="quick_action_showhide_osmbugs_title">Mostrar/ocultar notas OSM</string>
     <string name="quick_action_osmbugs_show">Mostrar Anotações do OSM</string>
     <string name="quick_action_osmbugs_hide">Ocultar notas OSM</string>
-    <string name="quick_action_showhide_osmbugs_descr">Um botão para mostrar ou ocultar Notas OSM no mapa.</string>
+    <string name="quick_action_showhide_osmbugs_descr">Um botão que mostra ou oculta Notas OSM no mapa.</string>
     <string name="sorted_by_distance">Classificado por distância</string>
     <string name="search_favorites">Pesquisar Favoritos</string>
     <string name="hillshade_menu_download_descr">Baixe o mapa \'Hillshade Overlay\' para mostrar o sombreamento vertical.</string>
@@ -2111,7 +2111,7 @@ Pôr do Sol: %2$s</string>
     <string name="select_city">Selecionar cidade</string>
     <string name="select_postcode">Busca por CEP</string>
     <string name="quick_action_auto_zoom">Zoom automático do mapa ligar/desligar</string>
-    <string name="quick_action_auto_zoom_desc">Um botão para ativar/desativar o zoom automático do mapa conforme a sua velocidade.</string>
+    <string name="quick_action_auto_zoom_desc">Um botão que ativa/desativa o zoom automático do mapa conforme a sua velocidade.</string>
     <string name="quick_action_auto_zoom_on">Ativar zoom automático do mapa</string>
     <string name="quick_action_auto_zoom_off">Desativar zoom automático do mapa</string>
     <string name="quick_action_add_destination">Defina destino</string>
@@ -2285,7 +2285,7 @@ Pôr do Sol: %2$s</string>
     <string name="empty_state_av_notes_desc">Adicione nota de áudio, vídeo ou foto em qualquer ponto do mapa, usando o widget ou o menu de contexto.</string>
     <string name="quick_action_add_destination_desc">Um botão que marca o centro da tela como o destino da rota, qualquer destino anteriormente selecionado se torna o último destino intermediário.</string>
     <string name="quick_action_replace_destination_desc">Tocar no botão de ação marcará o centro da tela como novo destino da rota, substituindo o destino selecionado anteriormente (se houver).</string>
-    <string name="quick_action_add_first_intermediate_desc">Um botão para adicionar no centro da tela o primeiro destino intermédio.</string>
+    <string name="quick_action_add_first_intermediate_desc">Um botão que adiciona no centro da tela o primeiro destino intermédio.</string>
     <string name="subscribe_email_desc">Assine a nossa lista de discussão sobre descontos do aplicativo e obtenha mais 3 downloads de mapa!</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd coleta informações sobre quais partes do aplicativo você abrir. A sua localização nunca é enviada, nem qualquer coisa digitada no aplicativo ou detalhes das áreas que você visualizar, pesquisar ou baixar.</string>
     <string name="auto_split_recording_title">Autodividir gravações após um intervalo</string>
@@ -2300,7 +2300,7 @@ Pôr do Sol: %2$s</string>
     <string name="get_for">Adquira por %1$s</string>
     <string name="get_for_month">Adquira por %1$s mês</string>
     <string name="osm_live_banner_desc">Obtenha downloads ilimitados de mapas, adicionando atualizações semanais, diárias e a cada hora.</string>
-    <string name="quick_action_add_gpx_descr">Tocar no botão de ação adicionará um ponto de passagem GPX no meio da tela.</string>
+    <string name="quick_action_add_gpx_descr">Um botão que adiciona um ponto de trajeto GPX no meio da tela.</string>
     <string name="av_locations_all_desc">Arquivo GPX com coordenadas e dados de todas as notas.</string>
     <string name="storage_place_description">Armazenamento de dados do OsmAnd (para mapas, arquivos GPX, etc.): %1$s.</string>
     <string name="first_usage_greeting">Obtenha direções e descobra novos lugares sem precisar de conexão com a Internet</string>
@@ -2433,8 +2433,8 @@ Pôr do Sol: %2$s</string>
     <string name="quick_actions_delete_text">Tem certeza de que deseja apagar a ação \"%s\"?</string>
     <string name="quick_favorites_show_favorites_dialog">Mostrar diálogo Favoritos</string>
     <string name="quick_favorites_name_preset">Nome do preset</string>
-    <string name="quick_action_add_marker_descr">Tocar nesse botão de ação adicionará um marcador de GPX no meio da tela.</string>
-    <string name="quick_action_add_parking_descr">Tocar no botão de ação adicionará um lugar de estacionamento no local do meio da tela.</string>
+    <string name="quick_action_add_marker_descr">Um botão que adiciona um marcador de mapa no centro da tela.</string>
+    <string name="quick_action_add_parking_descr">Um botão que adiciona o local de estacionamento no meio da tela.</string>
     <string name="release_3_0">• Novo: suporte para guias de viagem off-line globais. Locais referenciados estão lincados ao mapa. Dados iniciais do Wikivoyage.
 \n
 \n• Wikipédia: novo visual, links ativos, imagens agora suportados.
@@ -2478,18 +2478,18 @@ Pôr do Sol: %2$s</string>
 \n• Zoom dependente da velocidade opcional
 \n• Compartilhe sua localização para que seus amigos possam encontrar você</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Especificar um buffer de tempo para manter locais para enviar sem conexão</string>
-    <string name="quick_action_take_audio_note_descr">Tocar no botão de ação adicionará uma nota de áudio no meio da tela.</string>
-    <string name="quick_action_take_video_note_descr">Tocar no botão de ação adicionará uma nota de vídeo no meio da tela.</string>
-    <string name="quick_action_take_photo_note_descr">Tocar no botão de ação adicionará uma nota de foto no meio da tela.</string>
-    <string name="quick_action_add_osm_bug_descr">Tocar no botão de ação adicionará uma nota OSM no meio da tela.</string>
-    <string name="quick_action_add_poi_descr">Tocar no botão de ação adicionará um POI no meio da tela.</string>
+    <string name="quick_action_take_audio_note_descr">Um botão que adiciona uma nota de áudio no meio da tela.</string>
+    <string name="quick_action_take_video_note_descr">Um botão que adiciona uma nota de vídeo no meio da tela.</string>
+    <string name="quick_action_take_photo_note_descr">Um botão que adiciona uma nota fotográfica no meio da tela.</string>
+    <string name="quick_action_add_osm_bug_descr">Um botão que adiciona uma nota OSM no meio da tela.</string>
+    <string name="quick_action_add_poi_descr">Um botão que adiciona um POI no meio da tela.</string>
     <string name="quick_action_navigation_voice_descr">Tocar no botão de ação irá ativar ou desativar a orientação por voz durante a navegação.</string>
     <string name="quick_action_interim_dialog">Mostrar um diálogo intermediário</string>
-    <string name="favorite_autofill_toast_text">" está salvo no "</string>
+    <string name="favorite_autofill_toast_text">" salvo no "</string>
     <string name="favorite_empty_place_name">Lugar</string>
     <string name="quick_action_duplicates">Nome de ação rápida especificada já em uso foi mudado para %1$s para evitar a duplicação.</string>
     <string name="quick_action_duplicate">Nome de ação rápida duplicado</string>
-    <string name="quick_action_showhide_favorites_descr">Tocar neste botão de ação mostra ou oculta os pontos favoritos no mapa.</string>
+    <string name="quick_action_showhide_favorites_descr">Um botão que mostra ou oculta os pontos dos Favoritos no mapa.</string>
     <string name="quick_action_showhide_poi_descr">Tocar neste botão de ação mostra ou oculta POIs no mapa.</string>
     <string name="quick_action_showhide_favorites_title">Mostrar/ocultar favoritos</string>
     <string name="quick_action_favorites_show">Mostrar Favoritos</string>
@@ -2504,11 +2504,11 @@ Pôr do Sol: %2$s</string>
     <string name="quick_action_fav_name_descr">Deixe em branco para usar o endereço ou nome de lugar.</string>
     <string name="quick_action_bug_descr">Esta mensagem é incluído no campo de comentário.</string>
     <string name="quick_action_bug_message">Mensagem</string>
-    <string name="quick_action_category_descr">Selecione a categoria para salvar o favorito.</string>
-    <string name="quick_action_gpx_category_descr">Selecione uma categoria opcional.</string>
+    <string name="quick_action_category_descr">Categoria para salvar o Favorito:</string>
+    <string name="quick_action_gpx_category_descr">Escolha uma categoria opcional.</string>
     <string name="quick_action_poi_list">Lista de POIs</string>
     <string name="quick_action_sh_poi_descr">Adicionar uma ou mais categorias de POI para exibir no mapa.</string>
-    <string name="quick_action_page_list_descr">Tocar nas páginas deste botão de ação na lista abaixo.</string>
+    <string name="quick_action_page_list_descr">Um botão para percorrer a lista abaixo.</string>
     <string name="quick_action_map_style_action">Adicionar um estilo de mapa</string>
     <string name="quick_action_empty_param_error">Preencha todos os parâmetros</string>
     <string name="quick_action_map_styles">Estilos de mapa</string>
@@ -2822,7 +2822,7 @@ Pôr do Sol: %2$s</string>
 \n• Medição de distância: adiciona botão \"Medição\" em Ações no menu de contexto. 
 \n 
 \n</string>
-    <string name="test_voice_desrc">Toque num botão e ouça a correspondente voz de comando para identificar os comandos faltantes ou com falha.</string>
+    <string name="test_voice_desrc">Toque num botão e ouça o aviso por voz correspondente para checar se está em falta ou com falha</string>
     <string name="osm_live_plan_pricing">Planos e Preços</string>
     <string name="osm_live_payment_monthly_title">Mensal</string>
     <string name="osm_live_payment_3_months_title">A cada três meses</string>
@@ -2876,9 +2876,9 @@ Pôr do Sol: %2$s</string>
     <string name="intermediate_destinations">Destinos intermediários</string>
     <string name="arrive_at_time">Chega às %1$s</string>
     <string name="lang_gn_py">Guarani</string>
-    <string name="quick_action_switch_day_night_descr">Tocando neste botão de ação, alterne entre os modos Dia e Noite para OsmAnd</string>
-    <string name="quick_action_switch_day_mode">"Modo diurno "</string>
-    <string name="quick_action_switch_night_mode">"Modo noturno "</string>
+    <string name="quick_action_switch_day_night_descr">Um botão que alterna entre os modos dia e noite no OsmAnd.</string>
+    <string name="quick_action_switch_day_mode">Modo diurno</string>
+    <string name="quick_action_switch_night_mode">Modo noturno</string>
     <string name="quick_action_day_night_switch_mode">Alternar modo dia/noite</string>
     <string name="run_full_osmand_msg">Você está usando {0} Mapa, que é alimentado por OsmAnd. Você quer iniciar a versão completa do OsmAnd\?</string>
     <string name="cubic_m">m³</string>
@@ -2905,7 +2905,7 @@ Pôr do Sol: %2$s</string>
     <string name="exit_at">Desembarque em</string>
     <string name="sit_on_the_stop">Embarque na parada</string>
     <string name="quick_action_show_hide_gpx_tracks">Mostrar/ocultar faixas GPX</string>
-    <string name="quick_action_show_hide_gpx_tracks_descr">Um botão para mostrar ou ocultar trilhas GPX selecionadas no mapa.</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Um botão que mostra ou oculta trilhas GPX selecionadas no mapa.</string>
     <string name="quick_action_gpx_tracks_hide">Ocultar faixas de GPX</string>
     <string name="quick_action_gpx_tracks_show">Mostrar faixas GPX</string>
     <string name="release_3_3">- Nova tela \'Direções\': Apresenta os botões de destino Casa e Trabalho, atalho \"percurso anterior\", lista de faixas e marcadores GPX activos, histórico de pesquisa 
@@ -3351,11 +3351,11 @@ Pôr do Sol: %2$s</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">Preferir estradas não pavimentadas</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">Preferir estradas não pavimentadas.</string>
     <string name="layer_osm_edits">Edições OSM</string>
-    <string name="quick_action_contour_lines_descr">Um botão para mostrar ou ocultar curvas de nível no mapa.</string>
+    <string name="quick_action_contour_lines_descr">Um botão que mostra ou oculta curvas de nível no mapa.</string>
     <string name="quick_action_contour_lines_show">Mostrar curvas de nível</string>
     <string name="quick_action_contour_lines_hide">Ocultar linhas de contorno</string>
     <string name="quick_action_show_hide_contour_lines">Mostrar/ocultar linhas de contorno</string>
-    <string name="quick_action_hillshade_descr">Um botão para mostrar ou ocultar sombras de relevo no mapa.</string>
+    <string name="quick_action_hillshade_descr">Um botão que mostra ou oculta sombras de relevo no mapa.</string>
     <string name="quick_action_hillshade_show">Mostrar colina</string>
     <string name="quick_action_hillshade_hide">Ocultar colina</string>
     <string name="quick_action_show_hide_hillshade">Mostrar/ocultar colina</string>
