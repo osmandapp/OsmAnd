@@ -202,28 +202,27 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 					File fout = new File(dir, f + ".gpx"); //$NON-NLS-1$
 					if (!data.get(f).isEmpty()) {
 						WptPt pt = data.get(f).findPointToShow();
-						String dirName = "";
-						String dateDirName ="";
+						File targetDir = dir;
 						Integer track_storage_directory = ctx.getSettings().TRACK_STORAGE_DIRECTORY.get();
 						if (track_storage_directory != OsmandSettings.REC_DIRECTORY) {
 							SimpleDateFormat dateDirFormat = new SimpleDateFormat("yyyy-MM");
 							if (track_storage_directory == OsmandSettings.DAILY_DIRECTORY) {
 								dateDirFormat = new SimpleDateFormat("yyyy-MM-dd");
 							}
-							dateDirName = dateDirFormat.format(new Date(pt.time));
+							String dateDirName = dateDirFormat.format(new Date(pt.time));
+							File dateDir = new File(dir, dateDirName);
+							dateDir.mkdirs();
+							if (dateDir.exists()) {
+								targetDir = dateDir;
+								directories.add(dateDirName);
+							}
 						}
-						File dateDir = new File(dir, dateDirName);
-						dateDir.mkdirs();
-						if (dateDir.exists()) {
-							dirName = dateDirName;
-						}
-						directories.add(dirName);
 						String fileName = f + "_" + new SimpleDateFormat("HH-mm_EEE", Locale.US).format(new Date(pt.time)); //$NON-NLS-1$
 						filenames.add(fileName);
-						fout = new File(dateDir, fileName + ".gpx"); //$NON-NLS-1$
+						fout = new File(targetDir, fileName + ".gpx"); //$NON-NLS-1$
 						int ind = 1;
 						while (fout.exists()) {
-							fout = new File(dateDir, fileName + "_" + (++ind) + ".gpx"); //$NON-NLS-1$ //$NON-NLS-2$
+							fout = new File(targetDir, fileName + "_" + (++ind) + ".gpx"); //$NON-NLS-1$ //$NON-NLS-2$
 						}
 					}
 
