@@ -15,7 +15,7 @@
 		android:minHeight="@dimen/bottom_sheet_list_item_height"
 		tools:background="?android:attr/selectableItemBackground">
 
-		<RadioButton
+		<android.support.v7.widget.AppCompatRadioButton
 			android:id="@android:id/checkbox"
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
