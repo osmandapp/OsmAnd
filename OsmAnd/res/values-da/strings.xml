@@ -3397,4 +3397,10 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="route_start_point">Udgangspunkt</string>
     <string name="track_saved">Sporet er gemt</string>
     <string name="empty_filename">Filnavnet er tomt</string>
+    <string name="shared_string_revert">Tilbagefør</string>
+    <string name="quick_action_directions_from_desc">En knap for at få skærmen til at centrere afgangsstedet og beregne ruten til destinationen eller åbne en dialogboks for at vælge destination, hvis destinationsmarkøren ikke er på kortet.</string>
+    <string name="clear_confirmation_msg">Ryd %1$s\?</string>
+    <string name="download_map_dialog">Dialogboksen Hent kort</string>
+    <string name="dialogs_and_notifications_title">Dialoger og meddelelser</string>
+    <string name="dialogs_and_notifications_descr">Kontrol af popup-vinduer, dialoger og meddelelser, der OsmAnd vis under brug.</string>
 </resources>
