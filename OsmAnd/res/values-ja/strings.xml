@@ -370,7 +370,7 @@ POIの更新は利用できません</string>
     <string name="auto_zoom_map">マップを自動ズーム</string>
     <string name="additional_settings">追加設定</string>
     <string name="settings_preset_descr">マップの表示とナビゲーション設定はプロファイルごとに記憶されます。標準で使用するプロファイルを指定してください</string>
-    <string name="settings_preset">デフォルト表示プロファイル</string>
+    <string name="settings_preset">起動時の表示プロファイル</string>
     <string name="shared_string_settings">設定</string>
     <string name="save_current_track_descr">現在の経路を今すぐメモリーカードに保存します。</string>
     <string name="save_current_track">現在の経路を保存</string>
@@ -634,7 +634,7 @@ POIの更新は利用できません</string>
     <string name="recording_description">記録中 %1$s %3$s %2$s</string>
     <string name="recording_default_name">記録中</string>
     <string name="shared_string_control_stop">停止</string>
-    <string name="shared_string_control_start">スタート地点</string>
+    <string name="shared_string_control_start">開始</string>
     <string name="map_widget_av_notes">音声/動画メモ</string>
     <string name="osmand_srtm_short_description_80_chars">オフライン等高線のためのOsmAndプラグイン</string>
     <string name="map_widget_distancemeasurement">距離の測定</string>
@@ -731,7 +731,7 @@ POIの更新は利用できません</string>
     <string name="map_widget_monitoring">GPXログ</string>
     <string name="map_widget_speed">速度</string>
     <string name="map_widget_distance">目的地</string>
-    <string name="map_widget_altitude">高度</string>
+    <string name="map_widget_altitude">標高</string>
     <string name="map_widget_time">所要時間</string>
     <string name="map_widget_next_turn">次の曲がる方向</string>
     <string name="map_widget_next_turn_small">次の曲がる方向(小さいアイコン)</string>
@@ -869,7 +869,7 @@ POIの更新は利用できません</string>
     <string name="oclock">時頃</string>
     <string name="towards">の方へ</string>
     <string name="accuracy">精度</string>
-    <string name="altitude">高度</string>
+    <string name="altitude">標高</string>
     <string name="no_info">情報無し</string>
     <string name="direction_style_sidewise">横向き(8セクタ)</string>
     <string name="direction_style_clockwise">時計回り(12セクタ)</string>
@@ -1206,7 +1206,7 @@ POIの更新は利用できません</string>
     <string name="gpx_info_maximum_speed">"最高速度: %1$s "</string>
     <string name="gpx_info_avg_altitude">平均標高: %1$s</string>
     <string name="gpx_info_diff_altitude">標高差: %1$s</string>
-    <string name="gpx_info_asc_altitude">上昇/下降: %1$s</string>
+    <string name="gpx_info_asc_altitude">上り/下り: %1$s</string>
     <string name="gpx_timemoving">移動時間: %1$s</string>
     <string name="gpx_timespan">全長時間: %1$s</string>
     <string name="gpx_selection_segment_title">セグメント</string>
@@ -2052,7 +2052,7 @@ POIの更新は利用できません</string>
     <string name="get_it">入手する</string>
     <string name="si_mi_meters">マイル/メートル</string>
     <string name="skip_map_downloading">マップのダウンロードをスキップ</string>
-    <string name="skip_map_downloading_desc">オフライン用マップがインストールされていません。マップはこのリスト内から選択、あるいはメニューの%1$sから、後からでもダウンロードすることができます。</string>
+    <string name="skip_map_downloading_desc">オフライン用マップがインストールされていません。マップはこの画面にてリスト内から選択、あるいは後から\'メニューの%1$s\'にてダウンロードすることができます。</string>
     <string name="search_another_country">別の地域を選択</string>
     <string name="search_map">マップを検索しています…</string>
     <string name="no_inet_connection">インターネットに接続されていません</string>
@@ -2201,7 +2201,7 @@ POIの更新は利用できません</string>
     <string name="quick_action_btn_tutorial_title">ボタン位置を変更</string>
     <string name="quick_action_btn_tutorial_descr">ロングタップとドラッグで画面上のボタンの位置を変更します。</string>
     <string name="shared_string_action_name">アクション名</string>
-    <string name="shared_string_slope">坂</string>
+    <string name="shared_string_slope">勾配</string>
     <string name="add_new_folder">新しいフォルダーを追加</string>
     <string name="points_delete_multiple_succesful">ポイントは正常に削除されました。</string>
     <string name="points_delete_multiple">%1$d個の地点を削除してもよろしいですか？</string>
@@ -2240,7 +2240,7 @@ POIの更新は利用できません</string>
     <string name="index_item_depth_contours_osmand_ext">海洋等深線データ</string>
     <string name="download_depth_countours">海洋等深線データ</string>
     <string name="nautical_maps">航海マップ</string>
-    <string name="analyze_on_map">マップ上の分析</string>
+    <string name="analyze_on_map">分析をマップ上で閲覧</string>
     <string name="shared_string_visible">表示</string>
     <string name="fonts_header">マップ用フォント</string>
     <string name="right_side_navigation">右側通行</string>
@@ -2392,7 +2392,7 @@ POIの更新は利用できません</string>
     <string name="quick_action_showhide_osmbugs_descr">マップ画面でのOSMメモの表示と非表示を切り替えます。</string>
     <string name="sorted_by_distance">距離順で並べ替え</string>
     <string name="search_favorites">お気に入りで検索</string>
-    <string name="hillshade_menu_download_descr">垂直方向の高低を陰影で知るには、陰影起伏図(Hillshade Overlay)マップのダウンロードが必要です。</string>
+    <string name="hillshade_menu_download_descr">標高の高低をグラデーション表示するには、陰影起伏図(Hillshade Overlay)マップのダウンロードが必要です。</string>
     <string name="hillshade_purchase_header">等高線プラグイン『Contour lines plugin — OsmAnd』をインストールすることで、陰影起伏図(高低差を陰影で表したもの)をマップ上に表示できます。</string>
     <string name="hide_from_zoom_level">ズームレベルを非表示</string>
     <string name="srtm_menu_download_descr">この地域用の等高線マップをダウンロードします。</string>
@@ -3063,7 +3063,7 @@ POIの更新は利用できません</string>
     <string name="turn_screen_on_router">方向転換時に起動</string>
     <string name="turn_screen_on_time_descr">画面がオンになる時間を調整できます。</string>
     <string name="turn_screen_on_sensor">近接センサーを使用</string>
-    <string name="turn_screen_on_sensor_descr">ナビゲーション中に画面の上に手をかざすと、画面をオンにします。(近接センサー搭載端末のみ有効)</string>
+    <string name="turn_screen_on_sensor_descr">【近接センサー搭載端末のみ】ナビゲーション中に画面の近くに手をかざすと、画面をオンにします。</string>
     <string name="external_input_device">外部入力機器</string>
     <string name="external_input_device_descr">汎用キーボードやWunderLINQなどの外部コントロールデバイスを選択してください。</string>
     <string name="sett_no_ext_input">使用しない</string>
@@ -3106,9 +3106,9 @@ POIの更新は利用できません</string>
     <string name="rate_dialog_descr">フィードバックの共有や、Google Playでの評価をお願いします。</string>
     <string name="button_rate">OK</string>
     <string name="help_us_make_osmand_better">OsmAndの改善にご協力ください</string>
-    <string name="make_osmand_better_descr">OsmAndで匿名アプリ使用データの収集および処理できるようにします。マップに表示されている自分の位置や場所に関するデータは収集されません。
+    <string name="make_osmand_better_descr">OsmAnd側で匿名にてアプリ使用データの収集および処理ができるようにします。マップに表示されている自身の位置やその他場所に関するデータは収集されません。 
 \n 
-\n[設定]＞[プライバシーとセキュリティ]からいつでも設定を変更できます。</string>
+\n\'設定\'→\'プライバシーとセキュリティ\'からいつでも設定を変更できます。</string>
     <string name="choose_data_to_share">共有するデータの種類を選択:</string>
     <string name="collected_data_descr">OsmAndで共有を許可するデータを定義します。</string>
     <string name="downloaded_maps_collect_descr">どの国や地域の地図が需要が高いのかを把握するのに役立ちます。</string>
