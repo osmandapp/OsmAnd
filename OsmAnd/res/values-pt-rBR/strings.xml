@@ -102,7 +102,7 @@
     <string name="shared_string_rename">Renomear</string>
     <string name="shared_string_delete">Apagar</string>
     <string name="shared_string_delete_all">Apagar tudo</string>
-    <string name="shared_string_share">Compartilhar</string>
+    <string name="shared_string_share">Enviar</string>
     <string name="shared_string_apply">Aplicar</string>
     <string name="shared_string_control_start">Iniciar</string>
     <string name="shared_string_control_stop">Parar</string>
@@ -254,7 +254,7 @@
     <string name="lock_screen_request_explanation">%1$s precisa dessa permissão para desligar a tela para economizar energia.</string>
     <string name="wake_on_voice">Ligar tela</string>
     <string name="wake_on_voice_descr">Ligar tela do aparelho (se estiver desligada) quando se aproxima da manobra.</string>
-    <string name="impassable_road">Evitar estradas…</string>
+    <string name="impassable_road">Evitar vias…</string>
     <string name="rendering_attr_trainLightrailRoutes_name">Linhas de trem</string>
     <string name="rendering_attr_tramRoutes_name">Linhas de bonde</string>
     <string name="rendering_attr_shareTaxiRoutes_name">Compartilhar rota de táxi</string>
@@ -337,7 +337,7 @@
     <string name="routing_attr_avoid_toll_description">Evita estradas com pedágio</string>
     <string name="routing_attr_avoid_unpaved_name">Não há estradas não pavimentadas</string>
     <string name="routing_attr_avoid_unpaved_description">Evita estradas não pavimentadas</string>
-    <string name="routing_attr_avoid_ferries_description">Evitar as balsas</string>
+    <string name="routing_attr_avoid_ferries_description">Evita balsas</string>
     <string name="routing_attr_weight_name">Peso máximo</string>
     <string name="routing_attr_weight_description">Especifique o limite de peso do veículo nas rotas.</string>
     <string name="copying_osmand_files_descr">Copiar arquivos de dados para o novo destino (%s)…</string>
@@ -512,7 +512,7 @@
     <string name="route_info">Informações da rota</string>
     <string name="routing_attr_avoid_ferries_name">Nenhuma balsa</string>
     <string name="routing_attr_avoid_motorway_name">Não há autoestradas</string>
-    <string name="routing_attr_avoid_motorway_description">Evitar autoestradas</string>
+    <string name="routing_attr_avoid_motorway_description">Evita autoestradas</string>
     <string name="android_19_location_disabled">No Android 4.4 (KitKat), a pasta de armazenamento antiga (%s) está obsoleta. Copiar todos os arquivos OsmAnd para o novo local de armazenamento\?
 \n 
 \n Nota 1: Seus arquivos antigos permanecerão intactos (mas podem ser excluídos manualmente). 
@@ -1749,7 +1749,7 @@ Pôr do Sol: %2$s</string>
     <string name="rendering_attr_currentTrackWidth_description">Largura do GPX</string>
     <string name="rendering_attr_roadStyle_description">Estilo das vias</string>
     <string name="routing_attr_avoid_stairs_name">Não há escadas</string>
-    <string name="routing_attr_avoid_stairs_description">Evitar passar por escadas</string>
+    <string name="routing_attr_avoid_stairs_description">Evita passar por escadas</string>
     <string name="routing_attr_avoid_borders_name">Não há passagem por fronteira</string>
     <string name="favourites_context_menu_add">Adicionar favorito</string>
     <string name="poi_dialog_reopen">Reabrir</string>
@@ -1893,7 +1893,7 @@ Pôr do Sol: %2$s</string>
     <string name="access_disable_offroute_recalc_descr">Desabilitar recálculo de rota depois de ter saído de rota.</string>
     <string name="access_disable_wrong_direction_recalc_descr">Desabilitar recálculo de rota se só estiver se movendo na direção oposta.</string>
     <string name="follow_us">Siga-nos</string>
-    <string name="routing_attr_short_way_name">Caminho mais econômico</string>
+    <string name="routing_attr_short_way_name">Via mais econômica</string>
     <string name="routing_attr_short_way_description">Utilizar caminho econômico (geralmente mais curto).</string>
     <string name="edit_filter">Editar categorias</string>
     <string name="subcategories">Subcategorias</string>
@@ -2327,7 +2327,7 @@ Pôr do Sol: %2$s</string>
     <string name="shared_string_move_up">Mover ↑</string>
     <string name="shared_string_move_down">Mover ↓</string>
     <string name="finish_navigation">Finalizar a navegação</string>
-    <string name="avoid_road">Evitar estrada</string>
+    <string name="avoid_road">Evitar via</string>
     <string name="osm_live_subscription">Assinatura OsmAnd Live</string>
     <string name="osm_live_subscribe_btn">Assinar</string>
     <string name="osm_live_user_public_name">Nome público</string>
@@ -2868,7 +2868,7 @@ Pôr do Sol: %2$s</string>
     <string name="points_of_interests">Pontos de interesse (PDI)</string>
     <string name="waiting_for_route_calculation">Calculando rota…</string>
     <string name="app_mode_public_transport">Transporte público</string>
-    <string name="avoid_roads_descr">Selecione uma estrada que você deseja evitar durante a navegação, no mapa ou na lista abaixo:</string>
+    <string name="avoid_roads_descr">Selecione uma via que você deseja evitar durante a navegação, no mapa ou na lista abaixo:</string>
     <string name="show_along_the_route">Mostrar ao longo da rota</string>
     <string name="simulate_navigation">Simular navegação</string>
     <string name="choose_track_file_to_follow">Escolha o arquivo de trilha para seguir</string>
@@ -2988,18 +2988,18 @@ Pôr do Sol: %2$s</string>
     <string name="shared_string_milliradians">Milirradianos</string>
     <string name="angular_measeurement">Unidade angular</string>
     <string name="angular_measeurement_descr">Mude em que o azimute é medido.</string>
-    <string name="routing_attr_avoid_tram_name">Evitar bondes</string>
-    <string name="routing_attr_avoid_tram_description">Evitar de usar bondes</string>
-    <string name="routing_attr_avoid_bus_name">Evitar ônibus</string>
-    <string name="routing_attr_avoid_bus_description">Evitar de usar ônibus e trólebus</string>
-    <string name="routing_attr_avoid_share_taxi_name">Evitar táxi coletivo</string>
-    <string name="routing_attr_avoid_share_taxi_description">Evitar de usar táxi coletivo</string>
-    <string name="routing_attr_avoid_train_name">Evitar trens</string>
-    <string name="routing_attr_avoid_train_description">Evitar de usar trens</string>
+    <string name="routing_attr_avoid_tram_name">Sem bondes</string>
+    <string name="routing_attr_avoid_tram_description">Evita usar bondes</string>
+    <string name="routing_attr_avoid_bus_name">Sem ônibus</string>
+    <string name="routing_attr_avoid_bus_description">Evita usar ônibus e trólebus</string>
+    <string name="routing_attr_avoid_share_taxi_name">Sem táxi coletivo</string>
+    <string name="routing_attr_avoid_share_taxi_description">Evita usar táxi coletivo</string>
+    <string name="routing_attr_avoid_train_name">Sem trens</string>
+    <string name="routing_attr_avoid_train_description">Evita usar trens</string>
     <string name="routing_attr_avoid_subway_name">Evitar metrô</string>
-    <string name="routing_attr_avoid_subway_description">Evitar de usar metrôs e transporte ferroviário leve</string>
-    <string name="routing_attr_avoid_ferry_name">Evitar balsas</string>
-    <string name="routing_attr_avoid_ferry_description">Evitar de usar balsas</string>
+    <string name="routing_attr_avoid_subway_description">Evita usar metrôs e transporte ferroviário leve</string>
+    <string name="routing_attr_avoid_ferry_name">Sem balsas</string>
+    <string name="routing_attr_avoid_ferry_description">Evita usar balsas</string>
     <string name="release_3_3_7">• Exibição do tempo entre transferências em transporte público
 \n
 \n  • Interface do usuário corrigida para os detalhes da rota
@@ -3235,7 +3235,7 @@ Pôr do Sol: %2$s</string>
     <string name="pref_selected_by_default_for_profiles">Essa configuração é selecionada por padrão para perfis: %s</string>
     <string name="apply_to_current_profile">Aplicar apenas a %1$s</string>
     <string name="apply_to_all_profiles">Aplicar a todos os perfis</string>
-    <string name="start_up_message_pref">Mensagem de inicialização</string>
+    <string name="start_up_message_pref">Mensagem inicial</string>
     <string name="analytics_pref_title">Análises</string>
     <string name="turn_screen_on_info">Mostrar mapa na tela de bloqueio durante a navegação.</string>
     <string name="route_parameters_info">Configurações para roteamento no perfil selecionado \"%1$s\".</string>
@@ -3380,7 +3380,7 @@ Pôr do Sol: %2$s</string>
     <string name="quick_action_directions_from_desc">Um botão para fazer com que a tela centralize o ponto de partida e calcule a rota para o destino ou abra uma caixa de diálogo para selecionar o destino se o marcador de destino não estiver no mapa.</string>
     <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Mostrar os nós da rede de ciclovias</string>
     <string name="clear_confirmation_msg">Limpar %1$s\?</string>
-    <string name="download_map_dialog">Baixar mapa</string>
+    <string name="download_map_dialog">Caixa baixar mapa</string>
     <string name="dialogs_and_notifications_title">Diálogos e notificações</string>
     <string name="dialogs_and_notifications_descr">Popups de controle , caixas de diálogo e notificações que o OsmAnd mostra durante o uso.</string>
 </resources>
