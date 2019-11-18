@@ -221,7 +221,7 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 		if (activity != null) {
 			FragmentManager fragmentManager = activity.getSupportFragmentManager();
 			EditProfileFragment editProfileFragment = (EditProfileFragment) fragmentManager.findFragmentByTag(EditProfileFragment.TAG);
-			SettingsProfileFragment settingsProfileFragment = (SettingsProfileFragment) fragmentManager.findFragmentByTag(SettingsProfileFragment.TAG);
+			SettingsProfileFragment settingsProfileFragment = (SettingsProfileFragment) fragmentManager.findFragmentByTag(SettingsProfileFragment.class.getName());
 
 			if (editProfileFragment != null) {
 				switch (type) {

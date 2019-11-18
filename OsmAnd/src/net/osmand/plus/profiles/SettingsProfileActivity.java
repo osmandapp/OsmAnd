@@ -19,7 +19,7 @@ public class SettingsProfileActivity extends OsmandActionBarActivity {
 			SettingsProfileFragment profileFragment = new SettingsProfileFragment();
 			profileFragment.setArguments(getIntent().getExtras());
 			getSupportFragmentManager().beginTransaction()
-					.add(android.R.id.content, profileFragment, SettingsProfileFragment.TAG).commit();
+					.add(android.R.id.content, profileFragment, SettingsProfileFragment.class.getName()).commit();
 		}
 	}
 
