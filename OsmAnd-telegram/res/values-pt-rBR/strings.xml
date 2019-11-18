@@ -102,7 +102,7 @@
     <string name="minutes_format">%1$d m</string>
     <string name="hours_format">%1$d h</string>
     <string name="shared_string_install">Instalar</string>
-    <string name="shared_string_share">Compartilhar</string>
+    <string name="shared_string_share">Enviar</string>
     <string name="shared_string_back">Voltar</string>
     <string name="visible_time_for_all">Hora visível para todos</string>
     <string name="set_time_description">Defina a hora em que seus contatos e grupos selecionados verão sua localização em tempo real.</string>
