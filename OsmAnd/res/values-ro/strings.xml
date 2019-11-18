@@ -2424,10 +2424,10 @@
     <string name="logcat_buffer">Tampon logcat</string>
     <string name="plugins_settings">Setări plugin</string>
     <string name="shared_string_by_default">În mod implicit</string>
-    <string name="download_detailed_map">Descărcați harta detaliată% s, pentru a vizualiza această zonă.</string>
+    <string name="download_detailed_map">Descărcați harta detaliată %s, pentru a vizualiza această zonă.</string>
     <string name="change_data_storage_full_description">Mută fişierele de date OsmAnd la noua destinaţie\?</string>
-    <string name="data_storage_preference_summary">%1$s%2$s</string>
-    <string name="data_storage_space_description">%1$s GB free (of%2$s GB)</string>
+    <string name="data_storage_preference_summary">%1$s %2$s</string>
+    <string name="data_storage_space_description">%1$s GB free (of %2$s GB)</string>
     <string name="enter_path_to_folder">Introduceți calea către folder</string>
     <string name="shared_string_select_folder">Folderul…</string>
     <string name="paste_Osmand_data_folder_path">Lipește calea către dosar cu datele OsmAnd</string>
@@ -2470,15 +2470,15 @@
     <string name="store_tracks_in_rec_directory">Înregistrează traseele în dosarul „rec”</string>
     <string name="store_tracks_in_daily_directories">Înregistrați traseele în dosarele zilnice</string>
     <string name="store_tracks_in_daily_directories_descrp">Înregistrați trasee în sub-foldere în fiecare zi de înregistrare (cum ar fi 2018-01-01).</string>
-    <string name="shared_string_memory_used_tb_desc">Utilizat%1$s TB</string>
-    <string name="shared_string_memory_used_gb_desc">Utilizat%1$s GB</string>
-    <string name="shared_string_memory_used_mb_desc">Utilizat%1$s MB</string>
-    <string name="shared_string_memory_used_kb_desc">Utilizat%1$s kB</string>
+    <string name="shared_string_memory_used_tb_desc">Utilizat %1$s TB</string>
+    <string name="shared_string_memory_used_gb_desc">Utilizat %1$s GB</string>
+    <string name="shared_string_memory_used_mb_desc">Utilizat %1$s MB</string>
+    <string name="shared_string_memory_used_kb_desc">Utilizat %1$s kB</string>
     <string name="contour_lines_and_hillshade">Hărți cu Linii de contur și relief</string>
     <string name="routing_attr_prefer_unpaved_name">Prefer drumurile neasfaltate</string>
     <string name="routing_attr_prefer_unpaved_description">Prefer drumurile neasfaltate.</string>
     <string name="update_all_maps">Actualizați toate hărțile</string>
-    <string name="update_all_maps_q">Sigur actualizați toate hărțile (%1 $ d)\?</string>
+    <string name="update_all_maps_q">Sigur actualizați toate hărțile (%1$d)\?</string>
     <string name="release_3_5">• Setări actualizate pentru aplicații și profil: Setările sunt acum aranjate în funcție de tip. Fiecare profil poate fi personalizat separat.
 \n
 \n • Dialog nou de descărcare a hărții care sugerează o descărcare a hărții în timpul navigării
@@ -2496,9 +2496,9 @@
 \n • Alte bug-uri
 \n
 \n</string>
-    <string name="swap_two_places">Schimbă% 1 $ s și% 2 $ s</string>
+    <string name="swap_two_places">Schimbă %1$s și %2$s</string>
     <string name="track_saved">Traseu salvat</string>
     <string name="empty_filename">Numele fișierului este gol</string>
     <string name="shared_string_revert">Revenire</string>
-    <string name="clear_confirmation_msg">Șterge%1$s\?</string>
+    <string name="clear_confirmation_msg">Șterge %1$s\?</string>
 </resources>
