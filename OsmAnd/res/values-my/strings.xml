@@ -409,4 +409,10 @@
     <string name="shared_string_added">ထည့်သည်</string>
     <string name="empty_state_av_notes">မှတ်စုယူပါ။</string>
     <string name="empty_state_av_notes_desc">အသံ၊ ဗွီဒီယိုသို့မဟုတ်ဓာတ်ပုံမှတ်စုကိုဝစ်ဂျက် (သို့) ဆက်စပ်မီနူးကို သုံး၍ မြေပုံပေါ်ရှိအမှတ်အားလုံးကိုထည့်ပါ။</string>
+    <string name="by_date">နေ့စွဲအလိုက်</string>
+    <string name="by_type">အမျိုးအလိုက်</string>
+    <string name="shared_string_more_without_dots">နောက်ထပ်</string>
+    <string name="appearance_on_the_map">မြေပုံပေါ်တွင်ပုံပန်းသဏ္ဌာန်</string>
+    <string name="favourites_group">အနှစ်သက်ဆုံးအမျိုးအစား</string>
+    <string name="add_group">အဖွဲ့တစ်ဖွဲ့ထည့်ပါ</string>
 </resources>
