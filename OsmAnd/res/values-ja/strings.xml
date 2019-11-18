@@ -707,7 +707,7 @@ POIの更新は利用できません</string>
     <string name="day_night_info">昼/夜の情報</string>
     <string name="map_widget_vector_attributes">描画方法の属性</string>
     <string name="map_widget_renderer">マップスタイル</string>
-    <string name="layer_map_appearance">画面設定</string>
+    <string name="layer_map_appearance">UI設定</string>
     <string name="show_lanes">車線</string>
     <string name="avoid_unpaved">未舗装の道路を避ける</string>
     <string name="avoid_ferries">フェリーを使わない</string>
@@ -722,7 +722,7 @@ POIの更新は利用できません</string>
     <string name="int_continuosly">可能な限り継続</string>
     <string name="screen_is_locked">ロックアイコンのタップでロックが解除されます</string>
     <string name="map_widget_top_text">道路名称(国道、高速道路等)</string>
-    <string name="map_widget_config">画面設定</string>
+    <string name="map_widget_config">UI設定</string>
     <string name="map_widget_back_to_loc">現在地点を表示</string>
     <string name="map_widget_lock_screen">ロック</string>
     <string name="map_widget_compass">コンパス</string>
