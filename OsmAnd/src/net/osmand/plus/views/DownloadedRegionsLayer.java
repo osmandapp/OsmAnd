@@ -74,6 +74,7 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 
 	private int lastCheckMapCx;
 	private int lastCheckMapCy;
+	private int lastCheckMapZoom;
 
 	private static int ZOOM_TO_SHOW_MAP_NAMES = 6;
 	private static int ZOOM_AFTER_BASEMAP = 12;
@@ -238,34 +239,38 @@ public class DownloadedRegionsLayer extends OsmandMapLayer implements IContextMe
 		int zoom = tileBox.getZoom();
 		int cx = tileBox.getCenter31X();
 		int cy = tileBox.getCenter31Y();
-		if (lastCheckMapCx == cx && lastCheckMapCy == cy) {
+		if (lastCheckMapCx == cx && lastCheckMapCy == cy && lastCheckMapZoom == zoom) {
 			return;
 		}
 		lastCheckMapCx = cx;
 		lastCheckMapCy = cy;
+		lastCheckMapZoom = zoom;
+
 		if (app.getSettings().SHOW_DOWNLOAD_MAP_DIALOG.get()
 				&& zoom >= ZOOM_MIN_TO_SHOW_DOWNLOAD_DIALOG && zoom <= ZOOM_MAX_TO_SHOW_DOWNLOAD_DIALOG
 				&& currentObjects != null) {
 			WorldRegion regionData;
+			List<BinaryMapDataObject> selectedObjects = new ArrayList<>();
 			for (int i = 0; i < currentObjects.size(); i++) {
 				final BinaryMapDataObject o = currentObjects.get(i);
-				if (!osmandRegions.contain(o, cx, cy)) {
-					continue;
-				}
 				String fullName = osmandRegions.getFullName(o);
 				regionData = osmandRegions.getRegionData(fullName);
 				if (regionData != null && regionData.isRegionMapDownload()) {
 					String regionDownloadName = regionData.getRegionDownloadName();
-					if (regionDownloadName != null && checkIfObjectDownloaded(regionDownloadName)) {
-						hideDownloadMapToolbar();
-						return;
+					if (regionDownloadName != null) {
+						if (checkIfObjectDownloaded(regionDownloadName)) {
+							hideDownloadMapToolbar();
+							return;
+						} else {
+							selectedObjects.add(o);
+						}
 					}
 				}
 			}
 
 			IndexItem indexItem = null;
 			String name = null;
-			BinaryMapDataObject smallestRegion = app.getRegions().getSmallestBinaryMapDataObjectAt(currentObjects);
+			BinaryMapDataObject smallestRegion = app.getRegions().getSmallestBinaryMapDataObjectAt(selectedObjects);
 			if (smallestRegion != null) {
 				String fullName = osmandRegions.getFullName(smallestRegion);
 				regionData = osmandRegions.getRegionData(fullName);
