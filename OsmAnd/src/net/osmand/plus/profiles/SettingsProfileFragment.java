@@ -45,8 +45,6 @@ public class SettingsProfileFragment extends BaseOsmAndFragment
 
 	private static final Log LOG = PlatformUtil.getLog(SettingsProfileFragment.class);
 
-	public static final String TAG = "SettingsProfileFragment";
-
 	public static final String PROFILE_STRING_KEY = "string_key";
 	public static final String IS_NEW_PROFILE = "new_profile";
 	public static final String IS_USER_PROFILE = "user_profile";
