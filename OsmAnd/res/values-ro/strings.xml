@@ -2420,7 +2420,7 @@
     <string name="configure_profile_info">Setări pentru profil:</string>
     <string name="configure_profile">Configurează profilul</string>
     <string name="switch_profile">Schimbă profilul</string>
-    <string name="application_profile_changed">Profilul aplicației s-a modificat la \"% s\"</string>
+    <string name="application_profile_changed">Profilul aplicației s-a modificat la \"%s\"</string>
     <string name="logcat_buffer">Tampon logcat</string>
     <string name="plugins_settings">Setări plugin</string>
     <string name="shared_string_by_default">În mod implicit</string>
