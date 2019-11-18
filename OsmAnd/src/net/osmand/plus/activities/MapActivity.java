@@ -843,8 +843,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			}
 			if (intent.hasExtra(EditProfileFragment.OPEN_SETTINGS)) {
 				String settingsType = intent.getStringExtra(EditProfileFragment.OPEN_SETTINGS);
+				String appMode = intent.getStringExtra(EditProfileFragment.SELECTED_ITEM);
 				if (EditProfileFragment.OPEN_CONFIG_PROFILE.equals(settingsType)) {
-					BaseSettingsFragment.showInstance(this, SettingsScreenType.CONFIGURE_PROFILE);
+					BaseSettingsFragment.showInstance(this, SettingsScreenType.CONFIGURE_PROFILE, ApplicationMode.valueOfStringKey(appMode, null));
 				}
 				setIntent(null);
 			}

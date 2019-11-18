@@ -369,16 +369,13 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 				if (dataChanged) {
 					needSaveDialog();
 				} else if (getSettings() != null) {
-					activateMode(mode);
-					getSettings().APPLICATION_MODE.set(mode);
-
 					if (activity instanceof EditProfileActivity) {
 						Intent i = new Intent(getActivity(), MapActivity.class);
 						i.putExtra(OPEN_SETTINGS, OPEN_CONFIG_PROFILE);
 						i.putExtra(SELECTED_ITEM, profile.stringKey);
 						startActivity(i);
 					} else {
-						BaseSettingsFragment.showInstance(activity, SettingsScreenType.CONFIGURE_PROFILE);
+						BaseSettingsFragment.showInstance(activity, SettingsScreenType.CONFIGURE_PROFILE, ApplicationMode.valueOfStringKey(profile.stringKey, null));
 					}
 				}
 			}

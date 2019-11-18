@@ -304,7 +304,11 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 				try {
 					FragmentManager fragmentManager = activity.getSupportFragmentManager();
 					if (fragmentManager != null) {
-						settings.APPLICATION_MODE.set(getSelectedAppMode());
+						ApplicationMode selectedMode = getSelectedAppMode();
+						if (!ApplicationMode.values(app).contains(selectedMode)) {
+							ApplicationMode.changeProfileAvailability(selectedMode, true, app);
+						}
+						settings.APPLICATION_MODE.set(selectedMode);
 						fragmentManager.beginTransaction()
 								.remove(this)
 								.addToBackStack(TAG)
