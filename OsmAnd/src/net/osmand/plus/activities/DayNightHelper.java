@@ -8,6 +8,7 @@ import java.util.TimeZone;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.OsmandSettings.DayNightMode;
@@ -58,8 +59,12 @@ public class DayNightHelper implements SensorEventListener {
 	private StateChangedListener<Boolean> sensorStateListener;
 
 	public boolean isNightModeForMapControls() {
-		if (osmandApplication.getSettings().isLightContent()) {
-			return isNightMode();
+		return isNightModeForMapControlsForProfile(osmandApplication.getSettings().APPLICATION_MODE.get());
+	}
+
+	public boolean isNightModeForMapControlsForProfile(ApplicationMode mode) {
+		if (osmandApplication.getSettings().isLightContentForMode(mode)) {
+			return isNightModeForProfile(mode);
 		} else {
 			return true;
 		}
@@ -70,7 +75,11 @@ public class DayNightHelper implements SensorEventListener {
 	 * @return true if day is supposed to be 
 	 */
 	public boolean isNightMode() {
-		DayNightMode dayNightMode = pref.get();
+		return isNightModeForProfile(osmandApplication.getSettings().APPLICATION_MODE.get());
+	}
+
+	public boolean isNightModeForProfile(ApplicationMode mode) {
+		DayNightMode dayNightMode = pref.getModeValue(mode);
 		if (dayNightMode.isDay()) {
 			return false;
 		} else if (dayNightMode.isNight()) {

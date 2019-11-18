@@ -236,8 +236,14 @@ public class OsmandSettings {
 			OsmandPreference pref = getPreference(key);
 			if (pref instanceof CommonPreference) {
 				CommonPreference commonPreference = (CommonPreference) pref;
-				if (!commonPreference.global && !commonPreference.isSetForMode(ApplicationMode.DEFAULT)) {
-					boolean valueSaved = setPreference(key, map.get(key), ApplicationMode.DEFAULT);
+				if (!commonPreference.global) {
+					List<ApplicationMode> modes = commonPreference.general ? Collections.singletonList(ApplicationMode.DEFAULT) : ApplicationMode.allPossibleValues();
+					boolean valueSaved = false;
+					for (ApplicationMode mode : modes) {
+						if (!commonPreference.isSetForMode(mode)) {
+							valueSaved = setPreference(key, map.get(key), mode) || valueSaved;
+						}
+					}
 					if (valueSaved) {
 						settingsAPI.edit(globalPreferences).remove(key).commit();
 					}
@@ -994,10 +1000,24 @@ public class OsmandSettings {
 	public static final String NUMBER_OF_FREE_DOWNLOADS_ID = "free_downloads_v3";
 
 	// this value string is synchronized with settings_pref.xml preference name
-	private final OsmandPreference<String> PLUGINS = new StringPreference("enabled_plugins", MapillaryPlugin.ID).makeProfile();
+	private final OsmandPreference<String> PLUGINS = new StringPreference("enabled_plugins", MapillaryPlugin.ID) {
+		@Override
+		public String getProfileDefaultValue(ApplicationMode mode) {
+			ApplicationMode parent = mode.getParent();
+			if (parent != null && isSetForMode(parent)) {
+				return getModeValue(parent);
+			} else {
+				return super.getProfileDefaultValue(mode);
+			}
+		}
+	}.makeProfile();
 
 	public Set<String> getEnabledPlugins() {
-		String plugs = PLUGINS.get();
+		return getEnabledPluginsForMode(APPLICATION_MODE.get());
+	}
+
+	public Set<String> getEnabledPluginsForMode(ApplicationMode mode) {
+		String plugs = PLUGINS.getModeValue(mode);
 		StringTokenizer toks = new StringTokenizer(plugs, ",");
 		Set<String> res = new LinkedHashSet<String>();
 		while (toks.hasMoreTokens()) {
@@ -1010,7 +1030,11 @@ public class OsmandSettings {
 	}
 
 	public Set<String> getPlugins() {
-		String plugs = PLUGINS.get();
+		return getPluginsForMode(APPLICATION_MODE.get());
+	}
+
+	public Set<String> getPluginsForMode(ApplicationMode mode) {
+		String plugs = PLUGINS.getModeValue(mode);
 		StringTokenizer toks = new StringTokenizer(plugs, ",");
 		Set<String> res = new LinkedHashSet<String>();
 		while (toks.hasMoreTokens()) {
@@ -1019,8 +1043,12 @@ public class OsmandSettings {
 		return res;
 	}
 
-	public void enablePlugin(String pluginId, boolean enable) {
-		Set<String> set = getPlugins();
+	public boolean enablePlugin(String pluginId, boolean enable) {
+		return enablePluginForMode(pluginId, enable, APPLICATION_MODE.get());
+	}
+
+	public boolean enablePluginForMode(String pluginId, boolean enable, ApplicationMode mode) {
+		Set<String> set = getPluginsForMode(mode);
 		if (enable) {
 			set.remove("-" + pluginId);
 			set.add(pluginId);
@@ -1036,9 +1064,10 @@ public class OsmandSettings {
 				serialization.append(",");
 			}
 		}
-		if (!serialization.toString().equals(PLUGINS.get())) {
-			PLUGINS.set(serialization.toString());
+		if (!serialization.toString().equals(PLUGINS.getModeValue(mode))) {
+			return PLUGINS.setModeValue(mode, serialization.toString());
 		}
+		return false;
 	}
 
 
@@ -1128,8 +1157,13 @@ public class OsmandSettings {
 	public final CommonPreference<String> API_NAV_DRAWER_ITEMS_JSON = new StringPreference("api_nav_drawer_items_json", "{}").makeGlobal();
 	public final CommonPreference<String> API_CONNECTED_APPS_JSON = new StringPreference("api_connected_apps_json", "[]") {
 		@Override
-		public String getModeValue(ApplicationMode mode) {
-			return getValue(getProfilePreferences(mode), "[]");
+		public String getProfileDefaultValue(ApplicationMode mode) {
+			ApplicationMode parent = mode.getParent();
+			if (parent != null && isSetForMode(parent)) {
+				return getModeValue(parent);
+			} else {
+				return super.getProfileDefaultValue(mode);
+			}
 		}
 	}.makeProfile();
 
@@ -3190,9 +3224,12 @@ public class OsmandSettings {
 
 
 	public boolean isLightContent() {
-		return OSMAND_THEME.get() != OSMAND_DARK_THEME;
+		return isLightContentForMode(APPLICATION_MODE.get());
 	}
 
+	public boolean isLightContentForMode(ApplicationMode mode) {
+		return OSMAND_THEME.getModeValue(mode) != OSMAND_DARK_THEME;
+	}
 
 	public final CommonPreference<Boolean> FLUORESCENT_OVERLAYS =
 			new BooleanPreference("fluorescent_overlays", false).makeGlobal().cache();

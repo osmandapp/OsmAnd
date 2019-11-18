@@ -51,6 +51,7 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 	private final MapActivity map;
 	private OsmandMapTileView view;
 
+	private String packName;
 	private AidlMapLayerWrapper aidlLayer;
 
 	private Paint pointInnerCircle;
@@ -77,9 +78,10 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 	private Set<String> imageRequests = new HashSet<>();
 	private List<AidlMapPointWrapper> displayedPoints = new ArrayList<>();
 
-	public AidlMapLayer(MapActivity map, AidlMapLayerWrapper aidlLayer) {
+	public AidlMapLayer(MapActivity map, AidlMapLayerWrapper aidlLayer, String packName) {
 		this.map = map;
 		this.aidlLayer = aidlLayer;
+		this.packName = packName;
 	}
 
 	@Override
@@ -137,34 +139,36 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 		displayedPoints.clear();
 		imageRequests.clear();
 
-		canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
+		if (isAppEnabled()) {
+			canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 
-		String selectedPointId = getSelectedContextMenuPointId();
-		for (AidlMapPointWrapper point : aidlLayer.getPoints()) {
-			LatLon l = point.getLocation();
-			if (l != null) {
-				int x = (int) tileBox.getPixXFromLatLon(l.getLatitude(), l.getLongitude());
-				int y = (int) tileBox.getPixYFromLatLon(l.getLatitude(), l.getLongitude());
-				if (tileBox.containsPoint(x, y, bigIconSize)) {
-					Bitmap image = null;
-					if (pointsType != PointsType.STANDARD) {
-						String imageUri = point.getParams().get(AMapPoint.POINT_IMAGE_URI_PARAM);
-						if (!TextUtils.isEmpty(imageUri)) {
-							image = pointImages.get(imageUri);
-							if (image == null) {
-								imageRequests.add(imageUri);
+			String selectedPointId = getSelectedContextMenuPointId();
+			for (AidlMapPointWrapper point : aidlLayer.getPoints()) {
+				LatLon l = point.getLocation();
+				if (l != null) {
+					int x = (int) tileBox.getPixXFromLatLon(l.getLatitude(), l.getLongitude());
+					int y = (int) tileBox.getPixYFromLatLon(l.getLatitude(), l.getLongitude());
+					if (tileBox.containsPoint(x, y, bigIconSize)) {
+						Bitmap image = null;
+						if (pointsType != PointsType.STANDARD) {
+							String imageUri = point.getParams().get(AMapPoint.POINT_IMAGE_URI_PARAM);
+							if (!TextUtils.isEmpty(imageUri)) {
+								image = pointImages.get(imageUri);
+								if (image == null) {
+									imageRequests.add(imageUri);
+								}
 							}
 						}
+						displayedPoints.add(point);
+						boolean selected = selectedPointId != null && selectedPointId.equals(point.getId());
+						drawPoint(canvas, x, y, tileBox, point, image, selected);
 					}
-					displayedPoints.add(point);
-					boolean selected = selectedPointId != null && selectedPointId.equals(point.getId());
-					drawPoint(canvas, x, y, tileBox, point, image, selected);
 				}
 			}
-		}
 
-		if (imageRequests.size() > 0) {
-			executeTaskInBackground(new PointImageReaderTask(this), imageRequests.toArray(new String[imageRequests.size()]));
+			if (imageRequests.size() > 0) {
+				executeTaskInBackground(new PointImageReaderTask(this), imageRequests.toArray(new String[imageRequests.size()]));
+			}
 		}
 		mapTextLayer.putData(this, displayedPoints);
 	}
@@ -230,6 +234,14 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 		return Boolean.parseBoolean(point.getParams().get(AMapPoint.POINT_STALE_LOC_PARAM));
 	}
 
+	private boolean isAppEnabled() {
+		return map.getMyApplication().getAidlApi().isAppEnabled(packName);
+	}
+
+	public String getPackName() {
+		return packName;
+	}
+
 	@Override
 	public void destroyLayer() {
 	}
@@ -261,7 +273,9 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 
 	@Override
 	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o, boolean unknownLocation) {
-		getFromPoint(tileBox, point, o);
+		if (isAppEnabled()) {
+			getFromPoint(tileBox, point, o);
+		}
 	}
 
 	@Override

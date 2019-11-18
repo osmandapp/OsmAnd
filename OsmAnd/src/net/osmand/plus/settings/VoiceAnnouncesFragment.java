@@ -40,8 +40,9 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 		view.findViewById(R.id.toolbar_switch_container).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				boolean checked = !settings.SPEAK_ROUTING_ALARMS.get();
-				settings.SPEAK_ROUTING_ALARMS.set(checked);
+				ApplicationMode selectedMode = getSelectedAppMode();
+				boolean checked = !settings.SPEAK_ROUTING_ALARMS.getModeValue(selectedMode);
+				settings.SPEAK_ROUTING_ALARMS.setModeValue(selectedMode, checked);
 				updateToolbarSwitch();
 				enableDisablePreferences(checked);
 			}
@@ -59,7 +60,7 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 		if (view == null) {
 			return;
 		}
-		boolean checked = settings.SPEAK_ROUTING_ALARMS.get();
+		boolean checked = settings.SPEAK_ROUTING_ALARMS.getModeValue(getSelectedAppMode());
 
 		int color = checked ? getActiveProfileColor() : ContextCompat.getColor(app, R.color.preference_top_switch_off);
 		View switchContainer = view.findViewById(R.id.toolbar_switch_container);
@@ -87,14 +88,14 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 			setupAudioStreamGuidancePref();
 			setupInterruptMusicPref();
 		}
-		enableDisablePreferences(settings.SPEAK_ROUTING_ALARMS.get());
+		enableDisablePreferences(settings.SPEAK_ROUTING_ALARMS.getModeValue(getSelectedAppMode()));
 	}
 
 	private void setupSpeedLimitExceedPref() {
 		Float[] speedLimitValues;
 		String[] speedLimitNames;
 
-		if (settings.METRIC_SYSTEM.get() == OsmandSettings.MetricsConstants.KILOMETERS_AND_METERS) {
+		if (settings.METRIC_SYSTEM.getModeValue(getSelectedAppMode()) == OsmandSettings.MetricsConstants.KILOMETERS_AND_METERS) {
 			speedLimitValues = new Float[] {-10f, -7f, -5f, 0f, 5f, 7f, 10f, 15f, 20f};
 			speedLimitNames = new String[speedLimitValues.length];
 
@@ -206,7 +207,7 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				settings.SPEAK_SPEED_CAMERA.set(true);
+				settings.SPEAK_SPEED_CAMERA.setModeValue(getSelectedAppMode(), true);
 				SwitchPreferenceCompat speakSpeedCamera = (SwitchPreferenceCompat) findPreference(settings.SPEAK_SPEED_CAMERA.getId());
 				if (speakSpeedCamera != null) {
 					speakSpeedCamera.setChecked(true);
@@ -220,6 +221,7 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 	@Override
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
 		String prefId = preference.getKey();
+		ApplicationMode selectedMode = getSelectedAppMode();
 
 		if (prefId.equals(settings.VOICE_PROVIDER.getId())) {
 			if (MORE_VALUE.equals(newValue)) {
@@ -229,13 +231,13 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 				intent.putExtra(DownloadActivity.FILTER_CAT, DownloadActivityType.VOICE_FILE.getTag());
 				startActivity(intent);
 			} else if (newValue instanceof String) {
-				settings.VOICE_PROVIDER.set((String) newValue);
-				app.initVoiceCommandPlayer(getActivity(), getSelectedAppMode(), false, null, true, false);
+				settings.VOICE_PROVIDER.setModeValue(selectedMode, (String) newValue);
+				app.initVoiceCommandPlayer(getActivity(), selectedMode, false, null, true, false, false);
 			}
 			return true;
 		}
 		if (prefId.equals(settings.SPEAK_SPEED_CAMERA.getId())) {
-			if (!settings.SPEAK_SPEED_CAMERA.get()) {
+			if (!settings.SPEAK_SPEED_CAMERA.getModeValue(selectedMode)) {
 				confirmSpeedCamerasDlg();
 				return false;
 			} else {

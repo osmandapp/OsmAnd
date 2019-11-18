@@ -175,11 +175,17 @@ public class RoutingOptionsHelper {
 		}
 	}
 
-	public void applyVoiceProvider(MapActivity mapActivity, String provider) {
+	public void applyVoiceProvider(MapActivity mapActivity, String provider, boolean applyAllModes) {
 		OsmandApplication app = mapActivity.getMyApplication();
 		ApplicationMode selectedAppMode = app.getRoutingHelper().getAppMode();
-		app.getSettings().VOICE_PROVIDER.setModeValue(selectedAppMode, provider);
-		app.initVoiceCommandPlayer(mapActivity, selectedAppMode, false, null, true, false);
+		if (applyAllModes) {
+			for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
+				app.getSettings().VOICE_PROVIDER.setModeValue(mode, provider);
+			}
+		} else {
+			app.getSettings().VOICE_PROVIDER.setModeValue(selectedAppMode, provider);
+		}
+		app.initVoiceCommandPlayer(mapActivity, selectedAppMode, false, null, true, false, applyAllModes);
 	}
 
 	public Set<String> getVoiceFiles(Activity activity) {

@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.R;
 
 public class ScreenAlertsFragment extends BaseSettingsFragment {
@@ -38,7 +39,7 @@ public class ScreenAlertsFragment extends BaseSettingsFragment {
 		showTunnels.setIcon(getIcon(R.drawable.list_warnings_tunnel));
 
 		setupScreenAlertsImage();
-		enableDisablePreferences(settings.SHOW_ROUTING_ALARMS.get());
+		enableDisablePreferences(settings.SHOW_ROUTING_ALARMS.getModeValue(getSelectedAppMode()));
 	}
 
 	@Override
@@ -48,8 +49,9 @@ public class ScreenAlertsFragment extends BaseSettingsFragment {
 		view.findViewById(R.id.toolbar_switch_container).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				boolean checked = !settings.SHOW_ROUTING_ALARMS.get();
-				settings.SHOW_ROUTING_ALARMS.set(checked);
+				ApplicationMode selectedMode = getSelectedAppMode();
+				boolean checked = !settings.SHOW_ROUTING_ALARMS.getModeValue(selectedMode);
+				settings.SHOW_ROUTING_ALARMS.setModeValue(selectedMode, checked);
 				updateToolbarSwitch();
 				enableDisablePreferences(checked);
 			}
@@ -67,7 +69,7 @@ public class ScreenAlertsFragment extends BaseSettingsFragment {
 		if (view == null) {
 			return;
 		}
-		boolean checked = settings.SHOW_ROUTING_ALARMS.get();
+		boolean checked = settings.SHOW_ROUTING_ALARMS.getModeValue(getSelectedAppMode());
 
 		int color = checked ? getActiveProfileColor() : ContextCompat.getColor(app, R.color.preference_top_switch_off);
 		View switchContainer = view.findViewById(R.id.toolbar_switch_container);
@@ -122,14 +124,15 @@ public class ScreenAlertsFragment extends BaseSettingsFragment {
 	}
 
 	private Drawable getWarningIcon() {
-		boolean americanSigns = settings.DRIVING_REGION.get().americanSigns;
-		if (settings.SHOW_TRAFFIC_WARNINGS.get()) {
+		ApplicationMode selectedMode = getSelectedAppMode();
+		boolean americanSigns = settings.DRIVING_REGION.getModeValue(selectedMode).americanSigns;
+		if (settings.SHOW_TRAFFIC_WARNINGS.getModeValue(selectedMode)) {
 			return getIcon(americanSigns ? R.drawable.warnings_traffic_calming_us : R.drawable.warnings_traffic_calming);
-		} else if (settings.SHOW_PEDESTRIAN.get()) {
+		} else if (settings.SHOW_PEDESTRIAN.getModeValue(selectedMode)) {
 			return getIcon(americanSigns ? R.drawable.warnings_pedestrian_us : R.drawable.warnings_pedestrian);
-		} else if (settings.SHOW_CAMERAS.get()) {
+		} else if (settings.SHOW_CAMERAS.getModeValue(selectedMode)) {
 			return getIcon(R.drawable.warnings_speed_camera);
-		} else if (settings.SHOW_TUNNELS.get()) {
+		} else if (settings.SHOW_TUNNELS.getModeValue(selectedMode)) {
 			return getIcon(americanSigns ? R.drawable.warnings_tunnel_us : R.drawable.warnings_tunnel);
 		}
 

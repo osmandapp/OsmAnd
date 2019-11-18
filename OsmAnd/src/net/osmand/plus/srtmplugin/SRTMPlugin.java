@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 
 import net.osmand.AndroidUtils;
+import net.osmand.data.LatLon;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
@@ -20,13 +21,19 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.dashboard.DashboardOnMap;
+import net.osmand.plus.download.DownloadActivityType;
+import net.osmand.plus.download.DownloadIndexesThread;
+import net.osmand.plus.download.DownloadResources;
+import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.util.Algorithms;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.CONTOUR_LINES;
@@ -36,6 +43,9 @@ public class SRTMPlugin extends OsmandPlugin {
 
 	public static final String ID = "osmand.srtm";
 	public static final String FREE_ID = "osmand.srtm.paid";
+
+	private static final String SRTM_PLUGIN_COMPONENT_PAID = "net.osmand.srtmPlugin.paid";
+	private static final String SRTM_PLUGIN_COMPONENT = "net.osmand.srtmPlugin";
 
 	public static final String CONTOUR_LINES_ATTR = "contourLines";
 	public static final String CONTOUR_LINES_SCHEME_ATTR = "contourColorScheme";
@@ -72,6 +82,26 @@ public class SRTMPlugin extends OsmandPlugin {
 	@Override
 	public boolean needsInstallation() {
 		return super.needsInstallation() && !InAppPurchaseHelper.isSubscribedToLiveUpdates(app);
+	}
+
+	@Override
+	public boolean isMarketPlugin() {
+		return true;
+	}
+
+	@Override
+	public boolean isPaid() {
+		return true;
+	}
+
+	@Override
+	public String getComponentId1() {
+		return SRTM_PLUGIN_COMPONENT_PAID;
+	}
+
+	@Override
+	public String getComponentId2() {
+		return SRTM_PLUGIN_COMPONENT;
 	}
 
 	@Override
@@ -249,6 +279,37 @@ public class SRTMPlugin extends OsmandPlugin {
 				.setListener(listener)
 				.setPosition(13)
 				.createItem());
+	}
+
+	@Override
+	public List<IndexItem> getSuggestedMaps() {
+		List<IndexItem> suggestedMaps = new ArrayList<>();
+
+		DownloadIndexesThread downloadThread = app.getDownloadThread();
+		if (!downloadThread.getIndexes().isDownloadedFromInternet && settings.isInternetConnectionAvailable()) {
+			downloadThread.runReloadIndexFiles();
+		}
+
+		boolean downloadIndexes = settings.isInternetConnectionAvailable()
+				&& !downloadThread.getIndexes().isDownloadedFromInternet
+				&& !downloadThread.getIndexes().downloadFromInternetFailed;
+
+		if (!downloadIndexes) {
+			LatLon latLon = app.getMapViewTrackingUtilities().getMapLocation();
+			suggestedMaps.addAll(getMapsForType(latLon, DownloadActivityType.SRTM_COUNTRY_FILE));
+			suggestedMaps.addAll(getMapsForType(latLon, DownloadActivityType.HILLSHADE_FILE));
+		}
+
+		return suggestedMaps;
+	}
+
+	private List<IndexItem> getMapsForType(LatLon latLon, DownloadActivityType type) {
+		try {
+			return DownloadResources.findIndexItemsAt(app, latLon, type);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return Collections.emptyList();
 	}
 
 	public void toggleContourLines(final MapActivity activity,
