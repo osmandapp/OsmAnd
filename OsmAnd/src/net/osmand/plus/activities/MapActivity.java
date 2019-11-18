@@ -588,8 +588,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				? mapLayers.getRouteLayer().getRouteLineColor(nightMode)
 				: ContextCompat.getColor(this, R.color.wikivoyage_active_light);
 
+		RoutingHelper routingHelper = getRoutingHelper();
 		pb.setProgressDrawable(AndroidUtils.createProgressDrawable(bgColor, progressColor));
-		pb.setIndeterminate(getRoutingHelper().isPublicTransportMode());
+		pb.setIndeterminate(routingHelper.isPublicTransportMode() || !routingHelper.isOsmandRouting());
 		pb.getIndeterminateDrawable().setColorFilter(progressColor, android.graphics.PorterDuff.Mode.SRC_IN);
 	}
 
