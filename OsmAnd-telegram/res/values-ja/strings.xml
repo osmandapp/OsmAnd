@@ -119,4 +119,10 @@
     <string name="live_now_description">位置情報を共有する連絡先とグループです。</string>
     <string name="logout_from_osmand_telegram_descr">自身の居場所や他のユーザーの場所を共有および表示しないよう、OsmAnd Trackerからログアウトしますか？</string>
     <string name="logout_from_osmand_telegram">OsmAnd Trackerからログアウトしますか？</string>
+    <string name="shared_string_name">名前</string>
+    <string name="by_distance">距離で</string>
+    <string name="by_name">名前で</string>
+    <string name="by_group">グループで</string>
+    <string name="shared_string_sort">並び替え</string>
+    <string name="shared_string_sort_by">並び替え：</string>
 </resources>
