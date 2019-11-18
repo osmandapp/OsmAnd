@@ -2487,7 +2487,7 @@ Pôr do Sol: %2$s</string>
     <string name="quick_action_interim_dialog">Mostrar um diálogo intermediário</string>
     <string name="favorite_autofill_toast_text">" salvo no "</string>
     <string name="favorite_empty_place_name">Lugar</string>
-    <string name="quick_action_duplicates">"Ação rápida renomeada para  %1$s para evitar duplicação."</string>
+    <string name="quick_action_duplicates">Ação rápida renomeada para %1$s para evitar duplicação.</string>
     <string name="quick_action_duplicate">Nome de ação rápida duplicado</string>
     <string name="quick_action_showhide_favorites_descr">Um botão que mostra ou oculta os pontos dos Favoritos no mapa.</string>
     <string name="quick_action_showhide_poi_descr">Um botão que mostra ou oculta POIs no mapa.</string>
