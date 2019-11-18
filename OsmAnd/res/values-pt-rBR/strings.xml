@@ -2487,7 +2487,7 @@ Pôr do Sol: %2$s</string>
     <string name="quick_action_interim_dialog">Mostrar um diálogo intermediário</string>
     <string name="favorite_autofill_toast_text">" salvo no "</string>
     <string name="favorite_empty_place_name">Lugar</string>
-    <string name="quick_action_duplicates">Nome de ação rápida especificada já em uso foi mudado para %1$s para evitar a duplicação.</string>
+    <string name="quick_action_duplicates">"Ação rápida renomeada para  %1$s para evitar duplicação."</string>
     <string name="quick_action_duplicate">Nome de ação rápida duplicado</string>
     <string name="quick_action_showhide_favorites_descr">Um botão que mostra ou oculta os pontos dos Favoritos no mapa.</string>
     <string name="quick_action_showhide_poi_descr">Um botão que mostra ou oculta POIs no mapa.</string>
@@ -2527,13 +2527,13 @@ Pôr do Sol: %2$s</string>
     <string name="quick_action_btn_tutorial_title">Mudar posição do botão</string>
     <string name="quick_action_btn_tutorial_descr">Segure e arraste o botão para mudar a sua posição na tela.</string>
     <string name="shared_string_action_name">Nome da ação</string>
-    <string name="mappilary_no_internet_desc">Você precisa estar conectado à Internet para ver fotos do Mapillary.</string>
+    <string name="mappilary_no_internet_desc">As fotos do Mapillary estão disponíveis apenas online.</string>
     <string name="retry">Repetir</string>
     <string name="add_route_points">Adicionar Pontos de Rota</string>
     <string name="add_waypoint">Adicionar Ponto de Passagem</string>
     <string name="add_line">Adicionar Linha</string>
     <string name="save_gpx_waypoint">Salvar Ponto de Passagem GPX</string>
-    <string name="save_route_point">Salvar Ponto de Rota</string>
+    <string name="save_route_point">Salvar ponto de rota</string>
     <string name="waypoint_one">Ponto de Passagem 1</string>
     <string name="route_point_one">Ponto de Rota 1</string>
     <string name="empty_state_my_tracks">Adicione arquivos GPX</string>
@@ -3113,7 +3113,7 @@ Pôr do Sol: %2$s</string>
     <string name="routing_attr_difficulty_preference_name">Dificuldade preferida</string>
     <string name="routing_attr_difficulty_preference_description">Prefira rotas dessa dificuldade, embora o roteamento em pistas mais difíceis ou mais fáceis ainda seja possível se for mais curto.</string>
     <string name="routing_attr_freeride_policy_name">Fora de pista</string>
-    <string name="routing_attr_freeride_policy_description">Freerides e offpiste são rotas e passagens não oficiais. Normalmente sem estilo, sem manutenção dos funcionários e não checado à noite. Digite a risco próprio.</string>
+    <string name="routing_attr_freeride_policy_description">Freeride e offpiste são rotas e passagens não oficiais. Normalmente sem estilo, sem manutenção dos funcionários e não checado à noite. Digite a risco próprio.</string>
     <string name="process_downloading_service">Serviço de download do OsmAnd</string>
     <string name="shared_string_color_magenta">Magenta</string>
     <string name="shared_string_icon">Ícone</string>
