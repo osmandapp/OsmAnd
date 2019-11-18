@@ -1444,7 +1444,7 @@ POIの更新は利用できません</string>
     <string name="proxy_port_descr">プロキシのポート番号を設定します(例：8118)</string>
     <string name="voices">音声指示</string>
     <string name="shared_string_disabled">無効</string>
-    <string name="shared_string_enabled">有効</string>
+    <string name="shared_string_enabled">有効化</string>
     <string name="osmand_parking_overdue">超過しています</string>
     <string name="action_create">アクションの作成</string>
     <string name="action_modify">アクションの変更</string>
@@ -1465,7 +1465,7 @@ POIの更新は利用できません</string>
     <string name="general_settings_2">全般設定</string>
     <string name="shared_string_ellipsis">…</string>
     <string name="shared_string_enable">有効</string>
-    <string name="shared_string_disable">無効</string>
+    <string name="shared_string_disable">無効化</string>
     <string name="shared_string_selected">選択済み</string>
     <string name="shared_string_deselect">選択解除</string>
     <string name="shared_string_deselect_all">全て選択解除</string>
@@ -1812,7 +1812,7 @@ POIの更新は利用できません</string>
     <string name="routing_attr_avoid_stairs_name">階段を避ける</string>
     <string name="routing_attr_avoid_stairs_description">移動時に階段を避けるようにします</string>
     <string name="routing_attr_avoid_borders_name">国境検問所を通らない</string>
-    <string name="shared_string_status">状態</string>
+    <string name="shared_string_status">ステータス</string>
     <string name="shared_string_save_changes">変更の保存</string>
     <string name="shared_string_email_address">電子メールアドレス</string>
     <string name="rendering_attr_hideUnderground_name">地下の建造物</string>
