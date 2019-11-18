@@ -44,6 +44,9 @@ public class SRTMPlugin extends OsmandPlugin {
 	public static final String ID = "osmand.srtm";
 	public static final String FREE_ID = "osmand.srtm.paid";
 
+	private static final String SRTM_PLUGIN_COMPONENT_PAID = "net.osmand.srtmPlugin.paid";
+	private static final String SRTM_PLUGIN_COMPONENT = "net.osmand.srtmPlugin";
+
 	public static final String CONTOUR_LINES_ATTR = "contourLines";
 	public static final String CONTOUR_LINES_SCHEME_ATTR = "contourColorScheme";
 	public static final String CONTOUR_LINES_DISABLED_VALUE = "disabled";
@@ -79,6 +82,26 @@ public class SRTMPlugin extends OsmandPlugin {
 	@Override
 	public boolean needsInstallation() {
 		return super.needsInstallation() && !InAppPurchaseHelper.isSubscribedToLiveUpdates(app);
+	}
+
+	@Override
+	public boolean isMarketPlugin() {
+		return true;
+	}
+
+	@Override
+	public boolean isPaid() {
+		return true;
+	}
+
+	@Override
+	public String getComponentId1() {
+		return SRTM_PLUGIN_COMPONENT_PAID;
+	}
+
+	@Override
+	public String getComponentId2() {
+		return SRTM_PLUGIN_COMPONENT;
 	}
 
 	@Override

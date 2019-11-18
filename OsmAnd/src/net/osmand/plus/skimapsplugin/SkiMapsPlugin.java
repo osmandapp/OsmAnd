@@ -43,6 +43,15 @@ public class SkiMapsPlugin extends OsmandPlugin {
 		return R.drawable.ski_map;
 	}
 
+	@Override
+	public boolean isMarketPlugin() {
+		return true;
+	}
+
+	@Override
+	public String getComponentId1() {
+		return COMPONENT;
+	}
 
 	@Override
 	public String getHelpFileName() {

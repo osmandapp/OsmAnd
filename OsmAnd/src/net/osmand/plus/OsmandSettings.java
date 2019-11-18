@@ -1013,7 +1013,11 @@ public class OsmandSettings {
 	}.makeProfile();
 
 	public Set<String> getEnabledPlugins() {
-		String plugs = PLUGINS.get();
+		return getEnabledPluginsForMode(APPLICATION_MODE.get());
+	}
+
+	public Set<String> getEnabledPluginsForMode(ApplicationMode mode) {
+		String plugs = PLUGINS.getModeValue(mode);
 		StringTokenizer toks = new StringTokenizer(plugs, ",");
 		Set<String> res = new LinkedHashSet<String>();
 		while (toks.hasMoreTokens()) {
@@ -1039,11 +1043,11 @@ public class OsmandSettings {
 		return res;
 	}
 
-	public void enablePlugin(String pluginId, boolean enable) {
-		enablePluginForMode(pluginId, enable, APPLICATION_MODE.get());
+	public boolean enablePlugin(String pluginId, boolean enable) {
+		return enablePluginForMode(pluginId, enable, APPLICATION_MODE.get());
 	}
 
-	public void enablePluginForMode(String pluginId, boolean enable, ApplicationMode mode) {
+	public boolean enablePluginForMode(String pluginId, boolean enable, ApplicationMode mode) {
 		Set<String> set = getPluginsForMode(mode);
 		if (enable) {
 			set.remove("-" + pluginId);
@@ -1061,8 +1065,9 @@ public class OsmandSettings {
 			}
 		}
 		if (!serialization.toString().equals(PLUGINS.getModeValue(mode))) {
-			PLUGINS.setModeValue(mode, serialization.toString());
+			return PLUGINS.setModeValue(mode, serialization.toString());
 		}
+		return false;
 	}
 
 

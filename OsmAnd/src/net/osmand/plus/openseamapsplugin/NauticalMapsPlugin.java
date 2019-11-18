@@ -44,6 +44,16 @@ public class NauticalMapsPlugin extends OsmandPlugin {
 	}
 
 	@Override
+	public boolean isMarketPlugin() {
+		return true;
+	}
+
+	@Override
+	public String getComponentId1() {
+		return COMPONENT;
+	}
+
+	@Override
 	public String getDescription() {
 		return app.getString(net.osmand.plus.R.string.plugin_nautical_descr);
 	}
