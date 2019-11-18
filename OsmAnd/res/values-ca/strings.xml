@@ -1358,9 +1358,9 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="print_route">Imprimeix la ruta</string>
     <string name="speed_limit_exceed">Tolerància sobre el límit de velocitat</string>
     <string name="speed_limit_exceed_message">Trieu el marge de tolerància al límit de velocitat per sobre del que rebreu un avís de veu.</string>
-    <string name="anonymous_user_hint">Un usuari anònim no pot:
-\n- Crear grups;
-\n- Sincronitzar grups i dispositius amb el servidor;
+    <string name="anonymous_user_hint">Els usuaris anònims no poden: 
+\n- Crear grups; 
+\n- Sincronitzar grups i dispositius amb el servidor; 
 \n- Gestionar grups i dispositius en un tauler personal a la web.</string>
     <string name="anonymous_user">Usuari anònim</string>
     <string name="logged_as">S\'ha iniciat sessió com a %1$s</string>
@@ -2039,13 +2039,13 @@ L\'espai disponible és només de {2} MB.</string>
     <string name="no_update_info_desc">No comprovis noves versions ni ofertes relatives a OsmAnd.</string>
     <string name="no_update_info">No mostris noves versions</string>
     <string name="skip_map_downloading">Omet els mapes en procés de baixada</string>
-    <string name="skip_map_downloading_desc">"No disposeu de cap mapa instal·lat localment. Podeu triar un mapa de la llista o baixar-ne més tard via \'Menú -  %1$s\'."</string>
+    <string name="skip_map_downloading_desc">"No disposeu de cap mapa local. Podeu triar un mapa de la llista o baixar mapes més tard via \'Menú -  %1$s\'."</string>
     <string name="search_another_country">Selecciona un altre país</string>
     <string name="first_usage_greeting">Obteniu indicacions i descobriu llocs nous sense connexió a Internet</string>
     <string name="si_mi_meters">Milles/metres</string>
     <string name="get_for">Obteniu-lo per %1$s</string>
     <string name="get_for_month">Obteniu-lo per %1$s al mes</string>
-    <string name="osm_live_banner_desc">Obteniu nous mapes i actualitzacions sense límit més d\'un cop al mes: cada hora, dia o setmana.</string>
+    <string name="osm_live_banner_desc">Obteniu baixades il·limitades de mapes, incloent actualitzacions setmanals, diàries o, fins i tot, horàries.</string>
     <string name="osmand_plus_banner_desc">Baixada il·limitada de mapes, actualitzacions i el connector Viquipèdia.</string>
     <string name="get_it">Obteniu-lo</string>
     <string name="osm_live_payment_desc">Subscripció mensual. Quan vulgueu cancel·lar-la feu-ho des de Google Play.</string>
@@ -2075,8 +2075,8 @@ L\'espai disponible és només de {2} MB.</string>
     <string name="save_track_precision">Precisió mínima de l\'enregistrament</string>
     <string name="save_track_precision_descr">Filtre: No enregistris sense aquesta precisió mínima.</string>
     <string name="christmas_poi">PDI Nadal</string>
-    <string name="christmas_desc">Per planificar les vacances de Nadal i Any nou, podeu fer visibles els PDI associats amb el Nadal: arbres de Nadal, mercats, etc.</string>
-    <string name="christmas_desc_q">Voleu mostrar els PDI de Nadal?</string>
+    <string name="christmas_desc">Per planificar les festes de Nadal i Any nou, podeu fer visibles PDI associats com arbres de Nadal, mercats, etc.</string>
+    <string name="christmas_desc_q">Voleu mostrar PDI nadalencs\?</string>
     <string name="rendering_value_light_brown_name">Marró clar</string>
     <string name="rendering_value_dark_brown_name">Marró fosc</string>
     <string name="rendering_attr_contourColorScheme_name">Esquema de color de les línies de contorn</string>
@@ -2090,7 +2090,7 @@ L\'espai disponible és només de {2} MB.</string>
     <string name="gpx_logging_no_data">No hi ha dades</string>
     <string name="shared_string_notifications">Notificacions</string>
     <string name="trip_rec_notification_settings">Habilita l\'enregistrament d\'inici ràpid</string>
-    <string name="trip_rec_notification_settings_desc">Mostra una notificació de sistema en permetre començar l\'enregistrament de la ruta.</string>
+    <string name="trip_rec_notification_settings_desc">Mostra una notificació de sistema que es permet l\'enregistrament de la ruta.</string>
     <string name="gpx_no_tracks_title">No teniu encara cap fitxer GPX</string>
     <string name="gpx_no_tracks_title_folder">També podeu afegir fitxers GPX a la carpeta</string>
     <string name="gpx_add_track">Afegeix més…</string>
@@ -3398,4 +3398,10 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="rendering_value_white_name">Blanc</string>
     <string name="swap_two_places">Bescanvia %1$s i %2$s</string>
     <string name="route_start_point">Punt d\'inici</string>
+    <string name="track_saved">La traça s\'ha desat</string>
+    <string name="empty_filename">No hi ha nom del fitxer</string>
+    <string name="shared_string_revert">Reverteix</string>
+    <string name="clear_confirmation_msg">Voleu netejar %1$s\?</string>
+    <string name="dialogs_and_notifications_title">Diàlegs i notificacions</string>
+    <string name="dialogs_and_notifications_descr">Emergents de control, diàlegs i notificacions que surten a OsmAnd mentre s\'utilitza.</string>
 </resources>

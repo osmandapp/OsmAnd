@@ -2483,14 +2483,14 @@ Pôr do Sol: %2$s</string>
     <string name="quick_action_take_photo_note_descr">Um botão que adiciona uma nota fotográfica no meio da tela.</string>
     <string name="quick_action_add_osm_bug_descr">Um botão que adiciona uma nota OSM no meio da tela.</string>
     <string name="quick_action_add_poi_descr">Um botão que adiciona um POI no meio da tela.</string>
-    <string name="quick_action_navigation_voice_descr">Tocar no botão de ação irá ativar ou desativar a orientação por voz durante a navegação.</string>
+    <string name="quick_action_navigation_voice_descr">Um botão que desativa ou ativa orientação por voz durante a navegação.</string>
     <string name="quick_action_interim_dialog">Mostrar um diálogo intermediário</string>
     <string name="favorite_autofill_toast_text">" salvo no "</string>
     <string name="favorite_empty_place_name">Lugar</string>
-    <string name="quick_action_duplicates">Nome de ação rápida especificada já em uso foi mudado para %1$s para evitar a duplicação.</string>
+    <string name="quick_action_duplicates">Ação rápida renomeada para %1$s para evitar duplicação.</string>
     <string name="quick_action_duplicate">Nome de ação rápida duplicado</string>
     <string name="quick_action_showhide_favorites_descr">Um botão que mostra ou oculta os pontos dos Favoritos no mapa.</string>
-    <string name="quick_action_showhide_poi_descr">Tocar neste botão de ação mostra ou oculta POIs no mapa.</string>
+    <string name="quick_action_showhide_poi_descr">Um botão que mostra ou oculta POIs no mapa.</string>
     <string name="quick_action_showhide_favorites_title">Mostrar/ocultar favoritos</string>
     <string name="quick_action_favorites_show">Mostrar Favoritos</string>
     <string name="quick_action_favorites_hide">Ocultar favoritos</string>
@@ -2515,7 +2515,7 @@ Pôr do Sol: %2$s</string>
     <string name="quick_action_map_overlay">Alterar sobreposição de mapa</string>
     <string name="quick_action_map_overlay_title">Sobreposições do mapa</string>
     <string name="quick_action_map_overlay_action">Adicionar sobreposição</string>
-    <string name="quick_action_map_overlay_switch">A camada superior de mapa foi alterada para \"%s\".</string>
+    <string name="quick_action_map_overlay_switch">Camada superior de mapa alterada para \"%s\".</string>
     <string name="quick_action_map_underlay_switch">A camada inferior de mapa foi alterada para \"%s\".</string>
     <string name="quick_action_map_underlay">Mudar camada inferior de mapa</string>
     <string name="quick_action_map_underlay_title">Camadas inferiores de mapa</string>
@@ -2527,13 +2527,13 @@ Pôr do Sol: %2$s</string>
     <string name="quick_action_btn_tutorial_title">Mudar posição do botão</string>
     <string name="quick_action_btn_tutorial_descr">Segure e arraste o botão para mudar a sua posição na tela.</string>
     <string name="shared_string_action_name">Nome da ação</string>
-    <string name="mappilary_no_internet_desc">Você precisa estar conectado à Internet para ver fotos do Mapillary.</string>
+    <string name="mappilary_no_internet_desc">As fotos do Mapillary estão disponíveis apenas online.</string>
     <string name="retry">Repetir</string>
     <string name="add_route_points">Adicionar Pontos de Rota</string>
     <string name="add_waypoint">Adicionar Ponto de Passagem</string>
     <string name="add_line">Adicionar Linha</string>
     <string name="save_gpx_waypoint">Salvar Ponto de Passagem GPX</string>
-    <string name="save_route_point">Salvar Ponto de Rota</string>
+    <string name="save_route_point">Salvar ponto de rota</string>
     <string name="waypoint_one">Ponto de Passagem 1</string>
     <string name="route_point_one">Ponto de Rota 1</string>
     <string name="empty_state_my_tracks">Adicione arquivos GPX</string>
@@ -2586,7 +2586,7 @@ Pôr do Sol: %2$s</string>
     <string name="winter_and_ski_renderer">Inverno e esqui</string>
     <string name="touring_view_renderer">Vista de turismo</string>
     <string name="nautical_renderer">Náutico</string>
-    <string name="copy_location_name">Copiar nome de Ponto/POI</string>
+    <string name="copy_location_name">Copiar nome do local/POI</string>
     <string name="toast_empty_name_error">Localização sem nome</string>
     <string name="tunnel_warning">Túnel à frente</string>
     <string name="distance_farthest">O mais distante primeiro</string>
@@ -3107,13 +3107,13 @@ Pôr do Sol: %2$s</string>
     <string name="routing_attr_allow_expert_name">Permitir rotas especializadas</string>
     <string name="routing_attr_allow_expert_description">Rotas extremamente difíceis, com obstáculos perigosos e arredores.</string>
     <string name="routing_attr_allow_skating_only_name">Permitir apenas rotas de patinação</string>
-    <string name="routing_attr_allow_skating_only_description">Rotas preparadas para estilo livre ou apenas patinar sem trilhas clássicas.</string>
+    <string name="routing_attr_allow_skating_only_description">Rotas preparadas para estilo livre ou só patinação sem trilhas clássicas.</string>
     <string name="routing_attr_allow_classic_only_name">Permitir apenas rotas clássicas</string>
     <string name="routing_attr_allow_classic_only_description">Rotas preparadas para o estilo clássico apenas sem trilhas de patinação. Isso inclui rotas preparadas por uma moto de neve menor com pista mais solta e pistas feitas manualmente por esquiadores.</string>
     <string name="routing_attr_difficulty_preference_name">Dificuldade preferida</string>
     <string name="routing_attr_difficulty_preference_description">Prefira rotas dessa dificuldade, embora o roteamento em pistas mais difíceis ou mais fáceis ainda seja possível se for mais curto.</string>
     <string name="routing_attr_freeride_policy_name">Fora de pista</string>
-    <string name="routing_attr_freeride_policy_description">Freerides e offpiste são rotas e passagens não oficiais. Normalmente sem estilo, sem manutenção dos funcionários e não checado à noite. Digite a risco próprio.</string>
+    <string name="routing_attr_freeride_policy_description">Freeride e offpiste são rotas e passagens não oficiais. Normalmente sem estilo, sem manutenção dos funcionários e não checado à noite. Digite a risco próprio.</string>
     <string name="process_downloading_service">Serviço de download do OsmAnd</string>
     <string name="shared_string_color_magenta">Magenta</string>
     <string name="shared_string_icon">Ícone</string>
@@ -3254,7 +3254,7 @@ Pôr do Sol: %2$s</string>
     <string name="reset_to_default">Restaurar para o padrão</string>
     <string name="manage_profiles_descr">Criar, importar, editar perfis</string>
     <string name="manage_profiles">Gerenciar perfis de aplicativos…</string>
-    <string name="osmand_settings_descr">Eficaz para todo o aplicativo</string>
+    <string name="osmand_settings_descr">Efetivo em todo o aplicativo</string>
     <string name="osmand_settings">Configurações do OsmAnd</string>
     <string name="copy_from_other_profile">Copiar de outro perfil</string>
     <string name="turn_screen_on">Ativar tela</string>
@@ -3380,4 +3380,7 @@ Pôr do Sol: %2$s</string>
     <string name="quick_action_directions_from_desc">Um botão para fazer com que a tela centralize o ponto de partida e calcule a rota para o destino ou abra uma caixa de diálogo para selecionar o destino se o marcador de destino não estiver no mapa.</string>
     <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Mostrar os nós da rede de ciclovias</string>
     <string name="clear_confirmation_msg">Limpar %1$s\?</string>
+    <string name="download_map_dialog">Baixar mapa</string>
+    <string name="dialogs_and_notifications_title">Diálogos e notificações</string>
+    <string name="dialogs_and_notifications_descr">Popups de controle , caixas de diálogo e notificações que o OsmAnd mostra durante o uso.</string>
 </resources>
