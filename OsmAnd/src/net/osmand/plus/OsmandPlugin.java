@@ -172,33 +172,35 @@ public abstract class OsmandPlugin {
 	}
 
 	public static void initPlugins(@NonNull OsmandApplication app) {
+		Set<String> enabledPlugins = app.getSettings().getEnabledPlugins();
+
 		allPlugins.clear();
 		allPlugins.add(new MapillaryPlugin(app));
 
-		if (!app.getSettings().getPlugins().contains(MapillaryPlugin.ID)) {
+		if (!enabledPlugins.contains(MapillaryPlugin.ID) && !app.getSettings().getPlugins().contains("-" + MapillaryPlugin.ID)) {
+			enabledPlugins.add(MapillaryPlugin.ID);
 			app.getSettings().enablePlugin(MapillaryPlugin.ID, true);
 		}
 
 		allPlugins.add(new OsmandRasterMapsPlugin(app));
 		allPlugins.add(new OsmandMonitoringPlugin(app));
-		checkMarketPlugin(app, new SRTMPlugin(app));
+		checkMarketPlugin(app, enabledPlugins, new SRTMPlugin(app));
 
 		// ? questionable - definitely not market plugin
 //		checkMarketPlugin(app, enabledPlugins, new TouringViewPlugin(app), false, TouringViewPlugin.COMPONENT, null);
-		checkMarketPlugin(app, new NauticalMapsPlugin(app));
-		checkMarketPlugin(app, new SkiMapsPlugin(app));
+		checkMarketPlugin(app, enabledPlugins, new NauticalMapsPlugin(app));
+		checkMarketPlugin(app, enabledPlugins, new SkiMapsPlugin(app));
 
 		allPlugins.add(new AudioVideoNotesPlugin(app));
-		checkMarketPlugin(app, new ParkingPositionPlugin(app));
+		checkMarketPlugin(app, enabledPlugins, new ParkingPositionPlugin(app));
 		allPlugins.add(new AccessibilityPlugin(app));
 		allPlugins.add(new OsmEditingPlugin(app));
 		allPlugins.add(new OsmandDevelopmentPlugin(app));
 
-		activatePlugins(app);
+		activatePlugins(app, enabledPlugins);
 	}
 
-	private static void activatePlugins(OsmandApplication app) {
-		Set<String> enabledPlugins = app.getSettings().getEnabledPlugins();
+	private static void activatePlugins(OsmandApplication app, Set<String> enabledPlugins) {
 		for (OsmandPlugin plugin : allPlugins) {
 			if (enabledPlugins.contains(plugin.getId()) || plugin.isActive()) {
 				initPlugin(app, plugin);
@@ -207,10 +209,10 @@ public abstract class OsmandPlugin {
 	}
 
 	public static void updateActivatedPlugins(OsmandApplication app) {
-		for (OsmandPlugin plugin : OsmandPlugin.getMarketPlugins()) {
-			updateMarketPlugin(app, plugin);
-		}
 		Set<String> enabledPlugins = app.getSettings().getEnabledPlugins();
+		for (OsmandPlugin plugin : OsmandPlugin.getMarketPlugins()) {
+			updateMarketPlugin(app, enabledPlugins, plugin);
+		}
 		for (OsmandPlugin plugin : allPlugins) {
 			if (enabledPlugins.contains(plugin.getId())) {
 				initPlugin(app, plugin);
@@ -231,13 +233,13 @@ public abstract class OsmandPlugin {
 		}
 	}
 
-	private static void checkMarketPlugin(@NonNull OsmandApplication app, @NonNull OsmandPlugin plugin) {
-		if (updateMarketPlugin(app, plugin)) {
+	private static void checkMarketPlugin(@NonNull OsmandApplication app, @NonNull Set<String> enabledPlugins, @NonNull OsmandPlugin plugin) {
+		if (updateMarketPlugin(app, enabledPlugins, plugin)) {
 			allPlugins.add(plugin);
 		}
 	}
 
-	private static boolean updateMarketPlugin(@NonNull OsmandApplication app, @NonNull OsmandPlugin plugin) {
+	private static boolean updateMarketPlugin(@NonNull OsmandApplication app, @NonNull Set<String> enabledPlugins, @NonNull OsmandPlugin plugin) {
 		boolean marketEnabled = Version.isMarketEnabled(app);
 		boolean pckg = checkPluginPackage(app, plugin);
 		boolean paid = plugin.isPaid();
@@ -247,7 +249,7 @@ public abstract class OsmandPlugin {
 		}
 		if (pckg || (!marketEnabled && !paid)) {
 			if (pckg && !app.getSettings().getPlugins().contains("-" + plugin.getId())) {
-				app.getSettings().enablePlugin(plugin.getId(), true);
+				enabledPlugins.add(plugin.getId());
 				plugin.setActive(true);
 			}
 			plugin.setInstallURL(null);
@@ -256,7 +258,7 @@ public abstract class OsmandPlugin {
 			if (marketEnabled) {
 				plugin.setActive(false);
 				if (!app.getSettings().getPlugins().contains("-" + plugin.getId())) {
-					app.getSettings().enablePlugin(plugin.getId(), false);
+					enabledPlugins.remove(plugin.getId());
 				}
 				plugin.setInstallURL(Version.getUrlWithUtmRef(app, plugin.getComponentId1()));
 				return true;
@@ -283,8 +285,9 @@ public abstract class OsmandPlugin {
 	}
 
 	public static void checkInstalledMarketPlugins(@NonNull OsmandApplication app, @Nullable Activity activity) {
+		Set<String> enabledPlugins = app.getSettings().getEnabledPlugins();
 		for (OsmandPlugin plugin : OsmandPlugin.getMarketPlugins()) {
-			if (plugin.getInstallURL() != null && checkPluginPackage(app, plugin) && updateMarketPlugin(app, plugin)) {
+			if (plugin.getInstallURL() != null && checkPluginPackage(app, plugin) && updateMarketPlugin(app, enabledPlugins, plugin)) {
 				plugin.onInstall(app, activity);
 				initPlugin(app, plugin);
 			}
