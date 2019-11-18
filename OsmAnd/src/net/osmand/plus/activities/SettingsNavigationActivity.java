@@ -456,8 +456,8 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 				startActivity(intent);
 			} else {
 				super.onPreferenceChange(preference, newValue);
-				getMyApplication().initVoiceCommandPlayer(
-						this, settings.APPLICATION_MODE.get(), false, null, true, false);
+				getMyApplication().initVoiceCommandPlayer(this, settings.APPLICATION_MODE.get(),
+						false, null, true, false, false);
 			}
 			return true;
 		}

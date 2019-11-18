@@ -174,7 +174,7 @@ public class AppInitializer implements IProgress {
 			firstTime = true;
 			startPrefs.edit().putBoolean(FIRST_TIME_APP_RUN, true).commit();
 			startPrefs.edit().putString(VERSION_INSTALLED, Version.getFullVersion(app)).commit();
-			startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, VERSION_3_2).commit();
+			startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, VERSION_3_5).commit();
 		} else if (!Version.getFullVersion(app).equals(startPrefs.getString(VERSION_INSTALLED, ""))) {
 			prevAppVersion = startPrefs.getInt(VERSION_INSTALLED_NUMBER, 0);
 			if(prevAppVersion < VERSION_2_2) {
@@ -185,10 +185,12 @@ public class AppInitializer implements IProgress {
 			}
 			if(prevAppVersion < VERSION_2_3) {
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, VERSION_2_3).commit();
-			} else if (prevAppVersion < VERSION_3_2) {
+			}
+			if (prevAppVersion < VERSION_3_2) {
 				app.getSettings().BILLING_PURCHASE_TOKENS_SENT.set("");
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, VERSION_3_2).commit();
-			} else if (prevAppVersion < VERSION_3_5) {
+			}
+			if (prevAppVersion < VERSION_3_5 || Version.getAppVersion(app).equals("3.5.3")) {
 				app.getSettings().migrateGlobalPrefsToProfile();
 				startPrefs.edit().putInt(VERSION_INSTALLED_NUMBER, VERSION_3_5).commit();
 			}

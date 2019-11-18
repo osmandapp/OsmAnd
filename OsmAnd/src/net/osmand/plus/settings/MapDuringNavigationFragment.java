@@ -2,6 +2,7 @@ package net.osmand.plus.settings;
 
 import android.support.v7.preference.Preference;
 
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.AutoZoomMap;
 import net.osmand.plus.R;
@@ -44,14 +45,14 @@ public class MapDuringNavigationFragment extends BaseSettingsFragment {
 		int selectedIndex = -1;
 		entries[i] = getString(R.string.auto_zoom_none);
 		entryValues[0] = 0;
-		if (!settings.AUTO_ZOOM_MAP.get()) {
+		if (!settings.AUTO_ZOOM_MAP.getModeValue(getSelectedAppMode())) {
 			selectedIndex = 0;
 		}
 		i++;
 		for (AutoZoomMap autoZoomMap : AutoZoomMap.values()) {
 			entries[i] = getString(autoZoomMap.name);
 			entryValues[i] = i;
-			if (selectedIndex == -1 && settings.AUTO_ZOOM_MAP_SCALE.get() == autoZoomMap) {
+			if (selectedIndex == -1 && settings.AUTO_ZOOM_MAP_SCALE.getModeValue(getSelectedAppMode()) == autoZoomMap) {
 				selectedIndex = i;
 			}
 			i++;
@@ -76,7 +77,7 @@ public class MapDuringNavigationFragment extends BaseSettingsFragment {
 	private void setupMapDirectionToCompassPref() {
 		String[] entries;
 		Float[] entryValues;
-		if (settings.METRIC_SYSTEM.get() == OsmandSettings.MetricsConstants.KILOMETERS_AND_METERS) {
+		if (settings.METRIC_SYSTEM.getModeValue(getSelectedAppMode()) == OsmandSettings.MetricsConstants.KILOMETERS_AND_METERS) {
 			entryValues = new Float[] {0f, 5f, 7f, 10f, 15f, 20f};
 			entries = new String[entryValues.length];
 
@@ -102,12 +103,13 @@ public class MapDuringNavigationFragment extends BaseSettingsFragment {
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
 		if (preference.getKey().equals(settings.AUTO_ZOOM_MAP.getId())) {
 			if (newValue instanceof Integer) {
+				ApplicationMode selectedMode = getSelectedAppMode();
 				int position = (int) newValue;
 				if (position == 0) {
-					settings.AUTO_ZOOM_MAP.set(false);
+					settings.AUTO_ZOOM_MAP.setModeValue(selectedMode, false);
 				} else {
-					settings.AUTO_ZOOM_MAP.set(true);
-					settings.AUTO_ZOOM_MAP_SCALE.set(OsmandSettings.AutoZoomMap.values()[position - 1]);
+					settings.AUTO_ZOOM_MAP.setModeValue(selectedMode, true);
+					settings.AUTO_ZOOM_MAP_SCALE.setModeValue(selectedMode, OsmandSettings.AutoZoomMap.values()[position - 1]);
 				}
 				return true;
 			}

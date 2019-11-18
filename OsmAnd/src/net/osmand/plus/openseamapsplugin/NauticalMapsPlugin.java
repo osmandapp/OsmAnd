@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 
 import net.osmand.IndexConstants;
@@ -16,18 +17,17 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadResources;
-import net.osmand.plus.render.RendererRegistry;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.Collections;
+import java.util.List;
+
 
 public class NauticalMapsPlugin extends OsmandPlugin {
 
 	public static final String ID = "nauticalPlugin.plugin";
 	public static final String COMPONENT = "net.osmand.nauticalPlugin";
-	private static String previousRenderer = RendererRegistry.DEFAULT_RENDER;
+
 	private OsmandApplication app;
-	
 
 	public NauticalMapsPlugin(OsmandApplication app) {
 		this.app = app;
@@ -41,6 +41,16 @@ public class NauticalMapsPlugin extends OsmandPlugin {
 	@Override
 	public int getAssetResourceName() {
 		return R.drawable.nautical_map;
+	}
+
+	@Override
+	public boolean isMarketPlugin() {
+		return true;
+	}
+
+	@Override
+	public String getComponentId1() {
+		return COMPONENT;
 	}
 
 	@Override
@@ -61,10 +71,8 @@ public class NauticalMapsPlugin extends OsmandPlugin {
 	@Override
 	public boolean init(@NonNull final OsmandApplication app, final Activity activity) {
 		if (activity != null) {
-			addBoatProfile(true);
-			// called from UI 
-			previousRenderer = app.getSettings().RENDERER.get();
-			app.getSettings().RENDERER.set(RendererRegistry.NAUTICAL_RENDER);
+			ApplicationMode.changeProfileAvailability(ApplicationMode.BOAT, true, app);
+			// called from UI
 			if (!app.getResourceManager().getIndexFileNames().containsKey(DownloadResources.WORLD_SEAMARKS_NAME +
 					IndexConstants.BINARY_MAP_INDEX_EXT)) {
 				boolean nightMode;
@@ -84,38 +92,28 @@ public class NauticalMapsPlugin extends OsmandPlugin {
 						activity.startActivity(intent);
 					}
 				});
-				dlg.setNegativeButton(R.string.shared_string_cancel, new OnClickListener() {
-					
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						app.getSettings().RENDERER.set(previousRenderer);						
-					}
-				});
+				dlg.setNegativeButton(R.string.shared_string_cancel, null);
 				dlg.show();
 			}
-			
 		}
 		return true;
 	}
 
-	public void addBoatProfile(boolean flag) {
-		Set<ApplicationMode> selectedProfiles = new LinkedHashSet<>(ApplicationMode.values(app));
-		boolean isBoatEnabled = selectedProfiles.contains(ApplicationMode.BOAT);
-		if((!isBoatEnabled && flag) || (isBoatEnabled && !flag)) {
-			String s = app.getSettings().AVAILABLE_APP_MODES.get();
-			String currModes = flag ? s + ApplicationMode.BOAT.getStringKey() + ","
-					: s.replace(ApplicationMode.BOAT.getStringKey() + ",", "");
-			app.getSettings().AVAILABLE_APP_MODES.set(currModes);
-		}
+	@Override
+	public void onInstall(@NonNull OsmandApplication app, @Nullable Activity activity) {
+		ApplicationMode.changeProfileAvailability(ApplicationMode.BOAT, true, app);
+		super.onInstall(app, activity);
+	}
+
+	@Override
+	public List<ApplicationMode> getAddedAppModes() {
+		return Collections.singletonList(ApplicationMode.BOAT);
 	}
 	
 	@Override
 	public void disable(OsmandApplication app) {
 		super.disable(app);
-		if(app.getSettings().RENDERER.get().equals(RendererRegistry.NAUTICAL_RENDER)) {
-			app.getSettings().RENDERER.set(previousRenderer);
-		}
-		addBoatProfile(false);
+		ApplicationMode.changeProfileAvailability(ApplicationMode.BOAT, false, app);
 	}
 
 	@Override

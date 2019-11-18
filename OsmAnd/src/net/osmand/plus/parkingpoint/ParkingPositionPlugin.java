@@ -174,6 +174,15 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		return "feature_articles/parking-plugin.html";
 	}
 
+	@Override
+	public boolean isMarketPlugin() {
+		return true;
+	}
+
+	@Override
+	public String getComponentId1() {
+		return PARKING_PLUGIN_COMPONENT;
+	}
 
 	@Override
 	public void registerLayers(MapActivity activity) {

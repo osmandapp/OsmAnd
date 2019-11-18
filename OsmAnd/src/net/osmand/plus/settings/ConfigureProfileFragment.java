@@ -36,11 +36,12 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.SettingsHelper;
 import net.osmand.plus.SettingsHelper.ProfileSettingsItem;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.PluginActivity;
 import net.osmand.plus.helpers.FontCache;
+import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
+import net.osmand.plus.skimapsplugin.SkiMapsPlugin;
 
 import org.apache.commons.logging.Log;
 
@@ -258,12 +259,16 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 		}
 		List<OsmandPlugin> plugins = OsmandPlugin.getVisiblePlugins();
 		for (OsmandPlugin plugin : plugins) {
+			if (plugin instanceof SkiMapsPlugin || plugin instanceof NauticalMapsPlugin) {
+				continue;
+			}
+			boolean pluginEnabled = OsmandPlugin.isPluginEnabledForMode(app, plugin, getSelectedAppMode());
 			SwitchPreferenceEx preference = new SwitchPreferenceEx(ctx);
 			preference.setPersistent(false);
 			preference.setKey(plugin.getId());
 			preference.setTitle(plugin.getName());
-			preference.setChecked(plugin.isActive());
-			preference.setIcon(getPluginIcon(plugin));
+			preference.setChecked(pluginEnabled);
+			preference.setIcon(getPluginIcon(plugin, pluginEnabled));
 			preference.setIntent(getPluginIntent(plugin));
 			preference.setLayoutResource(R.layout.preference_dialog_and_switch);
 
@@ -271,9 +276,9 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 		}
 	}
 
-	private Drawable getPluginIcon(OsmandPlugin plugin) {
+	private Drawable getPluginIcon(OsmandPlugin plugin, boolean pluginEnabled) {
 		int iconResId = plugin.getLogoResourceId();
-		return plugin.isActive() ? getActiveIcon(iconResId) : getIcon(iconResId, isNightMode() ? R.color.icon_color_secondary_dark : R.color.icon_color_secondary_light);
+		return pluginEnabled ? getActiveIcon(iconResId) : getIcon(iconResId, isNightMode() ? R.color.icon_color_secondary_dark : R.color.icon_color_secondary_light);
 	}
 
 	private Intent getPluginIntent(OsmandPlugin plugin) {
@@ -339,8 +344,15 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 		if (plugin != null) {
 			if (newValue instanceof Boolean) {
 				if ((plugin.isActive() || !plugin.needsInstallation())) {
-					if (OsmandPlugin.enablePlugin(getActivity(), app, plugin, (Boolean) newValue)) {
-						preference.setIcon(getPluginIcon(plugin));
+					ApplicationMode selectedMode = getSelectedAppMode();
+					boolean pluginChanged;
+					if (selectedMode.equals(settings.APPLICATION_MODE.get())) {
+						pluginChanged = OsmandPlugin.enablePlugin(getActivity(), app, plugin, (Boolean) newValue);
+					} else {
+						pluginChanged = settings.enablePluginForMode(plugin.getId(), (Boolean) newValue, selectedMode);
+					}
+					if (pluginChanged) {
+						preference.setIcon(getPluginIcon(plugin, (Boolean) newValue));
 						return true;
 					}
 				} else if (plugin.needsInstallation() && preference.getIntent() != null) {

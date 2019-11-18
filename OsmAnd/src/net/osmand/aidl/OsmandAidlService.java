@@ -121,7 +121,7 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 	private OsmandAidlApi getApi(String reason) {
 		LOG.info("Request AIDL API for " + reason);
 		OsmandAidlApi api = getApp().getAidlApi();
-		String pack = getApp().getPackageManager().getNameForUid(Binder.getCallingUid());
+		String pack = getCallingAppPackName();
 		if (pack != null && !pack.equals(getApp().getPackageName()) && !api.isAppEnabled(pack)) {
 			return null;
 		}
@@ -156,6 +156,10 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 			api.aidlCallbackListener = null;
 		}
 		mHandlerThread.quit();
+	}
+
+	private String getCallingAppPackName() {
+		return getApp().getPackageManager().getNameForUid(Binder.getCallingUid());
 	}
 
 	private long getCallbackId() {
@@ -449,7 +453,8 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 		public boolean addMapLayer(AddMapLayerParams params) {
 			try {
 				OsmandAidlApi api = getApi("addMapLayer");
-				return params != null && api != null && api.addMapLayer(new AidlMapLayerWrapper(params.getLayer()));
+				String pack = getCallingAppPackName();
+				return params != null && api != null && api.addMapLayer(pack, new AidlMapLayerWrapper(params.getLayer()));
 			} catch (Exception e) {
 				handleException(e);
 				return false;
@@ -1267,6 +1272,7 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 				if (api != null && params != null) {
 					String colorName = api.getGpxColor(params.getFileName());
 					params.setGpxColor(colorName);
+					return true;
 				}
 				return false;
 			} catch (Exception e) {

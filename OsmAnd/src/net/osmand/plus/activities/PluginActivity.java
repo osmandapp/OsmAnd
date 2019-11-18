@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,8 +18,9 @@ import android.widget.TextView;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.download.DownloadIndexesThread;
 
-public class PluginActivity extends OsmandActionBarActivity {
+public class PluginActivity extends OsmandActionBarActivity  implements DownloadIndexesThread.DownloadEvents {
 	private static final String TAG = "PluginActivity";
 	public static final String EXTRA_PLUGIN_ID = "plugin_id";
 
@@ -109,8 +111,16 @@ public class PluginActivity extends OsmandActionBarActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-
+		OsmandApplication app = getMyApplication();
+		OsmandPlugin.checkInstalledMarketPlugins(app, this);
+		app.getDownloadThread().setUiActivity(this);
 		updateState();
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		getMyApplication().getDownloadThread().resetUiActivity(this);
 	}
 
 	@Override
@@ -163,6 +173,34 @@ public class PluginActivity extends OsmandActionBarActivity {
 			}
 
 			installHeader.setVisibility(View.GONE);
+		}
+	}
+
+	// DownloadEvents
+	@Override
+	public void newDownloadIndexes() {
+		for (Fragment fragment : getSupportFragmentManager().getFragments()) {
+			if (fragment instanceof DownloadIndexesThread.DownloadEvents && fragment.isAdded()) {
+				((DownloadIndexesThread.DownloadEvents) fragment).newDownloadIndexes();
+			}
+		}
+	}
+
+	@Override
+	public void downloadInProgress() {
+		for (Fragment fragment : getSupportFragmentManager().getFragments()) {
+			if (fragment instanceof DownloadIndexesThread.DownloadEvents && fragment.isAdded()) {
+				((DownloadIndexesThread.DownloadEvents) fragment).downloadInProgress();
+			}
+		}
+	}
+
+	@Override
+	public void downloadHasFinished() {
+		for (Fragment fragment : getSupportFragmentManager().getFragments()) {
+			if (fragment instanceof DownloadIndexesThread.DownloadEvents && fragment.isAdded()) {
+				((DownloadIndexesThread.DownloadEvents) fragment).downloadHasFinished();
+			}
 		}
 	}
 }

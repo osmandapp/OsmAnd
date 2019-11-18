@@ -14,6 +14,12 @@
     <string name="download_map_dialog">Download map dialog</string>
     <string name="dialogs_and_notifications_title">Dialogs and notifications</string>
     <string name="dialogs_and_notifications_descr">Control popups, dialogs and notifications that OsmAnd show during usage.</string>
+    <string name="suggested_maps">Suggested maps</string>
+    <string name="suggested_maps_descr">Those maps are required to use with plugin</string>
+    <string name="added_profiles">Added profiles</string>
+    <string name="added_profiles_descr">Plugin adds new profile to OsmAnd</string>
+    <string name="shared_string_turn_off">Turn off</string>
+    <string name="new_plugin_added">New plugin added</string>
     <string name="clear_confirmation_msg">Clear %1$s?</string>
     <string name="shared_string_revert">Revert</string>
     <string name="track_saved">Track saved</string>

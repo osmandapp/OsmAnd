@@ -72,7 +72,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 
 		String prefId = preference.getKey();
 		if (settings.EXTERNAL_INPUT_DEVICE.getId().equals(prefId)) {
-			boolean checked = settings.EXTERNAL_INPUT_DEVICE.get() != OsmandSettings.NO_EXTERNAL_DEVICE;
+			boolean checked = settings.EXTERNAL_INPUT_DEVICE.getModeValue(getSelectedAppMode()) != OsmandSettings.NO_EXTERNAL_DEVICE;
 
 			SwitchCompat switchView = (SwitchCompat) holder.findViewById(R.id.switchWidget);
 			switchView.setOnCheckedChangeListener(null);
@@ -139,7 +139,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 	}
 
 	private Drawable getRotateMapIcon() {
-		switch (settings.ROTATE_MAP.get()) {
+		switch (settings.ROTATE_MAP.getModeValue(getSelectedAppMode())) {
 			case OsmandSettings.ROTATE_MAP_NONE:
 				return getContentIcon(R.drawable.ic_action_direction_north);
 			case OsmandSettings.ROTATE_MAP_BEARING:
@@ -156,7 +156,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 
 
 	private Drawable getCenterPositionOnMapIcon() {
-		return getContentIcon(settings.CENTER_POSITION_ON_MAP.get() ? R.drawable.ic_action_display_position_center : R.drawable.ic_action_display_position_bottom);
+		return getContentIcon(settings.CENTER_POSITION_ON_MAP.getModeValue(getSelectedAppMode()) ? R.drawable.ic_action_display_position_center : R.drawable.ic_action_display_position_bottom);
 	}
 
 	private void setupMapScreenOrientationPref() {
@@ -167,7 +167,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 	}
 
 	private Drawable getMapScreenOrientationIcon() {
-		switch (settings.MAP_SCREEN_ORIENTATION.get()) {
+		switch (settings.MAP_SCREEN_ORIENTATION.getModeValue(getSelectedAppMode())) {
 			case ActivityInfo.SCREEN_ORIENTATION_PORTRAIT:
 				return getContentIcon(R.drawable.ic_action_phone_portrait_orientation);
 			case ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE:
@@ -178,9 +178,10 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 	}
 
 	private void setupDrivingRegionPref() {
+		ApplicationMode selectedMode = getSelectedAppMode();
 		Preference defaultDrivingRegion = findPreference(settings.DRIVING_REGION.getId());
 		defaultDrivingRegion.setIcon(getContentIcon(R.drawable.ic_action_car_dark));
-		defaultDrivingRegion.setSummary(getString(settings.DRIVING_REGION_AUTOMATIC.get() ? R.string.driving_region_automatic : settings.DRIVING_REGION.get().name));
+		defaultDrivingRegion.setSummary(getString(settings.DRIVING_REGION_AUTOMATIC.getModeValue(selectedMode) ? R.string.driving_region_automatic : settings.DRIVING_REGION.getModeValue(selectedMode).name));
 	}
 
 	private void setupUnitsOfLengthPref() {
@@ -202,7 +203,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 	private void setupCoordinatesFormatPref() {
 		Preference coordinatesFormat = findPreference(settings.COORDINATES_FORMAT.getId());
 		coordinatesFormat.setIcon(getContentIcon(R.drawable.ic_action_coordinates_widget));
-		coordinatesFormat.setSummary(PointDescription.formatToHumanString(app, settings.COORDINATES_FORMAT.get()));
+		coordinatesFormat.setSummary(PointDescription.formatToHumanString(app, settings.COORDINATES_FORMAT.getModeValue(getSelectedAppMode())));
 	}
 
 	private void setupAngularUnitsPref() {
@@ -304,8 +305,9 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 		drs.add(null);
 		drs.addAll(Arrays.asList(OsmandSettings.DrivingRegion.values()));
 		int sel = -1;
-		OsmandSettings.DrivingRegion selectedDrivingRegion = settings.DRIVING_REGION.get();
-		if (settings.DRIVING_REGION_AUTOMATIC.get()) {
+		ApplicationMode selectedMode = getSelectedAppMode();
+		OsmandSettings.DrivingRegion selectedDrivingRegion = settings.DRIVING_REGION.getModeValue(selectedMode);
+		if (settings.DRIVING_REGION_AUTOMATIC.getModeValue(selectedMode)) {
 			sel = 0;
 		}
 		for (int i = 1; i < drs.size(); i++) {
@@ -344,15 +346,16 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 		b.setAdapter(singleChoiceAdapter, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
+				ApplicationMode selectedMode = getSelectedAppMode();
 				if (drs.get(which) == null) {
-					settings.DRIVING_REGION_AUTOMATIC.set(true);
+					settings.DRIVING_REGION_AUTOMATIC.setModeValue(selectedMode, true);
 					MapViewTrackingUtilities mapViewTrackingUtilities = getMyApplication().getMapViewTrackingUtilities();
 					if (mapViewTrackingUtilities != null) {
 						mapViewTrackingUtilities.resetDrivingRegionUpdate();
 					}
 				} else {
-					settings.DRIVING_REGION_AUTOMATIC.set(false);
-					settings.DRIVING_REGION.set(drs.get(which));
+					settings.DRIVING_REGION_AUTOMATIC.setModeValue(selectedMode, false);
+					settings.DRIVING_REGION.setModeValue(selectedMode, drs.get(which));
 				}
 				updateAllSettings();
 			}
