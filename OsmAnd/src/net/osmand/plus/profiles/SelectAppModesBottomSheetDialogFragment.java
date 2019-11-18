@@ -41,11 +41,6 @@ public class SelectAppModesBottomSheetDialogFragment extends AppModesBottomSheet
 		if (appMode == null) {
 			appMode = app.getSettings().getApplicationMode();
 		}
-		if (usedOnMap) {
-			nightMode = app.getDaynightHelper().isNightModeForMapControlsForProfile(getAppMode());
-		} else {
-			nightMode = !app.getSettings().isLightContentForMode(getAppMode());
-		}
 	}
 
 	@Override
@@ -110,6 +105,15 @@ public class SelectAppModesBottomSheetDialogFragment extends AppModesBottomSheet
 			outState.putString(APP_MODE_KEY, appMode.getStringKey());
 		}
 		outState.putBoolean(APP_MODE_CHANGEABLE_KEY, appModeChangeable);
+	}
+
+	@Override
+	protected boolean isNightMode(@NonNull OsmandApplication app) {
+		if (usedOnMap) {
+			return app.getDaynightHelper().isNightModeForMapControlsForProfile(getAppMode());
+		} else {
+			return !app.getSettings().isLightContentForMode(getAppMode());
+		}
 	}
 
 	public static void showInstance(@NonNull FragmentManager fm, Fragment target, boolean usedOnMap,

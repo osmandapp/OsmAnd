@@ -8,6 +8,7 @@ import android.support.v7.preference.DialogPreference.TargetFragment;
 import android.support.v7.preference.Preference;
 
 import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 
 import java.util.List;
@@ -35,11 +36,6 @@ public abstract class BasePreferenceBottomSheet extends MenuBottomSheetDialogFra
 		if (savedInstanceState != null) {
 			appMode = ApplicationMode.valueOfStringKey(savedInstanceState.getString(APP_MODE_KEY), null);
 		}
-		if (usedOnMap) {
-			nightMode = requiredMyApplication().getDaynightHelper().isNightModeForMapControlsForProfile(getAppMode());
-		} else {
-			nightMode = !requiredMyApplication().getSettings().isLightContentForMode(getAppMode());
-		}
 	}
 
 	@Override
@@ -47,6 +43,15 @@ public abstract class BasePreferenceBottomSheet extends MenuBottomSheetDialogFra
 		super.onSaveInstanceState(outState);
 		if (appMode != null) {
 			outState.putString(APP_MODE_KEY, appMode.getStringKey());
+		}
+	}
+
+	@Override
+	protected boolean isNightMode(@NonNull OsmandApplication app) {
+		if (usedOnMap) {
+			return app.getDaynightHelper().isNightModeForMapControlsForProfile(getAppMode());
+		} else {
+			return !app.getSettings().isLightContentForMode(getAppMode());
 		}
 	}
 
