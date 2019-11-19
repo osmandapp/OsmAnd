@@ -1970,7 +1970,7 @@
     <string name="copied_to_clipboard">کپی شد</string>
     <string name="osm_edit_deleted_poi">حذف POI</string>
     <string name="osm_edit_removed_note">بستن یادداشت OSM</string>
-    <string name="osn_bug_name">یادداشت OSM</string>
+    <string name="osn_bug_name">یادداشت OSM‏</string>
     <string name="osn_add_dialog_title">نوشتن یادداشت</string>
     <string name="osn_comment_dialog_title">افزودن توضیح</string>
     <string name="osn_reopen_dialog_title">بازگشایی یادداشت</string>
@@ -3427,5 +3427,5 @@
     <string name="quick_action_directions_from_desc">با لمس این دکمهٔ عملیاتی، نقطهٔ مبدأ در مرکز صفحه قرار می‌گیرد و مسیر تا مقصد محاسبه می‌شود یا اگر نشانگری برای مقصد نباشد، کادری برای انتخاب مقصد باز می‌شود.</string>
     <string name="download_map_dialog">کادر دانلود نقشه</string>
     <string name="dialogs_and_notifications_title">کادرها و اعلان‌ها</string>
-    <string name="dialogs_and_notifications_descr">کادرها، کادرهای بالاپر و اعلان‌هایی که OsmAnd در هنگام کار نشان می‌دهد را تنظثم کنید.</string>
+    <string name="dialogs_and_notifications_descr">کادرها، کادرهای بالاپر و اعلان‌هایی که OsmAnd در هنگام کار نشان می‌دهد را تنظیم کنید.</string>
 </resources>

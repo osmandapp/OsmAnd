@@ -646,9 +646,9 @@ Lon: %2$s</string>
     <string name="srtm_paid_version_title">Nivelkurba kromprogramo</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd-kromprogramo por desegni nivelkurbojn eksterrete</string>
     <string name="srtm_plugin_name">Nivelkurboj</string>
-    <string name="osmand_srtm_long_description_1000_chars">Tiu ĉi kromprogramo ebligas vidigi kaj tavolon de nivelkurboj kaj tavolon de nivel-ombrumo (reliefo) supre normaj OsmAnd-mapoj. Tiu ĉi eblo estas dezirata de atletoj, migrantoj, turistoj kaj ĉiuj scivolaj en reliefa strukturo de tero. 
+    <string name="osmand_srtm_long_description_1000_chars">Tiu ĉi kromprogramo ebligas vidigi kaj tavolon de nivelkurboj kaj tavolon de nivel-ombrumo (reliefon) supre normaj OsmAnd‑mapoj. Tiu ĉi eblo estas dezirata de atletoj, migrantoj, turistoj kaj de ĉiuj scivolaj pri reliefa strukturo de tero.
 \n 
-\nLa mondaj datumoj (inter 70° N kaj 70° S) estas bazitaj sur mezuroj de SRTM (Shuttle Radar Topography Mission) kaj de ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), bildiga aparato en la Terra - ĉefa satelito de Sistemo de Tera Observado de NASA. ASTER estas kunlaboraĵo de NASA, de Japana Ministerio pri Ekonomio, Komerco kaj Industrio (METI) kaj de Japanaj Spacaj Sistemoj (J-spacesystems).</string>
+\nLa mondaj datumoj (inter 70° N kaj 70° S) estas bazitaj sur mezuroj de SRTM (Shuttle Radar Topography Mission) kaj de ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer) – bildiga aparato en la Terra (ĉefa satelito de Sistemo de Tera Observado de NASA). ASTER estas kunlaboraĵo de NASA, de Japana Ministerio pri Ekonomio, Komerco kaj Industrio (METI) kaj de Japanaj Spacaj Sistemoj (J‑spacesystems).</string>
     <string name="srtm_plugin_description">Tiu ĉi kromprogramo ebligas vidigi kaj tavolon de nivelkurboj kaj tavolon de nivel-ombrumo (reliefo) supre normaj OsmAnd-mapoj. Tiu ĉi eblo estas dezirata de atletoj, migrantoj, turistoj, kaj ĉiuj scivolaj en reliefa strukturo de tero. (Bonvolu rimarki, ke datumoj de nivelkurboj kaj nivel-ombrumo estas elŝuteblaj aparte post instalado de kromprogramo.) 
 \n 
 \nLa mondaj datumoj (inter 70° N kaj 70° S) estas bazitaj sur mezuroj de la SRTM (Shuttle Radar Topography Mission) kaj de la ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), bildiga aparato en la Terra - ĉefa satelito de Sistemo de Tera Observado de NASA. ASTER estas kunlaboraĵo de NASA, de Japana Ministerio pri Ekonomio, Komerco kaj Industrio (METI) kaj de Japanaj Spacaj Sistemoj (J-spacesystems).</string>
@@ -3298,7 +3298,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="rendering_attr_piste_difficulty_aerialway_name">kablovojo</string>
     <string name="rendering_attr_piste_difficulty_connection_name">ligilo</string>
     <string name="shared_string_calculate">Kalkuli</string>
-    <string name="shared_string_osmand_usage">Uzado de OsmAnd</string>
+    <string name="shared_string_osmand_usage">Uzitaj de OsmAnd</string>
     <string name="shared_sting_tiles">Kaheloj</string>
     <string name="shared_string_maps">Mapoj</string>
     <string name="shared_string_memory_tb_desc">%1$s TB</string>
@@ -3372,4 +3372,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="quick_action_directions_from_desc">Butono por agordi la ekranan centron kiel komencpunkton, kaj por kalkuli kurson al la celo aŭ por elekti celon (se celo ne estas markita sur la mapo).</string>
     <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Montri reton de nodoj de biciklaj kursoj</string>
     <string name="clear_confirmation_msg">Ĉu forviŝi %1$s\?</string>
+    <string name="download_map_dialog">Fenestro elŝuti mapojn</string>
+    <string name="dialogs_and_notifications_title">Fenestroj kaj sciigoj</string>
+    <string name="dialogs_and_notifications_descr">Administri (ŝpruc)fenestrojn kaj sciigojn, kiujn OsmAnd montras dum uzado.</string>
 </resources>

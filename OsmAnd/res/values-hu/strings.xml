@@ -2981,7 +2981,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="routing_attr_avoid_sett_description">Macskakő és kavicsburkolat elkerülése</string>
     <string name="files_moved">%1$d fájl áthelyezve (%2$s).</string>
     <string name="files_copied">%1$d fájl átmásolva (%2$s).</string>
-    <string name="files_failed">%1$d fájl másolása nem sikerült (%2$s).</string>
+    <string name="files_failed">%1$d fájl másolása sikertelen (%2$s).</string>
     <string name="files_present">%1$d fájl (%2$s) megtalálható az előző helyen: \'%3$s\'.</string>
     <string name="move_maps">Térképek áthelyezése</string>
     <string name="dont_move_maps">Ne mozogjon</string>
@@ -3011,7 +3011,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="make_osmand_better_descr">Engedélyezze, hogy az OsmAnd névtelen alkalmazáshasználati adatokat gyűjtsön és dolgozzon fel. Nem gyűjtünk vagy tárolunk adatokat a helyzetéről vagy az Ön által a térképen megtekintett helyekről.
 \n
 \nDöntését bármikor módosíthatja a Beállítások &gt; Adatvédelem és biztonság menüpontban.</string>
-    <string name="choose_data_to_share">Válassza ki, milyen adattípusokat kíván megosztani:</string>
+    <string name="choose_data_to_share">Válassza ki a megosztani kívánt adattípusokat:</string>
     <string name="downloaded_maps">Letöltött térképek</string>
     <string name="visited_screens">Meglátogatott képernyők</string>
     <string name="collected_data_descr">Határozza meg, mely adatok megosztását engedélyezi az OsmAndnak.</string>
@@ -3043,7 +3043,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="profile_alert_need_routing_type_title">Navigációtípus kijelölése</string>
     <string name="profile_alert_need_routing_type_msg">Kérjük, jelöljön ki egy navigációtípust az új alkalmazásprofilhoz</string>
     <string name="profile_alert_need_profile_name_title">Profil nevének megadása</string>
-    <string name="profile_alert_need_profile_name_msg">A profil nevének helye nem lehet üres!</string>
+    <string name="profile_alert_need_profile_name_msg">Először meg kell adnod egy profil nevet.</string>
     <string name="profile_alert_duplicate_name_title">Ez a név már létezik</string>
     <string name="profile_alert_duplicate_name_msg">Ilyen nevű profil már van</string>
     <string name="profile_alert_cant_delete_base">Az OsmAnd alapprofiljai nem törölhetők</string>
@@ -3234,4 +3234,5 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="swap_two_places">%1$s és %2$s felcserélése</string>
     <string name="route_start_point">Kiindulópont</string>
     <string name="default_speed_dialog_msg">Célja az érkezési idő becslése ismeretlen típusú utak esetén, valamint a sebesség korlátozása valamennyi úttípus esetén (az útvonalat befolyásolhatja)</string>
+    <string name="shared_string_revert">Visszaállít</string>
 </resources>

@@ -2497,7 +2497,7 @@ POIの更新は利用できません</string>
     <string name="my_location">現在地</string>
     <string name="shared_string_finish">完了</string>
     <string name="plan_route">ルートプランの設定</string>
-    <string name="shared_string_sort">並べ替え</string>
+    <string name="shared_string_sort">並び替え</string>
     <string name="coordinate_input">座標入力</string>
     <string name="marker_save_as_track_descr">マーカーは以下に指定したファイル名でエクスポートされます:</string>
     <string name="marker_save_as_track">経路を保存</string>
