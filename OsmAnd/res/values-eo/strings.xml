@@ -3375,4 +3375,11 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="download_map_dialog">Fenestro elŝuti mapojn</string>
     <string name="dialogs_and_notifications_title">Fenestroj kaj sciigoj</string>
     <string name="dialogs_and_notifications_descr">Administri (ŝpruc)fenestrojn kaj sciigojn, kiujn OsmAnd montras dum uzado.</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_name">Retoj de nodoj</string>
+    <string name="suggested_maps">Proponataj mapoj</string>
+    <string name="suggested_maps_descr">Tiuj ĉi mapoj estas postulataj por uzi kun kromprogramo</string>
+    <string name="added_profiles">Aldonitaj profiloj</string>
+    <string name="added_profiles_descr">Kromprogramo aldonas novajn profilojn al OsmAnd</string>
+    <string name="shared_string_turn_off">Malaktivigi</string>
+    <string name="new_plugin_added">Aldonis novan kromprogramon</string>
 </resources>
