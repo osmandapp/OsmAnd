@@ -3279,7 +3279,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="turn_screen_on">Bildschirm einschalten</string>
     <string name="map_during_navigation_info">Karte während Navigation</string>
     <string name="vehicle_parameters_descr">Gewicht, Höhe, Geschwindigkeit</string>
-    <string name="vehicle_parameters">Fahrzeuggrößen</string>
+    <string name="vehicle_parameters">Fahrzeugparameter</string>
     <string name="route_parameters">Routenparameter</string>
     <string name="navigate_point_format_olc">Standortkodierung öffnen</string>
     <string name="start_up_message_pref">Begrüßungsnachricht</string>
@@ -3392,4 +3392,14 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="rendering_value_white_name">Weiß</string>
     <string name="swap_two_places">%1$s und %2$s tauschen</string>
     <string name="route_start_point">Startpunkt</string>
+    <string name="default_speed_dialog_msg">Wird verwendet, um die Ankunftszeit für unbekannte Straßen zu schätzen und die Geschwindigkeit für alle Straßen zu begrenzen (könnte die Route ändern)</string>
+    <string name="track_saved">Track gespeichert</string>
+    <string name="empty_filename">Dateiname ist leer</string>
+    <string name="shared_string_revert">Zurücksetzen</string>
+    <string name="clear_confirmation_msg">%1$s löschen\?</string>
+    <string name="suggested_maps">Vorgeschlagene Karten</string>
+    <string name="added_profiles">Profile hinzugefügt</string>
+    <string name="added_profiles_descr">Plugin fügt OsmAnd neues Profil hinzu</string>
+    <string name="shared_string_turn_off">Ausschalten</string>
+    <string name="new_plugin_added">Neues Plugin hinzugefügt</string>
 </resources>
