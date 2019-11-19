@@ -2974,10 +2974,10 @@ Lon %2$s</string>
     <string name="rendering_attr_smoothness_very_horrible_name">Muy horrible</string>
     <string name="rendering_attr_smoothness_impassable_name">Intransitable</string>
     <string name="rendering_attr_highway_class_motorway_name">Autopista</string>
-    <string name="rendering_attr_highway_class_state_road_name">Carretera estatal</string>
-    <string name="rendering_attr_highway_class_road_name">Carretera</string>
-    <string name="rendering_attr_highway_class_street_name">Calle</string>
-    <string name="rendering_attr_highway_class_service_name">Servicio</string>
+    <string name="rendering_attr_highway_class_state_road_name">Carretera/ruta estatal</string>
+    <string name="rendering_attr_highway_class_road_name">Carretera principal</string>
+    <string name="rendering_attr_highway_class_street_name">Calle residencial</string>
+    <string name="rendering_attr_highway_class_service_name">Vía de servicio</string>
     <string name="rendering_attr_highway_class_footway_name">Vereda</string>
     <string name="rendering_attr_highway_class_track_name">Camino rural</string>
     <string name="rendering_attr_highway_class_bridleway_name">Camino ecuestre</string>
