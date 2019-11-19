@@ -3750,4 +3750,9 @@
     <string name="poi_bath_type_foot_bath">piedbano</string>
     <string name="poi_bath_open_air_yes">jes</string>
     <string name="poi_bath_open_air_no">ne</string>
+    <string name="poi_monastery_type_monastics">Ordeno: kontemplema</string>
+    <string name="poi_monastery_type_convent">Ordeno: almozanta</string>
+    <string name="poi_monastery_type_canonry">Ordeno: de regulaj kanonikoj</string>
+    <string name="poi_monastery_type_hermitage">Ordeno: ermita</string>
+    <string name="poi_monastery_type_clerks_regular">Ordeno: de regulaj klerikoj</string>
 </resources>
