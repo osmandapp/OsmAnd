@@ -2616,4 +2616,14 @@
     <string name="poi_access_goods">Accesso ai veicoli commerciali leggeri</string>
     <string name="poi_access_disabled">Accesso ai mezzi per disabili</string>
     <string name="poi_cash_withdrawal_bank_card">Prelievo di contanti</string>
+    <string name="poi_craft_builder">Muratore</string>
+    <string name="poi_craft_joiner">Falegname</string>
+    <string name="poi_bath_type">Tipo</string>
+    <string name="poi_bath_open_air">All\'aria aperta</string>
+    <string name="poi_bath_type_hot_spring">Sorgente calda</string>
+    <string name="poi_bath_type_onsen">Onsen</string>
+    <string name="poi_bath_type_river">Fiume</string>
+    <string name="poi_bath_type_lake">Lago</string>
+    <string name="poi_bath_open_air_yes">sì</string>
+    <string name="poi_bath_open_air_no">no</string>
 </resources>
