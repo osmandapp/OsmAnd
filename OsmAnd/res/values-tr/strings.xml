@@ -3344,4 +3344,14 @@
     <string name="quick_action_directions_from_desc">Başlangıç noktasını ekranın merkezi yapan ve hedefe giden rotayı hesaplayan veya hedef işaretleyici haritada değilse, hedefi seçmek için bir iletişim kutusu açan bir buton.</string>
     <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Düğüm ağı bisiklet rotalarını göster</string>
     <string name="clear_confirmation_msg">%1$s\'i temizle\?</string>
+    <string name="download_map_dialog">Harita indirme iletişim kutusu</string>
+    <string name="dialogs_and_notifications_title">İletişim kutuları ve bildirimler</string>
+    <string name="dialogs_and_notifications_descr">OsmAnd\'ın kullanım sırasında gösterdiği açılır pencereleri, iletişim kutularını ve bildirimleri kontrol edin.</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_name">Düğüm ağları</string>
+    <string name="suggested_maps">Önerilen haritalar</string>
+    <string name="suggested_maps_descr">Bu haritaların eklenti ile kullanılması gerekmektedir</string>
+    <string name="added_profiles">Eklenen profiller</string>
+    <string name="added_profiles_descr">Eklenti OsmAnd\'a yeni profil ekler</string>
+    <string name="shared_string_turn_off">Kapat</string>
+    <string name="new_plugin_added">Yeni eklenti eklendi</string>
 </resources>
