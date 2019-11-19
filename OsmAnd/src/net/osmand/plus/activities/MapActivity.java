@@ -496,6 +496,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			public void start() {
 				setupRouteCalculationProgressBar(pb);
 				mapRouteInfoMenu.routeCalculationStarted();
+				RoutingHelper routingHelper = getRoutingHelper();
+				if (routingHelper.isPublicTransportMode() || !routingHelper.isOsmandRouting()) {
+					dashboardOnMap.updateRouteCalculationProgress(0);
+				}
 			}
 
 			@Override
