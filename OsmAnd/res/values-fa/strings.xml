@@ -3428,4 +3428,9 @@
     <string name="download_map_dialog">کادر دانلود نقشه</string>
     <string name="dialogs_and_notifications_title">کادرها و اعلان‌ها</string>
     <string name="dialogs_and_notifications_descr">کادرها، کادرهای بالاپر و اعلان‌هایی که OsmAnd در هنگام کار نشان می‌دهد را تنظیم کنید.</string>
+    <string name="suggested_maps">نقشه‌های پیشنهادی</string>
+    <string name="suggested_maps_descr">به این نقشه‌ها برای استفاده با افزونه نیاز دارید</string>
+    <string name="added_profiles">پروفایل‌های افزوده</string>
+    <string name="added_profiles_descr">افزونه پروفایل تازه‌ای به OsmAnd اضافه می‌کند</string>
+    <string name="new_plugin_added">افزونهٔ تازه اضافه شد</string>
 </resources>

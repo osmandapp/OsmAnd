@@ -3235,4 +3235,10 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="route_start_point">Kiindulópont</string>
     <string name="default_speed_dialog_msg">Célja az érkezési idő becslése ismeretlen típusú utak esetén, valamint a sebesség korlátozása valamennyi úttípus esetén (az útvonalat befolyásolhatja)</string>
     <string name="shared_string_revert">Visszaállít</string>
+    <string name="track_saved">Nyomvonal elmentve</string>
+    <string name="empty_filename">Fájlnév üres</string>
+    <string name="download_map_dialog">Térképletöltés párbeszédablak</string>
+    <string name="dialogs_and_notifications_title">Párbeszédablakok és értesítések</string>
+    <string name="dialogs_and_notifications_descr">OsmAnd használata közben megjelenő felugró üzenetek, párbeszédablakok és értesítések beállításai.</string>
+    <string name="suggested_maps">Javasolt térképek</string>
 </resources>

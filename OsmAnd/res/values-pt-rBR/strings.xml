@@ -3383,4 +3383,10 @@ Pôr do Sol: %2$s</string>
     <string name="download_map_dialog">Caixa baixar mapa</string>
     <string name="dialogs_and_notifications_title">Diálogos e notificações</string>
     <string name="dialogs_and_notifications_descr">Popups de controle , caixas de diálogo e notificações que o OsmAnd mostra durante o uso.</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_name">Redes de nós</string>
+    <string name="suggested_maps">Mapas sugeridos</string>
+    <string name="suggested_maps_descr">Esses mapas são necessários para usar com o plugin</string>
+    <string name="added_profiles">Perfis adicionados</string>
+    <string name="shared_string_turn_off">Desligar</string>
+    <string name="new_plugin_added">Novo plugin adicionado</string>
 </resources>

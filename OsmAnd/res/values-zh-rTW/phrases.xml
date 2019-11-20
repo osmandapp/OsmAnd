@@ -3745,4 +3745,20 @@
     <string name="poi_cash_withdrawal_migros_bank">Migros 銀行</string>
     <string name="poi_cash_withdrawal_girocard">Girocard</string>
     <string name="poi_cash_withdrawal_postbank">郵政銀行</string>
+    <string name="poi_bath_type">類型</string>
+    <string name="poi_bath_open_air">露天</string>
+    <string name="poi_bath_type_hot_spring">溫泉</string>
+    <string name="poi_bath_type_onsen">日式溫泉</string>
+    <string name="poi_bath_type_hammam">土耳其浴</string>
+    <string name="poi_bath_type_thermal">温泉療法</string>
+    <string name="poi_bath_type_river">河</string>
+    <string name="poi_bath_type_lake">湖</string>
+    <string name="poi_bath_type_foot_bath">足浴</string>
+    <string name="poi_bath_open_air_yes">是</string>
+    <string name="poi_bath_open_air_no">否</string>
+    <string name="poi_monastery_type_monastics">修道院類型：僧侶</string>
+    <string name="poi_monastery_type_convent">修道院類型：女修道院</string>
+    <string name="poi_monastery_type_canonry">修道院類型：法政牧師</string>
+    <string name="poi_monastery_type_hermitage">修道院類型：隱士</string>
+    <string name="poi_monastery_type_clerks_regular">修道院：普通牧師</string>
 </resources>

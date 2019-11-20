@@ -824,7 +824,7 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="rendering_value_browse_map_name">Esploratzione mapa</string>
     <string name="rendering_value_car_name">Màchina</string>
     <string name="rendering_value_bicycle_name">Bitzicleta</string>
-    <string name="rendering_value_pedestrian_name">A pedes</string>
+    <string name="rendering_value_pedestrian_name">A pede</string>
     <string name="gpx_option_reverse_route">Furria diretzione GPX</string>
     <string name="rotate_map_bearing_opt">Diretzione de sa mòvida</string>
     <string name="show_view_angle">Ammustra diretzione de osservatzione de abbistadura</string>
@@ -1242,7 +1242,7 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="Closest_Amenities">Amenidades prus a curtzu</string>
     <string name="app_mode_car">Màchina</string>
     <string name="app_mode_bicycle">Bitzicleta</string>
-    <string name="app_mode_pedestrian">A pedes</string>
+    <string name="app_mode_pedestrian">A pede</string>
     <string name="position_on_map_center">In tzentru</string>
     <string name="position_on_map_bottom">In bassu</string>
     <string name="navigate_point_top_text">Insertare latitùdine &amp; longitùdine in su formadu (G - grados, M - minutos, S - segundos)</string>
@@ -2239,7 +2239,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="driving_region_automatic">Automàtica</string>
     <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) est un\'aplicatzione pro sa consultatzione de mapas e sa navigatzione chi impreat sos datos lìberos, vàlidos pro totu su mundu, e de calidade arta, de OpenStreetMap (OSM). 
 \n 
-\nImprea sa ghia vocale e sas indicatziones in s\'ischermu, càstia sos PDI (puntos de interesse), crea e manìgia rastas GPX, abìlita sa visualizatzione de sas curvas de livellu e sos datos de s\'artària (pro mèdiu de un\'estensione), issèbera sa modalidade intre ghia pro sa màchina, sas bitzicletas e a pedes, agiuda a megioare sas mapas OSM e àteru meda.</string>
+\nImprea sa ghia vocale e sas indicatziones in s\'ischermu, càstia sos PDI (puntos de interesse), crea e manìgia rastas GPX, abìlita sa visualizatzione de sas curvas de livellu e sos datos de s\'artària (pro mèdiu de un\'estensione), issèbera sa modalidade intre ghia pro sa màchina, sas bitzicletas e a pede, agiuda a megioare sas mapas OSM e àteru meda.</string>
     <string name="osmand_extended_description_part2">Navigatzione GPS 
 \n• Issèbera intre sa modalidade non in lìnia (non b\'ant a èssere pagamentos cando ses in s\'èsteru) o in lìnia (prus lestra) 
 \n• Ghia vocale chi t\'agiudat in totu su biàgiu tuo (boghes registradas e sintetizadas) 
@@ -3342,7 +3342,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="routing_attr_prefer_unpaved_description">Privilègia sos caminos non apamentados.</string>
     <string name="update_all_maps">Agiorna totu sas mapas</string>
     <string name="update_all_maps_q">Ses seguru de chèrrere agiornare totu (%1$d) sas mapas\?</string>
-    <string name="release_3_5">• Impostatziones de s\'aplicatzione e de profilu agiornadas. Sas impostatziones como sunt ordinadas pro casta. Cada profilu si podet personalizare a banda dae sos àtaeros.
+    <string name="release_3_5">• Impostatziones de s\'aplicatzione e de profilu agiornadas. Sas impostatziones como sunt ordinadas pro casta. Cada profilu si podet personalizare a banda dae sos àteros. 
 \n 
 \n • Su diàlogu de iscarrigamentu nou cussigiat una mapa de iscarrigare durante s\'esploratzione 
 \n 
@@ -3354,7 +3354,7 @@ Pro praghere iscrie su còdighe intreu</string>
 \n 
 \n • Àreas alluvionadas de su mundu acontzadas 
 \n 
-\n • Càlculu de sas àndalas pro s\'iscì: profilu de artària e cumplessidade de s\'àndalas annànghidos a sos detàllios de s\'àndala 
+\n • Càlculu de sas àndalas pro s\'iscì: profilu de artària e cumplessidade de s\'àndala annànghidos a sos detàllios de s\'àndala 
 \n 
 \n • Àteros errores acontzados
 \n

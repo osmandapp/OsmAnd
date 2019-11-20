@@ -249,4 +249,6 @@
     <string name="shared_string_apply">套用</string>
     <string name="set_time_timeline_descr">選取要顯示的時間</string>
     <string name="start_end_date">開始到結束日期</string>
+    <string name="location_sharing_status">正在分享：%1$s</string>
+    <string name="shared_string_enabled">已啟用</string>
 </resources>

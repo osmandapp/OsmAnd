@@ -406,7 +406,7 @@ POIの更新は利用できません</string>
     <string name="show_gps_coordinates_text">マップ上にGPS座標を表示</string>
     <string name="use_internet_to_download_tile">ローカルデータ内で見つからないマップタイルをインターネットからダウンロードします</string>
     <string name="app_description">ナビゲーションアプリケーション</string>
-    <string name="shared_string_exit">戻る</string>
+    <string name="shared_string_exit">終了</string>
     <string name="search_button">検索</string>
     <string name="search_activity">検索</string>
     <string name="searchpoi_activity">POIを選択</string>

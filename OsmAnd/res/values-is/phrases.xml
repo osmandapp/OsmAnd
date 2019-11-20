@@ -3731,4 +3731,15 @@
     <string name="poi_cash_withdrawal_migros_bank">Migros bank</string>
     <string name="poi_cash_withdrawal_girocard">Girocard</string>
     <string name="poi_cash_withdrawal_postbank">Postbank</string>
+    <string name="poi_bath_type">Tegund</string>
+    <string name="poi_bath_open_air">Utanhúss</string>
+    <string name="poi_bath_type_hot_spring">Heit uppspretta</string>
+    <string name="poi_bath_type_onsen">Onsen (japanskt)</string>
+    <string name="poi_bath_type_hammam">Hammam (arabískt)</string>
+    <string name="poi_bath_type_thermal">Volgra (thermal)</string>
+    <string name="poi_bath_type_river">Á</string>
+    <string name="poi_bath_type_lake">Stöðuvatn</string>
+    <string name="poi_bath_type_foot_bath">Fótabað</string>
+    <string name="poi_bath_open_air_yes">Já</string>
+    <string name="poi_bath_open_air_no">Nei</string>
 </resources>
