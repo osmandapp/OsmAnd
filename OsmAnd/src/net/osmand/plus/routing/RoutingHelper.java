@@ -1073,8 +1073,8 @@ public class RoutingHelper {
 			RouteRecalculationThread newThread = new RouteRecalculationThread(
 					"Calculating route", params, paramsChanged); //$NON-NLS-1$
 			currentRunningJob = newThread;
+			startProgress(params);
 			if (updateProgress) {
-				startProgress(params);
 				updateProgress(params);
 			}
 			if (prevRunningJob != null) {
@@ -1163,6 +1163,10 @@ public class RoutingHelper {
 
 	public boolean isPublicTransportMode() {
 		return mode.isDerivedRoutingFrom(ApplicationMode.PUBLIC_TRANSPORT);
+	}
+
+	public boolean isOsmandRouting() {
+		return mode.getRouteService() == RouteService.OSMAND;
 	}
 
 	public boolean isRouteBeingCalculated() {

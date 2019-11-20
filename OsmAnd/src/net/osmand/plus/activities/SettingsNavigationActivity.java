@@ -664,9 +664,9 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 			});
 			return true;
 		} else if (preference == defaultSpeed) {
-			showSeekbarSettingsDialog(this, false);
+			showSeekbarSettingsDialog(this, false, settings.getApplicationMode());
 		} else if (preference == defaultSpeedOnly) {
-			showSeekbarSettingsDialog(this, true);
+			showSeekbarSettingsDialog(this, true, settings.getApplicationMode());
 		}
 		return false;
 	}
@@ -720,14 +720,13 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		return bld.show();
 	}
 
-	public static void showSeekbarSettingsDialog(Activity activity, final boolean defaultSpeedOnly) {
-		if (activity == null) {
+	public static void showSeekbarSettingsDialog(Activity activity, final boolean defaultSpeedOnly, final ApplicationMode mode) {
+		if (activity == null || mode == null) {
 			return;
 		}
 		final OsmandApplication app = (OsmandApplication) activity.getApplication();
 		final OsmandSettings settings = app.getSettings();
 
-		final ApplicationMode mode = settings.getApplicationMode();
 		GeneralRouter router = getRouter(app.getRoutingConfig(), mode);
 		SpeedConstants units = settings.SPEED_SYSTEM.get();
 		String speedUnits = units.toShortString(activity);

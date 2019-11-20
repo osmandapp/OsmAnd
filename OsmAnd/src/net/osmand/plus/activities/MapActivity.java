@@ -496,6 +496,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			public void start() {
 				setupRouteCalculationProgressBar(pb);
 				mapRouteInfoMenu.routeCalculationStarted();
+				RoutingHelper routingHelper = getRoutingHelper();
+				if (routingHelper.isPublicTransportMode() || !routingHelper.isOsmandRouting()) {
+					dashboardOnMap.updateRouteCalculationProgress(0);
+				}
 			}
 
 			@Override
@@ -588,8 +592,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				? mapLayers.getRouteLayer().getRouteLineColor(nightMode)
 				: ContextCompat.getColor(this, R.color.wikivoyage_active_light);
 
+		RoutingHelper routingHelper = getRoutingHelper();
 		pb.setProgressDrawable(AndroidUtils.createProgressDrawable(bgColor, progressColor));
-		pb.setIndeterminate(getRoutingHelper().isPublicTransportMode());
+		pb.setIndeterminate(routingHelper.isPublicTransportMode() || !routingHelper.isOsmandRouting());
 		pb.getIndeterminateDrawable().setColorFilter(progressColor, android.graphics.PorterDuff.Mode.SRC_IN);
 	}
 
@@ -843,8 +848,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			}
 			if (intent.hasExtra(EditProfileFragment.OPEN_SETTINGS)) {
 				String settingsType = intent.getStringExtra(EditProfileFragment.OPEN_SETTINGS);
+				String appMode = intent.getStringExtra(EditProfileFragment.SELECTED_ITEM);
 				if (EditProfileFragment.OPEN_CONFIG_PROFILE.equals(settingsType)) {
-					BaseSettingsFragment.showInstance(this, SettingsScreenType.CONFIGURE_PROFILE);
+					BaseSettingsFragment.showInstance(this, SettingsScreenType.CONFIGURE_PROFILE, ApplicationMode.valueOfStringKey(appMode, null));
 				}
 				setIntent(null);
 			}

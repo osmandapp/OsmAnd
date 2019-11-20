@@ -98,8 +98,6 @@ public class GlobalSettingsFragment extends BaseSettingsFragment implements Send
 		if (app == null) {
 			return;
 		}
-		ApplicationMode selectedMode = getSelectedAppMode();
-
 		ApplicationMode[] appModes = ApplicationMode.values(app).toArray(new ApplicationMode[0]);
 		String[] entries = new String[appModes.length];
 		String[] entryValues = new String[appModes.length];
@@ -109,7 +107,7 @@ public class GlobalSettingsFragment extends BaseSettingsFragment implements Send
 		}
 
 		ListPreferenceEx defaultApplicationMode = (ListPreferenceEx) findPreference(settings.DEFAULT_APPLICATION_MODE.getId());
-		defaultApplicationMode.setIcon(getContentIcon(selectedMode.getIconRes()));
+		defaultApplicationMode.setIcon(getContentIcon(settings.DEFAULT_APPLICATION_MODE.get().getIconRes()));
 		defaultApplicationMode.setEntries(entries);
 		defaultApplicationMode.setEntryValues(entryValues);
 	}
