@@ -189,8 +189,8 @@ public class TrackActivity extends TabActivity {
 			}
 			if (file != null) {
 				SelectedGpxFile sf = selectedGpxHelper.getSelectedFileByPath(gpxFile.path);
-				if (sf != null && file != null && sf.getDisplayGroups() != null) {
-					displayGroups = sf.getDisplayGroups();
+				if (sf != null && file != null && sf.getDisplayGroups(app) != null) {
+					displayGroups = sf.getDisplayGroups(app);
 				}
 			}
 		}
@@ -479,7 +479,7 @@ public class TrackActivity extends TabActivity {
 					} else {
 						final SelectedGpxFile selectedGpx = helper.getSelectedFileByPath(result.path);
 						if (selectedGpx != null && result.error == null) {
-							selectedGpx.setGpxFile(result);
+							selectedGpx.setGpxFile(result, app);
 						}
 					}
 				}

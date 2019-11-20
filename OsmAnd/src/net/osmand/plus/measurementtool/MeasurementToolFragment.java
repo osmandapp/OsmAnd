@@ -1349,7 +1349,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 							SelectedGpxFile sf = activity.getMyApplication().getSelectedGpxHelper().selectGpxFile(gpx, true, false);
 							if (sf != null) {
 								if (actionType == NewGpxData.ActionType.ADD_SEGMENT || actionType == NewGpxData.ActionType.EDIT_SEGMENT) {
-									sf.processPoints();
+									sf.processPoints(getMyApplication());
 								}
 							}
 						}
