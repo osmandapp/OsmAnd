@@ -695,7 +695,7 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 			progressBar.setVisibility(View.GONE);
 			if (mSelectedGpxFile != null) {
 				List<GpxDisplayGroup> groups = getDisplayGroups();
-				mSelectedGpxFile.setDisplayGroups(groups);
+				mSelectedGpxFile.setDisplayGroups(groups, app);
 			}
 			updateContent();
 		}

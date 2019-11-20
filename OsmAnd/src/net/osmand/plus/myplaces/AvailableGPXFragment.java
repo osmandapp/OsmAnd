@@ -1867,9 +1867,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 		SelectedGpxFile sgpx = getSelectedGpxFile(gpxInfo, app);
 		GPXTrackAnalysis analysis = null;
 		if (sgpx != null) {
-			analysis = sgpx.getTrackAnalysis();
+			analysis = sgpx.getTrackAnalysis(app);
 		} else if (gpxInfo.currentlyRecordingTrack) {
-			analysis = app.getSavingTrackHelper().getCurrentTrack().getTrackAnalysis();
+			analysis = app.getSavingTrackHelper().getCurrentTrack().getTrackAnalysis(app);
 		} else if (gpxInfo.file != null) {
 			GpxDataItemCallback analyserCallback = null;
 			if (callback != null) {

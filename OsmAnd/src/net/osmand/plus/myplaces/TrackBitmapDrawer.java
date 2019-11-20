@@ -206,7 +206,7 @@ public class TrackBitmapDrawer {
 					sf = app.getSavingTrackHelper().getCurrentTrack();
 				} else {
 					sf = new GpxSelectionHelper.SelectedGpxFile();
-					sf.setGpxFile(gpxFile);
+					sf.setGpxFile(gpxFile, app);
 				}
 				Bitmap bmp = mapBitmap.copy(mapBitmap.getConfig(), true);
 				Canvas canvas = new Canvas(bmp);

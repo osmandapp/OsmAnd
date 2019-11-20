@@ -1238,7 +1238,7 @@ public class OsmandAidlApi {
 					@Override
 					protected void onPostExecute(GPXFile gpx) {
 						if (gpx.error == null) {
-							selectedGpx.setGpxFile(gpx);
+							selectedGpx.setGpxFile(gpx, app);
 							refreshMap();
 						}
 					}
@@ -1417,7 +1417,7 @@ public class OsmandAidlApi {
 				}
 				long modifiedTime = gpxFile.modifiedTime;
 				long fileSize = new File(gpxFile.path).length();
-				files.add(new ASelectedGpxFile(path, modifiedTime, fileSize, createGpxFileDetails(selectedGpxFile.getTrackAnalysis())));
+				files.add(new ASelectedGpxFile(path, modifiedTime, fileSize, createGpxFileDetails(selectedGpxFile.getTrackAnalysis(app))));
 			}
 		}
 		return true;
@@ -1435,7 +1435,7 @@ public class OsmandAidlApi {
 				}
 				long modifiedTime = gpxFile.modifiedTime;
 				long fileSize = new File(gpxFile.path).length();
-				files.add(new net.osmand.aidlapi.gpx.ASelectedGpxFile(path, modifiedTime, fileSize, createGpxFileDetailsV2(selectedGpxFile.getTrackAnalysis())));
+				files.add(new net.osmand.aidlapi.gpx.ASelectedGpxFile(path, modifiedTime, fileSize, createGpxFileDetailsV2(selectedGpxFile.getTrackAnalysis(app))));
 			}
 		}
 		return true;

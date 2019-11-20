@@ -796,7 +796,7 @@ public class GpxUiHelper {
 
 		GPXTrackAnalysis analysis = null;
 		if (currentlyRecordingTrack) {
-			analysis = app.getSavingTrackHelper().getCurrentTrack().getTrackAnalysis();
+			analysis = app.getSavingTrackHelper().getCurrentTrack().getTrackAnalysis(app);
 		} else if (dataItem != null) {
 			analysis = dataItem.getAnalysis();
 		}
@@ -1025,6 +1025,8 @@ public class GpxUiHelper {
 					GPXFile res = GPXUtilities.loadGPXFile(f);
 					if (res.error != null && !Algorithms.isEmpty(res.error.getMessage())) {
 						w += res.error.getMessage() + "\n";
+					} else {
+						res.addGeneralTrack();
 					}
 					result[k++] = res;
 				}
