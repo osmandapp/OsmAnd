@@ -1474,7 +1474,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				final Uri fileUri = AndroidUtils.getUriForFile(getMyApplication(), gpxInfo.file);
 				final Intent sendIntent = new Intent(Intent.ACTION_SEND);
 				sendIntent.putExtra(Intent.EXTRA_STREAM, fileUri);
-				sendIntent.setType("application/gpx+xml");
+				sendIntent.setType("text/plain");
 				sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 				startActivity(sendIntent);
 				return true;
