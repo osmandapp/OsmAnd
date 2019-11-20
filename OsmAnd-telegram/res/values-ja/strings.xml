@@ -125,4 +125,21 @@
     <string name="by_group">グループで</string>
     <string name="shared_string_sort">並び替え</string>
     <string name="shared_string_sort_by">並び替え：</string>
+    <string name="choose_osmand_desc">OsmAndのバージョンを選択すると、マップ上に連絡先が表示されます。</string>
+    <string name="choose_osmand">使用するOsmAndバージョンを選択</string>
+    <string name="disable_all_sharing_desc">選択したチャット (%1$d)で、現在地の共有をOFFにします。</string>
+    <string name="disable_all_sharing">すべての共有を無効化</string>
+    <string name="turn_off_all">すべてOFF</string>
+    <string name="shared_string_exit">終了</string>
+    <string name="time_ago">前</string>
+    <string name="last_response">最後の返信</string>
+    <string name="shared_string_group">グループ</string>
+    <string name="logout_no_internet_msg">インターネットに接続すると、Telegramから正しい手順でログアウトします。</string>
+    <string name="shared_string_close">閉じる</string>
+    <string name="disconnect_from_telegram_desc">位置共有アクセスを取り消すためには Telegramを開き、\'設定\'→\'プライバシーとセキュリティ\'→\'セッション\'に移動して、OsmAnd Trackerセッションを終了します。</string>
+    <string name="disconnect_from_telegram">TelegramからOsmAnd TrackerをOFFにする方法</string>
+    <string name="logout_help_desc">TelegramからOsmAnd TrackerをOFFにする方法</string>
+    <string name="connected_account">接続済みアカウント</string>
+    <string name="shared_string_account">アカウント</string>
+    <string name="in_time">%1$s内</string>
 </resources>
