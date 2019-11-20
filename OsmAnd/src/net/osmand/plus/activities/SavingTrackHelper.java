@@ -78,7 +78,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		this.currentTrack.setShowCurrentTrack(true);
 		GPXFile gx = new GPXFile(Version.getFullVersion(ctx));
 		gx.showCurrentTrack = true;
-		this.currentTrack.setGpxFile(gx);
+		this.currentTrack.setGpxFile(gx, ctx);
 		prepareCurrentTrackForRecording();
 
 		updateScript = "INSERT INTO " + TRACK_NAME + " (" + TRACK_COL_LAT + ", " + TRACK_COL_LON + ", "
@@ -482,7 +482,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 			lt.points.add(pt);
 		}
 		if (segmentAdded) {
-			currentTrack.processPoints();
+			currentTrack.processPoints(ctx);
 		}
 		currentTrack.getModifiableGpxFile().modifiedTime = time;
 	}
@@ -629,7 +629,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 			ctx.getSelectedGpxHelper().addPoints(entry.getValue().getPoints(), currentTrack.getModifiableGpxFile());
 			currentTrack.getModifiableGpxFile().tracks.addAll(entry.getValue().tracks);
 		}
-		currentTrack.processPoints();
+		currentTrack.processPoints(ctx);
 		prepareCurrentTrackForRecording();
 		GPXTrackAnalysis analysis = currentTrack.getModifiableGpxFile().getAnalysis(System.currentTimeMillis());
 		distance = analysis.totalDistance;

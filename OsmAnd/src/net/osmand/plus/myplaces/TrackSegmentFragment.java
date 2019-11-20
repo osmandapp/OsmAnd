@@ -1294,8 +1294,8 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 				if (selectedGpx != null) {
 					List<GpxDisplayGroup> groups = fragment.getDisplayGroups();
 					if (groups != null) {
-						selectedGpx.setDisplayGroups(groups);
-						selectedGpx.processPoints();
+						selectedGpx.setDisplayGroups(groups, app);
+						selectedGpx.processPoints(app);
 					}
 				}
 				fragment.updateContent();

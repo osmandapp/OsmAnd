@@ -289,7 +289,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		if (tileBox.getZoom() >= startZoom) {
 			// request to load
 			for (SelectedGpxFile g : selectedGPXFiles) {
-				List<GpxDisplayGroup> groups = g.getDisplayGroups();
+				List<GpxDisplayGroup> groups = g.getDisplayGroups(view.getApplication());
 				if (groups != null && !groups.isEmpty()) {
 					int color = g.getGpxFile().getColor(0);
 					if (color == 0) {
