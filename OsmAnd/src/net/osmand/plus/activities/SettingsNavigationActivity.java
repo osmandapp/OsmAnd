@@ -39,6 +39,7 @@ import net.osmand.plus.OsmandSettings.AutoZoomMap;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.OsmandSettings.SpeedConstants;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.Version;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
@@ -774,11 +775,10 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 			max = Math.round(router.getMaxSpeed() * ratio[0] * 1.5f);
 		}
 
-		AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-		boolean lightMode = app.getSettings().isLightContent();
-		int themeRes = lightMode ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme;
-		View seekbarView = LayoutInflater.from(new ContextThemeWrapper(activity, themeRes))
-				.inflate(R.layout.default_speed_dialog, null, false);
+		boolean nightMode = !app.getSettings().isLightContentForMode(mode);
+		Context themedContext = UiUtilities.getThemedContext(activity, nightMode);
+		AlertDialog.Builder builder = new AlertDialog.Builder(themedContext);
+		View seekbarView = LayoutInflater.from(themedContext).inflate(R.layout.default_speed_dialog, null, false);
 		builder.setView(seekbarView);
 		builder.setPositiveButton(R.string.shared_string_ok, new OnClickListener() {
 			@Override
