@@ -2004,7 +2004,7 @@ mapak eta nabigazioa</string>
 \nOsmAnd aplikaziorako gehigarri berezi honek itsas nabigaziorako marka eta ikur kartografikoak gehitzen ditu  itsaso zabalean zein kostatik hurbil. Itsas nabigaziorako marka bakoitzak identifikaziorako eta esanahia ulertzeko datuak dauzka (kategoria, forma, kolorea, zenbakia, erreferentzia, eta abar)
 \n
 \nOsmAnden ohiko mapa batetara itzultzeko, gehigarri hau desgaitu edo \'Mapa estiloa\' aldatu \'Konfiguratu mapa\' menuan."</string>
-    <string name="fav_point_emoticons_message">"Gogokoaren izena 1$s-ra aldatu da  emotikonoak dituen katea fitxategi batera gorde ahal izateko."</string>
+    <string name="fav_point_emoticons_message">"Gogokoaren izena %1$s-ra aldatu da  emotikonoak dituen katea fitxategi batera gorde ahal izateko."</string>
     <string name="activate_seamarks_plugin">Aktibatu \'Itsas-mapa ikuspegia\'</string>
     <string name="plugin_ski_descr">Gehigarri honek zure eskura jartzen ditu mundu osoko eskiatzeko aldapak, fondoko eski zirkuituak, trabesiako eski ibilbideak, teleferikoak, eta abar. Ibilbideak eta pistak zailtasunaren arabera koloreztatu dira, eta elurtutako paisaiaren itxura duen \'Negu\' estiloko mapa batean adierazten dira.
 \n
