@@ -3318,8 +3318,8 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="shared_string_memory_kb_desc">%1$s kB</string>
     <string name="track_storage_directory">Priečinok na ukladanie stôp</string>
     <string name="track_storage_directory_descrp">Stopy môžu byť ukladané v priečinku \'rec\' alebo v mesačných či denných priečinkoch.</string>
-    <string name="store_tracks_in_rec_directory">Ukladať zaznamenané stopy v priečinku \'rec\'</string>
-    <string name="store_tracks_in_daily_directories">Ukladať zaznamenané stopy v denných priečinkoch</string>
+    <string name="store_tracks_in_rec_directory">Zaznamenať stopy do priečinku \'rec\'</string>
+    <string name="store_tracks_in_daily_directories">Zaznamenať stopy do denných priečinkov</string>
     <string name="store_tracks_in_daily_directories_descrp">"Ukladať zaznamenané stopy podpriečinkoch za každý deň (napr.  2018-01-01)."</string>
     <string name="shared_string_memory_used_tb_desc">Použité %1$s TB</string>
     <string name="shared_string_memory_used_gb_desc">Použité %1$s GB</string>
@@ -3330,24 +3330,24 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="routing_attr_prefer_unpaved_description">Preferovať cesty s nespevneným povrchom.</string>
     <string name="update_all_maps">Aktualizovať všetky mapy</string>
     <string name="update_all_maps_q">Naozaj chcete aktualizovať všetky (%1$d) mapy\?</string>
-    <string name="release_3_5">• Vylepšené nastavenia aplikácie a profilov. Pohodlné usporiadanie nastavení podľa typu a možnosť upravenia každého profilu
-\n
-\n • Nový dialóg sťahovania máp, ktorý navrhuje mapy na stiahnutie počas prehliadania
-\n
-\n • Opravy nočného vzhľadu
-\n
-\n • Opravené niektoré chyby navigácie
-\n
-\n • Aktualizovaná základná mapa s podrobnejšou cestnou sieťou
-\n
-\n • Opravené \'zaplavené\' územia po svete
-\n
-\n • Lyžiarska navigácia: do detailov trasy bol pridaný výškový profil a obtiažnosť
-\n
+    <string name="release_3_5">• Vylepšené nastavenia aplikácie a profilov. Nastavenia sú usporiadané podľa typu. Každý profil môže byť upravený samostatne.
+\n 
+\n • Nový dialóg sťahovania máp, ktorý navrhuje mapy na stiahnutie počas prehliadania 
+\n 
+\n • Opravy nočného vzhľadu 
+\n 
+\n • Opravené niektoré chyby navigácie 
+\n 
+\n • Aktualizovaná základná mapa s podrobnejšou cestnou sieťou 
+\n 
+\n • Opravené \'zaplavené\' územia po svete 
+\n 
+\n • Lyžiarska navigácia: do detailov trasy bol pridaný výškový profil a obtiažnosť 
+\n 
 \n • Opravy iných chýb
 \n
 \n</string>
-    <string name="apply_preference_to_all_profiles">Túto zmenu môžete aplikovať na zvolený profil alebo na všetky.</string>
+    <string name="apply_preference_to_all_profiles">Túto zmenu môžete aplikovať na na všetky profily alebo na práve zvolený.</string>
     <string name="shared_preference">Zdieľané</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">Preferovať nespevnené cesty</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">Preferovať cesty s nespevneným povrchom.</string>
@@ -3383,4 +3383,12 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="download_map_dialog">Okno sťahovania máp</string>
     <string name="dialogs_and_notifications_title">Okná a upozornenia</string>
     <string name="dialogs_and_notifications_descr">Ovládať okná a upozornenia, ktoré OsmAnd zobrazuje počas behu.</string>
+    <string name="default_speed_dialog_msg">Používa sa pre odhad času na cestách neznámeho typu a obmedzenie rýchlosti na všetkých cestách (môže ovplyvniť trasu)</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_name">Siete bodov</string>
+    <string name="suggested_maps">Navrhované mapy</string>
+    <string name="suggested_maps_descr">Tieto mapy sa musia používať so zásuvným modulom</string>
+    <string name="added_profiles">Pridané profily</string>
+    <string name="added_profiles_descr">Modul pridá do OsmAnd nový profil</string>
+    <string name="shared_string_turn_off">Vypnúť</string>
+    <string name="new_plugin_added">Nový modul pridaný</string>
 </resources>
