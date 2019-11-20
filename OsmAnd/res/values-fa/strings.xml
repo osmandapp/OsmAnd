@@ -982,7 +982,7 @@
 \n 
 \nنقشه‌ها مستقیماً از طریق منابع آنلاین قابل‌دریافت هستند. همچنین می‌توانید آن‌ها را به‌صورت پایگاه‌دادهٔ SQLite برای استفادهٔ آفلاین آماده کنید و سپس در پوشهٔ داده‌های OsmAnd قرار دهید. نرم‌افزارهای مختلفی برای انجام این کار وجود دارد.</string>
     <string name="osmand_accessibility_description">این افزونه امکانات قابلیت‌دسترسی (accessibility) در دستگاهتان را مستقیماً در OsmAnd به کار می‌گیرد و تسهیلاتی را در اختیارتان می‌گذارد؛ مانند تنظیم‌کردن سرعت گفتار موتور صوتی، تبدیل متن به گفتار (مثل اعلام موقعیت شما)، پیمایش صفحه به‌کمک صفحهٔ جهت‌دار و استفاده از توپک برای تنظیم بزرگ‌نمایی.</string>
-    <string name="osm_editing_plugin_description">به‌وسیلهٔ این افزونه در تکمیل نقشهٔ OSM مشارکت کنید. مثلاً با ایجاد یا اصلاح نقاط مورد توجه (POI)، ارسال فایل‌های GPXای که ضبط کرده‌اید و نوشتن یادداشت‌های OSMای. 
+    <string name="osm_editing_plugin_description">به‌وسیلهٔ این افزونه در تکمیل نقشهٔ OSM مشارکت کنید. مثلاً با ایجاد یا اصلاح نقاط توجه (POI)، ارسال فایل‌های GPXای که ضبط کرده‌اید و نوشتن یادداشت‌های OSMای. 
 \nدربارهٔ یادداشت‌های OSM: 
 \nhttps://wiki.osm.org/wiki/Fa:Notes 
 \n 
@@ -1297,7 +1297,7 @@
     <string name="shared_string_waypoints">نقاط بین‌راهی</string>
     <string name="way_alarms">هشدارهای ترافیکی</string>
     <string name="speak_favorites">نقاط برگزیدهٔ نزدیک</string>
-    <string name="speak_poi">نقاط مورد توجه نزدیک</string>
+    <string name="speak_poi">نقاط توجه نزدیک</string>
     <string name="download_additional_maps">آیا نقشه‌های ناموجود را دانلود می‌کنید %1$s ‏(%2$d مگابایت)؟</string>
     <string name="shared_string_more">بیشتر…</string>
     <string name="rendering_value_browse_map_name">مرور نقشه</string>
@@ -1866,13 +1866,13 @@
     <string name="save_track_min_speed">کمترین سرعت برای ورود به سیستم</string>
     <string name="save_track_precision">کمترین دقت برای ثبت</string>
     <string name="christmas_poi">‏POI کریسمس</string>
-    <string name="christmas_desc">در آستانهٔ کریسمس و تعطیلات سال نو، می‌توانید نقاط مورد توجه در کریسمس، مانند درخت‌های کریسمس، فروشگاه‌ها و غیره را ببینید.</string>
-    <string name="christmas_desc_q">نقاط مورد توجه در تعطیلات کریسمس نمایش داده شود؟</string>
+    <string name="christmas_desc">در آستانهٔ کریسمس و تعطیلات سال نو، می‌توانید نقاط توجه در کریسمس، مانند درخت‌های کریسمس، فروشگاه‌ها و غیره را ببینید.</string>
+    <string name="christmas_desc_q">نقاط توجه تعطیلات کریسمس نمایش داده شود؟</string>
     <string name="rendering_value_light_brown_name">قهوه‌ای روشن</string>
     <string name="rendering_value_dark_brown_name">قهوه‌ای تیره</string>
     <string name="rendering_attr_contourColorScheme_name">رنگ‌بندی منحنی‌های میزان</string>
     <string name="rendering_attr_surfaceIntegrity_name">یکپارچگی سطح جاده‌ها</string>
-    <string name="search_hint">نام شهر، نشانی یا نام نقطهٔ مورد توجه را بنویسید</string>
+    <string name="search_hint">نام شهر، نشانی یا نام نقطهٔ توجه را بنویسید</string>
     <string name="edit_filter">ویرایش دسته‌ها</string>
     <string name="subcategories">زیردسته‌ها</string>
     <string name="selected_categories">دسته‌های انتخاب‌شده</string>
@@ -2518,7 +2518,7 @@
     <string name="osmand_extended_description_part7">مشارکت در نقشهٔ باز شهری (OSM) 
 \n • گزارش مشکل در داده‌ها 
 \n • آپلود ردهای GPX به OSM مستقیماً از طریق برنامه 
-\n • افزودن نقاط مورد توجه (POI) و آپلود مستقیم آن‌ها در نقشه
+\n • افزودن نقاط توجه (POI) و آپلود مستقیم آن‌ها در نقشه
 \n</string>
     <string name="wrong_format">قالب نادرست</string>
     <string name="osmand_extended_description_part8">نرم‌افزار OsmAnd متن‌باز است و فعالانه در حال توسعهٔ آن هستیم. راه مشارکت در توسعهٔ OsmAnd به‌روی همه باز است؛ از طریق گزارش مشکلات برنامه، بهترکردن ترجمهٔ برنامه یا کدنویسی برای قابلیت‌های جدید.
@@ -2562,7 +2562,7 @@
 \n • نمایش موقعیت و جهت قرارگیری شما 
 \n • نقشه را در راستای حرکتتان (یا قطب‌نما) تنظیم می‌کند 
 \n • جاهایی را که دوست دارید در قسمت نقاط برگزیده ذخیره کنید 
-\n • نقاط موردتوجه (POI یا Points of interest) اطراف شما را نشان می‌دهد 
+\n • نقاط توجه (POI یا Points of interest) اطراف شما را نشان می‌دهد 
 \n • نمایش نقشه‌های تخصصی آنلاین، تصاویر ماهواره‌ای (بینگ) و رولایه‌های مختلف مانند ردهای GPX گردشگردی یا ناوبری با امکان تنظیم شفافیت 
 \n • شیوهٔ نمایش نام‌های روی نقشه را انتخاب کنید: انگلیسی، محلی یا نویسه‌گردانی‌شده
 \n</string>
@@ -2588,7 +2588,7 @@
     <string name="osmand_plus_extended_description_part7">مشارکت مستقیم در نقشهٔ باز شهری (OSM) 
 \n • گزارش مشکل در داده‌ها 
 \n • آپلود ردهای GPX به OSM مستقیماً از طریق برنامه 
-\n • افزودن نقاط مورد توجه (POI) و آپلود مستقیم آن‌ها در نقشه 
+\n • افزودن نقاط توجه (POI) و آپلود مستقیم آن‌ها در نقشه 
 \n • ضبط اختیاری سفر حتی در پس‌زمینه (هنگامی که دستگاه در حالت خواب است) 
 \nنرم‌افزار OsmAnd متن‌باز است و فعالانه در حال توسعهٔ آن هستیم. راه مشارکت در توسعهٔ OsmAnd به‌روی همه باز است؛ از طریق گزارش مشکلات برنامه، بهترکردن ترجمهٔ برنامه یا کدنویسی برای قابلیت‌های جدید. 
 \nهمچنین بخشی از پیشرفت پروژه متکی به هدایای مالی شماست که در راستای سرمایه‌گذاری برای توسعه و آزمایش قابلیت‌های جدید نرم‌افزار صرف می‌شود.
