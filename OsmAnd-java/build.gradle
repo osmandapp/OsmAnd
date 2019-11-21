@@ -99,7 +99,6 @@ dependencies {
 	implementation group: 'commons-logging', name: 'commons-logging', version: '1.2'
 	implementation group: 'org.json', name: 'json', version: '20171018'
 	implementation 'it.unibo.alice.tuprolog:tuprolog:3.2.1'
-	implementation 'org.beanshell:bsh-core:2.0b4'
 	implementation 'org.apache.commons:commons-compress:1.17'
 	implementation 'com.moparisthebest:junidecode:0.1.1'
 	implementation 'com.vividsolutions:jts-core:1.14.0'
