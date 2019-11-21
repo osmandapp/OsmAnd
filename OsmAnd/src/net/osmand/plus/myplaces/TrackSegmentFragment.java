@@ -1177,7 +1177,7 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 
 		private TrkSegment getTrkSegment() {
 			for (Track t : gpxItem.group.getGpx().tracks) {
-				if (!t.generalTrack) {
+				if (!t.generalTrack && !gpxItem.isGeneralTrack() || t.generalTrack && gpxItem.isGeneralTrack()) {
 					for (TrkSegment s : t.segments) {
 						if (s.points.size() > 0 && s.points.get(0).equals(gpxItem.analysis.locationStart)) {
 							return s;
@@ -1245,12 +1245,12 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 
 			MapActivity.launchMapActivityMoveToTop(getActivity());
 		}
-	}
 
-	void openSplitIntervalScreen() {
-		TrackActivity activity = getTrackActivity();
-		if (activity != null) {
-			SplitSegmentDialogFragment.showInstance(activity);
+		private	void openSplitIntervalScreen() {
+			TrackActivity activity = getTrackActivity();
+			if (activity != null) {
+				SplitSegmentDialogFragment.showInstance(activity, gpxItem, getTrkSegment(), joinGapsEnabled);
+			}
 		}
 	}
 

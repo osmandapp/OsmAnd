@@ -287,17 +287,17 @@ public class GPXUtilities {
 		public Object renderer;
 
 
-		public List<GPXTrackAnalysis> splitByDistance(double meters) {
-			return split(getDistanceMetric(), getTimeSplit(), meters);
+		public List<GPXTrackAnalysis> splitByDistance(double meters, boolean joinGaps) {
+			return split(getDistanceMetric(), getTimeSplit(), meters, joinGaps);
 		}
 
-		public List<GPXTrackAnalysis> splitByTime(int seconds) {
-			return split(getTimeSplit(), getDistanceMetric(), seconds);
+		public List<GPXTrackAnalysis> splitByTime(int seconds, boolean joinGaps) {
+			return split(getTimeSplit(), getDistanceMetric(), seconds, joinGaps);
 		}
 
-		private List<GPXTrackAnalysis> split(SplitMetric metric, SplitMetric secondaryMetric, double metricLimit) {
+		private List<GPXTrackAnalysis> split(SplitMetric metric, SplitMetric secondaryMetric, double metricLimit, boolean joinGaps) {
 			List<SplitSegment> splitSegments = new ArrayList<>();
-			splitSegment(metric, secondaryMetric, metricLimit, splitSegments, this);
+			splitSegment(metric, secondaryMetric, metricLimit, splitSegments, this, joinGaps);
 			return convert(splitSegments);
 		}
 
@@ -852,8 +852,8 @@ public class GPXUtilities {
 	}
 
 	private static void splitSegment(SplitMetric metric, SplitMetric secondaryMetric,
-									 double metricLimit, List<SplitSegment> splitSegments,
-									 TrkSegment segment) {
+	                                 double metricLimit, List<SplitSegment> splitSegments,
+	                                 TrkSegment segment, boolean joinGaps) {
 		double currentMetricEnd = metricLimit;
 		double secondaryMetricEnd = 0;
 		SplitSegment sp = new SplitSegment(segment, 0, 0);
@@ -862,8 +862,11 @@ public class GPXUtilities {
 		for (int k = 0; k < segment.points.size(); k++) {
 			WptPt point = segment.points.get(k);
 			if (k > 0) {
-				double currentSegment = metric.metric(prev, point);
-				secondaryMetricEnd += secondaryMetric.metric(prev, point);
+				double currentSegment = 0;
+				if (!(segment.generalSegment && joinGaps && point.firstPoint)) {
+					currentSegment = metric.metric(prev, point);
+					secondaryMetricEnd += secondaryMetric.metric(prev, point);
+				}
 				while (total + currentSegment > currentMetricEnd) {
 					double p = currentMetricEnd - total;
 					double cf = (p / currentSegment);
