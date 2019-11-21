@@ -23,6 +23,7 @@ import net.osmand.IndexConstants;
 import net.osmand.StateChangedListener;
 import net.osmand.ValueHolder;
 import net.osmand.aidl.OsmandAidlApi;
+import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.map.ITileSource;
@@ -38,6 +39,7 @@ import net.osmand.plus.dialogs.RateUsBottomSheetDialog;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.mapillary.MapillaryPlugin;
 import net.osmand.plus.mapmarkers.CoordinateInputFormats.Format;
+import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.render.RenderingRulesStorage;
@@ -248,6 +250,18 @@ public class OsmandSettings {
 						settingsAPI.edit(globalPreferences).remove(key).commit();
 					}
 				}
+			}
+		}
+	}
+
+	public void migrateHomeWorkParkingToFavorites() {
+		FavouritesDbHelper favorites = ctx.getFavorites();
+		favorites.addFavoritePersonal(getHomePoint(),FavouritesDbHelper.HOME,getHomePointDescription().getName());
+		favorites.addFavoritePersonal(getWorkPoint(),FavouritesDbHelper.WORK,getWorkPointDescription().getName());
+		if (OsmandPlugin.getEnabledPlugin(ParkingPositionPlugin.class) != null) {
+			ParkingPositionPlugin parkingPositionPlugin = OsmandPlugin.getEnabledPlugin(ParkingPositionPlugin.class);
+			if(parkingPositionPlugin != null) {
+				favorites.addFavoritePersonal(parkingPositionPlugin.constructParkingPosition(), FavouritesDbHelper.PARKING, "");
 			}
 		}
 	}
