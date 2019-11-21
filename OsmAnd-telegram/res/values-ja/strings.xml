@@ -142,4 +142,21 @@
     <string name="connected_account">接続済みアカウント</string>
     <string name="shared_string_account">アカウント</string>
     <string name="in_time">%1$s内</string>
+    <string name="osmand_connect_desc">OsmAndのバージョンを選択すると、OsmAnd Trackerにて位置の表示が使用できます。</string>
+    <string name="osmand_connect">OsmAndの接続</string>
+    <string name="location_history_desc">特定の時間内で移動していない場合は、連絡先を非表示にします。</string>
+    <string name="location_history">位置履歴</string>
+    <string name="stale_location_desc">連絡相手が移動した最後の時刻をしめしています。</string>
+    <string name="stale_location">移動していません</string>
+    <string name="send_my_location_desc">位置共有の最小間隔を設定します。</string>
+    <string name="send_my_location">現在地の送信</string>
+    <string name="gps_and_location">GPSでの位置</string>
+    <string name="sharing_time">共有時刻</string>
+    <string name="expire_at">超過時間：</string>
+    <string name="stop_sharing_all">共有はON</string>
+    <string name="turn_off_location_sharing">現在地共有をOFFにする</string>
+    <string name="open_osmand">OsmAndを開く</string>
+    <string name="shared_string_live">Live</string>
+    <string name="shared_string_bot">BOT</string>
+    <string name="get_telegram_title">Telegramへの登録</string>
 </resources>
