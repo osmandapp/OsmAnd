@@ -863,7 +863,7 @@ Proportioneel werkgeheugen %4$s MB (Android limiet %5$s MB, Dalvik %6$s MB).</st
 \n 
 \nDe wereldwijde gegevens (van 70 graden noorderbreedte tot 70 graden zuiderbreedte) zijn gebaseerd op metingen door SRTM (Shuttle Radar Topography Mission) en ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), een beeldvormend instrument aan boord van de satelliet Terra, het vlaggeschip van NASA\'s Earth Observing System. ASTER is een samenwerkingsverband tussen NASA, het Japanse Ministerie van Economie, Handel en Industrie (METI), en het Japan Space Systems (J-spacesystems).</string>
     <string name="map_widget_distancemeasurement">Afstandsmeting</string>
-    <string name="audionotes_location_not_defined">Schakel\" locatie\" in om een notatie aan een specifieke locatie toe te voegen.</string>
+    <string name="audionotes_location_not_defined">Schakel \'locatie\' in om een notitie aan de locatie toe te voegen.</string>
     <string name="map_widget_audionotes">Audionotities</string>
     <string name="recording_is_recorded">Audio/video wordt opgenomen. Om te stoppen, tik op het AV-widget.</string>
     <string name="recording_playing">Een geluidsfragment van de gekozen opname wordt afgespeeld.\n%1$s</string>
@@ -872,7 +872,7 @@ Proportioneel werkgeheugen %4$s MB (Android limiet %5$s MB, Dalvik %6$s MB).</st
     <string name="recording_unavailable">niet beschikbaar</string>
     <string name="recording_context_menu_arecord">Audionotitie opnemen</string>
     <string name="recording_context_menu_vrecord">Videonotitie opnemen</string>
-    <string name="layer_recordings"></string>
+    <string name="layer_recordings"/>
     <string name="recording_can_not_be_played">Opname kan niet worden afgespeeld.</string>
     <string name="recording_context_menu_delete">Wis opname</string>
     <string name="recording_context_menu_play">Afspelen</string>
@@ -2478,7 +2478,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="mappilary_no_internet_desc">U moet een internetverbinding hebben om Mapillary-foto\'s te bekijken</string>
     <string name="empty_state_my_tracks_desc">Registreer of importeer tracks om weer te geven.</string>
     <string name="empty_state_favourites">Favorieten toevoegen</string>
-    <string name="empty_state_favourites_desc">Importeer Favorieten, of voeg ze via markeer punten toe aan de kaart.</string>
+    <string name="empty_state_favourites_desc">Importeer Favorieten, of voeg ze via markeerpunten toe aan de kaart.</string>
     <string name="import_track">Importeer track</string>
     <string name="import_track_desc">Bestand %1$s bevat geen waypoints. Importeren als een track?</string>
     <string name="move_point">Verplaats punt</string>
@@ -2751,7 +2751,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="osm_live_payment_renews_annually">"Wordt per jaar verlengd "</string>
     <string name="default_price_currency_format">%1$.2f %2$s</string>
     <string name="osm_live_payment_header">Kies de gewenste betalingsperiode:</string>
-    <string name="osm_live_payment_contribute_descr">Een deel van de inkomsten gaat naar OpenStreetMap medewerkers.</string>
+    <string name="osm_live_payment_contribute_descr">Een deel van de inkomsten gaat naar OpenStreetMap.</string>
     <string name="markers_remove_dialog_msg">Markeervlaggetje \'%s\' verwijderen\?</string>
     <string name="edit_map_marker">"Markeervlaggetje bewerken "</string>
     <string name="third_party_application">App van derde partij</string>
@@ -2759,22 +2759,22 @@ voor Gebied: %1$s x %2$s</string>
     <string name="start_search_from_city">Plaatsnaam kiezen</string>
     <string name="shared_string_restore">"Herstellen "</string>
     <string name="keep_passed_markers">Vorige vlaggetjes op de kaart behouden</string>
-    <string name="more_transport_on_stop_hint">Op deze halte zijn er meerdere verbindingen.</string>
+    <string name="more_transport_on_stop_hint">Meerdere verbindingen beschikbaar vanaf deze halte.</string>
     <string name="ask_for_location_permission">Geef OsmAnd toegang tot uw locatie om door te gaan.</string>
     <string name="keep_passed_markers_descr">Markeervlaggetjes die als Favorieten of als GPX-track toegevoegd zijn, en afgehandeld zijn, blijven zichtbaar op de kaart. Als die groep niet meer actief is, zullen ze verdwijnen.</string>
     <string name="mapillary_menu_title_pano">Alleen 360°-foto\'s tonen</string>
     <string name="rendering_value_black_name">Zwart</string>
     <string name="copy_location_name">"Naam kopiëren "</string>
     <string name="routing_attr_avoid_tram_description">Vermijd trams</string>
-    <string name="routing_attr_avoid_bus_name">Vermijd bussen</string>
+    <string name="routing_attr_avoid_bus_name">Geen bussen</string>
     <string name="routing_attr_avoid_bus_description">Vermijd bussen en trolleybussen</string>
-    <string name="routing_attr_avoid_share_taxi_name">Vermijd gedeelde taxis</string>
+    <string name="routing_attr_avoid_share_taxi_name">Geen gedeelde taxis</string>
     <string name="routing_attr_avoid_share_taxi_description">Vermijd gedeelde taxi</string>
-    <string name="routing_attr_avoid_train_name">Vermijd treinen</string>
+    <string name="routing_attr_avoid_train_name">Geen treinen</string>
     <string name="routing_attr_avoid_train_description">Vermijd treinen</string>
-    <string name="routing_attr_avoid_subway_name">Vermijd de metro</string>
+    <string name="routing_attr_avoid_subway_name">Geen metro</string>
     <string name="routing_attr_avoid_subway_description">Vermijd de metro en sneltram transport e.d.</string>
-    <string name="routing_attr_avoid_ferry_name">Vermijd veerboten</string>
+    <string name="routing_attr_avoid_ferry_name">Geen veerboten</string>
     <string name="routing_attr_avoid_ferry_description">Vermijd veerboten</string>
     <string name="shared_string_degrees">Graden</string>
     <string name="shared_string_milliradians">Milliradialen</string>
@@ -2783,15 +2783,14 @@ voor Gebied: %1$s x %2$s</string>
     <string name="quick_action_day_night_mode">%s modus</string>
     <string name="avoid_pt_types">Vermijd transport types…</string>
     <string name="shared_string_walk">Loop</string>
-    <string name="save_poi_value_exceed_length">The maximale tag lengte van \"%s\" is 255 karakters.
-\nVerkort aub om verder te gaan.</string>
+    <string name="save_poi_value_exceed_length">Verkort de lengte van \"%s\" tot minder dan 255 karakters.</string>
     <string name="save_poi_value_exceed_length_title">Lengte van waarde \"%s\"</string>
-    <string name="public_transport_warning_descr_blog">Leer meer op onze blog over hoe OsmAnd routes berekent.</string>
+    <string name="public_transport_warning_descr_blog">Lees meer op onze blog over hoe OsmAnd routes berekent.</string>
     <string name="public_transport_warning_title">Navigatie binnen openbaar vervoer is op dit moment in de beta testfase. Houd rekening met fouten en onnauwkeurigheden.</string>
     <string name="add_intermediate">Voeg tussenpunt toe</string>
-    <string name="add_start_and_end_points">Voeg start- en eindpunt toe</string>
-    <string name="route_add_start_point">Voeg startpunt toe</string>
-    <string name="route_descr_select_start_point">Selecteer startpunt</string>
+    <string name="add_start_and_end_points">Voeg vertrekpunt en bestemming toe</string>
+    <string name="route_add_start_point">Voeg vertrekpunt toe</string>
+    <string name="route_descr_select_start_point">Selecteer vertrekpunt</string>
     <string name="rendering_attr_surface_unpaved_name">Onverhard</string>
     <string name="rendering_attr_surface_sand_name">Zand</string>
     <string name="rendering_attr_surface_grass_name">Gras</string>
@@ -2870,10 +2869,10 @@ voor Gebied: %1$s x %2$s</string>
     <string name="intermediate_destinations">Tussenbestemmingen</string>
     <string name="arrive_at_time">Aankomst om %1$s</string>
     <string name="shared_string_launch">Open</string>
-    <string name="quick_action_switch_day_night_descr">Tik deze knop om te wisselen tussen de Osmand Dag en Nacht modus</string>
-    <string name="quick_action_switch_day_mode">Dag Modus</string>
-    <string name="quick_action_switch_night_mode">Nacht Modus</string>
-    <string name="quick_action_day_night_switch_mode">Wissel tussen Dag/Nacht modus</string>
+    <string name="quick_action_switch_day_night_descr">Tik deze knop om te wisselen tussen de Osmand dag en nacht modus</string>
+    <string name="quick_action_switch_day_mode">Dag modus</string>
+    <string name="quick_action_switch_night_mode">Nacht modus</string>
+    <string name="quick_action_day_night_switch_mode">Wissel tussen dag/nacht modus</string>
     <string name="routeInfo_surface_name">Oppervlakte</string>
     <string name="routeInfo_smoothness_name">Kwaliteit wegdek</string>
     <string name="routeInfo_steepness_name">Steilte</string>
@@ -2888,7 +2887,7 @@ voor Gebied: %1$s x %2$s</string>
 \n • Toon de azimuth in Afstands Meting
 \n
 \n</string>
-    <string name="angular_measeurement">Hoekmeting eenheden</string>
+    <string name="angular_measeurement">Eenheid hoeken</string>
     <string name="transfers_size">%1$d keer overstappen</string>
     <string name="rendering_attr_surface_grass_paver_name">Gras oppervlak</string>
     <string name="rendering_attr_surface_ground_name">Onverhard</string>
@@ -2915,9 +2914,9 @@ voor Gebied: %1$s x %2$s</string>
     <string name="sit_on_the_stop">Instappen bij halte</string>
     <string name="transfers">Aantal overstappen</string>
     <string name="lang_gn_py">Guarani</string>
-    <string name="routing_attr_avoid_sett_name">Vermijd straatkeien en kasseien</string>
+    <string name="routing_attr_avoid_sett_name">Geen straatkeien en kasseien</string>
     <string name="routing_attr_avoid_sett_description">Vermijd straatkeien en kasseien</string>
-    <string name="routing_attr_avoid_tram_name">Vermijd trams</string>
+    <string name="routing_attr_avoid_tram_name">Geen trams</string>
     <string name="files_moved">Verplaatste %1$d bestanden (%2$s).</string>
     <string name="files_copied">Gekopieerde %1$d bestanden (%2$s).</string>
     <string name="files_failed">Kopiëren van %1$d bestanden mislukt (%2$s).</string>
@@ -2929,7 +2928,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="app_mode_taxi">Taxi</string>
     <string name="app_mode_subway">Metro</string>
     <string name="app_mode_horse">Paard</string>
-    <string name="app_mode_helicopter">Hefschroefvliegtiig</string>
+    <string name="app_mode_helicopter">Helikopter</string>
     <string name="app_mode_skiing">Skiën</string>
     <string name="base_profile_descr_ski">Skiën</string>
     <string name="shared_string_min_speed">Minimumsnelheid</string>
@@ -2939,7 +2938,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="route_way">Weg</string>
     <string name="searching_gps">GPS aan het zoeken</string>
     <string name="routing_profile_straightline">Rechte lijn</string>
-    <string name="configure_profile_info">Alle onderstaande instellingen hebben slechts betrekking op het geselecteerde profiel.</string>
+    <string name="configure_profile_info">Profielinstellingen:</string>
     <string name="utm_format_descr">OsmAnd gebruikt het UTM Standard formaat. Dit lijkt sterk op het UTM Nato formaat, maar is niet identiek.</string>
     <string name="shared_string_example">Voorbeeld</string>
     <string name="navigate_point_format_utm">UTM Standaard</string>
@@ -2948,7 +2947,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="pref_selected_by_default_for_profiles">Deze instelling is standaard geselecteerd voor alle profielen: %s</string>
     <string name="change_default_settings">Pas de standaardinstellingen aan</string>
     <string name="discard_changes">Annuleren</string>
-    <string name="apply_to_current_profile">Pas toe op het huidige %1$s profiel</string>
+    <string name="apply_to_current_profile">Pas alleen toe op \"%1$s\"</string>
     <string name="apply_to_all_profiles">Toepassen op alle profielen</string>
     <string name="start_up_message_pref">Welkomstbericht</string>
     <string name="configure_profile">Stel profiel in</string>
@@ -2959,10 +2958,10 @@ voor Gebied: %1$s x %2$s</string>
     <string name="public_transport_try_ped">Probeer de wandelroute.</string>
     <string name="public_transport_try_change_settings">Probeer de instellingen te wijzigen.</string>
     <string name="public_transport_calc_pedestrian">Looproute berekenen</string>
-    <string name="button_rate">Beoordeel</string>
-    <string name="help_us_make_osmand_better">Help ons OsmAnd beter te maken!</string>
+    <string name="button_rate">Ok</string>
+    <string name="help_us_make_osmand_better">Help ons OsmAnd beter te maken</string>
     <string name="settings_privacy_and_security">Privacy en veiligheid</string>
-    <string name="settings_privacy_and_security_desc">Kies welke data je met ons deelt</string>
+    <string name="settings_privacy_and_security_desc">Kies welke gegevens je deelt</string>
     <string name="profile_name_hint">Profielnaam</string>
     <string name="nav_type_hint">Navigatietype</string>
     <string name="select_icon_profile_dialog_title">Selecteer icoon</string>
@@ -2972,14 +2971,14 @@ voor Gebied: %1$s x %2$s</string>
     <string name="profile_alert_need_routing_type_title">Selecteer navigatietype</string>
     <string name="profile_alert_need_routing_type_msg">Kies een navigatietype voor het nieuwe profiel</string>
     <string name="profile_alert_need_profile_name_title">Profielnaam invoeren</string>
-    <string name="profile_alert_need_profile_name_msg">Profielnaam mag niet leeg zijn!</string>
+    <string name="profile_alert_need_profile_name_msg">Geef eerst een profielnaam op.</string>
     <string name="profile_alert_duplicate_name_title">Dubbele naam</string>
     <string name="profile_alert_duplicate_name_msg">Er bestaat al een profiel met die naam</string>
     <string name="profile_alert_cant_delete_base">Basisprofielen van OsmAnd kun je niet verwijderen</string>
     <string name="profile_alert_need_save_title">Wijzigingen opslaan</string>
-    <string name="profile_alert_need_save_msg">Je moet wijzigingen aan het profiel opslaan om door te kunnen gaan</string>
+    <string name="profile_alert_need_save_msg">Sla wijzigingen aan het profiel eerst op</string>
     <string name="profile_alert_delete_title">Verwijder profiel</string>
-    <string name="profile_alert_delete_msg">Weet je zeker dat je profiel %s wilt verwijderen</string>
+    <string name="profile_alert_delete_msg">Weet je zeker dat je profiel \"%s\" wilt verwijderen</string>
     <string name="select_base_profile_dialog_title">Selecteer een basisprofiel</string>
     <string name="select_nav_profile_dialog_title">Selecteer navigatietype</string>
     <string name="base_profile_descr_car">Auto, vrachtauto, motor</string>
@@ -2999,10 +2998,10 @@ voor Gebied: %1$s x %2$s</string>
     <string name="shared_string_crash">Vastgelopen</string>
     <string name="app_mode_monowheel">Monowheel, Hoverboard</string>
     <string name="edit_profile_setup_title">Profiel instellen</string>
-    <string name="edit_profile_setup_subtitle">Profiel behoudt haar eigen instellingen</string>
-    <string name="edit_profile_setup_map_subtitle">Selecteer standaard kaartinstellingen voor profiel</string>
-    <string name="edit_profile_screen_options_subtitle">Selecteer standaard scherminstellingen voor profiel</string>
-    <string name="edit_profile_nav_settings_subtitle">Selecteer standaard navigatieinstellingen voor profiel</string>
+    <string name="edit_profile_setup_subtitle">Het profiel behoudt haar eigen instellingen</string>
+    <string name="edit_profile_setup_map_subtitle">Selecteer kaartinstellingen voor het profiel</string>
+    <string name="edit_profile_screen_options_subtitle">Selecteer scherminstellingen voor het profiel</string>
+    <string name="edit_profile_nav_settings_subtitle">Selecteer navigatieinstellingen voor het profiel</string>
     <string name="routing_attr_max_num_changes_description">Maximaal aantal keer overstappen</string>
     <string name="routing_attr_max_num_changes_name">Aantal aanpassingen</string>
     <string name="turn_screen_on_router">Activeer bij een bocht</string>
@@ -3038,7 +3037,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="years_5">Jaren</string>
     <string name="months_3">Drie maanden</string>
     <string name="price_free">Gratis</string>
-    <string name="list_of_installed_plugins">Lijst van geïnstalleerde plugins</string>
+    <string name="list_of_installed_plugins">Geïnstalleerde plugins</string>
     <string name="configure_navigation">Navigatie instellen</string>
     <string name="reset_to_default">Terugzetten naar standaardwaarden</string>
     <string name="manage_profiles_descr">Maak, importeer of wijzig profielen</string>
@@ -3049,7 +3048,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="vehicle_parameters">Voertuigparameters</string>
     <string name="download_detailed_map">Download gedetailleerde kaart van %s, om dit gebied te bekijken.</string>
     <string name="data_storage_preference_summary">%1$s • %2$s</string>
-    <string name="data_storage_space_description">%1$s GB vrij • %2$s GB in totaal</string>
+    <string name="data_storage_space_description">%1$s GB vrij (van %2$s GB)</string>
     <string name="routing_attr_width_name">Breedte van het voertuig</string>
     <string name="routing_attr_width_description">Specificeer de minimaal benodigde breedte voor het voertuig.</string>
     <string name="avoid_in_routing_descr_">Vermijd bepaalde routes en wegen</string>
