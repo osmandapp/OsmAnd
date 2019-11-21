@@ -459,7 +459,6 @@ dependencies {
 	implementation group: 'commons-logging', name: 'commons-logging', version: '1.2'
 	implementation 'commons-codec:commons-codec:1.11'
 	implementation 'it.unibo.alice.tuprolog:tuprolog:3.2.1'
-	implementation 'org.beanshell:bsh-core:2.0b4'
 	implementation 'org.apache.commons:commons-compress:1.17'
 	implementation 'com.moparisthebest:junidecode:0.1.1'
 	implementation 'org.immutables:gson:2.5.0'
