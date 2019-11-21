@@ -163,7 +163,7 @@
     <string name="local_index_routing_data">נתוני המסלול</string>
     <string name="navigate_point_format">עיצוב</string>
     <string name="first_time_msg">תודה לך על השימוש ב־OsmAnd. ניתן להוריד נתונים אזוריים לשימוש בלתי מקוון דרך ‚הגדרות’ ← ‚ניהול קובצי מפות’ לצפייה במפות, איתור כתובות, חיפוש נקודות עניין, מציאת תחבורה ציבורית ועוד.</string>
-    <string name="basemap_was_selected_to_download">מפת הבסיס נבחרה להורדה לטובת הפעולה התקינה של היישומון.</string>
+    <string name="basemap_was_selected_to_download">מפת הבסיס, שנחוצה כדי לספק פונקציות בסיסיות, נמצאת בתור ההורדה.</string>
     <string name="select_index_file_to_download">לא נמצא כלום. אם האזור שלך לא נמצא, ניתן ליצור אותו בעצמך (לפרטים https://osmand.net).</string>
     <string name="local_indexes_cat_tile">אריחי מפה מקוונים ושמורים</string>
     <string name="local_indexes_cat_map">מפות רגילות (וקטור)</string>
@@ -3380,4 +3380,15 @@
     <string name="shared_string_revert">החזרה</string>
     <string name="quick_action_directions_from_desc">כפתור למרכוז נקודת היציאה במסך וחישוב המסלול ליעד או לפתוח תיבת דו־שיח לבחירת היעד אם סמן היעד לא במפה.</string>
     <string name="clear_confirmation_msg">למחוק %1$s\?</string>
+    <string name="rendering_attr_showCycleNodeNetworkRoutes_name">הצגת מסלולי אופניים של רשת מפרקים</string>
+    <string name="download_map_dialog">דו־שיח הורדת מפה</string>
+    <string name="dialogs_and_notifications_title">תיבות דו־שיח והתראות</string>
+    <string name="dialogs_and_notifications_descr">שליטה בחלוניות הקופצות, בתיבות הדו־שיח ובהתראות שמוצגות במהלך השימוש ב־OsmAnd.</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_name">רשתות מפרקים</string>
+    <string name="suggested_maps">מפות מוצעות</string>
+    <string name="suggested_maps_descr">המפות האלו נחוצות לטובת שימוש עם תוסף</string>
+    <string name="added_profiles">הוספת פרופילים</string>
+    <string name="added_profiles_descr">התוסף מוסיף פרופיל חדש ל־OsmAnd</string>
+    <string name="shared_string_turn_off">כיבוי</string>
+    <string name="new_plugin_added">נוסף תוסף חדש</string>
 </resources>
