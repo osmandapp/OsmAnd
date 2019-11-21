@@ -982,8 +982,8 @@
     <string name="poi_denomination_catholic">Katolícke</string>
     <string name="poi_denomination_baptist">Baptistické</string>
     <string name="poi_denomination_roman_catholic">Rímskokatolícke</string>
-    <string name="poi_denomination_orthodox">Ortodoxné</string>
-    <string name="poi_denomination_lutheran">Luteránske</string>
+    <string name="poi_denomination_orthodox">Ortodoxné/Pravoslávne</string>
+    <string name="poi_denomination_lutheran">Luteránske/Evanjelické</string>
     <string name="poi_denomination_sunni">Sunitské</string>
     <string name="poi_denomination_protestant">Protestantské</string>
     <string name="poi_denomination_methodist">Metodistické</string>
@@ -999,7 +999,7 @@
     <string name="poi_denomination_new_apostolic">Novoapoštolská cirkev</string>
     <string name="poi_denomination_church_of_england">Anglikánska cirkev</string>
     <string name="poi_denomination_episcopal">Episkopálne</string>
-    <string name="poi_denomination_greek_catholic">Grékokatolícke</string>
+    <string name="poi_denomination_greek_catholic">Gréckokatolícke</string>
     <string name="poi_denomination_tibetan">Tibetské</string>
     <string name="poi_denomination_church_of_scotland">Škótska cirkev</string>
     <string name="poi_denomination_nondenominational">Bez vyznania</string>
