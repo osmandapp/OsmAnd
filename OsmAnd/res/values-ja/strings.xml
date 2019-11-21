@@ -51,9 +51,9 @@
     <string name="si_mi_yard">マイル/ヤード</string>
     <string name="si_km_m">キロメートル/メートル</string>
     <string name="yard">ヤード</string>
-    <string name="foot">ft</string>
+    <string name="foot">フィート</string>
     <string name="mile_per_hour">mph</string>
-    <string name="mile">mi</string>
+    <string name="mile">マイル</string>
     <string name="send_location_way_choose_title">次の方法で位置を共有</string>
     <string name="send_location_sms_pattern">位置 : %1$s\n%2$s</string>
     <string name="send_location_email_pattern">位置を見るには
@@ -89,9 +89,9 @@
     <string name="indexing_poi">POIを索引中…</string>
     <string name="indexing_transport">交通機関を索引化…</string>
     <string name="shared_string_io_error">I/O エラー発生</string>
-    <string name="km">km</string>
+    <string name="km">キロメートル</string>
     <string name="km_h">km/h</string>
-    <string name="m">m</string>
+    <string name="m">メートル</string>
     <string name="old_map_index_is_not_supported">重複したマップ
 データ形式 \'\'{0}\'\' はサポートされていません</string>
     <string name="poi_filter_car_aid">自動車用施設</string>
@@ -836,7 +836,7 @@ POIの更新は利用できません</string>
     <string name="accessibility_mode">アクセシビリティモード</string>
     <string name="accessibility_mode_descr">アクセシビリティ(ユーザー補助)機能を設定します</string>
     <string name="shared_string_on">有効</string>
-    <string name="shared_string_off">無効</string>
+    <string name="shared_string_off">OFF</string>
     <string name="accessibility_default">デバイス側のユーザー補助設定に従う</string>
     <string name="backToMenu">メニューに戻る</string>
     <string name="zoomOut">縮小</string>
@@ -1320,7 +1320,7 @@ POIの更新は利用できません</string>
     <string name="navigation_intent_invalid">無効なフォーマット: %s</string>
     <string name="route_descr_destination">目的地</string>
     <string name="index_tours">旅行</string>
-    <string name="shared_string_all">全て</string>
+    <string name="shared_string_all">すべて</string>
     <string name="shared_string_waypoints">経由地点</string>
     <string name="way_alarms">通行に関する警告</string>
     <string name="speak_favorites">周辺のお気に入り</string>
@@ -1695,11 +1695,11 @@ POIの更新は利用できません</string>
     <string name="favorite_category_select">カテゴリを選択</string>
     <string name="default_speed_system_descr">速度の単位を設定します</string>
     <string name="default_speed_system">速度の単位</string>
-    <string name="nm">nmi</string>
+    <string name="nm">海里</string>
     <string name="si_nm">海里</string>
-    <string name="si_kmh">キロメートル毎時(km/h)</string>
-    <string name="si_mph">マイル毎時(mph・mi/h)</string>
-    <string name="si_m_s">メートル毎秒(m/s)</string>
+    <string name="si_kmh">キロメートル毎時</string>
+    <string name="si_mph">マイル毎時</string>
+    <string name="si_m_s">メートル毎秒</string>
     <string name="si_min_km">キロメートル毎分(km/min)</string>
     <string name="si_min_m">マイル毎分(mi/min)</string>
     <string name="si_nm_h">海里毎時(ノット)</string>
