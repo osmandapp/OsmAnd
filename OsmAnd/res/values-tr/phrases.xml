@@ -2157,4 +2157,11 @@
     <string name="poi_clothes_shirts">Gömlek</string>
     <string name="poi_clothes_dance">Dans</string>
     <string name="poi_clothes_military">Askeri</string>
+    <string name="poi_historic_milestone">Tarihi kilometre taşı</string>
+    <string name="poi_shoes_children">Çocuk</string>
+    <string name="poi_shoes_women">Kadın</string>
+    <string name="poi_shoes_sport">Spor</string>
+    <string name="poi_shoes_men">Erkek</string>
+    <string name="poi_shoes_orthopedic">Ortopedik</string>
+    <string name="poi_historic_manor">Tarihi malikane</string>
 </resources>
