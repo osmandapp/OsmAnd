@@ -15,10 +15,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.net.URL;
 import java.net.URLConnection;
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -26,14 +24,13 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import bsh.Interpreter;
-
 
 public class TileSourceManager {
 	private static final Log log = PlatformUtil.getLog(TileSourceManager.class);
-	public static final String RULE_BEANSHELL = "beanshell";
 	public static final String RULE_YANDEX_TRAFFIC = "yandex_traffic";
 	private static final String RULE_WMS = "wms_tile";
+	private static final String RULE_TEMPLATE_1 = "template:1";
+	private static final String RND_ALG_WIKIMAPIA = "wikimapia";
 
 	private static final TileSourceTemplate MAPNIK_SOURCE =
 			new TileSourceTemplate("OsmAnd (online tiles)", "https://tile.osmand.net/hd/{0}/{1}/{2}.png", ".png", 19, 1, 512, 8, 18000);  //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
@@ -51,6 +48,9 @@ public class TileSourceManager {
 		MAPILLARY_VECTOR_SOURCE.setHidden(true);
 	}
 
+	private static final String PARAM_BING_QUAD_KEY = "{q}";
+	private static final String PARAM_RND = "{rnd}";
+
 	public static class TileSourceTemplate implements ITileSource, Cloneable {
 		private int maxZoom;
 		private int minZoom;
@@ -63,6 +63,9 @@ public class TileSourceManager {
 		// -1 never expires, 
 		private long expirationTimeMillis = -1;
 		private boolean ellipticYTile;
+		private boolean invertedYTile;
+		private String randoms;
+		private String[] randomsArray;
 		private String rule;
 		private boolean hidden; // if hidden in configure map settings, for example mapillary sources
 
@@ -79,15 +82,65 @@ public class TileSourceManager {
 			this.avgSize = avgSize;
 			this.bitDensity = bitDensity;
 		}
-		
-		public static String normalizeUrl(String url){
-			if(url != null){
-				url = url.replaceAll("\\{\\$z\\}", "{0}"); //$NON-NLS-1$ //$NON-NLS-2$
-				url = url.replaceAll("\\{\\$x\\}", "{1}"); //$NON-NLS-1$//$NON-NLS-2$
-				url = url.replaceAll("\\{\\$y\\}", "{2}"); //$NON-NLS-1$ //$NON-NLS-2$
+
+		public static String normalizeUrl(String url) {
+			if (url != null) {
+				url = url.replaceAll("\\{\\$z\\}", "{0}");
+				url = url.replaceAll("\\{\\$x\\}", "{1}");
+				url = url.replaceAll("\\{\\$y\\}", "{2}");
+				url = url.replaceAll("\\{z\\}", "{0}");
+				url = url.replaceAll("\\{x\\}", "{1}");
+				url = url.replaceAll("\\{y\\}", "{2}");
 			}
 			return url;
 		}
+
+		public static String[] buildRandomsArray(String randomsStr) {
+			List<String> randoms = new ArrayList<>();
+			if (!Algorithms.isEmpty(randomsStr)) {
+				if (randomsStr.equals(RND_ALG_WIKIMAPIA)) {
+					return new String[]{RND_ALG_WIKIMAPIA};
+				}
+				String[] valuesArray = randomsStr.split(",");
+				for (String s : valuesArray) {
+					String[] rangeArray = s.split("-");
+					if (rangeArray.length == 2) {
+						String s1 = rangeArray[0];
+						String s2 = rangeArray[1];
+						boolean rangeValid = false;
+						try {
+							int a = Integer.parseInt(s1);
+							int b = Integer.parseInt(s2);
+							if (b > a) {
+								for (int i = a; i <= b; i++) {
+									randoms.add(String.valueOf(i));
+								}
+								rangeValid = true;
+							}
+						} catch (NumberFormatException e) {
+							if (s1.length() == 1 && s2.length() == 1) {
+								char a = s1.charAt(0);
+								char b = s2.charAt(0);
+								if (b > a) {
+									for (char i = a; i <= b; i++) {
+										randoms.add(String.valueOf(i));
+									}
+									rangeValid = true;
+								}
+							}
+						}
+						if (!rangeValid) {
+							randoms.add(s1);
+							randoms.add(s2);
+						}
+					} else {
+						randoms.add(s);
+					}
+				}
+			}
+			return randoms.toArray(new String[randoms.size()]);
+		}
+
 		public void setMinZoom(int minZoom) {
 			this.minZoom = minZoom;
 		}
@@ -115,6 +168,31 @@ public class TileSourceManager {
 		@Override
 		public boolean isEllipticYTile() {
 			return ellipticYTile;
+		}
+
+		public boolean isInvertedYTile() {
+			return invertedYTile;
+		}
+
+		public void setInvertedYTile(boolean invertedYTile) {
+			this.invertedYTile = invertedYTile;
+		}
+
+		public String getRandoms() {
+			return randoms;
+		}
+
+		public void setRandoms(String randoms) {
+			this.randoms = randoms;
+			this.randomsArray = buildRandomsArray(randoms);
+		}
+
+		public String[] getRandomsArray() {
+			return randomsArray;
+		}
+
+		public void setRandomsArray(String[] randomsArray) {
+			this.randomsArray = randomsArray;
 		}
 
 		@Override
@@ -208,8 +286,52 @@ public class TileSourceManager {
 			if (urlToLoad == null) {
 				return null;
 			}
-			return MessageFormat.format(urlToLoad, zoom + "", x + "", y + ""); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			if (isInvertedYTile()) {
+				y = (1 << zoom) - 1 - y;
+			}
+			return buildUrlToLoad(urlToLoad, randomsArray, x, y, zoom);
 		}
+
+		private static String eqtBingQuadKey(int z, int x, int y) {
+			char[] NUM_CHAR = {'0', '1', '2', '3'};
+			char[] tn = new char[z];
+			for (int i = z - 1; i >= 0; i--) {
+				int num = (x % 2) | ((y % 2) << 1);
+				tn[i] = NUM_CHAR[num];
+				x >>= 1;
+				y >>= 1;
+			}
+			return new String(tn);
+		}
+
+		public static String buildUrlToLoad(String urlTemplate, String[] randomsArray, int x, int y, int zoom) {
+			try {
+				if (randomsArray != null && randomsArray.length > 0) {
+					String rand;
+					if (RND_ALG_WIKIMAPIA.equals(randomsArray[0])) {
+						rand = String.valueOf(x % 4 + (y % 4) * 4);
+					} else {
+						rand = randomsArray[(x + y) % randomsArray.length];
+					}
+					urlTemplate = urlTemplate.replace(PARAM_RND, rand);
+				} else if (urlTemplate.contains(PARAM_RND)) {
+					log.error("Cannot resolve randoms for template: " + urlTemplate);
+					return null;
+				}
+
+				int bingQuadKeyParamIndex = urlTemplate.indexOf(PARAM_BING_QUAD_KEY);
+				if (bingQuadKeyParamIndex != -1) {
+					return urlTemplate.replace(PARAM_BING_QUAD_KEY, eqtBingQuadKey(zoom, x, y));
+				}
+
+				return MessageFormat.format(urlTemplate, zoom + "", x + "", y + "");
+
+			} catch (IllegalArgumentException e) {
+				log.error("Cannot build url for template: " + urlTemplate, e);
+				return null;
+			}
+		}
+
 
 		public String getUrlTemplate() {
 			return urlToLoad;
@@ -349,6 +471,12 @@ public class TileSourceManager {
 		if (tm.isEllipticYTile()) {
 			properties.put("ellipsoid", tm.isEllipticYTile() + "");
 		}
+		if (tm.isInvertedYTile()) {
+			properties.put("inverted_y", tm.isInvertedYTile() + "");
+		}
+		if (tm.getRandoms() != null) {
+			properties.put("randoms", tm.getRandoms());
+		}
 		if (tm.getExpirationTimeMinutes() != -1) {
 			properties.put("expiration_time_minutes", tm.getExpirationTimeMinutes() + "");
 		}
@@ -390,12 +518,8 @@ public class TileSourceManager {
 			try {
 				if (readUrl.exists()) {
 					BufferedReader reader = new BufferedReader(new InputStreamReader(
-							new FileInputStream(readUrl), "UTF-8")); //$NON-NLS-1$
+							new FileInputStream(readUrl), "UTF-8"));
 					url = reader.readLine();
-					// 
-					//url = url.replaceAll("\\{\\$z\\}", "{0}"); //$NON-NLS-1$ //$NON-NLS-2$
-					//url = url.replaceAll("\\{\\$x\\}", "{1}"); //$NON-NLS-1$//$NON-NLS-2$
-					//url = url.replaceAll("\\{\\$y\\}", "{2}"); //$NON-NLS-1$ //$NON-NLS-2$
 					url = TileSourceTemplate.normalizeUrl(url);
 					reader.close();
 				}
@@ -457,7 +581,7 @@ public class TileSourceManager {
 		final List<TileSourceTemplate> templates = new ArrayList<TileSourceTemplate>();
 		try {
 			URLConnection connection = NetworkUtils.getHttpURLConnection((https ? "https" : "http")
-					+ "://osmand.net/tile_sources?" + versionAsUrl);
+					+ "://test.osmand.net/tile_sources?" + versionAsUrl);
 			XmlPullParser parser = PlatformUtil.newXMLPullParser();
 			parser.setInput(connection.getInputStream(), "UTF-8");
 			int tok;
@@ -487,12 +611,12 @@ public class TileSourceManager {
 	}
 	
 	public static TileSourceTemplate createTileSourceTemplate(Map<String, String> attrs) {
-		TileSourceTemplate template = null;
+		TileSourceTemplate template;
 		String rule = attrs.get("rule");
-		if(rule == null){
+		if (rule == null){
 			template = createSimpleTileSourceTemplate(attrs, false);
-		} else if(RULE_BEANSHELL.equalsIgnoreCase(rule)){
-			template = createBeanshellTileSourceTemplate(attrs);
+		} else if (RULE_TEMPLATE_1.equalsIgnoreCase(rule)) {
+			template = createSimpleTileSourceTemplate(attrs, false);
 		} else if (RULE_WMS.equalsIgnoreCase(rule)) {
 			template = createWmsTileSourceTemplate(attrs);
 		} else if (RULE_YANDEX_TRAFFIC.equalsIgnoreCase(rule)) {
@@ -521,8 +645,10 @@ public class TileSourceManager {
 		String ext = attributes.get("ext") == null ? ".jpg" : attributes.get("ext");
 		int bitDensity = parseInt(attributes, "img_density", 16);
 		int avgTileSize = parseInt(attributes, "avg_img_size", 18000);
+		String randoms = attributes.get("randoms");
 		urlTemplate = "http://whoots.mapwarper.net/tms/{0}/{1}/{2}/"+layer+"/"+urlTemplate;
 		TileSourceTemplate templ = new TileSourceTemplate(name, urlTemplate, ext, maxZoom, minZoom, tileSize, bitDensity, avgTileSize);
+		templ.setRandoms(randoms);
 		return templ;
 	}
 	
@@ -534,10 +660,7 @@ public class TileSourceManager {
 		if (name == null || (urlTemplate == null && !ignoreTemplate)) {
 			return null;
 		}
-		//As I see, here is no changes to urlTemplate  
-		//if(urlTemplate != null){
-			//urlTemplate.replace("${x}", "{1}").replace("${y}", "{2}").replace("${z}", "{0}");
-		//}
+
 		urlTemplate = TileSourceTemplate.normalizeUrl(urlTemplate);
 
 		int maxZoom = parseInt(attributes, "max_zoom", 18);
@@ -551,82 +674,18 @@ public class TileSourceManager {
 		if (Boolean.parseBoolean(attributes.get("ellipsoid"))) {
 			ellipsoid = true;
 		}
+		boolean invertedY = false;
+		if (Boolean.parseBoolean(attributes.get("inverted_y"))) {
+			invertedY = true;
+		}
+		String randoms = attributes.get("randoms");
 		TileSourceTemplate templ = new TileSourceTemplate(name, urlTemplate, ext, maxZoom, minZoom, tileSize, bitDensity, avgTileSize);
 		if(expirationTime >= 0) {
 			templ.setExpirationTimeMinutes(expirationTime);
 		}
 		templ.setEllipticYTile(ellipsoid);
+		templ.setInvertedYTile(invertedY);
+		templ.setRandoms(randoms);
 		return templ;
 	}
-	
-	private static TileSourceTemplate createBeanshellTileSourceTemplate(Map<String, String> attributes) {
-		String name = attributes.get("name");
-		String urlTemplate = attributes.get("url_template");
-		if (name == null || urlTemplate == null) {
-			return null;
-		}
-		int maxZoom = parseInt(attributes, "max_zoom", 18);
-		int minZoom = parseInt(attributes, "min_zoom", 5);
-		int tileSize = parseInt(attributes, "tile_size", 256);
-		String ext = attributes.get("ext") == null ? ".jpg" : attributes.get("ext");
-		int bitDensity = parseInt(attributes, "img_density", 16);
-		int avgTileSize = parseInt(attributes, "avg_img_size", 18000);
-		int expirationTime = parseInt(attributes, "expiration_time_minutes", -1);
-		boolean ellipsoid = false;
-		if (Boolean.parseBoolean(attributes.get("ellipsoid"))) {
-			ellipsoid = true;
-		}
-		TileSourceTemplate templ;
-		templ = new BeanShellTileSourceTemplate(name, urlTemplate, ext, maxZoom, minZoom, tileSize, bitDensity, avgTileSize);
-		templ.setEllipticYTile(ellipsoid);
-		if(expirationTime > 0) {
-			templ.setExpirationTimeMinutes(expirationTime);
-		}
-		return templ;
-	}
-	
-	public static class BeanShellTileSourceTemplate extends TileSourceTemplate {
-
-		Interpreter bshInterpreter;
-		
-		public BeanShellTileSourceTemplate(String name, String urlToLoad, String ext,
-				int maxZoom, int minZoom, int tileSize, int bitDensity, int avgSize) {
-			super(name, urlToLoad, ext, maxZoom, minZoom, tileSize, bitDensity, avgSize);
-			bshInterpreter = new Interpreter();
-			try {
-				bshInterpreter.eval(urlToLoad);
-				bshInterpreter.getClassManager().setClassLoader(new ClassLoader() {
-					@Override
-					public URL getResource(String resName) {
-						return null;
-					}
-					
-					@Override
-					public InputStream getResourceAsStream(String resName) {
-						return null;
-					}
-					
-					@Override
-					public Class<?> loadClass(String className) throws ClassNotFoundException {
-						throw new ClassNotFoundException("Error requesting " + className);
-					}
-				});
-			} catch (bsh.EvalError e) {
-				log.error("Error executing the map init script " + urlToLoad, e);
-			}
-		}
-
-		@Override
-		public String getUrlToLoad(int x, int y, int zoom) {
-			try {
-				return (String) bshInterpreter.eval("getTileUrl("+zoom+","+x+","+y+");");
-			} catch (bsh.EvalError e) {
-				log.error(e.getMessage(), e);
-				return null;
-			}
-		}
-		
-	}
-
-	
 }

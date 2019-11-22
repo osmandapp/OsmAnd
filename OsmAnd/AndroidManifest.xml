@@ -51,7 +51,7 @@
 	<application android:allowBackup="true" android:backupAgent="net.osmand.plus.OsmandBackupAgent"
 		android:icon="@mipmap/icon" android:label="@string/app_name"
 		android:name="net.osmand.plus.OsmandApplication" android:configChanges="locale"
-		android:theme="@style/OsmandDarkTheme" android:restoreAnyVersion="true" android:largeHeap="true">
+		android:theme="@style/OsmandDarkTheme" android:restoreAnyVersion="true" android:largeHeap="true" android:usesCleartextTraffic="true">
 
 		<meta-data android:name="com.google.android.backup.api_key" android:value="AEdPqrEAAAAIqF3tNGT66etVBn_vgzpfAY1wmIzKV1Ss6Ku-2A" />
 		<meta-data android:name="com.sec.android.support.multiwindow" android:value="true" />

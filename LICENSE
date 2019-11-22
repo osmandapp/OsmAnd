@@ -76,7 +76,6 @@
 
     * 3rd party libraries present in the libs folder (https://github.com/osmandapp/Osmand/tree/master/OsmAnd-java/libs):
         - bzip2-20090327.jar Bzip2 - Apache License
-        - bsh-core-2.0b4.jar Bean Shell - SPL and LGPL (http://www.beanshell.org/license.html)
         - commons-logging-1.1.1.jar - Apache License
         - gnu-trove-osmand.jar GNU trove - LGPL
         - icu4j-49_1.jar - ICU license (http://source.icu-project.org/repos/icu/icu/trunk/license.html)
