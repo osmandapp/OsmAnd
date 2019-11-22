@@ -3501,4 +3501,10 @@
 	<string name="poi_bath_open_air_yes">Да</string>
 	<string name="poi_bath_open_air_no">Нет</string>
 
+	<string name="poi_tourist_camp">Турбаза</string>
+
+	<string name="poi_community_gender_female">Пол сообщества: женский</string>
+	<string name="poi_community_gender_male">Пол сообщества: мужской</string>
+	<string name="poi_community_gender_mixed">Пол сообщества: мужской и женский</string>
+
 </resources>
