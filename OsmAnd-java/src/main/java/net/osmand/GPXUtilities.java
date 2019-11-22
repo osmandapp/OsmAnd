@@ -287,17 +287,17 @@ public class GPXUtilities {
 		public Object renderer;
 
 
-		public List<GPXTrackAnalysis> splitByDistance(double meters, boolean joinGaps) {
-			return split(getDistanceMetric(), getTimeSplit(), meters, joinGaps);
+		public List<GPXTrackAnalysis> splitByDistance(double meters, boolean joinSegments) {
+			return split(getDistanceMetric(), getTimeSplit(), meters, joinSegments);
 		}
 
-		public List<GPXTrackAnalysis> splitByTime(int seconds, boolean joinGaps) {
-			return split(getTimeSplit(), getDistanceMetric(), seconds, joinGaps);
+		public List<GPXTrackAnalysis> splitByTime(int seconds, boolean joinSegments) {
+			return split(getTimeSplit(), getDistanceMetric(), seconds, joinSegments);
 		}
 
-		private List<GPXTrackAnalysis> split(SplitMetric metric, SplitMetric secondaryMetric, double metricLimit, boolean joinGaps) {
+		private List<GPXTrackAnalysis> split(SplitMetric metric, SplitMetric secondaryMetric, double metricLimit, boolean joinSegments) {
 			List<SplitSegment> splitSegments = new ArrayList<>();
-			splitSegment(metric, secondaryMetric, metricLimit, splitSegments, this, joinGaps);
+			splitSegment(metric, secondaryMetric, metricLimit, splitSegments, this, joinSegments);
 			return convert(splitSegments);
 		}
 
@@ -852,8 +852,8 @@ public class GPXUtilities {
 	}
 
 	private static void splitSegment(SplitMetric metric, SplitMetric secondaryMetric,
-	                                 double metricLimit, List<SplitSegment> splitSegments,
-	                                 TrkSegment segment, boolean joinGaps) {
+									 double metricLimit, List<SplitSegment> splitSegments,
+									 TrkSegment segment, boolean joinSegments) {
 		double currentMetricEnd = metricLimit;
 		double secondaryMetricEnd = 0;
 		SplitSegment sp = new SplitSegment(segment, 0, 0);
@@ -863,7 +863,7 @@ public class GPXUtilities {
 			WptPt point = segment.points.get(k);
 			if (k > 0) {
 				double currentSegment = 0;
-				if (!(segment.generalSegment && joinGaps && point.firstPoint)) {
+				if (!(segment.generalSegment && joinSegments && point.firstPoint)) {
 					currentSegment = metric.metric(prev, point);
 					secondaryMetricEnd += secondaryMetric.metric(prev, point);
 				}

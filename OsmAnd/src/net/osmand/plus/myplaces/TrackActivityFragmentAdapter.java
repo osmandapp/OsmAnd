@@ -992,6 +992,7 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 		private List<Double> distanceSplit;
 		private TIntArrayList timeSplit;
 		private int selectedSplitInterval;
+		private boolean joinSegments;
 
 		SplitTrackAsyncTask(@NonNull TrackActivity activity,
 							@NonNull TrackActivityFragmentAdapter fragmentAdapter,
@@ -1006,6 +1007,7 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 			selectedSplitInterval = fragmentAdapter.selectedSplitInterval;
 			distanceSplit = fragmentAdapter.distanceSplit;
 			timeSplit = fragmentAdapter.timeSplit;
+			joinSegments = activity.isJoinSegments();
 		}
 
 		@Override
@@ -1042,9 +1044,9 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 				if (selectedSplitInterval == 0) {
 					model.noSplit(app);
 				} else if (distanceSplit.get(selectedSplitInterval) > 0) {
-					model.splitByDistance(app, distanceSplit.get(selectedSplitInterval));
+					model.splitByDistance(app, distanceSplit.get(selectedSplitInterval), joinSegments);
 				} else if (timeSplit.get(selectedSplitInterval) > 0) {
-					model.splitByTime(app, timeSplit.get(selectedSplitInterval));
+					model.splitByTime(app, timeSplit.get(selectedSplitInterval), joinSegments);
 				}
 			}
 			return null;

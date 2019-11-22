@@ -89,6 +89,12 @@ public class GpxDbHelper {
 		return res;
 	}
 
+	public boolean updateJoinSegments(@NonNull GpxDataItem item,  boolean joinSegments) {
+		boolean res = db.updateJoinSegments(item, joinSegments);
+		putToCache(item);
+		return res;
+	}
+
 	public boolean remove(File file) {
 		boolean res = db.remove(file);
 		itemsCache.remove(file);

@@ -73,7 +73,7 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 	private Rect minMaxSpeedTextBounds;
 	private ListView listView;
 	private ProgressBar progressBar;
-	private boolean joinGapsEnabled;
+	private boolean joinSegments;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -192,16 +192,16 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 		super.onDestroyView();
 	}
 
-	public void setJoinGapsEnabled(boolean joinGapsEnabled) {
-		this.joinGapsEnabled = joinGapsEnabled;
-	}
-
 	public void setGpxItem(GpxDisplayItem gpxItem) {
 		this.gpxItem = gpxItem;
 	}
 
 	public void setTrkSegment(GPXUtilities.TrkSegment trkSegment) {
 		this.trkSegment = trkSegment;
+	}
+
+	public void setJoinSegments(boolean joinSegments) {
+		this.joinSegments = joinSegments;
 	}
 
 	private void updateHeader() {
@@ -423,19 +423,6 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 		return splitSegments;
 	}
 
-	@Nullable
-	private GpxDisplayItem getOverviewSegment() {
-		TrackActivity trackActivity = getTrackActivity();
-		GpxDisplayItem overviewSegment = null;
-		if (trackActivity != null) {
-			List<GpxDisplayGroup> result = trackActivity.getGpxFile(false);
-			if (result.size() > 0 && result.get(0).getModifiableList().size() > 0) {
-				overviewSegment = result.get(0).getModifiableList().get(0);
-			}
-		}
-		return overviewSegment;
-	}
-
 	protected boolean hasFilterType(GpxDisplayItemType filterType) {
 		for (GpxDisplayItemType type : filterTypes) {
 			if (type == filterType) {
@@ -542,7 +529,7 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 					TextView distanceOrTimeSpanText = (TextView) convertView.findViewById(R.id.distance_or_time_span_text);
 					if (position == 0) {
 						distanceOrTimeSpanImageView.setImageDrawable(ic.getIcon(R.drawable.ic_action_track_16, app.getSettings().isLightContent() ? R.color.gpx_split_segment_icon_color : 0));
-						float totalDistance = joinGapsEnabled && gpxItem.isGeneralTrack() ? analysis.totalDistanceWithoutGaps : analysis.totalDistance;
+						float totalDistance = joinSegments && gpxItem.isGeneralTrack() ? analysis.totalDistanceWithoutGaps : analysis.totalDistance;
 						distanceOrTimeSpanValue.setText(OsmAndFormatter.getFormattedDistance(totalDistance, app));
 						distanceOrTimeSpanText.setText(app.getString(R.string.distance));
 					} else {
@@ -751,9 +738,9 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 				if (selectedSplitInterval == 0) {
 					model.noSplit(app);
 				} else if (distanceSplit.get(selectedSplitInterval) > 0) {
-					model.splitByDistance(app, distanceSplit.get(selectedSplitInterval), joinGapsEnabled);
+					model.splitByDistance(app, distanceSplit.get(selectedSplitInterval), joinSegments);
 				} else if (timeSplit.get(selectedSplitInterval) > 0) {
-					model.splitByTime(app, timeSplit.get(selectedSplitInterval), joinGapsEnabled);
+					model.splitByTime(app, timeSplit.get(selectedSplitInterval), joinSegments);
 				}
 			}
 
@@ -761,13 +748,13 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 		}
 	}
 
-	public static boolean showInstance(@NonNull TrackActivity trackActivity, @NonNull GpxDisplayItem gpxItem, GPXUtilities.TrkSegment trkSegment, boolean joinGapsEnabled) {
+	public static boolean showInstance(@NonNull TrackActivity trackActivity, @NonNull GpxDisplayItem gpxItem, GPXUtilities.TrkSegment trkSegment) {
 		try {
 			SplitSegmentDialogFragment fragment = new SplitSegmentDialogFragment();
 			fragment.setGpxItem(gpxItem);
 			fragment.setTrkSegment(trkSegment);
-			fragment.setJoinGapsEnabled(joinGapsEnabled);
 			fragment.setRetainInstance(true);
+			fragment.setJoinSegments(trackActivity.isJoinSegments());
 			fragment.show(trackActivity.getSupportFragmentManager(), TAG);
 			return true;
 		} catch (RuntimeException e) {

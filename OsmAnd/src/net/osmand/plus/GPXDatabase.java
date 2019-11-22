@@ -16,7 +16,7 @@ import java.util.List;
 public class GPXDatabase {
 
 	private static final String DB_NAME = "gpx_database";
-	private static final int DB_VERSION = 9;
+	private static final int DB_VERSION = 10;
 	private static final String GPX_TABLE_NAME = "gpxTable";
 	private static final String GPX_COL_NAME = "fileName";
 	private static final String GPX_COL_DIR = "fileDir";
@@ -54,6 +54,8 @@ public class GPXDatabase {
 
 	private static final String GPX_COL_SHOW_AS_MARKERS = "showAsMarkers";
 
+	private static final String GPX_COL_JOIN_SEGMENTS = "joinSegments";
+
 	public static final int GPX_SPLIT_TYPE_NO_SPLIT = -1;
 	public static final int GPX_SPLIT_TYPE_DISTANCE = 1;
 	public static final int GPX_SPLIT_TYPE_TIME = 2;
@@ -86,7 +88,8 @@ public class GPXDatabase {
 			GPX_COL_SPLIT_INTERVAL + " double, " +
 			GPX_COL_API_IMPORTED + " int, " + // 1 = true, 0 = false
 			GPX_COL_WPT_CATEGORY_NAMES + " TEXT, " +
-			GPX_COL_SHOW_AS_MARKERS + " int);"; // 1 = true, 0 = false
+			GPX_COL_SHOW_AS_MARKERS + " int, " + // 1 = true, 0 = false
+			GPX_COL_JOIN_SEGMENTS + " int);"; // 1 = true, 0 = false
 
 	private static final String GPX_TABLE_SELECT = "SELECT " +
 			GPX_COL_NAME + ", " +
@@ -113,7 +116,8 @@ public class GPXDatabase {
 			GPX_COL_SPLIT_INTERVAL + ", " +
 			GPX_COL_API_IMPORTED + ", " +
 			GPX_COL_WPT_CATEGORY_NAMES + ", " +
-			GPX_COL_SHOW_AS_MARKERS +
+			GPX_COL_SHOW_AS_MARKERS + ", " +
+			GPX_COL_JOIN_SEGMENTS +
 			" FROM " +	GPX_TABLE_NAME;
 
 	private static final String GPX_TABLE_UPDATE_ANALYSIS = "UPDATE " +
@@ -148,6 +152,7 @@ public class GPXDatabase {
 		private double splitInterval;
 		private boolean apiImported;
 		private boolean showAsMarkers;
+		private boolean joinSegments;
 
 		public GpxDataItem(File file, GPXTrackAnalysis analysis) {
 			this.file = file;
@@ -198,6 +203,14 @@ public class GPXDatabase {
 
 		public void setShowAsMarkers(boolean showAsMarkers) {
 			this.showAsMarkers = showAsMarkers;
+		}
+
+		public boolean isJoinSegments() {
+			return joinSegments;
+		}
+
+		public void setJoinSegments(boolean joinSegments) {
+			this.joinSegments = joinSegments;
 		}
 
 		@Override
@@ -322,6 +335,12 @@ public class GPXDatabase {
 					" SET " + GPX_COL_SHOW_AS_MARKERS + " = ? " +
 					"WHERE " + GPX_COL_SHOW_AS_MARKERS + " IS NULL", new Object[]{0});
 		}
+		if (oldVersion < 10) {
+			db.execSQL("ALTER TABLE " + GPX_TABLE_NAME + " ADD " + GPX_COL_JOIN_SEGMENTS + " int");
+			db.execSQL("UPDATE " + GPX_TABLE_NAME +
+					" SET " + GPX_COL_JOIN_SEGMENTS + " = ? " +
+					"WHERE " + GPX_COL_JOIN_SEGMENTS + " IS NULL", new Object[]{0});
+		}
 		db.execSQL("CREATE INDEX IF NOT EXISTS " + GPX_INDEX_NAME_DIR + " ON " + GPX_TABLE_NAME + " (" + GPX_COL_NAME + ", " + GPX_COL_DIR + ");");
 	}
 
@@ -396,6 +415,25 @@ public class GPXDatabase {
 								" WHERE " + GPX_COL_NAME + " = ? AND " + GPX_COL_DIR + " = ?",
 						new Object[]{showAsMarkers ? 1 : 0, fileName, fileDir});
 				item.setShowAsMarkers(showAsMarkers);
+			} finally {
+				db.close();
+			}
+			return true;
+		}
+		return false;
+	}
+
+	public boolean updateJoinSegments(GpxDataItem item, boolean joinSegments) {
+		SQLiteConnection db = openConnection(false);
+		if (db != null) {
+			try {
+				String fileName = getFileName(item.file);
+				String fileDir = getFileDir(item.file);
+				db.execSQL("UPDATE " + GPX_TABLE_NAME + " SET " +
+								GPX_COL_JOIN_SEGMENTS + " = ? " +
+								" WHERE " + GPX_COL_NAME + " = ? AND " + GPX_COL_DIR + " = ?",
+						new Object[]{joinSegments ? 1 : 0, fileName, fileDir});
+				item.setJoinSegments(joinSegments);
 			} finally {
 				db.close();
 			}
@@ -480,12 +518,12 @@ public class GPXDatabase {
 		}
 		if (a != null) {
 			db.execSQL(
-					"INSERT INTO " + GPX_TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-					new Object[]{ fileName, fileDir, a.totalDistance, a.totalTracks, a.startTime, a.endTime,
+					"INSERT INTO " + GPX_TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+					new Object[] {fileName, fileDir, a.totalDistance, a.totalTracks, a.startTime, a.endTime,
 							a.timeSpan, a.timeMoving, a.totalDistanceMoving, a.diffElevationUp, a.diffElevationDown,
 							a.avgElevation, a.minElevation, a.maxElevation, a.maxSpeed, a.avgSpeed, a.points, a.wptPoints,
 							color, item.file.lastModified(), item.splitType, item.splitInterval, item.apiImported ? 1 : 0,
-							Algorithms.encodeStringSet(item.analysis.wptCategoryNames), item.showAsMarkers ? 1 : 0});
+							Algorithms.encodeStringSet(item.analysis.wptCategoryNames), item.showAsMarkers ? 1 : 0, item.joinSegments ? 1 : 0});
 		} else {
 			db.execSQL("INSERT INTO " + GPX_TABLE_NAME + "(" +
 							GPX_COL_NAME + ", " +
@@ -495,9 +533,10 @@ public class GPXDatabase {
 							GPX_COL_SPLIT_TYPE + ", " +
 							GPX_COL_SPLIT_INTERVAL + ", " +
 							GPX_COL_API_IMPORTED + ", " +
-							GPX_COL_SHOW_AS_MARKERS +
-							") VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
-					new Object[]{fileName, fileDir, color, 0, item.splitType, item.splitInterval, item.apiImported ? 1 : 0, item.showAsMarkers ? 1 : 0});
+							GPX_COL_SHOW_AS_MARKERS + ", " +
+							GPX_COL_JOIN_SEGMENTS +
+							") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+					new Object[] {fileName, fileDir, color, 0, item.splitType, item.splitInterval, item.apiImported ? 1 : 0, item.showAsMarkers ? 1 : 0, item.joinSegments ? 1 : 0});
 		}
 	}
 
@@ -575,6 +614,7 @@ public class GPXDatabase {
 		boolean apiImported = query.getInt(22) == 1;
 		String wptCategoryNames = query.getString(23);
 		boolean showAsMarkers = query.getInt(24) == 1;
+		boolean joinSegments = query.getInt(25) == 1;
 
 		GPXTrackAnalysis a = new GPXTrackAnalysis();
 		a.totalDistance = totalDistance;
@@ -615,6 +655,7 @@ public class GPXDatabase {
 		item.splitInterval = splitInterval;
 		item.apiImported = apiImported;
 		item.showAsMarkers = showAsMarkers;
+		item.joinSegments = joinSegments;
 		return item;
 	}
 
