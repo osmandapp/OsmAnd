@@ -3354,4 +3354,5 @@
     <string name="added_profiles_descr">Eklenti OsmAnd\'a yeni profil ekler</string>
     <string name="shared_string_turn_off">Kapat</string>
     <string name="new_plugin_added">Yeni eklenti eklendi</string>
+    <string name="join_segments">Segmentleri birleştir</string>
 </resources>
