@@ -1747,8 +1747,8 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="map_legend">Légende</string>
     <string name="shared_string_upload">Téléversement</string>
     <string name="shared_string_update">Mise à jour</string>
-    <string name="read_more">Lire plus</string>
-    <string name="whats_new">Quoi de neuf en version</string>
+    <string name="read_more">En savoir +</string>
+    <string name="whats_new">Nouveautés de la version</string>
     <string name="rendering_attr_hideProposed_name">Objets proposés</string>
     <string name="lang_mk">Macédonien</string>
     <string name="lang_fy">Frison occidental</string>
@@ -3362,4 +3362,16 @@ représentant la zone : %1$s x %2$s</string>
     <string name="default_speed_dialog_msg">Utilisé pour estimer l\'heure d\'arrivée pour les types de route inconnus et pour limiter la vitesse sur toutes les routes (ce qui peut modifier le calcul d\'itinéraire)</string>
     <string name="track_saved">Trace enregistrée</string>
     <string name="empty_filename">Le nom du fichier n\'est pas renseigné</string>
+    <string name="shared_string_revert">Inverser</string>
+    <string name="quick_action_directions_from_desc">Bouton définissant le centre de la carte comme point de départ. Si la destination est définie, l\'itinéraire est calculé ; sinon une fenêtre est affichée pour indiquer la destination.</string>
+    <string name="clear_confirmation_msg">Effacer %1$s \?</string>
+    <string name="download_map_dialog">Écran de téléchargement de carte</string>
+    <string name="dialogs_and_notifications_title">Écrans et notifications</string>
+    <string name="dialogs_and_notifications_descr">Paramètres d\'affichage des écrans, fenêtres et notifications d\'OsmAnd.</string>
+    <string name="suggested_maps">Cartes suggérées</string>
+    <string name="suggested_maps_descr">Ces cartes sont nécessaires pour l\'utilisation du greffon</string>
+    <string name="added_profiles">Profils ajoutés</string>
+    <string name="added_profiles_descr">Le greffon ajoute un nouveau profil dans OsmAnd</string>
+    <string name="shared_string_turn_off">Désactiver</string>
+    <string name="new_plugin_added">Nouveau greffon ajouté</string>
 </resources>
