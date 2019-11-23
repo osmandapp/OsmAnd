@@ -48,7 +48,7 @@
     <string name="poi_farm">Quitanda de produção local</string>
     <string name="poi_greengrocer">Verdureira</string>
     <string name="poi_seafood">Loja de frutos do mar</string>
-    <string name="poi_confectionery">Doçaria</string>
+    <string name="poi_confectionery">Doceria</string>
     <string name="poi_ice_cream">Sorveteria</string>
     <string name="poi_supermarket">Supermercado</string>
     <string name="poi_tea">Loja de chá</string>
@@ -3762,4 +3762,8 @@
     <string name="poi_monastery_type_canonry">Tipo de mosteiro: canonaria</string>
     <string name="poi_monastery_type_hermitage">Tipo de mosteiro: eremitério</string>
     <string name="poi_monastery_type_clerks_regular">Tipo de mosteiro: clérigos regulares</string>
+    <string name="poi_tourist_camp">Acampamento turístico</string>
+    <string name="poi_community_gender_female">Gênero da comunidade: feminino</string>
+    <string name="poi_community_gender_male">Gênero da comunidade: masculino</string>
+    <string name="poi_community_gender_mixed">Gênero da comunidade: ambos</string>
 </resources>
