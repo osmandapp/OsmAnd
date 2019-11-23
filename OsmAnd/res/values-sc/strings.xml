@@ -3389,4 +3389,17 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="route_start_point">Puntu de incumintzu</string>
     <string name="track_saved">Rasta sarvada</string>
     <string name="empty_filename">Su nùmene de su documentu est bòidu</string>
+    <string name="shared_string_revert">Torra a comente fiat</string>
+    <string name="quick_action_directions_from_desc">Unu butone pro pònnere su tzentru de sa mapa comente puntu de tzucada e calculare s\'àndala pro sa destinatzione o abèrrere unu diàlogu pro ischertare sa destinatzione si su marcadore de sa destinatzione no est in sa mapa.</string>
+    <string name="clear_confirmation_msg">Cheres isbodiare %1$s\?</string>
+    <string name="download_map_dialog">Diàlogu de iscarrigamentu de sa mapa</string>
+    <string name="dialogs_and_notifications_title">Diàlogos e notìficas</string>
+    <string name="dialogs_and_notifications_descr">Controlla sas ventaneddas a cumparsa, sos diàlogos e sas notìficas chi OsmAnd ammustrat durante s\'impreu.</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_name">Retzas de nodos</string>
+    <string name="suggested_maps">Mapas cussigiadas</string>
+    <string name="suggested_maps_descr">Custas mapas sunt netzessàrias pro s\'impreu de s\'estensione</string>
+    <string name="added_profiles">Profilos annànghidos</string>
+    <string name="added_profiles_descr">S\'estensione annanghet unu profilu nou a OsmAnd</string>
+    <string name="shared_string_turn_off">Istuda</string>
+    <string name="new_plugin_added">Estensione noa annànghida</string>
 </resources>
