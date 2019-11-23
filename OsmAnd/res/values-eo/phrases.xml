@@ -3072,7 +3072,7 @@
     <string name="poi_electronics_repair_appliance">Riparo de elektronikaĵoj: aparatoj</string>
     <string name="poi_electronics_repair_phone">Riparo de elektronikaĵoj: telefonoj</string>
     <string name="poi_electronics_repair_tv">Riparo de elektronikaĵoj: televidiloj</string>
-    <string name="poi_resort_kids_camp">infana kampadejo</string>
+    <string name="poi_resort_kids_camp">infana kampo</string>
     <string name="poi_music_school">Muzika lernejo</string>
     <string name="poi_language_school">Lingva lernejo</string>
     <string name="poi_life_ring">Savoringo</string>
@@ -3755,4 +3755,8 @@
     <string name="poi_monastery_type_canonry">Ordeno: de regulaj kanonikoj</string>
     <string name="poi_monastery_type_hermitage">Ordeno: ermita</string>
     <string name="poi_monastery_type_clerks_regular">Ordeno: de regulaj klerikoj</string>
+    <string name="poi_tourist_camp">turisma kampo</string>
+    <string name="poi_community_gender_female">Komunumo: ina</string>
+    <string name="poi_community_gender_male">Komunumo: vira</string>
+    <string name="poi_community_gender_mixed">Komunumo: gea</string>
 </resources>
