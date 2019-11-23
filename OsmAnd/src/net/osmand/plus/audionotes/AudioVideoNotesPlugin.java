@@ -112,8 +112,8 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	private static final int TAKE_VIDEO_NOTE_ITEM_ORDER = 4300;
 	private static final int TAKE_PHOTO_NOTE_ITEM_ORDER = 4500;
 
-	private static Method mRegisterMediaButtonEventReceiver;
-	private static Method mUnregisterMediaButtonEventReceiver;
+//	private static Method mRegisterMediaButtonEventReceiver;
+//	private static Method mUnregisterMediaButtonEventReceiver;
 	private OsmandApplication app;
 	private TextInfoWidget recordControl;
 
@@ -513,24 +513,24 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	}
 
-	private static void initializeRemoteControlRegistrationMethods() {
-		try {
+//	private static void initializeRemoteControlRegistrationMethods() {
+//		try {
 			// API 8
-			if (mRegisterMediaButtonEventReceiver == null) {
-				mRegisterMediaButtonEventReceiver = AudioManager.class.getMethod("registerMediaButtonEventReceiver",
-						new Class[]{ComponentName.class});
-			}
-			if (mUnregisterMediaButtonEventReceiver == null) {
-				mUnregisterMediaButtonEventReceiver = AudioManager.class.getMethod("unregisterMediaButtonEventReceiver",
-						new Class[]{ComponentName.class});
-			}
-			/* success, this device will take advantage of better remote */
-			/* control event handling */
-		} catch (NoSuchMethodException nsme) {
-			/* failure, still using the legacy behavior, but this app */
-			/* is future-proof! */
-		}
-	}
+//			if (mRegisterMediaButtonEventReceiver == null) {
+//				mRegisterMediaButtonEventReceiver = AudioManager.class.getMethod("registerMediaButtonEventReceiver",
+//						new Class[]{ComponentName.class});
+//			}
+//			if (mUnregisterMediaButtonEventReceiver == null) {
+//				mUnregisterMediaButtonEventReceiver = AudioManager.class.getMethod("unregisterMediaButtonEventReceiver",
+//						new Class[]{ComponentName.class});
+//			}
+//			/* success, this device will take advantage of better remote */
+//			/* control event handling */
+//		} catch (NoSuchMethodException nsme) {
+//			/* failure, still using the legacy behavior, but this app */
+//			/* is future-proof! */
+//		}
+//	}
 
 	@Override
 	public String getId() {
@@ -579,11 +579,11 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	@Override
 	public boolean init(@NonNull final OsmandApplication app, Activity activity) {
-		initializeRemoteControlRegistrationMethods();
-		AudioManager am = (AudioManager) app.getSystemService(Context.AUDIO_SERVICE);
-		if (am != null) {
-			registerMediaListener(am);
-		}
+//		initializeRemoteControlRegistrationMethods();
+//		AudioManager am = (AudioManager) app.getSystemService(Context.AUDIO_SERVICE);
+//		if (am != null) {
+//			registerMediaListener(am);
+//		}
 		return true;
 	}
 
@@ -602,30 +602,30 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		return currentRecording;
 	}
 
-	private void registerMediaListener(AudioManager am) {
+//	private void registerMediaListener(AudioManager am) {
+//
+//		ComponentName receiver = new ComponentName(app.getPackageName(), MediaRemoteControlReceiver.class.getName());
+//		try {
+//			if (mRegisterMediaButtonEventReceiver == null) {
+//				return;
+//			}
+//			mRegisterMediaButtonEventReceiver.invoke(am, receiver);
+//		} catch (Exception ite) {
+//			log.error(ite.getMessage(), ite);
+//		}
+//	}
 
-		ComponentName receiver = new ComponentName(app.getPackageName(), MediaRemoteControlReceiver.class.getName());
-		try {
-			if (mRegisterMediaButtonEventReceiver == null) {
-				return;
-			}
-			mRegisterMediaButtonEventReceiver.invoke(am, receiver);
-		} catch (Exception ite) {
-			log.error(ite.getMessage(), ite);
-		}
-	}
-
-	private void unregisterMediaListener(AudioManager am) {
-		ComponentName receiver = new ComponentName(app.getPackageName(), MediaRemoteControlReceiver.class.getName());
-		try {
-			if (mUnregisterMediaButtonEventReceiver == null) {
-				return;
-			}
-			mUnregisterMediaButtonEventReceiver.invoke(am, receiver);
-		} catch (Exception ite) {
-			log.error(ite.getMessage(), ite);
-		}
-	}
+//	private void unregisterMediaListener(AudioManager am) {
+//		ComponentName receiver = new ComponentName(app.getPackageName(), MediaRemoteControlReceiver.class.getName());
+//		try {
+//			if (mUnregisterMediaButtonEventReceiver == null) {
+//				return;
+//			}
+//			mUnregisterMediaButtonEventReceiver.invoke(am, receiver);
+//		} catch (Exception ite) {
+//			log.error(ite.getMessage(), ite);
+//		}
+//	}
 
 	@Override
 	public void registerLayerContextMenuActions(final OsmandMapTileView mapView, ContextMenuAdapter adapter, final MapActivity mapActivity) {
@@ -869,8 +869,8 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	@Override
 	public void mapActivityResume(MapActivity activity) {
 		this.mapActivity = activity;
-		((AudioManager) activity.getSystemService(Context.AUDIO_SERVICE)).registerMediaButtonEventReceiver(
-				new ComponentName(activity, MediaRemoteControlReceiver.class));
+//		((AudioManager) activity.getSystemService(Context.AUDIO_SERVICE)).registerMediaButtonEventReceiver(
+//				new ComponentName(activity, MediaRemoteControlReceiver.class));
 		if (runAction != -1) {
 			takeAction(activity, actionLon, actionLat, runAction);
 			runAction = -1;
@@ -1712,10 +1712,10 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	@Override
 	public void disable(OsmandApplication app) {
-		AudioManager am = (AudioManager) app.getSystemService(Context.AUDIO_SERVICE);
-		if (am != null) {
-			unregisterMediaListener(am);
-		}
+//		AudioManager am = (AudioManager) app.getSystemService(Context.AUDIO_SERVICE);
+//		if (am != null) {
+//			unregisterMediaListener(am);
+//		}
 	}
 
 	@Override

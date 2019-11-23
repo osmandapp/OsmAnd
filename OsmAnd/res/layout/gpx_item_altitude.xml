@@ -34,7 +34,7 @@
                 android:gravity="center_vertical"
                 android:paddingLeft="@dimen/content_padding"
                 android:paddingRight="@dimen/content_padding"
-                android:text="@string/gpx_join_gaps"
+                android:text="@string/join_segments"
                 android:textColor="?android:attr/textColorPrimary"
                 android:textSize="@dimen/default_list_text_size"
                 osmand:typeface="@string/font_roboto_regular" />

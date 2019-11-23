@@ -1,5 +1,6 @@
 package net.osmand.plus.myplaces;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.res.ColorStateList;
 import android.graphics.Paint;
@@ -26,6 +27,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
+import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
@@ -57,7 +59,10 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 	private SplitSegmentsAdapter adapter;
 	private View headerView;
 
+	private GpxDisplayItem gpxItem;
 	private GpxDisplayItemType[] filterTypes = {GpxDisplayItemType.TRACK_SEGMENT};
+	private GPXUtilities.TrkSegment trkSegment;
+
 	private List<String> options = new ArrayList<>();
 	private List<Double> distanceSplit = new ArrayList<>();
 	private TIntArrayList timeSplit = new TIntArrayList();
@@ -68,6 +73,7 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 	private Rect minMaxSpeedTextBounds;
 	private ListView listView;
 	private ProgressBar progressBar;
+	private boolean joinSegments;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -87,7 +93,6 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 		listView.setBackgroundColor(getResources().getColor(
 				trackActivity.getMyApplication().getSettings().isLightContent() ? R.color.activity_background_color_light
 						: R.color.activity_background_color_dark));
-		trackActivity.onAttachFragment(this);
 	}
 
 	@Override
@@ -178,6 +183,27 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 		updateContent();
 	}
 
+	@Override
+	public void onDestroyView() {
+		Dialog dialog = getDialog();
+		if (dialog != null && getRetainInstance()) {
+			dialog.setDismissMessage(null);
+		}
+		super.onDestroyView();
+	}
+
+	public void setGpxItem(GpxDisplayItem gpxItem) {
+		this.gpxItem = gpxItem;
+	}
+
+	public void setTrkSegment(GPXUtilities.TrkSegment trkSegment) {
+		this.trkSegment = trkSegment;
+	}
+
+	public void setJoinSegments(boolean joinSegments) {
+		this.joinSegments = joinSegments;
+	}
+
 	private void updateHeader() {
 		final View splitIntervalView = headerView.findViewById(R.id.split_interval_view);
 
@@ -226,8 +252,7 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 		if (getTrackActivity() != null) {
 			adapter.clear();
 			adapter.setNotifyOnChange(false);
-			GpxDisplayItem overviewSegments = getOverviewSegment();
-			adapter.add(overviewSegments);
+			adapter.add(gpxItem);
 			List<GpxDisplayItem> splitSegments = getSplitSegments();
 			adapter.addAll(splitSegments);
 			adapter.notifyDataSetChanged();
@@ -370,26 +395,32 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 		List<GpxDisplayItem> splitSegments = new ArrayList<>();
 		if (trackActivity != null) {
 			List<GpxDisplayGroup> result = trackActivity.getGpxFile(true);
-			if (result != null && result.size() > 0) {
-				if (result.get(0).isSplitDistance() || result.get(0).isSplitTime()) {
-					splitSegments.addAll(result.get(0).getModifiableList());
+			if (result != null && result.size() > 0 && trkSegment.points.size() > 0) {
+				for (GpxDisplayGroup group : result) {
+					splitSegments.addAll(collectDisplayItemsFromGroup(group));
 				}
 			}
 		}
 		return splitSegments;
 	}
 
-	@Nullable
-	private GpxDisplayItem getOverviewSegment() {
-		TrackActivity trackActivity = getTrackActivity();
-		GpxDisplayItem overviewSegment = null;
-		if (trackActivity != null) {
-			List<GpxDisplayGroup> result = trackActivity.getGpxFile(false);
-			if (result.size() > 0 && result.get(0).getModifiableList().size() > 0) {
-				overviewSegment = result.get(0).getModifiableList().get(0);
+	private List<GpxDisplayItem> collectDisplayItemsFromGroup(GpxDisplayGroup group) {
+		List<GpxDisplayItem> splitSegments = new ArrayList<>();
+		boolean generalTrack = gpxItem.isGeneralTrack();
+		boolean generalGroup = group.isGeneralTrack();
+		if ((group.isSplitDistance() || group.isSplitTime()) && (!generalGroup && !generalTrack || generalGroup && generalTrack)) {
+			boolean itemsForSelectedSegment = false;
+			for (GpxDisplayItem item : group.getModifiableList()) {
+				itemsForSelectedSegment = trkSegment.points.get(0).equals(item.locationStart) || itemsForSelectedSegment;
+				if (itemsForSelectedSegment) {
+					splitSegments.add(item);
+				}
+				if (trkSegment.points.get(trkSegment.points.size() - 1).equals(item.locationEnd)) {
+					break;
+				}
 			}
 		}
-		return overviewSegment;
+		return splitSegments;
 	}
 
 	protected boolean hasFilterType(GpxDisplayItemType filterType) {
@@ -446,7 +477,7 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 				overviewTextView.setTextColor(defaultTextColor);
 				overviewTextView.setText(app.getString(R.string.shared_string_overview));
 				if (currentGpxDisplayItem != null) {
-					overviewTextView.setText(app.getString(R.string.shared_string_overview)	+ "  (" + Integer.toString(currentGpxDisplayItem.analysis.points) + ")");
+					overviewTextView.setText(app.getString(R.string.shared_string_overview) + "  (" + Integer.toString(currentGpxDisplayItem.analysis.points) + ")");
 					((TextView) convertView.findViewById(R.id.fragment_count_text)).setText(app.getString(R.string.shared_string_time_span) + ": " + Algorithms.formatDuration((int) (currentGpxDisplayItem.analysis.timeSpan / 1000), app.accessibilityEnabled()));
 				}
 			} else {
@@ -498,7 +529,8 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 					TextView distanceOrTimeSpanText = (TextView) convertView.findViewById(R.id.distance_or_time_span_text);
 					if (position == 0) {
 						distanceOrTimeSpanImageView.setImageDrawable(ic.getIcon(R.drawable.ic_action_track_16, app.getSettings().isLightContent() ? R.color.gpx_split_segment_icon_color : 0));
-						distanceOrTimeSpanValue.setText(OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app));
+						float totalDistance = joinSegments && gpxItem.isGeneralTrack() ? analysis.totalDistanceWithoutGaps : analysis.totalDistance;
+						distanceOrTimeSpanValue.setText(OsmAndFormatter.getFormattedDistance(totalDistance, app));
 						distanceOrTimeSpanText.setText(app.getString(R.string.distance));
 					} else {
 						if (currentGpxDisplayItem.group.isSplitDistance()) {
@@ -706,9 +738,9 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 				if (selectedSplitInterval == 0) {
 					model.noSplit(app);
 				} else if (distanceSplit.get(selectedSplitInterval) > 0) {
-					model.splitByDistance(app, distanceSplit.get(selectedSplitInterval));
+					model.splitByDistance(app, distanceSplit.get(selectedSplitInterval), joinSegments);
 				} else if (timeSplit.get(selectedSplitInterval) > 0) {
-					model.splitByTime(app, timeSplit.get(selectedSplitInterval));
+					model.splitByTime(app, timeSplit.get(selectedSplitInterval), joinSegments);
 				}
 			}
 
@@ -716,9 +748,13 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 		}
 	}
 
-	public static boolean showInstance(@NonNull TrackActivity trackActivity) {
+	public static boolean showInstance(@NonNull TrackActivity trackActivity, @NonNull GpxDisplayItem gpxItem, GPXUtilities.TrkSegment trkSegment) {
 		try {
 			SplitSegmentDialogFragment fragment = new SplitSegmentDialogFragment();
+			fragment.setGpxItem(gpxItem);
+			fragment.setTrkSegment(trkSegment);
+			fragment.setRetainInstance(true);
+			fragment.setJoinSegments(trackActivity.isJoinSegments());
 			fragment.show(trackActivity.getSupportFragmentManager(), TAG);
 			return true;
 		} catch (RuntimeException e) {

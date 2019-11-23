@@ -13,6 +13,7 @@
 -->
     <string name="rendering_value_walkingRoutesOSMCNodes_name">Node networks</string>
     <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Show node network cycle routes</string>
+    <string name="join_segments">Join segments</string>
     <string name="download_map_dialog">Download map dialog</string>
     <string name="dialogs_and_notifications_title">Dialogs and notifications</string>
     <string name="dialogs_and_notifications_descr">Control popups, dialogs and notifications that OsmAnd show during usage.</string>
