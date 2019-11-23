@@ -123,6 +123,7 @@ public class DashParkingFragment extends DashLocationFragment {
 			timeLeft.setText("");
 			timeLeft.setVisibility(View.GONE);
 		}
+
 		((TextView) mainView.findViewById(R.id.name)).setText(descr);
 		ImageView direction = (ImageView) mainView.findViewById(R.id.direction_icon);
 		if (loc != null) {

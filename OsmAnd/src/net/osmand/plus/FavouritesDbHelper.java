@@ -11,9 +11,11 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
+import net.osmand.data.PointDescription;
 import net.osmand.plus.MapMarkersHelper.MapMarkersGroup;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
+import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.compress.compressors.bzip2.BZip2CompressorOutputStream;
@@ -50,6 +52,11 @@ public class FavouritesDbHelper {
 	private final OsmandApplication context;
 	protected static final String HIDDEN = "hidden";
 	private static final String DELIMETER = "__";
+
+	public static final String PERSONAL = "personal";
+	public static final String HOME = "home";
+	public static final String WORK = "work";
+	public static final String PARKING = "parking";
 
 	private Set<FavoritesListener> listeners = new HashSet<>();
 	private boolean favoritesLoaded;
@@ -102,6 +109,54 @@ public class FavouritesDbHelper {
 				}
 			}
 		});
+	}
+
+	public boolean hasWorkPoint() {
+		return hasPersonalPoint(WORK);
+	}
+
+	public boolean hasHomePoint() {
+		return hasPersonalPoint(HOME);
+	}
+
+	public boolean hasParkingPoint() {
+		return hasPersonalPoint(PARKING);
+	}
+
+	private boolean hasPersonalPoint(String name) {
+		boolean hasPoint = false;
+		for (FavouritePoint fp : cachedFavoritePoints) {
+			if (fp.getName().equals(name) && fp.getCategory().equals(PERSONAL)) {
+				hasPoint = true;
+				break;
+			}
+		}
+		return hasPoint;
+	}
+
+	public FavouritePoint getWorkPoint() {
+		return getPersonalPoint(WORK);
+	}
+
+	public FavouritePoint getHomePoint() {
+		return getPersonalPoint(HOME);
+	}
+
+	public FavouritePoint getParkingPoint() {
+		return getPersonalPoint(PARKING);
+	}
+
+
+	FavouritePoint getPersonalPoint(String name) {
+		FavouritePoint favouritePoint = null;
+		for (FavouritePoint fp : cachedFavoritePoints) {
+			if (fp.getName().equals(name) && fp.getCategory().equals(PERSONAL)) {
+				favouritePoint = fp;
+				break;
+			}
+		}
+		return favouritePoint;
+
 	}
 
 	public boolean isFavoritesLoaded() {
@@ -197,6 +252,43 @@ public class FavouritesDbHelper {
 			saveCurrentPointsIntoFile();
 		}
 		return true;
+	}
+
+	public void setHomePoint(LatLon latLon, PointDescription description) {
+		if (hasHomePoint()) {
+			getHomePoint().setDescription(description.getName());
+			editFavourite(getHomePoint(),latLon.getLatitude(),latLon.getLongitude());
+		} else {
+			addFavoritePersonal(latLon, HOME, description.getName());
+		}
+	}
+
+	public void setWorkPoint(LatLon latLon, PointDescription description) {
+		if (hasWorkPoint()) {
+			getWorkPoint().setDescription(description.getName());
+			editFavourite(getWorkPoint(),latLon.getLatitude(),latLon.getLongitude());
+		} else {
+			addFavoritePersonal(latLon, WORK, description.getName());
+		}
+	}
+
+	public void setParkingPoint(LatLon latLon, PointDescription description) {
+		if (hasParkingPoint()) {
+			getParkingPoint().setDescription(description.getName());
+			editFavourite(getParkingPoint(),latLon.getLatitude(),latLon.getLongitude());
+		} else {
+			addFavoritePersonal(latLon, PARKING, description.getName());
+		}
+	}
+
+
+	public void addFavoritePersonal(LatLon latLon, String name, String description) {
+		if (latLon != null) {
+			FavouritePoint favouritePoint = new FavouritePoint(latLon.getLatitude(), latLon.getLongitude(),
+					name, FavouritesDbHelper.PERSONAL);
+			favouritePoint.setDescription(description);
+			addFavourite(favouritePoint);
+		}
 	}
 
 	public boolean addFavourite(FavouritePoint p) {
@@ -559,7 +651,7 @@ public class FavouritesDbHelper {
 
 			@Override
 			public int compare(FavoriteGroup lhs, FavoriteGroup rhs) {
-				return collator.compare(lhs.name, rhs.name);
+				return lhs.name.equals(PERSONAL) ? -1 : rhs.name.equals(PERSONAL) ? 1 : collator.compare(lhs.name, rhs.name);
 			}
 		});
 		Comparator<FavouritePoint> favoritesComparator = getComparator();
@@ -680,6 +772,45 @@ public class FavouritesDbHelper {
 		addEmptyCategory(context.getString(R.string.favorite_friends_category));
 		addEmptyCategory(context.getString(R.string.favorite_places_category));
 		addEmptyCategory(context.getString(R.string.shared_string_others));
+	}
+
+	public FavoriteGroup createPersonalGroup() {
+		FavoriteGroup group = new FavoriteGroup();
+		group.name = PERSONAL;
+		group.visible = true;
+		group.color = 0;
+		FavouritePoint fPoint;
+		TargetPointsHelper helper = context.getTargetPointsHelper();
+		TargetPointsHelper.TargetPoint targetPoint;
+
+		if (!hasHomePoint() && helper.getHomePoint() != null) {
+			targetPoint = helper.getHomePoint();
+			fPoint = new FavouritePoint(targetPoint.getLatitude(), targetPoint.getLongitude(),
+					HOME, group.name);
+			fPoint.setDescription(targetPoint.getPointDescription(context).getName());
+			group.points.add(fPoint);
+		}
+		if (!hasWorkPoint() && helper.getHomePoint() != null) {
+			targetPoint = helper.getWorkPoint();
+			fPoint = new FavouritePoint(targetPoint.getLatitude(), targetPoint.getLongitude(),
+					WORK, group.name);
+			fPoint.setDescription(targetPoint.getPointDescription(context).getName());
+			group.points.add(fPoint);
+		}
+		if (OsmandPlugin.getEnabledPlugin(ParkingPositionPlugin.class) != null) {
+			ParkingPositionPlugin parkingPositionPlugin = OsmandPlugin.getEnabledPlugin(ParkingPositionPlugin.class);
+			LatLon parkingLatLon = parkingPositionPlugin.getParkingPosition();
+			targetPoint = new TargetPointsHelper.TargetPoint(parkingLatLon, new PointDescription(PointDescription.POINT_TYPE_PARKING_MARKER, ""));
+			if (parkingLatLon != null) {
+				fPoint = new FavouritePoint(targetPoint.getLatitude(), targetPoint.getLongitude(),
+						PARKING, group.name);
+				fPoint.setDescription(targetPoint.getPointDescription(context).getName());
+				group.points.add(fPoint);
+			}
+		}
+
+		flatGroups.put(group.name, group);
+		return group;
 	}
 
 	private FavoriteGroup getOrCreateGroup(FavouritePoint p, int defColor) {

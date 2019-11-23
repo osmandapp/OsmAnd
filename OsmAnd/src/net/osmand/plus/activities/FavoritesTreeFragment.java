@@ -829,9 +829,11 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			int disabledColor = light ? R.color.text_color_secondary_light : R.color.text_color_secondary_dark;
 			row.findViewById(R.id.group_divider).setVisibility(groupPosition == 0 ? View.GONE : View.VISIBLE);
 			int color = model.color == 0 || model.color == Color.BLACK ? getResources().getColor(R.color.color_favorite) : model.color;
-			setCategoryIcon(app, app.getUIUtilities().getPaintedIcon(
-					R.drawable.ic_action_fav_dark, visible ? (color | 0xff000000) : getResources().getColor(disabledColor)),
-					groupPosition, isExpanded, row, light);
+			if (groupPosition != 0) {
+				setCategoryIcon(app, app.getUIUtilities().getPaintedIcon(
+						R.drawable.ic_action_fav_dark, visible ? (color | 0xff000000) : getResources().getColor(disabledColor)),
+						groupPosition, isExpanded, row, light);
+			}
 			adjustIndicator(app, groupPosition, isExpanded, row, light);
 			TextView label = (TextView) row.findViewById(R.id.category_name);
 			label.setTextColor(getResources().getColor(visible ? enabledColor : disabledColor));
@@ -879,16 +881,18 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			}
 			final View ch = row.findViewById(R.id.options);
 			if (!selectionMode) {
-				((ImageView) ch).setImageDrawable(getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_overflow_menu_white));
-				ch.setVisibility(View.VISIBLE);
-				ch.setContentDescription(getString(R.string.shared_string_settings));
-				ch.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						EditFavoriteGroupDialogFragment.showInstance(getChildFragmentManager(), model.name);
-					}
+				if (groupPosition != 0) {
+					((ImageView) ch).setImageDrawable(getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_overflow_menu_white));
+					ch.setVisibility(View.VISIBLE);
+					ch.setContentDescription(getString(R.string.shared_string_settings));
+					ch.setOnClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							EditFavoriteGroupDialogFragment.showInstance(getChildFragmentManager(), model.name);
+						}
 
-				});
+					});
+				}
 			} else {
 				ch.setVisibility(View.GONE);
 			}
@@ -933,8 +937,6 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 					}
 				});
 			}
-			icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(getActivity(),
-					visible ? model.getColor() : getResources().getColor(disabledIconColor), false));
 			LatLon lastKnownMapLocation = getMyApplication().getSettings().getLastKnownMapLocation();
 			int dist = (int) (MapUtils.getDistance(model.getLatitude(), model.getLongitude(),
 					lastKnownMapLocation.getLatitude(), lastKnownMapLocation.getLongitude()));
@@ -943,6 +945,26 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			name.setTypeface(Typeface.DEFAULT, visible ? Typeface.NORMAL : Typeface.ITALIC);
 			name.setTextColor(getResources().getColor(visible ? enabledColor : disabledColor));
 			distanceText.setText(distance);
+			if (groupPosition == 0) {
+				distanceText.setText(distance + "• " + model.getDescription());
+				switch (model.getName()) {
+					case FavouritesDbHelper.HOME:
+						icon.setImageDrawable(getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_home_dark));
+						name.setText(R.string.home_button);
+						break;
+					case FavouritesDbHelper.WORK:
+						icon.setImageDrawable(getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_work));
+						name.setText(R.string.work_button);
+						break;
+					case FavouritesDbHelper.PARKING:
+						icon.setImageDrawable(getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_parking_dark));
+						name.setText(R.string.parking_place);
+						break;
+				}
+			} else {
+				icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(getActivity(),
+						visible ? model.getColor() : getResources().getColor(disabledIconColor), false));
+			}
 			if (visible) {
 				distanceText.setTextColor(getResources().getColor(R.color.color_distance));
 			} else {

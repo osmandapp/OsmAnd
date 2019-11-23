@@ -196,6 +196,15 @@ public class TargetPointsHelper {
 		}
 	}
 
+	private TargetPoint readParkingPointFromPlugin() {
+		TargetPoint parkingPoint = TargetPoint.create(settings.getHomePoint(), settings.getHomePointDescription());
+		workPoint = TargetPoint.create(settings.getWorkPoint(), settings.getWorkPointDescription());
+		if (!ctx.isApplicationInitializing()) {
+			lookupAddressForParkingPoint(parkingPoint);
+		}
+		return parkingPoint;
+	}
+
 	private void readMyLocationPointFromSettings() {
 		myLocationToStart = TargetPoint.create(settings.getMyLocationToStart(), settings.getMyLocationToStartDescription());
 		if (!ctx.isApplicationInitializing()) {
@@ -279,6 +288,28 @@ public class TargetPointsHelper {
 						homePoint.pointDescription.setName(address);
 						settings.setHomePoint(homePoint.point.getLatitude(), homePoint.point.getLongitude(),
 								homePoint.pointDescription);
+						ctx.getFavorites().setHomePoint(homePoint.point, homePoint.pointDescription);
+						updateRouteAndRefresh(false);
+						updateTargetPoint(homePoint);
+					}
+				}
+			}, null);
+			ctx.getGeocodingLookupService().lookupAddress(homePointRequest);
+		}
+	}
+
+	private void lookupAddressForParkingPoint(TargetPoint parkingPoint) {
+		if (parkingPoint != null && parkingPoint.isSearchingAddress(ctx)
+				&& (homePointRequest == null || !homePointRequest.getLatLon().equals(homePoint.point))) {
+			cancelHomePointAddressRequest();
+			homePointRequest = new AddressLookupRequest(homePoint.point, new GeocodingLookupService.OnAddressLookupResult() {
+				@Override
+				public void geocodingDone(String address) {
+					homePointRequest = null;
+					if (homePoint != null) {
+						homePoint.pointDescription.setName(address);
+						settings.setHomePoint(homePoint.point.getLatitude(), homePoint.point.getLongitude(),
+								homePoint.pointDescription);
 						updateRouteAndRefresh(false);
 						updateTargetPoint(homePoint);
 					}
@@ -300,6 +331,7 @@ public class TargetPointsHelper {
 						workPoint.pointDescription.setName(address);
 						settings.setWorkPoint(workPoint.point.getLatitude(), workPoint.point.getLongitude(),
 								workPoint.pointDescription);
+						ctx.getFavorites().setWorkPoint(homePoint.point, homePoint.pointDescription);
 						updateRouteAndRefresh(false);
 						updateTargetPoint(workPoint);
 					}
@@ -372,6 +404,7 @@ public class TargetPointsHelper {
 		if (pointDescription.isLocation() && Algorithms.isEmpty(pointDescription.getName())) {
 			pointDescription.setName(PointDescription.getSearchAddressStr(ctx));
 		}
+		ctx.getFavorites().setHomePoint(latLon, pointDescription);
 		settings.setHomePoint(latLon.getLatitude(), latLon.getLongitude(), pointDescription);
 		readHomeWorkFromSettings();
 	}
@@ -386,6 +419,7 @@ public class TargetPointsHelper {
 		if (pointDescription.isLocation() && Algorithms.isEmpty(pointDescription.getName())) {
 			pointDescription.setName(PointDescription.getSearchAddressStr(ctx));
 		}
+		ctx.getFavorites().setWorkPoint(latLon,pointDescription);
 		settings.setWorkPoint(latLon.getLatitude(), latLon.getLongitude(), pointDescription);
 		readHomeWorkFromSettings();
 	}

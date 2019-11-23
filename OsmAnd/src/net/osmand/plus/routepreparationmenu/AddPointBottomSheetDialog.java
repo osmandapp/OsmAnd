@@ -358,17 +358,21 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 
 	private void loadFavoritesItems(List<Object> items, FavouritesDbHelper helper) {
 		items.clear();
-		addMainScrollItems(items);
+		addMainScrollItems(items,helper);
 		items.addAll(helper.getVisibleFavouritePoints());
 		if (items.isEmpty()) {
 			items.addAll(helper.getFavouritePoints());
 		}
 	}
 
-	private void addMainScrollItems(List<Object> items) {
+	private void addMainScrollItems(List<Object> items, FavouritesDbHelper helper) {
 		items.add(FAVORITES);
-		items.add(PointType.HOME);
-		items.add(PointType.WORK);
+		if(helper.hasHomePoint()) {
+			items.add(PointType.HOME);
+		}
+		if(helper.hasHomePoint()) {
+			items.add(PointType.WORK);
+		}
 	}
 
 	private void createFavoritesScrollItem() {
@@ -381,7 +385,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 			if (helper.isFavoritesLoaded()) {
 				loadFavoritesItems(items, helper);
 			} else {
-				addMainScrollItems(items);
+				addMainScrollItems(items,helper);
 				helper.addListener(new FavouritesDbHelper.FavoritesListener() {
 					@Override
 					public void onFavoritesLoaded() {
