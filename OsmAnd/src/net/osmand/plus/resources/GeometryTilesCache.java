@@ -12,7 +12,7 @@ public class GeometryTilesCache extends TilesCache<GeometryTile> {
 
 	public GeometryTilesCache(AsyncLoadingThread asyncLoadingThread) {
 		super(asyncLoadingThread);
-		maxCacheSize = 50;
+		maxCacheSize = 4;
 	}
 
 	@Override

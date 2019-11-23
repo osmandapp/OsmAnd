@@ -286,7 +286,9 @@ class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer, ICont
 					x = tileBox.getPixXFromTile(tileX + px, tileY + py, TILE_ZOOM);
 					y = tileBox.getPixYFromTile(tileX + px, tileY + py, TILE_ZOOM);
 
-					canvas.drawLine(lastx, lasty, x, y, paintLine);
+					if (lastx != x || lasty != y) {
+						canvas.drawLine(lastx, lasty, x, y, paintLine);
+					}
 
 					lastx = x;
 					lasty = y;
