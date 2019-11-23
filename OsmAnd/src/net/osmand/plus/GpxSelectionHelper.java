@@ -10,6 +10,7 @@ import android.support.v4.content.ContextCompat;
 
 import java.util.Map;
 import java.util.Map.Entry;
+
 import net.osmand.GPXUtilities;
 import net.osmand.IProgress;
 import net.osmand.PlatformUtil;
@@ -168,12 +169,12 @@ public class GpxSelectionHelper {
 					selectedGpxFile.setDisplayGroups(groups, app);
 				} else if (dataItem.getSplitType() == GPXDatabase.GPX_SPLIT_TYPE_DISTANCE) {
 					for (GpxDisplayGroup model : groups) {
-						model.splitByDistance(app, dataItem.getSplitInterval());
+						model.splitByDistance(app, dataItem.getSplitInterval(), dataItem.isJoinSegments());
 					}
 					selectedGpxFile.setDisplayGroups(groups, app);
 				} else if (dataItem.getSplitType() == GPXDatabase.GPX_SPLIT_TYPE_TIME) {
 					for (GpxDisplayGroup model : groups) {
-						model.splitByTime(app, (int) dataItem.getSplitInterval());
+						model.splitByTime(app, (int) dataItem.getSplitInterval(), dataItem.isJoinSegments());
 					}
 					selectedGpxFile.setDisplayGroups(groups, app);
 				}
@@ -316,6 +317,10 @@ public class GpxSelectionHelper {
 	}
 
 	private static void processGroupTrack(@NonNull OsmandApplication app, @NonNull GpxDisplayGroup group) {
+		processGroupTrack(app, group, false);
+	}
+
+	private static void processGroupTrack(@NonNull OsmandApplication app, @NonNull GpxDisplayGroup group, boolean joinSegments) {
 		if (group.track == null) {
 			return;
 		}
@@ -333,14 +338,14 @@ public class GpxSelectionHelper {
 			GPXTrackAnalysis[] as;
 			boolean split = true;
 			if (group.splitDistance > 0) {
-				List<GPXTrackAnalysis> trackSegments = r.splitByDistance(group.splitDistance);
+				List<GPXTrackAnalysis> trackSegments = r.splitByDistance(group.splitDistance, joinSegments);
 				as = trackSegments.toArray(new GPXTrackAnalysis[trackSegments.size()]);
 			} else if (group.splitTime > 0) {
-				List<GPXTrackAnalysis> trackSegments = r.splitByTime(group.splitTime);
+				List<GPXTrackAnalysis> trackSegments = r.splitByTime(group.splitTime, joinSegments);
 				as = trackSegments.toArray(new GPXTrackAnalysis[trackSegments.size()]);
 			} else {
 				split = false;
-				as = new GPXTrackAnalysis[]{GPXTrackAnalysis.segment(0, r)};
+				as = new GPXTrackAnalysis[] {GPXTrackAnalysis.segment(0, r)};
 			}
 			for (GPXTrackAnalysis analysis : as) {
 				GpxDisplayItem item = new GpxDisplayItem();
@@ -868,18 +873,18 @@ public class GpxSelectionHelper {
 			processGroupTrack(app, this);
 		}
 
-		public void splitByDistance(OsmandApplication app, double meters) {
+		public void splitByDistance(OsmandApplication app, double meters, boolean joinSegments) {
 			list.clear();
 			splitDistance = meters;
 			splitTime = -1;
-			processGroupTrack(app, this);
+			processGroupTrack(app, this, joinSegments);
 		}
 
-		public void splitByTime(OsmandApplication app, int seconds) {
+		public void splitByTime(OsmandApplication app, int seconds, boolean joinSegments) {
 			list.clear();
 			splitDistance = -1;
 			splitTime = seconds;
-			processGroupTrack(app, this);
+			processGroupTrack(app, this, joinSegments);
 		}
 
 		public int getColor() {

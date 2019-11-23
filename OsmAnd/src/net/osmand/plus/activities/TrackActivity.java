@@ -410,6 +410,17 @@ public class TrackActivity extends TabActivity {
 		}
 	}
 
+	public boolean setJoinSegments(boolean joinSegments) {
+		if (gpxDataItem != null) {
+			return app.getGpxDbHelper().updateJoinSegments(gpxDataItem, joinSegments);
+		}
+		return false;
+	}
+
+	public boolean isJoinSegments() {
+		return gpxDataItem != null && gpxDataItem.isJoinSegments();
+	}
+
 	private static class GPXFileLoaderTask extends AsyncTask<Void, Void, GPXFile> {
 
 		private OsmandApplication app;

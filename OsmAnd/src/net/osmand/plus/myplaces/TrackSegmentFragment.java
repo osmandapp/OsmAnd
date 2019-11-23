@@ -93,7 +93,6 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 
 	private boolean updateEnable;
 	private boolean chartClicked;
-	private boolean joinGapsEnabled;
 
 	private IconPopupMenu generalPopupMenu;
 	private IconPopupMenu altitudePopupMenu;
@@ -719,10 +718,13 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 							view.findViewById(R.id.gpx_join_gaps_container).setOnClickListener(new View.OnClickListener() {
 								@Override
 								public void onClick(View v) {
-									joinGapsEnabled = !joinGapsEnabled;
-									for (int i = 0; i < getCount(); i++) {
-										View view = getViewAtPosition(i);
-										updateJoinGapsInfo(view, i);
+									TrackActivity activity = getTrackActivity();
+									if (activity != null && activity.setJoinSegments(!activity.isJoinSegments())) {
+										updateSplitView();
+										for (int i = 0; i < getCount(); i++) {
+											View view = getViewAtPosition(i);
+											updateJoinGapsInfo(view, i);
+										}
 									}
 								}
 							});
@@ -856,10 +858,13 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 							view.findViewById(R.id.gpx_join_gaps_container).setOnClickListener(new View.OnClickListener() {
 								@Override
 								public void onClick(View v) {
-									joinGapsEnabled = !joinGapsEnabled;
-									for (int i = 0; i < getCount(); i++) {
-										View view = getViewAtPosition(i);
-										updateJoinGapsInfo(view, i);
+									TrackActivity activity = getTrackActivity();
+									if (activity != null && activity.setJoinSegments(!activity.isJoinSegments())) {
+										updateSplitView();
+										for (int i = 0; i < getCount(); i++) {
+											View view = getViewAtPosition(i);
+											updateJoinGapsInfo(view, i);
+										}
 									}
 								}
 							});
@@ -962,10 +967,13 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 							view.findViewById(R.id.gpx_join_gaps_container).setOnClickListener(new View.OnClickListener() {
 								@Override
 								public void onClick(View v) {
-									joinGapsEnabled = !joinGapsEnabled;
-									for (int i = 0; i < getCount(); i++) {
-										View view = getViewAtPosition(i);
-										updateJoinGapsInfo(view, i);
+									TrackActivity activity = getTrackActivity();
+									if (activity != null && activity.setJoinSegments(!activity.isJoinSegments())) {
+										updateSplitView();
+										for (int i = 0; i < getCount(); i++) {
+											View view = getViewAtPosition(i);
+											updateJoinGapsInfo(view, i);
+										}
 									}
 								}
 							});
@@ -1138,22 +1146,24 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 		}
 
 		void updateJoinGapsInfo(View view, int position) {
-			if (view != null) {
+			TrackActivity activity = getTrackActivity();
+			if (view != null && activity != null) {
 				GPXTrackAnalysis analysis = gpxItem.analysis;
 				GPXTabItemType tabType = tabTypes[position];
 				boolean visible = gpxItem.isGeneralTrack() && analysis != null && tabType.equals(GPXTabItemType.GPX_TAB_ITEM_GENERAL);
 				AndroidUiHelper.updateVisibility(view.findViewById(R.id.gpx_join_gaps_container), visible);
-				((SwitchCompat) view.findViewById(R.id.gpx_join_gaps_switch)).setChecked(joinGapsEnabled);
+				boolean joinSegments = activity.isJoinSegments();
+				((SwitchCompat) view.findViewById(R.id.gpx_join_gaps_switch)).setChecked(joinSegments);
 				if (analysis != null) {
 					if (tabType.equals(GPXTabItemType.GPX_TAB_ITEM_GENERAL)) {
-						float totalDistance = joinGapsEnabled && gpxItem.isGeneralTrack() ? analysis.totalDistanceWithoutGaps : analysis.totalDistance;
-						float timeSpan = joinGapsEnabled && gpxItem.isGeneralTrack() ? analysis.timeSpanWithoutGaps : analysis.timeSpan;
+						float totalDistance = joinSegments && gpxItem.isGeneralTrack() ? analysis.totalDistanceWithoutGaps : analysis.totalDistance;
+						float timeSpan = joinSegments && gpxItem.isGeneralTrack() ? analysis.timeSpanWithoutGaps : analysis.timeSpan;
 
 						((TextView) view.findViewById(R.id.distance_text)).setText(OsmAndFormatter.getFormattedDistance(totalDistance, app));
 						((TextView) view.findViewById(R.id.duration_text)).setText(Algorithms.formatDuration((int) (timeSpan / 1000), app.accessibilityEnabled()));
 					} else if (tabType.equals(GPXTabItemType.GPX_TAB_ITEM_SPEED)) {
-						long timeMoving = joinGapsEnabled && gpxItem.isGeneralTrack() ? analysis.timeMovingWithoutGaps : analysis.timeMoving;
-						float totalDistanceMoving = joinGapsEnabled && gpxItem.isGeneralTrack() ? analysis.totalDistanceMovingWithoutGaps : analysis.totalDistanceMoving;
+						long timeMoving = joinSegments && gpxItem.isGeneralTrack() ? analysis.timeMovingWithoutGaps : analysis.timeMoving;
+						float totalDistanceMoving = joinSegments && gpxItem.isGeneralTrack() ? analysis.totalDistanceMovingWithoutGaps : analysis.totalDistanceMoving;
 
 						((TextView) view.findViewById(R.id.time_moving_text)).setText(Algorithms.formatDuration((int) (timeMoving / 1000), app.accessibilityEnabled()));
 						((TextView) view.findViewById(R.id.distance_text)).setText(OsmAndFormatter.getFormattedDistance(totalDistanceMoving, app));
@@ -1177,7 +1187,7 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 
 		private TrkSegment getTrkSegment() {
 			for (Track t : gpxItem.group.getGpx().tracks) {
-				if (!t.generalTrack) {
+				if (!t.generalTrack && !gpxItem.isGeneralTrack() || t.generalTrack && gpxItem.isGeneralTrack()) {
 					for (TrkSegment s : t.segments) {
 						if (s.points.size() > 0 && s.points.get(0).equals(gpxItem.analysis.locationStart)) {
 							return s;
@@ -1245,12 +1255,12 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 
 			MapActivity.launchMapActivityMoveToTop(getActivity());
 		}
-	}
 
-	void openSplitIntervalScreen() {
-		TrackActivity activity = getTrackActivity();
-		if (activity != null) {
-			SplitSegmentDialogFragment.showInstance(activity);
+		private	void openSplitIntervalScreen() {
+			TrackActivity activity = getTrackActivity();
+			if (activity != null) {
+				SplitSegmentDialogFragment.showInstance(activity, gpxItem, getTrkSegment());
+			}
 		}
 	}
 
