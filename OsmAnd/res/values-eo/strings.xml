@@ -2226,9 +2226,9 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="do_not_show_startup_messages_desc">Ne montri mesaĝojn pri rabatoj por aplikaĵo pri kaj specialaj lokaj okazoj.</string>
     <string name="driving_region_automatic">Aŭtomata</string>
     <string name="right_side_navigation">Dekstr‑flanka trafiko</string>
-    <string name="osmand_extended_description_part1">OsmAnd (OSM Aŭtomata Navigado Direkte al celo) estas mapa kaj naviga aplikaĵo kun aliro al liberaj, tutmondaj kaj alt-kvalitaj datumoj de OpenStreetMap (OSM).
-\n
-\n Ĝuu voĉan kaj vidan navigadon, esploradon de interesejoj (punktoj de intereso), kreadon kaj administradon de GPX-spuroj, montradon de nivelkurboj kaj informojn pri altitudo (per kromprogramo), elekton inter aŭta, bicikla kaj piediranta reĝimoj, OSM-redaktadon kaj pli.</string>
+    <string name="osmand_extended_description_part1">OsmAnd (OSM Aŭtomata Navigado Direkte al celo) estas mapa kaj naviga aplikaĵo kun aliro al liberaj, tutmondaj kaj alt-kvalitaj datumoj de OpenStreetMap (OSM). 
+\n 
+\nĜuu voĉan kaj vidan navigadon, esploradon de interesejoj (punktoj de intereso), kreadon kaj administradon de GPX‑spuroj, montradon de nivelkurboj kaj informojn pri altitudo (per kromprogramo), elekton inter aŭta, bicikla kaj piediranta reĝimoj, OSM‑redaktadon kaj pli.</string>
     <string name="osmand_extended_description_part2">GPS-navigado 
 \n • Elekti inter eksterreta (neniuj retmigradaj kostoj dum estado eksterlande) kaj enreta (pli rapida) reĝimoj 
 \n • Turno-post-turnaj voĉaj anoncoj gvidos vin al la celo (antaŭregistritaj kaj parolsintezitaj voĉoj) 
@@ -2281,7 +2281,7 @@ Indikas lokon:  %1$s x %2$s"</string>
 \n Mapoj de preskaŭ ĉiuj de landoj de la mondo estas elŝuteblaj! 
 \n Havigu konfidindan navigilon en via lando - kaj en Francujo, Germanujo, Meksiko, Britujo, Hispanujo, Nederlando, Usono, Rusujo, Brazilo kaj ie alie.</string>
     <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Aŭtomata Navigado Direkte al celo) estas mapa kaj naviga aplikaĵo kun aliro al liberaj, tutmondaj kaj alt-kvalitaj datumoj de OpenStreetMap (OSM). 
-\n Ĝuu voĉan kaj vidan navigadon, esploradon de interesejoj (punktoj de intereso), kreadon kaj administradon de GPX-spuroj, montradon de nivelkurboj kaj informojn pri altitudo (per kromprogramo), elekton inter aŭta, bicikla kaj piediranta reĝimoj, OSM-redaktadon kaj pli. 
+\n Ĝuu voĉan kaj vidan navigadon, esploradon de interesejoj (punktoj de intereso), kreadon kaj administradon de GPX‑spuroj, montradon de nivelkurboj kaj informojn pri altitudo (per kromprogramo), elekton inter aŭta, bicikla kaj piediranta reĝimoj, OSM‑redaktadon kaj pli.
 \n 
 \n OsmAnd+ estas pagenda versio de aplikaĵo. Per aĉeti ĝin, vi apogas la projekton, fondas evoluigon de novaj funkcioj kaj akiras plej aktualajn ĝisdatigojn. 
 \n 
@@ -3382,4 +3382,5 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="added_profiles_descr">Kromprogramo aldonas novajn profilojn al OsmAnd</string>
     <string name="shared_string_turn_off">Malaktivigi</string>
     <string name="new_plugin_added">Aldonis novan kromprogramon</string>
+    <string name="join_segments">Kunigi segmentojn</string>
 </resources>

@@ -2512,8 +2512,8 @@ Pôr do Sol: %2$s</string>
     <string name="quick_action_map_style_action">Adicionar um estilo de mapa</string>
     <string name="quick_action_empty_param_error">Preencha todos os parâmetros</string>
     <string name="quick_action_map_styles">Estilos de mapa</string>
-    <string name="quick_action_map_overlay">Alterar sobreposição de mapa</string>
-    <string name="quick_action_map_overlay_title">Sobreposições do mapa</string>
+    <string name="quick_action_map_overlay">Mudar camada superior de mapa</string>
+    <string name="quick_action_map_overlay_title">Sobreposições de mapa</string>
     <string name="quick_action_map_overlay_action">Adicionar sobreposição</string>
     <string name="quick_action_map_overlay_switch">Camada superior de mapa alterada para \"%s\".</string>
     <string name="quick_action_map_underlay_switch">A camada inferior de mapa foi alterada para \"%s\".</string>
@@ -3389,4 +3389,5 @@ Pôr do Sol: %2$s</string>
     <string name="added_profiles">Perfis adicionados</string>
     <string name="shared_string_turn_off">Desligar</string>
     <string name="new_plugin_added">Novo plugin adicionado</string>
+    <string name="added_profiles_descr">Plugin adiciona novo perfil ao OsmAnd</string>
 </resources>

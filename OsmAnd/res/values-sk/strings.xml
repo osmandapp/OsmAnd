@@ -3223,21 +3223,21 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="years_2_4">Roky</string>
     <string name="years_5">Rokov</string>
     <string name="months_3">Tri mesiace</string>
-    <string name="configure_profile_info">Všetky nasledovné nastavenia ovplyvnia len zvolený profil.</string>
-    <string name="utm_format_descr">OsmAnd používa formát UTM Standard, ktorý je podobný ale nie identický s formátom UTM Nato.</string>
+    <string name="configure_profile_info">Nastavenia pre profil:</string>
+    <string name="utm_format_descr">OsmAnd používa formát UTM Standard, ktorý je podobný ale nie identický s formátom UTM NATO.</string>
     <string name="shared_string_example">Príklad</string>
     <string name="navigate_point_format_utm">UTM Standard</string>
     <string name="navigate_point_format_olc">Open Location Code</string>
-    <string name="coordinates_format_info">Zvolený formát bude použitý na všetkých miestach aplikácie.</string>
+    <string name="coordinates_format_info">Zvolený formát bude použitý naprieč aplikáciou.</string>
     <string name="pref_selected_by_default_for_profiles">Toto nastavenie bude predvolené v profiloch: %s</string>
-    <string name="change_default_settings">Zmeniť predvolené nastavenia</string>
-    <string name="discard_changes">Zahodiť zmeny</string>
-    <string name="apply_to_current_profile">Použiť na aktuálny profil %1$s</string>
+    <string name="change_default_settings">Zmeniť nastavenie</string>
+    <string name="discard_changes">Zahodiť zmenu</string>
+    <string name="apply_to_current_profile">Použiť len na \"%1$s\"</string>
     <string name="apply_to_all_profiles">Použiť na všetky profily</string>
     <string name="start_up_message_pref">Správa po spustení</string>
     <string name="analytics_pref_title">Analýzy</string>
-    <string name="turn_screen_on_info">Zobraziť mapu počas navigácie nad zamknutou obrazovkou.</string>
-    <string name="route_parameters_info">Tieto nastavenia ovplyvnia tvorbu trasy. Použijú sa len na zvolený profil: %1$s.</string>
+    <string name="turn_screen_on_info">Zobraziť mapu na zamknutej obrazovke počas navigácie.</string>
+    <string name="route_parameters_info">Nastavenia navigácie v zvolenom profile \"%1$s\".</string>
     <string name="wake_time">Čas zobudenia</string>
     <string name="units_and_formats">Jednotky &amp; formáty</string>
     <string name="appearance">Zobrazenie</string>
@@ -3276,13 +3276,13 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="change_data_storage_full_description">Presunúť dátové súbory OsmAnd do nového umiestnenia\?
 \n%1$s &gt; %2$s</string>
     <string name="enter_path_to_folder">Zadajte cestu k priečinku</string>
-    <string name="shared_string_select_folder">Zvoľte priečinok</string>
+    <string name="shared_string_select_folder">Priečinok…</string>
     <string name="paste_Osmand_data_folder_path">Vložte cestu k priečinku s dátami OsmAnd</string>
     <string name="change_osmand_data_folder_question">Zmeniť dátový priečinok OsmAnd\?</string>
     <string name="move_maps_to_new_destination">Presunúť do nového umiestnenia</string>
-    <string name="internal_app_storage_description">Interné úložisko, skryté pred používateľom a inými aplikáciami, kde k dátam môže pristupovať len OsmAnd</string>
+    <string name="internal_app_storage_description">Interné úložisko, skryté pred používateľom a inými aplikáciami, prístupné len OsmAndu</string>
     <string name="change_data_storage_folder">Zmeniť priečinok na ukladanie dát</string>
-    <string name="rendering_attr_piste_type_snow_park_name">Areál zimných športov</string>
+    <string name="rendering_attr_piste_type_snow_park_name">Snežný terénny areál</string>
     <string name="rendering_attr_piste_type_sleigh_name">Sane v záprahu</string>
     <string name="rendering_attr_piste_type_sled_name">Sánkovanie</string>
     <string name="rendering_attr_piste_type_hike_name">Putovanie</string>
@@ -3304,12 +3304,12 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="routing_attr_width_description">Zadajte šírku vozidla, ktorá musí byť povolená na cestách.</string>
     <string name="avoid_in_routing_descr_">Vyhnúť sa niektorým trasám a typom ciest</string>
     <string name="data_storage_preference_summary">%1$s • %2$s</string>
-    <string name="data_storage_space_description">Voľné %1$s GB • Celkom %2$s GB</string>
+    <string name="data_storage_space_description">Voľné %1$s GB (z %2$s GB)</string>
     <string name="app_mode_utv">Terénna úžitková štvorkolka</string>
     <string name="rendering_attr_piste_difficulty_aerialway_name">Lanovka</string>
     <string name="rendering_attr_piste_difficulty_connection_name">Spojnica</string>
     <string name="shared_string_calculate">Vypočítať</string>
-    <string name="shared_string_osmand_usage">Využitie OsmAndom</string>
+    <string name="shared_string_osmand_usage">Miesto použité OsmAndom</string>
     <string name="shared_sting_tiles">Dlaždice</string>
     <string name="shared_string_maps">Mapy</string>
     <string name="shared_string_memory_tb_desc">%1$s TB</string>
@@ -3320,7 +3320,7 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="track_storage_directory_descrp">Stopy môžu byť ukladané v priečinku \'rec\' alebo v mesačných či denných priečinkoch.</string>
     <string name="store_tracks_in_rec_directory">Zaznamenať stopy do priečinku \'rec\'</string>
     <string name="store_tracks_in_daily_directories">Zaznamenať stopy do denných priečinkov</string>
-    <string name="store_tracks_in_daily_directories_descrp">"Ukladať zaznamenané stopy podpriečinkoch za každý deň (napr.  2018-01-01)."</string>
+    <string name="store_tracks_in_daily_directories_descrp">Zaznamenávať stopy do podpriečinkov za každý deň (napr. 2018-01-01).</string>
     <string name="shared_string_memory_used_tb_desc">Použité %1$s TB</string>
     <string name="shared_string_memory_used_gb_desc">Použité %1$s GB</string>
     <string name="shared_string_memory_used_mb_desc">Použité %1$s MB</string>
@@ -3391,4 +3391,5 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="added_profiles_descr">Modul pridá do OsmAnd nový profil</string>
     <string name="shared_string_turn_off">Vypnúť</string>
     <string name="new_plugin_added">Nový modul pridaný</string>
+    <string name="join_segments">Spojiť úseky</string>
 </resources>

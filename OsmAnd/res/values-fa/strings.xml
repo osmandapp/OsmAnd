@@ -270,7 +270,7 @@
     <string name="navigate_point_top_text">عرض و طول جغرافیایی را در قالب انتخاب‌شده وارد کنید ( D - درجه، M - دقیقه، S - ثانیه)</string>
     <string name="navigate_point_latitude">عرض جغرافیایی</string>
     <string name="navigate_point_longitude">طول جغرافیایی</string>
-    <string name="poi_remove_confirm_template">آیا {0} حذف شود (توضیح دهید)؟</string>
+    <string name="poi_remove_confirm_template">‏{0} حذف شود (توضیح دهید)؟</string>
     <string name="osb_comment_dialog_error">افزودن توضیح ناموفق بود.</string>
     <string name="Closest_Amenities">نزدیک‌ترین امکانات رفاهی</string>
     <string name="map_tile_source_descr">منبع کاشی‌های آنلاین یا کاشی‌های ذخیره‌شدهٔ نقشه را انتخاب کنید</string>
@@ -280,7 +280,7 @@
     <string name="arrived_at_destination">رسیدید.</string>
     <string name="invalid_locations">مختصات نامعتبر</string>
     <string name="go_back_to_osmand">بازگشت به نقشه</string>
-    <string name="shared_string_close">بستن</string>
+    <string name="shared_string_close">ببند</string>
     <string name="loading_data">در حال بارکردن داده…</string>
     <string name="reading_indexes">در حال خواندن اطلاعات محلی…</string>
     <string name="previous_run_crashed">آخرین اجرای OsmAnd با شکست مواجه شد. فایل log در {0} قرار دارد. لطفاً مشکل را گزارش و فایل log را ضمیمهٔ آن کنید.</string>
@@ -342,7 +342,7 @@
     <string name="search_position_address">نشانی…</string>
     <string name="search_position_favorites">نقاط برگزیده…</string>
     <string name="search_position_undefined">نامشخص</string>
-    <string name="delete_confirmation_msg">آیا %1$s حذف شود؟</string>
+    <string name="delete_confirmation_msg">‏%1$s حذف شود؟</string>
     <string name="city_type_suburb">حومه</string>
     <string name="city_type_hamlet">دهکده</string>
     <string name="city_type_village">روستا</string>
@@ -3433,4 +3433,8 @@
     <string name="added_profiles">پروفایل‌های افزوده</string>
     <string name="added_profiles_descr">افزونه پروفایل تازه‌ای به OsmAnd اضافه می‌کند</string>
     <string name="new_plugin_added">افزونهٔ تازه اضافه شد</string>
+    <string name="rendering_attr_showCycleNodeNetworkRoutes_name">نمایش مسیرهای دوچرخهٔ شبکه‌های گره</string>
+    <string name="clear_confirmation_msg">%1$s پاک‌سازی شود؟</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_name">شبکه‌های گره</string>
+    <string name="shared_string_turn_off">خاموش</string>
 </resources>
