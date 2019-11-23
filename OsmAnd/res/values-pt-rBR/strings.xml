@@ -405,7 +405,7 @@
     <string name="show_zoom_buttons_navigation">Mostrar botões de zoom</string>
     <string name="save_as_favorites_points">Salvar como grupo do Favoritos</string>
     <string name="select_destination_and_intermediate_points">Defina destinos</string>
-    <string name="layer_amenity_label">Rótulos de sobreposição do ponto</string>
+    <string name="layer_amenity_label">Rótulos de POIs</string>
     <string name="loading_smth">Carregando %1$s…</string>
     <string name="map_widget_plain_time">Hora atual</string>
     <string name="selected_gpx_info_show">"
@@ -1067,7 +1067,7 @@ Pôr do Sol: %2$s</string>
     <string name="auto_follow_route_navigation_descr">Centralizar a posição no mapa apenas durante a navegação.</string>
     <string name="auto_follow_location_enabled">Mapa automaticamente centrado.</string>
     <string name="pref_vector_rendering">Opções específicas para renderizar vetores</string>
-    <string name="pref_overlay">Camada superior / Camada inferior</string>
+    <string name="pref_overlay">Sobreposição / camada inferior</string>
     <string name="pref_raster_map">Configurações de fonte de mapa</string>
     <string name="pref_vector_map">Configurações de mapa vetorial</string>
     <string name="delete_confirmation_msg">Apagar %1$s?</string>
@@ -1192,16 +1192,16 @@ Pôr do Sol: %2$s</string>
     <string name="voice_stream_voice_call">Áudio de chamada de voz (para interromper os aparelhos de som Bluetooth do carro)</string>
     <string name="voice_stream_music">Áudio de mídia/navegação</string>
     <string name="warning_tile_layer_not_downloadable">O aplicativo não pode fazer o download da camada de mapa %1$s, a reinstalação pode ajudar.</string>
-    <string name="overlay_transparency_descr">Ajustar a transparência da camada superior.</string>
-    <string name="overlay_transparency">Transparência da camada superior</string>
+    <string name="overlay_transparency_descr">Ajustar a transparência da sobreposição.</string>
+    <string name="overlay_transparency">Transparência da sobreposição</string>
     <string name="map_transparency_descr">Ajustar a transparência do mapa base.</string>
     <string name="map_transparency">Transparência do mapa base</string>
     <string name="layer_underlay">Camada inferior…</string>
     <string name="map_underlay">Mapa da camada inferior</string>
     <string name="map_underlay_descr">Escolher mapa da camada inferior</string>
-    <string name="layer_overlay">Camada superior…</string>
-    <string name="map_overlay">Mapa da camada superior</string>
-    <string name="map_overlay_descr">Escolher mapa da camada superior</string>
+    <string name="layer_overlay">Sobreposição…</string>
+    <string name="map_overlay">Mapa da sobreposição</string>
+    <string name="map_overlay_descr">Escolher mapa da sobreposição</string>
     <string name="tile_source_already_installed">Mapa já está instalado, as \'configurações\' serão atualizadas.</string>
     <string name="select_tile_source_to_install">Escolher os mapas (quadrículas) para instalar ou atualizar.</string>
     <string name="internet_not_available">Não é possível executar a operação sem uma conexão com a Internet.</string>
@@ -1334,7 +1334,7 @@ Pôr do Sol: %2$s</string>
     <string name="thanks_yandex_traffic">Obrigado à Yandex por fornecer informações de trânsito.</string>
     <string name="layer_yandex_traffic">Trânsito Yandex</string>
     <string name="layer_route">Rota</string>
-    <string name="layer_poi">POI…</string>
+    <string name="layer_poi">Sobreposição do POI…</string>
     <string name="layer_map">Fonte de mapa…</string>
     <string name="menu_layers">Camadas de mapa</string>
     <string name="use_trackball_descr">Usar um dispositivo de trackball para mover o mapa.</string>
@@ -2512,11 +2512,11 @@ Pôr do Sol: %2$s</string>
     <string name="quick_action_map_style_action">Adicionar um estilo de mapa</string>
     <string name="quick_action_empty_param_error">Preencha todos os parâmetros</string>
     <string name="quick_action_map_styles">Estilos de mapa</string>
-    <string name="quick_action_map_overlay">Mudar camada superior de mapa</string>
+    <string name="quick_action_map_overlay">Mudar sobreposição de mapa</string>
     <string name="quick_action_map_overlay_title">Sobreposições de mapa</string>
     <string name="quick_action_map_overlay_action">Adicionar sobreposição</string>
-    <string name="quick_action_map_overlay_switch">Camada superior de mapa alterada para \"%s\".</string>
-    <string name="quick_action_map_underlay_switch">A camada inferior de mapa foi alterada para \"%s\".</string>
+    <string name="quick_action_map_overlay_switch">Sobreposição de mapa alterada para \"%s\".</string>
+    <string name="quick_action_map_underlay_switch">Camada inferior de mapa foi alterada para \"%s\".</string>
     <string name="quick_action_map_underlay">Mudar camada inferior de mapa</string>
     <string name="quick_action_map_underlay_title">Camadas inferiores de mapa</string>
     <string name="quick_action_map_underlay_action">Adicionar sobreposição</string>
@@ -3356,9 +3356,9 @@ Pôr do Sol: %2$s</string>
     <string name="quick_action_contour_lines_hide">Ocultar linhas de contorno</string>
     <string name="quick_action_show_hide_contour_lines">Mostrar/ocultar linhas de contorno</string>
     <string name="quick_action_hillshade_descr">Um botão que mostra ou oculta sombras de relevo no mapa.</string>
-    <string name="quick_action_hillshade_show">Mostrar colina</string>
-    <string name="quick_action_hillshade_hide">Ocultar colina</string>
-    <string name="quick_action_show_hide_hillshade">Mostrar/ocultar colina</string>
+    <string name="quick_action_hillshade_show">Mostrar sombras de relevo</string>
+    <string name="quick_action_hillshade_hide">Ocultar sombras de relevo</string>
+    <string name="quick_action_show_hide_hillshade">Mostrar/ocultar sombras de relevo</string>
     <string name="tts_initialization_error">Não é possível iniciar o mecanismo de conversão de texto em fala</string>
     <string name="simulate_your_location_gpx_descr">Simule sua posição usando um rasteador GPX gravada.</string>
     <string name="export_profile">Exportar perfil</string>
@@ -3377,7 +3377,7 @@ Pôr do Sol: %2$s</string>
     <string name="track_saved">Trilha salva</string>
     <string name="empty_filename">O nome do arquivo está vazio</string>
     <string name="shared_string_revert">Reverter</string>
-    <string name="quick_action_directions_from_desc">Um botão para fazer com que a tela centralize o ponto de partida e calcule a rota para o destino ou abra uma caixa de diálogo para selecionar o destino se o marcador de destino não estiver no mapa.</string>
+    <string name="quick_action_directions_from_desc">Um botão que marca o centro da tela como o ponto de partida e calcula a rota para o destino ou abre uma caixa de diálogo para selecionar o destino se o marcador de destino não estiver no mapa.</string>
     <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Mostrar os nós da rede de ciclovias</string>
     <string name="clear_confirmation_msg">Limpar %1$s\?</string>
     <string name="download_map_dialog">Caixa baixar mapa</string>
@@ -3390,4 +3390,5 @@ Pôr do Sol: %2$s</string>
     <string name="shared_string_turn_off">Desligar</string>
     <string name="new_plugin_added">Novo plugin adicionado</string>
     <string name="added_profiles_descr">Plugin adiciona novo perfil ao OsmAnd</string>
+    <string name="join_segments">Unir segmentos</string>
 </resources>
