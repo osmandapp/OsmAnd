@@ -2577,7 +2577,7 @@
     <string name="osn_modify_dialog_error">No se pudo modificar la nota.</string>
     <string name="osn_modify_dialog_title">Modificar nota</string>
     <string name="context_menu_item_modify_note">Modificar nota de OSM</string>
-    <string name="make_round_trip_descr">Duplica el punto de inicio y lo añade como destino.</string>
+    <string name="make_round_trip_descr">Añade una copia del punto de partida como destino.</string>
     <string name="make_round_trip">Hacer ruta circular</string>
     <string name="wrong_format">Formato incorrecto</string>
     <string name="shared_string_road">Carretera</string>
@@ -2889,7 +2889,7 @@
     <string name="osm_live_payment_renews_quarterly">Renovar trimestralmente</string>
     <string name="osm_live_payment_renews_annually">Renovar anualmente</string>
     <string name="default_price_currency_format">%1$.2f %2$s</string>
-    <string name="osm_live_payment_header">Elige la frecuencia de pago:</string>
+    <string name="osm_live_payment_header">Frecuencia de pago:</string>
     <string name="osm_live_payment_contribute_descr">Las donaciones ayudan a financiar la cartografía de OpenStreetMap.</string>
     <string name="powered_by_osmand">Por OsmAnd</string>
     <string name="osm_live_subscriptions">Suscripciones</string>
@@ -3266,7 +3266,7 @@
     <string name="coordinates_format_info">El formato seleccionado se aplicará en toda la aplicación.</string>
     <string name="pref_selected_by_default_for_profiles">Esta opción está seleccionada por defecto para los perfiles: %s</string>
     <string name="change_default_settings">Cambiar los ajustes</string>
-    <string name="discard_changes">Descartar cambios</string>
+    <string name="discard_changes">Descartar cambio</string>
     <string name="apply_to_current_profile">Aplicar solo a \"%1$s\"</string>
     <string name="apply_to_all_profiles">Aplicar a todos los perfiles</string>
     <string name="start_up_message_pref">Mensaje de inicio</string>
@@ -3362,7 +3362,7 @@
     <string name="routing_attr_prefer_unpaved_name">Preferir caminos sin asfaltar</string>
     <string name="routing_attr_prefer_unpaved_description">Preferir caminos sin asfaltar.</string>
     <string name="update_all_maps">Actualizar todos los mapas</string>
-    <string name="update_all_maps_q">¿Estás seguro de que quieres actualizar todos (%1$d) los mapas\?</string>
+    <string name="update_all_maps_q">¿Estás seguro de que quieres actualizar todos los (%1$d) mapas\?</string>
     <string name="enter_path_to_folder">Introduce la ruta a la carpeta</string>
     <string name="paste_Osmand_data_folder_path">Pegar la ruta a la carpeta con los datos de OsmAnd</string>
     <string name="internal_app_storage_description">Almacenamiento interno, oculto para el usuario y otras aplicaciones, exclusivamente accesible para OsmAnd</string>
@@ -3408,4 +3408,19 @@
     <string name="rendering_attr_piste_type_skitour_name">Esquí de travesía</string>
     <string name="simulate_your_location_gpx_descr">Simula tu ubicación usando una traza GPX grabada.</string>
     <string name="empty_filename">El nombre del archivo está vacío</string>
+    <string name="track_saved">Traza guardada</string>
+    <string name="shared_string_revert">Revertir</string>
+    <string name="quick_action_directions_from_desc">Un botón para hacer del centro de la pantalla el punto de partida y calcular la ruta hacia el destino o abre un cuadro de diálogo para elegir el destino si el marcador no está en el mapa.</string>
+    <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Mostrar nodo de la red de rutas ciclistas</string>
+    <string name="clear_confirmation_msg">¿Borrar %1$s\?</string>
+    <string name="download_map_dialog">Diálogo de descarga de mapa</string>
+    <string name="dialogs_and_notifications_title">Diálogos y notificaciones</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_name">Redes de nodos</string>
+    <string name="suggested_maps">Mapas sugeridos</string>
+    <string name="suggested_maps_descr">Estos mapas deben usarse con el complemento</string>
+    <string name="added_profiles">Perfiles añadidos</string>
+    <string name="added_profiles_descr">El complemento añade un nuevo perfil a OsmAnd</string>
+    <string name="shared_string_turn_off">Apagar</string>
+    <string name="new_plugin_added">Nuevo complemento añadido</string>
+    <string name="join_segments">Unir segmentos</string>
 </resources>
