@@ -2773,7 +2773,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="routing_attr_avoid_train_name">Geen treinen</string>
     <string name="routing_attr_avoid_train_description">Vermijd treinen</string>
     <string name="routing_attr_avoid_subway_name">Geen metro</string>
-    <string name="routing_attr_avoid_subway_description">Vermijd de metro en sneltram transport e.d.</string>
+    <string name="routing_attr_avoid_subway_description">Vermijd de metro en sneltram</string>
     <string name="routing_attr_avoid_ferry_name">Geen veerboten</string>
     <string name="routing_attr_avoid_ferry_description">Vermijd veerboten</string>
     <string name="shared_string_degrees">Graden</string>
@@ -2869,7 +2869,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="intermediate_destinations">Tussenbestemmingen</string>
     <string name="arrive_at_time">Aankomst om %1$s</string>
     <string name="shared_string_launch">Open</string>
-    <string name="quick_action_switch_day_night_descr">Tik deze knop om te wisselen tussen de Osmand dag en nacht modus</string>
+    <string name="quick_action_switch_day_night_descr">Tik deze knop om te wisselen tussen de OsmAnd dag en nacht modus.</string>
     <string name="quick_action_switch_day_mode">Dag modus</string>
     <string name="quick_action_switch_night_mode">Nacht modus</string>
     <string name="quick_action_day_night_switch_mode">Wissel tussen dag/nacht modus</string>
