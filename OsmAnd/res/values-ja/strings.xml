@@ -608,7 +608,7 @@ POIの更新は利用できません</string>
     <string name="av_def_action_choose">ウィジェット起動毎に選択</string>
     <string name="av_def_action_video">動画を撮影</string>
     <string name="av_def_action_audio">音声を録音</string>
-    <string name="av_widget_action_descr">ウィジェットボタンのデフォルト動作:</string>
+    <string name="av_widget_action_descr">AVウィジェットボタン(音声・動画・写真で残すメモ機能)のデフォルト動作を指定します。</string>
     <string name="av_widget_action">ウィジェット機能のデフォルト設定</string>
     <string name="av_video_format_descr">動画の出力形式:</string>
     <string name="av_video_format">動画出力形式</string>
@@ -1340,7 +1340,7 @@ POIの更新は利用できません</string>
     <string name="distance">距離</string>
     <string name="rendering_attr_publicTransportMode_name">バス、トロリーバス、シャトルバス路線</string>
     <string name="save_track_to_gpx_globally">GPXファイルへの経路記録に関する設定</string>
-    <string name="save_track_to_gpx_globally_descr">GPXファイルへの一般の位置(General position)記録は、マップ画面上のGPXログウィジェットを使用してオンとオフを切り替えることが可能です</string>
+    <string name="save_track_to_gpx_globally_descr">GPXファイルへ記録される位置情報全般は、マップ画面上のGPXログウィジェットを使用してONとOFFを切り替えることが可能です。</string>
     <string name="save_track_interval_globally">記録間隔</string>
     <string name="confirm_every_run">常に尋ねる</string>
     <string name="save_global_track_interval_descr">標準的な経路の記録間隔を選択します(マップ上のGPXログウィジェットで有効化)</string>
@@ -3055,9 +3055,9 @@ POIの更新は利用できません</string>
     <string name="app_mode_offroad">オフロード</string>
     <string name="edit_profile_setup_title">プロファイルの個別設定</string>
     <string name="edit_profile_setup_subtitle">設定した値は各プロファイルごとに保持されます</string>
-    <string name="edit_profile_setup_map_subtitle">このプロファイルで使用するマップ設定を選択します</string>
-    <string name="edit_profile_screen_options_subtitle">このプロファイルで使用するマップ設定を選択します</string>
-    <string name="edit_profile_nav_settings_subtitle">このプロファイルで使用するナビゲーション設定を選択します</string>
+    <string name="edit_profile_setup_map_subtitle">プロファイルで使用するマップ設定を調整します</string>
+    <string name="edit_profile_screen_options_subtitle">プロファイルで使用するUI(ユーザーインターフェイス)設定を調整します</string>
+    <string name="edit_profile_nav_settings_subtitle">プロファイルで使用するナビゲーション設定を調整します</string>
     <string name="routing_attr_max_num_changes_description">乗り換えの上限を指定します</string>
     <string name="routing_attr_max_num_changes_name">乗り換え数</string>
     <string name="turn_screen_on_router">方向転換時に起動</string>
@@ -3111,8 +3111,8 @@ POIの更新は利用できません</string>
 \n\'設定\'→\'プライバシーとセキュリティ\'からいつでも設定を変更できます。</string>
     <string name="choose_data_to_share">共有するデータの種類を選択:</string>
     <string name="collected_data_descr">OsmAndで共有を許可するデータを定義します。</string>
-    <string name="downloaded_maps_collect_descr">どの国や地域の地図が需要が高いのかを把握するのに役立ちます。</string>
-    <string name="visited_screens_collect_descr">どのOsmAnd機能の需要が高いのかを把握するのに役立ちます。</string>
+    <string name="downloaded_maps_collect_descr">どの国や地域の地図の需要が高いのかを把握するのに役立ちます。</string>
+    <string name="visited_screens_collect_descr">OsmAndのどの機能の需要が高いのかを把握するのに役立ちます。</string>
     <string name="privacy_and_security_change_descr">%1$sに同意する場合は、[許可]をタップします</string>
     <string name="shared_string_no_thank_you">いいえ、結構です</string>
     <string name="shared_string_allow">許可</string>
