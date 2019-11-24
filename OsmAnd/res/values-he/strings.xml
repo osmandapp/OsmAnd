@@ -3391,4 +3391,5 @@
     <string name="added_profiles_descr">התוסף מוסיף פרופיל חדש ל־OsmAnd</string>
     <string name="shared_string_turn_off">כיבוי</string>
     <string name="new_plugin_added">נוסף תוסף חדש</string>
+    <string name="join_segments">חיבור מקטעים</string>
 </resources>
