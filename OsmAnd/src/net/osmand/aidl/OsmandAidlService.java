@@ -122,6 +122,17 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 		LOG.info("Request AIDL API for " + reason);
 		OsmandAidlApi api = getApp().getAidlApi();
 		String pack = getCallingAppPackName();
+		if (pack != null && !pack.equals(getApp().getPackageName()) && !api.isAppActivated(pack)) {
+			return null;
+		}
+		return api;
+	}
+
+	@Nullable
+	private OsmandAidlApi getUiApi(String reason) {
+		LOG.info("Request AIDL API for " + reason);
+		OsmandAidlApi api = getApp().getAidlApi();
+		String pack = getCallingAppPackName();
 		if (pack != null && !pack.equals(getApp().getPackageName()) && !api.isAppEnabled(pack)) {
 			return null;
 		}
@@ -202,7 +213,7 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 		@Override
 		public boolean refreshMap() {
 			try {
-				OsmandAidlApi api = getApi("refreshMap");
+				OsmandAidlApi api = getUiApi("refreshMap");
 				return api != null && api.reloadMap();
 			} catch (Exception e) {
 				handleException(e);
@@ -376,7 +387,7 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 		@Override
 		public boolean addMapWidget(AddMapWidgetParams params) {
 			try {
-				OsmandAidlApi api = getApi("addMapWidget");
+				OsmandAidlApi api = getUiApi("addMapWidget");
 				return params != null && api != null && api.addMapWidget(new AidlMapWidgetWrapper(params.getWidget()));
 			} catch (Exception e) {
 				handleException(e);
@@ -387,7 +398,7 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 		@Override
 		public boolean removeMapWidget(RemoveMapWidgetParams params) {
 			try {
-				OsmandAidlApi api = getApi("removeMapWidget");
+				OsmandAidlApi api = getUiApi("removeMapWidget");
 				return params != null && api != null && api.removeMapWidget(params.getId());
 			} catch (Exception e) {
 				return false;
@@ -397,7 +408,7 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 		@Override
 		public boolean updateMapWidget(UpdateMapWidgetParams params) {
 			try {
-				OsmandAidlApi api = getApi("updateMapWidget");
+				OsmandAidlApi api = getUiApi("updateMapWidget");
 				return params != null && api != null && api.updateMapWidget(new AidlMapWidgetWrapper(params.getWidget()));
 			} catch (Exception e) {
 				handleException(e);
@@ -408,7 +419,7 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 		@Override
 		public boolean showMapPoint(ShowMapPointParams params) {
 			try {
-				OsmandAidlApi api = getApi("showMapPoint");
+				OsmandAidlApi api = getUiApi("showMapPoint");
 				return params != null && api != null && api.showMapPoint(params.getLayerId(), new AidlMapPointWrapper(params.getPoint()));
 			} catch (Exception e) {
 				handleException(e);
@@ -419,7 +430,7 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 		@Override
 		public boolean addMapPoint(AddMapPointParams params) {
 			try {
-				OsmandAidlApi api = getApi("addMapPoint");
+				OsmandAidlApi api = getUiApi("addMapPoint");
 				return params != null && api != null && api.putMapPoint(params.getLayerId(), new AidlMapPointWrapper(params.getPoint()));
 			} catch (Exception e) {
 				handleException(e);
@@ -430,7 +441,7 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 		@Override
 		public boolean removeMapPoint(RemoveMapPointParams params) {
 			try {
-				OsmandAidlApi api = getApi("removeMapPoint");
+				OsmandAidlApi api = getUiApi("removeMapPoint");
 				return params != null && api != null && api.removeMapPoint(params.getLayerId(), params.getPointId());
 			} catch (Exception e) {
 				handleException(e);
@@ -441,7 +452,7 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 		@Override
 		public boolean updateMapPoint(UpdateMapPointParams params) {
 			try {
-				OsmandAidlApi api = getApi("updateMapPoint");
+				OsmandAidlApi api = getUiApi("updateMapPoint");
 				return params != null && api != null && api.updateMapPoint(params.getLayerId(), new AidlMapPointWrapper(params.getPoint()), params.isUpdateOpenedMenuAndMap());
 			} catch (Exception e) {
 				handleException(e);
@@ -452,7 +463,7 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 		@Override
 		public boolean addMapLayer(AddMapLayerParams params) {
 			try {
-				OsmandAidlApi api = getApi("addMapLayer");
+				OsmandAidlApi api = getUiApi("addMapLayer");
 				String pack = getCallingAppPackName();
 				return params != null && api != null && api.addMapLayer(pack, new AidlMapLayerWrapper(params.getLayer()));
 			} catch (Exception e) {
@@ -464,7 +475,7 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 		@Override
 		public boolean removeMapLayer(RemoveMapLayerParams params) {
 			try {
-				OsmandAidlApi api = getApi("removeMapLayer");
+				OsmandAidlApi api = getUiApi("removeMapLayer");
 				return params != null && api != null && api.removeMapLayer(params.getId());
 			} catch (Exception e) {
 				handleException(e);
@@ -475,7 +486,7 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 		@Override
 		public boolean updateMapLayer(UpdateMapLayerParams params) {
 			try {
-				OsmandAidlApi api = getApi("updateMapLayer");
+				OsmandAidlApi api = getUiApi("updateMapLayer");
 				return params != null && api != null && api.updateMapLayer(new AidlMapLayerWrapper(params.getLayer()));
 			} catch (Exception e) {
 				handleException(e);
@@ -582,7 +593,7 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 		public boolean setMapLocation(SetMapLocationParams params) {
 			try {
 				if (params != null) {
-					OsmandAidlApi api = getApi("setMapLocation");
+					OsmandAidlApi api = getUiApi("setMapLocation");
 					return api != null && api.setMapLocation(params.getLatitude(), params.getLongitude(),
 							params.getZoom(), params.isAnimated());
 				}
@@ -798,7 +809,7 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 		@Override
 		public boolean setNavDrawerItems(SetNavDrawerItemsParams params) {
 			try {
-				OsmandAidlApi api = getApi("setNavDrawerItems");
+				OsmandAidlApi api = getUiApi("setNavDrawerItems");
 				if (api != null && params != null) {
 					return api.setNavDrawerItems(params.getAppPackage(), convertNavDrawerItems(params.getItems()));
 				}
@@ -879,7 +890,7 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 		@Override
 		public boolean setNavDrawerLogo(String imageUri) {
 			try {
-				OsmandAidlApi api = getApi("setNavDrawerLogo");
+				OsmandAidlApi api = getUiApi("setNavDrawerLogo");
 				return api != null && api.setNavDrawerLogo(imageUri);
 			} catch (Exception e) {
 				handleException(e);
@@ -890,7 +901,7 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 		@Override
 		public boolean setEnabledIds(List<String> ids) {
 			try {
-				OsmandAidlApi api = getApi("setFeaturesEnabledIds");
+				OsmandAidlApi api = getUiApi("setFeaturesEnabledIds");
 				return api != null && api.setEnabledIds(ids);
 			} catch (Exception e) {
 				handleException(e);
@@ -901,7 +912,7 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 		@Override
 		public boolean setDisabledIds(List<String> ids) {
 			try {
-				OsmandAidlApi api = getApi("setFeaturesDisabledIds");
+				OsmandAidlApi api = getUiApi("setFeaturesDisabledIds");
 				return api != null && api.setDisabledIds(ids);
 			} catch (Exception e) {
 				handleException(e);
@@ -912,7 +923,7 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 		@Override
 		public boolean setEnabledPatterns(List<String> patterns) {
 			try {
-				OsmandAidlApi api = getApi("setFeaturesEnabledPatterns");
+				OsmandAidlApi api = getUiApi("setFeaturesEnabledPatterns");
 				return api != null && api.setEnabledPatterns(patterns);
 			} catch (Exception e) {
 				handleException(e);
@@ -923,7 +934,7 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 		@Override
 		public boolean setDisabledPatterns(List<String> patterns) {
 			try {
-				OsmandAidlApi api = getApi("setFeaturesDisabledPatterns");
+				OsmandAidlApi api = getUiApi("setFeaturesDisabledPatterns");
 				return api != null && api.setDisabledPatterns(patterns);
 			} catch (Exception e) {
 				handleException(e);
@@ -957,7 +968,7 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 		@Override
 		public boolean regWidgetVisibility(SetWidgetsParams params) {
 			try {
-				OsmandAidlApi api = getApi("regWidgetVisibility");
+				OsmandAidlApi api = getUiApi("regWidgetVisibility");
 				return api != null && api.regWidgetVisibility(params.getWidgetKey(), params.getAppModesKeys());
 			} catch (Exception e) {
 				handleException(e);
@@ -968,7 +979,7 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 		@Override
 		public boolean regWidgetAvailability(SetWidgetsParams params) {
 			try {
-				OsmandAidlApi api = getApi("regWidgetVisibility");
+				OsmandAidlApi api = getUiApi("regWidgetVisibility");
 				return api != null && api.regWidgetAvailability(params.getWidgetKey(), params.getAppModesKeys());
 			} catch (Exception e) {
 				handleException(e);
@@ -1034,7 +1045,7 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 		@Override
 		public boolean setNavDrawerLogoWithParams(NavDrawerHeaderParams params) {
 			try {
-				OsmandAidlApi api = getApi("setNavDrawerLogoWithParams");
+				OsmandAidlApi api = getUiApi("setNavDrawerLogoWithParams");
 				return api != null && api.setNavDrawerLogoWithParams(
 						params.getImageUri(), params.getPackageName(), params.getIntent());
 			} catch (Exception e) {
@@ -1046,7 +1057,7 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 		@Override
 		public boolean setNavDrawerFooterWithParams(NavDrawerFooterParams params) {
 			try {
-				OsmandAidlApi api = getApi("setNavDrawerFooterParams");
+				OsmandAidlApi api = getUiApi("setNavDrawerFooterParams");
 				return api != null && api.setNavDrawerFooterWithParams(
 						params.getAppName(), params.getPackageName(), params.getIntent());
 			} catch (Exception e) {
@@ -1058,7 +1069,7 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 		@Override
 		public boolean restoreOsmand() {
 			try {
-				OsmandAidlApi api = getApi("restoreOsmand");
+				OsmandAidlApi api = getUiApi("restoreOsmand");
 				return api != null && api.restoreOsmand();
 			} catch (Exception e) {
 				handleException(e);
@@ -1157,7 +1168,7 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 		@Override
 		public long addContextMenuButtons(ContextMenuButtonsParams params, final IOsmAndAidlCallback callback) {
 			try {
-				OsmandAidlApi api = getApi("addContextMenuButtons");
+				OsmandAidlApi api = getUiApi("addContextMenuButtons");
 				if (api != null && params != null) {
 					long callbackId = params.getCallbackId();
 					if (callbackId == -1 || !callbacks.containsKey(callbackId)) {
@@ -1178,7 +1189,7 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 		@Override
 		public boolean removeContextMenuButtons(RemoveContextMenuButtonsParams params) {
 			try {
-				OsmandAidlApi api = getApi("removeContextMenuButtons");
+				OsmandAidlApi api = getUiApi("removeContextMenuButtons");
 				if (params != null && api != null) {
 					long callbackId = params.getCallbackId();
 					removeAidlCallback(callbackId);
@@ -1193,7 +1204,7 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 		@Override
 		public boolean updateContextMenuButtons(UpdateContextMenuButtonsParams params) {
 			try {
-				OsmandAidlApi api = getApi("updateContextMenuButtons");
+				OsmandAidlApi api = getUiApi("updateContextMenuButtons");
 				if (params != null && api != null) {
 					ContextMenuButtonsParams buttonsParams = params.getContextMenuButtonsParams();
 					return api.updateContextMenuButtons(new AidlContextMenuButtonsWrapper(buttonsParams), buttonsParams.getCallbackId());
@@ -1219,7 +1230,7 @@ public class OsmandAidlService extends Service implements AidlCallbackListener {
 		@Override
 		public boolean setCustomization(CustomizationInfoParams params) {
 			try {
-				OsmandAidlApi api = getApi("setCustomization");
+				OsmandAidlApi api = getUiApi("setCustomization");
 				if (api != null && params != null) {
 					OsmandAidlService.this.setCustomization(api, params);
 					return true;

@@ -1840,6 +1840,10 @@ public class OsmandAidlApi {
 		return saveConnectedApps(selectedAppMode, connectedApps);
 	}
 
+	public boolean isAppActivated(@NonNull String pack) {
+		return true;
+	}
+
 	public boolean isAppEnabled(@NonNull String pack) {
 		ConnectedApp app = connectedApps.get(pack);
 		if (app == null) {
