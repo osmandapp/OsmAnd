@@ -946,7 +946,8 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			name.setTextColor(getResources().getColor(visible ? enabledColor : disabledColor));
 			distanceText.setText(distance);
 			if (groupPosition == 0) {
-				distanceText.setText(distance + "• " + model.getDescription());
+				String address = model.getDescription() != null ? "• " + model.getDescription() : "";
+				distanceText.setText(distance + address);
 				switch (model.getName()) {
 					case FavouritesDbHelper.HOME:
 						icon.setImageDrawable(getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_home_dark));
