@@ -27,6 +27,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import static net.osmand.plus.FavouritesDbHelper.PERSONAL;
+
 public class SelectCategoryDialogFragment extends DialogFragment {
 
 	public static final String TAG = SelectCategoryDialogFragment.class.getSimpleName();
@@ -79,14 +81,18 @@ public class SelectCategoryDialogFragment extends DialogFragment {
 		if (gpxFile != null) {
 			if (gpxCategories != null) {
 				for (Map.Entry<String, Integer> e : gpxCategories.entrySet()) {
-					String categoryName = e.getKey();
-					addCategory(activity, ll, categoryName, e.getValue());
+					if (!e.getKey().equals(PERSONAL)) {
+						String categoryName = e.getKey();
+						addCategory(activity, ll, categoryName, e.getValue());
+					}
 				}
 			}
 		} else {
 			List<FavouritesDbHelper.FavoriteGroup> gs = helper.getFavoriteGroups();
 			for (final FavouritesDbHelper.FavoriteGroup category : gs) {
-				addCategory(activity, ll, category.name, category.color);
+				if (!category.name.equals(PERSONAL)) {
+					addCategory(activity, ll, category.name, category.color);
+				}
 			}
 		}
 		View itemView = activity.getLayoutInflater().inflate(R.layout.favorite_category_dialog_item, null);
