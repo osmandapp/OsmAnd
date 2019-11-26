@@ -125,9 +125,9 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 
 	private void loadFavorites() {
 		favouritePoints.clear();
-		favouritePoints.addAll(getMyApplication().getFavorites().getVisibleFavouritePoints());
+		favouritePoints.addAll(getMyApplication().getFavorites().getNonPersonalVisibleFavouritePoints());
 		if (favouritePoints.isEmpty()) {
-			favouritePoints.addAll(getMyApplication().getFavorites().getFavouritePoints());
+			favouritePoints.addAll(getMyApplication().getFavorites().getNonPersonalFavouritePoints());
 		}
 	}
 

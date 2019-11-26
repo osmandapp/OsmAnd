@@ -359,9 +359,9 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 	private void loadFavoritesItems(List<Object> items, FavouritesDbHelper helper) {
 		items.clear();
 		addMainScrollItems(items,helper);
-		items.addAll(helper.getVisibleFavouritePoints());
+		items.addAll(helper.getNonPersonalVisibleFavouritePoints());
 		if (items.isEmpty()) {
-			items.addAll(helper.getFavouritePoints());
+			items.addAll(helper.getNonPersonalFavouritePoints());
 		}
 	}
 
@@ -372,6 +372,9 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 		}
 		if(helper.hasHomePoint()) {
 			items.add(PointType.WORK);
+		}
+		if (helper.hasHomePoint()) {
+			items.add(PointType.PARKING);
 		}
 	}
 
@@ -428,7 +431,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 					dismiss();
 				} else {
 					TargetPointsHelper helper = mapActivity.getMyApplication().getTargetPointsHelper();
-					Pair<LatLon, PointDescription> pair = getLocationAndDescrFromItem(item, helper);
+					Pair<LatLon, PointDescription> pair = getLocationAndDescrFromItem(item);
 					LatLon ll = pair.first;
 					PointDescription name = pair.second;
 					if (ll == null) {
@@ -456,7 +459,8 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 		};
 	}
 
-	private Pair<LatLon, PointDescription> getLocationAndDescrFromItem(Object item, TargetPointsHelper helper) {
+	private Pair<LatLon, PointDescription> getLocationAndDescrFromItem(Object item) {
+
 		PointDescription name = null;
 		LatLon ll = null;
 		if (item instanceof FavouritePoint) {
@@ -464,15 +468,19 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 			ll = new LatLon(point.getLatitude(), point.getLongitude());
 			name = point.getPointDescription();
 		} else if (item instanceof PointType) {
-			TargetPoint point = null;
+			MapActivity mapActivity = (MapActivity) getActivity();
+			FavouritesDbHelper helper = mapActivity.getMyApplication().getFavorites();
+			FavouritePoint point = null;
 			if (item == PointType.HOME) {
 				point = helper.getHomePoint();
 			} else if (item == PointType.WORK) {
 				point = helper.getWorkPoint();
+			} else if (item == PointType.PARKING) {
+				point = helper.getParkingPoint();
 			}
 			if (point != null) {
 				ll = new LatLon(point.getLatitude(), point.getLongitude());
-				name = point.getOriginalPointDescription();
+				name = point.getPointDescription();
 			}
 		}
 		return new Pair<>(ll, name);
@@ -633,6 +641,10 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 							point = helper.getWorkPoint();
 							favoriteViewHolder.title.setText(getString(R.string.work_button));
 							favoriteViewHolder.icon.setImageDrawable(getContentIcon(R.drawable.ic_action_work));
+						} else if (item == PointType.PARKING) {
+							point = helper.getWorkPoint();
+							favoriteViewHolder.title.setText(getString(R.string.parking_place));
+							favoriteViewHolder.icon.setImageDrawable(getContentIcon(R.drawable.ic_action_parking_dark));
 						}
 						favoriteViewHolder.description.setText(point != null ? point.getPointDescription(app).getSimpleName(app, false) : getString(R.string.shared_string_add));
 					} else if (item instanceof FavouritePoint) {

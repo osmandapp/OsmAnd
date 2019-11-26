@@ -582,6 +582,26 @@ public class FavouritesDbHelper {
 		return fp;
 	}
 
+	public List<FavouritePoint> getNonPersonalVisibleFavouritePoints() {
+		List<FavouritePoint> fp = new ArrayList<>();
+		for (FavouritePoint p : getNonPersonalFavouritePoints()) {
+			if (p.isVisible()) {
+				fp.add(p);
+			}
+		}
+		return fp;
+	}
+
+	public List<FavouritePoint> getNonPersonalFavouritePoints() {
+		List<FavouritePoint> fp = new ArrayList<>();
+		for (FavouritePoint p : cachedFavoritePoints) {
+			if (!p.getCategory().equals(PERSONAL)) {
+				fp.add(p);
+			}
+		}
+		return fp;
+	}
+
 	@Nullable
 	public FavouritePoint getVisibleFavByLatLon(@NonNull LatLon latLon) {
 		for (FavouritePoint fav : cachedFavoritePoints) {
@@ -689,6 +709,9 @@ public class FavouritesDbHelper {
 				}
 				if (res == 0) {
 					res = collator.compare(s1, s2);
+				}
+				if (s1.equals(WORK) && s2.equals(PARKING) && o1.getCategory().equals(PERSONAL) && o2.getCategory().equals(PERSONAL)) {
+					res = -1;
 				}
 				return res;
 

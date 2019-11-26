@@ -183,7 +183,8 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		TARGET,
 		INTERMEDIATE,
 		HOME,
-		WORK
+		WORK,
+		PARKING;
 	}
 
 	public MapRouteInfoMenu() {
