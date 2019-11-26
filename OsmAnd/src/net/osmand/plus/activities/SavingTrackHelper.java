@@ -238,17 +238,21 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 			}
 		}
 
-		SQLiteDatabase db = getWritableDatabase();
-		if (db != null && warnings.isEmpty() && db.isOpen()) {
-			try {
-				// remove all from db
-				db.execSQL("DELETE FROM " + TRACK_NAME + " WHERE " + TRACK_COL_DATE + " <= ?", new Object[] { System.currentTimeMillis() }); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-				db.execSQL("DELETE FROM " + POINT_NAME + " WHERE " + POINT_COL_DATE + " <= ?", new Object[] { System.currentTimeMillis() }); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-				// delete all
-				//			db.execSQL("DELETE FROM " + TRACK_NAME + " WHERE 1 = 1", new Object[] { }); //$NON-NLS-1$ //$NON-NLS-2$
-				//			db.execSQL("DELETE FROM " + POINT_NAME + " WHERE 1 = 1", new Object[] { }); //$NON-NLS-1$ //$NON-NLS-2$
-			} finally {
-				db.close();
+		if (warnings.isEmpty()) {
+			SQLiteDatabase db = getWritableDatabase();
+			if (db != null) {
+				try {
+					if (db.isOpen()) {
+						// remove all from db
+						db.execSQL("DELETE FROM " + TRACK_NAME + " WHERE " + TRACK_COL_DATE + " <= ?", new Object[]{System.currentTimeMillis()}); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+						db.execSQL("DELETE FROM " + POINT_NAME + " WHERE " + POINT_COL_DATE + " <= ?", new Object[]{System.currentTimeMillis()}); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+						// delete all
+						//			db.execSQL("DELETE FROM " + TRACK_NAME + " WHERE 1 = 1", new Object[] { }); //$NON-NLS-1$ //$NON-NLS-2$
+						//			db.execSQL("DELETE FROM " + POINT_NAME + " WHERE 1 = 1", new Object[] { }); //$NON-NLS-1$ //$NON-NLS-2$
+					}
+				} finally {
+					db.close();
+				}
 			}
 		}
 		distance = 0;
@@ -609,14 +613,12 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 
 	private synchronized void execWithClose(String script, Object[] objects) {
 		SQLiteDatabase db = getWritableDatabase();
-		try {
-			if (db != null) {
+		if (db != null) {
+			try {
 				db.execSQL(script, objects);
-			}
-		} catch (RuntimeException e) {
-			log.error(e.getMessage(), e);
-		} finally {
-			if (db != null) {
+			} catch (RuntimeException e) {
+				log.error(e.getMessage(), e);
+			} finally {
 				db.close();
 			}
 		}
