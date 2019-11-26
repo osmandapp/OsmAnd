@@ -1643,7 +1643,6 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> SHOW_NEARBY_FAVORITES = new BooleanPreference("show_nearby_favorites", false).makeProfile().cache();
 	public final OsmandPreference<Boolean> SHOW_NEARBY_POI = new BooleanPreference("show_nearby_poi", false).makeProfile().cache();
 
-	public final OsmandPreference<Boolean> SPEAK_ROUTING_ALARMS = new BooleanPreference("speak_routing_alarms", true).makeProfile().cache();
 	public final OsmandPreference<Boolean> SPEAK_STREET_NAMES = new BooleanPreference("speak_street_names", true).makeProfile().cache();
 	public final CommonPreference<Boolean> SPEAK_TRAFFIC_WARNINGS = new BooleanPreference("speak_traffic_warnings", true).makeProfile().cache();
 	{
@@ -3130,7 +3129,7 @@ public class OsmandSettings {
 
 	public final OsmandPreference<Boolean> USE_OSM_LIVE_FOR_PUBLIC_TRANSPORT = new BooleanPreference("enable_osmc_public_transport", false).makeGlobal();
 
-	public final OsmandPreference<Boolean> VOICE_MUTE = new BooleanPreference("voice_mute", false).makeGlobal();
+	public final OsmandPreference<Boolean> VOICE_MUTE = new BooleanPreference("voice_mute", false).makeProfile().cache();
 
 	// for background service
 	public final OsmandPreference<Boolean> MAP_ACTIVITY_ENABLED = new BooleanPreference("map_activity_enabled", false).makeGlobal();

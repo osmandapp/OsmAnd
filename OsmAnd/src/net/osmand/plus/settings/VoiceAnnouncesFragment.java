@@ -20,6 +20,7 @@ import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadActivityType;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
@@ -41,10 +42,11 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 			@Override
 			public void onClick(View view) {
 				ApplicationMode selectedMode = getSelectedAppMode();
-				boolean checked = !settings.SPEAK_ROUTING_ALARMS.getModeValue(selectedMode);
-				settings.SPEAK_ROUTING_ALARMS.setModeValue(selectedMode, checked);
+				boolean checked = !settings.VOICE_MUTE.getModeValue(selectedMode);
+				settings.VOICE_MUTE.setModeValue(selectedMode, checked);
 				updateToolbarSwitch();
-				enableDisablePreferences(checked);
+				enableDisablePreferences(!checked);
+				updateMenu();
 			}
 		});
 	}
@@ -60,7 +62,7 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 		if (view == null) {
 			return;
 		}
-		boolean checked = settings.SPEAK_ROUTING_ALARMS.getModeValue(getSelectedAppMode());
+		boolean checked = !settings.VOICE_MUTE.getModeValue(getSelectedAppMode());
 
 		int color = checked ? getActiveProfileColor() : ContextCompat.getColor(app, R.color.preference_top_switch_off);
 		View switchContainer = view.findViewById(R.id.toolbar_switch_container);
@@ -88,7 +90,7 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 			setupAudioStreamGuidancePref();
 			setupInterruptMusicPref();
 		}
-		enableDisablePreferences(settings.SPEAK_ROUTING_ALARMS.getModeValue(getSelectedAppMode()));
+		enableDisablePreferences(!settings.VOICE_MUTE.getModeValue(getSelectedAppMode()));
 	}
 
 	private void setupSpeedLimitExceedPref() {
@@ -216,6 +218,13 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 		});
 		bld.setNegativeButton(R.string.shared_string_cancel, null);
 		bld.show();
+	}
+
+	private void updateMenu() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.getMapRouteInfoMenu().updateMenu();
+		}
 	}
 
 	@Override

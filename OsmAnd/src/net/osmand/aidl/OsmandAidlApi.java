@@ -769,7 +769,6 @@ public class OsmandAidlApi {
 			public void onReceive(Context context, Intent intent) {
 				MapActivity mapActivity = mapActivityRef.get();
 				if (mapActivity != null) {
-					mapActivity.getMyApplication().getSettings().VOICE_MUTE.set(true);
 					mapActivity.getRoutingHelper().getVoiceRouter().setMute(true);
 				}
 			}
@@ -784,7 +783,6 @@ public class OsmandAidlApi {
 			public void onReceive(Context context, Intent intent) {
 				MapActivity mapActivity = mapActivityRef.get();
 				if (mapActivity != null) {
-					mapActivity.getMyApplication().getSettings().VOICE_MUTE.set(false);
 					mapActivity.getRoutingHelper().getVoiceRouter().setMute(false);
 				}
 			}
