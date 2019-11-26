@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,7 +19,9 @@ import android.widget.TextView;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.chooseplan.ChoosePlanDialogFragment;
 import net.osmand.plus.download.DownloadIndexesThread;
+import net.osmand.plus.srtmplugin.SRTMPlugin;
 
 public class PluginActivity extends OsmandActionBarActivity  implements DownloadIndexesThread.DownloadEvents {
 	private static final String TAG = "PluginActivity";
@@ -94,11 +97,19 @@ public class PluginActivity extends OsmandActionBarActivity  implements Download
 					}
 				});
 		Button getButton = (Button)findViewById(R.id.plugin_get);
+		getButton.setText(plugin.isPaid() ? R.string.get_plugin : R.string.shared_string_install);
 		getButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				try {
-					startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(plugin.getInstallURL())));
+					if (plugin instanceof SRTMPlugin) {
+						FragmentManager fragmentManager = getSupportFragmentManager();
+						if (fragmentManager != null) {
+							ChoosePlanDialogFragment.showHillshadeSrtmPluginInstance(fragmentManager);
+						}
+					} else {
+						startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(plugin.getInstallURL())));
+					}
 				} catch (Exception e) {
 					//ignored
 				}
