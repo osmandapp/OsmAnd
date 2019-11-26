@@ -25,7 +25,6 @@ import android.widget.Toast;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.UiUtilities.DialogButtonType;
@@ -163,14 +162,19 @@ public class OnSaveCurrentTrackFragment extends BottomSheetDialogFragment {
 			if (showOnMap) {
 				showOnMap(file, !openTrack);
 			}
-			if (openTrack) {
-				AvailableGPXFragment.openTrack(getActivity(), file);
+			FragmentActivity activity = getActivity();
+			if (openTrack && activity != null) {
+				AvailableGPXFragment.openTrack(activity, file);
 			}
 		}
 	}
 
 	private File renameGpxFile() {
-		OsmandApplication app = requiredMyApplication();
+		FragmentActivity activity = getActivity();
+		if (activity == null) {
+			return null;
+		}
+		OsmandApplication app = (OsmandApplication) activity.getApplication();
 		File savedFile = new File(app.getAppCustomization().getTracksDir(), new File(savedGpxDir, savedGpxName + ".gpx").getPath());
 		if (savedGpxName.equalsIgnoreCase(newGpxName)) {
 			return savedFile;
@@ -183,14 +187,18 @@ public class OnSaveCurrentTrackFragment extends BottomSheetDialogFragment {
 	}
 
 	private void showOnMap(File f, boolean animated) {
-		OsmandApplication app = requiredMyApplication();
+		FragmentActivity activity = getActivity();
+		if (activity == null) {
+			return;
+		}
+		OsmandApplication app = (OsmandApplication) activity.getApplication();
+
 		GpxInfo gpxInfo = new GpxInfo();
 		gpxInfo.setGpx(GPXUtilities.loadGPXFile(f));
 		if (gpxInfo.gpx != null) {
 			WptPt loc = gpxInfo.gpx.findPointToShow();
 			if (loc != null) {
 				app.getSelectedGpxHelper().setGpxFileToDisplay(gpxInfo.gpx);
-				FragmentActivity activity = getActivity();
 				if (activity instanceof MapActivity) {
 					MapActivity mapActivity = (MapActivity) activity;
 					if (animated) {
