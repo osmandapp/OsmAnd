@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:background="?attr/bg_color"
               android:minHeight="54dp"
-              android:orientation="horizontal">
+              tools:layout_height="54dp">
 
     <TextView
         android:id="@+id/title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:layout_marginLeft="16dp"
-        android:layout_weight="1"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/description"
+        android:layout_toStartOf="@+id/description"
+        android:layout_margin="@dimen/bottom_sheet_content_margin"
         android:textAppearance="@style/TextAppearance.ListItemTitle"
         tools:text="Some title text"/>
 
@@ -22,9 +26,21 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="center_vertical"
-        android:layout_margin="16dp"
+        android:layout_margin="@dimen/bottom_sheet_content_margin"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:gravity="center_vertical"
-        android:textColor="?colorAccent"
+        android:textColor="?attr/colorAccent"
         tools:text="topbar"/>
 
-</LinearLayout>
+    <View
+        android:id="@+id/divider"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_alignStart="@+id/title"
+        android:layout_alignLeft="@+id/title"
+        android:layout_alignParentBottom="true"
+        android:background="?attr/dashboard_divider" />
+
+</RelativeLayout>
