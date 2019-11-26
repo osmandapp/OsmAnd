@@ -229,24 +229,31 @@ public class OsmandSettings {
 		return globalPreferences != null && globalPreferences.getBoolean(SETTING_CUSTOMIZED_ID, false);
 	}
 
-	public void migrateGlobalPrefsToProfile() {
-		SharedPreferences sharedPreferences = (SharedPreferences) globalPreferences;
-		Map<String, ?> map = sharedPreferences.getAll();
-		for (String key : map.keySet()) {
+	public void migratePreferences() {
+		SharedPreferences globalSharedPreferences = (SharedPreferences) globalPreferences;
+		Map<String, ?> globalPrefsMap = globalSharedPreferences.getAll();
+		for (String key : globalPrefsMap.keySet()) {
 			OsmandPreference pref = getPreference(key);
 			if (pref instanceof CommonPreference) {
 				CommonPreference commonPreference = (CommonPreference) pref;
 				if (!commonPreference.global) {
 					List<ApplicationMode> modes = commonPreference.general ? Collections.singletonList(ApplicationMode.DEFAULT) : ApplicationMode.allPossibleValues();
-					boolean valueSaved = false;
 					for (ApplicationMode mode : modes) {
 						if (!commonPreference.isSetForMode(mode)) {
-							valueSaved = setPreference(key, map.get(key), mode) || valueSaved;
+							setPreference(key, globalPrefsMap.get(key), mode);
 						}
 					}
-					if (valueSaved) {
-						settingsAPI.edit(globalPreferences).remove(key).commit();
-					}
+				}
+			}
+		}
+		SharedPreferences defaultProfilePreferences = (SharedPreferences) this.defaultProfilePreferences;
+		Map<String, ?> defaultPrefsMap = defaultProfilePreferences.getAll();
+		for (String key : defaultPrefsMap.keySet()) {
+			OsmandPreference pref = getPreference(key);
+			if (pref instanceof CommonPreference) {
+				CommonPreference commonPreference = (CommonPreference) pref;
+				if (commonPreference.global && !commonPreference.isSet()) {
+					setPreference(key, defaultPrefsMap.get(key));
 				}
 			}
 		}
