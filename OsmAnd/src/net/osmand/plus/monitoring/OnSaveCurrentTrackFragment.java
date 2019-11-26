@@ -52,6 +52,7 @@ public class OnSaveCurrentTrackFragment extends BottomSheetDialogFragment {
 	private boolean showOnMap = true;
 	private boolean openTrack = false;
 	private File file;
+	private String savedGpxDir = "";
 	private String savedGpxName = "";
 	private String newGpxName = "";
 
@@ -63,8 +64,10 @@ public class OnSaveCurrentTrackFragment extends BottomSheetDialogFragment {
 		if (args != null && args.containsKey(SAVED_TRACKS_KEY)) {
 			ArrayList<String> savedGpxNames = args.getStringArrayList(SAVED_TRACKS_KEY);
 			if (savedGpxNames != null && savedGpxNames.size() > 0) {
-				savedGpxName = savedGpxNames.get(savedGpxNames.size() - 1);
-				newGpxName = savedGpxName;
+				String fileName = savedGpxNames.get(savedGpxNames.size() - 1);
+				savedGpxDir = new File(fileName).getParent();
+				savedGpxName = new File(fileName).getName();
+				newGpxName = this.savedGpxName;
 			}
 		} else {
 			dismiss();
@@ -168,7 +171,7 @@ public class OnSaveCurrentTrackFragment extends BottomSheetDialogFragment {
 
 	private File renameGpxFile() {
 		OsmandApplication app = requiredMyApplication();
-		File savedFile = new File(app.getAppCustomization().getTracksDir(), savedGpxName + ".gpx");
+		File savedFile = new File(app.getAppCustomization().getTracksDir(), new File(savedGpxDir, savedGpxName + ".gpx").getPath());
 		if (savedGpxName.equalsIgnoreCase(newGpxName)) {
 			return savedFile;
 		}
@@ -176,7 +179,7 @@ public class OnSaveCurrentTrackFragment extends BottomSheetDialogFragment {
 			Toast.makeText(app, R.string.empty_filename, Toast.LENGTH_LONG).show();
 			return null;
 		}
-		return LocalIndexesFragment.renameGpxFile(app, savedFile, newGpxName + ".gpx", null);
+		return LocalIndexesFragment.renameGpxFile(app, savedFile, newGpxName + ".gpx", true, null);
 	}
 
 	private void showOnMap(File f, boolean animated) {
