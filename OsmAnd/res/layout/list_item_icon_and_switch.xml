@@ -5,7 +5,6 @@
     android:layout_height="wrap_content"
     android:background="?attr/bg_color"
     android:minHeight="60dp"
-    tools:layout_height="60dp"
     android:orientation="vertical">
 
     <LinearLayout
@@ -18,8 +17,8 @@
             android:id="@+id/icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/bottom_sheet_content_margin"
-            android:layout_marginLeft="@dimen/bottom_sheet_content_margin"
+            android:layout_marginStart="@dimen/content_padding"
+            android:layout_marginLeft="@dimen/content_padding"
             tools:src="@drawable/ic_action_gabout_dark" />
 
         <android.support.v7.widget.AppCompatTextView
@@ -27,7 +26,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_margin="@dimen/bottom_sheet_content_margin"
+            android:layout_margin="@dimen/content_padding"
             android:textAppearance="@style/TextAppearance.ListItemTitle"
             tools:text="Some title text" />
 
@@ -36,8 +35,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
-            android:layout_marginEnd="@dimen/bottom_sheet_content_margin"
-            android:layout_marginRight="@dimen/bottom_sheet_content_margin"
+            android:layout_marginEnd="@dimen/content_padding"
+            android:layout_marginRight="@dimen/content_padding"
             android:focusable="false" />
 
     </LinearLayout>
@@ -46,8 +45,8 @@
         android:id="@+id/divider"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginStart="@dimen/bottom_sheet_content_margin"
-        android:layout_marginLeft="@dimen/bottom_sheet_content_margin"
+        android:layout_marginStart="@dimen/content_padding"
+        android:layout_marginLeft="@dimen/content_padding"
         android:background="?attr/dashboard_divider" />
 
 </LinearLayout>
