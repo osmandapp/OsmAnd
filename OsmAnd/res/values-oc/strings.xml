@@ -444,7 +444,7 @@
     <string name="profile_alert_need_routing_type_msg">Seleccionatz lo tipe de navigacion per lo perfiu d\'aplicacion novèu</string>
     <string name="select_base_profile_dialog_message">Començatz vòstre perfiu personalizat d\'un perfiu predeterminat de l\'aplicacion, es eu que fixa la configuracion basica per visibilitat predeterminada, leis extensions e leis unitats de velocitat de distància. Vaicí lei perfius d\'aplicacion predeterminats, amb d’exemples de personalizacion que se pòdon ajustar:</string>
     <string name="base_profile_descr_bicycle">Cicle de montanha, ciclimotor, cavau</string>
-    <string name="increase_search_radius_to">Aumenta lo radian de recèrca fins %1s</string>
+    <string name="increase_search_radius_to">Aumenta lo radian de recèrca fins %1$s</string>
     <string name="send_search_query">Volètz mandar leis informacions de la recèca \?</string>
     <string name="light_rs_render_descr">"Estil simple e contrastat per la navigacion automobila. En mòde nocturne fatiga pas leis uelhs.  Caracteristicas principalas: corbas de nivèu, vias contrastadas de color iranja, mens d’objèctes segondaris sus la mapa que pòcan distraire."</string>
     <string name="shared_string_min_speed">Velocitat minimala</string>
