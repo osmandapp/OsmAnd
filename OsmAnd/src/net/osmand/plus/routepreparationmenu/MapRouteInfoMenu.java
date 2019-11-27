@@ -1706,7 +1706,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		if (mapActivity != null) {
 			OsmandApplication app = mapActivity.getMyApplication();
 			Location loc = app.getLocationProvider().getLastKnownLocation();
-			int locationIconResByStatus = OsmAndLocationProvider.isLocationPermissionAvailable(mapActivity) & loc != null
+			int locationIconResByStatus = OsmAndLocationProvider.isLocationPermissionAvailable(mapActivity) && loc != null
 					? R.drawable.ic_action_location_color : R.drawable.ic_action_location_color_lost;
 
 			((ImageView) parentView.findViewById(R.id.fromIcon)).setImageDrawable(ContextCompat.getDrawable(mapActivity,
