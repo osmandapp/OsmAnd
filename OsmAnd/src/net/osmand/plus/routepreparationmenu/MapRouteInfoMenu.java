@@ -1704,10 +1704,12 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	public void updateFromIcon(View parentView) {
 		MapActivity mapActivity = getMapActivity();
 
-		int locationIconResByStatus = OsmAndLocationProvider.isLocationPermissionAvailable(mapActivity)
-			? R.drawable.ic_action_location_color : R.drawable.ic_action_location_color_lost;
-
 		if (mapActivity != null) {
+			OsmandApplication app = mapActivity.getMyApplication();
+			Location loc = app.getLocationProvider().getLastKnownLocation();
+			int locationIconResByStatus = OsmAndLocationProvider.isLocationPermissionAvailable(mapActivity) && loc != null
+					? R.drawable.ic_action_location_color : R.drawable.ic_action_location_color_lost;
+
 			((ImageView) parentView.findViewById(R.id.fromIcon)).setImageDrawable(ContextCompat.getDrawable(mapActivity,
 					mapActivity.getMyApplication().getTargetPointsHelper().getPointToStart() == null
 						? locationIconResByStatus : R.drawable.list_startpoint));
