@@ -22,8 +22,9 @@
 		tools:icon="@drawable/ic_action_alert" />
 
 	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
-		android:key="speak_routing_alarms"
+		android:key="voice_mute"
 		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:persistent="false"
 		android:summary="@string/voice_announces_descr"
 		android:title="@string/voice_announces"
 		app:fragment="net.osmand.plus.settings.VoiceAnnouncesFragment"

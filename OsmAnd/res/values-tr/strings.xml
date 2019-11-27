@@ -2627,7 +2627,7 @@
 \n
 \n\'Ayarlar\' → \'Gizlilik ve Güvenlik\' bölümünde istediğiniz zaman yapılandırın.</string>
     <string name="downloaded_maps_collect_descr">Ülke ve bölge haritası popülaritesini anlamamıza yardımcı olur.</string>
-    <string name="privacy_and_security_change_descr">%1$\'lerimizi kabul ediyorsanız \"İzin Ver\"e dokunun</string>
+    <string name="privacy_and_security_change_descr">%1$s\'lerimizi kabul ediyorsanız \"İzin Ver\"e dokunun</string>
     <string name="nav_type_hint">Navigasyon türü</string>
     <string name="osmand_routing_promo">routing.xml dosyasının değiştirilmiş versiyonunu ..osmand/routing dizinine ekleyebilirsiniz</string>
     <string name="show_compass_ruler">Pusula cetvelini göster</string>

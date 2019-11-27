@@ -403,11 +403,9 @@ public class ExternalApiHelper {
 					resultCode = Activity.RESULT_OK;
 				}
 			} else if (API_CMD_MUTE_NAVIGATION.equals(cmd)) {
-				mapActivity.getMyApplication().getSettings().VOICE_MUTE.set(true);
 				mapActivity.getRoutingHelper().getVoiceRouter().setMute(true);
 				resultCode = Activity.RESULT_OK;
 			} else if (API_CMD_UNMUTE_NAVIGATION.equals(cmd)) {
-				mapActivity.getMyApplication().getSettings().VOICE_MUTE.set(false);
 				mapActivity.getRoutingHelper().getVoiceRouter().setMute(false);
 				resultCode = Activity.RESULT_OK;
 			} else if (API_CMD_RECORD_AUDIO.equals(cmd)
