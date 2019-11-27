@@ -3398,4 +3398,6 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="added_profiles_descr">Wtyczka dodaje nowy profil do programu</string>
     <string name="shared_string_turn_off">Wyłącz</string>
     <string name="new_plugin_added">Dodano nową wtyczkę</string>
+    <string name="dialogs_and_notifications_descr">Kontroluj wyskakujące okienka, okna dialogowe i powiadomienia, które OsmAnd pokazuje podczas użytkowania.</string>
+    <string name="join_segments">Dołącz segmenty</string>
 </resources>
