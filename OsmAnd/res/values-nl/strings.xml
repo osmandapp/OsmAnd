@@ -1278,7 +1278,7 @@ Wil je een nieuwe map maken op de toegestane locatie en de OsmAnd-bestanden daar
     <string name="text_size">Tekstgrootte</string>
     <string name="fav_point_dublicate_message">Favoriet bestaat al: de naam is veranderd in %1$s.</string>
     <string name="fav_point_dublicate">Favoriet met deze naam bestaat al</string>
-    <string name="fav_point_emoticons_message">Favoriet bewaard als %1s omdat vreemde tekens niet opgeslagen kunnen worden in een bestand.</string>
+    <string name="fav_point_emoticons_message">Favoriet bewaard als %1$s omdat vreemde tekens niet opgeslagen kunnen worden in een bestand.</string>
     <string name="print_route">Route afdrukken</string>
     <string name="speed_limit_exceed">Te hoge snelheid melden bij</string>
     <string name="speed_limit_exceed_message">Kies hoeveel de maximumsnelheid mag worden overschreden voordat een melding volgt.</string>

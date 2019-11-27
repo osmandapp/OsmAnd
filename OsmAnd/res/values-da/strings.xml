@@ -3172,7 +3172,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="app_mode_personal_transporter">Person transport</string>
     <string name="app_mode_monowheel">Monowheel</string>
     <string name="app_mode_scooter">Scooter</string>
-    <string name="precision_hdop_and_vdop">Horisontal nøjagtighed: %1s, lodret: %2s</string>
+    <string name="precision_hdop_and_vdop">Horisontal nøjagtighed: %1$s, lodret: %2$s</string>
     <string name="precision_hdop">Horisontal nøjagtighed: %s</string>
     <string name="app_mode_offroad">Offroad</string>
     <string name="edit_profile_setup_title">Opsætning af profil</string>
