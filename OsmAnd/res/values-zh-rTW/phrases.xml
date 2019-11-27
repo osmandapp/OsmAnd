@@ -3761,4 +3761,8 @@
     <string name="poi_monastery_type_canonry">修道院類型：法政牧師</string>
     <string name="poi_monastery_type_hermitage">修道院類型：隱士</string>
     <string name="poi_monastery_type_clerks_regular">修道院：普通牧師</string>
+    <string name="poi_tourist_camp">旅行營地</string>
+    <string name="poi_community_gender_female">社群性別：女</string>
+    <string name="poi_community_gender_male">社群性別：男</string>
+    <string name="poi_community_gender_mixed">社群性別：混合</string>
 </resources>

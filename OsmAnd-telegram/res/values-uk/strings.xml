@@ -31,7 +31,7 @@
     <string name="last_available_location">Крайнє доступне позиціювання</string>
     <string name="sharing_status">Стан трансляції</string>
     <string name="location_sharing_status">Трансляція: %1$s</string>
-    <string name="shared_string_enabled">Увімкнута</string>
+    <string name="shared_string_enabled">Увімкнено</string>
     <string name="shared_string_status">Статус</string>
     <string name="no_gps_connection">Немає зʼєднання із GPS</string>
     <string name="no_internet_connection">Немає зʼєднання із інтернетом</string>
@@ -81,7 +81,7 @@
     <string name="get_telegram_description_continue">Будь ласка, встановіть Telegram та налаштуйте обліковий запис.</string>
     <string name="get_telegram_after_creating_account">Тоді Ви зможете використовувати цей додаток.</string>
     <string name="shared_string_all">Всі</string>
-    <string name="shared_string_off">Вимкнути</string>
+    <string name="shared_string_off">Вимк.</string>
     <string name="already_registered_in_telegram">Вам необхідно мати зареєстрований обліковий запис Telegram та номер телефону</string>
     <string name="do_not_have_telegram">Я не маю облікового запису Telegram</string>
     <string name="enter_phone_number">Введіть номер телефону</string>
