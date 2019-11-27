@@ -501,9 +501,8 @@ public class GPXDatabase {
 	}
 
 	private String getFileDir(File itemFile) {
-		return itemFile.getParentFile() == null ||
-				itemFile.getParentFile().equals(context.getAppPath(IndexConstants.GPX_INDEX_DIR)) ?
-				"" : itemFile.getParentFile().getName();
+		return itemFile.getParentFile() == null ? ""
+				: new File(itemFile.getPath().replace(context.getAppPath(IndexConstants.GPX_INDEX_DIR).getPath() + "/", "")).getParent();
 	}
 
 	void insert(GpxDataItem item, SQLiteConnection db) {
@@ -561,12 +560,14 @@ public class GPXDatabase {
 		}
 		String fileName = getFileName(item.file);
 		String fileDir = getFileDir(item.file);
+		long fileLastModifiedTime = item.file.lastModified();
 		db.execSQL(GPX_TABLE_UPDATE_ANALYSIS + " WHERE " + GPX_COL_NAME + " = ? AND " + GPX_COL_DIR + " = ?",
 				new Object[]{a.totalDistance, a.totalTracks, a.startTime, a.endTime,
 						a.timeSpan, a.timeMoving, a.totalDistanceMoving, a.diffElevationUp,
 						a.diffElevationDown, a.avgElevation, a.minElevation, a.maxElevation,
-						a.maxSpeed, a.avgSpeed, a.points, a.wptPoints, item.file.lastModified(),
+						a.maxSpeed, a.avgSpeed, a.points, a.wptPoints, fileLastModifiedTime,
 						Algorithms.encodeStringSet(a.wptCategoryNames), fileName, fileDir});
+		item.fileLastModifiedTime = fileLastModifiedTime;
 		item.analysis = a;
 		return true;
 	}
