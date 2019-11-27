@@ -344,7 +344,8 @@ public class MapWidgetRegistry {
 		cm.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.coordinates_widget, map)
 				.setIcon(R.drawable.ic_action_coordinates_widget)
 				.setSelected(settings.SHOW_COORDINATES_WIDGET.get())
-				.setListener(new ApearanceItemClickListener(settings.SHOW_COORDINATES_WIDGET, map)).createItem());
+				.setListener(new ApearanceItemClickListener(settings.SHOW_COORDINATES_WIDGET, map))
+				.setLayout(R.layout.list_item_icon_and_switch).createItem());
 		cm.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.map_markers, map)
 				.setDescription(settings.MAP_MARKERS_MODE.get().toHumanString(map))
 				.setListener(new ContextMenuAdapter.ItemClickListener() {
