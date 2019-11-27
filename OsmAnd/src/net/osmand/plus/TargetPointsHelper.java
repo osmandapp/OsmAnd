@@ -33,12 +33,15 @@ public class TargetPointsHelper {
 	private OsmandApplication ctx;
 	private TargetPoint homePoint = null;
 	private TargetPoint workPoint = null;
+	private TargetPoint parkingPoint = null;
 
 	private AddressLookupRequest startPointRequest;
 	private AddressLookupRequest targetPointRequest;
 	private AddressLookupRequest homePointRequest;
 	private AddressLookupRequest workPointRequest;
+	private AddressLookupRequest parkingPointRequest;
 	private AddressLookupRequest myLocationPointRequest;
+
 
 	public interface TargetPointChangedListener {
 		void onTargetPointChanged(TargetPoint targetPoint);
@@ -160,6 +163,7 @@ public class TargetPointsHelper {
 		}
 		lookupAddressForHomePoint();
 		lookupAddressForWorkPoint();
+		lookupAddressForParkingPoint();
 		lookupAddressForMyLocationPoint();
 	}
 
@@ -177,14 +181,17 @@ public class TargetPointsHelper {
 					PointDescription.deserializeFromString(desc.get(i), ips.get(i)), i);
 			intermediatePoints.add(targetPoint);
 		}
-		homePoint = settings.getHomePoint() != null ?
-				TargetPoint.create(settings.getHomePoint(), settings.getHomePointDescription()) : null;
-		workPoint = settings.getWorkPoint() != null ?
-				TargetPoint.create(settings.getWorkPoint(), settings.getWorkPointDescription()) : null;
-
+		readFromFavorites();
 		if (!ctx.isApplicationInitializing()) {
 			lookupAddessAll();
 		}
+	}
+
+	private void readFromFavorites() {
+		FavouritesDbHelper favorites = ctx.getFavorites();
+		homePoint = favorites.hasHomePoint() ? TargetPoint.create(favorites.getHomePointLatLon(), favorites.getHomePointDescription()) : null;
+		workPoint = favorites.hasWorkPoint() ? TargetPoint.create(favorites.getWorkPointLatLon(), favorites.getWorkPointDescription()) : null;
+		parkingPoint = favorites.hasParkingPoint() ? TargetPoint.create(favorites.getParkingPointLatLon(), favorites.getParkingPointDescription()) : null;
 	}
 
 	private void readHomeWorkFromSettings() {
@@ -196,13 +203,33 @@ public class TargetPointsHelper {
 		}
 	}
 
-	private TargetPoint readParkingPointFromPlugin() {
-		TargetPoint parkingPoint = TargetPoint.create(settings.getHomePoint(), settings.getHomePointDescription());
-		workPoint = TargetPoint.create(settings.getWorkPoint(), settings.getWorkPointDescription());
-		if (!ctx.isApplicationInitializing()) {
-			lookupAddressForParkingPoint(parkingPoint);
+	private void readHomeWorkParkingFromFavorites() {
+		FavouritesDbHelper favorites = ctx.getFavorites();
+		if (favorites.hasHomePoint()) {
+			homePoint = TargetPoint.create(favorites.getHomePointLatLon(), new PointDescription(PointDescription.POINT_TYPE_LOCATION, PointDescription.getSearchAddressStr(ctx)));
 		}
-		return parkingPoint;
+		if (favorites.hasWorkPoint()) {
+			workPoint = TargetPoint.create(favorites.getWorkPointLatLon(), new PointDescription(PointDescription.POINT_TYPE_LOCATION, PointDescription.getSearchAddressStr(ctx)));
+		}
+		if (favorites.hasParkingPoint()) {
+			parkingPoint = TargetPoint.create(favorites.getParkingPointLatLon(), new PointDescription(PointDescription.POINT_TYPE_LOCATION, PointDescription.getSearchAddressStr(ctx)));
+		}
+		if (!ctx.isApplicationInitializing()) {
+			lookupAddressForHomePoint();
+			lookupAddressForWorkPoint();
+			readParkingPointFromPlugin();
+		}
+	}
+
+	private void readParkingPointFromPlugin() {
+		FavouritesDbHelper favorites = ctx.getFavorites();
+		if (favorites.hasParkingPoint()) {
+			LatLon parkingPointLatLon = new LatLon(favorites.getParkingPoint().getLatitude(), favorites.getParkingPoint().getLongitude());
+			parkingPoint = TargetPoint.create(parkingPointLatLon, new PointDescription(PointDescription.POINT_TYPE_LOCATION, PointDescription.getSearchAddressStr(ctx)));
+			if (!ctx.isApplicationInitializing()) {
+				lookupAddressForParkingPoint();
+			}
+		}
 	}
 
 	private void readMyLocationPointFromSettings() {
@@ -286,8 +313,6 @@ public class TargetPointsHelper {
 					homePointRequest = null;
 					if (homePoint != null) {
 						homePoint.pointDescription.setName(address);
-						settings.setHomePoint(homePoint.point.getLatitude(), homePoint.point.getLongitude(),
-								homePoint.pointDescription);
 						ctx.getFavorites().setHomePoint(homePoint.point, homePoint.pointDescription);
 						updateRouteAndRefresh(false);
 						updateTargetPoint(homePoint);
@@ -298,24 +323,23 @@ public class TargetPointsHelper {
 		}
 	}
 
-	private void lookupAddressForParkingPoint(TargetPoint parkingPoint) {
+	private void lookupAddressForParkingPoint() {
 		if (parkingPoint != null && parkingPoint.isSearchingAddress(ctx)
-				&& (homePointRequest == null || !homePointRequest.getLatLon().equals(homePoint.point))) {
-			cancelHomePointAddressRequest();
-			homePointRequest = new AddressLookupRequest(homePoint.point, new GeocodingLookupService.OnAddressLookupResult() {
+				&& (parkingPointRequest == null || !parkingPointRequest.getLatLon().equals(parkingPoint.point))) {
+			cancelParkingPointAddressRequest();
+			parkingPointRequest = new AddressLookupRequest(parkingPoint.point, new GeocodingLookupService.OnAddressLookupResult() {
 				@Override
 				public void geocodingDone(String address) {
-					homePointRequest = null;
-					if (homePoint != null) {
-						homePoint.pointDescription.setName(address);
-						settings.setHomePoint(homePoint.point.getLatitude(), homePoint.point.getLongitude(),
-								homePoint.pointDescription);
+					parkingPointRequest = null;
+					if (parkingPoint != null) {
+						parkingPoint.pointDescription.setName(address);
+						ctx.getFavorites().setParkingPoint(parkingPoint.point, parkingPoint.pointDescription);
 						updateRouteAndRefresh(false);
-						updateTargetPoint(homePoint);
+						updateTargetPoint(parkingPoint);
 					}
 				}
 			}, null);
-			ctx.getGeocodingLookupService().lookupAddress(homePointRequest);
+			ctx.getGeocodingLookupService().lookupAddress(parkingPointRequest);
 		}
 	}
 
@@ -329,9 +353,7 @@ public class TargetPointsHelper {
 					workPointRequest = null;
 					if (workPoint != null) {
 						workPoint.pointDescription.setName(address);
-						settings.setWorkPoint(workPoint.point.getLatitude(), workPoint.point.getLongitude(),
-								workPoint.pointDescription);
-						ctx.getFavorites().setWorkPoint(homePoint.point, homePoint.pointDescription);
+						ctx.getFavorites().setWorkPoint(workPoint.point, workPoint.pointDescription);
 						updateRouteAndRefresh(false);
 						updateTargetPoint(workPoint);
 					}
@@ -394,6 +416,10 @@ public class TargetPointsHelper {
 		return workPoint;
 	}
 
+	public TargetPoint getParkingPoint() {
+		return parkingPoint;
+	}
+
 	public void setHomePoint(LatLon latLon, PointDescription name) {
 		final PointDescription pointDescription;
 		if (name == null) {
@@ -405,8 +431,7 @@ public class TargetPointsHelper {
 			pointDescription.setName(PointDescription.getSearchAddressStr(ctx));
 		}
 		ctx.getFavorites().setHomePoint(latLon, pointDescription);
-		settings.setHomePoint(latLon.getLatitude(), latLon.getLongitude(), pointDescription);
-		readHomeWorkFromSettings();
+		readHomeWorkParkingFromFavorites();
 	}
 
 	public void setWorkPoint(LatLon latLon, PointDescription name) {
@@ -420,8 +445,21 @@ public class TargetPointsHelper {
 			pointDescription.setName(PointDescription.getSearchAddressStr(ctx));
 		}
 		ctx.getFavorites().setWorkPoint(latLon,pointDescription);
-		settings.setWorkPoint(latLon.getLatitude(), latLon.getLongitude(), pointDescription);
-		readHomeWorkFromSettings();
+		readHomeWorkParkingFromFavorites();
+	}
+
+	public void setParkingPoint(LatLon latLon, PointDescription name) {
+		final PointDescription pointDescription;
+		if (name == null) {
+			pointDescription = new PointDescription(PointDescription.POINT_TYPE_LOCATION, "");
+		} else {
+			pointDescription = name;
+		}
+		if (pointDescription.isLocation() && Algorithms.isEmpty(pointDescription.getName())) {
+			pointDescription.setName(PointDescription.getSearchAddressStr(ctx));
+		}
+		ctx.getFavorites().setParkingPoint(latLon, pointDescription);
+		readHomeWorkParkingFromFavorites();
 	}
 
 	public List<TargetPoint> getIntermediatePoints() {
@@ -816,6 +854,13 @@ public class TargetPointsHelper {
 		if (workPointRequest != null) {
 			ctx.getGeocodingLookupService().cancel(workPointRequest);
 			workPointRequest = null;
+		}
+	}
+
+	private void cancelParkingPointAddressRequest() {
+		if (parkingPointRequest != null) {
+			ctx.getGeocodingLookupService().cancel(parkingPointRequest);
+			parkingPointRequest = null;
 		}
 	}
 

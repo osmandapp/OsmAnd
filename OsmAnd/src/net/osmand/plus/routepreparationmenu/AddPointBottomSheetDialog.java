@@ -642,7 +642,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 							favoriteViewHolder.title.setText(getString(R.string.work_button));
 							favoriteViewHolder.icon.setImageDrawable(getContentIcon(R.drawable.ic_action_work));
 						} else if (item == PointType.PARKING) {
-							point = helper.getWorkPoint();
+							point = helper.getParkingPoint();
 							favoriteViewHolder.title.setText(getString(R.string.parking_place));
 							favoriteViewHolder.icon.setImageDrawable(getContentIcon(R.drawable.ic_action_parking_dark));
 						}

@@ -46,6 +46,10 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	public PointDescription getPointDescription() {
 		return new PointDescription(PointDescription.POINT_TYPE_FAVORITE, name);
 	}
+
+	public PointDescription getPointStringDescription() {
+		return new PointDescription(PointDescription.POINT_TYPE_LOCATION, description);
+	}
 	
 	@Override
 	public PointDescription getPointDescription(Context ctx) {
