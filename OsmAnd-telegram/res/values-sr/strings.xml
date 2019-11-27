@@ -49,4 +49,5 @@
     <string name="si_nm">Наутичке миље</string>
     <string name="si_mi_meters">Миље/метри</string>
     <string name="shared_string_apply">Примени</string>
+    <string name="shared_string_enabled">Укључен</string>
 </resources>
