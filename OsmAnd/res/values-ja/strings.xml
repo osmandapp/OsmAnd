@@ -3252,7 +3252,7 @@ POIの更新は利用できません</string>
     <string name="logcat_buffer">Logcat用バッファー</string>
     <string name="plugins_settings">プラグイン設定</string>
     <string name="shared_string_by_default">標準設定</string>
-    <string name="download_detailed_map">このエリアを表示するには、より詳細な%s ップをダウンロードしてください。</string>
+    <string name="download_detailed_map">このエリアを表示するには、%sのマップをダウンロードしてください。</string>
     <string name="change_data_storage_full_description">OsmAndデータファイルを新しい保存場所に移動しますか？
 \n%1$s &gt; %2$s</string>
     <string name="data_storage_preference_summary">%1$s • %2$s</string>
@@ -3400,4 +3400,20 @@ POIの更新は利用できません</string>
     <string name="swap_two_places">%1$sと%2$sを入れ替え</string>
     <string name="route_start_point">出発地点</string>
     <string name="get_discount_title">%1$dを%2$で入手 、いまなら%3$s割引です。</string>
+    <string name="track_saved">経路が保存されました</string>
+    <string name="empty_filename">ファイル名が空欄です</string>
+    <string name="shared_string_revert">初期値に戻す</string>
+    <string name="rendering_attr_showCycleNodeNetworkRoutes_name">自転車ルートのノードネットワーク表示</string>
+    <string name="clear_confirmation_msg">%1$sを消去しますか？</string>
+    <string name="download_map_dialog">マップダウンロードダイアログ</string>
+    <string name="dialogs_and_notifications_title">ダイアログと通知</string>
+    <string name="dialogs_and_notifications_descr">OsmAnd使用中に表示されるポップアップ、ダイアログ、通知などの制御をおこないます。</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_name">ノードネットワーク</string>
+    <string name="suggested_maps">推奨マップ</string>
+    <string name="suggested_maps_descr">これらのマップはプラグインを使用する場合に必要です</string>
+    <string name="added_profiles">追加されたプロファイル</string>
+    <string name="added_profiles_descr">プラグインは新しいプロファイルをOsmAndに追加します</string>
+    <string name="shared_string_turn_off">OFFに</string>
+    <string name="new_plugin_added">新しいプラグインが追加されました</string>
+    <string name="join_segments">セグメント同士の接続</string>
 </resources>
