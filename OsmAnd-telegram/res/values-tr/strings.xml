@@ -54,4 +54,8 @@
     <string name="si_km_m">Kilometre/metre</string>
     <string name="si_nm">Deniz mili</string>
     <string name="si_mi_meters">Mil/metre</string>
+    <string name="shared_string_end">Bitiş</string>
+    <string name="shared_string_start">Başlangıç</string>
+    <string name="set_time_timeline_descr">Görüntülemek için zaman seçin</string>
+    <string name="start_end_date">Başlangıç — Bitiş tarihi</string>
 </resources>
