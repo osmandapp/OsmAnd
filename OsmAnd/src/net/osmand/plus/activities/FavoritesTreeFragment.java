@@ -1,5 +1,7 @@
 package net.osmand.plus.activities;
 
+import static net.osmand.plus.FavouritesDbHelper.PARKING;
+import static net.osmand.plus.FavouritesDbHelper.PERSONAL;
 import static net.osmand.plus.myplaces.FavoritesActivity.FAV_TAB;
 import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
 
@@ -44,6 +46,7 @@ import net.osmand.plus.FavouritesDbHelper.FavoritesListener;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.base.FavoriteImageDrawable;
@@ -52,6 +55,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.myplaces.FavoritesFragmentStateHolder;
+import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -739,6 +743,8 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 		private Set<?> filter;
 
 		public void synchronizeGroups() {
+			ParkingPositionPlugin plugin = OsmandPlugin.getEnabledPlugin(ParkingPositionPlugin.class);
+			boolean parkingPluginEnable = plugin != null;
 			favoriteGroups.clear();
 			groups.clear();
 			List<FavoriteGroup> disablesGroups = new ArrayList<>();
@@ -747,14 +753,37 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			for (FavoriteGroup key : gs) {
 				boolean empty = true;
 				if (flt == null || flt.contains(key)) {
-					empty = false;
-					favoriteGroups.put(key, new ArrayList<>(key.points));
+					if (key.name.equals(PERSONAL)) {
+						ArrayList<FavouritePoint> list = new ArrayList<>();
+						for (FavouritePoint p : key.points) {
+							if (p.getName().equals(PARKING)) {
+								if (parkingPluginEnable) {
+									list.add(p);
+									empty = false;
+								}
+							} else {
+								list.add(p);
+								empty = false;
+							}
+						}
+						favoriteGroups.put(key, list);
+					} else {
+						empty = false;
+						favoriteGroups.put(key, new ArrayList<>(key.points));
+					}
 				} else {
 					ArrayList<FavouritePoint> list = new ArrayList<>();
 					for (FavouritePoint p : key.points) {
 						if (flt.contains(p)) {
-							list.add(p);
-							empty = false;
+							if (p.getName().equals(PARKING)) {
+								if (parkingPluginEnable) {
+									list.add(p);
+									empty = false;
+								}
+							} else {
+								list.add(p);
+								empty = false;
+							}
 						}
 					}
 					favoriteGroups.put(key, list);
