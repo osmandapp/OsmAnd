@@ -3120,7 +3120,7 @@
     <string name="turn_screen_on_router">Пробуди се код скретања</string>
     <string name="turn_screen_on_time_descr">Подесите време када да се екран пробуди.</string>
     <string name="turn_screen_on_sensor">Користи сензор близине</string>
-    <string name="turn_screen_on_sensor_descr">Махните руком преко екрана да укључите екран за време навигације.</string>
+    <string name="turn_screen_on_sensor_descr">Махните руком преко екрана да га укључите за време навигације.</string>
     <string name="external_input_device">Екстерни улазни уређај</string>
     <string name="sett_no_ext_input">Ниједан</string>
     <string name="sett_generic_ext_input">Генеричка тастатура</string>
@@ -3138,7 +3138,7 @@
     <string name="routeInfo_tracktype_name">Чврстина подлоге</string>
     <string name="shared_string_file_is_saved">%s је сачуван</string>
     <string name="app_mode_camper">Кампер</string>
-    <string name="app_mode_campervan">Камп приколица</string>
+    <string name="app_mode_campervan">Камп приколица (RV)</string>
     <string name="rendering_attr_showLez_description">Прикажи зоне ниске емисије загађења. Не утиче на рутирање.</string>
     <string name="rendering_attr_showLez_name">Прикажи зоне ниске емисије загађења</string>
     <string name="temporary_conditional_routing">Укључи у обзир и привремена ограничења</string>
@@ -3251,7 +3251,7 @@
     <string name="navigate_point_format_olc">Отворени код локације (OLC)</string>
     <string name="coordinates_format_info">Означени формат ће бити примењен на сва места у апликацији.</string>
     <string name="pref_selected_by_default_for_profiles">Ова поставка је подразумевано одабрана за профиле: %s</string>
-    <string name="change_default_settings">Промени подразумеване поставке</string>
+    <string name="change_default_settings">Промени поставке</string>
     <string name="discard_changes">Одбаци промене</string>
     <string name="apply_to_current_profile">Примени на тренутни профил %1$s</string>
     <string name="apply_to_all_profiles">Примени на све профиле</string>
@@ -3264,7 +3264,7 @@
     <string name="appearance">Изглед</string>
     <string name="map_look_descr">Изглед карте</string>
     <string name="map_look">Изглед карте</string>
-    <string name="list_of_installed_plugins">Списак инсталираних додатака</string>
+    <string name="list_of_installed_plugins">Инсталирани додаци</string>
     <string name="configure_navigation">Подеси навођење</string>
     <string name="general_settings_profile_descr">Тема апликације, јединице, регија</string>
     <string name="configure_profile">Конфигуриши профил</string>
@@ -3299,7 +3299,7 @@
     <string name="data_storage_preference_summary">%1$s • %2$s</string>
     <string name="data_storage_space_description">Слободно %1$s GB • Укупно %2$s GB</string>
     <string name="enter_path_to_folder">Унесите путању до фасцикле</string>
-    <string name="shared_string_select_folder">Одаберите фасциклу</string>
+    <string name="shared_string_select_folder">Фасцикла…</string>
     <string name="paste_Osmand_data_folder_path">Уметни путању до фасцикле са OsmAnd подацима</string>
     <string name="change_osmand_data_folder_question">Промени OsmAnd фасциклу са подацима\?</string>
     <string name="move_maps_to_new_destination">Премести на ново одредиште</string>
@@ -3338,10 +3338,10 @@
     <string name="shared_string_memory_mb_desc">%1$s MB</string>
     <string name="shared_string_memory_kb_desc">%1$s kB</string>
     <string name="track_storage_directory">Складишни директоријум стаза</string>
-    <string name="track_storage_directory_descrp">Стазе могу бити складиштене у фасциклу за снимање или у месечним или дневним фасциклама.</string>
-    <string name="store_tracks_in_rec_directory">Прикажи снимљене стазе у фасцикли за снимање</string>
+    <string name="track_storage_directory_descrp">Стазе могу бити складиштене у \'rec\' фасцикли, или у месечним или дневним фасциклама.</string>
+    <string name="store_tracks_in_rec_directory">Снимај стазе у \'rec\' фасцикли</string>
     <string name="store_tracks_in_daily_directories">Ускладишти снимљене стазе у дневним фасциклама</string>
-    <string name="store_tracks_in_daily_directories_descrp">Складишти снимљене стазе у подфасцикле по дану снимања (нпр. 2018-01-01).</string>
+    <string name="store_tracks_in_daily_directories_descrp">Снимај стазе у подфасцикле по дану снимања (нпр. 2018-01-01).</string>
     <string name="shared_string_memory_used_tb_desc">Искоришћено %1$s TB</string>
     <string name="shared_string_memory_used_gb_desc">Искоришћено %1$s GB</string>
     <string name="shared_string_memory_used_mb_desc">Искоришћено %1$s MB</string>
