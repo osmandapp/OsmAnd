@@ -3390,4 +3390,12 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="shared_string_revert">Przywróć</string>
     <string name="quick_action_directions_from_desc">Przycisk służący do ustawienia środka ekranu jako punktu wyjazdu i obliczenia trasy do miejsca docelowego lub otwarcia okna dialogowego w celu wybrania miejsca docelowego, jeśli znacznik miejsca docelowego nie znajduje się na mapie.</string>
     <string name="clear_confirmation_msg">Wyczyścić %1$s\?</string>
+    <string name="download_map_dialog">Dialog pobierania map</string>
+    <string name="dialogs_and_notifications_title">Dialogi i powiadomienia</string>
+    <string name="suggested_maps">Sugerowane mapy</string>
+    <string name="suggested_maps_descr">Te mapy są wymagane do użycia z wtyczką</string>
+    <string name="added_profiles">Dodano profile</string>
+    <string name="added_profiles_descr">Wtyczka dodaje nowy profil do programu</string>
+    <string name="shared_string_turn_off">Wyłącz</string>
+    <string name="new_plugin_added">Dodano nową wtyczkę</string>
 </resources>

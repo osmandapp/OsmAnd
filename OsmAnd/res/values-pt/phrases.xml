@@ -3731,4 +3731,24 @@
     <string name="poi_cash_withdrawal_migros_bank">Banco Migros</string>
     <string name="poi_cash_withdrawal_girocard">Girocard</string>
     <string name="poi_cash_withdrawal_postbank">Postbank</string>
+    <string name="poi_bath_type">Tipo</string>
+    <string name="poi_bath_open_air">Ar livre</string>
+    <string name="poi_bath_type_hot_spring">Fonte termal</string>
+    <string name="poi_bath_type_onsen">Onsen</string>
+    <string name="poi_bath_type_hammam">Hamame</string>
+    <string name="poi_bath_type_thermal">Térmico</string>
+    <string name="poi_bath_type_river">Rio</string>
+    <string name="poi_bath_type_lake">Lago</string>
+    <string name="poi_bath_type_foot_bath">Banho de pés</string>
+    <string name="poi_bath_open_air_yes">Sim</string>
+    <string name="poi_bath_open_air_no">Não</string>
+    <string name="poi_monastery_type_monastics">Tipo de mosteiro: monásticos</string>
+    <string name="poi_monastery_type_convent">Tipo de mosteiro: convento</string>
+    <string name="poi_monastery_type_canonry">Tipo de mosteiro: canonaria</string>
+    <string name="poi_monastery_type_hermitage">Tipo de mosteiro: eremitério</string>
+    <string name="poi_monastery_type_clerks_regular">Tipo de mosteiro: clérigos regulares</string>
+    <string name="poi_tourist_camp">Acampamento turístico</string>
+    <string name="poi_community_gender_female">Sexo comunitário: feminino</string>
+    <string name="poi_community_gender_male">Sexo comunitário: masculino</string>
+    <string name="poi_community_gender_mixed">Sexo comunitário: misto</string>
 </resources>

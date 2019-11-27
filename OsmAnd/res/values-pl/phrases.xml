@@ -3723,4 +3723,8 @@
     <string name="poi_craft_cabinet_maker">Stolarz meblowy</string>
     <string name="poi_pet_grooming">Pielęgnacja zwierząt</string>
     <string name="poi_atm_yes">Bankomat: tak</string>
+    <string name="poi_cellar_entrance">Wejście do piwnicy</string>
+    <string name="poi_cash_withdrawal_bank_card">Wypłata gotówki</string>
+    <string name="poi_bath_type">Typ</string>
+    <string name="poi_bath_open_air">Na wolnym powietrzu</string>
 </resources>

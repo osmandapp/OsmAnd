@@ -3390,4 +3390,5 @@
     <string name="added_profiles_descr">外掛程式加入了新的設定檔到 OsmAnd</string>
     <string name="shared_string_turn_off">關閉</string>
     <string name="new_plugin_added">已新增新的外掛程式</string>
+    <string name="join_segments">新增線段</string>
 </resources>

@@ -3055,9 +3055,9 @@ POIの更新は利用できません</string>
     <string name="app_mode_offroad">オフロード</string>
     <string name="edit_profile_setup_title">プロファイルの個別設定</string>
     <string name="edit_profile_setup_subtitle">設定した値は各プロファイルごとに保持されます</string>
-    <string name="edit_profile_setup_map_subtitle">プロファイルで使用するマップ設定を調整します</string>
-    <string name="edit_profile_screen_options_subtitle">プロファイルで使用するUI(ユーザーインターフェイス)設定を調整します</string>
-    <string name="edit_profile_nav_settings_subtitle">プロファイルで使用するナビゲーション設定を調整します</string>
+    <string name="edit_profile_setup_map_subtitle">指定プロファイルのマップ設定を行います</string>
+    <string name="edit_profile_screen_options_subtitle">指定プロファイルのUI(ユーザーインターフェース)設定を行います</string>
+    <string name="edit_profile_nav_settings_subtitle">指定プロファイルのナビゲーション設定を行います</string>
     <string name="routing_attr_max_num_changes_description">乗り換えの上限を指定します</string>
     <string name="routing_attr_max_num_changes_name">乗り換え数</string>
     <string name="turn_screen_on_router">方向転換時に起動</string>

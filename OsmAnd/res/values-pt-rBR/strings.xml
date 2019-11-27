@@ -3389,6 +3389,6 @@ Pôr do Sol: %2$s</string>
     <string name="added_profiles">Perfis adicionados</string>
     <string name="shared_string_turn_off">Desligar</string>
     <string name="new_plugin_added">Novo plugin adicionado</string>
-    <string name="added_profiles_descr">Plugin adiciona novo perfil ao OsmAnd</string>
+    <string name="added_profiles_descr">Plugin que adiciona novo perfil ao OsmAnd</string>
     <string name="join_segments">Unir segmentos</string>
 </resources>
