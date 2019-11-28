@@ -319,8 +319,12 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	}
 
 	public Bundle buildArguments() {
+		return buildArguments(appMode.getStringKey());
+	}
+
+	public Bundle buildArguments(String key) {
 		Bundle args = new Bundle();
-		args.putString(APP_MODE_KEY, appMode.getStringKey());
+		args.putString(APP_MODE_KEY, key);
 		return args;
 	}
 

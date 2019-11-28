@@ -2092,7 +2092,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			String fragmentName = pref.getFragment();
 			Fragment fragment = Fragment.instantiate(this, fragmentName);
 			if (caller instanceof BaseSettingsFragment) {
-				fragment.setArguments(((BaseSettingsFragment) caller).buildArguments());
+				fragment.setArguments(((BaseSettingsFragment) caller).buildArguments(pref.getKey()));
 			}
 			getSupportFragmentManager().beginTransaction()
 					.replace(R.id.fragmentContainer, fragment, fragment.getClass().getName())

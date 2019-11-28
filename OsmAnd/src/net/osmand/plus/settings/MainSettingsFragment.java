@@ -115,6 +115,7 @@ public class MainSettingsFragment extends BaseSettingsFragment {
 			pref.setSummary(getAppModeDescription(getContext(), applicationMode));
 			pref.setChecked(isAppProfileEnabled);
 			pref.setLayoutResource(R.layout.preference_with_descr_dialog_and_switch);
+			pref.setFragment(ConfigureProfileFragment.class.getName());
 			preferenceCategory.addPreference(pref);
 		}
 	}
