@@ -895,10 +895,12 @@ public class SettingsHelper {
 		private List<SettingsItem> processedItems = new ArrayList<>();
 		private SettingsItem currentItem;
 		private AlertDialog dialog;
+		private boolean force;
 
 		ImportAsyncTask(@NonNull File settingsFile,
-						@Nullable SettingsImportListener listener) {
+		                boolean force, @Nullable SettingsImportListener listener) {
 			this.file = settingsFile;
+			this.force = force;
 			this.listener = listener;
 			importer = new SettingsImporter(app);
 		}
@@ -934,7 +936,7 @@ public class SettingsHelper {
 		}
 
 		private void processNextItem() {
-			if (activity == null) {
+			if (activity == null && !force) {
 				return;
 			}
 			if (items.size() == 0 && !importSuspended) {
@@ -956,7 +958,7 @@ public class SettingsHelper {
 			}
 			importSuspended = false;
 			if (item != null) {
-				if (item.exists()) {
+				if (item.exists() && !force) {
 					switch (item.getType()) {
 						case PROFILE: {
 							AlertDialog.Builder b = new AlertDialog.Builder(activity);
@@ -1098,8 +1100,8 @@ public class SettingsHelper {
 	}
 
 	public void importSettings(@NonNull File settingsFile,
-							   @Nullable SettingsImportListener listener) {
-		new ImportAsyncTask(settingsFile, listener).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+	                           boolean force, @Nullable SettingsImportListener listener) {
+		new ImportAsyncTask(settingsFile, force, listener).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	public void exportSettings(@NonNull File fileDir, @NonNull String fileName,

@@ -100,12 +100,12 @@ public class ImportHelper {
 	}
 
 	public void handleContentImport(final Uri contentUri, final boolean useImportDir) {
-		final String name = getNameFromContentUri(contentUri);
+		final String name = getNameFromContentUri(app, contentUri);
 		handleFileImport(contentUri, name, useImportDir);
 	}
 
 	public boolean handleGpxImport(final Uri contentUri, final boolean useImportDir) {
-		String name = getNameFromContentUri(contentUri);
+		String name = getNameFromContentUri(app, contentUri);
 		boolean isOsmandSubdir = isSubDirectory(app.getAppPath(IndexConstants.GPX_INDEX_DIR), new File(contentUri.getPath()));
 		if (!isOsmandSubdir && name != null) {
 			String nameLC = name.toLowerCase();
@@ -136,7 +136,7 @@ public class ImportHelper {
 		if (isFileIntent) {
 			fileName = new File(uri.getPath()).getName();
 		} else if (isContentIntent) {
-			fileName = getNameFromContentUri(uri);
+			fileName = getNameFromContentUri(app, uri);
 		}
 		handleFavouritesImport(uri, fileName, saveFile, false, true);
 	}
@@ -162,7 +162,7 @@ public class ImportHelper {
 		}
 	}
 
-	private String getNameFromContentUri(Uri contentUri) {
+	public static String getNameFromContentUri(OsmandApplication app, Uri contentUri) {
 		final String name;
 		final Cursor returnCursor = app.getContentResolver().query(contentUri, new String[] {OpenableColumns.DISPLAY_NAME}, null, null, null);
 		if (returnCursor != null && returnCursor.moveToFirst()) {
@@ -434,7 +434,7 @@ public class ImportHelper {
 
 			@Override
 			protected String doInBackground(Void... voids) {
-				String error = copyFile(getObfDestFile(name), obfFile, false);
+				String error = copyFile(app, getObfDestFile(name), obfFile, false);
 				if (error == null) {
 					app.getResourceManager().reloadIndexes(IProgress.EMPTY_PROGRESS, new ArrayList<String>());
 					app.getDownloadThread().updateLoadedFiles();
@@ -464,7 +464,7 @@ public class ImportHelper {
 	}
 
 	@Nullable
-	private String copyFile(@NonNull File dest, @NonNull Uri uri, boolean overwrite) {
+	public static String copyFile(OsmandApplication app, @NonNull File dest, @NonNull Uri uri, boolean overwrite) {
 		if (dest.exists() && !overwrite) {
 			return app.getString(R.string.file_with_name_already_exists);
 		}
@@ -521,7 +521,7 @@ public class ImportHelper {
 
 			@Override
 			protected String doInBackground(Void... voids) {
-				return copyFile(app.getAppPath(IndexConstants.TILES_INDEX_DIR + name), uri, false);
+				return copyFile(app, app.getAppPath(IndexConstants.TILES_INDEX_DIR + name), uri, false);
 			}
 
 			@Override
@@ -564,7 +564,7 @@ public class ImportHelper {
 					tempDir.mkdirs();
 				}
 				File dest = new File(tempDir, name);
-				return copyFile(dest, uri, true);
+				return copyFile(app, dest, uri, true);
 			}
 
 			@Override
@@ -572,7 +572,7 @@ public class ImportHelper {
 				File tempDir = app.getAppPath(IndexConstants.TEMP_DIR);
 				File file = new File(tempDir, name);
 				if (error == null && file.exists()) {
-					app.getSettingsHelper().importSettings(file, new SettingsImportListener() {
+					app.getSettingsHelper().importSettings(file, false, new SettingsImportListener() {
 						@Override
 						public void onSettingsImportFinished(boolean succeed, boolean empty) {
 							if (isActivityNotDestroyed(activity)) {

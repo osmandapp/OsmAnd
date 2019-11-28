@@ -59,6 +59,7 @@ import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.helpers.ExternalApiHelper;
+import net.osmand.plus.helpers.ImportHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.IContextMenuButtonListener;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
@@ -2209,6 +2210,27 @@ public class OsmandAidlApi {
 
 	private Map<String, FileCopyInfo> copyFilesCache = new ConcurrentHashMap<>();
 
+	public boolean importProfile(final Uri profileUri) {
+		if (profileUri != null) {
+			final ProfileImportTask settingsImportTask = new ProfileImportTask(app, profileUri);
+			if (app.isApplicationInitializing()) {
+				app.getAppInitializer().addListener(new AppInitializer.AppInitializeListener() {
+					@Override
+					public void onProgress(AppInitializer init, AppInitializer.InitEvents event) {
+					}
+
+					@Override
+					public void onFinish(AppInitializer init) {
+						settingsImportTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+					}
+				});
+			} else {
+				settingsImportTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+			}
+			return true;
+		}
+		return false;
+	}
 
 	private class FileCopyInfo {
 		long startTime;
@@ -2332,6 +2354,47 @@ public class OsmandAidlApi {
 				return GPXUtilities.loadGPXFile(new FileInputStream(fileDescriptor));
 			}
 			return null;
+		}
+	}
+
+	private static class ProfileImportTask extends AsyncTask<Void, Void, File> {
+
+		private final OsmandApplication app;
+		private final Uri profileUri;
+
+		ProfileImportTask(@NonNull OsmandApplication app, @NonNull Uri profileUri) {
+			this.app = app;
+			this.profileUri = profileUri;
+		}
+
+		@Override
+		protected File doInBackground(Void... voids) {
+			File tempDir = app.getAppPath(IndexConstants.TEMP_DIR);
+			if (!tempDir.exists()) {
+				tempDir.mkdirs();
+			}
+			File dest = null;
+			String scheme = profileUri.getScheme();
+			if ("file".equals(scheme)) {
+				String path = profileUri.getPath();
+				if (path != null) {
+					dest = new File(tempDir, new File(path).getName());
+				}
+			} else if ("content".equals(scheme)) {
+				dest = new File(tempDir, ImportHelper.getNameFromContentUri(app, profileUri));
+			}
+			if (dest != null) {
+				String error = ImportHelper.copyFile(app, dest, profileUri, true);
+				return error == null ? dest : null;
+			}
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(File file) {
+			if (file != null && file.exists()) {
+				app.getSettingsHelper().importSettings(file, true, null);
+			}
 		}
 	}
 
