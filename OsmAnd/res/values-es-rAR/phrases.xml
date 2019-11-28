@@ -3769,4 +3769,8 @@
     <string name="poi_monastery_type_canonry">Tipo de monasterio: canónico</string>
     <string name="poi_monastery_type_hermitage">Tipo de monasterio: ermita</string>
     <string name="poi_monastery_type_clerks_regular">Tipo de monasterio: empleados regulares</string>
+    <string name="poi_tourist_camp">Campamento turístico</string>
+    <string name="poi_community_gender_female">Género de la comunidad: femenino</string>
+    <string name="poi_community_gender_male">Género de la comunidad: masculino</string>
+    <string name="poi_community_gender_mixed">Género de la comunidad: mixto</string>
 </resources>

@@ -1054,10 +1054,11 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	}
 
 	private void createMuteSoundRoutingParameterButton(MapActivity mapActivity, final MuteSoundRoutingParameter parameter, final RouteMenuAppModes mode, LinearLayout optionsContainer) {
+		final ApplicationMode appMode = mapActivity.getRoutingHelper().getAppMode();
 		final int colorActive = ContextCompat.getColor(mapActivity, nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
 		final int colorDisabled = ContextCompat.getColor(mapActivity, R.color.description_font_and_bottom_sheet_icons);
 		String text = null;
-		final boolean active = !mapActivity.getRoutingHelper().getVoiceRouter().isMute();
+		boolean active = !mapActivity.getRoutingHelper().getVoiceRouter().isMuteForMode(appMode);
 		if (mode.parameters.size() <= 2) {
 			text = mapActivity.getString(active ? R.string.shared_string_on : R.string.shared_string_off);
 		}
@@ -1067,7 +1068,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				OsmandApplication app = getApp();
 				if (app != null) {
 					app.getRoutingOptionsHelper().switchSound();
-					boolean active = !app.getRoutingHelper().getVoiceRouter().isMute();
+					boolean active = !app.getRoutingHelper().getVoiceRouter().isMuteForMode(appMode);
 					String text = app.getString(active ? R.string.shared_string_on : R.string.shared_string_off);
 
 					Drawable itemDrawable = app.getUIUtilities().getIcon(active ? parameter.getActiveIconId() : parameter.getDisabledIconId(), nightMode ? R.color.route_info_control_icon_color_dark : R.color.route_info_control_icon_color_light);
@@ -1703,10 +1704,12 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	public void updateFromIcon(View parentView) {
 		MapActivity mapActivity = getMapActivity();
 
-		int locationIconResByStatus = OsmAndLocationProvider.isLocationPermissionAvailable(mapActivity)
-			? R.drawable.ic_action_location_color : R.drawable.ic_action_location_color_lost;
-
 		if (mapActivity != null) {
+			OsmandApplication app = mapActivity.getMyApplication();
+			Location loc = app.getLocationProvider().getLastKnownLocation();
+			int locationIconResByStatus = OsmAndLocationProvider.isLocationPermissionAvailable(mapActivity) && loc != null
+					? R.drawable.ic_action_location_color : R.drawable.ic_action_location_color_lost;
+
 			((ImageView) parentView.findViewById(R.id.fromIcon)).setImageDrawable(ContextCompat.getDrawable(mapActivity,
 					mapActivity.getMyApplication().getTargetPointsHelper().getPointToStart() == null
 						? locationIconResByStatus : R.drawable.list_startpoint));

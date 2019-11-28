@@ -237,7 +237,7 @@ Er is nu {2} MB beschikbaar</string>
     <string name="overlay_transparency">Overlay-transparantie</string>
     <string name="map_transparency_descr">Wijzig basiskaart-transparantie</string>
     <string name="map_transparency">Basiskaart-transparantie</string>
-    <string name="modify_transparency">Wijzig transparantie (0 = transparant, 255 = dekkend)</string>
+    <string name="modify_transparency">Wijzig transparantie (0 = transparant, 255 = volledig bedekt)</string>
     <string name="layer_underlay">Underlay-kaart…</string>
     <string name="map_underlay">Underlay kaart</string>
     <string name="map_underlay_descr">Kies underlay-kaart</string>
@@ -435,7 +435,7 @@ Er is nu {2} MB beschikbaar</string>
     <string name="route_head">Volg</string>
     <string name="first_time_continue">Ga door</string>
     <string name="first_time_download">Download regio\'s</string>
-    <string name="first_time_msg">Om OsmAnd goed te gebruiken moet je kaartgegevens downloaden (\'Instellingen\' → \'Kaartbeheer\'). Daarna kan je navigeren, de kaart bekijken, en adressen, interessepunten en openbaar vervoer opzoeken.</string>
+    <string name="first_time_msg">"Bedankt voor het gebruik van OsmAnd. Download regionale gegevens voor offline gebruik via \'Kaarten downloaden\' daarna kan je de kaarten bekijken, adressen en  POI\'s opzoeken, openbaar vervoer raadplegen en nog veel meer."</string>
     <string name="search_poi_location">Naar signaal zoeken…</string>
     <string name="search_near_map">Zoek bij het midden van de kaart</string>
     <string name="search_nearby">Zoek dichtbij</string>
@@ -636,7 +636,7 @@ Er is nu {2} MB beschikbaar</string>
     <string name="left_side_navigation_descr">Activeer in een land waar men links rijdt.</string>
     <string name="unknown_from_location">Startlocatie is nog niet bepaald</string>
     <string name="confirm_interrupt_download">Downloaden afbreken?</string>
-    <string name="basemap_was_selected_to_download">De basiskaart is nodig voor OsmAnd en is al geselecteerd om te downloaden.</string>
+    <string name="basemap_was_selected_to_download">De basiskaart is nodig voor de goede werking van OsmAnd en is al geselecteerd om te downloaden.</string>
     <string name="map_online_plugin_is_not_installed">Activeer de Online Kaarten-plugin om andere kaartbronnen te kunnen selecteren</string>
     <string name="map_online_data">Online (raster-) kaarten</string>
     <string name="map_online_data_descr">Gebruik online kaarten (download en bewaar deze op SD-kaart).</string>
@@ -1278,7 +1278,7 @@ Wil je een nieuwe map maken op de toegestane locatie en de OsmAnd-bestanden daar
     <string name="text_size">Tekstgrootte</string>
     <string name="fav_point_dublicate_message">Favoriet bestaat al: de naam is veranderd in %1$s.</string>
     <string name="fav_point_dublicate">Favoriet met deze naam bestaat al</string>
-    <string name="fav_point_emoticons_message">Favoriet bewaard als %1s omdat vreemde tekens niet opgeslagen kunnen worden in een bestand.</string>
+    <string name="fav_point_emoticons_message">Favoriet bewaard als %1$s omdat vreemde tekens niet opgeslagen kunnen worden in een bestand.</string>
     <string name="print_route">Route afdrukken</string>
     <string name="speed_limit_exceed">Te hoge snelheid melden bij</string>
     <string name="speed_limit_exceed_message">Kies hoeveel de maximumsnelheid mag worden overschreden voordat een melding volgt.</string>
@@ -2274,9 +2274,9 @@ voor Gebied: %1$s x %2$s</string>
     <string name="routing_attr_allow_private_description">Ga ook over privé-terreinen.</string>
     <string name="display_zoom_level">Zoomniveau weergave: %1$s</string>
     <string name="route_is_too_long_v2">Deze route is misschien te lang. Voeg tussenpunten toe als binnen 10 minuten geen route berekend is.</string>
-    <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) is een kaart- en navigatieprogramma dat de vrije, wereldwijde en gedetailleerde OpenStreetMap (OSM) data gebruikt. 
+    <string name="osmand_extended_description_part1">"OsmAnd (OSM, Automated Navigation Directions) is een kaart- en navigatieprogramma dat de gratische, wereldwijde en gedetailleerde OpenStreetMap (OSM) data gebruikt. 
 \n 
-\nGebruik visuele en gesproken navigatie, bekijk POI\'s (point of interest), maak en volg GPX-tracks, toon hoogtelijnen en hoogte informatie (via plug-in), kies tussen auto, fiets en wandelen, bewerk de OSM-kaart, en nog veel meer.</string>
+\nGebruikt visuele en gesproken navigatie, toont POI\'s (point of interest), maakt en volgt GPX-tracks, toont hoogtelijnen en hoogte informatie (via plug-in), kiest tussen auto, fiets,  wandelen of andere, je kan de OSM-kaart bewerken en nog veel meer."</string>
     <string name="osmand_extended_description_part2">"
  GPS-navigatie
 • Offline (geen datakosten) of online (snellere) routeberekening
@@ -2355,11 +2355,10 @@ voor Gebied: %1$s x %2$s</string>
     <string name="shared_string_permissions">Rechten</string>
     <string name="import_gpx_failed_descr">OsmAnd kan het bestand niet lezen. Controleer of OsmAnd rechten heeft om het bestand van deze locatie te lezen.</string>
     <string name="distance_moving">Gecorrigeerde afstand</string>
-    <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automated Navigation Directions) is een kaart- en navigatieprogramma dat de vrije, wereldwijde en uitstekende OpenStreetMap (OSM) gegevens gebruikt. 
-\nMet akoestische en visuele navigatie, bekijk POI (points of interest), maak en beheer GPX-sporen, gebruik hoogtelijnen en hoogtegegevens, kies tussen auto, fiets en wandelen, bewerk OSM en veel meer. 
-\n
+    <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automated Navigation Directions) is een kaart- en navigatieprogramma dat de gratische, wereldwijde en uitgebreide OpenStreetMap (OSM) gegevens gebruikt. 
+\nMet akoestische en visuele navigatie, toont POI (points of interest), maakt en beheert GPX-sporen, gebruikt hoogtelijnen en hoogtegegevens, kiest tussen auto, fiets en wandelen, je kan OSM bewerken en veel meer. 
 \n 
-\nOsmAnd+ is de betaalde versie van de app. Met de aanschaf ondersteunt u het project, geeft geld voor het maken van nieuwe functies, en krijgt u de nieuwste functies. 
+\nOsmAnd+ is de betaalde versie van de app. Met de aanschaf ondersteunt u het project, het maken van nieuwe functies, en krijgt u de nieuwste functies. 
 \n 
 \nEen paar belangrijke functies:</string>
     <string name="osmand_plus_extended_description_part2">" Navigatie • werkt online (snel) of offline (zonder roaming-kosten in het buitenalnd) • gesproken stap-voor-stap navigatie (met opgenomen of synthetische stem) • optioneel met rijstrookaanduiding, straatnamen und geschatte aankomsttijd • tussenstops op de route • automatische herberekening bij het verlaten van de route • zoek op adres, soort (bijv.: restaurant, hotel, benzinepomp, museum) of geografische coördinaten "</string>
@@ -2657,7 +2656,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="nautical_render_descr">Zeekaartstijl. Hoofdpunten: boeien, vuurtorens, rivieren, vaargeulen en -markeringen, havens, bakens, dieptelijnen.</string>
     <string name="ski_map_render_descr">Skistijl. Hoofdpunten: toont pistes, skiliften en andere ski-gerelateerde elementen. Overige kaartelementen zijn minder afleidend.</string>
     <string name="light_rs_render_descr">Eenvoudige en contrastrijke stijl voor autonavigatie. Zacht voor de ogen in nachtmodus. Hoofdpunten: hoogtelijnen, contrasterende wegen in oranje stijl, overige kaartelementen zijn minder afleidend.</string>
-    <string name="topo_render_descr">Contrastrijke stijl vooral ontworpen voor wandelen en fietsen in de natuur. Goede leesbaarheid bij complex buitenlicht. Hoofdpunten: Contrasterende wegen en natuurlijke objecten, verschillende soorten routes, hoogtelijnen met geavanceerde instellingen, meer details dan de standaardstijl op dezelfde zoomniveaus. Met de optie voor wegoppervlakken kan onderscheid worden gemaakt in de kwaliteit van de wegverharding. Geen nachtmodus.</string>
+    <string name="topo_render_descr">Voor wandelaars, trektochten en fietsenrs in de natuur. Buiten goed leesbaar. Contrasterende wegen en natuurlijke objecten, verschillende routetypen, geavanceerde hoogtelijn opties, extra details. Aanpassing van de oppervlakte-integriteit onderscheidt de kwaliteit van de weg. Geen nachtmodus.</string>
     <string name="mapnik_render_descr">Oude \'Mapnik\'-standaardstijl. Hoofdpunten: kleuren vergelijkbaar met de \'Mapnik\'-stijl.</string>
     <string name="touring_view_render_descr">Hoog contrast en maximaal detail, bevat alle opties van de standaardstijl van OsmAnd. Duidelijk onderscheid tussen wegtypes.
 \nGeschikt voor dag, nacht en outdoor gebruik.</string>
@@ -2773,7 +2772,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="routing_attr_avoid_train_name">Geen treinen</string>
     <string name="routing_attr_avoid_train_description">Vermijd treinen</string>
     <string name="routing_attr_avoid_subway_name">Geen metro</string>
-    <string name="routing_attr_avoid_subway_description">Vermijd de metro en sneltram transport e.d.</string>
+    <string name="routing_attr_avoid_subway_description">Vermijd de metro en sneltram</string>
     <string name="routing_attr_avoid_ferry_name">Geen veerboten</string>
     <string name="routing_attr_avoid_ferry_description">Vermijd veerboten</string>
     <string name="shared_string_degrees">Graden</string>
@@ -2869,7 +2868,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="intermediate_destinations">Tussenbestemmingen</string>
     <string name="arrive_at_time">Aankomst om %1$s</string>
     <string name="shared_string_launch">Open</string>
-    <string name="quick_action_switch_day_night_descr">Tik deze knop om te wisselen tussen de Osmand dag en nacht modus</string>
+    <string name="quick_action_switch_day_night_descr">Tik deze knop om te wisselen tussen de OsmAnd dag en nacht modus.</string>
     <string name="quick_action_switch_day_mode">Dag modus</string>
     <string name="quick_action_switch_night_mode">Nacht modus</string>
     <string name="quick_action_day_night_switch_mode">Wissel tussen dag/nacht modus</string>
@@ -3105,7 +3104,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="general_settings_profile_descr">App thema, eenheden, regio</string>
     <string name="screen_alerts_descr">Meldingen worden linksonder weergegeven tijdens het navigeren.</string>
     <string name="language_and_output">Taal en output</string>
-    <string name="manage_profiles">Profielen beheren…</string>
+    <string name="manage_profiles">App profielen beheren…</string>
     <string name="osmand_settings_descr">Effectief voor de gehele app</string>
     <string name="turn_screen_on">Scherm inschakelen</string>
     <string name="map_during_navigation_info">Kaart tijdens navigatie</string>
@@ -3136,14 +3135,15 @@ voor Gebied: %1$s x %2$s</string>
     <string name="shared_string_by_default">Standaard</string>
     <string name="app_mode_utv">Zij aan zij</string>
     <string name="shared_string_maps">Kaarten</string>
-    <string name="quick_action_contour_lines_descr">Tik om de hoogtelijnen in- of uit te schakelen.</string>
+    <string name="quick_action_contour_lines_descr">Tik om de hoogtelijnen in of uit te schakelen.</string>
     <string name="quick_action_contour_lines_show">Toon de hoogtelijnen</string>
     <string name="quick_action_contour_lines_hide">Verberg de hoogtelijnen</string>
     <string name="quick_action_show_hide_contour_lines">Toon/verberg de hoogtelijnen</string>
-    <string name="quick_action_hillshade_descr">Tik om de reliëflaag in- of uit te schakelen.</string>
+    <string name="quick_action_hillshade_descr">Tik om de reliëflaag in of uit te schakelen.</string>
     <string name="quick_action_hillshade_show">Toon de reliëflaag</string>
     <string name="quick_action_hillshade_hide">Verberg de reliëflaag</string>
     <string name="quick_action_show_hide_hillshade">Toon/verberg de reliëflaag</string>
     <string name="track_saved">Track opgeslagen</string>
-    <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Toon knooppunt van de fietsroutes</string>
+    <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Toon knooppunten netwerk voor fietsroutes</string>
+    <string name="contour_lines_and_hillshade">Hoogte lijnen en reliëflaag</string>
 </resources>

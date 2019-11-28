@@ -4,7 +4,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
 import net.osmand.data.QuadPoint;
@@ -80,8 +79,6 @@ public class MapUtils {
 		// not very accurate computation on sphere but for distances < 1000m it is ok
 		double mDist = (fromLat - toLat) * (fromLat - toLat) + (fromLon - toLon) * (fromLon - toLon);
 		double projection = scalarMultiplication(fromLat, fromLon, toLat, toLon, lat, lon);
-		double prlat;
-		double prlon;
 		if (projection < 0) {
 			return 0;
 		} else if (projection >= mDist) {

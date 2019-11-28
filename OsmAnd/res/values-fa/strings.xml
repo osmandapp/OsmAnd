@@ -3437,4 +3437,5 @@
     <string name="clear_confirmation_msg">%1$s پاک‌سازی شود؟</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_name">شبکه‌های گره</string>
     <string name="shared_string_turn_off">خاموش</string>
+    <string name="join_segments">پیوند پاره‌ها</string>
 </resources>

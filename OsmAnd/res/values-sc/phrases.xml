@@ -3755,4 +3755,13 @@
     <string name="poi_bath_type_foot_bath">Pedilùviu</string>
     <string name="poi_bath_open_air_yes">Eja</string>
     <string name="poi_bath_open_air_no">Nono</string>
+    <string name="poi_monastery_type_monastics">Casta de monastèriu: mòngios</string>
+    <string name="poi_monastery_type_convent">Casta de monastèriu: cumbentu</string>
+    <string name="poi_monastery_type_canonry">Casta de monastèriu: canonicadu</string>
+    <string name="poi_monastery_type_hermitage">Casta de monastèriu: èremu</string>
+    <string name="poi_monastery_type_clerks_regular">Casta de monastèriu: chièricos regulares</string>
+    <string name="poi_tourist_camp">Campu pro turistas</string>
+    <string name="poi_community_gender_female">Gènere de sa comunidade: fèminas</string>
+    <string name="poi_community_gender_male">Gènere de sa comunidade: òmines</string>
+    <string name="poi_community_gender_mixed">Gènere de sa comunidade: ambos</string>
 </resources>

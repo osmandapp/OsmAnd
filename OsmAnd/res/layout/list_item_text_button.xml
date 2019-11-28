@@ -5,26 +5,42 @@
               android:layout_height="wrap_content"
               android:background="?attr/bg_color"
               android:minHeight="54dp"
-              android:orientation="horizontal">
+              android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+    <LinearLayout
         android:layout_gravity="center_vertical"
-        android:layout_marginLeft="16dp"
-        android:layout_weight="1"
-        android:textAppearance="@style/TextAppearance.ListItemTitle"
-        tools:text="Some title text"/>
-
-    <android.support.v7.widget.AppCompatTextView
-        android:id="@+id/description"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center_vertical"
-        android:layout_margin="16dp"
-        android:gravity="center_vertical"
-        android:textColor="?colorAccent"
-        tools:text="topbar"/>
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginLeft="@dimen/content_padding"
+            android:layout_marginStart="@dimen/content_padding"
+            android:gravity="center_vertical"
+            android:textAppearance="@style/TextAppearance.ListItemTitle"
+            tools:text="Some title text"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/description"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/content_padding"
+            android:gravity="center_vertical"
+            android:textColor="?colorAccent"
+            tools:text="topbar"/>
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_marginStart="@dimen/content_padding"
+        android:layout_marginLeft="@dimen/content_padding"
+        android:background="?attr/dashboard_divider" />
 
 </LinearLayout>

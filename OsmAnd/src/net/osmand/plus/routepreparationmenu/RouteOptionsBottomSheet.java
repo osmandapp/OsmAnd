@@ -134,22 +134,22 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	private BaseBottomSheetItem createMuteSoundItem(final LocalRoutingParameter optionsItem) {
+		boolean active = !routingHelper.getVoiceRouter().isMuteForMode(applicationMode);
 		final BottomSheetItemWithCompoundButton[] muteSoundItem = new BottomSheetItemWithCompoundButton[1];
 		muteSoundItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
-				.setChecked(!routingHelper.getVoiceRouter().isMute())
+				.setChecked(active)
 				.setDescription(getString(R.string.voice_announcements))
-				.setIcon(getContentIcon((routingHelper.getVoiceRouter().isMute() ? optionsItem.getDisabledIconId() : optionsItem.getActiveIconId())))
+				.setIcon(getContentIcon(active ? optionsItem.getActiveIconId() : optionsItem.getDisabledIconId()))
 				.setTitle(getString(R.string.shared_string_sound))
 				.setLayoutId(R.layout.bottom_sheet_item_with_descr_and_switch_56dp)
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
 						routingOptionsHelper.addNewRouteMenuParameter(applicationMode, optionsItem);
-						boolean mt = !routingHelper.getVoiceRouter().isMute();
-						settings.VOICE_MUTE.set(mt);
-						routingHelper.getVoiceRouter().setMute(mt);
-						muteSoundItem[0].setChecked(!routingHelper.getVoiceRouter().isMute());
-						muteSoundItem[0].setIcon(getContentIcon((routingHelper.getVoiceRouter().isMute() ? optionsItem.getDisabledIconId() : optionsItem.getActiveIconId())));
+						boolean active = !routingHelper.getVoiceRouter().isMuteForMode(applicationMode);
+						routingHelper.getVoiceRouter().setMuteForMode(applicationMode, active);
+						muteSoundItem[0].setChecked(!active);
+						muteSoundItem[0].setIcon(getContentIcon(!active ? optionsItem.getActiveIconId() : optionsItem.getDisabledIconId()));
 						updateMenu();
 					}
 				})

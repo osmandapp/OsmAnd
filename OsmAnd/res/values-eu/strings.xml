@@ -2004,7 +2004,7 @@ mapak eta nabigazioa</string>
 \nOsmAnd aplikaziorako gehigarri berezi honek itsas nabigaziorako marka eta ikur kartografikoak gehitzen ditu  itsaso zabalean zein kostatik hurbil. Itsas nabigaziorako marka bakoitzak identifikaziorako eta esanahia ulertzeko datuak dauzka (kategoria, forma, kolorea, zenbakia, erreferentzia, eta abar)
 \n
 \nOsmAnden ohiko mapa batetara itzultzeko, gehigarri hau desgaitu edo \'Mapa estiloa\' aldatu \'Konfiguratu mapa\' menuan."</string>
-    <string name="fav_point_emoticons_message">"Gogokoaren izena 1$s-ra aldatu da  emotikonoak dituen katea fitxategi batera gorde ahal izateko."</string>
+    <string name="fav_point_emoticons_message">"Gogokoaren izena %1$s-ra aldatu da  emotikonoak dituen katea fitxategi batera gorde ahal izateko."</string>
     <string name="activate_seamarks_plugin">Aktibatu \'Itsas-mapa ikuspegia\'</string>
     <string name="plugin_ski_descr">Gehigarri honek zure eskura jartzen ditu mundu osoko eskiatzeko aldapak, fondoko eski zirkuituak, trabesiako eski ibilbideak, teleferikoak, eta abar. Ibilbideak eta pistak zailtasunaren arabera koloreztatu dira, eta elurtutako paisaiaren itxura duen \'Negu\' estiloko mapa batean adierazten dira.
 \n
@@ -3231,7 +3231,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="pref_selected_by_default_for_profiles">Ezarpen hau lehenetsita hautatuta dago profiletan: %s</string>
     <string name="change_default_settings">Aldatu lehenetsitako ezarpenak</string>
     <string name="discard_changes">Baztertu aldaketak</string>
-    <string name="apply_to_current_profile">"Aplikatu uneko  %1s profilari"</string>
+    <string name="apply_to_current_profile">"Aplikatu uneko  %1$s profilari"</string>
     <string name="apply_to_all_profiles">Aplikatu profil guztiei</string>
     <string name="start_up_message_pref">Hasierako mezua</string>
     <string name="analytics_pref_title">Analitikak</string>

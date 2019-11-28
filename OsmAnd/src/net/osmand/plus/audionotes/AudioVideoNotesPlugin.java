@@ -4,7 +4,6 @@ import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.ClipData;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -408,8 +407,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				Method saveAttributes = exClass.getMethod("saveAttributes", new Class[]{});
 				saveAttributes.invoke(exInstance);
 			} catch (Exception e) {
-				e.printStackTrace();
-				log.error(e);
+				log.error(e.getMessage(), e);
 			}
 		}
 
@@ -425,8 +423,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				Integer it = (Integer) getAttributeInt.invoke(exInstance, "Orientation", 1);
 				orientation = it;
 			} catch (Exception e) {
-				e.printStackTrace();
-				log.error(e);
+				log.error(e.getMessage(), e);
 			}
 			return orientation;
 		}
@@ -1136,7 +1133,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			try {
 				mediaRec.stop();
 			} catch (IllegalStateException e) {
-				e.printStackTrace();
+				log.error(e.getMessage(), e);
 			}
 			indexFile(true, mediaRecFile);
 			mediaRec.release();
@@ -1167,7 +1164,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 				} catch (Exception e) {
 					Toast.makeText(app, e.getMessage(), Toast.LENGTH_LONG).show();
-					e.printStackTrace();
+					log.error(e.getMessage(), e);
 					res = false;
 				}
 			}
@@ -1383,7 +1380,6 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 						closeRecordingMenu();
 						closeCamera();
 						finishRecording();
-						e.printStackTrace();
 					}
 				}
 
@@ -1418,7 +1414,6 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 								closeRecordingMenu();
 								closeCamera();
 								finishRecording();
-								e.printStackTrace();
 							}
 						}
 					});
@@ -1900,7 +1895,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			try {
 				ctx.startActivity(vint);
 			} catch (Exception e) {
-				e.printStackTrace();
+				log.error(e.getMessage(), e);
 			}
 			return;
 		} else if (r.isPhoto()) {
@@ -1908,7 +1903,11 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			vint.setDataAndType(AndroidUtils.getUriForFile(ctx, r.file), "image/*");
 			vint.setFlags(0x10000000);
 			vint.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-			ctx.startActivity(vint);
+			try {
+				ctx.startActivity(vint);
+			} catch (Exception e) {
+				log.error(e.getMessage(), e);
+			}
 			return;
 		}
 
@@ -2063,7 +2062,6 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				closeRecordingMenu();
 				closeCamera();
 				finishRecording();
-				e.printStackTrace();
 			}
 		}
 	}

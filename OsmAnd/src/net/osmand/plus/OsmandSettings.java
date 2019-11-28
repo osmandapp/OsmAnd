@@ -229,24 +229,31 @@ public class OsmandSettings {
 		return globalPreferences != null && globalPreferences.getBoolean(SETTING_CUSTOMIZED_ID, false);
 	}
 
-	public void migrateGlobalPrefsToProfile() {
-		SharedPreferences sharedPreferences = (SharedPreferences) globalPreferences;
-		Map<String, ?> map = sharedPreferences.getAll();
-		for (String key : map.keySet()) {
+	public void migratePreferences() {
+		SharedPreferences globalSharedPreferences = (SharedPreferences) globalPreferences;
+		Map<String, ?> globalPrefsMap = globalSharedPreferences.getAll();
+		for (String key : globalPrefsMap.keySet()) {
 			OsmandPreference pref = getPreference(key);
 			if (pref instanceof CommonPreference) {
 				CommonPreference commonPreference = (CommonPreference) pref;
 				if (!commonPreference.global) {
 					List<ApplicationMode> modes = commonPreference.general ? Collections.singletonList(ApplicationMode.DEFAULT) : ApplicationMode.allPossibleValues();
-					boolean valueSaved = false;
 					for (ApplicationMode mode : modes) {
 						if (!commonPreference.isSetForMode(mode)) {
-							valueSaved = setPreference(key, map.get(key), mode) || valueSaved;
+							setPreference(key, globalPrefsMap.get(key), mode);
 						}
 					}
-					if (valueSaved) {
-						settingsAPI.edit(globalPreferences).remove(key).commit();
-					}
+				}
+			}
+		}
+		SharedPreferences defaultProfilePreferences = (SharedPreferences) this.defaultProfilePreferences;
+		Map<String, ?> defaultPrefsMap = defaultProfilePreferences.getAll();
+		for (String key : defaultPrefsMap.keySet()) {
+			OsmandPreference pref = getPreference(key);
+			if (pref instanceof CommonPreference) {
+				CommonPreference commonPreference = (CommonPreference) pref;
+				if (commonPreference.global && !commonPreference.isSet()) {
+					setPreference(key, defaultPrefsMap.get(key));
 				}
 			}
 		}
@@ -1643,7 +1650,6 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> SHOW_NEARBY_FAVORITES = new BooleanPreference("show_nearby_favorites", false).makeProfile().cache();
 	public final OsmandPreference<Boolean> SHOW_NEARBY_POI = new BooleanPreference("show_nearby_poi", false).makeProfile().cache();
 
-	public final OsmandPreference<Boolean> SPEAK_ROUTING_ALARMS = new BooleanPreference("speak_routing_alarms", true).makeProfile().cache();
 	public final OsmandPreference<Boolean> SPEAK_STREET_NAMES = new BooleanPreference("speak_street_names", true).makeProfile().cache();
 	public final CommonPreference<Boolean> SPEAK_TRAFFIC_WARNINGS = new BooleanPreference("speak_traffic_warnings", true).makeProfile().cache();
 	{
@@ -3130,7 +3136,7 @@ public class OsmandSettings {
 
 	public final OsmandPreference<Boolean> USE_OSM_LIVE_FOR_PUBLIC_TRANSPORT = new BooleanPreference("enable_osmc_public_transport", false).makeGlobal();
 
-	public final OsmandPreference<Boolean> VOICE_MUTE = new BooleanPreference("voice_mute", false).makeGlobal();
+	public final OsmandPreference<Boolean> VOICE_MUTE = new BooleanPreference("voice_mute", false).makeProfile().cache();
 
 	// for background service
 	public final OsmandPreference<Boolean> MAP_ACTIVITY_ENABLED = new BooleanPreference("map_activity_enabled", false).makeGlobal();

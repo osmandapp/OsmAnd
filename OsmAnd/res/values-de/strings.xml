@@ -3170,7 +3170,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
 \n</string>
     <string name="app_mode_monowheel">Monowheel</string>
     <string name="app_mode_scooter">Motorroller</string>
-    <string name="precision_hdop_and_vdop">Horizontale Genauigkeit: %1s, vertikal: %2s</string>
+    <string name="precision_hdop_and_vdop">Horizontale Genauigkeit: %1$s, vertikal: %2$s</string>
     <string name="precision_hdop">Horizontale Genauigkeit: %s</string>
     <string name="routing_attr_allow_skating_only_name">Nur Skating-Routen zulassen</string>
     <string name="routing_attr_allow_skating_only_description">Nur für Freestyle oder Skating präparierte Routen, keine klassischen Loipen.</string>
@@ -3402,4 +3402,12 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="added_profiles_descr">Plugin fügt OsmAnd neues Profil hinzu</string>
     <string name="shared_string_turn_off">Ausschalten</string>
     <string name="new_plugin_added">Neues Plugin hinzugefügt</string>
+    <string name="quick_action_directions_from_desc">Eine Schaltfläche, um die Bildschirmmitte zum Ausgangspunkt zu machen und die Route zum Ziel zu berechnen oder einen Dialog zur Auswahl des Ziels zu öffnen, wenn sich der Zielmarker nicht auf der Karte befindet.</string>
+    <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Zeige Knotennetzwerk-Zyklus-Routen an</string>
+    <string name="download_map_dialog">Kartendialog herunterladen</string>
+    <string name="dialogs_and_notifications_title">Dialoge und Benachrichtigungen</string>
+    <string name="dialogs_and_notifications_descr">Steuern Sie Popups, Dialoge und Benachrichtigungen, die OsmAnd während der Nutzung anzeigt.</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_name">Knotennetzwerke</string>
+    <string name="suggested_maps_descr">Diese Karten sind für die Verwendung mit dem Plugin erforderlich</string>
+    <string name="join_segments">Segmente verbinden</string>
 </resources>

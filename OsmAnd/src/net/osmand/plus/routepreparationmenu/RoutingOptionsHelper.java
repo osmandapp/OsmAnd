@@ -95,9 +95,9 @@ public class RoutingOptionsHelper {
 
 	public void switchSound() {
 		RoutingHelper routingHelper = app.getRoutingHelper();
-		boolean mt = !routingHelper.getVoiceRouter().isMute();
-		settings.VOICE_MUTE.set(mt);
-		routingHelper.getVoiceRouter().setMute(mt);
+		ApplicationMode mode = routingHelper.getAppMode();
+		boolean mute = !routingHelper.getVoiceRouter().isMuteForMode(mode);
+		routingHelper.getVoiceRouter().setMuteForMode(mode, mute);
 	}
 
 	public void switchMusic() {

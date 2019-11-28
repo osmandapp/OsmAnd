@@ -278,7 +278,7 @@
     <string name="favorite_home_category">Ev</string>
     <string name="favorite_friends_category">Arkadaşlar</string>
     <string name="favorite_places_category">Yerler</string>
-    <string name="shared_string_name">Ad</string>
+    <string name="shared_string_name">İsim</string>
     <string name="favourites_edit_dialog_category">Kategori</string>
     <string name="shared_string_no_thanks">Hayır, teşekkürler</string>
     <string name="shared_string_download">İndir</string>
@@ -347,7 +347,7 @@
     <string name="first_time_continue">Sonra</string>
     <string name="search_poi_location">Sinyal bekleniyor…</string>
     <string name="transport_Routes">Rotalar</string>
-    <string name="shared_string_ok">Ok</string>
+    <string name="shared_string_ok">Tamam</string>
     <string name="shared_string_clear_all">Hepsini temizle</string>
     <string name="searching">Aranıyor…</string>
     <string name="searching_address">Adres aranıyor…</string>
@@ -779,7 +779,7 @@
     <string name="overlay_transparency">Katman şeffaflığı</string>
     <string name="internet_not_available">İnternet bağlantısı olmadan işlem yapılamıyor.</string>
     <string name="install_more">Daha fazla yükle…</string>
-    <string name="si_mi_feet">Mil/fit</string>
+    <string name="si_mi_feet">Mil/feet</string>
     <string name="mile_per_hour">mph</string>
     <string name="send_location_way_choose_title">Konumu paylaş</string>
     <string name="send_location_sms_pattern">Konum: %1$s\n%2$s</string>
@@ -1021,7 +1021,7 @@
     <string name="shared_string_manage">Yönet</string>
     <string name="shared_string_edit">Düzenle</string>
     <string name="shared_string_places">Yerler</string>
-    <string name="shared_string_search">Ara</string>
+    <string name="shared_string_search">Arama</string>
     <string name="shared_string_show_description">Açıklamayı göster.</string>
     <string name="shared_string_message">İleti</string>
     <string name="agps_data_last_downloaded">A-GPS verisi son indirilen: %1$s</string>
@@ -1085,7 +1085,7 @@
     <string name="shared_string_do_not_use">Kullanmayın</string>
     <string name="shared_string_enable">Etkinleştir</string>
     <string name="shared_string_disable">Devre dışı bırak</string>
-    <string name="shared_string_enabled">Aktif</string>
+    <string name="shared_string_enabled">Etkin</string>
     <string name="shared_string_disabled">Devre dışı</string>
     <string name="shared_string_selected">Seçili</string>
     <string name="shared_string_never">Hiçbir zaman</string>
@@ -1256,7 +1256,7 @@
     <string name="default_speed_system">Hız birimi</string>
     <string name="si_nm">Deniz mili</string>
     <string name="si_m_s">Metre/saniye</string>
-    <string name="si_min_km">Dakika / kilometre</string>
+    <string name="si_min_km">Dakika/kilometre</string>
     <string name="si_mph">Mil/saat</string>
     <string name="please_specify_poi_type_only_from_list">Lütfen doğru POI türünü belirtin veya bu aşamayı atlayın.</string>
     <string name="access_from_map_description">Menü düğmesi, menü yerine gösterge panelini başlatır</string>
@@ -1488,7 +1488,7 @@
     <string name="poi_filter_namefinder">Çevrimiçi Name Finder</string>
     <string name="reading_cached_tiles">Önbelleğe fayans okunuyor …</string>
     <string name="version_index_is_big_for_memory">Index \'\' {0} \'belleğe sığmadı</string>
-    <string name="si_mi_yard">Mil/yarda</string>
+    <string name="si_mi_yard">Mil/yard</string>
     <string name="yard">yd</string>
     <string name="foot">ft</string>
     <string name="mile">mi</string>
@@ -1656,11 +1656,11 @@
     <string name="srtm_plugin_disabled">Kontur hatları devre dışı</string>
     <string name="nm">nmi</string>
     <string name="si_kmh">Kilometre/saat</string>
-    <string name="si_min_m">Dakika / mil</string>
+    <string name="si_min_m">Dakika/mil</string>
     <string name="si_nm_h">Deniz mili/saat (knot)</string>
     <string name="nm_h">kn</string>
-    <string name="min_mile">dk/m</string>
-    <string name="min_km">dk/km</string>
+    <string name="min_mile">min/m</string>
+    <string name="min_km">min/km</string>
     <string name="m_s">m/s</string>
     <string name="shared_string_trip_recording">Seyahat kayıt</string>
     <string name="shared_string_navigation">Navigasyon</string>
@@ -1786,7 +1786,7 @@
     <string name="proxy_port_descr">Proxy\'nizin port numarasını belirtin (örn. 8118).</string>
     <string name="int_hour">h</string>
     <string name="index_tours">Turlar</string>
-    <string name="shared_string_all">Tüm</string>
+    <string name="shared_string_all">Tümü</string>
     <string name="shared_string_waypoints">Yol işaretleri</string>
     <string name="download_additional_maps">Eksik haritalar %1$s (%2$d MB) indirilsinmi?</string>
     <string name="rendering_value_browse_map_name">Haritaya göz at</string>
@@ -2092,7 +2092,7 @@
     <string name="use_location">Konumu kullan</string>
     <string name="today">Bugün</string>
     <string name="yesterday">Dün</string>
-    <string name="shared_string_install">Kur</string>
+    <string name="shared_string_install">Yükle</string>
     <string name="empty_state_osm_edits">OSM nesnesi oluştur veya değiştir</string>
     <string name="empty_state_osm_edits_descr">OSM POI\'leri oluşturun veya değiştirin, OSM Notları açın veya yorum ekleyin, ve kaydedilmiş GPX dosyalarını paylaşarak katkıda bulunun.</string>
     <string name="shared_string_deleted">Silindi</string>
@@ -2627,7 +2627,7 @@
 \n
 \n\'Ayarlar\' → \'Gizlilik ve Güvenlik\' bölümünde istediğiniz zaman yapılandırın.</string>
     <string name="downloaded_maps_collect_descr">Ülke ve bölge haritası popülaritesini anlamamıza yardımcı olur.</string>
-    <string name="privacy_and_security_change_descr">%1$\'lerimizi kabul ediyorsanız \"İzin Ver\"e dokunun</string>
+    <string name="privacy_and_security_change_descr">%1$s\'lerimizi kabul ediyorsanız \"İzin Ver\"e dokunun</string>
     <string name="nav_type_hint">Navigasyon türü</string>
     <string name="osmand_routing_promo">routing.xml dosyasının değiştirilmiş versiyonunu ..osmand/routing dizinine ekleyebilirsiniz</string>
     <string name="show_compass_ruler">Pusula cetvelini göster</string>

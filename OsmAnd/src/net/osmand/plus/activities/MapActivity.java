@@ -1707,6 +1707,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 					data.getPath() != null && data.getPath().startsWith("/go")) {
 				String lat = data.getQueryParameter("lat");
 				String lon = data.getQueryParameter("lon");
+				String url = data.getQueryParameter("url");
 				if (lat != null && lon != null) {
 					try {
 						double lt = Double.parseDouble(lat);
@@ -1719,6 +1720,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 						settings.setMapLocationToShow(lt, ln, z, new PointDescription(lt, ln));
 					} catch (NumberFormatException e) {
 						LOG.error("error", e);
+					}
+				} else if (url != null) {
+					url = DiscountHelper.parseUrl(app, url);
+					if (DiscountHelper.validateUrl(app, url)) {
+						DiscountHelper.openUrl(this, url);
 					}
 				}
 				setIntent(null);
@@ -1736,7 +1742,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 					data.getPath() != null && data.getPath().startsWith("/add-tile-source")) {
 				Map<String, String> attrs = new HashMap<>();
 				for (String name : data.getQueryParameterNames()) {
-					attrs.put(name, data.getQueryParameter(name));
+					String value = data.getQueryParameter(name);
+					if (value != null) {
+						attrs.put(name, value);
+					}
 				}
 				if (!attrs.isEmpty()) {
 					try {

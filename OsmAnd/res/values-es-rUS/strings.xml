@@ -3430,7 +3430,7 @@ Lon %2$s</string>
     <string name="quick_action_directions_from_desc">Un botón para centrar en la pantalla el punto de partida y calcular la ruta hacia el destino o abre un cuadro de diálogo para elegir el destino si el marcador no está en el mapa.</string>
     <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Mostrar nodo de la red de rutas ciclistas</string>
     <string name="clear_confirmation_msg">¿Borrar %1$s\?</string>
-    <string name="download_map_dialog">Descargar diálogo del mapa</string>
+    <string name="download_map_dialog">Diálogo de descarga del mapa</string>
     <string name="dialogs_and_notifications_title">Diálogos y notificaciones</string>
     <string name="dialogs_and_notifications_descr">Controla las ventanas emergentes, diálogos y notificaciones que OsmAnd muestra durante el uso.</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_name">Redes de nodos</string>
@@ -3440,4 +3440,5 @@ Lon %2$s</string>
     <string name="added_profiles_descr">El complemento añade un nuevo perfil a OsmAnd</string>
     <string name="shared_string_turn_off">Apagar</string>
     <string name="new_plugin_added">Nuevo complemento añadido</string>
+    <string name="join_segments">Unir segmentos</string>
 </resources>

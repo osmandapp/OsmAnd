@@ -49,7 +49,6 @@ public class VoiceRouter {
 	protected static CommandPlayer player;
 	protected final OsmandSettings settings;
 
-	private static boolean mute = false;
 	private static int currentStatus = STATUS_UNKNOWN;
 	private static boolean playedAndArriveAtTarget = false;
 	private static float playGoAheadDist = 0;
@@ -87,7 +86,6 @@ public class VoiceRouter {
 	VoiceRouter(RoutingHelper router, final OsmandSettings settings) {
 		this.router = router;
 		this.settings = settings;
-		mute = settings.VOICE_MUTE.get();
 	}
 	
 	public void setPlayer(CommandPlayer player) {
@@ -104,13 +102,21 @@ public class VoiceRouter {
 	public CommandPlayer getPlayer() {
 		return player;
 	}
-	
+
 	public void setMute(boolean mute) {
-		this.mute = mute;
+		settings.VOICE_MUTE.set(mute);
 	}
-	
+
+	public void setMuteForMode(ApplicationMode mode, boolean mute) {
+		settings.VOICE_MUTE.setModeValue(mode, mute);
+	}
+
 	public boolean isMute() {
-		return mute;
+		return settings.VOICE_MUTE.get();
+	}
+
+	public boolean isMuteForMode(ApplicationMode mode) {
+		return settings.VOICE_MUTE.getModeValue(mode);
 	}
 
 	private CommandBuilder getNewCommandPlayerToPlay() {
@@ -907,13 +913,11 @@ public class VoiceRouter {
 	}
 
 	private void play(CommandBuilder p) {
-		if (settings.SPEAK_ROUTING_ALARMS.get()) {
-			if (p != null) {
-				List<String> played = p.play();
-				notifyOnVoiceMessage(p.getListCommands(), played);
-			} else {
-				notifyOnVoiceMessage(Collections.EMPTY_LIST, Collections.EMPTY_LIST);
-			}
+		if (p != null) {
+			List<String> played = p.play();
+			notifyOnVoiceMessage(p.getListCommands(), played);
+		} else {
+			notifyOnVoiceMessage(Collections.EMPTY_LIST, Collections.EMPTY_LIST);
 		}
 	}
 
