@@ -3412,4 +3412,5 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="added_profiles_descr">Viðbótin bætir nýju sniði við OsmAnd</string>
     <string name="shared_string_turn_off">Slökkva</string>
     <string name="new_plugin_added">Nýrri viðbót bætt við</string>
+    <string name="join_segments">Sameina búta</string>
 </resources>
