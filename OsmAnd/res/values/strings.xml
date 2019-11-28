@@ -11,6 +11,8 @@
 	Thx - Hardy
 
 -->
+    <string name="reorder_profiles">Reorder</string>
+    <string name="selected_profile">Selected profile</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_name">Node networks</string>
     <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Show node network cycle routes</string>
     <string name="join_segments">Join segments</string>
