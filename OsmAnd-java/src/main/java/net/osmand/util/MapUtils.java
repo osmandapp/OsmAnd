@@ -411,7 +411,7 @@ public class MapUtils {
 		return rotate;
 	}
 	
-	public static float formatDegrees360(float degrees) {
+	public static float normalizeDegrees360(float degrees) {
 		while (degrees < 0.0f) {
 			degrees += 360.0f;
 		}

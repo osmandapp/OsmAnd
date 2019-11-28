@@ -187,7 +187,7 @@ public class GPXUtilities {
 		public double ele = Double.NaN;
 		public double speed = 0;
 		public double hdop = Double.NaN;
-		public float heading = -1.0f;
+		public float heading = Float.NaN;
 		public boolean deleted = false;
 		public int colourARGB = 0;                    // point colour (used for altitude/speed colouring)
 		public double distance = 0.0;                // cumulative distance, if in a track
@@ -1617,7 +1617,7 @@ public class GPXUtilities {
 			p.getExtensionsToWrite().put("speed", decimalFormat.format(p.speed));
 		}
 		if (p.heading >= 0) {
-			p.getExtensionsToWrite().put("heading", decimalFormat.format(p.heading));
+			p.getExtensionsToWrite().put("heading", String.valueOf(Math.round(p.heading)));
 		}
 		writeExtensions(serializer, p);
 	}

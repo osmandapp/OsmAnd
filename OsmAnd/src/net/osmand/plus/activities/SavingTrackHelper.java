@@ -56,6 +56,8 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	public final static String POINT_COL_CATEGORY = "category"; //$NON-NLS-1$
 	public final static String POINT_COL_DESCRIPTION = "description"; //$NON-NLS-1$
 	public final static String POINT_COL_COLOR = "color"; //$NON-NLS-1$
+	
+	public final static float DEFAULT_DEGREES = -1.0f;
 
 	public final static Log log = PlatformUtil.getLog(SavingTrackHelper.class);
 
@@ -409,7 +411,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	public void startNewSegment() {
 		lastTimeUpdated = 0;
 		lastPoint = null;
-		execWithClose(updateScript, new Object[] { 0, 0, 0, 0, 0, System.currentTimeMillis(), -1.0f});
+		execWithClose(updateScript, new Object[] { 0, 0, 0, 0, 0, System.currentTimeMillis(), DEFAULT_DEGREES});
 		addTrackPoint(null, true, System.currentTimeMillis());
 	}
 	
@@ -418,9 +420,9 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		long locationTime = System.currentTimeMillis();
 		OsmandSettings settings = ctx.getSettings();
 		if (heading != null && settings.CALCULATE_HEADING.get()) {
-			heading = MapUtils.formatDegrees360(heading);
+			heading = MapUtils.normalizeDegrees360(heading);
 		} else {
-			heading = -1.0f;
+			heading = DEFAULT_DEGREES;
 		}
 		boolean record = false;
 		if (location != null && OsmAndLocationProvider.isNotSimulatedLocation(location)) {
