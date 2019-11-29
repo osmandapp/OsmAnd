@@ -57,7 +57,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	public final static String POINT_COL_DESCRIPTION = "description"; //$NON-NLS-1$
 	public final static String POINT_COL_COLOR = "color"; //$NON-NLS-1$
 	
-	public final static float DEFAULT_DEGREES = -1.0f;
+	public final static float NO_HEADING = -1.0f;
 
 	public final static Log log = PlatformUtil.getLog(SavingTrackHelper.class);
 
@@ -411,7 +411,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	public void startNewSegment() {
 		lastTimeUpdated = 0;
 		lastPoint = null;
-		execWithClose(updateScript, new Object[] { 0, 0, 0, 0, 0, System.currentTimeMillis(), DEFAULT_DEGREES});
+		execWithClose(updateScript, new Object[] { 0, 0, 0, 0, 0, System.currentTimeMillis(), NO_HEADING});
 		addTrackPoint(null, true, System.currentTimeMillis());
 	}
 	
@@ -419,10 +419,10 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		// use because there is a bug on some devices with location.getTime()
 		long locationTime = System.currentTimeMillis();
 		OsmandSettings settings = ctx.getSettings();
-		if (heading != null && settings.CALCULATE_HEADING.get()) {
+		if (heading != null && settings.SAVE_HEADING_TO_GPX.get()) {
 			heading = MapUtils.normalizeDegrees360(heading);
 		} else {
-			heading = DEFAULT_DEGREES;
+			heading = NO_HEADING;
 		}
 		boolean record = false;
 		if (location != null && OsmAndLocationProvider.isNotSimulatedLocation(location)) {

@@ -152,7 +152,7 @@ public class SettingsMonitoringActivity extends SettingsBaseActivity {
 				R.string.auto_split_recording_descr));
 		cat.addPreference(createCheckBoxPreference(settings.DISABLE_RECORDING_ONCE_APP_KILLED, R.string.disable_recording_once_app_killed,
 				R.string.disable_recording_once_app_killed_descrp));
-		cat.addPreference(createCheckBoxPreference(settings.CALCULATE_HEADING, R.string.calculate_heading,
+		cat.addPreference(createCheckBoxPreference(settings.SAVE_HEADING_TO_GPX, R.string.calculate_heading,
 				R.string.calculate_heading_descr));
 
 		Integer[] intValues = new Integer[]{REC_DIRECTORY, MONTHLY_DIRECTORY, DAILY_DIRECTORY};
