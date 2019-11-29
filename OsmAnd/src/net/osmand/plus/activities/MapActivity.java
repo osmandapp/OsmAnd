@@ -1773,7 +1773,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		return mapLayers;
 	}
 
-	public static void launchMapActivityMoveToTop(Context activity, Bundle intentParams) {
+	public static void launchMapActivityMoveToTop(Context activity, Bundle oldIntentParams, Uri newIntentData) {
 		if (activity instanceof MapActivity) {
 			if (((MapActivity) activity).getDashboard().isVisible()) {
 				((MapActivity) activity).getDashboard().hideDashboard();
@@ -1785,9 +1785,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				Intent intent = ((Activity) activity).getIntent();
 				if (intent != null) {
 					prevActivityIntent = new Intent(intent);
-					if (intentParams != null) {
-						prevActivityIntent.putExtra(INTENT_PARAMS, intentParams);
-						prevActivityIntent.putExtras(intentParams);
+					if (oldIntentParams != null) {
+						prevActivityIntent.putExtra(INTENT_PARAMS, oldIntentParams);
+						prevActivityIntent.putExtras(oldIntentParams);
 					}
 					prevActivityIntent.putExtra(INTENT_KEY_PARENT_MAP_ACTIVITY, true);
 				} else {
@@ -1801,12 +1801,16 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			Intent newIntent = new Intent(activity, ((OsmandApplication) activity.getApplicationContext())
 					.getAppCustomization().getMapActivity());
 			newIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_CLEAR_TOP | additionalFlags);
+			if (newIntentData != null) {
+				newIntent.setAction(Intent.ACTION_VIEW);
+				newIntent.setData(newIntentData);
+			}
 			activity.startActivity(newIntent);
 		}
 	}
 
 	public static void launchMapActivityMoveToTop(Context activity) {
-		launchMapActivityMoveToTop(activity, null);
+		launchMapActivityMoveToTop(activity, null, null);
 	}
 
 	public static void clearPrevActivityIntent() {

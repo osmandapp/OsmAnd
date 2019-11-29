@@ -263,7 +263,7 @@ public class FavoritesActivity extends TabActivity {
 		OsmandApplication app = (OsmandApplication) activity.getApplication();
 		app.getSettings().setMapLocationToShow(latitude, longitude, zoom, pointDescription, addToHistory, toShow);
 		if (fragment != null) {
-			MapActivity.launchMapActivityMoveToTop(activity, fragment.storeState());
+			MapActivity.launchMapActivityMoveToTop(activity, fragment.storeState(), null);
 		} else {
 			MapActivity.launchMapActivityMoveToTop(activity);
 		}

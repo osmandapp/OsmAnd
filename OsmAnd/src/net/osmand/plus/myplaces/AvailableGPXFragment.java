@@ -707,7 +707,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment implement
 				settings.setMapLocationToShow(loc.lat, loc.lon, settings.getLastKnownMapZoom());
 				e = false;
 				app.getSelectedGpxHelper().setGpxFileToDisplay(info.gpx);
-				MapActivity.launchMapActivityMoveToTop(getActivity(), storeState());
+				MapActivity.launchMapActivityMoveToTop(getActivity(), storeState(), null);
 			}
 		}
 		if (e) {
