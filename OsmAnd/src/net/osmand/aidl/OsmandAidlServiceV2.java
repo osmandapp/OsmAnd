@@ -24,6 +24,7 @@ import net.osmand.aidlapi.copyfile.CopyFileParams;
 import net.osmand.aidlapi.customization.CustomizationInfoParams;
 import net.osmand.aidlapi.customization.OsmandSettingsInfoParams;
 import net.osmand.aidlapi.customization.OsmandSettingsParams;
+import net.osmand.aidlapi.customization.ProfileSettingsParams;
 import net.osmand.aidlapi.customization.SetWidgetsParams;
 import net.osmand.aidlapi.favorite.AFavorite;
 import net.osmand.aidlapi.favorite.AddFavoriteParams;
@@ -1208,6 +1209,17 @@ public class OsmandAidlServiceV2 extends Service implements AidlCallbackListener
 			try {
 				OsmandAidlApi api = getApi("removeAllActiveMapMarkers");
 				return api != null && api.removeAllActiveMapMarkers();
+			} catch (Exception e) {
+				handleException(e);
+				return false;
+			}
+		}
+
+		@Override
+		public boolean importProfile(ProfileSettingsParams params) {
+			try {
+				OsmandAidlApi api = getApi("importProfile");
+				return api != null && api.importProfile(params.getProfileSettingsUri(), params.getLatestChanges(), params.getVersion());
 			} catch (Exception e) {
 				handleException(e);
 				return false;
