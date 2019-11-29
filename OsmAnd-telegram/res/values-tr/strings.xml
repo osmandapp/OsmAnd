@@ -58,4 +58,13 @@
     <string name="shared_string_start">Başlangıç</string>
     <string name="set_time_timeline_descr">Görüntülemek için zaman seçin</string>
     <string name="start_end_date">Başlangıç — Bitiş tarihi</string>
+    <string name="timeline_no_data_descr">Seçilen gün için toplanan veri yok</string>
+    <string name="timeline_no_data">Veri yok</string>
+    <string name="min_logging_distance">Minimum kayıt mesafesi</string>
+    <string name="min_logging_distance_descr">Filtre: yeni bir nokta kaydetmek için minimum mesafe</string>
+    <string name="min_logging_accuracy">Minimum kayıt hassasiyeti</string>
+    <string name="min_logging_accuracy_descr">Filtre: hassasiyete ulaşılmadığı sürece kaydetme yok</string>
+    <string name="min_logging_speed">Minimum kayıt hızı</string>
+    <string name="min_logging_speed_descr">Filtre: seçili hızın altında kaydetme yok</string>
+    <string name="gpx_settings">GPX ayarları</string>
 </resources>

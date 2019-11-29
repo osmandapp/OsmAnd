@@ -435,7 +435,7 @@ Er is nu {2} MB beschikbaar</string>
     <string name="route_head">Volg</string>
     <string name="first_time_continue">Ga door</string>
     <string name="first_time_download">Download regio\'s</string>
-    <string name="first_time_msg">"Bedankt voor het gebruik van OsmAnd. Download regionale gegevens voor offline gebruik via \'Kaarten downloaden\' daarna kan je de kaarten bekijken, adressen en  POI\'s opzoeken, openbaar vervoer raadplegen en nog veel meer."</string>
+    <string name="first_time_msg">Bedankt voor het gebruik van OsmAnd. Download regionale gegevens voor offline gebruik via \'Kaarten downloaden\' daarna kan je de kaarten bekijken, adressen en POI\'s opzoeken, openbaar vervoer raadplegen en nog veel meer.</string>
     <string name="search_poi_location">Naar signaal zoeken…</string>
     <string name="search_near_map">Zoek bij het midden van de kaart</string>
     <string name="search_nearby">Zoek dichtbij</string>
@@ -2274,9 +2274,11 @@ voor Gebied: %1$s x %2$s</string>
     <string name="routing_attr_allow_private_description">Ga ook over privé-terreinen.</string>
     <string name="display_zoom_level">Zoomniveau weergave: %1$s</string>
     <string name="route_is_too_long_v2">Deze route is misschien te lang. Voeg tussenpunten toe als binnen 10 minuten geen route berekend is.</string>
-    <string name="osmand_extended_description_part1">"OsmAnd (OSM, Automated Navigation Directions) is een kaart- en navigatieprogramma dat de gratische, wereldwijde en gedetailleerde OpenStreetMap (OSM) data gebruikt. 
-\n 
-\nGebruikt visuele en gesproken navigatie, toont POI\'s (point of interest), maakt en volgt GPX-tracks, toont hoogtelijnen en hoogte informatie (via plug-in), kiest tussen auto, fiets,  wandelen of andere, je kan de OSM-kaart bewerken en nog veel meer."</string>
+    <string name="osmand_extended_description_part1">OsmAnd (OSM, Automated Navigation Directions) is een kaart- en navigatieprogramma dat de gratis, wereldwijde en gedetailleerde OpenStreetMap (OSM) data gebruikt. 
+\n
+\n
+\n
+\nGebruikt visuele en gesproken navigatie, toont POI\'s (point of interest), maakt en volgt GPX-tracks, toont hoogtelijnen en hoogte informatie (via plug-in), kiest tussen auto, fiets, wandelen of andere, je kan de OSM-kaart bewerken en nog veel meer.</string>
     <string name="osmand_extended_description_part2">"
  GPS-navigatie
 • Offline (geen datakosten) of online (snellere) routeberekening
@@ -2355,11 +2357,11 @@ voor Gebied: %1$s x %2$s</string>
     <string name="shared_string_permissions">Rechten</string>
     <string name="import_gpx_failed_descr">OsmAnd kan het bestand niet lezen. Controleer of OsmAnd rechten heeft om het bestand van deze locatie te lezen.</string>
     <string name="distance_moving">Gecorrigeerde afstand</string>
-    <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automated Navigation Directions) is een kaart- en navigatieprogramma dat de gratische, wereldwijde en uitgebreide OpenStreetMap (OSM) gegevens gebruikt. 
+    <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automated Navigation Directions) is een kaart- en navigatieprogramma dat de gratis, wereldwijde en uitgebreide OpenStreetMap (OSM) gegevens gebruikt. 
 \nMet akoestische en visuele navigatie, toont POI (points of interest), maakt en beheert GPX-sporen, gebruikt hoogtelijnen en hoogtegegevens, kiest tussen auto, fiets en wandelen, je kan OSM bewerken en veel meer. 
-\n 
+\n
 \nOsmAnd+ is de betaalde versie van de app. Met de aanschaf ondersteunt u het project, het maken van nieuwe functies, en krijgt u de nieuwste functies. 
-\n 
+\n
 \nEen paar belangrijke functies:</string>
     <string name="osmand_plus_extended_description_part2">" Navigatie • werkt online (snel) of offline (zonder roaming-kosten in het buitenalnd) • gesproken stap-voor-stap navigatie (met opgenomen of synthetische stem) • optioneel met rijstrookaanduiding, straatnamen und geschatte aankomsttijd • tussenstops op de route • automatische herberekening bij het verlaten van de route • zoek op adres, soort (bijv.: restaurant, hotel, benzinepomp, museum) of geografische coördinaten "</string>
     <string name="osmand_plus_extended_description_part3">" kaart bekijken • positie en richting tonen • kaart richten volgens kompas of volgens beweging • bewaar plaatsen als favoriet • toon POIs (point of interest) in de buurt • toon specifieke online-kaarten, satellietbeelden (van Bing), overlays zoals GPX-sporen met rit-/routeinformatie und extra kaartlagen met instelbare transparantie • toon plaatsnamen in Engels, de taal van het land of phonetisch weergegeven "</string>
@@ -2507,7 +2509,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="empty_state_markers_active">Maak markeringen aan op de kaart!</string>
     <string name="shared_string_two">Twee</string>
     <string name="shared_string_one">Een</string>
-    <string name="active_markers_descr">Kies hoeveel richtingaanwijzers getoond worden.</string>
+    <string name="active_markers_descr">Kies hoeveel markeervlaggetjes getoond worden.</string>
     <string name="digits_quantity">Aantal decimalen</string>
     <string name="shared_string_right">Rechts</string>
     <string name="shared_string_left">Links</string>
@@ -2556,7 +2558,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="travel_card_download_descr">Download Wikivoyage-reisgidsen om artikelen te lezen over plaatsen wereldwijd, zonder internetverbinding.</string>
     <string name="update_is_available">"Update beschikbaar "</string>
     <string name="download_file">"Bestand downloaden "</string>
-    <string name="start_editing_card_image_text">De gratische wereldwijde reisgids die iedereen kan bewerken.</string>
+    <string name="start_editing_card_image_text">De gratis wereldwijde reisgids die iedereen kan bewerken.</string>
     <string name="welcome_to_open_beta_description">Reisgidsen zijn gebaseerd op Wikivoyage. Test gratis alle mogelijkheden tijdens de open beta-testfase. Hierna zijn de reisgidsen beschikbaar voor abonnees van OsmAnd Unlimited en OsmAnd+.</string>
     <string name="start_editing_card_description">"Je kunt artikelen bewerken op Wikivoyage.org. Deel jouw kennis, ervaringen, talent en interesses "</string>
     <string name="start_editing">"Begin met bewerken "</string>
@@ -2577,7 +2579,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="contour_lines_hillshade_maps">Kaarten met hoogtelijnen en reliëfschaduw</string>
     <string name="unlock_all_features">Alle mogelijkheden van OsmAnd gebruiken</string>
     <string name="purchase_dialog_title">Kies je aankoop</string>
-    <string name="purchase_dialog_travel_description">Kies een van onderstaande aankopen om Reisgids offline te gebruiken:</string>
+    <string name="purchase_dialog_travel_description">Kies een van onderstaande aankopen om de reisgids offline te gebruiken:</string>
     <string name="purchase_dialog_subtitle">Kies een passend product</string>
     <string name="shared_string_dont">Niet doen</string>
     <string name="shared_string_do">Doe</string>
@@ -2723,8 +2725,8 @@ voor Gebied: %1$s x %2$s</string>
     <string name="empty_state_markers_active_desc">Druk lang of kort op de kaart en tik vervolgens op de Markeervlaggetje knop.</string>
     <string name="empty_state_markers_groups_desc">Importeer een Groep Favorieten of routepunten als Markeervlaggetjes.</string>
     <string name="empty_state_markers_history_desc">Markeervlaggetjes die niet actief zijn, verschijnen op dit scherm.</string>
-    <string name="show_guide_line_descr">Toon rechte lijnen van je positie naar de actieve Markeervlaggetjes.</string>
-    <string name="show_arrows_descr">Toon een of twee pijlen in de richting van de actieve Markeervlaggetjes.</string>
+    <string name="show_guide_line_descr">Toon rechte lijnen van je positie naar de actieve markeervlaggetjes.</string>
+    <string name="show_arrows_descr">Toon een of twee pijlen in de richting van de actieve markeervlaggetjes.</string>
     <string name="waypoints_added_to_map_markers">Routepunten toegevoegd aan Markeervlaggetjes</string>
     <string name="access_intermediate_arrival_time">Aankomsttijd tussenpunt</string>
     <string name="map_widget_intermediate_time">Tijd tot tussenpunt</string>
@@ -2777,7 +2779,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="routing_attr_avoid_ferry_description">Vermijd veerboten</string>
     <string name="shared_string_degrees">Graden</string>
     <string name="shared_string_milliradians">Milliradialen</string>
-    <string name="angular_measeurement_descr">Wijzig azimuth meet formaat.</string>
+    <string name="angular_measeurement_descr">Wijzig azimut eenheid</string>
     <string name="avoid_pt_types_descr">Selecteer de te vermijden openbaar vervoer opties:</string>
     <string name="quick_action_day_night_mode">%s modus</string>
     <string name="avoid_pt_types">Vermijd transport types…</string>
@@ -2944,7 +2946,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="navigate_point_format_olc">Open Locatie Code</string>
     <string name="coordinates_format_info">Het geselecteerde formaat wordt toegepast op alle plekken in de app.</string>
     <string name="pref_selected_by_default_for_profiles">Deze instelling is standaard geselecteerd voor alle profielen: %s</string>
-    <string name="change_default_settings">Pas de standaardinstellingen aan</string>
+    <string name="change_default_settings">Instelling aanpassen</string>
     <string name="discard_changes">Annuleren</string>
     <string name="apply_to_current_profile">Pas alleen toe op \"%1$s\"</string>
     <string name="apply_to_all_profiles">Toepassen op alle profielen</string>
