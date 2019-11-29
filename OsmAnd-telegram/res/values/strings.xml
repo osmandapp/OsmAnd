@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="saved_messages">Saved messages</string>
     <string name="shared_string_end">End</string>
     <string name="shared_string_start">Start</string>
     <string name="shared_string_apply">Apply</string>

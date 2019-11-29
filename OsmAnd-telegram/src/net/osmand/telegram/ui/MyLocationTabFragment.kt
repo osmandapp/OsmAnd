@@ -489,7 +489,6 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 	private fun updateList() {
 		val items: MutableList<TdApi.Object> = mutableListOf()
 		val chats: MutableList<TdApi.Chat> = mutableListOf()
-		val currentUser = telegramHelper.getCurrentUser()
 		val contacts = telegramHelper.getContacts()
 		val chatList = if (sharingMode) {
 			settings.getShareLocationChats()
@@ -501,10 +500,6 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 			if (chat != null) {
 				if (!sharingMode && settings.isSharingLocationToChat(chatId)) {
 					continue
-				} else if (telegramHelper.isPrivateChat(chat)) {
-					if ((chat.type as TdApi.ChatTypePrivate).userId == currentUser?.id) {
-						continue
-					}
 				}
 				chats.add(chat)
 			}
@@ -512,9 +507,8 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 		items.addAll(chats)
 		if (!sharingMode) {
 			for (user in contacts.values) {
-				val containsInChats =
-					chats.any { telegramHelper.getUserIdFromChatType(it.type) == user.id }
-				if ((!sharingMode && settings.isSharingLocationToUser(user.id)) || user.id == currentUser?.id || containsInChats) {
+				val containsInChats = chats.any { telegramHelper.getUserIdFromChatType(it.type) == user.id }
+				if ((!sharingMode && settings.isSharingLocationToUser(user.id)) || containsInChats) {
 					continue
 				}
 				items.add(user)
@@ -606,9 +600,18 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 
 			TelegramUiHelper.setupPhoto(app, holder.icon, photoPath, placeholderId, false)
 
+			val currentUserId = telegramHelper.getCurrentUserId()
 			val title = when (item) {
-				is TdApi.Chat -> item.title
-				is TdApi.User -> TelegramUiHelper.getUserName(item)
+				is TdApi.Chat -> {
+					if (telegramHelper.isPrivateChat(item) && (item.type as TdApi.ChatTypePrivate).userId == currentUserId) {
+						getString(R.string.saved_messages)
+					} else {
+						item.title
+					}
+				}
+				is TdApi.User -> {
+					if (item.id == currentUserId) getString(R.string.saved_messages) else TelegramUiHelper.getUserName(item)
+				}
 				else -> null
 			}
 

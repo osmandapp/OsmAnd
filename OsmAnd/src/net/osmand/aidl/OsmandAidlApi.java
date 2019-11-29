@@ -54,6 +54,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.SQLiteTileSource;
+import net.osmand.plus.SettingsHelper;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
@@ -2205,6 +2206,17 @@ public class OsmandAidlApi {
 
 	private Map<String, FileCopyInfo> copyFilesCache = new ConcurrentHashMap<>();
 
+	public boolean importProfile(final Uri profileUri, String latestChanges, int version) {
+		if (profileUri != null) {
+			Bundle bundle = new Bundle();
+			bundle.putString(SettingsHelper.SETTINGS_LATEST_CHANGES_KEY, latestChanges);
+			bundle.putInt(SettingsHelper.SETTINGS_VERSION_KEY, version);
+
+			MapActivity.launchMapActivityMoveToTop(app, null, profileUri, bundle);
+			return true;
+		}
+		return false;
+	}
 
 	private class FileCopyInfo {
 		long startTime;
