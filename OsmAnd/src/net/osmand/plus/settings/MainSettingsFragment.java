@@ -37,10 +37,6 @@ public class MainSettingsFragment extends BaseSettingsFragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		allAppModes = new ArrayList<>(ApplicationMode.allPossibleValues());
-		allAppModes.remove(ApplicationMode.DEFAULT);
-		availableAppModes = new LinkedHashSet<>(ApplicationMode.values(getMyApplication()));
-		availableAppModes.remove(ApplicationMode.DEFAULT);
 	}
 
 	@Override
@@ -51,6 +47,10 @@ public class MainSettingsFragment extends BaseSettingsFragment {
 
 	@Override
 	protected void setupPreferences() {
+		allAppModes = new ArrayList<>(ApplicationMode.allPossibleValues());
+		allAppModes.remove(ApplicationMode.DEFAULT);
+		availableAppModes = new LinkedHashSet<>(ApplicationMode.values(getMyApplication()));
+		availableAppModes.remove(ApplicationMode.DEFAULT);
 		Preference globalSettings = findPreference("global_settings");
 		globalSettings.setIcon(getContentIcon(R.drawable.ic_action_settings));
 		PreferenceCategory selectedProfile = (PreferenceCategory) findPreference(SELECTED_PROFILE);

@@ -20,6 +20,7 @@ import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceGroupAdapter;
 import android.support.v7.preference.SwitchPreferenceCompat;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -84,29 +85,56 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 	protected void createToolbar(LayoutInflater inflater, View view) {
 		super.createToolbar(inflater, view);
 
-		TextView toolbarTitle = (TextView) view.findViewById(R.id.profile_title);
+		TextView toolbarTitle = view.findViewById(R.id.toolbar_title);
 		toolbarTitle.setTypeface(FontCache.getRobotoMedium(view.getContext()));
-
+		toolbarTitle.setText(getSelectedAppMode().toHumanString(getContext()));
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 			float letterSpacing = AndroidUtils.getFloatValueFromRes(view.getContext(), R.dimen.title_letter_spacing);
 			toolbarTitle.setLetterSpacing(letterSpacing);
 		}
-		TextView profileType = (TextView) view.findViewById(R.id.profile_type);
-		profileType.setVisibility(View.VISIBLE);
+
+		TextView toolbarSubtitle = view.findViewById(R.id.toolbar_subtitle);
+		toolbarSubtitle.setText(R.string.configure_profile);
+		toolbarSubtitle.setVisibility(View.VISIBLE);
+
+		view.findViewById(R.id.toolbar_switch_container).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				ApplicationMode selectedMode = getSelectedAppMode();
+				List<ApplicationMode> availableAppModes = ApplicationMode.values(getMyApplication());
+				boolean isChecked = availableAppModes.contains(selectedMode);
+				if (!isChecked) {
+					availableAppModes.add(selectedMode);
+				} else {
+					availableAppModes.remove(selectedMode);
+				}
+				ApplicationMode.changeProfileAvailability(selectedMode, !isChecked, getMyApplication());
+				updateToolbarSwitch();
+			}
+		});
+	}
+
+	private void updateToolbarSwitch() {
+		View view = getView();
+		if (view == null) {
+			return;
+		}
+		boolean isChecked = ApplicationMode.values(getMyApplication()).contains(getSelectedAppMode());
+		int color = isChecked ? getActiveProfileColor() : ContextCompat.getColor(app, R.color.preference_top_switch_off);
+		View switchContainer = view.findViewById(R.id.toolbar_switch_container);
+		AndroidUtils.setBackground(switchContainer, new ColorDrawable(color));
+
+		SwitchCompat switchView = switchContainer.findViewById(R.id.switchWidget);
+		switchView.setChecked(isChecked);
+
+		TextView title = switchContainer.findViewById(R.id.switchButtonText);
+		title.setText(isChecked ? R.string.shared_string_on : R.string.shared_string_off);
 	}
 
 	@Override
 	protected void updateToolbar() {
 		super.updateToolbar();
-
-		View view = getView();
-		if (view != null) {
-			ApplicationMode selectedMode = getSelectedAppMode();
-			String appModeType = getAppModeDescription(view.getContext(), selectedMode);
-
-			TextView profileType = (TextView) view.findViewById(R.id.profile_type);
-			profileType.setText(appModeType);
-		}
+		updateToolbarSwitch();
 	}
 
 	private RecyclerView.ItemDecoration createDividerItemDecoration() {
