@@ -344,7 +344,8 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 				pt.hdop = query.getDouble(4);
 				long time = query.getLong(5);
 				pt.time = time;
-				pt.heading = query.getFloat(6);
+				float heading = query.getFloat(6);
+				pt.heading = heading == NO_HEADING ? Float.NaN : heading;
 				long currentInterval = Math.abs(time - previousTime);
 				boolean newInterval = pt.lat == 0 && pt.lon == 0;
 				
@@ -475,6 +476,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 			lastPoint = new LatLon(lat, lon);
 		}
 		lastTimeUpdated = time;
+		heading = heading == NO_HEADING ? Float.NaN : heading;
 		WptPt pt = new GPXUtilities.WptPt(lat, lon, time, alt, speed, hdop, heading);
 		addTrackPoint(pt, newSegment, time);
 		trkPoints++;

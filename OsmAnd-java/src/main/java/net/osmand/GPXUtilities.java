@@ -240,7 +240,7 @@ public class GPXUtilities {
 		}
 
 		public WptPt(double lat, double lon, long time, double ele, double speed, double hdop) {
-			this(lat, lon, time, ele, speed, hdop, -1.0f);
+			this(lat, lon, time, ele, speed, hdop, Float.NaN);
 		}
 
 		public WptPt(double lat, double lon, long time, double ele, double speed, double hdop, float heading) {
@@ -1616,7 +1616,7 @@ public class GPXUtilities {
 		if (p.speed > 0) {
 			p.getExtensionsToWrite().put("speed", decimalFormat.format(p.speed));
 		}
-		if (p.heading >= 0) {
+		if (!Float.isNaN(p.heading)) {
 			p.getExtensionsToWrite().put("heading", String.valueOf(Math.round(p.heading)));
 		}
 		writeExtensions(serializer, p);
