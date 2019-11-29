@@ -101,7 +101,7 @@ public class MainSettingsFragment extends BaseSettingsFragment {
 	}
 
 	private void setupConfigureProfilePref() {
-		ApplicationMode selectedMode = getSelectedAppMode();
+        ApplicationMode selectedMode = app.getSettings().APPLICATION_MODE.get();
 		String title = selectedMode.toHumanString(getContext());
 		String profileType = getAppModeDescription(getContext(), selectedMode);
 		int iconRes = selectedMode.getIconRes();

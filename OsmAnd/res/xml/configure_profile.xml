@@ -8,8 +8,7 @@
 		android:key="configure_profile_info"
 		android:layout="@layout/preference_info_descr"
 		android:persistent="false"
-		android:selectable="false"
-		android:title="@string/configure_profile_info" />
+		android:selectable="false"/>
 
 	<Preference
 		android:key="general_settings"
@@ -44,6 +43,14 @@
 		android:summary="@string/edit_profile_screen_options_subtitle"
 		android:title="@string/map_widget_config"
 		tools:icon="@drawable/ic_configure_screen_dark" />
+
+	<Preference
+		android:key="profile_appearance"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		android:summary="@string/choose_icon_color_name"
+		android:title="@string/profile_appearance"
+		tools:icon="@drawable/ic_action_offroad" />
 
 	<Preference
 		android:layout="@layout/list_item_divider"

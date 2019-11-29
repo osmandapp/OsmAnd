@@ -11,6 +11,8 @@
 	Thx - Hardy
 
 -->
+    <string name="profile_appearance">Profile appearance</string>
+    <string name="choose_icon_color_name">Choose icon, color and name</string>
     <string name="reorder_profiles">Reorder</string>
     <string name="selected_profile">Selected profile</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_name">Node networks</string>
