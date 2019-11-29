@@ -4155,4 +4155,6 @@
 	<string name="poi_community_gender_male">Community gender: male</string>
 	<string name="poi_community_gender_mixed">Community gender: mixed</string>
 
+	<string name="poi_grave">Grave</string>
+
 </resources>
