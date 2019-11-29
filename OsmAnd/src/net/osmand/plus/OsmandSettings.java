@@ -1607,6 +1607,8 @@ public class OsmandSettings {
 	public static final Integer DAILY_DIRECTORY = 2;
 
 	public final CommonPreference<Boolean> DISABLE_RECORDING_ONCE_APP_KILLED = new BooleanPreference("disable_recording_once_app_killed", false).makeProfile().makeGeneral();
+	
+	public final CommonPreference<Boolean> SAVE_HEADING_TO_GPX = new BooleanPreference("save_heading_to_gpx", false).makeProfile().makeGeneral();
 
 	public final CommonPreference<Integer> TRACK_STORAGE_DIRECTORY = new IntPreference("track_storage_directory", 0).makeProfile().makeGeneral();
 
