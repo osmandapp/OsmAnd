@@ -2401,8 +2401,8 @@
     <string name="export_profile_failed">Profilul nu se poate exporta.</string>
     <string name="profile_import">Importa profilul:</string>
     <string name="profile_import_descr">"Pentru a importa profilul, selectează fisierul din  aparat, si deschide-l cu OsmAnd."</string>
-    <string name="file_import_error">Eroare de incarcare al fisierului.</string>
-    <string name="file_imported_successfully">Fisier Incarcat cu succes.</string>
+    <string name="file_import_error">Eroare de incarcare al fisierului. %1$s: %2$s</string>
+    <string name="file_imported_successfully">%1$s Incarcat cu succes.</string>
     <string name="rendering_value_white_name">Alb</string>
     <string name="route_start_point">Punct de plecare</string>
     <string name="unirs_render_descr">Modifica stilul implicit pentru a crește contrastul dintre drumurile pietonale și biciclete. Utilizează culori Mapnik.</string>
