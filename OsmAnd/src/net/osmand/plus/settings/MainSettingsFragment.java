@@ -7,7 +7,6 @@ import android.support.annotation.ColorRes;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceViewHolder;
-import android.support.v7.preference.SwitchPreferenceCompat;
 import android.view.View;
 
 import net.osmand.AndroidUtils;
@@ -15,6 +14,7 @@ import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
+import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
@@ -77,6 +77,29 @@ public class MainSettingsFragment extends BaseSettingsFragment {
 		}
 	}
 
+	@Override
+	public boolean onPreferenceChange(Preference preference, Object newValue) {
+		String key = preference.getKey();
+		ApplicationMode applicationMode = getAppMode(key);
+		if (applicationMode != null) {
+			if (newValue instanceof Boolean) {
+				boolean isChecked = (Boolean) newValue;
+				onProfileSelected(applicationMode, isChecked);
+				preference.setIcon(getAppProfilesIcon(applicationMode, isChecked));
+			}
+		}
+		return super.onPreferenceChange(preference, newValue);
+	}
+
+	ApplicationMode getAppMode(String key) {
+		for (ApplicationMode applicationMode : allAppModes) {
+			if (applicationMode.getStringKey().equals(key)) {
+				return applicationMode;
+			}
+		}
+		return null;
+	}
+
 	private void setupConfigureProfilePref() {
 		ApplicationMode selectedMode = getSelectedAppMode();
 		String title = selectedMode.toHumanString(getContext());
@@ -107,7 +130,7 @@ public class MainSettingsFragment extends BaseSettingsFragment {
 		}
 		for (ApplicationMode applicationMode : allAppModes) {
 			boolean isAppProfileEnabled = availableAppModes.contains(applicationMode);
-			SwitchPreferenceCompat pref = new SwitchPreferenceCompat(app);
+			SwitchPreferenceEx pref = new SwitchPreferenceEx(app);
 			pref.setPersistent(false);
 			pref.setKey(applicationMode.getStringKey());
 			pref.setIcon(getAppProfilesIcon(applicationMode, isAppProfileEnabled));
@@ -118,6 +141,15 @@ public class MainSettingsFragment extends BaseSettingsFragment {
 			pref.setFragment(ConfigureProfileFragment.class.getName());
 			preferenceCategory.addPreference(pref);
 		}
+	}
+
+	public void onProfileSelected(ApplicationMode item, boolean isChecked) {
+		if (isChecked) {
+			availableAppModes.add(item);
+		} else {
+			availableAppModes.remove(item);
+		}
+		ApplicationMode.changeProfileAvailability(item, isChecked, getMyApplication());
 	}
 
 	private Drawable getAppProfilesIcon(ApplicationMode applicationMode, boolean appProfileEnabled) {
