@@ -2397,7 +2397,7 @@
     <string name="tts_initialization_error">Motorul text-to-speech nu porneste.</string>
     <string name="export_profile">Exportă profilul</string>
     <string name="exported_osmand_profile">Profil osmand exportat %1$s</string>
-    <string name="overwrite_profile_q">Profil deja existent, îl rescrii\?</string>
+    <string name="overwrite_profile_q">Profil \'%1$s\' deja existent, îl rescrii\?</string>
     <string name="export_profile_failed">Profilul nu se poate exporta.</string>
     <string name="profile_import">Importa profilul:</string>
     <string name="profile_import_descr">"Pentru a importa profilul, selectează fisierul din  aparat, si deschide-l cu OsmAnd."</string>

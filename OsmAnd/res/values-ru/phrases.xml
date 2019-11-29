@@ -3507,4 +3507,6 @@
 	<string name="poi_community_gender_male">Пол сообщества: мужской</string>
 	<string name="poi_community_gender_mixed">Пол сообщества: мужской и женский</string>
 
+	<string name="poi_grave">Могила</string>
+
 </resources>
