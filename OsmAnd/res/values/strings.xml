@@ -12,7 +12,7 @@
 
 -->
     <string name="save_heading">Save heading</string>
-    <string name="save_heading_descr">Calculate and save heading to each trackpoint while recording.</string>
+    <string name="save_heading_descr">Save heading to each trackpoint while recording.</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_name">Node networks</string>
     <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Show node network cycle routes</string>
     <string name="join_segments">Join segments</string>
