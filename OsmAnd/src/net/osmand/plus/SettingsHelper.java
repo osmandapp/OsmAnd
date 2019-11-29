@@ -895,12 +895,9 @@ public class SettingsHelper {
 		private List<SettingsItem> processedItems = new ArrayList<>();
 		private SettingsItem currentItem;
 		private AlertDialog dialog;
-		private boolean force;
 
-		ImportAsyncTask(@NonNull File settingsFile,
-		                boolean force, @Nullable SettingsImportListener listener) {
+		ImportAsyncTask(@NonNull File settingsFile, @Nullable SettingsImportListener listener) {
 			this.file = settingsFile;
-			this.force = force;
 			this.listener = listener;
 			importer = new SettingsImporter(app);
 		}
@@ -936,7 +933,7 @@ public class SettingsHelper {
 		}
 
 		private void processNextItem() {
-			if (activity == null && !force) {
+			if (activity == null) {
 				return;
 			}
 			if (items.size() == 0 && !importSuspended) {
@@ -958,31 +955,11 @@ public class SettingsHelper {
 			}
 			importSuspended = false;
 			if (item != null) {
-				if (item.exists() && !force) {
+				if (item.exists()) {
 					switch (item.getType()) {
 						case PROFILE: {
-							AlertDialog.Builder b = new AlertDialog.Builder(activity);
-							b.setMessage(activity.getString(R.string.overwrite_profile_q, item.getPublicName(app)));
-							b.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
-								@Override
-								public void onClick(DialogInterface dialog, int which) {
-									acceptItem(item);
-								}
-							});
-							b.setNegativeButton(R.string.shared_string_no, new DialogInterface.OnClickListener() {
-								@Override
-								public void onClick(DialogInterface dialog, int which) {
-									processNextItem();
-								}
-							});
-							b.setOnDismissListener(new DialogInterface.OnDismissListener() {
-								@Override
-								public void onDismiss(DialogInterface dialog) {
-									ImportAsyncTask.this.dialog = null;
-								}
-							});
-							b.setCancelable(false);
-							dialog = b.show();
+							String message = activity.getString(R.string.overwrite_profile_q, item.getPublicName(app));
+							dialog = showConfirmDialog(item, message);
 							break;
 						}
 						case FILE:
@@ -994,11 +971,41 @@ public class SettingsHelper {
 							break;
 					}
 				} else {
-					acceptItem(item);
+					if (item.getType() == SettingsItemType.PROFILE) {
+						String message = activity.getString(R.string.add_new_profile_q, item.getPublicName(app));
+						dialog = showConfirmDialog(item, message);
+					} else {
+						acceptItem(item);
+					}
 				}
 			} else {
 				processNextItem();
 			}
+		}
+
+		private AlertDialog showConfirmDialog(final SettingsItem item, String message) {
+			AlertDialog.Builder b = new AlertDialog.Builder(activity);
+			b.setMessage(message);
+			b.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					acceptItem(item);
+				}
+			});
+			b.setNegativeButton(R.string.shared_string_no, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					processNextItem();
+				}
+			});
+			b.setOnDismissListener(new DialogInterface.OnDismissListener() {
+				@Override
+				public void onDismiss(DialogInterface dialog) {
+					ImportAsyncTask.this.dialog = null;
+				}
+			});
+			b.setCancelable(false);
+			return b.show();
 		}
 
 		private void suspendImport() {
@@ -1099,9 +1106,8 @@ public class SettingsHelper {
 		}
 	}
 
-	public void importSettings(@NonNull File settingsFile,
-	                           boolean force, @Nullable SettingsImportListener listener) {
-		new ImportAsyncTask(settingsFile, force, listener).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+	public void importSettings(@NonNull File settingsFile, @Nullable SettingsImportListener listener) {
+		new ImportAsyncTask(settingsFile, listener).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	public void exportSettings(@NonNull File fileDir, @NonNull String fileName,

@@ -572,7 +572,7 @@ public class ImportHelper {
 				File tempDir = app.getAppPath(IndexConstants.TEMP_DIR);
 				File file = new File(tempDir, name);
 				if (error == null && file.exists()) {
-					app.getSettingsHelper().importSettings(file, false, new SettingsImportListener() {
+					app.getSettingsHelper().importSettings(file, new SettingsImportListener() {
 						@Override
 						public void onSettingsImportFinished(boolean succeed, boolean empty) {
 							if (isActivityNotDestroyed(activity)) {

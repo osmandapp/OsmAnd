@@ -2393,7 +2393,7 @@ public class OsmandAidlApi {
 		@Override
 		protected void onPostExecute(File file) {
 			if (file != null && file.exists()) {
-				app.getSettingsHelper().importSettings(file, true, null);
+				app.getSettingsHelper().importSettings(file, null);
 			}
 		}
 	}

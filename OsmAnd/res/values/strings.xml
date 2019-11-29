@@ -11,6 +11,7 @@
 	Thx - Hardy
 
 -->
+    <string name="add_new_profile_q">Add new profile \'%1$s\'?</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_name">Node networks</string>
     <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Show node network cycle routes</string>
     <string name="join_segments">Join segments</string>
