@@ -69,6 +69,9 @@ import static net.osmand.IndexConstants.OSMAND_SETTINGS_FILE_EXT;
 
 public class SettingsHelper {
 
+	public static final String SETTINGS_LATEST_CHANGES_KEY = "settings_latest_changes";
+	public static final String SETTINGS_VERSION_KEY = "settings_version";
+
 	private static final Log LOG = PlatformUtil.getLog(SettingsHelper.class);
 	private static final int BUFFER = 1024;
 
@@ -889,6 +892,9 @@ public class SettingsHelper {
 	private class ImportAsyncTask extends AsyncTask<Void, Void, List<SettingsItem>> {
 
 		private File file;
+		private String latestChanges;
+		private int version;
+
 		private SettingsImportListener listener;
 		private SettingsImporter importer;
 		private List<SettingsItem> items;
@@ -896,10 +902,11 @@ public class SettingsHelper {
 		private SettingsItem currentItem;
 		private AlertDialog dialog;
 
-		ImportAsyncTask(@NonNull File settingsFile,
-						@Nullable SettingsImportListener listener) {
+		ImportAsyncTask(@NonNull File settingsFile, String latestChanges, int version, @Nullable SettingsImportListener listener) {
 			this.file = settingsFile;
 			this.listener = listener;
+			this.latestChanges = latestChanges;
+			this.version = version;
 			importer = new SettingsImporter(app);
 		}
 
@@ -959,28 +966,8 @@ public class SettingsHelper {
 				if (item.exists()) {
 					switch (item.getType()) {
 						case PROFILE: {
-							AlertDialog.Builder b = new AlertDialog.Builder(activity);
-							b.setMessage(activity.getString(R.string.overwrite_profile_q, item.getPublicName(app)));
-							b.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
-								@Override
-								public void onClick(DialogInterface dialog, int which) {
-									acceptItem(item);
-								}
-							});
-							b.setNegativeButton(R.string.shared_string_no, new DialogInterface.OnClickListener() {
-								@Override
-								public void onClick(DialogInterface dialog, int which) {
-									processNextItem();
-								}
-							});
-							b.setOnDismissListener(new DialogInterface.OnDismissListener() {
-								@Override
-								public void onDismiss(DialogInterface dialog) {
-									ImportAsyncTask.this.dialog = null;
-								}
-							});
-							b.setCancelable(false);
-							dialog = b.show();
+							String title = activity.getString(R.string.overwrite_profile_q, item.getPublicName(app));
+							dialog = showConfirmDialog(item, title, latestChanges);
 							break;
 						}
 						case FILE:
@@ -992,11 +979,42 @@ public class SettingsHelper {
 							break;
 					}
 				} else {
-					acceptItem(item);
+					if (item.getType() == SettingsItemType.PROFILE) {
+						String title = activity.getString(R.string.add_new_profile_q, item.getPublicName(app));
+						dialog = showConfirmDialog(item, title, latestChanges);
+					} else {
+						acceptItem(item);
+					}
 				}
 			} else {
 				processNextItem();
 			}
+		}
+
+		private AlertDialog showConfirmDialog(final SettingsItem item, String title, String message) {
+			AlertDialog.Builder b = new AlertDialog.Builder(activity);
+			b.setTitle(title);
+			b.setMessage(message);
+			b.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					acceptItem(item);
+				}
+			});
+			b.setNegativeButton(R.string.shared_string_no, new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					processNextItem();
+				}
+			});
+			b.setOnDismissListener(new DialogInterface.OnDismissListener() {
+				@Override
+				public void onDismiss(DialogInterface dialog) {
+					ImportAsyncTask.this.dialog = null;
+				}
+			});
+			b.setCancelable(false);
+			return b.show();
 		}
 
 		private void suspendImport() {
@@ -1097,9 +1115,8 @@ public class SettingsHelper {
 		}
 	}
 
-	public void importSettings(@NonNull File settingsFile,
-							   @Nullable SettingsImportListener listener) {
-		new ImportAsyncTask(settingsFile, listener).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+	public void importSettings(@NonNull File settingsFile, String latestChanges, int version, @Nullable SettingsImportListener listener) {
+		new ImportAsyncTask(settingsFile, latestChanges, version, listener).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	public void exportSettings(@NonNull File fileDir, @NonNull String fileName,
