@@ -2257,4 +2257,24 @@
     <string name="poi_product_charcoal">Ürün: odun kömürü</string>
     <string name="poi_product_meat">Ürün: et</string>
     <string name="poi_shower_filter_yes">Evet</string>
+    <string name="poi_wheelchair_description">Tekerlekli sandalye kullananlar için açıklama</string>
+    <string name="poi_blind_description">Görme engelliler için açıklama</string>
+    <string name="poi_deaf_description">Duyma engelliler için açıklama</string>
+    <string name="poi_highway_steps">Merdivenler</string>
+    <string name="poi_handrail_yes">Tırabzan: evet</string>
+    <string name="poi_handrail_no">Tırabzan: hayır</string>
+    <string name="poi_ramp_yes">Rampa: evet</string>
+    <string name="poi_ramp_no">Rampa: hayır</string>
+    <string name="poi_ramp_wheelchair_yes">Tekerlekli sandalye rampası: evet</string>
+    <string name="poi_ramp_wheelchair_no">Tekerlekli sandalye rampası: hayır</string>
+    <string name="poi_ramp_stroller_yes">Rampa (puset): evet</string>
+    <string name="poi_ramp_stroller_no">Rampa (puset): hayır</string>
+    <string name="poi_ramp_bicycle_yes">Bisiklet rampası: evet</string>
+    <string name="poi_ramp_bicycle_no">Bisiklet rampası: hayır</string>
+    <string name="poi_ramp_luggage_yes">Bagaj rampası: evet</string>
+    <string name="poi_ramp_luggage_no">Bagaj rampası: hayır</string>
+    <string name="poi_step_count">Basamak sayısı</string>
+    <string name="poi_step_condition_even">Basamak durumu: düzgün</string>
+    <string name="poi_step_condition_uneven">Basamak durumu: düzensiz</string>
+    <string name="poi_step_condition_rough">Basamak durumu: engebeli</string>
 </resources>
