@@ -47,7 +47,7 @@
     <string name="shared_string_telegram">Telegram</string>
     <string name="privacy_policy_use_telegram">Telegram (the messaging app) is used to connect and communicate with people.</string>
     <string name="privacy_policy_telegram_client">OsmAnd tracker is one of the clients that use the Telegram open platform. Your contacts can use any other Telegram client.</string>
-    <string name="privacy_policy_agree">By clicking continue you agree to the conditions of Telegram Privacy Policy and OsmAnd Privacy Policy.</string>
+    <string name="privacy_policy_agree">By clicking \"Continue\" you agree to the conditions of the Telegram- and OsmAnd privacy policy.</string>
     <string name="shared_string_accept">Accept</string>
     <string name="telegram_privacy_policy">Telegram Privacy Policy</string>
     <string name="osmand_privacy_policy">OsmAnd Privacy Policy</string>
