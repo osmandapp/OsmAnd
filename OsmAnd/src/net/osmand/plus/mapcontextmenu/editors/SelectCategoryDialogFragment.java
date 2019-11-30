@@ -17,7 +17,6 @@ import android.widget.LinearLayout;
 import net.osmand.AndroidUtils;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -27,7 +26,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import static net.osmand.plus.FavouritesDbHelper.PERSONAL;
+import static net.osmand.plus.FavouritesDbHelper.PERSONAL_CATEGORY_NAME;
 
 public class SelectCategoryDialogFragment extends DialogFragment {
 
@@ -81,7 +80,7 @@ public class SelectCategoryDialogFragment extends DialogFragment {
 		if (gpxFile != null) {
 			if (gpxCategories != null) {
 				for (Map.Entry<String, Integer> e : gpxCategories.entrySet()) {
-					if (!e.getKey().equals(PERSONAL)) {
+					if (!e.getKey().equals(PERSONAL_CATEGORY_NAME)) {
 						String categoryName = e.getKey();
 						addCategory(activity, ll, categoryName, e.getValue());
 					}
@@ -90,7 +89,7 @@ public class SelectCategoryDialogFragment extends DialogFragment {
 		} else {
 			List<FavouritesDbHelper.FavoriteGroup> gs = helper.getFavoriteGroups();
 			for (final FavouritesDbHelper.FavoriteGroup category : gs) {
-				if (!category.name.equals(PERSONAL)) {
+				if (!category.name.equals(PERSONAL_CATEGORY_NAME)) {
 					addCategory(activity, ll, category.name, category.color);
 				}
 			}

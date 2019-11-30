@@ -23,7 +23,6 @@ import net.osmand.IndexConstants;
 import net.osmand.StateChangedListener;
 import net.osmand.ValueHolder;
 import net.osmand.aidl.OsmandAidlApi;
-import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.map.ITileSource;
@@ -256,12 +255,12 @@ public class OsmandSettings {
 
 	public void migrateHomeWorkParkingToFavorites() {
 		FavouritesDbHelper favorites = ctx.getFavorites();
-		favorites.addFavoritePersonal(getHomePoint(),FavouritesDbHelper.HOME,getHomePointDescription().getName());
-		favorites.addFavoritePersonal(getWorkPoint(),FavouritesDbHelper.WORK,getWorkPointDescription().getName());
+		favorites.addFavoritePersonal(getHomePoint(),FavouritesDbHelper.HOME_POINT_NAME,getHomePointDescription().getName());
+		favorites.addFavoritePersonal(getWorkPoint(),FavouritesDbHelper.WORK_POINT_NAME,getWorkPointDescription().getName());
 		if (OsmandPlugin.getEnabledPlugin(ParkingPositionPlugin.class) != null) {
 			ParkingPositionPlugin parkingPositionPlugin = OsmandPlugin.getEnabledPlugin(ParkingPositionPlugin.class);
 			if(parkingPositionPlugin != null) {
-				favorites.addFavoritePersonal(parkingPositionPlugin.constructParkingPosition(), FavouritesDbHelper.PARKING, "");
+				favorites.addFavoritePersonal(parkingPositionPlugin.constructParkingPosition(), FavouritesDbHelper.PARKING_POINT_NAME, "");
 			}
 		}
 	}

@@ -1,7 +1,6 @@
 package net.osmand.plus.parkingpoint;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 
@@ -76,7 +75,7 @@ public class ParkingTypeBottomSheetDialogFragment extends MenuBottomSheetDialogF
 				mapActivity.refreshMap();
 			}
 			mapActivity.getMyApplication().getTargetPointsHelper().setParkingPoint(plugin.getParkingPosition(),
-					new PointDescription(PointDescription.POINT_TYPE_FAVORITE,FavouritesDbHelper.PARKING));
+					new PointDescription(PointDescription.POINT_TYPE_FAVORITE,FavouritesDbHelper.PARKING_POINT_NAME));
 		}
 		dismiss();
 	}

@@ -1,7 +1,7 @@
 package net.osmand.plus.activities;
 
-import static net.osmand.plus.FavouritesDbHelper.PARKING;
-import static net.osmand.plus.FavouritesDbHelper.PERSONAL;
+import static net.osmand.plus.FavouritesDbHelper.PARKING_POINT_NAME;
+import static net.osmand.plus.FavouritesDbHelper.PERSONAL_CATEGORY_NAME;
 import static net.osmand.plus.myplaces.FavoritesActivity.FAV_TAB;
 import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
 
@@ -753,10 +753,10 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			for (FavoriteGroup key : gs) {
 				boolean empty = true;
 				if (flt == null || flt.contains(key)) {
-					if (key.name.equals(PERSONAL)) {
+					if (key.name.equals(PERSONAL_CATEGORY_NAME)) {
 						ArrayList<FavouritePoint> list = new ArrayList<>();
 						for (FavouritePoint p : key.points) {
-							if (p.getName().equals(PARKING)) {
+							if (p.getName().equals(PARKING_POINT_NAME)) {
 								if (parkingPluginEnable) {
 									list.add(p);
 									empty = false;
@@ -775,7 +775,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 					ArrayList<FavouritePoint> list = new ArrayList<>();
 					for (FavouritePoint p : key.points) {
 						if (flt.contains(p)) {
-							if (p.getName().equals(PARKING)) {
+							if (p.getName().equals(PARKING_POINT_NAME)) {
 								if (parkingPluginEnable) {
 									list.add(p);
 									empty = false;
@@ -978,15 +978,15 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 				String address = model.getDescription() != null ? "• " + model.getDescription() : "";
 				distanceText.setText(distance + address);
 				switch (model.getName()) {
-					case FavouritesDbHelper.HOME:
+					case FavouritesDbHelper.HOME_POINT_NAME:
 						icon.setImageDrawable(getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_home_dark));
 						name.setText(R.string.home_button);
 						break;
-					case FavouritesDbHelper.WORK:
+					case FavouritesDbHelper.WORK_POINT_NAME:
 						icon.setImageDrawable(getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_work));
 						name.setText(R.string.work_button);
 						break;
-					case FavouritesDbHelper.PARKING:
+					case FavouritesDbHelper.PARKING_POINT_NAME:
 						icon.setImageDrawable(getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_parking_dark));
 						name.setText(R.string.parking_place);
 						break;
