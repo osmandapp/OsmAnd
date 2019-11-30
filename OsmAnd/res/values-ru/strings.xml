@@ -3341,4 +3341,5 @@
     <string name="download_map_dialog">Диалог загрузки карты</string>
     <string name="dialogs_and_notifications_title">Диалоги и уведомления</string>
     <string name="dialogs_and_notifications_descr">Управление всплывающими окнами, диалогами и уведомлениями, которые OsmAnd показывает во время использования.</string>
+    <string name="add_new_profile_q">Добавить новый профиль \'%1$s\'\?</string>
 </resources>
