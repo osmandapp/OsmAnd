@@ -25,7 +25,7 @@
     <string name="logout_from_osmand_telegram">Wylogować się z OsmAnd Tracker\?</string>
     <string name="shared_string_name">Nazwa</string>
     <string name="by_distance">Według odległości</string>
-    <string name="by_name">Według nazwy</string>
+    <string name="by_name">Alfabetycznie</string>
     <string name="by_group">Według grupy</string>
     <string name="shared_string_sort">Sortuj</string>
     <string name="shared_string_sort_by">Sortuj według</string>
