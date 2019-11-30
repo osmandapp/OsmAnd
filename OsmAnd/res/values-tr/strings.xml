@@ -3355,4 +3355,7 @@
     <string name="shared_string_turn_off">Kapat</string>
     <string name="new_plugin_added">Yeni eklenti eklendi</string>
     <string name="join_segments">Segmentleri birleştir</string>
+    <string name="add_new_profile_q">\'%1$s\' yeni profil ekle\?</string>
+    <string name="save_heading">Başlığı kaydet</string>
+    <string name="save_heading_descr">Kayıt sırasında her bir izleme noktasının başlığını kaydet.</string>
 </resources>
