@@ -12,7 +12,7 @@
 
 -->
     <string name="add_new_profile_q">Add new profile \'%1$s\'?</string>
-    <string name="save_heading">Save heading</string>
+    <string name="save_heading">Include heading</string>
     <string name="save_heading_descr">Save heading to each trackpoint while recording.</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_name">Node networks</string>
     <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Show node network cycle routes</string>
