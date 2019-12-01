@@ -884,7 +884,7 @@ Lon %2$s</string>
     <string name="asap">Lo antes posible</string>
     <string name="share_route_as_gpx">Compartir la ruta como archivo GPX</string>
     <string name="share_route_subject">Ruta compartida vía OsmAnd</string>
-    <string name="route_roundabout">Rotonda: Toma la %1$dª salida hacia</string>
+    <string name="route_roundabout">Rotonda: Toma la %1$dª salida en</string>
     <string name="route_kl">Mantente a la izquierda y continúa por</string>
     <string name="route_kr">Mantente a la derecha y continúa por</string>
     <string name="rendering_attr_noPolygons_description">Hacer todas las funciones del terreno transparentes en el mapa.</string>
@@ -968,7 +968,7 @@ Lon %2$s</string>
     <string name="back">hacia atrás</string>
     <string name="back_left">hacia atrás a la izquierda</string>
     <string name="left">a la izquierda</string>
-    <string name="front_left">hacia atrás a la izquierda</string>
+    <string name="front_left">hacia delante a la izquierda</string>
     <string name="oclock">en punto</string>
     <string name="towards">hacia</string>
     <string name="accuracy">Precisión</string>
@@ -1248,7 +1248,7 @@ Lon %2$s</string>
     <string name="daynight_mode_night">Nocturno</string>
     <string name="daynight_mode_auto">Alba/ocaso</string>
     <string name="daynight_mode_sensor">Sensor de luz</string>
-    <string name="daynight_descr">Ajusta cambio entre el modo nocturno y diurno.</string>
+    <string name="daynight_descr">Alterna entre el modo nocturno y diurno.</string>
     <string name="daynight">Modo diurno/nocturno</string>
     <string name="download_files_question">¿Descargar {0} archivo(s) ({1} MB)?</string>
     <string name="items_were_selected">{0} elemento(s) marcado(s)</string>
@@ -1335,7 +1335,7 @@ Lon %2$s</string>
     <string name="voice_data_initializing">Inicializando datos de voz…</string>
     <string name="voice_data_not_supported">Versión no soportada de datos de voz</string>
     <string name="voice_data_corrupted">El dato de voz indicado está corrupto</string>
-    <string name="voice_data_unavailable">Paquete de Indicaciones por voz elegida, no disponible</string>
+    <string name="voice_data_unavailable">Paquete de indicaciones por voz elegido, no disponible</string>
     <string name="sd_unmounted">Tarjeta de memoria inaccesible. 
 \nNo podrás ver mapas ni encontrar cosas.</string>
     <string name="sd_mounted_ro">Tarjeta de memoria en sólo lectura. 
@@ -1824,9 +1824,9 @@ Lon %2$s</string>
     <string name="route_distance">Distancia:</string>
     <string name="route_duration">Duración:</string>
     <string name="missing_write_external_storage_permission">OsmAnd no tiene permiso para usar la tarjeta de memoria</string>
-    <string name="no_location_permission">Concede acceso a los datos de ubicación.</string>
-    <string name="no_camera_permission">Concede acceso a la cámara.</string>
-    <string name="no_microphone_permission">Concede acceso al micrófono.</string>
+    <string name="no_location_permission">Conceder acceso a los datos de ubicación.</string>
+    <string name="no_camera_permission">Conceder acceso a la cámara.</string>
+    <string name="no_microphone_permission">Conceder acceso al micrófono.</string>
     <string name="impassable_road_desc">Elige los caminos a evitar durante la navegación.</string>
     <string name="shared_string_sound">Sonido</string>
     <string name="select_voice_provider">Elige las indicaciones por voz</string>
@@ -2077,7 +2077,7 @@ Lon %2$s</string>
     <string name="shared_string_record">Grabar</string>
     <string name="gpx_logging_no_data">Sin datos</string>
     <string name="trip_rec_notification_settings">Activar la grabación rápida</string>
-    <string name="trip_rec_notification_settings_desc">Muestra una notificación del sistema que permite la grabación de viajes.</string>
+    <string name="trip_rec_notification_settings_desc">Muestra una notificación del sistema que permite la grabación del viaje.</string>
     <string name="shared_string_notifications">Notificaciones</string>
     <string name="gpx_no_tracks_title">Sin archivos GPX aún</string>
     <string name="gpx_no_tracks_title_folder">También puedes añadir archivos GPX a la carpeta</string>
@@ -2387,7 +2387,7 @@ Lon %2$s</string>
     <string name="type_postcode">Escribe el código postal</string>
     <string name="nearest_cities">Ciudades cercanas</string>
     <string name="select_city">Elegir la ciudad o pueblo</string>
-    <string name="select_postcode">Búsqueda de código postal</string>
+    <string name="select_postcode">Búsqueda por código postal</string>
     <string name="type_address">Escribe la dirección</string>
     <string name="select_street">Elegir la calle</string>
     <string name="shared_string_in_name">en %1$s</string>
@@ -2406,7 +2406,7 @@ Lon %2$s</string>
     <string name="route_is_too_long_v2">Para largas distancias: Añade destinos intermedios si no se encuentra ninguna ruta en 10 minutos.</string>
     <string name="srtm_menu_download_descr">Descarga el mapa de «Curvas de nivel» para usarlas en esta región.</string>
     <string name="shared_string_plugin">Complemento</string>
-    <string name="srtm_purchase_header">Debes comprar e instalar el complemento «Curvas de nivel» para mostrar áreas verticales graduadas.</string>
+    <string name="srtm_purchase_header">Compra e instala el complemento «Curvas de nivel» para mostrar áreas verticales graduadas.</string>
     <string name="hillshade_menu_download_descr">Descarga el mapa «Superposición de sombreado» para mostrar el sombreado vertical.</string>
     <string name="hillshade_purchase_header">Instala el complemento «Curvas de nivel» para mostrar las áreas verticales graduadas.</string>
     <string name="hide_from_zoom_level">Ocultar desde el nivel de zoom</string>
@@ -2426,7 +2426,7 @@ Lon %2$s</string>
     <string name="mapillary_widget_descr">Permite realizar contribuciones rápidas a Mapillary.</string>
     <string name="mapillary_descr">Fotos a nivel de calle en línea para todos. Descubre lugares, colabora, captura el mundo.</string>
     <string name="shared_string_add_photos">Añadir fotos</string>
-    <string name="mapillary_action_descr">Comparte tus propias imágenes a nivel de calle a través de Mapillary.</string>
+    <string name="mapillary_action_descr">Comparte tus imágenes a nivel de calle a través de Mapillary.</string>
     <string name="plugin_mapillary_descr">Fotos a nivel de calle para todos. Descubre lugares, colabora, captura el mundo.</string>
     <string name="online_photos">Fotos en línea</string>
     <string name="no_photos_descr">Sin fotos aquí.</string>
@@ -2916,7 +2916,7 @@ Lon %2$s</string>
     <string name="routeInfo_road_types_name">Tipos de caminos</string>
     <string name="exit_at">Bajarse en</string>
     <string name="sit_on_the_stop">Esperar en la parada</string>
-    <string name="quick_action_show_hide_gpx_tracks">Alternar vista de trazas GPX</string>
+    <string name="quick_action_show_hide_gpx_tracks">Mostrar/ocultar trazas GPX</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Un botón que muestra u oculta las trazas GPX elegidas en el mapa.</string>
     <string name="quick_action_gpx_tracks_hide">Ocultar trazas GPX</string>
     <string name="quick_action_gpx_tracks_show">Mostrar trazas GPX</string>
@@ -2983,7 +2983,7 @@ Lon %2$s</string>
     <string name="rendering_attr_highway_class_bridleway_name">Camino ecuestre</string>
     <string name="rendering_attr_highway_class_steps_name">Escalera</string>
     <string name="rendering_attr_highway_class_path_name">Sendero</string>
-    <string name="rendering_attr_highway_class_cycleway_name">Ciclovía / Bicisenda</string>
+    <string name="rendering_attr_highway_class_cycleway_name">Ciclovía/Bicisenda</string>
     <string name="rendering_attr_undefined_name">Indefinido</string>
     <string name="public_transport_warning_descr_blog">Conozca más en nuestro blog, sobre el enrutamiento de OsmAnd.</string>
     <string name="public_transport_warning_title">La navegación en transporte público se encuentra actualmente en fase de pruebas beta, se esperan errores e imprecisiones.</string>
@@ -3100,7 +3100,7 @@ Lon %2$s</string>
     <string name="special_routing_type">Enrutamiento especial</string>
     <string name="third_party_routing_type">Enrutamiento de terceros</string>
     <string name="application_profiles_descr">Perfiles que serán visibles en la aplicación.</string>
-    <string name="application_profiles">Perfiles de aplicación</string>
+    <string name="application_profiles">Perfiles de la aplicación</string>
     <string name="zoom_by_wunderlinq_descr">Cambia el zoom del mapa desplazando la rueda hacia arriba y abajo. La tecla «Escape» retrocede a la aplicación WunderLINQ.</string>
     <string name="zoom_by_wunderlinq">Controlar con WunderLINQ</string>
     <string name="quick_action_need_to_add_item_to_list">Añadir al menos un elemento a la lista en los ajustes de «Acción rápida»</string>
@@ -3113,7 +3113,7 @@ Lon %2$s</string>
     <string name="routing_attr_piste_type_sled_name">Trineo</string>
     <string name="routing_attr_piste_type_sled_description">Pendientes para uso de trineos.</string>
     <string name="routing_attr_allow_intermediate_name">Permitir rutas intermedias</string>
-    <string name="routing_attr_allow_intermediate_description">Rutas más difíciles con tramos más empinados. Generalmente algunos obstáculos que deben evitarse.</string>
+    <string name="routing_attr_allow_intermediate_description">Rutas más difíciles con tramos más empinados. En general, algunos obstáculos que deben evitarse.</string>
     <string name="routing_attr_allow_advanced_name">Permitir rutas avanzadas</string>
     <string name="routing_attr_allow_advanced_description">Rutas difíciles, con obstáculos peligrosos y tramos empinados.</string>
     <string name="routing_attr_allow_expert_name">Permitir rutas expertas</string>
@@ -3137,9 +3137,9 @@ Lon %2$s</string>
     <string name="default_speed_setting_descr">Cambiar los ajustes de la velocidad predefinida</string>
     <string name="minmax_speed_dialog_title">Definir velocidad mín/máx</string>
     <string name="new_profile">Nuevo perfil</string>
-    <string name="shared_string_crash">Cuelgue</string>
+    <string name="shared_string_crash">Error</string>
     <string name="last_launch_crashed">OsmAnd falló la última vez. Por favor, ayúdanos a mejorar OsmAnd compartiendo el mensaje de error.</string>
-    <string name="app_mode_ufo">Ovni</string>
+    <string name="app_mode_ufo">OVNI</string>
     <string name="release_3_4">• Perfiles de aplicación: crea un perfil personalizado según tus necesidades, con un icono y color personalizado. 
 \n 
 \n • Ahora puedes personalizar las velocidades predefinidas, máximas y mínimas de cualquier perfil 
@@ -3170,8 +3170,8 @@ Lon %2$s</string>
     <string name="edit_profile_setup_map_subtitle">Elige las opciones de mapa para el perfil</string>
     <string name="edit_profile_screen_options_subtitle">Elige las opciones de pantalla para el perfil</string>
     <string name="edit_profile_nav_settings_subtitle">Elige los ajustes de navegación para el perfil</string>
-    <string name="routing_attr_max_num_changes_description">Especifica el número máximo de trasbordos</string>
-    <string name="routing_attr_max_num_changes_name">Número de trasbordos</string>
+    <string name="routing_attr_max_num_changes_description">Especifica el número máximo de transbordos</string>
+    <string name="routing_attr_max_num_changes_name">Número de transbordos</string>
     <string name="turn_screen_on_router">Despertar al girar</string>
     <string name="turn_screen_on_time_descr">Define durante cuánto tiempo debe estar encendida la pantalla.</string>
     <string name="turn_screen_on_sensor">Usar sensor de proximidad</string>
@@ -3196,11 +3196,11 @@ Lon %2$s</string>
     <string name="rendering_attr_tracktype_grade3_name">Mayormente sólido (de áridos con vegetación entre rodaduras)</string>
     <string name="rendering_attr_tracktype_grade4_name">Mayormente suave (de tierra con vegetación entre rodaduras)</string>
     <string name="rendering_attr_tracktype_grade5_name">Suave (con rodaduras apenas visibles entre la vegetación)</string>
-    <string name="routeInfo_tracktype_name">Firmeza superficial</string>
+    <string name="routeInfo_tracktype_name">Firmeza de la superficie</string>
     <string name="shared_string_file_is_saved">Se ha guardado «%s»</string>
     <string name="shared_string_open_track">Abrir traza</string>
-    <string name="shared_string_track_is_saved">Se ha guardado la traza «%s»</string>
-    <string name="gpx_join_gaps">Fusionar espacios</string>
+    <string name="shared_string_track_is_saved">Traza «%s» guardada</string>
+    <string name="gpx_join_gaps">Unir espacios</string>
     <string name="app_mode_camper">Casa rodante</string>
     <string name="app_mode_campervan">Autocaravana (RV)</string>
     <string name="rendering_attr_showLez_description">Mostrar zonas de baja emisión en el mapa. No afecta a la navegación.</string>
@@ -3228,13 +3228,13 @@ Lon %2$s</string>
     <string name="price_free">Gratis</string>
     <string name="get_discount_title">Obtén %1$d %2$s a %3$s de descuento.</string>
     <string name="get_free_trial_title">Iniciar prueba gratuita de %1$d %2$s.</string>
-    <string name="get_discount_first_part">%1$s para el primer %2$s</string>
+    <string name="get_discount_first_part">%1$s durante el primer %2$s</string>
     <string name="get_discount_first_few_part">%1$s para el primer %2$s</string>
     <string name="get_discount_second_part">luego %1$s</string>
     <string name="cancel_subscription">Cancelar suscripción</string>
     <string name="price_and_discount">%1$s • Ahorra %2$s</string>
     <string name="configure_profile_info">Ajustes para el perfil:</string>
-    <string name="utm_format_descr">OsmAnd utiliza el estándar UTM, similar pero no idéntico al formato UTM OTAN.</string>
+    <string name="utm_format_descr">OsmAnd utiliza el formato UTM Estándar, similar pero no idéntico al formato UTM NATO.</string>
     <string name="shared_string_example">Ejemplo</string>
     <string name="navigate_point_format_utm">UTM Estándar</string>
     <string name="navigate_point_format_olc">Código de Ubicación Abierto</string>
@@ -3275,7 +3275,7 @@ Lon %2$s</string>
     <string name="voice_announces_info">Los anuncios de voz solo se realizan durante la navegación.</string>
     <string name="voice_announces_descr">Instrucciones de navegación y anuncios</string>
     <string name="voice_announces">Indicaciones por voz</string>
-    <string name="screen_alerts">Alertas de pantalla</string>
+    <string name="screen_alerts">Alertas en pantalla</string>
     <string name="route_parameters_descr">Configurar parámetros de ruta</string>
     <string name="route_parameters">Parámetros de ruta</string>
     <string name="application_profile_changed">Perfil de aplicación cambiado a «%s»</string>
@@ -3312,7 +3312,7 @@ Lon %2$s</string>
     <string name="rendering_attr_piste_difficulty_undefined_name">Indefinido</string>
     <string name="routeInfo_piste_difficulty_name">Dificultad de la pista</string>
     <string name="routing_attr_width_name">Límite de anchura</string>
-    <string name="routing_attr_width_description">Especifica el límite de anchura del vehículo permitido en rutas.</string>
+    <string name="routing_attr_width_description">Especifica el límite de anchura permitida del vehículo en rutas.</string>
     <string name="avoid_in_routing_descr_">Evita ciertas rutas y tipos de caminos</string>
     <string name="app_mode_utv">En paralelo</string>
     <string name="rendering_attr_piste_difficulty_aerialway_name">Vía aérea</string>
@@ -3326,7 +3326,7 @@ Lon %2$s</string>
     <string name="shared_string_memory_mb_desc">%1$s MB</string>
     <string name="shared_string_memory_kb_desc">%1$s kB</string>
     <string name="data_storage_preference_summary">%1$s • %2$s</string>
-    <string name="data_storage_space_description">%1$s GB libre (de %2$s GB)</string>
+    <string name="data_storage_space_description">%1$s GB libre(s) (de %2$s GB)</string>
     <string name="track_storage_directory">Carpeta de almacenamiento de trazas</string>
     <string name="track_storage_directory_descrp">Las trazas pueden almacenarse en la carpeta «rec», carpetas mensuales o diarias.</string>
     <string name="store_tracks_in_rec_directory">Grabar trazas en la carpeta «rec»</string>
@@ -3375,17 +3375,17 @@ Lon %2$s</string>
     <string name="simulate_your_location_gpx_descr">Simular la ubicación usando una traza GPX grabada.</string>
     <string name="export_profile">Exportar perfil</string>
     <string name="exported_osmand_profile">Perfil de OsmAnd: %1$s</string>
-    <string name="overwrite_profile_q">El perfil «%1$s» ya existe. ¿Sobreescribir\?</string>
+    <string name="overwrite_profile_q">El perfil «%1$s» ya existe. ¿Sobrescribir\?</string>
     <string name="export_profile_failed">No se pudo exportar el perfil.</string>
     <string name="profile_import">Importar perfil:</string>
     <string name="profile_import_descr">Para importar un perfil, elige el archivo en el dispositivo y ábrelo con OsmAnd.</string>
     <string name="file_import_error">Error de importación de %1$s: %2$s</string>
     <string name="file_imported_successfully">%1$s importados con éxito.</string>
-    <string name="swap_start_and_destination">Intercambiar inicio y destino</string>
+    <string name="swap_start_and_destination">Alternar inicio y destino</string>
     <string name="rendering_value_white_name">Blanco</string>
     <string name="swap_two_places">Alternar %1$s y %2$s</string>
     <string name="route_start_point">Punto de partida</string>
-    <string name="default_speed_dialog_msg">Se utiliza para estimar la hora de llegada en el caso de caminos de tipo desconocido y para limitar la velocidad en todos los caminos (podría cambiarse la ruta)</string>
+    <string name="default_speed_dialog_msg">Se utiliza para estimar la hora de llegada en el caso de los tipos de caminos desconocido y para limitar la velocidad en todos los caminos (podría cambiarse la ruta)</string>
     <string name="track_saved">Traza guardada</string>
     <string name="empty_filename">Nombre del archivo vacío</string>
     <string name="shared_string_revert">Revertir</string>

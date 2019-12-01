@@ -835,7 +835,7 @@ POIの更新は利用できません</string>
     <string name="shared_string_help">ヘルプ</string>
     <string name="accessibility_mode">アクセシビリティモード</string>
     <string name="accessibility_mode_descr">アクセシビリティ(ユーザー補助)機能を設定します</string>
-    <string name="shared_string_on">有効</string>
+    <string name="shared_string_on">ON</string>
     <string name="shared_string_off">OFF</string>
     <string name="accessibility_default">デバイス側のユーザー補助設定に従う</string>
     <string name="backToMenu">メニューに戻る</string>
@@ -3416,4 +3416,5 @@ POIの更新は利用できません</string>
     <string name="shared_string_turn_off">OFFに</string>
     <string name="new_plugin_added">新しいプラグインが追加されました</string>
     <string name="join_segments">セグメント同士の接続</string>
+    <string name="quick_action_directions_from_desc">画面の中心を出発点にし目的地までのルートを計算、または目的地マーカーがマップ上にない場合に目的地を選択するダイアログを開くボタンです。</string>
 </resources>

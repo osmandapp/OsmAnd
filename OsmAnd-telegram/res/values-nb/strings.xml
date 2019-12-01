@@ -248,4 +248,5 @@
     <string name="shared_string_apply">Bruk</string>
     <string name="set_time_timeline_descr">Velg tid å vise</string>
     <string name="start_end_date">Start–sluttdato</string>
+    <string name="saved_messages">Lagrede meldinger</string>
 </resources>

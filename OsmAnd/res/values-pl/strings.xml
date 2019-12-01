@@ -258,7 +258,7 @@
     <string name="rotate_map_compass_opt">Względem kompasu</string>
     <string name="rotate_map_bearing_opt">Względem kierunku ruchu</string>
     <string name="rotate_map_none_opt">Bez obracania (północ zawsze na górze)</string>
-    <string name="rotate_map_to_bearing_descr">Wybiera sposób obracania mapy.</string>
+    <string name="rotate_map_to_bearing_descr">Obracanie mapy:</string>
     <string name="rotate_map_to_bearing">Orientacja mapy</string>
     <string name="show_route">Szczegóły trasy</string>
     <string name="fav_imported_sucessfully">Zaimportowano ulubione</string>
@@ -477,8 +477,8 @@
     <string name="incremental_search_city">Znajdź miejscowość wpisując pierwsze litery</string>
     <string name="incremental_search_street">Znajdź ulicę</string>
     <string name="incremental_search_building">Znajdź numer domu</string>
-    <string name="choose_available_region">Proszę wybrać region z listy</string>
-    <string name="choose_intersected_street">Ulica przecinająca</string>
+    <string name="choose_available_region">Wybierz region z listy</string>
+    <string name="choose_intersected_street">Wybierz przecinającą ulicę</string>
     <string name="Closest_Amenities">Pobliskie usługi</string>
     <string name="app_mode_default">Przeglądanie mapy</string>
     <string name="app_mode_car">Samochód</string>
@@ -552,7 +552,7 @@
     <string name="map_online_data">Mapy online i kafelki</string>
     <string name="map_online_data_descr">Używa map online (pobiera i przechowuje kafelki na karcie pamięci).</string>
     <string name="shared_string_online_maps">Mapy online</string>
-    <string name="online_map_settings_descr">Skonfiguruj źródła kafelków online i offline.</string>
+    <string name="online_map_settings_descr">Wybierz źródła kafelków online i offline.</string>
     <string name="osmand_rastermaps_plugin_description">Umożliwia uzyskanie dostępu do wielu rodzajów map online (tzw kafelki lub raster), od gotowych kafelków OpenStreetMap (jak Mapnik) do zdjęć satelitarnych i specjalnych warstw map pogodowych uniwersalnych, map klimatycznych, map geologicznych, warstw cieniowania rzeźby terenu itp. 
 \n 
 \nKażda z tych map może być wykorzystana jako główna (podstawa) mapa wyświetlana na mapie OsmAnd lub jako nakładka lub podkład do innej mapy bazowej (jak zwykłe mapy offline OsmAnd). W celu zwiększenia widoczności mapy bazowej, niektóre elementy map wektorowych OsmAnd można łatwo ukryć poprzez menu „Konfiguracja mapy” zgodnie z zapotrzebowaniem. 
@@ -560,7 +560,7 @@
 \nMapy kafelkowe można uzyskać bezpośrednio z zasobów sieciowych, jak i przygotować je do użytku w trybie offline (i ręcznie skopiować do katalogu danych OsmAnd) jako bazy danych sqlite, które mogą być przygotowane przez niezależnych dostawców map.</string>
     <string name="osmand_background_plugin_description">Wyświetla ustawienia umożliwiające włączenie śledzenia i nawigacji w tle poprzez okresowe wybudzanie urządzenia GPS (przy wyłączonym ekranie).</string>
     <string name="osmand_accessibility_description">Umożliwia korzystanie ze specjalnych ułatwień dostępu urządzenia bezpośrednio w OsmAnd. Pozwala na np. dostosowanie szybkości mowy syntezowanych komunikatów głosowych, skonfigurowanie poruszania się po ekranie za pomocą pada kierunkowego, użycie trackballa do zmiany przybliżenia lub syntezowanych komunikatów głosowych np. do automatycznego powiadamiania o położeniu.</string>
-    <string name="osmand_development_plugin_description">Wyświetla ustawienia dotyczące rozwoju i diagnozowania błędów. Dodaje możliwość symulacji nawigacji, wyświetlania informacji o wydajności renderowania, czy też testowania komunikatów głosowych. Te funkcje oraz ustawienia przeznaczone są dla twórców oprogramowania. Zwykły użytkownik nie potrzebuje ich do prawidłowego działania programu.</string>
+    <string name="osmand_development_plugin_description">Ta wtyczka pokazuje ustawienia dotyczące rozwoju i diagnozowania błędów, takie jak testowanie i symulacja trasy, wydajnosci renderowania lub komunikatów głosowych. Te ustawienia są przeznaczone dla twórców i nie są potrzebne zwykłemu użytkownikowi.</string>
     <string name="plugins_screen">Wtyczki</string>
     <string name="prefs_plugins_descr">Aktywuje zaawansowane ustawienia i dodatkową funkcjonalność.</string>
     <string name="prefs_plugins">Wtyczki</string>
@@ -957,7 +957,7 @@
     <string name="shared_string_map">Mapa</string>
     <string name="item_checked">zaznaczone</string>
     <string name="item_unchecked">niezaznaczone</string>
-    <string name="av_def_action_choose">Wybranie czynności</string>
+    <string name="av_def_action_choose">Na żądanie\?</string>
     <string name="access_arrival_time">Czas przybycia</string>
     <string name="map_widget_gps_info">Dane GPS</string>
     <string name="layer_hillshade">Cieniowanie rzeźby terenu</string>
@@ -1120,7 +1120,7 @@
     <string name="routing_attr_weight_name">Ograniczenie wagi</string>
     <string name="routing_attr_weight_description">Określa dozwolony ciężar pojazdu na trasach.</string>
     <string name="select_gpx">Wybierz ślad GPX…</string>
-    <string name="route_descr_select_destination">Wybierz cel trasy</string>
+    <string name="route_descr_select_destination">Ustaw cel podróży</string>
     <string name="shared_string_select_on_map">Wskaż na mapie</string>
     <string name="shared_string_favorite">Ulubione</string>
     <string name="route_preferences">Ustawienia trasy</string>
@@ -2250,7 +2250,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="quick_action_replace_destination_desc">Naciśnięcie przycisku ustali nowy cel podróży w położeniu na środku ekranu, zastępując poprzednio wybrany cel (jeśli jest).</string>
     <string name="quick_action_add_first_intermediate_desc">Przycisk służący do ustawiania środka ekranu jako pierwszego pośredniego celu podróży.</string>
     <string name="type_address">Wprowadź adres</string>
-    <string name="type_city_town">Wprowadź miasto</string>
+    <string name="type_city_town">Wprowadź miasto/miejscowość</string>
     <string name="type_postcode">Wprowadź kod pocztowy</string>
     <string name="nearest_cities">Pobliskie miasta</string>
     <string name="select_city">Wybierz miasto</string>
@@ -2385,7 +2385,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
 \n</string>
     <string name="live_monitoring_max_interval_to_send">Bufor czasowy do śledzenia online</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Określa czas przechowywania wysyłanych położeń bez połączenia</string>
-    <string name="mappilary_no_internet_desc">Potrzebujesz połączenia z Internetem, aby oglądać zdjęcia z Mapillary.</string>
+    <string name="mappilary_no_internet_desc">Zdjęcia z Mapillary są dostępne tylko online.</string>
     <string name="add_waypoint">Dodaj punkt orientacyjny</string>
     <string name="save_gpx_waypoint">Zapisz punkt orientacyjny GPX</string>
     <string name="waypoint_one">Punkt orientacyjny 1</string>
@@ -2846,7 +2846,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="edit_map_marker">Edytuj znacznik mapy</string>
     <string name="third_party_application">Aplikacja innej firmy</string>
     <string name="search_street">Wyszukaj ulicę</string>
-    <string name="start_search_from_city">Najpierw wybierz miasto</string>
+    <string name="start_search_from_city">Najpierw wybierz miasto/miejscowość</string>
     <string name="keep_passed_markers_descr">Znaczniki dodane jako grupa ulubionych lub punkty trasy GPX oznaczone jako przekazane pozostaną na mapie. Jeśli grupa nie jest aktywna, znaczniki znikną z mapy.</string>
     <string name="osm_live_plan_pricing">Plan i ceny</string>
     <string name="osm_live_payment_monthly_title">Co miesiąc</string>
@@ -2886,15 +2886,15 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="app_mode_public_transport">Transport publiczny</string>
     <string name="avoid_roads_descr">Proszę wybrać na mapie lub z poniższej listy, drogę omijaną podczas nawigacji:</string>
     <string name="show_along_the_route">Wyświetlanie wzdłuż trasy</string>
-    <string name="simulate_navigation">Symulacja nawigacji</string>
+    <string name="simulate_navigation">Symulacja nawigowania</string>
     <string name="choose_track_file_to_follow">Wybierz plik śladu do podążania</string>
     <string name="voice_announcements">Komunikaty głosowe</string>
     <string name="intermediate_destinations">Pośrednie cele podróży</string>
     <string name="arrive_at_time">Dotarcie do celu o %1$s</string>
     <string name="quick_action_switch_day_night_descr">Naciśnięcie przycisku zmieni pomiędzy trybem Dziennym i Nocnym w OsmAndzie</string>
-    <string name="quick_action_switch_day_mode">Tryb Dzienny</string>
-    <string name="quick_action_switch_night_mode">Tryb Nocny</string>
-    <string name="quick_action_day_night_switch_mode">Zmień tryb Dzienny/Nocny</string>
+    <string name="quick_action_switch_day_mode">Tryb dzienny</string>
+    <string name="quick_action_switch_night_mode">Tryb nocny</string>
+    <string name="quick_action_day_night_switch_mode">Zmień tryb dzienny/nocny</string>
     <string name="routeInfo_roadClass_name">Rodzaj drogi</string>
     <string name="routeInfo_surface_name">Nawierzchnia</string>
     <string name="routeInfo_smoothness_name">Wygładzanie</string>
@@ -2928,7 +2928,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="use_osm_live_public_transport_description">Włącz transport publiczny dla zmian OsmAnd Live.</string>
     <string name="use_osm_live_public_transport">Transport publiczny OsmAnd Live</string>
     <string name="public_transport_warning_title">Nawigacja transportem publicznym jest obecnie w fazie testów beta. Mogą pojawić się błędy i nieścisłości.</string>
-    <string name="add_intermediate">Dodawanie punktu pośredniego</string>
+    <string name="add_intermediate">Dodaj punkt pośredni</string>
     <string name="transfers_size">%1$d transfery</string>
     <string name="add_start_and_end_points">Dodaj punkty początkowe i końcowe</string>
     <string name="rendering_attr_surface_grass_paver_name">Bruk z trawą</string>
@@ -3313,7 +3313,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="routing_attr_width_description">Określa dozwoloną szerokość pojazdu na trasach.</string>
     <string name="avoid_in_routing_descr_">Unika określonych tras i typów dróg</string>
     <string name="app_mode_utv">Strona po stronie</string>
-    <string name="rendering_attr_piste_difficulty_aerialway_name">Lotnisko</string>
+    <string name="rendering_attr_piste_difficulty_aerialway_name">Transport nadziemny</string>
     <string name="rendering_attr_piste_difficulty_connection_name">Połączenia</string>
     <string name="shared_string_calculate">Oblicz</string>
     <string name="shared_string_osmand_usage">Użycie OsmAnd</string>
@@ -3400,4 +3400,6 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="new_plugin_added">Dodano nową wtyczkę</string>
     <string name="dialogs_and_notifications_descr">Kontroluj wyskakujące okienka, okna dialogowe i powiadomienia, które OsmAnd pokazuje podczas użytkowania.</string>
     <string name="join_segments">Dołącz segmenty</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_name">Sieci węzłów</string>
+    <string name="add_new_profile_q">Dodać nowy profil \'%1$s\'\?</string>
 </resources>

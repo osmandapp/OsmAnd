@@ -3387,4 +3387,19 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="shared_string_revert">Ripristina</string>
     <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Mostra i nodi della rete dei percorsi ciclistici</string>
     <string name="clear_confirmation_msg">Cancella %1$s\?</string>
+    <string name="quick_action_directions_from_desc">Un pulsante che rende il centro dello schermo il punto di partenza e calcola il percorso per la destinazione o apre una finestra di dialogo per scegliere la destinazione se il marcatore della destinazione non è sulla mappa.</string>
+    <string name="download_map_dialog">Finestra di dialogo scarica mappe</string>
+    <string name="dialogs_and_notifications_title">Notifiche e finestre di dialogo</string>
+    <string name="dialogs_and_notifications_descr">Controllo dei popup, finestre di dialogo e notifiche che OsmAnd mostra nell\'utilizzo.</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_name">Nodo di reti</string>
+    <string name="suggested_maps">Mappe suggerite</string>
+    <string name="suggested_maps_descr">Queste mappe sono richieste per l\'utilizzo con il plugin</string>
+    <string name="added_profiles">Profilo aggiunto</string>
+    <string name="added_profiles_descr">Il componente aggiuntivo aggiungerà un nuovo profilo a OsmAnd</string>
+    <string name="shared_string_turn_off">Spegni</string>
+    <string name="new_plugin_added">Nuovo componente aggiuntivo aggiunto</string>
+    <string name="join_segments">Congiungi segmenti</string>
+    <string name="add_new_profile_q">Aggiungere il nuovo profilo \'%1$s\'\?</string>
+    <string name="save_heading">Salva orientamento</string>
+    <string name="save_heading_descr">Durante la registrazione salva l\'orientamento per ogni punto della traccia</string>
 </resources>

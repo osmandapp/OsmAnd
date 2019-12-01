@@ -3769,4 +3769,5 @@
     <string name="poi_community_gender_female">Geschlecht der Gemeinschaft: weiblich</string>
     <string name="poi_community_gender_male">Geschlecht der Gemeinschaft: männlich</string>
     <string name="poi_community_gender_mixed">Geschlecht der Gemeinschaft: gemischt</string>
+    <string name="poi_grave">Grab</string>
 </resources>
