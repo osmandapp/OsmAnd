@@ -2433,7 +2433,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="no_photos_descr">Keine Fotos hier.</string>
     <string name="plugin_mapillary_descr">Fotos von der Straße für jedermann. Plätze entdecken, mitwirken, die Welt im Bild festhalten.</string>
     <string name="improve_coverage_mapillary">Verbessern Sie die Bildberichterstattung mit Mapillary</string>
-    <string name="improve_coverage_install_mapillary_desc">Installieren Sie die App \'Mapillary\', um dieser Kartenposition eines oder mehrere Fotos hinzuzufügen.</string>
+    <string name="improve_coverage_install_mapillary_desc">Installieren Sie die App \'Mapillary\', um dieser Kartenposition ein oder mehrere Fotos hinzuzufügen.</string>
     <string name="open_mapillary">Mapillary öffnen</string>
     <string name="mapillary_image">Mapillary-Foto</string>
     <string name="shared_string_permissions">Berechtigungen</string>
@@ -2597,7 +2597,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="mark_passed">Markierung passiert</string>
     <string name="shared_string_gpx_waypoints">Track-Wegpunkte</string>
     <string name="modify_the_search_query">Suchanfrage verändern.</string>
-    <string name="empty_state_osm_edits">Erstellen oder Ändern von OSM-Objekten</string>
+    <string name="empty_state_osm_edits">OSM-Objekte erstellen oder ändern</string>
     <string name="empty_state_osm_edits_descr">OSM-POIs erstellen oder verändern, OSM-Notizen eröffnen oder bearbeiten, und aufgezeichnete GPX-Dateien hinzufügen.</string>
     <string name="shared_string_deleted">Gelöscht</string>
     <string name="shared_string_edited">Bearbeitet</string>
