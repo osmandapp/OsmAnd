@@ -341,7 +341,33 @@ public class GPXDatabase {
 					" SET " + GPX_COL_JOIN_SEGMENTS + " = ? " +
 					"WHERE " + GPX_COL_JOIN_SEGMENTS + " IS NULL", new Object[]{0});
 		}
+		if (oldVersion < 11) {
+			File lookupDir = context.getAppPath(IndexConstants.GPX_INDEX_DIR);
+			List<File> toUpdate = allFilesInDir(lookupDir);
+			for (File file : toUpdate) {
+				db.execSQL("UPDATE " + GPX_TABLE_NAME +
+								" SET " + GPX_COL_DIR + " = ? " +
+								" WHERE " + GPX_COL_NAME + " = ?",
+						new Object[]{getFileDir(file), getFileName(file)});
+			}
+		}
 		db.execSQL("CREATE INDEX IF NOT EXISTS " + GPX_INDEX_NAME_DIR + " ON " + GPX_TABLE_NAME + " (" + GPX_COL_NAME + ", " + GPX_COL_DIR + ");");
+	}
+
+	private List<File> allFilesInDir(File lookupDir) {
+		File[] lookupArray = lookupDir.listFiles();
+		List<File> dirList = new ArrayList<>();
+		if (lookupArray != null) {
+			for (File toCheck : lookupArray) {
+				if (toCheck.isDirectory()) {
+					dirList.addAll(allFilesInDir(toCheck));
+				}
+				else {
+					dirList.add(toCheck);
+				}
+			}
+		}
+		return dirList;
 	}
 
 	private boolean updateLastModifiedTime(GpxDataItem item) {
