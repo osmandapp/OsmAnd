@@ -3207,7 +3207,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="new_route_calculated_dist_dbg">Route: afstand %s, reistijd %s
 \nBerekening: %.1f sec, %d wegen, %d tegels)</string>
     <string name="lang_oc">Occitaans</string>
-    <string name="app_mode_wagon">Wagon</string>
+    <string name="app_mode_wagon">Stationwagon</string>
     <string name="app_mode_pickup_truck">Pickup truck</string>
     <string name="get_discount_title">Verkrijg %1$d %2$s met %3$s korting.</string>
     <string name="get_free_trial_title">"Start uw  %1$d %2$s gratis test."</string>
