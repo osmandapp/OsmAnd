@@ -343,12 +343,26 @@ public class GPXDatabase {
 		}
 		if (oldVersion < 11) {
 			File lookupDir = context.getAppPath(IndexConstants.GPX_INDEX_DIR);
-			List<File> toUpdate = allFilesInDir(lookupDir);
-			for (File file : toUpdate) {
-				db.execSQL("UPDATE " + GPX_TABLE_NAME +
-								" SET " + GPX_COL_DIR + " = ? " +
-								" WHERE " + GPX_COL_NAME + " = ?",
-						new Object[]{getFileDir(file), getFileName(file)});
+			List<File> allFiles = allFilesInDir(lookupDir);
+			List<GpxDataItem> toInsert = new ArrayList<>();
+			for (File file : allFiles) {
+				SQLiteCursor query = db.rawQuery(GPX_TABLE_SELECT + " WHERE " + GPX_COL_NAME + " = ? AND " +
+						GPX_COL_DIR + " = ?", new String[]{file.getName(), oldGetFileDir(file)});
+				if (query != null) {
+					try {
+						if (query.moveToFirst()) {
+							GpxDataItem item = readItem(query);
+							item.file = new File(getFileDir(file), getFileName(file));
+							toInsert.add(item);
+						}
+					} finally {
+						query.close();
+					}
+				}
+			}
+			db.execSQL("DELETE FROM " + GPX_TABLE_NAME);
+			for (GpxDataItem item : toInsert) {
+				insert(item, db);
 			}
 		}
 		db.execSQL("CREATE INDEX IF NOT EXISTS " + GPX_INDEX_NAME_DIR + " ON " + GPX_TABLE_NAME + " (" + GPX_COL_NAME + ", " + GPX_COL_DIR + ");");
@@ -368,6 +382,12 @@ public class GPXDatabase {
 			}
 		}
 		return dirList;
+	}
+
+	private String oldGetFileDir(File itemFile) {
+		return itemFile.getParentFile() == null ||
+				itemFile.getParentFile().equals(context.getAppPath(IndexConstants.GPX_INDEX_DIR)) ?
+				"" : itemFile.getParentFile().getName();
 	}
 
 	private boolean updateLastModifiedTime(GpxDataItem item) {
