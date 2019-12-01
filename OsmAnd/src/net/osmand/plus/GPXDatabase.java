@@ -258,7 +258,40 @@ public class GPXDatabase {
 				onUpgrade(conn, version, DB_VERSION);
 			}
 		}
+		cleanUpDatabase(conn);
 		return conn;
+	}
+
+	private void cleanUpDatabase(SQLiteConnection db) {
+		SQLiteCursor query = db.rawQuery("SELECT " + GPX_COL_NAME + ", " +
+				GPX_COL_DIR +
+				" FROM " + GPX_TABLE_NAME, null);
+		if (query != null) {
+			try {
+				if (query.moveToFirst()) {
+					do {
+						String fileName = query.getString(0);
+						String fileDir = query.getString(1);
+						File dir;
+						if (!Algorithms.isEmpty(fileDir)) {
+							dir = new File(context.getAppPath(IndexConstants.GPX_INDEX_DIR), fileDir);
+						} else {
+							dir = context.getAppPath(IndexConstants.GPX_INDEX_DIR);
+						}
+						File toCheck = new File(dir, fileName);
+						if (!toCheck.exists()) {
+							db.execSQL("DELETE FROM " + GPX_TABLE_NAME +
+											" WHERE " +
+											GPX_COL_DIR + " = ? AND " +
+											GPX_COL_NAME + " = ?",
+									new Object[]{fileDir, fileName});
+						}
+					} while (query.moveToNext());
+				}
+			} finally {
+				query.close();
+			}
+		}
 	}
 
 	private void onCreate(SQLiteConnection db) {
