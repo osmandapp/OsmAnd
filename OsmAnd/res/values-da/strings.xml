@@ -3403,4 +3403,16 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="download_map_dialog">Dialogboksen Hent kort</string>
     <string name="dialogs_and_notifications_title">Dialoger og meddelelser</string>
     <string name="dialogs_and_notifications_descr">Kontrol af popup-vinduer, dialoger og meddelelser, der OsmAnd vis under brug.</string>
+    <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Vis node netværk cykelruter</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_name">Node netværk</string>
+    <string name="suggested_maps">Foreslåede kort</string>
+    <string name="suggested_maps_descr">Disse kort skal bruges med udvidelser</string>
+    <string name="added_profiles">Tilføjede profiler</string>
+    <string name="added_profiles_descr">Udbidelse tilføjer ny profil til OsmAnd</string>
+    <string name="shared_string_turn_off">Sluk</string>
+    <string name="new_plugin_added">Ny udvidelse tilføjet</string>
+    <string name="join_segments">Forbind segmenter</string>
+    <string name="add_new_profile_q">Tilføj ny profil \'%1$s\'\?</string>
+    <string name="save_heading">Medtag overskrift</string>
+    <string name="save_heading_descr">Gem overskrift til hvert TrackPoint under optagelsen.</string>
 </resources>
