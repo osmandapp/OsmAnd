@@ -1110,7 +1110,7 @@
     <string name="share_note">Not paylaş</string>
     <string name="watch">İzle</string>
     <string name="notes">Notlar</string>
-    <string name="online_map">Çevrim içi harita</string>
+    <string name="online_map">Çevrimiçi harita</string>
     <string name="roads_only">Sadece yollar</string>
     <string name="device_memory">Aygıt belleği</string>
     <string name="edit_group">Grubu düzenle</string>
@@ -3356,6 +3356,6 @@
     <string name="new_plugin_added">Yeni eklenti eklendi</string>
     <string name="join_segments">Segmentleri birleştir</string>
     <string name="add_new_profile_q">\'%1$s\' yeni profil ekle\?</string>
-    <string name="save_heading">Başlığı kaydet</string>
+    <string name="save_heading">Başlığı dahil et</string>
     <string name="save_heading_descr">Kayıt sırasında her bir izleme noktasının başlığını kaydet.</string>
 </resources>
