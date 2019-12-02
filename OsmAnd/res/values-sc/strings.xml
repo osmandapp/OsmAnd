@@ -3402,4 +3402,9 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="added_profiles_descr">S\'estensione annanghet unu profilu nou a OsmAnd</string>
     <string name="shared_string_turn_off">Istuda</string>
     <string name="new_plugin_added">Estensione noa annànghida</string>
+    <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Ammustra sas àndalas tziclàbiles de sas retzas de nodos</string>
+    <string name="join_segments">Auni segmentos</string>
+    <string name="add_new_profile_q">Annanghere su profilu nou \'%1$s\'\?</string>
+    <string name="save_heading">Inclue sa diretzione</string>
+    <string name="save_heading_descr">Sarva sa diretzione pro cada puntu cando ses registrende.</string>
 </resources>
