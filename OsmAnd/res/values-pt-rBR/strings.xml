@@ -3391,4 +3391,7 @@ Pôr do Sol: %2$s</string>
     <string name="new_plugin_added">Novo plugin adicionado</string>
     <string name="added_profiles_descr">Plugin que adiciona novo perfil ao OsmAnd</string>
     <string name="join_segments">Unir segmentos</string>
+    <string name="add_new_profile_q">Adicionar novo perfil \'%1$s\'\?</string>
+    <string name="save_heading">Incluir direção</string>
+    <string name="save_heading_descr">Salvar direção de cada ponto da trilha durante a gravação.</string>
 </resources>
