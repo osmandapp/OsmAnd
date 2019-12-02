@@ -238,7 +238,9 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 					|| (mode.getRouteService() == RouteService.BROUTER
 					&& r.getStringKey().equals(RoutingProfilesResources.BROUTER_MODE.name())) 
 					|| (mode.getRouteService() == RouteService.STRAIGHT
-					&& r.getStringKey().equals(RoutingProfilesResources.STRAIGHT_LINE_MODE.name()))) {
+					&& r.getStringKey().equals(RoutingProfilesResources.STRAIGHT_LINE_MODE.name()))
+					|| (mode.getRouteService() == RouteService.GH
+					&& r.getStringKey().equals(RoutingProfilesResources.GH_MODE.name()))) {
 					profile.routingProfileDataObject = r;
 					r.setSelected(true);
 					navTypeEt.setText(r.getName());
@@ -669,6 +671,9 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		} else if(profile.routingProfileDataObject.getStringKey().equals(
 				RoutingProfilesResources.BROUTER_MODE.name())) {
 			builder.setRouteService(RouteService.BROUTER);
+		} else if (profile.routingProfileDataObject.getStringKey().equals(
+				RoutingProfilesResources.GH_MODE.name())){
+			builder.setRouteService(RouteService.GH);
 		} else if (profile.routingProfileDataObject != null) {
 			builder.setRoutingProfile(profile.routingProfileDataObject.getStringKey());
 		}
@@ -787,6 +792,12 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 			context.getString(R.string.special_routing_type),
 			RoutingProfilesResources.STRAIGHT_LINE_MODE.getIconRes(),
 			false, null));
+		profilesObjects.add(new RoutingProfileDataObject(
+				RoutingProfilesResources.GH_MODE.name(),
+				context.getString(RoutingProfilesResources.GH_MODE.getStringRes()),
+				context.getString(R.string.third_party_routing_type),
+				RoutingProfilesResources.GH_MODE.getIconRes(),
+				false, null));
 		if (context.getBRouterService() != null) {
 			profilesObjects.add(new RoutingProfileDataObject(
 				RoutingProfilesResources.BROUTER_MODE.name(),
@@ -819,6 +830,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 	public enum RoutingProfilesResources {
 		STRAIGHT_LINE_MODE(R.string.routing_profile_straightline, R.drawable.ic_action_split_interval),
 		BROUTER_MODE(R.string.routing_profile_broutrer, R.drawable.ic_action_split_interval),
+		GH_MODE(R.string.routing_profile_graph_hopper, R.drawable.ic_action_split_interval),
 		CAR(R.string.rendering_value_car_name, R.drawable.ic_action_car_dark),
 		PEDESTRIAN(R.string.rendering_value_pedestrian_name, R.drawable.ic_action_pedestrian_dark),
 		BICYCLE(R.string.rendering_value_bicycle_name, R.drawable.ic_action_bicycle_dark),

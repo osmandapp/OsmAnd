@@ -132,6 +132,25 @@ public class RouteCalculationResult {
 		updateDirectionsTime(this.directions, this.listDistance);
 		this.alarmInfo = Collections.unmodifiableList(alarms);
 	}
+
+//	public RouteCalculationResult(PathWrapper pathWrapper, String debugInfo){
+//		this.errorMessage = pathWrapper.getErrors().toString();
+//		this.routingTime = pathWrapper.getTime();
+//		this.loadedTiles = 0;
+//		this.visitedSegments = 0;
+//		this.calculateTime = 0;
+//		this.intermediatePoints = new int[0];
+//		this.locations = new ArrayList<Location>();
+//		this.segments = new ArrayList<RouteSegmentResult>();
+//		this.listDistance = new int[0];
+//		this.directions = new ArrayList<RouteDirectionInfo>();
+//		this.alarmInfo = new ArrayList<AlarmInfo>();
+//
+//		PointList pointList = pathWrapper.getPoints();
+//		for (GHPoint3D point: pointList){
+//			locations.add(new Location());
+//		}
+//	}
 	
 	public ApplicationMode getAppMode() {
 		return appMode;

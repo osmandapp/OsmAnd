@@ -294,6 +294,7 @@
     <string name="routing_profile_geocoding">Geocoding</string>
     <string name="routing_profile_straightline">Straight line</string>
     <string name="routing_profile_broutrer">BRouter (offline)</string>
+    <string name="routing_profile_graph_hopper">GraphHopper (offline)</string>
     <string name="osmand_default_routing">OsmAnd routing</string>
     <string name="custom_routing">Custom routing profile</string>
     <string name="special_routing_type">Special routing</string>

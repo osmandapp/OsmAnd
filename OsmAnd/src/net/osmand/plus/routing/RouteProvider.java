@@ -79,7 +79,8 @@ public class RouteProvider {
 	public enum RouteService {
 		OSMAND("OsmAnd (offline)"),
 		BROUTER("BRouter (offline)"),
-		STRAIGHT("Straight line");
+		STRAIGHT("Straight line"),
+		GH("GraphHopper (offline)");
 
 		private final String name;
 
@@ -315,6 +316,8 @@ public class RouteProvider {
 //					res = findORSRoute(params);
 //				} else if (params.type == RouteService.OSRM) {
 //					res = findOSRMRoute(params);
+				} else if (params.mode.getRouteService() == RouteService.GH){
+					res = findGHRoute(params);
 				} else if (params.mode.getRouteService() == RouteService.STRAIGHT){
 					res = findStraightRoute(params);
 				}
@@ -1256,5 +1259,27 @@ public class RouteProvider {
 		location.setLongitude(lons[1]);
 		dots.add(location);
 		return new RouteCalculationResult(dots, null, params, null, true);
+	}
+
+	private RouteCalculationResult findGHRoute(RouteCalculationParams params){
+//		File mapsFolder = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
+//                "/graphhopper/maps/");
+
+	    double startLat =  params.start.getLatitude();
+		double startLon = params.start.getLongitude();
+		double endLat = params.end.getLatitude();
+		double endLon = params.end.getLongitude();
+
+//        GHRequest request = new GHRequest(startLat,startLon,endLat,endLon)
+//                .setAlgorithm(Parameters.Algorithms.DIJKSTRA_BI);
+//        request.getHints().put(INSTRUCTIONS,"No instructions");
+
+//        GraphHopper graphHopper = new GraphHopper();
+//
+//        return new RouteCalculationResult(
+//                graphHopper.route(request).getBest(),
+//                graphHopper.route(request).getDebugInfo()
+//        );
+		return new RouteCalculationResult(null,null,params, null, false);
 	}
 }
