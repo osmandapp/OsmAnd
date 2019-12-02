@@ -208,21 +208,6 @@ public abstract class OsmandPlugin {
 		}
 	}
 
-	public static void updateActivatedPlugins(OsmandApplication app) {
-		Set<String> enabledPlugins = app.getSettings().getEnabledPlugins();
-		for (OsmandPlugin plugin : OsmandPlugin.getMarketPlugins()) {
-			updateMarketPlugin(app, enabledPlugins, plugin);
-		}
-		for (OsmandPlugin plugin : allPlugins) {
-			if (enabledPlugins.contains(plugin.getId())) {
-				initPlugin(app, plugin);
-			} else if (plugin.isActive()) {
-				plugin.setActive(false);
-				plugin.disable(app);
-			}
-		}
-	}
-
 	private static void initPlugin(OsmandApplication app, OsmandPlugin plugin) {
 		try {
 			if (plugin.init(app, null)) {
