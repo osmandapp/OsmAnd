@@ -4,7 +4,14 @@ package net.osmand.plus.routing;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Base64;
+
+import com.graphhopper.GHRequest;
+import com.graphhopper.PathWrapper;
+import com.graphhopper.util.Parameters;
+import com.graphhopper.util.PointList;
+import com.graphhopper.util.shapes.GHPoint3D;
 
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
@@ -32,6 +39,7 @@ import net.osmand.plus.render.NativeOsmandLibrary;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.router.GeneralRouter.RoutingParameterType;
+import net.osmand.router.GraphHopperRouterImpl;
 import net.osmand.router.PrecalculatedRouteDirection;
 import net.osmand.router.RoutePlannerFrontEnd;
 import net.osmand.router.RoutePlannerFrontEnd.RouteCalculationMode;
@@ -50,6 +58,7 @@ import org.xml.sax.SAXException;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -1262,24 +1271,26 @@ public class RouteProvider {
 	}
 
 	private RouteCalculationResult findGHRoute(RouteCalculationParams params){
-//		File mapsFolder = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
-//                "/graphhopper/maps/");
-
-	    double startLat =  params.start.getLatitude();
+		double startLat =  params.start.getLatitude();
 		double startLon = params.start.getLongitude();
 		double endLat = params.end.getLatitude();
 		double endLon = params.end.getLongitude();
 
-//        GHRequest request = new GHRequest(startLat,startLon,endLat,endLon)
-//                .setAlgorithm(Parameters.Algorithms.DIJKSTRA_BI);
-//        request.getHints().put(INSTRUCTIONS,"No instructions");
-
-//        GraphHopper graphHopper = new GraphHopper();
-//
-//        return new RouteCalculationResult(
-//                graphHopper.route(request).getBest(),
-//                graphHopper.route(request).getDebugInfo()
-//        );
-		return new RouteCalculationResult(null,null,params, null, false);
+		String area = "ukrainekieveurope";
+		File mapsFolder = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
+				"/graphhopper/maps/");
+        GHRequest request = new GHRequest(startLat,startLon,endLat,endLon)
+                .setAlgorithm(Parameters.Algorithms.DIJKSTRA_BI);
+		GraphHopperRouterImpl graphHopperRouter = new GraphHopperRouterImpl(request, mapsFolder.getAbsolutePath(), area);
+		PathWrapper pathWrapper = graphHopperRouter.calculateRoute();
+		PointList pointList = pathWrapper.getPoints();
+		List<Location> list = new ArrayList<>();
+		for (final GHPoint3D point: pointList){
+			Location location = new Location("GraphHopper");
+			location.setLatitude(point.getLat());
+			location.setLongitude(point.getLon());
+			list.add(location);
+		}
+		return new RouteCalculationResult(list,null,params,null,false);
 	}
 }
