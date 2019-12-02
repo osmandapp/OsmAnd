@@ -79,8 +79,7 @@ public class MainSettingsFragment extends BaseSettingsFragment {
 
 	@Override
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
-		String key = preference.getKey();
-		ApplicationMode applicationMode = getAppMode(key);
+        ApplicationMode applicationMode = ApplicationMode.valueOfStringKey(preference.getKey(), null);
 		if (applicationMode != null) {
 			if (newValue instanceof Boolean) {
 				boolean isChecked = (Boolean) newValue;
@@ -89,15 +88,6 @@ public class MainSettingsFragment extends BaseSettingsFragment {
 			}
 		}
 		return super.onPreferenceChange(preference, newValue);
-	}
-
-	ApplicationMode getAppMode(String key) {
-		for (ApplicationMode applicationMode : allAppModes) {
-			if (applicationMode.getStringKey().equals(key)) {
-				return applicationMode;
-			}
-		}
-		return null;
 	}
 
 	private void setupConfigureProfilePref() {
