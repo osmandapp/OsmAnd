@@ -3391,4 +3391,7 @@
     <string name="shared_string_turn_off">關閉</string>
     <string name="new_plugin_added">已新增新的外掛程式</string>
     <string name="join_segments">新增線段</string>
+    <string name="add_new_profile_q">新增新的設定檔「%1$s」？</string>
+    <string name="save_heading">包含標題</string>
+    <string name="save_heading_descr">在錄製時將標題儲存到每個追蹤點。</string>
 </resources>
