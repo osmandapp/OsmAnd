@@ -207,7 +207,7 @@ public class MapTileLayer extends BaseMapLayer {
 						int xZoom = (tileX % div) * tileSize / div;
 						int yZoom = (tileY % div) * tileSize / div;
 						// nice scale
-						boolean useSampling = kzoom > 3;
+						boolean useSampling = false;//kzoom > 3;
 						bitmapToZoom.set(Math.max(xZoom, 0), Math.max(yZoom, 0), 
 								Math.min(xZoom + tileSize / div, tileSize), 
 								Math.min(yZoom + tileSize / div, tileSize));
