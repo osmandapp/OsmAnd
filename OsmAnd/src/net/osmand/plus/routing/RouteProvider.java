@@ -9,8 +9,11 @@ import android.util.Base64;
 
 import com.graphhopper.GHRequest;
 import com.graphhopper.PathWrapper;
+import com.graphhopper.util.Instruction;
+import com.graphhopper.util.InstructionList;
 import com.graphhopper.util.Parameters;
 import com.graphhopper.util.PointList;
+import com.graphhopper.util.details.PathDetail;
 import com.graphhopper.util.shapes.GHPoint3D;
 
 import net.osmand.Location;
@@ -52,6 +55,7 @@ import net.osmand.util.Algorithms;
 import net.osmand.util.GeoPolylineParserUtil;
 import net.osmand.util.MapUtils;
 
+import org.apache.commons.logging.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.xml.sax.SAXException;
@@ -1276,13 +1280,14 @@ public class RouteProvider {
 		double endLat = params.end.getLatitude();
 		double endLon = params.end.getLongitude();
 
-		String area = "ukrainekieveurope";
+		String area = "ukraine";
 		File mapsFolder = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
 				"/graphhopper/maps/");
         GHRequest request = new GHRequest(startLat,startLon,endLat,endLon)
                 .setAlgorithm(Parameters.Algorithms.DIJKSTRA_BI);
 		GraphHopperRouterImpl graphHopperRouter = new GraphHopperRouterImpl(request, mapsFolder.getAbsolutePath(), area);
 		PathWrapper pathWrapper = graphHopperRouter.calculateRoute();
+
 		PointList pointList = pathWrapper.getPoints();
 		List<Location> list = new ArrayList<>();
 		for (final GHPoint3D point: pointList){
@@ -1291,6 +1296,16 @@ public class RouteProvider {
 			location.setLongitude(point.getLon());
 			list.add(location);
 		}
-		return new RouteCalculationResult(list,null,params,null,false);
+
+		List<RouteDirectionInfo> directions = new ArrayList<>();
+		InstructionList instructions = pathWrapper.getInstructions();
+		for (int i = 0; i < instructions.size(); i++){
+			Instruction instruction = instructions.get(i);
+			TurnType turnType = TurnType.fromGraphHopperInt(instruction.getSign(),true);
+			RouteDirectionInfo directionInfo = new RouteDirectionInfo(60,turnType);
+			directions.add(directionInfo);
+		}
+
+		return new RouteCalculationResult(list, directions, params,null,false);
 	}
 }

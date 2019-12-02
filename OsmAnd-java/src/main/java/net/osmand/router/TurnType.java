@@ -108,6 +108,41 @@ public class TurnType {
 		}
 		return t;
 	}
+
+	public  static TurnType fromGraphHopperInt(int i, Boolean leftSide){
+		TurnType t = null;
+		if (i == 0){
+			t = TurnType.valueOf(C, leftSide);
+		} else if (i == 1) {
+			t = TurnType.valueOf(TSLR, leftSide);
+		} else if (i == -1) {
+			t = TurnType.valueOf(TSLL, leftSide);
+		} else if (i == 2) {
+			t = TurnType.valueOf(TR, leftSide);
+		} else if (i == -2) {
+			t = TurnType.valueOf(TL, leftSide);
+		} else if (i == 3) {
+			t = TurnType.valueOf(TSHR, leftSide);
+		} else if (i == -3) {
+			t = TurnType.valueOf(TSHL, leftSide);
+		} else if (i == 6) {
+			t = TurnType.valueOf(RNDB, leftSide);
+		} else if (i == -6) {
+//			used for LEAVE_ROUNDABOUT = -6 in GraphHopper Instruction
+			t = TurnType.valueOf(RNLB, leftSide);
+		} else if (i == 7) {
+			t = TurnType.valueOf(KR, leftSide);
+		} else if (i == -7) {
+			t = TurnType.valueOf(KL, leftSide);
+		} else if (i == 8) {
+			t = TurnType.valueOf(TU, leftSide);
+		} else if (i == -8) {
+			t = TurnType.valueOf(TRU, leftSide);
+		} else {
+			t = TurnType.valueOf(C, leftSide);
+		}
+		return t;
+	}
 	
 
 	public static TurnType valueOf(int vs, boolean leftSide) {
