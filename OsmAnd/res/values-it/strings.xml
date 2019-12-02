@@ -1411,7 +1411,7 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="route_points">Punti del percorso</string>
     <string name="shared_string_release">Rilasciata</string>
     <string name="shared_string_ellipsis">…</string>
-    <string name="shared_string_ok">OK</string>
+    <string name="shared_string_ok">Ok</string>
     <string name="shared_string_cancel">Annulla</string>
     <string name="shared_string_dismiss">Annulla</string>
     <string name="shared_string_yes">Sì</string>
@@ -1420,7 +1420,7 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="shared_string_off">Spento</string>
     <string name="shared_string_previous">Precedente</string>
     <string name="shared_string_next">Successivo</string>
-    <string name="shared_string_enable">Abilitato</string>
+    <string name="shared_string_enable">Attiva</string>
     <string name="shared_string_disable">Disattiva</string>
     <string name="shared_string_enabled">Abilitato</string>
     <string name="shared_string_disabled">Disabilitato</string>
