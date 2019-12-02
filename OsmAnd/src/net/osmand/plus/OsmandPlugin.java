@@ -267,23 +267,6 @@ public abstract class OsmandPlugin {
 		return false;
 	}
 
-	public static boolean isPluginEnabledForMode(@NonNull OsmandApplication app, @NonNull OsmandPlugin plugin, @NonNull ApplicationMode mode) {
-		if (plugin.isMarketPlugin()) {
-			boolean marketEnabled = Version.isMarketEnabled(app);
-			boolean pckg = checkPluginPackage(app, plugin);
-			if ((Version.isDeveloperVersion(app) || !Version.isProductionVersion(app)) && !plugin.isPaid()) {
-				// for test reasons
-				marketEnabled = false;
-			}
-			if (pckg || (!marketEnabled && !plugin.isPaid())) {
-				return pckg && !app.getSettings().getPluginsForMode(mode).contains("-" + plugin.getId());
-			}
-			return false;
-		} else {
-			return app.getSettings().getEnabledPluginsForMode(mode).contains(plugin.getId());
-		}
-	}
-
 	public static void checkInstalledMarketPlugins(@NonNull OsmandApplication app, @Nullable Activity activity) {
 		Set<String> enabledPlugins = app.getSettings().getEnabledPlugins();
 		for (OsmandPlugin plugin : OsmandPlugin.getMarketPlugins()) {

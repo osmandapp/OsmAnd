@@ -437,8 +437,6 @@ public class OsmandSettings {
 
 				OsmandAidlApi aidlApi = ctx.getAidlApi();
 				if (aidlApi != null) {
-					aidlApi.loadConnectedApps();
-					OsmandPlugin.updateActivatedPlugins(ctx);
 					ctx.poiFilters.loadSelectedPoiFilters();
 				}
 
@@ -1017,14 +1015,10 @@ public class OsmandSettings {
 				return super.getProfileDefaultValue(mode);
 			}
 		}
-	}.makeProfile();
+	}.makeGlobal();
 
 	public Set<String> getEnabledPlugins() {
-		return getEnabledPluginsForMode(APPLICATION_MODE.get());
-	}
-
-	public Set<String> getEnabledPluginsForMode(ApplicationMode mode) {
-		String plugs = PLUGINS.getModeValue(mode);
+		String plugs = PLUGINS.get();
 		StringTokenizer toks = new StringTokenizer(plugs, ",");
 		Set<String> res = new LinkedHashSet<String>();
 		while (toks.hasMoreTokens()) {
@@ -1037,11 +1031,7 @@ public class OsmandSettings {
 	}
 
 	public Set<String> getPlugins() {
-		return getPluginsForMode(APPLICATION_MODE.get());
-	}
-
-	public Set<String> getPluginsForMode(ApplicationMode mode) {
-		String plugs = PLUGINS.getModeValue(mode);
+		String plugs = PLUGINS.get();
 		StringTokenizer toks = new StringTokenizer(plugs, ",");
 		Set<String> res = new LinkedHashSet<String>();
 		while (toks.hasMoreTokens()) {
@@ -1051,11 +1041,7 @@ public class OsmandSettings {
 	}
 
 	public boolean enablePlugin(String pluginId, boolean enable) {
-		return enablePluginForMode(pluginId, enable, APPLICATION_MODE.get());
-	}
-
-	public boolean enablePluginForMode(String pluginId, boolean enable, ApplicationMode mode) {
-		Set<String> set = getPluginsForMode(mode);
+		Set<String> set = getPlugins();
 		if (enable) {
 			set.remove("-" + pluginId);
 			set.add(pluginId);
@@ -1071,8 +1057,8 @@ public class OsmandSettings {
 				serialization.append(",");
 			}
 		}
-		if (!serialization.toString().equals(PLUGINS.getModeValue(mode))) {
-			return PLUGINS.setModeValue(mode, serialization.toString());
+		if (!serialization.toString().equals(PLUGINS.get())) {
+			return PLUGINS.set(serialization.toString());
 		}
 		return false;
 	}
@@ -1172,7 +1158,7 @@ public class OsmandSettings {
 				return super.getProfileDefaultValue(mode);
 			}
 		}
-	}.makeProfile();
+	}.makeGlobal();
 
 	public final CommonPreference<Integer> NUMBER_OF_STARTS_FIRST_XMAS_SHOWN = new IntPreference("number_of_starts_first_xmas_shown", 0).makeGlobal();
 
@@ -1607,7 +1593,7 @@ public class OsmandSettings {
 	public static final Integer DAILY_DIRECTORY = 2;
 
 	public final CommonPreference<Boolean> DISABLE_RECORDING_ONCE_APP_KILLED = new BooleanPreference("disable_recording_once_app_killed", false).makeProfile().makeGeneral();
-	
+
 	public final CommonPreference<Boolean> SAVE_HEADING_TO_GPX = new BooleanPreference("save_heading_to_gpx", false).makeProfile().makeGeneral();
 
 	public final CommonPreference<Integer> TRACK_STORAGE_DIRECTORY = new IntPreference("track_storage_directory", 0).makeProfile().makeGeneral();

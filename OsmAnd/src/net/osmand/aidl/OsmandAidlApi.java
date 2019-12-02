@@ -96,7 +96,6 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -1835,8 +1834,7 @@ public class OsmandAidlApi {
 
 	public boolean switchEnabled(@NonNull ConnectedApp connectedApp) {
 		connectedApp.enabled = !connectedApp.enabled;
-		ApplicationMode selectedAppMode = app.getSettings().APPLICATION_MODE.get();
-		return saveConnectedApps(selectedAppMode, connectedApps);
+		return saveConnectedApps();
 	}
 
 	public boolean isAppEnabled(@NonNull String pack) {
@@ -1844,22 +1842,12 @@ public class OsmandAidlApi {
 		if (app == null) {
 			app = new ConnectedApp(pack, true);
 			connectedApps.put(pack, app);
-			saveNewConnectedApp(app);
+			saveConnectedApps();
 		}
 		return app.enabled;
 	}
 
-	private void saveNewConnectedApp(ConnectedApp connectedApp) {
-		for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
-			Map<String, ConnectedApp> connectedApps = loadConnectedAppsForMode(mode);
-			if (!connectedApps.containsKey(connectedApp.pack)) {
-				connectedApps.put(connectedApp.pack, connectedApp);
-				saveConnectedApps(mode, connectedApps);
-			}
-		}
-	}
-
-	private boolean saveConnectedApps(ApplicationMode mode, Map<String, ConnectedApp> connectedApps) {
+	private boolean saveConnectedApps() {
 		try {
 			JSONArray array = new JSONArray();
 			for (ConnectedApp app : connectedApps.values()) {
@@ -1868,7 +1856,7 @@ public class OsmandAidlApi {
 				obj.put(ConnectedApp.PACK_KEY, app.pack);
 				array.put(obj);
 			}
-			return app.getSettings().API_CONNECTED_APPS_JSON.setModeValue(mode, array.toString());
+			return app.getSettings().API_CONNECTED_APPS_JSON.set(array.toString());
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
@@ -1876,16 +1864,9 @@ public class OsmandAidlApi {
 	}
 
 	public void loadConnectedApps() {
-		ApplicationMode selectedAppMode = app.getSettings().APPLICATION_MODE.get();
-		Map<String, ConnectedApp> appsForMode = loadConnectedAppsForMode(selectedAppMode);
-		connectedApps.clear();
-		connectedApps.putAll(appsForMode);
-	}
-
-	private Map<String, ConnectedApp> loadConnectedAppsForMode(ApplicationMode mode) {
-		Map<String, ConnectedApp> connectedApps = new HashMap<>();
 		try {
-			JSONArray array = new JSONArray(app.getSettings().API_CONNECTED_APPS_JSON.getModeValue(mode));
+			connectedApps.clear();
+			JSONArray array = new JSONArray(app.getSettings().API_CONNECTED_APPS_JSON.get());
 			for (int i = 0; i < array.length(); i++) {
 				JSONObject obj = array.getJSONObject(i);
 				String pack = obj.optString(ConnectedApp.PACK_KEY, "");
@@ -1895,7 +1876,6 @@ public class OsmandAidlApi {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-		return connectedApps;
 	}
 
 	boolean setNavDrawerLogo(@Nullable String uri) {
