@@ -1932,7 +1932,7 @@
     <string name="poi_aquaculture">Akwakultura</string>
     <string name="poi_greenhouse_horticulture">Szklarnie</string>
     <string name="poi_mdf">Rozdzielnia telefoniczna</string>
-    <string name="poi_bicycle_repair_station">Stacja naprawy rowerów; Stacja samodzielnej naprawy rowerów.</string>
+    <string name="poi_bicycle_repair_station">Stacja naprawy rowerów; Stacja samodzielnej naprawy rowerów</string>
     <string name="poi_escape_lane">Miejsce do bezpiecznego wytracenia prędkości</string>
     <string name="poi_historic_yes">Obiekt zabytkowy</string>
     <string name="poi_historic_aircraft">Zabytkowe lotnisko</string>
@@ -3717,11 +3717,11 @@
     <string name="poi_disabled_yes">Tak</string>
     <string name="poi_disabled_designated">Przeznaczony</string>
     <string name="poi_health_food">Zdrowe jedzenie</string>
-    <string name="poi_craft_distillery">Gorzelnia</string>
+    <string name="poi_craft_distillery">Destylarnia</string>
     <string name="poi_craft_joiner">Stolarz</string>
     <string name="poi_craft_bakery">Piekarnia</string>
     <string name="poi_craft_cabinet_maker">Stolarz meblowy</string>
-    <string name="poi_pet_grooming">Pielęgnacja zwierząt</string>
+    <string name="poi_pet_grooming">Fryzjer zwierzęcy</string>
     <string name="poi_atm_yes">Bankomat: tak</string>
     <string name="poi_cellar_entrance">Wejście do piwnicy</string>
     <string name="poi_cash_withdrawal_bank_card">Wypłata gotówki</string>
@@ -3751,4 +3751,6 @@
     <string name="poi_bath_type_foot_bath">Kąpiel stóp</string>
     <string name="poi_bath_open_air_yes">Tak</string>
     <string name="poi_bath_open_air_no">Nie</string>
+    <string name="poi_craft_floorer">Parkieciarz</string>
+    <string name="poi_charge">Ładowanie</string>
 </resources>
