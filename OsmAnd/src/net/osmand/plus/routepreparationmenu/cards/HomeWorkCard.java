@@ -7,10 +7,8 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
-import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routepreparationmenu.AddPointBottomSheetDialog;
-import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu.PointType;
 
 public class HomeWorkCard extends BaseCard {
@@ -27,14 +25,15 @@ public class HomeWorkCard extends BaseCard {
 	@Override
 	protected void updateContent() {
 		final TargetPointsHelper targetPointsHelper = mapActivity.getMyApplication().getTargetPointsHelper();
-		final TargetPoint homePoint = targetPointsHelper.getHomePoint();
-		final TargetPoint workPoint = targetPointsHelper.getWorkPoint();
+		final FavouritesDbHelper favouritesDbHelper = getMyApplication().getFavorites();
+		final FavouritePoint homePoint = favouritesDbHelper.getHomePoint();
+		final FavouritePoint workPoint = favouritesDbHelper.getWorkPoint();
 
-		TextView homeDescr = (TextView) view.findViewById(R.id.home_button_descr);
-		final TextView workDescr = (TextView) view.findViewById(R.id.work_button_descr);
-		homeDescr.setText(homePoint != null ? homePoint.getPointDescription(mapActivity).getSimpleName(mapActivity, false) :
+		TextView homeDescr = view.findViewById(R.id.home_button_descr);
+		final TextView workDescr = view.findViewById(R.id.work_button_descr);
+		homeDescr.setText(homePoint != null ? homePoint.getPointStringDescription().getSimpleName(mapActivity, false) :
 				mapActivity.getString(R.string.shared_string_add));
-		workDescr.setText(workPoint != null ? workPoint.getPointDescription(mapActivity).getSimpleName(mapActivity, false) :
+		workDescr.setText(workPoint != null ? workPoint.getPointStringDescription().getSimpleName(mapActivity, false) :
 				mapActivity.getString(R.string.shared_string_add));
 
 		View homeButton = view.findViewById(R.id.home_button);
@@ -44,7 +43,8 @@ public class HomeWorkCard extends BaseCard {
 				if (homePoint == null) {
 					AddPointBottomSheetDialog.showInstance(mapActivity, PointType.HOME);
 				} else {
-					targetPointsHelper.navigateToPoint(homePoint.point, true, -1, homePoint.getOriginalPointDescription());
+					targetPointsHelper.navigateToPoint(favouritesDbHelper.getHomePointLatLon(),
+                            true, -1, homePoint.getPointStringDescription());
 				}
 			}
 		});
@@ -63,7 +63,8 @@ public class HomeWorkCard extends BaseCard {
 				if (workPoint == null) {
 					AddPointBottomSheetDialog.showInstance(mapActivity, PointType.WORK);
 				} else {
-					targetPointsHelper.navigateToPoint(workPoint.point, true, -1, workPoint.getOriginalPointDescription());
+					targetPointsHelper.navigateToPoint(favouritesDbHelper.getWorkPointLatLon(),
+                            true, -1, workPoint.getPointStringDescription());
 				}
 			}
 		});
