@@ -1943,7 +1943,7 @@
     <string name="download_files_question_space_with_temp">Завантажити {0} файл(ів)\? Використовується {3} Мб тимчасової та {1} Мб постійної пам’яті (наразі вільно лише {2} Мб)</string>
     <string name="donations">Пожертвування</string>
     <string name="osm_live_subscribe_btn">Підписатися</string>
-    <string name="osm_live_hide_user_name">Не показувати моє ім\'я у звітах</string>
+    <string name="osm_live_hide_user_name">Не показувати моє ім’я у звітах</string>
     <string name="osm_live_month_cost">Щомісячна вартість</string>
     <string name="osm_live_month_cost_desc">Щомісячний платіж</string>
     <string name="osm_live_active">Активний</string>
