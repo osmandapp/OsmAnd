@@ -1,6 +1,5 @@
 package net.osmand.plus.activities;
 
-import static net.osmand.plus.FavouritesDbHelper.PARKING_POINT_NAME;
 import static net.osmand.plus.FavouritesDbHelper.PERSONAL_CATEGORY_NAME;
 import static net.osmand.plus.myplaces.FavoritesActivity.FAV_TAB;
 import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
@@ -756,7 +755,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 					if (key.name.equals(PERSONAL_CATEGORY_NAME)) {
 						ArrayList<FavouritePoint> list = new ArrayList<>();
 						for (FavouritePoint p : key.points) {
-							if (p.getName().equals(PARKING_POINT_NAME)) {
+							if (p.getName().equals(FavouritesDbHelper.PersonalPoint.PARKING.name())) {
 								if (parkingPluginEnable) {
 									list.add(p);
 									empty = false;
@@ -775,7 +774,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 					ArrayList<FavouritePoint> list = new ArrayList<>();
 					for (FavouritePoint p : key.points) {
 						if (flt.contains(p)) {
-							if (p.getName().equals(PARKING_POINT_NAME)) {
+							if (p.getName().equals(FavouritesDbHelper.PersonalPoint.PARKING.name())) {
 								if (parkingPluginEnable) {
 									list.add(p);
 									empty = false;
@@ -872,8 +871,13 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			} else {
 				label.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
 			}
-			label.setText(model.name.length() == 0 ? getString(R.string.shared_string_favorites) : model.name);
-
+			if (model.name.length() == 0) {
+				label.setText(getString(R.string.shared_string_favorites));
+			} else if (model.name.equals(PERSONAL_CATEGORY_NAME))
+				label.setText(R.string.personal_category_name);
+			else {
+				label.setText(model.name);
+			}
 			if (selectionMode) {
 				final CheckBox ch = (CheckBox) row.findViewById(R.id.toggle_item);
 				ch.setVisibility(View.VISIBLE);
@@ -975,22 +979,12 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			name.setTextColor(getResources().getColor(visible ? enabledColor : disabledColor));
 			distanceText.setText(distance);
 			if (groupPosition == 0) {
-				String address = model.getDescription() != null ? "• " + model.getDescription() : "";
-				distanceText.setText(distance + address);
-				switch (model.getName()) {
-					case FavouritesDbHelper.HOME_POINT_NAME:
-						icon.setImageDrawable(getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_home_dark));
-						name.setText(R.string.home_button);
-						break;
-					case FavouritesDbHelper.WORK_POINT_NAME:
-						icon.setImageDrawable(getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_work));
-						name.setText(R.string.work_button);
-						break;
-					case FavouritesDbHelper.PARKING_POINT_NAME:
-						icon.setImageDrawable(getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_action_parking_dark));
-						name.setText(R.string.parking_place);
-						break;
-				}
+				String distanceWithAddress = String.format(getString(R.string.distance_and_address), distance, model.getDescription() != null ? model.getDescription() : "");
+				distanceText.setText(distanceWithAddress);
+				icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(getActivity(),
+						visible ? model.getColor() : getResources().getColor(disabledIconColor), false,
+						FavouritesDbHelper.PersonalPoint.getIndex(model.getName())));
+				name.setText(FavouritesDbHelper.PersonalPoint.getLocalName(model.getName()));
 			} else {
 				icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(getActivity(),
 						visible ? model.getColor() : getResources().getColor(disabledIconColor), false));
