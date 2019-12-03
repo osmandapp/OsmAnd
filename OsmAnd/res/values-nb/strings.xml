@@ -3270,7 +3270,7 @@
     <string name="quick_action_hillshade_show">Vis relieffskygge</string>
     <string name="quick_action_hillshade_hide">Skjul relieffskygge</string>
     <string name="quick_action_show_hide_hillshade">Vis/skjul relieffskygge</string>
-    <string name="tts_initialization_error">Kan ikke starte tekst-til-tale -motor</string>
+    <string name="tts_initialization_error">Kan ikke starte tekst-til-tale-motor</string>
     <string name="simulate_your_location_gpx_descr">Simuler posisjonen din ved bruk av et innspilt GPX-spor.</string>
     <string name="exported_osmand_profile">OsmAnd-profil: %1$s</string>
     <string name="profile_import">Profil-import:</string>
@@ -3396,4 +3396,9 @@
     <string name="rendering_attr_piste_difficulty_extreme_name">Ekstremkjøring</string>
     <string name="rendering_attr_piste_difficulty_undefined_name">Udefinert</string>
     <string name="routeInfo_piste_difficulty_name">Løypevanskelighetsgrad</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_name">Nodenettverk</string>
+    <string name="join_segments">Bind sammen segmenter</string>
+    <string name="add_new_profile_q">Legg til ny profil «%1$s»\?</string>
+    <string name="save_heading">Ta med overskrift</string>
+    <string name="save_heading_descr">Lagre overskrift på hvert veipunkt under opptak.</string>
 </resources>
