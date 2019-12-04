@@ -53,8 +53,10 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.download.DownloadActivity;
+import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.util.Collections;
@@ -435,6 +437,13 @@ public class AndroidUtils {
 		TypedValue outValue = new TypedValue();
 		ctx.getResources().getValue(resId, outValue, true);
 		return outValue.getFloat();
+	}
+
+	public static int getDrawableId(OsmandApplication app, String id) {
+		if (!Algorithms.isEmpty(id)) {
+			return app.getResources().getIdentifier(id, "drawable", app.getPackageName());
+		}
+		return 0;
 	}
 
 	public static int getStatusBarHeight(Context ctx) {

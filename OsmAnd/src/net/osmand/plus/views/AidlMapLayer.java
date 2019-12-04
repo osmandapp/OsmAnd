@@ -41,6 +41,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
+import static net.osmand.aidl.OsmandAidlApi.ConnectedApp.LAYERS_PREFIX;
+
 public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider, MapTextLayer.MapTextProvider<AidlMapPointWrapper> {
 
 	private static final float POINT_IMAGE_VERTICAL_OFFSET = 0.91f;
@@ -90,7 +92,7 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 
 		OsmandApplication app = map.getMyApplication();
 		layerPref = app.getSettings().registerBooleanPreference(packName + "_" + aidlLayer.getId(), true);
-		appLayersPref = app.getSettings().registerBooleanPreference("layers_" + packName, true);
+		appLayersPref = app.getSettings().registerBooleanPreference(LAYERS_PREFIX + packName, true);
 	}
 
 	@Override

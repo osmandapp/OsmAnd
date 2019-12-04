@@ -20,9 +20,11 @@ import android.os.ParcelFileDescriptor;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
-import android.text.TextUtils;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 
+import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
@@ -43,6 +45,7 @@ import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GpxSelectionHelper;
@@ -53,6 +56,8 @@ import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.OsmandSettings.CommonPreference;
+import net.osmand.plus.R;
 import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.SettingsHelper;
 import net.osmand.plus.activities.MapActivity;
@@ -184,10 +189,6 @@ public class OsmandAidlApi {
 	private static final int DEFAULT_ZOOM = 15;
 
 	private OsmandApplication app;
-	private Map<String, AidlMapWidgetWrapper> widgets = new ConcurrentHashMap<>();
-	private Map<String, TextInfoWidget> widgetControls = new ConcurrentHashMap<>();
-	private Map<String, AidlMapLayerWrapper> layers = new ConcurrentHashMap<>();
-	private Map<String, OsmandMapLayer> mapLayers = new ConcurrentHashMap<>();
 	private Map<String, BroadcastReceiver> receivers = new TreeMap<>();
 	private Map<String, ConnectedApp> connectedApps = new ConcurrentHashMap<>();
 	private Map<String, AidlContextMenuButtonsWrapper> contextMenuButtonsParams = new ConcurrentHashMap<>();
@@ -307,14 +308,6 @@ public class OsmandAidlApi {
 		registerReceiver(setMapLocationReceiver, mapActivity, AIDL_SET_MAP_LOCATION);
 	}
 
-	private int getDrawableId(String id) {
-		if (Algorithms.isEmpty(id)) {
-			return 0;
-		} else {
-			return app.getResources().getIdentifier(id, "drawable", app.getPackageName());
-		}
-	}
-
 	private void registerAddMapWidgetReceiver(MapActivity mapActivity) {
 		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		BroadcastReceiver addMapWidgetReceiver = new BroadcastReceiver() {
@@ -322,14 +315,16 @@ public class OsmandAidlApi {
 			public void onReceive(Context context, Intent intent) {
 				MapActivity mapActivity = mapActivityRef.get();
 				String widgetId = intent.getStringExtra(AIDL_OBJECT_ID);
-				if (mapActivity != null && widgetId != null) {
-					AidlMapWidgetWrapper widget = widgets.get(widgetId);
-					if (widget != null) {
+				String packName = intent.getStringExtra(AIDL_PACKAGE_NAME);
+				if (mapActivity != null && widgetId != null && packName != null) {
+					ConnectedApp connectedApp = connectedApps.get(packName);
+					if (connectedApp != null) {
+						AidlMapWidgetWrapper widget = connectedApp.widgets.get(widgetId);
 						MapInfoLayer layer = mapActivity.getMapLayers().getMapInfoLayer();
-						if (layer != null) {
-							TextInfoWidget control = createWidgetControl(mapActivity, widgetId);
-							widgetControls.put(widgetId, control);
-							int menuIconId = getDrawableId(widget.getMenuIconName());
+						if (widget != null && layer != null) {
+							TextInfoWidget control = connectedApp.createWidgetControl(mapActivity, widgetId);
+							connectedApp.widgetControls.put(widgetId, control);
+							int menuIconId = AndroidUtils.getDrawableId(app, widget.getMenuIconName());
 							MapWidgetRegInfo widgetInfo = layer.registerSideWidget(control,
 									menuIconId, widget.getMenuTitle(), "aidl_widget_" + widgetId,
 									false, widget.getOrder());
@@ -378,13 +373,17 @@ public class OsmandAidlApi {
 			public void onReceive(Context context, Intent intent) {
 				MapActivity mapActivity = mapActivityRef.get();
 				String widgetId = intent.getStringExtra(AIDL_OBJECT_ID);
-				if (mapActivity != null && widgetId != null) {
-					MapInfoLayer layer = mapActivity.getMapLayers().getMapInfoLayer();
-					TextInfoWidget widgetControl = widgetControls.get(widgetId);
-					if (layer != null && widgetControl != null) {
-						layer.removeSideWidget(widgetControl);
-						widgetControls.remove(widgetId);
-						layer.recreateControls();
+				String packName = intent.getStringExtra(AIDL_PACKAGE_NAME);
+				if (mapActivity != null && widgetId != null && packName != null) {
+					ConnectedApp connectedApp = connectedApps.get(packName);
+					if (connectedApp != null) {
+						MapInfoLayer layer = mapActivity.getMapLayers().getMapInfoLayer();
+						TextInfoWidget widgetControl = connectedApp.widgetControls.get(widgetId);
+						if (layer != null && widgetControl != null) {
+							layer.removeSideWidget(widgetControl);
+							connectedApp.widgetControls.remove(widgetId);
+							layer.recreateControls();
+						}
 					}
 				}
 			}
@@ -393,19 +392,8 @@ public class OsmandAidlApi {
 	}
 
 	public void registerWidgetControls(MapActivity mapActivity) {
-		for (AidlMapWidgetWrapper widget : widgets.values()) {
-			MapInfoLayer layer = mapActivity.getMapLayers().getMapInfoLayer();
-			if (layer != null) {
-				TextInfoWidget control = createWidgetControl(mapActivity, widget.getId());
-				widgetControls.put(widget.getId(), control);
-				int menuIconId = getDrawableId(widget.getMenuIconName());
-				MapWidgetRegInfo widgetInfo = layer.registerSideWidget(control,
-						menuIconId, widget.getMenuTitle(), "aidl_widget_" + widget.getId(),
-						false, widget.getOrder());
-				if (!mapActivity.getMapLayers().getMapWidgetRegistry().isVisible(widgetInfo.key)) {
-					mapActivity.getMapLayers().getMapWidgetRegistry().setVisibility(widgetInfo, true, false);
-				}
-			}
+		for (ConnectedApp connectedApp : connectedApps.values()) {
+			connectedApp.registerWidgetControls(mapActivity);
 		}
 	}
 
@@ -417,16 +405,19 @@ public class OsmandAidlApi {
 				MapActivity mapActivity = mapActivityRef.get();
 				String layerId = intent.getStringExtra(AIDL_OBJECT_ID);
 				String packName = intent.getStringExtra(AIDL_PACKAGE_NAME);
-				if (mapActivity != null && packName != null && layerId != null) {
-					AidlMapLayerWrapper layer = layers.get(layerId);
-					if (layer != null) {
-						OsmandMapLayer mapLayer = mapLayers.get(layerId);
-						if (mapLayer != null) {
-							mapActivity.getMapView().removeLayer(mapLayer);
+				if (mapActivity != null && layerId != null && packName != null) {
+					ConnectedApp connectedApp = connectedApps.get(packName);
+					if (connectedApp != null) {
+						AidlMapLayerWrapper layer = connectedApp.layers.get(layerId);
+						if (layer != null) {
+							OsmandMapLayer mapLayer = connectedApp.mapLayers.get(layerId);
+							if (mapLayer != null) {
+								mapActivity.getMapView().removeLayer(mapLayer);
+							}
+							mapLayer = new AidlMapLayer(mapActivity, layer, connectedApp.pack);
+							mapActivity.getMapView().addLayer(mapLayer, layer.getZOrder());
+							connectedApp.mapLayers.put(layerId, mapLayer);
 						}
-						mapLayer = new AidlMapLayer(mapActivity, layer, packName);
-						mapActivity.getMapView().addLayer(mapLayer, layer.getZOrder());
-						mapLayers.put(layerId, mapLayer);
 					}
 				}
 			}
@@ -441,11 +432,15 @@ public class OsmandAidlApi {
 			public void onReceive(Context context, Intent intent) {
 				MapActivity mapActivity = mapActivityRef.get();
 				String layerId = intent.getStringExtra(AIDL_OBJECT_ID);
-				if (mapActivity != null && layerId != null) {
-					OsmandMapLayer mapLayer = mapLayers.remove(layerId);
-					if (mapLayer != null) {
-						mapActivity.getMapView().removeLayer(mapLayer);
-						mapActivity.refreshMap();
+				String packName = intent.getStringExtra(AIDL_PACKAGE_NAME);
+				if (mapActivity != null && layerId != null && packName != null) {
+					ConnectedApp connectedApp = connectedApps.get(packName);
+					if (connectedApp != null) {
+						OsmandMapLayer mapLayer = connectedApp.mapLayers.remove(layerId);
+						if (mapLayer != null) {
+							mapActivity.getMapView().removeLayer(mapLayer);
+							mapActivity.refreshMap();
+						}
 					}
 				}
 			}
@@ -837,18 +832,8 @@ public class OsmandAidlApi {
 	}
 
 	public void registerMapLayers(MapActivity mapActivity) {
-		for (AidlMapLayerWrapper layer : layers.values()) {
-			OsmandMapLayer mapLayer = mapLayers.get(layer.getId());
-			String packName = "";
-			if (mapLayer != null) {
-				if (mapLayer instanceof AidlMapLayer) {
-					packName = ((AidlMapLayer) mapLayer).getPackName();
-				}
-				mapActivity.getMapView().removeLayer(mapLayer);
-			}
-			mapLayer = new AidlMapLayer(mapActivity, layer, packName);
-			mapActivity.getMapView().addLayer(mapLayer, layer.getZOrder());
-			mapLayers.put(layer.getId(), mapLayer);
+		for (ConnectedApp connectedApp : connectedApps.values()) {
+			connectedApp.registerMapLayers(mapActivity);
 		}
 	}
 
@@ -856,43 +841,6 @@ public class OsmandAidlApi {
 		Intent intent = new Intent();
 		intent.setAction(AIDL_REFRESH_MAP);
 		app.sendBroadcast(intent);
-	}
-
-	private TextInfoWidget createWidgetControl(MapActivity mapActivity, final String widgetId) {
-		final TextInfoWidget control = new TextInfoWidget(mapActivity) {
-
-			@Override
-			public boolean updateInfo(DrawSettings drawSettings) {
-				AidlMapWidgetWrapper widget = widgets.get(widgetId);
-				if (widget != null) {
-					String txt = widget.getText();
-					String subtxt = widget.getDescription();
-					boolean night = drawSettings != null && drawSettings.isNightMode();
-					int icon = night ? getDrawableId(widget.getDarkIconName()) : getDrawableId(widget.getLightIconName());
-					setText(txt, subtxt);
-					if (icon != 0) {
-						setImageDrawable(icon);
-					} else {
-						setImageDrawable(null);
-					}
-					return true;
-				} else {
-					return false;
-				}
-			}
-		};
-		control.updateInfo(null);
-
-		control.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				AidlMapWidgetWrapper widget = widgets.get(widgetId);
-				if (widget != null && widget.getIntentOnClick() != null) {
-					app.startActivity(widget.getIntentOnClick());
-				}
-			}
-		});
-		return control;
 	}
 
 	boolean reloadMap() {
@@ -1056,97 +1004,71 @@ public class OsmandAidlApi {
 		return false;
 	}
 
-	boolean addMapWidget(AidlMapWidgetWrapper widget) {
+	boolean addMapWidget(String packName, AidlMapWidgetWrapper widget) {
 		if (widget != null) {
-			if (widgets.containsKey(widget.getId())) {
-				updateMapWidget(widget);
-			} else {
-				widgets.put(widget.getId(), widget);
-				Intent intent = new Intent();
-				intent.setAction(AIDL_ADD_MAP_WIDGET);
-				intent.putExtra(AIDL_OBJECT_ID, widget.getId());
-				app.sendBroadcast(intent);
+			ConnectedApp connectedApp = connectedApps.get(packName);
+			if (connectedApp != null) {
+				return connectedApp.addMapWidget(widget);
 			}
-			refreshMap();
-			return true;
-		} else {
-			return false;
 		}
+		return false;
 	}
 
-	boolean removeMapWidget(String widgetId) {
-		if (!Algorithms.isEmpty(widgetId) && widgets.containsKey(widgetId)) {
-			widgets.remove(widgetId);
-			Intent intent = new Intent();
-			intent.setAction(AIDL_REMOVE_MAP_WIDGET);
-			intent.putExtra(AIDL_OBJECT_ID, widgetId);
-			app.sendBroadcast(intent);
-			return true;
-		} else {
-			return false;
+	boolean removeMapWidget(String packName, String widgetId) {
+		if (!Algorithms.isEmpty(widgetId)) {
+			ConnectedApp connectedApp = connectedApps.get(packName);
+			if (connectedApp != null) {
+				return connectedApp.removeMapWidget(widgetId);
+			}
 		}
+		return false;
 	}
 
-	boolean updateMapWidget(AidlMapWidgetWrapper widget) {
-		if (widget != null && widgets.containsKey(widget.getId())) {
-			widgets.put(widget.getId(), widget);
-			refreshMap();
-			return true;
-		} else {
-			return false;
+	boolean updateMapWidget(String packName, AidlMapWidgetWrapper widget) {
+		if (widget != null) {
+			ConnectedApp connectedApp = connectedApps.get(packName);
+			if (connectedApp != null) {
+				return connectedApp.updateMapWidget(widget);
+			}
 		}
+		return false;
 	}
 
 	boolean addMapLayer(String packName, AidlMapLayerWrapper layer) {
 		if (layer != null) {
-			if (layers.containsKey(layer.getId())) {
-				updateMapLayer(layer);
-			} else {
-				layers.put(layer.getId(), layer);
-				Intent intent = new Intent();
-				intent.setAction(AIDL_ADD_MAP_LAYER);
-				intent.putExtra(AIDL_OBJECT_ID, layer.getId());
-				intent.putExtra(AIDL_PACKAGE_NAME, packName);
-				app.sendBroadcast(intent);
+			ConnectedApp connectedApp = connectedApps.get(packName);
+			if (connectedApp != null) {
+				return connectedApp.addMapLayer(layer);
 			}
-			refreshMap();
-			return true;
-		} else {
-			return false;
 		}
+		return false;
 	}
 
-	boolean removeMapLayer(String layerId) {
-		if (!Algorithms.isEmpty(layerId) && layers.containsKey(layerId)) {
-			layers.remove(layerId);
-			Intent intent = new Intent();
-			intent.setAction(AIDL_REMOVE_MAP_LAYER);
-			intent.putExtra(AIDL_OBJECT_ID, layerId);
-			app.sendBroadcast(intent);
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	boolean updateMapLayer(AidlMapLayerWrapper layer) {
-		if (layer != null && layers.containsKey(layer.getId())) {
-			AidlMapLayerWrapper existingLayer = layers.get(layer.getId());
-			for (AidlMapPointWrapper point : layer.getPoints()) {
-				existingLayer.putPoint(point);
+	boolean removeMapLayer(String packName, String layerId) {
+		if (!Algorithms.isEmpty(layerId)) {
+			ConnectedApp connectedApp = connectedApps.get(packName);
+			if (connectedApp != null) {
+				return connectedApp.removeMapLayer(layerId);
 			}
-			existingLayer.copyZoomBounds(layer);
-			refreshMap();
-			return true;
-		} else {
-			return false;
 		}
+		return false;
 	}
 
-	boolean showMapPoint(String layerId, AidlMapPointWrapper point) {
+	boolean updateMapLayer(String packName, AidlMapLayerWrapper layer) {
+		if (layer != null) {
+			ConnectedApp connectedApp = connectedApps.get(packName);
+			if (connectedApp != null) {
+				return connectedApp.updateMapLayer(layer);
+			}
+		}
+		return false;
+	}
+
+	boolean showMapPoint(String packName, String layerId, AidlMapPointWrapper point) {
 		if (point != null) {
-			if (!TextUtils.isEmpty(layerId)) {
-				AidlMapLayerWrapper layer = layers.get(layerId);
+			ConnectedApp connectedApp = connectedApps.get(packName);
+			if (connectedApp != null && !Algorithms.isEmpty(layerId)) {
+				AidlMapLayerWrapper layer = connectedApp.layers.get(layerId);
 				if (layer != null) {
 					AidlMapPointWrapper p = layer.getPoint(point.getId());
 					if (p != null) {
@@ -1169,40 +1091,31 @@ public class OsmandAidlApi {
 		return false;
 	}
 
-	boolean putMapPoint(String layerId, AidlMapPointWrapper point) {
+	boolean putMapPoint(String packName, String layerId, AidlMapPointWrapper point) {
 		if (point != null) {
-			AidlMapLayerWrapper layer = layers.get(layerId);
-			if (layer != null) {
-				layer.putPoint(point);
-				refreshMap();
-				return true;
+			ConnectedApp connectedApp = connectedApps.get(packName);
+			if (connectedApp != null) {
+				return connectedApp.putMapPoint(layerId, point);
 			}
 		}
 		return false;
 	}
 
-	boolean updateMapPoint(String layerId, AidlMapPointWrapper point, boolean updateOpenedMenuAndMap) {
+	boolean updateMapPoint(String packName, String layerId, AidlMapPointWrapper point, boolean updateOpenedMenuAndMap) {
 		if (point != null) {
-			AidlMapLayerWrapper layer = layers.get(layerId);
-			if (layer != null) {
-				layer.putPoint(point);
-				refreshMap();
-				if (updateOpenedMenuAndMap && aMapPointUpdateListener != null) {
-					aMapPointUpdateListener.onAMapPointUpdated(point, layerId);
-				}
-				return true;
+			ConnectedApp connectedApp = connectedApps.get(packName);
+			if (connectedApp != null) {
+				return connectedApp.updateMapPoint(layerId, point, updateOpenedMenuAndMap);
 			}
 		}
 		return false;
 	}
 
-	boolean removeMapPoint(String layerId, String pointId) {
-		if (pointId != null) {
-			AidlMapLayerWrapper layer = layers.get(layerId);
-			if (layer != null) {
-				layer.removePoint(pointId);
-				refreshMap();
-				return true;
+	boolean removeMapPoint(String packName, String layerId, String pointId) {
+		if (layerId != null && pointId != null) {
+			ConnectedApp connectedApp = connectedApps.get(packName);
+			if (connectedApp != null) {
+				return connectedApp.removeMapPoint(layerId, pointId);
 			}
 		}
 		return false;
@@ -1838,13 +1751,13 @@ public class OsmandAidlApi {
 	}
 
 	public boolean isAppEnabled(@NonNull String pack) {
-		ConnectedApp app = connectedApps.get(pack);
-		if (app == null) {
-			app = new ConnectedApp(pack, true);
-			connectedApps.put(pack, app);
+		ConnectedApp connectedApp = connectedApps.get(pack);
+		if (connectedApp == null) {
+			connectedApp = new ConnectedApp(app, pack, true);
+			connectedApps.put(pack, connectedApp);
 			saveConnectedApps();
 		}
-		return app.enabled;
+		return connectedApp.enabled;
 	}
 
 	private boolean saveConnectedApps() {
@@ -1871,7 +1784,7 @@ public class OsmandAidlApi {
 				JSONObject obj = array.getJSONObject(i);
 				String pack = obj.optString(ConnectedApp.PACK_KEY, "");
 				boolean enabled = obj.optBoolean(ConnectedApp.ENABLED_KEY, true);
-				connectedApps.put(pack, new ConnectedApp(pack, enabled));
+				connectedApps.put(pack, new ConnectedApp(app, pack, enabled));
 			}
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -2198,6 +2111,12 @@ public class OsmandAidlApi {
 		return false;
 	}
 
+	public void registerLayerContextMenu(OsmandMapTileView mapView, ContextMenuAdapter adapter, MapActivity mapActivity) {
+		for (ConnectedApp connectedApp : getConnectedApps()) {
+			connectedApp.registerLayerContextMenu(mapView, adapter, mapActivity);
+		}
+	}
+
 	private class FileCopyInfo {
 		long startTime;
 		long lastAccessTime;
@@ -2339,17 +2258,34 @@ public class OsmandAidlApi {
 
 	public static class ConnectedApp implements Comparable<ConnectedApp> {
 
-		static final String PACK_KEY = "pack";
-		static final String ENABLED_KEY = "enabled";
+		public static final String LAYERS_PREFIX = "layers_";
+		public static final String WIDGETS_PREFIX = "widgets_";
+
+		private static final String PACK_KEY = "pack";
+		private static final String ENABLED_KEY = "enabled";
+
+		private OsmandApplication app;
+
+		private Map<String, AidlMapWidgetWrapper> widgets = new ConcurrentHashMap<>();
+		private Map<String, TextInfoWidget> widgetControls = new ConcurrentHashMap<>();
+
+		private Map<String, AidlMapLayerWrapper> layers = new ConcurrentHashMap<>();
+		private Map<String, OsmandMapLayer> mapLayers = new ConcurrentHashMap<>();
+
+		private CommonPreference<Boolean> layersPref;
 
 		private String pack;
-		private boolean enabled;
 		private String name;
+
 		private Drawable icon;
 
-		ConnectedApp(String pack, boolean enabled) {
+		private boolean enabled;
+
+		ConnectedApp(OsmandApplication app, String pack, boolean enabled) {
+			this.app = app;
 			this.pack = pack;
 			this.enabled = enabled;
+			layersPref = app.getSettings().registerBooleanPreference(LAYERS_PREFIX + pack, true).cache();
 		}
 
 		public boolean isEnabled() {
@@ -2366,6 +2302,226 @@ public class OsmandAidlApi {
 
 		public Drawable getIcon() {
 			return icon;
+		}
+
+		private void registerMapLayers(MapActivity mapActivity) {
+			for (AidlMapLayerWrapper layer : layers.values()) {
+				OsmandMapLayer mapLayer = mapLayers.get(layer.getId());
+				if (mapLayer != null) {
+					mapActivity.getMapView().removeLayer(mapLayer);
+				}
+				mapLayer = new AidlMapLayer(mapActivity, layer, pack);
+				mapActivity.getMapView().addLayer(mapLayer, layer.getZOrder());
+				mapLayers.put(layer.getId(), mapLayer);
+			}
+		}
+
+		private void registerLayerContextMenu(OsmandMapTileView mapView, final ContextMenuAdapter menuAdapter, final MapActivity mapActivity) {
+			ContextMenuAdapter.ItemClickListener listener = new ContextMenuAdapter.OnRowItemClick() {
+
+				@Override
+				public boolean onRowItemClick(ArrayAdapter<ContextMenuItem> adapter, View view, int itemId, int position) {
+					CompoundButton btn = view.findViewById(R.id.toggle_item);
+					if (btn != null && btn.getVisibility() == View.VISIBLE) {
+						btn.setChecked(!btn.isChecked());
+						menuAdapter.getItem(position).setColorRes(btn.isChecked() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+						adapter.notifyDataSetChanged();
+						return false;
+					}
+					return true;
+				}
+
+				@Override
+				public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId,
+				                                  int position, boolean isChecked, int[] viewCoordinates) {
+					if (layersPref.set(isChecked)) {
+						ContextMenuItem item = adapter.getItem(position);
+						if (item != null) {
+							item.setColorRes(isChecked ? R.color.osmand_orange : ContextMenuItem.INVALID_ID);
+							item.setSelected(isChecked);
+							adapter.notifyDataSetChanged();
+						}
+						mapActivity.refreshMap();
+					}
+					return false;
+				}
+			};
+			boolean layersEnabled = layersPref.get();
+			menuAdapter.addItem(new ContextMenuItem.ItemBuilder()
+					.setId(LAYERS_PREFIX + pack)
+					.setTitle(name)
+					.setListener(listener)
+					.setSelected(layersEnabled)
+					.setIcon(R.drawable.ic_extension_dark)
+					.setColor(layersEnabled ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
+					.createItem());
+		}
+
+		private void registerWidgetControls(MapActivity mapActivity) {
+			for (AidlMapWidgetWrapper widget : widgets.values()) {
+				MapInfoLayer layer = mapActivity.getMapLayers().getMapInfoLayer();
+				if (layer != null) {
+					TextInfoWidget control = createWidgetControl(mapActivity, widget.getId());
+					widgetControls.put(widget.getId(), control);
+					int menuIconId = AndroidUtils.getDrawableId(mapActivity.getMyApplication(), widget.getMenuIconName());
+					MapWidgetRegInfo widgetInfo = layer.registerSideWidget(control, menuIconId,
+							widget.getMenuTitle(), "aidl_widget_" + widget.getId(), false, widget.getOrder());
+					if (!mapActivity.getMapLayers().getMapWidgetRegistry().isVisible(widgetInfo.key)) {
+						mapActivity.getMapLayers().getMapWidgetRegistry().setVisibility(widgetInfo, true, false);
+					}
+				}
+			}
+		}
+
+		private TextInfoWidget createWidgetControl(final MapActivity mapActivity, final String widgetId) {
+			TextInfoWidget control = new TextInfoWidget(mapActivity) {
+				@Override
+				public boolean updateInfo(DrawSettings drawSettings) {
+					AidlMapWidgetWrapper widget = widgets.get(widgetId);
+					if (widget != null) {
+						String txt = widget.getText();
+						String subtxt = widget.getDescription();
+						boolean night = drawSettings != null && drawSettings.isNightMode();
+						int icon = AndroidUtils.getDrawableId(mapActivity.getMyApplication(), night ? widget.getDarkIconName() : widget.getLightIconName());
+						setText(txt, subtxt);
+						if (icon != 0) {
+							setImageDrawable(icon);
+						} else {
+							setImageDrawable(null);
+						}
+						return true;
+					}
+					return false;
+				}
+			};
+			control.updateInfo(null);
+
+			control.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					AidlMapWidgetWrapper widget = widgets.get(widgetId);
+					if (widget != null && widget.getIntentOnClick() != null) {
+						app.startActivity(widget.getIntentOnClick());
+					}
+				}
+			});
+			return control;
+		}
+
+		boolean addMapWidget(AidlMapWidgetWrapper widget) {
+			if (widget != null) {
+				if (widgets.containsKey(widget.getId())) {
+					updateMapWidget(widget);
+				} else {
+					widgets.put(widget.getId(), widget);
+					Intent intent = new Intent();
+					intent.setAction(AIDL_ADD_MAP_WIDGET);
+					intent.putExtra(AIDL_OBJECT_ID, widget.getId());
+					app.sendBroadcast(intent);
+				}
+				app.getAidlApi().refreshMap();
+				return true;
+			}
+			return false;
+		}
+
+		boolean removeMapWidget(String widgetId) {
+			if (!Algorithms.isEmpty(widgetId) && widgets.containsKey(widgetId)) {
+				widgets.remove(widgetId);
+				Intent intent = new Intent();
+				intent.setAction(AIDL_REMOVE_MAP_WIDGET);
+				intent.putExtra(AIDL_OBJECT_ID, widgetId);
+				app.sendBroadcast(intent);
+				return true;
+			}
+			return false;
+		}
+
+		boolean updateMapWidget(AidlMapWidgetWrapper widget) {
+			if (widget != null && widgets.containsKey(widget.getId())) {
+				widgets.put(widget.getId(), widget);
+				app.getAidlApi().refreshMap();
+				return true;
+			}
+			return false;
+		}
+
+		boolean addMapLayer(AidlMapLayerWrapper layer) {
+			if (layer != null) {
+				if (layers.containsKey(layer.getId())) {
+					updateMapLayer(layer);
+				} else {
+					layers.put(layer.getId(), layer);
+					Intent intent = new Intent();
+					intent.setAction(AIDL_ADD_MAP_LAYER);
+					intent.putExtra(AIDL_OBJECT_ID, layer.getId());
+					intent.putExtra(AIDL_PACKAGE_NAME, pack);
+					app.sendBroadcast(intent);
+				}
+				app.getAidlApi().refreshMap();
+				return true;
+			}
+			return false;
+		}
+
+		boolean removeMapLayer(String layerId) {
+			if (!Algorithms.isEmpty(layerId) && layers.containsKey(layerId)) {
+				layers.remove(layerId);
+				Intent intent = new Intent();
+				intent.setAction(AIDL_REMOVE_MAP_LAYER);
+				intent.putExtra(AIDL_OBJECT_ID, layerId);
+				app.sendBroadcast(intent);
+				return true;
+			}
+			return false;
+		}
+
+		boolean updateMapLayer(AidlMapLayerWrapper layer) {
+			if (layer != null) {
+				AidlMapLayerWrapper existingLayer = layers.get(layer.getId());
+				if (existingLayer != null) {
+					for (AidlMapPointWrapper point : layer.getPoints()) {
+						existingLayer.putPoint(point);
+					}
+					existingLayer.copyZoomBounds(layer);
+					app.getAidlApi().refreshMap();
+					return true;
+				}
+			}
+			return false;
+		}
+
+		boolean putMapPoint(String layerId, AidlMapPointWrapper point) {
+			AidlMapLayerWrapper layer = layers.get(layerId);
+			if (layer != null) {
+				layer.putPoint(point);
+				app.getAidlApi().refreshMap();
+				return true;
+			}
+			return false;
+		}
+
+		boolean updateMapPoint(String layerId, AidlMapPointWrapper point, boolean updateOpenedMenuAndMap) {
+			AidlMapLayerWrapper layer = layers.get(layerId);
+			if (layer != null) {
+				layer.putPoint(point);
+				app.getAidlApi().refreshMap();
+				if (updateOpenedMenuAndMap && app.getAidlApi().aMapPointUpdateListener != null) {
+					app.getAidlApi().aMapPointUpdateListener.onAMapPointUpdated(point, layerId);
+				}
+				return true;
+			}
+			return false;
+		}
+
+		boolean removeMapPoint(String layerId, String pointId) {
+			AidlMapLayerWrapper layer = layers.get(layerId);
+			if (layer != null) {
+				layer.removePoint(pointId);
+				app.getAidlApi().refreshMap();
+				return true;
+			}
+			return false;
 		}
 
 		@Override
