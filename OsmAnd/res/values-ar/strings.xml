@@ -2260,7 +2260,7 @@
     <string name="shared_string_permissions">ترخيصات</string>
     <string name="import_gpx_failed_descr">لا يمكن للتطبيق استيراد الملف. الرجاء التحقق إذا كان التطبيق لديه إذن قراءة الملف من موقعه.</string>
     <string name="distance_moving">تصحيح المسافة</string>
-    <string name="mapillary_image">صورة مابيلاري</string>
+    <string name="mapillary_image">صور مابيلاري</string>
     <string name="open_mapillary">فتح مابيلاري</string>
     <string name="shared_string_install">تثبيت</string>
     <string name="improve_coverage_mapillary">تحسين تغطية الصور مع مابيلاري</string>
@@ -2945,4 +2945,33 @@
 \n• عرض السمت في قياس المسافة
 \n
 \n</string>
+    <string name="day">يوم</string>
+    <string name="days_2_4">أيام</string>
+    <string name="days_5">أيام</string>
+    <string name="week">أسبوع</string>
+    <string name="weeks_2_4">أسابيع</string>
+    <string name="weeks_5">أسابيع</string>
+    <string name="month">شهر</string>
+    <string name="months_2_4">أشهر</string>
+    <string name="months_5">أشهر</string>
+    <string name="year">سنة</string>
+    <string name="years_2_4">سنوات</string>
+    <string name="years_5">سنوات</string>
+    <string name="months_3">ثلاثة أشهر</string>
+    <string name="price_free">مجاناً</string>
+    <string name="rendering_attr_showCycleNodeNetworkRoutes_name">إظهار دوائر مسارات شبكة النقاط</string>
+    <string name="download_map_dialog">نافذة تحميل الخريطة</string>
+    <string name="dialogs_and_notifications_title">النوافذ والإشعارات</string>
+    <string name="dialogs_and_notifications_descr">التحكم بالنوافذ المنبثقة، النوافذ والإشعارات التي تظهر استخدام osmand.</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_name">شبكة النقاط</string>
+    <string name="suggested_maps">خرائط مقترحة</string>
+    <string name="suggested_maps_descr">هذه الخرائط مطلوبة لاستخدامها مع الإضافة</string>
+    <string name="added_profiles">إضافة ملفات تعريف</string>
+    <string name="added_profiles_descr">إضافة تتيح إضافة ملف تعريف جديد لOsmAnd</string>
+    <string name="shared_string_turn_off">إطفاء</string>
+    <string name="new_plugin_added">تمت تركيب إضافة جديدة</string>
+    <string name="join_segments">ربط الأجزاء</string>
+    <string name="add_new_profile_q">إضافة ملف تعريف جديد \'%1$s\'\?</string>
+    <string name="save_heading">ضمن الوجهة</string>
+    <string name="save_heading_descr">حفظ الوجهة لكل نقطة متابعة خلال التسجيل.</string>
 </resources>
