@@ -541,6 +541,7 @@ public class ConfigureMapMenu {
 				srtmPlugin.registerLayerContextMenuActions(activity.getMapView(), adapter, activity);
 			}
 		}
+		app.getAidlApi().registerLayerContextMenu(activity.getMapView(), adapter, activity);
 	}
 
 	public static void refreshMapComplete(final MapActivity activity) {

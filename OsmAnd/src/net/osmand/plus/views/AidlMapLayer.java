@@ -22,6 +22,8 @@ import net.osmand.aidlapi.maplayer.point.AMapPoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
@@ -54,6 +56,9 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 	private String packName;
 	private AidlMapLayerWrapper aidlLayer;
 
+	private CommonPreference<Boolean> layerPref;
+	private CommonPreference<Boolean> appLayersPref;
+
 	private Paint pointInnerCircle;
 	private Paint pointOuterCircle;
 	private Paint bitmapPaint;
@@ -82,6 +87,10 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 		this.map = map;
 		this.aidlLayer = aidlLayer;
 		this.packName = packName;
+
+		OsmandApplication app = map.getMyApplication();
+		layerPref = app.getSettings().registerBooleanPreference(packName + "_" + aidlLayer.getId(), true);
+		appLayersPref = app.getSettings().registerBooleanPreference("layers_" + packName, true);
 	}
 
 	@Override
@@ -139,7 +148,7 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 		displayedPoints.clear();
 		imageRequests.clear();
 
-		if (isAppEnabled()) {
+		if (isLayerEnabled()) {
 			canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 
 			String selectedPointId = getSelectedContextMenuPointId();
@@ -234,12 +243,8 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 		return Boolean.parseBoolean(point.getParams().get(AMapPoint.POINT_STALE_LOC_PARAM));
 	}
 
-	private boolean isAppEnabled() {
-		return map.getMyApplication().getAidlApi().isAppEnabled(packName);
-	}
-
-	public String getPackName() {
-		return packName;
+	private boolean isLayerEnabled() {
+		return map.getMyApplication().getAidlApi().isAppEnabled(packName) && appLayersPref.get() && layerPref.get();
 	}
 
 	@Override
@@ -273,7 +278,7 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 
 	@Override
 	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o, boolean unknownLocation) {
-		if (isAppEnabled()) {
+		if (isLayerEnabled()) {
 			getFromPoint(tileBox, point, o);
 		}
 	}
