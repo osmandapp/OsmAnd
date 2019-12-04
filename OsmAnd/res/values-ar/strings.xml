@@ -2974,4 +2974,86 @@
     <string name="add_new_profile_q">إضافة ملف تعريف جديد \'%1$s\'\?</string>
     <string name="save_heading">ضمن الوجهة</string>
     <string name="save_heading_descr">حفظ الوجهة لكل نقطة متابعة خلال التسجيل.</string>
+    <string name="default_speed_dialog_msg">يستخدم لتقدير وقت الوصول لنوع غير معروف من الطرق ولتقليل السرعة لجميع الطرق (قد يغير المسار)</string>
+    <string name="change_data_storage_full_description">نقل ملفات بيانات OsmAnd إلى الوجهة الجديدة\?
+\n%1$s &gt; %2$s</string>
+    <string name="data_storage_preference_summary">%1$s • %2$s</string>
+    <string name="data_storage_space_description">%1$s GB متاحة (من %2$s GB)</string>
+    <string name="enter_path_to_folder">إدخال مسار المجلد</string>
+    <string name="shared_string_select_folder">المجلد…</string>
+    <string name="paste_Osmand_data_folder_path">لصق مسار مجلد بيانات OsmAnd</string>
+    <string name="change_osmand_data_folder_question">تغيير مجلد بيانات OsmAnd؟</string>
+    <string name="move_maps_to_new_destination">الانتقال للوجهة الجديدة</string>
+    <string name="avoid_in_routing_descr_">تجنبة بعض الطرق، أو بعض أنواع الطرق</string>
+    <string name="app_mode_utv">جنباً إلى جنب</string>
+    <string name="rendering_attr_piste_difficulty_aerialway_name">طريق تلفريك</string>
+    <string name="rendering_attr_piste_difficulty_connection_name">اتصال</string>
+    <string name="shared_string_calculate">حساب</string>
+    <string name="shared_string_osmand_usage">استخدام OsmAnd</string>
+    <string name="shared_sting_tiles">طبقات</string>
+    <string name="shared_string_maps">الخرائط</string>
+    <string name="shared_string_memory_tb_desc">تيرا بايت %1$s TB</string>
+    <string name="shared_string_memory_gb_desc">قيقا بايت %1$s GB</string>
+    <string name="shared_string_memory_mb_desc">%1$s MB ميقا بايت</string>
+    <string name="shared_string_memory_kb_desc">%1$s kB كيلوا بايت</string>
+    <string name="track_storage_directory">مجلد تخزين المسار</string>
+    <string name="track_storage_directory_descrp">المسارات يمكن أن تخزن في مجلد \'rec\' بشكل شهري أو مجلدات يومية.</string>
+    <string name="store_tracks_in_rec_directory">تسجيل المسارات إلى مجلد \'rec\'</string>
+    <string name="store_tracks_in_daily_directories">تسجل المسارات في المجلدات اليومية</string>
+    <string name="store_tracks_in_daily_directories_descrp">سجل المسارات في مجلدات واجعل مسمياتها حسب التاريخ مثل 2018-01-01.</string>
+    <string name="shared_string_memory_used_tb_desc">تم استخدام %1$s TB</string>
+    <string name="shared_string_memory_used_gb_desc">تم استخدام %1$s GB</string>
+    <string name="shared_string_memory_used_mb_desc">تم استخدام %1$s MB</string>
+    <string name="shared_string_memory_used_kb_desc">تم استخدام %1$s kB</string>
+    <string name="contour_lines_and_hillshade">الخطوط الكنتورية والتضاريس</string>
+    <string name="routing_attr_prefer_unpaved_name">تفضيل الطرق الغير معبدة</string>
+    <string name="routing_attr_prefer_unpaved_description">تفضيل الطرق الغير معبدة.</string>
+    <string name="update_all_maps">تحديث كل الخرائط</string>
+    <string name="update_all_maps_q">هل أنت متأكد من رغبتك بتحديث (%1$d) خريطة؟</string>
+    <string name="release_3_5">• تحديث التطبيق وإعدادات ملفات التعريف: يتم ترتيب الإعدادات الآن حسب النوع. يمكن تخصيص كل ملف تعريف بشكل منفصل.
+\n
+\n • نافذة جديدة لتنزيل الخريطة المقترحة أثناء تصفح الخرائط
+\n
+\n • إصلاحات للنمط الليلي
+\n
+\n • إصلاح العديد من مشاكل التوجيه في جميع أنحاء العالم
+\n
+\n • خريطة الأساس المحدثة مع شبكة طرق أكثر تفصيلا
+\n
+\n • تحديث المناطق التي غمرتها الفيضانات في جميع أنحاء العالم
+\n
+\n • توجيه التزلج: إضافة ملف تعريف الارتفاع وتعقيد المسار إلى تفاصيل المسار
+\n
+\n • إصلاحات أخرى
+\n
+\n</string>
+    <string name="apply_preference_to_all_profiles">يمكنك تطبيق هذا التغيير على جميع ملفات التعريف أو على ملف التعريف المحدد حاليًا فقط.</string>
+    <string name="shared_preference">مشتركة</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_name">تفضيل الطرق غير المعبدة</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_description">تفضيل الطرق غير المعبدة.</string>
+    <string name="layer_osm_edits">تحرير خرائط OSM</string>
+    <string name="quick_action_contour_lines_descr">لإظهار وإخفاء الخطوط الكنتورية على الخريطة.</string>
+    <string name="quick_action_contour_lines_show">إظهار الخطوط الكنتورية</string>
+    <string name="quick_action_contour_lines_hide">إخفاء الخطوط الكنتورية</string>
+    <string name="quick_action_show_hide_contour_lines">إظهار/إخفاء الخطوط الكنتورية</string>
+    <string name="quick_action_hillshade_descr">لإظهار وإخفاء التضاريس على الخريطة.</string>
+    <string name="quick_action_hillshade_show">إظهار التضاريس</string>
+    <string name="quick_action_hillshade_hide">إخفاء التضاريس</string>
+    <string name="quick_action_show_hide_hillshade">إظهار/إخفاء التضاريس</string>
+    <string name="tts_initialization_error">لا يمكن بدء تشغيل أداة تحويل النص إلى كلام</string>
+    <string name="export_profile">تصدير ملف التعريف</string>
+    <string name="exported_osmand_profile">OsmAnd ملف تعريف: %1$s</string>
+    <string name="overwrite_profile_q">"ملف التعريف \'%1$s\'  موجود بالفعل، هل تريد استبداله؟"</string>
+    <string name="export_profile_failed">لا يمكن تصدير ملف التعريف.</string>
+    <string name="profile_import">استيراد ملف التعريف:</string>
+    <string name="profile_import_descr">لاستيراد ملف تعريف، اذهب لمكانه على الجهاز وافتحه باستخدام OsmAnd.</string>
+    <string name="file_import_error">%1$s خطأ في الاستيراد: %2$s</string>
+    <string name="file_imported_successfully">%1$s تم الاستيراد بنجاح.</string>
+    <string name="rendering_value_white_name">أبيض</string>
+    <string name="swap_two_places">تبديل %1$s و %2$s</string>
+    <string name="route_start_point">نقطة البداية</string>
+    <string name="track_saved">تم حفظ المسار</string>
+    <string name="empty_filename">اسم الملف فارغ</string>
+    <string name="shared_string_revert">استرجاع</string>
+    <string name="clear_confirmation_msg">مسح %1$s\?</string>
 </resources>
