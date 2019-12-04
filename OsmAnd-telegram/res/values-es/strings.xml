@@ -194,7 +194,7 @@
     <string name="shared_string_sent">Enviado</string>
     <string name="please_update_osmand">Actualice OsmAnd para ver datos en el mapa</string>
     <string name="shared_string_update">Actualizar</string>
-    <string name="shared_string_ok">Aplicar</string>
+    <string name="shared_string_ok">Aceptar</string>
     <string name="timeline_available_for_free_now">La línea de tiempo es una función disponible ahora de forma gratuita.</string>
     <string name="disable_monitoring">Desactivar la monitorización</string>
     <string name="location_recording_enabled">Grabación de ubicación activada</string>
