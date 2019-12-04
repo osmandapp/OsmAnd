@@ -46,15 +46,15 @@
 \nКвадрати мап можна отримувати безпосередньо з онлайн-джерел або підготувати їх для оффлайнового використання (та вручну скопіювати в теку даних OsmAnd) у вигляді бази даних SQLite, яку можна створити за допомогою різноманітних сторонніх інструментів підготовки мап.</string>
     <string name="osmand_background_plugin_description">Показує налаштування для увімкнення фонового трекінгу та навігації шляхом періодичного пробудження GPS-передавача (з вимкненим екраном).</string>
     <string name="osmand_accessibility_description">Цей втулок робить налаштування спеціальні можливості доступними просто в OsmAnd. Він полегшує, наприклад, коригування швидкості відтворення голосових підказок, налаштування спрямовування екрану під час навігації, використання трекболу для контролю масштабування, або використання голосових команд зворотного зв\'язку для авто-анотації Вашого місця розташування.</string>
-    <string name="osmand_development_plugin_description">Втулок показує налаштування для пошуку помилок і розробки, наприклад моделювання навігації чи показу продуктивності рендерингу, голосових повідомлень. Ці налаштування призначені для розробників і не потрібні пересічним користувачам.</string>
+    <string name="osmand_development_plugin_description">Втулок показує налаштування для пошуку помилок і розробки, наприклад моделювання навігації чи показу плідності відмалювання, голосових повідомлень. Ці налаштування призначені для розробників і не потрібні пересічним користувачам.</string>
     <string name="plugins_screen">Втулки</string>
     <string name="prefs_plugins_descr">Втулки надають додаткові можливості.</string>
     <string name="prefs_plugins">Втулки</string>
-    <string name="osm_editing_plugin_description">За допомогою цього втулка, ви можете використовувати OsmAnd для створення або редагування цікавих точок (POI) в OSM, створення й коментування нотаток OSM, надсилання GPX-треків в OSM. OSM — суспільний картографічний проєкт, участь в якому можуть брати усі охочі. За докладною інформацією звертайтесь на https://openstreetmap.org. Вітається активна участь, внесок можна зробити безпосередньо з OsmAnd, якщо ви вкажете свої персональні облікові дані OSM.</string>
+    <string name="osm_editing_plugin_description">За допомогою цього втулка, ви можете використовувати OsmAnd для створення або редагування цікавих точок (POI) в OSM, створення й коментування приміток OSM, надсилання GPX-треків в OSM. OSM — суспільний картографічний проєкт, участь в якому можуть брати усі охочі. За докладними відомостями звертайтесь на https://openstreetmap.org. Вітається активна участь, внесок можна зробити безпосередньо з OsmAnd, якщо ви вкажете свої персональні облікові дані OSM.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Векторні мапи відображаються швидше. Підтримуються не всіма пристроями.</string>
     <string name="play_commands_of_currently_selected_voice">Відтворити оголошення вибраним голосом:</string>
     <string name="debugging_and_development">Налагодження і розробка OsmAnd</string>
-    <string name="native_rendering">Швидкий рендеринг</string>
+    <string name="native_rendering">Швидке відмалювання</string>
     <string name="test_voice_prompts">Перевірити голосові підказки</string>
     <string name="switch_to_raster_map_to_see">Для поточної місцевості відсутні векторні автономні мапи. Завантажте їх у \'Налаштуваннях\' (\'Керування файлами мап\') або перемкніться на втулок \'Онлайн-мапи\'.</string>
     <string name="send_files_to_osm">Відправити GPX файли в OSM?</string>
@@ -65,7 +65,7 @@
     <string name="default_buttons_support">Підтримка</string>
     <string name="support_new_features">Підтримати розробку нових функцій</string>
     <string name="show_ruler_level">Відображати масштаб</string>
-    <string name="info_button">Інформація</string>
+    <string name="info_button">Відомості</string>
     <string name="back_to_location">Повернутись на позицію</string>
     <string name="shared_string_help">Допомога</string>
     <string name="accessibility_mode">Режим допоміжних можливостей</string>
@@ -105,7 +105,7 @@
     <string name="towards">до</string>
     <string name="accuracy">Точність</string>
     <string name="altitude">Висота</string>
-    <string name="no_info">Немає інформації</string>
+    <string name="no_info">Немає відомостей</string>
     <string name="direction_style_sidewise">За сторонами світу (8 секторів)</string>
     <string name="direction_style_clockwise">За циферблатом (12 секторів)</string>
     <string name="settings_direction_style">Стиль вказівника напрямків</string>
@@ -183,7 +183,7 @@
     <string name="auto_follow_route_navigation">Автоцентрування мапи тільки під час навігації</string>
     <string name="auto_follow_route_navigation_descr">Повертати мапу в поточну позицію тільки при навігації за маршрутом.</string>
     <string name="auto_follow_location_enabled">Використовується режим самочинного осереднення мапи.</string>
-    <string name="pref_vector_rendering">Налаштування векторного рендерінгу</string>
+    <string name="pref_vector_rendering">Налаштування векторного відмалювання</string>
     <string name="pref_overlay">Додаткові шари</string>
     <string name="pref_raster_map">Налаштування онлайн мап</string>
     <string name="pref_vector_map">Налаштування векторних мап</string>
@@ -260,8 +260,8 @@
     <string name="search_offline_clear_search">Новий пошук</string>
     <string name="map_text_size_descr">Виберіть розмір шрифту для позначень на мапі:</string>
     <string name="map_text_size">Розмір тексту</string>
-    <string name="trace_rendering">Налагоджувальна інформація про рендеринг</string>
-    <string name="trace_rendering_descr">Відображає продуктивність рендерингу.</string>
+    <string name="trace_rendering">Налагоджувальні відомості про відмалювання</string>
+    <string name="trace_rendering_descr">Відображає плідність відмалювання.</string>
     <string name="installing_new_resources">Розпаковуються нові дані…</string>
     <string name="internet_connection_required_for_online_route">Онлайн-служба навігації вибрана, але ви не підключені до Всемережжя.</string>
     <string name="tts_language_not_supported_title">Мова не підтримується</string>
@@ -392,13 +392,13 @@
     <string name="shared_string_download_map">Завантажити мапу</string>
     <string name="select_max_zoom_preload_area">Виберіть найбільший масштаб для попереднього завантаження</string>
     <string name="maps_could_not_be_downloaded">Дана мапа не може бути завантажена</string>
-    <string name="continuous_rendering">Безперервний рендеринг</string>
+    <string name="continuous_rendering">Безперервне відмалювання</string>
     <string name="continuous_rendering_descr">Відображати безперервне промальовування замість цілковитого зображення.</string>
     <string name="rendering_exception">Не вдалося відобразити обрану область.</string>
     <string name="show_point_options">Використати розташування…</string>
     <string name="renderer_load_sucess">Візуалізатор завантажено</string>
     <string name="renderer_load_exception">Не вдалося завантажити відмальовувач.</string>
-    <string name="renderers">Векторний рендер</string>
+    <string name="renderers">Векторне відмалювання</string>
     <string name="renderers_descr">Виберіть стиль відтворення мапи</string>
     <string name="poi_context_menu_website">Показати сайт POI</string>
     <string name="poi_context_menu_call">Показати телефон POI</string>
@@ -436,7 +436,7 @@
     <string name="none_region_found">Не знайдено завантажениі мапи на карті пам\'яті.</string>
     <string name="poi_namefinder_query_empty">Почніть вводити текст для пошуку POI</string>
     <string name="any_poi">Всі</string>
-    <string name="thanks_yandex_traffic">Дякуємо Yandex за інформацію про дорожній рух.</string>
+    <string name="thanks_yandex_traffic">Дякуємо Yandex за відомості про дорожній рух.</string>
     <string name="layer_yandex_traffic">Яндекс Пробки</string>
     <string name="layer_route">Маршрут</string>
     <string name="shared_string_favorites">Закладки</string>
@@ -686,7 +686,7 @@
     <string name="poi_action_succeded_template">Дію {0} завершено.</string>
     <string name="poi_error_unexpected_template">Не вдалося виконати дію {0}.</string>
     <string name="poi_error_io_error_template">Помилка вводу-виводу при виконанні дії {0}.</string>
-    <string name="poi_error_info_not_loaded">Помилка при завантаженні інформації про POI</string>
+    <string name="poi_error_info_not_loaded">Помилка при завантаженні відомостей про POI</string>
     <string name="poi_dialog_opening_hours">Відкрити</string>
     <string name="poi_dialog_comment">Коментар</string>
     <string name="poi_dialog_comment_default">Зміна POI</string>
@@ -885,7 +885,7 @@
     <string name="show_warnings_title">Показувати попередження…</string>
     <string name="poi_filter_emergency">Аварійні служби</string>
     <string name="non_optimal_route_calculation">Швидка побудова маршруту (можливо неоптимальна)</string>
-    <string name="show_warnings_descr">Налаштування попередження про дорожній рух (обмеження швидкості, вимушені зупинки, штучні нерівності, тунелі), попередження про камери контролю швидкості, інформація про смуги руху.</string>
+    <string name="show_warnings_descr">Налаштування попередження про дорожній рух (обмеження швидкості, вимушені зупинки, штучні нерівності, тунелі), попередження про камери контролю швидкості, відомості про смуги руху.</string>
     <string name="avoid_motorway">Без автомагістралей</string>
     <string name="snap_to_road_descr">Прив\'язуватися до доріг під час навігації.</string>
     <string name="snap_to_road">Прив’язуватися до доріг</string>
@@ -1103,7 +1103,7 @@
     <string name="driving_region_canada">Канада</string>
     <string name="driving_region_europe_asia">Європа, Азія, Латинська Америка та подібні</string>
     <string name="driving_region_uk">Великобританія, Індія &amp; схожі</string>
-    <string name="map_widget_fps_info">FPS-інфо</string>
+    <string name="map_widget_fps_info">FPS-відомості</string>
     <string name="about_version">Версія:</string>
     <string name="shared_string_about">Про додаток</string>
     <string name="about_settings_descr">Версія, ліцензії, учасники проєкту</string>
@@ -1275,7 +1275,7 @@
     <string name="shared_string_select_on_map">Обрати на мапі</string>
     <string name="shared_string_favorite">Закладки</string>
     <string name="route_preferences">Уподобання маршруту</string>
-    <string name="route_info">Інформація про маршрут</string>
+    <string name="route_info">Відомості про маршрут</string>
     <string name="routing_attr_prefer_motorway_name">Надавати перевагу автомагістралям</string>
     <string name="routing_attr_prefer_motorway_description">Надавати перевагу автомагістралям</string>
     <string name="routing_attr_avoid_toll_name">Без платних доріг</string>
@@ -1547,7 +1547,7 @@
     <string name="delay_to_start_navigation_descr">Вкажіть час очікування для перебування на екрані планування маршруту.</string>
     <string name="shared_string_is_open">Відкрито</string>
     <string name="rendering_attr_OSMMapperAssistant_name">Помічник мапера OSM</string>
-    <string name="agps_info">Інформація A-GPS</string>
+    <string name="agps_info">Відомості A-GPS</string>
     <string name="shared_string_manage">Керування</string>
     <string name="shared_string_edit">Правити</string>
     <string name="shared_string_places">Місця</string>
@@ -1567,9 +1567,9 @@
     <string name="shared_string_go">Вирушаємо</string>
     <string name="shared_string_do_not_use">Не використовувати</string>
     <string name="shared_string_address">Адреса</string>
-    <string name="plugin_touringview_descr">Активація цього виду змінює стиль мапи OsmAnd на „Туристичну мапу“ – особливий стиль з докладною деталізацією для мандрівників та професіональних водіїв. 
+    <string name="plugin_touringview_descr">Задіювання цього виду змінює стиль мапи OsmAnd на „Туристичну мапу“ – особливий стиль з докладною деталізацією для мандрівників та професіональних водіїв. 
 \n 
-\nЦей режим надає, на будь-якому масштабі, максимальну кількість інформації потрібну для подорожуючих (дороги, путівці, стежки та орієнтири). 
+\nЦей режим надає, на будь-якому масштабі, максимальну кількість відомостей потрібну для подорожніх (дороги, путівці, стежки та орієнтири). 
 \n 
 \nВін також чітко показує всі типи доріг однозначним кольоровим кодуванням, що є корисним особливо для водіїв великих транспортних засобів. 
 \n 
@@ -1667,7 +1667,7 @@
     <string name="shared_string_logoff">Вийти</string>
     <string name="local_recordings_delete_all_confirm">Ви збираєтеся видалити %1$d приміток. Ви впевнені\?</string>
     <string name="download_wikipedia_maps">Вікіпедія</string>
-    <string name="rendering_value_default13_name">Типово (13)</string>
+    <string name="rendering_value_default13_name">Усталено (13)</string>
     <string name="rendering_value_defaultTranslucentCyan_name">Типово (напівпрозорий блакитний)</string>
     <string name="rendering_value_translucent_orange_name">Напівпрозорий помаранчевий</string>
     <string name="shared_string_update">Оновити</string>
@@ -1749,7 +1749,7 @@
     <string name="shared_string_trip_recording">Запис подорожі</string>
     <string name="shared_string_navigation">Навігація</string>
     <string name="osmand_running_in_background">Працює у фоновому режимі</string>
-    <string name="favourites_edit_dialog_title">Інформація по закладці</string>
+    <string name="favourites_edit_dialog_title">Відомості по закладці</string>
     <string name="simulate_your_location_stop_descr">Зупинити симуляцію вашої позиції.</string>
     <string name="looking_up_address">Пошук адреси</string>
     <string name="av_locations">Місця</string>
@@ -1792,7 +1792,7 @@
     <string name="tab_title_advanced">Розширені</string>
     <string name="building_number">Номер будинку</string>
     <string name="next_proceed">Наступний</string>
-    <string name="contact_info">Контактна інформація</string>
+    <string name="contact_info">Контактні відомості</string>
     <string name="description">Опис</string>
     <string name="add_opening_hours">Додати години роботи</string>
     <string name="poi_dialog_poi_type">Тип POI</string>
@@ -2098,7 +2098,7 @@
     <string name="get_for">Отримати на %1$s</string>
     <string name="get_for_month">Отримати за %1$s на місяць</string>
     <string name="osm_live_banner_desc">Отримайте необмежені завантаження для мап, а також оновлення мап частіше ніж один раз на місяць: щотижня, щодня або щогодини.</string>
-    <string name="osmand_plus_banner_desc">Втулок для необмеженого доступу до мап, їх оновлень та отримання інформації з Wikipedia.</string>
+    <string name="osmand_plus_banner_desc">Втулок для необмеженого доступу до мап, їх оновлень та отримання відомостей з Wikipedia.</string>
     <string name="si_mi_meters">Милі/метри</string>
     <string name="skip_map_downloading">Пропустити завантаження мап</string>
     <string name="skip_map_downloading_desc">У Вас немає завантажених мап. Ви можете вибрати мапу зі списку або завантажити її пізніше за допомогою меню — %1$s.</string>
@@ -2384,8 +2384,8 @@
 \n• Дозволяє Вам вибрати вигляд назв на мапі: англійською мовою, локальною мовою або фонетичним написанням
 \n• Показує спеціалізовані онлайн-мапи, супутниковий вид (від Bing), різні накладки на кшталт туристичних/навігаційних GPX-треків та додаткові шари з налаштовуваною прозорістю
 \n</string>
-    <string name="osmand_extended_description_part4">Катання на лижах
-\nOsmAnd-втулок лижних мап дозволяє бачити лижні траси з рівнем складності та деякою додатковою інформацією на кшталт розташування підйомників та інших об’єктів.</string>
+    <string name="osmand_extended_description_part4">Катання на лижах 
+\nOsmAnd-втулок лижних мап дозволяє бачити лижні траси з рівнем складності та деякою додатковими відомостями на зразок розташування підйомників та інших об’єктів.</string>
     <string name="osmand_extended_description_part5">Їзда на велосипеді
 \n• Знаходьте велосипедні доріжки на мапі
 \n• GPS-навігація у велосипедному режимі будує маршрут з використанням велосипедних доріжок
