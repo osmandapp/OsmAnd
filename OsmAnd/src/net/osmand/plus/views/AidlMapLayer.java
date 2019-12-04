@@ -41,7 +41,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-import static net.osmand.aidl.OsmandAidlApi.ConnectedApp.LAYERS_PREFIX;
+import static net.osmand.aidl.ConnectedApp.AIDL_LAYERS_PREFIX;
 
 public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider, MapTextLayer.MapTextProvider<AidlMapPointWrapper> {
 
@@ -92,7 +92,7 @@ public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider
 
 		OsmandApplication app = map.getMyApplication();
 		layerPref = app.getSettings().registerBooleanPreference(packName + "_" + aidlLayer.getId(), true);
-		appLayersPref = app.getSettings().registerBooleanPreference(LAYERS_PREFIX + packName, true);
+		appLayersPref = app.getSettings().registerBooleanPreference(AIDL_LAYERS_PREFIX + packName, true);
 	}
 
 	@Override

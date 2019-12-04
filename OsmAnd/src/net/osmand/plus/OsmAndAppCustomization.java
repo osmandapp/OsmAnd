@@ -16,7 +16,7 @@ import android.widget.ArrayAdapter;
 import net.osmand.AndroidUtils;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
-import net.osmand.aidl.OsmandAidlApi;
+import net.osmand.aidl.ConnectedApp;
 import net.osmand.data.LocationPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.PluginsActivity;
@@ -434,7 +434,7 @@ public class OsmAndAppCustomization {
 			JSONObject allItems = new JSONObject(app.getSettings().API_NAV_DRAWER_ITEMS_JSON.get());
 			for (Iterator<?> it = allItems.keys(); it.hasNext(); ) {
 				String appPackage = (String) it.next();
-				OsmandAidlApi.ConnectedApp connectedApp = app.getAidlApi().getConnectedApp(appPackage);
+				ConnectedApp connectedApp = app.getAidlApi().getConnectedApp(appPackage);
 				if (connectedApp != null && connectedApp.isEnabled()) {
 					JSONArray jArray = allItems.getJSONArray(appPackage);
 					List<NavDrawerItem> list = new ArrayList<>();
