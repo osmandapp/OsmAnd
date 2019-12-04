@@ -325,6 +325,7 @@ public class OsmandAidlApi {
 						AidlMapWidgetWrapper widget = connectedApp.getWidgets().get(widgetId);
 						MapInfoLayer layer = mapActivity.getMapLayers().getMapInfoLayer();
 						if (widget != null && layer != null) {
+							ApplicationMode.regWidgetVisibility(widget.getId(), (ApplicationMode[]) null);
 							TextInfoWidget control = connectedApp.createWidgetControl(mapActivity, widgetId);
 							connectedApp.getWidgetControls().put(widgetId, control);
 							int menuIconId = AndroidUtils.getDrawableId(app, widget.getMenuIconName());
