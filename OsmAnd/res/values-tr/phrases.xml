@@ -2277,4 +2277,17 @@
     <string name="poi_step_condition_even">Basamak durumu: düzgün</string>
     <string name="poi_step_condition_uneven">Basamak durumu: düzensiz</string>
     <string name="poi_step_condition_rough">Basamak durumu: engebeli</string>
+    <string name="poi_cairn">Taş yığını</string>
+    <string name="poi_defibrillator">Defibrilatör</string>
+    <string name="poi_defibrillator_yes">Defibrilatör: evet</string>
+    <string name="poi_tomb_war_grave">Türü: savaş mezarı</string>
+    <string name="poi_tomb_tumulus">Türü: tümülüs</string>
+    <string name="poi_tomb_rock_cut">Türü: kaya oyma</string>
+    <string name="poi_tomb_hypogeum">Türü: yeraltı odası</string>
+    <string name="poi_tomb_vault">Türü: tonoz</string>
+    <string name="poi_tomb_columbarium">Türü: küllerin saklandığı yer</string>
+    <string name="poi_tomb_mausoleum">Türü: anıt mezar</string>
+    <string name="poi_tomb_sarcophagus">Türü: lahit</string>
+    <string name="poi_tomb_crypt">Türü: mahzen</string>
+    <string name="poi_tomb_pyramid">Türü: piramit</string>
 </resources>

@@ -2188,7 +2188,7 @@ Bitte geben Sie einen vollständigen Code ein</string>
     <string name="navigate_point_olc_info_area">Gültiger vollständiger OLC
 Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="auto_split_recording_title">Aufzeichnungen bei Lücken automatisch trennen</string>
-    <string name="auto_split_recording_descr">Nach 6 Minuten Pause neues Segment beginnen, nach 2 Stunden neuen Track beginnen und nach Pause mit Datumsänderung neue Datei beginnen.</string>
+    <string name="auto_split_recording_descr">Nach 6-minütiger Pause neues Segment, nach 2-stündiger Pause neuen Track und nach Pause mit Datumsänderung neue Datei beginnen.</string>
     <string name="navigate_point_olc">Offener Standortcode (OLC)</string>
     <string name="quick_action_page_list_descr">Taste, um durch die Liste unten zu blättern.</string>
     <string name="routing_attr_height_obstacles_name">Höhendaten berücksichtigen</string>
@@ -2433,7 +2433,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="no_photos_descr">Keine Fotos hier.</string>
     <string name="plugin_mapillary_descr">Fotos von der Straße für jedermann. Plätze entdecken, mitwirken, die Welt im Bild festhalten.</string>
     <string name="improve_coverage_mapillary">Verbessern Sie die Bildberichterstattung mit Mapillary</string>
-    <string name="improve_coverage_install_mapillary_desc">Installieren Sie die App \'Mapillary\', um dieser Kartenposition eines oder mehrere Fotos hinzuzufügen.</string>
+    <string name="improve_coverage_install_mapillary_desc">Installieren Sie die App \'Mapillary\', um dieser Kartenposition ein oder mehrere Fotos hinzuzufügen.</string>
     <string name="open_mapillary">Mapillary öffnen</string>
     <string name="mapillary_image">Mapillary-Foto</string>
     <string name="shared_string_permissions">Berechtigungen</string>
@@ -2597,7 +2597,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="mark_passed">Markierung passiert</string>
     <string name="shared_string_gpx_waypoints">Track-Wegpunkte</string>
     <string name="modify_the_search_query">Suchanfrage verändern.</string>
-    <string name="empty_state_osm_edits">Erstellen oder Ändern von OSM-Objekten</string>
+    <string name="empty_state_osm_edits">OSM-Objekte erstellen oder ändern</string>
     <string name="empty_state_osm_edits_descr">OSM-POIs erstellen oder verändern, OSM-Notizen eröffnen oder bearbeiten, und aufgezeichnete GPX-Dateien hinzufügen.</string>
     <string name="shared_string_deleted">Gelöscht</string>
     <string name="shared_string_edited">Bearbeitet</string>
@@ -2803,9 +2803,8 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="coord_input_save_as_track">Als Track speichern</string>
     <string name="coord_input_save_as_track_descr">Sie haben %1$s Punkte hinzugefügt. Geben Sie einen Dateinamen ein und klicken Sie auf \"Speichern\".</string>
     <string name="point_deleted">Punkt %1$s gelöscht</string>
-    <string name="send_search_query_description">Ihre Suchanfrage wird an: \"%1$s\" gesendet, zusammen mit Ihrem Standort.
-\n
-\nPersönliche Informationen werden nicht gesammelt, sondern nur Suchdaten, die zur Verbesserung der Suche benötigt werden.</string>
+    <string name="send_search_query_description">Ihre Suchanfrage wird zusammen mit Ihrem Standort gesendet an: „%1$s“.
+\nPersönliche Daten werden nicht gesammelt, zur Verbesserung der Suche werden nur die Suchdaten benötigt.</string>
     <string name="search_no_results_description">Keine Ergebnisse?
 \nNehmen Sie Kontakt mit uns auf.</string>
     <string name="send_search_query">Suchanfrage senden?</string>
@@ -3053,7 +3052,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="choose_data_to_share">Wählen Sie, welche Art Daten Sie freigeben möchten:</string>
     <string name="downloaded_maps">Heruntergeladene Karten</string>
     <string name="visited_screens">Besuchte Bildschirme</string>
-    <string name="collected_data_descr">Definieren Sie, welche Daten Sie OsmAnd erlauben, zu teilen.</string>
+    <string name="collected_data_descr">Bestimmen Sie, welche Daten Sie für OsmAnd freigeben.</string>
     <string name="downloaded_maps_collect_descr">Helfen Sie uns, die Beliebtheit von Karten für Länder und Regionen herauszufinden.</string>
     <string name="visited_screens_collect_descr">Helfen Sie uns, die Beliebtheit von OsmAnd-Funktionen zu verstehen.</string>
     <string name="privacy_and_security_change_descr">Auf \"Erlauben\" tippen, wenn Sie mit %1$s einverstanden sind</string>
@@ -3122,7 +3121,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="routing_attr_allow_expert_name">Extreme Abfahrten zulassen</string>
     <string name="routing_attr_allow_expert_description">Extrem schwere Routen, mit gefährlichen Hindernissen und schwieriger Umgebung.</string>
     <string name="routing_attr_allow_classic_only_name">Nur klassische Routen zulassen</string>
-    <string name="routing_attr_difficulty_preference_name">Bevorzugte Schwierigkeit</string>
+    <string name="routing_attr_difficulty_preference_name">Bevorzugter Schwierigkeitsgrad</string>
     <string name="routing_attr_piste_type_downhill_name">Ski Alpin/Abfahrt</string>
     <string name="routing_attr_piste_type_downhill_description">Pisten für Ski Alpin oder Abfahrt und Zugang zu den Skiliften.</string>
     <string name="process_downloading_service">OsmAnd Download-Dienst</string>
@@ -3140,7 +3139,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="shared_string_max_speed">Max. Tempo</string>
     <string name="default_speed_setting_title">Standardtempo</string>
     <string name="default_speed_setting_descr">Einstellungen des Standardtempos ändern</string>
-    <string name="minmax_speed_dialog_title">Min/Max-Tempo einstellen</string>
+    <string name="minmax_speed_dialog_title">Tempogrenzwerte einstellen</string>
     <string name="new_profile">Neues Profil</string>
     <string name="shared_string_crash">Absturz</string>
     <string name="last_launch_crashed">Der letzte Start von OsmAnd ist fehlgeschlagen. Bitte helfen Sie uns, OsmAnd zu verbessern, indem Sie uns über diesen Fehler informieren.</string>

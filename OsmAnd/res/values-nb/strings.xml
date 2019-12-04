@@ -1223,7 +1223,7 @@
     <string name="rendering_value_translucent_blue_name">Gjennomskinnelig blå</string>
     <string name="rendering_value_purple_name">Lilla</string>
     <string name="rendering_value_translucent_purple_name">Gjennomskinnelig lilla</string>
-    <string name="restart_is_required">En omstart av OsmAnd krevs for å ta i bruk endringer.</string>
+    <string name="restart_is_required">En omstart av OsmAnd kreves for å ta i bruk endringen.</string>
     <string name="plugin_touringview_name">Turkartvisning</string>
     <string name="rendering_value__name">Standard</string>
     <string name="rendering_value_highContrastRoads_name">Veier med høy kontrast</string>

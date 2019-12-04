@@ -3374,4 +3374,8 @@ représentant la zone : %1$s x %2$s</string>
     <string name="added_profiles_descr">Le greffon ajoute un nouveau profil dans OsmAnd</string>
     <string name="shared_string_turn_off">Désactiver</string>
     <string name="new_plugin_added">Nouveau greffon ajouté</string>
+    <string name="join_segments">Relier les segments</string>
+    <string name="add_new_profile_q">Ajouter le profil \'%1$s\' \?</string>
+    <string name="save_heading">Inclure l\'entête</string>
+    <string name="save_heading_descr">Enregistrer l\'entête avec chaque point lors de l\'enregistrement d\'une trace.</string>
 </resources>

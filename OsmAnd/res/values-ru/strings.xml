@@ -561,8 +561,8 @@
     <string name="si_km_m">Километры/метры</string>
     <string name="yard">ярд</string>
     <string name="foot">фут</string>
-    <string name="mile_per_hour">мл/ч</string>
-    <string name="mile">мл</string>
+    <string name="mile_per_hour">миль/ч</string>
+    <string name="mile">миля</string>
     <string name="send_location_way_choose_title">Поделиться, используя</string>
     <string name="send_location_sms_pattern">Координаты: %1$s\n%2$s</string>
     <string name="send_location_email_pattern">Чтобы увидеть местоположение следуйте ссылке %1$s или android ссылке %2$s</string>
@@ -1683,8 +1683,8 @@
     <string name="remove_the_tag">УДАЛИТЬ ТЕГ</string>
     <string name="edit_group">Редактировать группу</string>
     <string name="plugin_install_needs_network">Вам необходимо Интернет соединение для установки этого плагина.</string>
-    <string name="shared_string_enable">Вкл.</string>
-    <string name="shared_string_disable">Выкл.</string>
+    <string name="shared_string_enable">Включить</string>
+    <string name="shared_string_disable">Выключить</string>
     <string name="get_plugin">Получить</string>
     <string name="plugin_ski_name">Лыжные карты</string>
     <string name="plugin_nautical_name">Морские карты</string>
@@ -1698,7 +1698,7 @@
     <string name="back_to_map">Вернуться на карту</string>
     <string name="location_on_map">Координаты:\n Широта %1$s\n Долгота %2$s</string>
     <string name="shared_string_ellipsis">…</string>
-    <string name="shared_string_enabled">Включен</string>
+    <string name="shared_string_enabled">Включена</string>
     <string name="shared_string_disabled">Выключен</string>
     <string name="shared_string_never">Никогда</string>
     <string name="shared_string_and">и</string>
@@ -2086,7 +2086,7 @@
     <string name="clear_updates_proposition_message">Загруженные обновления можно удалить и вернуться к первоначальной редакции карты</string>
     <string name="add_time_span">Добавить временной интервал</string>
     <string name="road_blocked">Дорога перекрыта</string>
-    <string name="nm">мор. мл</string>
+    <string name="nm">мор. миля</string>
     <string name="nm_h">уз</string>
     <string name="downloads_left_template">Осталось %1$s загрузок</string>
     <string name="donations">Пожертвования</string>

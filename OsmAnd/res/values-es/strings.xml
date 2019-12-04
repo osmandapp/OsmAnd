@@ -751,7 +751,7 @@
     <string name="osmand_parking_hours">Horas</string>
     <string name="osmand_parking_minutes">Minutos</string>
     <string name="osmand_parking_position_description_add_time">Automóvil aparcado a las</string>
-    <string name="use_compass_navigation_descr">Usa la brújula cuando no se detecta la dirección.</string>
+    <string name="use_compass_navigation_descr">Usa la brújula cuando no se detecta el rumbo.</string>
     <string name="use_compass_navigation">Usar brújula</string>
     <string name="route_updated_loc_found">Esperando la ubicación para calcular la ruta</string>
     <string name="continue_follow_previous_route_auto">¿Reanudar la navegación anterior no finalizada? (%1$s segundos)</string>
@@ -3390,7 +3390,7 @@
     <string name="dialogs_and_notifications_title">Diálogos y notificaciones</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_name">Redes de nodos</string>
     <string name="suggested_maps">Mapas sugeridos</string>
-    <string name="suggested_maps_descr">Estos mapas deben usarse con el complemento</string>
+    <string name="suggested_maps_descr">Esos mapas son necesarios para su uso con un complemento</string>
     <string name="added_profiles">Perfiles añadidos</string>
     <string name="added_profiles_descr">El complemento añade un nuevo perfil a OsmAnd</string>
     <string name="shared_string_turn_off">Apagar</string>
@@ -3400,4 +3400,7 @@
     <string name="app_mode_utv">En paralelo</string>
     <string name="rendering_attr_piste_difficulty_aerialway_name">Vía aérea</string>
     <string name="dialogs_and_notifications_descr">Controla las ventanas emergentes, diálogos y notificaciones que OsmAnd muestra durante el uso.</string>
+    <string name="add_new_profile_q">¿Añadir nuevo perfil \'%1$s\'\?</string>
+    <string name="save_heading">Incluir rumbo</string>
+    <string name="save_heading_descr">Guarda el rumbo a cada punto de la traza durante la grabación.</string>
 </resources>

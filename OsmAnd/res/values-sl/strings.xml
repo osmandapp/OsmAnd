@@ -3260,4 +3260,11 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="plugins_settings">Nastavitve vstavka</string>
     <string name="layer_osm_edits">Urejanja OSM</string>
     <string name="tts_initialization_error">Programnika za izgovorjavo besedila ni mogoče začeti</string>
+    <string name="shared_string_revert">Povrni</string>
+    <string name="clear_confirmation_msg">Ali želite počistiti %1$s\?</string>
+    <string name="suggested_maps">Predlagani zemljevidi</string>
+    <string name="added_profiles">Dodani profili</string>
+    <string name="new_plugin_added">Dodan je nov vstavek</string>
+    <string name="join_segments">Združi odseke</string>
+    <string name="add_new_profile_q">Ali želite dodati nov profil »%1$s«\?</string>
 </resources>
