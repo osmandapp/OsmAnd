@@ -15,7 +15,6 @@ import net.osmand.data.PointDescription;
 import net.osmand.plus.MapMarkersHelper.MapMarkersGroup;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
-import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.compress.compressors.bzip2.BZip2CompressorOutputStream;
@@ -35,6 +34,52 @@ import java.util.Set;
 
 public class FavouritesDbHelper {
 
+	private GeocodingLookupService.AddressLookupRequest workPointRequest;
+	private GeocodingLookupService.AddressLookupRequest homePointRequest;
+	private GeocodingLookupService.AddressLookupRequest parkingPointRequest;
+
+	public enum PersonalPoint {
+		HOME("%@home@%", R.string.home_button),
+		WORK("%@work@%", R.string.work_button),
+		PARKING("%@parking@%", R.string.parking_place);
+
+		String name;
+		int localNameID;
+
+		PersonalPoint(@NonNull String name, int localNameID) {
+			this.name = name;
+			this.localNameID = localNameID;
+		}
+
+		public static int getIndex(@NonNull String name) {
+			for (PersonalPoint pp : values())
+				if (pp.name.equals(name)) {
+					return pp.ordinal();
+				}
+			return 0;
+		}
+
+		public int getLocalName() {
+			return localNameID;
+		}
+
+		public static int getLocalName(@NonNull String name) {
+			for (PersonalPoint pp : values())
+				if (pp.name.equals(name)) {
+					return pp.localNameID;
+				}
+			return 0;
+		}
+
+		public static String getNameByLocalName(@NonNull String name, @NonNull Context context) {
+			for (PersonalPoint pp : values())
+				if (context.getString(pp.localNameID).equals(name)) {
+					return pp.name;
+				}
+			return "";
+		}
+	}
+
 	public interface FavoritesListener {
 		void onFavoritesLoaded();
 	}
@@ -53,10 +98,7 @@ public class FavouritesDbHelper {
 	protected static final String HIDDEN = "hidden";
 	private static final String DELIMETER = "__";
 
-	public static final String PERSONAL_CATEGORY_NAME = "personal";
-	public static final String HOME_POINT_NAME = "home";
-	public static final String WORK_POINT_NAME = "work";
-	public static final String PARKING_POINT_NAME = "parking";
+	public static final String PERSONAL_CATEGORY_NAME = "personal!@#$";
 
 	private Set<FavoritesListener> listeners = new HashSet<>();
 	private boolean favoritesLoaded;
@@ -111,16 +153,16 @@ public class FavouritesDbHelper {
 		});
 	}
 
-	boolean hasWorkPoint() {
-		return hasPersonalPoint(WORK_POINT_NAME);
+	public boolean hasWorkPoint() {
+		return hasPersonalPoint(PersonalPoint.WORK.name);
 	}
 
 	public boolean hasHomePoint() {
-		return hasPersonalPoint(HOME_POINT_NAME);
+		return hasPersonalPoint(PersonalPoint.HOME.name);
 	}
 
-	boolean hasParkingPoint() {
-		return hasPersonalPoint(PARKING_POINT_NAME);
+	public boolean hasParkingPoint() {
+		return hasPersonalPoint(PersonalPoint.PARKING.name);
 	}
 
 	private boolean hasPersonalPoint(String name) {
@@ -135,59 +177,36 @@ public class FavouritesDbHelper {
 	}
 
 	public FavouritePoint getWorkPoint() {
-		return getPersonalPoint(WORK_POINT_NAME);
+		return getPersonalPoint(PersonalPoint.WORK.name);
 	}
 
 	public FavouritePoint getHomePoint() {
-		return getPersonalPoint(HOME_POINT_NAME);
+		return getPersonalPoint(PersonalPoint.HOME.name);
 	}
 
 	public FavouritePoint getParkingPoint() {
-		return getPersonalPoint(PARKING_POINT_NAME);
+		return getPersonalPoint(PersonalPoint.PARKING.name);
 	}
 
-	LatLon getWorkPointLatLon() {
+	public LatLon getWorkPointLatLon() {
 		LatLon workPointLatLon;
 		if (hasWorkPoint()) {
 			workPointLatLon = new LatLon(getWorkPoint().getLatitude(), getWorkPoint().getLongitude());
 		} else {
-			workPointLatLon = new LatLon(0, 0);
+			workPointLatLon = null;
 		}
 		return workPointLatLon;
 	}
 
-	LatLon getHomePointLatLon() {
+	public LatLon getHomePointLatLon() {
 		LatLon homePointLatLon;
 		if (hasHomePoint()) {
 			homePointLatLon = new LatLon(getHomePoint().getLatitude(), getHomePoint().getLongitude());
 		} else {
-			homePointLatLon = new LatLon(0, 0);
+			homePointLatLon = null;
 		}
 		return homePointLatLon;
 	}
-
-	LatLon getParkingPointLatLon() {
-		LatLon parkingPointLatLon;
-		if (hasParkingPoint()) {
-			parkingPointLatLon = new LatLon(getParkingPoint().getLatitude(), getParkingPoint().getLongitude());
-		} else {
-			parkingPointLatLon = new LatLon(0, 0);
-		}
-		return parkingPointLatLon;
-	}
-
-	PointDescription getHomePointDescription() {
-		return getHomePoint().getPointStringDescription();
-	}
-
-	PointDescription getWorkPointDescription() {
-		return getWorkPoint().getPointStringDescription();
-	}
-
-	PointDescription getParkingPointDescription() {
-		return getParkingPoint().getPointStringDescription();
-	}
-
 
 	private FavouritePoint getPersonalPoint(String name) {
 		FavouritePoint favouritePoint = null;
@@ -296,41 +315,42 @@ public class FavouritesDbHelper {
 		return true;
 	}
 
-	void setHomePoint(LatLon latLon, PointDescription description) {
+	public void setHomePoint(@NonNull LatLon latLon, @NonNull PointDescription description) {
 		if (hasHomePoint()) {
 			getHomePoint().setDescription(description.getName());
 			editFavourite(getHomePoint(),latLon.getLatitude(),latLon.getLongitude());
 		} else {
-			addFavoritePersonal(latLon, HOME_POINT_NAME, description.getName());
+			addFavoritePersonal(latLon, PersonalPoint.HOME.name, description.getName());
 		}
+		lookupAllPersonalPointsAddresses();
 	}
 
-	void setWorkPoint(LatLon latLon, PointDescription description) {
+	public void setWorkPoint(@NonNull LatLon latLon, @NonNull PointDescription description) {
 		if (hasWorkPoint()) {
 			getWorkPoint().setDescription(description.getName());
 			editFavourite(getWorkPoint(),latLon.getLatitude(),latLon.getLongitude());
 		} else {
-			addFavoritePersonal(latLon, WORK_POINT_NAME, description.getName());
+			addFavoritePersonal(latLon, PersonalPoint.WORK.name, description.getName());
 		}
+		lookupAllPersonalPointsAddresses();
 	}
 
-	void setParkingPoint(LatLon latLon, PointDescription description) {
+	public void setParkingPoint(@NonNull LatLon latLon, @NonNull PointDescription description) {
 		if (hasParkingPoint()) {
 			getParkingPoint().setDescription(description.getName());
 			editFavourite(getParkingPoint(),latLon.getLatitude(),latLon.getLongitude());
 		} else {
-			addFavoritePersonal(latLon, PARKING_POINT_NAME, description.getName());
+			addFavoritePersonal(latLon, PersonalPoint.PARKING.name, description.getName());
 		}
+		lookupAllPersonalPointsAddresses();
 	}
 
 
-	void addFavoritePersonal(LatLon latLon, String name, String description) {
-		if (latLon != null) {
-			FavouritePoint favouritePoint = new FavouritePoint(latLon.getLatitude(), latLon.getLongitude(),
-					name, FavouritesDbHelper.PERSONAL_CATEGORY_NAME);
-			favouritePoint.setDescription(description);
-			addFavourite(favouritePoint);
-		}
+	void addFavoritePersonal(@NonNull LatLon latLon, @NonNull String name, @NonNull String description) {
+		FavouritePoint favouritePoint = new FavouritePoint(latLon.getLatitude(), latLon.getLongitude(),
+				name, FavouritesDbHelper.PERSONAL_CATEGORY_NAME);
+		favouritePoint.setDescription(description);
+		addFavourite(favouritePoint);
 	}
 
 	public boolean addFavourite(FavouritePoint p) {
@@ -357,6 +377,92 @@ public class FavouritesDbHelper {
 		runSyncWithMarkers(group);
 
 		return true;
+	}
+
+
+	void lookupAllPersonalPointsAddresses() {
+		if (!context.isApplicationInitializing()) {
+			lookupAddressForHomePoint();
+			lookupAddressForWorkPoint();
+			lookupAddressForParkingPoint();
+		}
+	}
+
+	void lookupAddressForWorkPoint() {
+		final TargetPointsHelper targetPointsHelper = context.getTargetPointsHelper();
+		final FavouritePoint workPoint = getWorkPoint();
+		if (workPoint != null && (workPointRequest == null ||
+				!workPointRequest.getLatLon().equals(new LatLon(workPoint.getLatitude(), workPoint.getLongitude())))) {
+			cancelWorkPointAddressRequest();
+			workPointRequest = new GeocodingLookupService.AddressLookupRequest(
+					new LatLon(workPoint.getLatitude(), workPoint.getLongitude()), new GeocodingLookupService.OnAddressLookupResult() {
+				@Override
+				public void geocodingDone(String address) {
+					workPoint.setDescription(address);
+					targetPointsHelper.updateRouteAndRefresh(false);
+				}
+			}, null);
+			context.getGeocodingLookupService().lookupAddress(workPointRequest);
+		}
+	}
+
+	void lookupAddressForHomePoint() {
+		final TargetPointsHelper targetPointsHelper = context.getTargetPointsHelper();
+		final FavouritePoint homePoint = getHomePoint();
+		if (homePoint != null && (homePointRequest == null ||
+				!homePointRequest.getLatLon().equals(new LatLon(homePoint.getLatitude(), homePoint.getLongitude())))) {
+			cancelHomePointAddressRequest();
+			homePointRequest = new GeocodingLookupService.AddressLookupRequest(
+					new LatLon(homePoint.getLatitude(), homePoint.getLongitude()), new GeocodingLookupService.OnAddressLookupResult() {
+				@Override
+				public void geocodingDone(String address) {
+					homePointRequest = null;
+					homePoint.setDescription(address);
+					targetPointsHelper.updateRouteAndRefresh(false);
+				}
+			}, null);
+			context.getGeocodingLookupService().lookupAddress(homePointRequest);
+		}
+	}
+
+	void lookupAddressForParkingPoint() {
+		final TargetPointsHelper targetPointsHelper = context.getTargetPointsHelper();
+		final FavouritePoint parkingPoint = getParkingPoint();
+		if (parkingPoint != null && (parkingPointRequest == null ||
+				!parkingPointRequest.getLatLon().equals(new LatLon(parkingPoint.getLatitude(), parkingPoint.getLongitude())))) {
+			cancelParkingPointAddressRequest();
+			parkingPointRequest = new GeocodingLookupService.AddressLookupRequest(
+					new LatLon(parkingPoint.getLatitude(), parkingPoint.getLongitude()), new GeocodingLookupService.OnAddressLookupResult() {
+				@Override
+				public void geocodingDone(String address) {
+					parkingPointRequest = null;
+					parkingPoint.setDescription(address);
+					targetPointsHelper.updateRouteAndRefresh(false);
+				}
+			}, null);
+			context.getGeocodingLookupService().lookupAddress(parkingPointRequest);
+		}
+	}
+
+	private void cancelHomePointAddressRequest() {
+		if (homePointRequest != null) {
+			context.getGeocodingLookupService().cancel(homePointRequest);
+			homePointRequest = null;
+		}
+	}
+
+	private void cancelParkingPointAddressRequest() {
+		if (parkingPointRequest != null) {
+			context.getGeocodingLookupService().cancel(parkingPointRequest);
+			parkingPointRequest = null;
+		}
+	}
+
+	private void cancelWorkPointAddressRequest() {
+		if (workPointRequest != null) {
+			context.getGeocodingLookupService().cancel(workPointRequest);
+			workPointRequest = null;
+		}
 	}
 
 	public static AlertDialog.Builder checkDuplicates(FavouritePoint p, FavouritesDbHelper fdb, Context uiContext) {
@@ -752,10 +858,10 @@ public class FavouritesDbHelper {
 				if (res == 0) {
 					res = collator.compare(s1, s2);
 				}
-				if (s1.equals(WORK_POINT_NAME) && s2.equals(PARKING_POINT_NAME) && o1.getCategory().equals(PERSONAL_CATEGORY_NAME) && o2.getCategory().equals(PERSONAL_CATEGORY_NAME)) {
+				if (s1.equals(PersonalPoint.WORK.name) && s2.equals(PersonalPoint.PARKING.name) && o1.getCategory().equals(PERSONAL_CATEGORY_NAME) && o2.getCategory().equals(PERSONAL_CATEGORY_NAME)) {
 					res = -1;
 				}
-				if (s1.equals(PARKING_POINT_NAME) && s2.equals(WORK_POINT_NAME) && o1.getCategory().equals(PERSONAL_CATEGORY_NAME) && o2.getCategory().equals(PERSONAL_CATEGORY_NAME)) {
+				if (s1.equals(PersonalPoint.PARKING.name) && s2.equals(PersonalPoint.WORK.name) && o1.getCategory().equals(PERSONAL_CATEGORY_NAME) && o2.getCategory().equals(PERSONAL_CATEGORY_NAME)) {
 					res = 1;
 				}
 				return res;

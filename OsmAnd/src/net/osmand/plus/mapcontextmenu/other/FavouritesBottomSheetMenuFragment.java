@@ -142,6 +142,7 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 
 	private void selectFavorite(FavouritePoint point) {
 		TargetPointsHelper targetPointsHelper = getMyApplication().getTargetPointsHelper();
+		FavouritesDbHelper favorites = getMyApplication().getFavorites();
 		LatLon ll = new LatLon(point.getLatitude(), point.getLongitude());
 		switch (pointType) {
 			case START:
@@ -154,10 +155,10 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 				targetPointsHelper.navigateToPoint(ll, true, targetPointsHelper.getIntermediatePoints().size(), point.getPointDescription());
 				break;
 			case HOME:
-				targetPointsHelper.setHomePoint(ll, point.getPointDescription());
+				favorites.setHomePoint(ll, point.getPointDescription());
 				break;
 			case WORK:
-				targetPointsHelper.setWorkPoint(ll, point.getPointDescription());
+				favorites.setWorkPoint(ll, point.getPointDescription());
 				break;
 		}
 		MapRouteInfoMenu routeMenu = getMapRouteInfoMenu();

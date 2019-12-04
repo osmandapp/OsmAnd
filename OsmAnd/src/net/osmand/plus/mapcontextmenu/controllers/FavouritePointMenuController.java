@@ -9,6 +9,7 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.TransportStop;
+import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.R;
@@ -55,6 +56,15 @@ public class FavouritePointMenuController extends MenuController {
 		if (originObject instanceof Amenity) {
 			openingHoursInfo = OpeningHoursParser.getInfo(((Amenity) originObject).getOpeningHours());
 		}
+	}
+
+	@NonNull
+	@Override
+	public String getNameStr() {
+		if (getMapActivity() != null) {
+			return getMapActivity().getString(FavouritesDbHelper.PersonalPoint.getLocalName(fav.getName()));
+		}
+		return "";
 	}
 
 	@Override
@@ -148,8 +158,13 @@ public class FavouritePointMenuController extends MenuController {
 	public String getTypeStr() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			return fav.getCategory().length() == 0 ?
-					mapActivity.getString(R.string.shared_string_favorites) : fav.getCategory();
+			if(fav.getCategory().length() == 0){
+				return mapActivity.getString(R.string.shared_string_favorites);
+			}else if(fav.getCategory().equals(FavouritesDbHelper.PERSONAL_CATEGORY_NAME)){
+				return mapActivity.getString(R.string.personal_category_name);
+			}else{
+				return fav.getCategory();
+			}
 		} else {
 			return "";
 		}

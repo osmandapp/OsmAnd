@@ -177,6 +177,11 @@ public class FavoritesSearchFragment extends DialogFragment {
 				@Override
 				public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 					FavouritePoint point = listAdapter.getItem(position);
+					if (point.getCategory().equals(getContext().getString(R.string.personal_category_name))) {
+						point.setCategory(FavouritesDbHelper.PERSONAL_CATEGORY_NAME);
+						point.setName(FavouritesDbHelper.PersonalPoint.getNameByLocalName(point.getName(), getContext()));
+					}
+
 					if (point != null) {
 						showOnMap(point);
 						dismiss();
@@ -330,6 +335,12 @@ public class FavoritesSearchFragment extends DialogFragment {
 				if (flt == null || flt.contains(key)) {
 					for (FavouritePoint p : key.points) {
 						if (p.isVisible()) {
+							int localNameID = FavouritesDbHelper.PersonalPoint.getLocalName(p.getName());
+							if (localNameID != 0) {
+								p = new FavouritePoint(p);
+								p.setName(getContext().getString(localNameID));
+								p.setCategory(getContext().getString(R.string.personal_category_name));
+							}
 							points.add(p);
 						}
 					}
@@ -337,6 +348,12 @@ public class FavoritesSearchFragment extends DialogFragment {
 					ArrayList<FavouritePoint> list = new ArrayList<>();
 					for (FavouritePoint p : key.points) {
 						if (p.isVisible() && flt.contains(p)) {
+							int localNameID = FavouritesDbHelper.PersonalPoint.getLocalName(p.getName());
+							if (localNameID != 0) {
+								p = new FavouritePoint(p);
+								p.setName(getContext().getString(localNameID));
+								p.setCategory(getContext().getString(R.string.personal_category_name));
+							}
 							list.add(p);
 						}
 					}

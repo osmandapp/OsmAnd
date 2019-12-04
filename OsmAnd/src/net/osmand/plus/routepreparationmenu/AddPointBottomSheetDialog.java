@@ -35,6 +35,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.HorizontalRecyclerBottomSheetItem;
@@ -249,11 +250,11 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 											break;
 										case HOME:
 											app.showShortToastMessage(R.string.add_intermediate_point);
-											targetPointsHelper.setHomePoint(ll, null);
+											app.getFavorites().setHomePoint(ll, new PointDescription(PointDescription.POINT_TYPE_FAVORITE, ""));
 											break;
 										case WORK:
 											app.showShortToastMessage(R.string.add_intermediate_point);
-											targetPointsHelper.setWorkPoint(ll, null);
+											app.getFavorites().setWorkPoint(ll, new PointDescription(PointDescription.POINT_TYPE_FAVORITE, ""));
 											break;
 									}
 								} else if (pointType == PointType.START) {
@@ -370,10 +371,10 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 		if(helper.hasHomePoint()) {
 			items.add(PointType.HOME);
 		}
-		if(helper.hasHomePoint()) {
+		if (helper.hasWorkPoint()) {
 			items.add(PointType.WORK);
 		}
-		if (helper.hasHomePoint()) {
+		if (helper.hasParkingPoint()) {
 			items.add(PointType.PARKING);
 		}
 	}
@@ -480,7 +481,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 			}
 			if (point != null) {
 				ll = new LatLon(point.getLatitude(), point.getLongitude());
-				name = point.getPointDescription();
+				name = point.getPointStringDescription();
 			}
 		}
 		return new Pair<>(ll, name);
@@ -631,22 +632,24 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 					favoriteViewHolder.description.setVisibility(View.GONE);
 				} else {
 					if (item instanceof PointType) {
-						final TargetPointsHelper helper = app.getTargetPointsHelper();
-						TargetPoint point = null;
+						FavouritesDbHelper.PersonalPoint personalPoint = FavouritesDbHelper.PersonalPoint.valueOf(((PointType) item).name());
+						final FavouritesDbHelper favorites = app.getFavorites();
+						FavouritePoint point = null;
+						boolean light = app.getSettings().isLightContent();
+						int disabledIconColor = light ? R.color.icon_color_default_light : R.color.icon_color_default_dark;
+						favoriteViewHolder.icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(getActivity(),
+								getResources().getColor(disabledIconColor), false, (personalPoint.ordinal())));
+						favoriteViewHolder.title.setText(personalPoint.getLocalName());
 						if (item == PointType.HOME) {
-							point = helper.getHomePoint();
-							favoriteViewHolder.title.setText(getString(R.string.home_button));
-							favoriteViewHolder.icon.setImageDrawable(getContentIcon(R.drawable.ic_action_home_dark));
+							point = favorites.getHomePoint();
 						} else if (item == PointType.WORK) {
-							point = helper.getWorkPoint();
-							favoriteViewHolder.title.setText(getString(R.string.work_button));
-							favoriteViewHolder.icon.setImageDrawable(getContentIcon(R.drawable.ic_action_work));
+							point = favorites.getWorkPoint();
 						} else if (item == PointType.PARKING) {
-							point = helper.getParkingPoint();
-							favoriteViewHolder.title.setText(getString(R.string.parking_place));
-							favoriteViewHolder.icon.setImageDrawable(getContentIcon(R.drawable.ic_action_parking_dark));
+							point = favorites.getParkingPoint();
 						}
-						favoriteViewHolder.description.setText(point != null ? point.getPointDescription(app).getSimpleName(app, false) : getString(R.string.shared_string_add));
+						favoriteViewHolder.description.setText(point != null
+								? point.getPointStringDescription().getSimpleName(app, false)
+								: getString(R.string.shared_string_add));
 					} else if (item instanceof FavouritePoint) {
 						FavouritePoint point = (FavouritePoint) getItem(position);
 						favoriteViewHolder.title.setText(point.getName());

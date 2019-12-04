@@ -255,13 +255,11 @@ public class OsmandSettings {
 
 	public void migrateHomeWorkParkingToFavorites() {
 		FavouritesDbHelper favorites = ctx.getFavorites();
-		favorites.addFavoritePersonal(getHomePoint(),FavouritesDbHelper.HOME_POINT_NAME,getHomePointDescription().getName());
-		favorites.addFavoritePersonal(getWorkPoint(),FavouritesDbHelper.WORK_POINT_NAME,getWorkPointDescription().getName());
-		if (OsmandPlugin.getEnabledPlugin(ParkingPositionPlugin.class) != null) {
-			ParkingPositionPlugin parkingPositionPlugin = OsmandPlugin.getEnabledPlugin(ParkingPositionPlugin.class);
-			if(parkingPositionPlugin != null) {
-				favorites.addFavoritePersonal(parkingPositionPlugin.constructParkingPosition(), FavouritesDbHelper.PARKING_POINT_NAME, "");
-			}
+		if (getHomePoint() != null) {
+			favorites.addFavoritePersonal(getHomePoint(), FavouritesDbHelper.PersonalPoint.HOME.name, getHomePointDescription().getName());
+		}
+		if (getWorkPoint() != null) {
+			favorites.addFavoritePersonal(getWorkPoint(), FavouritesDbHelper.PersonalPoint.WORK.name, getWorkPointDescription().getName());
 		}
 	}
 
