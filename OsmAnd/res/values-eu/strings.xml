@@ -39,7 +39,7 @@
     <string name="route_to">Nora:</string>
     <string name="route_via">Pasatuz:</string>
     <string name="route_from">Nondik:</string>
-    <string name="app_mode_default">Mapa arakatu</string>
+    <string name="app_mode_default">Arakatu mapa</string>
     <string name="settings_preset">Lehenetsitako profila</string>
     <string name="settings_preset_descr">Maparen ikuspegia eta nabigazio ezarpenak profilka gogoratzen dira. Ezarri hemen zure lehenetsitako profila.</string>
     <string name="destination_point">Helmuga %1$s</string>
@@ -1648,7 +1648,7 @@ Lorratza %2$s</string>
     <string name="access_direction_audio_feedback">Audio bidezko jarraibideak</string>
     <string name="access_direction_audio_feedback_descr">Helburura norabidearen berri eman soinu bidez.</string>
     <string name="access_direction_haptic_feedback">Jarraibide haptikoak</string>
-    <string name="access_direction_haptic_feedback_descr">Helburura norabidearen berri eman dardararen bidez.</string>
+    <string name="access_direction_haptic_feedback_descr">Adierazi helburura norabidea dardararen bidez.</string>
     <string name="use_osm_live_routing_description">Gaitu nabigazioa OSM Live aldaketentzako (beta).</string>
     <string name="use_osm_live_routing">OsmAnd Live nabigazioa</string>
     <string name="osm_edit_modified_poi">Aldatutako OSM POI-a</string>
@@ -2486,7 +2486,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="add_point_after">Gehitu puntua atzetik</string>
     <string name="shared_string_options">Aukerak</string>
     <string name="move_all_to_history">Eraman guztia historialera</string>
-    <string name="show_direction">Distantziaren adierazlea</string>
+    <string name="show_direction">Distantzia-adierazlea</string>
     <string name="sort_by">Ordenatu honela</string>
     <string name="do_not_use_animations">Animaziorik ez</string>
     <string name="do_not_use_animations_descr">Aplikazioaren animazioak desgaitzen ditu.</string>
@@ -3024,7 +3024,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="rate_dialog_descr">Eman zure iritzia eta baloratu gure lana Google Play-n.</string>
     <string name="button_rate">Ados</string>
     <string name="help_us_make_osmand_better">Lagundu gaitzazu OsmAnd hobetzen</string>
-    <string name="choose_data_to_share">Aukeratu zein motako datuak partekatu nahi dituzun:</string>
+    <string name="choose_data_to_share">Aukeratu ze motako datuak partekatu nahi dituzun:</string>
     <string name="downloaded_maps">Deskargatutako mapak</string>
     <string name="visited_screens">Bisitatutako pantailak</string>
     <string name="colleted_data">Jasotako datuak</string>
@@ -3072,9 +3072,9 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="application_profiles">Aplikazio-profilak</string>
     <string name="routing_attr_freeride_policy_name">Pistatik kanpo</string>
     <string name="shared_string_privacy_policy">Pribatutasun-politika</string>
-    <string name="make_osmand_better_descr">Baimendu OsmAnd aplikazioaren erabilera-datu anonimoen bildu eta prozesatzea. Ez dugu zure kokalekuari buruzko datuak biltzen, ezta mapan begiratzen dituzun tokiena ere.
-\n
-\nKonfiguratu noiz nahi hemen: \'Ezarpenak\' &gt; \'Pribatutasuna eta segurtasuna\'.</string>
+    <string name="make_osmand_better_descr">OsmAnd aplikazioari erabilera-datu anonimoak bildu eta prozesatzea baimendu diezaiokezu. Ez da zure kokalekuari buruzko daturik biltzen, ezta mapan begiratzen dituzun tokiena ere. 
+\n 
+\nGero ere konfigurazioa hemen aldatu dezakezu: \'Ezarpenak\' &gt; \'Pribatutasuna eta segurtasuna\'.</string>
     <string name="app_mode_shuttle_bus">Autobus lotura-linea</string>
     <string name="osmand_routing_promo">Routing.xml fitxategiaren zure bertsio aldatua gehitu dezakezu ..osmand/routing helbidean</string>
     <string name="base_profile_descr_bicycle">Mendiko bizikleta, ziklomotorra, zaldia</string>
@@ -3406,6 +3406,6 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="new_plugin_added">Gehigarri berria gehituta</string>
     <string name="join_segments">Elkartu segmentuak</string>
     <string name="add_new_profile_q">Gehitu \'%1$s\' profil berria\?</string>
-    <string name="save_heading">Gorde norabidea</string>
+    <string name="save_heading">Sartu norabidea</string>
     <string name="save_heading_descr">Gorde lorratzeko puntu bakoitzerako norabidea grabatzean.</string>
 </resources>
