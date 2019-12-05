@@ -10,7 +10,6 @@
 
 <string name="bg_service_sleep_mode_off">Rhedeg yn y cefndir</string>
 <string name="bg_service_sleep_mode_on">Atal y cefndir</string>
-<string name="gps_wakeup_interval">Cyfnod deffro GPS: %S</string>
 <string name="int_continuosly">Parhaus</string>
 <string name="screen_is_locked">I ddatgloi\'r sgrin pwyswch yr eicon cloi</string>
 <string name="map_widget_top_text">Enw stryd</string>

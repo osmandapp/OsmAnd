@@ -123,7 +123,6 @@
     <string name="level_to_switch_vector_raster_descr">Poza tym poziomem używaj wszędzie map rastrowych.</string>
     <string name="level_to_switch_vector_raster">Minimalne przybliżenie mapy wektorowej</string>
     <string name="error_doing_search">Wystąpił błąd podczas wyszukiwania offline.</string>
-    <string name="search_offline_geo_error">Nie można przetworzyć „%s”.</string>
     <string name="search_osm_offline">Wyszukaj według lokalizacji geograficznej</string>
     <string name="system_locale">Systemowy</string>
     <string name="preferred_locale_descr">Wybiera język interfejsu (po zmianie należy uruchomić OsmAnd ponownie).</string>
@@ -859,7 +858,6 @@
     <string name="map_widget_show_ruler">Linijka</string>
     <string name="map_widget_view_direction">Kierunek patrzenia</string>
     <string name="map_widget_transparent">Przezroczyste widżety</string>
-    <string name="gps_wakeup_interval">Częstość wybudzania GPS: %s</string>
     <string name="int_continuosly">Ciągły</string>
     <string name="email">e-mail</string>
     <string name="rendering_attr_roadColors_name">Zestaw kolorów dróg</string>
@@ -2012,7 +2010,6 @@ Długość %2$s</string>
     <string name="skip_map_downloading_desc">Nie zainstalowano map w trybie offline. Można wybrać mapę z listy lub pobrać mapy później za pośrednictwem polecenia \"Menu - %1$s\".</string>
     <string name="get_it">Pobierz</string>
     <string name="get_for">Pobierz na %1$s</string>
-    <string name="get_for_month">Pobierz na %1$s miesięcy</string>
     <string name="osm_live_banner_desc">Zdobądź nieograniczoną liczbę pobrań map, dodając cotygodniowe, codzienne, a nawet cogodzinne aktualizacje.</string>
     <string name="osmand_plus_banner_desc">Nieograniczona liczba pobrań map, aktualizacje i wtyczka Wikipedii.</string>
     <string name="si_mi_meters">Mile/metry</string>
@@ -2492,8 +2489,6 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="appearance_on_the_map">Wygląd na mapie</string>
     <string name="add_track_to_markers_descr">Wybierz ścieżkę, aby dodać punkty dla znaczników.</string>
     <string name="shared_string_paste">Wklej</string>
-    <string name="coordinate_input_accuracy_description">Przechodzi automatycznie do następnego pola po wprowadzeniu %1$d cyfr zmiennoprzecinkowych.</string>
-    <string name="coordinate_input_accuracy">%1$d cyfr</string>
     <string name="go_to_next_field">Następne pole</string>
     <string name="tap_on_map_to_hide_interface">Tryb pełnego ekranu</string>
     <string name="shared_string_deleted">Usunięte</string>
@@ -2630,7 +2625,6 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="in_app_purchase_desc">Płatność jednorazowa</string>
     <string name="in_app_purchase_desc_ex">Po zakupie będzie on trwale dostępny.</string>
     <string name="purchase_unlim_title">Kup - %1$s</string>
-    <string name="purchase_subscription_title">Subskrybuj - %1$s</string>
     <string name="unlock_all_features">Odblokuj wszystkie funkcje OsmAnd</string>
     <string name="purchase_dialog_title">Wybierz plan</string>
     <string name="purchase_dialog_subtitle">Wybierz odpowiedni element</string>
@@ -3219,7 +3213,6 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="month">Miesiąc</string>
     <string name="year">Rok</string>
     <string name="months_3">Trzy miesiące</string>
-    <string name="get_free_trial_title">Rozpocznij bezpłatny okres próbny %1$d %2$s.</string>
     <string name="get_discount_first_part">%1$s dla pierwszych %2$s</string>
     <string name="cancel_subscription">Anuluj subskrypcję</string>
     <string name="price_and_discount">%1$s • Zapisz %2$s</string>

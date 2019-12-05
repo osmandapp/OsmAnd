@@ -330,7 +330,6 @@
   
   <string name="create_poi_link_to_osm_doc">" <u>Online OSM</u> რუკების დალაგება სურათებით"</string>
   <string name="error_doing_search">შეცდომა გათიშული ძებნის დროს</string>
-  <string name="search_offline_geo_error">შეუძლებელია დამუშავდეს მოთხოვნა \'%s\'</string>
   <string name="search_osm_offline">მისამართის ძებნა გათიშული რუკების გამოყენებით</string>
   <string name="system_locale">სისტემა</string>
   <string name="preferred_locale_descr">ენის არჩევა</string>
@@ -912,7 +911,6 @@
 <string name="map_widget_transparent">გამჭირვალე ხედი</string>
 
 
-<string name="gps_wakeup_interval">GPS-ის გაღვიძების ინტერვალი: %s</string>
 <string name="int_continuosly">გაგრძელებადი</string>
 <string name="email">ელ-ფოსტა</string>
 <string name="day_night_info_description">მზის ამოსვლა: %1$s \nჩასვლა: %2$s</string>

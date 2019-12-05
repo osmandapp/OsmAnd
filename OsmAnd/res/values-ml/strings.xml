@@ -508,7 +508,6 @@
     <string name="delete_filter">ഫില്‍റ്റര്‍ നീക്കം ചെയ്യുക</string>
     <string name="donation_to_osm_desc">"സംഭാവനകളുടെ ഒരു ഭാഗം ഓഎസ്എംആന്റ് -ന്റെ കോണ്ട്രിബ്യൂട് ചെയ്തവര്‍ക്ക് കൊടുക്കുന്നതാണ്. സബ്സ്ക്രിപ്ഷന്‍ വില  മാറ്റമില്ലാതെ തുടരും."</string>
     <string name="get_for">%1$s മേടിക്കുക</string>
-    <string name="get_for_month">മാസത്തിന് %1$s മേടിക്കുക</string>
     <string name="si_mi_meters">"മൈല്‍/മീറ്റര്‍ "</string>
     <string name="routing_attr_short_way_name">"മൈലേജ് കൂടുതലുള്ള വഴി "</string>
     <string name="routing_attr_short_way_description">മൈലേജ് കൂടുതലുള്ള വഴി ഉപയോഗിക്കുക</string>
@@ -651,7 +650,6 @@
     <string name="day_night_info">പകല്‍/രാത്രി വിവരം</string>
     <string name="map_widget_show_ruler">സ്കേല്‍</string>
     <string name="bg_service_sleep_mode_off">"ആപ്പിനെ ബാക്ക്ഗ്രൗണ്ടില്‍ പ്രവര്‍ത്തിപ്പിക്കുക "</string>
-    <string name="gps_wakeup_interval">"ജിപിഎസ് ഉണര്‍ത്താനുള്ള  ഇടവേള: %s"</string>
     <string name="map_widget_speed">വേഗത</string>
     <string name="map_widget_time">ദൈര്‍ഘ്യം</string>
     <string name="bg_service_screen_unlock">"സ്ക്രീന്‍ തുറക്കുക "</string>
@@ -1660,8 +1658,6 @@
     <string name="digits_quantity">ദശാംഷസ്ഥാനങ്ങളൂടെ എണ്ണം</string>
     <string name="show_number_pad">നമ്പര്‍പാഡ് കാണിക്കു</string>
     <string name="shared_string_paste">ഒട്ടിക്കുക</string>
-    <string name="coordinate_input_accuracy_description">"%1$d അക്കങ്ങള്‍ക്ക് ശേഷം തനിയെ അടുത്ത കളത്തിലേക്ക്  പോവുക "</string>
-    <string name="coordinate_input_accuracy">%1$d അക്കങ്ങള്‍</string>
     <string name="go_to_next_field">"അടുത്ത ഫീല്‍ഡ് "</string>
     <string name="rename_marker">"അടയാളത്തിന്റെ പേരുമാറ്റുക "</string>
     <string name="mark_passed">"പൂര്‍ണമായതായി അടയാളപ്പെടുത്തുക "</string>
@@ -2256,7 +2252,6 @@
     <string name="select_tile_source_to_install">(ടൈൽ) മാപ്പുകൾ ഇൻസ്റ്റാളുചെയ്യുന്നതിനോ അപ്ഡേറ്റുചെയ്യുന്നതിനോ തിരഞ്ഞെടുക്കുക .</string>
     <string name="install_more">കൂടുതൽ ഇൻസ്റ്റാൾ ചെയ്യുക ...</string>
     <string name="level_to_switch_vector_raster">മിനിമം വെക്ടർ സൂം നില</string>
-    <string name="search_offline_geo_error">\'%s\' എന്ന ജിയോഇന്റെന്റ് പാഴ്സ് ചെയ്യാനായില്ല.</string>
     <string name="preferred_locale_descr">പ്രദർശന ഭാഷ (display language) തിരഞ്ഞെടുക്കുക (OsmAnd പുനരാരംഭിക്കുമ്പോൾ ഇത് പ്രാബല്യത്തിൽ വരും).</string>
     <string name="preferred_locale">ഡിസ്പ്ളേ ചെയ്യുന്ന ഭാക്ഷ (Display language)</string>
     <string name="mile_per_hour">മൈല്‍/മണി.</string>
@@ -2648,7 +2643,6 @@
     <string name="in_app_purchase_desc">ഒറ്റത്തവണ പേയ്മെന്റ്</string>
     <string name="in_app_purchase_desc_ex">ഒരിക്കൽ വാങ്ങിയാൽ, ഇത് നിങ്ങൾക്ക് ശാശ്വതമായി ലഭ്യമാകും.</string>
     <string name="purchase_unlim_title">വാങ്ങാം - %1$s</string>
-    <string name="purchase_subscription_title">വരിക്കാരനാകാം - %1$s</string>
     <string name="wikivoyage_offline">ഓഫ്‌ലൈന്‍ വിക്കിവൊയേജ്</string>
     <string name="unlock_all_features">എല്ലാ OsmAnd സവിശേഷതകളും അൺലോക്കുചെയ്യുക</string>
     <string name="monthly_map_updates">മാപ്പ് അപ്ഡേറ്റുകൾ: എല്ലാ മാസവും every month</string>

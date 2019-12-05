@@ -482,7 +482,6 @@
     <string name="map_widget_transparent">透明皮肤</string>
     <string name="bg_service_sleep_mode_off">打开\n 睡眠模式</string>
     <string name="bg_service_sleep_mode_on">停止\n 睡眠模式</string>
-    <string name="gps_wakeup_interval">GPS 唤醒间隔：%s</string>
     <string name="map_widget_next_turn_small">下一个转弯(小)</string>
     <string name="map_widget_next_next_turn">再下一个转弯</string>
     <string name="map_widget_mini_route">路线小地图</string>
@@ -1437,7 +1436,6 @@
     <string name="osm_live_subscription_desc">启用认购可每小时、每天、每周的更新以及世界各地所有的地图无限制的下载。</string>
     <string name="get_it">获得</string>
     <string name="get_for">获取 %1$s</string>
-    <string name="get_for_month">每个月获得 %1$s</string>
     <string name="osm_live_banner_desc">获得无限制的地图下载和每个月超过一次以上的地图更新︰每周、每天或每小时。</string>
     <string name="osmand_plus_banner_desc">OsmAnd 完整版拥有无限制的地图下载和每个月的地图更新。</string>
     <string name="skip_map_downloading">跳过下载地图</string>
@@ -2094,7 +2092,6 @@
     <string name="voice_stream_voice_call">电话音频（会中断汽车蓝牙音响）</string>
     <string name="select_tile_source_to_install">选择要安装或更新的（平铺）地图</string>
     <string name="create_poi_link_to_osm_doc">带照片的<u>在线 OSM</u> 地图分类</string>
-    <string name="search_offline_geo_error">不能分析地理含义“%s”</string>
     <string name="send_location_email_pattern">查看追踪位置，以网页浏览器链接 %1$s 或用 Android intent 链接 %2$s</string>
     <string name="add_waypoint_dialog_added">GPX 航点“{0}”已成功添加</string>
     <string name="poi_filter_namefinder">在线名称查找器</string>
@@ -2480,7 +2477,6 @@
     <string name="in_app_purchase_desc">一次性付款</string>
     <string name="in_app_purchase_desc_ex">购买后将对您永久可用。</string>
     <string name="purchase_unlim_title">购买 - %1$s</string>
-    <string name="purchase_subscription_title">订阅 - %1$s</string>
     <string name="wikivoyage_offline">Wikivoyage 离线</string>
     <string name="unlimited_downloads">无限下载</string>
     <string name="wikipedia_offline">离线维基百科</string>
@@ -2584,7 +2580,7 @@
     <string name="shared_string_walk">步行</string>
     <string name="save_poi_value_exceed_length">标签“%s”的最大长度是255个字符。
 \n请先进行缩短再继续。</string>
-    <string name="save_poi_value_exceed_length_title">“%”值的长度</string>
+    <string name="save_poi_value_exceed_length_title">“%s”值的长度</string>
     <string name="public_transport_warning_descr_blog">在我们的博客上了解更多与 OsmAnd 路线计算相关的信息。</string>
     <string name="public_transport_warning_title">公共交通导航目前处于测试阶段，可能出现错误和信息不准确。</string>
     <string name="add_intermediate">添加中继点</string>

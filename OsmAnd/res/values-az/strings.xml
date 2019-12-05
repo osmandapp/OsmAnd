@@ -810,7 +810,6 @@
     <string name="osm_live_payment_desc">Abunə haqqı hər ay tutulur. İstədiyiniz vaxt Google Play-dən ləğv edin.</string>
     <string name="osm_live_subscription_desc">Abunəlik bütün qlobal xəritələr üçün saatlıq, günlük, həftəlik yenilənmələri və limitsiz endirmələri təmin edir.</string>
     <string name="get_for">%1$s-a al</string>
-    <string name="get_for_month">Aylıq %1$s-a al</string>
     <string name="osmand_plus_banner_desc">Limitsiz xəritə endirmələri, yenilənmələri və Vikipediya qoşması.</string>
     <string name="skip_map_downloading">Xəritələri endirməyi keç</string>
     <string name="skip_map_downloading_desc">Quraşdırılmış oflayn xəritəniz yoxdur. Siyahıdan bir xəritə seçə və ya xəritələri daha sonra “Menyu - %1$s” vasitəsilə endirə bilərsiniz.</string>
@@ -1692,8 +1691,6 @@
     <string name="digits_quantity">Onluq rəqəmlərin sayı</string>
     <string name="show_number_pad">Rəqəm panelini göstər</string>
     <string name="shared_string_paste">Əlavə et</string>
-    <string name="coordinate_input_accuracy_description">%1$d onluq rəqəm daxil etdikdən sonra avtomatik olaraq növbəti sahəyə keç.</string>
-    <string name="coordinate_input_accuracy">%1$d rəqəm</string>
     <string name="go_to_next_field">Növbəti sahə</string>
     <string name="rename_marker">İşarəni yenidən adlandır</string>
     <string name="import_as_gpx">GPX fayl kimi idxal et</string>
@@ -1933,7 +1930,6 @@
     <string name="recalculate_route_to_your_location">Nəqliyyat rejimi:</string>
     <string name="select_navigation_mode">Nəqliyyat rejimi seçin</string>
     <string name="avoid_ferries">Bərələrdən yayın</string>
-    <string name="gps_wakeup_interval">GPS oyandırma intervalı: %s</string>
     <string name="map_widget_monitoring">GPX qeydiyyatı</string>
     <string name="map_widget_next_turn">Növbəti döngə</string>
     <string name="map_widget_next_turn_small">Növbəti döngə (kiçik)</string>
@@ -2043,7 +2039,6 @@
     <string name="download_images">Şəkilləri endir</string>
     <string name="article_removed">Məqalə silindi</string>
     <string name="purchase_unlim_title">Al - %1$s</string>
-    <string name="purchase_subscription_title">Abunə ol - %1$s</string>
     <string name="unlimited_downloads">Limitsiz endirmələr</string>
     <string name="unlock_all_features">Bütün OsmAnd xüsusiyyətlərini aç</string>
     <string name="purchase_dialog_title">Plan seçin</string>

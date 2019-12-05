@@ -164,7 +164,6 @@ Translator: Le Viet Thanh; email: lethanhx2k@gmail.com --><resources>
 	
 	<string name="create_poi_link_to_osm_doc">Phân loại bản đồ trên <u>Online OSM</u> với ảnh</string>
     <string name="error_doing_search">Có lỗi khi tìm kiếm</string>
-    <string name="search_offline_geo_error">Không thể phân tích geo intent \'%s\'</string>
 	<string name="search_osm_offline">Tìm kiếm địa chỉ bằng bản đồ Offline</string>
 
 	<string name="system_locale">Hệ thống</string>

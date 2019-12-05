@@ -614,7 +614,6 @@
 \n برنامه در پس‌زمینه</string>
     <string name="bg_service_sleep_mode_on">پایان‌دادن 
 \n به اجرا در پس‌زمینه</string>
-    <string name="gps_wakeup_interval">بازهٔ بیدارباش GPS:‏ %s</string>
     <string name="screen_is_locked">برای گشودن قفل روی نماد قفل بزنید</string>
     <string name="map_widget_lock_screen">قفل</string>
     <string name="bg_service_screen_lock">قفل</string>
@@ -1029,7 +1028,6 @@
     <string name="map_transparency">شفافیت نقشهٔ پایه</string>
     <string name="select_tile_source_to_install">نقشه‌ها(ی کاشی‌وار) را برای نصب یا به‌روزرسانی انتخاب کنید.</string>
     <string name="level_to_switch_vector_raster">کمترین سطح زوم بُرداری</string>
-    <string name="search_offline_geo_error">نشانی جغرافیایی \'%s\' قابل‌تجزیه نیست.</string>
     <string name="search_osm_offline">جست‌وجو با مختصات جغرافیایی</string>
     <string name="send_location_email_pattern">برای مشاهدهٔ مکان، پیوند اینترنتی %1$s یا پیوند اندرویدی %2$s را باز کنید</string>
     <string name="amenity_type_geocache">Geocache</string>
@@ -1132,7 +1130,7 @@
     <string name="android_19_location_disabled">از اندروید ۴٫۴ (کیت‌کت) به بعد پوشهٔ ذخیره‌سازی پیشین (%s) منسوخ شده است. همهٔ فایل‌های OsmAnd به ذخیره‌گاه جدید منتقل شوند؟ 
 \n نکتهٔ ۱: فایل‌های قدیمی‌تان دست‌نخورده باقی می‌ماند (می‌توانید به‌صورت دستی آن‌ها را پاک کنید). 
 \n نکتهٔ ۲: در ذخیره‌گاه جدید نمی‌توانید فایل‌ها را بین OsmAnd و OsmAnd+‎ به‌اشتراک بگذارید.</string>
-    <string name="copying_osmand_one_file_descr">در حال کپی فایل (s%) به محل جدید…</string>
+    <string name="copying_osmand_one_file_descr">در حال کپی فایل (%s) به محل جدید…</string>
     <string name="copying_osmand_files_descr">در حال کپی فایل‌های دادهٔ OsmAnd به محل جدید (%s)…</string>
     <string name="copying_osmand_files">در حال کپی فایل‌های دادهٔ OsmAnd…</string>
     <string name="calculate_osmand_route_gpx">مسیریابی آفلاین OsmAnd</string>
@@ -1652,7 +1650,6 @@
     <string name="osm_live_subscription_desc">این اشتراک، به‌روزرسانی‌های ساعتی، روزانه و هفتگی و نیز امکان دانلود نامحدود همهٔ نقشه‌ها را فعال می‌کند.</string>
     <string name="get_it">دریافت</string>
     <string name="get_for">خرید با %1$s</string>
-    <string name="get_for_month">خرید با ماهی %1$s</string>
     <string name="osm_live_banner_desc">دانلود نامحدود نقشه‌ها و به‌روزرسانی هفتگی، روزانه یا حتی ساعتی اضافه می‌شود.</string>
     <string name="osmand_plus_banner_desc">دانلود نامحدود نقشه‌ها، به‌روزرسانی‌های نامحدود و افزونهٔ ویکی‌پدیا.</string>
     <string name="si_mi_meters">مایل/متر</string>
@@ -2612,8 +2609,6 @@
     <string name="shared_string_left">چپ</string>
     <string name="show_number_pad">نمایش صفحه‌کلید عددی</string>
     <string name="shared_string_paste">الصاق</string>
-    <string name="coordinate_input_accuracy_description">با واردکردن %1$d رقم اعشار، خانۀ بعدی به‌صورت خودکار فعال شود.</string>
-    <string name="coordinate_input_accuracy">%1$d رقم</string>
     <string name="go_to_next_field">پرش خودکار به خانهٔ بعدی</string>
     <string name="shared_string_two">دو</string>
     <string name="shared_string_one">یک</string>
@@ -2767,7 +2762,6 @@
     <string name="in_app_purchase_desc">یک بار پرداخت</string>
     <string name="in_app_purchase_desc_ex">با یک بار خرید، همیشه در اختیارتان خواهد بود.</string>
     <string name="purchase_unlim_title">خرید - %1$s</string>
-    <string name="purchase_subscription_title">اشتراک - %1$s</string>
     <string name="wikivoyage_offline">ویکی‌سفر آفلاین</string>
     <string name="unlimited_downloads">دانلود نامحدود</string>
     <string name="wikipedia_offline">ویکی‌پدیای آفلاین</string>
@@ -3247,7 +3241,6 @@
     <string name="years_5">سال</string>
     <string name="months_3">سه ماه</string>
     <string name="get_discount_title">‏ %1$d %2$s را با %3$s تخفیف بگیرید.</string>
-    <string name="get_free_trial_title">دورهٔ آزمایش رایگان %1$d %2$s را آغاز کنید.</string>
     <string name="get_discount_first_part">‏%1$s برای %2$s اول</string>
     <string name="get_discount_first_few_part">‏%1$s برای %2$s اول</string>
     <string name="get_discount_second_part">سپس %1$s</string>
@@ -3409,7 +3402,6 @@
     <string name="send_search_query_description">عبارت جستجوی شما «%1$s» و همچنین مکان شما ارسال خواهد شد.
 \n
 \nاطلاعات خصوصی جمع‌آوری نمی‌شود. فقط داده‌های جست‌وجو برای بهبود الگوریتم جست‌وجو موردنیاز است.</string>
-    <string name="swap_start_and_destination">تعویض شروع و مقصد</string>
     <string name="export_profile">برون‌ریزی پروفایل</string>
     <string name="overwrite_profile_q">پروفایل «%1$s» وجود دارد. جای آن نوشته شود؟</string>
     <string name="export_profile_failed">برون‌ریزی پروفایل ناموفق بود.</string>

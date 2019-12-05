@@ -265,7 +265,6 @@
     <string name="in_app_purchase">Comprés dins l\'aplicacion</string>
     <string name="in_app_purchase_desc">Pagament unic</string>
     <string name="purchase_unlim_title">Crompar - %1$s</string>
-    <string name="purchase_subscription_title">Subscriure - %1$s</string>
     <string name="unlimited_downloads">Descargaments illimitats</string>
     <string name="unlock_all_features">Desblòca totei lei foncions d\'OsmAnd</string>
     <string name="purchase_dialog_subtitle">Seleccionatz l\'element disponible:</string>

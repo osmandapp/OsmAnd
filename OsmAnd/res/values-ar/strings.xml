@@ -89,7 +89,6 @@
     <string name="avoid_unpaved">تجنب الطرق غير المعبدة</string>
     <string name="avoid_ferries">تجنب العبارات</string>
     <string name="avoid_in_routing_title">التجنب</string>
-    <string name="gps_wakeup_interval">GPS إيقاظ الفاصل الزمني: %s</string>
     <string name="int_continuosly">متواصل</string>
     <string name="screen_is_locked">لفتح قفل الشاشة اضغط على أيقونة القفل</string>
     <string name="map_widget_top_text">اسم الشارع</string>
@@ -749,7 +748,6 @@
     <string name="poi_error_info_not_loaded">كان معلومات حول عقدة لا تحميل</string>
     <string name="poi_error_io_error_template">وقعت I / O خطأ أثناء ممارسة العمل {0}.</string>
     <string name="error_doing_search">حدث خطا اثناء البحث</string>
-    <string name="search_offline_geo_error">لا يمكن تحليل نوايا الجغرافية \'% ق \'</string>
     <string name="search_osm_offline">البحث عن موقع جغرافي</string>
     <string name="system_locale">النظام</string>
     <string name="preferred_locale_descr">أعد تشغيل التطبيق بعد التغيير</string>
@@ -2012,7 +2010,6 @@
     <string name="first_usage_greeting">احصل على التوجيهات واكتشف أماكن جديدة دون اتصال.</string>
     <string name="search_my_location">البحث في موقعي</string>
     <string name="get_for">تحصل عليه بـ %1$s</string>
-    <string name="get_for_month">تحصل عليه لـ %1$s أشهر</string>
     <string name="osm_live_banner_desc">الحصول على عدد غير محدود من تحميلات الخرائط والتحديثات في الشهر : أسبوعياً، يومياً أو كل ساعة.</string>
     <string name="osmand_plus_banner_desc">نسخة كاملة من تطبيق أواسام آند مع تحميل غير محدود وتحديثات شهرية للخرائط .</string>
     <string name="si_mi_meters">ميل ، م</string>
@@ -2554,7 +2551,6 @@
     <string name="favourites_group">مجموعة مفضلة</string>
     <string name="shared_string_two">علامتان</string>
     <string name="shared_string_one">علامة</string>
-    <string name="coordinate_input_accuracy">%1$d أرقام</string>
     <string name="osm_recipient_stat">التعديلات %1$s, المبلغ %2$s mBTC</string>
     <string name="osm_recipients_label">مساهمي OSM المستفيدون</string>
     <string name="winter_and_ski_renderer">الشتاء و التزحلق</string>
@@ -2624,7 +2620,6 @@
     <string name="welcome_to_open_beta">مرحبا بكم على النسخة التجريبية المفتوحة</string>
     <string name="wikivoyage_travel_guide">أدلة السفر</string>
     <string name="purchase_unlim_title">شراء - %1$s</string>
-    <string name="purchase_subscription_title">الاشتراك - %1$s</string>
     <string name="wikivoyage_offline">ويكي الرحلات دون اتصال</string>
     <string name="unlimited_downloads">تحميلات غير محدودة</string>
     <string name="wikipedia_offline">ويكيبيديا دون اتصال</string>
@@ -2728,7 +2723,6 @@
     <string name="osc_file_desc">OSC - مناسب للتصدير إلى خريطة الشارع المفتوحة.</string>
     <string name="osm_edits_export_desc">حدد نوع التصدير: POI أو ملاحظات OSM أو كليهما.</string>
     <string name="add_group_descr">يمكنك استيراد مجموعات من المفضلة أو نقاط مسار.</string>
-    <string name="coordinate_input_accuracy_description">التبديل تلقائيا إلى الحقل التالي بعد ادخال %1$d أرقام عشرية.</string>
     <string name="mapillary_menu_title_pano">عرض صور 360° فقط</string>
     <string name="release_3_2_pre">• اصلاح الفشل عند بدء التشغيل التي وقعت في بعض الأجهزة
 \n

@@ -301,7 +301,6 @@
     <string name="bg_service_sleep_mode_off">Запусціць у
 \n фонавым рэжыме</string>
     <string name="bg_service_sleep_mode_on">Спынiць\n фонавы рэжым</string>
-    <string name="gps_wakeup_interval">Iнтэрвал абуджэння GPS: %s</string>
     <string name="int_continuosly">Безперапынны</string>
     <string name="screen_is_locked">Націсніце значок блакавання, каб разблакаваць экран</string>
     <string name="map_widget_top_text">Назва вуліцы</string>
@@ -651,7 +650,6 @@
     <string name="level_to_switch_vector_raster_descr">Выкарыстоўваць агульныя растравыя мапы да гэтага ўзроўня.</string>
     <string name="level_to_switch_vector_raster">Мінімальны ўзровень набліжэння для вектарных мапаў</string>
     <string name="error_doing_search">Не атрымалася выканаць пошук у аўтаномным рэжыме.</string>
-    <string name="search_offline_geo_error">Немагчыма апрацаваць запыт \'%s\'.</string>
     <string name="search_osm_offline">Пошук па геаграфічнаму становішчу</string>
     <string name="system_locale">Сістэмная</string>
     <string name="preferred_locale_descr">Абраць мову адлюстравання (набудзе моц пасля перазапуску OsmAnd).</string>
@@ -1832,7 +1830,7 @@
     <string name="select_voice_provider_descr">Абярыце ці спампуйце галасавыя падказкі для вашай мовы.</string>
     <string name="impassable_road_desc">Абярыце дарогі, якія вы хочаце пазбягаць падчас навігацыі.</string>
     <string name="update_time">Час абнаўлення</string>
-    <string name="updates_size">Абнаўленні: %s</string>
+    <string name="updates_size">Абнаўленні</string>
     <string name="last_map_change">Апошняя змена мапы: %s</string>
     <string name="shared_string_not_selected">Не абрана</string>
     <string name="hourly">Штогадзінна</string>
@@ -2029,7 +2027,6 @@
     <string name="first_usage_greeting">Пракладвайце маршруты і адкрывайце новыя месцы без злучэння з Інтэрнэтам</string>
     <string name="search_my_location">Знайсці маю пазіцыю</string>
     <string name="get_for">Атрымаць за %1$s</string>
-    <string name="get_for_month">Атрымаць за %1$s у месяц</string>
     <string name="get_it">Атрымаць</string>
     <string name="osm_live_banner_desc">Атрымайце неабмежаваную колькасць спампоўванняў мапаў і абнаўленні больш за адзін раз на месяц: штотыдзень, штодзень ці штогадзіну.</string>
     <string name="osmand_plus_banner_desc">Неабмежаваная колькасць спамоўванняў мапаў, абнаўленняў і ўбудова Wikipedia.</string>
@@ -2575,8 +2572,6 @@
     <string name="digits_quantity">Колькасць дзесятковых лічбаў</string>
     <string name="show_number_pad">Паказаць лічбавую панэль</string>
     <string name="shared_string_paste">Уставіць</string>
-    <string name="coordinate_input_accuracy_description">Аўтаматычна пераключыцца ў наступнае поле пасля ўводу %1$d дзесятковых лічбаў.</string>
-    <string name="coordinate_input_accuracy">%1$d лічбаў</string>
     <string name="go_to_next_field">Наступнае поле</string>
     <string name="rename_marker">Змяніць назву адзнакі</string>
     <string name="shared_string_two">Два</string>
@@ -2727,7 +2722,6 @@
     <string name="in_app_purchase_desc">Разавы плацёж</string>
     <string name="in_app_purchase_desc_ex">Аднойчы набыты, будзе заўсёды даступны для вас.</string>
     <string name="purchase_unlim_title">Купіць - %1$s</string>
-    <string name="purchase_subscription_title">Папісацца - %1$s</string>
     <string name="wikivoyage_offline">Аўтаномны Wikivoyage</string>
     <string name="unlimited_downloads">Неабмежаваныя спампоўкі</string>
     <string name="wikipedia_offline">Аўтаномная Вікіпедыя</string>
@@ -2879,7 +2873,6 @@
     <string name="shared_string_capacity">Аб’ём</string>
     <string name="shared_string_width">Шырыня</string>
     <string name="shared_string_height">Вышыня</string>
-    <string name="swap_start_and_destination">Памяняць месцамі пачатковы пункт і пункт прызначэння</string>
     <string name="add_destination_point">Дадаць пункт прызначэння</string>
     <string name="add_intermediate_point">Дадаць прамежкавы пункт</string>
     <string name="add_start_point">Дадаць пачатковы пункт</string>
@@ -3184,7 +3177,6 @@
     <string name="months_3">Тры месяцы</string>
     <string name="price_free">Бясплатна</string>
     <string name="get_discount_title">Атрымайце %1$d %2$s са зніжкай %3$s.</string>
-    <string name="get_free_trial_title">Пачаць бясплатны перыяд %1$d %2$s.</string>
     <string name="get_discount_first_part">%1$s за першы %2$s</string>
     <string name="get_discount_first_few_part">%1$s за першыя %2$s</string>
     <string name="get_discount_second_part">пасля %1$s</string>
