@@ -20,9 +20,11 @@ import android.os.ParcelFileDescriptor;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
-import android.text.TextUtils;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 
+import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
@@ -43,6 +45,7 @@ import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GpxSelectionHelper;
@@ -53,6 +56,8 @@ import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.OsmandSettings.CommonPreference;
+import net.osmand.plus.R;
 import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.SettingsHelper;
 import net.osmand.plus.activities.MapActivity;
@@ -96,11 +101,17 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
+
+import static net.osmand.aidl.ConnectedApp.AIDL_OBJECT_ID;
+import static net.osmand.aidl.ConnectedApp.AIDL_PACKAGE_NAME;
+import static net.osmand.aidl.ConnectedApp.AIDL_ADD_MAP_LAYER;
+import static net.osmand.aidl.ConnectedApp.AIDL_ADD_MAP_WIDGET;
+import static net.osmand.aidl.ConnectedApp.AIDL_REMOVE_MAP_LAYER;
+import static net.osmand.aidl.ConnectedApp.AIDL_REMOVE_MAP_WIDGET;
 
 import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_IO_ERROR;
 import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_MAX_LOCK_TIME_MS;
@@ -122,6 +133,7 @@ public class OsmandAidlApi {
 	public static final int KEY_ON_VOICE_MESSAGE = 5;
 
 	private static final Log LOG = PlatformUtil.getLog(OsmandAidlApi.class);
+
 	private static final String AIDL_REFRESH_MAP = "aidl_refresh_map";
 	private static final String AIDL_SET_MAP_LOCATION = "aidl_set_map_location";
 	private static final String AIDL_LATITUDE = "aidl_latitude";
@@ -143,17 +155,8 @@ public class OsmandAidlApi {
 	private static final String AIDL_SEARCH_LAT = "aidl_search_lat";
 	private static final String AIDL_SEARCH_LON = "aidl_search_lon";
 
-	private static final String AIDL_OBJECT_ID = "aidl_object_id";
-	private static final String AIDL_PACKAGE_NAME = "aidl_package_name";
-
-	private static final String AIDL_ADD_MAP_WIDGET = "aidl_add_map_widget";
-	private static final String AIDL_REMOVE_MAP_WIDGET = "aidl_remove_map_widget";
-
 	private static final String AIDL_ADD_CONTEXT_MENU_BUTTONS = "aidl_add_context_menu_buttons";
 	private static final String AIDL_REMOVE_CONTEXT_MENU_BUTTONS = "aidl_remove_context_menu_buttons";
-
-	private static final String AIDL_ADD_MAP_LAYER = "aidl_add_map_layer";
-	private static final String AIDL_REMOVE_MAP_LAYER = "aidl_remove_map_layer";
 
 	private static final String AIDL_TAKE_PHOTO_NOTE = "aidl_take_photo_note";
 	private static final String AIDL_START_VIDEO_RECORDING = "aidl_start_video_recording";
@@ -185,10 +188,6 @@ public class OsmandAidlApi {
 	private static final int DEFAULT_ZOOM = 15;
 
 	private OsmandApplication app;
-	private Map<String, AidlMapWidgetWrapper> widgets = new ConcurrentHashMap<>();
-	private Map<String, TextInfoWidget> widgetControls = new ConcurrentHashMap<>();
-	private Map<String, AidlMapLayerWrapper> layers = new ConcurrentHashMap<>();
-	private Map<String, OsmandMapLayer> mapLayers = new ConcurrentHashMap<>();
 	private Map<String, BroadcastReceiver> receivers = new TreeMap<>();
 	private Map<String, ConnectedApp> connectedApps = new ConcurrentHashMap<>();
 	private Map<String, AidlContextMenuButtonsWrapper> contextMenuButtonsParams = new ConcurrentHashMap<>();
@@ -252,6 +251,10 @@ public class OsmandAidlApi {
 		return mapActivityActive;
 	}
 
+	AMapPointUpdateListener getAMapPointUpdateListener() {
+		return aMapPointUpdateListener;
+	}
+
 	private void initOsmandTelegram() {
 		String[] packages = new String[] {"net.osmand.telegram", "net.osmand.telegram.debug"};
 		Intent intent = new Intent("net.osmand.telegram.InitApp");
@@ -308,14 +311,6 @@ public class OsmandAidlApi {
 		registerReceiver(setMapLocationReceiver, mapActivity, AIDL_SET_MAP_LOCATION);
 	}
 
-	private int getDrawableId(String id) {
-		if (Algorithms.isEmpty(id)) {
-			return 0;
-		} else {
-			return app.getResources().getIdentifier(id, "drawable", app.getPackageName());
-		}
-	}
-
 	private void registerAddMapWidgetReceiver(MapActivity mapActivity) {
 		final WeakReference<MapActivity> mapActivityRef = new WeakReference<>(mapActivity);
 		BroadcastReceiver addMapWidgetReceiver = new BroadcastReceiver() {
@@ -323,14 +318,17 @@ public class OsmandAidlApi {
 			public void onReceive(Context context, Intent intent) {
 				MapActivity mapActivity = mapActivityRef.get();
 				String widgetId = intent.getStringExtra(AIDL_OBJECT_ID);
-				if (mapActivity != null && widgetId != null) {
-					AidlMapWidgetWrapper widget = widgets.get(widgetId);
-					if (widget != null) {
+				String packName = intent.getStringExtra(AIDL_PACKAGE_NAME);
+				if (mapActivity != null && widgetId != null && packName != null) {
+					ConnectedApp connectedApp = connectedApps.get(packName);
+					if (connectedApp != null) {
+						AidlMapWidgetWrapper widget = connectedApp.getWidgets().get(widgetId);
 						MapInfoLayer layer = mapActivity.getMapLayers().getMapInfoLayer();
-						if (layer != null) {
-							TextInfoWidget control = createWidgetControl(mapActivity, widgetId);
-							widgetControls.put(widgetId, control);
-							int menuIconId = getDrawableId(widget.getMenuIconName());
+						if (widget != null && layer != null) {
+							ApplicationMode.regWidgetVisibility(widget.getId(), (ApplicationMode[]) null);
+							TextInfoWidget control = connectedApp.createWidgetControl(mapActivity, widgetId);
+							connectedApp.getWidgetControls().put(widgetId, control);
+							int menuIconId = AndroidUtils.getDrawableId(app, widget.getMenuIconName());
 							MapWidgetRegInfo widgetInfo = layer.registerSideWidget(control,
 									menuIconId, widget.getMenuTitle(), "aidl_widget_" + widgetId,
 									false, widget.getOrder());
@@ -379,13 +377,17 @@ public class OsmandAidlApi {
 			public void onReceive(Context context, Intent intent) {
 				MapActivity mapActivity = mapActivityRef.get();
 				String widgetId = intent.getStringExtra(AIDL_OBJECT_ID);
-				if (mapActivity != null && widgetId != null) {
-					MapInfoLayer layer = mapActivity.getMapLayers().getMapInfoLayer();
-					TextInfoWidget widgetControl = widgetControls.get(widgetId);
-					if (layer != null && widgetControl != null) {
-						layer.removeSideWidget(widgetControl);
-						widgetControls.remove(widgetId);
-						layer.recreateControls();
+				String packName = intent.getStringExtra(AIDL_PACKAGE_NAME);
+				if (mapActivity != null && widgetId != null && packName != null) {
+					ConnectedApp connectedApp = connectedApps.get(packName);
+					if (connectedApp != null) {
+						MapInfoLayer layer = mapActivity.getMapLayers().getMapInfoLayer();
+						TextInfoWidget widgetControl = connectedApp.getWidgetControls().get(widgetId);
+						if (layer != null && widgetControl != null) {
+							layer.removeSideWidget(widgetControl);
+							connectedApp.getWidgetControls().remove(widgetId);
+							layer.recreateControls();
+						}
 					}
 				}
 			}
@@ -394,19 +396,8 @@ public class OsmandAidlApi {
 	}
 
 	public void registerWidgetControls(MapActivity mapActivity) {
-		for (AidlMapWidgetWrapper widget : widgets.values()) {
-			MapInfoLayer layer = mapActivity.getMapLayers().getMapInfoLayer();
-			if (layer != null) {
-				TextInfoWidget control = createWidgetControl(mapActivity, widget.getId());
-				widgetControls.put(widget.getId(), control);
-				int menuIconId = getDrawableId(widget.getMenuIconName());
-				MapWidgetRegInfo widgetInfo = layer.registerSideWidget(control,
-						menuIconId, widget.getMenuTitle(), "aidl_widget_" + widget.getId(),
-						false, widget.getOrder());
-				if (!mapActivity.getMapLayers().getMapWidgetRegistry().isVisible(widgetInfo.key)) {
-					mapActivity.getMapLayers().getMapWidgetRegistry().setVisibility(widgetInfo, true, false);
-				}
-			}
+		for (ConnectedApp connectedApp : connectedApps.values()) {
+			connectedApp.registerWidgetControls(mapActivity);
 		}
 	}
 
@@ -418,16 +409,19 @@ public class OsmandAidlApi {
 				MapActivity mapActivity = mapActivityRef.get();
 				String layerId = intent.getStringExtra(AIDL_OBJECT_ID);
 				String packName = intent.getStringExtra(AIDL_PACKAGE_NAME);
-				if (mapActivity != null && packName != null && layerId != null) {
-					AidlMapLayerWrapper layer = layers.get(layerId);
-					if (layer != null) {
-						OsmandMapLayer mapLayer = mapLayers.get(layerId);
-						if (mapLayer != null) {
-							mapActivity.getMapView().removeLayer(mapLayer);
+				if (mapActivity != null && layerId != null && packName != null) {
+					ConnectedApp connectedApp = connectedApps.get(packName);
+					if (connectedApp != null) {
+						AidlMapLayerWrapper layer = connectedApp.getLayers().get(layerId);
+						if (layer != null) {
+							OsmandMapLayer mapLayer = connectedApp.getMapLayers().get(layerId);
+							if (mapLayer != null) {
+								mapActivity.getMapView().removeLayer(mapLayer);
+							}
+							mapLayer = new AidlMapLayer(mapActivity, layer, connectedApp.getPack());
+							mapActivity.getMapView().addLayer(mapLayer, layer.getZOrder());
+							connectedApp.getMapLayers().put(layerId, mapLayer);
 						}
-						mapLayer = new AidlMapLayer(mapActivity, layer, packName);
-						mapActivity.getMapView().addLayer(mapLayer, layer.getZOrder());
-						mapLayers.put(layerId, mapLayer);
 					}
 				}
 			}
@@ -442,11 +436,15 @@ public class OsmandAidlApi {
 			public void onReceive(Context context, Intent intent) {
 				MapActivity mapActivity = mapActivityRef.get();
 				String layerId = intent.getStringExtra(AIDL_OBJECT_ID);
-				if (mapActivity != null && layerId != null) {
-					OsmandMapLayer mapLayer = mapLayers.remove(layerId);
-					if (mapLayer != null) {
-						mapActivity.getMapView().removeLayer(mapLayer);
-						mapActivity.refreshMap();
+				String packName = intent.getStringExtra(AIDL_PACKAGE_NAME);
+				if (mapActivity != null && layerId != null && packName != null) {
+					ConnectedApp connectedApp = connectedApps.get(packName);
+					if (connectedApp != null) {
+						OsmandMapLayer mapLayer = connectedApp.getMapLayers().remove(layerId);
+						if (mapLayer != null) {
+							mapActivity.getMapView().removeLayer(mapLayer);
+							mapActivity.refreshMap();
+						}
 					}
 				}
 			}
@@ -837,19 +835,9 @@ public class OsmandAidlApi {
 		registerReceiver(hideSqliteDbFileReceiver, mapActivity, AIDL_HIDE_SQLITEDB_FILE);
 	}
 
-	public void registerMapLayers(MapActivity mapActivity) {
-		for (AidlMapLayerWrapper layer : layers.values()) {
-			OsmandMapLayer mapLayer = mapLayers.get(layer.getId());
-			String packName = "";
-			if (mapLayer != null) {
-				if (mapLayer instanceof AidlMapLayer) {
-					packName = ((AidlMapLayer) mapLayer).getPackName();
-				}
-				mapActivity.getMapView().removeLayer(mapLayer);
-			}
-			mapLayer = new AidlMapLayer(mapActivity, layer, packName);
-			mapActivity.getMapView().addLayer(mapLayer, layer.getZOrder());
-			mapLayers.put(layer.getId(), mapLayer);
+	public void registerMapLayers(@NonNull MapActivity mapActivity) {
+		for (ConnectedApp connectedApp : connectedApps.values()) {
+			connectedApp.registerMapLayers(mapActivity);
 		}
 	}
 
@@ -857,43 +845,6 @@ public class OsmandAidlApi {
 		Intent intent = new Intent();
 		intent.setAction(AIDL_REFRESH_MAP);
 		app.sendBroadcast(intent);
-	}
-
-	private TextInfoWidget createWidgetControl(MapActivity mapActivity, final String widgetId) {
-		final TextInfoWidget control = new TextInfoWidget(mapActivity) {
-
-			@Override
-			public boolean updateInfo(DrawSettings drawSettings) {
-				AidlMapWidgetWrapper widget = widgets.get(widgetId);
-				if (widget != null) {
-					String txt = widget.getText();
-					String subtxt = widget.getDescription();
-					boolean night = drawSettings != null && drawSettings.isNightMode();
-					int icon = night ? getDrawableId(widget.getDarkIconName()) : getDrawableId(widget.getLightIconName());
-					setText(txt, subtxt);
-					if (icon != 0) {
-						setImageDrawable(icon);
-					} else {
-						setImageDrawable(null);
-					}
-					return true;
-				} else {
-					return false;
-				}
-			}
-		};
-		control.updateInfo(null);
-
-		control.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				AidlMapWidgetWrapper widget = widgets.get(widgetId);
-				if (widget != null && widget.getIntentOnClick() != null) {
-					app.startActivity(widget.getIntentOnClick());
-				}
-			}
-		});
-		return control;
 	}
 
 	boolean reloadMap() {
@@ -1057,97 +1008,71 @@ public class OsmandAidlApi {
 		return false;
 	}
 
-	boolean addMapWidget(AidlMapWidgetWrapper widget) {
+	boolean addMapWidget(String packName, AidlMapWidgetWrapper widget) {
 		if (widget != null) {
-			if (widgets.containsKey(widget.getId())) {
-				updateMapWidget(widget);
-			} else {
-				widgets.put(widget.getId(), widget);
-				Intent intent = new Intent();
-				intent.setAction(AIDL_ADD_MAP_WIDGET);
-				intent.putExtra(AIDL_OBJECT_ID, widget.getId());
-				app.sendBroadcast(intent);
+			ConnectedApp connectedApp = connectedApps.get(packName);
+			if (connectedApp != null) {
+				return connectedApp.addMapWidget(widget);
 			}
-			refreshMap();
-			return true;
-		} else {
-			return false;
 		}
+		return false;
 	}
 
-	boolean removeMapWidget(String widgetId) {
-		if (!Algorithms.isEmpty(widgetId) && widgets.containsKey(widgetId)) {
-			widgets.remove(widgetId);
-			Intent intent = new Intent();
-			intent.setAction(AIDL_REMOVE_MAP_WIDGET);
-			intent.putExtra(AIDL_OBJECT_ID, widgetId);
-			app.sendBroadcast(intent);
-			return true;
-		} else {
-			return false;
+	boolean removeMapWidget(String packName, String widgetId) {
+		if (!Algorithms.isEmpty(widgetId)) {
+			ConnectedApp connectedApp = connectedApps.get(packName);
+			if (connectedApp != null) {
+				return connectedApp.removeMapWidget(widgetId);
+			}
 		}
+		return false;
 	}
 
-	boolean updateMapWidget(AidlMapWidgetWrapper widget) {
-		if (widget != null && widgets.containsKey(widget.getId())) {
-			widgets.put(widget.getId(), widget);
-			refreshMap();
-			return true;
-		} else {
-			return false;
+	boolean updateMapWidget(String packName, AidlMapWidgetWrapper widget) {
+		if (widget != null) {
+			ConnectedApp connectedApp = connectedApps.get(packName);
+			if (connectedApp != null) {
+				return connectedApp.updateMapWidget(widget);
+			}
 		}
+		return false;
 	}
 
 	boolean addMapLayer(String packName, AidlMapLayerWrapper layer) {
 		if (layer != null) {
-			if (layers.containsKey(layer.getId())) {
-				updateMapLayer(layer);
-			} else {
-				layers.put(layer.getId(), layer);
-				Intent intent = new Intent();
-				intent.setAction(AIDL_ADD_MAP_LAYER);
-				intent.putExtra(AIDL_OBJECT_ID, layer.getId());
-				intent.putExtra(AIDL_PACKAGE_NAME, packName);
-				app.sendBroadcast(intent);
+			ConnectedApp connectedApp = connectedApps.get(packName);
+			if (connectedApp != null) {
+				return connectedApp.addMapLayer(layer);
 			}
-			refreshMap();
-			return true;
-		} else {
-			return false;
 		}
+		return false;
 	}
 
-	boolean removeMapLayer(String layerId) {
-		if (!Algorithms.isEmpty(layerId) && layers.containsKey(layerId)) {
-			layers.remove(layerId);
-			Intent intent = new Intent();
-			intent.setAction(AIDL_REMOVE_MAP_LAYER);
-			intent.putExtra(AIDL_OBJECT_ID, layerId);
-			app.sendBroadcast(intent);
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	boolean updateMapLayer(AidlMapLayerWrapper layer) {
-		if (layer != null && layers.containsKey(layer.getId())) {
-			AidlMapLayerWrapper existingLayer = layers.get(layer.getId());
-			for (AidlMapPointWrapper point : layer.getPoints()) {
-				existingLayer.putPoint(point);
+	boolean removeMapLayer(String packName, String layerId) {
+		if (!Algorithms.isEmpty(layerId)) {
+			ConnectedApp connectedApp = connectedApps.get(packName);
+			if (connectedApp != null) {
+				return connectedApp.removeMapLayer(layerId);
 			}
-			existingLayer.copyZoomBounds(layer);
-			refreshMap();
-			return true;
-		} else {
-			return false;
 		}
+		return false;
 	}
 
-	boolean showMapPoint(String layerId, AidlMapPointWrapper point) {
+	boolean updateMapLayer(String packName, AidlMapLayerWrapper layer) {
+		if (layer != null) {
+			ConnectedApp connectedApp = connectedApps.get(packName);
+			if (connectedApp != null) {
+				return connectedApp.updateMapLayer(layer);
+			}
+		}
+		return false;
+	}
+
+	boolean showMapPoint(String packName, String layerId, AidlMapPointWrapper point) {
 		if (point != null) {
-			if (!TextUtils.isEmpty(layerId)) {
-				AidlMapLayerWrapper layer = layers.get(layerId);
+			ConnectedApp connectedApp = connectedApps.get(packName);
+			if (connectedApp != null && !Algorithms.isEmpty(layerId)) {
+				AidlMapLayerWrapper layer = connectedApp.getLayers().get(layerId);
 				if (layer != null) {
 					AidlMapPointWrapper p = layer.getPoint(point.getId());
 					if (p != null) {
@@ -1170,40 +1095,31 @@ public class OsmandAidlApi {
 		return false;
 	}
 
-	boolean putMapPoint(String layerId, AidlMapPointWrapper point) {
+	boolean putMapPoint(String packName, String layerId, AidlMapPointWrapper point) {
 		if (point != null) {
-			AidlMapLayerWrapper layer = layers.get(layerId);
-			if (layer != null) {
-				layer.putPoint(point);
-				refreshMap();
-				return true;
+			ConnectedApp connectedApp = connectedApps.get(packName);
+			if (connectedApp != null) {
+				return connectedApp.putMapPoint(layerId, point);
 			}
 		}
 		return false;
 	}
 
-	boolean updateMapPoint(String layerId, AidlMapPointWrapper point, boolean updateOpenedMenuAndMap) {
+	boolean updateMapPoint(String packName, String layerId, AidlMapPointWrapper point, boolean updateOpenedMenuAndMap) {
 		if (point != null) {
-			AidlMapLayerWrapper layer = layers.get(layerId);
-			if (layer != null) {
-				layer.putPoint(point);
-				refreshMap();
-				if (updateOpenedMenuAndMap && aMapPointUpdateListener != null) {
-					aMapPointUpdateListener.onAMapPointUpdated(point, layerId);
-				}
-				return true;
+			ConnectedApp connectedApp = connectedApps.get(packName);
+			if (connectedApp != null) {
+				return connectedApp.updateMapPoint(layerId, point, updateOpenedMenuAndMap);
 			}
 		}
 		return false;
 	}
 
-	boolean removeMapPoint(String layerId, String pointId) {
-		if (pointId != null) {
-			AidlMapLayerWrapper layer = layers.get(layerId);
-			if (layer != null) {
-				layer.removePoint(pointId);
-				refreshMap();
-				return true;
+	boolean removeMapPoint(String packName, String layerId, String pointId) {
+		if (layerId != null && pointId != null) {
+			ConnectedApp connectedApp = connectedApps.get(packName);
+			if (connectedApp != null) {
+				return connectedApp.removeMapPoint(layerId, pointId);
 			}
 		}
 		return false;
@@ -1808,9 +1724,9 @@ public class OsmandAidlApi {
 
 	public ConnectedApp getConnectedApp(@NonNull String pack) {
 		List<ConnectedApp> connectedApps = getConnectedApps();
-		for (ConnectedApp app : connectedApps) {
-			if (app.pack.equals(pack)) {
-				return app;
+		for (ConnectedApp connectedApp : connectedApps) {
+			if (connectedApp.getPack().equals(pack)) {
+				return connectedApp;
 			}
 		}
 		return null;
@@ -1820,13 +1736,8 @@ public class OsmandAidlApi {
 		List<ConnectedApp> res = new ArrayList<>(connectedApps.size());
 		PackageManager pm = app.getPackageManager();
 		for (ConnectedApp app : connectedApps.values()) {
-			try {
-				ApplicationInfo ai = pm.getPackageInfo(app.pack, 0).applicationInfo;
-				app.name = ai.loadLabel(pm).toString();
-				app.icon = ai.loadIcon(pm);
+			if (app.updateApplicationInfo(pm)) {
 				res.add(app);
-			} catch (PackageManager.NameNotFoundException e) {
-				// ignore
 			}
 		}
 		Collections.sort(res);
@@ -1834,41 +1745,30 @@ public class OsmandAidlApi {
 	}
 
 	public boolean switchEnabled(@NonNull ConnectedApp connectedApp) {
-		connectedApp.enabled = !connectedApp.enabled;
-		ApplicationMode selectedAppMode = app.getSettings().APPLICATION_MODE.get();
-		return saveConnectedApps(selectedAppMode, connectedApps);
+		connectedApp.switchEnabled();
+		return saveConnectedApps();
 	}
 
 	public boolean isAppEnabled(@NonNull String pack) {
-		ConnectedApp app = connectedApps.get(pack);
-		if (app == null) {
-			app = new ConnectedApp(pack, true);
-			connectedApps.put(pack, app);
-			saveNewConnectedApp(app);
+		ConnectedApp connectedApp = connectedApps.get(pack);
+		if (connectedApp == null) {
+			connectedApp = new ConnectedApp(app, pack, true);
+			connectedApps.put(pack, connectedApp);
+			saveConnectedApps();
 		}
-		return app.enabled;
+		return connectedApp.isEnabled();
 	}
 
-	private void saveNewConnectedApp(ConnectedApp connectedApp) {
-		for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
-			Map<String, ConnectedApp> connectedApps = loadConnectedAppsForMode(mode);
-			if (!connectedApps.containsKey(connectedApp.pack)) {
-				connectedApps.put(connectedApp.pack, connectedApp);
-				saveConnectedApps(mode, connectedApps);
-			}
-		}
-	}
-
-	private boolean saveConnectedApps(ApplicationMode mode, Map<String, ConnectedApp> connectedApps) {
+	private boolean saveConnectedApps() {
 		try {
 			JSONArray array = new JSONArray();
-			for (ConnectedApp app : connectedApps.values()) {
+			for (ConnectedApp connectedApp : connectedApps.values()) {
 				JSONObject obj = new JSONObject();
-				obj.put(ConnectedApp.ENABLED_KEY, app.enabled);
-				obj.put(ConnectedApp.PACK_KEY, app.pack);
+				obj.put(ConnectedApp.ENABLED_KEY, connectedApp.isEnabled());
+				obj.put(ConnectedApp.PACK_KEY, connectedApp.getPack());
 				array.put(obj);
 			}
-			return app.getSettings().API_CONNECTED_APPS_JSON.setModeValue(mode, array.toString());
+			return app.getSettings().API_CONNECTED_APPS_JSON.set(array.toString());
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
@@ -1876,26 +1776,18 @@ public class OsmandAidlApi {
 	}
 
 	public void loadConnectedApps() {
-		ApplicationMode selectedAppMode = app.getSettings().APPLICATION_MODE.get();
-		Map<String, ConnectedApp> appsForMode = loadConnectedAppsForMode(selectedAppMode);
-		connectedApps.clear();
-		connectedApps.putAll(appsForMode);
-	}
-
-	private Map<String, ConnectedApp> loadConnectedAppsForMode(ApplicationMode mode) {
-		Map<String, ConnectedApp> connectedApps = new HashMap<>();
 		try {
-			JSONArray array = new JSONArray(app.getSettings().API_CONNECTED_APPS_JSON.getModeValue(mode));
+			connectedApps.clear();
+			JSONArray array = new JSONArray(app.getSettings().API_CONNECTED_APPS_JSON.get());
 			for (int i = 0; i < array.length(); i++) {
 				JSONObject obj = array.getJSONObject(i);
 				String pack = obj.optString(ConnectedApp.PACK_KEY, "");
 				boolean enabled = obj.optBoolean(ConnectedApp.ENABLED_KEY, true);
-				connectedApps.put(pack, new ConnectedApp(pack, enabled));
+				connectedApps.put(pack, new ConnectedApp(app, pack, enabled));
 			}
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-		return connectedApps;
 	}
 
 	boolean setNavDrawerLogo(@Nullable String uri) {
@@ -2218,6 +2110,12 @@ public class OsmandAidlApi {
 		return false;
 	}
 
+	public void registerLayerContextMenu(ContextMenuAdapter adapter, MapActivity mapActivity) {
+		for (ConnectedApp connectedApp : getConnectedApps()) {
+			connectedApp.registerLayerContextMenu(adapter, mapActivity);
+		}
+	}
+
 	private class FileCopyInfo {
 		long startTime;
 		long lastAccessTime;
@@ -2355,46 +2253,6 @@ public class OsmandAidlApi {
 				a.timeSpan, a.timeMoving, a.totalDistanceMoving, a.diffElevationUp, a.diffElevationDown,
 				a.avgElevation, a.minElevation, a.maxElevation, a.minSpeed, a.maxSpeed, a.avgSpeed,
 				a.points, a.wptPoints, a.wptCategoryNames);
-	}
-
-	public static class ConnectedApp implements Comparable<ConnectedApp> {
-
-		static final String PACK_KEY = "pack";
-		static final String ENABLED_KEY = "enabled";
-
-		private String pack;
-		private boolean enabled;
-		private String name;
-		private Drawable icon;
-
-		ConnectedApp(String pack, boolean enabled) {
-			this.pack = pack;
-			this.enabled = enabled;
-		}
-
-		public boolean isEnabled() {
-			return enabled;
-		}
-
-		public String getName() {
-			return name;
-		}
-
-		public String getPack() {
-			return pack;
-		}
-
-		public Drawable getIcon() {
-			return icon;
-		}
-
-		@Override
-		public int compareTo(@NonNull ConnectedApp app) {
-			if (name != null && app.name != null) {
-				return name.compareTo(app.name);
-			}
-			return 0;
-		}
 	}
 
 	public interface SearchCompleteCallback {

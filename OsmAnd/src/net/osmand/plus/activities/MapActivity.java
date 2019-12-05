@@ -1516,7 +1516,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		});
 		getMapView().refreshMap(true);
 		applyScreenOrientation();
-		getMyApplication().getNotificationHelper().refreshNotifications();
 	}
 
 	public void updateMapSettings() {
