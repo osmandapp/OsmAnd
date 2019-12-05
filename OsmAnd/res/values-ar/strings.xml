@@ -3141,4 +3141,38 @@
     <string name="rendering_attr_piste_difficulty_extreme_name">أقصى</string>
     <string name="rendering_attr_piste_difficulty_undefined_name">غير محدد</string>
     <string name="routeInfo_piste_difficulty_name">صعوبة الطريق</string>
+    <string name="rate_dialog_descr">يرجى مشاركة ملاحظاتك وتقييم أعمالنا على Google Play.</string>
+    <string name="button_rate">موافق</string>
+    <string name="process_downloading_service">"خدمة  تحميل أوسماند"</string>
+    <string name="shared_string_color_magenta">أرجواني</string>
+    <string name="shared_string_icon">أيقونة</string>
+    <string name="press_again_to_change_the_map_orientation">انقر مرة أخرى لتغيير اتجاه الخريطة</string>
+    <string name="shared_string_min_speed">الحد الأدنى للسرعة</string>
+    <string name="shared_string_max_speed">الحد الأعلى للسرعة</string>
+    <string name="default_speed_setting_title">السرعة الافتراضية</string>
+    <string name="default_speed_setting_descr">تغيير إعدادات السرعة الافتراضية</string>
+    <string name="minmax_speed_dialog_title">"تعيين حد السرعة  الأدنى/الأعلى"</string>
+    <string name="new_profile">ملف تعريف جديد</string>
+    <string name="shared_string_crash">خروج مفاجئ</string>
+    <string name="last_launch_crashed">فشل العملية الأخيرة لأوسماند. الرجاء مساعدتنا في التحسين من خلال مشاركة رسالة الخطأ.</string>
+    <string name="release_3_4">• ملفات تخصيص التطبيق: قم بإنشاء ملف تعريف مخصص لاحتياجاتك الخاصة ، باستخدام رمز ولون مخصصين • قم الآن بتخصيص سرعات أي ملف شخصي الافتراضية وسرعات الحد الأدنى / الحد الأقصى • إضافة عنصر واجهة مستخدم للإحداثيات الحالية • خيارات مضافة لإظهار البوصلة ومسطرة دائرة نصف قطرها على الخريطة • إصلاح تسجيل مسار الخلفية • تحسين تنزيلات خريطة الخلفية • خيار \"تشغيل الشاشة\" المرتجع • اختيار لغة ويكيبيديا الثابتة • سلوك زر بوصلة ثابتة أثناء التنقل • إصلاحات أخرى في الأخطاء
+\n
+\n</string>
+    <string name="app_mode_personal_transporter">الناقل الشخصي</string>
+    <string name="app_mode_monowheel">عجلة آحادية</string>
+    <string name="app_mode_scooter">سكوتر</string>
+    <string name="precision_hdop_and_vdop">الدقة الأفقية: %1$s, عمودي: %2$s</string>
+    <string name="precision_hdop">الدقة الأفقية: %s</string>
+    <string name="app_mode_offroad">خارج المسار</string>
+    <string name="edit_profile_setup_title">إعداد الملف الشخصي</string>
+    <string name="edit_profile_setup_subtitle">يحتفظ الملف الشخصي بإعداداته الخاصة</string>
+    <string name="edit_profile_setup_map_subtitle">حدد خيارات الخريطة للملف الشخصي</string>
+    <string name="edit_profile_screen_options_subtitle">حدد خيارات الشاشة لملف التعريف</string>
+    <string name="edit_profile_nav_settings_subtitle">حدد إعدادات الملاحة لملف التعريف</string>
+    <string name="routing_attr_max_num_changes_description">حدد الحد الأعلى للتغييرات</string>
+    <string name="routing_attr_max_num_changes_name">عدد التغييرات</string>
+    <string name="turn_screen_on_router">تشغيل عند الانعطاف</string>
+    <string name="turn_screen_on_time_descr">تعيين الوقت الذي سيتم تشغيل الشاشة فيه.</string>
+    <string name="turn_screen_on_sensor">استخدام مستشعر القرب</string>
+    <string name="turn_screen_on_sensor_descr">حرك يدك أعلى الشاشة لتشغيلها أثناء التنقل.</string>
 </resources>
