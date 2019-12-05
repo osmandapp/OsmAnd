@@ -1798,7 +1798,7 @@ Lengtegraad:\t\t%2$s</string>
     <string name="av_audio_bitrate_descr">Kies audio bitrate.</string>
     <string name="looking_up_address">Adres wordt gezocht</string>
     <string name="rendering_attr_horseRoutes_name">Ruiterpaden</string>
-    <string name="update">Controle op Update</string>
+    <string name="update">Bijwerken</string>
     <string name="only_download_over_wifi">Alleen downloaden via WiFi</string>
     <string name="live_update">Automatisch controleren</string>
     <string name="update_now">Nu Controleren</string>
