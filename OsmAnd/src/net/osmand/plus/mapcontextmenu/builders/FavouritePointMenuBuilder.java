@@ -16,7 +16,6 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.TransportStop;
 import net.osmand.osm.PoiCategory;
-import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -159,14 +158,14 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 	}
 
 	private CollapsableView getCollapsableFavouritesView(final Context context, boolean collapsed, @NonNull final FavoriteGroup group, FavouritePoint selectedPoint) {
-		LinearLayout view = (LinearLayout) buildCollapsableContentView(context, collapsed, true);
+		LinearLayout view = buildCollapsableContentView(context, collapsed, true);
 
 		List<FavouritePoint> points = group.points;
 		for (int i = 0; i < points.size() && i < 10; i++) {
 			final FavouritePoint point = points.get(i);
 			boolean selected = selectedPoint != null && selectedPoint.equals(point);
 			TextViewEx button = buildButtonInCollapsableView(context, selected, false);
-			String name = context.getString(FavouritesDbHelper.PersonalPoint.getLocalName(point.getName()));
+			String name = point.getName(context);
 			button.setText(name);
 
 			if (!selected) {

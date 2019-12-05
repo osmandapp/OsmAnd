@@ -3,6 +3,11 @@ package net.osmand.data;
 import java.io.Serializable;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+
+import net.osmand.plus.FavouritesDbHelper;
+
+import static net.osmand.plus.FavouritesDbHelper.PERSONAL_CATEGORY_NAME;
 
 public class FavouritePoint implements Serializable, LocationPoint {
 	private static final long serialVersionUID = 729654300829771466L;
@@ -101,6 +106,9 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	}
 
 	public String getName(Context ctx) {
+		if (category.equals(PERSONAL_CATEGORY_NAME)) {
+			return ctx.getString(FavouritesDbHelper.PersonalPoint.getLocalName(name));
+		}
 		return name;
 	}
 	
@@ -119,7 +127,8 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
+	@NonNull
 	@Override
 	public String toString() {
 		return "Favourite " + getName(); //$NON-NLS-1$

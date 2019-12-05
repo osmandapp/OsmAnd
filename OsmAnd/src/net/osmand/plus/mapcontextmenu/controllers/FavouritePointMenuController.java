@@ -62,7 +62,7 @@ public class FavouritePointMenuController extends MenuController {
 	@Override
 	public String getNameStr() {
 		if (getMapActivity() != null) {
-			return getMapActivity().getString(FavouritesDbHelper.PersonalPoint.getLocalName(fav.getName()));
+			return fav.getName(getMapActivity().getApplicationContext());
 		}
 		return "";
 	}
