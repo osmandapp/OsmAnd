@@ -1116,7 +1116,7 @@
     <string name="map_widget_vector_attributes">Атрибуты визуализации</string>
     <string name="map_widget_renderer">Стиль карты</string>
     <string name="email">email</string>
-    <string name="day_night_info">Восход/закат</string>
+    <string name="day_night_info">День/Ночь данные</string>
     <string name="osmand_short_description_80_chars">OsmAnd - это навигационное приложение для путешествий с открытым исходным кодом</string>
     <string name="osmand_long_description_1000_chars">"OsmAnd (Open Street Maps Automated Navigation Directions)
 \n
