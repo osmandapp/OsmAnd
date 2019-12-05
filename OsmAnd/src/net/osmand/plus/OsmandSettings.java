@@ -256,10 +256,10 @@ public class OsmandSettings {
 	public void migrateHomeWorkParkingToFavorites() {
 		FavouritesDbHelper favorites = ctx.getFavorites();
 		if (getHomePoint() != null) {
-			favorites.addFavoritePersonal(getHomePoint(), FavouritesDbHelper.PersonalPoint.HOME.name, getHomePointDescription().getName());
+			favorites.setHomePoint(getHomePoint(), getHomePointDescription());
 		}
 		if (getWorkPoint() != null) {
-			favorites.addFavoritePersonal(getWorkPoint(), FavouritesDbHelper.PersonalPoint.WORK.name, getWorkPointDescription().getName());
+			favorites.setWorkPoint(getWorkPoint(), getWorkPointDescription());
 		}
 	}
 
