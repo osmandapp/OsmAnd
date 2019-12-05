@@ -185,7 +185,6 @@
     <string name="months_3">Three months</string>
     <string name="price_free">Free</string>
     <string name="get_discount_title">Get %1$d %2$s at %3$s off.</string>
-    <string name="get_free_trial_title">Start your %1$d %2$s free trial.</string>
     <string name="get_discount_first_part">%1$s for the first %2$s</string>
     <string name="get_discount_first_few_part">%1$s for the first %2$s</string>
     <string name="get_discount_second_part">then %1$s</string>
@@ -453,7 +452,6 @@
     <string name="shared_string_capacity">Сapacity</string>
     <string name="shared_string_width">Width</string>
     <string name="shared_string_height">Height</string>
-    <string name="swap_start_and_destination">Swap start and destination</string>
     <string name="add_destination_point">Set destination</string>
     <string name="add_intermediate_point">Add intermediate</string>
     <string name="add_start_point">Set starting point</string>
@@ -578,7 +576,6 @@
     <string name="in_app_purchase_desc">One-time payment</string>
     <string name="in_app_purchase_desc_ex">Once purchased, it will be permanently available to you.</string>
     <string name="purchase_unlim_title">Buy - %1$s</string>
-    <string name="purchase_subscription_title">Subscribe - %1$s</string>
     <string name="wikivoyage_offline">Wikivoyage offline</string>
     <string name="unlimited_downloads">Unlimited downloads</string>
     <string name="wikipedia_offline">Wikipedia offline</string>
@@ -719,8 +716,6 @@
     <string name="shared_string_left">Left</string>
     <string name="show_number_pad">Show number pad</string>
     <string name="shared_string_paste">Paste</string>
-    <string name="coordinate_input_accuracy_description">Automatically switch to the next field after entering %1$d decimal digits.</string>
-    <string name="coordinate_input_accuracy">%1$d digits</string>
     <string name="go_to_next_field">Next field</string>
     <string name="rename_marker">Rename marker</string>
     <string name="tap_on_map_to_hide_interface_descr">A tap on the map toggles the control buttons and widgets.</string>
@@ -1075,7 +1070,6 @@
     <string name="osm_live_subscription_desc">Subscription enables hourly, daily, weekly updates, and unlimited downloads for all maps globally.</string>
     <string name="get_it">Get it</string>
     <string name="get_for">Get for %1$s</string>
-    <string name="get_for_month">Get for %1$s month</string>
     <string name="osm_live_banner_desc">Get unlimited map downloads, adding weekly, daily, or even hourly updates.</string>
     <string name="osmand_plus_banner_desc">Unlimited map downloads, updates, and Wikipedia plugin.</string>
     <string name="si_mi_meters">Miles/meters</string>
@@ -2483,7 +2477,6 @@
     <string name="map_widget_transparent">Transparent widgets</string>
     <string name="bg_service_sleep_mode_off">Run\n app in background</string>
     <string name="bg_service_sleep_mode_on">Stop\n running in background</string>
-    <string name="gps_wakeup_interval">GPS wake-up interval: %s</string>
     <string name="int_continuosly">Continuous</string>
     <string name="screen_is_locked">Tap the lock icon to unlock</string>
     <string name="map_widget_top_text">Street name</string>
@@ -2838,7 +2831,6 @@
     <string name="level_to_switch_vector_raster">Minimum vector zoom level</string>
     <string name="create_poi_link_to_osm_doc"><u>Online OSM</u> map classification with images.</string>
     <string name="error_doing_search">Could not perform offline search.</string>
-    <string name="search_offline_geo_error">Could not parse geo intent \'%s\'.</string>
     <string name="search_osm_offline">Search by geo location</string>
     <string name="system_locale">System</string>
     <string name="preferred_locale_descr">App display language (used after OsmAnd is restarted).</string>

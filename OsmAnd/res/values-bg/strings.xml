@@ -263,7 +263,6 @@
 
     <string name="bg_service_sleep_mode_off">Работа\n във фонов режим</string>
     <string name="bg_service_sleep_mode_on">Изключване на\n фоновия режим</string>
-    <string name="gps_wakeup_interval">Интервал за задействане на GPS: %s</string>
     <string name="int_continuosly">Без прекъсване</string>
     <string name="screen_is_locked">За да отключите екрана натиснете закл. икона</string>
     <string name="map_widget_top_text">Име на улица</string>
@@ -666,7 +665,6 @@
 
 
     <string name="error_doing_search">Възникна грешка при търсенето офлайн</string>
-    <string name="search_offline_geo_error">Заявката не може да бъде анализирана - \'%s\'</string>
     <string name="search_osm_offline">Търсене на адрес в локалните карти</string>
     <string name="system_locale">Система</string>
     <string name="preferred_locale_descr">Избор на език за приложението (изисква рестартиране)</string>
@@ -1961,7 +1959,7 @@
     <string name="rec_split_clip_length_desc">Всеки записан видео клип ще бъде ограничен от този размер</string>
     <string name="rec_split_storage_size">Място за съхранение</string>
     <string name="rec_split_storage_size_desc">Големина на определената за видео клипове памет</string>
-    <string name="updates_size">Актуализации: %s</string>
+    <string name="updates_size">Актуализации</string>
     <string name="last_map_change">Последна промяна на картата: %s</string>
 <string name="shared_string_not_selected">Няма избран</string>
     <string name="rec_split_desc">Презаписване върху стари клипове при недостиг на място</string>
@@ -2079,7 +2077,6 @@
     <string name="map_widget_magnetic_bearing">Посока по магнитния компас</string>
     <string name="map_widget_bearing">Относителна посока</string>
     <string name="access_disable_offroute_recalc">Маршрутът да не се променя, когато сте извън пътя</string>
-    <string name="get_for_month">Вземете за %1$s месец</string>
     <string name="osm_live_banner_desc">Вземете неограничени сваляния на карти и актуализации на повече от един път в месеца: почасово, ежедневно или ежеседмично.</string>
     <string name="osmand_plus_banner_desc">Пълната версия на OsmAnd с неограничени сваляния на карти месечни актуализации.</string>
     <string name="si_mi_meters">Мили / м</string>

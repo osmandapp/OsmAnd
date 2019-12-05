@@ -11,7 +11,6 @@
     <string name="map_widget_show_ruler">Schaalaanduiding</string>
     <string name="map_widget_view_direction">Kijkrichting</string>
     <string name="map_widget_transparent">Transparante widgets</string>
-    <string name="gps_wakeup_interval">GPS activatie interval: %s</string>
     <string name="int_continuosly">continu</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Vectorkaarten worden vaak sneller weergegeven. Werkt niet op sommige apparaten.</string>
     <string name="play_commands_of_currently_selected_voice">Kies een stem en luister naar de aankondigingen</string>
@@ -250,9 +249,8 @@ Er is nu {2} MB beschikbaar</string>
     <string name="install_more">Installeer meer…</string>
     <string name="level_to_switch_vector_raster_descr">Minimum zoomniveau om vectorkaarten in plaats van (raster)kaartsegmenten te gebruiken.</string>
     <string name="level_to_switch_vector_raster">Min. vector zoomniveau</string>
-    <string name="create_poi_link_to_osm_doc"> string name=\"lat_lon_pattern\"&gt;Lat: %1$.5f Lon: %2$.5f&lt;/string </string>
+    <string name="create_poi_link_to_osm_doc">" <u>Online OSM</u> kaart classificatie met foto\'s"</string>
     <string name="error_doing_search">Fout bij offline zoeken.</string>
-    <string name="search_offline_geo_error">Kan de geo intent \'%s\' niet verwerken.</string>
     <string name="search_osm_offline">Zoek adres in de offline kaarten</string>
     <string name="system_locale">Systeem</string>
     <string name="preferred_locale_descr">Kies de taal van het menu (OsmAnd wordt opnieuw gestart)</string>
@@ -2018,7 +2016,6 @@ Nu is maar {2} MB beschikbaar.</string>
     <string name="osm_live_subscription_desc">Het abonnement geeft toegang tot Live Updates (elk uur, elke dag of elke week) en onbeperkte downloads van kaarten van de gehele wereld.</string>
     <string name="get_it">Abonnement nemen</string>
     <string name="get_for">Abonneren voor %1$s</string>
-    <string name="get_for_month">Abonneren voor %1$s per maand</string>
     <string name="osm_live_banner_desc">Krijg onbeperkte downloads van kaarten en updates vaker dan eens per maand: wekelijks, dagelijks of elk uur.</string>
     <string name="osmand_plus_banner_desc">Onbeperkte downloads van kaarten, updates, en Wikipedia plugin.</string>
     <string name="skip_map_downloading_desc">Er is geen kaart geïnstalleerd. Kies een kaart uit de lijst, of download later kaarten via \'Menu - %1$s\'.</string>
@@ -2514,8 +2511,6 @@ voor Gebied: %1$s x %2$s</string>
     <string name="shared_string_right">Rechts</string>
     <string name="shared_string_left">Links</string>
     <string name="shared_string_paste">Plakken</string>
-    <string name="coordinate_input_accuracy_description">Automatisch overschakelen naar het volgende veld na het invoeren van %1$d decimale cijfers.</string>
-    <string name="coordinate_input_accuracy">%1$d cijfers</string>
     <string name="go_to_next_field">Volgend veld</string>
     <string name="rename_marker">Herbenoem markering</string>
     <string name="plan_route_no_markers_toast">U moet minste één markering toevoegen om deze functie te gebruiken.</string>
@@ -2572,7 +2567,6 @@ voor Gebied: %1$s x %2$s</string>
     <string name="in_app_purchase_desc">"Eenmalige betaling "</string>
     <string name="in_app_purchase_desc_ex">Na aankoop is het permanent voor je beschikbaar.</string>
     <string name="purchase_unlim_title">%1$s Kopen</string>
-    <string name="purchase_subscription_title">- %1$s Abonneren</string>
     <string name="wikivoyage_offline">Wikivoyage offline</string>
     <string name="unlimited_downloads">Onbeperkte downloads</string>
     <string name="wikipedia_offline">Wikipedia offline</string>
@@ -3210,7 +3204,6 @@ voor Gebied: %1$s x %2$s</string>
     <string name="app_mode_wagon">Stationwagon</string>
     <string name="app_mode_pickup_truck">Pickup truck</string>
     <string name="get_discount_title">Verkrijg %1$d %2$s met %3$s korting.</string>
-    <string name="get_free_trial_title">"Start uw  %1$d %2$s gratis test."</string>
     <string name="get_discount_first_part">%1$s voor de eerste %2$s</string>
     <string name="get_discount_first_few_part">%1$s voor de eerste %2$s</string>
     <string name="get_discount_second_part">daarna %1$s</string>

@@ -255,7 +255,6 @@
     <string name="level_to_switch_vector_raster">Minimālais palielinājums vektoru kartēm</string>
     <string name="create_poi_link_to_osm_doc">_<u>Tiešsaistes OSM</u> kartes klasifikācija ar attēliem"</string>
     <string name="error_doing_search">Kļūda meklējot</string>
-    <string name="search_offline_geo_error">Kļūda geo pieprasījumā \'%s\'</string>
     <string name="search_osm_offline">Meklēt adresi bezsaistes kartēs</string>
     <string name="system_locale">Sistēma</string>
     <string name="preferred_locale_descr">Izvēlieties saskarnes valodu</string>
@@ -773,7 +772,6 @@
     <string name="map_widget_show_ruler">Lineāls</string>
     <string name="map_widget_view_direction">Skata virziens</string>
     <string name="map_widget_transparent">Caurspīdīgi logrīki</string>
-    <string name="gps_wakeup_interval">GPS pamošanās intervāls: %s</string>
     <string name="email">e-pasts</string>
     <string name="context_menu_item_last_intermediate_point">Pievienot kā pēdējo starpposma punktu</string>
     <string name="context_menu_item_first_intermediate_point">Pievienot kā pirmo starpposma punktu</string>
@@ -1944,7 +1942,6 @@ failu(s)?
     <string name="osm_live_subscription_desc">"Abonoments iespējo ik stundu,  dienu vai nedēļu atjauninājumus un neierobežotas lejupielādes visām pasaules kartēm."</string>
     <string name="get_it">Saņemt</string>
     <string name="get_for">Saņemt par %1$s</string>
-    <string name="get_for_month">Saņemt par %1$s mēnesī</string>
     <string name="osm_live_banner_desc">Saņemt neierobežotas karšu lejupielādes un atjauninājumus biežāk nekā reizi mēnesī: reizi stundā, dienā vai nedēļā.</string>
     <string name="osmand_plus_banner_desc">Pilnā OsmAnd versija ar bez neierobežotām karšu lejupielādēm un ikmēneša atjauninājumiem.</string>
     <string name="si_mi_meters">Jūdzes/metri</string>
@@ -2884,7 +2881,6 @@ No Afganistānas līdz Zimbabvei, no Austrālijas līdz ASV, Argentīna, Brazīl
     <string name="months_3">Trīs mēnešu</string>
     <string name="price_free">Bezmaksas</string>
     <string name="get_discount_title">Saņemiet %1$d %2$s ar %3$s atlaidi.</string>
-    <string name="get_free_trial_title">Sāciet jūsu %1$d %2$s bezmaksas periodu.</string>
     <string name="get_discount_first_part">%1$s par pirmo %2$s</string>
     <string name="get_discount_first_few_part">%1$s par pirmajām %2$s</string>
     <string name="get_discount_second_part">tad %1$s</string>
@@ -2896,8 +2892,6 @@ No Afganistānas līdz Zimbabvei, no Austrālijas līdz ASV, Argentīna, Brazīl
     <string name="shared_string_left">Pa kreisi</string>
     <string name="show_number_pad">Rādīt cipartastatūru</string>
     <string name="shared_string_paste">Ielīmēt</string>
-    <string name="coordinate_input_accuracy_description">"Automātiski pārslēgties uz nākamo lauku pēc  %1$d decimālo ciparu ievadīšanas."</string>
-    <string name="coordinate_input_accuracy">%1$d cipari</string>
     <string name="go_to_next_field">Nākošais lauks</string>
     <string name="show_guide_line_descr">Rādīt virzienu no jūsu atrašanās vietas līdz aktīvajiem marķieriem.</string>
     <string name="show_arrows_descr">Parādīt ar vienu vai divām bultām virzienu uz aktīvajiem marķieriem.</string>
@@ -3025,7 +3019,6 @@ No Afganistānas līdz Zimbabvei, no Austrālijas līdz ASV, Argentīna, Brazīl
     <string name="in_app_purchase_desc">Vienreizējais maksājums</string>
     <string name="in_app_purchase_desc_ex">Pēc pirkšanas, tas būs pieejams jums uz visiem laikiem.</string>
     <string name="purchase_unlim_title">Pirkt - %1$s</string>
-    <string name="purchase_subscription_title">Abonēt - %1$s</string>
     <string name="wikivoyage_offline">Vikiceļojumi bezsaistē</string>
     <string name="unlimited_downloads">Neierobežotas lejupielādes</string>
     <string name="wikipedia_offline">Vikipēdija bezsaistē</string>

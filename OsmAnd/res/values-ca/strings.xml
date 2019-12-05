@@ -180,7 +180,6 @@
 S\'ocuparà una memòria de {1} MB
 (La memòria disponible es de{2} MB)"</string>
     <string name="use_transparent_map_theme">Tema transparent</string>
-    <string name="gps_wakeup_interval">Interval de despertament del GPS: %s</string>
     <string name="osmand_parking_event">Traieu el cotxe de l\'aparcament</string>
     <string name="rendering_attr_appMode_description">Optimitza el mapa per</string>
     <string name="play_commands_of_currently_selected_voice">Selecciona una veu i comprova les indicacions en funcionament</string>
@@ -701,7 +700,6 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="renderer_load_sucess">El renderitzador s\'ha carregat</string>
     <string name="fav_points_not_exist">No hi ha punts Preferits</string>
     <string name="gpxup_trackable">Seguible</string>
-    <string name="search_offline_geo_error">No s\'ha pogut analitzar la geo intenció «%s».</string>
     <string name="amenity_type_geocache">Geocerca</string>
     <string name="btn_advanced_mode">Mode avançat…</string>
     <string name="poi_filter_parking">Aparcament</string>
@@ -1844,7 +1842,7 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="select_voice_provider">Seleccioneu guiatge de veu</string>
     <string name="select_voice_provider_descr">Seleccioneu o baixeu el guiatge de veu per al vostre idioma.</string>
     <string name="last_update">Darrera actualització: %s</string>
-    <string name="updates_size">Actualitzacions: %s</string>
+    <string name="updates_size">Actualitzacions</string>
     <string name="last_map_change">Darrer canvi del mapa: %s</string>
     <string name="rec_split_storage_size">Mida per l\'emmagatzematge</string>
     <string name="shared_string_not_selected">No seleccionat</string>
@@ -2044,7 +2042,6 @@ L\'espai disponible és només de {2} MB.</string>
     <string name="first_usage_greeting">Obteniu indicacions i descobriu llocs nous sense connexió a Internet</string>
     <string name="si_mi_meters">Milles/metres</string>
     <string name="get_for">Obteniu-lo per %1$s</string>
-    <string name="get_for_month">Obteniu-lo per %1$s al mes</string>
     <string name="osm_live_banner_desc">Obteniu baixades il·limitades de mapes, incloent actualitzacions setmanals, diàries o, fins i tot, horàries.</string>
     <string name="osmand_plus_banner_desc">Baixada il·limitada de mapes, actualitzacions i el connector Viquipèdia.</string>
     <string name="get_it">Obteniu-lo</string>
@@ -2586,8 +2583,6 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="shared_string_left">Esquerra</string>
     <string name="show_number_pad">Mostra el teclat numèric</string>
     <string name="shared_string_paste">Enganxa</string>
-    <string name="coordinate_input_accuracy_description">Canvia automàticament al següent camp després d\'introduir %1$d dígits decimals.</string>
-    <string name="coordinate_input_accuracy">%1$d dígits</string>
     <string name="go_to_next_field">Camp següent</string>
     <string name="rename_marker">Reanomena el marcador</string>
     <string name="appearance_on_the_map">Aparença al mapa</string>
@@ -2770,7 +2765,6 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="in_app_purchase_desc">Pagament únic</string>
     <string name="in_app_purchase_desc_ex">Un cop comprada, estarà permanentment a la vostra disposició.</string>
     <string name="purchase_unlim_title">Compra - %1$s</string>
-    <string name="purchase_subscription_title">Subscriu - %1$s</string>
     <string name="wikivoyage_offline">Viquiviatges sense connexió</string>
     <string name="unlimited_downloads">Baixades il·limitades</string>
     <string name="wikipedia_offline">Viquipèdia sense connexió</string>
@@ -3246,8 +3240,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="years_5">Anys</string>
     <string name="months_3">Trimestres</string>
     <string name="price_free">Gratuït</string>
-    <string name="get_discount_title">"Aconseguiu  %d %@ amb un  %d%% de descompte."</string>
-    <string name="get_free_trial_title">Comenceu la vostra prova gratuïta %1$d %2$s.</string>
+    <string name="get_discount_title">"Aconseguiu %1$d %2$s amb un %3$s de descompte."</string>
     <string name="get_discount_first_part">%1$s pels primers %2$s</string>
     <string name="get_discount_first_few_part">%1$s pels primers %2$s</string>
     <string name="get_discount_second_part">després %1$s</string>

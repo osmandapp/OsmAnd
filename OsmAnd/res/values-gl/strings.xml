@@ -567,7 +567,6 @@
     <string name="bg_service_sleep_mode_off">Executar
 \n a aplicación en segundo plano</string>
     <string name="bg_service_sleep_mode_on">Deter\n a execución en segundo plano</string>
-    <string name="gps_wakeup_interval">Intre para espertar o GPS: %s</string>
     <string name="int_continuosly">Continuo</string>
     <string name="screen_is_locked">Para desbloqueares a pantalla prema na icona do cadeado</string>
     <string name="map_widget_top_text">Nome da rúa</string>
@@ -935,7 +934,6 @@
     <string name="create_poi_link_to_osm_doc">
         <u>OSM en liña</u> clasificación de mapa con imaxes.</string>
     <string name="error_doing_search">Non se puido face-la procura sen conexión.</string>
-    <string name="search_offline_geo_error">Non foi posíbel analiza-lo filtro \"%s\".</string>
     <string name="search_osm_offline">Procurar ubicación xeográfica</string>
     <string name="system_locale">Sistema</string>
     <string name="preferred_locale_descr">Lingua da visualización (reinicie o OsmAnd despois da mudanza).</string>
@@ -1935,7 +1933,6 @@ Lon %2$s</string>
     <string name="osm_live_subscription_desc">A subscrición permite actualizacións a cada hora, día ou semana e baixadas ilimitadas de xeito global para tódolos mapas.</string>
     <string name="get_it">Obtéñaa</string>
     <string name="get_for">Obtéñaa por %1$s</string>
-    <string name="get_for_month">Obtéñaa por %1$s mes</string>
     <string name="si_mi_meters">Millas/metros</string>
     <string name="skip_map_downloading">Rexeita-la baixada dos mapas</string>
     <string name="skip_map_downloading_desc">Non hai ningún mapa baixado. Pode escoller un dos mapas da listaxe ou baixar mapas máis tarde dende o Menú - %1$s.</string>
@@ -2341,8 +2338,6 @@ Lon %2$s</string>
     <string name="shared_string_left">Esquerda</string>
     <string name="show_number_pad">Amosar teclado numérico</string>
     <string name="shared_string_paste">Pegar</string>
-    <string name="coordinate_input_accuracy_description">Pasar de xeito automático ó campo seguinte logo de inserir %1$d díxitos decimais.</string>
-    <string name="coordinate_input_accuracy">%1$d díxitos</string>
     <string name="go_to_next_field">Seguinte campo</string>
     <string name="rename_marker">Renomea-la marcaxe</string>
     <string name="tap_on_map_to_hide_interface">Modo de pantalla completa</string>
@@ -2564,7 +2559,6 @@ Lon %2$s</string>
     <string name="in_app_purchase_desc">Pagamento só unha vez</string>
     <string name="in_app_purchase_desc_ex">Unha vez mercado, ficará de xeito permanente dispoñíbel pra ti.</string>
     <string name="purchase_unlim_title">Mercar - %1$s</string>
-    <string name="purchase_subscription_title">Subscrición - %1$s</string>
     <string name="wikivoyage_offline">Wikiviaxes sen conexión</string>
     <string name="unlimited_downloads">Baixadas sen límite</string>
     <string name="wikipedia_offline">Wikipedia sen conexión</string>
@@ -3258,7 +3252,6 @@ Lon %2$s</string>
     <string name="months_3">Tres meses</string>
     <string name="price_free">De balde</string>
     <string name="get_discount_title">Obter %1$d %2$s cun %3$s de desconto.</string>
-    <string name="get_free_trial_title">Comezar a túa proba de balde %1$d %2$s.</string>
     <string name="get_discount_first_part">%1$s para o primeiro %2$s</string>
     <string name="get_discount_first_few_part">%1$s para o primeiro %2$s</string>
     <string name="get_discount_second_part">depois %1$s</string>

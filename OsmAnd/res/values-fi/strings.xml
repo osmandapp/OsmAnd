@@ -946,7 +946,6 @@ Maailmanlaajuiset tiedot (välillä 70 astetta pohjoista ja 70 astetta eteläist
     <string name="donation_to_osm_desc">Osa lahjoituksestasi lähetetään OSM-käyttäjille, jotka lähettävät muutoksia OpenStreetMapiin. Tilauksen hinta pysyy samana.</string>
     <string name="osm_live_subscription_desc">Tilaus mahdollistaa päivitykset tunneittain, päivittäin tai viikoittain ja kaikkien karttojen rajoittamattoman latauksen maailmanlaajuisesti.</string>
     <string name="get_for">Hanki %1$s ajaksi</string>
-    <string name="get_for_month">Hanki %1$s kuukaudeksi</string>
     <string name="osm_live_banner_desc">Hanki rajoittamaton karttojen lataus, ja karttojen päivitys useammin kuin kerran kuukaudessa, viikossa, päivässä tai tunnissa.</string>
     <string name="osmand_plus_banner_desc">Rajattomat karttojen lataukset, päivitykset, ja Wikimedia laajennus.</string>
     <string name="skip_map_downloading_desc">Sinulla ei ole yhtään offline-karttaa ladattuna. Voit valita kartan luettelosta tai ladata kartat myöhemmin valikosta – %1$s.</string>
@@ -1460,7 +1459,6 @@ Reitin pisteet %2$s</string>
     <string name="map_widget_renderer">Karttatyyli</string>
     <string name="bg_service_sleep_mode_on">Pysäytä
  sovellutuksen suoritus taustalta</string>
-    <string name="gps_wakeup_interval">GPS virkistyksen aikaväli: %s</string>
     <string name="map_widget_mini_route">Pienoisreittikartta</string>
     <string name="bg_service_interval">Aseta virkistyksen aikaväli:</string>
     <string name="select_animate_speedup">Aseta nopeus reitin simuloinnille</string>
@@ -1926,7 +1924,6 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="quick_action_map_source_action">Lisää karttalähde</string>
     <string name="quick_action_map_source_title">Karttalähteet</string>
     <string name="quick_action_map_source">Muuta kartan lähdettä</string>
-    <string name="quick_action_map_source_switch"/>
     <string name="gpx_split_interval">Jakoväli</string>
     <string name="prefs_plugins_descr">Liitännäiset aktivoivat laajennetut asetukset ja lisätoiminnallisuudet.</string>
     <string name="choose_auto_follow_route_descr">Aika kunnes karttanäyttö synkronoituu nykysijaintiin</string>
@@ -2175,8 +2172,6 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="north_abbreviation">N</string>
     <string name="show_number_pad">Näytä numeronäppäimistö</string>
     <string name="shared_string_paste">Liitä</string>
-    <string name="coordinate_input_accuracy_description">"Vaihda automaattisesti seuraavaan kenttään, kun %1$d desimaalia on syötetty. "</string>
-    <string name="coordinate_input_accuracy">%1$d desimaalia</string>
     <string name="go_to_next_field">Seuraava kenttä</string>
     <string name="rename_marker">Uudelleennimeä markkeri</string>
     <string name="tap_on_map_to_hide_interface_descr">Kartan koskettaminen näyttää/piilottaa nappulat ja widgetit.</string>

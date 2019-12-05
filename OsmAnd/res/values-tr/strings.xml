@@ -213,7 +213,6 @@
     <string name="map_widget_fluorescent">Floresan rotalar</string>
     <string name="map_widget_show_ruler">Cetvel</string>
     <string name="map_widget_transparent">Şeffaf widget\'lar</string>
-    <string name="gps_wakeup_interval">GPS uyandırma aralığı:%1$s</string>
     <string name="map_widget_config">Ekranı ayarla</string>
     <string name="map_widget_parking">Park et</string>
     <string name="map_widget_altitude">Rakım</string>
@@ -1502,7 +1501,6 @@
     <string name="layer_underlay">Alt katman harita…</string>
     <string name="select_tile_source_to_install">Yüklenecek veya güncellenecek (tile) haritaları seçin.</string>
     <string name="create_poi_link_to_osm_doc">Resimlerle <u>Çevrimiçi OSM</u> harita sınıflandırması.</string>
-    <string name="search_offline_geo_error">Coğrafi niyet ayrıştırılamadı \'%s\'.</string>
     <string name="unit_of_length">Uzunluk birimleri</string>
     <string name="keep_informing_never">Yalnızca elle ayarlama (oka basın)</string>
     <string name="keep_informing_descr">Navigasyon talimatlarını düzenli aralıklarla yeniden duyurun.</string>
@@ -2121,7 +2119,6 @@
     <string name="shared_string_right">Sağ</string>
     <string name="shared_string_left">Sol</string>
     <string name="shared_string_paste">Yapıştır</string>
-    <string name="coordinate_input_accuracy">%1$d hane</string>
     <string name="go_to_next_field">Sonraki alan</string>
     <string name="rename_marker">İşaretçiyi yeniden adlandır</string>
     <string name="tap_on_map_to_hide_interface">Tam ekran modu</string>
@@ -2231,7 +2228,6 @@
     <string name="move_to_history">Geçmişe taşı</string>
     <string name="keep_showing_on_map">Harita üzerinde göstermeye devam et</string>
     <string name="distance_indication_descr">Aktif işaretleyicilere olan uzaklığın nasıl gösterileceğini seçin.</string>
-    <string name="coordinate_input_accuracy_description">%1$d ondalık basamaklar girildikten sonra sonraki alana otomatik olarak geç.</string>
     <string name="tap_on_map_to_hide_interface_descr">Harita üzerine dokunarak basmak kontrol butonları ve widget\'lara geçiş yapmayı sağlar.</string>
     <string name="waypoints_added_to_map_markers">Waypoint\'ler harita işaretleyicilerine eklendi</string>
     <string name="marker_save_as_track_descr">İşaretleyicilerinizi şu GPX dosyasına aktarın:</string>
@@ -2704,7 +2700,6 @@
     <string name="months_3">Üç ay</string>
     <string name="price_free">Ücretsiz</string>
     <string name="get_discount_title">%3$s indirimli olarak %1$d %2$s alın.</string>
-    <string name="get_free_trial_title">%1$d %2$s ücretsiz denemenizi başlatın.</string>
     <string name="get_discount_first_part">İlk %2$s için %1$s</string>
     <string name="get_discount_first_few_part">İlk %2$s için %1$s</string>
     <string name="get_discount_second_part">sonra %1$s</string>
@@ -2739,7 +2734,6 @@
     <string name="rendering_attr_hideOverground_name">Yer üstü nesneleri</string>
     <string name="clear_tile_data">Tüm döşemeleri temizle</string>
     <string name="get_for">%1$s için alın</string>
-    <string name="get_for_month">%1$s ay için alın</string>
     <string name="lang_kab">Cezayir Berbericesi</string>
     <string name="translit_names">İsimlere harf çevirisi yap</string>
     <string name="translit_name_if_miss">%1$s adı eksikse harf çevirisi yap</string>
@@ -2845,7 +2839,6 @@
     <string name="in_app_purchase_desc">Tek seferlik ödeme</string>
     <string name="in_app_purchase_desc_ex">Bir kere satın alındıktan sonra, kalıcı olarak kullanımınıza sunulacak.</string>
     <string name="purchase_unlim_title">Satın al - %1$s</string>
-    <string name="purchase_subscription_title">Abone ol - %1$s</string>
     <string name="wikivoyage_offline">Çevrimdışı Wikivoyage</string>
     <string name="unlimited_downloads">Sınırsız indirme</string>
     <string name="wikipedia_offline">Çevrimdışı Wikipedia</string>
@@ -3314,7 +3307,6 @@
     <string name="shared_preference">Paylaşılan</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">Asfaltsız yolları tercih edin</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">Asfaltsız yolları tercih edin.</string>
-    <string name="swap_start_and_destination">Başlangıç ve varış yerini değiştir</string>
     <string name="layer_osm_edits">OSM Düzenlemeleri</string>
     <string name="quick_action_contour_lines_descr">Haritada eş yükselti çizgilerini göstermek veya gizlemek için bir geçiş.</string>
     <string name="quick_action_contour_lines_show">Eş yükselti çizgilerini göster</string>

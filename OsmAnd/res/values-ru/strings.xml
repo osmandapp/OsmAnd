@@ -15,7 +15,6 @@
     <string name="months_3">Три месяца</string>
     <string name="price_free">Бесплатно</string>
     <string name="get_discount_title">Получите %1$d %2$s со скидкой %3$s.</string>
-    <string name="get_free_trial_title">Начать бесплатный период в %1$d %2$s.</string>
     <string name="get_discount_first_part">%1$s за первый %2$s</string>
     <string name="get_discount_first_few_part">%1$s за первые %2$s</string>
     <string name="get_discount_second_part">затем %1$s</string>
@@ -547,7 +546,6 @@
     <string name="level_to_switch_vector_raster_descr">Минимальный масштаб для использования векторных карт.</string>
     <string name="level_to_switch_vector_raster">Минимальный уровень векторных карт</string>
     <string name="error_doing_search">Не удалось выполнить автономный поиск.</string>
-    <string name="search_offline_geo_error">Невозможно разобрать запрос: \"%s\".</string>
     <string name="search_osm_offline">Поиск по географическому положению</string>
     <string name="system_locale">Системная</string>
     <string name="preferred_locale_descr">Выбор языка приложения (вступает в силу после перезапуска OsmAnd).</string>
@@ -1111,7 +1109,6 @@
     <string name="map_widget_view_direction">Направление взгляда</string>
     <string name="map_widget_transparent">Прозрачные виджеты</string>
     <string name="int_continuosly">Постоянно</string>
-    <string name="gps_wakeup_interval">Интервал пробуждения GPS: %s</string>
     <string name="filterpoi_activity">Создать фильтр POI</string>
     <string name="select_navigation_mode">Выберите вид транспорта</string>
     <string name="day_night_info_description">Восход : %1$s
@@ -2243,7 +2240,6 @@
     <string name="skip_map_downloading_desc">У вас нет загруженных карт. Вы можете выбрать карту из списка или загрузить ее позже с помощью \"Меню - %1$s\".</string>
     <string name="si_mi_meters">Мили/метры</string>
     <string name="get_for">Получить за %1$s</string>
-    <string name="get_for_month">Получить за %1$s в месяц</string>
     <string name="get_it">Получить</string>
     <string name="osm_live_banner_desc">Получайте неограниченное количество загрузок карт и обновлений карт более одного раза в месяц: еженедельно, ежедневно или ежечасно.</string>
     <string name="osmand_plus_banner_desc">Неограниченный доступ к картам, обновлениям и плагину Wikipedia.</string>
@@ -2479,8 +2475,6 @@
     <string name="active_markers_descr">Выберите количество индикаторов направления для отображения.</string>
     <string name="digits_quantity">Количество десятичных цифр</string>
     <string name="shared_string_paste">Вставить</string>
-    <string name="coordinate_input_accuracy_description">Автопереход на следующее поле после ввода %1$d цифр после десятичной точки.</string>
-    <string name="coordinate_input_accuracy">%1$d цифр</string>
     <string name="go_to_next_field">Следующее поле</string>
     <string name="rename_marker">Переименовать маркер</string>
     <string name="tap_on_map_to_hide_interface">Полноэкранный режим</string>
@@ -2755,7 +2749,6 @@
     <string name="in_app_purchase">Покупка в приложении</string>
     <string name="in_app_purchase_desc">Разовый платеж</string>
     <string name="purchase_unlim_title">Купить - %1$s</string>
-    <string name="purchase_subscription_title">Подписаться - %1$s</string>
     <string name="wikivoyage_offline">Wikivoyage офлайн</string>
     <string name="unlimited_downloads">Неограниченные загрузки</string>
     <string name="wikipedia_offline">Wikipedia офлайн</string>
@@ -2897,7 +2890,6 @@
     <string name="lang_gn_py">Гуарани</string>
     <string name="run_full_osmand_msg">Вы используете {0} карту, которая поставляется OsmAnd. Хотите запустить полную версию Osmand\?</string>
     <string name="run_full_osmand_header">Запустить OsmAnd\?</string>
-    <string name="swap_start_and_destination">Поменять местами пункты отправления и назначения</string>
     <string name="add_destination_point">Добавить пункт назначения</string>
     <string name="add_intermediate_point">Добавить промежуточный пункт</string>
     <string name="add_start_point">Добавить пункт отправления</string>

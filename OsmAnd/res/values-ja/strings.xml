@@ -38,7 +38,6 @@
     <string name="level_to_switch_vector_raster_descr">ベクター形式マップを使用する際の最小ズームレベルを選択します</string>
     <string name="level_to_switch_vector_raster">最小ベクターズームレベル</string>
     <string name="error_doing_search">オフライン検索でエラーが発生しました</string>
-    <string name="search_offline_geo_error">次のgeoインテントをパースできません:\'%s\'</string>
     <string name="search_osm_offline">オフラインマップで住所検索</string>
     <string name="system_locale">システムで設定した言語</string>
     <string name="preferred_locale_descr">表示言語を選択します(OsmAndの再起動後有効になります)</string>
@@ -718,7 +717,6 @@ POIの更新は利用できません</string>
     <string name="map_widget_transparent">ウィジェット背景の透明化</string>
     <string name="bg_service_sleep_mode_off">動作中\n バックグラウンドモード</string>
     <string name="bg_service_sleep_mode_on">停止\n バックグラウンドモードの中断</string>
-    <string name="gps_wakeup_interval">GPS呼び出し間隔: %s</string>
     <string name="int_continuosly">可能な限り継続</string>
     <string name="screen_is_locked">ロックアイコンのタップでロックが解除されます</string>
     <string name="map_widget_top_text">道路名称(国道、高速道路等)</string>
@@ -2207,7 +2205,6 @@ POIの更新は利用できません</string>
     <string name="points_delete_multiple">%1$d個の地点を削除してもよろしいですか？</string>
     <string name="track_points_category_name">このルートで重要とされた地点(マーカー)一覧</string>
     <string name="shared_string_gpx_track">経路</string>
-    <string name="get_for_month">月額</string>
     <string name="favorite_group_name">グループ名</string>
     <string name="change_color">色を変更</string>
     <string name="edit_name">名前の編集</string>
@@ -2592,7 +2589,6 @@ POIの更新は利用できません</string>
     <string name="by_date">日付別</string>
     <string name="by_type">種類別</string>
     <string name="digits_quantity">小数点以下の桁数</string>
-    <string name="coordinate_input_accuracy_description">小数点(.)以下[%1$d桁]入力されたら次の入力項目へ自動的に移動します。</string>
     <string name="go_to_next_field">次の入力項目へ移動</string>
     <string name="tap_on_map_to_hide_interface_descr">マップ画面のタップで操作ボタンやウィジェットの表示と交互に切り替えます。</string>
     <string name="tap_on_map_to_hide_interface">フルスクリーンモード</string>
@@ -2740,7 +2736,6 @@ POIの更新は利用できません</string>
     <string name="in_app_purchase_desc">1回払い</string>
     <string name="in_app_purchase_desc_ex">一度購入すれば、永久に利用できるようになります。</string>
     <string name="purchase_unlim_title">購入 - %1$s</string>
-    <string name="purchase_subscription_title">サブスクライブ(定期利用契約) - %1$s</string>
     <string name="wikivoyage_offline">Wikivoyageオフライン</string>
     <string name="contour_lines_hillshade_maps">等高線と陰影地図</string>
     <string name="unlock_all_features">OsmAndの全ての機能をアンロック</string>
@@ -2822,7 +2817,6 @@ POIの更新は利用できません</string>
     <string name="shared_string_left">左</string>
     <string name="show_number_pad">数字キーパッドの表示</string>
     <string name="shared_string_paste">貼り付け</string>
-    <string name="coordinate_input_accuracy">%1$d桁</string>
     <string name="rename_marker">マーカー名の変更</string>
     <string name="import_gpx_file_description">お気に入りもしくはGPXファイルとしてインポートが可能です。</string>
     <string name="import_as_favorites">お気に入りとしてインポート</string>
@@ -3394,12 +3388,11 @@ POIの更新は利用できません</string>
     <string name="profile_import_descr">OsmAndにて端末内のファイルを選択し開くことで、プロファイルをインポートできます。</string>
     <string name="file_import_error">【%1$s】インポートエラー: %2$s</string>
     <string name="file_imported_successfully">%1$sのインポートに成功しました。</string>
-    <string name="swap_start_and_destination">string name=\"lat_lon_pattern\"&gt;\"緯度:%1$.5f 経度:%2$.5f\"&lt;/string</string>
     <string name="simulate_your_location_gpx_descr">記録されたGPX経路を利用して位置をシミュレートします。</string>
     <string name="rendering_value_white_name">白</string>
     <string name="swap_two_places">%1$sと%2$sを入れ替え</string>
     <string name="route_start_point">出発地点</string>
-    <string name="get_discount_title">%1$dを%2$で入手 、いまなら%3$s割引です。</string>
+    <string name="get_discount_title">%1$dを%2$sで入手 、いまなら%3$s割引です。</string>
     <string name="track_saved">経路が保存されました</string>
     <string name="empty_filename">ファイル名が空欄です</string>
     <string name="shared_string_revert">初期値に戻す</string>

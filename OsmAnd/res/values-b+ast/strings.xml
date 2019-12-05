@@ -609,8 +609,6 @@
     <string name="shared_string_right">Drecha</string>
     <string name="shared_string_left">Esquierda</string>
     <string name="shared_string_paste">Apegar</string>
-    <string name="coordinate_input_accuracy_description">Cambia automáticamente al campu siguiente tres introducir %1$d díxitos decimales.</string>
-    <string name="coordinate_input_accuracy">%1$d díxitos</string>
     <string name="go_to_next_field">Campu siguiente</string>
     <string name="tap_on_map_to_hide_interface">Mou a pantalla completa</string>
     <string name="waypoints_added_to_map_markers">Amestáronse los puntos a los marcadores del mapa</string>

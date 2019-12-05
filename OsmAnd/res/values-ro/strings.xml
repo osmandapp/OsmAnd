@@ -74,7 +74,6 @@
     <string name="map_widget_transparent">Skin transparent</string>
     <string name="bg_service_sleep_mode_off">Activează\n mod standby</string>
     <string name="bg_service_sleep_mode_on">Oprește\n mod standby</string>
-    <string name="gps_wakeup_interval">Interval menținere GPS activ: %s</string>
     <string name="int_continuosly">Continuu</string>
     <string name="screen_is_locked">Pentru deblocare ecran apăsați iconița în formă de lacăt</string>
     <string name="map_widget_top_text">Numele străzii</string>
@@ -429,7 +428,6 @@
     <string name="level_to_switch_vector_raster">Nivel zoom hartă vectorială</string>
     <string name="create_poi_link_to_osm_doc">Clasificare hartă <u>OSM online</u> cu imagini</string>
     <string name="error_doing_search">Eroare la căutarea în mod offline</string>
-    <string name="search_offline_geo_error">Nu s-a putut analiza informația geo \'%s\'</string>
     <string name="search_osm_offline">Căutare adrese folosind hărți offline</string>
     <string name="system_locale">Conform dispozitiv</string>
     <string name="preferred_locale_descr">Selectați limba de afișare (are efect atunci când OsmAnd este repornit).</string>
@@ -1706,8 +1704,6 @@
     <string name="shared_string_left">Stânga</string>
     <string name="show_number_pad">Arată panoul cu numere</string>
     <string name="shared_string_paste">Lipește</string>
-    <string name="coordinate_input_accuracy_description">Schimbă automat la câmpul urmator dupa ce introduceți %1$d digiți zecimali.</string>
-    <string name="coordinate_input_accuracy">%1$d digiți</string>
     <string name="go_to_next_field">Câmpul următor</string>
     <string name="rename_marker">Redenumește marcaj</string>
     <string name="tap_on_map_to_hide_interface_descr">O atingere pe hartă activează butoanele de control și widgeturi-le.</string>
@@ -1893,7 +1889,6 @@
     <string name="get_unlimited_access">Obține acces nelimitat</string>
     <string name="wikivoyage_travel_guide">Ghiduri de călătorie</string>
     <string name="purchase_unlim_title">Cumpără - %1$s</string>
-    <string name="purchase_subscription_title">Abonează-te - %1$s</string>
     <string name="unlimited_downloads">Descărcări nelimitate</string>
     <string name="unlock_all_features">Deblochează toate funcționalitățile OsmAnd</string>
     <string name="purchase_dialog_title">Alege planul</string>

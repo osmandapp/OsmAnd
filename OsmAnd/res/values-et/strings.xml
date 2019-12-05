@@ -209,5 +209,4 @@
     <string name="in_app_purchase">Rakenduse sisene ost</string>
     <string name="in_app_purchase_desc">Ühekordne makse</string>
     <string name="purchase_unlim_title">Osta - %1$s</string>
-    <string name="purchase_subscription_title">Liitu - %1$s</string>
     </resources>

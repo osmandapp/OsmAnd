@@ -290,7 +290,6 @@
     <string name="level_to_switch_vector_raster_descr">Použít rastrové mapy pro cokoli nad tuto úroveň.</string>
     <string name="level_to_switch_vector_raster">Minimální zvětšení vektorové mapy</string>
     <string name="error_doing_search">Nelze provést offline hledání.</string>
-    <string name="search_offline_geo_error">Nemohu rozpoznat geo intent:\'%s\'.</string>
     <string name="search_osm_offline">Hledat pomocí polohy</string>
     <string name="system_locale">Podle systému</string>
     <string name="preferred_locale_descr">Volba jazyka (projeví se jakmile bude OsmAnd restartován).</string>
@@ -777,7 +776,6 @@ Proporcionální paměť %4$s MB (limit Androidu %5$s MB, Dalvik %6$s MB).</stri
     <string name="email">e-mail</string>
     <string name="layer_map_appearance">Nastavení obrazovky</string>
     <string name="int_continuosly">Souvisle</string>
-    <string name="gps_wakeup_interval">Interval zaměřování GPS: %s</string>
     <string name="map_widget_fluorescent">Svítivé barvy trasy</string>
     <string name="map_widget_view_direction">Zorné pole</string>
     <string name="day_night_info_description">Východ slunce: %1$s
@@ -2018,7 +2016,6 @@ Délka %2$s</string>
     <string name="osm_live_subscription_desc">Předplatné umožňuje hodinové, denní, týdenní aktualizace a neomezené stahování map celého světa.</string>
     <string name="get_it">Získat</string>
     <string name="get_for">Získat za %1$s</string>
-    <string name="get_for_month">Získat za %1$s měsíčně</string>
     <string name="osm_live_banner_desc">Získejte neomezené stahování map a aktualizace více než jednou za měsíc: týdenní, denní nebo každou hodinu.</string>
     <string name="osmand_plus_banner_desc">Neomezené stahování map, aktualizací a modul Wikipedie.</string>
     <string name="si_mi_meters">Míle/metry</string>
@@ -2362,7 +2359,7 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="empty_state_favourites">Přidejte Oblíbené</string>
     <string name="empty_state_favourites_desc">Importujte Oblíbené nebo je přidejte označením bodů na mapě.</string>
     <string name="import_track">Import souboru GPX</string>
-    <string name="import_track_desc">Soubor %$1s neobsahuje body GPX trasy, chcete jej přesto importovat jako trasu?</string>
+    <string name="import_track_desc">Soubor %1$s neobsahuje body GPX trasy, chcete jej přesto importovat jako trasu?</string>
     <string name="move_point">Přesunout bod</string>
     <string name="add_segment_to_the_track">Přidat do GPX souboru</string>
     <string name="move_all_to_history">Přesunout vše do historie</string>
@@ -2459,8 +2456,6 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="shared_string_left">Vlevo</string>
     <string name="show_number_pad">Zobrazit numerickou klávesnici</string>
     <string name="shared_string_paste">Vložit</string>
-    <string name="coordinate_input_accuracy_description">Automaticky přepnout na další pole po zadání %1$d desetinných míst.</string>
-    <string name="coordinate_input_accuracy">%1$d číslic</string>
     <string name="go_to_next_field">Další pole</string>
     <string name="rename_marker">Přejmenovat značku</string>
     <string name="tap_on_map_to_hide_interface_descr">Klepnutí na mapu přepne ovládací tlačítka a nástroje.</string>
@@ -2676,7 +2671,6 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="in_app_purchase_desc">Jednorázová platba</string>
     <string name="in_app_purchase_desc_ex">Po zakoupení bude pro vás trvale k dispozici.</string>
     <string name="purchase_unlim_title">Koupit - %1$s</string>
-    <string name="purchase_subscription_title">Předplatit - %1$s</string>
     <string name="wikivoyage_offline">Wikivoyage v režimu offline</string>
     <string name="unlimited_downloads">Neomezené stahování</string>
     <string name="wikipedia_offline">Wikipedie v režimu offline</string>
@@ -3178,7 +3172,6 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="months_3">Tři měsíce</string>
     <string name="price_free">Zdarma</string>
     <string name="get_discount_title">Získejte %1$d %2$s při slevě %3$s.</string>
-    <string name="get_free_trial_title">Začněte zkušebně %1$d %2$s zdarma.</string>
     <string name="get_discount_first_part">%1$s za prvé %2$s</string>
     <string name="get_discount_first_few_part">%1$s za prvé %2$s</string>
     <string name="get_discount_second_part">potom %1$s</string>

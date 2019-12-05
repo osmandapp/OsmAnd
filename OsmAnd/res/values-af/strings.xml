@@ -391,7 +391,6 @@
   
   <string name="create_poi_link_to_osm_doc">"<u> Aanlyn OSM </u> kaart klassifikasie met prentjies"</string>
   <string name="error_doing_search">Fout tydens aflyn soek</string>
-  <string name="search_offline_geo_error">Kon nie die geo opset \'%s\' ontleed nie</string>
   <string name="search_osm_offline">Soek adres met behulp van aflyn kaarte</string>
   <string name="system_locale">Stelsel</string>
   <string name="preferred_locale_descr">Kies die taal vir die program</string>
@@ -902,7 +901,6 @@
 	<string name="map_widget_view_direction">Kykrigting</string>
 	<string name="map_widget_transparent">Deursigtige vel</string>
 	
-	<string name="gps_wakeup_interval">GPS opwek tussenpose: %s</string>
 	<string name="int_continuosly">Aaneenlopende</string>
 	<string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner toepassing is nie geïnstaleer nie. Wil jy dit in die mark soek?</string>
 	<string name="enable_plugin_monitoring_services">Aktiveer spoorsny inlasmodule om ligging aanteken diens te gebruik (aantekening, lewende spoor-natrek)</string>

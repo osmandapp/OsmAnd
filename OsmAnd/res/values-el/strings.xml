@@ -81,7 +81,6 @@
 \n εφαρμογής στο παρασκήνιο</string>
     <string name="bg_service_sleep_mode_on">Σταμάτημα
 \n εκτέλεσης στο παρασκήνιο</string>
-    <string name="gps_wakeup_interval">Διάστημα αφύπνισης GPS: %s</string>
     <string name="int_continuosly">Συνεχόμενο</string>
     <string name="screen_is_locked">Για ξεκλείδωμα της οθόνης πατήστε το εικονίδιο της κλειδαριάς</string>
     <string name="map_widget_top_text">Όνομα οδού</string>
@@ -437,7 +436,6 @@
     <string name="level_to_switch_vector_raster_descr">Χρήση χαρτών εικονογραφίας για ο,τιδήποτε κάτω από αυτό το επίπεδο.</string>
     <string name="level_to_switch_vector_raster">Ελάχιστο επίπεδο εστίασης διανύσματος</string>
     <string name="error_doing_search">Αδυναμία εκτέλεσης αναζήτησης χωρίς σύνδεση.</string>
-    <string name="search_offline_geo_error">Αδυναμία ανάλυσης της γεωγρ πρόθεσης \'%s\'.</string>
     <string name="search_osm_offline">Αναζήτηση κατά γεωγραφική τοποθεσία</string>
     <string name="system_locale">Σύστημα</string>
     <string name="preferred_locale_descr">Επιλέξτε γλώσσα εμφάνισης (λαμβάνει χώρα όταν επανεκκινεί το OsmAnd).</string>
@@ -1670,8 +1668,6 @@
     <string name="show_number_pad">Εμφάνιση αριθμητικού πληκτρολογίου</string>
     <string name="shared_string_paste">Επικόλληση</string>
     <string name="shared_string_wikivoyage">Βικιταξίδια</string>
-    <string name="coordinate_input_accuracy_description">Αυτόματη εναλλαγή στο επόμενο πεδίο μετά την καταχώριση %1$d δεκαδικών ψηφίων.</string>
-    <string name="coordinate_input_accuracy">%1$d ψηφία</string>
     <string name="go_to_next_field">Επόμενο πεδίο</string>
     <string name="rename_marker">Μετονομασία δείκτη</string>
     <string name="tap_on_map_to_hide_interface_descr">Πάτημα στον χάρτη εναλλάσσει τα πλήκτρα ελέγχου και τα γραφικά στοιχεία.</string>
@@ -1971,7 +1967,6 @@
     <string name="osm_live_subscription_desc">Η εγγραφή ενεργοποιεί ωριαίες, ημερήσιες και εβδομαδιαίες ενημερώσεις και απεριόριστες μεταφορτώσεις για όλους τους χάρτες παγκοσμίως.</string>
     <string name="get_it">Εγγραφείτε</string>
     <string name="get_for">Εγγραφείτε για %1$s</string>
-    <string name="get_for_month">Εγγραφείτε για %1$s μήνα</string>
     <string name="osm_live_banner_desc">Κάντε απεριόριστες μεταφορτώσεις χαρτών και ενημερώσεις χαρτών περισσότερο από μια φορά τον μήνα: εβδομαδιαία, ημερήσια, ή ωριαία.</string>
     <string name="osmand_plus_banner_desc">Απεριόριστες μεταφορτώσεις χαρτών, ενημερώσεις και πρόσθετο βικιπαίδεια.</string>
     <string name="si_mi_meters">Μίλια/μέτρα</string>
@@ -2730,7 +2725,6 @@
     <string name="in_app_purchase_desc">Εφάπαξ πληρωμή</string>
     <string name="in_app_purchase_desc_ex">Μόλις αγοραστεί, θα είναι μονίμως διαθέσιμη για σας.</string>
     <string name="purchase_unlim_title">Αγορά - %1$s</string>
-    <string name="purchase_subscription_title">Εγγραφή - %1$s</string>
     <string name="wikivoyage_offline">Βικιταξίδια χωρίς σύνδεση</string>
     <string name="unlimited_downloads">Απεριόριστες λήψεις</string>
     <string name="wikipedia_offline">Βικιπαίδεια χωρίς σύνδεση</string>
@@ -3113,7 +3107,6 @@
     <string name="years_5">Έτη</string>
     <string name="months_3">Τρεις μήνες</string>
     <string name="price_free">Δωρεάν</string>
-    <string name="get_free_trial_title">Ξεκινήστε την ελεύθερη δοκιμή σας %1$d %2$s.</string>
     <string name="get_discount_first_part">%1$s για τους πρώτους %2$s</string>
     <string name="get_discount_first_few_part">%1$s για τους πρώτους %2$s</string>
     <string name="get_discount_second_part">έπειτα %1$s</string>

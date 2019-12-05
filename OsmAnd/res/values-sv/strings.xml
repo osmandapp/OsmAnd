@@ -39,7 +39,6 @@
     <string name="map_widget_show_ruler">Linjal</string>
     <string name="map_widget_view_direction">Färdriktning</string>
     <string name="map_widget_transparent">Genomskinliga widgetar</string>
-    <string name="gps_wakeup_interval">GPS-väckningsintervall: %s</string>
     <string name="int_continuosly">Kontinuerlig</string>
     <string name="map_widget_reset">Återställ till standard</string>
     <string name="map_widget_time">Tid som är kvar</string>
@@ -417,7 +416,6 @@ Nyttjat utrymme är {1} MB.
     <string name="level_to_switch_vector_raster_descr">Minsta zoomnivå för att använda vektorkartor.</string>
     <string name="level_to_switch_vector_raster">Minsta vektor-zoomnivå</string>
     <string name="error_doing_search">Ett fel uppstod vid offline-sökning.</string>
-    <string name="search_offline_geo_error">Det gick inte att tolka geo-uppsåt \'%s\'.</string>
     <string name="search_osm_offline">Sök adress med hjälp av offline-kartor</string>
     <string name="system_locale">System</string>
     <string name="preferred_locale_descr">Välj visningsspråk (träder i kraft när OsmAnd startas om).</string>
@@ -1777,7 +1775,7 @@ Long %2$s</string>
     <string name="available_maps">Tillgängliga kartor</string>
     <string name="last_update">Senaste uppdateringen: %s</string>
     <string name="update_time">Uppdateringstid</string>
-    <string name="updates_size">Uppdateringar: %s</string>
+    <string name="updates_size">Uppdateringar</string>
     <string name="last_map_change">Senaste kartändring: %s</string>
     <string name="night">Natt</string>
     <string name="hourly">Varje timma</string>
@@ -1982,7 +1980,6 @@ Om du tycker om OsmAnd och OSM och vill stödja dem så är detta ett utmärkt s
     <string name="donation_to_osm">Donation till OpenStreetMap-gemenskapen</string>
     <string name="get_it">Skaffa det</string>
     <string name="get_for">Skaffa för %1$s</string>
-    <string name="get_for_month">Skaffa för %1$s månad</string>
     <string name="skip_map_downloading_desc">"Du har inte några offline-kartor installerade. Du kan välja en karta från listan eller hämta kartor senare via \'Meny  - %1$s\'."</string>
     <string name="search_map">Söker efter kartor …</string>
     <string name="first_usage_greeting">Erhåll vägbeskrivningar och upptäck nya platser utan Internetuppkoppling</string>
@@ -2380,8 +2377,6 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="shared_string_left">Vänster</string>
     <string name="show_number_pad">Visa numeriskt tangentbord</string>
     <string name="shared_string_paste">Klistra in</string>
-    <string name="coordinate_input_accuracy_description">Växla automatiskt till nästa fält efter du skrivit in %1$d decimaler.</string>
-    <string name="coordinate_input_accuracy">%1$d decimaler</string>
     <string name="go_to_next_field">Nästa fält</string>
     <string name="rename_marker">Byt namn på markör</string>
     <string name="tap_on_map_to_hide_interface_descr">Ett tryck på kartan växlar kontrollknappar och widgets.</string>
@@ -2586,7 +2581,6 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="in_app_purchase_desc">Engångsbetalning</string>
     <string name="in_app_purchase_desc_ex">När det väl är köpt, blir det permanent tillgängligt för dig.</string>
     <string name="purchase_unlim_title">Köp - %1$s</string>
-    <string name="purchase_subscription_title">Prenumerera - %1$s</string>
     <string name="wikivoyage_offline">Wikivoyage frånkopplad</string>
     <string name="unlimited_downloads">Obegränsat antal nedladdningar</string>
     <string name="wikipedia_offline">Wikipedia frånkopplad</string>
@@ -2874,7 +2868,6 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="gpx_join_gaps">Ta bort mellanrum</string>
     <string name="temporary_conditional_routing">Överväg tillfälliga begränsningar</string>
     <string name="get_discount_title">Få %1$d %2$s på %3$s av.</string>
-    <string name="get_free_trial_title">Starta din kostnadsfria provperiod på %1$d %2$s.</string>
     <string name="get_discount_first_part">%1$s för de första %2$s</string>
     <string name="get_discount_first_few_part">%1$s för de första %2$s</string>
     <string name="configure_profile_info">Inställningar för profilen:</string>
