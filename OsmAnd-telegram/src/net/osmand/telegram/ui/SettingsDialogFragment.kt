@@ -66,6 +66,11 @@ class SettingsDialogFragment : BaseDialogFragment() {
 			}
 		}
 
+		container = mainView.findViewById<ViewGroup>(R.id.units_and_formats_container)
+		settings.unitsAndFormatsPrefs.forEach {
+			createNumericPref(inflater, container, it)
+		}
+
 		container = mainView.findViewById<ViewGroup>(R.id.gps_points_container)
 		inflater.inflate(R.layout.item_with_descr_and_right_switch, container, false).apply {
 			findViewById<ImageView>(R.id.icon).setImageDrawable(uiUtils.getThemedIcon(R.drawable.ic_action_connect))
@@ -291,7 +296,7 @@ class SettingsDialogFragment : BaseDialogFragment() {
 			isModal = true
 			anchorView = valueView
 			setContentWidth(AndroidUtils.getPopupMenuWidth(ctx, menuList))
-			height = if (menuList.size < 6) {
+			height = if (menuList.size <= 6) {
 				ListPopupWindow.WRAP_CONTENT
 			} else {
 				AndroidUtils.getPopupMenuHeight(ctx)

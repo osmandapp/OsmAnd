@@ -142,6 +142,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 
 	val gpsAndLocPrefs = listOf(SendMyLocPref(), StaleLocPref(), LocHistoryPref(), ShareTypePref())
 	val gpxLoggingPrefs = listOf(MinLocationDistance(), MinLocationAccuracy(), MinLocationSpeed())
+	val unitsAndFormatsPrefs = listOf(UnitsOfSpeed(), UnitsOfLength())
 
 	var batteryOptimisationAsked = false
 
@@ -1052,6 +1053,36 @@ class TelegramSettings(private val app: TelegramApplication) {
 				else -> OsmandFormatter.getFormattedSpeed(value, app)
 			}
 		}
+	}
+
+	inner class UnitsOfSpeed : NumericPref(
+		R.drawable.ic_action_speed, R.string.unit_of_speed_system,
+		R.string.unit_of_speed_system_descr,
+		emptyList()
+	) {
+
+		override fun getCurrentValue() = speedConstants.toShortString(app)
+
+		override fun setCurrentValue(index: Int) {
+			speedConstants = SpeedConstants.values()[index]
+		}
+
+		override fun getMenuItems() = SpeedConstants.values().map { it.toShortString(app) }
+	}
+
+	inner class UnitsOfLength : NumericPref(
+		R.drawable.ic_action_ruler_unit, R.string.unit_of_length,
+		R.string.unit_of_length_descr,
+		emptyList()
+	) {
+
+		override fun getCurrentValue() = metricsConstants.toHumanString(app)
+
+		override fun setCurrentValue(index: Int) {
+			metricsConstants = MetricsConstants.values()[index]
+		}
+
+		override fun getMenuItems() = MetricsConstants.values().map { it.toHumanString(app) }
 	}
 
 	abstract inner class NumericPref(
