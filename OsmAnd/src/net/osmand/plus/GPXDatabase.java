@@ -236,6 +236,7 @@ public class GPXDatabase {
 		// init database
 		SQLiteConnection db = openConnection(false);
 		if (db != null) {
+			cleanUpDatabase(db);
 			db.close();
 		}
 	}
@@ -258,7 +259,6 @@ public class GPXDatabase {
 				onUpgrade(conn, version, DB_VERSION);
 			}
 		}
-		cleanUpDatabase(conn);
 		return conn;
 	}
 
