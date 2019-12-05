@@ -11,6 +11,7 @@
 	Thx - Hardy
 
 -->
+    <string name="personal_category_name">Personal</string>
     <string name="add_new_profile_q">Add new profile \'%1$s\'?</string>
     <string name="save_heading">Include heading</string>
     <string name="save_heading_descr">Save heading to each trackpoint while recording.</string>
