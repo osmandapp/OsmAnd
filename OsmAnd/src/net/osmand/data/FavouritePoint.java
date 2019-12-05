@@ -6,6 +6,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 
 import net.osmand.plus.FavouritesDbHelper;
+import net.osmand.plus.R;
 
 import static net.osmand.plus.FavouritesDbHelper.PERSONAL_CATEGORY_NAME;
 
@@ -96,6 +97,16 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	public void setLongitude(double longitude) {
 		this.longitude = longitude;
 	}
+
+	public String getCategory(Context context) {
+		String result = category;
+		if (category.isEmpty()) {
+			result = context.getString(R.string.shared_string_favorites);
+		} else if (category.equals(PERSONAL_CATEGORY_NAME)) {
+			result = context.getString(R.string.personal_category_name);
+		}
+		return result;
+	}
 	
 	public String getCategory() {
 		return category;
@@ -105,9 +116,9 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		this.category = category;
 	}
 
-	public String getName(Context ctx) {
+	public String getName(Context context) {
 		if (category.equals(PERSONAL_CATEGORY_NAME)) {
-			return ctx.getString(FavouritesDbHelper.PersonalPoint.getLocalName(name));
+			return context.getString(FavouritesDbHelper.PersonalPoint.getLocalName(name));
 		}
 		return name;
 	}

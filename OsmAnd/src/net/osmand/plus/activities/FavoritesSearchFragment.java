@@ -177,11 +177,6 @@ public class FavoritesSearchFragment extends DialogFragment {
 				@Override
 				public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 					FavouritePoint point = listAdapter.getItem(position);
-					if (point.getCategory().equals(getContext().getString(R.string.personal_category_name))) {
-						point.setCategory(FavouritesDbHelper.PERSONAL_CATEGORY_NAME);
-						point.setName(FavouritesDbHelper.PersonalPoint.getNameByLocalName(point.getName(), getContext()));
-					}
-
 					if (point != null) {
 						showOnMap(point);
 						dismiss();

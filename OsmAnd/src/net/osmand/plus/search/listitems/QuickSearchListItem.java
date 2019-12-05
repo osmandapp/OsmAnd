@@ -102,6 +102,8 @@ public class QuickSearchListItem {
 			case LOCATION:
 				LatLon latLon = searchResult.location;
 				return PointDescription.getLocationNamePlain(app, latLon.getLatitude(), latLon.getLongitude());
+			case FAVORITE:
+				return ((FavouritePoint) searchResult.object).getName(app);
 		}
 		return searchResult.localeName;
 	}
@@ -213,8 +215,7 @@ public class QuickSearchListItem {
 				return searchResult.localeRelatedObjectName;
 			case FAVORITE:
 				FavouritePoint fav = (FavouritePoint) searchResult.object;
-				return fav.getCategory().length() == 0 ?
-						app.getString(R.string.shared_string_favorites) : fav.getCategory();
+				return fav.getCategory(app);
 			case FAVORITE_GROUP:
 				return app.getString(R.string.shared_string_my_favorites);
 			case REGION:

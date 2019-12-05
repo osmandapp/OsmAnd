@@ -2378,6 +2378,12 @@ public class OsmandSettings {
 		edit.commit();
 		objectToShow = toShow;
 		if (addToHistory) {
+			if (pointDescription.isFavorite()) {
+				int localeNameID = FavouritesDbHelper.PersonalPoint.getLocalName(pointDescription.getName());
+				if (localeNameID != 0) {
+					pointDescription.setName(ctx.getString(localeNameID));
+				}
+			}
 			SearchHistoryHelper.getInstance(ctx).addNewItemToHistory(latitude, longitude, pointDescription);
 		}
 	}

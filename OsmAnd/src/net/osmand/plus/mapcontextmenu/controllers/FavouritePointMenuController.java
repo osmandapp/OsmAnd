@@ -158,13 +158,7 @@ public class FavouritePointMenuController extends MenuController {
 	public String getTypeStr() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			if(fav.getCategory().length() == 0){
-				return mapActivity.getString(R.string.shared_string_favorites);
-			}else if(fav.getCategory().equals(FavouritesDbHelper.PERSONAL_CATEGORY_NAME)){
-				return mapActivity.getString(R.string.personal_category_name);
-			}else{
-				return fav.getCategory();
-			}
+			return fav.getCategory(mapActivity.getApplicationContext());
 		} else {
 			return "";
 		}

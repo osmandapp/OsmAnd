@@ -704,7 +704,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 		selectedChildPos = childPos;
 		LatLon location = new LatLon(point.getLatitude(), point.getLongitude());
 		FavoritesActivity.showOnMap(requireActivity(), this, location.getLatitude(), location.getLongitude(),
-				settings.getLastKnownMapZoom(), new PointDescription(PointDescription.POINT_TYPE_FAVORITE, point.getName()), true, point);
+				settings.getLastKnownMapZoom(), new PointDescription(PointDescription.POINT_TYPE_FAVORITE, point.getName(getContext())), true, point);
 	}
 
 	@Override
