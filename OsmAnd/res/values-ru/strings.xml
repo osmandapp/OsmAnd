@@ -1087,7 +1087,7 @@
     <string name="map_widget_altitude">Высота</string>
     <string name="map_widget_time">Время в пути</string>
     <string name="map_widget_next_turn">Следующий поворот</string>
-    <string name="map_widget_next_turn_small">След. поворот (мал.)</string>
+    <string name="map_widget_next_turn_small">Следующий поворот (небольшой)</string>
     <string name="map_widget_next_next_turn">Второй след. поворот</string>
     <string name="map_widget_mini_route">Малая карта маршрута</string>
     <string name="bg_service_screen_lock">Заблокировать экран</string>
@@ -1101,7 +1101,7 @@
     <string name="show_lanes">Полосы движения</string>
     <string name="avoid_unpaved">Избегать проселочных дорог</string>
     <string name="avoid_ferries">Избегать паромов</string>
-    <string name="avoid_in_routing_title">Избегать при прокладке маршрута…</string>
+    <string name="avoid_in_routing_title">Избегать…</string>
     <string name="show_warnings_descr">Настройка оповещений (ограничения скорости, вынужденные остановки, искусственные неровности, тоннели), камеры скорости, информацию о полосах.</string>
     <string name="map_widget_fluorescent">Флуоресцентные маршруты</string>
     <string name="show_warnings_title">Показывать сигналы…</string>
@@ -1498,7 +1498,7 @@
     <string name="gpx_selection_route_points">%1$s \nМаршрутных точек %2$s</string>
     <string name="show_zoom_buttons_navigation_descr">Показывать кнопки изменения масштаба во время навигации.</string>
     <string name="show_zoom_buttons_navigation">Кнопки масштаба</string>
-    <string name="sort_by_distance">Сортировать по дистанции</string>
+    <string name="sort_by_distance">Сортировать по расстоянию</string>
     <string name="sort_by_name">Сортировать по имени</string>
     <string name="osmo_edit_color">Цвет метки</string>
     <string name="none_selected_gpx">Нет выбранных файлов GPX. Выберите один путем длительного нажатия.</string>
@@ -1547,9 +1547,9 @@
     <string name="pause_navigation">Приостановить навигацию</string>
     <string name="rendering_attr_alpineHiking_description">Визуализация пути по шкале SAC.</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Визуализация пути согласно трассам OSMC.</string>
-    <string name="arrival_distance_factor_early">Пораньше</string>
-    <string name="arrival_distance_factor_normally">Как обычно</string>
-    <string name="arrival_distance_factor_late">Попозже</string>
+    <string name="arrival_distance_factor_early">Раньше</string>
+    <string name="arrival_distance_factor_normally">Обычный</string>
+    <string name="arrival_distance_factor_late">Позже</string>
     <string name="arrival_distance_factor_at_last">На последних метрах</string>
     <string name="rendering_attr_alpineHiking_name">Пеший горный туризм по шкале (SAC)</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Наложение туристических меток</string>
@@ -2025,7 +2025,7 @@
     <string name="plugins_menu_group">Плагины</string>
     <string name="map_legend">Легенда</string>
     <string name="shared_string_update">Обновить</string>
-    <string name="shared_string_upload">Отправить</string>
+    <string name="shared_string_upload">Загрузить</string>
     <string name="osm_edit_created_poi">Создана OSM POI</string>
     <string name="osmand_running_in_background">Запустить в фоновом режиме</string>
     <string name="av_locations">Места</string>

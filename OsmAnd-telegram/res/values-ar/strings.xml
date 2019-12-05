@@ -14,4 +14,6 @@
     <string name="nm_h">م.بح/س</string>
     <string name="si_nm_h">ميل بحري في الساعة (عقدة)</string>
     <string name="si_km_m">كم/م</string>
+    <string name="shared_string_end">نهاية</string>
+    <string name="saved_messages">الرسائل المحفوظة</string>
 </resources>
