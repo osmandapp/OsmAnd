@@ -860,7 +860,7 @@
     <string name="shared_location">Mitgeteilter Standort</string>
     <string name="osmand_parking_event">Fahrzeug vom Parkplatz abholen</string>
     <string name="osmand_parking_warning">Warnung</string>
-    <string name="osmand_parking_warning_text">Ein Eintrag zum Abholen des Fahrzeugs wurde zum Kalender hinzugefügt und kann dort bearbeitet oder entfernt werden.</string>
+    <string name="osmand_parking_warning_text">Im Kalender wurde ein Abholtermin für das Fahrzeug eingetragen. Er kann dort bearbeitet oder entfernt werden.</string>
     <string name="osmand_parking_time_limit_title">Parkzeitbegrenzung setzen</string>
     <string name="osmand_parking_delete_confirm">Standorthinweis des geparkten Fahrzeugs löschen?</string>
     <string name="osmand_parking_delete">Parkplatz-Marker löschen</string>
@@ -978,7 +978,7 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
     <string name="av_camera_pic_size_descr">Bildgröße der Kamera festlegen</string>
     <string name="av_def_action_video">Video aufzeichnen</string>
     <string name="av_def_action_audio">Audio aufnehmen</string>
-    <string name="av_widget_action_descr">Standard-Steuerelement-Aktion:</string>
+    <string name="av_widget_action_descr">Steuerelement-Standardaktion:</string>
     <string name="av_widget_action">Standard-Steuerelement-Aktion</string>
     <string name="av_video_format_descr">Video-Ausgabeformat:</string>
     <string name="av_video_format">Video-Ausgabeformat</string>
@@ -986,13 +986,13 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
     <string name="av_use_external_recorder">System-Video-App nutzen</string>
     <string name="av_settings_descr">Konfigurieren von Audio- und Video-Einstellungen.</string>
     <string name="shared_string_control_stop">Stopp</string>
-    <string name="av_settings">Audio/Video Einstellungen</string>
+    <string name="av_settings">Audio-/Video-Einstellungen</string>
     <string name="shared_string_control_start">Start</string>
     <string name="av_def_action_picture">Foto aufnehmen</string>
     <string name="av_use_external_camera_descr">System App für Fotos verwenden.</string>
     <string name="av_use_external_camera">System-Kamera-App nutzen</string>
     <string name="av_def_action_choose">Auf Anfrage\?</string>
-    <string name="dropbox_plugin_description">Die Dropbox-Erweiterung macht die Synchronisierung von Tracks und Audio/Video-Notizen mit Ihrem Dropbox-Konto möglich.</string>
+    <string name="dropbox_plugin_description">Die Dropbox-Erweiterung macht die Synchronisierung von Tracks und Audio-/Video-Notizen mit Ihrem Dropbox-Konto möglich.</string>
     <string name="dropbox_plugin_name">Dropbox-Modul</string>
     <string name="intermediate_points_change_order">Reihenfolge ändern</string>
     <string name="recording_camera_not_available">Kamera nicht verfügbar</string>
@@ -1012,7 +1012,7 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
     <string name="recording_context_menu_precord">Foto aufnehmen</string>
     <string name="recording_can_not_be_played">Aufnahme konnte nicht abgespielt werden.</string>
     <string name="recording_context_menu_delete">Aufnahme löschen</string>
-    <string name="layer_recordings">Audio/Video-Notizen</string>
+    <string name="layer_recordings">Audio-/Video-Notizen</string>
     <string name="map_widget_av_notes">Audio-/Video-Notizen</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd-Erweiterung für Offline-Höhenlinien</string>
     <string name="map_widget_distancemeasurement">Entfernungsmessung</string>
@@ -1020,7 +1020,7 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
     <string name="monitoring_settings_descr">Konfiguration der Streckenaufzeichnung.</string>
     <string name="monitoring_control_start">GPX</string>
     <string name="map_widget_audionotes">Audio-Notizen</string>
-    <string name="audionotes_plugin_description">Die Audio/Video-Notiz-Erweiterung bietet die Möglichkeit, unterwegs ortsbezogene Audio-/Fotografie-/Video-Notizen aufzunehmen, entweder über eine Taste auf dem Kartenbildschirm für die aktuelle Position oder direkt über das Kontextmenü für jede beliebige Position auf der Karte.</string>
+    <string name="audionotes_plugin_description">Die Erweiterung Audio-/Video-Notizen bietet die Möglichkeit, unterwegs ortsbezogene Audio-/Fotografie-/Video-Notizen aufzunehmen, entweder über eine Taste auf dem Kartenbildschirm für die aktuelle Position oder direkt über das Kontextmenü für jede beliebige Position auf der Karte.</string>
     <string name="audionotes_plugin_name">Audio-/Video-Notizen</string>
     <string name="audionotes_location_not_defined">Benutzen Sie \'Standort verwenden…\', um dem Ort eine Notiz zuzuweisen.</string>
     <string name="osmand_srtm_long_description_1000_chars">Diese Erweiterung beinhaltet Höhenlinien und Relief-Schattierungen, die als Ergänzung zu den Standard-Offline-Karten von OsmAnd angezeigt werden können. Diese Funktionalität ist vor allem für Sportler, Wanderer, Radfahrer, Trekker und jeden interessant, der sich für das Geländerelief einer Landschaft interessiert. 
@@ -1030,7 +1030,7 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
     <string name="clear_dest_confirm">Sind Sie sicher, dass Sie Ihr Ziel (und die Zwischenziele) löschen möchten?</string>
     <string name="precise_routing_mode_descr">Routen fehlerfrei berechnen. Diese Funktion ist dennoch auf kurze Entfernung begrenzt und langsam.</string>
     <string name="precise_routing_mode">Präzises Routing (experimentell)</string>
-    <string name="local_indexes_cat_av">Audio/Video-Daten</string>
+    <string name="local_indexes_cat_av">Audio-/Video-Daten</string>
     <string name="prefer_motorways">Autobahnen bevorzugen</string>
     <string name="prefer_in_routing_title">Bevorzugen von …</string>
     <string name="prefer_in_routing_descr">Autobahnen bevorzugen.</string>
@@ -2918,7 +2918,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="quick_action_gpx_tracks_show">GPX-Tracks einblenden</string>
     <string name="exit_at">Aussteigen bei</string>
     <string name="sit_on_the_stop">Zusteigen an Haltestelle</string>
-    <string name="use_osm_live_public_transport_description">Öffentliche Verkehrsmittel für Änderungen mit OsmAnd Live aktivieren.</string>
+    <string name="use_osm_live_public_transport_description">OsmAnd-Live-Änderungen bei öffentlichen Verkehrsmitteln aktivieren.</string>
     <string name="use_osm_live_public_transport">OsmAnd Live öffentliche Verkehrsmittel</string>
     <string name="public_transport_warning_descr_blog">Erfahren Sie in unserem Blog mehr darüber, wie OsmAnd Routen berechnet.</string>
     <string name="public_transport_warning_title">Die Navigation im öffentlichen Nahverkehr befindet sich derzeit im Beta-Test, rechnen Sie mit Fehlern und Ungenauigkeiten.</string>
@@ -3392,7 +3392,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="new_plugin_added">Neues Plugin hinzugefügt</string>
     <string name="quick_action_directions_from_desc">Eine Schaltfläche, um die Bildschirmmitte zum Ausgangspunkt zu machen und die Route zum Ziel zu berechnen oder einen Dialog zur Auswahl des Ziels zu öffnen, wenn sich der Zielmarker nicht auf der Karte befindet.</string>
     <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Radroutennetzknoten anzeigen</string>
-    <string name="download_map_dialog">Kartendialog herunterladen</string>
+    <string name="download_map_dialog">Dialog zum Herunterladen der Karte</string>
     <string name="dialogs_and_notifications_title">Dialoge und Benachrichtigungen</string>
     <string name="dialogs_and_notifications_descr">Steuern Sie Popups, Dialoge und Benachrichtigungen, die OsmAnd während der Nutzung anzeigt.</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_name">Knotennetzwerke</string>
