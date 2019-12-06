@@ -11,9 +11,7 @@ import net.osmand.PlatformUtil
 import net.osmand.telegram.helpers.OsmandAidlHelper
 import net.osmand.telegram.helpers.ShowLocationHelper
 import net.osmand.telegram.helpers.TelegramHelper
-import net.osmand.telegram.utils.AndroidUtils
-import net.osmand.telegram.utils.OsmandApiUtils
-import net.osmand.telegram.utils.OsmandFormatter
+import net.osmand.telegram.utils.*
 import net.osmand.telegram.utils.OsmandFormatter.MetricsConstants
 import net.osmand.telegram.utils.OsmandFormatter.SpeedConstants
 import net.osmand.telegram.utils.OsmandLocationUtils
@@ -72,6 +70,7 @@ private const val SHARING_MODE_KEY = "current_sharing_mode"
 
 private const val METRICS_CONSTANTS_KEY = "metrics_constants"
 private const val SPEED_CONSTANTS_KEY = "speed_constants"
+private const val UTC_OFFSET_CONSTANTS_KEY = "utc_offset_constants"
 
 private const val SEND_MY_LOC_INTERVAL_KEY = "send_my_loc_interval"
 private const val STALE_LOC_TIME_KEY = "stale_loc_time"
@@ -125,6 +124,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 
 	var metricsConstants = MetricsConstants.KILOMETERS_AND_METERS
 	var speedConstants = SpeedConstants.KILOMETERS_PER_HOUR
+	var utcOffset = DataConstants.UTC_FORMAT
 
 	var sendMyLocInterval = SEND_MY_LOC_VALUES_SEC[SEND_MY_LOC_DEFAULT_INDEX]
 	var staleLocTime = STALE_LOC_VALUES_SEC[STALE_LOC_DEFAULT_INDEX]
@@ -142,7 +142,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 
 	val gpsAndLocPrefs = listOf(SendMyLocPref(), StaleLocPref(), LocHistoryPref(), ShareTypePref())
 	val gpxLoggingPrefs = listOf(MinLocationDistance(), MinLocationAccuracy(), MinLocationSpeed())
-	val unitsAndFormatsPrefs = listOf(UnitsOfSpeed(), UnitsOfLength())
+	val unitsAndFormatsPrefs = listOf(UnitsOfSpeed(), UnitsOfLength(), UtcOffset())
 
 	var batteryOptimisationAsked = false
 
@@ -607,6 +607,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 
 		edit.putString(METRICS_CONSTANTS_KEY, metricsConstants.name)
 		edit.putString(SPEED_CONSTANTS_KEY, speedConstants.name)
+		edit.putString(UTC_OFFSET_CONSTANTS_KEY, utcOffset)
 
 		edit.putLong(SEND_MY_LOC_INTERVAL_KEY, sendMyLocInterval)
 		edit.putLong(STALE_LOC_TIME_KEY, staleLocTime)
@@ -669,6 +670,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 		speedConstants = SpeedConstants.valueOf(
 			prefs.getString(SPEED_CONSTANTS_KEY, SpeedConstants.KILOMETERS_PER_HOUR.name)
 		)
+		utcOffset = prefs.getString(UTC_OFFSET_CONSTANTS_KEY, DataConstants.UTC_FORMAT)
 
 		try {
 			parseShareChatsInfo(JSONArray(prefs.getString(SHARE_CHATS_INFO_KEY, "")))
@@ -1069,6 +1071,20 @@ class TelegramSettings(private val app: TelegramApplication) {
 		}
 
 		override fun getMenuItems() = MetricsConstants.values().map { it.toHumanString(app) }
+	}
+
+	inner class UtcOffset : ListPreference(
+		R.drawable.ic_world_globe_dark, R.string.time_zone,
+		R.string.time_zone_descr
+	) {
+
+		override fun getCurrentValue() = utcOffset
+
+		override fun setCurrentValue(index: Int) {
+			utcOffset = DataConstants.utcOffsets[index]
+		}
+
+		override fun getMenuItems() = DataConstants.utcOffsets
 	}
 
 	abstract inner class ListPreference(

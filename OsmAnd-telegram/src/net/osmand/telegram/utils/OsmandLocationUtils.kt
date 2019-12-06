@@ -42,7 +42,7 @@ object OsmandLocationUtils {
 	const val SECONDS_AGO_SUFFIX = " seconds ago"
 	const val MINUTES_AGO_SUFFIX = " minutes ago"
 	const val HOURS_AGO_SUFFIX = " hours ago"
-	const val UTC_FORMAT_SUFFIX = " UTC"
+	const val UTC_FORMAT_SUFFIX = " ${DataConstants.UTC_FORMAT}"
 
 	val UTC_DATE_FORMAT = SimpleDateFormat("yyyy-MM-dd", Locale.US).apply {
 		timeZone = TimeZone.getTimeZone("UTC")
