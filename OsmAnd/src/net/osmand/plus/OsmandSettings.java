@@ -1005,17 +1005,7 @@ public class OsmandSettings {
 	public static final String NUMBER_OF_FREE_DOWNLOADS_ID = "free_downloads_v3";
 
 	// this value string is synchronized with settings_pref.xml preference name
-	private final OsmandPreference<String> PLUGINS = new StringPreference("enabled_plugins", MapillaryPlugin.ID) {
-		@Override
-		public String getProfileDefaultValue(ApplicationMode mode) {
-			ApplicationMode parent = mode.getParent();
-			if (parent != null && isSetForMode(parent)) {
-				return getModeValue(parent);
-			} else {
-				return super.getProfileDefaultValue(mode);
-			}
-		}
-	}.makeGlobal();
+	private final OsmandPreference<String> PLUGINS = new StringPreference("enabled_plugins", MapillaryPlugin.ID).makeGlobal();
 
 	public Set<String> getEnabledPlugins() {
 		String plugs = PLUGINS.get();
@@ -1148,17 +1138,7 @@ public class OsmandSettings {
 	public final CommonPreference<Boolean> SHOW_OSMAND_WELCOME_SCREEN = new BooleanPreference("show_osmand_welcome_screen", true).makeGlobal();
 
 	public final CommonPreference<String> API_NAV_DRAWER_ITEMS_JSON = new StringPreference("api_nav_drawer_items_json", "{}").makeGlobal();
-	public final CommonPreference<String> API_CONNECTED_APPS_JSON = new StringPreference("api_connected_apps_json", "[]") {
-		@Override
-		public String getProfileDefaultValue(ApplicationMode mode) {
-			ApplicationMode parent = mode.getParent();
-			if (parent != null && isSetForMode(parent)) {
-				return getModeValue(parent);
-			} else {
-				return super.getProfileDefaultValue(mode);
-			}
-		}
-	}.makeGlobal();
+	public final CommonPreference<String> API_CONNECTED_APPS_JSON = new StringPreference("api_connected_apps_json", "[]").makeGlobal();
 
 	public final CommonPreference<Integer> NUMBER_OF_STARTS_FIRST_XMAS_SHOWN = new IntPreference("number_of_starts_first_xmas_shown", 0).makeGlobal();
 
@@ -1321,12 +1301,7 @@ public class OsmandSettings {
 	//public final OsmandPreference<Integer> COORDINATES_FORMAT = new IntPreference("coordinates_format", PointDescription.FORMAT_DEGREES).makeGlobal();
 
 	public final OsmandPreference<AngularConstants> ANGULAR_UNITS = new EnumIntPreference<AngularConstants>(
-		"angular_measurement", AngularConstants.DEGREES, AngularConstants.values()) {
-		@Override
-		protected AngularConstants getValue(Object prefs, AngularConstants defaultValue) {
-			return super.getValue(prefs, defaultValue);
-		}
-	}.makeProfile().makeGeneral();
+		"angular_measurement", AngularConstants.DEGREES, AngularConstants.values()).makeProfile().makeGeneral();
 
 
 	public final OsmandPreference<SpeedConstants> SPEED_SYSTEM = new EnumIntPreference<SpeedConstants>(
