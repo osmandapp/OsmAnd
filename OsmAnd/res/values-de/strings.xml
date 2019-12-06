@@ -512,9 +512,9 @@
     <string name="reading_cached_tiles">Lese zwischengespeicherte Kacheln…</string>
     <string name="version_index_is_big_for_memory">Nicht genügend Speicher für Index \'\'{0}\'\'</string>
     <string name="version_index_is_not_supported">Die Index-Version \'\'{0}\'\' wird nicht unterstützt</string>
-    <string name="osmand_routing_experimental">OsmAnd-Offline-Navigation ist noch experimentell und funktioniert nicht gut für Entfernungen über 20 km. 
+    <string name="osmand_routing_experimental">OsmAnds Offline-Navigation ist noch experimentell und funktioniert nicht gut für Entfernungen über 20 km. 
 \n 
-\nAls Navigationsdienst wird temporär der Online-CloudMade-Dienst verwendet.</string>
+\nAls Navigationsdienst wird temporär der CloudMade-Online-Dienst verwendet.</string>
     <string name="specified_dir_doesnt_exist">Angegebener Ordner konnte nicht gefunden werden.</string>
     <string name="application_dir">Datenordner</string>
     <string name="osmand_net_previously_installed">Alle Offline-Daten der älteren App werden in der neuen weiter unterstützt. Favoriten müssen aber in der Vorversion exportiert und anschließend in die neue Version importiert werden.</string>
@@ -1823,7 +1823,7 @@ Lon %2$s</string>
     <string name="av_audio_bitrate">Audio-Bitrate</string>
     <string name="av_audio_bitrate_descr">Audio-Bitrate wählen.</string>
     <string name="rendering_attr_horseRoutes_name">Reitwege</string>
-    <string name="update">Aktualisierungsintervall</string>
+    <string name="update">Aktualisieren</string>
     <string name="only_download_over_wifi">Nur über WLAN herunterladen</string>
     <string name="live_update">Live-Aktualisierung</string>
     <string name="update_now">Jetzt aktualisieren</string>
@@ -3081,7 +3081,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="base_profile_descr_pedestrian">Gehen, Wandern, Laufen</string>
     <string name="base_profile_descr_public_transport">Alle ÖPNV-Arten</string>
     <string name="base_profile_descr_boat">Schiff, Rudern, Segeln</string>
-    <string name="base_profile_descr_aircraft">Flugzeug, Segelflug</string>
+    <string name="base_profile_descr_aircraft">Flugzeug, Segelflugzeug</string>
     <string name="colleted_data">Gesammelte Daten</string>
     <string name="base_profile_descr_ski">Skifahren</string>
     <string name="show_compass_ruler">Kompasslineal anzeigen</string>
@@ -3132,7 +3132,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="shared_string_max_speed">Max. Tempo</string>
     <string name="default_speed_setting_title">Standardtempo</string>
     <string name="default_speed_setting_descr">Einstellungen des Standardtempos ändern</string>
-    <string name="minmax_speed_dialog_title">Tempogrenzwerte einstellen</string>
+    <string name="minmax_speed_dialog_title">Tempogrenzen einstellen</string>
     <string name="new_profile">Neues Profil</string>
     <string name="shared_string_crash">Absturz</string>
     <string name="last_launch_crashed">Der letzte Start von OsmAnd ist fehlgeschlagen. Bitte helfen Sie uns, OsmAnd zu verbessern, indem Sie uns über diesen Fehler informieren.</string>
@@ -3231,7 +3231,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="get_discount_second_part">dann %1$s</string>
     <string name="cancel_subscription">Abonnement beenden</string>
     <string name="price_and_discount">%1$s • Spare %2$s</string>
-    <string name="get_discount_title">%1$d %2$s mit %3$s Rabatt erhalten.</string>
+    <string name="get_discount_title">Bekommen Sie %1$d %2$s mit %3$s Rabatt.</string>
     <string name="get_discount_first_part">%1$s für die ersten %2$s</string>
     <string name="get_discount_first_few_part">%1$s für die ersten %2$s</string>
     <string name="configure_profile_info">Einstellungen für Profil:</string>
@@ -3314,7 +3314,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="routeInfo_piste_difficulty_name">Pisten-Schwierigkeitsgrad</string>
     <string name="routing_attr_width_name">Breitenbegrenzung</string>
     <string name="routing_attr_width_description">Geben Sie die zulässige Fahrzeugbreitenbegrenzung auf Routen an.</string>
-    <string name="avoid_in_routing_descr_">Vermeiden von bestimmten Routen und Straßentypen</string>
+    <string name="avoid_in_routing_descr_">Bestimmte Routen und Straßentypen vermeiden</string>
     <string name="app_mode_utv">Nebeneinander</string>
     <string name="rendering_attr_piste_difficulty_aerialway_name">Seilbahn</string>
     <string name="rendering_attr_piste_difficulty_connection_name">Verbindung</string>
@@ -3363,10 +3363,10 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="quick_action_contour_lines_show">Höhenlinien anzeigen</string>
     <string name="quick_action_contour_lines_hide">Höhenlinien ausblenden</string>
     <string name="quick_action_show_hide_contour_lines">Höhenlinien ein-/ausblenden</string>
-    <string name="quick_action_hillshade_descr">Ein Umschalter zum Ein- oder Ausblenden von Schummerung auf der Karte.</string>
-    <string name="quick_action_hillshade_show">Schummerung anzeigen</string>
-    <string name="quick_action_hillshade_hide">Schummerung ausblenden</string>
-    <string name="quick_action_show_hide_hillshade">Schummerung ein-/ausblenden</string>
+    <string name="quick_action_hillshade_descr">Ein Umschalter zum Ein- oder Ausblenden der Reliefdarstellung.</string>
+    <string name="quick_action_hillshade_show">Relief anzeigen</string>
+    <string name="quick_action_hillshade_hide">Relief ausblenden</string>
+    <string name="quick_action_show_hide_hillshade">Relief ein-/ausblenden</string>
     <string name="tts_initialization_error">Text-to-Speech-Engine kann nicht gestartet werden</string>
     <string name="simulate_your_location_gpx_descr">Simulation Ihrer Position mit einem aufgezeichneten GPX-Track.</string>
     <string name="export_profile">Profil exportieren</string>
@@ -3391,7 +3391,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="shared_string_turn_off">Ausschalten</string>
     <string name="new_plugin_added">Neues Plugin hinzugefügt</string>
     <string name="quick_action_directions_from_desc">Eine Schaltfläche, um die Bildschirmmitte zum Ausgangspunkt zu machen und die Route zum Ziel zu berechnen oder einen Dialog zur Auswahl des Ziels zu öffnen, wenn sich der Zielmarker nicht auf der Karte befindet.</string>
-    <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Zeige Knotennetzwerk-Zyklus-Routen an</string>
+    <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Radroutennetzknoten anzeigen</string>
     <string name="download_map_dialog">Kartendialog herunterladen</string>
     <string name="dialogs_and_notifications_title">Dialoge und Benachrichtigungen</string>
     <string name="dialogs_and_notifications_descr">Steuern Sie Popups, Dialoge und Benachrichtigungen, die OsmAnd während der Nutzung anzeigt.</string>
