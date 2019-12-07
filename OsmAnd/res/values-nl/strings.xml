@@ -829,7 +829,7 @@ Proportioneel werkgeheugen %4$s MB (Android limiet %5$s MB, Dalvik %6$s MB).</st
     <string name="rendering_attr_roadColors_name">Kleurschema voor wegen</string>
     <string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner app is niet geïnstalleerd. In Google Play zoeken?</string>
     <string name="close_changeset">Sluit changeset</string>
-    <string name="safe_mode_description">Gebruik OsmAnd in veilige modus (gebruikt langzamere Android-code in plaats van native code).</string>
+    <string name="safe_mode_description">Gebruik OsmAnd in veilige modus (gebruikt langzamere java-code in plaats van native C-code).</string>
     <string name="safe_mode">Veilige modus</string>
     <string name="native_library_not_running">Het programma werkt in veilige modus (uitzetten via Instellingen).</string>
     <string name="background_service_is_enabled_question">OsmAnd achtergrond-service staat nog aan. Die ook uitschakelen?</string>
@@ -968,7 +968,7 @@ Proportioneel werkgeheugen %4$s MB (Android limiet %5$s MB, Dalvik %6$s MB).</st
     <string name="local_osm_changes_backup">Backup als OSM-wijziging</string>
     <string name="search_street_in_neighborhood_cities">Zoek straat in nabijgelegen plaatsen</string>
     <string name="intermediate_items_sort_return">Volgorde van tussenpunten geoptimaliseerd.</string>
-    <string name="intermediate_items_sort_by_distance">Sorteer huis-aan-huis route</string>
+    <string name="intermediate_items_sort_by_distance">Sorteer kortste afstand</string>
     <string name="please_select_address">Kies eerst een plaats of straat</string>
     <string name="context_menu_item_destination_point">Als bestemming instellen</string>
     <string name="destination_point">Bestemming %1$s</string>
@@ -1310,7 +1310,7 @@ Wil je een nieuwe map maken op de toegestane locatie en de OsmAnd-bestanden daar
     <string name="map_update">Updates beschikbaar voor %1$s kaart(en)</string>
     <string name="everything_up_to_date">Alle bestanden zijn bijgewerkt</string>
     <string name="use_opengl_render">Gebruik OpenGL</string>
-    <string name="use_opengl_render_descr">Gebruik OpenGL hardware-acceleratie weergave (gebruikt mogelijk meer stroom en werkt mogelijk niet op oudere apparaten).</string>
+    <string name="use_opengl_render_descr">Gebruik snelle hardware-gebaseerde OpenGL weergave (gebruikt mogelijk meer stroom en werkt mogelijk niet op oudere apparaten).</string>
     <string name="error_avoid_specific_road">Er is geen alternatieve weg gevonden</string>
     <string name="no_internet_connection">Downloaden mislukt. Controleer de internetverbinding.</string>
     <string name="download_tab_downloads">Alle downloads</string>
@@ -1411,7 +1411,7 @@ Wil je een nieuwe map maken op de toegestane locatie en de OsmAnd-bestanden daar
     <string name="shared_string_off">Uit</string>
     <string name="shared_string_previous">Vorige</string>
     <string name="shared_string_next">Volgende</string>
-    <string name="shared_string_enable">Inschakelen</string>
+    <string name="shared_string_enable">Activeer</string>
     <string name="shared_string_disable">Schakel uit</string>
     <string name="shared_string_enabled">Ingeschakeld</string>
     <string name="shared_string_disabled">Uitgeschakeld</string>
@@ -1436,7 +1436,7 @@ Wil je een nieuwe map maken op de toegestane locatie en de OsmAnd-bestanden daar
     <string name="shared_string_delete_all">Verwijder alles</string>
     <string name="shared_string_share">Deel</string>
     <string name="shared_string_add">Voeg toe</string>
-    <string name="shared_string_apply">Toepassen</string>
+    <string name="shared_string_apply">Pas toe</string>
     <string name="shared_string_control_start">Start</string>
     <string name="shared_string_control_stop">Stop</string>
     <string name="shared_string_import">Importeer</string>
@@ -1845,7 +1845,7 @@ Lengtegraad:\t\t%2$s</string>
     <string name="clear_updates_proposition_message">Je kan gedownloade updates verwijderen en terugkeren naar de originele kaart</string>
     <string name="add_time_span">Periode toevoegen</string>
     <string name="road_blocked">Weg geblokkeerd</string>
-    <string name="shared_string_select">Selecteer</string>
+    <string name="shared_string_select">Kies</string>
     <string name="reports_for">Verslag over</string>
     <string name="data_is_not_available">Gegevens niet beschikbaar</string>
     <string name="rendering_attr_hideUnderground_name">Ondergrondse objecten</string>
@@ -2640,7 +2640,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="rendering_attr_hidePOILabels_name">POI-namen</string>
     <string name="shared_string_without_name">Zonder naam</string>
     <string name="what_is_here">Wat is dit hier:</string>
-    <string name="open_from">Openen vanaf</string>
+    <string name="open_from">Geopend vanaf</string>
     <string name="open_till">Geopend tot</string>
     <string name="will_close_at">Sluit om</string>
     <string name="will_open_at">Gaat open om</string>
@@ -2987,7 +2987,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="shared_string_icon">Icoon</string>
     <string name="press_again_to_change_the_map_orientation">Tik nogmaals om de kaartoriëntatie te wijzigen</string>
     <string name="default_speed_setting_title">Standaardsnelheid</string>
-    <string name="default_speed_setting_descr">Instellingen aanpassen van standaard snelheden</string>
+    <string name="default_speed_setting_descr">Standaard snelheden instellingen aanpassen</string>
     <string name="minmax_speed_dialog_title">Stel min/max snelheid in</string>
     <string name="shared_string_crash">Vastgelopen</string>
     <string name="app_mode_monowheel">Monowheel, Hoverboard</string>
@@ -3278,4 +3278,5 @@ voor Gebied: %1$s x %2$s</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_name">Netwerk knooppunten</string>
     <string name="add_new_profile_q">Voeg nieuw profiel toe \'%1$s\'\?</string>
     <string name="save_heading_descr">Sla (richting) naar elk trackpunt op tijdens het opnemen.</string>
+    <string name="save_heading">Richting toevoegen</string>
 </resources>
