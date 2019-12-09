@@ -74,14 +74,7 @@ public class GeneralRouter implements VehicleRouter {
 	private TLongHashSet impassableRoads;
 	private GeneralRouterProfile profile;
 	
-	Map<RouteRegion, Map<IntHolder, Float>> priorityCache;	
-	Map<RouteRegion, Map<IntHolder, Float>> speedCache;
-	Map<RouteRegion, Map<IntHolder, Float>> vehicleSpeedCache;
-	Map<RouteRegion, Map<IntHolder, Float>> accessCache;
-	Map<RouteRegion, Map<IntHolder, Float>> onewayCache;
-	Map<RouteRegion, Map<IntHolder, Float>> obstacleCache;
-	Map<RouteRegion, Map<IntHolder, Float>> routingObstacleCache;
-	Map<RouteRegion, Map<IntHolder, Float>> penaltyCache;
+	Map<RouteRegion, Map<IntHolder, Float>>[] evalCache;	
 	
 	public enum RouteDataObjectAttribute {
 		ROAD_SPEED("speed"),
@@ -183,15 +176,13 @@ public class GeneralRouter implements VehicleRouter {
 
 	}
 
+	@SuppressWarnings("unchecked")
 	private void initCaches() {
-		priorityCache = new HashMap<>();	
-		speedCache = new HashMap<>();
-		vehicleSpeedCache = new HashMap<>();
-		obstacleCache = new HashMap<>();
-		routingObstacleCache = new HashMap<>();
-		accessCache = new HashMap<>();
-		onewayCache = new HashMap<>();
-		penaltyCache = new HashMap<>();
+		int l = RouteDataObjectAttribute.values().length;
+		evalCache = new Map[l];
+		for (int i = 0; i < l; i++) {
+			evalCache[i] = new HashMap<>();
+		}
 	}
 
 	public String getFilename() {
@@ -272,10 +263,10 @@ public class GeneralRouter implements VehicleRouter {
 
 	@Override
 	public boolean acceptLine(RouteDataObject way) {
-		Float res = getCache(accessCache, way);
+		Float res = getCache(RouteDataObjectAttribute.ACCESS, way);
 		if(res == null) {
 			res = (float) getObjContext(RouteDataObjectAttribute.ACCESS).evaluateInt(way, 0);
-			putCache(accessCache, way, res);
+			putCache(RouteDataObjectAttribute.ACCESS, way, res);
 		}
 		if(impassableRoads != null && impassableRoads.contains(way.id)) {
 			return false;
@@ -366,10 +357,10 @@ public class GeneralRouter implements VehicleRouter {
 	public float defineObstacle(RouteDataObject road, int point) {
 		int[] pointTypes = road.getPointTypes(point);
 		if(pointTypes != null) {
-			Float obst = getCache(obstacleCache, road.region, pointTypes);
+			Float obst = getCache(RouteDataObjectAttribute.OBSTACLES, road.region, pointTypes);
 			if(obst == null) {
 				obst = getObjContext(RouteDataObjectAttribute.OBSTACLES).evaluateFloat(road.region, pointTypes, 0);
-				putCache(obstacleCache, road.region, pointTypes, obst);
+				putCache(RouteDataObjectAttribute.OBSTACLES, road.region, pointTypes, obst);
 			}
 			return obst;
 		}
@@ -380,10 +371,10 @@ public class GeneralRouter implements VehicleRouter {
 	public float defineRoutingObstacle(RouteDataObject road, int point) {
 		int[] pointTypes = road.getPointTypes(point);
 		if(pointTypes != null){
-			Float obst = getCache(obstacleCache, road.region, pointTypes);
+			Float obst = getCache(RouteDataObjectAttribute.ROUTING_OBSTACLES, road.region, pointTypes);
 			if(obst ==  null) {
 				obst = getObjContext(RouteDataObjectAttribute.ROUTING_OBSTACLES).evaluateFloat(road.region, pointTypes, 0);
-				putCache(obstacleCache, road.region, pointTypes, obst);
+				putCache(RouteDataObjectAttribute.ROUTING_OBSTACLES, road.region, pointTypes, obst);
 			}
 			return obst;
 		}
@@ -423,10 +414,10 @@ public class GeneralRouter implements VehicleRouter {
 	
 	@Override
 	public int isOneWay(RouteDataObject road) {
-		Float res = getCache(onewayCache, road);
+		Float res = getCache(RouteDataObjectAttribute.ONEWAY, road);
 		if(res == null) {
 			res = (float) getObjContext(RouteDataObjectAttribute.ONEWAY).evaluateInt(road, 0);
-			putCache(onewayCache, road, res);
+			putCache(RouteDataObjectAttribute.ONEWAY, road, res);
 		}
 		return res.intValue();
 	}
@@ -438,51 +429,52 @@ public class GeneralRouter implements VehicleRouter {
 	
 	@Override
 	public float getPenaltyTransition(RouteDataObject road) {
-		Float vl = getCache(penaltyCache, road);
+		Float vl = getCache(RouteDataObjectAttribute.PENALTY_TRANSITION, road);
 		if (vl == null) {
 			vl = (float) getObjContext(RouteDataObjectAttribute.PENALTY_TRANSITION).evaluateInt(road, 0);
-			putCache(penaltyCache, road, vl);
+			putCache(RouteDataObjectAttribute.PENALTY_TRANSITION, road, vl);
 		}
 		return vl;
 	}
 
 	@Override
 	public float defineRoutingSpeed(RouteDataObject road) {
-		Float definedSpd = getCache(speedCache, road);
+		Float definedSpd = getCache(RouteDataObjectAttribute.ROAD_SPEED, road);
 		if (definedSpd == null) {
 			float spd = getObjContext(RouteDataObjectAttribute.ROAD_SPEED).evaluateFloat(road, defaultSpeed);
 			definedSpd = Math.max(Math.min(spd, maxSpeed), minSpeed);
-			putCache(speedCache, road, definedSpd);
+			putCache(RouteDataObjectAttribute.ROAD_SPEED, road, definedSpd);
 		}
 		return definedSpd;
 	}
 	
 	@Override
 	public float defineVehicleSpeed(RouteDataObject road) {
-		Float sp = getCache(vehicleSpeedCache, road);
+		Float sp = getCache(RouteDataObjectAttribute.ROAD_SPEED, road);
 		if (sp == null) {
 			float spd = getObjContext(RouteDataObjectAttribute.ROAD_SPEED).evaluateFloat(road, defaultSpeed);
 			sp = Math.max(Math.min(spd, maxSpeed), minSpeed);
-			putCache(vehicleSpeedCache, road, sp);
+			putCache(RouteDataObjectAttribute.ROAD_SPEED, road, sp);
 		}
 		return sp;
 	}
 	
 	@Override
 	public float defineSpeedPriority(RouteDataObject road) {
-		Float sp = getCache(priorityCache, road);
+		Float sp = getCache(RouteDataObjectAttribute.ROAD_PRIORITIES, road);
 		if(sp == null) {
 			sp = getObjContext(RouteDataObjectAttribute.ROAD_PRIORITIES).evaluateFloat(road, 1f);
-			putCache(priorityCache, road, sp);
+			putCache(RouteDataObjectAttribute.ROAD_PRIORITIES, road, sp);
 		}
 		return sp;
 	}
 
-	private void putCache(Map<RouteRegion, Map<IntHolder, Float>> ch, RouteDataObject road, Float val) {
-		putCache(ch, road.region, road.types, val);
+	private void putCache(RouteDataObjectAttribute attr, RouteDataObject road, Float val) {
+		putCache(attr, road.region, road.types, val);
 	}
 	
-	private void putCache(Map<RouteRegion, Map<IntHolder, Float>> ch, RouteRegion reg, int[] types, Float val) {
+	private void putCache(RouteDataObjectAttribute attr, RouteRegion reg, int[] types, Float val) {
+		Map<RouteRegion, Map<IntHolder, Float>> ch = evalCache[attr.ordinal()];
 		if (USE_CACHE) {
 			Map<IntHolder, Float> rM = ch.get(reg);
 			if (rM == null) {
@@ -508,11 +500,12 @@ public class GeneralRouter implements VehicleRouter {
 	    }
 	}
 
-	private Float getCache(Map<RouteRegion, Map<IntHolder, Float>> ch, RouteDataObject road) {
-		return getCache(ch, road.region, road.types);
+	private Float getCache(RouteDataObjectAttribute attr, RouteDataObject road) {
+		return getCache(attr, road.region, road.types);
 	}
 	
-	private Float getCache(Map<RouteRegion, Map<IntHolder, Float>> ch, RouteRegion reg, int[] types) {
+	private Float getCache(RouteDataObjectAttribute attr, RouteRegion reg, int[] types) {
+		Map<RouteRegion, Map<IntHolder, Float>> ch = evalCache[attr.ordinal()];
 		TIMER -= System.nanoTime();
 		if (USE_CACHE) {
 			Map<IntHolder, Float> rM = ch.get(reg);
