@@ -52,6 +52,14 @@ public class GeneralRouter implements VehicleRouter {
 	private boolean allowPrivate;
 	private String filename = null;
 	private String profileName = "";
+	
+	Map<String, Map<int[], Float>> priorityCache = new HashMap<>();	
+	Map<String, Map<int[], Float>> speedCache = new HashMap<>();
+	Map<String, Map<int[], Float>> obstacleCache = new HashMap<>();
+	Map<String, Map<int[], Float>> penaltyCache = new HashMap<>();
+
+	int count = 0;
+	int count2 = 0;
 
 	private Map<RouteRegion, Map<Integer, Integer>> regionConvert = new LinkedHashMap<RouteRegion, Map<Integer,Integer>>();
 	
@@ -128,6 +136,7 @@ public class GeneralRouter implements VehicleRouter {
 		tagRuleMask = new LinkedHashMap<String, BitSet>();
 		ruleToValue = new ArrayList<Object>();
 		parameters = new LinkedHashMap<String, GeneralRouter.RoutingParameter>();
+
 	}
 
 	public String getFilename() {
@@ -338,11 +347,24 @@ public class GeneralRouter implements VehicleRouter {
 		return 0;
 	}
 	
+
+	
 	@Override
 	public float defineRoutingObstacle(RouteDataObject road, int point) {
 		int[] pointTypes = road.getPointTypes(point);
+		String region = road.region.getName();
+		if (obstacleCache.containsKey(region)) {
+			if (obstacleCache.get(region).containsKey(pointTypes)) {
+				return obstacleCache.get(region).get(pointTypes);
+			}
+		} else {
+			obstacleCache.put(region, new HashMap<int[], Float>());	
+		}
+		
 		if(pointTypes != null){
-			return getObjContext(RouteDataObjectAttribute.ROUTING_OBSTACLES).evaluateFloat(road.region, pointTypes, 0);
+			float obst = getObjContext(RouteDataObjectAttribute.ROUTING_OBSTACLES).evaluateFloat(road.region, pointTypes, 0);
+			obstacleCache.get(region).put(pointTypes, obst);
+			return obst;
 		}
 		return 0;
 	}
@@ -395,20 +417,41 @@ public class GeneralRouter implements VehicleRouter {
 
 	@Override
 	public float defineRoutingSpeed(RouteDataObject road) {
+		String regionName = road.region.getName();
+		if (speedCache.containsKey(regionName)) {
+			if (speedCache.get(regionName).get(road.types) != null) {
+				return speedCache.get(regionName).get(road.types);
+			}
+		} else {
+			speedCache.put(regionName, new HashMap<int[], Float>());
+		}
 		float spd = getObjContext(RouteDataObjectAttribute.ROAD_SPEED).evaluateFloat(road, defaultSpeed);
-		return Math.max(Math.min(spd, maxSpeed), minSpeed);
+		float definedSpd = Math.max(Math.min(spd, maxSpeed), minSpeed);
+
+		speedCache.get(regionName).put(road.types, definedSpd);
+		return definedSpd;
 	}
-	
 	
 	@Override
 	public float defineVehicleSpeed(RouteDataObject road) {
 		float spd = getObjContext(RouteDataObjectAttribute.ROAD_SPEED).evaluateFloat(road, defaultSpeed);
 		return Math.max(Math.min(spd, maxSpeed), minSpeed);
 	}
-
+	
 	@Override
-	public float defineSpeedPriority(RouteDataObject road) {
-		return getObjContext(RouteDataObjectAttribute.ROAD_PRIORITIES).evaluateFloat(road, 1f);
+	public float defineSpeedPriority(RouteDataObject road) {		
+		String regionName = road.region.getName();
+		if (priorityCache.containsKey(regionName)) {
+			if (priorityCache.get(regionName).get(road.types) != null) {
+				return priorityCache.get(regionName).get(road.types);
+			}
+		} else {
+			priorityCache.put(regionName, new HashMap<int[], Float>());
+		}
+		float sp = getObjContext(RouteDataObjectAttribute.ROAD_PRIORITIES).evaluateFloat(road, 1f);
+		
+		priorityCache.get(regionName).put(road.types, sp);
+		return sp;
 	}
 
 	@Override
@@ -440,8 +483,36 @@ public class GeneralRouter implements VehicleRouter {
 	
 	@Override
 	public double calculateTurnTime(RouteSegment segment, int segmentEnd, RouteSegment prev, int prevSegmentEnd) {
-		float ts = getPenaltyTransition(segment.getRoad());
-		float prevTs = getPenaltyTransition(prev.getRoad());
+		String regionS = segment.getRoad().region.getName(); 
+		String regionPs = prev.getRoad().region.getName(); 
+		float ts;
+		float prevTs;
+		if (penaltyCache.containsKey(regionS)) {
+			if (penaltyCache.get(regionS).get(segment.getRoad().types) != null) {
+				ts = penaltyCache.get(regionS).get(segment.getRoad().types);
+			} else {
+				ts = getPenaltyTransition(segment.getRoad());
+				penaltyCache.get(regionS).put(segment.getRoad().types, ts);
+			}
+		} else {
+			penaltyCache.put(regionS, new HashMap<int[], Float>());
+			ts = getPenaltyTransition(segment.getRoad());
+			penaltyCache.get(regionS).put(segment.getRoad().types, ts);
+		}
+		
+		if (penaltyCache.containsKey(regionPs)) {
+			if (penaltyCache.get(regionPs).get(prev.getRoad().types) != null) {
+				prevTs = penaltyCache.get(regionPs).get(prev.getRoad().types);
+			} else {
+				prevTs = getPenaltyTransition(prev.getRoad());
+				penaltyCache.get(regionPs).put(prev.getRoad().types, prevTs);
+			}
+		} else {
+			penaltyCache.put(regionPs, new HashMap<int[], Float>());
+			prevTs = getPenaltyTransition(prev.getRoad());
+			penaltyCache.get(regionPs).put(prev.getRoad().types, prevTs);
+		}
+		
 		if(prevTs != ts) {
 			return Math.abs(ts - prevTs) / 2;
 		}
@@ -669,10 +740,13 @@ public class GeneralRouter implements VehicleRouter {
 		}
 		
 		public float evaluateFloat(RouteDataObject ro, float defValue) {
+			
 			Object o = evaluate(ro);
+			
 			if(!(o instanceof Number)) {
 				return defValue;
 			}
+			//System.out.println(String.format("RDA %s, val: %.3f", ro.types.toString(), ((Number)o).floatValue()));
 			return ((Number)o).floatValue();
 		}
 		
