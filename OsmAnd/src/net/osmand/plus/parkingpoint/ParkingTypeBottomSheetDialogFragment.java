@@ -4,6 +4,8 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.view.View;
 
+import net.osmand.data.PersonalFavouritePoint;
+import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -72,6 +74,8 @@ public class ParkingTypeBottomSheetDialogFragment extends MenuBottomSheetDialogF
 				plugin.showContextMenuIfNeeded(mapActivity, true);
 				mapActivity.refreshMap();
 			}
+			mapActivity.getMyApplication().getFavorites().setParkingPoint(plugin.getParkingPosition(),
+					new PointDescription(PointDescription.POINT_TYPE_FAVORITE, PersonalFavouritePoint.PointType.PARKING.name()));
 		}
 		dismiss();
 	}

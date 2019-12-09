@@ -43,6 +43,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.GeocodingLookupService;
 import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
@@ -183,7 +184,8 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		TARGET,
 		INTERMEDIATE,
 		HOME,
-		WORK
+		WORK,
+		PARKING
 	}
 
 	public MapRouteInfoMenu() {
@@ -261,6 +263,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				LatLon latlon = tileBox.getLatLonFromPixel(point.x, point.y);
 				selectFromMapTouch = false;
 				TargetPointsHelper targets = app.getTargetPointsHelper();
+				FavouritesDbHelper favorites = app.getFavorites();
 				switch (selectFromMapPointType) {
 					case START:
 						targets.setStartPoint(latlon, true, null);
@@ -272,10 +275,10 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 						targets.navigateToPoint(latlon, true, targets.getIntermediatePoints().size());
 						break;
 					case HOME:
-						targets.setHomePoint(latlon, null);
+						favorites.setHomePoint(latlon, new PointDescription(PointDescription.POINT_TYPE_FAVORITE, ""));
 						break;
 					case WORK:
-						targets.setWorkPoint(latlon, null);
+						favorites.setWorkPoint(latlon, new PointDescription(PointDescription.POINT_TYPE_FAVORITE, ""));
 						break;
 				}
 				if (selectFromMapWaypoints) {
@@ -1786,6 +1789,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			PointDescription pd = new PointDescription(PointDescription.POINT_TYPE_ADDRESS, name);
+			FavouritesDbHelper favorites = mapActivity.getMyApplication().getFavorites();
 			TargetPointsHelper targets = mapActivity.getMyApplication().getTargetPointsHelper();
 			switch (pointType) {
 				case START:
@@ -1798,10 +1802,10 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 					targets.navigateToPoint(l, true, targets.getIntermediatePoints().size(), pd);
 					break;
 				case HOME:
-					targets.setHomePoint(l, pd);
+					favorites.setHomePoint(l, new PointDescription(PointDescription.POINT_TYPE_FAVORITE, ""));
 					break;
 				case WORK:
-					targets.setWorkPoint(l, pd);
+					favorites.setWorkPoint(l, new PointDescription(PointDescription.POINT_TYPE_FAVORITE, ""));
 					break;
 			}
 			updateMenu();
@@ -1845,6 +1849,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		if (mapActivity != null) {
 			if (m != null) {
 				LatLon point = new LatLon(m.getLatitude(), m.getLongitude());
+				FavouritesDbHelper favorites = mapActivity.getMyApplication().getFavorites();
 				TargetPointsHelper targets = mapActivity.getMyApplication().getTargetPointsHelper();
 				switch (pointType) {
 					case START:
@@ -1857,10 +1862,10 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 						targets.navigateToPoint(point, true, targets.getIntermediatePoints().size(), m.getPointDescription(mapActivity));
 						break;
 					case HOME:
-						targets.setHomePoint(point, m.getPointDescription(mapActivity));
+						favorites.setHomePoint(point, m.getPointDescription(mapActivity));
 						break;
 					case WORK:
-						targets.setWorkPoint(point, m.getPointDescription(mapActivity));
+						favorites.setWorkPoint(point, m.getPointDescription(mapActivity));
 						break;
 				}
 				updateMenu();

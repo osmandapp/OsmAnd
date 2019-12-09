@@ -12,6 +12,7 @@ import net.osmand.data.LatLon;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.data.PersonalFavouritePoint;
+import net.osmand.data.PointDescription;
 import net.osmand.plus.MapMarkersHelper.MapMarkersGroup;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
@@ -32,7 +33,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import static net.osmand.data.PersonalFavouritePoint.PointType.HOME;
+import static net.osmand.data.PersonalFavouritePoint.PointType.PARKING;
+import static net.osmand.data.PersonalFavouritePoint.PointType.WORK;
+
 public class FavouritesDbHelper {
+
+	private GeocodingLookupService.AddressLookupRequest workPointRequest;
+	private GeocodingLookupService.AddressLookupRequest homePointRequest;
+	private GeocodingLookupService.AddressLookupRequest parkingPointRequest;
 
 	public interface FavoritesListener {
 		void onFavoritesLoaded();
@@ -104,6 +113,74 @@ public class FavouritesDbHelper {
 				}
 			}
 		});
+	}
+
+	public boolean hasWorkPoint() {
+		return hasPersonalPoint(WORK);
+	}
+
+	public boolean hasHomePoint() {
+		return hasPersonalPoint(HOME);
+	}
+
+	public boolean hasParkingPoint() {
+		return hasPersonalPoint(PARKING);
+	}
+
+	private boolean hasPersonalPoint(PersonalFavouritePoint.PointType pointType) {
+		boolean hasPersonalPoint = false;
+		for (FavouritePoint fp : cachedPersonalFavoritePoints) {
+			if (fp instanceof PersonalFavouritePoint) {
+				if (((PersonalFavouritePoint) fp).getType() == pointType) {
+					hasPersonalPoint = true;
+				}
+			}
+		}
+		return hasPersonalPoint;
+	}
+
+	public FavouritePoint getWorkPoint() {
+		return getPersonalPoint(WORK);
+	}
+
+	public FavouritePoint getHomePoint() {
+		return getPersonalPoint(HOME);
+	}
+
+	public FavouritePoint getParkingPoint() {
+		return getPersonalPoint(PARKING);
+	}
+
+	private FavouritePoint getPersonalPoint(PersonalFavouritePoint.PointType pointType) {
+		FavouritePoint personalPoint = null;
+		for (FavouritePoint fp : cachedPersonalFavoritePoints) {
+			if (fp instanceof PersonalFavouritePoint) {
+				if (((PersonalFavouritePoint) fp).getType() == pointType) {
+					personalPoint = fp;
+				}
+			}
+		}
+		return personalPoint;
+	}
+
+	public LatLon getWorkPointLatLon() {
+		LatLon workPointLatLon;
+		if (hasWorkPoint()) {
+			workPointLatLon = new LatLon(getWorkPoint().getLatitude(), getWorkPoint().getLongitude());
+		} else {
+			workPointLatLon = null;
+		}
+		return workPointLatLon;
+	}
+
+	public LatLon getHomePointLatLon() {
+		LatLon homePointLatLon;
+		if (hasHomePoint()) {
+			homePointLatLon = new LatLon(getHomePoint().getLatitude(), getHomePoint().getLongitude());
+		} else {
+			homePointLatLon = null;
+		}
+		return homePointLatLon;
 	}
 
 	public boolean isFavoritesLoaded() {
@@ -201,6 +278,48 @@ public class FavouritesDbHelper {
 		return true;
 	}
 
+	public void setHomePoint(@NonNull LatLon latLon, @NonNull PointDescription description) {
+		if (hasHomePoint()) {
+			getHomePoint().setDescription(description.getName());
+			editFavourite(getHomePoint(), latLon.getLatitude(), latLon.getLongitude());
+		} else {
+			FavouritePoint cachedHomePoint = new PersonalFavouritePoint(context, HOME.toString(),
+					latLon.getLatitude(), latLon.getLongitude());
+			cachedHomePoint.setDescription(description.getName());
+			cachedPersonalFavoritePoints.add(cachedHomePoint);
+			addFavourite(cachedHomePoint);
+		}
+		lookupAllPersonalPointsAddresses();
+	}
+
+	public void setWorkPoint(@NonNull LatLon latLon, @NonNull PointDescription description) {
+		if (hasWorkPoint()) {
+			getWorkPoint().setDescription(description.getName());
+			editFavourite(getWorkPoint(), latLon.getLatitude(), latLon.getLongitude());
+		} else {
+			FavouritePoint cachedWorkPoint = new PersonalFavouritePoint(context, WORK.toString(),
+					latLon.getLatitude(), latLon.getLongitude());
+			cachedWorkPoint.setDescription(description.getName());
+			cachedPersonalFavoritePoints.add(cachedWorkPoint);
+			addFavourite(cachedWorkPoint);
+		}
+		lookupAllPersonalPointsAddresses();
+	}
+
+	public void setParkingPoint(@NonNull LatLon latLon, @NonNull PointDescription description) {
+		if (hasParkingPoint()) {
+			getParkingPoint().setDescription(description.getName());
+			editFavourite(getParkingPoint(), latLon.getLatitude(), latLon.getLongitude());
+		} else {
+			FavouritePoint cachedParkingPoint = new PersonalFavouritePoint(context, PARKING.toString(),
+					latLon.getLatitude(), latLon.getLongitude());
+			cachedParkingPoint.setDescription(description.getName());
+			cachedPersonalFavoritePoints.add(cachedParkingPoint);
+			addFavourite(cachedParkingPoint);
+		}
+		lookupAllPersonalPointsAddresses();
+	}
+
 	public boolean addFavourite(FavouritePoint p) {
 		return addFavourite(p, true);
 	}
@@ -225,6 +344,91 @@ public class FavouritesDbHelper {
 		runSyncWithMarkers(group);
 
 		return true;
+	}
+
+	private void lookupAllPersonalPointsAddresses() {
+		if (!context.isApplicationInitializing()) {
+			lookupAddressForHomePoint();
+			lookupAddressForWorkPoint();
+			lookupAddressForParkingPoint();
+		}
+	}
+
+	void lookupAddressForWorkPoint() {
+		final TargetPointsHelper targetPointsHelper = context.getTargetPointsHelper();
+		final FavouritePoint workPoint = getWorkPoint();
+		if (workPoint != null && (workPointRequest == null ||
+				!workPointRequest.getLatLon().equals(new LatLon(workPoint.getLatitude(), workPoint.getLongitude())))) {
+			cancelWorkPointAddressRequest();
+			workPointRequest = new GeocodingLookupService.AddressLookupRequest(
+					new LatLon(workPoint.getLatitude(), workPoint.getLongitude()), new GeocodingLookupService.OnAddressLookupResult() {
+				@Override
+				public void geocodingDone(String address) {
+					workPoint.setDescription(address);
+					targetPointsHelper.updateRouteAndRefresh(false);
+				}
+			}, null);
+			context.getGeocodingLookupService().lookupAddress(workPointRequest);
+		}
+	}
+
+	void lookupAddressForHomePoint() {
+		final TargetPointsHelper targetPointsHelper = context.getTargetPointsHelper();
+		final FavouritePoint homePoint = getHomePoint();
+		if (homePoint != null && (homePointRequest == null ||
+				!homePointRequest.getLatLon().equals(new LatLon(homePoint.getLatitude(), homePoint.getLongitude())))) {
+			cancelHomePointAddressRequest();
+			homePointRequest = new GeocodingLookupService.AddressLookupRequest(
+					new LatLon(homePoint.getLatitude(), homePoint.getLongitude()), new GeocodingLookupService.OnAddressLookupResult() {
+				@Override
+				public void geocodingDone(String address) {
+					homePointRequest = null;
+					homePoint.setDescription(address);
+					targetPointsHelper.updateRouteAndRefresh(false);
+				}
+			}, null);
+			context.getGeocodingLookupService().lookupAddress(homePointRequest);
+		}
+	}
+
+	void lookupAddressForParkingPoint() {
+		final TargetPointsHelper targetPointsHelper = context.getTargetPointsHelper();
+		final FavouritePoint parkingPoint = getParkingPoint();
+		if (parkingPoint != null && (parkingPointRequest == null ||
+				!parkingPointRequest.getLatLon().equals(new LatLon(parkingPoint.getLatitude(), parkingPoint.getLongitude())))) {
+			cancelParkingPointAddressRequest();
+			parkingPointRequest = new GeocodingLookupService.AddressLookupRequest(
+					new LatLon(parkingPoint.getLatitude(), parkingPoint.getLongitude()), new GeocodingLookupService.OnAddressLookupResult() {
+				@Override
+				public void geocodingDone(String address) {
+					parkingPointRequest = null;
+					parkingPoint.setDescription(address);
+					targetPointsHelper.updateRouteAndRefresh(false);
+				}
+			}, null);
+			context.getGeocodingLookupService().lookupAddress(parkingPointRequest);
+		}
+	}
+
+	private void cancelHomePointAddressRequest() {
+		if (homePointRequest != null) {
+			context.getGeocodingLookupService().cancel(homePointRequest);
+			homePointRequest = null;
+		}
+	}
+
+	private void cancelParkingPointAddressRequest() {
+		if (parkingPointRequest != null) {
+			context.getGeocodingLookupService().cancel(parkingPointRequest);
+			parkingPointRequest = null;
+		}
+	}
+
+	private void cancelWorkPointAddressRequest() {
+		if (workPointRequest != null) {
+			context.getGeocodingLookupService().cancel(workPointRequest);
+			workPointRequest = null;
+		}
 	}
 
 	public static AlertDialog.Builder checkDuplicates(FavouritePoint p, FavouritesDbHelper fdb, Context uiContext) {
@@ -476,6 +680,26 @@ public class FavouritesDbHelper {
 		return fp;
 	}
 
+	public List<FavouritePoint> getNonPersonalVisibleFavouritePoints() {
+		List<FavouritePoint> fp = new ArrayList<>();
+		for (FavouritePoint p : getNonPersonalFavouritePoints()) {
+			if (p.isVisible()) {
+				fp.add(p);
+			}
+		}
+		return fp;
+	}
+
+	public List<FavouritePoint> getNonPersonalFavouritePoints() {
+		List<FavouritePoint> fp = new ArrayList<>();
+		for (FavouritePoint p : cachedFavoritePoints) {
+			if (!p.isPersonal()) {
+				fp.add(p);
+			}
+		}
+		return fp;
+	}
+
 	@Nullable
 	public FavouritePoint getVisibleFavByLatLon(@NonNull LatLon latLon) {
 		for (FavouritePoint fav : cachedFavoritePoints) {
@@ -550,7 +774,7 @@ public class FavouritesDbHelper {
 
 			@Override
 			public int compare(FavoriteGroup lhs, FavoriteGroup rhs) {
-				return collator.compare(lhs.name, rhs.name);
+				return lhs.personal ? -1 : rhs.personal ? 1 : collator.compare(lhs.name, rhs.name);
 			}
 		});
 		Comparator<FavouritePoint> favoritesComparator = getComparator();

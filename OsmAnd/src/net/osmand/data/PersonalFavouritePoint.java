@@ -4,7 +4,6 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 
-import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.R;
 
@@ -57,6 +56,11 @@ public class PersonalFavouritePoint extends FavouritePoint {
 		this(ctx, PointType.valueOf(typeName), latitude, longitude);
 	}
 
+	@Override
+	public PointDescription getPointDescription() {
+		return new PointDescription(PointDescription.POINT_TYPE_LOCATION, getDescription());
+	}
+
 	public PersonalFavouritePoint(PersonalFavouritePoint favouritePoint) {
 		super(favouritePoint);
 		this.type = favouritePoint.type;
@@ -95,7 +99,7 @@ public class PersonalFavouritePoint extends FavouritePoint {
 	public WptPt toWpt() {
 		WptPt pt = super.toWpt();
 		pt.getExtensionsToWrite().put(PERSONAL, "true");
-		pt.name = type.name;
+		pt.name = type.toString();
 		pt.desc = getDescription();
 		return pt;
 	}

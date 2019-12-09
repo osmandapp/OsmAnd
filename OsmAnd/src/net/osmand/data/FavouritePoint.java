@@ -5,7 +5,6 @@ import java.io.Serializable;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
-import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.WptPt;
 
 public class FavouritePoint implements Serializable, LocationPoint {
@@ -51,7 +50,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	}
 	
 	public PointDescription getPointDescription() {
-		return new PointDescription(PointDescription.POINT_TYPE_FAVORITE, name);
+		return new PointDescription(PointDescription.POINT_TYPE_FAVORITE, getName());
 	}
 
 	public boolean isPersonal() {

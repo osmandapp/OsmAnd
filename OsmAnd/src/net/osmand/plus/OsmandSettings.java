@@ -259,6 +259,16 @@ public class OsmandSettings {
 		}
 	}
 
+	void migrateHomeWorkParkingToFavorites() {
+		FavouritesDbHelper favorites = ctx.getFavorites();
+		if (getHomePoint() != null) {
+			favorites.setHomePoint(getHomePoint(), getHomePointDescription());
+		}
+		if (getWorkPoint() != null) {
+			favorites.setWorkPoint(getWorkPoint(), getWorkPointDescription());
+		}
+	}
+
 	public Object getProfilePreferences(ApplicationMode mode) {
 		return settingsAPI.getPreferenceObject(getSharedPreferencesName(mode));
 	}
@@ -2361,6 +2371,12 @@ public class OsmandSettings {
 		edit.commit();
 		objectToShow = toShow;
 		if (addToHistory) {
+			if (pointDescription.isFavorite()) {
+//				int localeNameID = PersonalFavouritePoint.PersonalPoint.getLocalName(pointDescription.getName());
+//				if (localeNameID != 0) {
+//					pointDescription.setName(ctx.getString(localeNameID));
+//				}
+			}
 			SearchHistoryHelper.getInstance(ctx).addNewItemToHistory(latitude, longitude, pointDescription);
 		}
 	}
