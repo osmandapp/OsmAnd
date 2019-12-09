@@ -58,9 +58,6 @@ public class GeneralRouter implements VehicleRouter {
 	Map<String, Map<int[], Float>> obstacleCache;
 	Map<String, Map<int[], Float>> penaltyCache;
 
-	int count = 0;
-	int count2 = 0;
-
 	private Map<RouteRegion, Map<Integer, Integer>> regionConvert = new LinkedHashMap<RouteRegion, Map<Integer,Integer>>();
 	
 	// cached values
@@ -376,7 +373,6 @@ public class GeneralRouter implements VehicleRouter {
 			obstacleCache.get(region).put(pointTypes, obst);
 			return obst;
 		}
-		
 		return 0;
 	}
 	
@@ -744,13 +740,10 @@ public class GeneralRouter implements VehicleRouter {
 		}
 		
 		public float evaluateFloat(RouteDataObject ro, float defValue) {
-			
-			Object o = evaluate(ro);
-			
+			Object o = evaluate(ro);			
 			if(!(o instanceof Number)) {
 				return defValue;
 			}
-			//System.out.println(String.format("RDA %s, val: %.3f", ro.types.toString(), ((Number)o).floatValue()));
 			return ((Number)o).floatValue();
 		}
 		
