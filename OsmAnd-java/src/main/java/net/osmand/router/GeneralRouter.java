@@ -424,11 +424,11 @@ public class GeneralRouter implements VehicleRouter {
 
 	@Override
 	public float defineRoutingSpeed(RouteDataObject road) {
-		Float definedSpd = getCache(priorityCache, road);
+		Float definedSpd = getCache(speedCache, road);
 		if (definedSpd == null) {
 			float spd = getObjContext(RouteDataObjectAttribute.ROAD_SPEED).evaluateFloat(road, defaultSpeed);
 			definedSpd = Math.max(Math.min(spd, maxSpeed), minSpeed);
-			putCache(priorityCache, road, definedSpd);
+			putCache(speedCache, road, definedSpd);
 		}
 		return definedSpd;
 	}
