@@ -324,6 +324,11 @@ public class RouteCalculationResult {
 							ctx.getSettings().MAP_TRANSLITERATE_NAMES.get()));
 					info.setDestinationName(next.getObject().getDestinationName(ctx.getSettings().MAP_PREFERRED_LOCALE.get(),
 							ctx.getSettings().MAP_TRANSLITERATE_NAMES.get(), next.isForwardDirection()));
+					if (s.getObject().isExitPoint() && next.getObject().isMotorWayLink()) {
+						info.setExitRef(next.getObject().getExitRef());
+						info.setExitShieldName(next.getObject().getDestinationRef(next.isForwardDirection()));
+						info.setExitStreetName(next.getObject().getExitName());
+					}
 				}
 
 		                String description = toString(turn, ctx, false) + " " + RoutingHelper.formatStreetName(info.getStreetName(),

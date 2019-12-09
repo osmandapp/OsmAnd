@@ -22,6 +22,12 @@ public class RouteDirectionInfo {
 	
 	private String destinationName;
 
+	private String exitRef;
+
+	private String exitShieldName;
+
+	private String exitStreetName;
+
 	public String getDestinationName() {
 		return destinationName;
 	}
@@ -105,5 +111,29 @@ public class RouteDirectionInfo {
 
 	public void setDistance(int distance) {
 		 this.distance = distance;
+	}
+
+	public String getExitRef() {
+		return exitRef;
+	}
+
+	public void setExitRef(String exitRef) {
+		this.exitRef = exitRef;
+	}
+
+	public String getExitShieldName() {
+		return exitShieldName;
+	}
+
+	public void setExitShieldName(String exitShieldName) {
+		this.exitShieldName = exitShieldName;
+	}
+
+	public String getExitStreetName() {
+		return exitStreetName;
+	}
+
+	public void setExitStreetName(String exitStreetName) {
+		this.exitStreetName = exitStreetName;
 	}
 }
