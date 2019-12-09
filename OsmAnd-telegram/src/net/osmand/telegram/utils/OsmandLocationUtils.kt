@@ -163,9 +163,17 @@ object OsmandLocationUtils {
 		return String.format(Locale.US, "%.5f, %.5f", sig.lat, sig.lon)
 	}
 
-	fun formatFullTime(ti: Long): String {
+	fun formatFullTime(ti: Long, app: TelegramApplication): String {
 		val dt = Date(ti)
-		return UTC_DATE_FORMAT.format(dt) + " " + UTC_TIME_FORMAT.format(dt) + UTC_FORMAT_SUFFIX
+		val offsetKey = app.settings.utcOffset
+		val utcOffset = DataConstants.utcOffsets[offsetKey] ?: 0f
+		val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US)
+
+		simpleDateFormat.timeZone = TimeZone.getTimeZone(DataConstants.UTC_FORMAT).apply {
+			rawOffset = (utcOffset * 60 * 60 * 1000).toInt()
+		}
+
+		return "${simpleDateFormat.format(dt)} $offsetKey"
 	}
 
 	fun parseOsmAndBotLocationContent(oldContent: MessageOsmAndBotLocation, content: TdApi.MessageContent): MessageOsmAndBotLocation {
@@ -329,49 +337,6 @@ object OsmandLocationUtils {
 		return 0
 	}
 
-	fun getTextMessageContent(updateId: Int, location: LocationMessage): TdApi.InputMessageText {
-		val entities = mutableListOf<TdApi.TextEntity>()
-		val builder = StringBuilder()
-		val locationMessage = formatLocation(location)
-
-		val firstSpace = USER_TEXT_LOCATION_TITLE.indexOf(' ')
-		val secondSpace = USER_TEXT_LOCATION_TITLE.indexOf(' ', firstSpace + 1)
-		entities.add(TdApi.TextEntity(builder.length + firstSpace + 1, secondSpace - firstSpace, TdApi.TextEntityTypeTextUrl(SHARING_LINK)))
-		builder.append("$USER_TEXT_LOCATION_TITLE\n")
-
-		entities.add(TdApi.TextEntity(builder.lastIndex, LOCATION_PREFIX.length, TdApi.TextEntityTypeBold()))
-		builder.append(LOCATION_PREFIX)
-
-		entities.add(TdApi.TextEntity(builder.length, locationMessage.length,
-			TdApi.TextEntityTypeTextUrl("$BASE_SHARING_URL?lat=${location.lat}&lon=${location.lon}")))
-		builder.append("$locationMessage\n")
-
-		if (location.altitude != 0.0) {
-			entities.add(TdApi.TextEntity(builder.lastIndex, ALTITUDE_PREFIX.length, TdApi.TextEntityTypeBold()))
-			builder.append(String.format(Locale.US, "$ALTITUDE_PREFIX%.1f m\n", location.altitude))
-		}
-		if (location.speed > 0) {
-			entities.add(TdApi.TextEntity(builder.lastIndex, SPEED_PREFIX.length, TdApi.TextEntityTypeBold()))
-			builder.append(String.format(Locale.US, "$SPEED_PREFIX%.1f m/s\n", location.speed))
-		}
-		if (location.bearing > 0) {
-			entities.add(TdApi.TextEntity(builder.lastIndex, BEARING_PREFIX.length, TdApi.TextEntityTypeBold()))
-			builder.append(String.format(Locale.US, "$BEARING_PREFIX%.1f$BEARING_SUFFIX\n", location.bearing))
-		}
-		if (location.hdop != 0.0 && location.speed == 0.0) {
-			entities.add(TdApi.TextEntity(builder.lastIndex, HDOP_PREFIX.length, TdApi.TextEntityTypeBold()))
-			builder.append(String.format(Locale.US, "$HDOP_PREFIX%d m\n", location.hdop.toInt()))
-		}
-		if (updateId == 0) {
-			builder.append(String.format("$UPDATED_PREFIX%s\n", formatFullTime(location.time)))
-		} else {
-			builder.append(String.format("$UPDATED_PREFIX%s (%d)\n", formatFullTime(location.time), updateId))
-		}
-		val textMessage = builder.toString().trim()
-
-		return TdApi.InputMessageText(TdApi.FormattedText(textMessage, entities.toTypedArray()), true, true)
-	}
-
 	fun getTextMessageContent(updateId: Int, location: BufferMessage, app: TelegramApplication): TdApi.InputMessageText {
 		val entities = mutableListOf<TdApi.TextEntity>()
 		val builder = StringBuilder()
@@ -409,9 +374,9 @@ object OsmandLocationUtils {
 			builder.append(String.format(Locale.US, "$HDOP_PREFIX%s\n", formattedHdop))
 		}
 		if (updateId == 0) {
-			builder.append(String.format("$UPDATED_PREFIX%s\n", formatFullTime(location.time)))
+			builder.append(String.format("$UPDATED_PREFIX%s\n", formatFullTime(location.time, app)))
 		} else {
-			builder.append(String.format("$UPDATED_PREFIX%s (%d)\n", formatFullTime(location.time), updateId))
+			builder.append(String.format("$UPDATED_PREFIX%s (%d)\n", formatFullTime(location.time, app), updateId))
 		}
 		val textMessage = builder.toString().trim()
 

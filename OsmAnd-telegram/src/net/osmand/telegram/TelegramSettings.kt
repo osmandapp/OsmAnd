@@ -1077,14 +1077,15 @@ class TelegramSettings(private val app: TelegramApplication) {
 		R.drawable.ic_world_globe_dark, R.string.time_zone,
 		R.string.time_zone_descr
 	) {
+		private val formattedUtcOffsets = DataConstants.utcOffsets.keys.toList()
 
 		override fun getCurrentValue() = utcOffset
 
 		override fun setCurrentValue(index: Int) {
-			utcOffset = DataConstants.utcOffsets[index]
+			utcOffset = formattedUtcOffsets[index]
 		}
 
-		override fun getMenuItems() = DataConstants.utcOffsets
+		override fun getMenuItems() = formattedUtcOffsets
 	}
 
 	abstract inner class ListPreference(
