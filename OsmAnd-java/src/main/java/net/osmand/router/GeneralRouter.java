@@ -42,6 +42,7 @@ public class GeneralRouter implements VehicleRouter {
 	public static final String VEHICLE_WIDTH = "width";
 	
 	private static boolean USE_CACHE = true;
+	public static long TIMER = 0;
 
 	private final RouteAttributeContext[] objectAttributes;
 	public final Map<String, String> attributes;
@@ -55,11 +56,6 @@ public class GeneralRouter implements VehicleRouter {
 	private boolean allowPrivate;
 	private String filename = null;
 	private String profileName = "";
-	
-	Map<RouteRegion, Map<IntHolder, Float>> priorityCache;	
-	Map<RouteRegion, Map<IntHolder, Float>> speedCache;
-	Map<RouteRegion, Map<IntHolder, Float>> obstacleCache;
-	Map<RouteRegion, Map<IntHolder, Float>> penaltyCache;
 
 	private Map<RouteRegion, Map<Integer, Integer>> regionConvert = new LinkedHashMap<RouteRegion, Map<Integer,Integer>>();
 	
@@ -78,6 +74,14 @@ public class GeneralRouter implements VehicleRouter {
 	private TLongHashSet impassableRoads;
 	private GeneralRouterProfile profile;
 	
+	Map<RouteRegion, Map<IntHolder, Float>> priorityCache;	
+	Map<RouteRegion, Map<IntHolder, Float>> speedCache;
+	Map<RouteRegion, Map<IntHolder, Float>> vehicleSpeedCache;
+	Map<RouteRegion, Map<IntHolder, Float>> accessCache;
+	Map<RouteRegion, Map<IntHolder, Float>> onewayCache;
+	Map<RouteRegion, Map<IntHolder, Float>> obstacleCache;
+	Map<RouteRegion, Map<IntHolder, Float>> routingObstacleCache;
+	Map<RouteRegion, Map<IntHolder, Float>> penaltyCache;
 	
 	public enum RouteDataObjectAttribute {
 		ROAD_SPEED("speed"),
@@ -119,47 +123,6 @@ public class GeneralRouter implements VehicleRouter {
 		SYMBOLIC
 	}
 	
-	public GeneralRouter(GeneralRouterProfile profile, Map<String, String> attributes) {
-		this.profile = profile;
-		this.attributes = new LinkedHashMap<String, String>();
-		Iterator<Entry<String, String>> e = attributes.entrySet().iterator();
-		while(e.hasNext()){
-			Entry<String, String> next = e.next();
-			addAttribute(next.getKey(), next.getValue());
-		}
-		objectAttributes = new RouteAttributeContext[RouteDataObjectAttribute.values().length];
-		for (int i = 0; i < objectAttributes.length; i++) {
-			objectAttributes[i] = new RouteAttributeContext();
-		}
-		universalRules = new LinkedHashMap<String, Integer>();
-		universalRulesById = new ArrayList<String>();
-		tagRuleMask = new LinkedHashMap<String, BitSet>();
-		ruleToValue = new ArrayList<Object>();
-		parameters = new LinkedHashMap<String, GeneralRouter.RoutingParameter>();
-		
-		priorityCache = new HashMap<>();	
-		speedCache = new HashMap<>();
-		obstacleCache = new HashMap<>();
-		penaltyCache = new HashMap<>();
-
-	}
-
-	public String getFilename() {
-		return filename;
-	}
-
-	public void setFilename(String filename) {
-		this.filename = filename;
-	}
-
-	public String getProfileName() {
-		return profileName;
-	}
-
-	public void setProfileName(String profileName) {
-		this.profileName = profileName;
-	}
-
 	public GeneralRouter(GeneralRouter parent, Map<String, String> params) {
 		this.profile = parent.profile;
 		this.attributes = new LinkedHashMap<String, String>();
@@ -194,12 +157,59 @@ public class GeneralRouter implements VehicleRouter {
 		if (params.containsKey(MAX_SPEED)) {
 			maxSpeed = parseSilentFloat(params.get(MAX_SPEED), maxSpeed);
 		}
+		initCaches();
+
+	}
+	
+	public GeneralRouter(GeneralRouterProfile profile, Map<String, String> attributes) {
+		this.profile = profile;
+		this.attributes = new LinkedHashMap<String, String>();
+		Iterator<Entry<String, String>> e = attributes.entrySet().iterator();
+		while(e.hasNext()){
+			Entry<String, String> next = e.next();
+			addAttribute(next.getKey(), next.getValue());
+		}
+		objectAttributes = new RouteAttributeContext[RouteDataObjectAttribute.values().length];
+		for (int i = 0; i < objectAttributes.length; i++) {
+			objectAttributes[i] = new RouteAttributeContext();
+		}
+		universalRules = new LinkedHashMap<String, Integer>();
+		universalRulesById = new ArrayList<String>();
+		tagRuleMask = new LinkedHashMap<String, BitSet>();
+		ruleToValue = new ArrayList<Object>();
+		parameters = new LinkedHashMap<String, GeneralRouter.RoutingParameter>();
 		
+		initCaches();
+
+	}
+
+	private void initCaches() {
 		priorityCache = new HashMap<>();	
 		speedCache = new HashMap<>();
+		vehicleSpeedCache = new HashMap<>();
 		obstacleCache = new HashMap<>();
+		routingObstacleCache = new HashMap<>();
+		accessCache = new HashMap<>();
+		onewayCache = new HashMap<>();
 		penaltyCache = new HashMap<>();
 	}
+
+	public String getFilename() {
+		return filename;
+	}
+
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
+
+	public String getProfileName() {
+		return profileName;
+	}
+
+	public void setProfileName(String profileName) {
+		this.profileName = profileName;
+	}
+
 	
 	public GeneralRouterProfile getProfile() {
 		return profile;
@@ -262,7 +272,11 @@ public class GeneralRouter implements VehicleRouter {
 
 	@Override
 	public boolean acceptLine(RouteDataObject way) {
-		int res = getObjContext(RouteDataObjectAttribute.ACCESS).evaluateInt(way, 0);
+		Float res = getCache(accessCache, way);
+		if(res == null) {
+			res = (float) getObjContext(RouteDataObjectAttribute.ACCESS).evaluateInt(way, 0);
+			putCache(accessCache, way, res);
+		}
 		if(impassableRoads != null && impassableRoads.contains(way.id)) {
 			return false;
 		}
@@ -352,7 +366,12 @@ public class GeneralRouter implements VehicleRouter {
 	public float defineObstacle(RouteDataObject road, int point) {
 		int[] pointTypes = road.getPointTypes(point);
 		if(pointTypes != null) {
-			return getObjContext(RouteDataObjectAttribute.OBSTACLES).evaluateFloat(road.region, pointTypes, 0);
+			Float obst = getCache(obstacleCache, road.region, pointTypes);
+			if(obst == null) {
+				obst = getObjContext(RouteDataObjectAttribute.OBSTACLES).evaluateFloat(road.region, pointTypes, 0);
+				putCache(obstacleCache, road.region, pointTypes, obst);
+			}
+			return obst;
 		}
 		return 0;
 	}
@@ -404,7 +423,12 @@ public class GeneralRouter implements VehicleRouter {
 	
 	@Override
 	public int isOneWay(RouteDataObject road) {
-		return getObjContext(RouteDataObjectAttribute.ONEWAY).evaluateInt(road, 0);
+		Float res = getCache(onewayCache, road);
+		if(res == null) {
+			res = (float) getObjContext(RouteDataObjectAttribute.ONEWAY).evaluateInt(road, 0);
+			putCache(onewayCache, road, res);
+		}
+		return res.intValue();
 	}
 	
 	@Override
@@ -435,8 +459,13 @@ public class GeneralRouter implements VehicleRouter {
 	
 	@Override
 	public float defineVehicleSpeed(RouteDataObject road) {
-		float spd = getObjContext(RouteDataObjectAttribute.ROAD_SPEED).evaluateFloat(road, defaultSpeed);
-		return Math.max(Math.min(spd, maxSpeed), minSpeed);
+		Float sp = getCache(vehicleSpeedCache, road);
+		if (sp == null) {
+			float spd = getObjContext(RouteDataObjectAttribute.ROAD_SPEED).evaluateFloat(road, defaultSpeed);
+			sp = Math.max(Math.min(spd, maxSpeed), minSpeed);
+			putCache(vehicleSpeedCache, road, sp);
+		}
+		return sp;
 	}
 	
 	@Override
@@ -462,6 +491,7 @@ public class GeneralRouter implements VehicleRouter {
 			}
 			rM.put(new IntHolder(types), val);
 		}
+		TIMER += System.nanoTime();
 	}
 	
 	class IntHolder {
@@ -483,12 +513,17 @@ public class GeneralRouter implements VehicleRouter {
 	}
 	
 	private Float getCache(Map<RouteRegion, Map<IntHolder, Float>> ch, RouteRegion reg, int[] types) {
+		TIMER -= System.nanoTime();
 		if (USE_CACHE) {
 			Map<IntHolder, Float> rM = ch.get(reg);
 			if (rM == null) {
 				return null;
 			}
-			return rM.get(new IntHolder(types));
+			Float vl = rM.get(new IntHolder(types));
+			if(vl != null) {
+				TIMER += System.nanoTime();
+				return vl;
+			}
 		}
 		return null;
 	}
