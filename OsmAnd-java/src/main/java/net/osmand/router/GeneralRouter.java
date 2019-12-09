@@ -39,6 +39,8 @@ public class GeneralRouter implements VehicleRouter {
 	public static final String VEHICLE_HEIGHT = "height";
 	public static final String VEHICLE_WEIGHT = "weight";
 	public static final String VEHICLE_WIDTH = "width";
+	
+	private static boolean USE_CACHE = true;
 
 	private final RouteAttributeContext[] objectAttributes;
 	public final Map<String, String> attributes;
@@ -53,10 +55,10 @@ public class GeneralRouter implements VehicleRouter {
 	private String filename = null;
 	private String profileName = "";
 	
-	Map<String, Map<int[], Float>> priorityCache;	
-	Map<String, Map<int[], Float>> speedCache;
-	Map<String, Map<int[], Float>> obstacleCache;
-	Map<String, Map<int[], Float>> penaltyCache;
+	Map<RouteRegion, Map<int[], Float>> priorityCache;	
+	Map<RouteRegion, Map<int[], Float>> speedCache;
+	Map<RouteRegion, Map<int[], Float>> obstacleCache;
+	Map<RouteRegion, Map<int[], Float>> penaltyCache;
 
 	private Map<RouteRegion, Map<Integer, Integer>> regionConvert = new LinkedHashMap<RouteRegion, Map<Integer,Integer>>();
 	
@@ -354,23 +356,15 @@ public class GeneralRouter implements VehicleRouter {
 		return 0;
 	}
 	
-
-	
 	@Override
 	public float defineRoutingObstacle(RouteDataObject road, int point) {
 		int[] pointTypes = road.getPointTypes(point);
-		String region = road.region.getName();
-		if (!obstacleCache.containsKey(region)) {
-			obstacleCache.put(region, new HashMap<int[], Float>());	
-		}
-		
-		if (obstacleCache.get(region).containsKey(pointTypes)) {
-			return obstacleCache.get(region).get(pointTypes);
-		}
-		
 		if(pointTypes != null){
-			float obst = getObjContext(RouteDataObjectAttribute.ROUTING_OBSTACLES).evaluateFloat(road.region, pointTypes, 0);
-			obstacleCache.get(region).put(pointTypes, obst);
+			Float obst = getCache(obstacleCache, road.region, pointTypes);
+			if(obst ==  null) {
+				obst = getObjContext(RouteDataObjectAttribute.ROUTING_OBSTACLES).evaluateFloat(road.region, pointTypes, 0);
+				putCache(obstacleCache, road.region, pointTypes, obst);
+			}
 			return obst;
 		}
 		return 0;
@@ -419,21 +413,22 @@ public class GeneralRouter implements VehicleRouter {
 	
 	@Override
 	public float getPenaltyTransition(RouteDataObject road) {
-		return getObjContext(RouteDataObjectAttribute.PENALTY_TRANSITION).evaluateInt(road, 0);
+		Float vl = getCache(penaltyCache, road);
+		if (vl == null) {
+			vl = (float) getObjContext(RouteDataObjectAttribute.PENALTY_TRANSITION).evaluateInt(road, 0);
+			putCache(penaltyCache, road, vl);
+		}
+		return vl;
 	}
 
 	@Override
 	public float defineRoutingSpeed(RouteDataObject road) {
-		String regionName = road.region.getName();
-		if (!speedCache.containsKey(regionName)) {
-			speedCache.put(regionName, new HashMap<int[], Float>());
-		} 
-		if (speedCache.get(regionName).get(road.types) != null) {
-			return speedCache.get(regionName).get(road.types);
+		Float definedSpd = getCache(priorityCache, road);
+		if (definedSpd == null) {
+			float spd = getObjContext(RouteDataObjectAttribute.ROAD_SPEED).evaluateFloat(road, defaultSpeed);
+			definedSpd = Math.max(Math.min(spd, maxSpeed), minSpeed);
+			putCache(priorityCache, road, definedSpd);
 		}
-		float spd = getObjContext(RouteDataObjectAttribute.ROAD_SPEED).evaluateFloat(road, defaultSpeed);
-		float definedSpd = Math.max(Math.min(spd, maxSpeed), minSpeed);
-		speedCache.get(regionName).put(road.types, definedSpd);
 		return definedSpd;
 	}
 	
@@ -444,17 +439,43 @@ public class GeneralRouter implements VehicleRouter {
 	}
 	
 	@Override
-	public float defineSpeedPriority(RouteDataObject road) {		
-		String regionName = road.region.getName();
-		if (!priorityCache.containsKey(regionName)) {
-			priorityCache.put(regionName, new HashMap<int[], Float>());
+	public float defineSpeedPriority(RouteDataObject road) {
+		Float sp = getCache(priorityCache, road);
+		if(sp == null) {
+			sp = getObjContext(RouteDataObjectAttribute.ROAD_PRIORITIES).evaluateFloat(road, 1f);
+			putCache(priorityCache, road, sp);
 		}
-		if (priorityCache.get(regionName).get(road.types) != null) {
-			return priorityCache.get(regionName).get(road.types);
-		}
-		float sp = getObjContext(RouteDataObjectAttribute.ROAD_PRIORITIES).evaluateFloat(road, 1f);		
-		priorityCache.get(regionName).put(road.types, sp);
 		return sp;
+	}
+
+	private void putCache(Map<RouteRegion, Map<int[], Float>> ch, RouteDataObject road, Float val) {
+		putCache(ch, road.region, road.types, val);
+	}
+	
+	private void putCache(Map<RouteRegion, Map<int[], Float>> ch, RouteRegion reg, int[] types, Float val) {
+		if (USE_CACHE) {
+			Map<int[], Float> rM = ch.get(reg);
+			if (rM == null) {
+				rM = new HashMap<int[], Float>();
+				ch.put(reg, rM);
+			}
+			rM.put(types, val);
+		}
+	}
+
+	private Float getCache(Map<RouteRegion, Map<int[], Float>> ch, RouteDataObject road) {
+		return getCache(ch, road.region, road.types);
+	}
+	
+	private Float getCache(Map<RouteRegion, Map<int[], Float>> ch, RouteRegion reg, int[] types) {
+		if (USE_CACHE) {
+			Map<int[], Float> rM = ch.get(reg);
+			if (rM == null) {
+				return null;
+			}
+			return rM.get(types);
+		}
+		return null;
 	}
 
 	@Override
@@ -486,33 +507,8 @@ public class GeneralRouter implements VehicleRouter {
 	
 	@Override
 	public double calculateTurnTime(RouteSegment segment, int segmentEnd, RouteSegment prev, int prevSegmentEnd) {
-		String regionS = segment.getRoad().region.getName(); 
-		String regionPs = prev.getRoad().region.getName(); 
-		float ts;
-		float prevTs;
-
-		if (!penaltyCache.containsKey(regionS)) {
-			penaltyCache.put(regionS, new HashMap<int[], Float>());
-		}
-		//maybe we don't need it? region should already be present in cache
-		if (!penaltyCache.containsKey(regionPs)) {
-			penaltyCache.put(regionPs, new HashMap<int[], Float>());
-		}
-		
-		if (penaltyCache.get(regionS).get(segment.getRoad().types) != null) {
-			ts = penaltyCache.get(regionS).get(segment.getRoad().types);
-		} else {
-			ts = getPenaltyTransition(segment.getRoad());
-			penaltyCache.get(regionS).put(segment.getRoad().types, ts);
-		}
-			
-		if (penaltyCache.get(regionPs).get(prev.getRoad().types) != null) {
-				prevTs = penaltyCache.get(regionPs).get(prev.getRoad().types);
-		} else {
-			prevTs = getPenaltyTransition(prev.getRoad());
-			penaltyCache.get(regionPs).put(prev.getRoad().types, prevTs);
-		}
-		
+		float ts = getPenaltyTransition(segment.getRoad());
+		float prevTs = getPenaltyTransition(prev.getRoad());
 		if(prevTs != ts) {
 			return Math.abs(ts - prevTs) / 2;
 		}
