@@ -9,6 +9,7 @@ import net.osmand.util.MapUtils;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.BitSet;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -55,10 +56,10 @@ public class GeneralRouter implements VehicleRouter {
 	private String filename = null;
 	private String profileName = "";
 	
-	Map<RouteRegion, Map<int[], Float>> priorityCache;	
-	Map<RouteRegion, Map<int[], Float>> speedCache;
-	Map<RouteRegion, Map<int[], Float>> obstacleCache;
-	Map<RouteRegion, Map<int[], Float>> penaltyCache;
+	Map<RouteRegion, Map<IntHolder, Float>> priorityCache;	
+	Map<RouteRegion, Map<IntHolder, Float>> speedCache;
+	Map<RouteRegion, Map<IntHolder, Float>> obstacleCache;
+	Map<RouteRegion, Map<IntHolder, Float>> penaltyCache;
 
 	private Map<RouteRegion, Map<Integer, Integer>> regionConvert = new LinkedHashMap<RouteRegion, Map<Integer,Integer>>();
 	
@@ -448,32 +449,46 @@ public class GeneralRouter implements VehicleRouter {
 		return sp;
 	}
 
-	private void putCache(Map<RouteRegion, Map<int[], Float>> ch, RouteDataObject road, Float val) {
+	private void putCache(Map<RouteRegion, Map<IntHolder, Float>> ch, RouteDataObject road, Float val) {
 		putCache(ch, road.region, road.types, val);
 	}
 	
-	private void putCache(Map<RouteRegion, Map<int[], Float>> ch, RouteRegion reg, int[] types, Float val) {
+	private void putCache(Map<RouteRegion, Map<IntHolder, Float>> ch, RouteRegion reg, int[] types, Float val) {
 		if (USE_CACHE) {
-			Map<int[], Float> rM = ch.get(reg);
+			Map<IntHolder, Float> rM = ch.get(reg);
 			if (rM == null) {
-				rM = new HashMap<int[], Float>();
+				rM = new HashMap<IntHolder, Float>();
 				ch.put(reg, rM);
 			}
-			rM.put(types, val);
+			rM.put(new IntHolder(types), val);
 		}
 	}
+	
+	class IntHolder {
+	    private final int[] array;
+	    IntHolder(int[] ts) { array = ts; }
+	    @Override public int hashCode() { return Arrays.hashCode(array); }
+	    @Override public boolean equals(Object other) {
+	        if (array == other) { return true; }
+	        if (! (other instanceof IntHolder) ) {
+	            return false;
+	        }
+	        //noinspection unchecked
+	        return Arrays.equals(array, ((IntHolder) other).array);
+	    }
+	}
 
-	private Float getCache(Map<RouteRegion, Map<int[], Float>> ch, RouteDataObject road) {
+	private Float getCache(Map<RouteRegion, Map<IntHolder, Float>> ch, RouteDataObject road) {
 		return getCache(ch, road.region, road.types);
 	}
 	
-	private Float getCache(Map<RouteRegion, Map<int[], Float>> ch, RouteRegion reg, int[] types) {
+	private Float getCache(Map<RouteRegion, Map<IntHolder, Float>> ch, RouteRegion reg, int[] types) {
 		if (USE_CACHE) {
-			Map<int[], Float> rM = ch.get(reg);
+			Map<IntHolder, Float> rM = ch.get(reg);
 			if (rM == null) {
 				return null;
 			}
-			return rM.get(types);
+			return rM.get(new IntHolder(types));
 		}
 		return null;
 	}
