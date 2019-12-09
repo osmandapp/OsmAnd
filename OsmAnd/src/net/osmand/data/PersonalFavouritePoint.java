@@ -19,23 +19,32 @@ public class PersonalFavouritePoint extends FavouritePoint {
 		WORK("work", R.string.work_button, 2),
 		PARKING("parking", R.string.map_widget_parking, 3);
 
-		private String name;
+		private String pointName;
 		@StringRes
 		private int resId;
 		private int order;
 
-		PointType(String name, @StringRes int resId, int order) {
-			this.name = name;
+		PointType(String pointName, @StringRes int resId, int order) {
+			this.pointName = pointName;
 			this.resId = resId;
 			this.order = order;
 		}
 
 		public String getName() {
-			return name;
+			return pointName;
 		}
 
 		public int getOrder() {
 			return order;
+		}
+
+		public static PointType valueOfPointName(@NonNull String typeName){
+
+			for (PointType pt:values()) {
+				if(pt.pointName.equals(typeName))
+						return pt;
+			}
+			throw new IllegalArgumentException("Illegal PointType pointName");
 		}
 
 		public String getHumanString(@NonNull Context ctx) {
@@ -43,27 +52,19 @@ public class PersonalFavouritePoint extends FavouritePoint {
 		}
 	}
 
-	private PersonalFavouritePoint() {
-	}
-
-	private PersonalFavouritePoint(@NonNull Context ctx, @NonNull PointType type, double latitude, double longitude) {
-		super(latitude, longitude, type.name, PERSONAL);
+	public PersonalFavouritePoint(@NonNull Context ctx, @NonNull PointType type, double latitude, double longitude) {
+		super(latitude, longitude, type.pointName, PERSONAL);
 		this.ctx = ctx;
 		this.type = type;
 	}
 
-	public PersonalFavouritePoint(@NonNull Context ctx, @NonNull String typeName, double latitude, double longitude) throws IllegalArgumentException {
-		this(ctx, PointType.valueOf(typeName), latitude, longitude);
+	public PersonalFavouritePoint(@NonNull Context ctx, @NonNull String pointName, double latitude, double longitude) throws IllegalArgumentException {
+		this(ctx, PointType.valueOfPointName(pointName), latitude, longitude);
 	}
 
 	@Override
 	public PointDescription getPointDescription() {
 		return new PointDescription(PointDescription.POINT_TYPE_LOCATION, getDescription());
-	}
-
-	public PersonalFavouritePoint(PersonalFavouritePoint favouritePoint) {
-		super(favouritePoint);
-		this.type = favouritePoint.type;
 	}
 
 	@Override
@@ -99,7 +100,7 @@ public class PersonalFavouritePoint extends FavouritePoint {
 	public WptPt toWpt() {
 		WptPt pt = super.toWpt();
 		pt.getExtensionsToWrite().put(PERSONAL, "true");
-		pt.name = type.toString();
+		pt.name = type.pointName;
 		pt.desc = getDescription();
 		return pt;
 	}

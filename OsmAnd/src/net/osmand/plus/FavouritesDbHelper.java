@@ -128,15 +128,12 @@ public class FavouritesDbHelper {
 	}
 
 	private boolean hasPersonalPoint(PersonalFavouritePoint.PointType pointType) {
-		boolean hasPersonalPoint = false;
 		for (FavouritePoint fp : cachedPersonalFavoritePoints) {
-			if (fp instanceof PersonalFavouritePoint) {
-				if (((PersonalFavouritePoint) fp).getType() == pointType) {
-					hasPersonalPoint = true;
-				}
+			if (((PersonalFavouritePoint) fp).getType() == pointType) {
+				return true;
 			}
 		}
-		return hasPersonalPoint;
+		return false;
 	}
 
 	public FavouritePoint getWorkPoint() {
@@ -152,35 +149,12 @@ public class FavouritesDbHelper {
 	}
 
 	private FavouritePoint getPersonalPoint(PersonalFavouritePoint.PointType pointType) {
-		FavouritePoint personalPoint = null;
 		for (FavouritePoint fp : cachedPersonalFavoritePoints) {
-			if (fp instanceof PersonalFavouritePoint) {
 				if (((PersonalFavouritePoint) fp).getType() == pointType) {
-					personalPoint = fp;
+					return fp;
 				}
 			}
-		}
-		return personalPoint;
-	}
-
-	public LatLon getWorkPointLatLon() {
-		LatLon workPointLatLon;
-		if (hasWorkPoint()) {
-			workPointLatLon = new LatLon(getWorkPoint().getLatitude(), getWorkPoint().getLongitude());
-		} else {
-			workPointLatLon = null;
-		}
-		return workPointLatLon;
-	}
-
-	public LatLon getHomePointLatLon() {
-		LatLon homePointLatLon;
-		if (hasHomePoint()) {
-			homePointLatLon = new LatLon(getHomePoint().getLatitude(), getHomePoint().getLongitude());
-		} else {
-			homePointLatLon = null;
-		}
-		return homePointLatLon;
+		return null;
 	}
 
 	public boolean isFavoritesLoaded() {
@@ -283,7 +257,7 @@ public class FavouritesDbHelper {
 			getHomePoint().setDescription(description.getName());
 			editFavourite(getHomePoint(), latLon.getLatitude(), latLon.getLongitude());
 		} else {
-			FavouritePoint cachedHomePoint = new PersonalFavouritePoint(context, HOME.toString(),
+			FavouritePoint cachedHomePoint = new PersonalFavouritePoint(context, HOME,
 					latLon.getLatitude(), latLon.getLongitude());
 			cachedHomePoint.setDescription(description.getName());
 			cachedPersonalFavoritePoints.add(cachedHomePoint);
@@ -297,7 +271,7 @@ public class FavouritesDbHelper {
 			getWorkPoint().setDescription(description.getName());
 			editFavourite(getWorkPoint(), latLon.getLatitude(), latLon.getLongitude());
 		} else {
-			FavouritePoint cachedWorkPoint = new PersonalFavouritePoint(context, WORK.toString(),
+			FavouritePoint cachedWorkPoint = new PersonalFavouritePoint(context, WORK,
 					latLon.getLatitude(), latLon.getLongitude());
 			cachedWorkPoint.setDescription(description.getName());
 			cachedPersonalFavoritePoints.add(cachedWorkPoint);
@@ -311,7 +285,7 @@ public class FavouritesDbHelper {
 			getParkingPoint().setDescription(description.getName());
 			editFavourite(getParkingPoint(), latLon.getLatitude(), latLon.getLongitude());
 		} else {
-			FavouritePoint cachedParkingPoint = new PersonalFavouritePoint(context, PARKING.toString(),
+			FavouritePoint cachedParkingPoint = new PersonalFavouritePoint(context, PARKING,
 					latLon.getLatitude(), latLon.getLongitude());
 			cachedParkingPoint.setDescription(description.getName());
 			cachedPersonalFavoritePoints.add(cachedParkingPoint);

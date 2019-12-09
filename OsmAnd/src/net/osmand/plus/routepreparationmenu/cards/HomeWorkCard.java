@@ -4,6 +4,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import net.osmand.data.FavouritePoint;
+import net.osmand.data.LatLon;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
@@ -41,7 +42,7 @@ public class HomeWorkCard extends BaseCard {
 				if (homePoint == null) {
 					AddPointBottomSheetDialog.showInstance(mapActivity, PointType.HOME);
 				} else {
-					targetPointsHelper.navigateToPoint(favorites.getHomePointLatLon(),
+					targetPointsHelper.navigateToPoint(new LatLon(homePoint.getLatitude(), homePoint.getLongitude()),
 							true, -1, homePoint.getPointDescription());
 				}
 			}
@@ -61,7 +62,7 @@ public class HomeWorkCard extends BaseCard {
 				if (workPoint == null) {
 					AddPointBottomSheetDialog.showInstance(mapActivity, PointType.WORK);
 				} else {
-					targetPointsHelper.navigateToPoint(favorites.getWorkPointLatLon(),
+					targetPointsHelper.navigateToPoint(new LatLon(workPoint.getLatitude(), workPoint.getLongitude()),
 							true, -1, workPoint.getPointDescription());
 				}
 			}
