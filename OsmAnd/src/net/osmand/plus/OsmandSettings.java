@@ -2371,12 +2371,6 @@ public class OsmandSettings {
 		edit.commit();
 		objectToShow = toShow;
 		if (addToHistory) {
-			if (pointDescription.isFavorite()) {
-//				int localeNameID = PersonalFavouritePoint.PersonalPoint.getLocalName(pointDescription.getName());
-//				if (localeNameID != 0) {
-//					pointDescription.setName(ctx.getString(localeNameID));
-//				}
-			}
 			SearchHistoryHelper.getInstance(ctx).addNewItemToHistory(latitude, longitude, pointDescription);
 		}
 	}
@@ -2581,16 +2575,6 @@ public class OsmandSettings {
 	public PointDescription getWorkPointDescription() {
 		return PointDescription.deserializeFromString(
 				settingsAPI.getString(globalPreferences, WORK_POINT_DESCRIPTION, ""), getWorkPoint());
-	}
-
-	public void setHomePoint(double latitude, double longitude, PointDescription p) {
-		settingsAPI.edit(globalPreferences).putFloat(HOME_POINT_LAT, (float) latitude).putFloat(HOME_POINT_LON, (float) longitude).commit();
-		settingsAPI.edit(globalPreferences).putString(HOME_POINT_DESCRIPTION, PointDescription.serializeToString(p)).commit();
-	}
-
-	public void setWorkPoint(double latitude, double longitude, PointDescription p) {
-		settingsAPI.edit(globalPreferences).putFloat(WORK_POINT_LAT, (float) latitude).putFloat(WORK_POINT_LON, (float) longitude).commit();
-		settingsAPI.edit(globalPreferences).putString(WORK_POINT_DESCRIPTION, PointDescription.serializeToString(p)).commit();
 	}
 
 	public LatLon getMyLocationToStart() {
