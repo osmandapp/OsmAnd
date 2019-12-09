@@ -165,7 +165,7 @@ object OsmandLocationUtils {
 
 	fun formatFullTime(ti: Long): String {
 		val dt = Date(ti)
-		return UTC_DATE_FORMAT.format(dt) + " " + UTC_TIME_FORMAT.format(dt) + " UTC"
+		return UTC_DATE_FORMAT.format(dt) + " " + UTC_TIME_FORMAT.format(dt) + UTC_FORMAT_SUFFIX
 	}
 
 	fun parseOsmAndBotLocationContent(oldContent: MessageOsmAndBotLocation, content: TdApi.MessageContent): MessageOsmAndBotLocation {
@@ -372,7 +372,7 @@ object OsmandLocationUtils {
 		return TdApi.InputMessageText(TdApi.FormattedText(textMessage, entities.toTypedArray()), true, true)
 	}
 
-	fun getTextMessageContent(updateId: Int, location: BufferMessage): TdApi.InputMessageText {
+	fun getTextMessageContent(updateId: Int, location: BufferMessage, app: TelegramApplication): TdApi.InputMessageText {
 		val entities = mutableListOf<TdApi.TextEntity>()
 		val builder = StringBuilder()
 		val locationMessage = formatLocation(location)
@@ -391,11 +391,13 @@ object OsmandLocationUtils {
 
 		if (location.altitude != 0.0) {
 			entities.add(TdApi.TextEntity(builder.lastIndex, ALTITUDE_PREFIX.length, TdApi.TextEntityTypeBold()))
-			builder.append(String.format(Locale.US, "$ALTITUDE_PREFIX%.1f m\n", location.altitude))
+			val formattedAltitude = OsmandFormatter.getFormattedAlt(location.altitude, app, false)
+			builder.append(String.format(Locale.US, "$ALTITUDE_PREFIX%s\n", formattedAltitude))
 		}
 		if (location.speed > 0) {
 			entities.add(TdApi.TextEntity(builder.lastIndex, SPEED_PREFIX.length, TdApi.TextEntityTypeBold()))
-			builder.append(String.format(Locale.US, "$SPEED_PREFIX%.1f m/s\n", location.speed))
+			val formattedSpeed = OsmandFormatter.getFormattedSpeed(location.speed.toFloat(), app, false)
+			builder.append(String.format(Locale.US, "$SPEED_PREFIX%s\n", formattedSpeed))
 		}
 		if (location.bearing > 0) {
 			entities.add(TdApi.TextEntity(builder.lastIndex, BEARING_PREFIX.length, TdApi.TextEntityTypeBold()))
@@ -403,7 +405,8 @@ object OsmandLocationUtils {
 		}
 		if (location.hdop != 0.0 && location.speed == 0.0) {
 			entities.add(TdApi.TextEntity(builder.lastIndex, HDOP_PREFIX.length, TdApi.TextEntityTypeBold()))
-			builder.append(String.format(Locale.US, "$HDOP_PREFIX%d m\n", location.hdop.toInt()))
+			val formattedHdop = OsmandFormatter.getFormattedDistance(location.hdop.toFloat(), app, false, false)
+			builder.append(String.format(Locale.US, "$HDOP_PREFIX%s\n", formattedHdop))
 		}
 		if (updateId == 0) {
 			builder.append(String.format("$UPDATED_PREFIX%s\n", formatFullTime(location.time)))
