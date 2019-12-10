@@ -418,7 +418,7 @@
     <string name="tts_language_not_supported">Die gewählte Sprache wird von der installierten Android-TTS-Engine nicht unterstützt. Stattdessen wird die voreingestellte TTS-Sprache verwendet. Im Market nach einer anderen TTS-Engine suchen\?</string>
     <string name="tts_missing_language_data_title">Fehlendes Sprachpaket</string>
     <string name="tts_missing_language_data">Gewählte Sprache aus dem Market installieren?</string>
-    <string name="switch_to_vector_map_to_see">Eine Offline-Vektor-Karte ist für diesen Ort vorhanden. 
+    <string name="switch_to_vector_map_to_see">Eine Offline-Vektorkarte ist für diesen Ort vorhanden. 
 \n\t 
 \n\tZur Verwendung aktivieren: \'Menü\' → \'Karte konfigurieren\' → \'Kartenquelle…\' → \'Offline-Vektorkarten\'.</string>
     <string name="choose_audio_stream">Navi-Sprachausgabe</string>
