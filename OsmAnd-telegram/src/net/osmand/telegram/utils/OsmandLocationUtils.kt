@@ -256,12 +256,7 @@ object OsmandLocationUtils {
 				}
 				s.startsWith(SPEED_PREFIX) -> {
 					val speedStr = s.removePrefix(SPEED_PREFIX)
-					try {
-						val speed = speedStr.split(" ").first()
-						res.speed = speed.toDouble()
-					} catch (e: Exception) {
-						e.printStackTrace()
-					}
+					res.speed = parseSpeed(speedStr)
 				}
 				s.startsWith(BEARING_PREFIX) -> {
 					val bearingStr = s.removePrefix(BEARING_PREFIX)
@@ -333,6 +328,25 @@ object OsmandLocationUtils {
 			e.printStackTrace()
 		}
 		return 0
+	}
+
+	fun parseSpeed(speedS: String): Double {
+		try {
+			val speedSplit = speedS.split(" ")
+			val speedVal = speedSplit.first().toDouble()
+			val speedFormat = OsmandFormatter.SpeedConstants.values().firstOrNull { it.getDefaultString() == speedSplit.last() }
+			return when (speedFormat) {
+				OsmandFormatter.SpeedConstants.KILOMETERS_PER_HOUR -> speedVal / 3.6f
+				OsmandFormatter.SpeedConstants.MILES_PER_HOUR -> (speedVal / 3.6f) / (OsmandFormatter.METERS_IN_KILOMETER / OsmandFormatter.METERS_IN_ONE_MILE)
+				OsmandFormatter.SpeedConstants.NAUTICALMILES_PER_HOUR -> (speedVal / 3.6f) / (OsmandFormatter.METERS_IN_KILOMETER / OsmandFormatter.METERS_IN_ONE_NAUTICALMILE)
+				OsmandFormatter.SpeedConstants.MINUTES_PER_KILOMETER -> (OsmandFormatter.METERS_IN_KILOMETER / speedVal) / 60
+				OsmandFormatter.SpeedConstants.MINUTES_PER_MILE -> (OsmandFormatter.METERS_IN_ONE_MILE / speedVal) / 60
+				else -> speedVal
+			}
+		} catch (e: Exception) {
+			e.printStackTrace()
+		}
+		return 0.0
 	}
 
 	fun parseDistance(distanceS: String): Double {
