@@ -42,7 +42,9 @@ object OsmandLocationUtils {
 	const val SECONDS_AGO_SUFFIX = " seconds ago"
 	const val MINUTES_AGO_SUFFIX = " minutes ago"
 	const val HOURS_AGO_SUFFIX = " hours ago"
-	const val UTC_FORMAT_SUFFIX = " ${DataConstants.UTC_FORMAT}"
+	const val UTC_FORMAT_PATTERN = "yyyy-MM-dd HH:mm:ss"
+
+	const val ONE_HOUR_TIME_MS = 60 * 60 * 1000 // 1 hour
 
 	val UTC_DATE_FORMAT = SimpleDateFormat("yyyy-MM-dd", Locale.US).apply {
 		timeZone = TimeZone.getTimeZone("UTC")
@@ -167,10 +169,10 @@ object OsmandLocationUtils {
 		val dt = Date(ti)
 		val offsetKey = app.settings.utcOffset
 		val utcOffset = DataConstants.utcOffsets[offsetKey] ?: 0f
-		val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US)
+		val simpleDateFormat = SimpleDateFormat(UTC_FORMAT_PATTERN, Locale.US)
 
 		simpleDateFormat.timeZone = TimeZone.getTimeZone(DataConstants.UTC_FORMAT).apply {
-			rawOffset = (utcOffset * 60 * 60 * 1000).toInt()
+			rawOffset = (utcOffset * ONE_HOUR_TIME_MS).toInt()
 		}
 
 		return "${simpleDateFormat.format(dt)} $offsetKey"
@@ -322,13 +324,19 @@ object OsmandLocationUtils {
 					val hours = locStr.toLong()
 					return (System.currentTimeMillis() - hours * 60 * 60 * 1000)
 				}
-				timeS.endsWith(UTC_FORMAT_SUFFIX) -> {
-					val locStr = timeS.removeSuffix(UTC_FORMAT_SUFFIX)
-					val (latS, lonS) = locStr.split(" ")
-					val date = UTC_DATE_FORMAT.parse(latS)
-					val time = UTC_TIME_FORMAT.parse(lonS)
-					val res = date.time + time.time
-					return res
+				timeS.contains(DataConstants.UTC_FORMAT) -> {
+					val utcIndex = timeS.indexOf(DataConstants.UTC_FORMAT)
+					if (utcIndex != -1) {
+						val locStr = timeS.substring(0, utcIndex)
+						val utcOffset = timeS.substring(utcIndex)
+						val utcTimeOffset = DataConstants.utcOffsets[utcOffset] ?: 0f
+						val simpleDateFormat = SimpleDateFormat(UTC_FORMAT_PATTERN, Locale.US)
+						simpleDateFormat.timeZone = TimeZone.getTimeZone(DataConstants.UTC_FORMAT).apply {
+								rawOffset = (utcTimeOffset * ONE_HOUR_TIME_MS).toInt()
+							}
+						val res = simpleDateFormat.parse(locStr)
+						return res.time
+					}
 				}
 			}
 		} catch (e: Exception) {
