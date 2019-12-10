@@ -71,7 +71,6 @@
 \n יישום ברקע</string>
     <string name="bg_service_sleep_mode_on">הפסקת
 \n הפעלה ברקע</string>
-    <string name="gps_wakeup_interval">הפרשי התעוררות של רכיב האיכון: %s</string>
     <string name="int_continuosly">רציף</string>
     <string name="screen_is_locked">לשחרור יש לגעת בסמל המנעול</string>
     <string name="map_widget_top_text">שם הרחוב</string>
@@ -432,7 +431,6 @@
     <string name="level_to_switch_vector_raster">תקריב מזערי לווקטורים</string>
     <string name="create_poi_link_to_osm_doc">סיווג מפה לפי <u>OSM מקוון</u> עם תמונות.</string>
     <string name="error_doing_search">לא ניתן לחפש באופן בלתי מקוון.</string>
-    <string name="search_offline_geo_error">לא ניתן לנתח את הפריט הגאוגרפי ‚%s’.</string>
     <string name="search_osm_offline">חיפוש לפי מיקום גאוגרפי</string>
     <string name="system_locale">מערכת</string>
     <string name="preferred_locale_descr">שפת תצוגת היישומון (תחול לאחר הפעלה מחדש של OsmAnd).</string>
@@ -1332,8 +1330,6 @@
     <string name="shared_string_left">שמאל</string>
     <string name="show_number_pad">הצגת מקלדת ספרות</string>
     <string name="shared_string_paste">הדבקה</string>
-    <string name="coordinate_input_accuracy_description">מעבר אוטומטי לשדה הבא לאחר הקלדת %1$d ספרות עשרונית.</string>
-    <string name="coordinate_input_accuracy">%1$d ספרות</string>
     <string name="go_to_next_field">לשדה הבא</string>
     <string name="waypoints_added_to_map_markers">נוספו נקודות דרך לסמני המפה</string>
     <string name="plan_route_no_markers_toast">יש להוסיף לפחות סמן אחד כדי להשתמש בפונקציה הזאת.</string>
@@ -2341,7 +2337,6 @@
     <string name="osm_live_subscription_desc">מינוי מאפשר עדכונים שעתיים, יומיים או שבועיים ואפשרות להורדת כל המפות בכל העולם ללא הגבלה.</string>
     <string name="get_it">הרשמה</string>
     <string name="get_for">הרשמה למשך %1$s</string>
-    <string name="get_for_month">הרשמה למשך חודש</string>
     <string name="osm_live_banner_desc">קבלת כמות הורדות בלתי מוגבלת תוך הוספת עדכונים ברמה שבועית, יומית או שעתית.</string>
     <string name="osmand_plus_banner_desc">עדכונים והורדות של המפה באופן בלתי מוגבל לרבות תוסף ויקיפדיה.</string>
     <string name="si_mi_meters">מיילים/מטרים</string>
@@ -2612,7 +2607,6 @@
     <string name="in_app_purchase_desc">תשלום חד־פעמי</string>
     <string name="in_app_purchase_desc_ex">לאחר הרכישה, הזמינות אליך תהיה לצמיתות.</string>
     <string name="purchase_unlim_title">רכישה - %1$s</string>
-    <string name="purchase_subscription_title">הרשמה - %1$s</string>
     <string name="wikivoyage_offline">ויקימסע בלתי מקוון</string>
     <string name="unlimited_downloads">הורדות ללא הגבלה</string>
     <string name="wikipedia_offline">ויקיפדיה בלתי מקוונת</string>
@@ -3254,7 +3248,6 @@
     <string name="months_3">שלושה חודשים</string>
     <string name="price_free">חינם</string>
     <string name="get_discount_title">לקבל את %1$d %2$s ב־%3$s הנחה.</string>
-    <string name="get_free_trial_title">התחלת ההתנסות שלך למשך %1$d %2$s בחינם.</string>
     <string name="get_discount_first_part">%1$s למשך %2$s הראשונים</string>
     <string name="get_discount_first_few_part">%1$s למשך %2$s הראשונים</string>
     <string name="get_discount_second_part">לאחר מכן %1$s</string>
@@ -3358,7 +3351,6 @@
     <string name="quick_action_show_hide_hillshade">הצגה/הסתרה של הצללה</string>
     <string name="tts_initialization_error">לא ניתן להפעיל מנוע המרת טקסט לדיבור</string>
     <string name="simulate_your_location_gpx_descr">הדמיית המיקום שלך באמצעות מסלול GPX שהוקלט מראש.</string>
-    <string name="swap_start_and_destination">החלפה בין התחלה ליעד</string>
     <string name="export_profile">ייצוא פרופיל</string>
     <string name="exported_osmand_profile">פרופיל OsmAnd:‏ %1$s</string>
     <string name="overwrite_profile_q">פרופיל בשם ‚%1$s’ כבר קיים. לדרוס\?</string>
@@ -3392,4 +3384,7 @@
     <string name="shared_string_turn_off">כיבוי</string>
     <string name="new_plugin_added">נוסף תוסף חדש</string>
     <string name="join_segments">חיבור מקטעים</string>
+    <string name="add_new_profile_q">להוסיף פרופיל חדש ‚%1&amp;s’\?</string>
+    <string name="save_heading">כולל הכותרת</string>
+    <string name="save_heading_descr">לשמור את הכותרת של כל נקודת דרך בזמן ההקלטה.</string>
 </resources>

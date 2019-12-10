@@ -1019,7 +1019,6 @@
     <string name="osm_live_subscription_desc">Чланарина омогућава часовне, дневне и седмичне надоградње, и неограничена преузимања свих карата.</string>
     <string name="get_it">Добавите је</string>
     <string name="get_for">Добавите за %1$s</string>
-    <string name="get_for_month">Добавите за %1$s месечно</string>
     <string name="osm_live_banner_desc">Добавите неограничено преузимање и надоградње карата више пута месечно: седмично, дневно или часовно.</string>
     <string name="osmand_plus_banner_desc">Неограничена преузимања карти, надоградње, додатак за Википедију.</string>
     <string name="si_mi_meters">Миље/метри</string>
@@ -1347,7 +1346,6 @@
     <string name="appearance_on_the_map">Изглед на карти</string>
     <string name="shared_string_right">Десно</string>
     <string name="shared_string_left">Лево</string>
-    <string name="coordinate_input_accuracy">%1$d цифара</string>
     <string name="go_to_next_field">Следеће поље</string>
     <string name="tap_on_map_to_hide_interface">Режим преко целог екрана</string>
     <string name="traffic_warning_payment">Наплата путарине</string>
@@ -1411,7 +1409,6 @@
     <string name="digits_quantity">Број децималних бројки</string>
     <string name="show_number_pad">Приказуј бројчану ставку</string>
     <string name="shared_string_paste">Налепи</string>
-    <string name="coordinate_input_accuracy_description">Аутоматски пређи на следеће поље после уноса.</string>
     <string name="rename_marker">Преименуј ознаку</string>
     <string name="tap_on_map_to_hide_interface_descr">Тупкање на карту је укључује и искључује контролна дугмад и справице.</string>
     <string name="mark_passed">Ознака прођена</string>
@@ -1472,7 +1469,7 @@
     <string name="marker_moved_to_active">Ознака карте је премештена у активне</string>
     <string name="shared_string_list">Списак</string>
     <string name="shared_string_groups">Групе</string>
-    <string name="passed">Последње коришћено</string>
+    <string name="passed">Последње коришћено: %1$s</string>
     <string name="make_active">Активирај</string>
     <string name="today">Данас</string>
     <string name="yesterday">Јуче</string>
@@ -2294,7 +2291,6 @@
     <string name="use_magnetic_sensor_descr">За исчитавање компаса, користите магнетни сензор уместо оријентационог сензора.</string>
     <string name="bg_service_sleep_mode_on">Заустави
 \n рад у позадини</string>
-    <string name="gps_wakeup_interval">Интервал буђења GPS уређаја: %s</string>
     <string name="local_indexes_cat_tile">Мрежне и кеширене карте са сличицама</string>
     <string name="map_online_data">Мрежне и карте са сличицама</string>
     <string name="front">напред</string>
@@ -2375,7 +2371,6 @@
     <string name="in_app_purchase_desc">Једнократно плаћање</string>
     <string name="in_app_purchase_desc_ex">Када се једном купи, биће Вам заувек доступно.</string>
     <string name="purchase_unlim_title">Купи - %1$s</string>
-    <string name="purchase_subscription_title">Претплати се - %1$s</string>
     <string name="unlimited_downloads">Неограничено преузимања</string>
     <string name="unlock_all_features">Откључај све OsmAnd функционалности</string>
     <string name="purchase_dialog_title">Одаберите план</string>
@@ -2600,7 +2595,6 @@
     <string name="warning_tile_layer_not_downloadable">Апликација не може да скине слој са картама %1$s, поновна инсталација апликације можда помогне.</string>
     <string name="create_poi_link_to_osm_doc">
         <u>Интернет ОСМ</u> класификација карти са сликама.</string>
-    <string name="search_offline_geo_error">Не могу да рашчланим гео интент \'%s\'.</string>
     <string name="poi_filter_namefinder">NameFinder на мрежи</string>
     <string name="tiles_to_download_estimated_size">На нивоу увећања {0} треба скинути {1} сличица ({2} MB)</string>
     <string name="transport_searching_transport">Резултати превоза (без одредишта):</string>
@@ -2894,7 +2888,6 @@
     <string name="shared_string_capacity">Капацитет</string>
     <string name="shared_string_width">Ширина</string>
     <string name="shared_string_height">Висина</string>
-    <string name="swap_start_and_destination">Замени почетак и циљ</string>
     <string name="add_destination_point">Додај одредиште</string>
     <string name="add_intermediate_point">Додај успутну станицу</string>
     <string name="add_start_point">Додај почетну тачку</string>
@@ -3238,7 +3231,6 @@
     <string name="months_3">Три месеца</string>
     <string name="price_free">Бесплатно</string>
     <string name="get_discount_title">Набавите %1$d %2$s за %3$s ниже.</string>
-    <string name="get_free_trial_title">Започните %1$d %2$s бесплатну пробу.</string>
     <string name="get_discount_first_part">%1$s првих %2$s</string>
     <string name="get_discount_first_few_part">%1$s првих %2$s</string>
     <string name="get_discount_second_part">онда %1$s</string>

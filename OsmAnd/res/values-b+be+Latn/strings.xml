@@ -637,7 +637,6 @@ Zachod: %2$s</string>
     <string name="map_widget_transparent">Prazrystaje afarmleńnie</string>
     <string name="bg_service_sleep_mode_off">Zapuścіć u\n fonavym režymie</string>
     <string name="bg_service_sleep_mode_on">Spynić\n fonavy režym</string>
-    <string name="gps_wakeup_interval">Intervał abudžeńnia GPS: %s</string>
     <string name="int_continuosly">Biezpierapynny</string>
     <string name="screen_is_locked">Nacisnicie značok blakavannia kab razblakavać ekran</string>
     <string name="map_widget_top_text">Nazva vulicy</string>
@@ -1005,7 +1004,6 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="create_poi_link_to_osm_doc">
         <u>Online OSM</u> mapa z vyjavami.</string>
     <string name="error_doing_search">Nie atrymalasia vykanać pošuk u aŭtanomnym režymie.</string>
-    <string name="search_offline_geo_error">Niemahčyma apracavać zapyt \'%s\'.</string>
     <string name="search_osm_offline">Pošuk pa hieahrafčnamu stanovišču</string>
     <string name="system_locale">Sіstemnaja</string>
     <string name="preferred_locale_descr">Vybar movy adliustravannia (nabudzie silu paslia pierazapusku OsmAnd).</string>
@@ -1964,7 +1962,7 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="missing_write_external_storage_permission">OsmAnd nie maje dazvolu na vykarystannie kartki pamiaci</string>
     <string name="last_update">Apošniaje abnaŭleńnie: %s</string>
     <string name="update_time">Čas abnaŭleńnia</string>
-    <string name="updates_size">Abnaŭleńnі: %s</string>
+    <string name="updates_size">Abnaŭleńnі</string>
     <string name="last_map_change">Apošniaja źmiena mapy: %s</string>
     <string name="hourly">Štohadzіnna</string>
     <string name="daily">Štodzionna</string>
@@ -1982,7 +1980,6 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="osm_live_subscription_desc">Padpiska dazvalaje atrymlivać štohadzinyja, štodzionnyja, štotydniovyja abnaŭlieńni i nieabmiežavanyja zahruzki dla ŭsich mapaŭ pa ŭsim śviecie.</string>
     <string name="get_it">Vaźmіcie</string>
     <string name="get_for">Atrymać za %1$s</string>
-    <string name="get_for_month">Atrymać za %1$s u miesiac</string>
     <string name="osm_live_banner_desc">Atrymajcie nieabmiežavanyja zahruzki mapaŭ i abnaŭlienni boĺš za adzin raz na miesiac: štotydzień, štodzień ci štohadzinu.</string>
     <string name="osmand_plus_banner_desc">Nieabmiežavanaja zahruzka mapaŭ, abnaŭlienniaŭ i Wikipedia-dadatka.</string>
     <string name="si_mi_meters">Mіli/metry</string>
@@ -2586,8 +2583,6 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="digits_quantity">Kolkaść dziesiatkovych ličbaŭ</string>
     <string name="show_number_pad">Pakazać ličbavuju paneĺ</string>
     <string name="shared_string_paste">Ustavić</string>
-    <string name="coordinate_input_accuracy_description">Aŭtamatyčna pieraklučycca ŭ nastupnaje pole paśla ŭvodu %1$d dziesiatkovych ličbaŭ.</string>
-    <string name="coordinate_input_accuracy">%1$d ličbaŭ</string>
     <string name="go_to_next_field">Nastupnaje polie</string>
     <string name="rename_marker">Pierajmienavać paznaku</string>
     <string name="appearance_on_the_map">Źniešni vyhlad na mapie</string>
@@ -2748,7 +2743,6 @@ Praparcyjnaj pamiacі %4$s MB (Abmiežavańnie Android %5$s MB, Dalvik %6$s MB).
     <string name="in_app_purchase_desc">Razavy placiož</string>
     <string name="in_app_purchase_desc_ex">Adnojčy nabyty, heta budzie zaŭsiody dastupny dlia vas.</string>
     <string name="purchase_unlim_title">Kupić - %1$s</string>
-    <string name="purchase_subscription_title">Papisacca - %1$s</string>
     <string name="wikivoyage_offline">Aŭtanomny Wikivoyage</string>
     <string name="unlimited_downloads">Nieabmiežavanyja spampoŭki</string>
     <string name="wikipedia_offline">Aŭtanomnaja Vikipedyja</string>

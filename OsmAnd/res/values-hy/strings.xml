@@ -317,7 +317,7 @@
     <string name="shared_string_slope">Լանջ</string>
     <string name="add_new_folder">Ավելացնել նոր թղթապանակ</string>
     <string name="points_delete_multiple_succesful">Կետ(եր)ը ջնջված է:</string>
-    <string name="points_delete_multiple">Դուք մտադիր եք ջնջել կետ(եր)ը: Համոզված եք?</string>
+    <string name="points_delete_multiple">Դուք մտադիր եք ջնջել %1$d կետ(եր)ը: Համոզված եք?</string>
     <string name="track_points_category_name">Ճանապարհային կետեր, POI, հատկանիշներ</string>
     <string name="shared_string_gpx_track">Տրեկ</string>
     <string name="max_speed">Առավելագույն արագություն</string>
@@ -394,7 +394,6 @@
     <string name="osm_live_subscription_desc">Բաժանորդագրությունը հնարավորութուն է տալիս անսահմանափակ թարմացումներ ներբեռնել աշխարհի ցանկացած քարտեզներ ամեն ժամ, ամենօրյա, շաբաթական:</string>
     <string name="get_it">Ստանալ այն</string>
     <string name="get_for">Ստանալ %1$s</string>
-    <string name="get_for_month">Ստանալ %1$s ամիսը</string>
     <string name="osm_live_banner_desc">Ստացեք քարտեզի անսահմանափակ ներբեռնման հնարավորութուն ինչպես նաև քարտեզների թարմացում ավելի հաճախ, քան ամիսը մեկ անգամ`շաբաթական, ամենօրյա կամ ամեն ժամ:</string>
     <string name="osmand_plus_banner_desc">Անսահմանափակ քարտեզների ներբեռնում , թարմացումներ, եւ Wikipedia plugin։</string>
     <string name="si_mi_meters">Մղոններ/մետր</string>
@@ -977,7 +976,7 @@
     <string name="back_to_map">Վերադառնալ քարտեզին</string>
     <string name="share_note">Տարածեք նշումը</string>
     <string name="location_on_map">Կոորդինատներ.
-\nԼայնությունը %1$
+\nԼայնությունը %1$s
 \nԵրկայնություն %2$s</string>
     <string name="watch">Դիտել</string>
     <string name="notes">Նշումներ</string>
@@ -1507,7 +1506,6 @@
 \nֆոնային ռեժիմի</string>
     <string name="bg_service_sleep_mode_on">Անջատեք
 \nֆոնային ռեժիմի</string>
-    <string name="gps_wakeup_interval">GPS-ի արթնացնող ժամանակահատված</string>
     <string name="int_continuosly">Մշտական</string>
     <string name="screen_is_locked">Էկրանի բացելու համար թակել կողպեքի պատկերակին</string>
     <string name="map_widget_top_text">Փողոցի անունը</string>
@@ -1856,7 +1854,6 @@
     <string name="create_poi_link_to_osm_doc">
         <u>1Online OSM</u>2 քարտեզ նկրաներով։</string>
     <string name="error_doing_search">Հնարավոր չէ կատարել անցանց(offline) որոնում:</string>
-    <string name="search_offline_geo_error">Հնարավոր չէ վերլուծել հարցումը \'%s\'։</string>
     <string name="search_osm_offline">Որոնում ըստ աշխարհագրական դիրքի</string>
     <string name="system_locale">Համակարգային</string>
     <string name="plugin_nautical_descr">"Այս plugin-ը հարստացնում է OsmAnd նավարկության հավելվածը  ինչպես նաևւ ծովային քարտեզներով նավակների համար, ծովագնացության և  այլ տեսակի ջրային շրջաններում
@@ -2400,7 +2397,7 @@
     <string name="quick_action_map_source">Փոխել քարտեզի աղբյուրը</string>
     <string name="quick_action_map_source_title">Քարտեզի աղբյուրները</string>
     <string name="quick_action_map_source_action">Ավելացնել քարտեզի աղբյուրները</string>
-    <string name="quick_action_map_source_switch">Քարտեզի աղբյուրը փոխվել է «%»։</string>
+    <string name="quick_action_map_source_switch">Քարտեզի աղբյուրը փոխվել է «%s»։</string>
     <string name="quick_action_btn_tutorial_title">Փոխել կոճակի դիրքը</string>
     <string name="quick_action_btn_tutorial_descr">Երկարատև սեղմումը և քաշելը փոխում է կոճակի դիրքը էկրանի վրա։</string>
     <string name="shared_string_action_name">Գործողության անունը</string>
@@ -2437,7 +2434,6 @@
     <string name="empty_state_markers_history_desc">Այս էկրանին կհայտնվեն մարկերներ, որոնք նշված են ինչպես անցած։</string>
     <string name="digits_quantity">Տասներորդ թվերի թվաքանակը</string>
     <string name="show_number_pad">Ցուցադրել թվային վահանակը</string>
-    <string name="coordinate_input_accuracy">%1$d թվեր</string>
     <string name="mark_passed">Նշել անցած</string>
     <string name="empty_state_osm_edits">Ստեղծեք կամ փոփոխել OSM օբյեկտները</string>
     <string name="empty_state_osm_edits_descr">Ստեղծեք կամ փոփոխեք OSM POI-րը, բացեք կամ մեկնաբանեք OSM-ի նշումները և ուղարկեք գրանցված GPX ֆայլեր:</string>
@@ -2488,7 +2484,6 @@
     <string name="show_arrows_descr">Ցուցադրել մեկ կամ երկու նետ, նշելով ակտիվ մարկերների ուղղությունը:</string>
     <string name="distance_indication_descr">Ընտրեք, թե ինչպես ցուցադրեք հեռավորությունը մինչև ակտիվ մարկերներին:</string>
     <string name="active_markers_descr">Ընտրեք, թե որքան \"ուղղության ցուցիչներ\" ցույց տալ:</string>
-    <string name="coordinate_input_accuracy_description">Ավտոմատ առաջընթաց հաջորդ դաշտ տասնորդական կետից հետո մուտքագրելուց %1$d թվեր:</string>
     <string name="tap_on_map_to_hide_interface_descr">Սեղմելով քարտեզի վրա փոխարինում են հսկողության կոճակները եւ վիջեթները:</string>
     <string name="tap_on_map_to_hide_interface">Ամբողջ էկրանով ռեժիմ</string>
     <string name="osm_recipient_stat">"Խմբագրումները կազմում են %1$s, գումարը  %2$s mBTC"</string>
@@ -2552,7 +2547,6 @@
     <string name="in_app_purchase_desc">Մեկանգամյա վճարում</string>
     <string name="in_app_purchase_desc_ex">Մի անգամ գնելուց հետո այն մշտապես մատչելի կլինի ձեզ համար:</string>
     <string name="purchase_unlim_title">Գնել - %1$s</string>
-    <string name="purchase_subscription_title">Բաժանորդագրվել - %1$s</string>
     <string name="wikivoyage_offline">Վիքիուղեցույցը անցանց ռեժիմում</string>
     <string name="unlimited_downloads">Անսահմանափակ ներբեռնում</string>
     <string name="wikipedia_offline">Վիքիպեդիա (անցանց)</string>
@@ -2687,7 +2681,7 @@
 \n
 \n "</string>
     <string name="commiting_way">Ճանապարհի ուղղում…</string>
-    <string name="increase_search_radius_to">Ավելացնել որոնման շառավիղը</string>
+    <string name="increase_search_radius_to">Ավելացնել որոնման շառավիղը %1$s</string>
     <string name="send_search_query_description">Մենք կուղարկենք ձեր որոնման հարցումը՝ \"%1$s\", ինչպես նաև ձեր գտնվելու վայրը։ \n
         \n" Մենք  չենք հավաքում անձնական տեղեկություններ, որոնման տվյալները օգտագործվում են միայն, որոնման ալգորիթմը բարելավելու համար:"</string>
     <string name="send_search_query">Ուղարկեք որոնման հարցումը\?</string>

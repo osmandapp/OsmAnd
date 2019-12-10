@@ -249,4 +249,5 @@
     <string name="start_end_date">תאריך התחלה - סיום</string>
     <string name="location_sharing_status">משותף: %1$s</string>
     <string name="shared_string_enabled">מופעל</string>
+    <string name="saved_messages">הודעות שמורות</string>
 </resources>

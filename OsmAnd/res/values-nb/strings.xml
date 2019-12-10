@@ -944,7 +944,6 @@
 \n i bakgrunnen</string>
     <string name="bg_service_sleep_mode_on">Stopp
 \n kjøring i bakgrunnen</string>
-    <string name="gps_wakeup_interval">GPS-vekkingsintervall: %s</string>
     <string name="route_kl">Hold til venstre og fortsett</string>
     <string name="route_kr">Hold til høyre og fortsett</string>
     <string name="debugging_and_development">OsmAnd-utvikling</string>
@@ -1223,7 +1222,7 @@
     <string name="rendering_value_translucent_blue_name">Gjennomskinnelig blå</string>
     <string name="rendering_value_purple_name">Lilla</string>
     <string name="rendering_value_translucent_purple_name">Gjennomskinnelig lilla</string>
-    <string name="restart_is_required">En omstart av OsmAnd krevs for å ta i bruk endringer.</string>
+    <string name="restart_is_required">En omstart av OsmAnd kreves for å ta i bruk endringen.</string>
     <string name="plugin_touringview_name">Turkartvisning</string>
     <string name="rendering_value__name">Standard</string>
     <string name="rendering_value_highContrastRoads_name">Veier med høy kontrast</string>
@@ -1716,7 +1715,6 @@
     <string name="christmas_desc">I anledning jul og nyttår kan du velge å vise interessepunkter knyttet til julen: juletrær, markeder, etc.</string>
     <string name="translit_name_if_miss">Transkriber hvis %1$s navn mangler</string>
     <string name="translit_names">Transkriber navn</string>
-    <string name="get_for_month">Få for %1$s måned</string>
     <string name="osm_live_banner_desc">Få ubegrensede kartnedlastinger, som legger til ukentlige, daglige, og selv timevise oppdateringer.</string>
     <string name="access_direction_audio_feedback">Lydbaserte anvisninger</string>
     <string name="access_direction_audio_feedback_descr">Indiker retning til målpunkt med lyd.</string>
@@ -2325,8 +2323,6 @@
     <string name="shared_string_right">Høyre</string>
     <string name="shared_string_left">Venstre</string>
     <string name="shared_string_paste">Lim inn</string>
-    <string name="coordinate_input_accuracy_description">Skift automatisk til det neste feltet etter å ha angitt %1$d desimaler.</string>
-    <string name="coordinate_input_accuracy">%1$d sifre</string>
     <string name="go_to_next_field">Neste felt</string>
     <string name="rename_marker">Gi nytt navn til markør</string>
     <string name="empty_state_osm_edits_descr">Opprett eller endre OSM-interessepunkter, åpne eller kommenter OSM-notater, og send inn innspilte GPX-filer.</string>
@@ -2537,7 +2533,6 @@
 \n Fra Afghanistan til Zimbabwe, fra Australia til USA. Argentina, Brasil, Canada, Frankrike, Tyskland, Mexico, Storbritannia, Spania, … 
 \n</string>
     <string name="rendering_attr_noPolygons_description">Gjør alle landarealelementer på kartet gjennomsiktige.</string>
-    <string name="search_offline_geo_error">Kunne ikke tolke geo-hensikt \"%s\".</string>
     <string name="foot">ft</string>
     <string name="nothing_found_in_radius">Ingenting funnet innen radiusen:</string>
     <string name="select_waypoints_category_description">Legg til alle sporets rutepunkter, eller velg separate kategorier.</string>
@@ -2651,7 +2646,6 @@
     <string name="daily_map_updates">Kartoppdateringer: Hver time</string>
     <string name="in_app_purchase">Kjøp i programmet</string>
     <string name="in_app_purchase_desc_ex">Når først kjøpt, vil det alltid være tilgjengelig for deg.</string>
-    <string name="purchase_subscription_title">Abonner - %1$s</string>
     <string name="paid_app">Betalt program</string>
     <string name="paid_plugin">Betalt tillegg</string>
     <string name="contour_lines_hillshade_maps">Kart for koter og relieffskygger</string>
@@ -3270,7 +3264,7 @@
     <string name="quick_action_hillshade_show">Vis relieffskygge</string>
     <string name="quick_action_hillshade_hide">Skjul relieffskygge</string>
     <string name="quick_action_show_hide_hillshade">Vis/skjul relieffskygge</string>
-    <string name="tts_initialization_error">Kan ikke starte tekst-til-tale -motor</string>
+    <string name="tts_initialization_error">Kan ikke starte tekst-til-tale-motor</string>
     <string name="simulate_your_location_gpx_descr">Simuler posisjonen din ved bruk av et innspilt GPX-spor.</string>
     <string name="exported_osmand_profile">OsmAnd-profil: %1$s</string>
     <string name="profile_import">Profil-import:</string>
@@ -3327,7 +3321,6 @@
     <string name="rendering_attr_piste_difficulty_connection_name">Overgang</string>
     <string name="track_saved">Spor lagret</string>
     <string name="empty_filename">Filnavnet er tomt</string>
-    <string name="swap_start_and_destination">Bytt start og mål</string>
     <string name="turn_screen_on_router">Vekk for sving</string>
     <string name="turn_screen_on_time_descr">Juster hvor lenge skjermen skal forbli påslått.</string>
     <string name="turn_screen_on_sensor">Bruk nærhetssensor.</string>
@@ -3357,7 +3350,6 @@
     <string name="app_mode_wagon">Vogn</string>
     <string name="app_mode_pickup_truck">Pickup</string>
     <string name="get_discount_title">Kjøp %1$d %2$s med %3$s rabatt.</string>
-    <string name="get_free_trial_title">Start din %1$d %2$s gratis prøveperiode.</string>
     <string name="get_discount_first_part">%1$s de første %2$s</string>
     <string name="get_discount_first_few_part">%1$s de første %2$s</string>
     <string name="get_discount_second_part">så %1$s</string>
@@ -3396,4 +3388,9 @@
     <string name="rendering_attr_piste_difficulty_extreme_name">Ekstremkjøring</string>
     <string name="rendering_attr_piste_difficulty_undefined_name">Udefinert</string>
     <string name="routeInfo_piste_difficulty_name">Løypevanskelighetsgrad</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_name">Nodenettverk</string>
+    <string name="join_segments">Bind sammen segmenter</string>
+    <string name="add_new_profile_q">Legg til ny profil «%1$s»\?</string>
+    <string name="save_heading">Ta med overskrift</string>
+    <string name="save_heading_descr">Lagre overskrift på hvert veipunkt under opptak.</string>
 </resources>

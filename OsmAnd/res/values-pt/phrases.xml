@@ -3751,4 +3751,5 @@
     <string name="poi_community_gender_female">Sexo comunitário: feminino</string>
     <string name="poi_community_gender_male">Sexo comunitário: masculino</string>
     <string name="poi_community_gender_mixed">Sexo comunitário: misto</string>
+    <string name="poi_grave">Grave</string>
 </resources>

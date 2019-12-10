@@ -39,7 +39,6 @@
     <string name="map_widget_show_ruler">Linjal</string>
     <string name="map_widget_view_direction">Färdriktning</string>
     <string name="map_widget_transparent">Genomskinliga widgetar</string>
-    <string name="gps_wakeup_interval">GPS-väckningsintervall: %s</string>
     <string name="int_continuosly">Kontinuerlig</string>
     <string name="map_widget_reset">Återställ till standard</string>
     <string name="map_widget_time">Tid som är kvar</string>
@@ -417,7 +416,6 @@ Nyttjat utrymme är {1} MB.
     <string name="level_to_switch_vector_raster_descr">Minsta zoomnivå för att använda vektorkartor.</string>
     <string name="level_to_switch_vector_raster">Minsta vektor-zoomnivå</string>
     <string name="error_doing_search">Ett fel uppstod vid offline-sökning.</string>
-    <string name="search_offline_geo_error">Det gick inte att tolka geo-uppsåt \'%s\'.</string>
     <string name="search_osm_offline">Sök adress med hjälp av offline-kartor</string>
     <string name="system_locale">System</string>
     <string name="preferred_locale_descr">Välj visningsspråk (träder i kraft när OsmAnd startas om).</string>
@@ -1777,7 +1775,7 @@ Long %2$s</string>
     <string name="available_maps">Tillgängliga kartor</string>
     <string name="last_update">Senaste uppdateringen: %s</string>
     <string name="update_time">Uppdateringstid</string>
-    <string name="updates_size">Uppdateringar: %s</string>
+    <string name="updates_size">Uppdateringar</string>
     <string name="last_map_change">Senaste kartändring: %s</string>
     <string name="night">Natt</string>
     <string name="hourly">Varje timma</string>
@@ -1982,7 +1980,6 @@ Om du tycker om OsmAnd och OSM och vill stödja dem så är detta ett utmärkt s
     <string name="donation_to_osm">Donation till OpenStreetMap-gemenskapen</string>
     <string name="get_it">Skaffa det</string>
     <string name="get_for">Skaffa för %1$s</string>
-    <string name="get_for_month">Skaffa för %1$s månad</string>
     <string name="skip_map_downloading_desc">"Du har inte några offline-kartor installerade. Du kan välja en karta från listan eller hämta kartor senare via \'Meny  - %1$s\'."</string>
     <string name="search_map">Söker efter kartor …</string>
     <string name="first_usage_greeting">Erhåll vägbeskrivningar och upptäck nya platser utan Internetuppkoppling</string>
@@ -2380,8 +2377,6 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="shared_string_left">Vänster</string>
     <string name="show_number_pad">Visa numeriskt tangentbord</string>
     <string name="shared_string_paste">Klistra in</string>
-    <string name="coordinate_input_accuracy_description">Växla automatiskt till nästa fält efter du skrivit in %1$d decimaler.</string>
-    <string name="coordinate_input_accuracy">%1$d decimaler</string>
     <string name="go_to_next_field">Nästa fält</string>
     <string name="rename_marker">Byt namn på markör</string>
     <string name="tap_on_map_to_hide_interface_descr">Ett tryck på kartan växlar kontrollknappar och widgets.</string>
@@ -2586,7 +2581,6 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="in_app_purchase_desc">Engångsbetalning</string>
     <string name="in_app_purchase_desc_ex">När det väl är köpt, blir det permanent tillgängligt för dig.</string>
     <string name="purchase_unlim_title">Köp - %1$s</string>
-    <string name="purchase_subscription_title">Prenumerera - %1$s</string>
     <string name="wikivoyage_offline">Wikivoyage frånkopplad</string>
     <string name="unlimited_downloads">Obegränsat antal nedladdningar</string>
     <string name="wikipedia_offline">Wikipedia frånkopplad</string>
@@ -2709,43 +2703,43 @@ Vänligen tillhandahåll fullständig kod</string>
 \n
 \n</string>
     <string name="quick_action_page_list_descr">Att trycka på denna åtgärdsknapp bläddrar genom listan nedan.</string>
-    <string name="poi_cannot_be_found">Nod eller väg kan inte hittas.</string>
+    <string name="poi_cannot_be_found">Kunde inte hitta nod eller väg.</string>
     <string name="search_no_results_feedback">Inga sökresultat?
 \nGe oss feedback</string>
-    <string name="increase_search_radius_to">Öka sökradie till %1$s</string>
-    <string name="thank_you_for_feedback">Tack för återkoppling</string>
+    <string name="increase_search_radius_to">Utöka sökradie till %1$s</string>
+    <string name="thank_you_for_feedback">Tack för din återkoppling</string>
     <string name="send_search_query">Skicka sökförfråga?</string>
     <string name="shared_string_world">Värld</string>
-    <string name="ask_for_location_permission">Ge OsmAnd tillstånd för plats för att fortsätta.</string>
+    <string name="ask_for_location_permission">Vänligen ge OsmAnd platsåtkomst för att fortsätta.</string>
     <string name="send_search_query_description">Vi skickar din sökfråga: \"%1$s\", såväl som din plats.\n
         \n Vi samlar inte in personlig information, vi behöver bara sökdata för att förbättra sökalgoritmen.</string>
-    <string name="third_party_application">Tredjepartsprogram</string>
+    <string name="third_party_application">Tredjepartsapp</string>
     <string name="search_street">Sök gata</string>
-    <string name="start_search_from_city">Välj en stad först</string>
+    <string name="start_search_from_city">Ange först stad/ort/plats</string>
     <string name="shared_string_restore">Återställ</string>
     <string name="keep_passed_markers">Behåll passerade markörer på kartan</string>
-    <string name="powered_by_osmand">Drivs av OsmAnd</string>
+    <string name="powered_by_osmand">Av OsmAnd</string>
     <string name="osm_live_plan_pricing">Abonnemang &amp; Priser</string>
-    <string name="osm_live_payment_monthly_title">Betala månadsvis</string>
-    <string name="osm_live_payment_3_months_title">Betala var 3:e månad</string>
-    <string name="osm_live_payment_annual_title">Betala en gång om året</string>
+    <string name="osm_live_payment_monthly_title">Månadsvis</string>
+    <string name="osm_live_payment_3_months_title">Var tredje månad</string>
+    <string name="osm_live_payment_annual_title">Årligen</string>
     <string name="osm_live_payment_month_cost_descr">%1$s / månad</string>
     <string name="osm_live_payment_month_cost_descr_ex">%1$.2f %2$s / månad</string>
-    <string name="osm_live_payment_discount_descr">Spara %1$s!</string>
-    <string name="osm_live_payment_current_subscription">Ditt nuvarande abonnemang</string>
+    <string name="osm_live_payment_discount_descr">Spara %1$s.</string>
+    <string name="osm_live_payment_current_subscription">Aktuell prenumeration</string>
     <string name="osm_live_payment_renews_monthly">Förnyas varje månad</string>
     <string name="osm_live_payment_renews_quarterly">Förnyas kvartalsvis</string>
     <string name="osm_live_payment_renews_annually">Förnyas årligen</string>
     <string name="default_price_currency_format">%1$.2f %2$s</string>
-    <string name="osm_live_payment_header">Välj en passande betalningsperiod:</string>
-    <string name="osm_live_payment_contribute_descr">En del av intäkterna går till OpenStreetMap bidragsgivare.</string>
+    <string name="osm_live_payment_header">Betalningsintervall:</string>
+    <string name="osm_live_payment_contribute_descr">Donationer hjälper till att finansiera OpenStreetMap-kartografi.</string>
     <string name="markers_remove_dialog_msg">Ta bort kartmarkör \'%s\'\?</string>
     <string name="edit_map_marker">Redigera kartmarkör</string>
     <string name="osm_live_subscriptions">Abonnemang</string>
     <string name="keep_passed_markers_descr">Markörer tillagda som en grupp av favoriter eller GPX waypoints märkta som \'passerad\' kommer att finnas kvar på kartan. Om gruppen inte är aktiv, kommer markörerna att försvinna från kartan.</string>
     <string name="shared_string_swap">Ändra</string>
     <string name="show_more">Visa mer</string>
-    <string name="tracks_on_map">Spår på kartan</string>
+    <string name="tracks_on_map">Visade spår</string>
     <string name="previous_route">Föregående rutt</string>
     <string name="add_home">Lägg till bostad</string>
     <string name="add_work">Lägg till arbetsplats</string>
@@ -2757,38 +2751,38 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="shared_string_height">Höjd</string>
     <string name="add_destination_point">Lägg till destination</string>
     <string name="add_intermediate_point">Lägg till hållplats</string>
-    <string name="add_start_point">Lägg till startpunkt</string>
+    <string name="add_start_point">Ställ in startpunkt</string>
     <string name="intermediate_waypoint">Hållplats</string>
     <string name="transfers">övergångar</string>
     <string name="on_foot">till fots</string>
     <string name="route_way">Väg</string>
     <string name="points_of_interests">Intressepunkter (IP)</string>
-    <string name="waiting_for_route_calculation">Väntar på beräkning av rutten</string>
+    <string name="waiting_for_route_calculation">Beräknar rutt…</string>
     <string name="app_mode_public_transport">Kollektivtrafik</string>
-    <string name="avoid_roads_descr">Markera en väg på kartan eller i listan nedan som du vill undvika färdas på:</string>
+    <string name="avoid_roads_descr">Välj en väg som du vill undvika under navigeringen, antingen på kartan eller i listan nedan:</string>
     <string name="show_along_the_route">Visa utmed rutten</string>
     <string name="simulate_navigation">Simulera navigering</string>
-    <string name="choose_track_file_to_follow">Välj en spårfil att följa</string>
+    <string name="choose_track_file_to_follow">Välj spårfil att följa</string>
     <string name="voice_announcements">Röstmeddelanden</string>
     <string name="intermediate_destinations">Mellanliggande destinationer</string>
     <string name="arrive_at_time">Ankomst klockan %1$s</string>
-    <string name="rate_dialog_descr">Vänligen ge oss 30 sekunder genom att dela din återkoppling och betygsätta vårt arbete på Google Play.</string>
-    <string name="button_rate">Betygsätt</string>
+    <string name="rate_dialog_descr">Vänligen dela din feedback och betygsätt vårt arbete på Google Play.</string>
+    <string name="button_rate">Okej</string>
     <string name="shared_string_privacy_policy">Sekretesspolicy</string>
-    <string name="help_us_make_osmand_better">Hjälp oss att göra OsmAnd bättre!</string>
-    <string name="make_osmand_better_descr">Tillåt OsmAnd att samla in och bearbeta anonyma applikationsanvändningsdata. Vi samlar inte in eller lagrar data om din position, eller om några platser du ser på kartan. 
-\n 
-\nDu kan när som helst ändra ditt val i Inställningar &gt; Sekretess och säkerhet.</string>
+    <string name="help_us_make_osmand_better">Hjälp oss att göra OsmAnd bättre</string>
+    <string name="make_osmand_better_descr">Tillåt OsmAnd att samla in och bearbeta data för anonym appanvändning. Inga data om din position eller dina platser du visar på kartan samlas in.
+\n
+\nKonfigurera när som helst i \"Inställningar\" → \"Sekretess och Säkerhet\".</string>
     <string name="choose_data_to_share">Välj vilken typ av data du vill dela:</string>
     <string name="downloaded_maps">Kartor nedladdade</string>
     <string name="visited_screens">Besökta skärmar</string>
     <string name="collected_data_descr">Definiera vilka data du tillåter OsmAnd att dela.</string>
-    <string name="downloaded_maps_collect_descr">Hjälper oss att förstå vilka kartor över vilka regioner och länder som är de mest populära.</string>
-    <string name="visited_screens_collect_descr">Hjälper oss att förstå vilka OsmAnd-funktioner som är de mest populära.</string>
-    <string name="privacy_and_security_change_descr">Genom att trycka på \"Tillåt\" godkänner du våra %1$s</string>
+    <string name="downloaded_maps_collect_descr">Hjälper oss att förstå land och region karta popularitet.</string>
+    <string name="visited_screens_collect_descr">Hjälper oss att förstå OsmAnd-funktioners popularitet.</string>
+    <string name="privacy_and_security_change_descr">Trycka på \"Tillåt\" om du godkänner våra %1$s</string>
     <string name="settings_privacy_and_security">Sekretess och säkerhet</string>
-    <string name="settings_privacy_and_security_desc">Välj vilka data du delar med oss</string>
-    <string name="shared_string_no_thank_you">Nej, tack</string>
+    <string name="settings_privacy_and_security_desc">Välj vilka data du delar</string>
+    <string name="shared_string_no_thank_you">Nej tack</string>
     <string name="shared_string_allow">Tillåt</string>
     <string name="profile_name_hint">Profilnamn</string>
     <string name="nav_type_hint">Navigeringstyp</string>
@@ -2807,16 +2801,16 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="profile_type_descr_string">Typ: %s</string>
     <string name="profile_type_base_string">Basprofil</string>
     <string name="profile_alert_need_routing_type_title">Välj navigeringstyp</string>
-    <string name="profile_alert_need_routing_type_msg">Välj en navigeringstyp för den nya applikationsprofilen</string>
+    <string name="profile_alert_need_routing_type_msg">Välj en navigeringstyp för den nya approfilen</string>
     <string name="profile_alert_need_profile_name_title">Ange profilnamn</string>
-    <string name="profile_alert_need_profile_name_msg">Profilnamnet ska inte vara tomt!</string>
-    <string name="profile_alert_duplicate_name_msg">Det finns redan profil med sådant namn</string>
+    <string name="profile_alert_need_profile_name_msg">Du måste ange ett profilnamn först.</string>
+    <string name="profile_alert_duplicate_name_msg">Det finns redan en profil med det namnet</string>
     <string name="profile_alert_cant_delete_base">Du kan inte ta bort OsmAnd-basprofiler</string>
     <string name="profile_alert_need_save_title">Spara ändringar</string>
-    <string name="profile_alert_need_save_msg">Du måste spara ändringar i Profil innan du fortsätter</string>
+    <string name="profile_alert_need_save_msg">Spara ändringar i profilen först</string>
     <string name="profile_alert_delete_title">Ta bort profil</string>
-    <string name="profile_alert_delete_msg">Är du säker på att du vill ta bort %s profil</string>
-    <string name="select_base_profile_dialog_title">Välj basprofil</string>
+    <string name="profile_alert_delete_msg">Är du säker på att du vill ta bort profilen \"%s\"</string>
+    <string name="select_base_profile_dialog_title">Välj en basprofil</string>
     <string name="process_downloading_service">OsmAnd-hämtningstjänst</string>
     <string name="shared_string_icon">Ikon</string>
     <string name="collected_data">Insamlade data</string>
@@ -2874,7 +2868,6 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="gpx_join_gaps">Ta bort mellanrum</string>
     <string name="temporary_conditional_routing">Överväg tillfälliga begränsningar</string>
     <string name="get_discount_title">Få %1$d %2$s på %3$s av.</string>
-    <string name="get_free_trial_title">Starta din kostnadsfria provperiod på %1$d %2$s.</string>
     <string name="get_discount_first_part">%1$s för de första %2$s</string>
     <string name="get_discount_first_few_part">%1$s för de första %2$s</string>
     <string name="configure_profile_info">Inställningar för profilen:</string>
@@ -2927,4 +2920,5 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="plugins_settings">Tilläggsinställningar</string>
     <string name="app_mode_utv">Sida vid sida</string>
     <string name="files_copied">%1$d filer kopierades (%2$s).</string>
+    <string name="swap_start_and_destination">Växla start och mål</string>
 </resources>

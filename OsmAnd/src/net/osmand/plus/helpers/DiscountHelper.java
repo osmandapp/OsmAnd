@@ -141,13 +141,8 @@ public class DiscountHelper {
 			JSONObject application = obj.getJSONObject("application");
 			boolean showChristmasDialog = obj.optBoolean("show_christmas_dialog", false);
 
-			if (data.url.startsWith(INAPP_PREFIX) && data.url.length() > INAPP_PREFIX.length()) {
-				String inAppSku = data.url.substring(INAPP_PREFIX.length());
-				InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
-				if (purchaseHelper != null
-						&& purchaseHelper.isPurchased(inAppSku) || InAppPurchaseHelper.isSubscribedToLiveUpdates(app)) {
-					return;
-				}
+			if (!validateUrl(app, data.url)) {
+				return;
 			}
 
 			if (data.oneOfConditions != null) {
@@ -215,7 +210,19 @@ public class DiscountHelper {
 		}
 	}
 
-	private static String parseUrl(OsmandApplication app, String url) {
+	public static boolean validateUrl(OsmandApplication app, String url) {
+		if (url.startsWith(INAPP_PREFIX) && url.length() > INAPP_PREFIX.length()) {
+			String inAppSku = url.substring(INAPP_PREFIX.length());
+			InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();
+			if (purchaseHelper != null
+					&& purchaseHelper.isPurchased(inAppSku) || InAppPurchaseHelper.isSubscribedToLiveUpdates(app)) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public static String parseUrl(OsmandApplication app, String url) {
 		if (!Algorithms.isEmpty(url)) {
 			int i = url.indexOf("osmand-market-app:");
 			if (i != -1) {
@@ -297,7 +304,7 @@ public class DiscountHelper {
 		mFilterVisible = true;
 	}
 
-	private static void openUrl(final MapActivity mapActivity, String url) {
+	public static void openUrl(final MapActivity mapActivity, String url) {
 		if (url.startsWith(INAPP_PREFIX)) {
 			OsmandApplication app = mapActivity.getMyApplication();
 			InAppPurchaseHelper purchaseHelper = app.getInAppPurchaseHelper();

@@ -1104,7 +1104,6 @@ Lon: %2$s</string>
     <string name="map_widget_transparent">Diafanaj fenestraĵoj</string>
     <string name="bg_service_sleep_mode_off">Lanĉi\n aplikaĵon fone</string>
     <string name="bg_service_sleep_mode_on">Ĉesigi\n fon-laboradon de aplikaĵo</string>
-    <string name="gps_wakeup_interval">GPS-a vekintervalo: %s</string>
     <string name="int_continuosly">Konstanta</string>
     <string name="screen_is_locked">Frapetu la emblemon de pendseruro por malŝlosi</string>
     <string name="map_widget_top_text">Stratnomo</string>
@@ -1525,7 +1524,6 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="create_poi_link_to_osm_doc">
         <u>Enreta OSM</u> map-klasigo kun bildoj.</string>
     <string name="error_doing_search">Ne povas serĉi eksterrete.</string>
-    <string name="search_offline_geo_error">Ne povas interpreti “%s”.</string>
     <string name="search_osm_offline">Serĉi per pozici-trova servo</string>
     <string name="preferred_locale_descr">Elekti lingvon de fasado (post ŝanĝi necesas restarti la aplikaĵon).</string>
     <string name="unit_of_length">Unuoj de longo</string>
@@ -2020,7 +2018,6 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="no_update_info_desc">Ne serĉi pri novaj versioj aŭ OsmAnd-rilataj rabatoj.</string>
     <string name="get_it">Havigi ĝin</string>
     <string name="get_for">Havigi ĝin por %1$s</string>
-    <string name="get_for_month">Havigi ĝin por %1$s monatoj</string>
     <string name="osm_live_banner_desc">Havigu senlimigitan elŝutojn de mapoj kaj ĉiusemajnaj, ĉiutagajn kaj eĉ ĉiuhorajn ĝisdatigojn.</string>
     <string name="osmand_plus_banner_desc">Senlimigitaj map-elŝutoj, ĝisdatigoj kaj kromprogramo Vikipedio.</string>
     <string name="si_mi_meters">Mejloj/metroj</string>
@@ -2561,8 +2558,6 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="shared_string_left">Maldekstre</string>
     <string name="show_number_pad">Montri nombran klavaron</string>
     <string name="shared_string_paste">Englui</string>
-    <string name="coordinate_input_accuracy_description">Aŭtomate baskuli al la sekva kampo post entajpi %1$d dekumajn ciferojn.</string>
-    <string name="coordinate_input_accuracy">%1$d ciferoj</string>
     <string name="go_to_next_field">Sekva kampo</string>
     <string name="appearance_on_the_map">Aspekto sur la mapo</string>
     <string name="add_track_to_markers_descr">Elektu kurson por aldoni ĝiajn navigadpunktojn al map-markoj.</string>
@@ -2717,7 +2712,6 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="in_app_purchase_desc">Unufoja pago</string>
     <string name="in_app_purchase_desc_ex">Kiam aĉetita, por ĉiam estos disponebla por vi.</string>
     <string name="purchase_unlim_title">Aĉeti - %1$s</string>
-    <string name="purchase_subscription_title">Aboni - %1$s</string>
     <string name="wikivoyage_offline">Vikivojaĝo eksterrete</string>
     <string name="unlimited_downloads">Senlimaj elŝutoj</string>
     <string name="wikipedia_offline">Vikipedio eksterrete</string>
@@ -3207,8 +3201,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="years_5">jaroj</string>
     <string name="months_3">tri monatoj</string>
     <string name="price_free">senpaga</string>
-    <string name="get_discount_title">Akiru %1$d %2$s kun rabato %$3$s.</string>
-    <string name="get_free_trial_title">Ekigu %1$d %2$s senpagan provperiodon.</string>
+    <string name="get_discount_title">Akiru %1$d %2$s kun rabato %3$s.</string>
     <string name="get_discount_first_part">%1$s por la unua %2$s</string>
     <string name="get_discount_first_few_part">%1$s por la unuaj %2$s</string>
     <string name="get_discount_second_part">sekve %1$s</string>
@@ -3383,4 +3376,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="shared_string_turn_off">Malaktivigi</string>
     <string name="new_plugin_added">Aldonis novan kromprogramon</string>
     <string name="join_segments">Kunigi segmentojn</string>
+    <string name="add_new_profile_q">Ĉu aldoni novan profilon “%1$s”\?</string>
+    <string name="save_heading">Inkluzivi direkton</string>
+    <string name="save_heading_descr">Konservi direkton al ĉiu punkto de kurso dum registri.</string>
 </resources>

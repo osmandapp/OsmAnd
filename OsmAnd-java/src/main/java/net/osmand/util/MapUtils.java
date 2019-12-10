@@ -410,6 +410,16 @@ public class MapUtils {
 		}
 		return rotate;
 	}
+	
+	public static float normalizeDegrees360(float degrees) {
+		while (degrees < 0.0f) {
+			degrees += 360.0f;
+		}
+		while (degrees >= 360.0f) {
+			degrees -= 360.0f;
+		}
+		return degrees;
+	}
 
 	/**
 	 * @param diff align difference between 2 angles ]-PI, PI]

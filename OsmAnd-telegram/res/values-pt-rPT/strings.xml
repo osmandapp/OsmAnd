@@ -96,9 +96,7 @@
     <string name="not_possible_to_send_to_telegram_chats">Não é possível enviar para bate-papo do Telegram:</string>
     <string name="not_sent_yet">Ainda não enviado</string>
     <string name="points_size">%1$d pontos</string>
-    <string name="welcome_descr">
-        <b>OsmAnd Tracker</b> permite que partilhe a sua localização e veja a dos outros no OsmAnd.<br/>
-        <br/>O app usa a API Telegram e você precisa de uma conta Telegram.</string>
+    <string name="welcome_descr"><b>OsmAnd Tracker</b> permite que partilhe a sua localização e veja a dos outros no OsmAnd.<br/> <br/>O app usa a API Telegram e você precisa de uma conta Telegram.</string>
     <string name="min_logging_distance_descr">Filtro: distância mínima para registrar um novo ponto</string>
     <string name="device_name_cannot_be_empty">O nome do aparelho não pode estar vazio</string>
     <string name="yard">yd</string>
@@ -201,7 +199,7 @@
     <string name="shared_string_authorization_descr">Por favor, insira o número de telefone do seu Telegram em formato internacional</string>
     <string name="set_visible_time_for_all">Definir tempo visível para todos</string>
     <string name="phone_number_title">Número de telefone</string>
-    <string name="privacy_policy_agree">Ao clicar em continuar, você concorda com as condições da política de privacidade do Telegram e da política de privacidade da OsmAnd.</string>
+    <string name="privacy_policy_agree">Ao clicar em \"Continuar\" você concorda com as condições da política de privacidade do Telegram e OsmAnd.</string>
     <string name="si_mi_feet">Milhas/pés</string>
     <string name="monitoring_is_enabled">Monitoramento está ativado</string>
     <string name="osmand_connect_desc">Escolha a versão OsmAnd que OsmAnd Tracker usa para exibir posições.</string>
@@ -250,4 +248,5 @@
     <string name="choose_osmand_desc">Selecione a versão OsmAnd, onde os contatos serão exibidos no mapa.</string>
     <string name="si_mi_yard">Milhas/jardas</string>
     <string name="initializing">Iniciando</string>
+    <string name="saved_messages">Mensagens gravadas</string>
 </resources>

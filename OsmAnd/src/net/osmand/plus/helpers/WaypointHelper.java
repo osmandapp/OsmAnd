@@ -648,7 +648,7 @@ public class WaypointHelper {
 									i.getLatitude(), i.getLongitude()) < DISTANCE_IGNORE_DOUBLE_SPEEDCAMS) {
 						// ignore double speed cams
 					} else {
-						lw.setAnnounce(app.getSettings().SPEAK_SPEED_CAMERA.get());
+						lw.setAnnounce(app.getSettings().SPEAK_SPEED_CAMERA.getModeValue(mode));
 						array.add(lw);
 						prevSpeedCam = i;
 					}

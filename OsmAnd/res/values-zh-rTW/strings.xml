@@ -106,7 +106,6 @@
     <string name="map_widget_transparent">透明小工具</string>
     <string name="bg_service_sleep_mode_off">運行\n 應用程式在背景運轉</string>
     <string name="bg_service_sleep_mode_on">停止\n在背景執行</string>
-    <string name="gps_wakeup_interval">GPS 喚醒間隔：%s</string>
     <string name="int_continuosly">連續</string>
     <string name="screen_is_locked">輕點鎖的圖示以解鎖</string>
     <string name="map_widget_top_text">街道名稱</string>
@@ -456,7 +455,6 @@
     <string name="level_to_switch_vector_raster_descr">任何超出此縮放級別的，使用點陣圖。</string>
     <string name="level_to_switch_vector_raster">最小向量縮放比級別</string>
     <string name="error_doing_search">無法執行離線查尋。</string>
-    <string name="search_offline_geo_error">無法解析地理含義 \'%s\'。</string>
     <string name="search_osm_offline">按地理位置查尋</string>
     <string name="system_locale">系統</string>
     <string name="preferred_locale_descr">應用程式顯示語言（在 OsmAnd 重新啟動後套用）。</string>
@@ -2019,7 +2017,6 @@
     <string name="si_mi_meters">英里/米</string>
     <string name="first_usage_wizard_desc">讓 OsmAnd 確定您所在的位置和建議下載該區域的地圖。</string>
     <string name="get_for">獲得 %1$s</string>
-    <string name="get_for_month">每個月獲得 %1$s</string>
     <string name="no_update_info_desc">不要檢查新版本或 OsmAnd 相關的折扣。</string>
     <string name="get_it">獲得</string>
     <string name="osm_live_payment_desc">每個月會收取訂閱費用。您隨時都能在 Google Play 取消。</string>
@@ -2564,8 +2561,6 @@
     <string name="shared_string_left">左方</string>
     <string name="show_number_pad">顯示數字鍵盤</string>
     <string name="shared_string_paste">貼上</string>
-    <string name="coordinate_input_accuracy_description">在小數點後面輸入 %1$d 個數字以後，自動切換到下一段。</string>
-    <string name="coordinate_input_accuracy">%1$d 個數字</string>
     <string name="go_to_next_field">下一段</string>
     <string name="appearance_on_the_map">顯現在地圖上</string>
     <string name="add_track_to_markers_descr">選擇一個軌跡以將其航點新增至標記。</string>
@@ -2719,7 +2714,6 @@
     <string name="in_app_purchase_desc">一次性付款</string>
     <string name="in_app_purchase_desc_ex">購買之後，它對您來說就是永久可用了。</string>
     <string name="purchase_unlim_title">購買 - %1$s</string>
-    <string name="purchase_subscription_title">訂閱 - %1$s</string>
     <string name="wikivoyage_offline">離線維基導遊</string>
     <string name="unlimited_downloads">無限制的下載</string>
     <string name="wikipedia_offline">離線維基百科</string>
@@ -3216,7 +3210,6 @@
     <string name="months_3">三個月</string>
     <string name="price_free">免費</string>
     <string name="get_discount_title">以 %3$s 折扣的優惠取得 %1$d %2$s。</string>
-    <string name="get_free_trial_title">開始您的 %1$d %2$s 免費試用。</string>
     <string name="get_discount_first_part">供 %1$s 的第一次 %2$s</string>
     <string name="get_discount_first_few_part">供 %1$s 的第一次 %2$s</string>
     <string name="get_discount_second_part">然後 %1$s</string>
@@ -3369,7 +3362,6 @@
     <string name="profile_import_descr">要匯入設定檔，在裝置上選取其檔案並使用 OsmAnd 開啟。</string>
     <string name="file_import_error">%1$s 匯入錯誤：%2$s</string>
     <string name="file_imported_successfully">%1$s 成功匯入。</string>
-    <string name="swap_start_and_destination">交換起點與終點</string>
     <string name="rendering_value_white_name">白</string>
     <string name="swap_two_places">交換 %1$s 與 %2$s</string>
     <string name="route_start_point">起點</string>
@@ -3391,4 +3383,7 @@
     <string name="shared_string_turn_off">關閉</string>
     <string name="new_plugin_added">已新增新的外掛程式</string>
     <string name="join_segments">新增線段</string>
+    <string name="add_new_profile_q">新增新的設定檔「%1$s」？</string>
+    <string name="save_heading">包含標題</string>
+    <string name="save_heading_descr">在錄製時將標題儲存到每個追蹤點。</string>
 </resources>

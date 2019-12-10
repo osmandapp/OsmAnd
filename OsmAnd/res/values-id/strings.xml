@@ -110,8 +110,6 @@
     <string name="shared_string_left">Kiri</string>
     <string name="show_number_pad">Tampilkan tombol angka</string>
     <string name="shared_string_paste">Tempel</string>
-    <string name="coordinate_input_accuracy_description">Otomatis beralih ke ruas berikutnya setelah memasukkan digit desimal %1$d.</string>
-    <string name="coordinate_input_accuracy">1$d digit</string>
     <string name="go_to_next_field">Lanjut ke bidang selanjutnya</string>
     <string name="rename_marker">Ubah nama penanda</string>
     <string name="tap_on_map_to_hide_interface_descr">Sentuh pada peta akan menyembunyikan tombol kontrol dan widget.</string>
@@ -416,7 +414,6 @@
     <string name="osm_live_subscription_desc">Langganan memungkinkan pembaruan per jam, harian, mingguan, dan unduhan tak terbatas untuk semua peta secara global.</string>
     <string name="get_it">Mendapatkan</string>
     <string name="get_for">Dapatkan untuk %1$s</string>
-    <string name="get_for_month">Dapatkan untuk %1$s sebulan</string>
     <string name="osm_live_banner_desc">Dapatkan download peta tak terbatas, dan update peta lebih dari sebulan sekali: mingguan, harian, atau per jam.</string>
     <string name="osmand_plus_banner_desc">Download unduhan, pembaruan, dan plugin tak terbatas.</string>
     <string name="si_mi_meters">Mil/Meter</string>
@@ -651,7 +648,6 @@
     <string name="in_app_purchase_desc">Pembayaran satu kali</string>
     <string name="in_app_purchase_desc_ex">Setelah dibeli, akan tersedia untuk anda secara permanen.</string>
     <string name="purchase_unlim_title">Beli - %1$s</string>
-    <string name="purchase_subscription_title">Langganan - %1$s</string>
     <string name="wikivoyage_offline">Wikivoyage luring</string>
     <string name="unlimited_downloads">Unduhan tidak terbatas</string>
     <string name="wikipedia_offline">Wikipedia luring</string>

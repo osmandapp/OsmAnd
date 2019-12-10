@@ -181,7 +181,6 @@
     <string name="create_poi_link_to_osm_doc">
         <u>OSM en ligne</u> classification des cartes en images</string>
     <string name="error_doing_search">Impossible d\'effectuer la recherche hors-ligne.</string>
-    <string name="search_offline_geo_error">Impossible d\'interpréter le geo intent:\'%s\'.</string>
     <string name="search_osm_offline">Rechercher par geo location</string>
     <string name="system_locale">Système</string>
     <string name="preferred_locale_descr">Langue d\'affichage de l\'application (utilisée après redémarrage d\'OsmAnd).</string>
@@ -778,7 +777,6 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="map_widget_show_ruler">Échelle</string>
     <string name="map_widget_view_direction">Orientation</string>
     <string name="map_widget_transparent">Gadgets transparents</string>
-    <string name="gps_wakeup_interval">Intervalle d\'activation du GPS: %s</string>
     <string name="email">e-mail</string>
     <string name="map_widget_vector_attributes">Attributs de rendu</string>
     <string name="select_navigation_mode">Mode de transport :</string>
@@ -2019,7 +2017,6 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="storage_place_description">Espace utilisé par OsmAnd (pour les cartes, les traces GPX, etc.) : %1$s.</string>
     <string name="first_usage_greeting">Suivez des itinéraires et découvrez de nouveaux lieux sans connexion Internet</string>
     <string name="get_for">Obtenir pour %1$s</string>
-    <string name="get_for_month">Obtenir pour %1$s mois</string>
     <string name="si_mi_meters">Miles / Mètres</string>
     <string name="get_it">Obtenir</string>
     <string name="osm_live_banner_desc">Téléchargez un nombre illimité de cartes et obtenez des mises à jour plus fréquentes (hebdo, quotidiennes voir horaires).</string>
@@ -2563,8 +2560,6 @@ représentant la zone : %1$s x %2$s</string>
     <string name="shared_string_left">Gauche</string>
     <string name="show_number_pad">Afficher le pavé numérique</string>
     <string name="shared_string_paste">Coller</string>
-    <string name="coordinate_input_accuracy_description">Passer automatiquement au champ suivant après avoir saisi %1$d chiffres après la virgule.</string>
-    <string name="coordinate_input_accuracy">%1$d chiffres</string>
     <string name="go_to_next_field">Champ suivant</string>
     <string name="appearance_on_the_map">Apparence sur la carte</string>
     <string name="add_track_to_markers_descr">Sélectionnez une trace pour ajouter ses points de passage aux marques.</string>
@@ -2719,7 +2714,6 @@ représentant la zone : %1$s x %2$s</string>
     <string name="in_app_purchase">Achat depuis l\'application</string>
     <string name="in_app_purchase_desc">Paiement en une fois</string>
     <string name="purchase_unlim_title">Acheter - %1$s</string>
-    <string name="purchase_subscription_title">Souscrire - %1$s</string>
     <string name="wikivoyage_offline">Wikivoyage hors-ligne</string>
     <string name="unlimited_downloads">Téléchargements illimités</string>
     <string name="wikipedia_offline">Wikipedia hors-ligne</string>
@@ -3200,7 +3194,6 @@ représentant la zone : %1$s x %2$s</string>
     <string name="years_5">Années</string>
     <string name="months_3">Trois mois</string>
     <string name="price_free">Gratuit</string>
-    <string name="get_free_trial_title">Démarrer votre %1$d %2$s essai gratuit.</string>
     <string name="get_discount_second_part">puis %1$s</string>
     <string name="cancel_subscription">Annuler l\'abonnement</string>
     <string name="get_discount_first_part">%1$s pour le premier %2$s</string>
@@ -3355,7 +3348,6 @@ représentant la zone : %1$s x %2$s</string>
     <string name="profile_import_descr">Pour importer un profil, sélectionnez le fichier sur l\'appareil et ouvrez le avec OsmAnd.</string>
     <string name="file_import_error">%1$s Erreur d\'importation : %2$s</string>
     <string name="file_imported_successfully">%1$s importé avec succès.</string>
-    <string name="swap_start_and_destination">Inverser Départ et Arrivée</string>
     <string name="rendering_value_white_name">Blanc</string>
     <string name="swap_two_places">Inverser %1$s et %2$s</string>
     <string name="route_start_point">Point de départ</string>
@@ -3374,4 +3366,8 @@ représentant la zone : %1$s x %2$s</string>
     <string name="added_profiles_descr">Le greffon ajoute un nouveau profil dans OsmAnd</string>
     <string name="shared_string_turn_off">Désactiver</string>
     <string name="new_plugin_added">Nouveau greffon ajouté</string>
+    <string name="join_segments">Relier les segments</string>
+    <string name="add_new_profile_q">Ajouter le profil \'%1$s\' \?</string>
+    <string name="save_heading">Inclure l\'entête</string>
+    <string name="save_heading_descr">Enregistrer l\'entête avec chaque point lors de l\'enregistrement d\'une trace.</string>
 </resources>

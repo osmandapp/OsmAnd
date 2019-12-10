@@ -250,4 +250,5 @@
     <string name="min_logging_accuracy_descr">Фільтр: реєстрація не проводиться, якщо не досягнуто точності</string>
     <string name="min_logging_speed">Мінімальна швидкість реєстрації</string>
     <string name="min_logging_speed_descr">Фільтр: не реєструвати, якщо швидкість меньша за обрану</string>
+    <string name="saved_messages">Збережені повідомлення</string>
 </resources>

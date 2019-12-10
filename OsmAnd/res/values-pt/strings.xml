@@ -646,7 +646,6 @@
     <string name="level_to_switch_vector_raster">Nível mínimo de zoom para vetorial</string>
     <string name="create_poi_link_to_osm_doc">Classificação de mapa <u>OSM Online</u> com imagens.</string>
     <string name="error_doing_search">Não foi possível executar a pesquisa offline.</string>
-    <string name="search_offline_geo_error">Não foi possível analisar a intenção geo \"%s\".</string>
     <string name="search_osm_offline">Pesquisa por localização geográfica</string>
     <string name="system_locale">Sistema</string>
     <string name="preferred_locale_descr">Selecione o idioma de visualização (surte efeito só de pois de reiniciar o OsmAnd).</string>
@@ -790,7 +789,6 @@
     <string name="map_widget_show_ruler">Regua</string>
     <string name="map_widget_view_direction">A direção da visão</string>
     <string name="map_widget_transparent">Widgets transparentes</string>
-    <string name="gps_wakeup_interval">GPS intervalo de despertar: %s</string>
     <string name="int_continuosly">Contínuo</string>
     <string name="email">e-mail</string>
     <string name="osmand_long_description_1000_chars">OsmAnd (direções automatizadas de navegação OSM)
@@ -2101,7 +2099,6 @@
     <string name="osm_live_subscription_desc">Subscrição permite atualizações a cada hora, diárias, semanais, e descarregamentos ilimitados de todos os mapas globalmente.</string>
     <string name="get_it">Comprá-lo</string>
     <string name="get_for">Comprar por %1$s</string>
-    <string name="get_for_month">Comprar por %1$s mês</string>
     <string name="osm_live_banner_desc">Obter descarregamentos ilimitados de mapas e atualizações de mapas mais do que uma vez por mês: semanal, diário, ou a cada hora.</string>
     <string name="osmand_plus_banner_desc">Descarregamentos ilimitados de mapas, atualizações e complemento Wikipédia.</string>
     <string name="si_mi_meters">Milhas/metros</string>
@@ -2247,7 +2244,6 @@
     <string name="in_app_purchase_desc">Pagamento de uma só vez</string>
     <string name="in_app_purchase_desc_ex">Uma vez comprado, estará sempre disponível para si.</string>
     <string name="purchase_unlim_title">Comprar - %1$s</string>
-    <string name="purchase_subscription_title">Assinar - %1$s</string>
     <string name="wikivoyage_offline">Wikivoyage offline</string>
     <string name="unlimited_downloads">Descarregamentos ilimitados</string>
     <string name="wikipedia_offline">A Wikipédia offline</string>
@@ -2392,8 +2388,6 @@
     <string name="shared_string_left">Esqueda</string>
     <string name="show_number_pad">Mostrar teclado numérico</string>
     <string name="shared_string_paste">Colar</string>
-    <string name="coordinate_input_accuracy_description">Alternar automaticamente para o próximo campo depois de entrar %1$d casas decimais.</string>
-    <string name="coordinate_input_accuracy">%1$d dígitos</string>
     <string name="go_to_next_field">Próximo campo</string>
     <string name="rename_marker">Renomear marcador</string>
     <string name="tap_on_map_to_hide_interface_descr">Um toque no mapa mostra/esconde os botões de controlo e widgets.</string>
@@ -3224,7 +3218,6 @@
     <string name="months_3">Três meses</string>
     <string name="price_free">Livre</string>
     <string name="get_discount_title">Obter %1$d %2$s de %3$s desconto.</string>
-    <string name="get_free_trial_title">Inicie sua avaliação gratuita de %1$d %2$s.</string>
     <string name="get_discount_second_part">depois %1$s</string>
     <string name="cancel_subscription">Cancelar subscrição</string>
     <string name="price_and_discount">%1$s - Poupe %2$s</string>

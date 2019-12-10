@@ -3765,4 +3765,5 @@
     <string name="poi_community_gender_female">社群性別：女</string>
     <string name="poi_community_gender_male">社群性別：男</string>
     <string name="poi_community_gender_mixed">社群性別：混合</string>
+    <string name="poi_grave">墳墓</string>
 </resources>

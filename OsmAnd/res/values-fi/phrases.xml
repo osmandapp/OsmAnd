@@ -97,7 +97,7 @@
     <string name="poi_caravans">Matkailuvaunut</string>
     <string name="poi_power_supply">Virtalähde</string>
     <string name="poi_home_visit">Kotikäynti</string>
-    <string name="poi_dish">Lautasantenni</string>
+    <string name="poi_dish">Ruokalaji</string>
     <string name="poi_payment_transport_type">Maksutapa (kuljetus)</string>
     <string name="poi_social_facility_type">Tyyppi</string>
     <string name="poi_social_facility_for">Kohderyhmä</string>
@@ -935,4 +935,7 @@
     <string name="poi_cash_withdrawal_bank_card">Käteisnosto</string>
     <string name="poi_bath_type">Tyyppi</string>
     <string name="poi_bath_open_air">Ulkoilma</string>
+    <string name="poi_cuisine">Keittiökulttuuri</string>
+    <string name="poi_glacier_ele_top">Korkein kohta</string>
+    <string name="poi_glacier_ele_bottom">Matalin kohta</string>
 </resources>

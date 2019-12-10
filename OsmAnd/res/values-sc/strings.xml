@@ -471,7 +471,6 @@
     <string name="map_widget_transparent">Butones trasparentes</string>
     <string name="bg_service_sleep_mode_off">Abìlita\n modalidade \"de isfundu\"</string>
     <string name="bg_service_sleep_mode_on">Firma\n modalidade \"de isfundu\"</string>
-    <string name="gps_wakeup_interval">Intervallu de ischidada GPS: %s</string>
     <string name="int_continuosly">Sighidu</string>
     <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Navigation Directions - Indicatziones de Navigatzione Automàticas) 
 \n
@@ -915,7 +914,6 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="create_poi_link_to_osm_doc">
         <u>OSM in lìnia</u> classificatzione mapas cun immàgines.</string>
     <string name="error_doing_search">Impossìbile fàghere sa chirca chene lìnia.</string>
-    <string name="search_offline_geo_error">Impossìbile lèghere geo intent \'%s\'.</string>
     <string name="search_osm_offline">Chirca impreende sa positzione geogràfica</string>
     <string name="system_locale">Sistema</string>
     <string name="preferred_locale_descr">Limba de interfache de s\'aplicatzione (impreada a pustis chi as a torrare a allùghere OsmAnd).</string>
@@ -2032,7 +2030,6 @@ Lon %2$s</string>
     <string name="clear_tile_data">Iscantzella totu sos tasseddos</string>
     <string name="first_usage_greeting">Retzi indicatziones e iscoberi logos noos chene una connessione a ìnternet</string>
     <string name="get_for">Retzi pro %1$s</string>
-    <string name="get_for_month">Retzi pro %1$s a su mese</string>
     <string name="osm_live_banner_desc">Iscàrriga iscarrigamentos de mapas chene lìmites e agiornamentos pro cada chida, cada die o fintzas cada ora.</string>
     <string name="osm_live_payment_desc">Costu mensile de s\'abbonamentu. Podes iscantzellare s\'iscritzione tua in Google Play cando boles.</string>
     <string name="donation_to_osm">Donatzione a sa comunidade de OpenStreetMap</string>
@@ -2575,8 +2572,6 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="shared_string_left">Manca</string>
     <string name="show_number_pad">Ammustra tecladu numèricu</string>
     <string name="shared_string_paste">Incolla</string>
-    <string name="coordinate_input_accuracy_description">Cola automaticamente a su campu imbeniente a pustis de àere iscritu %1$d tzifras detzimales.</string>
-    <string name="coordinate_input_accuracy">%1$d tzifras</string>
     <string name="go_to_next_field">Campu imbeniente</string>
     <string name="rename_marker">Torra a numenare su marcadore</string>
     <string name="appearance_on_the_map">Visualizatzione in sa mapa</string>
@@ -2732,7 +2727,6 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="in_app_purchase_desc">Pagamentu ùnicu</string>
     <string name="in_app_purchase_desc_ex">A pustis de sa còmpora at a èssere disponìbile pro semper.</string>
     <string name="purchase_unlim_title">Còmpora - %1$s</string>
-    <string name="purchase_subscription_title">Abbona·ti - %1$s</string>
     <string name="wikivoyage_offline">Wikivoyage non in lìnia</string>
     <string name="unlimited_downloads">Iscarrigamentos illimitados</string>
     <string name="wikipedia_offline">Wikipedia non in lìnia</string>
@@ -3228,7 +3222,6 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="months_3">Tres meses</string>
     <string name="price_free">De badas</string>
     <string name="get_discount_title">Otene %1$d %2$s a su %3$s de iscontu.</string>
-    <string name="get_free_trial_title">Incumintza sa proa de badas de %1$d %2$s tua.</string>
     <string name="get_discount_first_part">%1$s pro su primu %2$s</string>
     <string name="get_discount_first_few_part">%1$s pro su primu %2$s</string>
     <string name="get_discount_second_part">a pustis %1$s</string>
@@ -3359,7 +3352,6 @@ Pro praghere iscrie su còdighe intreu</string>
 \n • Àteros errores acontzados
 \n
 \n</string>
-    <string name="swap_start_and_destination">Cuncàmbia s\'orìgine e sa destinatzione</string>
     <string name="apply_preference_to_all_profiles">Podes aplicare custa modìfica a totu sos profilos o a su chi est ischertadu ebbia.</string>
     <string name="shared_preference">Cumpartzidu</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">Privilègia sos caminos non apamentados</string>
@@ -3402,4 +3394,9 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="added_profiles_descr">S\'estensione annanghet unu profilu nou a OsmAnd</string>
     <string name="shared_string_turn_off">Istuda</string>
     <string name="new_plugin_added">Estensione noa annànghida</string>
+    <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Ammustra sas àndalas tziclàbiles de sas retzas de nodos</string>
+    <string name="join_segments">Auni segmentos</string>
+    <string name="add_new_profile_q">Annanghere su profilu nou \'%1$s\'\?</string>
+    <string name="save_heading">Inclue sa diretzione</string>
+    <string name="save_heading_descr">Sarva sa diretzione pro cada puntu cando ses registrende.</string>
 </resources>

@@ -751,7 +751,6 @@ Pôr do Sol: %2$s</string>
     <string name="map_widget_view_direction">Direção da visão</string>
     <string name="map_widget_transparent">Widgets transparentes</string>
     <string name="bg_service_sleep_mode_on">Parar\n modo segundo plano</string>
-    <string name="gps_wakeup_interval">Intervalo de ativação do GPS: %s</string>
     <string name="int_continuosly">Contínuo</string>
     <string name="screen_is_locked">Toque no ícone de bloqueio para desbloquear</string>
     <string name="map_widget_top_text">Nome da rua</string>
@@ -1372,7 +1371,6 @@ Pôr do Sol: %2$s</string>
     <string name="transport_to_go_after">distância prévia</string>
     <string name="transport_to_go_before">distância seguinte</string>
     <string name="transport_stops_to_pass">paradas a passar</string>
-    <string name="search_offline_geo_error">Não foi possível analisar o geo intent \'%s\'.</string>
     <string name="transport_route_distance">Distância do itinerário</string>
     <string name="transport">Transporte</string>
     <string name="show_transport_over_map_description">Mostrar paradas de transporte público no mapa.</string>
@@ -2168,8 +2166,6 @@ Pôr do Sol: %2$s</string>
     <string name="shared_string_left">Esqueda</string>
     <string name="show_number_pad">Mostrar teclado numérico</string>
     <string name="shared_string_paste">Colar</string>
-    <string name="coordinate_input_accuracy_description">Alternar automaticamente para o próximo campo depois de entrar %1$d casas decimais.</string>
-    <string name="coordinate_input_accuracy">%1$d dígitos</string>
     <string name="go_to_next_field">Próximo campo</string>
     <string name="rename_marker">Renomear marcador</string>
     <string name="tap_on_map_to_hide_interface_descr">Um toque no mapa mostra/oculta os botões de controle e widgets.</string>
@@ -2298,7 +2294,6 @@ Pôr do Sol: %2$s</string>
     <string name="osm_live_subscription_desc">A assinatura permite atualizações a cada hora, diariamente e semanais, e downloads ilimitados para todos os mapas globalmente.</string>
     <string name="get_it">Adquira já</string>
     <string name="get_for">Adquira por %1$s</string>
-    <string name="get_for_month">Adquira por %1$s mês</string>
     <string name="osm_live_banner_desc">Obtenha downloads ilimitados de mapas, adicionando atualizações semanais, diárias e a cada hora.</string>
     <string name="quick_action_add_gpx_descr">Um botão que adiciona um ponto de trajeto GPX no meio da tela.</string>
     <string name="av_locations_all_desc">Arquivo GPX com coordenadas e dados de todas as notas.</string>
@@ -2684,7 +2679,6 @@ Pôr do Sol: %2$s</string>
     <string name="in_app_purchase_desc">Pagamento uma só vez</string>
     <string name="in_app_purchase_desc_ex">Uma vez adquirido, ele sempre será disponível para você.</string>
     <string name="purchase_unlim_title">Comprar - %1$s</string>
-    <string name="purchase_subscription_title">Assinar - %1$s</string>
     <string name="wikivoyage_offline">Wikivoyage offline</string>
     <string name="unlimited_downloads">Downloads ilimitados</string>
     <string name="wikipedia_offline">Wikipédia offline</string>
@@ -3215,7 +3209,6 @@ Pôr do Sol: %2$s</string>
     <string name="months_3">Três meses</string>
     <string name="price_free">Grátis</string>
     <string name="get_discount_title">Obter %1$d %2$s de %3$s desconto.</string>
-    <string name="get_free_trial_title">Iniciar avaliação gratuita de % %1$d %2$s.</string>
     <string name="get_discount_first_part">%1$s para primeiro %2$s</string>
     <string name="get_discount_first_few_part">%1$s para primeiro %2$s</string>
     <string name="get_discount_second_part">em seguida %1$s</string>
@@ -3369,7 +3362,6 @@ Pôr do Sol: %2$s</string>
     <string name="profile_import_descr">Para importar um perfil, selecione seu arquivo no dispositivo e abra-o com OsmAnd.</string>
     <string name="file_import_error">Erro de importação %1$s: %2$s</string>
     <string name="file_imported_successfully">%1$s importado com sucesso.</string>
-    <string name="swap_start_and_destination">Trocar início e destino</string>
     <string name="rendering_value_white_name">Branco</string>
     <string name="swap_two_places">Trocar %1$s e %2$s</string>
     <string name="route_start_point">Ponto de partida</string>
@@ -3391,4 +3383,7 @@ Pôr do Sol: %2$s</string>
     <string name="new_plugin_added">Novo plugin adicionado</string>
     <string name="added_profiles_descr">Plugin que adiciona novo perfil ao OsmAnd</string>
     <string name="join_segments">Unir segmentos</string>
+    <string name="add_new_profile_q">Adicionar novo perfil \'%1$s\'\?</string>
+    <string name="save_heading">Incluir direção</string>
+    <string name="save_heading_descr">Salvar direção de cada ponto da trilha durante a gravação.</string>
 </resources>

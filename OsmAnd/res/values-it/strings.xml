@@ -162,7 +162,6 @@
     <string name="create_poi_link_to_osm_doc">
         <u>OSM Online</u> con immagini.</string>
     <string name="error_doing_search">Non posso effettuare una ricerca offline.</string>
-    <string name="search_offline_geo_error">Impossibile leggere geo intent \'%s\'.</string>
     <string name="search_osm_offline">Ricerco tramite geo posizione</string>
     <string name="system_locale">Sistema</string>
     <string name="preferred_locale_descr">Lingua interfaccia dell\'app (utilizzata dal prossimo riavvio di OsmAnd).</string>
@@ -754,7 +753,6 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="map_widget_show_ruler">Righello</string>
     <string name="map_widget_view_direction">Direzione della visuale</string>
     <string name="map_widget_transparent">Widget trasparenti</string>
-    <string name="gps_wakeup_interval">Intervallo di risveglio GPS: %s</string>
     <string name="int_continuosly">Continuo</string>
     <string name="email">e-mail</string>
     <string name="osmand_short_description_80_chars">Visualizzazione e navigazione in mobilità di mappe mondiali OSM</string>
@@ -1411,7 +1409,7 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="route_points">Punti del percorso</string>
     <string name="shared_string_release">Rilasciata</string>
     <string name="shared_string_ellipsis">…</string>
-    <string name="shared_string_ok">OK</string>
+    <string name="shared_string_ok">Ok</string>
     <string name="shared_string_cancel">Annulla</string>
     <string name="shared_string_dismiss">Annulla</string>
     <string name="shared_string_yes">Sì</string>
@@ -1420,7 +1418,7 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="shared_string_off">Spento</string>
     <string name="shared_string_previous">Precedente</string>
     <string name="shared_string_next">Successivo</string>
-    <string name="shared_string_enable">Abilitato</string>
+    <string name="shared_string_enable">Attiva</string>
     <string name="shared_string_disable">Disattiva</string>
     <string name="shared_string_enabled">Abilitato</string>
     <string name="shared_string_disabled">Disabilitato</string>
@@ -2009,7 +2007,6 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="osm_live_subscription_desc">La sottoscrizione attiva aggiornamenti orari, quotidiani e settimanali e la possibilità di scaricare senza limiti tutte le mappe del mondo.</string>
     <string name="get_it">Ottienilo</string>
     <string name="get_for">Ottieni per %1$s</string>
-    <string name="get_for_month">Ottieni per %1$s mese</string>
     <string name="osm_live_banner_desc">Ottieni download delle mappe illimitati aggiungendo aggiornamenti settimanali, quotidiani o orari.</string>
     <string name="osmand_plus_banner_desc">Versione completa di OsmAnd con download illimitati, aggiornamenti mensili delle mappe e plugin Wikipedia.</string>
     <string name="si_mi_meters">Miglia/metri</string>
@@ -2552,8 +2549,6 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="shared_string_left">Sinistra</string>
     <string name="show_number_pad">Mostra la tastiera numerica</string>
     <string name="shared_string_paste">Incolla</string>
-    <string name="coordinate_input_accuracy_description">Spostati automaticamente nel campo successivo dopo l\'immissione di %1$d cifre decimali.</string>
-    <string name="coordinate_input_accuracy">%1$d cifre</string>
     <string name="go_to_next_field">Campo successivo</string>
     <string name="rename_marker">Rinomina il marcatore</string>
     <string name="looking_for_tracks_with_waypoints">Cerco tracce con punti intermedi</string>
@@ -2681,7 +2676,6 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="in_app_purchase_desc">Pagamento unico</string>
     <string name="in_app_purchase_desc_ex">Una volta acquistato, sarà permanentemente a vostra disposizione.</string>
     <string name="purchase_unlim_title">Acquista - %1$s</string>
-    <string name="purchase_subscription_title">Iscriviti - %1$s</string>
     <string name="wikivoyage_offline">Wikivoyage offline</string>
     <string name="unlimited_downloads">Download illimitati</string>
     <string name="wikipedia_offline">Wikipedia offline</string>
@@ -3217,7 +3211,6 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="months_3">Tre mesi</string>
     <string name="price_free">Gratuito</string>
     <string name="get_discount_title">Ottieni %1$d %2$s al %3$s di sconto.</string>
-    <string name="get_free_trial_title">Inizia il tuo %1$d %2$s periodo di prova gratuito.</string>
     <string name="get_discount_first_part">%1$s per il primo %2$s</string>
     <string name="get_discount_first_few_part">%1$s per il primo %2$s</string>
     <string name="get_discount_second_part">poi %1$s</string>
@@ -3387,4 +3380,19 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="shared_string_revert">Ripristina</string>
     <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Mostra i nodi della rete dei percorsi ciclistici</string>
     <string name="clear_confirmation_msg">Cancella %1$s\?</string>
+    <string name="quick_action_directions_from_desc">Un pulsante che rende il centro dello schermo il punto di partenza e calcola il percorso per la destinazione o apre una finestra di dialogo per scegliere la destinazione se il marcatore della destinazione non è sulla mappa.</string>
+    <string name="download_map_dialog">Finestra di dialogo scarica mappe</string>
+    <string name="dialogs_and_notifications_title">Notifiche e finestre di dialogo</string>
+    <string name="dialogs_and_notifications_descr">Controllo dei popup, finestre di dialogo e notifiche che OsmAnd mostra nell\'utilizzo.</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_name">Nodo di reti</string>
+    <string name="suggested_maps">Mappe suggerite</string>
+    <string name="suggested_maps_descr">Queste mappe sono richieste per l\'utilizzo con il plugin</string>
+    <string name="added_profiles">Profilo aggiunto</string>
+    <string name="added_profiles_descr">Il componente aggiuntivo aggiungerà un nuovo profilo a OsmAnd</string>
+    <string name="shared_string_turn_off">Spegni</string>
+    <string name="new_plugin_added">Nuovo componente aggiuntivo aggiunto</string>
+    <string name="join_segments">Congiungi segmenti</string>
+    <string name="add_new_profile_q">Aggiungere il nuovo profilo \'%1$s\'\?</string>
+    <string name="save_heading">Salva orientamento</string>
+    <string name="save_heading_descr">Durante la registrazione salva l\'orientamento per ogni punto della traccia</string>
 </resources>

@@ -816,11 +816,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 					if ("file".equals(scheme)) {
 						final String path = data.getPath();
 						if (path != null) {
-							importHelper.handleFileImport(data, new File(path).getName(), true);
+							importHelper.handleFileImport(data, new File(path).getName(), intent.getExtras(), true);
 						}
 						clearIntent(intent);
 					} else if ("content".equals(scheme)) {
-						importHelper.handleContentImport(data, true);
+						importHelper.handleContentImport(data, intent.getExtras(), true);
 						clearIntent(intent);
 					} else if ("google.navigation".equals(scheme) || "osmand.navigation".equals(scheme)) {
 						parseNavigationIntent(data);
@@ -1516,7 +1516,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		});
 		getMapView().refreshMap(true);
 		applyScreenOrientation();
-		getMyApplication().getNotificationHelper().refreshNotifications();
 	}
 
 	public void updateMapSettings() {
@@ -1707,6 +1706,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 					data.getPath() != null && data.getPath().startsWith("/go")) {
 				String lat = data.getQueryParameter("lat");
 				String lon = data.getQueryParameter("lon");
+				String url = data.getQueryParameter("url");
 				if (lat != null && lon != null) {
 					try {
 						double lt = Double.parseDouble(lat);
@@ -1719,6 +1719,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 						settings.setMapLocationToShow(lt, ln, z, new PointDescription(lt, ln));
 					} catch (NumberFormatException e) {
 						LOG.error("error", e);
+					}
+				} else if (url != null) {
+					url = DiscountHelper.parseUrl(app, url);
+					if (DiscountHelper.validateUrl(app, url)) {
+						DiscountHelper.openUrl(this, url);
 					}
 				}
 				setIntent(null);
@@ -1736,7 +1741,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 					data.getPath() != null && data.getPath().startsWith("/add-tile-source")) {
 				Map<String, String> attrs = new HashMap<>();
 				for (String name : data.getQueryParameterNames()) {
-					attrs.put(name, data.getQueryParameter(name));
+					String value = data.getQueryParameter(name);
+					if (value != null) {
+						attrs.put(name, value);
+					}
 				}
 				if (!attrs.isEmpty()) {
 					try {
@@ -1764,7 +1772,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		return mapLayers;
 	}
 
-	public static void launchMapActivityMoveToTop(Context activity, Bundle intentParams) {
+	public static void launchMapActivityMoveToTop(Context activity, Bundle prevIntentParams, Uri intentData, Bundle intentParams) {
 		if (activity instanceof MapActivity) {
 			if (((MapActivity) activity).getDashboard().isVisible()) {
 				((MapActivity) activity).getDashboard().hideDashboard();
@@ -1776,9 +1784,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				Intent intent = ((Activity) activity).getIntent();
 				if (intent != null) {
 					prevActivityIntent = new Intent(intent);
-					if (intentParams != null) {
-						prevActivityIntent.putExtra(INTENT_PARAMS, intentParams);
-						prevActivityIntent.putExtras(intentParams);
+					if (prevIntentParams != null) {
+						prevActivityIntent.putExtra(INTENT_PARAMS, prevIntentParams);
+						prevActivityIntent.putExtras(prevIntentParams);
 					}
 					prevActivityIntent.putExtra(INTENT_KEY_PARENT_MAP_ACTIVITY, true);
 				} else {
@@ -1792,12 +1800,24 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			Intent newIntent = new Intent(activity, ((OsmandApplication) activity.getApplicationContext())
 					.getAppCustomization().getMapActivity());
 			newIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_CLEAR_TOP | additionalFlags);
+			if (intentData != null) {
+				newIntent.setAction(Intent.ACTION_VIEW);
+				newIntent.setData(intentData);
+			}
+			if (intentParams != null) {
+				newIntent.putExtra(INTENT_PARAMS, intentParams);
+				newIntent.putExtras(intentParams);
+			}
 			activity.startActivity(newIntent);
 		}
 	}
 
 	public static void launchMapActivityMoveToTop(Context activity) {
 		launchMapActivityMoveToTop(activity, null);
+	}
+
+	public static void launchMapActivityMoveToTop(Context activity, Bundle intentParams) {
+		launchMapActivityMoveToTop(activity, intentParams, null, null);
 	}
 
 	public static void clearPrevActivityIntent() {

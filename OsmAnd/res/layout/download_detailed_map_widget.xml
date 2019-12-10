@@ -30,6 +30,7 @@
 					android:id="@+id/description"
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
+					android:textColor="?android:textColorSecondary"
 					android:layout_marginTop="@dimen/list_content_padding"
 					android:textSize="@dimen/default_list_text_size"
 					osmand:typeface="@string/font_roboto_regular"

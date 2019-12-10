@@ -189,7 +189,7 @@
     <string name="shared_string_telegram">Telegram</string>
     <string name="privacy_policy_use_telegram">Telegram（即時通訊應用程式）用以與人們連線與溝通。</string>
     <string name="privacy_policy_telegram_client">OsmAnd 追蹤器是其中一個使用 Telegram 開放平臺的客戶。您的聯絡人可以使用其他任何 Telegram 客戶端。</string>
-    <string name="privacy_policy_agree">點選繼續就代表您同意 Telegram 隱私權政策與 OsmAnd 隱私權政策。</string>
+    <string name="privacy_policy_agree">點選「繼續」就代表您同意 Telegram 與 OsmAnd 的隱私權政策。</string>
     <string name="shared_string_accept">接受</string>
     <string name="telegram_privacy_policy">Telegram 隱私權政策</string>
     <string name="osmand_privacy_policy">OsmAnd 隱私權政策</string>
@@ -251,4 +251,5 @@
     <string name="start_end_date">開始到結束日期</string>
     <string name="location_sharing_status">正在分享：%1$s</string>
     <string name="shared_string_enabled">已啟用</string>
+    <string name="saved_messages">已儲存的訊息</string>
 </resources>

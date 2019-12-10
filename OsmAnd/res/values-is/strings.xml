@@ -1144,7 +1144,6 @@ Sólsetur: %2$s</string>
  forrit í bakgrunni</string>
     <string name="bg_service_sleep_mode_on">Stöðva
  keyrslu í bakgrunni</string>
-    <string name="gps_wakeup_interval">Millibil þess sem GPS vaknar: %s</string>
     <string name="screen_is_locked">Ýttu á lásinn til að aflæsa skjánum</string>
     <string name="map_widget_top_text">Götuheiti</string>
     <string name="map_widget_config">Stilla skjá</string>
@@ -1390,7 +1389,6 @@ og leiðsögn</string>
     <string name="search_hint">Settu inn borg, heimilisfang, merkisstað</string>
     <string name="get_it">Ná í það</string>
     <string name="get_for">Ná í það fyrir %1$s</string>
-    <string name="get_for_month">Ná í það fyrir %1$s á mánuði</string>
     <string name="routing_attr_short_way_name">Leið með hagkvæmri eldsneytisnýtingu</string>
     <string name="routing_attr_short_way_description">Nota leið með hagkvæmri eldsneytisnýtingu (venjulega styttri).</string>
     <string name="replace_favorite_confirmation">Ertu viss að þú viljir skipta út eftirlætinu %1$s?</string>
@@ -2047,7 +2045,6 @@ Stendur fyrir svæði: %1$s x %2$s</string>
 \n • Mögulegt að skrá ferðina í bakgrunni (einnig þegar tækið er svæft) 
 \n OsmAnd er opinn hugbúnaður og í stöðugri þróun. Hver sem er getur tekið þátt í gerð forritsins, til dæmis með því að tilkynna um hnökra, bæta þýðingar eða forrita nýja eiginleika. Lífleg staða verkefnisins og sífelldar endurbætur má þannig rekja til margra þátta samspils milli notenda og hönnuða. Verkefnið styðst líka við fjárhagslega styrki frá notendum sem nýtast til að fjármagna viðameiri forritun og prófanir.
 \n</string>
-    <string name="search_offline_geo_error">Ekki tókst að þátta \'%s\' geo-virkniskipun (intent).</string>
     <string name="send_location_email_pattern">Til að sjá staðsetninguna, fylgdu veftenglinum %1$s eða Android-virkniskipunatenglinum %2$s</string>
     <string name="version_index_is_not_supported">Ekki er stuðningur við \'\'{0}\'\' útgáfu af vísi</string>
     <string name="gps_status_app_not_found">Forrit til að birta stöðu GPS fannst ekki. Leita á markaðnum?</string>
@@ -2207,7 +2204,6 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="shared_string_left">Vinstri</string>
     <string name="show_number_pad">Birta talnaborð</string>
     <string name="shared_string_paste">Líma</string>
-    <string name="coordinate_input_accuracy">%1$d tölustafir</string>
     <string name="go_to_next_field">Næsta gagnasvið</string>
     <string name="rename_marker">Endurnefna kortamerki</string>
     <string name="tap_on_map_to_hide_interface">Skjáfyllihamur</string>
@@ -2484,7 +2480,6 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="show_arrows_descr">Birta eina eða fleiri örvar sem gefa til kynna stefnu á virk kortamerki.</string>
     <string name="distance_indication_descr">Veldu hvernig á að birta vegalengdina að virkum kortamerkjum.</string>
     <string name="active_markers_descr">Veldu hve margir stefnuvísar séu birtir:</string>
-    <string name="coordinate_input_accuracy_description">Skipta sjálfkrafa yfir í næsta reit eftir að settir hafa verið inn %1$d tölustafir.</string>
     <string name="import_gpx_file_description">er hægt að flytja inn sem punkt í eftirlæti eða sem GPX-skrá.</string>
     <string name="marker_show_distance_descr">Veldu hvernig á að gefa til kynna vegalengd og stefnu að kortamerkjum á kortaskjánum:</string>
     <string name="map_orientation_change_in_accordance_with_speed_descr">Veldu undir hvaða hraða stefna kortsins skiptir úr \'Eftir átt hreyfingar\' yfir í \'Eftir áttavita\'.</string>
@@ -2740,7 +2735,6 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="in_app_purchase_desc">Eins-skiptis greiðsla</string>
     <string name="in_app_purchase_desc_ex">Eftir að það hefur verið keypt, verður það þér alltaf tiltækt.</string>
     <string name="purchase_unlim_title">Keypt - %1$s</string>
-    <string name="purchase_subscription_title">Í áskrift - %1$s</string>
     <string name="wikivoyage_offline">Wikivoyage ónettengt</string>
     <string name="unlimited_downloads">Ótakmörkuð niðurhöl</string>
     <string name="wikipedia_offline">Wikipedia ónettengt</string>
@@ -3236,11 +3230,10 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="years_5">ár</string>
     <string name="months_3">þrjá mánuði</string>
     <string name="price_free">ókeypis</string>
-    <string name="get_discount_title">Fáðu %d %@ með %d%% afslætti.</string>
-    <string name="get_free_trial_title">Byrjaðu að nota %d %@ ókeypis prufuáskriftina.</string>
+    <string name="get_discount_title">Fáðu %1$d %2$s með %3$s afslætti.</string>
     <string name="get_discount_first_part">%1$s fyrir fyrstu %2$s</string>
     <string name="get_discount_first_few_part">%1$s fyrir fyrstu %2$s</string>
-    <string name="get_discount_second_part">síðan %@</string>
+    <string name="get_discount_second_part">síðan %1$s</string>
     <string name="cancel_subscription">Hætta áskrift</string>
     <string name="price_and_discount">%1$s • Sparaðu %2$s</string>
     <string name="configure_profile_info">Stillingar fyrir sniðið:</string>
@@ -3381,7 +3374,6 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="quick_action_hillshade_show">Birta hæðaskyggingu</string>
     <string name="quick_action_hillshade_hide">Fela hæðaskyggingu</string>
     <string name="quick_action_show_hide_hillshade">Birta/Fela hæðaskyggingu</string>
-    <string name="swap_start_and_destination">Skipta á upphafi og áfangastað</string>
     <string name="tts_initialization_error">Gat ekki ræst talgervil</string>
     <string name="simulate_your_location_gpx_descr">Herma eftir staðsetningu þinni með áður skráðum GPX-ferli.</string>
     <string name="export_profile">Flytja út snið</string>
@@ -3412,4 +3404,8 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="added_profiles_descr">Viðbótin bætir nýju sniði við OsmAnd</string>
     <string name="shared_string_turn_off">Slökkva</string>
     <string name="new_plugin_added">Nýrri viðbót bætt við</string>
+    <string name="join_segments">Sameina búta</string>
+    <string name="add_new_profile_q">Bæta við nýja sniðinu \'%1$s\'\?</string>
+    <string name="save_heading">Hafa með stefnu</string>
+    <string name="save_heading_descr">Vista stefnu í hvern ferilpunkt á meðan upptöku stendur.</string>
 </resources>

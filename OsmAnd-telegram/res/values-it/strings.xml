@@ -187,9 +187,9 @@
     <string name="shared_string_text">Testo</string>
     <string name="map_and_text">Mappa e testo</string>
     <string name="timeline">Cronologia</string>
-    <string name="shared_string_ok">OK</string>
+    <string name="shared_string_ok">Ok</string>
     <string name="timeline_available_for_free_now">La funzionalità Timeline è adesso disponibile gratuitamente.</string>
-    <string name="disable_monitoring">Disattivare il monitoraggio</string>
+    <string name="disable_monitoring">Disattiva il monitoraggio</string>
     <string name="location_recording_enabled">Registrazione della posizione abilitata</string>
     <string name="timeline_description">Attivare il monitoraggio per salvare lo storico delle locazioni.</string>
     <string name="app_name_short">Tracker OsmAnd</string>
@@ -228,11 +228,11 @@
     <string name="proxy_port">Porta</string>
     <string name="proxy_server">Server</string>
     <string name="shared_string_connection">Connessione</string>
-    <string name="shared_string_enable">Abilitato</string>
-    <string name="proxy_type">Tipo di Proxy</string>
+    <string name="shared_string_enable">Attiva</string>
+    <string name="proxy_type">Tipo di proxy</string>
     <string name="proxy_connected">Connesso</string>
     <string name="proxy_disconnected">Disconnesso</string>
-    <string name="proxy_settings">Impostazioni Proxy</string>
+    <string name="proxy_settings">Impostazioni proxy</string>
     <string name="proxy">Proxy</string>
     <string name="privacy">Privacy</string>
     <string name="shared_string_select">Seleziona</string>
@@ -249,5 +249,6 @@
     <string name="shared_string_end">Fine</string>
     <string name="shared_string_start">Avvia</string>
     <string name="set_time_timeline_descr">Seleziona l\'ora da visualizzare</string>
-    <string name="start_end_date">Inizio - Data di fine</string>
+    <string name="start_end_date">Data di inizio - fine</string>
+    <string name="saved_messages">Messaggi salvati</string>
 </resources>
