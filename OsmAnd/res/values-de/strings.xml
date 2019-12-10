@@ -410,7 +410,7 @@
     <string name="search_offline_clear_search">Neue Suche</string>
     <string name="map_text_size_descr">Textgröße für Bezeichnungen auf der Karte:</string>
     <string name="map_text_size">Karten-Textgröße</string>
-    <string name="trace_rendering">Rendern von Debug-Infos</string>
+    <string name="trace_rendering">Infos zur Rendering-Fehlersuche</string>
     <string name="trace_rendering_descr">Rendering-Performance anzeigen (Geschwindigkeit des Offline-Bildaufbaus).</string>
     <string name="installing_new_resources">Entpacke neue Daten…</string>
     <string name="internet_connection_required_for_online_route">Die Online-Navigation funktioniert nicht offline.</string>
@@ -738,9 +738,9 @@
     <string name="saving_gpx_tracks">GPX-Datei wird gespeichert…</string>
     <string name="finished_task">Abgeschlossen</string>
     <string name="use_online_routing_descr">Internet zur Routenberechnung verwenden.</string>
-    <string name="use_online_routing">Online-Navigation</string>
-    <string name="osm_settings_descr">Einstellungen für OpenStreetMap.org (OSM).</string>
-    <string name="data_settings_descr">Dateneinstellungen festlegen: Sprache, Daten laden oder aktualisieren.</string>
+    <string name="use_online_routing">Online-Navigation nutzen</string>
+    <string name="osm_settings_descr">Einstellungen für OpenStreetMap.org (OSM), die für OSM-Übermittlungen erforderlich sind.</string>
+    <string name="data_settings_descr">Sprache angeben, Daten herunter- oder neuladen.</string>
     <string name="data_settings">Daten</string>
     <string name="osm_settings">OSM-Bearbeitung</string>
     <string name="additional_settings">Weitere Einstellungen</string>
@@ -751,7 +751,7 @@
     <string name="shared_string_add_to_favorites">Zu \'Favoriten\' hinzufügen</string>
     <string name="use_english_names_descr">Englische oder einheimische Namen in der Karte verwenden.</string>
     <string name="use_english_names">Englische Namen</string>
-    <string name="app_settings">App-einstellungen</string>
+    <string name="app_settings">App-Einstellungen</string>
     <string name="search_address">Adresse suchen</string>
     <string name="choose_building">Hausnummer wählen</string>
     <string name="choose_street">Straße wählen</string>
@@ -763,7 +763,7 @@
     <string name="show_poi_over_map_description">Zuletzt verwendetes POI-Overlay anzeigen.</string>
     <string name="show_poi_over_map">POI-Overlay anzeigen</string>
     <string name="map_tile_source_descr">Quelle für Online- oder zwischengespeicherte Kartenkacheln wählen</string>
-    <string name="map_tile_source">Kartenquelle</string>
+    <string name="map_tile_source">Kachelkartenquelle</string>
     <string name="map_source">Kartenquelle</string>
     <string name="use_internet">Internet verwenden</string>
     <string name="show_location">Standort anzeigen</string>
@@ -830,7 +830,7 @@
     <string name="poi_action_change">ändern</string>
     <string name="poi_action_succeded_template">Aktion {0} abgeschlossen.</string>
     <string name="poi_error_unexpected_template">Aktion {0} konnte nicht ausgeführt werden.</string>
-    <string name="poi_error_io_error_template">I/O Fehler bei Aktion {0}.</string>
+    <string name="poi_error_io_error_template">I/O-Fehler bei Aktion {0}.</string>
     <string name="poi_error_info_not_loaded">Informationen über den Knoten wurden nicht geladen</string>
     <string name="poi_dialog_opening_hours">Öffnungszeiten</string>
     <string name="poi_dialog_comment">Kommentar</string>
@@ -1089,10 +1089,10 @@
     <string name="distance_measurement_finish_subtrack">Weitere Messung anlegen</string>
     <string name="please_select_address">Zuerst Stadt oder Straße festlegen</string>
     <string name="destination_point">Ziel %1$s</string>
-    <string name="av_camera_focus">Kamera-Fokus-Typ</string>
+    <string name="av_camera_focus">Kamerafokus-Typ</string>
     <string name="av_camera_focus_descr">Kamerafokus-Modus:</string>
     <string name="av_camera_focus_auto">Autofokus</string>
-    <string name="av_camera_focus_infinity">Fokus ist auf unendlich gesetzt</string>
+    <string name="av_camera_focus_infinity">Fokus ist auf unendlich eingestellt</string>
     <string name="av_camera_focus_continuous">Die Kamera kontinuierlich scharf stellen</string>
     <string name="av_photo_play_sound">Ton bei Auslösung abspielen</string>
     <string name="av_photo_play_sound_descr">Ton oder Stille für Fotoauslöser festlegen.</string>
@@ -1112,7 +1112,7 @@
     <string name="context_menu_item_directions_from">Navigiere von</string>
     <string name="av_camera_focus_hiperfocal">Hyperfokaler Fokus</string>
     <string name="av_camera_focus_edof">Erweiterte Schärfentiefe (EDOF)</string>
-    <string name="av_camera_focus_macro">Makro-Fokusmodus (Nahaufnahme)</string>
+    <string name="av_camera_focus_macro">Makrofokus-Modus (Nahaufnahme)</string>
     <string name="speak_title">Ansagen…</string>
     <string name="speak_descr">Ansagen zu Straßennamen, Verkehrswarnungen (Stoppzeichen, Rüttelschwellen), stationäre Radarkontrollen, Tempolimits konfigurieren.</string>
     <string name="speak_street_names">Straßennamen (TTS)</string>
@@ -1642,9 +1642,9 @@ Lon %2$s</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Einfärbung gemäß Routennetzwerk</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Einfärbung gemäß OSMC-Wandersymbol</string>
     <string name="do_you_like_osmand">Gefällt Ihnen OsmAnd?</string>
-    <string name="rate_this_app">Bewerte diese App</string>
-    <string name="rate_this_app_long">Bitte gib OsmAnd eine Bewertung auf Google Play</string>
-    <string name="user_hates_app_get_feedback">Erzähle uns warum.</string>
+    <string name="rate_this_app">Bewerten Sie diese App</string>
+    <string name="rate_this_app_long">Bitte bewerten Sie OsmAnd auf Google Play</string>
+    <string name="user_hates_app_get_feedback">Sagen Sie uns, warum.</string>
     <string name="user_hates_app_get_feedback_long">Bitte teilen Sie uns Ihre Vorschläge mit.</string>
     <string name="no_updates_available">Keine Aktualisierungen verfügbar</string>
     <string name="download_live_updates">Live-Aktualisierungen</string>
@@ -1686,12 +1686,12 @@ Lon %2$s</string>
     <string name="please_specify_poi_type">Bitte Art des POI angeben.</string>
     <string name="working_days">Werktage</string>
     <string name="favourites">Favoriten</string>
-    <string name="poi_deleted_localy">Der POI wird hier gelöscht, sobald sie ihre Änderungen hochladen</string>
+    <string name="poi_deleted_localy">Der POI wird hier gelöscht, sobald Sie Ihre Änderungen hochladen</string>
     <string name="show_gpx">GPX-Daten anzeigen</string>
     <string name="are_you_sure">Sicher?</string>
     <string name="unsaved_changes_will_be_lost">Alle ungesicherten Änderungen gehen verloren. Fortfahren?</string>
     <string name="roads">Straßen</string>
-    <string name="show_free_version_banner_description">Auch in OsmAnd+ oder der Unlimited Version das Banner der kostenlosen Version anzeigen.</string>
+    <string name="show_free_version_banner_description">Das Banner der kostenlosen Version auch in der kostenpflichtigen Version anzeigen.</string>
     <string name="rendering_attr_hideProposed_name">Geplante Objekte</string>
     <string name="shared_string_update">Aktualisieren</string>
     <string name="shared_string_upload">Hochladen</string>
@@ -1737,7 +1737,7 @@ Lon %2$s</string>
     <string name="new_version">Neue Version</string>
     <string name="begin_with_osmand_menu_group">Erste Schritte in OsmAnd</string>
     <string name="features_menu_group">Merkmale</string>
-    <string name="help_us_to_improve_menu_group">Helfen, OsmAnd weiter zu verbessern</string>
+    <string name="help_us_to_improve_menu_group">Helfen Sie mit, OsmAnd zu verbessern</string>
     <string name="other_menu_group">Weitere</string>
     <string name="plugins_menu_group">Erweiterungen</string>
     <string name="first_usage_item">Erste Benutzung</string>
@@ -1786,7 +1786,7 @@ Lon %2$s</string>
     <string name="number_of_rows_in_dash">Anzahl der Zeilen in der Übersichtsseite %1$s</string>
     <string name="downloads_left_template">%1$s Downloads übrig</string>
     <string name="downloading_number_of_files">Herunterladen - %1$d Datei</string>
-    <string name="show_free_version_banner">Zeige das Banner der freien Version</string>
+    <string name="show_free_version_banner">Zeige das Banner der kostenlosen Version</string>
     <string name="activate_seamarks_plugin">Bitte die Erweiterung \'Seekarte\' aktivieren</string>
     <string name="activate_srtm_plugin">Bitte die Erweiterung \'Höhenlinien\' aktivieren</string>
     <string name="get_full_version">Vollversion</string>
@@ -1794,13 +1794,13 @@ Lon %2$s</string>
     <string name="value_downloaded_of_max">%1$.1f von %2$.1f MB</string>
     <string name="update_all">Alles aktualisieren (%1$s MB)</string>
     <string name="free_downloads_used">Verbrauchte freie Downloads</string>
-    <string name="enter_country_name">Name des Landes eingeben</string>
+    <string name="enter_country_name">Ländernamen eingeben</string>
     <string name="save_poi_without_poi_type_message">Möchten Sie den POI wirklich ohne Typ speichern?</string>
     <string name="poi_context_menu_modify_osm_change">OSM-Änderung bearbeiten</string>
     <string name="use_dashboard_btn">Übersichtsseite verwenden</string>
     <string name="use_drawer_btn">Menü verwenden</string>
-    <string name="dashboard_or_drawer_title">Auswahl der App-Bedienung</string>
-    <string name="dashboard_or_drawer_description">Es ist auswählbar, ob die App primär über die flexible Übersichtsseite oder über ein statisches Menü bedient werden soll. Diese Entscheidung kann jederzeit in den Übersichtsseiten-Einstellungen geändert werden.</string>
+    <string name="dashboard_or_drawer_title">Übersichtsseite oder Menüsteuerung</string>
+    <string name="dashboard_or_drawer_description">Es besteht die Möglichkeit, ob die App primär über die flexible Übersichtsseite oder ein statisches Menü zu steuern. Ihre Wahl kann jederzeit in den Übersichtsseiten-Einstellungen geändert werden.</string>
     <string name="access_from_map">Aufruf von der Karte aus</string>
     <string name="favorite_category_add_new">Neu erstellen</string>
     <string name="next_proceed">Weiter</string>
@@ -1808,7 +1808,7 @@ Lon %2$s</string>
     <string name="please_specify_poi_type_only_from_list">Bitte einen gültigen POI-Typ angeben oder überspringen.</string>
     <string name="share_osm_edits_subject">OSM-Bearbeitung mit OsmAnd geteilt</string>
     <string name="av_locations_descr">GPX-Datei mit Standorten.</string>
-    <string name="free_downloads_used_description">Anzeige der verbliebenen freien Downloads.</string>
+    <string name="free_downloads_used_description">Anzeige der verbleibenen freien Downloads.</string>
     <string name="shared_string_location">Standort</string>
     <string name="hillshade_layer_disabled">Schummerungsebene deaktiviert</string>
     <string name="shared_string_commit">Bestätigen</string>
@@ -2113,7 +2113,7 @@ Lon %2$s</string>
     <string name="quick_action_take_video_note">Neue Video-Notiz</string>
     <string name="quick_action_take_photo_note">Neue Foto-Notiz</string>
     <string name="quick_action_add_osm_bug">OSM-Notiz hinzufügen</string>
-    <string name="quick_action_navigation_voice">Sprachausgabe Ein/Aus</string>
+    <string name="quick_action_navigation_voice">Sprachausgabe ein/aus</string>
     <string name="quick_action_navigation_voice_off">Sprachausgabe aktivieren</string>
     <string name="quick_action_navigation_voice_on">Sprachausgabe stummschalten</string>
     <string name="quick_action_add_gpx">GPX-Wegpunkt einfügen</string>
@@ -2125,7 +2125,7 @@ Lon %2$s</string>
     <string name="quick_actions_delete">Aktion löschen</string>
     <string name="quick_actions_delete_text">Sind Sie sicher, dass Sie die Aktion „%s“ löschen möchten\?</string>
     <string name="quick_favorites_show_favorites_dialog">Dialog zu Favoriten anzeigen</string>
-    <string name="quick_favorites_name_preset">Name Voreinstellen</string>
+    <string name="quick_favorites_name_preset">Name voreinstellen</string>
     <string name="shared_string_action_name">Aktionsname</string>
     <string name="quick_action_add_marker_descr">Taste, um eine Kartenmarkierung am Bildschirmmittelpunkt einzufügen.</string>
     <string name="favorite_empty_place_name">Ort</string>
@@ -2147,10 +2147,10 @@ Lon %2$s</string>
     <string name="quick_action_empty_param_error">Füllen Sie alle Parameter aus</string>
     <string name="quick_action_map_styles">Kartenstile</string>
     <string name="quick_action_map_overlay">Overlay-Karte ändern</string>
-    <string name="quick_action_map_overlay_title">Overlay-Karten</string>
+    <string name="quick_action_map_overlay_title">Karten-Overlays</string>
     <string name="quick_action_map_overlay_action">Overlay hinzufügen</string>
-    <string name="quick_action_map_underlay">Underlay-Karte hinzufügen</string>
-    <string name="quick_action_map_underlay_title">Underlay-Karten</string>
+    <string name="quick_action_map_underlay">Karten-Underlay ändern</string>
+    <string name="quick_action_map_underlay_title">Karten-Underlays</string>
     <string name="quick_action_map_underlay_action">Underlay hinzufügen</string>
     <string name="quick_action_map_source">Kartenquelle ändern</string>
     <string name="quick_action_map_source_title">Kartenquellen</string>
@@ -2167,7 +2167,7 @@ Lon %2$s</string>
     <string name="quick_action_add_poi_descr">Taste, um einen POI am Bildschirmmittelpunkt einzufügen.</string>
     <string name="quick_action_navigation_voice_descr">Umschalter, um die Sprachansagen während der Navigation ein- oder auszuschalten.</string>
     <string name="quick_action_add_parking_descr">Taste, um eine Parkposition am Bildschirmmittelpunkt einzufügen.</string>
-    <string name="quick_action_interim_dialog">Dialog zum Bearbeiten zeigen</string>
+    <string name="quick_action_interim_dialog">Dialog zum Bearbeiten anzeigen</string>
     <string name="favorite_autofill_toast_text">" gespeichert unter "</string>
     <string name="quick_action_duplicates">Schnellaktionsname in %1$s umbenannt, um Duplikate zu vermeiden.</string>
     <string name="quick_action_duplicate">Namensduplikat für Schnellaktion</string>
@@ -2176,8 +2176,8 @@ Lon %2$s</string>
     <string name="quick_action_add_create_items">Objekte erstellen</string>
     <string name="quick_action_bug_descr">Diese Nachricht wird ins Kommentarfeld eingetragen.</string>
     <string name="quick_action_btn_tutorial_descr">Langes Drücken und Ziehen der Taste ändert ihre Bildschirmposition.</string>
-    <string name="quick_action_map_overlay_switch">Die Overlay-Karte wurde in „%s“ geändert.</string>
-    <string name="quick_action_map_underlay_switch">Die Underlay-Karte wurde in „%s“ geändert.</string>
+    <string name="quick_action_map_overlay_switch">Karten-Overlay wurde in „%s“ geändert.</string>
+    <string name="quick_action_map_underlay_switch">Karten-Underlay wurde in „%s“ geändert.</string>
     <string name="navigate_point_olc_info_invalid">Ungültiger OLC
 </string>
     <string name="navigate_point_olc_info_short">Kurzer OLC
@@ -2481,7 +2481,7 @@ Lon %2$s</string>
     <string name="enter_gpx_name">GPX-Dateiname:</string>
     <string name="show_on_map_after_saving">Nach dem Speichern auf der Karte anzeigen</string>
     <string name="add_waypoint">Wegpunkt hinzufügen</string>
-    <string name="save_gpx_waypoint">GPX Wegpunkt speichern</string>
+    <string name="save_gpx_waypoint">GPX-Wegpunkt speichern</string>
     <string name="save_route_point">Routenpunkt speichern</string>
     <string name="waypoint_one">Wegpunkt 1</string>
     <string name="route_point_one">Routenpunkt 1</string>
@@ -2503,7 +2503,7 @@ Lon %2$s</string>
     <string name="empty_state_favourites">Favoriten hinzufügen</string>
     <string name="empty_state_favourites_desc">Favoriten importieren oder durch Markieren von Punkten auf der Karte erstellen.</string>
     <string name="import_track">GPX-Datei importieren</string>
-    <string name="import_track_desc">Die Datei %1$s enthält keine Wegpunkte, soll sie als Track importiert werden?</string>
+    <string name="import_track_desc">Die Datei %1$s enthält keine Wegpunkte. Soll sie als Track importiert werden\?</string>
     <string name="move_point">Punkt verschieben</string>
     <string name="add_segment_to_the_track">Zu einer GPX-Datei hinzufügen</string>
     <string name="do_not_use_animations">Keine Animationen</string>
@@ -2876,7 +2876,7 @@ Lon %2$s</string>
     <string name="quick_action_switch_day_mode">Tag-Modus</string>
     <string name="quick_action_switch_night_mode">Nacht-Modus</string>
     <string name="quick_action_day_night_switch_mode">Tag-/Nacht-Modus umschalten</string>
-    <string name="run_full_osmand_msg">Sie verwenden {0} Karte, die von OsmAnd unterstützt wird. Möchten Sie die OsmAnd Vollversion starten\?</string>
+    <string name="run_full_osmand_msg">Sie verwenden {0} Karte, die von OsmAnd unterstützt wird. Möchten Sie die OsmAnd-Vollversion starten\?</string>
     <string name="add_destination_point">Ziel festlegen</string>
     <string name="add_intermediate_point">Zwischenpunkt hinzufügen</string>
     <string name="add_start_point">Startpunkt festlegen</string>
@@ -3215,8 +3215,8 @@ Lon %2$s</string>
     <string name="lang_oc">Okzitanisch</string>
     <string name="app_mode_wagon">Wagen</string>
     <string name="app_mode_pickup_truck">Kleintransporter</string>
-    <string name="new_route_calculated_dist_dbg">Route: Entfernung %s, Fahrzeit%s
-\nBerechnung: %.1f Sek.,%d Straßen,%d Kacheln)</string>
+    <string name="new_route_calculated_dist_dbg">Route: Entfernung %s, Fahrzeit %s 
+\nBerechnung: %.1f Sek., %d Straßen, %d Kacheln)</string>
     <string name="day">Tag</string>
     <string name="days_2_4">Tage</string>
     <string name="days_5">Tage</string>
