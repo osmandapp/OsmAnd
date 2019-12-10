@@ -252,12 +252,7 @@ object OsmandLocationUtils {
 				}
 				s.startsWith(ALTITUDE_PREFIX) -> {
 					val altStr = s.removePrefix(ALTITUDE_PREFIX)
-					try {
-						val alt = altStr.split(" ").first()
-						res.altitude = alt.toDouble()
-					} catch (e: Exception) {
-						e.printStackTrace()
-					}
+					res.altitude = parseDistance(altStr)
 				}
 				s.startsWith(SPEED_PREFIX) -> {
 					val speedStr = s.removePrefix(SPEED_PREFIX)
@@ -279,12 +274,7 @@ object OsmandLocationUtils {
 				}
 				s.startsWith(HDOP_PREFIX) -> {
 					val hdopStr = s.removePrefix(HDOP_PREFIX)
-					try {
-						val hdop = hdopStr.split(" ").first()
-						res.hdop = hdop.toDouble()
-					} catch (e: Exception) {
-						e.printStackTrace()
-					}
+					res.hdop = parseDistance(hdopStr)
 				}
 				s.startsWith(UPDATED_PREFIX) -> {
 					if (res.lastUpdated == 0) {
@@ -343,6 +333,25 @@ object OsmandLocationUtils {
 			e.printStackTrace()
 		}
 		return 0
+	}
+
+	fun parseDistance(distanceS: String): Double {
+		try {
+			val distanceSplit = distanceS.split(" ")
+			val distanceVal = distanceSplit.first().toDouble()
+			return when (distanceSplit.last()) {
+				OsmandFormatter.FORMAT_METERS_KEY -> return distanceVal
+				OsmandFormatter.FORMAT_FEET_KEY -> return distanceVal / OsmandFormatter.FEET_IN_ONE_METER
+				OsmandFormatter.FORMAT_YARDS_KEY -> return distanceVal / OsmandFormatter.YARDS_IN_ONE_METER
+				OsmandFormatter.FORMAT_KILOMETERS_KEY -> return distanceVal * OsmandFormatter.METERS_IN_KILOMETER
+				OsmandFormatter.FORMAT_NAUTICALMILES_KEY -> return distanceVal * OsmandFormatter.METERS_IN_ONE_NAUTICALMILE
+				OsmandFormatter.FORMAT_MILES_KEY -> return distanceVal * OsmandFormatter.METERS_IN_ONE_MILE
+				else -> distanceVal
+			}
+		} catch (e: Exception) {
+			e.printStackTrace()
+		}
+		return 0.0
 	}
 
 	fun getTextMessageContent(updateId: Int, location: BufferMessage, app: TelegramApplication): TdApi.InputMessageText {

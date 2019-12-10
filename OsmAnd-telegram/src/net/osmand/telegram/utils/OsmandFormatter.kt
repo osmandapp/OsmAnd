@@ -17,6 +17,14 @@ object OsmandFormatter {
 
 	val YARDS_IN_ONE_METER = 1.0936f
 	val FEET_IN_ONE_METER = YARDS_IN_ONE_METER * 3f
+
+	val FORMAT_METERS_KEY = "m"
+	val FORMAT_FEET_KEY = "ft"
+	val FORMAT_YARDS_KEY = "yd"
+	val FORMAT_KILOMETERS_KEY = "km"
+	val FORMAT_NAUTICALMILES_KEY = "nmi"
+	val FORMAT_MILES_KEY = "mi"
+
 	private val fixed2 = DecimalFormat("0.00")
 	private val fixed1 = DecimalFormat("0.0")
 
@@ -175,15 +183,15 @@ object OsmandFormatter {
 		val mainUnitInMeters: Float
 		when (mc) {
 			MetricsConstants.KILOMETERS_AND_METERS -> {
-				mainUnitStr = if (useLocalizedString) ctx.getString(R.string.km) else "km"
+				mainUnitStr = if (useLocalizedString) ctx.getString(R.string.km) else FORMAT_KILOMETERS_KEY
 				mainUnitInMeters = METERS_IN_KILOMETER
 			}
 			MetricsConstants.NAUTICAL_MILES -> {
-				mainUnitStr = if (useLocalizedString) ctx.getString(R.string.nm) else "nmi"
+				mainUnitStr = if (useLocalizedString) ctx.getString(R.string.nm) else FORMAT_NAUTICALMILES_KEY
 				mainUnitInMeters = METERS_IN_ONE_NAUTICALMILE
 			}
 			else -> {
-				mainUnitStr = if (useLocalizedString) ctx.getString(R.string.mile) else "mi"
+				mainUnitStr = if (useLocalizedString) ctx.getString(R.string.mile) else FORMAT_MILES_KEY
 				mainUnitInMeters = METERS_IN_ONE_MILE
 			}
 		}
@@ -204,15 +212,15 @@ object OsmandFormatter {
 			return MessageFormat.format(format2 + mainUnitStr, meters / mainUnitInMeters).replace('\n', ' ') //$NON-NLS-1$
 		} else {
 			if (mc == MetricsConstants.KILOMETERS_AND_METERS || mc == MetricsConstants.MILES_AND_METERS) {
-				return (meters + 0.5).toInt().toString() + if (useLocalizedString) " " + ctx.getString(R.string.m) else " m"  //$NON-NLS-1$
+				return (meters + 0.5).toInt().toString() + if (useLocalizedString) " " + ctx.getString(R.string.m) else " $FORMAT_METERS_KEY"  //$NON-NLS-1$
 			} else if (mc == MetricsConstants.MILES_AND_FEET) {
 				val feet = (meters * FEET_IN_ONE_METER + 0.5).toInt()
-				return feet.toString() + if (useLocalizedString) " " + ctx.getString(R.string.foot) else " ft" //$NON-NLS-1$
+				return feet.toString() + if (useLocalizedString) " " + ctx.getString(R.string.foot) else " $FORMAT_FEET_KEY" //$NON-NLS-1$
 			} else if (mc == MetricsConstants.MILES_AND_YARDS) {
 				val yards = (meters * YARDS_IN_ONE_METER + 0.5).toInt()
-				return yards.toString() + if (useLocalizedString) " " + ctx.getString(R.string.yard) else " yd" //$NON-NLS-1$
+				return yards.toString() + if (useLocalizedString) " " + ctx.getString(R.string.yard) else " $FORMAT_YARDS_KEY" //$NON-NLS-1$
 			}
-			return (meters + 0.5).toInt().toString() + if (useLocalizedString) " " + ctx.getString(R.string.m) else " m" //$NON-NLS-1$
+			return (meters + 0.5).toInt().toString() + if (useLocalizedString) " " + ctx.getString(R.string.m) else " $FORMAT_METERS_KEY" //$NON-NLS-1$
 		}
 	}
 
@@ -220,9 +228,9 @@ object OsmandFormatter {
 		val mc = ctx.settings.metricsConstants
 		val useFeet = mc == MetricsConstants.MILES_AND_FEET || mc == MetricsConstants.MILES_AND_YARDS
 		return if (!useFeet) {
-			(alt + 0.5).toInt().toString() + if (useLocalizedString) " " + ctx.getString(R.string.m) else " m"
+			(alt + 0.5).toInt().toString() + if (useLocalizedString) " " + ctx.getString(R.string.m) else " $FORMAT_METERS_KEY"
 		} else {
-			(alt * FEET_IN_ONE_METER + 0.5).toInt().toString() + if (useLocalizedString) " " + ctx.getString(R.string.foot) else " ft"
+			(alt * FEET_IN_ONE_METER + 0.5).toInt().toString() + if (useLocalizedString) " " + ctx.getString(R.string.foot) else " $FORMAT_FEET_KEY"
 		}
 	}
 
