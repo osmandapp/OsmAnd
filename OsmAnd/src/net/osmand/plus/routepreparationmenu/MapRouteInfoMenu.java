@@ -275,10 +275,10 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 						targets.navigateToPoint(latlon, true, targets.getIntermediatePoints().size());
 						break;
 					case HOME:
-						favorites.setHomePoint(latlon, new PointDescription(PointDescription.POINT_TYPE_FAVORITE, ""));
+						favorites.setHomePoint(latlon);
 						break;
 					case WORK:
-						favorites.setWorkPoint(latlon, new PointDescription(PointDescription.POINT_TYPE_FAVORITE, ""));
+						favorites.setWorkPoint(latlon);
 						break;
 				}
 				if (selectFromMapWaypoints) {
@@ -1802,10 +1802,10 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 					targets.navigateToPoint(l, true, targets.getIntermediatePoints().size(), pd);
 					break;
 				case HOME:
-					favorites.setHomePoint(l, new PointDescription(PointDescription.POINT_TYPE_FAVORITE, ""));
+					favorites.setHomePoint(l);
 					break;
 				case WORK:
-					favorites.setWorkPoint(l, new PointDescription(PointDescription.POINT_TYPE_FAVORITE, ""));
+					favorites.setWorkPoint(l);
 					break;
 			}
 			updateMenu();
@@ -1862,10 +1862,10 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 						targets.navigateToPoint(point, true, targets.getIntermediatePoints().size(), m.getPointDescription(mapActivity));
 						break;
 					case HOME:
-						favorites.setHomePoint(point, m.getPointDescription(mapActivity));
+						favorites.setHomePoint(point);
 						break;
 					case WORK:
-						favorites.setWorkPoint(point, m.getPointDescription(mapActivity));
+						favorites.setWorkPoint(point);
 						break;
 				}
 				updateMenu();

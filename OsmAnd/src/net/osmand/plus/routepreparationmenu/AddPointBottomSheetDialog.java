@@ -251,11 +251,11 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 											break;
 										case HOME:
 											app.showShortToastMessage(R.string.add_intermediate_point);
-											app.getFavorites().setHomePoint(ll, new PointDescription(PointDescription.POINT_TYPE_FAVORITE, ""));
+											app.getFavorites().setHomePoint(ll);
 											break;
 										case WORK:
 											app.showShortToastMessage(R.string.add_intermediate_point);
-											app.getFavorites().setWorkPoint(ll, new PointDescription(PointDescription.POINT_TYPE_FAVORITE, ""));
+											app.getFavorites().setWorkPoint(ll);
 											break;
 									}
 								} else if (pointType == PointType.START) {
@@ -369,13 +369,13 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 
 	private void addMainScrollItems(List<Object> items, FavouritesDbHelper favorites) {
 		items.add(FAVORITES);
-		if (favorites.hasHomePoint()) {
+		if (favorites.getHomePoint() != null) {
 			items.add(PointType.HOME);
 		}
-		if (favorites.hasWorkPoint()) {
+		if (favorites.getWorkPoint() != null) {
 			items.add(PointType.WORK);
 		}
-		if (favorites.hasParkingPoint()) {
+		if (favorites.getParkingPoint() != null) {
 			items.add(PointType.PARKING);
 		}
 	}
@@ -647,7 +647,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 							point = favorites.getParkingPoint();
 						}
 						favoriteViewHolder.icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(getActivity(),
-								getResources().getColor(disabledIconColor), false, (pointType.ordinal())));
+								getResources().getColor(disabledIconColor), false, pointType));
 						favoriteViewHolder.title.setText(point.getName());
 						favoriteViewHolder.description.setText(point != null
 								? point.getPointDescription().getSimpleName(app, false)

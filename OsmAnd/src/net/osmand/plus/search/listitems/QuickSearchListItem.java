@@ -102,8 +102,6 @@ public class QuickSearchListItem {
 			case LOCATION:
 				LatLon latLon = searchResult.location;
 				return PointDescription.getLocationNamePlain(app, latLon.getLatitude(), latLon.getLongitude());
-			case FAVORITE:
-				return ((FavouritePoint) searchResult.object).getName();
 		}
 		return searchResult.localeName;
 	}

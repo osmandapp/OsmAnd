@@ -504,6 +504,10 @@ public abstract class MenuController extends BaseMenuController implements Colla
 		return R.string.shared_string_add;
 	}
 
+	public boolean isFavButtonEnabled() {
+		return true;
+	}
+
 	public int getWaypointActionIconId() {
 		return R.drawable.map_action_flag_dark;
 	}

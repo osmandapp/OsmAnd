@@ -78,10 +78,8 @@ public class SelectCategoryDialogFragment extends DialogFragment {
 		if (gpxFile != null) {
 			if (gpxCategories != null) {
 				for (Map.Entry<String, Integer> e : gpxCategories.entrySet()) {
-					if (!e.getKey().equals(getContext().getString(R.string.personal_category_name))) {
-						String categoryName = e.getKey();
-						addCategory(activity, ll, categoryName, e.getValue());
-					}
+					String categoryName = e.getKey();
+					addCategory(activity, ll, categoryName, e.getValue());
 				}
 			}
 		} else {

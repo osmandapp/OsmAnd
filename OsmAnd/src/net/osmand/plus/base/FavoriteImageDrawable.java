@@ -18,7 +18,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
 
-import net.osmand.data.PersonalFavouritePoint;
+import net.osmand.data.PersonalFavouritePoint.PointType;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 
@@ -26,10 +26,8 @@ import java.util.TreeMap;
 
 public class FavoriteImageDrawable extends Drawable {
 
-	private static final int MAX_PERSONAL_POINT = PersonalFavouritePoint.PointType.values().length;
 	private boolean withShadow;
 	private boolean synced;
-	private int position;
 	private boolean history;
 	private Bitmap favIcon;
 	private Bitmap favBackground;
@@ -44,20 +42,16 @@ public class FavoriteImageDrawable extends Drawable {
 	private Paint paintInnerCircle = new Paint();
 	private ColorFilter colorFilter;
 	private ColorFilter grayFilter;
-	private Drawable[] personalPointBitmaps;
+	private Drawable personalPointBitmaps;
 
-	public FavoriteImageDrawable(Context ctx, int color, boolean withShadow, boolean synced) {
+	public FavoriteImageDrawable(Context ctx, int color, boolean withShadow, boolean synced, PointType pointType) {
 		this.withShadow = withShadow;
 		this.synced = synced;
 		Resources res = ctx.getResources();
-		personalPointBitmaps = new Drawable[]{
-				UiUtilities.tintDrawable(ResourcesCompat.getDrawable(res, R.drawable.ic_action_home_dark, null),
-						ContextCompat.getColor(ctx, R.color.icon_color_default_light)),
-				UiUtilities.tintDrawable(ResourcesCompat.getDrawable(res, R.drawable.ic_action_work, null),
-						ContextCompat.getColor(ctx, R.color.icon_color_default_light)),
-				UiUtilities.tintDrawable(ResourcesCompat.getDrawable(res, R.drawable.ic_action_parking_dark, null),
-						ContextCompat.getColor(ctx, R.color.icon_color_default_light))
-		};
+		if (pointType != null) {
+			personalPointBitmaps = UiUtilities.tintDrawable(ResourcesCompat.getDrawable(res, pointType.getIconID(), null),
+					ContextCompat.getColor(ctx, R.color.icon_color_default_light));
+		}
 		int col = color == 0 || color == Color.BLACK ? res.getColor(R.color.color_favorite) : color;
 		favIcon = BitmapFactory.decodeResource(res, R.drawable.map_favorite);
 		favBackground = BitmapFactory.decodeResource(res, R.drawable.map_white_favorite_shield);
@@ -70,11 +64,6 @@ public class FavoriteImageDrawable extends Drawable {
 		initSimplePaint(paintInnerCircle, col);
 		colorFilter = new PorterDuffColorFilter(col, PorterDuff.Mode.MULTIPLY);
 		grayFilter = new PorterDuffColorFilter(res.getColor(R.color.color_favorite_gray), PorterDuff.Mode.MULTIPLY);
-	}
-
-	public FavoriteImageDrawable(Context ctx, int color, boolean withShadow, boolean synced, int position) {
-		this(ctx, color, withShadow, synced);
-		this.position = position;
 	}
 
 	private void initSimplePaint(Paint paint, int color) {
@@ -91,8 +80,8 @@ public class FavoriteImageDrawable extends Drawable {
 			//bs.inset((int) (4 * density), (int) (4 * density));
 			bs.inset(bs.width() / 4, bs.height() / 4);
 			listDrawable.setBounds(bs);
-			for (Drawable drawable : personalPointBitmaps) {
-				drawable.setBounds(bounds);
+			if (personalPointBitmaps != null) {
+				personalPointBitmaps.setBounds(bounds);
 			}
 		}
 	}
@@ -119,8 +108,8 @@ public class FavoriteImageDrawable extends Drawable {
 		} else if (withShadow) {
 			canvas.drawBitmap(favBackground, bs.exactCenterX() - favBackground.getWidth() / 2f, bs.exactCenterY() - favBackground.getHeight() / 2f, paintBackground);
 			canvas.drawBitmap(favIcon, bs.exactCenterX() - favIcon.getWidth() / 2f, bs.exactCenterY() - favIcon.getHeight() / 2f, paintIcon);
-		} else if (position < MAX_PERSONAL_POINT) {
-			personalPointBitmaps[position].draw(canvas);
+		} else if (personalPointBitmaps != null) {
+			personalPointBitmaps.draw(canvas);
 		} else {
 			int min = Math.min(bs.width(), bs.height());
 			int r = (min * 4 / 10);
@@ -157,27 +146,30 @@ public class FavoriteImageDrawable extends Drawable {
 
 	private static TreeMap<Integer, FavoriteImageDrawable> cache = new TreeMap<>();
 
-	public static FavoriteImageDrawable getOrCreate(Context a, int color, boolean withShadow, boolean synced, int position) {
+	public static FavoriteImageDrawable getOrCreate(Context a, int color, boolean withShadow, boolean synced, PointType pointType) {
+		int order = 0;
+		if (pointType != null)
+			order = pointType.getOrder();
 		color = color | 0xff000000;
-		int hash = (color << 3) + (withShadow ? 1 : 0) + (synced ? 3 : 0) + (position + 4);
+		int hash = (color << 4) + (withShadow ? 0b0100 : 0) + (synced ? 0b1100 : 0) + order;
 		FavoriteImageDrawable drawable = cache.get(hash);
 		if (drawable == null) {
-			drawable = new FavoriteImageDrawable(a, color, withShadow, synced, position);
+			drawable = new FavoriteImageDrawable(a, color, withShadow, synced, pointType);
 			drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
 			cache.put(hash, drawable);
 		}
 		return drawable;
 	}
 
-	public static FavoriteImageDrawable getOrCreate(Context a, int color, boolean withShadow, int position) {
-		return getOrCreate(a, color, withShadow, false, position);
+	public static FavoriteImageDrawable getOrCreate(Context a, int color, boolean withShadow, PointType pointType) {
+		return getOrCreate(a, color, withShadow, false, pointType);
 	}
 
 	public static FavoriteImageDrawable getOrCreate(Context a, int color, boolean withShadow) {
-		return getOrCreate(a, color, withShadow, false, MAX_PERSONAL_POINT);
+		return getOrCreate(a, color, withShadow, false, null);
 	}
 
 	public static FavoriteImageDrawable getOrCreateSyncedIcon(Context a, int color) {
-		return getOrCreate(a, color, false, true, MAX_PERSONAL_POINT);
+		return getOrCreate(a, color, false, true, null);
 	}
 }

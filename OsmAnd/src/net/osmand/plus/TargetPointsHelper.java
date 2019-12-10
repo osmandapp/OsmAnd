@@ -150,15 +150,11 @@ public class TargetPointsHelper {
 	}
 
 	public void lookupAddessAll() {
-		FavouritesDbHelper favorites = ctx.getFavorites();
 		lookupAddressForPointToNavigate();
 		lookupAddessForStartPoint();
 		for (TargetPoint targetPoint : intermediatePoints) {
 			lookupAddressForIntermediatePoint(targetPoint);
 		}
-		favorites.lookupAddressForHomePoint();
-		favorites.lookupAddressForWorkPoint();
-		favorites.lookupAddressForParkingPoint();
 		lookupAddressForMyLocationPoint();
 	}
 

@@ -45,7 +45,6 @@ import net.osmand.plus.FavouritesDbHelper.FavoritesListener;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.base.FavoriteImageDrawable;
@@ -54,7 +53,6 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.myplaces.FavoritesFragmentStateHolder;
-import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -741,9 +739,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 		Filter myFilter;
 		private Set<?> filter;
 
-		public void synchronizeGroups() {
-			ParkingPositionPlugin plugin = OsmandPlugin.getEnabledPlugin(ParkingPositionPlugin.class);
-			boolean parkingPluginEnable = plugin != null;
+		void synchronizeGroups() {
 			favoriteGroups.clear();
 			groups.clear();
 			List<FavoriteGroup> disablesGroups = new ArrayList<>();
@@ -752,37 +748,14 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			for (FavoriteGroup key : gs) {
 				boolean empty = true;
 				if (flt == null || flt.contains(key)) {
-					if (key.name.equals(PersonalFavouritePoint.PERSONAL)) {
-						ArrayList<FavouritePoint> list = new ArrayList<>();
-						for (FavouritePoint p : key.points) {
-							if (p.getName().equals(PersonalFavouritePoint.PointType.PARKING.name())) {
-								if (parkingPluginEnable) {
-									list.add(p);
-									empty = false;
-								}
-							} else {
-								list.add(p);
-								empty = false;
-							}
-						}
-						favoriteGroups.put(key, list);
-					} else {
 						empty = false;
 						favoriteGroups.put(key, new ArrayList<>(key.points));
-					}
 				} else {
 					ArrayList<FavouritePoint> list = new ArrayList<>();
 					for (FavouritePoint p : key.points) {
 						if (flt.contains(p)) {
-							if (p.getName().equals(PersonalFavouritePoint.PointType.PARKING.name())) {
-								if (parkingPluginEnable) {
-									list.add(p);
-									empty = false;
-								}
-							} else {
-								list.add(p);
-								empty = false;
-							}
+							list.add(p);
+							empty = false;
 						}
 					}
 					favoriteGroups.put(key, list);
@@ -978,7 +951,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 				distanceText.setText(distanceWithAddress);
 				icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(getActivity(),
 						visible ? model.getColor() : getResources().getColor(disabledIconColor), false,
-						((PersonalFavouritePoint) model).getType().getOrder() - 1));
+						((PersonalFavouritePoint) model).getType()));
 				name.setText((model.getName()));
 			} else {
 				icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(getActivity(),

@@ -1,6 +1,7 @@
 package net.osmand.data;
 
 import android.content.Context;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 
@@ -12,39 +13,46 @@ public class PersonalFavouritePoint extends FavouritePoint {
 	private Context ctx;
 
 	private PointType type;
-	public static final String PERSONAL = "personal";
+	static final String PERSONAL = "personal";
 
 	public enum PointType {
-		HOME("home", R.string.home_button, 1),
-		WORK("work", R.string.work_button, 2),
-		PARKING("parking", R.string.map_widget_parking, 3);
+		HOME("home", R.string.home_button, 1, R.drawable.ic_action_home_dark),
+		WORK("work", R.string.work_button, 2, R.drawable.ic_action_work),
+		PARKING("parking", R.string.map_widget_parking, 3, R.drawable.ic_action_parking_dark);
 
-		private String pointName;
+		private String typeName;
 		@StringRes
 		private int resId;
 		private int order;
+		@DrawableRes
+		private int iconID;
 
-		PointType(String pointName, @StringRes int resId, int order) {
-			this.pointName = pointName;
+		PointType(@NonNull String typeName, @StringRes int resId, int order, @DrawableRes int iconID) {
+			this.typeName = typeName;
 			this.resId = resId;
 			this.order = order;
+			this.iconID = iconID;
 		}
 
 		public String getName() {
-			return pointName;
+			return typeName;
 		}
 
 		public int getOrder() {
 			return order;
 		}
 
-		public static PointType valueOfPointName(@NonNull String typeName){
+		public static PointType valueOfTypeName(@NonNull String typeName) {
 
 			for (PointType pt:values()) {
-				if(pt.pointName.equals(typeName))
+				if (pt.typeName.equals(typeName))
 						return pt;
 			}
-			throw new IllegalArgumentException("Illegal PointType pointName");
+			throw new IllegalArgumentException("Illegal PointType typeName");
+		}
+
+		public int getIconID() {
+			return iconID;
 		}
 
 		public String getHumanString(@NonNull Context ctx) {
@@ -53,13 +61,13 @@ public class PersonalFavouritePoint extends FavouritePoint {
 	}
 
 	public PersonalFavouritePoint(@NonNull Context ctx, @NonNull PointType type, double latitude, double longitude) {
-		super(latitude, longitude, type.pointName, PERSONAL);
+		super(latitude, longitude, type.typeName, PERSONAL);
 		this.ctx = ctx;
 		this.type = type;
 	}
 
-	public PersonalFavouritePoint(@NonNull Context ctx, @NonNull String pointName, double latitude, double longitude) throws IllegalArgumentException {
-		this(ctx, PointType.valueOfPointName(pointName), latitude, longitude);
+	PersonalFavouritePoint(@NonNull Context ctx, @NonNull String typeName, double latitude, double longitude) throws IllegalArgumentException {
+		this(ctx, PointType.valueOfTypeName(typeName), latitude, longitude);
 	}
 
 	@Override
@@ -100,7 +108,7 @@ public class PersonalFavouritePoint extends FavouritePoint {
 	public WptPt toWpt() {
 		WptPt pt = super.toWpt();
 		pt.getExtensionsToWrite().put(PERSONAL, "true");
-		pt.name = type.pointName;
+		pt.name = type.typeName;
 		pt.desc = getDescription();
 		return pt;
 	}
