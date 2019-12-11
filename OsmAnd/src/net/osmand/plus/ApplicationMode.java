@@ -50,6 +50,7 @@ public class ApplicationMode {
 	private static Map<String, Set<ApplicationMode>> widgetsAvailabilityMap = new LinkedHashMap<>();
 
 	private static List<ApplicationMode> defaultValues = new ArrayList<>();
+	private static List<ApplicationMode> customValues = new ArrayList<>();
 	private static List<ApplicationMode> values = new ArrayList<>();
 	private static List<ApplicationMode> cachedFilteredValues = new ArrayList<>();
 
@@ -209,6 +210,7 @@ public class ApplicationMode {
 			m.locationIconDayLost = m.parentAppMode.locationIconDayLost;
 			m.locationIconNightLost = m.parentAppMode.locationIconNightLost;
 			values.add(applicationMode);
+			customValues.add(applicationMode);
 			return applicationMode;
 		}
 
@@ -354,6 +356,11 @@ public class ApplicationMode {
 		return create(parent, -1, stringKey).userProfileTitle(userProfileTitle);
 	}
 
+	public static ApplicationModeBuilder changeBaseMode(ApplicationMode applicationMode) {
+		ApplicationModeBuilder builder = new ApplicationModeBuilder();
+		builder.applicationMode = applicationMode;
+		return builder;
+	}
 
 	public static List<ApplicationMode> values(OsmandApplication app) {
 		if (customizationListener == null) {
@@ -394,6 +401,10 @@ public class ApplicationMode {
 
 	public static List<ApplicationMode> getDefaultValues() {
 		return defaultValues;
+	}
+
+	public static List<ApplicationMode> getCustomValues() {
+		return customValues;
 	}
 
 	// returns modifiable ! Set<ApplicationMode> to exclude non-wanted derived
@@ -611,6 +622,7 @@ public class ApplicationMode {
 
 	public static void onApplicationStart(OsmandApplication app) {
 		// load for default profiles to initialize later custom modes
+		initDefaultModesParams(app);
 		initDefaultSpeed(app);
 		initCustomModes(app);
 		initDefaultSpeed(app);
@@ -651,6 +663,25 @@ public class ApplicationMode {
 		return gson.toJson(mb);
 	}
 
+	private static void initDefaultModesParams(OsmandApplication app) {
+		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+		Type t = new TypeToken<ArrayList<ApplicationModeBean>>() {}.getType();
+		List<ApplicationModeBean> defaultAppModeBeans = gson.fromJson(app.getSettings().DEFAULT_APP_PROFILES.get(), t);
+
+		if (!Algorithms.isEmpty(defaultAppModeBeans)) {
+			for (ApplicationModeBean modeBean : defaultAppModeBeans) {
+				ApplicationMode applicationMode = ApplicationMode.valueOfStringKey(modeBean.stringKey, null);
+				if (applicationMode != null) {
+					applicationMode.userProfileName = modeBean.userProfileName;
+					applicationMode.iconResName = modeBean.iconName;
+					applicationMode.iconColor = modeBean.iconColor;
+					applicationMode.routingProfile = modeBean.routingProfile;
+					applicationMode.routeService = modeBean.routeService;
+				}
+			}
+		}
+	}
+
 	private static void initCustomModes(OsmandApplication app){
 		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 		Type t = new TypeToken<ArrayList<ApplicationModeBean>>() {}.getType();
@@ -669,46 +700,51 @@ public class ApplicationMode {
 
 	}
 
-	private static void saveCustomModeToSettings(OsmandSettings settings){
-		List<ApplicationModeBean> customModes = new ArrayList<>();
-		for (ApplicationMode mode : values) {
-			if (mode.parentAppMode != null) {
-				ApplicationModeBean mb = new ApplicationModeBean();
-				mb.userProfileName = mode.userProfileName;
-				mb.iconColor = mode.iconColor;
-				mb.iconName = mode.iconResName;
-				mb.parent = mode.parentAppMode.getStringKey();
-				mb.stringKey = mode.stringKey;
-				mb.routeService = mode.routeService;
-				mb.routingProfile = mode.routingProfile;
-				customModes.add(mb);
-			}
-		}
+	private static void saveAppModesToSettings(OsmandSettings settings, boolean saveCustomModes) {
+		List<ApplicationMode> appModes = saveCustomModes ? customValues : defaultValues;
+		List<ApplicationModeBean> modeBeans = createApplicationModeBeans(appModes);
+
 		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-		String profiles = gson.toJson(customModes);
-		settings.CUSTOM_APP_PROFILES.set(profiles);
+		String profiles = gson.toJson(modeBeans);
+		if (saveCustomModes) {
+			settings.CUSTOM_APP_PROFILES.set(profiles);
+		} else {
+			settings.DEFAULT_APP_PROFILES.set(profiles);
+		}
 	}
 
-	public static ApplicationMode saveCustomProfile(ApplicationModeBuilder builder, OsmandApplication app) {
-		ApplicationMode mode = null;
-		for(ApplicationMode m : values) {
-			if(m.stringKey.equals(builder.applicationMode.stringKey)) {
-				mode = m;
-				mode.iconResName = builder.applicationMode.iconResName;
-				mode.iconRes = builder.applicationMode.iconRes;
-				mode.userProfileName = builder.applicationMode.userProfileName;
-				mode.parentAppMode = builder.applicationMode.parentAppMode;
-				mode.routingProfile = builder.applicationMode.routingProfile;
-				mode.routeService = builder.applicationMode.routeService;
-				mode.iconColor = builder.applicationMode.iconColor;
-				break;
-			}
+	private static List<ApplicationModeBean> createApplicationModeBeans(List<ApplicationMode> applicationModes) {
+		List<ApplicationModeBean> modeBeans = new ArrayList<>();
+		for (ApplicationMode mode : applicationModes) {
+			ApplicationModeBean mb = new ApplicationModeBean();
+			mb.userProfileName = mode.userProfileName;
+			mb.iconColor = mode.iconColor;
+			mb.iconName = mode.iconResName;
+			mb.parent = mode.parentAppMode.getStringKey();
+			mb.stringKey = mode.stringKey;
+			mb.routeService = mode.routeService;
+			mb.routingProfile = mode.routingProfile;
+			modeBeans.add(mb);
 		}
-		if(mode == null) {
+
+		return modeBeans;
+	}
+
+	public static ApplicationMode saveProfile(ApplicationModeBuilder builder, OsmandApplication app) {
+		ApplicationMode mode = ApplicationMode.valueOfStringKey(builder.applicationMode.stringKey, null);
+		if (mode != null) {
+			mode.iconResName = builder.applicationMode.iconResName;
+			mode.iconRes = builder.applicationMode.iconRes;
+			mode.userProfileName = builder.applicationMode.userProfileName;
+			mode.parentAppMode = builder.applicationMode.parentAppMode;
+			mode.routingProfile = builder.applicationMode.routingProfile;
+			mode.routeService = builder.applicationMode.routeService;
+			mode.iconColor = builder.applicationMode.iconColor;
+		} else {
 			mode = builder.customReg();
 			initRegVisibility();
 		}
-		saveCustomModeToSettings(app.getSettings());
+		saveAppModesToSettings(app.getSettings(), mode.isCustomProfile());
 
 		return mode;
 	}
@@ -721,8 +757,9 @@ public class ApplicationMode {
 				it.remove();
 			}
 		}
+		customValues.remove(md);
 		cachedFilteredValues.remove(md);
-		saveCustomModeToSettings(app.getSettings());
+		saveAppModesToSettings(app.getSettings(), md.isCustomProfile());
 	}
 
 	public static boolean changeProfileAvailability(ApplicationMode mode, boolean isSelected, OsmandApplication app) {

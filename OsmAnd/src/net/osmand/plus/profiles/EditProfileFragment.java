@@ -671,7 +671,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		}
 		builder.setColor(profile.iconColor);
 
-		mode = ApplicationMode.saveCustomProfile(builder, getMyApplication());
+		mode = ApplicationMode.saveProfile(builder, getMyApplication());
 		if (!ApplicationMode.values(app).contains(mode)) {
 			ApplicationMode.changeProfileAvailability(mode, true, getMyApplication());
 		}
