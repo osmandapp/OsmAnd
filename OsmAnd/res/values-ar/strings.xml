@@ -3196,7 +3196,7 @@
     <string name="files_present">%1$d الملفات (%2$s) موجودة بالموقع السابق \'%3$s\'.</string>
     <string name="move_maps">نقل الخرائط</string>
     <string name="dont_move_maps">عدم النقل</string>
-    <string name="public_transport_ped_route_title">المسار على الأقدام حوالي٪ 1 $ s ، وقد يكون أسرع من وسائل النقل العام</string>
+    <string name="public_transport_ped_route_title">المسار على الأقدام حوالي٪1$s ، وقد يكون أسرع من وسائل النقل العام</string>
     <string name="public_transport_no_route_title">لسوء الحظ ، لم يستطع أوسماند العثور علي مسار مناسب للإعدادات الخاصة بك.</string>
     <string name="public_transport_try_ped">حاول التنقل مشيا على الأقدام.</string>
     <string name="public_transport_try_change_settings">حاول تغيير الإعدادات.</string>
