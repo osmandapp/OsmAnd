@@ -993,8 +993,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 		override fun getCurrentValue() = getFormattedValue(minLocationDistance)
 
 		override fun setCurrentValue(index: Int) {
-			val value = MIN_LOCATION_DISTANCE[index]
-			minLocationDistance = value
+			minLocationDistance = MIN_LOCATION_DISTANCE[index]
 		}
 
 		override fun getMenuItems() = MIN_LOCATION_DISTANCE.map { getFormattedValue(it) }
@@ -1011,8 +1010,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 		override fun getCurrentValue() = getFormattedValue(minLocationAccuracy)
 
 		override fun setCurrentValue(index: Int) {
-			val value = MIN_LOCATION_ACCURACY[index]
-			minLocationAccuracy = value
+			minLocationAccuracy = MIN_LOCATION_ACCURACY[index]
 		}
 
 		override fun getMenuItems() = MIN_LOCATION_ACCURACY.map { getFormattedValue(it) }
@@ -1029,8 +1027,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 		override fun getCurrentValue() = getFormattedValue(minLocationSpeed)
 
 		override fun setCurrentValue(index: Int) {
-			val value = MIN_LOCATION_SPEED[index]
-			minLocationSpeed = value
+			minLocationSpeed = MIN_LOCATION_SPEED[index]
 		}
 
 		override fun getMenuItems() = MIN_LOCATION_SPEED.map { getFormattedValue(it) }
