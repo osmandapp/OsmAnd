@@ -3231,8 +3231,8 @@
     <string name="show_compass_ruler">إظهار مسطرةالبوصلة</string>
     <string name="hide_compass_ruler">إخفاء مسطرة البوصلة</string>
     <string name="select_icon_profile_dialog_title">اختر أيقونة</string>
-    <string name="settings_routing_mode_string">الوضع:% s</string>
-    <string name="settings_derived_routing_mode_string">وضع المستخدم ، مشتق من:% s</string>
+    <string name="settings_routing_mode_string">الوضع:%s</string>
+    <string name="settings_derived_routing_mode_string">وضع المستخدم ، مشتق من:%s</string>
     <string name="routing_profile_ski">تزلج</string>
     <string name="profile_type_descr_string">النوع:% s</string>
     <string name="profile_type_base_string">ملف التعريف الأساسي</string>
@@ -3301,16 +3301,16 @@
     <string name="sett_generic_ext_input">لوحة المفاتيح</string>
     <string name="sett_wunderlinq_ext_input">وندرلينك</string>
     <string name="sett_parrot_ext_input">ببغاء</string>
-    <string name="new_route_calculated_dist_dbg">المسار: المسافة٪ s ، وقت جهاز التوجيه٪ s
-\nالحساب:٪ .1f ثانية ،٪ d طرق ،٪ d تجانب)</string>
+    <string name="new_route_calculated_dist_dbg">المسار: المسافة٪s ، وقت جهاز التوجيه٪s
+\nالحساب:٪.1f ثانية ،٪d طرق ،٪d تجانب)</string>
     <string name="lang_oc">الاوكيتانيه</string>
     <string name="get_discount_title">احصل على خصم بمقدار %d %@ at %d%% .</string>
     <string name="get_discount_first_part">%1$s للأول %2$s</string>
     <string name="get_discount_first_few_part">%1$s للأول %2$s</string>
-    <string name="get_discount_second_part">ثم %1 $ s</string>
-    <string name="price_and_discount">%1 $ s • وفر %2 $ s</string>
+    <string name="get_discount_second_part">ثم %1$s</string>
+    <string name="price_and_discount">%1$s • وفر %2$s</string>
     <string name="apply_to_current_profile">تطبيق فقط على \"%1$s\"</string>
-    <string name="route_parameters_info">إعدادات التوجيه في ملف التعريف المحدد \"٪ 1 $ s\".</string>
+    <string name="route_parameters_info">إعدادات التوجيه في ملف التعريف المحدد \"٪1$s\".</string>
     <string name="routing_attr_width_name">حد العرض</string>
     <string name="routing_attr_width_description">حدد الحد المسموح به لعرض السيارة على الطرق.</string>
     <string name="simulate_your_location_gpx_descr">محاكاة موقعك باستخدام مسار GPX مسجل.</string>
