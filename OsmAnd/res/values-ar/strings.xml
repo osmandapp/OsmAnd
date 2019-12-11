@@ -1872,7 +1872,7 @@
     <string name="rendering_value_walkingRoutesScopeOSMC_name">تلوين وفق الانتماء للشبكة</string>
     <string name="rendering_value_walkingRoutesOSMC_name">تلوين وفق رمز تنزه OSMC</string>
     <string name="shared_string_logoff">خروج</string>
-    <string name="local_recordings_delete_all_confirm">هل أنت متأكد من أنك تريد حذف الملاحظات٪ 1 $ d؟</string>
+    <string name="local_recordings_delete_all_confirm">هل أنت متأكد من أنك تريد حذف الملاحظات ٪1$d؟</string>
     <string name="nautical_maps_missing">لعرض الخرائط البحرية، يجب تحميل خريطة خاصة محلياً</string>
     <string name="save_track_to_gpx_globally_descr">تسجيل الموقع العام إلى ملف GPX يمكن تشغيله أو إيقافه باستخدام نافذة تسجيل GPX على الشاشة خريطة.</string>
     <string name="proxy_host_descr">ضبط اسم مضيف البروكسي (مثال 127.0.0.1).</string>
