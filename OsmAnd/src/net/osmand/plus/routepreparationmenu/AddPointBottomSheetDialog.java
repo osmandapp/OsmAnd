@@ -362,23 +362,11 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 	private void loadFavoritesItems(List<Object> items, FavouritesDbHelper helper) {
 		items.clear();
 		addMainScrollItems(items, helper);
-		items.addAll(helper.getNonPersonalVisibleFavouritePoints());
-		if (items.isEmpty()) {
-			items.addAll(helper.getNonPersonalFavouritePoints());
-		}
+		items.addAll(helper.getVisibleFavouritePoints());
 	}
 
 	private void addMainScrollItems(List<Object> items, FavouritesDbHelper favorites) {
 		items.add(FAVORITES);
-		if (favorites.getHomePoint() != null) {
-			items.add(PointType.HOME);
-		}
-		if (favorites.getWorkPoint() != null) {
-			items.add(PointType.WORK);
-		}
-		if (favorites.getParkingPoint() != null) {
-			items.add(PointType.PARKING);
-		}
 	}
 
 	private void createFavoritesScrollItem() {
@@ -657,31 +645,15 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 					favoriteViewHolder.icon.setImageDrawable(getContentIcon(R.drawable.ic_action_fav_dark));
 					favoriteViewHolder.description.setVisibility(View.GONE);
 				} else {
-					if (item instanceof PointType) {
-						FavouritePoint point = null;
+					if (item instanceof PersonalFavouritePoint) {
+						PersonalFavouritePoint point = (PersonalFavouritePoint) item;
 						boolean light = app.getSettings().isLightContent();
 						int iconColor = light ? R.color.icon_color_default_light : R.color.icon_color_default_dark;
-						if (item == PointType.HOME) {
-							point = favorites.getHomePoint();
-						} else if (item == PointType.WORK) {
-							point = favorites.getWorkPoint();
-						} else if (item == PointType.PARKING) {
-							point = favorites.getParkingPoint();
-						}
-						Drawable icon = null;
-						String title = "";
-						String description = "";
-						if (point != null) {
-							PersonalFavouritePoint personalPoint = (PersonalFavouritePoint) point;
-							icon = app.getUIUtilities().getIcon(personalPoint.getType().getIconId(), iconColor);
-							title = point.getName();
-							description = point.getDescription();
-						}
-						favoriteViewHolder.icon.setImageDrawable(icon);
-						favoriteViewHolder.title.setText(title);
-						favoriteViewHolder.description.setText(description);
+						favoriteViewHolder.icon.setImageDrawable(app.getUIUtilities().getIcon(point.getType().getIconId(), iconColor));
+						favoriteViewHolder.title.setText(point.getName());
+						favoriteViewHolder.description.setText(point.getDescription());
 					} else if (item instanceof FavouritePoint) {
-						FavouritePoint point = (FavouritePoint) getItem(position);
+						FavouritePoint point = (FavouritePoint) item;
 						favoriteViewHolder.title.setText(point.getName());
 						if (point.getCategory().equals("")) {
 							favoriteViewHolder.description.setText(R.string.shared_string_favorites);
