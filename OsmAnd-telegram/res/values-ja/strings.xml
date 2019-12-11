@@ -162,7 +162,7 @@
     <string name="get_telegram_account_first">現在地の共有をおこなうには、Telegramアカウントが必要です。</string>
     <string name="get_telegram_description_continue">Telegramをインストールしてアカウントを設定してください。</string>
     <string name="get_telegram_after_creating_account">その後、このアプリを使用できます。</string>
-    <string name="shared_string_all">すべて</string>
+    <string name="shared_string_all">全て</string>
     <string name="shared_string_off">OFF</string>
     <string name="already_registered_in_telegram">登録済みのTelegramアカウントと電話番号が必要です。</string>
     <string name="do_not_have_telegram">私はTelegramアカウントを持っていません</string>
@@ -246,4 +246,5 @@
     <string name="my_location">現在地</string>
     <string name="live_now">今現在</string>
     <string name="timeline">タイムライン</string>
+    <string name="si_min_km">分/キロメートル</string>
 </resources>
