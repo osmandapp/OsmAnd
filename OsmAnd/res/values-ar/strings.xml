@@ -2280,7 +2280,7 @@
     <string name="hide_from_zoom_level">إخفاء من مستوى التكبير/التصغير</string>
     <string name="srtm_menu_download_descr">يجب تحميل خريطة الخطوط المحيطية (الكنتورية) لهذه المنطقة لعرضها.</string>
     <string name="show_from_zoom_level">العرض بدءا من مستوى التكبير</string>
-    <string name="display_zoom_level">عرض مستوى التكبير:٪ 1 $ s</string>
+    <string name="display_zoom_level">عرض مستوى التكبير:٪1$s</string>
     <string name="animate_my_location">استقراء موقعي</string>
     <string name="srtm_purchase_header">لمشاهدة خطوط التضاريس على الخريطة، يجب تحميل الملحق أولاً.</string>
     <string name="animate_my_location_desc">تمكين استقراء موقعي أثناء الفقد المؤقت للموقع وذلك لإصلاحه.</string>
