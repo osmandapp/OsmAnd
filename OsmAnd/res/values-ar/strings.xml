@@ -3234,7 +3234,7 @@
     <string name="settings_routing_mode_string">الوضع:%s</string>
     <string name="settings_derived_routing_mode_string">وضع المستخدم ، مشتق من:%s</string>
     <string name="routing_profile_ski">تزلج</string>
-    <string name="profile_type_descr_string">النوع:% s</string>
+    <string name="profile_type_descr_string">النوع:%s</string>
     <string name="profile_type_base_string">ملف التعريف الأساسي</string>
     <string name="profile_alert_need_routing_type_title">حدد نوع الملاحة</string>
     <string name="profile_alert_need_routing_type_msg">يرجى تحديد نوع الملاحة لملف التعريف الجديد</string>
