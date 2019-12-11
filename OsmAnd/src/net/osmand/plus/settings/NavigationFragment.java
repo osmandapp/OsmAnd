@@ -1,11 +1,19 @@
 package net.osmand.plus.settings;
 
+import android.os.Bundle;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.SwitchPreferenceCompat;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.profiles.EditProfileFragment.RoutingProfilesResources;
+import net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
+import net.osmand.router.GeneralRouter;
+
+import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.DIALOG_TYPE;
+import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.SELECTED_KEY;
+import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.TYPE_NAV_PROFILE;
 
 public class NavigationFragment extends BaseSettingsFragment {
 
@@ -20,7 +28,10 @@ public class NavigationFragment extends BaseSettingsFragment {
 		SwitchPreferenceCompat turnScreenOn = (SwitchPreferenceCompat) findPreference(settings.TURN_SCREEN_ON_ENABLED.getId());
 		SwitchPreferenceEx animateMyLocation = (SwitchPreferenceEx) findPreference(settings.ANIMATE_MY_LOCATION.getId());
 
-		navigationType.setIcon(getContentIcon(R.drawable.ic_action_car_dark));
+		GeneralRouter gr = app.getRoutingConfig().getRouter(getSelectedAppMode().getRoutingProfile());
+		RoutingProfilesResources routingProfilesResources = RoutingProfilesResources.valueOf(gr.getProfileName().toUpperCase());
+		navigationType.setSummary(routingProfilesResources.getStringRes());
+		navigationType.setIcon(getContentIcon(routingProfilesResources.getIconRes()));
 		routeParameters.setIcon(getContentIcon(R.drawable.ic_action_route_distance));
 		showRoutingAlarms.setIcon(getContentIcon(R.drawable.ic_action_alert));
 		speakRoutingAlarms.setIcon(getContentIcon(R.drawable.ic_action_volume_up));
@@ -40,6 +51,26 @@ public class NavigationFragment extends BaseSettingsFragment {
 			return true;
 		}
 		return super.onPreferenceChange(preference, newValue);
+	}
+
+	@Override
+	public boolean onPreferenceClick(Preference preference) {
+		if (preference.getKey().equals("navigation_type")) {
+			if (getSelectedAppMode().isCustomProfile()) {
+				final SelectProfileBottomSheetDialogFragment dialog = new SelectProfileBottomSheetDialogFragment();
+				Bundle bundle = new Bundle();
+				if (getSelectedAppMode() != null) {
+					bundle.putString(SELECTED_KEY, getSelectedAppMode().getRoutingProfile());
+				}
+				bundle.putString(DIALOG_TYPE, TYPE_NAV_PROFILE);
+				dialog.setArguments(bundle);
+				if (getActivity() != null) {
+					getActivity().getSupportFragmentManager().beginTransaction()
+							.add(dialog, "select_nav_type").commitAllowingStateLoss();
+				}
+			}
+		}
+		return true;
 	}
 
 	private void setupVehicleParametersPref() {

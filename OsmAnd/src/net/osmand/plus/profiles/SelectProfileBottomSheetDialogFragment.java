@@ -135,6 +135,7 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 
 		} else if (type.equals(TYPE_NAV_PROFILE)){
 			items.add(new TitleItem(getString(R.string.select_nav_profile_dialog_title)));
+			items.add(new LongDescriptionItem(getString(R.string.select_nav_profile_dialog_message)));
 			for (int i = 0; i < profiles.size(); i++) {
 				final int pos = i;
 				final ProfileDataObject profile = profiles.get(i);
