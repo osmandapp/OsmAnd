@@ -243,7 +243,7 @@ object OsmandFormatter {
 			SpeedConstants.NAUTICALMILES_PER_HOUR -> kmh * METERS_IN_KILOMETER / METERS_IN_ONE_NAUTICALMILE
 			SpeedConstants.MINUTES_PER_KILOMETER -> {
 				if (metersPerSeconds < 0.111111111) {
-					return "-" + mc.toShortString(ctx)
+					return "-" + if (useLocalizedString) mc.toShortString(ctx) else mc.getDefaultString()
 				}
 				METERS_IN_KILOMETER / (metersPerSeconds * 60)
 			}

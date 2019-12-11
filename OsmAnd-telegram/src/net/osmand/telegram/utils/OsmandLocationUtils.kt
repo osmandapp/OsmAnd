@@ -332,6 +332,9 @@ object OsmandLocationUtils {
 
 	fun parseSpeed(speedS: String): Double {
 		try {
+			if (!speedS.contains(" ")) {
+				return 0.0
+			}
 			val speedSplit = speedS.split(" ")
 			val speedVal = speedSplit.first().toDouble()
 			val speedFormat = OsmandFormatter.SpeedConstants.values().firstOrNull { it.getDefaultString() == speedSplit.last() }
