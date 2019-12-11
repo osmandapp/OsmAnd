@@ -20,6 +20,7 @@ public interface OsmAndCustomizationConstants {
 	String DRAWER_HELP_ID = DRAWER_ITEM_ID_SCHEME + "help";
 	String DRAWER_BUILDS_ID = DRAWER_ITEM_ID_SCHEME + "builds";
 	String DRAWER_DIVIDER_ID = DRAWER_ITEM_ID_SCHEME + "divider";
+	String DRAWER_AVOID_ID = DRAWER_ITEM_ID_SCHEME + "avoid_roads";
 
 	// Configure Map:
 	String CONFIGURE_MAP_ITEM_ID_SCHEME = "map.configure.";

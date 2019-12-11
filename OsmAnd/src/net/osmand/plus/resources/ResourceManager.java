@@ -253,6 +253,10 @@ public class ResourceManager {
 		if (!path.exists()) {
 			path.mkdir();
 		}
+		path = context.getAppPath(IndexConstants.AVOID_ROADS_DIR);
+		if (!path.exists()) {
+			path.mkdir();
+		}
 	}
 
 	public BitmapTilesCache getBitmapTilesCache() {

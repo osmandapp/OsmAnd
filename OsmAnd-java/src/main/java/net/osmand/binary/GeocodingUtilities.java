@@ -1,5 +1,6 @@
 package net.osmand.binary;
 
+import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
@@ -25,9 +26,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -140,6 +143,50 @@ public class GeocodingUtilities {
 		}
 	}
 
+	public Map<Long, Location> multipleReverseGeocodingSearch(RoutingContext ctx, List<Location> points, boolean allowEmptyNames) throws IOException {
+		RoutePlannerFrontEnd rp = new RoutePlannerFrontEnd();
+		Map<Long, Location> result = new HashMap<>();
+		for (Location point : points) {
+			List<GeocodingResult> lst = new ArrayList<>();
+			List<RouteSegmentPoint> listR = new ArrayList<>();
+			rp.findRouteSegment(point.getLatitude(), point.getLongitude(), ctx, listR);
+			double distSquare = 0;
+			TLongHashSet set = new TLongHashSet();
+			Set<String> streetNames = new HashSet<String>();
+			for (RouteSegmentPoint p : listR) {
+				RouteDataObject road = p.getRoad();
+				if (!set.add(road.getId())) {
+					continue;
+				}
+				String name = Algorithms.isEmpty(road.getName()) ? road.getRef("", false, true) : road.getName();
+				if (allowEmptyNames || !Algorithms.isEmpty(name)) {
+					if (distSquare == 0 || distSquare > p.distSquare) {
+						distSquare = p.distSquare;
+					}
+					GeocodingResult sr = new GeocodingResult();
+					sr.searchPoint = new LatLon(point.getLatitude(), point.getLongitude());
+					sr.streetName = name == null ? "" : name;
+					sr.point = p;
+					sr.connectionPoint = new LatLon(MapUtils.get31LatitudeY(p.preciseY), MapUtils.get31LongitudeX(p.preciseX));
+					sr.regionFP = road.region.getFilePointer();
+					sr.regionLen = road.region.getLength();
+					if (streetNames.add(sr.streetName)) {
+						lst.add(sr);
+					}
+				}
+				if (p.distSquare > STOP_SEARCHING_STREET_WITH_MULTIPLIER_RADIUS * STOP_SEARCHING_STREET_WITH_MULTIPLIER_RADIUS &&
+						distSquare != 0 && p.distSquare > THRESHOLD_MULTIPLIER_SKIP_STREETS_AFTER * distSquare) {
+					break;
+				}
+				if (p.distSquare > STOP_SEARCHING_STREET_WITHOUT_MULTIPLIER_RADIUS * STOP_SEARCHING_STREET_WITHOUT_MULTIPLIER_RADIUS) {
+					break;
+				}
+			}
+			Collections.sort(lst, GeocodingUtilities.DISTANCE_COMPARATOR);
+			result.put(lst.get(0).point.getRoad().id, point);
+		}
+		return result;
+	}
 
 	public List<GeocodingResult> reverseGeocodingSearch(RoutingContext ctx, double lat, double lon, boolean allowEmptyNames) throws IOException {
 		RoutePlannerFrontEnd rp = new RoutePlannerFrontEnd();

@@ -46,6 +46,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.api.SQLiteAPI;
 import net.osmand.plus.api.SQLiteAPIImpl;
+import net.osmand.plus.avoidroads.AvoidRoadsHelper;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.dialogs.CrashBottomSheetDialogFragment;
 import net.osmand.plus.dialogs.RateUsBottomSheetDialog;
@@ -137,6 +138,7 @@ public class OsmandApplication extends MultiDexApplication {
 	LockHelper lockHelper;
 	SettingsHelper settingsHelper;
 	GpxDbHelper gpxDbHelper;
+	AvoidRoadsHelper avoidRoadsHelper;
 
 	private RoutingConfiguration.Builder routingConfig;
 	private Locale preferredLocale = null;
@@ -338,6 +340,10 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public SettingsHelper getSettingsHelper() {
 		return settingsHelper;
+	}
+
+	public AvoidRoadsHelper getAvoidRoadsHelper() {
+		return avoidRoadsHelper;
 	}
 
 	public synchronized DownloadIndexesThread getDownloadThread() {

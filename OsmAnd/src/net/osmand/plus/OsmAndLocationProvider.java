@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import net.osmand.GeoidAltitudeCorrection;
@@ -879,7 +880,14 @@ public class OsmAndLocationProvider implements SensorEventListener {
 								   ResultMatcher<RouteDataObject> result) {
 		return currentPositionHelper.getRouteSegment(loc, appMode, cancelPreviousSearch, result);
 	}
-	
+
+	public boolean getMultipleRouteSegmentsIds(List<net.osmand.Location> points,
+	                               @Nullable ApplicationMode appMode,
+	                               boolean cancelPreviousSearch,
+	                               ResultMatcher<Map<Long, net.osmand.Location>> result) {
+		return currentPositionHelper.getMultipleRouteSegmentsIds(points, appMode, cancelPreviousSearch, result);
+	}
+
 	public boolean getGeocodingResult(net.osmand.Location loc, ResultMatcher<GeocodingResult> result) {
 		return currentPositionHelper.getGeocodingResult(loc, result);
 	}

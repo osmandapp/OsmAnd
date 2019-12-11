@@ -438,7 +438,7 @@ public class RoutingContext {
 		long now = System.nanoTime();
 		for(int i = -t; i <= t; i++) {
 			for(int j = -t; j <= t; j++) {
-				ts.add(getRoutingTile(x31 +i*coordinatesShift, y31 + j*coordinatesShift, 0, OPTION_IN_MEMORY_LOAD));		
+				ts.add(getRoutingTile(x31 +i*coordinatesShift, y31 + j*coordinatesShift, 0, OPTION_IN_MEMORY_LOAD));
 			}
 		}
 		TLongIterator it = ts.iterator();

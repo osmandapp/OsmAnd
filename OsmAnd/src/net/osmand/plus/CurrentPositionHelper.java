@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -54,6 +55,14 @@ public class CurrentPositionHelper {
 								   boolean cancelPreviousSearch,
 								   ResultMatcher<RouteDataObject> result) {
 		return scheduleRouteSegmentFind(loc, false, true, cancelPreviousSearch, null, result, appMode);
+	}
+
+	public boolean getMultipleRouteSegmentsIds(List<Location> points,
+	                                           @Nullable ApplicationMode appMode,
+	                                           boolean cancelPreviousSearch,
+	                                           ResultMatcher<Map<Long, Location>> result) {
+		return scheduleMultipleRouteSegmentFind(points, false, true, cancelPreviousSearch, null, result, appMode);
+
 	}
 
 	public boolean getGeocodingResult(Location loc, ResultMatcher<GeocodingResult> result) {
@@ -115,6 +124,90 @@ public class CurrentPositionHelper {
 			res = true;
 		}
 		return res;
+	}
+
+	private boolean scheduleMultipleRouteSegmentFind(final List<Location> points,
+	                                                 final boolean storeFound,
+	                                                 final boolean allowEmptyNames,
+	                                                 final boolean cancelPreviousSearch,
+	                                                 @Nullable final ResultMatcher<GeocodingResult> geoCoding,
+	                                                 @Nullable final ResultMatcher<Map<Long, Location>> result,
+	                                                 @Nullable final ApplicationMode appMode) {
+		boolean res = false;
+		if (points.get(0) != null) {
+			long requestKey = getRequestNumberKey(storeFound, allowEmptyNames);
+			AtomicInteger requestNumber = requestNumbersMap.get(requestKey);
+			if (requestNumber == null) {
+				requestNumber = new AtomicInteger();
+				requestNumbersMap.put(requestKey, requestNumber);
+			}
+			final int request = requestNumber.incrementAndGet();
+			final AtomicInteger finalRequestNumber = requestNumber;
+			singleThreadExecutor.submit(new Runnable() {
+				@Override
+				public void run() {
+					processMultipleGeocoding(points, geoCoding, storeFound, allowEmptyNames, result, appMode, request, finalRequestNumber, cancelPreviousSearch);
+				}
+			});
+			res = true;
+		}
+		return res;
+	}
+
+	private synchronized void processMultipleGeocoding(@NonNull List<Location> points,
+	                                                   @Nullable ResultMatcher<GeocodingResult> geoCoding,
+	                                                   boolean storeFound,
+	                                                   boolean allowEmptyNames,
+	                                                   @Nullable final ResultMatcher<Map<Long, Location>> result,
+	                                                   @Nullable ApplicationMode appMode,
+	                                                   int request,
+	                                                   @NonNull AtomicInteger requestNumber,
+	                                                   boolean cancelPreviousSearch) {
+
+		if (cancelPreviousSearch && request != requestNumber.get()) {
+			return;
+		}
+
+		final Map<Long, Location> gr = runUpdateInThreadBatch(points,
+				geoCoding != null, allowEmptyNames, appMode);
+
+		if(result != null) {
+			app.runInUIThread(new Runnable() {
+				@Override
+				public void run() {
+					result.publish(gr == null || gr.isEmpty() ? null : gr);
+				}
+			});
+		}
+	}
+
+
+	@Nullable
+	private Map<Long, Location> runUpdateInThreadBatch(List<Location> points,
+	                                                                    boolean geocoding,
+	                                                                    boolean allowEmptyNames,
+	                                                                    @Nullable ApplicationMode appMode) {
+
+		List<BinaryMapReaderResource> checkReaders = new ArrayList<>();
+		for (Location loc : points) {
+			checkReaders.addAll(checkReaders(loc.getLatitude(), loc.getLongitude(), usedReaders));
+		}
+
+		if (appMode == null) {
+			appMode = app.getSettings().getApplicationMode();
+		}
+		if (ctx == null || am != appMode || checkReaders != usedReaders) {
+			initCtx(app, checkReaders, appMode);
+			if (ctx == null) {
+				return null;
+			}
+		}
+		try {
+			return new GeocodingUtilities().multipleReverseGeocodingSearch(geocoding ? defCtx : ctx, points, allowEmptyNames);
+		} catch (Exception e) {
+			log.error("Exception happened during runUpdateInThread", e);
+			return null;
+		}
 	}
 	
 	private void initCtx(OsmandApplication app, List<BinaryMapReaderResource> checkReaders,

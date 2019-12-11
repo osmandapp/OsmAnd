@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import net.osmand.CallbackWithObject;
 import net.osmand.Location;
+import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
@@ -27,6 +28,7 @@ import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.RndPointGenerator;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
@@ -34,12 +36,16 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.util.MapUtils;
 
+import org.apache.commons.logging.Log;
+
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class AvoidSpecificRoads {
-
+	private static final Log LOG = PlatformUtil.getLog(AvoidSpecificRoads.class);
 	private OsmandApplication app;
 
 	private Map<LatLon, RouteDataObject> impassableRoads = new LinkedHashMap<>();

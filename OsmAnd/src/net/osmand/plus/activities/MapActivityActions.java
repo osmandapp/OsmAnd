@@ -83,6 +83,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_AVOID_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_CONFIGURE_MAP_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_CONFIGURE_SCREEN_ID;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_DASHBOARD_ID;
@@ -967,6 +968,18 @@ public class MapActivityActions implements DialogProvider {
 						Intent intent = new Intent(mapActivity, HelpActivity.class);
 						intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 						mapActivity.startActivity(intent);
+						return true;
+					}
+				}).createItem());
+
+		optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.test_avoid_roads_menu_item, mapActivity)
+				.setId(DRAWER_AVOID_ID)
+				.setIcon(R.drawable.ic_action_road_works_dark)
+				.setListener(new ItemClickListener() {
+					@Override
+					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
+						app.logEvent("drawer_import_avoid_roads");
+						app.getAvoidRoadsHelper().testRun();
 						return true;
 					}
 				}).createItem());

@@ -109,7 +109,7 @@ public class RouteResultPreparationTest {
                     String expectedResult = expectedResults.get(segmentId);
                     if (expectedResult != null) {
                     	if(!Algorithms.objectEquals(expectedResult, turnLanes) &&
-                    			!Algorithms.objectEquals(expectedResult, lanes) && 
+                    			!Algorithms.objectEquals(expectedResult, lanes) &&
                     			!Algorithms.objectEquals(expectedResult, turn)) {
                     		Assert.assertEquals("Segment " + segmentId, expectedResult, turnLanes);
                     	}
