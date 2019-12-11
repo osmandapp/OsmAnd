@@ -3,6 +3,7 @@ package net.osmand.plus.mapcontextmenu.other;
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -72,6 +73,10 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 				public void onFavoritesLoaded() {
 					loadFavorites();
 					adapter.notifyDataSetChanged();
+				}
+
+				@Override
+				public void onFavoriteAddressResolved(@NonNull FavouritePoint favouritePoint) {
 				}
 			});
 		}
@@ -155,10 +160,10 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 				targetPointsHelper.navigateToPoint(ll, true, targetPointsHelper.getIntermediatePoints().size(), point.getPointDescription());
 				break;
 			case HOME:
-				favorites.setHomePoint(ll);
+				favorites.setHomePoint(ll, null);
 				break;
 			case WORK:
-				favorites.setWorkPoint(ll);
+				favorites.setWorkPoint(ll, null);
 				break;
 		}
 		MapRouteInfoMenu routeMenu = getMapRouteInfoMenu();

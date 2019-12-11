@@ -116,6 +116,10 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 				public void onFavoritesLoaded() {
 					favouritesAdapter.synchronizeGroups();
 				}
+
+				@Override
+				public void onFavoriteAddressResolved(@NonNull FavouritePoint favouritePoint) {
+				}
 			});
 		}
 		setAdapter(favouritesAdapter);
@@ -748,8 +752,8 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			for (FavoriteGroup key : gs) {
 				boolean empty = true;
 				if (flt == null || flt.contains(key)) {
-						empty = false;
-						favoriteGroups.put(key, new ArrayList<>(key.points));
+					empty = false;
+					favoriteGroups.put(key, new ArrayList<>(key.points));
 				} else {
 					ArrayList<FavouritePoint> list = new ArrayList<>();
 					for (FavouritePoint p : key.points) {
@@ -947,7 +951,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			name.setTextColor(getResources().getColor(visible ? enabledColor : disabledColor));
 			distanceText.setText(distance);
 			if (model instanceof PersonalFavouritePoint) {
-				String distanceWithAddress = String.format(getString(R.string.distance_and_address), distance, model.getDescription() != null ? model.getDescription() : "");
+				String distanceWithAddress = String.format(getString(R.string.distance_and_address), distance.trim(), model.getDescription() != null ? model.getDescription() : "");
 				distanceText.setText(distanceWithAddress);
 				icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(getActivity(),
 						visible ? model.getColor() : getResources().getColor(disabledIconColor), false,

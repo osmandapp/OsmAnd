@@ -25,13 +25,13 @@ public class PersonalFavouritePoint extends FavouritePoint {
 		private int resId;
 		private int order;
 		@DrawableRes
-		private int iconID;
+		private int iconId;
 
-		PointType(@NonNull String typeName, @StringRes int resId, int order, @DrawableRes int iconID) {
+		PointType(@NonNull String typeName, @StringRes int resId, int order, @DrawableRes int iconId) {
 			this.typeName = typeName;
 			this.resId = resId;
 			this.order = order;
-			this.iconID = iconID;
+			this.iconId = iconId;
 		}
 
 		public String getName() {
@@ -43,16 +43,16 @@ public class PersonalFavouritePoint extends FavouritePoint {
 		}
 
 		public static PointType valueOfTypeName(@NonNull String typeName) {
-
-			for (PointType pt:values()) {
-				if (pt.typeName.equals(typeName))
-						return pt;
+			for (PointType pt : values()) {
+				if (pt.typeName.equals(typeName)) {
+					return pt;
+				}
 			}
 			throw new IllegalArgumentException("Illegal PointType typeName");
 		}
 
-		public int getIconID() {
-			return iconID;
+		public int getIconId() {
+			return iconId;
 		}
 
 		public String getHumanString(@NonNull Context ctx) {

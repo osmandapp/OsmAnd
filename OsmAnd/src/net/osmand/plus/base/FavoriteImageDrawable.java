@@ -42,14 +42,14 @@ public class FavoriteImageDrawable extends Drawable {
 	private Paint paintInnerCircle = new Paint();
 	private ColorFilter colorFilter;
 	private ColorFilter grayFilter;
-	private Drawable personalPointBitmaps;
+	private Drawable personalPointBitmap;
 
 	public FavoriteImageDrawable(Context ctx, int color, boolean withShadow, boolean synced, PointType pointType) {
 		this.withShadow = withShadow;
 		this.synced = synced;
 		Resources res = ctx.getResources();
 		if (pointType != null) {
-			personalPointBitmaps = UiUtilities.tintDrawable(ResourcesCompat.getDrawable(res, pointType.getIconID(), null),
+			personalPointBitmap = UiUtilities.tintDrawable(ResourcesCompat.getDrawable(res, pointType.getIconId(), null),
 					ContextCompat.getColor(ctx, R.color.icon_color_default_light));
 		}
 		int col = color == 0 || color == Color.BLACK ? res.getColor(R.color.color_favorite) : color;
@@ -80,8 +80,8 @@ public class FavoriteImageDrawable extends Drawable {
 			//bs.inset((int) (4 * density), (int) (4 * density));
 			bs.inset(bs.width() / 4, bs.height() / 4);
 			listDrawable.setBounds(bs);
-			if (personalPointBitmaps != null) {
-				personalPointBitmaps.setBounds(bounds);
+			if (personalPointBitmap != null) {
+				personalPointBitmap.setBounds(bounds);
 			}
 		}
 	}
@@ -108,8 +108,8 @@ public class FavoriteImageDrawable extends Drawable {
 		} else if (withShadow) {
 			canvas.drawBitmap(favBackground, bs.exactCenterX() - favBackground.getWidth() / 2f, bs.exactCenterY() - favBackground.getHeight() / 2f, paintBackground);
 			canvas.drawBitmap(favIcon, bs.exactCenterX() - favIcon.getWidth() / 2f, bs.exactCenterY() - favIcon.getHeight() / 2f, paintIcon);
-		} else if (personalPointBitmaps != null) {
-			personalPointBitmaps.draw(canvas);
+		} else if (personalPointBitmap != null) {
+			personalPointBitmap.draw(canvas);
 		} else {
 			int min = Math.min(bs.width(), bs.height());
 			int r = (min * 4 / 10);
@@ -131,7 +131,7 @@ public class FavoriteImageDrawable extends Drawable {
 
 	@Override
 	public int getOpacity() {
-		return PixelFormat.UNKNOWN;
+		return 0;
 	}
 
 	@Override
@@ -147,11 +147,11 @@ public class FavoriteImageDrawable extends Drawable {
 	private static TreeMap<Integer, FavoriteImageDrawable> cache = new TreeMap<>();
 
 	public static FavoriteImageDrawable getOrCreate(Context a, int color, boolean withShadow, boolean synced, PointType pointType) {
-		int order = 0;
+		int pointTypeId = 0;
 		if (pointType != null)
-			order = pointType.getOrder();
+			pointTypeId = pointType.ordinal();
 		color = color | 0xff000000;
-		int hash = (color << 4) + (withShadow ? 0b0100 : 0) + (synced ? 0b1100 : 0) + order;
+		int hash = (color << 4) + ((withShadow ? 1 : 0) << 2) + ((synced ? 3 : 0) << 2) + pointTypeId;
 		FavoriteImageDrawable drawable = cache.get(hash);
 		if (drawable == null) {
 			drawable = new FavoriteImageDrawable(a, color, withShadow, synced, pointType);

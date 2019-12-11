@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -250,12 +251,12 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 											targetPointsHelper.navigateToPoint(ll, true, targetPointsHelper.getIntermediatePoints().size());
 											break;
 										case HOME:
-											app.showShortToastMessage(R.string.add_intermediate_point);
-											app.getFavorites().setHomePoint(ll);
+											app.showShortToastMessage(R.string.add_home);
+											app.getFavorites().setHomePoint(ll, null);
 											break;
 										case WORK:
-											app.showShortToastMessage(R.string.add_intermediate_point);
-											app.getFavorites().setWorkPoint(ll);
+											app.showShortToastMessage(R.string.add_work);
+											app.getFavorites().setWorkPoint(ll, null);
 											break;
 									}
 								} else if (pointType == PointType.START) {
@@ -392,13 +393,23 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 			} else {
 				addMainScrollItems(items, helper);
 				helper.addListener(new FavouritesDbHelper.FavoritesListener() {
-					@Override
-					public void onFavoritesLoaded() {
+
+					private void reloadFavoritesItems() {
 						MapActivity mapActivity = (MapActivity) getActivity();
 						if (mapActivity != null) {
 							loadFavoritesItems(adapter.getItems(), helper);
 							adapter.notifyDataSetChanged();
 						}
+					}
+
+					@Override
+					public void onFavoritesLoaded() {
+						reloadFavoritesItems();
+					}
+
+					@Override
+					public void onFavoriteAddressResolved(@NonNull FavouritePoint favouritePoint) {
+						reloadFavoritesItems();
 					}
 				});
 			}
@@ -443,6 +454,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 							dismiss();
 						}
 					} else {
+						FavouritesDbHelper favorites = requiredMyApplication().getFavorites();
 						switch (pointType) {
 							case START:
 								helper.setStartPoint(ll, true, name);
@@ -452,6 +464,15 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 								break;
 							case INTERMEDIATE:
 								helper.navigateToPoint(ll, true, helper.getIntermediatePoints().size(), name);
+								break;
+							case HOME:
+								favorites.setHomePoint(ll, null);
+								break;
+							case WORK:
+								favorites.setWorkPoint(ll, null);
+								break;
+							case PARKING:
+								favorites.setParkingPoint(ll);
 								break;
 						}
 						dismiss();
@@ -598,8 +619,11 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 
 	private class FavoritesItemsAdapter extends ScrollItemsAdapter {
 
+		private FavouritesDbHelper favorites;
+
 		FavoritesItemsAdapter(OsmandApplication app, List<Object> items) {
 			super(app, items);
+			favorites = app.getFavorites();
 		}
 
 		@NonNull
@@ -634,11 +658,9 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 					favoriteViewHolder.description.setVisibility(View.GONE);
 				} else {
 					if (item instanceof PointType) {
-						PersonalFavouritePoint.PointType pointType = PersonalFavouritePoint.PointType.valueOf(((PointType) item).name());
-						final FavouritesDbHelper favorites = app.getFavorites();
 						FavouritePoint point = null;
 						boolean light = app.getSettings().isLightContent();
-						int disabledIconColor = light ? R.color.icon_color_default_light : R.color.icon_color_default_dark;
+						int iconColor = light ? R.color.icon_color_default_light : R.color.icon_color_default_dark;
 						if (item == PointType.HOME) {
 							point = favorites.getHomePoint();
 						} else if (item == PointType.WORK) {
@@ -646,12 +668,18 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 						} else if (item == PointType.PARKING) {
 							point = favorites.getParkingPoint();
 						}
-						favoriteViewHolder.icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(getActivity(),
-								getResources().getColor(disabledIconColor), false, pointType));
-						favoriteViewHolder.title.setText(point.getName());
-						favoriteViewHolder.description.setText(point != null
-								? point.getPointDescription().getSimpleName(app, false)
-								: getString(R.string.shared_string_add));
+						Drawable icon = null;
+						String title = "";
+						String description = "";
+						if (point != null) {
+							PersonalFavouritePoint personalPoint = (PersonalFavouritePoint) point;
+							icon = app.getUIUtilities().getIcon(personalPoint.getType().getIconId(), iconColor);
+							title = point.getName();
+							description = point.getDescription();
+						}
+						favoriteViewHolder.icon.setImageDrawable(icon);
+						favoriteViewHolder.title.setText(title);
+						favoriteViewHolder.description.setText(description);
 					} else if (item instanceof FavouritePoint) {
 						FavouritePoint point = (FavouritePoint) getItem(position);
 						favoriteViewHolder.title.setText(point.getName());

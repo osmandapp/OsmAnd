@@ -159,13 +159,16 @@ public class MapRouteInfoMenuFragment extends ContextMenuFragment {
 					updateRouteCalculationProgress(0);
 				}
 			}
-			menu.addTargetPointListener();
+			menu.onResume(this);
 		}
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
+		if (menu != null) {
+			menu.onPause(this);
+		}
 	}
 
 	@Override

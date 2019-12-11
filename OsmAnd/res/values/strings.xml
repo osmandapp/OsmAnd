@@ -11,7 +11,8 @@
 	Thx - Hardy
 
 -->
-    <string name="distance_and_address">%1$s• %2$s</string>
+    <string name="distance_and_address">%1$s • %2$s</string>
+    <string name="street_city">%1$s, %2$s</string>
     <string name="personal_category_name">Personal</string>
     <string name="add_new_profile_q">Add new profile \'%1$s\'?</string>
     <string name="save_heading">Include heading</string>
