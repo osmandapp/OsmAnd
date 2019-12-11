@@ -3385,4 +3385,7 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="shared_string_turn_off">Vypnúť</string>
     <string name="new_plugin_added">Nový modul pridaný</string>
     <string name="join_segments">Spojiť úseky</string>
+    <string name="add_new_profile_q">Pridať nový profil \'%1$s\'\?</string>
+    <string name="save_heading">Pridať nadpis</string>
+    <string name="save_heading_descr">Pridať nadpis ku každému bodu trasy pri zázname.</string>
 </resources>

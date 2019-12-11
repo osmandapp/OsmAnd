@@ -663,7 +663,7 @@ Pôr do Sol: %2$s</string>
     <string name="select_address_activity">Especificar o endereço</string>
     <string name="favourites_list_activity">Selecionar favorito</string>
     <string name="local_openstreetmap_act_title">Modificações no OSM</string>
-    <string name="layer_hillshade">Camadas de relevo</string>
+    <string name="layer_hillshade">Camada de sombras de relevo</string>
     <string name="map_widget_gps_info">Informação de GPS</string>
     <string name="access_arrival_time">Hora de chegada</string>
     <string name="item_checked">marcado</string>
