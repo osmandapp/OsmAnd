@@ -3182,7 +3182,7 @@
     <string name="turn_screen_on_sensor_descr">حرك يدك أعلى الشاشة لتشغيلها أثناء التنقل.</string>
     <string name="monthly_map_updates">تحديثات الخريطة الشهرية</string>
     <string name="daily_map_updates">تحديثات الخريطة كل ساعة</string>
-    <string name="send_search_query_description">سيتم إرسال استعلام البحث إلى: \"%1 $ s\" ، بالاضافة إلى موقعك. لا يتم جمع المعلومات الشخصية ، فقط بيانات البحث اللازمة لتحسين البحث.</string>
+    <string name="send_search_query_description">سيتم إرسال استعلام البحث إلى: \"%1$s\" ، بالاضافة إلى موقعك. لا يتم جمع المعلومات الشخصية ، فقط بيانات البحث اللازمة لتحسين البحث.</string>
     <string name="routing_attr_avoid_tram_name">لامركبة ترام</string>
     <string name="routing_attr_avoid_tram_description">تجنب مركبة الترام</string>
     <string name="routing_attr_avoid_bus_name">لا يوجد حافلات</string>
