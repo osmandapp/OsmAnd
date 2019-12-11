@@ -1882,7 +1882,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="osm_live_thanks">Merci pour votre soutien à OsmAnd !
 \nPour activer toutes les nouvelles fonctionnalités, merci de redémarrer OsmAnd.</string>
     <string name="osm_live_subscription_settings">Paramétrage de l\'abonnement</string>
-    <string name="show_transparency_seekbar">Afficher la barre de recherche transparente</string>
+    <string name="show_transparency_seekbar">Afficher curseur de réglage de la transparence</string>
     <string name="recalculate_route">Recalculer l\'itinéraire</string>
     <string name="storage_directory_shared">Mémoire partagée</string>
     <string name="shared_string_topbar">Barre supérieure</string>
