@@ -270,9 +270,16 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 			OsmandApplication app = mapActivity.getMyApplication();
 			QuickSearchType searchType = dialogFragment.getSearchType();
 			if (searchType.isTargetPoint()) {
-				mapActivity.getMapLayers().getMapControlsLayer().selectAddress(
-						pointDescription != null ? pointDescription.getName() : null,
-						latitude, longitude, searchType);
+				String name = null;
+				if (pointDescription != null) {
+					String typeName = pointDescription.getTypeName();
+					if (!Algorithms.isEmpty(typeName)) {
+						name = mapActivity.getString(R.string.street_city, pointDescription.getName(), typeName);
+					} else {
+						name = pointDescription.getName();
+					}
+				}
+				mapActivity.getMapLayers().getMapControlsLayer().selectAddress(name, latitude, longitude, searchType);
 
 				dialogFragment.dismiss();
 				mapActivity.getMapLayers().getMapControlsLayer().showRouteInfoMenu();

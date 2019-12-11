@@ -561,12 +561,16 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				R.color.ctx_menu_buttons_icon_color));
 		((TextView) view.findViewById(R.id.context_menu_fav_text_view)).setText(menu.getFavActionStringId());
 		View favView = view.findViewById(R.id.context_menu_fav_view);
-		favView.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				menu.buttonFavoritePressed();
-			}
-		});
+		if (menu.isFavButtonEnabled()) {
+			favView.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					menu.buttonFavoritePressed();
+				}
+			});
+		} else {
+			deactivate(favView);
+		}
 
 		final ImageView imageWaypoint = (ImageView) view.findViewById(R.id.context_menu_route_image_view);
 		imageWaypoint.setImageDrawable(getIcon(menu.getWaypointActionIconId(),

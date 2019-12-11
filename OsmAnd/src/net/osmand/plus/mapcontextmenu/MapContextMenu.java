@@ -871,6 +871,14 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		return R.string.shared_string_add;
 	}
 
+	boolean isFavButtonEnabled() {
+		MenuController menuController = getMenuController();
+		if (menuController != null) {
+			return menuController.isFavButtonEnabled();
+		}
+		return true;
+	}
+
 	public int getWaypointActionIconId() {
 		return waypointActionIconId;
 	}

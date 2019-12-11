@@ -197,7 +197,7 @@
     <string name="shared_string_telegram">Telegram</string>
     <string name="privacy_policy_use_telegram">Telegram (la aplicación de mensajería) se utiliza para conectar y comunicar a las personas.</string>
     <string name="privacy_policy_telegram_client">El rastreador de OsmAnd (en inglés como «OsmAnd Tracker»), es uno de los clientes que utiliza la plataforma abierta de Telegram. Sus contactos pueden utilizar cualquier otro cliente de Telegram.</string>
-    <string name="privacy_policy_agree">Al pulsar en continuar, acepta las Políticas de Privacidad de Telegram y de OsmAnd.</string>
+    <string name="privacy_policy_agree">Al pulsar en «Continuar», acepta las Políticas de Privacidad de Telegram y de OsmAnd.</string>
     <string name="shared_string_accept">Aceptar</string>
     <string name="telegram_privacy_policy">Política de privacidad de Telegram</string>
     <string name="osmand_privacy_policy">Política de privacidad de OsmAnd</string>
@@ -249,4 +249,5 @@
     <string name="shared_string_apply">Aplicar</string>
     <string name="set_time_timeline_descr">Elige la hora de visualización</string>
     <string name="start_end_date">Fecha de inicio — fin</string>
+    <string name="saved_messages">Mensajes guardados</string>
 </resources>

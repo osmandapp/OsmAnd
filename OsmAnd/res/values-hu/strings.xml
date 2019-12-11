@@ -1478,7 +1478,7 @@ Hosszúság: %2$s</string>
     <string name="shared_string_deselect">Kijelölés megszüntetése</string>
     <string name="shared_string_deselect_all">Összes kijelölés megszüntetése</string>
     <string name="shared_string_unexpected_error">Váratlan hiba</string>
-    <string name="shared_string_action_template">{0} művelet</string>
+    <string name="shared_string_action_template">{0}. művelet</string>
     <string name="shared_string_collapse">Összecsukás</string>
     <string name="shared_string_video">Videó</string>
     <string name="shared_string_photo">Fénykép</string>

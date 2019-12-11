@@ -259,6 +259,29 @@ public class OsmandSettings {
 		}
 	}
 
+	void migrateHomeWorkParkingToFavorites() {
+		FavouritesDbHelper favorites = ctx.getFavorites();
+
+		LatLon homePoint = null;
+		float lat = settingsAPI.getFloat(globalPreferences, "home_point_lat", 0);
+		float lon = settingsAPI.getFloat(globalPreferences, "home_point_lon", 0);
+		if (lat != 0 || lon != 0) {
+			homePoint = new LatLon(lat, lon);
+		}
+		LatLon workPoint = null;
+		lat = settingsAPI.getFloat(globalPreferences, "work_point_lat", 0);
+		lon = settingsAPI.getFloat(globalPreferences, "work_point_lon", 0);
+		if (lat != 0 || lon != 0) {
+			workPoint = new LatLon(lat, lon);
+		}
+		if (homePoint != null) {
+			favorites.setHomePoint(homePoint, null);
+		}
+		if (workPoint != null) {
+			favorites.setWorkPoint(workPoint, null);
+		}
+	}
+
 	public Object getProfilePreferences(ApplicationMode mode) {
 		return settingsAPI.getPreferenceObject(getSharedPreferencesName(mode));
 	}
@@ -2393,13 +2416,6 @@ public class OsmandSettings {
 	public final static String MY_LOC_POINT_LON = "my_loc_point_lon";
 	public final static String MY_LOC_POINT_DESCRIPTION = "my_loc_point_description";
 
-	public final static String HOME_POINT_LAT = "home_point_lat";
-	public final static String HOME_POINT_LON = "home_point_lon";
-	public final static String HOME_POINT_DESCRIPTION = "home_point_description";
-	public final static String WORK_POINT_LAT = "work_point_lat";
-	public final static String WORK_POINT_LON = "work_point_lon";
-	public final static String WORK_POINT_DESCRIPTION = "work_point_description";
-
 	private static final String IMPASSABLE_ROAD_POINTS = "impassable_road_points";
 	private static final String IMPASSABLE_ROADS_DESCRIPTIONS = "impassable_roads_descriptions";
 	private ImpassableRoadsStorage mImpassableRoadsStorage = new ImpassableRoadsStorage();
@@ -2512,44 +2528,6 @@ public class OsmandSettings {
 	public PointDescription getPointNavigateDescriptionBackup() {
 		return PointDescription.deserializeFromString(
 				settingsAPI.getString(globalPreferences, POINT_NAVIGATE_DESCRIPTION_BACKUP, ""), getPointToNavigate());
-	}
-
-	public LatLon getHomePoint() {
-		float lat = settingsAPI.getFloat(globalPreferences, HOME_POINT_LAT, 0);
-		float lon = settingsAPI.getFloat(globalPreferences, HOME_POINT_LON, 0);
-		if (lat == 0 && lon == 0) {
-			return null;
-		}
-		return new LatLon(lat, lon);
-	}
-
-	public PointDescription getHomePointDescription() {
-		return PointDescription.deserializeFromString(
-				settingsAPI.getString(globalPreferences, HOME_POINT_DESCRIPTION, ""), getHomePoint());
-	}
-
-	public LatLon getWorkPoint() {
-		float lat = settingsAPI.getFloat(globalPreferences, WORK_POINT_LAT, 0);
-		float lon = settingsAPI.getFloat(globalPreferences, WORK_POINT_LON, 0);
-		if (lat == 0 && lon == 0) {
-			return null;
-		}
-		return new LatLon(lat, lon);
-	}
-
-	public PointDescription getWorkPointDescription() {
-		return PointDescription.deserializeFromString(
-				settingsAPI.getString(globalPreferences, WORK_POINT_DESCRIPTION, ""), getWorkPoint());
-	}
-
-	public void setHomePoint(double latitude, double longitude, PointDescription p) {
-		settingsAPI.edit(globalPreferences).putFloat(HOME_POINT_LAT, (float) latitude).putFloat(HOME_POINT_LON, (float) longitude).commit();
-		settingsAPI.edit(globalPreferences).putString(HOME_POINT_DESCRIPTION, PointDescription.serializeToString(p)).commit();
-	}
-
-	public void setWorkPoint(double latitude, double longitude, PointDescription p) {
-		settingsAPI.edit(globalPreferences).putFloat(WORK_POINT_LAT, (float) latitude).putFloat(WORK_POINT_LON, (float) longitude).commit();
-		settingsAPI.edit(globalPreferences).putString(WORK_POINT_DESCRIPTION, PointDescription.serializeToString(p)).commit();
 	}
 
 	public LatLon getMyLocationToStart() {

@@ -369,9 +369,10 @@ public class BinaryRoutePlanner {
 	
 	public void printDebugMemoryInformation(RoutingContext ctx, PriorityQueue<RouteSegment> graphDirectSegments, PriorityQueue<RouteSegment> graphReverseSegments, 
 			TLongObjectHashMap<RouteSegment> visitedDirectSegments,TLongObjectHashMap<RouteSegment> visitedOppositeSegments) {
-		printInfo("Time to calculate : " + (System.nanoTime() - ctx.timeToCalculate) / 1e6 + 
-				", time to load : " + ctx.timeToLoad / 1e6 + ", time to load headers : " + ctx.timeToLoadHeaders / 1e6 + 
-				", time to calc dev : " + ctx.timeNanoToCalcDeviation / 1e6);
+		printInfo(String.format("Time. Total: %.2f, to load: %.2f, to load headers: %.2f, to calc dev: %.2f, to calc rules: %.2f ", 
+				(System.nanoTime() - ctx.timeToCalculate) / 1e6, ctx.timeToLoad / 1e6, 
+				ctx.timeToLoadHeaders / 1e6, ctx.timeNanoToCalcDeviation / 1e6, GeneralRouter.TIMER / 1e6));
+		GeneralRouter.TIMER = 0;
 		int maxLoadedTiles = Math.max(ctx.maxLoadedTiles, ctx.getCurrentlyLoadedTiles());
 		printInfo("Current loaded tiles : " + ctx.getCurrentlyLoadedTiles() + ", maximum loaded tiles " + maxLoadedTiles);
 		printInfo("Loaded tiles " + ctx.loadedTiles + " (distinct " + ctx.distinctLoadedTiles + "), unloaded tiles " + ctx.unloadedTiles +

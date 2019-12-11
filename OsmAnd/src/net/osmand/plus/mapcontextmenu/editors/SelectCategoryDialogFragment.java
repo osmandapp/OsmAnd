@@ -17,7 +17,6 @@ import android.widget.LinearLayout;
 import net.osmand.AndroidUtils;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -86,7 +85,9 @@ public class SelectCategoryDialogFragment extends DialogFragment {
 		} else {
 			List<FavouritesDbHelper.FavoriteGroup> gs = helper.getFavoriteGroups();
 			for (final FavouritesDbHelper.FavoriteGroup category : gs) {
-				addCategory(activity, ll, category.name, category.color);
+				if (!category.personal) {
+					addCategory(activity, ll, category.name, category.color);
+				}
 			}
 		}
 		View itemView = activity.getLayoutInflater().inflate(R.layout.favorite_category_dialog_item, null);
