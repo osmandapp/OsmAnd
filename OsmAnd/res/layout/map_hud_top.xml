@@ -124,22 +124,22 @@
 
 			<TextView
 				android:id="@+id/map_exit_ref"
-				android:layout_width="32dp"
-				android:layout_height="32dp"
-				android:background="@drawable/bg_topbar_shield_exit_ref"
-				android:textColor="@color/color_black"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
 				android:textSize="@dimen/map_widget_text_size"
-				android:textAlignment="gravity"
 				android:gravity="center"
+				android:minWidth="@dimen/map_widget_height"
+				android:background="@drawable/bg_topbar_shield_exit_ref"
+				android:textColor="@color/color_white"
 				android:visibility="gone"
-				tools:text="99"
+				tools:text="8"
 				tools:visibility="visible" />
 
 			<ImageView
 				android:id="@+id/map_turn_icon"
-				android:layout_width="32dp"
-				android:layout_height="32dp"
-				android:scaleType="center"
+				android:layout_width="@dimen/map_widget_height"
+				android:layout_height="@dimen/map_widget_height"
+				android:scaleType="fitCenter"
 				tools:src="@drawable/map_turn_right_small" />
 
 			<LinearLayout
@@ -152,11 +152,11 @@
 					android:id="@+id/map_exit_shield_name"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:layout_marginEnd="8dp"
-					android:layout_marginRight="8dp"
-					android:padding="8dp"
+					android:layout_marginEnd="@dimen/content_padding_half"
+					android:layout_marginRight="@dimen/content_padding_half"
+					android:padding="@dimen/content_padding_half"
 					android:textColor="@color/color_black"
-					tools:background="@drawable/h_white_octagon_bgblue_2_road_shield"
+					tools:background="@drawable/h_white_pillow_4_road_shield"
 					tools:text="S108" />
 
 				<FrameLayout

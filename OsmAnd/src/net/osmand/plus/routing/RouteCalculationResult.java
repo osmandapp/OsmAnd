@@ -14,6 +14,7 @@ import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.routing.AlarmInfo.AlarmInfoType;
+import net.osmand.router.ExitInfo;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RoutingContext;
 import net.osmand.router.TurnType;
@@ -325,9 +326,28 @@ public class RouteCalculationResult {
 					info.setDestinationName(next.getObject().getDestinationName(ctx.getSettings().MAP_PREFERRED_LOCALE.get(),
 							ctx.getSettings().MAP_TRANSLITERATE_NAMES.get(), next.isForwardDirection()));
 					if (s.getObject().isExitPoint() && next.getObject().isMotorWayLink()) {
-						info.setExitRef(next.getObject().getExitRef());
-						info.setExitShieldName(next.getObject().getDestinationRef(next.isForwardDirection()));
-						info.setExitStreetName(next.getObject().getExitName());
+						ExitInfo exitInfo = new ExitInfo();
+						exitInfo.setRef(next.getObject().getExitRef());
+						exitInfo.setExitStreetName(next.getObject().getExitName());
+						String shieldName = next.getObject().getDestinationRef(next.isForwardDirection());
+						exitInfo.setShieldName(shieldName);
+						//	Search for nearest shield properties
+						for (int j = lind; j < list.size(); j++) {
+							RouteSegmentResult segment = list.get(j);
+							String segmentRef = segment.getObject().getRef("", false, segment.isForwardDirection());
+								//	if it's the same road
+								if (segmentRef != null && segmentRef.equals(shieldName)) {
+								String shieldColor = segment.getObject().getShieldColor();
+								String shieldShape = segment.getObject().getShieldShape();
+								if (shieldColor != null && shieldShape != null) {
+									exitInfo.setShieldIconName(shieldColor + "_" + shieldShape + "_"
+									+ shieldName.length() + "_" + "road_shield");
+									//	we found it
+									break;
+								}
+							}
+						}
+						info.setExitInfo(exitInfo);
 					}
 				}
 

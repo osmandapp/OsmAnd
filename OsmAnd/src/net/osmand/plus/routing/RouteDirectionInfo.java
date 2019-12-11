@@ -1,7 +1,10 @@
 package net.osmand.plus.routing;
 
+import android.support.annotation.Nullable;
+
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.router.ExitInfo;
 import net.osmand.router.TurnType;
 
 public class RouteDirectionInfo {
@@ -22,11 +25,8 @@ public class RouteDirectionInfo {
 	
 	private String destinationName;
 
-	private String exitRef;
-
-	private String exitShieldName;
-
-	private String exitStreetName;
+	@Nullable
+	private ExitInfo exitInfo;
 
 	public String getDestinationName() {
 		return destinationName;
@@ -113,27 +113,12 @@ public class RouteDirectionInfo {
 		 this.distance = distance;
 	}
 
-	public String getExitRef() {
-		return exitRef;
+	@Nullable
+	public ExitInfo getExitInfo() {
+		return exitInfo;
 	}
 
-	public void setExitRef(String exitRef) {
-		this.exitRef = exitRef;
-	}
-
-	public String getExitShieldName() {
-		return exitShieldName;
-	}
-
-	public void setExitShieldName(String exitShieldName) {
-		this.exitShieldName = exitShieldName;
-	}
-
-	public String getExitStreetName() {
-		return exitStreetName;
-	}
-
-	public void setExitStreetName(String exitStreetName) {
-		this.exitStreetName = exitStreetName;
+	public void setExitInfo(@Nullable ExitInfo exitInfo) {
+		this.exitInfo = exitInfo;
 	}
 }

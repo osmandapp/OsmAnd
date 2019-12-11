@@ -742,6 +742,28 @@ public class RouteDataObject {
 		return null;
 	}
 
+	public String getShieldColor() {
+		int sz = types.length;
+		for (int i = 0; i < sz; i++) {
+			RouteTypeRule r = region.quickGetEncodingRule(types[i]);
+			if (r.getTag().equals("road_shield_color_1")) {
+				return r.getValue();
+			}
+		}
+		return null;
+	}
+
+	public String getShieldShape() {
+		int sz = types.length;
+		for (int i = 0; i < sz; i++) {
+			RouteTypeRule r = region.quickGetEncodingRule(types[i]);
+			if (r.getTag().equals("road_shield_shape_1")) {
+				return r.getValue();
+			}
+		}
+		return null;
+	}
+
 	public int getOneway() {
 		int sz = types.length;
 		for (int i = 0; i < sz; i++) {

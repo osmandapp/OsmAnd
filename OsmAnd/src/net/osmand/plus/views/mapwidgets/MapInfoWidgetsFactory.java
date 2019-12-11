@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -51,7 +50,6 @@ import net.osmand.plus.helpers.WaypointDialogHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
 import net.osmand.plus.render.MapRenderRepositories;
-import net.osmand.plus.render.OsmandRenderer;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routepreparationmenu.ShowAlongTheRouteBottomSheet;
 import net.osmand.plus.routing.RouteCalculationResult;
@@ -62,6 +60,7 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.RulerControlLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WidgetState;
 import net.osmand.plus.views.mapwidgets.NextTurnInfoWidget.TurnDrawable;
+import net.osmand.router.ExitInfo;
 import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -947,6 +946,8 @@ public class MapInfoWidgetsFactory {
 			TextInfoWidget.updateTextColor((TextView) waypointInfoBar.findViewById(R.id.waypoint_text),
 					(TextView) waypointInfoBar.findViewById(R.id.waypoint_text_shadow),
 					textColor, textShadowColor, bold, rad / 2);
+			exitRefText.setTextColor(nightMode ? map.getResources().getColor(R.color.text_color_primary_dark) :
+					map.getResources().getColor(R.color.color_white));
 
 			ImageView all = (ImageView) waypointInfoBar.findViewById(R.id.waypoint_more);
 			ImageView remove = (ImageView) waypointInfoBar.findViewById(R.id.waypoint_close);
@@ -962,36 +963,27 @@ public class MapInfoWidgetsFactory {
 			TurnType[] type = new TurnType[1];
 			boolean showNextTurn = false;
 			boolean showMarker = this.showMarker;
-			boolean showShield = false;
-			String exitRef = null;
-			String exitShieldName = null;
-			String exitStreetName = null;
+			boolean showExitInfo = false;
+			ExitInfo exitInfo = null;
 
 			if (routingHelper != null && routingHelper.isRouteCalculated() && !routingHelper.isDeviatedFromRoute()) {
 				RouteCalculationResult.NextDirectionInfo nextDirectionInfo =
 						routingHelper.getNextRouteDirectionInfo(new RouteCalculationResult.NextDirectionInfo(), false);
 				if (nextDirectionInfo != null) {
 					RouteDirectionInfo directionInfo = nextDirectionInfo.directionInfo;
-					if (directionInfo != null) {
-						exitRef = directionInfo.getExitRef();
-						exitShieldName = directionInfo.getExitShieldName();
-						exitStreetName = directionInfo.getExitStreetName();
-						if (exitRef != null) {
-							showShield = true;
-							exitRefText.setText(exitRef);
-							AndroidUiHelper.updateVisibility(exitRefText, true);
-						} else {
-							showShield = false;
-							AndroidUiHelper.updateVisibility(exitRefText, false);
-						}
+					if (directionInfo != null && directionInfo.getExitInfo() != null) {
+						exitInfo = directionInfo.getExitInfo();
+						showExitInfo = true;
+					} else {
+						showExitInfo = false;
 					}
 				}
 
 				if (routingHelper.isFollowingMode()) {
 					if (settings.SHOW_STREET_NAME.get()) {
 						text = routingHelper.getCurrentName(type);
-						if (showShield) {
-							text = exitStreetName;
+						if (showExitInfo) {
+							text = exitInfo.getExitStreetName();
 						}
 						if (text == null) {
 							text = "";
@@ -1063,29 +1055,41 @@ public class MapInfoWidgetsFactory {
 				AndroidUiHelper.updateVisibility(addressTextShadow, shadowRad > 0);
 				boolean update = turnDrawable.setTurnType(type[0]) || showMarker != this.showMarker;
 				this.showMarker = showMarker;
-				int h = addressText.getHeight() / 4 * 3;
-				if (h != turnDrawable.getBounds().bottom) {
-					turnDrawable.setBounds(0, 0, h, h);
+				if (!showExitInfo) {
+					int h = addressText.getHeight() / 4 * 3;
+					if (h != turnDrawable.getBounds().bottom) {
+						turnDrawable.setBounds(0, 0, h, h);
+					}
 				}
-				if (update) {
-					if (type[0] != null) {
-						if (showShield) {
-							addressTextShadow.setCompoundDrawables(null, null, null, null);
-							addressTextShadow.setCompoundDrawablePadding(4);
-							addressText.setCompoundDrawables(null, null, null, null);
-							addressText.setCompoundDrawablePadding(4);
-							exitShield.setText(exitShieldName);
-							turnIcon.setImageDrawable(turnDrawable);
-							AndroidUiHelper.updateVisibility(turnIcon, true);
-							AndroidUiHelper.updateVisibility(exitShield, true);
-						} else {
-							addressTextShadow.setCompoundDrawables(turnDrawable, null, null, null);
-							addressTextShadow.setCompoundDrawablePadding(4);
-							addressText.setCompoundDrawables(turnDrawable, null, null, null);
-							addressText.setCompoundDrawablePadding(4);
-							AndroidUiHelper.updateVisibility(turnIcon, false);
-							AndroidUiHelper.updateVisibility(exitShield, false);
+				if (showExitInfo) {
+					addressTextShadow.setCompoundDrawables(null, null, null, null);
+					addressText.setCompoundDrawables(null, null, null, null);
+					turnIcon.setImageDrawable(turnDrawable);
+					AndroidUiHelper.updateVisibility(turnIcon, true);
+					String ref = exitInfo.getRef();
+					if (!Algorithms.isEmpty(ref)){
+						exitRefText.setText(ref);
+						AndroidUiHelper.updateVisibility(exitRefText, true);
+					}
+					String shieldName = exitInfo.getShieldName();
+					if (!Algorithms.isEmpty(shieldName)){
+						exitShield.setText(shieldName);
+						AndroidUiHelper.updateVisibility(exitShield, true);
+						if (exitInfo.getShieldIconName() != null) {
+							MapRenderRepositories mapRenderRepo = map.getMyApplication().getResourceManager().getRenderer();
+							Drawable shield = mapRenderRepo.getRenderer().getShieldDrawable(exitInfo.getShieldIconName());
+							exitShield.setBackgroundDrawable(shield);
 						}
+					}
+				} else if (update) {
+					if (type[0] != null) {
+						addressTextShadow.setCompoundDrawables(turnDrawable, null, null, null);
+						addressTextShadow.setCompoundDrawablePadding(4);
+						addressText.setCompoundDrawables(turnDrawable, null, null, null);
+						addressText.setCompoundDrawablePadding(4);
+						AndroidUiHelper.updateVisibility(turnIcon, false);
+						AndroidUiHelper.updateVisibility(exitRefText, false);
+						AndroidUiHelper.updateVisibility(exitShield, false);
 					} else if (showMarker) {
 						Drawable marker = map.getMyApplication().getUIUtilities().getIcon(R.drawable.ic_action_start_navigation, R.color.color_myloc_distance);
 						addressTextShadow.setCompoundDrawablesWithIntrinsicBounds(marker, null, null, null);
