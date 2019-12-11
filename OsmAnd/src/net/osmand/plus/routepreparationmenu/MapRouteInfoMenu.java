@@ -19,6 +19,7 @@ import android.support.transition.Transition;
 import android.support.transition.TransitionListenerAdapter;
 import android.support.transition.TransitionManager;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatImageView;
 import android.view.View;
@@ -39,10 +40,13 @@ import net.osmand.PlatformUtil;
 import net.osmand.StateChangedListener;
 import net.osmand.ValueHolder;
 import net.osmand.binary.RouteDataObject;
+import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.FavouritesDbHelper;
+import net.osmand.plus.FavouritesDbHelper.FavoritesListener;
 import net.osmand.plus.GeocodingLookupService;
 import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
@@ -115,7 +119,7 @@ import java.util.Set;
 import java.util.Stack;
 import java.util.TreeMap;
 
-public class MapRouteInfoMenu implements IRouteInformationListener, CardListener {
+public class MapRouteInfoMenu implements IRouteInformationListener, CardListener, FavoritesListener {
 
 	private static final Log LOG = PlatformUtil.getLog(MapRouteInfoMenu.class);
 	
@@ -183,7 +187,8 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		TARGET,
 		INTERMEDIATE,
 		HOME,
-		WORK
+		WORK,
+		PARKING
 	}
 
 	public MapRouteInfoMenu() {
@@ -209,7 +214,6 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 			app = mapActivity.getMyApplication();
 			portraitMode = AndroidUiHelper.isOrientationPortrait(mapActivity);
 			animationsHandler = new Handler();
-			mapActivity.getMyApplication().getRoutingHelper().addListener(this);
 		}
 	}
 
@@ -261,6 +265,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				LatLon latlon = tileBox.getLatLonFromPixel(point.x, point.y);
 				selectFromMapTouch = false;
 				TargetPointsHelper targets = app.getTargetPointsHelper();
+				FavouritesDbHelper favorites = app.getFavorites();
 				switch (selectFromMapPointType) {
 					case START:
 						targets.setStartPoint(latlon, true, null);
@@ -272,10 +277,10 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 						targets.navigateToPoint(latlon, true, targets.getIntermediatePoints().size());
 						break;
 					case HOME:
-						targets.setHomePoint(latlon, null);
+						favorites.setHomePoint(latlon, null);
 						break;
 					case WORK:
-						targets.setWorkPoint(latlon, null);
+						favorites.setWorkPoint(latlon, null);
 						break;
 				}
 				if (selectFromMapWaypoints) {
@@ -1782,10 +1787,11 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		hide();
 	}
 
-	public void selectAddress(String name, LatLon l, PointType pointType) {
+	public void selectAddress(@Nullable String name, @NonNull LatLon l, PointType pointType) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			PointDescription pd = new PointDescription(PointDescription.POINT_TYPE_ADDRESS, name);
+			FavouritesDbHelper favorites = mapActivity.getMyApplication().getFavorites();
 			TargetPointsHelper targets = mapActivity.getMyApplication().getTargetPointsHelper();
 			switch (pointType) {
 				case START:
@@ -1798,10 +1804,10 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 					targets.navigateToPoint(l, true, targets.getIntermediatePoints().size(), pd);
 					break;
 				case HOME:
-					targets.setHomePoint(l, pd);
+					favorites.setHomePoint(l, name);
 					break;
 				case WORK:
-					targets.setWorkPoint(l, pd);
+					favorites.setWorkPoint(l, name);
 					break;
 			}
 			updateMenu();
@@ -1845,6 +1851,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		if (mapActivity != null) {
 			if (m != null) {
 				LatLon point = new LatLon(m.getLatitude(), m.getLongitude());
+				FavouritesDbHelper favorites = mapActivity.getMyApplication().getFavorites();
 				TargetPointsHelper targets = mapActivity.getMyApplication().getTargetPointsHelper();
 				switch (pointType) {
 					case START:
@@ -1857,10 +1864,10 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 						targets.navigateToPoint(point, true, targets.getIntermediatePoints().size(), m.getPointDescription(mapActivity));
 						break;
 					case HOME:
-						targets.setHomePoint(point, m.getPointDescription(mapActivity));
+						favorites.setHomePoint(point, null);
 						break;
 					case WORK:
-						targets.setWorkPoint(point, m.getPointDescription(mapActivity));
+						favorites.setWorkPoint(point, null);
 						break;
 				}
 				updateMenu();
@@ -2098,6 +2105,25 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	public void routeWasFinished() {
 	}
 
+	public void onResume(Fragment fragment) {
+		OsmandApplication app = getApp();
+		if (app != null) {
+			app.getRoutingHelper().addListener(this);
+			app.getFavorites().addListener(this);
+		}
+		addTargetPointListener();
+	}
+
+	public void onPause(Fragment fragment) {
+		OsmandApplication app = getApp();
+		if (app != null) {
+			app.getRoutingHelper().removeListener(this);
+			app.getFavorites().removeListener(this);
+		}
+		removeTargetPointListener();
+		menuCards = new ArrayList<>();
+	}
+
 	public void onDismiss(Fragment fragment, int currentMenuState, Bundle arguments, boolean backPressed) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
@@ -2122,7 +2148,6 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				if (onDismissListener != null) {
 					onDismissListener.onDismiss(null);
 				}
-				removeTargetPointListener();
 			} else if (fragment instanceof ChooseRouteFragment) {
 				routeSelected = true;
 				MapRouteMenuStateHolder holder = new MapRouteMenuStateHolder(MapRouteMenuType.ROUTE_DETAILS, currentMenuState, fragment.getArguments());
@@ -2201,12 +2226,6 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		if (fragmentRef != null) {
 			fragmentRef.get().dismiss();
 		}
-		OsmandApplication app = getApp();
-		if (app != null) {
-			app.getRoutingHelper().removeListener(this);
-		}
-		removeTargetPointListener();
-		menuCards = new ArrayList<>();
 	}
 
 	public boolean needShowMenu() {
@@ -2221,6 +2240,15 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	@DrawableRes
 	public int getRoutePlanningBtnImage() {
 		return menuBackStack.empty() ? 0 : menuBackStack.peek().getButtonImage();
+	}
+
+	@Override
+	public void onFavoritesLoaded() {
+	}
+
+	@Override
+	public void onFavoriteAddressResolved(@NonNull FavouritePoint favouritePoint) {
+		updateMenu();
 	}
 
 	public enum MapRouteMenuType {

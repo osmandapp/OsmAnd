@@ -1286,7 +1286,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 				break;
 		}
 		if (pointType != null) {
-			mapRouteInfoMenu.selectAddress(name != null ? name : "", new LatLon(latitude, longitude), pointType);
+			mapRouteInfoMenu.selectAddress(name, new LatLon(latitude, longitude), pointType);
 		}
 	}
 

@@ -2,6 +2,7 @@ package net.osmand.plus.dashboard;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -73,6 +74,10 @@ public class DashFavoritesFragment extends DashLocationFragment {
 				@Override
 				public void onFavoritesLoaded() {
 					setupFavorites();
+				}
+
+				@Override
+				public void onFavoriteAddressResolved(@NonNull FavouritePoint favouritePoint) {
 				}
 			});
 		}
