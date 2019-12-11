@@ -3213,7 +3213,7 @@
     <string name="collected_data_descr">حدد البيانات التي تسمح لأوسماند بمشاركتها.</string>
     <string name="downloaded_maps_collect_descr">يساعدنا في فهم أي الخرائط من المناطق والبلدان الأكثر شعبية.</string>
     <string name="visited_screens_collect_descr">يساعدنا في فهم ميزات أوسماند الأكثر شيوعا.</string>
-    <string name="privacy_and_security_change_descr">انقر فوق \"السماح\" إذا كنت توافق على٪ 1 $ s</string>
+    <string name="privacy_and_security_change_descr">انقر فوق \"السماح\" إذا كنت توافق على٪1$s</string>
     <string name="settings_privacy_and_security">الخصوصية والأمان</string>
     <string name="settings_privacy_and_security_desc">اختر البيانات للمشاركة</string>
     <string name="shared_string_no_thank_you">لا ، شكراً</string>
