@@ -720,7 +720,7 @@ public class ApplicationMode {
 			mb.userProfileName = mode.userProfileName;
 			mb.iconColor = mode.iconColor;
 			mb.iconName = mode.iconResName;
-			mb.parent = mode.parentAppMode.getStringKey();
+			mb.parent = mode.parentAppMode != null ? mode.parentAppMode.getStringKey() : null;
 			mb.stringKey = mode.stringKey;
 			mb.routeService = mode.routeService;
 			mb.routingProfile = mode.routingProfile;

@@ -775,7 +775,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		}
 	}
 
-	static List<RoutingProfileDataObject> getRoutingProfiles(OsmandApplication context) {
+	public static List<RoutingProfileDataObject> getRoutingProfiles(OsmandApplication context) {
 		List<RoutingProfileDataObject> profilesObjects = new ArrayList<>();
 		profilesObjects.add(new RoutingProfileDataObject(
 			RoutingProfilesResources.STRAIGHT_LINE_MODE.name(),

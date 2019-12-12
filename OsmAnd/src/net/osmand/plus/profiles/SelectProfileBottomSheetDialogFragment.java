@@ -17,6 +17,7 @@ import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.LongDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.settings.NavigationFragment;
 
 import org.apache.commons.logging.Log;
 
@@ -223,6 +224,7 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 			FragmentManager fragmentManager = activity.getSupportFragmentManager();
 			EditProfileFragment editProfileFragment = (EditProfileFragment) fragmentManager.findFragmentByTag(EditProfileFragment.TAG);
 			SettingsProfileFragment settingsProfileFragment = (SettingsProfileFragment) fragmentManager.findFragmentByTag(SettingsProfileFragment.class.getName());
+			NavigationFragment navigationFragment = (NavigationFragment) fragmentManager.findFragmentByTag(NavigationFragment.class.getName());
 
 			if (editProfileFragment != null) {
 				switch (type) {
@@ -231,6 +233,7 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 						break;
 					case TYPE_NAV_PROFILE:
 						listener = editProfileFragment.getNavProfileListener();
+
 						break;
 					case TYPE_ICON:
 						listener = editProfileFragment.getIconListener();
@@ -238,6 +241,8 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 				}
 			} else if (settingsProfileFragment != null) {
 				listener = settingsProfileFragment.getBaseProfileListener();
+			} else if (navigationFragment != null) {
+				listener = navigationFragment.getNavProfileListener();
 			}
 		}
 	}
@@ -272,7 +277,7 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 		return icons;
 	}
 
-	interface SelectProfileListener {
+	public interface SelectProfileListener {
 		void onSelectedType(int pos, String stringRes);
 	}
 

@@ -90,6 +90,16 @@ public class MainSettingsFragment extends BaseSettingsFragment {
 		return super.onPreferenceChange(preference, newValue);
 	}
 
+	@Override
+	public boolean onPreferenceClick(Preference preference) {
+		String prefId = preference.getKey();
+		if (APP_PROFILES.equals(preference.getParent().getKey())) {
+			BaseSettingsFragment.showInstance(getActivity(), SettingsScreenType.CONFIGURE_PROFILE, ApplicationMode.valueOfStringKey(prefId, null));
+			return true;
+		}
+		return super.onPreferenceClick(preference);
+	}
+
 	private void setupConfigureProfilePref() {
         ApplicationMode selectedMode = app.getSettings().APPLICATION_MODE.get();
 		String title = selectedMode.toHumanString(getContext());
