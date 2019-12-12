@@ -30,8 +30,8 @@ public class ReorderItemTouchHelperCallback extends ItemTouchHelper.Callback {
 	}
 
 	@Override
-	public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
-		int from = viewHolder.getAdapterPosition();
+	public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder source, RecyclerView.ViewHolder target) {
+		int from = source.getAdapterPosition();
 		int to = target.getAdapterPosition();
 		if (from == RecyclerView.NO_POSITION || to == RecyclerView.NO_POSITION) {
 			return false;

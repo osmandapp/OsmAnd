@@ -1,4 +1,4 @@
-package net.osmand.plus.settings;
+package net.osmand.plus.profiles;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -19,8 +19,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
-import net.osmand.plus.profiles.ProfilesAdapter;
-import net.osmand.plus.profiles.ReorderItemTouchHelperCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,11 +59,6 @@ public class EditProfilesFragment extends BaseOsmAndFragment {
 
 			private int fromPosition;
 			private int toPosition;
-
-			@Override
-			public void onItemClick(View view) {
-
-			}
 
 			@Override
 			public void onDragStarted(RecyclerView.ViewHolder holder) {

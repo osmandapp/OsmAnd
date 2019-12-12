@@ -12,6 +12,7 @@
 
 -->
     <string name="shared_string_downloading_formatted">Downloading %s</string>
+    <string name="edit_profiles_descr">You can’t delete default OsmAnd profiles, but you can disable them in previous screen, or move them to the bottom.</string>
     <string name="edit_profiles">Edit profiles</string>
     <string name="select_nav_profile_dialog_message">Navigation type affects the rules for route calculations.</string>
     <string name="distance_and_address">%1$s • %2$s</string>

@@ -20,11 +20,11 @@ public class QuickActionItemTouchHelperCallback extends ReorderItemTouchHelperCa
 	}
 
 	@Override
-	public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
-		if (isaHeaderType(viewHolder) || isaHeaderType(target)) {
+	public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder source, RecyclerView.ViewHolder target) {
+		if (isaHeaderType(source) || isaHeaderType(target)) {
 			return false;
 		}
-		return super.onMove(recyclerView, viewHolder, target);
+		return super.onMove(recyclerView, source, target);
 	}
 
 	private boolean isaHeaderType(RecyclerView.ViewHolder viewHolder) {
