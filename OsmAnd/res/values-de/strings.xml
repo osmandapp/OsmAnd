@@ -3402,8 +3402,8 @@ Lon %2$s</string>
     <string name="suggested_maps_descr">Diese Karten sind für die Verwendung mit dem Plugin erforderlich</string>
     <string name="join_segments">Segmente verbinden</string>
     <string name="add_new_profile_q">Neues Profil \'%1$s\' hinzufügen\?</string>
-    <string name="save_heading">Überschrift einbeziehen</string>
-    <string name="save_heading_descr">Überschrift zu jedem Trackpoint während der Aufnahme speichern.</string>
+    <string name="save_heading">Richtung einbeziehen</string>
+    <string name="save_heading_descr">Richtung zu jedem Trackpunkt während der Aufnahme speichern.</string>
     <string name="distance_and_address">%1$s • %2$s</string>
     <string name="street_city">%1$s, %2$s</string>
     <string name="personal_category_name">Persönlich</string>
