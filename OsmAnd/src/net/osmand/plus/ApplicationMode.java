@@ -17,6 +17,7 @@ import net.osmand.util.Algorithms;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -61,6 +62,7 @@ public class ApplicationMode {
 	private final String stringKey;
 	private String userProfileName;
 	private int descriptionId;
+	private int order;
 
 	private ApplicationMode parentAppMode;
 	private String iconResName = "ic_world_globe_dark";
@@ -127,7 +129,7 @@ public class ApplicationMode {
 		@Expose ProfileIconColors iconColor = ProfileIconColors.DEFAULT;
 		@Expose String routingProfile = null;
 		@Expose RouteService routeService = RouteService.OSMAND;
-
+		@Expose int order;
 	}
 
 	private static void initRegVisibility() {
@@ -335,6 +337,11 @@ public class ApplicationMode {
 
 		public ApplicationModeBuilder setColor(ProfileIconColors colorData) {
 			applicationMode.iconColor = colorData;
+			return this;
+		}
+
+		public ApplicationModeBuilder setOrder(int order) {
+			applicationMode.order = order;
 			return this;
 		}
 	}
@@ -619,6 +626,13 @@ public class ApplicationMode {
 		}
 	}
 
+	public int getOrder() {
+		return order;
+	}
+
+	public void setOrder(int order) {
+		this.order = order;
+	}
 
 	public static void onApplicationStart(OsmandApplication app) {
 		// load for default profiles to initialize later custom modes
@@ -627,6 +641,7 @@ public class ApplicationMode {
 		initCustomModes(app);
 		initDefaultSpeed(app);
 		initRegVisibility();
+		reorderAppModes();
 	}
 
 	private static void initDefaultSpeed(OsmandApplication app) {
@@ -636,6 +651,19 @@ public class ApplicationMode {
 				m.defaultSpeed = spd;
 			}
 		}
+	}
+
+	public static void reorderAppModes() {
+		Comparator<ApplicationMode> comparator = new Comparator<ApplicationMode>() {
+			@Override
+			public int compare(ApplicationMode o1, ApplicationMode o2) {
+				return (o1.order < o2.order) ? -1 : ((o1.order == o2.order) ? 0 : 1);
+			}
+		};
+		Collections.sort(values, comparator);
+		Collections.sort(customValues, comparator);
+		Collections.sort(defaultValues, comparator);
+		Collections.sort(cachedFilteredValues, comparator);
 	}
 
 	public static ApplicationModeBuilder fromJson(OsmandApplication app, String json) {
@@ -677,6 +705,7 @@ public class ApplicationMode {
 					applicationMode.iconColor = modeBean.iconColor;
 					applicationMode.routingProfile = modeBean.routingProfile;
 					applicationMode.routeService = modeBean.routeService;
+					applicationMode.order = modeBean.order;
 				}
 			}
 		}
@@ -689,15 +718,29 @@ public class ApplicationMode {
 
 		if (!Algorithms.isEmpty(customProfiles)) {
 			for (ApplicationModeBean m : customProfiles) {
-				ApplicationModeBuilder b = createCustomMode(valueOfStringKey(m.parent, CAR),
-						m.userProfileName, m.stringKey);
-				b.setRouteService(m.routeService).setRoutingProfile(m.routingProfile);
-				b.icon(app, m.iconName);
-				b.setColor(m.iconColor);
-				b.customReg();
+				ApplicationMode parentMode = valueOfStringKey(m.parent, CAR);
+				createCustomMode(parentMode, m.userProfileName, m.stringKey)
+						.setRouteService(m.routeService)
+						.setRoutingProfile(m.routingProfile)
+						.icon(app, m.iconName)
+						.setColor(m.iconColor)
+						.setOrder(m.order)
+						.customReg();
 			}
 		}
+	}
 
+	public static void saveAppModesToSettings(OsmandSettings settings) {
+		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+
+		List<ApplicationModeBean> defaultModeBeans = createApplicationModeBeans(defaultValues);
+		List<ApplicationModeBean> customModeBeans = createApplicationModeBeans(customValues);
+
+		String defaultProfiles = gson.toJson(defaultModeBeans);
+		String customProfiles = gson.toJson(customModeBeans);
+
+		settings.DEFAULT_APP_PROFILES.set(defaultProfiles);
+		settings.CUSTOM_APP_PROFILES.set(customProfiles);
 	}
 
 	private static void saveAppModesToSettings(OsmandSettings settings, boolean saveCustomModes) {
@@ -724,6 +767,7 @@ public class ApplicationMode {
 			mb.stringKey = mode.stringKey;
 			mb.routeService = mode.routeService;
 			mb.routingProfile = mode.routingProfile;
+			mb.order = mode.order;
 			modeBeans.add(mb);
 		}
 
@@ -740,6 +784,7 @@ public class ApplicationMode {
 			mode.routingProfile = builder.applicationMode.routingProfile;
 			mode.routeService = builder.applicationMode.routeService;
 			mode.iconColor = builder.applicationMode.iconColor;
+			mode.order = builder.applicationMode.order;
 		} else {
 			mode = builder.customReg();
 			initRegVisibility();
@@ -807,12 +852,7 @@ public class ApplicationMode {
 		}
 
 		public int getColor(boolean nightMode) {
-			if (nightMode) {
-				return nightColor;
-			} else {
-				return dayColor;
-			}
+			return nightMode ? nightColor : dayColor;
 		}
- 	}
-
+	}
 }
