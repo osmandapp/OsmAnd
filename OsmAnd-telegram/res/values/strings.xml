@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="time_zone_descr">Select time zone to show in your location messages.</string>
+    <string name="time_zone">Time zone</string>
+    <string name="units_and_formats">Units &amp; formats</string>
+    <string name="unit_of_length_descr">Change what distance is measured in.</string>
+    <string name="unit_of_length">Units of length</string>
+    <string name="unit_of_speed_system_descr">Define unit of speed.</string>
+    <string name="unit_of_speed_system">Unit of speed</string>
     <string name="saved_messages">Saved messages</string>
     <string name="shared_string_end">End</string>
     <string name="shared_string_start">Start</string>

@@ -109,7 +109,7 @@ public class TravelDownloadUpdateCard extends BaseTravelCard {
 	@NonNull
 	private String getTitle(boolean loading) {
 		if (loading) {
-			return app.getString(R.string.shared_string_downloading) + "...";
+			return app.getString(R.string.shared_string_downloading);
 		}
 		return app.getString(download ? R.string.download_file : R.string.update_is_available);
 	}

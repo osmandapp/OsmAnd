@@ -89,6 +89,35 @@
 					android:maxLines="1"
 					android:paddingLeft="@dimen/content_padding_standard"
 					android:paddingRight="@dimen/content_padding_standard"
+					android:text="@string/units_and_formats"
+					android:textColor="?android:textColorPrimary"
+					android:textSize="@dimen/list_item_title_text_size"
+					app:typeface="@string/font_roboto_medium"/>
+
+				<LinearLayout
+					android:id="@+id/units_and_formats_container"
+					android:layout_width="match_parent"
+					android:layout_height="wrap_content"
+					android:orientation="vertical"/>
+
+			</LinearLayout>
+
+			<include layout="@layout/list_item_divider"/>
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:background="?attr/card_bg_color"
+				android:orientation="vertical">
+
+				<net.osmand.telegram.ui.views.TextViewEx
+					android:layout_width="match_parent"
+					android:layout_height="@dimen/list_header_height"
+					android:ellipsize="end"
+					android:gravity="center_vertical"
+					android:maxLines="1"
+					android:paddingLeft="@dimen/content_padding_standard"
+					android:paddingRight="@dimen/content_padding_standard"
 					android:text="@string/shared_string_appearance"
 					android:textColor="?android:textColorPrimary"
 					android:textSize="@dimen/list_item_title_text_size"
