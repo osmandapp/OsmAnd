@@ -746,7 +746,9 @@ public class RouteDataObject {
 		int sz = types.length;
 		for (int i = 0; i < sz; i++) {
 			RouteTypeRule r = region.quickGetEncodingRule(types[i]);
-			if (r.getTag().equals("road_shield_color_1")) {
+			if (r.getTag().equals("road_shield_color_1")
+					|| r.getTag().equals("road_shield_color_2")
+					|| r.getTag().equals("road_shield_color_3")) {
 				return r.getValue();
 			}
 		}
@@ -757,7 +759,9 @@ public class RouteDataObject {
 		int sz = types.length;
 		for (int i = 0; i < sz; i++) {
 			RouteTypeRule r = region.quickGetEncodingRule(types[i]);
-			if (r.getTag().equals("road_shield_shape_1")) {
+			if (r.getTag().equals("road_shield_shape_1")
+					|| r.getTag().equals("road_shield_shape_2")
+					|| r.getTag().equals("road_shield_shape_3")) {
 				return r.getValue();
 			}
 		}

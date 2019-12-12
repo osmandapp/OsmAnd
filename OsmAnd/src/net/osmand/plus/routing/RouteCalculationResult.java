@@ -339,10 +339,12 @@ public class RouteCalculationResult {
 								if (segmentRef != null && segmentRef.equals(shieldName)) {
 								String shieldColor = segment.getObject().getShieldColor();
 								String shieldShape = segment.getObject().getShieldShape();
-								if (shieldColor != null && shieldShape != null) {
-									exitInfo.setShieldIconName(shieldColor + "_" + shieldShape + "_"
-									+ shieldName.length() + "_" + "road_shield");
-									//	we found it
+									if (shieldColor != null || shieldShape != null) {
+										exitInfo.setShieldIconName((shieldColor != null ? shieldColor : "white")
+												+ "_"
+												+ (shieldShape != null ? shieldShape : "square")
+												+ "_"
+												+ shieldName.length() + "_" + "road_shield");
 									break;
 								}
 							}
