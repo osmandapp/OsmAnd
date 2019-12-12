@@ -21,7 +21,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class ProfilesAdapter extends AbstractProfileMenuAdapter<ProfilesAdapter.SelectProfileViewHolder>
-		implements ProfilesItemTouchHelperCallback.ItemTouchHelperAdapter {
+		implements ReorderItemTouchHelperCallback.OnItemMoveCallback {
 
 	private OsmandApplication app;
 	private List<ApplicationMode> applicationModes;

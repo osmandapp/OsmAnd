@@ -363,35 +363,26 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
         }
 
         @Override
-        public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
-            if (viewHolder.getItemViewType() == SCREEN_HEADER_TYPE || target.getItemViewType() == SCREEN_HEADER_TYPE)
-                return false;
-            else {
-                int selectedPosition = viewHolder.getAdapterPosition();
-                int targetPosition = target.getAdapterPosition();
-                Log.v(TAG, "selected: " + selectedPosition + ", target: " + targetPosition);
+        public boolean onItemMove(int selectedPosition, int targetPosition) {
+            Log.v(TAG, "selected: " + selectedPosition + ", target: " + targetPosition);
 
-                if (selectedPosition < 0 || targetPosition < 0)
-                    return false;
-
-                Collections.swap(itemsList, selectedPosition, targetPosition);
-                if (selectedPosition - targetPosition < -1) {
-                    notifyItemMoved(selectedPosition, targetPosition);
-                    notifyItemMoved(targetPosition - 1, selectedPosition);
-                } else if (selectedPosition - targetPosition > 1) {
-                    notifyItemMoved(selectedPosition, targetPosition);
-                    notifyItemMoved(targetPosition + 1, selectedPosition);
-                } else {
-                    notifyItemMoved(selectedPosition, targetPosition);
-                }
-                notifyItemChanged(selectedPosition);
-                notifyItemChanged(targetPosition);
-                return true;
+            Collections.swap(itemsList, selectedPosition, targetPosition);
+            if (selectedPosition - targetPosition < -1) {
+                notifyItemMoved(selectedPosition, targetPosition);
+                notifyItemMoved(targetPosition - 1, selectedPosition);
+            } else if (selectedPosition - targetPosition > 1) {
+                notifyItemMoved(selectedPosition, targetPosition);
+                notifyItemMoved(targetPosition + 1, selectedPosition);
+            } else {
+                notifyItemMoved(selectedPosition, targetPosition);
             }
+            notifyItemChanged(selectedPosition);
+            notifyItemChanged(targetPosition);
+            return true;
         }
 
         @Override
-        public void onViewDropped(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+        public void onItemDismiss(RecyclerView.ViewHolder holder) {
             saveQuickActions();
         }
 

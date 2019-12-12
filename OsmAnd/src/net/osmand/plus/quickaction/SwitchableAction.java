@@ -33,6 +33,8 @@ public abstract class SwitchableAction<T> extends QuickAction {
 
 	private transient EditText title;
 
+	private transient ItemTouchHelper touchHelper;
+
 	protected SwitchableAction(int type) {
 		super(type);
 	}
@@ -56,20 +58,17 @@ public abstract class SwitchableAction<T> extends QuickAction {
 		if (!getParams().isEmpty()) {
 			showDialog.setChecked(Boolean.valueOf(getParams().get(KEY_DIALOG)));
 		}
-		
-		final RecyclerView list = (RecyclerView) view.findViewById(R.id.list);
 
-		final QuickActionItemTouchHelperCallback touchHelperCallback = new QuickActionItemTouchHelperCallback();
-		final ItemTouchHelper touchHelper = new ItemTouchHelper(touchHelperCallback);
-
-		final Adapter adapter = new Adapter(activity, new QuickActionListFragment.OnStartDragListener() {
+		RecyclerView list = (RecyclerView) view.findViewById(R.id.list);
+		Adapter adapter = new Adapter(activity, new QuickActionListFragment.OnStartDragListener() {
 			@Override
 			public void onStartDrag(RecyclerView.ViewHolder viewHolder) {
 				touchHelper.startDrag(viewHolder);
 			}
 		});
 
-		touchHelperCallback.setItemMoveCallback(adapter);
+		QuickActionItemTouchHelperCallback touchHelperCallback = new QuickActionItemTouchHelperCallback(adapter);
+		touchHelper = new ItemTouchHelper(touchHelperCallback);
 		touchHelper.attachToRecyclerView(list);
 
 		if (!getParams().isEmpty()) {
@@ -215,17 +214,9 @@ public abstract class SwitchableAction<T> extends QuickAction {
 		}
 
 		@Override
-		public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
-
-			int selectedPosition = viewHolder.getAdapterPosition();
-			int targetPosition = target.getAdapterPosition();
-
-			if (selectedPosition < 0 || targetPosition < 0) {
-				return false;
-			}
-
+		public boolean onItemMove(int selectedPosition, int targetPosition) {
 			String oldTitle = getTitle(itemsList);
-			String defaultName = recyclerView.getContext().getString(getNameRes());
+			String defaultName = context.getString(getNameRes());
 
 			Collections.swap(itemsList, selectedPosition, targetPosition);
 			if (selectedPosition - targetPosition < -1) {
@@ -256,7 +247,8 @@ public abstract class SwitchableAction<T> extends QuickAction {
 		}
 
 		@Override
-		public void onViewDropped(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+		public void onItemDismiss(RecyclerView.ViewHolder holder) {
+
 		}
 
 		public class ItemHolder extends RecyclerView.ViewHolder {

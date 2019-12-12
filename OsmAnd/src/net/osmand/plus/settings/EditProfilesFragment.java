@@ -20,7 +20,7 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.profiles.ProfilesAdapter;
-import net.osmand.plus.profiles.ProfilesItemTouchHelperCallback;
+import net.osmand.plus.profiles.ReorderItemTouchHelperCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +54,7 @@ public class EditProfilesFragment extends BaseOsmAndFragment {
 
 		final List<ApplicationMode> applicationModes = new ArrayList<>(ApplicationMode.allPossibleValues());
 		final ProfilesAdapter adapter = new ProfilesAdapter(mapActivity, applicationModes);
-		final ItemTouchHelper touchHelper = new ItemTouchHelper(new ProfilesItemTouchHelperCallback(adapter));
+		final ItemTouchHelper touchHelper = new ItemTouchHelper(new ReorderItemTouchHelperCallback(adapter));
 
 		touchHelper.attachToRecyclerView(recyclerView);
 		adapter.setAdapterListener(new ProfilesAdapter.ProfilesAdapterListener() {
