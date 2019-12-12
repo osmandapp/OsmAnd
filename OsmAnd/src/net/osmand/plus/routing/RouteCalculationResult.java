@@ -13,7 +13,10 @@ import net.osmand.data.QuadRect;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.routing.AlarmInfo.AlarmInfoType;
+import net.osmand.render.RenderingRuleSearchRequest;
+import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.ExitInfo;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RoutingContext;
@@ -331,6 +334,26 @@ public class RouteCalculationResult {
 						exitInfo.setExitStreetName(next.getObject().getExitName());
 						String shieldName = next.getObject().getDestinationRef(next.isForwardDirection());
 						exitInfo.setShieldName(shieldName);
+
+						RenderingRulesStorage currentRenderer = ctx.getRendererRegistry().getCurrentSelectedRenderer();
+						MapRenderRepositories maps = ctx.getResourceManager().getRenderer();
+						RenderingRuleSearchRequest request = maps.getSearchRequestWithAppliedCustomRules(currentRenderer, false);
+						request.setInitialTagValueZoom("highway", "secondary", 21, null);
+						request.setIntFilter(request.ALL.R_TEXT_LENGTH, shieldName.length());
+						request.setStringFilter(request.ALL.R_NAME_TAG, "road_ref_1");
+						request.setStringFilter(request.ALL.R_ADDITIONAL, "road_shield_shape_1=pillow");
+//						request.setStringFilter(request.ALL.R_ADDITIONAL, "pillow");
+						String shieldId = null;
+						if (request.search(RenderingRulesStorage.TEXT_RULES) && request.getFloatPropertyValue(request.ALL.R_TEXT_SIZE) > 0) {
+							if (request.isSpecified(request.ALL.R_TEXT_SHIELD)) {
+								shieldId = request.getStringPropertyValue(request.ALL.R_TEXT_SHIELD);
+							}
+							if (request.isSpecified(request.ALL.R_ICON)) {
+								shieldId = request.getStringPropertyValue(request.ALL.R_ICON);
+							}
+							ctx.showShortToastMessage(" textShield " + shieldId);
+						}
+
 						//	Search for nearest shield properties
 						for (int j = lind; j < list.size(); j++) {
 							RouteSegmentResult segment = list.get(j);
