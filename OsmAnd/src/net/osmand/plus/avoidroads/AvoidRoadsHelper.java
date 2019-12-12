@@ -11,16 +11,21 @@ import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
+import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
 
+import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
+import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -32,7 +37,9 @@ public class AvoidRoadsHelper {
 
 	private static final Log LOG = PlatformUtil.getLog(AvoidRoadsHelper.class);
 
-	private static int[] foundObjCount;
+	public static final int FROM_URL = 101;
+	public static final int FROM_STORAGE = 100;
+
 	private static boolean saveResultToFile = true;
 
 	private final Map<Long, Location> roadsToAvoid;
@@ -40,27 +47,26 @@ public class AvoidRoadsHelper {
 
 	private final OsmandApplication app;
 	private final ApplicationMode appMode;
-	private final RDOSearchCompleteCallback rdoSearchCompleteCallback;
+	private final CompletionCallback completionCallback;
 
 	private ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
 
 //	String inputFileName = "points_500.json";
-	String inputFileName = "point_100.json";
-//	String inputFileName = "points_10.json";
+//	String inputFileName = "point_100.json";
+	String inputFileName = "points_10.json";
 
 	public AvoidRoadsHelper(final OsmandApplication app) {
 		this.app = app;
 		this.appMode = app.getSettings().getApplicationMode();
 		this.roadsToAvoid = new LinkedHashMap<>();
 		this.parsedPoints = new ArrayList<>();
-		foundObjCount = new int[] {0, 0};
 
-		rdoSearchCompleteCallback = new RDOSearchCompleteCallback() {
+		completionCallback = new CompletionCallback() {
 			@Override
 			public void onRDOSearchComplete() {
 				if (saveResultToFile) {
 					File out = new File (app.getAppPath(IndexConstants.AVOID_ROADS_DIR).getAbsolutePath() + "/"
-							+ inputFileName.substring(0, inputFileName.lastIndexOf(".")) + "_out.json");
+							+ "processed_ids.json");
 					saveRoadsToJson(roadsToAvoid, out);
 				}
 			}
@@ -69,7 +75,6 @@ public class AvoidRoadsHelper {
 			public void onPointsParsed(List<Location> result) {
 				parsedPoints.addAll(result);
 				convertPointsToRDO(parsedPoints);
-
 			}
 		};
 	}
@@ -78,8 +83,82 @@ public class AvoidRoadsHelper {
 		File in = new File(app.getAppPath(IndexConstants.AVOID_ROADS_DIR).getAbsolutePath()  + "/" + inputFileName);
 		LOG.debug(String.format("Input json: %s", in.getAbsolutePath()));
 		if (in.exists()) {
-			parsePointsFromJson(in.getAbsolutePath());
+			loadJson(in.getAbsolutePath(), FROM_STORAGE);
 		}
+	}
+
+	public void testRunDownload() {
+		String url = "https://gist.githubusercontent.com/MadWasp79/1238d8878792572e343eb2e296c3c7f5/raw/494f872425993797c3a3bc79a4ec82039db6ee46/point_100.json";
+		LOG.debug(String.format("Loading json from url: %s", url));
+		loadJson(url, FROM_URL);
+	}
+
+
+	public void convertPointsToRDO(List<Location> parsedPoints) {
+
+		this.roadsToAvoid.clear();
+
+		app.getLocationProvider().getMultipleRouteSegmentsIds(parsedPoints, appMode, false, new ResultMatcher<Map<Long, Location>>() {
+			@Override
+			public boolean publish(Map<Long, Location> result) {
+
+				if (result == null || result.isEmpty()) {
+					LOG.error("Error! No valid result");
+				} else {
+					roadsToAvoid.putAll(result);
+					LOG.debug(String.format("Found %d road ids", result.size()));
+					completionCallback.onRDOSearchComplete();
+				}
+				return true;
+			}
+			@Override
+			public boolean isCancelled() {
+				return false;
+			}
+		});
+
+	}
+
+	@SuppressLint("StaticFieldLeak")
+	private void loadJson(final String path, final int source) {
+		new AsyncTask<Void, Void, List<Location>>() {
+			@Override
+			protected List<Location> doInBackground(Void... voids) {
+				InputStream is = null;
+				try {
+					switch(source) {
+						case FROM_STORAGE:
+							is = new FileInputStream(path);
+							break;
+						case FROM_URL:
+							URLConnection connection = NetworkUtils.getHttpURLConnection(path);
+							is = connection.getInputStream();
+							break;
+					}
+					List<Location> result = new ArrayList<>();
+					parsePointsFromJson(is, result);
+					return result;
+				} catch (Exception e) {
+					LOG.error("Error reading json url!");
+				} finally {
+					if (is != null) {
+						try {
+							is.close();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
+				}
+				return null;
+			}
+
+			@Override
+			protected void onPostExecute(List<Location> result) {
+				if (!Algorithms.isEmpty(result)) {
+					completionCallback.onPointsParsed(result);
+				}
+			}
+		}.executeOnExecutor(singleThreadExecutor);
 	}
 
 	@SuppressLint("StaticFieldLeak")
@@ -111,89 +190,27 @@ public class AvoidRoadsHelper {
 				return null;
 			}
 		}.executeOnExecutor(singleThreadExecutor);
-
 	}
 
-	public void convertPointsToRDO(List<Location> parsedPoints) {
-
-		this.roadsToAvoid.clear();
-
-		app.getLocationProvider().getMultipleRouteSegmentsIds(parsedPoints, appMode, false, new ResultMatcher<Map<Long, Location>>() {
-			@Override
-			public boolean publish(Map<Long, Location> result) {
-
-				if (result == null || result.isEmpty()) {
-					LOG.error("Error! No valid result");
-				} else {
-					roadsToAvoid.putAll(result);
-					LOG.debug(String.format("Found %d road ids", result.size()));
-
-					rdoSearchCompleteCallback.onRDOSearchComplete();
-
-				}
-				return true;
-			}
-			@Override
-			public boolean isCancelled() {
-				return false;
-			}
-		});
-
-	}
-
-	@SuppressLint("StaticFieldLeak")
-	private void parsePointsFromJson(final String pointsJson) {
-
-		new AsyncTask<String, Void, List<Location>>() {
-			@Override
-			protected List<Location> doInBackground(String... file) {
-				FileReader fr = null;
-				try {
-					List<Location> result = new ArrayList<>();
-					fr = new FileReader(pointsJson);
-					Gson gson = new Gson();
-					GeoJSON geoJSON = gson.fromJson(fr, GeoJSON.class);
-					for (Point o : geoJSON.points) {
-						Location ll = new Location("geoJSON");
-						ll.setLatitude(o.geo.coordinates.get(1));
-						ll.setLongitude(o.geo.coordinates.get(0));
-						result.add(ll);
-					}
-					LOG.debug(String.format("Points parsed: %d", result.size()));
-					return result;
-				} catch (Exception e) {
-					LOG.error("Error reading json file!");
-				} finally {
-					if (fr != null) {
-						try {
-							fr.close();
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-					}
-				}
-				return null;
-			}
-
-			@Override
-			protected void onPostExecute(List<Location> result) {
-				if (!Algorithms.isEmpty(result)) {
-					rdoSearchCompleteCallback.onPointsParsed(result);
-				}
-			}
-		}.executeOnExecutor(singleThreadExecutor);
+	private void parsePointsFromJson(InputStream is, List<Location> result) {
+		Gson gson = new Gson();
+		GeoJSON geoJSON = gson.fromJson(new BufferedReader(new InputStreamReader(is)), GeoJSON.class);
+		for (Point o : geoJSON.points) {
+			Location ll = new Location("geoJSON");
+			ll.setLatitude(o.geo.coordinates.get(1));
+			ll.setLongitude(o.geo.coordinates.get(0));
+			result.add(ll);
+		}
+		LOG.debug(String.format("Points parsed: %d", result.size()));
 	}
 
 
-
-
-	interface RDOSearchCompleteCallback {
+	interface CompletionCallback {
 		void onRDOSearchComplete();
 		void onPointsParsed(List<Location> result);
 	}
 
 	class GeoJSON {
-
 		@SerializedName("type")
 		@Expose
 		String type;
@@ -204,7 +221,6 @@ public class AvoidRoadsHelper {
 	}
 
 	class Point {
-
 		@SerializedName("type")
 		@Expose
 		String type;
@@ -213,9 +229,7 @@ public class AvoidRoadsHelper {
 		Geometry geo;
 	}
 
-
 	class Geometry {
-
 		@SerializedName("type")
 		@Expose
 		String type;
