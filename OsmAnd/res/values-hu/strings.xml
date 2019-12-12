@@ -3238,5 +3238,5 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="distance_and_address">%1$s • %2$s</string>
     <string name="street_city">%1$s, %2$s</string>
     <string name="personal_category_name">Személyes</string>
-    <string name="shared_string_downloading_formatted">%s letöltés</string>
+    <string name="shared_string_downloading_formatted">%s letöltése</string>
 </resources>
