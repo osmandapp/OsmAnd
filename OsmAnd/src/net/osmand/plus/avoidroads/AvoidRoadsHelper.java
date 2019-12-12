@@ -11,6 +11,9 @@ import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
+import net.osmand.binary.RouteDataObject;
+import net.osmand.data.QuadRect;
+import net.osmand.data.QuadTree;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
@@ -27,6 +30,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -64,6 +68,7 @@ public class AvoidRoadsHelper {
 		completionCallback = new CompletionCallback() {
 			@Override
 			public void onRDOSearchComplete() {
+
 				if (saveResultToFile) {
 					File out = new File (app.getAppPath(IndexConstants.AVOID_ROADS_DIR).getAbsolutePath() + "/"
 							+ "processed_ids.json");
@@ -80,11 +85,15 @@ public class AvoidRoadsHelper {
 	}
 
 	public void testRun() {
-		File in = new File(app.getAppPath(IndexConstants.AVOID_ROADS_DIR).getAbsolutePath()  + "/" + inputFileName);
-		LOG.debug(String.format("Input json: %s", in.getAbsolutePath()));
-		if (in.exists()) {
-			loadJson(in.getAbsolutePath(), FROM_STORAGE);
-		}
+//		File in = new File(app.getAppPath(IndexConstants.AVOID_ROADS_DIR).getAbsolutePath()  + "/" + inputFileName);
+//		LOG.debug(String.format("Input json: %s", in.getAbsolutePath()));
+//		if (in.exists()) {
+//			loadJson(in.getAbsolutePath(), FROM_STORAGE);
+//		}
+		//String url = "https://gist.githubusercontent.com/MadWasp79/1238d8878792572e343eb2e296c3c7f5/raw/494f872425993797c3a3bc79a4ec82039db6ee46/point_100.json";
+		String url = "https://gist.githubusercontent.com/MadWasp79/45f362ea48e9e8edd1593113593993c5/raw/6e817fb3bc7eaeaa3eda24847fde4855eb22485d/points_500.json";
+		LOG.debug(String.format("Loading json from url: %s", url));
+		loadJson(url, FROM_URL);
 	}
 
 	public void testRunDownload() {
@@ -94,11 +103,40 @@ public class AvoidRoadsHelper {
 	}
 
 
-	public void convertPointsToRDO(List<Location> parsedPoints) {
-
+	public void convertPointsToRDO(final List<Location> parsedPoints) {
+		final Map<Long, Location> avoidedRoads = new HashMap<>();
+		final long timeStart = System.currentTimeMillis();
+		final int[] count = {0};
 		this.roadsToAvoid.clear();
+//		for (final Location point : parsedPoints) {
+//
+//			app.getLocationProvider().getRouteSegment(point, appMode, false, new ResultMatcher<RouteDataObject>() {
+//				@Override
+//				public boolean publish(RouteDataObject result) {
+//					count[0]++;
+//					if (result == null) {
+//						LOG.error("Error! Find no result for point []");
+//					} else {
+//						avoidedRoads.put(result.id, point);
+//					}
+//					if (count[0] == parsedPoints.size()) {
+//						completionCallback.onRDOSearchComplete();
+//					}
+//					if (count[0]%10 == 0) {
+//						app.showShortToastMessage(String.format("Found %d roads", count[0]));
+//					}
+//					return true;
+//				}
+//
+//				@Override
+//				public boolean isCancelled() {
+//					return false;
+//				}
+//			});
+//		}
 
-		app.getLocationProvider().getMultipleRouteSegmentsIds(parsedPoints, appMode, false, new ResultMatcher<Map<Long, Location>>() {
+		app.getLocationProvider().getMultipleRouteSegmentsIds(parsedPoints, appMode, false,
+				new ResultMatcher<Map<Long, Location>>() {
 			@Override
 			public boolean publish(Map<Long, Location> result) {
 
@@ -139,7 +177,7 @@ public class AvoidRoadsHelper {
 					parsePointsFromJson(is, result);
 					return result;
 				} catch (Exception e) {
-					LOG.error("Error reading json url!");
+					LOG.error("Error reading json !");
 				} finally {
 					if (is != null) {
 						try {
@@ -195,12 +233,34 @@ public class AvoidRoadsHelper {
 	private void parsePointsFromJson(InputStream is, List<Location> result) {
 		Gson gson = new Gson();
 		GeoJSON geoJSON = gson.fromJson(new BufferedReader(new InputStreamReader(is)), GeoJSON.class);
+		double minlat = 0 , maxlat = 0, minlon = 0, maxlon= 0;
+		boolean first = true;
 		for (Point o : geoJSON.points) {
 			Location ll = new Location("geoJSON");
-			ll.setLatitude(o.geo.coordinates.get(1));
-			ll.setLongitude(o.geo.coordinates.get(0));
+			double lat = o.geo.coordinates.get(1);
+			double lon = o.geo.coordinates.get(0);
+			if(first) {
+				minlat = maxlat = lat;
+				minlon = maxlon = lon;
+				first = false;
+			} else {
+				minlat = Math.min(minlat, lat);
+				minlon = Math.min(minlon, lon);
+				maxlat = Math.max(maxlat, lat);
+				maxlon = Math.max(maxlon, lon);
+			}
+			ll.setLatitude(lat);
+			ll.setLongitude(lon);
 			result.add(ll);
 		}
+		QuadRect qr = new QuadRect(minlon, minlat, maxlon, maxlat);
+		QuadTree<Location> qt = new QuadTree<Location>(qr, 8, 0.55f);
+		for(Location l : result) {
+			qt.insert(l, (float)l.getLongitude(), (float) l.getLatitude());
+		}
+		qt.queryInBox(qr, result);
+
+		app.showShortToastMessage(String.format("Loaded and parsed %d avoid points from JSON. Starting segment search.", result.size()));
 		LOG.debug(String.format("Points parsed: %d", result.size()));
 	}
 

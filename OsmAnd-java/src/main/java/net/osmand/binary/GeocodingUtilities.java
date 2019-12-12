@@ -183,8 +183,13 @@ public class GeocodingUtilities {
 				}
 			}
 			Collections.sort(lst, GeocodingUtilities.DISTANCE_COMPARATOR);
-			result.put(lst.get(0).point.getRoad().id, point);
+			if (lst.size() > 0) {
+				result.put(lst.get(0).point.getRoad().id, point);
+//				log.debug(String.format("Road %s", lst.get(0).point.getRoad()));
+			}
 		}
+		log.debug(String.format("Time to load %d, time to findInitialSegment %d, timeToLoadHeaders %d, tiles loaded %d",
+				ctx.timeToLoad,ctx.timeToFindInitialSegments,  ctx.timeToLoadHeaders, ctx.loadedTiles));
 		return result;
 	}
 

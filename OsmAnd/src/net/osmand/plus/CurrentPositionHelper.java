@@ -188,9 +188,9 @@ public class CurrentPositionHelper {
 	                                                                    boolean allowEmptyNames,
 	                                                                    @Nullable ApplicationMode appMode) {
 
-		List<BinaryMapReaderResource> checkReaders = new ArrayList<>();
+		List<BinaryMapReaderResource> checkReaders = usedReaders;
 		for (Location loc : points) {
-			checkReaders.addAll(checkReaders(loc.getLatitude(), loc.getLongitude(), usedReaders));
+			checkReaders = checkReaders(loc.getLatitude(), loc.getLongitude(), checkReaders);
 		}
 
 		if (appMode == null) {
@@ -230,11 +230,11 @@ public class CurrentPositionHelper {
 			for (BinaryMapReaderResource rep : checkReaders) {
 				rs[i++] = rep.getReader(BinaryMapReaderResourceType.STREET_LOOKUP);
 			}
-			RoutingConfiguration cfg = app.getRoutingConfig().build(p, 10,
+			RoutingConfiguration cfg = app.getRoutingConfig().build(p, 100,
 					new HashMap<String, String>());
 			cfg.routeCalculationTime = System.currentTimeMillis();
 			ctx = new RoutePlannerFrontEnd().buildRoutingContext(cfg, null, rs);
-			RoutingConfiguration defCfg = app.getRoutingConfig().build("geocoding", 10,
+			RoutingConfiguration defCfg = app.getRoutingConfig().build("geocoding", 100,
 					new HashMap<String, String>());
 			defCtx = new RoutePlannerFrontEnd().buildRoutingContext(defCfg, null, rs);
 		} else {

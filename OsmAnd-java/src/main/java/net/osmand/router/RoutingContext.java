@@ -92,10 +92,10 @@ public class RoutingContext {
 	public int memoryOverhead = 0;
 	
 	
-	long timeNanoToCalcDeviation = 0;
-	long timeToLoad = 0;
-	long timeToLoadHeaders = 0;
-	long timeToFindInitialSegments = 0;
+	public long timeNanoToCalcDeviation = 0;
+	public long timeToLoad = 0;
+	public long timeToLoadHeaders = 0;
+	public long timeToFindInitialSegments = 0;
 	public long timeToCalculate = 0;
 	
 	int distinctLoadedTiles = 0;
@@ -289,6 +289,7 @@ public class RoutingContext {
 	public void loadSubregionTile(final RoutingSubregionTile ts, boolean loadObjectsInMemory, List<RouteDataObject> toLoad, TLongHashSet excludeNotAllowed) {
 		boolean wasUnloaded = ts.isUnloaded();
 		int ucount = ts.getUnloadCont();
+
 		if (nativeLib == null) {
 			long now = System.nanoTime();
 			try {
@@ -321,7 +322,7 @@ public class RoutingContext {
 			} catch (IOException e) {
 				throw new RuntimeException("Loading data exception", e);
 			}
-
+//			log.debug(String.format("Load subregion: %s", ts.subregion.filePointer));
 			timeToLoad += (System.nanoTime() - now);
 			
 		} else {

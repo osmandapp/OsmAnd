@@ -979,8 +979,8 @@ public class MapActivityActions implements DialogProvider {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
 						app.logEvent("drawer_import_avoid_roads");
-//						app.getAvoidRoadsHelper().testRun();
-						app.getAvoidRoadsHelper().testRunDownload();
+						app.getAvoidRoadsHelper().testRun();
+//						app.getAvoidRoadsHelper().testRunDownload();
 						return true;
 					}
 				}).createItem());
