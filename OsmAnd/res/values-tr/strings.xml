@@ -3350,4 +3350,7 @@
     <string name="add_new_profile_q">\'%1$s\' yeni profil ekle\?</string>
     <string name="save_heading">Başlığı dahil et</string>
     <string name="save_heading_descr">Kayıt sırasında her bir izleme noktasının başlığını kaydet.</string>
+    <string name="distance_and_address">%1$s • %2$s</string>
+    <string name="street_city">%1$s, %2$s</string>
+    <string name="personal_category_name">Kişisel</string>
 </resources>

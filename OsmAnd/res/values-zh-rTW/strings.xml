@@ -3386,4 +3386,8 @@
     <string name="add_new_profile_q">新增新的設定檔「%1$s」？</string>
     <string name="save_heading">包含標題</string>
     <string name="save_heading_descr">在錄製時將標題儲存到每個追蹤點。</string>
+    <string name="distance_and_address">%1$s • %2$s</string>
+    <string name="street_city">%1$s, %2$s</string>
+    <string name="personal_category_name">個人</string>
+    <string name="shared_string_downloading_formatted">正在下載 %s</string>
 </resources>
