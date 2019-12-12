@@ -189,6 +189,10 @@ android {
 			dimension "version"
 			applicationId "net.osmand.plus.huawei"
 		}
+		freehuawei {
+			dimension "version"
+			applicationId "net.osmand.huawei"
+		}
 
 		// CoreVersion
 		legacy {
