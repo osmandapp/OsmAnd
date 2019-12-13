@@ -28,6 +28,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.profiles.ReorderItemTouchHelperCallback;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -93,7 +94,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
         quickActionRV.setAdapter(adapter);
         quickActionRV.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        ItemTouchHelper.Callback touchHelperCallback = new QuickActionItemTouchHelperCallback(adapter);
+        ItemTouchHelper.Callback touchHelperCallback = new ReorderItemTouchHelperCallback(adapter);
         touchHelper = new ItemTouchHelper(touchHelperCallback);
         touchHelper.attachToRecyclerView(quickActionRV);
         adapter.addItems(quickActionRegistry.getFilteredQuickActions());
@@ -187,7 +188,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
         adapter.addItems(quickActionRegistry.getFilteredQuickActions());
     }
 
-    public class QuickActionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements QuickActionItemTouchHelperCallback.OnItemMoveCallback {
+    public class QuickActionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements ReorderItemTouchHelperCallback.OnItemMoveCallback {
         public static final int SCREEN_ITEM_TYPE = 1;
         public static final int SCREEN_HEADER_TYPE = 2;
 
@@ -411,7 +412,8 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
             }
         }
 
-        public class QuickActionHeaderVH extends RecyclerView.ViewHolder {
+        public class QuickActionHeaderVH extends ReorderItemTouchHelperCallback.ImmobileViewHolder {
+
             public TextView headerName;
 
             public QuickActionHeaderVH(View itemView) {

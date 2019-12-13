@@ -20,6 +20,7 @@ import android.widget.TextView;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dialogs.SelectMapViewQuickActionsBottomSheet;
+import net.osmand.plus.profiles.ReorderItemTouchHelperCallback;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -67,7 +68,7 @@ public abstract class SwitchableAction<T> extends QuickAction {
 			}
 		});
 
-		QuickActionItemTouchHelperCallback touchHelperCallback = new QuickActionItemTouchHelperCallback(adapter);
+		ReorderItemTouchHelperCallback touchHelperCallback = new ReorderItemTouchHelperCallback(adapter);
 		touchHelper = new ItemTouchHelper(touchHelperCallback);
 		touchHelper.attachToRecyclerView(list);
 
@@ -116,7 +117,7 @@ public abstract class SwitchableAction<T> extends QuickAction {
 		fragment.show(fm, SelectMapViewQuickActionsBottomSheet.TAG);
 	}
 	
-	protected class Adapter extends RecyclerView.Adapter<Adapter.ItemHolder> implements QuickActionItemTouchHelperCallback.OnItemMoveCallback {
+	protected class Adapter extends RecyclerView.Adapter<Adapter.ItemHolder> implements ReorderItemTouchHelperCallback.OnItemMoveCallback {
 
 		private List<T> itemsList = new ArrayList<>();
 		private final QuickActionListFragment.OnStartDragListener onStartDragListener;
