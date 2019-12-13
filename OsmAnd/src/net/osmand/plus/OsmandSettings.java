@@ -2615,6 +2615,7 @@ public class OsmandSettings {
 		}
 	}
 
+
 	private abstract class MapPointsStorage {
 
 		protected String pointsKey;
@@ -2808,6 +2809,7 @@ public class OsmandSettings {
 	public boolean addImpassableRoad(double latitude, double longitude) {
 		return mImpassableRoadsStorage.insertPoint(latitude, longitude, null, 0);
 	}
+
 
 	public boolean removeImpassableRoad(int index) {
 		return mImpassableRoadsStorage.deletePoint(index);

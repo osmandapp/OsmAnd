@@ -143,9 +143,9 @@ public class GeocodingUtilities {
 		}
 	}
 
-	public Map<Long, Location> multipleReverseGeocodingSearch(RoutingContext ctx, List<Location> points, boolean allowEmptyNames) throws IOException {
+	public Map<RouteDataObject, Location> multipleReverseGeocodingSearch(RoutingContext ctx, List<Location> points, boolean allowEmptyNames) throws IOException {
 		RoutePlannerFrontEnd rp = new RoutePlannerFrontEnd();
-		Map<Long, Location> result = new HashMap<>();
+		Map<RouteDataObject, Location> result = new HashMap<>();
 		for (Location point : points) {
 			List<GeocodingResult> lst = new ArrayList<>();
 			List<RouteSegmentPoint> listR = new ArrayList<>();
@@ -184,12 +184,12 @@ public class GeocodingUtilities {
 			}
 			Collections.sort(lst, GeocodingUtilities.DISTANCE_COMPARATOR);
 			if (lst.size() > 0) {
-				result.put(lst.get(0).point.getRoad().id, point);
+				result.put(lst.get(0).point.getRoad(), point);
 //				log.debug(String.format("Road %s", lst.get(0).point.getRoad()));
 			}
 		}
-		log.debug(String.format("Time to load %d, time to findInitialSegment %d, timeToLoadHeaders %d, tiles loaded %d",
-				ctx.timeToLoad,ctx.timeToFindInitialSegments,  ctx.timeToLoadHeaders, ctx.loadedTiles));
+		log.debug(String.format("Time to load %.3f s, time to findInitialSegment %.3f s, timeToLoadHeaders %.3f s, tiles loaded %d",
+				ctx.timeToLoad/1000000000.0f, ctx.timeToFindInitialSegments/1000000000.0f,  ctx.timeToLoadHeaders/1000000000.0f, ctx.loadedTiles));
 		return result;
 	}
 

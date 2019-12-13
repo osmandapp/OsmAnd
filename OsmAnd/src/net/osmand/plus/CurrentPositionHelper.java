@@ -60,7 +60,7 @@ public class CurrentPositionHelper {
 	public boolean getMultipleRouteSegmentsIds(List<Location> points,
 	                                           @Nullable ApplicationMode appMode,
 	                                           boolean cancelPreviousSearch,
-	                                           ResultMatcher<Map<Long, Location>> result) {
+	                                           ResultMatcher<Map<RouteDataObject, Location>> result) {
 		return scheduleMultipleRouteSegmentFind(points, false, true, cancelPreviousSearch, null, result, appMode);
 
 	}
@@ -131,7 +131,7 @@ public class CurrentPositionHelper {
 	                                                 final boolean allowEmptyNames,
 	                                                 final boolean cancelPreviousSearch,
 	                                                 @Nullable final ResultMatcher<GeocodingResult> geoCoding,
-	                                                 @Nullable final ResultMatcher<Map<Long, Location>> result,
+	                                                 @Nullable final ResultMatcher<Map<RouteDataObject, Location>> result,
 	                                                 @Nullable final ApplicationMode appMode) {
 		boolean res = false;
 		if (points.get(0) != null) {
@@ -158,7 +158,7 @@ public class CurrentPositionHelper {
 	                                                   @Nullable ResultMatcher<GeocodingResult> geoCoding,
 	                                                   boolean storeFound,
 	                                                   boolean allowEmptyNames,
-	                                                   @Nullable final ResultMatcher<Map<Long, Location>> result,
+	                                                   @Nullable final ResultMatcher<Map<RouteDataObject, Location>> result,
 	                                                   @Nullable ApplicationMode appMode,
 	                                                   int request,
 	                                                   @NonNull AtomicInteger requestNumber,
@@ -168,7 +168,7 @@ public class CurrentPositionHelper {
 			return;
 		}
 
-		final Map<Long, Location> gr = runUpdateInThreadBatch(points,
+		final Map<RouteDataObject, Location> gr = runUpdateInThreadBatch(points,
 				geoCoding != null, allowEmptyNames, appMode);
 
 		if(result != null) {
@@ -183,7 +183,7 @@ public class CurrentPositionHelper {
 
 
 	@Nullable
-	private Map<Long, Location> runUpdateInThreadBatch(List<Location> points,
+	private Map<RouteDataObject, Location> runUpdateInThreadBatch(List<Location> points,
 	                                                                    boolean geocoding,
 	                                                                    boolean allowEmptyNames,
 	                                                                    @Nullable ApplicationMode appMode) {

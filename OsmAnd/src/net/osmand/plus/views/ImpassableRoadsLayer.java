@@ -10,6 +10,7 @@ import android.graphics.PointF;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import net.osmand.Location;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -17,6 +18,7 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.avoidroads.AvoidRoadsHelper;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.helpers.AvoidSpecificRoads.AvoidSpecificRoadsCallback;
 import net.osmand.plus.views.ContextMenuLayer.ApplyMovedObjectCallback;
@@ -31,6 +33,7 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 
 	private final MapActivity activity;
 	private AvoidSpecificRoads avoidSpecificRoads;
+	private AvoidRoadsHelper avoidRoadsHelper;
 	private ContextMenuLayer contextMenuLayer;
 
 	private Bitmap roadWorkIcon;
@@ -44,6 +47,7 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 	@Override
 	public void initLayer(OsmandMapTileView view) {
 		avoidSpecificRoads = activity.getMyApplication().getAvoidSpecificRoads();
+		avoidRoadsHelper = activity.getMyApplication().getAvoidRoadsHelper();
 		contextMenuLayer = view.getLayerByClass(ContextMenuLayer.class);
 		roadWorkIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_pin_avoid_road);
 		activePaint = new Paint();
@@ -77,6 +81,20 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 				final double longitude = location.getLongitude();
 				if (tileBox.containsLatLon(latitude, longitude)) {
 					drawPoint(canvas, tileBox, latitude, longitude, road != null);
+				}
+			}
+			for (Map.Entry<RouteDataObject, Location> entry : avoidRoadsHelper.getRoadsToAvoid().entrySet()) {
+				RouteDataObject rdo = entry.getKey();
+				if (rdo != null && contextMenuLayer.getMoveableObject() instanceof RouteDataObject) {
+					RouteDataObject object = (RouteDataObject) contextMenuLayer.getMoveableObject();
+					if (object.id == rdo.id) {
+						continue;
+					}
+				}
+				final double lat = entry.getValue().getLatitude();
+				final double lon = entry.getValue().getLongitude();
+				if (tileBox.containsLatLon(lat, lon)) {
+					drawPoint(canvas, tileBox, lat, lon, rdo != null);
 				}
 			}
 		}

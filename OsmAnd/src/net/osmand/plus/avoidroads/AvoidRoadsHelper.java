@@ -1,7 +1,12 @@
 package net.osmand.plus.avoidroads;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
+import android.view.Gravity;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 
 import com.google.gson.Gson;
 import com.google.gson.annotations.Expose;
@@ -12,11 +17,14 @@ import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.RouteDataObject;
+import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -28,9 +36,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.ref.WeakReference;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,12 +51,14 @@ public class AvoidRoadsHelper {
 
 	private static final Log LOG = PlatformUtil.getLog(AvoidRoadsHelper.class);
 
-	public static final int FROM_URL = 101;
-	public static final int FROM_STORAGE = 100;
+	private static final int FROM_URL = 101;
+	private static final int FROM_STORAGE = 100;
+
+	private static final int SOURCE = FROM_STORAGE;
 
 	private static boolean saveResultToFile = true;
 
-	private final Map<Long, Location> roadsToAvoid;
+	private final Map<RouteDataObject, Location> roadsToAvoid;
 	private final List<Location> parsedPoints;
 
 	private final OsmandApplication app;
@@ -55,9 +67,14 @@ public class AvoidRoadsHelper {
 
 	private ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
 
+	private WeakReference<MapActivity> mapActivityWeakReference = null;
+
 //	String inputFileName = "points_500.json";
 //	String inputFileName = "point_100.json";
 	String inputFileName = "points_10.json";
+	String testurl = "https://gist.githubusercontent.com/MadWasp79/1238d8878792572e343eb2e296c3c7f5/raw/494f872425993797c3a3bc79a4ec82039db6ee46/point_100.json";
+//	String testurl = "https://gist.githubusercontent.com/MadWasp79/45f362ea48e9e8edd1593113593993c5/raw/6e817fb3bc7eaeaa3eda24847fde4855eb22485d/points_500.json";
+
 
 	public AvoidRoadsHelper(final OsmandApplication app) {
 		this.app = app;
@@ -68,84 +85,129 @@ public class AvoidRoadsHelper {
 		completionCallback = new CompletionCallback() {
 			@Override
 			public void onRDOSearchComplete() {
-
 				if (saveResultToFile) {
 					File out = new File (app.getAppPath(IndexConstants.AVOID_ROADS_DIR).getAbsolutePath() + "/"
 							+ "processed_ids.json");
 					saveRoadsToJson(roadsToAvoid, out);
 				}
+
+
+				app.getAvoidRoadsHelper().addResultToImpassibleRoads(roadsToAvoid);
+
+				MapActivity mapActivity = mapActivityWeakReference.get();
+				if (mapActivity != null) {
+					app.getAvoidRoadsHelper().showParsingCompleteDialog(mapActivity);
+				} else {
+					app.showToastMessage("Successfully processed roads to avoid. Applying result to routing parameters");
+				}
 			}
 
 			@Override
 			public void onPointsParsed(List<Location> result) {
+				app.getRoutingConfig().clearImpassableRoads();
+				parsedPoints.clear();
 				parsedPoints.addAll(result);
 				convertPointsToRDO(parsedPoints);
 			}
 		};
 	}
 
-	public void testRun() {
-//		File in = new File(app.getAppPath(IndexConstants.AVOID_ROADS_DIR).getAbsolutePath()  + "/" + inputFileName);
-//		LOG.debug(String.format("Input json: %s", in.getAbsolutePath()));
-//		if (in.exists()) {
-//			loadJson(in.getAbsolutePath(), FROM_STORAGE);
-//		}
-		//String url = "https://gist.githubusercontent.com/MadWasp79/1238d8878792572e343eb2e296c3c7f5/raw/494f872425993797c3a3bc79a4ec82039db6ee46/point_100.json";
-		String url = "https://gist.githubusercontent.com/MadWasp79/45f362ea48e9e8edd1593113593993c5/raw/6e817fb3bc7eaeaa3eda24847fde4855eb22485d/points_500.json";
-		LOG.debug(String.format("Loading json from url: %s", url));
-		loadJson(url, FROM_URL);
+	public Map<RouteDataObject, Location> getRoadsToAvoid() {
+		return roadsToAvoid;
 	}
 
-	public void testRunDownload() {
-		String url = "https://gist.githubusercontent.com/MadWasp79/1238d8878792572e343eb2e296c3c7f5/raw/494f872425993797c3a3bc79a4ec82039db6ee46/point_100.json";
-		LOG.debug(String.format("Loading json from url: %s", url));
-		loadJson(url, FROM_URL);
+	public void addResultToImpassibleRoads(Map<RouteDataObject, Location> result) {
+		app.getRoutingConfig().addMultipleImpassableRoads(result);
 	}
 
-
-	public void convertPointsToRDO(final List<Location> parsedPoints) {
-		final Map<Long, Location> avoidedRoads = new HashMap<>();
-		final long timeStart = System.currentTimeMillis();
-		final int[] count = {0};
-		this.roadsToAvoid.clear();
-//		for (final Location point : parsedPoints) {
-//
-//			app.getLocationProvider().getRouteSegment(point, appMode, false, new ResultMatcher<RouteDataObject>() {
-//				@Override
-//				public boolean publish(RouteDataObject result) {
-//					count[0]++;
-//					if (result == null) {
-//						LOG.error("Error! Find no result for point []");
-//					} else {
-//						avoidedRoads.put(result.id, point);
-//					}
-//					if (count[0] == parsedPoints.size()) {
-//						completionCallback.onRDOSearchComplete();
-//					}
-//					if (count[0]%10 == 0) {
-//						app.showShortToastMessage(String.format("Found %d roads", count[0]));
-//					}
-//					return true;
-//				}
-//
-//				@Override
-//				public boolean isCancelled() {
-//					return false;
-//				}
-//			});
-//		}
-
-		app.getLocationProvider().getMultipleRouteSegmentsIds(parsedPoints, appMode, false,
-				new ResultMatcher<Map<Long, Location>>() {
+	public void showUrlDialog(final MapActivity activity) {
+		mapActivityWeakReference = new WeakReference<MapActivity>(activity);
+		final AlertDialog.Builder db = new AlertDialog.Builder(activity);
+		db.setTitle("Process Avoid Points");
+		db.setMessage("Enter url to JSON file. \"Parse\" to continue:");
+		final EditText urlInputString = new EditText(activity);
+		LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+				LinearLayout.LayoutParams.MATCH_PARENT,
+				LinearLayout.LayoutParams.MATCH_PARENT);
+		urlInputString.setLayoutParams(lp);
+		urlInputString.setText(testurl);
+//		urlInputString.selectAll();
+		db.setView(urlInputString);
+		db.setIcon(R.drawable.map_pin_avoid_road);
+		db.setPositiveButton("Parse", new DialogInterface.OnClickListener() {
 			@Override
-			public boolean publish(Map<Long, Location> result) {
+			public void onClick(DialogInterface dialog, int which) {
+				String url = urlInputString.getText().toString();
+				boolean isValidJsonUrl = false;
+				try {
+					URL test = new URL(url);
+					if (url.endsWith(".json")) {
+						isValidJsonUrl = true;
+					}
+				} catch (MalformedURLException e){
+					isValidJsonUrl  = false;
+					app.showShortToastMessage("Enter valid JSON url");
+				}
+				if (isValidJsonUrl) {
+					app.showShortToastMessage("Downloading JSON");
+					app.getAvoidRoadsHelper().loadJson(url, FROM_URL);
+//					dialog.dismiss();
+				}
 
+
+			}
+		});
+		db.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+			}
+		});
+		db.show();
+	}
+
+	public void showParsingCompleteDialog(final MapActivity activity) {
+		final AlertDialog.Builder db = new AlertDialog.Builder(activity);
+		db.setTitle("Avoid Points");
+		db.setMessage("Parsing complete, applying result to routing config!");
+		db.setIcon(R.drawable.map_pin_avoid_road);
+		db.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+			}
+		});
+		db.show();
+	}
+
+	public void testRun() {
+		String in = "";
+		switch (SOURCE) {
+			case FROM_STORAGE:
+				in = app.getAppPath(IndexConstants.AVOID_ROADS_DIR).getAbsolutePath()  + "/" + inputFileName;
+				LOG.debug(String.format("Input json from file: %s", in));
+				break;
+			case FROM_URL:
+				LOG.debug(String.format("Loading json from url: %s", in));
+				break;
+		}
+
+		loadJson(in, SOURCE);
+	}
+
+	private void convertPointsToRDO(final List<Location> parsedPoints) {
+		this.roadsToAvoid.clear();
+		app.getLocationProvider().getMultipleRouteSegmentsIds(parsedPoints, appMode, false,
+				new ResultMatcher<Map<RouteDataObject, Location>>() {
+
+			@Override
+			public boolean publish(Map<RouteDataObject, Location> result) {
 				if (result == null || result.isEmpty()) {
 					LOG.error("Error! No valid result");
 				} else {
 					roadsToAvoid.putAll(result);
 					LOG.debug(String.format("Found %d road ids", result.size()));
-					completionCallback.onRDOSearchComplete();
+					app.getAvoidRoadsHelper().completionCallback.onRDOSearchComplete();
 				}
 				return true;
 			}
@@ -158,7 +220,7 @@ public class AvoidRoadsHelper {
 	}
 
 	@SuppressLint("StaticFieldLeak")
-	private void loadJson(final String path, final int source) {
+	public void loadJson(final String path, final int source) {
 		new AsyncTask<Void, Void, List<Location>>() {
 			@Override
 			protected List<Location> doInBackground(Void... voids) {
@@ -173,8 +235,12 @@ public class AvoidRoadsHelper {
 							is = connection.getInputStream();
 							break;
 					}
+
 					List<Location> result = new ArrayList<>();
-					parsePointsFromJson(is, result);
+					parseJson(is, result);
+					if (is != null) {
+						is.close();
+					}
 					return result;
 				} catch (Exception e) {
 					LOG.error("Error reading json !");
@@ -193,14 +259,14 @@ public class AvoidRoadsHelper {
 			@Override
 			protected void onPostExecute(List<Location> result) {
 				if (!Algorithms.isEmpty(result)) {
-					completionCallback.onPointsParsed(result);
+					app.getAvoidRoadsHelper().completionCallback.onPointsParsed(result);
 				}
 			}
 		}.executeOnExecutor(singleThreadExecutor);
 	}
 
 	@SuppressLint("StaticFieldLeak")
-	private void saveRoadsToJson(final Map<Long, Location> roadsToAvoid, final File out) {
+	private void saveRoadsToJson(final Map<RouteDataObject, Location> roadsToAvoid, final File out) {
 		new AsyncTask<Void, Void, Void>() {
 			@Override
 			protected Void doInBackground(Void... voids) {
@@ -230,7 +296,7 @@ public class AvoidRoadsHelper {
 		}.executeOnExecutor(singleThreadExecutor);
 	}
 
-	private void parsePointsFromJson(InputStream is, List<Location> result) {
+	private void parseJson(InputStream is, List<Location> result) {
 		Gson gson = new Gson();
 		GeoJSON geoJSON = gson.fromJson(new BufferedReader(new InputStreamReader(is)), GeoJSON.class);
 		double minlat = 0 , maxlat = 0, minlon = 0, maxlon= 0;
@@ -260,7 +326,7 @@ public class AvoidRoadsHelper {
 		}
 		qt.queryInBox(qr, result);
 
-		app.showShortToastMessage(String.format("Loaded and parsed %d avoid points from JSON. Starting segment search.", result.size()));
+//		app.showShortToastMessage(String.format("Loaded and parsed %d avoid points from JSON. Starting segment search.", result.size()));
 		LOG.debug(String.format("Points parsed: %d", result.size()));
 	}
 
@@ -304,10 +370,10 @@ public class AvoidRoadsHelper {
 		@Expose
 		List<RoadToAvoid> roadsToAvoid;
 
-		public RoadsToAvoid(Map<Long, Location> roads) {
+		public RoadsToAvoid(Map<RouteDataObject, Location> roads) {
 			this.roadsToAvoid = new ArrayList<>();
-			for (Map.Entry<Long, Location> road : roads.entrySet()) {
-				roadsToAvoid.add(new RoadToAvoid (road.getKey(), road.getValue().getLatitude(), road.getValue().getLongitude()));
+			for (Map.Entry<RouteDataObject, Location> road : roads.entrySet()) {
+				roadsToAvoid.add(new RoadToAvoid (road.getKey().id >> 6, road.getValue().getLatitude(), road.getValue().getLongitude()));
 			}
 		}
 	}

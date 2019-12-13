@@ -884,7 +884,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	public boolean getMultipleRouteSegmentsIds(List<net.osmand.Location> points,
 	                               @Nullable ApplicationMode appMode,
 	                               boolean cancelPreviousSearch,
-	                               ResultMatcher<Map<Long, net.osmand.Location>> result) {
+	                               ResultMatcher<Map<RouteDataObject, net.osmand.Location>> result) {
 		return currentPositionHelper.getMultipleRouteSegmentsIds(points, appMode, cancelPreviousSearch, result);
 	}
 

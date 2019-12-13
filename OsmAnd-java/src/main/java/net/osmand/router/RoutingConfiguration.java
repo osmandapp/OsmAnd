@@ -56,6 +56,7 @@ public class RoutingConfiguration {
 		private Map<String, GeneralRouter> routers = new LinkedHashMap<>();
 		private Map<String, String> attributes = new LinkedHashMap<>();
 		private HashMap<Long, Location> impassableRoadLocations = new HashMap<>();
+		private HashMap<Long, Location> roadsToAvoid = new HashMap<>();
 
 		// Example
 //		{
@@ -88,6 +89,7 @@ public class RoutingConfiguration {
 			i.recalculateDistance = parseSilentFloat(getAttribute(i.router, "recalculateDistanceHelp"), i.recalculateDistance) ;
 			i.heuristicCoefficient = parseSilentFloat(getAttribute(i.router, "heuristicCoefficient"), i.heuristicCoefficient);
 			i.router.addImpassableRoads(impassableRoadLocations.keySet());
+			i.router.addImpassableRoads(roadsToAvoid.keySet());
 			i.ZOOM_TO_LOAD_TILES = parseSilentInt(getAttribute(i.router, "zoomToLoadTiles"), i.ZOOM_TO_LOAD_TILES);
 			int desirable = parseSilentInt(getAttribute(i.router, "memoryLimitInMB"), 0);
 			if(desirable != 0) {
@@ -114,7 +116,14 @@ public class RoutingConfiguration {
 			}
 			return false;
 		}
-		
+
+		public void addMultipleImpassableRoads(Map<RouteDataObject, Location> ir) {
+			for (Map.Entry<RouteDataObject, Location> r : ir.entrySet()) {
+				if (!impassableRoadLocations.containsKey(r.getKey().id)){
+					impassableRoadLocations.put(r.getKey().id, r.getValue());
+				}
+			}
+		}
 		
 		private String getAttribute(VehicleRouter router, String propertyName) {
 			if (router.containsAttribute(propertyName)) {
@@ -139,6 +148,10 @@ public class RoutingConfiguration {
 
 		public void removeImpassableRoad(RouteDataObject obj) {
 			impassableRoadLocations.remove(obj.id);
+		}
+
+		public void clearImpassableRoads() {
+			impassableRoadLocations.clear();
 		}
 	}
 
