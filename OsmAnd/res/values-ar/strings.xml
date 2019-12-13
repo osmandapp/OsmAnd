@@ -3315,4 +3315,8 @@
     <string name="routing_attr_width_description">حدد الحد المسموح به لعرض السيارة على الطرق.</string>
     <string name="simulate_your_location_gpx_descr">محاكاة موقعك باستخدام مسار GPX مسجل.</string>
     <string name="quick_action_directions_from_desc">زر لجعل الشاشة مركز نقطة الانطلاق وحساب الطريق إلى الوجهة أو فتح مربع حوار لتحديد الوجهة إذا لم تكن علامة الوجهة علي الخريطة.</string>
+    <string name="distance_and_address">%1$s • %2$s</string>
+    <string name="street_city">%1$s, %2$s</string>
+    <string name="personal_category_name">شخصي</string>
+    <string name="shared_string_downloading_formatted">تنزيل %s</string>
 </resources>
