@@ -3386,4 +3386,8 @@ Pôr do Sol: %2$s</string>
     <string name="add_new_profile_q">Adicionar novo perfil \'%1$s\'\?</string>
     <string name="save_heading">Incluir direção</string>
     <string name="save_heading_descr">Salvar direção de cada ponto da trilha durante a gravação.</string>
+    <string name="distance_and_address">%1$s • %2$s</string>
+    <string name="street_city">%1$s, %2$s</string>
+    <string name="personal_category_name">Pessoal</string>
+    <string name="shared_string_downloading_formatted">Baixando %s</string>
 </resources>
