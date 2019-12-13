@@ -461,7 +461,7 @@
     <string name="preferred_locale">顯示語言</string>
     <string name="shared_string_next">下一頁</string>
     <string name="shared_string_previous">上一頁</string>
-    <string name="unit_of_length_descr">改變所測量的距離。</string>
+    <string name="unit_of_length_descr">變更距離的測量方式。</string>
     <string name="unit_of_length">長度單位</string>
     <string name="si_mi_feet">英哩/英呎</string>
     <string name="si_mi_yard">英哩/碼</string>
