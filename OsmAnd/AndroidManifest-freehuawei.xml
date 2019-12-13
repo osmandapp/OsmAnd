@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools">
+
+	<application>
+		<activity android:name="com.huawei.android.sdk.drm.DrmDialogActivity"
+			android:configChanges="screenSize|orientation|keyboardHidden"
+			android:exported="false"
+			android:theme="@android:style/Theme.Translucent">
+			<meta-data
+				android:name="hwc-theme"
+				android:value="androidhwext:style/Theme.Emui.Translucent" />
+		</activity>
+
+		<provider
+			android:name="android.support.v4.content.FileProvider"
+			android:authorities="net.osmand.huawei.fileprovider"
+			tools:replace="android:authorities" />
+		<service
+			android:name="net.osmand.plus.NavigationService"
+			android:process="net.osmand.huawei"
+			tools:replace="android:process" />
+	</application>
+
+</manifest>

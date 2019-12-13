@@ -3251,7 +3251,7 @@ Lon %2$s</string>
     <string name="turn_screen_on_info">Karte während der Navigation auf Sperrbildschirm anzeigen.</string>
     <string name="route_parameters_info">Einstellungen für die Routenplanung des gewählten Profils „%1$s“.</string>
     <string name="wake_time">Aufwachzeit</string>
-    <string name="units_and_formats">Einheiten und Formate</string>
+    <string name="units_and_formats">Einheiten &amp; Formate</string>
     <string name="appearance">Aussehen</string>
     <string name="map_look_descr">Kartendarstellung</string>
     <string name="map_look">Kartendarstellung</string>
@@ -3402,6 +3402,10 @@ Lon %2$s</string>
     <string name="suggested_maps_descr">Diese Karten sind für die Verwendung mit dem Plugin erforderlich</string>
     <string name="join_segments">Segmente verbinden</string>
     <string name="add_new_profile_q">Neues Profil \'%1$s\' hinzufügen\?</string>
-    <string name="save_heading">Überschrift einbeziehen</string>
-    <string name="save_heading_descr">Überschrift zu jedem Trackpoint während der Aufnahme speichern.</string>
+    <string name="save_heading">Richtung einbeziehen</string>
+    <string name="save_heading_descr">Richtung zu jedem Trackpunkt während der Aufnahme speichern.</string>
+    <string name="distance_and_address">%1$s • %2$s</string>
+    <string name="street_city">%1$s, %2$s</string>
+    <string name="personal_category_name">Persönlich</string>
+    <string name="shared_string_downloading_formatted">%s herunterladen</string>
 </resources>
