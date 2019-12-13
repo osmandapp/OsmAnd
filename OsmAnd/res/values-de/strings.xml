@@ -454,7 +454,7 @@
     <string name="preferred_locale">Anzeigesprache</string>
     <string name="shared_string_next">Weiter</string>
     <string name="shared_string_previous">Zurück</string>
-    <string name="unit_of_length_descr">Ändern Sie, in welcher Entfernung gemessen wird.</string>
+    <string name="unit_of_length_descr">Maß für Entfernungen ändern.</string>
     <string name="unit_of_length">Längeneinheiten</string>
     <string name="si_mi_feet">Meilen/Fuß</string>
     <string name="si_mi_yard">Meilen/Yards</string>
