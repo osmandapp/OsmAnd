@@ -1116,7 +1116,7 @@
     <string name="map_widget_vector_attributes">Атрибуты визуализации</string>
     <string name="map_widget_renderer">Стиль карты</string>
     <string name="email">email</string>
-    <string name="day_night_info">День/Ночь данные</string>
+    <string name="day_night_info">Восход/закат</string>
     <string name="osmand_short_description_80_chars">OsmAnd - это навигационное приложение для путешествий с открытым исходным кодом</string>
     <string name="osmand_long_description_1000_chars">"OsmAnd (Open Street Maps Automated Navigation Directions)
 \n
@@ -1547,9 +1547,9 @@
     <string name="pause_navigation">Приостановить навигацию</string>
     <string name="rendering_attr_alpineHiking_description">Визуализация пути по шкале SAC.</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Визуализация пути согласно трассам OSMC.</string>
-    <string name="arrival_distance_factor_early">Раньше</string>
-    <string name="arrival_distance_factor_normally">Обычный</string>
-    <string name="arrival_distance_factor_late">Позже</string>
+    <string name="arrival_distance_factor_early">Пораньше</string>
+    <string name="arrival_distance_factor_normally">Как обычно</string>
+    <string name="arrival_distance_factor_late">Попозже</string>
     <string name="arrival_distance_factor_at_last">На последних метрах</string>
     <string name="rendering_attr_alpineHiking_name">Пеший горный туризм по шкале (SAC)</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Наложение туристических меток</string>
@@ -1695,7 +1695,7 @@
     <string name="back_to_map">Вернуться на карту</string>
     <string name="location_on_map">Координаты:\n Широта %1$s\n Долгота %2$s</string>
     <string name="shared_string_ellipsis">…</string>
-    <string name="shared_string_enabled">Включена</string>
+    <string name="shared_string_enabled">Включен</string>
     <string name="shared_string_disabled">Выключен</string>
     <string name="shared_string_never">Никогда</string>
     <string name="shared_string_and">и</string>
@@ -2345,7 +2345,7 @@
     <string name="measurement_tool_action_bar">Просмотрите карту и добавьте точки</string>
     <string name="measurement_tool">Измерить расстояние</string>
     <string name="none_point_error">Необходимо добавить хотя бы одну точку.</string>
-    <string name="mapillary_image">Изображение Mapillary</string>
+    <string name="mapillary_image">Фотография Mapillary</string>
     <string name="improve_coverage_mapillary">Улучшить фотопокрытие через Mapillary</string>
     <string name="hide_from_zoom_level">Скрыть от шкалы приближения</string>
     <string name="rendering_value_translucent_pink_name">Прозрачно-розовый</string>
@@ -2749,9 +2749,9 @@
     <string name="in_app_purchase">Покупка в приложении</string>
     <string name="in_app_purchase_desc">Разовый платеж</string>
     <string name="purchase_unlim_title">Купить - %1$s</string>
-    <string name="wikivoyage_offline">Wikivoyage офлайн</string>
+    <string name="wikivoyage_offline">Викигид офлайн</string>
     <string name="unlimited_downloads">Неограниченные загрузки</string>
-    <string name="wikipedia_offline">Wikipedia офлайн</string>
+    <string name="wikipedia_offline">Википедия офлайн</string>
     <string name="unlock_all_features">Разблокировать все функции OsmAnd</string>
     <string name="monthly_map_updates">Обновления карт: ежемесячные
     </string>
@@ -2898,7 +2898,7 @@
     <string name="waiting_for_route_calculation">Расчет маршрута…</string>
     <string name="app_mode_public_transport">Общественный транспорт</string>
     <string name="avoid_roads_descr">Выберите дорогу на карте или из списка ниже, которую вы хотите избежать во время навигации:</string>
-    <string name="simulate_navigation">Симулировать навигацию</string>
+    <string name="simulate_navigation">Моделировать навигацию</string>
     <string name="choose_track_file_to_follow">Выберите файл трека для следования</string>
     <string name="voice_announcements">Голосовые объявления</string>
     <string name="quick_action_switch_day_night_descr">Нажатие на кнопку действия переключает между дневным и ночным режимами для OsmAnd</string>
