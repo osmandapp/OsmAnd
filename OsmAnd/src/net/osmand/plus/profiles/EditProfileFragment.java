@@ -852,7 +852,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		}
 	}
 
-	private class ApplicationProfileObject {
+	 class ApplicationProfileObject {
 
 		int stringKeyName = -1;
 		String stringKey;

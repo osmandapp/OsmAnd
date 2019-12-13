@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		android:id="@+id/buttons_layout"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_gravity="bottom"
+		android:background="?attr/bg_color"
+		android:orientation="horizontal">
+
+		<Button
+			android:id="@+id/cancel_button"
+			android:layout_width="0dp"
+			android:layout_height="42dp"
+			android:layout_weight="1"
+			android:layout_marginTop="@dimen/list_content_padding"
+			android:layout_marginBottom="@dimen/list_content_padding"
+			android:layout_marginStart="@dimen/list_content_padding"
+			android:layout_marginEnd="8dp"
+			android:layout_marginLeft="@dimen/list_content_padding"
+			android:layout_marginRight="8dp"
+			android:background="?attr/profile_cancel_btn"
+			android:text="@string/shared_string_cancel"
+			android:textAllCaps="false"
+			android:textColor="?attr/active_color_basic"/>
+
+		<Button
+			android:id="@+id/save_profile_btn"
+			android:layout_width="0dp"
+			android:layout_height="42dp"
+			android:layout_weight="1"
+			android:layout_marginTop="@dimen/list_content_padding"
+			android:layout_marginBottom="@dimen/list_content_padding"
+			android:layout_marginStart="8dp"
+			android:layout_marginEnd="@dimen/list_content_padding"
+			android:layout_marginLeft="8dp"
+			android:layout_marginRight="@dimen/list_content_padding"
+			android:background="?attr/profile_save_btn"
+			android:text="@string/shared_string_save"
+			android:textAllCaps="false"
+			android:textColor="@color/color_white"/>
+
+</LinearLayout>

@@ -41,7 +41,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.PluginActivity;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
-import net.osmand.plus.profiles.EditProfileFragment;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.plus.skimapsplugin.SkiMapsPlugin;
 
@@ -67,7 +66,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 	private static final String CONFIGURE_MAP = "configure_map";
 	private static final String CONFIGURE_SCREEN = "configure_screen";
 	private static final String EXPORT_PROFILE = "export_profile";
-    private static final String PROFILE_APPEARANCE = "profile_appearance";
+	private static final String PROFILE_APPEARANCE = "profile_appearance";
 
 	@ColorRes
 	protected int getBackgroundColorRes() {
@@ -99,25 +98,20 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 		toolbarSubtitle.setText(R.string.configure_profile);
 		toolbarSubtitle.setVisibility(View.VISIBLE);
 
-        if (!getSelectedAppMode().equals(ApplicationMode.DEFAULT)) {
-            view.findViewById(R.id.toolbar_switch_container).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    ApplicationMode selectedMode = getSelectedAppMode();
-                    List<ApplicationMode> availableAppModes = ApplicationMode.values(getMyApplication());
-                    boolean isChecked = availableAppModes.contains(selectedMode);
-                    if (!isChecked) {
-                        availableAppModes.add(selectedMode);
-                    } else {
-                        availableAppModes.remove(selectedMode);
-                    }
-                    ApplicationMode.changeProfileAvailability(selectedMode, !isChecked, getMyApplication());
-                    updateToolbarSwitch();
-                }
-            });
-        } else {
-            view.findViewById(R.id.switchWidget).setVisibility(View.GONE);
-        }
+		if (!getSelectedAppMode().equals(ApplicationMode.DEFAULT)) {
+			view.findViewById(R.id.toolbar_switch_container).setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					ApplicationMode selectedMode = getSelectedAppMode();
+					List<ApplicationMode> availableAppModes = ApplicationMode.values(getMyApplication());
+					boolean isChecked = availableAppModes.contains(selectedMode);
+					ApplicationMode.changeProfileAvailability(selectedMode, !isChecked, getMyApplication());
+					updateToolbarSwitch();
+				}
+			});
+		} else {
+			view.findViewById(R.id.switchWidget).setVisibility(View.GONE);
+		}
 	}
 
 	private void updateToolbarSwitch() {
@@ -198,7 +192,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 		setupNavigationSettingsPref();
 		setupConfigureMapPref();
 		setupConfigureScreenPref();
-        setupProfileAppearancePref();
+		setupProfileAppearancePref();
 
 		PreferenceCategory pluginSettings = (PreferenceCategory) findPreference(PLUGIN_SETTINGS);
 		pluginSettings.setIconSpaceReserved(false);
@@ -246,15 +240,15 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 		configureMap.setIntent(intent);
 	}
 
-    private void setupProfileAppearancePref() {
-        Context ctx = getContext();
-        if (ctx == null) {
-            return;
-        }
-        Preference configureMap = findPreference(PROFILE_APPEARANCE);
-        configureMap.setIcon(getContentIcon(R.drawable.ic_action_offroad));
-        configureMap.setFragment(EditProfileFragment.class.getName());
-    }
+	private void setupProfileAppearancePref() {
+		Context ctx = getContext();
+		if (ctx == null) {
+			return;
+		}
+		Preference configureMap = findPreference(PROFILE_APPEARANCE);
+		configureMap.setIcon(getContentIcon(getSelectedAppMode().getIconRes()));
+		configureMap.setFragment(ProfileAppearanceFragment.class.getName());
+	}
 
 	private void setupExportProfilePref() {
 		Preference exportProfile = findPreference(EXPORT_PROFILE);

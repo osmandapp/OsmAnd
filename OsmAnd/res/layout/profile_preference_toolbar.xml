@@ -37,6 +37,14 @@
 			android:textSize="@dimen/dialog_header_text_size"
 			osmand:typeface="@string/font_roboto_medium"
 			tools:text="@string/routing_settings_2" />
+
+		<include
+			layout="@layout/profile_button_small"
+			android:layout_width="@dimen/route_info_toolbar_button_size"
+			android:layout_height="@dimen/route_info_toolbar_button_size"
+			android:layout_marginLeft="@dimen/content_padding_half"
+			android:layout_marginRight="@dimen/content_padding_half" />
+
 	</LinearLayout>
 
 </android.support.v7.widget.Toolbar>

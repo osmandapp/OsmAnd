@@ -18,6 +18,7 @@ import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.LongDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.settings.NavigationFragment;
+import net.osmand.plus.settings.ProfileAppearanceFragment;
 
 import org.apache.commons.logging.Log;
 
@@ -225,6 +226,7 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 			EditProfileFragment editProfileFragment = (EditProfileFragment) fragmentManager.findFragmentByTag(EditProfileFragment.TAG);
 			SettingsProfileFragment settingsProfileFragment = (SettingsProfileFragment) fragmentManager.findFragmentByTag(SettingsProfileFragment.class.getName());
 			NavigationFragment navigationFragment = (NavigationFragment) fragmentManager.findFragmentByTag(NavigationFragment.class.getName());
+			ProfileAppearanceFragment profileAppearanceFragment = (ProfileAppearanceFragment) fragmentManager.findFragmentByTag(ProfileAppearanceFragment.class.getName());
 
 			if (editProfileFragment != null) {
 				switch (type) {
@@ -243,7 +245,9 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 				listener = settingsProfileFragment.getBaseProfileListener();
 			} else if (navigationFragment != null) {
 				listener = navigationFragment.getNavProfileListener();
-			}
+			} else if (profileAppearanceFragment != null) {
+				listener = profileAppearanceFragment.getParentProfileListener();
+		}
 		}
 	}
 

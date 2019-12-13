@@ -11,7 +11,9 @@
 	Thx - Hardy
 
 -->
-    <string name="delete_profiles_descr">After you tap Apply, deleted profiles will be lost completely.</string>
+	<string name="delete_profiles_descr">After you tap Apply, deleted profiles will be lost completely.</string>
+    <string name="master_profile">Master profile</string>
+    <string name="select_color">Select color</string>
     <string name="shared_string_downloading_formatted">Downloading %s</string>
     <string name="edit_profiles_descr">You can’t delete default OsmAnd profiles, but you can disable them in previous screen, or move them to the bottom.</string>
     <string name="edit_profiles">Edit profiles</string>

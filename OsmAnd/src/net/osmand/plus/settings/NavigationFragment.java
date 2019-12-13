@@ -3,6 +3,8 @@ package net.osmand.plus.settings;
 import android.os.Bundle;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.SwitchPreferenceCompat;
+import android.view.LayoutInflater;
+import android.view.View;
 
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.R;
@@ -24,6 +26,7 @@ import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.TY
 public class NavigationFragment extends BaseSettingsFragment {
 
 	public static final String TAG = NavigationFragment.class.getSimpleName();
+	public static final String NAVIGATION_TYPE = "navigation_type";
 	private SelectProfileBottomSheetDialogFragment.SelectProfileListener navTypeListener;
 	List<RoutingProfileDataObject> routingProfileDataObjects;
 	private Preference navigationType;
@@ -35,8 +38,14 @@ public class NavigationFragment extends BaseSettingsFragment {
 	}
 
 	@Override
+	protected void createToolbar(LayoutInflater inflater, View view) {
+		super.createToolbar(inflater, view);
+		view.findViewById(R.id.profile_button).setVisibility(View.GONE);
+	}
+
+	@Override
 	protected void setupPreferences() {
-		navigationType = findPreference("navigation_type");
+		navigationType = findPreference(NAVIGATION_TYPE);
 		Preference routeParameters = findPreference("route_parameters");
 		SwitchPreferenceCompat showRoutingAlarms = (SwitchPreferenceCompat) findPreference(settings.SHOW_ROUTING_ALARMS.getId());
 		SwitchPreferenceCompat speakRoutingAlarms = (SwitchPreferenceCompat) findPreference(settings.VOICE_MUTE.getId());
@@ -71,7 +80,7 @@ public class NavigationFragment extends BaseSettingsFragment {
 
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
-		if (preference.getKey().equals("navigation_type")) {
+		if (preference.getKey().equals(NAVIGATION_TYPE)) {
 			final SelectProfileBottomSheetDialogFragment dialog = new SelectProfileBottomSheetDialogFragment();
 			Bundle bundle = new Bundle();
 			if (getSelectedAppMode() != null) {

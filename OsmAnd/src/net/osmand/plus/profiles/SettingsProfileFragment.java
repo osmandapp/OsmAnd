@@ -170,7 +170,7 @@ public class SettingsProfileFragment extends BaseOsmAndFragment
 		return typeListener;
 	}
 
-	static List<ProfileDataObject> getBaseProfiles(Context ctx) {
+	public static List<ProfileDataObject> getBaseProfiles(Context ctx) {
 		List<ProfileDataObject> profiles = new ArrayList<>();
 		for (ApplicationMode mode : ApplicationMode.getDefaultValues()) {
 			if (mode != ApplicationMode.DEFAULT) {
