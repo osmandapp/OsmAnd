@@ -736,7 +736,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="osmand_parking_hours">Heures</string>
     <string name="osmand_parking_minutes">Minutes</string>
     <string name="osmand_parking_position_description_add_time">Le véhicule a été garé à</string>
-    <string name="use_compass_navigation_descr">Utiliser la boussole quand l\'orientation n\'est pas détectée.</string>
+    <string name="use_compass_navigation_descr">Utiliser la boussole quand la direction n\'est pas détectée.</string>
     <string name="use_compass_navigation">Utiliser la boussole</string>
     <string name="route_updated_loc_found">En attente de la position pour calculer l\'itinéraire</string>
     <string name="continue_follow_previous_route_auto">La navigation a été interrompue. Souhaitez-vous la reprendre ? (%1$s secondes)</string>
@@ -1882,7 +1882,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="osm_live_thanks">Merci pour votre soutien à OsmAnd !
 \nPour activer toutes les nouvelles fonctionnalités, merci de redémarrer OsmAnd.</string>
     <string name="osm_live_subscription_settings">Paramétrage de l\'abonnement</string>
-    <string name="show_transparency_seekbar">Afficher curseur de réglage de la transparence</string>
+    <string name="show_transparency_seekbar">Afficher le curseur de réglage de la transparence</string>
     <string name="recalculate_route">Recalculer l\'itinéraire</string>
     <string name="storage_directory_shared">Mémoire partagée</string>
     <string name="shared_string_topbar">Barre supérieure</string>
@@ -3368,9 +3368,12 @@ représentant la zone : %1$s x %2$s</string>
     <string name="new_plugin_added">Nouveau greffon ajouté</string>
     <string name="join_segments">Relier les segments</string>
     <string name="add_new_profile_q">Ajouter le profil \'%1$s\' \?</string>
-    <string name="save_heading">Inclure l\'entête</string>
-    <string name="save_heading_descr">Enregistrer l\'entête avec chaque point lors de l\'enregistrement d\'une trace.</string>
-    <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Montre des itinéraires cyclables de réseau de nœud</string>
-    <string name="rendering_value_walkingRoutesOSMCNodes_name">Réseaux de nœud</string>
+    <string name="save_heading">Inclure la direction</string>
+    <string name="save_heading_descr">Inclure la direction de chaque point lors de l\'enregistrement d\'une trace.</string>
+    <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Afficher node network cycle routes</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_name">Nœud de réseaux</string>
     <string name="personal_category_name">Personnel</string>
+    <string name="distance_and_address">%1$s • %2$s</string>
+    <string name="street_city">%1$s, %2$s</string>
+    <string name="shared_string_downloading_formatted">Téléchargement %s</string>
 </resources>

@@ -335,7 +335,7 @@ POIの更新は利用できません</string>
     <string name="opening_changeset">変更セットを開いています…</string>
     <string name="closing_changeset">変更セットを閉じています…</string>
     <string name="commiting_node">ノードをコミットしています…</string>
-    <string name="loading_poi_obj">POIをロード中…</string>
+    <string name="loading_poi_obj">POIを読み込んでいます…</string>
     <string name="auth_failed">認証に失敗</string>
     <string name="failed_op">失敗</string>
     <string name="converting_names">現地/英語 名称を変換中…</string>
@@ -1051,7 +1051,7 @@ POIの更新は利用できません</string>
     <string name="av_camera_focus_hiperfocal">過焦点フォーカス</string>
     <string name="av_camera_focus_edof">拡張被写界深度(EDOF)</string>
     <string name="av_camera_focus_continuous">定期的にフォーカスを調整</string>
-    <string name="amenity_type_seamark">満潮線</string>
+    <string name="amenity_type_seamark">航路標識</string>
     <string name="app_modes_choose_descr">マップ画面で表示したい移動手段別プロファイルを選択します(乗用車、自転車、徒歩、その他…)</string>
     <string name="app_modes_choose">アプリプロファイル</string>
     <string name="map_widget_map_rendering">マップ描画に関する設定</string>
@@ -1234,7 +1234,7 @@ POIの更新は利用できません</string>
     <string name="localization_pref_title">ローカライズ関連設定</string>
     <string name="index_item_nation_addresses">全国の住所</string>
     <string name="index_item_world_altitude_correction">世界間標高補正データ</string>
-    <string name="index_item_world_seamarks">全世界の満潮水位線</string>
+    <string name="index_item_world_seamarks">全世界の航路標識</string>
     <string name="index_item_world_bitcoin_payments">全世界ビットコインでの支払い</string>
     <string name="index_item_world_basemap">世界地図(ワールドベースマップ)</string>
     <string name="index_item_world_ski">ワールドスキーマップ</string>
@@ -1380,7 +1380,7 @@ POIの更新は利用できません</string>
     <string name="map_widget_right">右パネル</string>
     <string name="map_widget_left">左パネル</string>
     <string name="shared_string_show">表示</string>
-    <string name="configure_map">マップ設定</string>
+    <string name="configure_map">マップの設定</string>
     <string name="search_radius_proximity">内</string>
     <string name="anonymous_user_hint">以下は匿名ユーザーでは使用できません:↵\n- グループ作成;↵\n- サーバを利用してのグループやデバイスの同期;↵\n- ウェブサイト上の個別ダッシュボードでのグループやデバイスの管理.</string>
     <string name="anonymous_user">匿名ユーザー</string>
@@ -1720,7 +1720,7 @@ POIの更新は利用できません</string>
     <string name="show_free_version_banner">無料版のバナーを表示</string>
     <string name="show_free_version_banner_description">有料版でも、ダウンロード画面の無料版バナー広告を見ることが出来ます</string>
     <string name="buy">購入</string>
-    <string name="activate_seamarks_plugin">水位線プラグインを有効にしてください</string>
+    <string name="activate_seamarks_plugin">\'航海マップ表示\'プラグインを有効化してください</string>
     <string name="activate_srtm_plugin">SRTMプラグインを有効にしてください</string>
     <string name="later">後で</string>
     <string name="get_full_version">フルバージョンを入手</string>
@@ -1854,7 +1854,7 @@ POIの更新は利用できません</string>
     <string name="osm_live_thanks">OsmAndを支援いただきありがとうございます！
 \nすべての新機能を有効にするには、OsmAndの再起動が必要です。</string>
     <string name="osm_live_region_desc">あなたの寄付の一部がその地域のOSM更新に貢献したユーザーへ還元されます</string>
-    <string name="select_map_marker">マップマーカーの選択</string>
+    <string name="select_map_marker">マップマーカーを選択</string>
     <string name="map_markers_other">その他マーカー</string>
     <string name="upload_anonymously">匿名でアップロード</string>
     <string name="show_transparency_seekbar">透過タイプシークバーを表示</string>
@@ -1936,7 +1936,7 @@ POIの更新は利用できません</string>
     <string name="osm_live_subscription">OsmAnd Liveのサブスクリプション</string>
     <string name="osm_live_subscribe_btn">サブスクリプション(利用契約)する</string>
     <string name="osm_live_subscription_settings">サブスクリプションの設定</string>
-    <string name="osm_live_ask_for_purchase">最初にOsmAnd Liveのサブスクリプション(定期有料契約)手続きをしてください</string>
+    <string name="osm_live_ask_for_purchase">最初にOsmAnd Liveのサブスクリプション登録(定期購入)をしてください</string>
     <string name="osm_live_header">このサブスクリプション(定期有料契約)により世界中のマップを時間毎更新することが可能です。 サブスクリプション収入の一部はOSMコミュニティに還元され、OSMに貢献した各ユーザーにも支払われます。 あなたがOsmAndとOSMを愛用し、サポートを受けたり支援を行いたいと思うのであれば、サブスクリプションはそのための最適解です。</string>
     <string name="no_address_found">住所が未定義</string>
     <string name="number_of_contributors">貢献者数</string>
@@ -2232,7 +2232,7 @@ POIの更新は利用できません</string>
     <string name="no_underlay">アンダーレイ無し</string>
     <string name="subscribe_email_error">エラー</string>
     <string name="subscribe_email_desc">メーリングリストをご購読いただけると、アプリの割引やさらに3つのマップをダウンロード可能になります！</string>
-    <string name="depth_contour_descr">点と等深線による海底地形図がマップに表示されます。</string>
+    <string name="depth_contour_descr">海の深さを示す等深線と航路標識です。</string>
     <string name="sea_depth_thanks">海洋等深線データを購入していただき、ありがとうございます</string>
     <string name="index_item_depth_contours_osmand_ext">海洋等深線データ</string>
     <string name="download_depth_countours">海洋等深線データ</string>
@@ -2421,7 +2421,7 @@ POIの更新は利用できません</string>
  • POIを追加してOSMに直接アップロードできます(オフラインの場合は後で行うことができます)
 　 OsmAndはオープンソースで積極的に開発されています。バグを報告したり、翻訳を改善したり、新しい機能をコーディングすることで、誰もがアプリケーションの開発に貢献できます。このような開発者とユーザーとのやりとりによって、プロジェクトは継続的に改善されています。プロジェクトの進捗状況は、資金調達と新しい機能のテストに大きく左右されます。
  "</string>
-    <string name="save_poi_too_many_uppercase">名前に大文字が多すぎます。 続行しますか？</string>
+    <string name="save_poi_too_many_uppercase">この名前は大文字が多いようですが、続行しますか？</string>
     <string name="shared_string_add_photos">写真を追加</string>
     <string name="no_photos_descr">この近辺の写真はありません。</string>
     <string name="online_photos">近隣の写真(要オンライン)</string>
@@ -2623,7 +2623,7 @@ POIの更新は利用できません</string>
     <string name="shared_string_bookmark">ブックマーク</string>
     <string name="hide_full_description">詳しい説明文を非表示</string>
     <string name="show_full_description">詳しい説明文を表示</string>
-    <string name="nautical_render_descr">航海ナビゲーション用です。特徴としてブイ、灯台、河川、海路と航路標識、港、満潮水位線、深度等高線などの表示があります。</string>
+    <string name="nautical_render_descr">航海ナビゲーション用です。特徴としてブイ、灯台、河川、海路と標識、港、航路標識や関連施設、等深線などの表示が可能になります。</string>
     <string name="off_road_render_descr">『トポ(Topo)』スタイルに基づくオフロード走行用として、緑色の衛星画像をアンダーレイマップとして使用します。幹線道路の緻密さ、経路においてどの程度緻密さが増減するか、小道や自転車やその他用ルートでも用いられます。</string>
     <string name="ski_map_render_descr">スキー用です。主な特徴はピステ(滑走路、ゲレンデ)、スキーリフト、クロスカントリー用コース表示などを備えています。 逆にそれ以外のマップオブジェクトを暗くして目立たなくなるようにもします。</string>
     <string name="light_rs_render_descr">シンプルな運転用スタイルです。おだやかな夜間モード、等高線、対照的なオレンジ色スタイルの道路表示で、セカンダリマップオブジェクトは若干暗くしてあります。</string>
@@ -2933,14 +2933,14 @@ POIの更新は利用できません</string>
     <string name="routeInfo_steepness_name">勾配</string>
     <string name="run_full_osmand_msg">あなたは今 OsmAndで動くマップを使用しています。{0} OsmAndのフルバージョンを起動しますか？</string>
     <string name="run_full_osmand_header">OsmAndを起動しますか？</string>
-    <string name="add_intermediate">経由地点を追加する</string>
+    <string name="add_intermediate">中間経由地点を追加</string>
     <string name="rendering_attr_surface_paved_name">舗装有り</string>
     <string name="rendering_attr_highway_class_state_road_name">国道</string>
     <string name="rendering_attr_highway_class_road_name">その他道路</string>
     <string name="rendering_attr_highway_class_service_name">アクセス道路、特定施設用道路</string>
     <string name="rendering_attr_undefined_name">OSMに情報なし</string>
     <string name="step_by_step">ターンバイターン</string>
-    <string name="add_work">職場の追加</string>
+    <string name="add_work">勤務先を追加</string>
     <string name="work_button">職場</string>
     <string name="routing_attr_avoid_tram_name">路面電車を使わない</string>
     <string name="routing_attr_avoid_tram_description">移動手段に路面電車を使いません</string>
@@ -3015,7 +3015,7 @@ POIの更新は利用できません</string>
     <string name="rendering_attr_highway_class_steps_name">階段、エスカレーター</string>
     <string name="rendering_attr_highway_class_path_name">道(自動車以外のもの向け)</string>
     <string name="rendering_attr_highway_class_cycleway_name">自転車道</string>
-    <string name="add_home">自宅の追加</string>
+    <string name="add_home">自宅を追加</string>
     <string name="shared_string_privacy_policy">プライバシーポリシー</string>
     <string name="settings_privacy_and_security">プライバシーとセキュリティ</string>
     <string name="downloaded_maps">ダウンロードしたマップ</string>

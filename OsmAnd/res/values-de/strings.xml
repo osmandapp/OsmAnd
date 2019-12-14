@@ -454,7 +454,7 @@
     <string name="preferred_locale">Anzeigesprache</string>
     <string name="shared_string_next">Weiter</string>
     <string name="shared_string_previous">Zurück</string>
-    <string name="unit_of_length_descr">Ändern Sie, in welcher Entfernung gemessen wird.</string>
+    <string name="unit_of_length_descr">Maß für Entfernungen ändern.</string>
     <string name="unit_of_length">Längeneinheiten</string>
     <string name="si_mi_feet">Meilen/Fuß</string>
     <string name="si_mi_yard">Meilen/Yards</string>
@@ -470,7 +470,7 @@
     <string name="send_location">Standort senden</string>
     <string name="context_menu_item_share_location">Standort mitteilen</string>
     <string name="add_waypoint_dialog_added">GPX-Wegpunkt \'\'{0}\'\' hinzugefügt</string>
-    <string name="add_waypoint_dialog_title">Wegpunkt zum gespeicherten GPX-Track hinzufügen</string>
+    <string name="add_waypoint_dialog_title">Wegpunkt zum aufgezeichneten GPX-Track hinzufügen</string>
     <string name="context_menu_item_add_waypoint">GPX-Wegpunkt anfügen</string>
     <string name="amenity_type_administrative">Verwaltung</string>
     <string name="amenity_type_barrier">Barriere</string>
@@ -1019,7 +1019,7 @@
     <string name="monitoring_settings_descr">Konfiguration der Streckenaufzeichnung.</string>
     <string name="monitoring_control_start">GPX</string>
     <string name="map_widget_audionotes">Audio-Notizen</string>
-    <string name="audionotes_plugin_description">Die Erweiterung Audio-/Video-Notizen bietet die Möglichkeit, unterwegs ortsbezogene Audio-/Fotografie-/Video-Notizen aufzunehmen, entweder über eine Taste auf dem Kartenbildschirm für die aktuelle Position oder direkt über das Kontextmenü für jede beliebige Position auf der Karte.</string>
+    <string name="audionotes_plugin_description">Diese Erweiterung bietet die Möglichkeit, unterwegs ortsbezogene Audio- und Video-Notizen sowie Fotos aufzunehmen, entweder über eine Taste auf der Karte für die aktuelle Position oder direkt über das Kontextmenü für eine beliebige Position auf der Karte.</string>
     <string name="audionotes_plugin_name">Audio-/Video-Notizen</string>
     <string name="audionotes_location_not_defined">Benutzen Sie \'Standort verwenden…\', um dem Ort eine Notiz zuzuweisen.</string>
     <string name="osmand_srtm_long_description_1000_chars">Diese Erweiterung beinhaltet Höhenlinien und Relief-Schattierungen, die als Ergänzung zu den Standard-Offline-Karten von OsmAnd angezeigt werden können. Diese Funktionalität ist vor allem für Sportler, Wanderer, Radfahrer, Trekker und jeden interessant, der sich für das Geländerelief einer Landschaft interessiert. 
@@ -3251,7 +3251,7 @@ Lon %2$s</string>
     <string name="turn_screen_on_info">Karte während der Navigation auf Sperrbildschirm anzeigen.</string>
     <string name="route_parameters_info">Einstellungen für die Routenplanung des gewählten Profils „%1$s“.</string>
     <string name="wake_time">Aufwachzeit</string>
-    <string name="units_and_formats">Einheiten &amp; Formate</string>
+    <string name="units_and_formats">Einheiten und Formate</string>
     <string name="appearance">Aussehen</string>
     <string name="map_look_descr">Kartendarstellung</string>
     <string name="map_look">Kartendarstellung</string>

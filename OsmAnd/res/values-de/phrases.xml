@@ -2789,7 +2789,7 @@
     <string name="poi_covered">Überdacht</string>
     <string name="poi_ferry_terminal_cargo">Fracht</string>
     <string name="poi_bicycle_parking_type">Typ</string>
-    <string name="poi_aerialway_bicycle">Radtransport</string>
+    <string name="poi_aerialway_bicycle">Fahrradtransport</string>
     <string name="poi_aerialway_heating">Heizung</string>
     <string name="poi_pump">Pumpe</string>
     <string name="poi_observatory_designation">Bezeichnung</string>
@@ -3614,7 +3614,7 @@
     <string name="poi_access_motorcycle">Zufahrt Motorrad</string>
     <string name="poi_access_moped">Zufahrt Moped</string>
     <string name="poi_access_mofa">Zufahrt Mofa</string>
-    <string name="poi_access_hgv">Zufahrt LKW</string>
+    <string name="poi_access_hgv">Zufahrt Lkw</string>
     <string name="poi_access_goods">Zufahrt leichter Lieferfahrzeuge</string>
     <string name="poi_access_disabled">Behindertengerechter Zugang</string>
     <string name="poi_taxi_office">Taxibüro</string>
