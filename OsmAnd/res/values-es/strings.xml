@@ -3395,4 +3395,8 @@
     <string name="add_new_profile_q">¿Añadir nuevo perfil \'%1$s\'\?</string>
     <string name="save_heading">Incluir rumbo</string>
     <string name="save_heading_descr">Guarda el rumbo a cada punto de la traza durante la grabación.</string>
+    <string name="distance_and_address">%1$s • %2$s</string>
+    <string name="street_city">%1$s, %2$s</string>
+    <string name="personal_category_name">Personal</string>
+    <string name="shared_string_downloading_formatted">Descargando %s</string>
 </resources>
