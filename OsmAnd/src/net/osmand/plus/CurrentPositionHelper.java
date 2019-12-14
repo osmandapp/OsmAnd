@@ -23,6 +23,7 @@ import net.osmand.util.MapUtils;
 import org.apache.commons.logging.Log;
 
 import java.io.IOException;
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -60,8 +61,9 @@ public class CurrentPositionHelper {
 	public boolean getMultipleRouteSegmentsIds(List<Location> points,
 	                                           @Nullable ApplicationMode appMode,
 	                                           boolean cancelPreviousSearch,
-	                                           ResultMatcher<Map<RouteDataObject, Location>> result) {
-		return scheduleMultipleRouteSegmentFind(points, false, true, cancelPreviousSearch, null, result, appMode);
+	                                           ResultMatcher<Map<RouteDataObject, Location>> result,
+	                                           final WeakReference<GeocodingUtilities.RouteSearchProgressCallback> progressCallbackWeakRef) {
+		return scheduleMultipleRouteSegmentFind(points, false, true, cancelPreviousSearch, null, result, appMode, progressCallbackWeakRef);
 
 	}
 
@@ -132,7 +134,8 @@ public class CurrentPositionHelper {
 	                                                 final boolean cancelPreviousSearch,
 	                                                 @Nullable final ResultMatcher<GeocodingResult> geoCoding,
 	                                                 @Nullable final ResultMatcher<Map<RouteDataObject, Location>> result,
-	                                                 @Nullable final ApplicationMode appMode) {
+	                                                 @Nullable final ApplicationMode appMode,
+	                                                 final WeakReference<GeocodingUtilities.RouteSearchProgressCallback> progressCallbackWeakRef) {
 		boolean res = false;
 		if (points.get(0) != null) {
 			long requestKey = getRequestNumberKey(storeFound, allowEmptyNames);
@@ -146,7 +149,7 @@ public class CurrentPositionHelper {
 			singleThreadExecutor.submit(new Runnable() {
 				@Override
 				public void run() {
-					processMultipleGeocoding(points, geoCoding, storeFound, allowEmptyNames, result, appMode, request, finalRequestNumber, cancelPreviousSearch);
+					processMultipleGeocoding(points, geoCoding, storeFound, allowEmptyNames, result, appMode, request, finalRequestNumber, cancelPreviousSearch, progressCallbackWeakRef);
 				}
 			});
 			res = true;
@@ -162,14 +165,15 @@ public class CurrentPositionHelper {
 	                                                   @Nullable ApplicationMode appMode,
 	                                                   int request,
 	                                                   @NonNull AtomicInteger requestNumber,
-	                                                   boolean cancelPreviousSearch) {
+	                                                   boolean cancelPreviousSearch,
+	                                                   WeakReference<GeocodingUtilities.RouteSearchProgressCallback> progressCallbackWeakRef) {
 
 		if (cancelPreviousSearch && request != requestNumber.get()) {
 			return;
 		}
 
 		final Map<RouteDataObject, Location> gr = runUpdateInThreadBatch(points,
-				geoCoding != null, allowEmptyNames, appMode);
+				geoCoding != null, allowEmptyNames, appMode, progressCallbackWeakRef);
 
 		if(result != null) {
 			app.runInUIThread(new Runnable() {
@@ -186,7 +190,8 @@ public class CurrentPositionHelper {
 	private Map<RouteDataObject, Location> runUpdateInThreadBatch(List<Location> points,
 	                                                                    boolean geocoding,
 	                                                                    boolean allowEmptyNames,
-	                                                                    @Nullable ApplicationMode appMode) {
+	                                                                    @Nullable ApplicationMode appMode,
+	                                                                    WeakReference<GeocodingUtilities.RouteSearchProgressCallback> progressCallbackWeakRef) {
 
 		List<BinaryMapReaderResource> checkReaders = usedReaders;
 		for (Location loc : points) {
@@ -203,7 +208,7 @@ public class CurrentPositionHelper {
 			}
 		}
 		try {
-			return new GeocodingUtilities().multipleReverseGeocodingSearch(geocoding ? defCtx : ctx, points, allowEmptyNames);
+			return new GeocodingUtilities().multipleReverseGeocodingSearch(geocoding ? defCtx : ctx, points, allowEmptyNames,progressCallbackWeakRef);
 		} catch (Exception e) {
 			log.error("Exception happened during runUpdateInThread", e);
 			return null;

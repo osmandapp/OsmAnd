@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
@@ -17,6 +18,7 @@ import net.osmand.IndexConstants;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
+import net.osmand.binary.GeocodingUtilities;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
@@ -60,9 +62,11 @@ public class AvoidRoadsHelper {
 	private final List<Location> parsedPoints;
 	private final OsmandApplication app;
 	private final ApplicationMode appMode;
-	private CompletionCallback completionCallback;
-	private ParsingProgressCallback ppc;
+	private GeocodingUtilities.RouteSearchProgressCallback ppc;
 	private ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
+
+	private CompletionCallback completionCallback;
+	private UpdateProgressCallback progressDialogCallback;
 	private WeakReference<MapActivity> mapActivityWeakReference = null;
 
 	private static boolean saveResultToFile = false;
@@ -71,6 +75,8 @@ public class AvoidRoadsHelper {
 	private long timeDownload;
 	private long timeParsePoints;
 	private long timeFindSegments;
+
+	private AlertDialog pDialog;
 
 	private final int[] pointsToProcess = {-1};
 //	private String inputFileName = "points_500.json";
@@ -90,13 +96,15 @@ public class AvoidRoadsHelper {
 			@Override
 			public void onRDOSearchComplete() {
 				timeFindSegments = System.currentTimeMillis();
+				if (pDialog.isShowing()) {
+					pDialog.dismiss();
+				}
+				pDialog = null;
 				if (saveResultToFile) {
-					File out = new File (app.getAppPath(IndexConstants.AVOID_ROADS_DIR).getAbsolutePath() + "/"
-							+ "processed_ids.json");
+					File out = new File (app.getAppPath(IndexConstants.AVOID_ROADS_DIR).getAbsolutePath() + "/processed_ids.json");
 					saveRoadsToJson(roadsToAvoid, out);
 				}
 				app.getAvoidRoadsHelper().addResultToImpassibleRoads(roadsToAvoid);
-
 				MapActivity mapActivity = mapActivityWeakReference.get();
 				if (mapActivity != null) {
 					app.getAvoidRoadsHelper().showParsingCompleteDialog(mapActivity);
@@ -110,10 +118,48 @@ public class AvoidRoadsHelper {
 				app.getRoutingConfig().clearImpassableRoads();
 				parsedPoints.clear();
 				parsedPoints.addAll(result);
+				final MapActivity mapActivity = mapActivityWeakReference.get();
+				if (mapActivity != null) {
+					if (pDialog == null) {
+						pDialog = buildProgressDialog(mapActivity).show();
+					}
+				}
 				convertPointsToRDO(parsedPoints);
 			}
 		};
+
+		ppc = new GeocodingUtilities.RouteSearchProgressCallback() {
+			@Override
+			public void onRouteFoundProgress(int percent) {
+				LOG.debug("Progress: " + percent);
+				final MapActivity mapActivity = mapActivityWeakReference.get();
+				if (mapActivity != null) {
+//					if (!pDialog.isShowing()) {
+//						pDialog.show();
+//					}
+					final ProgressBar pb = (ProgressBar) ((AlertDialog) pDialog).findViewById(R.id.avoid_route_pb);
+					pb.setProgress(percent);
+				}
+
+			}
+		};
 	}
+
+	public void testRun() {
+		String in = "";
+		switch (SOURCE) {
+			case FROM_STORAGE:
+				in = app.getAppPath(IndexConstants.AVOID_ROADS_DIR).getAbsolutePath()  + "/" + inputFileName;
+				LOG.debug(String.format("Input json from file: %s", in));
+				break;
+			case FROM_URL:
+				LOG.debug(String.format("Loading json from url: %s", in));
+				break;
+		}
+
+		loadJson(in, SOURCE);
+	}
+
 
 	public Map<RouteDataObject, Location> getRoadsToAvoid() {
 		return roadsToAvoid;
@@ -123,16 +169,15 @@ public class AvoidRoadsHelper {
 		app.getRoutingConfig().addMultipleImpassableRoads(result);
 	}
 
-	public void progressDialog(final MapActivity activity) {
+	public AlertDialog.Builder buildProgressDialog(final MapActivity activity) {
+
 		AlertDialog.Builder adb = new AlertDialog.Builder(activity);
-		adb.setMessage("Searching Roads to Avoid...");
+		adb.setMessage("Determining Roads to Avoid...");
+		final View dialogProgressView = activity.getLayoutInflater().inflate(R.layout.avoid_roads_progress_dialog, null);
+		adb.setView(dialogProgressView);
+		return adb;
 
-		ppc = new ParsingProgressCallback() {
-			@Override
-			public void onParsingProgress(int percent) {
 
-			}
-		};
 	}
 
 	public void showUrlDialog(final MapActivity activity) {
@@ -215,21 +260,6 @@ public class AvoidRoadsHelper {
 		db.show();
 	}
 
-	public void testRun() {
-		String in = "";
-		switch (SOURCE) {
-			case FROM_STORAGE:
-				in = app.getAppPath(IndexConstants.AVOID_ROADS_DIR).getAbsolutePath()  + "/" + inputFileName;
-				LOG.debug(String.format("Input json from file: %s", in));
-				break;
-			case FROM_URL:
-				LOG.debug(String.format("Loading json from url: %s", in));
-				break;
-		}
-
-		loadJson(in, SOURCE);
-	}
-
 	private void convertPointsToRDO(final List<Location> parsedPoints) {
 		this.roadsToAvoid.clear();
 		app.getLocationProvider().getMultipleRouteSegmentsIds(parsedPoints, appMode, false,
@@ -250,7 +280,7 @@ public class AvoidRoadsHelper {
 			public boolean isCancelled() {
 				return false;
 			}
-		});
+		}, new WeakReference<GeocodingUtilities.RouteSearchProgressCallback>(ppc));
 
 	}
 
@@ -376,9 +406,10 @@ public class AvoidRoadsHelper {
 		void onPointsParsed(List<Location> result);
 	}
 
-	interface ParsingProgressCallback {
-		void onParsingProgress(int percent);
+	interface UpdateProgressCallback {
+		void onProgressUpdate(int progress);
 	}
+
 
 	class GeoJSON {
 		@SerializedName("type")
@@ -423,7 +454,6 @@ public class AvoidRoadsHelper {
 	}
 
 	class RoadToAvoid {
-
 		@SerializedName("road_id")
 		@Expose
 		long roadId;

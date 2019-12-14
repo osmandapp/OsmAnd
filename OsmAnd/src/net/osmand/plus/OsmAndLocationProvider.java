@@ -2,6 +2,8 @@ package net.osmand.plus;
 
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
+
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -14,6 +16,7 @@ import net.osmand.GeoidAltitudeCorrection;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.access.NavigationInfo;
+import net.osmand.binary.GeocodingUtilities;
 import net.osmand.binary.GeocodingUtilities.GeocodingResult;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
@@ -884,8 +887,9 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	public boolean getMultipleRouteSegmentsIds(List<net.osmand.Location> points,
 	                               @Nullable ApplicationMode appMode,
 	                               boolean cancelPreviousSearch,
-	                               ResultMatcher<Map<RouteDataObject, net.osmand.Location>> result) {
-		return currentPositionHelper.getMultipleRouteSegmentsIds(points, appMode, cancelPreviousSearch, result);
+	                               ResultMatcher<Map<RouteDataObject, net.osmand.Location>> result,
+	                               final WeakReference<GeocodingUtilities.RouteSearchProgressCallback> progressCallbackWeakRef) {
+		return currentPositionHelper.getMultipleRouteSegmentsIds(points, appMode, cancelPreviousSearch, result, progressCallbackWeakRef);
 	}
 
 	public boolean getGeocodingResult(net.osmand.Location loc, ResultMatcher<GeocodingResult> result) {

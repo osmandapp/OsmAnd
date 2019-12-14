@@ -21,6 +21,7 @@ import net.osmand.util.MapUtils;
 import org.apache.commons.logging.Log;
 
 import java.io.IOException;
+import java.lang.ref.WeakReference;
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -143,10 +144,17 @@ public class GeocodingUtilities {
 		}
 	}
 
-	public Map<RouteDataObject, Location> multipleReverseGeocodingSearch(RoutingContext ctx, List<Location> points, boolean allowEmptyNames) throws IOException {
+	public interface RouteSearchProgressCallback {
+		void onRouteFoundProgress(int percent);
+	}
+
+	public Map<RouteDataObject, Location> multipleReverseGeocodingSearch(RoutingContext ctx, List<Location> points, boolean allowEmptyNames, WeakReference<RouteSearchProgressCallback> progressCallbackWeakRef) throws IOException {
 		RoutePlannerFrontEnd rp = new RoutePlannerFrontEnd();
 		Map<RouteDataObject, Location> result = new HashMap<>();
-		for (Location point : points) {
+		int prevProgress = 0;
+		int batchSize = points.size();
+		for (int i = 0; i < batchSize; i++) {
+			Location point = points.get(i);
 			List<GeocodingResult> lst = new ArrayList<>();
 			List<RouteSegmentPoint> listR = new ArrayList<>();
 			rp.findRouteSegment(point.getLatitude(), point.getLongitude(), ctx, listR);
@@ -185,6 +193,13 @@ public class GeocodingUtilities {
 			Collections.sort(lst, GeocodingUtilities.DISTANCE_COMPARATOR);
 			if (lst.size() > 0) {
 				result.put(lst.get(0).point.getRoad(), point);
+				if (progressCallbackWeakRef.get() != null) {
+					int progress = (int) (i * 100.0/batchSize);
+					if (progress > prevProgress) {
+						progressCallbackWeakRef.get().onRouteFoundProgress(progress);
+						prevProgress = progress;
+					}
+				}
 //				log.debug(String.format("Road %s", lst.get(0).point.getRoad()));
 			}
 		}
