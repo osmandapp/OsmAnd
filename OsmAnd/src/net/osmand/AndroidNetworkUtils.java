@@ -3,8 +3,9 @@ package net.osmand;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
-import net.osmand.osm.io.Base64;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -18,7 +19,6 @@ import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -30,6 +30,7 @@ import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.net.UnknownHostException;
 import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.zip.GZIPOutputStream;
@@ -43,29 +44,53 @@ public class AndroidNetworkUtils {
 		void onResult(String result);
 	}
 
+	public static class RequestResponse {
+		private Request request;
+		private String response;
+
+		RequestResponse(@NonNull Request request, @Nullable String response) {
+			this.request = request;
+			this.response = response;
+		}
+
+		public Request getRequest() {
+			return request;
+		}
+
+		public String getResponse() {
+			return response;
+		}
+	}
+
+	public interface OnRequestsResultListener {
+		void onResult(@NonNull List<RequestResponse> results);
+	}
+
 	public static void sendRequestsAsync(final OsmandApplication ctx,
 										final List<Request> requests,
-										final OnRequestResultListener listener) {
+										final OnRequestsResultListener listener) {
 
-		new AsyncTask<Void, Void, String>() {
+		new AsyncTask<Void, Void, List<RequestResponse>>() {
 
 			@Override
-			protected String doInBackground(Void... params) {
+			protected List<RequestResponse> doInBackground(Void... params) {
+				List<RequestResponse> responses = new ArrayList<>();
 				for (Request request : requests) {
 					try {
-						return sendRequest(ctx, request.getUrl(), request.getParameters(),
+						String response = sendRequest(ctx, request.getUrl(), request.getParameters(),
 								request.getUserOperation(), request.isToastAllowed(), request.isPost());
+						responses.add(new RequestResponse(request, response));
 					} catch (Exception e) {
-						// ignore
+						responses.add(new RequestResponse(request, null));
 					}
 				}
-				return null;
+				return responses;
 			}
 
 			@Override
-			protected void onPostExecute(String response) {
+			protected void onPostExecute(@NonNull List<RequestResponse> results) {
 				if (listener != null) {
-					listener.onResult(response);
+					listener.onResult(results);
 				}
 			}
 
