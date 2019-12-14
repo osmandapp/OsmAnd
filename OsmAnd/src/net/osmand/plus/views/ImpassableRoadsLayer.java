@@ -83,6 +83,9 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 					drawPoint(canvas, tileBox, latitude, longitude, road != null);
 				}
 			}
+		}
+
+		if (tileBox.getZoom() > START_ZOOM + 1) {
 			for (Map.Entry<RouteDataObject, Location> entry : avoidRoadsHelper.getRoadsToAvoid().entrySet()) {
 				RouteDataObject rdo = entry.getKey();
 				if (rdo != null && contextMenuLayer.getMoveableObject() instanceof RouteDataObject) {

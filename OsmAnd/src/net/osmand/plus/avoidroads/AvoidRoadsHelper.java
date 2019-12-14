@@ -4,9 +4,10 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
-import android.view.Gravity;
+import android.view.View;
 import android.widget.EditText;
-import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import com.google.gson.Gson;
 import com.google.gson.annotations.Expose;
@@ -17,7 +18,6 @@ import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.RouteDataObject;
-import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.osm.io.NetworkUtils;
@@ -53,27 +53,31 @@ public class AvoidRoadsHelper {
 
 	private static final int FROM_URL = 101;
 	private static final int FROM_STORAGE = 100;
-
 	private static final int SOURCE = FROM_STORAGE;
 
-	private static boolean saveResultToFile = true;
 
 	private final Map<RouteDataObject, Location> roadsToAvoid;
 	private final List<Location> parsedPoints;
-
 	private final OsmandApplication app;
 	private final ApplicationMode appMode;
-	private final CompletionCallback completionCallback;
-
+	private CompletionCallback completionCallback;
+	private ParsingProgressCallback ppc;
 	private ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
-
 	private WeakReference<MapActivity> mapActivityWeakReference = null;
 
-//	String inputFileName = "points_500.json";
-//	String inputFileName = "point_100.json";
-	String inputFileName = "points_10.json";
-	String testurl = "https://gist.githubusercontent.com/MadWasp79/1238d8878792572e343eb2e296c3c7f5/raw/494f872425993797c3a3bc79a4ec82039db6ee46/point_100.json";
-//	String testurl = "https://gist.githubusercontent.com/MadWasp79/45f362ea48e9e8edd1593113593993c5/raw/6e817fb3bc7eaeaa3eda24847fde4855eb22485d/points_500.json";
+	private static boolean saveResultToFile = false;
+
+	private long timeStart;
+	private long timeDownload;
+	private long timeParsePoints;
+	private long timeFindSegments;
+
+	private final int[] pointsToProcess = {-1};
+//	private String inputFileName = "points_500.json";
+//	private String inputFileName = "point_100.json";
+	private String inputFileName = "points_10.json";
+//	private String testurl = "https://gist.githubusercontent.com/MadWasp79/1238d8878792572e343eb2e296c3c7f5/raw/494f872425993797c3a3bc79a4ec82039db6ee46/point_100.json";
+	private String testurl = "https://gist.githubusercontent.com/MadWasp79/45f362ea48e9e8edd1593113593993c5/raw/6e817fb3bc7eaeaa3eda24847fde4855eb22485d/points_500.json";
 
 
 	public AvoidRoadsHelper(final OsmandApplication app) {
@@ -85,13 +89,12 @@ public class AvoidRoadsHelper {
 		completionCallback = new CompletionCallback() {
 			@Override
 			public void onRDOSearchComplete() {
+				timeFindSegments = System.currentTimeMillis();
 				if (saveResultToFile) {
 					File out = new File (app.getAppPath(IndexConstants.AVOID_ROADS_DIR).getAbsolutePath() + "/"
 							+ "processed_ids.json");
 					saveRoadsToJson(roadsToAvoid, out);
 				}
-
-
 				app.getAvoidRoadsHelper().addResultToImpassibleRoads(roadsToAvoid);
 
 				MapActivity mapActivity = mapActivityWeakReference.get();
@@ -120,46 +123,71 @@ public class AvoidRoadsHelper {
 		app.getRoutingConfig().addMultipleImpassableRoads(result);
 	}
 
+	public void progressDialog(final MapActivity activity) {
+		AlertDialog.Builder adb = new AlertDialog.Builder(activity);
+		adb.setMessage("Searching Roads to Avoid...");
+
+		ppc = new ParsingProgressCallback() {
+			@Override
+			public void onParsingProgress(int percent) {
+
+			}
+		};
+	}
+
 	public void showUrlDialog(final MapActivity activity) {
 		mapActivityWeakReference = new WeakReference<MapActivity>(activity);
+		pointsToProcess[0] = -1;
 		final AlertDialog.Builder db = new AlertDialog.Builder(activity);
-		db.setTitle("Process Avoid Points");
-		db.setMessage("Enter url to JSON file. \"Parse\" to continue:");
-		final EditText urlInputString = new EditText(activity);
-		LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-				LinearLayout.LayoutParams.MATCH_PARENT,
-				LinearLayout.LayoutParams.MATCH_PARENT);
-		urlInputString.setLayoutParams(lp);
-		urlInputString.setText(testurl);
-//		urlInputString.selectAll();
-		db.setView(urlInputString);
+		final View dialogView = activity.getLayoutInflater().inflate(R.layout.load_avoid_roads_dialog, null);
+		final RadioGroup rg = (RadioGroup) dialogView.findViewById(R.id.point_quantity_selector);
+		final EditText urlEt = (EditText) dialogView.findViewById(R.id.json_url_et);
+		db.setTitle("Process Avoid Roads");
+		db.setView(dialogView);
 		db.setIcon(R.drawable.map_pin_avoid_road);
 		db.setPositiveButton("Parse", new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				String url = urlInputString.getText().toString();
 				boolean isValidJsonUrl = false;
+				int selectedId = rg.getCheckedRadioButtonId();
+				RadioButton rb = (RadioButton) dialogView.findViewById(selectedId);
+				if (rb != null) {
+					switch (rb.getText().toString()) {
+						case "10":
+							pointsToProcess[0] = 10;
+							break;
+						case "100":
+							pointsToProcess[0] = 100;
+							break;
+						case "500":
+							pointsToProcess[0] = 500;
+					}
+				}
+
+				String urlFromEt = urlEt.getText().toString();
+				if (Algorithms.isEmpty(urlFromEt)) {
+					urlFromEt = testurl;
+				}
 				try {
-					URL test = new URL(url);
-					if (url.endsWith(".json")) {
+					URL test = new URL(urlFromEt);
+					if (urlFromEt.endsWith(".json")) {
 						isValidJsonUrl = true;
 					}
 				} catch (MalformedURLException e){
 					isValidJsonUrl  = false;
-					app.showShortToastMessage("Enter valid JSON url");
+					app.showShortToastMessage("Enter valid JSON url!");
 				}
 				if (isValidJsonUrl) {
+					timeStart = System.currentTimeMillis();
 					app.showShortToastMessage("Downloading JSON");
-					app.getAvoidRoadsHelper().loadJson(url, FROM_URL);
-//					dialog.dismiss();
+					loadJson(urlFromEt, FROM_URL);
 				}
-
-
 			}
 		});
 		db.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
+				pointsToProcess[0] = -1;
 				dialog.dismiss();
 			}
 		});
@@ -168,8 +196,15 @@ public class AvoidRoadsHelper {
 
 	public void showParsingCompleteDialog(final MapActivity activity) {
 		final AlertDialog.Builder db = new AlertDialog.Builder(activity);
-		db.setTitle("Avoid Points");
-		db.setMessage("Parsing complete, applying result to routing config!");
+		db.setTitle("Processing complete!");
+		db.setMessage(String.format("Found %d unique roads to avoid.\n" +
+				"Time to download: %.3fs\n" +
+				"Time to parse JSON: %.3fs\n" +
+				"Time to find roads: %.3fs\n",
+				roadsToAvoid.size(),
+				(timeDownload-timeStart)/1000.0f,
+				(timeParsePoints-timeDownload)/1000.0f,
+				(timeFindSegments-timeParsePoints)/1000.0f));
 		db.setIcon(R.drawable.map_pin_avoid_road);
 		db.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 			@Override
@@ -237,13 +272,14 @@ public class AvoidRoadsHelper {
 					}
 
 					List<Location> result = new ArrayList<>();
+					timeDownload = System.currentTimeMillis();
 					parseJson(is, result);
 					if (is != null) {
 						is.close();
 					}
 					return result;
 				} catch (Exception e) {
-					LOG.error("Error reading json !");
+					LOG.error("Error reading json!");
 				} finally {
 					if (is != null) {
 						try {
@@ -263,6 +299,45 @@ public class AvoidRoadsHelper {
 				}
 			}
 		}.executeOnExecutor(singleThreadExecutor);
+	}
+
+	private void parseJson(InputStream is, List<Location> result) {
+		Gson gson = new Gson();
+		GeoJSON geoJSON = gson.fromJson(new BufferedReader(new InputStreamReader(is)), GeoJSON.class);
+		double minlat = 0 , maxlat = 0, minlon = 0, maxlon= 0;
+		boolean first = true;
+		int limit = pointsToProcess[0];
+		if (limit == -1 || limit > geoJSON.points.size()) {
+			limit = geoJSON.points.size();
+		}
+		for (int i = 0; i < limit; i++) {
+			Point o = geoJSON.points.get(i);
+			Location ll = new Location("geoJSON");
+			double lat = o.geo.coordinates.get(1);
+			double lon = o.geo.coordinates.get(0);
+			if(first) {
+				minlat = maxlat = lat;
+				minlon = maxlon = lon;
+				first = false;
+			} else {
+				minlat = Math.min(minlat, lat);
+				minlon = Math.min(minlon, lon);
+				maxlat = Math.max(maxlat, lat);
+				maxlon = Math.max(maxlon, lon);
+			}
+			ll.setLatitude(lat);
+			ll.setLongitude(lon);
+			result.add(ll);
+		}
+		QuadRect qr = new QuadRect(minlon, minlat, maxlon, maxlat);
+		QuadTree<Location> qt = new QuadTree<Location>(qr, 8, 0.55f);
+		for(Location l : result) {
+			qt.insert(l, (float)l.getLongitude(), (float) l.getLatitude());
+		}
+		qt.queryInBox(qr, result);
+		timeParsePoints = System.currentTimeMillis();
+		app.showShortToastMessage(String.format("Loaded and parsed %d points from JSON. Starting segment search.", result.size()));
+		LOG.debug(String.format("Points parsed: %d", result.size()));
 	}
 
 	@SuppressLint("StaticFieldLeak")
@@ -296,44 +371,13 @@ public class AvoidRoadsHelper {
 		}.executeOnExecutor(singleThreadExecutor);
 	}
 
-	private void parseJson(InputStream is, List<Location> result) {
-		Gson gson = new Gson();
-		GeoJSON geoJSON = gson.fromJson(new BufferedReader(new InputStreamReader(is)), GeoJSON.class);
-		double minlat = 0 , maxlat = 0, minlon = 0, maxlon= 0;
-		boolean first = true;
-		for (Point o : geoJSON.points) {
-			Location ll = new Location("geoJSON");
-			double lat = o.geo.coordinates.get(1);
-			double lon = o.geo.coordinates.get(0);
-			if(first) {
-				minlat = maxlat = lat;
-				minlon = maxlon = lon;
-				first = false;
-			} else {
-				minlat = Math.min(minlat, lat);
-				minlon = Math.min(minlon, lon);
-				maxlat = Math.max(maxlat, lat);
-				maxlon = Math.max(maxlon, lon);
-			}
-			ll.setLatitude(lat);
-			ll.setLongitude(lon);
-			result.add(ll);
-		}
-		QuadRect qr = new QuadRect(minlon, minlat, maxlon, maxlat);
-		QuadTree<Location> qt = new QuadTree<Location>(qr, 8, 0.55f);
-		for(Location l : result) {
-			qt.insert(l, (float)l.getLongitude(), (float) l.getLatitude());
-		}
-		qt.queryInBox(qr, result);
-
-//		app.showShortToastMessage(String.format("Loaded and parsed %d avoid points from JSON. Starting segment search.", result.size()));
-		LOG.debug(String.format("Points parsed: %d", result.size()));
-	}
-
-
 	interface CompletionCallback {
 		void onRDOSearchComplete();
 		void onPointsParsed(List<Location> result);
+	}
+
+	interface ParsingProgressCallback {
+		void onParsingProgress(int percent);
 	}
 
 	class GeoJSON {
