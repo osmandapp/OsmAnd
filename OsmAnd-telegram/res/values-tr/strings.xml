@@ -249,4 +249,11 @@
     <string name="my_location">Konumum</string>
     <string name="live_now">Şimdi canlı</string>
     <string name="timeline">Zaman çizelgesi</string>
+    <string name="time_zone_descr">Konum mesajlarınızda gösterilecek saat dilimini seçin.</string>
+    <string name="time_zone">Saat dilimi</string>
+    <string name="units_and_formats">Birimler ve formatlar</string>
+    <string name="unit_of_length_descr">Mesafe ölçüm birimini değiştir.</string>
+    <string name="unit_of_length">Uzunluk birimleri</string>
+    <string name="unit_of_speed_system_descr">Hız birimini tanımlayın.</string>
+    <string name="unit_of_speed_system">Hız birimi</string>
 </resources>
