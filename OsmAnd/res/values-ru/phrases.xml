@@ -2234,8 +2234,8 @@
     <string name="poi_traffic_calming_island">Островок (препятствие)</string>
     <string name="poi_boat_storage">Место для хранения лодок</string>
     <string name="poi_kissing_gate">Калитка</string>
-    <string name="facebook">Фейсбук;Facebook</string>
-    <string name="twitter">Твиттер;Twitter</string>
+    <string name="facebook">Facebook</string>
+    <string name="twitter">Twitter</string>
     <string name="poi_skype">Скайп;Skype</string>
     <string name="poi_garden_style_kitchen">Стиль сада: кухня</string>
     <string name="poi_toilets_access_community">Туалет: общественный</string>
@@ -3494,5 +3494,5 @@
     <string name="poi_community_gender_male">Пол сообщества: мужской</string>
     <string name="poi_community_gender_mixed">Пол сообщества: мужской и женский</string>
     <string name="poi_grave">Могила</string>
-    <string name="reddit">Реддит;Reddit</string>
+    <string name="reddit">Reddit</string>
 </resources>

@@ -2142,10 +2142,10 @@ Lon %2$s</string>
     <string name="quick_action_duplicate">Nombre de la acción rápida duplicado</string>
     <string name="quick_action_showhide_favorites_descr">Un botón que muestra u oculta los Favoritos en el mapa.</string>
     <string name="quick_action_showhide_poi_descr">Un botón que muestra u oculta los PDI en el mapa.</string>
-    <string name="quick_action_showhide_favorites_title">Alternar vista de Favoritos</string>
+    <string name="quick_action_showhide_favorites_title">Mostrar/ocultar Favoritos</string>
     <string name="quick_action_favorites_show">Mostrar Favoritos</string>
     <string name="quick_action_favorites_hide">Ocultar Favoritos</string>
-    <string name="quick_action_showhide_poi_title">Alternar vista de PDI</string>
+    <string name="quick_action_showhide_poi_title">Mostrar/ocultar PDI</string>
     <string name="quick_action_poi_show">Mostrar %1$s</string>
     <string name="quick_action_poi_hide">Ocultar %1$s</string>
     <string name="quick_action_add_category">Añadir una categoría</string>
@@ -3329,7 +3329,7 @@ Lon %2$s</string>
     <string name="shared_string_memory_used_gb_desc">Usado %1$s GB</string>
     <string name="shared_string_memory_used_mb_desc">Usado %1$s MB</string>
     <string name="shared_string_memory_used_kb_desc">Usado %1$s kB</string>
-    <string name="contour_lines_and_hillshade">Curvas de nivel y sombreados</string>
+    <string name="contour_lines_and_hillshade">Curvas de nivel y sombreado</string>
     <string name="routing_attr_prefer_unpaved_name">Preferir caminos sin pavimentar</string>
     <string name="routing_attr_prefer_unpaved_description">Prefiere caminos sin pavimentar.</string>
     <string name="update_all_maps">Actualizar todos los mapas</string>
@@ -3359,11 +3359,11 @@ Lon %2$s</string>
     <string name="quick_action_contour_lines_descr">Un botón que muestra u oculta las curvas de nivel en el mapa.</string>
     <string name="quick_action_contour_lines_show">Mostrar curvas de nivel</string>
     <string name="quick_action_contour_lines_hide">Ocultar curvas de nivel</string>
-    <string name="quick_action_show_hide_contour_lines">Alternar curvas de nivel</string>
+    <string name="quick_action_show_hide_contour_lines">Mostrar/ocultar curvas de nivel</string>
     <string name="quick_action_hillshade_descr">Un botón que muestra u oculta la sombra de una colina en el mapa.</string>
-    <string name="quick_action_hillshade_show">Mostrar sombreados</string>
-    <string name="quick_action_hillshade_hide">Ocultar sombreados</string>
-    <string name="quick_action_show_hide_hillshade">Alternar sombreados</string>
+    <string name="quick_action_hillshade_show">Mostrar sombreado</string>
+    <string name="quick_action_hillshade_hide">Ocultar sombreado</string>
+    <string name="quick_action_show_hide_hillshade">Mostrar/ocultar sombreado</string>
     <string name="tts_initialization_error">Imposible iniciar el motor de habla sintetizada</string>
     <string name="simulate_your_location_gpx_descr">Simular la ubicación usando una traza GPX grabada.</string>
     <string name="export_profile">Exportar perfil</string>
@@ -3395,4 +3395,7 @@ Lon %2$s</string>
     <string name="shared_string_turn_off">Apagar</string>
     <string name="new_plugin_added">Nuevo complemento añadido</string>
     <string name="join_segments">Unir segmentos</string>
+    <string name="add_new_profile_q">¿Añadir nuevo perfil «%1$s»\?</string>
+    <string name="save_heading">Incluir rumbo</string>
+    <string name="save_heading_descr">Guarda el rumbo para cada punto de la traza durante la grabación.</string>
 </resources>

@@ -11,9 +11,7 @@ import net.osmand.PlatformUtil
 import net.osmand.telegram.helpers.OsmandAidlHelper
 import net.osmand.telegram.helpers.ShowLocationHelper
 import net.osmand.telegram.helpers.TelegramHelper
-import net.osmand.telegram.utils.AndroidUtils
-import net.osmand.telegram.utils.OsmandApiUtils
-import net.osmand.telegram.utils.OsmandFormatter
+import net.osmand.telegram.utils.*
 import net.osmand.telegram.utils.OsmandFormatter.MetricsConstants
 import net.osmand.telegram.utils.OsmandFormatter.SpeedConstants
 import net.osmand.telegram.utils.OsmandLocationUtils
@@ -72,6 +70,7 @@ private const val SHARING_MODE_KEY = "current_sharing_mode"
 
 private const val METRICS_CONSTANTS_KEY = "metrics_constants"
 private const val SPEED_CONSTANTS_KEY = "speed_constants"
+private const val UTC_OFFSET_CONSTANTS_KEY = "utc_offset_constants"
 
 private const val SEND_MY_LOC_INTERVAL_KEY = "send_my_loc_interval"
 private const val STALE_LOC_TIME_KEY = "stale_loc_time"
@@ -125,6 +124,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 
 	var metricsConstants = MetricsConstants.KILOMETERS_AND_METERS
 	var speedConstants = SpeedConstants.KILOMETERS_PER_HOUR
+	var utcOffset = DataConstants.UTC_FORMAT
 
 	var sendMyLocInterval = SEND_MY_LOC_VALUES_SEC[SEND_MY_LOC_DEFAULT_INDEX]
 	var staleLocTime = STALE_LOC_VALUES_SEC[STALE_LOC_DEFAULT_INDEX]
@@ -142,6 +142,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 
 	val gpsAndLocPrefs = listOf(SendMyLocPref(), StaleLocPref(), LocHistoryPref(), ShareTypePref())
 	val gpxLoggingPrefs = listOf(MinLocationDistance(), MinLocationAccuracy(), MinLocationSpeed())
+	val unitsAndFormatsPrefs = listOf(UnitsOfSpeed(), UnitsOfLength(), UtcOffset())
 
 	var batteryOptimisationAsked = false
 
@@ -606,6 +607,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 
 		edit.putString(METRICS_CONSTANTS_KEY, metricsConstants.name)
 		edit.putString(SPEED_CONSTANTS_KEY, speedConstants.name)
+		edit.putString(UTC_OFFSET_CONSTANTS_KEY, utcOffset)
 
 		edit.putLong(SEND_MY_LOC_INTERVAL_KEY, sendMyLocInterval)
 		edit.putLong(STALE_LOC_TIME_KEY, staleLocTime)
@@ -668,6 +670,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 		speedConstants = SpeedConstants.valueOf(
 			prefs.getString(SPEED_CONSTANTS_KEY, SpeedConstants.KILOMETERS_PER_HOUR.name)
 		)
+		utcOffset = prefs.getString(UTC_OFFSET_CONSTANTS_KEY, DataConstants.UTC_FORMAT)
 
 		try {
 			parseShareChatsInfo(JSONArray(prefs.getString(SHARE_CHATS_INFO_KEY, "")))
@@ -895,68 +898,64 @@ class TelegramSettings(private val app: TelegramApplication) {
 		}
 	}
 
-	inner class SendMyLocPref : NumericPref(
+	inner class SendMyLocPref : ListPreference(
 		R.drawable.ic_action_share_location,
 		R.string.send_my_location,
-		R.string.send_my_location_desc,
-		SEND_MY_LOC_VALUES_SEC
+		R.string.send_my_location_desc
 	) {
 
 		override fun getCurrentValue() =
 			OsmandFormatter.getFormattedDuration(app, sendMyLocInterval)
 
 		override fun setCurrentValue(index: Int) {
-			sendMyLocInterval = values[index].toLong()
+			sendMyLocInterval = SEND_MY_LOC_VALUES_SEC[index]
 			app.updateSendLocationInterval()
 		}
 
 		override fun getMenuItems() =
-			values.map { OsmandFormatter.getFormattedDuration(app, it.toLong()) }
+			SEND_MY_LOC_VALUES_SEC.map { OsmandFormatter.getFormattedDuration(app, it) }
 	}
 
-	inner class StaleLocPref : NumericPref(
+	inner class StaleLocPref : ListPreference(
 		R.drawable.ic_action_time_span,
 		R.string.stale_location,
-		R.string.stale_location_desc,
-		STALE_LOC_VALUES_SEC
+		R.string.stale_location_desc
 	) {
 
 		override fun getCurrentValue() =
 			OsmandFormatter.getFormattedDuration(app, staleLocTime)
 
 		override fun setCurrentValue(index: Int) {
-			staleLocTime = values[index].toLong()
+			staleLocTime = STALE_LOC_VALUES_SEC[index]
 		}
 
 		override fun getMenuItems() =
-			values.map { OsmandFormatter.getFormattedDuration(app, it.toLong()) }
+			STALE_LOC_VALUES_SEC.map { OsmandFormatter.getFormattedDuration(app, it) }
 	}
 
-	inner class LocHistoryPref : NumericPref(
+	inner class LocHistoryPref : ListPreference(
 		R.drawable.ic_action_location_history,
 		R.string.location_history,
-		R.string.location_history_desc,
-		LOC_HISTORY_VALUES_SEC
+		R.string.location_history_desc
 	) {
 
 		override fun getCurrentValue() =
 			OsmandFormatter.getFormattedDuration(app, locHistoryTime)
 
 		override fun setCurrentValue(index: Int) {
-			val value = values[index]
-			locHistoryTime = value.toLong()
-			app.telegramHelper.messageActiveTimeSec = value.toLong()
+			val value = LOC_HISTORY_VALUES_SEC[index]
+			locHistoryTime = value
+			app.telegramHelper.messageActiveTimeSec = value
 		}
 
 		override fun getMenuItems() =
-			values.map { OsmandFormatter.getFormattedDuration(app, it.toLong()) }
+			LOC_HISTORY_VALUES_SEC.map { OsmandFormatter.getFormattedDuration(app, it) }
 	}
 
-	inner class ShareTypePref : NumericPref(
+	inner class ShareTypePref : ListPreference(
 		R.drawable.ic_action_location_history,
 		R.string.send_location_as,
-		R.string.send_location_as_descr,
-		emptyList()
+		R.string.send_location_as_descr
 	) {
 
 		override fun getCurrentValue(): String {
@@ -988,20 +987,16 @@ class TelegramSettings(private val app: TelegramApplication) {
 		}
 	}
 
-	inner class MinLocationDistance : NumericPref(
-		0, R.string.min_logging_distance,
-		R.string.min_logging_distance_descr,
-		MIN_LOCATION_DISTANCE
-	) {
+	inner class MinLocationDistance :
+		ListPreference(0, R.string.min_logging_distance, R.string.min_logging_distance_descr) {
 
 		override fun getCurrentValue() = getFormattedValue(minLocationDistance)
 
 		override fun setCurrentValue(index: Int) {
-			val value = values[index]
-			minLocationDistance = value.toFloat()
+			minLocationDistance = MIN_LOCATION_DISTANCE[index]
 		}
 
-		override fun getMenuItems() = values.map { getFormattedValue(it.toFloat()) }
+		override fun getMenuItems() = MIN_LOCATION_DISTANCE.map { getFormattedValue(it) }
 
 		private fun getFormattedValue(value: Float): String {
 			return if (value == 0f) app.getString(R.string.shared_string_select)
@@ -1009,20 +1004,16 @@ class TelegramSettings(private val app: TelegramApplication) {
 		}
 	}
 
-	inner class MinLocationAccuracy : NumericPref(
-		0, R.string.min_logging_accuracy,
-		R.string.min_logging_accuracy_descr,
-		MIN_LOCATION_ACCURACY
-	) {
+	inner class MinLocationAccuracy :
+		ListPreference(0, R.string.min_logging_accuracy, R.string.min_logging_accuracy_descr) {
 
 		override fun getCurrentValue() = getFormattedValue(minLocationAccuracy)
 
 		override fun setCurrentValue(index: Int) {
-			val value = values[index]
-			minLocationAccuracy = value.toFloat()
+			minLocationAccuracy = MIN_LOCATION_ACCURACY[index]
 		}
 
-		override fun getMenuItems() = values.map { getFormattedValue(it.toFloat()) }
+		override fun getMenuItems() = MIN_LOCATION_ACCURACY.map { getFormattedValue(it) }
 
 		private fun getFormattedValue(value: Float): String {
 			return if (value == 0f) app.getString(R.string.shared_string_select)
@@ -1030,20 +1021,16 @@ class TelegramSettings(private val app: TelegramApplication) {
 		}
 	}
 
-	inner class MinLocationSpeed : NumericPref(
-		0, R.string.min_logging_speed,
-		R.string.min_logging_speed_descr,
-		MIN_LOCATION_SPEED
-	) {
+	inner class MinLocationSpeed :
+		ListPreference(0, R.string.min_logging_speed, R.string.min_logging_speed_descr) {
 
 		override fun getCurrentValue() = getFormattedValue(minLocationSpeed)
 
 		override fun setCurrentValue(index: Int) {
-			val value = values[index]
-			minLocationSpeed = value.toFloat()
+			minLocationSpeed = MIN_LOCATION_SPEED[index]
 		}
 
-		override fun getMenuItems() = values.map { getFormattedValue(it.toFloat()) }
+		override fun getMenuItems() = MIN_LOCATION_SPEED.map { getFormattedValue(it) }
 
 		private fun getFormattedValue(value: Float): String {
 			return when (value) {
@@ -1054,11 +1041,54 @@ class TelegramSettings(private val app: TelegramApplication) {
 		}
 	}
 
-	abstract inner class NumericPref(
+	inner class UnitsOfSpeed : ListPreference(
+		R.drawable.ic_action_speed,
+		R.string.unit_of_speed_system,
+		R.string.unit_of_speed_system_descr
+	) {
+
+		override fun getCurrentValue() = speedConstants.toShortString(app)
+
+		override fun setCurrentValue(index: Int) {
+			speedConstants = SpeedConstants.values()[index]
+		}
+
+		override fun getMenuItems() = SpeedConstants.values().map { it.toShortString(app) }
+	}
+
+	inner class UnitsOfLength : ListPreference(
+		R.drawable.ic_action_ruler_unit, R.string.unit_of_length,
+		R.string.unit_of_length_descr
+	) {
+
+		override fun getCurrentValue() = metricsConstants.toHumanString(app)
+
+		override fun setCurrentValue(index: Int) {
+			metricsConstants = MetricsConstants.values()[index]
+		}
+
+		override fun getMenuItems() = MetricsConstants.values().map { it.toHumanString(app) }
+	}
+
+	inner class UtcOffset : ListPreference(
+		R.drawable.ic_world_globe_dark, R.string.time_zone,
+		R.string.time_zone_descr
+	) {
+		private val formattedUtcOffsets = DataConstants.utcOffsets.keys.toList()
+
+		override fun getCurrentValue() = utcOffset
+
+		override fun setCurrentValue(index: Int) {
+			utcOffset = formattedUtcOffsets[index]
+		}
+
+		override fun getMenuItems() = formattedUtcOffsets
+	}
+
+	abstract inner class ListPreference(
 		@DrawableRes val iconId: Int,
 		@StringRes val titleId: Int,
-		@StringRes val descriptionId: Int,
-		val values: List<Number>
+		@StringRes val descriptionId: Int
 	) {
 
 		abstract fun getCurrentValue(): String

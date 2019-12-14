@@ -447,7 +447,7 @@ public class DownloadIndexesThread {
 					mainView.setKeepScreenOn(true);
 				}
 			}
-			startTask(ctx.getString(R.string.shared_string_downloading) + ctx.getString(R.string.shared_string_ellipsis), -1);
+			startTask(ctx.getString(R.string.shared_string_downloading), -1);
 			downloadHasStarted();
 		}
 

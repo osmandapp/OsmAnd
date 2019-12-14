@@ -1,7 +1,9 @@
 package net.osmand.plus.mapmarkers;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 
+import net.osmand.data.FavouritePoint;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.FavouritesDbHelper.FavoritesListener;
@@ -37,6 +39,10 @@ public class AddFavouritesGroupBottomSheetDialogFragment extends AddGroupBottomS
 					if (adapter != null) {
 						adapter.notifyDataSetChanged();
 					}
+				}
+
+				@Override
+				public void onFavoriteAddressResolved(@NonNull FavouritePoint favouritePoint) {
 				}
 			});
 		}

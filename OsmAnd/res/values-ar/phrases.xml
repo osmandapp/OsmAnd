@@ -1622,4 +1622,5 @@
     <string name="poi_park_ride_tram">ترام</string>
     <string name="poi_park_ride_ferry">عبّارة</string>
     <string name="poi_generator_source_biomass">مصدر الطاقة: الكتلة الحيوية</string>
+    <string name="reddit">موقع Reddit</string>
 </resources>

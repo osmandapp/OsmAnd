@@ -123,7 +123,7 @@ public class DownloadTilesDialog {
 		}
 		final ProgressDialog progressDlg = new ProgressDialog(ctx);
 		progressDlg.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-		progressDlg.setMessage(ctx.getString(R.string.shared_string_downloading) + ctx.getString(R.string.shared_string_ellipsis));
+		progressDlg.setMessage(ctx.getString(R.string.shared_string_downloading));
 		progressDlg.setCancelable(true);
 		progressDlg.setMax(numberTiles);
 		progressDlg.setOnCancelListener(new DialogInterface.OnCancelListener(){

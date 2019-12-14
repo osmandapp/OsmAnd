@@ -1141,7 +1141,7 @@
     <string name="lang_sw">Суахілі</string>
     <string name="lang_he">Іврит</string>
     <string name="forward">Вперед</string>
-    <string name="home">Домашня сторінка</string>
+    <string name="home">Домівка</string>
     <string name="live_monitoring_m_descr">Надішліть дані відстеження до вказаної веб-служби, якщо ввімкнено часопис GPX.</string>
     <string name="live_monitoring_m">Онлайн моніторинг (потрібен GPX)</string>
     <string name="live_monitoring_start">Розпочати моніторинг</string>
