@@ -192,7 +192,11 @@ public class GeocodingUtilities {
 			}
 			Collections.sort(lst, GeocodingUtilities.DISTANCE_COMPARATOR);
 			if (lst.size() > 0) {
-				result.put(lst.get(0).point.getRoad(), point);
+				Location ll = new Location("");
+				ll.setLatitude(lst.get(0).connectionPoint.getLatitude());
+				ll.setLongitude(lst.get(0).connectionPoint.getLongitude());
+				result.put(lst.get(0).point.getRoad(), ll);
+//				result.put(lst.get(0).point.getRoad(), point);
 				if (progressCallbackWeakRef.get() != null) {
 					int progress = (int) (i * 100.0/batchSize);
 					if (progress > prevProgress) {
