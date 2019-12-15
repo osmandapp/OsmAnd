@@ -1167,13 +1167,13 @@ POIの更新は利用できません</string>
     <string name="rendering_attr_hideText_name">文字列</string>
     <string name="rendering_attr_hideWoodScrubs_name">森林、低木等</string>
     <string name="rendering_attr_buildings15zoom_name">ズーム15で建物表示</string>
-    <string name="rendering_attr_moreDetailed_name">細かな施設も表示</string>
+    <string name="rendering_attr_moreDetailed_name">詳細</string>
     <string name="rendering_attr_lessDetailed_name">詳細を省く</string>
     <string name="rendering_attr_hideAccess_name">通行制限</string>
     <string name="rendering_attr_showAccess_name">通行制限と料金所を表示</string>
-    <string name="rendering_attr_showSurfaceGrade_name">道路の質(等級)を表示</string>
+    <string name="rendering_attr_showSurfaceGrade_name">道路の品質を表示</string>
     <string name="rendering_attr_showSurfaces_name">路面を表示</string>
-    <string name="rendering_attr_showCycleRoutes_name">自転車道を表示</string>
+    <string name="rendering_attr_showCycleRoutes_name">自転車ルートを表示</string>
     <string name="stop_navigation_service">停止</string>
     <string name="gpx_start_new_segment">新しいセグメントの開始</string>
     <string name="no_index_file_to_download">ダウンロードできるものが見つかりません、インターネットの接続を確認して下さい。</string>
@@ -1295,9 +1295,9 @@ POIの更新は利用できません</string>
     <string name="index_name_gb">ヨーロッパ - イギリス</string>
     <string name="gpx_option_calculate_first_last_segment">最初と最後の経路セグメントを利用しOsmAndエンジンでルートを計算する</string>
     <string name="use_displayed_track_for_navigation">ナビゲーションに表示された経路を使用しますか？</string>
-    <string name="rendering_attr_alpineHiking_name">ハイキング、トレッキングルート(SAC基準)を表示</string>
+    <string name="rendering_attr_alpineHiking_name">アルペンハイキングスケール(SAC)</string>
     <string name="rendering_attr_alpineHiking_description">SACスケールに従って道を描写</string>
-    <string name="rendering_attr_hikingRoutesOSMC_name">ハイキング用シンボルを重ねて表示</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">ハイキングシンボルをオーバーレイ表示</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">OSMCトレースに従って道を描写</string>
     <string name="interrupt_music_descr">有効にすると音声案内時に音楽を一時停止します</string>
     <string name="interrupt_music">音楽の一時停止</string>
@@ -1359,7 +1359,7 @@ POIの更新は利用できません</string>
     <string name="fav_point_dublicate_message">そのお気に入りは、重複を避けるために%1$sという名前に変更されました。</string>
     <string name="text_size_descr">マップ上の文字サイズを設定します。</string>
     <string name="text_size">文字サイズ</string>
-    <string name="rendering_attr_tramTrainRoutes_name">路面電車、鉄道路線</string>
+    <string name="rendering_attr_tramTrainRoutes_name">路面電車と鉄道の路線</string>
     <string name="lock_screen_request_explanation">省電力機能で画面をオフにするには%1$s の権限が必要です。</string>
     <string name="wake_on_voice">画面の電源オン設定</string>
     <string name="wake_on_voice_descr">方向転換地点に近づいたらデバイスの画面を(オフの場合指定時間)オンにします</string>
@@ -1370,11 +1370,11 @@ POIの更新は利用できません</string>
     <string name="rendering_attr_shareTaxiRoutes_name">タクシーのルート共有</string>
     <string name="rendering_attr_trolleybusRoutes_name">トロリーバスでのルート</string>
     <string name="rendering_attr_busRoutes_name">バスでのルート</string>
-    <string name="rendering_category_hide">マップの簡略化</string>
-    <string name="rendering_category_routes">経路の追加描写</string>
+    <string name="rendering_category_hide">非表示</string>
+    <string name="rendering_category_routes">ルート</string>
     <string name="rendering_category_details">詳細</string>
     <string name="rendering_category_transport">交通機関の追加描写</string>
-    <string name="rendering_category_others">他のマップ要素に関する設定</string>
+    <string name="rendering_category_others">その他のマップ属性</string>
     <string name="map_widget_appearance_rem">その他の要素</string>
     <string name="map_widget_top">ステータスバー</string>
     <string name="map_widget_right">右パネル</string>
@@ -1395,7 +1395,7 @@ POIの更新は利用できません</string>
     <string name="gps_status">GPSステータス</string>
     <string name="version_settings_descr">nightlyビルドをダウンロード出来ます(nightly、beta版専用機能)</string>
     <string name="version_settings">ビルド</string>
-    <string name="rendering_attr_streetLighting_name">道路の明滅</string>
+    <string name="rendering_attr_streetLighting_name">街路照明</string>
     <string name="proxy_pref_title">プロキシ</string>
     <string name="proxy_pref_descr">インターネット接続のプロキシ設定をします</string>
     <string name="settings_privacy">プライバシー設定</string>
@@ -1538,7 +1538,7 @@ POIの更新は利用できません</string>
     <string name="shared_string_do_not_use">使用しない</string>
     <string name="shared_string_show_description">詳細表示</string>
     <string name="shared_string_address">住所</string>
-    <string name="rendering_attr_OSMMapperAssistant_name">OSM マップ作成アシスタント</string>
+    <string name="rendering_attr_OSMMapperAssistant_name">OSMマッパーアシスタント</string>
     <string name="shared_string_manage">管理</string>
     <string name="shared_string_edit">編集</string>
     <string name="shared_string_places">場所</string>
@@ -1561,7 +1561,7 @@ POIの更新は利用できません</string>
     <string name="storage_directory">マップストレージ</string>
     <string name="shared_string_copy">コピー</string>
     <string name="osm_edit_context_menu_delete">OSMの編集を削除</string>
-    <string name="rendering_value_disabled_name">無効</string>
+    <string name="rendering_value_disabled_name">無効化</string>
     <string name="shared_string_logoff">ログオフ</string>
     <string name="routing_attr_avoid_borders_description">国境を越えて別の国に入るようなルート設定を避けます。</string>
     <string name="routing_attr_height_name">高さ制限</string>
@@ -1902,7 +1902,7 @@ POIの更新は利用できません</string>
     <string name="no_microphone_permission">マイクへのアクセスを許可します。</string>
     <string name="route_distance">距離:</string>
     <string name="route_duration">時間:</string>
-    <string name="rendering_attr_horseRoutes_name">乗馬用ルート</string>
+    <string name="rendering_attr_horseRoutes_name">馬用ルート</string>
     <string name="shared_string_near">近辺</string>
     <string name="shared_string_hide">非表示</string>
     <string name="av_video_quality_low">最低画質</string>
@@ -2016,7 +2016,7 @@ POIの更新は利用できません</string>
     <string name="auto_split_recording_title">空白検知で自動分割記録</string>
     <string name="auto_split_recording_descr">6分、2時間、あるいは日付変更後に長い空白があった場合に新しいセグメントを開始します。</string>
     <string name="rendering_attr_contourDensity_description">等高線の密度</string>
-    <string name="rendering_attr_contourDensity_name">等高線の密度</string>
+    <string name="rendering_attr_contourDensity_name">等高線密度</string>
     <string name="rendering_value_high_name">高</string>
     <string name="rendering_value_medium_w_name">中</string>
     <string name="rendering_value_low_name">低</string>

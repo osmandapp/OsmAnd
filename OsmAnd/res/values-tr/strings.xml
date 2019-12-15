@@ -295,7 +295,7 @@
     <string name="incomplete_locale">Tamamlanmamış</string>
     <string name="shared_string_next">Sonraki</string>
     <string name="shared_string_previous">Önceki</string>
-    <string name="unit_of_length_descr">Mesafe ölçüm birimini değiştirin.</string>
+    <string name="unit_of_length_descr">Mesafe ölçüm birimini değiştir.</string>
     <string name="si_km_m">Kilometre/metre</string>
     <string name="amenity_type_education">Eğitim</string>
     <string name="amenity_type_emergency">Acil durum</string>
@@ -3353,4 +3353,5 @@
     <string name="distance_and_address">%1$s • %2$s</string>
     <string name="street_city">%1$s, %2$s</string>
     <string name="personal_category_name">Kişisel</string>
+    <string name="shared_string_downloading_formatted">%s indiriliyor</string>
 </resources>
