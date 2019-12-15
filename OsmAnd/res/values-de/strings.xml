@@ -1522,7 +1522,7 @@
     <string name="shared_string_search">Suchen</string>
     <string name="shared_string_show_description">Beschreibung anzeigen.</string>
     <string name="shared_string_message">Nachricht</string>
-    <string name="agps_data_last_downloaded">A-GPS-Daten zuletzt heruntergeladen: %1$s</string>
+    <string name="agps_data_last_downloaded">A-GPS-Daten heruntergeladen: %1$s</string>
     <string name="confirm_usage_speed_cameras">In vielen Ländern (Deutschland, Frankreich, Italien und andere) ist die Verwendung von Blitzerwarnern gesetzlich nicht erlaubt. OsmAnd übernimmt keine Verantwortung im Fall von Gesetzesübertretungen. Klicken Sie nur auf \'Ja\', wenn Sie zur Verwendung dieser Funktion berechtigt sind.</string>
     <string name="welmode_download_maps">Kartenverwaltung</string>
     <string name="welcome_header">Willkommen</string>
