@@ -560,7 +560,7 @@
     <string name="download_type_to_filter">Nach Typ filtern</string>
     <string name="use_high_res_maps">Hochauflösende Anzeige</string>
     <string name="use_high_res_maps_descr">Unterdrückt Streckung (Unschärfe) von Kartenkacheln auf manchen Anzeigen.</string>
-    <string name="unknown_location">Position noch nicht bekannt</string>
+    <string name="unknown_location">Position noch nicht bekannt.</string>
     <string name="context_menu_item_search_transport">Suche ÖPNV</string>
     <string name="transport_searching_transport">ÖPNV-Ergebnisse (kein Ziel):</string>
     <string name="transport_searching_route">ÖPNV-Ergebnisse ({0} bis zum Ziel):</string>
