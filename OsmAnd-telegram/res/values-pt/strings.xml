@@ -16,7 +16,7 @@
     <string name="altitude">Altitude</string>
     <string name="shared_string_search">Pesquisar</string>
     <string name="shared_string_ok">Ok</string>
-    <string name="app_name_short">OsmAnd Tracker</string>
+    <string name="app_name_short">Rastreador OsmAnd</string>
     <string name="shared_string_telegram">Telegram</string>
     <string name="shared_string_appearance">Aparência</string>
     <string name="shared_string_update">Atualizar</string>
@@ -250,4 +250,11 @@
     <string name="live_now">Ao vivo agora</string>
     <string name="timeline">Cronologia</string>
     <string name="saved_messages">Mensagens gravadas</string>
+    <string name="time_zone_descr">Selecione o fuso horário para mostrar nas suas mensagens de localização.</string>
+    <string name="time_zone">Fuso horário</string>
+    <string name="units_and_formats">Unidades e formatos</string>
+    <string name="unit_of_length_descr">Alterar unidade de medida de distância.</string>
+    <string name="unit_of_length">Unidades de comprimento</string>
+    <string name="unit_of_speed_system_descr">Definir unidade de velocidade.</string>
+    <string name="unit_of_speed_system">Unidade de velocidade</string>
 </resources>
