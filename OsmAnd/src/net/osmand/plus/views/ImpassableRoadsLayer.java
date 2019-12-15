@@ -179,6 +179,19 @@ public class ImpassableRoadsLayer extends OsmandMapLayer implements
 					}
 				}
 			}
+
+			for (Map.Entry<RouteDataObject, Location> entry : avoidRoadsHelper.getRoadsToAvoid().entrySet()) {
+				LatLon location = new LatLon(entry.getValue().getLatitude(), entry.getValue().getLongitude());
+				RouteDataObject road = entry.getKey();
+				if (location != null && road != null) {
+					int x = (int) tileBox.getPixXFromLatLon(location.getLatitude(), location.getLongitude());
+					int y = (int) tileBox.getPixYFromLatLon(location.getLatitude(), location.getLongitude());
+					if (calculateBelongs(ex, ey, x, y, compare)) {
+						compare = radius;
+						o.add(road);
+					}
+				}
+			}
 		}
 	}
 
