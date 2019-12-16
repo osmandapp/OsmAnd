@@ -34,7 +34,7 @@
     <string name="shared_string_search">Pesquisar</string>
     <string name="shared_string_show_description">Mostrar descrição.</string>
     <string name="shared_string_message">Mensagem</string>
-    <string name="agps_data_last_downloaded">Últimos dados A-GPS baixados: %1$s</string>
+    <string name="agps_data_last_downloaded">Dados A-GPS baixados: %1$s</string>
     <string name="confirm_usage_speed_cameras">Em diversos países (Alemanha, França, Itália, etc.) o uso de alertas de radar é ilegal. OsmAnd não assume qualquer responsabilidade se você violar a lei. Por favor, toque em \"Sim\" somente se você pode aceitar o uso deste recurso.</string>
     <string name="welmode_download_maps">Baixar mapas</string>
     <string name="welcome_select_region">Para refletir corretamente seus sinais e regras de trânsito, por favor, selecione a região que você dirige:</string>
@@ -1214,7 +1214,7 @@ Pôr do Sol: %2$s</string>
     <string name="preferred_locale_descr">Idioma de exibição do aplicativo (usado após o reinício do OsmAnd).</string>
     <string name="preferred_locale">Idioma de exibição</string>
     <string name="incomplete_locale">incompleto</string>
-    <string name="unit_of_length_descr">Altere as unidades de distância e velocidade.</string>
+    <string name="unit_of_length_descr">Altere as unidades de medida.</string>
     <string name="unit_of_length">Unidades de medida</string>
     <string name="si_mi_feet">Milhas/pés</string>
     <string name="si_mi_yard">Milhas/jardas</string>
