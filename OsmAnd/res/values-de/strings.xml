@@ -29,7 +29,7 @@
     <string name="speak_favorites">Favoriten in der Nähe</string>
     <string name="speak_poi">Nahegelegene POI</string>
     <string name="confirm_every_run">Immer fragen</string>
-    <string name="save_global_track_interval_descr">Aufzeichnungsintervall für die generelle Track-Aufzeichnung festlegen (via Schaltfläche \'GPX-Aufzeichnung\' auf dem Kartenbildschirm).</string>
+    <string name="save_global_track_interval_descr">Aufzeichnungsintervall für die generelle Track-Aufzeichnung festlegen (via Schaltfläche \'GPX\' auf dem Kartenbildschirm).</string>
     <string name="save_global_track_interval">Intervall für generelle Aufzeichnung</string>
     <string name="enable_sleep_mode">GPS-Hintergrunddienst aktivieren</string>
     <string name="sleep_mode_stop_dialog">GPS-Hintergrunddienst beenden?</string>
@@ -41,7 +41,7 @@
     <string name="background_service_int">GPS-Aufwachintervall</string>
     <string name="save_track_to_gpx_globally">Aufzeichnung in GPX-Datei</string>
     <string name="save_track_to_gpx_globally_headline">GPX-Aufzeichnung bei Bedarf</string>
-    <string name="save_track_to_gpx_globally_descr">Generelle Positionserfassung kann mit der Schaltfläche \'GPX-Aufzeichnung\' direkt auf dem Kartenbildschirm aktiviert oder deaktiviert werden.</string>
+    <string name="save_track_to_gpx_globally_descr">Generelle Positionserfassung kann mit der Schaltfläche \'GPX\' direkt auf dem Kartenbildschirm aktiviert oder deaktiviert werden.</string>
     <string name="save_current_track">Aktuellen Track speichern</string>
     <string name="save_current_track_descr">Aktuellen Track jetzt als GPX-Datei speichern.</string>
     <string name="save_track_to_gpx">Während der Navigation automatisch Track aufzeichnen</string>
@@ -261,7 +261,7 @@
     <string name="local_openstreetmap_settings">OSM-POIs/-Notizen auf dem Gerät gespeichert</string>
     <string name="local_openstreetmap_settings_descr">In der Gerätedatenbank vermerkte OSM-POIs/-Notizen anzeigen und verwalten.</string>
     <string name="live_monitoring_m">Online-Aufzeichnung (benötigt GPX)</string>
-    <string name="live_monitoring_m_descr">Track-Daten zu einem festgelegten Internet-Dienst senden, wenn GPX-Aufzeichnung aktiviert ist.</string>
+    <string name="live_monitoring_m_descr">Track-Daten zu einem festgelegten Internetdienst senden, wenn die GPX-Aufzeichnung aktiviert ist.</string>
     <string name="live_monitoring_url">Internetadresse zur Aufzeichnung</string>
     <string name="live_monitoring_url_descr">Spezifikation der Internetadresse zur Aufzeichnung mit Parametern: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
     <string name="live_monitoring_interval">Online-Aufzeichnungsintervall</string>
@@ -609,7 +609,7 @@
     <string name="network_provider">Netzwerk</string>
     <string name="gps_provider">GPS</string>
     <string name="int_seconds">Sekunden</string>
-    <string name="int_min">Min.</string>
+    <string name="int_min">Minuten</string>
     <string name="background_service_provider_descr">Vom Hintergrunddienst verwendete Standortmethode:</string>
     <string name="background_service_provider">Standortbestimmung</string>
     <string name="off_router_service_no_gps_available">Die Hintergrundnavigation erfordert aktivierte Standortdienste.</string>
@@ -1282,7 +1282,7 @@
     <string name="lang_lv">Lettisch</string>
     <string name="lang_mr">Marathi</string>
     <string name="lang_nl">Niederländisch</string>
-    <string name="lang_no">Norwegische Buchsprache</string>
+    <string name="lang_no">Norwegisch (Bokmål)</string>
     <string name="lang_pl">Polnisch</string>
     <string name="lang_pt">Portugiesisch</string>
     <string name="lang_pt_br">Portugiesisch (Brasilien)</string>
@@ -1471,7 +1471,7 @@
     <string name="back_to_map">Zurück zur Karte</string>
     <string name="plugin_nautical_descr">Diese Erweiterung bereichert OsmAnd um die zusätzliche Darstellungsmöglichkeit nautischer Karten für Bootfahrer, Segler und andere Wassersportler. 
 \n 
-\nEine spezielle Kartenergänzung für OsmAnd (\'Seezeichen (weltweit)\') enthält alle nautischen Navigationsmarken und Kartensymbole zur Navigation auf Binnengewässern und in Küstennähe. Die Beschreibung jeder Navigationsmarke liefert die notwendigen Einzelheiten zu deren Bestimmung und Bedeutung (Kategorie, Form, Farbe, Reihenfolge, Verweis usw.). 
+\nDie spezielle Kartenergänzung \'Seezeichen (weltweit)\' enthält alle nautischen Navigationsmarken und Kartensymbole zur Navigation auf Binnengewässern und in Küstennähe. Die Beschreibung jeder Navigationsmarke liefert die notwendigen Einzelheiten zu deren Bestimmung und Bedeutung (Kategorie, Form, Farbe, Reihenfolge, Verweis usw.). 
 \n 
 \nUm zur herkömmlichen Kartendarstellung in OsmAnd zurückzukehren, kann diese Ansicht hier wieder deaktiviert oder die \'Kartendarstellung\' unter \'Karte konfigurieren\' wie gewünscht geändert werden.</string>
     <string name="plugin_ski_descr">Diese Erweiterung aktiviert die spezielle Kartendarstellung \'Winter- und Skikarte\', die global Skiabfahrten, Langlaufrouten, alpine Skirouten, Skilifte und Bergbahnen enthält. Routen und Pisten werden farbcodiert nach Schwierigkeit, Landschaftselemente nach winterlichen Gesichtspunkten (Assimilierung einer Schneedecke) angezeigt. 
