@@ -21,4 +21,5 @@
     <string name="si_min_m">Λεπτά ανά μίλι</string>
     <string name="si_nm">Ναυτικά μίλια</string>
     <string name="si_mi_meters">Μίλια/μέτρα</string>
+    <string name="shared_string_all">Όλα</string>
 </resources>
