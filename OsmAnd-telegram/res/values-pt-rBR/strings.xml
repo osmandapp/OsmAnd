@@ -251,4 +251,7 @@
     <string name="set_time_timeline_descr">Selecionar a hora para exibir</string>
     <string name="start_end_date">Data de início - fim</string>
     <string name="saved_messages">Mensagens salvas</string>
+    <string name="units_and_formats">Unidades e formatos</string>
+    <string name="unit_of_length_descr">Altere as unidades de medida.</string>
+    <string name="unit_of_length">Unidades de medida</string>
 </resources>
