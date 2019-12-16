@@ -11,6 +11,7 @@
 	Thx - Hardy
 
 -->
+    <string name="offroad_render_descr">For deserts and other sparsely populated areas.</string>
     <string name="shared_string_downloading_formatted">Downloading %s</string>
     <string name="distance_and_address">%1$s • %2$s</string>
     <string name="street_city">%1$s, %2$s</string>
