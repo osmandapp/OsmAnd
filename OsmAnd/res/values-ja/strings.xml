@@ -977,7 +977,7 @@ POIの更新は利用できません</string>
     <string name="file_can_not_be_renamed">ファイルの名前を変更できませんでした。</string>
     <string name="file_with_name_already_exists">その名前のファイルは既に存在します。</string>
     <string name="shared_string_gpx_route">GPXルート</string>
-    <string name="poi_query_by_name_matches_categories">関連するいくつかのPOIカテゴリが見つかりました。</string>
+    <string name="poi_query_by_name_matches_categories">関連するいくつかのPOIカテゴリーが見つかりました。</string>
     <string name="data_to_search_poi_not_available">POI検索用のオフラインデータをダウンロードします。</string>
     <string name="poi_filter_by_name">名前で検索</string>
     <string name="old_poi_file_should_be_deleted">POIデータファイル「%1$s」の余剰部分は、削除することができます。</string>
@@ -1497,7 +1497,7 @@ POIの更新は利用できません</string>
     <string name="local_osm_changes_upload_all_confirm">%1$dカ所の変更をOSMにアップロードしてもよろしいですか？</string>
     <string name="plugin_nautical_descr">このプラグインはOsmAnd Maps &amp; Navigationにて航海マップを生成し、ボート、セーリング、その他のウォータースポーツに向けた機能を豊かにします。 
 \n 
-\n特殊マップアドオンはOsmAndに内陸だけでなく沿岸に向けた、航海ナビゲーションマークやチャートシンボルを提供します。各ナビゲーションマークの説明はそれらの意味(カテゴリ、形状、色、順序、参照など)を識別するために必要な詳細を示されます。 
+\n特殊マップアドオンはOsmAndに内陸だけでなく沿岸に向けた、航海ナビゲーションマークやチャートシンボルを提供します。各ナビゲーションマークの説明はそれらの意味(カテゴリー、形状、色、順序、参照など)を識別するために必要な詳細を示されます。 
 \n 
 \nOsmAndの従来のマップスタイルに戻すには、このプラグインを非アクティブにするか、必要に応じて\'マップ設定\'の\'マップスタイル \'からも変更出来ます。</string>
     <string name="plugin_ski_name">スキーマップ表示</string>
@@ -1680,16 +1680,16 @@ POIの更新は利用できません</string>
     <string name="tab_title_advanced">拡張</string>
     <string name="show_on_start">起動時に表示</string>
     <string name="count_of_lines">表示数の選択</string>
-    <string name="favorite_category_dublicate_message">指定したカテゴリ名は既に使用されています。別の名前を使用して下さい。</string>
-    <string name="favorite_category_name">カテゴリ名</string>
-    <string name="favorite_category_add_new_title">新しいカテゴリを追加</string>
+    <string name="favorite_category_dublicate_message">指定したカテゴリー名は既に使用されています。別の名前を使用して下さい。</string>
+    <string name="favorite_category_name">カテゴリー名</string>
+    <string name="favorite_category_add_new_title">新しいカテゴリーを追加</string>
     <string name="regions">地域</string>
     <string name="region_maps">広域マップ</string>
     <string name="world_maps">世界地図</string>
     <string name="hillshade_layer_disabled">陰影起伏図レイヤー表示無効</string>
     <string name="srtm_plugin_disabled">等高線無効</string>
     <string name="favorite_category_add_new">新規追加</string>
-    <string name="favorite_category_select">カテゴリを選択</string>
+    <string name="favorite_category_select">カテゴリーを選択</string>
     <string name="default_speed_system_descr">速度の単位を設定します</string>
     <string name="default_speed_system">速度の単位</string>
     <string name="nm">海里</string>
@@ -1964,9 +1964,9 @@ POIの更新は利用できません</string>
     <string name="access_autoannounce_period">自動音声案内間隔</string>
     <string name="access_autoannounce_period_descr">音声案内間隔の最小時間を設定します</string>
     <string name="access_default_color">既定色</string>
-    <string name="access_category_choice">カテゴリ選択</string>
+    <string name="access_category_choice">カテゴリー選択</string>
     <string name="access_hint_enter_name">名前の入力</string>
-    <string name="access_hint_enter_category">カテゴリの入力</string>
+    <string name="access_hint_enter_category">カテゴリーの入力</string>
     <string name="access_hint_enter_description">詳細の入力</string>
     <string name="access_collapsed_list">たたまれたリスト</string>
     <string name="access_expanded_list">展開されたリスト</string>
@@ -1994,7 +1994,7 @@ POIの更新は利用できません</string>
     <string name="show_something_on_map">マップ上に%1$sを表示</string>
     <string name="dist_away_from_my_location">%1$s離れた場所を検索</string>
     <string name="share_history_subject">OsmAnd経由で共有</string>
-    <string name="search_categories">カテゴリ</string>
+    <string name="search_categories">カテゴリー</string>
     <string name="postcode">郵便番号</string>
     <string name="shared_string_from">から</string>
     <string name="city_type_district">地区</string>
@@ -2389,7 +2389,7 @@ POIの更新は利用できません</string>
     <string name="display_zoom_level">表示ズームレベル: %1$s</string>
     <string name="index_item_depth_points_southern_hemisphere">南半球の海洋深度マップ</string>
     <string name="index_item_depth_points_northern_hemisphere">北半球の海洋深度マップ</string>
-    <string name="rendering_attr_surfaceIntegrity_name">路面状態</string>
+    <string name="rendering_attr_surfaceIntegrity_name">路面の質</string>
     <string name="translit_name_if_miss">%1$sの名前が欠落している場合、(他の文字で)翻字します</string>
     <string name="translit_names">名称を翻字</string>
     <string name="private_access_routing_req">目的地が専有エリア(私有地)内にあります。専有道路あるいは私道を通ることを許可しますか？</string>
@@ -2553,7 +2553,7 @@ POIの更新は利用できません</string>
     <string name="shared_string_more_without_dots">その他</string>
     <string name="appearance_on_the_map">マップ画面での表示設定</string>
     <string name="add_track_to_markers_descr">マーカーとして追加する経由地点を経路データから選択してください。(経由地点を含む経路のみリストアップされます)</string>
-    <string name="add_favourites_group_to_markers_descr">マーカーとして追加するお気に入りのカテゴリを選択してください。</string>
+    <string name="add_favourites_group_to_markers_descr">マーカーとして追加するお気に入りのカテゴリーを選択してください。</string>
     <string name="add_group_descr">お気に入り地点やGPX経由地点をグループとしてインポートできます。</string>
     <string name="empty_state_markers_groups">グループでインポート</string>
     <string name="empty_state_markers_groups_desc">お気に入り地点や経路データ内の経由地点をマーカーとしてまとめて追加できます。</string>
@@ -2563,7 +2563,7 @@ POIの更新は利用できません</string>
     <string name="show_arrows_descr">画面上にアクティブマーカーの方向を示す矢印を、一つあるいは二つ表示させます。</string>
     <string name="distance_indication_descr">アクティブマーカーまでの距離を示す情報をどこに表示するか選択してください。</string>
     <string name="active_markers_descr">マーカーの方向と距離を示すインジケーターの数を選択してください。</string>
-    <string name="favourites_group">お気に入り地点のカテゴリ</string>
+    <string name="favourites_group">お気に入り地点のカテゴリー</string>
     <string name="empty_state_markers_active_desc">任意の場所をロングまたはショートタップで指定後、旗のボタンでマーカーを作成します。</string>
     <string name="shared_string_gpx_waypoints">経路データ内の経由地点</string>
     <string name="show_passed">通過済みも表示</string>
@@ -2626,7 +2626,7 @@ POIの更新は利用できません</string>
     <string name="off_road_render_descr">『トポ(Topo)』スタイルに基づくオフロード走行用として、緑色の衛星画像をアンダーレイマップとして使用します。幹線道路の緻密さ、経路においてどの程度緻密さが増減するか、小道や自転車やその他用ルートでも用いられます。</string>
     <string name="ski_map_render_descr">スキー用です。主な特徴はピステ(滑走路、ゲレンデ)、スキーリフト、クロスカントリー用コース表示などを備えています。 逆にそれ以外のマップオブジェクトを暗くして目立たなくなるようにもします。</string>
     <string name="light_rs_render_descr">シンプルな運転用スタイルです。おだやかな夜間モード、等高線、対照的なオレンジ色スタイルの道路表示で、セカンダリマップオブジェクトは若干暗くしてあります。</string>
-    <string name="topo_render_descr">ハイキング、トレッキング、ネイチャーサイクリング向けです。屋外で視認しやすい配色になっています。対照的な道路と自然物、さまざまなルートタイプ、高度な等高線オプション、詳細の追加などがなされています。 路面状態を表示するオプションを使えば、各道路の品質把握ができます。夜間モードはありません。</string>
+    <string name="topo_render_descr">ハイキング、トレッキング、ネイチャーサイクリング向けです。屋外で視認しやすい配色になっています。対照的な道路と自然物、さまざまなルートタイプ、高度な等高線オプション、詳細の追加などがなされています。 路面の素材や質を表示するオプションを使えば、各道路の状態も把握できます。夜間モードはありません。</string>
     <string name="mapnik_render_descr">昔のデフォルトであった『Mapnik』スタイルです。Mapnikそのものではありませんが似た配色になります。</string>
     <string name="coord_input_edit_point">地点／座標の編集</string>
     <string name="coord_input_add_point">座標の追加</string>
@@ -2740,7 +2740,7 @@ POIの更新は利用できません</string>
     <string name="shared_string_result">結果</string>
     <string name="waypoints_removed_from_map_markers">マップマーカーから経由地点を削除しました</string>
     <string name="nothing_found_in_radius">指定距離間内には見つかりませんでした:</string>
-    <string name="select_waypoints_category_description">経路内の全ての経由地点を追加する、もしくはカテゴリ別に選択してください。</string>
+    <string name="select_waypoints_category_description">経路内の全ての経由地点を追加する、もしくはカテゴリー別に選択してください。</string>
     <string name="shared_string_total">トータル</string>
     <string name="group_deleted">グループを削除しました</string>
     <string name="rendering_attr_whiteWaterSports_name">リバースポーツ(川遊び、リバーアクティビティ)</string>
