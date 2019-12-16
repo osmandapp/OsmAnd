@@ -3171,7 +3171,7 @@ POIの更新は利用できません</string>
     <string name="app_mode_personal_transporter">個人輸送業者</string>
     <string name="app_mode_monowheel">モノホイール</string>
     <string name="app_mode_scooter">スクーター</string>
-    <string name="precision_hdop_and_vdop">水平精度: %1$s, 垂直:%2$s</string>
+    <string name="precision_hdop_and_vdop">水平精度: %1$s, 垂直精度:%2$s</string>
     <string name="precision_hdop">水平精度: %s</string>
     <string name="rendering_attr_highway_class_track_grade1_name">グレード1</string>
     <string name="rendering_attr_highway_class_track_grade2_name">グレード2</string>
