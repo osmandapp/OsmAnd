@@ -247,4 +247,7 @@
     <string name="live_now">今現在</string>
     <string name="timeline">タイムライン</string>
     <string name="si_min_km">分/キロメートル</string>
+    <string name="si_min_m">分/マイル</string>
+    <string name="units_and_formats">単位と形式</string>
+    <string name="unit_of_length">長さの単位</string>
 </resources>

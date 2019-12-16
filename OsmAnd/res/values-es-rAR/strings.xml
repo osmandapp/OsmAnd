@@ -19,7 +19,7 @@
     <string name="shared_string_search">Buscar</string>
     <string name="shared_string_show_description">Mostrar información.</string>
     <string name="shared_string_message">Mensaje</string>
-    <string name="agps_data_last_downloaded">Últimos datos A-GPS descargados: %1$s</string>
+    <string name="agps_data_last_downloaded">Datos A-GPS descargados: %1$s</string>
     <string name="confirm_usage_speed_cameras">En muchos países (Alemania, Francia, Italia y otros) el uso de avisos de radares es ilegal. OsmAnd no asume ninguna responsabilidad si usted viola la ley. Pulsa en «sí», sólo si puedes utilizar esta función.</string>
     <string name="welmode_download_maps">Descargar mapas</string>
     <string name="welcome_select_region">Para reflejar correctamente las señales y normas de tráfico, elige tu región de conducción:</string>
@@ -3398,4 +3398,8 @@ Lon %2$s</string>
     <string name="add_new_profile_q">¿Añadir el nuevo perfil «%1$s»\?</string>
     <string name="save_heading">Incluir rumbo</string>
     <string name="save_heading_descr">Guarda el rumbo para cada punto de la traza durante la grabación.</string>
+    <string name="distance_and_address">%1$s • %2$s</string>
+    <string name="street_city">%1$s, %2$s</string>
+    <string name="personal_category_name">Personal</string>
+    <string name="shared_string_downloading_formatted">Descargando %s</string>
 </resources>

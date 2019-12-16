@@ -921,7 +921,7 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="incomplete_locale">non cumpridu</string>
     <string name="shared_string_next">Sighi</string>
     <string name="shared_string_previous">Antepostu</string>
-    <string name="unit_of_length_descr">Muda sas unidades de mèdida de sa distàntzia.</string>
+    <string name="unit_of_length_descr">Muda s\'unidade de mèdida pro sa distàntzia.</string>
     <string name="unit_of_length">Unidades de longària</string>
     <string name="si_mi_feet">Mìllias/pedes</string>
     <string name="si_mi_yard">Mìllias/iardas</string>
@@ -1521,7 +1521,7 @@ Lon %2$s</string>
     <string name="mark_to_delete">Marca pro iscantzellare</string>
     <string name="confirm_usage_speed_cameras">In medas istados (Germània, Frantza, Itàlia, e àteros) s’impreu de avisos pro sos autovelox est illegale. OsmAnd non s’at a pigare responsabilidades s’in casu tue as a violare sa lege. Pro praghere incarca \'Eja\' petzi si podes impreare custa funtzionalidade.</string>
     <string name="agps_info">Informatziones A-GPS</string>
-    <string name="agps_data_last_downloaded">Ùrtimu agiornamentu datos A-GPS: %1$s</string>
+    <string name="agps_data_last_downloaded">Datos A-GPS iscarrigados: %1$s</string>
     <string name="shared_string_message">Messàgiu</string>
     <string name="shared_string_do_not_use">No imprees</string>
     <string name="shared_string_address">Indiritzu</string>
@@ -2909,7 +2909,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="step_by_step">Bortada pro bortada</string>
     <string name="routeInfo_road_types_name">Casta de àndalas</string>
     <string name="exit_at">Essi in</string>
-    <string name="sit_on_the_stop">Sede·ti in sa firmada</string>
+    <string name="sit_on_the_stop">Àrtzia in sa firmada</string>
     <string name="quick_action_show_hide_gpx_tracks">Ammustra/cua sas rastas GPX</string>
     <string name="quick_action_show_hide_gpx_tracks_descr">Unu butone pro ammustrare o cuare sas rastas GPX ischertadas in sa mapa.</string>
     <string name="quick_action_gpx_tracks_hide">Istichi sas rastas GPX</string>
@@ -3399,4 +3399,8 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="add_new_profile_q">Annanghere su profilu nou \'%1$s\'\?</string>
     <string name="save_heading">Inclue sa diretzione</string>
     <string name="save_heading_descr">Sarva sa diretzione pro cada puntu cando ses registrende.</string>
+    <string name="distance_and_address">%1$s • %2$s</string>
+    <string name="street_city">%1$s, %2$s</string>
+    <string name="personal_category_name">Personale</string>
+    <string name="shared_string_downloading_formatted">Iscarrighende %s</string>
 </resources>

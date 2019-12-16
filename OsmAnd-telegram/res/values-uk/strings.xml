@@ -251,4 +251,7 @@
     <string name="min_logging_speed">Мінімальна швидкість реєстрації</string>
     <string name="min_logging_speed_descr">Фільтр: не реєструвати, якщо швидкість меньша за обрану</string>
     <string name="saved_messages">Збережені повідомлення</string>
+    <string name="time_zone_descr">Оберіть часовий пояс щоб відобразити повідомлення у вашому розташуванні.</string>
+    <string name="time_zone">Часовий пояс</string>
+    <string name="units_and_formats">Одиниці / Виміри</string>
 </resources>

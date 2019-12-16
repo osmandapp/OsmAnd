@@ -1,2 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="shared_string_ok">Εντάξει</string>
+    <string name="shared_string_update">Ενημέρωση</string>
+    <string name="shared_string_map">Χάρτης</string>
+    <string name="shared_string_add">Προσθήκη</string>
+    <string name="shared_string_hide">Απόκρυψη</string>
+    <string name="shared_string_save">Αποθήκευση</string>
+    <string name="shared_string_sort">Ταξινόμηση</string>
+    <string name="km">χλμ</string>
+    <string name="m">μ</string>
+    <string name="nm">ναυτικό μίλι</string>
+    <string name="min_mile">λεπτά/μίλι</string>
+    <string name="min_km">λεπτά/χιλιόμετρο</string>
+    <string name="m_s">μέτρα/δευτερόλεπτο</string>
+    <string name="km_h">χλμ/ω</string>
+    <string name="si_kmh">Χιλιόμετρα ανά ώρα</string>
+    <string name="si_mph">Μίλια ανά ώρα</string>
+    <string name="si_m_s">Μέτρα ανά δευτερόλεπτο</string>
+    <string name="si_min_km">Λεπτά ανά χιλιόμετρο</string>
+    <string name="si_min_m">Λεπτά ανά μίλι</string>
+    <string name="si_nm">Ναυτικά μίλια</string>
+    <string name="si_mi_meters">Μίλια/μέτρα</string>
+</resources>

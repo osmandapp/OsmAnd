@@ -1508,7 +1508,7 @@
     <string name="welcome_header">歡迎</string>
     <string name="confirm_usage_speed_cameras">在許多國家（德國、法國、義大利和其它）使用測速照相警示是非法的。如果您違反了法律，OsmAnd 並不承擔任何的責任。請只在您有資格使用此功能時，才點下「是」。</string>
     <string name="agps_info">A-GPS 資訊</string>
-    <string name="agps_data_last_downloaded">A-GPS 資料上次下載：%1$s</string>
+    <string name="agps_data_last_downloaded">A-GPS 資料下載時間：%1$s</string>
     <string name="shared_string_message">訊息</string>
     <string name="shared_string_do_not_use">不使用</string>
     <string name="shared_string_address">地址</string>
@@ -2279,7 +2279,8 @@
 \n• 直接從應用程式上傳 GPX 軌跡到 OSM 
 \n• 新增 POI 並直接上傳至 OSM（如果是離線使用則會在稍後上傳） 
 \n• 可選的旅程錄製而且在背景模式（當裝置處於休眠模式下） 
-\nOsmAnd 是正在積極開發的開放原始碼。每個人都可以透過回報錯誤、改進翻譯或編寫新功能，為應用程式做出貢獻。此外，該專案依靠提供資金捐款資助編寫程式碼和測試新的功能。</string>
+\nOsmAnd 是仍在積極開發的開放原始碼軟體。每個人都可以透過回報錯誤、改進翻譯或編寫新功能，為應用程式做出貢獻。此外，該專案依靠提供資金捐款資助編寫程式碼和測試新的功能。
+\n</string>
     <string name="osmand_extended_description_part1">OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式可以免費的存取，有世界各地和高品質的 OpenStreetMap（OSM）資料。
 \n
 \n享有語音和視覺的導航，檢視 POI（興趣點），建立和管理 GPX 軌跡，使用視覺化的等高線和海拔資訊（透過外掛元件），能在汽車駕駛、騎自行車和步行模式之間選擇、OSM 編輯和更多。</string>

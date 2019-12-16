@@ -3279,4 +3279,5 @@ voor Gebied: %1$s x %2$s</string>
     <string name="add_new_profile_q">Voeg nieuw profiel toe \'%1$s\'\?</string>
     <string name="save_heading_descr">Sla (richting) naar elk trackpunt op tijdens het opnemen.</string>
     <string name="save_heading">Richting toevoegen</string>
+    <string name="personal_category_name">Persoonlijk</string>
 </resources>

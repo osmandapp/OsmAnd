@@ -346,7 +346,7 @@
     <string name="poi_paragliding">Gleitschirmfliegen</string>
     <string name="poi_park">Park</string>
     <string name="poi_parking">Parkplatz</string>
-    <string name="poi_parking_entrance">Parkeinfahrt</string>
+    <string name="poi_parking_entrance">Parkplatzeinfahrt</string>
     <string name="poi_craft_parquet_layer">Parkettleger</string>
     <string name="poi_pawnbroker">Pfandleiher</string>
     <string name="poi_peak">Berggipfel</string>
@@ -392,7 +392,7 @@
     <string name="poi_public_transport_platform_bus">Bushaltestelle</string>
     <string name="poi_public_transport_platform_tram">Straßenbahnhaltestelle</string>
     <string name="poi_public_transport_platform_trolleybus">Haltestelle für Oberleitungsbus</string>
-    <string name="poi_public_transport_station">Öff. Verkehrsmittel-Station</string>
+    <string name="poi_public_transport_station">ÖPNV-Station</string>
     <string name="poi_quarry">Steinbruch</string>
     <string name="poi_raceway">Rennstrecke</string>
     <string name="poi_racquet">Racquetball</string>
@@ -1151,7 +1151,7 @@
     <string name="poi_fuel_91ul">Avgas UL 91</string>
     <string name="poi_fuel_100ll">Avgas 100LL</string>
     <string name="poi_fuel_autogas">Autogas</string>
-    <string name="poi_fuel_jeta1">Flugzeug A-1 Kraftstoff</string>
+    <string name="poi_fuel_jeta1">Flugkraftstoff Jet A-1</string>
     <string name="poi_fuel_adblue">AdBlue</string>
     <string name="poi_fuel_wood">Kraftstoff: Holz</string>
     <string name="poi_street_lamp">Straßenlaterne</string>

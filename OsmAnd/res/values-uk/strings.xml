@@ -1552,7 +1552,7 @@
     <string name="shared_string_search">Пошук</string>
     <string name="shared_string_show_description">Показати опис.</string>
     <string name="shared_string_message">Повідомлення</string>
-    <string name="agps_data_last_downloaded">Останні завантажені дані A-GPS: %1$s</string>
+    <string name="agps_data_last_downloaded">Завантажені дані A-GPS: %1$s</string>
     <string name="confirm_usage_speed_cameras">У багатьох країнах (Німеччина, Франція, Італія та інші) використання детекторів камер контролю швидкості не дозволено законом. OsmAnd не несе ніякої відповідальності, якщо Ви порушите закон. Будь ласка, натисніть кнопку „Так“, тільки якщо ви маєте право використовувати цю функцію.</string>
     <string name="welmode_download_maps">Завантаження мап</string>
     <string name="welcome_select_region">Щоб правильно показувати дорожні знаки та правила дорожнього руху, будь ласка, виберіть ваш регіон:</string>
@@ -3291,7 +3291,7 @@
     <string name="apply_to_all_profiles">Застосувати до всіх профілів</string>
     <string name="start_up_message_pref">Початкове повідомлення</string>
     <string name="analytics_pref_title">Аналітика</string>
-    <string name="units_and_formats">Одиниці виміру та формати</string>
+    <string name="units_and_formats">Одиниці / Виміри</string>
     <string name="appearance">Зовнішній вигляд</string>
     <string name="map_look_descr">Вигляд мапи</string>
     <string name="map_look">Вигляд карти</string>
@@ -3452,4 +3452,8 @@
     <string name="add_new_profile_q">Додати новий профіль \'%1$s\'\?</string>
     <string name="save_heading">Зберегти заголовок</string>
     <string name="save_heading_descr">Зберегти заголовок для кожної точки треку під час запису.</string>
+    <string name="distance_and_address">%1$s • %2$s</string>
+    <string name="street_city">%1$s, %2$s</string>
+    <string name="personal_category_name">Особистий</string>
+    <string name="shared_string_downloading_formatted">Завантажується %s</string>
 </resources>

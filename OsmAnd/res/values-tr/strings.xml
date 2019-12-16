@@ -1023,7 +1023,7 @@
     <string name="shared_string_search">Arama</string>
     <string name="shared_string_show_description">Açıklamayı göster.</string>
     <string name="shared_string_message">İleti</string>
-    <string name="agps_data_last_downloaded">A-GPS verisi son indirilen: %1$s</string>
+    <string name="agps_data_last_downloaded">İndirilen A-GPS verisi: %1$s</string>
     <string name="welmode_download_maps">Harita indir</string>
     <string name="welcome_header">Hoş Geldiniz</string>
     <string name="current_route">Şu anki rota</string>
@@ -3305,7 +3305,7 @@
 \n</string>
     <string name="apply_preference_to_all_profiles">Bu değişikliği tüm profillere veya yalnızca şu anda seçili olana uygulayabilirsiniz.</string>
     <string name="shared_preference">Paylaşılan</string>
-    <string name="routing_attr_driving_style_prefer_unpaved_name">Asfaltsız yolları tercih edin</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_name">Asfaltsız yolları tercih et</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">Asfaltsız yolları tercih edin.</string>
     <string name="layer_osm_edits">OSM Düzenlemeleri</string>
     <string name="quick_action_contour_lines_descr">Haritada eş yükselti çizgilerini göstermek veya gizlemek için bir geçiş.</string>

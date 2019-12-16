@@ -1511,7 +1511,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="welcome_header">Bienvenue</string>
     <string name="confirm_usage_speed_cameras">Dans certains pays (France, Allemagne, Italie, …) l\'utilisation d\'alertes radars est interdite par la loi. OsmAnd décline toute responsabilité en cas de violation de la loi. Pour activer cette fonctionnalité en toute connaissance de cause, répondez \"Oui\".</string>
     <string name="agps_info">Données A-GPS</string>
-    <string name="agps_data_last_downloaded">Dernière mise à jour des données A-GPS : %1$s</string>
+    <string name="agps_data_last_downloaded">Données A-GPS téléchargées le %1$s</string>
     <string name="shared_string_message">Message</string>
     <string name="shared_string_do_not_use">Ne pas utiliser</string>
     <string name="shared_string_address">Adresse</string>
