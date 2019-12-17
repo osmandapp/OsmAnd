@@ -293,7 +293,7 @@
     <string name="download_type_to_filter">Filtre</string>
     <string name="use_high_res_maps">Carte haute résolution</string>
     <string name="use_high_res_maps_descr">Ne pas étirer (et rendre flou) les tuiles de carte sur les écrans haute résolution.</string>
-    <string name="unknown_location">Position inconnue</string>
+    <string name="unknown_location">Position inconnue.</string>
     <string name="context_menu_item_search_transport">Chercher un transport public</string>
     <string name="transport_searching_transport">Transports possibles (aucune arrivée définie) :</string>
     <string name="transport_searching_route">Transports possibles ({0} pour rejoindre l\'arrivée) :</string>
@@ -587,7 +587,7 @@
     <string name="offline_navigation_not_available">Navigation hors-ligne temporairement indisponible.</string>
     <string name="left_side_navigation">Conduite à gauche</string>
     <string name="left_side_navigation_descr">Pour les pays où la circulation s\'effectue sur la partie gauche de la route.</string>
-    <string name="unknown_from_location">Point de départ inconnu</string>
+    <string name="unknown_from_location">Point de départ non défini.</string>
     <string name="confirm_interrupt_download">Annuler le téléchargement ?</string>
     <string name="basemap_was_selected_to_download">La carte mondiale de base, requise pour le bon fonctionnement de l\'application, est en attente de téléchargement.</string>
     <string name="map_online_plugin_is_not_installed">Activez le greffon \"Cartes en ligne\" pour sélectionner différentes sources de cartes</string>
@@ -3327,7 +3327,7 @@ représentant la zone : %1$s x %2$s</string>
 \n</string>
     <string name="apply_preference_to_all_profiles">Vous pouvez appliquer cette modification à tous les profils ou uniquement aux profils sélectionnés actuellement.</string>
     <string name="shared_preference">Partagé</string>
-    <string name="routing_attr_driving_style_prefer_unpaved_name">Privilégier les routes non pavées</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_name">Privilégier les routes non revêtues</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">Privilégier les routes non pavées.</string>
     <string name="layer_osm_edits">Modifications OSM</string>
     <string name="quick_action_contour_lines_descr">Affiche ou masque les courbes de niveaux sur la carte.</string>
@@ -3370,10 +3370,12 @@ représentant la zone : %1$s x %2$s</string>
     <string name="add_new_profile_q">Ajouter le profil \'%1$s\' \?</string>
     <string name="save_heading">Inclure la direction</string>
     <string name="save_heading_descr">Inclure la direction de chaque point lors de l\'enregistrement d\'une trace.</string>
-    <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Afficher node network cycle routes</string>
-    <string name="rendering_value_walkingRoutesOSMCNodes_name">Nœud de réseaux</string>
+    <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Afficher les pistes cyclables</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_name">Réseaux</string>
     <string name="personal_category_name">Personnel</string>
     <string name="distance_and_address">%1$s • %2$s</string>
     <string name="street_city">%1$s, %2$s</string>
     <string name="shared_string_downloading_formatted">Téléchargement %s</string>
+    <string name="rendering_value_thick_name">Épais</string>
+    <string name="desert_render_descr">Pour les déserts et autres zones faiblement peuplées.</string>
 </resources>
