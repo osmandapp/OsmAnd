@@ -3069,7 +3069,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="routing_attr_max_num_changes_name">Nombre de correspondances</string>
     <string name="turn_screen_on_sensor">Utiliser le capteur de proximité</string>
     <string name="sett_no_ext_input">Aucun</string>
-    <string name="routing_attr_freeride_policy_description">Le freeride et le hors-piste sont des itinéraires non-officiels qui ne sont généralement ni damés ni entretenus et ne sont pas contrôlés en fin de journée par les autorités. Entrez à vos risques et périls.</string>
+    <string name="routing_attr_freeride_policy_description">Le freeride et le hors-piste sont des itinéraires non-officiels. Ces itinéraires ne sont généralement ni damés ni entretenus et ne sont pas contrôlés en fin de journée par les autorités. Entrez à vos risques et périls.</string>
     <string name="default_speed_setting_descr">Modifiez les paramètres de vitesse par défaut</string>
     <string name="app_mode_ufo">OVNI</string>
     <string name="app_mode_personal_transporter">Gyropode</string>
