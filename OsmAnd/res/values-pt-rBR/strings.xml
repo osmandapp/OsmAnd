@@ -905,8 +905,8 @@ Pôr do Sol: %2$s</string>
     <string name="offline_navigation_not_available">Navegação OsmAnd off-line está temporariamente indisponível.</string>
     <string name="left_side_navigation_descr">Para países onde as pessoas dirigem no lado esquerdo da estrada.</string>
     <string name="local_index_description">Toque em qualquer item para ver mais detalhes, toque longo para desativar ou excluir. Dados atuais no aparelho (%1$s livre):</string>
-    <string name="unknown_from_location">Ponto de partida ainda não determinado</string>
-    <string name="unknown_location">Posição ainda desconhecida</string>
+    <string name="unknown_from_location">Ponto de partida ainda não determinado.</string>
+    <string name="unknown_location">Posição ainda desconhecida.</string>
     <string name="modify_transparency">Definir transparência (0 - transparente, 255 - opaco)</string>
     <string name="confirm_interrupt_download">Cancelar o download\?</string>
     <string name="basemap_was_selected_to_download">O mapa base necessário para fornecer funcionalidade básica está na fila de download.</string>
@@ -3390,4 +3390,6 @@ Pôr do Sol: %2$s</string>
     <string name="street_city">%1$s, %2$s</string>
     <string name="personal_category_name">Pessoal</string>
     <string name="shared_string_downloading_formatted">Baixando %s</string>
+    <string name="rendering_value_thick_name">Grosso</string>
+    <string name="desert_render_descr">Para desertos e outras áreas escassamente povoadas.</string>
 </resources>
