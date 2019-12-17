@@ -730,7 +730,7 @@ public class ApplicationMode {
 		}
 	}
 
-	public static void saveAppModesToSettings(OsmandSettings settings) {
+	public static void saveAppModesToSettings(OsmandApplication app) {
 		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 
 		List<ApplicationModeBean> defaultModeBeans = createApplicationModeBeans(defaultValues);
@@ -739,8 +739,8 @@ public class ApplicationMode {
 		String defaultProfiles = gson.toJson(defaultModeBeans);
 		String customProfiles = gson.toJson(customModeBeans);
 
-		settings.DEFAULT_APP_PROFILES.set(defaultProfiles);
-		settings.CUSTOM_APP_PROFILES.set(customProfiles);
+		app.getSettings().DEFAULT_APP_PROFILES.set(defaultProfiles);
+		app.getSettings().CUSTOM_APP_PROFILES.set(customProfiles);
 	}
 
 	private static void saveAppModesToSettings(OsmandSettings settings, boolean saveCustomModes) {
@@ -805,6 +805,13 @@ public class ApplicationMode {
 		customValues.remove(md);
 		cachedFilteredValues.remove(md);
 		saveAppModesToSettings(app.getSettings(), md.isCustomProfile());
+	}
+
+	public static void deleteCustomModes(List<ApplicationMode> modes, OsmandApplication app) {
+		values.removeAll(modes);
+		customValues.removeAll(modes);
+		cachedFilteredValues.removeAll(modes);
+		saveAppModesToSettings(app.getSettings(), true);
 	}
 
 	public static boolean changeProfileAvailability(ApplicationMode mode, boolean isSelected, OsmandApplication app) {
