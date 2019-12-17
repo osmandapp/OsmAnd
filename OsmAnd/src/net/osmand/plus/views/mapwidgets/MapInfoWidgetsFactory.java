@@ -1128,8 +1128,8 @@ public class MapInfoWidgetsFactory {
 					mapRenderRepo.getSearchRequestWithAppliedCustomRules(storage, nightMode);
 
 			renderingReq.setInitialTagValueZoom("highway", "secondary", 15, null);
-//			renderingReq.setIntFilter(renderingReq.ALL.R_TEXT_LENGTH, ref.length());
-//			renderingReq.setStringFilter(renderingReq.ALL.R_NAME_TAG, tagName);
+			renderingReq.setIntFilter(renderingReq.ALL.R_TEXT_LENGTH, ref.length());
+			renderingReq.setStringFilter(renderingReq.ALL.R_NAME_TAG, "ref");
 
 			OsmandRenderer.RenderingContext rc = new OsmandRenderer.RenderingContext(context);
 			TextRenderer textRenderer = new TextRenderer(context);
