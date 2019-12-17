@@ -562,8 +562,7 @@ public class ApplicationMode {
 
 	public void setDefaultSpeed(OsmandApplication app, float defaultSpeed) {
 		this.defaultSpeed = defaultSpeed;
-		app.getSettings().DEFAULT_SPEED.set(defaultSpeed);
-
+		app.getSettings().DEFAULT_SPEED.setModeValue(this, defaultSpeed);
 	}
 
 	public void resetDefaultSpeed(OsmandApplication app) {
