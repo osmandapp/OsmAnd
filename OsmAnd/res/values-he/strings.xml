@@ -95,8 +95,8 @@
     <string name="offline_navigation_not_available">ניווט בלתי מקוון ב־OsmAnd אינו זמין נכון לעכשיו.</string>
     <string name="left_side_navigation">כיוון תנועה שמאלי</string>
     <string name="left_side_navigation_descr">מדינות בהן נוהגים בצד השמאלי של הדרך (לא תקף לישראל).</string>
-    <string name="unknown_from_location">נקודת היציאה לא נקבעה עדיין</string>
-    <string name="unknown_location">המיקום עדיין לא ידוע</string>
+    <string name="unknown_from_location">נקודת היציאה לא נקבעה עדיין.</string>
+    <string name="unknown_location">המיקום עדיין לא ידוע.</string>
     <string name="modify_transparency">הגדרת השקיפות (0 - שקוף, 255 - אטום)</string>
     <string name="confirm_interrupt_download">לבטל הורדה\?</string>
     <string name="map_widget_fluorescent">הארת מסלולים</string>
@@ -2768,13 +2768,13 @@
     <string name="hide_full_description">הסתרת התיאור המלא</string>
     <string name="show_full_description">הצגת התיאור המלא</string>
     <string name="nautical_render_descr">לניווט ימי. לרבות מצופים, מגדלורים, מסלולי נהרות, סימונים ומסלולים לניווט בים, מעגנים, שירותי סימונים ימיים וקווי מתאר לתיאור עומק.</string>
-    <string name="ski_map_render_descr">סגנון גלישת סקי. תכונות מפתח: עיבוד מסלולי גלישה, מעליות סקי ותכונות סקי נוספות בדרך נוחה. עצמים משניים במפה פחות מושכים תשומת לב.</string>
+    <string name="ski_map_render_descr">לגלישת סקי. מציע מסלולי גלישה, מעליות סקי ותכונות סקי נוספות בדרך נוחה. מעמעם עצמים משניים במפה.</string>
     <string name="light_rs_render_descr">סגנון נהיגה פשוט. מצב לילה עדין, לרבות קווי מתאר, כבישים בניגודיות גבוהה ובכתום, פריטים משניים במפה מעומעמים.</string>
     <string name="topo_render_descr">סגנונות ניגודיות תוכננו בעיקר לטובת טיולי הרים, מסלולי טיול ורכיבה על אופניים בטבע. תצוגה מותאמת לקריאה בתנאי תאורת חוץ מורכבים. תכונות מפתח: ניגודיות בין דרכים לעצמים בטבע, סוגים שונים של מסלולים, קווי מתאר עם הגדרות מתקדמות, פרטים נוספים ברמות תקריב מתואמות מעבר לסגנון בררת המחדל. אפשרות שלמות משטח מאפשרת להבדיל בין דרכים עם איכות משטח שונה. אין מצב לילה.</string>
     <string name="mapnik_render_descr">סגנון ‚Mapnik’ מיושן כבררת מחדל. הצבעים דומים ל־‚Mapnik’.</string>
     <string name="default_render_descr">סגנון מטרה כללית. ערים צפופות מופיעות בצורה נקייה. תכונות מפתח: קווי מתאר, שלמות המשטח, הגבלות גישה, סימוני מספרי כבישים, עיבוד נתיבים לפי מדד SAC, פריטי ספורט מים לבנים.</string>
     <string name="shared_string_bookmark">סימנייה</string>
-    <string name="off_road_render_descr">מתאים לנהיגת שטח. מתאים לשימוש עם תמונות לוויין ירוקות כמפה בשכבה שמתחת. נקודות מפתח: דרכים ראשיות צרות יותר, המסלולים, דרכי הגישה, מסלולי האופניים ודרכים נוספות עבים יותר.</string>
+    <string name="off_road_render_descr">לנהיגת שטח לפי סגנון ‚טופוגרפיה’ מתאים לשימוש עם תמונות לוויין ירוקות כשכבה שמתחת. דרכים ראשיות צרות יותר, המסלולים, דרכי הגישה, מסלולי האופניים ודרכים נוספות עבים יותר.</string>
     <string name="touring_view_render_descr">סגנון פירוט מדויק לטובת תיירות. כולל את כל אפשרויות התצוגה של בררת המחדל, בנוסף: מציג כמה שיותר פרטים ככל הניתן, במיוחד את כל הדרכים, השבילים ודרכי טיול נוספות. הבחנה חזותית ברורה בין כל סוגי הדרכים השונים, העלאת זיכרונות בתצורת אטלסים לתיירות. ערכת צבעים בניגודיות גבוהה לשימוש בחוץ לצד מצבי יום ולילה.</string>
     <string name="access_intermediate_arrival_time">זמן הגעה לנקודת ביניים</string>
     <string name="map_widget_intermediate_time">זמן ביניים</string>
@@ -3391,4 +3391,9 @@
     <string name="street_city">%1$s, %2$s</string>
     <string name="personal_category_name">אישי</string>
     <string name="shared_string_downloading_formatted">%s בהורדה</string>
+    <string name="routing_attr_allow_classic_only_description">מסלולים שעבור גרומינג לסגנון קלסי רק ללא מסלולי ההחלקה. לרבות מסלולים שעברו גרומינג על ידי אופנוע שלג עם תוואי רופף ומסלולים שנסללו ידנית על ידי גולשי סקי.</string>
+    <string name="routing_attr_difficulty_preference_description">להעדיף מסלולים ברמת הקושי הזו, למרות שניתוב דרך מסלולים קשים או קלים יותר עדיין אפשרי אם מדובר במסלולים יותר קצרים.</string>
+    <string name="routing_attr_freeride_policy_description">מסלולי גלישה חופשית ומחוץ לסימון הם מסלולים ומעברים בלתי רשמיים. בדרך כלל לא עברו גרומינג, אינם מתוחזקים באופן רשמי ואינם מפוקחים בשעות הערב. הכניסה על אחריותך בלבד.</string>
+    <string name="rendering_value_thick_name">עבה</string>
+    <string name="desert_render_descr">למדבריות ואזורים נוספים עם אוכלוסיה דלילה.</string>
 </resources>

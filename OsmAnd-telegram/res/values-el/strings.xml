@@ -22,4 +22,7 @@
     <string name="si_nm">Ναυτικά μίλια</string>
     <string name="si_mi_meters">Μίλια/μέτρα</string>
     <string name="shared_string_all">Όλα</string>
+    <string name="altitude">Υψόμετρο</string>
+    <string name="shared_string_name">Όνομα</string>
+    <string name="osmand_service">Κατάσταση παρασκηνίου</string>
 </resources>
