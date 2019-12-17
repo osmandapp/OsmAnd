@@ -3403,4 +3403,6 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="street_city">%1$s, %2$s</string>
     <string name="personal_category_name">Personale</string>
     <string name="shared_string_downloading_formatted">Iscarrighende %s</string>
+    <string name="rendering_value_thick_name">Grussa</string>
+    <string name="desert_render_descr">Pro sos desertos e sas àteras àreas cun una populatzione minore.</string>
 </resources>
