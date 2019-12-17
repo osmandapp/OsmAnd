@@ -293,7 +293,7 @@ public class SettingsMonitoringActivity extends SettingsBaseActivity {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				if (which == 0) {
-					settings.setSharedGeneralPreference(prefId, newValue);
+					settings.setPreferenceForAllModes(prefId, newValue);
 				} else {
 					settings.setPreference(prefId, newValue);
 				}
