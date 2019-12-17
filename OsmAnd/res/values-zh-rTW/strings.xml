@@ -189,8 +189,8 @@
     <string name="offline_navigation_not_available">OsmAnd 離線導航，暫時不能使用。</string>
     <string name="left_side_navigation">靠左行駛</string>
     <string name="left_side_navigation_descr">給那些在道路左側行駛的國家。</string>
-    <string name="unknown_from_location">出發點尚未決定</string>
-    <string name="unknown_location">未知地理位置</string>
+    <string name="unknown_from_location">出發點尚未決定。</string>
+    <string name="unknown_location">未知地理位置。</string>
     <string name="modify_transparency">設定透明度（0 - 透明, 255 - 不透明）</string>
     <string name="confirm_interrupt_download">取消下載？</string>
     <string name="first_time_msg">感謝您使用 OsmAnd。透過「設定」-&gt;「管理地圖檔案」下載地區的資料供離線使用，以便檢視地圖，位置的地址、查看 POI、尋找大眾運輸工具等等。</string>
@@ -3391,4 +3391,6 @@
     <string name="street_city">%1$s, %2$s</string>
     <string name="personal_category_name">個人</string>
     <string name="shared_string_downloading_formatted">正在下載 %s</string>
+    <string name="rendering_value_thick_name">密集</string>
+    <string name="desert_render_descr">適用於沙漠或其他人煙稀少的地區。</string>
 </resources>
