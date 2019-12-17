@@ -3250,4 +3250,6 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="rendering_attr_piste_difficulty_extreme_name">Extrém</string>
     <string name="rendering_attr_piste_difficulty_undefined_name">Meghatározatlan</string>
     <string name="routeInfo_piste_difficulty_name">Sípálya nehézsége</string>
+    <string name="rendering_value_thick_name">Vastag</string>
+    <string name="desert_render_descr">Sivatagokhoz és más ritkán lakott területekhez.</string>
 </resources>
