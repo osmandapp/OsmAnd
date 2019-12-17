@@ -236,8 +236,8 @@
     <string name="rendering_attr_hmRendered_name">Haritayı daha detaylı göster</string>
     <string name="address_search_desc">Adres arama</string>
     <string name="favourites_search_desc">Sık Kullanılanları aramanın bir yolu</string>
-    <string name="unknown_from_location">Kalkış noktası henüz belirlenmedi</string>
-    <string name="unknown_location">Konum henüz bilinmiyor</string>
+    <string name="unknown_from_location">Kalkış noktası henüz belirlenmedi.</string>
+    <string name="unknown_location">Konum henüz bilinmiyor.</string>
     <string name="confirm_interrupt_download">İndirme iptal edilsin mi\?</string>
     <string name="select_index_file_to_download">Hiçbir şey bulunamadı. Eğer bölgenizi bulamıyorsanız, kendiniz yapabilirsiniz (bakınız: https://osmand.net).</string>
     <string name="local_indexes_cat_map">Standart haritalar (vektör)</string>
@@ -3354,4 +3354,6 @@
     <string name="street_city">%1$s, %2$s</string>
     <string name="personal_category_name">Kişisel</string>
     <string name="shared_string_downloading_formatted">%s indiriliyor</string>
+    <string name="rendering_value_thick_name">Kalın</string>
+    <string name="desert_render_descr">Çöller ve diğer seyrek nüfuslu alanlar için.</string>
 </resources>
