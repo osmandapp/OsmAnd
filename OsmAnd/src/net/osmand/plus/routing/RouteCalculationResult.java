@@ -322,37 +322,35 @@ public class RouteCalculationResult {
 						info.routeEndPointOffset = roundAboutEnd;
 					}
 					RouteSegmentResult next = list.get(lind);
-					info.setRef(next.getObject().getRef(ctx.getSettings().MAP_PREFERRED_LOCALE.get(), 
-							ctx.getSettings().MAP_TRANSLITERATE_NAMES.get(), next.isForwardDirection()));
+					String ref = next.getObject().getRef(ctx.getSettings().MAP_PREFERRED_LOCALE.get(),
+							ctx.getSettings().MAP_TRANSLITERATE_NAMES.get(), next.isForwardDirection());
+					info.setRef(ref);
 					info.setStreetName(next.getObject().getName(ctx.getSettings().MAP_PREFERRED_LOCALE.get(), 
 							ctx.getSettings().MAP_TRANSLITERATE_NAMES.get()));
 					info.setDestinationName(next.getObject().getDestinationName(ctx.getSettings().MAP_PREFERRED_LOCALE.get(),
 							ctx.getSettings().MAP_TRANSLITERATE_NAMES.get(), next.isForwardDirection()));
+
+					//	Search for nearest shield properties
+					for (int j = lind; j < list.size(); j++) {
+						RouteSegmentResult segment = list.get(j);
+						String segmentRef = segment.getObject().getRef("", false,
+								segment.isForwardDirection());
+						//	if it's the same road
+						if (segmentRef != null && segmentRef.equals(ref)) {
+							String shieldColor = segment.getObject().getShieldColor();
+							String shieldShape = segment.getObject().getShieldShape();
+							if (shieldColor != null || shieldShape != null) {
+								info.setShieldColor(shieldColor != null ? shieldColor : "white");
+								info.setShieldShape(shieldShape != null ? shieldShape : "square");
+								break;
+							}
+						}
+					}
+
 					if (s.getObject().isExitPoint() && next.getObject().isMotorWayLink()) {
 						ExitInfo exitInfo = new ExitInfo();
 						exitInfo.setRef(next.getObject().getExitRef());
 						exitInfo.setExitStreetName(next.getObject().getExitName());
-						String shieldName = next.getObject().getDestinationRef(next.isForwardDirection());
-						exitInfo.setShieldName(shieldName);
-
-						//	Search for nearest shield properties
-						for (int j = lind; j < list.size(); j++) {
-							RouteSegmentResult segment = list.get(j);
-							String segmentRef = segment.getObject().getRef("", false, segment.isForwardDirection());
-								//	if it's the same road
-								if (segmentRef != null && segmentRef.equals(shieldName)) {
-								String shieldColor = segment.getObject().getShieldColor();
-								String shieldShape = segment.getObject().getShieldShape();
-									if (shieldColor != null || shieldShape != null) {
-										exitInfo.setShieldIconName((shieldColor != null ? shieldColor : "white")
-												+ "_"
-												+ (shieldShape != null ? shieldShape : "square")
-												+ "_"
-												+ shieldName.length() + "_" + "road_shield");
-									break;
-								}
-							}
-						}
 						info.setExitInfo(exitInfo);
 					}
 				}

@@ -25,6 +25,10 @@ public class RouteDirectionInfo {
 	
 	private String destinationName;
 
+	private String shieldColor;
+
+	private String shieldShape;
+
 	@Nullable
 	private ExitInfo exitInfo;
 
@@ -120,5 +124,21 @@ public class RouteDirectionInfo {
 
 	public void setExitInfo(@Nullable ExitInfo exitInfo) {
 		this.exitInfo = exitInfo;
+	}
+
+	public String getShieldColor() {
+		return shieldColor;
+	}
+
+	public void setShieldColor(String shieldColor) {
+		this.shieldColor = shieldColor;
+	}
+
+	public String getShieldShape() {
+		return shieldShape;
+	}
+
+	public void setShieldShape(String shieldShape) {
+		this.shieldShape = shieldShape;
 	}
 }

@@ -626,7 +626,7 @@ public class VoiceRouter {
 		return new StreetName(result);
 	}
 
-	private StreetName getSpeakableExitName(ExitInfo exitInfo, boolean includeDest) {
+	private StreetName getSpeakableExitName(RouteDirectionInfo routeInfo, ExitInfo exitInfo, boolean includeDest) {
 		Map<String, String> result = new HashMap<>();
 		if (exitInfo == null || !router.getSettings().SPEAK_STREET_NAMES.get()) {
 			return new StreetName(result);
@@ -634,7 +634,7 @@ public class VoiceRouter {
 		if (player != null && player.supportsStructuredStreetNames()) {
 			result.put(TO_REF, getNonNullString(getSpeakablePointName(exitInfo.getRef())));
 			result.put(TO_STREET_NAME, getNonNullString(getSpeakablePointName(exitInfo.getExitStreetName())));
-			result.put(TO_DEST, includeDest ? getNonNullString(getSpeakablePointName(exitInfo.getShieldName())) : "");
+			result.put(TO_DEST, includeDest ? getNonNullString(getSpeakablePointName(routeInfo.getRef())) : "");
 		} else {
 			result.put(TO_REF, getNonNullString(getSpeakablePointName(exitInfo.getRef())));
 			result.put(TO_STREET_NAME, getNonNullString(getSpeakablePointName(exitInfo.getExitStreetName())));
@@ -698,7 +698,7 @@ public class VoiceRouter {
 			String lang = player.getLanguage();
 			if (tParam != null) {
 				if (exitInfo != null && (lang.startsWith("en") || lang.startsWith("ru"))) {
-					p.takeExit(tParam, dist, getSpeakableExitName(exitInfo, true));
+					p.takeExit(tParam, dist, getSpeakableExitName(next, exitInfo, true));
 				} else {
 					p.turn(tParam, dist, getSpeakableStreetName(currentSegment, next, true));
 				}
@@ -772,7 +772,7 @@ public class VoiceRouter {
 			String lang = player.getLanguage();
 			if (tParam != null) {
 				if (exitInfo != null && (lang.startsWith("en") || lang.startsWith("ru"))) {
-					p.takeExit(tParam, getSpeakableExitName(exitInfo, !suppressDest));
+					p.takeExit(tParam, getSpeakableExitName(next, exitInfo, !suppressDest));
 				} else {
 					p.turn(tParam, getSpeakableStreetName(currentSegment, next, !suppressDest));
 				}

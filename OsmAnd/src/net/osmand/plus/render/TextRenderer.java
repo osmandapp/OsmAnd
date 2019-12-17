@@ -43,7 +43,7 @@ public class TextRenderer {
 	private Typeface italicTypeface;
 	private Typeface boldTypeface;
 
-	static class TextDrawInfo {
+	public static class TextDrawInfo {
 
 		public TextDrawInfo(String text) {
 			this.text = text;
@@ -288,7 +288,7 @@ public class TextRenderer {
 		}
 	}
 
-	private void drawShieldIcon(RenderingContext rc, Canvas cv, TextDrawInfo text, String sr) {
+	public void drawShieldIcon(RenderingContext rc, Canvas cv, TextDrawInfo text, String sr) {
 		if (sr != null) {
 			float coef = rc.getDensityValue(rc.screenDensityRatio * rc.textScale);
 			Bitmap ico = RenderingIcons.getIcon(context, sr, true);
@@ -308,7 +308,7 @@ public class TextRenderer {
 		}
 	}
 
-	private void drawWrappedText(Canvas cv, TextDrawInfo text, float textSize) {
+	public void drawWrappedText(Canvas cv, TextDrawInfo text, float textSize) {
 		if (text.textWrap == 0) {
 			// set maximum for all text
 			text.textWrap = 40;
