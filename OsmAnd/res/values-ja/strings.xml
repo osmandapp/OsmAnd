@@ -1491,7 +1491,7 @@ POIの更新は利用できません</string>
 \n特別なマップのダウンロードは必要なく、標準マップから生成されます。 
 \n 
 \n設定の有効無効化で元に戻せますが、[マップ設定]下の[マップスタイル]を変更することで必要に応じて切り替えることも出来ます。</string>
-    <string name="plugin_nautical_name">航海マップ表示</string>
+    <string name="plugin_nautical_name">航路マップ表示</string>
     <string name="local_osm_changes_upload_all_confirm">%1$dカ所の変更をOSMにアップロードしてもよろしいですか？</string>
     <string name="plugin_nautical_descr">このプラグインはOsmAndのマップ画面に海洋および河川移動時に便利なマップを反映させることができ、ボート、セーリング、その他のウォータースポーツに向けた機能を含んでいます。 
 \n 
@@ -1516,7 +1516,7 @@ POIの更新は利用できません</string>
     <string name="device_memory">本体メモリー</string>
     <string name="rendering_attr_pisteGrooming_name">ゲレンデ圧雪</string>
     <string name="world_ski_missing">スキーマップを表示するためには専用のオフラインマップのダウンロードが必要</string>
-    <string name="nautical_maps_missing">航海マップを表示するためには専用のオフラインマップのダウンロードが必要です</string>
+    <string name="nautical_maps_missing">航路マップを表示するためには専用のオフラインマップのダウンロードが必要です</string>
     <string name="edit_group">グループ編集</string>
     <string name="shared_string_release">リリース</string>
     <string name="plugin_install_needs_network">このプラグインのインストールには、オンライン環境が必要です。</string>
@@ -1717,7 +1717,7 @@ POIの更新は利用できません</string>
     <string name="show_free_version_banner">無料版のバナーを表示</string>
     <string name="show_free_version_banner_description">有料版でも、ダウンロード画面の無料版バナー広告を見ることが出来ます</string>
     <string name="buy">購入</string>
-    <string name="activate_seamarks_plugin">\'航海マップ表示\'プラグインを有効化してください</string>
+    <string name="activate_seamarks_plugin">\'航路マップ表示\'プラグインを有効化してください</string>
     <string name="activate_srtm_plugin">SRTMプラグインを有効にしてください</string>
     <string name="later">後で</string>
     <string name="get_full_version">フルバージョンを入手</string>
@@ -2233,7 +2233,7 @@ POIの更新は利用できません</string>
     <string name="sea_depth_thanks">海洋等深線データを購入していただき、ありがとうございます</string>
     <string name="index_item_depth_contours_osmand_ext">海洋等深線データ</string>
     <string name="download_depth_countours">海洋等深線データ</string>
-    <string name="nautical_maps">航海マップ</string>
+    <string name="nautical_maps">航路マップ</string>
     <string name="analyze_on_map">分析をマップ上で閲覧</string>
     <string name="shared_string_visible">表示</string>
     <string name="fonts_header">マップ用フォント</string>
@@ -2825,7 +2825,7 @@ POIの更新は利用できません</string>
     <string name="day_off_label">OFF</string>
     <string name="winter_and_ski_renderer">冬期およびスキー</string>
     <string name="touring_view_renderer">ツーリングビュー</string>
-    <string name="nautical_renderer">航海</string>
+    <string name="nautical_renderer">船舶</string>
     <string name="copy_location_name">場所/POI名称のコピー</string>
     <string name="toast_empty_name_error">名前の付けられていない場所</string>
     <string name="tunnel_warning">前方にトンネル有り</string>
