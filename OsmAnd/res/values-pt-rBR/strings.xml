@@ -1808,7 +1808,7 @@ Pôr do Sol: %2$s</string>
     <string name="shared_string_near">Perto de</string>
     <string name="no_address_found">Sem endereço determinado</string>
     <string name="looking_up_address">Procurando endereço</string>
-    <string name="rendering_attr_horseRoutes_name">Rotas para cavalos</string>
+    <string name="rendering_attr_horseRoutes_name">Rotas hípicas</string>
     <string name="update">Atualizar</string>
     <string name="only_download_over_wifi">Somente baixar via Wi-Fi</string>
     <string name="live_update">Atualização ao vivo</string>
@@ -2278,7 +2278,7 @@ Pôr do Sol: %2$s</string>
     <string name="translit_names">Transliterar nomes</string>
     <string name="import_track_desc">Arquivo %1$s não possui pontos de passagem, importe-o como uma trilha?</string>
     <string name="add_segment_to_the_track">Adicionar a um arquivo GPX</string>
-    <string name="empty_state_av_notes_desc">Adicione nota de áudio, vídeo ou foto em qualquer ponto do mapa, usando o widget ou o menu de contexto.</string>
+    <string name="empty_state_av_notes_desc">Adicione notas de áudio, vídeo ou foto em qualquer ponto do mapa, usando o widget ou o menu de contexto.</string>
     <string name="quick_action_add_destination_desc">Um botão que marca o centro da tela como o destino da rota, qualquer destino anteriormente selecionado se torna o último destino intermediário.</string>
     <string name="quick_action_replace_destination_desc">Tocar no botão de ação marcará o centro da tela como novo destino da rota, substituindo o destino selecionado anteriormente (se houver).</string>
     <string name="quick_action_add_first_intermediate_desc">Um botão que adiciona no centro da tela o primeiro destino intermédio.</string>
@@ -2604,7 +2604,7 @@ Pôr do Sol: %2$s</string>
     <string name="enter_the_file_name">Digite o nome do arquivo.</string>
     <string name="map_import_error">Erro de importação de mapa</string>
     <string name="map_imported_successfully">Mapa importado</string>
-    <string name="rendering_attr_whiteWaterSports_name">Esportes aquáticos</string>
+    <string name="rendering_attr_whiteWaterSports_name">Esportes em corredeiras</string>
     <string name="make_as_start_point">Converter em ponto de partida</string>
     <string name="select_waypoints_category_description">Adicione todos os pontos da trilha, ou selecione categorias separadas.</string>
     <string name="shared_string_total">Total</string>
