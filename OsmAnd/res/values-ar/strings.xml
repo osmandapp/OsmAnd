@@ -1965,7 +1965,7 @@
 \nليست هناك حاجة لتحميل خريطة خاصة،الرؤية يتم إنشاءها من خلال خرائطنا المحلية. 
 \n 
 \nهذه الرؤية يمكن التراجع عنها إما عن طريق تعطيلها هنا، أو تغيير \'نمط الخريطة\' في \'ضبط الخريطة\' حسب الرغبة.</string>
-    <string name="create_poi_link_to_osm_doc"> string name=\"lat_lon_pattern\"&gt;خط العرض: %1$.5f خط الطول: %2$.5f&lt;/string </string>
+    <string name="create_poi_link_to_osm_doc">تصنيف الخريطة &lt;u/&gt; على الإنترنت&lt;u&gt; مع الصور.</string>
     <string name="background_service_wait_int_descr">تعيين الحد الأقصى لوقت الانتظار لكل إصلاح موقع في الخلفية.</string>
     <string name="background_service_wait_int">الانتظار الأقصى للإصلاح</string>
     <string name="voice_data_not_supported">إصدار غير معتمد من البيانات الصوتية</string>
