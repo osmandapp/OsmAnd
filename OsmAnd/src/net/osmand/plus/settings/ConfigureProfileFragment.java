@@ -245,9 +245,14 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 		if (ctx == null) {
 			return;
 		}
+
 		Preference configureMap = findPreference(PROFILE_APPEARANCE);
-		configureMap.setIcon(getContentIcon(getSelectedAppMode().getIconRes()));
-		configureMap.setFragment(ProfileAppearanceFragment.class.getName());
+		if (!getSelectedAppMode().equals(ApplicationMode.DEFAULT)) {
+			configureMap.setIcon(getContentIcon(getSelectedAppMode().getIconRes()));
+			configureMap.setFragment(ProfileAppearanceFragment.TAG);
+		} else {
+			configureMap.setVisible(false);
+		}
 	}
 
 	private void setupExportProfilePref() {

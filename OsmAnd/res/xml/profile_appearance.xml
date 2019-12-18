@@ -52,12 +52,12 @@
 	<PreferenceCategory
 		android:key="select_map_icon"
 		android:layout="@layout/preference_category_with_descr"
-		android:title="@string/map_during_navigation" />
+		android:title="@string/select_map_icon" />
 
 	<Preference
 		android:key="map_icon_items"
 		android:layout="@layout/preference_with_descr"
-		android:title="@string/map_during_navigation"
+		android:title="@string/select_map_icon"
 		android:selectable="false"/>
 
 	<Preference
@@ -67,12 +67,12 @@
 	<PreferenceCategory
 		android:key="select_nav_icon"
 		android:layout="@layout/preference_category_with_descr"
-		android:title="@string/map_during_navigation" />
+		android:title="@string/select_navigation_icon" />
 
 	<Preference
 		android:key="nav_icon_items"
 		android:layout="@layout/preference_with_descr"
-		android:title="@string/map_during_navigation"
+		android:title="@string/select_navigation_icon"
 		android:selectable="false"/>
 
 </PreferenceScreen>

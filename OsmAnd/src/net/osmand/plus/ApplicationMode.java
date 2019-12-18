@@ -3,6 +3,7 @@ package net.osmand.plus;
 import android.content.Context;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
+import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 
 import com.google.gson.Gson;
@@ -860,6 +861,81 @@ public class ApplicationMode {
 
 		public int getColor(boolean nightMode) {
 			return nightMode ? nightColor : dayColor;
+		}
+	}
+
+	public enum ProfileIcons {
+		CAR(R.drawable.ic_action_car_dark, R.string.app_mode_car, "ic_action_car_dark", false),
+		TAXI(R.drawable.ic_action_taxi, R.string.app_mode_taxi, "ic_action_taxi", false),
+		TRUCK(R.drawable.ic_action_truck_dark, R.string.app_mode_truck, "ic_action_truck_dark", false),
+		SHUTTLE_BUS(R.drawable.ic_action_shuttle_bus, R.string.app_mode_shuttle_bus, "ic_action_shuttle_bus", false),
+		BUS(R.drawable.ic_action_bus_dark, R.string.app_mode_bus, "ic_action_bus_dark", false),
+		SUBWAY(R.drawable.ic_action_subway, R.string.app_mode_subway, "ic_action_subway", false),
+		MOTORCYCLE(R.drawable.ic_action_motorcycle_dark, R.string.app_mode_motorcycle, "ic_action_motorcycle_dark", false),
+		BICYCLE(R.drawable.ic_action_bicycle_dark, R.string.app_mode_bicycle, "ic_action_bicycle_dark", false),
+		HORSE(R.drawable.ic_action_horse, R.string.app_mode_horse, "ic_action_horse", false),
+		PEDESTRIAN(R.drawable.ic_action_pedestrian_dark, R.string.app_mode_pedestrian, "ic_action_pedestrian_dark", false),
+		TREKKING(R.drawable.ic_action_trekking_dark, R.string.app_mode_hiking, "ic_action_trekking_dark", false),
+		SKIING(R.drawable.ic_action_skiing, R.string.app_mode_skiing, "ic_action_skiing", false),
+		SAIL_BOAT(R.drawable.ic_action_sail_boat_dark, R.string.app_mode_boat, "ic_action_sail_boat_dark", false),
+		AIRCRAFT(R.drawable.ic_action_aircraft, R.string.app_mode_aircraft, "ic_action_aircraft", false),
+		HELICOPTER(R.drawable.ic_action_helicopter, R.string.app_mode_helicopter, "ic_action_helicopter", false),
+		TRANSPORTER(R.drawable.ic_action_personal_transporter, R.string.app_mode_personal_transporter, "ic_action_personal_transporter", false),
+		MONOWHEEL(R.drawable.ic_action_monowheel, R.string.app_mode_monowheel, "ic_action_monowheel", false),
+		SCOOTER(R.drawable.ic_action_scooter, R.string.app_mode_scooter, "ic_action_scooter", false),
+		UFO(R.drawable.ic_action_ufo, R.string.app_mode_ufo, "ic_action_ufo", false),
+		OFFROAD(R.drawable.ic_action_offroad, R.string.app_mode_offroad, "ic_action_offroad", false),
+		CAMPERVAN(R.drawable.ic_action_campervan, R.string.app_mode_campervan, "ic_action_campervan", false),
+		CAMPER(R.drawable.ic_action_camper, R.string.app_mode_camper, "ic_action_camper", false),
+		PICKUP_TRUCK(R.drawable.ic_action_pickup_truck, R.string.app_mode_pickup_truck, "ic_action_pickup_truck", false),
+		WAGON(R.drawable.ic_action_wagon, R.string.app_mode_wagon, "ic_action_wagon", false),
+		UTV(R.drawable.ic_action_utv, R.string.app_mode_utv, "ic_action_utv", false);
+
+		@DrawableRes
+		private int resId;
+		@StringRes
+		private int titleId;
+		private String resStringId;
+		private boolean isSelected;
+
+		ProfileIcons(@DrawableRes int resId, @StringRes int titleId, @NonNull String resStringId, boolean isSelected) {
+			this.resId = resId;
+			this.titleId = titleId;
+			this.isSelected = isSelected;
+			this.resStringId = resStringId;
+		}
+
+		public static ArrayList<Integer> getIcons() {
+			ArrayList<Integer> list = new ArrayList<>();
+			for (ProfileIcons pi : values()) {
+				list.add(pi.resId);
+			}
+			return list;
+		}
+
+		public int getResId() {
+			return resId;
+		}
+
+		public int getTitleId() {
+			return titleId;
+		}
+
+		public String getResStringId() {
+			return resStringId;
+		}
+
+		public static String getResStringByResId(int resId) {
+			for (ProfileIcons pi : values()) {
+				if (pi.resId == resId) {
+					return pi.resStringId;
+				}
+			}
+			return CAR.getResStringId();
+		}
+
+		public boolean isSelected() {
+			return isSelected;
 		}
 	}
 }
