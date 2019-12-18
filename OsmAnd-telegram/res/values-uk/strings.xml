@@ -253,5 +253,6 @@
     <string name="saved_messages">Збережені повідомлення</string>
     <string name="time_zone_descr">Оберіть часовий пояс щоб відобразити повідомлення у вашому розташуванні.</string>
     <string name="time_zone">Часовий пояс</string>
-    <string name="units_and_formats">Одиниці / Виміри</string>
+    <string name="units_and_formats">Одиниці та формати</string>
+    <string name="unit_of_length">Одиниці вимірювання довжини</string>
 </resources>
