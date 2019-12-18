@@ -695,16 +695,16 @@ public class RouteDataObject {
 		return false;
 	}
 
-	public boolean isMotorWayLink() {
-		int sz = types.length;
-		for (int i = 0; i < sz; i++) {
-			RouteTypeRule r = region.quickGetEncodingRule(types[i]);
-			if (r.getTag().equals("highway") && r.getValue().equals("motorway_link")) {
-				return true;
-			}
-		}
-		return false;
-	}
+//	public boolean isMotorWayLink() {
+//		int sz = types.length;
+//		for (int i = 0; i < sz; i++) {
+//			RouteTypeRule r = region.quickGetEncodingRule(types[i]);
+//			if (r.getTag().equals("highway") && r.getValue().equals("motorway_link")) {
+//				return true;
+//			}
+//		}
+//		return false;
+//	}
 
 	public String getExitName() {
 		if (pointNames != null && pointNameTypes != null) {
@@ -742,27 +742,33 @@ public class RouteDataObject {
 		return null;
 	}
 
-	public String getShieldColor() {
+	public BinaryMapIndexReader.TagValuePair getShieldColor() {
 		int sz = types.length;
 		for (int i = 0; i < sz; i++) {
 			RouteTypeRule r = region.quickGetEncodingRule(types[i]);
-			if (r.getTag().equals("road_shield_color_1")
-					|| r.getTag().equals("road_shield_color_2")
-					|| r.getTag().equals("road_shield_color_3")) {
-				return r.getValue();
+			switch (r.getTag()) {
+				case "road_shield_color_1":
+					return new BinaryMapIndexReader.TagValuePair("road_shield_color_1", r.getValue(), 0);
+				case "road_shield_color_2":
+					return new BinaryMapIndexReader.TagValuePair("road_shield_color_2", r.getValue(), 0);
+				case "road_shield_color_3":
+					return new BinaryMapIndexReader.TagValuePair("road_shield_color_3", r.getValue(), 0);
 			}
 		}
 		return null;
 	}
 
-	public String getShieldShape() {
+	public BinaryMapIndexReader.TagValuePair getShieldShape() {
 		int sz = types.length;
 		for (int i = 0; i < sz; i++) {
 			RouteTypeRule r = region.quickGetEncodingRule(types[i]);
-			if (r.getTag().equals("road_shield_shape_1")
-					|| r.getTag().equals("road_shield_shape_2")
-					|| r.getTag().equals("road_shield_shape_3")) {
-				return r.getValue();
+			switch (r.getTag()) {
+				case "road_shield_shape_1":
+					return new BinaryMapIndexReader.TagValuePair("road_shield_shape_1", r.getValue(), 0);
+				case "road_shield_shape_2":
+					return new BinaryMapIndexReader.TagValuePair("road_shield_shape_2", r.getValue(), 0);
+				case "road_shield_shape_3":
+					return new BinaryMapIndexReader.TagValuePair("road_shield_shape_3", r.getValue(), 0);
 			}
 		}
 		return null;

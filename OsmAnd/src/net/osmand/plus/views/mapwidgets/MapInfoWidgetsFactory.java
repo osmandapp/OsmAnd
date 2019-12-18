@@ -1003,8 +1003,11 @@ public class MapInfoWidgetsFactory {
 								} else {
 									ref = directionInfo != null ? directionInfo.getRef() : null;
 									if (ref != null) {
-										setShield(shieldIcon, assembleShieldString(directionInfo.getShieldColor(),
-												directionInfo.getShieldShape(), ref.length()), ref);
+										setShield(shieldIcon, assembleShieldString(directionInfo.getShieldColorValue(),
+												directionInfo.getShieldShapeValue(), ref.length()), ref);
+										AndroidUiHelper.updateVisibility(shieldIcon, true);
+									} else {
+										AndroidUiHelper.updateVisibility(shieldIcon, false);
 									}
 									turnDrawable.setColor(R.color.nav_arrow);
 								}
@@ -1028,9 +1031,12 @@ public class MapInfoWidgetsFactory {
 							text = "";
 						}
 						if (ref != null) {
-							setShield(shieldIcon, assembleShieldString(next.getShieldColor(),
-									next.getShieldShape(),
+							setShield(shieldIcon, assembleShieldString(next.getShieldColorValue(),
+									next.getShieldShapeValue(),
 									ref.length()), ref);
+							AndroidUiHelper.updateVisibility(shieldIcon, true);
+						} else {
+							AndroidUiHelper.updateVisibility(shieldIcon, false);
 						}
 					} else {
 						text = null;
@@ -1049,9 +1055,12 @@ public class MapInfoWidgetsFactory {
 							"»");
 				}
 				if (ref != null) {
-					setShield(shieldIcon, assembleShieldString(rt.getShieldColor(),
-							rt.getShieldShape(),
+					setShield(shieldIcon, assembleShieldString(rt.getShieldColor().value,
+							rt.getShieldShape().value,
 							ref.length()), ref);
+					AndroidUiHelper.updateVisibility(shieldIcon, true);
+				}else {
+					AndroidUiHelper.updateVisibility(shieldIcon, false);
 				}
 				if (text == null) {
 					text = "";
@@ -1126,10 +1135,10 @@ public class MapInfoWidgetsFactory {
 			boolean nightMode = app.getDaynightHelper().isNightMode();
 			RenderingRuleSearchRequest renderingReq =
 					mapRenderRepo.getSearchRequestWithAppliedCustomRules(storage, nightMode);
-
 			renderingReq.setInitialTagValueZoom("highway", "secondary", 15, null);
 			renderingReq.setIntFilter(renderingReq.ALL.R_TEXT_LENGTH, ref.length());
 			renderingReq.setStringFilter(renderingReq.ALL.R_NAME_TAG, "ref");
+			renderingReq.search(RenderingRulesStorage.POINT_RULES);
 
 			OsmandRenderer.RenderingContext rc = new OsmandRenderer.RenderingContext(context);
 			TextRenderer textRenderer = new TextRenderer(context);

@@ -4,6 +4,8 @@ import android.content.Context;
 import android.support.annotation.Nullable;
 
 import net.osmand.Location;
+import net.osmand.PlatformUtil;
+import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.binary.RouteDataObject;
@@ -24,6 +26,8 @@ import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
+import org.apache.commons.logging.Log;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -31,6 +35,8 @@ import java.util.List;
 import static net.osmand.binary.RouteDataObject.HEIGHT_UNDEFINED;
 
 public class RouteCalculationResult {
+	private final static Log log = PlatformUtil.getLog(RouteCalculationResult.class);
+
 	private static double distanceClosestToIntermediate = 3000;
 	private static double distanceThresholdToIntermediate = 25;
 	// could not be null and immodifiable!
@@ -330,6 +336,14 @@ public class RouteCalculationResult {
 					info.setDestinationName(next.getObject().getDestinationName(ctx.getSettings().MAP_PREFERRED_LOCALE.get(),
 							ctx.getSettings().MAP_TRANSLITERATE_NAMES.get(), next.isForwardDirection()));
 
+					if (s.getObject().isExitPoint() && next.getObject().getHighway().equals("motorway_link")) {
+						ExitInfo exitInfo = new ExitInfo();
+						exitInfo.setRef(next.getObject().getExitRef());
+						exitInfo.setExitStreetName(next.getObject().getExitName());
+						info.setExitInfo(exitInfo);
+					}
+
+					String highwayTag = s.getObject().getHighway();
 					//	Search for nearest shield properties
 					for (int j = lind; j < list.size(); j++) {
 						RouteSegmentResult segment = list.get(j);
@@ -337,21 +351,19 @@ public class RouteCalculationResult {
 								segment.isForwardDirection());
 						//	if it's the same road
 						if (segmentRef != null && segmentRef.equals(ref)) {
-							String shieldColor = segment.getObject().getShieldColor();
-							String shieldShape = segment.getObject().getShieldShape();
-							if (shieldColor != null || shieldShape != null) {
-								info.setShieldColor(shieldColor != null ? shieldColor : "white");
-								info.setShieldShape(shieldShape != null ? shieldShape : "square");
+							BinaryMapIndexReader.TagValuePair colorPair = segment.getObject().getShieldColor();
+							BinaryMapIndexReader.TagValuePair shapePair = segment.getObject().getShieldShape();
+							if (colorPair != null || shapePair != null) {
+								info.setShieldColorValue(colorPair != null ? colorPair.value : "white");
+								info.setShieldShapeValue(shapePair != null ? shapePair.value : "square");
+								if (colorPair != null) {
+									info.setShieldIconName(getShieldIconName(ctx, ref, highwayTag, colorPair));
+								} else {
+									info.setShieldIconName(getShieldIconName(ctx, ref, highwayTag, shapePair));
+								}
 								break;
 							}
 						}
-					}
-
-					if (s.getObject().isExitPoint() && next.getObject().isMotorWayLink()) {
-						ExitInfo exitInfo = new ExitInfo();
-						exitInfo.setRef(next.getObject().getExitRef());
-						exitInfo.setExitStreetName(next.getObject().getExitName());
-						info.setExitInfo(exitInfo);
 					}
 				}
 
@@ -383,6 +395,32 @@ public class RouteCalculationResult {
 			prev.setAverageSpeed(prevDirectionDistance / prevDirectionTime);
 		}
 		return segmentsToPopulate;
+	}
+
+	private static String getShieldIconName(OsmandApplication ctx, String ref, String highwayTag,
+											BinaryMapIndexReader.TagValuePair pair) {
+		String shieldId = null;
+		RenderingRulesStorage currentRenderer = ctx.getRendererRegistry().getCurrentSelectedRenderer();
+		MapRenderRepositories maps = ctx.getResourceManager().getRenderer();
+		boolean nightMode = ctx.getDaynightHelper().isNightMode();
+		RenderingRuleSearchRequest request = maps.getSearchRequestWithAppliedCustomRules(currentRenderer, nightMode);
+		request.setInitialTagValueZoom("highway", highwayTag, 10, null);
+		request.setIntFilter(request.ALL.R_TEXT_LENGTH, ref.length());
+		request.setStringFilter(request.ALL.R_NAME_TAG, "road_ref_1");
+		request.setStringFilter(request.ALL.R_ADDITIONAL,
+				pair.tag + "=" + pair.value);
+		if (request.search(RenderingRulesStorage.TEXT_RULES)) {
+			if (request.getFloatPropertyValue(request.ALL.R_TEXT_SIZE) > 0) {
+				if (request.isSpecified(request.ALL.R_TEXT_SHIELD)) {
+					shieldId = request.getStringPropertyValue(request.ALL.R_TEXT_SHIELD);
+				}
+				if (request.isSpecified(request.ALL.R_ICON)) {
+					shieldId = request.getStringPropertyValue(request.ALL.R_ICON);
+				}
+			}
+		}
+		log.info("Shield name: " + shieldId);
+		return shieldId;
 	}
 	
 	protected static void addMissingTurnsToRoute(List<Location> locations, 
