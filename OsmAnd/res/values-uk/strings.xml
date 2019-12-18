@@ -22,8 +22,8 @@
     <string name="offline_navigation_not_available">Автономна навігація OsmAnd тимчасово не доступна.</string>
     <string name="left_side_navigation">Лівосторонній рух</string>
     <string name="left_side_navigation_descr">Для країн з лівостороннім рухом.</string>
-    <string name="unknown_from_location">Початкове місцезнаходження ще не визначено</string>
-    <string name="unknown_location">Розташування ще не визначено</string>
+    <string name="unknown_from_location">Початкове місцезнаходження ще не визначено.</string>
+    <string name="unknown_location">Розташування ще не визначено.</string>
     <string name="modify_transparency">Змінити прозорість (0 - прозорий, 255 - непрозорий)</string>
     <string name="confirm_interrupt_download">Скасувати завантаження файлу?</string>
     <string name="first_time_msg">Дякуємо за використання OsmAnd. Завантажуйте регіональні дані для використання в автономному режимі за допомогою пункту меню \'Налаштування\' → \'Управління мапами\' для перегляду мап, пошуку адрес, POI, громадського транспорту тощо.</string>
@@ -302,7 +302,7 @@
     <string name="preferred_locale">Мова інтерфейсу</string>
     <string name="shared_string_next">Наступний</string>
     <string name="shared_string_previous">Назад</string>
-    <string name="unit_of_length_descr">Змінити одиниці вимірювання довжини.</string>
+    <string name="unit_of_length_descr">Оберіть, на якій відстані вимірюється.</string>
     <string name="unit_of_length">Одиниці вимірювання довжини</string>
     <string name="si_mi_feet">Милі/фути</string>
     <string name="si_mi_yard">Милі/ярди</string>
@@ -3456,4 +3456,6 @@
     <string name="street_city">%1$s, %2$s</string>
     <string name="personal_category_name">Особистий</string>
     <string name="shared_string_downloading_formatted">Завантажується %s</string>
+    <string name="rendering_value_thick_name">Товсто</string>
+    <string name="desert_render_descr">Для пустель та інших малонаселених областей.</string>
 </resources>
