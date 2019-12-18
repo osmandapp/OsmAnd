@@ -255,4 +255,7 @@
     <string name="time_zone">Часовий пояс</string>
     <string name="units_and_formats">Одиниці та формати</string>
     <string name="unit_of_length">Одиниці вимірювання довжини</string>
+    <string name="unit_of_length_descr">Оберіть, на якій відстані вимірюється.</string>
+    <string name="unit_of_speed_system_descr">Визначити одиницю швидкості.</string>
+    <string name="unit_of_speed_system">Одиниця виміру швидкості</string>
 </resources>
