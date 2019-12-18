@@ -303,7 +303,7 @@
     <string name="shared_string_next">Наступний</string>
     <string name="shared_string_previous">Назад</string>
     <string name="unit_of_length_descr">Змінити одиниці вимірювання довжини.</string>
-    <string name="unit_of_length">Одиниці довжини</string>
+    <string name="unit_of_length">Одиниці вимірювання довжини</string>
     <string name="si_mi_feet">Милі/фути</string>
     <string name="si_mi_yard">Милі/ярди</string>
     <string name="si_km_m">Кілометри/метри</string>
@@ -3291,7 +3291,7 @@
     <string name="apply_to_all_profiles">Застосувати до всіх профілів</string>
     <string name="start_up_message_pref">Початкове повідомлення</string>
     <string name="analytics_pref_title">Аналітика</string>
-    <string name="units_and_formats">Одиниці / Виміри</string>
+    <string name="units_and_formats">Одиниці та формати</string>
     <string name="appearance">Зовнішній вигляд</string>
     <string name="map_look_descr">Вигляд мапи</string>
     <string name="map_look">Вигляд карти</string>
