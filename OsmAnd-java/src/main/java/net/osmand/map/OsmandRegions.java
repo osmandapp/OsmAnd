@@ -629,6 +629,7 @@ public class OsmandRegions {
 			return;
 		}
 		WorldRegion world = new WorldRegion(WorldRegion.WORLD);
+		initWorldRegion(world, WorldRegion.ANTARCTICA_REGION_ID);
 		initWorldRegion(world, WorldRegion.AFRICA_REGION_ID);
 		initWorldRegion(world, WorldRegion.ASIA_REGION_ID);
 		initWorldRegion(world, WorldRegion.CENTRAL_AMERICA_REGION_ID);
