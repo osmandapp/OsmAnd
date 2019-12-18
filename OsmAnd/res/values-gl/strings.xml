@@ -659,7 +659,7 @@
     <string name="unknown_location">A ubicación é aínda descoñecida</string>
     <string name="modify_transparency">Modificar a transparencia (0 - transparente, 255 - opaco)</string>
     <string name="confirm_interrupt_download">Desexas desbota-la baixada dos ficheiros\?</string>
-    <string name="first_time_msg">Grazas por empregar o OsmAnd. Para moitas das funcións desta aplicación fan falla algúns datos rexionais sen conexión que poden ser baixados dende «Axustes» → «Xestionar os ficheiros de mapas». Despois é posíbel ollar mapas, atopar enderezos, consultar puntos de interese (PDI) e atopar transporte público.</string>
+    <string name="first_time_msg">Grazas por empregar o OsmAnd. Para moitas das funcións desta aplicación fan falla algúns datos rexionais sen conexión que poden ser baixados dende os \'Axustes\' → \'Xestionar os ficheiros de mapas\'. Despois é posíbel ollar mapas, atopar enderezos, consultar puntos de interese (PDI) e atopar transporte público.</string>
     <string name="basemap_was_selected_to_download">Marcouse para baixa-lo mapa base, para que a aplicación funcione.</string>
     <string name="local_indexes_cat_tile">Mapas con conexión e en teselas baixadas</string>
     <string name="local_indexes_cat_map">Mapas normais (vectoriais)</string>
@@ -835,7 +835,7 @@
     <string name="file_can_not_be_renamed">Non é posíbel mudar o nome do ficheiro.</string>
     <string name="file_with_name_already_exists">Xa existe un ficheiro con ese nome.</string>
     <string name="shared_string_gpx_route">Itinerario de GPX</string>
-    <string name="poi_query_by_name_matches_categories">Hai varias categorías de PDE que responden á consulta:</string>
+    <string name="poi_query_by_name_matches_categories">Atopadas varias categorías de PDI relacionadas.</string>
     <string name="data_to_search_poi_not_available">Non hai datos locais presentes para procurar puntos de interese.</string>
     <string name="poi_filter_by_name">Procurar polo nome</string>
     <string name="old_poi_file_should_be_deleted">O ficheiro de datos do PDI «%1$s» é redundante e pode ser eliminado.</string>
@@ -1070,7 +1070,7 @@
     <string name="error_occurred_loading_gpx">Non foi posíbel carrega-los datos do GPX</string>
     <string name="send_report">Send report</string>
     <string name="none_region_found">Non foi posíbel atopar datos para as rexións no cartón de memoria.</string>
-    <string name="poi_namefinder_query_empty">Insira a consulta para atopar puntos de interese (PDI)</string>
+    <string name="poi_namefinder_query_empty">Escribir para atopar un PDI</string>
     <string name="any_poi">Calquera</string>
     <string name="thanks_yandex_traffic">Grazas a Yandex pola información do tráfico.</string>
     <string name="layer_yandex_traffic">Tráfico de Yandex</string>
@@ -1909,8 +1909,8 @@ Lon %2$s</string>
     <string name="save_track_precision">Precisión mínima para o rexistro</string>
     <string name="save_track_precision_descr">Filtro: Non rexistrar, alo menos que se acade esta precisión.</string>
     <string name="christmas_poi">PDI de Nadal</string>
-    <string name="christmas_desc">Anticipando as vacacións de Nadal e de Aninovo, pode decidir amosar puntos de interese asociados co Nadal: árbores de Nadal, mercados, etc.</string>
-    <string name="christmas_desc_q">Amosar PDI do Nadal\?</string>
+    <string name="christmas_desc">Anticipando as vacacións de Nadal e de Aninovo, podes decidir amosar puntos de interese asociados coma árbores de Nadal, mercados, etc.</string>
+    <string name="christmas_desc_q">Amosar PDI de Nadal\?</string>
     <string name="rendering_value_light_brown_name">Marrón claro</string>
     <string name="rendering_value_dark_brown_name">Marrón escuro</string>
     <string name="rendering_attr_contourColorScheme_name">Esquema de cores das liñas de nivel</string>
@@ -2247,7 +2247,7 @@ Lon %2$s</string>
     <string name="mapillary_widget">Trebello do Mapillary</string>
     <string name="mapillary">Mapillary</string>
     <string name="restart_search">Reiniciar procura</string>
-    <string name="increase_search_radius">Aumenta-lo raio da procura</string>
+    <string name="increase_search_radius">Aumentar o raio de procura</string>
     <string name="nothing_found">Non se atopou ren</string>
     <string name="quick_action_showhide_osmbugs_title">Amosar/Agochar as notas do OSM</string>
     <string name="quick_action_osmbugs_show">Amosar notas do OSM</string>
@@ -2447,7 +2447,7 @@ Lon %2$s</string>
     <string name="poi_cannot_be_found">Non foi posíbel atopar o nó ou a vía.</string>
     <string name="search_no_results_feedback">Sen resultados de procura\? Mándanos a túa opinión</string>
     <string name="commiting_way">Estase a envíar camiño…</string>
-    <string name="increase_search_radius_to">Aumenta-lo raio da procura para %1$s</string>
+    <string name="increase_search_radius_to">Aumentar o raio de procura para %1$s</string>
     <string name="shared_string_world">Mundo</string>
     <string name="coord_input_save_as_track">Gardar coma pista</string>
     <string name="coord_input_save_as_track_descr">Engadiches %1$s puntos. Insire un nome do ficheiro e preme en \"Gardar\".</string>
@@ -2512,7 +2512,7 @@ Lon %2$s</string>
     <string name="send_search_query_description">Mandaremos a consulta de procura: \"%1$s\", así coma a ubicación.
 \n
 \n Non se recompilan datos persoais, os datos de procura só son empregados para mellorar o algoritmo de procura.</string>
-    <string name="send_search_query">Enviar consulta da procura\?</string>
+    <string name="send_search_query">Enviar consulta de procura\?</string>
     <string name="point_deleted">Punto %1$s eliminado</string>
     <string name="coord_input_edit_point">Editar punto</string>
     <string name="coord_input_add_point">Engadir punto</string>
