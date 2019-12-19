@@ -3178,7 +3178,7 @@
     <string name="third_party_routing_type">Δρομολόγηση τρίτων</string>
     <string name="application_profiles_descr">Επιλέξτε τις κατατομές (προφίλ) που θα είναι ορατές στην εφαρμογή.</string>
     <string name="application_profiles">Κατατομές (προφίλ) εφαρμογής</string>
-    <string name="quick_action_need_to_add_item_to_list">Χρειάζεται να προσθέσετε τουλάχιστον ένα στοιχείο στον κατάλογο ρυθμίσεων Quick Action</string>
+    <string name="quick_action_need_to_add_item_to_list">Προσθέστε τουλάχιστον ένα στοιχείο στον κατάλογο ρυθμίσεων \'Quick action\'</string>
     <string name="routing_attr_piste_type_downhill_name">Αλπική/κατηφορική χιονοδρομία</string>
     <string name="routing_attr_piste_type_downhill_description">Πίστες για αλπική ή κατηφορική χιονοδρομία και πρόσβαση σε αναβατόρια.</string>
     <string name="routing_attr_piste_type_nordic_name">Εκτός πίστας/σκανδιναβική χιονοδρομία</string>

@@ -254,4 +254,8 @@
     <string name="units_and_formats">Unidades e formatos</string>
     <string name="unit_of_length_descr">Altere as unidades de medida.</string>
     <string name="unit_of_length">Unidades de medida</string>
+    <string name="time_zone_descr">Selecione o fuso horário para mostrar nas mensagens de localização.</string>
+    <string name="time_zone">Fuso horário</string>
+    <string name="unit_of_speed_system_descr">Defina a unidade de velocidade.</string>
+    <string name="unit_of_speed_system">Unidade de velocidade</string>
 </resources>
