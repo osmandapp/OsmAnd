@@ -1881,11 +1881,11 @@ Lon %2$s</string>
     <string name="no_waypoints_found">Non se atoparon puntos de pasaxe</string>
     <string name="show_legacy_search">Mostrar as buscas á antiga</string>
     <string name="show_legacy_search_desc">Activar as buscas á antiga na lista de gabetas</string>
-    <string name="routing_attr_allow_motorway_name">Permitir autoestradas</string>
-    <string name="routing_attr_allow_motorway_description">Permitir autoestradas.</string>
+    <string name="routing_attr_allow_motorway_name">Empregar autoestradas</string>
+    <string name="routing_attr_allow_motorway_description">Permite autoestradas.</string>
     <string name="upload_osm_note_description">Subir notas do OSM de xeito anónimo ou empregando o teu perfil do OpenStreetMap.org.</string>
     <string name="wiki_around">Artigos da Wikipedia pretos</string>
-    <string name="search_map_hint">Procurar cidade ou rexión</string>
+    <string name="search_map_hint">Cidade ou rexión</string>
     <string name="route_roundabout_short">Colla a %1$d saída e siga</string>
     <string name="upload_poi">Enviar PDI</string>
     <string name="route_calculation">Cálculo da rota</string>
@@ -1893,8 +1893,8 @@ Lon %2$s</string>
     <string name="gpx_no_tracks_title_folder">Tamén podes engadir ficheiros GPX ó cartafol</string>
     <string name="gpx_add_track">Engadir máis…</string>
     <string name="gpx_appearance">Aparencia</string>
-    <string name="trip_rec_notification_settings">Activar comezo rápido da gravación</string>
-    <string name="trip_rec_notification_settings_desc">Amosar unha notificación que permita comezar a gravar a viaxe premendo no botón de gravar.</string>
+    <string name="trip_rec_notification_settings">Activar a gravación rápida</string>
+    <string name="trip_rec_notification_settings_desc">Amosa unha notificación do sistema que permite a gravación da viaxe.</string>
     <string name="shared_string_notifications">Notificacións</string>
     <string name="shared_string_continue">Continuar</string>
     <string name="shared_string_pause">Deter</string>
@@ -2009,7 +2009,7 @@ Lon %2$s</string>
     <string name="map_widget_bearing">Traxectoria relativa</string>
     <string name="rendering_attr_surfaceIntegrity_name">Integridade da superficie da estrada</string>
     <string name="translit_name_if_miss">Transliterar se falta o nome en %1$s</string>
-    <string name="osm_live_banner_desc">Obteña baixadas dos mapas sen límites e actualizacións dos mapas máis dunha vez ó mes: cada semana, día ou hora.</string>
+    <string name="osm_live_banner_desc">Obtén descargas ilimitadas de mapas, engadindo actualizacións semanais, diarias ou cada hora.</string>
     <string name="no_inet_connection_desc_map">Obrigatorio para baixar mapas.</string>
     <string name="search_location">Estase a procura-la localización…</string>
     <string name="rendering_attr_hideOverground_name">Obxectos por riba do chan</string>
@@ -2179,7 +2179,7 @@ Lon %2$s</string>
     <string name="shared_string_slope">Costa</string>
     <string name="add_new_folder">Engadir un cartafol novo</string>
     <string name="points_delete_multiple_succesful">Punto(s) eliminado(s).</string>
-    <string name="points_delete_multiple">Vas eliminar %1$d punto(s). Tes a certeza de querer facelo\?</string>
+    <string name="points_delete_multiple">Tes a certeza de que desexas eliminar %1$d punto(s)\?</string>
     <string name="track_points_category_name">Puntos da rota, puntos de interese, funcións nomeadas</string>
     <string name="route_points_category_name">Viraxes a pasar nesta rota</string>
     <string name="max_speed">Velocidade máxima</string>
@@ -2191,7 +2191,7 @@ Lon %2$s</string>
     <string name="shared_string_end_time">Hora do remate</string>
     <string name="shared_string_color">Cor</string>
     <string name="select_gpx_folder">Escolle-lo cartafol do ficheiro GPX</string>
-    <string name="file_can_not_be_moved">Non é posíbel mover o ficheiro.</string>
+    <string name="file_can_not_be_moved">Non foi posíbel mover o ficheiro.</string>
     <string name="shared_string_move">Mover</string>
     <string name="shared_string_gpx_tracks">Pistas</string>
     <string name="routing_attr_driving_style_name">Estilo da condución</string>
