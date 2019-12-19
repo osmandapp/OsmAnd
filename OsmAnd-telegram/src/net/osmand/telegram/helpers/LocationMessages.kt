@@ -25,7 +25,7 @@ class LocationMessages(val app: TelegramApplication) {
 
 	init {
 		dbHelper = SQLiteHelper(app)
-		readBufferedMessages()
+		readBufferedMessages(app.settings.bufferTime)
 		readLastMessages()
 	}
 
@@ -140,8 +140,8 @@ class LocationMessages(val app: TelegramApplication) {
 		dbHelper.removeBufferedMessage(message)
 	}
 
-	private fun readBufferedMessages() {
-		this.bufferedMessages = dbHelper.getBufferedMessages()
+	private fun readBufferedMessages(bufferTime: Long) {
+		this.bufferedMessages = dbHelper.getBufferedMessages(bufferTime)
 	}
 
 	private fun readLastMessages() {
@@ -293,7 +293,7 @@ class LocationMessages(val app: TelegramApplication) {
 			return res
 		}
 
-		internal fun getBufferedMessages(): List<BufferMessage> {
+		internal fun getBufferedMessages(bufferTime: Long): List<BufferMessage> {
 			val res = arrayListOf<BufferMessage>()
 			readableDatabase?.rawQuery(BUFFER_TABLE_SELECT, null)?.apply {
 				if (moveToFirst()) {
@@ -303,7 +303,22 @@ class LocationMessages(val app: TelegramApplication) {
 				}
 				close()
 			}
-			return res
+			return removeOldBufferedMessages(res, bufferTime)
+		}
+
+		internal fun removeOldBufferedMessages(list: List<BufferMessage>, bufferTime: Long): List<BufferMessage> {
+			log.info("removeOldBufferedMessages" )
+			val currentTime = System.currentTimeMillis()
+			val cleanedList = arrayListOf<BufferMessage>()
+			list.forEach { message ->
+				if (currentTime - message.time >  bufferTime) {
+					removeBufferedMessage(message)
+					log.debug("remove old buffered message: $message" )
+				} else {
+					cleanedList.add(message)
+				}
+			}
+			return cleanedList
 		}
 
 		internal fun getLastMessages(): MutableList<LocationMessage> {

@@ -61,6 +61,9 @@ private const val MIN_LOCATION_DISTANCE_INDEX = 0
 private const val MIN_LOCATION_ACCURACY_INDEX = 0
 private const val MIN_LOCATION_SPEED_INDEX = 0
 
+private const val MIN_BUFFER_TIME = 60 * 1L // 1 minute for test
+private const val BUFFER_TIME_KEY = "buffer_time"
+
 private const val SETTINGS_NAME = "osmand_telegram_settings"
 
 private const val SHARE_LOCATION_CHATS_KEY = "share_location_chats"
@@ -151,6 +154,8 @@ class TelegramSettings(private val app: TelegramApplication) {
 	var showGpsPoints = false
 
 	var proxyEnabled = false
+
+	var bufferTime = MIN_BUFFER_TIME
 
 	init {
 		updatePrefs()
