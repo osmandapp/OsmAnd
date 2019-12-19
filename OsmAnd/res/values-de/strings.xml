@@ -846,7 +846,7 @@
     <string name="offline_navigation_not_available">OsmAnd-Offline-Navigation steht zur Zeit nicht zur Verfügung.</string>
     <string name="left_side_navigation">Linksverkehr</string>
     <string name="left_side_navigation_descr">Für Länder, in denen man auf der linken Straßenseite fährt.</string>
-    <string name="unknown_from_location">Startpunkt noch nicht ermittelt</string>
+    <string name="unknown_from_location">Startpunkt noch nicht ermittelt.</string>
     <string name="confirm_interrupt_download">Download abbrechen\?</string>
     <string name="basemap_was_selected_to_download">Die Basiskarte, die zur Bereitstellung grundlegender Funktionen erforderlich ist, befindet sich in der Downloadwarteschlange.</string>
     <string name="local_index_routing_data">Routing-Daten</string>
@@ -3408,4 +3408,6 @@ Lon %2$s</string>
     <string name="street_city">%1$s, %2$s</string>
     <string name="personal_category_name">Persönlich</string>
     <string name="shared_string_downloading_formatted">%s herunterladen</string>
+    <string name="rendering_value_thick_name">Fett</string>
+    <string name="desert_render_descr">Für Wüsten und andere dünn besiedelte Gebiete.</string>
 </resources>
