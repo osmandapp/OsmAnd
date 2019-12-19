@@ -34,6 +34,7 @@ import com.jwetherell.openmap.common.UTMPoint;
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.LocationConvert;
+import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -1055,8 +1056,11 @@ public class MapInfoWidgetsFactory {
 							"»");
 				}
 				if (ref != null) {
-					setShield(shieldIcon, assembleShieldString(rt.getShieldColor().value,
-							rt.getShieldShape().value,
+					BinaryMapIndexReader.TagValuePair colorPair = rt.getShieldColor();
+					BinaryMapIndexReader.TagValuePair shapePair = rt.getShieldShape();
+					setShield(shieldIcon, assembleShieldString(
+							colorPair != null ? colorPair.value : null,
+							shapePair != null ? shapePair.value : null,
 							ref.length()), ref);
 					AndroidUiHelper.updateVisibility(shieldIcon, true);
 				}else {
