@@ -1377,7 +1377,7 @@ POIの更新は利用できません</string>
     <string name="map_widget_right">右パネル</string>
     <string name="map_widget_left">左パネル</string>
     <string name="shared_string_show">表示</string>
-    <string name="configure_map">マップの設定</string>
+    <string name="configure_map">マップ設定</string>
     <string name="search_radius_proximity">内</string>
     <string name="anonymous_user_hint">以下は匿名ユーザーでは使用できません:↵\n- グループ作成;↵\n- サーバを利用してのグループやデバイスの同期;↵\n- ウェブサイト上の個別ダッシュボードでのグループやデバイスの管理.</string>
     <string name="anonymous_user">匿名ユーザー</string>
@@ -1501,11 +1501,7 @@ POIの更新は利用できません</string>
     <string name="plugin_ski_name">スキーマップ表示</string>
     <string name="plugin_ski_descr">このプラグインは世界各国のダウンヒル、クロスカントリー、アルペンの各スキー場やコースのほか、ロープウェイやスキーリフトといった索道設備なども参照できるようになります。ルートとゲレンデは難易度によって色分けされ、冬の雪景色をイメージしたウィンターマップスタイルで描かれます。 
 \n 
-\nプラグインを有効にすると、冬の景色をイメージした\'ウィンター＆スキー\'スタイルに変更できます。この表示はプラグインを無効化するか、必要に応じて\'マップ設定\'から\'マップスタイル \'を変更することで元に戻すことができます。
-\n
-\nこのOsmAndのプラグインは、世界のダウンヒルスキー場、クロスカントリースキー場、アルペンスキー場、ケーブルカー、スキーリフトの詳細を指先で操作できる。ルートとピストは困難に応じて色分けされ、冬の雪景色を取り込んだ特別な「冬 」マップ形式で表示されます。
-\n
-\nこのビューをアクティブにすると、マップスタイルが「冬とスキー 」に変更され、寒冷地の条件下ですべての景観フィーチャが表示されます。このビューを元に戻すには、ここで再び非アクティブにするか、必要に応じて「マップの構成 」の「マップスタイル 」を変更します。</string>
+\nプラグインを有効にすると、冬の景色をイメージした\'ウィンター＆スキー\'スタイルに変更できます。この表示はプラグインを無効化するか、必要に応じて\'マップ設定\'から\'マップスタイル \'を変更することで元に戻すことができます。</string>
     <string name="rename_failed">リネーム出来ませんでした</string>
     <string name="days_behind">日前</string>
     <string name="back_to_map">マップ画面に戻る</string>
@@ -2173,7 +2169,7 @@ POIの更新は利用できません</string>
     <string name="quick_action_poi_hide">%1$sを非表示</string>
     <string name="quick_action_add_category">カテゴリーを追加</string>
     <string name="quick_action_add_create_items">アイテムを作成</string>
-    <string name="quick_action_add_configure_map">マップの設定</string>
+    <string name="quick_action_add_configure_map">マップ設定</string>
     <string name="quick_action_add_navigation">ナビゲーション</string>
     <string name="quick_action_fav_name_descr">住所または場所の名前を利用する場合は空白のままにします</string>
     <string name="quick_action_bug_descr">このメッセージはコメント欄に自動入力されます。</string>
@@ -2827,7 +2823,7 @@ POIの更新は利用できません</string>
     <string name="move_point">ポイントの移動</string>
     <string name="total_donations">寄付総額</string>
     <string name="day_off_label">OFF</string>
-    <string name="winter_and_ski_renderer">冬期およびスキー</string>
+    <string name="winter_and_ski_renderer">ウィンター＆スキー</string>
     <string name="touring_view_renderer">ツーリングビュー</string>
     <string name="nautical_renderer">船舶</string>
     <string name="copy_location_name">場所/POI名称のコピー</string>
