@@ -126,7 +126,7 @@
     <string name="transport_search_desc">بحث عن وسائل النقل العام</string>
     <string name="favourites_search_desc">البحث في المفضلة</string>
     <string name="offline_navigation_not_available">ملاحة أوسماند غير متاحة مؤقتا.</string>
-    <string name="unknown_from_location">نقطة الانطلاق لم تحدد بعد</string>
+    <string name="unknown_from_location">نقطة الانطلاق لم تحدد بعد.</string>
     <string name="local_indexes_cat_map">الخرائط القياسية (ناقل)</string>
     <string name="index_settings_descr">تحميل وإدارة الخرائط غير المتصلة المخزنة على جهازك.</string>
     <string name="prefs_plugins">الملحقات</string>
@@ -432,7 +432,7 @@
     <string name="poi_search_desc">بحث عن النقاط المهمة</string>
     <string name="left_side_navigation">القيادة بيد اليسار</string>
     <string name="left_side_navigation_descr">حدد للبلدان التي فيها حركة المرور على اليسار.</string>
-    <string name="unknown_location">الموقف غير معروف بعد</string>
+    <string name="unknown_location">الموقف غير معروف بعد.</string>
     <string name="modify_transparency">تعديل الشفافية (0 - شفاف ، 255 - معتم )</string>
     <string name="confirm_interrupt_download">إلغاء التحميل؟</string>
     <string name="first_time_msg">نشكرك على استخدام أوسماند. الكثير من مميزات هذا البرنامج بحاجة إلى بعض البيانات الإقليمية التي يمكنك تحميلها عبر \'إعدادات\'→ \'إدارة البيانات\'. بعد ذلك سوف تكون قادرا على عرض الخرائط، و تحديد العناوين ، والبحث عن النقاط المهمة ، والعثور على وسائل النقل العام .</string>
@@ -921,8 +921,7 @@
     <string name="routing_attr_no_new_routing_name">قواعد توجيه No v1.9</string>
     <string name="navigate_point_northing">نحو الشمال</string>
     <string name="home_button">المنزل</string>
-    <string name="agps_data_last_downloaded">آخر تحديث لبيانات A-GPS :
-\n %1$s</string>
+    <string name="agps_data_last_downloaded">تنزيل بيانات A-GPS: %1$s</string>
     <string name="welcome_text">أوسماند يوفر تصفح خرائط عالمي بدون اتصال، وكذلك ملاحة عالمية بدون اتصال.</string>
     <string name="welcome_header">أهلا</string>
     <string name="current_route">الطريق الحالي</string>
@@ -3028,7 +3027,7 @@
 \n</string>
     <string name="apply_preference_to_all_profiles">يمكنك تطبيق هذا التغيير على جميع ملفات التعريف أو على ملف التعريف المحدد حاليًا فقط.</string>
     <string name="shared_preference">مشتركة</string>
-    <string name="routing_attr_driving_style_prefer_unpaved_name">تفضيل الطرق غير المعبدة</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_name">تفضيل الطرق الغير ممهدة</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">تفضيل الطرق غير المعبدة.</string>
     <string name="layer_osm_edits">تحرير خرائط OSM</string>
     <string name="quick_action_contour_lines_descr">لإظهار وإخفاء الخطوط الكنتورية على الخريطة.</string>
@@ -3315,4 +3314,10 @@
     <string name="routing_attr_width_description">حدد الحد المسموح به لعرض السيارة على الطرق.</string>
     <string name="simulate_your_location_gpx_descr">محاكاة موقعك باستخدام مسار GPX مسجل.</string>
     <string name="quick_action_directions_from_desc">زر لجعل الشاشة مركز نقطة الانطلاق وحساب الطريق إلى الوجهة أو فتح مربع حوار لتحديد الوجهة إذا لم تكن علامة الوجهة علي الخريطة.</string>
+    <string name="distance_and_address">%1$s • %2$s</string>
+    <string name="street_city">%1$s, %2$s</string>
+    <string name="personal_category_name">شخصي</string>
+    <string name="shared_string_downloading_formatted">تنزيل %s</string>
+    <string name="rendering_value_thick_name">سميك</string>
+    <string name="desert_render_descr">للصحاري وغيرها من المناطق قليله السكان.</string>
 </resources>

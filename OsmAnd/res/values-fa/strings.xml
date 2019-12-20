@@ -153,8 +153,8 @@
     <string name="offline_navigation_not_available">مسیریابی آفلاین OsmAnd موقتاً در دسترس نیست.</string>
     <string name="left_side_navigation">رانندگی از چپ</string>
     <string name="left_side_navigation_descr">برای کشورهایی که از سمت چپ جاده می‌رانند.</string>
-    <string name="unknown_from_location">مبدأ هنوز مشخص نیست</string>
-    <string name="unknown_location">موقعیت هنوز مشخص نیست</string>
+    <string name="unknown_from_location">مبدأ هنوز مشخص نیست.</string>
+    <string name="unknown_location">موقعیت هنوز مشخص نیست.</string>
     <string name="modify_transparency">تنظیم شفافیت (0 - شفاف، 255 - مات)</string>
     <string name="confirm_interrupt_download">دانلود را لغو می‌کنید؟</string>
     <string name="local_indexes_cat_map">نقشه‌های استاندارد (بُرداری)</string>
@@ -308,7 +308,7 @@
     <string name="route_general_information">مسافت کل %1$s، مدت سفر %2$d ساعت و %3$d دقیقه.</string>
     <string name="shared_string_next">بعدی</string>
     <string name="shared_string_previous">قبلی</string>
-    <string name="unit_of_length_descr">واحدهای طولی را تغییر دهید.</string>
+    <string name="unit_of_length_descr">یکاهای طول را تغییر دهید.</string>
     <string name="unit_of_length">یکاهای طول</string>
     <string name="local_index_descr_title">مدیریت فایل‌های نقشه</string>
     <string name="local_index_mi_restore">فعال‌کردن</string>
@@ -1493,7 +1493,7 @@
     <string name="shared_string_search">جست‌وجو</string>
     <string name="shared_string_show_description">نمایش توضیحات</string>
     <string name="shared_string_message">پیام</string>
-    <string name="agps_data_last_downloaded">آخرین باری که اطلاعات A-GPS دانلود شده: %1$s</string>
+    <string name="agps_data_last_downloaded">دادهٔ A-GPS دانلود شد: %1$s</string>
     <string name="confirm_usage_speed_cameras">در بسیاری از کشورها (آلمان، فرانسه، ایتالیا و...) استفاده از هشداردهندهٔ دوربین‌های ترافیکی غیرقانونی است. با نقض قانون از سوی شما OsmAnd هیچ‌گونه مسئولیتی بر عهده نمی‌گیرد. لطفاً فقط اگر مجاز به استفاده از این ویژگی هستید «بله» را انتخاب کنید.</string>
     <string name="welmode_download_maps">دانلود نقشه‌ها</string>
     <string name="welcome_select_region">برای نمایش صحیح علائم و قوانین ترافیکی، لطفاً منطقهٔ رانندگی خود را انتخاب کنید:</string>
@@ -3430,4 +3430,12 @@
     <string name="rendering_value_walkingRoutesOSMCNodes_name">شبکه‌های گره</string>
     <string name="shared_string_turn_off">خاموش</string>
     <string name="join_segments">پیوند پاره‌ها</string>
+    <string name="save_heading">ثبت جهت</string>
+    <string name="save_heading_descr">هنگام ضبط، برای هر یک از نقطه‌های رد جهت را ثبت کن.</string>
+    <string name="distance_and_address">%1$s • %2$s</string>
+    <string name="street_city">%1$s،‏ %2$s</string>
+    <string name="personal_category_name">شخصی</string>
+    <string name="shared_string_downloading_formatted">در حال بارگیری %s</string>
+    <string name="rendering_value_thick_name">ضخیم</string>
+    <string name="desert_render_descr">برای بیابان‌ها و سایر نواحی با جمعیت پراکنده.</string>
 </resources>

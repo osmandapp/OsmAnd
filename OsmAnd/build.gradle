@@ -116,6 +116,9 @@ android {
 		huawei {
 			manifest.srcFile "AndroidManifest-huawei.xml"
 		}
+		freehuawei {
+			manifest.srcFile "AndroidManifest-freehuawei.xml"
+		}
 
 		legacy {
 			jniLibs.srcDirs = ["libc++"]
@@ -497,4 +500,5 @@ dependencies {
 	}
 
 	huaweiImplementation files('libs/huawei-android-drm_v2.5.2.300.jar')
+	freehuaweiImplementation files('libs/huawei-android-drm_v2.5.2.300.jar')
 }

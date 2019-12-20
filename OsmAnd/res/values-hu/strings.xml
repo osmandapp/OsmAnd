@@ -255,7 +255,7 @@ Ehhez {1} MB helyre van szükség.
     <string name="preferred_locale">Kijelző nyelve</string>
     <string name="shared_string_next">Következő</string>
     <string name="shared_string_previous">Előző</string>
-    <string name="unit_of_length_descr">Távolság mértékegységének megváltoztatása.</string>
+    <string name="unit_of_length_descr">Távolság mértékegységének módosítása</string>
     <string name="unit_of_length">Hosszmértékegységek</string>
     <string name="si_mi_feet">Mérföld/láb</string>
     <string name="si_mi_yard">Mérföld/yard</string>
@@ -3134,7 +3134,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="turn_screen_on_info">Térkép megjelenítése a lezárási képernyő felett navigáció közben.</string>
     <string name="route_parameters_info">Útvonaltervezési beállítások erre a profilra: %1$s.</string>
     <string name="wake_time">Felébresztési idő</string>
-    <string name="units_and_formats">Mértékegységek és formátumok</string>
+    <string name="units_and_formats">Mértékegységek &amp; formátumok</string>
     <string name="appearance">Megjelenés</string>
     <string name="map_look_descr">Térkép megjelenés</string>
     <string name="list_of_installed_plugins">Telepített bővítmények</string>
@@ -3234,9 +3234,22 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="dialogs_and_notifications_title">Párbeszédablakok és értesítések</string>
     <string name="dialogs_and_notifications_descr">OsmAnd használata közben megjelenő felugró üzenetek, párbeszédablakok és értesítések beállításai.</string>
     <string name="suggested_maps">Javasolt térképek</string>
-    <string name="add_new_profile_q">Hozzáadod az új \'%1$s\' profilt\?</string>
+    <string name="add_new_profile_q">Hozzáadja az új \'%1$s\' profilt\?</string>
     <string name="distance_and_address">%1$s • %2$s</string>
     <string name="street_city">%1$s, %2$s</string>
     <string name="personal_category_name">Személyes</string>
     <string name="shared_string_downloading_formatted">%s letöltése</string>
+    <string name="new_route_calculated_dist_dbg">Útvonal: távolság %s, menetidő %s
+\nSzámítás: %.1f mp, %d útszakasz, %d csempe</string>
+    <string name="rendering_attr_piste_type_downhill_name">Lesikló</string>
+    <string name="routeInfo_piste_type_name">Sípálya típusa</string>
+    <string name="rendering_attr_piste_difficulty_intermediate_name">Haladó</string>
+    <string name="rendering_attr_piste_difficulty_advanced_name">Tapasztalt</string>
+    <string name="rendering_attr_piste_difficulty_expert_name">Profi</string>
+    <string name="rendering_attr_piste_difficulty_freeride_name">Pálya nélküli</string>
+    <string name="rendering_attr_piste_difficulty_extreme_name">Extrém</string>
+    <string name="rendering_attr_piste_difficulty_undefined_name">Meghatározatlan</string>
+    <string name="routeInfo_piste_difficulty_name">Sípálya nehézsége</string>
+    <string name="rendering_value_thick_name">Vastag</string>
+    <string name="desert_render_descr">Sivatagokhoz és más ritkán lakott területekhez.</string>
 </resources>
