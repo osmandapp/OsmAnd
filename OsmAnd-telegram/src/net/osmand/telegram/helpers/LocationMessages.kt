@@ -332,21 +332,6 @@ class LocationMessages(val app: TelegramApplication) {
 			return res
 		}
 
-		internal fun removeOldBufferedMessages(list: List<BufferMessage>, bufferTime: Long): List<BufferMessage> {
-			log.info("removeOldBufferedMessages" )
-			val currentTime = System.currentTimeMillis()
-			val cleanedList = arrayListOf<BufferMessage>()
-			list.forEach { message ->
-				if (currentTime - message.time >  bufferTime) {
-					removeBufferedMessage(message)
-					log.debug("remove old buffered message: $message" )
-				} else {
-					cleanedList.add(message)
-				}
-			}
-			return cleanedList
-		}
-
 		internal fun getLastMessages(): MutableList<LocationMessage> {
 			val res = arrayListOf<LocationMessage>()
 			readableDatabase?.rawQuery("$TIMELINE_TABLE_SELECT_LAST_LOCATIONS GROUP BY $COL_USER_ID, $COL_CHAT_ID, $COL_DEVICE_NAME, $COL_TYPE", null)?.apply {
