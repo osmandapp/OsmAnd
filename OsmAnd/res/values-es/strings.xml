@@ -312,7 +312,7 @@
     <string name="download_type_to_filter">escriba el filtro</string>
     <string name="use_high_res_maps">Pantalla de alta resolución</string>
     <string name="use_high_res_maps_descr">No estira (ni hace borrosas) las teselas de mapa en pantallas de alta densidad.</string>
-    <string name="unknown_location">Ubicación desconocida</string>
+    <string name="unknown_location">Ubicación aún desconocida.</string>
     <string name="context_menu_item_search_transport">Buscar transporte público</string>
     <string name="transport_searching_transport">Resultados de transporte (sin destino):</string>
     <string name="transport_searching_route">Resultados de transporte ({0} al destino):</string>
@@ -609,7 +609,7 @@
     <string name="offline_navigation_not_available">La navegación sin conexión de OsmAnd, no está disponible temporalmente.</string>
     <string name="left_side_navigation">Circular por la izquierda</string>
     <string name="left_side_navigation_descr">Para países donde la gente conduce por el lado izquierdo del camino.</string>
-    <string name="unknown_from_location">Punto de partida indeterminado</string>
+    <string name="unknown_from_location">Punto de partida aún no determinado.</string>
     <string name="confirm_interrupt_download">¿Cancelar la descarga\?</string>
     <string name="basemap_was_selected_to_download">El mapa base necesario para proporcionar la funcionalidad básica, está en la cola de descarga.</string>
     <string name="map_online_plugin_is_not_installed">Activa el complemento «Mapas en línea», para elegir diferentes fuentes de mapas</string>
@@ -1520,7 +1520,7 @@
     <string name="confirm_usage_speed_cameras">En muchos países (Alemania, Francia, Italia y otros) el uso de avisos de radares es ilegal. OsmAnd no asume ninguna responsabilidad si usted viola la ley. Pulsa en «sí», sólo si puedes utilizar esta función.</string>
     <string name="agps_info">Información A-GPS</string>
     <string name="shared_string_message">Mensaje</string>
-    <string name="agps_data_last_downloaded">Últimos datos A-GPS descargados: %1$s</string>
+    <string name="agps_data_last_downloaded">Datos A-GPS descargados: %1$s</string>
     <string name="shared_string_do_not_use">No usar</string>
     <string name="shared_string_address">Dirección</string>
     <string name="shared_string_show_description">Mostrar información.</string>
@@ -3399,4 +3399,6 @@
     <string name="street_city">%1$s, %2$s</string>
     <string name="personal_category_name">Personal</string>
     <string name="shared_string_downloading_formatted">Descargando %s</string>
+    <string name="rendering_value_thick_name">Grueso</string>
+    <string name="desert_render_descr">Para desiertos y otras zonas escasamente pobladas.</string>
 </resources>
