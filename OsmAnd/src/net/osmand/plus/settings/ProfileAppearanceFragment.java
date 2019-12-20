@@ -6,6 +6,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.preference.Preference;
@@ -23,6 +26,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import net.osmand.AndroidUtils;
+import net.osmand.PlatformUtil;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
@@ -34,13 +38,18 @@ import net.osmand.plus.widgets.FlowLayout;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 import net.osmand.util.Algorithms;
 
+import org.apache.commons.logging.Log;
+
 import java.util.ArrayList;
 
+import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
 import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.DIALOG_TYPE;
 import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.SELECTED_KEY;
 import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.TYPE_BASE_APP_PROFILE;
 
 public class ProfileAppearanceFragment extends BaseSettingsFragment {
+
+	private static final Log LOG = PlatformUtil.getLog(ProfileAppearanceFragment.class);
 
 	public static final String TAG = ProfileAppearanceFragment.class.getName();
 	private static final String MASTER_PROFILE = "master_profile";
@@ -56,6 +65,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 	public static final String PROFILE_ICON_RES_KEY = "profile_icon_res_key";
 	public static final String PROFILE_COLOR_KEY = "profile_color_key";
 	public static final String PROFILE_PARENT_KEY = "profile_parent_key";
+	public static final String BASE_PROFILE_FOR_NEW = "base_profile_for_new";
 	private SelectProfileBottomSheetDialogFragment.SelectProfileListener parentProfileListener;
 	private EditText baseProfileName;
 	private ApplicationProfileObject profile;
@@ -63,18 +73,41 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 	private EditText profileName;
 	private FlowLayout colorItems;
 	private FlowLayout iconItems;
+	private boolean isNewProfile = false;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		profile = new ApplicationProfileObject();
-		profile.stringKey = getSelectedAppMode().getStringKey();
-		profile.parent = getSelectedAppMode().getParent();
-		profile.name = getSelectedAppMode().toHumanString(getContext());
-		profile.color = getSelectedAppMode().getIconColorInfo();
-		profile.iconRes = getSelectedAppMode().getIconRes();
-		profile.routingProfile = getSelectedAppMode().getRoutingProfile();
-		profile.routeService = getSelectedAppMode().getRouteService();
+		ApplicationMode baseModeForNewProfile = null;
+		if (getArguments() != null) {
+			Bundle arguments = getArguments();
+			String keyBaseProfileForNew = arguments.getString(BASE_PROFILE_FOR_NEW, null);
+			for (ApplicationMode mode : ApplicationMode.getDefaultValues()) {
+				if (mode.getStringKey().equals(keyBaseProfileForNew)) {
+					baseModeForNewProfile = mode;
+					break;
+				}
+			}
+		}
+		if (baseModeForNewProfile != null) {
+			profile.stringKey = baseModeForNewProfile.getStringKey();
+			profile.parent = baseModeForNewProfile;
+			profile.name = baseModeForNewProfile.toHumanString(getContext());
+			profile.color = baseModeForNewProfile.getIconColorInfo();
+			profile.iconRes = baseModeForNewProfile.getIconRes();
+			profile.routingProfile = baseModeForNewProfile.getRoutingProfile();
+			profile.routeService = baseModeForNewProfile.getRouteService();
+			isNewProfile = true;
+		} else {
+			profile.stringKey = getSelectedAppMode().getStringKey();
+			profile.parent = getSelectedAppMode().getParent();
+			profile.name = getSelectedAppMode().toHumanString(getContext());
+			profile.color = getSelectedAppMode().getIconColorInfo();
+			profile.iconRes = getSelectedAppMode().getIconRes();
+			profile.routingProfile = getSelectedAppMode().getRoutingProfile();
+			profile.routeService = getSelectedAppMode().getRouteService();
+		}
 		changedProfile = new ApplicationProfileObject();
 		if (savedInstanceState != null) {
 			restoreState(savedInstanceState);
@@ -121,7 +154,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 				public void onClick(View v) {
 					if (getActivity() != null) {
 						if (isChanged()) {
-							if (saveNewProfile(false)) {
+							if (saveNewProfile()) {
 								profile = changedProfile;
 								getActivity().onBackPressed();
 							}
@@ -242,10 +275,10 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 			colorItems = (FlowLayout) holder.findViewById(R.id.color_items);
 			colorItems.removeAllViews();
 			for (ApplicationMode.ProfileIconColors color : ApplicationMode.ProfileIconColors.values()) {
-				View view = createColorItemView(color, colorItems);
-				colorItems.addView(view, new FlowLayout.LayoutParams(0, 0));
-				ImageView outlineCircle = view.findViewById(R.id.outlineCircle);
-				ImageView checkMark = view.findViewById(R.id.checkMark);
+				View colorItem = createColorItemView(color, colorItems);
+				colorItems.addView(colorItem, new FlowLayout.LayoutParams(0, 0));
+				ImageView outlineCircle = colorItem.findViewById(R.id.outlineCircle);
+				ImageView checkMark = colorItem.findViewById(R.id.checkMark);
 				GradientDrawable gradientDrawable = (GradientDrawable) ContextCompat.getDrawable(app, R.drawable.circle_contour_bg_light);
 				if (gradientDrawable != null) {
 					gradientDrawable.setStroke(AndroidUtils.dpToPx(app, 2),
@@ -261,9 +294,9 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 			iconItems.removeAllViews();
 			ArrayList<Integer> icons = ApplicationMode.ProfileIcons.getIcons();
 			for (int iconRes : icons) {
-				View view = createIconItemView(iconRes, iconItems);
-				iconItems.addView(view, new FlowLayout.LayoutParams(0, 0));
-				ImageView outlineCircle = view.findViewById(R.id.outlineCircle);
+				View iconItem = createIconItemView(iconRes, iconItems);
+				iconItems.addView(iconItem, new FlowLayout.LayoutParams(0, 0));
+				ImageView outlineCircle = iconItem.findViewById(R.id.outlineCircle);
 				outlineCircle.setVisibility(View.GONE);
 			}
 			setIconNewColor(changedProfile.iconRes);
@@ -271,9 +304,9 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 	}
 
 	private View createColorItemView(final ApplicationMode.ProfileIconColors colorRes, ViewGroup rootView) {
-		FrameLayout colorView = (FrameLayout) UiUtilities.getInflater(getContext(), isNightMode())
+		FrameLayout colorItemView = (FrameLayout) UiUtilities.getInflater(getContext(), isNightMode())
 				.inflate(R.layout.preference_circle_item, rootView, false);
-		ImageView coloredCircle = colorView.findViewById(R.id.bckgroundCircle);
+		ImageView coloredCircle = colorItemView.findViewById(R.id.bckgroundCircle);
 		coloredCircle.setImageDrawable(getPaintedIcon(R.drawable.circle_background_light,
 				ContextCompat.getColor(app, colorRes.getColor(isNightMode()))));
 		coloredCircle.setOnClickListener(new View.OnClickListener() {
@@ -284,17 +317,17 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 				}
 			}
 		});
-		colorView.setTag(colorRes);
-		return colorView;
+		colorItemView.setTag(colorRes);
+		return colorItemView;
 	}
 
 	private void updateColorSelector(ApplicationMode.ProfileIconColors color) {
-		View view = colorItems.findViewWithTag(changedProfile.color);
-		view.findViewById(R.id.outlineCircle).setVisibility(View.GONE);
-		view.findViewById(R.id.checkMark).setVisibility(View.GONE);
-		view = colorItems.findViewWithTag(color);
-		view.findViewById(R.id.outlineCircle).setVisibility(View.VISIBLE);
-		view.findViewById(R.id.checkMark).setVisibility(View.VISIBLE);
+		View colorItem = colorItems.findViewWithTag(changedProfile.color);
+		colorItem.findViewById(R.id.outlineCircle).setVisibility(View.GONE);
+		colorItem.findViewById(R.id.checkMark).setVisibility(View.GONE);
+		colorItem = colorItems.findViewWithTag(color);
+		colorItem.findViewById(R.id.outlineCircle).setVisibility(View.VISIBLE);
+		colorItem.findViewById(R.id.checkMark).setVisibility(View.VISIBLE);
 		changedProfile.color = color;
 		if (iconItems != null) {
 			setIconNewColor(changedProfile.iconRes);
@@ -303,11 +336,11 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 	}
 
 	private View createIconItemView(final int iconRes, ViewGroup rootView) {
-		FrameLayout iconView = (FrameLayout) UiUtilities.getInflater(getContext(), isNightMode())
+		FrameLayout iconItemView = (FrameLayout) UiUtilities.getInflater(getContext(), isNightMode())
 				.inflate(R.layout.preference_circle_item, rootView, false);
-		ImageView checkMark = iconView.findViewById(R.id.checkMark);
+		ImageView checkMark = iconItemView.findViewById(R.id.checkMark);
 		checkMark.setImageDrawable(app.getUIUtilities().getIcon(iconRes, R.color.icon_color_default_light));
-		ImageView coloredCircle = iconView.findViewById(R.id.bckgroundCircle);
+		ImageView coloredCircle = iconItemView.findViewById(R.id.bckgroundCircle);
 		coloredCircle.setImageDrawable(getPaintedIcon(R.drawable.circle_background_light,
 				UiUtilities.getColorWithAlpha(ContextCompat.getColor(app, R.color.icon_color_default_light), 0.1f)));
 		coloredCircle.setOnClickListener(new View.OnClickListener() {
@@ -318,17 +351,17 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 				}
 			}
 		});
-		iconView.setTag(iconRes);
-		return iconView;
+		iconItemView.setTag(iconRes);
+		return iconItemView;
 	}
 
 	private void updateIconSelector(int iconRes) {
 		setIconNewColor(iconRes);
-		View view = iconItems.findViewWithTag(changedProfile.iconRes);
-		view.findViewById(R.id.outlineCircle).setVisibility(View.GONE);
-		ImageView checkMark = view.findViewById(R.id.checkMark);
+		View iconItem = iconItems.findViewWithTag(changedProfile.iconRes);
+		iconItem.findViewById(R.id.outlineCircle).setVisibility(View.GONE);
+		ImageView checkMark = iconItem.findViewById(R.id.checkMark);
 		checkMark.setImageDrawable(app.getUIUtilities().getIcon(changedProfile.iconRes, R.color.icon_color_default_light));
-		ImageView coloredCircle = view.findViewById(R.id.bckgroundCircle);
+		ImageView coloredCircle = iconItem.findViewById(R.id.bckgroundCircle);
 		coloredCircle.setImageDrawable(getPaintedIcon(R.drawable.circle_background_light,
 				UiUtilities.getColorWithAlpha(ContextCompat.getColor(app, R.color.icon_color_default_light), 0.1f)));
 		changedProfile.iconRes = iconRes;
@@ -338,19 +371,21 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 	private void setIconNewColor(int iconRes) {
 		int changedProfileColor = ContextCompat.getColor(app, changedProfile.color.getColor(
 				app.getDaynightHelper().isNightModeForMapControls()));
-		View view = iconItems.findViewWithTag(iconRes);
-		ImageView coloredCircle = view.findViewById(R.id.bckgroundCircle);
-		coloredCircle.setImageDrawable(getPaintedIcon(R.drawable.circle_background_light,
-				UiUtilities.getColorWithAlpha(ContextCompat.getColor(app, changedProfile.color.getColor(isNightMode())), 0.1f)));
-		ImageView outlineCircle = view.findViewById(R.id.outlineCircle);
-		GradientDrawable gradientDrawable = (GradientDrawable) ContextCompat.getDrawable(app, R.drawable.circle_contour_bg_light);
-		if (gradientDrawable != null) {
-			gradientDrawable.setStroke(AndroidUtils.dpToPx(app, 2), changedProfileColor);
+		View iconItem = iconItems.findViewWithTag(iconRes);
+		if (iconItem != null) {
+			ImageView coloredCircle = iconItem.findViewById(R.id.bckgroundCircle);
+			coloredCircle.setImageDrawable(getPaintedIcon(R.drawable.circle_background_light,
+					UiUtilities.getColorWithAlpha(ContextCompat.getColor(app, changedProfile.color.getColor(isNightMode())), 0.1f)));
+			ImageView outlineCircle = iconItem.findViewById(R.id.outlineCircle);
+			GradientDrawable circleContourDrawable = (GradientDrawable) ContextCompat.getDrawable(app, R.drawable.circle_contour_bg_light);
+			if (circleContourDrawable != null) {
+				circleContourDrawable.setStroke(AndroidUtils.dpToPx(app, 2), changedProfileColor);
+			}
+			outlineCircle.setImageDrawable(circleContourDrawable);
+			outlineCircle.setVisibility(View.VISIBLE);
+			ImageView checkMark = iconItem.findViewById(R.id.checkMark);
+			checkMark.setImageDrawable(app.getUIUtilities().getPaintedIcon(iconRes, changedProfileColor));
 		}
-		outlineCircle.setImageDrawable(gradientDrawable);
-		outlineCircle.setVisibility(View.VISIBLE);
-		ImageView checkMark = view.findViewById(R.id.checkMark);
-		checkMark.setImageDrawable(app.getUIUtilities().getPaintedIcon(iconRes, changedProfileColor));
 	}
 
 	private void hideKeyboard() {
@@ -392,39 +427,34 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 		}
 	}
 
-	private boolean saveNewProfile(boolean isNew) {
+	private boolean saveNewProfile() {
 		if (changedProfile.name.replace(" ", "").length() < 1) {
-			showSaveWarningDialog(
-					getString(R.string.profile_alert_need_profile_name_title),
-					getString(R.string.profile_alert_need_profile_name_msg),
-					getActivity()
-			);
+			if (getActivity() != null) {
+				createWarningDialog(getActivity(),
+						R.string.profile_alert_need_profile_name_title, R.string.profile_alert_need_profile_name_msg, R.string.shared_string_dismiss).show();
+			}
 			return false;
 		}
 
 		for (ApplicationMode m : ApplicationMode.allPossibleValues()) {
 			if (m.getCustomProfileName() != null && getActivity() != null &&
-					m.getCustomProfileName().equals(changedProfile.name) && isNew) {
-				AlertDialog.Builder bld = new AlertDialog.Builder(getActivity());
-				bld.setTitle(R.string.profile_alert_duplicate_name_title);
-				bld.setMessage(R.string.profile_alert_duplicate_name_msg);
-				bld.setNegativeButton(R.string.shared_string_dismiss, null);
-				bld.show();
-				bld.setOnDismissListener(new DialogInterface.OnDismissListener() {
+					m.getCustomProfileName().equals(changedProfile.name) && isNewProfile) {
+				AlertDialog.Builder duplicateNameWarning = createWarningDialog(getActivity(),
+						R.string.profile_alert_duplicate_name_title, R.string.profile_alert_duplicate_name_msg, R.string.shared_string_dismiss);
+				duplicateNameWarning.setOnDismissListener(new DialogInterface.OnDismissListener() {
 					@Override
 					public void onDismiss(DialogInterface dialog) {
 						profileName.requestFocus();
 					}
 				});
+				duplicateNameWarning.show();
 				return false;
 			}
 		}
 		String customStringKey = profile.stringKey;
-		if (isNew) {
-			customStringKey =
-					profile.parent.getStringKey() + "_" + System.currentTimeMillis();
+		if (isNewProfile) {
+			customStringKey = profile.stringKey + "_" + System.currentTimeMillis();
 		}
-
 		ApplicationMode.ApplicationModeBuilder builder = ApplicationMode
 				.createCustomMode(changedProfile.parent, changedProfile.name.trim(), customStringKey)
 				.icon(app, ApplicationMode.ProfileIcons.getResStringByResId(changedProfile.iconRes))
@@ -438,19 +468,10 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 		return true;
 	}
 
-	private void showSaveWarningDialog(String title, String message, Activity activity) {
-		AlertDialog.Builder bld = new AlertDialog.Builder(activity);
-		bld.setTitle(title);
-		bld.setMessage(message);
-		bld.setNegativeButton(R.string.shared_string_dismiss, null);
-		bld.show();
-	}
-
 	public boolean isProfileAppearanceChanged(final MapActivity mapActivity) {
 		if (isChanged()) {
-			AlertDialog.Builder dismissDialog = new AlertDialog.Builder(mapActivity);
-			dismissDialog.setTitle(R.string.shared_string_dismiss);
-			dismissDialog.setMessage(R.string.exit_without_saving);
+			AlertDialog.Builder dismissDialog = createWarningDialog(getActivity(),
+					R.string.shared_string_dismiss, R.string.exit_without_saving, R.string.shared_string_cancel);
 			dismissDialog.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
@@ -458,12 +479,38 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 					mapActivity.onBackPressed();
 				}
 			});
-			dismissDialog.setNegativeButton(R.string.shared_string_cancel, null);
 			dismissDialog.show();
 			return true;
 		} else {
 			return false;
 		}
+	}
+
+	private AlertDialog.Builder createWarningDialog(Activity activity, int title, int message, int negButton) {
+		AlertDialog.Builder warningDialog = new AlertDialog.Builder(activity);
+		warningDialog.setTitle(getString(title));
+		warningDialog.setMessage(getString(message));
+		warningDialog.setNegativeButton(negButton, null);
+		return warningDialog;
+	}
+
+	public static boolean showInstance(FragmentActivity activity, SettingsScreenType screenType, @Nullable String appMode) {
+		try {
+			Fragment fragment = Fragment.instantiate(activity, screenType.fragmentName);
+			Bundle args = new Bundle();
+			if (appMode != null) {
+				args.putString(BASE_PROFILE_FOR_NEW, appMode);
+			}
+			fragment.setArguments(args);
+			activity.getSupportFragmentManager().beginTransaction()
+					.replace(R.id.fragmentContainer, fragment, screenType.fragmentName)
+					.addToBackStack(DRAWER_SETTINGS_ID + ".new")
+					.commit();
+			return true;
+		} catch (Exception e) {
+			LOG.error(e);
+		}
+		return false;
 	}
 
 	class ApplicationProfileObject {

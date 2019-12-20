@@ -18,6 +18,7 @@ import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.LongDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.settings.MainSettingsFragment;
 import net.osmand.plus.settings.NavigationFragment;
 import net.osmand.plus.settings.ProfileAppearanceFragment;
 
@@ -125,9 +126,7 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 							if (listener == null) {
 								getListener();
 							}
-							if (listener != null) {
-								listener.onSelectedType(pos, "");
-							}
+							listener.onSelectedType(pos, "");
 							dismiss();
 						}
 					})
@@ -167,9 +166,7 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 							if (listener == null) {
 								getListener();
 							}
-							if (listener != null) {
-								listener.onSelectedType(pos, "");
-							}
+							listener.onSelectedType(pos, "");
 							dismiss();
 						}
 					})
@@ -205,9 +202,7 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 							if(listener == null) {
 								getListener();
 							}
-							if (listener != null) {
-								listener.onSelectedType(icon.getResId(), icon.getResStringId());
-							}
+							listener.onSelectedType(icon.getResId(), icon.getResStringId());
 							dismiss();
 						}
 					})
@@ -225,6 +220,7 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 			SettingsProfileFragment settingsProfileFragment = (SettingsProfileFragment) fragmentManager.findFragmentByTag(SettingsProfileFragment.class.getName());
 			NavigationFragment navigationFragment = (NavigationFragment) fragmentManager.findFragmentByTag(NavigationFragment.class.getName());
 			ProfileAppearanceFragment profileAppearanceFragment = (ProfileAppearanceFragment) fragmentManager.findFragmentByTag(ProfileAppearanceFragment.TAG);
+			MainSettingsFragment mainSettingsFragment = (MainSettingsFragment) fragmentManager.findFragmentByTag(MainSettingsFragment.TAG);
 
 			if (editProfileFragment != null) {
 				switch (type) {
@@ -245,7 +241,9 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 				listener = navigationFragment.getNavProfileListener();
 			} else if (profileAppearanceFragment != null) {
 				listener = profileAppearanceFragment.getParentProfileListener();
-		}
+			} else if (mainSettingsFragment != null) {
+				listener = mainSettingsFragment.getParentProfileListener();
+			}
 		}
 	}
 

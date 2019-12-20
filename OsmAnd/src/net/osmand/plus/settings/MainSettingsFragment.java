@@ -4,6 +4,8 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.ColorRes;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceViewHolder;
@@ -14,6 +16,9 @@ import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
+import net.osmand.plus.profiles.ProfileDataObject;
+import net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment;
+import net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.SelectProfileListener;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 
 import java.util.ArrayList;
@@ -21,9 +26,13 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.DIALOG_TYPE;
+import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.TYPE_BASE_APP_PROFILE;
+import static net.osmand.plus.profiles.SettingsProfileFragment.getBaseProfiles;
+
 public class MainSettingsFragment extends BaseSettingsFragment {
 
-	public static final String TAG = MainSettingsFragment.class.getSimpleName();
+	public static final String TAG = MainSettingsFragment.class.getName();
 
 	private static final String CONFIGURE_PROFILE = "configure_profile";
 	private static final String APP_PROFILES = "app_profiles";
@@ -33,6 +42,7 @@ public class MainSettingsFragment extends BaseSettingsFragment {
 	private static final String REORDER_PROFILES = "reorder_profiles";
 	private List<ApplicationMode> allAppModes;
 	private Set<ApplicationMode> availableAppModes;
+	private SelectProfileListener selectProfileListener = null;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -93,9 +103,19 @@ public class MainSettingsFragment extends BaseSettingsFragment {
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
 		String prefId = preference.getKey();
-		if (APP_PROFILES.equals(preference.getParent().getKey())) {
-			BaseSettingsFragment.showInstance(getActivity(), SettingsScreenType.CONFIGURE_PROFILE, ApplicationMode.valueOfStringKey(prefId, null));
+		if (preference.getParent() != null && APP_PROFILES.equals(preference.getParent().getKey())) {
+			BaseSettingsFragment.showInstance(getActivity(), SettingsScreenType.CONFIGURE_PROFILE,
+					ApplicationMode.valueOfStringKey(prefId, null));
 			return true;
+		} else if (CREATE_PROFILE.equals(prefId)) {
+			final SelectProfileBottomSheetDialogFragment dialog = new SelectProfileBottomSheetDialogFragment();
+			Bundle bundle = new Bundle();
+			bundle.putString(DIALOG_TYPE, TYPE_BASE_APP_PROFILE);
+			dialog.setArguments(bundle);
+			if (getActivity() != null) {
+				getActivity().getSupportFragmentManager().beginTransaction()
+						.add(dialog, "select_base_profile").commitAllowingStateLoss();
+			}
 		}
 		return super.onPreferenceClick(preference);
 	}
@@ -156,5 +176,25 @@ public class MainSettingsFragment extends BaseSettingsFragment {
 		int iconResId = applicationMode.getIconRes();
 		return appProfileEnabled ? app.getUIUtilities().getIcon(applicationMode.getIconRes(), applicationMode.getIconColorInfo().getColor(isNightMode()))
 				: getIcon(iconResId, isNightMode() ? R.color.icon_color_secondary_dark : R.color.icon_color_secondary_light);
+	}
+
+	public SelectProfileListener getParentProfileListener() {
+		if (selectProfileListener == null) {
+			selectProfileListener = new SelectProfileListener() {
+				@Override
+				public void onSelectedType(int pos, String stringRes) {
+					FragmentActivity activity = getActivity();
+					if (activity != null) {
+						FragmentManager fragmentManager = activity.getSupportFragmentManager();
+						if (fragmentManager != null) {
+							ProfileDataObject profileDataObject = getBaseProfiles(app).get(pos);
+							ProfileAppearanceFragment.showInstance(activity, SettingsScreenType.PROFILE_APPEARANCE,
+									profileDataObject.getStringKey());
+						}
+					}
+				}
+			};
+		}
+		return selectProfileListener;
 	}
 }

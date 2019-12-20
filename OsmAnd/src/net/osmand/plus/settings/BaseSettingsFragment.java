@@ -83,7 +83,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 
 	public enum SettingsScreenType {
 
-		MAIN_SETTINGS(MainSettingsFragment.class.getName(), false, R.xml.settings_main_screen, R.layout.global_preference_toolbar),
+		MAIN_SETTINGS(MainSettingsFragment.TAG, false, R.xml.settings_main_screen, R.layout.global_preference_toolbar),
 		GLOBAL_SETTINGS(GlobalSettingsFragment.class.getName(), false, R.xml.global_settings, R.layout.global_preference_toolbar),
 		CONFIGURE_PROFILE(ConfigureProfileFragment.class.getName(), true, R.xml.configure_profile, R.layout.profile_preference_toolbar_with_switch),
 		PROXY_SETTINGS(ProxySettingsFragment.class.getName(), false, R.xml.proxy_preferences, R.layout.global_preferences_toolbar_with_switch),
