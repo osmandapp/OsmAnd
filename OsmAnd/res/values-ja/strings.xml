@@ -168,7 +168,7 @@ MB)をダウンロードしますか?</string>
     <string name="download_type_to_filter">フィルタをかける種別</string>
     <string name="use_high_res_maps">高解像度マップ</string>
     <string name="use_high_res_maps_descr">高精細度装置向け高解像度マップを表示します</string>
-    <string name="unknown_location">現在地はまだ取得できていません</string>
+    <string name="unknown_location">現在地はまだ取得できていません。</string>
     <string name="context_menu_item_search_transport">公共交通機関を検索</string>
     <string name="transport_searching_transport">交通機関の検索結果(目的地無し):</string>
     <string name="transport_searching_route">交通機関を検索結果(目的地は{0}):</string>
@@ -394,7 +394,7 @@ POIの更新は利用できません</string>
     <string name="show_view_angle">視線方向を表示</string>
     <string name="map_view_3d_descr">マップの3Dビューを有効化します</string>
     <string name="map_view_3d">マップビュー3D</string>
-    <string name="show_poi_over_map_description">最後に使用したPOIをオーバーレイ表示</string>
+    <string name="show_poi_over_map_description">最後に使用したPOIをオーバーレイ表示します。</string>
     <string name="show_poi_over_map">POIを表示</string>
     <string name="map_tile_source_descr">オンラインで使用するマップソース、またはオフラインマップタイルキャッシュを選択します</string>
     <string name="map_tile_source">タイルマップ選択</string>
@@ -798,7 +798,7 @@ POIの更新は利用できません</string>
     <string name="transport_search_desc">公共交通機関を検索</string>
     <string name="favourites_search_desc">お気に入り検索</string>
     <string name="offline_navigation_not_available">OsmAndオフラインナビゲーションが一時的に利用できません。</string>
-    <string name="unknown_from_location">出発地点が、まだ確定されていません</string>
+    <string name="unknown_from_location">出発地点が、まだ確定されていません。</string>
     <string name="basemap_was_selected_to_download">基本的な機能を提供するために必要なベースマップは、必ずダウンロード候補にあがるようになっています。</string>
     <string name="local_indexes_cat_tile">オンライン(またはキャッシュ済み)タイルマップ</string>
     <string name="local_indexes_cat_map">標準マップ(ベクター形式)</string>
@@ -3401,4 +3401,6 @@ POIの更新は利用できません</string>
     <string name="save_heading_descr">記録中の各トラックポイントに見出しも保存します。</string>
     <string name="personal_category_name">パーソナル</string>
     <string name="shared_string_downloading_formatted">をダウンロード中</string>
+    <string name="rendering_value_thick_name">濃い</string>
+    <string name="desert_render_descr">砂漠などの過疎地に用いられます。</string>
 </resources>
