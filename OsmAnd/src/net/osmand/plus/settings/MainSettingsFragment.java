@@ -136,8 +136,8 @@ public class MainSettingsFragment extends BaseSettingsFragment {
 		createProfile.setIcon(app.getUIUtilities().getIcon(R.drawable.ic_action_plus,
 				isNightMode() ? R.color.active_color_primary_dark : R.color.active_color_primary_light));
 		Preference importProfile = findPreference(IMPORT_PROFILE);
-		importProfile.setIcon(app.getUIUtilities().getIcon(R.drawable.ic_action_import,
-				isNightMode() ? R.color.active_color_primary_dark : R.color.active_color_primary_light));
+//		importProfile.setIcon(app.getUIUtilities().getIcon(R.drawable.ic_action_import,
+//				isNightMode() ? R.color.active_color_primary_dark : R.color.active_color_primary_light));
 		Preference reorderProfiles = findPreference(REORDER_PROFILES);
 		reorderProfiles.setIcon(app.getUIUtilities().getIcon(R.drawable.ic_action_edit_dark,
 				isNightMode() ? R.color.active_color_primary_dark : R.color.active_color_primary_light));

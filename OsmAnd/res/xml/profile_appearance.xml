@@ -49,7 +49,7 @@
 		android:layout="@layout/simple_divider_item"
 		android:selectable="false" />
 
-	<PreferenceCategory
+	<!--PreferenceCategory
 		android:key="select_map_icon"
 		android:layout="@layout/preference_category_with_descr"
 		android:title="@string/select_map_icon" />
@@ -73,6 +73,6 @@
 		android:key="nav_icon_items"
 		android:layout="@layout/preference_with_descr"
 		android:title="@string/select_navigation_icon"
-		android:selectable="false"/>
+		android:selectable="false"/-->
 
 </PreferenceScreen>

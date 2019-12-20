@@ -126,8 +126,8 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 	protected void setupPreferences() {
 		findPreference(SELECT_COLOR).setIconSpaceReserved(false);
 		findPreference(SELECT_ICON).setIconSpaceReserved(false);
-		findPreference(SELECT_MAP_ICON).setIconSpaceReserved(false);
-		findPreference(SELECT_NAV_ICON).setIconSpaceReserved(false);
+//		findPreference(SELECT_MAP_ICON).setIconSpaceReserved(false);
+//		findPreference(SELECT_NAV_ICON).setIconSpaceReserved(false);
 	}
 
 	@SuppressLint("InlinedApi")
@@ -230,6 +230,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 			profileName = (EditText) holder.findViewById(R.id.profile_name_et);
 			profileName.setImeOptions(EditorInfo.IME_ACTION_DONE);
 			profileName.setText(changedProfile.name);
+			profileName.requestFocus();
 			profileName.addTextChangedListener(new TextWatcher() {
 				@Override
 				public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -436,9 +437,8 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 			return false;
 		}
 
-		for (ApplicationMode m : ApplicationMode.allPossibleValues()) {
-			if (m.getCustomProfileName() != null && getActivity() != null &&
-					m.getCustomProfileName().equals(changedProfile.name) && isNewProfile) {
+		if (hasNameDuplicate()) {
+			if (getActivity() != null) {
 				AlertDialog.Builder duplicateNameWarning = createWarningDialog(getActivity(),
 						R.string.profile_alert_duplicate_name_title, R.string.profile_alert_duplicate_name_msg, R.string.shared_string_dismiss);
 				duplicateNameWarning.setOnDismissListener(new DialogInterface.OnDismissListener() {
@@ -448,9 +448,11 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 					}
 				});
 				duplicateNameWarning.show();
-				return false;
 			}
+			return false;
 		}
+
+
 		String customStringKey = profile.stringKey;
 		if (isNewProfile) {
 			customStringKey = profile.stringKey + "_" + System.currentTimeMillis();
@@ -466,6 +468,16 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 			ApplicationMode.changeProfileAvailability(mode, true, getMyApplication());
 		}
 		return true;
+	}
+
+	private boolean hasNameDuplicate() {
+		for (ApplicationMode m : ApplicationMode.allPossibleValues()) {
+			if (m.toHumanString(app).equals(changedProfile.name)
+					&& (m.getStringKey().equals(profile.stringKey) && isNewProfile)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public boolean isProfileAppearanceChanged(final MapActivity mapActivity) {
