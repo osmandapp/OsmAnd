@@ -921,7 +921,7 @@
     <string name="routing_attr_no_new_routing_name">قواعد توجيه No v1.9</string>
     <string name="navigate_point_northing">نحو الشمال</string>
     <string name="home_button">المنزل</string>
-    <string name="agps_data_last_downloaded">تنزيل بيانات A-GPS: %1 $ s</string>
+    <string name="agps_data_last_downloaded">تنزيل بيانات A-GPS: %1$s</string>
     <string name="welcome_text">أوسماند يوفر تصفح خرائط عالمي بدون اتصال، وكذلك ملاحة عالمية بدون اتصال.</string>
     <string name="welcome_header">أهلا</string>
     <string name="current_route">الطريق الحالي</string>
