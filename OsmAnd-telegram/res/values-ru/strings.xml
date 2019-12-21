@@ -251,4 +251,11 @@
     <string name="shared_string_start">Начало</string>
     <string name="set_time_timeline_descr">Выберите время для отображения</string>
     <string name="saved_messages">Сохраненные сообщения</string>
+    <string name="time_zone_descr">Выберите часовой пояс, чтобы показывать время вашего местоположения в сообщениях.</string>
+    <string name="time_zone">Часовой пояс</string>
+    <string name="units_and_formats">Единицы измерения и форматы</string>
+    <string name="unit_of_length_descr">Изменить единицу измерения расстояния.</string>
+    <string name="unit_of_length">Единицы измерения расстояния</string>
+    <string name="unit_of_speed_system_descr">Выберите единицу измерения скорости.</string>
+    <string name="unit_of_speed_system">Единица измерения скорости</string>
 </resources>
