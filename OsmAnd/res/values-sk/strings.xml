@@ -3392,4 +3392,6 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="street_city">%1$s, %2$s</string>
     <string name="personal_category_name">Osobné</string>
     <string name="shared_string_downloading_formatted">Sťahujem %s</string>
+    <string name="rendering_value_thick_name">Hrubé</string>
+    <string name="desert_render_descr">Pre púšte a iné riedko osídlené oblasti.</string>
 </resources>
