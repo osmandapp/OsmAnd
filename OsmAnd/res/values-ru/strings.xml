@@ -243,8 +243,8 @@
     <string name="map_widget_magnetic_bearing">Магнитный пеленг</string>
     <string name="map_widget_bearing">Курсовой угол</string>
     <string name="map_mode">Режим карты</string>
-    <string name="rendering_value_thin_name">Тонкий</string>
-    <string name="rendering_value_medium_name">Средний</string>
+    <string name="rendering_value_thin_name">Тонко</string>
+    <string name="rendering_value_medium_name">Средне</string>
     <string name="rendering_value_bold_name">Толстый</string>
     <string name="select_map_markers">Выберите маркеры</string>
     <string name="shared_string_topbar">Верхняя панель</string>
@@ -552,7 +552,7 @@
     <string name="preferred_locale">Локализация</string>
     <string name="shared_string_next">Далее</string>
     <string name="shared_string_previous">Предыдущий</string>
-    <string name="unit_of_length_descr">Выберите единицы измерения расстояния.</string>
+    <string name="unit_of_length_descr">Изменить единицу измерения расстояния.</string>
     <string name="unit_of_length">Единицы измерения расстояния</string>
     <string name="si_mi_feet">Мили/футы</string>
     <string name="si_mi_yard">Мили/ярды</string>
@@ -2334,7 +2334,7 @@
     <string name="shared_string_reset">Сбросить</string>
     <string name="shared_string_to">До</string>
     <string name="mapillary_menu_date_from">От</string>
-    <string name="shared_string_reload">Обновить</string>
+    <string name="shared_string_reload">Перезагрузить</string>
     <string name="mapillary_menu_filter_description">Фильтровать фотографии по отправителю, дате или типу. Фильтры применяются только для больших масштабов.</string>
     <string name="import_gpx_failed_descr">OsmAnd не удается импортировать файл. Проверьте имеет ли OsmAnd разрешение на чтение файла из его местоположения.</string>
     <string name="distance_moving">Откорректированное расстояние</string>
