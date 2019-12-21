@@ -373,7 +373,7 @@
     <string name="map_widget_fluorescent">طرق فلورية</string>
     <string name="map_widget_show_ruler">مسطرة</string>
     <string name="map_widget_view_direction">عرض الاتجاه</string>
-    <string name="map_widget_transparent">العدادات شفافة</string>
+    <string name="map_widget_transparent">عدادات شفافة</string>
     <string name="bg_service_sleep_mode_off">تشغيل
 \n التطبيق في الخلفية</string>
     <string name="bg_service_sleep_mode_on">إيقاف
@@ -1183,7 +1183,7 @@
     <string name="traffic_warning_calming">تخفيف الازدحام</string>
     <string name="traffic_warning_speed_camera">كاميرا مراقبة السرعة</string>
     <string name="traffic_warning">تنبيه مروري</string>
-    <string name="speak_poi">POI مجاورة</string>
+    <string name="speak_poi">نقاط الاهتمام المجاورة</string>
     <string name="way_alarms">تنبيهات مرورية</string>
     <string name="save_track_to_gpx_globally_headline">تسجيل المسار حسب الطلب</string>
     <string name="download_additional_maps">حمّل الخرائط المفقودة %1$s (%2$d MB)؟</string>
@@ -2181,7 +2181,7 @@
     <string name="shared_string_max">أقصى</string>
     <string name="shared_string_start_time">وقت البدء</string>
     <string name="shared_string_end_time">وقت الإنتهاء</string>
-    <string name="routing_attr_driving_style_name">نوع السياقة</string>
+    <string name="routing_attr_driving_style_name">اسلوب القيادة</string>
     <string name="altitude_descent">منحدر</string>
     <string name="altitude_ascent">مرتفع</string>
     <string name="altitude_range">مدى الارتفاع</string>
@@ -2215,7 +2215,7 @@
     <string name="driving_region_automatic">تلقائي</string>
     <string name="parking_options">خيارات الموقف</string>
     <string name="full_version_thanks">شكرا لكم لاقتناء النسخة الكاملة من أوسماند.</string>
-    <string name="routing_attr_driving_style_speed_name">طرق أقصر</string>
+    <string name="routing_attr_driving_style_speed_name">أقصر الطرق</string>
     <string name="routing_attr_driving_style_safety_name">تفضيل الشوارع الجانبية</string>
     <string name="shared_string_gpx_track">مسار</string>
     <string name="select_gpx_folder">حدد مجلد المسار</string>
@@ -3027,7 +3027,7 @@
 \n</string>
     <string name="apply_preference_to_all_profiles">يمكنك تطبيق هذا التغيير على جميع ملفات التعريف أو على ملف التعريف المحدد حاليًا فقط.</string>
     <string name="shared_preference">مشتركة</string>
-    <string name="routing_attr_driving_style_prefer_unpaved_name">تفضيل الطرق الغير ممهدة</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_name">تفضيل الطرق الغير معبدة</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">تفضيل الطرق غير المعبدة.</string>
     <string name="layer_osm_edits">تحرير خرائط OSM</string>
     <string name="quick_action_contour_lines_descr">لإظهار وإخفاء الخطوط الكنتورية على الخريطة.</string>
