@@ -324,7 +324,7 @@
     <string name="edit_tilesource_expiration_time">الانتهاء (دقائق)</string>
     <string name="edit_tilesource_choose_existing">اختر القائمة …</string>
     <string name="map_widget_fps_info">معلومات تنقيح FPS</string>
-    <string name="settings_preset_descr">اختيار وضع إفتراضي لعرض الخريطة: استعراض، سيارة، مشي .</string>
+    <string name="settings_preset_descr">اختيار وضع افتراضي لعرض الخريطة: استعراض، سيارة، مشي .</string>
     <string name="intermediate_items_sort_return">أُعيد ترتيب نقاط الوجهات الوسطى لتحسين ترتيبها من الموقع الحالي حتى الوجهة.</string>
     <string name="local_osm_changes_backup_successful">أنشئ ملف تعديل OSM بنجاح %1$s</string>
     <string name="local_osm_changes_backup_failed">فشلت عملية النسخ الاحتياطي لتعديل OSM.</string>
@@ -927,7 +927,7 @@
     <string name="current_route">الطريق الحالي</string>
     <string name="mark_to_delete">اختر للحذف</string>
     <string name="confirmation_to_clear_history">هل ترغب في حذف السجلات؟</string>
-    <string name="shared_string_go">ابدأ</string>
+    <string name="shared_string_go">اذهب</string>
     <string name="osmand_parking_overdue">تأخر</string>
     <string name="osmand_parking_time_left">يسار</string>
     <string name="your_edits">تعديلاتك</string>
@@ -982,7 +982,7 @@
     <string name="map_locale">لغة الخريطة</string>
     <string name="rendering_category_details">تفاصيل</string>
     <string name="map_widget_plain_time">الوقت الحالي</string>
-    <string name="rotate_map_to_bearing">الاتجاه</string>
+    <string name="rotate_map_to_bearing">اتجاه الخريطة</string>
     <string name="rotate_map_bearing_opt">حسب اتجاه الحركة</string>
     <string name="rotate_map_none_opt">الشمال في الأعلى</string>
     <string name="rotate_map_compass_opt">حسب البوصلة</string>
@@ -1588,7 +1588,7 @@
     <string name="lang_tl">التاغالوغية</string>
     <string name="lang_nv">النافاجونية</string>
     <string name="map_widget_magnetic_bearing">تأثير مغناطيسي</string>
-    <string name="coords_format">نمط الاحداثيات</string>
+    <string name="coords_format">نمط الإحداثيات</string>
     <string name="night">ليلاً</string>
     <string name="shared_string_move_up">حرك للاعلى</string>
     <string name="shared_string_move_down">حرك للاسفل</string>
@@ -1643,9 +1643,9 @@
     <string name="rendering_attr_hideUnderground_name">أشياء تحت الأرض</string>
     <string name="data_is_not_available">البيانات غير متوفرة</string>
     <string name="shared_string_read_more">إقرأ المزيد</string>
-    <string name="road_blocked">الطريق محظورة</string>
+    <string name="road_blocked">الطريق محظور</string>
     <string name="shared_string_select">تحديد</string>
-    <string name="switch_start_finish">إعكس نقطة الانطلاق و الوصول</string>
+    <string name="switch_start_finish">اعكس نقطة الانطلاق والوصول</string>
     <string name="rendering_attr_hideIcons_name">أيقونات POI</string>
     <string name="shared_string_type">النوع</string>
     <string name="shared_string_not_selected">غير محدد</string>
@@ -1806,7 +1806,7 @@
     <string name="saved_at_time">تم الحفظ في : %1$s</string>
     <string name="closing_at">يغلق على</string>
     <string name="opening_at">يفتح على</string>
-    <string name="poi">POI</string>
+    <string name="poi">نقاط</string>
     <string name="show_transport_over_map">عرض مواقف النقل</string>
     <string name="show_transport_over_map_description">عرض مواقف وسائل النقل العام على الخريطة.</string>
     <string name="transport_stop_to_go_out">إختر موقف النزول</string>
