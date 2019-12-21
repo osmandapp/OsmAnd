@@ -3683,8 +3683,8 @@
     <string name="poi_tourist_bus_yes">Доступ на туристичному автобусі: так</string>
     <string name="poi_tourist_bus_designated">Доступ на автобусі: призначено</string>
     <string name="poi_tourist_bus_no">Доступ на туристичному автобусі: ні</string>
-    <string name="poi_coach_yes">Доступ тренера: так</string>
-    <string name="poi_coach_no">Доступ тренера: ні</string>
+    <string name="poi_coach_yes">Доступ на автобусі далекого прямування: так</string>
+    <string name="poi_coach_no">Доступ на автобусі далекого прямування: ні</string>
     <string name="poi_ski_yes">Доступ на лижах: так</string>
     <string name="poi_ski_no">Доступ на лижах: ні</string>
     <string name="poi_snowmobile_private">Доступ на снігоїзді: приватний</string>
@@ -3749,7 +3749,7 @@
     <string name="poi_monastery_type_convent">Вид монастиря: жіночий</string>
     <string name="poi_monastery_type_canonry">Вид монастиря: канонір</string>
     <string name="poi_monastery_type_hermitage">Вид монастиря: ермітаж</string>
-    <string name="poi_monastery_type_clerks_regular">Вид монастиря: клериканський регулярний</string>
+    <string name="poi_monastery_type_clerks_regular">Вид монастиря: регулярні клірики</string>
     <string name="poi_tourist_camp">Туристичний табір</string>
     <string name="poi_community_gender_female">Стать спільноти: жіноча</string>
     <string name="poi_community_gender_male">Стать спільноти: чоловіча</string>
