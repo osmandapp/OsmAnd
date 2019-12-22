@@ -1038,7 +1038,7 @@
     <string name="renderer_load_sucess">"Carregouse a visualización "</string>
     <string name="renderer_load_exception">Non foi posíbel cargar o visualizador (renderizador).</string>
     <string name="renderers">Renderizador vectorial</string>
-    <string name="renderers_descr">Escolle a aparencia da visualización (renderizado).</string>
+    <string name="renderers_descr">Escolle a aparencia da visualización (renderizado) dos mapas</string>
     <string name="poi_context_menu_website">Amosar sitio web do punto de interese</string>
     <string name="poi_context_menu_call">Amosar teléfono do punto de interese</string>
     <string name="download_type_to_filter">tipo que filtrar</string>
@@ -2906,7 +2906,7 @@ Lon %2$s</string>
     <string name="intermediate_destinations">Destinos intermedios</string>
     <string name="arrive_at_time">Chegada ás %1$s</string>
     <string name="lang_gn_py">Guaraní</string>
-    <string name="quick_action_switch_day_night_descr">Un botón que troca entre o modo día e noite para o OsmAnd</string>
+    <string name="quick_action_switch_day_night_descr">Un botón que troca entre o modo día e noite para o OsmAnd.</string>
     <string name="quick_action_switch_day_mode">Modo día</string>
     <string name="quick_action_switch_night_mode">Modo noite</string>
     <string name="quick_action_day_night_switch_mode">Trocar modos día e noite</string>
