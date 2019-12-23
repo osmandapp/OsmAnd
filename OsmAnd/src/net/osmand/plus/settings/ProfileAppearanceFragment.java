@@ -20,7 +20,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -30,6 +29,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
+import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment;
 import net.osmand.plus.profiles.SettingsProfileFragment;
@@ -134,12 +134,22 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = super.onCreateView(inflater, container, savedInstanceState);
 		if (view != null) {
-			FrameLayout frameLayout = view.findViewById(android.R.id.list_container);
-			View inflatedLayout = UiUtilities.getInflater(getContext(), isNightMode())
-					.inflate(R.layout.preference_cancel_save_button, frameLayout, false);
-			frameLayout.addView(inflatedLayout);
-			Button cancelButton = inflatedLayout.findViewById(R.id.cancel_button);
-			Button saveButton = inflatedLayout.findViewById(R.id.save_profile_btn);
+			FrameLayout preferencesContainer = view.findViewById(android.R.id.list_container);
+			LayoutInflater themedInflater = UiUtilities.getInflater(getContext(), isNightMode());
+			View buttonsContainer = themedInflater.inflate(R.layout.bottom_buttons, preferencesContainer, false);
+
+			preferencesContainer.addView(buttonsContainer);
+			View cancelButton = buttonsContainer.findViewById(R.id.dismiss_button);
+			View saveButton = buttonsContainer.findViewById(R.id.right_bottom_button);
+
+			saveButton.setVisibility(View.VISIBLE);
+			buttonsContainer.findViewById(R.id.buttons_divider).setVisibility(View.VISIBLE);
+
+			AndroidUtils.setBackground(getContext(), buttonsContainer, isNightMode(), R.color.list_background_color_light, R.color.list_background_color_dark);
+
+			UiUtilities.setupDialogButton(false, cancelButton, DialogButtonType.SECONDARY, R.string.shared_string_cancel);
+			UiUtilities.setupDialogButton(false, saveButton, DialogButtonType.PRIMARY, R.string.shared_string_save);
+
 			cancelButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {

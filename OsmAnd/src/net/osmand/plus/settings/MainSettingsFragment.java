@@ -40,6 +40,7 @@ public class MainSettingsFragment extends BaseSettingsFragment {
 	private static final String CREATE_PROFILE = "create_profile";
 	private static final String IMPORT_PROFILE = "import_profile";
 	private static final String REORDER_PROFILES = "reorder_profiles";
+
 	private List<ApplicationMode> allAppModes;
 	private Set<ApplicationMode> availableAppModes;
 	private SelectProfileListener selectProfileListener = null;
@@ -89,7 +90,7 @@ public class MainSettingsFragment extends BaseSettingsFragment {
 
 	@Override
 	public boolean onPreferenceChange(Preference preference, Object newValue) {
-        ApplicationMode applicationMode = ApplicationMode.valueOfStringKey(preference.getKey(), null);
+		ApplicationMode applicationMode = ApplicationMode.valueOfStringKey(preference.getKey(), null);
 		if (applicationMode != null) {
 			if (newValue instanceof Boolean) {
 				boolean isChecked = (Boolean) newValue;
@@ -121,7 +122,7 @@ public class MainSettingsFragment extends BaseSettingsFragment {
 	}
 
 	private void setupConfigureProfilePref() {
-        ApplicationMode selectedMode = app.getSettings().APPLICATION_MODE.get();
+		ApplicationMode selectedMode = app.getSettings().APPLICATION_MODE.get();
 		String title = selectedMode.toHumanString(getContext());
 		String profileType = getAppModeDescription(getContext(), selectedMode);
 		int iconRes = selectedMode.getIconRes();

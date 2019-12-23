@@ -50,15 +50,13 @@ public class EditProfilesFragment extends BaseOsmAndFragment {
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		final MapActivity mapActivity = (MapActivity) requireActivity();
+		OsmandApplication app = requireMyApplication();
 		if (savedInstanceState != null && savedInstanceState.containsKey(APP_MODES_ORDER_KEY) && savedInstanceState.containsKey(DELETED_APP_MODES_KEY)) {
 			appModesOrders = (HashMap<String, Integer>) savedInstanceState.getSerializable(APP_MODES_ORDER_KEY);
 			deletedModesKeys = savedInstanceState.getStringArrayList(DELETED_APP_MODES_KEY);
 		} else {
-			List<ApplicationMode> appModes = ApplicationMode.allPossibleValues();
-			for (int i = 0; i < appModes.size(); i++) {
-				ApplicationMode mode = appModes.get(i);
-				appModesOrders.put(mode.getStringKey(), i);
+			for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
+				appModesOrders.put(mode.getStringKey(), mode.getOrder());
 			}
 		}
 		View mainView = inflater.inflate(R.layout.edit_profiles_list_fragment, container, false);
@@ -82,7 +80,7 @@ public class EditProfilesFragment extends BaseOsmAndFragment {
 		RecyclerView recyclerView = mainView.findViewById(R.id.profiles_list);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-		adapter = new EditProfilesAdapter(mapActivity);
+		adapter = new EditProfilesAdapter(app);
 		updateItems();
 
 		final ItemTouchHelper touchHelper = new ItemTouchHelper(new ReorderItemTouchHelperCallback(adapter));
@@ -125,7 +123,7 @@ public class EditProfilesFragment extends BaseOsmAndFragment {
 
 		recyclerView.setAdapter(adapter);
 
-		View cancelButton = mainView.findViewById(R.id.cancel_button);
+		View cancelButton = mainView.findViewById(R.id.dismiss_button);
 		UiUtilities.setupDialogButton(false, cancelButton, UiUtilities.DialogButtonType.SECONDARY, R.string.shared_string_cancel);
 		cancelButton.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -137,8 +135,11 @@ public class EditProfilesFragment extends BaseOsmAndFragment {
 			}
 		});
 
-		View applyButton = mainView.findViewById(R.id.apply_button);
+		mainView.findViewById(R.id.buttons_divider).setVisibility(View.VISIBLE);
+
+		View applyButton = mainView.findViewById(R.id.right_bottom_button);
 		UiUtilities.setupDialogButton(false, applyButton, UiUtilities.DialogButtonType.PRIMARY, R.string.shared_string_apply);
+		applyButton.setVisibility(View.VISIBLE);
 		applyButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -271,9 +272,9 @@ public class EditProfilesFragment extends BaseOsmAndFragment {
 
 		private boolean nightMode;
 
-		EditProfilesAdapter(MapActivity mapActivity) {
+		EditProfilesAdapter(OsmandApplication app) {
 			setHasStableIds(true);
-			app = mapActivity.getMyApplication();
+			this.app = app;
 			uiUtilities = app.getUIUtilities();
 			nightMode = !app.getSettings().isLightContent();
 		}
