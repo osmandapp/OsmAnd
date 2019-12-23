@@ -58,10 +58,11 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 	private static final String SELECT_ICON = "select_icon";
 	private static final String COLOR_ITEMS = "color_items";
 	private static final String ICON_ITEMS = "icon_items";
-	private static final String SELECT_MAP_ICON = "select_map_icon";
-	private static final String SELECT_NAV_ICON = "select_nav_icon";
+//	private static final String SELECT_MAP_ICON = "select_map_icon";
+//	private static final String SELECT_NAV_ICON = "select_nav_icon";
 
 	public static final String PROFILE_NAME_KEY = "profile_name_key";
+	public static final String PROFILE_STRINGKEY_KEY = "profile_stringkey_key";
 	public static final String PROFILE_ICON_RES_KEY = "profile_icon_res_key";
 	public static final String PROFILE_COLOR_KEY = "profile_color_key";
 	public static final String PROFILE_PARENT_KEY = "profile_parent_key";
@@ -73,7 +74,6 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 	private EditText profileName;
 	private FlowLayout colorItems;
 	private FlowLayout iconItems;
-	private boolean isNewProfile = false;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -91,14 +91,13 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 			}
 		}
 		if (baseModeForNewProfile != null) {
-			profile.stringKey = baseModeForNewProfile.getStringKey();
+			profile.stringKey = baseModeForNewProfile.getStringKey() + "_" + System.currentTimeMillis();
 			profile.parent = baseModeForNewProfile;
 			profile.name = baseModeForNewProfile.toHumanString(getContext());
 			profile.color = baseModeForNewProfile.getIconColorInfo();
 			profile.iconRes = baseModeForNewProfile.getIconRes();
 			profile.routingProfile = baseModeForNewProfile.getRoutingProfile();
 			profile.routeService = baseModeForNewProfile.getRouteService();
-			isNewProfile = true;
 		} else {
 			profile.stringKey = getSelectedAppMode().getStringKey();
 			profile.parent = getSelectedAppMode().getParent();
@@ -185,6 +184,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 
 	private void saveState(Bundle outState) {
 		outState.putString(PROFILE_NAME_KEY, changedProfile.name);
+		outState.putString(PROFILE_STRINGKEY_KEY, changedProfile.stringKey);
 		outState.putInt(PROFILE_ICON_RES_KEY, changedProfile.iconRes);
 		outState.putSerializable(PROFILE_COLOR_KEY, changedProfile.color);
 		if (changedProfile.parent != null) {
@@ -194,10 +194,11 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 
 	private void restoreState(Bundle savedInstanceState) {
 		changedProfile.name = savedInstanceState.getString(PROFILE_NAME_KEY);
+		changedProfile.stringKey = savedInstanceState.getString(PROFILE_STRINGKEY_KEY);
 		changedProfile.iconRes = savedInstanceState.getInt(PROFILE_ICON_RES_KEY);
 		changedProfile.color = (ApplicationMode.ProfileIconColors) savedInstanceState.getSerializable(PROFILE_COLOR_KEY);
-		String stringKey = savedInstanceState.getString(PROFILE_PARENT_KEY);
-		changedProfile.parent = ApplicationMode.valueOfStringKey(stringKey, null);
+		String parentStringKey = savedInstanceState.getString(PROFILE_PARENT_KEY);
+		changedProfile.parent = ApplicationMode.valueOfStringKey(parentStringKey, null);
 	}
 
 	@Override
@@ -452,13 +453,8 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 			return false;
 		}
 
-
-		String customStringKey = profile.stringKey;
-		if (isNewProfile) {
-			customStringKey = profile.stringKey + "_" + System.currentTimeMillis();
-		}
 		ApplicationMode.ApplicationModeBuilder builder = ApplicationMode
-				.createCustomMode(changedProfile.parent, changedProfile.name.trim(), customStringKey)
+				.createCustomMode(changedProfile.parent, changedProfile.name.trim(), changedProfile.stringKey)
 				.icon(app, ApplicationMode.ProfileIcons.getResStringByResId(changedProfile.iconRes))
 				.setRouteService(changedProfile.routeService)
 				.setRoutingProfile(changedProfile.routingProfile)
@@ -472,8 +468,8 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 
 	private boolean hasNameDuplicate() {
 		for (ApplicationMode m : ApplicationMode.allPossibleValues()) {
-			if (m.toHumanString(app).equals(changedProfile.name)
-					&& (m.getStringKey().equals(profile.stringKey) && isNewProfile)) {
+			if (m.toHumanString(app).equals(changedProfile.name) &&
+					!m.getStringKey().equals(profile.stringKey)) {
 				return true;
 			}
 		}
