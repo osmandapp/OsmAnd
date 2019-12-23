@@ -252,8 +252,10 @@
     <string name="set_time_timeline_descr">Dauer der Anzeige auswählen</string>
     <string name="saved_messages">Gespeicherte Nachrichten</string>
     <string name="time_zone">Zeitzone</string>
-    <string name="units_and_formats">Einheiten &amp; Formate</string>
+    <string name="units_and_formats">Einheiten und Formate</string>
     <string name="unit_of_length">Längeneinheiten</string>
     <string name="unit_of_speed_system_descr">Geschwindigkeitseinheit festlegen.</string>
     <string name="unit_of_speed_system">Geschwindigkeitseinheit</string>
+    <string name="time_zone_descr">Wählen Sie die Zeitzone aus, die in Ihren Standortmeldungen angezeigt werden soll.</string>
+    <string name="unit_of_length_descr">Maß für Entfernungen ändern.</string>
 </resources>

@@ -195,7 +195,7 @@
     <string name="shared_string_telegram">טלגרם</string>
     <string name="privacy_policy_use_telegram">טלגרם (יישומון ההתכתבות) משמש תשתית להתחברות ולתקשורת עם אנשים.</string>
     <string name="privacy_policy_telegram_client">העוקב של OsmAnd הוא אחד הלקוחות שמשתמש בפלטפורמה הפתוחה של טלגרם. אנשי הקשר שלך יכולים להשתמש בכל לקוח טלגרם שיבחרו.</string>
-    <string name="privacy_policy_agree">לחיצה על המשך מהווה את הסכמתך לתנאי מדיניות הפרטיות של טלגרם ולתנאי מדיניות הפרטיות של OsmAnd.</string>
+    <string name="privacy_policy_agree">לחיצה על „המשך” מהווה את הסכמתך לתנאי מדיניות הפרטיות של טלגרם ושל OsmAnd.</string>
     <string name="shared_string_accept">קבלה</string>
     <string name="telegram_privacy_policy">מדיניות הפרטיות של טלגרם</string>
     <string name="osmand_privacy_policy">מדיניות הפרטיות של OsmAnd</string>
@@ -250,4 +250,11 @@
     <string name="location_sharing_status">משותף: %1$s</string>
     <string name="shared_string_enabled">מופעל</string>
     <string name="saved_messages">הודעות שמורות</string>
+    <string name="time_zone_descr">נא לבחור את אזור הזמן בהודעות המיקום שלך.</string>
+    <string name="time_zone">אזור זמן</string>
+    <string name="units_and_formats">יחידות ותבניות</string>
+    <string name="unit_of_length_descr">שינוי היחידות שבהן מודדים מרחק.</string>
+    <string name="unit_of_length">יחידות אורך</string>
+    <string name="unit_of_speed_system_descr">הגדרת יחידת מהירות.</string>
+    <string name="unit_of_speed_system">יחידת מהירות</string>
 </resources>

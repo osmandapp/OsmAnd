@@ -3391,4 +3391,5 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="distance_and_address">%1$s • %2$s</string>
     <string name="street_city">%1$s, %2$s</string>
     <string name="personal_category_name">Osobné</string>
+    <string name="shared_string_downloading_formatted">Sťahujem %s</string>
 </resources>

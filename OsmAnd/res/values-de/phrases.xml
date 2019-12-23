@@ -346,7 +346,7 @@
     <string name="poi_paragliding">Gleitschirmfliegen</string>
     <string name="poi_park">Park</string>
     <string name="poi_parking">Parkplatz</string>
-    <string name="poi_parking_entrance">Parkeinfahrt</string>
+    <string name="poi_parking_entrance">Parkplatzeinfahrt</string>
     <string name="poi_craft_parquet_layer">Parkettleger</string>
     <string name="poi_pawnbroker">Pfandleiher</string>
     <string name="poi_peak">Berggipfel</string>
@@ -392,7 +392,7 @@
     <string name="poi_public_transport_platform_bus">Bushaltestelle</string>
     <string name="poi_public_transport_platform_tram">Straßenbahnhaltestelle</string>
     <string name="poi_public_transport_platform_trolleybus">Haltestelle für Oberleitungsbus</string>
-    <string name="poi_public_transport_station">Öff. Verkehrsmittel-Station</string>
+    <string name="poi_public_transport_station">ÖPNV-Station</string>
     <string name="poi_quarry">Steinbruch</string>
     <string name="poi_raceway">Rennstrecke</string>
     <string name="poi_racquet">Racquetball</string>
@@ -1151,7 +1151,7 @@
     <string name="poi_fuel_91ul">Avgas UL 91</string>
     <string name="poi_fuel_100ll">Avgas 100LL</string>
     <string name="poi_fuel_autogas">Autogas</string>
-    <string name="poi_fuel_jeta1">Flugzeug A-1 Kraftstoff</string>
+    <string name="poi_fuel_jeta1">Flugkraftstoff Jet A-1</string>
     <string name="poi_fuel_adblue">AdBlue</string>
     <string name="poi_fuel_wood">Kraftstoff: Holz</string>
     <string name="poi_street_lamp">Straßenlaterne</string>
@@ -2789,7 +2789,7 @@
     <string name="poi_covered">Überdacht</string>
     <string name="poi_ferry_terminal_cargo">Fracht</string>
     <string name="poi_bicycle_parking_type">Typ</string>
-    <string name="poi_aerialway_bicycle">Radtransport</string>
+    <string name="poi_aerialway_bicycle">Fahrradtransport</string>
     <string name="poi_aerialway_heating">Heizung</string>
     <string name="poi_pump">Pumpe</string>
     <string name="poi_observatory_designation">Bezeichnung</string>
@@ -3614,7 +3614,7 @@
     <string name="poi_access_motorcycle">Zufahrt Motorrad</string>
     <string name="poi_access_moped">Zufahrt Moped</string>
     <string name="poi_access_mofa">Zufahrt Mofa</string>
-    <string name="poi_access_hgv">Zufahrt LKW</string>
+    <string name="poi_access_hgv">Zufahrt Lkw</string>
     <string name="poi_access_goods">Zufahrt leichter Lieferfahrzeuge</string>
     <string name="poi_access_disabled">Behindertengerechter Zugang</string>
     <string name="poi_taxi_office">Taxibüro</string>

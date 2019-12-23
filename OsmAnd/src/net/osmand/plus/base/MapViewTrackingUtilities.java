@@ -29,6 +29,7 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.MapUtils;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 
 public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLocationListener,
 		OsmAndCompassListener, MapMarkerChangedListener {
@@ -360,7 +361,13 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 				mapView.refreshMap();
 			}
 			if (location == null) {
-				app.showToastMessage(R.string.unknown_location);
+				//Hardy, 2019-12-15: Inject A-GPS data if backToLocationImpl fails with no fix:
+				if (app.getSettings().isInternetConnectionAvailable(true)) {
+					locationProvider.redownloadAGPS();
+					app.showToastMessage(app.getString(R.string.unknown_location) + "\n\n" + app.getString(R.string.agps_data_last_downloaded, (new SimpleDateFormat("yyyy-MM-dd  HH:mm")).format(app.getSettings().AGPS_DATA_LAST_TIME_DOWNLOADED.get())));
+				} else {
+					app.showToastMessage(R.string.unknown_location);
+				}
 			}
 		}
 	}
