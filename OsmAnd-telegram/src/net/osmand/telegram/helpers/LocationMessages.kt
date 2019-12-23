@@ -23,6 +23,8 @@ class LocationMessages(val app: TelegramApplication) {
 
 	private val dbHelper: SQLiteHelper
 
+	private var lastRemoveTime: Long? = null
+
 	init {
 		dbHelper = SQLiteHelper(app)
 		readBufferedMessages()
@@ -30,30 +32,37 @@ class LocationMessages(val app: TelegramApplication) {
 	}
 
 	fun getBufferedMessages(): List<BufferMessage> {
+		removeOldBufferedMessages()
 		return bufferedMessages.sortedBy { it.time }
 	}
 
 	fun getBufferedMessagesCount(): Int {
+		removeOldBufferedMessages()
 		return bufferedMessages.size
 	}
 
 	fun getBufferedMessagesCountForChat(chatId: Long, type: Int): Int {
+		removeOldBufferedMessages()
 		return bufferedMessages.count { it.chatId == chatId && it.type == type }
 	}
 
 	fun getBufferedMessagesCountForChat(chatId: Long): Int {
+		removeOldBufferedMessages()
 		return bufferedMessages.count { it.chatId == chatId}
 	}
 
 	fun getBufferedMessagesForChat(chatId: Long): List<BufferMessage> {
+		removeOldBufferedMessages()
 		return bufferedMessages.filter { it.chatId == chatId }.sortedBy { it.time }
 	}
 
 	fun getBufferedTextMessagesForChat(chatId: Long): List<BufferMessage> {
+		removeOldBufferedMessages()
 		return bufferedMessages.filter { it.chatId == chatId && it.type == TYPE_TEXT }.sortedBy { it.time }
 	}
 
 	fun getBufferedMapMessagesForChat(chatId: Long): List<BufferMessage> {
+		removeOldBufferedMessages()
 		return bufferedMessages.filter { it.chatId == chatId && it.type == TYPE_MAP }.sortedBy { it.time }
 	}
 
@@ -84,7 +93,7 @@ class LocationMessages(val app: TelegramApplication) {
 
 	fun addBufferedMessage(message: BufferMessage) {
 		log.debug("addBufferedMessage $message")
-		val messages = mutableListOf(*this.bufferedMessages.toTypedArray())
+		val messages = this.bufferedMessages.toMutableList()
 		messages.add(message)
 		this.bufferedMessages = messages
 		dbHelper.addBufferedMessage(message)
@@ -134,14 +143,38 @@ class LocationMessages(val app: TelegramApplication) {
 
 	fun removeBufferedMessage(message: BufferMessage) {
 		log.debug("removeBufferedMessage $message")
-		val messages = mutableListOf(*this.bufferedMessages.toTypedArray())
+		val messages = this.bufferedMessages.toMutableList()
 		messages.remove(message)
 		this.bufferedMessages = messages
 		dbHelper.removeBufferedMessage(message)
 	}
 
+	private fun removeOldBufferedMessages() {
+		val currentTime = System.currentTimeMillis()
+		if (this.bufferedMessages.isNotEmpty() && isTimeToDelete(currentTime)) {
+			val bufferExpirationTime = app.settings.bufferTime * 1000
+			val messages = this.bufferedMessages.toMutableList()
+			val expiredList = messages.filter {
+				currentTime - it.time > bufferExpirationTime
+			}
+			expiredList.forEach { message ->
+				dbHelper.removeBufferedMessage(message)
+			}
+			messages.removeAll(expiredList)
+			this.bufferedMessages = messages.toList()
+			lastRemoveTime = currentTime
+		}
+	}
+
+	private fun isTimeToDelete(currentTime: Long) = if (lastRemoveTime != null) {
+		currentTime - lastRemoveTime!! > 60000L
+	} else {
+		true
+	}
+
 	private fun readBufferedMessages() {
 		this.bufferedMessages = dbHelper.getBufferedMessages()
+		removeOldBufferedMessages()
 	}
 
 	private fun readLastMessages() {
