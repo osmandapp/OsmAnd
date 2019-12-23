@@ -156,7 +156,7 @@ class LocationMessages(val app: TelegramApplication) {
 				val diffTime = currentTime - message.time
 				if (diffTime > bufferTime) {
 					log.debug("remove old buffered message: $message with diff in time: $diffTime")
-                    dbHelper.removeBufferedMessage(message)
+					dbHelper.removeBufferedMessage(message)
 				} else {
 					cleanedList.add(message)
 				}
