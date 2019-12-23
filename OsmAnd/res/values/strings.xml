@@ -11,9 +11,9 @@
 	Thx - Hardy
 
 -->
-	  <string name="select_navigation_icon">Select navigation icon</string>
-	  <string name="select_map_icon">Select map icon</string>
-	  <string name="delete_profiles_descr">After you tap Apply, deleted profiles will be lost completely.</string>
+    <string name="select_navigation_icon">Select navigation icon</string>
+    <string name="select_map_icon">Select map icon</string>
+    <string name="delete_profiles_descr">After you tap Apply, deleted profiles will be lost completely.</string>
     <string name="master_profile">Master profile</string>
     <string name="select_color">Select color</string>
     <string name="rendering_value_thick_name">Thick</string>
@@ -30,7 +30,7 @@
     <string name="save_heading_descr">Save heading to each trackpoint while recording.</string>
     <string name="profile_appearance">Profile appearance</string>
     <string name="choose_icon_color_name">Choose icon, color and name</string>
-	<string name="reorder_profiles"> Edit profiles list</string>
+    <string name="reorder_profiles">Edit profiles list</string>
     <string name="selected_profile">Selected profile</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_name">Node networks</string>
     <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Show node network cycle routes</string>
@@ -56,7 +56,7 @@
     <string name="exported_osmand_profile">OsmAnd profile: %1$s</string>
     <string name="overwrite_profile_q">Profile \'%1$s\' already exists. Overwrite?</string>
     <string name="export_profile_failed">Could not export profile.</string>
-	<string name="profile_import">Profile import</string>
+    <string name="profile_import">Profile import</string>
     <string name="profile_import_descr">To import a profile, select its file on the device and open it with OsmAnd.</string>
     <string name="file_import_error">%1$s import error: %2$s</string>
     <string name="file_imported_successfully">%1$s successfully imported.</string>
@@ -318,7 +318,7 @@
     <string name="profile_alert_need_save_msg">Save changes to the profile first</string>
     <string name="profile_alert_delete_title">Delete profile</string>
     <string name="profile_alert_delete_msg">Are you sure you want to delete the \"%s\" profile</string>
-	<string name="select_base_profile_dialog_title">Select profile to start with</string>
+    <string name="select_base_profile_dialog_title">Select profile to start with</string>
     <string name="select_base_profile_dialog_message">Base your custom profile on one of the default app profiles, this defines the basic setup like default visibility of widgets and units of speed and distance. These are the default app profiles, together with examples of custom profiles they may be extended to:</string>
     <string name="select_nav_profile_dialog_title">Select navigation type</string>
     <string name="base_profile_descr_car">Car, truck, motorcycle</string>
