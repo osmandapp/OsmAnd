@@ -5,6 +5,13 @@
 	android:title="@string/routing_settings_2">
 
 	<Preference
+		android:key="navigation_type"
+		android:layout="@layout/preference_with_descr"
+		android:summary="@string/rendering_value_car_name"
+		android:title="@string/nav_type_hint"
+		tools:icon="@drawable/ic_action_car_dark" />
+
+	<Preference
 		android:key="route_parameters"
 		android:layout="@layout/preference_with_descr"
 		android:summary="@string/route_parameters_descr"

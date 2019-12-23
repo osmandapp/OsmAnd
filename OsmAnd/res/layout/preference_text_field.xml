@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:gravity="center_vertical"
+	android:orientation="horizontal">
+
+	<net.osmand.plus.widgets.OsmandTextFieldBoxes
+		android:id="@+id/profile_name_otfb"
+		android:layout_width="0dp"
+		android:layout_height="60dp"
+		android:layout_margin="@dimen/list_content_padding"
+		android:layout_weight="1"
+		app:labelText="@string/profile_name_hint"
+		app:primaryColor="@color/active_color_primary_dark"
+		app:secondaryColor="?android:textColorSecondary">
+
+		<studio.carbonylgroup.textfieldboxes.ExtendedEditText
+			android:id="@+id/profile_name_et"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:lines="1"
+			android:maxLines="1"
+			android:singleLine="true"
+			tools:text="@string/lorem_ipsum" />
+
+	</net.osmand.plus.widgets.OsmandTextFieldBoxes>
+
+</LinearLayout>

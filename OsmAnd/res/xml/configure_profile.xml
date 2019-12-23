@@ -8,8 +8,7 @@
 		android:key="configure_profile_info"
 		android:layout="@layout/preference_info_descr"
 		android:persistent="false"
-		android:selectable="false"
-		android:title="@string/configure_profile_info" />
+		android:selectable="false"/>
 
 	<Preference
 		android:key="general_settings"
@@ -46,6 +45,14 @@
 		tools:icon="@drawable/ic_configure_screen_dark" />
 
 	<Preference
+		android:key="profile_appearance"
+		android:layout="@layout/preference_with_descr"
+		android:persistent="false"
+		android:summary="@string/choose_icon_color_name"
+		android:title="@string/profile_appearance"
+		tools:icon="@drawable/ic_action_offroad" />
+
+	<Preference
 		android:layout="@layout/list_item_divider"
 		android:selectable="false" />
 
@@ -70,6 +77,13 @@
 		android:persistent="false"
 		android:title="@string/export_profile"
 		tools:icon="@drawable/ic_action_app_configuration" />
+
+	<Preference
+		android:key="delete_profile"
+		android:layout="@layout/preference_button"
+		android:persistent="false"
+		android:title="@string/profile_alert_delete_title"
+		tools:icon="@drawable/ic_action_delete_dark" />
 
 	<Preference
 		android:key="export_profile_descr"

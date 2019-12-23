@@ -170,7 +170,7 @@ public class SettingsProfileFragment extends BaseOsmAndFragment
 		return typeListener;
 	}
 
-	static List<ProfileDataObject> getBaseProfiles(Context ctx) {
+	public static List<ProfileDataObject> getBaseProfiles(Context ctx) {
 		List<ProfileDataObject> profiles = new ArrayList<>();
 		for (ApplicationMode mode : ApplicationMode.getDefaultValues()) {
 			if (mode != ApplicationMode.DEFAULT) {
@@ -188,9 +188,7 @@ public class SettingsProfileFragment extends BaseOsmAndFragment
 			if (activity instanceof SettingsProfileActivity) {
 				Intent intent = new Intent(getActivity(), EditProfileActivity.class);
 				intent.putExtra(PROFILE_STRING_KEY, item.getStringKey());
-				if (item.isCustomProfile()) {
-					intent.putExtra(IS_USER_PROFILE, true);
-				}
+				intent.putExtra(IS_USER_PROFILE, item.isCustomProfile());
 				activity.startActivity(intent);
 			} else {
 				FragmentManager fragmentManager = activity.getSupportFragmentManager();

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:id="@+id/buttons_container"
+	android:layout_width="match_parent"
+	android:layout_height="@dimen/dialog_button_ex_height"
+	android:gravity="center"
+	android:layout_gravity="bottom"
+	android:orientation="horizontal"
+	android:paddingLeft="@dimen/content_padding"
+	android:paddingRight="@dimen/content_padding">
+
+	<include
+		android:id="@+id/dismiss_button"
+		layout="@layout/bottom_sheet_dialog_button" />
+
+	<View
+		android:id="@+id/buttons_divider"
+		android:layout_width="@dimen/content_padding"
+		android:layout_height="match_parent"
+		android:visibility="gone"
+		tools:visibility="visible" />
+
+	<include
+		android:id="@+id/right_bottom_button"
+		layout="@layout/bottom_sheet_dialog_button"
+		android:visibility="gone"
+		tools:visibility="visible" />
+
+</LinearLayout>

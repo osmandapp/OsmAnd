@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:background="?attr/activity_background_color"
+	android:orientation="vertical">
+
+	<android.support.design.widget.AppBarLayout
+		android:id="@+id/appbar"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
+
+		<include layout="@layout/global_preference_toolbar" />
+
+	</android.support.design.widget.AppBarLayout>
+
+	<FrameLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent">
+
+		<android.support.v7.widget.RecyclerView
+			android:id="@+id/profiles_list"
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:background="?attr/list_background_color"
+			android:clipToPadding="false"
+			android:paddingBottom="72dp" />
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_gravity="bottom"
+			android:orientation="vertical">
+
+			<ImageView
+				android:id="@+id/buttons_shadow"
+				android:layout_width="match_parent"
+				android:layout_height="10dp"
+				android:background="@drawable/bg_contextmenu_shadow_top_light" />
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:background="?attr/list_background_color">
+
+				<include
+					layout="@layout/bottom_buttons"
+					android:layout_width="match_parent"
+					android:layout_height="@dimen/dialog_button_ex_height" />
+
+			</LinearLayout>
+
+		</LinearLayout>
+
+	</FrameLayout>
+
+</LinearLayout>
