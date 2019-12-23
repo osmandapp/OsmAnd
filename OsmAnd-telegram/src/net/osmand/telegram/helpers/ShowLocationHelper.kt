@@ -43,6 +43,11 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 
 		const val GPX_COLORS_COUNT = 10
 
+		private const val STATUS_WIDGET_ID = "status_widget"
+		private const val STATUS_WIDGET_MENU_ICON = "ic_action_speed"
+		private const val STATUS_WIDGET_DAY_ICON = "widget_speed_day"
+		private const val STATUS_WIDGET_NIGHT_ICON = "widget_speed_night"
+
 		val GPX_COLORS = arrayOf(
 			"red", "orange", "lightblue", "blue", "purple",
 			"translucent_red", "translucent_orange", "translucent_lightblue",
@@ -196,6 +201,31 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 				}
 			}
 		}
+	}
+
+	fun updateStatusWidget(count: Int) {
+		val text = when {
+			count > 0 -> count.toString()
+			count == 0 -> "ON"
+			else -> "OFF"
+		}
+		val bufferText = when {
+			count > 0 -> count.toString()
+			else -> ""
+		}
+		osmandAidlHelper.addMapWidget(
+				STATUS_WIDGET_ID,
+				STATUS_WIDGET_MENU_ICON,
+				app.getString(R.string.status_widget_title),
+				STATUS_WIDGET_DAY_ICON,
+				STATUS_WIDGET_NIGHT_ICON,
+				text, bufferText, 50, getStatusWidgetIntent())
+	}
+
+	private fun getStatusWidgetIntent(): Intent {
+		val startIntent = app.packageManager.getLaunchIntentForPackage(app.packageName)
+		startIntent.addCategory(Intent.CATEGORY_LAUNCHER)
+		return startIntent
 	}
 
 	private fun getALatLonFromMessage(content: TdApi.MessageContent): ALatLon? {

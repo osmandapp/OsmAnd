@@ -154,6 +154,7 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 		if (shouldCleanupResources) {
 			app.cleanupResources()
 		}
+		app().showLocationHelper.updateStatusWidget(-1)
 
 		// remove notification
 		stopForeground(java.lang.Boolean.TRUE)
@@ -194,6 +195,7 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 		updateShareInfoHandler?.postDelayed({
 			if (isUsedByMyLocation(usedBy)) {
 				app().shareLocationHelper.updateSendLiveMessages()
+				app().showLocationHelper.updateStatusWidget(app().locationMessages.getBufferedMessagesCount())
 				startShareInfoUpdates()
 			}
 		}, UPDATE_LIVE_MESSAGES_INTERVAL_MS)
