@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="buffer_time_descr">Time after which buffered messages will be deleted</string>
+    <string name="buffer_time_descr">Time after which buffered location messages will be deleted</string>
     <string name="buffer_time">Buffer time</string>
     <string name="time_zone_descr">Select time zone to show in your location messages.</string>
     <string name="time_zone">Time zone</string>

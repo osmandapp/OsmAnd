@@ -23,6 +23,8 @@ class LocationMessages(val app: TelegramApplication) {
 
 	private val dbHelper: SQLiteHelper
 
+	private var lastRemoveTime: Long? = null
+
 	init {
 		dbHelper = SQLiteHelper(app)
 		readBufferedMessages()
@@ -91,7 +93,7 @@ class LocationMessages(val app: TelegramApplication) {
 
 	fun addBufferedMessage(message: BufferMessage) {
 		log.debug("addBufferedMessage $message")
-		val messages = mutableListOf(*this.bufferedMessages.toTypedArray())
+		val messages = this.bufferedMessages.toMutableList()
 		messages.add(message)
 		this.bufferedMessages = messages
 		dbHelper.addBufferedMessage(message)
@@ -141,29 +143,32 @@ class LocationMessages(val app: TelegramApplication) {
 
 	fun removeBufferedMessage(message: BufferMessage) {
 		log.debug("removeBufferedMessage $message")
-		val messages = mutableListOf(*this.bufferedMessages.toTypedArray())
+		val messages = this.bufferedMessages.toMutableList()
 		messages.remove(message)
 		this.bufferedMessages = messages
 		dbHelper.removeBufferedMessage(message)
 	}
 
 	private fun removeOldBufferedMessages() {
-		if (this.bufferedMessages.isNotEmpty()) {
+		val currentTime = System.currentTimeMillis()
+		if (this.bufferedMessages.isNotEmpty() && isTimeToDelete(currentTime)) {
 			val bufferTime = app.settings.bufferTime * 1000
-			val currentTime = System.currentTimeMillis()
-			val cleanedList = arrayListOf<BufferMessage>()
-			this.bufferedMessages.forEach { message ->
-				val diffTime = currentTime - message.time
-				if (diffTime > bufferTime) {
-					log.debug("remove old buffered message: $message with diff in time: $diffTime")
-					dbHelper.removeBufferedMessage(message)
-				} else {
-					cleanedList.add(message)
-				}
+			val messages = this.bufferedMessages.toMutableList()
+			val expiredList = messages.filter {
+				currentTime - it.time > bufferTime
 			}
-			this.bufferedMessages = cleanedList
+			expiredList.forEach { message ->
+				dbHelper.removeBufferedMessage(message)
+			}
+			messages.removeAll(expiredList)
+			this.bufferedMessages = messages.toList()
+			lastRemoveTime = currentTime
 		}
 	}
+
+	private fun isTimeToDelete(currentTime: Long) = if (lastRemoveTime != null) {
+		currentTime - lastRemoveTime!! > 60000L
+	} else true
 
 	private fun readBufferedMessages() {
 		this.bufferedMessages = dbHelper.getBufferedMessages()
