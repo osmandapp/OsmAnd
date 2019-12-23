@@ -152,10 +152,10 @@ class LocationMessages(val app: TelegramApplication) {
 	private fun removeOldBufferedMessages() {
 		val currentTime = System.currentTimeMillis()
 		if (this.bufferedMessages.isNotEmpty() && isTimeToDelete(currentTime)) {
-			val bufferTime = app.settings.bufferTime * 1000
+			val bufferExpirationTime = app.settings.bufferTime * 1000
 			val messages = this.bufferedMessages.toMutableList()
 			val expiredList = messages.filter {
-				currentTime - it.time > bufferTime
+				currentTime - it.time > bufferExpirationTime
 			}
 			expiredList.forEach { message ->
 				dbHelper.removeBufferedMessage(message)
@@ -168,7 +168,9 @@ class LocationMessages(val app: TelegramApplication) {
 
 	private fun isTimeToDelete(currentTime: Long) = if (lastRemoveTime != null) {
 		currentTime - lastRemoveTime!! > 60000L
-	} else true
+	} else {
+		true
+	}
 
 	private fun readBufferedMessages() {
 		this.bufferedMessages = dbHelper.getBufferedMessages()
