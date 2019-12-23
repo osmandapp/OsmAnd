@@ -40,6 +40,7 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.SettingsHelper;
 import net.osmand.plus.SettingsHelper.ProfileSettingsItem;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.PluginActivity;
 import net.osmand.plus.helpers.FontCache;
@@ -400,7 +401,8 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 		final ApplicationMode profile = getSelectedAppMode();
 		if (getActivity() != null) {
 			if (profile.getParent() != null) {
-				AlertDialog.Builder bld = new AlertDialog.Builder(getActivity());
+				Context themedContext = UiUtilities.getThemedContext(getActivity(), isNightMode());
+				AlertDialog.Builder bld = new AlertDialog.Builder(themedContext);
 				bld.setTitle(R.string.profile_alert_delete_title);
 				bld.setMessage(String
 						.format(getString(R.string.profile_alert_delete_msg),

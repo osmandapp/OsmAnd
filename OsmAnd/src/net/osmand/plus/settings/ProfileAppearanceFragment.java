@@ -495,7 +495,8 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 	}
 
 	private AlertDialog.Builder createWarningDialog(Activity activity, int title, int message, int negButton) {
-		AlertDialog.Builder warningDialog = new AlertDialog.Builder(activity);
+		Context themedContext = UiUtilities.getThemedContext(activity, isNightMode());
+		AlertDialog.Builder warningDialog = new AlertDialog.Builder(themedContext);
 		warningDialog.setTitle(getString(title));
 		warningDialog.setMessage(getString(message));
 		warningDialog.setNegativeButton(negButton, null);
