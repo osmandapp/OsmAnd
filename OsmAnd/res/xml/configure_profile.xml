@@ -79,6 +79,13 @@
 		tools:icon="@drawable/ic_action_app_configuration" />
 
 	<Preference
+		android:key="delete_profile"
+		android:layout="@layout/preference_button"
+		android:persistent="false"
+		android:title="@string/profile_alert_delete_title"
+		tools:icon="@drawable/ic_action_delete_dark" />
+
+	<Preference
 		android:key="export_profile_descr"
 		android:layout="@layout/preference_info_descr_with_title"
 		android:title="@string/profile_import"

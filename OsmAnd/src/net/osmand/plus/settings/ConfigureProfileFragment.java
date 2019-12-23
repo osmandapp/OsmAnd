@@ -2,6 +2,7 @@ package net.osmand.plus.settings;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Rect;
@@ -14,6 +15,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceGroup;
@@ -25,6 +27,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
@@ -66,6 +69,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 	private static final String CONFIGURE_MAP = "configure_map";
 	private static final String CONFIGURE_SCREEN = "configure_screen";
 	private static final String EXPORT_PROFILE = "export_profile";
+	private static final String DELETE_PROFILE = "delete_profile";
 	private static final String PROFILE_APPEARANCE = "profile_appearance";
 
 	@ColorRes
@@ -204,6 +208,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 		settingsActions.setIconSpaceReserved(false);
 
 		setupExportProfilePref();
+		setupDeleteProfilePref();
 	}
 
 	private void setupNavigationSettingsPref() {
@@ -258,6 +263,12 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 	private void setupExportProfilePref() {
 		Preference exportProfile = findPreference(EXPORT_PROFILE);
 		exportProfile.setIcon(app.getUIUtilities().getIcon(R.drawable.ic_action_app_configuration,
+				isNightMode() ? R.color.active_color_primary_dark : R.color.active_color_primary_light));
+	}
+
+	private void setupDeleteProfilePref() {
+		Preference deleteProfile = findPreference(DELETE_PROFILE);
+		deleteProfile.setIcon(app.getUIUtilities().getIcon(R.drawable.ic_action_delete_dark,
 				isNightMode() ? R.color.active_color_primary_dark : R.color.active_color_primary_light));
 	}
 
@@ -379,9 +390,43 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 					}
 				}
 			}, new ProfileSettingsItem(app.getSettings(), profile));
+		} else if (DELETE_PROFILE.equals(prefId)) {
+			onDeleteProfileClick();
 		}
-
 		return super.onPreferenceClick(preference);
+	}
+
+	void onDeleteProfileClick() {
+		final ApplicationMode profile = getSelectedAppMode();
+		if (getActivity() != null) {
+			if (profile.getParent() != null) {
+				AlertDialog.Builder bld = new AlertDialog.Builder(getActivity());
+				bld.setTitle(R.string.profile_alert_delete_title);
+				bld.setMessage(String
+						.format(getString(R.string.profile_alert_delete_msg),
+								profile.getCustomProfileName()));
+				bld.setPositiveButton(R.string.shared_string_delete,
+						new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								OsmandApplication app = getMyApplication();
+								if (app != null) {
+									ApplicationMode.deleteCustomMode(ApplicationMode.valueOfStringKey(profile.getStringKey(), ApplicationMode.DEFAULT), app);
+									app.getSettings().APPLICATION_MODE.set(ApplicationMode.DEFAULT);
+								}
+
+								if (getActivity() != null) {
+									getActivity().onBackPressed();
+								}
+							}
+						});
+				bld.setNegativeButton(R.string.shared_string_dismiss, null);
+				bld.show();
+			} else {
+				Toast.makeText(getActivity(), R.string.profile_alert_cant_delete_base,
+						Toast.LENGTH_SHORT).show();
+			}
+		}
 	}
 
 	@Override
