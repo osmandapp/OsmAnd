@@ -3402,5 +3402,7 @@ POIの更新は利用できません</string>
     <string name="personal_category_name">パーソナル</string>
     <string name="shared_string_downloading_formatted">をダウンロード中</string>
     <string name="rendering_value_thick_name">濃い</string>
-    <string name="desert_render_descr">砂漠などの過疎地に用いられます。</string>
+    <string name="desert_render_descr">砂漠などの過疎地に向いたマップスタイルです。</string>
+    <string name="distance_and_address">%1$s • %2$s</string>
+    <string name="street_city">%1$s, %2$s</string>
 </resources>
