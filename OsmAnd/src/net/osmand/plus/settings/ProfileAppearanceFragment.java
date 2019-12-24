@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -74,6 +75,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 	private EditText profileName;
 	private FlowLayout colorItems;
 	private FlowLayout iconItems;
+	private OsmandTextFieldBoxes profileNameOtfb;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -256,8 +258,10 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 					changedProfile.name = s.toString();
 				}
 			});
+			profileNameOtfb = (OsmandTextFieldBoxes) holder.findViewById(R.id.profile_name_otfb);
 		} else if (MASTER_PROFILE.equals(preference.getKey())) {
 			baseProfileName = (EditText) holder.findViewById(R.id.master_profile_et);
+			baseProfileName.setFocusable(false);
 			baseProfileName.setText(changedProfile.parent != null
 					? changedProfile.parent.toHumanString(getContext())
 					: getSelectedAppMode().toHumanString(getContext()));
@@ -344,6 +348,10 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 		if (iconItems != null) {
 			setIconNewColor(changedProfile.iconRes);
 		}
+		int selectedColor = ContextCompat.getColor(app,
+				changedProfile.color.getColor(isNightMode()));
+		profileNameOtfb.setPrimaryColor(selectedColor);
+		profileName.getBackground().mutate().setColorFilter(selectedColor, PorterDuff.Mode.SRC_ATOP);
 		updateProfileButton();
 	}
 
@@ -487,6 +495,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 	}
 
 	public boolean isProfileAppearanceChanged(final MapActivity mapActivity) {
+		hideKeyboard();
 		if (isChanged()) {
 			AlertDialog.Builder dismissDialog = createWarningDialog(getActivity(),
 					R.string.shared_string_dismiss, R.string.exit_without_saving, R.string.shared_string_cancel);
