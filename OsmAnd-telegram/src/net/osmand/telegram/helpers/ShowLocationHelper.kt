@@ -44,9 +44,11 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 		const val GPX_COLORS_COUNT = 10
 
 		private const val STATUS_WIDGET_ID = "status_widget"
-		private const val STATUS_WIDGET_MENU_ICON = "ic_action_speed"
-		private const val STATUS_WIDGET_DAY_ICON = "widget_speed_day"
-		private const val STATUS_WIDGET_NIGHT_ICON = "widget_speed_night"
+		private const val STATUS_WIDGET_MENU_ICON = "widget_location_sharing_night"
+		private const val STATUS_WIDGET_ANIM_ICON_DAY = "anim_widget_location_sharing_day"
+		private const val STATUS_WIDGET_ANIM_ICON_NIGHT = "anim_widget_location_sharing_night"
+		private const val STATUS_WIDGET_OFF_ICON_DAY = "widget_location_sharing_off_day"
+		private const val STATUS_WIDGET_OFF_ICON_NIGHT = "widget_location_sharing_off_night"
 
 		val GPX_COLORS = arrayOf(
 			"red", "orange", "lightblue", "blue", "purple",
@@ -203,22 +205,31 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 		}
 	}
 
-	fun updateStatusWidget(count: Int) {
+	fun addOrUpdateStatusWidget(count: Int, isSending: Boolean) {
+		val iconDay: String
+		val iconNight: String
 		val text = when {
-			count > 0 -> count.toString()
-			count == 0 -> "ON"
-			else -> "OFF"
+			count >= 0 && isSending -> {
+				iconDay = STATUS_WIDGET_ANIM_ICON_DAY
+				iconNight = STATUS_WIDGET_ANIM_ICON_NIGHT
+				app.getString(R.string.shared_string_ok)
+			}
+			else -> {
+				iconDay = STATUS_WIDGET_OFF_ICON_DAY
+				iconNight = STATUS_WIDGET_OFF_ICON_NIGHT
+				app.getString(R.string.shared_string_off)
+			}
 		}
 		val bufferText = when {
-			count > 0 -> count.toString()
+			count > 0 -> "($count)"
 			else -> ""
 		}
 		osmandAidlHelper.addMapWidget(
 				STATUS_WIDGET_ID,
 				STATUS_WIDGET_MENU_ICON,
 				app.getString(R.string.status_widget_title),
-				STATUS_WIDGET_DAY_ICON,
-				STATUS_WIDGET_NIGHT_ICON,
+				iconDay,
+				iconNight,
 				text, bufferText, 50, getStatusWidgetIntent())
 	}
 

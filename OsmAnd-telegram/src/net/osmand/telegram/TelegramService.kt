@@ -20,6 +20,7 @@ import net.osmand.telegram.utils.AndroidUtils
 import org.drinkless.td.libcore.telegram.TdApi
 import java.util.*
 
+private const val UPDATE_WIDGET_INTERVAL_MS = 1000L // 1 sec
 private const val UPDATE_LIVE_MESSAGES_INTERVAL_MS = 10000L // 10 sec
 private const val UPDATE_LIVE_TRACKS_INTERVAL_MS = 30000L // 30 sec
 
@@ -35,6 +36,9 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 
 	private var updateTracksHandler: Handler? = null
 	private var tracksHandlerThread = HandlerThread("TracksUpdateServiceThread")
+
+	private var updateWidgetHandler: Handler? = null
+	private var updateWidgetThread = HandlerThread("WidgetUpdateServiceThread")
 
 	var handler: Handler? = null
 		private set
@@ -58,8 +62,10 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 		super.onCreate()
 		mHandlerThread.start()
 		tracksHandlerThread.start()
+		updateWidgetThread.start()
 		updateShareInfoHandler = Handler(mHandlerThread.looper)
 		updateTracksHandler = Handler(tracksHandlerThread.looper)
+		updateWidgetHandler = Handler(updateWidgetThread.looper)
 	}
 
 	override fun onBind(intent: Intent): IBinder? {
@@ -106,6 +112,7 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 		if (isUsedByMyLocation(usedBy)) {
 			initLocationUpdates()
 			startShareInfoUpdates()
+			startWidgetUpdates()
 		}
 		if (isUsedByUsersLocations(usedBy)) {
 			app.telegramHelper.startLiveMessagesUpdates(app.settings.sendMyLocInterval)
@@ -139,6 +146,8 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 		app.telegramService = null
 		tracksHandlerThread.quit()
 		mHandlerThread.quit()
+		updateWidgetThread.quit()
+		app().showLocationHelper.addOrUpdateStatusWidget(-1, false)
 
 		usedBy = 0
 
@@ -154,7 +163,6 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 		if (shouldCleanupResources) {
 			app.cleanupResources()
 		}
-		app().showLocationHelper.updateStatusWidget(-1)
 
 		// remove notification
 		stopForeground(java.lang.Boolean.TRUE)
@@ -195,7 +203,6 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 		updateShareInfoHandler?.postDelayed({
 			if (isUsedByMyLocation(usedBy)) {
 				app().shareLocationHelper.updateSendLiveMessages()
-				app().showLocationHelper.updateStatusWidget(app().locationMessages.getBufferedMessagesCount())
 				startShareInfoUpdates()
 			}
 		}, UPDATE_LIVE_MESSAGES_INTERVAL_MS)
@@ -210,6 +217,17 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 				startTracksUpdates()
 			}
 		}, UPDATE_LIVE_TRACKS_INTERVAL_MS)
+	}
+
+	private fun startWidgetUpdates() {
+		updateWidgetHandler?.postDelayed({
+			if (isUsedByMyLocation(usedBy)) {
+				val sharingStatus = app().settings.sharingStatusChanges.last()
+				val isSending = !((sharingStatus.statusType == TelegramSettings.SharingStatusType.NO_GPS) || (sharingStatus.statusType == TelegramSettings.SharingStatusType.INITIALIZING))
+				app().showLocationHelper.addOrUpdateStatusWidget(app().locationMessages.getBufferedMessagesCount(), isSending)
+			}
+			startWidgetUpdates()
+		}, UPDATE_WIDGET_INTERVAL_MS)
 	}
 	
 	@SuppressLint("MissingPermission")
