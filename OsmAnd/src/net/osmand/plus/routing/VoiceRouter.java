@@ -697,7 +697,7 @@ public class VoiceRouter {
 			ExitInfo exitInfo = next.getExitInfo();
 			String lang = player.getLanguage();
 			if (tParam != null) {
-				if (exitInfo != null && (lang.startsWith("en") || lang.startsWith("ru"))) {
+				if (exitInfo != null) {
 					p.takeExit(tParam, dist, getSpeakableExitName(next, exitInfo, true));
 				} else {
 					p.turn(tParam, dist, getSpeakableStreetName(currentSegment, next, true));
@@ -771,7 +771,7 @@ public class VoiceRouter {
 			boolean isplay = true;
 			String lang = player.getLanguage();
 			if (tParam != null) {
-				if (exitInfo != null && (lang.startsWith("en") || lang.startsWith("ru"))) {
+				if (exitInfo != null) {
 					p.takeExit(tParam, getSpeakableExitName(next, exitInfo, !suppressDest));
 				} else {
 					p.turn(tParam, getSpeakableStreetName(currentSegment, next, !suppressDest));
