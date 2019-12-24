@@ -439,7 +439,7 @@
     <string name="fav_export_confirmation">Файл, содержащий ранее экспортированные избранные, уже существует. Заменить его?</string>
     <string name="profile_settings">Настройки профиля</string>
     <string name="settings_preset">Профиль по умолчанию</string>
-    <string name="settings_preset_descr">Выберите профиль работы приложения (в каждом профиле настройки хранятся отдельно).</string>
+    <string name="settings_preset_descr">Вид карты и настройки навигации сохраняются для каждого отдельного профиля. Установите ваш профиль по умолчанию.</string>
     <string name="global_settings">Общие настройки</string>
     <string name="global_app_settings">Общие настройки приложения</string>
     <string name="download_files_not_enough_space">Недостаточно места на диске для загрузки %1$s MB (свободно: %2$s).</string>
@@ -447,11 +447,11 @@
     <string name="use_transparent_map_theme">Прозрачная тема</string>
     <string name="native_library_not_supported">Нативная библиотека не поддерживается на этом устройстве.</string>
     <string name="init_native_library">Инициализация нативной библиотеки…</string>
-    <string name="choose_auto_follow_route">Настройки автовозврата карты</string>
+    <string name="choose_auto_follow_route">Вид карты автоцентра</string>
     <string name="choose_auto_follow_route_descr">Выберите время, через которое карта вернется к текущей позиции.</string>
     <string name="auto_follow_route_navigation">Автовозврат карты только при следовании по маршруту</string>
     <string name="auto_follow_route_navigation_descr">Возвращать карту в текущее положение только при следовании по маршруту.</string>
-    <string name="auto_follow_location_enabled">Привязка карты к местоположению включена.</string>
+    <string name="auto_follow_location_enabled">Автоцентр просмотра карты во время использования.</string>
     <string name="shared_string_gpx_route">"Маршрут  GPX"</string>
     <string name="poi_query_by_name_matches_categories">Некоторые категории POI соответствуют запросу, можете использовать их для создания фильтра:</string>
     <string name="data_to_search_poi_not_available">Локальные данные для поиска POI по имени не найдены.</string>
@@ -517,7 +517,7 @@
     <string name="tts_language_not_supported">Выбранный язык не поддерживается активным Android TTS (text-to-speech). Будет использован язык по-умолчанию. Посмотреть в Google Play другой TTS? Иначе будет использоваться предустановленный язык TTS.</string>
     <string name="tts_missing_language_data_title">Данные отсутствуют</string>
     <string name="tts_missing_language_data">Перейти в маркет для загрузки выбранного языка?</string>
-    <string name="gpx_option_reverse_route">Выбрать обратное направление пути</string>
+    <string name="gpx_option_reverse_route">Обратное направление GPX</string>
     <string name="gpx_option_destination_point">Использовать текущий пункт назначения</string>
     <string name="gpx_option_from_start_point">Пройти весь путь</string>
     <string name="switch_to_vector_map_to_see">Для этого региона доступны локальные векторные карты. 
@@ -1181,7 +1181,7 @@
     <string name="poi_filter_sightseeing">Достопримечательности</string>
     <string name="context_menu_item_last_intermediate_point">Добавить как последний промежуточный пункт</string>
     <string name="context_menu_item_first_intermediate_point">Добавить как первый промежуточный пункт</string>
-    <string name="add_as_last_destination_point">Добавить как последний промежуточный пункт назначения</string>
+    <string name="add_as_last_destination_point">Добавить промежуточный пункт в конец</string>
     <string name="add_as_first_destination_point">Добавить как первый промежуточный пункт назначения</string>
     <string name="replace_destination_point">Заменить пункт назначения</string>
     <string name="new_destination_point_dialog">Пункт назначения уже установлен:</string>
@@ -3265,7 +3265,7 @@
     <string name="shared_string_memory_used_gb_desc">Использовано %1$s ГБ</string>
     <string name="shared_string_memory_used_mb_desc">Использовано %1$s МБ</string>
     <string name="shared_string_memory_used_kb_desc">Использовано %1$s кБ</string>
-    <string name="routing_attr_driving_style_prefer_unpaved_name">Предпочитать дороги без покрытия</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_name">Предпочитать грунтовые дороги</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">Предпочитать дороги без покрытия</string>
     <string name="shared_string_other">Прочее</string>
     <string name="download_detailed_map">Загрузить подробную карту %s, чтобы просмотреть эту область.</string>
