@@ -3602,7 +3602,7 @@
     <string name="poi_access_mofa">Доступно для мофа</string>
     <string name="poi_access_hgv">Доступно для HGV</string>
     <string name="poi_access_goods">Доступ для легких вантажних автомобілів</string>
-    <string name="poi_access_disabled">Нема доступу</string>
+    <string name="poi_access_disabled">Доступ для осіб із обмеженими можливостями</string>
     <string name="poi_taxi_office">Офіс таксі</string>
     <string name="poi_vehicle_yes">Доступ для транспорту</string>
     <string name="poi_vehicle_private">Приватний доступ для транспорту</string>
