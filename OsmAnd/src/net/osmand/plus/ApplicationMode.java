@@ -52,7 +52,6 @@ public class ApplicationMode {
 	private static Map<String, Set<ApplicationMode>> widgetsAvailabilityMap = new LinkedHashMap<>();
 
 	private static List<ApplicationMode> defaultValues = new ArrayList<>();
-	private static List<ApplicationMode> customValues = new ArrayList<>();
 	private static List<ApplicationMode> values = new ArrayList<>();
 	private static List<ApplicationMode> cachedFilteredValues = new ArrayList<>();
 
@@ -194,6 +193,9 @@ public class ApplicationMode {
 		private ApplicationMode reg() {
 			values.add(applicationMode);
 			defaultValues.add(applicationMode);
+			if (applicationMode.getOrder() == 0 && !values.isEmpty()) {
+				applicationMode.setOrder(values.size());
+			}
 			return applicationMode;
 		}
 
@@ -213,7 +215,9 @@ public class ApplicationMode {
 			m.locationIconDayLost = m.parentAppMode.locationIconDayLost;
 			m.locationIconNightLost = m.parentAppMode.locationIconNightLost;
 			values.add(applicationMode);
-			customValues.add(applicationMode);
+			if (applicationMode.getOrder() == 0 && !values.isEmpty()) {
+				applicationMode.setOrder(values.size());
+			}
 			return applicationMode;
 		}
 
@@ -412,7 +416,13 @@ public class ApplicationMode {
 	}
 
 	public static List<ApplicationMode> getCustomValues() {
-		return customValues;
+		List<ApplicationMode> customModes = new ArrayList<>();
+		for (ApplicationMode mode : values) {
+			if (mode.isCustomProfile()) {
+				customModes.add(mode);
+			}
+		}
+		return customModes;
 	}
 
 	// returns modifiable ! Set<ApplicationMode> to exclude non-wanted derived
@@ -656,12 +666,11 @@ public class ApplicationMode {
 	public static void reorderAppModes() {
 		Comparator<ApplicationMode> comparator = new Comparator<ApplicationMode>() {
 			@Override
-			public int compare(ApplicationMode o1, ApplicationMode o2) {
-				return (o1.order < o2.order) ? -1 : ((o1.order == o2.order) ? 0 : 1);
+			public int compare(ApplicationMode mode1, ApplicationMode mode2) {
+				return (mode1.order < mode2.order) ? -1 : ((mode1.order == mode2.order) ? 0 : 1);
 			}
 		};
 		Collections.sort(values, comparator);
-		Collections.sort(customValues, comparator);
 		Collections.sort(defaultValues, comparator);
 		Collections.sort(cachedFilteredValues, comparator);
 	}
@@ -672,9 +681,11 @@ public class ApplicationMode {
 
 		ApplicationModeBuilder b = createCustomMode(valueOfStringKey(mb.parent, null),
 				mb.userProfileName, mb.stringKey);
-		b.setRouteService(mb.routeService).setRoutingProfile(mb.routingProfile);
+		b.setRouteService(mb.routeService);
+		b.setRoutingProfile(mb.routingProfile);
 		b.icon(app, mb.iconName);
 		b.setColor(mb.iconColor);
+		b.setOrder(mb.order);
 		return b;
 	}
 
@@ -687,6 +698,7 @@ public class ApplicationMode {
 		mb.stringKey = stringKey;
 		mb.routeService = routeService;
 		mb.routingProfile = routingProfile;
+		mb.order = order;
 		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 		return gson.toJson(mb);
 	}
@@ -734,7 +746,7 @@ public class ApplicationMode {
 		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 
 		List<ApplicationModeBean> defaultModeBeans = createApplicationModeBeans(defaultValues);
-		List<ApplicationModeBean> customModeBeans = createApplicationModeBeans(customValues);
+		List<ApplicationModeBean> customModeBeans = createApplicationModeBeans(getCustomValues());
 
 		String defaultProfiles = gson.toJson(defaultModeBeans);
 		String customProfiles = gson.toJson(customModeBeans);
@@ -744,7 +756,7 @@ public class ApplicationMode {
 	}
 
 	private static void saveAppModesToSettings(OsmandSettings settings, boolean saveCustomModes) {
-		List<ApplicationMode> appModes = saveCustomModes ? customValues : defaultValues;
+		List<ApplicationMode> appModes = saveCustomModes ? getCustomValues() : defaultValues;
 		List<ApplicationModeBean> modeBeans = createApplicationModeBeans(appModes);
 
 		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
@@ -802,14 +814,18 @@ public class ApplicationMode {
 				it.remove();
 			}
 		}
-		customValues.remove(md);
 		cachedFilteredValues.remove(md);
 		saveAppModesToSettings(app.getSettings(), md.isCustomProfile());
 	}
 
 	public static void deleteCustomModes(List<ApplicationMode> modes, OsmandApplication app) {
-		values.removeAll(modes);
-		customValues.removeAll(modes);
+		Iterator<ApplicationMode> it = values.iterator();
+		while (it.hasNext()) {
+			ApplicationMode m = it.next();
+			if (modes.contains(m)) {
+				it.remove();
+			}
+		}
 		cachedFilteredValues.removeAll(modes);
 		saveAppModesToSettings(app.getSettings(), true);
 	}

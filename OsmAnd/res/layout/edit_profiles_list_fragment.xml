@@ -36,32 +36,17 @@
 				android:id="@+id/buttons_shadow"
 				android:layout_width="match_parent"
 				android:layout_height="10dp"
-				android:layout_gravity="bottom"
 				android:background="@drawable/bg_contextmenu_shadow_top_light" />
 
 			<LinearLayout
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:layout_gravity="bottom"
-				android:background="?attr/list_background_color"
-				android:orientation="horizontal"
-				android:paddingLeft="@dimen/content_padding"
-				android:paddingTop="@dimen/content_padding_small"
-				android:paddingRight="@dimen/content_padding"
-				android:paddingBottom="@dimen/content_padding_small">
+				android:background="?attr/list_background_color">
 
 				<include
-					android:id="@+id/cancel_button"
-					layout="@layout/bottom_sheet_dialog_button" />
-
-				<View
-					android:id="@+id/buttons_divider"
-					android:layout_width="@dimen/content_padding"
-					android:layout_height="match_parent" />
-
-				<include
-					android:id="@+id/apply_button"
-					layout="@layout/bottom_sheet_dialog_button" />
+					layout="@layout/bottom_buttons"
+					android:layout_width="match_parent"
+					android:layout_height="@dimen/dialog_button_ex_height" />
 
 			</LinearLayout>
 

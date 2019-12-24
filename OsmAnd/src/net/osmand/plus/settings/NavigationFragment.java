@@ -27,8 +27,9 @@ public class NavigationFragment extends BaseSettingsFragment {
 
 	public static final String TAG = NavigationFragment.class.getSimpleName();
 	public static final String NAVIGATION_TYPE = "navigation_type";
+
 	private SelectProfileBottomSheetDialogFragment.SelectProfileListener navTypeListener;
-	List<RoutingProfileDataObject> routingProfileDataObjects;
+	private List<RoutingProfileDataObject> routingProfileDataObjects;
 	private Preference navigationType;
 
 	@Override
