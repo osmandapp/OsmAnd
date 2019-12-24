@@ -178,6 +178,8 @@ public class MeasurementEditingContext {
 	}
 
 	public WptPt removePoint(int position, boolean updateSnapToRoad) {
+		if(position < 0 || position > before.points.size())
+			return new WptPt();
 		WptPt pt = before.points.remove(position);
 		if (updateSnapToRoad) {
 			updateCacheForSnapIfNeeded(false);

@@ -293,7 +293,7 @@
     <string name="download_type_to_filter">Filtre</string>
     <string name="use_high_res_maps">Carte haute résolution</string>
     <string name="use_high_res_maps_descr">Ne pas étirer (et rendre flou) les tuiles de carte sur les écrans haute résolution.</string>
-    <string name="unknown_location">Position inconnue</string>
+    <string name="unknown_location">Position inconnue.</string>
     <string name="context_menu_item_search_transport">Chercher un transport public</string>
     <string name="transport_searching_transport">Transports possibles (aucune arrivée définie) :</string>
     <string name="transport_searching_route">Transports possibles ({0} pour rejoindre l\'arrivée) :</string>
@@ -587,7 +587,7 @@
     <string name="offline_navigation_not_available">Navigation hors-ligne temporairement indisponible.</string>
     <string name="left_side_navigation">Conduite à gauche</string>
     <string name="left_side_navigation_descr">Pour les pays où la circulation s\'effectue sur la partie gauche de la route.</string>
-    <string name="unknown_from_location">Point de départ inconnu</string>
+    <string name="unknown_from_location">Point de départ non défini.</string>
     <string name="confirm_interrupt_download">Annuler le téléchargement ?</string>
     <string name="basemap_was_selected_to_download">La carte mondiale de base, requise pour le bon fonctionnement de l\'application, est en attente de téléchargement.</string>
     <string name="map_online_plugin_is_not_installed">Activez le greffon \"Cartes en ligne\" pour sélectionner différentes sources de cartes</string>
@@ -736,7 +736,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="osmand_parking_hours">Heures</string>
     <string name="osmand_parking_minutes">Minutes</string>
     <string name="osmand_parking_position_description_add_time">Le véhicule a été garé à</string>
-    <string name="use_compass_navigation_descr">Utiliser la boussole quand l\'orientation n\'est pas détectée.</string>
+    <string name="use_compass_navigation_descr">Utiliser la boussole quand la direction n\'est pas détectée.</string>
     <string name="use_compass_navigation">Utiliser la boussole</string>
     <string name="route_updated_loc_found">En attente de la position pour calculer l\'itinéraire</string>
     <string name="continue_follow_previous_route_auto">La navigation a été interrompue. Souhaitez-vous la reprendre ? (%1$s secondes)</string>
@@ -1511,7 +1511,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="welcome_header">Bienvenue</string>
     <string name="confirm_usage_speed_cameras">Dans certains pays (France, Allemagne, Italie, …) l\'utilisation d\'alertes radars est interdite par la loi. OsmAnd décline toute responsabilité en cas de violation de la loi. Pour activer cette fonctionnalité en toute connaissance de cause, répondez \"Oui\".</string>
     <string name="agps_info">Données A-GPS</string>
-    <string name="agps_data_last_downloaded">Dernière mise à jour des données A-GPS : %1$s</string>
+    <string name="agps_data_last_downloaded">Données A-GPS téléchargées le %1$s</string>
     <string name="shared_string_message">Message</string>
     <string name="shared_string_do_not_use">Ne pas utiliser</string>
     <string name="shared_string_address">Adresse</string>
@@ -1882,7 +1882,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="osm_live_thanks">Merci pour votre soutien à OsmAnd !
 \nPour activer toutes les nouvelles fonctionnalités, merci de redémarrer OsmAnd.</string>
     <string name="osm_live_subscription_settings">Paramétrage de l\'abonnement</string>
-    <string name="show_transparency_seekbar">Afficher la barre de recherche transparente</string>
+    <string name="show_transparency_seekbar">Afficher le curseur de réglage de la transparence</string>
     <string name="recalculate_route">Recalculer l\'itinéraire</string>
     <string name="storage_directory_shared">Mémoire partagée</string>
     <string name="shared_string_topbar">Barre supérieure</string>
@@ -3033,7 +3033,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="profile_alert_need_save_msg">Enregistrez d\'abord les modifications apportées au profil</string>
     <string name="profile_alert_delete_title">Supprimer le profil</string>
     <string name="profile_alert_delete_msg">Êtes-vous certain de vouloir supprimer le profil \"%s\" \?</string>
-    <string name="select_base_profile_dialog_title">Sélectionnez un profil de base</string>
+    <string name="select_base_profile_dialog_title">Sélectionnez un profil avec lequel démarrer</string>
     <string name="shared_string_color_magenta">Magenta</string>
     <string name="shared_string_icon">icône</string>
     <string name="collected_data">Données collectées</string>
@@ -3069,7 +3069,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="routing_attr_max_num_changes_name">Nombre de correspondances</string>
     <string name="turn_screen_on_sensor">Utiliser le capteur de proximité</string>
     <string name="sett_no_ext_input">Aucun</string>
-    <string name="routing_attr_freeride_policy_description">Le freeride et le hors-piste sont des itinéraires non-officiels qui ne sont généralement ni damés ni entretenus et ne sont pas contrôlés en fin de journée par les autorités. Entrez à vos risques et périls.</string>
+    <string name="routing_attr_freeride_policy_description">Le freeride et le hors-piste sont des itinéraires non-officiels. Ces itinéraires ne sont généralement ni balisés ni damés et ne sont pas contrôlés en fin de journée par les autorités. Entrez à vos risques et périls.</string>
     <string name="default_speed_setting_descr">Modifiez les paramètres de vitesse par défaut</string>
     <string name="app_mode_ufo">OVNI</string>
     <string name="app_mode_personal_transporter">Gyropode</string>
@@ -3327,7 +3327,7 @@ représentant la zone : %1$s x %2$s</string>
 \n</string>
     <string name="apply_preference_to_all_profiles">Vous pouvez appliquer cette modification à tous les profils ou uniquement aux profils sélectionnés actuellement.</string>
     <string name="shared_preference">Partagé</string>
-    <string name="routing_attr_driving_style_prefer_unpaved_name">Privilégier les routes non pavées</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_name">Privilégier les routes non revêtues</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">Privilégier les routes non pavées.</string>
     <string name="layer_osm_edits">Modifications OSM</string>
     <string name="quick_action_contour_lines_descr">Affiche ou masque les courbes de niveaux sur la carte.</string>
@@ -3344,7 +3344,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="exported_osmand_profile">Profil OsmAnd : %1$s</string>
     <string name="overwrite_profile_q">Le profil \'%1$s\' existe déjà. Voulez-vous l\'écraser \?</string>
     <string name="export_profile_failed">Impossible d\'exporter le profil.</string>
-    <string name="profile_import">Importer le profil :</string>
+    <string name="profile_import">Import du profil</string>
     <string name="profile_import_descr">Pour importer un profil, sélectionnez le fichier sur l\'appareil et ouvrez le avec OsmAnd.</string>
     <string name="file_import_error">%1$s Erreur d\'importation : %2$s</string>
     <string name="file_imported_successfully">%1$s importé avec succès.</string>
@@ -3368,6 +3368,26 @@ représentant la zone : %1$s x %2$s</string>
     <string name="new_plugin_added">Nouveau greffon ajouté</string>
     <string name="join_segments">Relier les segments</string>
     <string name="add_new_profile_q">Ajouter le profil \'%1$s\' \?</string>
-    <string name="save_heading">Inclure l\'entête</string>
-    <string name="save_heading_descr">Enregistrer l\'entête avec chaque point lors de l\'enregistrement d\'une trace.</string>
+    <string name="save_heading">Inclure la direction</string>
+    <string name="save_heading_descr">Inclure la direction de chaque point lors de l\'enregistrement d\'une trace.</string>
+    <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Afficher les pistes cyclables</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_name">Réseaux</string>
+    <string name="personal_category_name">Personnel</string>
+    <string name="distance_and_address">%1$s • %2$s</string>
+    <string name="street_city">%1$s, %2$s</string>
+    <string name="shared_string_downloading_formatted">Téléchargement %s</string>
+    <string name="rendering_value_thick_name">Épais</string>
+    <string name="desert_render_descr">Pour les déserts et autres zones faiblement peuplées.</string>
+    <string name="select_navigation_icon">Sélectionnez l\'icône de navigation</string>
+    <string name="select_map_icon">Sélectionnez l\'icône de carte</string>
+    <string name="delete_profiles_descr">Si vous choisissez Appliquer, les profils seront définitivement supprimés.</string>
+    <string name="master_profile">Profil principal</string>
+    <string name="select_color">Sélectionnez la couleur</string>
+    <string name="edit_profiles_descr">Vous ne pouvez pas supprimer les profils OsmAnd par défaut mais vous pouvez les désactiver depuis l\'écran précédent ou les déplacer vers le bas.</string>
+    <string name="edit_profiles">Modifier les profils</string>
+    <string name="select_nav_profile_dialog_message">Le type de navigation détermine les règles de calcul des itinéraires.</string>
+    <string name="profile_appearance">Apparence du profil</string>
+    <string name="choose_icon_color_name">Choisissez l\'icône, la couleur et le nom</string>
+    <string name="reorder_profiles">Modifiez la liste des profils</string>
+    <string name="selected_profile">Profil sélectionné</string>
 </resources>

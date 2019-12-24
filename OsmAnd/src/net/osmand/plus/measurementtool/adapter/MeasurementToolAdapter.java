@@ -20,12 +20,13 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.measurementtool.NewGpxData.ActionType;
+import net.osmand.plus.profiles.ReorderItemTouchHelperCallback;
 
 import java.util.Collections;
 import java.util.List;
 
 public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementToolAdapter.MeasureToolItemVH>
-		implements MeasurementToolItemTouchHelperCallback.ItemTouchHelperAdapter {
+		implements ReorderItemTouchHelperCallback.OnItemMoveCallback {
 
 	private final MapActivity mapActivity;
 	private final List<WptPt> points;

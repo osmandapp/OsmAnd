@@ -415,7 +415,7 @@
     <string name="agps_info">A-GPS informoj</string>
     <string name="rendering_attr_OSMMapperAssistant_name">OSM-mapiga helpilo</string>
     <string name="shared_string_manage">Administri</string>
-    <string name="agps_data_last_downloaded">Lasta elŝuto de A-GPS datumoj: %1$s</string>
+    <string name="agps_data_last_downloaded">A-GPS-datumoj elŝutitaj je %1$s</string>
     <string name="confirm_usage_speed_cameras">En multaj landoj (Germanujo, Francujo, Italujo kaj aliaj) uzado de sciigoj pri rapid-kontroliloj estas kontraŭleĝa. OsmAnd ne respondumos, se vi rompos leĝon. Bonvolu elekti “jes” nur se vi estas permesata por uzi tiun ĉi eblon.</string>
     <string name="welcome_select_region">Por korekte prezenti trafiksignojn kaj regulojn, bonvolu elekti vian trafikan regionon:</string>
     <string name="welcome_text">OsmAnd ebligas uzi tutmondajn mapojn kaj navigadon sen interreta konekto.</string>
@@ -1193,8 +1193,8 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="left_side_navigation">Maldekstr-flanka trafiko</string>
     <string name="left_side_navigation_descr">Pro landaj kie oni veturas sur maldekstra flanko de vojo.</string>
     <string name="local_index_description">Frapetu ekzistantan elementon por vidi pliajn detalojn, premtenu por malaktivigi aŭ forigi. Datumoj en aparato nuntempe (%1$s malokupiĝa):</string>
-    <string name="unknown_location">Pozicio ankoraŭ ne estas konata</string>
-    <string name="unknown_from_location">Komencpunkto ankoraŭ ne precizigita</string>
+    <string name="unknown_location">Pozicio ankoraŭ ne estas konata.</string>
+    <string name="unknown_from_location">Komencpunkto ankoraŭ ne estas precizigita.</string>
     <string name="modify_transparency">Modifi diafanecon (0 - travidebla, 255 - maldiafana)</string>
     <string name="confirm_interrupt_download">Ĉu ĉesigi elŝutadon\?</string>
     <string name="first_time_msg">Dankon al vi por uzi OsmAnd. Elŝutu eksterretajn regionajn datumojn en la menuo “administri map-dosierojn” por esplori mapojn, serĉi adresojn, interesejojn, publikan transporton kaj pli.</string>
@@ -3379,4 +3379,10 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="add_new_profile_q">Ĉu aldoni novan profilon “%1$s”\?</string>
     <string name="save_heading">Inkluzivi direkton</string>
     <string name="save_heading_descr">Konservi direkton al ĉiu punkto de kurso dum registri.</string>
+    <string name="distance_and_address">%1$s • %2$s</string>
+    <string name="street_city">%1$s, %2$s</string>
+    <string name="personal_category_name">Personaj</string>
+    <string name="shared_string_downloading_formatted">Elŝutado de %s</string>
+    <string name="rendering_value_thick_name">Dika</string>
+    <string name="desert_render_descr">Por dezertoj kaj aliaj maldense loĝataj lokoj.</string>
 </resources>

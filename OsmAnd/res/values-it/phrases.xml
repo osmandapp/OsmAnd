@@ -2626,4 +2626,5 @@
     <string name="poi_bath_type_lake">Lago</string>
     <string name="poi_bath_open_air_yes">sì</string>
     <string name="poi_bath_open_air_no">no</string>
+    <string name="poi_fire_hydrant_position_green">Verde</string>
 </resources>

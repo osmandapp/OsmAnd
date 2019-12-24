@@ -17,6 +17,8 @@ import com.android.billingclient.api.SkuDetailsResponseListener;
 
 import net.osmand.AndroidNetworkUtils;
 import net.osmand.AndroidNetworkUtils.OnRequestResultListener;
+import net.osmand.AndroidNetworkUtils.OnRequestsResultListener;
+import net.osmand.AndroidNetworkUtils.RequestResponse;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -950,67 +952,90 @@ public class InAppPurchaseHelper {
 				Map<String, String> parameters = new HashMap<>();
 				parameters.put("userid", userId);
 				parameters.put("sku", purchase.getSku());
+				parameters.put("orderId", purchase.getOrderId());
 				parameters.put("purchaseToken", purchase.getPurchaseToken());
 				parameters.put("email", email);
 				parameters.put("token", token);
 				addUserInfo(parameters);
 				requests.add(new AndroidNetworkUtils.Request(url, parameters, userOperation, true, true));
 			}
-			AndroidNetworkUtils.sendRequestsAsync(ctx, requests, new OnRequestResultListener() {
+			AndroidNetworkUtils.sendRequestsAsync(ctx, requests, new OnRequestsResultListener() {
 				@Override
-				public void onResult(String result) {
-					if (result != null) {
-						try {
-							JSONObject obj = new JSONObject(result);
-							if (!obj.has("error")) {
-								String tokensSentStr = ctx.getSettings().BILLING_PURCHASE_TOKENS_SENT.get();
-								Set<String> tokensSent = new HashSet<>(Arrays.asList(tokensSentStr.split(";")));
-								for (Purchase purchase : purchases) {
-									tokensSent.add(purchase.getSku());
-								}
-								ctx.getSettings().BILLING_PURCHASE_TOKENS_SENT.set(TextUtils.join(";", tokensSent));
-
-								if (obj.has("visibleName") && !Algorithms.isEmpty(obj.getString("visibleName"))) {
-									ctx.getSettings().BILLING_USER_NAME.set(obj.getString("visibleName"));
-									ctx.getSettings().BILLING_HIDE_USER_NAME.set(false);
-								} else {
-									ctx.getSettings().BILLING_HIDE_USER_NAME.set(true);
-								}
-								if (obj.has("preferredCountry")) {
-									String prefferedCountry = obj.getString("preferredCountry");
-									if (!ctx.getSettings().BILLING_USER_COUNTRY_DOWNLOAD_NAME.get().equals(prefferedCountry)) {
-										ctx.getSettings().BILLING_USER_COUNTRY_DOWNLOAD_NAME.set(prefferedCountry);
-										CountrySelectionFragment countrySelectionFragment = new CountrySelectionFragment();
-										countrySelectionFragment.initCountries(ctx);
-										CountryItem countryItem = null;
-										if (Algorithms.isEmpty(prefferedCountry)) {
-											countryItem = countrySelectionFragment.getCountryItems().get(0);
-										} else if (!prefferedCountry.equals(OsmandSettings.BILLING_USER_DONATION_NONE_PARAMETER)) {
-											countryItem = countrySelectionFragment.getCountryItem(prefferedCountry);
-										}
-										if (countryItem != null) {
-											ctx.getSettings().BILLING_USER_COUNTRY.set(countryItem.getLocalName());
-										}
+				public void onResult(@NonNull List<RequestResponse> results) {
+					for (RequestResponse rr : results) {
+						String sku = rr.getRequest().getParameters().get("sku");
+						Purchase purchase = getPurchase(sku);
+						if (purchase != null) {
+							updateSentTokens(purchase);
+							String result = rr.getResponse();
+							if (result != null) {
+								try {
+									JSONObject obj = new JSONObject(result);
+									if (!obj.has("error")) {
+										processPurchasedJson(obj);
+									} else {
+										complain("SendToken Error: "
+												+ obj.getString("error")
+												+ " (userId=" + userId + " token=" + token + " response=" + result + " google=" + purchase.toString() + ")");
 									}
+								} catch (JSONException e) {
+									logError("SendToken", e);
+									complain("SendToken Error: "
+											+ (e.getMessage() != null ? e.getMessage() : "JSONException")
+											+ " (userId=" + userId + " token=" + token + " response=" + result + " google=" + purchase.toString() + ")");
 								}
-								if (obj.has("email")) {
-									ctx.getSettings().BILLING_USER_EMAIL.set(obj.getString("email"));
-								}
-							} else {
-								complain("SendToken Error: "
-										+ obj.getString("error")
-										+ " (userId=" + userId + " token=" + token + " response=" + result + ")");
 							}
-						} catch (JSONException e) {
-							logError("SendToken", e);
-							complain("SendToken Error: "
-									+ (e.getMessage() != null ? e.getMessage() : "JSONException")
-									+ " (userId=" + userId + " token=" + token + " response=" + result + ")");
 						}
 					}
 					if (listener != null) {
 						listener.onResult("OK");
 					}
+				}
+
+				private void updateSentTokens(@NonNull Purchase purchase) {
+					String tokensSentStr = ctx.getSettings().BILLING_PURCHASE_TOKENS_SENT.get();
+					Set<String> tokensSent = new HashSet<>(Arrays.asList(tokensSentStr.split(";")));
+					tokensSent.add(purchase.getSku());
+					ctx.getSettings().BILLING_PURCHASE_TOKENS_SENT.set(TextUtils.join(";", tokensSent));
+				}
+
+				private void processPurchasedJson(JSONObject obj) throws JSONException {
+					if (obj.has("visibleName") && !Algorithms.isEmpty(obj.getString("visibleName"))) {
+						ctx.getSettings().BILLING_USER_NAME.set(obj.getString("visibleName"));
+						ctx.getSettings().BILLING_HIDE_USER_NAME.set(false);
+					} else {
+						ctx.getSettings().BILLING_HIDE_USER_NAME.set(true);
+					}
+					if (obj.has("preferredCountry")) {
+						String prefferedCountry = obj.getString("preferredCountry");
+						if (!ctx.getSettings().BILLING_USER_COUNTRY_DOWNLOAD_NAME.get().equals(prefferedCountry)) {
+							ctx.getSettings().BILLING_USER_COUNTRY_DOWNLOAD_NAME.set(prefferedCountry);
+							CountrySelectionFragment countrySelectionFragment = new CountrySelectionFragment();
+							countrySelectionFragment.initCountries(ctx);
+							CountryItem countryItem = null;
+							if (Algorithms.isEmpty(prefferedCountry)) {
+								countryItem = countrySelectionFragment.getCountryItems().get(0);
+							} else if (!prefferedCountry.equals(OsmandSettings.BILLING_USER_DONATION_NONE_PARAMETER)) {
+								countryItem = countrySelectionFragment.getCountryItem(prefferedCountry);
+							}
+							if (countryItem != null) {
+								ctx.getSettings().BILLING_USER_COUNTRY.set(countryItem.getLocalName());
+							}
+						}
+					}
+					if (obj.has("email")) {
+						ctx.getSettings().BILLING_USER_EMAIL.set(obj.getString("email"));
+					}
+				}
+
+				@Nullable
+				private Purchase getPurchase(String sku) {
+					for (Purchase purchase : purchases) {
+						if (purchase.getSku().equals(sku)) {
+							return purchase;
+						}
+					}
+					return null;
 				}
 			});
 		} catch (Exception e) {

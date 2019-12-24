@@ -1,13 +1,6 @@
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-	<item
-		android:bottom="1dp"
-		android:left="1dp"
-		android:right="1dp"
-		android:top="1dp">
-		<shape android:shape="oval">
-			<stroke
-				android:width="1dp"
-				android:color="@color/divider_color_dark" />
-		</shape>
-	</item>
-</layer-list>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+	android:shape="oval">
+	<stroke
+		android:width="1dp"
+		android:color="@color/divider_color_dark" />
+</shape>

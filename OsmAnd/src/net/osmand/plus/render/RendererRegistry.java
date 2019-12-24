@@ -45,6 +45,7 @@ public class RendererRegistry {
 	public final static String OFFROAD_RENDER = "Offroad";  //$NON-NLS-1$
 	public final static String LIGHTRS_RENDER = "LightRS";  //$NON-NLS-1$
 	public final static String UNIRS_RENDER = "UniRS";  //$NON-NLS-1$
+	public final static String DESERT_RENDER = "Desert";  //$NON-NLS-1$
 
 	private RenderingRulesStorage defaultRender = null;
 	private RenderingRulesStorage currentSelectedRender = null;
@@ -73,6 +74,7 @@ public class RendererRegistry {
 		internalRenderers.put(NAUTICAL_RENDER, "nautical" + ".render.xml");
 		internalRenderers.put(WINTER_SKI_RENDER, "skimap" + ".render.xml");
 		internalRenderers.put(OFFROAD_RENDER, "offroad" + ".render.xml");
+		internalRenderers.put(DESERT_RENDER, "desert" + ".render.xml");
 	}
 	
 	public RenderingRulesStorage defaultRender() {
@@ -305,6 +307,8 @@ public class RendererRegistry {
 				return ctx.getString(R.string.nautical_render_descr);
 			case OFFROAD_RENDER:
 				return ctx.getString(R.string.off_road_render_descr);
+			case DESERT_RENDER:
+				return ctx.getString(R.string.desert_render_descr);
 		}
 		return ""; 
 	}

@@ -243,8 +243,8 @@
     <string name="map_widget_magnetic_bearing">Магнитный пеленг</string>
     <string name="map_widget_bearing">Курсовой угол</string>
     <string name="map_mode">Режим карты</string>
-    <string name="rendering_value_thin_name">Тонкий</string>
-    <string name="rendering_value_medium_name">Средний</string>
+    <string name="rendering_value_thin_name">Тонко</string>
+    <string name="rendering_value_medium_name">Средне</string>
     <string name="rendering_value_bold_name">Толстый</string>
     <string name="select_map_markers">Выберите маркеры</string>
     <string name="shared_string_topbar">Верхняя панель</string>
@@ -439,7 +439,7 @@
     <string name="fav_export_confirmation">Файл, содержащий ранее экспортированные избранные, уже существует. Заменить его?</string>
     <string name="profile_settings">Настройки профиля</string>
     <string name="settings_preset">Профиль по умолчанию</string>
-    <string name="settings_preset_descr">Выберите профиль работы приложения (в каждом профиле настройки хранятся отдельно).</string>
+    <string name="settings_preset_descr">Вид карты и настройки навигации сохраняются для каждого отдельного профиля. Установите ваш профиль по умолчанию.</string>
     <string name="global_settings">Общие настройки</string>
     <string name="global_app_settings">Общие настройки приложения</string>
     <string name="download_files_not_enough_space">Недостаточно места на диске для загрузки %1$s MB (свободно: %2$s).</string>
@@ -447,11 +447,11 @@
     <string name="use_transparent_map_theme">Прозрачная тема</string>
     <string name="native_library_not_supported">Нативная библиотека не поддерживается на этом устройстве.</string>
     <string name="init_native_library">Инициализация нативной библиотеки…</string>
-    <string name="choose_auto_follow_route">Настройки автовозврата карты</string>
+    <string name="choose_auto_follow_route">Вид карты автоцентра</string>
     <string name="choose_auto_follow_route_descr">Выберите время, через которое карта вернется к текущей позиции.</string>
     <string name="auto_follow_route_navigation">Автовозврат карты только при следовании по маршруту</string>
     <string name="auto_follow_route_navigation_descr">Возвращать карту в текущее положение только при следовании по маршруту.</string>
-    <string name="auto_follow_location_enabled">Привязка карты к местоположению включена.</string>
+    <string name="auto_follow_location_enabled">Автоцентр просмотра карты во время использования.</string>
     <string name="shared_string_gpx_route">"Маршрут  GPX"</string>
     <string name="poi_query_by_name_matches_categories">Некоторые категории POI соответствуют запросу, можете использовать их для создания фильтра:</string>
     <string name="data_to_search_poi_not_available">Локальные данные для поиска POI по имени не найдены.</string>
@@ -517,7 +517,7 @@
     <string name="tts_language_not_supported">Выбранный язык не поддерживается активным Android TTS (text-to-speech). Будет использован язык по-умолчанию. Посмотреть в Google Play другой TTS? Иначе будет использоваться предустановленный язык TTS.</string>
     <string name="tts_missing_language_data_title">Данные отсутствуют</string>
     <string name="tts_missing_language_data">Перейти в маркет для загрузки выбранного языка?</string>
-    <string name="gpx_option_reverse_route">Выбрать обратное направление пути</string>
+    <string name="gpx_option_reverse_route">Обратное направление GPX</string>
     <string name="gpx_option_destination_point">Использовать текущий пункт назначения</string>
     <string name="gpx_option_from_start_point">Пройти весь путь</string>
     <string name="switch_to_vector_map_to_see">Для этого региона доступны локальные векторные карты. 
@@ -552,7 +552,7 @@
     <string name="preferred_locale">Локализация</string>
     <string name="shared_string_next">Далее</string>
     <string name="shared_string_previous">Предыдущий</string>
-    <string name="unit_of_length_descr">Выберите единицы измерения расстояния.</string>
+    <string name="unit_of_length_descr">Изменить единицу измерения расстояния.</string>
     <string name="unit_of_length">Единицы измерения расстояния</string>
     <string name="si_mi_feet">Мили/футы</string>
     <string name="si_mi_yard">Мили/ярды</string>
@@ -1116,7 +1116,7 @@
     <string name="map_widget_vector_attributes">Атрибуты визуализации</string>
     <string name="map_widget_renderer">Стиль карты</string>
     <string name="email">email</string>
-    <string name="day_night_info">День/Ночь данные</string>
+    <string name="day_night_info">Восход/закат</string>
     <string name="osmand_short_description_80_chars">OsmAnd - это навигационное приложение для путешествий с открытым исходным кодом</string>
     <string name="osmand_long_description_1000_chars">"OsmAnd (Open Street Maps Automated Navigation Directions)
 \n
@@ -1181,7 +1181,7 @@
     <string name="poi_filter_sightseeing">Достопримечательности</string>
     <string name="context_menu_item_last_intermediate_point">Добавить как последний промежуточный пункт</string>
     <string name="context_menu_item_first_intermediate_point">Добавить как первый промежуточный пункт</string>
-    <string name="add_as_last_destination_point">Добавить как последний промежуточный пункт назначения</string>
+    <string name="add_as_last_destination_point">Добавить промежуточный пункт в конец</string>
     <string name="add_as_first_destination_point">Добавить как первый промежуточный пункт назначения</string>
     <string name="replace_destination_point">Заменить пункт назначения</string>
     <string name="new_destination_point_dialog">Пункт назначения уже установлен:</string>
@@ -1547,9 +1547,9 @@
     <string name="pause_navigation">Приостановить навигацию</string>
     <string name="rendering_attr_alpineHiking_description">Визуализация пути по шкале SAC.</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Визуализация пути согласно трассам OSMC.</string>
-    <string name="arrival_distance_factor_early">Раньше</string>
-    <string name="arrival_distance_factor_normally">Обычный</string>
-    <string name="arrival_distance_factor_late">Позже</string>
+    <string name="arrival_distance_factor_early">Пораньше</string>
+    <string name="arrival_distance_factor_normally">Как обычно</string>
+    <string name="arrival_distance_factor_late">Попозже</string>
     <string name="arrival_distance_factor_at_last">На последних метрах</string>
     <string name="rendering_attr_alpineHiking_name">Пеший горный туризм по шкале (SAC)</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Наложение туристических меток</string>
@@ -1695,7 +1695,7 @@
     <string name="back_to_map">Вернуться на карту</string>
     <string name="location_on_map">Координаты:\n Широта %1$s\n Долгота %2$s</string>
     <string name="shared_string_ellipsis">…</string>
-    <string name="shared_string_enabled">Включена</string>
+    <string name="shared_string_enabled">Включен</string>
     <string name="shared_string_disabled">Выключен</string>
     <string name="shared_string_never">Никогда</string>
     <string name="shared_string_and">и</string>
@@ -2334,7 +2334,7 @@
     <string name="shared_string_reset">Сбросить</string>
     <string name="shared_string_to">До</string>
     <string name="mapillary_menu_date_from">От</string>
-    <string name="shared_string_reload">Обновить</string>
+    <string name="shared_string_reload">Перезагрузить</string>
     <string name="mapillary_menu_filter_description">Фильтровать фотографии по отправителю, дате или типу. Фильтры применяются только для больших масштабов.</string>
     <string name="import_gpx_failed_descr">OsmAnd не удается импортировать файл. Проверьте имеет ли OsmAnd разрешение на чтение файла из его местоположения.</string>
     <string name="distance_moving">Откорректированное расстояние</string>
@@ -2345,7 +2345,7 @@
     <string name="measurement_tool_action_bar">Просмотрите карту и добавьте точки</string>
     <string name="measurement_tool">Измерить расстояние</string>
     <string name="none_point_error">Необходимо добавить хотя бы одну точку.</string>
-    <string name="mapillary_image">Изображение Mapillary</string>
+    <string name="mapillary_image">Фотография Mapillary</string>
     <string name="improve_coverage_mapillary">Улучшить фотопокрытие через Mapillary</string>
     <string name="hide_from_zoom_level">Скрыть от шкалы приближения</string>
     <string name="rendering_value_translucent_pink_name">Прозрачно-розовый</string>
@@ -2749,9 +2749,9 @@
     <string name="in_app_purchase">Покупка в приложении</string>
     <string name="in_app_purchase_desc">Разовый платеж</string>
     <string name="purchase_unlim_title">Купить - %1$s</string>
-    <string name="wikivoyage_offline">Wikivoyage офлайн</string>
+    <string name="wikivoyage_offline">Викигид офлайн</string>
     <string name="unlimited_downloads">Неограниченные загрузки</string>
-    <string name="wikipedia_offline">Wikipedia офлайн</string>
+    <string name="wikipedia_offline">Википедия офлайн</string>
     <string name="unlock_all_features">Разблокировать все функции OsmAnd</string>
     <string name="monthly_map_updates">Обновления карт: ежемесячные
     </string>
@@ -2898,7 +2898,7 @@
     <string name="waiting_for_route_calculation">Расчет маршрута…</string>
     <string name="app_mode_public_transport">Общественный транспорт</string>
     <string name="avoid_roads_descr">Выберите дорогу на карте или из списка ниже, которую вы хотите избежать во время навигации:</string>
-    <string name="simulate_navigation">Симулировать навигацию</string>
+    <string name="simulate_navigation">Моделировать навигацию</string>
     <string name="choose_track_file_to_follow">Выберите файл трека для следования</string>
     <string name="voice_announcements">Голосовые объявления</string>
     <string name="quick_action_switch_day_night_descr">Нажатие на кнопку действия переключает между дневным и ночным режимами для OsmAnd</string>
@@ -3265,7 +3265,7 @@
     <string name="shared_string_memory_used_gb_desc">Использовано %1$s ГБ</string>
     <string name="shared_string_memory_used_mb_desc">Использовано %1$s МБ</string>
     <string name="shared_string_memory_used_kb_desc">Использовано %1$s кБ</string>
-    <string name="routing_attr_driving_style_prefer_unpaved_name">Предпочитать дороги без покрытия</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_name">Предпочитать грунтовые дороги</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">Предпочитать дороги без покрытия</string>
     <string name="shared_string_other">Прочее</string>
     <string name="download_detailed_map">Загрузить подробную карту %s, чтобы просмотреть эту область.</string>

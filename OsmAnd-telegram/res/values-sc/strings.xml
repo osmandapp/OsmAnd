@@ -233,7 +233,7 @@
     <string name="proxy_settings">Impostatziones de su servidore intermediàriu</string>
     <string name="proxy">Servidore intermediàriu (proxy)</string>
     <string name="privacy">Privadesa</string>
-    <string name="bearing">Andamentu</string>
+    <string name="bearing">Orientamentu</string>
     <string name="shared_string_select">Seletziona</string>
     <string name="min_logging_distance">Distàntzia mìnima de registratzione</string>
     <string name="min_logging_distance_descr">FIltru: distàntzia mìnima pro registrare unu puntu nou</string>
@@ -250,4 +250,11 @@
     <string name="set_time_timeline_descr">Ischerta su tempus de ammustrare</string>
     <string name="start_end_date">Data de incumintzu — de acabu</string>
     <string name="saved_messages">Messàgios sarvados</string>
+    <string name="time_zone_descr">Issèbera su fusu oràriu de ammustrare in sos messàgios de positzione tuos.</string>
+    <string name="time_zone">Fusu oràriu</string>
+    <string name="units_and_formats">Unidades e formados</string>
+    <string name="unit_of_length_descr">Muda s\'unidade de mèdida pro sa distàntzia.</string>
+    <string name="unit_of_length">Unidades de longària</string>
+    <string name="unit_of_speed_system_descr">Issèbera s\'unidade de letresa.</string>
+    <string name="unit_of_speed_system">Unidade de lestresa</string>
 </resources>

@@ -3388,4 +3388,10 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="add_new_profile_q">Pridať nový profil \'%1$s\'\?</string>
     <string name="save_heading">Pridať nadpis</string>
     <string name="save_heading_descr">Pridať nadpis ku každému bodu trasy pri zázname.</string>
+    <string name="distance_and_address">%1$s • %2$s</string>
+    <string name="street_city">%1$s, %2$s</string>
+    <string name="personal_category_name">Osobné</string>
+    <string name="shared_string_downloading_formatted">Sťahujem %s</string>
+    <string name="rendering_value_thick_name">Hrubé</string>
+    <string name="desert_render_descr">Pre púšte a iné riedko osídlené oblasti.</string>
 </resources>

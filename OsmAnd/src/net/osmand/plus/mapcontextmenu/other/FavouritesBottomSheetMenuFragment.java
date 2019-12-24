@@ -50,6 +50,7 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 	private boolean locationUpdateStarted;
 	private boolean compassUpdateAllowed = true;
 	private PointType pointType;
+	private Location location;
 	private float lastHeading;
 
 	private FavoritesListener favoritesListener;
@@ -219,7 +220,10 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 
 	@Override
 	public void updateLocation(Location location) {
-		updateLocationUi();
+		if (!MapUtils.areLatLonEqual(this.location, location)) {
+			this.location = location;
+			updateLocationUi();
+		}
 	}
 
 	@Override

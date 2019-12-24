@@ -252,4 +252,13 @@
     <string name="location_sharing_status">正在分享：%1$s</string>
     <string name="shared_string_enabled">已啟用</string>
     <string name="saved_messages">已儲存的訊息</string>
+    <string name="time_zone_descr">選取要在您位置訊息中顯示的時區。</string>
+    <string name="time_zone">時區</string>
+    <string name="units_and_formats">單位與格式</string>
+    <string name="unit_of_length_descr">變更距離的測量方式。</string>
+    <string name="unit_of_length">長度單位</string>
+    <string name="unit_of_speed_system_descr">定義速度單位。</string>
+    <string name="unit_of_speed_system">速度單位</string>
+    <string name="buffer_time_descr">緩衝的位置訊息要被刪除的時間</string>
+    <string name="buffer_time">緩衝過期時間</string>
 </resources>

@@ -69,4 +69,7 @@
     <string name="nm_h">nmi/h</string>
     <string name="si_nm_h">مایل دریایی بر ساعت (نات)</string>
     <string name="shared_string_enabled">فعال</string>
+    <string name="units_and_formats">یکاها و قالب‌ها</string>
+    <string name="unit_of_length_descr">یکاهای طول را تغییر دهید.</string>
+    <string name="unit_of_length">یکاهای طول</string>
 </resources>

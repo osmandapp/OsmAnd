@@ -46,7 +46,7 @@
     <string name="poi_butcher">Açougue</string>
     <string name="poi_deli">Delicatessen</string>
     <string name="poi_farm">Quitanda de produção local</string>
-    <string name="poi_greengrocer">Verdureira</string>
+    <string name="poi_greengrocer">Verdureira/Quitanda</string>
     <string name="poi_seafood">Loja de frutos do mar</string>
     <string name="poi_confectionery">Doceria</string>
     <string name="poi_ice_cream">Sorveteria</string>
@@ -1988,7 +1988,7 @@
     <string name="poi_refugee_no">Refugiados: não</string>
     <string name="poi_social_facility_group_home">Moradia assistida</string>
     <string name="poi_social_facility_assisted_living">Assistência domiciliar</string>
-    <string name="poi_social_facility_outreach">Alcance</string>
+    <string name="poi_social_facility_outreach">Centro de assistência</string>
     <string name="poi_impromptu_yes">Improvisado: sim</string>
     <string name="poi_impromptu_no">Improvisado: não</string>
     <string name="poi_social_facility_food_bank">Banco de alimentos</string>

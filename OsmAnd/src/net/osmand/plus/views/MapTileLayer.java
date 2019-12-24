@@ -7,6 +7,7 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.os.Build;
 import android.widget.Toast;
 
 import net.osmand.data.QuadRect;
@@ -40,6 +41,7 @@ public class MapTileLayer extends BaseMapLayer {
 	protected ResourceManager resourceManager;
 	protected OsmandSettings settings;
 	private boolean visible = true;
+	private boolean useSampling;
 
 	
 	public MapTileLayer(boolean mainMap) {
@@ -56,6 +58,8 @@ public class MapTileLayer extends BaseMapLayer {
 		this.view = view;
 		settings = view.getSettings();
 		resourceManager = view.getApplication().getResourceManager();
+
+		useSampling = Build.VERSION.SDK_INT < 28;
 
 		paintBitmap = new Paint();
 		paintBitmap.setFilterBitmap(true);
@@ -207,7 +211,7 @@ public class MapTileLayer extends BaseMapLayer {
 						int xZoom = (tileX % div) * tileSize / div;
 						int yZoom = (tileY % div) * tileSize / div;
 						// nice scale
-						boolean useSampling = false;//kzoom > 3;
+						boolean useSampling = this.useSampling && kzoom > 3;
 						bitmapToZoom.set(Math.max(xZoom, 0), Math.max(yZoom, 0), 
 								Math.min(xZoom + tileSize / div, tileSize), 
 								Math.min(yZoom + tileSize / div, tileSize));
