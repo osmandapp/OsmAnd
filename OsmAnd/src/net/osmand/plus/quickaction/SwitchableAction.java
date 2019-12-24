@@ -20,7 +20,7 @@ import android.widget.TextView;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dialogs.SelectMapViewQuickActionsBottomSheet;
-import net.osmand.plus.profiles.ReorderItemTouchHelperCallback;
+import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
 
 import java.util.ArrayList;
 import java.util.Collections;

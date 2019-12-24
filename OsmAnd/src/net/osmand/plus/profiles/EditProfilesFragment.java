@@ -29,6 +29,7 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.settings.BaseSettingsFragment;
+import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -47,6 +48,9 @@ public class EditProfilesFragment extends BaseOsmAndFragment {
 
 	private EditProfilesAdapter adapter;
 
+	private boolean nightMode;
+	private boolean wasDrawerDisabled;
+
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -59,6 +63,8 @@ public class EditProfilesFragment extends BaseOsmAndFragment {
 				appModesOrders.put(mode.getStringKey(), mode.getOrder());
 			}
 		}
+		nightMode = !app.getSettings().isLightContent();
+
 		View mainView = inflater.inflate(R.layout.edit_profiles_list_fragment, container, false);
 		AndroidUtils.addStatusBarPadding21v(getContext(), mainView);
 
@@ -184,6 +190,41 @@ public class EditProfilesFragment extends BaseOsmAndFragment {
 		super.onSaveInstanceState(outState);
 		outState.putSerializable(APP_MODES_ORDER_KEY, appModesOrders);
 		outState.putStringArrayList(DELETED_APP_MODES_KEY, deletedModesKeys);
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			wasDrawerDisabled = mapActivity.isDrawerDisabled();
+			if (!wasDrawerDisabled) {
+				mapActivity.disableDrawer();
+			}
+		}
+	}
+
+	public void onPause() {
+		super.onPause();
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null && !wasDrawerDisabled) {
+			mapActivity.enableDrawer();
+		}
+	}
+
+	@Override
+	public int getStatusBarColorId() {
+		return nightMode ? R.color.status_bar_color_dark : R.color.status_bar_color_light;
+	}
+
+	@Nullable
+	public MapActivity getMapActivity() {
+		FragmentActivity activity = getActivity();
+		if (activity instanceof MapActivity) {
+			return (MapActivity) activity;
+		} else {
+			return null;
+		}
 	}
 
 	public List<EditProfileDataObject> getProfiles(boolean deleted) {
