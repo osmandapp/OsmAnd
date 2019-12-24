@@ -9,8 +9,8 @@
     <string name="poi_deli">Деликатесы</string>
     <string name="poi_greengrocer">Овощи и фрукты</string>
     <string name="poi_seafood">Морепродукты</string>
-    <string name="poi_confectionery">Кондитерская</string>
-    <string name="poi_ice_cream">Мороженое</string>
+    <string name="poi_confectionery">Кондитерский магазин</string>
+    <string name="poi_ice_cream">Магазин мороженого</string>
     <string name="poi_supermarket">Супермаркет;Универсам</string>
     <string name="poi_tea">Чайный магазин</string>
     <string name="poi_dairy">Молочный магазин;Молоко</string>
@@ -67,14 +67,14 @@
     <string name="poi_kiosk">Киоск, ларёк</string>
     <string name="poi_kitchen">Кухни</string>
     <string name="poi_mobile_phone">Салон связи</string>
-    <string name="poi_motorcycle">Мотоциклы</string>
+    <string name="poi_motorcycle">Магазин мотоциклов</string>
     <string name="poi_musical_instrument">Музыкальные инструменты</string>
-    <string name="poi_music">Аудиозаписи;Музыкальный магазин</string>
-    <string name="poi_newsagent">Журнальный киоск;Журналы</string>
+    <string name="poi_music">Музыкальный магазин</string>
+    <string name="poi_newsagent">Газеты и журналы</string>
     <string name="poi_optician">Оптика</string>
     <string name="poi_organic">Биопродукты;Экологически чистые продукты;Органическая пища</string>
     <string name="poi_outdoor">Товары для активного отдыха</string>
-    <string name="poi_paint">Краски</string>
+    <string name="poi_paint">Магазин красок</string>
     <string name="poi_pet">Зоомагазин;Товары для животных</string>
     <string name="poi_radiotechnics">Радиодетали</string>
     <string name="poi_second_hand">Секонд-хенд</string>
@@ -806,7 +806,7 @@
     <string name="poi_road_obstacle">Дорожные препятствия</string>
     <string name="poi_medical_supply">Медицинские изделия</string>
     <string name="poi_public_transport_stop_position">Остановка общественного транспорта</string>
-    <string name="poi_railway_buffer_stop">Железнодорожный буфер</string>
+    <string name="poi_railway_buffer_stop">Железнодорожный буфер (тупиковый упор)</string>
     <string name="poi_junction">Перекрёсток</string>
     <string name="poi_observation_tower">Наблюдательная башня</string>
     <string name="poi_bell_tower">Колокольня</string>
@@ -1247,13 +1247,13 @@
     <string name="poi_payment_others_no">Другие методы оплаты не принимаются</string>
     <string name="poi_payment_routex_yes">Routex</string>
     <string name="poi_payment_routex_no">Топливные карты Routex не принимаются</string>
-    <string name="poi_payment_bancomat_yes">Bancomat</string>
+    <string name="poi_payment_bancomat_yes">Bancomat (Итальянская сеть)</string>
     <string name="poi_payment_bancomat_no">Bancomat не принимается</string>
     <string name="poi_payment_icsf_yes">Карты IC Stored Fare</string>
     <string name="poi_payment_icsf_no">Карты IC Stored Fare не принимаются</string>
     <string name="poi_payment_jcb_yes">JCB</string>
     <string name="poi_payment_jcb_no">Карты JCB не принимаются</string>
-    <string name="poi_payment_laser_yes">Laser</string>
+    <string name="poi_payment_laser_yes">Laser (Ирландская сеть)</string>
     <string name="poi_payment_laser_no">Карты Laser не принимаются</string>
     <string name="poi_payment_ep_quick_yes">Quick</string>
     <string name="poi_payment_ep_quick_no">Карты Quick не принимаются</string>
@@ -1576,7 +1576,7 @@
     <string name="poi_internet_access_type_wlan">Беспроводной</string>
     <string name="poi_internet_access_type_wired">Кабельный</string>
     <string name="poi_internet_access_type_public">Публичный доступ в интернет</string>
-    <string name="poi_internet_access_type_no">Без доступа в интернет</string>
+    <string name="poi_internet_access_type_no">Без доступа в Интернет</string>
     <string name="poi_internet_access_type_yes">C доступом в интернет</string>
     <string name="poi_maxwidth">Максимальная ширина</string>
     <string name="poi_iata">Код IATA</string>
@@ -2240,7 +2240,7 @@
     <string name="poi_garden_style_kitchen">Стиль сада: кухня</string>
     <string name="poi_toilets_access_community">Туалет: общественный</string>
     <string name="poi_internet_access_type_terminal">Терминал</string>
-    <string name="poi_historic_period_dominate">Исторический период: доминантный</string>
+    <string name="poi_historic_period_dominate">Исторический период: Доминат (285 – 476 г. н.э.)</string>
     <string name="poi_conveying_yes">Эскалатор/траволатор</string>
     <string name="poi_bridge_ref">Метка моста</string>
     <string name="poi_tunnel_ref">Метка туннеля</string>
@@ -2604,8 +2604,8 @@
     <string name="poi_counselling_type_rehabilitation_no">Консультация реабилитационная: нет</string>
     <string name="poi_counselling_type_sexual_yes">Консультация сексологическая: да</string>
     <string name="poi_counselling_type_sexual_no">Консультация сексологическая: нет</string>
-    <string name="poi_counselling_type_sexual_abuse_yes">Консультация для жертв домагательств: да</string>
-    <string name="poi_counselling_type_sexual_abuse_no">Консультация для жертв домагательств: нет</string>
+    <string name="poi_counselling_type_sexual_abuse_yes">Консультация для жертв домогательств: да</string>
+    <string name="poi_counselling_type_sexual_abuse_no">Консультация для жертв домогательств: нет</string>
     <string name="poi_counselling_type_victim_yes">Консультация для жертв насилия: да</string>
     <string name="poi_counselling_type_victim_no">Консультация для жертв насилия: нет</string>
     <string name="poi_counselling_type_violence_yes">Консультация по вопросам (домашнего) насилия: да</string>
@@ -3277,7 +3277,7 @@
     <string name="poi_google_plus">Google+</string>
     <string name="poi_content_wastewater">Содержимое: стоки</string>
     <string name="poi_enforcement_check">Требование: контроль</string>
-    <string name="poi_payment_account_cards_no"/>
+    <string name="poi_payment_account_cards_no">Платежные карты не принимаются</string>
     <string name="poi_payment_prepaid_ticket_yes">Предоплаченные билеты</string>
     <string name="poi_depot">Депо</string>
     <string name="poi_letter_box">Абонентский почтовый ящик</string>
@@ -3495,4 +3495,10 @@
     <string name="poi_community_gender_mixed">Пол сообщества: мужской и женский</string>
     <string name="poi_grave">Могила</string>
     <string name="reddit">Reddit</string>
+    <string name="poi_counselling_type_nutrition_nfire_hydo">Консультация по вопросам питания: нет</string>
+    <string name="poi_snowmobile_filter">Доступ для снегоходов</string>
+    <string name="poi_access_bus">Доступ для автобусов</string>
+    <string name="poi_access_caravan">Доступ для домов на колесах — автоприцепов</string>
+    <string name="poi_access_disabled">Доступ для людей с ограниченными возможностями</string>
+    <string name="poi_cash_withdrawal_bank_card">Снятие наличности</string>
 </resources>
