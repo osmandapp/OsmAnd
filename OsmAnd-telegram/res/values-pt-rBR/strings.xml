@@ -258,4 +258,6 @@
     <string name="time_zone">Fuso horário</string>
     <string name="unit_of_speed_system_descr">Defina a unidade de velocidade.</string>
     <string name="unit_of_speed_system">Unidade de velocidade</string>
+    <string name="buffer_time_descr">Tempo após o qual as mensagens de localização em buffer serão excluídas</string>
+    <string name="buffer_time">Tempo de expiração do buffer</string>
 </resources>
