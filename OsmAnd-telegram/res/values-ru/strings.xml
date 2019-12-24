@@ -121,7 +121,7 @@
     <string name="location_history_desc">Скройте контакты, которые не обновили свое местоположение за определенный промежуток времени.</string>
     <string name="share_location_as">Поделиться местоположением как</string>
     <string name="share_location_as_description">Если вы хотите подключить несколько устройств к одной учетной записи Telegram, вам необходимо использовать другое устройство для трансляции местоположения.</string>
-    <string name="osmand_connect_desc">Выберите версию OsmAnd, которую OsmAnd Tracker использует для отображения местоположений на карте.</string>
+    <string name="osmand_connect_desc">Выберите версию OsmAnd которую OsmAnd Tracker использует для отображения положений на карте.</string>
     <string name="osmand_connect">OsmAnd подключение</string>
     <string name="connected_account">Связанная учетная запись</string>
     <string name="shared_string_account">Учетная запись</string>
@@ -258,4 +258,6 @@
     <string name="unit_of_length">Единицы измерения расстояния</string>
     <string name="unit_of_speed_system_descr">Выберите единицу измерения скорости.</string>
     <string name="unit_of_speed_system">Единица измерения скорости</string>
+    <string name="buffer_time_descr">Время, по истечении которого буферизованные сообщения о местоположении будут удалены</string>
+    <string name="buffer_time">Срок действия буфера</string>
 </resources>
