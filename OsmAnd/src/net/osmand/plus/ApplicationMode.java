@@ -52,7 +52,6 @@ public class ApplicationMode {
 	private static Map<String, Set<ApplicationMode>> widgetsAvailabilityMap = new LinkedHashMap<>();
 
 	private static List<ApplicationMode> defaultValues = new ArrayList<>();
-	private static List<ApplicationMode> customValues = new ArrayList<>();
 	private static List<ApplicationMode> values = new ArrayList<>();
 	private static List<ApplicationMode> cachedFilteredValues = new ArrayList<>();
 
@@ -194,6 +193,9 @@ public class ApplicationMode {
 		private ApplicationMode reg() {
 			values.add(applicationMode);
 			defaultValues.add(applicationMode);
+			if (applicationMode.getOrder() == 0 && !values.isEmpty()) {
+				applicationMode.setOrder(values.size());
+			}
 			return applicationMode;
 		}
 
@@ -213,7 +215,9 @@ public class ApplicationMode {
 			m.locationIconDayLost = m.parentAppMode.locationIconDayLost;
 			m.locationIconNightLost = m.parentAppMode.locationIconNightLost;
 			values.add(applicationMode);
-			customValues.add(applicationMode);
+			if (applicationMode.getOrder() == 0 && !values.isEmpty()) {
+				applicationMode.setOrder(values.size());
+			}
 			return applicationMode;
 		}
 
@@ -677,9 +681,11 @@ public class ApplicationMode {
 
 		ApplicationModeBuilder b = createCustomMode(valueOfStringKey(mb.parent, null),
 				mb.userProfileName, mb.stringKey);
-		b.setRouteService(mb.routeService).setRoutingProfile(mb.routingProfile);
+		b.setRouteService(mb.routeService);
+		b.setRoutingProfile(mb.routingProfile);
 		b.icon(app, mb.iconName);
 		b.setColor(mb.iconColor);
+		b.setOrder(mb.order);
 		return b;
 	}
 
@@ -692,6 +698,7 @@ public class ApplicationMode {
 		mb.stringKey = stringKey;
 		mb.routeService = routeService;
 		mb.routingProfile = routingProfile;
+		mb.order = order;
 		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 		return gson.toJson(mb);
 	}
@@ -807,7 +814,6 @@ public class ApplicationMode {
 				it.remove();
 			}
 		}
-		customValues.remove(md);
 		cachedFilteredValues.remove(md);
 		saveAppModesToSettings(app.getSettings(), md.isCustomProfile());
 	}
