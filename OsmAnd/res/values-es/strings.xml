@@ -203,7 +203,7 @@
     <string name="preferred_locale">Idioma de visualización</string>
     <string name="shared_string_next">Siguiente</string>
     <string name="shared_string_previous">Anterior</string>
-    <string name="unit_of_length_descr">Cambia la distancia de medición.</string>
+    <string name="unit_of_length_descr">Cambia las unidades de longitud.</string>
     <string name="unit_of_length">Unidades de longitud</string>
     <string name="si_mi_feet">Millas/pies</string>
     <string name="si_mi_yard">Millas/yardas</string>
