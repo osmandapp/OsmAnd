@@ -9,7 +9,7 @@
     <string name="shared_string_telegram">Telegram</string>
     <string name="privacy_policy_use_telegram">Telegram (de berichten-app) wordt gebruikt om mensen te verbinden en te communiceren met mensen.</string>
     <string name="privacy_policy_telegram_client">OsmAnd-tracker is een van de app clients die het open platform van Telegram gebruiken. Uw contactpersonen kunnen elke andere Telegram-client gebruiken.</string>
-    <string name="privacy_policy_agree">Door op Doorgaan te klikken gaat u accoord met het privacy beleid van Telegram en van OsmAnd.</string>
+    <string name="privacy_policy_agree">Door op Doorgaan te klikken gaat u akkoord met het privacy beleid van zowel Telegram als OsmAnd.</string>
     <string name="shared_string_accept">Aanvaard</string>
     <string name="telegram_privacy_policy">Telegram privacy beleid</string>
     <string name="osmand_privacy_policy">OsmAnd privacy beleid</string>
@@ -169,7 +169,7 @@
     <string name="initialization">Initialiseer</string>
     <string name="location_service_no_gps_available">Selecteer de locatie provider waarmee u uw locatie deelt.</string>
     <string name="osmand_service">Achtergrond modus</string>
-    <string name="osmand_service_descr">OsmAnd loopt in de achtergrond met uitgeschakeld scherm.</string>
+    <string name="osmand_service_descr">OsmAnd tracker loopt in de achtergrond met uitgeschakeld scherm.</string>
     <string name="shared_string_distance">Afstand</string>
     <string name="share_location">Deel locatie</string>
     <string name="sharing_location">Locatie wordt gedeeld</string>
@@ -250,4 +250,11 @@
     <string name="set_time_timeline_descr">Kies te tonen tijd</string>
     <string name="start_end_date">Start — Eind datum</string>
     <string name="saved_messages">Bewaarde gesprekken</string>
+    <string name="time_zone_descr">Selecteer de te tonen tijdzone in uw locatie berichten.</string>
+    <string name="time_zone">Tijdzone</string>
+    <string name="units_and_formats">Eenheden &amp; formaten</string>
+    <string name="unit_of_length_descr">Wijzig de eenheid van afstand voor metingen.</string>
+    <string name="unit_of_length">Afstand eenheden</string>
+    <string name="unit_of_speed_system_descr">Definieer de eenheid voor snelheid.</string>
+    <string name="unit_of_speed_system">Eenheid van snelheid</string>
 </resources>
