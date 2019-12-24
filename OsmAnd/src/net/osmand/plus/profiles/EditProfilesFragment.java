@@ -391,11 +391,16 @@ public class EditProfilesFragment extends BaseOsmAndFragment {
 			Object itemFrom = getItem(from);
 			Object itemTo = getItem(to);
 			if (itemFrom instanceof EditProfileDataObject && itemTo instanceof EditProfileDataObject) {
-				EditProfileDataObject profileDataObjectFrom = (EditProfileDataObject) itemFrom;
-				EditProfileDataObject profileDataObjectTo = (EditProfileDataObject) itemTo;
-				int tmp = profileDataObjectFrom.getOrder();
-				appModesOrders.put(profileDataObjectFrom.getStringKey(), profileDataObjectTo.getOrder());
-				appModesOrders.put(profileDataObjectTo.getStringKey(), tmp);
+				EditProfileDataObject profileFrom = (EditProfileDataObject) itemFrom;
+				EditProfileDataObject profileTo = (EditProfileDataObject) itemTo;
+
+				int orderFrom = profileFrom.getOrder();
+				int orderTo = profileTo.getOrder();
+
+				profileFrom.setOrder(orderTo);
+				profileTo.setOrder(orderFrom);
+				appModesOrders.put(profileFrom.getStringKey(), orderTo);
+				appModesOrders.put(profileTo.getStringKey(), orderFrom);
 
 				Collections.swap(items, from, to);
 				notifyItemMoved(from, to);
