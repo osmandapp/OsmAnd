@@ -3415,7 +3415,7 @@ Lon %2$s</string>
     <string name="delete_profiles_descr">Nachdem Sie auf Anwenden geklickt haben, gehen gelöschte Profile vollständig verloren.</string>
     <string name="master_profile">Hauptprofil</string>
     <string name="select_color">Farbe wählen</string>
-    <string name="edit_profiles_descr">Sie können die Standard-OsmAnd-Profile nicht löschen, sie jedoch im vorherigen Bildschirm deaktivieren oder nach unten verschieben.</string>
+    <string name="edit_profiles_descr">Sie können voreingestellte OsmAnd-Profile nicht löschen, aber im vorherigen Bildschirm deaktivieren oder nach unten verschieben.</string>
     <string name="edit_profiles">Profile bearbeiten</string>
     <string name="select_nav_profile_dialog_message">Der Navigationstyp beeinflusst die Regeln für Routenberechnungen.</string>
     <string name="profile_appearance">Profildarstellung</string>
