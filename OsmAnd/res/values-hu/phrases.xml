@@ -793,7 +793,7 @@
     <string name="poi_chalet">Nyaralóház</string>
     <string name="poi_apartment">Apartman</string>
     <string name="poi_wilderness_hut">Menedékház (személyzet nélkül)</string>
-    <string name="poi_lean_to">Esőbeálló</string>
+    <string name="poi_lean_to">Háromfalú fészer</string>
     <string name="poi_religion_voodoo">Vudu</string>
     <string name="poi_religion_unitarian_universalist">Unitárius univerzalista</string>
     <string name="poi_religion_multifaith">Többhitű</string>
@@ -2573,7 +2573,7 @@
     <string name="poi_street_cabinet_telecom">Közműszekrény típusa: távközlés</string>
     <string name="poi_street_cabinet_cable_tv">Közműszekrény típusa: kábeltelevízió</string>
     <string name="poi_street_cabinet_gas">Közműszekrény típusa: földgáz</string>
-    <string name="poi_street_cabinet_postal_service">Közműszekrény típusa: postai szolgáltatás</string>
+    <string name="poi_street_cabinet_postal_service">Közműszekrény típusa: átmeneti küldeménytároló (posta)</string>
     <string name="poi_street_cabinet_waste">Közműszekrény típusa: hulladék</string>
     <string name="poi_street_cabinet_water_management">Közműszekrény típusa: vízgazdálkodás</string>
     <string name="poi_street_cabinet_street_lighting">Közműszekrény típusa: közvilágítás</string>
@@ -3757,4 +3757,7 @@
     <string name="poi_cash_withdrawal_girocard">girocard (DE)</string>
     <string name="poi_cash_withdrawal_postbank">Postbank (DE)</string>
     <string name="poi_bath_open_air">Szabadtéri</string>
+    <string name="poi_health_food">Egészségesélelmiszer-bolt</string>
+    <string name="poi_craft_floorer">Padlólerakó</string>
+    <string name="poi_pet_grooming">Állatkozmetika</string>
 </resources>
