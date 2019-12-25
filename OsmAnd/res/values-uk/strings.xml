@@ -2039,10 +2039,10 @@
     <string name="legacy_search">Старий пошук</string>
     <string name="show_legacy_search">Показувати старий пошук</string>
     <string name="show_legacy_search_desc">Додати старий пошук до шухлядового списку.</string>
-    <string name="routing_attr_allow_motorway_name">Дозволити автомагістралі</string>
-    <string name="routing_attr_allow_motorway_description">Дозволити автомагістралі.</string>
+    <string name="routing_attr_allow_motorway_name">Використовувати автомагістралі</string>
+    <string name="routing_attr_allow_motorway_description">Дозволяє автомагістралі.</string>
     <string name="wiki_around">Статті Вікіпедії поруч</string>
-    <string name="search_map_hint">Пошук міста або країни</string>
+    <string name="search_map_hint">Місто або регіон</string>
     <string name="route_roundabout_short">Поверніть на %1$d з’їзд</string>
     <string name="upload_poi">Вивантажити POI</string>
     <string name="route_calculation">Побудова маршруту</string>
@@ -3079,9 +3079,9 @@
     <string name="button_rate">Добре</string>
     <string name="shared_string_privacy_policy">Політика конфіденційності</string>
     <string name="help_us_make_osmand_better">Допоможіть нам зробити OsmAnd кращим</string>
-    <string name="make_osmand_better_descr">Дозволити OsmAnd збирати та обробляти анонімні дані про використання додатку. Ми не збираємо і не зберігаємо дані про ваше розташування або будь-які інші розташування, які ви переглядаєте на мапі.
-\n 
-\nВи можете змінити свій вибір у будь-який час через Налаштування &gt; Конфіденційність та безпека.</string>
+    <string name="make_osmand_better_descr">Дозвольте OsmAnd збирати та обробляти анонімні дані про використання додатку. Ми не збираємо і не зберігаємо дані про ваше розташування або будь-які інші розташування, які ви переглядаєте на мапі.
+\n
+\nВи можете змінити свій вибір у будь-який час через «Налаштування» → «Конфіденційність та безпека».</string>
     <string name="choose_data_to_share">Оберіть, даними якого типу ви хотіли б поділитися:</string>
     <string name="downloaded_maps">Мап завантажено</string>
     <string name="visited_screens">Екранів відвідано</string>
