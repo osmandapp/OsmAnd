@@ -3099,7 +3099,7 @@
     <string name="profile_alert_need_save_msg">ابتدا تغییرات پروفایل را ذخیره کنید</string>
     <string name="profile_alert_delete_title">حذف پروفایل</string>
     <string name="profile_alert_delete_msg">آیا از حذف پروفایل «%s» اطمینان دارید</string>
-    <string name="select_base_profile_dialog_title">یک پروفایل پایه انتخاب کنید</string>
+    <string name="select_base_profile_dialog_title">پروفایل پایه را انتخاب کنید</string>
     <string name="select_base_profile_dialog_message">پروفایل سفارشی خود را بر پایهٔ یکی از پروفایل‌های برنامه بسازید. با این کار برخی چیزهای ابتدایی مانند نمایانی ابزارک‌ها و یکای سرعت و مسافت تنظیم می‌شود. 
 \nپروفایل‌های پیشفرض برنامه و چند نمونه پروفایل سفارشی که بر پایهٔ آن‌ها ساخته شده، در زیر آمده:</string>
     <string name="select_nav_profile_dialog_title">انتخاب نوع ناوبری</string>
@@ -3405,7 +3405,7 @@
     <string name="export_profile">برون‌برد پروفایل</string>
     <string name="overwrite_profile_q">پروفایل «%1$s» وجود دارد. جای آن نوشته شود؟</string>
     <string name="export_profile_failed">برون‌برد پروفایل ناموفق بود.</string>
-    <string name="profile_import">درون‌برد پروفایل:</string>
+    <string name="profile_import">درون‌برد پروفایل</string>
     <string name="profile_import_descr">برای درون‌ریزی یک پروفایل، فایل آن را از روی دستگاه انتخاب و با OsmAnd باز کنید.</string>
     <string name="file_import_error">%1$s خطای درون‌برد: %2$s</string>
     <string name="file_imported_successfully">‏%1$s باموفقیت درون‌برد شد.</string>
@@ -3439,4 +3439,16 @@
     <string name="rendering_value_thick_name">ضخیم</string>
     <string name="desert_render_descr">برای بیابان‌ها و سایر نواحی با جمعیت پراکنده.</string>
     <string name="add_new_profile_q">پروفایل تازهٔ «%1$s» اضافه شود؟</string>
+    <string name="select_navigation_icon">انتخاب نماد ناوبری</string>
+    <string name="select_map_icon">انتخاب نماد نقشه</string>
+    <string name="delete_profiles_descr">پس از لمس «به‌کارگیری»، پروفایل‌های حذف‌شده کاملاً از بین می‌روند.</string>
+    <string name="master_profile">پروفایل اصلی</string>
+    <string name="select_color">انتخاب رنگ</string>
+    <string name="edit_profiles_descr">نمی‌توانید پروفایل‌های پیشفرض OsmAnd را حذف کنید، اما در صفحهٔ پیشین می‌توانید آن‌ها را غیرفعال نمایید یا به پایین منتقل کنید.</string>
+    <string name="edit_profiles">ویرایش پروفایل‌ها</string>
+    <string name="select_nav_profile_dialog_message">نوع ناوبری بر قواعد محاسبهٔ مسیر اثرگذار است.</string>
+    <string name="profile_appearance">ظاهر پروفایل</string>
+    <string name="choose_icon_color_name">انتخاب نماد، رنگ و نام</string>
+    <string name="reorder_profiles">ویرایش لیست پروفایل‌ها</string>
+    <string name="selected_profile">پروفایل انتخاب‌شده</string>
 </resources>
