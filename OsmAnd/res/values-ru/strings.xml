@@ -66,11 +66,11 @@
     <string name="select_street">Выберите улицу</string>
     <string name="shared_string_in_name">в %1$s</string>
     <string name="type_address">Введите адрес</string>
-    <string name="type_city_town">Введите город</string>
+    <string name="type_city_town">Введите город/населенный пункт/место</string>
     <string name="type_postcode">Введите почтовый индекс</string>
     <string name="nearest_cities">Ближайшие города</string>
     <string name="select_city">Выберите город</string>
-    <string name="select_postcode">Выберите почтовый код</string>
+    <string name="select_postcode">Поиск почтового индекса</string>
     <string name="quick_action_take_audio_note">Записать аудио</string>
     <string name="quick_action_take_video_note">Записать видео</string>
     <string name="quick_action_take_photo_note">Сделать фото</string>
@@ -99,7 +99,7 @@
     <string name="quick_action_auto_zoom_desc">Нажатие на кнопку действия вкл/выкл автомасштаб карты в зависимости от скорости.</string>
     <string name="quick_action_auto_zoom_on">Включение автомасштаба</string>
     <string name="quick_action_auto_zoom_off">Выключение автомасштаба</string>
-    <string name="quick_action_add_destination">Добавить пункт назначения</string>
+    <string name="quick_action_add_destination">Установить пункт назначения</string>
     <string name="quick_action_replace_destination">Заменить пункт назначения</string>
     <string name="quick_action_add_first_intermediate">Добавить первую промежуточную точку</string>
     <string name="quick_action_add_destination_desc">Нажатие на кнопку действия добавит пункт назначения по центру экрана, любой ранее выбранный пункт назначения станет последним промежуточным пунктом.</string>
@@ -118,7 +118,7 @@
     <string name="shared_string_slope">Уклон</string>
     <string name="add_new_folder">Добавить новую папку</string>
     <string name="points_delete_multiple_succesful">Точка(-и) удалены.</string>
-    <string name="points_delete_multiple">Вы собираетесь удалить %1$d точку(и). Вы уверены?</string>
+    <string name="points_delete_multiple">Вы уверены, что желаете удалить %1$d точку(и)\?</string>
     <string name="route_points_category_name">Повороты на маршруте</string>
     <string name="track_points_category_name">Путевые точки, точки интереса, именованные элементы</string>
     <string name="shared_string_gpx_track">Трек</string>
@@ -185,10 +185,10 @@
     <string name="legacy_search">Старый поиск</string>
     <string name="show_legacy_search">Показывать старый поиск</string>
     <string name="show_legacy_search_desc">Добавить старый поиск в меню.</string>
-    <string name="routing_attr_allow_motorway_name">Разрешить автомагистрали</string>
-    <string name="routing_attr_allow_motorway_description">Разрешить автомагистрали.</string>
+    <string name="routing_attr_allow_motorway_name">Использовать автомагистрали</string>
+    <string name="routing_attr_allow_motorway_description">Разрешает автомагистрали.</string>
     <string name="wiki_around">Статьи Википедии рядом</string>
-    <string name="search_map_hint">Поиск города или страны</string>
+    <string name="search_map_hint">Город или регион</string>
     <string name="route_roundabout_short">Сверните на %1$d съезд</string>
     <string name="upload_poi">Выгрузить POI</string>
     <string name="route_calculation">Построение маршрута</string>
@@ -212,8 +212,8 @@
     <string name="save_track_precision">Минимальная точность для записи</string>
     <string name="save_track_precision_descr">Фильтр: не записывать, если эта точность не достигнута.</string>
     <string name="christmas_poi">Рождественские POI</string>
-    <string name="christmas_desc">В преддверии рождественских и новогодних праздников, вы можете выбрать для отображения POI, связанные с Рождеством: елки, ярмарки и т. п.</string>
-    <string name="christmas_desc_q">Показать рождественские POI?</string>
+    <string name="christmas_desc">В преддверии рождественских и новогодних праздников вы можете выбрать отображение связанных с ними POI, таких как рождественские елки, ярмарки и т.д.</string>
+    <string name="christmas_desc_q">Отображать праздничные POI\?</string>
     <string name="rendering_attr_contourColorScheme_description">Цветовая схема горизонталей</string>
     <string name="rendering_value_light_brown_name">Светло-коричневый</string>
     <string name="rendering_value_dark_brown_name">Темно-коричневый</string>
@@ -488,7 +488,7 @@
     <string name="vector_data_missing">Локальные данные отсутствуют на SD-карте. Пожалуйста, загрузите их для того, чтобы использовать приложение без Интернета.</string>
     <string name="local_index_gpx_info_show">"
 \n
-\nДолго удерживайте для настроек"</string>
+\nДолго удерживайте для вызова настроек"</string>
     <string name="local_index_installed">Загружено</string>
     <string name="local_index_items_backuped">%1$d из %2$d объект(ов) успешно архивированы.</string>
     <string name="local_index_items_deleted">%1$d из %2$d объект(ов) успешно удалены.</string>
@@ -2293,7 +2293,7 @@
     <string name="quick_action_navigation_voice">Голос вкл/выкл</string>
     <string name="quick_action_navigation_voice_off">Включить голос</string>
     <string name="quick_action_navigation_voice_on">Выключить голос</string>
-    <string name="file_can_not_be_moved">Файл не может быть перемещен.</string>
+    <string name="file_can_not_be_moved">Не удалось переместить файл.</string>
     <string name="sea_depth_thanks">Благодарим вас за покупку контуров морских глубин</string>
     <string name="shared_string_add_photos">Добавить фотографии</string>
     <string name="shared_string_permissions">Разрешения</string>
@@ -3051,15 +3051,14 @@
     <string name="move_maps">Переместить карты</string>
     <string name="dont_move_maps">Не перемещать</string>
     <string name="public_transport_ped_route_title">Маршрут пешком составляет примерно %1$s и может быть быстрее, чем на общественном транспорте</string>
-    <string name="shared_string_privacy_policy">политикой конфиденциальности</string>
-    <string name="help_us_make_osmand_better">Помогите нам сделать OsmAnd лучше!</string>
-    <string name="make_osmand_better_descr">"Разрешите OsmAnd собирать и обрабатывать анонимные данные об использовании приложения. Мы не собираем и не храним данные о вашем местоположении или о любых местах, которые вы просматриваете на карте.  
+    <string name="shared_string_privacy_policy">Политика конфиденциальности</string>
+    <string name="help_us_make_osmand_better">Помогите нам сделать OsmAnd лучше</string>
+    <string name="make_osmand_better_descr">Разрешите OsmAnd собирать и обрабатывать анонимные данные об использовании приложения. Мы не собираем и не храним данные о вашем местоположении или о любых местах, которые вы просматриваете на карте.
 \n
-\n 
-\nВы можете изменить свой выбор в любое время в Настройки &gt; Конфиденциальность и безопасность."</string>
+\nВы можете изменить свой выбор в любое время в меню «Настройка» → «Конфиденциальность и безопасность».</string>
     <string name="choose_data_to_share">Выберите тип данных, которыми вы хотите поделиться:</string>
-    <string name="downloaded_maps">Загруженные карты</string>
-    <string name="visited_screens">Посещаемые экраны</string>
+    <string name="downloaded_maps">Карт скачано</string>
+    <string name="visited_screens">Экранов посещено</string>
     <string name="colleted_data">Собранные данные</string>
     <string name="collected_data_descr">Список данных, которыми вы хотите поделиться с OsmAnd.</string>
     <string name="downloaded_maps_collect_descr">Помогает нам понять, какие карты регионов и стран наиболее популярны.</string>
@@ -3084,7 +3083,7 @@
     <string name="profile_alert_need_profile_name_title">Введите имя профиля</string>
     <string name="profile_alert_need_profile_name_msg">Имя профиля не должно быть пустым!</string>
     <string name="profile_alert_duplicate_name_msg">Уже есть профиль с таким именем</string>
-    <string name="rate_dialog_descr">Пожалуйста, уделите нам 30 секунд, оставьте отзыв и оцените нашу работу в Google Play.</string>
+    <string name="rate_dialog_descr">Пожалуйста, оставьте отзыв и оцените нашу работу в Google Play.</string>
     <string name="settings_privacy_and_security_desc">Выберите данные, которые будут нам доступны</string>
     <string name="app_mode_skiing">Лыжи</string>
     <string name="base_profile_descr_ski">Лыжи</string>
@@ -3110,7 +3109,7 @@
     <string name="shared_string_icon">Значок</string>
     <string name="collected_data">Собранные данные</string>
     <string name="press_again_to_change_the_map_orientation">Нажмите еще раз, чтобы изменить ориентацию карты</string>
-    <string name="last_launch_crashed">Последний запуск OsmAnd завершился с ошибкой. Пожалуйста, помогите нам улучшить OsmAnd, поделившись сообщением об ошибке.</string>
+    <string name="last_launch_crashed">Последний запуск OsmAnd завершился ошибкой. Пожалуйста, помогите нам улучшить OsmAnd, отправив нам отчет об ошибке.</string>
     <string name="settings_routing_mode_string">Режим: %s</string>
     <string name="settings_derived_routing_mode_string">Режим пользователя, полученный из: %s</string>
     <string name="profile_alert_duplicate_name_title">Повторяющееся имя</string>
@@ -3123,9 +3122,9 @@
     <string name="routing_attr_allow_intermediate_description">Более сложные трассы с крутыми участками. Как правило, встречаются препятствия, которые потребуется обходить.</string>
     <string name="routing_attr_allow_advanced_description">Сложные маршруты, с опасными препятствиями и крутыми участками.</string>
     <string name="routing_attr_difficulty_preference_name">Предпочитаемая сложность</string>
-    <string name="process_downloading_service">Служба загрузки OsmAnd</string>
+    <string name="process_downloading_service">Служба скачивания OsmAnd</string>
     <string name="shared_string_color_magenta">Пурпурный</string>
-    <string name="button_rate">Оценить</string>
+    <string name="button_rate">OK</string>
     <string name="show_compass_ruler">Показать компас линейку</string>
     <string name="hide_compass_ruler">Скрыть компас линейку</string>
     <string name="shared_string_min_speed">Мин. скорость</string>
@@ -3154,14 +3153,14 @@
 \n</string>
     <string name="app_mode_monowheel">Моноколесо</string>
     <string name="app_mode_scooter">Самокат</string>
-    <string name="precision_hdop_and_vdop">Точность по горизонтали: %1$s, по вертикали: %2$s</string>
-    <string name="precision_hdop">Точность по горизонтали: %s</string>
+    <string name="precision_hdop_and_vdop">Горизонтальная точность: %1$s, вертикальная: %2$s</string>
+    <string name="precision_hdop">Горизонтальная точность: %s</string>
     <string name="app_mode_shuttle_bus">Маршрутка</string>
     <string name="app_mode_ufo">НЛО</string>
     <string name="edit_profile_setup_title">Настройки профиля</string>
     <string name="edit_profile_setup_subtitle">У каждого профиля свои настройки</string>
-    <string name="minmax_speed_dialog_title">Мин/макс скорость</string>
-    <string name="shared_string_crash">Аварии</string>
+    <string name="minmax_speed_dialog_title">Установить мин/макс скорость</string>
+    <string name="shared_string_crash">Сбой</string>
     <string name="app_mode_offroad">Внедорожник</string>
     <string name="edit_profile_setup_map_subtitle">Выберите настройки карты по умолчанию для профиля</string>
     <string name="edit_profile_screen_options_subtitle">Выбор параметров экрана по умолчанию для профиля</string>
@@ -3222,7 +3221,7 @@
     <string name="manage_profiles_descr">Создание, импорт и редактирование профилей</string>
     <string name="manage_profiles">Управление профилями приложения…</string>
     <string name="utm_format_descr">OsmAnd использует формат UTM Standard, который похож, но не идентичен формату UTM NATO.</string>
-    <string name="navigate_point_format_utm">UTM Standard</string>
+    <string name="navigate_point_format_utm">UTM Стандарт</string>
     <string name="navigate_point_format_olc">Open Location Code</string>
     <string name="coordinates_format_info">Выбранный формат будет применен ко всему приложению.</string>
     <string name="pref_selected_by_default_for_profiles">Параметр выбран по умолчанию для профилей: %s</string>
@@ -3266,7 +3265,7 @@
     <string name="shared_string_memory_used_mb_desc">Использовано %1$s МБ</string>
     <string name="shared_string_memory_used_kb_desc">Использовано %1$s кБ</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">Предпочитать грунтовые дороги</string>
-    <string name="routing_attr_driving_style_prefer_unpaved_description">Предпочитать дороги без покрытия</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_description">Предпочитать дороги без покрытия.</string>
     <string name="shared_string_other">Прочее</string>
     <string name="download_detailed_map">Загрузить подробную карту %s, чтобы просмотреть эту область.</string>
     <string name="rendering_attr_piste_type_snow_park_name">Снежный парк</string>
@@ -3324,7 +3323,7 @@
     <string name="exported_osmand_profile">Профиль OsmAnd: %1$s</string>
     <string name="overwrite_profile_q">Профиль \'%1$s\' уже существует. Перезаписать\?</string>
     <string name="export_profile_failed">Не удалось экспортировать профиль.</string>
-    <string name="profile_import">Импорт профиля:</string>
+    <string name="profile_import">Импорт профиля</string>
     <string name="profile_import_descr">Чтобы импортировать профиль, выберите его файл на устройстве и откройте с помощью OsmAnd.</string>
     <string name="file_imported_successfully">%1$s успешно импортирован.</string>
     <string name="rendering_value_white_name">Белый</string>
@@ -3337,4 +3336,27 @@
     <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Отображать узловые сети велосипедных маршрутов</string>
     <string name="save_heading">Сохранять путевой угол</string>
     <string name="save_heading_descr">Сохранять во время записи путевой угол для каждой точки трека.</string>
+    <string name="layer_osm_edits">OSM правки</string>
+    <string name="swap_two_places">Поменять местами %1$s и %2$s</string>
+    <string name="track_saved">Трек сохранен</string>
+    <string name="empty_filename">Не указано имя файла</string>
+    <string name="clear_confirmation_msg">Очистить %1$s\?</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_name">Узловые сети</string>
+    <string name="suggested_maps">Предлагаемые карты</string>
+    <string name="join_segments">Объединить сегменты</string>
+    <string name="distance_and_address">%1$s • %2$s</string>
+    <string name="street_city">%1$s, %2$s</string>
+    <string name="desert_render_descr">Для пустынь и других малонаселенных районов.</string>
+    <string name="select_navigation_icon">Выберите значок навигации</string>
+    <string name="select_map_icon">Выберите значок карты</string>
+    <string name="delete_profiles_descr">После нажатия кнопки Применить удаленные профили будут полностью потеряны.</string>
+    <string name="master_profile">Базовый профиль</string>
+    <string name="select_color">Выберите цвет</string>
+    <string name="edit_profiles_descr">Вы не можете удалить стандартные профили OsmAnd, но вы можете отключить их на предыдущем экране или переместить вниз.</string>
+    <string name="edit_profiles">Редактировать профили</string>
+    <string name="select_nav_profile_dialog_message">Тип навигации влияет на правила расчета маршрута.</string>
+    <string name="profile_appearance">Внешний вид профиля</string>
+    <string name="choose_icon_color_name">Выберите значок, цвет и имя</string>
+    <string name="reorder_profiles">Редактировать список профилей</string>
+    <string name="selected_profile">Выбранный профиль</string>
 </resources>

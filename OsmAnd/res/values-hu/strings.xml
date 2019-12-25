@@ -211,7 +211,7 @@
     <string name="installing_new_resources">Új adatok kicsomagolása…</string>
     <string name="internet_connection_required_for_online_route">Az online navigáció offline üzemmódban nem működik.</string>
     <string name="tts_language_not_supported_title">Nem támogatott nyelv</string>
-    <string name="tts_language_not_supported">A kiválasztott nyelvet az Android TTS rendszere nem támogatja. Keresel másik TTS rendszert a Play Áruházban? Egyébként a jelenlegi TTS-t használja a program.</string>
+    <string name="tts_language_not_supported">A kiválasztott nyelvet az Android TTS rendszere nem támogatja. Keres másik TTS rendszert a Play Áruházban\? Egyébként a jelenlegi TTS-t használja a program.</string>
     <string name="tts_missing_language_data_title">Hiányzó adat</string>
     <string name="tts_missing_language_data">Átváltasz az áruházra a kiválasztott nyelv letöltéséhez?</string>
     <string name="gpx_option_reverse_route">GPX irány megfordítása</string>
@@ -1035,7 +1035,7 @@ Proporcionális memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</str
     <string name="av_camera_focus_auto">Autofókusz</string>
     <string name="av_camera_focus_hiperfocal">Végtelen fókusz</string>
     <string name="av_camera_focus_edof">Kiterjesztett mélységélesség (EDOF)</string>
-    <string name="av_camera_focus_infinity">Végtelenre állított fókusz</string>
+    <string name="av_camera_focus_infinity">Fókusz végtelenre állítva</string>
     <string name="av_camera_focus_macro">Makró (közeli) fókuszmód</string>
     <string name="av_camera_focus_continuous">A kamera folyamatosan próbál fókuszálni</string>
     <string name="av_photo_play_sound">Kamera exponálási hangjának lejátszása</string>
@@ -2084,7 +2084,7 @@ Ha szereted az OsmAndot és az OSM-et, és szeretnéd támogatni a fejlődésük
     <string name="show_legacy_search">Régi kereső megjelenítése</string>
     <string name="show_legacy_search_desc">Régi kereső megjelenítése az oldalsó menüben.</string>
     <string name="routing_attr_allow_motorway_name">Autópálya használata</string>
-    <string name="routing_attr_allow_motorway_description">Autópályák engedélyezése.</string>
+    <string name="routing_attr_allow_motorway_description">Engedélyezi az autópályákat.</string>
     <string name="lang_sr_latn">szerb (latin betűs)</string>
     <string name="lang_zh_hk">kínai (Hongkong)</string>
     <string name="rendering_attr_contourDensity_description">Szintvonalak sűrűsége</string>
@@ -2544,7 +2544,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="osc_file_desc">OSC – megfelelő export az OpenStreetMap számára.</string>
     <string name="shared_string_gpx_file">GPX-fájl</string>
     <string name="osc_file">OSC-fájl</string>
-    <string name="choose_file_type">Fájltípus kiválasztása</string>
+    <string name="choose_file_type">Fájltípus kijelölése</string>
     <string name="osm_edits_export_desc">Az exporttípus kijelölése: OSM-jegyzet, POI vagy mindkettő.</string>
     <string name="all_data">Minden adat</string>
     <string name="osm_notes">OSM Jegyzetek</string>
@@ -2668,14 +2668,14 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="how_to_open_wiki_title">Hogyan nyiss meg Wikipédia szócikkeket?</string>
     <string name="get_osmand_live">Az összes funkció feloldásához szerezze be az OsmAnd Live-ot: Napi térképfrissítés korlátlan számú letöltéssel, az összes fizetős és ingyenes bővítmény, Wikipédia, Wikivoyage és sok más.</string>
     <string name="unirs_render_descr">Az alapértelmezett stílus módosítása a gyalogos és kerékpáros utak kontrasztosabb megjelenítése érdekében. Mapnik színeket használ.</string>
-    <string name="off_road_render_descr"></string>
+    <string name="off_road_render_descr"/>
     <string name="nautical_render_descr">Hajózási navigációhoz. Főbb tulajdonságok: bóják, világítótornyok, folyók, tengeri útvonalak és jelzések, kikötők, hajózási jelzések, mélységvonalak.</string>
     <string name="ski_map_render_descr">Síeléshez. Kiemeli a sípályákat, a felvonókat, a sífutónyomokat stb. A másodlagos térképobjektumokat elhalványítja.</string>
     <string name="light_rs_render_descr">Egyszerű vezetési stílus. Kellemes éjszakai mód, szintvonalak, kontrasztos narancsszínű utak, elhalványított másodlagos térképobjektumok.</string>
-    <string name="topo_render_descr"></string>
+    <string name="topo_render_descr"/>
     <string name="mapnik_render_descr">Régi alapértelmezett „Mapnik”-stílus. A színek hasonlóak a Mapnikhez.</string>
-    <string name="touring_view_render_descr"></string>
-    <string name="default_render_descr"></string>
+    <string name="touring_view_render_descr"/>
+    <string name="default_render_descr"/>
     <string name="shared_string_gpx_files">GPX fájlok</string>
     <string name="quick_action_edit_actions">Műveletek szerkesztése</string>
     <string name="shared_string_dont">Nem</string>
@@ -3209,7 +3209,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="exported_osmand_profile">OsmAnd profil: %1$s</string>
     <string name="overwrite_profile_q">\'%1$s\' profil már létezik. Felülírod\?</string>
     <string name="export_profile_failed">Nem sikerült a profil exportálása.</string>
-    <string name="profile_import">Profil importálás:</string>
+    <string name="profile_import">Profil importálása</string>
     <string name="profile_import_descr">Profil importálásához válaszd ki a megfelelő fájlt a készüléken és nyisd meg az OsmAnd-dal.</string>
     <string name="file_import_error">%1$s importálás hiba: %2$s</string>
     <string name="file_imported_successfully">%1$s sikeresen importálva.</string>
@@ -3321,4 +3321,16 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="join_segments">Szegmensek összekapcsolása</string>
     <string name="save_heading">Irány belefoglalása</string>
     <string name="save_heading_descr">Rögzítéskor menti az egyes útpontok irányát is.</string>
+    <string name="select_navigation_icon">Navigációs ikon kijelölése</string>
+    <string name="select_map_icon">Térképikon kijelölése</string>
+    <string name="delete_profiles_descr">Az Alkalmazás-ra koppintva a törölt profilok végérvényesen elvesznek.</string>
+    <string name="master_profile">Főprofil</string>
+    <string name="select_color">Szín kijelölése</string>
+    <string name="edit_profiles_descr">Az alapértelmezett OsmAnd-profilok nem törölhetők, viszont letilthatók az előző képernyőn vagy letolhatók a lista aljára.</string>
+    <string name="edit_profiles">Profilok szerkesztése</string>
+    <string name="select_nav_profile_dialog_message">A navigációtípus befolyásolja az útvonal kiszámításának szabályait.</string>
+    <string name="profile_appearance">Profil megjelenése</string>
+    <string name="choose_icon_color_name">Ikon, szín és név kiválasztása</string>
+    <string name="reorder_profiles">Profilok listájának szerkesztése</string>
+    <string name="selected_profile">Kijelölt profil</string>
 </resources>

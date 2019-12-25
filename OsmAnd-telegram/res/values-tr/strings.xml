@@ -256,4 +256,6 @@
     <string name="unit_of_length">Uzunluk birimleri</string>
     <string name="unit_of_speed_system_descr">Hız birimini tanımlayın.</string>
     <string name="unit_of_speed_system">Hız birimi</string>
+    <string name="buffer_time_descr">Arabelleğe alınan konum mesajlarının silineceği süre</string>
+    <string name="buffer_time">Arabellek zaman aşım süresi</string>
 </resources>
