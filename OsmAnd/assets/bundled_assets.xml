@@ -48,6 +48,7 @@
 	<asset source="voice/uk/uk_tts.js" destination="voice/uk-tts/uk_tts.js" mode="overwriteOnlyIfExists" />
 	<asset source="voice/zh/zh_tts.js" destination="voice/zh-tts/zh_tts.js" mode="alwaysOverwriteOrCopy" />
 	<asset source="voice/zh-hk/zh-hk_tts.js" destination="voice/zh-hk-tts/zh-hk_tts.js" mode="overwriteOnlyIfExists" />
+	<asset source="voice/zh-tw/zh-tw_tts.js" destination="voice/zh-tw-tts/zh-tw_tts.js" mode="overwriteOnlyIfExists" />
 
 	<asset source="fonts/05_NotoSans-Regular.ttf" destination="fonts/05_NotoSans-Regular.ttf" mode="alwaysOverwriteOrCopy" />
 	<asset source="fonts/10_NotoSans-Bold.ttf" destination="fonts/10_NotoSans-Bold.ttf" mode="alwaysOverwriteOrCopy" />
