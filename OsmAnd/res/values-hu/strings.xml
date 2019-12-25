@@ -3041,7 +3041,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="profile_alert_need_save_msg">A módosítások mentése először a profilba</string>
     <string name="profile_alert_delete_title">Profil törlése</string>
     <string name="profile_alert_delete_msg">Biztosan törölni szeretné a(z) „%s” profilt\?</string>
-    <string name="select_base_profile_dialog_title">Profil kijelölése kezdéshez</string>
+    <string name="select_base_profile_dialog_title">Alapprofil kijelölése</string>
     <string name="process_downloading_service">OsmAnd letöltési szolgáltatás</string>
     <string name="shared_string_color_magenta">Magenta</string>
     <string name="shared_string_icon">Ikon</string>
