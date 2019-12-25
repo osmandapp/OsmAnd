@@ -1179,7 +1179,7 @@
     <string name="poi_filter_accomodation">Жилье</string>
     <string name="poi_filter_restaurants">Рестораны</string>
     <string name="poi_filter_sightseeing">Достопримечательности</string>
-    <string name="context_menu_item_last_intermediate_point">Добавить как последний промежуточный пункт</string>
+    <string name="context_menu_item_last_intermediate_point">Добавить как последний промежуточный пункт назначения</string>
     <string name="context_menu_item_first_intermediate_point">Добавить как первый промежуточный пункт</string>
     <string name="add_as_last_destination_point">Добавить промежуточный пункт в конец</string>
     <string name="add_as_first_destination_point">Добавить как первый промежуточный пункт назначения</string>
@@ -3359,4 +3359,7 @@
     <string name="choose_icon_color_name">Выберите значок, цвет и имя</string>
     <string name="reorder_profiles">Редактировать список профилей</string>
     <string name="selected_profile">Выбранный профиль</string>
+    <string name="personal_category_name">Персональный</string>
+    <string name="shared_string_downloading_formatted">Скачивание %s</string>
+    <string name="rendering_value_thick_name">Толсто</string>
 </resources>
