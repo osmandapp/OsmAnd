@@ -3076,7 +3076,7 @@ Lon %2$s</string>
     <string name="profile_alert_need_save_msg">Änderungen am Profil zuerst speichern</string>
     <string name="profile_alert_delete_title">Profil löschen</string>
     <string name="profile_alert_delete_msg">Möchten Sie das Profil „%s“ wirklich löschen\?</string>
-    <string name="select_base_profile_dialog_title">Ein Basisprofil auswählen</string>
+    <string name="select_base_profile_dialog_title">Wählen Sie zunächst ein Profil aus</string>
     <string name="select_base_profile_dialog_message">Bauen Sie ein eigenes Anwendungsprofil auf einem der Standardprofile der App auf. Dieses bestimmt die Grundeinstellungen wie Voreinstellungen zur Sichtbarkeit von Widgets und die Einheiten für Geschwindigkeit und Entfernungen. Dies sind die App-Standardprofile zusammen mit Beispielen für eigene Anwendungsprofile, die erweitert werden können:</string>
     <string name="select_nav_profile_dialog_title">Navigationsart auswählen</string>
     <string name="base_profile_descr_car">Auto, Lkw, Motorrad</string>
@@ -3376,7 +3376,7 @@ Lon %2$s</string>
     <string name="exported_osmand_profile">OsmAnd-Profil: %1$s</string>
     <string name="overwrite_profile_q">Das Profil \'%1$s\' existiert bereits. Überschreiben\?</string>
     <string name="export_profile_failed">Das Profil konnte nicht exportiert werden.</string>
-    <string name="profile_import">Profil-Import:</string>
+    <string name="profile_import">Profil-Import</string>
     <string name="profile_import_descr">Um ein Profil zu importieren, wählen Sie die Profildatei auf dem Gerät aus und öffnen Sie diese mit OsmAnd.</string>
     <string name="file_import_error">%1$s Importfehler: %2$s</string>
     <string name="file_imported_successfully">%1$s erfolgreich importiert.</string>
@@ -3410,4 +3410,16 @@ Lon %2$s</string>
     <string name="shared_string_downloading_formatted">%s herunterladen</string>
     <string name="rendering_value_thick_name">Fett</string>
     <string name="desert_render_descr">Für Wüsten und andere dünn besiedelte Gebiete.</string>
+    <string name="select_navigation_icon">Navigationssymbol wählen</string>
+    <string name="select_map_icon">Kartensymbol wählen</string>
+    <string name="delete_profiles_descr">Nachdem Sie auf Anwenden geklickt haben, gehen gelöschte Profile vollständig verloren.</string>
+    <string name="master_profile">Hauptprofil</string>
+    <string name="select_color">Farbe wählen</string>
+    <string name="edit_profiles_descr">Sie können die Standard-OsmAnd-Profile nicht löschen, sie jedoch im vorherigen Bildschirm deaktivieren oder nach unten verschieben.</string>
+    <string name="edit_profiles">Profile bearbeiten</string>
+    <string name="select_nav_profile_dialog_message">Der Navigationstyp beeinflusst die Regeln für Routenberechnungen.</string>
+    <string name="profile_appearance">Profildarstellung</string>
+    <string name="choose_icon_color_name">Symbol, Farbe und Name wählen</string>
+    <string name="reorder_profiles">Profilliste bearbeiten</string>
+    <string name="selected_profile">Ausgewähltes Profil</string>
 </resources>

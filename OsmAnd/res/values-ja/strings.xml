@@ -3122,7 +3122,7 @@ POIの更新は利用できません</string>
     <string name="profile_alert_need_save_msg">一旦プロファイルへ変更を保存する必要があります</string>
     <string name="profile_alert_delete_title">プロファイルの削除</string>
     <string name="profile_alert_delete_msg">プロファイル 『%s』 を削除してよろしいですか？</string>
-    <string name="select_base_profile_dialog_title">ベースプロファイルの選択</string>
+    <string name="select_base_profile_dialog_title">開始時に表示するプロファイルの選択</string>
     <string name="select_base_profile_dialog_message">カスタムプロファイルは標準のアプリケーションプロファイルを元に作成します。ウィジェットなどの表示設定や速度と距離の単位などの標準設定をプロファイルごとに定義可能です。これらは標準のアプリプロファイルを基本としており、今後それらと共に拡張される可能性があります:</string>
     <string name="select_nav_profile_dialog_title">ナビゲーションタイプの選択</string>
     <string name="base_profile_descr_car">乗用車,トラック,オートバイ</string>
@@ -3405,4 +3405,16 @@ POIの更新は利用できません</string>
     <string name="desert_render_descr">砂漠などの過疎地に向いたマップスタイルです。</string>
     <string name="distance_and_address">%1$s • %2$s</string>
     <string name="street_city">%1$s, %2$s</string>
+    <string name="select_navigation_icon">ナビゲーションアイコンの選択</string>
+    <string name="select_map_icon">マップアイコンの選択</string>
+    <string name="delete_profiles_descr">[決定]をタップすると、プロファイルが完全に削除されます。</string>
+    <string name="master_profile">マスタープロファイル</string>
+    <string name="select_color">色の選択</string>
+    <string name="edit_profiles_descr">OsmAndに最初からあるプロファイルは削除できませんが、前の画面でそれらを無効にしたり、リストの下の方へ移動させることはできます。</string>
+    <string name="edit_profiles">プロファイルの編集</string>
+    <string name="select_nav_profile_dialog_message">ナビゲーションタイプは、ルート計算の方針に影響します。</string>
+    <string name="profile_appearance">プロファイルの外観</string>
+    <string name="choose_icon_color_name">アイコン、色、名前を選択してください</string>
+    <string name="reorder_profiles">プロファイルリストの編集</string>
+    <string name="selected_profile">選択されたプロファイル</string>
 </resources>
