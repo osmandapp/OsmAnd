@@ -3041,7 +3041,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="profile_alert_need_save_msg">A módosítások mentése először a profilba</string>
     <string name="profile_alert_delete_title">Profil törlése</string>
     <string name="profile_alert_delete_msg">Biztosan törölni szeretné a(z) „%s” profilt\?</string>
-    <string name="select_base_profile_dialog_title">Alapprofil kijelölése</string>
+    <string name="select_base_profile_dialog_title">Kiinduló profil kijelölése</string>
     <string name="process_downloading_service">OsmAnd letöltési szolgáltatás</string>
     <string name="shared_string_color_magenta">Magenta</string>
     <string name="shared_string_icon">Ikon</string>
@@ -3333,4 +3333,5 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="choose_icon_color_name">Ikon, szín és név kiválasztása</string>
     <string name="reorder_profiles">Profilok listájának szerkesztése</string>
     <string name="selected_profile">Kijelölt profil</string>
+    <string name="select_base_profile_dialog_message">A létrehozandó egyedi profil az alkalmazás egyik alapprofilján fog alapulni, ez határozza meg az alapvető beállításokat, mint például a widgetek láthatóságát vagy a sebesség és távolság mértékegységeit. Ezek az alapprofilok, néhány pédával az egyedi profilokra, amikre kiterjeszthetők:</string>
 </resources>
