@@ -3324,7 +3324,7 @@
     <string name="exported_osmand_profile">Профиль OsmAnd: %1$s</string>
     <string name="overwrite_profile_q">Профиль \'%1$s\' уже существует. Перезаписать\?</string>
     <string name="export_profile_failed">Не удалось экспортировать профиль.</string>
-    <string name="profile_import">Импорт профиля:</string>
+    <string name="profile_import">Импорт профиля</string>
     <string name="profile_import_descr">Чтобы импортировать профиль, выберите его файл на устройстве и откройте с помощью OsmAnd.</string>
     <string name="file_imported_successfully">%1$s успешно импортирован.</string>
     <string name="rendering_value_white_name">Белый</string>
@@ -3337,4 +3337,27 @@
     <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Отображать узловые сети велосипедных маршрутов</string>
     <string name="save_heading">Сохранять путевой угол</string>
     <string name="save_heading_descr">Сохранять во время записи путевой угол для каждой точки трека.</string>
+    <string name="layer_osm_edits">OSM правки</string>
+    <string name="swap_two_places">Поменять местами %1$s и %2$s</string>
+    <string name="track_saved">Трек сохранен</string>
+    <string name="empty_filename">Не указано имя файла</string>
+    <string name="clear_confirmation_msg">Очистить %1$s\?</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_name">Узловые сети</string>
+    <string name="suggested_maps">Предлагаемые карты</string>
+    <string name="join_segments">Объединить сегменты</string>
+    <string name="distance_and_address">%1$s • %2$s</string>
+    <string name="street_city">%1$s, %2$s</string>
+    <string name="desert_render_descr">Для пустынь и других малонаселенных районов.</string>
+    <string name="select_navigation_icon">Выберите значок навигации</string>
+    <string name="select_map_icon">Выберите значок карты</string>
+    <string name="delete_profiles_descr">После нажатия кнопки Применить удаленные профили будут полностью потеряны.</string>
+    <string name="master_profile">Базовый профиль</string>
+    <string name="select_color">Выберите цвет</string>
+    <string name="edit_profiles_descr">Вы не можете удалить стандартные профили OsmAnd, но вы можете отключить их на предыдущем экране или переместить вниз.</string>
+    <string name="edit_profiles">Редактировать профили</string>
+    <string name="select_nav_profile_dialog_message">Тип навигации влияет на правила расчета маршрута.</string>
+    <string name="profile_appearance">Внешний вид профиля</string>
+    <string name="choose_icon_color_name">Выберите значок, цвет и имя</string>
+    <string name="reorder_profiles">Редактировать список профилей</string>
+    <string name="selected_profile">Выбранный профиль</string>
 </resources>
