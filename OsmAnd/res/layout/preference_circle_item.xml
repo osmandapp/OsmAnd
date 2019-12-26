@@ -12,11 +12,11 @@
 		app:srcCompat="@drawable/circle_contour_bg_light" />
 
 	<ImageView
-		android:id="@+id/bckgroundCircle"
+		android:id="@+id/backgroundCircle"
 		android:layout_width="48dp"
 		android:layout_height="48dp"
 		android:layout_margin="4dp"
-		app:srcCompat="@drawable/ic_action_circle" />
+		android:background="@drawable/circle_background_light" />
 
 	<ImageView
 		android:id="@+id/checkMark"
@@ -30,6 +30,5 @@
 		app:srcCompat="@drawable/ic_action_done"
 		android:layout_marginStart="16dp"
 		android:layout_marginEnd="4dp" />
-
 
 </FrameLayout>

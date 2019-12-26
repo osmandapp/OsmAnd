@@ -327,8 +327,9 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 	private View createColorItemView(final ApplicationMode.ProfileIconColors colorRes, ViewGroup rootView) {
 		FrameLayout colorItemView = (FrameLayout) UiUtilities.getInflater(getContext(), isNightMode())
 				.inflate(R.layout.preference_circle_item, rootView, false);
-		ImageView coloredCircle = colorItemView.findViewById(R.id.bckgroundCircle);
-		coloredCircle.setImageDrawable(getPaintedIcon(R.drawable.circle_background_light,
+		ImageView coloredCircle = colorItemView.findViewById(R.id.backgroundCircle);
+		AndroidUtils.setBackground(coloredCircle,
+				UiUtilities.tintDrawable(ContextCompat.getDrawable(app, R.drawable.circle_background_light),
 				ContextCompat.getColor(app, colorRes.getColor(isNightMode()))));
 		coloredCircle.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -365,8 +366,9 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 				.inflate(R.layout.preference_circle_item, rootView, false);
 		ImageView checkMark = iconItemView.findViewById(R.id.checkMark);
 		checkMark.setImageDrawable(app.getUIUtilities().getIcon(iconRes, R.color.icon_color_default_light));
-		ImageView coloredCircle = iconItemView.findViewById(R.id.bckgroundCircle);
-		coloredCircle.setImageDrawable(getPaintedIcon(R.drawable.circle_background_light,
+		ImageView coloredCircle = iconItemView.findViewById(R.id.backgroundCircle);
+		AndroidUtils.setBackground(coloredCircle,
+				UiUtilities.tintDrawable(ContextCompat.getDrawable(app, R.drawable.circle_background_light),
 				UiUtilities.getColorWithAlpha(ContextCompat.getColor(app, R.color.icon_color_default_light), 0.1f)));
 		coloredCircle.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -386,8 +388,8 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 		iconItem.findViewById(R.id.outlineCircle).setVisibility(View.GONE);
 		ImageView checkMark = iconItem.findViewById(R.id.checkMark);
 		checkMark.setImageDrawable(app.getUIUtilities().getIcon(changedProfile.iconRes, R.color.icon_color_default_light));
-		ImageView coloredCircle = iconItem.findViewById(R.id.bckgroundCircle);
-		coloredCircle.setImageDrawable(getPaintedIcon(R.drawable.circle_background_light,
+		AndroidUtils.setBackground(iconItem.findViewById(R.id.backgroundCircle),
+				UiUtilities.tintDrawable(ContextCompat.getDrawable(app, R.drawable.circle_background_light),
 				UiUtilities.getColorWithAlpha(ContextCompat.getColor(app, R.color.icon_color_default_light), 0.1f)));
 		changedProfile.iconRes = iconRes;
 		updateProfileButton();
@@ -398,8 +400,8 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 				app.getDaynightHelper().isNightModeForMapControls()));
 		View iconItem = iconItems.findViewWithTag(iconRes);
 		if (iconItem != null) {
-			ImageView coloredCircle = iconItem.findViewById(R.id.bckgroundCircle);
-			coloredCircle.setImageDrawable(getPaintedIcon(R.drawable.circle_background_light,
+			AndroidUtils.setBackground(iconItem.findViewById(R.id.backgroundCircle),
+					UiUtilities.tintDrawable(ContextCompat.getDrawable(app, R.drawable.circle_background_light),
 					UiUtilities.getColorWithAlpha(ContextCompat.getColor(app, changedProfile.color.getColor(isNightMode())), 0.1f)));
 			ImageView outlineCircle = iconItem.findViewById(R.id.outlineCircle);
 			GradientDrawable circleContourDrawable = (GradientDrawable) ContextCompat.getDrawable(app, R.drawable.circle_contour_bg_light);
