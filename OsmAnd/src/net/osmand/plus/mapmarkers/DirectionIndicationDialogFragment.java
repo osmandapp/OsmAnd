@@ -2,7 +2,6 @@ package net.osmand.plus.mapmarkers;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.res.ColorStateList;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
@@ -10,7 +9,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.widget.CompoundButtonCompat;
 import android.support.v7.widget.ListPopupWindow;
 import android.support.v7.widget.Toolbar;
 import android.text.SpannableString;
@@ -52,6 +50,7 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 
 	private int helpImgHeight;
 	private boolean shadowVisible;
+	private boolean usedOnMap = false;
 
 	public void setListener(DirectionIndicationFragmentListener listener) {
 		this.listener = listener;
@@ -61,6 +60,8 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		final OsmandSettings settings = getSettings();
+		boolean nightMode = isNightMode(usedOnMap);
+		
 		helpImgHeight = getResources().getDimensionPixelSize(R.dimen.action_bar_image_height);
 
 		mainView = UiUtilities.getInflater(getContext(), !settings.isLightContent()).inflate(R.layout.fragment_direction_indication_dialog, container);
@@ -151,6 +152,7 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 				updateSelection(true);
 			}
 		});
+		UiUtilities.setupCompoundButton(getMyApplication(), distanceIndicationToggle, nightMode, true);
 
 		mainView.findViewById(R.id.top_bar_row).setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -178,6 +180,7 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 				updateChecked(settings.SHOW_ARROWS_TO_FIRST_MARKERS, showArrowsToggle);
 			}
 		});
+		UiUtilities.setupCompoundButton(getMyApplication(), showArrowsToggle, nightMode, true);
 
 		final CompoundButton showLinesToggle = (CompoundButton) mainView.findViewById(R.id.show_guide_line_switch);
 		showLinesToggle.setChecked(settings.SHOW_LINES_TO_FIRST_MARKERS.get());
@@ -187,6 +190,7 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 				updateChecked(settings.SHOW_LINES_TO_FIRST_MARKERS, showLinesToggle);
 			}
 		});
+		UiUtilities.setupCompoundButton(getMyApplication(), showLinesToggle, nightMode, true);
 
 		final CompoundButton oneTapActiveToggle = (CompoundButton) mainView.findViewById(R.id.one_tap_active_switch);
 		oneTapActiveToggle.setChecked(settings.SELECT_MARKER_ON_SINGLE_TAP.get());
@@ -196,6 +200,7 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 				updateChecked(settings.SELECT_MARKER_ON_SINGLE_TAP, oneTapActiveToggle);
 			}
 		});
+		UiUtilities.setupCompoundButton(getMyApplication(), oneTapActiveToggle, nightMode, true);
 
 		final CompoundButton keepPassedToggle = (CompoundButton) mainView.findViewById(R.id.keep_passed_switch);
 		keepPassedToggle.setChecked(settings.KEEP_PASSED_MARKERS_ON_MAP.get());
@@ -205,6 +210,7 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 				updateChecked(settings.KEEP_PASSED_MARKERS_ON_MAP, keepPassedToggle);
 			}
 		});
+		UiUtilities.setupCompoundButton(getMyApplication(), keepPassedToggle, nightMode, true);
 
 		return mainView;
 	}
@@ -379,12 +385,9 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 	}
 
 	private void updateMarkerModeRow(int rowId, int radioButtonId, boolean checked, boolean active) {
-		boolean night = !getSettings().isLightContent();
 		RadioButton rb = (RadioButton) mainView.findViewById(radioButtonId);
-		int colorId = active ? night ? R.color.active_color_primary_dark : R.color.active_color_primary_light
-				: night ? R.color.icon_color_default_dark : R.color.icon_color_default_light;
 		rb.setChecked(checked);
-		CompoundButtonCompat.setButtonTintList(rb, ColorStateList.valueOf(ContextCompat.getColor(getContext(), colorId)));
+		UiUtilities.setupCompoundButton(getMyApplication(), rb, isNightMode(usedOnMap), true);
 		mainView.findViewById(rowId).setEnabled(active);
 	}
 

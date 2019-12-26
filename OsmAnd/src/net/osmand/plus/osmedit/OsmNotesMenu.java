@@ -22,7 +22,10 @@ public class OsmNotesMenu {
 
 	public static ContextMenuAdapter createListAdapter(final MapActivity mapActivity) {
 		ContextMenuAdapter adapter = new ContextMenuAdapter();
+		boolean nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		adapter.setDefaultLayoutId(R.layout.list_item_icon_and_menu);
+		adapter.setProfileDependent(true);
+		adapter.setNightMode(nightMode);
 		createLayersItems(adapter, mapActivity);
 		return adapter;
 	}
@@ -88,7 +91,7 @@ public class OsmNotesMenu {
 		if (showOsmBugs) {
 			toggleIconColorId = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
 		} else {
-			toggleIconColorId = nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light;
+			toggleIconColorId = ContextMenuItem.INVALID_ID;
 		}
 
 		adapter.addItem(new ContextMenuItem.ItemBuilder()

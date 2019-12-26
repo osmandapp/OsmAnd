@@ -267,7 +267,7 @@ public class MapActivityLayers {
 				return true;
 			}
 		};
-		return GpxUiHelper.selectGPXFiles(files, activity, callbackWithObject, getThemeRes(getApplication()));
+		return GpxUiHelper.selectGPXFiles(files, activity, callbackWithObject, getThemeRes(getApplication()), isNightMode(getApplication()));
 	}
 
 
@@ -283,6 +283,8 @@ public class MapActivityLayers {
 			addFilterToList(adapter, list, f, true);
 		}
 		list.add(poiFilters.getCustomPOIFilter());
+		adapter.setProfileDependent(true);
+		adapter.setNightMode(isNightMode(app));
 
 		final ArrayAdapter<ContextMenuItem> listAdapter = adapter.createListAdapter(activity, !isNightMode(app));
 		AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(activity, getThemeRes(app)));

@@ -80,6 +80,9 @@ public class BooleanPreferenceBottomSheet extends BasePreferenceBottomSheet {
 					}
 				})
 				.create();
+		if (isProfileDependent()) {
+			preferenceBtn[0].setCompoundButtonColorId(getAppMode().getIconColorInfo().getColor(nightMode));
+		}
 		items.add(preferenceBtn[0]);
 
 		String description = switchPreference.getDescription();
@@ -129,7 +132,7 @@ public class BooleanPreferenceBottomSheet extends BasePreferenceBottomSheet {
 	}
 
 	public static void showInstance(@NonNull FragmentManager fm, String prefId, Fragment target, boolean usedOnMap,
-									@Nullable ApplicationMode appMode) {
+									@Nullable ApplicationMode appMode, boolean profileDependent) {
 		try {
 			if (fm.findFragmentByTag(BooleanPreferenceBottomSheet.TAG) == null) {
 				Bundle args = new Bundle();
@@ -140,6 +143,7 @@ public class BooleanPreferenceBottomSheet extends BasePreferenceBottomSheet {
 				fragment.setUsedOnMap(usedOnMap);
 				fragment.setAppMode(appMode);
 				fragment.setTargetFragment(target, 0);
+				fragment.setProfileDependent(profileDependent);
 				fragment.show(fm, BooleanPreferenceBottomSheet.TAG);
 			}
 		} catch (RuntimeException e) {

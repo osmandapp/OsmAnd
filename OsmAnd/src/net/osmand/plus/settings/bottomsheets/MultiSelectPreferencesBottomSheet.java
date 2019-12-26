@@ -87,6 +87,9 @@ public class MultiSelectPreferencesBottomSheet extends BasePreferenceBottomSheet
 					})
 					.setTag(prefId)
 					.create();
+			if (isProfileDependent()) {
+				item[0].setCompoundButtonColorId(getAppMode().getIconColorInfo().getColor(nightMode));
+			}
 			items.add(item[0]);
 		}
 	}
@@ -158,7 +161,7 @@ public class MultiSelectPreferencesBottomSheet extends BasePreferenceBottomSheet
 	}
 
 	public static boolean showInstance(@NonNull FragmentManager fragmentManager, String prefId, Fragment target,
-									   boolean usedOnMap, @Nullable ApplicationMode appMode) {
+									   boolean usedOnMap, @Nullable ApplicationMode appMode, boolean profileDependent) {
 		try {
 			Bundle args = new Bundle();
 			args.putString(PREFERENCE_ID, prefId);
@@ -169,6 +172,7 @@ public class MultiSelectPreferencesBottomSheet extends BasePreferenceBottomSheet
 			fragment.setAppMode(appMode);
 			fragment.setTargetFragment(target, 0);
 			fragment.show(fragmentManager, TAG);
+			fragment.setProfileDependent(profileDependent);
 			return true;
 		} catch (RuntimeException e) {
 			return false;
