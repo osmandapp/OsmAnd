@@ -162,6 +162,7 @@ public class AppInitializer implements IProgress {
 		if(initSettings) {
 			return;
 		}
+		ApplicationMode.onApplicationStart(app);
 		startPrefs = app.getSharedPreferences(
 				getLocalClassName(app.getAppCustomization().getMapActivity().getName()),
 				Context.MODE_PRIVATE);
@@ -211,9 +212,7 @@ public class AppInitializer implements IProgress {
 		}
 		app.getSettings().SHOW_TRAVEL_UPDATE_CARD.set(true);
 		app.getSettings().SHOW_TRAVEL_NEEDED_MAPS_CARD.set(true);
-		ApplicationMode.onApplicationStart(app);
 		initSettings = true;
-
 	}
 
 	public int getNumberOfStarts() {
