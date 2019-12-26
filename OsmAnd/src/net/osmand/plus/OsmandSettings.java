@@ -151,7 +151,6 @@ public class OsmandSettings {
 	/// Settings variables
 	private final OsmandApplication ctx;
 	private SettingsAPI settingsAPI;
-	private Object defaultProfilePreferences;
 	private Object globalPreferences;
 	private Object profilePreferences;
 	private ApplicationMode currentMode;
@@ -179,7 +178,6 @@ public class OsmandSettings {
 
 	private void initPrefs() {
 		globalPreferences = settingsAPI.getPreferenceObject(getSharedPreferencesName(null));
-		defaultProfilePreferences = getProfilePreferences(ApplicationMode.DEFAULT);
 		currentMode = readApplicationMode();
 		profilePreferences = getProfilePreferences(currentMode);
 		registeredPreferences.put(APPLICATION_MODE.getId(), APPLICATION_MODE);
@@ -245,7 +243,7 @@ public class OsmandSettings {
 				}
 			}
 		}
-		SharedPreferences defaultProfilePreferences = (SharedPreferences) this.defaultProfilePreferences;
+		SharedPreferences defaultProfilePreferences = (SharedPreferences) getProfilePreferences(ApplicationMode.DEFAULT);
 		Map<String, ?> defaultPrefsMap = defaultProfilePreferences.getAll();
 		for (String key : defaultPrefsMap.keySet()) {
 			OsmandPreference pref = getPreference(key);
@@ -650,11 +648,7 @@ public class OsmandSettings {
 			if (pt != null) {
 				return getProfileDefaultValue(pt);
 			}
-			if (settingsAPI.contains(defaultProfilePreferences, getId())) {
-				return getValue(defaultProfilePreferences, defaultValue);
-			} else {
-				return defaultValue;
-			}
+			return defaultValue;
 		}
 
 		public boolean hasDefaultValues() {
