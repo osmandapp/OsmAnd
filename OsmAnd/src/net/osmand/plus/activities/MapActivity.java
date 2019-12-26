@@ -1060,7 +1060,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private BaseSettingsFragment getVisibleBaseSettingsFragment(int... ids) {
 		for (int id : ids) {
 			Fragment fragment = getSupportFragmentManager().findFragmentById(id);
-			if (fragment != null && !fragment.isRemoving() && fragment.isVisible() && fragment instanceof BaseSettingsFragment
+			if (fragment != null && !fragment.isRemoving() && fragment instanceof BaseSettingsFragment
 					&& ((BaseSettingsFragment) fragment).getStatusBarColorId() != -1) {
 				return (BaseSettingsFragment) fragment;
 			}

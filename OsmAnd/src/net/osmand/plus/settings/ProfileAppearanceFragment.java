@@ -149,8 +149,8 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 
 			AndroidUtils.setBackground(getContext(), buttonsContainer, isNightMode(), R.color.list_background_color_light, R.color.list_background_color_dark);
 
-			UiUtilities.setupDialogButton(false, cancelButton, DialogButtonType.SECONDARY, R.string.shared_string_cancel);
-			UiUtilities.setupDialogButton(false, saveButton, DialogButtonType.PRIMARY, R.string.shared_string_save);
+			UiUtilities.setupDialogButton(isNightMode(), cancelButton, DialogButtonType.SECONDARY, R.string.shared_string_cancel);
+			UiUtilities.setupDialogButton(isNightMode(), saveButton, DialogButtonType.PRIMARY, R.string.shared_string_save);
 
 			cancelButton.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -175,6 +175,11 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 			});
 		}
 		return view;
+	}
+
+	@Override
+	protected boolean isFullScreenAllowed() {
+		return false;
 	}
 
 	private boolean isChanged() {

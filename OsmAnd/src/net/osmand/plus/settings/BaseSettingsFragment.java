@@ -1,6 +1,7 @@
 package net.osmand.plus.settings;
 
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -34,6 +35,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -142,7 +144,6 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		updateTheme();
 		View view = super.onCreateView(inflater, container, savedInstanceState);
 		if (view != null) {
-			AndroidUtils.addStatusBarPadding21v(getContext(), view);
 			if (getPreferenceScreen() != null) {
 				PreferenceManager prefManager = getPreferenceManager();
 				PreferenceScreen preferenceScreen = prefManager.inflateFromResource(prefManager.getContext(), currentScreenType.preferencesResId, null);
@@ -228,6 +229,27 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 						activity.getWindow().setStatusBarColor(ContextCompat.getColor(activity, colorId));
 					}
 				}
+				if (activity instanceof MapActivity) {
+					View view = getView();
+					if (view != null) {
+						ViewTreeObserver vto = view.getViewTreeObserver();
+						vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+
+							@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+							@Override
+							public void onGlobalLayout() {
+
+								View view = getView();
+								if (view != null) {
+									ViewTreeObserver obs = view.getViewTreeObserver();
+									obs.removeOnGlobalLayoutListener(this);
+									view.requestLayout();
+								}
+							}
+						});
+					}
+					((MapActivity) activity).exitFromFullScreen();
+				}
 			}
 		}
 	}
@@ -236,16 +258,18 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	public void onPause() {
 		super.onPause();
 
-		MapActivity mapActivity = getMapActivity();
-		if (!wasDrawerDisabled && mapActivity != null) {
-			mapActivity.enableDrawer();
-		}
+		Activity activity = getActivity();
+		if (activity != null) {
+			if (!wasDrawerDisabled && activity instanceof MapActivity) {
+				((MapActivity) activity).enableDrawer();
+			}
 
-		if (Build.VERSION.SDK_INT >= 21) {
-			Activity activity = getActivity();
-			if (activity != null) {
+			if (Build.VERSION.SDK_INT >= 21) {
 				if (!(activity instanceof MapActivity) && statusBarColor != -1) {
 					activity.getWindow().setStatusBarColor(statusBarColor);
+				}
+				if (!isFullScreenAllowed() && activity instanceof MapActivity) {
+					((MapActivity) activity).enterToFullScreen();
 				}
 			}
 		}
@@ -341,6 +365,10 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 					.addToBackStack(DRAWER_SETTINGS_ID + ".new")
 					.commit();
 		}
+	}
+
+	protected boolean isFullScreenAllowed() {
+		return true;
 	}
 
 	protected abstract void setupPreferences();
