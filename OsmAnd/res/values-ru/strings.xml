@@ -1827,7 +1827,7 @@
     <string name="rendering_attr_hideHouseNumbers_name">Номера домов</string>
     <string name="routing_attr_avoid_borders_description">Избегать пересечения национальных границ</string>
     <string name="routing_attr_height_name">Максимальная высота</string>
-    <string name="routing_attr_height_description">Укажите высоту автомобиля для учета при построении маршрута.</string>
+    <string name="routing_attr_height_description">Укажите высоту транспортного средства для учета при построении маршрута.</string>
     <string name="use_fast_recalculation">Умный перерасчет маршрута</string>
     <string name="use_fast_recalculation_desc">Перерасчет только начальной части маршрута для длительных поездок.</string>
     <string name="osm_edit_context_menu_delete">Удалить правки OSM</string>
@@ -3272,7 +3272,7 @@
     <string name="rendering_attr_piste_type_sleigh_name">Сани</string>
     <string name="routeInfo_piste_difficulty_name">Сложность трассы</string>
     <string name="routing_attr_width_name">Ограничение по ширине</string>
-    <string name="routing_attr_width_description">Укажите ширину автомобиля для учета при построении маршрута.</string>
+    <string name="routing_attr_width_description">Укажите ширину транспортного средства для учета при построении маршрута.</string>
     <string name="app_mode_utv">Мотовездеход</string>
     <string name="shared_string_calculate">Рассчитать</string>
     <string name="shared_string_osmand_usage">Использовано OsmAnd</string>
