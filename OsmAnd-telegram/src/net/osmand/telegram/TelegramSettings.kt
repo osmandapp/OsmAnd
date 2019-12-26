@@ -115,7 +115,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 	private var hiddenOnMapChats: Set<Long> = emptySet()
 	private var shareDevices: Set<DeviceBot> = emptySet()
 	private var liveTracksInfo = emptyList<LiveTrackInfo>()
-	private var lastChatsInfo = ConcurrentHashMap<Long, LastChatInfo>()
+	var lastChatsInfo = ConcurrentHashMap<Long, LastChatInfo>()
 
 	var sharingStatusChanges = ConcurrentLinkedQueue<SharingStatus>()
 
