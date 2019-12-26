@@ -3077,7 +3077,7 @@ Lon %2$s</string>
     <string name="profile_alert_need_save_msg">Guardar primero los cambios del perfil</string>
     <string name="profile_alert_delete_title">Borrar perfil</string>
     <string name="profile_alert_delete_msg">¿Borrar el perfil «%s»\?</string>
-    <string name="select_base_profile_dialog_title">Elegir un perfil base</string>
+    <string name="select_base_profile_dialog_title">Elige el perfil para empezar</string>
     <string name="select_base_profile_dialog_message">El perfil personalizado se basa en uno de los perfiles de aplicación predefinidos, lo que define los ajustes básicos como la visibilidad predefinida de los widgets, las unidades de velocidad y distancia. Estos son los perfiles de aplicación predefinidos, junto con ejemplos de perfiles personalizados a los que se pueden ampliar:</string>
     <string name="select_nav_profile_dialog_title">Elegir el tipo de navegación</string>
     <string name="base_profile_descr_car">Automóvil, camión, motocicleta</string>
@@ -3370,7 +3370,7 @@ Lon %2$s</string>
     <string name="exported_osmand_profile">Perfil de OsmAnd: %1$s</string>
     <string name="overwrite_profile_q">El perfil «%1$s» ya existe. ¿Sobrescribir\?</string>
     <string name="export_profile_failed">No se pudo exportar el perfil.</string>
-    <string name="profile_import">Importar perfil:</string>
+    <string name="profile_import">Importar perfil</string>
     <string name="profile_import_descr">Para importar un perfil, elige el archivo en el dispositivo y ábrelo con OsmAnd.</string>
     <string name="file_import_error">Error de importación de %1$s: %2$s</string>
     <string name="file_imported_successfully">%1$s importados con éxito.</string>
@@ -3404,4 +3404,16 @@ Lon %2$s</string>
     <string name="shared_string_downloading_formatted">Descargando %s</string>
     <string name="rendering_value_thick_name">Espesor</string>
     <string name="desert_render_descr">Para desiertos y otras zonas escasamente pobladas.</string>
+    <string name="select_navigation_icon">Elegir icono de navegación</string>
+    <string name="select_map_icon">Elegir icono de mapa</string>
+    <string name="delete_profiles_descr">Después de pulsar «Aplicar», los perfiles borrados se perderán completamente.</string>
+    <string name="master_profile">Perfil maestro</string>
+    <string name="select_color">Elegir color</string>
+    <string name="edit_profiles_descr">No puedes borrar los perfiles de OsmAnd predefinidos, pero puedes desactivarlos en la pantalla anterior, o moverlos a la parte inferior.</string>
+    <string name="edit_profiles">Editar perfiles</string>
+    <string name="select_nav_profile_dialog_message">El tipo de navegación afecta a las reglas para los cálculos de ruta.</string>
+    <string name="profile_appearance">Aspecto del perfil</string>
+    <string name="choose_icon_color_name">Elige el icono, el color y el nombre</string>
+    <string name="reorder_profiles">Editar la lista de perfiles</string>
+    <string name="selected_profile">Perfil marcado</string>
 </resources>
