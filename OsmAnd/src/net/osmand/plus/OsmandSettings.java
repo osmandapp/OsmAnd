@@ -237,8 +237,7 @@ public class OsmandSettings {
 			if (pref instanceof CommonPreference) {
 				CommonPreference commonPreference = (CommonPreference) pref;
 				if (!commonPreference.global) {
-					List<ApplicationMode> modes = ApplicationMode.allPossibleValues();
-					for (ApplicationMode mode : modes) {
+					for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
 						if (!commonPreference.isSetForMode(mode)) {
 							setPreference(key, globalPrefsMap.get(key), mode);
 						}
@@ -254,6 +253,14 @@ public class OsmandSettings {
 				CommonPreference commonPreference = (CommonPreference) pref;
 				if (commonPreference.global && !commonPreference.isSet()) {
 					setPreference(key, defaultPrefsMap.get(key));
+				}
+			}
+		}
+		for (OsmandPreference pref : generalPrefs) {
+			Object defaultVal = pref.getModeValue(ApplicationMode.DEFAULT);
+			for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
+				if (!pref.isSetForMode(mode)) {
+					pref.setModeValue(mode, defaultVal);
 				}
 			}
 		}
@@ -3446,6 +3453,39 @@ public class OsmandSettings {
 			this.name = name;
 		}
 	}
+
+	private OsmandPreference[] generalPrefs = new OsmandPreference[]{
+			EXTERNAL_INPUT_DEVICE,
+			CENTER_POSITION_ON_MAP,
+			ROTATE_MAP,
+			MAP_SCREEN_ORIENTATION,
+			LIVE_MONITORING_URL,
+			LIVE_MONITORING_MAX_INTERVAL_TO_SEND,
+			LIVE_MONITORING_INTERVAL,
+			LIVE_MONITORING,
+			SHOW_TRIP_REC_NOTIFICATION,
+			AUTO_SPLIT_RECORDING,
+			SAVE_TRACK_MIN_SPEED,
+			SAVE_TRACK_PRECISION,
+			SAVE_TRACK_MIN_DISTANCE,
+			SAVE_TRACK_INTERVAL,
+			TRACK_STORAGE_DIRECTORY,
+			SAVE_HEADING_TO_GPX,
+			DISABLE_RECORDING_ONCE_APP_KILLED,
+			SAVE_TRACK_TO_GPX,
+			SAVE_GLOBAL_TRACK_REMEMBER,
+			SAVE_GLOBAL_TRACK_INTERVAL,
+			MAP_EMPTY_STATE_ALLOWED,
+			DO_NOT_USE_ANIMATIONS,
+			USE_KALMAN_FILTER_FOR_COMPASS,
+			USE_MAGNETIC_FIELD_SENSOR_COMPASS,
+			USE_TRACKBALL_FOR_MOVEMENTS,
+			SPEED_SYSTEM,
+			ANGULAR_UNITS,
+			METRIC_SYSTEM,
+			DRIVING_REGION,
+			DRIVING_REGION_AUTOMATIC
+	};
 
 	public class PreferencesDataStore extends PreferenceDataStore {
 
