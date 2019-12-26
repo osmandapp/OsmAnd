@@ -34,7 +34,7 @@ import android.graphics.Typeface;
 import org.apache.commons.logging.Log;
 
 public class TextRenderer {
-
+	private static final Log LOG = PlatformUtil.getLog(TextRenderer.class);
 	private Paint paintText;
 	private final Context context;
 	private Paint paintIcon;

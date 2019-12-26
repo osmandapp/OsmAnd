@@ -131,8 +131,11 @@
 				android:minWidth="@dimen/map_widget_height"
 				android:textColor="@color/color_white"
 				android:textSize="@dimen/map_widget_text_size"
+                android:textStyle="bold"
 				android:visibility="gone"
-				tools:text="8"
+				android:paddingRight="@dimen/text_margin_small"
+				android:paddingLeft="@dimen/text_margin_small"
+				tools:text="8W"
 				tools:visibility="visible" />
 
 			<ImageView
