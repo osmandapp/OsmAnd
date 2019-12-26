@@ -1002,9 +1002,8 @@ public class MapInfoWidgetsFactory {
 									}
 								}
 							}
-							if (name != null) {
+							if (name != null && setRoadShield(shieldIcon, object, nameTag, name, additional)) {
 								AndroidUiHelper.updateVisibility(shieldIcon, true);
-								setRoadShield(shieldIcon, object, nameTag, name, additional);
 							} else {
 								AndroidUiHelper.updateVisibility(shieldIcon, false);
 							}
@@ -1109,7 +1108,7 @@ public class MapInfoWidgetsFactory {
 					AndroidUiHelper.updateVisibility(exitRefText, false);
 				}
 				if (update) {
-					if (type[0] != null && turnDrawable != null) {
+					if (type[0] != null) {
 						turnIcon.setImageDrawable(turnDrawable);
 						AndroidUiHelper.updateVisibility(turnIcon, true);
 					} else if (showMarker) {
@@ -1131,9 +1130,7 @@ public class MapInfoWidgetsFactory {
 
 		private boolean setRoadShield(ImageView view, RouteDataObject object, String nameTag, String name, String additional) {
 			Context context = topBar.getContext();
-
 			int[] tps = object.getTypes();
-
 			OsmandApplication app = ((OsmandApplication) context.getApplicationContext());
 			RenderingRulesStorage storage = app.getRendererRegistry().getCurrentSelectedRenderer();
 			boolean nightMode = app.getDaynightHelper().isNightMode();
@@ -1155,6 +1152,7 @@ public class MapInfoWidgetsFactory {
 			rreq.search(RenderingRulesStorage.TEXT_RULES);
 
 			OsmandRenderer.RenderingContext rc = new OsmandRenderer.RenderingContext(context);
+
 			TextRenderer textRenderer = new TextRenderer(context);
 			TextRenderer.TextDrawInfo text = new TextRenderer.TextDrawInfo(name);
 
@@ -1166,7 +1164,8 @@ public class MapInfoWidgetsFactory {
 
 			if (rreq.isSpecified(rreq.ALL.R_TEXT_SHIELD)) {
 				text.shieldResIcon = rreq.getStringPropertyValue(rreq.ALL.R_TEXT_SHIELD);
-				shieldRes = app.getResources().getIdentifier("h_"+text.shieldResIcon, "drawable", app.getPackageName());
+				shieldRes = app.getResources().getIdentifier("h_"+text.shieldResIcon,
+						"drawable", app.getPackageName());
 			}
 
 			if (rreq.isSpecified(rreq.ALL.R_TEXT_COLOR)) {
@@ -1179,9 +1178,7 @@ public class MapInfoWidgetsFactory {
 						TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, ts, app.getResources().getDisplayMetrics()));
 			}
 
-
 			if (shieldRes != -1) {
-
 				float xSize;
 				float ySize;
 				Bitmap shield;
@@ -1189,6 +1186,7 @@ public class MapInfoWidgetsFactory {
 				ySize = shield.getHeight();
 				xSize = shield.getWidth();
 				float xyRatio = xSize/ySize;
+				//setting view propotions (height is fixed by toolbar size - 48dp);
 				int viewHeightPx = AndroidUtils.dpToPx(context, 48);
 				int viewWidthPx = (int) (viewHeightPx * xyRatio);
 
@@ -1196,16 +1194,13 @@ public class MapInfoWidgetsFactory {
 				params.width = viewWidthPx;
 				view.setLayoutParams(params);
 
+				//creating bitmap according to size of resource
 				Bitmap bitmap = Bitmap.createBitmap((int) xSize, (int) ySize, Bitmap.Config.ARGB_8888);
 				Canvas canvas = new Canvas(bitmap);
-				Paint.FontMetrics fm = p.getFontMetrics();
 				text.fillProperties(rc, rreq, xSize/2, ySize/2 - p.getFontMetrics().ascent/2f);
-
-				textRenderer.drawShieldIcon(rc, canvas, text, text.shieldRes);
 				textRenderer.drawShieldIcon(rc, canvas, text, text.shieldResIcon);
 				textRenderer.drawWrappedText(canvas, text, 20);
 
-				view.setVisibility(View.VISIBLE);
 				view.setImageBitmap(bitmap);
 				return true;
 			}
