@@ -65,9 +65,7 @@ public class EditProfilesFragment extends BaseOsmAndFragment {
 		}
 		nightMode = !app.getSettings().isLightContent();
 
-		View mainView = inflater.inflate(R.layout.edit_profiles_list_fragment, container, false);
-		AndroidUtils.addStatusBarPadding21v(getContext(), mainView);
-
+		View mainView =UiUtilities.getInflater(getContext(), nightMode).inflate(R.layout.edit_profiles_list_fragment, container, false);
 		ImageButton closeButton = mainView.findViewById(R.id.close_button);
 		closeButton.setImageResource(R.drawable.ic_action_remove_dark);
 		closeButton.setOnClickListener(new View.OnClickListener() {
@@ -130,7 +128,7 @@ public class EditProfilesFragment extends BaseOsmAndFragment {
 		recyclerView.setAdapter(adapter);
 
 		View cancelButton = mainView.findViewById(R.id.dismiss_button);
-		UiUtilities.setupDialogButton(false, cancelButton, UiUtilities.DialogButtonType.SECONDARY, R.string.shared_string_cancel);
+		UiUtilities.setupDialogButton(nightMode, cancelButton, UiUtilities.DialogButtonType.SECONDARY, R.string.shared_string_cancel);
 		cancelButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -144,7 +142,7 @@ public class EditProfilesFragment extends BaseOsmAndFragment {
 		mainView.findViewById(R.id.buttons_divider).setVisibility(View.VISIBLE);
 
 		View applyButton = mainView.findViewById(R.id.right_bottom_button);
-		UiUtilities.setupDialogButton(false, applyButton, UiUtilities.DialogButtonType.PRIMARY, R.string.shared_string_apply);
+		UiUtilities.setupDialogButton(nightMode, applyButton, UiUtilities.DialogButtonType.PRIMARY, R.string.shared_string_apply);
 		applyButton.setVisibility(View.VISIBLE);
 		applyButton.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -183,6 +181,11 @@ public class EditProfilesFragment extends BaseOsmAndFragment {
 		});
 
 		return mainView;
+	}
+
+	@Override
+	protected boolean isFullScreenAllowed() {
+		return false;
 	}
 
 	@Override

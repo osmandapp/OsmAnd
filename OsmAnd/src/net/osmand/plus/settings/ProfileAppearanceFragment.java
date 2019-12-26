@@ -177,11 +177,6 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 		return view;
 	}
 
-	@Override
-	protected boolean isFullScreenAllowed() {
-		return false;
-	}
-
 	private boolean isChanged() {
 		return !profile.equals(changedProfile);
 	}

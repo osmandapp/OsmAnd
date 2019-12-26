@@ -268,7 +268,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 				if (!(activity instanceof MapActivity) && statusBarColor != -1) {
 					activity.getWindow().setStatusBarColor(statusBarColor);
 				}
-				if (!isFullScreenAllowed() && activity instanceof MapActivity) {
+				if (activity instanceof MapActivity) {
 					((MapActivity) activity).enterToFullScreen();
 				}
 			}
@@ -365,10 +365,6 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 					.addToBackStack(DRAWER_SETTINGS_ID + ".new")
 					.commit();
 		}
-	}
-
-	protected boolean isFullScreenAllowed() {
-		return true;
 	}
 
 	protected abstract void setupPreferences();
