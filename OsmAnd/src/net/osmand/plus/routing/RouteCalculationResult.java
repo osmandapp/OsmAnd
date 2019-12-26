@@ -5,7 +5,6 @@ import android.support.annotation.Nullable;
 
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
-import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.binary.RouteDataObject;
@@ -15,10 +14,7 @@ import net.osmand.data.QuadRect;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
-import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.routing.AlarmInfo.AlarmInfoType;
-import net.osmand.render.RenderingRuleSearchRequest;
-import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.ExitInfo;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RoutingContext;
@@ -328,42 +324,19 @@ public class RouteCalculationResult {
 						info.routeEndPointOffset = roundAboutEnd;
 					}
 					RouteSegmentResult next = list.get(lind);
-					String ref = next.getObject().getRef(ctx.getSettings().MAP_PREFERRED_LOCALE.get(),
+
+					String nextRef = next.getObject().getRef(ctx.getSettings().MAP_PREFERRED_LOCALE.get(),
 							ctx.getSettings().MAP_TRANSLITERATE_NAMES.get(), next.isForwardDirection());
-					info.setRef(ref);
+					info.setRef(nextRef);
 					info.setStreetName(next.getObject().getName(ctx.getSettings().MAP_PREFERRED_LOCALE.get(), 
 							ctx.getSettings().MAP_TRANSLITERATE_NAMES.get()));
 					info.setDestinationName(next.getObject().getDestinationName(ctx.getSettings().MAP_PREFERRED_LOCALE.get(),
 							ctx.getSettings().MAP_TRANSLITERATE_NAMES.get(), next.isForwardDirection()));
-
 					if (s.getObject().isExitPoint() && next.getObject().getHighway().equals("motorway_link")) {
 						ExitInfo exitInfo = new ExitInfo();
 						exitInfo.setRef(next.getObject().getExitRef());
 						exitInfo.setExitStreetName(next.getObject().getExitName());
 						info.setExitInfo(exitInfo);
-					}
-
-					String highwayTag = s.getObject().getHighway();
-					//	Search for nearest shield properties
-					for (int j = lind; j < list.size(); j++) {
-						RouteSegmentResult segment = list.get(j);
-						String segmentRef = segment.getObject().getRef("", false,
-								segment.isForwardDirection());
-						//	if it's the same road
-						if (segmentRef != null && segmentRef.equals(ref)) {
-							BinaryMapIndexReader.TagValuePair colorPair = segment.getObject().getShieldColor();
-							BinaryMapIndexReader.TagValuePair shapePair = segment.getObject().getShieldShape();
-							if (colorPair != null || shapePair != null) {
-								info.setShieldColorValue(colorPair != null ? colorPair.value : "white");
-								info.setShieldShapeValue(shapePair != null ? shapePair.value : "square");
-								if (colorPair != null) {
-									info.setShieldIconName(getShieldIconName(ctx, ref, highwayTag, colorPair));
-								} else {
-									info.setShieldIconName(getShieldIconName(ctx, ref, highwayTag, shapePair));
-								}
-								break;
-							}
-						}
 					}
 				}
 
@@ -397,32 +370,6 @@ public class RouteCalculationResult {
 		return segmentsToPopulate;
 	}
 
-	private static String getShieldIconName(OsmandApplication ctx, String ref, String highwayTag,
-											BinaryMapIndexReader.TagValuePair pair) {
-		String shieldId = null;
-		RenderingRulesStorage currentRenderer = ctx.getRendererRegistry().getCurrentSelectedRenderer();
-		MapRenderRepositories maps = ctx.getResourceManager().getRenderer();
-		boolean nightMode = ctx.getDaynightHelper().isNightMode();
-		RenderingRuleSearchRequest request = maps.getSearchRequestWithAppliedCustomRules(currentRenderer, nightMode);
-		request.setInitialTagValueZoom("highway", highwayTag, 10, null);
-		request.setIntFilter(request.ALL.R_TEXT_LENGTH, ref.length());
-		request.setStringFilter(request.ALL.R_NAME_TAG, "road_ref_1");
-		request.setStringFilter(request.ALL.R_ADDITIONAL,
-				pair.tag + "=" + pair.value);
-		if (request.search(RenderingRulesStorage.TEXT_RULES)) {
-			if (request.getFloatPropertyValue(request.ALL.R_TEXT_SIZE) > 0) {
-				if (request.isSpecified(request.ALL.R_TEXT_SHIELD)) {
-					shieldId = request.getStringPropertyValue(request.ALL.R_TEXT_SHIELD);
-				}
-				if (request.isSpecified(request.ALL.R_ICON)) {
-					shieldId = request.getStringPropertyValue(request.ALL.R_ICON);
-				}
-			}
-		}
-		log.info("Shield name: " + shieldId);
-		return shieldId;
-	}
-	
 	protected static void addMissingTurnsToRoute(List<Location> locations, 
 			List<RouteDirectionInfo> originalDirections, Location start, LatLon end, ApplicationMode mode, Context ctx,
 			boolean leftSide){

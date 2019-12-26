@@ -37,7 +37,8 @@ import com.jwetherell.openmap.common.UTMPoint;
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.LocationConvert;
-import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.PlatformUtil;
+import net.osmand.binary.BinaryMapRouteReaderAdapter;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -1031,14 +1032,6 @@ public class MapInfoWidgetsFactory {
 								if (type[0] == null) {
 									showMarker = true;
 								} else {
-									ref = directionInfo != null ? directionInfo.getRef() : null;
-									if (ref != null) {
-										setShield(shieldIcon, assembleShieldString(directionInfo.getShieldColorValue(),
-												directionInfo.getShieldShapeValue(), ref.length()), ref);
-										AndroidUiHelper.updateVisibility(shieldIcon, true);
-									} else {
-										AndroidUiHelper.updateVisibility(shieldIcon, false);
-									}
 									turnDrawable.setColor(R.color.nav_arrow);
 								}
 							}
@@ -1059,14 +1052,6 @@ public class MapInfoWidgetsFactory {
 						if (text == null) {
 							text = "";
 						}
-						if (ref != null) {
-							setShield(shieldIcon, assembleShieldString(next.getShieldColorValue(),
-									next.getShieldShapeValue(),
-									ref.length()), ref);
-							AndroidUiHelper.updateVisibility(shieldIcon, true);
-						} else {
-							AndroidUiHelper.updateVisibility(shieldIcon, false);
-						}
 					} else {
 						text = null;
 					}
@@ -1081,17 +1066,6 @@ public class MapInfoWidgetsFactory {
 							rt.getRef(settings.MAP_PREFERRED_LOCALE.get(), settings.MAP_TRANSLITERATE_NAMES.get(), rt.bearingVsRouteDirection(lastKnownLocation)),
 							rt.getDestinationName(settings.MAP_PREFERRED_LOCALE.get(), settings.MAP_TRANSLITERATE_NAMES.get(), rt.bearingVsRouteDirection(lastKnownLocation)),
 							"»");
-				}
-				if (ref != null) {
-					BinaryMapIndexReader.TagValuePair colorPair = rt.getShieldColor();
-					BinaryMapIndexReader.TagValuePair shapePair = rt.getShieldShape();
-					setShield(shieldIcon, assembleShieldString(
-							colorPair != null ? colorPair.value : null,
-							shapePair != null ? shapePair.value : null,
-							ref.length()), ref);
-					AndroidUiHelper.updateVisibility(shieldIcon, true);
-				}else {
-					AndroidUiHelper.updateVisibility(shieldIcon, false);
 				}
 				if (text == null) {
 					text = "";
@@ -1155,7 +1129,7 @@ public class MapInfoWidgetsFactory {
 			return false;
 		}
 
-		private void setShield(ImageView view, String shield, String ref) {
+		private boolean setRoadShield(ImageView view, RouteDataObject object, String nameTag, String name, String additional) {
 			Context context = topBar.getContext();
 
 			int[] tps = object.getTypes();
@@ -1163,12 +1137,22 @@ public class MapInfoWidgetsFactory {
 			OsmandApplication app = ((OsmandApplication) context.getApplicationContext());
 			RenderingRulesStorage storage = app.getRendererRegistry().getCurrentSelectedRenderer();
 			boolean nightMode = app.getDaynightHelper().isNightMode();
-			RenderingRuleSearchRequest renderingReq =
-					mapRenderRepo.getSearchRequestWithAppliedCustomRules(storage, nightMode);
-			renderingReq.setInitialTagValueZoom("highway", "secondary", 15, null);
-			renderingReq.setIntFilter(renderingReq.ALL.R_TEXT_LENGTH, ref.length());
-			renderingReq.setStringFilter(renderingReq.ALL.R_NAME_TAG, "ref");
-			renderingReq.search(RenderingRulesStorage.POINT_RULES);
+			RenderingRuleSearchRequest rreq = map.getMyApplication().getResourceManager()
+					.getRenderer().getSearchRequestWithAppliedCustomRules(storage, nightMode);
+
+			for (int k = 0; k < tps.length; k++) {
+				BinaryMapRouteReaderAdapter.RouteTypeRule tp = object.region.quickGetEncodingRule(tps[k]);
+				if (tp.getTag().equals("highway")) {
+					rreq.setInitialTagValueZoom(tp.getTag(), tp.getValue(), 15, null);
+				} else {
+					additional += tp.getTag() + "=" + tp.getValue() + ";";
+				}
+			}
+
+			rreq.setIntFilter(rreq.ALL.R_TEXT_LENGTH, name.length());
+			rreq.setStringFilter(rreq.ALL.R_NAME_TAG, nameTag);
+			rreq.setStringFilter(rreq.ALL.R_ADDITIONAL, additional);
+			rreq.search(RenderingRulesStorage.TEXT_RULES);
 
 			OsmandRenderer.RenderingContext rc = new OsmandRenderer.RenderingContext(context);
 			TextRenderer textRenderer = new TextRenderer(context);

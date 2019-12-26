@@ -32,6 +32,7 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Typeface;
 import org.apache.commons.logging.Log;
+import org.w3c.dom.Text;
 
 public class TextRenderer {
 	private static final Log LOG = PlatformUtil.getLog(TextRenderer.class);
@@ -63,8 +64,8 @@ public class TextRenderer {
 		int textWrap = 0;
 		boolean bold = false;
 		boolean italic = false;
-		String shieldRes = null;
-		String shieldResIcon = null;
+		public String shieldRes = null;
+		public String shieldResIcon = null;
 		int textOrder = 100;
 		int textShadowColor = Color.WHITE;
 
@@ -293,8 +294,8 @@ public class TextRenderer {
 			float coef = rc.getDensityValue(rc.screenDensityRatio * rc.textScale);
 			Bitmap ico = RenderingIcons.getIcon(context, sr, true);
 			if (ico != null) {
-				float left = text.centerX - ico.getWidth() / 2 * coef - 0.5f;
-				float top = text.centerY - ico.getHeight() / 2 * coef -  paintText.descent() - 0.5f;
+				float left = text.centerX - ico.getWidth() / 2.0f * coef - 0.5f;
+				float top = text.centerY - ico.getHeight() / 2.0f * coef - paintText.descent() * 1.5f;
 				if(rc.screenDensityRatio != 1f){
 					RectF rf = new RectF(left, top, left + ico.getWidth() * coef, 
 							top + ico.getHeight() * coef);
