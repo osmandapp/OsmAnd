@@ -905,8 +905,8 @@ Lon %2$s</string>
     <string name="left_side_navigation">Circular por la izquierda</string>
     <string name="left_side_navigation_descr">Para países donde la gente conduce por el lado izquierdo del camino.</string>
     <string name="local_index_description">Pulsa cualquier objeto para ver más detalles, mantén pulsado para desactivar o borrar. Datos en el dispositivo actualmente (%1$s libre):</string>
-    <string name="unknown_from_location">Punto de partida indeterminado</string>
-    <string name="unknown_location">Ubicación desconocida</string>
+    <string name="unknown_from_location">Punto de partida indeterminado.</string>
+    <string name="unknown_location">Ubicación desconocida.</string>
     <string name="modify_transparency">Definir transparencia (0 - transparente, 255 - opaco)</string>
     <string name="confirm_interrupt_download">¿Cancelar la descarga\?</string>
     <string name="first_time_msg">Gracias por usar OsmAnd. Descarga datos regionales sin conexión a través de «Ajustes → Gestionar mapas» para ver los mapas, ubicar direcciones, buscar PDI, encontrar transporte público y más.</string>
@@ -3402,4 +3402,6 @@ Lon %2$s</string>
     <string name="street_city">%1$s, %2$s</string>
     <string name="personal_category_name">Personal</string>
     <string name="shared_string_downloading_formatted">Descargando %s</string>
+    <string name="rendering_value_thick_name">Espesor</string>
+    <string name="desert_render_descr">Para desiertos y otras zonas escasamente pobladas.</string>
 </resources>

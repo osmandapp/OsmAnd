@@ -418,7 +418,7 @@
     <string name="prefs_plugins">Complementos</string>
     <string name="osm_editing_plugin_description">Este complemento do OsmAnd pode ser usado para enviar alterações para o OpenStreetMap, tais como criar ou alterar POIs, abrir ou comentar erros reportados do OpenStreetMap e contribuir com ficheiros GPX gravados. O OpenStreetMap é um projeto de mapeamento mundial dirigido pela comunidade e de domínio público. Para mais detalhes, consulte https://openstreetmap.org. A participação ativa é apreciada e as contribuições podem ser feitas diretamente do OsmAnd, se introduzir os seus dados de acesso à sua conta de utilizador do OpenStreetMap na aplicação.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Os mapas vetoriais são mostrados mais rapidamente. Podem não funcionar bem em alguns aparelhos.</string>
-    <string name="play_commands_of_currently_selected_voice">Selecione uma voz e teste reproduzindo os avisos</string>
+    <string name="play_commands_of_currently_selected_voice">Selecione uma voz e teste reproduzindo anúncios:</string>
     <string name="debugging_and_development">Desenvolvimento OsmAnd</string>
     <string name="native_rendering">Renderização nativa</string>
     <string name="test_voice_prompts">Testar comandos de voz</string>
@@ -977,7 +977,7 @@
     <string name="driving_region_europe_asia">Europa, Ásia, América Latina e similares</string>
     <string name="driving_region_uk">Reino Unido, Índia e similares</string>
     <string name="speak_title">Anunciar…</string>
-    <string name="speak_descr">Configure para anunciar nomes das ruas, avisos de tráfego (paragens obrigatórias, lombas), avisos de radares, limites de velocidade.</string>
+    <string name="speak_descr">Configurar anúncio de nomes de ruas, avisos de trânsito (paragens forçadas, lombadas de velocidade), avisos de radares de trânsito, limites de velocidade.</string>
     <string name="speak_street_names">Nomes das ruas (TTS)</string>
     <string name="speak_speed_limit">Limite de velocidade</string>
     <string name="speak_cameras">Radares de velocidade</string>
@@ -3224,37 +3224,37 @@
     <string name="get_discount_first_part">%1$s para o primeiro %2$s</string>
     <string name="get_discount_first_few_part">%1$s para o primeiro %2$s</string>
     <string name="gpx_join_gaps">Mesclar espaços</string>
-    <string name="configure_profile_info">Todas as configurações abaixo são afetadas apenas pelo perfil selecionado.</string>
-    <string name="utm_format_descr">OsmAnd usa o formato UTM Standard que é similar, mas não idêntico ao formato UTM Nato.</string>
+    <string name="configure_profile_info">Configurações de perfil:</string>
+    <string name="utm_format_descr">OsmAnd usa o UTM Standard que é semelhante, mas não idêntico ao formato UTM Nato.</string>
     <string name="shared_string_example">Exemplo</string>
     <string name="navigate_point_format_utm">UTM Standard</string>
     <string name="navigate_point_format_olc">Open Location Code</string>
-    <string name="coordinates_format_info">O formato selecionado será aplicado a todos os locais da aplicação.</string>
+    <string name="coordinates_format_info">O formato selecionado será aplicado em toda a app.</string>
     <string name="pref_selected_by_default_for_profiles">Esta configuração é selecionada por padrão para os perfis: %s</string>
-    <string name="change_default_settings">Alterar as configurações padrão</string>
-    <string name="discard_changes">Descartar alterações</string>
-    <string name="apply_to_current_profile">Aplicar ao perfil atual %1$s</string>
+    <string name="change_default_settings">Alterar a configuração</string>
+    <string name="discard_changes">Descartar alteração</string>
+    <string name="apply_to_current_profile">Aplicar só ao \"%1$s\"</string>
     <string name="apply_to_all_profiles">Aplicar a todos os perfis</string>
     <string name="start_up_message_pref">Mensagem de inicialização</string>
     <string name="analytics_pref_title">Análises</string>
-    <string name="turn_screen_on_info">Mostrar mapa durante a navegação acima do ecrã de bloqueio.</string>
-    <string name="route_parameters_info">Estas definições afetam a construção da rota. Será aplicado somente ao perfil selecionado: %1$s.</string>
+    <string name="turn_screen_on_info">Mostrar mapa durante a navegação no ecrã de bloqueio.</string>
+    <string name="route_parameters_info">Configurações de roteamento no perfil selecionado \"%1$s\".</string>
     <string name="wake_time">Tempo de despertar</string>
     <string name="units_and_formats">Unidades e formatos</string>
     <string name="appearance">Aspeto</string>
     <string name="map_look_descr">Aparência do mapa</string>
     <string name="map_look">Aspeto do mapa</string>
-    <string name="list_of_installed_plugins">Lista de plugins instalados</string>
+    <string name="list_of_installed_plugins">Plugins instalados</string>
     <string name="configure_navigation">Configurar a navegação</string>
     <string name="general_settings_profile_descr">Tema do app, unidades, região</string>
     <string name="configure_profile">Configurar o perfil</string>
-    <string name="screen_alerts_descr">Os alertas serão mostrados no canto inferior esquerdo do ecrã durante a navegação.</string>
+    <string name="screen_alerts_descr">Os alertas serão mostrados no canto inferior esquerdo durante a navegação.</string>
     <string name="switch_profile">Mudar de perfil</string>
     <string name="language_and_output">Idioma e saída</string>
     <string name="reset_to_default">Redefinir para o padrão</string>
     <string name="manage_profiles_descr">Criar, importar, editar perfis</string>
-    <string name="manage_profiles">Gerir perfis de aplicação…</string>
-    <string name="osmand_settings_descr">Afetar toda a aplicação</string>
+    <string name="manage_profiles">Gerir perfis de app…</string>
+    <string name="osmand_settings_descr">Afeta toda a app</string>
     <string name="osmand_settings">Configurações do OsmAnd</string>
     <string name="copy_from_other_profile">Copiar de outro perfil</string>
     <string name="turn_screen_on">Ativar o ecrã</string>
@@ -3263,13 +3263,13 @@
     <string name="shared_string_other">Outros</string>
     <string name="vehicle_parameters_descr">Peso, altura, velocidade</string>
     <string name="vehicle_parameters">Parâmetros do veículo</string>
-    <string name="voice_announces_info">Os avisos de voz são reproduzidos apenas durante a navegação.</string>
+    <string name="voice_announces_info">Anúncios de voz só acontecem durante a navegação.</string>
     <string name="voice_announces_descr">Instruções e anúncios de navegação</string>
     <string name="voice_announces">Anúncios de voz</string>
     <string name="screen_alerts">Alertas de ecrã</string>
     <string name="route_parameters_descr">Configurar os parâmetros da rota</string>
     <string name="route_parameters">Parâmetros de rota</string>
-    <string name="application_profile_changed">Perfil de aplicação modificado para \"%s\"</string>
+    <string name="application_profile_changed">Perfil de app modificado para \"%s\"</string>
     <string name="logcat_buffer">Buffer de logcat</string>
     <string name="plugins_settings">Configurações de Plugins</string>
     <string name="app_mode_camper">Campista</string>
@@ -3279,13 +3279,13 @@
     <string name="change_data_storage_full_description">Mover ficheiros de dados OsmAnd para o novo destino\?
 \n%1$s &gt; %2$s</string>
     <string name="enter_path_to_folder">Insira o caminho para a pasta</string>
-    <string name="shared_string_select_folder">Selecionar pasta</string>
+    <string name="shared_string_select_folder">Pasta…</string>
     <string name="paste_Osmand_data_folder_path">Colar caminho para a pasta com dados OsmAnd</string>
     <string name="change_osmand_data_folder_question">Alterar a pasta de dados OsmAnd\?</string>
     <string name="move_maps_to_new_destination">Mover para o novo destino</string>
-    <string name="internal_app_storage_description">Armazenamento interno, escondido do utilizador e outros apps, por isso ninguém, exceto OsmAnd, pode ter acesso aos seus dados</string>
+    <string name="internal_app_storage_description">Armazenamento interno, oculto do utilizador e outros apps, exclusivamente acessível ao OsmAnd</string>
     <string name="change_data_storage_folder">Alterar pasta de armazenamento de dados</string>
-    <string name="rendering_attr_piste_type_snow_park_name">Parque de neve</string>
+    <string name="rendering_attr_piste_type_snow_park_name">Parque do terreno</string>
     <string name="rendering_attr_piste_type_sleigh_name">Trenó</string>
     <string name="rendering_attr_piste_type_sled_name">Trenó</string>
     <string name="rendering_attr_piste_type_hike_name">Caminhada</string>
@@ -3323,7 +3323,7 @@
     <string name="store_tracks_in_daily_directories">Gravar caminhos em pastas diárias</string>
     <string name="store_tracks_in_daily_directories_descrp">Gravar caminhos em subpastas por dia de gravação (como 2018-01-01).</string>
     <string name="data_storage_preference_summary">%1$s • %2$s</string>
-    <string name="data_storage_space_description">Livre %1$s GB • Total %2$s GB</string>
+    <string name="data_storage_space_description">%1$s GB livre (de %2$s GB)</string>
     <string name="shared_string_memory_used_tb_desc">%1$s TB usado(s)</string>
     <string name="shared_string_memory_used_gb_desc">%1$s GB usado(s)</string>
     <string name="shared_string_memory_used_mb_desc">%1$s MB usado(s)</string>
@@ -3333,25 +3333,45 @@
     <string name="routing_attr_prefer_unpaved_description">Preferir estradas não pavimentadas.</string>
     <string name="update_all_maps">Atualizar todos os mapas</string>
     <string name="update_all_maps_q">Tem certeza de que deseja atualizar todos os mapas (%1$d)\?</string>
-    <string name="release_3_5">"- Configurações de aplicativo e perfil atualizados. Arranjo conveniente de configurações por tipo, com capacidade de personalizar cada perfil
-\n
-\n - Nova caixa de diálogo de descarregamento de mapas que sugere um mapa para descarregamento durante a navegação
-\n
-\n - Correções do tema noturno
-\n
-\n -  Poucos problemas de roteamento em todo o mundo corrigidos
-\n
-\n - Basemap atualizado com uma rede rodoviária mais detalhada
-\n
-\n - Áreas inundadas corrigidas em todo o mundo
-\n
-\n - Roteamento de esqui: perfil de altura e complexidade da rota adicionados aos detalhes da rota
-\n
+    <string name="release_3_5">"- Configurações de app e perfil atualizados. Arranjo conveniente de configurações por tipo, com capacidade de personalizar cada perfil 
+\n 
+\n - Nova caixa de diálogo de descarregamento de mapas que sugere um mapa para descarregamento durante a navegação 
+\n 
+\n - Correções do tema noturno 
+\n 
+\n -  Poucos problemas de roteamento em todo o mundo corrigidos 
+\n 
+\n - Basemap atualizado com uma rede rodoviária mais detalhada 
+\n 
+\n - Áreas inundadas corrigidas em todo o mundo 
+\n 
+\n - Roteamento de esqui: perfil de altura e complexidade da rota adicionados aos detalhes da rota 
+\n 
 \n - Outras correções de bugs
 \n
 \n"</string>
-    <string name="apply_preference_to_all_profiles">Pode aplicar essa modificação a todos os perfis ou apenas aos selecionados.</string>
+    <string name="apply_preference_to_all_profiles">Pode aplicar esta modificação a todos os perfis ou apenas ao atualmente selecionado.</string>
     <string name="shared_preference">Partilhado</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">Preferir estradas não pavimentadas</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">Preferir estradas não pavimentadas.</string>
+    <string name="default_speed_dialog_msg">Usado para calcular o tempo de chegada previsto durante o roteiro</string>
+    <string name="rendering_value_white_name">Branco</string>
+    <string name="add_new_profile_q">Adicionar novo perfil \'%1$s\'\?</string>
+    <string name="save_heading">Incluir a direção</string>
+    <string name="save_heading_descr">Gravar direção para cada ponto de pista durante a gravação.</string>
+    <string name="distance_and_address">%1$s • %2$s</string>
+    <string name="street_city">%1$s, %2$s</string>
+    <string name="personal_category_name">Pessoal</string>
+    <string name="shared_string_downloading_formatted">Descarregando %s</string>
+    <string name="rendering_value_thick_name">Grosso</string>
+    <string name="desert_render_descr">Para desertos e outras áreas pouco povoadas.</string>
+    <string name="select_navigation_icon">Selecione o ícone de navegação</string>
+    <string name="select_map_icon">Selecione o ícone do mapa</string>
+    <string name="delete_profiles_descr">Depois de tocar em Aplicar, os perfis eliminados serão completamente perdidos.</string>
+    <string name="master_profile">Perfil principal</string>
+    <string name="select_color">Selecione a cor</string>
+    <string name="edit_profiles_descr">Não pode excluir perfis OsmAnd padrão, mas pode desativá-los no ecrã anterior, ou movê-los para o fundo.</string>
+    <string name="edit_profiles">Editar perfis</string>
+    <string name="select_nav_profile_dialog_message">O tipo de navegação afeta as regras para cálculos de rotas.</string>
+    <string name="profile_appearance">Aspecto do perfil</string>
 </resources>

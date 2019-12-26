@@ -2549,7 +2549,7 @@
     <string name="profile_alert_need_save_msg">Önce profile yapılan değişiklikleri kaydet</string>
     <string name="profile_alert_delete_title">Profili sil</string>
     <string name="profile_alert_delete_msg">\"%s\" profilini silmek istediğinizden emin misiniz</string>
-    <string name="select_base_profile_dialog_title">Temel bir profil seçin</string>
+    <string name="select_base_profile_dialog_title">Başlanacak profili seç</string>
     <string name="select_nav_profile_dialog_title">Gezinme türünü seçin</string>
     <string name="base_profile_descr_car">Araba, kamyon, motorsiklet</string>
     <string name="base_profile_descr_bicycle">Dağ bisikleti, moped, at</string>
@@ -3322,7 +3322,7 @@
     <string name="exported_osmand_profile">OsmAnd profili: %1$s</string>
     <string name="overwrite_profile_q">\'%1$s\' profili zaten var. Üzerine yazılsın mı\?</string>
     <string name="export_profile_failed">Profil dışa aktarılamadı.</string>
-    <string name="profile_import">Profil içe aktarma:</string>
+    <string name="profile_import">Profil içe aktarma</string>
     <string name="profile_import_descr">Bir profili içe aktarmak için, cihazdaki dosyasını seçin ve OsmAnd ile açın.</string>
     <string name="file_import_error">%1$s içe aktarma hatası: %2$s</string>
     <string name="file_imported_successfully">%1$s başarıyla içe aktarıldı.</string>
@@ -3356,4 +3356,16 @@
     <string name="shared_string_downloading_formatted">%s indiriliyor</string>
     <string name="rendering_value_thick_name">Kalın</string>
     <string name="desert_render_descr">Çöller ve diğer seyrek nüfuslu alanlar için.</string>
+    <string name="select_navigation_icon">Navigasyon simgesini seç</string>
+    <string name="select_map_icon">Harita simgesini seç</string>
+    <string name="delete_profiles_descr">Uygula\'ya dokunduktan sonra, silinen profiller tamamen kaybolacaktır.</string>
+    <string name="master_profile">Ana profil</string>
+    <string name="select_color">Renk seç</string>
+    <string name="edit_profiles_descr">Varsayılan OsmAnd profillerini silemezsiniz, ancak önceki ekranda devre dışı bırakabilir veya alt tarafa taşıyabilirsiniz.</string>
+    <string name="edit_profiles">Profilleri düzenle</string>
+    <string name="select_nav_profile_dialog_message">Navigasyon türü, rota hesaplamaları için kuralları etkiler.</string>
+    <string name="profile_appearance">Profil görünümü</string>
+    <string name="choose_icon_color_name">Simge, renk ve isim seç</string>
+    <string name="reorder_profiles">Profil listesini düzenle</string>
+    <string name="selected_profile">Seçilen profil</string>
 </resources>

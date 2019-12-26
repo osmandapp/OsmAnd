@@ -133,6 +133,7 @@ import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchType;
 import net.osmand.plus.settings.BaseSettingsFragment;
 import net.osmand.plus.settings.BaseSettingsFragment.SettingsScreenType;
 import net.osmand.plus.settings.DataStorageFragment;
+import net.osmand.plus.settings.ProfileAppearanceFragment;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.MapControlsLayer;
@@ -673,6 +674,12 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (editProfileFragment != null) {
 			if (!editProfileFragment.onBackPressedAllowed()) {
 				editProfileFragment.confirmCancelDialog(this);
+				return;
+			}
+		}
+		ProfileAppearanceFragment profileAppearanceFragment = getProfileAppearanceFragment();
+		if (profileAppearanceFragment != null) {
+			if (profileAppearanceFragment.isProfileAppearanceChanged(this)) {
 				return;
 			}
 		}
@@ -2398,6 +2405,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	public EditProfileFragment getEditProfileFragment() {
 		return getFragment(EditProfileFragment.TAG);
+	}
+
+	public ProfileAppearanceFragment getProfileAppearanceFragment() {
+		return getFragment(ProfileAppearanceFragment.TAG);
 	}
 
 	public QuickActionListFragment getQuickActionListFragment() {

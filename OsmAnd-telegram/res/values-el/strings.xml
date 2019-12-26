@@ -22,4 +22,25 @@
     <string name="si_nm">Ναυτικά μίλια</string>
     <string name="si_mi_meters">Μίλια/μέτρα</string>
     <string name="shared_string_all">Όλα</string>
+    <string name="altitude">Υψόμετρο</string>
+    <string name="shared_string_name">Όνομα</string>
+    <string name="osmand_service">Κατάσταση παρασκηνίου</string>
+    <string name="shared_string_apply">Εφαρμογή</string>
+    <string name="shared_string_select">Επιλέξτε</string>
+    <string name="shared_string_enable">Ενεργοποίηση</string>
+    <string name="shared_string_search">Αναζήτηση</string>
+    <string name="average_altitude">Μέσο υψόμετρο</string>
+    <string name="average_speed">Μέση ταχύτητα</string>
+    <string name="shared_string_status">Κατάσταση</string>
+    <string name="shared_string_disable">Απενεργοποίηση</string>
+    <string name="shared_string_close">Κλείσιμο</string>
+    <string name="shared_string_off">Ανενεργό</string>
+    <string name="shared_string_install">Εγκατάσταση</string>
+    <string name="shared_string_share">Διαμοιρασμός</string>
+    <string name="shared_string_back">Προηγούμενο</string>
+    <string name="shared_string_continue">Συνέχεια</string>
+    <string name="shared_string_cancel">Ακύρωση</string>
+    <string name="shared_string_settings">Επιλογές</string>
+    <string name="shared_string_enabled">Ενεργοποιημένο</string>
+    <string name="units_and_formats">Μονάδες μέτρησης &amp; φορμά</string>
 </resources>

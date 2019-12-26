@@ -614,8 +614,8 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="offline_navigation_not_available">Sa navigatzione chene lìnia de OsmAnd est temporaneamente non disponìbile.</string>
     <string name="left_side_navigation">Ghia a manca</string>
     <string name="left_side_navigation_descr">Pro sos istados in ue si ghiat mantenende sa manca.</string>
-    <string name="unknown_from_location">Sa positzione de tzucada no est istada galu determinata</string>
-    <string name="unknown_location">Positzione galu disconnota</string>
+    <string name="unknown_from_location">Sa positzione de tzucada no est istada galu determinata.</string>
+    <string name="unknown_location">Positzione galu disconnota.</string>
     <string name="modify_transparency">Imposta sa trasparèntzia (0 - trasparente, 255 - annapadu)</string>
     <string name="confirm_interrupt_download">Annullare s’iscarrigamentu\?</string>
     <string name="local_indexes_cat_tile">Mapas in lìnia e in cache a tasseddos</string>
@@ -3078,7 +3078,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="profile_alert_need_save_msg">In antis sarva sas modìficas a su profilu</string>
     <string name="profile_alert_delete_title">Iscantzella su profilu</string>
     <string name="profile_alert_delete_msg">Ses seguru de chèrrere iscantzellare su profilu \"%s\"\?</string>
-    <string name="select_base_profile_dialog_title">Ischerta unu profilu de base</string>
+    <string name="select_base_profile_dialog_title">Ischerta unu profilu cun su cale incumentzare</string>
     <string name="select_base_profile_dialog_message">Basa su profilu personalizadu tuo in subra de unu de sos profilos predefinidos de s\'aplicatzione. Custu definit s\'impostatzione de base, comente a sa visibilidade de sos widgets e de sas unidades de lestresa e de distàntzia. Custos sunt sos profilos predefinidos de s\'aplicatzione, in paris cun esèmpios de profilos personalizados chi diant pòdere èssere creados dae cussos:</string>
     <string name="select_nav_profile_dialog_title">Ischerta sa casta de navigatzione</string>
     <string name="base_profile_descr_car">Màchina, càmion, mototzicleta</string>
@@ -3371,7 +3371,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="exported_osmand_profile">Profilu de OsmAnd: %1$s</string>
     <string name="overwrite_profile_q">Su profilu \'%1$s\' esistit giai. Lu cheres subra-iscrìere\?</string>
     <string name="export_profile_failed">Esportatzione de su profilu fallida.</string>
-    <string name="profile_import">Importa su profilu:</string>
+    <string name="profile_import">Importa su profilu</string>
     <string name="profile_import_descr">Pro importare unu profilu ischerta su documentu suo in su dispositivu e aberi·lu cun OsmAnd.</string>
     <string name="file_import_error">Errore de importatzione de %1$s: %2$s</string>
     <string name="file_imported_successfully">%1$s importadu chene problemas.</string>
@@ -3403,4 +3403,18 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="street_city">%1$s, %2$s</string>
     <string name="personal_category_name">Personale</string>
     <string name="shared_string_downloading_formatted">Iscarrighende %s</string>
+    <string name="rendering_value_thick_name">Grussa</string>
+    <string name="desert_render_descr">Pro sos desertos e sas àteras àreas cun una populatzione minore.</string>
+    <string name="select_navigation_icon">Ischerta s\'icona de navigatzione</string>
+    <string name="select_map_icon">Ischerta s\'icona de sa mapa</string>
+    <string name="delete_profiles_descr">A pustis de àere incarcadu Àplica sos profilos iscantzellados s\'ant a pèrdere definitivamente.</string>
+    <string name="master_profile">Profilu printzipale</string>
+    <string name="select_color">Ischerta su colore</string>
+    <string name="edit_profiles_descr">Non podes iscantzellare sos profilos predefinidos de OsmAnd, ma los podes disabilitare in s\'ischermada anteposta, o los podes mòvere a giosso.</string>
+    <string name="edit_profiles">Muda sos profilos</string>
+    <string name="select_nav_profile_dialog_message">Sa casta de navigatzione influentzat sas règulas pro sos càlculos de sas àndalas.</string>
+    <string name="profile_appearance">Aparèntzia de su profilu</string>
+    <string name="choose_icon_color_name">Issèbera s\'icona, su colore e su nùmene</string>
+    <string name="reorder_profiles">Muda sa lista de sos profilos</string>
+    <string name="selected_profile">Profilu ischertadu</string>
 </resources>

@@ -453,7 +453,7 @@ public class SettingsHelper {
 		@Override
 		public void apply() {
 			if (appMode.isCustomProfile()) {
-				appMode = ApplicationMode.saveCustomProfile(builder, getSettings().getContext());
+				appMode = ApplicationMode.saveProfile(builder, getSettings().getContext());
 			}
 		}
 

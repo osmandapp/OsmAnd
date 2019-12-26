@@ -3741,4 +3741,15 @@
     <string name="poi_bath_type_foot_bath">足湯</string>
     <string name="poi_bath_open_air_yes">露天風呂である</string>
     <string name="poi_bath_open_air_no">露天風呂ではない</string>
+    <string name="poi_course">コース</string>
+    <string name="poi_hill">丘</string>
+    <string name="poi_monastery_type_monastics">修道院種別:男子修道院</string>
+    <string name="poi_monastery_type_convent">修道院種別:女子修道院</string>
+    <string name="poi_monastery_type_canonry">修道院種別:カノン派</string>
+    <string name="poi_monastery_type_hermitage">修道院種別:隠者のすみか(エルミタージュ)</string>
+    <string name="poi_monastery_type_clerks_regular">修道院種別:牧師の集まり</string>
+    <string name="poi_community_gender_female">コミュニティの性別:女性</string>
+    <string name="poi_community_gender_male">コミュニティの性別:男性</string>
+    <string name="poi_community_gender_mixed">コミュニティの性別:混在</string>
+    <string name="poi_grave">墓</string>
 </resources>

@@ -257,4 +257,6 @@
     <string name="unit_of_length">Unidades de longària</string>
     <string name="unit_of_speed_system_descr">Issèbera s\'unidade de letresa.</string>
     <string name="unit_of_speed_system">Unidade de lestresa</string>
+    <string name="buffer_time_descr">Tempus a pustis de su cale sos messàgios de positzione in sa memòria tampone (buffer) ant a èssere iscantzellados</string>
+    <string name="buffer_time">Tempus de iscadidura de sa memòria tampone</string>
 </resources>

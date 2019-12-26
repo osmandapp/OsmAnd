@@ -3033,7 +3033,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="profile_alert_need_save_msg">Enregistrez d\'abord les modifications apportées au profil</string>
     <string name="profile_alert_delete_title">Supprimer le profil</string>
     <string name="profile_alert_delete_msg">Êtes-vous certain de vouloir supprimer le profil \"%s\" \?</string>
-    <string name="select_base_profile_dialog_title">Sélectionnez un profil de base</string>
+    <string name="select_base_profile_dialog_title">Sélectionnez un profil avec lequel démarrer</string>
     <string name="shared_string_color_magenta">Magenta</string>
     <string name="shared_string_icon">icône</string>
     <string name="collected_data">Données collectées</string>
@@ -3069,7 +3069,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="routing_attr_max_num_changes_name">Nombre de correspondances</string>
     <string name="turn_screen_on_sensor">Utiliser le capteur de proximité</string>
     <string name="sett_no_ext_input">Aucun</string>
-    <string name="routing_attr_freeride_policy_description">Le freeride et le hors-piste sont des itinéraires non-officiels qui ne sont généralement ni damés ni entretenus et ne sont pas contrôlés en fin de journée par les autorités. Entrez à vos risques et périls.</string>
+    <string name="routing_attr_freeride_policy_description">Le freeride et le hors-piste sont des itinéraires non-officiels. Ces itinéraires ne sont généralement ni balisés ni damés et ne sont pas contrôlés en fin de journée par les autorités. Entrez à vos risques et périls.</string>
     <string name="default_speed_setting_descr">Modifiez les paramètres de vitesse par défaut</string>
     <string name="app_mode_ufo">OVNI</string>
     <string name="app_mode_personal_transporter">Gyropode</string>
@@ -3344,7 +3344,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="exported_osmand_profile">Profil OsmAnd : %1$s</string>
     <string name="overwrite_profile_q">Le profil \'%1$s\' existe déjà. Voulez-vous l\'écraser \?</string>
     <string name="export_profile_failed">Impossible d\'exporter le profil.</string>
-    <string name="profile_import">Importer le profil :</string>
+    <string name="profile_import">Import du profil</string>
     <string name="profile_import_descr">Pour importer un profil, sélectionnez le fichier sur l\'appareil et ouvrez le avec OsmAnd.</string>
     <string name="file_import_error">%1$s Erreur d\'importation : %2$s</string>
     <string name="file_imported_successfully">%1$s importé avec succès.</string>
@@ -3378,4 +3378,16 @@ représentant la zone : %1$s x %2$s</string>
     <string name="shared_string_downloading_formatted">Téléchargement %s</string>
     <string name="rendering_value_thick_name">Épais</string>
     <string name="desert_render_descr">Pour les déserts et autres zones faiblement peuplées.</string>
+    <string name="select_navigation_icon">Sélectionnez l\'icône de navigation</string>
+    <string name="select_map_icon">Sélectionnez l\'icône de carte</string>
+    <string name="delete_profiles_descr">Si vous choisissez Appliquer, les profils seront définitivement supprimés.</string>
+    <string name="master_profile">Profil principal</string>
+    <string name="select_color">Sélectionnez la couleur</string>
+    <string name="edit_profiles_descr">Vous ne pouvez pas supprimer les profils OsmAnd par défaut mais vous pouvez les désactiver depuis l\'écran précédent ou les déplacer vers le bas.</string>
+    <string name="edit_profiles">Modifier les profils</string>
+    <string name="select_nav_profile_dialog_message">Le type de navigation détermine les règles de calcul des itinéraires.</string>
+    <string name="profile_appearance">Apparence du profil</string>
+    <string name="choose_icon_color_name">Choisissez l\'icône, la couleur et le nom</string>
+    <string name="reorder_profiles">Modifiez la liste des profils</string>
+    <string name="selected_profile">Profil sélectionné</string>
 </resources>

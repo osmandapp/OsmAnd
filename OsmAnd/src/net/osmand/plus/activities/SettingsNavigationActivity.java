@@ -19,7 +19,6 @@ import android.preference.PreferenceScreen;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.util.TypedValue;
-import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -729,7 +728,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		final OsmandSettings settings = app.getSettings();
 
 		GeneralRouter router = getRouter(app.getRoutingConfig(), mode);
-		SpeedConstants units = settings.SPEED_SYSTEM.get();
+		SpeedConstants units = settings.SPEED_SYSTEM.getModeValue(mode);
 		String speedUnits = units.toShortString(activity);
 		final float[] ratio = new float[1];
 		switch (units) {
@@ -755,8 +754,8 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 				break;
 		}
 
-		float settingsMinSpeed = settings.MIN_SPEED.get();
-		float settingsMaxSpeed = settings.MAX_SPEED.get();
+		float settingsMinSpeed = settings.MIN_SPEED.getModeValue(mode);
+		float settingsMaxSpeed = settings.MAX_SPEED.getModeValue(mode);
 
 		final int[] defaultValue = {Math.round(mode.getDefaultSpeed() * ratio[0])};
 		final int[] minValue = new int[1];
@@ -785,8 +784,8 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 			public void onClick(DialogInterface dialog, int which) {
 				mode.setDefaultSpeed(app, defaultValue[0] / ratio[0]);
 				if (!defaultSpeedOnly) {
-					settings.MIN_SPEED.set(minValue[0] / ratio[0]);
-					settings.MAX_SPEED.set(maxValue[0] / ratio[0]);
+					settings.MIN_SPEED.setModeValue(mode, minValue[0] / ratio[0]);
+					settings.MAX_SPEED.setModeValue(mode, maxValue[0] / ratio[0]);
 				}
 				RoutingHelper routingHelper = app.getRoutingHelper();
 				if (mode.equals(routingHelper.getAppMode()) && (routingHelper.isRouteCalculated() || routingHelper.isRouteBeingCalculated())) {
@@ -800,8 +799,8 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 			public void onClick(DialogInterface dialog, int which) {
 				mode.resetDefaultSpeed(app);
 				if (!defaultSpeedOnly) {
-					settings.MIN_SPEED.set(0f);
-					settings.MAX_SPEED.set(0f);
+					settings.MIN_SPEED.setModeValue(mode,0f);
+					settings.MAX_SPEED.setModeValue(mode,0f);
 				}
 				RoutingHelper routingHelper = app.getRoutingHelper();
 				if (mode.equals(routingHelper.getAppMode()) && (routingHelper.isRouteCalculated() || routingHelper.isRouteBeingCalculated())) {

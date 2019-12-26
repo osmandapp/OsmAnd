@@ -211,7 +211,7 @@
     <string name="my_location_search_hint">Ara: Grup veya kişi</string>
     <string name="start_location_sharing">Konumu paylaş</string>
     <string name="show_on_map">Haritada göster</string>
-    <string name="app_name">OsmAnd Online GPS Tracker</string>
+    <string name="app_name">OsmAnd Çevrimiçi GPS İzleyici</string>
     <string name="phone_number_title">Telefon numarası</string>
     <string name="phone_number_descr">Uluslararası formatta telefon numarası</string>
     <string name="shared_string_password">Parola</string>
@@ -256,4 +256,6 @@
     <string name="unit_of_length">Uzunluk birimleri</string>
     <string name="unit_of_speed_system_descr">Hız birimini tanımlayın.</string>
     <string name="unit_of_speed_system">Hız birimi</string>
+    <string name="buffer_time_descr">Arabelleğe alınan konum mesajlarının silineceği süre</string>
+    <string name="buffer_time">Arabellek zaman aşım süresi</string>
 </resources>

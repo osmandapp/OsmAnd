@@ -164,8 +164,8 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		selectColorBtn = view.findViewById(R.id.select_icon_color_button);
 		profileNameEt = view.findViewById(R.id.profile_name_et);
 		profileNameTextBox = view.findViewById(R.id.profile_name_otfb);
-		navTypeEt = view.findViewById(R.id.navigation_type_et);
-		navTypeTextBox = view.findViewById(R.id.navigation_type_otfb);
+		navTypeEt = view.findViewById(R.id.master_profile_et);
+		navTypeTextBox = view.findViewById(R.id.master_profile_otfb);
 		selectNavTypeBtn = view.findViewById(R.id.select_nav_type_btn);
 		cancelBtn = view.findViewById(R.id.cancel_button);
 		saveButton = view.findViewById(R.id.save_profile_btn);
@@ -671,7 +671,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		}
 		builder.setColor(profile.iconColor);
 
-		mode = ApplicationMode.saveCustomProfile(builder, getMyApplication());
+		mode = ApplicationMode.saveProfile(builder, getMyApplication());
 		if (!ApplicationMode.values(app).contains(mode)) {
 			ApplicationMode.changeProfileAvailability(mode, true, getMyApplication());
 		}
@@ -775,7 +775,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		}
 	}
 
-	static List<RoutingProfileDataObject> getRoutingProfiles(OsmandApplication context) {
+	public static List<RoutingProfileDataObject> getRoutingProfiles(OsmandApplication context) {
 		List<RoutingProfileDataObject> profilesObjects = new ArrayList<>();
 		profilesObjects.add(new RoutingProfileDataObject(
 			RoutingProfilesResources.STRAIGHT_LINE_MODE.name(),
@@ -852,7 +852,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		}
 	}
 
-	private class ApplicationProfileObject {
+	 class ApplicationProfileObject {
 
 		int stringKeyName = -1;
 		String stringKey;

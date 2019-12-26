@@ -20,6 +20,7 @@ import android.widget.TextView;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dialogs.SelectMapViewQuickActionsBottomSheet;
+import net.osmand.plus.profiles.ReorderItemTouchHelperCallback;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -32,6 +33,8 @@ public abstract class SwitchableAction<T> extends QuickAction {
 	protected static final String KEY_DIALOG = "dialog";
 
 	private transient EditText title;
+
+	private transient ItemTouchHelper touchHelper;
 
 	protected SwitchableAction(int type) {
 		super(type);
@@ -56,20 +59,17 @@ public abstract class SwitchableAction<T> extends QuickAction {
 		if (!getParams().isEmpty()) {
 			showDialog.setChecked(Boolean.valueOf(getParams().get(KEY_DIALOG)));
 		}
-		
-		final RecyclerView list = (RecyclerView) view.findViewById(R.id.list);
 
-		final QuickActionItemTouchHelperCallback touchHelperCallback = new QuickActionItemTouchHelperCallback();
-		final ItemTouchHelper touchHelper = new ItemTouchHelper(touchHelperCallback);
-
-		final Adapter adapter = new Adapter(activity, new QuickActionListFragment.OnStartDragListener() {
+		RecyclerView list = (RecyclerView) view.findViewById(R.id.list);
+		Adapter adapter = new Adapter(activity, new QuickActionListFragment.OnStartDragListener() {
 			@Override
 			public void onStartDrag(RecyclerView.ViewHolder viewHolder) {
 				touchHelper.startDrag(viewHolder);
 			}
 		});
 
-		touchHelperCallback.setItemMoveCallback(adapter);
+		ReorderItemTouchHelperCallback touchHelperCallback = new ReorderItemTouchHelperCallback(adapter);
+		touchHelper = new ItemTouchHelper(touchHelperCallback);
 		touchHelper.attachToRecyclerView(list);
 
 		if (!getParams().isEmpty()) {
@@ -117,7 +117,7 @@ public abstract class SwitchableAction<T> extends QuickAction {
 		fragment.show(fm, SelectMapViewQuickActionsBottomSheet.TAG);
 	}
 	
-	protected class Adapter extends RecyclerView.Adapter<Adapter.ItemHolder> implements QuickActionItemTouchHelperCallback.OnItemMoveCallback {
+	protected class Adapter extends RecyclerView.Adapter<Adapter.ItemHolder> implements ReorderItemTouchHelperCallback.OnItemMoveCallback {
 
 		private List<T> itemsList = new ArrayList<>();
 		private final QuickActionListFragment.OnStartDragListener onStartDragListener;
@@ -215,17 +215,9 @@ public abstract class SwitchableAction<T> extends QuickAction {
 		}
 
 		@Override
-		public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
-
-			int selectedPosition = viewHolder.getAdapterPosition();
-			int targetPosition = target.getAdapterPosition();
-
-			if (selectedPosition < 0 || targetPosition < 0) {
-				return false;
-			}
-
+		public boolean onItemMove(int selectedPosition, int targetPosition) {
 			String oldTitle = getTitle(itemsList);
-			String defaultName = recyclerView.getContext().getString(getNameRes());
+			String defaultName = context.getString(getNameRes());
 
 			Collections.swap(itemsList, selectedPosition, targetPosition);
 			if (selectedPosition - targetPosition < -1) {
@@ -256,7 +248,8 @@ public abstract class SwitchableAction<T> extends QuickAction {
 		}
 
 		@Override
-		public void onViewDropped(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+		public void onItemDismiss(RecyclerView.ViewHolder holder) {
+
 		}
 
 		public class ItemHolder extends RecyclerView.ViewHolder {

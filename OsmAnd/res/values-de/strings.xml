@@ -13,7 +13,7 @@
     <string name="gps_network_not_enabled">Standortservice ist deaktiviert. Einschalten\?</string>
     <string name="disable_recording_once_app_killed">Eigenständige Streckenaufzeichnung unterbinden</string>
     <string name="disable_recording_once_app_killed_descrp">Die GPX-Aufzeichnung wird angehalten, wenn OsmAnd beendet wird (über „zuletzt verwendete Apps“). (Die Hintergrunddienst-Anzeige verschwindet aus der Android-Benachrichtigungsleiste.)</string>
-    <string name="shared_string_import2osmand">Nach OsmAnd importieren</string>
+    <string name="shared_string_import2osmand">In OsmAnd importieren</string>
     <string name="tips_and_tricks_descr">Häufig gestellte Fragen, neueste Änderungen und anderes.</string>
     <string name="delay_to_start_navigation">Zielführung beginnen nach…</string>
     <string name="delay_to_start_navigation_descr">Wartezeit festlegen, um mit der Zielführung zu beginnen.</string>
@@ -418,9 +418,9 @@
     <string name="tts_language_not_supported">Die gewählte Sprache wird von der installierten Android-TTS-Engine nicht unterstützt. Stattdessen wird die voreingestellte TTS-Sprache verwendet. Im Market nach einer anderen TTS-Engine suchen\?</string>
     <string name="tts_missing_language_data_title">Fehlendes Sprachpaket</string>
     <string name="tts_missing_language_data">Gewählte Sprache aus dem Market installieren?</string>
-    <string name="switch_to_vector_map_to_see">Eine Offline-Vektorkarte ist für diesen Ort vorhanden. 
+    <string name="switch_to_vector_map_to_see">Es gibt eine Offline-Vektorkarte für diesen Ort. 
 \n\t 
-\n\tZur Verwendung aktivieren: \'Menü\' → \'Karte konfigurieren\' → \'Kartenquelle…\' → \'Offline-Vektorkarten\'.</string>
+\n\tWählen Sie \'Menü\' → \'Karte konfigurieren\' → \'Kartenquelle…\' → \'Offline-Vektorkarten\', um sie zu verwenden.</string>
     <string name="choose_audio_stream">Navi-Sprachausgabe</string>
     <string name="choose_audio_stream_descr">Lautsprecher für Sprachansagen auswählen.</string>
     <string name="voice_stream_voice_call">Wie Anrufe (unterbricht Bluetooth-Verbindung zum Autoradio)</string>
@@ -846,7 +846,7 @@
     <string name="offline_navigation_not_available">OsmAnd-Offline-Navigation steht zur Zeit nicht zur Verfügung.</string>
     <string name="left_side_navigation">Linksverkehr</string>
     <string name="left_side_navigation_descr">Für Länder, in denen man auf der linken Straßenseite fährt.</string>
-    <string name="unknown_from_location">Startpunkt noch nicht ermittelt</string>
+    <string name="unknown_from_location">Startpunkt noch nicht ermittelt.</string>
     <string name="confirm_interrupt_download">Download abbrechen\?</string>
     <string name="basemap_was_selected_to_download">Die Basiskarte, die zur Bereitstellung grundlegender Funktionen erforderlich ist, befindet sich in der Downloadwarteschlange.</string>
     <string name="local_index_routing_data">Routing-Daten</string>
@@ -961,16 +961,16 @@
     <string name="map_widget_show_destination_arrow">Richtung zum Ziel anzeigen</string>
     <string name="non_optimal_route_calculation">Auch nicht optimale Routen über lange Distanzen berechnen</string>
     <string name="gps_not_available">Bitte aktivieren Sie GPS in den Einstellungen</string>
-    <string name="enable_plugin_monitoring_services">Streckenaufzeichnungs-Modul aktivieren, um Aufzeichnungsdienste (GPX-Aufzeichnung, Online-Aufzeichnung) zu verwenden</string>
+    <string name="enable_plugin_monitoring_services">Erweiterung \'Streckenaufzeichnung\' aktivieren, um Aufzeichnungsdienste (GPX-Aufzeichnung, Online-Verfolgung) zu verwenden</string>
     <string name="zxing_barcode_scanner_not_found">Barcode-Scanner-App ZXing nicht installiert. Soll im Google Play-Store danach gesucht werden?</string>
     <string name="close_changeset">Änderungssatz schließen</string>
     <string name="incomplete_locale">unvollständig</string>
     <string name="srtm_plugin_name">Höhenlinien</string>
-    <string name="srtm_plugin_description">Diese Erweiterung beinhaltet Höhenlinien und Relief-Schattierungen, die als Ergänzung zu den Standard-Offline-Karten von OsmAnd angezeigt werden können. Diese Funktionalität ist vor allem für Sportler, Wanderer, Radfahrer, Trekker und jeden interessant, der sich für das Geländerelief einer Landschaft interessiert. (Bitte beachten Sie, Höhen- und Reliefdaten müssen nach Aktivierung der Erweiterung zusätzlich heruntergeladen werden.) 
+    <string name="srtm_plugin_description">Diese Erweiterung beinhaltet Höhenlinien und Relief-Schattierungen, die als Ergänzung zu den Standard-Offline-Karten von OsmAnd angezeigt werden können. Diese Funktionalität ist vor allem für Sportler, Wanderer, Radfahrer, Trekker und jeden interessant, der sich für das Geländerelief einer Landschaft interessiert. (Bitte beachten Sie, dass Höhen- und Reliefdaten nach Aktivierung der Erweiterung zusätzlich heruntergeladen werden müssen.) 
 \n 
-\nDie globalen Daten (zwischen 70° Nord und 70° Süd) basieren auf Messungen von SRTM (Shuttle Radar Topography Mission) und ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), einem bildgebenden System des Satelliten Terra, dem Flaggschiff des NASA-Erd-Beobachtungsprogramms. ASTER ist der Erfolg der Zusammenarbeit zwischen der NASA, dem japanischen Ministerium für Wirtschaft, Handel und Industrie und dem japanischen Raumfahrtprogramm (J-spacesystems).</string>
+\nDie globalen Daten (zwischen 70° Nord und 70° Süd) basieren auf Messungen von SRTM (Shuttle Radar Topography Mission) und ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), einem bildgebenden System an Bord des Satelliten Terra, dem Flaggschiff des NASA-Programms zur Erdbeobachtung. ASTER beruht auf der erfolgreichen Zusammenarbeit zwischen der NASA, dem japanischen Ministerium für Wirtschaft, Handel und Industrie und dem japanischen Raumfahrtprogramm (J-spacesystems).</string>
     <string name="srtm_paid_version_title">Höhenlinien-Plugin</string>
-    <string name="srtm_paid_version_msg">Bitte ziehen Sie den Kauf des Höhenlinien-Moduls im Play-Store in Erwägung, um die Weiterentwicklung zu fördern.</string>
+    <string name="srtm_paid_version_msg">Bitte erwägen Sie den Kauf der Erweiterung \'Höhenlinien\' im Play-Store, um die Weiterentwicklung zu fördern.</string>
     <string name="download_select_map_types">Andere Karten</string>
     <string name="download_srtm_maps">Höhenlinien</string>
     <string name="av_camera_pic_size">Bildgröße der Kamera</string>
@@ -1461,7 +1461,7 @@
     <string name="free">Frei %1$s </string>
     <string name="device_memory">Gerätespeicher</string>
     <string name="rendering_attr_pisteGrooming_name">Pistenpflege</string>
-    <string name="plugin_ski_name">Ski-Karte</string>
+    <string name="plugin_ski_name">Skikarte</string>
     <string name="plugin_nautical_name">Seekarte</string>
     <string name="world_ski_missing">Um Ski-Karten anzeigen zu können, muss die entsprechende Offline-Karte heruntergeladen werden</string>
     <string name="nautical_maps_missing">Um See-Karten anzeigen zu können, muss die entsprechende Offline-Karte heruntergeladen werden</string>
@@ -2097,7 +2097,7 @@ Lon %2$s</string>
     <string name="rendering_attr_hideWaterPolygons_description">Wasser</string>
     <string name="rendering_attr_contourWidth_description">Breite der Höhenlinien</string>
     <string name="rendering_attr_contourWidth_name">Breite der Höhenlinien</string>
-    <string name="rendering_attr_contourDensity_description">Höhenliniendichte</string>
+    <string name="rendering_attr_contourDensity_description">Dichte der Höhenlinien</string>
     <string name="rendering_attr_contourDensity_name">Dichte der Höhenlinien</string>
     <string name="rendering_value_high_name">Hoch</string>
     <string name="rendering_value_medium_w_name">Mittel</string>
@@ -2237,7 +2237,7 @@ Lon %2$s</string>
     <string name="driving_region_automatic">Automatisch</string>
     <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) ist eine Karten- und Navigationsapp mit Zugriff auf die kostenlosen, weltweiten und qualitativ hochwertigen Daten von OpenStreetMap (OSM). 
 \n 
-\nGenießen Sie die akustische und visuelle Navigation, die Anzeige von POIs (Orte von Interesse), die Erstellung und Verwaltung von GPX-Tracks, die Darstellung von Höhenlinien und Höhendaten (durch eine Erweiterung), die Wahl zwischen Auto-, Fahrrad- oder Fußgängerbetrieb, die Möglichkeit, an OSM mitzuarbeiten und vieles mehr.</string>
+\nGenießen Sie die akustische und visuelle Navigation, die Anzeige von POIs (Orte von Interesse), die Erstellung und Verwaltung von GPX-Tracks, die Darstellung von Höhenlinien und -daten (durch eine Erweiterung), die Wahl zwischen Auto-, Fahrrad- oder Fußgängerbetrieb, die Möglichkeit, an OSM mitzuarbeiten und vieles mehr.</string>
     <string name="osmand_extended_description_part2">GPS-Navigation
 \n • Sie haben die Wahl zwischen dem Offline-Betrieb (ohne Roaming-Gebühren, wenn Sie im Ausland sind) oder dem (schnelleren) Online-Betrieb
 \n • Die Sprachführung (mit aufgenommenen oder synthetischen Stimmen) begleitet Sie Schritt für Schritt auf Ihrem Weg
@@ -2596,7 +2596,7 @@ Lon %2$s</string>
     <string name="shared_string_gpx_waypoints">Track-Wegpunkte</string>
     <string name="modify_the_search_query">Suchanfrage verändern.</string>
     <string name="empty_state_osm_edits">OSM-Objekte erstellen oder ändern</string>
-    <string name="empty_state_osm_edits_descr">OSM-POIs erstellen oder verändern, OSM-Notizen eröffnen oder bearbeiten, und aufgezeichnete GPX-Dateien hinzufügen.</string>
+    <string name="empty_state_osm_edits_descr">OSM-POIs erstellen oder verändern, OSM-Notizen eröffnen oder bearbeiten und aufgezeichnete GPX-Dateien hinzufügen.</string>
     <string name="shared_string_deleted">Gelöscht</string>
     <string name="shared_string_edited">Bearbeitet</string>
     <string name="shared_string_added">Hinzugefügt</string>
@@ -3051,7 +3051,7 @@ Lon %2$s</string>
     <string name="collected_data_descr">Bestimmen Sie, welche Daten Sie für OsmAnd freigeben.</string>
     <string name="downloaded_maps_collect_descr">Helfen Sie uns, die Beliebtheit von Karten für Länder und Regionen herauszufinden.</string>
     <string name="visited_screens_collect_descr">Helfen Sie uns, die Beliebtheit von OsmAnd-Funktionen zu verstehen.</string>
-    <string name="privacy_and_security_change_descr">Auf „Erlauben“ tippen, wenn Sie mit %1$s einverstanden sind</string>
+    <string name="privacy_and_security_change_descr">Auf „Erlauben“ tippen, wenn Sie mit unserer %1$s einverstanden sind</string>
     <string name="settings_privacy_and_security">Datenschutz und Sicherheit</string>
     <string name="settings_privacy_and_security_desc">Wählen Sie, welche Daten sie freigeben möchten</string>
     <string name="shared_string_no_thank_you">Nein, danke</string>
@@ -3076,7 +3076,7 @@ Lon %2$s</string>
     <string name="profile_alert_need_save_msg">Änderungen am Profil zuerst speichern</string>
     <string name="profile_alert_delete_title">Profil löschen</string>
     <string name="profile_alert_delete_msg">Möchten Sie das Profil „%s“ wirklich löschen\?</string>
-    <string name="select_base_profile_dialog_title">Ein Basisprofil auswählen</string>
+    <string name="select_base_profile_dialog_title">Wählen Sie zunächst ein Profil aus</string>
     <string name="select_base_profile_dialog_message">Bauen Sie ein eigenes Anwendungsprofil auf einem der Standardprofile der App auf. Dieses bestimmt die Grundeinstellungen wie Voreinstellungen zur Sichtbarkeit von Widgets und die Einheiten für Geschwindigkeit und Entfernungen. Dies sind die App-Standardprofile zusammen mit Beispielen für eigene Anwendungsprofile, die erweitert werden können:</string>
     <string name="select_nav_profile_dialog_title">Navigationsart auswählen</string>
     <string name="base_profile_descr_car">Auto, Lkw, Motorrad</string>
@@ -3376,7 +3376,7 @@ Lon %2$s</string>
     <string name="exported_osmand_profile">OsmAnd-Profil: %1$s</string>
     <string name="overwrite_profile_q">Das Profil \'%1$s\' existiert bereits. Überschreiben\?</string>
     <string name="export_profile_failed">Das Profil konnte nicht exportiert werden.</string>
-    <string name="profile_import">Profil-Import:</string>
+    <string name="profile_import">Profilimport</string>
     <string name="profile_import_descr">Um ein Profil zu importieren, wählen Sie die Profildatei auf dem Gerät aus und öffnen Sie diese mit OsmAnd.</string>
     <string name="file_import_error">%1$s Importfehler: %2$s</string>
     <string name="file_imported_successfully">%1$s erfolgreich importiert.</string>
@@ -3408,4 +3408,18 @@ Lon %2$s</string>
     <string name="street_city">%1$s, %2$s</string>
     <string name="personal_category_name">Persönlich</string>
     <string name="shared_string_downloading_formatted">%s herunterladen</string>
+    <string name="rendering_value_thick_name">Fett</string>
+    <string name="desert_render_descr">Für Wüsten und andere dünn besiedelte Gebiete.</string>
+    <string name="select_navigation_icon">Navigationssymbol wählen</string>
+    <string name="select_map_icon">Kartensymbol wählen</string>
+    <string name="delete_profiles_descr">Nachdem Sie auf Anwenden geklickt haben, gehen gelöschte Profile vollständig verloren.</string>
+    <string name="master_profile">Hauptprofil</string>
+    <string name="select_color">Farbe wählen</string>
+    <string name="edit_profiles_descr">Sie können voreingestellte OsmAnd-Profile nicht löschen, aber im vorherigen Bildschirm deaktivieren oder nach unten verschieben.</string>
+    <string name="edit_profiles">Profile bearbeiten</string>
+    <string name="select_nav_profile_dialog_message">Der Navigationstyp beeinflusst die Regeln für Routenberechnungen.</string>
+    <string name="profile_appearance">Profildarstellung</string>
+    <string name="choose_icon_color_name">Symbol, Farbe und Namen wählen</string>
+    <string name="reorder_profiles">Profilliste bearbeiten</string>
+    <string name="selected_profile">Ausgewähltes Profil</string>
 </resources>
