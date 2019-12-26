@@ -32,8 +32,8 @@ import android.widget.Toast;
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
-import net.osmand.aidl.OsmandAidlApi;
 import net.osmand.aidl.ConnectedApp;
+import net.osmand.aidl.OsmandAidlApi;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -45,6 +45,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.PluginActivity;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
+import net.osmand.plus.profiles.SelectAppModesBottomSheetDialogFragment;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.plus.skimapsplugin.SkiMapsPlugin;
 
@@ -69,6 +70,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 	private static final String SETTINGS_ACTIONS = "settings_actions";
 	private static final String CONFIGURE_MAP = "configure_map";
 	private static final String CONFIGURE_SCREEN = "configure_screen";
+	private static final String COPY_FROM_OTHER_PROFILE = "copy_from_other_profile";
 	private static final String EXPORT_PROFILE = "export_profile";
 	private static final String DELETE_PROFILE = "delete_profile";
 	private static final String PROFILE_APPEARANCE = "profile_appearance";
@@ -208,6 +210,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 		PreferenceCategory settingsActions = (PreferenceCategory) findPreference(SETTINGS_ACTIONS);
 		settingsActions.setIconSpaceReserved(false);
 
+		setupCopyFromOtherProfilePref();
 		setupExportProfilePref();
 		setupDeleteProfilePref();
 	}
@@ -259,6 +262,12 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 		} else {
 			configureMap.setVisible(false);
 		}
+	}
+
+	private void setupCopyFromOtherProfilePref() {
+		Preference copyProfilePrefs = findPreference(COPY_FROM_OTHER_PROFILE);
+		copyProfilePrefs.setIcon(app.getUIUtilities().getIcon(R.drawable.ic_action_copy,
+				isNightMode() ? R.color.active_color_primary_dark : R.color.active_color_primary_light));
 	}
 
 	private void setupExportProfilePref() {
@@ -350,6 +359,11 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 	}
 
 	@Override
+	public void onAppModeChanged(ApplicationMode appMode) {
+		settings.copyPreferencesFromProfile(appMode, getSelectedAppMode());
+	}
+
+	@Override
 	public boolean onPreferenceClick(Preference preference) {
 		String prefId = preference.getKey();
 
@@ -372,6 +386,12 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 				} catch (Exception e) {
 					LOG.error(e);
 				}
+			}
+		} else if (COPY_FROM_OTHER_PROFILE.equals(prefId)) {
+			FragmentManager fragmentManager = getFragmentManager();
+			if (fragmentManager != null) {
+				SelectAppModesBottomSheetDialogFragment.showInstance(fragmentManager,
+						ConfigureProfileFragment.this, false, getSelectedAppMode(), false);
 			}
 		} else if (EXPORT_PROFILE.equals(prefId)) {
 			Context ctx = requireContext();

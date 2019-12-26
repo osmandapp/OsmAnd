@@ -301,6 +301,17 @@ public class OsmandSettings {
 		}
 	}
 
+	public void copyPreferencesFromProfile(ApplicationMode modeFrom, ApplicationMode modeTo) {
+		for (OsmandPreference pref : registeredPreferences.values()) {
+			if (pref instanceof CommonPreference) {
+				CommonPreference commonPreference = (CommonPreference) pref;
+				if (!commonPreference.global) {
+					commonPreference.copyFromMode(modeFrom, modeTo);
+				}
+			}
+		}
+	}
+
 	public boolean setPreference(String key, Object value) {
 		return setPreference(key, value, APPLICATION_MODE.get());
 	}
@@ -721,6 +732,23 @@ public class OsmandSettings {
 
 		public boolean isSetForMode(ApplicationMode mode) {
 			return settingsAPI.contains(getProfilePreferences(mode), getId());
+		}
+
+		public boolean copyFromMode(ApplicationMode modeFrom, ApplicationMode modeTo) {
+			if (global) {
+				return false;
+			}
+
+			T copiedValue = getModeValue(modeFrom);
+			Object profilePrefs = getProfilePreferences(modeTo);
+
+			boolean valueSaved = setValue(profilePrefs, copiedValue);
+			if (valueSaved && cache && cachedPreference == profilePrefs) {
+				cachedValue = copiedValue;
+			}
+			fireEvent(copiedValue);
+
+			return valueSaved;
 		}
 
 		@Override

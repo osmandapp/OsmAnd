@@ -469,6 +469,10 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 				.setRouteService(changedProfile.routeService)
 				.setRoutingProfile(changedProfile.routingProfile)
 				.setColor(changedProfile.color);
+
+		if (ApplicationMode.valueOfStringKey(changedProfile.stringKey, null) == null) {
+			settings.copyPreferencesFromProfile(changedProfile.parent, getSelectedAppMode());
+		}
 		ApplicationMode mode = ApplicationMode.saveProfile(builder, getMyApplication());
 		if (!ApplicationMode.values(app).contains(mode)) {
 			ApplicationMode.changeProfileAvailability(mode, true, getMyApplication());
