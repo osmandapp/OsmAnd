@@ -295,7 +295,7 @@
     <string name="index_item_world_seamarks">Seezeichen (weltweit)</string>
     <string name="index_item_world_bitcoin_payments">Bitcoin-Bezahlmöglichkeiten (weltweit)</string>
     <string name="index_item_world_basemap">Übersichtskarte der Welt</string>
-    <string name="index_item_world_ski">Ski-Karte (weltweit)</string>
+    <string name="index_item_world_ski">Skikarte (weltweit)</string>
     <string name="index_srtm_parts">Teile</string>
     <string name="index_srtm_ele">Höhenlinien</string>
     <string name="index_name_openmaps">OpenMaps EU</string>
@@ -471,7 +471,7 @@
     <string name="context_menu_item_share_location">Standort mitteilen</string>
     <string name="add_waypoint_dialog_added">GPX-Wegpunkt \'\'{0}\'\' hinzugefügt</string>
     <string name="add_waypoint_dialog_title">Wegpunkt zum aufgezeichneten GPX-Track hinzufügen</string>
-    <string name="context_menu_item_add_waypoint">GPX-Wegpunkt anfügen</string>
+    <string name="context_menu_item_add_waypoint">GPX-Wegpunkt hinzufügen</string>
     <string name="amenity_type_administrative">Verwaltung</string>
     <string name="amenity_type_barrier">Barriere</string>
     <string name="amenity_type_education">Bildung</string>
@@ -643,7 +643,7 @@
     <string name="search_poi_location">Warte auf Signal…</string>
     <string name="search_near_map">Suche in der Nähe</string>
     <string name="search_nearby">Suche um Aufenthaltsort</string>
-    <string name="map_orientation_default">Lagesensor</string>
+    <string name="map_orientation_default">Gleich wie Gerät</string>
     <string name="map_orientation_portrait">Hochformat</string>
     <string name="map_orientation_landscape">Querformat</string>
     <string name="map_screen_orientation">Bildschirmausrichtung</string>
@@ -901,7 +901,7 @@
     <string name="map_widget_back_to_loc">Wo bin ich</string>
     <string name="map_widget_lock_screen">Sperren</string>
     <string name="map_widget_compass">Kompass</string>
-    <string name="map_widget_reset">Auf Voreinstellung setzen</string>
+    <string name="map_widget_reset">Auf Voreinstellung zurücksetzen</string>
     <string name="map_widget_parking">Parken</string>
     <string name="map_widget_monitoring">GPX-Aufzeichnung</string>
     <string name="map_widget_speed">Geschwindigkeit</string>
@@ -1312,7 +1312,7 @@
     <string name="gpx_info_average_speed">Durchschnittsgeschwindigkeit: %1$s </string>
     <string name="gpx_info_maximum_speed">Höchstgeschwindigkeit: %1$s</string>
     <string name="gpx_info_avg_altitude">Durchschnittliche Höhe: %1$s</string>
-    <string name="gpx_info_diff_altitude">Höhenunterschied: %1$s</string>
+    <string name="gpx_info_diff_altitude">Höhenbereich: %1$s</string>
     <string name="gpx_info_asc_altitude">Ab-/Anstieg: %1$s</string>
     <string name="gpx_timespan">Zeitspanne: %1$s</string>
     <string name="gpx_timemoving">Zeit in Bewegung: %1$s</string>
@@ -1463,8 +1463,8 @@
     <string name="rendering_attr_pisteGrooming_name">Pistenpflege</string>
     <string name="plugin_ski_name">Skikarte</string>
     <string name="plugin_nautical_name">Seekarte</string>
-    <string name="world_ski_missing">Um Ski-Karten anzeigen zu können, muss die entsprechende Offline-Karte heruntergeladen werden</string>
-    <string name="nautical_maps_missing">Um See-Karten anzeigen zu können, muss die entsprechende Offline-Karte heruntergeladen werden</string>
+    <string name="world_ski_missing">Um Skikarten anzeigen zu können, muss die entsprechende Offline-Karte heruntergeladen werden</string>
+    <string name="nautical_maps_missing">Um Seekarten anzeigen zu können, muss die entsprechende Offline-Karte heruntergeladen werden</string>
     <string name="get_plugin">Erwerben</string>
     <string name="rename_failed">Umbenennen fehlgeschlagen.</string>
     <string name="shared_string_currently_recording_track">Momentane Track-Aufzeichnung</string>
@@ -1474,9 +1474,9 @@
 \nDie spezielle Kartenergänzung \'Seezeichen (weltweit)\' enthält alle nautischen Navigationsmarken und Kartensymbole zur Navigation auf Binnengewässern und in Küstennähe. Die Beschreibung jeder Navigationsmarke liefert die notwendigen Einzelheiten zu deren Bestimmung und Bedeutung (Kategorie, Form, Farbe, Reihenfolge, Verweis usw.). 
 \n 
 \nUm zur herkömmlichen Kartendarstellung in OsmAnd zurückzukehren, kann diese Ansicht hier wieder deaktiviert oder die \'Kartendarstellung\' unter \'Karte konfigurieren\' wie gewünscht geändert werden.</string>
-    <string name="plugin_ski_descr">Diese Erweiterung aktiviert die spezielle Kartendarstellung \'Winter- und Skikarte\', die global Skiabfahrten, Langlaufrouten, alpine Skirouten, Skilifte und Bergbahnen enthält. Routen und Pisten werden farbcodiert nach Schwierigkeit, Landschaftselemente nach winterlichen Gesichtspunkten (Assimilierung einer Schneedecke) angezeigt. 
+    <string name="plugin_ski_descr">Diese Erweiterung stellt Details von weltweiten Skiabfahrten, Langlaufrouten, alpinen Skirouten, Bergbahnen und Skiliften zur Verfügung. Die Routen und Pisten werden farbcodiert nach Schwierigkeit, Landschaftselemente nach winterlichen Gesichtspunkten (Assimilierung einer Schneedecke) angezeigt. 
 \n 
-\nDiese spezielle Kartendarstellung kann zurückgestellt werden, indem sie hier wieder deaktiviert oder indem die \'Kartendarstellung\' unter \'Karte konfigurieren\' wie gewünscht geändert wird.</string>
+\nWenn Sie diese Ansicht aktivieren, ändert sich der Kartenstil in \'Winter und Ski\' und zeigt alle Landschaftsmerkmale unter winterlichen Bedingungen. Diese Ansicht kann hier wieder deaktiviert werden oder indem die \'Kartendarstellung\' unter \'Karte konfigurieren\' wie gewünscht geändert wird.</string>
     <string name="plugin_touringview_descr">Bei Aktivierung dieser Ansicht wechselt die Kartendarstellung zur \'Tourenkarte\', einer besonders detaillierten Darstellung für Fernreisende und Berufsfahrer. 
 \n 
 \nDiese Darstellung liefert für jeden Maßstab den größtmöglichen Umfang an Reisedetails, die die Kartendaten enthalten (insbesondere Straßen, Wege, Pfade und Orientierungspunkte). 
@@ -2195,7 +2195,7 @@ Lon %2$s</string>
     <string name="route_altitude">Routenhöhenprofil</string>
     <string name="altitude_descent">Abstieg</string>
     <string name="altitude_ascent">Aufstieg</string>
-    <string name="altitude_range">Höhendifferenz</string>
+    <string name="altitude_range">Höhenbereich</string>
     <string name="average_altitude">Durchschnittliche Höhe</string>
     <string name="shared_string_time">Zeit</string>
     <string name="total_distance">Gesamtstrecke</string>
@@ -2259,8 +2259,8 @@ Lon %2$s</string>
 \n • lassen Ihnen die Wahl, wie Bezeichnungen auf der Karte angezeigt werden sollen: in Englisch, Landessprache oder in phonetischer Schreibweise 
 \n • stellen spezielle Online-Karten, Satellitenansichten (von Bing), verschiedene Overlays, wie GPX-Tracks zu Touren-/Routenverläufen und zusätzliche Ebenen mit einstellbarer Transparenz dar
 \n</string>
-    <string name="osmand_extended_description_part4">Ski-Sport
-\n das OsmAnd-Skikarten-Modul ermöglicht Ihnen das Betrachten von Skirouten, deren Schwierigkeitsgrad und einiger zusätzlicher Informationen, wie die Lage von Liften und weiterer Einrichtungen.</string>
+    <string name="osmand_extended_description_part4">Skisport 
+\n Die OsmAnd-Erweiterung \'Skikarte\' ermöglicht Ihnen das Betrachten von Skirouten, deren Schwierigkeitsgrad und einiger zusätzlicher Informationen, wie die Lage von Liften und anderer Einrichtungen.</string>
     <string name="osmand_extended_description_part5">Radfahren
 \n • Sie finden Radwege auf der Karte
 \n • Die GPS-Navigation im Fahrrad-Modus errechnet Ihre Route anhand von Radwegen
@@ -2782,7 +2782,7 @@ Lon %2$s</string>
     <string name="nautical_render_descr">Zur nautischen Navigation. Hauptmerkmale: Bojen, Leuchttürme, Flussläufe, Schifffahrtswege und -zeichen, Häfen, Seezeichendienste und Tiefenlinien.</string>
     <string name="ski_map_render_descr">Für Skifahrer. Enthält Pisten, Lifte, Langlaufloipen und mehr. Weniger störende sekundäre Kartenobjekte.</string>
     <string name="light_rs_render_descr">Einfacher Kartenstil für die Navigation im Auto. Sanfter Nachtmodus, Höhenlinien, kontrastreiche orangefarbene Straßen, dunkelt sekundäre Kartenobjekte ab.</string>
-    <string name="topo_render_descr">Für Wanderungen, Trekking und Naturradtouren. Im Freien lesbar. Kontrastreiche Straßen und Naturobjekte, verschiedene Routentypen, erweiterte Höhenlinienoptionen, zusätzliche Details. Die Einstellung der Oberflächenintegrität unterscheidet die Straßenqualität. Kein Nachtmodus.</string>
+    <string name="topo_render_descr">Für Wanderungen, Trekking und Naturradfahren. Im Freien lesbar. Kontrastreiche Straßen und Naturobjekte, verschiedene Routentypen, erweiterte Höhenlinienoptionen, zusätzliche Details. Die Einstellung der Oberflächenintegrität unterscheidet die Straßenqualität. Kein Nachtmodus.</string>
     <string name="mapnik_render_descr">Alter Mapnik-Stil. Farben ähnlich dem Mapnik-Stil.</string>
     <string name="default_render_descr">Universeller Stil. Klare Darstellung dicht besiedelter Städte. Hauptmerkmale: Höhenlinien, Routen, Oberflächenqualität, Zufahrtsbeschränkungen, Straßenschilder, Wegeführung nach SAC-Skala, Wildwassersportmerkmale.</string>
     <string name="shared_string_bookmark">Lesezeichen</string>
@@ -2963,7 +2963,7 @@ Lon %2$s</string>
     <string name="rendering_attr_smoothness_impassable_name">Unpassierbar</string>
     <string name="rendering_attr_highway_class_motorway_name">Autobahn</string>
     <string name="rendering_attr_highway_class_state_road_name">Staatsstraße</string>
-    <string name="rendering_attr_highway_class_road_name">Straße</string>
+    <string name="rendering_attr_highway_class_road_name">Landstraße</string>
     <string name="rendering_attr_highway_class_street_name">Straße</string>
     <string name="rendering_attr_highway_class_service_name">Dienstleistung</string>
     <string name="rendering_attr_highway_class_footway_name">Gehweg</string>
@@ -3118,8 +3118,8 @@ Lon %2$s</string>
     <string name="routing_attr_allow_expert_description">Extrem schwere Routen, mit gefährlichen Hindernissen und schwieriger Umgebung.</string>
     <string name="routing_attr_allow_classic_only_name">Nur klassische Routen zulassen</string>
     <string name="routing_attr_difficulty_preference_name">Bevorzugter Schwierigkeitsgrad</string>
-    <string name="routing_attr_piste_type_downhill_name">Ski Alpin/Abfahrt</string>
-    <string name="routing_attr_piste_type_downhill_description">Pisten für Ski Alpin oder Abfahrt und Zugang zu den Skiliften.</string>
+    <string name="routing_attr_piste_type_downhill_name">Ski Alpin/Abfahrtslauf</string>
+    <string name="routing_attr_piste_type_downhill_description">Pisten für Ski Alpin oder Abfahrtslauf und Zugang zu den Skiliften.</string>
     <string name="process_downloading_service">OsmAnd Download-Dienst</string>
     <string name="shared_string_color_magenta">Magenta</string>
     <string name="shared_string_icon">Symbol</string>
@@ -3261,7 +3261,7 @@ Lon %2$s</string>
     <string name="configure_profile">Profil konfigurieren</string>
     <string name="switch_profile">Profil wechseln</string>
     <string name="language_and_output">Sprache und Ausgabe</string>
-    <string name="reset_to_default">Auf Voreinstellungen zurücksetzen</string>
+    <string name="reset_to_default">Auf Voreinstellung zurücksetzen</string>
     <string name="manage_profiles_descr">Profile erstellen, importieren, bearbeiten</string>
     <string name="manage_profiles">App-Profile verwalten…</string>
     <string name="osmand_settings_descr">Die gesamte App betreffend</string>

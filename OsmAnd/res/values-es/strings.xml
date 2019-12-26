@@ -2074,7 +2074,7 @@
     <string name="rendering_attr_contourColorScheme_name">Esquema de color de las curvas de nivel</string>
     <string name="rendering_attr_surfaceIntegrity_name">Integridad de la superficie del camino</string>
     <string name="search_hint">Ingresa nombre de ciudad, dirección o PDI</string>
-    <string name="translit_name_if_miss">Transliterar nombres si no se encuentran en %1$s</string>
+    <string name="translit_name_if_miss">Transliterar si falta el nombre %1$s</string>
     <string name="translit_names">Transliterar nombres</string>
     <string name="edit_filter">Editar categorías</string>
     <string name="subcategories">Subcategorías</string>
@@ -3112,13 +3112,13 @@
     <string name="profile_alert_need_save_msg">Guardar primero los cambios del perfil</string>
     <string name="profile_alert_delete_title">Borrar perfil</string>
     <string name="profile_alert_delete_msg">¿Estás seguro de que deseas borrar el perfil «%s»\?</string>
-    <string name="select_base_profile_dialog_title">Elegir un perfil base</string>
+    <string name="select_base_profile_dialog_title">Selecciona un perfil para comenzar</string>
     <string name="select_base_profile_dialog_message">El perfil personalizado se basa en uno de los perfiles de aplicación predefinidos, lo que define los ajustes básicos como la visibilidad predefinida de los widgets, las unidades de velocidad y distancia. Estos son los perfiles de aplicación predefinidos, junto con ejemplos de perfiles personalizados a los que se pueden ampliar:</string>
     <string name="select_nav_profile_dialog_title">Elegir el tipo de navegación</string>
     <string name="base_profile_descr_car">Automóvil, camión, motocicleta</string>
     <string name="base_profile_descr_bicycle">Bicicleta de montaña, ciclomotor, caballo</string>
     <string name="base_profile_descr_pedestrian">Caminata, senderismo, correr</string>
-    <string name="base_profile_descr_public_transport">Transporte público (todos)</string>
+    <string name="base_profile_descr_public_transport">Todos los tipos de Transporte Público</string>
     <string name="base_profile_descr_boat">Barco, remo, vela</string>
     <string name="base_profile_descr_aircraft">Avión, ala delta</string>
     <string name="routing_profile_straightline">Línea recta</string>
@@ -3362,7 +3362,7 @@
     <string name="exported_osmand_profile">Perfil de OsmAnd: %1$s</string>
     <string name="overwrite_profile_q">El perfil «%1$s» ya existe. ¿Sobrescribir\?</string>
     <string name="export_profile_failed">No se pudo exportar el perfil.</string>
-    <string name="profile_import">Importar perfil:</string>
+    <string name="profile_import">Importar perfil</string>
     <string name="profile_import_descr">Para importar un perfil, elige el archivo en el dispositivo y ábrelo con OsmAnd.</string>
     <string name="file_import_error">Error de importación de %1$s: %2$s</string>
     <string name="file_imported_successfully">%1$s importados con éxito.</string>
@@ -3378,7 +3378,7 @@
     <string name="quick_action_directions_from_desc">Un botón para centrar en la pantalla el punto de partida y calcular la ruta hacia el destino o abre un cuadro de diálogo para elegir el destino si el marcador no está en el mapa.</string>
     <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Mostrar nodo de la red de rutas ciclistas</string>
     <string name="clear_confirmation_msg">¿Borrar %1$s\?</string>
-    <string name="download_map_dialog">Diálogo de descarga de mapa</string>
+    <string name="download_map_dialog">Diálogo de descarga de mapas</string>
     <string name="dialogs_and_notifications_title">Diálogos y notificaciones</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_name">Redes de nodos</string>
     <string name="suggested_maps">Mapas sugeridos</string>
@@ -3401,4 +3401,16 @@
     <string name="shared_string_downloading_formatted">Descargando %s</string>
     <string name="rendering_value_thick_name">Grueso</string>
     <string name="desert_render_descr">Para desiertos y otras zonas escasamente pobladas.</string>
+    <string name="select_navigation_icon">Seleccionar icono de navegación</string>
+    <string name="select_map_icon">Seleccionar icono de mapa</string>
+    <string name="delete_profiles_descr">Después de tocar Aplicar, los perfiles eliminados se perderán por completo.</string>
+    <string name="master_profile">Perfil principal</string>
+    <string name="select_color">Seleccionar el color</string>
+    <string name="edit_profiles_descr">No puedes eliminar los perfiles de OsmAnd predeterminados, pero puedes deshabilitarlos en la pantalla anterior o moverlos a la parte inferior.</string>
+    <string name="edit_profiles">Editar perfiles</string>
+    <string name="select_nav_profile_dialog_message">El tipo de navegación afecta a las reglas para los cálculos de ruta.</string>
+    <string name="profile_appearance">Apariencia del perfil</string>
+    <string name="choose_icon_color_name">Elige icono, color y nombre</string>
+    <string name="reorder_profiles">Editar la lista de perfiles</string>
+    <string name="selected_profile">Perfil seleccionado</string>
 </resources>
