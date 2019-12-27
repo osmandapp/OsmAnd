@@ -2682,7 +2682,7 @@
     <string name="quick_action_show_hide_gpx_tracks_descr">Comutați pentru a afișa sau a ascunde traseele GPX selectate pe hartă.</string>
     <string name="rendering_attr_surface_sett_name">Setãri</string>
     <string name="rendering_attr_highway_class_bridleway_name">Piste de călărie</string>
-    <string name="save_poi_value_exceed_length">Scurtați lungimea etichetei \"% s\" la mai puțin de 255 de caractere.</string>
+    <string name="save_poi_value_exceed_length">Scurtați lungimea etichetei \"%s\" la mai puțin de 255 de caractere.</string>
     <string name="save_poi_value_exceed_length_title">Lungimea valorii \"% s\"</string>
     <string name="files_moved">Mutat% 1 $ d fișiere (% 2 $ s).</string>
     <string name="files_copied">Fișiere %1 $ d copiate (%2 $ s).</string>
