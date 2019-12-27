@@ -44,6 +44,7 @@ import net.osmand.plus.OsmandSettings.LayerTransparencySeekbarMode;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivity.ShowQuickSearchMode;
 import net.osmand.plus.base.ContextMenuFragment.MenuState;
@@ -969,6 +970,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 		} else {
 			transparencyBarLayout.setVisibility(View.GONE);
 		}
+		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+		UiUtilities.setupSeekBar(app, transparencyBar, nightMode, true);
 	}
 
 	public void hideTransparencyBar() {

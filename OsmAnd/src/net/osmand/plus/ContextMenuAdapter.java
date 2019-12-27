@@ -54,6 +54,8 @@ public class ContextMenuAdapter {
 	@LayoutRes
 	private int DEFAULT_LAYOUT_ID = R.layout.list_menu_item_native;
 	List<ContextMenuItem> items = new ArrayList<>();
+	private boolean profileDependent = false;
+	private boolean nightMode;
 	private ConfigureMapMenu.OnClickListener changeAppModeListener = null;
 
 	public int length() {
@@ -85,6 +87,18 @@ public class ContextMenuAdapter {
 	}
 
 	public void clearAdapter() { items.clear(); }
+
+	public boolean isProfileDependent() {
+		return profileDependent;
+	}
+
+	public void setProfileDependent(boolean profileDependent) {
+		this.profileDependent = profileDependent;
+	}
+
+	public void setNightMode(boolean nightMode) {
+		this.nightMode = nightMode;
+	}
 
 	public void setDefaultLayoutId(int defaultLayoutId) {
 		this.DEFAULT_LAYOUT_ID = defaultLayoutId;
@@ -163,6 +177,8 @@ public class ContextMenuAdapter {
 			final ContextMenuItem item = getItem(position);
 			int layoutId = item.getLayout();
 			layoutId = layoutId != ContextMenuItem.INVALID_ID ? layoutId : DEFAULT_LAYOUT_ID;
+			int currentModeColorRes = app.getSettings().getApplicationMode().getIconColorInfo().getColor(nightMode);
+			int currentModeColor = ContextCompat.getColor(app, currentModeColorRes);
 			if (layoutId == R.layout.mode_toggles) {
 				final Set<ApplicationMode> selected = new LinkedHashSet<>();
 				return AppModeDialog.prepareAppModeDrawerView((Activity) getContext(),
@@ -332,6 +348,8 @@ public class ContextMenuAdapter {
 						} else {
 							colorRes = 0;
 						}
+					} else if (profileDependent) {
+						colorRes = currentModeColorRes;
 					}
 					final Drawable drawable = mIconsCache.getIcon(item.getIcon(), colorRes);
 					((AppCompatImageView) convertView.findViewById(R.id.icon)).setImageDrawable(drawable);
@@ -384,6 +402,9 @@ public class ContextMenuAdapter {
 				} else if (ch != null) {
 					ch.setVisibility(View.GONE);
 				}
+				if (profileDependent) {
+					UiUtilities.setupCompoundButton(nightMode, currentModeColor, ch);
+				}
 			}
 
 			if (convertView.findViewById(R.id.seekbar) != null) {
@@ -412,6 +433,7 @@ public class ContextMenuAdapter {
 				} else if (seekBar != null) {
 					seekBar.setVisibility(View.GONE);
 				}
+				UiUtilities.setupSeekBar(app, seekBar, nightMode, profileDependent);
 			}
 
 			View progressBar = convertView.findViewById(R.id.ProgressBar);

@@ -1,7 +1,6 @@
 package net.osmand.plus.routepreparationmenu;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -21,6 +20,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import net.osmand.ValueHolder;
+import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.DialogListItemAdapter;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -54,6 +55,7 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 
 	private MapActivity mapActivity;
 	private WaypointHelper waypointHelper;
+	private ApplicationMode appMode;
 
 	private ExpandableListView expListView;
 	private ExpandableListAdapter adapter;
@@ -206,6 +208,17 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 			setupHeightAndBackground(getView());
 		}
 	}
+	
+	public void setAppMode(ApplicationMode appMode) {
+		this.appMode = appMode;
+	}
+	
+	public ApplicationMode getAppMode() {
+		if (appMode == null) {
+			setAppMode(app.getSettings().getApplicationMode());
+		}
+		return appMode;
+	}
 
 	@Override
 	public void onRoutingDataUpdate() {
@@ -339,6 +352,8 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 					}
 				}
 			});
+			int selectedProfileColor = ContextCompat.getColor(app, getAppMode().getIconColorInfo().getColor(isNightMode(app)));
+			UiUtilities.setupCompoundButton(nightMode, selectedProfileColor, compoundButton);
 
 			convertView.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -496,21 +511,28 @@ public class ShowAlongTheRouteBottomSheet extends MenuBottomSheetDialogFragment 
 				selected = i;
 			}
 		}
-		new AlertDialog.Builder(mapActivity)
-				.setSingleChoiceItems(names, selected, new DialogInterface.OnClickListener() {
+		int selectedProfileColor = ContextCompat.getColor(app, getAppMode().getIconColorInfo().getColor(nightMode));
+		DialogListItemAdapter dialogAdapter = DialogListItemAdapter.createSingleChoiceAdapter(
+				names, nightMode, selected, app, selectedProfileColor, themeRes, new View.OnClickListener() {
 					@Override
-					public void onClick(DialogInterface dialogInterface, int i) {
-						int value = WaypointHelper.SEARCH_RADIUS_VALUES[i];
+					public void onClick(View v) {
+						int which = (int) v.getTag();
+						int value = WaypointHelper.SEARCH_RADIUS_VALUES[which];
 						if (waypointHelper.getSearchDeviationRadius(type) != value) {
 							waypointHelper.setSearchDeviationRadius(type, value);
 							recalculatePoints(type);
-							dialogInterface.dismiss();
 							updateAdapter();
 						}
 					}
-				}).setTitle(app.getString(R.string.search_radius_proximity))
+				}
+		);
+		AlertDialog dialog = new AlertDialog.Builder(new ContextThemeWrapper(mapActivity, themeRes))
+				.setTitle(app.getString(R.string.search_radius_proximity))
 				.setNegativeButton(R.string.shared_string_cancel, null)
-				.show();
+				.setAdapter(dialogAdapter, null)
+				.create();
+		dialogAdapter.setDialog(dialog);
+		dialog.show();
 	}
 
 	private void enableType(final int type,

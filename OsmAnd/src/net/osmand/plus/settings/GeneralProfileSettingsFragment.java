@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
@@ -339,6 +340,9 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 							desc.setVisibility(View.GONE);
 						}
 						title.setChecked(position == selected);
+						if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+							UiUtilities.setupCompoundButtonDrawable(app, isNightMode(), getActiveProfileColor(), title.getCheckMarkDrawable());
+						}
 						return v;
 					}
 				};

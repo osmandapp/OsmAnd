@@ -17,6 +17,7 @@ import android.preference.PreferenceCategory;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -809,12 +810,13 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 			}
 		});
 
+		int selectedModeColor = ContextCompat.getColor(app, mode.getIconColorInfo().getColor(nightMode));
 		if (!defaultSpeedOnly) {
-			setupSpeedSlider(SpeedSliderType.DEFAULT_SPEED, speedUnits, minValue, defaultValue, maxValue, min, max, seekbarView);
-			setupSpeedSlider(SpeedSliderType.MIN_SPEED, speedUnits, minValue, defaultValue, maxValue, min, max, seekbarView);
-			setupSpeedSlider(SpeedSliderType.MAX_SPEED, speedUnits, minValue, defaultValue, maxValue, min, max, seekbarView);
+			setupSpeedSlider(app, SpeedSliderType.DEFAULT_SPEED, speedUnits, minValue, defaultValue, maxValue, min, max, seekbarView, nightMode, selectedModeColor);
+			setupSpeedSlider(app, SpeedSliderType.MIN_SPEED, speedUnits, minValue, defaultValue, maxValue, min, max, seekbarView, nightMode, selectedModeColor);
+			setupSpeedSlider(app, SpeedSliderType.MAX_SPEED, speedUnits, minValue, defaultValue, maxValue, min, max, seekbarView, nightMode, selectedModeColor);
 		} else {
-			setupSpeedSlider(SpeedSliderType.DEFAULT_SPEED_ONLY, speedUnits, minValue, defaultValue, maxValue, min, max, seekbarView);
+			setupSpeedSlider(app, SpeedSliderType.DEFAULT_SPEED_ONLY, speedUnits, minValue, defaultValue, maxValue, min, max, seekbarView, nightMode, selectedModeColor);
 			seekbarView.findViewById(R.id.default_speed_div).setVisibility(View.GONE);
 			seekbarView.findViewById(R.id.default_speed_container).setVisibility(View.GONE);
 			seekbarView.findViewById(R.id.max_speed_div).setVisibility(View.GONE);
@@ -831,9 +833,10 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		MAX_SPEED,
 	}
 
-	private static void setupSpeedSlider(final SpeedSliderType type, String speedUnits,
+	private static void setupSpeedSlider(final OsmandApplication app, final SpeedSliderType type, String speedUnits,
 										 final int[] minValue, final int[] defaultValue, final int[] maxValue,
-										 final int min, final int max, View seekbarView) {
+										 final int min, final int max, View seekbarView, final boolean nightMode,
+	                                     final int activeColor) {
 		View seekbarLayout;
 		int titleId;
 		final int[] speedValue;
@@ -915,5 +918,6 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 			public void onStopTrackingTouch(SeekBar seekBar) {
 			}
 		});
+		UiUtilities.setupSeekBar(speedSeekBar, activeColor, nightMode);
 	}
 }

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
+import android.support.v4.content.ContextCompat;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -490,6 +491,8 @@ public class MapWidgetRegistry {
 
 			final boolean selected = r.visibleCollapsed(mode) || r.visible(mode);
 			final String desc = mapActivity.getString(R.string.shared_string_collapse);
+			final boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+			final int currentModeColorRes = mode.getIconColorInfo().getColor(nightMode);
 			ContextMenuItem.ItemBuilder itemBuilder = new ContextMenuItem.ItemBuilder()
 					.setIcon(r.getDrawableMenu())
 					.setSelected(selected)
@@ -530,7 +533,7 @@ public class MapWidgetRegistry {
 									MenuItem menuItem = menu.add(R.id.single_selection_group, id, i, titleId)
 											.setChecked(id == checkedId);
 									menuItem.setIcon(menuItem.isChecked() && selected
-											? ic.getIcon(iconId, R.color.osmand_orange) : ic.getThemedIcon(iconId));
+											? ic.getIcon(iconId, currentModeColorRes) : ic.getThemedIcon(iconId));
 								}
 								menu.setGroupCheckable(R.id.single_selection_group, true, true);
 								menu.setGroupVisible(R.id.single_selection_group, true);
@@ -779,6 +782,9 @@ public class MapWidgetRegistry {
 
 	public ContextMenuAdapter getViewConfigureMenuAdapter(final MapActivity map) {
 		final ContextMenuAdapter cm = new ContextMenuAdapter();
+		boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+		cm.setProfileDependent(true);
+		cm.setNightMode(nightMode);
 		cm.setDefaultLayoutId(R.layout.list_item_icon_and_menu);
 		cm.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.app_modes_choose, map)
 				.setLayout(R.layout.mode_toggles).createItem());
