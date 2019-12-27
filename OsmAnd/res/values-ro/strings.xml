@@ -2684,11 +2684,11 @@
     <string name="rendering_attr_highway_class_bridleway_name">Piste de călărie</string>
     <string name="save_poi_value_exceed_length">Scurtați lungimea etichetei \"%s\" la mai puțin de 255 de caractere.</string>
     <string name="save_poi_value_exceed_length_title">Lungimea valorii \"%s\"</string>
-    <string name="files_moved">Mutat% 1 $ d fișiere (% 2 $ s).</string>
-    <string name="files_copied">Fișiere %1 $ d copiate (%2 $ s).</string>
-    <string name="files_failed">Nu s-a putut copia fișierele% 1 $ d (% 2 $ s).</string>
-    <string name="files_present">fișierele %1 $ d (%2 $ s) sunt prezente în locația anterioară \' %3 $ s \'.</string>
-    <string name="public_transport_ped_route_title">Traseul pe jos este de aproximativ %1 $ s, și poate fi mai rapid decât transportul public</string>
+    <string name="files_moved">Mutat %1$d fișiere (%2$s).</string>
+    <string name="files_copied">Fișiere %1$d copiate (%2$s).</string>
+    <string name="files_failed">Nu s-a putut copia fișierele %1$d (%2$s).</string>
+    <string name="files_present">fișierele %1$d (%2$s) sunt prezente în locația anterioară \' %3$s \'.</string>
+    <string name="public_transport_ped_route_title">Traseul pe jos este de aproximativ %1$s, și poate fi mai rapid decât transportul public</string>
     <string name="public_transport_no_route_title">Din păcate, OsmAnd nu a putut găsi un traseu potrivit pentru setările dumneavoastră.</string>
     <string name="coordinates_widget">Coordonatele widget</string>
     <string name="make_osmand_better_descr"></string>
