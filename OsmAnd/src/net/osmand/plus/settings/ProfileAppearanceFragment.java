@@ -95,7 +95,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 		if (baseModeForNewProfile != null) {
 			profile.stringKey = baseModeForNewProfile.getStringKey() + "_" + System.currentTimeMillis();
 			profile.parent = baseModeForNewProfile;
-			profile.name = baseModeForNewProfile.toHumanString(getContext());
+			profile.name = baseModeForNewProfile.toHumanString(app);
 			profile.color = baseModeForNewProfile.getIconColorInfo();
 			profile.iconRes = baseModeForNewProfile.getIconRes();
 			profile.routingProfile = baseModeForNewProfile.getRoutingProfile();
@@ -115,12 +115,31 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 		} else {
 			changedProfile.stringKey = profile.stringKey;
 			changedProfile.parent = profile.parent;
-			changedProfile.name = profile.name;
+			if (baseModeForNewProfile != null) {
+				changedProfile.name = createNonDuplicateName(baseModeForNewProfile.toHumanString(app));
+			} else {
+				changedProfile.name = profile.name;
+			}
 			changedProfile.color = profile.color;
 			changedProfile.iconRes = profile.iconRes;
 			changedProfile.routingProfile = profile.routingProfile;
 			changedProfile.routeService = profile.routeService;
 		}
+	}
+
+	private String createNonDuplicateName(String oldName) {
+		int suffix = 0;
+		int i = oldName.length() - 1;
+		do {
+			try {
+				suffix = Integer.parseInt(oldName.substring(i));
+			} catch (NumberFormatException e) {
+				break;
+			}
+			i--;
+		} while (i >= 0);
+		suffix++;
+		return oldName.substring(0, i + 1) + suffix;
 	}
 
 	@Override
