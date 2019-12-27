@@ -3090,7 +3090,7 @@
     <string name="press_again_to_change_the_map_orientation">Pulsa de nuevo para cambiar la orientación del mapa</string>
     <string name="shared_string_min_speed">Velocidad mín.</string>
     <string name="shared_string_max_speed">Velocidad máx.</string>
-    <string name="default_speed_setting_title">Velocidad predefinida</string>
+    <string name="default_speed_setting_title">Velocidad normal</string>
     <string name="default_speed_setting_descr">Cambiar los ajustes de la velocidad predefinida</string>
     <string name="minmax_speed_dialog_title">Definir velocidad mín/máx</string>
     <string name="new_profile">Nuevo perfil</string>
@@ -3194,7 +3194,7 @@
     <string name="shared_string_track_is_saved">Traza «%s» guardada</string>
     <string name="app_mode_campervan">Autocaravana (RV)</string>
     <string name="rendering_attr_showLez_description">Mostrar zonas de baja emisión en el mapa. No afecta a la navegación.</string>
-    <string name="rendering_attr_showLez_name">Mostrar zonas de baja emisión</string>
+    <string name="rendering_attr_showLez_name">Mostrar Zonas de Bajas Emisiones</string>
     <string name="temporary_conditional_routing">Considerar limitaciones temporales</string>
     <string name="gpx_join_gaps">Unir espacios</string>
     <string name="shared_string_default">Predefinido</string>
@@ -3382,7 +3382,7 @@
     <string name="dialogs_and_notifications_title">Diálogos y notificaciones</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_name">Redes de nodos</string>
     <string name="suggested_maps">Mapas sugeridos</string>
-    <string name="suggested_maps_descr">Esos mapas son necesarios para su uso con un complemento</string>
+    <string name="suggested_maps_descr">Esos mapas deben usarse con un complemento</string>
     <string name="added_profiles">Perfiles añadidos</string>
     <string name="added_profiles_descr">El complemento añade un nuevo perfil a OsmAnd</string>
     <string name="shared_string_turn_off">Apagar</string>
@@ -3400,7 +3400,7 @@
     <string name="personal_category_name">Personal</string>
     <string name="shared_string_downloading_formatted">Descargando %s</string>
     <string name="rendering_value_thick_name">Grueso</string>
-    <string name="desert_render_descr">Para desiertos y otras zonas escasamente pobladas.</string>
+    <string name="desert_render_descr">Para desiertos y otras zonas escasamente pobladas. Muestra más detalles en una escala de visualización.</string>
     <string name="select_navigation_icon">Seleccionar icono de navegación</string>
     <string name="select_map_icon">Seleccionar icono de mapa</string>
     <string name="delete_profiles_descr">Después de tocar Aplicar, los perfiles eliminados se perderán por completo.</string>
