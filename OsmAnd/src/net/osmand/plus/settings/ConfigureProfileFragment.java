@@ -46,6 +46,7 @@ import net.osmand.plus.activities.PluginActivity;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
+import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.plus.skimapsplugin.SkiMapsPlugin;
 
@@ -273,9 +274,13 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 	}
 
 	private void setupResetToDefaultPref() {
-		Preference copyProfilePrefs = findPreference(RESET_TO_DEFAULT);
-		copyProfilePrefs.setIcon(app.getUIUtilities().getIcon(R.drawable.ic_action_reset_to_default_dark,
-				isNightMode() ? R.color.active_color_primary_dark : R.color.active_color_primary_light));
+		Preference resetToDefault = findPreference(RESET_TO_DEFAULT);
+		if (getSelectedAppMode().isCustomProfile()) {
+			resetToDefault.setVisible(false);
+		} else {
+			resetToDefault.setIcon(app.getUIUtilities().getIcon(R.drawable.ic_action_reset_to_default_dark,
+					isNightMode() ? R.color.active_color_primary_dark : R.color.active_color_primary_light));
+		}
 	}
 
 	private void setupExportProfilePref() {
@@ -397,7 +402,10 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 						ConfigureProfileFragment.this, false, getSelectedAppMode());
 			}
 		} else if (RESET_TO_DEFAULT.equals(prefId)) {
-			app.getSettings().resetPreferencesForProfile(getSelectedAppMode());
+			FragmentManager fragmentManager = getFragmentManager();
+			if (fragmentManager != null) {
+				ResetProfilePrefsBottomSheet.showInstance(fragmentManager, prefId, this, false, getSelectedAppMode());
+			}
 		} else if (EXPORT_PROFILE.equals(prefId)) {
 			Context ctx = requireContext();
 			final ApplicationMode profile = getSelectedAppMode();
