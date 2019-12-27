@@ -3076,7 +3076,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="profile_alert_need_save_msg">Najpierw zapisz zmiany w profilu</string>
     <string name="profile_alert_delete_title">Usuń profil</string>
     <string name="profile_alert_delete_msg">Usunąć profil \"%s\"\?</string>
-    <string name="select_base_profile_dialog_title">Wybór profilu bazowego</string>
+    <string name="select_base_profile_dialog_title">Wybierz profil, od którego chcesz rozpocząć</string>
     <string name="select_base_profile_dialog_message">Profil dostosowany można oprzeć na jednym z domyślnych profili aplikacji. Określają one podstawowe ustawienia, takie jak domyślna widoczność widżetów i jednostek prędkości i odległości. Są to domyślne profile aplikacji, wraz z przykładami profili dostosowanych, które można rozszerzyć na:</string>
     <string name="select_nav_profile_dialog_title">Wybierz typ nawigacji</string>
     <string name="base_profile_descr_car">Samochód, ciężarówka, motocykl</string>
@@ -3369,7 +3369,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="exported_osmand_profile">Profil OsmAnd: %1$s</string>
     <string name="overwrite_profile_q">Profil „%1$s” już istnieje. Zastąpić go\?</string>
     <string name="export_profile_failed">Nie udało się wyeksportować profilu.</string>
-    <string name="profile_import">Importowanie profilu:</string>
+    <string name="profile_import">Import profilu</string>
     <string name="profile_import_descr">Aby zaimportować profil, proszę otworzyć plik na urządzeniu za pomocą OsmAnd.</string>
     <string name="file_import_error">Błąd importowania %1$s: %2$s</string>
     <string name="file_imported_successfully">Zaimportowano %1$s.</string>
@@ -3402,4 +3402,18 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="personal_category_name">Osobiste</string>
     <string name="shared_string_downloading_formatted">Pobieranie %s</string>
     <string name="desert_render_descr">Dla pustyń i innych słabo zaludnionych obszarów.</string>
+    <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Pokaż trasy cyklu sieci węzłów</string>
+    <string name="rendering_value_thick_name">Gruby</string>
+    <string name="select_navigation_icon">Wybierz ikonę nawigacji</string>
+    <string name="select_map_icon">Wybierz ikonę mapy</string>
+    <string name="delete_profiles_descr">Po dotknięciu Zastosuj usunięte profile zostaną całkowicie utracone.</string>
+    <string name="master_profile">Główny profil</string>
+    <string name="select_color">Wybierz kolor</string>
+    <string name="edit_profiles_descr">Nie możesz usunąć domyślnych profili OsmAnd, ale możesz je wyłączyć na poprzednim ekranie lub przenieść na dół.</string>
+    <string name="edit_profiles">Edytuj profile</string>
+    <string name="select_nav_profile_dialog_message">Typ nawigacji wpływa na zasady obliczania trasy.</string>
+    <string name="profile_appearance">Wygląd profilu</string>
+    <string name="choose_icon_color_name">Wybierz ikonę, kolor i nazwę</string>
+    <string name="reorder_profiles">Edytuj listę profili</string>
+    <string name="selected_profile">Wybrany profil</string>
 </resources>
