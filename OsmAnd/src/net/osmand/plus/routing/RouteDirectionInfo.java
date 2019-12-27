@@ -2,6 +2,7 @@ package net.osmand.plus.routing;
 
 import android.support.annotation.Nullable;
 
+import net.osmand.binary.RouteDataObject;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.router.ExitInfo;
@@ -18,18 +19,14 @@ public class RouteDirectionInfo {
 	private String descriptionRoute = ""; //$NON-NLS-1$
 	// Speed after the action till next turn
 	private float averageSpeed;
-	
+
 	private String ref;
-	
+
 	private String streetName;
-	
+
 	private String destinationName;
 
-	private String shieldColorValue;
-
-	private String shieldShapeValue;
-
-	private String shieldIconName;
+	private RouteDataObject routeDataObject;
 
 	@Nullable
 	private ExitInfo exitInfo;
@@ -47,14 +44,22 @@ public class RouteDirectionInfo {
 		this.averageSpeed = averageSpeed == 0 ? 1 : averageSpeed;
 		this.turnType = turnType;
 	}
-	
+
+	public RouteDataObject getRouteDataObject() {
+		return routeDataObject;
+	}
+
+	public void setRouteDataObject(RouteDataObject routeDataObject) {
+		this.routeDataObject = routeDataObject;
+	}
+
 	public String getDescriptionRoute(OsmandApplication ctx) {
 		if (!descriptionRoute.endsWith(OsmAndFormatter.getFormattedDistance(distance, ctx))) {
 			descriptionRoute += " " + OsmAndFormatter.getFormattedDistance(distance, ctx);
 		}
 		return descriptionRoute.trim();
 	}
-	
+
 	public String getDescriptionRoute(OsmandApplication ctx, int collectedDistance) {
 		if (!descriptionRoute.endsWith(OsmAndFormatter.getFormattedDistance(collectedDistance, ctx))) {
 			descriptionRoute += " " + OsmAndFormatter.getFormattedDistance(collectedDistance, ctx);
@@ -81,7 +86,7 @@ public class RouteDirectionInfo {
 	public void setStreetName(String streetName) {
 		this.streetName = streetName;
 	}
-	
+
 	public void setDescriptionRoute(String descriptionRoute) {
 		this.descriptionRoute = descriptionRoute;
 	}
@@ -99,11 +104,11 @@ public class RouteDirectionInfo {
 		return (int) Math.round(distance / averageSpeed);
 	}
 
-	
+
 	public TurnType getTurnType() {
 		return turnType;
 	}
-	
+
 
 	// calculated vars
 	// after action (excluding expectedTime)
@@ -116,7 +121,7 @@ public class RouteDirectionInfo {
 	}
 
 	public void setDistance(int distance) {
-		 this.distance = distance;
+		this.distance = distance;
 	}
 
 	@Nullable
@@ -126,29 +131,5 @@ public class RouteDirectionInfo {
 
 	public void setExitInfo(@Nullable ExitInfo exitInfo) {
 		this.exitInfo = exitInfo;
-	}
-
-	public String getShieldColorValue() {
-		return shieldColorValue;
-	}
-
-	public void setShieldColorValue(String shieldColorValue) {
-		this.shieldColorValue = shieldColorValue;
-	}
-
-	public String getShieldShapeValue() {
-		return shieldShapeValue;
-	}
-
-	public void setShieldShapeValue(String shieldShapeValue) {
-		this.shieldShapeValue = shieldShapeValue;
-	}
-
-	public String getShieldIconName() {
-		return shieldIconName;
-	}
-
-	public void setShieldIconName(String shieldIconName) {
-		this.shieldIconName = shieldIconName;
 	}
 }

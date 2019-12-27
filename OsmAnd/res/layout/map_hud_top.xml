@@ -132,7 +132,11 @@
 				android:textColor="@color/color_white"
 				android:textSize="@dimen/map_widget_text_size"
 				android:visibility="gone"
+				android:paddingLeft="@dimen/text_margin_small"
+				android:paddingRight="@dimen/text_margin_small"
+				android:textStyle="bold"
 				tools:text="8"
+
 				tools:visibility="visible" />
 
 			<ImageView
@@ -140,13 +144,15 @@
 				android:layout_width="@dimen/map_widget_height"
 				android:layout_height="@dimen/map_widget_height"
 				android:scaleType="fitCenter"
+				android:visibility="gone"
 				tools:src="@drawable/map_turn_right_small" />
 
 			<ImageView
 				android:id="@+id/map_shield_icon"
-				android:layout_width="60dp"
-				android:layout_height="match_parent"
+				android:layout_width="@dimen/map_widget_height"
+				android:layout_height="@dimen/map_widget_height"
 				android:scaleType="fitCenter"
+				android:visibility="gone"
 				tools:src="@drawable/h_white_pillow_2_road_shield" />
 
 			<FrameLayout

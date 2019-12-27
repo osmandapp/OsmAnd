@@ -342,29 +342,6 @@ public class RouteCalculationResult {
 						exitInfo.setExitStreetName(next.getObject().getExitName());
 						info.setExitInfo(exitInfo);
 					}
-
-					String highwayTag = s.getObject().getHighway();
-					//	Search for nearest shield properties
-					for (int j = lind; j < list.size(); j++) {
-						RouteSegmentResult segment = list.get(j);
-						String segmentRef = segment.getObject().getRef("", false,
-								segment.isForwardDirection());
-						//	if it's the same road
-						if (segmentRef != null && segmentRef.equals(ref)) {
-							BinaryMapIndexReader.TagValuePair colorPair = segment.getObject().getShieldColor();
-							BinaryMapIndexReader.TagValuePair shapePair = segment.getObject().getShieldShape();
-							if (colorPair != null || shapePair != null) {
-								info.setShieldColorValue(colorPair != null ? colorPair.value : "white");
-								info.setShieldShapeValue(shapePair != null ? shapePair.value : "square");
-								if (colorPair != null) {
-									info.setShieldIconName(getShieldIconName(ctx, ref, highwayTag, colorPair));
-								} else {
-									info.setShieldIconName(getShieldIconName(ctx, ref, highwayTag, shapePair));
-								}
-								break;
-							}
-						}
-					}
 				}
 
 		                String description = toString(turn, ctx, false) + " " + RoutingHelper.formatStreetName(info.getStreetName(),
@@ -385,6 +362,7 @@ public class RouteCalculationResult {
 					prevDirectionDistance = 0;
 					prevDirectionTime = 0;
 				}
+				info.setRouteDataObject(s.getObject());
 				directions.add(info);
 			}
 			prevDirectionDistance += s.getDistance();
@@ -395,32 +373,6 @@ public class RouteCalculationResult {
 			prev.setAverageSpeed(prevDirectionDistance / prevDirectionTime);
 		}
 		return segmentsToPopulate;
-	}
-
-	private static String getShieldIconName(OsmandApplication ctx, String ref, String highwayTag,
-											BinaryMapIndexReader.TagValuePair pair) {
-		String shieldId = null;
-		RenderingRulesStorage currentRenderer = ctx.getRendererRegistry().getCurrentSelectedRenderer();
-		MapRenderRepositories maps = ctx.getResourceManager().getRenderer();
-		boolean nightMode = ctx.getDaynightHelper().isNightMode();
-		RenderingRuleSearchRequest request = maps.getSearchRequestWithAppliedCustomRules(currentRenderer, nightMode);
-		request.setInitialTagValueZoom("highway", highwayTag, 10, null);
-		request.setIntFilter(request.ALL.R_TEXT_LENGTH, ref.length());
-		request.setStringFilter(request.ALL.R_NAME_TAG, "road_ref_1");
-		request.setStringFilter(request.ALL.R_ADDITIONAL,
-				pair.tag + "=" + pair.value);
-		if (request.search(RenderingRulesStorage.TEXT_RULES)) {
-			if (request.getFloatPropertyValue(request.ALL.R_TEXT_SIZE) > 0) {
-				if (request.isSpecified(request.ALL.R_TEXT_SHIELD)) {
-					shieldId = request.getStringPropertyValue(request.ALL.R_TEXT_SHIELD);
-				}
-				if (request.isSpecified(request.ALL.R_ICON)) {
-					shieldId = request.getStringPropertyValue(request.ALL.R_ICON);
-				}
-			}
-		}
-		log.info("Shield name: " + shieldId);
-		return shieldId;
 	}
 	
 	protected static void addMissingTurnsToRoute(List<Location> locations, 
