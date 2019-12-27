@@ -45,7 +45,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.PluginActivity;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
-import net.osmand.plus.profiles.SelectAppModesBottomSheetDialogFragment;
+import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.plus.skimapsplugin.SkiMapsPlugin;
 
@@ -367,13 +367,6 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 	}
 
 	@Override
-	public void onAppModeChanged(final ApplicationMode appMode) {
-		long start = System.currentTimeMillis();
-		app.getSettings().copyPreferencesFromProfile(appMode, getSelectedAppMode());
-		LOG.debug("copyPrefs " + (System.currentTimeMillis() - start));
-	}
-
-	@Override
 	public boolean onPreferenceClick(Preference preference) {
 		String prefId = preference.getKey();
 
@@ -400,8 +393,8 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 		} else if (COPY_FROM_OTHER_PROFILE.equals(prefId)) {
 			FragmentManager fragmentManager = getFragmentManager();
 			if (fragmentManager != null) {
-				SelectAppModesBottomSheetDialogFragment.showInstance(fragmentManager,
-						ConfigureProfileFragment.this, false, getSelectedAppMode(), false);
+				SelectCopyAppModeBottomSheet.showInstance(fragmentManager,
+						ConfigureProfileFragment.this, false, getSelectedAppMode());
 			}
 		} else if (RESET_TO_DEFAULT.equals(prefId)) {
 			app.getSettings().resetPreferencesForProfile(getSelectedAppMode());
