@@ -3,7 +3,11 @@ package net.osmand.telegram.ui
 import android.animation.*
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Canvas
+import android.graphics.Rect
 import android.graphics.Typeface
+import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.os.Build
 import android.os.Bundle
@@ -33,6 +37,7 @@ import java.util.concurrent.ConcurrentHashMap
 
 private const val SELECTED_CHATS_KEY = "selected_chats"
 private const val SELECTED_CHATS_USERS = "selected_users"
+private const val HEADER = 3
 private const val LAST_SHARE_CHAT = 2
 private const val SHARE_LOCATION_CHAT = 1
 private const val DEFAULT_CHAT = 0
@@ -209,6 +214,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 					}
 				}
 			})
+			addItemDecoration(createDividerItemDecoration(sharingMode))
 		}
 
 		mainView.findViewById<View>(R.id.stop_all_sharing_row).setOnClickListener {
@@ -248,6 +254,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 		updateCurrentUserPhoto()
 		updateContent()
 		updateEnable = true
+		settings.read()
 		startHandler()
 	}
 
@@ -459,6 +466,54 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 		}
 	}
 
+	private fun createDividerItemDecoration(sharingMode: Boolean): RecyclerView.ItemDecoration {
+		val divider: Drawable = ColorDrawable(ContextCompat.getColor(app, R.color.card_divider_dark))
+		val pluginDividerHeight: Int = AndroidUtils.dpToPx(app, 1f)
+		return object : RecyclerView.ItemDecoration() {
+			override fun onDraw(canvas: Canvas, parent: RecyclerView, state: RecyclerView.State) {
+				val dividerLeft = if (sharingMode){
+					AndroidUtils.dpToPx(app, 72f)
+				} else {
+					parent.paddingLeft
+				}
+				val dividerRight = parent.width - parent.paddingRight
+				val childCount = parent.childCount
+				for (i in 0 until childCount - 1) {
+					val child = parent.getChildAt(i)
+					if (shouldDrawDivider(i)) {
+						val params = child.layoutParams as RecyclerView.LayoutParams
+						val dividerTop = child.bottom + params.bottomMargin
+						val dividerBottom = dividerTop + pluginDividerHeight
+						divider.setBounds(dividerLeft, dividerTop, dividerRight, dividerBottom)
+						divider.draw(canvas)
+					}
+				}
+			}
+
+			override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
+				val position = parent.getChildAdapterPosition(view)
+				if (shouldDrawDivider(position)) {
+					outRect[0, 0, 0] = pluginDividerHeight
+				}
+			}
+
+			private fun shouldDrawDivider(position: Int): Boolean {
+				val item = adapter.items[position]
+				val nextP = position + 1
+				if (nextP < adapter.items.count()) {
+					val next = adapter.items[nextP]
+					if (!sharingMode && item is LastChat && next !is LastChat) {
+						return true
+					}
+				}
+				if (sharingMode && item is LastChat) {
+					return true
+				}
+				return false
+			}
+		}
+	}
+
 	private fun updateContent() {
 		sharingMode = sharingMode && settings.hasAnyChatToShareLocation()
 		updateSharingStatus()
@@ -493,7 +548,8 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 	}
 
 	private fun updateList() {
-		val items: MutableList<TdApi.Object> = mutableListOf()
+		val lastItems = getLastShareItems()
+		val items: MutableList<Any> = mutableListOf()
 		val chats: MutableList<TdApi.Chat> = mutableListOf()
 		val contacts = telegramHelper.getContacts()
 		val chatList = if (sharingMode) {
@@ -521,28 +577,33 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 			}
 		}
 		if (sharingMode && settings.hasAnyChatToShareLocation()) {
-			adapter.items = sortAdapterItems(items)
+			val filteredLastItems = lastItems.filter { !settings.isSharingLocationToChat(it.chat.id) }.toMutableList()
+			val sorted = sortAdapterItems(items as MutableList<TdApi.Object>)
+			if (filteredLastItems.isNotEmpty()) {
+				sorted.add(getString(R.string.shared_string_suggested))
+			}
+			sorted.addAll(filteredLastItems)
+			adapter.items = sorted
 		} else {
-			items.addAll(0, getLastShareItems(items))
+			val filteredLastItems = lastItems.filter { !settings.isSharingLocationToChat(it.chat.id) }.toMutableList()
+			items.addAll(0, filteredLastItems)
 			adapter.items = items
 		}
 	}
 
-	private fun getLastShareItems(items: MutableList<TdApi.Object>): MutableList<TdApi.Object> {
-		val lastItems: MutableList<TdApi.Object> = mutableListOf()
-		items.forEach {
-			val id = when (it) {
-				is TdApi.Chat -> it.id
-				else -> -1
-			}
-			if (lastChatsInfo.containsKey(id)) {
-				lastItems.add(LastChat(it as TdApi.Chat, lastChatsInfo[id]!!.livePeriod))
+	private fun getLastShareItems(): MutableList<LastChat> {
+		val lastItems: MutableList<LastChat> = mutableListOf()
+		val chatListIds = telegramHelper.getChatListIds()
+		chatListIds.forEach { chatId ->
+			val chat = telegramHelper.getChat(chatId)
+			if (chat != null && lastChatsInfo.containsKey(chatId)) {
+				lastItems.add(LastChat(chat, lastChatsInfo[chatId]!!.livePeriod))
 			}
 		}
 		return lastItems
 	}
 
-	private fun sortAdapterItems(list: MutableList<TdApi.Object>): MutableList<TdApi.Object> {
+	private fun sortAdapterItems(list: MutableList<TdApi.Object>): MutableList<Any> {
 		list.sortWith(Comparator<TdApi.Object> { o1, o2 ->
 			val title1 = when (o1) {
 				is TdApi.Chat -> o1.title
@@ -556,12 +617,12 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 			}
 			title1.compareTo(title2)
 		})
-		return list
+		return list.toMutableList()
 	}
 
 	inner class MyLocationListAdapter :
 		RecyclerView.Adapter<MyLocationListAdapter.BaseViewHolder>() {
-		var items = mutableListOf<TdApi.Object>()
+		var items = mutableListOf<Any>()
 			set(value) {
 				field = value
 				notifyDataSetChanged()
@@ -576,6 +637,8 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 			}
 			return if (item is LastChat) {
 				LAST_SHARE_CHAT
+			} else if (item is String) {
+				HEADER
 			} else if (settings.isSharingLocationToChat(id) && sharingMode) {
 				SHARE_LOCATION_CHAT
 			} else {
@@ -600,6 +663,11 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 							.inflate(R.layout.last_share_list_item, parent, false)
 					LastChatViewHolder(view)
 				}
+				HEADER -> {
+					val view = LayoutInflater.from(parent.context)
+							.inflate(R.layout.header_list_item, parent, false)
+					HeaderViewHolder(view)
+				}
 				else -> throw RuntimeException("Unsupported view type: $viewType")
 			}
 		}
@@ -610,8 +678,10 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 			val isChat = item is TdApi.Chat
 			val itemId = if (isChat) {
 				(item as TdApi.Chat).id
+			} else if (item is TdApi.User) {
+				item.id.toLong()
 			} else {
-				(item as TdApi.User).id.toLong()
+				-1
 			}
 
 			val lastItem = position == itemCount - 1
@@ -628,6 +698,10 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 			}
 
 			TelegramUiHelper.setupPhoto(app, holder.icon, photoPath, placeholderId, false)
+
+			if (item is LastChat) {
+				TelegramUiHelper.applyGrayscaleFilter(holder.icon)
+			}
 
 			val currentUserId = telegramHelper.getCurrentUserId()
 			val title = when (item) {
@@ -705,13 +779,9 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 							settings.shareLocationToChat(itemId, false)
 							if (shareInfo != null) {
 								telegramHelper.stopSendingLiveLocationToChat(shareInfo)
-									app.settings.lastChatsInfo[shareInfo.chatId] = TelegramSettings.LastChatInfo().apply {
-										chatId = shareInfo.chatId
-										livePeriod = shareInfo.livePeriod
-									}
-									log.info("Save chat to last: ${shareInfo.chatId}")
+								settings.addTimePeriodToLastItem(shareInfo.chatId,shareInfo.livePeriod)
 							}
-							removeItem(item)
+							removeItem(item as TdApi.Object)
 						}
 					}
 				}
@@ -802,6 +872,8 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 						(activity as DataSetListener).onDataSetChanged()
 					}
 				}
+			} else if (holder is HeaderViewHolder) {
+				holder.header?.text = item as String
 			}
 		}
 
@@ -842,6 +914,10 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 			val container: LinearLayout? = view.findViewById(R.id.container)
 			val time: TextView? = view.findViewById(R.id.time)
 		}
+
+		inner class HeaderViewHolder(val view: View) : BaseViewHolder(view) {
+			val header: TextView? = view.findViewById(R.id.header)
+		}
 	}
 
 	interface ActionButtonsListener {
@@ -849,4 +925,4 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 	}
 }
 
-class LastChat internal constructor(val chat: TdApi.Chat, val time: Long) : TdApi.Chat()
+class LastChat internal constructor(val chat: TdApi.Chat, val time: Long)

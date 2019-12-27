@@ -7,6 +7,7 @@ import android.support.annotation.DrawableRes
 import android.support.annotation.StringRes
 import android.text.SpannableStringBuilder
 import android.text.style.ForegroundColorSpan
+import com.google.gson.JsonObject
 import net.osmand.PlatformUtil
 import net.osmand.telegram.helpers.OsmandAidlHelper
 import net.osmand.telegram.helpers.ShowLocationHelper
@@ -14,13 +15,15 @@ import net.osmand.telegram.helpers.TelegramHelper
 import net.osmand.telegram.utils.*
 import net.osmand.telegram.utils.OsmandFormatter.MetricsConstants
 import net.osmand.telegram.utils.OsmandFormatter.SpeedConstants
-import net.osmand.telegram.utils.OsmandLocationUtils
 import org.drinkless.td.libcore.telegram.TdApi
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
+import java.util.*
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.ConcurrentLinkedQueue
+import kotlin.collections.ArrayList
+
 
 val ADDITIONAL_ACTIVE_TIME_VALUES_SEC = listOf(15 * 60L, 30 * 60L, 60 * 60L, 180 * 60L)
 
@@ -838,8 +841,26 @@ class TelegramSettings(private val app: TelegramApplication) {
 				val obj = JSONObject()
 				obj.put(LastChatInfo.CHAT_ID_KEY, chatId)
 				obj.put(LastChatInfo.LIVE_PERIOD_KEY, lastInfo.livePeriod)
+				obj.put(LastChatInfo.PERIODS_KEY, convertPeriodsToJson(lastInfo.periods))
+				log.info("Periods to put: ${lastInfo.periods}")
 				jArray.put(obj)
 			}
+			jArray
+		} catch (e: JSONException) {
+			log.error(e)
+			null
+		}
+	}
+
+	private fun convertPeriodsToJson(periods: LinkedList<Long>): JSONArray? {
+		return try {
+			val jArray = JSONArray()
+			for (i in 0 until periods.count()) {
+				val obj = JSONObject()
+				obj.put(i.toString(), periods[i])
+				jArray.put(obj)
+			}
+			log.info("Json array periods: $jArray")
 			jArray
 		} catch (e: JSONException) {
 			log.error(e)
@@ -918,12 +939,59 @@ class TelegramSettings(private val app: TelegramApplication) {
 			val obj = json.getJSONObject(i)
 			val lastInfo = LastChatInfo().apply {
 				chatId = obj.optLong(LastChatInfo.CHAT_ID_KEY)
-				livePeriod = obj.getLong(LastChatInfo.LIVE_PERIOD_KEY)
+//				livePeriod = obj.optLong(LastChatInfo.LIVE_PERIOD_KEY)
+				periods = LinkedList<Long>()
+				val jsonArray = obj.getJSONArray(LastChatInfo.PERIODS_KEY)
+				log.info("getJson: $jsonArray")
+				for (j in 0 until jsonArray.length()) {
+					val obj=jsonArray.get(j) as JSONObject
+
+					periods.add(obj.optLong(j.toString()))
+				}
+				log.info("Periods: $periods")
+				livePeriod = calcLivePeriod(periods)
 			}
 			lastChatsInfo[lastInfo.chatId] = lastInfo
 		}
 	}
-	
+
+	fun addTimePeriodToLastItem(id: Long, time: Long) {
+		if (lastChatsInfo.containsKey(id)) {
+			lastChatsInfo[id]?.periods = addTimeToPeriods(lastChatsInfo[id]?.periods, time)
+		} else {
+			lastChatsInfo[id] = LastChatInfo().apply {
+				chatId = id
+				livePeriod = time
+				periods = LinkedList<Long>().apply {
+					addFirst(time)
+				}
+			}
+		}
+	}
+
+	private fun addTimeToPeriods(periods: LinkedList<Long>?, time: Long): LinkedList<Long> {
+		if (periods?.isNotEmpty() != null) {
+			return if (periods.count() < 5) {
+				periods.addFirst(time)
+				periods
+			} else {
+				periods.removeLast()
+				periods.addFirst(time)
+				periods
+			}
+		}
+		return LinkedList<Long>().apply { addFirst(time) }
+	}
+
+	private fun calcLivePeriod(periods: LinkedList<Long>): Long {
+		periods.sort()
+		return if (periods.count() % 2 == 0) {
+			(periods[periods.count() / 2] + periods[periods.count() / 2 - 1]) / 2
+		} else {
+			periods[periods.count() / 2]
+		}
+	}
+
 	private fun getLiveNowChats() = app.telegramHelper.getMessagesByChatIds(locHistoryTime).keys
 
 	private fun updatePrefs() {
@@ -1417,10 +1485,12 @@ class TelegramSettings(private val app: TelegramApplication) {
 
 		var chatId = -1L
 		var livePeriod = -1L
+		var periods = LinkedList<Long>()
 
 		companion object {
 			internal const val CHAT_ID_KEY = "chatId"
 			internal const val LIVE_PERIOD_KEY = "livePeriod"
+			internal const val PERIODS_KEY = "periods"
 		}
 	}
 }

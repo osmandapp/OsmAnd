@@ -1,6 +1,8 @@
 package net.osmand.telegram.helpers
 
 import android.graphics.Bitmap
+import android.graphics.ColorMatrix
+import android.graphics.ColorMatrixColorFilter
 import android.graphics.drawable.Drawable
 import android.widget.ImageView
 import net.osmand.data.LatLon
@@ -12,6 +14,11 @@ import net.osmand.telegram.utils.OsmandLocationUtils.MessageUserLocation
 import org.drinkless.td.libcore.telegram.TdApi
 
 object TelegramUiHelper {
+
+	fun applyGrayscaleFilter(iv: ImageView?) {
+		val matrix = ColorMatrix().apply { setSaturation(0F) }
+		iv?.colorFilter = ColorMatrixColorFilter(matrix)
+	}
 
 	fun setupPhoto(
 		app: TelegramApplication,
