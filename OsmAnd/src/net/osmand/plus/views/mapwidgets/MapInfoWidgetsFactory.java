@@ -1094,7 +1094,7 @@ public class MapInfoWidgetsFactory {
 				AndroidUiHelper.updateVisibility(waypointInfoBar, false);
 				AndroidUiHelper.updateVisibility(addressText, true);
 				AndroidUiHelper.updateVisibility(addressTextShadow, shadowRad > 0);
-				boolean update = turnDrawable.setTurnType(type[0]) || showMarker != this.showMarker;
+				boolean updateTurnIcon = turnDrawable.setTurnType(type[0]) || showMarker != this.showMarker;
 				this.showMarker = showMarker;
 				if (showExitInfo) {
 					String exitRef = exitInfo.getRef();
@@ -1107,10 +1107,14 @@ public class MapInfoWidgetsFactory {
 				} else {
 					AndroidUiHelper.updateVisibility(exitRefText, false);
 				}
-				if (update) {
+				if (updateTurnIcon) {
 					if (type[0] != null) {
-						turnIcon.setImageDrawable(turnDrawable);
-						AndroidUiHelper.updateVisibility(turnIcon, true);
+						if (turnDrawable.turnType != null) {
+							AndroidUiHelper.updateVisibility(turnIcon, true);
+							turnIcon.setImageDrawable(turnDrawable);
+						} else {
+							AndroidUiHelper.updateVisibility(turnIcon, false);
+						}
 					} else if (showMarker) {
 						Drawable marker = map.getMyApplication().getUIUtilities().getIcon(R.drawable.ic_action_start_navigation, R.color.color_myloc_distance);
 						turnIcon.setImageDrawable(marker);

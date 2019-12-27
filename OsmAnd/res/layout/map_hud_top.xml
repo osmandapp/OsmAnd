@@ -115,7 +115,7 @@
 		<!-- android:layout_weight="1" to show properly next turn -->
 		<LinearLayout
 			android:layout_width="match_parent"
-			android:layout_height="wrap_content"
+			android:layout_height="@dimen/map_widget_height"
 			android:layout_gravity="center"
 			android:layout_marginLeft="5dp"
 			android:layout_marginRight="5dp"
@@ -143,14 +143,18 @@
 				android:layout_width="@dimen/map_widget_height"
 				android:layout_height="@dimen/map_widget_height"
 				android:scaleType="fitCenter"
-				tools:src="@drawable/map_turn_right_small" />
+				tools:src="@drawable/map_turn_right_small"
+				android:visibility="gone"/>
 
 			<ImageView
 				android:id="@+id/map_shield_icon"
-				android:layout_width="60dp"
-				android:layout_height="match_parent"
+				android:layout_width="wrap_content"
+				android:layout_height="@dimen/map_widget_height"
 				android:scaleType="fitCenter"
-				tools:src="@drawable/h_white_pillow_2_road_shield" />
+				android:visibility="gone"
+				tools:src="@drawable/h_white_pillow_2_road_shield"
+				tools:visibility="visible"
+				/>
 
 			<FrameLayout
 				android:layout_width="wrap_content"

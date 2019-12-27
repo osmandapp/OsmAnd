@@ -834,7 +834,6 @@ public class RoutingHelper {
 		if(n.distanceTo > 0  && n.directionInfo != null && !n.directionInfo.getTurnType().isSkipToSpeak() &&
 				voiceRouter.isDistanceLess(speed, n.distanceTo, voiceRouter.PREPARE_DISTANCE * 0.75f, 0f)) {
 			String nm = n.directionInfo.getStreetName();
-//			String rf = n.directionInfo.getRef();
 			String dn = n.directionInfo.getDestinationName();
 			if(next != null) {
 				next[0] = n.directionInfo.getTurnType();
@@ -863,7 +862,6 @@ public class RoutingHelper {
 
 	private String getRouteSegmentStreetName(RouteSegmentResult rs) {
 		String nm = rs.getObject().getName(settings.MAP_PREFERRED_LOCALE.get(), settings.MAP_TRANSLITERATE_NAMES.get());
-//		String rf = rs.getObject().getRef(settings.MAP_PREFERRED_LOCALE.get(), settings.MAP_TRANSLITERATE_NAMES.get(), rs.isForwardDirection());
 		String dn = rs.getObject().getDestinationName(settings.MAP_PREFERRED_LOCALE.get(),
 				settings.MAP_TRANSLITERATE_NAMES.get(), rs.isForwardDirection());
 		return formatStreetName(nm, null, dn, "»");
