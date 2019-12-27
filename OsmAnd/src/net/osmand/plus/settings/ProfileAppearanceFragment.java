@@ -204,7 +204,9 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 						if (isChanged()) {
 							if (saveNewProfile()) {
 								profile = changedProfile;
-								getActivity().onBackPressed();
+								ProfileAppearanceFragment.this.dismiss();
+								BaseSettingsFragment.showInstance(getMapActivity(), SettingsScreenType.CONFIGURE_PROFILE,
+										ApplicationMode.valueOfStringKey(changedProfile.stringKey, null));
 							}
 						}
 					}
