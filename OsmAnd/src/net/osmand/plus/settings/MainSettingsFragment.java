@@ -16,6 +16,7 @@ import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.profiles.ProfileDataObject;
 import net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment;
 import net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.SelectProfileListener;
@@ -38,7 +39,7 @@ public class MainSettingsFragment extends BaseSettingsFragment {
 	private static final String APP_PROFILES = "app_profiles";
 	private static final String SELECTED_PROFILE = "selected_profile";
 	private static final String CREATE_PROFILE = "create_profile";
-	private static final String IMPORT_PROFILE = "import_profile";
+	//	private static final String IMPORT_PROFILE = "import_profile";
 	private static final String REORDER_PROFILES = "reorder_profiles";
 
 	private List<ApplicationMode> allAppModes;
@@ -136,7 +137,7 @@ public class MainSettingsFragment extends BaseSettingsFragment {
 		Preference createProfile = findPreference(CREATE_PROFILE);
 		createProfile.setIcon(app.getUIUtilities().getIcon(R.drawable.ic_action_plus,
 				isNightMode() ? R.color.active_color_primary_dark : R.color.active_color_primary_light));
-		Preference importProfile = findPreference(IMPORT_PROFILE);
+//		Preference importProfile = findPreference(IMPORT_PROFILE);
 //		importProfile.setIcon(app.getUIUtilities().getIcon(R.drawable.ic_action_import,
 //				isNightMode() ? R.color.active_color_primary_dark : R.color.active_color_primary_light));
 		Preference reorderProfiles = findPreference(REORDER_PROFILES);
@@ -197,5 +198,12 @@ public class MainSettingsFragment extends BaseSettingsFragment {
 			};
 		}
 		return selectProfileListener;
+	}
+
+	public void close() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.getMapRouteInfoMenu().updateMenu();
+		}
 	}
 }
