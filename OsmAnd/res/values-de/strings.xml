@@ -3409,7 +3409,7 @@ Lon %2$s</string>
     <string name="personal_category_name">Persönlich</string>
     <string name="shared_string_downloading_formatted">%s herunterladen</string>
     <string name="rendering_value_thick_name">Fett</string>
-    <string name="desert_render_descr">Für Wüsten und andere dünn besiedelte Gebiete.</string>
+    <string name="desert_render_descr">Für Wüsten und andere dünn besiedelte Gebiete. Zeigt mehr Details in einer Ansichtsskala an.</string>
     <string name="select_navigation_icon">Navigationssymbol wählen</string>
     <string name="select_map_icon">Kartensymbol wählen</string>
     <string name="delete_profiles_descr">Nachdem Sie auf Anwenden geklickt haben, gehen gelöschte Profile vollständig verloren.</string>
