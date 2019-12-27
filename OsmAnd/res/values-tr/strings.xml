@@ -3355,7 +3355,7 @@
     <string name="personal_category_name">Kişisel</string>
     <string name="shared_string_downloading_formatted">%s indiriliyor</string>
     <string name="rendering_value_thick_name">Kalın</string>
-    <string name="desert_render_descr">Çöller ve diğer seyrek nüfuslu alanlar için.</string>
+    <string name="desert_render_descr">Çöller ve diğer seyrek nüfuslu alanlar için. Görüntüleme ölçeğinde daha fazla ayrıntı görüntüler.</string>
     <string name="select_navigation_icon">Navigasyon simgesini seç</string>
     <string name="select_map_icon">Harita simgesini seç</string>
     <string name="delete_profiles_descr">Uygula\'ya dokunduktan sonra, silinen profiller tamamen kaybolacaktır.</string>

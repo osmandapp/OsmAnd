@@ -1964,7 +1964,8 @@
 \nليست هناك حاجة لتحميل خريطة خاصة،الرؤية يتم إنشاؤها من خلال خرائطنا المحلية. 
 \n 
 \nهذه الرؤية يمكن التراجع عنها إما عن طريق تعطيلها هنا، أو تغيير \'نمط الخريطة\' في \'ضبط الخريطة\' حسب الرغبة.</string>
-    <string name="create_poi_link_to_osm_doc"> string name=\"lat_lon_pattern\"&gt;خط العرض: %1$.5f خط الطول: %2$.5f&lt;/string </string>
+    <string name="create_poi_link_to_osm_doc">
+        <u>Online OSM</u> map classification with images.</string>
     <string name="background_service_wait_int_descr">تعيين الحد الأقصى لوقت الانتظار لكل إصلاح موقع في الخلفية.</string>
     <string name="background_service_wait_int">الانتظار الأقصى للإصلاح</string>
     <string name="voice_data_not_supported">إصدار غير معتمد من البيانات الصوتية</string>
@@ -3322,4 +3323,16 @@
     <string name="shared_string_downloading_formatted">تنزيل %s</string>
     <string name="rendering_value_thick_name">سميك</string>
     <string name="desert_render_descr">للصحاري وغيرها من المناطق قليله السكان.</string>
+    <string name="select_navigation_icon">حدد رمز التنقل</string>
+    <string name="select_map_icon">حدد أيقونه الخريطة</string>
+    <string name="delete_profiles_descr">بعد النقر فوق \"تطبيق\" ، سيتم فقد ملفات التعريف المحذوفة بالكامل.</string>
+    <string name="master_profile">الملف الشخصي الرئيسي</string>
+    <string name="select_color">اختر اللون</string>
+    <string name="edit_profiles_descr">لا يمكنك حذف ملفات تعريف أوسماند الافتراضية ، ولكن يمكنك تعطيلها في الشاشة السابقة ، أو نقلها إلى الأسفل.</string>
+    <string name="edit_profiles">تحرير ملفات التعريف</string>
+    <string name="select_nav_profile_dialog_message">يؤثر نوع التنقل على قواعد حسابات المسار.</string>
+    <string name="profile_appearance">مظهر الملف الشخصي</string>
+    <string name="choose_icon_color_name">اختر الايقونة واللون والاسم</string>
+    <string name="reorder_profiles">تحرير قائمة ملفات التعريف</string>
+    <string name="selected_profile">الملف الشخصي المحدد</string>
 </resources>
