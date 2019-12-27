@@ -540,7 +540,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 		if (isChanged()) {
 			AlertDialog.Builder dismissDialog = createWarningDialog(getActivity(),
 					R.string.shared_string_dismiss, R.string.exit_without_saving, R.string.shared_string_cancel);
-			dismissDialog.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
+			dismissDialog.setPositiveButton(R.string.shared_string_exit, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					changedProfile = profile;
