@@ -37,7 +37,7 @@ public class ContourLinesMenu {
 		if (plugin != null && !plugin.isActive() && !plugin.needsInstallation()) {
 			OsmandPlugin.enablePlugin(mapActivity, mapActivity.getMyApplication(), plugin, true);
 		}
-		boolean nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
+		boolean nightMode = isNightMode(mapActivity.getMyApplication());
 		ContextMenuAdapter adapter = new ContextMenuAdapter();
 		adapter.setDefaultLayoutId(R.layout.list_item_icon_and_menu);
 		adapter.setProfileDependent(true);
@@ -328,6 +328,13 @@ public class ContourLinesMenu {
 				}
 			}
 		}
+	}
+	
+	public static boolean isNightMode(OsmandApplication app) {
+		if (app == null) {
+			return false;
+		}
+		return app.getDaynightHelper().isNightModeForMapControls();
 	}
 
 	public static void closeDashboard(MapActivity mapActivity) {

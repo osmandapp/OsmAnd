@@ -27,14 +27,14 @@ public class DialogListItemAdapter extends BaseAdapter {
 	
 	public static DialogListItemAdapter createSingleChoiceAdapter(String[] mData, boolean nightMode, int selected, OsmandApplication app,
 	                                                              @ColorInt int compoundButtonColor, int themeRes, final View.OnClickListener listener) {
-		return new DialogListItemAdapter(mData, selected, null, nightMode, app, 
-				compoundButtonColor, themeRes, listener, false);
+		
+		return new DialogListItemAdapter(mData, selected, null, nightMode, app, compoundButtonColor, themeRes, listener, false);
 	}
 
 	public static DialogListItemAdapter createMultiChoiceAdapter(String[] mData, boolean nightMode, boolean checkedItems[], OsmandApplication app,
 	                                                             @ColorInt int compoundButtonColor, int themeRes, final View.OnClickListener listener) {
-		return new DialogListItemAdapter(mData, INVALID_ID, checkedItems, nightMode, app,
-				compoundButtonColor, themeRes, listener, true);
+		
+		return new DialogListItemAdapter(mData, INVALID_ID, checkedItems, nightMode, app, compoundButtonColor, themeRes, listener, true);
 	}
 
 	private DialogListItemAdapter(String[] mData, int selected, boolean[] checkedItems, boolean nightMode, OsmandApplication app,
