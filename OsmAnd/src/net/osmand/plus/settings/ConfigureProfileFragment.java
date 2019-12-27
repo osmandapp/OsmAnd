@@ -71,6 +71,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 	private static final String CONFIGURE_MAP = "configure_map";
 	private static final String CONFIGURE_SCREEN = "configure_screen";
 	private static final String COPY_FROM_OTHER_PROFILE = "copy_from_other_profile";
+	private static final String RESET_TO_DEFAULT = "reset_to_default";
 	private static final String EXPORT_PROFILE = "export_profile";
 	private static final String DELETE_PROFILE = "delete_profile";
 	private static final String PROFILE_APPEARANCE = "profile_appearance";
@@ -211,6 +212,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 		settingsActions.setIconSpaceReserved(false);
 
 		setupCopyFromOtherProfilePref();
+		setupResetToDefaultPref();
 		setupExportProfilePref();
 		setupDeleteProfilePref();
 	}
@@ -267,6 +269,12 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 	private void setupCopyFromOtherProfilePref() {
 		Preference copyProfilePrefs = findPreference(COPY_FROM_OTHER_PROFILE);
 		copyProfilePrefs.setIcon(app.getUIUtilities().getIcon(R.drawable.ic_action_copy,
+				isNightMode() ? R.color.active_color_primary_dark : R.color.active_color_primary_light));
+	}
+
+	private void setupResetToDefaultPref() {
+		Preference copyProfilePrefs = findPreference(RESET_TO_DEFAULT);
+		copyProfilePrefs.setIcon(app.getUIUtilities().getIcon(R.drawable.ic_action_reset_to_default_dark,
 				isNightMode() ? R.color.active_color_primary_dark : R.color.active_color_primary_light));
 	}
 
@@ -359,8 +367,10 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 	}
 
 	@Override
-	public void onAppModeChanged(ApplicationMode appMode) {
-		settings.copyPreferencesFromProfile(appMode, getSelectedAppMode());
+	public void onAppModeChanged(final ApplicationMode appMode) {
+		long start = System.currentTimeMillis();
+		app.getSettings().copyPreferencesFromProfile(appMode, getSelectedAppMode());
+		LOG.debug("copyPrefs " + (System.currentTimeMillis() - start));
 	}
 
 	@Override
@@ -393,6 +403,8 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 				SelectAppModesBottomSheetDialogFragment.showInstance(fragmentManager,
 						ConfigureProfileFragment.this, false, getSelectedAppMode(), false);
 			}
+		} else if (RESET_TO_DEFAULT.equals(prefId)) {
+			app.getSettings().resetPreferencesForProfile(getSelectedAppMode());
 		} else if (EXPORT_PROFILE.equals(prefId)) {
 			Context ctx = requireContext();
 			final ApplicationMode profile = getSelectedAppMode();

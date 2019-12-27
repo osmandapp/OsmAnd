@@ -470,12 +470,14 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 				.setRoutingProfile(changedProfile.routingProfile)
 				.setColor(changedProfile.color);
 
-		if (ApplicationMode.valueOfStringKey(changedProfile.stringKey, null) == null) {
-			settings.copyPreferencesFromProfile(changedProfile.parent, getSelectedAppMode());
-		}
+		boolean newProfile = ApplicationMode.valueOfStringKey(changedProfile.stringKey, null) == null;
+
 		ApplicationMode mode = ApplicationMode.saveProfile(builder, getMyApplication());
 		if (!ApplicationMode.values(app).contains(mode)) {
 			ApplicationMode.changeProfileAvailability(mode, true, getMyApplication());
+		}
+		if (newProfile) {
+			app.getSettings().copyPreferencesFromProfile(changedProfile.parent, mode);
 		}
 		return true;
 	}

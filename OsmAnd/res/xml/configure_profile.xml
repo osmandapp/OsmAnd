@@ -79,6 +79,13 @@
 		tools:icon="@drawable/ic_action_copy" />
 
 	<Preference
+		android:key="reset_to_default"
+		android:layout="@layout/preference_button"
+		android:persistent="false"
+		android:title="@string/reset_to_default"
+		tools:icon="@drawable/ic_action_reset_to_default_dark" />
+
+	<Preference
 		android:key="export_profile"
 		android:layout="@layout/preference_button"
 		android:persistent="false"
