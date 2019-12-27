@@ -17,7 +17,7 @@
     <string name="master_profile">Master profile</string>
     <string name="select_color">Select color</string>
     <string name="rendering_value_thick_name">Thick</string>
-    <string name="desert_render_descr">For deserts and other sparsely populated areas.</string>
+    <string name="desert_render_descr">For deserts and other sparsely populated areas. Displays more detail on a viewing scale.</string>
     <string name="shared_string_downloading_formatted">Downloading %s</string>
     <string name="edit_profiles_descr">You can’t delete default OsmAnd profiles, but you can disable them in previous screen, or move them to the bottom.</string>
     <string name="edit_profiles">Edit profiles</string>

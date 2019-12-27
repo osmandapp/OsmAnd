@@ -153,7 +153,7 @@
     <string name="poi_medical_supply">Медичне постачання</string>
     <string name="poi_photo">Фотомагазин</string>
     <string name="poi_traffic_calming_bump">Штучна дорожня нерівність</string>
-    <string name="poi_traffic_calming_hump">\"Лежачий поліцейський\"</string>
+    <string name="poi_traffic_calming_hump">Штучна дорожня нерівність «лежачий поліцейський»</string>
     <string name="poi_traffic_calming_chicane">Шикана</string>
     <string name="poi_leather">Магазин шкіри, галантарея</string>
     <string name="poi_music">Музичний магазин</string>
@@ -167,7 +167,7 @@
     <string name="poi_video_games">Комп’ютерні ігри</string>
     <string name="poi_pyrotechnics">Піротехніка</string>
     <string name="poi_weapons">Магазин зброї</string>
-    <string name="poi_traffic_calming_cushion">\"Берлінська подушка\"</string>
+    <string name="poi_traffic_calming_cushion">Штучна дорожня нерівність «берлінська подушка»</string>
     <string name="poi_traffic_calming_rumble_strip">Шумові полоси</string>
     <string name="poi_traffic_calming_table">Підвищений пішохідний перехід</string>
     <string name="poi_traffic_calming_choker">Звуження дороги</string>
@@ -603,7 +603,7 @@
     <string name="poi_honey">Мед</string>
     <string name="poi_religion">Релігія</string>
     <string name="poi_ford_stepping_stones">Рудиментарний міст з каменів</string>
-    <string name="poi_traffic_calming_island">Острівець (перешкода)</string>
+    <string name="poi_traffic_calming_island">Дорожній острівець безпеки</string>
     <string name="poi_aeroway_fuel">Авіаційна заправка</string>
     <string name="poi_waterway_fuel">Заправна станція для човнів</string>
     <string name="poi_aerialway_platter">Тарілочний підйомник</string>
@@ -1200,8 +1200,8 @@
     <string name="poi_lwn_ref">Вузол місцевої мережі пішого туризму</string>
     <string name="poi_route_hiking_iwn_poi">Міжнародний маршрут пішого туризму</string>
     <string name="poi_route_hiking_nwn_poi">Національний маршрут пішого туризму</string>
-    <string name="poi_route_hiking_rwn_poi">Регіональний піший маршрут</string>
-    <string name="poi_route_hiking_lwn_poi">Місцевий піший маршрут</string>
+    <string name="poi_route_hiking_rwn_poi">Регіональний маршрут пішого туризму</string>
+    <string name="poi_route_hiking_lwn_poi">Місцевий маршрут пішого туризму</string>
     <string name="poi_route_hiking_ref_poi">Позначення маршруту пішого туризму</string>
     <string name="poi_opening_hours">Робочі години</string>
     <string name="poi_collection_times">Години виймання (посилок)</string>
@@ -2625,7 +2625,7 @@
     <string name="poi_payment_troika_no">Картки Трійка не приймаються</string>
     <string name="poi_cuisine_curry">Каррі</string>
     <string name="poi_cuisine_lao">Лаоська</string>
-    <string name="poi_drive_in_no">Клієнти, які сидять в автомобілі, не обслуговуються</string>
+    <string name="poi_drive_in_no">Придбати продукти не покидаючи авто на парковці (drive-in): ні</string>
     <string name="poi_vending_chewing_gums">Жувальна гумка</string>
     <string name="poi_bridge_movable_lift">Тип розвідного моста: вертикально-підйомний</string>
     <string name="poi_elevator_yes">З ліфтом</string>
@@ -2645,7 +2645,7 @@
     <string name="poi_telescope_type_optical">Оптичний</string>
     <string name="poi_cuisine_grill">Гриль</string>
     <string name="poi_cuisine_uzbek">Узбецька</string>
-    <string name="poi_drive_through_no">Клієнти, що сидять в автомобілі, не обслуговуються</string>
+    <string name="poi_drive_through_no">Придбати продукти не покидаючи авто у віконці (drive-through): ні</string>
     <string name="poi_vending_coffee">Кава</string>
     <string name="poi_bridge_movable_submersible">Тип розвідного моста: затоплюваний</string>
     <string name="poi_technical_monument">Технічний пам\'ятник</string>
