@@ -301,22 +301,6 @@ public class OsmandSettings {
 		}
 	}
 
-	public void copyPreferencesFromProfile(ApplicationMode modeFrom, ApplicationMode modeTo) {
-		for (OsmandPreference pref : registeredPreferences.values()) {
-			if (pref instanceof CommonPreference) {
-				CommonPreference commonPreference = (CommonPreference) pref;
-				if (!commonPreference.global) {
-					Object copiedValue = commonPreference.getModeValue(modeFrom);
-					commonPreference.setModeValue(modeTo, copiedValue);
-				}
-			}
-		}
-	}
-
-	public boolean resetPreferencesForProfile(ApplicationMode mode) {
-		return settingsAPI.edit(getProfilePreferences(mode)).clear().commit();
-	}
-
 	public boolean setPreference(String key, Object value) {
 		return setPreference(key, value, APPLICATION_MODE.get());
 	}
@@ -419,6 +403,36 @@ public class OsmandSettings {
 			}
 		}
 		return false;
+	}
+
+	public boolean copyPreferencesFromProfile(ApplicationMode modeFrom, ApplicationMode modeTo) {
+		SettingsEditor settingsEditor = settingsAPI.edit(getProfilePreferences(modeTo));
+		for (OsmandPreference pref : registeredPreferences.values()) {
+			if (pref instanceof CommonPreference && !((CommonPreference) pref).global) {
+				CommonPreference profilePref = (CommonPreference) pref;
+				if (!profilePref.isSetForMode(modeFrom)) {
+					settingsEditor.remove(pref.getId());
+				} else {
+					Object copiedValue = profilePref.getModeValue(modeFrom);
+					if (copiedValue instanceof String) {
+						settingsEditor.putString(pref.getId(), (String) copiedValue);
+					} else if (copiedValue instanceof Boolean) {
+						settingsEditor.putBoolean(pref.getId(), (Boolean) copiedValue);
+					} else if (copiedValue instanceof Float) {
+						settingsEditor.putFloat(pref.getId(), (Float) copiedValue);
+					} else if (copiedValue instanceof Integer) {
+						settingsEditor.putInt(pref.getId(), (Integer) copiedValue);
+					} else if (copiedValue instanceof Long) {
+						settingsEditor.putLong(pref.getId(), (Long) copiedValue);
+					}
+				}
+			}
+		}
+		return settingsEditor.commit();
+	}
+
+	public boolean resetPreferencesForProfile(ApplicationMode mode) {
+		return settingsAPI.edit(getProfilePreferences(mode)).clear().commit();
 	}
 
 	public ApplicationMode LAST_ROUTING_APPLICATION_MODE = null;
