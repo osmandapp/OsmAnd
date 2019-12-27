@@ -3744,4 +3744,7 @@
     <string name="poi_bath_open_air_no">Nei</string>
     <string name="poi_tourist_camp">Ferðamannabúðir</string>
     <string name="poi_grave">Gröf</string>
+    <string name="poi_community_gender_female">Kyn samfélags: konur</string>
+    <string name="poi_community_gender_male">Kyn samfélags: karlar</string>
+    <string name="poi_community_gender_mixed">Kyn samfélags: blandað</string>
 </resources>
