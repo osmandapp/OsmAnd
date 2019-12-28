@@ -863,7 +863,7 @@ Pôr do Sol: %2$s</string>
     <string name="osmand_parking_warning">Alerta</string>
     <string name="osmand_parking_warning_text">Uma notificação para pegar seu carro foi adicionada ao seu calendário e pode ser editada ou removida lá.</string>
     <string name="osmand_parking_time_limit_title">Definir limite de tempo</string>
-    <string name="osmand_parking_delete_confirm">Apagar o marcardor da posição de estacionamento?</string>
+    <string name="osmand_parking_delete_confirm">Apagar o marcador da posição de estacionamento\?</string>
     <string name="osmand_parking_delete">Apagar um marcador de estacionamento</string>
     <string name="osmand_parking_choose_type">Selecionar o tipo de estacionamento</string>
     <string name="osmand_parking_no_lim_text">Tempo ilimitado</string>
