@@ -26,7 +26,7 @@ public class RouteDirectionInfo {
 
 	private String destinationName;
 
-	private RouteDataObject routeDataObject;
+	private RouteDataObject routeDataObject = null;
 
 	@Nullable
 	private ExitInfo exitInfo;

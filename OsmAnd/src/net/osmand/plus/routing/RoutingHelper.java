@@ -825,7 +825,8 @@ public class RoutingHelper {
 //		return false;
 //	}
 
-	public synchronized String getCurrentName(TurnType[] next, NextDirectionInfo n) {
+	public synchronized String getCurrentName(TurnType[] next){
+		NextDirectionInfo n = getNextRouteDirectionInfo(new NextDirectionInfo(), true);
 		Location l = lastFixedLocation;
 		float speed = 0;
 		if(l != null && l.hasSpeed()) {
