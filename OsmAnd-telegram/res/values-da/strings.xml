@@ -204,7 +204,7 @@
     <string name="shared_string_telegram">Telegram</string>
     <string name="privacy_policy_use_telegram">Telegram (besked app) bruges til at forbinde og kommunikere med mennesker.</string>
     <string name="privacy_policy_telegram_client">OsmAnd Tracker er en af de klienter, der bruger den åbne Telegram platform. Kontaktpersoner kan bruge enhver anden Telegram klient.</string>
-    <string name="privacy_policy_agree">Ved at klikke på fortsæt accepteres betingelserne i Telegram Privacy Policy og OsmAnd Privacy Policy.</string>
+    <string name="privacy_policy_agree">Ved at klikke på \"Fortsæt\" accepteres betingelserne i Telegram- og OsmAnd privatlivspolitik.</string>
     <string name="shared_string_accept">Accepter</string>
     <string name="telegram_privacy_policy">Telegram privatlivspolitik</string>
     <string name="osmand_privacy_policy">OsmAnd privatlivspolitik</string>
@@ -250,4 +250,13 @@
     <string name="shared_string_apply">Anvend</string>
     <string name="set_time_timeline_descr">Vælg tid at vise</string>
     <string name="start_end_date">Start — slutdato</string>
+    <string name="saved_messages">Gemte beskeder</string>
+    <string name="time_zone_descr">Vælg tidszone, der skal vises i placeringsbeskeder.</string>
+    <string name="time_zone">Tidszone</string>
+    <string name="units_and_formats">Enheder &amp; formater</string>
+    <string name="unit_of_length">Længdeenheder</string>
+    <string name="unit_of_speed_system_descr">Vælg enhed for hastighed.</string>
+    <string name="unit_of_speed_system">Hastighed</string>
+    <string name="buffer_time_descr">Maksimal tid til lagring af punkter i bufferen</string>
+    <string name="buffer_time">Buffer udløbstid</string>
 </resources>

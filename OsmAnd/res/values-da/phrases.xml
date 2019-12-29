@@ -3765,4 +3765,13 @@
     <string name="poi_bath_open_air_yes">Ja</string>
     <string name="poi_bath_open_air_no">Nej</string>
     <string name="poi_grave">Grav</string>
+    <string name="poi_monastery_type_monastics">Klostertype: munke</string>
+    <string name="poi_monastery_type_convent">Klostertype: konvent</string>
+    <string name="poi_monastery_type_canonry">Klostertype: kanonik</string>
+    <string name="poi_monastery_type_hermitage">Klostertype: hermitage</string>
+    <string name="poi_monastery_type_clerks_regular">Klostertype: faste medarbejdere</string>
+    <string name="poi_tourist_camp">Turistlejr</string>
+    <string name="poi_community_gender_female">Fællesskabet køn: kvinde</string>
+    <string name="poi_community_gender_male">Fællesskabets køn: mand</string>
+    <string name="poi_community_gender_mixed">Fællesskabet køn: blandet</string>
 </resources>
