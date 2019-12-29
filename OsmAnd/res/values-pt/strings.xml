@@ -3333,23 +3333,37 @@
     <string name="routing_attr_prefer_unpaved_description">Preferir estradas não pavimentadas.</string>
     <string name="update_all_maps">Atualizar todos os mapas</string>
     <string name="update_all_maps_q">Tem certeza de que deseja atualizar todos os mapas (%1$d)\?</string>
-    <string name="release_3_5">"- Configurações de app e perfil atualizados. Arranjo conveniente de configurações por tipo, com capacidade de personalizar cada perfil 
+    <string name="release_3_5">- Configurações de app e perfil atualizados. Arranjo conveniente de configurações por tipo, com capacidade de personalizar cada perfil 
+\n
 \n 
+\n
 \n - Nova caixa de diálogo de descarregamento de mapas que sugere um mapa para descarregamento durante a navegação 
+\n
 \n 
+\n
 \n - Correções do tema noturno 
+\n
 \n 
-\n -  Poucos problemas de roteamento em todo o mundo corrigidos 
+\n
+\n - Poucos problemas de roteamento em todo o mundo corrigidos 
+\n
 \n 
+\n
 \n - Basemap atualizado com uma rede rodoviária mais detalhada 
+\n
 \n 
+\n
 \n - Áreas inundadas corrigidas em todo o mundo 
+\n
 \n 
+\n
 \n - Roteamento de esqui: perfil de altura e complexidade da rota adicionados aos detalhes da rota 
+\n
 \n 
+\n
 \n - Outras correções de bugs
 \n
-\n"</string>
+\n</string>
     <string name="apply_preference_to_all_profiles">Pode aplicar esta modificação a todos os perfis ou apenas ao atualmente selecionado.</string>
     <string name="shared_preference">Partilhado</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">Preferir estradas não pavimentadas</string>
@@ -3364,7 +3378,7 @@
     <string name="personal_category_name">Pessoal</string>
     <string name="shared_string_downloading_formatted">Descarregando %s</string>
     <string name="rendering_value_thick_name">Grosso</string>
-    <string name="desert_render_descr">Para desertos e outras áreas pouco povoadas.</string>
+    <string name="desert_render_descr">Para desertos e outras áreas pouco povoadas. Exibe mais detalhes numa escala de visualização.</string>
     <string name="select_navigation_icon">Selecione o ícone de navegação</string>
     <string name="select_map_icon">Selecione o ícone do mapa</string>
     <string name="delete_profiles_descr">Depois de tocar em Aplicar, os perfis eliminados serão completamente perdidos.</string>
