@@ -2240,7 +2240,7 @@
 \n • تحميل مسارات GPX إلى الموقع مباشرة بالتطبيق
 \n • إضافة POI ورفعها مباشرة إلى الموقع (أو في وقت لاحق إن كنت غير متصل بالشبكة)</string>
     <string name="nothing_found_descr">عدل طلب البحث أو زد النطاق.</string>
-    <string name="quick_action_showhide_osmbugs_title">عرض/إخفاء الملاحظات</string>
+    <string name="quick_action_showhide_osmbugs_title">تبديل ملاحظات OSM</string>
     <string name="quick_action_osmbugs_show">عرض الملاحظات</string>
     <string name="quick_action_osmbugs_hide">إخفاء الملاحظات</string>
     <string name="sorted_by_distance">مرتبة حسب المسافة</string>
