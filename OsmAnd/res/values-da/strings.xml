@@ -3370,7 +3370,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="quick_action_contour_lines_show">Vis højdekurver</string>
     <string name="quick_action_contour_lines_hide">Skjul højdekurver</string>
     <string name="quick_action_show_hide_contour_lines">Vis/skjul højdekurver</string>
-    <string name="quick_action_hillshade_descr">Tryk på genvejsknappenviser eller skjuler reliefskygger på kortet</string>
+    <string name="quick_action_hillshade_descr">Tryk på genvejsknappen viser eller skjuler reliefskygger på kortet</string>
     <string name="quick_action_hillshade_show">Vis reliefskygger</string>
     <string name="quick_action_hillshade_hide">Skjul reliefskygger</string>
     <string name="quick_action_show_hide_hillshade">Vis/skjul reliefskygger</string>
@@ -3407,4 +3407,22 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="add_new_profile_q">Tilføj ny profil \'%1$s\'\?</string>
     <string name="save_heading">Medtag overskrift</string>
     <string name="save_heading_descr">Gem overskrift til hvert TrackPoint under optagelsen.</string>
+    <string name="distance_and_address">%1$s • %2$s</string>
+    <string name="street_city">%1$s, %2$s</string>
+    <string name="personal_category_name">Personlig</string>
+    <string name="shared_string_downloading_formatted">Henter %s</string>
+    <string name="rendering_value_thick_name">Tyk</string>
+    <string name="desert_render_descr">Til ørkener og andre tyndt befolkede områder. Viser flere detaljer på en visningsskala.</string>
+    <string name="select_navigation_icon">Vælg navigationsikon</string>
+    <string name="select_map_icon">Vælg kortikon</string>
+    <string name="delete_profiles_descr">Tryk på Anvend og slettede profiler går helt tabt.</string>
+    <string name="master_profile">Hovedprofil</string>
+    <string name="select_color">Vælg farve</string>
+    <string name="edit_profiles_descr">Standard-profiler kan ikke slettes, men de kan deaktiveres på forrige skærmbillede eller flyttes til bunden.</string>
+    <string name="edit_profiles">Rediger profiler</string>
+    <string name="select_nav_profile_dialog_message">Navigationstype påvirker reglerne for ruteberegninger.</string>
+    <string name="profile_appearance">Profilens udseende</string>
+    <string name="choose_icon_color_name">Vælg ikon, farve og navn</string>
+    <string name="reorder_profiles">Rediger profilliste</string>
+    <string name="selected_profile">Valgte profil</string>
 </resources>
