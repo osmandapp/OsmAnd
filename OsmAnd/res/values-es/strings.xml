@@ -2990,7 +2990,7 @@
     <string name="routing_attr_avoid_sett_name">Sin empedrado y adoquinado</string>
     <string name="routing_attr_avoid_sett_description">Evitar las calles empedradas y adoquinadas</string>
     <string name="shared_string_degrees">Grados</string>
-    <string name="shared_string_milliradians">Mil angular</string>
+    <string name="shared_string_milliradians">Milésimas angulares</string>
     <string name="angular_measeurement">Unidad angular</string>
     <string name="angular_measeurement_descr">Cambiar el acimut en el que se mide.</string>
     <string name="routing_attr_avoid_tram_name">Sin tranvías</string>
