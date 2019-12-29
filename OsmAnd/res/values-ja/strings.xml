@@ -44,7 +44,7 @@
     <string name="preferred_locale">表示言語</string>
     <string name="shared_string_next">次へ</string>
     <string name="shared_string_previous">前へ</string>
-    <string name="unit_of_length_descr">長さの単位を変更出来ます</string>
+    <string name="unit_of_length_descr">測定する距離を変更します。</string>
     <string name="unit_of_length">長さの単位</string>
     <string name="si_mi_feet">マイル/フィート</string>
     <string name="si_mi_yard">マイル/ヤード</string>
