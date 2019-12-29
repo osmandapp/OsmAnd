@@ -1,5 +1,6 @@
 package net.osmand.plus.routepreparationmenu;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.ColorRes;
@@ -474,8 +475,9 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	private void updateParameters() {
+		Activity activity = getActivity();
 		View mainView = getView();
-		if (mainView != null) {
+		if (activity != null && mainView != null) {
 			LinearLayout itemsContainer = (LinearLayout) mainView.findViewById(useScrollableItemsContainer()
 					? R.id.scrollable_items_container : R.id.non_scrollable_items_container);
 			if (itemsContainer != null) {
@@ -484,7 +486,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 			items.clear();
 			createMenuItems(null);
 			for (BaseBottomSheetItem item : items) {
-				item.inflate(app, itemsContainer, nightMode);
+				item.inflate(activity, itemsContainer, nightMode);
 			}
 			setupHeightAndBackground(mainView);
 		}

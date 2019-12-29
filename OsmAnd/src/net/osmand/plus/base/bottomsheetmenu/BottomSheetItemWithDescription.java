@@ -1,5 +1,6 @@
 package net.osmand.plus.base.bottomsheetmenu;
 
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorRes;
 import android.support.annotation.LayoutRes;
@@ -68,13 +69,13 @@ public class BottomSheetItemWithDescription extends SimpleBottomSheetItem {
 	}
 
 	@Override
-	public void inflate(OsmandApplication app, ViewGroup container, boolean nightMode) {
-		super.inflate(app, container, nightMode);
+	public void inflate(Context context, ViewGroup container, boolean nightMode) {
+		super.inflate(context, container, nightMode);
 		descriptionTv = (TextView) view.findViewById(R.id.description);
 		if (descriptionTv != null) {
 			descriptionTv.setText(description);
 			if (descriptionColorId != INVALID_ID) {
-				descriptionTv.setTextColor(ContextCompat.getColor(app, descriptionColorId));
+				descriptionTv.setTextColor(ContextCompat.getColor(context, descriptionColorId));
 			}
 			if (descriptionMaxLines != INVALID_VALUE) {
 				descriptionTv.setMaxLines(descriptionMaxLines);

@@ -1,5 +1,6 @@
 package net.osmand.plus.base.bottomsheetmenu;
 
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorRes;
 import android.support.annotation.LayoutRes;
@@ -52,8 +53,8 @@ public class SimpleBottomSheetItem extends BaseBottomSheetItem {
 	}
 
 	@Override
-	public void inflate(OsmandApplication app, ViewGroup container, boolean nightMode) {
-		super.inflate(app, container, nightMode);
+	public void inflate(Context context, ViewGroup container, boolean nightMode) {
+		super.inflate(context, container, nightMode);
 		iconView = ((ImageView) view.findViewById(R.id.icon));
 		if (iconView != null) {
 			iconView.setImageDrawable(icon);
@@ -62,7 +63,7 @@ public class SimpleBottomSheetItem extends BaseBottomSheetItem {
 		if (title != null && titleTv != null) {
 			titleTv.setText(title);
 			if (titleColorId != INVALID_ID) {
-				titleTv.setTextColor(ContextCompat.getColor(app, titleColorId));
+				titleTv.setTextColor(ContextCompat.getColor(context, titleColorId));
 			}
 		}
 	}

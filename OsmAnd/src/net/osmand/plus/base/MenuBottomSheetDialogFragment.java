@@ -145,9 +145,9 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 	public abstract void createMenuItems(Bundle savedInstanceState);
 
 	protected void inflateMenuItems() {
-		OsmandApplication app = getMyApplication();
+		Activity activity = requireActivity();
 		for (BaseBottomSheetItem item : items) {
-			item.inflate(app, itemsContainer, nightMode);
+			item.inflate(activity, itemsContainer, nightMode);
 		}
 	}
 

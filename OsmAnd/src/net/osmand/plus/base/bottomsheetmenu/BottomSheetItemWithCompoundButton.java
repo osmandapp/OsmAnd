@@ -1,5 +1,6 @@
 package net.osmand.plus.base.bottomsheetmenu;
 
+import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.ColorRes;
@@ -76,14 +77,14 @@ public class BottomSheetItemWithCompoundButton extends BottomSheetItemWithDescri
 	}
 
 	@Override
-	public void inflate(OsmandApplication app, ViewGroup container, boolean nightMode) {
-		super.inflate(app, container, nightMode);
+	public void inflate(Context context, ViewGroup container, boolean nightMode) {
+		super.inflate(context, container, nightMode);
 		compoundButton = (CompoundButton) view.findViewById(R.id.compound_button);
 		if (compoundButton != null) {
 			compoundButton.setChecked(checked);
 			compoundButton.setOnCheckedChangeListener(onCheckedChangeListener);
 			if (compoundButtonColorId != INVALID_ID) {
-				UiUtilities.setupCompoundButton(nightMode, ContextCompat.getColor(app, compoundButtonColorId), compoundButton);
+				UiUtilities.setupCompoundButton(nightMode, ContextCompat.getColor(context, compoundButtonColorId), compoundButton);
 			} else {
 				CompoundButtonCompat.setButtonTintList(compoundButton, buttonTintList);
 			}
