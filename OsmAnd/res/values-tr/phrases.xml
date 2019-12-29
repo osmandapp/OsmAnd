@@ -2290,4 +2290,24 @@
     <string name="poi_tomb_sarcophagus">Türü: lahit</string>
     <string name="poi_tomb_crypt">Türü: mahzen</string>
     <string name="poi_tomb_pyramid">Türü: piramit</string>
+    <string name="poi_historic_civilization_ancient_roman">Uygarlık: eski roma (MÖ 753 – MS 284)</string>
+    <string name="poi_historic_civilization_nuragic">Uygarlık: nuragic (MÖ 18. yy – MS 2. yy)</string>
+    <string name="poi_historic_civilization_etruscan">Uygarlık: etrüsk (MÖ 12. – 6. yy)</string>
+    <string name="poi_historic_civilization_prehistoric">Uygarlık: tarih öncesi</string>
+    <string name="poi_historic_civilization_ancient_greek">Uygarlık: antik yunan</string>
+    <string name="poi_historic_civilization_roman">Uygarlık: roma</string>
+    <string name="poi_historic_civilization_byzantine">Uygarlık: bizans (MS 285 – MS 1453)</string>
+    <string name="poi_historic_civilization_imperial_chinese">Uygarlık: çin imparatorluğu (MÖ 221 – MS 1911)</string>
+    <string name="poi_historic_civilization_ancient_egyptian">Uygarlık: eski mısır (MÖ 332 yılına kadar)</string>
+    <string name="poi_historic_civilization_celtic">Uygarlık: kelt</string>
+    <string name="poi_historic_civilization_western_roman">Uygarlık: batı roma (MS 285 – MS 476)</string>
+    <string name="poi_historic_civilization_mycenaean">Uygarlık: miken</string>
+    <string name="poi_historic_civilization_dacian">Uygarlık: dacian</string>
+    <string name="poi_historic_civilization_hernici">Uygarlık: hernici</string>
+    <string name="poi_historic_civilization_greek_egyptian">Uygarlık: yunan mısırı (MÖ 332 – MÖ 30)</string>
+    <string name="poi_historic_civilization_roman_and_byzantine_egyptian">Uygarlık: roma ve bizans mısırı</string>
+    <string name="poi_historic_civilization_helladic">Uygarlık: helladik</string>
+    <string name="poi_historic_civilization_cycladic">Uygarlık: kiklad</string>
+    <string name="poi_historic_civilization_minoan">Uygarlık: minos</string>
+    <string name="poi_historic_civilization_tiahuanacota">Uygarlık: tiahuanaco</string>
 </resources>
