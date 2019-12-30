@@ -112,7 +112,7 @@
             android:layout_marginLeft="@dimen/dashFavIconMargin"
             android:background="?attr/dashboard_button"
             android:src="@drawable/ic_action_test_light"
-            android:visibility="invisible"/>
+            android:visibility="gone"/>
 
         <ImageButton
             android:id="@+id/options"
