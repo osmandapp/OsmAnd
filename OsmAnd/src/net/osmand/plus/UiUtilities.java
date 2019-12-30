@@ -345,6 +345,16 @@ public class UiUtilities {
 		setupCompoundButton(nightMode, ContextCompat.getColor(app, activeColor), compoundButton);
 	}
 
+	public static void setupCompoundButton(Context ctx, CompoundButton compoundButton, boolean nightMode, ApplicationMode appMode) {
+		if (compoundButton == null) {
+			return;
+		}
+		int activeColor = appMode != null ?
+				appMode.getIconColorInfo().getColor(nightMode) :
+				nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
+		setupCompoundButton(nightMode, ContextCompat.getColor(ctx, activeColor), compoundButton);
+	}
+
 	public static void setupCompoundButton(boolean nightMode, @ColorInt int activeColor, CompoundButton compoundButton) {
 		if (compoundButton == null) {
 			return;

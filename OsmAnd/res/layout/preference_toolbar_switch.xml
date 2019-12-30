@@ -31,13 +31,15 @@
 			osmand:typeface="@string/font_roboto_medium"
 			tools:text="@string/shared_string_off" />
 
-		<android.support.v7.widget.SwitchCompat
+		<net.osmand.plus.widgets.SwitchCompatEx
 			android:id="@+id/switchWidget"
 			android:layout_width="wrap_content"
 			android:layout_height="match_parent"
 			android:background="@null"
 			android:clickable="false"
 			android:focusable="false"
+			osmand:profileDependent="false"
+			osmand:nightMode="?attr/nightTheme"
 			android:paddingLeft="@dimen/content_padding"
 			android:paddingRight="@dimen/content_padding" />
 

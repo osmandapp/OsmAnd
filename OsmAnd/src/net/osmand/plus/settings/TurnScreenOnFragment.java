@@ -3,7 +3,6 @@ package net.osmand.plus.settings;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.preference.Preference;
-import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -11,9 +10,9 @@ import android.widget.TextView;
 import net.osmand.AndroidUtils;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.R;
-import net.osmand.plus.UiUtilities;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
+import net.osmand.plus.widgets.SwitchCompatEx;
 
 public class TurnScreenOnFragment extends BaseSettingsFragment {
 
@@ -62,9 +61,9 @@ public class TurnScreenOnFragment extends BaseSettingsFragment {
 		View switchContainer = view.findViewById(R.id.toolbar_switch_container);
 		AndroidUtils.setBackground(switchContainer, new ColorDrawable(color));
 
-		SwitchCompat switchView = (SwitchCompat) switchContainer.findViewById(R.id.switchWidget);
+		SwitchCompatEx switchView = (SwitchCompatEx) switchContainer.findViewById(R.id.switchWidget);
 		switchView.setChecked(checked);
-		UiUtilities.setupCompoundButton(isNightMode(), getActiveProfileColor(), switchView);
+		switchView.getAttributes().setProfileDependent(getSelectedAppMode());
 
 		TextView title = switchContainer.findViewById(R.id.switchButtonText);
 		title.setText(checked ? R.string.shared_string_on : R.string.shared_string_off);

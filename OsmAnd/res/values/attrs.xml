@@ -4,6 +4,7 @@
         <attr name="maxVisibleWidth" format="dimension"/>
     </declare-styleable>
     <declare-styleable name="OsmAndTheme">
+        <attr name="nightTheme" format="boolean" />
         <attr name="mapBackground" format="reference"/>
         <attr name="routeParameterTitleColor" format="color"/>
         <attr name="chart_marker_background" format="reference" />
@@ -163,6 +164,14 @@
 		<attr name="typeface" format="string|reference"/>
 		<attr name="textAllCapsCompat" format="reference|boolean" />
 	</declare-styleable>
+
+    <declare-styleable name="CompoundButtonExAttributes">
+        <attr name="profileDependent" format="boolean"/>
+        <attr name="nightMode" format="boolean" />
+    </declare-styleable>
+    <declare-styleable name="SwitchCompatEx" parent="CompoundButtonExAttributes" />
+    <declare-styleable name="RadioButtonEx" parent="CompoundButtonExAttributes" />
+    <declare-styleable name="CheckBoxEx" parent="CompoundButtonExAttributes" />
 	<!--<declare-styleable name="ButtonEx" parent="TextViewEx" />
 	<declare-styleable name="SwitchEx" parent="ButtonEx" />-->
 </resources>
