@@ -15,6 +15,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -201,6 +202,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 				@Override
 				public void onClick(View v) {
 					if (getActivity() != null) {
+						hideKeyboard();
 						if (isChanged()) {
 							if (saveNewProfile()) {
 								profile = changedProfile;
@@ -281,6 +283,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 		if (PROFILE_NAME.equals(preference.getKey())) {
 			profileName = (EditText) holder.findViewById(R.id.profile_name_et);
 			profileName.setImeOptions(EditorInfo.IME_ACTION_DONE);
+			profileName.setRawInputType(InputType.TYPE_CLASS_TEXT);
 			profileName.setText(changedProfile.name);
 			profileName.requestFocus();
 			profileName.addTextChangedListener(new TextWatcher() {

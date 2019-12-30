@@ -21,7 +21,7 @@
 			android:id="@+id/profile_name_et"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:inputType="text|textMultiLine|textCapSentences"
+			android:inputType="textMultiLine"
 			android:scrollHorizontally="false"
 			android:maxLines="4"
 			tools:text="@string/lorem_ipsum" />
