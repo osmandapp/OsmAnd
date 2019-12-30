@@ -9,7 +9,6 @@ import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
-import android.graphics.PixelFormat;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.Rect;
@@ -18,7 +17,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
 
-import net.osmand.data.PersonalFavouritePoint.PointType;
+import net.osmand.data.FavouritePoint.PointType;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 
@@ -149,7 +148,7 @@ public class FavoriteImageDrawable extends Drawable {
 	public static FavoriteImageDrawable getOrCreate(Context a, int color, boolean withShadow, boolean synced, PointType pointType) {
 		int pointTypeId = 0;
 		if (pointType != null)
-			pointTypeId = pointType.ordinal();
+			pointTypeId = pointType.getOrder();
 		color = color | 0xff000000;
 		int hash = (color << 4) + ((withShadow ? 1 : 0) << 2) + ((synced ? 3 : 0) << 2) + pointTypeId;
 		FavoriteImageDrawable drawable = cache.get(hash);
