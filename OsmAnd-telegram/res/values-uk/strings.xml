@@ -253,9 +253,11 @@
     <string name="saved_messages">Збережені повідомлення</string>
     <string name="time_zone_descr">Оберіть часовий пояс щоб відобразити повідомлення у вашому розташуванні.</string>
     <string name="time_zone">Часовий пояс</string>
-    <string name="units_and_formats">Одиниці та формати</string>
+    <string name="units_and_formats">Одиниця вимірювання та формати</string>
     <string name="unit_of_length">Одиниці вимірювання довжини</string>
-    <string name="unit_of_length_descr">Оберіть, на якій відстані вимірюється.</string>
+    <string name="unit_of_length_descr">Змінити одиницю вимірювання відстані.</string>
     <string name="unit_of_speed_system_descr">Визначити одиницю швидкості.</string>
-    <string name="unit_of_speed_system">Одиниця виміру швидкості</string>
+    <string name="unit_of_speed_system">Одиниця вимірювання швидкості</string>
+    <string name="buffer_time_descr">Найбільший час зберігання точок у буфері</string>
+    <string name="buffer_time">Термін дії буфера</string>
 </resources>

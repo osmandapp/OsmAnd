@@ -4,7 +4,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
+import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.ArrayAdapter;
 
@@ -13,6 +15,7 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
+import net.osmand.plus.DialogListItemAdapter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
@@ -359,7 +362,9 @@ public class SRTMPlugin extends OsmandPlugin {
 									 final Runnable callback) {
 		final String propertyDescr = SettingsActivity.getStringPropertyDescription(activity,
 				p.getAttrName(), p.getName());
-		AlertDialog.Builder b = new AlertDialog.Builder(activity);
+		boolean nightMode = isNightMode(activity, app);
+		int themeRes = getThemeRes(activity, app);
+		AlertDialog.Builder b = new AlertDialog.Builder(new ContextThemeWrapper(activity, themeRes));
 		b.setTitle(propertyDescr);
 
 		List<String> possibleValuesList = new ArrayList<>(Arrays.asList(p.getPossibleValues()));
@@ -382,18 +387,22 @@ public class SRTMPlugin extends OsmandPlugin {
 					possibleValues[j]);
 		}
 
-		b.setSingleChoiceItems(possibleValuesString, i, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				if (which == 0) {
-					pref.set("");
-				} else {
-					pref.set(possibleValues[which - 1]);
+		int selectedModeColor = ContextCompat.getColor(app, settings.getApplicationMode().getIconColorInfo().getColor(nightMode));
+		DialogListItemAdapter dialogAdapter = DialogListItemAdapter.createSingleChoiceAdapter(
+				possibleValuesString, nightMode, i, app, selectedModeColor, themeRes, new View.OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						int which = (int) v.getTag();
+						if (which == 0) {
+							pref.set("");
+						} else {
+							pref.set(possibleValues[which - 1]);
+						}
+						refreshMapComplete(activity);
+					}
 				}
-				refreshMapComplete(activity);
-				dialog.dismiss();
-			}
-		});
+		);
 		b.setNegativeButton(R.string.shared_string_dismiss, null);
 		b.setOnDismissListener(new DialogInterface.OnDismissListener() {
 			@Override
@@ -403,7 +412,8 @@ public class SRTMPlugin extends OsmandPlugin {
 				}
 			}
 		});
-		b.show();
+		b.setAdapter(dialogAdapter, null);
+		dialogAdapter.setDialog(b.show());
 	}
 
 	@Override
@@ -419,5 +429,16 @@ public class SRTMPlugin extends OsmandPlugin {
 		activity.getMyApplication().getResourceManager().getRenderer().clearCache();
 		activity.updateMapSettings();
 		activity.getMapView().refreshMap(true);
+	}
+
+	private static boolean isNightMode(Activity activity, OsmandApplication app) {
+		if (activity == null || app == null) {
+			return false;
+		}
+		return activity instanceof MapActivity ? app.getDaynightHelper().isNightModeForMapControls() : !app.getSettings().isLightContent();
+	}
+
+	private static int getThemeRes(Activity activity, OsmandApplication app) {
+		return isNightMode(activity, app) ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 	}
 }

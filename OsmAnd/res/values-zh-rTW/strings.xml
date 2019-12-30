@@ -3065,7 +3065,7 @@
     <string name="profile_alert_need_save_msg">先將變更儲存至設定檔中</string>
     <string name="profile_alert_delete_title">刪除設定檔</string>
     <string name="profile_alert_delete_msg">您確定您想要刪除「%s」設定檔嗎</string>
-    <string name="select_base_profile_dialog_title">選取基本設定檔</string>
+    <string name="select_base_profile_dialog_title">選取要用以開始的設定檔</string>
     <string name="select_base_profile_dialog_message">讓您自訂的設定檔以其中一個預設應用程式設定檔為基礎，這定義了如小工具、速度單位與距離的顯示方式。這些是預設的應用程式設定檔，連同其可以擴展成的自訂設定檔範例：</string>
     <string name="select_nav_profile_dialog_title">選取導航類型</string>
     <string name="base_profile_descr_car">汽車、卡車、摩托車</string>
@@ -3359,7 +3359,7 @@
     <string name="exported_osmand_profile">OsmAnd 設定檔：%1$s</string>
     <string name="overwrite_profile_q">設定檔「%1$s」已存在。覆寫？</string>
     <string name="export_profile_failed">無法匯出設定檔。</string>
-    <string name="profile_import">設定檔匯入：</string>
+    <string name="profile_import">設定檔匯入</string>
     <string name="profile_import_descr">要匯入設定檔，在裝置上選取其檔案並使用 OsmAnd 開啟。</string>
     <string name="file_import_error">%1$s 匯入錯誤：%2$s</string>
     <string name="file_imported_successfully">%1$s 成功匯入。</string>
@@ -3392,5 +3392,17 @@
     <string name="personal_category_name">個人</string>
     <string name="shared_string_downloading_formatted">正在下載 %s</string>
     <string name="rendering_value_thick_name">密集</string>
-    <string name="desert_render_descr">適用於沙漠或其他人煙稀少的地區。</string>
+    <string name="desert_render_descr">適用於沙漠或其他人煙稀少的地區。在檢視的尺寸下顯示更多細節。</string>
+    <string name="select_navigation_icon">選取導航圖示</string>
+    <string name="select_map_icon">選取地圖圖示</string>
+    <string name="delete_profiles_descr">點擊「套用」後，刪除的設定檔將會完全遺失。</string>
+    <string name="master_profile">主控設定檔</string>
+    <string name="select_color">選取顏色</string>
+    <string name="edit_profiles_descr">您無法刪除預設的 OsmAnd 設定檔，但您可以在前一個畫面停用它們，或是將它們移動到底部。</string>
+    <string name="edit_profiles">編輯設定檔</string>
+    <string name="select_nav_profile_dialog_message">導航類型會影響路徑計算的規則。</string>
+    <string name="profile_appearance">設定外觀</string>
+    <string name="choose_icon_color_name">選擇圖示、顏色與名稱</string>
+    <string name="reorder_profiles">編輯設定檔清單</string>
+    <string name="selected_profile">選定的設定檔</string>
 </resources>

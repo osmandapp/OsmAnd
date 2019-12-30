@@ -863,7 +863,7 @@ Pôr do Sol: %2$s</string>
     <string name="osmand_parking_warning">Alerta</string>
     <string name="osmand_parking_warning_text">Uma notificação para pegar seu carro foi adicionada ao seu calendário e pode ser editada ou removida lá.</string>
     <string name="osmand_parking_time_limit_title">Definir limite de tempo</string>
-    <string name="osmand_parking_delete_confirm">Apagar o marcardor da posição de estacionamento?</string>
+    <string name="osmand_parking_delete_confirm">Apagar o marcador da posição de estacionamento\?</string>
     <string name="osmand_parking_delete">Apagar um marcador de estacionamento</string>
     <string name="osmand_parking_choose_type">Selecionar o tipo de estacionamento</string>
     <string name="osmand_parking_no_lim_text">Tempo ilimitado</string>
@@ -3065,7 +3065,7 @@ Pôr do Sol: %2$s</string>
     <string name="profile_alert_need_save_msg">Salvar as alterações no perfil primeiro</string>
     <string name="profile_alert_delete_title">Excluir perfil</string>
     <string name="profile_alert_delete_msg">Tem certeza de que deseja excluir o perfil de \"%s\"</string>
-    <string name="select_base_profile_dialog_title">Selecionar o perfil base</string>
+    <string name="select_base_profile_dialog_title">Selecionar o perfil para começar</string>
     <string name="select_base_profile_dialog_message">Baseie seu perfil personalizado em um dos perfis padrões do aplicativo, os quais definem a configuração básica, como a visibilidade padrão de widgets e unidades de velocidade e distância. Abaixo estão os perfis padrões do aplicativo juntamente com exemplos de perfis personalizados para os quais eles podem ser estendidos:</string>
     <string name="select_nav_profile_dialog_title">Escolher o tipo de navegação</string>
     <string name="base_profile_descr_car">Carro, caminhão, motocicleta</string>
@@ -3358,7 +3358,7 @@ Pôr do Sol: %2$s</string>
     <string name="exported_osmand_profile">Perfil OsmAnd: %1$s</string>
     <string name="overwrite_profile_q">O perfil \'%1$s\' já existe. Substituir\?</string>
     <string name="export_profile_failed">Não foi possível exportar o perfil.</string>
-    <string name="profile_import">Importação de perfil:</string>
+    <string name="profile_import">Importação de perfil</string>
     <string name="profile_import_descr">Para importar um perfil, selecione seu arquivo no dispositivo e abra-o com OsmAnd.</string>
     <string name="file_import_error">Erro de importação %1$s: %2$s</string>
     <string name="file_imported_successfully">%1$s importado com sucesso.</string>
@@ -3392,4 +3392,16 @@ Pôr do Sol: %2$s</string>
     <string name="shared_string_downloading_formatted">Baixando %s</string>
     <string name="rendering_value_thick_name">Grosso</string>
     <string name="desert_render_descr">Para desertos e outras áreas escassamente povoadas.</string>
+    <string name="select_navigation_icon">Selecionar ícone de navegação</string>
+    <string name="select_map_icon">Selecione o ícone do mapa</string>
+    <string name="delete_profiles_descr">Depois de tocar em Aplicar, os perfis excluídos serão perdidos completamente.</string>
+    <string name="master_profile">Perfil principal</string>
+    <string name="select_color">Selecione a cor</string>
+    <string name="edit_profiles_descr">Você não pode excluir os perfis padrão do OsmAnd, mas pode desativá-los na tela anterior ou movê-los para baixo.</string>
+    <string name="edit_profiles">Editar perfis</string>
+    <string name="select_nav_profile_dialog_message">O tipo de navegação afeta as regras para cálculos de rota.</string>
+    <string name="profile_appearance">Aparência do perfil</string>
+    <string name="choose_icon_color_name">Escolha ícone, cor e nome</string>
+    <string name="reorder_profiles">Editar lista de perfis</string>
+    <string name="selected_profile">Perfil selecionado</string>
 </resources>

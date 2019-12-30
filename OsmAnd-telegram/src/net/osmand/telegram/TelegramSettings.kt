@@ -61,6 +61,11 @@ private const val MIN_LOCATION_DISTANCE_INDEX = 0
 private const val MIN_LOCATION_ACCURACY_INDEX = 0
 private const val MIN_LOCATION_SPEED_INDEX = 0
 
+private val BUFFER_TIME = listOf(60 * 60L, 2 * 60 * 60L, 4 * 60 * 60L, 8 * 60 * 60L,
+		12 * 60 * 60L, 24 * 60 * 60L)
+private const val BUFFER_TIME_INDEX = 0
+private const val BUFFER_TIME_KEY = "buffer_time"
+
 private const val SETTINGS_NAME = "osmand_telegram_settings"
 
 private const val SHARE_LOCATION_CHATS_KEY = "share_location_chats"
@@ -140,7 +145,8 @@ class TelegramSettings(private val app: TelegramApplication) {
 
 	var liveNowSortType = LiveNowSortType.SORT_BY_DISTANCE
 
-	val gpsAndLocPrefs = listOf(SendMyLocPref(), StaleLocPref(), LocHistoryPref(), ShareTypePref())
+	val gpsAndLocPrefs = listOf(SendMyLocPref(), StaleLocPref(), LocHistoryPref(), ShareTypePref(),
+			BufferTimePref())
 	val gpxLoggingPrefs = listOf(MinLocationDistance(), MinLocationAccuracy(), MinLocationSpeed())
 	val unitsAndFormatsPrefs = listOf(UnitsOfSpeed(), UnitsOfLength(), UtcOffset())
 
@@ -151,6 +157,8 @@ class TelegramSettings(private val app: TelegramApplication) {
 	var showGpsPoints = false
 
 	var proxyEnabled = false
+
+	var bufferTime = BUFFER_TIME[BUFFER_TIME_INDEX]
 
 	init {
 		updatePrefs()
@@ -631,6 +639,8 @@ class TelegramSettings(private val app: TelegramApplication) {
 
 		edit.putBoolean(PROXY_ENABLED, proxyEnabled)
 
+		edit.putLong(BUFFER_TIME_KEY, bufferTime)
+
 		val jArray = convertShareChatsInfoToJson()
 		if (jArray != null) {
 			edit.putString(SHARE_CHATS_INFO_KEY, jArray.toString())
@@ -713,6 +723,9 @@ class TelegramSettings(private val app: TelegramApplication) {
 		showGpsPoints = prefs.getBoolean(SHOW_GPS_POINTS, false)
 
 		proxyEnabled = prefs.getBoolean(PROXY_ENABLED, false)
+
+		bufferTime = prefs.getLong(BUFFER_TIME_KEY, BUFFER_TIME[BUFFER_TIME_INDEX])
+
 		try {
 			parseProxyPreferences(JSONObject(prefs.getString(PROXY_PREFERENCES_KEY, "")))
 		} catch (e: JSONException) {
@@ -1083,6 +1096,19 @@ class TelegramSettings(private val app: TelegramApplication) {
 		}
 
 		override fun getMenuItems() = formattedUtcOffsets
+	}
+
+	inner class BufferTimePref : ListPreference(R.drawable.ic_action_time_span, R.string.buffer_time,
+			R.string.buffer_time_descr) {
+		override fun getCurrentValue() = OsmandFormatter.getFormattedDuration(app, bufferTime)
+
+		override fun setCurrentValue(index: Int) {
+			bufferTime = BUFFER_TIME[index]
+		}
+
+		override fun getMenuItems(): List<String> {
+			return BUFFER_TIME.map { OsmandFormatter.getFormattedDuration(app, it) }
+		}
 	}
 
 	abstract inner class ListPreference(

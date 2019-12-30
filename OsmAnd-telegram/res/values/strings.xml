@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="buffer_time_descr">Maximum time to store points in the buffer</string>
+    <string name="buffer_time">Buffer expiration time</string>
     <string name="time_zone_descr">Select time zone to show in your location messages.</string>
     <string name="time_zone">Time zone</string>
     <string name="units_and_formats">Units &amp; formats</string>

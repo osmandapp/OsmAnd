@@ -258,4 +258,6 @@
     <string name="unit_of_speed_system">Geschwindigkeitseinheit</string>
     <string name="time_zone_descr">Wählen Sie die Zeitzone aus, die in Ihren Standortmeldungen angezeigt werden soll.</string>
     <string name="unit_of_length_descr">Maß für Entfernungen ändern.</string>
+    <string name="buffer_time_descr">Maximale Zeit zum Speichern von Punkten im Puffer</string>
+    <string name="buffer_time">Verfallszeit des Puffers</string>
 </resources>

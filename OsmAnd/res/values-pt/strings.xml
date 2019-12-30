@@ -418,7 +418,7 @@
     <string name="prefs_plugins">Complementos</string>
     <string name="osm_editing_plugin_description">Este complemento do OsmAnd pode ser usado para enviar alterações para o OpenStreetMap, tais como criar ou alterar POIs, abrir ou comentar erros reportados do OpenStreetMap e contribuir com ficheiros GPX gravados. O OpenStreetMap é um projeto de mapeamento mundial dirigido pela comunidade e de domínio público. Para mais detalhes, consulte https://openstreetmap.org. A participação ativa é apreciada e as contribuições podem ser feitas diretamente do OsmAnd, se introduzir os seus dados de acesso à sua conta de utilizador do OpenStreetMap na aplicação.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Os mapas vetoriais são mostrados mais rapidamente. Podem não funcionar bem em alguns aparelhos.</string>
-    <string name="play_commands_of_currently_selected_voice">Selecione uma voz e teste reproduzindo os avisos</string>
+    <string name="play_commands_of_currently_selected_voice">Selecione uma voz e teste reproduzindo anúncios:</string>
     <string name="debugging_and_development">Desenvolvimento OsmAnd</string>
     <string name="native_rendering">Renderização nativa</string>
     <string name="test_voice_prompts">Testar comandos de voz</string>
@@ -916,11 +916,11 @@
     <string name="index_srtm_ele">Curvas de nível</string>
     <string name="recording_photo_description">Foto %1$s de %2$s</string>
     <string name="av_def_action_picture">Capture uma foto</string>
-    <string name="osmand_srtm_long_description_1000_chars">Este complemento disponibiliza \'Curvas de Nível\' e \'Sombreamento de relevo\', que podem ser aplicadas nos mapas standard do OsmAnd. 
+    <string name="osmand_srtm_long_description_1000_chars">Este complemento disponibiliza \'Curvas de Nível\' e \'Sombras de relevo\', que podem ser aplicadas nos mapas standard do OsmAnd. 
 \nEstas funcionalidades podem ser apreciadas por atletas, caminhantes, e qualquer pessoa interessada na informação de relevo de uma paisagem. 
 \n 
 \nOs dados globais (entre as latitudes 70° norte e 70° sul) são baseados nas medições do SRTM (Shuttle Radar Topography Mission) e do ASTER (Advanced Spaceborn Thermal Emission and Reflection Radiometer), um instrumento de imagens no \'Terra\', o satélite principal do Sistema de Observação da Terra da NASA. O ASTER é um esforço conjunto da NASA, do Ministério da Economia, Comércio e Indústria do Japão e do Sistema Espacial Japonês (J-spacesystems).</string>
-    <string name="srtm_plugin_description">Este complemento disponibiliza \'Curvas de Nível\' e \'Sombreamento de relevo\', que podem ser aplicadas nos mapas standard do OsmAnd. 
+    <string name="srtm_plugin_description">Este complemento disponibiliza \'Curvas de Nível\' e \'Sombras de relevo\', que podem ser aplicadas nos mapas padrão do OsmAnd. 
 \nEstas funcionalidades podem ser apreciadas por atletas, caminhantes, e qualquer pessoa interessada na informação de relevo de uma paisagem. 
 \n 
 \nOs dados globais (entre as latitudes 70° norte e 70° sul) são baseados nas medições do SRTM (Shuttle Radar Topography Mission) e do ASTER (Advanced Spaceborn Thermal Emission and Reflection Radiometer), um instrumento de imagens no \'Terra\', o satélite principal do Sistema de Observação da Terra da NASA. O ASTER é um esforço conjunto da NASA, do Ministério da Economia, Comércio e Indústria do Japão e do Sistema Espacial Japonês (J-spacesystems).</string>
@@ -946,12 +946,12 @@
     <string name="favourites_list_activity">Selecione favorito</string>
     <string name="local_openstreetmap_act_title">Modificaçoes OSM</string>
     <string name="shared_string_more_actions">Outras ações</string>
-    <string name="layer_hillshade">Camada de sombreamentos de relevo</string>
+    <string name="layer_hillshade">Camada de sombras de relevo</string>
     <string name="map_widget_gps_info">Informação de GPS</string>
     <string name="download_using_mobile_internet">Não conectado ao Wi-Fi. Usar a conexão atual com a Internet para descarregar\?</string>
     <string name="monitoring_settings_descr">Configure como gravar suas viagens.</string>
     <string name="clear_destination">Apagar local de destino</string>
-    <string name="download_hillshade_maps">Sombras de Colinas</string>
+    <string name="download_hillshade_maps">Sombras de relevo</string>
     <string name="files_limit">Restando %1$d ficheiros</string>
     <string name="available_downloads_left">Faltam %1$d ficheiros para descarregar</string>
     <string name="install_paid">Versão completa</string>
@@ -977,7 +977,7 @@
     <string name="driving_region_europe_asia">Europa, Ásia, América Latina e similares</string>
     <string name="driving_region_uk">Reino Unido, Índia e similares</string>
     <string name="speak_title">Anunciar…</string>
-    <string name="speak_descr">Configure para anunciar nomes das ruas, avisos de tráfego (paragens obrigatórias, lombas), avisos de radares, limites de velocidade.</string>
+    <string name="speak_descr">Configurar anúncio de nomes de ruas, avisos de trânsito (paragens forçadas, lombadas de velocidade), avisos de radares de trânsito, limites de velocidade.</string>
     <string name="speak_street_names">Nomes das ruas (TTS)</string>
     <string name="speak_speed_limit">Limite de velocidade</string>
     <string name="speak_cameras">Radares de velocidade</string>
@@ -1454,7 +1454,7 @@
     <string name="regions">Regiões</string>
     <string name="region_maps">Mapas de Regiões</string>
     <string name="world_maps">Mapas Mundiais</string>
-    <string name="hillshade_layer_disabled">Camada de sombreamento de relevo desligada</string>
+    <string name="hillshade_layer_disabled">Camada de sombras de relevo desativada</string>
     <string name="srtm_plugin_disabled">Curvas de Nível desligadas</string>
     <string name="favorite_category_add_new">Adicionar novo</string>
     <string name="favorite_category_select">Selecionar categoria</string>
@@ -1930,7 +1930,7 @@
     <string name="quick_action_showhide_osmbugs_descr">Tocar no botão de ação irá mostrar ou esconder as anotações OSM no mapa.</string>
     <string name="sorted_by_distance">Ordenar por distância</string>
     <string name="search_favorites">Favoritos de pesquisa</string>
-    <string name="hillshade_menu_download_descr">Para observar relief sombreamento de relevo no mapa, precisa de descarregar o mapa de sobreposições de sombreamento de relevo desta região.</string>
+    <string name="hillshade_menu_download_descr">Descarregar o mapa \'Hillshade Overlay\' para mostrar as sombras verticais.</string>
     <string name="hillshade_purchase_header">Para ver relief sobreamento de relevo no mapa, precisa de comprar e instalar o complemento \'Contour Lines\'</string>
     <string name="hide_from_zoom_level">Esconder do nível de zoom</string>
     <string name="srtm_menu_download_descr">Descarregue o mapa de \'linha de contorno\' para esta região.</string>
@@ -1969,7 +1969,7 @@
     <string name="no_underlay">Sem subposição</string>
     <string name="subscribe_email_error">Erro</string>
     <string name="subscribe_email_desc">Assine a nossa lista de e-mail sobre descontos da aplicação e ganhe mais 3 descarregamentos de mapas!</string>
-    <string name="depth_contour_descr">Linhas de contorno de profundidade marítima e seamarks.</string>
+    <string name="depth_contour_descr">Curvas de nível de profundidade marítima e seamarks.</string>
     <string name="sea_depth_thanks">Muito obrigado por comprar \'Contornos de profundidade náutica\'</string>
     <string name="index_item_depth_contours_osmand_ext">Contornos de profundidade náutica</string>
     <string name="index_item_depth_points_southern_hemisphere">Pontos de profundidade náutica do hemisfério sul</string>
@@ -2032,13 +2032,13 @@
     <string name="rendering_attr_hideUnderground_name">Objetos subterrâneos</string>
     <string name="auto_split_recording_title">Divisão automática de gravações após separação</string>
     <string name="auto_split_recording_descr">Iniciar novo segmento após uma quebra de 6 min, novo percurso após quebra de 2 h, ou novo ficheiro após uma quebra mais longa se a data se tiver alterada.</string>
-    <string name="rendering_attr_contourDensity_description">Densidade de linhas de contorno</string>
+    <string name="rendering_attr_contourDensity_description">Densidade de curvas de nível</string>
     <string name="rendering_attr_contourDensity_name">Densidade de linhas de contorno</string>
     <string name="rendering_value_high_name">Alto</string>
     <string name="rendering_value_medium_w_name">Médio</string>
     <string name="rendering_value_low_name">Baixo</string>
-    <string name="rendering_attr_contourWidth_description">Largura das linhas de contorno</string>
-    <string name="rendering_attr_contourWidth_name">Largura das linhas de contorno</string>
+    <string name="rendering_attr_contourWidth_description">Largura das curvas de nível</string>
+    <string name="rendering_attr_contourWidth_name">Largura das curvas de nível</string>
     <string name="rendering_attr_hideWaterPolygons_description">Água</string>
     <string name="rendering_attr_hideWaterPolygons_name">Esconder água</string>
     <string name="legacy_search">Pesquisa antiga</string>
@@ -2065,7 +2065,7 @@
     <string name="shared_string_recorded">Gravado</string>
     <string name="shared_string_record">Registo</string>
     <string name="gpx_logging_no_data">Sem dados</string>
-    <string name="rendering_attr_contourColorScheme_description">Esquema de cores das linhas de contorno</string>
+    <string name="rendering_attr_contourColorScheme_description">Esquema de cores das curvas de nível</string>
     <string name="save_track_min_speed">Velocidade mínima para registo</string>
     <string name="save_track_min_speed_descr">Filtro: nenhum registo de pontos abaixo desta velocidade.</string>
     <string name="save_track_min_distance">Deslocamento mínimo para registo</string>
@@ -2077,7 +2077,7 @@
     <string name="christmas_desc_q">Mostrar pontos de interesse (POI) de Natal?</string>
     <string name="rendering_value_light_brown_name">Castanho claro</string>
     <string name="rendering_value_dark_brown_name">Castanho escuro</string>
-    <string name="rendering_attr_contourColorScheme_name">Esquema de cores das linhas de contorno</string>
+    <string name="rendering_attr_contourColorScheme_name">Esquema de cores das curvas de nível</string>
     <string name="rendering_attr_surfaceIntegrity_name">Integridade da superfície da estrada</string>
     <string name="search_hint">Escreva cidade, endereço, nome do ponto de interesse (POI)</string>
     <string name="translit_name_if_miss">Transliterar se %1$s nome está ausente</string>
@@ -2205,7 +2205,7 @@
     <string name="off_road_render_descr">Adequado para uso durante a condução fora de estrada. Adequado para utilização com imagens de satélite verdes como um mapa de fundo. Características principais: redução da espessura das estradas principais, aumento da espessura de trilhos, caminhos, ciclovias e de outras rotas. Baseado no estilo \"Topo\".</string>
     <string name="nautical_render_descr">Estilo Náutico da navegação. Principais características: bóias, faróis, cursos de rios, vias marítimas e marcas, portos, serviços seamark, contornos de profundidade.</string>
     <string name="ski_map_render_descr">Estilo de esqui. Características principais: processa pistas, infraestruturas de esqui e outras características de esqui de uma forma conveniente. Menos objetos secundários do mapa que distraem.</string>
-    <string name="light_rs_render_descr">Estilo simples e contrastante para a navegação do carro. Suave para os olhos no modo noturno. Características principais: linhas de contorno, estradas contrastantes de estilo laranja, menos objetos secundários do mapa para evitar distrações.</string>
+    <string name="light_rs_render_descr">Estilo simples e contrastante para a navegação do carro. É suave para os olhos no modo noturno. Características principais: curvas de nível, estradas contrastantes de estilo laranja, menos objetos secundários do mapa para evitar distrações.</string>
     <string name="topo_render_descr">Estilo de contraste projetado principalmente para caminhadas, trekking e ciclismo na natureza. Boa legibilidade em iluminação externa complexa. Características principais: contrastando estradas e objetos naturais, diferentes tipos de rotas, linhas de contorno com configurações avançadas, mais detalhes em níveis de zoom correspondentes do que o estilo padrão. A opção de integridade superficial permite distinguir a qualidade da superfície rodoviária. Sem modo noturno.</string>
     <string name="mapnik_render_descr">Velho estilo de renderização padrão \'Mapnik\'. Características principais: as cores são semelhantes ao estilo \'Mapnik\'.</string>
     <string name="touring_view_render_descr">Estilo de alto detalhe para turismo. Inclui todas as opções de configuração de estilo padrão e além disso: mostra o máximo de detalhes possível, em particular todas as estradas, caminhos e outras formas de viajar. Distinção visual clara entre todos os tipos de estradas diferentes, reminiscente de muitos mapas de turismo. Esquema de cores de alto contraste para uso ao ar livre, modo diurno e noturno.</string>
@@ -2247,7 +2247,7 @@
     <string name="wikivoyage_offline">Wikivoyage offline</string>
     <string name="unlimited_downloads">Descarregamentos ilimitados</string>
     <string name="wikipedia_offline">A Wikipédia offline</string>
-    <string name="contour_lines_hillshade_maps">Linhas de contorno e mapas de sombreamento de relevo</string>
+    <string name="contour_lines_hillshade_maps">Mapas de curvas de nível e de sombras de relevo</string>
     <string name="unlock_all_features">Desbloquear todas as características de OsmAnd</string>
     <string name="purchase_dialog_title">Escolher plano</string>
     <string name="purchase_dialog_travel_description">Compre uma das opções seguintes para receber a funcionalidade da guia de viagem offline:</string>
@@ -3224,37 +3224,37 @@
     <string name="get_discount_first_part">%1$s para o primeiro %2$s</string>
     <string name="get_discount_first_few_part">%1$s para o primeiro %2$s</string>
     <string name="gpx_join_gaps">Mesclar espaços</string>
-    <string name="configure_profile_info">Todas as configurações abaixo são afetadas apenas pelo perfil selecionado.</string>
-    <string name="utm_format_descr">OsmAnd usa o formato UTM Standard que é similar, mas não idêntico ao formato UTM Nato.</string>
+    <string name="configure_profile_info">Configurações de perfil:</string>
+    <string name="utm_format_descr">OsmAnd usa o UTM Standard que é semelhante, mas não idêntico ao formato UTM Nato.</string>
     <string name="shared_string_example">Exemplo</string>
     <string name="navigate_point_format_utm">UTM Standard</string>
     <string name="navigate_point_format_olc">Open Location Code</string>
-    <string name="coordinates_format_info">O formato selecionado será aplicado a todos os locais da aplicação.</string>
+    <string name="coordinates_format_info">O formato selecionado será aplicado em toda a app.</string>
     <string name="pref_selected_by_default_for_profiles">Esta configuração é selecionada por padrão para os perfis: %s</string>
-    <string name="change_default_settings">Alterar as configurações padrão</string>
-    <string name="discard_changes">Descartar alterações</string>
-    <string name="apply_to_current_profile">Aplicar ao perfil atual %1$s</string>
+    <string name="change_default_settings">Alterar a configuração</string>
+    <string name="discard_changes">Descartar alteração</string>
+    <string name="apply_to_current_profile">Aplicar só ao \"%1$s\"</string>
     <string name="apply_to_all_profiles">Aplicar a todos os perfis</string>
     <string name="start_up_message_pref">Mensagem de inicialização</string>
     <string name="analytics_pref_title">Análises</string>
-    <string name="turn_screen_on_info">Mostrar mapa durante a navegação acima do ecrã de bloqueio.</string>
-    <string name="route_parameters_info">Estas definições afetam a construção da rota. Será aplicado somente ao perfil selecionado: %1$s.</string>
+    <string name="turn_screen_on_info">Mostrar mapa durante a navegação no ecrã de bloqueio.</string>
+    <string name="route_parameters_info">Configurações de roteamento no perfil selecionado \"%1$s\".</string>
     <string name="wake_time">Tempo de despertar</string>
     <string name="units_and_formats">Unidades e formatos</string>
     <string name="appearance">Aspeto</string>
     <string name="map_look_descr">Aparência do mapa</string>
     <string name="map_look">Aspeto do mapa</string>
-    <string name="list_of_installed_plugins">Lista de plugins instalados</string>
+    <string name="list_of_installed_plugins">Plugins instalados</string>
     <string name="configure_navigation">Configurar a navegação</string>
     <string name="general_settings_profile_descr">Tema do app, unidades, região</string>
     <string name="configure_profile">Configurar o perfil</string>
-    <string name="screen_alerts_descr">Os alertas serão mostrados no canto inferior esquerdo do ecrã durante a navegação.</string>
+    <string name="screen_alerts_descr">Os alertas serão mostrados no canto inferior esquerdo durante a navegação.</string>
     <string name="switch_profile">Mudar de perfil</string>
     <string name="language_and_output">Idioma e saída</string>
     <string name="reset_to_default">Redefinir para o padrão</string>
     <string name="manage_profiles_descr">Criar, importar, editar perfis</string>
-    <string name="manage_profiles">Gerir perfis de aplicação…</string>
-    <string name="osmand_settings_descr">Afetar toda a aplicação</string>
+    <string name="manage_profiles">Gerir perfis de app…</string>
+    <string name="osmand_settings_descr">Afeta toda a app</string>
     <string name="osmand_settings">Configurações do OsmAnd</string>
     <string name="copy_from_other_profile">Copiar de outro perfil</string>
     <string name="turn_screen_on">Ativar o ecrã</string>
@@ -3263,13 +3263,13 @@
     <string name="shared_string_other">Outros</string>
     <string name="vehicle_parameters_descr">Peso, altura, velocidade</string>
     <string name="vehicle_parameters">Parâmetros do veículo</string>
-    <string name="voice_announces_info">Os avisos de voz são reproduzidos apenas durante a navegação.</string>
+    <string name="voice_announces_info">Anúncios de voz só acontecem durante a navegação.</string>
     <string name="voice_announces_descr">Instruções e anúncios de navegação</string>
     <string name="voice_announces">Anúncios de voz</string>
     <string name="screen_alerts">Alertas de ecrã</string>
     <string name="route_parameters_descr">Configurar os parâmetros da rota</string>
     <string name="route_parameters">Parâmetros de rota</string>
-    <string name="application_profile_changed">Perfil de aplicação modificado para \"%s\"</string>
+    <string name="application_profile_changed">Perfil de app modificado para \"%s\"</string>
     <string name="logcat_buffer">Buffer de logcat</string>
     <string name="plugins_settings">Configurações de Plugins</string>
     <string name="app_mode_camper">Campista</string>
@@ -3279,13 +3279,13 @@
     <string name="change_data_storage_full_description">Mover ficheiros de dados OsmAnd para o novo destino\?
 \n%1$s &gt; %2$s</string>
     <string name="enter_path_to_folder">Insira o caminho para a pasta</string>
-    <string name="shared_string_select_folder">Selecionar pasta</string>
+    <string name="shared_string_select_folder">Pasta…</string>
     <string name="paste_Osmand_data_folder_path">Colar caminho para a pasta com dados OsmAnd</string>
     <string name="change_osmand_data_folder_question">Alterar a pasta de dados OsmAnd\?</string>
     <string name="move_maps_to_new_destination">Mover para o novo destino</string>
-    <string name="internal_app_storage_description">Armazenamento interno, escondido do utilizador e outros apps, por isso ninguém, exceto OsmAnd, pode ter acesso aos seus dados</string>
+    <string name="internal_app_storage_description">Armazenamento interno, oculto do utilizador e outros apps, exclusivamente acessível ao OsmAnd</string>
     <string name="change_data_storage_folder">Alterar pasta de armazenamento de dados</string>
-    <string name="rendering_attr_piste_type_snow_park_name">Parque de neve</string>
+    <string name="rendering_attr_piste_type_snow_park_name">Parque do terreno</string>
     <string name="rendering_attr_piste_type_sleigh_name">Trenó</string>
     <string name="rendering_attr_piste_type_sled_name">Trenó</string>
     <string name="rendering_attr_piste_type_hike_name">Caminhada</string>
@@ -3323,7 +3323,7 @@
     <string name="store_tracks_in_daily_directories">Gravar caminhos em pastas diárias</string>
     <string name="store_tracks_in_daily_directories_descrp">Gravar caminhos em subpastas por dia de gravação (como 2018-01-01).</string>
     <string name="data_storage_preference_summary">%1$s • %2$s</string>
-    <string name="data_storage_space_description">Livre %1$s GB • Total %2$s GB</string>
+    <string name="data_storage_space_description">%1$s GB livre (de %2$s GB)</string>
     <string name="shared_string_memory_used_tb_desc">%1$s TB usado(s)</string>
     <string name="shared_string_memory_used_gb_desc">%1$s GB usado(s)</string>
     <string name="shared_string_memory_used_mb_desc">%1$s MB usado(s)</string>
@@ -3333,25 +3333,100 @@
     <string name="routing_attr_prefer_unpaved_description">Preferir estradas não pavimentadas.</string>
     <string name="update_all_maps">Atualizar todos os mapas</string>
     <string name="update_all_maps_q">Tem certeza de que deseja atualizar todos os mapas (%1$d)\?</string>
-    <string name="release_3_5">"- Configurações de aplicativo e perfil atualizados. Arranjo conveniente de configurações por tipo, com capacidade de personalizar cada perfil
+    <string name="release_3_5">- Configurações de app e perfil atualizados. Arranjo conveniente de configurações por tipo, com capacidade de personalizar cada perfil 
 \n
-\n - Nova caixa de diálogo de descarregamento de mapas que sugere um mapa para descarregamento durante a navegação
+\n 
 \n
-\n - Correções do tema noturno
+\n - Nova caixa de diálogo de descarregamento de mapas que sugere um mapa para descarregamento durante a navegação 
 \n
-\n -  Poucos problemas de roteamento em todo o mundo corrigidos
+\n 
 \n
-\n - Basemap atualizado com uma rede rodoviária mais detalhada
+\n - Correções do tema noturno 
 \n
-\n - Áreas inundadas corrigidas em todo o mundo
+\n 
 \n
-\n - Roteamento de esqui: perfil de altura e complexidade da rota adicionados aos detalhes da rota
+\n - Poucos problemas de roteamento em todo o mundo corrigidos 
+\n
+\n 
+\n
+\n - Basemap atualizado com uma rede rodoviária mais detalhada 
+\n
+\n 
+\n
+\n - Áreas inundadas corrigidas em todo o mundo 
+\n
+\n 
+\n
+\n - Roteamento de esqui: perfil de altura e complexidade da rota adicionados aos detalhes da rota 
+\n
+\n 
 \n
 \n - Outras correções de bugs
 \n
-\n"</string>
-    <string name="apply_preference_to_all_profiles">Pode aplicar essa modificação a todos os perfis ou apenas aos selecionados.</string>
+\n</string>
+    <string name="apply_preference_to_all_profiles">Pode aplicar esta modificação a todos os perfis ou apenas ao atualmente selecionado.</string>
     <string name="shared_preference">Partilhado</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">Preferir estradas não pavimentadas</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">Preferir estradas não pavimentadas.</string>
+    <string name="default_speed_dialog_msg">Usado para calcular o tempo de chegada previsto durante o roteiro</string>
+    <string name="rendering_value_white_name">Branco</string>
+    <string name="add_new_profile_q">Adicionar novo perfil \'%1$s\'\?</string>
+    <string name="save_heading">Incluir a direção</string>
+    <string name="save_heading_descr">Gravar direção para cada ponto de pista durante a gravação.</string>
+    <string name="distance_and_address">%1$s • %2$s</string>
+    <string name="street_city">%1$s, %2$s</string>
+    <string name="personal_category_name">Pessoal</string>
+    <string name="shared_string_downloading_formatted">Descarregando %s</string>
+    <string name="rendering_value_thick_name">Grosso</string>
+    <string name="desert_render_descr">Para desertos e outras áreas pouco povoadas. Exibe mais detalhes numa escala de visualização.</string>
+    <string name="select_navigation_icon">Selecione o ícone de navegação</string>
+    <string name="select_map_icon">Selecione o ícone do mapa</string>
+    <string name="delete_profiles_descr">Depois de tocar em Aplicar, os perfis eliminados serão completamente perdidos.</string>
+    <string name="master_profile">Perfil principal</string>
+    <string name="select_color">Selecione a cor</string>
+    <string name="edit_profiles_descr">Não pode excluir perfis OsmAnd padrão, mas pode desativá-los no ecrã anterior, ou movê-los para o fundo.</string>
+    <string name="edit_profiles">Editar perfis</string>
+    <string name="select_nav_profile_dialog_message">O tipo de navegação afeta as regras para cálculos de rotas.</string>
+    <string name="profile_appearance">Aspecto do perfil</string>
+    <string name="layer_osm_edits">Edições OSM</string>
+    <string name="quick_action_contour_lines_descr">Uma alternância para mostrar ou esconder curvas de nível no mapa.</string>
+    <string name="quick_action_contour_lines_show">Mostrar curvas de nível</string>
+    <string name="quick_action_contour_lines_hide">Ocultar curvas de nível</string>
+    <string name="quick_action_show_hide_contour_lines">Mostrar/ocultar curvas de nível</string>
+    <string name="quick_action_hillshade_descr">Uma alternância para mostrar ou ocultar sombras de relevo.</string>
+    <string name="quick_action_hillshade_show">Mostrar sombras de relevo</string>
+    <string name="quick_action_hillshade_hide">Ocultar sombras de relevo</string>
+    <string name="quick_action_show_hide_hillshade">Mostrar/ocultar sombras de relevo</string>
+    <string name="tts_initialization_error">Não é possível iniciar o mecanismo de conversão de texto em fala</string>
+    <string name="simulate_your_location_gpx_descr">Simule a sua posição usando um caminho GPX gravado.</string>
+    <string name="export_profile">Perfil de exportação</string>
+    <string name="exported_osmand_profile">Perfil OsmAnd: %1$s</string>
+    <string name="overwrite_profile_q">O perfil \'%1$s\' já existe. Sobregravar\?</string>
+    <string name="export_profile_failed">Não podia exportar o perfil.</string>
+    <string name="profile_import">Importação de perfis</string>
+    <string name="profile_import_descr">Para importar um perfil, selecione o seu ficheiro no aparelho e abra-o com OsmAnd.</string>
+    <string name="file_import_error">%1$s erro de importação: %2$s</string>
+    <string name="file_imported_successfully">%1$s importados com sucesso.</string>
+    <string name="swap_two_places">Trocar %1$s com %2$s</string>
+    <string name="route_start_point">Ponto de partida</string>
+    <string name="track_saved">Caminho gravado</string>
+    <string name="empty_filename">O nome do ficheiro está vazio</string>
+    <string name="shared_string_revert">Reverter</string>
+    <string name="quick_action_directions_from_desc">Um botão para centrar o ecrã no ponto de partida e calcular a rota até ao destino ou abrir um diálogo para selecionar o destino se o marcador de destino não estiver no mapa.</string>
+    <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Mostrar nós da rede de ciclovias</string>
+    <string name="clear_confirmation_msg">Limpar %1$s\?</string>
+    <string name="download_map_dialog">Diálogo de descarregar mapas</string>
+    <string name="dialogs_and_notifications_title">Diálogos e notificações</string>
+    <string name="dialogs_and_notifications_descr">Controlar popups, diálogos e notificações que o OsmAnd mostra durante a utilização.</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_name">Redes de nós</string>
+    <string name="suggested_maps">Mapas sugeridos</string>
+    <string name="suggested_maps_descr">Esses mapas são necessários para usar com o plugin</string>
+    <string name="added_profiles">Perfis adicionados</string>
+    <string name="added_profiles_descr">O plugin adiciona um perfil novo ao OsmAnd</string>
+    <string name="shared_string_turn_off">Desligar</string>
+    <string name="new_plugin_added">Novo plugin adicionado</string>
+    <string name="join_segments">Juntar segmentos</string>
+    <string name="choose_icon_color_name">Escolha o ícone, cor e nome</string>
+    <string name="reorder_profiles">Editar lista de perfis</string>
+    <string name="selected_profile">Perfil selecionado</string>
 </resources>

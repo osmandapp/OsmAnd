@@ -415,7 +415,7 @@
     <string name="agps_info">A-GPS informoj</string>
     <string name="rendering_attr_OSMMapperAssistant_name">OSM-mapiga helpilo</string>
     <string name="shared_string_manage">Administri</string>
-    <string name="agps_data_last_downloaded">Lasta elŝuto de A-GPS datumoj: %1$s</string>
+    <string name="agps_data_last_downloaded">A-GPS-datumoj elŝutitaj je %1$s</string>
     <string name="confirm_usage_speed_cameras">En multaj landoj (Germanujo, Francujo, Italujo kaj aliaj) uzado de sciigoj pri rapid-kontroliloj estas kontraŭleĝa. OsmAnd ne respondumos, se vi rompos leĝon. Bonvolu elekti “jes” nur se vi estas permesata por uzi tiun ĉi eblon.</string>
     <string name="welcome_select_region">Por korekte prezenti trafiksignojn kaj regulojn, bonvolu elekti vian trafikan regionon:</string>
     <string name="welcome_text">OsmAnd ebligas uzi tutmondajn mapojn kaj navigadon sen interreta konekto.</string>
@@ -1193,8 +1193,8 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="left_side_navigation">Maldekstr-flanka trafiko</string>
     <string name="left_side_navigation_descr">Pro landaj kie oni veturas sur maldekstra flanko de vojo.</string>
     <string name="local_index_description">Frapetu ekzistantan elementon por vidi pliajn detalojn, premtenu por malaktivigi aŭ forigi. Datumoj en aparato nuntempe (%1$s malokupiĝa):</string>
-    <string name="unknown_location">Pozicio ankoraŭ ne estas konata</string>
-    <string name="unknown_from_location">Komencpunkto ankoraŭ ne precizigita</string>
+    <string name="unknown_location">Pozicio ankoraŭ ne estas konata.</string>
+    <string name="unknown_from_location">Komencpunkto ankoraŭ ne estas precizigita.</string>
     <string name="modify_transparency">Modifi diafanecon (0 - travidebla, 255 - maldiafana)</string>
     <string name="confirm_interrupt_download">Ĉu ĉesigi elŝutadon\?</string>
     <string name="first_time_msg">Dankon al vi por uzi OsmAnd. Elŝutu eksterretajn regionajn datumojn en la menuo “administri map-dosierojn” por esplori mapojn, serĉi adresojn, interesejojn, publikan transporton kaj pli.</string>
@@ -3061,7 +3061,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="profile_alert_need_save_msg">Unue konservu ŝanĝojn al la profilo</string>
     <string name="profile_alert_delete_title">Forigi profilon</string>
     <string name="profile_alert_delete_msg">Ĉu vi certe volas forigi la profilon “%s”\?</string>
-    <string name="select_base_profile_dialog_title">Elektu bazan profilon</string>
+    <string name="select_base_profile_dialog_title">Elektu komencan profilon</string>
     <string name="select_base_profile_dialog_message">Via propra profilo estos bazita sur iu implicita aplikaĵa profilo, kiu difinos bazajn agordojn kiel videblon de fenestraĵoj, unuojn de rapido kaj distanco. Jen implicitaj profiloj kaj ekzemplaj profiloj por krei:</string>
     <string name="select_nav_profile_dialog_title">Elektu navigadan profilon</string>
     <string name="base_profile_descr_car">Aŭto, kamiono, motorciklo</string>
@@ -3350,7 +3350,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="exported_osmand_profile">Profilo OsmAnd: %1$s</string>
     <string name="overwrite_profile_q">Profilo “%1$s” jam ekzistas. Ĉu anstataŭigi ĝin\?</string>
     <string name="export_profile_failed">Ne povas elporti profilon.</string>
-    <string name="profile_import">Enporti profilon:</string>
+    <string name="profile_import">Enporti profilon</string>
     <string name="profile_import_descr">Por enporti profilon, elektu ĝian dosieron kaj malfermu ĝin per OsmAnd.</string>
     <string name="file_import_error">Eraro dum enporti %1$s: %2$s</string>
     <string name="file_imported_successfully">Sukcese enportita: %1$s.</string>
@@ -3379,4 +3379,22 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="add_new_profile_q">Ĉu aldoni novan profilon “%1$s”\?</string>
     <string name="save_heading">Inkluzivi direkton</string>
     <string name="save_heading_descr">Konservi direkton al ĉiu punkto de kurso dum registri.</string>
+    <string name="distance_and_address">%1$s • %2$s</string>
+    <string name="street_city">%1$s, %2$s</string>
+    <string name="personal_category_name">Personaj</string>
+    <string name="shared_string_downloading_formatted">Elŝutado de %s</string>
+    <string name="rendering_value_thick_name">Dika</string>
+    <string name="desert_render_descr">Por dezertoj kaj aliaj maldense loĝataj lokoj. Montras pli da detaloj je pligrandigo.</string>
+    <string name="select_navigation_icon">Elekti emblemon de navigo</string>
+    <string name="select_map_icon">Elekti emblemon de mapo</string>
+    <string name="delete_profiles_descr">Kiam vi frapetos “apliki”, la forigitaj profiloj porĉiame perdiĝos.</string>
+    <string name="master_profile">Ĉefa profilo</string>
+    <string name="select_color">Elekti koloron</string>
+    <string name="edit_profiles_descr">Vi ne povas forigi la implicitajn profilojn de OsmAnd, sed vi povas malaktivigi ilin (ĉe la antaŭa ekrano) aŭ movi ilin suben.</string>
+    <string name="edit_profiles">Redakti profilojn</string>
+    <string name="select_nav_profile_dialog_message">Profilo de navigo influas al maniero por kalkuli kurson.</string>
+    <string name="profile_appearance">Aspekto de profilo</string>
+    <string name="choose_icon_color_name">Elekti emblemon, koloron kaj nomon</string>
+    <string name="reorder_profiles">Redakti liston de profiloj</string>
+    <string name="selected_profile">Elektita profilo</string>
 </resources>

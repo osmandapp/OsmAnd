@@ -3753,4 +3753,6 @@
     <string name="poi_bath_open_air_no">Nie</string>
     <string name="poi_craft_floorer">Parkieciarz</string>
     <string name="poi_charge">Ładowanie</string>
+    <string name="poi_cash_withdrawal_migros_bank">Bank Migros</string>
+    <string name="poi_monastery_type_monastics">Klasztor typu: monastyr</string>
 </resources>

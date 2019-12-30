@@ -139,7 +139,7 @@
     <string name="no_location_permission">A aplicación non ten permiso para acceder ós datos da ubicación.</string>
     <string name="gps_not_available">Activar «Ubicación» nos axustes do sistema</string>
     <string name="location_service_no_gps_available">Escolle un dos fornecedores da ubicación para compartilla-la túa ubicación.</string>
-    <string name="osmand_service">Modo no segundo plano</string>
+    <string name="osmand_service">Modo en segundo plano</string>
     <string name="osmand_service_descr">O OsmAnd Tracker execútase no modo en segundo plano ca pantalla apagada.</string>
     <string name="shared_string_distance">Distancia</string>
     <string name="share_location">Compartillar ubicación</string>

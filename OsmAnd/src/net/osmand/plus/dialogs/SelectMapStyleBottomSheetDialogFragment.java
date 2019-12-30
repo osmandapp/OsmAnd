@@ -24,6 +24,7 @@ import net.osmand.OsmAndCollator;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
@@ -53,7 +54,6 @@ public class SelectMapStyleBottomSheetDialogFragment extends MenuBottomSheetDial
 	private LinearLayout stylesContainer;
 	private BottomSheetItemTitleWithDescrAndButton descrItem;
 	private View.OnClickListener onStyleClickListener;
-	private ColorStateList rbColorList;
 
 	private TreeMap<String, String> stylesMap;
 	private String selectedStyle;
@@ -77,8 +77,6 @@ public class SelectMapStyleBottomSheetDialogFragment extends MenuBottomSheetDial
 		if(selectedStyle == null) {
 			selectedStyle = RendererRegistry.DEFAULT_RENDER;
 		}
-
-		rbColorList = AndroidUtils.createCheckedColorStateList(context, R.color.icon_color_default_light, getActiveColorId());
 
 		items.add(new TitleItem(getString(R.string.map_widget_renderer)));
 
@@ -215,7 +213,7 @@ public class SelectMapStyleBottomSheetDialogFragment extends MenuBottomSheetDial
 
 			RadioButton rb = (RadioButton) view.findViewById(R.id.compound_button);
 			rb.setChecked(selected);
-			CompoundButtonCompat.setButtonTintList(rb, rbColorList);
+			UiUtilities.setupCompoundButton(getMyApplication(), rb, nightMode, true);
 
 			counter++;
 		}
@@ -224,7 +222,7 @@ public class SelectMapStyleBottomSheetDialogFragment extends MenuBottomSheetDial
 	@ColorInt
 	private int getStyleTitleColor(boolean selected) {
 		int colorId = selected
-				? getActiveColorId()
+				? getMyApplication() != null ? getMyApplication().getSettings().APPLICATION_MODE.get().getIconColorInfo().getColor(nightMode) : getActiveColorId()
 				: nightMode ? R.color.text_color_primary_dark : R.color.text_color_primary_light;
 		return getResolvedColor(colorId);
 	}

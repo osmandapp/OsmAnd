@@ -254,8 +254,10 @@
     <string name="time_zone_descr">Seleccioneu fus horari per mostrar en els vostres missatges d\'ubicació.</string>
     <string name="time_zone">Fus horari</string>
     <string name="units_and_formats">Unitats i formats</string>
-    <string name="unit_of_length_descr">Canvieu com es mesuren les distàncies.</string>
+    <string name="unit_of_length_descr">Canvieu en què es mesuren les distàncies.</string>
     <string name="unit_of_length">Unitats de longitud</string>
     <string name="unit_of_speed_system_descr">Establiu la unitat de velocitat.</string>
     <string name="unit_of_speed_system">Unitat de velocitat</string>
+    <string name="buffer_time_descr">Temps màxim per mantenir punts a la memòria intermèdia</string>
+    <string name="buffer_time">Temps de caducitat de la memòria intermèdia</string>
 </resources>

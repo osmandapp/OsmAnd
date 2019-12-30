@@ -1,5 +1,6 @@
 package net.osmand.plus.base.bottomsheetmenu.simpleitems;
 
+import android.content.Context;
 import android.support.annotation.ColorRes;
 import android.view.ViewGroup;
 
@@ -21,10 +22,10 @@ public class TitleItem extends SimpleBottomSheetItem {
 	}
 
 	@Override
-	public void inflate(OsmandApplication app, ViewGroup container, boolean nightMode) {
+	public void inflate(Context context, ViewGroup container, boolean nightMode) {
 		if (titleColorId == INVALID_ID) {
 			titleColorId = nightMode ? R.color.text_color_primary_dark : INVALID_ID;
 		}
-		super.inflate(app, container, nightMode);
+		super.inflate(context, container, nightMode);
 	}
 }

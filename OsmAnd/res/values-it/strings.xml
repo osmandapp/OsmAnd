@@ -3357,7 +3357,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="quick_action_contour_lines_show">Mostra le linee isoipse</string>
     <string name="quick_action_contour_lines_hide">Nascondi le linee isoipse</string>
     <string name="quick_action_show_hide_contour_lines">Mostra/nascondi le linee isoipse</string>
-    <string name="quick_action_hillshade_descr">Questo pulsante mostra o nasconde nella mappa le ombreggiature dei rilievi</string>
+    <string name="quick_action_hillshade_descr">Un controllo per mostrare o nascondere nella mappa le ombreggiature dei rilievi.</string>
     <string name="quick_action_hillshade_show">Mostra l\'ombreggiatura dei rilievi</string>
     <string name="quick_action_hillshade_hide">Nascondi l\'ombreggiatura dei rilievi</string>
     <string name="quick_action_show_hide_hillshade">Mostra/nascondi l\'ombreggiatura dei rilievi</string>
@@ -3402,4 +3402,6 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="rendering_attr_piste_type_snow_park_name">Parco innevato</string>
     <string name="rendering_attr_piste_type_skitour_name">Sci alpinismo</string>
     <string name="rendering_attr_piste_difficulty_freeride_name">Freeride</string>
+    <string name="rendering_value_thick_name">Spessore</string>
+    <string name="desert_render_descr">Per i deserti e altre zone poco popolate.</string>
 </resources>

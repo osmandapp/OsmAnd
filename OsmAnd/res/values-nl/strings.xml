@@ -249,14 +249,15 @@ Er is nu {2} MB beschikbaar</string>
     <string name="install_more">Installeer meer…</string>
     <string name="level_to_switch_vector_raster_descr">Minimum zoomniveau om vectorkaarten in plaats van (raster)kaartsegmenten te gebruiken.</string>
     <string name="level_to_switch_vector_raster">Min. vector zoomniveau</string>
-    <string name="create_poi_link_to_osm_doc"> string name=\"lat_lon_pattern\"&gt;Lat: %1$.5f Lon: %2$.5f&lt;/string </string>
+    <string name="create_poi_link_to_osm_doc">
+        <u>Online OSM</u> kaart classificatie met afbeeldingen.</string>
     <string name="error_doing_search">Fout bij offline zoeken.</string>
     <string name="search_osm_offline">Zoek adres in de offline kaarten</string>
     <string name="system_locale">Systeem</string>
     <string name="preferred_locale_descr">Kies de taal van het menu (OsmAnd wordt opnieuw gestart)</string>
     <string name="preferred_locale">Taal</string>
-    <string name="unit_of_length_descr">Kies de eenheid van afstand.</string>
-    <string name="unit_of_length">Eenheid van lengte</string>
+    <string name="unit_of_length_descr">Wijzig de eenheid van afstand voor metingen.</string>
+    <string name="unit_of_length">Afstand eenheden</string>
     <string name="si_mi_feet">Mijlen/voeten</string>
     <string name="si_mi_yard">Mijlen/yards</string>
     <string name="si_km_m">Kilometers/meters</string>
@@ -444,7 +445,7 @@ Er is nu {2} MB beschikbaar</string>
     <string name="map_screen_orientation_descr">Scherm-oriëntatie: staand, liggend of apparaatinstelling.</string>
     <string name="opening_hours_not_supported">Openingstijden kunnen niet gewijzigd worden</string>
     <string name="add_new_rule">Nieuwe regel toevoegen</string>
-    <string name="transport_Routes">Routes</string>
+    <string name="transport_Routes">(Bus)Lijnen</string>
     <string name="transport_Stop">Halte</string>
     <string name="transport_stops">Haltes</string>
     <string name="transport_search_after">Aansluitende route</string>
@@ -632,7 +633,7 @@ Er is nu {2} MB beschikbaar</string>
     <string name="offline_navigation_not_available">OsmAnd offline navigatie is tijdelijk niet beschikbaar.</string>
     <string name="left_side_navigation">Linksrijdend verkeer</string>
     <string name="left_side_navigation_descr">Activeer in een land waar men links rijdt.</string>
-    <string name="unknown_from_location">Startlocatie is nog niet bepaald</string>
+    <string name="unknown_from_location">Vertrekpunt is nog niet bepaald.</string>
     <string name="confirm_interrupt_download">Downloaden afbreken?</string>
     <string name="basemap_was_selected_to_download">De basiskaart is nodig voor de goede werking van OsmAnd en is al geselecteerd om te downloaden.</string>
     <string name="map_online_plugin_is_not_installed">Activeer de \'Online Kaarten\' plug-in om andere kaartbronnen te kunnen selecteren</string>
@@ -2271,9 +2272,10 @@ voor Gebied: %1$s x %2$s</string>
     <string name="routing_attr_allow_private_description">Ga ook over privé-terreinen.</string>
     <string name="display_zoom_level">Zoomniveau weergave: %1$s</string>
     <string name="route_is_too_long_v2">Deze route is misschien te lang. Voeg tussenpunten toe als binnen 10 minuten geen route berekend is.</string>
-    <string name="osmand_extended_description_part1">"OsmAnd (OSM, Automated Navigation Directions) is een kaart- en navigatieprogramma dat de gratis, wereldwijde en gedetailleerde OpenStreetMap (OSM) data gebruikt. 
-\n  
-\nGebruikt visuele en gesproken navigatie, toont POI\'s (point of interest), maakt en volgt GPX-tracks, toont hoogtelijnen en hoogte informatie (via plug-in), kiest tussen auto, fiets, wandelen of andere, je kan de OSM-kaart bewerken en nog veel meer."</string>
+    <string name="osmand_extended_description_part1">OsmAnd (OSM, Automated Navigation Directions) is een kaart- en navigatieprogramma dat de gratis, wereldwijde en gedetailleerde OpenStreetMap (OSM) data gebruikt. 
+\n
+\n
+\nGebruikt visuele en gesproken navigatie, toont POI\'s (point of interest), maakt en volgt GPX-tracks, toont hoogtelijnen en hoogte informatie (via plug-in), kiest tussen auto, fiets, wandelen of andere, je kan de OSM-kaart bewerken en nog veel meer.</string>
     <string name="osmand_extended_description_part2">"
  GPS-navigatie
 • Offline (geen datakosten) of online (snellere) routeberekening
@@ -2572,7 +2574,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="contour_lines_hillshade_maps">Kaarten met hoogtelijnen en reliëfschaduw</string>
     <string name="unlock_all_features">Alle mogelijkheden van OsmAnd gebruiken</string>
     <string name="purchase_dialog_title">Kies je aankoop</string>
-    <string name="purchase_dialog_travel_description">Kies een van onderstaande aankopen om de reisgids offline te gebruiken:</string>
+    <string name="purchase_dialog_travel_description">Kies een van onderstaande aankopen om de offline reisgids te kunnen gebruiken:</string>
     <string name="purchase_dialog_subtitle">Kies een passend product</string>
     <string name="shared_string_dont">Niet doen</string>
     <string name="shared_string_do">Doe</string>
@@ -2973,7 +2975,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="profile_alert_need_save_msg">Sla wijzigingen aan het profiel eerst op</string>
     <string name="profile_alert_delete_title">Verwijder profiel</string>
     <string name="profile_alert_delete_msg">Weet je zeker dat je profiel \"%s\" wilt verwijderen</string>
-    <string name="select_base_profile_dialog_title">Selecteer een basisprofiel</string>
+    <string name="select_base_profile_dialog_title">Selecteer een profiel om mee te starten</string>
     <string name="select_nav_profile_dialog_title">Selecteer navigatietype</string>
     <string name="base_profile_descr_car">Auto, vrachtauto, motor</string>
     <string name="base_profile_descr_bicycle">Mountainbike, brommer, paard</string>
@@ -3074,7 +3076,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="exported_osmand_profile">OsmAnd profiel: %1$s</string>
     <string name="overwrite_profile_q">Profiel \'%1$s\' bestaat al. Overschrijven\?</string>
     <string name="export_profile_failed">Profiel kon niet geëxporteerd worden.</string>
-    <string name="profile_import">Profiel importeren:</string>
+    <string name="profile_import">Profiel importeren</string>
     <string name="profile_import_descr">Om een profiel te importeren, selecteer het bestand op het apparaat en open het met OsmAnd.</string>
     <string name="file_import_error">%1$s fout bij het importeren: %2$s</string>
     <string name="file_imported_successfully">%1$s succesvol geïmporteerd.</string>
@@ -3094,7 +3096,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="sett_no_ext_input">Geen</string>
     <string name="turn_screen_on_info">Toon de kaart op het vergrendeld scherm tijdens navigatie.</string>
     <string name="route_parameters_info">Navigatie-instellingen voor het geselecteerde profiel \"%1$s\".</string>
-    <string name="units_and_formats">Eenheden en notaties</string>
+    <string name="units_and_formats">Eenheden &amp; formaten</string>
     <string name="map_look_descr">Kaartweergave</string>
     <string name="general_settings_profile_descr">App thema, eenheden, regio</string>
     <string name="screen_alerts_descr">Meldingen worden linksonder weergegeven tijdens het navigeren.</string>
@@ -3280,4 +3282,20 @@ voor Gebied: %1$s x %2$s</string>
     <string name="save_heading_descr">Sla (richting) naar elk trackpunt op tijdens het opnemen.</string>
     <string name="save_heading">Richting toevoegen</string>
     <string name="personal_category_name">Persoonlijk</string>
+    <string name="distance_and_address">%1$s • %2$s</string>
+    <string name="street_city">%1$s, %2$s</string>
+    <string name="shared_string_downloading_formatted">Downloaden %s</string>
+    <string name="desert_render_descr">Voor woestijnen en andere dunbevolkte gebieden. Toont meer details op schaal.</string>
+    <string name="rendering_value_thick_name">Dik</string>
+    <string name="select_map_icon">Selecteer kaart icoon</string>
+    <string name="delete_profiles_descr">Nadat u Toepassen getikt heeft, worden verwijderde profielen geheel gewist.</string>
+    <string name="master_profile">Hoofdprofiel</string>
+    <string name="select_color">Selecteer kleur</string>
+    <string name="edit_profiles_descr">U kunt geen standaard OsmAnd profielen verwijderen, maar u kunt ze deactiveren in het vorige scherm, of naar onderen verplaatsen.</string>
+    <string name="edit_profiles">Wijzig profielen</string>
+    <string name="select_nav_profile_dialog_message">Navigatie type beïnvloedt de routeberekening regels.</string>
+    <string name="profile_appearance">Profiel aanzicht</string>
+    <string name="choose_icon_color_name">Kies icoon, kleur en naam</string>
+    <string name="reorder_profiles">Wijzig profielen lijst</string>
+    <string name="selected_profile">Geselecteerd profiel</string>
 </resources>

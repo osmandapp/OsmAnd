@@ -92,7 +92,7 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-
+		int activeColorRes = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
 		if (type.equals(TYPE_BASE_APP_PROFILE)) {
 			items.add(new TitleItem(getString(R.string.select_base_profile_dialog_title)));
 			items.add(new LongDescriptionItem(getString(R.string.select_base_profile_dialog_message)));
@@ -103,15 +103,14 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 				final Drawable drawableIcon;
 				if (isSelected) {
 					drawableIcon = getMyApplication().getUIUtilities()
-						.getIcon(profile.getIconRes(), nightMode
-							? R.color.active_color_primary_dark
-							: R.color.active_color_primary_light);
+						.getIcon(profile.getIconRes(), activeColorRes);
 				} else {
 					drawableIcon = getMyApplication().getUIUtilities()
 						.getIcon(profile.getIconRes(), R.color.icon_color_default_light);
 				}
 
 				items.add(new BottomSheetItemWithCompoundButton.Builder()
+					.setCompoundButtonColorId(activeColorRes)
 					.setChecked(isSelected)
 					.setButtonTintList(isSelected
 						? ColorStateList.valueOf(getResolvedColor(getActiveColorId()))
@@ -143,15 +142,14 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 				final Drawable drawableIcon;
 				if (isSelected) {
 					drawableIcon = getMyApplication().getUIUtilities()
-						.getIcon(profile.getIconRes(), nightMode
-							? R.color.active_color_primary_dark
-							: R.color.active_color_primary_light);
+						.getIcon(profile.getIconRes(), activeColorRes);
 				} else {
 					drawableIcon = getMyApplication().getUIUtilities()
 						.getIcon(profile.getIconRes(), R.color.icon_color_default_light);
 				}
 
 				items.add(new BottomSheetItemWithCompoundButton.Builder()
+					.setCompoundButtonColorId(activeColorRes)
 					.setChecked(isSelected)
 					.setButtonTintList(isSelected
 						? ColorStateList.valueOf(getResolvedColor(getActiveColorId()))
@@ -189,6 +187,7 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 				}
 
 				items.add(new BottomSheetItemWithCompoundButton.Builder()
+						.setCompoundButtonColorId(activeColorRes)
 						.setChecked(icon.getResStringId().equals(selectedIconRes))
 					.setButtonTintList(isSelected
 						? ColorStateList.valueOf(getResolvedColor(getActiveColorId()))
