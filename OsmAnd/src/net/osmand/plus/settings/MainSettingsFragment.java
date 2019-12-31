@@ -16,7 +16,6 @@ import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.profiles.ProfileDataObject;
 import net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment;
 import net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.SelectProfileListener;
@@ -200,10 +199,9 @@ public class MainSettingsFragment extends BaseSettingsFragment {
 		return selectProfileListener;
 	}
 
-	public void close() {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			mapActivity.getMapRouteInfoMenu().updateMenu();
-		}
+	@Override
+	public void onPause() {
+		updateRouteInfoMenu();
+		super.onPause();
 	}
 }

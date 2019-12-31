@@ -119,6 +119,12 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 		}
 	}
 
+	@Override
+	public void onPause() {
+		updateRouteInfoMenu();
+		super.onPause();
+	}
+
 	private void updateToolbarSwitch() {
 		View view = getView();
 		if (view == null) {
@@ -135,10 +141,6 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 
 		TextView title = switchContainer.findViewById(R.id.switchButtonText);
 		title.setText(isChecked ? R.string.shared_string_on : R.string.shared_string_off);
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			mapActivity.getMapRouteInfoMenu().updateMenu();
-		}
 	}
 
 	@Override
