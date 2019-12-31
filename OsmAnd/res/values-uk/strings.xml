@@ -24,8 +24,8 @@
     <string name="left_side_navigation_descr">Для країн з лівостороннім рухом.</string>
     <string name="unknown_from_location">Початкове місцезнаходження ще не визначено.</string>
     <string name="unknown_location">Розташування ще не визначено.</string>
-    <string name="modify_transparency">Змінити прозорість (0 - прозорий, 255 - непрозорий)</string>
-    <string name="confirm_interrupt_download">Скасувати завантаження файлу?</string>
+    <string name="modify_transparency">Встановити прозорість (0 – прозорий, 255 – непрозорий)</string>
+    <string name="confirm_interrupt_download">Скасувати завантаження\?</string>
     <string name="first_time_msg">Дякуємо за використання OsmAnd. Завантажуйте регіональні дані для використання в автономному режимі за допомогою пункту меню \'Налаштування\' → \'Управління мапами\' для перегляду мап, пошуку адрес, POI, громадського транспорту тощо.</string>
     <string name="basemap_was_selected_to_download">Базова мапа вибрана для завантаження, оскільки необхідна для коректної роботи додатку.</string>
     <string name="select_index_file_to_download">Нічого не знайдено. Якщо ви не знайшли свій регіон, ви можете створити його самостійно (див. https://osmand.net).</string>
@@ -3435,7 +3435,7 @@
     <string name="suggested_maps">Пропоновані мапи</string>
     <string name="suggested_maps_descr">Ці мапи потрібно використовувати з втулком</string>
     <string name="added_profiles">Додані профілі</string>
-    <string name="added_profiles_descr">Втулка додає новий профіль до OsmAnd</string>
+    <string name="added_profiles_descr">Плагін додає новий профіль до OsmAnd</string>
     <string name="shared_string_turn_off">Вимкнути</string>
     <string name="new_plugin_added">Нова втулка додана</string>
     <string name="join_segments">Приєднати частки</string>
