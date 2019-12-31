@@ -468,7 +468,6 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 														  final boolean showTrackSelection, boolean nightMode) {
 		int textColorPrimary = ContextCompat.getColor(app, nightMode ? R.color.text_color_primary_dark : R.color.text_color_primary_light);
 		int textColorSecondary = ContextCompat.getColor(app, nightMode ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light);
-
 		LinearLayout ll = new LinearLayout(uiCtx);
 		final int dp24 = AndroidUtils.dpToPx(uiCtx, 24f);
 		final int dp8 = AndroidUtils.dpToPx(uiCtx, 8f);
