@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -26,7 +25,6 @@ import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
-import net.osmand.data.PersonalFavouritePoint;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.MapMarkersHelper;
@@ -37,7 +35,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.HorizontalRecyclerBottomSheetItem;
@@ -645,12 +642,13 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 					favoriteViewHolder.icon.setImageDrawable(getContentIcon(R.drawable.ic_action_fav_dark));
 					favoriteViewHolder.description.setVisibility(View.GONE);
 				} else {
-					if (item instanceof PersonalFavouritePoint) {
-						PersonalFavouritePoint point = (PersonalFavouritePoint) item;
+					if (item instanceof FavouritePoint && ((FavouritePoint) item).isPersonal()) {
+						FavouritePoint point = (FavouritePoint) item;
 						boolean light = app.getSettings().isLightContent();
 						int iconColor = light ? R.color.icon_color_default_light : R.color.icon_color_default_dark;
-						favoriteViewHolder.icon.setImageDrawable(app.getUIUtilities().getIcon(point.getType().getIconId(), iconColor));
-						favoriteViewHolder.title.setText(point.getName());
+						favoriteViewHolder.icon.setImageDrawable(app.getUIUtilities().getIcon(
+								FavouritePoint.PointType.valueOfTypeName(point.getName()).getIconId(), iconColor));
+						favoriteViewHolder.title.setText(point.getName(app));
 						favoriteViewHolder.description.setText(point.getDescription());
 					} else if (item instanceof FavouritePoint) {
 						FavouritePoint point = (FavouritePoint) item;

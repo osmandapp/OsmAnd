@@ -295,7 +295,7 @@ public class QuickSearchHelper implements ResourceListener {
 					continue;
 				}
 				SearchResult sr = new SearchResult(phrase);
-				sr.localeName = point.getName();
+				sr.localeName = point.getName(app);
 				sr.object = point;
 				sr.priority = SEARCH_FAVORITE_OBJECT_PRIORITY;
 				sr.objectType = ObjectType.FAVORITE;

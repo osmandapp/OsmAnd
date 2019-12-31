@@ -3,14 +3,18 @@ package net.osmand.data;
 import java.io.Serializable;
 
 import android.content.Context;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
+import android.support.annotation.StringRes;
 
 import net.osmand.GPXUtilities.WptPt;
+import net.osmand.plus.R;
 
 public class FavouritePoint implements Serializable, LocationPoint {
 	private static final long serialVersionUID = 729654300829771466L;
 
 	protected static final String HIDDEN = "hidden";
+	public static final String PERSONAL_CATEGORY = "personal";
 
 	protected String name = "";
 	protected String description;
@@ -20,6 +24,51 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	private double longitude;
 	private int color;
 	private boolean visible = true;
+
+	public enum PointType {
+		HOME("home", R.string.home_button, 1, R.drawable.ic_action_home_dark),
+		WORK("work", R.string.work_button, 2, R.drawable.ic_action_work),
+		PARKING("parking", R.string.map_widget_parking, 3, R.drawable.ic_action_parking_dark);
+
+		private String typeName;
+		@StringRes
+		private int resId;
+		private int order;
+		@DrawableRes
+		private int iconId;
+
+		PointType(@NonNull String typeName, @StringRes int resId, int order, @DrawableRes int iconId) {
+			this.typeName = typeName;
+			this.resId = resId;
+			this.order = order;
+			this.iconId = iconId;
+		}
+
+		public String getName() {
+			return typeName;
+		}
+
+		public int getOrder() {
+			return order;
+		}
+
+		public static PointType valueOfTypeName(@NonNull String typeName) {
+			for (PointType pt : values()) {
+				if (pt.typeName.equals(typeName)) {
+					return pt;
+				}
+			}
+			throw new IllegalArgumentException("Illegal PointType typeName");
+		}
+
+		public int getIconId() {
+			return iconId;
+		}
+
+		public String getHumanString(@NonNull Context ctx) {
+			return ctx.getString(resId);
+		}
+	}
 
 	public FavouritePoint(){
 	}
@@ -50,11 +99,15 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	}
 	
 	public PointDescription getPointDescription() {
-		return new PointDescription(PointDescription.POINT_TYPE_FAVORITE, getName());
+		if (isPersonal()) {
+			return new PointDescription(PointDescription.POINT_TYPE_FAVORITE, getDescription());
+		} else {
+			return new PointDescription(PointDescription.POINT_TYPE_FAVORITE, getName());
+		}
 	}
 
 	public boolean isPersonal() {
-		return false;
+		return PERSONAL_CATEGORY.equals(category);
 	}
 
 	@Override
@@ -101,12 +154,23 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	public String getCategory() {
 		return category;
 	}
+
+	public String getCategory(Context ctx) {
+		if (isPersonal()) {
+			return ctx.getString(R.string.personal_category_name);
+		} else {
+			return category;
+		}
+	}
 	
 	public void setCategory(String category) {
 		this.category = category;
 	}
 
 	public String getName(Context ctx) {
+		if (isPersonal()) {
+			return PointType.valueOfTypeName(getName()).getHumanString(ctx);
+		}
 		return name;
 	}
 	
@@ -189,15 +253,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 			name = "";
 		}
 		FavouritePoint fp;
-		if (pt.getExtensionsToRead().containsKey(PersonalFavouritePoint.PERSONAL)) {
-			try {
-				fp = new PersonalFavouritePoint(ctx, name, pt.lat, pt.lon);
-			} catch (IllegalArgumentException e) {
-				fp = new FavouritePoint(pt.lat, pt.lon, name, categoryName);
-			}
-		} else {
 			fp = new FavouritePoint(pt.lat, pt.lon, name, categoryName);
-		}
 		fp.setDescription(pt.desc);
 		if (pt.comment != null) {
 			fp.setOriginObjectName(pt.comment);

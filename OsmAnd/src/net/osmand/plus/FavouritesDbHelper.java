@@ -3,7 +3,6 @@ package net.osmand.plus;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.annotation.StringRes;
 import android.support.v7.app.AlertDialog;
 
 import net.osmand.GPXUtilities;
@@ -12,7 +11,6 @@ import net.osmand.GPXUtilities.WptPt;
 import net.osmand.PlatformUtil;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
-import net.osmand.data.PersonalFavouritePoint;
 import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
 import net.osmand.plus.MapMarkersHelper.MapMarkersGroup;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
@@ -35,9 +33,9 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-import static net.osmand.data.PersonalFavouritePoint.PointType.HOME;
-import static net.osmand.data.PersonalFavouritePoint.PointType.PARKING;
-import static net.osmand.data.PersonalFavouritePoint.PointType.WORK;
+import static net.osmand.data.FavouritePoint.PointType.HOME;
+import static net.osmand.data.FavouritePoint.PointType.PARKING;
+import static net.osmand.data.FavouritePoint.PointType.WORK;
 
 public class FavouritesDbHelper {
 
@@ -75,6 +73,14 @@ public class FavouritesDbHelper {
 		public int color;
 		public boolean personal = false;
 		public List<FavouritePoint> points = new ArrayList<FavouritePoint>();
+
+		public String getName(Context ctx) {
+			if (personal) {
+				return ctx.getString(R.string.personal_category_name);
+			} else {
+				return name;
+			}
+		}
 	}
 
 	public void loadFavorites() {
@@ -132,9 +138,9 @@ public class FavouritesDbHelper {
 		deleteFavourite(getParkingPoint());
 	}
 
-	private FavouritePoint getPersonalPoint(PersonalFavouritePoint.PointType pointType) {
+	private FavouritePoint getPersonalPoint(FavouritePoint.PointType pointType) {
 		for (FavouritePoint fp : cachedPersonalFavoritePoints) {
-				if (((PersonalFavouritePoint) fp).getType() == pointType) {
+			if ((FavouritePoint.PointType.valueOfTypeName(fp.getName())) == pointType) {
 					return fp;
 				}
 			}
@@ -244,7 +250,7 @@ public class FavouritesDbHelper {
 		if (homePoint != null) {
 			editFavourite(homePoint, latLon.getLatitude(), latLon.getLongitude(), description);
 		} else {
-			homePoint = new PersonalFavouritePoint(context, HOME, latLon.getLatitude(), latLon.getLongitude());
+			homePoint = new FavouritePoint(latLon.getLatitude(), latLon.getLongitude(), HOME.getName(), FavouritePoint.PERSONAL_CATEGORY);
 			homePoint.setDescription(description);
 			addFavourite(homePoint);
 		}
@@ -258,7 +264,7 @@ public class FavouritesDbHelper {
 		if (workPoint != null) {
 			editFavourite(workPoint, latLon.getLatitude(), latLon.getLongitude(), description);
 		} else {
-			workPoint = new PersonalFavouritePoint(context, WORK, latLon.getLatitude(), latLon.getLongitude());
+			workPoint = new FavouritePoint(latLon.getLatitude(), latLon.getLongitude(), WORK.getName(), FavouritePoint.PERSONAL_CATEGORY);
 			workPoint.setDescription(description);
 			addFavourite(workPoint);
 		}
@@ -272,7 +278,7 @@ public class FavouritesDbHelper {
 		if (parkingPoint != null) {
 			editFavourite(parkingPoint, latLon.getLatitude(), latLon.getLongitude(), null);
 		} else {
-			parkingPoint = new PersonalFavouritePoint(context, PARKING, latLon.getLatitude(), latLon.getLongitude());
+			parkingPoint = new FavouritePoint(latLon.getLatitude(), latLon.getLongitude(), PARKING.getName(), FavouritePoint.PERSONAL_CATEGORY);
 			addFavourite(parkingPoint);
 		}
 		lookupAddress(parkingPoint);
@@ -744,8 +750,8 @@ public class FavouritesDbHelper {
 			@Override
 			public int compare(FavouritePoint o1, FavouritePoint o2) {
 				if (o1.isPersonal() && o2.isPersonal()) {
-					int x = ((PersonalFavouritePoint) o1).getType().getOrder();
-					int y = ((PersonalFavouritePoint) o2).getType().getOrder();
+					int x = FavouritePoint.PointType.valueOfTypeName(o1.getName()).getOrder();
+					int y = FavouritePoint.PointType.valueOfTypeName(o1.getName()).getOrder();
 					return Algorithms.compare(x, y);
 				} else if (o1.isPersonal()) {
 					return -1;

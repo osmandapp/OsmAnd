@@ -37,7 +37,6 @@ import android.widget.Toast;
 import net.osmand.AndroidUtils;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
-import net.osmand.data.PersonalFavouritePoint;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
@@ -706,7 +705,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 		selectedChildPos = childPos;
 		LatLon location = new LatLon(point.getLatitude(), point.getLongitude());
 		FavoritesActivity.showOnMap(requireActivity(), this, location.getLatitude(), location.getLongitude(),
-				settings.getLastKnownMapZoom(), new PointDescription(PointDescription.POINT_TYPE_FAVORITE, point.getName()), true, point);
+				settings.getLastKnownMapZoom(), new PointDescription(PointDescription.POINT_TYPE_FAVORITE, point.getName(app)), true, point);
 	}
 
 	@Override
@@ -848,7 +847,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			} else {
 				label.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
 			}
-			label.setText(model.name.length() == 0 ? getString(R.string.shared_string_favorites) : model.name);
+			label.setText(model.name.length() == 0 ? getString(R.string.shared_string_favorites) : model.getName(app));
 
 			if (selectionMode) {
 				final CheckBox ch = (CheckBox) row.findViewById(R.id.toggle_item);
@@ -950,13 +949,13 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			name.setTypeface(Typeface.DEFAULT, visible ? Typeface.NORMAL : Typeface.ITALIC);
 			name.setTextColor(getResources().getColor(visible ? enabledColor : disabledColor));
 			distanceText.setText(distance);
-			if (model instanceof PersonalFavouritePoint) {
+			if (model.isPersonal()) {
 				String distanceWithAddress = String.format(getString(R.string.distance_and_address), distance.trim(), model.getDescription() != null ? model.getDescription() : "");
 				distanceText.setText(distanceWithAddress);
 				icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(getActivity(),
 						visible ? model.getColor() : getResources().getColor(disabledIconColor), false,
-						((PersonalFavouritePoint) model).getType()));
-				name.setText((model.getName()));
+						FavouritePoint.PointType.valueOfTypeName(model.getName())));
+				name.setText((model.getName(app)));
 			} else {
 				icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(getActivity(),
 						visible ? model.getColor() : getResources().getColor(disabledIconColor), false));

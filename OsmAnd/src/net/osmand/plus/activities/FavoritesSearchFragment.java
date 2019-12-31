@@ -457,7 +457,7 @@ public class FavoritesSearchFragment extends DialogFragment {
 					TextView subtitle = (TextView) view.findViewById(R.id.subtitle);
 
 					imageView.setImageDrawable(FavoriteImageDrawable.getOrCreate(activity, point.getColor(), false));
-					title.setText(point.getName());
+					title.setText(point.getName(app));
 
 					int dist = (int) (MapUtils.getDistance(point.getLatitude(), point.getLongitude(),
 							location.getLatitude(), location.getLongitude()));
@@ -468,7 +468,7 @@ public class FavoritesSearchFragment extends DialogFragment {
 					distanceText.setText(distance);
 					distanceText.setTextColor(app.getResources().getColor(R.color.color_distance));
 
-					subtitle.setText(point.getCategory().length() == 0 ? app.getString(R.string.shared_string_favorites) : point.getCategory());
+					subtitle.setText(point.getCategory().length() == 0 ? app.getString(R.string.shared_string_favorites) : point.getCategory(app));
 				}
 			}
 			View divider = view.findViewById(R.id.divider);
