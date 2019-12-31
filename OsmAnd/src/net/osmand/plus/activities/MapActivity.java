@@ -133,7 +133,6 @@ import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchType;
 import net.osmand.plus.settings.BaseSettingsFragment;
 import net.osmand.plus.settings.BaseSettingsFragment.SettingsScreenType;
 import net.osmand.plus.settings.DataStorageFragment;
-import net.osmand.plus.settings.MainSettingsFragment;
 import net.osmand.plus.settings.ProfileAppearanceFragment;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
 import net.osmand.plus.views.AnimateDraggingMapThread;
@@ -683,10 +682,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			if (profileAppearanceFragment.isProfileAppearanceChanged(this)) {
 				return;
 			}
-		}
-		MainSettingsFragment mainSettingsFragment = getMainSettingsFragment();
-		if (mainSettingsFragment != null) {
-			mainSettingsFragment.close();
 		}
 		if (mapContextMenu.isVisible() && mapContextMenu.isClosable()) {
 			if (mapContextMenu.getCurrentMenuState() != MenuState.HEADER_ONLY && !isLandscapeLayout()) {
@@ -2418,10 +2413,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	public QuickActionListFragment getQuickActionListFragment() {
 		return  getFragment(QuickActionListFragment.TAG);
-	}
-
-	public MainSettingsFragment getMainSettingsFragment() {
-		return getFragment(MainSettingsFragment.TAG);
 	}
 
 	<T> T getFragment(String fragmentTag){

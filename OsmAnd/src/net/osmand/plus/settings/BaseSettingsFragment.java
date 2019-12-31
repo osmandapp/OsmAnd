@@ -772,4 +772,11 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		}
 		return false;
 	}
+
+	void updateRouteInfoMenu() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.getMapRouteInfoMenu().updateMenu();
+		}
+	}
 }

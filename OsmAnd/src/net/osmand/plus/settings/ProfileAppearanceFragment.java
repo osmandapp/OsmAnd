@@ -148,11 +148,11 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 			suffix++;
 			newName = oldName.substring(0, i + 1) + divider + suffix;
 		}
-		while (hasThatName(newName));
+		while (hasProfileWithName(newName));
 		return newName;
 	}
 
-	boolean hasThatName(String newName) {
+	private boolean hasProfileWithName(String newName) {
 		for (ApplicationMode m : ApplicationMode.allPossibleValues()) {
 			if (m.toHumanString(app).equals(newName)) {
 				return true;
