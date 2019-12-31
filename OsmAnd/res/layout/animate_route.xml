@@ -10,6 +10,7 @@
 		android:layout_marginLeft="24dp"
 		android:layout_marginTop="16dp"
 		android:layout_marginRight="16dp"
+		android:textColor="?android:attr/textColorSecondary"
 		android:layout_marginBottom="8dp"
 		android:text="@string/animate_routing_gpx" />
 
@@ -25,6 +26,7 @@
 			android:layout_marginLeft="24dp"
 			android:layout_marginTop="5dp"
 			android:layout_marginRight="16dp"
+			android:textColor="?android:attr/textColorSecondary"
 			android:gravity="left"
 			android:text="@string/select_animate_speedup" />
 
@@ -47,6 +49,7 @@
 				android:id="@+id/MinSpeedup"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
+				android:textColor="?android:attr/textColorSecondary"
 				android:layout_weight="0.5"
 				android:gravity="left"
 				android:text="10" />
@@ -55,6 +58,7 @@
 				android:id="@+id/MaxSpeedup"
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
+				android:textColor="?android:attr/textColorSecondary"
 				android:layout_weight="0.5"
 				android:gravity="right"
 				android:text="15" />
