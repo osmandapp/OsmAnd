@@ -1049,4 +1049,17 @@
     <string name="choose_icon_color_name">Vali ikoon, värv ja nimi</string>
     <string name="reorder_profiles">Muuda profiilide loetelu</string>
     <string name="selected_profile">Valitud profiil</string>
+    <string name="right_side_navigation">Parempoolne liiklus</string>
+    <string name="driving_region_automatic">Automaatne</string>
+    <string name="fonts_header">Kaardi kirjastiilid</string>
+    <string name="restore_purchases">Taasta ostud</string>
+    <string name="shared_string_visible">Nähtaval</string>
+    <string name="sea_depth_thanks">Täname, et ostsid \'Meresügavuse kontuurid\'</string>
+    <string name="index_item_depth_contours_osmand_ext">Meresügavuse kontuurid</string>
+    <string name="index_item_depth_points_southern_hemisphere">Lõunapoolkera meresügavuse punktid</string>
+    <string name="index_item_depth_points_northern_hemisphere">Põhjapoolkera meresügavuse punktid</string>
+    <string name="download_depth_countours">Meresügavuse kontuurid</string>
+    <string name="nautical_maps">Merekaardid</string>
+    <string name="depth_contour_descr">Meresügavuse kontuurjooned ja meremärgid.</string>
+    <string name="index_item_world_wikivoyage">Ülemaailmsed Wikivoyage artiklid</string>
 </resources>
