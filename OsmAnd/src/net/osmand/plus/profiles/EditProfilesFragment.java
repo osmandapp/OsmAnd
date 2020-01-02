@@ -65,7 +65,7 @@ public class EditProfilesFragment extends BaseOsmAndFragment {
 		}
 		nightMode = !app.getSettings().isLightContent();
 
-		View mainView =UiUtilities.getInflater(getContext(), nightMode).inflate(R.layout.edit_profiles_list_fragment, container, false);
+		View mainView = UiUtilities.getInflater(getContext(), nightMode).inflate(R.layout.edit_profiles_list_fragment, container, false);
 		ImageButton closeButton = mainView.findViewById(R.id.close_button);
 		closeButton.setImageResource(R.drawable.ic_action_remove_dark);
 		closeButton.setOnClickListener(new View.OnClickListener() {
@@ -355,7 +355,7 @@ public class EditProfilesFragment extends BaseOsmAndFragment {
 		public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, int pos) {
 			if (holder instanceof ProfileViewHolder) {
 				ProfileViewHolder profileViewHolder = (ProfileViewHolder) holder;
-				EditProfileDataObject mode = (EditProfileDataObject) items.get(pos);
+				final EditProfileDataObject mode = (EditProfileDataObject) items.get(pos);
 
 				profileViewHolder.title.setText(mode.getName());
 				profileViewHolder.description.setText(mode.getDescription());
@@ -373,17 +373,15 @@ public class EditProfilesFragment extends BaseOsmAndFragment {
 				Drawable drawable = UiUtilities.getColoredSelectableDrawable(app, colorNoAlpha, 0.3f);
 				AndroidUtils.setBackground(profileViewHolder.itemsContainer, drawable);
 
-				if (mode.isCustomProfile()) {
-					profileViewHolder.actionIcon.setOnClickListener(new View.OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							int pos = holder.getAdapterPosition();
-							if (pos != RecyclerView.NO_POSITION) {
-								listener.onButtonClicked(pos);
-							}
+				profileViewHolder.actionIcon.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						int pos = holder.getAdapterPosition();
+						if (mode.isCustomProfile() && pos != RecyclerView.NO_POSITION) {
+							listener.onButtonClicked(pos);
 						}
-					});
-				}
+					}
+				});
 				profileViewHolder.moveIcon.setVisibility(mode.isDeleted() ? View.GONE : View.VISIBLE);
 				if (!mode.isDeleted()) {
 					int removeIconColor = mode.isCustomProfile() ? R.color.color_osm_edit_delete : R.color.icon_color_default_light;

@@ -71,7 +71,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 	private static final String SETTINGS_ACTIONS = "settings_actions";
 	private static final String CONFIGURE_MAP = "configure_map";
 	private static final String CONFIGURE_SCREEN = "configure_screen";
-	private static final String COPY_FROM_OTHER_PROFILE = "copy_from_other_profile";
+	private static final String COPY_PROFILE_SETTINGS = "copy_profile_settings";
 	private static final String RESET_TO_DEFAULT = "reset_to_default";
 	private static final String EXPORT_PROFILE = "export_profile";
 	private static final String DELETE_PROFILE = "delete_profile";
@@ -219,7 +219,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 		PreferenceCategory settingsActions = (PreferenceCategory) findPreference(SETTINGS_ACTIONS);
 		settingsActions.setIconSpaceReserved(false);
 
-		setupCopyFromOtherProfilePref();
+		setupCopyProfileSettingsPref();
 		setupResetToDefaultPref();
 		setupExportProfilePref();
 		setupDeleteProfilePref();
@@ -274,8 +274,8 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 		}
 	}
 
-	private void setupCopyFromOtherProfilePref() {
-		Preference copyProfilePrefs = findPreference(COPY_FROM_OTHER_PROFILE);
+	private void setupCopyProfileSettingsPref() {
+		Preference copyProfilePrefs = findPreference(COPY_PROFILE_SETTINGS);
 		copyProfilePrefs.setIcon(app.getUIUtilities().getIcon(R.drawable.ic_action_copy,
 				isNightMode() ? R.color.active_color_primary_dark : R.color.active_color_primary_light));
 	}
@@ -402,11 +402,10 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 					LOG.error(e);
 				}
 			}
-		} else if (COPY_FROM_OTHER_PROFILE.equals(prefId)) {
+		} else if (COPY_PROFILE_SETTINGS.equals(prefId)) {
 			FragmentManager fragmentManager = getFragmentManager();
 			if (fragmentManager != null) {
-				SelectCopyAppModeBottomSheet.showInstance(fragmentManager,
-						ConfigureProfileFragment.this, false, getSelectedAppMode());
+				SelectCopyAppModeBottomSheet.showInstance(fragmentManager, this, false, getSelectedAppMode());
 			}
 		} else if (RESET_TO_DEFAULT.equals(prefId)) {
 			FragmentManager fragmentManager = getFragmentManager();

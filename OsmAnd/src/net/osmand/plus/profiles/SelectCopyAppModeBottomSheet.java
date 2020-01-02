@@ -34,16 +34,16 @@ public class SelectCopyAppModeBottomSheet extends AppModesBottomSheetDialogFragm
 		Bundle args = getArguments();
 		if (args != null && args.containsKey(CURRENT_APP_MODE_KEY)) {
 			currentAppMode = ApplicationMode.valueOfStringKey(args.getString(CURRENT_APP_MODE_KEY), null);
-		}
-		if (savedInstanceState != null) {
-			selectedAppMode = ApplicationMode.valueOfStringKey(savedInstanceState.getString(SELECTED_APP_MODE_KEY), null);
-			currentAppMode = ApplicationMode.valueOfStringKey(savedInstanceState.getString(CURRENT_APP_MODE_KEY), null);
-		}
-		OsmandApplication app = requiredMyApplication();
-		if (currentAppMode == null) {
-			currentAppMode = app.getSettings().getApplicationMode();
+		} else {
+			OsmandApplication app = requiredMyApplication();
+			if (currentAppMode == null) {
+				currentAppMode = app.getSettings().getApplicationMode();
+			}
 		}
 		super.onCreate(savedInstanceState);
+		if (savedInstanceState != null) {
+			selectedAppMode = ApplicationMode.valueOfStringKey(savedInstanceState.getString(SELECTED_APP_MODE_KEY), null);
+		}
 	}
 
 	public ApplicationMode getSelectedAppMode() {
@@ -107,7 +107,7 @@ public class SelectCopyAppModeBottomSheet extends AppModesBottomSheetDialogFragm
 	protected void onRightBottomButtonClick() {
 		OsmandApplication app = getMyApplication();
 		if (app != null && selectedAppMode != null) {
-			getMyApplication().getSettings().copyPreferencesFromProfile(selectedAppMode, currentAppMode);
+			app.getSettings().copyPreferencesFromProfile(selectedAppMode, currentAppMode);
 		}
 		dismiss();
 	}

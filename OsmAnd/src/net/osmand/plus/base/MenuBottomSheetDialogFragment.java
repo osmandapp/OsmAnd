@@ -83,7 +83,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 		inflateMenuItems();
 
 		dismissButton = mainView.findViewById(R.id.dismiss_button);
-		UiUtilities.setupDialogButton(nightMode, dismissButton, getDismissByttonType(), getDismissButtonTextId());
+		UiUtilities.setupDialogButton(nightMode, dismissButton, getDismissButtonType(), getDismissButtonTextId());
 		dismissButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -98,7 +98,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 			if (rightBottomButtonTextId != DEFAULT_VALUE) {
 				mainView.findViewById(R.id.buttons_divider).setVisibility(View.VISIBLE);
 				rightButton = mainView.findViewById(R.id.right_bottom_button);
-				UiUtilities.setupDialogButton(nightMode, rightButton, getRightBottomByttonType(), rightBottomButtonTextId);
+				UiUtilities.setupDialogButton(nightMode, rightButton, getRightBottomButtonType(), rightBottomButtonTextId);
 				rightButton.setVisibility(View.VISIBLE);
 				rightButton.setOnClickListener(new View.OnClickListener() {
 					@Override
@@ -249,7 +249,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 		dismissButtonStringRes = stringRes;
 	}
 
-	protected DialogButtonType getDismissByttonType() {
+	protected DialogButtonType getDismissButtonType() {
 		return DialogButtonType.SECONDARY;
 	}
 
@@ -262,7 +262,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 		return DEFAULT_VALUE;
 	}
 
-	protected DialogButtonType getRightBottomByttonType() {
+	protected DialogButtonType getRightBottomButtonType() {
 		return DialogButtonType.PRIMARY;
 	}
 

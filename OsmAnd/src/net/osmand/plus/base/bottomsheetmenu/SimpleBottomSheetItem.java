@@ -10,11 +10,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import net.osmand.plus.OsmandApplication;
+import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
 
 public class SimpleBottomSheetItem extends BaseBottomSheetItem {
 
+	private Drawable background;
 	private Drawable icon;
 	protected String title;
 	@ColorRes
@@ -30,10 +31,12 @@ public class SimpleBottomSheetItem extends BaseBottomSheetItem {
 								 View.OnClickListener onClickListener,
 								 int position,
 								 Drawable icon,
+								 Drawable background,
 								 String title,
 								 @ColorRes int titleColorId) {
 		super(customView, layoutId, tag, disabled, onClickListener, position);
 		this.icon = icon;
+		this.background = background;
 		this.title = title;
 		this.titleColorId = titleColorId;
 	}
@@ -66,17 +69,26 @@ public class SimpleBottomSheetItem extends BaseBottomSheetItem {
 				titleTv.setTextColor(ContextCompat.getColor(context, titleColorId));
 			}
 		}
+		if (background != null) {
+			AndroidUtils.setBackground(view, background);
+		}
 	}
 
 	public static class Builder extends BaseBottomSheetItem.Builder {
 
 		protected Drawable icon;
+		protected Drawable background;
 		protected String title;
 		@ColorRes
 		protected int titleColorId = INVALID_ID;
 
 		public Builder setIcon(Drawable icon) {
 			this.icon = icon;
+			return this;
+		}
+
+		public Builder setBackground(Drawable icon) {
+			this.background = icon;
 			return this;
 		}
 
@@ -98,6 +110,7 @@ public class SimpleBottomSheetItem extends BaseBottomSheetItem {
 					onClickListener,
 					position,
 					icon,
+					background,
 					title,
 					titleColorId);
 		}
