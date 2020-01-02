@@ -410,9 +410,7 @@ public class OsmandSettings {
 		for (OsmandPreference pref : registeredPreferences.values()) {
 			if (pref instanceof CommonPreference && !((CommonPreference) pref).global) {
 				CommonPreference profilePref = (CommonPreference) pref;
-				if (!profilePref.isSetForMode(modeFrom)) {
-					settingsEditor.remove(pref.getId());
-				} else {
+				if (profilePref.isSetForMode(modeFrom)) {
 					Object copiedValue = profilePref.getModeValue(modeFrom);
 					if (copiedValue instanceof String) {
 						settingsEditor.putString(pref.getId(), (String) copiedValue);
@@ -425,6 +423,8 @@ public class OsmandSettings {
 					} else if (copiedValue instanceof Long) {
 						settingsEditor.putLong(pref.getId(), (Long) copiedValue);
 					}
+				} else {
+					settingsEditor.remove(pref.getId());
 				}
 			}
 		}

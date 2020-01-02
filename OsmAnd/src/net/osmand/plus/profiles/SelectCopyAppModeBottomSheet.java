@@ -34,11 +34,9 @@ public class SelectCopyAppModeBottomSheet extends AppModesBottomSheetDialogFragm
 		Bundle args = getArguments();
 		if (args != null && args.containsKey(CURRENT_APP_MODE_KEY)) {
 			currentAppMode = ApplicationMode.valueOfStringKey(args.getString(CURRENT_APP_MODE_KEY), null);
-		} else {
-			OsmandApplication app = requiredMyApplication();
-			if (currentAppMode == null) {
-				currentAppMode = app.getSettings().getApplicationMode();
-			}
+		}
+		if (currentAppMode == null) {
+			currentAppMode = requiredMyApplication().getSettings().getApplicationMode();
 		}
 		super.onCreate(savedInstanceState);
 		if (savedInstanceState != null) {
@@ -73,9 +71,9 @@ public class SelectCopyAppModeBottomSheet extends AppModesBottomSheetDialogFragm
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
+		outState.putString(CURRENT_APP_MODE_KEY, currentAppMode.getStringKey());
 		if (selectedAppMode != null) {
 			outState.putString(SELECTED_APP_MODE_KEY, selectedAppMode.getStringKey());
-			outState.putString(CURRENT_APP_MODE_KEY, currentAppMode.getStringKey());
 		}
 	}
 
