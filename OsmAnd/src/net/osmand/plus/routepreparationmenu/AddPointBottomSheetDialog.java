@@ -160,10 +160,10 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 
 	private void createSearchItem() {
 		View searchView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.bottom_sheet_double_item, null);
-		TextView firstTitle = (TextView) searchView.findViewById(R.id.first_title);
-		TextView secondTitle = (TextView) searchView.findViewById(R.id.second_title);
-		ImageView firstIcon = (ImageView) searchView.findViewById(R.id.first_icon);
-		ImageView secondIcon = (ImageView) searchView.findViewById(R.id.second_icon);
+		TextView firstTitle = searchView.findViewById(R.id.first_title);
+		TextView secondTitle = searchView.findViewById(R.id.second_title);
+		ImageView firstIcon = searchView.findViewById(R.id.first_icon);
+		ImageView secondIcon = searchView.findViewById(R.id.second_icon);
 
 		firstTitle.setText(R.string.shared_string_search);
 		secondTitle.setText(R.string.shared_string_address);
@@ -317,7 +317,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 
 	private void createSwitchStartAndEndItem() {
 		final View switchStartAndEndView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.bottom_sheet_item_simple_56dp, null);
-		TextView title = (TextView) switchStartAndEndView.findViewById(R.id.title);
+		TextView title = switchStartAndEndView.findViewById(R.id.title);
 
 		String start = getString(R.string.route_start_point).toLowerCase();
 		String destination = getString(R.string.route_descr_destination).toLowerCase();
@@ -358,11 +358,11 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 
 	private void loadFavoritesItems(List<Object> items, FavouritesDbHelper helper) {
 		items.clear();
-		addMainScrollItems(items, helper);
+		addMainScrollItems(items);
 		items.addAll(helper.getVisibleFavouritePoints());
 	}
 
-	private void addMainScrollItems(List<Object> items, FavouritesDbHelper favorites) {
+	private void addMainScrollItems(List<Object> items) {
 		items.add(FAVORITES);
 	}
 
@@ -376,7 +376,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 			if (helper.isFavoritesLoaded()) {
 				loadFavoritesItems(items, helper);
 			} else {
-				addMainScrollItems(items, helper);
+				addMainScrollItems(items);
 				helper.addListener(new FavouritesDbHelper.FavoritesListener() {
 
 					private void reloadFavoritesItems() {
@@ -537,9 +537,9 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 
 		ItemViewHolder(View itemView) {
 			super(itemView);
-			title = (TextView) itemView.findViewById(R.id.title);
-			description = (TextView) itemView.findViewById(R.id.description);
-			icon = (ImageView) itemView.findViewById(R.id.icon);
+			title = itemView.findViewById(R.id.title);
+			description = itemView.findViewById(R.id.description);
+			icon = itemView.findViewById(R.id.icon);
 		}
 	}
 
@@ -597,18 +597,15 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 			return items.get(position);
 		}
 
-		public void setItemClickListener(OnClickListener listener) {
+		void setItemClickListener(OnClickListener listener) {
 			this.listener = listener;
 		}
 	}
 
 	private class FavoritesItemsAdapter extends ScrollItemsAdapter {
 
-		private FavouritesDbHelper favorites;
-
 		FavoritesItemsAdapter(OsmandApplication app, List<Object> items) {
 			super(app, items);
-			favorites = app.getFavorites();
 		}
 
 		@NonNull
@@ -642,27 +639,27 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 					favoriteViewHolder.icon.setImageDrawable(getContentIcon(R.drawable.ic_action_fav_dark));
 					favoriteViewHolder.description.setVisibility(View.GONE);
 				} else {
-					if (item instanceof FavouritePoint && ((FavouritePoint) item).isPersonal()) {
+					if (item instanceof FavouritePoint) {
 						FavouritePoint point = (FavouritePoint) item;
-						boolean light = app.getSettings().isLightContent();
-						int iconColor = light ? R.color.icon_color_default_light : R.color.icon_color_default_dark;
-						favoriteViewHolder.icon.setImageDrawable(app.getUIUtilities().getIcon(
-								FavouritePoint.PointType.valueOfTypeName(point.getName()).getIconId(), iconColor));
 						favoriteViewHolder.title.setText(point.getName(app));
-						favoriteViewHolder.description.setText(point.getDescription());
-					} else if (item instanceof FavouritePoint) {
-						FavouritePoint point = (FavouritePoint) item;
-						favoriteViewHolder.title.setText(point.getName());
-						if (point.getCategory().equals("")) {
-							favoriteViewHolder.description.setText(R.string.shared_string_favorites);
+						if (((FavouritePoint) item).isPersonal()) {
+							int iconColor = app.getSettings().isLightContent()
+									? R.color.icon_color_default_light : R.color.icon_color_default_dark;
+							favoriteViewHolder.icon.setImageDrawable(app.getUIUtilities().getIcon(
+									FavouritePoint.PointType.valueOfTypeName(point.getName()).getIconId(), iconColor));
+							favoriteViewHolder.description.setText(point.getDescription());
 						} else {
-							favoriteViewHolder.description.setText(point.getCategory());
+							if (point.getCategory().equals("")) {
+								favoriteViewHolder.description.setText(R.string.shared_string_favorites);
+							} else {
+								favoriteViewHolder.description.setText(point.getCategory());
+							}
+							int pointColor = point.getColor();
+							int color = pointColor == 0 || pointColor == Color.BLACK ? ContextCompat.getColor(app, R.color.color_favorite) : pointColor;
+							favoriteViewHolder.icon.setImageDrawable(app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_fav_dark, color));
 						}
-						int pointColor = point.getColor();
-						int color = pointColor == 0 || pointColor == Color.BLACK ? ContextCompat.getColor(app, R.color.color_favorite) : pointColor;
-						favoriteViewHolder.icon.setImageDrawable(app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_fav_dark, color));
+						favoriteViewHolder.description.setVisibility(View.VISIBLE);
 					}
-					favoriteViewHolder.description.setVisibility(View.VISIBLE);
 				}
 			}
 		}

@@ -793,7 +793,7 @@ public class FavouritesDbHelper {
 			return false;
 		}
 		for (WptPt p : res.getPoints()) {
-			FavouritePoint fp = FavouritePoint.fromWpt(context, p);
+			FavouritePoint fp = FavouritePoint.fromWpt(p);
 			if (fp != null) {
 				points.put(getKey(fp), fp);
 			}

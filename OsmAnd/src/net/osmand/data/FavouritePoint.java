@@ -13,7 +13,7 @@ import net.osmand.plus.R;
 public class FavouritePoint implements Serializable, LocationPoint {
 	private static final long serialVersionUID = 729654300829771466L;
 
-	protected static final String HIDDEN = "hidden";
+	private static final String HIDDEN = "hidden";
 	public static final String PERSONAL_CATEGORY = "personal";
 
 	protected String name = "";
@@ -99,11 +99,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	}
 	
 	public PointDescription getPointDescription() {
-		if (isPersonal()) {
-			return new PointDescription(PointDescription.POINT_TYPE_FAVORITE, getDescription());
-		} else {
-			return new PointDescription(PointDescription.POINT_TYPE_FAVORITE, getName());
-		}
+		return new PointDescription(PointDescription.POINT_TYPE_FAVORITE, getName());
 	}
 
 	public boolean isPersonal() {
@@ -111,8 +107,12 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	}
 
 	@Override
-	public PointDescription getPointDescription(Context ctx) {
-		return getPointDescription();
+	public PointDescription getPointDescription(@NonNull Context ctx) {
+		if (isPersonal()) {
+			return new PointDescription(PointDescription.POINT_TYPE_FAVORITE, getName(ctx));
+		} else {
+			return getPointDescription();
+		}
 	}
 	
 	public void setColor(int color) {
@@ -155,7 +155,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		return category;
 	}
 
-	public String getCategory(Context ctx) {
+	public String getCategory(@NonNull Context ctx) {
 		if (isPersonal()) {
 			return ctx.getString(R.string.personal_category_name);
 		} else {
@@ -167,7 +167,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		this.category = category;
 	}
 
-	public String getName(Context ctx) {
+	public String getName(@NonNull Context ctx) {
 		if (isPersonal()) {
 			return PointType.valueOfTypeName(getName()).getHumanString(ctx);
 		}
@@ -189,7 +189,8 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
+	@NonNull
 	@Override
 	public String toString() {
 		return "Favourite " + getName(); //$NON-NLS-1$
@@ -246,7 +247,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		return result;
 	}
 
-	public static FavouritePoint fromWpt(@NonNull Context ctx, @NonNull WptPt pt) {
+	public static FavouritePoint fromWpt(@NonNull WptPt pt) {
 		String name = pt.name;
 		String categoryName = pt.category != null ? pt.category : "";
 		if (name == null) {
