@@ -4,11 +4,8 @@ package net.osmand.plus;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.view.ContextThemeWrapper;
 import android.view.View;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.LinearLayout;
-import android.widget.RadioButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -55,7 +52,9 @@ public class OsmAndLocationSimulation {
 	public void startStopRouteAnimation(final Activity ma, boolean useGpx, final Runnable runnable) {
 		if (!isRouteAnimating()) {
 			if (useGpx) {
-				AlertDialog.Builder builder = new AlertDialog.Builder(ma);
+				boolean nightMode = app.getDaynightHelper().isNightModeForMapControls();
+				int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
+				AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(ma, themeRes));
 				builder.setTitle(R.string.animate_route);
 
 				final View view = ma.getLayoutInflater().inflate(R.layout.animate_route, null);
@@ -63,6 +62,7 @@ public class OsmAndLocationSimulation {
 				((TextView) view.findViewById(R.id.MaxSpeedup)).setText("4"); //$NON-NLS-1$
 				final SeekBar speedup = (SeekBar) view.findViewById(R.id.Speedup);
 				speedup.setMax(3);
+				UiUtilities.setupSeekBar(app, speedup, nightMode, true);
 				builder.setView(view);
 				builder.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 

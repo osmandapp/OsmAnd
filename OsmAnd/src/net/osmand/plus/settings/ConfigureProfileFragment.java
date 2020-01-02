@@ -123,6 +123,12 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 		}
 	}
 
+	@Override
+	public void onPause() {
+		updateRouteInfoMenu();
+		super.onPause();
+	}
+
 	private void updateToolbarSwitch() {
 		View view = getView();
 		if (view == null) {
