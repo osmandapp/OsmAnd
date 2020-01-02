@@ -1359,7 +1359,7 @@
     <string name="rendering_value_pedestrian_name">Пішки</string>
     <string name="record_plugin_description">Цей втулок задіює можливість записувати та зберігати ваші треки вручну, торкаючись віджету часопису GPX на екрані мапи, або самочинно записувати всі ваші подорожі у файл GPX. 
 \n 
-\nЗаписаними треками можна поділитись з вашими друзями або іншими учасниками спільноти OSM. Атлети можуть використовувати записані треки для відстежування власних тренувань. Базовий аналіз треків наявний безпосередньо в OsmAnd, наприклад: час проходження кола, середня швидкість й т.п., звісно, записані треки можна також проаналізувати за допомогою іншого програмного забезпечення.</string>
+\nЗаписаними треками можна поділитись з вашими друзями або іншими учасниками спільноти OSM. Атлети можуть використовувати записані треки для відстежування власних тренувань. Основний розбір треків наявний безпосередньо в OsmAnd, наприклад: час проходження кола, середня швидкість й т.п., звісно, записані треки можна також проаналізувати за допомогою іншого програмного забезпечення.</string>
     <string name="save_track_to_gpx_globally">Писати трек у файл GPX</string>
     <string name="save_track_to_gpx_globally_descr">Загальний запис розташування до файлу GPX можна ввімкнути або вимкнути кнопкою часопису GPX на екрані з мапою.</string>
     <string name="save_track_interval_globally">Інтервал записування</string>
@@ -3111,7 +3111,7 @@
     <string name="settings_derived_routing_mode_string">Користувацький режим, похідний від: %s</string>
     <string name="routing_profile_ski">Лижі</string>
     <string name="profile_type_descr_string">Тип: %s</string>
-    <string name="profile_type_base_string">Базовий профіль</string>
+    <string name="profile_type_base_string">Основний профіль</string>
     <string name="profile_alert_need_routing_type_title">Оберіть тип навігації</string>
     <string name="profile_alert_need_routing_type_msg">Оберіть тип навігації для нового профілю додатку</string>
     <string name="profile_alert_need_profile_name_title">Введіть назву профілю</string>
@@ -3460,4 +3460,7 @@
     <string name="choose_icon_color_name">Оберіть образок, барву та назву</string>
     <string name="reorder_profiles">Редагувати список профілів</string>
     <string name="selected_profile">Вибраний профіль</string>
+    <string name="reset_confirmation_descr">Натискаючи %1$, ви втратите всі свої зміни.</string>
+    <string name="reset_all_profile_settings_descr">Усі налаштування профілю буде скинуто після встановлення.</string>
+    <string name="reset_all_profile_settings">Скинути всі усталені налаштування профілю\?</string>
 </resources>
