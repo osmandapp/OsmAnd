@@ -881,7 +881,7 @@
     <string name="turn_screen_on_info">Kuva kaart lukustuskuval navigeerimise ajal.</string>
     <string name="route_parameters_info">Marsruutimise seaded valitud profiilis \"%1$s\".</string>
     <string name="wake_time">Ärkamisaeg</string>
-    <string name="units_and_formats">Ühikud &amp; formaadid</string>
+    <string name="units_and_formats">Ühikud ja formaadid</string>
     <string name="appearance">Välimus</string>
     <string name="map_look_descr">Kaardi välimus</string>
     <string name="map_look">Kaardi välimus</string>
@@ -2682,4 +2682,36 @@
     <string name="routing_attr_width_description">Määra teedel lubatud sõiduki laius.</string>
     <string name="simulate_your_location_gpx_descr">Simuleeri oma asukohta kasutades salvestatud GPX rada.</string>
     <string name="quick_action_directions_from_desc">Nupp ekraani keskkoha lähtekohaks muutmiseks ja sihtkohta teekonna arvutamiseks või sihtkoha valimise dialoogi avamiseks kui sihtkoha marker puudub kaardil.</string>
+    <string name="record_plugin_description">See lisa aktiveerib radade salvestamise funktsionaalsuse, puudutades käsitsi kaardil GPX logimisvidinat või logides automaatselt kõik oma navigeerimise marsruudid GPX faili.
+\n
+\nSalvestatud radu saab jagada oma sõpradega või kasutada OSM kaastöödeks. Sportlased saavad kasutada salvestatud radu oma treeningute jälgimiseks. Mõningast raja põhianalüüsi saab teha otse OsmAnd sees, näiteks ringiajad, keskmine kiirus jne. Lisaks muidugi saab radu hiljem analüüsia ka spetsiaalsetete 3. osapoolte analüüsitööriistadega.</string>
+    <string name="osmand_srtm_long_description_1000_chars">See lisa pakub nii kõrgusjoonte ülekatte kui ka (reljeefse) künkavarjutuse kihi, mida kuvatakse OsmAnd standardkaartidel. Seda funktsionaalsust hindavad sportlased, matkajad, rändajad ja kõik teised, kes on huvitatud maastiku reljeefstruktuurist.
+\n
+\nGlobaalsed andmed (vahemikus 70 ° põhja ja 70 ° lõuna) põhinevad mõõtmistel, mille on teinud SRTM (süstiku radari topograafiamissioon) ja ASTER (täiustatud kosmose termilise kiirguse ja peegelduse radiomeeter), NASA maavaatlussatelliitide süsteemi lipulaeva Terra pardal olev pildistamisinstrument. ASTER on NASA, Jaapani majandus-, kaubandus- ja tööstusministeeriumi (METI) ja Jaapani kosmosesüsteemide (J-kosmosesüsteemid) koostöö.</string>
+    <string name="srtm_plugin_description">See laiendus pakub nii kõrgusjoonte ülekatte kui ka (reljeefse) künkavarjutuse kihi, mida kuvatakse OsmAnd standardkaartidel. Seda funktsionaalsust hindavad sportlased, matkajad, rändajad ja kõik teised, kes on huvitatud maastiku reljeefstruktuurist. (Pange tähele, et kõrgusjoonte ja/või reljeefi andmed on eraldi, pärast laienduse aktiveerimist on saadaval täiendavald alla laetavad failid.)
+\n
+\nGlobaalsed andmed (vahemikus 70 ° põhja ja 70 ° lõuna) põhinevad mõõtmistel, mille on teinud SRTM (süstiku radari topograafiamissioon) ja ASTER (täiustatud kosmose termilise kiirguse ja peegelduse radiomeeter), NASA maavaatlussatelliitide süsteemi lipulaeva Terra pardal olev pildistamisinstrument. ASTER on NASA, Jaapani majandus-, kaubandus- ja tööstusministeeriumi (METI) ja Jaapani kosmosesüsteemide (J-kosmosesüsteemid) koostöö.</string>
+    <string name="plugin_touringview_descr">Selle vaate aktiveerimine muudab OsmAndi kaardistiili \'Reisivaateks\'. See on reisijatele ja kutselistele autojuhtidele mõeldud eriline kõrglahutusega vaade.
+\n
+\nSee vaade pakub igal kaardi suurendamisel maksimaalse hulga kaardiandmetes saada olevaid reisiandmeid (eriti teed, rajad, rajad ja orientatsioonimärgid).
+\n
+\nSamuti kujutab see värvikoodide abil üheselt mõistetavalt igat tüüpi teid, mis on kasulik nt. suurte sõidukite juhtimisel.
+\n
+\nSee pakub ka spetsiaalseid matkavõimalusi näiteks jalgrattateid või Alpide mägiteid kuvades.
+\n
+\nSpetsiaalset kaardi allalaadimist pole vaja, vaade on loodud meie tavalistest kaartidest.
+\n
+\nSelle vaate saab tagasi lülitada, aktiveerides selle siin uuesti või muutes vastavalt vajadusele jaotises \'Kaardi seadistamine\' \'Kaardistiil\'.</string>
+    <string name="plugin_nautical_descr">See lisa rikastab OsmAnd kaardi ja navigatsioonirakendust, et toota ka merekaarte paadisõiduks, purjetamiseks ja muud tüüpi veespordi jaoks.
+\n
+\nSpetsiaalne OsmAnd kaardi lisamoodul pakub kõiki merenavigatsioonimärke ja kaardisümboleid nii sisemaal kui ka rannikul navigeerimiseks. Iga navigatsioonimärgi kirjeldus sisaldab nende identifitseerimiseks vajalikke üksikasju ja tähendust (kategooria, kuju, värv, järjestus, viide jne).
+\n
+\nOsmAnd tavapärase kaardistiili juurde naasmiseks lihtsalt aktiveerige see laiendus uuesti või muutke vastavalt vajadusele jaotises \'Kaardi seadistamine\' \'Kaardistiil\'.</string>
+    <string name="plugin_ski_descr">See OsmAnd laiendus toob sõrmeulatusse üksikasjad globaalsete mäesuusatamise nõlvade, murdmaasuusaradade, mäesuusaradade, köisraudteede ja suusaliftide kohta. Teekonnad ja suusaradade raskusastmed on tähistatud värvikoodidega ning kujutatud spetsiaalses talvises kaardistiilis, mis sulab ühte lumivalge talvemaastikuga.
+\n
+\nSelle vaate aktiveerimine muudab kaardi stiili väärtuseks \'Talv ja suusk\', mis näitab kõiki maastikuomadusi talvetingimustes. Selle vaate saab tagasi lülitada, aktiveerides selle siin uuesti või muutes vastavalt vajadusele jaotises \'Kaardi seadistamine\' \'Kaardistiil\'.</string>
+    <string name="audionotes_plugin_description">Heli/video märkmete lisa pakub funktsionaalsust, mille abil saad reisi ajal teha heli/pildi/videomärkmeid, kasutades kas kaardi nuppu või otse kontekstimenüüd kaardi mistahes asukoha jaoks.</string>
+    <string name="osmand_parking_plugin_description">Parkimiskoha lisa võimaldab registreerida oma auto parkimiskohta ja jälgida järelejäänud parkimisaega (kui ajaline piirang kehtib).
+\nNii asukoht kui aeg on nähtavad nii OsmAnd armatuurlaual kui kaardi vidinas. Meeldetuletust saab lisada Androidi kalendrisse.</string>
+    <string name="unit_of_length_descr">Muuda kauguse mõõtmise ühikuid.</string>
 </resources>
