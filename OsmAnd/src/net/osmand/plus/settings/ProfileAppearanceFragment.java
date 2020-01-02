@@ -521,9 +521,15 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 				.setRouteService(changedProfile.routeService)
 				.setRoutingProfile(changedProfile.routingProfile)
 				.setColor(changedProfile.color);
+
+		boolean newProfile = ApplicationMode.valueOfStringKey(changedProfile.stringKey, null) == null;
+
 		ApplicationMode mode = ApplicationMode.saveProfile(builder, getMyApplication());
 		if (!ApplicationMode.values(app).contains(mode)) {
 			ApplicationMode.changeProfileAvailability(mode, true, getMyApplication());
+		}
+		if (newProfile) {
+			app.getSettings().copyPreferencesFromProfile(changedProfile.parent, mode);
 		}
 		return true;
 	}

@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 
 public class BottomSheetItemWithDescription extends SimpleBottomSheetItem {
@@ -30,13 +29,14 @@ public class BottomSheetItemWithDescription extends SimpleBottomSheetItem {
 										  View.OnClickListener onClickListener,
 										  int position,
 										  Drawable icon,
+										  Drawable background,
 										  String title,
 										  @ColorRes int titleColorId,
 										  CharSequence description,
 										  @ColorRes int descriptionColorId,
 										  int descriptionMaxLines,
 										  boolean descriptionLinksClickable) {
-		super(customView, layoutId, tag, disabled, onClickListener, position, icon, title, titleColorId);
+		super(customView, layoutId, tag, disabled, onClickListener, position, icon, background, title, titleColorId);
 		this.description = description;
 		this.descriptionColorId = descriptionColorId;
 		this.descriptionMaxLines = descriptionMaxLines;
@@ -121,6 +121,7 @@ public class BottomSheetItemWithDescription extends SimpleBottomSheetItem {
 					onClickListener,
 					position,
 					icon,
+					background,
 					title,
 					titleColorId,
 					description,
