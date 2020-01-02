@@ -2,12 +2,10 @@ package net.osmand.plus.dialogs;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.widget.CompoundButtonCompat;
 import android.support.v4.widget.NestedScrollView;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
@@ -18,7 +16,6 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import net.osmand.AndroidUtils;
 import net.osmand.Collator;
 import net.osmand.OsmAndCollator;
 import net.osmand.plus.OsmandApplication;
@@ -222,7 +219,7 @@ public class SelectMapStyleBottomSheetDialogFragment extends MenuBottomSheetDial
 	@ColorInt
 	private int getStyleTitleColor(boolean selected) {
 		int colorId = selected
-				? getMyApplication() != null ? getMyApplication().getSettings().APPLICATION_MODE.get().getIconColorInfo().getColor(nightMode) : getActiveColorId()
+				? getActiveColorId()
 				: nightMode ? R.color.text_color_primary_dark : R.color.text_color_primary_light;
 		return getResolvedColor(colorId);
 	}
