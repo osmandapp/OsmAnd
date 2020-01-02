@@ -863,7 +863,7 @@ Pôr do Sol: %2$s</string>
     <string name="osmand_parking_warning">Alerta</string>
     <string name="osmand_parking_warning_text">Uma notificação para pegar seu carro foi adicionada ao seu calendário e pode ser editada ou removida lá.</string>
     <string name="osmand_parking_time_limit_title">Definir limite de tempo</string>
-    <string name="osmand_parking_delete_confirm">Apagar o marcardor da posição de estacionamento?</string>
+    <string name="osmand_parking_delete_confirm">Apagar o marcador da posição de estacionamento\?</string>
     <string name="osmand_parking_delete">Apagar um marcador de estacionamento</string>
     <string name="osmand_parking_choose_type">Selecionar o tipo de estacionamento</string>
     <string name="osmand_parking_no_lim_text">Tempo ilimitado</string>
@@ -3391,7 +3391,7 @@ Pôr do Sol: %2$s</string>
     <string name="personal_category_name">Pessoal</string>
     <string name="shared_string_downloading_formatted">Baixando %s</string>
     <string name="rendering_value_thick_name">Grosso</string>
-    <string name="desert_render_descr">Para desertos e outras áreas escassamente povoadas.</string>
+    <string name="desert_render_descr">Para desertos e outras áreas escassamente povoadas. Exibe mais detalhes em uma escala de visualização.</string>
     <string name="select_navigation_icon">Selecionar ícone de navegação</string>
     <string name="select_map_icon">Selecione o ícone do mapa</string>
     <string name="delete_profiles_descr">Depois de tocar em Aplicar, os perfis excluídos serão perdidos completamente.</string>

@@ -249,7 +249,7 @@
     <string name="min_logging_accuracy">Мінімальна точність реєстрації</string>
     <string name="min_logging_accuracy_descr">Фільтр: реєстрація не проводиться, якщо не досягнуто точності</string>
     <string name="min_logging_speed">Мінімальна швидкість реєстрації</string>
-    <string name="min_logging_speed_descr">Фільтр: не реєструвати, якщо швидкість меньша за обрану</string>
+    <string name="min_logging_speed_descr">Фільтр: не реєструвати, якщо швидкість менша за обрану</string>
     <string name="saved_messages">Збережені повідомлення</string>
     <string name="time_zone_descr">Оберіть часовий пояс щоб відобразити повідомлення у вашому розташуванні.</string>
     <string name="time_zone">Часовий пояс</string>
@@ -258,6 +258,6 @@
     <string name="unit_of_length_descr">Змінити одиницю вимірювання відстані.</string>
     <string name="unit_of_speed_system_descr">Визначити одиницю швидкості.</string>
     <string name="unit_of_speed_system">Одиниця вимірювання швидкості</string>
-    <string name="buffer_time_descr">Час, після вичерпання якого буферизовані повідомлення про місцерозташування будуть видалені</string>
+    <string name="buffer_time_descr">Найбільший час зберігання точок у буфері</string>
     <string name="buffer_time">Термін дії буфера</string>
 </resources>

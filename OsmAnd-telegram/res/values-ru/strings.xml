@@ -258,6 +258,6 @@
     <string name="unit_of_length">Единицы измерения расстояния</string>
     <string name="unit_of_speed_system_descr">Выберите единицу измерения скорости.</string>
     <string name="unit_of_speed_system">Единица измерения скорости</string>
-    <string name="buffer_time_descr">Время, по истечении которого буферизованные сообщения о местоположении будут удалены</string>
+    <string name="buffer_time_descr">Максимальное время хранения точек в буфере</string>
     <string name="buffer_time">Срок действия буфера</string>
 </resources>

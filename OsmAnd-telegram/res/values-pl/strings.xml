@@ -251,4 +251,12 @@
     <string name="set_time_timeline_descr">Wybierz czas wyświetlania</string>
     <string name="start_end_date">Daty rozpoczęcia i zakończenia</string>
     <string name="saved_messages">Zapisane wiadomości</string>
+    <string name="time_zone">Strefa czasowa</string>
+    <string name="units_and_formats">Jednostki i formaty</string>
+    <string name="unit_of_length_descr">Zmienia jednostki długości.</string>
+    <string name="unit_of_length">Jednostki długości</string>
+    <string name="unit_of_speed_system_descr">Zdefiniuj jednostkę prędkości.</string>
+    <string name="unit_of_speed_system">Jednostka prędkości</string>
+    <string name="buffer_time_descr">Maksymalny czas przechowywania punktów w buforze</string>
+    <string name="buffer_time">Czas ważności bufora</string>
 </resources>

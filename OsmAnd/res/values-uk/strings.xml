@@ -24,8 +24,8 @@
     <string name="left_side_navigation_descr">Для країн з лівостороннім рухом.</string>
     <string name="unknown_from_location">Початкове місцезнаходження ще не визначено.</string>
     <string name="unknown_location">Розташування ще не визначено.</string>
-    <string name="modify_transparency">Змінити прозорість (0 - прозорий, 255 - непрозорий)</string>
-    <string name="confirm_interrupt_download">Скасувати завантаження файлу?</string>
+    <string name="modify_transparency">Встановити прозорість (0 – прозорий, 255 – непрозорий)</string>
+    <string name="confirm_interrupt_download">Скасувати завантаження\?</string>
     <string name="first_time_msg">Дякуємо за використання OsmAnd. Завантажуйте регіональні дані для використання в автономному режимі за допомогою пункту меню \'Налаштування\' → \'Управління мапами\' для перегляду мап, пошуку адрес, POI, громадського транспорту тощо.</string>
     <string name="basemap_was_selected_to_download">Базова мапа вибрана для завантаження, оскільки необхідна для коректної роботи додатку.</string>
     <string name="select_index_file_to_download">Нічого не знайдено. Якщо ви не знайшли свій регіон, ви можете створити його самостійно (див. https://osmand.net).</string>
@@ -1331,7 +1331,8 @@
     <string name="keep_informing_never">Тільки вручну (натискати на стрілку)</string>
     <string name="keep_informing_descr">Повторювати навігаційні інструкції через регулярні проміжки часу.</string>
     <string name="keep_informing">Повторювати навігаційні інструкції</string>
-    <string name="create_poi_link_to_osm_doc"> string name=\"lat_lon_pattern\"&gt;Шир: %1$.5f Дов: %2$.5f&lt;/string </string>
+    <string name="create_poi_link_to_osm_doc">
+        <u>Online OSM</u> класифікація мап із зображеннями.</string>
     <string name="import_file_favourites">Зберегти дані як GPX-файл чи імпортувати маршрутні точки в \'Закладки\'?</string>
     <string name="shared_string_share">Поділитися</string>
     <string name="share_fav_subject">Закладки, якими поділились через OsmAnd</string>
@@ -2472,7 +2473,7 @@
     <string name="mapillary_action_descr">Поділитися своїми вуличними видами цієї місцевості через Mapillary.</string>
     <string name="mapillary_widget">Віджет Mapillary</string>
     <string name="mapillary_widget_descr">Дозволяє швидко зробити внесок в Mapillary.</string>
-    <string name="mapillary_descr">"Світлини вулиць в мережі для всіх.  Відкрийте для себе місця, діліться та знимкуйте весь світ."</string>
+    <string name="mapillary_descr">Світлини вулиць в мережі для всіх. Відкрийте для себе місця, діліться та знимкуйте весь світ.</string>
     <string name="plugin_mapillary_descr">Вуличні фотографії для усіх. Відкривайте для себе місця, співпрацюйте, знімкуйте світ.</string>
     <string name="online_photos">Мережеві світлинознімки</string>
     <string name="no_photos_descr">Тут нема світлин.</string>
@@ -3286,11 +3287,11 @@
     <string name="map_look">Вигляд карти</string>
     <string name="list_of_installed_plugins">Встановлені втулки</string>
     <string name="configure_navigation">Налаштування навігації</string>
-    <string name="general_settings_profile_descr">Тема додатку, одиниці виміру, регіон</string>
+    <string name="general_settings_profile_descr">Тема додатка, одиниці вимірювання, регіон</string>
     <string name="configure_profile">Налаштування профілю</string>
     <string name="switch_profile">Змінити профіль</string>
     <string name="reset_to_default">Скинути на усталені</string>
-    <string name="manage_profiles_descr">Створення, імпорт та редагування профілів</string>
+    <string name="manage_profiles_descr">Створення, імпорт, редагування профілів</string>
     <string name="manage_profiles">Керування профілями додатку…</string>
     <string name="osmand_settings">Налаштування OsmAnd</string>
     <string name="copy_from_other_profile">Копіювати з іншого профілю</string>
@@ -3434,7 +3435,7 @@
     <string name="suggested_maps">Пропоновані мапи</string>
     <string name="suggested_maps_descr">Ці мапи потрібно використовувати з втулком</string>
     <string name="added_profiles">Додані профілі</string>
-    <string name="added_profiles_descr">Втулка додає новий профіль до OsmAnd</string>
+    <string name="added_profiles_descr">Плагін додає новий профіль до OsmAnd</string>
     <string name="shared_string_turn_off">Вимкнути</string>
     <string name="new_plugin_added">Нова втулка додана</string>
     <string name="join_segments">Приєднати частки</string>
@@ -3446,7 +3447,7 @@
     <string name="personal_category_name">Особистий</string>
     <string name="shared_string_downloading_formatted">Завантажується %s</string>
     <string name="rendering_value_thick_name">Товсто</string>
-    <string name="desert_render_descr">Для пустель та інших малонаселених областей.</string>
+    <string name="desert_render_descr">Для пустель та інших малонаселених ділянок. Відображає більше докладностей у масштабі перегляду.</string>
     <string name="select_navigation_icon">Оберіть навігаційний образок</string>
     <string name="select_map_icon">Оберіть образок мапи</string>
     <string name="delete_profiles_descr">Після натискання кнопки Застосувати видалені профілі повністю втрачаються.</string>

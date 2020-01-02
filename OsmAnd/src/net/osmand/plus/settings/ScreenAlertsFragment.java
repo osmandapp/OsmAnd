@@ -16,6 +16,7 @@ import android.widget.TextView;
 import net.osmand.AndroidUtils;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 
 public class ScreenAlertsFragment extends BaseSettingsFragment {
 
@@ -77,6 +78,7 @@ public class ScreenAlertsFragment extends BaseSettingsFragment {
 
 		SwitchCompat switchView = (SwitchCompat) switchContainer.findViewById(R.id.switchWidget);
 		switchView.setChecked(checked);
+		UiUtilities.setupCompoundButton(isNightMode(), getActiveProfileColor(), switchView);
 
 		TextView title = switchContainer.findViewById(R.id.switchButtonText);
 		title.setText(checked ? R.string.shared_string_on : R.string.shared_string_off);

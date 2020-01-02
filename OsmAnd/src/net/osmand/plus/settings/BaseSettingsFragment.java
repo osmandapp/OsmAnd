@@ -34,6 +34,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -295,13 +296,13 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 
 		ApplicationMode appMode = getSelectedAppMode();
 		if (preference instanceof ListPreferenceEx) {
-			SingleSelectPreferenceBottomSheet.showInstance(fragmentManager, preference.getKey(), this, false, appMode);
+			SingleSelectPreferenceBottomSheet.showInstance(fragmentManager, preference.getKey(), this, false, appMode, currentScreenType.profileDependent);
 		} else if (preference instanceof SwitchPreferenceEx) {
-			BooleanPreferenceBottomSheet.showInstance(fragmentManager, preference.getKey(), this, false, appMode);
+			BooleanPreferenceBottomSheet.showInstance(fragmentManager, preference.getKey(), this, false, appMode, currentScreenType.profileDependent);
 		} else if (preference instanceof EditTextPreference) {
 			EditTextPreferenceBottomSheet.showInstance(fragmentManager, preference.getKey(), this, false, appMode);
 		} else if (preference instanceof MultiSelectBooleanPreference) {
-			MultiSelectPreferencesBottomSheet.showInstance(fragmentManager, preference.getKey(), this, false, appMode);
+			MultiSelectPreferencesBottomSheet.showInstance(fragmentManager, preference.getKey(), this, false, appMode, currentScreenType.profileDependent);
 		} else {
 			super.onDisplayPreferenceDialog(preference);
 		}
@@ -351,6 +352,15 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 			if (selectableView != null) {
 				Drawable drawable = UiUtilities.getColoredSelectableDrawable(app, getActiveProfileColor(), 0.3f);
 				AndroidUtils.setBackground(selectableView, drawable);
+			}
+		}
+		if (currentScreenType.profileDependent) {
+			View cb = holder.itemView.findViewById(R.id.switchWidget);
+			if (cb == null) {
+				cb = holder.findViewById(android.R.id.checkbox);
+			}
+			if (cb instanceof CompoundButton) {
+				UiUtilities.setupCompoundButton(isNightMode(), getActiveProfileColor(), (CompoundButton) cb);
 			}
 		}
 	}

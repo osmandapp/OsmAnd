@@ -56,7 +56,8 @@ public class SingleSelectPreferenceBottomSheet extends BasePreferenceBottomSheet
 			final BaseBottomSheetItem[] preferenceItem = new BottomSheetItemWithCompoundButton[1];
 			preferenceItem[0] = new BottomSheetItemWithCompoundButton.Builder()
 					.setChecked(i == selectedEntryIndex)
-					.setButtonTintList(AndroidUtils.createCheckedColorStateList(ctx, R.color.icon_color_default_light, getActiveColorId()))
+					.setButtonTintList(AndroidUtils.createCheckedColorStateList(ctx, R.color.icon_color_default_light,
+							isProfileDependent() ? getAppMode().getIconColorInfo().getColor(nightMode) : getActiveColorId()))
 					.setTitle(entries[i])
 					.setTag(i)
 					.setLayoutId(R.layout.bottom_sheet_item_with_radio_btn_left)
@@ -125,7 +126,7 @@ public class SingleSelectPreferenceBottomSheet extends BasePreferenceBottomSheet
 	}
 
 	public static boolean showInstance(@NonNull FragmentManager fragmentManager, String key, Fragment target,
-									   boolean usedOnMap, @Nullable ApplicationMode appMode) {
+									   boolean usedOnMap, @Nullable ApplicationMode appMode, boolean profileDependent) {
 		try {
 			Bundle args = new Bundle();
 			args.putString(PREFERENCE_ID, key);
@@ -135,6 +136,7 @@ public class SingleSelectPreferenceBottomSheet extends BasePreferenceBottomSheet
 			fragment.setUsedOnMap(usedOnMap);
 			fragment.setAppMode(appMode);
 			fragment.setTargetFragment(target, 0);
+			fragment.setProfileDependent(profileDependent);
 			fragment.show(fragmentManager, TAG);
 			return true;
 		} catch (RuntimeException e) {

@@ -2763,7 +2763,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="mapnik_render_descr">Ancien rendu par défaut \'Mapnik\'. Fonctions clés : couleurs identiques au style \'Mapnik\'.</string>
     <string name="default_render_descr">Style générique. Zones urbaines affichées clairement, courbes de niveaux, routes et revêtement des routes, restrictions d\'accès, chemins identifiés sur l\'échelle SAC.</string>
     <string name="shared_string_bookmark">Favori</string>
-    <string name="topo_render_descr">Pour les activités en extérieur (randonnée, VTT). Lisibilité optimisée pour l\'extérieur, routes et éléments naturels contrastés, distinction des types de routes en fonction de leur qualité, options avancées pour les courbes de niveaux, nombreux détails. Pas de mode nuit.</string>
+    <string name="topo_render_descr">Pour les activités en extérieur (randonnée, VTT). Lisibilité optimisée pour l\'extérieur, routes et éléments naturels contrastés, distinction des types de routes en fonction de leur revêtement, options avancées pour les courbes de niveaux, nombreux détails. Pas de mode nuit.</string>
     <string name="off_road_render_descr">Pour la conduite sur voies non revêtues. Style basé sur le style \"Topo\" et à utiliser avec la sous-couche verte d\'images satellites. Largeur réduite pour les routes, largeur augmentée pour les chemins et autres pistes.</string>
     <string name="touring_view_render_descr">Style très détaillé pour le tourisme. Inclus tous les caractéristiques du style OsmAnd par défaut plus : information les plus détaillées possibles sur les routes, chemins, sentiers et tous les moyens permettant de se déplacer. Distinction visuelle claire des différents types de routes. Adapté à un usage en extérieur, de jour comme de nuit.</string>
     <string name="access_intermediate_arrival_time">Heure d\'arrivée à l\'étape</string>
@@ -3232,7 +3232,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="voice_announces">Annonces vocales</string>
     <string name="configure_profile_info">Paramètres du profil :</string>
     <string name="utm_format_descr">OsmAnd utilise le Standard UTM qui est comparable mais pas identique au format UTM de l\'OTAN.</string>
-    <string name="navigate_point_format_olc">Ouvrir le code de lieu</string>
+    <string name="navigate_point_format_olc">Code Open Location</string>
     <string name="analytics_pref_title">Analyses</string>
     <string name="turn_screen_on_info">Afficher la carte sur l\'écran de verrouillage pendant la navigation.</string>
     <string name="route_parameters_info">Paramètres de calcul d\'itinéraire pour le profil sélectionné : \"%1$s\".</string>
@@ -3377,7 +3377,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="street_city">%1$s, %2$s</string>
     <string name="shared_string_downloading_formatted">Téléchargement %s</string>
     <string name="rendering_value_thick_name">Épais</string>
-    <string name="desert_render_descr">Pour les déserts et autres zones faiblement peuplées.</string>
+    <string name="desert_render_descr">Pour les déserts et autres zones faiblement peuplées, affiche plus de détails.</string>
     <string name="select_navigation_icon">Sélectionnez l\'icône de navigation</string>
     <string name="select_map_icon">Sélectionnez l\'icône de carte</string>
     <string name="delete_profiles_descr">Si vous choisissez Appliquer, les profils seront définitivement supprimés.</string>

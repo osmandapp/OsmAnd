@@ -663,11 +663,11 @@
     <string name="map_online_data_descr">Online térképek használata (csempék letöltése és tárolása memóriakártyán).</string>
     <string name="shared_string_online_maps">Online térképek</string>
     <string name="online_map_settings_descr">Online vagy gyorsítótárazott csempés térképek forrásainak kijelölése.</string>
-    <string name="osmand_rastermaps_plugin_description">Ezzel a bővítménnyel az online (úgynevezett csempés vagy raszteres) térképek több típusához is hozzáférhet az előre meghatározott OpenStreetMap csempéktől kezdve (mint például a Mapnik) a műholdképekig és a speciális célú rétegekig, úgymint időjárási térképek, éghajlati térképek, földtani térképek, domborzatárnyékolási rétegek, stb. 
+    <string name="osmand_rastermaps_plugin_description">Ezzel a bővítménnyel az online (úgynevezett csempés vagy raszteres) térképek több típusához is hozzáférhet előre meghatározott OpenStreetMap-csempéktől kezdve (mint például a Mapnik) műholdképekig és speciális célú rétegekig (pl. időjárási térképek, éghajlati térképek, földtani térképek, domborzatárnyékolási rétegek stb.).
 \n 
-\nEzen térképek bármelyike használható az OsmAnd térkép képernyőjén megjelenítendő fő (alap) térképként, vagy egy másik alaptérkép fedvényeként vagy alátétjeként (mint például az OsmAnd normál offline térképei). Bármely alátét térkép láthatóbbá tételének érdekében az OsmAnd vektoros térképeinek bizonyos elemei igény szerint könnyedén elrejthetők a „Térkép beállítása” menün keresztül. 
+\nEzek a térképek egyaránt használhatók az OsmAnd-térkép képernyőjén megjelenítendő fő (alap) térképként, illetve egy másik alaptérkép fedvényeként vagy alátétjeként (mint például az OsmAnd normál offline térképei). Az alátéttérkép láthatóbbá tétele érdekében az OsmAnd vektoros térképeinek bizonyos elemei igény szerint könnyedén elrejthetők a „Térkép beállítása” menün keresztül. 
 \n 
-\nA csempés térképek internetes forrásokon keresztül szerezhetők be, vagy előkészíthetők kapcsolat nélküli használathoz (és kézzel átmásolva az OsmAnd adatmappájába) egy olyan SQLite adatbázisként, amelyet különféle harmadik féltől származó térkép-előkészítő eszközök állíthatnak elő.</string>
+\nA csempés térképek beszerezhetők internetes forrásokból, vagy előkészíthetők kapcsolat nélküli használathoz (és kézzel átmásolva az OsmAnd adatmappájába) SQLite adatbázisként, amely különféle harmadik féltől származó térkép-előkészítő eszközökkel állítható elő.</string>
     <string name="osmand_background_plugin_description">Megjeleníti a háttérben futó nyomvonalrögzítés és navigáció beállításait, ami periodikusan felébreszti a GPS modult (kikapcsolt képernyőnél).</string>
     <string name="osmand_accessibility_description">Ez a bővítmény elérhetővé teszi az eszköz akadálymentesítési lehetőségeit közvetlenül az OsmAnd programban. Ez megkönnyíti például a szövegfelolvasó (TTS) hangok beszédsebességének állítását, az irányító gombok képernyő navigációjának beállítását, egy görgető használatát a nagyítás vezérléséhez, vagy szövegfelolvasó visszajelzés használatát, például a pozíció automatikus bejelentésénél.</string>
     <string name="osmand_development_plugin_description">Ez a bővítmény beállításokat jelenít meg olyan fejlesztői és hibakeresési szolgáltatásokhoz, mint például útvonaltervezés tesztelése vagy szimulálása, a megjelenítés teljesítménye vagy a hangutasítások. Ezeket a beállításokat fejlesztőknek szánják, és nem szükségesek az átlagos felhasználónak.</string>
@@ -786,48 +786,47 @@ Proporcionális memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</str
     <string name="map_widget_vector_attributes">Megjelenítési jellemzők</string>
     <string name="map_widget_renderer">Térképstílus</string>
     <string name="osmand_short_description_80_chars">Globális mobil térkép és navigáció, offline és online OSM-térképekkel</string>
-    <string name="osmand_long_description_1000_chars">"OsmAnd (OSM Automated Navigation Directions) 
+    <string name="osmand_long_description_1000_chars">"OsmAnd (OSM Automated Navigation Directions)
+\n
+\n Az OsmAnd nyílt forráskódú navigációs alkalmazás, amely a globális OpenStreetMap (OSM) adatok széles skáláját használja. Az alkalmazás internetkapcsolat nélkül is használható, mert minden (vektoros és csempés) térképadat tárolható a telefon memóriájában. Az alkalmazás továbbá offline és online útvonaltervezést is tartalmaz, részletes, hangvezérléses navigációval.
+\n
+\n Néhány fontos funkció:
+\n - Teljesen offline működés (letöltött vektoros és csempés térképek tárolása a készülék tárhelyén)
+\n - kompakt vektoros térképek az egész világról
+\n - Ország- és régiótérképek letöltése közvetlenül az alkalmazásból
+\n - Több térkép egymásra rétegezése, például állítható átlátszóságú GPX- vagy navigációs nyomvonalak, érdekes pontok, kedvence, szintvonalak, tömegközlekedési megállók és további térképek
+\n - Címek és helyek (érdekes pontok) offline keresése
+\n - Offline útvonaltervezés közepes távolságra
+\n - Autós, kerékpáros és gyalogos módok a következő beállításokkal:
+\n  - éjszakai/nappali nézet automatikus átkapcsolása
+\n  - sebességfüggő térképnagyítás
+\n  - térképigazítás iránytű vagy mozgásirány szerint
+\n  - sávnavigáció, sebességkorlátozás kijelzése, rögzített és hangfelolvasásos (TTS) hangok
 \n 
-\n Az OsmAnd nyílt forráskódú navigációs alkalmazás az OpenStreetMap (OSM) adatainak széleskörű használatával. Bármelyik térképadat (vektoros és raszteres térképek) tárolható a készülék memóriakártyáján offline használatra. Az OsmAnd továbbá lehetővé teszi az offline és online útvonaltervezést is, részletes hangutasításokkal. 
-\n 
-\n Néhány fontosabb funkció: 
-\n - Teljesen offline működés (a letöltött vektoros és raszteres térképek az eszközön tárolódnak) 
-\n - A kompakt, offline vektoros térképek az egész világhoz elérhetőek 
-\n - Az ország vagy régió térképei letölthetők közvetlenül az alkalmazásból 
-\n - Számos rávetíthető térképréteg, mint GPX-ek, navigációs útvonalak, POI-k (érdekes helyek), Kedvencek, szintvonalak, tömegközlekedési megállók, további térképek beállítható átlátszósággal 
-\n - Címek és helyek offline kereshetősége 
-\n - Offline útvonaltervezés közepes távolságra 
-\n - Autós, kerékpáros és gyalogos módok: 
-\n  - opcionális automata nappali/éjszakai nézetváltással 
-\n  - opcionális sebességfüggő nagyítással 
-\n  - opcionális térképforgatással a mozgás vagy az iránytű alapján 
-\n  - opcionális sávasszisztens, sebességkorlátozás kijelzés, felvett és gépi hangutasítás 
-\n 
-\n Az OsmAnd ingyenes változatának korlátozásai: 
-\n - Korlátozott számú térképletöltés 
-\n - Offline Wikipédia cikkek nem érhetőek el 
-\n 
-\n Az OsmAnd folyamatosan fejlesztés alatt áll és a projektünk nagyban függ a pénzügyi támogatásoktól, amiből finanszírozhatók a fejlesztések és az új funkciók tesztelése. Kérlek, fontold meg az OsmAnd+ megvásárlását, vagy egy-egy funkció támogatását az osmand.net oldalon."</string>
-    <string name="osmand_plus_long_description_1000_chars">"OsmAnd+ (OSM Automated Navigation Directions) 
-\n 
-\n Az OsmAnd+ egy nyílt forráskódú navigációs alkalmazás az OpenStreetMap (OSM) adatainak széleskörű használatával. Bármelyik térképadat (vektoros és raszteres térképek) tárolható a készülék memóriakártyáján offline használatra. Az OsmAnd továbbá lehetővé teszi az offline és online útvonaltervezést is, részletes hangutasításokkal. 
-\n 
-\n Az OsmAnd+ az alkalmazás fizetős változata, aminek megvásárlásával támogatod a projektet, az új funkciók fejlesztésének finanszírozását és megkapod a legújabb frissítéseket. 
-\n 
-\n Néhány fontosabb funkció: 
-\n - Teljesen offline működés (a letöltött vektoros és raszteres térképek az eszközön tárolódnak) 
-\n - A kompakt, offline vektoros térképek az egész világhoz elérhetőek 
-\n - Országok és régiók térképeinek korlátlan letöltése közvetlenül az alkalmazásból 
-\n - Offline Wikipédia szócikkek letöltése, ami hasznos segítség városnézéshez 
-\n - Számos rávetíthető térképréteg, mint GPX-ek, navigációs útvonalak, POI-k (érdekes helyek), Kedvencek, szintvonalak, tömegközlekedési megállók, további térképek beállítható átlátszósággal 
-\n 
-\n - Címek és helyek offline kereshetősége 
-\n - Offline útvonaltervezés közepes távolságokra 
-\n - Autós, kerékpáros és gyalogos módok: 
-\n  - opcionális automata nappali/éjszakai nézetváltással 
-\n  - opcionális sebességfüggő nagyítással 
-\n  - opcionális térképforgatással a mozgás vagy az iránytű alapján 
-\n  - opcionális sávasszisztens, sebességhatár kijelzés, felvett és gépi hangutasítás 
+\n Az OsmAnd ezen ingyenes verziójának korlátozásai:
+\n - letölthető térképek számának korlátozása
+\n - wikipédia-POI offline elérés nélkül
+\n
+\n Az OsmAndot aktívan fejlesztjük. Projektünk és a folyamatos előrelépés az új funkciók kifejlesztésére és tesztelésére kapott adományoktól függ. Kérjük, fontolja meg az OsmAnd+ megvásárlását vagy konkrét új funkciók finanszírozását vagy egy álalános adományt a https://osmand.net oldalon."</string>
+    <string name="osmand_plus_long_description_1000_chars">"OsmAnd+ (OSM Automated Navigation Directions)
+\n
+\n Az OsmAnd+ nyílt forráskódú navigációs alkalmazás, amely a globális OpenStreetMap (OSM) adatok széles skáláját használja. Az alkalmazás internetkapcsolat nélkül is használható, mert minden (vektoros és csempés) térképadat tárolható a telefon memóriájában. Az alkalmazás továbbá offline és online útvonaltervezést is tartalmaz, részletes, hangvezérléses navigációval.
+\n
+\n Az OsmAnd+ az alkalmazás fizetős verziója, megvásárlásával támogatja a projektet, új funkciók kifejlesztését finanszírozza és megkapja a legújabb frissítéseket.
+\n
+\n Néhány fontos funkció:
+\n - Teljesen offline működés (letöltött vektoros és csempés térképek tárolása a készülék tárhelyén)
+\n - kompakt vektoros térképek az egész világról
+\n - Korlátlan számú ország- és régiótérkép letöltése közvetlenül az alkalmazásból
+\n - Offline Wikipédia-funkció (Wikipédiához kapcsolódó érdekes pontok letöltése), városnézéshez kiváló
+\n - Több térkép egymásra rétegezése, például állítható átlátszóságú GPX- vagy navigációs nyomvonalak, érdekes pontok, kedvence, szintvonalak, tömegközlekedési megállók és további térképek
+\n - Címek és helyek (érdekes pontok) offline keresése
+\n - Offline útvonaltervezés közepes távolságra
+\n - Autós, kerékpáros és gyalogos módok a következő beállításokkal:
+\n  - éjszakai/nappali nézet automatikus átkapcsolása
+\n  - sebességfüggő térképnagyítás
+\n  - térképigazítás iránytű vagy mozgásirány szerint
+\n  - sávnavigáció, sebességkorlátozás kijelzése, rögzített és hangfelolvasásos (TTS) hangok
 \n"</string>
     <string name="osmand_plus_short_description_80_chars">Globális mobil térkép és navigáció, offline és online OSM térképekkel</string>
     <string name="avoid_motorway">Autópálya nélkül</string>
@@ -2120,22 +2119,22 @@ Ha szereted az OsmAndot és az OSM-et, és szeretnéd támogatni a fejlődésük
     <string name="quick_actions_delete_text">Biztosan törlöd a(z) „%s” műveletet?</string>
     <string name="quick_favorites_show_favorites_dialog">Kedvencek párbeszédablak megjelenítése</string>
     <string name="quick_favorites_name_preset">Előre megadott név</string>
-    <string name="quick_action_add_marker_descr">A gomb létrehoz egy térképjelölőt a képernyő közepén.</string>
-    <string name="quick_action_add_gpx_descr">A gomb létrehoz egy GPX-útpontot a képernyő közepén.</string>
-    <string name="quick_action_take_audio_note_descr">A gomb létrehoz egy hangjegyzetet a képernyő közepén.</string>
-    <string name="quick_action_take_video_note_descr">A gomb létrehoz egy videojegyzetet a képernyő közepén.</string>
-    <string name="quick_action_take_photo_note_descr">A gomb létrehoz egy fényképes jegyzetet a képernyő közepén.</string>
-    <string name="quick_action_add_osm_bug_descr">A gomb létrehoz egy OSM-jegyzetet a képernyő közepén.</string>
-    <string name="quick_action_add_poi_descr">A gomb létrehoz egy érdekes helyet (POI-t) a képernyő közepén.</string>
-    <string name="quick_action_navigation_voice_descr">Egy kapcsoló, ami be- és kikapcsolja a navigáció közbeni hangutasításokat.</string>
-    <string name="quick_action_add_parking_descr">A gomb létrehoz a parkolási helyet a képernyő közepén.</string>
+    <string name="quick_action_add_marker_descr">Gomb, amely létrehoz a képernyő közepén egy térképjelölőt.</string>
+    <string name="quick_action_add_gpx_descr">A gomb, amely létrehoz a képernyő közepén egy GPX-útpontot.</string>
+    <string name="quick_action_take_audio_note_descr">Gomb, amely létrehoz a képernyő közepén egy hangjegyzetet.</string>
+    <string name="quick_action_take_video_note_descr">Gomb, amely létrehoz a képernyő közepén egy videojegyzetet.</string>
+    <string name="quick_action_take_photo_note_descr">Gomb, amely létrehoz a képernyő közepén egy fényképes jegyzetet.</string>
+    <string name="quick_action_add_osm_bug_descr">Gomb, amely létrehoz a képernyő közepén egy OSM-jegyzetet.</string>
+    <string name="quick_action_add_poi_descr">Gomb, amely létrehoz a képernyő közepén egy érdekes helyet (POI-t).</string>
+    <string name="quick_action_navigation_voice_descr">Váltógomb, amely engedélyezi vagy letiltja a navigáció közbeni hangutasításokat.</string>
+    <string name="quick_action_add_parking_descr">Gomb, amely létrehoz a képernyő közepén egy parkolási helyet.</string>
     <string name="quick_action_interim_dialog">Ideiglenes dialógusablak megjelenítése</string>
     <string name="favorite_autofill_toast_text">" elmentve ide: "</string>
     <string name="favorite_empty_place_name">Hely</string>
     <string name="quick_action_duplicates">A duplikáció elkerüléséért a gyorsművelet át lett nevezve erre: %1$s.</string>
     <string name="quick_action_duplicate">A gyorsművelet neve kétszer szerepel</string>
-    <string name="quick_action_showhide_favorites_descr">Egy kapcsoló, ami megjeleníti vagy elrejti a Kedvenc helyeket a térképen.</string>
-    <string name="quick_action_showhide_poi_descr">Egy kapcsoló, ami megjeleníti vagy elrejti a POI-kat a térképen.</string>
+    <string name="quick_action_showhide_favorites_descr">Váltógomb, amely a térképen megjeleníti vagy elrejti a Kedvenc helyeket.</string>
+    <string name="quick_action_showhide_poi_descr">Váltógomb, amely a térképen megjeleníti vagy elrejti az érdekes pontokat (POI-kat).</string>
     <string name="quick_action_showhide_favorites_title">Kedvencek megjelenítése/elrejtése</string>
     <string name="quick_action_favorites_show">Kedvencek megjelenítése</string>
     <string name="quick_action_favorites_hide">Kedvencek elrejtése</string>
@@ -2171,14 +2170,14 @@ Ha szereted az OsmAndot és az OSM-et, és szeretnéd támogatni a fejlődésük
     <string name="quick_action_btn_tutorial_title">Gombpozíció módosítása</string>
     <string name="quick_action_btn_tutorial_descr">A gombot hosszan nyomva és húzva módosíthatod a helyét a képernyőn.</string>
     <string name="shared_string_action_name">Műveletnév</string>
-    <string name="navigate_point_olc">Open Location Code</string>
-    <string name="navigate_point_olc_info_invalid">Érvénytelen OLC
-</string>
-    <string name="navigate_point_olc_info_short">Rövid OLC
-Kérlek adj meg egy teljes kódot</string>
+    <string name="navigate_point_olc">Open Location Code (OLC)</string>
+    <string name="navigate_point_olc_info_invalid">Érvénytelen OLC (Open Location Code)
+\n</string>
+    <string name="navigate_point_olc_info_short">Rövid OLC (Open Location Code)
+\nKérjük, teljes kódot adjon meg</string>
     <string name="navigate_point_olc_info_area">Érvényes teljes OLC
-Ábrázolt terület: %1$s x %2$s</string>
-    <string name="quick_action_page_list_descr">A gomb léptetni fogja az alábbi listát.</string>
+\nA következő területet jeleníti meg: %1$s x %2$s</string>
+    <string name="quick_action_page_list_descr">Gomb, amely lépteti az alábbi listát.</string>
     <string name="select_gpx_folder">GPX fájlok könyvtárának kijelölése</string>
     <string name="file_can_not_be_moved">Nem sikerült áthelyezni a fájlt.</string>
     <string name="shared_string_move">Áthelyezés</string>
@@ -2233,15 +2232,15 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="type_postcode">Add meg az irányítószámot</string>
     <string name="nearest_cities">Közeli települések</string>
     <string name="quick_action_auto_zoom">Térkép automatikus nagyítása be/ki</string>
-    <string name="quick_action_auto_zoom_desc">Egy kapcsoló, ami be- és kikapcsolja a térkép sebességtől függő automatikus nagyítását.</string>
+    <string name="quick_action_auto_zoom_desc">Váltógomb, amely be- vagy kikapcsolja a sebességtől függő automatikus térképnagyítást.</string>
     <string name="quick_action_auto_zoom_on">Automatikus térképnagyítás engedélyezése</string>
     <string name="quick_action_auto_zoom_off">Térkép automatikus nagyításának kikapcsolása</string>
     <string name="quick_action_add_destination">Célpont megadása</string>
     <string name="quick_action_replace_destination">Célpont lecserélése</string>
     <string name="quick_action_add_first_intermediate">Hozzáadás első köztes célpontként</string>
-    <string name="quick_action_add_destination_desc">A gomb beállítja a képernyő középpontját úti célként. A korábban beállított célpont lesz az utolsó köztes célpont.</string>
+    <string name="quick_action_add_destination_desc">Gomb, amely beállítja a képernyő középpontját úti célnak. A korábban beállított célpont lesz az utolsó köztes célpont.</string>
     <string name="quick_action_replace_destination_desc">A műveletgombra koppintás a képernyő középpontját beállítja új úti célként, lecserélve korábban kiválasztott célpontot (ha volt).</string>
-    <string name="quick_action_add_first_intermediate_desc">A gomb a képernyő középpontját beállítja első köztes célpontnak.</string>
+    <string name="quick_action_add_first_intermediate_desc">Gomb, amely beállítja a képernyő közepét első köztes célpontnak.</string>
     <string name="no_overlay">Nincs rátétréteg</string>
     <string name="no_underlay">Nincs alátétréteg</string>
     <string name="subscribe_email_error">Hiba</string>
@@ -2266,7 +2265,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="quick_action_showhide_osmbugs_title">OSM Jegyzetek ki/bekapcsolása</string>
     <string name="quick_action_osmbugs_show">OSM Jegyzetek megjelenítése</string>
     <string name="quick_action_osmbugs_hide">OSM Jegyzetek elrejtése</string>
-    <string name="quick_action_showhide_osmbugs_descr">Egy kapcsoló, ami megjeleníti vagy elrejti az OSM jegyzeteket a térképen.</string>
+    <string name="quick_action_showhide_osmbugs_descr">Váltógomb, amely a térképen megjeleníti vagy elrejti az OSM-jegyzeteket.</string>
     <string name="sorted_by_distance">Távolság szerinti sorrendben</string>
     <string name="search_favorites">Keresés a Kedvencekben</string>
     <string name="hillshade_menu_download_descr">A függőleges árnyékolás megjelenítéséhez töltse le a „Domborzatárnyékolás” térképet.</string>
@@ -2668,14 +2667,14 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="how_to_open_wiki_title">Hogyan nyiss meg Wikipédia szócikkeket?</string>
     <string name="get_osmand_live">Az összes funkció feloldásához szerezze be az OsmAnd Live-ot: Napi térképfrissítés korlátlan számú letöltéssel, az összes fizetős és ingyenes bővítmény, Wikipédia, Wikivoyage és sok más.</string>
     <string name="unirs_render_descr">Az alapértelmezett stílus módosítása a gyalogos és kerékpáros utak kontrasztosabb megjelenítése érdekében. Mapnik színeket használ.</string>
-    <string name="off_road_render_descr"/>
+    <string name="off_road_render_descr">Topo stílus alapján terepen történő vezetéshez és alátétként zöld műholdképekkel történő használathoz. Vékonyabb főutak, vastagabb mezőgazdasági és erdészeti utak, ösvények, kerékpár- és más útvonalak.</string>
     <string name="nautical_render_descr">Hajózási navigációhoz. Főbb tulajdonságok: bóják, világítótornyok, folyók, tengeri útvonalak és jelzések, kikötők, hajózási jelzések, mélységvonalak.</string>
     <string name="ski_map_render_descr">Síeléshez. Kiemeli a sípályákat, a felvonókat, a sífutónyomokat stb. A másodlagos térképobjektumokat elhalványítja.</string>
     <string name="light_rs_render_descr">Egyszerű vezetési stílus. Kellemes éjszakai mód, szintvonalak, kontrasztos narancsszínű utak, elhalványított másodlagos térképobjektumok.</string>
-    <string name="topo_render_descr"/>
+    <string name="topo_render_descr">Túrázáshoz és természetben történő kerékpározáshoz. Szabad téren is olvasható. Kontrasztos utak és természeti objektumok, különböző úttípusok, speciális szintvonalbeállítások, további részletek. A felület sértetlenségének kiigazítása láthatóbbá teszi az útminőséget. Éjszakai mód nincs.</string>
     <string name="mapnik_render_descr">Régi alapértelmezett „Mapnik”-stílus. A színek hasonlóak a Mapnikhez.</string>
-    <string name="touring_view_render_descr"/>
-    <string name="default_render_descr"/>
+    <string name="touring_view_render_descr">"Turisztikai stílus erős kontraszttal és a legtöbb részlettel. Tartalmazza az OsmAnd alapértelmezett stílus össze beállítását, miközben megjeleníti a lehető legtöbb részletet, különösen utakat, ösvényeket és más utazási útvonalakat.  A „Turistaatlasz-szerű” stílus világos különbséget tesz az úttípusok között. Alkalmas nappali, éjszakai és szabad téri használatra is."</string>
+    <string name="default_render_descr">Általános felhasználású stílus. A sűrű városok világosan jelennek meg. Jellemzői a szintvonalak, az útvonalak, a felszínminőség, a használati korlátozások, útszámozások, vadvízisport-létesítmények. Az ösvények az SAC-skála szerint jelennek meg.</string>
     <string name="shared_string_gpx_files">GPX fájlok</string>
     <string name="quick_action_edit_actions">Műveletek szerkesztése</string>
     <string name="shared_string_dont">Nem</string>
@@ -2840,15 +2839,15 @@ Kérlek adj meg egy teljes kódot</string>
 \n Az OsmAnd+ az alkalmazás fizetős verziója. A megvásárlásával támogatod a projektet, finanszírozod az új funkciók fejlesztését, és megkapod a legújabb frissítéseket.
 \n
 \n Néhány a főbb funkciókból:</string>
-    <string name="osmand_plus_extended_description_part2">"Navigáció
-\n • Online (gyorsabb) és offline (nincs roamingdíj külföldön) is működik
-\n • Kanyaronkénti hangutasítások vezetnek végig az úton (rögzített és előállított hangok)
-\n • Válaszható sávvezérlés, utcanevek, és becsült érkezési idő
-\n • Köztes pontok támogatása az útitervben
-\n • Az útvonalterv újratervezésre kerül, ha eltérsz attól
-\n • Célkeresés cím, típus (például: parkoló, étterem, hotel, benzinkút, múzeum), vagy földrajzi koordináták szerint
-\n "</string>
-    <string name="quick_action_switch_day_night_descr">Az OsmAnd nappali és éjszakai módjai közötti kapcsoló.</string>
+    <string name="osmand_plus_extended_description_part2">Navigáció 
+\n • Online (gyorsabb) és offline (nincs roamingdíj külföldön) is működik 
+\n • Kanyaronkénti hangutasítások vezetnek végig az úton (rögzített és előállított hangok) 
+\n • Válaszható sávvezérlés, utcanevek, és becsült érkezési idő 
+\n • Köztes pontok támogatása az útitervben 
+\n • Az útvonalterv újratervezésre kerül, ha eltérsz attól 
+\n • Célkeresés cím, típus (például: parkoló, étterem, hotel, benzinkút, múzeum), vagy földrajzi koordináták szerint 
+\n</string>
+    <string name="quick_action_switch_day_night_descr">Váltógomb, amellyel az OsmAnd éjszakai és nappali módja között lehet váltani.</string>
     <string name="quick_action_switch_day_mode">Nappali mód</string>
     <string name="quick_action_switch_night_mode">Éjszakai mód</string>
     <string name="quick_action_day_night_switch_mode">Váltás a nappali/éjszakai mód között</string>
@@ -2869,7 +2868,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="routeInfo_road_types_name">Úttípusok</string>
     <string name="exit_at">Szálljon le itt:</string>
     <string name="quick_action_show_hide_gpx_tracks">GPX-nyomvonalak megjelenítése/elrejtése</string>
-    <string name="quick_action_show_hide_gpx_tracks_descr">GPX-nyomvonalakat a térképen megjelenítő vagy elrejtő kapcsoló.</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Váltógomb, amely a térképen megjeleníti vagy elrejti a GPX-nyomvonalakat.</string>
     <string name="quick_action_gpx_tracks_hide">GPX nyomvonalak elrejtése</string>
     <string name="quick_action_gpx_tracks_show">GPX nyomvonalak megjelenítése</string>
     <string name="add_destination_query">Először adjon meg egy célpontot</string>
@@ -3178,8 +3177,8 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="osmand_settings">OsmAnd beállítások</string>
     <string name="shared_string_calculate">Kiszámít</string>
     <string name="layer_osm_edits">OSM szerkesztések</string>
-    <string name="quick_action_contour_lines_descr">Egy kapcsoló, ami megjeleníti vagy elrejti a szintvonalakat a térképen.</string>
-    <string name="quick_action_hillshade_descr">Egy kapcsoló, ami megjeleníti vagy elrejti a domborzatárnyékolást a térképen.</string>
+    <string name="quick_action_contour_lines_descr">Váltógomb, amely a térképen megjeleníti vagy elrejti a szintvonalakat.</string>
+    <string name="quick_action_hillshade_descr">Váltógomb, amely a térképen megjeleníti vagy elrejti a domborzatárnyékolást.</string>
     <string name="tts_initialization_error">Szövegfelolvasó motor indítása sikertelen</string>
     <string name="data_storage_preference_summary">%1$s • %2$s</string>
     <string name="data_storage_space_description">%1$s GB szabad (%2$s GB-ból)</string>
@@ -3292,7 +3291,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="utm_format_descr">Az OsmAnd az UTM-szabványt (Universal Transverse Mercator) használja, amely hasonlít a NATO MGRS-rendszeréhez (Military Grid Reference System), de nem azonos vele.</string>
     <string name="shared_string_example">Példa</string>
     <string name="navigate_point_format_utm">UTM-szabvány</string>
-    <string name="navigate_point_format_olc">Helykód megnyitása</string>
+    <string name="navigate_point_format_olc">Open Location Code (OLC)</string>
     <string name="pref_selected_by_default_for_profiles">Ez a beállítás alapértelmezés szerint ki van jelölve a következő profilokban: %s</string>
     <string name="map_look">Térképnézet</string>
     <string name="reset_to_default">Alapértelmezés visszaállítása</string>
@@ -3339,4 +3338,79 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="get_discount_first_few_part">%1$s az első %2$s</string>
     <string name="get_discount_second_part">utána %1$s</string>
     <string name="price_and_discount">%1$s • %2$s megtakarítás</string>
+    <string name="osmand_plus_extended_description_part3">Térképnézet
+\n • Megjeleníti a pozícióját és az irányultságát
+\n • Választható térképigazítás az iránytű vagy a mozgás iránya alapján
+\n • Mentse el legfontosabb helyeit a Kedvencek közé
+\n • Jelenítse meg az Önhöz közeli érdekes pontokat (POI-kat)
+\n • Jelenítsen meg speciális online térképcsempéket, műholdképeket (Bing), különböző rátétrétegeket, például turisztikai/navigációs GPX-nyomvonalakat és további rátétrétegeket és állítsa be átlátszóságukat
+\n • Tetszés szerint megjelenítheti a helyneveket magyarul, angolul, a helyi nyelven vagy fonetikus átírással
+\n</string>
+    <string name="osmand_plus_extended_description_part4">Az OSM és a Wikipédia adatainak használata
+\n • Kiváló minőségű adatok a világ legjobb együttműködésen alapuló projektjeiből
+\n • Országonként vagy régiónként rendelkezésre álló OSM-adatok
+\n • Wikipédiához kapcsolódó érdekes pontok, kiválóak városnézéshez
+\n • Korlátlan számú letöltés, közvetlenül az alkalmazásból
+\n • Kompakt offline vektoros térképek, legalább havi frissítéssel
+\n
+\n • Választási lehetőség a teljes régiós térkép és a kizárólag az úthálózatot mutató térkép között (Például Japán összesen 700 MB, az úthálózat ebből csupán 200 MB)</string>
+    <string name="osmand_plus_extended_description_part5">Biztonsági funkciók
+\n • Beállítható automatikus átkapcsolás éjszakai/nappali módra
+\n • Beállítható sebességkorlátozás megjelenítése, túllépés esetén figyelmeztetéssel
+\n • Beállítható sebességfüggő térképnagyítás
+\n • Ossza meg helyzetét, hogy mások megtalálhassák
+\n</string>
+    <string name="osmand_plus_extended_description_part6">Kerékpáros és gyalogos funkciók
+\n • Gyalog- és turistautak, valamint kerékpáros ösvények megtekintése, szabadtéri tevékenységekhez kitűnő
+\n • Speciális kerékpáros és gyalogos útvonal-tervezési és megjelenítési módok
+\n • Bekapcsolható tömegközlekedési (busz-, villamos- és vasúti) megállók, vonalnevekkel
+\n • Bekapcsolható útvonalrögzítés helyi GPX-fájlba vagy online módon
+\n • Bekapcsolható sebesség- és magasságkijelzés
+\n • Szintvonalak és domborzatárnyékolás megjelenítése (bővítmény telepítése után)</string>
+    <string name="osmand_plus_extended_description_part7">Szerkessze közvetlenül az OpenStreetMapet
+\n • Jelentsen be hibákat
+\n • Töltsön fel GPX-nyomvonalakat az OSM-re közvetlenül az alkalmazásból
+\n • Adjon hozzá érdekes pontokat és töltse fel őket közvetlenül (vagy később offline módon) az OSM-re
+\n • Beállítható útvonalrögzítés a háttérben is (miközben a készülék alvó üzemmódban van)
+\n Az OsmAnd aktívan fejlesztett nyílt forráskódú szoftver. Bárki közreműködhet az alkalmazás fejlesztésében hibák bejelentésével, a fordítások javításával vagy új funkciók kódolásával. A projekt az új funkciók kódolásánek és tesztelésének finanszírozását lehetővé tevő pénzügyi hozzájárulásoktól függ.
+\n</string>
+    <string name="release_3_4">• Alkalmazásprofilok: egyedi profil létrehozása saját igényei szerint, egyedi ikonnal és színnel
+\n
+\n • Most már minden profilban testreszabhatók az alapértelmezések és legkisebb/legnagyobb sebességek
+\n
+\n • Új widget a jelenlegi koordinátáknak
+\n
+\n • Új opciók az iránytű és a sugárirányú vonalzó térképen való megjelenítéséhez
+\n
+\n • A háttérben történő nyomvonalrögzítés hibáinak javítása
+\n
+\n • Háttérben történő térképletöltés javítása
+\n
+\n • A „Képernyő bekapcsolása” opció visszaállítása
+\n
+\n • A Wikipédia-nyelv kijelölésének javítása
+\n
+\n • Az iránytűgomb navigáció közbeni viselkedésének javítása
+\n
+\n • Más hibajavítások
+\n
+\n</string>
+    <string name="release_3_5">• Frissített alkalmazás- és profilbeállítások: a beállítások most típusonként vannak elrendezve. Minden profil külön-külön testreszabható.
+\n
+\n • Az új térképletöltési párbeszédablak böngészés közben javaslatot tesz a letöltendő térképre
+\n
+\n • Az éjszakai téma hibáinak javítása
+\n
+\n • Számos útvonaltervezési probléma javítása világszerte
+\n
+\n • Frissített alaptérkép részletesebb úthálózattal
+\n
+\n • Elárasztott területek javítása világszerte
+\n
+\n • Sí útvonaltervezés: magassági profil és útvonalbonyolultság hozzáadása az útvonal részleteihez
+\n
+\n • További hibajavítások
+\n
+\n</string>
+    <string name="quick_action_directions_from_desc">Gomb, amely beállítja a képernyő közepét kiindulási pontnak, és kiszámítja a célpontig vezető utat vagy megnyit egy párbeszédablakot a célpont kijelöléséhez, ha a célpontjelölő nincs a térképen.</string>
 </resources>

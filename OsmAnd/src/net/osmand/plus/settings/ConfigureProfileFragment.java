@@ -135,6 +135,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 
 		SwitchCompat switchView = switchContainer.findViewById(R.id.switchWidget);
 		switchView.setChecked(isChecked);
+		UiUtilities.setupCompoundButton(isNightMode(), getActiveProfileColor(), switchView);
 
 		TextView title = switchContainer.findViewById(R.id.switchButtonText);
 		title.setText(isChecked ? R.string.shared_string_on : R.string.shared_string_off);

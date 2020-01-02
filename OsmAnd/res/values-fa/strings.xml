@@ -3437,7 +3437,7 @@
     <string name="personal_category_name">شخصی</string>
     <string name="shared_string_downloading_formatted">در حال بارگیری %s</string>
     <string name="rendering_value_thick_name">ضخیم</string>
-    <string name="desert_render_descr">برای بیابان‌ها و سایر نواحی با جمعیت پراکنده.</string>
+    <string name="desert_render_descr">برای بیابان‌ها و سایر نواحی با جمعیت پراکنده. در مقیاس مشابه، جزئیات بیشتری نشان می‌دهد.</string>
     <string name="add_new_profile_q">پروفایل تازهٔ «%1$s» اضافه شود؟</string>
     <string name="select_navigation_icon">انتخاب نماد ناوبری</string>
     <string name="select_map_icon">انتخاب نماد نقشه</string>

@@ -873,7 +873,7 @@ Ferill %2$s</string>
     <string name="transport_search_desc">Leita að almenningssamgöngum</string>
     <string name="favourites_search_desc">Leið til að leita að eftirlætum</string>
     <string name="left_side_navigation">Ekið á vinstri akrein</string>
-    <string name="unknown_location">Staðsetning er ekki enn þekkt</string>
+    <string name="unknown_location">Staðsetning er ekki enn þekkt.</string>
     <string name="local_indexes_cat_map">Stöðluð kort (vektor)</string>
     <string name="native_rendering">Innbyggð myndgerð</string>
     <string name="test_voice_prompts">Prófa raddskipanir</string>
@@ -1292,7 +1292,7 @@ og leiðsögn</string>
     <string name="local_index_routing_data">Gögn fyrir leiðagerð</string>
     <string name="offline_navigation_not_available">Ónettengd leiðsögn með OsmAnd er ekki tiltæk í augnablikinu.</string>
     <string name="left_side_navigation_descr">Fyrir lönd með vinstri handar umferð.</string>
-    <string name="unknown_from_location">Upphafspunktur er ekki ennþá skilgreindur</string>
+    <string name="unknown_from_location">Upphafspunktur er ekki ennþá skilgreindur.</string>
     <string name="modify_transparency">Stilla gegnsæi (0 - gegnsætt, 255 - ógegnsætt)</string>
     <string name="confirm_interrupt_download">Hætta við niðurhal\?</string>
     <string name="basemap_was_selected_to_download">Grunnkort er nauðsynlegt til að forritið virki almennilega og var því valið til að vera sótt.</string>
@@ -3086,7 +3086,7 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="profile_alert_cant_delete_base">Þú getur ekki eytt grunnsniðum OsmAnd</string>
     <string name="profile_alert_need_save_msg">Vistaðu breytingar á notkunarsniðinu áður en haldið er áfram</string>
     <string name="profile_alert_delete_msg">Ertu viss um að þú viljir eyða notkunarsniðinu \"%s\"</string>
-    <string name="select_base_profile_dialog_title">Veldu grunnsnið</string>
+    <string name="select_base_profile_dialog_title">Veldu snið til að byrja með</string>
     <string name="base_profile_descr_car">Bílar, trukkar, mótorhjól</string>
     <string name="base_profile_descr_bicycle">Fjallahjól, skellinöðrur, hestar</string>
     <string name="base_profile_descr_pedestrian">Ganga, hlaup</string>
@@ -3380,7 +3380,7 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="exported_osmand_profile">OsmAnd-snið: %1$s</string>
     <string name="overwrite_profile_q">Sniðið \'%1$s\' er þegar til staðar. Skrifa yfir það\?</string>
     <string name="export_profile_failed">Gat ekki flutt út sniðið.</string>
-    <string name="profile_import">Flytja inn sniðið:</string>
+    <string name="profile_import">Innflutningur á sniði</string>
     <string name="profile_import_descr">Til að flytja inn snið skaltu velja sniðskrána á tækinu og opna hana með OsmAnd.</string>
     <string name="file_import_error">Villa í innflutningi %1$s: %2$s</string>
     <string name="file_imported_successfully">Það tókst að flytja %1$s inn.</string>
@@ -3412,4 +3412,18 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="street_city">%1$s, %2$s</string>
     <string name="personal_category_name">Persónulegt</string>
     <string name="shared_string_downloading_formatted">Sæki %s</string>
+    <string name="rendering_value_thick_name">Svert</string>
+    <string name="desert_render_descr">Fyrir eyðimerkur og önnur mjög dreifbýl svæði. Sýnir nákvæmari atriði miðað við kvarða skoðunar.</string>
+    <string name="select_navigation_icon">Veldu leiðsagnartáknmynd</string>
+    <string name="select_map_icon">Veldu kortatáknmynd</string>
+    <string name="delete_profiles_descr">Eftir að ýtt er á \"Virkja\" munu eydd snið tapast endanlega.</string>
+    <string name="master_profile">Aðalsnið</string>
+    <string name="select_color">Veldu lit</string>
+    <string name="edit_profiles_descr">Þú getur ekki eytt sjálfgefnum grunnsniðum OsmAnd, en þú getur gert þau óvirk á skjánum hér á undan, eða fært þau neðst.</string>
+    <string name="edit_profiles">Breyta sniðum</string>
+    <string name="select_nav_profile_dialog_message">Gerð leiðsagnar hefur áhrif á reglur þær sem notaðar eru við útreikning leiða..</string>
+    <string name="profile_appearance">Útlit sniðs</string>
+    <string name="choose_icon_color_name">Veldu táknmynd, lit og nafn</string>
+    <string name="reorder_profiles">Breyta lista yfir snið</string>
+    <string name="selected_profile">Valið snið</string>
 </resources>

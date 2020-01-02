@@ -22,8 +22,11 @@ public class RasterMapMenu {
 	private static final String TAG = "RasterMapMenu";
 	public static ContextMenuAdapter createListAdapter(final MapActivity mapActivity,
 													   final RasterMapType type) {
+		boolean nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		ContextMenuAdapter adapter = new ContextMenuAdapter();
 		adapter.setDefaultLayoutId(R.layout.list_item_icon_and_menu);
+		adapter.setProfileDependent(true);
+		adapter.setNightMode(nightMode);
 		createLayersItems(adapter, mapActivity, type);
 		return adapter;
 	}

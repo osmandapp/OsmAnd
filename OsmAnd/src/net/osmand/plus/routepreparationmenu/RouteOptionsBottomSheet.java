@@ -1,7 +1,9 @@
 package net.osmand.plus.routepreparationmenu;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.ColorRes;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.view.ContextThemeWrapper;
@@ -59,6 +61,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 	private RoutingHelper routingHelper;
 	private RoutingOptionsHelper routingOptionsHelper;
 	private ApplicationMode applicationMode;
+	@ColorRes private int selectedModeColorId;
 	private MapActivity mapActivity;
 
 	@Override
@@ -70,6 +73,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 		routingOptionsHelper = app.getRoutingOptionsHelper();
 		mapActivity = getMapActivity();
 		applicationMode = routingHelper.getAppMode();
+		selectedModeColorId = applicationMode.getIconColorInfo().getColor(nightMode);
 	}
 
 	@Override
@@ -137,6 +141,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 		boolean active = !routingHelper.getVoiceRouter().isMuteForMode(applicationMode);
 		final BottomSheetItemWithCompoundButton[] muteSoundItem = new BottomSheetItemWithCompoundButton[1];
 		muteSoundItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
+				.setCompoundButtonColorId(selectedModeColorId)
 				.setChecked(active)
 				.setDescription(getString(R.string.voice_announcements))
 				.setIcon(getContentIcon(active ? optionsItem.getActiveIconId() : optionsItem.getDisabledIconId()))
@@ -160,6 +165,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 	private BaseBottomSheetItem createTimeConditionalRoutingItem(final LocalRoutingParameter optionsItem) {
 		final BottomSheetItemWithCompoundButton[] timeConditionalRoutingItem = new BottomSheetItemWithCompoundButton[1];
 		timeConditionalRoutingItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
+				.setCompoundButtonColorId(selectedModeColorId)
 				.setChecked(settings.ENABLE_TIME_CONDITIONAL_ROUTING.get())
 				.setIcon(getContentIcon((optionsItem.getActiveIconId())))
 				.setTitle(getString(R.string.temporary_conditional_routing))
@@ -195,6 +201,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 						fragment.setUsedOnMap(true);
 						fragment.setArguments(args);
 						fragment.setTargetFragment(RouteOptionsBottomSheet.this, ShowAlongTheRouteBottomSheet.REQUEST_CODE);
+						fragment.setAppMode(applicationMode);
 						fragment.show(fm, ShowAlongTheRouteBottomSheet.TAG);
 						updateMenu();
 					}
@@ -204,6 +211,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 	private BaseBottomSheetItem createRouteSimulationItem(final LocalRoutingParameter optionsItem) {
 		final BottomSheetItemWithCompoundButton[] simulateNavigationItem = new BottomSheetItemWithCompoundButton[1];
 		simulateNavigationItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
+				.setCompoundButtonColorId(selectedModeColorId)
 				.setChecked(settings.simulateNavigation)
 				.setIcon(getContentIcon(R.drawable.ic_action_start_navigation))
 				.setTitle(getString(R.string.simulate_navigation))
@@ -240,6 +248,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 						routingOptionsHelper.addNewRouteMenuParameter(applicationMode, optionsItem);
 						AvoidRoadsBottomSheetDialogFragment avoidRoadsFragment = new AvoidRoadsBottomSheetDialogFragment();
 						avoidRoadsFragment.setTargetFragment(RouteOptionsBottomSheet.this, AvoidRoadsBottomSheetDialogFragment.REQUEST_CODE);
+						avoidRoadsFragment.setCompoundButtonColorId(selectedModeColorId);
 						avoidRoadsFragment.show(mapActivity.getSupportFragmentManager(), AvoidRoadsBottomSheetDialogFragment.TAG);
 						updateMenu();
 					}
@@ -259,6 +268,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 						routingOptionsHelper.addNewRouteMenuParameter(applicationMode, optionsItem);
 						AvoidRoadsBottomSheetDialogFragment avoidRoadsFragment = new AvoidRoadsBottomSheetDialogFragment(true);
 						avoidRoadsFragment.setTargetFragment(RouteOptionsBottomSheet.this, AvoidRoadsBottomSheetDialogFragment.REQUEST_CODE);
+						avoidRoadsFragment.setCompoundButtonColorId(selectedModeColorId);
 						avoidRoadsFragment.show(mapActivity.getSupportFragmentManager(), AvoidRoadsBottomSheetDialogFragment.TAG);
 						updateMenu();
 					}
@@ -313,6 +323,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 		if (parameter != null) {
 			final BottomSheetItemWithCompoundButton[] item = new BottomSheetItemWithCompoundButton[1];
 			BottomSheetItemWithCompoundButton.Builder builder = new BottomSheetItemWithCompoundButton.Builder();
+			builder.setCompoundButtonColorId(selectedModeColorId);
 			int iconId = -1;
 			if (parameter.routingParameter != null || parameter instanceof RoutingOptionsHelper.OtherLocalRoutingParameter) {
 				builder.setTitle(parameter.getText(mapActivity));
@@ -464,8 +475,9 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 	}
 
 	private void updateParameters() {
+		Activity activity = getActivity();
 		View mainView = getView();
-		if (mainView != null) {
+		if (activity != null && mainView != null) {
 			LinearLayout itemsContainer = (LinearLayout) mainView.findViewById(useScrollableItemsContainer()
 					? R.id.scrollable_items_container : R.id.non_scrollable_items_container);
 			if (itemsContainer != null) {
@@ -474,7 +486,7 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 			items.clear();
 			createMenuItems(null);
 			for (BaseBottomSheetItem item : items) {
-				item.inflate(app, itemsContainer, nightMode);
+				item.inflate(activity, itemsContainer, nightMode);
 			}
 			setupHeightAndBackground(mainView);
 		}

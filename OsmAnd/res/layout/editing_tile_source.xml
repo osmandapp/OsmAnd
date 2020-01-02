@@ -6,46 +6,57 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
+        android:paddingLeft="@dimen/context_menu_padding_margin_large"
+        android:paddingRight="@dimen/context_menu_padding_margin_large"
+	    android:paddingTop="@dimen/context_menu_padding_margin_large"
+	    android:paddingBottom="@dimen/context_menu_padding_margin_large"
         android:orientation="vertical">
 
         <TextView
+	        android:textColor="?android:textColorSecondary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/shared_string_name"/>
 
         <EditText
             android:id="@+id/Name"
+	        android:textColor="?android:textColorPrimary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
+            android:layout_marginLeft="@dimen/text_margin_small"
+            android:layout_marginRight="@dimen/text_margin_small"
             android:text="">
 
             <requestFocus/>
         </EditText>
 
         <TextView
+	        android:textColor="?android:textColorSecondary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:scrollHorizontally="true"
+	        android:layout_marginTop="@dimen/content_padding_half"
             android:text="@string/edit_tilesource_choose_existing"/>
 
         <Spinner
             android:id="@+id/TileSourceSpinner"
+	        android:textColor="?android:textColorPrimary"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"/>
+            android:layout_marginLeft="@dimen/text_margin_small"
+            android:layout_marginRight="@dimen/text_margin_small"/>
 
         <TextView
+	        android:textColor="?android:textColorSecondary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+	        android:layout_marginTop="@dimen/content_padding_half"
             android:text="@string/edit_tilesource_url_to_load"/>
 
         <EditText
             android:id="@+id/URLToLoad"
+	        android:textColor="?android:textColorPrimary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:lines="5"
@@ -53,43 +64,52 @@
             android:text=""/>
 
         <TextView
+	        android:layout_marginTop="@dimen/content_padding_half"
+	        android:textColor="?android:textColorSecondary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/edit_tilesource_minzoom"/>
 
         <EditText
             android:id="@+id/MinZoom"
+	        android:textColor="?android:textColorPrimary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text=""/>
 
         <TextView
+	        android:layout_marginTop="@dimen/content_padding_half"
+	        android:textColor="?android:textColorSecondary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/edit_tilesource_maxzoom"/>
 
         <EditText
             android:id="@+id/MaxZoom"
+	        android:textColor="?android:textColorPrimary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text=""/>
 
         <TextView
+	        android:layout_marginTop="@dimen/content_padding_half"
+	        android:textColor="?android:textColorSecondary"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="@string/edit_tilesource_expiration_time"/>
 
         <EditText
             android:id="@+id/ExpirationTime"
+	        android:textColor="?android:textColorPrimary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text=""/>
 
-        <CheckBox
+        <android.support.v7.widget.AppCompatCheckBox
             android:id="@+id/EllipticMercator"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="5dp"
+	        android:layout_marginTop="@dimen/content_padding_half"
             android:text="@string/edit_tilesource_elliptic_tile"/>
     </LinearLayout>
 

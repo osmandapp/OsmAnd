@@ -3395,7 +3395,7 @@
     <string name="routing_attr_difficulty_preference_description">להעדיף מסלולים ברמת הקושי הזו, למרות שניתוב דרך מסלולים קשים או קלים יותר עדיין אפשרי אם מדובר במסלולים יותר קצרים.</string>
     <string name="routing_attr_freeride_policy_description">מסלולי גלישה חופשית ומחוץ לסימון הם מסלולים ומעברים בלתי רשמיים. בדרך כלל לא עברו גרומינג, אינם מתוחזקים באופן רשמי ואינם מפוקחים בשעות הערב. הכניסה על אחריותך בלבד.</string>
     <string name="rendering_value_thick_name">עבה</string>
-    <string name="desert_render_descr">למדבריות ואזורים נוספים עם אוכלוסיה דלילה.</string>
+    <string name="desert_render_descr">למדבריות ואזורים נוספים עם אוכלוסיה דלילה. מציג פרטים נוספים בהתאם לתקריב.</string>
     <string name="select_navigation_icon">בחירת סמל ניווט</string>
     <string name="select_map_icon">בחירת סמל מפה</string>
     <string name="delete_profiles_descr">לאחר לחיצה על ‚החלה’, הפרופילים שנמחקו יאבדו לעד.</string>
