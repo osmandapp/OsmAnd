@@ -3404,4 +3404,7 @@ Pôr do Sol: %2$s</string>
     <string name="choose_icon_color_name">Escolha ícone, cor e nome</string>
     <string name="reorder_profiles">Editar lista de perfis</string>
     <string name="selected_profile">Perfil selecionado</string>
+    <string name="reset_confirmation_descr">Ao clicar em %1$s, você perderá todas as suas alterações.</string>
+    <string name="reset_all_profile_settings_descr">Todas as configurações de perfil serão redefinidas para o estado após a instalação.</string>
+    <string name="reset_all_profile_settings">Redefinir todas as configurações de perfil para o padrão\?</string>
 </resources>
