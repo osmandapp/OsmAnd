@@ -2909,7 +2909,7 @@
     <string name="use_osm_live_public_transport_description">Увімкнути громадський транспорт із врахуванням авто-оновлень OsmAnd Live.</string>
     <string name="use_osm_live_public_transport">Громадський транспорт OsmAnd Live</string>
     <string name="step_by_step">По черзі</string>
-    <string name="routeInfo_road_types_name">Типи доріг</string>
+    <string name="routeInfo_road_types_name">Види доріг</string>
     <string name="exit_at">Вихід на</string>
     <string name="sit_on_the_stop">Посадка на зупинці</string>
     <string name="shared_string_swap">Поміняти</string>
@@ -2947,7 +2947,7 @@
     <string name="quick_action_switch_day_mode">Денний режим</string>
     <string name="quick_action_switch_night_mode">Нічний режим</string>
     <string name="quick_action_day_night_switch_mode">Перемкнути Денний/Нічний режим</string>
-    <string name="routeInfo_roadClass_name">Тип дороги</string>
+    <string name="routeInfo_roadClass_name">Вид дороги</string>
     <string name="routeInfo_surface_name">Поверхня</string>
     <string name="routeInfo_smoothness_name">Рівність</string>
     <string name="routeInfo_steepness_name">Крутість</string>
@@ -2978,14 +2978,14 @@
     <string name="rendering_attr_surface_paving_stones_name">Тротуарна плитка</string>
     <string name="rendering_attr_surface_pebblestone_name">Галька</string>
     <string name="rendering_attr_surface_stone_name">Камінь</string>
-    <string name="rendering_attr_surface_metal_name">Метал</string>
+    <string name="rendering_attr_surface_metal_name">Ковань</string>
     <string name="rendering_attr_surface_wood_name">Дерево</string>
     <string name="rendering_attr_surface_gravel_name">Гравій</string>
     <string name="rendering_attr_surface_fine_gravel_name">Багатошаровий гравій</string>
-    <string name="rendering_attr_surface_compacted_name">Втрамбована</string>
+    <string name="rendering_attr_surface_compacted_name">Ущільнена</string>
     <string name="rendering_attr_smoothness_excellent_name">Чудова</string>
     <string name="rendering_attr_smoothness_good_name">Хороша</string>
-    <string name="rendering_attr_smoothness_intermediate_name">Середня</string>
+    <string name="rendering_attr_smoothness_intermediate_name">Посередньо</string>
     <string name="rendering_attr_smoothness_bad_name">Погана</string>
     <string name="rendering_attr_smoothness_very_bad_name">Дуже погана</string>
     <string name="rendering_attr_smoothness_horrible_name">Жахлива</string>
@@ -2995,7 +2995,7 @@
     <string name="rendering_attr_highway_class_road_name">Дорога</string>
     <string name="rendering_attr_highway_class_street_name">Вулиця</string>
     <string name="rendering_attr_highway_class_service_name">Проїзд</string>
-    <string name="rendering_attr_highway_class_footway_name">Тротуар</string>
+    <string name="rendering_attr_highway_class_footway_name">Пішохідна доріжка</string>
     <string name="rendering_attr_highway_class_steps_name">Сходи</string>
     <string name="waiting_for_route_calculation">Розрахунок маршруту…</string>
     <string name="shared_string_description">Опис</string>
@@ -3029,7 +3029,7 @@
     <string name="save_poi_value_exceed_length_title">Довжина значення \"%s\"</string>
     <string name="rendering_attr_surface_cobblestone_name">Мостова</string>
     <string name="rendering_attr_highway_class_state_road_name">Державна дорога</string>
-    <string name="rendering_attr_highway_class_track_name">Сільськогосподарська</string>
+    <string name="rendering_attr_highway_class_track_name">Трек</string>
     <string name="rendering_attr_highway_class_bridleway_name">Кінна</string>
     <string name="rendering_attr_highway_class_path_name">Стежка</string>
     <string name="rendering_attr_highway_class_cycleway_name">Велодоріжка</string>
