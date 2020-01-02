@@ -1,7 +1,6 @@
 package net.osmand.plus.activities;
 
 import android.Manifest;
-import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.Dialog;
@@ -38,7 +37,6 @@ import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewStub;
-import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
@@ -376,29 +374,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public void exitFromFullScreen(View view) {
-		runLayoutListener(view);
-		AndroidUtils.exitFromFullScreen(this);
+		AndroidUtils.exitFromFullScreen(this, view);
 	}
 
 	public void enterToFullScreen() {
-		runLayoutListener(getLayout());
-		AndroidUtils.enterToFullScreen(this);
-	}
-
-	private void runLayoutListener(final View view) {
-		if (view != null) {
-			ViewTreeObserver vto = view.getViewTreeObserver();
-			vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-
-				@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-				@Override
-				public void onGlobalLayout() {
-					ViewTreeObserver obs = view.getViewTreeObserver();
-					obs.removeOnGlobalLayoutListener(this);
-					view.requestLayout();
-				}
-			});
-		}
+		AndroidUtils.enterToFullScreen(this, getLayout());
 	}
 
 	@Override
