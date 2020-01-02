@@ -3317,7 +3317,7 @@ Lon %2$s</string>
     <string name="routeInfo_piste_difficulty_name">Pisten-Schwierigkeitsgrad</string>
     <string name="routing_attr_width_name">Breitenbegrenzung</string>
     <string name="routing_attr_width_description">Geben Sie die zulässige Fahrzeugbreitenbegrenzung auf Routen an.</string>
-    <string name="avoid_in_routing_descr_">Bestimmte Routen und Straßentypen vermeiden</string>
+    <string name="avoid_in_routing_descr_">Vermeiden bestimmter Routen und Straßentypen</string>
     <string name="app_mode_utv">Nebeneinander</string>
     <string name="rendering_attr_piste_difficulty_aerialway_name">Seilbahn</string>
     <string name="rendering_attr_piste_difficulty_connection_name">Verbindung</string>
@@ -3422,4 +3422,7 @@ Lon %2$s</string>
     <string name="choose_icon_color_name">Symbol, Farbe und Namen wählen</string>
     <string name="reorder_profiles">Profilliste bearbeiten</string>
     <string name="selected_profile">Ausgewähltes Profil</string>
+    <string name="reset_confirmation_descr">Durch das Auswählen von %1$s werden alle Änderungen verlorengehen.</string>
+    <string name="reset_all_profile_settings_descr">Alle Profil-Einstellungen werden auf den Ausgangszustand nach App-Installation zurückgesetzt.</string>
+    <string name="reset_all_profile_settings">Alle Profil-Einstellungen auf den Standard zurücksetzen\?</string>
 </resources>
