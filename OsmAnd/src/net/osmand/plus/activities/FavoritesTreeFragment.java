@@ -704,8 +704,14 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 		selectedGroupPos = groupPos;
 		selectedChildPos = childPos;
 		LatLon location = new LatLon(point.getLatitude(), point.getLongitude());
+		String pointType;
+		if (point.isPersonal() && point.getName().equals(FavouritePoint.PointType.PARKING.getName())) {
+			pointType = PointDescription.POINT_TYPE_PARKING_MARKER;
+		} else {
+			pointType = PointDescription.POINT_TYPE_FAVORITE;
+		}
 		FavoritesActivity.showOnMap(requireActivity(), this, location.getLatitude(), location.getLongitude(),
-				settings.getLastKnownMapZoom(), new PointDescription(PointDescription.POINT_TYPE_FAVORITE, point.getName(app)), true, point);
+				settings.getLastKnownMapZoom(), new PointDescription(pointType, point.getName(app)), true, point);
 	}
 
 	@Override
