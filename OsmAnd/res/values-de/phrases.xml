@@ -3672,9 +3672,9 @@
     <string name="poi_caravan_no">Zufahrt Wohnwagen: nein</string>
     <string name="poi_motorhome_no">Zufahrt Wohnmobil: nein</string>
     <string name="poi_bus_no">Anbindung Linienbus: nein</string>
-    <string name="poi_tourist_bus_yes">Zufahrt Touristenbus: ja</string>
-    <string name="poi_tourist_bus_designated">Zufahrt Touristenbus: ausgewiesen</string>
-    <string name="poi_tourist_bus_no">Zufahrt Touristenbus: nein</string>
+    <string name="poi_tourist_bus_yes">Reisebuszufahrt: ja</string>
+    <string name="poi_tourist_bus_designated">Reisebuszufahrt: ausgewiesen</string>
+    <string name="poi_tourist_bus_no">Reisebuszufahrt: nein</string>
     <string name="poi_ski_yes">Zufahrt Ski: ja</string>
     <string name="poi_ski_no">Zufahrt Ski: nein</string>
     <string name="poi_snowmobile_private">Zufahrt Schneemobil: privat</string>
