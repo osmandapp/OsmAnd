@@ -273,8 +273,8 @@
     <string name="add_segment_to_the_track">GPX ಟ್ರ್ಯಾಕ್ಅನ್ನು ಸೇರಿಸಿ</string>
     <string name="default_speed_dialog_msg">ಅಜ್ಞಾತ ರೀತಿಯ ರಸ್ತೆಗಳಿಗೆ ಆಗಮನದ ಸಮಯವನ್ನು ಅಂದಾಜು ಮಾಡಲು ಮತ್ತು ಎಲ್ಲಾ ರಸ್ತೆಗಳ ವೇಗವನ್ನು ಮಿತಿಗೊಳಿಸಲು ಬಳಸಲಾಗುತ್ತದೆ (ಮಾರ್ಗವನ್ನು ಬದಲಾಯಿಸಬಹುದು)</string>
     <string name="change_data_storage_full_description">OsmAnd ಡೇಟಾ ಫೈಲ್‌ಗಳನ್ನು ಹೊಸ ಸ್ಥಳಕ್ಕೆ ಸೇರಿಸುವುದೇ\?
-\n% 1 $ s&gt;% 2 $ s</string>
-    <string name="data_storage_preference_summary">% 1 $ s •% 2 $ s</string>
+\n%1$s &gt; %2$s</string>
+    <string name="data_storage_preference_summary">%1$s • %2$s</string>
     <string name="avoid_in_routing_descr_">ಕೆಲವು ಮಾರ್ಗಗಳು ಮತ್ತು ರಸ್ತೆ ಪ್ರಕಾರಗಳನ್ನು ಪರಿಗಣಿಸಬೇಡಿ</string>
     <string name="app_mode_utv">ಅಕ್ಕ-ಪಕ್ಕ</string>
     <string name="rendering_attr_piste_difficulty_aerialway_name">ವೈಮಾನಿಕ ಮಾರ್ಗ</string>
@@ -282,7 +282,7 @@
     <string name="shared_string_calculate">ಲೆಕ್ಕಹಾಕು</string>
     <string name="shared_string_osmand_usage">OsmAndನ ಬಳಕೆ</string>
     <string name="shared_string_maps">ನಕ್ಷೆಗಳು</string>
-    <string name="shared_string_memory_tb_desc">% 1 $ s TB</string>
+    <string name="shared_string_memory_tb_desc">%1$s TB</string>
     <string name="shared_string_memory_gb_desc">%1$s GB</string>
     <string name="shared_string_memory_mb_desc">%1$s MB</string>
     <string name="shared_string_memory_kb_desc">%1$s kB</string>
@@ -291,15 +291,15 @@
     <string name="store_tracks_in_rec_directory">ಟ್ರ್ಯಾಕ್‌ಗಳನ್ನು \'rec\' ಫೋಲ್ಡರ್‌ಗೆ ಸಂಗ್ರಹ ಮಾಡಿ</string>
     <string name="store_tracks_in_daily_directories">\'daily\' ಫೋಲ್ಡರ್‌ನಲ್ಲಿ ಟ್ರ್ಯಾಕ್‌ಗಳನ್ನು ಸಂಗ್ರಹ ಮಾಡಿ</string>
     <string name="store_tracks_in_daily_directories_descrp">ಟ್ರಕ್ಗಳನ್ನು ಉಪ ಫೋಲ್ಡರ್ಗಳಲ್ಲಿ, ರೆಕಾರ್ಡಿಂಗ್ ಮಾಡಿದ ದಿನದ ಪ್ರಕಾರ ಸಂಗ್ರಹಿಸಿ ದಿನ (ಉದಾ. 2018-01-01).</string>
-    <string name="shared_string_memory_used_tb_desc">% 1 $ s TB ಬಳಸಲಾಗಿದೆ</string>
-    <string name="shared_string_memory_used_gb_desc">% 1 $ s GB ಬಳಸಲಾಗಿದೆ</string>
-    <string name="shared_string_memory_used_mb_desc">% 1 $ s MB ಬಳಸಲಾಗಿದೆ</string>
-    <string name="shared_string_memory_used_kb_desc">% 1 $ s kB ಬಳಸಲಾಗುತ್ತದೆ</string>
+    <string name="shared_string_memory_used_tb_desc">%1$s TB ಬಳಸಲಾಗಿದೆ</string>
+    <string name="shared_string_memory_used_gb_desc">%1$s GB ಬಳಸಲಾಗಿದೆ</string>
+    <string name="shared_string_memory_used_mb_desc">%1$s MB ಬಳಸಲಾಗಿದೆ</string>
+    <string name="shared_string_memory_used_kb_desc">%1$s kB ಬಳಸಲಾಗುತ್ತದೆ</string>
     <string name="contour_lines_and_hillshade">ಬಾಹ್ಯರೇಖೆ ರೇಖೆಗಳು ಮತ್ತು ಹಿಲ್ಶೇಡ್</string>
     <string name="routing_attr_prefer_unpaved_name">ಸುಸಜ್ಜಿತ ರಸ್ತೆಗಳಿಗೆ ಆದ್ಯತೆ ನೀಡಿ</string>
     <string name="routing_attr_prefer_unpaved_description">ಸುಸಜ್ಜಿತ ರಸ್ತೆಗಳಿಗೆ ಆದ್ಯತೆ ನೀಡಿ.</string>
     <string name="update_all_maps">ಎಲ್ಲಾ ನಕ್ಷೆಗಳನ್ನು ನವೀಕರಿಸಿ</string>
-    <string name="update_all_maps_q">ಎಲ್ಲಾ (% 1 $ d) ನಕ್ಷೆಗಳನ್ನು ನವೀಕರಿಸಲು ನೀವು ಖಚಿತವಾಗಿ ಬಯಸುವಿರಾ\?</string>
+    <string name="update_all_maps_q">ಎಲ್ಲಾ (%1$d) ನಕ್ಷೆಗಳನ್ನು ನವೀಕರಿಸಲು ನೀವು ಖಚಿತವಾಗಿ ಬಯಸುವಿರಾ\?</string>
     <string name="release_3_5">ನವೀಕರಿಸಿದ ಅಪ್ಲಿಕೇಶನ್ ಮತ್ತು ಪ್ರೊಫೈಲ್ ಸೆಟ್ಟಿಂಗ್‌ಗಳು: ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ಈಗ ಅವುಗಳ ಪ್ರಕಾರದ ಮೇಲೆ ಜೋಡಿಸಲಾಗಿದೆ. ಪ್ರತಿಯೊಂದು ಪ್ರೊಫೈಲ್ ಅನ್ನು ಪ್ರತ್ಯೇಕವಾಗಿ ಕಸ್ಟಮೈಸ್ ಮಾಡಬಹುದು.
 \n
 \nಬ್ರೌಸಿಂಗ್ ಮಾಡುವಾಗ ನೀವು ಉಪಾಯಾಗಿಸಬಹುದಾದ ನಕ್ಷೆಯನ್ನು ಡೌನ್‌ಲೋಡ್ ಮಾಡಲು ಸೂಚಿಸಲಾಗುತಿದ್ದೆ.
@@ -332,21 +332,21 @@
     <string name="quick_action_show_hide_hillshade">ಹಿಲ್ಶೇಡ್ ಅನ್ನು ತೋರಿಸಿ / ಮರೆಮಾಡಿ</string>
     <string name="tts_initialization_error">text-to-speech ಎಂಜಿನ್ ಅನ್ನು ಪ್ರಾರಂಭಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ</string>
     <string name="export_profile">ಪ್ರೊಫೈಲನ್ನು ಬೇರೆಡೆಗೆ ರಫ್ತುಮಾಡಿ</string>
-    <string name="exported_osmand_profile">OsmAnd ಪ್ರೊಫೈಲ್:% 1 $ s</string>
-    <string name="overwrite_profile_q">\'% 1 $ s\' ಪ್ರೊಫೈಲ್ ಈಗಾಗಲೇ ಅಸ್ತಿತ್ವದಲ್ಲಿದೆ. ಓವರ್‌ರೈಟ್ ಮಾಡಲು ಬಯಸುವಿರಾ\?</string>
+    <string name="exported_osmand_profile">OsmAnd ಪ್ರೊಫೈಲ್:%1$s</string>
+    <string name="overwrite_profile_q">\'%1$s\' ಪ್ರೊಫೈಲ್ ಈಗಾಗಲೇ ಅಸ್ತಿತ್ವದಲ್ಲಿದೆ. ಓವರ್‌ರೈಟ್ ಮಾಡಲು ಬಯಸುವಿರಾ\?</string>
     <string name="export_profile_failed">ಪ್ರೊಫೈಲ್ ಅನ್ನು ರಫ್ತು ಮಾಡಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ.</string>
     <string name="profile_import">ಪ್ರೊಫೈಲ್ ಆಮದು ಮಾಡಿಕೊಳ್ಳಿ</string>
     <string name="profile_import_descr">ಪ್ರೊಫೈಲ್ ಅನ್ನು ಆಮದು ಮಾಡಲು, ನಿಮ್ಮ deviceನಲ್ಲಿ ಅದರ ಫೈಲ್ ಅನ್ನು ಆಯ್ಕೆ ಮಾಡಿ ಮತ್ತು ಅದನ್ನು OsmAnd ನೊಂದಿಗೆ ತೆರೆಯಿರಿ.</string>
-    <string name="file_import_error">% 1$s ಆಮದು ದೋಷ:% 2 $ s</string>
-    <string name="file_imported_successfully">% 1 $ s ಅನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಆಮದು ಮಾಡಲಾಗಿದೆ.</string>
+    <string name="file_import_error">%1$s ಆಮದು ದೋಷ:%2$s</string>
+    <string name="file_imported_successfully">%1$s ಅನ್ನು ಯಶಸ್ವಿಯಾಗಿ ಆಮದು ಮಾಡಲಾಗಿದೆ.</string>
     <string name="rendering_value_white_name">ಬಿಳಿ</string>
-    <string name="swap_two_places">% 1 $ s ಮತ್ತು% 2 $ s ಅನ್ನು ಬದಲಾಯಿಸಿ</string>
+    <string name="swap_two_places">%1$s ಮತ್ತು%2$s ಅನ್ನು ಬದಲಾಯಿಸಿ</string>
     <string name="route_start_point">ಪ್ರಾರಂಭದ ಸ್ಥಳ</string>
     <string name="track_saved">ಟ್ರ್ಯಾಕ್ ಉಳಿಸಲಾಗಿದೆ</string>
     <string name="empty_filename">ಫೈಲಿನ ಹೆಸರು ಖಾಲಿಯಾಗಿದೆ</string>
     <string name="shared_string_revert">ಹಿಂಪಡೆ</string>
     <string name="rendering_attr_showCycleNodeNetworkRoutes_name">ನೋಡ್ ನೆಟ್‌ವರ್ಕ್ ಸೈಕಲ್ ಮಾರ್ಗಗಳನ್ನು ತೋರಿಸಿ</string>
-    <string name="clear_confirmation_msg">% 1 $ s ತೆರವುಗೊಳಿಸುವುದೇ\?</string>
+    <string name="clear_confirmation_msg">%1$s ತೆರವುಗೊಳಿಸುವುದೇ\?</string>
     <string name="download_map_dialog">ನಕ್ಷೆಯ ಸಂವಾದವನ್ನು ಡೌನ್‌ಲೋಡ್ ಮಾಡಿ</string>
     <string name="dialogs_and_notifications_title">ಸಂವಾದಗಳು ಮತ್ತು ಅಧಿಸೂಚನೆಗಳು</string>
     <string name="dialogs_and_notifications_descr">ಬಳಕೆಯ ಸಮಯದಲ್ಲಿ OsmAnd ತೋರಿಸುವ ಪಾಪ್‌ಅಪ್‌ಗಳು, ಸಂವಾದಗಳು ಮತ್ತು ಅಧಿಸೂಚನೆಗಳನ್ನು ನಿಯಂತ್ರಿಸಿ.</string>
@@ -358,11 +358,11 @@
     <string name="shared_string_turn_off">ಆಫ್ ಮಾಡಿ</string>
     <string name="new_plugin_added">ಹೊಸ ಪ್ಲಗಿನ್ ಸೇರಿಸಲಾಗಿದೆ</string>
     <string name="join_segments">ಭಾಗಗಳನ್ನು ಸೇರಿಸಿ</string>
-    <string name="add_new_profile_q">ಹೊಸ ಪ್ರೊಫೈಲ್ ಸೇರಿಸುವುದೇ \'% 1 $ s\'\?</string>
+    <string name="add_new_profile_q">ಹೊಸ ಪ್ರೊಫೈಲ್ ಸೇರಿಸುವುದೇ \'%1$s\'\?</string>
     <string name="save_heading">ಶೀರ್ಷಿಕೆಯನ್ನು ಸೇರಿಸಿ</string>
     <string name="save_heading_descr">ರೆಕಾರ್ಡಿಂಗ್ ಮಾಡುವಾಗ ಪ್ರತಿ ಟ್ರ್ಯಾಕ್ ಪಾಯಿಂಟ್‌ಗೆ ಶೀರ್ಷಿಕೆ ಉಳಿಸಿ.</string>
-    <string name="distance_and_address">% 1 $ s •% 2 $ s</string>
-    <string name="street_city">% 1 $ s,% 2 $ s</string>
+    <string name="distance_and_address">%1$s • %2$s</string>
+    <string name="street_city">%1$s, %2$s</string>
     <string name="personal_category_name">ವೈಯಕ್ತಿಕ</string>
     <string name="shared_string_downloading_formatted">ಡೌನ್‌ಲೋಡ್ ಮಾಡಲಾಗುತ್ತಿದೆ%s</string>
     <string name="rendering_value_thick_name">ದಪ್ಪ</string>
