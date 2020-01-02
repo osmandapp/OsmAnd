@@ -3413,4 +3413,7 @@ Ha szereted az OsmAndot és az OSM-et, és szeretnéd támogatni a fejlődésük
 \n
 \n</string>
     <string name="quick_action_directions_from_desc">Gomb, amely beállítja a képernyő közepét kiindulási pontnak, és kiszámítja a célpontig vezető utat vagy megnyit egy párbeszédablakot a célpont kijelöléséhez, ha a célpontjelölő nincs a térképen.</string>
+    <string name="reset_confirmation_descr">Minden módosítás elvész, ha erre koppint: %1$s.</string>
+    <string name="reset_all_profile_settings_descr">Minden profilbeállítás vissza fog állni a telepítést követő állapotba.</string>
+    <string name="reset_all_profile_settings">Minden profil visszaálljon az alapértelmezett helyzetbe\?</string>
 </resources>
