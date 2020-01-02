@@ -43,7 +43,7 @@ public class HomeWorkCard extends BaseCard {
 					AddPointBottomSheetDialog.showInstance(mapActivity, PointType.HOME);
 				} else {
 					targetPointsHelper.navigateToPoint(new LatLon(homePoint.getLatitude(), homePoint.getLongitude()),
-							true, -1, homePoint.getPointDescription());
+							true, -1, homePoint.getPointDescription(mapActivity));
 				}
 			}
 		});
@@ -63,7 +63,7 @@ public class HomeWorkCard extends BaseCard {
 					AddPointBottomSheetDialog.showInstance(mapActivity, PointType.WORK);
 				} else {
 					targetPointsHelper.navigateToPoint(new LatLon(workPoint.getLatitude(), workPoint.getLongitude()),
-							true, -1, workPoint.getPointDescription());
+							true, -1, workPoint.getPointDescription(mapActivity));
 				}
 			}
 		});

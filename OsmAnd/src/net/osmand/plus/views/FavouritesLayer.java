@@ -291,6 +291,7 @@ public class FavouritesLayer extends OsmandMapLayer implements ContextMenuLayer.
 		boolean result = false;
 		if (o instanceof FavouritePoint) {
 			favorites.editFavourite((FavouritePoint) o, position.getLatitude(), position.getLongitude());
+			favorites.lookupAddressAllPersonalPoints();
 			result = true;
 		}
 		if (callback != null) {
