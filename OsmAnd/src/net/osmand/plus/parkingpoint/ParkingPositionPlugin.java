@@ -119,12 +119,6 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		return parkingStartTime.get();
 	}
 
-	@Override
-	public void disable(OsmandApplication app) {
-		super.disable(app);
-		app.getFavorites().deleteParkingPoint();
-	}
-
 	public boolean clearParkingPosition() {
 		parkingLat.resetToDefault();
 		parkingLon.resetToDefault();

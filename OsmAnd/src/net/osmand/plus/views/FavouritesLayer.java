@@ -24,9 +24,11 @@ import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.base.FavoriteImageDrawable;
+import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
 import net.osmand.plus.views.ContextMenuLayer.ApplyMovedObjectCallback;
 import net.osmand.plus.views.MapTextLayer.MapTextProvider;
 
@@ -132,6 +134,10 @@ public class FavouritesLayer extends OsmandMapLayer implements ContextMenuLayer.
 								if ((marker = mapMarkersHelper.getMapMarker(o)) == null) {
 									continue;
 								}
+							}
+							if (group.personal && o.getName().equals(FavouritePoint.PointType.PARKING.getName())
+									&& OsmandPlugin.getEnabledPlugin(ParkingPositionPlugin.class) == null) {
+								continue;
 							}
 							cache.add(o);
 							float x = tileBox.getPixXFromLatLon(lat, lon);
