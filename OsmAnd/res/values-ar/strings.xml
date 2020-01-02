@@ -3248,7 +3248,7 @@
     <string name="profile_alert_need_save_title">حفظ التغييرات</string>
     <string name="profile_alert_need_save_msg">احفظ التغييرات في ملف التعريف أولاً</string>
     <string name="profile_alert_delete_title">حذف الملف الشخصي</string>
-    <string name="profile_alert_delete_msg">هل تريد بالتأكيد حذف ملف التعريف \"٪ s\"</string>
+    <string name="profile_alert_delete_msg">هل تريد بالتأكيد حذف ملف التعريف \"%s\"</string>
     <string name="select_base_profile_dialog_title">حدد ملف تعريف أساسي</string>
     <string name="select_base_profile_dialog_message">إسناد ملف التعريف المخصص الخاص بك إلى أحد ملفات تعريف التطبيق الافتراضية ، يحدد الإعداد الأساسي مثل الرؤية الافتراضية لعناصر واجهة المستخدم ووحدات السرعة والمسافة. وهذه هي ملفات تعريف التطبيق الافتراضية ، إلى جانب أمثلة لملفات تعريف مخصصة يمكن تمديدها إلى:</string>
     <string name="select_nav_profile_dialog_title">حدد نوع الملاحة</string>

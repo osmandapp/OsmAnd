@@ -53,10 +53,12 @@ public class NavigationFragment extends BaseSettingsFragment {
 		SwitchPreferenceCompat turnScreenOn = (SwitchPreferenceCompat) findPreference(settings.TURN_SCREEN_ON_ENABLED.getId());
 		SwitchPreferenceEx animateMyLocation = (SwitchPreferenceEx) findPreference(settings.ANIMATE_MY_LOCATION.getId());
 		if (getSelectedAppMode().getRoutingProfile() != null) {
-			GeneralRouter gr = app.getRoutingConfig().getRouter(getSelectedAppMode().getRoutingProfile());
-			RoutingProfilesResources routingProfilesResources = RoutingProfilesResources.valueOf(gr.getProfileName().toUpperCase());
-			navigationType.setSummary(routingProfilesResources.getStringRes());
-			navigationType.setIcon(getContentIcon(routingProfilesResources.getIconRes()));
+			GeneralRouter routingProfile = app.getRoutingConfig().getRouter(getSelectedAppMode().getRoutingProfile());
+			if (routingProfile != null) {
+				RoutingProfilesResources routingProfilesResources = RoutingProfilesResources.valueOf(routingProfile.getProfileName().toUpperCase());
+				navigationType.setSummary(routingProfilesResources.getStringRes());
+				navigationType.setIcon(getContentIcon(routingProfilesResources.getIconRes()));
+			}
 		}
 		routeParameters.setIcon(getContentIcon(R.drawable.ic_action_route_distance));
 		showRoutingAlarms.setIcon(getContentIcon(R.drawable.ic_action_alert));

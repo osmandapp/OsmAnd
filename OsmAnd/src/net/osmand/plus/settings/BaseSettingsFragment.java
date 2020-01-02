@@ -143,7 +143,6 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		updateTheme();
 		View view = super.onCreateView(inflater, container, savedInstanceState);
 		if (view != null) {
-			AndroidUtils.addStatusBarPadding21v(getContext(), view);
 			if (getPreferenceScreen() != null) {
 				PreferenceManager prefManager = getPreferenceManager();
 				PreferenceScreen preferenceScreen = prefManager.inflateFromResource(prefManager.getContext(), currentScreenType.preferencesResId, null);
@@ -229,6 +228,9 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 						activity.getWindow().setStatusBarColor(ContextCompat.getColor(activity, colorId));
 					}
 				}
+				if (activity instanceof MapActivity) {
+					((MapActivity) activity).exitFromFullScreen(getView());
+				}
 			}
 		}
 	}
@@ -237,16 +239,18 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	public void onPause() {
 		super.onPause();
 
-		MapActivity mapActivity = getMapActivity();
-		if (!wasDrawerDisabled && mapActivity != null) {
-			mapActivity.enableDrawer();
-		}
+		Activity activity = getActivity();
+		if (activity != null) {
+			if (!wasDrawerDisabled && activity instanceof MapActivity) {
+				((MapActivity) activity).enableDrawer();
+			}
 
-		if (Build.VERSION.SDK_INT >= 21) {
-			Activity activity = getActivity();
-			if (activity != null) {
+			if (Build.VERSION.SDK_INT >= 21) {
 				if (!(activity instanceof MapActivity) && statusBarColor != -1) {
 					activity.getWindow().setStatusBarColor(statusBarColor);
+				}
+				if (activity instanceof MapActivity) {
+					((MapActivity) activity).enterToFullScreen();
 				}
 			}
 		}
@@ -747,5 +751,12 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 			LOG.error(e);
 		}
 		return false;
+	}
+
+	void updateRouteInfoMenu() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.getMapRouteInfoMenu().updateMenu();
+		}
 	}
 }

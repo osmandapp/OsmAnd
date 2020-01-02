@@ -28,9 +28,9 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
-import net.osmand.plus.profiles.ReorderItemTouchHelperCallback;
-import net.osmand.plus.profiles.ReorderItemTouchHelperCallback.UnmovableItem;
-import net.osmand.plus.profiles.ReorderItemTouchHelperCallback.OnItemMoveCallback;
+import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
+import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback.UnmovableItem;
+import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback.OnItemMoveCallback;
 
 import java.util.ArrayList;
 import java.util.Collections;
