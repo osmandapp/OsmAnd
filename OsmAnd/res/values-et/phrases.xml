@@ -647,4 +647,14 @@
     <string name="poi_waterway_fuel">Paatide bensiinijaam</string>
     <string name="poi_electricity_combined_charging">Laadimisjaam</string>
     <string name="poi_park_ride_ferry">Parvlaev</string>
+    <string name="poi_9pin">Üheksa kurikaga keegel</string>
+    <string name="poi_10pin">Kümne kurikaga keegel</string>
+    <string name="poi_archery">Vibulaskmine</string>
+    <string name="poi_athletics">Kergejõustik</string>
+    <string name="poi_american_football">Ameerika jalgpall</string>
+    <string name="poi_australian_football">Austraalia jalgpall</string>
+    <string name="poi_base">Base-hüpped</string>
+    <string name="poi_baseball">Pesapall</string>
+    <string name="poi_basketball">Korvpall</string>
+    <string name="poi_beachvolleyball">Rannavõrkpall</string>
 </resources>
