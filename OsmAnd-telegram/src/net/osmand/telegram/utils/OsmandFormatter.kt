@@ -45,6 +45,16 @@ object OsmandFormatter {
 		fixed2.minimumIntegerDigits = 1
 	}
 
+	fun getFormattedDurationShort(seconds: Long): String {
+		val hours = seconds / (60 * 60)
+		val minutes = seconds / 60 % 60
+		return if (hours >= 1) {
+			String.format("%1d:%02d", hours, minutes)
+		} else {
+			String.format("%02d", minutes)
+		}
+	}
+
 	fun getFormattedDuration(ctx: Context, seconds: Long, short: Boolean = false): String {
 		val hours = seconds / (60 * 60)
 		val minutes = seconds / 60 % 60

@@ -205,11 +205,17 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 		}
 	}
 
-	fun addOrUpdateStatusWidget(count: Int, isSending: Boolean) {
+	fun addOrUpdateStatusWidget(time: Long, isSending: Boolean) {
 		val iconDay: String
 		val iconNight: String
 		val text = when {
-			count >= 0 && isSending -> {
+			time > 0L -> {
+				iconDay = STATUS_WIDGET_ANIM_ICON_DAY
+				iconNight = STATUS_WIDGET_ANIM_ICON_NIGHT
+				val diffTime = (System.currentTimeMillis() - time) / 1000
+				OsmandFormatter.getFormattedDurationShort(diffTime)
+			}
+			time == 0L && isSending -> {
 				iconDay = STATUS_WIDGET_ANIM_ICON_DAY
 				iconNight = STATUS_WIDGET_ANIM_ICON_NIGHT
 				app.getString(R.string.shared_string_ok)
@@ -220,8 +226,8 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 				app.getString(R.string.shared_string_off)
 			}
 		}
-		val bufferText = when {
-			count > 0 -> "($count)"
+		val subText = when {
+			time > 0 -> app.getString(R.string.shared_string_minute_short)
 			else -> ""
 		}
 		osmandAidlHelper.addMapWidget(
@@ -230,7 +236,7 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 				app.getString(R.string.status_widget_title),
 				iconDay,
 				iconNight,
-				text, bufferText, 50, getStatusWidgetIntent())
+				text, subText, 50, getStatusWidgetIntent())
 	}
 
 	private fun getStatusWidgetIntent(): Intent {

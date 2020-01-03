@@ -27,6 +27,8 @@ private const val UPDATE_LIVE_TRACKS_INTERVAL_MS = 30000L // 30 sec
 class TelegramService : Service(), LocationListener, TelegramIncomingMessagesListener,
 	TelegramOutgoingMessagesListener {
 
+	private val log = PlatformUtil.getLog(TelegramService::class.java)
+
 	private fun app() = application as TelegramApplication
 	private val binder = LocationServiceBinder()
 	private var shouldCleanupResources: Boolean = false
@@ -224,7 +226,8 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 			if (isUsedByMyLocation(usedBy)) {
 				val sharingStatus = app().settings.sharingStatusChanges.last()
 				val isSending = !((sharingStatus.statusType == TelegramSettings.SharingStatusType.NO_GPS) || (sharingStatus.statusType == TelegramSettings.SharingStatusType.INITIALIZING))
-				app().showLocationHelper.addOrUpdateStatusWidget(app().locationMessages.getBufferedMessagesCount(), isSending)
+				app().showLocationHelper.addOrUpdateStatusWidget(app().locationMessages.firstWriteTime, isSending)
+				log.info("difference in time: ${System.currentTimeMillis() - app().locationMessages.firstWriteTime}")
 			}
 			startWidgetUpdates()
 		}, UPDATE_WIDGET_INTERVAL_MS)
