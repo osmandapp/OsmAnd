@@ -15,11 +15,6 @@ import org.drinkless.td.libcore.telegram.TdApi
 
 object TelegramUiHelper {
 
-	fun applyGrayscaleFilter(iv: ImageView?) {
-		val matrix = ColorMatrix().apply { setSaturation(0F) }
-		iv?.colorFilter = ColorMatrixColorFilter(matrix)
-	}
-
 	fun setupPhoto(
 		app: TelegramApplication,
 		iv: ImageView?,

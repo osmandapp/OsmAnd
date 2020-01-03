@@ -3,6 +3,8 @@ package net.osmand.telegram.ui
 import android.animation.*
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.ColorMatrix
+import android.graphics.ColorMatrixColorFilter
 import android.graphics.Typeface
 import android.graphics.drawable.GradientDrawable
 import android.os.Build
@@ -277,23 +279,13 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 				}
 			}
 			DisableSharingBottomSheet.SHARING_DISABLED_REQUEST_CODE -> {
-				saveChatsToSuggested()
+				saveChatsToLastChatsInfo()
 				sharingMode = false
 				app.stopSharingLocation()
 				updateContent()
 			}
 			SharingStatusBottomSheet.SHARING_STATUS_REQUEST_CODE -> {
 				updateSharingStatus()
-			}
-		}
-	}
-
-	private fun saveChatsToSuggested() {
-		val chatListIds = settings.getShareLocationChats()
-		chatListIds.forEach { id ->
-			val shareInfo = settings.getChatsShareInfo()[id]
-			if (shareInfo != null) {
-				settings.addTimePeriodToLastItem(shareInfo.chatId, shareInfo.livePeriod)
 			}
 		}
 	}
@@ -537,14 +529,12 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 		}
 		if (sharingMode && settings.hasAnyChatToShareLocation()) {
 			val filteredLastItems = lastItems.filter { !settings.isSharingLocationToChat(it.chat.id) }.toMutableList()
-			val sorted = sortAdapterItems(items as MutableList<TdApi.Object>)
-			val lastChats = SuggestedChats(filteredLastItems)
-			sorted.add(lastChats)
-			adapter.items = sorted
+			val sortedItems = sortAdapterItems(items as MutableList<TdApi.Object>)
+			sortedItems.add(SuggestedChats(filteredLastItems))
+			adapter.items = sortedItems
 		} else {
 			val filteredLastItems = lastItems.filter { !settings.isSharingLocationToChat(it.chat.id) }.toMutableList()
-			val lastChats = SuggestedChats(filteredLastItems)
-			items.add(0, lastChats)
+			items.add(0, SuggestedChats(filteredLastItems))
 			adapter.items = items
 		}
 	}
@@ -561,6 +551,16 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 			}
 		}
 		return lastItems
+	}
+
+	private fun saveChatsToLastChatsInfo() {
+		val chatListIds = settings.getShareLocationChats()
+		chatListIds.forEach { id ->
+			val shareInfo = settings.getChatsShareInfo()[id]
+			if (shareInfo != null) {
+				settings.addTimePeriodToLastItem(shareInfo.chatId, shareInfo.livePeriod)
+			}
+		}
 	}
 
 	private fun sortAdapterItems(list: MutableList<TdApi.Object>): MutableList<Any> {
@@ -862,7 +862,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 
 			title.text = getTitleText(lastChat.chat)
 			setupPhoto(lastChat.chat, icon, true)
-			TelegramUiHelper.applyGrayscaleFilter(icon)
+			icon.colorFilter = ColorMatrixColorFilter(ColorMatrix().apply { setSaturation(0F) })
 
 			val sharingTime = SpannableStringBuilder("${getString(R.string.sharing_time)}: ")
 			val formattedTime = OsmandFormatter.getFormattedDuration(app, lastChat.time, false)
