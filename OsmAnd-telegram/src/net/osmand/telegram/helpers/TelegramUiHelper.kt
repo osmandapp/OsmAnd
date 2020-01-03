@@ -1,8 +1,6 @@
 package net.osmand.telegram.helpers
 
 import android.graphics.Bitmap
-import android.graphics.ColorMatrix
-import android.graphics.ColorMatrixColorFilter
 import android.graphics.drawable.Drawable
 import android.widget.ImageView
 import net.osmand.data.LatLon
