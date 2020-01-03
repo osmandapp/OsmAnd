@@ -117,7 +117,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 	private var hiddenOnMapChats: Set<Long> = emptySet()
 	private var shareDevices: Set<DeviceBot> = emptySet()
 	private var liveTracksInfo = emptyList<LiveTrackInfo>()
-	var lastChatsInfo = ConcurrentHashMap<Long, LastChatInfo>()
+	var lastChatsInfo = LinkedList<LastChatInfo>()
 
 	var sharingStatusChanges = ConcurrentLinkedQueue<SharingStatus>()
 
@@ -836,11 +836,10 @@ class TelegramSettings(private val app: TelegramApplication) {
 	private fun convertLastChatsInfoToJson(): JSONArray? {
 		return try {
 			val jArray = JSONArray()
-			lastChatsInfo.forEach { (chatId, lastInfo) ->
+			lastChatsInfo.forEach { lastInfo ->
 				val obj = JSONObject()
-				obj.put(LastChatInfo.CHAT_ID_KEY, chatId)
+				obj.put(LastChatInfo.CHAT_ID_KEY, lastInfo.chatId)
 				obj.put(LastChatInfo.PERIODS_KEY, convertPeriodsToJson(lastInfo.periods))
-				log.info("Save last info: ${lastInfo.periods} / id: ${lastInfo.chatId}")
 				jArray.put(obj)
 			}
 			jArray
@@ -853,13 +852,11 @@ class TelegramSettings(private val app: TelegramApplication) {
 	private fun convertPeriodsToJson(periods: LinkedList<Long>): JSONArray? {
 		return try {
 			val jArray = JSONArray()
-			log.info("periods to convert : $periods")
 			for (i in 0 until periods.count()) {
 				val obj = JSONObject()
 				obj.put(i.toString(), periods[i])
 				jArray.put(obj)
 			}
-			log.info("Converted to json periods: $jArray")
 			jArray
 		} catch (e: JSONException) {
 			log.error(e)
@@ -940,36 +937,43 @@ class TelegramSettings(private val app: TelegramApplication) {
 				chatId = obj.optLong(LastChatInfo.CHAT_ID_KEY)
 				periods = LinkedList<Long>()
 				val jsonArray = obj.getJSONArray(LastChatInfo.PERIODS_KEY)
-				log.info("get Json periods: $jsonArray")
 				for (j in 0 until jsonArray.length()) {
 					val o = jsonArray.get(j) as JSONObject
 					periods.addLast(o.optLong(j.toString()))
 				}
-				log.info("Converted from json periods: $periods")
-				livePeriod = calcLivePeriod(periods)
 			}
-			lastChatsInfo[lastInfo.chatId] = lastInfo
+			lastChatsInfo.addLast(lastInfo)
 		}
 	}
 
 	fun addTimePeriodToLastItem(id: Long, time: Long) {
-		if (lastChatsInfo.containsKey(id)) {
-			lastChatsInfo[id]?.periods = addTimeToPeriods(lastChatsInfo[id]?.periods, time)
+		val lastInfo = lastChatsInfo.find { it.chatId == id }
+		if (lastInfo == null) {
+			addItemToSuggested(id, time)
 		} else {
-			lastChatsInfo[id] = LastChatInfo().apply {
-				chatId = id
-				livePeriod = time
-				periods = LinkedList<Long>().apply {
-					addFirst(time)
-				}
+			val index = lastChatsInfo.indexOf(lastInfo)
+			lastChatsInfo[index].periods = addTimeToPeriods(lastChatsInfo[index].periods, time)
+		}
+	}
+
+	private fun addItemToSuggested(id: Long, time: Long) {
+		val newLastInfo = LastChatInfo().apply {
+			chatId = id
+			periods = LinkedList<Long>().apply {
+				addFirst(time)
 			}
 		}
-		log.info("added to periods: ${lastChatsInfo[id]?.periods}")
+		if (lastChatsInfo.size < 5) {
+			lastChatsInfo.addFirst(newLastInfo)
+		} else {
+			lastChatsInfo.removeLast()
+			lastChatsInfo.addFirst(newLastInfo)
+		}
 	}
 
 	private fun addTimeToPeriods(periods: LinkedList<Long>?, time: Long): LinkedList<Long> {
 		if (periods?.isNotEmpty() != null) {
-			return if (periods.count() < 5) {
+			return if (periods.size < 5) {
 				periods.addFirst(time)
 				periods
 			} else {
@@ -981,11 +985,13 @@ class TelegramSettings(private val app: TelegramApplication) {
 		return LinkedList<Long>().apply { addFirst(time) }
 	}
 
-	private fun calcLivePeriod(periods: LinkedList<Long>): Long {
-		return if (periods.count() % 2 == 0) {
-			(periods[periods.count() / 2] + periods[periods.count() / 2 - 1]) / 2
+	fun calcLivePeriod(periods: LinkedList<Long>): Long {
+		val copy = periods.toLongArray()
+		copy.sort()
+		return if (copy.size % 2 == 0) {
+			(copy[copy.size / 2] + copy[copy.size / 2 - 1]) / 2
 		} else {
-			periods[periods.count() / 2]
+			copy[copy.size / 2]
 		}
 	}
 
@@ -1481,12 +1487,10 @@ class TelegramSettings(private val app: TelegramApplication) {
 	class LastChatInfo {
 
 		var chatId = -1L
-		var livePeriod = -1L
 		var periods = LinkedList<Long>()
 
 		companion object {
 			internal const val CHAT_ID_KEY = "chatId"
-			internal const val LIVE_PERIOD_KEY = "livePeriod"
 			internal const val PERIODS_KEY = "periods"
 		}
 	}
