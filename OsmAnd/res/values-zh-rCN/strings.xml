@@ -1315,7 +1315,7 @@
     <string name="online_photos">在线照片</string>
     <string name="mapillary_descr">供所有人使用的在线街景照片。协作发现景点，捕捉世界之美。</string>
     <string name="distance_moving">距离已修正</string>
-    <string name="no_photos_descr">我们没有该地点的照片。</string>
+    <string name="no_photos_descr">这里没有照片。</string>
     <string name="routing_attr_short_way_name">节油道路</string>
     <string name="routing_attr_short_way_description">使用节油道路（通常更短）。</string>
     <string name="configure_screen_quick_action">快捷操作</string>
@@ -2310,7 +2310,7 @@
     <string name="quick_action_sh_poi_descr">您可以添加一个或多个要显示在地图上的 POI 类别。</string>
     <string name="quick_action_page_list_descr">轻触动作按钮会直达下面的清单。</string>
     <string name="quick_action_map_style_action">添加地图样式</string>
-    <string name="quick_action_empty_param_error">参数不应为空</string>
+    <string name="quick_action_empty_param_error">请填写所有参数</string>
     <string name="quick_action_map_styles">地图样式</string>
     <string name="quick_action_map_overlay">更改地图覆盖</string>
     <string name="quick_action_map_overlay_title">地图覆盖</string>
@@ -2321,7 +2321,7 @@
     <string name="quick_action_map_underlay_title">地图衬底层</string>
     <string name="quick_action_map_underlay_action">添加衬底层</string>
     <string name="quick_action_map_source_title">地图来源</string>
-    <string name="quick_action_map_source_switch">地图来源已更改为\"%s\"。</string>
+    <string name="quick_action_map_source_switch">地图来源已更改为“%s”。</string>
     <string name="quick_action_btn_tutorial_title">更改按钮的位置</string>
     <string name="quick_action_btn_tutorial_descr">长按并拖动按钮来改变其在屏幕上的位置。</string>
     <string name="map_widget_ruler_control">半径量尺</string>
@@ -2444,7 +2444,7 @@
     <string name="shared_string_paste">粘贴</string>
     <string name="tap_on_map_to_hide_interface">全屏模式</string>
     <string name="import_file">导入文件</string>
-    <string name="mappilary_no_internet_desc">您需要互联网连接以查看来自 Mapillary 的图片。</string>
+    <string name="mappilary_no_internet_desc">来自 Mapillary 的图片必须在线查看。</string>
     <string name="retry">重试</string>
     <string name="save_gpx_waypoint">保存 GPX 航点</string>
     <string name="import_track">导入 GPX 文件</string>
@@ -2678,7 +2678,7 @@
     <string name="rendering_attr_surface_ice_name">冰面</string>
     <string name="rendering_attr_surface_salt_name">盐地</string>
     <string name="rendering_attr_surface_snow_name">雪地</string>
-    <string name="rendering_attr_surface_paved_name">已规划路径</string>
+    <string name="rendering_attr_surface_paved_name">已铺装路面</string>
     <string name="rendering_attr_surface_concrete_name">混凝土地</string>
     <string name="rendering_attr_surface_cobblestone_name">鹅卵石地</string>
     <string name="rendering_attr_surface_paving_stones_name">铺路石</string>
@@ -2789,4 +2789,10 @@
     <string name="route_start_point">起点</string>
     <string name="track_saved">追踪已保存</string>
     <string name="empty_filename">文件名为空</string>
+    <string name="copy_location_name">复制地点/兴趣点名称</string>
+    <string name="routeInfo_roadClass_name">道路类型</string>
+    <string name="routeInfo_surface_name">表面</string>
+    <string name="clear_confirmation_msg">清空 %1$s？</string>
+    <string name="dialogs_and_notifications_title">对话框和通知</string>
+    <string name="shared_string_downloading_formatted">正在下载 %s</string>
 </resources>

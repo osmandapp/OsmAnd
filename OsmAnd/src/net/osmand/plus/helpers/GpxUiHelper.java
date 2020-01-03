@@ -224,7 +224,8 @@ public class GpxUiHelper {
 
 	public static AlertDialog selectGPXFiles(List<String> selectedGpxList, final Activity activity,
 											 final CallbackWithObject<GPXFile[]> callbackWithObject, 
-											 int dialogThemeRes) {
+											 int dialogThemeRes,
+	                                         boolean nightMode) {
 		OsmandApplication app = (OsmandApplication) activity.getApplication();
 		final File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
 		final List<GPXInfo> allGpxList = getSortedGPXFilesInfo(dir, selectedGpxList, false);
@@ -234,7 +235,7 @@ public class GpxUiHelper {
 		allGpxList.add(0, new GPXInfo(activity.getString(R.string.show_current_gpx_title), 0, 0));
 
 		final ContextMenuAdapter adapter = createGpxContextMenuAdapter(allGpxList, selectedGpxList, true);
-		return createDialog(activity, true, true, true, callbackWithObject, allGpxList, adapter, dialogThemeRes);
+		return createDialog(activity, true, true, true, callbackWithObject, allGpxList, adapter, dialogThemeRes, nightMode);
 	}
 
 	public static AlertDialog selectGPXFile(final Activity activity,
@@ -253,7 +254,7 @@ public class GpxUiHelper {
 			}
 
 			final ContextMenuAdapter adapter = createGpxContextMenuAdapter(list, null, showCurrentGpx);
-			return createDialog(activity, showCurrentGpx, multipleChoice, false, callbackWithObject, list, adapter, dialogThemeRes);
+			return createDialog(activity, showCurrentGpx, multipleChoice, false, callbackWithObject, list, adapter, dialogThemeRes, nightMode);
 		}
 		return null;
 	}
@@ -500,7 +501,8 @@ public class GpxUiHelper {
 											final CallbackWithObject<GPXFile[]> callbackWithObject,
 											final List<GPXInfo> list,
 											final ContextMenuAdapter adapter,
-	                                        final int themeRes) {
+	                                        final int themeRes,
+	                                        final boolean nightMode) {
 		final OsmandApplication app = (OsmandApplication) activity.getApplication();
 		final DateFormat dateFormat = android.text.format.DateFormat.getMediumDateFormat(activity);
 		final File dir = app.getAppPath(IndexConstants.GPX_INDEX_DIR);
@@ -559,6 +561,7 @@ public class GpxUiHelper {
 								item.setSelected(isChecked);
 							}
 						});
+						UiUtilities.setupCompoundButton(app, ch, nightMode, true);
 					} else {
 						final SwitchCompat ch = ((SwitchCompat) v.findViewById(R.id.toggle_item));
 						ch.setVisibility(View.VISIBLE);
@@ -571,6 +574,7 @@ public class GpxUiHelper {
 								item.setSelected(isChecked);
 							}
 						});
+						UiUtilities.setupCompoundButton(app, ch, nightMode, true);
 					}
 					v.findViewById(R.id.check_item).setVisibility(View.VISIBLE);
 				}

@@ -59,7 +59,6 @@ import net.osmand.plus.mapmarkers.MapMarkersDialogFragment;
 import net.osmand.plus.mapmarkers.MarkersPlanRouteContext;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
-import net.osmand.plus.profiles.SettingsProfileActivity;
 import net.osmand.plus.routepreparationmenu.MapRouteInfoMenu;
 import net.osmand.plus.routepreparationmenu.WaypointsFragment;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
@@ -706,9 +705,7 @@ public class MapActivityActions implements DialogProvider {
 				.setListener(new ItemClickListener() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked, int[] viewCoordinates) {
-						Intent intent = new Intent(app, SettingsProfileActivity.class);
-						intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-						app.startActivity(intent);
+						BaseSettingsFragment.showInstance(mapActivity, BaseSettingsFragment.SettingsScreenType.MAIN_SETTINGS);
 						return true;
 					}
 				})

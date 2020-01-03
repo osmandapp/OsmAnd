@@ -50,4 +50,7 @@
     <string name="si_mi_meters">Миље/метри</string>
     <string name="shared_string_apply">Примени</string>
     <string name="shared_string_enabled">Укључен</string>
+    <string name="units_and_formats">Мерне јединице &amp; форматирања</string>
+    <string name="unit_of_length_descr">Промени јединице за дужину.</string>
+    <string name="unit_of_length">Јединице дужине</string>
 </resources>

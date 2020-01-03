@@ -176,9 +176,7 @@
     <string name="user_name">El vostre nom d\'usuari d\'OSM</string>
     <string name="user_password">La vostra contrasenya a OSM</string>
     <string name="download_files_not_enough_space">No hi ha prou espai lliure per baixar %1$s MB (lliure: %2$s).</string>
-    <string name="download_files_question_space">"Voleu baixar {0} fitxer(s)?  
-S\'ocuparà una memòria de {1} MB
-(La memòria disponible es de{2} MB)"</string>
+    <string name="download_files_question_space">"Voleu baixar {0} fitxer(s)\? S\'ocuparà  {1} MB (de {2} MB)."</string>
     <string name="use_transparent_map_theme">Tema transparent</string>
     <string name="osmand_parking_event">Traieu el cotxe de l\'aparcament</string>
     <string name="rendering_attr_appMode_description">Optimitza el mapa per</string>
@@ -287,7 +285,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="system_locale">Sistema</string>
     <string name="shared_string_next">Endavant</string>
     <string name="shared_string_previous">Enrere</string>
-    <string name="unit_of_length_descr">Canvia com es mesura la distància.</string>
+    <string name="unit_of_length_descr">Canvieu en què es mesuren les distàncies.</string>
     <string name="unit_of_length">Unitats de longitud</string>
     <string name="si_mi_feet">Milles/peu</string>
     <string name="si_mi_yard">Milles/iardes</string>
@@ -1900,10 +1898,8 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="osm_live_enter_user_name">Introduïu un nom públic</string>
     <string name="osm_live_subscription_settings">Configuració de la subscripció</string>
     <string name="upload_anonymously">Puja anònimament</string>
-    <string name="download_files_error_not_enough_space">No hi ha prou espai! 
-Cal una memòria de {3} MB temporals i {1} MB permanents. 
-L\'espai disponible és només de {2} MB.</string>
-    <string name="download_files_question_space_with_temp">Voleu baixar {0} fitxer(s)? L\'ocupació temporal de memòria serà de {3} MB i la permanent {1} MB. (Disposeu de {2} MB)</string>
+    <string name="download_files_error_not_enough_space">No hi ha prou espai! Calen {3} MB temporalment i {1} MB de permanents. (Només es disposa de {2} MB).</string>
+    <string name="download_files_question_space_with_temp">Voleu baixar {0} fitxer(s)\? S\'utilitzen {3} MB temporalment i {1} MB permanentment. (De {2} MB).</string>
     <string name="shared_string_move_up">Puja ↑</string>
     <string name="shared_string_move_down">Baixa ↓</string>
     <string name="avoid_road">Evita la via</string>
@@ -2037,7 +2033,7 @@ L\'espai disponible és només de {2} MB.</string>
     <string name="no_update_info_desc">No comprovis noves versions ni ofertes relatives a OsmAnd.</string>
     <string name="no_update_info">No mostris noves versions</string>
     <string name="skip_map_downloading">Omet els mapes en procés de baixada</string>
-    <string name="skip_map_downloading_desc">"No disposeu de cap mapa local. Podeu triar un mapa de la llista o baixar mapes més tard via \'Menú -  %1$s\'."</string>
+    <string name="skip_map_downloading_desc">No disposeu de cap mapa local. Podeu triar un mapa de la llista o baixar mapes més tard via «Menú - %1$s».</string>
     <string name="search_another_country">Selecciona un altre país</string>
     <string name="first_usage_greeting">Obteniu indicacions i descobriu llocs nous sense connexió a Internet</string>
     <string name="si_mi_meters">Milles/metres</string>
@@ -2086,7 +2082,7 @@ L\'espai disponible és només de {2} MB.</string>
     <string name="shared_string_record">Enregistra</string>
     <string name="gpx_logging_no_data">No hi ha dades</string>
     <string name="shared_string_notifications">Notificacions</string>
-    <string name="trip_rec_notification_settings">Habilita l\'enregistrament d\'inici ràpid</string>
+    <string name="trip_rec_notification_settings">Activa l\'enregistrament ràpid</string>
     <string name="trip_rec_notification_settings_desc">Mostra una notificació de sistema que es permet l\'enregistrament de la ruta.</string>
     <string name="gpx_no_tracks_title">No teniu encara cap fitxer GPX</string>
     <string name="gpx_no_tracks_title_folder">També podeu afegir fitxers GPX a la carpeta</string>
@@ -2096,13 +2092,13 @@ L\'espai disponible és només de {2} MB.</string>
     <string name="route_calculation">Càlcul de ruta</string>
     <string name="upload_poi">Puja PDI</string>
     <string name="route_roundabout_short">Agafeu la %1$d sortida i continueu</string>
-    <string name="search_map_hint">Cerca de ciutat o regió</string>
+    <string name="search_map_hint">Ciutat o regió</string>
     <string name="wiki_around">Articles de la zona a la Viquipèdia</string>
     <string name="legacy_search">Cerca de llegat</string>
     <string name="show_legacy_search">Mostra la cerca de llegat</string>
     <string name="show_legacy_search_desc">Afegeix la cerca de llegat en la llista desplegable.</string>
-    <string name="routing_attr_allow_motorway_name">Permet les autopistes</string>
-    <string name="routing_attr_allow_motorway_description">Permet les autopistes.</string>
+    <string name="routing_attr_allow_motorway_name">Utilitza les autopistes</string>
+    <string name="routing_attr_allow_motorway_description">Permet les autopistes</string>
     <string name="lang_sr_latn">Serbi (llatí)</string>
     <string name="lang_zh_hk">Xinès (Hong Kong)</string>
     <string name="rendering_attr_contourWidth_description">Gruix de la corba de nivell</string>
@@ -2213,7 +2209,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="routing_attr_driving_style_name">Estil de conducció</string>
     <string name="shared_string_gpx_tracks">Pistes</string>
     <string name="select_gpx_folder">Seleccioneu la carpeta fitxers GPX</string>
-    <string name="file_can_not_be_moved">El fitxer no es pot moure.</string>
+    <string name="file_can_not_be_moved">No s\'ha pogut moure l\'arxiu.</string>
     <string name="shared_string_move">Mou</string>
     <string name="shared_string_time_moving">Temps en moviment</string>
     <string name="shared_string_time_span">Lapse temporal</string>
@@ -2225,7 +2221,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="average_speed">Velocitat mitjana</string>
     <string name="shared_string_gpx_track">Pista</string>
     <string name="points_delete_multiple_succesful">El(s) punt(s) s\'ha(n) esborrat.</string>
-    <string name="points_delete_multiple">Esteu eliminant %1$d punt(s). Ho confirmeu?</string>
+    <string name="points_delete_multiple">Voleu eliminar %1$d punt(s)\?</string>
     <string name="route_points_category_name">Canvis de direcció a la ruta</string>
     <string name="track_points_category_name">Fites, punts d\'interès, elements famosos</string>
     <string name="add_new_folder">Afegeix a una carpeta nova</string>
@@ -2245,7 +2241,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="do_not_show_startup_messages">No mostris missatges inicials</string>
     <string name="do_not_show_startup_messages_desc">No mostris descomptes de l\'aplicació ni missatges d\'esdeveniments locals destacats.</string>
     <string name="parking_options">Opcions d\'aparcament</string>
-    <string name="right_side_navigation">Conducció per la dreta</string>
+    <string name="right_side_navigation">Trànsit per la dreta</string>
     <string name="driving_region_automatic">Automàtic</string>
     <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) és una aplicació de navegació i de consulta de mapes que accedeix a les dades obertes de tot el món i d\'alta-qualitat d\'OpenStreetMap (OSM). 
 \n
@@ -2326,12 +2322,12 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="quick_action_auto_zoom_desc">Prement aquest botó d\'acció commuteu l\'escala automàtica del mapa segons la vostra velocitat.</string>
     <string name="quick_action_auto_zoom_on">Activa l\'escala automàtica del mapa</string>
     <string name="quick_action_auto_zoom_off">Desactiva l\'escala automàtica del mapa</string>
-    <string name="quick_action_add_destination">Afegeix destinació</string>
+    <string name="quick_action_add_destination">Establiu destinació</string>
     <string name="quick_action_replace_destination">Substitueix destinació</string>
     <string name="quick_action_add_first_intermediate">Afegeix primer intermedi</string>
-    <string name="quick_action_add_destination_desc">Prement aquest botó d\'acció convertiu el punt central de la pantalla en el nou destí i qualsevol destinació anterior esdevé la darrera destinació intermèdia.</string>
+    <string name="quick_action_add_destination_desc">Un botó per establir el punt central de la pantalla com la nova destinació i qualsevol destinació anterior esdevé la darrera destinació intermèdia.</string>
     <string name="quick_action_replace_destination_desc">Prement aquest botó d\'acció agafeu el punt central de la pantalla com el nou destí, substituint la destinació anterior (si n\'hi ha).</string>
-    <string name="quick_action_add_first_intermediate_desc">Prement aquest botó d\'acció afegiu el punt central de la pantalla com primera destinació intermèdia.</string>
+    <string name="quick_action_add_first_intermediate_desc">Un botó per fer del punt central de la pantalla la primera fita.</string>
     <string name="depth_contour_descr">Isòbates i fondàries nàutiques puntuals.</string>
     <string name="shared_string_paused">En pausa</string>
     <string name="osmand_extended_description_part3">Mapa
@@ -2355,11 +2351,11 @@ Abasta l\'àrea: %1$s x %2$s</string>
 \nOsmAnd + és la versió de pagament de l\'aplicació. En comprar-la, recolzareu el projecte, finançant el desenvolupament de noves característiques i rebreu les darreres actualitzacions. 
 \n
 \nCaracterístiques principals:</string>
-    <string name="type_city_town">Introduïu el poble o ciutat</string>
+    <string name="type_city_town">Introduïu ciutat/població/localitat</string>
     <string name="type_postcode">Introduïu el codi postal</string>
     <string name="nearest_cities">Ciutats més properes</string>
     <string name="select_city">Selecciona el municipi</string>
-    <string name="select_postcode">Selecciona el codi postal</string>
+    <string name="select_postcode">Cerca pel codi postal</string>
     <string name="osmand_plus_extended_description_part3">Consulta del mapa
 \n• Mostra la vostra posició i orientació
 \n• Té l\'opció d\'orientar la imatge segons la vostra pròpia orientació o en la direcció en que us moveu
@@ -2803,8 +2799,9 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="coord_input_save_as_track_descr">Heu afegit %1$s punts. Introduïu un nom de fitxer i premeu \"Desa\".</string>
     <string name="point_deleted">El punt %1$s s\'ha esborrat</string>
     <string name="shared_string_world">Mundial</string>
-    <string name="send_search_query_description">Enviarem la vostra consulta de cerca: \"%1$s\", així com la vostra ubicació.\n
-        \n No es recull informació personal, només les dades utilitzades en la cerca per millorar-ne l\'algorisme.</string>
+    <string name="send_search_query_description">Enviarem la vostra consulta de cerca: a \"%1$s\", junt amb la vostra ubicació.
+\n 
+\n No es recull informació personal, només les dades de la cerca per millorar-la.</string>
     <string name="search_no_results_description">Cap resultat?
 \nParleu-nos-en al respecte.</string>
     <string name="send_search_query">Voleu enviar la consulta de cerca?</string>
@@ -2822,10 +2819,10 @@ Abasta l\'àrea: %1$s x %2$s</string>
 \n
 \n• Altres correccions d\'errors  
 \n"</string>
-    <string name="increase_search_radius_to">Augmenta el radi de cerca fins %1$s</string>
+    <string name="increase_search_radius_to">Allarga el radi de cerca fins %1$s</string>
     <string name="commiting_way">Executant via…</string>
     <string name="thank_you_for_feedback">Gràcies per els vostres comentaris</string>
-    <string name="poi_cannot_be_found">No es pot trobar el node o la via.</string>
+    <string name="poi_cannot_be_found">No s\'ha pogut trobar el node o la via.</string>
     <string name="search_no_results_feedback">Cap resultat en la cerca?
 \nComenteu-nos-ho</string>
     <string name="test_voice_desrc">Premeu un botó i escolteu la corresponent descripció de veu per identificar les descripcions pendents o errònies.</string>
@@ -2854,11 +2851,11 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="ask_for_location_permission">Cal que doneu a OsmAnd accés a la ubicació per continuar.</string>
     <string name="rendering_value_black_name">Negre</string>
     <string name="search_street">Cerca un carrer</string>
-    <string name="start_search_from_city">Seleccioneu primer la ciutat</string>
+    <string name="start_search_from_city">Seleccioneu primer la ciutat/població/localitat</string>
     <string name="shared_string_restore">Restaura</string>
     <string name="keep_passed_markers_descr">Els marcadors afegits a un grup de Preferits i les fites GPX ja assolides romandran al mapa. Si el grup no estigués activat, els marcadors no apareixerien al mapa.</string>
     <string name="keep_passed_markers">Manté al mapa les fites assolides</string>
-    <string name="more_transport_on_stop_hint">Hi ha altres mitjans de transport en aquesta parada.</string>
+    <string name="more_transport_on_stop_hint">Altres mitjans de transport disponibles en aquesta parada.</string>
     <string name="markers_remove_dialog_msg">Voleu esborrar el marcador de mapa \'%s\'\?</string>
     <string name="edit_map_marker">Edita el marcador de mapa</string>
     <string name="third_party_application">Aplicació de tercers</string>
@@ -2874,8 +2871,8 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="osm_live_payment_renews_quarterly">Renovació trimestral</string>
     <string name="osm_live_payment_renews_annually">Renovació anual</string>
     <string name="default_price_currency_format">%1$.2f %2$s</string>
-    <string name="osm_live_payment_header">Seleccioneu el període de pagament que us convingui:</string>
-    <string name="osm_live_payment_contribute_descr">Una part dels ingressos és pels col·laboradors d\'OpenStreetMap.</string>
+    <string name="osm_live_payment_header">Cicle de pagament:</string>
+    <string name="osm_live_payment_contribute_descr">Les donacions ajuden a finançar la cartografia d\'OpenStreetMap.</string>
     <string name="powered_by_osmand">Per OsmAnd</string>
     <string name="osm_live_subscriptions">Subscripcions</string>
     <string name="mapillary_menu_title_pano">Només mostra imatges de 360º</string>
@@ -2887,9 +2884,9 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="quick_action_switch_day_mode">Mode Diürn</string>
     <string name="quick_action_switch_night_mode">Mode Nocturn</string>
     <string name="quick_action_day_night_switch_mode">Canvia mode Diürn/Nocturn</string>
-    <string name="add_destination_point">Afegeix destinació</string>
+    <string name="add_destination_point">Establiu destinació</string>
     <string name="add_intermediate_point">Afegeix punt intermedi</string>
-    <string name="add_start_point">Afegeix el punt inicial</string>
+    <string name="add_start_point">Establiu el punt inicial</string>
     <string name="intermediate_waypoint">Punt intermedi</string>
     <string name="transfers">transferències</string>
     <string name="on_foot">a peu</string>
@@ -2901,7 +2898,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="show_along_the_route">Mostra al llarg de la ruta</string>
     <string name="simulate_navigation">Simula la navegació</string>
     <string name="choose_track_file_to_follow">Seleccioneu l\'arxiu de la traça a seguir</string>
-    <string name="voice_announcements">Anuncis de veu</string>
+    <string name="voice_announcements">Indicacions per veu</string>
     <string name="intermediate_destinations">Destinacions intermèdies</string>
     <string name="arrive_at_time">Arribada a %1$s</string>
     <string name="cubic_m">m³</string>
@@ -2914,10 +2911,10 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="routeInfo_smoothness_name">Uniformitat</string>
     <string name="routeInfo_steepness_name">Pendent</string>
     <string name="add_home">Afegeix casa meva</string>
-    <string name="add_work">Afegeix feina</string>
+    <string name="add_work">Afegeix lloc de la feina</string>
     <string name="work_button">Feina</string>
     <string name="previous_route">Ruta anterior</string>
-    <string name="add_destination_query">Comenceu per afegir la destinació</string>
+    <string name="add_destination_query">Comenceu primer establint la destinació</string>
     <string name="shared_string_swap">Bescanvia</string>
     <string name="show_more">Mostra\'n més</string>
     <string name="tracks_on_map">Traces visualitzades</string>
@@ -2926,8 +2923,8 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="step_by_step">Totes les cruïlles</string>
     <string name="routeInfo_road_types_name">Tipus de carretera</string>
     <string name="exit_at">Sortida a</string>
-    <string name="quick_action_show_hide_gpx_tracks">"Mostra/amaga traces GPX "</string>
-    <string name="quick_action_show_hide_gpx_tracks_descr">Prement aquest botó d\'acció es mostren o s\'amaguen al mapa les traces GPX</string>
+    <string name="quick_action_show_hide_gpx_tracks">Mostra/amaga traces GPX</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Un commutador per mostrar o amagar les traces GPX seleccionades al mapa.</string>
     <string name="quick_action_gpx_tracks_hide">Amaga les traces GPX</string>
     <string name="quick_action_gpx_tracks_show">Mostra les traces GPX</string>
     <string name="sit_on_the_stop">Pugeu a la parada</string>
@@ -2950,13 +2947,13 @@ Abasta l\'àrea: %1$s x %2$s</string>
 \n</string>
     <string name="use_osm_live_public_transport_description">Activa les modificacions del transport públic amb OsmAnd Live.</string>
     <string name="use_osm_live_public_transport">Transport públic a OsmAnd Live</string>
-    <string name="public_transport_warning_descr_blog">Teniu més informació sobre com OsmAnd calcula les rutes al nostre blog.</string>
+    <string name="public_transport_warning_descr_blog">Llegiu més sobre com OsmAnd calcula les rutes al nostre bloc.</string>
     <string name="public_transport_warning_title">La navegació en transports públics ara està en proves beta, vigileu errors o defectes.</string>
-    <string name="add_intermediate">Afegeix un punt intermedi</string>
+    <string name="add_intermediate">Afegiu un punt intermedi</string>
     <string name="transfers_size">%1$d trasllats</string>
-    <string name="add_start_and_end_points">Afegeix punts inicial i final</string>
-    <string name="route_add_start_point">Afegeix punt de sortida</string>
-    <string name="route_descr_select_start_point">Selecciona punt de sortida</string>
+    <string name="add_start_and_end_points">Afegiu inici i destinació</string>
+    <string name="route_add_start_point">Afegiu punt de sortida</string>
+    <string name="route_descr_select_start_point">Seleccioneu punt de sortida</string>
     <string name="rendering_attr_surface_unpaved_name">Sense asfaltar</string>
     <string name="rendering_attr_surface_sand_name">Sorra</string>
     <string name="rendering_attr_surface_grass_name">Gespa</string>
@@ -3000,8 +2997,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="rendering_attr_highway_class_bridleway_name">Ruta eqüestre</string>
     <string name="rendering_attr_highway_class_cycleway_name">Carril bici</string>
     <string name="shared_string_walk">Caminada</string>
-    <string name="save_poi_value_exceed_length">La longitud màxima de l\'etiqueta \"%s\" és de 255 caràcters. 
-\nEscurceu-la per continuar.</string>
+    <string name="save_poi_value_exceed_length">Escurceu la longitud de l\'etiqueta \"%s\" a menys de 255 caràcters.</string>
     <string name="save_poi_value_exceed_length_title">Longitud del valor de \"%s\"</string>
     <string name="rendering_attr_surface_dirt_name">Pols</string>
     <string name="avoid_pt_types_descr">Seleccioneu quin transport públic no s\'ha d\'incloure a la navegació:</string>
@@ -3013,18 +3009,18 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="angular_measeurement_descr">Canvia la unitat de mesura de l\'azimut.</string>
     <string name="routing_attr_avoid_sett_name">Evita els empedrats i els llambordins</string>
     <string name="routing_attr_avoid_sett_description">Evita els empedrats i els llambordins</string>
-    <string name="routing_attr_avoid_tram_name">Evita el tram</string>
+    <string name="routing_attr_avoid_tram_name">Sense el tram</string>
     <string name="routing_attr_avoid_tram_description">Evita el tram</string>
     <string name="routing_attr_avoid_bus_name">Sense autobús</string>
     <string name="routing_attr_avoid_bus_description">Evita autobús i troleibús</string>
     <string name="routing_attr_avoid_share_taxi_name">Sense taxi compartit</string>
     <string name="routing_attr_avoid_share_taxi_description">Evita el taxi compartit</string>
-    <string name="routing_attr_avoid_train_name">Evita el tren</string>
+    <string name="routing_attr_avoid_train_name">Sense trens</string>
     <string name="routing_attr_avoid_train_description">Evita el tren</string>
-    <string name="routing_attr_avoid_subway_name">Evita el metro</string>
+    <string name="routing_attr_avoid_subway_name">Sense metro</string>
     <string name="routing_attr_avoid_subway_description">Evita el metro i el tram</string>
-    <string name="routing_attr_avoid_ferry_name">Evita el ferri</string>
-    <string name="routing_attr_avoid_ferry_description">Evita el ferri</string>
+    <string name="routing_attr_avoid_ferry_name">Sense ferris</string>
+    <string name="routing_attr_avoid_ferry_description">Evita els ferris</string>
     <string name="release_3_3_7">• Mostra el temps entre transbordaments al transport públic
 \n
 \n• Corregida la IU pels detalls de la ruta
@@ -3051,10 +3047,10 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="rate_dialog_descr">Si us plau, comenteu que us sembla i puntueu la nostra feina a Google Play.</string>
     <string name="button_rate">D\'acord</string>
     <string name="shared_string_privacy_policy">Política de privadesa</string>
-    <string name="help_us_make_osmand_better">Ajudeu-nos a millorar OsmAnd!</string>
-    <string name="make_osmand_better_descr">Autoritzeu a OsmAnd a recopilar i processar dades anònimes d\'ús de l\'aplicació. No recopilarem ni emmagatzemarem dades sobre la vostra ubicació ni dels llocs que consulteu al mapa. 
+    <string name="help_us_make_osmand_better">Ajudeu-nos a millorar OsmAnd</string>
+    <string name="make_osmand_better_descr">Autoritzeu a OsmAnd a recopilar i processar dades anònimes d\'ús de l\'aplicació. No es recollirà cap dada sobre la vostra ubicació ni dels llocs que consulteu al mapa. 
 \n 
-\nPodeu canviar aquesta opció quan vulgueu a Configuració &gt; Privadesa i seguretat.</string>
+\nSempre es pot revisar a \'Configuració\' &gt; \'Privadesa i seguretat\'.</string>
     <string name="choose_data_to_share">Trieu el tipus de dades que voleu compartir:</string>
     <string name="downloaded_maps">Mapes baixats</string>
     <string name="colleted_data">Dades recollides</string>
@@ -3092,7 +3088,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="profile_alert_need_save_msg">Primer heu de desar els canvis en el perfil</string>
     <string name="profile_alert_delete_title">Suprimeix el perfil</string>
     <string name="profile_alert_delete_msg">Esteu segur que voleu suprimir el perfil \"%s\"</string>
-    <string name="select_base_profile_dialog_title">Seleccioneu un perfil base</string>
+    <string name="select_base_profile_dialog_title">Seleccioneu un perfil amb què començar</string>
     <string name="settings_derived_routing_mode_string">Mode usuari, derivat de: %s</string>
     <string name="select_nav_profile_dialog_title">Seleccioneu el tipus de navegació</string>
     <string name="base_profile_descr_car">Cotxe, camió, motocicleta</string>
@@ -3217,7 +3213,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="shared_string_track_is_saved">La traça %s s\'ha desat</string>
     <string name="gpx_join_gaps">Uneix separacions</string>
     <string name="app_mode_camper">Camper</string>
-    <string name="app_mode_campervan">Autocaravana</string>
+    <string name="app_mode_campervan">Autocaravana (RV)</string>
     <string name="rendering_attr_showLez_description">Mostra les zones de baixes emissions al mapa. No afecta el càlcul de ruta.</string>
     <string name="rendering_attr_showLez_name">Mostra les zones de baixes emissions</string>
     <string name="temporary_conditional_routing">Considereu les limitacions temporals</string>
@@ -3330,11 +3326,11 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">Millor les carreteres sense asfaltar</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">Millor les carreteres sense asfaltar.</string>
     <string name="layer_osm_edits">Edicions d\'OSM</string>
-    <string name="quick_action_contour_lines_descr">Un commutador per mostrar o amagar les corbes de nivell en el mapa</string>
+    <string name="quick_action_contour_lines_descr">Un botó per a mostrar o amagar les corbes de nivell en el mapa.</string>
     <string name="quick_action_contour_lines_show">Mostra les corbes de nivell</string>
     <string name="quick_action_contour_lines_hide">Amaga les corbes de nivell</string>
     <string name="quick_action_show_hide_contour_lines">Mostra/amaga les corbes de nivell</string>
-    <string name="quick_action_hillshade_descr">Un commutador per mostrar o amagar l\'ombrejat de relleu al mapa</string>
+    <string name="quick_action_hillshade_descr">Un botó per a mostrar o amagar l\'ombrejat de relleu al mapa.</string>
     <string name="quick_action_hillshade_show">Mostra l\'ombrejat de relleu</string>
     <string name="quick_action_hillshade_hide">Amaga l\'ombrejat de relleu</string>
     <string name="quick_action_show_hide_hillshade">Mostra/amaga l\'ombrejat de relleu</string>
@@ -3377,15 +3373,15 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="screen_alerts">Alertes de pantalla</string>
     <string name="route_parameters_descr">Configura els paràmetres de la ruta</string>
     <string name="rendering_attr_piste_type_hike_name">Senderisme</string>
-    <string name="default_speed_dialog_msg">"S\'utilitza per estimar l\'hora d\'arribada per carreteres de tipus desconegut  i per limitar la velocitat a totes les vies (podria canviar la ruta)"</string>
+    <string name="default_speed_dialog_msg">S\'utilitza per estimar l\'hora d\'arribada per carreteres de tipus desconegut i per limitar la velocitat a totes les vies (podria canviar la ruta)</string>
     <string name="shared_string_other">Altres</string>
     <string name="shared_sting_tiles">Tessel·les</string>
     <string name="export_profile">Exporta el perfil</string>
     <string name="exported_osmand_profile">Perfil d\'OsmAnd: %1$s</string>
     <string name="overwrite_profile_q">El perfil \'%1$s\' ja existeix. El voleu sobreescriure\?</string>
     <string name="export_profile_failed">No s\'ha pogut exportar el perfil.</string>
-    <string name="profile_import">Importa el perfil:</string>
-    <string name="profile_import_descr">Per importar un perfil, seleccioneu el seu arxiu en el dispositiu i obriu-lo amb OsmAnd.</string>
+    <string name="profile_import">Importació del perfil</string>
+    <string name="profile_import_descr">Per a importar un perfil, seleccioneu-ne el fitxer en el dispositiu i obriu-lo amb OsmAnd.</string>
     <string name="file_import_error">Error d\'importació de %1$s: %2$s</string>
     <string name="file_imported_successfully">S\'ha importat correctament %1$s.</string>
     <string name="rendering_value_white_name">Blanc</string>
@@ -3397,4 +3393,38 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="clear_confirmation_msg">Voleu netejar %1$s\?</string>
     <string name="dialogs_and_notifications_title">Diàlegs i notificacions</string>
     <string name="dialogs_and_notifications_descr">Emergents de control, diàlegs i notificacions que surten a OsmAnd mentre s\'utilitza.</string>
+    <string name="join_segments">Uneix segments</string>
+    <string name="add_new_profile_q">Voleu afegir el perfil nou \'%1$s\'\?</string>
+    <string name="distance_and_address">%1$s • %2$s</string>
+    <string name="street_city">%1$s, %2$s</string>
+    <string name="personal_category_name">Personal</string>
+    <string name="shared_string_downloading_formatted">S\'està baixant %s</string>
+    <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Mostra les vies ciclistes de xarxa de nodes</string>
+    <string name="download_map_dialog">Diàleg de baixada de mapa</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_name">Xarxes de nodes</string>
+    <string name="suggested_maps">Mapes suggerits</string>
+    <string name="suggested_maps_descr">Aquests mapes són necessaris per utilitzar-los amb el connector</string>
+    <string name="added_profiles">Perfils afegits</string>
+    <string name="added_profiles_descr">El connector afegeix un nou perfil a OsmAnd</string>
+    <string name="shared_string_turn_off">Desactiva</string>
+    <string name="new_plugin_added">S\'ha afegit un nou connector</string>
+    <string name="desert_render_descr">A deserts i altre àrees poc poblades. Mostra més detalls en una escala de visualització.</string>
+    <string name="routing_attr_width_name">Límit d\'amplada</string>
+    <string name="routing_attr_width_description">Indica el límit d\'amplada de vehicle permesa en les rutes.</string>
+    <string name="rendering_attr_piste_difficulty_aerialway_name">Via aèria</string>
+    <string name="simulate_your_location_gpx_descr">Simula la vostra posició fent servir una traça GPX enregistrada.</string>
+    <string name="rendering_value_thick_name">Gruix</string>
+    <string name="select_navigation_icon">Seleccioneu la icona de navegació</string>
+    <string name="select_map_icon">Seleccioneu la icona del mapa</string>
+    <string name="delete_profiles_descr">Si toqueu Aplica, els perfils suprimits es perdran definitivament.</string>
+    <string name="master_profile">Perfil principal</string>
+    <string name="select_color">Seleccioneu el color</string>
+    <string name="edit_profiles_descr">No podeu suprimir els perfils predeterminats de l\'OsmAnd, però podeu desactivar-los en la pantalla anterior, o moure\'ls a la part inferior.</string>
+    <string name="edit_profiles">Edita els perfils</string>
+    <string name="select_nav_profile_dialog_message">El tipus de navegació determina les regles de càlcul de les rutes.</string>
+    <string name="profile_appearance">Aparença del perfil</string>
+    <string name="choose_icon_color_name">Trieu la icona, el color i el nom</string>
+    <string name="reorder_profiles">Edita la llista de perfils</string>
+    <string name="selected_profile">Perfil seleccionat</string>
+    <string name="quick_action_directions_from_desc">Un botó per establir el punt central de la pantalla com el punt de sortida i calcular la ruta vers la destinació o obrir una petició per seleccionar-la si no hi ha un marcador de destinació al mapa.</string>
 </resources>

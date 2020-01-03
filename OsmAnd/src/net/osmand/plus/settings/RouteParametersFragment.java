@@ -77,9 +77,9 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 	protected void setupPreferences() {
 		setupRouteParametersImage();
 
-		Preference vehicleParametersInfo = findPreference(ROUTE_PARAMETERS_INFO);
-		vehicleParametersInfo.setIcon(getContentIcon(R.drawable.ic_action_info_dark));
-		vehicleParametersInfo.setTitle(getString(R.string.route_parameters_info, getSelectedAppMode().toHumanString(getContext())));
+		Preference routeParametersInfo = findPreference(ROUTE_PARAMETERS_INFO);
+		routeParametersInfo.setIcon(getContentIcon(R.drawable.ic_action_info_dark));
+		routeParametersInfo.setTitle(getString(R.string.route_parameters_info, getSelectedAppMode().toHumanString(getContext())));
 
 		setupRoutingPrefs();
 		setupTimeConditionalRoutingPref();

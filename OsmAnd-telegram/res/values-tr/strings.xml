@@ -211,7 +211,7 @@
     <string name="my_location_search_hint">Ara: Grup veya kişi</string>
     <string name="start_location_sharing">Konumu paylaş</string>
     <string name="show_on_map">Haritada göster</string>
-    <string name="app_name">OsmAnd Online GPS Tracker</string>
+    <string name="app_name">OsmAnd Çevrimiçi GPS İzleyici</string>
     <string name="phone_number_title">Telefon numarası</string>
     <string name="phone_number_descr">Uluslararası formatta telefon numarası</string>
     <string name="shared_string_password">Parola</string>
@@ -245,8 +245,19 @@
     <string name="shared_string_hour_short">sa</string>
     <string name="shared_string_minute_short">dk</string>
     <string name="shared_string_second_short">sn</string>
-    <string name="welcome_descr"><b>OsmAnd Tracker</b> konumunuzu paylaşmanıza ve OsmAnd\'daki diğer kişileri görmenize olanak sağlar.<br/><br/>Uygulama Telegram API\'sini kullanmaktadır, bu nedenle bir Telegram hesabına ihtiyacınız vardır.</string>
+    <string name="welcome_descr">
+        <b>OsmAnd Tracker</b> konumunuzu paylaşmanıza ve OsmAnd\'daki diğer kişileri görmenize olanak sağlar.<br/>
+        <br/>Uygulama Telegram API\'sini kullanmaktadır, bu nedenle bir Telegram hesabına ihtiyacınız vardır.</string>
     <string name="my_location">Konumum</string>
     <string name="live_now">Şimdi canlı</string>
     <string name="timeline">Zaman çizelgesi</string>
+    <string name="time_zone_descr">Konum mesajlarınızda gösterilecek saat dilimini seçin.</string>
+    <string name="time_zone">Saat dilimi</string>
+    <string name="units_and_formats">Birimler ve formatlar</string>
+    <string name="unit_of_length_descr">Mesafe ölçüm birimini değiştir.</string>
+    <string name="unit_of_length">Uzunluk birimleri</string>
+    <string name="unit_of_speed_system_descr">Hız birimini tanımlayın.</string>
+    <string name="unit_of_speed_system">Hız birimi</string>
+    <string name="buffer_time_descr">Noktaların arabellekte saklanacağı maksimum süre</string>
+    <string name="buffer_time">Arabellek zaman aşım süresi</string>
 </resources>

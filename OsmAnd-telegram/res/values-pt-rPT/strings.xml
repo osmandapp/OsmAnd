@@ -96,7 +96,9 @@
     <string name="not_possible_to_send_to_telegram_chats">Não é possível enviar para bate-papo do Telegram:</string>
     <string name="not_sent_yet">Ainda não enviado</string>
     <string name="points_size">%1$d pontos</string>
-    <string name="welcome_descr"><b>OsmAnd Tracker</b> permite que partilhe a sua localização e veja a dos outros no OsmAnd.<br/> <br/>O app usa a API Telegram e você precisa de uma conta Telegram.</string>
+    <string name="welcome_descr">
+        <b>OsmAnd Tracker</b> permite que partilhe a sua localização e veja a dos outros no OsmAnd.<br/>
+        <br/>O app usa a API Telegram e você precisa de uma conta Telegram.</string>
     <string name="min_logging_distance_descr">Filtro: distância mínima para registrar um novo ponto</string>
     <string name="device_name_cannot_be_empty">O nome do aparelho não pode estar vazio</string>
     <string name="yard">yd</string>
@@ -249,4 +251,13 @@
     <string name="si_mi_yard">Milhas/jardas</string>
     <string name="initializing">Iniciando</string>
     <string name="saved_messages">Mensagens gravadas</string>
+    <string name="time_zone_descr">Selecione o fuso horário a mostrar nas suas mensagens de localização.</string>
+    <string name="time_zone">Fuso horário</string>
+    <string name="units_and_formats">Unidades e formatos</string>
+    <string name="unit_of_length_descr">Alterar unidade de distância.</string>
+    <string name="unit_of_length">Unidades de comprimento</string>
+    <string name="unit_of_speed_system_descr">Definir unidade de velocidade.</string>
+    <string name="unit_of_speed_system">Unidade de velocidade</string>
+    <string name="buffer_time_descr">Tempo máximo para armazenar pontos no buffer</string>
+    <string name="buffer_time">Tempo de expiração do buffer</string>
 </resources>

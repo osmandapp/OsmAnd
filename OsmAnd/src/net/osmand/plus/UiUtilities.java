@@ -3,6 +3,7 @@ package net.osmand.plus;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
@@ -16,11 +17,15 @@ import android.support.annotation.DrawableRes;
 import android.support.annotation.StringRes;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
+import android.support.v4.widget.TintableCompoundButton;
 import android.support.v7.view.ContextThemeWrapper;
+import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
@@ -320,6 +325,75 @@ public class UiUtilities {
 		return screenOrientation;
 	}
 
+	public static void setupCompoundButtonDrawable(Context ctx, boolean nightMode, @ColorInt int activeColor, Drawable drawable) {
+		int inactiveColor = ContextCompat.getColor(ctx, nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light);
+		int[][] states = new int[][] {
+				new int[] {-android.R.attr.state_checked},
+				new int[] {android.R.attr.state_checked}
+		};
+		ColorStateList csl = new ColorStateList(states, new int[]{inactiveColor, activeColor});
+		DrawableCompat.setTintList(DrawableCompat.wrap(drawable), csl);
+	}
+
+	public static void setupCompoundButton(OsmandApplication app, CompoundButton compoundButton, boolean nightMode, boolean profileDependent) {
+		if (compoundButton == null) {
+			return;
+		}
+		int activeColor = profileDependent ? 
+				app.getSettings().APPLICATION_MODE.get().getIconColorInfo().getColor(nightMode) : 
+				nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
+		setupCompoundButton(nightMode, ContextCompat.getColor(app, activeColor), compoundButton);
+	}
+
+	public static void setupCompoundButton(boolean nightMode, @ColorInt int activeColor, CompoundButton compoundButton) {
+		if (compoundButton == null) {
+			return;
+		}
+		Context ctx = compoundButton.getContext();
+		int inactiveColorPrimary = ContextCompat.getColor(ctx, nightMode ? R.color.icon_color_default_dark : R.color.icon_color_secondary_light);
+		int inactiveColorSecondary = getColorWithAlpha(inactiveColorPrimary, 0.45f);
+		int[][] states = new int[][] {
+				new int[] {-android.R.attr.state_checked},
+				new int[] {android.R.attr.state_checked}
+		};
+		if (compoundButton instanceof SwitchCompat) {
+			SwitchCompat sc = (SwitchCompat) compoundButton;
+			int[] thumbColors = new int[] {
+					inactiveColorPrimary, activeColor
+			};
+
+			int[] trackColors = new int[] {
+					inactiveColorSecondary, inactiveColorSecondary
+			};
+			DrawableCompat.setTintList(DrawableCompat.wrap(sc.getThumbDrawable()), new ColorStateList(states, thumbColors));
+			DrawableCompat.setTintList(DrawableCompat.wrap(sc.getTrackDrawable()), new ColorStateList(states, trackColors));
+		} else if (compoundButton instanceof TintableCompoundButton) {
+			ColorStateList csl = new ColorStateList(states, new int[]{inactiveColorPrimary, activeColor});
+			((TintableCompoundButton) compoundButton).setSupportButtonTintList(csl);
+		}
+		compoundButton.setBackgroundColor(Color.TRANSPARENT);
+	}
+	
+	public static void setupSeekBar(OsmandApplication app, SeekBar seekBar, boolean nightMode, boolean profileDependent) {
+		int activeColor = ContextCompat.getColor(app, profileDependent ?
+				app.getSettings().APPLICATION_MODE.get().getIconColorInfo().getColor(nightMode) :
+				nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
+		setupSeekBar(seekBar, activeColor, nightMode);
+	}
+
+	public static void setupSeekBar(SeekBar seekBar, @ColorInt int activeColor, boolean nightMode) {
+		int backgroundColor = ContextCompat.getColor(seekBar.getContext(),
+				nightMode ? R.color.icon_color_secondary_dark : R.color.icon_color_default_light);
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+			LayerDrawable progressBarDrawable = (LayerDrawable) seekBar.getProgressDrawable();
+			Drawable backgroundDrawable = progressBarDrawable.getDrawable(0);
+			Drawable progressDrawable = progressBarDrawable.getDrawable(2);
+			backgroundDrawable.setColorFilter(backgroundColor, PorterDuff.Mode.SRC_IN);
+			progressDrawable.setColorFilter(activeColor, PorterDuff.Mode.SRC_IN);
+			seekBar.getThumb().setColorFilter(activeColor, PorterDuff.Mode.SRC_IN);
+		}
+	}
+	
 	public static void setupDialogButton(boolean nightMode, View buttonView, DialogButtonType buttonType, @StringRes int buttonTextId) {
 		setupDialogButton(nightMode, buttonView, buttonType, buttonView.getContext().getString(buttonTextId));
 	}

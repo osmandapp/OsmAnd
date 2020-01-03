@@ -34,7 +34,7 @@
     <string name="shared_string_search">Pesquisar</string>
     <string name="shared_string_show_description">Mostrar descrição.</string>
     <string name="shared_string_message">Mensagem</string>
-    <string name="agps_data_last_downloaded">Últimos dados A-GPS baixados: %1$s</string>
+    <string name="agps_data_last_downloaded">Dados A-GPS baixados: %1$s</string>
     <string name="confirm_usage_speed_cameras">Em diversos países (Alemanha, França, Itália, etc.) o uso de alertas de radar é ilegal. OsmAnd não assume qualquer responsabilidade se você violar a lei. Por favor, toque em \"Sim\" somente se você pode aceitar o uso deste recurso.</string>
     <string name="welmode_download_maps">Baixar mapas</string>
     <string name="welcome_select_region">Para refletir corretamente seus sinais e regras de trânsito, por favor, selecione a região que você dirige:</string>
@@ -335,7 +335,7 @@
     <string name="routing_attr_prefer_motorway_description">Preferir autoestradas na rota</string>
     <string name="routing_attr_avoid_toll_name">Sem pedágios</string>
     <string name="routing_attr_avoid_toll_description">Evita estradas com pedágio</string>
-    <string name="routing_attr_avoid_unpaved_name">Não há estradas não pavimentadas</string>
+    <string name="routing_attr_avoid_unpaved_name">Sem estradas não pavimentadas</string>
     <string name="routing_attr_avoid_unpaved_description">Evita estradas não pavimentadas</string>
     <string name="routing_attr_avoid_ferries_description">Evita balsas</string>
     <string name="routing_attr_weight_name">Peso máximo</string>
@@ -510,8 +510,8 @@
     <string name="route_descr_select_destination">Defina o destino</string>
     <string name="route_preferences">Preferências de rota</string>
     <string name="route_info">Informações da rota</string>
-    <string name="routing_attr_avoid_ferries_name">Nenhuma balsa</string>
-    <string name="routing_attr_avoid_motorway_name">Não há autoestradas</string>
+    <string name="routing_attr_avoid_ferries_name">Sem balsas</string>
+    <string name="routing_attr_avoid_motorway_name">Sem autoestradas</string>
     <string name="routing_attr_avoid_motorway_description">Evita autoestradas</string>
     <string name="android_19_location_disabled">No Android 4.4 (KitKat), a pasta de armazenamento antiga (%s) está obsoleta. Copiar todos os arquivos OsmAnd para o novo local de armazenamento\?
 \n 
@@ -863,7 +863,7 @@ Pôr do Sol: %2$s</string>
     <string name="osmand_parking_warning">Alerta</string>
     <string name="osmand_parking_warning_text">Uma notificação para pegar seu carro foi adicionada ao seu calendário e pode ser editada ou removida lá.</string>
     <string name="osmand_parking_time_limit_title">Definir limite de tempo</string>
-    <string name="osmand_parking_delete_confirm">Apagar o marcardor da posição de estacionamento?</string>
+    <string name="osmand_parking_delete_confirm">Apagar o marcador da posição de estacionamento\?</string>
     <string name="osmand_parking_delete">Apagar um marcador de estacionamento</string>
     <string name="osmand_parking_choose_type">Selecionar o tipo de estacionamento</string>
     <string name="osmand_parking_no_lim_text">Tempo ilimitado</string>
@@ -905,8 +905,8 @@ Pôr do Sol: %2$s</string>
     <string name="offline_navigation_not_available">Navegação OsmAnd off-line está temporariamente indisponível.</string>
     <string name="left_side_navigation_descr">Para países onde as pessoas dirigem no lado esquerdo da estrada.</string>
     <string name="local_index_description">Toque em qualquer item para ver mais detalhes, toque longo para desativar ou excluir. Dados atuais no aparelho (%1$s livre):</string>
-    <string name="unknown_from_location">Ponto de partida ainda não determinado</string>
-    <string name="unknown_location">Posição ainda desconhecida</string>
+    <string name="unknown_from_location">Ponto de partida ainda não determinado.</string>
+    <string name="unknown_location">Posição ainda desconhecida.</string>
     <string name="modify_transparency">Definir transparência (0 - transparente, 255 - opaco)</string>
     <string name="confirm_interrupt_download">Cancelar o download\?</string>
     <string name="basemap_was_selected_to_download">O mapa base necessário para fornecer funcionalidade básica está na fila de download.</string>
@@ -1214,7 +1214,7 @@ Pôr do Sol: %2$s</string>
     <string name="preferred_locale_descr">Idioma de exibição do aplicativo (usado após o reinício do OsmAnd).</string>
     <string name="preferred_locale">Idioma de exibição</string>
     <string name="incomplete_locale">incompleto</string>
-    <string name="unit_of_length_descr">Altere as unidades de distância e velocidade.</string>
+    <string name="unit_of_length_descr">Altere as unidades de medida.</string>
     <string name="unit_of_length">Unidades de medida</string>
     <string name="si_mi_feet">Milhas/pés</string>
     <string name="si_mi_yard">Milhas/jardas</string>
@@ -1746,9 +1746,9 @@ Pôr do Sol: %2$s</string>
     <string name="rendering_attr_currentTrackColor_description">Cor do GPX</string>
     <string name="rendering_attr_currentTrackWidth_description">Largura do GPX</string>
     <string name="rendering_attr_roadStyle_description">Estilo das vias</string>
-    <string name="routing_attr_avoid_stairs_name">Não há escadas</string>
+    <string name="routing_attr_avoid_stairs_name">Sem escadas</string>
     <string name="routing_attr_avoid_stairs_description">Evita passar por escadas</string>
-    <string name="routing_attr_avoid_borders_name">Não há passagem por fronteira</string>
+    <string name="routing_attr_avoid_borders_name">Sem passagem por fronteira</string>
     <string name="favourites_context_menu_add">Adicionar favorito</string>
     <string name="poi_dialog_reopen">Reabrir</string>
     <string name="downloads_left_template">%1$s transferências restantes</string>
@@ -1808,7 +1808,7 @@ Pôr do Sol: %2$s</string>
     <string name="shared_string_near">Perto de</string>
     <string name="no_address_found">Sem endereço determinado</string>
     <string name="looking_up_address">Procurando endereço</string>
-    <string name="rendering_attr_horseRoutes_name">Rotas para cavalos</string>
+    <string name="rendering_attr_horseRoutes_name">Rotas hípicas</string>
     <string name="update">Atualizar</string>
     <string name="only_download_over_wifi">Somente baixar via Wi-Fi</string>
     <string name="live_update">Atualização ao vivo</string>
@@ -2278,7 +2278,7 @@ Pôr do Sol: %2$s</string>
     <string name="translit_names">Transliterar nomes</string>
     <string name="import_track_desc">Arquivo %1$s não possui pontos de passagem, importe-o como uma trilha?</string>
     <string name="add_segment_to_the_track">Adicionar a um arquivo GPX</string>
-    <string name="empty_state_av_notes_desc">Adicione nota de áudio, vídeo ou foto em qualquer ponto do mapa, usando o widget ou o menu de contexto.</string>
+    <string name="empty_state_av_notes_desc">Adicione notas de áudio, vídeo ou foto em qualquer ponto do mapa, usando o widget ou o menu de contexto.</string>
     <string name="quick_action_add_destination_desc">Um botão que marca o centro da tela como o destino da rota, qualquer destino anteriormente selecionado se torna o último destino intermediário.</string>
     <string name="quick_action_replace_destination_desc">Tocar no botão de ação marcará o centro da tela como novo destino da rota, substituindo o destino selecionado anteriormente (se houver).</string>
     <string name="quick_action_add_first_intermediate_desc">Um botão que adiciona no centro da tela o primeiro destino intermédio.</string>
@@ -2604,7 +2604,7 @@ Pôr do Sol: %2$s</string>
     <string name="enter_the_file_name">Digite o nome do arquivo.</string>
     <string name="map_import_error">Erro de importação de mapa</string>
     <string name="map_imported_successfully">Mapa importado</string>
-    <string name="rendering_attr_whiteWaterSports_name">Esportes aquáticos</string>
+    <string name="rendering_attr_whiteWaterSports_name">Esportes em corredeiras</string>
     <string name="make_as_start_point">Converter em ponto de partida</string>
     <string name="select_waypoints_category_description">Adicione todos os pontos da trilha, ou selecione categorias separadas.</string>
     <string name="shared_string_total">Total</string>
@@ -3065,7 +3065,7 @@ Pôr do Sol: %2$s</string>
     <string name="profile_alert_need_save_msg">Salvar as alterações no perfil primeiro</string>
     <string name="profile_alert_delete_title">Excluir perfil</string>
     <string name="profile_alert_delete_msg">Tem certeza de que deseja excluir o perfil de \"%s\"</string>
-    <string name="select_base_profile_dialog_title">Selecionar o perfil base</string>
+    <string name="select_base_profile_dialog_title">Selecionar o perfil para começar</string>
     <string name="select_base_profile_dialog_message">Baseie seu perfil personalizado em um dos perfis padrões do aplicativo, os quais definem a configuração básica, como a visibilidade padrão de widgets e unidades de velocidade e distância. Abaixo estão os perfis padrões do aplicativo juntamente com exemplos de perfis personalizados para os quais eles podem ser estendidos:</string>
     <string name="select_nav_profile_dialog_title">Escolher o tipo de navegação</string>
     <string name="base_profile_descr_car">Carro, caminhão, motocicleta</string>
@@ -3107,7 +3107,7 @@ Pôr do Sol: %2$s</string>
     <string name="routing_attr_difficulty_preference_name">Dificuldade preferida</string>
     <string name="routing_attr_difficulty_preference_description">Prefira rotas dessa dificuldade, embora o roteamento em pistas mais difíceis ou mais fáceis ainda seja possível se for mais curto.</string>
     <string name="routing_attr_freeride_policy_name">Fora de pista</string>
-    <string name="routing_attr_freeride_policy_description">Freeride e offpiste são rotas e passagens não oficiais. Normalmente sem estilo, sem manutenção dos funcionários e não checado à noite. Digite a risco próprio.</string>
+    <string name="routing_attr_freeride_policy_description">Freeride e offpiste são rotas e passagens não oficiais. Normalmente sem estilo, sem manutenção por funcionários e não checado à noite. Entre por sua conta e risco.</string>
     <string name="process_downloading_service">Serviço de download do OsmAnd</string>
     <string name="shared_string_color_magenta">Magenta</string>
     <string name="shared_string_icon">Ícone</string>
@@ -3247,7 +3247,7 @@ Pôr do Sol: %2$s</string>
     <string name="reset_to_default">Restaurar para o padrão</string>
     <string name="manage_profiles_descr">Criar, importar, editar perfis</string>
     <string name="manage_profiles">Gerenciar perfis de aplicativos…</string>
-    <string name="osmand_settings_descr">Efetivo em todo o aplicativo</string>
+    <string name="osmand_settings_descr">Afeta o aplicativo todo</string>
     <string name="osmand_settings">Configurações do OsmAnd</string>
     <string name="copy_from_other_profile">Copiar de outro perfil</string>
     <string name="turn_screen_on">Ativar tela</string>
@@ -3358,7 +3358,7 @@ Pôr do Sol: %2$s</string>
     <string name="exported_osmand_profile">Perfil OsmAnd: %1$s</string>
     <string name="overwrite_profile_q">O perfil \'%1$s\' já existe. Substituir\?</string>
     <string name="export_profile_failed">Não foi possível exportar o perfil.</string>
-    <string name="profile_import">Importação de perfil:</string>
+    <string name="profile_import">Importação de perfil</string>
     <string name="profile_import_descr">Para importar um perfil, selecione seu arquivo no dispositivo e abra-o com OsmAnd.</string>
     <string name="file_import_error">Erro de importação %1$s: %2$s</string>
     <string name="file_imported_successfully">%1$s importado com sucesso.</string>
@@ -3386,4 +3386,22 @@ Pôr do Sol: %2$s</string>
     <string name="add_new_profile_q">Adicionar novo perfil \'%1$s\'\?</string>
     <string name="save_heading">Incluir direção</string>
     <string name="save_heading_descr">Salvar direção de cada ponto da trilha durante a gravação.</string>
+    <string name="distance_and_address">%1$s • %2$s</string>
+    <string name="street_city">%1$s, %2$s</string>
+    <string name="personal_category_name">Pessoal</string>
+    <string name="shared_string_downloading_formatted">Baixando %s</string>
+    <string name="rendering_value_thick_name">Grosso</string>
+    <string name="desert_render_descr">Para desertos e outras áreas escassamente povoadas. Exibe mais detalhes em uma escala de visualização.</string>
+    <string name="select_navigation_icon">Selecionar ícone de navegação</string>
+    <string name="select_map_icon">Selecione o ícone do mapa</string>
+    <string name="delete_profiles_descr">Depois de tocar em Aplicar, os perfis excluídos serão perdidos completamente.</string>
+    <string name="master_profile">Perfil principal</string>
+    <string name="select_color">Selecione a cor</string>
+    <string name="edit_profiles_descr">Você não pode excluir os perfis padrão do OsmAnd, mas pode desativá-los na tela anterior ou movê-los para baixo.</string>
+    <string name="edit_profiles">Editar perfis</string>
+    <string name="select_nav_profile_dialog_message">O tipo de navegação afeta as regras para cálculos de rota.</string>
+    <string name="profile_appearance">Aparência do perfil</string>
+    <string name="choose_icon_color_name">Escolha ícone, cor e nome</string>
+    <string name="reorder_profiles">Editar lista de perfis</string>
+    <string name="selected_profile">Perfil selecionado</string>
 </resources>

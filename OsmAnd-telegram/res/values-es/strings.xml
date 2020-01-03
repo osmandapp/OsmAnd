@@ -203,7 +203,7 @@
     <string name="shared_string_telegram">Telegram</string>
     <string name="privacy_policy_use_telegram">Telegram (la aplicación de mensajería) se utiliza para conectar y comunicar a las personas.</string>
     <string name="privacy_policy_telegram_client">El rastreador de OsmAnd (en inglés como «OsmAnd Tracker»), es uno de los clientes que utiliza la plataforma abierta de Telegram. Sus contactos pueden utilizar cualquier otro cliente de Telegram.</string>
-    <string name="privacy_policy_agree">Al pulsar en continuar, acepta las Políticas de Privacidad de Telegram y de OsmAnd.</string>
+    <string name="privacy_policy_agree">Al hacer clic en \"Continuar\", aceptas las condiciones de la política de privacidad de Telegram- y OsmAnd.</string>
     <string name="shared_string_accept">Aceptar</string>
     <string name="telegram_privacy_policy">Política de privacidad de Telegram</string>
     <string name="osmand_privacy_policy">Política de privacidad de OsmAnd</string>
@@ -249,4 +249,14 @@
     <string name="shared_string_start">Inicio</string>
     <string name="set_time_timeline_descr">Elige la hora de visualización</string>
     <string name="start_end_date">Fecha de Inicio — Fin</string>
+    <string name="saved_messages">Mensajes guardados</string>
+    <string name="time_zone_descr">Seleccione la zona horaria que desea mostrar en los mensajes de ubicación.</string>
+    <string name="time_zone">Zona horaria</string>
+    <string name="units_and_formats">Unidades y formatos</string>
+    <string name="unit_of_length_descr">Cambia las unidades de longitud.</string>
+    <string name="unit_of_length">Unidades de longitud</string>
+    <string name="unit_of_speed_system_descr">Definir la unidad de velocidad.</string>
+    <string name="unit_of_speed_system">Unidad de velocidad</string>
+    <string name="buffer_time_descr">Tiempo después del cual se eliminarán los mensajes de ubicación almacenados en búfer</string>
+    <string name="buffer_time">Tiempo de expiración del búfer</string>
 </resources>

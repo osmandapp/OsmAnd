@@ -949,7 +949,7 @@ Proporcionální paměť %4$s MB (limit Androidu %5$s MB, Dalvik %6$s MB).</stri
     <string name="choose_osmand_theme_descr">Vyberte si vzhled aplikace.</string>
     <string name="street_name">Název ulice</string>
     <string name="hno">číslo domu</string>
-    <string name="download_using_mobile_internet">Není připojeni přes WiFi. Použít současné připojení k internetu pro stahování\?</string>
+    <string name="download_using_mobile_internet">Není připojení přes WiFi. Použít současné připojení k internetu pro stahování\?</string>
     <string name="available_downloads_left">%1$d souborů zbývá ke stažení</string>
     <string name="files_limit">Zbývá %1$d souborů</string>
     <string name="monitoring_settings">Záznam cesty</string>
@@ -2877,7 +2877,7 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="routeInfo_surface_name">Povrch</string>
     <string name="routeInfo_smoothness_name">Hladkost povrchu</string>
     <string name="routeInfo_steepness_name">Strmost</string>
-    <string name="show_more">Ukaž více</string>
+    <string name="show_more">Ukázat více</string>
     <string name="tracks_on_map">Zobrazené trasy</string>
     <string name="time_of_day">Denní doba</string>
     <string name="step_by_step">Krok za krokem</string>

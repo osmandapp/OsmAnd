@@ -11,7 +11,7 @@
     <string name="privacy_policy_use_telegram">يستخدم تيليجرام (تطبيق المراسلة) للاتصال والتواصل مع الأشخاص.</string>
     <string name="shared_string_later">لاحقا</string>
     <string name="osmand_service">حالة وضع السكون</string>
-    <string name="nm_h">م.بح/س</string>
+    <string name="nm_h">ميل بحري</string>
     <string name="si_nm_h">ميل بحري في الساعة (عقدة)</string>
     <string name="si_km_m">كم ، متر</string>
     <string name="shared_string_end">نهاية</string>
@@ -34,7 +34,7 @@
     <string name="shared_string_off">إيقاف</string>
     <string name="shared_string_install">تثبيت</string>
     <string name="shared_string_share">مشاركة</string>
-    <string name="shared_string_back">العودة</string>
+    <string name="shared_string_back">عودة</string>
     <string name="shared_string_password">كلمة المرور</string>
     <string name="shared_string_continue">استمرار</string>
     <string name="shared_string_cancel">إلغاء</string>
@@ -66,4 +66,7 @@
     <string name="shared_string_start">بدء</string>
     <string name="shared_string_apply">تطبيق</string>
     <string name="shared_string_enabled">مفعل</string>
+    <string name="units_and_formats">الوحدات والأشكال</string>
+    <string name="unit_of_length_descr">اختيار الوحدات: كم، ميل، ميل بحري.. إلخ.</string>
+    <string name="unit_of_length">وحدات الطول</string>
 </resources>

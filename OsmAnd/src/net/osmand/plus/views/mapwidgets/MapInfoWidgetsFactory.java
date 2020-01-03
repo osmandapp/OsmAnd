@@ -1085,7 +1085,7 @@ public class MapInfoWidgetsFactory {
 							Bundle args = new Bundle();
 							args.putInt(ShowAlongTheRouteBottomSheet.EXPAND_TYPE_KEY, pnt.type);
 							fragment.setArguments(args);
-							fragment.setUsedOnMap(false);
+							fragment.setUsedOnMap(true);
 							fragment.show(map.getSupportFragmentManager(), ShowAlongTheRouteBottomSheet.TAG);
 						}
 					});

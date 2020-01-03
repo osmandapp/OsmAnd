@@ -2,6 +2,7 @@ package net.osmand.plus.settings;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Rect;
@@ -14,32 +15,38 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceGroupAdapter;
 import android.support.v7.preference.SwitchPreferenceCompat;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
-import net.osmand.aidl.OsmandAidlApi;
 import net.osmand.aidl.ConnectedApp;
+import net.osmand.aidl.OsmandAidlApi;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.SettingsHelper;
 import net.osmand.plus.SettingsHelper.ProfileSettingsItem;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.PluginActivity;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
+import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
+import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.plus.skimapsplugin.SkiMapsPlugin;
 
@@ -64,7 +71,11 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 	private static final String SETTINGS_ACTIONS = "settings_actions";
 	private static final String CONFIGURE_MAP = "configure_map";
 	private static final String CONFIGURE_SCREEN = "configure_screen";
+	private static final String COPY_PROFILE_SETTINGS = "copy_profile_settings";
+	private static final String RESET_TO_DEFAULT = "reset_to_default";
 	private static final String EXPORT_PROFILE = "export_profile";
+	private static final String DELETE_PROFILE = "delete_profile";
+	private static final String PROFILE_APPEARANCE = "profile_appearance";
 
 	@ColorRes
 	protected int getBackgroundColorRes() {
@@ -84,29 +95,62 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 	protected void createToolbar(LayoutInflater inflater, View view) {
 		super.createToolbar(inflater, view);
 
-		TextView toolbarTitle = (TextView) view.findViewById(R.id.profile_title);
+		TextView toolbarTitle = view.findViewById(R.id.toolbar_title);
 		toolbarTitle.setTypeface(FontCache.getRobotoMedium(view.getContext()));
-
+		toolbarTitle.setText(getSelectedAppMode().toHumanString(getContext()));
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 			float letterSpacing = AndroidUtils.getFloatValueFromRes(view.getContext(), R.dimen.title_letter_spacing);
 			toolbarTitle.setLetterSpacing(letterSpacing);
 		}
-		TextView profileType = (TextView) view.findViewById(R.id.profile_type);
-		profileType.setVisibility(View.VISIBLE);
+
+		TextView toolbarSubtitle = view.findViewById(R.id.toolbar_subtitle);
+		toolbarSubtitle.setText(R.string.configure_profile);
+		toolbarSubtitle.setVisibility(View.VISIBLE);
+
+		if (!getSelectedAppMode().equals(ApplicationMode.DEFAULT)) {
+			view.findViewById(R.id.toolbar_switch_container).setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					ApplicationMode selectedMode = getSelectedAppMode();
+					List<ApplicationMode> availableAppModes = ApplicationMode.values(getMyApplication());
+					boolean isChecked = availableAppModes.contains(selectedMode);
+					ApplicationMode.changeProfileAvailability(selectedMode, !isChecked, getMyApplication());
+					updateToolbarSwitch();
+				}
+			});
+		} else {
+			view.findViewById(R.id.switchWidget).setVisibility(View.GONE);
+		}
+	}
+
+	@Override
+	public void onPause() {
+		updateRouteInfoMenu();
+		super.onPause();
+	}
+
+	private void updateToolbarSwitch() {
+		View view = getView();
+		if (view == null) {
+			return;
+		}
+		boolean isChecked = ApplicationMode.values(getMyApplication()).contains(getSelectedAppMode());
+		int color = isChecked ? getActiveProfileColor() : ContextCompat.getColor(app, R.color.preference_top_switch_off);
+		View switchContainer = view.findViewById(R.id.toolbar_switch_container);
+		AndroidUtils.setBackground(switchContainer, new ColorDrawable(color));
+
+		SwitchCompat switchView = switchContainer.findViewById(R.id.switchWidget);
+		switchView.setChecked(isChecked);
+		UiUtilities.setupCompoundButton(isNightMode(), getActiveProfileColor(), switchView);
+
+		TextView title = switchContainer.findViewById(R.id.switchButtonText);
+		title.setText(isChecked ? R.string.shared_string_on : R.string.shared_string_off);
 	}
 
 	@Override
 	protected void updateToolbar() {
 		super.updateToolbar();
-
-		View view = getView();
-		if (view != null) {
-			ApplicationMode selectedMode = getSelectedAppMode();
-			String appModeType = getAppModeDescription(view.getContext(), selectedMode);
-
-			TextView profileType = (TextView) view.findViewById(R.id.profile_type);
-			profileType.setText(appModeType);
-		}
+		updateToolbarSwitch();
 	}
 
 	private RecyclerView.ItemDecoration createDividerItemDecoration() {
@@ -164,6 +208,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 		setupNavigationSettingsPref();
 		setupConfigureMapPref();
 		setupConfigureScreenPref();
+		setupProfileAppearancePref();
 
 		PreferenceCategory pluginSettings = (PreferenceCategory) findPreference(PLUGIN_SETTINGS);
 		pluginSettings.setIconSpaceReserved(false);
@@ -174,7 +219,10 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 		PreferenceCategory settingsActions = (PreferenceCategory) findPreference(SETTINGS_ACTIONS);
 		settingsActions.setIconSpaceReserved(false);
 
+		setupCopyProfileSettingsPref();
+		setupResetToDefaultPref();
 		setupExportProfilePref();
+		setupDeleteProfilePref();
 	}
 
 	private void setupNavigationSettingsPref() {
@@ -211,9 +259,46 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 		configureMap.setIntent(intent);
 	}
 
+	private void setupProfileAppearancePref() {
+		Context ctx = getContext();
+		if (ctx == null) {
+			return;
+		}
+
+		Preference configureMap = findPreference(PROFILE_APPEARANCE);
+		if (!getSelectedAppMode().equals(ApplicationMode.DEFAULT)) {
+			configureMap.setIcon(getContentIcon(getSelectedAppMode().getIconRes()));
+			configureMap.setFragment(ProfileAppearanceFragment.TAG);
+		} else {
+			configureMap.setVisible(false);
+		}
+	}
+
+	private void setupCopyProfileSettingsPref() {
+		Preference copyProfilePrefs = findPreference(COPY_PROFILE_SETTINGS);
+		copyProfilePrefs.setIcon(app.getUIUtilities().getIcon(R.drawable.ic_action_copy,
+				isNightMode() ? R.color.active_color_primary_dark : R.color.active_color_primary_light));
+	}
+
+	private void setupResetToDefaultPref() {
+		Preference resetToDefault = findPreference(RESET_TO_DEFAULT);
+		if (getSelectedAppMode().isCustomProfile()) {
+			resetToDefault.setVisible(false);
+		} else {
+			resetToDefault.setIcon(app.getUIUtilities().getIcon(R.drawable.ic_action_reset_to_default_dark,
+					isNightMode() ? R.color.active_color_primary_dark : R.color.active_color_primary_light));
+		}
+	}
+
 	private void setupExportProfilePref() {
 		Preference exportProfile = findPreference(EXPORT_PROFILE);
 		exportProfile.setIcon(app.getUIUtilities().getIcon(R.drawable.ic_action_app_configuration,
+				isNightMode() ? R.color.active_color_primary_dark : R.color.active_color_primary_light));
+	}
+
+	private void setupDeleteProfilePref() {
+		Preference deleteProfile = findPreference(DELETE_PROFILE);
+		deleteProfile.setIcon(app.getUIUtilities().getIcon(R.drawable.ic_action_delete_dark,
 				isNightMode() ? R.color.active_color_primary_dark : R.color.active_color_primary_light));
 	}
 
@@ -317,6 +402,16 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 					LOG.error(e);
 				}
 			}
+		} else if (COPY_PROFILE_SETTINGS.equals(prefId)) {
+			FragmentManager fragmentManager = getFragmentManager();
+			if (fragmentManager != null) {
+				SelectCopyAppModeBottomSheet.showInstance(fragmentManager, this, false, getSelectedAppMode());
+			}
+		} else if (RESET_TO_DEFAULT.equals(prefId)) {
+			FragmentManager fragmentManager = getFragmentManager();
+			if (fragmentManager != null) {
+				ResetProfilePrefsBottomSheet.showInstance(fragmentManager, prefId, this, false, getSelectedAppMode());
+			}
 		} else if (EXPORT_PROFILE.equals(prefId)) {
 			Context ctx = requireContext();
 			final ApplicationMode profile = getSelectedAppMode();
@@ -335,9 +430,44 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 					}
 				}
 			}, new ProfileSettingsItem(app.getSettings(), profile));
+		} else if (DELETE_PROFILE.equals(prefId)) {
+			onDeleteProfileClick();
 		}
-
 		return super.onPreferenceClick(preference);
+	}
+
+	void onDeleteProfileClick() {
+		final ApplicationMode profile = getSelectedAppMode();
+		if (getActivity() != null) {
+			if (profile.getParent() != null) {
+				Context themedContext = UiUtilities.getThemedContext(getActivity(), isNightMode());
+				AlertDialog.Builder bld = new AlertDialog.Builder(themedContext);
+				bld.setTitle(R.string.profile_alert_delete_title);
+				bld.setMessage(String
+						.format(getString(R.string.profile_alert_delete_msg),
+								profile.getCustomProfileName()));
+				bld.setPositiveButton(R.string.shared_string_delete,
+						new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								OsmandApplication app = getMyApplication();
+								if (app != null) {
+									ApplicationMode.deleteCustomMode(ApplicationMode.valueOfStringKey(profile.getStringKey(), ApplicationMode.DEFAULT), app);
+									app.getSettings().APPLICATION_MODE.set(ApplicationMode.DEFAULT);
+								}
+
+								if (getActivity() != null) {
+									getActivity().onBackPressed();
+								}
+							}
+						});
+				bld.setNegativeButton(R.string.shared_string_dismiss, null);
+				bld.show();
+			} else {
+				Toast.makeText(getActivity(), R.string.profile_alert_cant_delete_base,
+						Toast.LENGTH_SHORT).show();
+			}
+		}
 	}
 
 	@Override

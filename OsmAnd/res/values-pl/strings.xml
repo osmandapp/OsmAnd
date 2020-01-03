@@ -240,7 +240,7 @@
     <string name="download_type_to_filter">Proszę wprowadzić tekst, aby filtrować dane</string>
     <string name="use_high_res_maps">Wysoka rozdzielczość ekranu</string>
     <string name="use_high_res_maps_descr">Nie rozciągaj i rozmazuj kafelków mapy na ekranach o dużej rozdzielczości.</string>
-    <string name="unknown_location">Położenie nie jest jeszcze znane</string>
+    <string name="unknown_location">Położenie nie jest jeszcze znane.</string>
     <string name="context_menu_item_search_transport">Wyszukaj transport publiczny</string>
     <string name="transport_searching_transport">Rezultat wyszukiwania transportu (brak celu):</string>
     <string name="transport_searching_route">Rezultat wyszukiwania transportu ({0} do celu):</string>
@@ -544,7 +544,7 @@
     <string name="offline_navigation_not_available">Nawigacja offline w OsmAnd jest tymczasowo niedostępna.</string>
     <string name="left_side_navigation">Ruch lewostronny</string>
     <string name="left_side_navigation_descr">Dla krajów, w których jeździ się po lewej stronie ulicy.</string>
-    <string name="unknown_from_location">Nie ustalono jeszcze punktu początkowego</string>
+    <string name="unknown_from_location">Nie ustalono jeszcze punktu początkowego.</string>
     <string name="confirm_interrupt_download">Anulować pobieranie pliku?</string>
     <string name="basemap_was_selected_to_download">Mapa podstawowa potrzebna do zapewnienia podstawowej funkcjonalności jest w kolejce pobierania.</string>
     <string name="map_online_plugin_is_not_installed">Aktywuj wtyczkę \"Mapy online\", aby wybrać inne źródła mapy</string>
@@ -1501,7 +1501,7 @@ Długość %2$s</string>
     <string name="drawer">Płaska lista</string>
     <string name="days_behind">dni za najnowszą wersją</string>
     <string name="agps_info">Informacje A-GPS</string>
-    <string name="agps_data_last_downloaded">Ostatni pobrane dane A-GPS: %1$s</string>
+    <string name="agps_data_last_downloaded">Dane A-GPS pobrane: %1$s</string>
     <string name="confirm_usage_speed_cameras">W wielu krajach (Niemcy, Francja, Włochy i inne) korzystanie z ostrzeżeń o fotoradarach jest nielegalne. OsmAnd nie ponosi odpowiedzialności w przypadku naruszenia prawa. Proszę wybrać „Tak”, tylko jeśli wolno używać tej funkcji.</string>
     <string name="welmode_download_maps">Pobierz mapy</string>
     <string name="welcome_select_region">Proszę wybrać region ruchu, aby właściwie przedstawiać znaki i inne reguły ruchu:</string>
@@ -2891,7 +2891,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="quick_action_day_night_switch_mode">Zmień tryb dzienny/nocny</string>
     <string name="routeInfo_roadClass_name">Rodzaj drogi</string>
     <string name="routeInfo_surface_name">Nawierzchnia</string>
-    <string name="routeInfo_smoothness_name">Wygładzanie</string>
+    <string name="routeInfo_smoothness_name">Gładkość</string>
     <string name="routeInfo_steepness_name">Nachylenie</string>
     <string name="add_home">Dodaj dom</string>
     <string name="add_work">Dodaj pracę</string>
@@ -2953,7 +2953,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="rendering_attr_smoothness_impassable_name">Nieprzejezdna</string>
     <string name="rendering_attr_highway_class_motorway_name">Autostrada</string>
     <string name="rendering_attr_highway_class_state_road_name">Krajowa</string>
-    <string name="rendering_attr_highway_class_road_name">Szosa</string>
+    <string name="rendering_attr_highway_class_road_name">Droga</string>
     <string name="rendering_attr_highway_class_street_name">Ulica</string>
     <string name="rendering_attr_highway_class_service_name">Dojazdowa</string>
     <string name="rendering_attr_highway_class_footway_name">Chodnik</string>
@@ -3076,7 +3076,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="profile_alert_need_save_msg">Najpierw zapisz zmiany w profilu</string>
     <string name="profile_alert_delete_title">Usuń profil</string>
     <string name="profile_alert_delete_msg">Usunąć profil \"%s\"\?</string>
-    <string name="select_base_profile_dialog_title">Wybór profilu bazowego</string>
+    <string name="select_base_profile_dialog_title">Wybierz profil, od którego chcesz rozpocząć</string>
     <string name="select_base_profile_dialog_message">Profil dostosowany można oprzeć na jednym z domyślnych profili aplikacji. Określają one podstawowe ustawienia, takie jak domyślna widoczność widżetów i jednostek prędkości i odległości. Są to domyślne profile aplikacji, wraz z przykładami profili dostosowanych, które można rozszerzyć na:</string>
     <string name="select_nav_profile_dialog_title">Wybierz typ nawigacji</string>
     <string name="base_profile_descr_car">Samochód, ciężarówka, motocykl</string>
@@ -3196,7 +3196,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="app_mode_campervan">Samochód kempingowy</string>
     <string name="rendering_attr_showLez_description">Wyświetl strefy niskiej emisji na mapie. Nie ma to wpływu na przebieg trasy.</string>
     <string name="rendering_attr_showLez_name">Wyświetl strefy niskiej emisji</string>
-    <string name="temporary_conditional_routing">Rozpatrywanie tymczasowych ograniczeń</string>
+    <string name="temporary_conditional_routing">Uwzględnianie tymczasowych ograniczeń</string>
     <string name="third_party_routing_type">Wyznaczanie tras przez inne osoby</string>
     <string name="app_mode_monowheel">Monocykl</string>
     <string name="shared_string_default">Domyślnie</string>
@@ -3282,7 +3282,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="shared_string_select_folder">Katalog…</string>
     <string name="paste_Osmand_data_folder_path">Wprowadza ścieżkę do katalogu z danymi OsmAnd</string>
     <string name="change_osmand_data_folder_question">Zmienić katalog danych OsmAnd\?</string>
-    <string name="move_maps_to_new_destination">Przenieś do nowego położenia</string>
+    <string name="move_maps_to_new_destination">Przenieś do nowej lokalizacji</string>
     <string name="internal_app_storage_description">Wewnętrzna pamięć, ukryta przed użytkownikiem i innymi aplikacjami, do której dostęp ma tylko OsmAnd</string>
     <string name="change_data_storage_folder">Wybór katalogu przechowywania danych</string>
     <string name="rendering_attr_piste_type_snow_park_name">Park terenowy</string>
@@ -3369,7 +3369,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="exported_osmand_profile">Profil OsmAnd: %1$s</string>
     <string name="overwrite_profile_q">Profil „%1$s” już istnieje. Zastąpić go\?</string>
     <string name="export_profile_failed">Nie udało się wyeksportować profilu.</string>
-    <string name="profile_import">Importowanie profilu:</string>
+    <string name="profile_import">Import profilu</string>
     <string name="profile_import_descr">Aby zaimportować profil, proszę otworzyć plik na urządzeniu za pomocą OsmAnd.</string>
     <string name="file_import_error">Błąd importowania %1$s: %2$s</string>
     <string name="file_imported_successfully">Zaimportowano %1$s.</string>
@@ -3397,4 +3397,23 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="add_new_profile_q">Dodać nowy profil \'%1$s\'\?</string>
     <string name="save_heading">Dołącz kierunek</string>
     <string name="save_heading_descr">Zapisz podczas nagrywania kierunek do każdego punktu trasy.</string>
+    <string name="distance_and_address">%1$s • %2$s</string>
+    <string name="street_city">%1$s, %2$s</string>
+    <string name="personal_category_name">Osobiste</string>
+    <string name="shared_string_downloading_formatted">Pobieranie %s</string>
+    <string name="desert_render_descr">Dla pustyń i innych słabo zaludnionych obszarów.</string>
+    <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Pokaż trasy cyklu sieci węzłów</string>
+    <string name="rendering_value_thick_name">Gruby</string>
+    <string name="select_navigation_icon">Wybierz ikonę nawigacji</string>
+    <string name="select_map_icon">Wybierz ikonę mapy</string>
+    <string name="delete_profiles_descr">Po dotknięciu Zastosuj usunięte profile zostaną całkowicie utracone.</string>
+    <string name="master_profile">Główny profil</string>
+    <string name="select_color">Wybierz kolor</string>
+    <string name="edit_profiles_descr">Nie możesz usunąć domyślnych profili OsmAnd, ale możesz je wyłączyć na poprzednim ekranie lub przenieść na dół.</string>
+    <string name="edit_profiles">Edytuj profile</string>
+    <string name="select_nav_profile_dialog_message">Typ nawigacji wpływa na zasady obliczania trasy.</string>
+    <string name="profile_appearance">Wygląd profilu</string>
+    <string name="choose_icon_color_name">Wybierz ikonę, kolor i nazwę</string>
+    <string name="reorder_profiles">Edytuj listę profili</string>
+    <string name="selected_profile">Wybrany profil</string>
 </resources>

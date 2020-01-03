@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.ColorRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -30,7 +31,6 @@ import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.SubtitleDividerItem;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
-import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.router.GeneralRouter;
 
 import java.io.Serializable;
@@ -38,6 +38,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem.INVALID_ID;
 
 
 public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
@@ -57,6 +59,7 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 	private List<LatLon> removedImpassableRoads;
 	private LinearLayout stylesContainer;
 	private boolean hideImpassableRoads;
+	@ColorRes private int compoundButtonColorId = INVALID_ID;
 
 	public AvoidRoadsBottomSheetDialogFragment() {
 	}
@@ -229,6 +232,7 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 
 			final BottomSheetItemWithCompoundButton[] item = new BottomSheetItemWithCompoundButton[1];
 			item[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
+					.setCompoundButtonColorId(compoundButtonColorId)
 					.setChecked(selected)
 					.setTitle(parameterName)
 					.setLayoutId(R.layout.bottom_sheet_item_with_switch_no_icon)
@@ -244,6 +248,10 @@ public class AvoidRoadsBottomSheetDialogFragment extends MenuBottomSheetDialogFr
 			items.add(item[0]);
 			compoundButtons.add(item[0]);
 		}
+	}
+	
+	public void setCompoundButtonColorId(@ColorRes int compoundButtonColorId) {
+		this.compoundButtonColorId = compoundButtonColorId;
 	}
 
 	@Override
