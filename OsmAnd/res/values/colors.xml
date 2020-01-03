@@ -454,13 +454,13 @@
 	<color name="profile_icon_color_yellow_light">#F0B400</color>
 	<color name="profile_icon_color_magenta_light">#CC0063</color>
 
-	<color name="profile_icon_color_blue_dark_default">#B3237BFF</color>
-	<color name="profile_icon_color_purple_dark">#B3732EEB</color>
-	<color name="profile_icon_color_green_dark">#B30EBE92</color>
-	<color name="profile_icon_color_blue_dark">#B3007EB3</color>
-	<color name="profile_icon_color_red_dark">#B3FF2200</color>
-	<color name="profile_icon_color_yellow_dark">#B3F0B400</color>
-	<color name="profile_icon_color_magenta_dark">#B3CC0063</color>
+	<color name="profile_icon_color_blue_dark_default">#237BFF</color>
+	<color name="profile_icon_color_purple_dark">#732EEB</color>
+	<color name="profile_icon_color_green_dark">#0EBE92</color>
+	<color name="profile_icon_color_blue_dark">#007EB3</color>
+	<color name="profile_icon_color_red_dark">#FF2200</color>
+	<color name="profile_icon_color_yellow_dark">#F0B400</color>
+	<color name="profile_icon_color_magenta_dark">#CC0063</color>
 
 	<color name="profile_icon_color_inactive">#727272</color>
 

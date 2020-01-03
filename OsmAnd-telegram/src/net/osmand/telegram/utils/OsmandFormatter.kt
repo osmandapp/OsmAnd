@@ -17,6 +17,14 @@ object OsmandFormatter {
 
 	val YARDS_IN_ONE_METER = 1.0936f
 	val FEET_IN_ONE_METER = YARDS_IN_ONE_METER * 3f
+
+	val FORMAT_METERS_KEY = "m"
+	val FORMAT_FEET_KEY = "ft"
+	val FORMAT_YARDS_KEY = "yd"
+	val FORMAT_KILOMETERS_KEY = "km"
+	val FORMAT_NAUTICALMILES_KEY = "nmi"
+	val FORMAT_MILES_KEY = "mi"
+
 	private val fixed2 = DecimalFormat("0.00")
 	private val fixed1 = DecimalFormat("0.0")
 
@@ -166,118 +174,94 @@ object OsmandFormatter {
 	}
 
 	@JvmOverloads
-	fun getFormattedDistance(meters: Float, ctx: TelegramApplication, forceTrailingZeros: Boolean = true): String {
+	fun getFormattedDistance(meters: Float, ctx: TelegramApplication, forceTrailingZeros: Boolean = true, useLocalizedString: Boolean = true): String {
 		val format1 = if (forceTrailingZeros) "{0,number,0.0} " else "{0,number,0.#} "
 		val format2 = if (forceTrailingZeros) "{0,number,0.00} " else "{0,number,0.##} "
 
 		val mc = ctx.settings.metricsConstants
-		val mainUnitStr: Int
+		val mainUnitStr: String
 		val mainUnitInMeters: Float
-		if (mc == MetricsConstants.KILOMETERS_AND_METERS) {
-			mainUnitStr = R.string.km
-			mainUnitInMeters = METERS_IN_KILOMETER
-		} else if (mc == MetricsConstants.NAUTICAL_MILES) {
-			mainUnitStr = R.string.nm
-			mainUnitInMeters = METERS_IN_ONE_NAUTICALMILE
-		} else {
-			mainUnitStr = R.string.mile
-			mainUnitInMeters = METERS_IN_ONE_MILE
+		when (mc) {
+			MetricsConstants.KILOMETERS_AND_METERS -> {
+				mainUnitStr = if (useLocalizedString) ctx.getString(R.string.km) else FORMAT_KILOMETERS_KEY
+				mainUnitInMeters = METERS_IN_KILOMETER
+			}
+			MetricsConstants.NAUTICAL_MILES -> {
+				mainUnitStr = if (useLocalizedString) ctx.getString(R.string.nm) else FORMAT_NAUTICALMILES_KEY
+				mainUnitInMeters = METERS_IN_ONE_NAUTICALMILE
+			}
+			else -> {
+				mainUnitStr = if (useLocalizedString) ctx.getString(R.string.mile) else FORMAT_MILES_KEY
+				mainUnitInMeters = METERS_IN_ONE_MILE
+			}
 		}
 
 		if (meters >= 100 * mainUnitInMeters) {
-			return (meters / mainUnitInMeters + 0.5).toInt().toString() + " " + ctx.getString(mainUnitStr) //$NON-NLS-1$
+			return (meters / mainUnitInMeters + 0.5).toInt().toString() + " " + mainUnitStr //$NON-NLS-1$
 		} else if (meters > 9.99f * mainUnitInMeters) {
-			return MessageFormat.format(format1 + ctx.getString(mainUnitStr), meters / mainUnitInMeters).replace('\n', ' ') //$NON-NLS-1$
+			return MessageFormat.format(format1 + mainUnitStr, meters / mainUnitInMeters).replace('\n', ' ') //$NON-NLS-1$
 		} else if (meters > 0.999f * mainUnitInMeters) {
-			return MessageFormat.format(format2 + ctx.getString(mainUnitStr), meters / mainUnitInMeters).replace('\n', ' ') //$NON-NLS-1$
+			return MessageFormat.format(format2 + mainUnitStr, meters / mainUnitInMeters).replace('\n', ' ') //$NON-NLS-1$
 		} else if (mc == MetricsConstants.MILES_AND_FEET && meters > 0.249f * mainUnitInMeters) {
-			return MessageFormat.format(format2 + ctx.getString(mainUnitStr), meters / mainUnitInMeters).replace('\n', ' ') //$NON-NLS-1$
+			return MessageFormat.format(format2 + mainUnitStr, meters / mainUnitInMeters).replace('\n', ' ') //$NON-NLS-1$
 		} else if (mc == MetricsConstants.MILES_AND_METERS && meters > 0.249f * mainUnitInMeters) {
-			return MessageFormat.format(format2 + ctx.getString(mainUnitStr), meters / mainUnitInMeters).replace('\n', ' ') //$NON-NLS-1$
+			return MessageFormat.format(format2 + mainUnitStr, meters / mainUnitInMeters).replace('\n', ' ') //$NON-NLS-1$
 		} else if (mc == MetricsConstants.MILES_AND_YARDS && meters > 0.249f * mainUnitInMeters) {
-			return MessageFormat.format(format2 + ctx.getString(mainUnitStr), meters / mainUnitInMeters).replace('\n', ' ') //$NON-NLS-1$
+			return MessageFormat.format(format2 + mainUnitStr, meters / mainUnitInMeters).replace('\n', ' ') //$NON-NLS-1$
 		} else if (mc == MetricsConstants.NAUTICAL_MILES && meters > 0.99f * mainUnitInMeters) {
-			return MessageFormat.format(format2 + ctx.getString(mainUnitStr), meters / mainUnitInMeters).replace('\n', ' ') //$NON-NLS-1$
+			return MessageFormat.format(format2 + mainUnitStr, meters / mainUnitInMeters).replace('\n', ' ') //$NON-NLS-1$
 		} else {
 			if (mc == MetricsConstants.KILOMETERS_AND_METERS || mc == MetricsConstants.MILES_AND_METERS) {
-				return (meters + 0.5).toInt().toString() + " " + ctx.getString(R.string.m) //$NON-NLS-1$
+				return (meters + 0.5).toInt().toString() + if (useLocalizedString) " " + ctx.getString(R.string.m) else " $FORMAT_METERS_KEY"  //$NON-NLS-1$
 			} else if (mc == MetricsConstants.MILES_AND_FEET) {
 				val feet = (meters * FEET_IN_ONE_METER + 0.5).toInt()
-				return feet.toString() + " " + ctx.getString(R.string.foot) //$NON-NLS-1$
+				return feet.toString() + if (useLocalizedString) " " + ctx.getString(R.string.foot) else " $FORMAT_FEET_KEY" //$NON-NLS-1$
 			} else if (mc == MetricsConstants.MILES_AND_YARDS) {
 				val yards = (meters * YARDS_IN_ONE_METER + 0.5).toInt()
-				return yards.toString() + " " + ctx.getString(R.string.yard) //$NON-NLS-1$
+				return yards.toString() + if (useLocalizedString) " " + ctx.getString(R.string.yard) else " $FORMAT_YARDS_KEY" //$NON-NLS-1$
 			}
-			return (meters + 0.5).toInt().toString() + " " + ctx.getString(R.string.m) //$NON-NLS-1$
+			return (meters + 0.5).toInt().toString() + if (useLocalizedString) " " + ctx.getString(R.string.m) else " $FORMAT_METERS_KEY" //$NON-NLS-1$
 		}
 	}
 
-	fun getFormattedAlt(alt: Double, ctx: TelegramApplication): String {
+	fun getFormattedAlt(alt: Double, ctx: TelegramApplication, useLocalizedString: Boolean = true): String {
 		val mc = ctx.settings.metricsConstants
-		return if (mc == MetricsConstants.KILOMETERS_AND_METERS) {
-			(alt + 0.5).toInt().toString() + " " + ctx.getString(R.string.m)
+		val useFeet = mc == MetricsConstants.MILES_AND_FEET || mc == MetricsConstants.MILES_AND_YARDS
+		return if (!useFeet) {
+			(alt + 0.5).toInt().toString() + if (useLocalizedString) " " + ctx.getString(R.string.m) else " $FORMAT_METERS_KEY"
 		} else {
-			(alt * FEET_IN_ONE_METER + 0.5).toInt().toString() + " " + ctx.getString(R.string.foot)
+			(alt * FEET_IN_ONE_METER + 0.5).toInt().toString() + if (useLocalizedString) " " + ctx.getString(R.string.foot) else " $FORMAT_FEET_KEY"
 		}
 	}
 
-	fun getFormattedSpeed(metersperseconds: Float, ctx: TelegramApplication): String {
+	fun getFormattedSpeed(metersPerSeconds: Float, ctx: TelegramApplication, useLocalizedString: Boolean = true): String {
 		val mc = ctx.settings.speedConstants
-		val kmh = metersperseconds * 3.6f
-		if (mc == SpeedConstants.KILOMETERS_PER_HOUR) {
+		val kmh = metersPerSeconds * 3.6f
+		val convertedSpeed: Float = when (mc) {
+			SpeedConstants.KILOMETERS_PER_HOUR -> kmh
+			SpeedConstants.MILES_PER_HOUR -> kmh * METERS_IN_KILOMETER / METERS_IN_ONE_MILE
+			SpeedConstants.NAUTICALMILES_PER_HOUR -> kmh * METERS_IN_KILOMETER / METERS_IN_ONE_NAUTICALMILE
+			SpeedConstants.MINUTES_PER_KILOMETER -> {
+				if (metersPerSeconds < 0.111111111) {
+					return "-" + if (useLocalizedString) mc.toShortString(ctx) else mc.getDefaultString()
+				}
+				METERS_IN_KILOMETER / (metersPerSeconds * 60)
+			}
+			SpeedConstants.MINUTES_PER_MILE -> {
+				if (metersPerSeconds < 0.111111111) {
+					return "-" + if (useLocalizedString) mc.toShortString(ctx) else mc.getDefaultString()
+				}
+				METERS_IN_ONE_MILE / (metersPerSeconds * 60)
+			}
+			else -> metersPerSeconds /*if (mc == SpeedConstants.METERS_PER_SECOND) */
+		}
+
+		return if (convertedSpeed >= mc.speedThreshold) {
 			// e.g. car case and for high-speeds: Display rounded to 1 km/h (5% precision at 20 km/h)
-			if (kmh >= 20) {
-				return Math.round(kmh).toString() + " " + mc.toShortString(ctx)
-			}
+			"${Math.round(convertedSpeed)} " + if (useLocalizedString) mc.toShortString(ctx) else mc.getDefaultString()
+		} else {
 			// for smaller values display 1 decimal digit x.y km/h, (0.5% precision at 20 km/h)
-			val kmh10 = Math.round(kmh * 10f)
-			return (kmh10 / 10f).toString() + " " + mc.toShortString(ctx)
-		} else if (mc == SpeedConstants.MILES_PER_HOUR) {
-			val mph = kmh * METERS_IN_KILOMETER / METERS_IN_ONE_MILE
-			if (mph >= 20) {
-				return Math.round(mph).toString() + " " + mc.toShortString(ctx)
-			} else {
-				val mph10 = Math.round(mph * 10f)
-				return (mph10 / 10f).toString() + " " + mc.toShortString(ctx)
-			}
-		} else if (mc == SpeedConstants.NAUTICALMILES_PER_HOUR) {
-			val mph = kmh * METERS_IN_KILOMETER / METERS_IN_ONE_NAUTICALMILE
-			if (mph >= 20) {
-				return Math.round(mph).toString() + " " + mc.toShortString(ctx)
-			} else {
-				val mph10 = Math.round(mph * 10f)
-				return (mph10 / 10f).toString() + " " + mc.toShortString(ctx)
-			}
-		} else if (mc == SpeedConstants.MINUTES_PER_KILOMETER) {
-			if (metersperseconds < 0.111111111) {
-				return "-" + mc.toShortString(ctx)
-			}
-			val minperkm = METERS_IN_KILOMETER / (metersperseconds * 60)
-			if (minperkm >= 10) {
-				return Math.round(minperkm).toString() + " " + mc.toShortString(ctx)
-			} else {
-				val mph10 = Math.round(minperkm * 10f)
-				return (mph10 / 10f).toString() + " " + mc.toShortString(ctx)
-			}
-		} else if (mc == SpeedConstants.MINUTES_PER_MILE) {
-			if (metersperseconds < 0.111111111) {
-				return "-" + mc.toShortString(ctx)
-			}
-			val minperm = METERS_IN_ONE_MILE / (metersperseconds * 60)
-			if (minperm >= 10) {
-				return Math.round(minperm).toString() + " " + mc.toShortString(ctx)
-			} else {
-				val mph10 = Math.round(minperm * 10f)
-				return (mph10 / 10f).toString() + " " + mc.toShortString(ctx)
-			}
-		} else
-		/*if (mc == SpeedConstants.METERS_PER_SECOND) */ {
-			if (metersperseconds >= 10) {
-				return Math.round(metersperseconds).toString() + " " + SpeedConstants.METERS_PER_SECOND.toShortString(ctx)
-			}
-			// for smaller values display 1 decimal digit x.y km/h, (0.5% precision at 20 km/h)
-			val kmh10 = Math.round(metersperseconds * 10f)
-			return (kmh10 / 10f).toString() + " " + SpeedConstants.METERS_PER_SECOND.toShortString(ctx)
+			"${Math.round(convertedSpeed * 10f) / 10f} " + if (useLocalizedString) mc.toShortString(ctx) else mc.getDefaultString()
 		}
 	}
 
@@ -311,20 +295,27 @@ object OsmandFormatter {
 		}
 	}
 
-	enum class SpeedConstants private constructor(private val key: Int, private val descr: Int) {
-		KILOMETERS_PER_HOUR(R.string.km_h, R.string.si_kmh),
-		MILES_PER_HOUR(R.string.mile_per_hour, R.string.si_mph),
-		METERS_PER_SECOND(R.string.m_s, R.string.si_m_s),
-		MINUTES_PER_MILE(R.string.min_mile, R.string.si_min_m),
-		MINUTES_PER_KILOMETER(R.string.min_km, R.string.si_min_km),
-		NAUTICALMILES_PER_HOUR(R.string.nm_h, R.string.si_nm_h);
+	enum class SpeedConstants private constructor(
+		private val key: String,
+		private val title: Int,
+		private val descr: Int,
+		val speedThreshold: Int
+	) {
+		KILOMETERS_PER_HOUR("km/h", R.string.km_h, R.string.si_kmh, 20),
+		MILES_PER_HOUR("mph", R.string.mile_per_hour, R.string.si_mph, 20),
+		METERS_PER_SECOND("m/s", R.string.m_s, R.string.si_m_s, 10),
+		MINUTES_PER_MILE("min/m", R.string.min_mile, R.string.si_min_m, 10),
+		MINUTES_PER_KILOMETER("min/km", R.string.min_km, R.string.si_min_km, 10),
+		NAUTICALMILES_PER_HOUR("nmi/h", R.string.nm_h, R.string.si_nm_h, 20);
 
 		fun toHumanString(ctx: Context): String {
 			return ctx.getString(descr)
 		}
 
 		fun toShortString(ctx: Context): String {
-			return ctx.getString(key)
+			return ctx.getString(title)
 		}
+
+		fun getDefaultString() = key
 	}
 }

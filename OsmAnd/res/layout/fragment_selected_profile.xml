@@ -239,7 +239,7 @@
 						android:tint="@color/settings_divider"/>
 
 					<net.osmand.plus.widgets.OsmandTextFieldBoxes
-						android:id="@+id/navigation_type_otfb"
+						android:id="@+id/master_profile_otfb"
 						android:layout_width="match_parent"
 						android:layout_height="60dp"
 						app:primaryColor="@color/active_color_primary_dark"
@@ -247,7 +247,7 @@
 						app:labelText="@string/nav_type_hint">
 
 						<studio.carbonylgroup.textfieldboxes.ExtendedEditText
-							android:id="@+id/navigation_type_et"
+							android:id="@+id/master_profile_et"
 							android:layout_width="match_parent"
 							android:layout_height="wrap_content"
 							android:focusable="false"

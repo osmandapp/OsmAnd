@@ -48,13 +48,16 @@ import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewParent;
+import android.view.ViewTreeObserver;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.download.DownloadActivity;
+import net.osmand.util.Algorithms;
 
 import java.io.File;
 import java.util.Collections;
@@ -437,6 +440,13 @@ public class AndroidUtils {
 		return outValue.getFloat();
 	}
 
+	public static int getDrawableId(OsmandApplication app, String id) {
+		if (!Algorithms.isEmpty(id)) {
+			return app.getResources().getIdentifier(id, "drawable", app.getPackageName());
+		}
+		return 0;
+	}
+
 	public static int getStatusBarHeight(Context ctx) {
 		int result = 0;
 		int resourceId = ctx.getResources().getIdentifier("status_bar_height", "dimen", "android");
@@ -542,16 +552,37 @@ public class AndroidUtils {
 		return coordinates;
 	}
 
-	public static void enterToFullScreen(Activity activity) {
+	public static void enterToFullScreen(Activity activity, View view) {
 		if (Build.VERSION.SDK_INT >= 21) {
+			requestLayout(view);
 			activity.getWindow().getDecorView()
 					.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
 		}
 	}
 
-	public static void exitFromFullScreen(Activity activity) {
+	public static void exitFromFullScreen(Activity activity, View view) {
 		if (Build.VERSION.SDK_INT >= 21) {
+			requestLayout(view);
 			activity.getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
+		}
+	}
+
+	private static void requestLayout(final View view) {
+		if (view != null) {
+			ViewTreeObserver vto = view.getViewTreeObserver();
+			vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+
+				@Override
+				public void onGlobalLayout() {
+					ViewTreeObserver obs = view.getViewTreeObserver();
+					if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+						obs.removeOnGlobalLayoutListener(this);
+					} else {
+						obs.removeGlobalOnLayoutListener(this);
+					}
+					view.requestLayout();
+				}
+			});
 		}
 	}
 

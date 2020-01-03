@@ -1,5 +1,6 @@
 package net.osmand.plus.dialogs;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -276,8 +277,9 @@ public class PluginInstalledBottomSheetDialog extends MenuBottomSheetDialogFragm
 	}
 
 	private void updateItems() {
+		Activity activity = getActivity();
 		View mainView = getView();
-		if (mainView != null) {
+		if (activity != null && mainView != null) {
 			LinearLayout itemsContainer = (LinearLayout) mainView.findViewById(useScrollableItemsContainer()
 					? R.id.scrollable_items_container : R.id.non_scrollable_items_container);
 			if (itemsContainer != null) {
@@ -286,7 +288,7 @@ public class PluginInstalledBottomSheetDialog extends MenuBottomSheetDialogFragm
 			items.clear();
 			createMenuItems(null);
 			for (BaseBottomSheetItem item : items) {
-				item.inflate(getMyApplication(), itemsContainer, nightMode);
+				item.inflate(activity, itemsContainer, nightMode);
 			}
 			setupHeightAndBackground(mainView);
 		}

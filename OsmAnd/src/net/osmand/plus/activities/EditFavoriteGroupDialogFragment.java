@@ -73,7 +73,7 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 						Activity activity = getActivity();
 						if (activity != null) {
 							AlertDialog.Builder b = new AlertDialog.Builder(activity);
-							b.setTitle(R.string.favorite_group_name);
+							b.setTitle(R.string.favorite_category_name);
 							final EditText nameEditText = new EditText(activity);
 							nameEditText.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
 							nameEditText.setText(group.name);

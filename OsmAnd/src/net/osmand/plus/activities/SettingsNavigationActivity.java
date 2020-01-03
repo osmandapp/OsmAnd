@@ -17,9 +17,9 @@ import android.preference.PreferenceCategory;
 import android.preference.PreferenceGroup;
 import android.preference.PreferenceScreen;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.util.TypedValue;
-import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -729,7 +729,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		final OsmandSettings settings = app.getSettings();
 
 		GeneralRouter router = getRouter(app.getRoutingConfig(), mode);
-		SpeedConstants units = settings.SPEED_SYSTEM.get();
+		SpeedConstants units = settings.SPEED_SYSTEM.getModeValue(mode);
 		String speedUnits = units.toShortString(activity);
 		final float[] ratio = new float[1];
 		switch (units) {
@@ -755,8 +755,8 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 				break;
 		}
 
-		float settingsMinSpeed = settings.MIN_SPEED.get();
-		float settingsMaxSpeed = settings.MAX_SPEED.get();
+		float settingsMinSpeed = settings.MIN_SPEED.getModeValue(mode);
+		float settingsMaxSpeed = settings.MAX_SPEED.getModeValue(mode);
 
 		final int[] defaultValue = {Math.round(mode.getDefaultSpeed() * ratio[0])};
 		final int[] minValue = new int[1];
@@ -785,8 +785,8 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 			public void onClick(DialogInterface dialog, int which) {
 				mode.setDefaultSpeed(app, defaultValue[0] / ratio[0]);
 				if (!defaultSpeedOnly) {
-					settings.MIN_SPEED.set(minValue[0] / ratio[0]);
-					settings.MAX_SPEED.set(maxValue[0] / ratio[0]);
+					settings.MIN_SPEED.setModeValue(mode, minValue[0] / ratio[0]);
+					settings.MAX_SPEED.setModeValue(mode, maxValue[0] / ratio[0]);
 				}
 				RoutingHelper routingHelper = app.getRoutingHelper();
 				if (mode.equals(routingHelper.getAppMode()) && (routingHelper.isRouteCalculated() || routingHelper.isRouteBeingCalculated())) {
@@ -800,8 +800,8 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 			public void onClick(DialogInterface dialog, int which) {
 				mode.resetDefaultSpeed(app);
 				if (!defaultSpeedOnly) {
-					settings.MIN_SPEED.set(0f);
-					settings.MAX_SPEED.set(0f);
+					settings.MIN_SPEED.setModeValue(mode,0f);
+					settings.MAX_SPEED.setModeValue(mode,0f);
 				}
 				RoutingHelper routingHelper = app.getRoutingHelper();
 				if (mode.equals(routingHelper.getAppMode()) && (routingHelper.isRouteCalculated() || routingHelper.isRouteBeingCalculated())) {
@@ -810,12 +810,13 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 			}
 		});
 
+		int selectedModeColor = ContextCompat.getColor(app, mode.getIconColorInfo().getColor(nightMode));
 		if (!defaultSpeedOnly) {
-			setupSpeedSlider(SpeedSliderType.DEFAULT_SPEED, speedUnits, minValue, defaultValue, maxValue, min, max, seekbarView);
-			setupSpeedSlider(SpeedSliderType.MIN_SPEED, speedUnits, minValue, defaultValue, maxValue, min, max, seekbarView);
-			setupSpeedSlider(SpeedSliderType.MAX_SPEED, speedUnits, minValue, defaultValue, maxValue, min, max, seekbarView);
+			setupSpeedSlider(app, SpeedSliderType.DEFAULT_SPEED, speedUnits, minValue, defaultValue, maxValue, min, max, seekbarView, nightMode, selectedModeColor);
+			setupSpeedSlider(app, SpeedSliderType.MIN_SPEED, speedUnits, minValue, defaultValue, maxValue, min, max, seekbarView, nightMode, selectedModeColor);
+			setupSpeedSlider(app, SpeedSliderType.MAX_SPEED, speedUnits, minValue, defaultValue, maxValue, min, max, seekbarView, nightMode, selectedModeColor);
 		} else {
-			setupSpeedSlider(SpeedSliderType.DEFAULT_SPEED_ONLY, speedUnits, minValue, defaultValue, maxValue, min, max, seekbarView);
+			setupSpeedSlider(app, SpeedSliderType.DEFAULT_SPEED_ONLY, speedUnits, minValue, defaultValue, maxValue, min, max, seekbarView, nightMode, selectedModeColor);
 			seekbarView.findViewById(R.id.default_speed_div).setVisibility(View.GONE);
 			seekbarView.findViewById(R.id.default_speed_container).setVisibility(View.GONE);
 			seekbarView.findViewById(R.id.max_speed_div).setVisibility(View.GONE);
@@ -832,9 +833,10 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		MAX_SPEED,
 	}
 
-	private static void setupSpeedSlider(final SpeedSliderType type, String speedUnits,
+	private static void setupSpeedSlider(final OsmandApplication app, final SpeedSliderType type, String speedUnits,
 										 final int[] minValue, final int[] defaultValue, final int[] maxValue,
-										 final int min, final int max, View seekbarView) {
+										 final int min, final int max, View seekbarView, final boolean nightMode,
+	                                     final int activeColor) {
 		View seekbarLayout;
 		int titleId;
 		final int[] speedValue;
@@ -916,5 +918,6 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 			public void onStopTrackingTouch(SeekBar seekBar) {
 			}
 		});
+		UiUtilities.setupSeekBar(speedSeekBar, activeColor, nightMode);
 	}
 }

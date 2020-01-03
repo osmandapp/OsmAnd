@@ -7,14 +7,13 @@ import net.osmand.telegram.helpers.LocationMessages.BufferMessage
 import net.osmand.telegram.notifications.TelegramNotification.NotificationType
 import net.osmand.telegram.utils.AndroidNetworkUtils
 import net.osmand.telegram.utils.BASE_URL
+import net.osmand.telegram.utils.OsmandLocationUtils
 import net.osmand.util.MapUtils
 import org.drinkless.td.libcore.telegram.TdApi
 import org.json.JSONException
 import org.json.JSONObject
 
 private const val USER_SET_LIVE_PERIOD_DELAY_MS = 5000 // 5 sec
-
-private const val UPDATE_LOCATION_ACCURACY = 150 // 150 meters
 
 private const val SENT_LOCATIONS_INTERVAL_TIME_MS = 4000 // 4 sec
 
@@ -142,7 +141,8 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 					if (it.deviceName.isEmpty()) {
 						if (!shareInfo.pendingTextMessage && shareInfo.currentTextMessageId != -1L) {
 							lastLocationSentTime = System.currentTimeMillis()
-							app.telegramHelper.editTextLocation(shareInfo, it)
+							val content = OsmandLocationUtils.getTextMessageContent(shareInfo.updateTextMessageId, it, app)
+							app.telegramHelper.editTextLocation(shareInfo, content)
 							app.locationMessages.removeBufferedMessage(it)
 						}
 					} else {
@@ -263,7 +263,8 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 					sendLocationToBot(message, shareInfo, SHARE_TYPE_TEXT)
 				} else {
 					lastLocationSentTime = System.currentTimeMillis()
-					app.telegramHelper.sendNewTextLocation(shareInfo, message)
+					val content = OsmandLocationUtils.getTextMessageContent(shareInfo.updateTextMessageId, message, app)
+					app.telegramHelper.sendNewTextLocation(shareInfo, content)
 				}
 			}
 		} else {
@@ -276,7 +277,8 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 			} else {
 				if (shareInfo.pendingTdLibText < MAX_MESSAGES_IN_TDLIB_PER_CHAT) {
 					lastLocationSentTime = System.currentTimeMillis()
-					app.telegramHelper.editTextLocation(shareInfo, message)
+					val content = OsmandLocationUtils.getTextMessageContent(shareInfo.updateTextMessageId, message, app)
+					app.telegramHelper.editTextLocation(shareInfo, content)
 				} else {
 					app.locationMessages.addBufferedMessage(message)
 				}

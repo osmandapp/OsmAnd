@@ -37,6 +37,7 @@ import net.osmand.plus.GPXDatabase;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.SettingsHelper;
 import net.osmand.plus.SettingsHelper.SettingsImportListener;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TrackActivity;
@@ -99,13 +100,13 @@ public class ImportHelper {
 		this.gpxImportCompleteListener = gpxImportCompleteListener;
 	}
 
-	public void handleContentImport(final Uri contentUri, final boolean useImportDir) {
-		final String name = getNameFromContentUri(contentUri);
-		handleFileImport(contentUri, name, useImportDir);
+	public void handleContentImport(final Uri contentUri, Bundle extras, final boolean useImportDir) {
+		final String name = getNameFromContentUri(app, contentUri);
+		handleFileImport(contentUri, name, extras, useImportDir);
 	}
 
 	public boolean handleGpxImport(final Uri contentUri, final boolean useImportDir) {
-		String name = getNameFromContentUri(contentUri);
+		String name = getNameFromContentUri(app, contentUri);
 		boolean isOsmandSubdir = isSubDirectory(app.getAppPath(IndexConstants.GPX_INDEX_DIR), new File(contentUri.getPath()));
 		if (!isOsmandSubdir && name != null) {
 			String nameLC = name.toLowerCase();
@@ -136,12 +137,12 @@ public class ImportHelper {
 		if (isFileIntent) {
 			fileName = new File(uri.getPath()).getName();
 		} else if (isContentIntent) {
-			fileName = getNameFromContentUri(uri);
+			fileName = getNameFromContentUri(app, uri);
 		}
 		handleFavouritesImport(uri, fileName, saveFile, false, true);
 	}
 
-	public void handleFileImport(final Uri intentUri, final String fileName, final boolean useImportDir) {
+	public void handleFileImport(Uri intentUri, String fileName, Bundle extras, boolean useImportDir) {
 		final boolean isFileIntent = "file".equals(intentUri.getScheme());
 		final boolean isOsmandSubdir = isSubDirectory(app.getAppPath(IndexConstants.GPX_INDEX_DIR), new File(intentUri.getPath()));
 
@@ -156,13 +157,19 @@ public class ImportHelper {
 		} else if (fileName != null && fileName.endsWith(IndexConstants.SQLITE_EXT)) {
 			handleSqliteTileImport(intentUri, fileName);
 		} else if (fileName != null && fileName.endsWith(IndexConstants.OSMAND_SETTINGS_FILE_EXT)) {
-			handleOsmAndSettingsImport(intentUri, fileName);
+			if (extras != null && extras.containsKey(SettingsHelper.SETTINGS_VERSION_KEY) && extras.containsKey(SettingsHelper.SETTINGS_LATEST_CHANGES_KEY)) {
+				int version = extras.getInt(SettingsHelper.SETTINGS_VERSION_KEY, -1);
+				String latestChanges = extras.getString(SettingsHelper.SETTINGS_LATEST_CHANGES_KEY);
+				handleOsmAndSettingsImport(intentUri, fileName, latestChanges, version);
+			} else {
+				handleOsmAndSettingsImport(intentUri, fileName, null, -1);
+			}
 		} else {
 			handleFavouritesImport(intentUri, fileName, saveFile, useImportDir, false);
 		}
 	}
 
-	private String getNameFromContentUri(Uri contentUri) {
+	public static String getNameFromContentUri(OsmandApplication app, Uri contentUri) {
 		final String name;
 		final Cursor returnCursor = app.getContentResolver().query(contentUri, new String[] {OpenableColumns.DISPLAY_NAME}, null, null, null);
 		if (returnCursor != null && returnCursor.moveToFirst()) {
@@ -434,7 +441,7 @@ public class ImportHelper {
 
 			@Override
 			protected String doInBackground(Void... voids) {
-				String error = copyFile(getObfDestFile(name), obfFile, false);
+				String error = copyFile(app, getObfDestFile(name), obfFile, false);
 				if (error == null) {
 					app.getResourceManager().reloadIndexes(IProgress.EMPTY_PROGRESS, new ArrayList<String>());
 					app.getDownloadThread().updateLoadedFiles();
@@ -464,7 +471,7 @@ public class ImportHelper {
 	}
 
 	@Nullable
-	private String copyFile(@NonNull File dest, @NonNull Uri uri, boolean overwrite) {
+	public static String copyFile(OsmandApplication app, @NonNull File dest, @NonNull Uri uri, boolean overwrite) {
 		if (dest.exists() && !overwrite) {
 			return app.getString(R.string.file_with_name_already_exists);
 		}
@@ -521,7 +528,7 @@ public class ImportHelper {
 
 			@Override
 			protected String doInBackground(Void... voids) {
-				return copyFile(app.getAppPath(IndexConstants.TILES_INDEX_DIR + name), uri, false);
+				return copyFile(app, app.getAppPath(IndexConstants.TILES_INDEX_DIR + name), uri, false);
 			}
 
 			@Override
@@ -547,7 +554,7 @@ public class ImportHelper {
 	}
 
 	@SuppressLint("StaticFieldLeak")
-	private void handleOsmAndSettingsImport(final Uri uri, final String name) {
+	private void handleOsmAndSettingsImport(final Uri uri, final String name, final String latestChanges, final int version) {
 		final AsyncTask<Void, Void, String> settingsImportTask = new AsyncTask<Void, Void, String>() {
 
 			ProgressDialog progress;
@@ -564,7 +571,7 @@ public class ImportHelper {
 					tempDir.mkdirs();
 				}
 				File dest = new File(tempDir, name);
-				return copyFile(dest, uri, true);
+				return copyFile(app, dest, uri, true);
 			}
 
 			@Override
@@ -572,7 +579,7 @@ public class ImportHelper {
 				File tempDir = app.getAppPath(IndexConstants.TEMP_DIR);
 				File file = new File(tempDir, name);
 				if (error == null && file.exists()) {
-					app.getSettingsHelper().importSettings(file, new SettingsImportListener() {
+					app.getSettingsHelper().importSettings(file, latestChanges, version, new SettingsImportListener() {
 						@Override
 						public void onSettingsImportFinished(boolean succeed, boolean empty) {
 							if (isActivityNotDestroyed(activity)) {

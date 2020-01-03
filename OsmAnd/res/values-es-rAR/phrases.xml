@@ -3568,8 +3568,8 @@
     <string name="poi_health_specialty_radiotheraphy_yes">Radioterapia</string>
     <string name="poi_hazard">Advertencia de peligro</string>
     <string name="poi_rtsa_scale_filter">Categoría de dificultad</string>
-    <string name="poi_rtsa_scale_nc">н/к (sin dificultad)</string>
-    <string name="poi_rtsa_scale_nc_asterisk">н/к* (sin dificultad, posible peligro)</string>
+    <string name="poi_rtsa_scale_nc">н/к (sin categoría)</string>
+    <string name="poi_rtsa_scale_nc_asterisk">н/к* (sin categoría, posible peligro)</string>
     <string name="poi_rtsa_scale_1a">1A</string>
     <string name="poi_rtsa_scale_1a_asterisk">1A*</string>
     <string name="poi_rtsa_scale_1b">1B</string>
@@ -3753,4 +3753,25 @@
     <string name="poi_cash_withdrawal_migros_bank">Banco Migros</string>
     <string name="poi_cash_withdrawal_girocard">Girocard</string>
     <string name="poi_cash_withdrawal_postbank">Postbanco</string>
+    <string name="poi_bath_type">Tipo de baño</string>
+    <string name="poi_bath_open_air">Al aire libre</string>
+    <string name="poi_bath_type_hot_spring">Fuente termal</string>
+    <string name="poi_bath_type_onsen">Onsen (japonés)</string>
+    <string name="poi_bath_type_hammam">Hammam (turco)</string>
+    <string name="poi_bath_type_thermal">Térmico</string>
+    <string name="poi_bath_type_river">Río</string>
+    <string name="poi_bath_type_lake">Lago</string>
+    <string name="poi_bath_type_foot_bath">Baño de pies</string>
+    <string name="poi_bath_open_air_yes">Sí</string>
+    <string name="poi_bath_open_air_no">No</string>
+    <string name="poi_monastery_type_monastics">Tipo de monasterio: monásticos</string>
+    <string name="poi_monastery_type_convent">Tipo monasterio: convento</string>
+    <string name="poi_monastery_type_canonry">Tipo de monasterio: canónico</string>
+    <string name="poi_monastery_type_hermitage">Tipo de monasterio: ermita</string>
+    <string name="poi_monastery_type_clerks_regular">Tipo de monasterio: empleados regulares</string>
+    <string name="poi_tourist_camp">Campamento turístico</string>
+    <string name="poi_community_gender_female">Género de la comunidad: femenino</string>
+    <string name="poi_community_gender_male">Género de la comunidad: masculino</string>
+    <string name="poi_community_gender_mixed">Género de la comunidad: mixto</string>
+    <string name="poi_grave">Tumba</string>
 </resources>

@@ -482,7 +482,6 @@
     <string name="map_widget_transparent">透明皮肤</string>
     <string name="bg_service_sleep_mode_off">打开\n 睡眠模式</string>
     <string name="bg_service_sleep_mode_on">停止\n 睡眠模式</string>
-    <string name="gps_wakeup_interval">GPS 唤醒间隔：%s</string>
     <string name="map_widget_next_turn_small">下一个转弯(小)</string>
     <string name="map_widget_next_next_turn">再下一个转弯</string>
     <string name="map_widget_mini_route">路线小地图</string>
@@ -1316,7 +1315,7 @@
     <string name="online_photos">在线照片</string>
     <string name="mapillary_descr">供所有人使用的在线街景照片。协作发现景点，捕捉世界之美。</string>
     <string name="distance_moving">距离已修正</string>
-    <string name="no_photos_descr">我们没有该地点的照片。</string>
+    <string name="no_photos_descr">这里没有照片。</string>
     <string name="routing_attr_short_way_name">节油道路</string>
     <string name="routing_attr_short_way_description">使用节油道路（通常更短）。</string>
     <string name="configure_screen_quick_action">快捷操作</string>
@@ -1437,7 +1436,6 @@
     <string name="osm_live_subscription_desc">启用认购可每小时、每天、每周的更新以及世界各地所有的地图无限制的下载。</string>
     <string name="get_it">获得</string>
     <string name="get_for">获取 %1$s</string>
-    <string name="get_for_month">每个月获得 %1$s</string>
     <string name="osm_live_banner_desc">获得无限制的地图下载和每个月超过一次以上的地图更新︰每周、每天或每小时。</string>
     <string name="osmand_plus_banner_desc">OsmAnd 完整版拥有无限制的地图下载和每个月的地图更新。</string>
     <string name="skip_map_downloading">跳过下载地图</string>
@@ -2094,7 +2092,6 @@
     <string name="voice_stream_voice_call">电话音频（会中断汽车蓝牙音响）</string>
     <string name="select_tile_source_to_install">选择要安装或更新的（平铺）地图</string>
     <string name="create_poi_link_to_osm_doc">带照片的<u>在线 OSM</u> 地图分类</string>
-    <string name="search_offline_geo_error">不能分析地理含义“%s”</string>
     <string name="send_location_email_pattern">查看追踪位置，以网页浏览器链接 %1$s 或用 Android intent 链接 %2$s</string>
     <string name="add_waypoint_dialog_added">GPX 航点“{0}”已成功添加</string>
     <string name="poi_filter_namefinder">在线名称查找器</string>
@@ -2313,7 +2310,7 @@
     <string name="quick_action_sh_poi_descr">您可以添加一个或多个要显示在地图上的 POI 类别。</string>
     <string name="quick_action_page_list_descr">轻触动作按钮会直达下面的清单。</string>
     <string name="quick_action_map_style_action">添加地图样式</string>
-    <string name="quick_action_empty_param_error">参数不应为空</string>
+    <string name="quick_action_empty_param_error">请填写所有参数</string>
     <string name="quick_action_map_styles">地图样式</string>
     <string name="quick_action_map_overlay">更改地图覆盖</string>
     <string name="quick_action_map_overlay_title">地图覆盖</string>
@@ -2324,7 +2321,7 @@
     <string name="quick_action_map_underlay_title">地图衬底层</string>
     <string name="quick_action_map_underlay_action">添加衬底层</string>
     <string name="quick_action_map_source_title">地图来源</string>
-    <string name="quick_action_map_source_switch">地图来源已更改为\"%s\"。</string>
+    <string name="quick_action_map_source_switch">地图来源已更改为“%s”。</string>
     <string name="quick_action_btn_tutorial_title">更改按钮的位置</string>
     <string name="quick_action_btn_tutorial_descr">长按并拖动按钮来改变其在屏幕上的位置。</string>
     <string name="map_widget_ruler_control">半径量尺</string>
@@ -2447,7 +2444,7 @@
     <string name="shared_string_paste">粘贴</string>
     <string name="tap_on_map_to_hide_interface">全屏模式</string>
     <string name="import_file">导入文件</string>
-    <string name="mappilary_no_internet_desc">您需要互联网连接以查看来自 Mapillary 的图片。</string>
+    <string name="mappilary_no_internet_desc">来自 Mapillary 的图片必须在线查看。</string>
     <string name="retry">重试</string>
     <string name="save_gpx_waypoint">保存 GPX 航点</string>
     <string name="import_track">导入 GPX 文件</string>
@@ -2480,7 +2477,6 @@
     <string name="in_app_purchase_desc">一次性付款</string>
     <string name="in_app_purchase_desc_ex">购买后将对您永久可用。</string>
     <string name="purchase_unlim_title">购买 - %1$s</string>
-    <string name="purchase_subscription_title">订阅 - %1$s</string>
     <string name="wikivoyage_offline">Wikivoyage 离线</string>
     <string name="unlimited_downloads">无限下载</string>
     <string name="wikipedia_offline">离线维基百科</string>
@@ -2584,7 +2580,7 @@
     <string name="shared_string_walk">步行</string>
     <string name="save_poi_value_exceed_length">标签“%s”的最大长度是255个字符。
 \n请先进行缩短再继续。</string>
-    <string name="save_poi_value_exceed_length_title">“%”值的长度</string>
+    <string name="save_poi_value_exceed_length_title">“%s”值的长度</string>
     <string name="public_transport_warning_descr_blog">在我们的博客上了解更多与 OsmAnd 路线计算相关的信息。</string>
     <string name="public_transport_warning_title">公共交通导航目前处于测试阶段，可能出现错误和信息不准确。</string>
     <string name="add_intermediate">添加中继点</string>
@@ -2682,7 +2678,7 @@
     <string name="rendering_attr_surface_ice_name">冰面</string>
     <string name="rendering_attr_surface_salt_name">盐地</string>
     <string name="rendering_attr_surface_snow_name">雪地</string>
-    <string name="rendering_attr_surface_paved_name">已规划路径</string>
+    <string name="rendering_attr_surface_paved_name">已铺装路面</string>
     <string name="rendering_attr_surface_concrete_name">混凝土地</string>
     <string name="rendering_attr_surface_cobblestone_name">鹅卵石地</string>
     <string name="rendering_attr_surface_paving_stones_name">铺路石</string>
@@ -2793,4 +2789,10 @@
     <string name="route_start_point">起点</string>
     <string name="track_saved">追踪已保存</string>
     <string name="empty_filename">文件名为空</string>
+    <string name="copy_location_name">复制地点/兴趣点名称</string>
+    <string name="routeInfo_roadClass_name">道路类型</string>
+    <string name="routeInfo_surface_name">表面</string>
+    <string name="clear_confirmation_msg">清空 %1$s？</string>
+    <string name="dialogs_and_notifications_title">对话框和通知</string>
+    <string name="shared_string_downloading_formatted">正在下载 %s</string>
 </resources>

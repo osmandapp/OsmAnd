@@ -111,7 +111,7 @@
     <string name="show_warnings_descr">Konfigurer trafikadvarsler (hastighedsgrænser, tvungne stop, vejbump, tunneler), fartkameraadvarsler og vognbane oplysninger.</string>
     <string name="use_compass_navigation_descr">Brug kompasset, når ingen retning er registret.</string>
     <string name="use_compass_navigation">Kompas</string>
-    <string name="avoid_motorway">Undgå motorveje</string>
+    <string name="avoid_motorway">Ingen motorveje</string>
     <string name="auto_zoom_map_descr">Zoomniveau i henhold til hastighed (mens kortet er synkroniseret med aktuel position).</string>
     <string name="auto_zoom_map">Automatisk kortzoom</string>
     <string name="access_arrival_time">Ankomsttid</string>
@@ -135,7 +135,7 @@
     <string name="osmand_plus_short_description_80_chars">Global mobilkortvisning og navigation til offline og online OSM-kort</string>
     <string name="filterpoi_activity">Opret interessepunkt-filter</string>
     <string name="recalculate_route_to_your_location">Transporttilstand:</string>
-    <string name="select_navigation_mode">Vælg transporttilstand</string>
+    <string name="select_navigation_mode">Transporttilstand:</string>
     <string name="day_night_info_description">Solopgang: %1$s
 \nSolnedgang: %2$s</string>
     <string name="day_night_info">Dag/nat information</string>
@@ -143,8 +143,8 @@
     <string name="map_widget_renderer">Kortstilart</string>
     <string name="layer_map_appearance">Konfigurer skærm</string>
     <string name="show_lanes">Vognbaner</string>
-    <string name="avoid_unpaved">Undgå grusveje</string>
-    <string name="avoid_ferries">Undgå færger</string>
+    <string name="avoid_unpaved">Ingen ikke-asfalterede veje</string>
+    <string name="avoid_ferries">Ingen færger</string>
     <string name="avoid_in_routing_title">Undgå…</string>
     <string name="map_widget_fluorescent">Fluorescerende ruter</string>
     <string name="map_widget_show_ruler">Lineal</string>
@@ -153,13 +153,12 @@
     <string name="bg_service_sleep_mode_off">Kør\ni baggrunden</string>
     <string name="bg_service_sleep_mode_on">Stop
 \nkørsel i baggrunden</string>
-    <string name="gps_wakeup_interval">GPS vågn-op interval: %s</string>
     <string name="int_continuosly">Vedvarende</string>
-    <string name="screen_is_locked">Tryk på låseikonet for at låse skærmen op</string>
+    <string name="screen_is_locked">Tryk på låseikonet for at låse op</string>
     <string name="map_widget_top_text">Gadenavn</string>
     <string name="map_widget_config">Konfigurer skærm</string>
     <string name="map_widget_back_to_loc">Hvor er jeg</string>
-    <string name="map_widget_lock_screen">Lås skærm</string>
+    <string name="map_widget_lock_screen">Lås</string>
     <string name="map_widget_compass">Kompas</string>
     <string name="download_hillshade_maps">Reliefskygger</string>
     <string name="map_widget_reset">Nulstil til standard</string>
@@ -173,12 +172,12 @@
     <string name="map_widget_next_turn_small">Næste sving (lille)</string>
     <string name="map_widget_next_next_turn">Svinget efter næste</string>
     <string name="map_widget_mini_route">Mini rutekort</string>
-    <string name="bg_service_screen_lock">Lås skærm</string>
-    <string name="bg_service_screen_unlock">Lås skærmen op</string>
+    <string name="bg_service_screen_lock">Lås</string>
+    <string name="bg_service_screen_unlock">Lås op</string>
     <string name="bg_service_screen_lock_toast">Skærmen er låst</string>
     <string name="bg_service_interval">Indstil opvågningsinterval:</string>
     <string name="show_cameras">Fartkameraer</string>
-    <string name="avoid_toll_roads">Undgå betalingsveje</string>
+    <string name="avoid_toll_roads">Ingen betalingsveje</string>
     <string name="continue_follow_previous_route_auto">Fortsæt med at følge tidligere ufærdige navigation? (%1$s sekunder)</string>
     <string name="route_updated_loc_found">Afventer position for at beregne ruten</string>
     <string name="osmand_parking_hours">Timer</string>
@@ -210,7 +209,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="osmand_parking_position_name">Parkeringsplads</string>
     <string name="osmand_parking_plugin_description">Parkeringsplads udvidelsen kan registrere hvor bilen er parkeret, og hvor meget tid der er tilbage (hvis der er en tidsfrist). 
 \nBåde placering og tid er synlige på betjeningspanel samt i et modul på skærmen. En alarm kan tilføjes til kalenderen, som en påmindelse.</string>
-    <string name="osmand_parking_plugin_name">Parkering</string>
+    <string name="osmand_parking_plugin_name">Parkeringsplads</string>
     <string name="context_menu_item_add_parking_point">Marker som parkeringsplads</string>
     <string name="context_menu_item_delete_parking_point">Slet parkeringsmarkør</string>
     <string name="gpxup_public">Offentligt</string>
@@ -239,15 +238,15 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="poi_search_desc">Søgning efter interessepunkt (IP)</string>
     <string name="address_search_desc">Adressesøgning</string>
     <string name="navpoint_search_desc">Koordinater</string>
-    <string name="transport_search_desc">Kollektivtrafiksøgning</string>
+    <string name="transport_search_desc">Søg efter offentlig transport</string>
     <string name="favourites_search_desc">En måde at søge efter Favoritter</string>
     <string name="offline_navigation_not_available">Offline navigation er midlertidig utilgængelig.</string>
     <string name="left_side_navigation">Venstrekørsel</string>
     <string name="left_side_navigation_descr">For lande, hvor man kører i venstre side af vejen.</string>
     <string name="unknown_from_location">Udgangspunktet endnu ikke fastlagt</string>
     <string name="unknown_location">Position endnu ikke kendt</string>
-    <string name="modify_transparency">Ændr gennemsigtighed (0 - gennemsigtig, 255 - ugennemsigtig)</string>
-    <string name="confirm_interrupt_download">Annuller filhentning?</string>
+    <string name="modify_transparency">Indstil gennemsigtighed (0-transparent, 255-uigennemsigtig)</string>
+    <string name="confirm_interrupt_download">Annuller hentning\?</string>
     <string name="first_time_msg">Tak for at du bruger OsmAnd. Hent data for offline brug via \'Indstillinger\' → \'Administrer kortfiler\' for at se kort, søge adresser, finde interessepunkter (IP), kolllektivtrafik og mere.</string>
     <string name="basemap_was_selected_to_download">Grundkort er valgt til hentning så programmet funktioner.</string>
     <string name="select_index_file_to_download">Fandt intet. Hvis man ikke kan finde sit område kan man lave den selv (se https://osmand.net).</string>
@@ -258,7 +257,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="map_online_data">Onlinekort og kortbrikker</string>
     <string name="map_online_data_descr">Brug onlinekort (hent og gem midlertidige kortbrikker på hukommelseskortet).</string>
     <string name="shared_string_online_maps">Onlinekort</string>
-    <string name="online_map_settings_descr">Konfigurer online- eller cachelagrede kilder til kortbrikker.</string>
+    <string name="online_map_settings_descr">Vælg online- eller cachelagrede kilder til kortbrikker.</string>
     <string name="osmand_background_plugin_description">Viser indstillinger til at aktivere baggrundssporing og navigation ved periodisk at vække GPS-enheden (med slukket skærm).</string>
     <string name="osmand_accessibility_description">Udvidelsen gør tilgængelighedsfunktioner tilgængelige direkte i OsmAnd. Det letter fx justering af hastigheden for talesyntese, konfiguration af skærmnavigation med styrekryds (D-pad), brug af en styrekugle til zoomstyring, eller tekst-til-tale-tilbagemeldinger, fx automatisk at annoncere positionen.</string>
     <string name="osmand_rastermaps_plugin_description">Udvidelsen giver adgang til mange typer af online (såkaldte brikker eller raster) kort, fra foruddefinerede OpenStreetMap kortbrikker (som Mapnik) til satellitbilleder og lag til særlig anvendelse som vejr-, klima- eller geologiskekort og reliefskygger osv. 
@@ -273,7 +272,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="prefs_plugins">Udvidelser</string>
     <string name="osm_editing_plugin_description">Udvidelsen giver OsmAnd mulighed for at lave OSM-bidrag såsom at oprette eller ændre OSM-interessepunkter (IP), åbne eller kommentere OSM-noter og bidrage med optagede GPX-filer. OSM er et fælles drevet, globalt kortlægningsprojekt med fri adgang for alle. Se https://openstreetmap.org for nærmere oplysninger. Aktiv deltagelse er værdsat, og bidragene kan ske direkte fra OsmAnd, hvis du angiver dine OSM-legitimationsoplysninger.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Vektorkort vises sandsynligvis hurtigere. Fungerer muligvis ikke godt på nogle enheder.</string>
-    <string name="play_commands_of_currently_selected_voice">Vælg en stemme og test den ved at afspille beskeder</string>
+    <string name="play_commands_of_currently_selected_voice">Vælg en stemme og test den ved at afspille meddelelser:</string>
     <string name="debugging_and_development">OsmAnd udvikling</string>
     <string name="native_rendering">Indbygget rendering</string>
     <string name="test_voice_prompts">Test talemeddelelser</string>
@@ -299,21 +298,21 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="zoomIn">Zoom ind</string>
     <string name="zoomIs">Zoomniveau</string>
     <string name="north">nord</string>
-    <string name="north_north_east">nord/nordøst</string>
+    <string name="north_north_east">nord-nordøst</string>
     <string name="north_east">nordøst</string>
-    <string name="east_north_east">øst/nordøst</string>
+    <string name="east_north_east">øst-nordøst</string>
     <string name="east">øst</string>
-    <string name="east_south_east">øst/sydøst</string>
+    <string name="east_south_east">øst-sydøst</string>
     <string name="south_east">sydøst</string>
-    <string name="south_south_east">syd/sydøst</string>
+    <string name="south_south_east">syd-sydøst</string>
     <string name="south">syd</string>
-    <string name="south_south_west">syd/sydvest</string>
+    <string name="south_south_west">syd-sydvest</string>
     <string name="south_west">sydvest</string>
-    <string name="west_south_west">vest/sydvest</string>
+    <string name="west_south_west">vest-sydvest</string>
     <string name="west">vest</string>
-    <string name="west_north_west">vest/nordvest</string>
+    <string name="west_north_west">vest-nordvest</string>
     <string name="north_west">nordvest</string>
-    <string name="north_north_west">nord/nordvest</string>
+    <string name="north_north_west">nord-nordvest</string>
     <string name="front">fremad</string>
     <string name="front_right">fremad til højre</string>
     <string name="right">til højre</string>
@@ -330,7 +329,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="direction_style_sidewise">Sidelæns (8 sektorer)</string>
     <string name="direction_style_clockwise">Med uret (12 sektioner)</string>
     <string name="settings_direction_style">Retningsstil</string>
-    <string name="settings_direction_style_descr">Vælg stil til at udtrykke relative retninger under bevægelse.</string>
+    <string name="settings_direction_style_descr">Vælg stil til at udtrykke relative retninger under bevægelse</string>
     <string name="auto_announce_on">Start automatisk annonceringen</string>
     <string name="auto_announce_off">Stop automatisk annonceringen</string>
     <string name="i_am_here">Jeg er her</string>
@@ -347,8 +346,8 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="local_openstreetmap_uploading">Overfører…</string>
     <string name="local_openstreetmap_were_uploaded">{0} interessepunkt/noter blev overført</string>
     <string name="local_openstreetmap_uploadall">Send alt</string>
-    <string name="local_openstreetmap_upload">Send ændringer til OSM</string>
-    <string name="local_openstreetmap_delete">Slet ændringer</string>
+    <string name="local_openstreetmap_upload">Send redigering til OSM</string>
+    <string name="local_openstreetmap_delete">Slet redigering</string>
     <string name="local_openstreetmap_descr_title">Asynkron OSM-redigering:</string>
     <string name="local_openstreetmap_settings">OSM interessepunkter/noter gemt på enheden</string>
     <string name="local_openstreetmap_settings_descr">Vis og administrer OSM interessepunkter/noter registreret i database på enheden.</string>
@@ -416,7 +415,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="city_type_village">Landsby</string>
     <string name="animate_route_off">Stop simulering</string>
     <string name="animate_route">Start simulering</string>
-    <string name="file_can_not_be_renamed">Filen kan ikke omdøbes.</string>
+    <string name="file_can_not_be_renamed">Filen kunne ikke omdøbes.</string>
     <string name="file_with_name_already_exists">Der eksisterer allerede en fil med det navn.</string>
     <string name="shared_string_gpx_route">GPX-rute</string>
     <string name="poi_query_by_name_matches_categories">Flere kategorier af interessepunkter fundet som matcher forespørgslen:</string>
@@ -522,12 +521,12 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="local_indexes_cat_poi">Interessepunkt-data</string>
     <string name="ttsvoice">TTS stemme</string>
     <string name="search_offline_clear_search">Ny søgning</string>
-    <string name="map_text_size_descr">Vælg tekststørrelsen for navne på kortet.</string>
+    <string name="map_text_size_descr">Tekststørrelse for navne på kortet:</string>
     <string name="map_text_size">Tekststørrelse</string>
     <string name="trace_rendering">Renderingsfejlfinding</string>
     <string name="trace_rendering_descr">Vis renderingsydeevne.</string>
     <string name="installing_new_resources">Udpakker nye data…</string>
-    <string name="internet_connection_required_for_online_route">En online navigationstjeneste er valgt, men der er ikke forbindelse til internettet.</string>
+    <string name="internet_connection_required_for_online_route">Online navigation fungerer ikke offline.</string>
     <string name="tts_language_not_supported_title">Sproget er ikke understøttet</string>
     <string name="tts_language_not_supported">Det valgte sprog er ikke understøttet af den installerede Android TTS (tekst-til-tale)-motor. Søg på Google Play efter en anden TTS-motor? Ellers vil standard TTS-sprog blive brugt.</string>
     <string name="tts_missing_language_data_title">Manglende data</string>
@@ -544,16 +543,16 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="voice_stream_notification">Meddelelselyd</string>
     <string name="voice_stream_music">Medie-/navigationslyd</string>
     <string name="warning_tile_layer_not_downloadable">Kan ikke hente kortlaget %1$s, at geninstallere kan hjælpe.</string>
-    <string name="overlay_transparency_descr">Ændr gennemsigtigheden for overlejring.</string>
+    <string name="overlay_transparency_descr">Juster gennemsigtigheden for overlejring.</string>
     <string name="overlay_transparency">Overlejrings-gennemsigtighed</string>
-    <string name="map_transparency_descr">Ændr gennemsigtigheden for grundkort.</string>
+    <string name="map_transparency_descr">Juster gennemsigtigheden for grundkort.</string>
     <string name="map_transparency">Gennemsigtighed for basiskort</string>
     <string name="layer_underlay">Underlejringskort…</string>
     <string name="map_underlay">Underlejringskort</string>
-    <string name="map_underlay_descr">Vælg kort til underlejring.</string>
+    <string name="map_underlay_descr">Vælg kort til underlejring</string>
     <string name="layer_overlay">Overlejringskort…</string>
     <string name="map_overlay">Overlejringskort</string>
-    <string name="map_overlay_descr">Vælg kortet til overlejring.</string>
+    <string name="map_overlay_descr">Vælg kort til overlejring</string>
     <string name="tile_source_already_installed">Kort er allerede installeret, \'Indstillinger\' vil blive opdateret.</string>
     <string name="select_tile_source_to_install">Vælg kort/kortbrikker der skal installeres eller opdateres.</string>
     <string name="internet_not_available">Kan ikke udføre handlingen uden en forbindelse til Internettet.</string>
@@ -563,7 +562,6 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="poi_filter_nominatim">Online Nominatim</string>
     <string name="local_index_poi_data">Interessepunkt-data</string>
     <string name="error_doing_search">Kunne ikke udføre offline søgning.</string>
-    <string name="search_offline_geo_error">Kunne ikke fortolke geografisk hensigt \'%s\'.</string>
     <string name="search_osm_offline">Søg efter geografisk placering</string>
     <string name="system_locale">System</string>
     <string name="preferred_locale_descr">Vælg sprog (træder i kraft ved genstart).</string>
@@ -618,7 +616,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="reading_cached_tiles">Læser cachelagrede kortbrikker…</string>
     <string name="version_index_is_big_for_memory">Ikke nok hukommelse for indeks \'{0}\'</string>
     <string name="version_index_is_not_supported">Versionen af indeks \'{0}\' er ikke understøttet</string>
-    <string name="specified_dir_doesnt_exist">Kan ikke finde den angivne mappe.</string>
+    <string name="specified_dir_doesnt_exist">Kunne ikke finde den angivne mappe.</string>
     <string name="application_dir">Datalagringsmappe</string>
     <string name="build_installed">Version {0} blev installeret ({1}).</string>
     <string name="downloading_build">Henter version…</string>
@@ -633,7 +631,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="daynight_mode_night">Nat</string>
     <string name="daynight_mode_auto">Solopgang/-nedgang</string>
     <string name="daynight_mode_sensor">Lysføler</string>
-    <string name="daynight_descr">Vælg regel for skift mellem dag- og nattilstand.</string>
+    <string name="daynight_descr">Juster skift mellem nat- og dagtilstand.</string>
     <string name="daynight">Dag-/nattilstand</string>
     <string name="download_files_question">Hent {0} filer ({1} MB)?</string>
     <string name="amenity_type_landuse">Arealanvendelse</string>
@@ -645,16 +643,16 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="fast_route_mode_descr">"Aktiver for at beregne den hurtigste rute eller deaktiver for  brændstofbesparende rute."</string>
     <string name="tiles_to_download_estimated_size">Ved zoom {0} hent {1} kortbrikker ({2} MB)</string>
     <string name="shared_string_download_map">Hent kort</string>
-    <string name="select_max_zoom_preload_area">Vælg maksimal zoom der skal indlæses på forhånd</string>
+    <string name="select_max_zoom_preload_area">Maksimal zoom der skal indlæses på forhånd</string>
     <string name="maps_could_not_be_downloaded">Kortet kunne ikke hentes</string>
     <string name="continuous_rendering">Kontinuerlig rendering</string>
     <string name="continuous_rendering_descr">Vis kontinuerlig rendering i stedet for hele kortet på en gang.</string>
-    <string name="rendering_exception">Kunne ikke optegne det valgte område</string>
+    <string name="rendering_exception">Kunne ikke optegne det valgte område.</string>
     <string name="show_point_options">Brug placering…</string>
     <string name="renderer_load_sucess">Rendering indlæst</string>
-    <string name="renderer_load_exception">Kunne ikke indlæse renderer</string>
+    <string name="renderer_load_exception">Kunne ikke indlæse renderer.</string>
     <string name="renderers">Vektor-rendering</string>
-    <string name="renderers_descr">Vælg renderingsudseende.</string>
+    <string name="renderers_descr">Vælg renderingsudseende</string>
     <string name="poi_context_menu_website">Vis hjemmeside (IP)</string>
     <string name="poi_context_menu_call">Vis telefon (IP)</string>
     <string name="website">Hjemmeside</string>
@@ -670,7 +668,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="no_vector_map_loaded">Vektorkort blev ikke indlæst</string>
     <string name="gpx_files_not_found">Ingen GPX-filer blev fundet i \'/tracks\' mappen</string>
     <string name="layer_gpx_layer">GPX-filer…</string>
-    <string name="error_reading_gpx">Kunne ikke læse GPX-data</string>
+    <string name="error_reading_gpx">Kunne ikke læse GPX-data.</string>
     <string name="vector_data">Offline vektorkort</string>
     <string name="transport_context_menu">Søg efter transport ved stoppested</string>
     <string name="poi_context_menu_modify">Ændr interessepunkt</string>
@@ -678,14 +676,14 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="rotate_map_compass_opt">Kompasretning</string>
     <string name="rotate_map_bearing_opt">Bevægelsesretning</string>
     <string name="rotate_map_none_opt">Ingen rotation (nord er altid opad)</string>
-    <string name="rotate_map_to_bearing_descr">Vælg justering af skærmen.</string>
+    <string name="rotate_map_to_bearing_descr">Justering af skærm:</string>
     <string name="rotate_map_to_bearing">Kortorientering</string>
     <string name="show_route">Rutedetaljer</string>
     <string name="fav_imported_sucessfully">Favoritter importeret</string>
     <string name="fav_file_to_load_not_found">GPX-fil med Favoritter ikke fundet i {0}</string>
     <string name="fav_saved_sucessfully">Favoritter gemt i {0}</string>
     <string name="no_fav_to_save">Ingen Favoritter at gemme</string>
-    <string name="error_occurred_loading_gpx">Kunne ikke indlæse GPX</string>
+    <string name="error_occurred_loading_gpx">GPX kunne ikke indlæses.</string>
     <string name="send_report">Send rapport</string>
     <string name="none_region_found">Kunne ikke finde nogen kort på hukommelseskortet.</string>
     <string name="poi_namefinder_query_empty">Skriv for at finde interessepunkt</string>
@@ -696,7 +694,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="layer_osm_bugs">OSM-noter (online)</string>
     <string name="layer_map">Vælg kortkilde…</string>
     <string name="menu_layers">Kortlag</string>
-    <string name="context_menu_item_search_poi">Søg interessepunkt</string>
+    <string name="context_menu_item_search_poi">Søg efter interessepunkt</string>
     <string name="use_trackball_descr">Brug en trackball for at flytte kortet.</string>
     <string name="use_trackball">Brug trackball</string>
     <string name="background_service_wait_int_descr">Indstil den højeste tilladte ventetid for hver positionssøgning i baggrunden.</string>
@@ -704,9 +702,9 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="where_am_i">Hvor er jeg?</string>
     <string name="network_provider">Netværk</string>
     <string name="int_seconds">sekunder</string>
-    <string name="background_service_int_descr">Indstil vågn-op interval som anvendes af baggrundstjenesten.</string>
+    <string name="background_service_int_descr">Vågn-op interval som anvendes af baggrundstjenesten:</string>
     <string name="background_service_int">GPS vågn-op interval</string>
-    <string name="background_service_provider_descr">Vælg placeringsmetode som bruges af baggrundstjenesten.</string>
+    <string name="background_service_provider_descr">Placeringsmetode som bruges af baggrundstjenesten:</string>
     <string name="background_service_provider">Placeringsudbyder</string>
     <string name="background_router_service_descr">Spor positionen, mens skærmen er slukket.</string>
     <string name="background_router_service">Kør OsmAnd i baggrunden</string>
@@ -716,9 +714,9 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="menu_mute_off">Lyd er slået til</string>
     <string name="menu_mute_on">Lyd er slået fra</string>
     <string name="email">e-mail</string>
-    <string name="edit_filter_delete_message">Filter {0} er slettet</string>
-    <string name="edit_filter_create_message">Filter {0} er oprettet</string>
-    <string name="edit_filter_delete_dialog_title">Slet det valgte filter?</string>
+    <string name="edit_filter_delete_message">Filter {0}\' er slettet</string>
+    <string name="edit_filter_create_message">Filter \'{0}\' er oprettet</string>
+    <string name="edit_filter_delete_dialog_title">Slet filter\?</string>
     <string name="edit_filter_save_as_menu_item">Gem som</string>
     <string name="filter_current_poiButton">Filter</string>
     <string name="poi_dialog_other_tags_message">Alle de øvrige mærker bevares</string>
@@ -729,7 +727,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="poi_action_succeded_template">Handling {0} fuldført.</string>
     <string name="poi_action_change">ændre</string>
     <string name="poi_action_add">tilføj</string>
-    <string name="poi_remove_success">Interessepunkt slettet</string>
+    <string name="poi_remove_success">Slettet</string>
     <string name="poi_remove_title">Slet interessepunkt</string>
     <string name="poi_create_title">Opret interessepunkt</string>
     <string name="poi_edit_title">Rediger interessepunkt</string>
@@ -777,7 +775,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="transport_route_distance">Rutelængde</string>
     <string name="transport">Transport</string>
     <string name="poi_remove_confirm_template">Slet {0} (kommentar)?</string>
-    <string name="osb_comment_dialog_error">Kunne ikke tilføje kommentar</string>
+    <string name="osb_comment_dialog_error">Kunne ikke tilføje kommentar.</string>
     <string name="osb_comment_dialog_author">Forfatternavn</string>
     <string name="add_favorite_dialog_default_favourite_name">Favorit</string>
     <string name="add_favorite_dialog_top_text">Indtast Favoritnavn</string>
@@ -788,7 +786,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="search_address_building">Bygning</string>
     <string name="search_address_street">Gade</string>
     <string name="search_address_city">By</string>
-    <string name="search_address_top_text">Vælg adresse</string>
+    <string name="search_address_top_text">Adresse</string>
     <string name="voice_provider_descr">Vælg talevejledning til navigation.</string>
     <string name="transport_Stop">Stoppested</string>
     <string name="transport_stops">Stoppesteder</string>
@@ -805,8 +803,8 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="show_transport_over_map">Vis stoppesteder</string>
     <string name="hello">OsmAnd navigationsprogram</string>
     <string name="update_poi_success">Interessepunkt-data blev opdateret ({0} blev indlæst)</string>
-    <string name="update_poi_error_local">Kunne ikke opdatere lokal interessepunkt-liste</string>
-    <string name="update_poi_error_loading">Kunne ikke indlæse data fra server</string>
+    <string name="update_poi_error_local">Kunne ikke opdatere lokal interessepunkt-liste.</string>
+    <string name="update_poi_error_loading">Kunne ikke indlæse data fra server.</string>
     <string name="update_poi_no_offline_poi_index">Ingen offline interessepunkt-data til rådighed for området</string>
     <string name="update_poi_is_not_available_for_zoom">Ved at zoome ind kan interessepunkter opdateres</string>
     <string name="context_menu_item_update_poi">Opdater interessepunkt</string>
@@ -831,7 +829,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
 \nNavigationen skiftes midlertidig til online CloudMade tjenesten.</string>
     <string name="search_offline_address">Offline søgning</string>
     <string name="route_general_information">Total afstand %1$s, rejsetid %2$d t %3$d m.</string>
-    <string name="router_service_descr">Vælg en online eller offline navigationstjeneste.</string>
+    <string name="router_service_descr">Online eller offline navigationstjeneste.</string>
     <string name="router_service">Navigationstjeneste</string>
     <string name="sd_dir_not_accessible">Datalagringsmappen på hukommelseskortet er ikke tilgængelig!</string>
     <string name="download_question_exist">Offline-data for {0} eksisterer allerede ({1}). Opdater ({2})?</string>
@@ -844,7 +842,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="update_existing">Erstat</string>
     <string name="only_show">Vis rute</string>
     <string name="follow">Start vejledning</string>
-    <string name="mark_final_location_first">Vælg først en destination</string>
+    <string name="mark_final_location_first">Angiv destinationen først</string>
     <string name="get_directions">Rutevejledning</string>
     <string name="opening_hours">Åbningstider</string>
     <string name="opening_changeset">Åbner ændringssæt…</string>
@@ -858,12 +856,12 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="loading_streets">Indlæser gader…</string>
     <string name="loading_cities">Indlæser byer…</string>
     <string name="poi">Interessepunkt</string>
-    <string name="error_occurred_saving_gpx">Kunne ikke gemme GPX-fil</string>
-    <string name="error_calculating_route">Kunne ikke beregne rute</string>
-    <string name="error_calculating_route_occured">Kunne ikke beregne rute</string>
-    <string name="empty_route_calculated">Beregnet rute er tom</string>
+    <string name="error_occurred_saving_gpx">Kunne ikke gemme GPX-fil.</string>
+    <string name="error_calculating_route">Ruten kunne ikke beregnes.</string>
+    <string name="error_calculating_route_occured">Ruten kunne ikke beregnes.</string>
+    <string name="empty_route_calculated">Beregnet rute er tom.</string>
     <string name="new_route_calculated_dist">Ny rute beregnet, afstand</string>
-    <string name="arrived_at_destination">Ankommet til destinationen</string>
+    <string name="arrived_at_destination">Ankommet.</string>
     <string name="invalid_locations">Ugyldige koordinater</string>
     <string name="go_back_to_osmand">Tilbage til kortet</string>
     <string name="loading_data">Indlæser data…</string>
@@ -898,9 +896,9 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="show_view_angle">Vis synsretning</string>
     <string name="map_view_3d_descr">Aktiver 3D-visning af kortet.</string>
     <string name="map_view_3d">3D-kortvisning</string>
-    <string name="show_poi_over_map_description">Vis den sidst valgte IP overlejring på kortet.</string>
+    <string name="show_poi_over_map_description">Vis den sidst anvendte IP overlejring.</string>
     <string name="show_poi_over_map">Vis IP overlejring</string>
-    <string name="map_tile_source_descr">Vælg kilden til onlinekort eller cachelagrede kortbrikker.</string>
+    <string name="map_tile_source_descr">Vælg kilde til onlinekort eller cachelagrede kortbrikker</string>
     <string name="map_tile_source">Kilde til kortbrikker</string>
     <string name="map_source">Kortkilde</string>
     <string name="use_internet">Brug internettet</string>
@@ -912,7 +910,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="search_activity">Søg</string>
     <string name="searchpoi_activity">Vælg interessepunkt</string>
     <string name="search_POI_level_btn">Find flere</string>
-    <string name="choose_available_region">Vælg område fra listen</string>
+    <string name="choose_available_region">Vælg område fra liste</string>
     <string name="choose_intersected_street">Vælg krydsende gade</string>
     <string name="app_mode_car">Kørsel</string>
     <string name="app_mode_bicycle">Cykling</string>
@@ -922,8 +920,8 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="navigate_point_top_text">Indtast bredde(lat)- og længdegrad(lon) i det valgte format (D - grader, M - minutter, S - sekunder)</string>
     <string name="navigate_point_latitude">Breddegrad</string>
     <string name="navigate_point_longitude">Længdegrad</string>
-    <string name="navigate_point_format_D">GGG.GG</string>
-    <string name="navigate_point_format_DM">DDD MM.MM</string>
+    <string name="navigate_point_format_D">DDD.DDDDD</string>
+    <string name="navigate_point_format_DM">DDD MM.MMM</string>
     <string name="search_address_region">Område</string>
     <string name="add_favorite_dialog_favourite_added_template">Favoritpunkt \'{0}\' tilføjet.</string>
     <string name="poi_dialog_comment_default">Interessepunkt ændres</string>
@@ -937,7 +935,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="incremental_search_building">Søg efter bygning trinvist</string>
     <string name="Closest_Amenities">Nærmeste faciliteter</string>
     <string name="incremental_search_street">Søg efter gader trinvist</string>
-    <string name="navigate_point_format_DMS">DDD MM SS.SS</string>
+    <string name="navigate_point_format_DMS">DDD MM SS.S</string>
     <string name="street_name">Gadenavn</string>
     <string name="select_address_activity">Vælg adresse</string>
     <string name="favourites_list_activity">Vælg Favorit</string>
@@ -1301,7 +1299,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="fav_point_emoticons_message">Favoritnavn er ændret til %1$s for at kunne gemme navnet med humørikoner til en fil.</string>
     <string name="speed_limit_exceed">Tolerance for hastighedsgrænse</string>
     <string name="speed_limit_exceed_message">Vælg hvor meget hastighedsgrænsen skal overskrides, for at få en taleadvarsel.</string>
-    <string name="anonymous_user_hint">En anonym bruger kan ikke: 
+    <string name="anonymous_user_hint">Anonyme brugere kan ikke: 
 \n- Oprette grupper; 
 \n- Synkronisere grupper og enheder med serveren; 
 \n- Administrere grupper og enheder på et personligt betjeningspanel på hjemmesiden.</string>
@@ -1474,7 +1472,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="shared_string_remember_my_choice">Husk valg</string>
     <string name="shared_string_refresh">Opdater</string>
     <string name="shared_string_download">Hent</string>
-    <string name="shared_string_downloading">Henter</string>
+    <string name="shared_string_downloading">Henter…</string>
     <string name="shared_string_download_successful">Hentet</string>
     <string name="shared_string_io_error">I/O fejl</string>
     <string name="shared_string_unexpected_error">Uventet fejl</string>
@@ -1653,8 +1651,8 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="app_name_osmand">OsmAnd</string>
     <string name="offline_maps_and_navigation">Offline kort\n&amp; navigation</string>
     <string name="commit_poi">Overfør IP</string>
-    <string name="routing_attr_avoid_shuttle_train_name">Undgå shuttletog</string>
-    <string name="routing_attr_avoid_shuttle_train_description">Undgå at bruge shuttle-tog</string>
+    <string name="routing_attr_avoid_shuttle_train_name">Ingen shuttle-tog</string>
+    <string name="routing_attr_avoid_shuttle_train_description">Undgår at bruge shuttle-tog</string>
     <string name="plugin_settings">Udvidelser</string>
     <string name="tab_title_advanced">Udvidet</string>
     <string name="building_number">Bygningsnummer</string>
@@ -1789,8 +1787,8 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="osn_reopen_dialog_title">Genåbn note</string>
     <string name="osn_close_dialog_title">Luk note</string>
     <string name="osn_add_dialog_success">Note oprettet</string>
-    <string name="osn_add_dialog_error">Kunne ikke oprette note</string>
-    <string name="osn_close_dialog_error">Kunne ikke lukke noten</string>
+    <string name="osn_add_dialog_error">Noten kunne ikke oprettes.</string>
+    <string name="osn_close_dialog_error">Noten kunne ikke lukkes.</string>
     <string name="shared_string_commit">Udfør</string>
     <string name="poi_dialog_reopen">Genåbn</string>
     <string name="osn_close_dialog_success">Note lukket</string>
@@ -1881,7 +1879,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="shared_string_save_changes">Gem ændringer</string>
     <string name="find_parking">Find parkering</string>
     <string name="show_polygons">Vis polygoner</string>
-    <string name="rendering_attr_showMtbRoutes_name">Vis MTB ruter</string>
+    <string name="rendering_attr_showMtbRoutes_name">Vis mountainbike-stier</string>
     <string name="show_map_markers_description">Aktivér kortmarkør funktionen.</string>
     <string name="clear_active_markers_q">Fjern alle aktive markører?</string>
     <string name="clear_markers_history_q">Ryd kortmarkørhistoriken?</string>
@@ -1917,12 +1915,12 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="osm_live_user_public_name">Offentligt navn</string>
     <string name="osm_live_hide_user_name">Vis ikke navn i rapporter</string>
     <string name="osm_live_support_region">Understøttet område</string>
-    <string name="osm_live_month_cost">Månedlige omkostninger</string>
+    <string name="osm_live_month_cost">Omkostning pr. måned</string>
     <string name="osm_live_month_cost_desc">Månedlig betaling</string>
     <string name="osm_live_active">Aktiv</string>
     <string name="osm_live_not_active">Inaktiv</string>
     <string name="osm_live_enter_email">Indtast en gyldig e-mailadresse</string>
-    <string name="osm_live_enter_user_name">Indtast offentligt navn</string>
+    <string name="osm_live_enter_user_name">Indtast et offentligt navn</string>
     <string name="osm_live_thanks">Tak for støtte til OsmAnd!
 \nFor at aktivere alle nye funktioner, er det nødvendigt at genstarte OsmAnd.</string>
     <string name="osm_live_region_desc">En del af donationen vil blive sendt til OSM-brugere, som indsender ændringer til kortet i det pågældende område.</string>
@@ -2043,7 +2041,6 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="first_usage_greeting">Få rutevejledning og opdag nye steder uden internetforbindelse</string>
     <string name="si_mi_meters">Mil/meter</string>
     <string name="get_for">Få for %1$s</string>
-    <string name="get_for_month">Få for %1$s måned</string>
     <string name="osm_live_banner_desc">Få ubegrænset hentning - og opdatering af kort mere end en gang om måneden: ugentligt, dagligt eller hver time.</string>
     <string name="osmand_plus_banner_desc">Ubegrænset adgang til kort, opdateringer og Wikipedia udvidelse.</string>
     <string name="get_it">Få det</string>
@@ -2073,7 +2070,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="rendering_attr_surfaceIntegrity_name">Vejoverfladens integritet</string>
     <string name="christmas_poi">Jule interessepunkter (IP)</string>
     <string name="christmas_desc">I anledning af jul og nytår, vælg at få vist interessepunkter tilknyttet jul: juletræer, markeder, mm.</string>
-    <string name="christmas_desc_q">Vis jule-interessepunkter (IP)?</string>
+    <string name="christmas_desc_q">Vis juleferie-interessepunkter (IP)\?</string>
     <string name="save_track_min_speed">Minimumshastighed for logning</string>
     <string name="save_track_min_speed_descr">Filter: Ingen logning af punkter under denne hastighed.</string>
     <string name="save_track_min_distance">Logning ved minimum forskydning</string>
@@ -2098,10 +2095,10 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="route_calculation">Ruteberegning</string>
     <string name="upload_poi">Overfør IP</string>
     <string name="route_roundabout_short">Tag %1$d afkørsel og forsæt</string>
-    <string name="search_map_hint">Søg efter by eller område</string>
+    <string name="search_map_hint">By eller område</string>
     <string name="wiki_around">Wikipedia artikler i nærheden</string>
-    <string name="routing_attr_allow_motorway_name">Tillad motorveje</string>
-    <string name="routing_attr_allow_motorway_description">Tillad motorveje.</string>
+    <string name="routing_attr_allow_motorway_name">Brug motorveje</string>
+    <string name="routing_attr_allow_motorway_description">Tillader motorveje.</string>
     <string name="legacy_search">Legacy søgning</string>
     <string name="show_legacy_search">Vis legacy søgning</string>
     <string name="show_legacy_search_desc">Tilføj legacy søgning til sidemenuen.</string>
@@ -2215,7 +2212,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="routing_attr_driving_style_name">Kørestil</string>
     <string name="shared_string_gpx_tracks">Spor</string>
     <string name="select_gpx_folder">Vælg mappe til GPX-fil</string>
-    <string name="file_can_not_be_moved">Filen kan ikke flyttes.</string>
+    <string name="file_can_not_be_moved">Filen kunne ikke flyttes.</string>
     <string name="shared_string_move">Flyt</string>
     <string name="shared_string_time_span">Varighed</string>
     <string name="shared_string_max">Maks</string>
@@ -2321,13 +2318,14 @@ Repræsenterer område: %1$s x %2$s</string>
 \n  • Understøtter mellemliggende punkter på ruten 
 \n  • Automatisk genberegning, ved afvigelse fra ruten 
 \n  • Søg efter steder efter adresse, efter type (fx: restaurant, hotel, tankstation, museum), eller ved geografiske koordinater "</string>
-    <string name="osmand_plus_extended_description_part3">Kortvisning  
-\n • Vis position og orientering  
-\n • Juster eventuelt kortet efter kompas eller bevægelsesretning  
-\n • Gem de vigtigste steder som foretrukne  
-\n • Vis IP\'er (interessepunkt) i nærheden  
-\n • Vis specialiserede online kortbrikker, satellitvisning (fra Bing), forskellige overlejringer som touring/navigation GPX-spor og yderligere lag med justerbar gennemsigtighed  
-\n • Vis valgfrit stednavne på engelsk, lokal eller fonetisk stavemåde</string>
+    <string name="osmand_plus_extended_description_part3">Kortvisning   
+\n • Vis position og orientering   
+\n • Juster eventuelt kortet efter kompas eller bevægelsesretning   
+\n • Gem de vigtigste steder som foretrukne   
+\n • Vis IP\'er (interessepunktr) i nærheden   
+\n • Vis specialiserede online kortbrikker, satellitvisning (fra Bing), forskellige overlejringer som touring/navigation GPX-spor og yderligere lag med justerbar gennemsigtighed   
+\n • Vis valgfrit stednavne på engelsk, lokal eller fonetisk stavemåde
+\n</string>
     <string name="osmand_plus_extended_description_part4">Brug OSM og Wikipedia data  
 \n • Information af høj kvalitet fra de bedste samarbejdsprojekter i verden  
 \n • OSM data til hvert land eller område  
@@ -2377,7 +2375,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="subscribe_email_desc">Abonner på postlisten om rabatter og hent yderligere 3 kort!</string>
     <string name="no_overlay">Ingen overlejring</string>
     <string name="no_underlay">Ingen underlejring</string>
-    <string name="quick_action_add_destination">Tilføj destination</string>
+    <string name="quick_action_add_destination">Angiv destination</string>
     <string name="quick_action_replace_destination">Udskift destination</string>
     <string name="quick_action_add_first_intermediate">Tilføj første mellemliggende punkt</string>
     <string name="quick_action_add_destination_desc">Tryk på genvejen tilføjer en destination på skærmens centrum, enhver tidligere valgt destination bliver den sidste mellemliggende destination.</string>
@@ -2388,11 +2386,11 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="quick_action_auto_zoom_on">"Aktiver automatisk  kortzoom"</string>
     <string name="quick_action_auto_zoom_off">"Deaktiver automatisk  kortzoom"</string>
     <string name="shared_string_paused">Pauset</string>
-    <string name="type_city_town">Indtast by eller bydel</string>
+    <string name="type_city_town">Indtast by/bydel/sted</string>
     <string name="type_postcode">Indtast postnummer</string>
     <string name="nearest_cities">Nærmeste byer</string>
     <string name="select_city">Vælg by</string>
-    <string name="select_postcode">Vælg postnummer</string>
+    <string name="select_postcode">Søg på postnummer</string>
     <string name="type_address">Indtast adresse</string>
     <string name="select_street">Vælg gade</string>
     <string name="shared_string_in_name">i %1$s</string>
@@ -2425,7 +2423,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="increase_search_radius">Øg søgeradius</string>
     <string name="nothing_found">Fandt intet</string>
     <string name="nothing_found_descr">Ændr søgningen eller øg søgeradius.</string>
-    <string name="private_access_routing_req">Destinationen ligger i et område med privat adgang. Giv adgang til de private veje for denne tur?</string>
+    <string name="private_access_routing_req">Destinationen ligger i et område med privat adgang. Tillad brug af private veje til turen\?</string>
     <string name="mapillary">Mapillary</string>
     <string name="mapillary_widget">Mapillary-modul</string>
     <string name="mapillary_widget_descr">Tillader hurtige bidrag til Mapillary.</string>
@@ -2434,7 +2432,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="mapillary_action_descr">Bidrag med egne billeder af stedet på gadeniveau via Mapillary.</string>
     <string name="plugin_mapillary_descr">Fotos på gadeniveau for alle. Opdag steder, samarbejd, indfang verden.</string>
     <string name="online_photos">Online-fotos</string>
-    <string name="no_photos_descr">Vi har ingen billeder fra dette sted.</string>
+    <string name="no_photos_descr">Ingen billeder her.</string>
     <string name="shared_string_install">Installer</string>
     <string name="improve_coverage_mapillary">Forbedr fotodækningen med Mapillary</string>
     <string name="improve_coverage_install_mapillary_desc">Installer Mapillary for at tilføje et eller flere billeder til denne placering.</string>
@@ -2452,7 +2450,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="mapillary_menu_descr_username">Se kun billeder tilføjet af</string>
     <string name="mapillary_menu_title_username">Brugernavn</string>
     <string name="mapillary_menu_filter_description">Filtrer billeder efter indsender, dato eller type. Kun aktiv for højere zoomniveauer.</string>
-    <string name="mapillary_menu_descr_dates">Se kun de billeder, der er tilføjet</string>
+    <string name="mapillary_menu_descr_dates">Vis kun billeder, der er tilføjet</string>
     <string name="shared_string_reload">Genindlæs</string>
     <string name="mapillary_menu_descr_tile_cache">Genindlæs kortbrikker for at se opdaterede data.</string>
     <string name="mapillary_menu_title_tile_cache">Kortbrikmellemlager (cache)</string>
@@ -2527,17 +2525,17 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="passed">Sidst anvendt: %1$s</string>
     <string name="make_active">Aktivér</string>
     <string name="marker_show_distance_descr">Vælg hvordan afstanden og retningen til kortmarkører på kortet skal angives:</string>
-    <string name="remove_from_map_markers">Fjern fra kortmarkører</string>
-    <string name="descendingly">faldende</string>
-    <string name="ascendingly">stigende</string>
-    <string name="date_added">Dato tilføjet</string>
+    <string name="remove_from_map_markers">Fjern fra \'Kortmarkører\'</string>
+    <string name="descendingly">Z-A</string>
+    <string name="ascendingly">A-Z</string>
+    <string name="date_added">Tilføjet</string>
     <string name="order_by">Sorter efter:</string>
     <string name="show_guide_line">Vis retningsbestemte linjer</string>
     <string name="show_arrows_on_the_map">Vis pile på kortet</string>
     <string name="show_passed">Vis passerede</string>
     <string name="hide_passed">Skjul passerede</string>
     <string name="use_location">Brug position</string>
-    <string name="add_location_as_first_point_descr">Tilføj position som startpunkt til planlægning af den perfekte rute.</string>
+    <string name="add_location_as_first_point_descr">Tilføj position som udgangspunkt til planlægning af den perfekte rute.</string>
     <string name="my_location">Min position</string>
     <string name="shared_string_finish">Afslut</string>
     <string name="plan_route">Planlæg rute</string>
@@ -2552,11 +2550,11 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="use_system_keyboard">Brug systemets tastatur</string>
     <string name="fast_coordinates_input_descr">Vælg format for koordinatindtastning. Kan altid ændres ved at trykke på \'Indstillinger\'.</string>
     <string name="fast_coordinates_input">Hurtig koordinatindtastning</string>
-    <string name="routing_attr_avoid_ice_roads_fords_name">Undgå isglatte veje, vadesteder</string>
-    <string name="routing_attr_avoid_ice_roads_fords_description">Undgå isglatte veje og vadesteder.</string>
-    <string name="make_round_trip_descr">"Tilføj kopi af udgangspunkt  som destination."</string>
+    <string name="routing_attr_avoid_ice_roads_fords_name">Ingen isglatte veje eller vadesteder</string>
+    <string name="routing_attr_avoid_ice_roads_fords_description">Undgår isglatte veje og vadesteder.</string>
+    <string name="make_round_trip_descr">Tilføj kopi af udgangspunkt som destination.</string>
     <string name="make_round_trip">Foretag rundtur</string>
-    <string name="osn_modify_dialog_error">Kunne ikke ændre note</string>
+    <string name="osn_modify_dialog_error">Kunne ikke ændre note.</string>
     <string name="osn_modify_dialog_title">Ændr note</string>
     <string name="context_menu_item_modify_note">Ændr OSM-note</string>
     <string name="rendering_value_darkyellow_name">Mørkegul</string>
@@ -2584,17 +2582,15 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="shared_string_left">Venstre</string>
     <string name="show_number_pad">Vis numerisk tastatur</string>
     <string name="shared_string_paste">Indsæt</string>
-    <string name="coordinate_input_accuracy_description">Skift automatisk til det næste felt efter indtastning af %1$d cifre.</string>
-    <string name="coordinate_input_accuracy">%1$d cifre</string>
     <string name="go_to_next_field">Næste felt</string>
     <string name="shared_string_two">To</string>
     <string name="shared_string_one">En</string>
     <string name="show_guide_line_descr">Vis retningsbestemt linje fra position til de aktive markørplaceringer.</string>
     <string name="show_arrows_descr">Vis en eller to pile der angiver retningen til de aktive markører.</string>
     <string name="distance_indication_descr">Vælg hvordan afstanden til de aktive markører skal vises.</string>
-    <string name="active_markers_descr">Vælg hvor mange retningsindikatorer der skal vises.</string>
+    <string name="active_markers_descr">Angiv antal retningsindikatorer:</string>
     <string name="add_track_to_markers_descr">Vælg et spor for at tilføje dens rutepunkter til markører.</string>
-    <string name="add_favourites_group_to_markers_descr">Vælg en Favoritkategori, der skal tilføjes markørerne.</string>
+    <string name="add_favourites_group_to_markers_descr">Vælg en katagori af Favoriter, der skal tilføjes markørerne.</string>
     <string name="shared_string_gpx_waypoints">Sporrutepunkter</string>
     <string name="favourites_group">Favoritkategori</string>
     <string name="add_group">Tilføj en gruppe</string>
@@ -2668,7 +2664,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="shared_string_gpx_file">GPX-fil</string>
     <string name="osc_file">OSC-fil</string>
     <string name="choose_file_type">Vælg filtype</string>
-    <string name="osm_edits_export_desc">Vælg eksporttype: OSM-noter, IP, eller begge.</string>
+    <string name="osm_edits_export_desc">Vælg eksporttype: OSM-noter, IP\'er, eller begge.</string>
     <string name="all_data">Alle data</string>
     <string name="osm_notes">OSM-noter</string>
     <string name="tunnel_warning">Tunnel forude</string>
@@ -2677,7 +2673,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="last_intermediate_dest_description">Tilføjer et mellemliggende stop</string>
     <string name="first_intermediate_dest_description">Tilføjer første stop</string>
     <string name="subsequent_dest_description">Flyt destination op og opret den</string>
-    <string name="make_as_start_point">Gør til startpunktet</string>
+    <string name="make_as_start_point">Gør til udgangspunkt</string>
     <string name="dd_mm_ss_format">GG°MM′SS″</string>
     <string name="dd_dddddd_format">GG.GGGGGG°</string>
     <string name="dd_ddddd_format">GG.GGGGG°</string>
@@ -2696,8 +2692,8 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="enter_lon">Indtast længdegrad</string>
     <string name="enter_lat">Indtast breddegrad</string>
     <string name="enter_lat_and_lon">Indtast længde- og breddegrad</string>
-    <string name="distance_farthest">Afstand: længst væk først</string>
-    <string name="distance_nearest">Afstand: nærmeste først</string>
+    <string name="distance_farthest">Længst væk først</string>
+    <string name="distance_nearest">Nærmeste først</string>
     <string name="nothing_found_in_radius">Kunne ikke finde noget:</string>
     <string name="select_waypoints_category_description">Tilføj alle sporets rutepunkter, eller vælg forskellige kategorier.</string>
     <string name="shared_string_total">I alt</string>
@@ -2708,7 +2704,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="shared_string_travel_guides">Rejseguider</string>
     <string name="shared_string_result">Resultat</string>
     <string name="use_two_digits_longitude">Brug tocifret længdegrad</string>
-    <string name="wikivoyage_search_hint">Søg: land, by, region</string>
+    <string name="wikivoyage_search_hint">Søg efter land, by, region</string>
     <string name="shared_string_read">Læs</string>
     <string name="saved_articles">Artikler med bogmærker</string>
     <string name="shared_string_explore">Udforsk</string>
@@ -2732,13 +2728,12 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="download_images">Hent billeder</string>
     <string name="purchase_dialog_title">Vælg abonnement</string>
     <string name="purchase_dialog_travel_description">Køb en af følgende for at læse rejseartikler offline:</string>
-    <string name="purchase_dialog_subtitle">Vælg passende emne:</string>
-    <string name="monthly_map_updates">Opdatering af kort: hver måned</string>
-    <string name="daily_map_updates">Opdatering af kort: hver time</string>
+    <string name="purchase_dialog_subtitle">Vælg passende emne</string>
+    <string name="monthly_map_updates">Månedlige kortopdateringer</string>
+    <string name="daily_map_updates">Kortopdateringer hver time</string>
     <string name="in_app_purchase">Køb i programmet</string>
     <string name="in_app_purchase_desc">Engangsbetaling</string>
     <string name="purchase_unlim_title">Køb - %1$s</string>
-    <string name="purchase_subscription_title">Abonner - %1$s</string>
     <string name="wikivoyage_offline">Wikivoyage offline</string>
     <string name="unlimited_downloads">Ubegrænset hentninger</string>
     <string name="wikipedia_offline">Wikipedia offline</string>
@@ -2755,7 +2750,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="download_file">Hent fil</string>
     <string name="start_editing_card_image_text">Den gratis verdensomspændende rejseguide, som alle kan redigere.</string>
     <string name="welcome_to_open_beta_description">Rejseguide er baseret på Wikivoyage. Test alle funktionerne gratis i den åbne beta. Bagefter vil rejseguider være tilgængelig for abonnenter af OsmAnd ubegrænset og ejere af OsmAnd+.</string>
-    <string name="start_editing_card_description">Du kan og bør redigere en artikel på Wikivoyage. Del viden, erfaringer, talent og din opmærksomhed</string>
+    <string name="start_editing_card_description">Du kan og bør redigere en artikel på Wikivoyage. Del viden, erfaringer, talent og din opmærksomhed.</string>
     <string name="start_editing">Begynd redigering</string>
     <string name="get_unlimited_access">Få ubegrænset adgang</string>
     <string name="welcome_to_open_beta">Velkommen til den åbne beta</string>
@@ -2783,11 +2778,11 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="read_wikipedia_offline">Læs Wikipedia offline</string>
     <string name="hide_full_description">Skjul fuld beskrivelse</string>
     <string name="show_full_description">Vis fuld beskrivelse</string>
-    <string name="nautical_render_descr">Nautisk navigationsstil. Hovedtræk: bøjer, fyrtårne, vandveje, sejlruter og sømærker, havne, søfartstjenester, dybdekonturer.</string>
+    <string name="nautical_render_descr">Til maritim navigation. Funktioner: bøjer, fyrtårne, vandveje, sejlruter og sømærker, havne, søfartstjenester og dybdekonturer.</string>
     <string name="ski_map_render_descr">Stilart til skiløb. Hovedtræk: visning af pister, skilifte og andre skifaciliteter på en praktisk måde. Færre distraherende sekundære objekter på kortet.</string>
     <string name="light_rs_render_descr">Enkel og kontrastrig stilart til bilnavigation. Skånsom for øjnene i nat-tilstand. Hovedtræk: højdekurver, veje med kontrast i orange, færre distraherende sekundære kortobjekter.</string>
     <string name="topo_render_descr">Kontraststilart designet primært til gåture, vandring og cykling i naturen. God læsbarhed ved kompleks udendørs belysning. Hovedtræk: Kontrastrige veje og naturlige objekter, forskellige typer ruter, højdekurver med avancerede indstillinger, flere detaljer i de tilsvarende zoomniveauer end i standard stilart. Overfladevalg gør det muligt at skelne mellem veje med forskellig overfladekvalitet. Ingen nat-tilstand.</string>
-    <string name="mapnik_render_descr">"Gammel \'Mapnik\' standard renderingstilart. Hovedtræk: farver svarer til  \'Mapnik\'-stilart."</string>
+    <string name="mapnik_render_descr">Gammel standard \'Mapnik\' stilart. Farver svarer til \'Mapnik\'.</string>
     <string name="default_render_descr">Generel stilart. Forenklet rendering i tæt befolkede byer. Hovedtræk: højdekurver, ruter, vejbelægning, adgangsbegrænsninger, vejskilte, visning af stier i henhold til SAC-skalaen, rafting funktioner.</string>
     <string name="touring_view_render_descr">Detaljeret stilart til touring. Indeholder alle indstillingsmuligheder fra standardstil, desuden: viser så mange detaljer som muligt, navnlig alle veje, stier og andre måder at rejse på. En Klar visuel sondring mellem alle forskellige vejtyper, minder om mange vejkort. Farveskema med høj kontrast til udendørs brug, dag og nat stilstand.</string>
     <string name="shared_string_bookmark">Bogmærke</string>
@@ -2805,8 +2800,9 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="coord_input_save_as_track_descr">%1$s punkter tilføjet. Indtast et filnavn og tryk på “Gem“.</string>
     <string name="point_deleted">Punkt %1$s er blevet slettet</string>
     <string name="shared_string_world">Verden</string>
-    <string name="send_search_query_description">Send søgestrengen: \"%1$s\" samt lokationen.\n
-        \nDer indsamles ingen personlige oplysninger, søgedata bruges kun til at forbedre søgealgoritmen.</string>
+    <string name="send_search_query_description">Send søgestrengen: \"%1$s\" samt lokationen.
+\n 
+\nDer indsamles ingen personlige oplysninger, kun søgedata, der er nødvendige for at forbedre søgningen.</string>
     <string name="search_no_results_description">Ingen resultater?
 \nRapporter det.</string>
     <string name="send_search_query">Send søgeforespørgsel?</string>
@@ -2824,7 +2820,7 @@ Repræsenterer område: %1$s x %2$s</string>
 \n
 \n• Andre fejlrettelser 
 \n</string>
-    <string name="increase_search_radius_to">Forøg søgeradius til %1$s</string>
+    <string name="increase_search_radius_to">Udvid søgeradius til %1$s</string>
     <string name="thank_you_for_feedback">Tak for tilbagemelding</string>
     <string name="poi_cannot_be_found">Node eller vej kan ikke findes.</string>
     <string name="search_no_results_feedback">Ingen søgeresultater?
@@ -2847,12 +2843,12 @@ Repræsenterer område: %1$s x %2$s</string>
 \n</string>
     <string name="ask_for_location_permission">Giv OsmAnd adgang til placering for at fortsætte.</string>
     <string name="rendering_value_black_name">Sort</string>
-    <string name="more_transport_on_stop_hint">Der er flere transportmidler ved dette stop.</string>
+    <string name="more_transport_on_stop_hint">Der er flere forbindelser ved dette stop.</string>
     <string name="markers_remove_dialog_msg">Slet kortmarkør \'%s\'\?</string>
     <string name="edit_map_marker">Rediger kortmarkør</string>
     <string name="third_party_application">Tredjepartsprogram</string>
     <string name="search_street">Søg efter gade</string>
-    <string name="start_search_from_city">Vælg en by først</string>
+    <string name="start_search_from_city">Indtast først by/bydel/sted</string>
     <string name="shared_string_restore">Gendan</string>
     <string name="keep_passed_markers_descr">Markører tilføjet som en gruppe af favoritter eller GPX rutepunkter markeret passeret vil forblive på kortet. Hvis gruppen ikke er aktiv, vil mærkerne forsvinde fra kortet.</string>
     <string name="keep_passed_markers">Behold passerede markører på kortet</string>
@@ -2868,8 +2864,8 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="osm_live_payment_renews_quarterly">Fornyes kvartalsvis</string>
     <string name="osm_live_payment_renews_annually">Fornyes hvert år</string>
     <string name="default_price_currency_format">%1$.2f %2$s</string>
-    <string name="osm_live_payment_header">Vælg en passende betalingsperiode:</string>
-    <string name="osm_live_payment_contribute_descr">En del af indtægterne går til OpenStreetMap bidragsydere.</string>
+    <string name="osm_live_payment_header">Betalingsinterval:</string>
+    <string name="osm_live_payment_contribute_descr">Donationer er med til at finansiere OpenStreetMap kortlægning.</string>
     <string name="powered_by_osmand">Af OsmAnd</string>
     <string name="osm_live_subscriptions">Abonnementer</string>
     <string name="mapillary_menu_title_pano">Vis kun 360° billeder</string>
@@ -3235,7 +3231,6 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="months_3">Tre måneder</string>
     <string name="price_free">Gratis</string>
     <string name="get_discount_title">Få %1$d %2$s med %3$s rabat.</string>
-    <string name="get_free_trial_title">Start %1$d %2$s gratis prøveperiode.</string>
     <string name="get_discount_first_part">%1$s for første %2$s</string>
     <string name="get_discount_first_few_part">%1$s for første %2$s</string>
     <string name="get_discount_second_part">derefter %1$s</string>
@@ -3333,7 +3328,6 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="shared_string_memory_gb_desc">%1$s GB</string>
     <string name="shared_string_memory_mb_desc">%1$s MB</string>
     <string name="shared_string_memory_kb_desc">%1$s KB</string>
-    <string name="swap_start_and_destination">Skift start og destination</string>
     <string name="data_storage_preference_summary">%1$s • %2$s</string>
     <string name="data_storage_space_description">%1$s GB ledig (af %2$s GB)</string>
     <string name="track_storage_directory">Overvåg lagringsmappen</string>
@@ -3376,7 +3370,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="quick_action_contour_lines_show">Vis højdekurver</string>
     <string name="quick_action_contour_lines_hide">Skjul højdekurver</string>
     <string name="quick_action_show_hide_contour_lines">Vis/skjul højdekurver</string>
-    <string name="quick_action_hillshade_descr">Tryk på genvejsknappenviser eller skjuler reliefskygger på kortet</string>
+    <string name="quick_action_hillshade_descr">Tryk på genvejsknappen viser eller skjuler reliefskygger på kortet</string>
     <string name="quick_action_hillshade_show">Vis reliefskygger</string>
     <string name="quick_action_hillshade_hide">Skjul reliefskygger</string>
     <string name="quick_action_show_hide_hillshade">Vis/skjul reliefskygger</string>
@@ -3395,4 +3389,40 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="route_start_point">Udgangspunkt</string>
     <string name="track_saved">Sporet er gemt</string>
     <string name="empty_filename">Filnavnet er tomt</string>
+    <string name="shared_string_revert">Tilbagefør</string>
+    <string name="quick_action_directions_from_desc">En knap for at få skærmen til at centrere afgangsstedet og beregne ruten til destinationen eller åbne en dialogboks for at vælge destination, hvis destinationsmarkøren ikke er på kortet.</string>
+    <string name="clear_confirmation_msg">Ryd %1$s\?</string>
+    <string name="download_map_dialog">Dialogboksen Hent kort</string>
+    <string name="dialogs_and_notifications_title">Dialoger og meddelelser</string>
+    <string name="dialogs_and_notifications_descr">Kontrol af popup-vinduer, dialoger og meddelelser, der OsmAnd vis under brug.</string>
+    <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Vis node netværk cykelruter</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_name">Node netværk</string>
+    <string name="suggested_maps">Foreslåede kort</string>
+    <string name="suggested_maps_descr">Disse kort skal bruges med udvidelser</string>
+    <string name="added_profiles">Tilføjede profiler</string>
+    <string name="added_profiles_descr">Udbidelse tilføjer ny profil til OsmAnd</string>
+    <string name="shared_string_turn_off">Sluk</string>
+    <string name="new_plugin_added">Ny udvidelse tilføjet</string>
+    <string name="join_segments">Forbind segmenter</string>
+    <string name="add_new_profile_q">Tilføj ny profil \'%1$s\'\?</string>
+    <string name="save_heading">Medtag overskrift</string>
+    <string name="save_heading_descr">Gem overskrift til hvert TrackPoint under optagelsen.</string>
+    <string name="distance_and_address">%1$s • %2$s</string>
+    <string name="street_city">%1$s, %2$s</string>
+    <string name="personal_category_name">Personlig</string>
+    <string name="shared_string_downloading_formatted">Henter %s</string>
+    <string name="rendering_value_thick_name">Tyk</string>
+    <string name="desert_render_descr">Til ørkener og andre tyndt befolkede områder. Viser flere detaljer på en visningsskala.</string>
+    <string name="select_navigation_icon">Vælg navigationsikon</string>
+    <string name="select_map_icon">Vælg kortikon</string>
+    <string name="delete_profiles_descr">Tryk på Anvend og slettede profiler går helt tabt.</string>
+    <string name="master_profile">Hovedprofil</string>
+    <string name="select_color">Vælg farve</string>
+    <string name="edit_profiles_descr">Standard-profiler kan ikke slettes, men de kan deaktiveres på forrige skærmbillede eller flyttes til bunden.</string>
+    <string name="edit_profiles">Rediger profiler</string>
+    <string name="select_nav_profile_dialog_message">Navigationstype påvirker reglerne for ruteberegninger.</string>
+    <string name="profile_appearance">Profilens udseende</string>
+    <string name="choose_icon_color_name">Vælg ikon, farve og navn</string>
+    <string name="reorder_profiles">Rediger profilliste</string>
+    <string name="selected_profile">Valgte profil</string>
 </resources>

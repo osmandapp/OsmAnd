@@ -208,21 +208,6 @@ public abstract class OsmandPlugin {
 		}
 	}
 
-	public static void updateActivatedPlugins(OsmandApplication app) {
-		Set<String> enabledPlugins = app.getSettings().getEnabledPlugins();
-		for (OsmandPlugin plugin : OsmandPlugin.getMarketPlugins()) {
-			updateMarketPlugin(app, enabledPlugins, plugin);
-		}
-		for (OsmandPlugin plugin : allPlugins) {
-			if (enabledPlugins.contains(plugin.getId())) {
-				initPlugin(app, plugin);
-			} else if (plugin.isActive()) {
-				plugin.setActive(false);
-				plugin.disable(app);
-			}
-		}
-	}
-
 	private static void initPlugin(OsmandApplication app, OsmandPlugin plugin) {
 		try {
 			if (plugin.init(app, null)) {
@@ -265,23 +250,6 @@ public abstract class OsmandPlugin {
 			}
 		}
 		return false;
-	}
-
-	public static boolean isPluginEnabledForMode(@NonNull OsmandApplication app, @NonNull OsmandPlugin plugin, @NonNull ApplicationMode mode) {
-		if (plugin.isMarketPlugin()) {
-			boolean marketEnabled = Version.isMarketEnabled(app);
-			boolean pckg = checkPluginPackage(app, plugin);
-			if ((Version.isDeveloperVersion(app) || !Version.isProductionVersion(app)) && !plugin.isPaid()) {
-				// for test reasons
-				marketEnabled = false;
-			}
-			if (pckg || (!marketEnabled && !plugin.isPaid())) {
-				return pckg && !app.getSettings().getPluginsForMode(mode).contains("-" + plugin.getId());
-			}
-			return false;
-		} else {
-			return app.getSettings().getEnabledPluginsForMode(mode).contains(plugin.getId());
-		}
 	}
 
 	public static void checkInstalledMarketPlugins(@NonNull OsmandApplication app, @Nullable Activity activity) {

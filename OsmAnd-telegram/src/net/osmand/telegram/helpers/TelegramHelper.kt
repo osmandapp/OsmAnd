@@ -926,9 +926,8 @@ class TelegramHelper private constructor() {
 		}
 	}
 
-	fun sendNewTextLocation(shareInfo: TelegramSettings.ShareChatInfo, location: LocationMessages.BufferMessage) {
+	fun sendNewTextLocation(shareInfo: TelegramSettings.ShareChatInfo, content: TdApi.InputMessageText) {
 		shareInfo.updateTextMessageId = 1
-		val content = OsmandLocationUtils.getTextMessageContent(shareInfo.updateTextMessageId, location)
 		if (!shareInfo.pendingTextMessage) {
 			shareInfo.pendingTextMessage = true
 			shareInfo.pendingTdLibText++
@@ -940,8 +939,7 @@ class TelegramHelper private constructor() {
 		}
 	}
 
-	fun editTextLocation(shareInfo: TelegramSettings.ShareChatInfo, location: LocationMessages.BufferMessage) {
-		val content = OsmandLocationUtils.getTextMessageContent(shareInfo.updateTextMessageId, location)
+	fun editTextLocation(shareInfo: TelegramSettings.ShareChatInfo, content: TdApi.InputMessageText) {
 		if (shareInfo.currentTextMessageId!=-1L) {
 			shareInfo.pendingTdLibText++
 			shareInfo.lastSendTextMessageTime = (System.currentTimeMillis() / 1000).toInt()

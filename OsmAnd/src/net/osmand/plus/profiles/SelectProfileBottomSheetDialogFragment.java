@@ -11,12 +11,16 @@ import android.view.View;
 import android.view.View.OnClickListener;
 
 import net.osmand.PlatformUtil;
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.LongDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.settings.MainSettingsFragment;
+import net.osmand.plus.settings.NavigationFragment;
+import net.osmand.plus.settings.ProfileAppearanceFragment;
 
 import org.apache.commons.logging.Log;
 
@@ -44,7 +48,6 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 
 	private final List<ProfileDataObject> profiles = new ArrayList<>();
 
-	private List<IconResWithDescr> icons;
 	private String selectedItemKey;
 	private String selectedIconRes;
 
@@ -62,7 +65,6 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 				profiles.addAll(SettingsProfileFragment.getBaseProfiles(app));
 			} else if (type.equals(TYPE_ICON)) {
 				selectedIconRes = args.getString(SELECTED_ICON, "");
-				icons = getProfileIcons();
 			} else {
 				LOG.error("Check intent data!");
 				dismiss();
@@ -90,7 +92,7 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
-
+		int activeColorRes = nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
 		if (type.equals(TYPE_BASE_APP_PROFILE)) {
 			items.add(new TitleItem(getString(R.string.select_base_profile_dialog_title)));
 			items.add(new LongDescriptionItem(getString(R.string.select_base_profile_dialog_message)));
@@ -101,15 +103,14 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 				final Drawable drawableIcon;
 				if (isSelected) {
 					drawableIcon = getMyApplication().getUIUtilities()
-						.getIcon(profile.getIconRes(), nightMode
-							? R.color.active_color_primary_dark
-							: R.color.active_color_primary_light);
+						.getIcon(profile.getIconRes(), activeColorRes);
 				} else {
 					drawableIcon = getMyApplication().getUIUtilities()
 						.getIcon(profile.getIconRes(), R.color.icon_color_default_light);
 				}
 
 				items.add(new BottomSheetItemWithCompoundButton.Builder()
+					.setCompoundButtonColorId(activeColorRes)
 					.setChecked(isSelected)
 					.setButtonTintList(isSelected
 						? ColorStateList.valueOf(getResolvedColor(getActiveColorId()))
@@ -124,9 +125,7 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 							if (listener == null) {
 								getListener();
 							}
-							if (listener != null) {
-								listener.onSelectedType(pos, "");
-							}
+							listener.onSelectedType(pos, "");
 							dismiss();
 						}
 					})
@@ -135,6 +134,7 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 
 		} else if (type.equals(TYPE_NAV_PROFILE)){
 			items.add(new TitleItem(getString(R.string.select_nav_profile_dialog_title)));
+			items.add(new LongDescriptionItem(getString(R.string.select_nav_profile_dialog_message)));
 			for (int i = 0; i < profiles.size(); i++) {
 				final int pos = i;
 				final ProfileDataObject profile = profiles.get(i);
@@ -142,15 +142,14 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 				final Drawable drawableIcon;
 				if (isSelected) {
 					drawableIcon = getMyApplication().getUIUtilities()
-						.getIcon(profile.getIconRes(), nightMode
-							? R.color.active_color_primary_dark
-							: R.color.active_color_primary_light);
+						.getIcon(profile.getIconRes(), activeColorRes);
 				} else {
 					drawableIcon = getMyApplication().getUIUtilities()
 						.getIcon(profile.getIconRes(), R.color.icon_color_default_light);
 				}
 
 				items.add(new BottomSheetItemWithCompoundButton.Builder()
+					.setCompoundButtonColorId(activeColorRes)
 					.setChecked(isSelected)
 					.setButtonTintList(isSelected
 						? ColorStateList.valueOf(getResolvedColor(getActiveColorId()))
@@ -165,9 +164,7 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 							if (listener == null) {
 								getListener();
 							}
-							if (listener != null) {
-								listener.onSelectedType(pos, "");
-							}
+							listener.onSelectedType(pos, "");
 							dismiss();
 						}
 					})
@@ -175,10 +172,10 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 			}
 		} else if (type.equals(TYPE_ICON)) {
 			items.add(new TitleItem(getString(R.string.select_icon_profile_dialog_title)));
-			for (final IconResWithDescr icon : icons) {
+			for (final ApplicationMode.ProfileIcons icon : ApplicationMode.ProfileIcons.values()) {
 				Drawable drawableIcon;
-				boolean isSelected = icon.resStringId.equals(selectedIconRes);
-				int iconRes = icon.resId;
+				boolean isSelected = icon.getResStringId().equals(selectedIconRes);
+				int iconRes = icon.getResId();
 				if (isSelected) {
 					drawableIcon = getMyApplication().getUIUtilities()
 						.getIcon(iconRes, nightMode
@@ -190,11 +187,12 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 				}
 
 				items.add(new BottomSheetItemWithCompoundButton.Builder()
-					.setChecked(icon.resStringId.equals(selectedIconRes))
+						.setCompoundButtonColorId(activeColorRes)
+						.setChecked(icon.getResStringId().equals(selectedIconRes))
 					.setButtonTintList(isSelected
 						? ColorStateList.valueOf(getResolvedColor(getActiveColorId()))
 						: null)
-					.setTitle(getMyApplication().getString(icon.titleId))
+						.setTitle(getMyApplication().getString(icon.getTitleId()))
 					.setIcon(drawableIcon)
 					.setLayoutId(R.layout.bottom_sheet_item_with_radio_btn)
 					.setOnClickListener(new OnClickListener() {
@@ -203,9 +201,7 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 							if(listener == null) {
 								getListener();
 							}
-							if (listener != null) {
-								listener.onSelectedType(icon.resId, icon.resStringId);
-							}
+							listener.onSelectedType(icon.getResId(), icon.getResStringId());
 							dismiss();
 						}
 					})
@@ -215,13 +211,15 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 		}
 	}
 
-
 	private void getListener() {
 		FragmentActivity activity = getActivity();
 		if (activity != null) {
 			FragmentManager fragmentManager = activity.getSupportFragmentManager();
 			EditProfileFragment editProfileFragment = (EditProfileFragment) fragmentManager.findFragmentByTag(EditProfileFragment.TAG);
 			SettingsProfileFragment settingsProfileFragment = (SettingsProfileFragment) fragmentManager.findFragmentByTag(SettingsProfileFragment.class.getName());
+			NavigationFragment navigationFragment = (NavigationFragment) fragmentManager.findFragmentByTag(NavigationFragment.class.getName());
+			ProfileAppearanceFragment profileAppearanceFragment = (ProfileAppearanceFragment) fragmentManager.findFragmentByTag(ProfileAppearanceFragment.TAG);
+			MainSettingsFragment mainSettingsFragment = (MainSettingsFragment) fragmentManager.findFragmentByTag(MainSettingsFragment.TAG);
 
 			if (editProfileFragment != null) {
 				switch (type) {
@@ -230,6 +228,7 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 						break;
 					case TYPE_NAV_PROFILE:
 						listener = editProfileFragment.getNavProfileListener();
+
 						break;
 					case TYPE_ICON:
 						listener = editProfileFragment.getIconListener();
@@ -237,56 +236,17 @@ public class SelectProfileBottomSheetDialogFragment extends MenuBottomSheetDialo
 				}
 			} else if (settingsProfileFragment != null) {
 				listener = settingsProfileFragment.getBaseProfileListener();
+			} else if (navigationFragment != null) {
+				listener = navigationFragment.getNavProfileListener();
+			} else if (profileAppearanceFragment != null) {
+				listener = profileAppearanceFragment.getParentProfileListener();
+			} else if (mainSettingsFragment != null) {
+				listener = mainSettingsFragment.getParentProfileListener();
 			}
 		}
 	}
 
-	private List<IconResWithDescr> getProfileIcons() {
-		List<IconResWithDescr> icons = new ArrayList<>();
-		icons.add(new IconResWithDescr(R.drawable.ic_action_car_dark, R.string.app_mode_car, "ic_action_car_dark", false));
-		icons.add(new IconResWithDescr(R.drawable.ic_action_taxi, R.string.app_mode_taxi, "ic_action_taxi", false));
-		icons.add(new IconResWithDescr(R.drawable.ic_action_truck_dark, R.string.app_mode_truck, "ic_action_truck_dark", false));
-		icons.add(new IconResWithDescr(R.drawable.ic_action_shuttle_bus, R.string.app_mode_shuttle_bus, "ic_action_shuttle_bus", false));
-		icons.add(new IconResWithDescr(R.drawable.ic_action_bus_dark, R.string.app_mode_bus, "ic_action_bus_dark",false));
-		icons.add(new IconResWithDescr(R.drawable.ic_action_subway, R.string.app_mode_subway, "ic_action_subway", false));
-		icons.add(new IconResWithDescr(R.drawable.ic_action_motorcycle_dark, R.string.app_mode_motorcycle, "ic_action_motorcycle_dark", false));
-		icons.add(new IconResWithDescr(R.drawable.ic_action_bicycle_dark, R.string.app_mode_bicycle, "ic_action_bicycle_dark", false));
-		icons.add(new IconResWithDescr(R.drawable.ic_action_horse, R.string.app_mode_horse, "ic_action_horse", false));
-		icons.add(new IconResWithDescr(R.drawable.ic_action_pedestrian_dark, R.string.app_mode_pedestrian,"ic_action_pedestrian_dark", false));
-		icons.add(new IconResWithDescr(R.drawable.ic_action_trekking_dark, R.string.app_mode_hiking, "ic_action_trekking_dark", false));
-		icons.add(new IconResWithDescr(R.drawable.ic_action_skiing, R.string.app_mode_skiing, "ic_action_skiing", false));
-		icons.add(new IconResWithDescr(R.drawable.ic_action_sail_boat_dark, R.string.app_mode_boat, "ic_action_sail_boat_dark", false));
-		icons.add(new IconResWithDescr(R.drawable.ic_action_aircraft, R.string.app_mode_aircraft, "ic_action_aircraft", false));
-		icons.add(new IconResWithDescr(R.drawable.ic_action_helicopter, R.string.app_mode_helicopter, "ic_action_helicopter", false));
-		icons.add(new IconResWithDescr(R.drawable.ic_action_personal_transporter, R.string.app_mode_personal_transporter, "ic_action_personal_transporter", false));
-		icons.add(new IconResWithDescr(R.drawable.ic_action_monowheel, R.string.app_mode_monowheel, "ic_action_monowheel", false));
-		icons.add(new IconResWithDescr(R.drawable.ic_action_scooter, R.string.app_mode_scooter, "ic_action_scooter", false));
-		icons.add(new IconResWithDescr(R.drawable.ic_action_ufo, R.string.app_mode_ufo, "ic_action_ufo", false));
-		icons.add(new IconResWithDescr(R.drawable.ic_action_offroad, R.string.app_mode_offroad, "ic_action_offroad", false));
-		icons.add(new IconResWithDescr(R.drawable.ic_action_campervan, R.string.app_mode_campervan, "ic_action_campervan", false));
-		icons.add(new IconResWithDescr(R.drawable.ic_action_camper, R.string.app_mode_camper, "ic_action_camper", false));
-		icons.add(new IconResWithDescr(R.drawable.ic_action_pickup_truck, R.string.app_mode_pickup_truck, "ic_action_pickup_truck", false));
-		icons.add(new IconResWithDescr(R.drawable.ic_action_wagon, R.string.app_mode_wagon, "ic_action_wagon", false));
-		icons.add(new IconResWithDescr(R.drawable.ic_action_utv, R.string.app_mode_utv, "ic_action_utv", false));
-		return icons;
-	}
-
-	interface SelectProfileListener {
+	public interface SelectProfileListener {
 		void onSelectedType(int pos, String stringRes);
 	}
-
-	private class IconResWithDescr {
-		private int resId;
-		private int titleId;
-		private String resStringId;
-		private boolean isSelected;
-
-		public IconResWithDescr(int resId, int titleId, String resStringId, boolean isSelected) {
-			this.resId = resId;
-			this.titleId = titleId;
-			this.isSelected = isSelected;
-			this.resStringId = resStringId;
-		}
-	}
-
 }

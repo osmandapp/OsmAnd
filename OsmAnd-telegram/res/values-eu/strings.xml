@@ -186,4 +186,5 @@
     <string name="shared_string_apply">Aplikatu</string>
     <string name="set_time_timeline_descr">Hautatu bistaratzeko denbora</string>
     <string name="start_end_date">Hasiera — Amaiera data</string>
+    <string name="shared_string_enabled">Gaituta</string>
 </resources>

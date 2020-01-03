@@ -326,7 +326,6 @@ Tam prireiks {1} MB pastoviam saugojimui.
     <string name="create_poi_link_to_osm_doc">
         <u>Online OSM</u> žemėlapis su nuotraukomis.</string>
     <string name="error_doing_search">Įvyko klaida vykdant paiešką be interneto.</string>
-    <string name="search_offline_geo_error">Nepavyko suprasti geo poreikio \'%s\'.</string>
     <string name="search_osm_offline">Ieškoti adreso parsiųstuose žemėlapiuose</string>
     <string name="system_locale">Sistemos</string>
     <string name="preferred_locale_descr">Pasirinkite programos kalbą (pakeitę kalbą iš naujo aktyvuokite OsmAnd).</string>
@@ -765,7 +764,6 @@ Tam prireiks {1} MB pastoviam saugojimui.
     <string name="bg_service_sleep_mode_off">Įjungti\n foninį režimą</string>
     <string name="bg_service_sleep_mode_on">Išjungti\n foninį režimą</string>
     <string name="map_widget_show_ruler">Liniuotė</string>
-    <string name="gps_wakeup_interval">GPS pabudimo intervalas: %s</string>
     <string name="int_continuosly">Tolydžiai</string>
     <string name="email">el. paštas</string>
     <string name="layer_map_appearance">Konfigūruoti ekraną</string>
@@ -1074,8 +1072,8 @@ Tam prireiks {1} MB pastoviam saugojimui.
     <string name="android_19_location_disabled">Pradedant Android 4.4 versija jūs nebegalėsite parsisųsti ir atnaujinti žemėlapių ankstesnėse saugojimo vietose (%s). Ar norite pakeisti saugyklos vietą ir į ją nukopijuoti visus failus?
 \n Pastaba: Seni failai išliks kur buvę (galima bus ištrinti rankiniu būdu).
 \n Pastaba: dalintis tais pačiais failais tarp OsmAnd ir OsmAnd+ nebus galima.</string>
-    <string name="copying_osmand_one_file_descr">Kopijuojami failai (%/s) į naują saugojimo vietą…</string>
-    <string name="copying_osmand_files_descr">OsmAnd failai kopijuojami į naują vietą (%/s)…</string>
+    <string name="copying_osmand_one_file_descr">Kopijuojami failai (%s) į naują saugojimo vietą…</string>
+    <string name="copying_osmand_files_descr">OsmAnd failai kopijuojami į naują vietą (%s)…</string>
     <string name="copying_osmand_files">Kopijuojami OsmAnd failai…</string>
     <string name="keep_and_add_destination_point">Įtraukti kaip sekantį kelionės tikslą</string>
     <string name="select_gpx">Pasirinkti GPX…</string>
@@ -1969,7 +1967,6 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="osm_live_subscription_desc">Prenumerata įgalins savaitinius, kasdienius ar kasvalandinius atnaujinimus ir neribotą parsiuntimų kiekį visiems pasaulio žemėlapiams.</string>
     <string name="get_it">Gauti</string>
     <string name="get_for">Gauti už %1$s</string>
-    <string name="get_for_month">Gauti už %1$s kas mėnesį</string>
     <string name="osm_live_banner_desc">Gaukite neribotą kiekį žemėlapių parsiuntimų ir atnaujinimus dažniau nei kas mėnesį: kas savaitę, kas dieną ar kas valandą.</string>
     <string name="osmand_plus_banner_desc">Neribotas žemėlapių parsiuntimas, atnaujinimai ir Wikipedia įskiepis.</string>
     <string name="si_mi_meters">Mylios/metrai</string>
@@ -2480,7 +2477,6 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="daily_map_updates">Žemėlapis atnaujinamas: kas valandą</string>
     <string name="in_app_purchase_desc">Vienkartinis mokestis</string>
     <string name="purchase_unlim_title">Pirkti - %1$s</string>
-    <string name="purchase_subscription_title">Prenumeruoti - %1$s</string>
     <string name="unlimited_downloads">Neriboti atsisiuntimai</string>
     <string name="unlock_all_features">Atrakinti visas OsmAnd funkcijas</string>
     <string name="purchase_dialog_title">Pasirinkite planą</string>
@@ -2524,7 +2520,6 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="choose_file_type">Pasirinkite failo tipą</string>
     <string name="all_data">Visi duomenys</string>
     <string name="osm_notes">OSM pastabos</string>
-    <string name="coordinate_input_accuracy">%1$d skaitmenų</string>
     <string name="marker_save_as_track">Išsaugoti kaip GPX failą</string>
     <string name="shared_string_gpx_files">GPX failai</string>
     <string name="import_track">Importuoti GPX failą</string>

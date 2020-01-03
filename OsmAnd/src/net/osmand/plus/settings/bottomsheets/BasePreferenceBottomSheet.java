@@ -21,6 +21,7 @@ public abstract class BasePreferenceBottomSheet extends MenuBottomSheetDialogFra
 	private String prefId;
 	private Preference preference;
 	private ApplicationMode appMode;
+	private boolean profileDependent;
 
 	protected void setAppMode(ApplicationMode appMode) {
 		this.appMode = appMode;
@@ -93,5 +94,13 @@ public abstract class BasePreferenceBottomSheet extends MenuBottomSheetDialogFra
 			}
 		}
 		return null;
+	}
+
+	public void setProfileDependent(boolean profileDependent) {
+		this.profileDependent = profileDependent;
+	}
+
+	public boolean isProfileDependent() {
+		return profileDependent;
 	}
 }

@@ -30,18 +30,38 @@
 				android:src="@drawable/ic_action_mode_back"
 				android:tint="?attr/default_icon_color" />
 
-			<net.osmand.plus.widgets.TextViewEx
-				android:id="@+id/toolbar_title"
+			<LinearLayout
 				android:layout_width="0dp"
 				android:layout_height="wrap_content"
+				android:layout_gravity="center_vertical"
 				android:layout_weight="1"
-				android:letterSpacing="@dimen/text_button_letter_spacing"
-				android:paddingLeft="@dimen/content_padding"
-				android:paddingRight="@dimen/content_padding"
-				android:textColor="?android:textColorPrimary"
-				android:textSize="@dimen/dialog_header_text_size"
-				osmand:typeface="@string/font_roboto_medium"
-				tools:text="@string/routing_settings_2" />
+				android:background="?attr/card_and_list_background_basic"
+				android:orientation="vertical">
+
+				<net.osmand.plus.widgets.TextViewEx
+					android:id="@+id/toolbar_title"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:letterSpacing="@dimen/text_button_letter_spacing"
+					android:paddingLeft="@dimen/content_padding"
+					android:paddingRight="@dimen/content_padding"
+					android:textColor="?android:textColorPrimary"
+					android:textSize="@dimen/dialog_header_text_size"
+					osmand:typeface="@string/font_roboto_medium"
+					tools:text="@string/routing_settings_2" />
+
+				<TextView
+					android:id="@+id/toolbar_subtitle"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:ellipsize="end"
+					android:maxLines="2"
+					android:paddingLeft="@dimen/content_padding"
+					android:paddingRight="@dimen/content_padding"
+					android:textAppearance="@style/TextAppearance.ContextMenuSubtitle"
+					android:visibility="gone"
+					tools:text="Some description" />
+			</LinearLayout>
 
 			<include
 				layout="@layout/profile_button_small"

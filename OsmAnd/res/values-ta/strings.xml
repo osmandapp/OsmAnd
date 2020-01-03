@@ -279,7 +279,6 @@
     <string name="in_app_purchase_desc">ஒரு முறை பணம் செலுத்துதல்</string>
     <string name="in_app_purchase_desc_ex">ஒருமுறை வாங்கிய பிறகு, அது உங்களுக்கு நிரந்தரமாக கிடைக்கும்.</string>
     <string name="purchase_unlim_title">வாங்க -%1$s</string>
-    <string name="purchase_subscription_title">சந்தாவிற்கு - %$s</string>
     <string name="wikivoyage_offline">விக்கிவோயாஜ் இணையாநிலை</string>
     <string name="unlimited_downloads">வரம்பற்ற பதிவிறக்கங்கள்</string>
     <string name="wikipedia_offline">விக்கிப்பீடியா இணையாநிலை</string>
@@ -396,7 +395,6 @@
     <string name="osm_live_subscription_desc">சந்தா உலகளாவிய அனைத்து வரைபடங்களுக்கான மணிநேர, தினசரி, வாராந்திர மேம்படுத்தல்கள் மற்றும் வரம்பற்ற பதிவிறக்கங்களை இயக்குகிறது.</string>
     <string name="get_it">அதைப் பெறுங்கள்</string>
     <string name="get_for">%1$s ஐப் பெறுக</string>
-    <string name="get_for_month">%1$s மாதத்திற்குப் பெறுக</string>
     <string name="osm_live_banner_desc">வரம்பற்ற வரைபட பதிவிறக்கங்களைப் பெறுக, மேலும் ஒரு மாதத்திற்கு ஒருமுறை விட மேம்படுத்துங்கள்: வாராந்திர, தினசரி அல்லது மணிநேரம்.</string>
     <string name="osmand_plus_banner_desc">வரம்பற்ற வரைபட பதிவிறக்கங்கள், புதுப்பிப்புகள் மற்றும் விக்கிபீடியா சொருகி.</string>
     <string name="si_mi_meters">மைல்கள் / மீட்டர்</string>
@@ -1113,7 +1111,6 @@
     <string name="create_poi_link_to_osm_doc">
         <u>ஆன்லைன் OSM</u>படங்களுடன் வரைபட வகைப்பாடு.</string>
     <string name="error_doing_search">ஆஃப்லைன் தேடலைச் செயல்படுத்த முடியவில்லை.</string>
-    <string name="search_offline_geo_error">புவி நோக்கத்தை \'%s\' ஐப் பாகுபடுத்த முடியவில்லை.</string>
     <string name="search_osm_offline">புவி இருப்பிடத்தைத் தேடு</string>
     <string name="system_locale">முறை</string>
     <string name="preferred_locale_descr">காட்சி மொழியை தேர்ந்தெடு (OsmAnd மறுதொடக்கம் செய்யப்படும் போது நடைமுறைக்கு வரும்).

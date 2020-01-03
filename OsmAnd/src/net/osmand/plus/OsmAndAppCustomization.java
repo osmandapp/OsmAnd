@@ -13,9 +13,10 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.widget.ArrayAdapter;
 
+import net.osmand.AndroidUtils;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
-import net.osmand.aidl.OsmandAidlApi;
+import net.osmand.aidl.ConnectedApp;
 import net.osmand.data.LocationPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.PluginsActivity;
@@ -409,10 +410,11 @@ public class OsmAndAppCustomization {
 						intent.addFlags(item.flags);
 					}
 					final Intent finalIntent = intent;
+					int iconId = AndroidUtils.getDrawableId(app, item.iconName);
 					adapter.addItem(new ContextMenuItem.ItemBuilder()
 							.setId(item.getId())
 							.setTitle(item.name)
-							.setIcon(getIconId(item.iconName))
+							.setIcon(iconId != 0 ? iconId : ContextMenuItem.INVALID_ID)
 							.setListener(new ContextMenuAdapter.ItemClickListener() {
 								@Override
 								public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked, int[] viewCoordinates) {
@@ -432,7 +434,7 @@ public class OsmAndAppCustomization {
 			JSONObject allItems = new JSONObject(app.getSettings().API_NAV_DRAWER_ITEMS_JSON.get());
 			for (Iterator<?> it = allItems.keys(); it.hasNext(); ) {
 				String appPackage = (String) it.next();
-				OsmandAidlApi.ConnectedApp connectedApp = app.getAidlApi().getConnectedApp(appPackage);
+				ConnectedApp connectedApp = app.getAidlApi().getConnectedApp(appPackage);
 				if (connectedApp != null && connectedApp.isEnabled()) {
 					JSONArray jArray = allItems.getJSONArray(appPackage);
 					List<NavDrawerItem> list = new ArrayList<>();
@@ -452,14 +454,6 @@ public class OsmAndAppCustomization {
 			e.printStackTrace();
 		}
 		return res;
-	}
-
-	private int getIconId(@Nullable String iconName) {
-		if (!TextUtils.isEmpty(iconName)) {
-			int id = app.getResources().getIdentifier(iconName, "drawable", app.getPackageName());
-			return id == 0 ? -1 : id;
-		}
-		return -1;
 	}
 
 	@NonNull

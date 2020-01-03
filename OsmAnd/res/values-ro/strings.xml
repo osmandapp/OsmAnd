@@ -74,7 +74,6 @@
     <string name="map_widget_transparent">Skin transparent</string>
     <string name="bg_service_sleep_mode_off">Activează\n mod standby</string>
     <string name="bg_service_sleep_mode_on">Oprește\n mod standby</string>
-    <string name="gps_wakeup_interval">Interval menținere GPS activ: %s</string>
     <string name="int_continuosly">Continuu</string>
     <string name="screen_is_locked">Pentru deblocare ecran apăsați iconița în formă de lacăt</string>
     <string name="map_widget_top_text">Numele străzii</string>
@@ -429,7 +428,6 @@
     <string name="level_to_switch_vector_raster">Nivel zoom hartă vectorială</string>
     <string name="create_poi_link_to_osm_doc">Clasificare hartă <u>OSM online</u> cu imagini</string>
     <string name="error_doing_search">Eroare la căutarea în mod offline</string>
-    <string name="search_offline_geo_error">Nu s-a putut analiza informația geo \'%s\'</string>
     <string name="search_osm_offline">Căutare adrese folosind hărți offline</string>
     <string name="system_locale">Conform dispozitiv</string>
     <string name="preferred_locale_descr">Selectați limba de afișare (are efect atunci când OsmAnd este repornit).</string>
@@ -984,7 +982,7 @@
     <string name="clear_destination">Șterge destinația</string>
     <string name="street_name">Stradă</string>
     <string name="hno">Număr casă</string>
-    <string name="choose_osmand_theme_descr">Alege tema aplicației</string>
+    <string name="choose_osmand_theme_descr">Personalizați aspectul aplicației.</string>
     <string name="choose_osmand_theme">Temă aplicație</string>
     <string name="accessibility_options">Opțiuni accesibilitate</string>
     <string name="select_address_activity">Selectează adresa</string>
@@ -1285,7 +1283,7 @@
     <string name="routing_attr_avoid_shuttle_train_description">Evitați utilizarea trenurilor de transfer</string>
     <string name="no_updates_available">Nu sunt actualizări disponibile</string>
     <string name="rendering_attr_currentTrackWidth_name">Lățime GPX</string>
-    <string name="download_live_updates">Actualizări in timp real</string>
+    <string name="download_live_updates">Actualizări în timp real</string>
     <string name="rendering_value_boldOutline_name">Bold contur</string>
     <string name="av_locations">Locații</string>
     <string name="av_locations_descr">Fișier GPX cu notițe de locații.</string>
@@ -1376,7 +1374,7 @@
     <string name="context_menu_item_delete_waypoint">Ștergi punctul de referință GPX?</string>
     <string name="context_menu_item_edit_waypoint">Editează punctul de referință GPX</string>
     <string name="shared_string_location">Locație</string>
-    <string name="share_osm_edits_subject">Editări OSM împărțite prin OsmAnd</string>
+    <string name="share_osm_edits_subject">Editări OSM distribuite prin OsmAnd</string>
     <string name="lang_nds">Minim în limba germană</string>
     <string name="lang_mk">Macedonian</string>
     <string name="read_more">Citește mai multe</string>
@@ -1683,7 +1681,7 @@
     <string name="by_type">După tip</string>
     <string name="looking_for_tracks_with_waypoints">"Se caută  trasee cu puncte intermediare"</string>
     <string name="shared_string_more_without_dots">Mai mult</string>
-    <string name="appearance_on_the_map">Apariția pe hartă</string>
+    <string name="appearance_on_the_map">Aspectul pe hartă</string>
     <string name="add_track_to_markers_descr">Selectați un traseu pentru a-i adăuga un punct intermediar la marcaje.</string>
     <string name="add_favourites_group_to_markers_descr">Selectați o categorie de Favorite pentru a fi adaugate la marcaje.</string>
     <string name="shared_string_gpx_waypoints">Puncte intermediare traseu</string>
@@ -1706,8 +1704,6 @@
     <string name="shared_string_left">Stânga</string>
     <string name="show_number_pad">Arată panoul cu numere</string>
     <string name="shared_string_paste">Lipește</string>
-    <string name="coordinate_input_accuracy_description">Schimbă automat la câmpul urmator dupa ce introduceți %1$d digiți zecimali.</string>
-    <string name="coordinate_input_accuracy">%1$d digiți</string>
     <string name="go_to_next_field">Câmpul următor</string>
     <string name="rename_marker">Redenumește marcaj</string>
     <string name="tap_on_map_to_hide_interface_descr">O atingere pe hartă activează butoanele de control și widgeturi-le.</string>
@@ -1733,7 +1729,7 @@
     <string name="context_menu_item_modify_note">Modifică nota OMS</string>
     <string name="make_round_trip_descr">Copiază punctul de pornire ca destinație.</string>
     <string name="coordinates_format">Format coordonate</string>
-    <string name="use_system_keyboard">Foloseste tastatura sistemului</string>
+    <string name="use_system_keyboard">Folosește tastatura sistemului</string>
     <string name="fast_coordinates_input_descr">Alege formatul coordonatelor. Puteți oricând schimba din \'Opțiuni\'.</string>
     <string name="fast_coordinates_input">Introducere rapidă a coordonatelor</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Evită drumurile cu polei și traversarile râurilor</string>
@@ -1819,7 +1815,7 @@
     <string name="favorite_group_name">Numele grupului</string>
     <string name="change_color">Schimbă culoarea</string>
     <string name="edit_name">Modifică numele</string>
-    <string name="animate_my_location">Animeaza Poziția Mea</string>
+    <string name="animate_my_location">Animează poziția mea</string>
     <string name="shared_string_overview">Prezentare generală</string>
     <string name="select_street">Selectează strada</string>
     <string name="shared_string_in_name">în %1$s</string>
@@ -1893,7 +1889,6 @@
     <string name="get_unlimited_access">Obține acces nelimitat</string>
     <string name="wikivoyage_travel_guide">Ghiduri de călătorie</string>
     <string name="purchase_unlim_title">Cumpără - %1$s</string>
-    <string name="purchase_subscription_title">Abonează-te - %1$s</string>
     <string name="unlimited_downloads">Descărcări nelimitate</string>
     <string name="unlock_all_features">Deblochează toate funcționalitățile OsmAnd</string>
     <string name="purchase_dialog_title">Alege planul</string>
@@ -1988,7 +1983,7 @@
     <string name="map_mode">Mod hartă</string>
     <string name="rendering_value_thin_name">Subțire</string>
     <string name="rendering_value_medium_name">Mediu</string>
-    <string name="report">Raportează</string>
+    <string name="report">Raport</string>
     <string name="shared_string_move_down">Mută ↓</string>
     <string name="finish_navigation">Termină navigarea</string>
     <string name="avoid_road">Evită drumul</string>
@@ -2131,8 +2126,8 @@
     <string name="routing_attr_avoid_tram_description">Evită tramvaiele</string>
     <string name="routing_attr_avoid_bus_name">Evită autobuzele</string>
     <string name="routing_attr_avoid_bus_description">Evită autobuzele și troleibuzele</string>
-    <string name="routing_attr_avoid_share_taxi_name">Evită taxi-urile partajate</string>
-    <string name="routing_attr_avoid_share_taxi_description">Evită taxi-urile partajate</string>
+    <string name="routing_attr_avoid_share_taxi_name">Evită taxi-urile</string>
+    <string name="routing_attr_avoid_share_taxi_description">Evită taxi-urile</string>
     <string name="routing_attr_avoid_train_name">Evită trenurile</string>
     <string name="routing_attr_avoid_train_description">Evită trenurile</string>
     <string name="routing_attr_avoid_subway_name">Evită metro-urile</string>
@@ -2209,7 +2204,7 @@
     <string name="quick_action_show_hide_gpx_tracks">Afișați/Ascundeți traseele GPX</string>
     <string name="quick_action_gpx_tracks_hide">Ascundeți traseele GPX</string>
     <string name="quick_action_gpx_tracks_show">Afișați traseele GPX</string>
-    <string name="add_destination_query">Vă rugăm să adăugați destinația mai întâi</string>
+    <string name="add_destination_query">Selectați destinația mai întâi</string>
     <string name="previous_route">Ruta anterioară</string>
     <string name="add_home">Adăugați acasă</string>
     <string name="add_work">Adăugați serviciu</string>
@@ -2218,8 +2213,8 @@
     <string name="shared_string_capacity">Capacitate</string>
     <string name="shared_string_width">Lățime</string>
     <string name="shared_string_height">Înălțime</string>
-    <string name="add_destination_point">Adăugați destinație</string>
-    <string name="add_intermediate_point">Adăugați intermediar</string>
+    <string name="add_destination_point">Adăugați destinația</string>
+    <string name="add_intermediate_point">Adăugați punct intermediar</string>
     <string name="add_start_point">Adăugați punctul de plecare</string>
     <string name="intermediate_waypoint">Punct intermediar</string>
     <string name="transfers">Transferuri</string>
@@ -2231,7 +2226,7 @@
     <string name="avoid_roads_descr">Selectați un drum pe care doriți să îl evitați în timpul navigării, fie pe hartă, fie din lista de mai jos:</string>
     <string name="show_along_the_route">Afișați de-a lungul rutei</string>
     <string name="simulate_navigation">Simulați navigația</string>
-    <string name="choose_track_file_to_follow">Alegeți fișierul traseu pe care să-l urmăriți</string>
+    <string name="choose_track_file_to_follow">Alegeți un fisier ca traseu, pe care să-l urmăriți</string>
     <string name="voice_announcements">Anunțuri vocale</string>
     <string name="intermediate_destinations">Destinații intermediare</string>
     <string name="arrive_at_time">Sosire la %1$s</string>
@@ -2257,7 +2252,7 @@
     <string name="search_street">Căutați strada</string>
     <string name="start_search_from_city">Selectați mai întâi orașul</string>
     <string name="shared_string_restore">Restaurați</string>
-    <string name="ask_for_location_permission">"Acordați OsmAnd acces la locația  pentru a continua."</string>
+    <string name="ask_for_location_permission">"Acordați OsmAnd acces la locație  pentru a continua."</string>
     <string name="thank_you_for_feedback">Mulțumim pentru părerea dvs</string>
     <string name="increase_search_radius_to">Creșteți raza de căutare la %1$s</string>
     <string name="shared_string_world">Lume</string>
@@ -2321,7 +2316,7 @@
     <string name="visited_screens_collect_descr">Colectăm aceste date pentru a înțelege cele mai populare caracteristici ale lui OsmAnd.</string>
     <string name="privacy_and_security_change_descr">Făcând click pe \"Permiteți\" sunteți de acord cu %1$s</string>
     <string name="settings_privacy_and_security">Confidențialitate și Securitate</string>
-    <string name="settings_privacy_and_security_desc">Alegeți datele dvs. pentru a fi distribuite cu noi</string>
+    <string name="settings_privacy_and_security_desc">Alegeți datele dvs. pentru a fi distribuite</string>
     <string name="shared_string_no_thank_you">Nu, mulțumesc</string>
     <string name="shared_string_allow">Permiteți</string>
     <string name="profile_name_hint">Nume profil</string>
@@ -2343,20 +2338,20 @@
     <string name="profile_alert_need_routing_type_title">Selectați tipul navigației</string>
     <string name="profile_alert_need_profile_name_title">Introduceți numele profilului</string>
     <string name="profile_alert_need_profile_name_msg">Numele profilului nu trebuie să fie gol!</string>
-    <string name="profile_alert_duplicate_name_title">Nume duplicat</string>
+    <string name="profile_alert_duplicate_name_title">Nume deja existent</string>
     <string name="profile_alert_duplicate_name_msg">Există deja un profil cu un astfel de nume</string>
     <string name="profile_alert_cant_delete_base">Nu puteți șterge profile de bază OsmAnd</string>
     <string name="profile_alert_need_save_title">Salvați modificările</string>
-    <string name="profile_alert_need_save_msg">Trebuie să salvați modificările la profil înainte de a continua</string>
+    <string name="profile_alert_need_save_msg">"Trebuie să salvați modificările  profilului înainte de a continua"</string>
     <string name="profile_alert_delete_title">Ștergeți profilul</string>
     <string name="profile_alert_delete_msg">Sigur doriți să ștergeți profilul %s</string>
-    <string name="select_base_profile_dialog_title">Selectați profilul de bază</string>
+    <string name="select_base_profile_dialog_title">Selectați profilul cu care să începeți</string>
     <string name="select_nav_profile_dialog_title">Selectați tipul de navigare</string>
     <string name="base_profile_descr_car">Mașină, Camion, Motocicletă</string>
     <string name="base_profile_descr_bicycle">MTB, Moped, Cal</string>
     <string name="base_profile_descr_pedestrian">Plimbări, Drumeții, Alergare</string>
     <string name="base_profile_descr_boat">Navă, Canotaj, Navigație</string>
-    <string name="base_profile_descr_aircraft">Avion, Planare</string>
+    <string name="base_profile_descr_aircraft">Avion, Planor</string>
     <string name="routing_profile_geocoding">Geocodare</string>
     <string name="routing_profile_straightline">Linie dreaptă</string>
     <string name="osmand_default_routing">Rutare OsmAnd</string>
@@ -2382,7 +2377,7 @@
     <string name="minmax_speed_dialog_title">Setați viteza min/max</string>
     <string name="new_profile">Profil nou</string>
     <string name="apply_preference_to_all_profiles">Poţi aplica aceasta modificare pe toate profilele sau doar pe cel selectat</string>
-    <string name="shared_preference">Împărţit</string>
+    <string name="shared_preference">Partajat</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">Prefer drumurile nepavate</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">Prefer drumurile nepavate</string>
     <string name="layer_osm_edits">Editare OSM</string>
@@ -2396,13 +2391,316 @@
     <string name="quick_action_show_hide_hillshade">Afişează/ascunde umbrele</string>
     <string name="tts_initialization_error">Motorul text-to-speech nu porneste.</string>
     <string name="export_profile">Exportă profilul</string>
-    <string name="exported_osmand_profile">Profil osmand exportat</string>
-    <string name="overwrite_profile_q">Profil deja existent, îl rescrii\?</string>
+    <string name="exported_osmand_profile">Profil osmand exportat %1$s</string>
+    <string name="overwrite_profile_q">Profil \'%1$s\' deja existent, îl rescrii\?</string>
     <string name="export_profile_failed">Profilul nu se poate exporta.</string>
-    <string name="profile_import">Importa profilul:</string>
-    <string name="profile_import_descr">"Pentru a importa profilul, selectează fisierul din  aparat, si deschide-l cu OsmAnd."</string>
-    <string name="file_import_error">Eroare de incarcare al fisierului.</string>
-    <string name="file_imported_successfully">Fisier Incarcat cu succes.</string>
+    <string name="profile_import">Importare de profil:</string>
+    <string name="profile_import_descr">Pentru a importa profilul, selectați fișierul din dispozitiv, și deschideți-l cu OsmAnd.</string>
+    <string name="file_import_error">%1$s Eroare de incarcare al fisierului. %1$s: %2$s</string>
+    <string name="file_imported_successfully">%1$s Incarcat cu succes.</string>
     <string name="rendering_value_white_name">Alb</string>
     <string name="route_start_point">Punct de plecare</string>
+    <string name="unirs_render_descr">Modifica stilul implicit pentru a crește contrastul dintre drumurile pietonale și biciclete. Utilizează culori Mapnik.</string>
+    <string name="error_notification_desc">"Trimite o copie a  ecranului al acestei notificări către suport@osmand.net"</string>
+    <string name="coord_input_save_as_track_descr">Ai adăugat puncte%1$s. Scrie un nume de fișier și apăsați \"Salvează\".</string>
+    <string name="send_search_query_description">Cererea de căutare va fi trimisă la: \"%1$s\", împreună cu locația dumneavoastră.
+\nInformaţiile personale nu sunt colectate, doar datele de căutare necesare pentru a îmbunătăţi căutarea.</string>
+    <string name="send_search_query">Trimiţi interogare de căutare\?</string>
+    <string name="search_no_results_feedback">Nu există Rezultate\? Oferiți feedback</string>
+    <string name="more_transport_on_stop_hint">Mai multe optiuni de transport disponibile de la această oprire.</string>
+    <string name="keep_passed_markers_descr">Marcajele adăugate ca grup de Favorite sau GPX waypoints marcate vor rămâne pe hartă.Dacă grupul nu este activ, markerii vor dispărea din hartă.</string>
+    <string name="keep_passed_markers">Păstraţi markerii trecuţi pe hartă</string>
+    <string name="swap_start_and_destination">Schimba adresa de început și de sfârșit</string>
+    <string name="default_speed_dialog_msg">Utilizat pentru estimarea timpului de sosire pentru tipul necunoscut de drumuri și pentru a limita viteza pentru toate drumurile (ar putea schimba ruta)</string>
+    <string name="configure_profile_info">Setări pentru profil:</string>
+    <string name="configure_profile">Configurează profilul</string>
+    <string name="switch_profile">Schimbă profilul</string>
+    <string name="application_profile_changed">Profilul aplicației s-a modificat la \"%s\"</string>
+    <string name="logcat_buffer">Tampon logcat</string>
+    <string name="plugins_settings">Setări plugin</string>
+    <string name="shared_string_by_default">În mod implicit</string>
+    <string name="download_detailed_map">Descărcați harta detaliată %s, pentru a vizualiza această zonă.</string>
+    <string name="change_data_storage_full_description">Mută fişierele de date OsmAnd la noua destinaţie\?</string>
+    <string name="data_storage_preference_summary">%1$s %2$s</string>
+    <string name="data_storage_space_description">%1$s GB free (of %2$s GB)</string>
+    <string name="enter_path_to_folder">Introduceți calea către folder</string>
+    <string name="shared_string_select_folder">Folderul…</string>
+    <string name="paste_Osmand_data_folder_path">Lipește calea către dosar cu datele OsmAnd</string>
+    <string name="change_osmand_data_folder_question">Schimbați dosarul de date ale OsmAnd\?</string>
+    <string name="move_maps_to_new_destination">Mută la noua destinație</string>
+    <string name="internal_app_storage_description">Stocare internă, ascunsă de utilizator și alte aplicații, accesibilă exclusiv pentru OsmAnd</string>
+    <string name="change_data_storage_folder">Schimbați folderul de stocare a datelor</string>
+    <string name="rendering_attr_piste_type_snow_park_name">Parc</string>
+    <string name="rendering_attr_piste_type_sleigh_name">Sanie</string>
+    <string name="rendering_attr_piste_type_sled_name">Sanie</string>
+    <string name="rendering_attr_piste_type_hike_name">excursie pe jos</string>
+    <string name="rendering_attr_piste_type_connection_name">Conexiune</string>
+    <string name="rendering_attr_piste_type_skitour_name">traseu pentru skiori</string>
+    <string name="rendering_attr_piste_type_downhill_name">La vale</string>
+    <string name="rendering_attr_piste_type_nordic_name">Nordic</string>
+    <string name="routeInfo_piste_type_name">Tipul pistei</string>
+    <string name="rendering_attr_piste_difficulty_novice_name">Incepator</string>
+    <string name="rendering_attr_piste_difficulty_easy_name">Uşor</string>
+    <string name="rendering_attr_piste_difficulty_intermediate_name">Mai experimentat</string>
+    <string name="rendering_attr_piste_difficulty_advanced_name">Avansat</string>
+    <string name="rendering_attr_piste_difficulty_expert_name">Expert</string>
+    <string name="rendering_attr_piste_difficulty_freeride_name">Plimbare gratuită</string>
+    <string name="rendering_attr_piste_difficulty_extreme_name">Extrem</string>
+    <string name="rendering_attr_piste_difficulty_undefined_name">Nedefinit</string>
+    <string name="routeInfo_piste_difficulty_name">Pista dificilă</string>
+    <string name="avoid_in_routing_descr_">Evitaţi anumite rute şi tipuri de drumuri</string>
+    <string name="app_mode_utv">Alăturate</string>
+    <string name="rendering_attr_piste_difficulty_aerialway_name">Aerian</string>
+    <string name="rendering_attr_piste_difficulty_connection_name">Conexiune</string>
+    <string name="shared_string_calculate">Calculează</string>
+    <string name="shared_string_osmand_usage">Utilizarea OsmAnd</string>
+    <string name="shared_sting_tiles">Dale</string>
+    <string name="shared_string_maps">Hărţi</string>
+    <string name="shared_string_memory_tb_desc">%1$s TB</string>
+    <string name="shared_string_memory_gb_desc">%1$s GB</string>
+    <string name="shared_string_memory_mb_desc">%1$s MB</string>
+    <string name="shared_string_memory_kb_desc">%1$s kB</string>
+    <string name="track_storage_directory">Dosar de stocare trasee</string>
+    <string name="track_storage_directory_descrp">Traseele pot fi stocate în dosarul „rec”, lunar sau zilnic.</string>
+    <string name="store_tracks_in_rec_directory">Înregistrează traseele în dosarul „rec”</string>
+    <string name="store_tracks_in_daily_directories">Înregistrați traseele în dosarele zilnice</string>
+    <string name="store_tracks_in_daily_directories_descrp">Înregistrați trasee în sub-foldere în fiecare zi de înregistrare (cum ar fi 2018-01-01).</string>
+    <string name="shared_string_memory_used_tb_desc">Utilizat %1$s TB</string>
+    <string name="shared_string_memory_used_gb_desc">Utilizat %1$s GB</string>
+    <string name="shared_string_memory_used_mb_desc">Utilizat %1$s MB</string>
+    <string name="shared_string_memory_used_kb_desc">Utilizat %1$s kB</string>
+    <string name="contour_lines_and_hillshade">Hărți cu Linii de contur și relief</string>
+    <string name="routing_attr_prefer_unpaved_name">Prefer drumurile neasfaltate</string>
+    <string name="routing_attr_prefer_unpaved_description">Prefer drumurile neasfaltate.</string>
+    <string name="update_all_maps">Actualizați toate hărțile</string>
+    <string name="update_all_maps_q">Sigur actualizați toate hărțile (%1$d)\?</string>
+    <string name="release_3_5">• Setări actualizate pentru aplicații și profil: Setările sunt acum aranjate în funcție de tip. Fiecare profil poate fi personalizat separat.
+\n
+\n • Dialog nou de descărcare a hărții care sugerează o descărcare a hărții în timpul navigării
+\n
+\n • Rezolvări tematice de noapte
+\n
+\n • S-au rezolvat mai multe probleme de rutare în întreaga lume
+\n
+\n • Actualizare hartă de bază cu o rețea rutieră mai detaliată
+\n
+\n • Zonele inundate fixe din întreaga lume
+\n
+\n • Traseu de schi: se adaugă profilul de cota și complexitatea traseului la detaliile traseului
+\n
+\n • Alte bug-uri
+\n
+\n</string>
+    <string name="swap_two_places">Schimbă %1$s și %2$s</string>
+    <string name="track_saved">Traseu salvat</string>
+    <string name="empty_filename">Numele fișierului este gol</string>
+    <string name="shared_string_revert">Revenire</string>
+    <string name="clear_confirmation_msg">Șterge %1$s\?</string>
+    <string name="update_time">Timpul de actualizare</string>
+    <string name="last_map_change">Ultima schimbare a hărții: %s</string>
+    <string name="hourly">Din oră în oră</string>
+    <string name="daily">Zilnic</string>
+    <string name="weekly">Săptămânal</string>
+    <string name="morning">Dimineața</string>
+    <string name="updates_size">Mărimea actualizării</string>
+    <string name="number_of_contributors">Numărul de contribuabili</string>
+    <string name="number_of_edits">Numărul de modificări</string>
+    <string name="reports_for">Raport pentru</string>
+    <string name="night">Noaptea</string>
+    <string name="gpx_appearance">Aspect</string>
+    <string name="total_donations">Total donații</string>
+    <string name="quick_action_switch_night_mode">Mod nocturn</string>
+    <string name="base_profile_descr_public_transport">Toate tipurile de transport public</string>
+    <string name="edit_profile_screen_options_subtitle">Selectați opțiunile ecranului pentru profil</string>
+    <string name="turn_screen_on_sensor">Utilizați senzorul de proximitate</string>
+    <string name="external_input_device">Dispozitive externe de intrare</string>
+    <string name="sett_generic_ext_input">Tastatură</string>
+    <string name="temporary_conditional_routing">Luați în considerare limitările temporare</string>
+    <string name="route_parameters_info">Setări pentru rutare în profilul selectat \"%1$s\".</string>
+    <string name="units_and_formats">Unități și formate</string>
+    <string name="appearance">Aspect</string>
+    <string name="map_look_descr">Aspect hartă</string>
+    <string name="list_of_installed_plugins">Plugin-uri instalate</string>
+    <string name="general_settings_profile_descr">Temă aplicație, unități, regiune</string>
+    <string name="manage_profiles_descr">Creați, importați, editați profiluri</string>
+    <string name="manage_profiles">Gestionați profilurile de aplicație …</string>
+    <string name="osmand_settings_descr">Se aplică pentru întreaga aplicație</string>
+    <string name="osmand_settings">Setări OsmAnd</string>
+    <string name="copy_from_other_profile">Copiați din alt profil</string>
+    <string name="turn_screen_on">Porniți ecranul</string>
+    <string name="map_during_navigation_info">Harta în timpul navigării</string>
+    <string name="map_during_navigation">Harta în timpul navigării</string>
+    <string name="shared_string_other">Altele</string>
+    <string name="vehicle_parameters_descr">Greutate, înălțime, viteză</string>
+    <string name="vehicle_parameters">Parametrii vehicul</string>
+    <string name="voice_announces">Anunțuri vocale</string>
+    <string name="screen_alerts">Alerte ecran</string>
+    <string name="route_parameters_descr">Configurați parametrii rutei</string>
+    <string name="route_parameters">Parametrii rutei</string>
+    <string name="routing_attr_width_name">Limită lățime</string>
+    <string name="routing_attr_width_description">Specificați limita permisă pentru lățimea vehiculului pe rute.</string>
+    <string name="dialogs_and_notifications_title">Dialoguri și notificări</string>
+    <string name="shared_string_crash">Blocat</string>
+    <string name="last_launch_crashed">Ultima data OsnAnd s-a blocat. Varog săAjutati OsmAnd prin a trimite eroarea.</string>
+    <string name="app_mode_ufo">OZN</string>
+    <string name="release_3_4">"• Creaza profile: creează un profil personalizat pentru nevoile tale, cu o pictogramă și o culoare personalizate
+\n
+\n • Personalizați acum orice profil implicit și viteze min / max
+\n
+\n • A fost adăugat un widget pentru coordonatele actuale
+\n
+\n • Opțiuni adăugate pentru a afișa busola și o riglă  pe hartă
+\n
+\n • Remediat jurnalul de cale in  fundal
+\n
+\n • Descărcări de hărți de fundal îmbunătățite
+\n
+\n • Opțiunea „Întoarce ecranul” returnat
+\n
+\n • Remediat selectarea limbii Wikipedia
+\n
+\n • Remediat butonul busolei în timpul navigării
+\n
+\n • Alte bug-uri
+\n
+\n"</string>
+    <string name="app_mode_personal_transporter">Transportator personal</string>
+    <string name="app_mode_monowheel">Monoroată</string>
+    <string name="app_mode_scooter">Scuter</string>
+    <string name="precision_hdop_and_vdop">Precizie orizontală: %1$s, vertical: %2$s</string>
+    <string name="precision_hdop">Precizie orizontală:%s</string>
+    <string name="app_mode_offroad">Teren accidentat</string>
+    <string name="edit_profile_setup_title">Seteaza profilul</string>
+    <string name="edit_profile_setup_subtitle">Profilul păstrează propriile setări</string>
+    <string name="edit_profile_setup_map_subtitle">Selectați opțiunile hărții pentru profil</string>
+    <string name="edit_profile_nav_settings_subtitle">Selectarea setărilor de navigare ale profilului</string>
+    <string name="routing_attr_max_num_changes_description">Specificați o limită superioară de modificări</string>
+    <string name="routing_attr_max_num_changes_name">Numărul de modificări</string>
+    <string name="turn_screen_on_time_descr">Reglați cât timp ar trebui să fie activat ecranul.</string>
+    <string name="turn_screen_on_sensor_descr">Mișcă-ți mâna peste partea de sus a ecranului pentru a-l activa în timp ce navighează.</string>
+    <string name="turn_on_profile_desc">Vă rugăm să activați cel puțin un profil de aplicație pentru a utiliza această setare.</string>
+    <string name="rendering_attr_winter_road_name">Drum de iarnă</string>
+    <string name="rendering_attr_ice_road_name">Drum cu gheață</string>
+    <string name="routeInfo_winter_ice_road_name">Drumuri de iarnă și gheață</string>
+    <string name="rendering_attr_tracktype_grade1_name">Solid</string>
+    <string name="rendering_attr_tracktype_grade2_name">Solid (neasfaltat)</string>
+    <string name="rendering_attr_tracktype_grade3_name">În mare parte solid</string>
+    <string name="rendering_attr_tracktype_grade4_name">Cea mai mare parte e moale</string>
+    <string name="rendering_attr_tracktype_grade5_name">Moale</string>
+    <string name="routeInfo_tracktype_name">Rezistența suprafeței</string>
+    <string name="shared_string_file_is_saved">%s este salvat</string>
+    <string name="shared_string_open_track">Deschide pista</string>
+    <string name="shared_string_track_is_saved">Traseul %s este salvat</string>
+    <string name="gpx_join_gaps">Completati traseele gpx lipsa</string>
+    <string name="app_mode_camper">Camping</string>
+    <string name="app_mode_campervan">Rulota</string>
+    <string name="rendering_attr_showLez_description">Afișează zonele cu emisii reduse pe hartă. Nu afectează rutarea.</string>
+    <string name="rendering_attr_showLez_name">Afișează zone cu emisii reduse</string>
+    <string name="shared_string_default">Implicit</string>
+    <string name="app_mode_wagon">Căruță</string>
+    <string name="app_mode_pickup_truck">Camioneta</string>
+    <string name="day">Ziua</string>
+    <string name="days_2_4">Zile</string>
+    <string name="days_5">Zile</string>
+    <string name="week">Saptamana</string>
+    <string name="weeks_2_4">săptămâni</string>
+    <string name="weeks_5">Săptămâni</string>
+    <string name="month">Lună</string>
+    <string name="months_2_4">Luni</string>
+    <string name="months_5">Luni</string>
+    <string name="year">An</string>
+    <string name="years_2_4">Ani</string>
+    <string name="years_5">Ani</string>
+    <string name="months_3">Trei luni</string>
+    <string name="price_free">Gratuit</string>
+    <string name="get_discount_title">Obțineți %1$d %2$s la %3$s dezactivat.</string>
+    <string name="get_discount_first_part">%1$s pentru primul %2$s</string>
+    <string name="get_discount_first_few_part">%1$s pentru primul %2$s</string>
+    <string name="get_discount_second_part">apoi %1$s</string>
+    <string name="cancel_subscription">Anulare abonament</string>
+    <string name="price_and_discount">%1$s • Salvați %2$s</string>
+    <string name="utm_format_descr">OsmAnd folosește standardul UTM, care este similar, dar nu este identic cu formatul UTM NATO.</string>
+    <string name="shared_string_example">Exemplu</string>
+    <string name="navigate_point_format_utm">Standardul UTM</string>
+    <string name="navigate_point_format_olc">Deschideți codul locatiei</string>
+    <string name="coordinates_format_info">Formatul selectat va fi aplicat în întreaga aplicație.</string>
+    <string name="pref_selected_by_default_for_profiles">Această setare este selectată implicit pentru profiluri: %s</string>
+    <string name="change_default_settings">Modifica setarile</string>
+    <string name="discard_changes">Renunțați la modificare</string>
+    <string name="apply_to_current_profile">Se aplică numai la \"%1$s\"</string>
+    <string name="apply_to_all_profiles">Aplicați la toate profilurile</string>
+    <string name="start_up_message_pref">Mesaj de pornire</string>
+    <string name="analytics_pref_title">Analize</string>
+    <string name="turn_screen_on_info">Afișați harta pe ecranul de blocare în timpul navigării.</string>
+    <string name="wake_time">Timp de trezire</string>
+    <string name="map_look">Harta arata</string>
+    <string name="configure_navigation">Configurați navigarea</string>
+    <string name="screen_alerts_descr">Alertele sunt afișate în partea stângă jos în timpul navigării.</string>
+    <string name="language_and_output">Limbă și ieșire</string>
+    <string name="reset_to_default">Resetează la valorile implicite</string>
+    <string name="voice_announces_info">Anunțurile vocale doar în timpul navigării.</string>
+    <string name="voice_announces_descr">Instrucțiuni și anunțuri de navigație</string>
+    <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Arată rutele pentru biciclete</string>
+    <string name="download_map_dialog">Dialogul de descărcare a hărții</string>
+    <string name="dialogs_and_notifications_descr">Control popups, dialoguri și notificări pe care OsmAnd le arată în timpul utilizării.</string>
+    <string name="rendering_value_walkingRoutesOSMCNodes_name">Rețele de noduri</string>
+    <string name="suggested_maps">Hărți sugerate</string>
+    <string name="suggested_maps_descr">Aceste hărți trebuie să fie utilizate cu pluginul</string>
+    <string name="added_profiles">Profiluri adăugate</string>
+    <string name="added_profiles_descr">Pluginul adaugă un nou profil la OsmAnd</string>
+    <string name="shared_string_turn_off">Opriți</string>
+    <string name="new_plugin_added">A fost adăugat un plugin nou</string>
+    <string name="join_segments">Alăturați segmente</string>
+    <string name="add_new_profile_q">Adăugați un profil nou \'%1$s\'\?</string>
+    <string name="save_heading">Includeți titlu</string>
+    <string name="save_heading_descr">Salvați poziția fiecarui punct al traseului în timpul înregistrării.</string>
+    <string name="distance_and_address">%1$s • %2$s</string>
+    <string name="street_city">%1$s, %2$s</string>
+    <string name="personal_category_name">Personal</string>
+    <string name="shared_string_downloading_formatted">Descarcarea</string>
+    <string name="rendering_value_thick_name">Gros</string>
+    <string name="desert_render_descr">Pentru deșerturi și alte zone slab populate.</string>
+    <string name="select_navigation_icon">Selecteaza iconul pentru navigatie</string>
+    <string name="select_map_icon">Selecteaza iconul pentru harta</string>
+    <string name="delete_profiles_descr">Dupa ce apasati Apply ,profilul sters va fi pierdut definitiv.</string>
+    <string name="master_profile">Profil de baza</string>
+    <string name="select_color">Selecteaza culoarea</string>
+    <string name="edit_profiles_descr">Nu puteți șterge profilurile OsmAnd implicite, dar aveți posibilitatea să le dezactivați în ecranul anterior sau să le mutați în partea de jos.</string>
+    <string name="edit_profiles">Editarea profilurilor</string>
+    <string name="select_nav_profile_dialog_message">Tipul de navigație afectează regulile pentru calcularea rutei.</string>
+    <string name="profile_appearance">Aspectul profilului</string>
+    <string name="choose_icon_color_name">Alegeți pictograma, culoarea și numele</string>
+    <string name="reorder_profiles">Editează lista de profiluri</string>
+    <string name="selected_profile">Profil selectat</string>
+    <string name="nautical_render_descr">Pentru navigare nautică.Caracteristici de geamanduri, faruri, râuri, benzi și mărci de mare, porturi, servicii de marinari, și contururi de adâncime.</string>
+    <string name="ski_map_render_descr">Pentru schi. Dispune de pârtii, teleschiuri, piste de fond, etc.</string>
+    <string name="light_rs_render_descr">Stil de conducere simplu. Mod de noapte ,cu linii de contur, drumuri cu contrast portocaliu, obiecte intunecate in harta secundară.</string>
+    <string name="topo_render_descr">Pentru drumeții, drumeții și ciclism natural. Citit în aer liber. Drumuri contrastante și obiecte naturale, diferite tipuri de traseu, opțiuni avansate de linie de contur, detalii suplimentare. Reglarea integrității suprafeței distinge calitatea drumului. Fără mod de noapte.</string>
+    <string name="mapnik_render_descr">Vechiul stil \"Mapnik\".Culori similare cu \"Mapnik\".</string>
+    <string name="touring_view_render_descr">Stil turistic cu contrast ridicat și detalii maxime. Include toate opțiunile stilului implicit OsmAnd, afișând în același timp cât mai multe detalii posibile, în special drumuri, căi și alte modalități de călătorie. Distincția clară \"atlas turistic\" între tipurile de drum. Potrivit pentru zi, noapte și în aer liber.</string>
+    <string name="off_road_render_descr">Pentru conducere off-road bazată pe stilul „Topo” și pentru utilizarea cu imagini de satelit verzi, ca strat subaltern. Grosimea drumului principal redus, grosimea crescută a pistelor, cărărilor, bicicletelor și altor rute.</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Comutați pentru a afișa sau a ascunde traseele GPX selectate pe hartă.</string>
+    <string name="rendering_attr_surface_sett_name">Setãri</string>
+    <string name="rendering_attr_highway_class_bridleway_name">Piste de călărie</string>
+    <string name="save_poi_value_exceed_length">Scurtați lungimea etichetei \"%s\" la mai puțin de 255 de caractere.</string>
+    <string name="save_poi_value_exceed_length_title">Lungimea valorii \"%s\"</string>
+    <string name="files_moved">Mutat %1$d fișiere (%2$s).</string>
+    <string name="files_copied">Fișiere %1$d copiate (%2$s).</string>
+    <string name="files_failed">Nu s-a putut copia fișierele %1$d (%2$s).</string>
+    <string name="files_present">fișierele %1$d (%2$s) sunt prezente în locația anterioară \' %3$s \'.</string>
+    <string name="public_transport_ped_route_title">Traseul pe jos este de aproximativ %1$s, și poate fi mai rapid decât transportul public</string>
+    <string name="public_transport_no_route_title">Din păcate, OsmAnd nu a putut găsi un traseu potrivit pentru setările dumneavoastră.</string>
+    <string name="coordinates_widget">Coordonatele widget</string>
+    <string name="make_osmand_better_descr"></string>
+    <string name="osmand_routing_promo"></string>
+    <string name="settings_derived_routing_mode_string"></string>
+    <string name="profile_alert_need_routing_type_msg">Alegeți un tip de navigare pentru noul profil</string>
+    <string name="select_base_profile_dialog_message">Profilul personalizat pe unul dintre profilurile ale aplicației implicite, acest lucru definește configurarea de bază, cum ar fi vizibilitatea implicită a widgets și unități de viteză și distanță.Acestea sunt profilurile de aplicație implicite, împreună cu exemple de profiluri personalizate pot fi extinse la:</string>
+    <string name="routing_profile_broutrer">Rutare (offline)</string>
+    <string name="custom_routing">Alegerea unei rute personalizate</string>
+    <string name="rendering_attr_highway_class_track_grade1_name">Gradul 1</string>
+    <string name="rendering_attr_highway_class_track_grade2_name">Gradul 2</string>
+    <string name="rendering_attr_highway_class_track_grade3_name">Gradul 3</string>
+    <string name="rendering_attr_highway_class_track_grade4_name">Gradul 4</string>
+    <string name="rendering_attr_highway_class_track_grade5_name">Gradul 5</string>
 </resources>

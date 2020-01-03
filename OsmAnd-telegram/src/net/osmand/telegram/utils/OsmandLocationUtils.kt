@@ -42,7 +42,9 @@ object OsmandLocationUtils {
 	const val SECONDS_AGO_SUFFIX = " seconds ago"
 	const val MINUTES_AGO_SUFFIX = " minutes ago"
 	const val HOURS_AGO_SUFFIX = " hours ago"
-	const val UTC_FORMAT_SUFFIX = " UTC"
+	const val UTC_FORMAT_PATTERN = "yyyy-MM-dd HH:mm:ss"
+
+	const val ONE_HOUR_TIME_MS = 60 * 60 * 1000 // 1 hour
 
 	val UTC_DATE_FORMAT = SimpleDateFormat("yyyy-MM-dd", Locale.US).apply {
 		timeZone = TimeZone.getTimeZone("UTC")
@@ -163,9 +165,17 @@ object OsmandLocationUtils {
 		return String.format(Locale.US, "%.5f, %.5f", sig.lat, sig.lon)
 	}
 
-	fun formatFullTime(ti: Long): String {
+	fun formatFullTime(ti: Long, app: TelegramApplication): String {
 		val dt = Date(ti)
-		return UTC_DATE_FORMAT.format(dt) + " " + UTC_TIME_FORMAT.format(dt) + " UTC"
+		val offsetKey = app.settings.utcOffset
+		val utcOffset = DataConstants.utcOffsets[offsetKey] ?: 0f
+		val simpleDateFormat = SimpleDateFormat(UTC_FORMAT_PATTERN, Locale.US)
+
+		simpleDateFormat.timeZone = TimeZone.getTimeZone(DataConstants.UTC_FORMAT).apply {
+			rawOffset = (utcOffset * ONE_HOUR_TIME_MS).toInt()
+		}
+
+		return "${simpleDateFormat.format(dt)} $offsetKey"
 	}
 
 	fun parseOsmAndBotLocationContent(oldContent: MessageOsmAndBotLocation, content: TdApi.MessageContent): MessageOsmAndBotLocation {
@@ -242,21 +252,11 @@ object OsmandLocationUtils {
 				}
 				s.startsWith(ALTITUDE_PREFIX) -> {
 					val altStr = s.removePrefix(ALTITUDE_PREFIX)
-					try {
-						val alt = altStr.split(" ").first()
-						res.altitude = alt.toDouble()
-					} catch (e: Exception) {
-						e.printStackTrace()
-					}
+					res.altitude = parseDistance(altStr)
 				}
 				s.startsWith(SPEED_PREFIX) -> {
 					val speedStr = s.removePrefix(SPEED_PREFIX)
-					try {
-						val speed = speedStr.split(" ").first()
-						res.speed = speed.toDouble()
-					} catch (e: Exception) {
-						e.printStackTrace()
-					}
+					res.speed = parseSpeed(speedStr)
 				}
 				s.startsWith(BEARING_PREFIX) -> {
 					val bearingStr = s.removePrefix(BEARING_PREFIX)
@@ -269,12 +269,7 @@ object OsmandLocationUtils {
 				}
 				s.startsWith(HDOP_PREFIX) -> {
 					val hdopStr = s.removePrefix(HDOP_PREFIX)
-					try {
-						val hdop = hdopStr.split(" ").first()
-						res.hdop = hdop.toDouble()
-					} catch (e: Exception) {
-						e.printStackTrace()
-					}
+					res.hdop = parseDistance(hdopStr)
 				}
 				s.startsWith(UPDATED_PREFIX) -> {
 					if (res.lastUpdated == 0) {
@@ -314,13 +309,19 @@ object OsmandLocationUtils {
 					val hours = locStr.toLong()
 					return (System.currentTimeMillis() - hours * 60 * 60 * 1000)
 				}
-				timeS.endsWith(UTC_FORMAT_SUFFIX) -> {
-					val locStr = timeS.removeSuffix(UTC_FORMAT_SUFFIX)
-					val (latS, lonS) = locStr.split(" ")
-					val date = UTC_DATE_FORMAT.parse(latS)
-					val time = UTC_TIME_FORMAT.parse(lonS)
-					val res = date.time + time.time
-					return res
+				timeS.contains(DataConstants.UTC_FORMAT) -> {
+					val utcIndex = timeS.indexOf(DataConstants.UTC_FORMAT)
+					if (utcIndex != -1) {
+						val locStr = timeS.substring(0, utcIndex)
+						val utcOffset = timeS.substring(utcIndex)
+						val utcTimeOffset = DataConstants.utcOffsets[utcOffset] ?: 0f
+						val simpleDateFormat = SimpleDateFormat(UTC_FORMAT_PATTERN, Locale.US)
+						simpleDateFormat.timeZone = TimeZone.getTimeZone(DataConstants.UTC_FORMAT).apply {
+								rawOffset = (utcTimeOffset * ONE_HOUR_TIME_MS).toInt()
+							}
+						val res = simpleDateFormat.parse(locStr)
+						return res.time
+					}
 				}
 			}
 		} catch (e: Exception) {
@@ -329,50 +330,48 @@ object OsmandLocationUtils {
 		return 0
 	}
 
-	fun getTextMessageContent(updateId: Int, location: LocationMessage): TdApi.InputMessageText {
-		val entities = mutableListOf<TdApi.TextEntity>()
-		val builder = StringBuilder()
-		val locationMessage = formatLocation(location)
-
-		val firstSpace = USER_TEXT_LOCATION_TITLE.indexOf(' ')
-		val secondSpace = USER_TEXT_LOCATION_TITLE.indexOf(' ', firstSpace + 1)
-		entities.add(TdApi.TextEntity(builder.length + firstSpace + 1, secondSpace - firstSpace, TdApi.TextEntityTypeTextUrl(SHARING_LINK)))
-		builder.append("$USER_TEXT_LOCATION_TITLE\n")
-
-		entities.add(TdApi.TextEntity(builder.lastIndex, LOCATION_PREFIX.length, TdApi.TextEntityTypeBold()))
-		builder.append(LOCATION_PREFIX)
-
-		entities.add(TdApi.TextEntity(builder.length, locationMessage.length,
-			TdApi.TextEntityTypeTextUrl("$BASE_SHARING_URL?lat=${location.lat}&lon=${location.lon}")))
-		builder.append("$locationMessage\n")
-
-		if (location.altitude != 0.0) {
-			entities.add(TdApi.TextEntity(builder.lastIndex, ALTITUDE_PREFIX.length, TdApi.TextEntityTypeBold()))
-			builder.append(String.format(Locale.US, "$ALTITUDE_PREFIX%.1f m\n", location.altitude))
+	fun parseSpeed(speedS: String): Double {
+		try {
+			if (!speedS.contains(" ")) {
+				return 0.0
+			}
+			val speedSplit = speedS.split(" ")
+			val speedVal = speedSplit.first().toDouble()
+			val speedFormat = OsmandFormatter.SpeedConstants.values().firstOrNull { it.getDefaultString() == speedSplit.last() }
+			return when (speedFormat) {
+				OsmandFormatter.SpeedConstants.KILOMETERS_PER_HOUR -> speedVal / 3.6f
+				OsmandFormatter.SpeedConstants.MILES_PER_HOUR -> (speedVal / 3.6f) / (OsmandFormatter.METERS_IN_KILOMETER / OsmandFormatter.METERS_IN_ONE_MILE)
+				OsmandFormatter.SpeedConstants.NAUTICALMILES_PER_HOUR -> (speedVal / 3.6f) / (OsmandFormatter.METERS_IN_KILOMETER / OsmandFormatter.METERS_IN_ONE_NAUTICALMILE)
+				OsmandFormatter.SpeedConstants.MINUTES_PER_KILOMETER -> (OsmandFormatter.METERS_IN_KILOMETER / speedVal) / 60
+				OsmandFormatter.SpeedConstants.MINUTES_PER_MILE -> (OsmandFormatter.METERS_IN_ONE_MILE / speedVal) / 60
+				else -> speedVal
+			}
+		} catch (e: Exception) {
+			e.printStackTrace()
 		}
-		if (location.speed > 0) {
-			entities.add(TdApi.TextEntity(builder.lastIndex, SPEED_PREFIX.length, TdApi.TextEntityTypeBold()))
-			builder.append(String.format(Locale.US, "$SPEED_PREFIX%.1f m/s\n", location.speed))
-		}
-		if (location.bearing > 0) {
-			entities.add(TdApi.TextEntity(builder.lastIndex, BEARING_PREFIX.length, TdApi.TextEntityTypeBold()))
-			builder.append(String.format(Locale.US, "$BEARING_PREFIX%.1f$BEARING_SUFFIX\n", location.bearing))
-		}
-		if (location.hdop != 0.0 && location.speed == 0.0) {
-			entities.add(TdApi.TextEntity(builder.lastIndex, HDOP_PREFIX.length, TdApi.TextEntityTypeBold()))
-			builder.append(String.format(Locale.US, "$HDOP_PREFIX%d m\n", location.hdop.toInt()))
-		}
-		if (updateId == 0) {
-			builder.append(String.format("$UPDATED_PREFIX%s\n", formatFullTime(location.time)))
-		} else {
-			builder.append(String.format("$UPDATED_PREFIX%s (%d)\n", formatFullTime(location.time), updateId))
-		}
-		val textMessage = builder.toString().trim()
-
-		return TdApi.InputMessageText(TdApi.FormattedText(textMessage, entities.toTypedArray()), true, true)
+		return 0.0
 	}
 
-	fun getTextMessageContent(updateId: Int, location: BufferMessage): TdApi.InputMessageText {
+	fun parseDistance(distanceS: String): Double {
+		try {
+			val distanceSplit = distanceS.split(" ")
+			val distanceVal = distanceSplit.first().toDouble()
+			return when (distanceSplit.last()) {
+				OsmandFormatter.FORMAT_METERS_KEY -> return distanceVal
+				OsmandFormatter.FORMAT_FEET_KEY -> return distanceVal / OsmandFormatter.FEET_IN_ONE_METER
+				OsmandFormatter.FORMAT_YARDS_KEY -> return distanceVal / OsmandFormatter.YARDS_IN_ONE_METER
+				OsmandFormatter.FORMAT_KILOMETERS_KEY -> return distanceVal * OsmandFormatter.METERS_IN_KILOMETER
+				OsmandFormatter.FORMAT_NAUTICALMILES_KEY -> return distanceVal * OsmandFormatter.METERS_IN_ONE_NAUTICALMILE
+				OsmandFormatter.FORMAT_MILES_KEY -> return distanceVal * OsmandFormatter.METERS_IN_ONE_MILE
+				else -> distanceVal
+			}
+		} catch (e: Exception) {
+			e.printStackTrace()
+		}
+		return 0.0
+	}
+
+	fun getTextMessageContent(updateId: Int, location: BufferMessage, app: TelegramApplication): TdApi.InputMessageText {
 		val entities = mutableListOf<TdApi.TextEntity>()
 		val builder = StringBuilder()
 		val locationMessage = formatLocation(location)
@@ -391,11 +390,13 @@ object OsmandLocationUtils {
 
 		if (location.altitude != 0.0) {
 			entities.add(TdApi.TextEntity(builder.lastIndex, ALTITUDE_PREFIX.length, TdApi.TextEntityTypeBold()))
-			builder.append(String.format(Locale.US, "$ALTITUDE_PREFIX%.1f m\n", location.altitude))
+			val formattedAltitude = OsmandFormatter.getFormattedAlt(location.altitude, app, false)
+			builder.append(String.format(Locale.US, "$ALTITUDE_PREFIX%s\n", formattedAltitude))
 		}
 		if (location.speed > 0) {
 			entities.add(TdApi.TextEntity(builder.lastIndex, SPEED_PREFIX.length, TdApi.TextEntityTypeBold()))
-			builder.append(String.format(Locale.US, "$SPEED_PREFIX%.1f m/s\n", location.speed))
+			val formattedSpeed = OsmandFormatter.getFormattedSpeed(location.speed.toFloat(), app, false)
+			builder.append(String.format(Locale.US, "$SPEED_PREFIX%s\n", formattedSpeed))
 		}
 		if (location.bearing > 0) {
 			entities.add(TdApi.TextEntity(builder.lastIndex, BEARING_PREFIX.length, TdApi.TextEntityTypeBold()))
@@ -403,12 +404,13 @@ object OsmandLocationUtils {
 		}
 		if (location.hdop != 0.0 && location.speed == 0.0) {
 			entities.add(TdApi.TextEntity(builder.lastIndex, HDOP_PREFIX.length, TdApi.TextEntityTypeBold()))
-			builder.append(String.format(Locale.US, "$HDOP_PREFIX%d m\n", location.hdop.toInt()))
+			val formattedHdop = OsmandFormatter.getFormattedDistance(location.hdop.toFloat(), app, false, false)
+			builder.append(String.format(Locale.US, "$HDOP_PREFIX%s\n", formattedHdop))
 		}
 		if (updateId == 0) {
-			builder.append(String.format("$UPDATED_PREFIX%s\n", formatFullTime(location.time)))
+			builder.append(String.format("$UPDATED_PREFIX%s\n", formatFullTime(location.time, app)))
 		} else {
-			builder.append(String.format("$UPDATED_PREFIX%s (%d)\n", formatFullTime(location.time), updateId))
+			builder.append(String.format("$UPDATED_PREFIX%s (%d)\n", formatFullTime(location.time, app), updateId))
 		}
 		val textMessage = builder.toString().trim()
 

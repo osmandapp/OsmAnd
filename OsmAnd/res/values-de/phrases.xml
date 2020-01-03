@@ -346,7 +346,7 @@
     <string name="poi_paragliding">Gleitschirmfliegen</string>
     <string name="poi_park">Park</string>
     <string name="poi_parking">Parkplatz</string>
-    <string name="poi_parking_entrance">Parkeinfahrt</string>
+    <string name="poi_parking_entrance">Parkplatzeinfahrt</string>
     <string name="poi_craft_parquet_layer">Parkettleger</string>
     <string name="poi_pawnbroker">Pfandleiher</string>
     <string name="poi_peak">Berggipfel</string>
@@ -392,7 +392,7 @@
     <string name="poi_public_transport_platform_bus">Bushaltestelle</string>
     <string name="poi_public_transport_platform_tram">Straßenbahnhaltestelle</string>
     <string name="poi_public_transport_platform_trolleybus">Haltestelle für Oberleitungsbus</string>
-    <string name="poi_public_transport_station">Öff. Verkehrsmittel-Station</string>
+    <string name="poi_public_transport_station">ÖPNV-Station</string>
     <string name="poi_quarry">Steinbruch</string>
     <string name="poi_raceway">Rennstrecke</string>
     <string name="poi_racquet">Racquetball</string>
@@ -974,7 +974,7 @@
     <string name="poi_seasonal_winter">Winter</string>
     <string name="poi_crossing_uncontrolled">Unkontrolliert</string>
     <string name="poi_crossing_unmarked">Unmarkiert</string>
-    <string name="poi_access_private">Zugang Privat</string>
+    <string name="poi_access_private">Privater Zugang</string>
     <string name="poi_access_destination">Anlieger frei</string>
     <string name="poi_access_permissive">Zugang gestattet</string>
     <string name="poi_animal_shelter_dog">Hunde</string>
@@ -1151,7 +1151,7 @@
     <string name="poi_fuel_91ul">Avgas UL 91</string>
     <string name="poi_fuel_100ll">Avgas 100LL</string>
     <string name="poi_fuel_autogas">Autogas</string>
-    <string name="poi_fuel_jeta1">Flugzeug A-1 Kraftstoff</string>
+    <string name="poi_fuel_jeta1">Flugkraftstoff Jet A-1</string>
     <string name="poi_fuel_adblue">AdBlue</string>
     <string name="poi_fuel_wood">Kraftstoff: Holz</string>
     <string name="poi_street_lamp">Straßenlaterne</string>
@@ -1337,7 +1337,7 @@
     <string name="poi_rescue_station">Rettungsstation</string>
     <string name="poi_mini_roundabout">Mini-Kreisverkehr</string>
     <string name="poi_railway_crossing">Bahnübergang</string>
-    <string name="poi_bird_hide">Vögelbeobachtungspunkt</string>
+    <string name="poi_bird_hide">Vogelbeobachtungspunkt</string>
     <string name="poi_garden">Garten</string>
     <string name="poi_heath">Heide</string>
     <string name="poi_grass">Gras</string>
@@ -1384,7 +1384,7 @@
     <string name="poi_aerialway_bicycle_summer">Nur im Sommer erlaubt</string>
     <string name="poi_aerialway_access_entry">Nur Eingang</string>
     <string name="poi_aerialway_access_exit">Nur Ausgang</string>
-    <string name="poi_aerialway_access_both">Eingang und Ausgang</string>
+    <string name="poi_aerialway_access_both">Ein- und Ausgang</string>
     <string name="poi_aerialway_summer_access_entry">Sommereingang</string>
     <string name="poi_aerialway_summer_access_exit">Sommerausgang</string>
     <string name="poi_aerialway_summer_access_both">Sommer Ein- und Ausgang</string>
@@ -1759,7 +1759,7 @@
     <string name="poi_payment_yandexmoney_no">Yandex.Money nicht akzeptiert</string>
     <string name="poi_description_payment">Zahlungsbeschreibung</string>
     <string name="poi_internet_access_fee_yes">Internetzugang: kostenpflichtig</string>
-    <string name="poi_internet_access_fee_no">Internetzugang: gratis</string>
+    <string name="poi_internet_access_fee_no">Internetzugang: kostenlos</string>
     <string name="poi_events_venue">Veranstaltungsort</string>
     <string name="poi_diet_vegetarian_only">Nur vegetarisch</string>
     <string name="poi_diet_vegetarian_yes">Vegetarische</string>
@@ -1805,7 +1805,7 @@
     <string name="poi_toilets_wheelchair_no">Rollstuhlgerechte Toilette: nein</string>
     <string name="poi_toilets_access_customers">Toilettenzugang: Kunden</string>
     <string name="poi_toilets_access_permissive">Toilettenzugang: gestattet</string>
-    <string name="poi_toilets_access_community">Toilettenzugang: öffentlich</string>
+    <string name="poi_toilets_access_community">Toilettenzugang: Gemeinschaft</string>
     <string name="poi_toilets_access_public">Toilettenzugang: öffentlich</string>
     <string name="poi_diaper_yes">Wickeltisch</string>
     <string name="poi_diaper_no">Kein Wickeltisch</string>
@@ -2192,7 +2192,7 @@
     <string name="poi_historic_civilization_cycladic">Kultur: Kykladen</string>
     <string name="poi_historic_civilization_minoan">Kultur: Minoisch</string>
     <string name="poi_historic_civilization_tiahuanacota">Kultur: Tiahuanaco</string>
-    <string name="poi_animal_training">Dressur</string>
+    <string name="poi_animal_training">Tierausbildung</string>
     <string name="poi_animal_training_dog">Hund</string>
     <string name="poi_animal_training_horse">Pferd</string>
     <string name="poi_historic_period_nuragic">Historisches Zeitalter: Nuraghenkultur</string>
@@ -2789,7 +2789,7 @@
     <string name="poi_covered">Überdacht</string>
     <string name="poi_ferry_terminal_cargo">Fracht</string>
     <string name="poi_bicycle_parking_type">Typ</string>
-    <string name="poi_aerialway_bicycle">Radtransport</string>
+    <string name="poi_aerialway_bicycle">Fahrradtransport</string>
     <string name="poi_aerialway_heating">Heizung</string>
     <string name="poi_pump">Pumpe</string>
     <string name="poi_observatory_designation">Bezeichnung</string>
@@ -3608,13 +3608,13 @@
     <string name="poi_hookah_lounge">Wasserpfeifen-Lounge</string>
     <string name="poi_source_biomass">Energiequelle: Biomasse</string>
     <string name="poi_snowmobile_filter">Zufahrt Schneemobil</string>
-    <string name="poi_access_bus">Zufahrt Linienbus</string>
+    <string name="poi_access_bus">Anbindung Linienbus</string>
     <string name="poi_access_caravan">Zufahrt Wohnwagen</string>
     <string name="poi_access_motorhome">Zufahrt Wohnmobil</string>
     <string name="poi_access_motorcycle">Zufahrt Motorrad</string>
     <string name="poi_access_moped">Zufahrt Moped</string>
     <string name="poi_access_mofa">Zufahrt Mofa</string>
-    <string name="poi_access_hgv">Zufahrt LKW</string>
+    <string name="poi_access_hgv">Zufahrt Lkw</string>
     <string name="poi_access_goods">Zufahrt leichter Lieferfahrzeuge</string>
     <string name="poi_access_disabled">Behindertengerechter Zugang</string>
     <string name="poi_taxi_office">Taxibüro</string>
@@ -3671,7 +3671,7 @@
     <string name="poi_foot_customers">Zugang Fußgänger: Kunden</string>
     <string name="poi_caravan_no">Zufahrt Wohnwagen: nein</string>
     <string name="poi_motorhome_no">Zufahrt Wohnmobil: nein</string>
-    <string name="poi_bus_no">Zufahrt Linienbus: nein</string>
+    <string name="poi_bus_no">Anbindung Linienbus: nein</string>
     <string name="poi_tourist_bus_yes">Zufahrt Touristenbus: ja</string>
     <string name="poi_tourist_bus_designated">Zufahrt Touristenbus: ausgewiesen</string>
     <string name="poi_tourist_bus_no">Zufahrt Touristenbus: nein</string>
@@ -3691,7 +3691,7 @@
     <string name="poi_taxi_yes">Zufahrt Taxi: ja</string>
     <string name="poi_taxi_designated">Zufahrt Taxi: ausgewiesen</string>
     <string name="poi_taxi_no">Zufahrt Taxi: nein</string>
-    <string name="poi_disabled_no">Zugang Behinderte: nein</string>
+    <string name="poi_disabled_no">Behindertengerechter Zugang: nein</string>
     <string name="poi_snowmobile_yes">ja</string>
     <string name="poi_snowmobile_designated">ausgewiesen</string>
     <string name="poi_snowmobile_permissive">gestattet</string>
@@ -3749,4 +3749,25 @@
     <string name="poi_cash_withdrawal_postbank">Postbank</string>
     <string name="poi_cash_withdrawal_postfinance_card">PostFinance Card</string>
     <string name="poi_cash_withdrawal_migros_bank">Migros Bank</string>
+    <string name="poi_bath_type">Typ</string>
+    <string name="poi_bath_type_hot_spring">Heiße Quelle</string>
+    <string name="poi_bath_type_onsen">Onsen</string>
+    <string name="poi_bath_type_hammam">Hammam</string>
+    <string name="poi_bath_type_thermal">Therme</string>
+    <string name="poi_bath_type_river">Fluss</string>
+    <string name="poi_bath_type_lake">See</string>
+    <string name="poi_bath_type_foot_bath">Fußbad</string>
+    <string name="poi_bath_open_air_yes">ja</string>
+    <string name="poi_bath_open_air_no">nein</string>
+    <string name="poi_monastery_type_monastics">Klostertyp: Mönche</string>
+    <string name="poi_monastery_type_hermitage">Klostertyp: Einsiedelei</string>
+    <string name="poi_bath_open_air">Freibad</string>
+    <string name="poi_monastery_type_convent">Klostertyp: Konvent</string>
+    <string name="poi_monastery_type_canonry">Klostertyp: Kanoniker</string>
+    <string name="poi_monastery_type_clerks_regular">Klostertyp: Ordenspriester</string>
+    <string name="poi_tourist_camp">Freizeit- und Erholungsheim</string>
+    <string name="poi_community_gender_female">Geschlecht der Gemeinschaft: weiblich</string>
+    <string name="poi_community_gender_male">Geschlecht der Gemeinschaft: männlich</string>
+    <string name="poi_community_gender_mixed">Geschlecht der Gemeinschaft: gemischt</string>
+    <string name="poi_grave">Grab</string>
 </resources>

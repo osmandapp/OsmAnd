@@ -3,12 +3,18 @@ package net.osmand.data;
 import java.io.Serializable;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+
+import net.osmand.GPXUtilities.WptPt;
 
 public class FavouritePoint implements Serializable, LocationPoint {
 	private static final long serialVersionUID = 729654300829771466L;
-	private String name = "";
-	private String description;
-	private String category = "";
+
+	protected static final String HIDDEN = "hidden";
+
+	protected String name = "";
+	protected String description;
+	protected String category = "";
 	private String originObjectName = "";
 	private double latitude;
 	private double longitude;
@@ -44,9 +50,13 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	}
 	
 	public PointDescription getPointDescription() {
-		return new PointDescription(PointDescription.POINT_TYPE_FAVORITE, name);
+		return new PointDescription(PointDescription.POINT_TYPE_FAVORITE, getName());
 	}
-	
+
+	public boolean isPersonal() {
+		return false;
+	}
+
 	@Override
 	public PointDescription getPointDescription(Context ctx) {
 		return getPointDescription();
@@ -170,5 +180,50 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + ((originObjectName == null) ? 0 : originObjectName.hashCode());
 		return result;
+	}
+
+	public static FavouritePoint fromWpt(@NonNull Context ctx, @NonNull WptPt pt) {
+		String name = pt.name;
+		String categoryName = pt.category != null ? pt.category : "";
+		if (name == null) {
+			name = "";
+		}
+		FavouritePoint fp;
+		if (pt.getExtensionsToRead().containsKey(PersonalFavouritePoint.PERSONAL)) {
+			try {
+				fp = new PersonalFavouritePoint(ctx, name, pt.lat, pt.lon);
+			} catch (IllegalArgumentException e) {
+				fp = new FavouritePoint(pt.lat, pt.lon, name, categoryName);
+			}
+		} else {
+			fp = new FavouritePoint(pt.lat, pt.lon, name, categoryName);
+		}
+		fp.setDescription(pt.desc);
+		if (pt.comment != null) {
+			fp.setOriginObjectName(pt.comment);
+		}
+		fp.setColor(pt.getColor(0));
+		fp.setVisible(!pt.getExtensionsToRead().containsKey(HIDDEN));
+		return fp;
+	}
+
+	public WptPt toWpt() {
+		WptPt pt = new WptPt();
+		pt.lat = getLatitude();
+		pt.lon = getLongitude();
+		if (!isVisible()) {
+			pt.getExtensionsToWrite().put(HIDDEN, "true");
+		}
+		if (getColor() != 0) {
+			pt.setColor(getColor());
+		}
+		pt.name = getName();
+		pt.desc = getDescription();
+		if (getCategory().length() > 0)
+			pt.category = getCategory();
+		if (getOriginObjectName().length() > 0) {
+			pt.comment = getOriginObjectName();
+		}
+		return pt;
 	}
 }

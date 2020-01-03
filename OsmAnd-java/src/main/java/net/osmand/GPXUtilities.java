@@ -187,6 +187,7 @@ public class GPXUtilities {
 		public double ele = Double.NaN;
 		public double speed = 0;
 		public double hdop = Double.NaN;
+		public float heading = Float.NaN;
 		public boolean deleted = false;
 		public int colourARGB = 0;                    // point colour (used for altitude/speed colouring)
 		public double distance = 0.0;                // cumulative distance, if in a track
@@ -208,6 +209,7 @@ public class GPXUtilities {
 			this.ele = wptPt.ele;
 			this.speed = wptPt.speed;
 			this.hdop = wptPt.hdop;
+			this.heading = wptPt.heading;
 			this.deleted = wptPt.deleted;
 			this.colourARGB = wptPt.colourARGB;
 			this.distance = wptPt.distance;
@@ -233,14 +235,22 @@ public class GPXUtilities {
 			return lon;
 		}
 
+		public float getHeading() {
+			return heading;
+		}
 
 		public WptPt(double lat, double lon, long time, double ele, double speed, double hdop) {
+			this(lat, lon, time, ele, speed, hdop, Float.NaN);
+		}
+
+		public WptPt(double lat, double lon, long time, double ele, double speed, double hdop, float heading) {
 			this.lat = lat;
 			this.lon = lon;
 			this.time = time;
 			this.ele = ele;
 			this.speed = speed;
 			this.hdop = hdop;
+			this.heading = heading;
 		}
 
 		public boolean isVisible() {
@@ -1605,6 +1615,9 @@ public class GPXUtilities {
 		}
 		if (p.speed > 0) {
 			p.getExtensionsToWrite().put("speed", decimalFormat.format(p.speed));
+		}
+		if (!Float.isNaN(p.heading)) {
+			p.getExtensionsToWrite().put("heading", String.valueOf(Math.round(p.heading)));
 		}
 		writeExtensions(serializer, p);
 	}

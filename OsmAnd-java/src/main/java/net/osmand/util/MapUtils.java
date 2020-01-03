@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
 import net.osmand.data.QuadPoint;
@@ -410,6 +411,16 @@ public class MapUtils {
 		}
 		return rotate;
 	}
+	
+	public static float normalizeDegrees360(float degrees) {
+		while (degrees < 0.0f) {
+			degrees += 360.0f;
+		}
+		while (degrees >= 360.0f) {
+			degrees -= 360.0f;
+		}
+		return degrees;
+	}
 
 	/**
 	 * @param diff align difference between 2 angles ]-PI, PI]
@@ -615,6 +626,12 @@ public class MapUtils {
 			r.top = Math.max(r.top, latitude);
 			r.bottom = Math.min(r.bottom, latitude);
 		}
+	}
+
+	public static boolean areLatLonEqual(Location l1, Location l2) {
+		return l1 == null && l2 == null
+				|| (l1 != null && l2 != null && Math.abs(l1.getLatitude() - l2.getLatitude()) < 0.00001
+				&& Math.abs(l1.getLongitude() - l2.getLongitude()) < 0.00001);
 	}
 }
 

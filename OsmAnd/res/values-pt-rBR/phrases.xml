@@ -46,9 +46,9 @@
     <string name="poi_butcher">Açougue</string>
     <string name="poi_deli">Delicatessen</string>
     <string name="poi_farm">Quitanda de produção local</string>
-    <string name="poi_greengrocer">Verdureira</string>
+    <string name="poi_greengrocer">Verdureira/Quitanda</string>
     <string name="poi_seafood">Loja de frutos do mar</string>
-    <string name="poi_confectionery">Doçaria</string>
+    <string name="poi_confectionery">Doceria</string>
     <string name="poi_ice_cream">Sorveteria</string>
     <string name="poi_supermarket">Supermercado</string>
     <string name="poi_tea">Loja de chá</string>
@@ -1988,7 +1988,7 @@
     <string name="poi_refugee_no">Refugiados: não</string>
     <string name="poi_social_facility_group_home">Moradia assistida</string>
     <string name="poi_social_facility_assisted_living">Assistência domiciliar</string>
-    <string name="poi_social_facility_outreach">Alcance</string>
+    <string name="poi_social_facility_outreach">Centro de assistência</string>
     <string name="poi_impromptu_yes">Improvisado: sim</string>
     <string name="poi_impromptu_no">Improvisado: não</string>
     <string name="poi_social_facility_food_bank">Banco de alimentos</string>
@@ -3156,7 +3156,7 @@
     <string name="poi_zoo_aviary">Aviário</string>
     <string name="poi_zoo_falconry">Falcoaria</string>
     <string name="poi_zoo_reptile">Répteis</string>
-    <string name="poi_stands">Estandes</string>
+    <string name="poi_stands">Arquibancada</string>
     <string name="poi_motorcycle_sales_yes">Vendas</string>
     <string name="poi_motorcycle_sales_no">Vendas: não</string>
     <string name="poi_motorcycle_sales_yes_used">Vendas: sim; usado</string>
@@ -3746,4 +3746,25 @@
     <string name="poi_cash_withdrawal_migros_bank">Banco Migros</string>
     <string name="poi_cash_withdrawal_girocard">Girocard</string>
     <string name="poi_cash_withdrawal_postbank">Postbanco</string>
+    <string name="poi_bath_type">Tipo</string>
+    <string name="poi_bath_open_air">Ar livre</string>
+    <string name="poi_bath_type_hot_spring">Fonte termal</string>
+    <string name="poi_bath_type_onsen">Onsen</string>
+    <string name="poi_bath_type_hammam">Hamame</string>
+    <string name="poi_bath_type_thermal">Térmico</string>
+    <string name="poi_bath_type_river">Rio</string>
+    <string name="poi_bath_type_lake">Lago</string>
+    <string name="poi_bath_type_foot_bath">Banho de pé</string>
+    <string name="poi_bath_open_air_yes">Sim</string>
+    <string name="poi_bath_open_air_no">Não</string>
+    <string name="poi_monastery_type_monastics">Tipo de mosteiro: monásticos</string>
+    <string name="poi_monastery_type_convent">Tipo de mosteiro: convento</string>
+    <string name="poi_monastery_type_canonry">Tipo de mosteiro: canonaria</string>
+    <string name="poi_monastery_type_hermitage">Tipo de mosteiro: eremitério</string>
+    <string name="poi_monastery_type_clerks_regular">Tipo de mosteiro: clérigos regulares</string>
+    <string name="poi_tourist_camp">Acampamento turístico</string>
+    <string name="poi_community_gender_female">Gênero da comunidade: feminino</string>
+    <string name="poi_community_gender_male">Gênero da comunidade: masculino</string>
+    <string name="poi_community_gender_mixed">Gênero da comunidade: ambos</string>
+    <string name="poi_grave">Túmulo</string>
 </resources>

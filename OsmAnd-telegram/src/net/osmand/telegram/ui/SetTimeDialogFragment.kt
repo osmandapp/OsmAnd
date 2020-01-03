@@ -322,9 +322,18 @@ class SetTimeDialogFragment : BaseDialogFragment(), TelegramLocationListener, Te
 
 			TelegramUiHelper.setupPhoto(app, holder.icon, photoPath, placeholderId, false)
 
+			val currentUserId = telegramHelper.getCurrentUserId()
 			val title = when (item) {
-				is TdApi.Chat -> item.title
-				is TdApi.User -> TelegramUiHelper.getUserName(item)
+				is TdApi.Chat -> {
+					if (telegramHelper.isPrivateChat(item) && (item.type as TdApi.ChatTypePrivate).userId == currentUserId) {
+						getString(R.string.saved_messages)
+					} else {
+						item.title
+					}
+				}
+				is TdApi.User -> {
+					if (item.id == currentUserId) getString(R.string.saved_messages) else TelegramUiHelper.getUserName(item)
+				}
 				else -> null
 			}
 
