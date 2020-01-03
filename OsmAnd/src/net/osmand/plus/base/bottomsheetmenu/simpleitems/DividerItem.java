@@ -36,17 +36,17 @@ public class DividerItem extends BaseBottomSheetItem {
 	}
 
 	@Override
-	public void inflate(OsmandApplication app, ViewGroup container, boolean nightMode) {
-		super.inflate(app, container, nightMode);
+	public void inflate(Context context, ViewGroup container, boolean nightMode) {
+		super.inflate(context, container, nightMode);
 
-		int height = AndroidUtils.dpToPx(app, 1);
+		int height = AndroidUtils.dpToPx(context, 1);
 
 		LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) view.getLayoutParams();
-		params.setMargins(getLeftMargin(app), getTopMargin(app), 0, getBottomMargin(app));
+		params.setMargins(getLeftMargin(context), getTopMargin(context), 0, getBottomMargin(context));
 		params.height = height;
 
 		view.setMinimumHeight(height);
-		view.setBackgroundColor(ContextCompat.getColor(app, getBgColorId(nightMode)));
+		view.setBackgroundColor(ContextCompat.getColor(context, getBgColorId(nightMode)));
 	}
 
 	protected int getTopMargin(Context context) {

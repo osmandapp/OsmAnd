@@ -2040,7 +2040,7 @@
     <string name="index_item_depth_contours_osmand_ext">Deniz derinlik eğrileri</string>
     <string name="index_item_depth_points_southern_hemisphere">Güney yarımküre deniz derinlik noktaları</string>
     <string name="index_item_depth_points_northern_hemisphere">Kuzey yarımküre deniz derinlik noktaları</string>
-    <string name="download_depth_countours">Denizel derinlik konturları</string>
+    <string name="download_depth_countours">Deniz derinlik eğrileri</string>
     <string name="nautical_maps">Deniz haritaları</string>
     <string name="fonts_header">Harita yazı tipleri</string>
     <string name="rendering_attr_depthContours_name">Denizel derinlik konturları</string>
@@ -2424,7 +2424,7 @@
     <string name="rendering_attr_surface_salt_name">Tuz</string>
     <string name="rendering_attr_surface_snow_name">Kar</string>
     <string name="rendering_attr_surface_asphalt_name">Asfalt</string>
-    <string name="rendering_attr_surface_paved_name">Taş döşeme</string>
+    <string name="rendering_attr_surface_paved_name">Kaplamalı</string>
     <string name="rendering_attr_surface_concrete_name">Beton</string>
     <string name="rendering_attr_surface_cobblestone_name">Parke taşı</string>
     <string name="rendering_attr_surface_paving_stones_name">Kaldırım taşı</string>
@@ -2441,17 +2441,17 @@
     <string name="rendering_attr_smoothness_bad_name">Kötü</string>
     <string name="rendering_attr_smoothness_very_bad_name">Çok kötü</string>
     <string name="rendering_attr_smoothness_horrible_name">Korkunç</string>
-    <string name="rendering_attr_smoothness_very_horrible_name">Çok kötü</string>
+    <string name="rendering_attr_smoothness_very_horrible_name">Çok korkunç</string>
     <string name="rendering_attr_highway_class_motorway_name">Otoyol</string>
     <string name="rendering_attr_highway_class_state_road_name">Devlet yolu</string>
     <string name="rendering_attr_highway_class_road_name">Yol</string>
-    <string name="rendering_attr_highway_class_street_name">Cadde</string>
-    <string name="rendering_attr_highway_class_service_name">Servis Yolu</string>
+    <string name="rendering_attr_highway_class_street_name">Sokak</string>
+    <string name="rendering_attr_highway_class_service_name">Servis yolu</string>
     <string name="rendering_attr_highway_class_footway_name">Yaya yolu</string>
-    <string name="rendering_attr_highway_class_track_name">Tarım yolu</string>
+    <string name="rendering_attr_highway_class_track_name">Tarımsal yol</string>
     <string name="rendering_attr_highway_class_cycleway_name">Bisiklet yolu</string>
-    <string name="rendering_attr_undefined_name">Belirtilmemiş</string>
-    <string name="routeInfo_road_types_name">Yol tipleri</string>
+    <string name="rendering_attr_undefined_name">Tanımlanmamış</string>
+    <string name="routeInfo_road_types_name">Yol türleri</string>
     <string name="shared_string_swap">Takas</string>
     <string name="show_more">Daha fazla görüntüle</string>
     <string name="quick_action_show_hide_gpx_tracks">GPX yol-izlerini göster/gizle</string>
@@ -2549,7 +2549,7 @@
     <string name="profile_alert_need_save_msg">Önce profile yapılan değişiklikleri kaydet</string>
     <string name="profile_alert_delete_title">Profili sil</string>
     <string name="profile_alert_delete_msg">\"%s\" profilini silmek istediğinizden emin misiniz</string>
-    <string name="select_base_profile_dialog_title">Temel bir profil seçin</string>
+    <string name="select_base_profile_dialog_title">Başlanacak profili seç</string>
     <string name="select_nav_profile_dialog_title">Gezinme türünü seçin</string>
     <string name="base_profile_descr_car">Araba, kamyon, motorsiklet</string>
     <string name="base_profile_descr_bicycle">Dağ bisikleti, moped, at</string>
@@ -3246,7 +3246,7 @@
     <string name="rendering_attr_piste_type_skitour_name">Kayak turu</string>
     <string name="rendering_attr_piste_type_downhill_name">Yokuş aşağı</string>
     <string name="rendering_attr_piste_type_nordic_name">Nord</string>
-    <string name="routeInfo_piste_type_name">Pist tipi</string>
+    <string name="routeInfo_piste_type_name">Pist türü</string>
     <string name="rendering_attr_piste_difficulty_novice_name">Acemi</string>
     <string name="rendering_attr_piste_difficulty_easy_name">Kolay</string>
     <string name="rendering_attr_piste_difficulty_intermediate_name">Orta düzey</string>
@@ -3322,7 +3322,7 @@
     <string name="exported_osmand_profile">OsmAnd profili: %1$s</string>
     <string name="overwrite_profile_q">\'%1$s\' profili zaten var. Üzerine yazılsın mı\?</string>
     <string name="export_profile_failed">Profil dışa aktarılamadı.</string>
-    <string name="profile_import">Profil içe aktarma:</string>
+    <string name="profile_import">Profil içe aktarma</string>
     <string name="profile_import_descr">Bir profili içe aktarmak için, cihazdaki dosyasını seçin ve OsmAnd ile açın.</string>
     <string name="file_import_error">%1$s içe aktarma hatası: %2$s</string>
     <string name="file_imported_successfully">%1$s başarıyla içe aktarıldı.</string>
@@ -3355,5 +3355,17 @@
     <string name="personal_category_name">Kişisel</string>
     <string name="shared_string_downloading_formatted">%s indiriliyor</string>
     <string name="rendering_value_thick_name">Kalın</string>
-    <string name="desert_render_descr">Çöller ve diğer seyrek nüfuslu alanlar için.</string>
+    <string name="desert_render_descr">Çöller ve diğer seyrek nüfuslu alanlar için. Görüntüleme ölçeğinde daha fazla ayrıntı görüntüler.</string>
+    <string name="select_navigation_icon">Navigasyon simgesini seç</string>
+    <string name="select_map_icon">Harita simgesini seç</string>
+    <string name="delete_profiles_descr">Uygula\'ya dokunduktan sonra, silinen profiller tamamen kaybolacaktır.</string>
+    <string name="master_profile">Ana profil</string>
+    <string name="select_color">Renk seç</string>
+    <string name="edit_profiles_descr">Varsayılan OsmAnd profillerini silemezsiniz, ancak önceki ekranda devre dışı bırakabilir veya alt tarafa taşıyabilirsiniz.</string>
+    <string name="edit_profiles">Profilleri düzenle</string>
+    <string name="select_nav_profile_dialog_message">Navigasyon türü, rota hesaplamaları için kuralları etkiler.</string>
+    <string name="profile_appearance">Profil görünümü</string>
+    <string name="choose_icon_color_name">Simge, renk ve isim seç</string>
+    <string name="reorder_profiles">Profil listesini düzenle</string>
+    <string name="selected_profile">Seçilen profil</string>
 </resources>

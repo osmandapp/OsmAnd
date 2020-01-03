@@ -5,7 +5,9 @@ import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.AppCompatCheckBox;
 import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.AdapterView;
@@ -26,6 +28,7 @@ import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
 import net.osmand.plus.ContextMenuItem;
+import net.osmand.plus.DialogListItemAdapter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
@@ -433,16 +436,22 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 					names[i] = downloaded.get(i).getName();
 				}
 				final boolean[] selected = new boolean[downloaded.size()];
-				builder.setMultiChoiceItems(names, selected, new DialogInterface.OnMultiChoiceClickListener() {
-
-					@Override
-					public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-						selected[which] = isChecked;
-						if (entriesMap.containsKey(downloaded.get(which).getName()) && isChecked) {
-							Toast.makeText(activity, R.string.tile_source_already_installed, Toast.LENGTH_SHORT).show();
+				boolean nightMode = isNightMode(activity, app);
+				int themeResId = getThemeRes(activity, app);
+				int selectedProfileColor = ContextCompat.getColor(app, app.getSettings().getApplicationMode().getIconColorInfo().getColor(nightMode));
+				DialogListItemAdapter dialogAdapter = DialogListItemAdapter.createMultiChoiceAdapter(names, nightMode, selected, app,
+						selectedProfileColor, themeResId, new View.OnClickListener() {
+							@Override
+							public void onClick(View v) {
+								int which = (int) v.getTag();
+								selected[which] = !selected[which];
+								if (entriesMap.containsKey(downloaded.get(which).getName()) && selected[which]) {
+									Toast.makeText(activity, R.string.tile_source_already_installed, Toast.LENGTH_SHORT).show();
+								}
+							}
 						}
-					}
-				});
+				);
+				builder.setAdapter(dialogAdapter, null);
 				builder.setNegativeButton(R.string.shared_string_cancel, null);
 				builder.setTitle(R.string.select_tile_source_to_install);
 				builder.setPositiveButton(R.string.shared_string_apply, new DialogInterface.OnClickListener() {
@@ -467,8 +476,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 						}
 					}
 				});
-
-				builder.show();
+				dialogAdapter.setDialog(builder.show());
 			}
 		};
 		t.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
@@ -478,6 +486,9 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		final OsmandApplication app = (OsmandApplication) activity.getApplication();
 		final OsmandSettings settings = app.getSettings();
 		final Map<String, String> entriesMap = settings.getTileSourceEntries(false);
+		boolean nightMode = isNightMode(activity, app);
+		final int dp8 = AndroidUtils.dpToPx(app, 8f);
+		int textColorPrimary = ContextCompat.getColor(app, nightMode ? R.color.text_color_primary_dark : R.color.text_color_primary_light);
 		TileSourceTemplate ts = new TileSourceTemplate("NewMapnik", "http://mapnik.osmand.net/{0}/{1}/{2}.png",
 				"png", 17, 5, 256, 16, 32000);
 		final TileSourceTemplate[] result = new TileSourceTemplate[]{ts};
@@ -489,7 +500,10 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		final EditText minZoom = (EditText) view.findViewById(R.id.MinZoom);
 		final EditText maxZoom = (EditText) view.findViewById(R.id.MaxZoom);
 		final EditText expire = (EditText) view.findViewById(R.id.ExpirationTime);
-		final CheckBox elliptic = (CheckBox) view.findViewById(R.id.EllipticMercator);
+		final AppCompatCheckBox elliptic = (AppCompatCheckBox) view.findViewById(R.id.EllipticMercator);
+		elliptic.setTextColor(textColorPrimary);
+		elliptic.setPadding(dp8, 0, 0, 0);
+		UiUtilities.setupCompoundButton(app, elliptic, nightMode, true);
 		updateTileSourceEditView(ts, name, urlToLoad, minZoom, maxZoom, expire, elliptic);
 
 		final ArrayList<String> templates = new ArrayList<>(entriesMap.keySet());

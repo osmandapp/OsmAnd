@@ -249,7 +249,8 @@ Er is nu {2} MB beschikbaar</string>
     <string name="install_more">Installeer meer…</string>
     <string name="level_to_switch_vector_raster_descr">Minimum zoomniveau om vectorkaarten in plaats van (raster)kaartsegmenten te gebruiken.</string>
     <string name="level_to_switch_vector_raster">Min. vector zoomniveau</string>
-    <string name="create_poi_link_to_osm_doc"> string name=\"lat_lon_pattern\"&gt;Lat: %1$.5f Lon: %2$.5f&lt;/string </string>
+    <string name="create_poi_link_to_osm_doc">
+        <u>Online OSM</u> kaart classificatie met afbeeldingen.</string>
     <string name="error_doing_search">Fout bij offline zoeken.</string>
     <string name="search_osm_offline">Zoek adres in de offline kaarten</string>
     <string name="system_locale">Systeem</string>
@@ -2974,7 +2975,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="profile_alert_need_save_msg">Sla wijzigingen aan het profiel eerst op</string>
     <string name="profile_alert_delete_title">Verwijder profiel</string>
     <string name="profile_alert_delete_msg">Weet je zeker dat je profiel \"%s\" wilt verwijderen</string>
-    <string name="select_base_profile_dialog_title">Selecteer een basisprofiel</string>
+    <string name="select_base_profile_dialog_title">Selecteer een profiel om mee te starten</string>
     <string name="select_nav_profile_dialog_title">Selecteer navigatietype</string>
     <string name="base_profile_descr_car">Auto, vrachtauto, motor</string>
     <string name="base_profile_descr_bicycle">Mountainbike, brommer, paard</string>
@@ -3075,7 +3076,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="exported_osmand_profile">OsmAnd profiel: %1$s</string>
     <string name="overwrite_profile_q">Profiel \'%1$s\' bestaat al. Overschrijven\?</string>
     <string name="export_profile_failed">Profiel kon niet geëxporteerd worden.</string>
-    <string name="profile_import">Profiel importeren:</string>
+    <string name="profile_import">Profiel importeren</string>
     <string name="profile_import_descr">Om een profiel te importeren, selecteer het bestand op het apparaat en open het met OsmAnd.</string>
     <string name="file_import_error">%1$s fout bij het importeren: %2$s</string>
     <string name="file_imported_successfully">%1$s succesvol geïmporteerd.</string>
@@ -3284,5 +3285,17 @@ voor Gebied: %1$s x %2$s</string>
     <string name="distance_and_address">%1$s • %2$s</string>
     <string name="street_city">%1$s, %2$s</string>
     <string name="shared_string_downloading_formatted">Downloaden %s</string>
-    <string name="desert_render_descr">Voor woestijnen en andere dunbevolkte gebieden.</string>
+    <string name="desert_render_descr">Voor woestijnen en andere dunbevolkte gebieden. Toont meer details op schaal.</string>
+    <string name="rendering_value_thick_name">Dik</string>
+    <string name="select_map_icon">Selecteer kaart icoon</string>
+    <string name="delete_profiles_descr">Nadat u Toepassen getikt heeft, worden verwijderde profielen geheel gewist.</string>
+    <string name="master_profile">Hoofdprofiel</string>
+    <string name="select_color">Selecteer kleur</string>
+    <string name="edit_profiles_descr">U kunt geen standaard OsmAnd profielen verwijderen, maar u kunt ze deactiveren in het vorige scherm, of naar onderen verplaatsen.</string>
+    <string name="edit_profiles">Wijzig profielen</string>
+    <string name="select_nav_profile_dialog_message">Navigatie type beïnvloedt de routeberekening regels.</string>
+    <string name="profile_appearance">Profiel aanzicht</string>
+    <string name="choose_icon_color_name">Kies icoon, kleur en naam</string>
+    <string name="reorder_profiles">Wijzig profielen lijst</string>
+    <string name="selected_profile">Geselecteerd profiel</string>
 </resources>

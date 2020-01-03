@@ -46,7 +46,7 @@
     <string name="shared_string_telegram">テレグラム</string>
     <string name="privacy_policy_use_telegram">テレグラム(メッセージングアプリ)は、他の人々と通信するために使用されます。</string>
     <string name="privacy_policy_telegram_client">OsmAndトラッカーは、Telegramオープンプラットフォームを利用するクライアントの1つです。連絡先は他のTelegramクライアントのものを利用できます。</string>
-    <string name="privacy_policy_agree">続行をクリックすると、TelegramプライバシーポリシーおよびOsmAndプライバシーポリシーの条件に同意したとみなされます。</string>
+    <string name="privacy_policy_agree">続行をクリックすると、TelegramおよびOsmAndプライバシーポリシーの条件に同意したとみなされます。</string>
     <string name="shared_string_accept">決定</string>
     <string name="telegram_privacy_policy">Telegramプライバシーポリシー</string>
     <string name="osmand_privacy_policy">OsmAndプライバシーポリシー</string>
@@ -242,7 +242,9 @@
     <string name="shared_string_hour_short">時間</string>
     <string name="shared_string_minute_short">分</string>
     <string name="shared_string_second_short">秒</string>
-    <string name="welcome_descr"><b>OsmAnd Tracker</b>OsmAndで現在地を共有して他の人たちの現在地も確認できます。<br/><br/>アプリはTelegram APIを使用するため、Telegramアカウントが必要です。</string>
+    <string name="welcome_descr">
+        <b>OsmAnd Tracker</b>OsmAndで現在地を共有して他の人たちの現在地も確認できます。<br/>
+        <br/>アプリはTelegram APIを使用するため、Telegramアカウントが必要です。</string>
     <string name="my_location">現在地</string>
     <string name="live_now">今現在</string>
     <string name="timeline">タイムライン</string>
@@ -250,4 +252,12 @@
     <string name="si_min_m">分/マイル</string>
     <string name="units_and_formats">単位と形式</string>
     <string name="unit_of_length">長さの単位</string>
+    <string name="saved_messages">保存したメッセージ</string>
+    <string name="time_zone_descr">ロケーションメッセージに表示するタイムゾーンを選択します。</string>
+    <string name="time_zone">タイムゾーン</string>
+    <string name="unit_of_length_descr">測定する距離を変更します。</string>
+    <string name="unit_of_speed_system_descr">速度の単位を指定します。</string>
+    <string name="unit_of_speed_system">速度の単位</string>
+    <string name="buffer_time_descr">バッファー内に保存する時間を指定します</string>
+    <string name="buffer_time">バッファー有効時間</string>
 </resources>

@@ -100,14 +100,14 @@ public class ConfigureProfileMenuAdapter extends AbstractProfileMenuAdapter<Conf
 			holder.dividerBottom.setVisibility(View.VISIBLE);
 			holder.icon.setVisibility(View.VISIBLE);
 			holder.descr.setVisibility(View.VISIBLE);
-			holder.switcher.setVisibility(View.VISIBLE);
+			holder.compoundButton.setVisibility(View.VISIBLE);
 			holder.menuIcon.setVisibility(View.VISIBLE);
 			final ApplicationMode item = (ApplicationMode) obj;
 			holder.title.setText(item.toHumanString(app));
 			holder.descr.setText(BaseSettingsFragment.getAppModeDescription(app, item));
 
 			holder.initSwitcher = true;
-			holder.switcher.setChecked(selectedItems.contains(item));
+			holder.compoundButton.setChecked(selectedItems.contains(item));
 			holder.initSwitcher = false;
 			updateViewHolder(holder, item);
 		} else {
@@ -117,7 +117,7 @@ public class ConfigureProfileMenuAdapter extends AbstractProfileMenuAdapter<Conf
 			}
 			holder.icon.setVisibility(View.INVISIBLE);
 			holder.descr.setVisibility(View.GONE);
-			holder.switcher.setVisibility(View.GONE);
+			holder.compoundButton.setVisibility(View.GONE);
 			holder.menuIcon.setVisibility(View.GONE);
 			holder.title.setTextColor(app.getResources().getColor(
 				nightMode
@@ -166,7 +166,7 @@ public class ConfigureProfileMenuAdapter extends AbstractProfileMenuAdapter<Conf
 					}
 				}
 			});
-			switcher.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			compoundButton.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 				@Override
 				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 					int pos = getAdapterPosition();

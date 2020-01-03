@@ -19,6 +19,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.UiUtilities;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.download.DownloadActivity;
@@ -70,6 +71,7 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 
 		SwitchCompat switchView = (SwitchCompat) switchContainer.findViewById(R.id.switchWidget);
 		switchView.setChecked(checked);
+		UiUtilities.setupCompoundButton(isNightMode(), getActiveProfileColor(), switchView);
 
 		TextView title = switchContainer.findViewById(R.id.switchButtonText);
 		title.setText(checked ? R.string.shared_string_on : R.string.shared_string_off);

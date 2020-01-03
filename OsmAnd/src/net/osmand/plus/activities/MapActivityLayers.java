@@ -4,6 +4,7 @@ package net.osmand.plus.activities;
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.view.ContextThemeWrapper;
 import android.view.View;
@@ -22,6 +23,7 @@ import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
+import net.osmand.plus.DialogListItemAdapter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
@@ -267,7 +269,7 @@ public class MapActivityLayers {
 				return true;
 			}
 		};
-		return GpxUiHelper.selectGPXFiles(files, activity, callbackWithObject, getThemeRes(getApplication()));
+		return GpxUiHelper.selectGPXFiles(files, activity, callbackWithObject, getThemeRes(getApplication()), isNightMode(getApplication()));
 	}
 
 
@@ -283,6 +285,8 @@ public class MapActivityLayers {
 			addFilterToList(adapter, list, f, true);
 		}
 		list.add(poiFilters.getCustomPOIFilter());
+		adapter.setProfileDependent(true);
+		adapter.setNightMode(isNightMode(app));
 
 		final ArrayAdapter<ContextMenuItem> listAdapter = adapter.createListAdapter(activity, !isNightMode(app));
 		AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(activity, getThemeRes(app)));
@@ -491,80 +495,85 @@ public class MapActivityLayers {
 			items[i++] = entry.getValue();
 		}
 
-		builder.setSingleChoiceItems(items, selectedItem, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				String layerKey = entriesMapList.get(which).getKey();
-				switch (layerKey) {
-					case layerOsmVector:
-						settings.MAP_ONLINE_DATA.set(false);
-						updateMapSource(mapView, null);
-						updateItem(it, adapter, null);
-						break;
-					case layerEditInstall:
-						OsmandRasterMapsPlugin.defineNewEditLayer(activity, new ResultMatcher<TileSourceTemplate>() {
+		OsmandApplication app = getApplication();
+		boolean nightMode = isNightMode(app);
+		int themeRes = getThemeRes(app);
+		int selectedModeColor = ContextCompat.getColor(app, settings.getApplicationMode().getIconColorInfo().getColor(nightMode));
+		DialogListItemAdapter dialogAdapter = DialogListItemAdapter.createSingleChoiceAdapter(
+				items, nightMode, selectedItem, app, selectedModeColor, themeRes, new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						int which = (int) v.getTag();
+						String layerKey = entriesMapList.get(which).getKey();
+						switch (layerKey) {
+							case layerOsmVector:
+								settings.MAP_ONLINE_DATA.set(false);
+								updateMapSource(mapView, null);
+								updateItem(it, adapter, null);
+								break;
+							case layerEditInstall:
+								OsmandRasterMapsPlugin.defineNewEditLayer(activity, new ResultMatcher<TileSourceTemplate>() {
 
-							@Override
-							public boolean publish(TileSourceTemplate object) {
-								settings.MAP_TILE_SOURCES.set(object.getName());
-								settings.MAP_ONLINE_DATA.set(true);
-								if(it != null) {
-									it.setDescription(object.getName());
-								}
-								updateMapSource(mapView, settings.MAP_TILE_SOURCES);
-								return true;
-							}
-
-							@Override
-							public boolean isCancelled() {
-								return false;
-							}
-
-						});
-						break;
-					case layerInstallMore:
-						OsmandRasterMapsPlugin.installMapLayers(activity, new ResultMatcher<TileSourceTemplate>() {
-							TileSourceTemplate template = null;
-							int count = 0;
-
-							@Override
-							public boolean publish(TileSourceTemplate object) {
-								if (object == null) {
-									if (count == 1) {
-										settings.MAP_TILE_SOURCES.set(template.getName());
+									@Override
+									public boolean publish(TileSourceTemplate object) {
+										settings.MAP_TILE_SOURCES.set(object.getName());
 										settings.MAP_ONLINE_DATA.set(true);
-										updateItem(it, adapter, template.getName());
+										if(it != null) {
+											it.setDescription(object.getName());
+										}
 										updateMapSource(mapView, settings.MAP_TILE_SOURCES);
-									} else {
-										selectMapLayer(mapView, it, adapter);
+										return true;
 									}
-								} else {
-									count++;
-									template = object;
-								}
-								return false;
-							}
 
-							@Override
-							public boolean isCancelled() {
-								return false;
-							}
-						});
-						break;
-					default:
-						settings.MAP_TILE_SOURCES.set(layerKey);
-						settings.MAP_ONLINE_DATA.set(true);
-						updateItem(it, adapter, layerKey);
-						updateMapSource(mapView, settings.MAP_TILE_SOURCES);
-						break;
+									@Override
+									public boolean isCancelled() {
+										return false;
+									}
+
+								});
+								break;
+							case layerInstallMore:
+								OsmandRasterMapsPlugin.installMapLayers(activity, new ResultMatcher<TileSourceTemplate>() {
+									TileSourceTemplate template = null;
+									int count = 0;
+
+									@Override
+									public boolean publish(TileSourceTemplate object) {
+										if (object == null) {
+											if (count == 1) {
+												settings.MAP_TILE_SOURCES.set(template.getName());
+												settings.MAP_ONLINE_DATA.set(true);
+												updateItem(it, adapter, template.getName());
+												updateMapSource(mapView, settings.MAP_TILE_SOURCES);
+											} else {
+												selectMapLayer(mapView, it, adapter);
+											}
+										} else {
+											count++;
+											template = object;
+										}
+										return false;
+									}
+
+									@Override
+									public boolean isCancelled() {
+										return false;
+									}
+								});
+								break;
+							default:
+								settings.MAP_TILE_SOURCES.set(layerKey);
+								settings.MAP_ONLINE_DATA.set(true);
+								updateItem(it, adapter, layerKey);
+								updateMapSource(mapView, settings.MAP_TILE_SOURCES);
+								break;
+						}
+					}
 				}
-
-				dialog.dismiss();
-			}
-
-		});
+		);
+		builder.setAdapter(dialogAdapter, null);
 		builder.setNegativeButton(R.string.shared_string_dismiss, null);
-		builder.show();
+		dialogAdapter.setDialog(builder.show());
 	}
 
 	private void updateItem(@Nullable ContextMenuItem item,

@@ -253,8 +253,10 @@
     <string name="time_zone_descr">Marca la zona horaria que deseas que aparezca en los mensajes de ubicación.</string>
     <string name="time_zone">Zona horaria</string>
     <string name="units_and_formats">Unidades y formatos</string>
-    <string name="unit_of_length_descr">Cambia la distancia de medición.</string>
+    <string name="unit_of_length_descr">Cambia las unidades de longitud.</string>
     <string name="unit_of_length">Unidades de longitud</string>
     <string name="unit_of_speed_system_descr">Define la unidad de velocidad.</string>
     <string name="unit_of_speed_system">Unidad de velocidad</string>
+    <string name="buffer_time_descr">Tiempo máximo para almacenar puntos en el búfer</string>
+    <string name="buffer_time">Tiempo de expiración del búfer</string>
 </resources>

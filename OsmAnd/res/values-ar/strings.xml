@@ -1481,7 +1481,7 @@
     <!-- string name="lat_lon_pattern">خط العرض: %1$.5f خط الطول: %2$.5f</string -->
     <string name="access_direction_audio_feedback_descr">إشارة صوتية عند اتجاه نقطة الوصول.</string>
     <string name="access_direction_haptic_feedback_descr">اشر عن اتجاه نقطة الهدف بالاهتزاز.</string>
-    <string name="use_osm_live_routing_description">تمكين الملاحة لتعديلات OSM Live (تجريبي).</string>
+    <string name="use_osm_live_routing_description">تمكين الملاحة لتعديلات أوسماند لايف (تجريبي).</string>
     <string name="access_disable_offroute_recalc">لا تغير المسار عندما تكون خارج الطريق</string>
     <string name="access_disable_offroute_recalc_descr">منع إعادة الحساب التلقائي للمسار عندما تبتعد قليلا عن الطريق الصحيح.</string>
     <string name="access_disable_wrong_direction_recalc">لا تغير المسار باتجاه خاطئ</string>
@@ -1964,7 +1964,8 @@
 \nليست هناك حاجة لتحميل خريطة خاصة،الرؤية يتم إنشاؤها من خلال خرائطنا المحلية. 
 \n 
 \nهذه الرؤية يمكن التراجع عنها إما عن طريق تعطيلها هنا، أو تغيير \'نمط الخريطة\' في \'ضبط الخريطة\' حسب الرغبة.</string>
-    <string name="create_poi_link_to_osm_doc"> string name=\"lat_lon_pattern\"&gt;خط العرض: %1$.5f خط الطول: %2$.5f&lt;/string </string>
+    <string name="create_poi_link_to_osm_doc">
+        <u>على الانترنت OSM</u> تصنيف الخريطة مع الصور.</string>
     <string name="background_service_wait_int_descr">تعيين الحد الأقصى لوقت الانتظار لكل إصلاح موقع في الخلفية.</string>
     <string name="background_service_wait_int">الانتظار الأقصى للإصلاح</string>
     <string name="voice_data_not_supported">إصدار غير معتمد من البيانات الصوتية</string>
@@ -2239,7 +2240,7 @@
 \n • تحميل مسارات GPX إلى الموقع مباشرة بالتطبيق
 \n • إضافة POI ورفعها مباشرة إلى الموقع (أو في وقت لاحق إن كنت غير متصل بالشبكة)</string>
     <string name="nothing_found_descr">عدل طلب البحث أو زد النطاق.</string>
-    <string name="quick_action_showhide_osmbugs_title">عرض/إخفاء الملاحظات</string>
+    <string name="quick_action_showhide_osmbugs_title">تبديل ملاحظات OSM</string>
     <string name="quick_action_osmbugs_show">عرض الملاحظات</string>
     <string name="quick_action_osmbugs_hide">إخفاء الملاحظات</string>
     <string name="sorted_by_distance">مرتبة حسب المسافة</string>
@@ -3045,7 +3046,7 @@
     <string name="exported_osmand_profile">OsmAnd ملف تعريف: %1$s</string>
     <string name="overwrite_profile_q">ملف التعريف \'%1$s\' موجود بالفعل، هل تريد استبداله؟</string>
     <string name="export_profile_failed">لا يمكن تصدير ملف التعريف.</string>
-    <string name="profile_import">استيراد ملف التعريف:</string>
+    <string name="profile_import">استيراد ملف التعريف</string>
     <string name="profile_import_descr">لاستيراد ملف تعريف، اذهب لمكانه على الجهاز وافتحه باستخدام OsmAnd.</string>
     <string name="file_import_error">%1$s استيراد خاطئ: %2$s</string>
     <string name="file_imported_successfully">%1$s تم الاستيراد بنجاح.</string>
@@ -3247,7 +3248,7 @@
     <string name="profile_alert_need_save_title">حفظ التغييرات</string>
     <string name="profile_alert_need_save_msg">احفظ التغييرات في ملف التعريف أولاً</string>
     <string name="profile_alert_delete_title">حذف الملف الشخصي</string>
-    <string name="profile_alert_delete_msg">هل تريد بالتأكيد حذف ملف التعريف \"٪ s\"</string>
+    <string name="profile_alert_delete_msg">هل تريد بالتأكيد حذف ملف التعريف \"%s\"</string>
     <string name="select_base_profile_dialog_title">حدد ملف تعريف أساسي</string>
     <string name="select_base_profile_dialog_message">إسناد ملف التعريف المخصص الخاص بك إلى أحد ملفات تعريف التطبيق الافتراضية ، يحدد الإعداد الأساسي مثل الرؤية الافتراضية لعناصر واجهة المستخدم ووحدات السرعة والمسافة. وهذه هي ملفات تعريف التطبيق الافتراضية ، إلى جانب أمثلة لملفات تعريف مخصصة يمكن تمديدها إلى:</string>
     <string name="select_nav_profile_dialog_title">حدد نوع الملاحة</string>
@@ -3322,4 +3323,16 @@
     <string name="shared_string_downloading_formatted">تنزيل %s</string>
     <string name="rendering_value_thick_name">سميك</string>
     <string name="desert_render_descr">للصحاري وغيرها من المناطق قليله السكان.</string>
+    <string name="select_navigation_icon">حدد رمز التنقل</string>
+    <string name="select_map_icon">حدد أيقونه الخريطة</string>
+    <string name="delete_profiles_descr">بعد النقر فوق \"تطبيق\" ، سيتم فقد ملفات التعريف المحذوفة بالكامل.</string>
+    <string name="master_profile">الملف الشخصي الرئيسي</string>
+    <string name="select_color">اختر اللون</string>
+    <string name="edit_profiles_descr">لا يمكنك حذف ملفات تعريف أوسماند الافتراضية ، ولكن يمكنك تعطيلها في الشاشة السابقة ، أو نقلها إلى الأسفل.</string>
+    <string name="edit_profiles">تحرير ملفات التعريف</string>
+    <string name="select_nav_profile_dialog_message">يؤثر نوع التنقل على قواعد حسابات المسار.</string>
+    <string name="profile_appearance">مظهر الملف الشخصي</string>
+    <string name="choose_icon_color_name">اختر الايقونة واللون والاسم</string>
+    <string name="reorder_profiles">تحرير قائمة ملفات التعريف</string>
+    <string name="selected_profile">الملف الشخصي المحدد</string>
 </resources>

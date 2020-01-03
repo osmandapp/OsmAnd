@@ -94,7 +94,7 @@ public class SelectProfileMenuAdapter extends AbstractProfileMenuAdapter<SelectP
 			holder.dividerUp.setVisibility(View.INVISIBLE);
 			holder.icon.setVisibility(View.VISIBLE);
 			holder.descr.setVisibility(View.VISIBLE);
-			holder.switcher.setVisibility(View.GONE);
+			holder.compoundButton.setVisibility(View.GONE);
 			holder.menuIcon.setVisibility(View.GONE);
 			final ApplicationMode item = (ApplicationMode) obj;
 			holder.title.setText(item.toHumanString(app));
@@ -123,7 +123,7 @@ public class SelectProfileMenuAdapter extends AbstractProfileMenuAdapter<SelectP
 			}
 			holder.icon.setVisibility(View.INVISIBLE);
 			holder.descr.setVisibility(View.GONE);
-			holder.switcher.setVisibility(View.GONE);
+			holder.compoundButton.setVisibility(View.GONE);
 			holder.menuIcon.setVisibility(View.GONE);
 			int color = ContextCompat.getColor(app, nightMode
 					? R.color.active_color_primary_dark

@@ -34,6 +34,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -142,7 +143,6 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		updateTheme();
 		View view = super.onCreateView(inflater, container, savedInstanceState);
 		if (view != null) {
-			AndroidUtils.addStatusBarPadding21v(getContext(), view);
 			if (getPreferenceScreen() != null) {
 				PreferenceManager prefManager = getPreferenceManager();
 				PreferenceScreen preferenceScreen = prefManager.inflateFromResource(prefManager.getContext(), currentScreenType.preferencesResId, null);
@@ -228,6 +228,9 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 						activity.getWindow().setStatusBarColor(ContextCompat.getColor(activity, colorId));
 					}
 				}
+				if (activity instanceof MapActivity) {
+					((MapActivity) activity).exitFromFullScreen(getView());
+				}
 			}
 		}
 	}
@@ -236,16 +239,18 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 	public void onPause() {
 		super.onPause();
 
-		MapActivity mapActivity = getMapActivity();
-		if (!wasDrawerDisabled && mapActivity != null) {
-			mapActivity.enableDrawer();
-		}
+		Activity activity = getActivity();
+		if (activity != null) {
+			if (!wasDrawerDisabled && activity instanceof MapActivity) {
+				((MapActivity) activity).enableDrawer();
+			}
 
-		if (Build.VERSION.SDK_INT >= 21) {
-			Activity activity = getActivity();
-			if (activity != null) {
+			if (Build.VERSION.SDK_INT >= 21) {
 				if (!(activity instanceof MapActivity) && statusBarColor != -1) {
 					activity.getWindow().setStatusBarColor(statusBarColor);
+				}
+				if (activity instanceof MapActivity) {
+					((MapActivity) activity).enterToFullScreen();
 				}
 			}
 		}
@@ -295,13 +300,13 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 
 		ApplicationMode appMode = getSelectedAppMode();
 		if (preference instanceof ListPreferenceEx) {
-			SingleSelectPreferenceBottomSheet.showInstance(fragmentManager, preference.getKey(), this, false, appMode);
+			SingleSelectPreferenceBottomSheet.showInstance(fragmentManager, preference.getKey(), this, false, appMode, currentScreenType.profileDependent);
 		} else if (preference instanceof SwitchPreferenceEx) {
-			BooleanPreferenceBottomSheet.showInstance(fragmentManager, preference.getKey(), this, false, appMode);
+			BooleanPreferenceBottomSheet.showInstance(fragmentManager, preference.getKey(), this, false, appMode, currentScreenType.profileDependent);
 		} else if (preference instanceof EditTextPreference) {
 			EditTextPreferenceBottomSheet.showInstance(fragmentManager, preference.getKey(), this, false, appMode);
 		} else if (preference instanceof MultiSelectBooleanPreference) {
-			MultiSelectPreferencesBottomSheet.showInstance(fragmentManager, preference.getKey(), this, false, appMode);
+			MultiSelectPreferencesBottomSheet.showInstance(fragmentManager, preference.getKey(), this, false, appMode, currentScreenType.profileDependent);
 		} else {
 			super.onDisplayPreferenceDialog(preference);
 		}
@@ -351,6 +356,15 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 			if (selectableView != null) {
 				Drawable drawable = UiUtilities.getColoredSelectableDrawable(app, getActiveProfileColor(), 0.3f);
 				AndroidUtils.setBackground(selectableView, drawable);
+			}
+		}
+		if (currentScreenType.profileDependent) {
+			View cb = holder.itemView.findViewById(R.id.switchWidget);
+			if (cb == null) {
+				cb = holder.findViewById(android.R.id.checkbox);
+			}
+			if (cb instanceof CompoundButton) {
+				UiUtilities.setupCompoundButton(isNightMode(), getActiveProfileColor(), (CompoundButton) cb);
 			}
 		}
 	}
@@ -737,5 +751,12 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 			LOG.error(e);
 		}
 		return false;
+	}
+
+	void updateRouteInfoMenu() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.getMapRouteInfoMenu().updateMenu();
+		}
 	}
 }

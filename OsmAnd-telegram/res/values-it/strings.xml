@@ -254,4 +254,6 @@
     <string name="units_and_formats">Unità e formati</string>
     <string name="unit_of_length_descr">Cambia l\'unità di misura della distanza.</string>
     <string name="unit_of_length">Unità di misura di lunghezza</string>
+    <string name="time_zone">Fuso orario</string>
+    <string name="unit_of_speed_system">Unità di misura della velocità</string>
 </resources>

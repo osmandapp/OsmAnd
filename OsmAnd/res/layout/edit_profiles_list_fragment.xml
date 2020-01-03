@@ -24,7 +24,8 @@
 			android:layout_height="match_parent"
 			android:background="?attr/list_background_color"
 			android:clipToPadding="false"
-			android:paddingBottom="72dp" />
+			android:paddingBottom="72dp"
+			android:paddingTop="16dp"/>
 
 		<LinearLayout
 			android:layout_width="match_parent"

@@ -29,6 +29,7 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
 import net.osmand.plus.settings.BaseSettingsFragment;
+import net.osmand.plus.views.controls.ReorderItemTouchHelperCallback;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -47,6 +48,9 @@ public class EditProfilesFragment extends BaseOsmAndFragment {
 
 	private EditProfilesAdapter adapter;
 
+	private boolean nightMode;
+	private boolean wasDrawerDisabled;
+
 	@Nullable
 	@Override
 	public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -59,9 +63,9 @@ public class EditProfilesFragment extends BaseOsmAndFragment {
 				appModesOrders.put(mode.getStringKey(), mode.getOrder());
 			}
 		}
-		View mainView = inflater.inflate(R.layout.edit_profiles_list_fragment, container, false);
-		AndroidUtils.addStatusBarPadding21v(getContext(), mainView);
+		nightMode = !app.getSettings().isLightContent();
 
+		View mainView = UiUtilities.getInflater(getContext(), nightMode).inflate(R.layout.edit_profiles_list_fragment, container, false);
 		ImageButton closeButton = mainView.findViewById(R.id.close_button);
 		closeButton.setImageResource(R.drawable.ic_action_remove_dark);
 		closeButton.setOnClickListener(new View.OnClickListener() {
@@ -124,7 +128,7 @@ public class EditProfilesFragment extends BaseOsmAndFragment {
 		recyclerView.setAdapter(adapter);
 
 		View cancelButton = mainView.findViewById(R.id.dismiss_button);
-		UiUtilities.setupDialogButton(false, cancelButton, UiUtilities.DialogButtonType.SECONDARY, R.string.shared_string_cancel);
+		UiUtilities.setupDialogButton(nightMode, cancelButton, UiUtilities.DialogButtonType.SECONDARY, R.string.shared_string_cancel);
 		cancelButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -138,7 +142,7 @@ public class EditProfilesFragment extends BaseOsmAndFragment {
 		mainView.findViewById(R.id.buttons_divider).setVisibility(View.VISIBLE);
 
 		View applyButton = mainView.findViewById(R.id.right_bottom_button);
-		UiUtilities.setupDialogButton(false, applyButton, UiUtilities.DialogButtonType.PRIMARY, R.string.shared_string_apply);
+		UiUtilities.setupDialogButton(nightMode, applyButton, UiUtilities.DialogButtonType.PRIMARY, R.string.shared_string_apply);
 		applyButton.setVisibility(View.VISIBLE);
 		applyButton.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -180,10 +184,50 @@ public class EditProfilesFragment extends BaseOsmAndFragment {
 	}
 
 	@Override
+	protected boolean isFullScreenAllowed() {
+		return false;
+	}
+
+	@Override
 	public void onSaveInstanceState(@NonNull Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putSerializable(APP_MODES_ORDER_KEY, appModesOrders);
 		outState.putStringArrayList(DELETED_APP_MODES_KEY, deletedModesKeys);
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			wasDrawerDisabled = mapActivity.isDrawerDisabled();
+			if (!wasDrawerDisabled) {
+				mapActivity.disableDrawer();
+			}
+		}
+	}
+
+	public void onPause() {
+		super.onPause();
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null && !wasDrawerDisabled) {
+			mapActivity.enableDrawer();
+		}
+	}
+
+	@Override
+	public int getStatusBarColorId() {
+		return nightMode ? R.color.status_bar_color_dark : R.color.status_bar_color_light;
+	}
+
+	@Nullable
+	public MapActivity getMapActivity() {
+		FragmentActivity activity = getActivity();
+		if (activity instanceof MapActivity) {
+			return (MapActivity) activity;
+		} else {
+			return null;
+		}
 	}
 
 	public List<EditProfileDataObject> getProfiles(boolean deleted) {
@@ -311,7 +355,7 @@ public class EditProfilesFragment extends BaseOsmAndFragment {
 		public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, int pos) {
 			if (holder instanceof ProfileViewHolder) {
 				ProfileViewHolder profileViewHolder = (ProfileViewHolder) holder;
-				EditProfileDataObject mode = (EditProfileDataObject) items.get(pos);
+				final EditProfileDataObject mode = (EditProfileDataObject) items.get(pos);
 
 				profileViewHolder.title.setText(mode.getName());
 				profileViewHolder.description.setText(mode.getDescription());
@@ -329,17 +373,15 @@ public class EditProfilesFragment extends BaseOsmAndFragment {
 				Drawable drawable = UiUtilities.getColoredSelectableDrawable(app, colorNoAlpha, 0.3f);
 				AndroidUtils.setBackground(profileViewHolder.itemsContainer, drawable);
 
-				if (mode.isCustomProfile()) {
-					profileViewHolder.actionIcon.setOnClickListener(new View.OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							int pos = holder.getAdapterPosition();
-							if (pos != RecyclerView.NO_POSITION) {
-								listener.onButtonClicked(pos);
-							}
+				profileViewHolder.actionIcon.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						int pos = holder.getAdapterPosition();
+						if (mode.isCustomProfile() && pos != RecyclerView.NO_POSITION) {
+							listener.onButtonClicked(pos);
 						}
-					});
-				}
+					}
+				});
 				profileViewHolder.moveIcon.setVisibility(mode.isDeleted() ? View.GONE : View.VISIBLE);
 				if (!mode.isDeleted()) {
 					int removeIconColor = mode.isCustomProfile() ? R.color.color_osm_edit_delete : R.color.icon_color_default_light;
