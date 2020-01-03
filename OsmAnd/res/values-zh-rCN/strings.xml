@@ -2557,7 +2557,7 @@
     <string name="mapillary_menu_title_pano">仅显示 360° 图像</string>
     <string name="wiki_article_search_text">搜索对应的维基条目</string>
     <string name="run_full_osmand_header">启动 OsmAnd？</string>
-    <string name="routing_attr_avoid_subway_name">避免地铁</string>
+    <string name="routing_attr_avoid_subway_name">不乘坐地铁</string>
     <string name="quick_action_day_night_mode">%s模式</string>
     <string name="avoid_pt_types">避免特定交通类型……</string>
     <string name="rendering_attr_undefined_name">未定义</string>
@@ -2567,12 +2567,12 @@
     <string name="total_donations">捐赠总计</string>
     <string name="winter_and_ski_renderer">冬季与滑雪</string>
     <string name="toast_empty_name_error">未命名位置</string>
-    <string name="routing_attr_avoid_share_taxi_name">避免共享出租车</string>
+    <string name="routing_attr_avoid_share_taxi_name">不乘坐共享出租车</string>
     <string name="routing_attr_avoid_share_taxi_description">避免共享出租车</string>
-    <string name="routing_attr_avoid_train_name">避免火车</string>
+    <string name="routing_attr_avoid_train_name">不乘坐火车</string>
     <string name="routing_attr_avoid_train_description">避免火车</string>
     <string name="routing_attr_avoid_subway_description">避免地铁和轻轨交通</string>
-    <string name="routing_attr_avoid_ferry_name">避免轮渡</string>
+    <string name="routing_attr_avoid_ferry_name">不乘坐轮渡</string>
     <string name="routing_attr_avoid_ferry_description">避免轮渡</string>
     <string name="shared_string_degrees">度</string>
     <string name="shared_string_milliradians">毫弧度</string>
@@ -2600,9 +2600,9 @@
     <string name="transfers_size">%1$d 次中转</string>
     <string name="rendering_attr_surface_mud_name">泥路</string>
     <string name="rendering_attr_surface_asphalt_name">柏油路</string>
-    <string name="routing_attr_avoid_tram_name">避免电车</string>
+    <string name="routing_attr_avoid_tram_name">不乘坐电车</string>
     <string name="routing_attr_avoid_tram_description">避免电车</string>
-    <string name="routing_attr_avoid_bus_name">避免公交</string>
+    <string name="routing_attr_avoid_bus_name">不乘坐公交</string>
     <string name="routing_attr_avoid_bus_description">避免公交和无轨电车</string>
     <string name="send_log">发送日志</string>
     <string name="files_moved">已移动 %1$d 个文件 (%2$s)。</string>
@@ -2610,7 +2610,7 @@
     <string name="files_present">%1$d 个文件 (%2$s) 仍在原路径 \'%3$s\'。</string>
     <string name="move_maps">移动地图</string>
     <string name="dont_move_maps">不要移动</string>
-    <string name="public_transport_ped_route_title">徒步完成此路径需要约 %1$s，可能比公交更快</string>
+    <string name="public_transport_ped_route_title">徒步完成此路径需要约 %1$s，可能比公共交通更快</string>
     <string name="public_transport_no_route_title">非常抱歉，OsmAnd 无法找到符合您的设置的路线。</string>
     <string name="public_transport_try_ped">尝试步行导航。</string>
     <string name="public_transport_try_change_settings">尝试更改设置。</string>
@@ -2710,7 +2710,7 @@
 \n • 在测距中显示方位角
 \n
 \n</string>
-    <string name="files_failed">未能复制 %1$d 个文件 (%2$s).</string>
+    <string name="files_failed">无法复制 %1$d 个文件 (%2$s)。</string>
     <string name="poi_cannot_be_found">无法找到节点或道路。</string>
     <string name="shared_string_total">一共</string>
     <string name="wikivoyage_download_pics">下载图片</string>
@@ -2741,7 +2741,7 @@
     <string name="shared_string_default">默认</string>
     <string name="transport_nearby_routes">之间</string>
     <string name="shared_string_privacy_policy">隐私政策</string>
-    <string name="help_us_make_osmand_better">帮助我们让 OsmAnd 变得更好！</string>
+    <string name="help_us_make_osmand_better">帮助我们让 OsmAnd 变得更好</string>
     <string name="shared_string_no_thank_you">不，谢谢</string>
     <string name="shared_string_allow">允许</string>
     <string name="nav_type_hint">导航类型</string>
@@ -2754,7 +2754,7 @@
     <string name="cancel_subscription">取消订阅</string>
     <string name="units_and_formats">单位和格式</string>
     <string name="appearance">外观</string>
-    <string name="list_of_installed_plugins">已安装插件列表</string>
+    <string name="list_of_installed_plugins">已安装插件</string>
     <string name="configure_navigation">配置导航</string>
     <string name="general_settings_profile_descr">应用主题、单位、区域</string>
     <string name="language_and_output">语言和输出</string>
@@ -2762,7 +2762,7 @@
     <string name="osmand_settings">OsmAnd 设置</string>
     <string name="shared_string_other">其它</string>
     <string name="plugins_settings">插件设置</string>
-    <string name="shared_string_select_folder">选择文件夹</string>
+    <string name="shared_string_select_folder">文件夹…</string>
     <string name="shared_string_calculate">计算</string>
     <string name="shared_string_osmand_usage">OsmAnd 用法</string>
     <string name="shared_string_memory_used_tb_desc">已使用 %1$s TB</string>
@@ -2780,7 +2780,7 @@
     <string name="exported_osmand_profile">OsmAnd配置文件： %1$s</string>
     <string name="overwrite_profile_q">配置文件\"%1$s\"已存在。覆盖？</string>
     <string name="export_profile_failed">无法导出配置文件。</string>
-    <string name="profile_import">配置文件导入：</string>
+    <string name="profile_import">配置文件导入</string>
     <string name="profile_import_descr">要导入配置文件，请在设备上选择其文件，然后使用OsmAnd打开它。</string>
     <string name="file_import_error">%1$s 导入错误：%2$s</string>
     <string name="file_imported_successfully">%1$s 已成功导入。</string>
@@ -2795,4 +2795,17 @@
     <string name="clear_confirmation_msg">清空 %1$s？</string>
     <string name="dialogs_and_notifications_title">对话框和通知</string>
     <string name="shared_string_downloading_formatted">正在下载 %s</string>
+    <string name="download_map_dialog">下载地图对话框</string>
+    <string name="suggested_maps">建议的地图</string>
+    <string name="shared_string_turn_off">关闭</string>
+    <string name="distance_and_address">%1$s • %2$s</string>
+    <string name="select_navigation_icon">选择导航图标</string>
+    <string name="select_map_icon">选择地图图标</string>
+    <string name="delete_profiles_descr">在您点击“应用”后，已删除的配置将永久丢失。</string>
+    <string name="select_color">选择颜色</string>
+    <string name="edit_profiles_descr">您不能删除默认的 OsmAnd 配置，但您可以在前一个屏幕中将其禁用，或是将它们移到底部。</string>
+    <string name="choose_icon_color_name">选择图标、颜色和名称</string>
+    <string name="reset_confirmation_descr">如果点击 %1$s，您将丢失所有更改。</string>
+    <string name="reset_all_profile_settings_descr">所有配置设置将会重置为安装后的状态。</string>
+    <string name="reset_all_profile_settings">要将所有配置设置重置为默认值吗？</string>
 </resources>
