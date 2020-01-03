@@ -742,38 +742,6 @@ public class RouteDataObject {
 		return null;
 	}
 
-	public BinaryMapIndexReader.TagValuePair getShieldColor() {
-		int sz = types.length;
-		for (int i = 0; i < sz; i++) {
-			RouteTypeRule r = region.quickGetEncodingRule(types[i]);
-			switch (r.getTag()) {
-				case "road_shield_color_1":
-					return new BinaryMapIndexReader.TagValuePair("road_shield_color_1", r.getValue(), 0);
-				case "road_shield_color_2":
-					return new BinaryMapIndexReader.TagValuePair("road_shield_color_2", r.getValue(), 0);
-				case "road_shield_color_3":
-					return new BinaryMapIndexReader.TagValuePair("road_shield_color_3", r.getValue(), 0);
-			}
-		}
-		return null;
-	}
-
-	public BinaryMapIndexReader.TagValuePair getShieldShape() {
-		int sz = types.length;
-		for (int i = 0; i < sz; i++) {
-			RouteTypeRule r = region.quickGetEncodingRule(types[i]);
-			switch (r.getTag()) {
-				case "road_shield_shape_1":
-					return new BinaryMapIndexReader.TagValuePair("road_shield_shape_1", r.getValue(), 0);
-				case "road_shield_shape_2":
-					return new BinaryMapIndexReader.TagValuePair("road_shield_shape_2", r.getValue(), 0);
-				case "road_shield_shape_3":
-					return new BinaryMapIndexReader.TagValuePair("road_shield_shape_3", r.getValue(), 0);
-			}
-		}
-		return null;
-	}
-
 	public int getOneway() {
 		int sz = types.length;
 		for (int i = 0; i < sz; i++) {
