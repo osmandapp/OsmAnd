@@ -995,11 +995,8 @@ public class MapInfoWidgetsFactory {
 								turnDrawable.setColor(R.color.nav_arrow);
 							}
 						}
-
 						RouteCalculationResult.NextDirectionInfo nextDirInfo = routingHelper.getNextRouteDirectionInfo(
 								new RouteCalculationResult.NextDirectionInfo(), true);
-
-
 						RouteDirectionInfo directionInfo = nextDirInfo.directionInfo;
 
 						if (directionInfo != null && directionInfo.getExitInfo() != null) {
@@ -1013,26 +1010,24 @@ public class MapInfoWidgetsFactory {
 							text = exitInfo.getExitStreetName();
 						}
 
-
 						if (nextDirInfo.directionInfo.getRouteDataObject() != null) {
 							object = nextDirInfo.directionInfo.getRouteDataObject();
 							showShield = true;
 						}
 					}
-
-			} else {
-				int di = MapRouteInfoMenu.getDirectionInfo();
-				if (di >= 0 && map.getMapRouteInfoMenu().isVisible() &&
-						di < routingHelper.getRouteDirections().size()) {
-					showNextTurn = true;
-					RouteDirectionInfo next = routingHelper.getRouteDirections().get(di);
-					type[0] = next.getTurnType();
-					turnDrawable.setColor(R.color.nav_arrow_distant);
-					text = RoutingHelper.formatStreetName(next.getStreetName(), null, next.getDestinationName(), "»");
-					if (text == null) {
-						text = "";
-					}
 				} else {
+					int di = MapRouteInfoMenu.getDirectionInfo();
+					if (di >= 0 && map.getMapRouteInfoMenu().isVisible() &&
+							di < routingHelper.getRouteDirections().size()) {
+						showNextTurn = true;
+						RouteDirectionInfo next = routingHelper.getRouteDirections().get(di);
+						type[0] = next.getTurnType();
+						turnDrawable.setColor(R.color.nav_arrow_distant);
+						text = RoutingHelper.formatStreetName(next.getStreetName(), null, next.getDestinationName(), "»");
+						if (text == null) {
+							text = "";
+						}
+					} else {
 						text = null;
 					}
 				}
@@ -1041,7 +1036,6 @@ public class MapInfoWidgetsFactory {
 				RouteDataObject rt = locationProvider.getLastKnownRouteSegment();
 				if (rt != null) {
 					Location lastKnownLocation = locationProvider.getLastKnownLocation();
-					//ref = rt.getRef(settings.MAP_PREFERRED_LOCALE.get(), settings.MAP_TRANSLITERATE_NAMES.get(), rt.bearingVsRouteDirection(lastKnownLocation));
 					text = RoutingHelper.formatStreetName(
 							rt.getName(settings.MAP_PREFERRED_LOCALE.get(), settings.MAP_TRANSLITERATE_NAMES.get()),
 							rt.getRef(settings.MAP_PREFERRED_LOCALE.get(), settings.MAP_TRANSLITERATE_NAMES.get(), rt.bearingVsRouteDirection(lastKnownLocation)),
@@ -1078,9 +1072,7 @@ public class MapInfoWidgetsFactory {
 				AndroidUiHelper.updateVisibility(addressTextShadow, shadowRad > 0);
 				boolean update = turnDrawable.setTurnType(type[0]) || showMarker != this.showMarker;
 				this.showMarker = showMarker;
-
 				if (showShield) {
-
 					if (setRoadShield(shieldIcon, object)) {
 						AndroidUiHelper.updateVisibility(shieldIcon, true);
 					} else {
@@ -1137,7 +1129,7 @@ public class MapInfoWidgetsFactory {
 					additional.append(key).append("=").append(val).append(";");
 				}
 			}
-			LOG.debug("Additionals (names): " + additional.toString() );
+//			LOG.debug("Additionals (names): " + additional.toString() );
 
 			Context context = topBar.getContext();
 			int[] tps = object.getTypes();

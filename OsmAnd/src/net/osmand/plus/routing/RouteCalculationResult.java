@@ -28,8 +28,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
-
 import static net.osmand.binary.RouteDataObject.HEIGHT_UNDEFINED;
 
 public class RouteCalculationResult {
@@ -345,8 +343,7 @@ public class RouteCalculationResult {
 						boolean isNextShieldFound = false;
 						int[] nextSegmentNameIds = nextRoad.nameIds;
 						for (int nm = 0; nm < nextSegmentNameIds.length; nm++) {
-							int nmId = nextSegmentNameIds[nm];
-							if (nextRoad.region.quickGetEncodingRule(nextSegmentNameIds[nm]).getTag().startsWith("road_ref")) {// && nextSegmentNames.get(nmId).equals(ref)) {
+							if (nextRoad.region.quickGetEncodingRule(nextSegmentNameIds[nm]).getTag().startsWith("road_ref")) {
 								info.setRouteDataObject(nextRoad);
 								isNextShieldFound = true;
 							}
@@ -393,8 +390,6 @@ public class RouteCalculationResult {
 					prevDirectionDistance = 0;
 					prevDirectionTime = 0;
 				}
-
-
 				directions.add(info);
 			}
 			prevDirectionDistance += s.getDistance();
