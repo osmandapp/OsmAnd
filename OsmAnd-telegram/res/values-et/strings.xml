@@ -85,4 +85,11 @@
     <string name="si_km_m">Kilomeetrid/meetrid</string>
     <string name="si_nm">Meremiilid</string>
     <string name="si_mi_meters">Miilid/meetrid</string>
+    <string name="privacy">Privaatsus</string>
+    <string name="direction">Suund</string>
+    <string name="precision">Täpsus</string>
+    <string name="bearing">Kurss</string>
+    <string name="search_contacts">Otsi kontaktide hulgast</string>
+    <string name="search_contacts_descr">Otsi kõigist oma gruppidest ja kontaktidest.</string>
+    <string name="type_contact_or_group_name">Kirjuta kontakti või grupi nimi</string>
 </resources>
