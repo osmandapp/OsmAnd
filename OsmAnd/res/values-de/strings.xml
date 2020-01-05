@@ -73,8 +73,8 @@
     <string name="map_magnifier">Kartenlupe</string>
     <string name="base_world_map">Weltweite Basiskarte (basemap)</string>
     <string name="context_menu_item_destination_point">Als Ziel wählen</string>
-    <string name="layer_hillshade">Schummerungsebene</string>
-    <string name="download_hillshade_maps">Schummerungen</string>
+    <string name="layer_hillshade">Reliefanzeige</string>
+    <string name="download_hillshade_maps">Relief</string>
     <string name="rendering_attr_noAdminboundaries_name">Grenzen</string>
     <string name="rendering_attr_noAdminboundaries_description">Anzeige regionaler Grenzverläufe (Administrationsebenen 5 - 9) unterdrücken.</string>
     <string name="map_widget_max_speed">Tempolimit</string>
