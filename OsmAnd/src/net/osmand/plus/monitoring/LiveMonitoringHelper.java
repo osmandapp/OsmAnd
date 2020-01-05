@@ -1,6 +1,8 @@
 package net.osmand.plus.monitoring;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 
 import net.osmand.PlatformUtil;
@@ -9,9 +11,14 @@ import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.ExternalApiHelper;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -33,9 +40,15 @@ public class LiveMonitoringHelper  {
 	private final static Log log = PlatformUtil.getLog(LiveMonitoringHelper.class);
 	private ConcurrentLinkedQueue<LiveMonitoringData> queue;
 	private boolean started = false;
+	private OsmandApplication app = null;
+
+	// set by OsmandMonitoringPlugin.registerLayers()
+	MapActivity activity = null;
+	ExternalApiHelper apiHelper = null;
 
 	public LiveMonitoringHelper(Context ctx){
 		this.ctx = ctx;
+		app = (OsmandApplication) ctx.getApplicationContext();
 		settings = ((OsmandApplication) ctx.getApplicationContext()).getSettings();
 		queue = new ConcurrentLinkedQueue<>();
 	}
@@ -198,6 +211,26 @@ public class LiveMonitoringHelper  {
 					is.close();
 				}
 				log.info("Monitor response (" + urlConnection.getHeaderField("Content-Type") + "): " + responseBody.toString());
+
+				try {
+					JSONObject obj = new JSONObject(responseBody.toString());
+					JSONArray osmandapicmds = obj.getJSONArray("osmandapicmds");
+					for (int i = 0; i < osmandapicmds.length(); i++) {
+						String osmandapicmd = osmandapicmds.getString(i);
+						//String osmandapicmd = "osmand.api://add_map_marker?lat=54.6622958&lon=-5.7666790&name=thing2";
+						log.info("Monitor received"+i+": "+osmandapicmd);
+						if (osmandapicmd.startsWith("osmand.api://")) {
+							Intent intent = new Intent(activity, app.getAppCustomization().getFavoritesActivity());
+							Uri netdata = Uri.parse(osmandapicmd);
+							intent.setData(netdata);
+							Intent result = apiHelper.processApiRequest(intent);
+						}
+					}
+				} catch (JSONException e) {
+					String message = "JSON parsing error: " + (e.getMessage() == null ? "unknown" : e.getMessage());
+					//app.showShortToastMessage(MessageFormat.format(activity.getString(R.string.error_message_pattern), message));
+					log.error(message);
+				}
 			}
 
 			urlConnection.disconnect();

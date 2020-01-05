@@ -34,6 +34,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.SavingTrackHelper.SaveGpxResult;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
+import net.osmand.plus.helpers.ExternalApiHelper;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -106,6 +107,8 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 
 	@Override
 	public void registerLayers(MapActivity activity) {
+		liveMonitoringHelper.activity = activity;
+		liveMonitoringHelper.apiHelper = new ExternalApiHelper(activity);
 		registerWidget(activity);
 	}
 
