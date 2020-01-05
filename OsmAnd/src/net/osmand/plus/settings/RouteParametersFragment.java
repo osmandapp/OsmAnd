@@ -118,8 +118,8 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		SwitchPreferenceEx timeConditionalRouting = createSwitchPreferenceEx(settings.ENABLE_TIME_CONDITIONAL_ROUTING.getId(),
 				R.string.temporary_conditional_routing, R.layout.preference_with_descr_dialog_and_switch);
 		timeConditionalRouting.setIcon(getRoutingPrefIcon(settings.ENABLE_TIME_CONDITIONAL_ROUTING.getId()));
-		timeConditionalRouting.setSummaryOn(R.string.shared_string_enable);
-		timeConditionalRouting.setSummaryOff(R.string.shared_string_disable);
+		timeConditionalRouting.setSummaryOn(R.string.shared_string_on);
+		timeConditionalRouting.setSummaryOff(R.string.shared_string_off);
 		getPreferenceScreen().addPreference(timeConditionalRouting);
 	}
 
@@ -133,8 +133,8 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 		SwitchPreferenceEx fastRoute = createSwitchPreferenceEx(app.getSettings().FAST_ROUTE_MODE.getId(), R.string.fast_route_mode, R.layout.preference_with_descr_dialog_and_switch);
 		fastRoute.setIcon(getRoutingPrefIcon(app.getSettings().FAST_ROUTE_MODE.getId()));
 		fastRoute.setDescription(getString(R.string.fast_route_mode_descr));
-		fastRoute.setSummaryOn(R.string.shared_string_enable);
-		fastRoute.setSummaryOff(R.string.shared_string_disable);
+		fastRoute.setSummaryOn(R.string.shared_string_on);
+		fastRoute.setSummaryOff(R.string.shared_string_off);
 
 		ApplicationMode am = getSelectedAppMode();
 		if (am.getRouteService() != RouteProvider.RouteService.OSMAND) {
@@ -204,8 +204,8 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 						SwitchPreferenceEx switchPreferenceEx = (SwitchPreferenceEx) createSwitchPreferenceEx(pref.getId(), title, description, R.layout.preference_with_descr_dialog_and_switch);
 						switchPreferenceEx.setDescription(description);
 						switchPreferenceEx.setIcon(getRoutingPrefIcon(p.getId()));
-						switchPreferenceEx.setSummaryOn(R.string.shared_string_enable);
-						switchPreferenceEx.setSummaryOff(R.string.shared_string_disable);
+						switchPreferenceEx.setSummaryOn(R.string.shared_string_on);
+						switchPreferenceEx.setSummaryOff(R.string.shared_string_off);
 						switchPreferenceEx.setIconSpaceReserved(true);
 
 						screen.addPreference(switchPreferenceEx);
