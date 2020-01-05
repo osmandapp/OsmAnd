@@ -2725,7 +2725,7 @@
     <string name="background_service_is_enabled_question">OsmAnd taustateenus töötab endiselt. Kas see ka lõpetada\?</string>
     <string name="save_track_to_gpx_globally_descr">GPX faili üldist asukoha logimist saab sisse või välja lülitada kaardil oleva GPX logimisvidina abil.</string>
     <string name="live_monitoring_m_descr">Saada jälgimisandmed kindlaksmääratud veebiteenusele kui GPX logimine on sisse lülitatud.</string>
-    <string name="android_19_location_disabled">Android 4.4 (KitKat) alates ei ole vanemad salvestuskaustad (% s) enam toetatud. Kas kopeerida kõik OsmAnd failid uude salvestuskohta\?
+    <string name="android_19_location_disabled">Android 4.4 (KitKat) alates ei ole vanemad salvestuskaustad (%s) enam toetatud. Kas kopeerida kõik OsmAnd failid uude salvestuskohta\?
 \n Märkus 1: Vanad failid jäävad puutumatuks (kuid neid saab käsitsi kustutada).
 \n Märkus 2: Uues salvestuskohas pole faile võimalik OsmAnd ja OsmAnd+ vahel jagada.</string>
     <string name="local_osm_changes_delete_all_confirm">Oled kindel, et soovid %1$d OSM muudatust kustutada\?</string>
