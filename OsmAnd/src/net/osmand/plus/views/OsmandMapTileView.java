@@ -950,7 +950,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			}
 		} else if (tileBoxHeightPx > 0) {
 			tbh = (int) (tileBoxHeightPx * border);
-			dy = (tb.getPixHeight() - tileBoxHeightPx) / 2 - marginTopPx;
+			dy = (tb.getCenterPixelY() * 2 - tileBoxHeightPx) / 2 - marginTopPx;
 		}
 		tb.setPixelDimensions(tbw, tbh);
 
