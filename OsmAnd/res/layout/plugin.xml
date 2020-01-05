@@ -72,8 +72,8 @@
                     android:paddingRight="9.5dp"
                     android:paddingTop="8dp"
                     android:textColor="?attr/switch_ex_text_color"
-                    android:textOff="@string/shared_string_disabled"
-                    android:textOn="@string/shared_string_enabled"
+                    android:textOff="@string/shared_string_off"
+                    android:textOn="@string/shared_string_on"
                     android:textSize="@dimen/default_sub_text_size"
                     osmand:textAllCapsCompat="true"
                     osmand:typeface="@string/font_roboto_medium"/>
