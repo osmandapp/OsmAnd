@@ -11,13 +11,13 @@
     <string name="poi_aerialway_drag_lift">Schlepplift</string>
     <string name="poi_aerialway_gondola">Gondelbahn</string>
     <string name="poi_aerialway_goods">Güterseilbahn</string>
-    <string name="poi_aerialway_j_bar">Schlepplift</string>
+    <string name="poi_aerialway_j_bar">Tellerschlepplift</string>
     <string name="poi_aerialway_magic_carpet">Teppichlift</string>
     <string name="poi_aerialway_mixed_lift">Hybridlift</string>
     <string name="poi_aerialway_platter">Plattenlift</string>
     <string name="poi_aerialway_rope_tow">Übungslift</string>
     <string name="poi_aerialway_station">Seilbahnstation</string>
-    <string name="poi_aerialway_t_bar">Schlepplift</string>
+    <string name="poi_aerialway_t_bar">Stangenschlepplift</string>
     <string name="poi_aeroway_gate">Flugsteig</string>
     <string name="poi_aeroway_terminal">Flughafenterminal</string>
     <string name="poi_craft_agricultural_engines">Landmaschinen</string>
@@ -1355,7 +1355,7 @@
     <string name="poi_power_pole">Strommast</string>
     <string name="poi_power_tower">Strommast</string>
     <string name="poi_ford_stepping_stones">Trittsteine</string>
-    <string name="poi_greenfield">Bauland</string>
+    <string name="poi_greenfield">Grüne Wiese</string>
     <string name="poi_religion_jain">Jainismus</string>
     <string name="poi_board_type_notice">schwarzes Brett</string>
     <string name="poi_garden_style_english">Gartenstil: Englisch</string>
@@ -2016,7 +2016,7 @@
     <string name="poi_service_bicycle_cleaning_no">Fahrradreinigung: nein</string>
     <string name="poi_service_bicycle_chaintool_yes">Fahrradkettenwerkzeug</string>
     <string name="poi_service_bicycle_chaintool_no">Fahrradkettenwerkzeug: nein</string>
-    <string name="poi_service_bicycle_second_hand_yes">Verkauf von Gebrauchtfahrräder</string>
+    <string name="poi_service_bicycle_second_hand_yes">Verkauf von Gebrauchtfahrrädern</string>
     <string name="poi_service_bicycle_second_hand_no">Verkauf von Gebrauchtfahrrädern: nein</string>
     <string name="poi_wildlife_hide">Wildbeobachtungsplatz</string>
     <string name="poi_training_language">Ausbildung: Sprache</string>
@@ -2445,7 +2445,7 @@
     <string name="poi_vacuum_cleaner_no">Staubsauger: nein</string>
     <string name="poi_amenity_vacuum_cleaner">Staubsauger</string>
     <string name="poi_sport_free_flying">Freies Fliegen (Sport)</string>
-    <string name="poi_bicycle_repair_station">Fahrräder Selbstreparaturstation</string>
+    <string name="poi_bicycle_repair_station">Fahrrad-Selbstreparaturstation</string>
     <string name="poi_water_tap">Wasserhahn</string>
     <string name="poi_button_operated_yes">Tastenbetätigung: ja</string>
     <string name="poi_button_operated_no">Tastenbetätigung: nein</string>
