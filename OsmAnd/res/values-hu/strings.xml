@@ -766,7 +766,7 @@ Proporcionális memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</str
     <string name="bg_service_screen_unlock">Feloldás</string>
     <string name="bg_service_sleep_mode_off">Futtatás\n háttérben</string>
     <string name="bg_service_sleep_mode_on">Háttérben futás\n leállítása</string>
-    <string name="avoid_in_routing_title">Elkerülés:</string>
+    <string name="avoid_in_routing_title">Elkerülés…</string>
     <string name="show_warnings_title">Figyelmeztetések megjelenítése…</string>
     <string name="show_warnings_descr">Közlekedési figyelmeztetések (sebességkorlátozás, közúti ellenőrzés, fekvőrendőr, alagút), traffipaxriasztás és sávinformációk beállítása.</string>
     <string name="map_widget_fluorescent">Élénk színű utak</string>
@@ -2855,7 +2855,7 @@ Ha szereted az OsmAndot és az OSM-et, és szeretnéd támogatni a fejlődésük
     <string name="run_full_osmand_header">Elindítod az OsmAndot\?</string>
     <string name="add_work">Munkahely hozzáadása</string>
     <string name="work_button">Munkahely</string>
-    <string name="routeInfo_surface_name">Burkolat</string>
+    <string name="routeInfo_surface_name">Felület</string>
     <string name="routeInfo_smoothness_name">Simaság</string>
     <string name="routeInfo_steepness_name">Lejtés</string>
     <string name="previous_route">Előző útvonal</string>

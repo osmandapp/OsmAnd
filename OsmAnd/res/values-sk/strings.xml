@@ -1809,7 +1809,7 @@ Dĺžka %2$s</string>
     <string name="route_distance">Vzdialenosť:</string>
     <string name="route_duration">Čas:</string>
     <string name="update_now">Aktualizovať teraz</string>
-    <string name="update">Aktualizovať každých</string>
+    <string name="update">Aktualizovať</string>
     <string name="only_download_over_wifi">Sťahovať iba na Wi-Fi</string>
     <string name="live_update">Okamžité aktualizácie</string>
     <string name="missing_write_external_storage_permission">OsmAnd nemá oprávnenie použiť pamäťovú kartu</string>

@@ -3413,4 +3413,7 @@
     <string name="choose_icon_color_name">Elegir el icono, color y nombre</string>
     <string name="reorder_profiles">Editar la lista de perfiles</string>
     <string name="selected_profile">Perfil seleccionado</string>
+    <string name="reset_confirmation_descr">Haciendo click en %1$s, perderás todos tus cambios.</string>
+    <string name="reset_all_profile_settings_descr">Todos los ajustes del perfil se restablecerán al estado después de la instalación.</string>
+    <string name="reset_all_profile_settings">¿Restablecer todos los ajustes del perfil a los valores predeterminados\?</string>
 </resources>
