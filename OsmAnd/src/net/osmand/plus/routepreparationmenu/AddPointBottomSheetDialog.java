@@ -641,12 +641,12 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 				} else {
 					if (item instanceof FavouritePoint) {
 						FavouritePoint point = (FavouritePoint) item;
-						favoriteViewHolder.title.setText(point.getName(app));
-						if (((FavouritePoint) item).isPersonal()) {
+						favoriteViewHolder.title.setText(point.getDisplayName(app));
+						if (((FavouritePoint) item).isPersonalPoint()) {
 							int iconColor = app.getSettings().isLightContent()
 									? R.color.icon_color_default_light : R.color.icon_color_default_dark;
 							favoriteViewHolder.icon.setImageDrawable(app.getUIUtilities().getIcon(
-									FavouritePoint.PointType.valueOfTypeName(point.getName()).getIconId(), iconColor));
+									FavouritesDbHelper.getPersonalIconId(point.getName()), iconColor));
 							favoriteViewHolder.description.setText(point.getDescription());
 						} else {
 							if (point.getCategory().equals("")) {

@@ -24,11 +24,9 @@ import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
-import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.base.FavoriteImageDrawable;
-import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
 import net.osmand.plus.views.ContextMenuLayer.ApplyMovedObjectCallback;
 import net.osmand.plus.views.MapTextLayer.MapTextProvider;
 
@@ -128,16 +126,13 @@ public class FavouritesLayer extends OsmandMapLayer implements ContextMenuLayer.
 						double lon = o.getLongitude();
 						if (o.isVisible() && o != contextMenuLayer.getMoveableObject()
 								&& lat >= latLonBounds.bottom && lat <= latLonBounds.top
-								&& lon >= latLonBounds.left && lon <= latLonBounds.right) {
+								&& lon >= latLonBounds.left && lon <= latLonBounds.right
+								&& !favorites.isParkingPoint(o)) {
 							MapMarker marker = null;
 							if (synced) {
 								if ((marker = mapMarkersHelper.getMapMarker(o)) == null) {
 									continue;
 								}
-							}
-							if (group.personal && o.getName().equals(FavouritePoint.PointType.PARKING.getName())
-									&& OsmandPlugin.getEnabledPlugin(ParkingPositionPlugin.class) == null) {
-								continue;
 							}
 							cache.add(o);
 							float x = tileBox.getPixXFromLatLon(lat, lon);
@@ -206,13 +201,11 @@ public class FavouritesLayer extends OsmandMapLayer implements ContextMenuLayer.
 
 	private void getFavFromPoint(RotatedTileBox tb, List<? super FavouritePoint> res, int r, int ex, int ey,
 			FavouritePoint n) {
-		if (n.isVisible()) { 
+		if (n.isVisible() && !favorites.isParkingPoint(n)) {
 			int x = (int) tb.getPixXFromLatLon(n.getLatitude(), n.getLongitude());
 			int y = (int) tb.getPixYFromLatLon(n.getLatitude(), n.getLongitude());
 			if (calculateBelongs(ex, ey, x, y, r)) {
-				if (!n.getName().equals(FavouritePoint.PointType.PARKING.getName())) {
-					res.add(n);
-				}
+				res.add(n);
 			}
 		}
 	}
@@ -299,7 +292,9 @@ public class FavouritesLayer extends OsmandMapLayer implements ContextMenuLayer.
 		boolean result = false;
 		if (o instanceof FavouritePoint) {
 			favorites.editFavourite((FavouritePoint) o, position.getLatitude(), position.getLongitude());
-			favorites.lookupAddressAllPersonalPoints();
+			if (((FavouritePoint) o).isPersonalPoint()) {
+				favorites.lookupAddress((FavouritePoint) o);
+			}
 			result = true;
 		}
 		if (callback != null) {

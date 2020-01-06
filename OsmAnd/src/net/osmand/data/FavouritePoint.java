@@ -3,18 +3,18 @@ package net.osmand.data;
 import java.io.Serializable;
 
 import android.content.Context;
-import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
-import android.support.annotation.StringRes;
 
 import net.osmand.GPXUtilities.WptPt;
+import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.R;
+
+import static net.osmand.plus.FavouritesDbHelper.FavoriteGroup.PERSONAL_CATEGORY;
 
 public class FavouritePoint implements Serializable, LocationPoint {
 	private static final long serialVersionUID = 729654300829771466L;
 
 	private static final String HIDDEN = "hidden";
-	public static final String PERSONAL_CATEGORY = "personal";
 
 	protected String name = "";
 	protected String description;
@@ -24,51 +24,6 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	private double longitude;
 	private int color;
 	private boolean visible = true;
-
-	public enum PointType {
-		HOME("home", R.string.home_button, 1, R.drawable.ic_action_home_dark),
-		WORK("work", R.string.work_button, 2, R.drawable.ic_action_work),
-		PARKING("parking", R.string.map_widget_parking, 3, R.drawable.ic_action_parking_dark);
-
-		private String typeName;
-		@StringRes
-		private int resId;
-		private int order;
-		@DrawableRes
-		private int iconId;
-
-		PointType(@NonNull String typeName, @StringRes int resId, int order, @DrawableRes int iconId) {
-			this.typeName = typeName;
-			this.resId = resId;
-			this.order = order;
-			this.iconId = iconId;
-		}
-
-		public String getName() {
-			return typeName;
-		}
-
-		public int getOrder() {
-			return order;
-		}
-
-		public static PointType valueOfTypeName(@NonNull String typeName) {
-			for (PointType pt : values()) {
-				if (pt.typeName.equals(typeName)) {
-					return pt;
-				}
-			}
-			throw new IllegalArgumentException("Illegal PointType typeName");
-		}
-
-		public int getIconId() {
-			return iconId;
-		}
-
-		public String getHumanString(@NonNull Context ctx) {
-			return ctx.getString(resId);
-		}
-	}
 
 	public FavouritePoint(){
 	}
@@ -102,17 +57,15 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		return new PointDescription(PointDescription.POINT_TYPE_FAVORITE, getName());
 	}
 
-	public boolean isPersonal() {
-		return PERSONAL_CATEGORY.equals(category);
+	public boolean isPersonalPoint() {
+		return name.equals(FavouritesDbHelper.getHomePointName())
+				|| name.equals(FavouritesDbHelper.getWorkPointName())
+				|| name.equals(FavouritesDbHelper.getParkingPointName());
 	}
 
 	@Override
 	public PointDescription getPointDescription(@NonNull Context ctx) {
-		if (isPersonal()) {
-			return new PointDescription(PointDescription.POINT_TYPE_FAVORITE, getName(ctx));
-		} else {
-			return getPointDescription();
-		}
+		return new PointDescription(PointDescription.POINT_TYPE_FAVORITE, getDisplayName(ctx));
 	}
 	
 	public void setColor(int color) {
@@ -155,8 +108,8 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		return category;
 	}
 
-	public String getCategory(@NonNull Context ctx) {
-		if (isPersonal()) {
+	public String getCategoryDisplayName(@NonNull Context ctx) {
+		if (category.equals(PERSONAL_CATEGORY)) {
 			return ctx.getString(R.string.personal_category_name);
 		} else {
 			return category;
@@ -167,9 +120,9 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		this.category = category;
 	}
 
-	public String getName(@NonNull Context ctx) {
-		if (isPersonal()) {
-			return PointType.valueOfTypeName(getName()).getHumanString(ctx);
+	public String getDisplayName(@NonNull Context ctx) {
+		if (isPersonalPoint()) {
+			return FavouritesDbHelper.getPersonalName(this, ctx);
 		}
 		return name;
 	}

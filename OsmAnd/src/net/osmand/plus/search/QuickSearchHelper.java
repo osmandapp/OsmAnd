@@ -11,7 +11,6 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
-import net.osmand.data.WptLocationPoint;
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
@@ -295,7 +294,7 @@ public class QuickSearchHelper implements ResourceListener {
 					continue;
 				}
 				SearchResult sr = new SearchResult(phrase);
-				sr.localeName = point.getName(app);
+				sr.localeName = point.getDisplayName(app);
 				sr.object = point;
 				sr.priority = SEARCH_FAVORITE_OBJECT_PRIORITY;
 				sr.objectType = ObjectType.FAVORITE;

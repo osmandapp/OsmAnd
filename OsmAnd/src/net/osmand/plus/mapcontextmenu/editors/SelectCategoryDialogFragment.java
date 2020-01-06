@@ -26,6 +26,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import static net.osmand.plus.FavouritesDbHelper.FavoriteGroup.PERSONAL_CATEGORY;
+
 public class SelectCategoryDialogFragment extends DialogFragment {
 
 	public static final String TAG = SelectCategoryDialogFragment.class.getSimpleName();
@@ -85,9 +87,7 @@ public class SelectCategoryDialogFragment extends DialogFragment {
 		} else {
 			List<FavouritesDbHelper.FavoriteGroup> gs = helper.getFavoriteGroups();
 			for (final FavouritesDbHelper.FavoriteGroup category : gs) {
-				if (!category.personal) {
-					addCategory(activity, ll, category.name, category.color);
-				}
+				addCategory(activity, ll, category.getName(getContext()), category.color);
 			}
 		}
 		View itemView = activity.getLayoutInflater().inflate(R.layout.favorite_category_dialog_item, null);
@@ -133,12 +133,13 @@ public class SelectCategoryDialogFragment extends DialogFragment {
 			public void onClick(View v) {
 				FragmentActivity a = getActivity();
 				if (a != null && a instanceof MapActivity) {
+					String categoryInternalName = categoryName.equals(a.getString(R.string.personal_category_name)) ? PERSONAL_CATEGORY : categoryName;
 					PointEditor pointEditor = ((MapActivity) a).getContextMenu().getPointEditor(editorTag);
 					if (pointEditor != null) {
-						pointEditor.setCategory(categoryName, categoryColor);
+						pointEditor.setCategory(categoryInternalName, categoryColor);
 					}
 					if (selectionListener != null) {
-						selectionListener.onCategorySelected(categoryName, categoryColor);
+						selectionListener.onCategorySelected(categoryInternalName, categoryColor);
 					}
 				}
 				dismiss();

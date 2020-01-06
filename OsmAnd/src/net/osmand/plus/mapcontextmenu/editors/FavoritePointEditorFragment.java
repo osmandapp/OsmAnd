@@ -25,6 +25,8 @@ import net.osmand.plus.dialogs.FavoriteDialogs;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.util.Algorithms;
 
+import static net.osmand.plus.FavouritesDbHelper.FavoriteGroup.PERSONAL_CATEGORY;
+
 public class FavoritePointEditorFragment extends PointEditorFragment {
 
 	@Nullable
@@ -230,10 +232,11 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 		FavouritesDbHelper helper = getHelper();
 		FavoritePointEditor editor = getFavoritePointEditor();
 		if (editor != null && helper != null) {
+			String categoryInternalName = category.equals(getContext().getString(R.string.personal_category_name)) ? PERSONAL_CATEGORY : category;
 			if (editor.isNew()) {
-				doAddFavorite(name, category, description);
+				doAddFavorite(name, categoryInternalName, description);
 			} else {
-				helper.editFavouriteName(favorite, name, category, description);
+				helper.editFavouriteName(favorite, name, categoryInternalName, description);
 			}
 		}
 		MapActivity mapActivity = getMapActivity();
@@ -309,7 +312,7 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 	@Override
 	public String getCategoryInitValue() {
 		FavouritePoint favorite = getFavorite();
-		return favorite == null || favorite.getCategory().length() == 0 ? getDefaultCategoryName() : favorite.getCategory();
+		return favorite == null || favorite.getCategory().length() == 0 ? getDefaultCategoryName() : favorite.getCategoryDisplayName(getContext());
 	}
 
 	@Override

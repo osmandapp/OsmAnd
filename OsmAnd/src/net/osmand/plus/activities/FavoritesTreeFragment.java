@@ -707,13 +707,13 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 		selectedChildPos = childPos;
 		LatLon location = new LatLon(point.getLatitude(), point.getLongitude());
 		String pointType;
-		if (point.isPersonal() && point.getName().equals(FavouritePoint.PointType.PARKING.getName())) {
+		if (app.getFavorites().isParkingPoint(point)) {
 			pointType = PointDescription.POINT_TYPE_PARKING_MARKER;
 		} else {
 			pointType = PointDescription.POINT_TYPE_FAVORITE;
 		}
 		FavoritesActivity.showOnMap(requireActivity(), this, location.getLatitude(), location.getLongitude(),
-				settings.getLastKnownMapZoom(), new PointDescription(pointType, point.getName(app)), true, point);
+				settings.getLastKnownMapZoom(), new PointDescription(pointType, point.getDisplayName(app)), true, point);
 	}
 
 	@Override
@@ -760,16 +760,16 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			for (FavoriteGroup key : gs) {
 				boolean empty = true;
 				if (flt == null || flt.contains(key)) {
-					if (key.personal) {
+					if (key.isPersonal()) {
 						ArrayList<FavouritePoint> list = new ArrayList<>();
 						for (FavouritePoint p : key.points) {
-							if (p.getName().equals(FavouritePoint.PointType.PARKING.getName())) {
+							if (app.getFavorites().isParkingPoint(p)) {
 								if (isParkingPluginEnable) {
 									list.add(p);
 									empty = false;
 								}
 							} else {
-								if (p.getName().equals(FavouritePoint.PointType.PARKING.getName())) {
+								if (app.getFavorites().isParkingPoint(p)) {
 									if (isParkingPluginEnable) {
 										list.add(p);
 										empty = false;
@@ -865,7 +865,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			int disabledColor = light ? R.color.text_color_secondary_light : R.color.text_color_secondary_dark;
 			row.findViewById(R.id.group_divider).setVisibility(groupPosition == 0 ? View.GONE : View.VISIBLE);
 			int color = model.color == 0 || model.color == Color.BLACK ? getResources().getColor(R.color.color_favorite) : model.color;
-			if (!model.personal) {
+			if (!model.isPersonal()) {
 				setCategoryIcon(app, app.getUIUtilities().getPaintedIcon(
 						R.drawable.ic_action_fav_dark, visible ? (color | 0xff000000) : getResources().getColor(disabledColor)),
 						groupPosition, isExpanded, row, light);
@@ -917,7 +917,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			}
 			final View ch = row.findViewById(R.id.options);
 			if (!selectionMode) {
-				if (!model.personal) {
+				if (!model.isPersonal()) {
 					((ImageView) ch).setImageDrawable(getMyApplication().getUIUtilities().getThemedIcon(R.drawable.ic_overflow_menu_white));
 					ch.setVisibility(View.VISIBLE);
 					ch.setContentDescription(getString(R.string.shared_string_settings));
@@ -981,13 +981,13 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			name.setTypeface(Typeface.DEFAULT, visible ? Typeface.NORMAL : Typeface.ITALIC);
 			name.setTextColor(getResources().getColor(visible ? enabledColor : disabledColor));
 			distanceText.setText(distance);
-			if (model.isPersonal()) {
+			if (model.isPersonalPoint()) {
 				String distanceWithAddress = String.format(getString(R.string.distance_and_address), distance.trim(), model.getDescription() != null ? model.getDescription() : "");
 				distanceText.setText(distanceWithAddress);
 				icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(getActivity(),
 						visible ? model.getColor() : getResources().getColor(disabledIconColor), false,
-						FavouritePoint.PointType.valueOfTypeName(model.getName())));
-				name.setText((model.getName(app)));
+						model));
+				name.setText((model.getDisplayName(app)));
 			} else {
 				icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(getActivity(),
 						visible ? model.getColor() : getResources().getColor(disabledIconColor), false));

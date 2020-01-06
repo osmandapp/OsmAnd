@@ -214,7 +214,7 @@ public class QuickSearchListItem {
 			case FAVORITE:
 				FavouritePoint fav = (FavouritePoint) searchResult.object;
 				return fav.getCategory().length() == 0 ?
-						app.getString(R.string.shared_string_favorites) : fav.getCategory(app);
+						app.getString(R.string.shared_string_favorites) : fav.getCategoryDisplayName(app);
 			case FAVORITE_GROUP:
 				return app.getString(R.string.shared_string_my_favorites);
 			case REGION:

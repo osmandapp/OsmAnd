@@ -17,7 +17,8 @@ import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
 
-import net.osmand.data.FavouritePoint.PointType;
+import net.osmand.data.FavouritePoint;
+import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 
@@ -43,12 +44,12 @@ public class FavoriteImageDrawable extends Drawable {
 	private ColorFilter grayFilter;
 	private Drawable personalPointBitmap;
 
-	public FavoriteImageDrawable(Context ctx, int color, boolean withShadow, boolean synced, PointType pointType) {
+	public FavoriteImageDrawable(Context ctx, int color, boolean withShadow, boolean synced, FavouritePoint point) {
 		this.withShadow = withShadow;
 		this.synced = synced;
 		Resources res = ctx.getResources();
-		if (pointType != null) {
-			personalPointBitmap = UiUtilities.tintDrawable(ResourcesCompat.getDrawable(res, pointType.getIconId(), null),
+		if (point != null && point.isPersonalPoint()) {
+			personalPointBitmap = UiUtilities.tintDrawable(ResourcesCompat.getDrawable(res, FavouritesDbHelper.getPersonalIconId(point.getName()), null),
 					ContextCompat.getColor(ctx, R.color.icon_color_default_light));
 		}
 		int col = color == 0 || color == Color.BLACK ? res.getColor(R.color.color_favorite) : color;
@@ -143,25 +144,27 @@ public class FavoriteImageDrawable extends Drawable {
 		paintIcon.setColorFilter(cf);
 	}
 
-	private static TreeMap<Integer, FavoriteImageDrawable> cache = new TreeMap<>();
+	private static TreeMap<String, FavoriteImageDrawable> cache = new TreeMap<>();
 
-	public static FavoriteImageDrawable getOrCreate(Context a, int color, boolean withShadow, boolean synced, PointType pointType) {
-		int pointTypeId = 0;
-		if (pointType != null)
-			pointTypeId = pointType.getOrder();
+	public static FavoriteImageDrawable getOrCreate(Context a, int color, boolean withShadow, boolean synced, FavouritePoint point) {
+		String pointName = "";
+		if (point != null && point.isPersonalPoint()) {
+			pointName = point.getName();
+		}
 		color = color | 0xff000000;
-		int hash = (color << 4) + ((withShadow ? 1 : 0) << 2) + ((synced ? 3 : 0) << 2) + pointTypeId;
-		FavoriteImageDrawable drawable = cache.get(hash);
+		int hash = (color << 4) + ((withShadow ? 1 : 0) << 2) + ((synced ? 3 : 0) << 2);
+		String uniqueId = hash + pointName;
+		FavoriteImageDrawable drawable = cache.get(uniqueId);
 		if (drawable == null) {
-			drawable = new FavoriteImageDrawable(a, color, withShadow, synced, pointType);
+			drawable = new FavoriteImageDrawable(a, color, withShadow, synced, point);
 			drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
-			cache.put(hash, drawable);
+			cache.put(uniqueId, drawable);
 		}
 		return drawable;
 	}
 
-	public static FavoriteImageDrawable getOrCreate(Context a, int color, boolean withShadow, PointType pointType) {
-		return getOrCreate(a, color, withShadow, false, pointType);
+	public static FavoriteImageDrawable getOrCreate(Context a, int color, boolean withShadow, FavouritePoint point) {
+		return getOrCreate(a, color, withShadow, false, point);
 	}
 
 	public static FavoriteImageDrawable getOrCreate(Context a, int color, boolean withShadow) {
