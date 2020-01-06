@@ -47,6 +47,8 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 		private const val STATUS_WIDGET_MENU_ICON = "widget_location_sharing_night"
 		private const val STATUS_WIDGET_ANIM_ICON_DAY = "anim_widget_location_sharing_day"
 		private const val STATUS_WIDGET_ANIM_ICON_NIGHT = "anim_widget_location_sharing_night"
+		private const val STATUS_WIDGET_ON_ANIM_ICON_DAY = "anim_widget_location_sharing_on_day"
+		private const val STATUS_WIDGET_ON_ANIM_ICON_NIGHT = "anim_widget_location_sharing_on_night"
 		private const val STATUS_WIDGET_OFF_ICON_DAY = "widget_location_sharing_off_day"
 		private const val STATUS_WIDGET_OFF_ICON_NIGHT = "widget_location_sharing_off_night"
 
@@ -216,6 +218,11 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 				OsmandFormatter.getFormattedDurationForWidget(diffTime)
 			}
 			time == 0L && isSending -> {
+				iconDay = STATUS_WIDGET_ON_ANIM_ICON_DAY
+				iconNight = STATUS_WIDGET_ON_ANIM_ICON_NIGHT
+				app.getString(R.string.shared_string_ok)
+			}
+			time == 0L && !isSending -> {
 				iconDay = STATUS_WIDGET_ANIM_ICON_DAY
 				iconNight = STATUS_WIDGET_ANIM_ICON_NIGHT
 				app.getString(R.string.shared_string_ok)
