@@ -3335,8 +3335,8 @@
     <string name="internal_app_storage_description">Внутрішнє сховище, приховане від користувачів та інших додатків, доступне виключно OsmAnd</string>
     <string name="change_data_storage_folder">Зміна теки сховища даних</string>
     <string name="rendering_attr_piste_type_snow_park_name">Ландшафтний парк</string>
-    <string name="rendering_attr_piste_type_sleigh_name">Сани</string>
-    <string name="rendering_attr_piste_type_sled_name">Санки</string>
+    <string name="rendering_attr_piste_type_sleigh_name">Запряжені сани, санчата</string>
+    <string name="rendering_attr_piste_type_sled_name">Тільки санки, санчата</string>
     <string name="rendering_attr_piste_type_hike_name">Похід</string>
     <string name="rendering_attr_piste_type_connection_name">З\'єднання</string>
     <string name="rendering_attr_piste_type_skitour_name">Лижні мандри</string>
