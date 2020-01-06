@@ -914,7 +914,6 @@ public class MapMarkersHelper {
 				MapMarker marker = new MapMarker(point, pointDescription, colorIndex, false, 0);
 				if (group != null) {
 					marker.id = group.getId() + marker.getName(ctx) + MapUtils.createShortLinkString(marker.point.getLatitude(), marker.point.getLongitude(), 15);
-					// TODO ???????
 					if (markersDbHelper.getMarker(marker.id) != null) {
 						continue;
 					}

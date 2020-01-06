@@ -666,9 +666,9 @@ public class FavouritesDbHelper {
 	public FavoriteGroup getGroup(String nameId) {
 		if (flatGroups.containsKey(nameId)) {
 			return flatGroups.get(nameId);
-			// TODO HW: double check invocations and use convert where it is needed?
-//		} else if (name.equals(context.getString(R.string.personal_category_name))) {
-//			return flatGroups.get(PERSONAL_CATEGORY);
+			// TODO HW: double check invocations and use convertDisplayNameToGroupIdName where it is needed?
+////		} else if (name.equals(context.getString(R.string.personal_category_name))) {
+////			return flatGroups.get(PERSONAL_CATEGORY);
 		} else {
 			return null;
 		}
