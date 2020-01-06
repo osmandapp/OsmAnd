@@ -23,7 +23,7 @@
     <string name="poi_craft_agricultural_engines">Landmaschinen</string>
     <string name="poi_aerodrome">Flughafen</string>
     <string name="poi_alcohol">Spirituosenladen</string>
-    <string name="poi_alpine_hut">bewirtschaftete Schutzhütte</string>
+    <string name="poi_alpine_hut">Bewirtschaftete Schutzhütte</string>
     <string name="poi_ambulance_station">Rettungswache</string>
     <string name="poi_anime">Anime-Shop</string>
     <string name="poi_antiques">Antiquitätenhändler</string>
@@ -591,7 +591,7 @@
     <string name="poi_american_football">Amerikanischer Football</string>
     <string name="poi_base">Basejumping</string>
     <string name="poi_bmx">BMX</string>
-    <string name="poi_canadian_football">Kanad. Football</string>
+    <string name="poi_canadian_football">Kanadischer Football</string>
     <string name="poi_surfing">Surfen</string>
     <string name="poi_historic_cannon">Historische Kanone</string>
     <string name="poi_harbour">Hafen</string>
@@ -728,7 +728,7 @@
     <string name="poi_charity">Sozialkaufhaus</string>
     <string name="poi_cabin">Hütte</string>
     <string name="poi_lean_to">Unterstand</string>
-    <string name="poi_wilderness_hut">unbewirtschaftete Schutzhütte</string>
+    <string name="poi_wilderness_hut">Unbewirtschaftete Schutzhütte</string>
     <string name="poi_wiki_lang_zh">Chinesisches Wiki</string>
     <string name="poi_wiki_lang_tr">Türkisches Wiki</string>
     <string name="poi_wiki_lang_uk">Ukrainisches Wiki</string>
@@ -1859,7 +1859,7 @@
     <string name="poi_memorial_column">Spalte</string>
     <string name="poi_memorial_stupa">Stupa</string>
     <string name="poi_inscription">Beschriftung</string>
-    <string name="poi_historic_quarry">historischer Steinbruch</string>
+    <string name="poi_historic_quarry">Historischer Steinbruch</string>
     <string name="poi_resource_antimony">Antimon</string>
     <string name="poi_resource_asbestos">Asbest</string>
     <string name="poi_resource_basalt">Basalt</string>
@@ -2054,7 +2054,7 @@
     <string name="poi_animal_boarding_dog_cat">Beförderungstyp: Hund, Katze</string>
     <string name="poi_animal_boarding_horse">Beförderungstyp: Pferd</string>
     <string name="poi_honey">Honiggeschäft</string>
-    <string name="poi_technical_monument">technisches Denkmal</string>
+    <string name="poi_technical_monument">Technisches Denkmal</string>
     <string name="poi_office_camping">Camping-Büro</string>
     <string name="poi_model_aerodrome">Modellflugplatz</string>
     <string name="poi_guide">Fremdenführerbüro</string>
@@ -2233,7 +2233,7 @@
     <string name="poi_historic_era_paleolithic">Historische Epoche: Altsteinzeit (2,6 Mio. - 10000 Jahre vor heute)</string>
     <string name="poi_historic_era_mesolithic">Historische Epoche: Mittelsteinzeit</string>
     <string name="poi_historic_era_neolithic">Historische Epoche: Jungsteinzeit</string>
-    <string name="poi_historic_era_chalcolithic">Historische Epoche: Kupfersteinzeit (4. - 3. Jahrtausend v.Chr.)</string>
+    <string name="poi_historic_era_chalcolithic">Historische Epoche: Kupfersteinzeit (4. - 3. Jahrtausend v. Chr.)</string>
     <string name="poi_stone_type_conciliation_cross">Typ: Steinkreuz</string>
     <string name="poi_site_type_hut_circle">Hüttenkreis</string>
     <string name="poi_site_type_petroglyph">Petroglyphe</string>
