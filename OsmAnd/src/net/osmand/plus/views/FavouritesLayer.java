@@ -111,7 +111,7 @@ public class FavouritesLayer extends OsmandMapLayer implements ContextMenuLayer.
 		if (this.settings.SHOW_FAVORITES.get() && favorites.isFavoritesLoaded()) {
 			if (tileBox.getZoom() >= startZoom) {
 				float iconSize = FavoriteImageDrawable.getOrCreate(view.getContext(), 0,
-						 true).getIntrinsicWidth() * 3 / 2.5f;
+						 true, (FavouritePoint) null).getIntrinsicWidth() * 3 / 2.5f;
 				QuadTree<QuadRect> boundIntersections = initBoundIntersections(tileBox);
 
 				// request to load
@@ -126,8 +126,7 @@ public class FavouritesLayer extends OsmandMapLayer implements ContextMenuLayer.
 						double lon = o.getLongitude();
 						if (o.isVisible() && o != contextMenuLayer.getMoveableObject()
 								&& lat >= latLonBounds.bottom && lat <= latLonBounds.top
-								&& lon >= latLonBounds.left && lon <= latLonBounds.right
-								&& !favorites.isParkingPoint(o)) {
+								&& lon >= latLonBounds.left && lon <= latLonBounds.right) {
 							MapMarker marker = null;
 							if (synced) {
 								if ((marker = mapMarkersHelper.getMapMarker(o)) == null) {
@@ -176,10 +175,10 @@ public class FavouritesLayer extends OsmandMapLayer implements ContextMenuLayer.
 		FavoriteImageDrawable fid;
 		boolean history = false;
 		if (marker != null) {
-			fid = FavoriteImageDrawable.getOrCreateSyncedIcon(view.getContext(), o.getColor());
+			fid = FavoriteImageDrawable.getOrCreateSyncedIcon(view.getContext(), o.getColor(), o);
 			history = marker.history;
 		} else {
-			fid = FavoriteImageDrawable.getOrCreate(view.getContext(), o.getColor(), true);
+			fid = FavoriteImageDrawable.getOrCreate(view.getContext(), o.getColor(), true, o);
 		}
 		fid.drawBitmapInCenter(canvas, x, y, history);
 	}
@@ -201,7 +200,7 @@ public class FavouritesLayer extends OsmandMapLayer implements ContextMenuLayer.
 
 	private void getFavFromPoint(RotatedTileBox tb, List<? super FavouritePoint> res, int r, int ex, int ey,
 			FavouritePoint n) {
-		if (n.isVisible() && !favorites.isParkingPoint(n)) {
+		if (n.isVisible()) {
 			int x = (int) tb.getPixXFromLatLon(n.getLatitude(), n.getLongitude());
 			int y = (int) tb.getPixYFromLatLon(n.getLatitude(), n.getLongitude());
 			if (calculateBelongs(ex, ey, x, y, r)) {
@@ -292,9 +291,7 @@ public class FavouritesLayer extends OsmandMapLayer implements ContextMenuLayer.
 		boolean result = false;
 		if (o instanceof FavouritePoint) {
 			favorites.editFavourite((FavouritePoint) o, position.getLatitude(), position.getLongitude());
-			if (((FavouritePoint) o).isPersonalPoint()) {
-				favorites.lookupAddress((FavouritePoint) o);
-			}
+			favorites.lookupAddress((FavouritePoint) o);
 			result = true;
 		}
 		if (callback != null) {

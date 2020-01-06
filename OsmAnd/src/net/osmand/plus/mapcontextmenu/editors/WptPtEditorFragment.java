@@ -364,7 +364,7 @@ public class WptPtEditorFragment extends PointEditorFragment {
 
 	@Override
 	public Drawable getNameIcon() {
-		return FavoriteImageDrawable.getOrCreate(getMapActivity(), getPointColor(), false);
+		return FavoriteImageDrawable.getOrCreate(getMapActivity(), getPointColor(), false, wpt);
 	}
 
 	@Override

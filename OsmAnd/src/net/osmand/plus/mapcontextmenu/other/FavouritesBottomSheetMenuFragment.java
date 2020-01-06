@@ -77,7 +77,7 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 				}
 
 				@Override
-				public void onFavoriteAddressResolved(@NonNull FavouritePoint favouritePoint) {
+				public void onFavoriteDataUpdated(@NonNull FavouritePoint favouritePoint) {
 				}
 			});
 		}

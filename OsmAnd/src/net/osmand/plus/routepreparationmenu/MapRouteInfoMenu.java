@@ -2247,7 +2247,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 	}
 
 	@Override
-	public void onFavoriteAddressResolved(@NonNull FavouritePoint favouritePoint) {
+	public void onFavoriteDataUpdated(@NonNull FavouritePoint favouritePoint) {
 		updateMenu();
 	}
 

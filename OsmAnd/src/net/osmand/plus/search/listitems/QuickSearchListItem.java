@@ -355,7 +355,7 @@ public class QuickSearchListItem {
 				return getIcon(app, R.drawable.ic_action_world_globe);
 			case FAVORITE:
 				FavouritePoint fav = (FavouritePoint) searchResult.object;
-				return FavoriteImageDrawable.getOrCreate(app, fav.getColor(), false);
+				return FavoriteImageDrawable.getOrCreate(app, fav.getColor(), false, fav);
 			case FAVORITE_GROUP:
 				FavoriteGroup group = (FavoriteGroup) searchResult.object;
 				int color = group.color == 0 || group.color == Color.BLACK ? app.getResources().getColor(R.color.color_favorite) : group.color;
@@ -372,7 +372,7 @@ public class QuickSearchListItem {
 				}
 			case WPT:
 				WptPt wpt = (WptPt) searchResult.object;
-				return FavoriteImageDrawable.getOrCreate(app, wpt.getColor(), false);
+				return FavoriteImageDrawable.getOrCreate(app, wpt.getColor(), false, wpt);
 			case UNKNOWN_NAME_FILTER:
 				break;
 		}

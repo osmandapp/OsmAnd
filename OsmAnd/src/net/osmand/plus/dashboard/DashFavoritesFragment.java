@@ -77,7 +77,7 @@ public class DashFavoritesFragment extends DashLocationFragment {
 				}
 
 				@Override
-				public void onFavoriteAddressResolved(@NonNull FavouritePoint favouritePoint) {
+				public void onFavoriteDataUpdated(@NonNull FavouritePoint favouritePoint) {
 				}
 			});
 		}
@@ -138,7 +138,7 @@ public class DashFavoritesFragment extends DashLocationFragment {
 			}
 
 			((ImageView) view.findViewById(R.id.favourite_icon)).setImageDrawable(FavoriteImageDrawable.getOrCreate(
-					getActivity(), point.getColor(), false));
+					getActivity(), point.getColor(), false, point));
 			DashLocationView dv = new DashLocationView(direction, label, new LatLon(point.getLatitude(),
 					point.getLongitude()));
 			distances.add(dv);

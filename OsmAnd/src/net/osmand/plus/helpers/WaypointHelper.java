@@ -3,12 +3,14 @@ package net.osmand.plus.helpers;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 
+import net.osmand.GPXUtilities;
 import net.osmand.Location;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.Amenity;
 import net.osmand.data.Amenity.AmenityRoutePoint;
+import net.osmand.data.FavouritePoint;
 import net.osmand.data.LocationPoint;
 import net.osmand.data.PointDescription;
 import net.osmand.osm.PoiType;
@@ -769,9 +771,10 @@ public class WaypointHelper {
 					return iconsCache.getIcon(R.drawable.list_destination, 0);
 				}
 
-			} else if (type == FAVORITES || type == WAYPOINTS) {
-				return FavoriteImageDrawable.getOrCreate(uiCtx, point.getColor(), false);
-
+			} else if (type == FAVORITES ) {
+				return FavoriteImageDrawable.getOrCreate(uiCtx, point.getColor(), false, (FavouritePoint) point);
+			} else if (type == WAYPOINTS) {
+				return FavoriteImageDrawable.getOrCreate(uiCtx, point.getColor(), false, (GPXUtilities.WptPt) point);
 			} else if (type == ALARMS) {
 				//assign alarm list icons manually for now
 				String typeString = ((AlarmInfo) point).getType().toString();

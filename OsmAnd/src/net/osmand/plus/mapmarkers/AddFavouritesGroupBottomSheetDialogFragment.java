@@ -42,7 +42,7 @@ public class AddFavouritesGroupBottomSheetDialogFragment extends AddGroupBottomS
 				}
 
 				@Override
-				public void onFavoriteAddressResolved(@NonNull FavouritePoint favouritePoint) {
+				public void onFavoriteDataUpdated(@NonNull FavouritePoint favouritePoint) {
 				}
 			});
 		}

@@ -43,8 +43,10 @@ import static net.osmand.plus.FavouritesDbHelper.PersonalPointType.WORK;
 public class FavouritesDbHelper {
 
 	public interface FavoritesListener {
+
 		void onFavoritesLoaded();
-		void onFavoriteAddressResolved(@NonNull FavouritePoint favouritePoint);
+
+		void onFavoriteDataUpdated(@NonNull FavouritePoint favouritePoint);
 	}
 
 	private static final org.apache.commons.logging.Log log = PlatformUtil.getLog(FavouritesDbHelper.class);
@@ -110,15 +112,31 @@ public class FavouritesDbHelper {
 
 	public static class FavoriteGroup {
 		public static final String PERSONAL_CATEGORY = "personal";
-		public String name;
-		public boolean visible = true;
-		public int color;
+		private String name;
+		private boolean visible = true;
+		private int color;
 
 		public boolean isPersonal() {
 			return name.equals(PERSONAL_CATEGORY);
 		}
 
-		public List<FavouritePoint> points = new ArrayList<>();
+		private List<FavouritePoint> points = new ArrayList<>();
+
+		public List<FavouritePoint> getPoints() {
+			return points;
+		}
+
+		public int getColor() {
+			return color;
+		}
+
+		public boolean isVisible() {
+			return visible;
+		}
+
+		public String getName() {
+			return name;
+		}
 
 		public String getName(Context ctx) {
 			if (isPersonal()) {
@@ -129,9 +147,6 @@ public class FavouritesDbHelper {
 		}
 	}
 
-	public boolean isParkingPoint(FavouritePoint fp) {
-		return getGroup(fp.getCategory()).isPersonal() && fp.getName().equals(getParkingPointName());
-	}
 
 	public static String getPersonalName(FavouritePoint fp, Context ctx) {
 		return PersonalPointType.valueOfTypeName(fp.getName()).getHumanString(ctx);
@@ -405,12 +420,12 @@ public class FavouritesDbHelper {
 				@Override
 				public void geocodingDone(String address) {
 					addressRequestMap.remove(p);
-					editFavouriteDescription(p, address);
+					editAddressDescription(p, address);
 					context.runInUIThread(new Runnable() {
 						@Override
 						public void run() {
 							for (FavoritesListener listener : listeners) {
-								listener.onFavoriteAddressResolved(p);
+								listener.onFavoriteDataUpdated(p);
 							}
 						}
 					});
@@ -519,6 +534,14 @@ public class FavouritesDbHelper {
 			pg.points.add(p);
 		}
 		sortAll();
+		saveCurrentPointsIntoFile();
+		runSyncWithMarkers(getOrCreateGroup(p, 0));
+		return true;
+	}
+
+
+	public boolean editAddressDescription(FavouritePoint p, String address) {
+		p.setAddress(description);
 		saveCurrentPointsIntoFile();
 		runSyncWithMarkers(getOrCreateGroup(p, 0));
 		return true;

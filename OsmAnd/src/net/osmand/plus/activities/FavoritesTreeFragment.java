@@ -119,7 +119,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 				}
 
 				@Override
-				public void onFavoriteAddressResolved(@NonNull FavouritePoint favouritePoint) {
+				public void onFavoriteDataUpdated(@NonNull FavouritePoint favouritePoint) {
 				}
 			});
 		}
@@ -706,12 +706,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 		selectedGroupPos = groupPos;
 		selectedChildPos = childPos;
 		LatLon location = new LatLon(point.getLatitude(), point.getLongitude());
-		String pointType;
-		if (app.getFavorites().isParkingPoint(point)) {
-			pointType = PointDescription.POINT_TYPE_PARKING_MARKER;
-		} else {
-			pointType = PointDescription.POINT_TYPE_FAVORITE;
-		}
+		String pointType = PointDescription.POINT_TYPE_FAVORITE;
 		FavoritesActivity.showOnMap(requireActivity(), this, location.getLatitude(), location.getLongitude(),
 				settings.getLastKnownMapZoom(), new PointDescription(pointType, point.getDisplayName(app)), true, point);
 	}
@@ -751,7 +746,6 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 		private Set<?> filter;
 
 		void synchronizeGroups() {
-			boolean isParkingPluginEnable = OsmandPlugin.getEnabledPlugin(ParkingPositionPlugin.class) != null;
 			favoriteGroups.clear();
 			groups.clear();
 			List<FavoriteGroup> disablesGroups = new ArrayList<>();
@@ -760,31 +754,8 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			for (FavoriteGroup key : gs) {
 				boolean empty = true;
 				if (flt == null || flt.contains(key)) {
-					if (key.isPersonal()) {
-						ArrayList<FavouritePoint> list = new ArrayList<>();
-						for (FavouritePoint p : key.points) {
-							if (app.getFavorites().isParkingPoint(p)) {
-								if (isParkingPluginEnable) {
-									list.add(p);
-									empty = false;
-								}
-							} else {
-								if (app.getFavorites().isParkingPoint(p)) {
-									if (isParkingPluginEnable) {
-										list.add(p);
-										empty = false;
-									}
-								} else {
-									list.add(p);
-									empty = false;
-								}
-							}
-						}
-						favoriteGroups.put(key, list);
-					} else {
-						empty = false;
-						favoriteGroups.put(key, new ArrayList<>(key.points));
-					}
+					empty = false;
+					favoriteGroups.put(key, new ArrayList<>(key.points));
 				} else {
 					ArrayList<FavouritePoint> list = new ArrayList<>();
 					for (FavouritePoint p : key.points) {
@@ -977,21 +948,17 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			int dist = (int) (MapUtils.getDistance(model.getLatitude(), model.getLongitude(),
 					lastKnownMapLocation.getLatitude(), lastKnownMapLocation.getLongitude()));
 			String distance = OsmAndFormatter.getFormattedDistance(dist, getMyApplication()) + "  ";
-			name.setText(model.getName(), TextView.BufferType.SPANNABLE);
+			name.setText(model.getDisplayName(app), TextView.BufferType.SPANNABLE);
 			name.setTypeface(Typeface.DEFAULT, visible ? Typeface.NORMAL : Typeface.ITALIC);
 			name.setTextColor(getResources().getColor(visible ? enabledColor : disabledColor));
 			distanceText.setText(distance);
-			if (model.isPersonalPoint()) {
-				String distanceWithAddress = String.format(getString(R.string.distance_and_address), distance.trim(), model.getDescription() != null ? model.getDescription() : "");
+			if (model.isAddressSpecified()) {
+				String distanceWithAddress = String.format(getString(R.string.distance_and_address), distance.trim(),
+						model.getDescription() != null ? model.getDescription() : "");
 				distanceText.setText(distanceWithAddress);
-				icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(getActivity(),
-						visible ? model.getColor() : getResources().getColor(disabledIconColor), false,
-						model));
-				name.setText((model.getDisplayName(app)));
-			} else {
-				icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(getActivity(),
-						visible ? model.getColor() : getResources().getColor(disabledIconColor), false));
 			}
+			icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(getActivity(),
+					visible ? model.getColor() : getResources().getColor(disabledIconColor), false, model));
 			if (visible) {
 				distanceText.setTextColor(getResources().getColor(R.color.color_distance));
 			} else {

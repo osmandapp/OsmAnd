@@ -393,7 +393,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 					}
 
 					@Override
-					public void onFavoriteAddressResolved(@NonNull FavouritePoint favouritePoint) {
+					public void onFavoriteDataUpdated(@NonNull FavouritePoint favouritePoint) {
 						reloadFavoritesItems();
 					}
 				});

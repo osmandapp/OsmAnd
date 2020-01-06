@@ -118,7 +118,7 @@ public class FavouritePointMenuController extends MenuController {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			return FavoriteImageDrawable.getOrCreate(mapActivity.getMyApplication(), fav.getColor(),
-					false, fav.isPersonalPoint() ? fav : null);
+					false, fav);
 		} else {
 			return null;
 		}
@@ -142,11 +142,6 @@ public class FavouritePointMenuController extends MenuController {
 	@Override
 	public int getFavActionStringId() {
 		return R.string.shared_string_edit;
-	}
-
-	@Override
-	public boolean isFavButtonEnabled() {
-		return !fav.isPersonalPoint();
 	}
 
 	@NonNull

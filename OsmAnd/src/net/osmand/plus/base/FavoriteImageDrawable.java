@@ -17,6 +17,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
 
+import net.osmand.GPXUtilities;
 import net.osmand.data.FavouritePoint;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.R;
@@ -48,8 +49,9 @@ public class FavoriteImageDrawable extends Drawable {
 		this.withShadow = withShadow;
 		this.synced = synced;
 		Resources res = ctx.getResources();
-		if (point != null && point.isPersonalPoint()) {
-			personalPointBitmap = UiUtilities.tintDrawable(ResourcesCompat.getDrawable(res, FavouritesDbHelper.getPersonalIconId(point.getName()), null),
+		int overlayIconId = point.getOverlayIconId();
+		if (overlayIconId != 0) {
+			personalPointBitmap = UiUtilities.tintDrawable(ResourcesCompat.getDrawable(res, overlayIconId, null),
 					ContextCompat.getColor(ctx, R.color.icon_color_default_light));
 		}
 		int col = color == 0 || color == Color.BLACK ? res.getColor(R.color.color_favorite) : color;
@@ -167,11 +169,15 @@ public class FavoriteImageDrawable extends Drawable {
 		return getOrCreate(a, color, withShadow, false, point);
 	}
 
-	public static FavoriteImageDrawable getOrCreate(Context a, int color, boolean withShadow) {
+	public static FavoriteImageDrawable getOrCreate(Context a, int color, boolean withShadow, GPXUtilities.WptPt pt) {
 		return getOrCreate(a, color, withShadow, false, null);
 	}
 
-	public static FavoriteImageDrawable getOrCreateSyncedIcon(Context a, int color) {
+	public static FavoriteImageDrawable getOrCreateSyncedIcon(Context a, int color, FavouritePoint point) {
+		return getOrCreate(a, color, false, true, point);
+	}
+
+	public static FavoriteImageDrawable getOrCreateSyncedIcon(Context a, int color, GPXUtilities.WptPt pt) {
 		return getOrCreate(a, color, false, true, null);
 	}
 }

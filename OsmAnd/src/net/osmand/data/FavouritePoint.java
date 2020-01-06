@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.R;
+import net.osmand.util.Algorithms;
 
 import static net.osmand.plus.FavouritesDbHelper.FavoriteGroup.PERSONAL_CATEGORY;
 
@@ -19,6 +20,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	protected String name = "";
 	protected String description;
 	protected String category = "";
+	protected String address = "";
 	private String originObjectName = "";
 	private double latitude;
 	private double longitude;
@@ -52,12 +54,25 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	public int getColor() {
 		return color;
 	}
-	
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
 	public PointDescription getPointDescription() {
 		return new PointDescription(PointDescription.POINT_TYPE_FAVORITE, getName());
 	}
 
+	public boolean isAddressSpecified() {
+		return !Algorithms.isEmpty(address);
+	}
+
 	public boolean isPersonalPoint() {
+		// TODO: HW
 		return name.equals(FavouritesDbHelper.getHomePointName())
 				|| name.equals(FavouritesDbHelper.getWorkPointName())
 				|| name.equals(FavouritesDbHelper.getParkingPointName());
@@ -86,6 +101,14 @@ public class FavouritePoint implements Serializable, LocationPoint {
 
 	public void setOriginObjectName(String originObjectName) {
 		this.originObjectName = originObjectName;
+	}
+
+	public int getOverlayIconId() {
+		// TODO HW
+		if(isPersonalPoint()) {
+			return FavouritesDbHelper.getPersonalIconId(point.getName());
+		}
+		return 0;
 	}
 
 	public double getLatitude() {
