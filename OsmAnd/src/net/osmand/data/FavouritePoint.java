@@ -148,7 +148,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	}
 
 	public String getCategoryDisplayName(@NonNull Context ctx) {
-		return FavouritesDbHelper.FavoriteGroup.getDisplayName(ctx);
+		return FavouritesDbHelper.FavoriteGroup.getDisplayName(category, ctx);
 	}
 	
 	public void setCategory(String category) {

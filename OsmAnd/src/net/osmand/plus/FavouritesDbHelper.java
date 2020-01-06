@@ -67,10 +67,10 @@ public class FavouritesDbHelper {
 
 	public static class FavoriteGroup {
 		public static final String PERSONAL_CATEGORY = "personal";
-		public String name;
-		public boolean visible = true;
-		public int color;
-		public List<FavouritePoint> points = new ArrayList<>();
+		protected String name;
+		protected boolean visible = true;
+		protected int color;
+		protected List<FavouritePoint> points = new ArrayList<>();
 
 		public boolean isPersonal() {
 			return isPersonal(name);
