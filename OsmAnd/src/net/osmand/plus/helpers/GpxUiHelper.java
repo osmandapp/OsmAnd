@@ -73,7 +73,6 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
-import net.osmand.plus.GpxDbHelper;
 import net.osmand.plus.GpxDbHelper.GpxDataItemCallback;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmAndConstants;
@@ -121,6 +120,7 @@ import static net.osmand.plus.OsmAndFormatter.METERS_IN_KILOMETER;
 import static net.osmand.plus.OsmAndFormatter.METERS_IN_ONE_MILE;
 import static net.osmand.plus.OsmAndFormatter.METERS_IN_ONE_NAUTICALMILE;
 import static net.osmand.plus.OsmAndFormatter.YARDS_IN_ONE_METER;
+import static net.osmand.plus.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
 import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
 import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
 import static net.osmand.plus.download.DownloadActivity.formatKb;
@@ -561,7 +561,7 @@ public class GpxUiHelper {
 								item.setSelected(isChecked);
 							}
 						});
-						UiUtilities.setupCompoundButton(app, ch, nightMode, true);
+						UiUtilities.setupCompoundButton(ch, nightMode, PROFILE_DEPENDENT);
 					} else {
 						final SwitchCompat ch = ((SwitchCompat) v.findViewById(R.id.toggle_item));
 						ch.setVisibility(View.VISIBLE);
@@ -574,7 +574,7 @@ public class GpxUiHelper {
 								item.setSelected(isChecked);
 							}
 						});
-						UiUtilities.setupCompoundButton(app, ch, nightMode, true);
+						UiUtilities.setupCompoundButton(ch, nightMode, PROFILE_DEPENDENT);
 					}
 					v.findViewById(R.id.check_item).setVisibility(View.VISIBLE);
 				}

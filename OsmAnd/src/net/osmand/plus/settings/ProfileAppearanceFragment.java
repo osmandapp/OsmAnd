@@ -77,6 +77,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 	private FlowLayout colorItems;
 	private FlowLayout iconItems;
 	private OsmandTextFieldBoxes profileNameOtfb;
+	private View saveButton;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -180,7 +181,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 
 			preferencesContainer.addView(buttonsContainer);
 			View cancelButton = buttonsContainer.findViewById(R.id.dismiss_button);
-			View saveButton = buttonsContainer.findViewById(R.id.right_bottom_button);
+			saveButton = buttonsContainer.findViewById(R.id.right_bottom_button);
 
 			saveButton.setVisibility(View.VISIBLE);
 			buttonsContainer.findViewById(R.id.buttons_divider).setVisibility(View.VISIBLE);
@@ -283,7 +284,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 		if (PROFILE_NAME.equals(preference.getKey())) {
 			profileName = (EditText) holder.findViewById(R.id.profile_name_et);
 			profileName.setImeOptions(EditorInfo.IME_ACTION_DONE);
-			profileName.setRawInputType(InputType.TYPE_CLASS_TEXT);
+			profileName.setRawInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
 			profileName.setText(changedProfile.name);
 			profileName.requestFocus();
 			profileName.addTextChangedListener(new TextWatcher() {
@@ -298,6 +299,12 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 				@Override
 				public void afterTextChanged(Editable s) {
 					changedProfile.name = s.toString();
+					if (hasNameDuplicate()) {
+						saveButton.setEnabled(false);
+						profileNameOtfb.setError(app.getString(R.string.profile_alert_duplicate_name_msg), true);
+					} else {
+						saveButton.setEnabled(true);
+					}
 				}
 			});
 			profileNameOtfb = (OsmandTextFieldBoxes) holder.findViewById(R.id.profile_name_otfb);
@@ -496,21 +503,6 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 			if (getActivity() != null) {
 				createWarningDialog(getActivity(),
 						R.string.profile_alert_need_profile_name_title, R.string.profile_alert_need_profile_name_msg, R.string.shared_string_dismiss).show();
-			}
-			return false;
-		}
-
-		if (hasNameDuplicate()) {
-			if (getActivity() != null) {
-				AlertDialog.Builder duplicateNameWarning = createWarningDialog(getActivity(),
-						R.string.profile_alert_duplicate_name_title, R.string.profile_alert_duplicate_name_msg, R.string.shared_string_dismiss);
-				duplicateNameWarning.setOnDismissListener(new DialogInterface.OnDismissListener() {
-					@Override
-					public void onDismiss(DialogInterface dialog) {
-						profileName.requestFocus();
-					}
-				});
-				duplicateNameWarning.show();
 			}
 			return false;
 		}
