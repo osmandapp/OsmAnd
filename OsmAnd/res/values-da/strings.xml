@@ -3003,18 +3003,18 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="shared_string_milliradians">Milliradianer</string>
     <string name="angular_measeurement">Enhed for vinkelmåling</string>
     <string name="angular_measeurement_descr">Ændre hvad azimuth er måles i.</string>
-    <string name="routing_attr_avoid_tram_name">Undgå sporvogne</string>
-    <string name="routing_attr_avoid_tram_description">Undgå sporvogne</string>
-    <string name="routing_attr_avoid_bus_name">Undgå busser</string>
-    <string name="routing_attr_avoid_bus_description">Undgå busser og trolleybusser</string>
-    <string name="routing_attr_avoid_share_taxi_name">Undgå deletaxi</string>
-    <string name="routing_attr_avoid_share_taxi_description">Undgå deletaxi</string>
-    <string name="routing_attr_avoid_train_name">Undgå tog</string>
-    <string name="routing_attr_avoid_train_description">Undgå tog</string>
-    <string name="routing_attr_avoid_subway_name">Undgå metro</string>
-    <string name="routing_attr_avoid_subway_description">Undgå metro og letbane</string>
-    <string name="routing_attr_avoid_ferry_name">Undgå færger</string>
-    <string name="routing_attr_avoid_ferry_description">Undgå færger</string>
+    <string name="routing_attr_avoid_tram_name">Ingen sporvogne</string>
+    <string name="routing_attr_avoid_tram_description">Undgår sporvogne</string>
+    <string name="routing_attr_avoid_bus_name">Ingen busser</string>
+    <string name="routing_attr_avoid_bus_description">Undgår busser og trolleybusser</string>
+    <string name="routing_attr_avoid_share_taxi_name">Ingen deletaxi</string>
+    <string name="routing_attr_avoid_share_taxi_description">Undgår deletaxi</string>
+    <string name="routing_attr_avoid_train_name">Ingen tog</string>
+    <string name="routing_attr_avoid_train_description">Undgår tog</string>
+    <string name="routing_attr_avoid_subway_name">Ingen metro</string>
+    <string name="routing_attr_avoid_subway_description">Undgår metro og letbane</string>
+    <string name="routing_attr_avoid_ferry_name">Ingen færger</string>
+    <string name="routing_attr_avoid_ferry_description">Undgår færger</string>
     <string name="release_3_3_7">• Vis tid mellem overførsler i offentlig transport 
 \n 
 \n • Korrigeret brugergrænseflade til ruteoplysningerne 
@@ -3028,10 +3028,10 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="files_moved">Flyttede %1$d filer (%2$s).</string>
     <string name="files_copied">Kopieret %1$d filer (%2$s).</string>
     <string name="files_failed">Kunne ikke kopiere %1$d filer (%2$s).</string>
-    <string name="files_present">%1$d filer (%2$s) er til stede på tidligere placering \'%3$s\'.</string>
+    <string name="files_present">%1$d filer (%2$s) findes på den forrige placering \'%3$s\'.</string>
     <string name="move_maps">Flyt kort</string>
     <string name="dont_move_maps">Flyt ikke</string>
-    <string name="public_transport_ped_route_title">Ruten til fods er ca %1$s og kan være hurtigere end med offentlig transport</string>
+    <string name="public_transport_ped_route_title">Ruten til fods er ca %1$s og kan være hurtigere end offentlig transport</string>
     <string name="public_transport_no_route_title">Kunne desværre ikke finde en rute, der passer til indstillingerne.</string>
     <string name="public_transport_try_ped">Prøv fodgængernavigationen.</string>
     <string name="public_transport_try_change_settings">Prøv at ændre indstillinger.</string>
@@ -3039,14 +3039,14 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="public_transport_type">Transporttype</string>
     <string name="searching_gps">Søger efter GPS</string>
     <string name="coordinates_widget">Koordinat modul</string>
-    <string name="rate_dialog_descr">Brug 30 sekunder, del erfaringer og bedøm vores arbejde på Google Play.</string>
-    <string name="button_rate">Bedøm</string>
+    <string name="rate_dialog_descr">Del erfaringer og bedøm vores arbejde på Google Play.</string>
+    <string name="button_rate">OK</string>
     <string name="shared_string_privacy_policy">Privatlivspolitik</string>
-    <string name="help_us_make_osmand_better">Hjælp med at gøre OsmAnd bedre!</string>
+    <string name="help_us_make_osmand_better">Hjælp med at gøre OsmAnd bedre</string>
     <string name="make_osmand_better_descr">Tillad OsmAnd at indsamle og behandle anonyme programdata. Vi indsamler ikke eller lagrer data om placering eller om steder på kortet.
 \n
 \nKan til enhver tid ændres i Indstillinger &gt; Privatliv og sikkerhed.</string>
-    <string name="choose_data_to_share">Vælg hvilken type data der deles:</string>
+    <string name="choose_data_to_share">Vælg den type data der deles:</string>
     <string name="downloaded_maps">Hentede kort</string>
     <string name="visited_screens">Besøgte skærme</string>
     <string name="colleted_data">Indsamlede data</string>
@@ -3055,7 +3055,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="visited_screens_collect_descr">Hjælper med at forstå hvilke funktioner i OsmAnd der er mest populære.</string>
     <string name="privacy_and_security_change_descr">Ved at trykke på \"Tillad\" accepteres vores %1$s</string>
     <string name="settings_privacy_and_security">Privatliv og sikkerhed</string>
-    <string name="settings_privacy_and_security_desc">Vælg hvilke data der deles med os</string>
+    <string name="settings_privacy_and_security_desc">Vælg hvilke data der deles</string>
     <string name="shared_string_no_thank_you">Nej tak</string>
     <string name="shared_string_allow">Tillade</string>
     <string name="profile_name_hint">Profilnavn</string>
@@ -3084,14 +3084,14 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="profile_alert_duplicate_name_msg">Der er allerede en profil med det navn</string>
     <string name="profile_alert_cant_delete_base">Basisprofiler kan ikke slettes</string>
     <string name="profile_alert_need_save_title">Gem ændringer</string>
-    <string name="profile_alert_need_save_msg">Ændringer i profilen skal gemmes først</string>
+    <string name="profile_alert_need_save_msg">Gem ændringer til profilen først</string>
     <string name="profile_alert_delete_title">Slet profil</string>
-    <string name="profile_alert_delete_msg">Slet profilen %s\?</string>
-    <string name="select_base_profile_dialog_title">Vælg en basisprofil</string>
+    <string name="profile_alert_delete_msg">Slet profilen \"%s\"\?</string>
+    <string name="select_base_profile_dialog_title">Vælg en profil til at starte med</string>
     <string name="select_base_profile_dialog_message">Basér den brugerdefinerede profil på en af standardprofilerne, dette definerer den grundlæggende opsætning som standard synlighed for moduler og enheder for hastighed og distance. Dette er standardprofilerne, sammen med eksempler på brugerdefinerede profiler, de kan udvides til:</string>
     <string name="select_nav_profile_dialog_title">Vælg navigationstype</string>
     <string name="base_profile_descr_car">Bil, lastbil, motorcykel</string>
-    <string name="base_profile_descr_bicycle">MTB, knallert, hest</string>
+    <string name="base_profile_descr_bicycle">Mountainbike, knallert, hest</string>
     <string name="base_profile_descr_pedestrian">Gå, vandring, løb</string>
     <string name="base_profile_descr_public_transport">Offentlig transport (alle)</string>
     <string name="base_profile_descr_boat">Skib, roning, sejlads</string>
@@ -3142,7 +3142,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="minmax_speed_dialog_title">Indstil min/maks hastighed</string>
     <string name="new_profile">Ny profil</string>
     <string name="shared_string_crash">Nedbrud</string>
-    <string name="last_launch_crashed">Den sidste start af OsmAnd mislykkedes. Hjælp med at forbedre OsmAnd ved at dele fejlmeddelelsen.</string>
+    <string name="last_launch_crashed">Sidste kørsel af OsmAnd mislykkedes. Hjælp med at forbedre OsmAnd ved at dele fejlmeddelelsen.</string>
     <string name="app_mode_ufo">UFO</string>
     <string name="release_3_4">"• Anvendelsesprofiler: opret en brugervalgt profil med en brugervalgt ikon og farve 
 \n
@@ -3166,20 +3166,20 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="app_mode_personal_transporter">Person transport</string>
     <string name="app_mode_monowheel">Monowheel</string>
     <string name="app_mode_scooter">Scooter</string>
-    <string name="precision_hdop_and_vdop">Horisontal nøjagtighed: %1$s, lodret: %2$s</string>
-    <string name="precision_hdop">Horisontal nøjagtighed: %s</string>
+    <string name="precision_hdop_and_vdop">Vandret nøjagtighed: %1$s, lodret: %2$s</string>
+    <string name="precision_hdop">Vandret præcision: %s</string>
     <string name="app_mode_offroad">Offroad</string>
     <string name="edit_profile_setup_title">Opsætning af profil</string>
     <string name="edit_profile_setup_subtitle">Profilen bevarer sine egne indstillinger</string>
     <string name="edit_profile_setup_map_subtitle">Vælg kortindstillinger for profilen</string>
     <string name="edit_profile_screen_options_subtitle">Vælg skærmindstillinger for profilen</string>
     <string name="edit_profile_nav_settings_subtitle">Vælg navigationsindstillinger for profilen</string>
-    <string name="routing_attr_max_num_changes_description">Angiv det maksimale antal skift</string>
+    <string name="routing_attr_max_num_changes_description">Angiv øvre grænse for omstigninger</string>
     <string name="routing_attr_max_num_changes_name">Antal skift</string>
     <string name="turn_screen_on_router">Vågn op ved retningsændring</string>
-    <string name="turn_screen_on_time_descr">Indstil tid for hvornår skærmen tænder.</string>
+    <string name="turn_screen_on_time_descr">Indstil hvor længe skærmen skal være tændt.</string>
     <string name="turn_screen_on_sensor">Brug nærhedssensor</string>
-    <string name="turn_screen_on_sensor_descr">Vink med hånden over toppen af skærmen for at tænde for skærmen, under navigering.</string>
+    <string name="turn_screen_on_sensor_descr">Vink med hånden over toppen af skærmen for at tænde den under navigering.</string>
     <string name="rendering_attr_highway_class_track_grade1_name">Grad 1</string>
     <string name="rendering_attr_highway_class_track_grade2_name">Grad 2</string>
     <string name="rendering_attr_highway_class_track_grade3_name">Grad 3</string>
@@ -3258,7 +3258,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="configure_navigation">Konfigurer navigation</string>
     <string name="general_settings_profile_descr">Tema, enheder, region</string>
     <string name="configure_profile">Konfigurer profil</string>
-    <string name="screen_alerts_descr">"Advarsler vil blive vist i nederste venstre  hjørne af skærmen under navigationen."</string>
+    <string name="screen_alerts_descr">Advarsler vises nederst til venstre under navigationen.</string>
     <string name="switch_profile">Skift profil</string>
     <string name="language_and_output">Sprog og output</string>
     <string name="reset_to_default">Gendan standardværdi</string>
@@ -3275,7 +3275,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="vehicle_parameters">Køretøjsparametre</string>
     <string name="voice_announces_info">Stemmemeddelelser afspilles kun under navigation.</string>
     <string name="voice_announces_descr">Navigation instruktion og meddelelser</string>
-    <string name="voice_announces">Talevejledning</string>
+    <string name="voice_announces">Stemmemeddelelser</string>
     <string name="screen_alerts">Alarmer på skærmen</string>
     <string name="route_parameters_descr">Konfigurer ruteparametre</string>
     <string name="route_parameters">Ruteparametre</string>
@@ -3294,7 +3294,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="paste_Osmand_data_folder_path">Indsæt sti til mappen med data</string>
     <string name="change_osmand_data_folder_question">Skift datamappe\?</string>
     <string name="move_maps_to_new_destination">Flyt til den nye destination</string>
-    <string name="internal_app_storage_description">Internt lager, skjult fra brugere og andre programmer, så ingen undtagen OsmAnd kan få adgang til data</string>
+    <string name="internal_app_storage_description">Internt lager, skjult for bruger og andre apps, kun tilgængelig for OsmAnd</string>
     <string name="change_data_storage_folder">Skift datalagringsmappe</string>
     <string name="rendering_attr_piste_type_snow_park_name">Snowpark</string>
     <string name="rendering_attr_piste_type_sleigh_name">Kane</string>
@@ -3366,7 +3366,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">Foretræk ikke-asfalterede veje</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">Foretræk ikke-asfalterede veje.</string>
     <string name="layer_osm_edits">OSM redigeringer</string>
-    <string name="quick_action_contour_lines_descr">Tryk på genvejsknappen viser eller skjuler højdekurver på kortet</string>
+    <string name="quick_action_contour_lines_descr">En til/fra-knap for at vise eller skjuler højdekurver på kortet.</string>
     <string name="quick_action_contour_lines_show">Vis højdekurver</string>
     <string name="quick_action_contour_lines_hide">Skjul højdekurver</string>
     <string name="quick_action_show_hide_contour_lines">Vis/skjul højdekurver</string>
@@ -3381,7 +3381,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="exported_osmand_profile">OsmAnd profil: %1$s</string>
     <string name="overwrite_profile_q">Profilen \'%1$s\' findes allerede. Overskriv\?</string>
     <string name="export_profile_failed">Profilen kunne ikke eksporteres.</string>
-    <string name="profile_import">Profilimport:</string>
+    <string name="profile_import">Profilimport</string>
     <string name="profile_import_descr">For at importere en profil, vælg filen på enheden og åbn den med OsmAnd.</string>
     <string name="file_import_error">%1$s importfejl: %2$s</string>
     <string name="file_imported_successfully">%1$s blev importeret.</string>
@@ -3425,4 +3425,8 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="choose_icon_color_name">Vælg ikon, farve og navn</string>
     <string name="reorder_profiles">Rediger profilliste</string>
     <string name="selected_profile">Valgte profil</string>
+    <string name="default_speed_dialog_msg">Bruges til at estimere ankomsttidspunkt for ukendte vejtyper og til at begrænse hastigheden for alle veje (kan ændre ruten)</string>
+    <string name="reset_confirmation_descr">Ved at klikke på %1$s, mistes alle ændringer.</string>
+    <string name="reset_all_profile_settings_descr">Alle profilindstillinger nulstilles.</string>
+    <string name="reset_all_profile_settings">Nulstil alle profilindstillinger til standard\?</string>
 </resources>
