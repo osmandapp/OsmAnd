@@ -27,8 +27,8 @@ public class HomeWorkCard extends BaseCard {
 	protected void updateContent() {
 		final TargetPointsHelper targetPointsHelper = mapActivity.getMyApplication().getTargetPointsHelper();
 		final FavouritesDbHelper favorites = getMyApplication().getFavorites();
-		final FavouritePoint homePoint = favorites.getHomePoint();
-		final FavouritePoint workPoint = favorites.getWorkPoint();
+		final FavouritePoint homePoint = favorites.getSpecialPoint(FavouritePoint.SpecialPointType.HOME);
+		final FavouritePoint workPoint = favorites.getSpecialPoint(FavouritePoint.SpecialPointType.WORK);
 
 		TextView homeDescr = view.findViewById(R.id.home_button_descr);
 		final TextView workDescr = view.findViewById(R.id.work_button_descr);

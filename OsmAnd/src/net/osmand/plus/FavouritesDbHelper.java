@@ -1,10 +1,8 @@
 package net.osmand.plus;
 
 import android.content.Context;
-import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.annotation.StringRes;
 import android.support.v7.app.AlertDialog;
 
 import net.osmand.GPXUtilities;
@@ -67,45 +65,6 @@ public class FavouritesDbHelper {
 
 	private Map<FavouritePoint, AddressLookupRequest> addressRequestMap = new ConcurrentHashMap<>();
 
-	public enum PersonalPointType {
-		HOME("home", R.string.home_button, R.drawable.ic_action_home_dark),
-		WORK("work", R.string.work_button, R.drawable.ic_action_work),
-		PARKING("parking", R.string.map_widget_parking, R.drawable.ic_action_parking_dark);
-
-		private String typeName;
-		@StringRes
-		private int resId;
-		@DrawableRes
-		private int iconId;
-
-		PersonalPointType(@NonNull String typeName, @StringRes int resId, @DrawableRes int iconId) {
-			this.typeName = typeName;
-			this.resId = resId;
-			this.iconId = iconId;
-		}
-
-		public String getName() {
-			return typeName;
-		}
-
-		public static PersonalPointType valueOfTypeName(@NonNull String typeName) {
-			for (PersonalPointType pt : values()) {
-				if (pt.typeName.equals(typeName)) {
-					return pt;
-				}
-			}
-			return null;
-		}
-
-		public int getIconId() {
-			return iconId;
-		}
-
-		public String getHumanString(@NonNull Context ctx) {
-			return ctx.getString(resId);
-		}
-	}
-
 	public FavouritesDbHelper(OsmandApplication context) {
 		this.context = context;
 	}
@@ -148,26 +107,6 @@ public class FavouritesDbHelper {
 	}
 
 
-	public static String getPersonalName(FavouritePoint fp, Context ctx) {
-		return PersonalPointType.valueOfTypeName(fp.getName()).getHumanString(ctx);
-	}
-
-	public static int getPersonalIconId(String pointName) {
-		return PersonalPointType.valueOfTypeName(pointName).iconId;
-	}
-
-	public static String getParkingPointName() {
-		return PARKING.getName();
-	}
-
-	public static String getHomePointName() {
-		return HOME.getName();
-	}
-
-	public static String getWorkPointName() {
-		return WORK.getName();
-	}
-
 	public void loadFavorites() {
 		flatGroups.clear();
 		favoriteGroups.clear();
@@ -207,25 +146,9 @@ public class FavouritesDbHelper {
 		});
 	}
 
-	public FavouritePoint getWorkPoint() {
-		return getPersonalPoint(WORK);
-	}
-
-	public FavouritePoint getHomePoint() {
-		return getPersonalPoint(HOME);
-	}
-
-	public FavouritePoint getParkingPoint() {
-		return getPersonalPoint(PARKING);
-	}
-
-	public void deleteParkingPoint() {
-		deleteFavourite(getParkingPoint());
-	}
-
-	private FavouritePoint getPersonalPoint(PersonalPointType pointType) {
+	public FavouritePoint getSpecialPoint(PersonalPointType pointType) {
 		for (FavouritePoint fp : cachedFavoritePoints) {
-			if ((PersonalPointType.valueOfTypeName(fp.getName())) == pointType) {
+			if (fp.getSpecialPointType() == pointType) {
 					return fp;
 				}
 			}
@@ -327,43 +250,18 @@ public class FavouritesDbHelper {
 		return true;
 	}
 
-	public void setHomePoint(@NonNull LatLon latLon, @Nullable String description) {
-		FavouritePoint homePoint = getHomePoint();
-		if (homePoint != null) {
-			editFavourite(homePoint, latLon.getLatitude(), latLon.getLongitude(), description);
+	public void setSpecialPoint(@NonNull LatLon latLon, FavouritePoint.SpecialPointType personalType, @Nullable String address) {
+		FavouritePoint point = getSpecialPoint(personalType);
+		if (point != null) {
+			editFavourite(point, latLon.getLatitude(), latLon.getLongitude(), description);
 		} else {
-			homePoint = new FavouritePoint(latLon.getLatitude(), latLon.getLongitude(), HOME.getName(), PERSONAL_CATEGORY);
-			homePoint.setDescription(description);
-			addFavourite(homePoint);
+			point = new FavouritePoint(latLon.getLatitude(), latLon.getLongitude(), personalType, personalType.getCategory());
+			point.setDescription(description);
+			addFavourite(point);
 		}
-		if (description == null) {
-			lookupAddress(homePoint);
+		if (address == null) {
+			lookupAddress(point);
 		}
-	}
-
-	public void setWorkPoint(@NonNull LatLon latLon, @Nullable String description) {
-		FavouritePoint workPoint = getWorkPoint();
-		if (workPoint != null) {
-			editFavourite(workPoint, latLon.getLatitude(), latLon.getLongitude(), description);
-		} else {
-			workPoint = new FavouritePoint(latLon.getLatitude(), latLon.getLongitude(), WORK.getName(), PERSONAL_CATEGORY);
-			workPoint.setDescription(description);
-			addFavourite(workPoint);
-		}
-		if (description == null) {
-			lookupAddress(workPoint);
-		}
-	}
-
-	public void setParkingPoint(@NonNull LatLon latLon) {
-		FavouritePoint parkingPoint = getParkingPoint();
-		if (parkingPoint != null) {
-			editFavourite(parkingPoint, latLon.getLatitude(), latLon.getLongitude(), null);
-		} else {
-			parkingPoint = new FavouritePoint(latLon.getLatitude(), latLon.getLongitude(), PARKING.getName(), PERSONAL_CATEGORY);
-			addFavourite(parkingPoint);
-		}
-		lookupAddress(parkingPoint);
 	}
 
 	public boolean addFavourite(FavouritePoint p) {
@@ -392,19 +290,12 @@ public class FavouritesDbHelper {
 		return true;
 	}
 
-	public void lookupAddressAllPersonalPoints() {
+	public void lookupAddressAllSpecialPoints() {
 		if (!context.isApplicationInitializing()) {
-			FavouritePoint workPoint = getWorkPoint();
-			if (workPoint != null) {
-				lookupAddress(workPoint);
-			}
-			FavouritePoint homePoint = getHomePoint();
-			if (homePoint != null) {
-				lookupAddress(homePoint);
-			}
-			FavouritePoint parkingPoint = getParkingPoint();
-			if (parkingPoint != null) {
-				lookupAddress(parkingPoint);
+			for(FavouritePoint p : getFavouritePoints()) {
+				if(p.getSpecialPointType() != null) {
+					lookupAddress(p);
+				}
 			}
 		}
 	}
@@ -725,25 +616,6 @@ public class FavouritesDbHelper {
 		return fp;
 	}
 
-	public List<FavouritePoint> getNonPersonalVisibleFavouritePoints() {
-		List<FavouritePoint> fp = new ArrayList<>();
-		for (FavouritePoint p : getNonPersonalFavouritePoints()) {
-			if (p.isVisible()) {
-				fp.add(p);
-			}
-		}
-		return fp;
-	}
-
-	public List<FavouritePoint> getNonPersonalFavouritePoints() {
-		List<FavouritePoint> fp = new ArrayList<>();
-		for (FavouritePoint p : cachedFavoritePoints) {
-			if (!p.isPersonalPoint()) {
-				fp.add(p);
-			}
-		}
-		return fp;
-	}
 
 	@Nullable
 	public FavouritePoint getVisibleFavByLatLon(@NonNull LatLon latLon) {

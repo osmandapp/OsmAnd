@@ -480,11 +480,11 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 				FavouritesDbHelper favorites = mapActivity.getMyApplication().getFavorites();
 				FavouritePoint point = null;
 				if (item == PointType.HOME) {
-					point = favorites.getHomePoint();
+					point = favorites.getSpecialPoint(FavouritePoint.SpecialPointType.HOME);
 				} else if (item == PointType.WORK) {
-					point = favorites.getWorkPoint();
+					point = favorites.getSpecialPoint(FavouritePoint.SpecialPointType.WORK);
 				} else if (item == PointType.PARKING) {
-					point = favorites.getParkingPoint();
+					point = favorites.getSpecialPoint(FavouritePoint.SpecialPointType.PARKING);
 				}
 				if (point != null) {
 					ll = new LatLon(point.getLatitude(), point.getLongitude());
@@ -642,6 +642,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 					if (item instanceof FavouritePoint) {
 						FavouritePoint point = (FavouritePoint) item;
 						favoriteViewHolder.title.setText(point.getDisplayName(app));
+						// TODO HW: similar to overlay icon id
 						if (((FavouritePoint) item).isPersonalPoint()) {
 							int iconColor = app.getSettings().isLightContent()
 									? R.color.icon_color_default_light : R.color.icon_color_default_dark;

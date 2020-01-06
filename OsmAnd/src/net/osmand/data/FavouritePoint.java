@@ -3,7 +3,9 @@ package net.osmand.data;
 import java.io.Serializable;
 
 import android.content.Context;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
+import android.support.annotation.StringRes;
 
 import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.FavouritesDbHelper;
@@ -11,11 +13,16 @@ import net.osmand.plus.R;
 import net.osmand.util.Algorithms;
 
 import static net.osmand.plus.FavouritesDbHelper.FavoriteGroup.PERSONAL_CATEGORY;
+import static net.osmand.plus.FavouritesDbHelper.PersonalPointType.HOME;
+import static net.osmand.plus.FavouritesDbHelper.PersonalPointType.PARKING;
+import static net.osmand.plus.FavouritesDbHelper.PersonalPointType.WORK;
 
 public class FavouritePoint implements Serializable, LocationPoint {
 	private static final long serialVersionUID = 729654300829771466L;
 
 	private static final String HIDDEN = "hidden";
+
+
 
 	protected String name = "";
 	protected String description;
@@ -26,8 +33,9 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	private double longitude;
 	private int color;
 	private boolean visible = true;
+	private SpecialPointType specialPointType = null;
 
-	public FavouritePoint(){
+	public FavouritePoint() {
 	}
 
 	public FavouritePoint(double latitude, double longitude, String name, String category) {
@@ -38,6 +46,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 			name = "";
 		}
 		this.name = name;
+		initPersonalType();
 	}
 
 	public FavouritePoint(FavouritePoint favouritePoint) {
@@ -49,6 +58,21 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		this.description = favouritePoint.description;
 		this.visible = favouritePoint.visible;
 		this.originObjectName = favouritePoint.originObjectName;
+		initPersonalType();
+	}
+
+	private void initPersonalType() {
+		if(FavouritesDbHelper.FavoriteGroup.PERSONAL_CATEGORY.equals(category)) {
+			for(SpecialPointType p : SpecialPointType.values()) {
+				if(p.typeName.equals(this.name)) {
+					this.specialPointType = p;
+				}
+			}
+		}
+	}
+
+	public SpecialPointType getSpecialPointType() {
+		return specialPointType;
 	}
 
 	public int getColor() {
@@ -72,10 +96,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	}
 
 	public boolean isPersonalPoint() {
-		// TODO: HW
-		return name.equals(FavouritesDbHelper.getHomePointName())
-				|| name.equals(FavouritesDbHelper.getWorkPointName())
-				|| name.equals(FavouritesDbHelper.getParkingPointName());
+		return specialPointType != null;
 	}
 
 	@Override
@@ -141,11 +162,12 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	
 	public void setCategory(String category) {
 		this.category = category;
+		initPersonalType();
 	}
 
 	public String getDisplayName(@NonNull Context ctx) {
-		if (isPersonalPoint()) {
-			return FavouritesDbHelper.getPersonalName(this, ctx);
+		if (specialPointType != null) {
+			return specialPointType.getHumanString(ctx);
 		}
 		return name;
 	}
@@ -156,6 +178,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 
 	public void setName(String name) {
 		this.name = name;
+		initPersonalType();
 	}
 
 	public String getDescription () {
@@ -222,6 +245,49 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		result = prime * result + ((originObjectName == null) ? 0 : originObjectName.hashCode());
 		return result;
 	}
+
+
+	public enum SpecialPointType {
+		HOME("home", R.string.home_button, R.drawable.ic_action_home_dark),
+		WORK("work", R.string.work_button, R.drawable.ic_action_work),
+		PARKING("parking", R.string.map_widget_parking, R.drawable.ic_action_parking_dark);
+
+		private String typeName;
+		@StringRes
+		private int resId;
+		@DrawableRes
+		private int iconId;
+
+		SpecialPointType(@NonNull String typeName, @StringRes int resId, @DrawableRes int iconId) {
+			this.typeName = typeName;
+			this.resId = resId;
+			this.iconId = iconId;
+		}
+
+		public String getCategory() { return PERSONAL_CATEGORY; }
+
+		public String getName() {
+			return typeName;
+		}
+
+		public static SpecialPointType valueOfTypeName(@NonNull String typeName) {
+			for (SpecialPointType pt : values()) {
+				if (pt.typeName.equals(typeName)) {
+					return pt;
+				}
+			}
+			return null;
+		}
+
+		public int getIconId() {
+			return iconId;
+		}
+
+		public String getHumanString(@NonNull Context ctx) {
+			return ctx.getString(resId);
+		}
+	}
+
 
 	public static FavouritePoint fromWpt(@NonNull WptPt pt) {
 		String name = pt.name;
