@@ -103,7 +103,7 @@
     <string name="shared_string_is_open_24_7">Avatud 24/7</string>
     <string name="storage_directory_card">Mälukaart</string>
     <string name="coords_format">Koordinaatide formaat</string>
-    <string name="coords_format_descr">Geograafiliste koordinaatide vorming.</string>
+    <string name="coords_format_descr">Geograafiliste koordinaatide formaat.</string>
     <string name="current_track">Valitud lugu</string>
     <string name="use_osm_live_routing_description">Aktiveeri OsmAnd Live muutuste navigeerimine.</string>
     <string name="use_osm_live_routing">OsmAnd Live navigeerimine</string>
@@ -472,7 +472,7 @@
     <string name="map_import_error">Kaardi importimise viga</string>
     <string name="map_imported_successfully">Kaart imporditud</string>
     <string name="enter_the_file_name">Kirjuta faili nimi.</string>
-    <string name="transport_nearby_routes_within">Lähedalasuvad teekonnad</string>
+    <string name="transport_nearby_routes_within">Lähedalolevad teekonnad</string>
     <string name="transport_nearby_routes">Ulatus</string>
     <string name="dd_mm_ss_format">DD°MM′SS″</string>
     <string name="dd_dddddd_format">DD.DDDDDD°</string>
@@ -943,7 +943,7 @@
     <string name="rendering_attr_piste_difficulty_freeride_name">Vabasõit</string>
     <string name="rendering_attr_piste_difficulty_extreme_name">Äärmuslik</string>
     <string name="rendering_attr_piste_difficulty_undefined_name">Määratlemata</string>
-    <string name="routeInfo_piste_difficulty_name">Nõlva keerukus</string>
+    <string name="routeInfo_piste_difficulty_name">Nõlva raskusaste</string>
     <string name="avoid_in_routing_descr_">Väldi teatud marsruute ja teetüüpe</string>
     <string name="app_mode_utv">Kõrvuti</string>
     <string name="rendering_attr_piste_difficulty_aerialway_name">Lennutee</string>
@@ -1269,40 +1269,40 @@
     <string name="rendering_category_details">Üksikasjad</string>
     <string name="rendering_category_transport">Liikumisvahend</string>
     <string name="rendering_category_others">Muud kaardi omadused</string>
-    <string name="map_widget_appearance_rem">Järelejäänud elemendid</string>
+    <string name="map_widget_appearance_rem">Järelolevad elemendid</string>
     <string name="map_widget_vector_attributes">Kujutamise omadused</string>
     <string name="map_widget_top">Olekuriba</string>
     <string name="map_widget_right">Parempoolne paneel</string>
     <string name="map_widget_left">Vasakpoolne paneel</string>
     <string name="configure_map">Kaardiseadistused</string>
-    <string name="search_radius_proximity">Piires</string>
+    <string name="search_radius_proximity">Ulatus</string>
     <string name="anonymous_user_hint">Anonüümsed kasutajad ei saa:
 \n- Luua gruppe;
 \n- Serveriga gruppe ja seadmeid sünkroonida;
 \n- Hallata gruppe ja seadmeid isiklikul veebipõhisel armatuurlaual.</string>
     <string name="anonymous_user">Anonüümne kasutaja</string>
     <string name="logged_as">Sisse logitud nimega %1$s</string>
-    <string name="speed_limit_exceed">Kiirusepiirangu tolerants</string>
-    <string name="speed_limit_exceed_message">Vali kiirusepiirangu tolerantsi marginaal, mida ületades saad häälhoiatuse.</string>
+    <string name="speed_limit_exceed">Kiiruspiirangu tolerants</string>
+    <string name="speed_limit_exceed_message">Vali kiiruspiirangu tolerantsi marginaal, mida ületades saad häälhoiatuse.</string>
     <string name="fav_point_dublicate">Antud korduv lemmiku nimi</string>
     <string name="fav_point_dublicate_message">Korduvuse vältimiseks nimetatud lemmik ümber %1$s.</string>
     <string name="text_size_descr">Määra teksti suurus kaardil.</string>
     <string name="text_size">Teksti suurus</string>
-    <string name="traffic_warning_speed_limit">Kiirusepiirang</string>
+    <string name="traffic_warning_speed_limit">Kiiruspiirang</string>
     <string name="traffic_warning_border_control">Piirikontroll</string>
     <string name="traffic_warning_payment">Tolliputka</string>
     <string name="traffic_warning_stop">Stopp märk</string>
     <string name="traffic_warning_calming">Liikluse rahustamine</string>
     <string name="traffic_warning_speed_camera">Kiiruskaamera</string>
     <string name="traffic_warning">Liikluse hoiatus</string>
-    <string name="speak_favorites">Lemmikud lähedal</string>
-    <string name="speak_poi">Lähedalasuv huvipunkt</string>
+    <string name="speak_favorites">Lähedalolevad lemmikud</string>
+    <string name="speak_poi">Lähedalolev HP</string>
     <string name="way_alarms">Liikluse hoiatused</string>
     <string name="sleep_mode_stop_dialog">Peata GPS taustarežiim\?</string>
     <string name="stop_navigation_service">Peatu</string>
     <string name="confirm_every_run">Küsi alati</string>
     <string name="save_global_track_interval_descr">Määra üldise teekonna salvestamise logimise ajavahemik (lubatud kaardil GPX logimise lisa abil).</string>
-    <string name="save_global_track_interval">Üldine logimise ajavahemik</string>
+    <string name="save_global_track_interval">Üldine logimisintervall</string>
     <string name="background_service_int">GPS äratuse ajavahemik</string>
     <string name="enable_sleep_mode">Luba GPS taustarežiim</string>
     <string name="save_track_to_gpx_globally">Logi teekond GPX faili</string>
@@ -1514,7 +1514,7 @@
     <string name="auto_zoom_none">Automaatne suurendamine puudub</string>
     <string name="auto_zoom_close">Lühimaale</string>
     <string name="auto_zoom_far">Keskmaale</string>
-    <string name="auto_zoom_farthest">Pikamaale</string>
+    <string name="auto_zoom_farthest">Pikale maale</string>
     <string name="map_magnifier">Kaardi suurendus</string>
     <string name="base_world_map">Maailma aluskaart</string>
     <string name="about_version">Versioon:</string>
@@ -1532,7 +1532,7 @@
     <string name="edit_tilesource_choose_existing">Vali olemasolev…</string>
     <string name="maps_define_edit">Määratle/Muuda…</string>
     <string name="map_widget_fps_info">FPS silumisteave</string>
-    <string name="driving_region">Sõitmispiirkond</string>
+    <string name="driving_region">Sõidupiirkond</string>
     <string name="driving_region_japan">Jaapan</string>
     <string name="driving_region_us">Ameerika Ühendriigid</string>
     <string name="driving_region_canada">Kanada</string>
@@ -1555,7 +1555,7 @@
     <string name="destination_point">Sihtkoht %1$s</string>
     <string name="context_menu_item_destination_point">Määra sihtkohaks</string>
     <string name="please_select_address">Määra kõigepealt linn või tänav</string>
-    <string name="search_street_in_neighborhood_cities">Otsi tänavat lähedalasuvatest linnadest</string>
+    <string name="search_street_in_neighborhood_cities">Otsi tänavat naaberlinnadest</string>
     <string name="intermediate_items_sort_by_distance">Sorteeri ukselt-uksele</string>
     <string name="local_osm_changes_backup_successful">OSM muudatuste fail loodi %1$s</string>
     <string name="local_osm_changes_backup_failed">OSM muudatuste tagavarakoopia loomine ebaõnnestus.</string>
@@ -1600,7 +1600,7 @@
     <string name="prefer_motorways">Eelista kiirteid</string>
     <string name="prefer_in_routing_title">Eelista…</string>
     <string name="prefer_in_routing_descr">Eelista kiirteid.</string>
-    <string name="max_speed_none">mitte midagi</string>
+    <string name="max_speed_none">määramata</string>
     <string name="index_name_openmaps">OpenMaps EU</string>
     <string name="download_wikipedia_maps">Vikipeedia</string>
     <string name="local_indexes_cat_srtm">Kõrgusjooned</string>
@@ -1721,7 +1721,7 @@
 \n - Automatiseeritud päeva/öö vaate vahetamine 
 \n - Kiirusest sõltuv kaardi suurendusaste 
 \n - Kaardi joondamine vastavalt kompassile või liikumissuunale 
-\n - Teekonnal juhtimine, kiirusepiirangu kuvamine, salvestatud ja kõnesünteesitud hääljuhised 
+\n - Teekonnal juhtimine, kiiruspiirangu kuvamine, salvestatud ja kõnesünteesitud hääljuhised 
 \n 
 \n Selle tasuta OsmAnd versiooni piirangud: 
 \n - Kaardi allalaadimiste arv on piiratud 
@@ -1748,7 +1748,7 @@
 \n - Automatiseeritud päeva/öö ekraanivaate vahetamine 
 \n - Kiirusest sõltuv kaardi suurendustase 
 \n - Kaardi joondamine vastavalt kompassile või liikumissuunale 
-\n - Raja juhtimine, kiirusepiirangu kuvamine, salvestatud ja kõnesünteesi hääled
+\n - Raja juhtimine, kiiruspiirangu kuvamine, salvestatud ja kõnesünteesi hääled
 \n</string>
     <string name="filterpoi_activity">Loo huvipunktide filter</string>
     <string name="select_navigation_mode">Transpordiliik:</string>
@@ -1756,7 +1756,7 @@
 \nPäikeseloojang: %2$s</string>
     <string name="day_night_info">Päeva/öö teave</string>
     <string name="map_widget_renderer">Kaardi stiil</string>
-    <string name="layer_map_appearance">Seadista ekraani</string>
+    <string name="layer_map_appearance">Ekraani seadistamine</string>
     <string name="show_lanes">Sõidurajad</string>
     <string name="avoid_unpaved">Väldi sillutamata teid</string>
     <string name="avoid_ferries">Väldi praame</string>
@@ -1771,7 +1771,7 @@
     <string name="int_continuosly">Jätkuv</string>
     <string name="screen_is_locked">Avamiseks puuduta luku ikooni</string>
     <string name="map_widget_top_text">Tänavanimi</string>
-    <string name="map_widget_config">Seadista ekraani</string>
+    <string name="map_widget_config">Ekraani seadistamine</string>
     <string name="map_widget_back_to_loc">Kus ma olen</string>
     <string name="map_widget_lock_screen">Lukusta</string>
     <string name="map_widget_compass">Kompass</string>
@@ -2560,7 +2560,7 @@
 \n • Teekond arvutatakse sellest kõrvale kaldudes alati ümber 
 \n • Teeäärsed juhised, tänavanimed ja eeldatav saabumisaeg on abiks teel olles 
 \n • Reisi turvalisemaks muutmiseks lülitatakse päeval/öösel ekraani režiim automaatselt ümber 
-\n • Näidake kiirusepiiranguid ja saate selle ületamise korral meeldetuletusi 
+\n • Näidake kiiruspiiranguid ja saate selle ületamise korral meeldetuletusi 
 \n • Kaardi suurendustaset kohandatakse vastavalt teie kiirusele 
 \n • Otsige sihtkohti aadressi, liigi (nt parkimine, restoran, hotell, bensiinijaam, muuseum) või geograafiliste koordinaatide järgi 
 \n • Toetab teekonna vahepunkte 
@@ -2732,8 +2732,8 @@
     <string name="local_index_tile_data_name">Paanide andmed: %1$s</string>
     <string name="edit_tilesource_successfully">Paanide allikas %1$s on salvestatud</string>
     <string name="driving_region_descr">Vali sõidupiirkond: USA, Euroopa, Suurbritannia, Aasia ja teised.</string>
-    <string name="speak_descr">Seadista teavitamine tänavanimede, liiklushoiatuste (sunnitud peatuste, teekünniste), kiiruskaamerate hoiatuste ja kiirusepiirangute osas.</string>
-    <string name="settings_preset_descr">Kaardivaate ja navigeerimise sätted jäetakse iga kasutusprofiili osas meelde eraldi. Seadista siin oma vaikeprofiil.</string>
+    <string name="speak_descr">Seadista teavitamine tänavanimede, liiklushoiatuste (sunnitud peatuste, teekünniste), kiiruskaamerate hoiatuste ja kiiruspiirangute osas.</string>
+    <string name="settings_preset_descr">Kaardivaate ja navigeerimise sätted jäetakse meelde iga kasutusprofiili kohta eraldi. Seadista siin oma vaikeprofiil.</string>
     <string name="intermediate_items_sort_return">Vahe sihtkohtade optimeeritud järjekord teel sihtkohta.</string>
     <string name="use_distance_measurement_help">* Puuduta punkti märkimiseks.
 \n * Pikk puudutus kaardil eelmise punkti kustutamiseks.
@@ -3260,7 +3260,7 @@
 \n • Valik täielike regiooniandmete ja lihtsalt teedevõrgu vahel (näide: kogu Jaapan on seega vastavalt kas 700 MB või 200 MB)</string>
     <string name="osmand_plus_extended_description_part5">Turvafunktsioonid
 \n • Valikuline automaatne päeva- ja öövaate vahetamine
-\n • Valikuline kiirusepiirangu kuvamine koos meeldetuletusega kiiruse ületamise puhul
+\n • Valikuline kiiruspiirangu kuvamine koos meeldetuletusega kiiruse ületamise puhul
 \n • Valikuline kiirusest sõltuv suurendustase
 \n • Jaga oma asukohta, et sõbrad sind üles leiaksid
 \n</string>
