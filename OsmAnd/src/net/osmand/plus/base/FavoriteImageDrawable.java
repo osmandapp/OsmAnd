@@ -45,7 +45,7 @@ public class FavoriteImageDrawable extends Drawable {
 	private ColorFilter grayFilter;
 	private Drawable personalPointBitmap;
 
-	public FavoriteImageDrawable(Context ctx, int color, boolean withShadow, boolean synced, FavouritePoint point) {
+	private FavoriteImageDrawable(Context ctx, int color, boolean withShadow, boolean synced, FavouritePoint point) {
 		this.withShadow = withShadow;
 		this.synced = synced;
 		Resources res = ctx.getResources();
@@ -148,7 +148,7 @@ public class FavoriteImageDrawable extends Drawable {
 
 	private static TreeMap<String, FavoriteImageDrawable> cache = new TreeMap<>();
 
-	public static FavoriteImageDrawable getOrCreate(Context a, int color, boolean withShadow, boolean synced, FavouritePoint point) {
+	private static FavoriteImageDrawable getOrCreate(Context a, int color, boolean withShadow, boolean synced, FavouritePoint point) {
 		String pointName = "";
 		if (point != null && point.isPersonalPoint()) {
 			pointName = point.getName();
