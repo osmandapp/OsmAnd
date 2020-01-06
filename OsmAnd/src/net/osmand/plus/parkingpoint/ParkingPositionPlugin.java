@@ -15,6 +15,7 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
@@ -292,7 +293,10 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 				showDeleteEventWarning(activity);
 				cancelParking();
 				if (activity instanceof MapActivity) {
-					app.getFavorites().deleteParkingPoint();
+					FavouritePoint pnt = app.getFavorites().getSpecialPoint(FavouritePoint.SpecialPointType.PARKING);
+					if(pnt != null) {
+						app.getFavorites().deleteFavourite(pnt);
+					}
 					((MapActivity) activity).getContextMenu().close();
 				}
 			}

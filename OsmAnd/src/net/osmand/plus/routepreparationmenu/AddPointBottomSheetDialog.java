@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.WorkSource;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
@@ -249,11 +250,11 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 											break;
 										case HOME:
 											app.showShortToastMessage(R.string.add_home);
-											app.getFavorites().setHomePoint(ll, null);
+											app.getFavorites().setSpecialPoint(ll, FavouritePoint.SpecialPointType.HOME, null);
 											break;
 										case WORK:
 											app.showShortToastMessage(R.string.add_work);
-											app.getFavorites().setWorkPoint(ll, null);
+											app.getFavorites().setSpecialPoint(ll, FavouritePoint.SpecialPointType.WORK, null);
 											break;
 									}
 								} else if (pointType == PointType.START) {
@@ -451,13 +452,13 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 								helper.navigateToPoint(ll, true, helper.getIntermediatePoints().size(), name);
 								break;
 							case HOME:
-								favorites.setHomePoint(ll, null);
+								favorites.setSpecialPoint(ll, FavouritePoint.SpecialPointType.HOME, null);
 								break;
 							case WORK:
-								favorites.setWorkPoint(ll, null);
+								favorites.setSpecialPoint(ll, FavouritePoint.SpecialPointType.WORK, null);
 								break;
 							case PARKING:
-								favorites.setParkingPoint(ll);
+								favorites.setSpecialPoint(ll, FavouritePoint.SpecialPointType.PARKING, null);
 								break;
 						}
 						dismiss();

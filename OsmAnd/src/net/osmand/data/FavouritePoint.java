@@ -12,10 +12,6 @@ import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.R;
 import net.osmand.util.Algorithms;
 
-import static net.osmand.plus.FavouritesDbHelper.FavoriteGroup.PERSONAL_CATEGORY;
-import static net.osmand.plus.FavouritesDbHelper.PersonalPointType.HOME;
-import static net.osmand.plus.FavouritesDbHelper.PersonalPointType.PARKING;
-import static net.osmand.plus.FavouritesDbHelper.PersonalPointType.WORK;
 
 public class FavouritePoint implements Serializable, LocationPoint {
 	private static final long serialVersionUID = 729654300829771466L;
@@ -125,9 +121,8 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	}
 
 	public int getOverlayIconId() {
-		// TODO HW
-		if(isPersonalPoint()) {
-			return FavouritesDbHelper.getPersonalIconId(point.getName());
+		if(specialPointType != null) {
+			return specialPointType.getIconId();
 		}
 		return 0;
 	}

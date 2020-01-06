@@ -33,10 +33,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-import static net.osmand.plus.FavouritesDbHelper.FavoriteGroup.PERSONAL_CATEGORY;
-import static net.osmand.plus.FavouritesDbHelper.PersonalPointType.HOME;
-import static net.osmand.plus.FavouritesDbHelper.PersonalPointType.PARKING;
-import static net.osmand.plus.FavouritesDbHelper.PersonalPointType.WORK;
 
 public class FavouritesDbHelper {
 
@@ -71,15 +67,14 @@ public class FavouritesDbHelper {
 
 	public static class FavoriteGroup {
 		public static final String PERSONAL_CATEGORY = "personal";
-		private String name;
-		private boolean visible = true;
-		private int color;
+		public String name;
+		public boolean visible = true;
+		public int color;
+		public List<FavouritePoint> points = new ArrayList<>();
 
 		public boolean isPersonal() {
 			return name.equals(PERSONAL_CATEGORY);
 		}
-
-		private List<FavouritePoint> points = new ArrayList<>();
 
 		public List<FavouritePoint> getPoints() {
 			return points;
@@ -103,6 +98,16 @@ public class FavouritesDbHelper {
 			} else {
 				return name;
 			}
+		}
+
+		public String convertDisplayNameToGroupIdName(Context context, String name) {
+			if(name.equals(context.getString(R.string.personal_category_name))) {
+				return PERSONAL_CATEGORY;
+			}
+			if(name.equals(context.getString(R.string.shared_string_favorites))) {
+				return "";
+			}
+			return name;
 		}
 	}
 
@@ -146,7 +151,7 @@ public class FavouritesDbHelper {
 		});
 	}
 
-	public FavouritePoint getSpecialPoint(PersonalPointType pointType) {
+	public FavouritePoint getSpecialPoint(FavouritePoint.SpecialPointType pointType) {
 		for (FavouritePoint fp : cachedFavoritePoints) {
 			if (fp.getSpecialPointType() == pointType) {
 					return fp;
@@ -250,13 +255,13 @@ public class FavouritesDbHelper {
 		return true;
 	}
 
-	public void setSpecialPoint(@NonNull LatLon latLon, FavouritePoint.SpecialPointType personalType, @Nullable String address) {
-		FavouritePoint point = getSpecialPoint(personalType);
+	public void setSpecialPoint(@NonNull LatLon latLon, FavouritePoint.SpecialPointType specialType, @Nullable String address) {
+		FavouritePoint point = getSpecialPoint(specialType);
 		if (point != null) {
-			editFavourite(point, latLon.getLatitude(), latLon.getLongitude(), description);
+			editFavourite(point, latLon.getLatitude(), latLon.getLongitude(), address);
 		} else {
-			point = new FavouritePoint(latLon.getLatitude(), latLon.getLongitude(), personalType, personalType.getCategory());
-			point.setDescription(description);
+			point = new FavouritePoint(latLon.getLatitude(), latLon.getLongitude(), specialType, specialType.getCategory());
+			point.setAddress(address);
 			addFavourite(point);
 		}
 		if (address == null) {
@@ -432,7 +437,7 @@ public class FavouritesDbHelper {
 
 
 	public boolean editAddressDescription(FavouritePoint p, String address) {
-		p.setAddress(description);
+		p.setAddress(address);
 		saveCurrentPointsIntoFile();
 		runSyncWithMarkers(getOrCreateGroup(p, 0));
 		return true;
@@ -650,11 +655,12 @@ public class FavouritesDbHelper {
 		}
 	}
 
-	public FavoriteGroup getGroup(String name) {
-		if (flatGroups.containsKey(name)) {
-			return flatGroups.get(name);
-		} else if (name.equals(context.getString(R.string.personal_category_name))) {
-			return flatGroups.get(PERSONAL_CATEGORY);
+	public FavoriteGroup getGroup(String nameId) {
+		if (flatGroups.containsKey(nameId)) {
+			return flatGroups.get(nameId);
+			// TODO HW: double check invocations and use convert where it is needed?
+//		} else if (name.equals(context.getString(R.string.personal_category_name))) {
+//			return flatGroups.get(PERSONAL_CATEGORY);
 		} else {
 			return null;
 		}

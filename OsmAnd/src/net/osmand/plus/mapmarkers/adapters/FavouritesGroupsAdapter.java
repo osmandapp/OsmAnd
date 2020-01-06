@@ -35,7 +35,7 @@ public class FavouritesGroupsAdapter extends GroupsAdapter {
 			int color = favoriteGroup.color == 0 || favoriteGroup.color == Color.BLACK ? app.getResources().getColor(R.color.color_favorite) : favoriteGroup.color;
 			markersGroupViewHolder.icon.setImageDrawable(iconsCache.getPaintedIcon(R.drawable.ic_action_folder, color | 0xff000000));
 			markersGroupViewHolder.name.setText(favoriteGroup.name.length() == 0 ? app.getString(R.string.shared_string_favorites) : favoriteGroup.name);
-			markersGroupViewHolder.numberCount.setText(String.valueOf(favoriteGroup.points.size()));
+			markersGroupViewHolder.numberCount.setText(String.valueOf(favoriteGroup.getPoints().size()));
 		}
 	}
 
