@@ -213,7 +213,7 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 				iconDay = STATUS_WIDGET_ANIM_ICON_DAY
 				iconNight = STATUS_WIDGET_ANIM_ICON_NIGHT
 				val diffTime = (System.currentTimeMillis() - time) / 1000
-				OsmandFormatter.getFormattedDurationShort(diffTime)
+				OsmandFormatter.getFormattedDurationForWidget(diffTime)
 			}
 			time == 0L && isSending -> {
 				iconDay = STATUS_WIDGET_ANIM_ICON_DAY
@@ -223,11 +223,17 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 			else -> {
 				iconDay = STATUS_WIDGET_OFF_ICON_DAY
 				iconNight = STATUS_WIDGET_OFF_ICON_NIGHT
-				app.getString(R.string.shared_string_off)
+				app.getString(R.string.shared_string_start)
 			}
 		}
 		val subText = when {
-			time > 0 -> app.getString(R.string.shared_string_minute_short)
+			time > 0 -> {
+				if (text.length > 2) {
+					app.getString(R.string.shared_string_hour_short)
+				} else {
+					app.getString(R.string.shared_string_minute_short)
+				}
+			}
 			else -> ""
 		}
 		osmandAidlHelper.addMapWidget(

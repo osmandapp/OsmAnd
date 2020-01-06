@@ -25,13 +25,10 @@ class LocationMessages(val app: TelegramApplication) {
 
 	private var lastRemoveTime: Long? = null
 
-	var firstWriteTime: Long = 0L
-
 	init {
 		dbHelper = SQLiteHelper(app)
 		readBufferedMessages()
 		readLastMessages()
-		firstWriteTime = getFirstWriteTime() ?: 0L
 	}
 
 	fun getBufferedMessages(): List<BufferMessage> {
@@ -100,7 +97,6 @@ class LocationMessages(val app: TelegramApplication) {
 		messages.add(message)
 		this.bufferedMessages = messages
 		dbHelper.addBufferedMessage(message)
-		updateFirstWriteTime()
 	}
 
 	fun addNewLocationMessage(message: TdApi.Message) {
@@ -143,7 +139,6 @@ class LocationMessages(val app: TelegramApplication) {
 		log.debug("clearBufferedMessages")
 		dbHelper.clearBufferedMessages()
 		bufferedMessages = emptyList()
-		updateFirstWriteTime()
 	}
 
 	fun removeBufferedMessage(message: BufferMessage) {
@@ -152,15 +147,6 @@ class LocationMessages(val app: TelegramApplication) {
 		messages.remove(message)
 		this.bufferedMessages = messages
 		dbHelper.removeBufferedMessage(message)
-		updateFirstWriteTime()
-	}
-
-	private fun updateFirstWriteTime() {
-		if (firstWriteTime == 0L && bufferedMessages.isNotEmpty()) {
-			firstWriteTime = System.currentTimeMillis()
-		} else if (bufferedMessages.isEmpty()) {
-			firstWriteTime = 0L
-		}
 	}
 
 	private fun removeOldBufferedMessages() {
@@ -177,12 +163,7 @@ class LocationMessages(val app: TelegramApplication) {
 			messages.removeAll(expiredList)
 			this.bufferedMessages = messages.toList()
 			lastRemoveTime = currentTime
-			updateFirstWriteTime()
 		}
-	}
-
-	private fun getFirstWriteTime(): Long? {
-		return bufferedMessages.minBy { it.time }?.time
 	}
 
 	private fun isTimeToDelete(currentTime: Long) = if (lastRemoveTime != null) {

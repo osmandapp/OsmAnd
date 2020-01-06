@@ -225,9 +225,23 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 		updateWidgetHandler?.postDelayed({
 			if (isUsedByMyLocation(usedBy)) {
 				val sharingStatus = app().settings.sharingStatusChanges.last()
-				val isSending = !((sharingStatus.statusType == TelegramSettings.SharingStatusType.NO_GPS) || (sharingStatus.statusType == TelegramSettings.SharingStatusType.INITIALIZING))
-				app().showLocationHelper.addOrUpdateStatusWidget(app().locationMessages.firstWriteTime, isSending)
-				log.info("difference in time: ${System.currentTimeMillis() - app().locationMessages.firstWriteTime}")
+				val isSending = sharingStatus.statusType == TelegramSettings.SharingStatusType.SENDING
+				val sharingChats = app().settings.getShareLocationChats()
+				var oldestTime = 0L
+				if (sharingChats.isNotEmpty()) {
+					sharingChats.forEach { id ->
+						val bufferMessages = app().locationMessages.getBufferedMessagesForChat(id)
+						if (bufferMessages.isNotEmpty()) {
+							val newTime = bufferMessages[0].time
+							if (oldestTime == 0L || newTime < oldestTime) {
+								oldestTime = newTime
+							}
+						} else {
+							oldestTime = 0L
+						}
+					}
+				}
+				app().showLocationHelper.addOrUpdateStatusWidget(oldestTime, isSending)
 			}
 			startWidgetUpdates()
 		}, UPDATE_WIDGET_INTERVAL_MS)
