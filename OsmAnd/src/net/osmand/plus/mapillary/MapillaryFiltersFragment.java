@@ -69,7 +69,7 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
 
         final View toggleRow = view.findViewById(R.id.toggle_row);
         final boolean selected = settings.SHOW_MAPILLARY.get();
-        final int toggleActionStringId = selected ? R.string.shared_string_enabled : R.string.shared_string_disabled;
+        final int toggleActionStringId = selected ? R.string.shared_string_on : R.string.shared_string_off;
         int toggleIconColorId;
         int toggleIconId;
         if (selected) {

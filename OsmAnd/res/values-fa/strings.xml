@@ -3451,4 +3451,7 @@
     <string name="choose_icon_color_name">انتخاب نماد، رنگ و نام</string>
     <string name="reorder_profiles">ویرایش لیست پروفایل‌ها</string>
     <string name="selected_profile">پروفایل انتخاب‌شده</string>
+    <string name="reset_confirmation_descr">با کلیک روی %1$s، همهٔ تغییرات شما از بین می‌رود.</string>
+    <string name="reset_all_profile_settings_descr">همهٔ تنظیمات پروفایل به حالت اولیهٔ پس از نصب بازنشانی می‌شود.</string>
+    <string name="reset_all_profile_settings">همهٔ تنظیمات پروفایل را بازنشانی می‌کنید؟</string>
 </resources>

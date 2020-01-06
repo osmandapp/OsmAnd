@@ -70,8 +70,8 @@ public class RasterMapMenu {
 		}
 
 		final boolean selected = mapTypeDescr != null;
-		final int toggleActionStringId = selected ? R.string.shared_string_enabled
-				: R.string.shared_string_disabled;
+		final int toggleActionStringId = selected ? R.string.shared_string_on
+				: R.string.shared_string_off;
 
 		final OnMapSelectedCallback onMapSelectedCallback =
 				new OnMapSelectedCallback() {
