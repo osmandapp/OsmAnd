@@ -205,11 +205,16 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 					if (getActivity() != null) {
 						hideKeyboard();
 						if (isChanged()) {
-							if (saveNewProfile()) {
+							boolean isNew = ApplicationMode.valueOfStringKey(changedProfile.stringKey, null) == null;
+							if (saveProfile(isNew)) {
 								profile = changedProfile;
-								ProfileAppearanceFragment.this.dismiss();
-								BaseSettingsFragment.showInstance(getMapActivity(), SettingsScreenType.CONFIGURE_PROFILE,
-										ApplicationMode.valueOfStringKey(changedProfile.stringKey, null));
+								if (isNew) {
+									ProfileAppearanceFragment.this.dismiss();
+									BaseSettingsFragment.showInstance(getMapActivity(), SettingsScreenType.CONFIGURE_PROFILE,
+											ApplicationMode.valueOfStringKey(changedProfile.stringKey, null));
+								} else {
+									getActivity().onBackPressed();
+								}
 							}
 						}
 					}
@@ -498,7 +503,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 		}
 	}
 
-	private boolean saveNewProfile() {
+	private boolean saveProfile(boolean isNew) {
 		if (changedProfile.name.replace(" ", "").length() < 1) {
 			if (getActivity() != null) {
 				createWarningDialog(getActivity(),
@@ -514,13 +519,11 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 				.setRoutingProfile(changedProfile.routingProfile)
 				.setColor(changedProfile.color);
 
-		boolean newProfile = ApplicationMode.valueOfStringKey(changedProfile.stringKey, null) == null;
-
 		ApplicationMode mode = ApplicationMode.saveProfile(builder, getMyApplication());
 		if (!ApplicationMode.values(app).contains(mode)) {
 			ApplicationMode.changeProfileAvailability(mode, true, getMyApplication());
 		}
-		if (newProfile) {
+		if (isNew) {
 			app.getSettings().copyPreferencesFromProfile(changedProfile.parent, mode);
 		}
 		return true;
