@@ -148,11 +148,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	}
 
 	public String getCategoryDisplayName(@NonNull Context ctx) {
-		if (category.equals(PERSONAL_CATEGORY)) {
-			return ctx.getString(R.string.personal_category_name);
-		} else {
-			return category;
-		}
+		return FavouritesDbHelper.FavoriteGroup.getDisplayName(ctx);
 	}
 	
 	public void setCategory(String category) {
@@ -259,7 +255,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 			this.iconId = iconId;
 		}
 
-		public String getCategory() { return PERSONAL_CATEGORY; }
+		public String getCategory() { return FavouritesDbHelper.FavoriteGroup.PERSONAL_CATEGORY; }
 
 		public String getName() {
 			return typeName;

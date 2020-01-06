@@ -73,7 +73,19 @@ public class FavouritesDbHelper {
 		public List<FavouritePoint> points = new ArrayList<>();
 
 		public boolean isPersonal() {
-			return name.equals(PERSONAL_CATEGORY);
+			return isPersonal(name);
+		}
+
+		private static boolean isPersonal(String name) {
+			return PERSONAL_CATEGORY.equals(name);
+		}
+
+		public static String getDisplayName(String name, Context ctx) {
+			if (isPersonal(name)) {
+				return ctx.getString(R.string.personal_category_name);
+			} else {
+				return name;
+			}
 		}
 
 		public List<FavouritePoint> getPoints() {
@@ -92,12 +104,8 @@ public class FavouritesDbHelper {
 			return name;
 		}
 
-		public String getName(Context ctx) {
-			if (isPersonal()) {
-				return ctx.getString(R.string.personal_category_name);
-			} else {
-				return name;
-			}
+		public String getDisplayName(Context ctx) {
+			return getDisplayName(name, ctx);
 		}
 
 		public String convertDisplayNameToGroupIdName(Context context, String name) {
@@ -260,7 +268,7 @@ public class FavouritesDbHelper {
 		if (point != null) {
 			editFavourite(point, latLon.getLatitude(), latLon.getLongitude(), address);
 		} else {
-			point = new FavouritePoint(latLon.getLatitude(), latLon.getLongitude(), specialType, specialType.getCategory());
+			point = new FavouritePoint(latLon.getLatitude(), latLon.getLongitude(), specialType.getName(), specialType.getCategory());
 			point.setAddress(address);
 			addFavourite(point);
 		}

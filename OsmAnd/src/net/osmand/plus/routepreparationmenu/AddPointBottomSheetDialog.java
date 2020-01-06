@@ -643,12 +643,11 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 					if (item instanceof FavouritePoint) {
 						FavouritePoint point = (FavouritePoint) item;
 						favoriteViewHolder.title.setText(point.getDisplayName(app));
-						// TODO HW: similar to overlay icon id
-						if (((FavouritePoint) item).isPersonalPoint()) {
+						if (((FavouritePoint) item).getSpecialPointType() != null) {
 							int iconColor = app.getSettings().isLightContent()
 									? R.color.icon_color_default_light : R.color.icon_color_default_dark;
 							favoriteViewHolder.icon.setImageDrawable(app.getUIUtilities().getIcon(
-									FavouritesDbHelper.getPersonalIconId(point.getName()), iconColor));
+									((FavouritePoint) item).getSpecialPointType().getIconId(), iconColor));
 							favoriteViewHolder.description.setText(point.getDescription());
 						} else {
 							if (point.getCategory().equals("")) {

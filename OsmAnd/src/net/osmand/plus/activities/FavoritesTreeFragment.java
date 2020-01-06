@@ -850,7 +850,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			} else {
 				label.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
 			}
-			label.setText(model.name.length() == 0 ? getString(R.string.shared_string_favorites) : model.getName(app));
+			label.setText(model.name.length() == 0 ? getString(R.string.shared_string_favorites) : model.getDisplayName(app));
 
 			if (selectionMode) {
 				final CheckBox ch = (CheckBox) row.findViewById(R.id.toggle_item);
