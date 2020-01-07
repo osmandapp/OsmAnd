@@ -710,7 +710,7 @@ public class ConfigureMapMenu {
 						AlertDialog.Builder b = new AlertDialog.Builder(new ContextThemeWrapper(view.getContext(), themeRes));
 						// test old descr as title
 						b.setTitle(R.string.text_size);
-						final Float[] txtValues = new Float[]{0.75f, 1f, 1.25f, 1.5f, 2f, 3f};
+						final Float[] txtValues = new Float[]{0.33f, 0.5f, 0.75f, 1f, 1.25f, 1.5f, 2f, 3f};
 						int selected = -1;
 						final String[] txtNames = new String[txtValues.length];
 						for (int i = 0; i < txtNames.length; i++) {
