@@ -112,17 +112,17 @@ public class ContributionVersionActivity extends OsmandListActivity {
 			}
 		} else if(operationId == INSTALL_BUILD){
 			if(currentSelectedBuild != null){
+				Intent intent;
 				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
 					Uri apkUri = FileProvider.getUriForFile(this, getPackageName() + ".fileprovider", pathToDownload);
-					Intent intent = new Intent(Intent.ACTION_INSTALL_PACKAGE);
+					intent = new Intent(Intent.ACTION_INSTALL_PACKAGE);
 					intent.setData(apkUri);
-					intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
 				} else {
-					Intent intent = new Intent(Intent.ACTION_VIEW);
+					intent = new Intent(Intent.ACTION_VIEW);
 					intent.setDataAndType(Uri.fromFile(pathToDownload), "application/vnd.android.package-archive");
-					intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-					startActivityForResult(intent, ACTIVITY_TO_INSTALL);
 				}
+				intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+				startActivityForResult(intent, ACTIVITY_TO_INSTALL);
 				updateInstalledApp(false, currentSelectedBuild.date);
 			}
 		}
