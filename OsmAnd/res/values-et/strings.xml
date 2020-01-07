@@ -74,7 +74,9 @@
     <string name="debugging_and_development">OsmAnd arendus</string>
     <string name="back_to_map">Tagasi kaardile</string>
     <string name="share_note">Jaga märget</string>
-    <string name="location_on_map">Asukoht:\n Lat %1$s\n Lon %2$s</string>
+    <string name="location_on_map">Asukoht:
+\n Lai %1$s
+\n Pik %2$s</string>
     <string name="notes">Märkmed</string>
     <string name="online_map">Veebikaart</string>
     <string name="roads_only">Ainult teed</string>
@@ -244,8 +246,8 @@
     <string name="share_route_as_gpx">Jaga teekonda GPX failina</string>
     <string name="share_route_subject">OsmAnd abil jagatud teekond</string>
     <string name="route_roundabout">Ringristmik: vali %1d väljumine ja sõida otse</string>
-    <string name="route_kl">Püsi vasakul ja sõida otse</string>
-    <string name="route_kr">Püsi paremal ja sõida otse</string>
+    <string name="route_kl">Hoia vasakule ja sõida otse</string>
+    <string name="route_kr">Hoia paremale ja sõida otse</string>
     <string name="use_fluorescent_overlays_descr">Kasuta helkivaid värve radade ja teekondade kuvamisel.</string>
     <string name="animate_route_off">Peata simuleerimine</string>
     <string name="animate_route">Alusta simuleerimist</string>
@@ -255,10 +257,10 @@
     <string name="layer_route">Teekond</string>
     <string name="route_tr">Pööra paremale ja sõida otse</string>
     <string name="route_tshr">Pööra järsult paremale ja sõida otse</string>
-    <string name="route_tslr">Pööra kergelt paremale ja sõida otse</string>
+    <string name="route_tslr">Pööra veidi paremale ja sõida otse</string>
     <string name="route_tl">Pööra vasakule ja sõida otse</string>
     <string name="route_tshl">Pööra järsult vasakule ja sõida otse</string>
-    <string name="route_tsll">Pööra kergelt vasakule ja sõida otse</string>
+    <string name="route_tsll">Pööra veidi vasakule ja sõida otse</string>
     <string name="route_tu">Tee tagasipööre ja sõida otse</string>
     <string name="transport_Routes">Teekonnad</string>
     <string name="transport_route_distance">Teekonna pikkus</string>
@@ -1149,7 +1151,7 @@
     <string name="storage_directory">Kaardi salvestusruum</string>
     <string name="shared_string_copy">Kopeeri</string>
     <string name="filter_poi_hint">Filtreerimine nime järgi</string>
-    <string name="search_poi_category_hint">Kirjuta, et otsida kõigist</string>
+    <string name="search_poi_category_hint">Kirjuta kõigi otsimiseks</string>
     <string name="rendering_attr_OSMMapperAssistant_name">OSM kaardistaja abiline</string>
     <string name="agps_info">A-GPS teave</string>
     <string name="shared_string_manage">Halda</string>
@@ -1174,8 +1176,8 @@
     <string name="waypoint_visit_before">Külasta ennem</string>
     <string name="simulate_your_location">Simuleeri oma asukohta</string>
     <string name="drawer">Ühetasandiline loetelu</string>
-    <string name="short_location_on_map">Pik %1$s
-\nLai %2$s</string>
+    <string name="short_location_on_map">Lai %1$s 
+\nPik %2$s</string>
     <string name="tips_and_tricks_descr">Korduvad küsimused, hiljutised muudatused ja muu.</string>
     <string name="shared_string_dismiss">Loobu</string>
     <string name="shared_string_do_not_use">Ära kasuta</string>
@@ -1187,7 +1189,7 @@
     <string name="shared_string_selected_lowercase">valitud</string>
     <string name="shared_string_never">Mitte kunagi</string>
     <string name="shared_string_none">Mitte ühtegi</string>
-    <string name="shared_string_select_on_map">Valitse kaardil</string>
+    <string name="shared_string_select_on_map">Vali kaardil</string>
     <string name="shared_string_select_all">Vali kõik</string>
     <string name="shared_string_deselect">Tühista valik</string>
     <string name="shared_string_deselect_all">Tühista kogu valik</string>
@@ -1291,10 +1293,10 @@
     <string name="traffic_warning_speed_limit">Kiiruspiirang</string>
     <string name="traffic_warning_border_control">Piirikontroll</string>
     <string name="traffic_warning_payment">Tolliputka</string>
-    <string name="traffic_warning_stop">Stopp märk</string>
+    <string name="traffic_warning_stop">Stoppmärk</string>
     <string name="traffic_warning_calming">Liikluse rahustamine</string>
     <string name="traffic_warning_speed_camera">Kiiruskaamera</string>
-    <string name="traffic_warning">Liikluse hoiatus</string>
+    <string name="traffic_warning">Liiklushoiatus</string>
     <string name="speak_favorites">Lähedalolevad lemmikud</string>
     <string name="speak_poi">Lähedalolev HP</string>
     <string name="way_alarms">Liikluse hoiatused</string>
@@ -1383,7 +1385,7 @@
     <string name="delay_navigation_start">Alusta pöörangupõhist juhendamist automaatselt</string>
     <string name="local_index_gpx_info_show">"
 \n
-\nPikk puudutus valikuteks"</string>
+\nPikk puudutus kaardil vaatamiseks"</string>
     <string name="gpx_info_subtracks">Alamrajad: %1$s</string>
     <string name="gpx_info_waypoints">Teekonnapunktid: %1$s</string>
     <string name="gpx_info_distance">Kaugus: %1$s (%2$s punkti)</string>
@@ -1410,7 +1412,7 @@
     <string name="int_days">päeva</string>
     <string name="osmo_connect_menu">Ühenda</string>
     <string name="always_center_position_on_map">Kuva asukoht alati keskel</string>
-    <string name="voice_pref_title">Heli</string>
+    <string name="voice_pref_title">Hääl</string>
     <string name="misc_pref_title">Mitmesugust</string>
     <string name="localization_pref_title">Tõlge</string>
     <string name="index_item_nation_addresses">ülemaailmsed aadressid</string>
@@ -1470,7 +1472,7 @@
     <string name="index_name_italy">Euroopa - Itaalia</string>
     <string name="index_name_gb">Euroopa - Suurbritannia</string>
     <string name="calculate_osmand_route_without_internet">OsmAnd teekonna lõigu võrguühenduseta arvutamine</string>
-    <string name="gpx_option_calculate_first_last_segment">Arvuta OsmAnd marsruut teekonna esimesele ja viimasele lõigule</string>
+    <string name="gpx_option_calculate_first_last_segment">Arvuta OsmAnd teekond esimesele ja viimasele teekonnalõigule</string>
     <string name="use_displayed_track_for_navigation">Kasutada näidatud rada navigeerimiseks\?</string>
     <string name="keep_and_add_destination_point">Lisa hilisemaks sihtkohaks</string>
     <string name="select_gpx">Vali GPX…</string>
@@ -1496,7 +1498,7 @@
     <string name="copying_osmand_files_descr">OsmAnd andmefailide kopeerimine uude asukohta (%s)…</string>
     <string name="copying_osmand_files">OsmAnd andmefailide kopeerimine…</string>
     <string name="app_mode_truck">Veoauto</string>
-    <string name="guidance_preferences_descr">Navigatsioonieelistused</string>
+    <string name="guidance_preferences_descr">Navigeerimiseelistused</string>
     <string name="routing_preferences_descr">Teekonna leidmise eelistused</string>
     <string name="speech_rate_descr">Määra kõnesünteesi kõne kiirus.</string>
     <string name="speech_rate">Kõne kiirus</string>
@@ -1537,7 +1539,7 @@
     <string name="driving_region_us">Ameerika Ühendriigid</string>
     <string name="driving_region_canada">Kanada</string>
     <string name="driving_region_europe_asia">Euroopa, Aasia, Ladina-Ameerika ja sarnased</string>
-    <string name="driving_region_uk">Suurbritannia, India, Austraalia ja sarnased</string>
+    <string name="driving_region_uk">UK, India, Austraalia ja sarnased</string>
     <string name="speak_title">Teata…</string>
     <string name="speak_street_names">Tänavanimed (TTS)</string>
     <string name="speak_speed_limit">Kiiruspiirang</string>
@@ -1696,7 +1698,7 @@
     <string name="poi_filter_food_shop">Toidupood</string>
     <string name="poi_filter_for_tourists">Turistidele</string>
     <string name="poi_filter_fuel">Kütus</string>
-    <string name="show_warnings_title">Kuva teated…</string>
+    <string name="show_warnings_title">Kuva märguanded…</string>
     <string name="show_warnings_descr">Seadista liiklushoiatused (kiiruspiirangud, kohustuslikud peatused, teekünnised, tunnelid), kiiruskaamerate hoiatused ja sõiduradade teave.</string>
     <string name="use_compass_navigation">Kasuta kompassi</string>
     <string name="avoid_motorway">Väldi kiirteid</string>
@@ -1891,7 +1893,7 @@
     <string name="left">vasakule</string>
     <string name="front_left">vasakule-edasi</string>
     <string name="oclock">kell</string>
-    <string name="towards">suunas</string>
+    <string name="towards">poole</string>
     <string name="accuracy">Täpsus</string>
     <string name="altitude">Kõrgus</string>
     <string name="no_info">Teave puudub</string>
@@ -1958,7 +1960,7 @@
     <string name="osmand_service_descr">OsmAnd töötab taustal, ekraan välja lülitatud.</string>
     <string name="download_files_question_space">Lae alla {0} fail(i)\? {1} MB (kokku {2} MB-st) võetakse kasutusse.</string>
     <string name="use_transparent_map_theme">Läbipaistev teema</string>
-    <string name="choose_auto_follow_route">Joonda kaardivaade automaatselt keskele</string>
+    <string name="choose_auto_follow_route">Kaardivaade automaatselt keskele</string>
     <string name="choose_auto_follow_route_descr">Aeg kuni kaardivaade sünkroniseerub praeguse asukohaga.</string>
     <string name="keep_informing_never">Ainult käsitsi (puuduta noolt)</string>
     <string name="keep_informing_descr">Teata navigeerimisjuhised korrapäraste ajavahemike järel uuesti.</string>
@@ -2027,7 +2029,7 @@
     <string name="tts_language_not_supported_title">Mittetoetatud keel</string>
     <string name="tts_missing_language_data_title">Puuduvad andmed</string>
     <string name="tts_missing_language_data">Mine turule valitud keele alla laadimiseks\?</string>
-    <string name="gpx_option_reverse_route">Pööra GPX suund ümber</string>
+    <string name="gpx_option_reverse_route">Vastupidine GPX suund</string>
     <string name="gpx_option_destination_point">Kasuta olemasoleva sihtkohta</string>
     <string name="gpx_option_from_start_point">Mööda kogu rada</string>
     <string name="choose_audio_stream">Hääljuhiste väljund</string>
@@ -2202,7 +2204,7 @@
     <string name="shared_string_others">Muud</string>
     <string name="default_speed_system_descr">Määra kiiruse ühik.</string>
     <string name="default_speed_system">Kiiruse ühik</string>
-    <string name="nm">mpk</string>
+    <string name="nm">nmi</string>
     <string name="si_nm">Meremiilid</string>
     <string name="si_kmh">Kilomeetrit tunnis</string>
     <string name="si_mph">Miili tunnis</string>
@@ -2290,15 +2292,15 @@
     <string name="av_audio_bitrate">Heli bitikiirus</string>
     <string name="av_audio_bitrate_descr">Vali heli bitikiirus.</string>
     <string name="shared_string_near">Lähedal</string>
-    <string name="no_address_found">Aadress määramata</string>
-    <string name="looking_up_address">Aadressiotsing</string>
+    <string name="no_address_found">Aadressi pole määratud</string>
+    <string name="looking_up_address">Aadressi otsimine</string>
     <string name="live_update">Reaalajas uuendus</string>
     <string name="update_now">Uuenda kohe</string>
     <string name="no_location_permission">Luba ligipääs asukoha andmetele.</string>
     <string name="no_camera_permission">Luba ligipääs kaamerale.</string>
     <string name="no_microphone_permission">Luba ligipääs mikrofonile.</string>
     <string name="impassable_road_desc">Vali teed, mida soovid navigeerimise ajal vältida.</string>
-    <string name="shared_string_sound">Hääl</string>
+    <string name="shared_string_sound">Heli</string>
     <string name="select_voice_provider">Vali hääljuhendamine</string>
     <string name="select_voice_provider_descr">Vali või lae alla hääljuhendamine omas keeles.</string>
     <string name="live_updates">Reaalajas uuendused</string>
@@ -2355,7 +2357,7 @@
     <string name="upload_osm_note">Lae üles OSM märge</string>
     <string name="upload_anonymously">Lae üles anonüümselt</string>
     <string name="select_map_marker">Valitse kaardimarker</string>
-    <string name="map_markers_other">Muud markerid</string>
+    <string name="map_markers_other">Teised markerid</string>
     <string name="show_transparency_seekbar">Kuva läbipaistev otsinguriba</string>
     <string name="donations">Annetused</string>
     <string name="number_of_recipients">Vastuvõtjate arv</string>
@@ -2731,7 +2733,7 @@
     <string name="local_osm_changes_delete_all_confirm">Oled kindel, et soovid %1$d OSM muudatust kustutada\?</string>
     <string name="local_index_tile_data_name">Paanide andmed: %1$s</string>
     <string name="edit_tilesource_successfully">Paanide allikas %1$s on salvestatud</string>
-    <string name="driving_region_descr">Vali sõidupiirkond: USA, Euroopa, Suurbritannia, Aasia ja teised.</string>
+    <string name="driving_region_descr">Vali sõidupiirkond: USA, Euroopa, UK, Aasia ja teised.</string>
     <string name="speak_descr">Seadista teavitamine tänavanimede, liiklushoiatuste (sunnitud peatuste, teekünniste), kiiruskaamerate hoiatuste ja kiiruspiirangute osas.</string>
     <string name="settings_preset_descr">Kaardivaate ja navigeerimise sätted jäetakse meelde iga kasutusprofiili kohta eraldi. Seadista siin oma vaikeprofiil.</string>
     <string name="intermediate_items_sort_return">Vahe sihtkohtade optimeeritud järjekord teel sihtkohta.</string>
@@ -3222,20 +3224,20 @@
 \n • Lae GPX rajad OSM keskkonda üles otse rakendusest
 \n • Lisa huvipunkte ja lae need kohe üles OSM keskkonda (või hiljem internetühenduse tekkides)
 \n</string>
-    <string name="osmand_extended_description_part8">OsmAnd on aktiivselt arendatud avatud lähtekoodiga tarkvara. Kõik saavad rakendusse panustada, teatades vigadest, parandades tõlkeid või kodeerides uusi funktsioone. Lisaks toetub projekt rahalisele toetusele koodide kodeerimiseks ja uute funktsioonide testimiseks.
-\n Ligikaudne kaardi leviala ja kvaliteet:
-\n • Lääne-Euroopa: ****
-\n • Ida-Euroopa: ***
-\n • Venemaa: ***
-\n • Põhja-Ameerika: ***
-\n • Lõuna-Ameerika: **
-\n • Aasia: **
-\n • Jaapan ja Korea: ***
-\n • Lähis-Ida: **
-\n • Aafrika: **
-\n • Antarktika: *
-\n Enamik maailma riike üle on allalaadimiseks saadaval!
-\n Hangi oma riigis usaldusväärne navigaator - olgu see siis Prantsusmaa, Saksamaa, Mehhiko, Suurbritannia, Hispaania, Holland, USA, Venemaa, Brasiilia või mõni muu.</string>
+    <string name="osmand_extended_description_part8">OsmAnd on aktiivselt arendatud avatud lähtekoodiga tarkvara. Kõik saavad rakendusse panustada, teatades vigadest, parandades tõlkeid või kodeerides uusi funktsioone. Lisaks toetub projekt rahalisele toetusele koodide kodeerimiseks ja uute funktsioonide testimiseks. 
+\n Ligikaudne kaardi leviala ja kvaliteet: 
+\n • Lääne-Euroopa: **** 
+\n • Ida-Euroopa: *** 
+\n • Venemaa: *** 
+\n • Põhja-Ameerika: *** 
+\n • Lõuna-Ameerika: ** 
+\n • Aasia: ** 
+\n • Jaapan ja Korea: *** 
+\n • Lähis-Ida: ** 
+\n • Aafrika: ** 
+\n • Antarktika: * 
+\n Enamik maailma riike üle on allalaadimiseks saadaval! 
+\n Hangi oma riigis usaldusväärne navigaator - olgu see siis Prantsusmaa, Saksamaa, Mehhiko, UK, Hispaania, Holland, USA, Venemaa, Brasiilia või mõni muu.</string>
     <string name="osmand_plus_extended_description_part1">OsmAnd + (OSM automatiseeritud navigeerimisjuhised) on kaardi- ja navigatsioonirakendus, millel on juurdepääs tasuta, ülemaailmsetele ja kvaliteetsetele OpenStreetMap (OSM) andmetele.
 \n Naudi hääl- ja optilist navigeerimist, HP-de (huvipunktide) vaatamist, GPX radade loomist ja haldamist, kasutades kõrgusjoonte visuaalset kuvamist ja kõrgusteavet, valikut autosõidu, jalgrattasõidu, jalakäijate režiimide, OSM redigeerimise ja palju muu vahel.
 \n
@@ -3278,19 +3280,19 @@
 \n • Valikuline reisi salvestamine ka taustrežiimis (kui seade on puhkeolekus)
 \n OsmAnd on aktiivselt arendatud avatud lähtekoodiga tarkvara. Kõik saavad rakendusse panustada, teatades vigadest, parandades tõlkeid või kodeerides uusi funktsioone. Lisaks toetub projekt rahalisele toetusele koodide kodeerimiseks ja uute funktsioonide testimiseks.
 \n</string>
-    <string name="osmand_plus_extended_description_part8">Ligikaudne kaardi leviala ja kvaliteet:
-\n • Lääne-Euroopa: ****
-\n • Ida-Euroopa: ***
-\n • Venemaa: ***
-\n • Põhja-Ameerika: ***
-\n • Lõuna-Ameerika: **
-\n • Aasia: **
-\n • Jaapan ja Korea: ***
-\n • Lähis-Ida: **
-\n • Aafrika: **
-\n • Antarktika: *
-\n Enamik riike kogu maailmas on saadaval alla laadimiseks
-\n Afganistanist Zimbabweni, Austraaliast USA-ni. Argentiina, Brasiilia, Kanada, Prantsusmaa, Saksamaa, Mehhiko, Suurbritannia, Hispaania, …
+    <string name="osmand_plus_extended_description_part8">Ligikaudne kaardi leviala ja kvaliteet: 
+\n • Lääne-Euroopa: **** 
+\n • Ida-Euroopa: *** 
+\n • Venemaa: *** 
+\n • Põhja-Ameerika: *** 
+\n • Lõuna-Ameerika: ** 
+\n • Aasia: ** 
+\n • Jaapan ja Korea: *** 
+\n • Lähis-Ida: ** 
+\n • Aafrika: ** 
+\n • Antarktika: * 
+\n Enamik riike kogu maailmas on saadaval alla laadimiseks 
+\n Afganistanist Zimbabweni, Austraaliast USA-ni. Argentiina, Brasiilia, Kanada, Prantsusmaa, Saksamaa, Mehhiko, UK, Hispaania, …
 \n</string>
     <string name="save_poi_too_many_uppercase">Nimi sisaldab liiga palju suurtähti. Jätkata\?</string>
     <string name="retry">Proovi uuesti</string>
