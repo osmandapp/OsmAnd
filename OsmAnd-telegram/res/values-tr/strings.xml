@@ -260,4 +260,6 @@
     <string name="unit_of_speed_system">Hız birimi</string>
     <string name="buffer_time_descr">Noktaların arabellekte saklanacağı maksimum süre</string>
     <string name="buffer_time">Arabellek zaman aşım süresi</string>
+    <string name="shared_string_suggested">Önerilen</string>
+    <string name="status_widget_title">OsmAnd Tracker durumu</string>
 </resources>
