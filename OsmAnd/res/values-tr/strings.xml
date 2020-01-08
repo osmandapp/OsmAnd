@@ -3368,4 +3368,7 @@
     <string name="choose_icon_color_name">Simge, renk ve isim seç</string>
     <string name="reorder_profiles">Profil listesini düzenle</string>
     <string name="selected_profile">Seçilen profil</string>
+    <string name="reset_confirmation_descr">%1$s\'e tıkladığınızda, tüm değişikliklerinizi kaybedeceksiniz.</string>
+    <string name="reset_all_profile_settings_descr">Tüm profil ayarları kurulumdan sonraki duruma sıfırlanacaktır.</string>
+    <string name="reset_all_profile_settings">Tüm profil ayarları varsayılana sıfırlansın mı\?</string>
 </resources>

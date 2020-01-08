@@ -532,7 +532,7 @@
     <string name="poi_suburb">Przedmieście</string>
     <string name="poi_quarter">Dzielnica</string>
     <string name="poi_neighbourhood">Osiedle</string>
-    <string name="poi_locality">Miejscowość</string>
+    <string name="poi_locality">Nazwany obszar</string>
     <string name="poi_place_allotments">Ogródki działkowe</string>
     <string name="poi_place_farm">Gospodarstwo rolne</string>
     <string name="poi_residential">Obszar zamieszkania</string>

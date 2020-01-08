@@ -766,7 +766,7 @@ Proporcionális memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</str
     <string name="bg_service_screen_unlock">Feloldás</string>
     <string name="bg_service_sleep_mode_off">Futtatás\n háttérben</string>
     <string name="bg_service_sleep_mode_on">Háttérben futás\n leállítása</string>
-    <string name="avoid_in_routing_title">Elkerülés:</string>
+    <string name="avoid_in_routing_title">Elkerülés…</string>
     <string name="show_warnings_title">Figyelmeztetések megjelenítése…</string>
     <string name="show_warnings_descr">Közlekedési figyelmeztetések (sebességkorlátozás, közúti ellenőrzés, fekvőrendőr, alagút), traffipaxriasztás és sávinformációk beállítása.</string>
     <string name="map_widget_fluorescent">Élénk színű utak</string>
@@ -2855,7 +2855,7 @@ Ha szereted az OsmAndot és az OSM-et, és szeretnéd támogatni a fejlődésük
     <string name="run_full_osmand_header">Elindítod az OsmAndot\?</string>
     <string name="add_work">Munkahely hozzáadása</string>
     <string name="work_button">Munkahely</string>
-    <string name="routeInfo_surface_name">Burkolat</string>
+    <string name="routeInfo_surface_name">Felület</string>
     <string name="routeInfo_smoothness_name">Simaság</string>
     <string name="routeInfo_steepness_name">Lejtés</string>
     <string name="previous_route">Előző útvonal</string>
@@ -3209,10 +3209,10 @@ Ha szereted az OsmAndot és az OSM-et, és szeretnéd támogatni a fejlődésük
     <string name="overwrite_profile_q">\'%1$s\' profil már létezik. Felülírod\?</string>
     <string name="export_profile_failed">Nem sikerült a profil exportálása.</string>
     <string name="profile_import">Profil importálása</string>
-    <string name="profile_import_descr">Profil importálásához válaszd ki a megfelelő fájlt a készüléken és nyisd meg az OsmAnd-dal.</string>
+    <string name="profile_import_descr">Profil importálásához jelölje ki a megfelelő fájlt a készüléken, és nyissa meg az OsmAnddal.</string>
     <string name="file_import_error">%1$s importálás hiba: %2$s</string>
     <string name="file_imported_successfully">%1$s sikeresen importálva.</string>
-    <string name="app_mode_utv">Egymás mellett</string>
+    <string name="app_mode_utv">UTV (kis terepautó)</string>
     <string name="rendering_attr_piste_difficulty_aerialway_name">Kötélpályás felvonó</string>
     <string name="switch_profile">Profil váltás</string>
     <string name="application_profile_changed">Alkalmazás profi módosítva erre: %s</string>
@@ -3413,4 +3413,8 @@ Ha szereted az OsmAndot és az OSM-et, és szeretnéd támogatni a fejlődésük
 \n
 \n</string>
     <string name="quick_action_directions_from_desc">Gomb, amely beállítja a képernyő közepét kiindulási pontnak, és kiszámítja a célpontig vezető utat vagy megnyit egy párbeszédablakot a célpont kijelöléséhez, ha a célpontjelölő nincs a térképen.</string>
+    <string name="reset_confirmation_descr">Minden módosítás elvész, ha erre koppint: %1$s.</string>
+    <string name="reset_all_profile_settings_descr">Minden profilbeállítás vissza fog állni a telepítést követő állapotba.</string>
+    <string name="reset_all_profile_settings">Minden profil visszaálljon az alapértelmezett helyzetbe\?</string>
+    <string name="app_mode_wagon">Családi autó</string>
 </resources>

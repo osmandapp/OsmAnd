@@ -52,7 +52,7 @@ public class HillshadeMenu {
 		}
 
 		final boolean selected = plugin.isHillShadeLayerEnabled();
-		final int toggleActionStringId = selected ? R.string.shared_string_enabled : R.string.shared_string_disabled;
+		final int toggleActionStringId = selected ? R.string.shared_string_on : R.string.shared_string_off;
 
 		ContextMenuAdapter.OnRowItemClick l = new ContextMenuAdapter.OnRowItemClick() {
 			@Override

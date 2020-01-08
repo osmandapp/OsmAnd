@@ -56,6 +56,7 @@ class TelegramApplication : Application(), OsmandHelperListener {
 					)
 					showLocationHelper.addDirectionContextMenuButton()
 					showLocationHelper.startShowingLocation()
+					showLocationHelper.addOrUpdateStatusWidget(-1, false)
 				}
 			}
 		}

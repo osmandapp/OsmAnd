@@ -250,4 +250,14 @@
     <string name="shared_string_apply">Ужыць</string>
     <string name="set_time_timeline_descr">Абраць час для паказу</string>
     <string name="start_end_date">Пачатак - дата завяршэння</string>
+    <string name="saved_messages">Захаваныя паведамленні</string>
+    <string name="time_zone_descr">Абярыце часавы пояс, каб паказваць ваш час у паведамленнях.</string>
+    <string name="time_zone">Часавы пояс</string>
+    <string name="units_and_formats">Адзінкі вымярэння і фарматы</string>
+    <string name="unit_of_length_descr">Змяніць адзінкі вымярэння адлегласці.</string>
+    <string name="unit_of_length">Адзінкі даўжыні</string>
+    <string name="unit_of_speed_system_descr">Вызначце адзінку вымярэння хуткасці.</string>
+    <string name="unit_of_speed_system">Адзінка вымярэння хуткасці</string>
+    <string name="buffer_time_descr">Максімальны час захоўвання пунктаў у буферы</string>
+    <string name="buffer_time">Час дзеяння буферу</string>
 </resources>
