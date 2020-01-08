@@ -3416,5 +3416,5 @@ Ha szereted az OsmAndot és az OSM-et, és szeretnéd támogatni a fejlődésük
     <string name="reset_confirmation_descr">Minden módosítás elvész, ha erre koppint: %1$s.</string>
     <string name="reset_all_profile_settings_descr">Minden profilbeállítás vissza fog állni a telepítést követő állapotba.</string>
     <string name="reset_all_profile_settings">Minden profil visszaálljon az alapértelmezett helyzetbe\?</string>
-    <string name="app_mode_wagon">Szekér</string>
+    <string name="app_mode_wagon">Családi autó</string>
 </resources>
