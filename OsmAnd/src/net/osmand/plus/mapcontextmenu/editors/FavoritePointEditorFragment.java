@@ -71,7 +71,7 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 		View view = super.onCreateView(inflater, container, savedInstanceState);
 		FavoritePointEditor editor = getFavoritePointEditor();
 		if (view != null && editor != null && editor.isNew()) {
-			Button replaceButton = (Button) view.findViewById(R.id.replace_button);
+			Button replaceButton = view.findViewById(R.id.replace_button);
 			replaceButton.setTextColor(getResources().getColor(!editor.isLight() ? R.color.osmand_orange : R.color.map_widget_blue));
 			replaceButton.setVisibility(View.VISIBLE);
 			replaceButton.setOnClickListener(new View.OnClickListener() {
@@ -147,7 +147,7 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 	public void setCategory(String name, int color) {
 		FavouritesDbHelper helper = getHelper();
 		if (helper != null) {
-			FavoriteGroup group = helper.getGroup(name);
+			FavoriteGroup group = helper.getGroup(FavouritesDbHelper.FavoriteGroup.convertDisplayNameToGroupIdName(requireContext(), name));
 			this.group = group;
 			super.setCategory(name, group.getColor());
 		}
@@ -310,7 +310,7 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 	@Override
 	public String getCategoryInitValue() {
 		FavouritePoint favorite = getFavorite();
-		return favorite == null || favorite.getCategory().length() == 0 ? getDefaultCategoryName() : favorite.getCategoryDisplayName(getContext());
+		return favorite == null || favorite.getCategory().length() == 0 ? getDefaultCategoryName() : favorite.getCategoryDisplayName(requireContext());
 	}
 
 	@Override

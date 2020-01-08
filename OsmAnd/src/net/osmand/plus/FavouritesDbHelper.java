@@ -83,6 +83,8 @@ public class FavouritesDbHelper {
 		public static String getDisplayName(String name, Context ctx) {
 			if (isPersonal(name)) {
 				return ctx.getString(R.string.personal_category_name);
+			} else if (name.isEmpty()) {
+				return ctx.getString(R.string.shared_string_favorites);
 			} else {
 				return name;
 			}
@@ -108,7 +110,7 @@ public class FavouritesDbHelper {
 			return getDisplayName(name, ctx);
 		}
 
-		public String convertDisplayNameToGroupIdName(Context context, String name) {
+		public static String convertDisplayNameToGroupIdName(Context context, String name) {
 			if (name.equals(context.getString(R.string.personal_category_name))) {
 				return PERSONAL_CATEGORY;
 			}

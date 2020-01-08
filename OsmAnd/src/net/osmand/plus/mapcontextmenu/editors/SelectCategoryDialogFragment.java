@@ -132,14 +132,13 @@ public class SelectCategoryDialogFragment extends DialogFragment {
 			@Override
 			public void onClick(View v) {
 				FragmentActivity a = getActivity();
-				if (a != null && a instanceof MapActivity) {
-					String categoryInternalName = categoryName.equals(a.getString(R.string.personal_category_name)) ? PERSONAL_CATEGORY : categoryName;
+				if (a instanceof MapActivity) {
 					PointEditor pointEditor = ((MapActivity) a).getContextMenu().getPointEditor(editorTag);
 					if (pointEditor != null) {
-						pointEditor.setCategory(categoryInternalName, categoryColor);
+						pointEditor.setCategory(categoryName, categoryColor);
 					}
 					if (selectionListener != null) {
-						selectionListener.onCategorySelected(categoryInternalName, categoryColor);
+						selectionListener.onCategorySelected(categoryName, categoryColor);
 					}
 				}
 				dismiss();
