@@ -356,13 +356,10 @@ public class UiUtilities {
 			return;
 		}
 		OsmandApplication app = (OsmandApplication) compoundButton.getContext().getApplicationContext();
-		@ColorInt int activeColor = -1;
+		@ColorInt int activeColor = ContextCompat.getColor(app, nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
 		@ColorInt int inactiveColorPrimary = ContextCompat.getColor(app, nightMode ? R.color.icon_color_default_dark : R.color.icon_color_secondary_light);
 		@ColorInt int inactiveColorSecondary = getColorWithAlpha(inactiveColorPrimary, 0.45f);
 		switch (type) {
-			case GLOBAL:
-				activeColor = ContextCompat.getColor(app, nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
-				break;
 			case PROFILE_DEPENDENT:
 				ApplicationMode appMode = app.getSettings().getApplicationMode();
 				activeColor = ContextCompat.getColor(app, appMode.getIconColorInfo().getColor(nightMode));
