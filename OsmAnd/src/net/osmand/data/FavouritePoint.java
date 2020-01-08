@@ -55,6 +55,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		this.description = favouritePoint.description;
 		this.visible = favouritePoint.visible;
 		this.originObjectName = favouritePoint.originObjectName;
+		this.address = favouritePoint.address;
 		initPersonalType();
 	}
 
@@ -92,7 +93,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		return !Algorithms.isEmpty(address);
 	}
 
-	public boolean isPersonalPoint() {
+	public boolean isSpecialPoint() {
 		return specialPointType != null;
 	}
 
@@ -122,7 +123,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	}
 
 	public int getOverlayIconId() {
-		if(specialPointType != null) {
+		if (isSpecialPoint()) {
 			return specialPointType.getIconId();
 		}
 		return 0;
@@ -158,7 +159,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	}
 
 	public String getDisplayName(@NonNull Context ctx) {
-		if (specialPointType != null) {
+		if (isSpecialPoint()) {
 			return specialPointType.getHumanString(ctx);
 		}
 		return name;
@@ -260,15 +261,6 @@ public class FavouritePoint implements Serializable, LocationPoint {
 
 		public String getName() {
 			return typeName;
-		}
-
-		public static SpecialPointType valueOfTypeName(@NonNull String typeName) {
-			for (SpecialPointType pt : values()) {
-				if (pt.typeName.equals(typeName)) {
-					return pt;
-				}
-			}
-			return null;
 		}
 
 		public int getIconId() {

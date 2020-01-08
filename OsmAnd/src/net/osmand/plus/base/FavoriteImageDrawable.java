@@ -19,7 +19,6 @@ import android.support.v4.content.res.ResourcesCompat;
 
 import net.osmand.GPXUtilities;
 import net.osmand.data.FavouritePoint;
-import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 
@@ -150,7 +149,7 @@ public class FavoriteImageDrawable extends Drawable {
 
 	private static FavoriteImageDrawable getOrCreate(Context a, int color, boolean withShadow, boolean synced, FavouritePoint point) {
 		String pointName = "";
-		if (point != null && point.isPersonalPoint()) {
+		if (point != null && point.isSpecialPoint()) {
 			pointName = point.getName();
 		}
 		color = color | 0xff000000;

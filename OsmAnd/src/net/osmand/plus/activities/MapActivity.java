@@ -422,12 +422,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 					}
 					if (event == InitEvents.MAPS_INITIALIZED) {
 						// TODO investigate if this false cause any issues!
-						// !!! TODO HW it shouldn't be called every time  start!!!
 						mapView.refreshMap(false);
 						if (dashboardOnMap != null) {
 							dashboardOnMap.updateLocation(true, true, false);
 						}
-						app.getFavorites().lookupAddressAllSpecialPoints();
 						app.getTargetPointsHelper().lookupAddessAll();
 						app.getMapMarkersHelper().lookupAddressAll();
 					}

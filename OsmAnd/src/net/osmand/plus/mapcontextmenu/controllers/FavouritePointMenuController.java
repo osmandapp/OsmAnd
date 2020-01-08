@@ -144,6 +144,11 @@ public class FavouritePointMenuController extends MenuController {
 		return R.string.shared_string_edit;
 	}
 
+	@Override
+	public boolean isFavButtonEnabled() {
+		return !fav.isSpecialPoint();
+	}
+
 	@NonNull
 	@Override
 	public String getTypeStr() {
