@@ -81,7 +81,7 @@
     <string name="poi_boules">Boule</string>
     <string name="poi_boundary_stone">Grenzstein</string>
     <string name="poi_boutique">Boutique</string>
-    <string name="poi_bowls">Bowling</string>
+    <string name="poi_bowls">Bowls</string>
     <string name="poi_craft_brewery">Brauerei</string>
     <string name="poi_bridge">Brücke</string>
     <string name="poi_brothel">Bordell</string>
@@ -339,7 +339,7 @@
     <string name="poi_organic">Biolebensmittel</string>
     <string name="poi_orienteering">Orientierungslauf</string>
     <string name="poi_outdoor">Outdoor-Geschäft</string>
-    <string name="poi_paddle_tennis">Tischtennis</string>
+    <string name="poi_paddle_tennis">Padel-Tennis</string>
     <string name="poi_paint">Farbengeschäft</string>
     <string name="poi_craft_painter">Maler</string>
     <string name="poi_palaeontological_site">Paläontologischer Ort</string>
@@ -432,7 +432,7 @@
     <string name="poi_craft_sculptor">Bildhauer</string>
     <string name="poi_seafood">Fischgeschäft</string>
     <string name="poi_anchor_berth">Ankerplatz</string>
-    <string name="poi_anchorage">Ankerplatz</string>
+    <string name="poi_anchorage">Verankerung</string>
     <string name="poi_beacon">Bake</string>
     <string name="poi_beacon_cardinal">Untiefenbake (Kardinal)</string>
     <string name="poi_beacon_lateral">Fahrrinnenbake (Lateral)</string>
@@ -530,7 +530,7 @@
     <string name="poi_theatre">Theater</string>
     <string name="poi_theme_park">Vergnügungspark</string>
     <string name="poi_ticket">Ticketverkauf</string>
-    <string name="poi_craft_tiler">Dachdecker</string>
+    <string name="poi_craft_tiler">Fliesenleger</string>
     <string name="poi_craft_tinsmith">Klempner</string>
     <string name="poi_tobacco">Tabakwarengeschäft</string>
     <string name="poi_toboggan">Rodel</string>
@@ -544,10 +544,10 @@
     <string name="poi_traffic_calming_bump">Bodenschwelle</string>
     <string name="poi_traffic_calming_chicane">Schikane</string>
     <string name="poi_traffic_calming_choker">Fahrbahnverengung</string>
-    <string name="poi_traffic_calming_cushion">Bodenwelle</string>
-    <string name="poi_traffic_calming_hump">Bodenwelle</string>
+    <string name="poi_traffic_calming_cushion">Bodenwelle (mit Lücken)</string>
+    <string name="poi_traffic_calming_hump">Bodenwelle (lang)</string>
     <string name="poi_traffic_calming_rumble_strip">Holperstreifen</string>
-    <string name="poi_traffic_calming_table">Bodenwelle</string>
+    <string name="poi_traffic_calming_table">Bodenwelle (Aufpflasterung)</string>
     <string name="poi_traffic_signals">Ampel</string>
     <string name="poi_tram_stop">Straßenbahnhaltestelle</string>
     <string name="poi_travel_agent">Reisebüro</string>
@@ -3044,7 +3044,7 @@
     <string name="poi_waterway_fuel">Tankstelle für Boote</string>
     <string name="poi_feeding_place">Ort für die Tierfütterung</string>
     <string name="poi_party">Partybedarf</string>
-    <string name="poi_electrical">Elektronikgeschäft</string>
+    <string name="poi_electrical">Elektrogeschäft</string>
     <string name="poi_locksmith">Schlüsseldienst</string>
     <string name="poi_lighting">Leuchten</string>
     <string name="poi_lottery">Lotteriescheine</string>
@@ -3057,7 +3057,7 @@
     <string name="poi_gambling_bingo">Bingo</string>
     <string name="poi_e_cigarette">E-Zigarettengeschäft</string>
     <string name="poi_locomotive">Lokomotive</string>
-    <string name="poi_nutrition_supplements">Nahrungsergänzungen</string>
+    <string name="poi_nutrition_supplements">Nahrungsergänzungsmittel</string>
     <string name="poi_photo_studio">Fotostudio</string>
     <string name="poi_free_flying_characteristic">Charakteristisch</string>
     <string name="poi_emergency_infrastructure">Notfallinfrastruktur</string>
@@ -3368,7 +3368,7 @@
     <string name="poi_meadow_agricultural">Typ: landwirtschaftlich</string>
     <string name="poi_meadow_transitional">Typ: vorübergehend</string>
     <string name="poi_frozen_food">Tiefkühlkost</string>
-    <string name="poi_agrarian">Hofladen</string>
+    <string name="poi_agrarian">Agrargeschäft</string>
     <string name="poi_shop_boat">Bootsgeschäft</string>
     <string name="poi_cannabis">Cannabis-Laden</string>
     <string name="poi_climbing_boulder_yes">Bouldern: ja</string>
@@ -3459,7 +3459,7 @@
     <string name="poi_service_vehicle_batteries_yes">Batterien</string>
     <string name="poi_service_vehicle_air_conditioning_yes">Klimatisierung</string>
     <string name="poi_service_vehicle_body_repair_yes">Karosserie-Reparatur</string>
-    <string name="poi_service_vehicle_electrical_yes">Elektronik</string>
+    <string name="poi_service_vehicle_electrical_yes">Elektrik</string>
     <string name="poi_service_vehicle_wheels_yes">Räder</string>
     <string name="poi_service_vehicle_glass_yes">Glas</string>
     <string name="poi_service_vehicle_truck_repair_yes">Lkw-Reparatur</string>

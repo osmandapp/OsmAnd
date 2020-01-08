@@ -3209,10 +3209,10 @@ Ha szereted az OsmAndot és az OSM-et, és szeretnéd támogatni a fejlődésük
     <string name="overwrite_profile_q">\'%1$s\' profil már létezik. Felülírod\?</string>
     <string name="export_profile_failed">Nem sikerült a profil exportálása.</string>
     <string name="profile_import">Profil importálása</string>
-    <string name="profile_import_descr">Profil importálásához válaszd ki a megfelelő fájlt a készüléken és nyisd meg az OsmAnd-dal.</string>
+    <string name="profile_import_descr">Profil importálásához jelölje ki a megfelelő fájlt a készüléken, és nyissa meg az OsmAnddal.</string>
     <string name="file_import_error">%1$s importálás hiba: %2$s</string>
     <string name="file_imported_successfully">%1$s sikeresen importálva.</string>
-    <string name="app_mode_utv">Egymás mellett</string>
+    <string name="app_mode_utv">UTV (kis terepautó)</string>
     <string name="rendering_attr_piste_difficulty_aerialway_name">Kötélpályás felvonó</string>
     <string name="switch_profile">Profil váltás</string>
     <string name="application_profile_changed">Alkalmazás profi módosítva erre: %s</string>
@@ -3416,4 +3416,5 @@ Ha szereted az OsmAndot és az OSM-et, és szeretnéd támogatni a fejlődésük
     <string name="reset_confirmation_descr">Minden módosítás elvész, ha erre koppint: %1$s.</string>
     <string name="reset_all_profile_settings_descr">Minden profilbeállítás vissza fog állni a telepítést követő állapotba.</string>
     <string name="reset_all_profile_settings">Minden profil visszaálljon az alapértelmezett helyzetbe\?</string>
+    <string name="app_mode_wagon">Családi autó</string>
 </resources>
