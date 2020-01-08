@@ -998,12 +998,12 @@ class TelegramSettings(private val app: TelegramApplication) {
 	}
 
 	fun calcLivePeriod(periods: LinkedList<Long>): Long {
-		val copy = periods.toLongArray()
-		copy.sort()
-		return if (copy.size % 2 == 0) {
-			(copy[copy.size / 2] + copy[copy.size / 2 - 1]) / 2
+		val sortedPeriods = periods.toLongArray()
+		sortedPeriods.sort()
+		return if (sortedPeriods.size % 2 == 0) {
+			(sortedPeriods[sortedPeriods.size / 2] + sortedPeriods[sortedPeriods.size / 2 - 1]) / 2
 		} else {
-			copy[copy.size / 2]
+			sortedPeriods[sortedPeriods.size / 2]
 		}
 	}
 

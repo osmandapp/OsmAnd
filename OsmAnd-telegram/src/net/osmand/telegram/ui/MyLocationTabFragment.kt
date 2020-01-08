@@ -856,7 +856,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 				} else {
 					settings.shareLocationToChat(lastChat.chat.id, true, lastChat.time)
 					app.shareLocationHelper.startSharingLocation()
-					(activity as DataSetListener).onDataSetChanged()
+					(activity as MainActivity).refreshPages()
 				}
 			}
 
