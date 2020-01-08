@@ -3,6 +3,8 @@ package net.osmand.telegram.ui
 import android.animation.*
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.ColorMatrix
+import android.graphics.ColorMatrixColorFilter
 import android.graphics.Typeface
 import android.graphics.drawable.GradientDrawable
 import android.os.Build
@@ -17,13 +19,12 @@ import android.text.SpannableString
 import android.text.SpannableStringBuilder
 import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
+import android.util.TypedValue
 import android.view.*
 import android.view.animation.LinearInterpolator
 import android.widget.*
-import net.osmand.telegram.ADDITIONAL_ACTIVE_TIME_VALUES_SEC
-import net.osmand.telegram.R
-import net.osmand.telegram.SHARE_TYPE_MAP
-import net.osmand.telegram.TelegramApplication
+import net.osmand.PlatformUtil
+import net.osmand.telegram.*
 import net.osmand.telegram.helpers.LocationMessages
 import net.osmand.telegram.helpers.TelegramHelper
 import net.osmand.telegram.helpers.TelegramHelper.TelegramListener
@@ -31,15 +32,21 @@ import net.osmand.telegram.helpers.TelegramUiHelper
 import net.osmand.telegram.utils.AndroidUtils
 import net.osmand.telegram.utils.OsmandFormatter
 import org.drinkless.td.libcore.telegram.TdApi
+import java.util.*
+import kotlin.Comparator
+import kotlin.collections.HashSet
 
 private const val SELECTED_CHATS_KEY = "selected_chats"
 private const val SELECTED_CHATS_USERS = "selected_users"
+private const val SUGGESTED = 2
 private const val SHARE_LOCATION_CHAT = 1
 private const val DEFAULT_CHAT = 0
 
 private const val ADAPTER_UPDATE_INTERVAL_MIL = 5 * 1000L // 5 sec
 
 class MyLocationTabFragment : Fragment(), TelegramListener {
+
+	private val log = PlatformUtil.getLog(MyLocationTabFragment::class.java)
 
 	private var textMarginSmall: Int = 0
 	private var textMarginBig: Int = 0
@@ -84,6 +91,8 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 	private var sharingMode = false
 
 	private var updateEnable: Boolean = false
+
+	private lateinit var lastChatsInfo: LinkedList<TelegramSettings.LastChatInfo>
 
 	override fun onCreateView(
 		inflater: LayoutInflater,
@@ -234,6 +243,8 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 			}
 		}
 
+		lastChatsInfo = settings.lastChatsInfo
+
 		return mainView
 	}
 
@@ -268,6 +279,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 				}
 			}
 			DisableSharingBottomSheet.SHARING_DISABLED_REQUEST_CODE -> {
+				saveChatsToLastChatsInfo()
 				sharingMode = false
 				app.stopSharingLocation()
 				updateContent()
@@ -487,7 +499,8 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 	}
 
 	private fun updateList() {
-		val items: MutableList<TdApi.Object> = mutableListOf()
+		val lastItems = getLastShareItems()
+		val items: MutableList<Any> = mutableListOf()
 		val chats: MutableList<TdApi.Chat> = mutableListOf()
 		val contacts = telegramHelper.getContacts()
 		val chatList = if (sharingMode) {
@@ -515,13 +528,42 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 			}
 		}
 		if (sharingMode && settings.hasAnyChatToShareLocation()) {
-			adapter.items = sortAdapterItems(items)
+			val filteredLastItems = lastItems.filter { !settings.isSharingLocationToChat(it.chat.id) }.toMutableList()
+			val sortedItems = sortAdapterItems(items as MutableList<TdApi.Object>)
+			sortedItems.add(SuggestedChats(filteredLastItems))
+			adapter.items = sortedItems
 		} else {
+			val filteredLastItems = lastItems.filter { !settings.isSharingLocationToChat(it.chat.id) }.toMutableList()
+			items.add(0, SuggestedChats(filteredLastItems))
 			adapter.items = items
 		}
 	}
 
-	private fun sortAdapterItems(list: MutableList<TdApi.Object>): MutableList<TdApi.Object> {
+	private fun getLastShareItems(): MutableList<LastChat> {
+		val lastItems: MutableList<LastChat> = mutableListOf()
+		val chatListIds = telegramHelper.getChatListIds()
+		chatListIds.forEach { chatId ->
+			val chat = telegramHelper.getChat(chatId)
+			val lastInfo = lastChatsInfo.find { it.chatId == chatId }
+			if (chat != null && lastInfo != null) {
+				val index = lastChatsInfo.indexOf(lastInfo)
+				lastItems.add(LastChat(chat, settings.calcLivePeriod(lastChatsInfo[index].periods)))
+			}
+		}
+		return lastItems
+	}
+
+	private fun saveChatsToLastChatsInfo() {
+		val chatListIds = settings.getShareLocationChats()
+		chatListIds.forEach { id ->
+			val shareInfo = settings.getChatsShareInfo()[id]
+			if (shareInfo != null) {
+				settings.addTimePeriodToLastItem(shareInfo.chatId, shareInfo.livePeriod)
+			}
+		}
+	}
+
+	private fun sortAdapterItems(list: MutableList<TdApi.Object>): MutableList<Any> {
 		list.sortWith(Comparator<TdApi.Object> { o1, o2 ->
 			val title1 = when (o1) {
 				is TdApi.Chat -> o1.title
@@ -535,12 +577,12 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 			}
 			title1.compareTo(title2)
 		})
-		return list
+		return list.toMutableList()
 	}
 
 	inner class MyLocationListAdapter :
 		RecyclerView.Adapter<MyLocationListAdapter.BaseViewHolder>() {
-		var items = mutableListOf<TdApi.Object>()
+		var items = mutableListOf<Any>()
 			set(value) {
 				field = value
 				notifyDataSetChanged()
@@ -553,7 +595,9 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 				is TdApi.User -> item.id.toLong()
 				else -> -1
 			}
-			return if (settings.isSharingLocationToChat(id) && sharingMode) {
+			return if (item is SuggestedChats) {
+				SUGGESTED
+			} else if (settings.isSharingLocationToChat(id) && sharingMode) {
 				SHARE_LOCATION_CHAT
 			} else {
 				DEFAULT_CHAT
@@ -572,6 +616,11 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 						.inflate(R.layout.user_list_item, parent, false)
 					ChatViewHolder(view)
 				}
+				SUGGESTED -> {
+					val view = LayoutInflater.from(parent.context)
+							.inflate(R.layout.suggested_list_item, parent, false)
+					SuggestedViewHolder(view)
+				}
 				else -> throw RuntimeException("Unsupported view type: $viewType")
 			}
 		}
@@ -582,40 +631,18 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 			val isChat = item is TdApi.Chat
 			val itemId = if (isChat) {
 				(item as TdApi.Chat).id
+			} else if (item is TdApi.User) {
+				item.id.toLong()
 			} else {
-				(item as TdApi.User).id.toLong()
+				-1
 			}
 
 			val lastItem = position == itemCount - 1
-			val placeholderId =
-				if (isChat && telegramHelper.isGroup(item as TdApi.Chat)) R.drawable.img_group_picture else R.drawable.img_user_picture
 			val live = (isChat && settings.isSharingLocationToChat(itemId))
 			val shareInfo = if (isChat) settings.getChatsShareInfo()[itemId] else null
 
-			val photoPath = when (item) {
-				is TdApi.Chat -> item.photo?.small?.local?.path
-				is TdApi.User -> item.profilePhoto?.small?.local?.path
-				else -> null
-			}
-
-			TelegramUiHelper.setupPhoto(app, holder.icon, photoPath, placeholderId, false)
-
-			val currentUserId = telegramHelper.getCurrentUserId()
-			val title = when (item) {
-				is TdApi.Chat -> {
-					if (telegramHelper.isPrivateChat(item) && (item.type as TdApi.ChatTypePrivate).userId == currentUserId) {
-						getString(R.string.saved_messages)
-					} else {
-						item.title
-					}
-				}
-				is TdApi.User -> {
-					if (item.id == currentUserId) getString(R.string.saved_messages) else TelegramUiHelper.getUserName(item)
-				}
-				else -> null
-			}
-
-			holder.title?.text = title
+			setupPhoto(item, holder.icon, isChat)
+			holder.title?.text = getTitleText(item)
 
 			if (holder is ChatViewHolder) {
 				holder.description?.visibility = View.GONE
@@ -669,8 +696,9 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 							settings.shareLocationToChat(itemId, false)
 							if (shareInfo != null) {
 								telegramHelper.stopSendingLiveLocationToChat(shareInfo)
+								settings.addTimePeriodToLastItem(shareInfo.chatId,shareInfo.livePeriod)
 							}
-							removeItem(item)
+							removeItem(item as TdApi.Object)
 						}
 					}
 				}
@@ -743,12 +771,113 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 						text = description
 					}
 				}
+			} else if (holder is SuggestedViewHolder) {
+				holder.list.removeAllViews()
+				if ((item as SuggestedChats).list.isEmpty()) {
+					holder.container?.visibility = View.GONE
+				} else {
+					holder.container?.visibility = View.VISIBLE
+					val iterator = item.list.iterator()
+					iterator.forEach {
+						holder.list.addView(createLastChatView(it, iterator.hasNext()))
+					}
+				}
+				val tv = TypedValue()
+				if (!sharingMode) {
+					holder.dividerTop?.visibility = View.GONE
+					holder.dividerBottom?.visibility = View.VISIBLE
+					holder.header?.visibility = View.GONE
+					if (context?.theme?.resolveAttribute(R.attr.card_bg_color, tv, true) != null) {
+						holder.container?.setBackgroundColor(tv.data)
+					}
+				} else {
+					holder.dividerTop?.visibility = View.VISIBLE
+					holder.dividerBottom?.visibility = View.GONE
+					holder.header?.visibility = View.VISIBLE
+					if (context?.theme?.resolveAttribute(R.attr.shared_chat_card_bg, tv, true) != null) {
+						holder.container?.setBackgroundResource(tv.resourceId)
+					}
+				}
 			}
+		}
+
+		private fun getTitleText(item: Any): String? {
+			val currentUserId = telegramHelper.getCurrentUserId()
+			return when (item) {
+				is LastChat -> {
+					if (telegramHelper.isPrivateChat(item.chat) && (item.chat.type as TdApi.ChatTypePrivate).userId == currentUserId) {
+						getString(R.string.saved_messages)
+					} else {
+						item.chat.title
+					}
+				}
+				is TdApi.Chat -> {
+					if (telegramHelper.isPrivateChat(item) && (item.type as TdApi.ChatTypePrivate).userId == currentUserId) {
+						getString(R.string.saved_messages)
+					} else {
+						item.title
+					}
+				}
+				is TdApi.User -> {
+					if (item.id == currentUserId) getString(R.string.saved_messages) else TelegramUiHelper.getUserName(item)
+				}
+				else -> null
+			}
+		}
+
+		private fun setupPhoto(item: Any, icon: ImageView?, isChat: Boolean) {
+			val photoPath = when (item) {
+				is LastChat -> item.chat.photo?.small?.local?.path
+				is TdApi.Chat -> item.photo?.small?.local?.path
+				is TdApi.User -> item.profilePhoto?.small?.local?.path
+				else -> null
+			}
+			val placeholderId =
+					if (isChat && telegramHelper.isGroup(item as TdApi.Chat)) R.drawable.img_group_picture else R.drawable.img_user_picture
+
+			TelegramUiHelper.setupPhoto(app, icon, photoPath, placeholderId, false)
+		}
+
+		private fun createLastChatView(lastChat: LastChat, hasNext: Boolean): View {
+			val view = layoutInflater.inflate(R.layout.last_share_list_item, null)
+			val time: TextView = view.findViewById(R.id.time)
+			val container: LinearLayout = view.findViewById(R.id.container)
+			val icon: ImageView = view.findViewById(R.id.icon)
+			val title: TextView = view.findViewById(R.id.title)
+			val divider: View = view.findViewById(R.id.divider)
+
+			if (sharingMode && hasNext) {
+				divider.visibility = View.VISIBLE
+			}
+
+			container.setOnClickListener {
+				if (!AndroidUtils.isLocationPermissionAvailable(view!!.context)) {
+					AndroidUtils.requestLocationPermission(activity!!)
+				} else {
+					settings.shareLocationToChat(lastChat.chat.id, true, lastChat.time)
+					app.shareLocationHelper.startSharingLocation()
+					(activity as DataSetListener).onDataSetChanged()
+				}
+			}
+
+			title.text = getTitleText(lastChat.chat)
+			setupPhoto(lastChat.chat, icon, true)
+			icon.colorFilter = ColorMatrixColorFilter(ColorMatrix().apply { setSaturation(0F) })
+
+			val sharingTime = SpannableStringBuilder("${getString(R.string.sharing_time)}: ")
+			val formattedTime = OsmandFormatter.getFormattedDuration(app, lastChat.time, false)
+			val start = sharingTime.length
+			sharingTime.append(formattedTime)
+			sharingTime.setSpan(StyleSpan(Typeface.BOLD), start, sharingTime.length, 0)
+			sharingTime.setSpan(ForegroundColorSpan(ContextCompat.getColor(app, R.color.ctrl_active_light)), start, sharingTime.length, 0)
+			time.text = sharingTime
+			return view
 		}
 
 		private fun removeItem(chat: TdApi.Object) {
 			items.remove(chat)
-			if (items.isEmpty()) {
+			val filtered = items.filterIsInstance<TdApi.Object>()
+			if (filtered.isEmpty()) {
 				sharingMode = false
 				updateContent()
 				shareLocationHelper.stopSharingLocation()
@@ -778,9 +907,21 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 			val sharingExpiresLine: TextView? = view.findViewById(R.id.expires_line)
 			val gpsPointsLine: TextView? = view.findViewById(R.id.gps_points_line)
 		}
+
+		inner class SuggestedViewHolder(val view: View) : BaseViewHolder(view) {
+			val list: LinearLayout = view.findViewById(R.id.last_items_list)
+			val container: LinearLayout? = view.findViewById(R.id.container)
+			val dividerBottom: View? = view.findViewById(R.id.divider_bottom)
+			val dividerTop: View? = view.findViewById(R.id.divider_top)
+			val header: TextView? = view.findViewById(R.id.header)
+		}
 	}
 
 	interface ActionButtonsListener {
 		fun switchButtonsVisibility(visible: Boolean)
 	}
 }
+
+class LastChat internal constructor(val chat: TdApi.Chat, val time: Long)
+
+class SuggestedChats internal constructor(val list: MutableList<LastChat>)
