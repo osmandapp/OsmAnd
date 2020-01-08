@@ -274,9 +274,6 @@ public class FavouritesDbHelper {
 			point.setAddress(address);
 			addFavourite(point);
 		}
-		if (address == null) {
-			lookupAddress(point);
-		}
 	}
 
 	public boolean addFavourite(FavouritePoint p) {
@@ -286,6 +283,9 @@ public class FavouritesDbHelper {
 	public boolean addFavourite(FavouritePoint p, boolean saveImmediately) {
 		if (p.getName().equals("") && flatGroups.containsKey(p.getCategory())) {
 			return true;
+		}
+		if (!p.isAddressSpecified()) {
+			lookupAddress(p);
 		}
 		context.getSettings().SHOW_FAVORITES.set(true);
 		FavoriteGroup group = getOrCreateGroup(p, 0);
@@ -303,16 +303,6 @@ public class FavouritesDbHelper {
 		runSyncWithMarkers(group);
 
 		return true;
-	}
-
-	public void lookupAddressAllSpecialPoints() {
-		if (!context.isApplicationInitializing()) {
-			for (FavouritePoint p : getFavouritePoints()) {
-				if (p.getSpecialPointType() != null) {
-					lookupAddress(p);
-				}
-			}
-		}
 	}
 
 	public void lookupAddress(@NonNull final FavouritePoint p) {
@@ -446,34 +436,23 @@ public class FavouritesDbHelper {
 	}
 
 
-	public boolean editAddressDescription(FavouritePoint p, String address) {
+	private void editAddressDescription(@NonNull FavouritePoint p, @Nullable String address) {
 		p.setAddress(address);
 		saveCurrentPointsIntoFile();
 		runSyncWithMarkers(getOrCreateGroup(p, 0));
-		return true;
 	}
 
-	public boolean editFavouriteDescription(FavouritePoint p, String description) {
-		p.setDescription(description);
-		saveCurrentPointsIntoFile();
-		runSyncWithMarkers(getOrCreateGroup(p, 0));
-		return true;
+	public boolean editFavourite(@NonNull FavouritePoint p, double lat, double lon) {
+		return editFavourite(p, lat, lon, null);
 	}
 
-	public boolean editFavourite(FavouritePoint p, double lat, double lon) {
+	private boolean editFavourite(@NonNull FavouritePoint p, double lat, double lon, @Nullable String description) {
 		cancelAddressRequest(p);
 		p.setLatitude(lat);
 		p.setLongitude(lon);
-		saveCurrentPointsIntoFile();
-		runSyncWithMarkers(getOrCreateGroup(p, 0));
-		return true;
-	}
-
-	public boolean editFavourite(FavouritePoint p, double lat, double lon, String description) {
-		cancelAddressRequest(p);
-		p.setLatitude(lat);
-		p.setLongitude(lon);
-		p.setDescription(description);
+		if (description != null) {
+			p.setDescription(description);
+		}
 		saveCurrentPointsIntoFile();
 		runSyncWithMarkers(getOrCreateGroup(p, 0));
 		return true;
