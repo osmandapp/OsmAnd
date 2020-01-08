@@ -155,7 +155,7 @@ class SearchDialogFragment : BaseDialogFragment(), TelegramHelper.TelegramSearch
 	}
 
 	private fun runSearch(text: String) {
-		if (getString(R.string.saved_messages).startsWith(text, true)) {
+		if (getSavedMessagesChatTitle().startsWith(text, true)) {
 			val savedMessages = telegramHelper.getChat(telegramHelper.getCurrentUserId().toLong())
 			if (savedMessages != null) {
 				telegramHelper.searchChats(savedMessages.title)
@@ -164,10 +164,12 @@ class SearchDialogFragment : BaseDialogFragment(), TelegramHelper.TelegramSearch
 		telegramHelper.searchChats(text)
 		telegramHelper.searchChatsOnServer(text)
 		telegramHelper.searchContacts(text)
-		if (text.length > 4 && !getString(R.string.saved_messages).startsWith(text, true)) {
+		if (text.length > 4 && !getSavedMessagesChatTitle().startsWith(text, true)) {
 			telegramHelper.searchPublicChats(text)
 		}
 	}
+
+	private fun getSavedMessagesChatTitle() = getString(R.string.saved_messages)
 
 	override fun onResume() {
 		super.onResume()
@@ -392,13 +394,13 @@ class SearchDialogFragment : BaseDialogFragment(), TelegramHelper.TelegramSearch
 			val title = when (item) {
 				is TdApi.Chat -> {
 					if (telegramHelper.isPrivateChat(item) && (item.type as TdApi.ChatTypePrivate).userId == currentUserId) {
-						getString(R.string.saved_messages)
+						getSavedMessagesChatTitle()
 					} else {
 						item.title
 					}
 				}
 				is TdApi.User -> {
-					if (item.id == currentUserId) getString(R.string.saved_messages) else TelegramUiHelper.getUserName(item)
+					if (item.id == currentUserId) getSavedMessagesChatTitle() else TelegramUiHelper.getUserName(item)
 				}
 				else -> null
 			}
