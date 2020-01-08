@@ -44,7 +44,7 @@ private const val MY_LOCATION_TAB_POS = 0
 private const val LIVE_NOW_TAB_POS = 1
 private const val TIMELINE_TAB_POS = 2
 
-class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListener, TelegramIncomingMessagesListener, DataSetListener {
+class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListener, TelegramIncomingMessagesListener {
 
 	private val log = PlatformUtil.getLog(MainActivity::class.java)
 
@@ -486,7 +486,7 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 		}
 	}
 
-	override fun onDataSetChanged() {
+	fun onDataSetChanged() {
 		viewPager.adapter?.notifyDataSetChanged()
 	}
 
@@ -521,8 +521,4 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 			return PagerAdapter.POSITION_NONE
 		}
 	}
-}
-
-interface DataSetListener {
-	fun onDataSetChanged()
 }
