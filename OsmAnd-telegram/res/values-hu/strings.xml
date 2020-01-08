@@ -2,7 +2,7 @@
 <resources>
     <string name="shared_string_telegram">Telegram</string>
     <string name="privacy_policy_use_telegram">A Telegram (üzenetküldő alkalmazás) a másokkal való összekapcsolódásra és kommunikációra használható.</string>
-    <string name="privacy_policy_telegram_client">A Telegram nyílt platformot használó kliensprogramok egyike az OsmAnd tracker. Partnerei bármelyik másik Telegram kliensprogramot is használhatják.</string>
+    <string name="privacy_policy_telegram_client">A Telegram nyílt platformot használó kliensprogramok egyike az OsmAnd Tracker. Partnerei bármelyik másik Telegram kliensprogramot is használhatják.</string>
     <string name="privacy_policy_agree">A „Tovább”-ra kattintva elfogadja a Telegram és az OsmAnd adatvédelmi irányelveinek feltételeit.</string>
     <string name="shared_string_accept">Elfogadás</string>
     <string name="telegram_privacy_policy">Telegram adatvédelmi irányelvei</string>
@@ -257,6 +257,8 @@
     <string name="unit_of_length">Hosszmértékegységek</string>
     <string name="unit_of_speed_system_descr">Sebesség mértékegységének meghatározása</string>
     <string name="unit_of_speed_system">Sebesség mértékegysége</string>
-    <string name="buffer_time_descr">Az az idő, amely után a pufferelt helyzetjelentések törlődnek</string>
+    <string name="buffer_time_descr">Az a leghosszabb idő, ameddig a pontok a pufferben tárolódnak</string>
     <string name="buffer_time">Puffer lejárati ideje</string>
+    <string name="shared_string_suggested">Javasolt</string>
+    <string name="status_widget_title">Az OsmAnd Tracker állapota</string>
 </resources>
