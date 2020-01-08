@@ -259,4 +259,6 @@
     <string name="unit_of_speed_system">יחידת מהירות</string>
     <string name="buffer_time_descr">הזמן המרבי לשמירת נקודות בזיכרון</string>
     <string name="buffer_time">זמן פקיעת הזיכרון</string>
+    <string name="shared_string_suggested">מוצע</string>
+    <string name="status_widget_title">מצב עוקב OsmAnd</string>
 </resources>
