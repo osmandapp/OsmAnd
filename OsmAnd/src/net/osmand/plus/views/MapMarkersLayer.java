@@ -546,7 +546,8 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 						if (!unknownLocation && selectMarkerOnSingleTap) {
 							o.add(marker);
 						} else {
-							if (isMarkerOnFavorite(marker) || isMarkerOnWaypoint(marker)) {
+							if (isMarkerOnFavorite(marker) && app.getSettings().SHOW_FAVORITES.get()
+									|| isMarkerOnWaypoint(marker) && app.getSettings().SHOW_WPT.get()) {
 								continue;
 							}
 							Amenity mapObj = getMapObjectByMarker(marker);
