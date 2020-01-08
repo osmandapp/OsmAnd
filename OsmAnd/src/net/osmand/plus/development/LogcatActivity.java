@@ -1,12 +1,9 @@
 package net.osmand.plus.development;
 
-import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
@@ -17,7 +14,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -34,23 +30,27 @@ import java.io.InputStreamReader;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 public class LogcatActivity extends ActionBarProgressActivity {
 
 	public static final String LOGCAT_PATH = "logcat.log";
 
-	public static int MAX_BUFFER_LOG = 1000;
+
+	public static int MAX_BUFFER_LOG = 10000;
 
 	private static final int SHARE_ID = 0;
+	private static final int LEVEL_ID = 1;
 
 	private static final Log log = PlatformUtil.getLog(LogcatActivity.class);
 
 	private LogcatAsyncTask logcatAsyncTask;
-	private Map<Integer, String> logsMap;
+	private List<String> logs = new ArrayList<>();
 	private LogcatAdapter adapter;
+	private String[] LEVELS = {"D", "I", "W", "E"};
+	private int filterLevel = 1;
+	private RecyclerView recyclerView;
+
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -65,26 +65,18 @@ public class LogcatActivity extends ActionBarProgressActivity {
 			supportActionBar.setElevation(5.0f);
 		}
 
-		logsMap = new LinkedHashMap<Integer, String>() {
-			@Override
-			protected boolean removeEldestEntry(Entry<Integer, String> eldest) {
-				return size() > MAX_BUFFER_LOG;
-			}
-		};
-
 		adapter = new LogcatAdapter();
-
-		RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+		recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
 		recyclerView.setLayoutManager(new LinearLayoutManager(this));
 		recyclerView.setAdapter(adapter);
 
-		int colorResId = AndroidUtils.resolveAttribute(app, R.attr.divider_color_basic);
-		if (colorResId != 0) {
-			DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
-			dividerItemDecoration.setDrawable(new ColorDrawable(ContextCompat.getColor(app, colorResId)));
-
-			recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-		}
+//		int colorResId = AndroidUtils.resolveAttribute(app, R.attr.divider_color_basic);
+//		if (colorResId != 0) {
+//			DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
+//			dividerItemDecoration.setDrawable(new ColorDrawable(ContextCompat.getColor(app, colorResId)));
+//
+//			recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+//		}
 	}
 
 	@Override
@@ -101,11 +93,22 @@ public class LogcatActivity extends ActionBarProgressActivity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		MenuItem item = menu.add(0, SHARE_ID, 0, R.string.shared_string_export);
-		item.setIcon(R.drawable.ic_action_gshare_dark);
-		item.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+		MenuItem share = menu.add(0, SHARE_ID, 0, R.string.shared_string_export);
+		share.setIcon(R.drawable.ic_action_gshare_dark);
+		share.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+
+
+		MenuItem level = menu.add(0, LEVEL_ID, 0, "");
+		level.setTitle(getFilterLevel());
+		level.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+
 
 		return super.onCreateOptionsMenu(menu);
+	}
+
+	@NonNull
+	private String getFilterLevel() {
+		return "*:" + LEVELS[this.filterLevel];
 	}
 
 	@Override
@@ -115,6 +118,17 @@ public class LogcatActivity extends ActionBarProgressActivity {
 			case android.R.id.home:
 				finish();
 				return true;
+			case LEVEL_ID:
+				this.filterLevel++;
+				if(this.filterLevel >= LEVELS.length) {
+					this.filterLevel = 0;
+				}
+				item.setTitle(getFilterLevel());
+				stopLogcatAsyncTask();
+				logs.clear();
+				adapter.notifyDataSetChanged();
+				startLogcatAsyncTask();
+				return true;
 			case SHARE_ID:
 				startSaveLogsAsyncTask();
 				return true;
@@ -123,24 +137,14 @@ public class LogcatActivity extends ActionBarProgressActivity {
 		return false;
 	}
 
-	private void onNewLogEntry(int index, String logEntry) {
-		logsMap.put(index, logEntry);
-
-		runOnUiThread(new Runnable() {
-			@Override
-			public void run() {
-				adapter.setLogs(logsMap.values());
-			}
-		});
-	}
 
 	private void startSaveLogsAsyncTask() {
-		SaveLogsAsyncTask saveLogsAsyncTask = new SaveLogsAsyncTask(this, logsMap.values());
+		SaveLogsAsyncTask saveLogsAsyncTask = new SaveLogsAsyncTask(this, logs);
 		saveLogsAsyncTask.execute();
 	}
 
 	private void startLogcatAsyncTask() {
-		logcatAsyncTask = new LogcatAsyncTask(this, "*:E");
+		logcatAsyncTask = new LogcatAsyncTask(this, getFilterLevel());
 		logcatAsyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
@@ -152,8 +156,6 @@ public class LogcatActivity extends ActionBarProgressActivity {
 	}
 
 	private class LogcatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
-		private List<String> logs = new ArrayList<>();
 
 		@NonNull
 		@Override
@@ -184,13 +186,6 @@ public class LogcatActivity extends ActionBarProgressActivity {
 			return logs.get(position);
 		}
 
-		public void setLogs(Collection<String> logs) {
-			this.logs.clear();
-			if (logs != null && !logs.isEmpty()) {
-				this.logs.addAll(logs);
-			}
-			notifyDataSetChanged();
-		}
 
 		private class LogViewHolder extends RecyclerView.ViewHolder {
 
@@ -260,7 +255,6 @@ public class LogcatActivity extends ActionBarProgressActivity {
 		private Process processLogcat;
 		private WeakReference<LogcatActivity> logcatActivity;
 		private String filterLevel;
-		private int index = 0;
 
 		LogcatAsyncTask(LogcatActivity logcatActivity, String filterLevel) {
 			this.logcatActivity = new WeakReference<>(logcatActivity);
@@ -277,7 +271,7 @@ public class LogcatActivity extends ActionBarProgressActivity {
 				BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(processLogcat.getInputStream()));
 
 				String line;
-				while ((line = bufferedReader.readLine()) != null) {
+				while ((line = bufferedReader.readLine()) != null && logcatActivity.get() != null) {
 					if (isCancelled()) {
 						break;
 					}
@@ -298,8 +292,14 @@ public class LogcatActivity extends ActionBarProgressActivity {
 			if (values.length > 0 && !isCancelled()) {
 				LogcatActivity activity = logcatActivity.get();
 				if (activity != null) {
-					activity.onNewLogEntry(index, values[0]);
-					index++;
+					boolean autoscroll = !activity.recyclerView.canScrollVertically(1);
+					for(String s : values) {
+						activity.logs.add(s);
+					}
+					activity.adapter.notifyDataSetChanged();
+					if(autoscroll) {
+						activity.recyclerView.scrollToPosition(activity.logs.size() - 1);
+					}
 				}
 			}
 		}

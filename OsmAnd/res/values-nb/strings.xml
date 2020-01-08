@@ -3424,4 +3424,7 @@
     <string name="choose_icon_color_name">Velg ikon, farge og navn</string>
     <string name="reorder_profiles">Rediger profilliste</string>
     <string name="selected_profile">Valgt profil</string>
+    <string name="reset_confirmation_descr">Ved å klikke %1$s vil alle endringene dine gå tapt.</string>
+    <string name="reset_all_profile_settings_descr">Alle profilinnstillinger må tilbakestilles til forvalg.</string>
+    <string name="reset_all_profile_settings">Tilbakestill alle innstillinger til forvalg\?</string>
 </resources>
