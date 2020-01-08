@@ -41,6 +41,8 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 
 import java.util.LinkedList;
 
+import static net.osmand.plus.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
+
 public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment {
 
 	public final static String TAG = "DirectionIndicationDialogFragment";
@@ -152,7 +154,7 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 				updateSelection(true);
 			}
 		});
-		UiUtilities.setupCompoundButton(getMyApplication(), distanceIndicationToggle, nightMode, true);
+		UiUtilities.setupCompoundButton(distanceIndicationToggle, nightMode, PROFILE_DEPENDENT);
 
 		mainView.findViewById(R.id.top_bar_row).setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -180,7 +182,7 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 				updateChecked(settings.SHOW_ARROWS_TO_FIRST_MARKERS, showArrowsToggle);
 			}
 		});
-		UiUtilities.setupCompoundButton(getMyApplication(), showArrowsToggle, nightMode, true);
+		UiUtilities.setupCompoundButton(showArrowsToggle, nightMode, PROFILE_DEPENDENT);
 
 		final CompoundButton showLinesToggle = (CompoundButton) mainView.findViewById(R.id.show_guide_line_switch);
 		showLinesToggle.setChecked(settings.SHOW_LINES_TO_FIRST_MARKERS.get());
@@ -190,7 +192,7 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 				updateChecked(settings.SHOW_LINES_TO_FIRST_MARKERS, showLinesToggle);
 			}
 		});
-		UiUtilities.setupCompoundButton(getMyApplication(), showLinesToggle, nightMode, true);
+		UiUtilities.setupCompoundButton(showLinesToggle, nightMode, PROFILE_DEPENDENT);
 
 		final CompoundButton oneTapActiveToggle = (CompoundButton) mainView.findViewById(R.id.one_tap_active_switch);
 		oneTapActiveToggle.setChecked(settings.SELECT_MARKER_ON_SINGLE_TAP.get());
@@ -200,7 +202,7 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 				updateChecked(settings.SELECT_MARKER_ON_SINGLE_TAP, oneTapActiveToggle);
 			}
 		});
-		UiUtilities.setupCompoundButton(getMyApplication(), oneTapActiveToggle, nightMode, true);
+		UiUtilities.setupCompoundButton(oneTapActiveToggle, nightMode, PROFILE_DEPENDENT);
 
 		final CompoundButton keepPassedToggle = (CompoundButton) mainView.findViewById(R.id.keep_passed_switch);
 		keepPassedToggle.setChecked(settings.KEEP_PASSED_MARKERS_ON_MAP.get());
@@ -210,7 +212,7 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 				updateChecked(settings.KEEP_PASSED_MARKERS_ON_MAP, keepPassedToggle);
 			}
 		});
-		UiUtilities.setupCompoundButton(getMyApplication(), keepPassedToggle, nightMode, true);
+		UiUtilities.setupCompoundButton(keepPassedToggle, nightMode, PROFILE_DEPENDENT);
 
 		return mainView;
 	}
@@ -387,7 +389,7 @@ public class DirectionIndicationDialogFragment extends BaseOsmAndDialogFragment 
 	private void updateMarkerModeRow(int rowId, int radioButtonId, boolean checked, boolean active) {
 		RadioButton rb = (RadioButton) mainView.findViewById(radioButtonId);
 		rb.setChecked(checked);
-		UiUtilities.setupCompoundButton(getMyApplication(), rb, isNightMode(usedOnMap), true);
+		UiUtilities.setupCompoundButton(rb, isNightMode(usedOnMap), PROFILE_DEPENDENT);
 		mainView.findViewById(rowId).setEnabled(active);
 	}
 

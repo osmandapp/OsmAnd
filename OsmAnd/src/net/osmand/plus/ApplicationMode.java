@@ -791,6 +791,7 @@ public class ApplicationMode {
 		if (mode != null) {
 			mode.iconResName = builder.applicationMode.iconResName;
 			mode.iconRes = builder.applicationMode.iconRes;
+			mode.iconMapRes = builder.applicationMode.iconMapRes;
 			mode.userProfileName = builder.applicationMode.userProfileName;
 			mode.parentAppMode = builder.applicationMode.parentAppMode;
 			mode.routingProfile = builder.applicationMode.routingProfile;

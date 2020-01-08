@@ -45,6 +45,8 @@ import java.util.List;
 
 import gnu.trove.list.array.TIntArrayList;
 
+import static net.osmand.plus.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
+
 public class OsmandMonitoringPlugin extends OsmandPlugin {
 	public static final String ID = "osmand.monitoring";
 	public final static String OSMAND_SAVE_SERVICE_ACTION = "OSMAND_SAVE_SERVICE_ACTION";
@@ -544,7 +546,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 
 				}
 			});
-			UiUtilities.setupCompoundButton(app, cb, nightMode, true);
+			UiUtilities.setupCompoundButton(cb, nightMode, PROFILE_DEPENDENT);
 			ll.addView(cb);
 		}
 
@@ -572,7 +574,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 					app.getSelectedGpxHelper().selectGpxFile(app.getSavingTrackHelper().getCurrentGpx(), isChecked, false);
 				}
 			});
-			UiUtilities.setupCompoundButton(app, cb, nightMode, true);
+			UiUtilities.setupCompoundButton(cb, nightMode, PROFILE_DEPENDENT);
 			ll.addView(cb);
 		}
 
