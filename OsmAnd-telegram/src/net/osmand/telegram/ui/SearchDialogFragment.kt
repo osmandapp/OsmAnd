@@ -155,10 +155,16 @@ class SearchDialogFragment : BaseDialogFragment(), TelegramHelper.TelegramSearch
 	}
 
 	private fun runSearch(text: String) {
+		if (getString(R.string.saved_messages).startsWith(text, true)) {
+			val savedMessages = telegramHelper.getChat(telegramHelper.getCurrentUserId().toLong())
+			if (savedMessages != null) {
+				telegramHelper.searchChats(savedMessages.title)
+			}
+		}
 		telegramHelper.searchChats(text)
 		telegramHelper.searchChatsOnServer(text)
 		telegramHelper.searchContacts(text)
-		if (text.length > 4) {
+		if (text.length > 4 && !getString(R.string.saved_messages).startsWith(text, true)) {
 			telegramHelper.searchPublicChats(text)
 		}
 	}
@@ -231,7 +237,7 @@ class SearchDialogFragment : BaseDialogFragment(), TelegramHelper.TelegramSearch
 		selectedChats.forEach {
 			val chat = telegramHelper.getChat(it)
 			if (chat != null) {
-				if (!telegramHelper.isChannel(chat) && telegramHelper.getUserIdFromChatType(chat.type) != currentUserId) {
+				if (!telegramHelper.isChannel(chat)) {
 					items.add(chat)
 				}
 			} else {
@@ -250,7 +256,7 @@ class SearchDialogFragment : BaseDialogFragment(), TelegramHelper.TelegramSearch
 		searchedChatsIds.forEach {
 			val chat = telegramHelper.getChat(it)
 			if (chat != null && !selectedChats.contains(it)) {
-				if (!telegramHelper.isChannel(chat) && telegramHelper.getUserIdFromChatType(chat.type) != currentUserId) {
+				if (!telegramHelper.isChannel(chat)) {
 					chats.add(chat)
 				}
 			} else {
@@ -382,9 +388,18 @@ class SearchDialogFragment : BaseDialogFragment(), TelegramHelper.TelegramSearch
 
 			TelegramUiHelper.setupPhoto(app, holder.icon, photoPath, placeholderId, false)
 
+			val currentUserId = telegramHelper.getCurrentUserId()
 			val title = when (item) {
-				is TdApi.Chat -> item.title
-				is TdApi.User -> TelegramUiHelper.getUserName(item)
+				is TdApi.Chat -> {
+					if (telegramHelper.isPrivateChat(item) && (item.type as TdApi.ChatTypePrivate).userId == currentUserId) {
+						getString(R.string.saved_messages)
+					} else {
+						item.title
+					}
+				}
+				is TdApi.User -> {
+					if (item.id == currentUserId) getString(R.string.saved_messages) else TelegramUiHelper.getUserName(item)
+				}
 				else -> null
 			}
 
