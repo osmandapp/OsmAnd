@@ -53,8 +53,6 @@ public class ConnectedApp implements Comparable<ConnectedApp> {
 	private Map<String, AidlMapLayerWrapper> layers = new ConcurrentHashMap<>();
 	private Map<String, OsmandMapLayer> mapLayers = new ConcurrentHashMap<>();
 
-	private OsmandSettings.CommonPreference<Boolean> layersPref;
-
 	private String pack;
 	private String name;
 
@@ -66,7 +64,6 @@ public class ConnectedApp implements Comparable<ConnectedApp> {
 		this.app = app;
 		this.pack = pack;
 		this.enabled = enabled;
-		layersPref = app.getSettings().registerBooleanPreference(AIDL_LAYERS_PREFIX + pack, true).cache();
 	}
 
 	public boolean isEnabled() {
@@ -125,6 +122,8 @@ public class ConnectedApp implements Comparable<ConnectedApp> {
 	}
 
 	void registerLayerContextMenu(final ContextMenuAdapter menuAdapter, final MapActivity mapActivity) {
+		final OsmandSettings.CommonPreference<Boolean> layersPref = app.getSettings().registerBooleanPreference(AIDL_LAYERS_PREFIX + pack, true).cache();
+
 		ContextMenuAdapter.ItemClickListener listener = new ContextMenuAdapter.OnRowItemClick() {
 
 			@Override
