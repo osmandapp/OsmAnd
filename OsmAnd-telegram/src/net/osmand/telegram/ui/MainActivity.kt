@@ -486,7 +486,7 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 		}
 	}
 
-	fun onDataSetChanged() {
+	fun refreshPages() {
 		viewPager.adapter?.notifyDataSetChanged()
 	}
 
