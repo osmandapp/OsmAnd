@@ -230,7 +230,7 @@ public class ImportHelper {
 	}
 
 	@SuppressLint("StaticFieldLeak")
-	private void handleFavouritesImport(final Uri gpxFile, final String fileName, final boolean save, final boolean useImportDir, final boolean forceImportFavourites) {
+	private void handleFavouritesImport(final Uri fileUri, final String fileName, final boolean save, final boolean useImportDir, final boolean forceImportFavourites) {
 		new AsyncTask<Void, Void, GPXFile>() {
 			ProgressDialog progress = null;
 
@@ -242,18 +242,49 @@ public class ImportHelper {
 			@Override
 			protected GPXFile doInBackground(Void... nothing) {
 				InputStream is = null;
+				ZipInputStream zis = null;
 				try {
-					final ParcelFileDescriptor pFD = app.getContentResolver().openFileDescriptor(gpxFile, "r");
-
+					final ParcelFileDescriptor pFD = app.getContentResolver().openFileDescriptor(fileUri, "r");
 					if (pFD != null) {
 						is = new FileInputStream(pFD.getFileDescriptor());
-						return GPXUtilities.loadGPXFile(is);
+
+						if (fileName != null && fileName.endsWith(KML_SUFFIX)) {
+							final String result = Kml2Gpx.toGpx(is);
+							if (result != null) {
+								try {
+									return GPXUtilities.loadGPXFile(new ByteArrayInputStream(result.getBytes("UTF-8")));
+								} catch (UnsupportedEncodingException e) {
+									return null;
+								}
+							}
+						} else if (fileName != null && fileName.endsWith(KMZ_SUFFIX)) {
+							try {
+								zis = new ZipInputStream(is);
+								zis.getNextEntry();
+								final String result = Kml2Gpx.toGpx(zis);
+								if (result != null) {
+									try {
+										return GPXUtilities.loadGPXFile(new ByteArrayInputStream(result.getBytes("UTF-8")));
+									} catch (UnsupportedEncodingException e) {
+										return null;
+									}
+								}
+							} catch (Exception e) {
+								return null;
+							}
+						} else {
+							return GPXUtilities.loadGPXFile(is);
+						}
 					}
 				} catch (FileNotFoundException e) {
 					//
 				} finally {
 					if (is != null) try {
 						is.close();
+					} catch (IOException ignore) {
+					}
+					if (zis != null) try {
+						zis.close();
 					} catch (IOException ignore) {
 					}
 				}
@@ -265,6 +296,7 @@ public class ImportHelper {
 				if (isActivityNotDestroyed(activity)) {
 					progress.dismiss();
 				}
+
 				importFavourites(result, fileName, save, useImportDir, forceImportFavourites);
 			}
 		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
