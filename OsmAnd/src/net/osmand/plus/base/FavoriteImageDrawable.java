@@ -49,7 +49,7 @@ public class FavoriteImageDrawable extends Drawable {
 		this.withShadow = withShadow;
 		this.synced = synced;
 		Resources res = ctx.getResources();
-		int overlayIconId = point.getOverlayIconId();
+		int overlayIconId = point != null ? point.getOverlayIconId() : 0;
 		if (overlayIconId != 0) {
 			personalPointBitmap = UiUtilities.tintDrawable(ResourcesCompat.getDrawable(res, overlayIconId, null),
 					ContextCompat.getColor(ctx, R.color.icon_color_default_light));

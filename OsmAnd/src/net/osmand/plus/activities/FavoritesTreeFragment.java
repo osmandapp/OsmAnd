@@ -209,14 +209,14 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 		listView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
 			@Override
 			public void onGroupCollapse(int groupPosition) {
-				String groupName = favouritesAdapter.getGroup(groupPosition).name;
+				String groupName = favouritesAdapter.getGroup(groupPosition).getName();
 				getGroupExpandedPreference(groupName).set(false);
 			}
 		});
 		listView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
 			@Override
 			public void onGroupExpand(int groupPosition) {
-				String groupName = favouritesAdapter.getGroup(groupPosition).name;
+				String groupName = favouritesAdapter.getGroup(groupPosition).getName();
 				getGroupExpandedPreference(groupName).set(true);
 			}
 		});
@@ -232,7 +232,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 				int selection = listView.getHeaderViewsCount();
 				for (int i = 0; i < groupPos; i++) {
 					selection++; // because of group header
-					if (getGroupExpandedPreference(favouritesAdapter.getGroup(i).name).get()) {
+					if (getGroupExpandedPreference(favouritesAdapter.getGroup(i).getName()).get()) {
 						selection += favouritesAdapter.getChildrenCount(i);
 					}
 				}
@@ -314,16 +314,16 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			FavoriteGroup group = favouritesAdapter.getGroup(groupPosition);
 			ch.setChecked(!ch.isChecked());
 			if (ch.isChecked()) {
-				Set<FavouritePoint> set = favoritesSelected.get(group.name);
+				Set<FavouritePoint> set = favoritesSelected.get(group.getName());
 				if (set != null) {
 					set.add(model);
 				} else {
 					set = new LinkedHashSet<>();
 					set.add(model);
-					favoritesSelected.put(group.name, set);
+					favoritesSelected.put(group.getName(), set);
 				}
 			} else {
-				Set<FavouritePoint> set = favoritesSelected.get(group.name);
+				Set<FavouritePoint> set = favoritesSelected.get(group.getName());
 				if (set != null) {
 					set.remove(model);
 				}
@@ -451,7 +451,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			List<PointDescription> names = new ArrayList<>();
 			for (Map.Entry<String, Set<FavouritePoint>> entry : favoritesSelected.entrySet()) {
 				FavoriteGroup favGr = helper.getGroup(entry.getKey());
-				if (entry.getValue().size() == favGr.points.size()) {
+				if (entry.getValue().size() == favGr.getPoints().size()) {
 					markersHelper.addOrEnableGroup(favGr);
 				} else {
 					for (FavouritePoint fp : entry.getValue()) {
@@ -539,8 +539,8 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 		StringBuilder html = new StringBuilder();
 		html.append("<h1>My Favorites</h1>");
 		for (FavoriteGroup group : groups) {
-			html.append("<h3>" + group.name + "</h3>");
-			for (FavouritePoint fp : group.points) {
+			html.append("<h3>" + group.getName() + "</h3>");
+			for (FavouritePoint fp : group.getPoints()) {
 				String url = "geo:" + ((float) fp.getLatitude()) + "," + ((float) fp.getLongitude()) + "?m=" + fp.getName();
 				html.append("<p>" + fp.getName() + " - " + "<a href=\"" + url + "\">geo:"
 						+ ((float) fp.getLatitude()) + "," + ((float) fp.getLongitude()) + "</a><br>");
@@ -589,7 +589,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			@Override
 			protected Void doInBackground(Void... params) {
 				if (group != null) {
-					helper.saveFile(group.points, dst);
+					helper.saveFile(group.getPoints(), dst);
 				}
 				return null;
 			}
@@ -681,7 +681,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 
 	private void initListExpandedState() {
 		for (int i = 0; i < favouritesAdapter.getGroupCount(); i++) {
-			String groupName = favouritesAdapter.getGroup(i).name;
+			String groupName = favouritesAdapter.getGroup(i).getName();
 			if (getGroupExpandedPreference(groupName).get()) {
 				listView.expandGroup(i);
 			} else {
@@ -755,10 +755,10 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 				boolean empty = true;
 				if (flt == null || flt.contains(key)) {
 					empty = false;
-					favoriteGroups.put(key, new ArrayList<>(key.points));
+					favoriteGroups.put(key, new ArrayList<>(key.getPoints()));
 				} else {
 					ArrayList<FavouritePoint> list = new ArrayList<>();
-					for (FavouritePoint p : key.points) {
+					for (FavouritePoint p : key.getPoints()) {
 						if (flt.contains(p)) {
 							list.add(p);
 							empty = false;
@@ -767,7 +767,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 					favoriteGroups.put(key, list);
 				}
 				if (!empty) {
-					if (key.visible) {
+					if (key.isVisible()) {
 						groups.add(key);
 					} else {
 						disablesGroups.add(key);
@@ -831,11 +831,11 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			OsmandApplication app = getMyApplication();
 			boolean light = app.getSettings().isLightContent();
 			final FavoriteGroup model = getGroup(groupPosition);
-			boolean visible = model.visible;
+			boolean visible = model.isVisible();
 			int enabledColor = light ? R.color.text_color_primary_light : R.color.text_color_primary_dark;
 			int disabledColor = light ? R.color.text_color_secondary_light : R.color.text_color_secondary_dark;
 			row.findViewById(R.id.group_divider).setVisibility(groupPosition == 0 ? View.GONE : View.VISIBLE);
-			int color = model.color == 0 || model.color == Color.BLACK ? getResources().getColor(R.color.color_favorite) : model.color;
+			int color = model.getColor() == 0 || model.getColor() == Color.BLACK ? getResources().getColor(R.color.color_favorite) : model.getColor();
 			if (!model.isPersonal()) {
 				setCategoryIcon(app, app.getUIUtilities().getPaintedIcon(
 						R.drawable.ic_action_fav_dark, visible ? (color | 0xff000000) : getResources().getColor(disabledColor)),
@@ -850,7 +850,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			} else {
 				label.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
 			}
-			label.setText(model.name.length() == 0 ? getString(R.string.shared_string_favorites) : model.getDisplayName(app));
+			label.setText(model.getName().length() == 0 ? getString(R.string.shared_string_favorites) : model.getDisplayName(app));
 
 			if (selectionMode) {
 				final CheckBox ch = (CheckBox) row.findViewById(R.id.toggle_item);
@@ -860,21 +860,21 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 				ch.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						List<FavouritePoint> fvs = model.points;
+						List<FavouritePoint> fvs = model.getPoints();
 						if (ch.isChecked()) {
 							groupsToDelete.add(model);
 							if (fvs != null) {
-								Set<FavouritePoint> set = favoritesSelected.get(model.name);
+								Set<FavouritePoint> set = favoritesSelected.get(model.getName());
 								if (set != null) {
-									set.addAll(model.points);
+									set.addAll(model.getPoints());
 								} else {
-									set = new LinkedHashSet<>(model.points);
-									favoritesSelected.put(model.name, set);
+									set = new LinkedHashSet<>(model.getPoints());
+									favoritesSelected.put(model.getName(), set);
 								}
 							}
 						} else {
 							groupsToDelete.remove(model);
-							favoritesSelected.remove(model.name);
+							favoritesSelected.remove(model.getName());
 						}
 						favouritesAdapter.notifyDataSetInvalidated();
 						updateSelectionMode(actionMode);
@@ -895,7 +895,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 					ch.setOnClickListener(new View.OnClickListener() {
 						@Override
 						public void onClick(View v) {
-							EditFavoriteGroupDialogFragment.showInstance(getChildFragmentManager(), model.name);
+							EditFavoriteGroupDialogFragment.showInstance(getChildFragmentManager(), model.getName());
 						}
 
 					});
@@ -977,26 +977,26 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			final CheckBox ch = (CheckBox) row.findViewById(R.id.toggle_item);
 			if (selectionMode) {
 				ch.setVisibility(View.VISIBLE);
-				ch.setChecked(favoritesSelected.get(group.name) != null && favoritesSelected.get(group.name).contains(model));
+				ch.setChecked(favoritesSelected.get(group.getName()) != null && favoritesSelected.get(group.getName()).contains(model));
 				row.findViewById(R.id.favourite_icon).setVisibility(View.GONE);
 				ch.setOnClickListener(new View.OnClickListener() {
 
 					@Override
 					public void onClick(View v) {
 						if (ch.isChecked()) {
-							Set<FavouritePoint> set = favoritesSelected.get(group.name);
+							Set<FavouritePoint> set = favoritesSelected.get(group.getName());
 							if (set != null) {
 								set.add(model);
 							} else {
 								set = new LinkedHashSet<>();
 								set.add(model);
-								favoritesSelected.put(group.name, set);
+								favoritesSelected.put(group.getName(), set);
 							}
 						} else {
-							Set<FavouritePoint> set = favoritesSelected.get(group.name);
+							Set<FavouritePoint> set = favoritesSelected.get(group.getName());
 							if (set != null) {
 								groupsToDelete.remove(group);
-								getGroupPosition(group.name);
+								getGroupPosition(group.getName());
 								set.remove(model);
 								favouritesAdapter.notifyDataSetInvalidated();
 							}
@@ -1026,7 +1026,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 		public int getGroupPosition(String groupName) {
 			for (int i = 0; i < getGroupCount(); i++) {
 				FavoriteGroup group = getGroup(i);
-				if (group.name.equals(groupName)) {
+				if (group.getName().equals(groupName)) {
 					return i;
 				}
 			}
@@ -1050,10 +1050,10 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 				Set<Object> filter = new HashSet<>();
 				String cs = constraint.toString().toLowerCase();
 				for (FavoriteGroup g : helper.getFavoriteGroups()) {
-					if (g.name.toLowerCase().contains(cs)) {
+					if (g.getName().toLowerCase().contains(cs)) {
 						filter.add(g);
 					} else {
-						for (FavouritePoint fp : g.points) {
+						for (FavouritePoint fp : g.getPoints()) {
 							if (fp.getName().toLowerCase().contains(cs)) {
 								filter.add(fp);
 							}

@@ -358,7 +358,7 @@ public class QuickSearchListItem {
 				return FavoriteImageDrawable.getOrCreate(app, fav.getColor(), false, fav);
 			case FAVORITE_GROUP:
 				FavoriteGroup group = (FavoriteGroup) searchResult.object;
-				int color = group.color == 0 || group.color == Color.BLACK ? app.getResources().getColor(R.color.color_favorite) : group.color;
+				int color = group.getColor() == 0 || group.getColor() == Color.BLACK ? app.getResources().getColor(R.color.color_favorite) : group.getColor();
 				return app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_fav_dark, color | 0xff000000);
 			case REGION:
 				return getIcon(app, R.drawable.ic_world_globe_dark);

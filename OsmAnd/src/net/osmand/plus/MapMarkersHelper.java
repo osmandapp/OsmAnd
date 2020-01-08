@@ -535,7 +535,7 @@ public class MapMarkersHelper {
 	}
 	
 	private MapMarkersGroup createFavMarkerGroup(FavoriteGroup favGroup) {
-		return new MapMarkersGroup(favGroup.name, favGroup.name, MapMarkersGroup.FAVORITES_TYPE);
+		return new MapMarkersGroup(favGroup.getName(), favGroup.getName(), MapMarkersGroup.FAVORITES_TYPE);
 	}
 
 	private String getMarkerGroupId(File gpx) {
@@ -543,7 +543,7 @@ public class MapMarkersHelper {
 	}
 	
 	private String getMarkerGroupId(FavoriteGroup group) {
-		return group.name;
+		return group.getName();
 	}
 	
 	@NonNull
@@ -1161,13 +1161,13 @@ public class MapMarkersHelper {
 				if (favGroup == null) {
 					return;
 				}
-				group.visible = favGroup.visible;
+				group.visible = favGroup.isVisible();
 				if (!group.isVisible() || group.isDisabled()) {
 					removeGroupActiveMarkers(group, true);
 					return;
 				}
 
-				for (FavouritePoint fp : favGroup.points) {
+				for (FavouritePoint fp : favGroup.getPoints()) {
 					addNewMarkerIfNeeded(group, groupMarkers, new LatLon(fp.getLatitude(), fp.getLongitude()), fp.getName(), fp, null);
 				}
 

@@ -67,10 +67,10 @@ public class FavouritesDbHelper {
 
 	public static class FavoriteGroup {
 		public static final String PERSONAL_CATEGORY = "personal";
-		protected String name;
-		protected boolean visible = true;
-		protected int color;
-		protected List<FavouritePoint> points = new ArrayList<>();
+		private String name;
+		private boolean visible = true;
+		private int color;
+		private List<FavouritePoint> points = new ArrayList<>();
 
 		public boolean isPersonal() {
 			return isPersonal(name);
@@ -109,10 +109,10 @@ public class FavouritesDbHelper {
 		}
 
 		public String convertDisplayNameToGroupIdName(Context context, String name) {
-			if(name.equals(context.getString(R.string.personal_category_name))) {
+			if (name.equals(context.getString(R.string.personal_category_name))) {
 				return PERSONAL_CATEGORY;
 			}
-			if(name.equals(context.getString(R.string.shared_string_favorites))) {
+			if (name.equals(context.getString(R.string.shared_string_favorites))) {
 				return "";
 			}
 			return name;
@@ -162,9 +162,9 @@ public class FavouritesDbHelper {
 	public FavouritePoint getSpecialPoint(FavouritePoint.SpecialPointType pointType) {
 		for (FavouritePoint fp : cachedFavoritePoints) {
 			if (fp.getSpecialPointType() == pointType) {
-					return fp;
-				}
+				return fp;
 			}
+		}
 		return null;
 	}
 
@@ -194,7 +194,7 @@ public class FavouritesDbHelper {
 	private void runSyncWithMarkers(FavoriteGroup favGroup) {
 		MapMarkersHelper helper = context.getMapMarkersHelper();
 		MapMarkersGroup group = helper.getMarkersGroup(favGroup);
-		if(group != null) {
+		if (group != null) {
 			helper.runSynchronization(group);
 		}
 	}
@@ -202,7 +202,7 @@ public class FavouritesDbHelper {
 	private boolean removeFromMarkers(FavoriteGroup favGroup) {
 		MapMarkersHelper helper = context.getMapMarkersHelper();
 		MapMarkersGroup group = helper.getMarkersGroup(favGroup);
-		if(group != null) {
+		if (group != null) {
 			helper.removeMarkersGroup(group);
 			return true;
 		}
@@ -305,8 +305,8 @@ public class FavouritesDbHelper {
 
 	public void lookupAddressAllSpecialPoints() {
 		if (!context.isApplicationInitializing()) {
-			for(FavouritePoint p : getFavouritePoints()) {
-				if(p.getSpecialPointType() != null) {
+			for (FavouritePoint p : getFavouritePoints()) {
+				if (p.getSpecialPointType() != null) {
 					lookupAddress(p);
 				}
 			}
@@ -321,21 +321,21 @@ public class FavouritesDbHelper {
 			cancelAddressRequest(p);
 			request = new AddressLookupRequest(new LatLon(latitude, longitude),
 					new GeocodingLookupService.OnAddressLookupResult() {
-				@Override
-				public void geocodingDone(String address) {
-					addressRequestMap.remove(p);
-					editAddressDescription(p, address);
-					context.runInUIThread(new Runnable() {
 						@Override
-						public void run() {
-							for (FavoritesListener listener : listeners) {
-								listener.onFavoriteDataUpdated(p);
-							}
-						}
-					});
+						public void geocodingDone(String address) {
+							addressRequestMap.remove(p);
+							editAddressDescription(p, address);
+							context.runInUIThread(new Runnable() {
+								@Override
+								public void run() {
+									for (FavoritesListener listener : listeners) {
+										listener.onFavoriteDataUpdated(p);
+									}
+								}
+							});
 
-				}
-			}, null);
+						}
+					}, null);
 			addressRequestMap.put(p, request);
 			context.getGeocodingLookupService().lookupAddress(request);
 		}
@@ -495,7 +495,7 @@ public class FavouritesDbHelper {
 	private void backup(File backupFile, File externalFile) {
 		try {
 			File f = new File(backupFile.getParentFile(), backupFile.getName());
-			BZip2CompressorOutputStream out = new BZip2CompressorOutputStream( new FileOutputStream(f));
+			BZip2CompressorOutputStream out = new BZip2CompressorOutputStream(new FileOutputStream(f));
 			FileInputStream fis = new FileInputStream(externalFile);
 			Algorithms.streamCopy(fis, out);
 			fis.close();

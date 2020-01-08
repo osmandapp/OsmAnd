@@ -87,7 +87,7 @@ public class SelectCategoryDialogFragment extends DialogFragment {
 		} else {
 			List<FavouritesDbHelper.FavoriteGroup> gs = helper.getFavoriteGroups();
 			for (final FavouritesDbHelper.FavoriteGroup category : gs) {
-				addCategory(activity, ll, category.getDisplayName(getContext()), category.color);
+				addCategory(activity, ll, category.getDisplayName(getContext()), category.getColor());
 			}
 		}
 		View itemView = activity.getLayoutInflater().inflate(R.layout.favorite_category_dialog_item, null);

@@ -121,7 +121,7 @@ public class FavouritesLayer extends OsmandMapLayer implements ContextMenuLayer.
 				for (FavoriteGroup group : favorites.getFavoriteGroups()) {
 					List<Pair<FavouritePoint, MapMarker>> fullObjects = new ArrayList<>();
 					boolean synced = mapMarkersHelper.getMarkersGroup(group) != null;
-					for (FavouritePoint o : group.points) {
+					for (FavouritePoint o : group.getPoints()) {
 						double lat = o.getLatitude();
 						double lon = o.getLongitude();
 						if (o.isVisible() && o != contextMenuLayer.getMoveableObject()

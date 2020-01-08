@@ -123,7 +123,7 @@ public class FavoriteDialogs {
 		List<FavoriteGroup> gs = helper.getFavoriteGroups();
 		final String[] list = new String[gs.size()];
 		for (int i = 0; i < list.length; i++) {
-			list[i] = gs.get(i).name;
+			list[i] = gs.get(i).getName();
 		}
 		cat.setAdapter(new ArrayAdapter<String>(activity, R.layout.list_textview, list));
 		

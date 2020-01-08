@@ -149,7 +149,7 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 		if (helper != null) {
 			FavoriteGroup group = helper.getGroup(name);
 			this.group = group;
-			super.setCategory(name, group.color);
+			super.setCategory(name, group.getColor());
 		}
 	}
 
@@ -334,7 +334,7 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 		int color = 0;
 		FavoriteGroup group = getGroup();
 		if (group != null) {
-			color = group.color;
+			color = group.getColor();
 		}
 		if (color == 0) {
 			color = defaultColor;
