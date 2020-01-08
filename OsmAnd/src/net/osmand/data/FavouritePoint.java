@@ -17,6 +17,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	private static final long serialVersionUID = 729654300829771466L;
 
 	private static final String HIDDEN = "hidden";
+	private static final String ADDRESS_EXTENSION = "address";
 
 
 
@@ -294,6 +295,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		}
 		fp.setColor(pt.getColor(0));
 		fp.setVisible(!pt.getExtensionsToRead().containsKey(HIDDEN));
+		fp.setAddress(pt.getExtensionsToRead().get(ADDRESS_EXTENSION));
 		return fp;
 	}
 
@@ -303,6 +305,9 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		pt.lon = getLongitude();
 		if (!isVisible()) {
 			pt.getExtensionsToWrite().put(HIDDEN, "true");
+		}
+		if (isAddressSpecified()) {
+			pt.getExtensionsToWrite().put(ADDRESS_EXTENSION, getAddress());
 		}
 		if (getColor() != 0) {
 			pt.setColor(getColor());
