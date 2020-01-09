@@ -129,6 +129,17 @@ public class FavouritePointMenuController extends MenuController {
 		return mapMarker == null;
 	}
 
+	@NonNull
+	@Override
+	public String getNameStr() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			return fav.getDisplayName(getMapActivity());
+		} else {
+			return super.getNameStr();
+		}
+	}
+
 	@Override
 	public Drawable getSecondLineTypeIcon() {
 		return getIcon(R.drawable.ic_action_group_name_16, isLight() ? R.color.icon_color_default_light : R.color.ctx_menu_bottom_view_icon_dark);
