@@ -75,6 +75,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 	private lateinit var sharingStatusTitle: TextView
 	private lateinit var sharingStatusIcon: ImageView
 	private lateinit var startSharingBtn: View
+	private lateinit var backToOsmAndBtn: TextView
 
 	private lateinit var searchBoxBg: GradientDrawable
 
@@ -240,6 +241,16 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 				sharingMode = false
 				actionButtonsListener?.switchButtonsVisibility(true)
 				updateContent()
+			}
+		}
+
+		backToOsmAndBtn = mainView.findViewById<TextView>(R.id.back_to_osmand).apply {
+			setOnClickListener {
+				val startIntent = app.packageManager.getLaunchIntentForPackage("net.osmand.plus")
+				if (startIntent != null) {
+					startIntent.addCategory(Intent.CATEGORY_LAUNCHER)
+					startActivity(startIntent)
+				}
 			}
 		}
 
@@ -478,6 +489,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 		textContainer.visibility = if (sharingMode) View.GONE else View.VISIBLE
 		titleContainer.visibility = if (sharingMode) View.VISIBLE else View.GONE
 		startSharingBtn.visibility = if (sharingMode) View.VISIBLE else View.GONE
+		backToOsmAndBtn.visibility = if (sharingMode) View.VISIBLE else View.GONE
 		headerParams.scrollFlags =
 				if (sharingMode) 0 else AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL
 		stopSharingSwitcher.isChecked = true
