@@ -112,43 +112,81 @@
             android:background="@drawable/btn_flat"
             android:minHeight="@dimen/map_address_height">
 
-            <!-- android:layout_weight="1" to show properly next turn -->
-            <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp">
+		<!-- android:layout_weight="1" to show properly next turn -->
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center"
+			android:layout_marginLeft="5dp"
+			android:layout_marginRight="5dp"
+			android:gravity="center"
+			android:orientation="horizontal">
 
+			<TextView
+				android:id="@+id/map_exit_ref"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:background="@drawable/bg_topbar_shield_exit_ref"
+				android:gravity="center"
+				android:minWidth="@dimen/map_widget_height"
+				android:textColor="@color/color_white"
+				android:textSize="@dimen/map_widget_text_size"
+				android:visibility="gone"
+				android:paddingLeft="@dimen/text_margin_small"
+				android:paddingRight="@dimen/text_margin_small"
+				android:textStyle="bold"
+				tools:text="8"
 
-                <TextView
-                    android:id="@+id/map_address_text_shadow"
-                    android:importantForAccessibility="no"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:singleLine="true"
-                    android:textColor="@color/color_black"
-                    android:textSize="@dimen/map_widget_text_size"
-                    tools:text="Long Street Name">
-                </TextView>
+				tools:visibility="visible" />
 
-                <TextView
-                    android:id="@+id/map_address_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:singleLine="true"
-                    android:textColor="@color/color_black"
-                    android:textSize="@dimen/map_widget_text_size"
-                    tools:text="Long Street Name">
-                </TextView>
-            </FrameLayout>
+			<ImageView
+				android:id="@+id/map_turn_icon"
+				android:layout_width="@dimen/map_widget_height"
+				android:layout_height="@dimen/map_widget_height"
+				android:scaleType="fitCenter"
+				android:visibility="gone"
+				tools:src="@drawable/map_turn_right_small" />
 
+			<ImageView
+				android:id="@+id/map_shield_icon"
+				android:layout_width="@dimen/map_widget_height"
+				android:layout_height="@dimen/map_widget_height"
+				android:scaleType="fitCenter"
+				android:visibility="gone"
+				tools:src="@drawable/h_white_pillow_2_road_shield" />
+
+			<FrameLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content">
+
+				<TextView
+					android:id="@+id/map_address_text_shadow"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="center"
+					android:ellipsize="end"
+					android:importantForAccessibility="no"
+					android:maxLines="1"
+					android:singleLine="true"
+					android:textColor="@color/color_black"
+					android:textSize="@dimen/map_widget_text_size"
+					tools:text="Long Street Name" />
+
+				<TextView
+					android:id="@+id/map_address_text"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="center"
+					android:ellipsize="end"
+					android:maxLines="1"
+					android:singleLine="true"
+					android:textColor="@color/color_black"
+					android:textSize="@dimen/map_widget_text_size"
+					tools:text="Long Street Name" />
+
+			</FrameLayout>
+
+		</LinearLayout>
 
             <LinearLayout
                 android:id="@+id/waypoint_info_bar"

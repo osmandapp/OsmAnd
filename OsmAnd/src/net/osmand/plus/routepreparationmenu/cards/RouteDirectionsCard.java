@@ -17,6 +17,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routepreparationmenu.RouteDetailsFragment;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.views.TurnPathHelper;
+import net.osmand.plus.views.mapwidgets.RouteInfoWidgetsFactory;
 import net.osmand.util.Algorithms;
 
 import java.util.List;
@@ -67,13 +68,25 @@ public class RouteDirectionsCard extends BaseCard {
 		TextView timeLabel = (TextView) row.findViewById(R.id.time);
 		TextView cumulativeDistanceLabel = (TextView) row.findViewById(R.id.cumulative_distance);
 		TextView cumulativeTimeLabel = (TextView) row.findViewById(R.id.cumulative_time);
-		ImageView icon = (ImageView) row.findViewById(R.id.direction);
+		ImageView directionIcon = (ImageView) row.findViewById(R.id.direction);
+		ImageView lanesIcon = (ImageView) row.findViewById(R.id.lanes);
 		row.findViewById(R.id.divider).setVisibility(directionInfoIndex == directionsInfo.size() - 1 ? View.INVISIBLE : View.VISIBLE);
 
 		TurnPathHelper.RouteDrawable drawable = new TurnPathHelper.RouteDrawable(mapActivity.getResources(), true);
 		drawable.setColorFilter(new PorterDuffColorFilter(getActiveColor(), PorterDuff.Mode.SRC_ATOP));
 		drawable.setRouteType(model.getTurnType());
-		icon.setImageDrawable(drawable);
+		directionIcon.setImageDrawable(drawable);
+
+		int[] lanes = model.getTurnType().getLanes();
+		if (lanes != null){
+			RouteInfoWidgetsFactory.LanesDrawable lanesDrawable = new RouteInfoWidgetsFactory.LanesDrawable(mapActivity,1);
+			lanesDrawable.lanes = lanes;
+			lanesDrawable.isTurnByTurn = true;
+			lanesDrawable.isNightMode = nightMode;
+			lanesDrawable.updateBounds();
+			lanesIcon.setImageDrawable(lanesDrawable);
+			lanesIcon.setVisibility(View.VISIBLE);
+		}
 
 		label.setText(model.getDescriptionRoutePart());
 		if (model.distance > 0) {

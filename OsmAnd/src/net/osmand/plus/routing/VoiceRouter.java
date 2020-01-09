@@ -16,6 +16,7 @@ import net.osmand.plus.routing.data.StreetName;
 import net.osmand.plus.voice.AbstractPrologCommandPlayer;
 import net.osmand.plus.voice.CommandBuilder;
 import net.osmand.plus.voice.CommandPlayer;
+import net.osmand.router.ExitInfo;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.TurnType;
 import net.osmand.util.MapUtils;
@@ -618,13 +619,29 @@ public class VoiceRouter {
 			}
 
 		} else {
-			result.put("toRef", getNonNullString(getSpeakablePointName(i.getRef())));
+			result.put(TO_REF, getNonNullString(getSpeakablePointName(i.getRef())));
 			result.put(TO_STREET_NAME, getNonNullString(getSpeakablePointName(i.getStreetName())));
 			result.put(TO_DEST, "");
 		}
 		return new StreetName(result);
 	}
 
+	private StreetName getSpeakableExitName(RouteDirectionInfo routeInfo, ExitInfo exitInfo, boolean includeDest) {
+		Map<String, String> result = new HashMap<>();
+		if (exitInfo == null || !router.getSettings().SPEAK_STREET_NAMES.get()) {
+			return new StreetName(result);
+		}
+		if (player != null && player.supportsStructuredStreetNames()) {
+			result.put(TO_REF, getNonNullString(getSpeakablePointName(exitInfo.getRef())));
+			result.put(TO_STREET_NAME, getNonNullString(getSpeakablePointName(exitInfo.getExitStreetName())));
+			result.put(TO_DEST, includeDest ? getNonNullString(getSpeakablePointName(routeInfo.getRef())) : "");
+		} else {
+			result.put(TO_REF, getNonNullString(getSpeakablePointName(exitInfo.getRef())));
+			result.put(TO_STREET_NAME, getNonNullString(getSpeakablePointName(exitInfo.getExitStreetName())));
+			result.put(TO_DEST, "");
+		}
+		return new StreetName(result);
+	}
 
 	private String getNonNullString(String speakablePointName) {
 		return  speakablePointName == null ? "" : speakablePointName;
@@ -677,8 +694,14 @@ public class VoiceRouter {
 		if (p != null) {
 			String tParam = getTurnType(next.getTurnType());
 			boolean isPlay = true;
+			ExitInfo exitInfo = next.getExitInfo();
+			String lang = player.getLanguage();
 			if (tParam != null) {
-				p.turn(tParam, dist, getSpeakableStreetName(currentSegment, next, true));
+				if (exitInfo != null) {
+					p.takeExit(tParam, dist, getSpeakableExitName(next, exitInfo, true));
+				} else {
+					p.turn(tParam, dist, getSpeakableStreetName(currentSegment, next, true));
+				}
 				suppressDest = true;
 			} else if (next.getTurnType().isRoundAbout()) {
 				p.roundAbout(dist, next.getTurnType().getTurnAngle(), next.getTurnType().getExitOut(), getSpeakableStreetName(currentSegment, next, true));
@@ -744,9 +767,15 @@ public class VoiceRouter {
 		CommandBuilder p = getNewCommandPlayerToPlay();
 		if (p != null) {
 			String tParam = getTurnType(next.getTurnType());
+			ExitInfo exitInfo = next.getExitInfo();
 			boolean isplay = true;
+			String lang = player.getLanguage();
 			if (tParam != null) {
-				p.turn(tParam, getSpeakableStreetName(currentSegment, next, !suppressDest));
+				if (exitInfo != null) {
+					p.takeExit(tParam, getSpeakableExitName(next, exitInfo, !suppressDest));
+				} else {
+					p.turn(tParam, getSpeakableStreetName(currentSegment, next, !suppressDest));
+				}
 			} else if (next.getTurnType().isRoundAbout()) {
 				p.roundAbout(next.getTurnType().getTurnAngle(), next.getTurnType().getExitOut(), getSpeakableStreetName(currentSegment, next, !suppressDest));
 			} else if (next.getTurnType().getValue() == TurnType.TU || next.getTurnType().getValue() == TurnType.TRU) {

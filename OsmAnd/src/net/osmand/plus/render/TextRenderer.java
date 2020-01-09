@@ -43,7 +43,7 @@ public class TextRenderer {
 	private Typeface italicTypeface;
 	private Typeface boldTypeface;
 
-	static class TextDrawInfo {
+	public static class TextDrawInfo {
 
 		public TextDrawInfo(String text) {
 			this.text = text;
@@ -94,6 +94,30 @@ public class TextRenderer {
 				shieldResIcon = render.getStringPropertyValue(render.ALL.R_ICON);
 			}
 			textOrder = render.getIntPropertyValue(render.ALL.R_TEXT_ORDER, 100);
+		}
+
+		public float getCenterX() {
+			return centerX;
+		}
+
+		public void setCenterX(float centerX) {
+			this.centerX = centerX;
+		}
+
+		public float getCenterY() {
+			return centerY;
+		}
+
+		public void setCenterY(float centerY) {
+			this.centerY = centerY;
+		}
+
+		public String getShieldResIcon() {
+			return shieldResIcon;
+		}
+
+		public void setShieldResIcon(String shieldResIcon) {
+			this.shieldResIcon = shieldResIcon;
 		}
 	}
 
@@ -288,13 +312,13 @@ public class TextRenderer {
 		}
 	}
 
-	private void drawShieldIcon(RenderingContext rc, Canvas cv, TextDrawInfo text, String sr) {
+	public void drawShieldIcon(RenderingContext rc, Canvas cv, TextDrawInfo text, String sr) {
 		if (sr != null) {
 			float coef = rc.getDensityValue(rc.screenDensityRatio * rc.textScale);
 			Bitmap ico = RenderingIcons.getIcon(context, sr, true);
 			if (ico != null) {
-				float left = text.centerX - ico.getWidth() / 2 * coef - 0.5f;
-				float top = text.centerY - ico.getHeight() / 2 * coef -  paintText.descent() - 0.5f;
+				float left = text.centerX - ico.getWidth() / 2 * coef;// - 0.5f;
+				float top = text.centerY - ico.getHeight() / 2 * coef -  paintText.descent() * 1.5f;
 				if(rc.screenDensityRatio != 1f){
 					RectF rf = new RectF(left, top, left + ico.getWidth() * coef, 
 							top + ico.getHeight() * coef);
@@ -308,7 +332,7 @@ public class TextRenderer {
 		}
 	}
 
-	private void drawWrappedText(Canvas cv, TextDrawInfo text, float textSize) {
+	public void drawWrappedText(Canvas cv, TextDrawInfo text, float textSize) {
 		if (text.textWrap == 0) {
 			// set maximum for all text
 			text.textWrap = 40;

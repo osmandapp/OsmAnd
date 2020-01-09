@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.Nullable;
 
 import net.osmand.Location;
+import net.osmand.PlatformUtil;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
 import net.osmand.binary.RouteDataObject;
@@ -14,11 +15,14 @@ import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.routing.AlarmInfo.AlarmInfoType;
+import net.osmand.router.ExitInfo;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.RoutingContext;
 import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
+
+import org.apache.commons.logging.Log;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -27,6 +31,8 @@ import java.util.List;
 import static net.osmand.binary.RouteDataObject.HEIGHT_UNDEFINED;
 
 public class RouteCalculationResult {
+	private final static Log log = PlatformUtil.getLog(RouteCalculationResult.class);
+
 	private static double distanceClosestToIntermediate = 3000;
 	private static double distanceThresholdToIntermediate = 25;
 	// could not be null and immodifiable!
@@ -318,15 +324,55 @@ public class RouteCalculationResult {
 						info.routeEndPointOffset = roundAboutEnd;
 					}
 					RouteSegmentResult next = list.get(lind);
-					info.setRef(next.getObject().getRef(ctx.getSettings().MAP_PREFERRED_LOCALE.get(), 
-							ctx.getSettings().MAP_TRANSLITERATE_NAMES.get(), next.isForwardDirection()));
+					String ref = next.getObject().getRef(ctx.getSettings().MAP_PREFERRED_LOCALE.get(),
+							ctx.getSettings().MAP_TRANSLITERATE_NAMES.get(), next.isForwardDirection());
+					info.setRef(ref);
 					info.setStreetName(next.getObject().getName(ctx.getSettings().MAP_PREFERRED_LOCALE.get(), 
 							ctx.getSettings().MAP_TRANSLITERATE_NAMES.get()));
 					info.setDestinationName(next.getObject().getDestinationName(ctx.getSettings().MAP_PREFERRED_LOCALE.get(),
 							ctx.getSettings().MAP_TRANSLITERATE_NAMES.get(), next.isForwardDirection()));
+					if (s.getObject().isExitPoint() && next.getObject().getHighway().equals("motorway_link")) {
+						ExitInfo exitInfo = new ExitInfo();
+						exitInfo.setRef(next.getObject().getExitRef());
+						exitInfo.setExitStreetName(next.getObject().getExitName());
+						info.setExitInfo(exitInfo);
+					}
+
+					if (ref != null) {
+						RouteDataObject nextRoad = next.getObject();
+						boolean isNextShieldFound = false;
+						int[] nextSegmentNameIds = nextRoad.nameIds;
+						for (int nm = 0; nm < nextSegmentNameIds.length; nm++) {
+							if (nextRoad.region.quickGetEncodingRule(nextSegmentNameIds[nm]).getTag().startsWith("road_ref")) {
+								info.setRouteDataObject(nextRoad);
+								isNextShieldFound = true;
+							}
+						}
+
+						if (!isNextShieldFound) {
+							for (int ind = lind; ind < list.size(); ind++) {
+								if (list.get(ind).getTurnType() != null) {
+									info.setRouteDataObject(null);
+									break;
+								} else {
+									RouteDataObject obj = list.get(ind).getObject();
+									int[] nameIds = obj.nameIds;
+									for (int idx = 0; idx < nameIds.length; idx ++) {
+										if (obj.region.routeEncodingRules.get(obj.nameIds[idx]).getTag().startsWith("road_ref")) {
+											info.setRouteDataObject(obj);
+											break;
+										}
+									}
+									if (info.getRouteDataObject() != null) {
+										break;
+									}
+								}
+							}
+						}
+					}
 				}
 
-		                String description = toString(turn, ctx, false) + " " + RoutingHelper.formatStreetName(info.getStreetName(),
+				String description = toString(turn, ctx, false) + " " + RoutingHelper.formatStreetName(info.getStreetName(),
 						info.getRef(), info.getDestinationName(), ctx.getString(R.string.towards));
 				description = description.trim();
 				String[] pointNames = s.getObject().getPointNames(s.getStartPointIndex());

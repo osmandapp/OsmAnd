@@ -115,6 +115,14 @@ public class JSCommandBuilder extends CommandBuilder {
         return addCommand(C_TURN, param, dist, convertStreetName(streetName));
     }
 
+    public JSCommandBuilder takeExit(String turnType, StreetName streetName) {
+        return takeExit(turnType, -1, streetName);
+    }
+
+    public JSCommandBuilder takeExit(String turnType, double dist, StreetName streetName) {
+        return addCommand(C_TAKE_EXIT, turnType, dist, convertStreetName(streetName));
+    }
+
     /**
      *
      * @param param A_LEFT, A_RIGHT, ...
