@@ -152,13 +152,13 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 		LatLon ll = new LatLon(point.getLatitude(), point.getLongitude());
 		switch (pointType) {
 			case START:
-				targetPointsHelper.setStartPoint(ll, true, point.getPointDescription(mapActivity));
+				targetPointsHelper.setStartPoint(ll, true, point.getPointDescription(requireActivity()));
 				break;
 			case TARGET:
-				targetPointsHelper.navigateToPoint(ll, true, -1, point.getPointDescription(mapActivity));
+				targetPointsHelper.navigateToPoint(ll, true, -1, point.getPointDescription(requireActivity()));
 				break;
 			case INTERMEDIATE:
-				targetPointsHelper.navigateToPoint(ll, true, targetPointsHelper.getIntermediatePoints().size(), point.getPointDescription(mapActivity));
+				targetPointsHelper.navigateToPoint(ll, true, targetPointsHelper.getIntermediatePoints().size(), point.getPointDescription(requireActivity()));
 				break;
 			case HOME:
 				favorites.setSpecialPoint(ll, FavouritePoint.SpecialPointType.HOME, null);

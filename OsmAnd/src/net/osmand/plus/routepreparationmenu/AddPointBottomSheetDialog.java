@@ -474,7 +474,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 		if (item instanceof FavouritePoint) {
 			FavouritePoint point = (FavouritePoint) item;
 			ll = new LatLon(point.getLatitude(), point.getLongitude());
-			name = point.getPointDescription(mapActivity);
+			name = point.getPointDescription(requireActivity());
 		} else if (item instanceof PointType) {
 			MapActivity mapActivity = (MapActivity) getActivity();
 			if (mapActivity != null) {
