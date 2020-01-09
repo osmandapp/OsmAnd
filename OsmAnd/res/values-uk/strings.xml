@@ -3408,7 +3408,7 @@
     <string name="choose_icon_color_name">Оберіть образок, барву та назву</string>
     <string name="reorder_profiles">Редагувати список профілів</string>
     <string name="selected_profile">Вибраний профіль</string>
-    <string name="reset_confirmation_descr">Натискаючи %1$, ви втратите всі свої зміни.</string>
+    <string name="reset_confirmation_descr">Натискаючи %1$s, ви втратите всі свої зміни.</string>
     <string name="reset_all_profile_settings_descr">Усі налаштування профілю буде скинуто після встановлення.</string>
     <string name="reset_all_profile_settings">Скинути всі усталені налаштування профілю\?</string>
 </resources>
