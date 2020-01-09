@@ -14,6 +14,7 @@ import net.osmand.telegram.R
 import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.helpers.OsmandAidlHelper.ContextMenuButtonsListener
 import net.osmand.telegram.helpers.TelegramUiHelper.ListItem
+import net.osmand.telegram.ui.OPEN_MY_LOCATION_TAB_KEY
 import net.osmand.telegram.utils.AndroidUtils
 import net.osmand.telegram.utils.OsmandFormatter
 import net.osmand.telegram.utils.OsmandLocationUtils
@@ -255,6 +256,7 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 	private fun getStatusWidgetIntent(): Intent {
 		val startIntent = app.packageManager.getLaunchIntentForPackage(app.packageName)
 		startIntent.addCategory(Intent.CATEGORY_LAUNCHER)
+		startIntent.putExtra(OPEN_MY_LOCATION_TAB_KEY,true)
 		return startIntent
 	}
 

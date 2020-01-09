@@ -225,10 +225,10 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 		updateWidgetHandler?.postDelayed({
 			if (isUsedByMyLocation(usedBy)) {
 				val sharingStatus = app().settings.sharingStatusChanges.last()
-				val isSending = sharingStatus.statusType == TelegramSettings.SharingStatusType.SENDING
+				var isSending = sharingStatus.statusType == TelegramSettings.SharingStatusType.SENDING
 				val sharingChats = app().settings.getShareLocationChats()
 				var oldestTime = 0L
-				if (sharingChats.isNotEmpty()) {
+				if (sharingChats.isNotEmpty() && app().shareLocationHelper.sharingLocation) {
 					sharingChats.forEach { id ->
 						val bufferMessages = app().locationMessages.getBufferedMessagesForChat(id)
 						if (bufferMessages.isNotEmpty()) {
@@ -240,6 +240,9 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 							oldestTime = 0L
 						}
 					}
+				} else {
+					isSending = false
+					oldestTime = -1
 				}
 				log.info("oldest buffered msg time: $oldestTime | isSending: $isSending")
 				app().showLocationHelper.addOrUpdateStatusWidget(oldestTime, isSending)
