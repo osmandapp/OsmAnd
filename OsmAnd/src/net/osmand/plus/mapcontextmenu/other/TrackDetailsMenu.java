@@ -586,7 +586,7 @@ public class TrackDetailsMenu {
 				switch (gpxItem.chartTypes[i]) {
 					case ALTITUDE:
 						dataSet = GpxUiHelper.createGPXElevationDataSet(app, chart, analysis,
-								gpxItem.chartAxisType, false, true);
+								gpxItem.chartAxisType, false, true, false);
 						break;
 					case SPEED:
 						dataSet = GpxUiHelper.createGPXSpeedDataSet(app, chart, analysis,
@@ -594,7 +594,7 @@ public class TrackDetailsMenu {
 						break;
 					case SLOPE:
 						dataSet = GpxUiHelper.createGPXSlopeDataSet(app, chart, analysis,
-								gpxItem.chartAxisType, null, gpxItem.chartTypes.length > 1, true);
+								gpxItem.chartAxisType, null, gpxItem.chartTypes.length > 1, true, false);
 						break;
 				}
 				if (dataSet != null) {
