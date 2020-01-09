@@ -82,7 +82,7 @@ public class FavoriteDialogs {
 				if (helper.editFavourite(fp, point.getLatitude(), point.getLongitude())) {
 					if (activity instanceof MapActivity) {
 						((MapActivity) activity).getContextMenu()
-								.show(new LatLon(point.getLatitude(), point.getLongitude()), fp.getPointDescription(), fp);
+								.show(new LatLon(point.getLatitude(), point.getLongitude()), fp.getPointDescription(activity), fp);
 					}
 				}
 				if (activity instanceof MapActivity) {

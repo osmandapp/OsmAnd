@@ -85,10 +85,6 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		this.address = address;
 	}
 
-	public PointDescription getPointDescription() {
-		return new PointDescription(PointDescription.POINT_TYPE_FAVORITE, getName());
-	}
-
 	public boolean isAddressSpecified() {
 		return !Algorithms.isEmpty(address);
 	}

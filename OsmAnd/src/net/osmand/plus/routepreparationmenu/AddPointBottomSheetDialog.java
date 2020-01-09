@@ -474,7 +474,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 		if (item instanceof FavouritePoint) {
 			FavouritePoint point = (FavouritePoint) item;
 			ll = new LatLon(point.getLatitude(), point.getLongitude());
-			name = point.getPointDescription();
+			name = point.getPointDescription(mapActivity);
 		} else if (item instanceof PointType) {
 			MapActivity mapActivity = (MapActivity) getActivity();
 			if (mapActivity != null) {
@@ -489,7 +489,7 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 				}
 				if (point != null) {
 					ll = new LatLon(point.getLatitude(), point.getLongitude());
-					name = point.getPointDescription();
+					name = point.getPointDescription(mapActivity);
 				}
 			}
 		}
