@@ -24,8 +24,8 @@
     <string name="left_side_navigation_descr">Для країн з лівостороннім рухом.</string>
     <string name="unknown_from_location">Початкове місцезнаходження ще не визначено.</string>
     <string name="unknown_location">Розташування ще не визначено.</string>
-    <string name="modify_transparency">Змінити прозорість (0 - прозорий, 255 - непрозорий)</string>
-    <string name="confirm_interrupt_download">Скасувати завантаження файлу?</string>
+    <string name="modify_transparency">Встановити прозорість (0 – прозорий, 255 – непрозорий)</string>
+    <string name="confirm_interrupt_download">Скасувати завантаження\?</string>
     <string name="first_time_msg">Дякуємо за використання OsmAnd. Завантажуйте регіональні дані для використання в автономному режимі за допомогою пункту меню \'Налаштування\' → \'Управління мапами\' для перегляду мап, пошуку адрес, POI, громадського транспорту тощо.</string>
     <string name="basemap_was_selected_to_download">Базова мапа вибрана для завантаження, оскільки необхідна для коректної роботи додатку.</string>
     <string name="select_index_file_to_download">Нічого не знайдено. Якщо ви не знайшли свій регіон, ви можете створити його самостійно (див. https://osmand.net).</string>
@@ -918,78 +918,26 @@
     <string name="osmand_plus_play_title_30_chars">OsmAnd+ Мапи і Навігація</string>
     <string name="layer_hillshade">Шар рельєфа місцевості</string>
     <string name="download_regular_maps">Стандартна мапа</string>
-    <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Navigation Directions) 
-\n 
-\n 
-\n 
-\n 
-\n 
-\n 
-\n 
-\n 
-\n 
-\nOsmAnd — навігаційне програмне забезпечення з відкритим кодом з доступом до різноманітних картографічних даних від OpenStreetMap (OSM). Всі землеписні дані (векторні та растрові) можуть бути збережені на карті пам’яті телефону для подальшого автономного використання. Також пропонується функція маршрутизації в автономному режимі та в мережевому режимі, включаючи покрокові голосові підказки. 
-\n 
-\n 
-\n 
-\n 
-\n 
-\n 
-\n 
-\n 
-\n 
-\nКілька основних можливостей: 
-\n 
-\n 
-\n 
-\n 
-\n- повноцінна робота без інтернет-з’єднання (просто збережіть векторні чи растрові дані на пристрій) 
-\n 
-\n 
-\n- доступні компактні автономні векторні мапи всього світу 
-\n 
-\n 
-\n- завантаження мап країн чи областей безпосередньо в програмі 
-\n 
-\n 
-\n- можливе накладання декількох шарів карти, такі як GPX- або навігаційні треки, POI, Закладки, поземистості, зупинки громадського транспорту, додаткові карти з налаштовуваною прозорістю 
-\n 
-\n 
-\n- автономний пошук адрес та POI 
-\n 
-\n 
-\n- автономне прокладання маршрутів середньої дальності 
-\n 
-\n 
-\n- режими для пішохідної, автомобільної та велонавігації з опціональними: - самочинним перемиканням до денного/нічного режиму мапи 
-\n 
-\n 
-\n- самомасштабуванням мапи відповідно до швидкості руху 
-\n 
-\n 
-\n- можливістю орієнтації мапи за компасом чи напрямком руху 
-\n 
-\n 
-\n- веденням по смугах руху, відображенням обмежень швидкості, записаними та синтезованими голосами супроводу 
-\n 
-\n 
-\n 
-\n 
-\n 
-\n 
-\n 
-\nОбмеження цієї безкоштовної версії OsmAnd: 
-\n 
-\n 
-\n- кількість завантажень мап є обмеженою 
-\n 
-\n 
-\n- відсутній автономний доступ до POI з Вікіпедії 
-\n 
-\n 
-\n 
-\n 
-\n 
+    <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Navigation Directions)
+\n
+\nOsmAnd — навігаційне програмне забезпечення з відкритим кодом з доступом до різноманітних картографічних даних від OpenStreetMap (OSM). Всі землеписні дані (векторні та растрові) можуть бути збережені на карті пам’яті телефону для подальшого автономного використання. Також пропонується функція маршрутизації в автономному режимі та в мережевому режимі, включаючи покрокові голосові підказки.
+\n
+\nКілька основних можливостей:
+\n- повноцінна робота без інтернет-з’єднання (просто збережіть векторні чи растрові дані на пристрій)
+\n- доступні компактні автономні векторні мапи всього світу
+\n- завантаження мап країн чи областей безпосередньо в програмі
+\n- можливе накладання декількох шарів карти, такі як GPX- або навігаційні треки, POI, Закладки, поземистості, зупинки громадського транспорту, додаткові карти з налаштовуваною прозорістю
+\n- автономний пошук адрес та POI
+\n- автономне прокладання маршрутів середньої дальності
+\n- режими для пішохідної, автомобільної та велонавігації з опціональними: - самочинним перемиканням до денного/нічного режиму мапи
+\n- самомасштабуванням мапи відповідно до швидкості руху
+\n- можливістю орієнтації мапи за компасом чи напрямком руху
+\n- веденням по смугах руху, відображенням обмежень швидкості, записаними та синтезованими голосами супроводу
+\n
+\nОбмеження цієї безкоштовної версії OsmAnd:
+\n- кількість завантажень мап є обмеженою
+\n- відсутній автономний доступ до POI з Вікіпедії
+\n
 \nOsmAnd активно розвивається, і наш проєкт та його подальший розвиток покладається на фінансові внески на розробку та тестування. Будь ласка, розгляньте можливість придбання OsmAnd+, профінансуйте конкретні нові можливості програми або зробіть благодійний внесок на https://osmand.net.</string>
     <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions) 
 \n 
@@ -1359,7 +1307,7 @@
     <string name="rendering_value_pedestrian_name">Пішки</string>
     <string name="record_plugin_description">Цей втулок задіює можливість записувати та зберігати ваші треки вручну, торкаючись віджету часопису GPX на екрані мапи, або самочинно записувати всі ваші подорожі у файл GPX. 
 \n 
-\nЗаписаними треками можна поділитись з вашими друзями або іншими учасниками спільноти OSM. Атлети можуть використовувати записані треки для відстежування власних тренувань. Базовий аналіз треків наявний безпосередньо в OsmAnd, наприклад: час проходження кола, середня швидкість й т.п., звісно, записані треки можна також проаналізувати за допомогою іншого програмного забезпечення.</string>
+\nЗаписаними треками можна поділитись з вашими друзями або іншими учасниками спільноти OSM. Атлети можуть використовувати записані треки для відстежування власних тренувань. Основний розбір треків наявний безпосередньо в OsmAnd, наприклад: час проходження кола, середня швидкість й т.п., звісно, записані треки можна також проаналізувати за допомогою іншого програмного забезпечення.</string>
     <string name="save_track_to_gpx_globally">Писати трек у файл GPX</string>
     <string name="save_track_to_gpx_globally_descr">Загальний запис розташування до файлу GPX можна ввімкнути або вимкнути кнопкою часопису GPX на екрані з мапою.</string>
     <string name="save_track_interval_globally">Інтервал записування</string>
@@ -2909,7 +2857,7 @@
     <string name="use_osm_live_public_transport_description">Увімкнути громадський транспорт із врахуванням авто-оновлень OsmAnd Live.</string>
     <string name="use_osm_live_public_transport">Громадський транспорт OsmAnd Live</string>
     <string name="step_by_step">По черзі</string>
-    <string name="routeInfo_road_types_name">Типи доріг</string>
+    <string name="routeInfo_road_types_name">Види доріг</string>
     <string name="exit_at">Вихід на</string>
     <string name="sit_on_the_stop">Посадка на зупинці</string>
     <string name="shared_string_swap">Поміняти</string>
@@ -2947,7 +2895,7 @@
     <string name="quick_action_switch_day_mode">Денний режим</string>
     <string name="quick_action_switch_night_mode">Нічний режим</string>
     <string name="quick_action_day_night_switch_mode">Перемкнути Денний/Нічний режим</string>
-    <string name="routeInfo_roadClass_name">Тип дороги</string>
+    <string name="routeInfo_roadClass_name">Вид дороги</string>
     <string name="routeInfo_surface_name">Поверхня</string>
     <string name="routeInfo_smoothness_name">Рівність</string>
     <string name="routeInfo_steepness_name">Крутість</string>
@@ -2978,14 +2926,14 @@
     <string name="rendering_attr_surface_paving_stones_name">Тротуарна плитка</string>
     <string name="rendering_attr_surface_pebblestone_name">Галька</string>
     <string name="rendering_attr_surface_stone_name">Камінь</string>
-    <string name="rendering_attr_surface_metal_name">Метал</string>
+    <string name="rendering_attr_surface_metal_name">Ковань</string>
     <string name="rendering_attr_surface_wood_name">Дерево</string>
     <string name="rendering_attr_surface_gravel_name">Гравій</string>
     <string name="rendering_attr_surface_fine_gravel_name">Багатошаровий гравій</string>
-    <string name="rendering_attr_surface_compacted_name">Втрамбована</string>
+    <string name="rendering_attr_surface_compacted_name">Ущільнена</string>
     <string name="rendering_attr_smoothness_excellent_name">Чудова</string>
     <string name="rendering_attr_smoothness_good_name">Хороша</string>
-    <string name="rendering_attr_smoothness_intermediate_name">Середня</string>
+    <string name="rendering_attr_smoothness_intermediate_name">Посередньо</string>
     <string name="rendering_attr_smoothness_bad_name">Погана</string>
     <string name="rendering_attr_smoothness_very_bad_name">Дуже погана</string>
     <string name="rendering_attr_smoothness_horrible_name">Жахлива</string>
@@ -2995,7 +2943,7 @@
     <string name="rendering_attr_highway_class_road_name">Дорога</string>
     <string name="rendering_attr_highway_class_street_name">Вулиця</string>
     <string name="rendering_attr_highway_class_service_name">Проїзд</string>
-    <string name="rendering_attr_highway_class_footway_name">Тротуар</string>
+    <string name="rendering_attr_highway_class_footway_name">Пішохідна доріжка</string>
     <string name="rendering_attr_highway_class_steps_name">Сходи</string>
     <string name="waiting_for_route_calculation">Розрахунок маршруту…</string>
     <string name="shared_string_description">Опис</string>
@@ -3029,7 +2977,7 @@
     <string name="save_poi_value_exceed_length_title">Довжина значення \"%s\"</string>
     <string name="rendering_attr_surface_cobblestone_name">Мостова</string>
     <string name="rendering_attr_highway_class_state_road_name">Державна дорога</string>
-    <string name="rendering_attr_highway_class_track_name">Сільськогосподарська</string>
+    <string name="rendering_attr_highway_class_track_name">Трек</string>
     <string name="rendering_attr_highway_class_bridleway_name">Кінна</string>
     <string name="rendering_attr_highway_class_path_name">Стежка</string>
     <string name="rendering_attr_highway_class_cycleway_name">Велодоріжка</string>
@@ -3111,7 +3059,7 @@
     <string name="settings_derived_routing_mode_string">Користувацький режим, похідний від: %s</string>
     <string name="routing_profile_ski">Лижі</string>
     <string name="profile_type_descr_string">Тип: %s</string>
-    <string name="profile_type_base_string">Базовий профіль</string>
+    <string name="profile_type_base_string">Основний профіль</string>
     <string name="profile_alert_need_routing_type_title">Оберіть тип навігації</string>
     <string name="profile_alert_need_routing_type_msg">Оберіть тип навігації для нового профілю додатку</string>
     <string name="profile_alert_need_profile_name_title">Введіть назву профілю</string>
@@ -3335,8 +3283,8 @@
     <string name="internal_app_storage_description">Внутрішнє сховище, приховане від користувачів та інших додатків, доступне виключно OsmAnd</string>
     <string name="change_data_storage_folder">Зміна теки сховища даних</string>
     <string name="rendering_attr_piste_type_snow_park_name">Ландшафтний парк</string>
-    <string name="rendering_attr_piste_type_sleigh_name">Сани</string>
-    <string name="rendering_attr_piste_type_sled_name">Санки</string>
+    <string name="rendering_attr_piste_type_sleigh_name">Запряжені сани, санчата</string>
+    <string name="rendering_attr_piste_type_sled_name">Тільки санки, санчата</string>
     <string name="rendering_attr_piste_type_hike_name">Похід</string>
     <string name="rendering_attr_piste_type_connection_name">З\'єднання</string>
     <string name="rendering_attr_piste_type_skitour_name">Лижні мандри</string>
@@ -3435,7 +3383,7 @@
     <string name="suggested_maps">Пропоновані мапи</string>
     <string name="suggested_maps_descr">Ці мапи потрібно використовувати з втулком</string>
     <string name="added_profiles">Додані профілі</string>
-    <string name="added_profiles_descr">Втулка додає новий профіль до OsmAnd</string>
+    <string name="added_profiles_descr">Плагін додає новий профіль до OsmAnd</string>
     <string name="shared_string_turn_off">Вимкнути</string>
     <string name="new_plugin_added">Нова втулка додана</string>
     <string name="join_segments">Приєднати частки</string>
@@ -3460,4 +3408,7 @@
     <string name="choose_icon_color_name">Оберіть образок, барву та назву</string>
     <string name="reorder_profiles">Редагувати список профілів</string>
     <string name="selected_profile">Вибраний профіль</string>
+    <string name="reset_confirmation_descr">Натискаючи %1$, ви втратите всі свої зміни.</string>
+    <string name="reset_all_profile_settings_descr">Усі налаштування профілю буде скинуто після встановлення.</string>
+    <string name="reset_all_profile_settings">Скинути всі усталені налаштування профілю\?</string>
 </resources>

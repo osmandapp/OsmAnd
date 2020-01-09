@@ -3391,7 +3391,7 @@ Pôr do Sol: %2$s</string>
     <string name="personal_category_name">Pessoal</string>
     <string name="shared_string_downloading_formatted">Baixando %s</string>
     <string name="rendering_value_thick_name">Grosso</string>
-    <string name="desert_render_descr">Para desertos e outras áreas escassamente povoadas.</string>
+    <string name="desert_render_descr">Para desertos e outras áreas escassamente povoadas. Exibe mais detalhes em uma escala de visualização.</string>
     <string name="select_navigation_icon">Selecionar ícone de navegação</string>
     <string name="select_map_icon">Selecione o ícone do mapa</string>
     <string name="delete_profiles_descr">Depois de tocar em Aplicar, os perfis excluídos serão perdidos completamente.</string>
@@ -3404,4 +3404,7 @@ Pôr do Sol: %2$s</string>
     <string name="choose_icon_color_name">Escolha ícone, cor e nome</string>
     <string name="reorder_profiles">Editar lista de perfis</string>
     <string name="selected_profile">Perfil selecionado</string>
+    <string name="reset_confirmation_descr">Ao clicar em %1$s, você perderá todas as suas alterações.</string>
+    <string name="reset_all_profile_settings_descr">Todas as configurações de perfil serão redefinidas para o estado após a instalação.</string>
+    <string name="reset_all_profile_settings">Redefinir todas as configurações de perfil para o padrão\?</string>
 </resources>

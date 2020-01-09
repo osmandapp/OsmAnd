@@ -52,6 +52,12 @@ public class UiUtilities {
 		STROKED
 	}
 
+	public enum CompoundButtonType {
+		GLOBAL,
+		PROFILE_DEPENDENT,
+		TOOLBAR
+	}
+
 	public UiUtilities(OsmandApplication app) {
 		this.app = app;
 	}
@@ -335,23 +341,45 @@ public class UiUtilities {
 		DrawableCompat.setTintList(DrawableCompat.wrap(drawable), csl);
 	}
 
-	public static void setupCompoundButton(OsmandApplication app, CompoundButton compoundButton, boolean nightMode, boolean profileDependent) {
-		if (compoundButton == null) {
-			return;
-		}
-		int activeColor = profileDependent ? 
-				app.getSettings().APPLICATION_MODE.get().getIconColorInfo().getColor(nightMode) : 
-				nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light;
-		setupCompoundButton(nightMode, ContextCompat.getColor(app, activeColor), compoundButton);
-	}
-
 	public static void setupCompoundButton(boolean nightMode, @ColorInt int activeColor, CompoundButton compoundButton) {
-		if (compoundButton == null) {
-			return;
-		}
-		Context ctx = compoundButton.getContext();
+	    if (compoundButton == null) {
+	        return;
+        }
+	    Context ctx = compoundButton.getContext();
 		int inactiveColorPrimary = ContextCompat.getColor(ctx, nightMode ? R.color.icon_color_default_dark : R.color.icon_color_secondary_light);
 		int inactiveColorSecondary = getColorWithAlpha(inactiveColorPrimary, 0.45f);
+		setupCompoundButton(compoundButton, activeColor, inactiveColorPrimary, inactiveColorSecondary);
+	}
+
+	public static void setupCompoundButton(CompoundButton compoundButton, boolean nightMode, CompoundButtonType type) {
+		if (compoundButton == null) {
+			return;
+		}
+		OsmandApplication app = (OsmandApplication) compoundButton.getContext().getApplicationContext();
+		@ColorInt int activeColor = ContextCompat.getColor(app, nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light);
+		@ColorInt int inactiveColorPrimary = ContextCompat.getColor(app, nightMode ? R.color.icon_color_default_dark : R.color.icon_color_secondary_light);
+		@ColorInt int inactiveColorSecondary = getColorWithAlpha(inactiveColorPrimary, 0.45f);
+		switch (type) {
+			case PROFILE_DEPENDENT:
+				ApplicationMode appMode = app.getSettings().getApplicationMode();
+				activeColor = ContextCompat.getColor(app, appMode.getIconColorInfo().getColor(nightMode));
+				break;
+			case TOOLBAR:
+				activeColor = ContextCompat.getColor(app, nightMode ? R.color.text_color_tab_active_dark : R.color.text_color_tab_active_light);
+				inactiveColorPrimary = activeColor;
+				inactiveColorSecondary = UiUtilities.getColorWithAlpha(Color.BLACK, 0.25f);
+				break;
+		}
+		setupCompoundButton(compoundButton, activeColor, inactiveColorPrimary, inactiveColorSecondary);
+	}
+
+	public static void setupCompoundButton(CompoundButton compoundButton,
+										   @ColorInt int activeColor,
+										   @ColorInt int inactiveColorPrimary,
+										   @ColorInt int inactiveColorSecondary) {
+		if (compoundButton == null) {
+			return;
+		}
 		int[][] states = new int[][] {
 				new int[] {-android.R.attr.state_checked},
 				new int[] {android.R.attr.state_checked}

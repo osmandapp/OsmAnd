@@ -50,7 +50,13 @@ public class FileSettingsAPIImpl implements SettingsAPI {
 				modified.put(wrap(pref,key), null);
 				return this;
 			}
-			
+
+			@Override
+			public SettingsEditor clear() {
+				modified.clear();
+				return this;
+			}
+
 			@Override
 			public SettingsEditor putString(String key, String value) {
 				modified.put(wrap(pref,key), value);

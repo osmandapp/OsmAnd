@@ -952,6 +952,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			tbh = (int) (tileBoxHeightPx * border);
 			dy = (tb.getPixHeight() - tileBoxHeightPx) / 2 - marginTopPx;
 		}
+		dy += tb.getCenterPixelY() - tb.getPixHeight() / 2;
 		tb.setPixelDimensions(tbw, tbh);
 
 		double clat = bottom / 2 + top / 2;
@@ -983,6 +984,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			tbh = (int) (tileBoxHeightPx * border);
 			dy = (tb.getPixHeight() - tileBoxHeightPx) / 2 - marginTopPx;
 		}
+		dy += tb.getCenterPixelY() - tb.getPixHeight() / 2;
 		tb.setPixelDimensions(tbw, tbh);
 
 		if (dy != 0) {
@@ -1006,6 +1008,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			tbh = tileBoxHeightPx;
 			dy = (tb.getPixHeight() - tileBoxHeightPx) / 2 - marginTopPx;
 		}
+		dy += tb.getCenterPixelY() - tb.getPixHeight() / 2;
 		tb.setPixelDimensions(tbw, tbh);
 		tb.setLatLonCenter(clat, clon);
 		tb.setZoom(zoom);

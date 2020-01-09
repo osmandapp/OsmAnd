@@ -14,13 +14,14 @@ import net.osmand.telegram.helpers.TelegramHelper
 import net.osmand.telegram.utils.*
 import net.osmand.telegram.utils.OsmandFormatter.MetricsConstants
 import net.osmand.telegram.utils.OsmandFormatter.SpeedConstants
-import net.osmand.telegram.utils.OsmandLocationUtils
 import org.drinkless.td.libcore.telegram.TdApi
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
+import java.util.*
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.ConcurrentLinkedQueue
+import kotlin.collections.ArrayList
 
 val ADDITIONAL_ACTIVE_TIME_VALUES_SEC = listOf(15 * 60L, 30 * 60L, 60 * 60L, 180 * 60L)
 
@@ -110,6 +111,8 @@ private const val WAITING_TDLIB_TIME = 30 // 2 seconds
 
 private const val GPS_UPDATE_EXPIRED_TIME = 60 * 3L // 3 minutes
 
+private const val LAST_CHATS_INFO_KEY = "last_chats_info"
+
 class TelegramSettings(private val app: TelegramApplication) {
 
 	private val log = PlatformUtil.getLog(TelegramSettings::class.java)
@@ -118,6 +121,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 	private var hiddenOnMapChats: Set<Long> = emptySet()
 	private var shareDevices: Set<DeviceBot> = emptySet()
 	private var liveTracksInfo = emptyList<LiveTrackInfo>()
+	var lastChatsInfo = LinkedList<LastChatInfo>()
 
 	var sharingStatusChanges = ConcurrentLinkedQueue<SharingStatus>()
 
@@ -661,6 +665,11 @@ class TelegramSettings(private val app: TelegramApplication) {
 			edit.putString(LIVE_TRACKS_KEY, jsonArrayLiveTracks.toString())
 		}
 
+		val jArrayLastInfo = convertLastChatsInfoToJson()
+		if (jArrayLastInfo != null) {
+			edit.putString(LAST_CHATS_INFO_KEY, jArrayLastInfo.toString())
+		}
+
 		edit.apply()
 	}
 
@@ -686,6 +695,12 @@ class TelegramSettings(private val app: TelegramApplication) {
 			parseShareChatsInfo(JSONArray(prefs.getString(SHARE_CHATS_INFO_KEY, "")))
 		} catch (e: JSONException) {
 			e.printStackTrace()
+		}
+
+		try {
+			parseLastChatsInfo(JSONArray(prefs.getString(LAST_CHATS_INFO_KEY, "")))
+		} catch (e: JSONException) {
+			log.error(e)
 		}
 
 		parseShareDevices(prefs.getString(SHARE_DEVICES_KEY, ""))
@@ -830,6 +845,37 @@ class TelegramSettings(private val app: TelegramApplication) {
 		}
 	}
 
+	private fun convertLastChatsInfoToJson(): JSONArray? {
+		return try {
+			val jArray = JSONArray()
+			lastChatsInfo.forEach { lastInfo ->
+				val obj = JSONObject()
+				obj.put(LastChatInfo.CHAT_ID_KEY, lastInfo.chatId)
+				obj.put(LastChatInfo.PERIODS_KEY, convertPeriodsToJson(lastInfo.periods))
+				jArray.put(obj)
+			}
+			jArray
+		} catch (e: JSONException) {
+			log.error(e)
+			null
+		}
+	}
+
+	private fun convertPeriodsToJson(periods: LinkedList<Long>): JSONArray? {
+		return try {
+			val jArray = JSONArray()
+			for (i in 0 until periods.count()) {
+				val obj = JSONObject()
+				obj.put(i.toString(), periods[i])
+				jArray.put(obj)
+			}
+			jArray
+		} catch (e: JSONException) {
+			log.error(e)
+			null
+		}
+	}
+
 	private fun parseShareChatsInfo(json: JSONArray) {
 		for (i in 0 until json.length()) {
 			val obj = json.getJSONObject(i)
@@ -894,6 +940,71 @@ class TelegramSettings(private val app: TelegramApplication) {
 
 	private fun parseShareDevices(json: String) {
 		shareDevices = OsmandApiUtils.parseJsonContents(json).toHashSet()
+	}
+
+	private fun parseLastChatsInfo(json: JSONArray) {
+		for (i in 0 until json.length()) {
+			val obj = json.getJSONObject(i)
+			val lastInfo = LastChatInfo().apply {
+				chatId = obj.optLong(LastChatInfo.CHAT_ID_KEY)
+				periods = LinkedList<Long>()
+				val jsonArray = obj.getJSONArray(LastChatInfo.PERIODS_KEY)
+				for (j in 0 until jsonArray.length()) {
+					val o = jsonArray.get(j) as JSONObject
+					periods.addLast(o.optLong(j.toString()))
+				}
+			}
+			lastChatsInfo.addLast(lastInfo)
+		}
+	}
+
+	fun addTimePeriodToLastItem(id: Long, time: Long) {
+		val lastInfo = lastChatsInfo.find { it.chatId == id }
+		if (lastInfo == null) {
+			addItemToSuggested(id, time)
+		} else {
+			val index = lastChatsInfo.indexOf(lastInfo)
+			lastChatsInfo[index].periods = addTimeToPeriods(lastChatsInfo[index].periods, time)
+		}
+	}
+
+	private fun addItemToSuggested(id: Long, time: Long) {
+		val newLastInfo = LastChatInfo().apply {
+			chatId = id
+			periods = LinkedList<Long>().apply {
+				addFirst(time)
+			}
+		}
+		if (lastChatsInfo.size < 5) {
+			lastChatsInfo.addFirst(newLastInfo)
+		} else {
+			lastChatsInfo.removeLast()
+			lastChatsInfo.addFirst(newLastInfo)
+		}
+	}
+
+	private fun addTimeToPeriods(periods: LinkedList<Long>?, time: Long): LinkedList<Long> {
+		if (periods?.isNotEmpty() != null) {
+			return if (periods.size < 5) {
+				periods.addFirst(time)
+				periods
+			} else {
+				periods.removeLast()
+				periods.addFirst(time)
+				periods
+			}
+		}
+		return LinkedList<Long>().apply { addFirst(time) }
+	}
+
+	fun calcLivePeriod(periods: LinkedList<Long>): Long {
+		val sortedPeriods = periods.toLongArray()
+		sortedPeriods.sort()
+		return if (sortedPeriods.size % 2 == 0) {
+			(sortedPeriods[sortedPeriods.size / 2] + sortedPeriods[sortedPeriods.size / 2 - 1]) / 2
+		} else {
+			sortedPeriods[sortedPeriods.size / 2]
+		}
 	}
 
 	private fun getLiveNowChats() = app.telegramHelper.getMessagesByChatIds(locHistoryTime).keys
@@ -1395,6 +1506,17 @@ class TelegramSettings(private val app: TelegramApplication) {
 			internal const val PENDING_TEXT_MESSAGE_KEY = "pendingTextMessage"
 			internal const val PENDING_MAP_MESSAGE_KEY = "pendingMapMessage"
 			internal const val SENT_MESSAGES_KEY = "sentMessages"
+		}
+	}
+
+	class LastChatInfo {
+
+		var chatId = -1L
+		var periods = LinkedList<Long>()
+
+		companion object {
+			internal const val CHAT_ID_KEY = "chatId"
+			internal const val PERIODS_KEY = "periods"
 		}
 	}
 }

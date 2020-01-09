@@ -2,6 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:paddingTop="@dimen/content_padding"
+    android:paddingLeft="@dimen/content_padding"
+    android:paddingRight="@dimen/content_padding"
     android:orientation="vertical">
 
     <TextView
@@ -9,6 +12,7 @@
         android:gravity="center"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:textColor="?android:textColorSecondary"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="5dp" />
@@ -17,30 +21,33 @@
         android:id="@+id/ZoomToDownload"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="5dp" />
+        android:layout_marginLeft="@dimen/content_padding"
+        android:layout_marginRight="@dimen/content_padding"
+        android:layout_marginTop="@dimen/content_padding_small"/>
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="5dp">
+        android:layout_height="wrap_content">
 
         <TextView
             android:text="10"
-            android:gravity="left"
+            android:gravity="start"
             android:layout_weight="0.5"
             android:id="@+id/MinZoom"
+            android:textColor="?android:textColorSecondary"
+            android:paddingLeft="@dimen/content_padding_small"
+            android:paddingRight="@dimen/content_padding_small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <TextView
             android:text="15"
-            android:gravity="right"
+            android:gravity="end"
             android:layout_weight="0.5"
             android:id="@+id/MaxZoom"
+            android:textColor="?android:textColorSecondary"
+            android:paddingLeft="@dimen/content_padding_small"
+            android:paddingRight="@dimen/content_padding_small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
@@ -49,6 +56,8 @@
         android:text="@string/tiles_to_download_estimated_size"
         android:gravity="center"
         android:id="@+id/DownloadDescription"
+        android:layout_marginTop="@dimen/content_padding_small"
+        android:textColor="?android:textColorSecondary"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" />
 

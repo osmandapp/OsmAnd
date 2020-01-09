@@ -61,7 +61,8 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 	private RoutingHelper routingHelper;
 	private RoutingOptionsHelper routingOptionsHelper;
 	private ApplicationMode applicationMode;
-	@ColorRes private int selectedModeColorId;
+	@ColorRes
+	private int selectedModeColorId;
 	private MapActivity mapActivity;
 
 	@Override
@@ -166,15 +167,15 @@ public class RouteOptionsBottomSheet extends MenuBottomSheetDialogFragment {
 		final BottomSheetItemWithCompoundButton[] timeConditionalRoutingItem = new BottomSheetItemWithCompoundButton[1];
 		timeConditionalRoutingItem[0] = (BottomSheetItemWithCompoundButton) new BottomSheetItemWithCompoundButton.Builder()
 				.setCompoundButtonColorId(selectedModeColorId)
-				.setChecked(settings.ENABLE_TIME_CONDITIONAL_ROUTING.get())
+				.setChecked(settings.ENABLE_TIME_CONDITIONAL_ROUTING.getModeValue(applicationMode))
 				.setIcon(getContentIcon((optionsItem.getActiveIconId())))
 				.setTitle(getString(R.string.temporary_conditional_routing))
 				.setLayoutId(R.layout.bottom_sheet_item_with_switch_56dp)
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						boolean enabled = !settings.ENABLE_TIME_CONDITIONAL_ROUTING.get();
-						settings.ENABLE_TIME_CONDITIONAL_ROUTING.set(enabled);
+						boolean enabled = !settings.ENABLE_TIME_CONDITIONAL_ROUTING.getModeValue(applicationMode);
+						settings.ENABLE_TIME_CONDITIONAL_ROUTING.setModeValue(applicationMode, enabled);
 						timeConditionalRoutingItem[0].setChecked(enabled);
 						app.getRoutingHelper().recalculateRouteDueToSettingsChange();
 					}

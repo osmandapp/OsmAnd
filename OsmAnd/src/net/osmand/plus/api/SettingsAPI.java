@@ -13,6 +13,7 @@ public interface SettingsAPI {
 		public SettingsEditor putInt(String key, int value);
 		public SettingsEditor putLong(String key, long value);
 		public SettingsEditor remove(String key);
+		public SettingsEditor clear();
 		public boolean commit();
 	}
 	

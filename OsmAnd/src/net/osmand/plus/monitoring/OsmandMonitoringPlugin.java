@@ -45,6 +45,8 @@ import java.util.List;
 
 import gnu.trove.list.array.TIntArrayList;
 
+import static net.osmand.plus.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
+
 public class OsmandMonitoringPlugin extends OsmandPlugin {
 	public static final String ID = "osmand.monitoring";
 	public final static String OSMAND_SAVE_SERVICE_ACTION = "OSMAND_SAVE_SERVICE_ACTION";
@@ -466,12 +468,15 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 														  final int[] minutes, final ValueHolder<Boolean> choice,
 														  final ValueHolder<Integer> v,
 														  final boolean showTrackSelection, boolean nightMode) {
+		int textColorPrimary = ContextCompat.getColor(app, nightMode ? R.color.text_color_primary_dark : R.color.text_color_primary_light);
+		int textColorSecondary = ContextCompat.getColor(app, nightMode ? R.color.text_color_secondary_dark : R.color.text_color_secondary_light);
 		LinearLayout ll = new LinearLayout(uiCtx);
 		final int dp24 = AndroidUtils.dpToPx(uiCtx, 24f);
 		final int dp8 = AndroidUtils.dpToPx(uiCtx, 8f);
 		final TextView tv = new TextView(uiCtx);
 		tv.setPadding(dp24, dp8 * 2, dp24, dp8);
 		tv.setText(String.format(patternMsg, uiCtx.getString(R.string.int_continuosly)));
+		tv.setTextColor(textColorSecondary);
 
 		SeekBar sp = new SeekBar(uiCtx);
 		sp.setPadding(dp24 + dp8, dp8, dp24 + dp8, dp8);
@@ -524,7 +529,6 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		ll.setOrientation(LinearLayout.VERTICAL);
 		ll.addView(tv);
 		ll.addView(sp);
-		int textColorPrimary = ContextCompat.getColor(app, nightMode ? R.color.text_color_primary_dark : R.color.text_color_primary_light);
 		if (choice != null) {
 			final AppCompatCheckBox cb = new AppCompatCheckBox(uiCtx);
 			cb.setText(R.string.shared_string_remember_my_choice);
@@ -542,7 +546,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 
 				}
 			});
-			UiUtilities.setupCompoundButton(app, cb, nightMode, true);
+			UiUtilities.setupCompoundButton(cb, nightMode, PROFILE_DEPENDENT);
 			ll.addView(cb);
 		}
 
@@ -570,7 +574,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 					app.getSelectedGpxHelper().selectGpxFile(app.getSavingTrackHelper().getCurrentGpx(), isChecked, false);
 				}
 			});
-			UiUtilities.setupCompoundButton(app, cb, nightMode, true);
+			UiUtilities.setupCompoundButton(cb, nightMode, PROFILE_DEPENDENT);
 			ll.addView(cb);
 		}
 

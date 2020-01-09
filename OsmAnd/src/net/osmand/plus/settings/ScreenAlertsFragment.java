@@ -18,6 +18,8 @@ import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 
+import static net.osmand.plus.UiUtilities.CompoundButtonType.TOOLBAR;
+
 public class ScreenAlertsFragment extends BaseSettingsFragment {
 
 	public static final String TAG = ScreenAlertsFragment.class.getSimpleName();
@@ -78,7 +80,7 @@ public class ScreenAlertsFragment extends BaseSettingsFragment {
 
 		SwitchCompat switchView = (SwitchCompat) switchContainer.findViewById(R.id.switchWidget);
 		switchView.setChecked(checked);
-		UiUtilities.setupCompoundButton(isNightMode(), getActiveProfileColor(), switchView);
+		UiUtilities.setupCompoundButton(switchView, isNightMode(), TOOLBAR);
 
 		TextView title = switchContainer.findViewById(R.id.switchButtonText);
 		title.setText(checked ? R.string.shared_string_on : R.string.shared_string_off);

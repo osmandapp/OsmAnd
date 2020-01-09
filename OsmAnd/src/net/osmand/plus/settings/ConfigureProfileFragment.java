@@ -32,8 +32,8 @@ import android.widget.Toast;
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
-import net.osmand.aidl.OsmandAidlApi;
 import net.osmand.aidl.ConnectedApp;
+import net.osmand.aidl.OsmandAidlApi;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -45,6 +45,8 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.PluginActivity;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
+import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
+import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.plus.skimapsplugin.SkiMapsPlugin;
 
@@ -53,6 +55,7 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.util.List;
 
+import static net.osmand.plus.UiUtilities.CompoundButtonType.TOOLBAR;
 import static net.osmand.plus.profiles.EditProfileFragment.MAP_CONFIG;
 import static net.osmand.plus.profiles.EditProfileFragment.OPEN_CONFIG_ON_MAP;
 import static net.osmand.plus.profiles.EditProfileFragment.SCREEN_CONFIG;
@@ -69,6 +72,8 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 	private static final String SETTINGS_ACTIONS = "settings_actions";
 	private static final String CONFIGURE_MAP = "configure_map";
 	private static final String CONFIGURE_SCREEN = "configure_screen";
+	private static final String COPY_PROFILE_SETTINGS = "copy_profile_settings";
+	private static final String RESET_TO_DEFAULT = "reset_to_default";
 	private static final String EXPORT_PROFILE = "export_profile";
 	private static final String DELETE_PROFILE = "delete_profile";
 	private static final String PROFILE_APPEARANCE = "profile_appearance";
@@ -119,6 +124,12 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 		}
 	}
 
+	@Override
+	public void onPause() {
+		updateRouteInfoMenu();
+		super.onPause();
+	}
+
 	private void updateToolbarSwitch() {
 		View view = getView();
 		if (view == null) {
@@ -131,7 +142,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 
 		SwitchCompat switchView = switchContainer.findViewById(R.id.switchWidget);
 		switchView.setChecked(isChecked);
-		UiUtilities.setupCompoundButton(isNightMode(), getActiveProfileColor(), switchView);
+		UiUtilities.setupCompoundButton(switchView, isNightMode(), TOOLBAR);
 
 		TextView title = switchContainer.findViewById(R.id.switchButtonText);
 		title.setText(isChecked ? R.string.shared_string_on : R.string.shared_string_off);
@@ -209,6 +220,8 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 		PreferenceCategory settingsActions = (PreferenceCategory) findPreference(SETTINGS_ACTIONS);
 		settingsActions.setIconSpaceReserved(false);
 
+		setupCopyProfileSettingsPref();
+		setupResetToDefaultPref();
 		setupExportProfilePref();
 		setupDeleteProfilePref();
 	}
@@ -259,6 +272,22 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 			configureMap.setFragment(ProfileAppearanceFragment.TAG);
 		} else {
 			configureMap.setVisible(false);
+		}
+	}
+
+	private void setupCopyProfileSettingsPref() {
+		Preference copyProfilePrefs = findPreference(COPY_PROFILE_SETTINGS);
+		copyProfilePrefs.setIcon(app.getUIUtilities().getIcon(R.drawable.ic_action_copy,
+				isNightMode() ? R.color.active_color_primary_dark : R.color.active_color_primary_light));
+	}
+
+	private void setupResetToDefaultPref() {
+		Preference resetToDefault = findPreference(RESET_TO_DEFAULT);
+		if (getSelectedAppMode().isCustomProfile()) {
+			resetToDefault.setVisible(false);
+		} else {
+			resetToDefault.setIcon(app.getUIUtilities().getIcon(R.drawable.ic_action_reset_to_default_dark,
+					isNightMode() ? R.color.active_color_primary_dark : R.color.active_color_primary_light));
 		}
 	}
 
@@ -373,6 +402,16 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 				} catch (Exception e) {
 					LOG.error(e);
 				}
+			}
+		} else if (COPY_PROFILE_SETTINGS.equals(prefId)) {
+			FragmentManager fragmentManager = getFragmentManager();
+			if (fragmentManager != null) {
+				SelectCopyAppModeBottomSheet.showInstance(fragmentManager, this, false, getSelectedAppMode());
+			}
+		} else if (RESET_TO_DEFAULT.equals(prefId)) {
+			FragmentManager fragmentManager = getFragmentManager();
+			if (fragmentManager != null) {
+				ResetProfilePrefsBottomSheet.showInstance(fragmentManager, prefId, this, false, getSelectedAppMode());
 			}
 		} else if (EXPORT_PROFILE.equals(prefId)) {
 			Context ctx = requireContext();

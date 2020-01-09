@@ -206,4 +206,6 @@
     <string name="gps_points_in_buffer">poslano (%1$d v medpomnilniku)</string>
     <string name="timeline_available_for_free_now">Časovnica je od sedaj na voljo brezplačno.</string>
     <string name="location_recording_enabled">Beleženje trenutnega mesta je omogočeno</string>
+    <string name="units_and_formats">Enote in zapisi</string>
+    <string name="unit_of_length_descr">Izbor enote za prikaz razdalje.</string>
 </resources>

@@ -268,7 +268,6 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 				mapView.setRotate(0, true);
 			}
 			mapView.setMapPosition(settings.ROTATE_MAP.get() == OsmandSettings.ROTATE_MAP_BEARING
-					&& !routePlanningMode
 					&& !settings.CENTER_POSITION_ON_MAP.get() ?
 					OsmandSettings.BOTTOM_CONSTANT : OsmandSettings.CENTER_CONSTANT);
 		}

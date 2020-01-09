@@ -1,7 +1,6 @@
 package net.osmand.plus.profiles;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -9,14 +8,11 @@ import android.view.ContextThemeWrapper;
 import android.view.View;
 
 import net.osmand.plus.ApplicationMode;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
-
-import static net.osmand.plus.profiles.SettingsProfileFragment.IS_USER_PROFILE;
-import static net.osmand.plus.profiles.SettingsProfileFragment.PROFILE_STRING_KEY;
+import net.osmand.plus.settings.BaseSettingsFragment;
 
 public abstract class AppModesBottomSheetDialogFragment<T extends AbstractProfileMenuAdapter> extends MenuBottomSheetDialogFragment 
 		implements AbstractProfileMenuAdapter.ButtonPressedListener, AbstractProfileMenuAdapter.ProfilePressedListener {
@@ -79,17 +75,13 @@ public abstract class AppModesBottomSheetDialogFragment<T extends AbstractProfil
 
 	@Override
 	public void onProfilePressed(ApplicationMode item) {
-		Intent intent = new Intent(getActivity(), EditProfileActivity.class);
-		intent.putExtra(PROFILE_STRING_KEY, item.getStringKey());
-		intent.putExtra(IS_USER_PROFILE, item.isCustomProfile());
-		startActivity(intent);
+		this.dismiss();
+		BaseSettingsFragment.showInstance(getActivity(), BaseSettingsFragment.SettingsScreenType.CONFIGURE_PROFILE, item);
 	}
 
 	@Override
 	public void onButtonPressed() {
-		OsmandApplication app = requiredMyApplication();
-		Intent intent = new Intent(app, SettingsProfileActivity.class);
-		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		app.startActivity(intent);
+		this.dismiss();
+		BaseSettingsFragment.showInstance(getActivity(), BaseSettingsFragment.SettingsScreenType.MAIN_SETTINGS);
 	}
 }

@@ -55,6 +55,7 @@ import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_D
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.MAP_CONTEXT_MENU_UPDATE_MAP;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.OVERLAY_MAP;
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.UNDERLAY_MAP;
+import static net.osmand.plus.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
 
 public class OsmandRasterMapsPlugin extends OsmandPlugin {
 	public static final String ID = "osmand.rastermaps";
@@ -503,7 +504,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		final AppCompatCheckBox elliptic = (AppCompatCheckBox) view.findViewById(R.id.EllipticMercator);
 		elliptic.setTextColor(textColorPrimary);
 		elliptic.setPadding(dp8, 0, 0, 0);
-		UiUtilities.setupCompoundButton(app, elliptic, nightMode, true);
+		UiUtilities.setupCompoundButton(elliptic, nightMode, PROFILE_DEPENDENT);
 		updateTileSourceEditView(ts, name, urlToLoad, minZoom, maxZoom, expire, elliptic);
 
 		final ArrayList<String> templates = new ArrayList<>(entriesMap.keySet());

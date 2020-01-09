@@ -3,6 +3,7 @@ package net.osmand.plus.views.mapwidgets;
 import android.app.Activity;
 import android.graphics.Paint.Style;
 import android.graphics.Typeface;
+import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.view.Gravity;
@@ -71,6 +72,10 @@ public class TextInfoWidget  {
 	public void setImageDrawable(Drawable imageDrawable, boolean gone) {
 		if(imageDrawable != null) {
 			imageView.setImageDrawable(imageDrawable);
+			Object anim = imageView.getDrawable();
+			if (anim instanceof AnimationDrawable) {
+				((AnimationDrawable) anim).start();
+			}
 			imageView.setVisibility(View.VISIBLE);
 		} else {
 			imageView.setVisibility(gone ? View.GONE : View.INVISIBLE);
