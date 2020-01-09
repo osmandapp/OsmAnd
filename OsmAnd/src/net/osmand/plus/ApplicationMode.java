@@ -673,6 +673,13 @@ public class ApplicationMode {
 		Collections.sort(values, comparator);
 		Collections.sort(defaultValues, comparator);
 		Collections.sort(cachedFilteredValues, comparator);
+		updateAppModesOrder();
+	}
+
+	private static void updateAppModesOrder() {
+		for (int i = 0; i < values.size(); i++) {
+			values.get(i).setOrder(i);
+		}
 	}
 
 	public static ApplicationModeBuilder fromJson(OsmandApplication app, String json) {
