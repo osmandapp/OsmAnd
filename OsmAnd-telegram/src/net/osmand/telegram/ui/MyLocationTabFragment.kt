@@ -52,6 +52,8 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 	private var textMarginBig: Int = 0
 	private var searchBoxHeight: Int = 0
 	private var searchBoxSidesMargin: Int = 0
+	private var titlePaddingSmall: Int = 0
+	private var titlePaddingBig: Int = 0
 
 	private var appBarScrollRange: Int = -1
 
@@ -108,6 +110,8 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 		textMarginBig = resources.getDimensionPixelSize(R.dimen.my_location_text_sides_margin)
 		searchBoxHeight = resources.getDimensionPixelSize(R.dimen.search_box_height)
 		searchBoxSidesMargin = resources.getDimensionPixelSize(R.dimen.content_padding_half)
+		titlePaddingSmall = resources.getDimensionPixelSize(R.dimen.app_bar_title_padding_small)
+		titlePaddingBig = resources.getDimensionPixelSize(R.dimen.app_bar_title_padding_big)
 
 		sharingMode = settings.hasAnyChatToShareLocation()
 
@@ -175,7 +179,6 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 			if (Build.VERSION.SDK_INT >= 16) {
 				layoutTransition.enableTransitionType(LayoutTransition.CHANGING)
 			}
-			AndroidUtils.addStatusBarPadding19v(app, this)
 			title = findViewById(R.id.title)
 			description = findViewById(R.id.description)
 		}
@@ -400,10 +403,19 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 	private fun adjustText() {
 		val gravity = if (appBarCollapsed) Gravity.START else Gravity.CENTER
 		val padding = if (appBarCollapsed) textMarginSmall else textMarginBig
+		val titlePadding = if (appBarCollapsed) titlePaddingBig else titlePaddingSmall
 		textContainer.apply {
 			setPadding(padding, paddingTop, padding, paddingBottom)
+			if (appBarCollapsed) {
+				AndroidUtils.addStatusBarPadding19v(app, this)
+			} else {
+				AndroidUtils.removeStatusBarPadding19v(app, this)
+			}
 		}
-		title.gravity = gravity
+		title.apply {
+			this.gravity = gravity
+			setPadding(paddingLeft, titlePadding, paddingRight, titlePadding)
+		}
 		description.gravity = gravity
 	}
 

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+	<dimen name="app_bar_title_padding_small">8dp</dimen>
+	<dimen name="app_bar_title_padding_big">14dp</dimen>
 	<dimen name="content_padding_tiny">2dp</dimen>
 	<dimen name="content_padding_small">4dp</dimen>
 	<dimen name="content_padding_half">8dp</dimen>
@@ -51,7 +53,7 @@
 
 	<dimen name="image_button_padding">12dp</dimen>
 
-	<dimen name="my_location_image_height">168dp</dimen>
+	<dimen name="my_location_image_height">148dp</dimen>
 	<dimen name="my_location_text_sides_margin">32dp</dimen>
 	<dimen name="my_location_user_icon_size">60dp</dimen>
 

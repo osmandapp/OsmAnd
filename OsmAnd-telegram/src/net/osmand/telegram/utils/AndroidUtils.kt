@@ -106,6 +106,14 @@ object AndroidUtils {
 		}
 	}
 
+	fun removeStatusBarPadding19v(ctx: Context, view: View) {
+		if (Build.VERSION.SDK_INT >= 19) {
+			view.apply {
+				setPadding(paddingLeft, paddingTop - getStatusBarHeight(ctx), paddingRight, paddingBottom)
+			}
+		}
+	}
+
 	fun getNavBarHeight(ctx: Context): Int {
 		if (!hasNavBar(ctx)) {
 			return 0
