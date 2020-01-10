@@ -341,19 +341,10 @@ public class DataStorageFragment extends BaseSettingsFragment implements DataSto
 		@SuppressLint("StaticFieldLeak")
 		MoveFilesToDifferentDirectory task = new MoveFilesToDifferentDirectory(activity, fromDirectory, toDirectory) {
 
-			private MessageFormat formatMb = new MessageFormat("{0, number,##.#} MB", Locale.US);
 
 			@NonNull
 			private String getFormattedSize(long sizeBytes) {
-				int size = (int) ((sizeBytes + 512) >> 10);
-				if (size >= 0) {
-					if (size > 100) {
-						return formatMb.format(new Object[]{(float) size / (1 << 10)});
-					} else {
-						return size + " kB";
-					}
-				}
-				return "";
+				return AndroidUtils.formatSize(activity.get(), sizeBytes);
 			}
 
 			private void showResultsDialog() {

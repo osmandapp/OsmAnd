@@ -467,7 +467,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		public String getExtendedDescription(Context ctx) {
 			DateFormat dateFormat = android.text.format.DateFormat.getMediumDateFormat(ctx);
 			String date = dateFormat.format(file.lastModified());
-			String size = AndroidUtils.formatSize(file.length());
+			String size = AndroidUtils.formatSize(ctx, file.length());
 			if (isPhoto()) {
 				return date + " • " + size;
 			}

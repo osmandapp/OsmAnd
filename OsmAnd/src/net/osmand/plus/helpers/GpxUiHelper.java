@@ -123,8 +123,6 @@ import static net.osmand.plus.OsmAndFormatter.YARDS_IN_ONE_METER;
 import static net.osmand.plus.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
 import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
 import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
-import static net.osmand.plus.download.DownloadActivity.formatKb;
-import static net.osmand.plus.download.DownloadActivity.formatMb;
 
 public class GpxUiHelper {
 
@@ -812,11 +810,7 @@ public class GpxUiHelper {
 			String date = "";
 			String size = "";
 			if (info.getFileSize() >= 0) {
-				if (info.getFileSize() > (100 * (1 << 10))) {
-					size = formatMb.format(new Object[]{(float) info.getFileSize() / (1 << 20)});
-				} else {
-					size = formatKb.format(new Object[]{(float) info.getFileSize() / (1 << 10)});
-				}
+				size = AndroidUtils.formatSize(v.getContext(), info.getFileSize());
 			}
 			DateFormat df = app.getResourceManager().getDateFormat();
 			long fd = info.getLastModified();
