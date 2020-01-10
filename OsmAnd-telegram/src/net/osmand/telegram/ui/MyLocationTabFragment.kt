@@ -244,16 +244,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 			}
 		}
 
-		backToOsmAndBtn = mainView.findViewById<TextView>(R.id.back_to_osmand).apply {
-			setOnClickListener {
-				val startIntent = app.packageManager.getLaunchIntentForPackage("net.osmand.plus")
-				if (startIntent != null) {
-					startIntent.addCategory(Intent.CATEGORY_LAUNCHER)
-					startActivity(startIntent)
-				}
-			}
-		}
-
+		backToOsmAndBtn = mainView.findViewById<TextView>(R.id.back_to_osmand)
 		lastChatsInfo = settings.lastChatsInfo
 
 		return mainView
@@ -494,6 +485,25 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 				if (sharingMode) 0 else AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL
 		stopSharingSwitcher.isChecked = true
 		appBarScrollRange = -1
+		updateBackToOsmBtn()
+	}
+
+	private fun updateBackToOsmBtn() {
+		val pckg = app.settings.appToConnectPackage
+		backToOsmAndBtn.apply {
+			visibility = if (pckg.isNotEmpty() && sharingMode && AndroidUtils.isAppInstalled(app, pckg)) {
+				setOnClickListener {
+					val startIntent = app.packageManager.getLaunchIntentForPackage(pckg)
+					if (startIntent != null) {
+						startIntent.addCategory(Intent.CATEGORY_LAUNCHER)
+						startActivity(startIntent)
+					}
+				}
+				View.VISIBLE
+			} else {
+				View.GONE
+			}
+		}
 	}
 
 	private fun updateSharingStatus() {
