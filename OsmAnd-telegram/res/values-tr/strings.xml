@@ -262,4 +262,5 @@
     <string name="buffer_time">Arabellek zaman aşım süresi</string>
     <string name="shared_string_suggested">Önerilen</string>
     <string name="status_widget_title">OsmAnd Tracker durumu</string>
+    <string name="back_to_osmand">OsmAnd\'a geri dön</string>
 </resources>
