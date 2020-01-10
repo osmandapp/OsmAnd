@@ -60,8 +60,10 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 	private static final String SELECT_ICON = "select_icon";
 	private static final String COLOR_ITEMS = "color_items";
 	private static final String ICON_ITEMS = "icon_items";
-//	private static final String SELECT_MAP_ICON = "select_map_icon";
-//	private static final String SELECT_NAV_ICON = "select_nav_icon";
+	private static final String SELECT_MAP_ICON = "select_map_icon";
+	private static final String MAP_ICON_ITEMS = "map_icon_items";
+	private static final String SELECT_NAV_ICON = "select_nav_icon";
+	private static final String NAV_ICON_ITEMS = "nav_icon_items";
 
 	public static final String PROFILE_NAME_KEY = "profile_name_key";
 	public static final String PROFILE_STRINGKEY_KEY = "profile_stringkey_key";
@@ -76,6 +78,8 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 	private EditText profileName;
 	private FlowLayout colorItems;
 	private FlowLayout iconItems;
+	private FlowLayout mapIconItems;
+	private FlowLayout navIconItems;
 	private OsmandTextFieldBoxes profileNameOtfb;
 	private View saveButton;
 
@@ -166,8 +170,8 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 	protected void setupPreferences() {
 		findPreference(SELECT_COLOR).setIconSpaceReserved(false);
 		findPreference(SELECT_ICON).setIconSpaceReserved(false);
-//		findPreference(SELECT_MAP_ICON).setIconSpaceReserved(false);
-//		findPreference(SELECT_NAV_ICON).setIconSpaceReserved(false);
+		findPreference(SELECT_MAP_ICON).setIconSpaceReserved(false);
+		findPreference(SELECT_NAV_ICON).setIconSpaceReserved(false);
 	}
 
 	@SuppressLint("InlinedApi")
@@ -370,6 +374,40 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 				outlineCircle.setVisibility(View.GONE);
 			}
 			setIconNewColor(changedProfile.iconRes);
+		} else if (MAP_ICON_ITEMS.equals(preference.getKey())) {
+			mapIconItems = (FlowLayout) holder.findViewById(R.id.color_items);
+			mapIconItems.removeAllViews();
+			ArrayList<Integer> icons = ApplicationMode.ProfileIcons.getIcons();
+			for(int iconRes:icons) {
+				FrameLayout iconItemView = (FrameLayout) UiUtilities.getInflater(getContext(), isNightMode())
+						.inflate(R.layout.preference_select_icon_button, mapIconItems, false);
+				mapIconItems.addView(iconItemView, new FlowLayout.LayoutParams(0, 0));
+				ImageView coloredRect = mapIconItems.findViewById(R.id.backgroundRect);
+				AndroidUtils.setBackground(coloredRect,
+						UiUtilities.tintDrawable(ContextCompat.getDrawable(app, R.drawable.bg_select_icon_button),
+								UiUtilities.getColorWithAlpha(ContextCompat.getColor(app, R.color.icon_color_default_light), 0.1f)));
+				coloredRect.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+//						if (iconRes != changedProfile.iconRes) {
+//							updateIconSelector(iconRes);
+//						}
+					}
+				});
+
+				ImageView outlineCircle = mapIconItems.findViewById(R.id.outlineRect);
+				GradientDrawable circleContourDrawable = (GradientDrawable) ContextCompat.getDrawable(app, R.drawable.bg_select_icon_button_outline);
+				int changedProfileColor = ContextCompat.getColor(app, changedProfile.color.getColor(
+						app.getDaynightHelper().isNightModeForMapControls()));
+				if (circleContourDrawable != null) {
+					circleContourDrawable.setStroke(AndroidUtils.dpToPx(app, 2), changedProfileColor);
+				}
+				outlineCircle.setImageDrawable(circleContourDrawable);
+				outlineCircle.setVisibility(View.VISIBLE);
+			}
+
+		} else if (NAV_ICON_ITEMS.equals(preference.getKey())) {
+
 		}
 	}
 

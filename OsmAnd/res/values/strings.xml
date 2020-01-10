@@ -11,6 +11,8 @@
 	Thx - Hardy
 
 -->
+    <string name="select_nav_icon_descr">You will see the icon only while navigation or while moving.</string>
+    <string name="select_map_icon_descr">Map icon appears only on the map, and changing while navigation to navigation icon.</string>
     <string name="ltr_or_rtl_combine">%1$s: %2$s</string>
     <string name="reset_confirmation_descr">By clicking %1$s, you will lose all your changes.</string>
     <string name="reset_all_profile_settings_descr">All profile settings will be reset to the state after installation.</string>
