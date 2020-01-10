@@ -261,4 +261,6 @@
     <string name="unit_of_speed_system">速度單位</string>
     <string name="buffer_time_descr">在緩衝中儲存點的最長時間</string>
     <string name="buffer_time">緩衝過期時間</string>
+    <string name="shared_string_suggested">建議</string>
+    <string name="status_widget_title">OsmAnd Tracker 狀態</string>
 </resources>

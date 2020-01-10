@@ -1850,7 +1850,8 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="install_more">Asenna lisää…</string>
     <string name="level_to_switch_vector_raster_descr">Käytä rasterikarttoja kaikkeen, joka ylittää tämän tason.</string>
     <string name="level_to_switch_vector_raster">Pienin vektorien zoomaustaso</string>
-    <string name="create_poi_link_to_osm_doc"><u>Online OSM</u> karttaluokittelu kuvilla.</string>
+    <string name="create_poi_link_to_osm_doc">
+        <u>Online OSM</u> karttaluokittelu kuvilla.</string>
     <string name="error_doing_search">Ei voitu suorittaa offline-hakua.</string>
     <string name="system_locale">Järjestelmä</string>
     <string name="preferred_locale_descr">Sovelluksen näyttökieli (käytetään, kun OsmAnd käynnistetään uudelleen).</string>
@@ -2332,7 +2333,7 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="export_profile">Vie profiili</string>
     <string name="exported_osmand_profile">OsmAnd profiili: %1$s</string>
     <string name="overwrite_profile_q">Profiili \'%1$s\' on jo olemassa. Korvataanko\?</string>
-    <string name="profile_import">Profiilin tuonti:</string>
+    <string name="profile_import">Profiilin tuonti</string>
     <string name="file_import_error">%1$s tuontivirhe: %2$s</string>
     <string name="file_imported_successfully">%1$s tuotu onnistuneesti.</string>
     <string name="rendering_value_white_name">Valkoinen</string>
@@ -2499,4 +2500,5 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="suggested_maps">Ehdotetut kartat</string>
     <string name="new_plugin_added">Uusi laajennus lisätty</string>
     <string name="join_segments">Yhdistä segmentit</string>
+    <string name="add_segment_to_the_track">Lisää GPX-tiedostoon</string>
 </resources>

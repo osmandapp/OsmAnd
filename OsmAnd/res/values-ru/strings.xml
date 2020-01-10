@@ -46,11 +46,11 @@
     <string name="quick_action_showhide_osmbugs_descr">Переключатель, чтобы отобразить или скрыть заметки OSM на карте.</string>
     <string name="sorted_by_distance">Отсортировано по расстоянию</string>
     <string name="search_favorites">Поиск в избранных</string>
-    <string name="hillshade_menu_download_descr">Чтобы увидеть теневую отмывку рельефа, скачайте карту «Затенение рельефа» этого региона.</string>
-    <string name="hillshade_purchase_header">Чтобы увидеть на карте теневую отмывку рельефа, вам необходимо купить и установить плагин «Линии высот»</string>
-    <string name="srtm_menu_download_descr">Скачайте карту \"Контурные линии\" для использования в этом регионе.</string>
+    <string name="hillshade_menu_download_descr">Загрузите карту «Наложение затенения рельефа» для отображения вертикального затенения (отмывки) рельефа.</string>
+    <string name="hillshade_purchase_header">Установите плагин «Контурные линии» для отображения градуированных вертикальных областей.</string>
+    <string name="srtm_menu_download_descr">Скачайте карту «Контурные линии» для использования в этом регионе.</string>
     <string name="shared_string_plugin">Плагин</string>
-    <string name="srtm_purchase_header">Для того, чтобы отобразить линии контуров рельефа, вам нужно приобрести и установить плагин \"Линии высот\"</string>
+    <string name="srtm_purchase_header">Приобретите и установите плагин «Контурные линии» для отображения градуированных вертикальных областей.</string>
     <string name="srtm_color_scheme">Цветовая схема</string>
     <string name="show_from_zoom_level">Отображать, начиная с уровня масштабирования</string>
     <string name="animate_my_location">Анимация моего положения</string>
@@ -2316,7 +2316,7 @@
     <string name="store_tracks_in_monthly_directories_descrp">Сохранять записанные треки в подпапках с записью месяца (например, 2018-01).</string>
     <string name="mapillary_menu_title_tile_cache">Кэш тайлов</string>
     <string name="wrong_user_name">Неверное имя пользователя</string>
-    <string name="mapillary_menu_descr_dates">Просмотр фотографий по дате</string>
+    <string name="mapillary_menu_descr_dates">Показывать только добавленные изображения</string>
     <string name="mapillary_menu_title_dates">Дата</string>
     <string name="mapillary_menu_descr_username">Просмотр фотографий пользователя</string>
     <string name="mapillary_menu_title_username">Имя пользователя</string>
@@ -2501,7 +2501,7 @@
     <string name="add_location_as_first_point_descr">Добавить ваше местоположение как точку отправления при планировании маршрута.</string>
     <string name="show_passed">Показать пройденные</string>
     <string name="hide_passed">Скрыть пройденные</string>
-    <string name="remove_from_map_markers">Удалить из маркеров карты</string>
+    <string name="remove_from_map_markers">Удалить из «Маркеров карты»</string>
     <string name="keep_showing_on_map">Продолжать показывать на карте</string>
     <string name="line">Линия</string>
     <string name="looking_for_tracks_with_waypoints">Поиск треков с путевыми точками</string>
@@ -2594,7 +2594,7 @@
     <string name="empty_state_my_tracks">Добавить файлы GPX</string>
     <string name="empty_state_my_tracks_desc">Импорт файлов GPX, или запись треков.</string>
     <string name="empty_state_favourites">Добавить избранные</string>
-    <string name="empty_state_favourites_desc">Добавить избранные на карту или импортировать из файла.</string>
+    <string name="empty_state_favourites_desc">Импортируйте избранное, или добавляйте, отмечая точки на карте.</string>
     <string name="import_track">Импортировать файл GPX</string>
     <string name="move_point">Переместить точку</string>
     <string name="add_segment_to_the_track">Добавить в файл GPX</string>
@@ -2723,7 +2723,7 @@
     <string name="select_waypoints_category_description">Добавьте все путевые точки трека или выберите отдельные категории.</string>
     <string name="shared_string_total">Всего</string>
     <string name="shared_string_result">Результат</string>
-    <string name="wikivoyage_search_hint">Поиск: страна, город, провинция</string>
+    <string name="wikivoyage_search_hint">Поиск страны, города или провинции</string>
     <string name="shared_string_read">Читать</string>
     <string name="saved_articles">Сохраненные статьи</string>
     <string name="shared_string_contents">Главы</string>
@@ -2793,21 +2793,21 @@
     <string name="purchase_cancelled_dialog_descr">Возобновите подписку, чтобы продолжить использовать все функции:</string>
     <string name="hide_full_description">Скрыть полное описание</string>
     <string name="show_full_description">Показать полное описание</string>
-    <string name="nautical_render_descr">Стиль морской навигации. Ключевые особенности: буи, маяки, речные пути, морские пути и знаки, гавани, услуги морских судов, контуры глубин.</string>
-    <string name="ski_map_render_descr">Стиль для катания на лыжах. Ключевые особенности: отображение трасс, подъемников и других лыжных объектов. Меньше отвлекающих второстепенных объектов на карте.</string>
+    <string name="nautical_render_descr">Для морской навигации. Выделяет буи, маяки, речные пути, морские пути и знаки, гавани, услуги для морских судов, контуры глубин.</string>
+    <string name="ski_map_render_descr">Для катания на лыжах. Выделяет горнолыжные трассы, подъемники, трассы для беговых лыж и прочее. Меньше отвлекающих второстепенных объектов на карте.</string>
     <string name="download_all">Скачать все</string>
-    <string name="light_rs_render_descr">Простой и контрастный стиль для автомобильной навигации. Комфортный для глаз в ночном режиме. Ключевые особенности: контурные линии, контрастные оранжевые дороги, меньше отвлекающих второстепенных объектов на карте.</string>
-    <string name="topo_render_descr">Контрастный стиль, предназначенный в основном для пеших прогулок, походов и велосипедных прогулок по природе. Хорошая читаемость при сложном внешнем освещении. Ключевые особенности: контрастные дороги и природные объекты, различные типы маршрутов, контурные линии с расширенными настройками, более подробная информация при соответствующих уровнях масштабирования, чем в стиле по умолчанию. Опция \"Качество дорожного покрытия\" позволяет различать дороги с различным качеством поверхности. Нет ночного режима.</string>
-    <string name="mapnik_render_descr">Старый стиль отображения по умолчанию \"Mapnik\". Ключевые особенности: цвета похожи на стиль \"Mapnik\".</string>
-    <string name="default_render_descr">Стиль общего назначения. Упрощенный рендеринг в густонаселенных городах. Ключевые особенности: контурные линии, маршруты, качество поверхности, ограничения доступа, дорожные щиты, визуализация маршрутов по шкале SAC, характеристики спортивных сплавов.</string>
+    <string name="light_rs_render_descr">Простой стиль для вождения. Мягкий ночной режим, контурные линии, контрастные дороги в оранжевом стиле, тусклые второстепенные объекты карты.</string>
+    <string name="topo_render_descr">Для пеших походов, треккинга и велосипедных прогулок на природе. Читабельный на открытом воздухе и при сложном освещении. Контрастные дороги и природные объекты, различные типы маршрутов, контурные линии с расширенными настройками, дополнительные детали. Опция «Качество дорожного покрытия» позволяет различать дороги с различным качеством поверхности. Нет ночного режима.</string>
+    <string name="mapnik_render_descr">Старый стиль по умолчанию «Mapnik». Похожие цвета на «Mapnik».</string>
+    <string name="default_render_descr">Стиль общего назначения. Густонаселенные города показаны упрощенно. Выделяет контурные линии, маршруты, качество поверхности, ограничения доступа, дорожные щиты, визуализация пешеходных маршрутов по шкале SAC, объекты спортивных сплавов.</string>
     <string name="open_wikipedia_link_online">Открыть ссылку Википедии в онлайн</string>
     <string name="open_wikipedia_link_online_description">Ссылка будет открыта в веб-браузере.</string>
     <string name="read_wikipedia_offline_description">Получите подписку на OsmAnd Live, чтобы читать статьи в Википедии и Викигиде в автономном режиме.</string>
     <string name="how_to_open_link">Как открыть ссылку?</string>
     <string name="read_wikipedia_offline">Читать Википедию в автономном режиме</string>
-    <string name="touring_view_render_descr">Высоко детализированный стиль для туристических целей. Включает все параметры конфигурации стиля по умолчанию, кроме того: отображает как можно больше деталей, в частности, все дороги, тропинки и другие способы перемещения. Четкое визуальное различие между всеми типами дорог, реминисценция многих туристических атласов. Высококонтрастная цветовая схема для уличного использования, дневной и ночной режим.</string>
+    <string name="touring_view_render_descr">Туристический стиль с высоким контрастом и максимальной детализацией. Включает все опции стиля OsmAnd по умолчанию, также отображая как можно больше деталей, в частности дороги, тропы и другие пути для передвижения. Четкое различие между типами дорог, как во многих туристических атласах. Подходит для дневного, ночного и уличного использования.</string>
     <string name="shared_string_bookmark">Сохранить</string>
-    <string name="off_road_render_descr">"Подходит для использования во время езды по бездорожью.  Подходит для использования с зелеными спутниковыми изображениями в качестве подложки карты. Ключевые особенности: уменьшенная толщина основных дорог, увеличенная толщина дорожек, тропинок, велосипедных и других маршрутов. Основано на стиле \"Topo\"."</string>
+    <string name="off_road_render_descr">Для езды по бездорожью, основано на топографическом стиле (англ. «Topo»), можно использовать с зелеными спутниковыми снимками в качестве подложки. Уменьшенная толщина основных дорог, увеличенная толщина путей, дорожек, велосипедных и других маршрутов.</string>
     <string name="unirs_render_descr">Модификация стиля по умолчанию для увеличения контраста пешеходных и велосипедных дорог. Использует старые цвета Mapnik.</string>
     <string name="shared_string_gpx_files">Файлы GPX</string>
     <string name="get_osmand_live">Получите OsmAnd Live, чтобы разблокировать все функции: ежедневные обновления карт с неограниченной загрузкой, все платные и бесплатные плагины, Википедия, Викигид и многое другое.</string>
@@ -2869,7 +2869,7 @@
     <string name="shared_string_restore">Восстановить</string>
     <string name="keep_passed_markers_descr">Маркеры, добавленные как группа избранных или путевых точек GPX и отмеченные как пройденные, останутся на карте. Если группа не активна, маркеры исчезнут с карты.</string>
     <string name="keep_passed_markers">Оставить пройденные маркеры на карте</string>
-    <string name="more_transport_on_stop_hint">На этой остановке есть другие транспортные средства.</string>
+    <string name="more_transport_on_stop_hint">Больше транспорта доступно от этой остановки.</string>
     <string name="markers_remove_dialog_msg">Удалить маркер \'%s\'\?</string>
     <string name="edit_map_marker">Редактировать маркер</string>
     <string name="third_party_application">Стороннее приложение</string>
@@ -3096,7 +3096,7 @@
     <string name="profile_alert_delete_title">Удалить профиль</string>
     <string name="profile_alert_delete_msg">Вы действительно хотите удалить профиль \"%s\"</string>
     <string name="select_base_profile_dialog_title">Выберите профиль для начала</string>
-    <string name="select_base_profile_dialog_message">Пользовательский профиль приложения должен основываться на одном из профилей приложения по умолчанию. Выбранный профиль определяет основные настройки: настройку виджетов, единиц измерения скорости и расстояния. В строке ниже имени профиля вы можете узнать, какие профили навигации подходят для каждого профиля приложения.</string>
+    <string name="select_base_profile_dialog_message">Основывайте свой пользовательский профиль на одном из профилей приложения по умолчанию, это определяет базовые настройки, такие как видимость виджетов по умолчанию и выбор единиц измерения скорости и расстояния. Ниже перечислены профили приложений по умолчанию, а также примеры пользовательских профилей, на которые они могут быть расширены:</string>
     <string name="select_nav_profile_dialog_title">Выберите тип навигации</string>
     <string name="base_profile_descr_car">Автомобиль, грузовик, мотоцикл</string>
     <string name="base_profile_descr_bicycle">Горный велосипед, мопед, лошадь</string>
@@ -3193,7 +3193,7 @@
     <string name="temporary_conditional_routing">Учитывать временные ограничения</string>
     <string name="new_route_calculated_dist_dbg">Маршрут: расстояние %s, время навигации %s 
 \nРасчет: %.1f с, %d дорог, %d тайлов)</string>
-    <string name="quick_action_need_to_add_item_to_list">Вам нужно добавить по крайней мере один элемент в список в настройках Быстрого действия</string>
+    <string name="quick_action_need_to_add_item_to_list">Добавьте хотя бы один элемент в список «Быстрые действия» в настройках</string>
     <string name="routing_attr_piste_type_skitour_description">Маршруты для горнолыжного туризма.</string>
     <string name="routing_attr_freeride_policy_name">Офпист</string>
     <string name="routing_attr_freeride_policy_description">Фрирайды и офписты являются неофициальными неадаптированными трассами. Обычно неухоженные, неразмеченные и неосвещенные вечером. Вход на свой страх и риск.</string>
@@ -3412,4 +3412,5 @@
     <string name="reset_confirmation_descr">Нажимая %1$s, вы потеряете все свои изменения.</string>
     <string name="reset_all_profile_settings_descr">Все настройки профиля будут сброшены в значения по умолчанию после установки.</string>
     <string name="reset_all_profile_settings">Сбросить все настройки профиля в значения по умолчанию\?</string>
+    <string name="ltr_or_rtl_combine">%1$s: %2$s</string>
 </resources>

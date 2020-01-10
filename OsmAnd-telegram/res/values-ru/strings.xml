@@ -260,4 +260,6 @@
     <string name="unit_of_speed_system">Единица измерения скорости</string>
     <string name="buffer_time_descr">Максимальное время хранения точек в буфере</string>
     <string name="buffer_time">Срок действия буфера</string>
+    <string name="shared_string_suggested">Предложено</string>
+    <string name="status_widget_title">Статус OsmAnd Tracker</string>
 </resources>
