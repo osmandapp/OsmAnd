@@ -80,7 +80,11 @@ public class FavouritesDbHelper {
 			return PERSONAL_CATEGORY.equals(name);
 		}
 
-		public static String getDisplayName(String name, Context ctx) {
+		public static boolean isPersonalCategoryDisplayName(Context ctx, String name){
+			return name.equals(ctx.getString(R.string.personal_category_name));
+		}
+
+		public static String getDisplayName(Context ctx, String name) {
 			if (isPersonal(name)) {
 				return ctx.getString(R.string.personal_category_name);
 			} else if (name.isEmpty()) {
@@ -107,11 +111,11 @@ public class FavouritesDbHelper {
 		}
 
 		public String getDisplayName(Context ctx) {
-			return getDisplayName(name, ctx);
+			return getDisplayName(ctx, name);
 		}
 
 		public static String convertDisplayNameToGroupIdName(Context context, String name) {
-			if (name.equals(context.getString(R.string.personal_category_name))) {
+			if (isPersonalCategoryDisplayName(context,name)) {
 				return PERSONAL_CATEGORY;
 			}
 			if (name.equals(context.getString(R.string.shared_string_favorites))) {
@@ -120,7 +124,6 @@ public class FavouritesDbHelper {
 			return name;
 		}
 	}
-
 
 	public void loadFavorites() {
 		flatGroups.clear();
@@ -435,7 +438,6 @@ public class FavouritesDbHelper {
 		return true;
 	}
 
-
 	private void editAddressDescription(@NonNull FavouritePoint p, @Nullable String address) {
 		p.setAddress(address);
 		saveCurrentPointsIntoFile();
@@ -490,7 +492,6 @@ public class FavouritesDbHelper {
 		return saveExternalFile(null);
 	}
 
-
 	private Exception saveExternalFile(Set<String> deleted) {
 		Map<String, FavouritePoint> all = new LinkedHashMap<String, FavouritePoint>();
 		loadGPXFile(getExternalFile(), all);
@@ -508,7 +509,6 @@ public class FavouritesDbHelper {
 		favoritePoints.addAll(all.values());
 		return saveFile(favoritePoints, getExternalFile());
 	}
-
 
 	private String getKey(FavouritePoint p) {
 		return p.getName() + DELIMETER + p.getCategory();
@@ -560,7 +560,6 @@ public class FavouritesDbHelper {
 		return GPXUtilities.writeGpxFile(f, gpx);
 	}
 
-
 	public GPXFile asGpxFile() {
 		return asGpxFile(cachedFavoritePoints);
 	}
@@ -573,21 +572,16 @@ public class FavouritesDbHelper {
 		return gpx;
 	}
 
-
 	private void addEmptyCategory(String name) {
-		addEmptyCategory(name, 0, true, false);
+		addEmptyCategory(name, 0, true);
 	}
 
 	public void addEmptyCategory(String name, int color) {
-		if (name.equals(context.getString(R.string.personal_category_name)))
+		if (FavoriteGroup.isPersonalCategoryDisplayName(context,name))
 			addEmptyCategory(name, color, true);
 	}
 
 	public void addEmptyCategory(String name, int color, boolean visible) {
-		addEmptyCategory(name, color, visible, false);
-	}
-
-	public void addEmptyCategory(String name, int color, boolean visible, boolean personal) {
 		FavoriteGroup group = new FavoriteGroup();
 		group.name = name;
 		group.color = color;
@@ -610,7 +604,6 @@ public class FavouritesDbHelper {
 		return fp;
 	}
 
-
 	@Nullable
 	public FavouritePoint getVisibleFavByLatLon(@NonNull LatLon latLon) {
 		for (FavouritePoint fav : cachedFavoritePoints) {
@@ -620,7 +613,6 @@ public class FavouritesDbHelper {
 		}
 		return null;
 	}
-
 
 	public List<FavoriteGroup> getFavoriteGroups() {
 		return favoriteGroups;
@@ -647,9 +639,6 @@ public class FavouritesDbHelper {
 	public FavoriteGroup getGroup(String nameId) {
 		if (flatGroups.containsKey(nameId)) {
 			return flatGroups.get(nameId);
-			// TODO HW: double check invocations and use convertDisplayNameToGroupIdName where it is needed?
-////		} else if (name.equals(context.getString(R.string.personal_category_name))) {
-////			return flatGroups.get(PERSONAL_CATEGORY);
 		} else {
 			return null;
 		}
@@ -666,7 +655,6 @@ public class FavouritesDbHelper {
 		}
 		return null;
 	}
-
 
 	public void recalculateCachedFavPoints() {
 		List<FavouritePoint> allPoints = new ArrayList<>();

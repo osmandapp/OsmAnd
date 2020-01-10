@@ -147,18 +147,19 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 	}
 
 	private void selectFavorite(FavouritePoint point) {
-		TargetPointsHelper targetPointsHelper = getMyApplication().getTargetPointsHelper();
-		FavouritesDbHelper favorites = getMyApplication().getFavorites();
+		OsmandApplication app = getMyApplication();
+		TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
+		FavouritesDbHelper favorites = app.getFavorites();
 		LatLon ll = new LatLon(point.getLatitude(), point.getLongitude());
 		switch (pointType) {
 			case START:
-				targetPointsHelper.setStartPoint(ll, true, point.getPointDescription(requireActivity()));
+				targetPointsHelper.setStartPoint(ll, true, point.getPointDescription(app));
 				break;
 			case TARGET:
-				targetPointsHelper.navigateToPoint(ll, true, -1, point.getPointDescription(requireActivity()));
+				targetPointsHelper.navigateToPoint(ll, true, -1, point.getPointDescription(app));
 				break;
 			case INTERMEDIATE:
-				targetPointsHelper.navigateToPoint(ll, true, targetPointsHelper.getIntermediatePoints().size(), point.getPointDescription(requireActivity()));
+				targetPointsHelper.navigateToPoint(ll, true, targetPointsHelper.getIntermediatePoints().size(), point.getPointDescription(app));
 				break;
 			case HOME:
 				favorites.setSpecialPoint(ll, FavouritePoint.SpecialPointType.HOME, null);

@@ -71,7 +71,7 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 		View view = super.onCreateView(inflater, container, savedInstanceState);
 		FavoritePointEditor editor = getFavoritePointEditor();
 		if (view != null && editor != null && editor.isNew()) {
-			Button replaceButton = view.findViewById(R.id.replace_button);
+			Button replaceButton = (Button) view.findViewById(R.id.replace_button);
 			replaceButton.setTextColor(getResources().getColor(!editor.isLight() ? R.color.osmand_orange : R.color.map_widget_blue));
 			replaceButton.setVisibility(View.VISIBLE);
 			replaceButton.setOnClickListener(new View.OnClickListener() {

@@ -134,7 +134,7 @@ public class FavouritePointMenuController extends MenuController {
 	public String getNameStr() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			return fav.getDisplayName(getMapActivity());
+			return fav.getDisplayName(mapActivity);
 		} else {
 			return super.getNameStr();
 		}
