@@ -262,4 +262,5 @@
     <string name="buffer_time">Термін дії буфера</string>
     <string name="shared_string_suggested">Запропоновано</string>
     <string name="status_widget_title">Статус відстежувача OsmAnd</string>
+    <string name="back_to_osmand">Повернутися до OsmAnd</string>
 </resources>
