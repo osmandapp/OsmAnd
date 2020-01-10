@@ -295,6 +295,30 @@
 
 		</FrameLayout>
 
+		<FrameLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:background="@color/bg_list_item_dark">
+
+			<net.osmand.telegram.ui.views.TextViewEx
+				android:id="@+id/back_to_osmand"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:background="?attr/selectableItemBackground"
+				android:drawableStart="@drawable/ic_action_undo"
+				android:drawableLeft="@drawable/ic_action_undo"
+				android:drawablePadding="@dimen/my_location_text_sides_margin"
+				android:gravity="center_vertical"
+				android:minHeight="@dimen/list_item_height_min"
+				android:paddingStart="@dimen/content_padding_standard"
+				android:paddingLeft="@dimen/content_padding_standard"
+				android:text="@string/back_to_osmand"
+				android:textColor="?attr/colorPrimaryDark"
+				android:textSize="@dimen/list_item_title_text_size"
+				app:typeface="@string/font_roboto_regular" />
+
+		</FrameLayout>
+
 	</android.support.design.widget.AppBarLayout>
 
 	<FrameLayout
