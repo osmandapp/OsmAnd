@@ -1385,7 +1385,7 @@
     <string name="delay_navigation_start">Alusta pöörangupõhist juhendamist automaatselt</string>
     <string name="local_index_gpx_info_show">"
 \n
-\nPikk puudutus kaardil vaatamiseks"</string>
+\nPikk puudutus valikuteks"</string>
     <string name="gpx_info_subtracks">Alamrajad: %1$s</string>
     <string name="gpx_info_waypoints">Teekonnapunktid: %1$s</string>
     <string name="gpx_info_distance">Kaugus: %1$s (%2$s punkti)</string>
@@ -2912,7 +2912,7 @@
     <string name="opening_changeset">Muudatuste komplekti avamine…</string>
     <string name="closing_changeset">Muudatuste komplekti sulgemine…</string>
     <string name="commiting_node">Sõlme kinnitamine…</string>
-    <string name="loading_poi_obj">Huvipunktide laadimine…</string>
+    <string name="loading_poi_obj">HP laadimine…</string>
     <string name="auth_failed">Autoriseerimine ebaõnnestus</string>
     <string name="failed_op">ebaõnnestus</string>
     <string name="converting_names">Kohalike/ingliskeelsete nimede teisendamine…</string>
@@ -3352,4 +3352,5 @@
     <string name="reset_confirmation_descr">Vajutades nupul %1$s kaovad kõik muudatused.</string>
     <string name="reset_all_profile_settings_descr">Kõik profiiliseaded lähtestatakse paigaldusjärgsesse olekusse.</string>
     <string name="reset_all_profile_settings">Taasta kõikide profiiliseadete vaikeväärtused\?</string>
+    <string name="ltr_or_rtl_combine">%1$s: %2$s</string>
 </resources>

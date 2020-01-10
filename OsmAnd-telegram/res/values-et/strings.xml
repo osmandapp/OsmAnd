@@ -260,4 +260,6 @@
     <string name="my_location">Minu asukoht</string>
     <string name="live_now">Nüüd reaalajas nähtav</string>
     <string name="timeline">Ajajoon</string>
+    <string name="shared_string_suggested">Soovitatud</string>
+    <string name="status_widget_title">OsmAnd Tracker olek</string>
 </resources>

@@ -3408,4 +3408,5 @@
     <string name="reset_confirmation_descr">點擊 %1$s，您將會失去您所有的變更。</string>
     <string name="reset_all_profile_settings_descr">所有設定檔都將被重設為安裝後的狀態。</string>
     <string name="reset_all_profile_settings">將所有設定檔重設為預設值？</string>
+    <string name="ltr_or_rtl_combine">%1$s：%2$s</string>
 </resources>
