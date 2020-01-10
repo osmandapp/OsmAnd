@@ -236,7 +236,7 @@ public class OsmandSettings {
 				CommonPreference commonPreference = (CommonPreference) pref;
 				if (!commonPreference.global) {
 					for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
-						if (!commonPreference.isSetForMode(mode)) {
+						if (!commonPreference.isSetForMode(mode) && !commonPreference.hasDefaultValueForMode(mode)) {
 							setPreference(key, globalPrefsMap.get(key), mode);
 						}
 					}
@@ -255,10 +255,13 @@ public class OsmandSettings {
 			}
 		}
 		for (OsmandPreference pref : generalPrefs) {
-			Object defaultVal = pref.getModeValue(ApplicationMode.DEFAULT);
-			for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
-				if (!pref.isSetForMode(mode)) {
-					pref.setModeValue(mode, defaultVal);
+			if (pref instanceof CommonPreference) {
+				CommonPreference commonPref = (CommonPreference) pref;
+				Object defaultVal = commonPref.getModeValue(ApplicationMode.DEFAULT);
+				for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
+					if (!commonPref.isSetForMode(mode) && !commonPref.hasDefaultValueForMode(mode)) {
+						setPreference(commonPref.getId(), defaultVal, mode);
+					}
 				}
 			}
 		}
@@ -410,7 +413,7 @@ public class OsmandSettings {
 		for (OsmandPreference pref : registeredPreferences.values()) {
 			if (pref instanceof CommonPreference && !((CommonPreference) pref).global) {
 				CommonPreference profilePref = (CommonPreference) pref;
-				if (profilePref.isSetForMode(modeFrom)) {
+				if (profilePref.isSetForMode(modeFrom) || profilePref.hasDefaultValueForMode(modeFrom)) {
 					Object copiedValue = profilePref.getModeValue(modeFrom);
 					if (copiedValue instanceof String) {
 						settingsEditor.putString(pref.getId(), (String) copiedValue);
