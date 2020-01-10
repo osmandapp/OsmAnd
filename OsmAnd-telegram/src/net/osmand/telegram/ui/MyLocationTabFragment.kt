@@ -480,7 +480,6 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 		textContainer.visibility = if (sharingMode) View.GONE else View.VISIBLE
 		titleContainer.visibility = if (sharingMode) View.VISIBLE else View.GONE
 		startSharingBtn.visibility = if (sharingMode) View.VISIBLE else View.GONE
-		backToOsmAndBtn.visibility = if (sharingMode) View.VISIBLE else View.GONE
 		headerParams.scrollFlags =
 				if (sharingMode) 0 else AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL
 		stopSharingSwitcher.isChecked = true
