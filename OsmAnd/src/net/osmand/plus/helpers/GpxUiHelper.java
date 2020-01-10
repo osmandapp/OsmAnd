@@ -1230,7 +1230,7 @@ public class GpxUiHelper {
 	}
 
 	private static List<Entry> calculateElevationArray(GPXTrackAnalysis analysis, GPXDataSetAxisType axisType,
-													   float divX, float convEle, boolean useGeneralTrackPoints) {
+													   float divX, float convEle, boolean useGeneralTrackPoints, boolean calcGaps) {
 		List<Entry> values = new ArrayList<>();
 		List<Elevation> elevationData = analysis.elevationData;
 		float nextX = 0;
@@ -1252,7 +1252,9 @@ public class GpxUiHelper {
 				x = e.distance;
 			}
 			if (x > 0) {
-				nextX += x / divX;
+				if (!(!calcGaps && e.firstPoint && lastEntry != null)) {
+					nextX += x / divX;
+				}
 				if (!Float.isNaN(e.elevation)) {
 					elev = e.elevation;
 					if (prevElevOrig != -80000) {
@@ -1383,7 +1385,8 @@ public class GpxUiHelper {
 															   @NonNull GPXTrackAnalysis analysis,
 															   @NonNull GPXDataSetAxisType axisType,
 															   boolean useRightAxis,
-															   boolean drawFilled) {
+															   boolean drawFilled,
+															   boolean calcGaps) {
 		OsmandSettings settings = ctx.getSettings();
 		OsmandSettings.MetricsConstants mc = settings.METRIC_SYSTEM.get();
 		boolean useFeet = (mc == OsmandSettings.MetricsConstants.MILES_AND_FEET) || (mc == OsmandSettings.MetricsConstants.MILES_AND_YARDS);
@@ -1393,11 +1396,11 @@ public class GpxUiHelper {
 		float divX;
 		XAxis xAxis = mChart.getXAxis();
 		if (axisType == GPXDataSetAxisType.TIME && analysis.isTimeSpecified()) {
-			divX = setupXAxisTime(xAxis, analysis.timeSpan);
+			divX = setupXAxisTime(xAxis, calcGaps ? analysis.timeSpan : analysis.timeSpanWithoutGaps);
 		} else if (axisType == GPXDataSetAxisType.TIMEOFDAY && analysis.isTimeSpecified()) {
 			divX = setupXAxisTimeOfDay(xAxis, analysis.startTime);
 		} else {
-			divX = setupAxisDistance(ctx, xAxis, analysis.totalDistance);
+			divX = setupAxisDistance(ctx, xAxis, calcGaps ? analysis.totalDistance : analysis.totalDistanceWithoutGaps);
 		}
 
 		final String mainUnitY = useFeet ? ctx.getString(R.string.foot) : ctx.getString(R.string.m);
@@ -1421,7 +1424,7 @@ public class GpxUiHelper {
 			}
 		});
 
-		List<Entry> values = calculateElevationArray(analysis, axisType, divX, convEle, true);
+		List<Entry> values = calculateElevationArray(analysis, axisType, divX, convEle, true, calcGaps);
 
 		OrderedLineDataSet dataSet = new OrderedLineDataSet(values, "", GPXDataSetType.ALTITUDE, axisType);
 		dataSet.priority = (float) (analysis.avgElevation - analysis.minElevation) * convEle;
@@ -1640,7 +1643,8 @@ public class GpxUiHelper {
 														   @NonNull GPXDataSetAxisType axisType,
 														   @Nullable List<Entry> eleValues,
 														   boolean useRightAxis,
-														   boolean drawFilled) {
+														   boolean drawFilled,
+														   boolean calcGaps) {
 		if (axisType == GPXDataSetAxisType.TIME || axisType == GPXDataSetAxisType.TIMEOFDAY) {
 			return null;
 		}
@@ -1649,10 +1653,10 @@ public class GpxUiHelper {
 		OsmandSettings.MetricsConstants mc = settings.METRIC_SYSTEM.get();
 		boolean useFeet = (mc == OsmandSettings.MetricsConstants.MILES_AND_FEET) || (mc == OsmandSettings.MetricsConstants.MILES_AND_YARDS);
 		final float convEle = useFeet ? 3.28084f : 1.0f;
-		final float totalDistance = analysis.totalDistance;
+		final float totalDistance = calcGaps ? analysis.totalDistance : analysis.totalDistanceWithoutGaps;
 
 		XAxis xAxis = mChart.getXAxis();
-		float divX = setupAxisDistance(ctx, xAxis, analysis.totalDistance);
+		float divX = setupAxisDistance(ctx, xAxis, calcGaps ? analysis.totalDistance : analysis.totalDistanceWithoutGaps);
 
 		final String mainUnitY = "%";
 
@@ -1677,7 +1681,7 @@ public class GpxUiHelper {
 
 		List<Entry> values;
 		if (eleValues == null) {
-			values = calculateElevationArray(analysis, GPXDataSetAxisType.DISTANCE, 1f, 1f, false);
+			values = calculateElevationArray(analysis, GPXDataSetAxisType.DISTANCE, 1f, 1f, false, calcGaps);
 		} else {
 			values = new ArrayList<>(eleValues.size());
 			for (Entry e : eleValues) {

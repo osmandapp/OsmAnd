@@ -873,7 +873,7 @@ public class GPXUtilities {
 			WptPt point = segment.points.get(k);
 			if (k > 0) {
 				double currentSegment = 0;
-				if (!(segment.generalSegment && joinSegments && point.firstPoint)) {
+				if (!(segment.generalSegment && !joinSegments && point.firstPoint)) {
 					currentSegment = metric.metric(prev, point);
 					secondaryMetricEnd += secondaryMetric.metric(prev, point);
 				}
