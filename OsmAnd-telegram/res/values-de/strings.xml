@@ -262,4 +262,5 @@
     <string name="buffer_time">Verfallszeit des Puffers</string>
     <string name="shared_string_suggested">Empfohlen</string>
     <string name="status_widget_title">OsmAnd Tracker-Status</string>
+    <string name="back_to_osmand">Zurück zu OsmAnd</string>
 </resources>
