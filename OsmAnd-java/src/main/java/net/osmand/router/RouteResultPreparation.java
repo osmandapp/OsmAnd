@@ -1087,14 +1087,15 @@ public class RouteResultPreparation {
 				t = attachKeepLeftInfoAndLanes(leftSide, prev, rr);
 			}
 			if (t != null) {
-				t.setTurnAngle((float) -mpi);
+				t.setTurnAngle((float) - mpi);
 			}
 		}
 		return t;
 	}
 
-	private int[] getTurnLanesInfo(RouteSegmentResult prevSegm, int mainTurnType) {		String turnLanes = getTurnLanesString(prevSegm);
-		int[] lanesArray ;
+	private int[] getTurnLanesInfo(RouteSegmentResult prevSegm, int mainTurnType) {
+		String turnLanes = getTurnLanesString(prevSegm);
+		int[] lanesArray;
 		if (turnLanes == null) {
 			if(prevSegm.getTurnType() != null && prevSegm.getTurnType().getLanes() != null
 					&& prevSegm.getDistance() < 100) {
