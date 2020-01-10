@@ -484,10 +484,10 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 				if (sharingMode) 0 else AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL
 		stopSharingSwitcher.isChecked = true
 		appBarScrollRange = -1
-		updateBackToOsmBtn()
+		updateBackToOsmAndBtn()
 	}
 
-	private fun updateBackToOsmBtn() {
+	private fun updateBackToOsmAndBtn() {
 		val pckg = app.settings.appToConnectPackage
 		backToOsmAndBtn.apply {
 			visibility = if (pckg.isNotEmpty() && sharingMode && AndroidUtils.isAppInstalled(app, pckg)) {
