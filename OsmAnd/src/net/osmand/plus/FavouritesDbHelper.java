@@ -3,7 +3,6 @@ package net.osmand.plus;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.annotation.StringRes;
 import android.support.v7.app.AlertDialog;
 
 import net.osmand.GPXUtilities;
@@ -12,7 +11,6 @@ import net.osmand.GPXUtilities.WptPt;
 import net.osmand.PlatformUtil;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
-import net.osmand.data.PersonalFavouritePoint;
 import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
 import net.osmand.plus.MapMarkersHelper.MapMarkersGroup;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
@@ -35,15 +33,14 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-import static net.osmand.data.PersonalFavouritePoint.PointType.HOME;
-import static net.osmand.data.PersonalFavouritePoint.PointType.PARKING;
-import static net.osmand.data.PersonalFavouritePoint.PointType.WORK;
 
 public class FavouritesDbHelper {
 
 	public interface FavoritesListener {
+
 		void onFavoritesLoaded();
-		void onFavoriteAddressResolved(@NonNull FavouritePoint favouritePoint);
+
+		void onFavoriteDataUpdated(@NonNull FavouritePoint favouritePoint);
 	}
 
 	private static final org.apache.commons.logging.Log log = PlatformUtil.getLog(FavouritesDbHelper.class);
@@ -54,7 +51,6 @@ public class FavouritesDbHelper {
 	public static final String FILE_TO_BACKUP = "favourites_bak.gpx"; //$NON-NLS-1$
 
 	private List<FavouritePoint> cachedFavoritePoints = new ArrayList<>();
-	private List<FavouritePoint> cachedPersonalFavoritePoints = new ArrayList<>();
 	private List<FavoriteGroup> favoriteGroups = new ArrayList<>();
 	private Map<String, FavoriteGroup> flatGroups = new LinkedHashMap<>();
 	private final OsmandApplication context;
@@ -70,11 +66,63 @@ public class FavouritesDbHelper {
 	}
 
 	public static class FavoriteGroup {
-		public String name;
-		public boolean visible = true;
-		public int color;
-		public boolean personal = false;
-		public List<FavouritePoint> points = new ArrayList<FavouritePoint>();
+		public static final String PERSONAL_CATEGORY = "personal";
+		private String name;
+		private boolean visible = true;
+		private int color;
+		private List<FavouritePoint> points = new ArrayList<>();
+
+		public boolean isPersonal() {
+			return isPersonal(name);
+		}
+
+		private static boolean isPersonal(String name) {
+			return PERSONAL_CATEGORY.equals(name);
+		}
+
+		public static boolean isPersonalCategoryDisplayName(Context ctx, String name){
+			return name.equals(ctx.getString(R.string.personal_category_name));
+		}
+
+		public static String getDisplayName(Context ctx, String name) {
+			if (isPersonal(name)) {
+				return ctx.getString(R.string.personal_category_name);
+			} else if (name.isEmpty()) {
+				return ctx.getString(R.string.shared_string_favorites);
+			} else {
+				return name;
+			}
+		}
+
+		public List<FavouritePoint> getPoints() {
+			return points;
+		}
+
+		public int getColor() {
+			return color;
+		}
+
+		public boolean isVisible() {
+			return visible;
+		}
+
+		public String getName() {
+			return name;
+		}
+
+		public String getDisplayName(Context ctx) {
+			return getDisplayName(ctx, name);
+		}
+
+		public static String convertDisplayNameToGroupIdName(Context context, String name) {
+			if (isPersonalCategoryDisplayName(context,name)) {
+				return PERSONAL_CATEGORY;
+			}
+			if (name.equals(context.getString(R.string.shared_string_favorites))) {
+				return "";
+			}
+			return name;
+		}
 	}
 
 	public void loadFavorites() {
@@ -116,28 +164,12 @@ public class FavouritesDbHelper {
 		});
 	}
 
-	public FavouritePoint getWorkPoint() {
-		return getPersonalPoint(WORK);
-	}
-
-	public FavouritePoint getHomePoint() {
-		return getPersonalPoint(HOME);
-	}
-
-	public FavouritePoint getParkingPoint() {
-		return getPersonalPoint(PARKING);
-	}
-
-	public void deleteParkingPoint() {
-		deleteFavourite(getParkingPoint());
-	}
-
-	private FavouritePoint getPersonalPoint(PersonalFavouritePoint.PointType pointType) {
-		for (FavouritePoint fp : cachedPersonalFavoritePoints) {
-				if (((PersonalFavouritePoint) fp).getType() == pointType) {
-					return fp;
-				}
+	public FavouritePoint getSpecialPoint(FavouritePoint.SpecialPointType pointType) {
+		for (FavouritePoint fp : cachedFavoritePoints) {
+			if (fp.getSpecialPointType() == pointType) {
+				return fp;
 			}
+		}
 		return null;
 	}
 
@@ -167,7 +199,7 @@ public class FavouritesDbHelper {
 	private void runSyncWithMarkers(FavoriteGroup favGroup) {
 		MapMarkersHelper helper = context.getMapMarkersHelper();
 		MapMarkersGroup group = helper.getMarkersGroup(favGroup);
-		if(group != null) {
+		if (group != null) {
 			helper.runSynchronization(group);
 		}
 	}
@@ -175,7 +207,7 @@ public class FavouritesDbHelper {
 	private boolean removeFromMarkers(FavoriteGroup favGroup) {
 		MapMarkersHelper helper = context.getMapMarkersHelper();
 		MapMarkersGroup group = helper.getMarkersGroup(favGroup);
-		if(group != null) {
+		if (group != null) {
 			helper.removeMarkersGroup(group);
 			return true;
 		}
@@ -229,9 +261,6 @@ public class FavouritesDbHelper {
 				runSyncWithMarkers(group);
 			}
 			cachedFavoritePoints.remove(p);
-			if (p.isPersonal()) {
-				cachedPersonalFavoritePoints.remove(p);
-			}
 		}
 		if (saveImmediately) {
 			saveCurrentPointsIntoFile();
@@ -239,43 +268,15 @@ public class FavouritesDbHelper {
 		return true;
 	}
 
-	public void setHomePoint(@NonNull LatLon latLon, @Nullable String description) {
-		FavouritePoint homePoint = getHomePoint();
-		if (homePoint != null) {
-			editFavourite(homePoint, latLon.getLatitude(), latLon.getLongitude(), description);
+	public void setSpecialPoint(@NonNull LatLon latLon, FavouritePoint.SpecialPointType specialType, @Nullable String address) {
+		FavouritePoint point = getSpecialPoint(specialType);
+		if (point != null) {
+			editFavourite(point, latLon.getLatitude(), latLon.getLongitude(), address);
 		} else {
-			homePoint = new PersonalFavouritePoint(context, HOME, latLon.getLatitude(), latLon.getLongitude());
-			homePoint.setDescription(description);
-			addFavourite(homePoint);
+			point = new FavouritePoint(latLon.getLatitude(), latLon.getLongitude(), specialType.getName(), specialType.getCategory());
+			point.setAddress(address);
+			addFavourite(point);
 		}
-		if (description == null) {
-			lookupAddress(homePoint);
-		}
-	}
-
-	public void setWorkPoint(@NonNull LatLon latLon, @Nullable String description) {
-		FavouritePoint workPoint = getWorkPoint();
-		if (workPoint != null) {
-			editFavourite(workPoint, latLon.getLatitude(), latLon.getLongitude(), description);
-		} else {
-			workPoint = new PersonalFavouritePoint(context, WORK, latLon.getLatitude(), latLon.getLongitude());
-			workPoint.setDescription(description);
-			addFavourite(workPoint);
-		}
-		if (description == null) {
-			lookupAddress(workPoint);
-		}
-	}
-
-	public void setParkingPoint(@NonNull LatLon latLon) {
-		FavouritePoint parkingPoint = getParkingPoint();
-		if (parkingPoint != null) {
-			editFavourite(parkingPoint, latLon.getLatitude(), latLon.getLongitude(), null);
-		} else {
-			parkingPoint = new PersonalFavouritePoint(context, PARKING, latLon.getLatitude(), latLon.getLongitude());
-			addFavourite(parkingPoint);
-		}
-		lookupAddress(parkingPoint);
 	}
 
 	public boolean addFavourite(FavouritePoint p) {
@@ -286,6 +287,9 @@ public class FavouritesDbHelper {
 		if (p.getName().equals("") && flatGroups.containsKey(p.getCategory())) {
 			return true;
 		}
+		if (!p.isAddressSpecified()) {
+			lookupAddress(p);
+		}
 		context.getSettings().SHOW_FAVORITES.set(true);
 		FavoriteGroup group = getOrCreateGroup(p, 0);
 
@@ -294,9 +298,6 @@ public class FavouritesDbHelper {
 			p.setColor(group.color);
 			group.points.add(p);
 			cachedFavoritePoints.add(p);
-		}
-		if (p.isPersonal()) {
-			cachedPersonalFavoritePoints.add(p);
 		}
 		if (saveImmediately) {
 			sortAll();
@@ -307,24 +308,7 @@ public class FavouritesDbHelper {
 		return true;
 	}
 
-	public void lookupAddressAllPersonalPoints() {
-		if (!context.isApplicationInitializing()) {
-			FavouritePoint workPoint = getWorkPoint();
-			if (workPoint != null) {
-				lookupAddress(workPoint);
-			}
-			FavouritePoint homePoint = getHomePoint();
-			if (homePoint != null) {
-				lookupAddress(homePoint);
-			}
-			FavouritePoint parkingPoint = getParkingPoint();
-			if (parkingPoint != null) {
-				lookupAddress(parkingPoint);
-			}
-		}
-	}
-
-	private void lookupAddress(@NonNull final FavouritePoint p) {
+	public void lookupAddress(@NonNull final FavouritePoint p) {
 		AddressLookupRequest request = addressRequestMap.get(p);
 		double latitude = p.getLatitude();
 		double longitude = p.getLongitude();
@@ -332,21 +316,21 @@ public class FavouritesDbHelper {
 			cancelAddressRequest(p);
 			request = new AddressLookupRequest(new LatLon(latitude, longitude),
 					new GeocodingLookupService.OnAddressLookupResult() {
-				@Override
-				public void geocodingDone(String address) {
-					addressRequestMap.remove(p);
-					editFavouriteDescription(p, address);
-					context.runInUIThread(new Runnable() {
 						@Override
-						public void run() {
-							for (FavoritesListener listener : listeners) {
-								listener.onFavoriteAddressResolved(p);
-							}
-						}
-					});
+						public void geocodingDone(String address) {
+							addressRequestMap.remove(p);
+							editAddressDescription(p, address);
+							context.runInUIThread(new Runnable() {
+								@Override
+								public void run() {
+									for (FavoritesListener listener : listeners) {
+										listener.onFavoriteDataUpdated(p);
+									}
+								}
+							});
 
-				}
-			}, null);
+						}
+					}, null);
 			addressRequestMap.put(p, request);
 			context.getGeocodingLookupService().lookupAddress(request);
 		}
@@ -454,27 +438,23 @@ public class FavouritesDbHelper {
 		return true;
 	}
 
-	public boolean editFavouriteDescription(FavouritePoint p, String description) {
-		p.setDescription(description);
+	private void editAddressDescription(@NonNull FavouritePoint p, @Nullable String address) {
+		p.setAddress(address);
 		saveCurrentPointsIntoFile();
 		runSyncWithMarkers(getOrCreateGroup(p, 0));
-		return true;
 	}
 
-	public boolean editFavourite(FavouritePoint p, double lat, double lon) {
+	public boolean editFavourite(@NonNull FavouritePoint p, double lat, double lon) {
+		return editFavourite(p, lat, lon, null);
+	}
+
+	private boolean editFavourite(@NonNull FavouritePoint p, double lat, double lon, @Nullable String description) {
 		cancelAddressRequest(p);
 		p.setLatitude(lat);
 		p.setLongitude(lon);
-		saveCurrentPointsIntoFile();
-		runSyncWithMarkers(getOrCreateGroup(p, 0));
-		return true;
-	}
-
-	public boolean editFavourite(FavouritePoint p, double lat, double lon, String description) {
-		cancelAddressRequest(p);
-		p.setLatitude(lat);
-		p.setLongitude(lon);
-		p.setDescription(description);
+		if (description != null) {
+			p.setDescription(description);
+		}
 		saveCurrentPointsIntoFile();
 		runSyncWithMarkers(getOrCreateGroup(p, 0));
 		return true;
@@ -498,7 +478,7 @@ public class FavouritesDbHelper {
 	private void backup(File backupFile, File externalFile) {
 		try {
 			File f = new File(backupFile.getParentFile(), backupFile.getName());
-			BZip2CompressorOutputStream out = new BZip2CompressorOutputStream( new FileOutputStream(f));
+			BZip2CompressorOutputStream out = new BZip2CompressorOutputStream(new FileOutputStream(f));
 			FileInputStream fis = new FileInputStream(externalFile);
 			Algorithms.streamCopy(fis, out);
 			fis.close();
@@ -511,7 +491,6 @@ public class FavouritesDbHelper {
 	public Exception exportFavorites() {
 		return saveExternalFile(null);
 	}
-
 
 	private Exception saveExternalFile(Set<String> deleted) {
 		Map<String, FavouritePoint> all = new LinkedHashMap<String, FavouritePoint>();
@@ -530,7 +509,6 @@ public class FavouritesDbHelper {
 		favoritePoints.addAll(all.values());
 		return saveFile(favoritePoints, getExternalFile());
 	}
-
 
 	private String getKey(FavouritePoint p) {
 		return p.getName() + DELIMETER + p.getCategory();
@@ -582,7 +560,6 @@ public class FavouritesDbHelper {
 		return GPXUtilities.writeGpxFile(f, gpx);
 	}
 
-
 	public GPXFile asGpxFile() {
 		return asGpxFile(cachedFavoritePoints);
 	}
@@ -595,13 +572,13 @@ public class FavouritesDbHelper {
 		return gpx;
 	}
 
-
-	public void addEmptyCategory(String name) {
+	private void addEmptyCategory(String name) {
 		addEmptyCategory(name, 0, true);
 	}
 
 	public void addEmptyCategory(String name, int color) {
-		addEmptyCategory(name, color, true);
+		if (FavoriteGroup.isPersonalCategoryDisplayName(context,name))
+			addEmptyCategory(name, color, true);
 	}
 
 	public void addEmptyCategory(String name, int color, boolean visible) {
@@ -627,26 +604,6 @@ public class FavouritesDbHelper {
 		return fp;
 	}
 
-	public List<FavouritePoint> getNonPersonalVisibleFavouritePoints() {
-		List<FavouritePoint> fp = new ArrayList<>();
-		for (FavouritePoint p : getNonPersonalFavouritePoints()) {
-			if (p.isVisible()) {
-				fp.add(p);
-			}
-		}
-		return fp;
-	}
-
-	public List<FavouritePoint> getNonPersonalFavouritePoints() {
-		List<FavouritePoint> fp = new ArrayList<>();
-		for (FavouritePoint p : cachedFavoritePoints) {
-			if (!p.isPersonal()) {
-				fp.add(p);
-			}
-		}
-		return fp;
-	}
-
 	@Nullable
 	public FavouritePoint getVisibleFavByLatLon(@NonNull LatLon latLon) {
 		for (FavouritePoint fav : cachedFavoritePoints) {
@@ -656,7 +613,6 @@ public class FavouritesDbHelper {
 		}
 		return null;
 	}
-
 
 	public List<FavoriteGroup> getFavoriteGroups() {
 		return favoriteGroups;
@@ -680,9 +636,9 @@ public class FavouritesDbHelper {
 		}
 	}
 
-	public FavoriteGroup getGroup(String name) {
-		if (flatGroups.containsKey(name)) {
-			return flatGroups.get(name);
+	public FavoriteGroup getGroup(String nameId) {
+		if (flatGroups.containsKey(nameId)) {
+			return flatGroups.get(nameId);
 		} else {
 			return null;
 		}
@@ -700,18 +656,12 @@ public class FavouritesDbHelper {
 		return null;
 	}
 
-
 	public void recalculateCachedFavPoints() {
 		List<FavouritePoint> allPoints = new ArrayList<>();
-		List<FavouritePoint> personalPoints = new ArrayList<>();
 		for (FavoriteGroup f : favoriteGroups) {
-			if (f.personal) {
-				personalPoints.addAll(f.points);
-			}
 			allPoints.addAll(f.points);
 		}
 		cachedFavoritePoints = allPoints;
-		cachedPersonalFavoritePoints = personalPoints;
 	}
 
 	public void sortAll() {
@@ -721,7 +671,7 @@ public class FavouritesDbHelper {
 
 			@Override
 			public int compare(FavoriteGroup lhs, FavoriteGroup rhs) {
-				return lhs.personal ? -1 : rhs.personal ? 1 : collator.compare(lhs.name, rhs.name);
+				return lhs.isPersonal() ? -1 : rhs.isPersonal() ? 1 : collator.compare(lhs.name, rhs.name);
 			}
 		});
 		Comparator<FavouritePoint> favoritesComparator = getComparator();
@@ -730,9 +680,6 @@ public class FavouritesDbHelper {
 		}
 		if (cachedFavoritePoints != null) {
 			Collections.sort(cachedFavoritePoints, favoritesComparator);
-		}
-		if (cachedPersonalFavoritePoints != null) {
-			Collections.sort(cachedPersonalFavoritePoints, favoritesComparator);
 		}
 	}
 
@@ -743,15 +690,6 @@ public class FavouritesDbHelper {
 
 			@Override
 			public int compare(FavouritePoint o1, FavouritePoint o2) {
-				if (o1.isPersonal() && o2.isPersonal()) {
-					int x = ((PersonalFavouritePoint) o1).getType().getOrder();
-					int y = ((PersonalFavouritePoint) o2).getType().getOrder();
-					return Algorithms.compare(x, y);
-				} else if (o1.isPersonal()) {
-					return -1;
-				} else if (o2.isPersonal()) {
-					return 1;
-				}
 				String s1 = o1.getName();
 				String s2 = o2.getName();
 				int i1 = Algorithms.extractIntegerNumber(s1);
@@ -787,7 +725,7 @@ public class FavouritesDbHelper {
 			return false;
 		}
 		for (WptPt p : res.getPoints()) {
-			FavouritePoint fp = FavouritePoint.fromWpt(context, p);
+			FavouritePoint fp = FavouritePoint.fromWpt(p);
 			if (fp != null) {
 				points.put(getKey(fp), fp);
 			}
@@ -852,7 +790,6 @@ public class FavouritesDbHelper {
 		group.name = p.getCategory();
 		group.visible = p.isVisible();
 		group.color = p.getColor();
-		group.personal = p.isPersonal();
 		flatGroups.put(group.name, group);
 		favoriteGroups.add(group);
 		if (group.color == 0) {

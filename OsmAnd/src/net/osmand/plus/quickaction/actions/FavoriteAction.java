@@ -150,21 +150,12 @@ public class FavoriteAction extends QuickAction {
 
 			FavouritesDbHelper.FavoriteGroup group = helper.getFavoriteGroups().get(0);
 
-			if (group.name.isEmpty() && group.color == 0) {
+			int color = group.getColor() == 0 ? activity.getResources().getColor(R.color.color_favorite) : group.getColor();
+			categoryEdit.setText(group.getDisplayName(activity));
+			categoryImage.setColorFilter(color);
 
-				group.name = activity.getString(R.string.shared_string_favorites);
-
-				categoryEdit.setText(activity.getString(R.string.shared_string_favorites));
-				categoryImage.setColorFilter(activity.getResources().getColor(R.color.color_favorite));
-
-			} else {
-
-				categoryEdit.setText(group.name);
-				categoryImage.setColorFilter(group.color);
-			}
-
-			getParams().put(KEY_CATEGORY_NAME, group.name);
-			getParams().put(KEY_CATEGORY_COLOR, String.valueOf(group.color));
+			getParams().put(KEY_CATEGORY_NAME, group.getName());
+			getParams().put(KEY_CATEGORY_COLOR, String.valueOf(group.getColor()));
 
 		} else {
 

@@ -3,13 +3,8 @@ package net.osmand.plus.mapmarkers.adapters;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
-import net.osmand.plus.UiUtilities;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 
 import java.util.List;
@@ -32,10 +27,10 @@ public class FavouritesGroupsAdapter extends GroupsAdapter {
 		} else if (holder instanceof MapMarkersGroupViewHolder) {
 			FavoriteGroup favoriteGroup = getItem(position);
 			MapMarkersGroupViewHolder markersGroupViewHolder = (MapMarkersGroupViewHolder) holder;
-			int color = favoriteGroup.color == 0 || favoriteGroup.color == Color.BLACK ? app.getResources().getColor(R.color.color_favorite) : favoriteGroup.color;
+			int color = favoriteGroup.getColor() == 0 || favoriteGroup.getColor() == Color.BLACK ? app.getResources().getColor(R.color.color_favorite) : favoriteGroup.getColor();
 			markersGroupViewHolder.icon.setImageDrawable(iconsCache.getPaintedIcon(R.drawable.ic_action_folder, color | 0xff000000));
-			markersGroupViewHolder.name.setText(favoriteGroup.name.length() == 0 ? app.getString(R.string.shared_string_favorites) : favoriteGroup.name);
-			markersGroupViewHolder.numberCount.setText(String.valueOf(favoriteGroup.points.size()));
+			markersGroupViewHolder.name.setText(favoriteGroup.getName().length() == 0 ? app.getString(R.string.shared_string_favorites) : favoriteGroup.getName());
+			markersGroupViewHolder.numberCount.setText(String.valueOf(favoriteGroup.getPoints().size()));
 		}
 	}
 

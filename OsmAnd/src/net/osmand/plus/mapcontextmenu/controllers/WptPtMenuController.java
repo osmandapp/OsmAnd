@@ -82,7 +82,7 @@ public class WptPtMenuController extends MenuController {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			return FavoriteImageDrawable.getOrCreate(mapActivity.getMyApplication(),
-					wpt.getColor(ContextCompat.getColor(mapActivity, R.color.gpx_color_point)), false);
+					wpt.getColor(ContextCompat.getColor(mapActivity, R.color.gpx_color_point)), false, wpt);
 		} else {
 			return null;
 		}

@@ -23,6 +23,7 @@ import net.osmand.IndexConstants;
 import net.osmand.StateChangedListener;
 import net.osmand.ValueHolder;
 import net.osmand.aidl.OsmandAidlApi;
+import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.map.ITileSource;
@@ -283,10 +284,10 @@ public class OsmandSettings {
 			workPoint = new LatLon(lat, lon);
 		}
 		if (homePoint != null) {
-			favorites.setHomePoint(homePoint, null);
+			favorites.setSpecialPoint(homePoint, FavouritePoint.SpecialPointType.HOME, null);
 		}
 		if (workPoint != null) {
-			favorites.setWorkPoint(workPoint, null);
+			favorites.setSpecialPoint(workPoint, FavouritePoint.SpecialPointType.WORK, null);
 		}
 	}
 

@@ -42,7 +42,7 @@ public class AddFavouritesGroupBottomSheetDialogFragment extends AddGroupBottomS
 				}
 
 				@Override
-				public void onFavoriteAddressResolved(@NonNull FavouritePoint favouritePoint) {
+				public void onFavoriteDataUpdated(@NonNull FavouritePoint favouritePoint) {
 				}
 			});
 		}
@@ -52,8 +52,8 @@ public class AddFavouritesGroupBottomSheetDialogFragment extends AddGroupBottomS
 	@Override
 	protected void onItemClick(int position) {
 		FavoriteGroup group = favouritesDbHelper.getFavoriteGroups().get(position - 1);
-		if (!group.visible) {
-			favouritesDbHelper.editFavouriteGroup(group, group.name, group.color, true);
+		if (!group.isVisible()) {
+			favouritesDbHelper.editFavouriteGroup(group, group.getName(), group.getColor(), true);
 		}
 		getMyApplication().getMapMarkersHelper().addOrEnableGroup(group);
 		dismiss();
