@@ -262,4 +262,5 @@
     <string name="timeline">Ajajoon</string>
     <string name="shared_string_suggested">Soovitatud</string>
     <string name="status_widget_title">OsmAnd Tracker olek</string>
+    <string name="back_to_osmand">Tagasi OsmAnd-i</string>
 </resources>
