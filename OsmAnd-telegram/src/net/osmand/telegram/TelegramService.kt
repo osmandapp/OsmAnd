@@ -244,7 +244,6 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 					isSending = false
 					oldestTime = -1
 				}
-				log.info("oldest buffered msg time: $oldestTime | isSending: $isSending")
 				app().showLocationHelper.addOrUpdateStatusWidget(oldestTime, isSending)
 			}
 			startWidgetUpdates()
