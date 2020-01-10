@@ -50,7 +50,7 @@
 			android:id="@+id/text_container"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:layout_marginBottom="@dimen/content_padding_standard"
+			android:layout_marginBottom="@dimen/content_padding_half"
 			android:animateLayoutChanges="true"
 			android:orientation="vertical"
 			android:paddingLeft="@dimen/my_location_text_sides_margin"
@@ -58,7 +58,7 @@
 
 			<LinearLayout
 				android:layout_width="match_parent"
-				android:layout_height="@dimen/action_bar_height">
+				android:layout_height="wrap_content">
 
 				<net.osmand.telegram.ui.views.TextViewEx
 					android:id="@+id/title"
@@ -66,6 +66,8 @@
 					android:layout_height="wrap_content"
 					android:layout_gravity="center_vertical"
 					android:layout_weight="1"
+					android:paddingTop="@dimen/app_bar_title_padding_small"
+					android:paddingBottom="@dimen/app_bar_title_padding_small"
 					android:ellipsize="end"
 					android:gravity="center"
 					android:maxLines="1"
