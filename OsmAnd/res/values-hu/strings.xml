@@ -1847,7 +1847,7 @@ Hosszúság: %2$s</string>
     <string name="osm_user_stat">Szerkesztések: %1$s, helyezés: %2$s, összes szerkesztés: %3$s</string>
     <string name="osm_editors_ranking">OSM szerkesztői rangsor</string>
     <string name="osm_live_subscription">OsmAnd Live előfizetés</string>
-    <string name="osm_live_subscribe_btn">Feliratkozás</string>
+    <string name="osm_live_subscribe_btn">Előfizetés</string>
     <string name="osm_live_user_public_name">Nyilvános név</string>
     <string name="osm_live_hide_user_name">Ne jelenjék meg a nevem a jelentésekben</string>
     <string name="osm_live_support_region">Támogatott régió</string>
