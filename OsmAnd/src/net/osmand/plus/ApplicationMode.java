@@ -79,13 +79,13 @@ public class ApplicationMode {
 	private int arrivalDistance = 90;
 	private int offRouteDistance = 350;
 	private int bearingIconDay = R.drawable.map_pedestrian_bearing;
-	private int bearingIconNight = R.drawable.map_pedestrian_bearing_night;
+//	private int bearingIconNight = R.drawable.map_pedestrian_bearing_night;
 	private int headingIconDay = R.drawable.map_pedestrian_location_view_angle;
-	private int headingIconNight = R.drawable.map_pedestrian_location_view_angle_night;
-	private int locationIconDay = R.drawable.map_pedestrian_location;
-	private int locationIconNight = R.drawable.map_pedestrian_location_night;
-	private int locationIconDayLost = R.drawable.map_pedestrian_location_lost;
-	private int locationIconNightLost = R.drawable.map_pedestrian_location_lost_night;
+//	private int headingIconNight = R.drawable.map_pedestrian_location_view_angle_night;
+	private int locationIcon = R.drawable.map_default_location_xml;
+//	private int locationIconNight = R.drawable.map_pedestrian_location_night;
+//	private int locationIconDayLost = R.drawable.map_pedestrian_location_lost;
+//	private int locationIconNightLost = R.drawable.map_pedestrian_location_lost_night;
 
 	private ApplicationMode(int key, String stringKey) {
 		this.keyName = key;
@@ -207,13 +207,13 @@ public class ApplicationMode {
 			m.arrivalDistance = m.parentAppMode.arrivalDistance;
 			m.offRouteDistance = m.parentAppMode.offRouteDistance;
 			m.bearingIconDay = m.parentAppMode.bearingIconDay;
-			m.bearingIconNight = m.parentAppMode.bearingIconNight;
+//			m.bearingIconNight = m.parentAppMode.bearingIconNight;
 			m.headingIconDay = m.parentAppMode.headingIconDay;
-			m.headingIconNight = m.parentAppMode.headingIconNight;
-			m.locationIconDay = m.parentAppMode.locationIconDay;
-			m.locationIconNight = m.parentAppMode.locationIconNight;
-			m.locationIconDayLost = m.parentAppMode.locationIconDayLost;
-			m.locationIconNightLost = m.parentAppMode.locationIconNightLost;
+//			m.headingIconNight = m.parentAppMode.headingIconNight;
+			m.locationIcon = m.parentAppMode.locationIcon;
+//			m.locationIconNight = m.parentAppMode.locationIconNight;
+//			m.locationIconDayLost = m.parentAppMode.locationIconDayLost;
+//			m.locationIconNightLost = m.parentAppMode.locationIconNightLost;
 			values.add(applicationMode);
 			if (applicationMode.getOrder() == 0 && !values.isEmpty()) {
 				applicationMode.setOrder(values.size());
@@ -264,47 +264,47 @@ public class ApplicationMode {
 
 		public ApplicationModeBuilder carLocation() {
 			applicationMode.bearingIconDay = R.drawable.map_car_bearing;
-			applicationMode.bearingIconNight = R.drawable.map_car_bearing_night;
+//			applicationMode.bearingIconNight = R.drawable.map_car_bearing_night;
 			applicationMode.headingIconDay = R.drawable.map_car_location_view_angle;
-			applicationMode.headingIconNight = R.drawable.map_car_location_view_angle_night;
-			applicationMode.locationIconDay = R.drawable.map_car_location;
-			applicationMode.locationIconNight = R.drawable.map_car_location_night;
-			applicationMode.locationIconDayLost = R.drawable.map_car_location_lost;
-			applicationMode.locationIconNightLost = R.drawable.map_car_location_lost_night;
+//			applicationMode.headingIconNight = R.drawable.map_car_location_view_angle_night;
+			applicationMode.locationIcon = R.drawable.map_car_location_xml;
+//			applicationMode.locationIconNight = R.drawable.map_car_location_night;
+//			applicationMode.locationIconDayLost = R.drawable.map_car_location_lost;
+//			applicationMode.locationIconNightLost = R.drawable.map_car_location_lost_night;
 			return this;
 		}
 
 		public ApplicationModeBuilder bicycleLocation() {
 			applicationMode.bearingIconDay = R.drawable.map_bicycle_bearing;
-			applicationMode.bearingIconNight = R.drawable.map_bicycle_bearing_night;
+//			applicationMode.bearingIconNight = R.drawable.map_bicycle_bearing_night;
 			applicationMode.headingIconDay = R.drawable.map_bicycle_location_view_angle;
-			applicationMode.headingIconNight = R.drawable.map_bicycle_location_view_angle_night;
-			applicationMode.locationIconDay = R.drawable.map_bicycle_location;
-			applicationMode.locationIconNight = R.drawable.map_bicycle_location_night;
-			applicationMode.locationIconDayLost = R.drawable.map_bicycle_location_lost;
-			applicationMode.locationIconNightLost = R.drawable.map_bicycle_location_lost_night;
+//			applicationMode.headingIconNight = R.drawable.map_bicycle_location_view_angle_night;
+			applicationMode.locationIcon = R.drawable.map_bicycle_location_xml;
+//			applicationMode.locationIconNight = R.drawable.map_bicycle_location_night;
+//			applicationMode.locationIconDayLost = R.drawable.map_bicycle_location_lost;
+//			applicationMode.locationIconNightLost = R.drawable.map_bicycle_location_lost_night;
 			return this;
 		}
 
 		public ApplicationModeBuilder defLocation() {
 			applicationMode.bearingIconDay = R.drawable.map_pedestrian_bearing;
-			applicationMode.bearingIconNight = R.drawable.map_pedestrian_bearing_night;
+//			applicationMode.bearingIconNight = R.drawable.map_pedestrian_bearing_night;
 			applicationMode.headingIconDay = R.drawable.map_default_location_view_angle;
-			applicationMode.headingIconNight = R.drawable.map_default_location_view_angle_night;
-			applicationMode.locationIconDay = R.drawable.map_pedestrian_location;
-			applicationMode.locationIconNight = R.drawable.map_pedestrian_location_night;
-			applicationMode.locationIconDayLost = R.drawable.map_pedestrian_location_lost;
-			applicationMode.locationIconNightLost = R.drawable.map_pedestrian_location_lost_night;
+//			applicationMode.headingIconNight = R.drawable.map_default_location_view_angle_night;
+			applicationMode.locationIcon = R.drawable.map_default_location_xml;
+//			applicationMode.locationIconNight = R.drawable.map_pedestrian_location_night;
+//			applicationMode.locationIconDayLost = R.drawable.map_pedestrian_location_lost;
+//			applicationMode.locationIconNightLost = R.drawable.map_pedestrian_location_lost_night;
 			return this;
 		}
 
 		public ApplicationModeBuilder nauticalLocation() {
 			applicationMode.bearingIconDay = R.drawable.map_nautical_bearing;
-			applicationMode.bearingIconNight = R.drawable.map_nautical_bearing_night;
+//			applicationMode.bearingIconNight = R.drawable.map_nautical_bearing_night;
 			applicationMode.headingIconDay = R.drawable.map_nautical_location_view_angle;
-			applicationMode.headingIconNight = R.drawable.map_nautical_location_view_angle_night;
-			applicationMode.locationIconDay = R.drawable.map_nautical_location;
-			applicationMode.locationIconNight = R.drawable.map_nautical_location_night;
+//			applicationMode.headingIconNight = R.drawable.map_nautical_location_view_angle_night;
+			applicationMode.locationIcon = R.drawable.map_nautical_location;
+//			applicationMode.locationIconNight = R.drawable.map_nautical_location_night;
 			return this;
 		}
 
@@ -512,33 +512,33 @@ public class ApplicationMode {
 		return bearingIconDay;
 	}
 
-	public int getResourceBearingNight() {
-		return bearingIconNight;
-	}
+//	public int getResourceBearingNight() {
+//		return bearingIconNight;
+//	}
 
 	public int getResourceHeadingDay() {
 		return headingIconDay;
 	}
 
-	public int getResourceHeadingNight() {
-		return headingIconNight;
-	}
+//	public int getResourceHeadingNight() {
+//		return headingIconNight;
+//	}
 
 	public int getResourceLocationDay() {
-		return locationIconDay;
+		return locationIcon;
 	}
 
-	public int getResourceLocationNight() {
-		return locationIconNight;
-	}
+//	public int getResourceLocationNight() {
+//		return locationIconNight;
+//	}
 
-	public int getResourceLocationDayLost() {
-		return locationIconDayLost;
-	}
+//	public int getResourceLocationDayLost() {
+//		return locationIconDayLost;
+//	}
 
-	public int getResourceLocationNightLost() {
-		return locationIconNightLost;
-	}
+//	public int getResourceLocationNightLost() {
+//		return locationIconNightLost;
+//	}
 
 	public String getStringKey() {
 		return stringKey;

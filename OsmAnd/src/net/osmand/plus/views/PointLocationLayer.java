@@ -7,7 +7,12 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.PointF;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
 import android.graphics.RectF;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.LayerDrawable;
+import android.support.v4.content.ContextCompat;
 
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
@@ -23,6 +28,9 @@ import org.apache.commons.logging.Log;
 
 import java.util.List;
 
+import static android.graphics.Paint.ANTI_ALIAS_FLAG;
+import static android.graphics.Paint.FILTER_BITMAP_FLAG;
+
 public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider {
 	private static final Log LOG = PlatformUtil.getLog(PointLocationLayer.class);
 
@@ -30,15 +38,19 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 	protected final static int RADIUS = 7;
 
 	private Paint locationPaint;
+	private Paint headingPaint;
 	private Paint area;
 	private Paint aroundArea;
 
 	private OsmandMapTileView view;
 
 	private ApplicationMode appMode;
+	private int color;
 	private Bitmap bearingIcon;
 	private Bitmap headingIcon;
-	private Bitmap locationIcon;
+	private Bitmap locationIconCenter;
+	private Bitmap locationIconTop;
+	private Bitmap locationIconBottom;
 	private OsmAndLocationProvider locationProvider;
 	private MapViewTrackingUtilities mapViewTrackingUtilities;
 	private boolean nm;
@@ -52,6 +64,9 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 		locationPaint = new Paint();
 		locationPaint.setAntiAlias(true);
 		locationPaint.setFilterBitmap(true);
+
+		headingPaint = new Paint(ANTI_ALIAS_FLAG | FILTER_BITMAP_FLAG);
+
 
 		area = new Paint();
 		area.setColor(view.getResources().getColor(R.color.pos_area));
@@ -119,7 +134,7 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 				canvas.save();
 				canvas.rotate(heading - 180, locationX, locationY);
 				canvas.drawBitmap(headingIcon, locationX - headingIcon.getWidth() / 2,
-						locationY - headingIcon.getHeight() / 2, locationPaint);
+						locationY - headingIcon.getHeight() / 2, headingPaint);
 				canvas.restore();
 
 			}
@@ -131,8 +146,18 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 				canvas.drawBitmap(bearingIcon, locationX - bearingIcon.getWidth() / 2,
 						locationY - bearingIcon.getHeight() / 2, locationPaint);
 			} else {
-				canvas.drawBitmap(locationIcon, locationX - locationIcon.getWidth() / 2,
-						locationY - locationIcon.getHeight() / 2, locationPaint);
+				if (locationIconTop != null) {
+					canvas.drawBitmap(locationIconTop, locationX - locationIconCenter.getWidth() / 2,
+							locationY - locationIconCenter.getHeight() / 2, headingPaint);
+				}
+				if (locationIconCenter != null) {
+					canvas.drawBitmap(locationIconCenter, locationX - locationIconCenter.getWidth() / 2,
+							locationY - locationIconCenter.getHeight() / 2, locationPaint);
+				}
+				if (locationIconBottom != null) {
+					canvas.drawBitmap(locationIconBottom, locationX - locationIconCenter.getWidth() / 2,
+							locationY - locationIconCenter.getHeight() / 2, headingPaint);
+				}
 			}
 
 		}
@@ -147,32 +172,24 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 	public void destroyLayer() {
 
 	}
-	public void updateIcons(ApplicationMode appMode, boolean nighMode, boolean locationOutdated) {
-		if (appMode != this.appMode || this.nm != nighMode || this.locationOutdated != locationOutdated) {
+	private void updateIcons(ApplicationMode appMode, boolean nighMode, boolean locationOutdated) {
+		if (appMode != this.appMode || this.nm != nighMode || this.locationOutdated != locationOutdated ||
+				color != appMode.getIconColorInfo().getColor(nighMode)) {
 			this.appMode = appMode;
+			this.color = appMode.getIconColorInfo().getColor(nighMode);
 			this.nm = nighMode;
 			this.locationOutdated = locationOutdated;
-			final int resourceBearingDay = appMode.getResourceBearingDay();
-			final int resourceBearingNight = appMode.getResourceBearingNight();
-			final int resourceBearing = nighMode ? resourceBearingNight : resourceBearingDay;
-			bearingIcon = BitmapFactory.decodeResource(view.getResources(), resourceBearing);
-
-			final int resourceHeadingDay = appMode.getResourceHeadingDay();
-			final int resourceHeadingNight = appMode.getResourceHeadingNight();
-			final int resourceHeading = nighMode ? resourceHeadingNight : resourceHeadingDay;
-			headingIcon = BitmapFactory.decodeResource(view.getResources(), resourceHeading);
-
-			final int resourceLocationDay;
-			final int resourceLocationNight;
-			if (locationOutdated) {
-				resourceLocationDay = appMode.getResourceLocationDayLost();
-				resourceLocationNight = appMode.getResourceLocationNightLost();
-			} else {
-				resourceLocationDay = appMode.getResourceLocationDay();
-				resourceLocationNight = appMode.getResourceLocationNight();
-			}
-			final int resourceLocation = nighMode ? resourceLocationNight : resourceLocationDay;
-			locationIcon = BitmapFactory.decodeResource(view.getResources(), resourceLocation);
+			bearingIcon = BitmapFactory.decodeResource(view.getResources(), appMode.getResourceBearingDay());
+			headingIcon = BitmapFactory.decodeResource(view.getResources(), appMode.getResourceHeadingDay());
+			final int resourceLocation = appMode.getResourceLocationDay();
+			locationPaint.setColorFilter(new PorterDuffColorFilter(ContextCompat.getColor(view.getContext(), color),
+					PorterDuff.Mode.SRC_IN));
+				LayerDrawable layerDrawable = (LayerDrawable) ContextCompat.getDrawable(view.getContext(), resourceLocation);
+				if (layerDrawable != null) {
+					locationIconTop = ((BitmapDrawable) layerDrawable.getDrawable(0)).getBitmap();
+					locationIconCenter = ((BitmapDrawable) layerDrawable.getDrawable(1)).getBitmap();
+					locationIconBottom = ((BitmapDrawable) layerDrawable.getDrawable(2)).getBitmap();
+				}
 			area.setColor(view.getResources().getColor(!nm ? R.color.pos_area : R.color.pos_area_night));
 		}
 	}
