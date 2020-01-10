@@ -292,7 +292,7 @@ public class PlanRouteFragment extends BaseOsmAndFragment implements OsmAndLocat
 				}
 				Object item = adapter.getItem(pos);
 				if (item instanceof Location) {
-					markersHelper.setStartFromMyLocation(!mapActivity.getMyApplication().getSettings().ROUTE_MAP_MARKERS_START_MY_LOC.get());
+					markersHelper.setStartFromMyLocation(!markersHelper.isStartFromMyLocation());
 				} else if (item instanceof MapMarker) {
 					MapMarker marker = (MapMarker) item;
 					selectedCount = marker.selected ? selectedCount - 1 : selectedCount + 1;

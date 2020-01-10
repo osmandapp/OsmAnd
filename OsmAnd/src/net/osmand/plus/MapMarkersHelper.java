@@ -9,6 +9,8 @@ import android.support.v4.content.ContextCompat;
 
 import net.osmand.AndroidUtils;
 import net.osmand.GPXUtilities;
+import net.osmand.GPXUtilities.GPXFile;
+import net.osmand.GPXUtilities.WptPt;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.data.FavouritePoint;
@@ -16,8 +18,6 @@ import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
-import net.osmand.GPXUtilities.GPXFile;
-import net.osmand.GPXUtilities.WptPt;
 import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
@@ -53,9 +53,9 @@ public class MapMarkersHelper {
 	public static final int BY_DISTANCE_DESC = 1;
 	public static final int BY_DISTANCE_ASC = 2;
 	public static final int BY_DATE_ADDED_DESC = 3;
-	
+
 	public static final int BY_DATE_ADDED_ASC = 4;
-	
+
 	private static final Log LOG = PlatformUtil.getLog(MapMarkersHelper.class);
 
 	@Retention(RetentionPolicy.SOURCE)
@@ -64,7 +64,6 @@ public class MapMarkersHelper {
 	}
 
 	private OsmandApplication ctx;
-	private OsmandSettings settings;
 	private MapMarkersDbHelper markersDbHelper;
 
 	private ExecutorService executorService = Executors.newSingleThreadExecutor();
@@ -75,8 +74,6 @@ public class MapMarkersHelper {
 
 	private List<MapMarkerChangedListener> listeners = new ArrayList<>();
 	private Set<OnGroupSyncedListener> syncListeners = new HashSet<>();
-
-	private boolean startFromMyLocation;
 
 	private MarkersPlanRouteContext planRouteContext;
 
@@ -93,12 +90,11 @@ public class MapMarkersHelper {
 	}
 
 	public boolean isStartFromMyLocation() {
-		return startFromMyLocation;
+		return ctx.getSettings().ROUTE_MAP_MARKERS_START_MY_LOC.get();
 	}
 
 	public void setStartFromMyLocation(boolean startFromMyLocation) {
-		this.startFromMyLocation = startFromMyLocation;
-		settings.ROUTE_MAP_MARKERS_START_MY_LOC.set(startFromMyLocation);
+		ctx.getSettings().ROUTE_MAP_MARKERS_START_MY_LOC.set(startFromMyLocation);
 	}
 
 	public MarkersPlanRouteContext getPlanRouteContext() {
@@ -107,10 +103,8 @@ public class MapMarkersHelper {
 
 	public MapMarkersHelper(OsmandApplication ctx) {
 		this.ctx = ctx;
-		settings = ctx.getSettings();
 		markersDbHelper = ctx.getMapMarkersDbHelper();
 		planRouteContext = new MarkersPlanRouteContext(ctx);
-		startFromMyLocation = settings.ROUTE_MAP_MARKERS_START_MY_LOC.get();
 		markersDbHelper.removeDisabledGroups();
 		loadMarkers();
 		loadGroups();
@@ -616,7 +610,7 @@ public class MapMarkersHelper {
 
 	private List<MapMarker> getMarkers() {
 		List<MapMarker> res = new ArrayList<>(mapMarkers);
-		if (settings.KEEP_PASSED_MARKERS_ON_MAP.get()) {
+		if (ctx.getSettings().KEEP_PASSED_MARKERS_ON_MAP.get()) {
 			res.addAll(mapMarkersHistory);
 		}
 		return res;
@@ -883,7 +877,7 @@ public class MapMarkersHelper {
 							@Nullable List<WptPt> wptPts,
 							@Nullable List<String> mapObjNames) {
 		if (points.size() > 0) {
-			settings.SHOW_MAP_MARKERS.set(true);
+			ctx.getSettings().SHOW_MAP_MARKERS.set(true);
 			int colorIndex = -1;
 			List<MapMarker> addedMarkers = new ArrayList<>();
 			for (int i = 0; i < points.size(); i++) {

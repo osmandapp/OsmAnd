@@ -76,6 +76,8 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	private static final long LOCATION_TIMEOUT_TO_BE_STALE = 1000 * 60 * 2; // 2 minutes
 	private static final long STALE_LOCATION_TIMEOUT_TO_BE_GONE = 1000 * 60 * 20; // 20 minutes
 
+	private static final long AGPS_TO_REDOWNLOAD = 16 * 60 * 60 * 1000; // 16 hours
+
 	private static final int REQUESTS_BEFORE_CHECK_LOCATION = 100;
 	private AtomicInteger locationRequestsCounter = new AtomicInteger();
 	private AtomicInteger staleLocationRequestsCounter = new AtomicInteger();
@@ -114,7 +116,6 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	private int currentScreenOrientation;
 
 	private OsmandApplication app;
-	private OsmandSettings settings;
 
 	private NavigationInfo navigationInfo;
 	private CurrentPositionHelper currentPositionHelper;
@@ -128,9 +129,6 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	private List<OsmAndCompassListener> compassListeners = new ArrayList<OsmAndLocationProvider.OsmAndCompassListener>();
 	private Listener gpsStatusListener;
 	private float[] mRotationM = new float[9];
-	private OsmandPreference<Boolean> USE_MAGNETIC_FIELD_SENSOR_COMPASS;
-	private OsmandPreference<Boolean> USE_FILTER_FOR_COMPASS;
-	private static final long AGPS_TO_REDOWNLOAD = 16 * 60 * 60 * 1000; // 16 hours
 
 
 	public class SimulationProvider {
@@ -234,9 +232,6 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	public OsmAndLocationProvider(OsmandApplication app) {
 		this.app = app;
 		navigationInfo = new NavigationInfo(app);
-		settings = app.getSettings();
-		USE_MAGNETIC_FIELD_SENSOR_COMPASS = settings.USE_MAGNETIC_FIELD_SENSOR_COMPASS;
-		USE_FILTER_FOR_COMPASS = settings.USE_KALMAN_FILTER_FOR_COMPASS;
 		currentPositionHelper = new CurrentPositionHelper(app);
 		locationSimulation = new OsmAndLocationSimulation(app, this);
 		addLocationListener(navigationInfo);
@@ -393,7 +388,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		} else if (!sensorRegistered && register) {
 			Log.d(PlatformUtil.TAG, "Enable sensor"); //$NON-NLS-1$
 			SensorManager sensorMgr = (SensorManager) app.getSystemService(Context.SENSOR_SERVICE);
-			if (USE_MAGNETIC_FIELD_SENSOR_COMPASS.get()) {
+			if (app.getSettings().USE_MAGNETIC_FIELD_SENSOR_COMPASS.get()) {
 				Sensor s = sensorMgr.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 				if (s == null || !sensorMgr.registerListener(this, s, SensorManager.SENSOR_DELAY_UI)) {
 					Log.e(PlatformUtil.TAG, "Sensor accelerometer could not be enabled");
@@ -476,7 +471,8 @@ public class OsmAndLocationProvider implements SensorEventListener {
 				default:
 					return;
 				}
-				if (USE_MAGNETIC_FIELD_SENSOR_COMPASS.get()) {
+				OsmandSettings settings = app.getSettings();
+				if (settings.USE_MAGNETIC_FIELD_SENSOR_COMPASS.get()) {
 					if (mGravs != null && mGeoMags != null) {
 						boolean success = SensorManager.getRotationMatrix(mRotationM, null, mGravs, mGeoMags);
 						if (!success) {
@@ -495,7 +491,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 				lastValSin = (float) Math.sin(valRad);
 				lastValCos = (float) Math.cos(valRad);
 				// lastHeadingCalcTime = System.currentTimeMillis();
-				boolean filter = USE_FILTER_FOR_COMPASS.get(); //USE_MAGNETIC_FIELD_SENSOR_COMPASS.get();
+				boolean filter = settings.USE_KALMAN_FILTER_FOR_COMPASS.get(); //USE_MAGNETIC_FIELD_SENSOR_COMPASS.get();
 				if (filter) {
 					filterCompassValue();
 				} else {
@@ -806,9 +802,9 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		if (routingHelper.isFollowingMode()) {
 			if (location == null || isPointAccurateForRouting(location)) {
 				// Update routing position and get location for sticking mode
-				updatedLocation = routingHelper.setCurrentLocation(location, settings.SNAP_TO_ROAD.get());
+				updatedLocation = routingHelper.setCurrentLocation(location, app.getSettings().SNAP_TO_ROAD.get());
 			}
-		} else if(routingHelper.isRoutePlanningMode() && settings.getPointToStart() == null) {
+		} else if(routingHelper.isRoutePlanningMode() && app.getSettings().getPointToStart() == null) {
 			routingHelper.setCurrentLocation(location, false);
 		} else if(getLocationSimulation().isRouteAnimating()) {
 			routingHelper.setCurrentLocation(location, false);

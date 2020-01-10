@@ -39,6 +39,7 @@ import net.osmand.data.QuadPointDouble;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.MapTileDownloader;
+import net.osmand.plus.OsmAndAppCustomization.OsmAndAppCustomizationListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
@@ -121,6 +122,15 @@ public class MapRenderRepositories {
 		this.renderer = new OsmandRenderer(context);
 		handler = new Handler(Looper.getMainLooper());
 		prefs = context.getSettings();
+
+		OsmAndAppCustomizationListener customizationListener = new OsmAndAppCustomizationListener() {
+			@Override
+			public void onOsmAndSettingsCustomized() {
+				prefs = MapRenderRepositories.this.context.getSettings();
+				clearCache();
+			}
+		};
+		context.getAppCustomization().addListener(customizationListener);
 	}
 
 	public Context getContext() {
@@ -151,11 +161,6 @@ public class MapRenderRepositories {
 
 	public RotatedTileBox getPrevBmpLocation() {
 		return prevBmpLocation;
-	}
-
-	public void updateSettings() {
-		prefs = context.getSettings();
-		clearCache();
 	}
 
 	public synchronized void closeConnection(String file) {
