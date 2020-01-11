@@ -102,10 +102,10 @@
     <string name="quick_action_add_destination">Установить пункт назначения</string>
     <string name="quick_action_replace_destination">Заменить пункт назначения</string>
     <string name="quick_action_add_first_intermediate">Добавить первую промежуточную точку</string>
-    <string name="quick_action_add_destination_desc">Нажатие на кнопку действия добавит пункт назначения по центру экрана, любой ранее выбранный пункт назначения станет последним промежуточным пунктом.</string>
-    <string name="quick_action_directions_from_desc">Нажатие на кнопку действия добавит пункт отправления по центру экрана и проложит путь до ранее выбранного пункта назначения или откроет диалог для выбора пункта назначения если он отсутствует на карте.</string>
-    <string name="quick_action_replace_destination_desc">Нажатие на кнопку действия установит пункт назначения по центру экрана, заменив ранее выбранный пункт назначения (если такой был).</string>
-    <string name="quick_action_add_first_intermediate_desc">Нажатие на кнопку действия добавит по центру экрана первую промежуточную точку маршрута.</string>
+    <string name="quick_action_add_destination_desc">Кнопка для установки центра экрана пунктом назначения маршрута, любой ранее выбранный пункт назначения станет последним промежуточным пунктом.</string>
+    <string name="quick_action_directions_from_desc">Кнопка для установки центра экрана пунктом отправления, также приложение проложит путь до ранее выбранного пункта назначения или откроет диалог для выбора пункта назначения если он отсутствует на карте.</string>
+    <string name="quick_action_replace_destination_desc">Нажатие на кнопку действия установит пункт назначения по центру экрана, заменив ранее выбранный пункт назначения (если такой был задан).</string>
+    <string name="quick_action_add_first_intermediate_desc">Кнопка для установки центра экрана первой промежуточной точкой маршрута.</string>
     <string name="no_overlay">Нет покрытия</string>
     <string name="no_underlay">Нет подложки</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">Холмистый</string>
@@ -143,7 +143,7 @@
     <string name="routing_attr_relief_smoothness_factor_name">Выберите пересеченность местности</string>
     <string name="routing_attr_height_obstacles_name">Использовать данные о высотах</string>
     <string name="routing_attr_height_obstacles_description">Фактор рельефа местности (по данным SRTM, ASTER и EU-DEM).</string>
-    <string name="quick_action_duplicates">Быстрое действие переименовано на %1$s, чтобы избежать повторений.</string>
+    <string name="quick_action_duplicates">Название быстрого действия было изменено на %1$s, чтобы избежать дублирования.</string>
     <string name="quick_action_duplicate">Обнаружен дубликат имени</string>
     <string name="quick_action_showhide_favorites_descr">Переключатель, чтобы отобразить или скрыть Избранные точки на карте.</string>
     <string name="quick_action_showhide_poi_descr">Переключатель, чтобы отобразить или скрыть POI на карте.</string>
@@ -156,7 +156,7 @@
     <string name="quick_action_gpx_category_descr">Выберите опциональную категорию.</string>
     <string name="quick_action_poi_list">Список категорий</string>
     <string name="quick_action_sh_poi_descr">Добавить одну или несколько категорий POI для отображения на карте.</string>
-    <string name="quick_action_page_list_descr">Нажатие на кнопку действия позволит циклически переключать элементы данного списка.</string>
+    <string name="quick_action_page_list_descr">Кнопка для перелистывания списка ниже.</string>
     <string name="quick_action_empty_param_error">Заполните все параметры</string>
     <string name="quick_action_map_overlay">Сменить карту покрытия</string>
     <string name="quick_action_map_overlay_title">Карты покрытия</string>
@@ -369,7 +369,7 @@
     <string name="map_online_data">Онлайн карты</string>
     <string name="map_online_data_descr">Использовать онлайн карты (загрузка и кэширование на SD-карте).</string>
     <string name="shared_string_online_maps">Онлайн карты</string>
-    <string name="online_map_settings_descr">Настройки источников онлайн или кэшированных растровых карт.</string>
+    <string name="online_map_settings_descr">Выберите источник онлайн или кешированных растровых карт.</string>
     <string name="osmand_rastermaps_plugin_description">С помощью этого плагина можно получить доступ ко множеству видов онлайн-карт (тайловых или растровых), от предопределенных тайловых OpenStreetMap (Mapnik) до спутниковых снимков и слоев специального назначения, таких как карты погоды, климатические карты, геологических карты, слои затемнения высот и т. д. 
 \n 
 \nЛюбая из этих карт может быть использована в качестве основной (базовой) карты для отображения карты OsmAnd, или в виде наложения или подложки к другой базовой карте (например стандартной офлайн-карте OsmAnd). Чтобы сделать какую-либо подложку лучше видимой, некоторые элементы векторной карты OsmAnd могут быть по желанию легко скрыты через меню «Настройки карты». 
@@ -383,7 +383,7 @@
     <string name="prefs_plugins">Плагины</string>
     <string name="osm_editing_plugin_description">С помощью этого плагина OsmAnd может быть использован для улучшения OSM через создание или изменение объектов OSM POI, открытие или комментирование OSM заметок, а также отправку записанных файлов GPX. OSM развивается обществом, глобальный проект создания карты общей собственности. Для получения дополнительной информации, пожалуйста, обращайтесь на https://openstreetmap.org. Активное участие ценится, и взносы могут быть сделаны непосредственно через OsmAnd, если вы укажете свои учетные данные OSM в настройках.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Векторные карты могут отображаться быстрее. Поддерживается не всеми устройствами.</string>
-    <string name="play_commands_of_currently_selected_voice">Воспроизвести команды выбранным голосом</string>
+    <string name="play_commands_of_currently_selected_voice">Выберите голос и протестируйте его, проигрывая объявления:</string>
     <string name="debugging_and_development">Отладка и разработка</string>
     <string name="native_rendering">Быстрый рендеринг</string>
     <string name="test_voice_prompts">Тест голосовых подсказок</string>
@@ -698,7 +698,7 @@
     <string name="context_menu_item_search_poi">Искать POI</string>
     <string name="use_trackball_descr">Использовать трекбол для перемещения по карте.</string>
     <string name="use_trackball">Использовать трекбол</string>
-    <string name="background_service_wait_int_descr">Задать максимальное время ожидания для каждого фонового определения местоположения.</string>
+    <string name="background_service_wait_int_descr">Устанавливает максимально допустимое время ожидания для каждого фонового фиксирования местоположения.</string>
     <string name="background_service_wait_int">Время ожидания</string>
     <string name="where_am_i">Где я?</string>
     <string name="network_provider">Сеть</string>
@@ -866,9 +866,9 @@
     <string name="show_view_angle">Угол обзора</string>
     <string name="map_view_3d_descr">Включить 3D вид для карты.</string>
     <string name="map_view_3d">3D вид</string>
-    <string name="show_poi_over_map_description">Показывать на карте последние выбранные POI.</string>
+    <string name="show_poi_over_map_description">Показать последние использованные POI на карте.</string>
     <string name="show_poi_over_map">Отображать POI</string>
-    <string name="map_tile_source_descr">Выберите источник онлайн или кэшированных тайлов карты.</string>
+    <string name="map_tile_source_descr">Выберите источник онлайн или кешированных тайлов карты</string>
     <string name="map_tile_source">Растровые карты</string>
     <string name="map_source">Источник карты</string>
     <string name="use_internet">Использовать Интернет</string>
@@ -1119,7 +1119,7 @@
     <string name="map_widget_renderer">Стиль карты</string>
     <string name="email">email</string>
     <string name="day_night_info">Восход/закат</string>
-    <string name="osmand_short_description_80_chars">OsmAnd - это навигационное приложение для путешествий с открытым исходным кодом</string>
+    <string name="osmand_short_description_80_chars">Мобильный просмотр и навигация по онлайн и офлайн картам OSM всего мира</string>
     <string name="osmand_long_description_1000_chars">"OsmAnd (Open Street Maps Automated Navigation Directions)
 \n
 \n OsmAnd - это навигационное приложение с открытым исходным кодом и доступом к картам и данным на основе (OpenStreetMap). Все данные карт (векторные или растровые) могут быть сохранены на карту памяти устройства для использования без подключения к Интернету. OsmAnd также предоставляет  оффлайн и онлайн средства построения маршрута включая голосовые инструкции по маршруту.
@@ -1299,7 +1299,7 @@
     <string name="av_camera_focus_macro">Макро-режим</string>
     <string name="av_camera_focus_continuous">Постоянная фокусировка</string>
     <string name="av_photo_play_sound">Воспроизводить звук срабатывания затвора камеры</string>
-    <string name="av_photo_play_sound_descr">Воспроизводить звук при фотографировании.</string>
+    <string name="av_photo_play_sound_descr">Воспроизводить звук или соблюдать тишину при фотографировании.</string>
     <string name="av_camera_pic_size">Размер изображения камеры</string>
     <string name="av_camera_pic_size_descr">Установить размер изображения с камеры</string>
     <string name="speak_speed_limit">Ограничение скорости</string>
@@ -2349,7 +2349,7 @@
     <string name="none_point_error">Необходимо добавить хотя бы одну точку.</string>
     <string name="mapillary_image">Фотография Mapillary</string>
     <string name="improve_coverage_mapillary">Улучшить фотопокрытие через Mapillary</string>
-    <string name="hide_from_zoom_level">Скрыть от шкалы приближения</string>
+    <string name="hide_from_zoom_level">Скрыть, начиная с уровня масштабирования</string>
     <string name="rendering_value_translucent_pink_name">Прозрачно-розовый</string>
     <string name="lang_ber">Берберский язык</string>
     <string name="move_all_to_history">Переместить все в историю</string>
@@ -2445,15 +2445,15 @@
 \n</string>
     <string name="live_monitoring_max_interval_to_send">Временной буфер для онлайн слежения</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Укажите временной буфер для хранения местоположений при отсутствии подключения к сети</string>
-    <string name="quick_action_add_marker_descr">Нажатие на кнопку действия добавит маркер по центру экрана.</string>
-    <string name="quick_action_add_gpx_descr">Нажатие на кнопку действия добавит путевую точку GPX по центру экрана.</string>
-    <string name="quick_action_take_audio_note_descr">Нажатие на кнопку действия добавит аудио заметку по центру экрана.</string>
-    <string name="quick_action_take_video_note_descr">Нажатие на кнопку действия добавит видео заметку по центру экрана.</string>
-    <string name="quick_action_take_photo_note_descr">Нажатие на кнопку действия добавит фото заметку по центру экрана.</string>
-    <string name="quick_action_add_osm_bug_descr">Нажатие на кнопку действия добавит заметку OSM в центре экрана.</string>
-    <string name="quick_action_add_poi_descr">Нажатие на кнопку действия добавит POI в центре экрана.</string>
+    <string name="quick_action_add_marker_descr">Кнопка для добавления маркера карты в центр экрана.</string>
+    <string name="quick_action_add_gpx_descr">Кнопка для добавления путевой точки GPX в центре экрана.</string>
+    <string name="quick_action_take_audio_note_descr">Кнопка для добавления аудио заметки в центре экрана.</string>
+    <string name="quick_action_take_video_note_descr">Кнопка для добавления видео заметки в центре экрана.</string>
+    <string name="quick_action_take_photo_note_descr">Кнопка для добавления фото заметки в центре экрана.</string>
+    <string name="quick_action_add_osm_bug_descr">Кнопка для добавления OSM заметки в центре экрана.</string>
+    <string name="quick_action_add_poi_descr">Кнопка для добавления POI в центре экрана.</string>
     <string name="quick_action_navigation_voice_descr">Переключатель, чтобы включить или выключить голосовые подсказки во время навигации.</string>
-    <string name="quick_action_add_parking_descr">Нажатие на кнопку действия добавит место парковки в центре экрана.</string>
+    <string name="quick_action_add_parking_descr">Кнопка для добавления парковочного места в центре экрана.</string>
     <string name="quick_action_interim_dialog">Показывать промежуточный диалог</string>
     <string name="mappilary_no_internet_desc">Фотографии Mapillary доступны только онлайн.</string>
     <string name="wrong_format">Неправильный формат</string>
@@ -2827,7 +2827,7 @@
     <string name="search_no_results_description">Нет результатов?
 \nРасскажите нам об этом.</string>
     <string name="send_search_query">Отправить поисковый запрос?</string>
-    <string name="test_voice_desrc">Нажмите кнопку и прослушайте соответствующую голосовую подсказку, чтобы определить отсутствующие или ошибочные подсказки.</string>
+    <string name="test_voice_desrc">Нажмите кнопку и прослушайте соответствующую голосовую подсказку, чтобы узнать, отсутствует она или ошибочна</string>
     <string name="thank_you_for_feedback">Спасибо за Ваш отзыв</string>
     <string name="poi_cannot_be_found">Не удалось найти узел или путь.</string>
     <string name="search_no_results_feedback">Нет результатов поиска\? 
@@ -3169,7 +3169,7 @@
     <string name="edit_profile_screen_options_subtitle">Выбор настроек экрана для профиля</string>
     <string name="edit_profile_nav_settings_subtitle">Выбор настроек навигации для профиля</string>
     <string name="routing_attr_max_num_changes_description">Выбор верхней границы изменений</string>
-    <string name="turn_screen_on_sensor">Использовать датчик приближения</string>
+    <string name="turn_screen_on_sensor">Использовать бесконтактный датчик (сенсорный выключатель)</string>
     <string name="turn_on_profile_desc">Пожалуйста, включите хотя бы один профиль приложения, чтобы использовать эту настройку.</string>
     <string name="shared_string_file_is_saved">%s сохранено</string>
     <string name="osmand_default_routing">Навигация OsmAnd</string>
@@ -3181,7 +3181,7 @@
     <string name="app_mode_personal_transporter">Персональный транспортер</string>
     <string name="routing_attr_max_num_changes_name">Количество изменений</string>
     <string name="turn_screen_on_time_descr">Настройте, как долго экран должен быть включен.</string>
-    <string name="turn_screen_on_sensor_descr">Включение экрана во время навигации при проведении рукой в верхней части экрана.</string>
+    <string name="turn_screen_on_sensor_descr">При навигации включать экран движением руки над верхней частью.</string>
     <string name="external_input_device">Внешние устройства ввода</string>
     <string name="external_input_device_descr">Выберите внешнее устройство управления, например, клавиатуру или WunderLINQ.</string>
     <string name="sett_no_ext_input">Нет</string>
