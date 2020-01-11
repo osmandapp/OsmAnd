@@ -871,7 +871,7 @@ Pôr do Sol: %2$s</string>
     <string name="osmand_parking_time_limit">Tempo limitado</string>
     <string name="osmand_parking_time_no_limit">Sem limite de tempo</string>
     <string name="osmand_parking_position_description">A localização de estacionamento do seu veículo. %1$s</string>
-    <string name="osmand_parking_position_description_add">Buscar o veículo em:</string>
+    <string name="osmand_parking_position_description_add">Buscar o veículo às:</string>
     <string name="osmand_parking_pm">PM</string>
     <string name="osmand_parking_am">AM</string>
     <string name="osmand_parking_position_name">Vaga de estacionamento</string>
