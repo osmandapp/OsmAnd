@@ -983,7 +983,7 @@ Proportioneel werkgeheugen %4$s MB (Android limiet %5$s MB, Dalvik %6$s MB).</st
     <string name="av_camera_focus_macro">Macromodus (dichtbij scherpstellen)</string>
     <string name="av_camera_focus_continuous">Voortdurend blijven scherpstellen</string>
     <string name="av_photo_play_sound_descr">Kies of er een geluid wordt afgespeeld bij het maken van Foto\'s</string>
-    <string name="speak_speed_limit">Snelheidsbeperking</string>
+    <string name="speak_speed_limit">Snelheidslimiet</string>
     <string name="speak_cameras">Snelheidscamera\'s</string>
     <string name="speak_traffic_warnings">Verkeers Waarschuwingen</string>
     <string name="route_from">Van:</string>
@@ -1270,8 +1270,8 @@ Wil je een nieuwe map maken op de toegestane locatie en de OsmAnd-bestanden daar
     <string name="traffic_warning_payment">Tolpoortje</string>
     <string name="traffic_warning_stop">Stopbord</string>
     <string name="traffic_warning_calming">Verkeersdrempel</string>
-    <string name="traffic_warning_speed_camera">Snelheidscontrole</string>
-    <string name="traffic_warning">Waarschuwing</string>
+    <string name="traffic_warning_speed_camera">Snelheidscamera</string>
+    <string name="traffic_warning">Verkeers waarschuwing</string>
     <string name="local_index_description">Tik om details te bekijken; druk lang om uit te schakelen of te verwijderen. Huidige gegevens op het toestel (%1$s beschikbaar):</string>
     <string name="text_size_descr">De grootte van tekst op de kaart instellen.</string>
     <string name="text_size">Tekstgrootte</string>
@@ -1833,7 +1833,7 @@ Lengtegraad:\t\t%2$s</string>
     <string name="night">\'s avonds</string>
     <string name="shared_string_not_selected">Niet geselecteerd</string>
     <string name="select_month_and_country">Kies maand en kaart</string>
-    <string name="starting_point">Startpunt</string>
+    <string name="starting_point">Vertrekpunt</string>
     <string name="shared_string_type">Type</string>
     <string name="item_removed">Item verwijderd</string>
     <string name="n_items_removed">items verwijderd</string>
@@ -1877,8 +1877,7 @@ Lengtegraad:\t\t%2$s</string>
     <string name="osm_live_thanks">Bedankt voor je OSM Live Abonnement! Een herstart van OsmAnd is nodig.</string>
     <string name="osm_live_region_desc">Een gedeelte van je betaling gaat naar OSM-bijdragers in deze regio.</string>
     <string name="osm_live_subscription_settings">Abonnementsgegevens</string>
-    <string name="osm_live_ask_for_purchase">Neem alsjeblieft eerst een
-\nabonnement op OsmAnd Live</string>
+    <string name="osm_live_ask_for_purchase">Neem alsjeblieft eerst een abonnement op OsmAnd Live</string>
     <string name="osm_live_header">Met dit abonnement ontvang je dagelijks updates voor kaarten over de hele wereld. 
 \nEen gedeelte van uw bijdrage gaat naar de OSM-gemeenschap en wordt uitbetaald naar het aantal OSM-bewerkingen. Als je OsmAnd en OSM wil ondersteunen, en ondersteund wilt worden door hen, is dit de perfecte manier om dat te doen.</string>
     <string name="select_map_marker">Kies markeervlaggetjes</string>
@@ -1921,7 +1920,7 @@ Nu is maar {2} MB beschikbaar.</string>
     <string name="no_map_markers_found">Markeervlaggetjes kun je via de kaart toevoegen</string>
     <string name="no_waypoints_found">Geen punten gevonden</string>
     <string name="rendering_value_thin_name">Dun</string>
-    <string name="rendering_value_medium_name">Normaal</string>
+    <string name="rendering_value_medium_name">Gemiddeld</string>
     <string name="rendering_value_bold_name">Vet</string>
     <string name="map_mode">Dag-Nacht stijl</string>
     <string name="number_of_gpx_files_selected_pattern">%s GPX-bestanden geselecteerd</string>
@@ -2808,7 +2807,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="rendering_attr_surface_compacted_name">Verdicht</string>
     <string name="rendering_attr_smoothness_excellent_name">Uitstekend</string>
     <string name="rendering_attr_smoothness_good_name">Goed</string>
-    <string name="rendering_attr_smoothness_intermediate_name">Matig</string>
+    <string name="rendering_attr_smoothness_intermediate_name">Gemiddeld</string>
     <string name="rendering_attr_smoothness_bad_name">Slecht</string>
     <string name="rendering_attr_smoothness_very_bad_name">Zeer slecht</string>
     <string name="rendering_attr_smoothness_horrible_name">Verschrikkelijk</string>
@@ -2825,7 +2824,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="rendering_attr_highway_class_steps_name">Treden</string>
     <string name="rendering_attr_highway_class_path_name">Pad</string>
     <string name="rendering_attr_highway_class_cycleway_name">Fietspad</string>
-    <string name="rendering_attr_undefined_name">Onbepaald</string>
+    <string name="rendering_attr_undefined_name">Ongedefinieerd</string>
     <string name="use_osm_live_public_transport_description">Activeer openbaar vervoer voor Osmand Live wijzigingen.</string>
     <string name="use_osm_live_public_transport">OsmAnd Live Openbaar vervoer</string>
     <string name="time_of_day">Huidige tijd</string>
@@ -3234,7 +3233,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="rendering_attr_piste_difficulty_freeride_name">Gratische rit</string>
     <string name="rendering_attr_piste_difficulty_extreme_name">Extreem</string>
     <string name="rendering_attr_piste_difficulty_undefined_name">Ongedefinieerd</string>
-    <string name="routeInfo_piste_difficulty_name">Piste moeilijkheidsgraad</string>
+    <string name="routeInfo_piste_difficulty_name">Moeilijkheidsgraad piste</string>
     <string name="rendering_attr_piste_difficulty_aerialway_name">Lift</string>
     <string name="rendering_attr_piste_difficulty_connection_name">Verbinding</string>
     <string name="shared_string_osmand_usage">OsmAnd gebruik</string>
@@ -3298,4 +3297,8 @@ voor Gebied: %1$s x %2$s</string>
     <string name="choose_icon_color_name">Kies icoon, kleur en naam</string>
     <string name="reorder_profiles">Wijzig profielen lijst</string>
     <string name="selected_profile">Geselecteerd profiel</string>
+    <string name="select_navigation_icon">Selecteer navigatie icoon</string>
+    <string name="reset_confirmation_descr">Door op %1$s te tikken zullen al je wijzigingen verloren gaan.</string>
+    <string name="reset_all_profile_settings_descr">Alle profiel instellingen worden terug gezet naar het moment na installatie.</string>
+    <string name="reset_all_profile_settings">Alle profiel instellingen terugzetten naar standaard\?</string>
 </resources>

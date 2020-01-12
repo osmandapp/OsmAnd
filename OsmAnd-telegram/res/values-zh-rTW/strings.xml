@@ -263,4 +263,5 @@
     <string name="buffer_time">緩衝過期時間</string>
     <string name="shared_string_suggested">建議</string>
     <string name="status_widget_title">OsmAnd Tracker 狀態</string>
+    <string name="back_to_osmand">回到 OsmAnd</string>
 </resources>

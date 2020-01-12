@@ -3454,4 +3454,5 @@
     <string name="reset_confirmation_descr">با کلیک روی %1$s، همهٔ تغییرات شما از بین می‌رود.</string>
     <string name="reset_all_profile_settings_descr">همهٔ تنظیمات پروفایل به حالت اولیهٔ پس از نصب بازنشانی می‌شود.</string>
     <string name="reset_all_profile_settings">همهٔ تنظیمات پروفایل را بازنشانی می‌کنید؟</string>
+    <string name="ltr_or_rtl_combine">%1$s: ‪%2$s‬</string>
 </resources>

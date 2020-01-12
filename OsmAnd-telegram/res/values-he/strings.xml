@@ -261,4 +261,5 @@
     <string name="buffer_time">זמן פקיעת הזיכרון</string>
     <string name="shared_string_suggested">מוצע</string>
     <string name="status_widget_title">מצב עוקב OsmAnd</string>
+    <string name="back_to_osmand">חזרה ל־OsmAnd</string>
 </resources>

@@ -262,4 +262,5 @@
     <string name="buffer_time">Tempo de expiração do buffer</string>
     <string name="shared_string_suggested">Sugerido</string>
     <string name="status_widget_title">Status do OsmAnd Tracker</string>
+    <string name="back_to_osmand">Voltar para OsmAnd</string>
 </resources>
