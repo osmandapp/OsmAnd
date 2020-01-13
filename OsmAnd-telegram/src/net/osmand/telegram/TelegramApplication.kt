@@ -42,24 +42,7 @@ class TelegramApplication : Application(), OsmandHelperListener {
 		telegramHelper.messageActiveTimeSec = settings.locHistoryTime
 		uiUtils = UiUtils(this)
 		osmandAidlHelper = OsmandAidlHelper(this)
-		osmandAidlHelper.listener = object : OsmandHelperListener {
-			override fun onOsmandConnectionStateChanged(connected: Boolean) {
-				if (connected) {
-					osmandAidlHelper.clearNavDrawerItems("net.osmand.telegram")
-					osmandAidlHelper.clearNavDrawerItems("net.osmand.telegram.debug")
-					osmandAidlHelper.setNavDrawerItems(
-						applicationContext.packageName,
-						listOf(getString(R.string.app_name_short)),
-						listOf("osmand_telegram://main_activity"),
-						listOf("ic_action_location_sharing_app"),
-						listOf(-1)
-					)
-					showLocationHelper.addDirectionContextMenuButton()
-					showLocationHelper.startShowingLocation()
-					showLocationHelper.addOrUpdateStatusWidget(-1, false)
-				}
-			}
-		}
+		osmandAidlHelper.listener = this
 		osmandAidlHelper.setUpdatesListener(object : UpdatesListener {
 			override fun update() {
 				if (settings.hasAnyChatToShowOnMap()) {
@@ -143,8 +126,19 @@ class TelegramApplication : Application(), OsmandHelperListener {
 
 	override fun onOsmandConnectionStateChanged(connected: Boolean) {
 		if (connected) {
+			osmandAidlHelper.clearNavDrawerItems("net.osmand.telegram")
+			osmandAidlHelper.clearNavDrawerItems("net.osmand.telegram.debug")
+			osmandAidlHelper.setNavDrawerItems(
+				applicationContext.packageName,
+				listOf(getString(R.string.app_name_short)),
+				listOf("osmand_telegram://main_activity"),
+				listOf("ic_action_location_sharing_app"),
+				listOf(-1)
+			)
 			showLocationHelper.setupMapLayer()
 			showLocationHelper.addDirectionContextMenuButton()
+			showLocationHelper.startShowingLocation()
+			showLocationHelper.addOrUpdateStatusWidget(-1, false)
 		}
 	}
 
