@@ -91,8 +91,6 @@ public class MultiTouchSupport {
 	private static final int TILT_X_THRESHOLD_PX = 40;
 	private static final int TILT_Y_THRESHOLD_PX = 40;
 	private static final int TILT_DY_THRESHOLD_PX = 40;
-	private static final float ROTATION_THRESHOLD_DEG = 15.0f;
-	private boolean isRotating;
 
 	public boolean onTouchEvent(MotionEvent event){
 		if(!isMultiTouchSupported()){
@@ -148,13 +146,7 @@ public class MultiTouchSupport {
 					centerPoint = new PointF((x1 + x2) / 2, (y1 + y2) / 2);
 
 					if (angleDefined) {
-						float a = MapUtils.unifyRotationTo360(angle - angleStarted);
-						if (!isRotating && Math.abs(a) > ROTATION_THRESHOLD_DEG) {
-							isRotating = true;
-							angleStarted = angle;
-						} else if (isRotating) {
-							angleRelative = a;
-						}
+						angleRelative = MapUtils.unifyRotationTo360(angle - angleStarted);
 					}
 					zoomRelative = distance / zoomStartedDistance;
 					listener.onZoomingOrRotating(zoomRelative, angleRelative);
@@ -182,7 +174,6 @@ public class MultiTouchSupport {
 						angleStarted = angle;
 						angleRelative = 0;
 						zoomRelative = 0;
-						isRotating = false;
 						inZoomMode = true;
 					}
 				}
