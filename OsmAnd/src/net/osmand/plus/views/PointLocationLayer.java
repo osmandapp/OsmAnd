@@ -61,22 +61,15 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 	}
 
 	private void initUI() {
-		locationPaint = new Paint();
-		locationPaint.setAntiAlias(true);
-		locationPaint.setFilterBitmap(true);
-
+		locationPaint = new Paint(ANTI_ALIAS_FLAG | FILTER_BITMAP_FLAG);
 		headingPaint = new Paint(ANTI_ALIAS_FLAG | FILTER_BITMAP_FLAG);
-
-
 		area = new Paint();
 		area.setColor(view.getResources().getColor(R.color.pos_area));
-
 		aroundArea = new Paint();
 		aroundArea.setColor(view.getResources().getColor(R.color.pos_around));
 		aroundArea.setStyle(Style.STROKE);
 		aroundArea.setStrokeWidth(1);
 		aroundArea.setAntiAlias(true);
-
 		locationProvider = view.getApplication().getLocationProvider();
 		updateIcons(view.getSettings().getApplicationMode(), false, locationProvider.getLastKnownLocation() == null);
 	}
@@ -167,11 +160,10 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 		return l != null && tb.containsLatLon(l.getLatitude(), l.getLongitude());
 	}
 
-
 	@Override
 	public void destroyLayer() {
-
 	}
+
 	private void updateIcons(ApplicationMode appMode, boolean nighMode, boolean locationOutdated) {
 		if (appMode != this.appMode || this.nm != nighMode || this.locationOutdated != locationOutdated ||
 				color != appMode.getIconColorInfo().getColor(nighMode)) {
@@ -181,23 +173,27 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 			this.locationOutdated = locationOutdated;
 			bearingIcon = BitmapFactory.decodeResource(view.getResources(), appMode.getResourceBearingDay());
 			headingIcon = BitmapFactory.decodeResource(view.getResources(), appMode.getResourceHeadingDay());
-			final int resourceLocation = appMode.getResourceLocationDay();
-			locationPaint.setColorFilter(new PorterDuffColorFilter(ContextCompat.getColor(view.getContext(), color),
-					PorterDuff.Mode.SRC_IN));
-				LayerDrawable layerDrawable = (LayerDrawable) ContextCompat.getDrawable(view.getContext(), resourceLocation);
-				if (layerDrawable != null) {
-					locationIconTop = ((BitmapDrawable) layerDrawable.getDrawable(0)).getBitmap();
-					locationIconCenter = ((BitmapDrawable) layerDrawable.getDrawable(1)).getBitmap();
-					locationIconBottom = ((BitmapDrawable) layerDrawable.getDrawable(2)).getBitmap();
-				}
+			if (locationOutdated) {
+				locationPaint.setColorFilter(new PorterDuffColorFilter(ContextCompat.getColor(view.getContext(),
+						R.color.icon_color_secondary_light), PorterDuff.Mode.SRC_IN));
+			} else {
+				locationPaint.setColorFilter(new PorterDuffColorFilter(ContextCompat.getColor(view.getContext(), color),
+						PorterDuff.Mode.SRC_IN));
+			}
+			LayerDrawable layerDrawable = (LayerDrawable) ContextCompat.getDrawable(view.getContext(), appMode.getResourceLocationDay());
+			if (layerDrawable != null) {
+				locationIconTop = ((BitmapDrawable) layerDrawable.getDrawable(0)).getBitmap();
+				locationIconCenter = ((BitmapDrawable) layerDrawable.getDrawable(1)).getBitmap();
+				locationIconBottom = ((BitmapDrawable) layerDrawable.getDrawable(2)).getBitmap();
+			}
 			area.setColor(view.getResources().getColor(!nm ? R.color.pos_area : R.color.pos_area_night));
 		}
 	}
+
 	@Override
 	public boolean drawInScreenPixels() {
 		return false;
 	}
-
 
 	@Override
 	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o, boolean unknownLocation) {
@@ -260,5 +256,4 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 			}
 		}
 	}
-
 }
