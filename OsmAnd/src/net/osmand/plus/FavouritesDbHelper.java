@@ -577,13 +577,12 @@ public class FavouritesDbHelper {
 	}
 
 	public void addEmptyCategory(String name, int color) {
-		if (FavoriteGroup.isPersonalCategoryDisplayName(context,name))
 			addEmptyCategory(name, color, true);
 	}
 
 	public void addEmptyCategory(String name, int color, boolean visible) {
 		FavoriteGroup group = new FavoriteGroup();
-		group.name = name;
+		group.name = FavoriteGroup.convertDisplayNameToGroupIdName(context, name);
 		group.color = color;
 		group.visible = visible;
 		favoriteGroups.add(group);
@@ -621,7 +620,7 @@ public class FavouritesDbHelper {
 	public boolean groupExists(String name) {
 		String nameLowercase = name.toLowerCase();
 		for (String groupName : flatGroups.keySet()) {
-			if (groupName.toLowerCase().equals(nameLowercase)) {
+			if (groupName.toLowerCase().equals(nameLowercase) || FavoriteGroup.getDisplayName(context, groupName).equals(name)) {
 				return true;
 			}
 		}
