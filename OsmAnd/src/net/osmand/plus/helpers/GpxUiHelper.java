@@ -1224,7 +1224,7 @@ public class GpxUiHelper {
 	}
 
 	private static List<Entry> calculateElevationArray(GPXTrackAnalysis analysis, GPXDataSetAxisType axisType,
-													   float divX, float convEle, boolean useGeneralTrackPoints, boolean calcGaps) {
+													   float divX, float convEle, boolean useGeneralTrackPoints, boolean calcWithoutGaps) {
 		List<Entry> values = new ArrayList<>();
 		List<Elevation> elevationData = analysis.elevationData;
 		float nextX = 0;
@@ -1246,7 +1246,7 @@ public class GpxUiHelper {
 				x = e.distance;
 			}
 			if (x > 0) {
-				if (!(!calcGaps && e.firstPoint && lastEntry != null)) {
+				if (!(calcWithoutGaps && e.firstPoint && lastEntry != null)) {
 					nextX += x / divX;
 				}
 				if (!Float.isNaN(e.elevation)) {
@@ -1380,7 +1380,7 @@ public class GpxUiHelper {
 															   @NonNull GPXDataSetAxisType axisType,
 															   boolean useRightAxis,
 															   boolean drawFilled,
-															   boolean calcGaps) {
+															   boolean calcWithoutGaps) {
 		OsmandSettings settings = ctx.getSettings();
 		OsmandSettings.MetricsConstants mc = settings.METRIC_SYSTEM.get();
 		boolean useFeet = (mc == OsmandSettings.MetricsConstants.MILES_AND_FEET) || (mc == OsmandSettings.MetricsConstants.MILES_AND_YARDS);
@@ -1390,11 +1390,11 @@ public class GpxUiHelper {
 		float divX;
 		XAxis xAxis = mChart.getXAxis();
 		if (axisType == GPXDataSetAxisType.TIME && analysis.isTimeSpecified()) {
-			divX = setupXAxisTime(xAxis, calcGaps ? analysis.timeSpan : analysis.timeSpanWithoutGaps);
+			divX = setupXAxisTime(xAxis, calcWithoutGaps ? analysis.timeSpanWithoutGaps : analysis.timeSpan);
 		} else if (axisType == GPXDataSetAxisType.TIMEOFDAY && analysis.isTimeSpecified()) {
 			divX = setupXAxisTimeOfDay(xAxis, analysis.startTime);
 		} else {
-			divX = setupAxisDistance(ctx, xAxis, calcGaps ? analysis.totalDistance : analysis.totalDistanceWithoutGaps);
+			divX = setupAxisDistance(ctx, xAxis, calcWithoutGaps ? analysis.totalDistanceWithoutGaps : analysis.totalDistance);
 		}
 
 		final String mainUnitY = useFeet ? ctx.getString(R.string.foot) : ctx.getString(R.string.m);
@@ -1418,7 +1418,7 @@ public class GpxUiHelper {
 			}
 		});
 
-		List<Entry> values = calculateElevationArray(analysis, axisType, divX, convEle, true, calcGaps);
+		List<Entry> values = calculateElevationArray(analysis, axisType, divX, convEle, true, calcWithoutGaps);
 
 		OrderedLineDataSet dataSet = new OrderedLineDataSet(values, "", GPXDataSetType.ALTITUDE, axisType);
 		dataSet.priority = (float) (analysis.avgElevation - analysis.minElevation) * convEle;
@@ -1465,22 +1465,23 @@ public class GpxUiHelper {
 	}
 
 	public static OrderedLineDataSet createGPXSpeedDataSet(@NonNull OsmandApplication ctx,
-														   @NonNull LineChart mChart,
-														   @NonNull GPXTrackAnalysis analysis,
-														   @NonNull GPXDataSetAxisType axisType,
-														   boolean useRightAxis,
-														   boolean drawFilled) {
+	                                                       @NonNull LineChart mChart,
+	                                                       @NonNull GPXTrackAnalysis analysis,
+	                                                       @NonNull GPXDataSetAxisType axisType,
+	                                                       boolean useRightAxis,
+	                                                       boolean drawFilled,
+	                                                       boolean calcWithoutGaps) {
 		OsmandSettings settings = ctx.getSettings();
 		boolean light = settings.isLightContent();
 
 		float divX;
 		XAxis xAxis = mChart.getXAxis();
 		if (axisType == GPXDataSetAxisType.TIME && analysis.isTimeSpecified()) {
-			divX = setupXAxisTime(xAxis, analysis.timeSpan);
+			divX = setupXAxisTime(xAxis, calcWithoutGaps ? analysis.timeSpanWithoutGaps : analysis.timeSpan);
 		} else if (axisType == GPXDataSetAxisType.TIMEOFDAY && analysis.isTimeSpecified()) {
 			divX = setupXAxisTimeOfDay(xAxis, analysis.startTime);
 		} else {
-			divX = setupAxisDistance(ctx, xAxis, analysis.totalDistance);
+			divX = setupAxisDistance(ctx, xAxis, calcWithoutGaps ? analysis.totalDistanceWithoutGaps : analysis.totalDistance);
 		}
 
 		OsmandSettings.SpeedConstants sps = settings.SPEED_SYSTEM.get();
@@ -1540,7 +1541,9 @@ public class GpxUiHelper {
 					values.add(new Entry(nextX + 1, 0));
 					values.add(new Entry(nextX + x - 1, 0));
 				}
-				nextX += x / divX;
+				if (!(calcWithoutGaps && s.firstPoint)) {
+					nextX += x / divX;
+				}
 				if (Float.isNaN(divSpeed)) {
 					nextY = s.speed * mulSpeed;
 				} else {
@@ -1638,7 +1641,7 @@ public class GpxUiHelper {
 														   @Nullable List<Entry> eleValues,
 														   boolean useRightAxis,
 														   boolean drawFilled,
-														   boolean calcGaps) {
+														   boolean calcWithoutGaps) {
 		if (axisType == GPXDataSetAxisType.TIME || axisType == GPXDataSetAxisType.TIMEOFDAY) {
 			return null;
 		}
@@ -1647,10 +1650,10 @@ public class GpxUiHelper {
 		OsmandSettings.MetricsConstants mc = settings.METRIC_SYSTEM.get();
 		boolean useFeet = (mc == OsmandSettings.MetricsConstants.MILES_AND_FEET) || (mc == OsmandSettings.MetricsConstants.MILES_AND_YARDS);
 		final float convEle = useFeet ? 3.28084f : 1.0f;
-		final float totalDistance = calcGaps ? analysis.totalDistance : analysis.totalDistanceWithoutGaps;
+		final float totalDistance = calcWithoutGaps ? analysis.totalDistanceWithoutGaps : analysis.totalDistance;
 
 		XAxis xAxis = mChart.getXAxis();
-		float divX = setupAxisDistance(ctx, xAxis, calcGaps ? analysis.totalDistance : analysis.totalDistanceWithoutGaps);
+		float divX = setupAxisDistance(ctx, xAxis, calcWithoutGaps ? analysis.totalDistanceWithoutGaps : analysis.totalDistance);
 
 		final String mainUnitY = "%";
 
@@ -1675,7 +1678,7 @@ public class GpxUiHelper {
 
 		List<Entry> values;
 		if (eleValues == null) {
-			values = calculateElevationArray(analysis, GPXDataSetAxisType.DISTANCE, 1f, 1f, false, calcGaps);
+			values = calculateElevationArray(analysis, GPXDataSetAxisType.DISTANCE, 1f, 1f, false, calcWithoutGaps);
 		} else {
 			values = new ArrayList<>(eleValues.size());
 			for (Entry e : eleValues) {

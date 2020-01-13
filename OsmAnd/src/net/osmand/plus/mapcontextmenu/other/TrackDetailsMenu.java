@@ -590,7 +590,7 @@ public class TrackDetailsMenu {
 						break;
 					case SPEED:
 						dataSet = GpxUiHelper.createGPXSpeedDataSet(app, chart, analysis,
-								gpxItem.chartAxisType, gpxItem.chartTypes.length > 1, true);
+								gpxItem.chartAxisType, gpxItem.chartTypes.length > 1, true, false);
 						break;
 					case SLOPE:
 						dataSet = GpxUiHelper.createGPXSlopeDataSet(app, chart, analysis,
