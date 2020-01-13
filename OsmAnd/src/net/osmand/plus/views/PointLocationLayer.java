@@ -171,8 +171,8 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 			this.color = appMode.getIconColorInfo().getColor(nighMode);
 			this.nm = nighMode;
 			this.locationOutdated = locationOutdated;
-			bearingIcon = BitmapFactory.decodeResource(view.getResources(), appMode.getResourceBearingDay());
-			headingIcon = BitmapFactory.decodeResource(view.getResources(), appMode.getResourceHeadingDay());
+			bearingIcon = BitmapFactory.decodeResource(view.getResources(), appMode.getNavigationIcon().getIconId());
+			headingIcon = BitmapFactory.decodeResource(view.getResources(), appMode.getLocationIcon().getHeadingIconId());
 			if (locationOutdated) {
 				locationPaint.setColorFilter(new PorterDuffColorFilter(ContextCompat.getColor(view.getContext(),
 						R.color.icon_color_secondary_light), PorterDuff.Mode.SRC_IN));
@@ -180,7 +180,7 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 				locationPaint.setColorFilter(new PorterDuffColorFilter(ContextCompat.getColor(view.getContext(), color),
 						PorterDuff.Mode.SRC_IN));
 			}
-			LayerDrawable layerDrawable = (LayerDrawable) ContextCompat.getDrawable(view.getContext(), appMode.getResourceLocationDay());
+			LayerDrawable layerDrawable = (LayerDrawable) ContextCompat.getDrawable(view.getContext(), appMode.getLocationIcon().getIconId());
 			if (layerDrawable != null) {
 				locationIconTop = ((BitmapDrawable) layerDrawable.getDrawable(0)).getBitmap();
 				locationIconCenter = ((BitmapDrawable) layerDrawable.getDrawable(1)).getBitmap();
