@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Matrix;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
@@ -25,6 +26,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
@@ -60,8 +62,8 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 	private static final String SELECT_ICON = "select_icon";
 	private static final String COLOR_ITEMS = "color_items";
 	private static final String ICON_ITEMS = "icon_items";
-	private static final String SELECT_MAP_ICON = "select_map_icon";
-	private static final String MAP_ICON_ITEMS = "map_icon_items";
+	private static final String SELECT_LOCATION_ICON = "select_location_icon";
+	private static final String LOCATION_ICON_ITEMS = "location_icon_items";
 	private static final String SELECT_NAV_ICON = "select_nav_icon";
 	private static final String NAV_ICON_ITEMS = "nav_icon_items";
 
@@ -170,7 +172,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 	protected void setupPreferences() {
 		findPreference(SELECT_COLOR).setIconSpaceReserved(false);
 		findPreference(SELECT_ICON).setIconSpaceReserved(false);
-		findPreference(SELECT_MAP_ICON).setIconSpaceReserved(false);
+		findPreference(SELECT_LOCATION_ICON).setIconSpaceReserved(false);
 		findPreference(SELECT_NAV_ICON).setIconSpaceReserved(false);
 	}
 
@@ -370,44 +372,23 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 			for (int iconRes : icons) {
 				View iconItem = createIconItemView(iconRes, iconItems);
 				iconItems.addView(iconItem, new FlowLayout.LayoutParams(0, 0));
-				ImageView outlineCircle = iconItem.findViewById(R.id.outlineCircle);
-				outlineCircle.setVisibility(View.GONE);
 			}
 			setIconNewColor(changedProfile.iconRes);
-		} else if (MAP_ICON_ITEMS.equals(preference.getKey())) {
+		} else if (LOCATION_ICON_ITEMS.equals(preference.getKey())) {
 			mapIconItems = (FlowLayout) holder.findViewById(R.id.color_items);
 			mapIconItems.removeAllViews();
-			ArrayList<Integer> icons = ApplicationMode.ProfileIcons.getIcons();
-			for(int iconRes:icons) {
-				FrameLayout iconItemView = (FrameLayout) UiUtilities.getInflater(getContext(), isNightMode())
-						.inflate(R.layout.preference_select_icon_button, mapIconItems, false);
+			for (ApplicationMode.LocationIcon iconRes : ApplicationMode.LocationIcon.values()) {
+				View iconItemView = createLocationIconView(iconRes, mapIconItems);
 				mapIconItems.addView(iconItemView, new FlowLayout.LayoutParams(0, 0));
-				ImageView coloredRect = mapIconItems.findViewById(R.id.backgroundRect);
-				AndroidUtils.setBackground(coloredRect,
-						UiUtilities.tintDrawable(ContextCompat.getDrawable(app, R.drawable.bg_select_icon_button),
-								UiUtilities.getColorWithAlpha(ContextCompat.getColor(app, R.color.icon_color_default_light), 0.1f)));
-				coloredRect.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-//						if (iconRes != changedProfile.iconRes) {
-//							updateIconSelector(iconRes);
-//						}
-					}
-				});
-
-				ImageView outlineCircle = mapIconItems.findViewById(R.id.outlineRect);
-				GradientDrawable circleContourDrawable = (GradientDrawable) ContextCompat.getDrawable(app, R.drawable.bg_select_icon_button_outline);
-				int changedProfileColor = ContextCompat.getColor(app, changedProfile.color.getColor(
-						app.getDaynightHelper().isNightModeForMapControls()));
-				if (circleContourDrawable != null) {
-					circleContourDrawable.setStroke(AndroidUtils.dpToPx(app, 2), changedProfileColor);
-				}
-				outlineCircle.setImageDrawable(circleContourDrawable);
-				outlineCircle.setVisibility(View.VISIBLE);
 			}
 
 		} else if (NAV_ICON_ITEMS.equals(preference.getKey())) {
-
+			navIconItems = (FlowLayout) holder.findViewById(R.id.color_items);
+			navIconItems.removeAllViews();
+			for (ApplicationMode.NavigationIcon iconRes : ApplicationMode.NavigationIcon.values()) {
+				View iconItemView = createNavigationIconView(iconRes, navIconItems);
+				navIconItems.addView(iconItemView, new FlowLayout.LayoutParams(0, 0));
+			}
 		}
 	}
 
@@ -465,6 +446,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 				}
 			}
 		});
+		iconItemView.findViewById(R.id.outlineCircle).setVisibility(View.GONE);
 		iconItemView.setTag(iconRes);
 		return iconItemView;
 	}
@@ -477,9 +459,83 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 		checkMark.setImageDrawable(app.getUIUtilities().getIcon(changedProfile.iconRes, R.color.icon_color_default_light));
 		AndroidUtils.setBackground(iconItem.findViewById(R.id.backgroundCircle),
 				UiUtilities.tintDrawable(ContextCompat.getDrawable(app, R.drawable.circle_background_light),
-				UiUtilities.getColorWithAlpha(ContextCompat.getColor(app, R.color.icon_color_default_light), 0.1f)));
+						UiUtilities.getColorWithAlpha(ContextCompat.getColor(app, R.color.icon_color_default_light), 0.1f)));
 		changedProfile.iconRes = iconRes;
 		updateProfileButton();
+		updateLocationIconSelector();
+	}
+
+	private View createLocationIconView(ApplicationMode.LocationIcon locationIcon, ViewGroup rootView) {
+		FrameLayout locationIconView = (FrameLayout) UiUtilities.getInflater(getContext(), isNightMode())
+				.inflate(R.layout.preference_select_icon_button, rootView, false);
+		locationIconView.<ImageView>findViewById(R.id.icon)
+				.setImageDrawable(ContextCompat.getDrawable(app, locationIcon.getIconId()));
+		locationIconView.<ImageView>findViewById(R.id.headingIcon)
+				.setImageDrawable(ContextCompat.getDrawable(app, locationIcon.getHeadingIconId()));
+		ImageView coloredRect = locationIconView.findViewById(R.id.backgroundRect);
+		AndroidUtils.setBackground(coloredRect,
+				UiUtilities.tintDrawable(ContextCompat.getDrawable(app, R.drawable.bg_select_icon_button),
+						UiUtilities.getColorWithAlpha(ContextCompat.getColor(app, R.color.icon_color_default_light), 0.1f)));
+		coloredRect.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+//						if (locationIcon != changedProfile.locationIcon) {
+//							updateIconSelector(locationIcon);
+//						}
+			}
+		});
+		ImageView outlineRect = locationIconView.findViewById(R.id.outlineRect);
+		GradientDrawable rectContourDrawable = (GradientDrawable) ContextCompat.getDrawable(app, R.drawable.bg_select_icon_button_outline);
+		int changedProfileColor = ContextCompat.getColor(app, changedProfile.color.getColor(
+				app.getDaynightHelper().isNightModeForMapControls()));
+		if (rectContourDrawable != null) {
+			rectContourDrawable.setStroke(AndroidUtils.dpToPx(app, 2), changedProfileColor);
+		}
+		outlineRect.setImageDrawable(rectContourDrawable);
+		outlineRect.setVisibility(View.GONE);
+		return locationIconView;
+	}
+
+	private void updateLocationIconSelector() {
+	}
+
+	private View createNavigationIconView(ApplicationMode.NavigationIcon navigationIcon, ViewGroup rootView) {
+		FrameLayout navigationIconView = (FrameLayout) UiUtilities.getInflater(getContext(), isNightMode())
+				.inflate(R.layout.preference_select_icon_button, rootView, false);
+		ImageView imageView = navigationIconView.findViewById(R.id.icon);
+		imageView.setImageDrawable(ContextCompat.getDrawable(app, navigationIcon.getIconId()));
+		Matrix matrix = new Matrix();
+		imageView.setScaleType(ImageView.ScaleType.MATRIX);
+		matrix.postRotate((float) -90, imageView.getDrawable().getIntrinsicWidth() / 2,
+				imageView.getDrawable().getIntrinsicHeight() / 2);
+		imageView.setImageMatrix(matrix);
+		ImageView coloredRect = navigationIconView.findViewById(R.id.backgroundRect);
+		AndroidUtils.setBackground(coloredRect,
+				UiUtilities.tintDrawable(ContextCompat.getDrawable(app, R.drawable.bg_select_icon_button),
+						UiUtilities.getColorWithAlpha(ContextCompat.getColor(app, R.color.icon_color_default_light), 0.1f)));
+		coloredRect.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+//						if (navigationIcon != changedProfile.navigationIcon) {
+//							updateIconSelector(navigationIcon);
+//						}
+			}
+		});
+		ImageView outlineRect = navigationIconView.findViewById(R.id.outlineRect);
+		GradientDrawable rectContourDrawable = (GradientDrawable) ContextCompat.getDrawable(app, R.drawable.bg_select_icon_button_outline);
+		int changedProfileColor = ContextCompat.getColor(app, changedProfile.color.getColor(
+				app.getDaynightHelper().isNightModeForMapControls()));
+		if (rectContourDrawable != null) {
+			rectContourDrawable.setStroke(AndroidUtils.dpToPx(app, 2), changedProfileColor);
+		}
+		outlineRect.setImageDrawable(rectContourDrawable);
+		outlineRect.setVisibility(View.GONE);
+		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(164, AndroidUtils.dpToPx(app, 80));
+		navigationIconView.setLayoutParams(params);
+		return navigationIconView;
+	}
+
+	private void updateNavigationIconSelector() {
 	}
 
 	private void setIconNewColor(int iconRes) {
