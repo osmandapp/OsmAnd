@@ -36,6 +36,8 @@ public class MultiTouchSupport {
 			public void onActionPointerUp();
 
 			public void onActionCancel();
+
+			public void onChangingViewAngle(float angle);
 	}
 
 	private boolean multiTouchAPISupported = false;
@@ -62,6 +64,10 @@ public class MultiTouchSupport {
 		return inZoomMode;
 	}
 
+	public boolean isInTiltMode() {
+		return inTiltMode;
+	}
+
 	private void initMethods(){
 		try {
 			getPointerCount = MotionEvent.class.getMethod("getPointerCount"); //$NON-NLS-1$
@@ -76,9 +82,17 @@ public class MultiTouchSupport {
 	}
 
 	private boolean inZoomMode = false;
+	private boolean inTiltMode = false;
 	private double zoomStartedDistance = 100;
 	private double zoomRelative = 1;
 	private PointF centerPoint = new PointF();
+	private PointF firstFingerStart = new PointF();
+	private PointF secondFingerStart = new PointF();
+	private static final int TILT_X_THRESHOLD_PX = 40;
+	private static final int TILT_Y_THRESHOLD_PX = 40;
+	private static final int TILT_DY_THRESHOLD_PX = 40;
+	private static final float ROTATION_THRESHOLD_DEG = 15.0f;
+	private boolean isRotating;
 
 	public boolean onTouchEvent(MotionEvent event){
 		if(!isMultiTouchSupported()){
@@ -91,9 +105,10 @@ public class MultiTouchSupport {
 			}
 			Integer pointCount = (Integer) getPointerCount.invoke(event);
 			if(pointCount < 2){
-				if(inZoomMode){
+				if (inZoomMode || inTiltMode) {
 					listener.onZoomOrRotationEnded(zoomRelative, angleRelative);
 					inZoomMode = false;
+					inTiltMode = false;
 					return true;
 				}
 				return false;
@@ -114,28 +129,63 @@ public class MultiTouchSupport {
 			}
 			if (actionCode == ACTION_POINTER_DOWN) {
 				centerPoint = new PointF((x1 + x2) / 2, (y1 + y2) / 2);
+				firstFingerStart = new PointF(x1, y1);
+				secondFingerStart = new PointF(x2, y2);
 				listener.onGestureInit(x1, y1, x2, y2);
 				listener.onZoomStarted(centerPoint);
-				zoomStartedDistance = distance;
-				angleStarted = angle;
-				inZoomMode = true;
 				return true;
 			} else if(actionCode == ACTION_POINTER_UP){
-				if(inZoomMode){
+				if (inZoomMode || inTiltMode) {
 					listener.onZoomOrRotationEnded(zoomRelative, angleRelative);
 					inZoomMode = false;
+					inTiltMode = false;
 				}
 				return true;
-			} else if(inZoomMode && actionCode == MotionEvent.ACTION_MOVE){
-				// Keep zoom center fixed or flexible
-				centerPoint = new PointF((x1 + x2) / 2, (y1 + y2) / 2);
+			} else if (actionCode == MotionEvent.ACTION_MOVE) {
+				if (inZoomMode) {
 
-				if(angleDefined) {
-					angleRelative = MapUtils.unifyRotationTo360(angle - angleStarted);
+					// Keep zoom center fixed or flexible
+					centerPoint = new PointF((x1 + x2) / 2, (y1 + y2) / 2);
+
+					if (angleDefined) {
+						float a = MapUtils.unifyRotationTo360(angle - angleStarted);
+						if (!isRotating && Math.abs(a) > ROTATION_THRESHOLD_DEG) {
+							isRotating = true;
+							angleStarted = angle;
+						} else if (isRotating) {
+							angleRelative = a;
+						}
+					}
+					zoomRelative = distance / zoomStartedDistance;
+					listener.onZoomingOrRotating(zoomRelative, angleRelative);
+					return true;
+				} else if (inTiltMode) {
+					float dy2 = secondFingerStart.y - y2;
+					float viewAngle = dy2 / 8f;
+					listener.onChangingViewAngle(viewAngle);
+				} else {
+					float dx1 = Math.abs(firstFingerStart.x - x1);
+					float dx2 = Math.abs(secondFingerStart.x - x2);
+					float dy1 = Math.abs(firstFingerStart.y - y1);
+					float dy2 = Math.abs(secondFingerStart.y - y2);
+					float startDy = Math.abs(secondFingerStart.y - firstFingerStart.y);
+					if (dx1 < TILT_X_THRESHOLD_PX && dx2 < TILT_X_THRESHOLD_PX
+							&& dy1 > TILT_Y_THRESHOLD_PX && dy2 > TILT_Y_THRESHOLD_PX
+							&& startDy < TILT_Y_THRESHOLD_PX * 6
+							&& Math.abs(dy2 - dy1) < TILT_DY_THRESHOLD_PX) {
+						inTiltMode = true;
+					} else if (dx1 > TILT_X_THRESHOLD_PX || dx2 > TILT_X_THRESHOLD_PX
+							|| Math.abs(dy2 - dy1) > TILT_DY_THRESHOLD_PX
+							|| Math.abs(dy1 - dy2) > TILT_DY_THRESHOLD_PX) {
+						listener.onZoomStarted(centerPoint);
+						zoomStartedDistance = distance;
+						angleStarted = angle;
+						angleRelative = 0;
+						zoomRelative = 0;
+						isRotating = false;
+						inZoomMode = true;
+					}
 				}
-				zoomRelative = distance / zoomStartedDistance;
-				listener.onZoomingOrRotating(zoomRelative, angleRelative);
-				return true;
 			}
 		} catch (Exception e) {
 			log.debug("Multi touch exception" , e); //$NON-NLS-1$

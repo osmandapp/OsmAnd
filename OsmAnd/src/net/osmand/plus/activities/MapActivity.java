@@ -489,6 +489,12 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 	}
 
+	public void setMapElevation(float angle) {
+		if (settings.USE_OPENGL_RENDER.get() && NativeCoreContext.isInit()) {
+			atlasMapRendererView.setElevationAngle(angle);
+		}
+	}
+
 	private void createProgressBarForRouting() {
 		final ProgressBar pb = (ProgressBar) findViewById(R.id.map_horizontal_progress);
 
