@@ -259,4 +259,8 @@
     <string name="unit_of_speed_system">Hastighed</string>
     <string name="buffer_time_descr">Maksimal tid til lagring af punkter i bufferen</string>
     <string name="buffer_time">Buffer udløbstid</string>
+    <string name="unit_of_length_descr">Ændr enhed for afstand.</string>
+    <string name="shared_string_suggested">Foreslået</string>
+    <string name="status_widget_title">OsmAnd Tracker-status</string>
+    <string name="back_to_osmand">Tilbage til OsmAnd</string>
 </resources>
