@@ -825,21 +825,21 @@ public class RoutingHelper {
 //		return false;
 //	}
 
-	public synchronized String getCurrentName(TurnType[] next){
-		NextDirectionInfo n = getNextRouteDirectionInfo(new NextDirectionInfo(), true);
+	public synchronized String getCurrentName(TurnType[] next, NextDirectionInfo n){
 		Location l = lastFixedLocation;
 		float speed = 0;
 		if(l != null && l.hasSpeed()) {
 			speed = l.getSpeed();
 		}
+		if(next != null) {
+			next[0] = n.directionInfo.getTurnType();
+		}
 		if(n.distanceTo > 0  && n.directionInfo != null && !n.directionInfo.getTurnType().isSkipToSpeak() &&
 				voiceRouter.isDistanceLess(speed, n.distanceTo, voiceRouter.PREPARE_DISTANCE * 0.75f, 0f)) {
 			String nm = n.directionInfo.getStreetName();
-//			String rf = n.directionInfo.getRef();
+			String rf = n.directionInfo.getRef();
 			String dn = n.directionInfo.getDestinationName();
-			if(next != null) {
-				next[0] = n.directionInfo.getTurnType();
-			}
+
 			return formatStreetName(nm, null, dn, "»");
 		}
 		RouteSegmentResult rs = getCurrentSegmentResult();
