@@ -245,7 +245,7 @@
     <string name="timeline_no_data_descr">Non tenimus datos collidos pro sa die ischertada</string>
     <string name="timeline_no_data">Perunu datu</string>
     <string name="shared_string_end">Acaba</string>
-    <string name="shared_string_start">Incumintza</string>
+    <string name="shared_string_start">Allughe</string>
     <string name="shared_string_apply">Àplica</string>
     <string name="set_time_timeline_descr">Ischerta su tempus de ammustrare</string>
     <string name="start_end_date">Data de incumintzu — de acabu</string>
@@ -257,6 +257,8 @@
     <string name="unit_of_length">Unidades de longària</string>
     <string name="unit_of_speed_system_descr">Issèbera s\'unidade de letresa.</string>
     <string name="unit_of_speed_system">Unidade de lestresa</string>
-    <string name="buffer_time_descr">Tempus a pustis de su cale sos messàgios de positzione in sa memòria tampone (buffer) ant a èssere iscantzellados</string>
+    <string name="buffer_time_descr">Tempus màssimu de archiviatzione de sos puntos in sa memòria tampone (buffer)</string>
     <string name="buffer_time">Tempus de iscadidura de sa memòria tampone</string>
+    <string name="shared_string_suggested">Cunsigiadu</string>
+    <string name="status_widget_title">Istadu de s\'arrastadore de OsmAnd</string>
 </resources>

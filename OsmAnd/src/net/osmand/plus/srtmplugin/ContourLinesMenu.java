@@ -86,7 +86,7 @@ public class ContourLinesMenu {
 		final OsmandSettings.CommonPreference<String> colorPref = settings.getCustomRenderProperty(colorSchemeProp.getAttrName());
 
 		final boolean selected = !pref.get().equals(CONTOUR_LINES_DISABLED_VALUE);
-		final int toggleActionStringId = selected ? R.string.shared_string_enabled : R.string.shared_string_disabled;
+		final int toggleActionStringId = selected ? R.string.shared_string_on : R.string.shared_string_off;
 		final int showZoomLevelStringId = R.string.show_from_zoom_level;
 		final int colorSchemeStringId = R.string.srtm_color_scheme;
 

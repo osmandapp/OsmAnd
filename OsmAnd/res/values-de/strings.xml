@@ -73,8 +73,8 @@
     <string name="map_magnifier">Kartenlupe</string>
     <string name="base_world_map">Weltweite Basiskarte (basemap)</string>
     <string name="context_menu_item_destination_point">Als Ziel wählen</string>
-    <string name="layer_hillshade">Schummerungsebene</string>
-    <string name="download_hillshade_maps">Schummerungen</string>
+    <string name="layer_hillshade">Reliefanzeige</string>
+    <string name="download_hillshade_maps">Relief</string>
     <string name="rendering_attr_noAdminboundaries_name">Grenzen</string>
     <string name="rendering_attr_noAdminboundaries_description">Anzeige regionaler Grenzverläufe (Administrationsebenen 5 - 9) unterdrücken.</string>
     <string name="map_widget_max_speed">Tempolimit</string>
@@ -373,7 +373,7 @@
     <string name="show_more_map_detail">Mehr Kartendetails anzeigen</string>
     <string name="show_more_map_detail_descr">Einige Vektordaten (Straßen usw.) bereits bei kleineren Vergrößerungen zeigen.</string>
     <string name="favourites_delete_multiple_succesful">Favorit(en) gelöscht.</string>
-    <string name="favorite_delete_multiple">Es soll(en) %1$d Favorit(en) und %2$d Favoriten-Gruppe(n) gelöscht werden. Fortfahren?</string>
+    <string name="favorite_delete_multiple">Es sollen %1$d Favorit(en) und %2$d Favoritengruppe(n) gelöscht werden. Fortfahren\?</string>
     <string name="favorite_home_category">Zuhause</string>
     <string name="favorite_friends_category">Freunde</string>
     <string name="favorite_places_category">Sehenswertes</string>
@@ -501,7 +501,7 @@
     <string name="km">km</string>
     <string name="km_h">km/h</string>
     <string name="m">m</string>
-    <string name="old_map_index_is_not_supported">Überholtes Karten-Format \'\'{0}\'\' wird nicht mehr unterstützt</string>
+    <string name="old_map_index_is_not_supported">Überholtes Kartenformat \'\'{0}\'\' wird nicht mehr unterstützt</string>
     <string name="poi_filter_car_aid">Autowerkstatt</string>
     <string name="poi_filter_closest_poi">Nächstgelegene POIs</string>
     <string name="poi_filter_custom_filter">Benutzerdefinierter Filter</string>
@@ -740,7 +740,7 @@
     <string name="use_online_routing_descr">Internet zur Routenberechnung verwenden.</string>
     <string name="use_online_routing">Online-Navigation nutzen</string>
     <string name="osm_settings_descr">Einstellungen für OpenStreetMap.org (OSM), die für OSM-Übermittlungen erforderlich sind.</string>
-    <string name="data_settings_descr">Sprache angeben, Daten herunter- oder neuladen.</string>
+    <string name="data_settings_descr">Sprache angeben, Daten herunter- oder neu laden.</string>
     <string name="data_settings">Daten</string>
     <string name="osm_settings">OSM-Bearbeitung</string>
     <string name="additional_settings">Weitere Einstellungen</string>
@@ -792,7 +792,7 @@
     <string name="navigate_point_format_D">DDD.DDDDD</string>
     <string name="navigate_point_format_DM">DDD MM.MMM</string>
     <string name="navigate_point_format_DMS">DDD MM SS.S</string>
-    <string name="shared_string_show_on_map">Auf Karte anzeigen</string>
+    <string name="shared_string_show_on_map">Auf der Karte anzeigen</string>
     <string name="search_address_top_text">Adresse</string>
     <string name="search_address_region">Region</string>
     <string name="search_address_city">Ort</string>
@@ -1184,7 +1184,7 @@
     <string name="complex_route_calculation_failed">Schnelle Routenberechnung fehlgeschlagen (%s), Rückfall auf langsame Berechnung.</string>
     <string name="disable_complex_routing_descr">Zwei-Phasen-Routing für Fahrzeugnavigation deaktivieren.</string>
     <string name="disable_complex_routing">Komplexes Routing deaktivieren</string>
-    <string name="shared_string_select_on_map">Auf Karte auswählen</string>
+    <string name="shared_string_select_on_map">Auf der Karte auswählen</string>
     <string name="shared_string_favorite">Favorit</string>
     <string name="route_preferences">Routen-Einstellungen</string>
     <string name="route_info">Routen-Info</string>
@@ -2111,7 +2111,7 @@ Lon %2$s</string>
     <string name="quick_action_map_style_switch">Kartendarstellung geändert zu „%s“.</string>
     <string name="quick_action_take_audio_note">Neue Audio-Notiz</string>
     <string name="quick_action_take_video_note">Neue Video-Notiz</string>
-    <string name="quick_action_take_photo_note">Neue Foto-Notiz</string>
+    <string name="quick_action_take_photo_note">Neue Fotonotiz</string>
     <string name="quick_action_add_osm_bug">OSM-Notiz hinzufügen</string>
     <string name="quick_action_navigation_voice">Sprachausgabe ein/aus</string>
     <string name="quick_action_navigation_voice_off">Sprachausgabe aktivieren</string>
@@ -2238,16 +2238,16 @@ Lon %2$s</string>
     <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) ist eine Karten- und Navigationsapp mit Zugriff auf die kostenlosen, weltweiten und qualitativ hochwertigen Daten von OpenStreetMap (OSM). 
 \n 
 \nGenießen Sie die akustische und visuelle Navigation, die Anzeige von POIs (Orte von Interesse), die Erstellung und Verwaltung von GPX-Tracks, die Darstellung von Höhenlinien und -daten (durch eine Erweiterung), die Wahl zwischen Auto-, Fahrrad- oder Fußgängerbetrieb, die Möglichkeit, an OSM mitzuarbeiten und vieles mehr.</string>
-    <string name="osmand_extended_description_part2">GPS-Navigation
-\n • Sie haben die Wahl zwischen dem Offline-Betrieb (ohne Roaming-Gebühren, wenn Sie im Ausland sind) oder dem (schnelleren) Online-Betrieb
-\n • Die Sprachführung (mit aufgenommenen oder synthetischen Stimmen) begleitet Sie Schritt für Schritt auf Ihrem Weg
-\n • Ihre Route wird neu berechnet, sobald Sie von ihr abweichen
-\n • Fahrspurassistent, Straßennamen und voraussichtliche Ankunftszeit helfen Ihnen auf der Strecke
-\n • Zur Erhöhung Ihrer Reisesicherheit erfolgt ein automatischer Wechsel zwischen Tag- und Nachtmodus
-\n • Sie können wählen, ob Tempolimits angezeigt werden sollen, und ob Sie bei deren Überschreitung darauf hingewiesen werden wollen
-\n • Die Kartenvergrößerung passt sich Ihrer Geschwindigkeit an
-\n • Sie können Ziele nach Adresse, Typ (z. B.: Parkplatz, Restaurant, Hotel, Tankstelle, Museum) oder geographischen Koordinaten suchen
-\n • Die Festlegung von Zwischenstopps entlang Ihrer Reiseroute ist möglich
+    <string name="osmand_extended_description_part2">GPS-Navigation 
+\n • Sie haben die Wahl zwischen dem Offline-Betrieb (ohne Roaming-Gebühren, wenn Sie im Ausland sind) oder dem (schnelleren) Online-Betrieb 
+\n • Die Sprachführung (mit aufgenommenen oder synthetischen Stimmen) begleitet Sie Schritt für Schritt auf Ihrem Weg 
+\n • Ihre Route wird neu berechnet, sobald Sie von ihr abweichen 
+\n • Fahrspurassistent, Straßennamen und voraussichtliche Ankunftszeit helfen Ihnen auf der Strecke 
+\n • Zur Erhöhung Ihrer Reisesicherheit erfolgt ein automatischer Wechsel zwischen Tag- und Nachtmodus 
+\n • Sie können wählen, ob Tempolimits angezeigt werden sollen, und ob Sie bei deren Überschreitung darauf hingewiesen werden wollen 
+\n • Die Kartenvergrößerung passt sich Ihrer Geschwindigkeit an 
+\n • Sie können Ziele nach Adresse, Typ (z. B. Parkplatz, Restaurant, Hotel, Tankstelle, Museum) oder geographischen Koordinaten suchen 
+\n • Die Festlegung von Zwischenstopps entlang Ihrer Reiseroute ist möglich 
 \n • Sie können Ihre GPX-Tracks aufzeichnen, einspielen und ihnen folgen
 \n</string>
     <string name="osmand_extended_description_part3">Karten 
@@ -2256,7 +2256,7 @@ Lon %2$s</string>
 \n • zeigen an, wo Sie sind und worauf Sie sehen 
 \n • übermitteln Ihre Position, damit Ihre Freunde Sie finden können 
 \n • speichern Ihre wichtigsten Orte als Favoriten 
-\n • lassen Ihnen die Wahl, wie Bezeichnungen auf der Karte angezeigt werden sollen: in Englisch, Landessprache oder in phonetischer Schreibweise 
+\n • lassen Ihnen die Wahl, wie Bezeichnungen auf der Karte angezeigt werden sollen: in Englisch, Landessprache oder phonetischer Schreibweise 
 \n • stellen spezielle Online-Karten, Satellitenansichten (von Bing), verschiedene Overlays, wie GPX-Tracks zu Touren-/Routenverläufen und zusätzliche Ebenen mit einstellbarer Transparenz dar
 \n</string>
     <string name="osmand_extended_description_part4">Skisport 
@@ -2301,13 +2301,13 @@ Lon %2$s</string>
 \n OsmAnd+ ist die Kaufversion. Durch ihren Erwerb unterstützen Sie das Projekt, fördern die Entwicklung neuer Funktionen und erhalten die neuesten Aktualisierungen. 
 \n 
 \n Einige der Hauptmerkmale:</string>
-    <string name="osmand_plus_extended_description_part2">Navigation
-\n • funktioniert online (schnell) oder offline (ohne Roaming-Gebühren im Ausland)
-\n • akustische Schritt-für-Schritt-Wegführung (mit aufgenommenen oder synthetischen Stimmen)
-\n • optional mit Fahrspurassistent, Straßennamenanzeige und geschätzter Ankunftszeit
-\n • unterstützt Zwischenstopps entlang der Reiseroute
-\n • automatische Routenneuberechnung, sobald Sie von ihr abweichen
-\n • Ortssuche nach Adresse, Typ (z. B.: Restaurant, Hotel, Tankstelle, Museum) oder geographischen Koordinaten
+    <string name="osmand_plus_extended_description_part2">Navigation 
+\n • funktioniert online (schnell) oder offline (ohne Roaming-Gebühren im Ausland) 
+\n • akustische Schritt-für-Schritt-Wegführung (mit aufgenommenen oder synthetischen Stimmen) 
+\n • optional mit Fahrspurassistent, Straßennamenanzeige und geschätzter Ankunftszeit 
+\n • unterstützt Zwischenstopps entlang der Reiseroute 
+\n • automatische Routenneuberechnung, sobald Sie von ihr abweichen 
+\n • Ortssuche nach Adresse, Typ (z. B. Restaurant, Hotel, Tankstelle, Museum) oder geographischen Koordinaten 
 \n</string>
     <string name="osmand_plus_extended_description_part4">OSM- und Wikipedia-Datennutzung
 \n • Qualitativ hochwertige Informationen aus den besten Gemeinschaftsprojekten der Welt
@@ -2378,7 +2378,7 @@ Lon %2$s</string>
     <string name="index_item_depth_points_northern_hemisphere">Nautische Meerestiefen der Nordhalbkugel</string>
     <string name="download_depth_countours">Nautische Tiefenkonturen</string>
     <string name="nautical_maps">Seekarten</string>
-    <string name="analyze_on_map">Auf Karte auswerten</string>
+    <string name="analyze_on_map">Auf der Karte auswerten</string>
     <string name="shared_string_visible">Sichtbar</string>
     <string name="right_side_navigation">Rechtsverkehr</string>
     <string name="no_overlay">Kein Overlay</string>
@@ -2779,12 +2779,12 @@ Lon %2$s</string>
     <string name="download_all">Alles herunterladen</string>
     <string name="hide_full_description">Vollständige Beschreibung ausblenden</string>
     <string name="show_full_description">Vollständige Beschreibung anzeigen</string>
-    <string name="nautical_render_descr">Zur nautischen Navigation. Hauptmerkmale: Bojen, Leuchttürme, Flussläufe, Schifffahrtswege und -zeichen, Häfen, Seezeichendienste und Tiefenlinien.</string>
+    <string name="nautical_render_descr">Zur nautischen Navigation. Merkmale: Bojen, Leuchttürme, Flussläufe, Schifffahrtswege und -zeichen, Häfen, Seezeichendienste und Tiefenlinien.</string>
     <string name="ski_map_render_descr">Für Skifahrer. Enthält Pisten, Lifte, Langlaufloipen und mehr. Weniger störende sekundäre Kartenobjekte.</string>
     <string name="light_rs_render_descr">Einfacher Kartenstil für die Navigation im Auto. Sanfter Nachtmodus, Höhenlinien, kontrastreiche orangefarbene Straßen, dunkelt sekundäre Kartenobjekte ab.</string>
     <string name="topo_render_descr">Für Wanderungen, Trekking und Radfahren in der Natur. Im Freien lesbar. Kontrastreiche Straßen und Naturobjekte, verschiedene Routentypen, erweiterte Höhenlinienoptionen, zusätzliche Details. Die Einstellung der Oberflächenbeschaffenheit kennzeichnet die Straßenqualität. Kein Nachtmodus.</string>
     <string name="mapnik_render_descr">Alter Mapnik-Stil. Farben ähnlich dem Mapnik-Stil.</string>
-    <string name="default_render_descr">Universeller Stil. Klare Darstellung dicht besiedelter Städte. Hauptmerkmale: Höhenlinien, Routen, Oberflächenqualität, Zufahrtsbeschränkungen, Straßenschilder, Wegeführung nach SAC-Skala, Wildwassersportmerkmale.</string>
+    <string name="default_render_descr">Universeller Stil. Klare Darstellung dicht besiedelter Städte. Merkmale: Höhenlinien, Routen, Oberflächenqualität, Zufahrtsbeschränkungen, Straßenschilder, Wegeführung nach SAC-Skala, Wildwassersportmerkmale.</string>
     <string name="shared_string_bookmark">Lesezeichen</string>
     <string name="off_road_render_descr">Für den Einsatz im Gelände, basierend auf dem \'Topo\'-Kartenstil und zur Verwendung mit grünen Satellitenbildern als Unterlagekarte. Verringerte Linienstärke für Straßen, erhöhte für Fußwege, Wander-, Rad- und andere Outdoor-Routen.</string>
     <string name="touring_view_render_descr">Touring-Stil mit hohem Kontrast und maximalen Details. Enthält alle Optionen des OsmAnd-Standardstils und zeigt dabei so viele Details wie möglich an, insbesondere Straßen, Pfade und andere Verkehrswege. Klare Unterscheidung zwischen den Straßentypen durch den „Touring-Atlas“. Geeignet für den Einsatz bei Tag, Nacht und im Freien.</string>
@@ -3131,8 +3131,8 @@ Lon %2$s</string>
     <string name="routing_attr_freeride_policy_description">Freerides und Strecken abseits der Piste sind inoffizielle Routen und Passagen. Typischerweise unpräpariert, nicht offiziell betreut und abends nicht kontrolliert. Betreten auf eigene Gefahr.</string>
     <string name="press_again_to_change_the_map_orientation">Erneut antippen, um die Kartenausrichtung zu ändern</string>
     <string name="quick_action_need_to_add_item_to_list">Sie müssen mindestens einen Eintrag in die Liste der Schnellaktionseinstellungen hinzufügen</string>
-    <string name="shared_string_min_speed">Min. Tempo</string>
-    <string name="shared_string_max_speed">Max. Tempo</string>
+    <string name="shared_string_min_speed">Mindesttempo</string>
+    <string name="shared_string_max_speed">Maximaltempo</string>
     <string name="default_speed_setting_title">Standardtempo</string>
     <string name="default_speed_setting_descr">Einstellungen des Standardtempos ändern</string>
     <string name="minmax_speed_dialog_title">Tempogrenzen einstellen</string>
@@ -3317,7 +3317,7 @@ Lon %2$s</string>
     <string name="routeInfo_piste_difficulty_name">Pisten-Schwierigkeitsgrad</string>
     <string name="routing_attr_width_name">Breitenbegrenzung</string>
     <string name="routing_attr_width_description">Geben Sie die zulässige Fahrzeugbreitenbegrenzung auf Routen an.</string>
-    <string name="avoid_in_routing_descr_">Bestimmte Routen und Straßentypen vermeiden</string>
+    <string name="avoid_in_routing_descr_">Vermeiden bestimmter Routen und Straßentypen</string>
     <string name="app_mode_utv">Nebeneinander</string>
     <string name="rendering_attr_piste_difficulty_aerialway_name">Seilbahn</string>
     <string name="rendering_attr_piste_difficulty_connection_name">Verbindung</string>
@@ -3422,4 +3422,8 @@ Lon %2$s</string>
     <string name="choose_icon_color_name">Symbol, Farbe und Namen wählen</string>
     <string name="reorder_profiles">Profilliste bearbeiten</string>
     <string name="selected_profile">Ausgewähltes Profil</string>
+    <string name="reset_confirmation_descr">Durch das Auswählen von %1$s werden alle Änderungen verlorengehen.</string>
+    <string name="reset_all_profile_settings_descr">Alle Profil-Einstellungen werden auf den Ausgangszustand nach App-Installation zurückgesetzt.</string>
+    <string name="reset_all_profile_settings">Alle Profil-Einstellungen auf den Standard zurücksetzen\?</string>
+    <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
 </resources>

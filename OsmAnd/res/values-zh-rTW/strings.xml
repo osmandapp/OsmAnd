@@ -2881,7 +2881,7 @@
     <string name="quick_action_day_night_switch_mode">切換日間／夜間模式</string>
     <string name="routeInfo_roadClass_name">道路類型</string>
     <string name="routeInfo_surface_name">路面</string>
-    <string name="routeInfo_smoothness_name">平坦</string>
+    <string name="routeInfo_smoothness_name">光滑度</string>
     <string name="routeInfo_steepness_name">坡度</string>
     <string name="add_home">新增住家</string>
     <string name="add_work">新增工作地點</string>
@@ -3180,7 +3180,7 @@
     <string name="rendering_attr_tracktype_grade3_name">大多堅實</string>
     <string name="rendering_attr_tracktype_grade4_name">大多鬆軟</string>
     <string name="rendering_attr_tracktype_grade5_name">鬆軟</string>
-    <string name="routeInfo_tracktype_name">表面堅固</string>
+    <string name="routeInfo_tracktype_name">表面硬度</string>
     <string name="shared_string_file_is_saved">%s 已儲存</string>
     <string name="shared_string_open_track">開放軌道</string>
     <string name="shared_string_track_is_saved">軌道 %s 已儲存</string>
@@ -3405,4 +3405,8 @@
     <string name="choose_icon_color_name">選擇圖示、顏色與名稱</string>
     <string name="reorder_profiles">編輯設定檔清單</string>
     <string name="selected_profile">選定的設定檔</string>
+    <string name="reset_confirmation_descr">點擊 %1$s，您將會失去您所有的變更。</string>
+    <string name="reset_all_profile_settings_descr">所有設定檔都將被重設為安裝後的狀態。</string>
+    <string name="reset_all_profile_settings">將所有設定檔重設為預設值？</string>
+    <string name="ltr_or_rtl_combine_via_colon">%1$s：%2$s</string>
 </resources>

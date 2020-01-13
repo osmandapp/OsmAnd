@@ -29,6 +29,7 @@ import net.osmand.plus.settings.preferences.ListPreferenceEx;
 
 import java.util.Set;
 
+import static net.osmand.plus.UiUtilities.CompoundButtonType.TOOLBAR;
 import static net.osmand.plus.activities.SettingsNavigationActivity.MORE_VALUE;
 
 public class VoiceAnnouncesFragment extends BaseSettingsFragment {
@@ -71,7 +72,7 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 
 		SwitchCompat switchView = (SwitchCompat) switchContainer.findViewById(R.id.switchWidget);
 		switchView.setChecked(checked);
-		UiUtilities.setupCompoundButton(isNightMode(), getActiveProfileColor(), switchView);
+		UiUtilities.setupCompoundButton(switchView, isNightMode(), TOOLBAR);
 
 		TextView title = switchContainer.findViewById(R.id.switchButtonText);
 		title.setText(checked ? R.string.shared_string_on : R.string.shared_string_off);

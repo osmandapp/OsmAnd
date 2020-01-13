@@ -90,11 +90,11 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 
 	private void buildGroupFavouritesView(View view) {
 		FavoriteGroup favoriteGroup = app.getFavorites().getGroup(fav);
-		List<FavouritePoint> groupFavourites = favoriteGroup.points;
+		List<FavouritePoint> groupFavourites = favoriteGroup.getPoints();
 		if (groupFavourites.size() > 0) {
-			int color = favoriteGroup.color == 0 || favoriteGroup.color == Color.BLACK ? view.getResources().getColor(R.color.color_favorite) : favoriteGroup.color;
+			int color = favoriteGroup.getColor() == 0 || favoriteGroup.getColor() == Color.BLACK ? view.getResources().getColor(R.color.color_favorite) : favoriteGroup.getColor();
 			int disabledColor = light ? R.color.text_color_secondary_light : R.color.text_color_secondary_dark;
-			color = favoriteGroup.visible ? (color | 0xff000000) : view.getResources().getColor(disabledColor);
+			color = favoriteGroup.isVisible() ? (color | 0xff000000) : view.getResources().getColor(disabledColor);
 			String name = view.getContext().getString(R.string.context_menu_points_of_group);
 			buildRow(view, app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_folder, color), null, name, 0, null,
 					true, getCollapsableFavouritesView(view.getContext(), true, favoriteGroup, fav),
@@ -160,12 +160,12 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 	private CollapsableView getCollapsableFavouritesView(final Context context, boolean collapsed, @NonNull final FavoriteGroup group, FavouritePoint selectedPoint) {
 		LinearLayout view = (LinearLayout) buildCollapsableContentView(context, collapsed, true);
 
-		List<FavouritePoint> points = group.points;
+		List<FavouritePoint> points = group.getPoints();
 		for (int i = 0; i < points.size() && i < 10; i++) {
 			final FavouritePoint point = points.get(i);
 			boolean selected = selectedPoint != null && selectedPoint.equals(point);
 			TextViewEx button = buildButtonInCollapsableView(context, selected, false);
-			String name = point.getName();
+			String name = point.getDisplayName(context);
 			button.setText(name);
 
 			if (!selected) {
@@ -173,7 +173,7 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 					@Override
 					public void onClick(View v) {
 						LatLon latLon = new LatLon(point.getLatitude(), point.getLongitude());
-						PointDescription pointDescription = new PointDescription(PointDescription.POINT_TYPE_FAVORITE, point.getName());
+						PointDescription pointDescription = new PointDescription(PointDescription.POINT_TYPE_FAVORITE, point.getDisplayName(context));
 						mapActivity.getContextMenu().show(latLon, pointDescription, point);
 					}
 				});
@@ -187,7 +187,7 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 			button.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					FavoritesActivity.openFavoritesGroup(context, group.name);
+					FavoritesActivity.openFavoritesGroup(context, group.getName());
 				}
 			});
 			view.addView(button);

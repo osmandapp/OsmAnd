@@ -412,7 +412,13 @@ public class TrackActivity extends TabActivity {
 
 	public boolean setJoinSegments(boolean joinSegments) {
 		if (gpxDataItem != null) {
-			return app.getGpxDbHelper().updateJoinSegments(gpxDataItem, joinSegments);
+			boolean updated = app.getGpxDbHelper().updateJoinSegments(gpxDataItem, joinSegments);
+
+			SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByPath(gpxFile.path);
+			if (updated && selectedGpxFile != null) {
+				selectedGpxFile.setJoinSegments(joinSegments);
+			}
+			return updated;
 		}
 		return false;
 	}

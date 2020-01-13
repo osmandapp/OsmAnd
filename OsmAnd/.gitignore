@@ -18,6 +18,15 @@ huaweidrmlib/
 HwDRM_SDK_*
 drm_strings.xml
 
+# copy_widget_icons.sh
+res/drawable-large/map_*
+res/drawable-large-hdpi/map_*
+res/drawable-large-xhdpi/map_* 
+# copy_widget_icons.sh
+res/drawable-large/widget_*
+res/drawable-large-hdpi/widget_*
+res/drawable-large-xhdpi/widget_* 
+
 valgrind/
 bin/
 dist/

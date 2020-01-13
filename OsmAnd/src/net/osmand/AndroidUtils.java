@@ -60,6 +60,7 @@ import net.osmand.plus.download.DownloadActivity;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
+import java.text.MessageFormat;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -76,6 +77,9 @@ import static android.util.TypedValue.COMPLEX_UNIT_SP;
 public class AndroidUtils {
 
 	public static final String STRING_PLACEHOLDER = "%s";
+	public static final MessageFormat formatKb = new MessageFormat("{0, number,##.#}", Locale.US);
+	public static final MessageFormat formatGb = new MessageFormat("{0, number,#.##}", Locale.US);
+	public static final MessageFormat formatMb = new MessageFormat("{0, number,##.#}", Locale.US);
 	
 	/**
 	 * @param context
@@ -211,16 +215,26 @@ public class AndroidUtils {
 		return DateFormat.getTimeFormat(ctx).format(new Date(time));
 	}
 
-	public static String formatSize(long sizeBytes) {
+
+	public static String formatSize(Context ctx, long sizeBytes) {
 		int sizeKb = (int) ((sizeBytes + 512) >> 10);
 		if (sizeKb > 0) {
+
+			String size = "";
+			String numSuffix = "MB";
 			if (sizeKb > 1 << 20) {
-				return DownloadActivity.formatGb.format(new Object[]{(float) sizeKb / (1 << 20)});
+				size = formatGb.format(new Object[]{(float) sizeKb / (1 << 20)});
+				numSuffix = "GB";
 			} else if (sizeBytes > (100 * (1 << 10))) {
-				return DownloadActivity.formatMb.format(new Object[]{(float) sizeBytes / (1 << 20)});
+				size = formatMb.format(new Object[]{(float) sizeBytes / (1 << 20)});
 			} else {
-				return DownloadActivity.formatKb.format(new Object[]{(float) sizeBytes / (1 << 10)});
+				size = formatKb.format(new Object[]{(float) sizeBytes / (1 << 10)});
+				numSuffix = "kB";
 			}
+			if(ctx == null) {
+				return size + " " + numSuffix;
+			}
+			return ctx.getString(R.string.ltr_or_rtl_combine_via_colon, size, numSuffix);
 		}
 		return "";
 	}

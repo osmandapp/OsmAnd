@@ -236,7 +236,7 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 									? app.getFavorites().getVisibleFavByLatLon(marker.point)
 									: marker.favouritePoint;
 							if (fav != null) {
-								showMap(marker.point, fav.getPointDescription(), fav);
+								showMap(marker.point, fav.getPointDescription(mapActivity), fav);
 								return;
 							}
 

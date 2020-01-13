@@ -15,6 +15,7 @@
 		android:layout_margin="@dimen/list_content_padding"
 		app:primaryColor="@color/active_color_primary_dark"
 		app:secondaryColor="?android:textColorSecondary"
+		app:errorColor="@color/color_invalid"
 		app:labelText="@string/profile_name_hint">
 
 		<studio.carbonylgroup.textfieldboxes.ExtendedEditText

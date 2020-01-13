@@ -55,6 +55,7 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.util.List;
 
+import static net.osmand.plus.UiUtilities.CompoundButtonType.TOOLBAR;
 import static net.osmand.plus.profiles.EditProfileFragment.MAP_CONFIG;
 import static net.osmand.plus.profiles.EditProfileFragment.OPEN_CONFIG_ON_MAP;
 import static net.osmand.plus.profiles.EditProfileFragment.SCREEN_CONFIG;
@@ -141,7 +142,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 
 		SwitchCompat switchView = switchContainer.findViewById(R.id.switchWidget);
 		switchView.setChecked(isChecked);
-		UiUtilities.setupCompoundButton(isNightMode(), getActiveProfileColor(), switchView);
+		UiUtilities.setupCompoundButton(switchView, isNightMode(), TOOLBAR);
 
 		TextView title = switchContainer.findViewById(R.id.switchButtonText);
 		title.setText(isChecked ? R.string.shared_string_on : R.string.shared_string_off);

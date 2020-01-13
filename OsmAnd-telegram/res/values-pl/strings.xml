@@ -259,4 +259,5 @@
     <string name="unit_of_speed_system">Jednostka prędkości</string>
     <string name="buffer_time_descr">Maksymalny czas przechowywania punktów w buforze</string>
     <string name="buffer_time">Czas ważności bufora</string>
+    <string name="time_zone_descr">Wybierz strefę czasową, która ma być wyświetlana w wiadomościach o Twojej lokalizacji.</string>
 </resources>

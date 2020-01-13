@@ -3397,4 +3397,8 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="choose_icon_color_name">Elekti emblemon, koloron kaj nomon</string>
     <string name="reorder_profiles">Redakti liston de profiloj</string>
     <string name="selected_profile">Elektita profilo</string>
+    <string name="reset_confirmation_descr">Per klaki “%1$s”, ĉiuj viaj ŝanĝoj perdiĝos.</string>
+    <string name="reset_all_profile_settings_descr">Ĉiuj agordoj pri profiloj revenos al la post-instala stato.</string>
+    <string name="reset_all_profile_settings">Ĉu rekomencigi ĉiujn agordojn pri profiloj\?</string>
+    <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
 </resources>

@@ -1809,7 +1809,7 @@ Dĺžka %2$s</string>
     <string name="route_distance">Vzdialenosť:</string>
     <string name="route_duration">Čas:</string>
     <string name="update_now">Aktualizovať teraz</string>
-    <string name="update">Aktualizovať každých</string>
+    <string name="update">Aktualizovať</string>
     <string name="only_download_over_wifi">Sťahovať iba na Wi-Fi</string>
     <string name="live_update">Okamžité aktualizácie</string>
     <string name="missing_write_external_storage_permission">OsmAnd nemá oprávnenie použiť pamäťovú kartu</string>
@@ -2022,7 +2022,7 @@ Dĺžka %2$s</string>
     <string name="clear_tile_data">Vymazať všetky dlaždice</string>
     <string name="get_it">Získať</string>
     <string name="get_for">Získať za %1$s</string>
-    <string name="osm_live_banner_desc">Získajte neobmedzené sťahovanie máp a aktualizácií častejšie ako raz za mesiac: každý týždeň, deň alebo hodinu.</string>
+    <string name="osm_live_banner_desc">Získajte neobmedzené sťahovanie máp a aktualizácie každý týždeň, deň alebo hodinu.</string>
     <string name="osmand_plus_banner_desc">Neobmedzené sťahovanie máp, aktualizácií a modul Wikipédia.</string>
     <string name="si_mi_meters">Míle/metre</string>
     <string name="osm_live_payment_desc">Predplatné bude spoplatnené každý mesiac. Predplatné zrušte kedykoľvek na Google Play.</string>
@@ -2057,7 +2057,7 @@ Dĺžka %2$s</string>
     <string name="save_track_precision">Minimálna presnosť záznamu</string>
     <string name="save_track_precision_descr">Filter: Žiadne zaznamenávanie kým sa nedosiahne táto presnosť.</string>
     <string name="christmas_poi">Vianočné body záujmu</string>
-    <string name="christmas_desc">Ako prípravu na Vianoce a Nový rok môžete zobraziť body záujmu spojené s Vianocami: Vianočné stromčeky, trhy, atď.</string>
+    <string name="christmas_desc">Ako prípravu na Vianoce a Nový rok môžete zobraziť súvisiace body záujmu ako Vianočné stromčeky a trhy, atď.</string>
     <string name="christmas_desc_q">Zobraziť vianočné objekty?</string>
     <string name="shared_string_continue">Pokračovať</string>
     <string name="shared_string_pause">Pozastaviť</string>
@@ -2065,8 +2065,8 @@ Dĺžka %2$s</string>
     <string name="shared_string_recorded">Zaznamenané</string>
     <string name="shared_string_record">Záznam</string>
     <string name="gpx_logging_no_data">Žiadne údaje</string>
-    <string name="trip_rec_notification_settings">Povoliť rýchly štart záznamu</string>
-    <string name="trip_rec_notification_settings_desc">Zobraziť systémové oznámenie, ktoré umožňuje spustiť nahrávanie.</string>
+    <string name="trip_rec_notification_settings">Zapnúť rýchly záznam</string>
+    <string name="trip_rec_notification_settings_desc">Zobraziť systémové oznámenie, ktoré umožňuje nahrávanie.</string>
     <string name="shared_string_notifications">Oznámenia</string>
     <string name="gpx_no_tracks_title">Nemáte zatiaľ žiadne súbory GPX</string>
     <string name="gpx_no_tracks_title_folder">Do priečinka môžete pridať aj súbory GPX</string>
@@ -2076,12 +2076,12 @@ Dĺžka %2$s</string>
     <string name="route_calculation">Výpočet trasy</string>
     <string name="route_roundabout_short">Použite výjazd %1$d a pokračujte</string>
     <string name="upload_poi">Odoslať POI</string>
-    <string name="search_map_hint">Hľadať mesto alebo región</string>
+    <string name="search_map_hint">Mesto alebo región</string>
     <string name="wiki_around">Články Wikipédie v okolí</string>
     <string name="legacy_search">Staršie vyhľadávanie</string>
     <string name="show_legacy_search">Zobraziť starší spôsob vyhľadávania</string>
     <string name="show_legacy_search_desc">Pridať staršie vyhľadávanie do úvodného panelu.</string>
-    <string name="routing_attr_allow_motorway_name">Povoliť diaľnice</string>
+    <string name="routing_attr_allow_motorway_name">Použiť diaľnice</string>
     <string name="routing_attr_allow_motorway_description">Povoliť použiť diaľnice.</string>
     <string name="lang_sr_latn">Srbsky (Latinka)</string>
     <string name="lang_zh_hk">Čínsky (Hong Kong)</string>
@@ -2192,7 +2192,7 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="total_distance">Celková vzdialenosť</string>
     <string name="routing_attr_driving_style_name">Štýl jazdy</string>
     <string name="select_gpx_folder">Zvoľte priečinok pre súbor GPX</string>
-    <string name="file_can_not_be_moved">Súbor nemôže byť presunutý.</string>
+    <string name="file_can_not_be_moved">Súbor nemohol byť presunutý.</string>
     <string name="shared_string_move">Presunúť</string>
     <string name="shared_string_gpx_tracks">Stopy</string>
     <string name="shared_string_time_moving">Čas v pohybe</string>
@@ -2205,7 +2205,7 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="average_speed">Priemerná rýchlosť</string>
     <string name="shared_string_gpx_track">Stopa</string>
     <string name="points_delete_multiple_succesful">Bod(y) boli vymazané.</string>
-    <string name="points_delete_multiple">Chystáte sa vymazať %1$d bodov. Ste si istý?</string>
+    <string name="points_delete_multiple">Naozaj chcete vymazať %1$d bodov\?</string>
     <string name="route_points_category_name">Zákruty potrebné na tejto trase</string>
     <string name="track_points_category_name">Waypointy, body záujmu, pomenované objekty</string>
     <string name="add_new_folder">Pridať nový priečinok</string>
@@ -2225,7 +2225,7 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="parking_options">Možnosti parkovania</string>
     <string name="full_version_thanks">Ďakujeme za zakúpenie platenej verzie OsmAnd.</string>
     <string name="routing_attr_relief_smoothness_factor_name">Zvoľte fluktuáciu nadmorskej výšky</string>
-    <string name="right_side_navigation">Jazdenie po pravej strane</string>
+    <string name="right_side_navigation">Premávka po pravej strane</string>
     <string name="driving_region_automatic">Automaticky</string>
     <string name="fonts_header">Mapové písma</string>
     <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions - Automatizované navigačné pokyny) je mapová a navigačná aplikácia s prístupom k voľným a kvalitným celosvetovým údajom z OpenStreetMap (OSM).
@@ -2361,7 +2361,7 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="quick_action_add_first_intermediate">Pridať prvý prechodný bod</string>
     <string name="quick_action_add_destination_desc">Tlačidlo na určenie stredu obrazovky novým cieľom trasy a doterajší cieľ sa stane posledným prechodným cieľom.</string>
     <string name="quick_action_replace_destination_desc">Aktivovaním tohto tlačidla sa stred obrazovky stane novým cieľom trasy a nahradí doterajší cieľ (ak existoval).</string>
-    <string name="quick_action_add_first_intermediate_desc">Aktivovaním tohto tlačidla akcie sa stred obrazovky stane prvým prechodným bodom trasy.</string>
+    <string name="quick_action_add_first_intermediate_desc">Tlačidlo pre nastavenie stredu obrazovky ako prvý prechodný bod trasy.</string>
     <string name="no_overlay">Žiadna prekrývacia vrstva</string>
     <string name="no_underlay">Žiadna podkladová vrstva</string>
     <string name="subscribe_email_error">Chyba</string>
@@ -3405,4 +3405,8 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="choose_icon_color_name">Zvoľte ikonu, farbu a názov</string>
     <string name="reorder_profiles">Upraviť zoznam profilov</string>
     <string name="selected_profile">Zvolený profil</string>
+    <string name="reset_confirmation_descr">Stlačením %1$s stratíte všetky zmeny.</string>
+    <string name="reset_all_profile_settings_descr">Všetky nastavenia profilu budú vrátené do východzieho stavu.</string>
+    <string name="reset_all_profile_settings">Resetovať nastavenia profilu na predvolené hodnoty\?</string>
+    <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
 </resources>

@@ -14,6 +14,7 @@ import net.osmand.telegram.R
 import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.helpers.OsmandAidlHelper.ContextMenuButtonsListener
 import net.osmand.telegram.helpers.TelegramUiHelper.ListItem
+import net.osmand.telegram.ui.OPEN_MY_LOCATION_TAB_KEY
 import net.osmand.telegram.utils.AndroidUtils
 import net.osmand.telegram.utils.OsmandFormatter
 import net.osmand.telegram.utils.OsmandLocationUtils
@@ -42,6 +43,15 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 		const val LIVE_TRACKS_DIR = "livetracks"
 
 		const val GPX_COLORS_COUNT = 10
+
+		private const val STATUS_WIDGET_ID = "status_widget"
+		private const val STATUS_WIDGET_MENU_ICON = "widget_location_sharing_night"
+		private const val STATUS_WIDGET_ANIM_ICON_DAY = "anim_widget_location_sharing_day"
+		private const val STATUS_WIDGET_ANIM_ICON_NIGHT = "anim_widget_location_sharing_night"
+		private const val STATUS_WIDGET_ON_ANIM_ICON_DAY = "anim_widget_location_sharing_on_day"
+		private const val STATUS_WIDGET_ON_ANIM_ICON_NIGHT = "anim_widget_location_sharing_on_night"
+		private const val STATUS_WIDGET_OFF_ICON_DAY = "widget_location_sharing_off_day"
+		private const val STATUS_WIDGET_OFF_ICON_NIGHT = "widget_location_sharing_off_night"
 
 		val GPX_COLORS = arrayOf(
 			"red", "orange", "lightblue", "blue", "purple",
@@ -196,6 +206,58 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 				}
 			}
 		}
+	}
+
+	fun addOrUpdateStatusWidget(time: Long, isSending: Boolean) {
+		val iconDay: String
+		val iconNight: String
+		val text = when {
+			time > 0L -> {
+				iconDay = STATUS_WIDGET_ANIM_ICON_DAY
+				iconNight = STATUS_WIDGET_ANIM_ICON_NIGHT
+				val diffTime = (System.currentTimeMillis() - time) / 1000
+				OsmandFormatter.getFormattedDurationForWidget(diffTime)
+			}
+			time == 0L && isSending -> {
+				iconDay = STATUS_WIDGET_ON_ANIM_ICON_DAY
+				iconNight = STATUS_WIDGET_ON_ANIM_ICON_NIGHT
+				app.getString(R.string.shared_string_ok)
+			}
+			time == 0L && !isSending -> {
+				iconDay = STATUS_WIDGET_ANIM_ICON_DAY
+				iconNight = STATUS_WIDGET_ANIM_ICON_NIGHT
+				app.getString(R.string.shared_string_ok)
+			}
+			else -> {
+				iconDay = STATUS_WIDGET_OFF_ICON_DAY
+				iconNight = STATUS_WIDGET_OFF_ICON_NIGHT
+				app.getString(R.string.shared_string_start)
+			}
+		}
+		val subText = when {
+			time > 0 -> {
+				if (text.length > 2) {
+					app.getString(R.string.shared_string_hour_short)
+				} else {
+					app.getString(R.string.shared_string_minute_short)
+				}
+			}
+			else -> ""
+		}
+		osmandAidlHelper.addMapWidget(
+				STATUS_WIDGET_ID,
+				STATUS_WIDGET_MENU_ICON,
+				app.getString(R.string.status_widget_title),
+				iconDay,
+				iconNight,
+				text, subText, 50, getStatusWidgetIntent())
+	}
+
+	private fun getStatusWidgetIntent(): Intent {
+		val startIntent = app.packageManager.getLaunchIntentForPackage(app.packageName)
+		startIntent.addCategory(Intent.CATEGORY_LAUNCHER)
+		startIntent.putExtra(OPEN_MY_LOCATION_TAB_KEY,true)
+		return startIntent
 	}
 
 	private fun getALatLonFromMessage(content: TdApi.MessageContent): ALatLon? {

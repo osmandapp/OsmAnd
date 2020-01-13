@@ -214,7 +214,7 @@ public class QuickSearchListItem {
 			case FAVORITE:
 				FavouritePoint fav = (FavouritePoint) searchResult.object;
 				return fav.getCategory().length() == 0 ?
-						app.getString(R.string.shared_string_favorites) : fav.getCategory();
+						app.getString(R.string.shared_string_favorites) : fav.getCategoryDisplayName(app);
 			case FAVORITE_GROUP:
 				return app.getString(R.string.shared_string_my_favorites);
 			case REGION:
@@ -355,10 +355,10 @@ public class QuickSearchListItem {
 				return getIcon(app, R.drawable.ic_action_world_globe);
 			case FAVORITE:
 				FavouritePoint fav = (FavouritePoint) searchResult.object;
-				return FavoriteImageDrawable.getOrCreate(app, fav.getColor(), false);
+				return FavoriteImageDrawable.getOrCreate(app, fav.getColor(), false, fav);
 			case FAVORITE_GROUP:
 				FavoriteGroup group = (FavoriteGroup) searchResult.object;
-				int color = group.color == 0 || group.color == Color.BLACK ? app.getResources().getColor(R.color.color_favorite) : group.color;
+				int color = group.getColor() == 0 || group.getColor() == Color.BLACK ? app.getResources().getColor(R.color.color_favorite) : group.getColor();
 				return app.getUIUtilities().getPaintedIcon(R.drawable.ic_action_fav_dark, color | 0xff000000);
 			case REGION:
 				return getIcon(app, R.drawable.ic_world_globe_dark);
@@ -372,7 +372,7 @@ public class QuickSearchListItem {
 				}
 			case WPT:
 				WptPt wpt = (WptPt) searchResult.object;
-				return FavoriteImageDrawable.getOrCreate(app, wpt.getColor(), false);
+				return FavoriteImageDrawable.getOrCreate(app, wpt.getColor(), false, wpt);
 			case UNKNOWN_NAME_FILTER:
 				break;
 		}

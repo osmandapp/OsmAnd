@@ -11,7 +11,9 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.res.AssetManager;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Handler;
@@ -137,6 +139,8 @@ public class OsmandApplication extends MultiDexApplication {
 	LockHelper lockHelper;
 	SettingsHelper settingsHelper;
 	GpxDbHelper gpxDbHelper;
+
+	private Resources localizedResources;
 
 	private RoutingConfiguration.Builder routingConfig;
 	private Locale preferredLocale = null;
@@ -376,25 +380,34 @@ public class OsmandApplication extends MultiDexApplication {
 		String lang = split[0];
 		String country = (split.length > 1) ? split[1] : "";
 
-		if(defaultLocale == null) {
+		if (defaultLocale == null) {
 			defaultLocale = Locale.getDefault();
 		}
-		if (!"".equals(lang) && !config.locale.equals(pl)) {
+		if (!"".equals(lang)) {
 			if (!"".equals(country)) {
 				preferredLocale = new Locale(lang, country);
 			} else {
 				preferredLocale = new Locale(lang);
 			}
-			Locale.setDefault(preferredLocale);
-			config.locale = preferredLocale;
-			getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
-		} else if("".equals(lang) && defaultLocale != null && Locale.getDefault() != defaultLocale) {
-			Locale.setDefault(defaultLocale);
-			config.locale = defaultLocale;
-			preferredLocale = null;
-			getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
 		}
-		
+		Locale selectedLocale = null;
+
+		if (!"".equals(lang) && !config.locale.equals(preferredLocale)) {
+			selectedLocale = preferredLocale;
+		} else if ("".equals(lang) && defaultLocale != null && Locale.getDefault() != defaultLocale) {
+			selectedLocale = defaultLocale;
+			preferredLocale = null;
+		}
+		if (selectedLocale != null) {
+			Locale.setDefault(selectedLocale);
+			config.locale = selectedLocale;
+			getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+			if (android.os.Build.VERSION.SDK_INT >= 17) {
+				Configuration conf = new Configuration(config);
+				conf.locale = selectedLocale;
+				localizedResources = createConfigurationContext(conf).getResources();
+			}
+		}
 	}
 
 	public static final int PROGRESS_DIALOG = 5;
@@ -831,7 +844,17 @@ public class OsmandApplication extends MultiDexApplication {
 		}
 		return lang;
 	}
-	
+
+	@Override
+	public AssetManager getAssets() {
+		return localizedResources != null ? localizedResources.getAssets() : super.getAssets();
+	}
+
+	@Override
+	public Resources getResources() {
+		return localizedResources != null ? localizedResources : super.getResources();
+	}
+
 	public synchronized RoutingConfiguration.Builder getRoutingConfig() {
 		RoutingConfiguration.Builder rc;
 		if(routingConfig == null) {

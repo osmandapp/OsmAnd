@@ -529,7 +529,7 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 					TextView distanceOrTimeSpanText = (TextView) convertView.findViewById(R.id.distance_or_time_span_text);
 					if (position == 0) {
 						distanceOrTimeSpanImageView.setImageDrawable(ic.getIcon(R.drawable.ic_action_track_16, app.getSettings().isLightContent() ? R.color.gpx_split_segment_icon_color : 0));
-						float totalDistance = joinSegments && gpxItem.isGeneralTrack() ? analysis.totalDistanceWithoutGaps : analysis.totalDistance;
+						float totalDistance = joinSegments && gpxItem.isGeneralTrack() ? analysis.totalDistance : analysis.totalDistanceWithoutGaps;
 						distanceOrTimeSpanValue.setText(OsmAndFormatter.getFormattedDistance(totalDistance, app));
 						distanceOrTimeSpanText.setText(app.getString(R.string.distance));
 					} else {

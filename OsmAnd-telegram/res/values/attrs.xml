@@ -12,6 +12,7 @@
 		<attr name="primary_btn_text_color" format="reference" />
 		<attr name="secondary_btn_bg" format="reference" />
 		<attr name="shared_chat_card_bg" format="reference" />
+		<attr name="bg_list_item_dark" format="reference" />
 	</declare-styleable>
 
 	<declare-styleable name="TextViewEx">

@@ -77,9 +77,8 @@ public class CoordinatesFormatFragment extends BaseSettingsFragment {
 		String formattedCoordinates = OsmAndFormatter.getFormattedCoordinates(lat, lon, format);
 		if (format == PointDescription.UTM_FORMAT) {
 			SpannableStringBuilder spannableBuilder = new SpannableStringBuilder();
-			spannableBuilder.append(getString(R.string.shared_string_example));
-			spannableBuilder.append(": ");
-			spannableBuilder.append(formattedCoordinates);
+			String combined = getString(R.string.ltr_or_rtl_combine_via_colon, getString(R.string.shared_string_example), formattedCoordinates);
+			spannableBuilder.append(combined);
 			spannableBuilder.append("\n");
 			spannableBuilder.append(getString(R.string.utm_format_descr));
 
@@ -106,7 +105,7 @@ public class CoordinatesFormatFragment extends BaseSettingsFragment {
 
 			return spannableBuilder;
 		}
-		return getString(R.string.shared_string_example) + ": " + formattedCoordinates;
+		return getString(R.string.ltr_or_rtl_combine_via_colon, getString(R.string.shared_string_example), formattedCoordinates);
 	}
 
 	@Override

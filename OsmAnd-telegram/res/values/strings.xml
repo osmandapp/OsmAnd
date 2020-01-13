@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="back_to_osmand">Back to OsmAnd</string>
+    <string name="shared_string_suggested">Suggested</string>
+    <string name="status_widget_title">OsmAnd Tracker status</string>
     <string name="buffer_time_descr">Maximum time to store points in the buffer</string>
     <string name="buffer_time">Buffer expiration time</string>
     <string name="time_zone_descr">Select time zone to show in your location messages.</string>

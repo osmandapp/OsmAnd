@@ -39,6 +39,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import static net.osmand.plus.UiUtilities.CompoundButtonType.PROFILE_DEPENDENT;
+
 public class SelectMapStyleBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
 	public static final String TAG = SelectMapStyleBottomSheetDialogFragment.class.getSimpleName();
@@ -210,7 +212,7 @@ public class SelectMapStyleBottomSheetDialogFragment extends MenuBottomSheetDial
 
 			RadioButton rb = (RadioButton) view.findViewById(R.id.compound_button);
 			rb.setChecked(selected);
-			UiUtilities.setupCompoundButton(getMyApplication(), rb, nightMode, true);
+			UiUtilities.setupCompoundButton(rb, nightMode, PROFILE_DEPENDENT);
 
 			counter++;
 		}

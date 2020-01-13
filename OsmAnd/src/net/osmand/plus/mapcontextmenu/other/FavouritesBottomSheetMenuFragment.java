@@ -77,7 +77,7 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 				}
 
 				@Override
-				public void onFavoriteAddressResolved(@NonNull FavouritePoint favouritePoint) {
+				public void onFavoriteDataUpdated(@NonNull FavouritePoint favouritePoint) {
 				}
 			});
 		}
@@ -131,9 +131,9 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 
 	private void loadFavorites() {
 		favouritePoints.clear();
-		favouritePoints.addAll(getMyApplication().getFavorites().getNonPersonalVisibleFavouritePoints());
+		favouritePoints.addAll(getMyApplication().getFavorites().getVisibleFavouritePoints());
 		if (favouritePoints.isEmpty()) {
-			favouritePoints.addAll(getMyApplication().getFavorites().getNonPersonalFavouritePoints());
+			favouritePoints.addAll(getMyApplication().getFavorites().getFavouritePoints());
 		}
 	}
 
@@ -147,24 +147,25 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 	}
 
 	private void selectFavorite(FavouritePoint point) {
-		TargetPointsHelper targetPointsHelper = getMyApplication().getTargetPointsHelper();
-		FavouritesDbHelper favorites = getMyApplication().getFavorites();
+		OsmandApplication app = getMyApplication();
+		TargetPointsHelper targetPointsHelper = app.getTargetPointsHelper();
+		FavouritesDbHelper favorites = app.getFavorites();
 		LatLon ll = new LatLon(point.getLatitude(), point.getLongitude());
 		switch (pointType) {
 			case START:
-				targetPointsHelper.setStartPoint(ll, true, point.getPointDescription());
+				targetPointsHelper.setStartPoint(ll, true, point.getPointDescription(app));
 				break;
 			case TARGET:
-				targetPointsHelper.navigateToPoint(ll, true, -1, point.getPointDescription());
+				targetPointsHelper.navigateToPoint(ll, true, -1, point.getPointDescription(app));
 				break;
 			case INTERMEDIATE:
-				targetPointsHelper.navigateToPoint(ll, true, targetPointsHelper.getIntermediatePoints().size(), point.getPointDescription());
+				targetPointsHelper.navigateToPoint(ll, true, targetPointsHelper.getIntermediatePoints().size(), point.getPointDescription(app));
 				break;
 			case HOME:
-				favorites.setHomePoint(ll, null);
+				favorites.setSpecialPoint(ll, FavouritePoint.SpecialPointType.HOME, null);
 				break;
 			case WORK:
-				favorites.setWorkPoint(ll, null);
+				favorites.setSpecialPoint(ll, FavouritePoint.SpecialPointType.WORK, null);
 				break;
 		}
 		MapRouteInfoMenu routeMenu = getMapRouteInfoMenu();

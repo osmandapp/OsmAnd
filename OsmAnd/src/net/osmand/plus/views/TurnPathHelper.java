@@ -568,7 +568,6 @@ public class TurnPathHelper {
 
 	public static Path getPathFromTurnType(Resources res, int firstTurn,
 			int secondTurn, int thirdTurn, int turnIndex, float coef, boolean leftSide, boolean smallArrow) {
-
 		int firstTurnType = TurnType.valueOf(firstTurn, leftSide).getValue();
 		int secondTurnType = TurnType.valueOf(secondTurn, leftSide).getValue();
 		int thirdTurnType = TurnType.valueOf(thirdTurn, leftSide).getValue();
@@ -606,6 +605,14 @@ public class TurnPathHelper {
 				} else {
 					turnResource = null;
 				}
+			} else if (TurnType.isSlightTurn(firstTurnType) && !TurnType.isSlightTurn(secondTurnType)
+					&& !TurnType.isSlightTurn(thirdTurnType)) {
+				if (TurnType.isLeftTurn(firstTurnType) && TurnType.isRightTurn(secondTurnType)
+						&& TurnType.isLeftTurn(thirdTurnType)){
+					turnResource = new TurnResource(secondTurnType, true, false, leftSide);
+				} else if (TurnType.isRightTurn(firstTurnType) && TurnType.isLeftTurn(secondTurnType)
+						&& TurnType.isRightTurn(thirdTurnType)) {
+					turnResource = new TurnResource(secondTurnType, true, false, leftSide); }
 			} else if (firstTurnType == TurnType.C || thirdTurnType == TurnType.C) {
 				// get the small one
 				turnResource = new TurnResource(secondTurnType, true, false, leftSide);
@@ -613,9 +620,11 @@ public class TurnPathHelper {
 				turnResource = new TurnResource(secondTurnType, false, false, leftSide);
 			}
 		} else if (turnIndex == THIRD_TURN) {
-			if ((TurnType.isLeftTurn(firstTurnType) || TurnType.isLeftTurn(secondTurnType)) && TurnType.isLeftTurn(thirdTurnType)) {
+			if (((TurnType.isLeftTurn(firstTurnType) && !TurnType.isSlightTurn(firstTurnType))
+					|| TurnType.isLeftTurn(secondTurnType)) && TurnType.isLeftTurn(thirdTurnType)) {
 				turnResource = null;
-			} else if ((TurnType.isRightTurn(firstTurnType) || TurnType.isRightTurn(secondTurnType)) && TurnType.isRightTurn(thirdTurnType)) {
+			} else if (((TurnType.isRightTurn(firstTurnType) && !TurnType.isSlightTurn(firstTurnType))
+					|| TurnType.isRightTurn(secondTurnType)) && TurnType.isRightTurn(thirdTurnType)) {
 				turnResource = null;
 			} else {
 				turnResource = new TurnResource(thirdTurnType, true, false, leftSide);

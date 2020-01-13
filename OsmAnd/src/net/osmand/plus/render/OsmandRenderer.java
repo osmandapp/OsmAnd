@@ -488,7 +488,10 @@ public class OsmandRenderer {
 							mapObj.typeInd = j;
 							mapObj.obj = o;
 							if(objectType == 3) {
-								MapDataObjectPrimitive pointObj = mapObj;
+								MapDataObjectPrimitive pointObj = new MapDataObjectPrimitive();
+								pointObj.order = order;
+								pointObj.typeInd = j;
+								pointObj.obj = o;
 								pointObj.objectType = 1;
 								double area = polygonArea(mapObj, mult);
 								mapObj.area = area;

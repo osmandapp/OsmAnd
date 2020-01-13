@@ -365,7 +365,7 @@ public class ConfigureMapMenu {
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setId(TRANSPORT_ID)
 				.setTitleId(R.string.rendering_category_transport, activity)
-				.setIcon(R.drawable.ic_action_bus_dark)
+				.setIcon(R.drawable.ic_action_transport_bus)
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
 				.setSelected(transportSelected)
 				.setColor(transportSelected ? selectedProfileColorRes : ContextMenuItem.INVALID_ID)
@@ -428,13 +428,13 @@ public class ConfigureMapMenu {
 							if ("transportStops".equals(p.getAttrName())) {
 								iconIds[i] = R.drawable.ic_action_transport_stop;
 							} else if ("publicTransportMode".equals(p.getAttrName())) {
-								iconIds[i] = R.drawable.ic_action_bus_dark;
+								iconIds[i] = R.drawable.ic_action_transport_bus;
 							} else if ("tramTrainRoutes".equals(p.getAttrName())) {
 								iconIds[i] = R.drawable.ic_action_transport_tram;
 							} else if ("subwayMode".equals(p.getAttrName())) {
 								iconIds[i] = R.drawable.ic_action_transport_subway;
 							} else {
-								iconIds[i] = R.drawable.ic_action_bus_dark;
+								iconIds[i] = R.drawable.ic_action_transport_bus;
 							}
 						}
 
@@ -710,7 +710,7 @@ public class ConfigureMapMenu {
 						AlertDialog.Builder b = new AlertDialog.Builder(new ContextThemeWrapper(view.getContext(), themeRes));
 						// test old descr as title
 						b.setTitle(R.string.text_size);
-						final Float[] txtValues = new Float[]{0.75f, 1f, 1.25f, 1.5f, 2f, 3f};
+						final Float[] txtValues = new Float[]{0.33f, 0.5f, 0.75f, 1f, 1.25f, 1.5f, 2f, 3f};
 						int selected = -1;
 						final String[] txtNames = new String[txtValues.length];
 						for (int i = 0; i < txtNames.length; i++) {
@@ -835,7 +835,7 @@ public class ConfigureMapMenu {
 					}
 				}).createItem());
 
-		props = createProperties(customRules, null, R.string.rendering_category_transport, R.drawable.ic_action_bus_dark,
+		props = createProperties(customRules, null, R.string.rendering_category_transport, R.drawable.ic_action_transport_bus,
 				"transport", null, adapter, activity, true, TRANSPORT_RENDERING_ID, themeRes, nightMode, selectedProfileColor);
 		if (props != null) {
 			adapter.addItem(props);

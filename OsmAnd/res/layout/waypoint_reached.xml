@@ -48,6 +48,7 @@
             android:layout_gravity="center_vertical"
             android:ellipsize="end"
             android:maxLines="2"
+            android:textColor="?android:textColorSecondary"
             android:textSize="@dimen/default_list_text_size"
             tools:text="Some waypoint text"/>
 
@@ -75,7 +76,7 @@
                 android:layout_marginStart="6dp"
                 android:drawablePadding="2dp"
                 android:maxLines="1"
-                android:textColor="@color/text_color_secondary_dark"
+                android:textColor="?android:textColorSecondary"
                 android:textSize="@dimen/default_sub_text_size"
                 tools:text="Intermediate point "/>
 
@@ -87,7 +88,7 @@
                 android:layout_weight="1"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:textColor="@color/text_color_secondary_dark"
+                android:textColor="?android:textColorSecondary"
                 android:textSize="@dimen/default_sub_text_size"
                 tools:text="some description"/>
 

@@ -12,10 +12,8 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceViewHolder;
 import android.support.v7.preference.SwitchPreferenceCompat;
-import android.support.v7.preference.TwoStatePreference;
 import android.support.v7.widget.AppCompatCheckedTextView;
 import android.support.v7.widget.SwitchCompat;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +21,6 @@ import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
-import net.osmand.AndroidUtils;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandSettings;
@@ -32,11 +29,9 @@ import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.Version;
 import net.osmand.plus.base.MapViewTrackingUtilities;
-import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.settings.bottomsheets.ChangeGeneralProfilesPrefBottomSheet;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
-import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -79,28 +74,6 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 			switchView.setOnCheckedChangeListener(null);
 			switchView.setChecked(checked);
 			switchView.setOnCheckedChangeListener(externalInputDeviceListener);
-		}
-
-		OsmandSettings.OsmandPreference osmandPreference = settings.getPreference(prefId);
-		TextView summaryView = (TextView) holder.findViewById(android.R.id.summary);
-		if (osmandPreference instanceof CommonPreference && summaryView != null) {
-			CharSequence summary = null;
-
-			if (preference instanceof TwoStatePreference) {
-				TwoStatePreference statePreference = (TwoStatePreference) preference;
-				summary = statePreference.isChecked() ? statePreference.getSummaryOn() : statePreference.getSummaryOff();
-			}
-			if (TextUtils.isEmpty(summary)) {
-				summary = preference.getSummary();
-			}
-			ApplicationMode selectedMode = getSelectedAppMode();
-			CommonPreference commonPref = (CommonPreference) osmandPreference;
-			if (!commonPref.hasDefaultValueForMode(selectedMode)
-					&& (!commonPref.isSetForMode(selectedMode) || getSelectedAppMode().equals(ApplicationMode.DEFAULT))) {
-				String baseString = getString(R.string.shared_preference) + ": %s";
-				summary = AndroidUtils.getStyledString(baseString, summary, new CustomTypefaceSpan(FontCache.getRobotoMedium(app)), null);
-			}
-			summaryView.setText(summary);
 		}
 	}
 

@@ -89,7 +89,10 @@ class ShareLocationHelper(private val app: TelegramApplication) {
 			app.settings.getChatsShareInfo().forEach { (chatId, shareInfo) ->
 				val currentTime = System.currentTimeMillis() / 1000
 				when {
-					shareInfo.getChatLiveMessageExpireTime() <= 0 -> app.settings.shareLocationToChat(chatId, false)
+					shareInfo.getChatLiveMessageExpireTime() <= 0 -> {
+						app.settings.shareLocationToChat(chatId, false)
+						app.settings.addTimePeriodToLastItem(shareInfo.chatId, shareInfo.livePeriod)
+					}
 					currentTime > shareInfo.currentMessageLimit -> {
 						shareInfo.apply {
 							val newLivePeriod =

@@ -358,7 +358,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	private void drawSelectedFilesPoints(Canvas canvas, RotatedTileBox tileBox, List<SelectedGpxFile> selectedGPXFiles) {
 		if (tileBox.getZoom() >= startZoom) {
 			float iconSize = FavoriteImageDrawable.getOrCreate(view.getContext(), 0,
-					true).getIntrinsicWidth() * 3 / 2.5f;
+					true, (WptPt) null).getIntrinsicWidth() * 3 / 2.5f;
 			QuadTree<QuadRect> boundIntersections = initBoundIntersections(tileBox);
 
 			List<LatLon> fullObjectsLatLon = new ArrayList<>();
@@ -484,10 +484,10 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		FavoriteImageDrawable fid;
 		boolean history = false;
 		if (marker != null) {
-			fid = FavoriteImageDrawable.getOrCreateSyncedIcon(view.getContext(), pointColor);
+			fid = FavoriteImageDrawable.getOrCreateSyncedIcon(view.getContext(), pointColor, o);
 			history = marker.history;
 		} else {
-			fid = FavoriteImageDrawable.getOrCreate(view.getContext(), pointColor, true);
+			fid = FavoriteImageDrawable.getOrCreate(view.getContext(), pointColor, true, o);
 		}
 		fid.drawBitmapInCenter(canvas, x, y, history);
 	}

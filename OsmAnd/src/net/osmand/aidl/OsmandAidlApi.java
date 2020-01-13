@@ -8,10 +8,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -20,9 +18,6 @@ import android.os.ParcelFileDescriptor;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.CompoundButton;
 
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
@@ -45,7 +40,6 @@ import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GpxSelectionHelper;
@@ -56,8 +50,6 @@ import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.OsmandSettings.CommonPreference;
-import net.osmand.plus.R;
 import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.SettingsHelper;
 import net.osmand.plus.activities.MapActivity;
@@ -77,7 +69,6 @@ import net.osmand.plus.routing.VoiceRouter;
 import net.osmand.plus.views.AidlMapLayer;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapLayer;
-import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.MapWidgetRegInfo;
 import net.osmand.plus.views.mapwidgets.TextInfoWidget;
@@ -106,13 +97,12 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
 
-import static net.osmand.aidl.ConnectedApp.AIDL_OBJECT_ID;
-import static net.osmand.aidl.ConnectedApp.AIDL_PACKAGE_NAME;
 import static net.osmand.aidl.ConnectedApp.AIDL_ADD_MAP_LAYER;
 import static net.osmand.aidl.ConnectedApp.AIDL_ADD_MAP_WIDGET;
+import static net.osmand.aidl.ConnectedApp.AIDL_OBJECT_ID;
+import static net.osmand.aidl.ConnectedApp.AIDL_PACKAGE_NAME;
 import static net.osmand.aidl.ConnectedApp.AIDL_REMOVE_MAP_LAYER;
 import static net.osmand.aidl.ConnectedApp.AIDL_REMOVE_MAP_WIDGET;
-
 import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_IO_ERROR;
 import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_MAX_LOCK_TIME_MS;
 import static net.osmand.aidlapi.OsmandAidlConstants.COPY_FILE_PARAMS_ERROR;
@@ -856,7 +846,7 @@ public class OsmandAidlApi {
 		FavouritesDbHelper favoritesHelper = app.getFavorites();
 		List<FavouritesDbHelper.FavoriteGroup> groups = favoritesHelper.getFavoriteGroups();
 		for (FavouritesDbHelper.FavoriteGroup g : groups) {
-			if (g.name.equals(name)) {
+			if (g.getName().equals(name)) {
 				return false;
 			}
 		}
@@ -872,7 +862,7 @@ public class OsmandAidlApi {
 		FavouritesDbHelper favoritesHelper = app.getFavorites();
 		List<FavouritesDbHelper.FavoriteGroup> groups = favoritesHelper.getFavoriteGroups();
 		for (FavouritesDbHelper.FavoriteGroup g : groups) {
-			if (g.name.equals(name)) {
+			if (g.getName().equals(name)) {
 				favoritesHelper.deleteGroup(g);
 				return true;
 			}
@@ -884,7 +874,7 @@ public class OsmandAidlApi {
 		FavouritesDbHelper favoritesHelper = app.getFavorites();
 		List<FavouritesDbHelper.FavoriteGroup> groups = favoritesHelper.getFavoriteGroups();
 		for (FavouritesDbHelper.FavoriteGroup g : groups) {
-			if (g.name.equals(prevGroupName)) {
+			if (g.getName().equals(prevGroupName)) {
 				int color = 0;
 				if (!Algorithms.isEmpty(colorTag)) {
 					color = ColorDialogs.getColorByTag(colorTag);
@@ -2112,7 +2102,9 @@ public class OsmandAidlApi {
 
 	public void registerLayerContextMenu(ContextMenuAdapter adapter, MapActivity mapActivity) {
 		for (ConnectedApp connectedApp : getConnectedApps()) {
-			connectedApp.registerLayerContextMenu(adapter, mapActivity);
+			if (!connectedApp.getLayers().isEmpty()) {
+				connectedApp.registerLayerContextMenu(adapter, mapActivity);
+			}
 		}
 	}
 

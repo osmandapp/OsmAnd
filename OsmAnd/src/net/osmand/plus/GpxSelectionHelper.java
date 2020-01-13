@@ -8,20 +8,17 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 
-import java.util.Map;
-import java.util.Map.Entry;
-
 import net.osmand.GPXUtilities;
-import net.osmand.IProgress;
-import net.osmand.PlatformUtil;
-import net.osmand.data.LatLon;
-import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.GPXUtilities.Route;
 import net.osmand.GPXUtilities.Track;
 import net.osmand.GPXUtilities.TrkSegment;
 import net.osmand.GPXUtilities.WptPt;
+import net.osmand.IProgress;
+import net.osmand.PlatformUtil;
+import net.osmand.data.LatLon;
+import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.MapMarkersHelper.MapMarkersGroup;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
 import net.osmand.plus.activities.SavingTrackHelper;
@@ -39,6 +36,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class GpxSelectionHelper {
 
@@ -48,6 +47,7 @@ public class GpxSelectionHelper {
 	private static final String BACKUPMODIFIEDTIME = "backupTime";
 	private static final String COLOR = "color";
 	private static final String SELECTED_BY_USER = "selected_by_user";
+
 	private OsmandApplication app;
 	@NonNull
 	private List<SelectedGpxFile> selectedGPXFiles = new java.util.ArrayList<>();
@@ -64,7 +64,7 @@ public class GpxSelectionHelper {
 	public void clearAllGpxFilesToShow(boolean backupSelection) {
 		selectedGpxFilesBackUp.clear();
 		if (backupSelection) {
-			for(SelectedGpxFile s : selectedGPXFiles) {
+			for (SelectedGpxFile s : selectedGPXFiles) {
 				selectedGpxFilesBackUp.put(s.gpxFile, s.modifiedTime);
 			}
 		}
@@ -512,7 +512,7 @@ public class GpxSelectionHelper {
 						}
 						if (gpx.error != null) {
 							save = true;
-						} else if(obj.has(BACKUP)) {
+						} else if (obj.has(BACKUP)) {
 							selectedGpxFilesBackUp.put(gpx, gpx.modifiedTime);
 						} else {
 							selectGpxFile(gpx, true, false, true, selectedByUser, false);
@@ -561,7 +561,7 @@ public class GpxSelectionHelper {
 			if (s != null) {
 				try {
 					JSONObject obj = new JSONObject();
-					if(Algorithms.isEmpty(s.getKey().path)) {
+					if (Algorithms.isEmpty(s.getKey().path)) {
 						obj.put(CURRENT_TRACK, true);
 					} else {
 						obj.put(FILE, s.getKey().path);
@@ -595,8 +595,11 @@ public class GpxSelectionHelper {
 			displayed = sf != null;
 			if (show && sf == null) {
 				sf = new SelectedGpxFile();
-				if (dataItem != null && dataItem.getColor() != 0) {
-					gpx.setColor(dataItem.getColor());
+				if (dataItem != null) {
+					if (dataItem.getColor() != 0) {
+						gpx.setColor(dataItem.getColor());
+					}
+					sf.setJoinSegments(dataItem.isJoinSegments());
 				}
 				sf.setGpxFile(gpx, app);
 				sf.notShowNavigationDialog = notShowNavigationDialog;
@@ -661,7 +664,6 @@ public class GpxSelectionHelper {
 	}
 
 	private void syncGpxWithMarkers(GPXFile gpxFile) {
-		File gpx = new File(gpxFile.path);
 		MapMarkersHelper mapMarkersHelper = app.getMapMarkersHelper();
 		MapMarkersGroup group = mapMarkersHelper.getMarkersGroup(gpxFile);
 		if (group != null) {
@@ -669,21 +671,24 @@ public class GpxSelectionHelper {
 		}
 	}
 
-
 	public static class SelectedGpxFile {
+
 		public boolean notShowNavigationDialog = false;
 		public boolean selectedByUser = true;
 
-		private boolean showCurrentTrack;
 		private GPXFile gpxFile;
-		private int color;
 		private GPXTrackAnalysis trackAnalysis;
-		private long modifiedTime = -1;
-		private boolean splitProcessed = false;
-		private List<TrkSegment> processedPointsToDisplay = new ArrayList<>();
-		private boolean routePoints;
 
+		private List<TrkSegment> processedPointsToDisplay = new ArrayList<>();
 		private List<GpxDisplayGroup> displayGroups;
+
+		private int color;
+		private long modifiedTime = -1;
+
+		private boolean routePoints;
+		private boolean joinSegments;
+		private boolean showCurrentTrack;
+		private boolean splitProcessed = false;
 
 		public void setGpxFile(GPXFile gpxFile, OsmandApplication app) {
 			this.gpxFile = gpxFile;
@@ -723,7 +728,7 @@ public class GpxSelectionHelper {
 		}
 
 		public List<TrkSegment> getPointsToDisplay() {
-			return processedPointsToDisplay;
+			return joinSegments ? gpxFile.getGeneralTrack().segments : processedPointsToDisplay;
 		}
 
 		public List<TrkSegment> getModifiablePointsToDisplay() {
@@ -745,6 +750,14 @@ public class GpxSelectionHelper {
 
 		public void setShowCurrentTrack(boolean showCurrentTrack) {
 			this.showCurrentTrack = showCurrentTrack;
+		}
+
+		public boolean isJoinSegments() {
+			return joinSegments;
+		}
+
+		public void setJoinSegments(boolean joinSegments) {
+			this.joinSegments = joinSegments;
 		}
 
 		public int getColor() {

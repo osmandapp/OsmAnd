@@ -12,6 +12,8 @@ import android.support.v4.app.DialogFragment
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
+import android.support.v4.view.PagerAdapter
+import android.support.v4.view.ViewPager
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.ListPopupWindow
@@ -22,7 +24,6 @@ import net.osmand.PlatformUtil
 import net.osmand.telegram.R
 import net.osmand.telegram.TelegramApplication
 import net.osmand.telegram.helpers.OsmandAidlHelper
-import net.osmand.telegram.helpers.TelegramHelper
 import net.osmand.telegram.helpers.TelegramHelper.*
 import net.osmand.telegram.ui.LoginDialogFragment.LoginDialogType
 import net.osmand.telegram.ui.MyLocationTabFragment.ActionButtonsListener
@@ -66,6 +67,7 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 	private lateinit var buttonsBar: LinearLayout
 	private lateinit var bottomNav: BottomNavigationView
 	private lateinit var coordinatorLayout: CoordinatorLayout
+	private lateinit var viewPager: ViewPager
 
 	private var snackbarShown = false
 
@@ -81,7 +83,7 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 		
 		paused = false
 
-		val viewPager = findViewById<LockableViewPager>(R.id.view_pager).apply {
+		viewPager = findViewById<LockableViewPager>(R.id.view_pager).apply {
 			swipeLocked = true
 			offscreenPageLimit = 3
 			adapter = ViewPagerAdapter(supportFragmentManager)
@@ -484,6 +486,10 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 		}
 	}
 
+	fun refreshPages() {
+		viewPager.adapter?.notifyDataSetChanged()
+	}
+
 	private fun showOsmandMissingDialog() {
 		OsmandMissingDialogFragment().show(supportFragmentManager, null)
 	}
@@ -510,5 +516,9 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 		override fun getItem(position: Int) = fragments[position]
 
 		override fun getCount() = fragments.size
+
+		override fun getItemPosition(`object`: Any): Int {
+			return PagerAdapter.POSITION_NONE
+		}
 	}
 }

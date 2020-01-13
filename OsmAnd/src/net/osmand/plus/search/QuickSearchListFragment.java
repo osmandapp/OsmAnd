@@ -194,9 +194,10 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 						List<FavouritePoint> favs = app.getFavorites().getFavouritePoints();
 						for (FavouritePoint f : favs) {
 							if (entryLatLon.equals(new LatLon(f.getLatitude(), f.getLongitude()))
-									&& pointDescription.getName().equals(f.getName())) {
+									&& (pointDescription.getName().equals(f.getName()) ||
+									pointDescription.getName().equals(f.getDisplayName(app)))) {
 								object = f;
-								pointDescription = f.getPointDescription();
+								pointDescription = f.getPointDescription(app);
 								break;
 							}
 						}
@@ -204,7 +205,7 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 					break;
 				case FAVORITE:
 					FavouritePoint fav = (FavouritePoint) object;
-					pointDescription = fav.getPointDescription();
+					pointDescription = fav.getPointDescription(app);
 					break;
 				case VILLAGE:
 				case CITY:

@@ -3163,8 +3163,8 @@
     <string name="poi_motorcycle_sales_used">Vendas: usado</string>
     <string name="poi_motorcycle_rental_yes">Locação</string>
     <string name="poi_motorcycle_rental_no">Locação: não</string>
-    <string name="poi_motorcycle_repair_yes">Reparo</string>
-    <string name="poi_motorcycle_repair_no">Reparo: não</string>
+    <string name="poi_motorcycle_repair_yes">Conserto</string>
+    <string name="poi_motorcycle_repair_no">Conserto: não</string>
     <string name="poi_motorcycle_parts_yes">Peças</string>
     <string name="poi_motorcycle_parts_no">Peças: não</string>
     <string name="poi_motorcycle_tyres_yes">Pneus</string>

@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import net.osmand.AndroidUtils;
 import net.osmand.IProgress;
 import net.osmand.plus.OnDismissDialogFragmentListener;
 import net.osmand.plus.OsmandApplication;
@@ -188,13 +189,9 @@ public class DataStoragePlaceDialogFragment extends BottomSheetDialogFragment {
 		if (dir != null && dir.canRead()) {
 			StatFs fs = new StatFs(dir.getAbsolutePath());
 			@SuppressWarnings("deprecation")
-			float size = (float) fs.getAvailableBlocks() * fs.getBlockSize();
+			long size = (long) fs.getAvailableBlocks() * fs.getBlockSize();
 			if (size > 0) {
-				if (size > 1 << 20) {
-					sz = DownloadActivity.formatGb.format(new Object[]{size / (1 << 30)});
-				} else {
-					sz = DownloadActivity.formatMb.format(new Object[]{size / (1 << 20)});
-				}
+				sz = AndroidUtils.formatSize(getActivity(), size);
 			}
 		}
 		return sz;
