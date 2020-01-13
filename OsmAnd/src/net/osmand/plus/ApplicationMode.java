@@ -78,14 +78,8 @@ public class ApplicationMode {
 	private int minDistanceForTurn = 50;
 	private int arrivalDistance = 90;
 	private int offRouteDistance = 350;
-	private int bearingIconDay = R.drawable.map_pedestrian_bearing;
-//	private int bearingIconNight = R.drawable.map_pedestrian_bearing_night;
-	private int headingIconDay = R.drawable.map_pedestrian_location_view_angle;
-//	private int headingIconNight = R.drawable.map_pedestrian_location_view_angle_night;
-	private int locationIcon = R.drawable.map_default_location_xml;
-//	private int locationIconNight = R.drawable.map_pedestrian_location_night;
-//	private int locationIconDayLost = R.drawable.map_pedestrian_location_lost;
-//	private int locationIconNightLost = R.drawable.map_pedestrian_location_lost_night;
+	private NavigationIcon bearingIcon = NavigationIcon.CAR;
+	private LocationIcon locationIcon = LocationIcon.DEFAULT;
 
 	private ApplicationMode(int key, String stringKey) {
 		this.keyName = key;
@@ -96,29 +90,42 @@ public class ApplicationMode {
 	/*
 	 * DEFAULT("Browse map"), CAR("Car"), BICYCLE("Bicycle"), PEDESTRIAN("Pedestrian"); NAUTICAL("boat"); PUBLIC_TRANSPORT("Public transport"); AIRCRAFT("Aircraft")
 	 */
-	public static final ApplicationMode DEFAULT = createBase(R.string.app_mode_default, "default").speed(1.5f, 5).arrivalDistance(90).defLocation().
-			icon(R.drawable.ic_world_globe_dark, R.drawable.map_world_globe_dark, "ic_world_globe_dark").reg();
+	public static final ApplicationMode DEFAULT = createBase(R.string.app_mode_default, "default").speed(1.5f, 5).arrivalDistance(90)
+			.locationIcon(LocationIcon.DEFAULT).navigationIcon(NavigationIcon.CAR)
+			.icon(R.drawable.ic_world_globe_dark, R.drawable.map_world_globe_dark, "ic_world_globe_dark").reg();
 
-	public static final ApplicationMode CAR = createBase(R.string.app_mode_car, "car").speed(12.5f, 35).carLocation().
-			icon(R.drawable.ic_action_car_dark, R.drawable.map_action_car_dark, "ic_action_car_dark").setRoutingProfile("car").description(R.string.base_profile_descr_car).reg();
+	public static final ApplicationMode CAR = createBase(R.string.app_mode_car, "car").speed(12.5f, 35)
+			.locationIcon(LocationIcon.CAR).navigationIcon(NavigationIcon.CAR)
+			.icon(R.drawable.ic_action_car_dark, R.drawable.map_action_car_dark, "ic_action_car_dark")
+			.setRoutingProfile("car").description(R.string.base_profile_descr_car).reg();
 
-	public static final ApplicationMode BICYCLE = createBase(R.string.app_mode_bicycle, "bicycle").speed(2.77f, 15).arrivalDistance(60).offRouteDistance(50).bicycleLocation().
-			icon(R.drawable.ic_action_bicycle_dark, R.drawable.map_action_bicycle_dark,"ic_action_bicycle_dark").setRoutingProfile("bicycle").description(R.string.base_profile_descr_bicycle).reg();
+	public static final ApplicationMode BICYCLE = createBase(R.string.app_mode_bicycle, "bicycle").speed(2.77f, 15).arrivalDistance(60).offRouteDistance(50)
+			.locationIcon(LocationIcon.BICYCLE).navigationIcon(NavigationIcon.CAR)
+			.icon(R.drawable.ic_action_bicycle_dark, R.drawable.map_action_bicycle_dark,"ic_action_bicycle_dark")
+			.setRoutingProfile("bicycle").description(R.string.base_profile_descr_bicycle).reg();
 
-	public static final ApplicationMode PEDESTRIAN = createBase(R.string.app_mode_pedestrian, "pedestrian").speed(1.11f, 5).arrivalDistance(45).offRouteDistance(20).
-			icon(R.drawable.ic_action_pedestrian_dark, R.drawable.map_action_pedestrian_dark, "ic_action_pedestrian_dark").setRoutingProfile("pedestrian").description(R.string.base_profile_descr_pedestrian).reg();
+	public static final ApplicationMode PEDESTRIAN = createBase(R.string.app_mode_pedestrian, "pedestrian").speed(1.11f, 5).arrivalDistance(45).offRouteDistance(20)
+			.icon(R.drawable.ic_action_pedestrian_dark, R.drawable.map_action_pedestrian_dark, "ic_action_pedestrian_dark")
+			.setRoutingProfile("pedestrian").description(R.string.base_profile_descr_pedestrian).reg();
 
-	public static final ApplicationMode PUBLIC_TRANSPORT = createBase(R.string.app_mode_public_transport, "public_transport").
-			icon(R.drawable.ic_action_bus_dark, R.drawable.map_action_bus_dark,"ic_action_bus_dark").setRoutingProfile("public_transport").description(R.string.base_profile_descr_public_transport).reg();
+	public static final ApplicationMode PUBLIC_TRANSPORT = createBase(R.string.app_mode_public_transport, "public_transport")
+			.icon(R.drawable.ic_action_bus_dark, R.drawable.map_action_bus_dark,"ic_action_bus_dark")
+			.setRoutingProfile("public_transport").description(R.string.base_profile_descr_public_transport).reg();
 
-	public static final ApplicationMode BOAT = createBase(R.string.app_mode_boat, "boat").speed(1.38f, 20).nauticalLocation().
-			icon(R.drawable.ic_action_sail_boat_dark, R.drawable.map_action_sail_boat_dark, "ic_action_sail_boat_dark").setRoutingProfile("boat").description(R.string.base_profile_descr_boat).reg();
+	public static final ApplicationMode BOAT = createBase(R.string.app_mode_boat, "boat").speed(1.38f, 20)
+			.locationIcon(LocationIcon.DEFAULT).navigationIcon(NavigationIcon.NAUTICAL)
+			.icon(R.drawable.ic_action_sail_boat_dark, R.drawable.map_action_sail_boat_dark, "ic_action_sail_boat_dark")
+			.setRoutingProfile("boat").description(R.string.base_profile_descr_boat).reg();
 
-	public static final ApplicationMode AIRCRAFT = createBase(R.string.app_mode_aircraft, "aircraft").speed(40f, 100).carLocation().
-			icon(R.drawable.ic_action_aircraft, R.drawable.map_action_aircraft,"ic_action_aircraft").setRouteService(RouteService.STRAIGHT).setRoutingProfile("STRAIGHT_LINE_MODE").description(R.string.base_profile_descr_aircraft).reg();
+	public static final ApplicationMode AIRCRAFT = createBase(R.string.app_mode_aircraft, "aircraft").speed(40f, 100)
+			.locationIcon(LocationIcon.CAR).navigationIcon(NavigationIcon.CAR)
+			.icon(R.drawable.ic_action_aircraft, R.drawable.map_action_aircraft,"ic_action_aircraft").setRouteService(RouteService.STRAIGHT)
+			.setRoutingProfile("STRAIGHT_LINE_MODE").description(R.string.base_profile_descr_aircraft).reg();
 
-	public static final ApplicationMode SKI = createBase(R.string.app_mode_skiing, "ski").speed(1.38f, 15).arrivalDistance(60).offRouteDistance(50).bicycleLocation().
-		icon(R.drawable.ic_action_skiing,  R.drawable.ic_action_skiing,"ic_action_skiing").setRoutingProfile("ski").description(R.string.base_profile_descr_ski).reg();
+	public static final ApplicationMode SKI = createBase(R.string.app_mode_skiing, "ski").speed(1.38f, 15).arrivalDistance(60).offRouteDistance(50)
+			.locationIcon(LocationIcon.BICYCLE).navigationIcon(NavigationIcon.CAR)
+			.icon(R.drawable.ic_action_skiing,  R.drawable.ic_action_skiing,"ic_action_skiing")
+			.setRoutingProfile("ski").description(R.string.base_profile_descr_ski).reg();
 
 
 	private static class ApplicationModeBean {
@@ -206,14 +213,8 @@ public class ApplicationMode {
 			m.minDistanceForTurn = m.parentAppMode.minDistanceForTurn;
 			m.arrivalDistance = m.parentAppMode.arrivalDistance;
 			m.offRouteDistance = m.parentAppMode.offRouteDistance;
-			m.bearingIconDay = m.parentAppMode.bearingIconDay;
-//			m.bearingIconNight = m.parentAppMode.bearingIconNight;
-			m.headingIconDay = m.parentAppMode.headingIconDay;
-//			m.headingIconNight = m.parentAppMode.headingIconNight;
+			m.bearingIcon = m.parentAppMode.bearingIcon;
 			m.locationIcon = m.parentAppMode.locationIcon;
-//			m.locationIconNight = m.parentAppMode.locationIconNight;
-//			m.locationIconDayLost = m.parentAppMode.locationIconDayLost;
-//			m.locationIconNightLost = m.parentAppMode.locationIconNightLost;
 			values.add(applicationMode);
 			if (applicationMode.getOrder() == 0 && !values.isEmpty()) {
 				applicationMode.setOrder(values.size());
@@ -250,63 +251,44 @@ public class ApplicationMode {
 
 		public ApplicationModeBuilder parent(ApplicationMode parent) {
 			applicationMode.parentAppMode = parent;
-			if (parent == CAR || parent == AIRCRAFT) {
-				this.carLocation();
-			} else if (parent == BICYCLE || parent == SKI) {
-				this.bicycleLocation();
-			} else if (parent == BOAT) {
-				this.nauticalLocation();
-			} else {
-				this.defLocation();
-			}
+			applicationMode.locationIcon=parent.locationIcon;
+			applicationMode.bearingIcon=parent.bearingIcon;
 			return this;
 		}
 
-		public ApplicationModeBuilder carLocation() {
-			applicationMode.bearingIconDay = R.drawable.map_car_bearing;
-//			applicationMode.bearingIconNight = R.drawable.map_car_bearing_night;
-			applicationMode.headingIconDay = R.drawable.map_car_location_view_angle;
-//			applicationMode.headingIconNight = R.drawable.map_car_location_view_angle_night;
-			applicationMode.locationIcon = R.drawable.map_car_location_xml;
-//			applicationMode.locationIconNight = R.drawable.map_car_location_night;
-//			applicationMode.locationIconDayLost = R.drawable.map_car_location_lost;
-//			applicationMode.locationIconNightLost = R.drawable.map_car_location_lost_night;
+		ApplicationModeBuilder locationIcon(LocationIcon locationIcon){
+			applicationMode.locationIcon = locationIcon;
 			return this;
 		}
 
-		public ApplicationModeBuilder bicycleLocation() {
-			applicationMode.bearingIconDay = R.drawable.map_bicycle_bearing;
-//			applicationMode.bearingIconNight = R.drawable.map_bicycle_bearing_night;
-			applicationMode.headingIconDay = R.drawable.map_bicycle_location_view_angle;
-//			applicationMode.headingIconNight = R.drawable.map_bicycle_location_view_angle_night;
-			applicationMode.locationIcon = R.drawable.map_bicycle_location_xml;
-//			applicationMode.locationIconNight = R.drawable.map_bicycle_location_night;
-//			applicationMode.locationIconDayLost = R.drawable.map_bicycle_location_lost;
-//			applicationMode.locationIconNightLost = R.drawable.map_bicycle_location_lost_night;
+		ApplicationModeBuilder navigationIcon(NavigationIcon navigationIcon){
+			applicationMode.bearingIcon = navigationIcon;
 			return this;
 		}
 
-		public ApplicationModeBuilder defLocation() {
-			applicationMode.bearingIconDay = R.drawable.map_pedestrian_bearing;
-//			applicationMode.bearingIconNight = R.drawable.map_pedestrian_bearing_night;
-			applicationMode.headingIconDay = R.drawable.map_default_location_view_angle;
-//			applicationMode.headingIconNight = R.drawable.map_default_location_view_angle_night;
-			applicationMode.locationIcon = R.drawable.map_default_location_xml;
-//			applicationMode.locationIconNight = R.drawable.map_pedestrian_location_night;
-//			applicationMode.locationIconDayLost = R.drawable.map_pedestrian_location_lost;
-//			applicationMode.locationIconNightLost = R.drawable.map_pedestrian_location_lost_night;
-			return this;
-		}
-
-		public ApplicationModeBuilder nauticalLocation() {
-			applicationMode.bearingIconDay = R.drawable.map_nautical_bearing;
-//			applicationMode.bearingIconNight = R.drawable.map_nautical_bearing_night;
-			applicationMode.headingIconDay = R.drawable.map_nautical_location_view_angle;
-//			applicationMode.headingIconNight = R.drawable.map_nautical_location_view_angle_night;
-			applicationMode.locationIcon = R.drawable.map_nautical_location;
-//			applicationMode.locationIconNight = R.drawable.map_nautical_location_night;
-			return this;
-		}
+//		public ApplicationModeBuilder carLocation() {
+//			applicationMode.bearingIcon = NavigationIcon.CAR;
+//			applicationMode.locationIcon = LocationIcon.CAR;
+//			return this;
+//		}
+//
+//		public ApplicationModeBuilder bicycleLocation() {
+//			applicationMode.bearingIcon =  NavigationIcon.CAR;
+//			applicationMode.locationIcon =LocationIcon.BICYCLE;
+//			return this;
+//		}
+//
+//		public ApplicationModeBuilder defLocation() {
+//			applicationMode.bearingIcon =  NavigationIcon.CAR;
+//			applicationMode.locationIcon = LocationIcon.DEFAULT;
+//			return this;
+//		}
+//
+//		public ApplicationModeBuilder nauticalLocation() {
+//			applicationMode.bearingIcon =NavigationIcon.NAUTICAL;
+//			applicationMode.locationIcon = LocationIcon.DEFAULT;
+//			return this;
+//		}
 
 		public ApplicationModeBuilder speed(float defSpeed, int distForTurn) {
 			applicationMode.defaultSpeed = defSpeed;
@@ -508,37 +490,13 @@ public class ApplicationMode {
 		return getDefaultSpeed() > 10;
 	}
 
-	public int getResourceBearingDay() {
-		return bearingIconDay;
+	public NavigationIcon getNavigationIcon() {
+		return bearingIcon;
 	}
 
-//	public int getResourceBearingNight() {
-//		return bearingIconNight;
-//	}
-
-	public int getResourceHeadingDay() {
-		return headingIconDay;
-	}
-
-//	public int getResourceHeadingNight() {
-//		return headingIconNight;
-//	}
-
-	public int getResourceLocationDay() {
+	public LocationIcon getLocationIcon() {
 		return locationIcon;
 	}
-
-//	public int getResourceLocationNight() {
-//		return locationIconNight;
-//	}
-
-//	public int getResourceLocationDayLost() {
-//		return locationIconDayLost;
-//	}
-
-//	public int getResourceLocationNightLost() {
-//		return locationIconNightLost;
-//	}
 
 	public String getStringKey() {
 		return stringKey;
@@ -953,6 +911,45 @@ public class ApplicationMode {
 				}
 			}
 			return CAR.getResStringId();
+		}
+	}
+
+	public enum LocationIcon{
+		DEFAULT(R.drawable.map_default_location_xml,R.drawable.map_default_location_view_angle),
+		CAR(R.drawable.map_car_location_xml,R.drawable.map_car_location_view_angle),
+		BICYCLE(R.drawable.map_bicycle_location_xml,R.drawable.map_bicycle_location_view_angle);
+
+		LocationIcon(@DrawableRes int iconId, @DrawableRes int headingIconId){
+			this.iconId = iconId;
+			this.headingIconId = headingIconId;
+		}
+
+		@DrawableRes
+		private final int iconId;
+		@DrawableRes
+		private final int headingIconId;
+
+		public int getIconId() {
+			return iconId;
+		}
+		public int getHeadingIconId() {
+			return headingIconId;
+		}
+	}
+
+	public enum NavigationIcon{
+		CAR(R.drawable.map_car_navigation_xml),
+		NAUTICAL(R.drawable.map_nautical_navigation_xml);
+
+		NavigationIcon(@DrawableRes int iconId){
+			this.iconId = iconId;
+		}
+
+		@DrawableRes
+		private final int iconId;
+
+		public int getIconId() {
+			return iconId;
 		}
 	}
 }
