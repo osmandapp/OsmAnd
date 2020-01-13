@@ -769,7 +769,6 @@ public class VoiceRouter {
 			String tParam = getTurnType(next.getTurnType());
 			ExitInfo exitInfo = next.getExitInfo();
 			boolean isplay = true;
-			String lang = player.getLanguage();
 			if (tParam != null) {
 				p.turn(tParam, getSpeakableStreetName(currentSegment, next, !suppressDest));
 //				if (exitInfo != null) {
