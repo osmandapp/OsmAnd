@@ -426,17 +426,19 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 			if (dataSets == null && chart != null) {
 				dataSets = new ArrayList<>();
 				GPXTrackAnalysis analysis = gpxItem.analysis;
+				GpxDataItem gpxDataItem = getGpxDataItem();
+				boolean calcWithoutGaps = gpxItem.isGeneralTrack() && gpxDataItem != null && !gpxDataItem.isJoinSegments();
 				switch (tabType) {
 					case GPX_TAB_ITEM_GENERAL: {
 						OrderedLineDataSet speedDataSet = null;
 						OrderedLineDataSet elevationDataSet = null;
 						if (analysis.hasSpeedData) {
 							speedDataSet = GpxUiHelper.createGPXSpeedDataSet(app, chart,
-									analysis, GPXDataSetAxisType.DISTANCE, true, true);
+									analysis, GPXDataSetAxisType.DISTANCE, true, true, calcWithoutGaps);
 						}
 						if (analysis.hasElevationData) {
 							elevationDataSet = GpxUiHelper.createGPXElevationDataSet(app, chart,
-									analysis, GPXDataSetAxisType.DISTANCE, false, true);
+									analysis, GPXDataSetAxisType.DISTANCE, false, true, calcWithoutGaps);
 						}
 						if (speedDataSet != null) {
 							dataSets.add(speedDataSet);
@@ -452,14 +454,14 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 					}
 					case GPX_TAB_ITEM_ALTITUDE: {
 						OrderedLineDataSet elevationDataSet = GpxUiHelper.createGPXElevationDataSet(app, chart,
-								analysis, GPXDataSetAxisType.DISTANCE, false, true);
+								analysis, GPXDataSetAxisType.DISTANCE, false, true, calcWithoutGaps);
 						if (elevationDataSet != null) {
 							dataSets.add(elevationDataSet);
 						}
 						if (analysis.hasElevationData) {
 							List<Entry> eleValues = elevationDataSet != null && !gpxItem.isGeneralTrack() ? elevationDataSet.getValues() : null;
 							OrderedLineDataSet slopeDataSet = GpxUiHelper.createGPXSlopeDataSet(app, chart,
-									analysis, GPXDataSetAxisType.DISTANCE, eleValues, true, true);
+									analysis, GPXDataSetAxisType.DISTANCE, eleValues, true, true, calcWithoutGaps);
 							if (slopeDataSet != null) {
 								dataSets.add(slopeDataSet);
 							}
@@ -469,7 +471,7 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 					}
 					case GPX_TAB_ITEM_SPEED: {
 						OrderedLineDataSet speedDataSet = GpxUiHelper.createGPXSpeedDataSet(app, chart,
-								analysis, GPXDataSetAxisType.DISTANCE, false, true);
+								analysis, GPXDataSetAxisType.DISTANCE, false, true, calcWithoutGaps);
 						if (speedDataSet != null) {
 							dataSets.add(speedDataSet);
 						}
@@ -720,7 +722,7 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 								public void onClick(View v) {
 									TrackActivity activity = getTrackActivity();
 									if (activity != null && activity.setJoinSegments(!activity.isJoinSegments())) {
-										updateSplitView();
+										updateContent();
 										for (int i = 0; i < getCount(); i++) {
 											View view = getViewAtPosition(i);
 											updateJoinGapsInfo(view, i);
@@ -1156,14 +1158,14 @@ public class TrackSegmentFragment extends OsmAndListFragment implements TrackBit
 				((SwitchCompat) view.findViewById(R.id.gpx_join_gaps_switch)).setChecked(joinSegments);
 				if (analysis != null) {
 					if (tabType.equals(GPXTabItemType.GPX_TAB_ITEM_GENERAL)) {
-						float totalDistance = joinSegments && gpxItem.isGeneralTrack() ? analysis.totalDistanceWithoutGaps : analysis.totalDistance;
-						float timeSpan = joinSegments && gpxItem.isGeneralTrack() ? analysis.timeSpanWithoutGaps : analysis.timeSpan;
+						float totalDistance = !joinSegments && gpxItem.isGeneralTrack() ? analysis.totalDistanceWithoutGaps : analysis.totalDistance;
+						float timeSpan = !joinSegments && gpxItem.isGeneralTrack() ? analysis.timeSpanWithoutGaps : analysis.timeSpan;
 
 						((TextView) view.findViewById(R.id.distance_text)).setText(OsmAndFormatter.getFormattedDistance(totalDistance, app));
 						((TextView) view.findViewById(R.id.duration_text)).setText(Algorithms.formatDuration((int) (timeSpan / 1000), app.accessibilityEnabled()));
 					} else if (tabType.equals(GPXTabItemType.GPX_TAB_ITEM_SPEED)) {
-						long timeMoving = joinSegments && gpxItem.isGeneralTrack() ? analysis.timeMovingWithoutGaps : analysis.timeMoving;
-						float totalDistanceMoving = joinSegments && gpxItem.isGeneralTrack() ? analysis.totalDistanceMovingWithoutGaps : analysis.totalDistanceMoving;
+						long timeMoving = !joinSegments && gpxItem.isGeneralTrack() ? analysis.timeMovingWithoutGaps : analysis.timeMoving;
+						float totalDistanceMoving = !joinSegments && gpxItem.isGeneralTrack() ? analysis.totalDistanceMovingWithoutGaps : analysis.totalDistanceMoving;
 
 						((TextView) view.findViewById(R.id.time_moving_text)).setText(Algorithms.formatDuration((int) (timeMoving / 1000), app.accessibilityEnabled()));
 						((TextView) view.findViewById(R.id.distance_text)).setText(OsmAndFormatter.getFormattedDistance(totalDistanceMoving, app));

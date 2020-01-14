@@ -676,7 +676,72 @@ public class RouteDataObject {
 		}
 		return false;
 	}
-	
+
+	public boolean isExitPoint() {
+		if (pointTypes != null) {
+			int ptSz = pointTypes.length;
+			for (int i = 0; i < ptSz; i++) {
+				int[] point = pointTypes[i];
+				if (point != null) {
+					int pSz = point.length;
+					for (int j = 0; j < pSz; j++) {
+						if (region.routeEncodingRules.get(point[j]).getValue().equals("motorway_junction")) {
+							return true;
+						}
+					}
+				}
+			}
+		}
+		return false;
+	}
+
+//	public boolean isMotorWayLink() {
+//		int sz = types.length;
+//		for (int i = 0; i < sz; i++) {
+//			RouteTypeRule r = region.quickGetEncodingRule(types[i]);
+//			if (r.getTag().equals("highway") && r.getValue().equals("motorway_link")) {
+//				return true;
+//			}
+//		}
+//		return false;
+//	}
+
+	public String getExitName() {
+		if (pointNames != null && pointNameTypes != null) {
+			int pnSz = pointNames.length;
+			for (int i = 0; i < pnSz; i++) {
+				String[] point = pointNames[i];
+				if (point != null) {
+					int pSz = point.length;
+					for (int j = 0; j < pSz; j++) {
+						if (pointNameTypes[i][j] == region.nameTypeRule) {
+							return point[j];
+						}
+					}
+				}
+			}
+		}
+		return null;
+	}
+
+	public String getExitRef() {
+		if (pointNames != null && pointNameTypes != null) {
+			int pnSz = pointNames.length;
+			for (int i = 0; i < pnSz; i++) {
+				String[] point = pointNames[i];
+				if (point != null) {
+					int pSz = point.length;
+					for (int j = 0; j < pSz; j++) {
+						if (pointNameTypes[i][j] == region.refTypeRule) {
+							return point[j];
+						}
+					}
+				}
+			}
+		}
+		return null;
+	}
+
 	public int getOneway() {
 		int sz = types.length;
 		for (int i = 0; i < sz; i++) {

@@ -18,7 +18,6 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -61,7 +60,7 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 		if (group == null) {
 			return;
 		}
-		items.add(new TitleItem(Algorithms.isEmpty(group.name) ? app.getString(R.string.shared_string_favorites) : group.name));
+		items.add(new TitleItem(Algorithms.isEmpty(group.getName()) ? app.getString(R.string.shared_string_favorites) : group.getName()));
 
 		BaseBottomSheetItem editNameItem = new SimpleBottomSheetItem.Builder()
 				.setIcon(getContentIcon(R.drawable.ic_action_edit_dark))
@@ -76,7 +75,7 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 							b.setTitle(R.string.favorite_category_name);
 							final EditText nameEditText = new EditText(activity);
 							nameEditText.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT));
-							nameEditText.setText(group.name);
+							nameEditText.setText(group.getName());
 							LinearLayout container = new LinearLayout(activity);
 							int sidePadding = AndroidUtils.dpToPx(activity, 24f);
 							int topPadding = AndroidUtils.dpToPx(activity, 4f);
@@ -88,10 +87,10 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 								@Override
 								public void onClick(DialogInterface dialog, int which) {
 									String name = nameEditText.getText().toString();
-									boolean nameChanged = !Algorithms.objectEquals(group.name, name);
+									boolean nameChanged = !Algorithms.objectEquals(group.getName(), name);
 									if (nameChanged) {
 										app.getFavorites()
-												.editFavouriteGroup(group, name, group.color, group.visible);
+												.editFavouriteGroup(group, name, group.getColor(), group.isVisible());
 										updateParentFragment();
 									}
 									dismiss();
@@ -135,9 +134,9 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 								public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 									Integer color = colorAdapter.getItem(position);
 									if (color != null) {
-										if (color != group.color) {
+										if (color != group.getColor()) {
 											app.getFavorites()
-													.editFavouriteGroup(group, group.name, color, group.visible);
+													.editFavouriteGroup(group, group.getName(), color, group.isVisible());
 											updateParentFragment();
 										}
 									}
@@ -153,16 +152,16 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 		items.add(changeColorItem);
 
 		BaseBottomSheetItem showOnMapItem = new BottomSheetItemWithCompoundButton.Builder()
-				.setChecked(group.visible)
+				.setChecked(group.isVisible())
 				.setIcon(getContentIcon(R.drawable.ic_map))
 				.setTitle(getString(R.string.shared_string_show_on_map))
 				.setLayoutId(R.layout.bottom_sheet_item_with_switch)
 				.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						boolean visible = !group.visible;
+						boolean visible = !group.isVisible();
 						app.getFavorites()
-								.editFavouriteGroup(group, group.name, group.color, visible);
+								.editFavouriteGroup(group, group.getName(), group.getColor(), visible);
 						updateParentFragment();
 						dismiss();
 					}
@@ -170,7 +169,7 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 				.create();
 		items.add(showOnMapItem);
 
-		if (group.points.size() > 0) {
+		if (group.getPoints().size() > 0) {
 			items.add(new DividerHalfItem(getContext()));
 
 			final MapMarkersHelper markersHelper = app.getMapMarkersHelper();
@@ -240,7 +239,7 @@ public class EditFavoriteGroupDialogFragment extends MenuBottomSheetDialogFragme
 	}
 
 	private void updateColorView(ImageView colorImageView) {
-		int color = group.color == 0 ? getResources().getColor(R.color.color_favorite) : group.color;
+		int color = group.getColor() == 0 ? getResources().getColor(R.color.color_favorite) : group.getColor();
 		if (color == 0) {
 			colorImageView.setImageDrawable(getContentIcon(R.drawable.ic_action_circle));
 		} else {

@@ -291,7 +291,6 @@ public class OsmandApplication extends MultiDexApplication {
 	public void setOsmandSettings(OsmandSettings osmandSettings) {
 		//android.os.Process.killProcess(android.os.Process.myPid());
 		this.osmandSettings = osmandSettings;
-		resourceManager.getRenderer().updateSettings();
 		OsmandPlugin.initPlugins(this);
 	}
 
@@ -383,10 +382,12 @@ public class OsmandApplication extends MultiDexApplication {
 		if (defaultLocale == null) {
 			defaultLocale = Locale.getDefault();
 		}
-		if (!"".equals(country)) {
-			preferredLocale = new Locale(lang, country);
-		} else {
-			preferredLocale = new Locale(lang);
+		if (!"".equals(lang)) {
+			if (!"".equals(country)) {
+				preferredLocale = new Locale(lang, country);
+			} else {
+				preferredLocale = new Locale(lang);
+			}
 		}
 		Locale selectedLocale = null;
 

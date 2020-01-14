@@ -1086,7 +1086,7 @@ Proporcionális memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</str
     <string name="app_mode_hiking">Túrázás</string>
     <string name="app_mode_motorcycle">Motorkerékpár</string>
     <string name="app_mode_boat">Hajó</string>
-    <string name="app_mode_aircraft">Légi jármű</string>
+    <string name="app_mode_aircraft">Repülőgép</string>
     <string name="local_osm_changes_delete_all_confirm">Biztosan törölni kíván %1$d OSM-módosítást\?</string>
     <string name="shared_string_delete_all">Összes törlése</string>
     <string name="auto_zoom_none">Nincs automatikus nagyítás</string>
@@ -1847,7 +1847,7 @@ Hosszúság: %2$s</string>
     <string name="osm_user_stat">Szerkesztések: %1$s, helyezés: %2$s, összes szerkesztés: %3$s</string>
     <string name="osm_editors_ranking">OSM szerkesztői rangsor</string>
     <string name="osm_live_subscription">OsmAnd Live előfizetés</string>
-    <string name="osm_live_subscribe_btn">Feliratkozás</string>
+    <string name="osm_live_subscribe_btn">Előfizetés</string>
     <string name="osm_live_user_public_name">Nyilvános név</string>
     <string name="osm_live_hide_user_name">Ne jelenjék meg a nevem a jelentésekben</string>
     <string name="osm_live_support_region">Támogatott régió</string>
@@ -3420,5 +3420,6 @@ Ha szereted az OsmAndot és az OSM-et, és szeretnéd támogatni a fejlődésük
     <string name="reset_all_profile_settings_descr">Minden profilbeállítás vissza fog állni a telepítést követő állapotba.</string>
     <string name="reset_all_profile_settings">Minden profil visszaálljon az alapértelmezett helyzetbe\?</string>
     <string name="app_mode_wagon">Családi autó</string>
-    <string name="ltr_or_rtl_combine">%1$s: %2$s</string>
+    <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
+    <string name="ltr_or_rtl_combine_via_space">%1$s %2$s</string>
 </resources>

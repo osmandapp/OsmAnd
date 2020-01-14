@@ -39,6 +39,7 @@ public class CommandBuilder {
 	protected static final String C_ATTENTION = "attention";  //$NON-NLS-1$
 	protected static final String C_OFF_ROUTE = "off_route";  //$NON-NLS-1$
 	protected static final String C_BACK_ON_ROUTE ="back_on_route"; //$NON-NLS-1$
+	protected static final String C_TAKE_EXIT = "take_exit"; //$NON-NLS-1$
 
 
 	protected static final String C_BEAR_LEFT = "bear_left";  //$NON-NLS-1$
@@ -176,6 +177,14 @@ public class CommandBuilder {
 
 	public CommandBuilder turn(String param, double dist, StreetName streetName){
 		return alt(prepareStruct(C_TURN, param, dist, streetName), prepareStruct(C_TURN, param, dist));
+	}
+
+	public CommandBuilder takeExit(String turnType, StreetName streetName) {
+		return alt(prepareStruct(C_TAKE_EXIT, turnType, streetName), prepareStruct(C_TAKE_EXIT, turnType));
+	}
+
+	public CommandBuilder takeExit(String turnType, double dist, StreetName streetName) {
+		return alt(prepareStruct(C_TAKE_EXIT, turnType, dist, streetName), prepareStruct(C_TAKE_EXIT, turnType, dist));
 	}
 
 	/**

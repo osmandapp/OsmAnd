@@ -45,4 +45,6 @@
 
 	<color name="live_track_active_icon">#F54522</color>
 
+	<color name="bg_list_item_dark">#727272</color>
+
 </resources>

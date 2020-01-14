@@ -23,6 +23,7 @@ import net.osmand.IndexConstants;
 import net.osmand.StateChangedListener;
 import net.osmand.ValueHolder;
 import net.osmand.aidl.OsmandAidlApi;
+import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.map.ITileSource;
@@ -236,7 +237,7 @@ public class OsmandSettings {
 				CommonPreference commonPreference = (CommonPreference) pref;
 				if (!commonPreference.global) {
 					for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
-						if (!commonPreference.isSetForMode(mode)) {
+						if (!commonPreference.isSetForMode(mode) && !commonPreference.hasDefaultValueForMode(mode)) {
 							setPreference(key, globalPrefsMap.get(key), mode);
 						}
 					}
@@ -255,10 +256,13 @@ public class OsmandSettings {
 			}
 		}
 		for (OsmandPreference pref : generalPrefs) {
-			Object defaultVal = pref.getModeValue(ApplicationMode.DEFAULT);
-			for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
-				if (!pref.isSetForMode(mode)) {
-					pref.setModeValue(mode, defaultVal);
+			if (pref instanceof CommonPreference) {
+				CommonPreference commonPref = (CommonPreference) pref;
+				Object defaultVal = commonPref.getModeValue(ApplicationMode.DEFAULT);
+				for (ApplicationMode mode : ApplicationMode.allPossibleValues()) {
+					if (!commonPref.isSetForMode(mode) && !commonPref.hasDefaultValueForMode(mode)) {
+						setPreference(commonPref.getId(), defaultVal, mode);
+					}
 				}
 			}
 		}
@@ -280,10 +284,10 @@ public class OsmandSettings {
 			workPoint = new LatLon(lat, lon);
 		}
 		if (homePoint != null) {
-			favorites.setHomePoint(homePoint, null);
+			favorites.setSpecialPoint(homePoint, FavouritePoint.SpecialPointType.HOME, null);
 		}
 		if (workPoint != null) {
-			favorites.setWorkPoint(workPoint, null);
+			favorites.setSpecialPoint(workPoint, FavouritePoint.SpecialPointType.WORK, null);
 		}
 	}
 
@@ -410,7 +414,7 @@ public class OsmandSettings {
 		for (OsmandPreference pref : registeredPreferences.values()) {
 			if (pref instanceof CommonPreference && !((CommonPreference) pref).global) {
 				CommonPreference profilePref = (CommonPreference) pref;
-				if (profilePref.isSetForMode(modeFrom)) {
+				if (profilePref.isSetForMode(modeFrom) || profilePref.hasDefaultValueForMode(modeFrom)) {
 					Object copiedValue = profilePref.getModeValue(modeFrom);
 					if (copiedValue instanceof String) {
 						settingsEditor.putString(pref.getId(), (String) copiedValue);
@@ -1466,8 +1470,6 @@ public class OsmandSettings {
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<String> PREFERRED_LOCALE = new StringPreference("preferred_locale", "").makeGlobal();
-
-	public static final String TRANSPORT_STOPS_OVER_MAP = "transportStops";
 
 	public final OsmandPreference<String> MAP_PREFERRED_LOCALE = new StringPreference("map_preferred_locale", "").makeGlobal().cache();
 	public final OsmandPreference<Boolean> MAP_TRANSLITERATE_NAMES = new BooleanPreference("map_transliterate_names", false).makeGlobal().cache();

@@ -168,7 +168,7 @@
     <string name="poi_curtain">Vorhanggeschäft</string>
     <string name="poi_customs">Zollamt</string>
     <string name="poi_cycling">Radsport</string>
-    <string name="poi_dairy">Molkereiprodukte</string>
+    <string name="poi_dairy">Milchladen</string>
     <string name="poi_dam">Staudamm</string>
     <string name="poi_dance_floor">Tanzfläche</string>
     <string name="poi_deli">Feinkostgeschäft</string>
@@ -220,7 +220,7 @@
     <string name="poi_garages">Garagen</string>
     <string name="poi_garden_centre">Gartencenter</string>
     <string name="poi_craft_gardener">Gärtner</string>
-    <string name="poi_gas">Flüssiggas</string>
+    <string name="poi_gas">Flüssiggasspeicher</string>
     <string name="poi_gate">Tor</string>
     <string name="poi_shop_yes">Gemischtwarenhandlung</string>
     <string name="poi_geyser">Geysir</string>
@@ -248,7 +248,7 @@
     <string name="poi_hearing_aids">Hörgeräte</string>
     <string name="poi_helipad">Hubschrauberlandeplatz</string>
     <string name="poi_herbalist">Kräuterladen</string>
-    <string name="poi_hifi">HiFi-Geschäft</string>
+    <string name="poi_hifi">Hi-Fi-Geschäft</string>
     <string name="poi_historic_monastery">Historisches Kloster</string>
     <string name="poi_hockey">Hockey</string>
     <string name="poi_horse_racing">Pferderennen</string>
@@ -396,7 +396,7 @@
     <string name="poi_quarry">Steinbruch</string>
     <string name="poi_raceway">Rennstrecke</string>
     <string name="poi_racquet">Racquetball</string>
-    <string name="poi_radiotechnics">Radiotechniker</string>
+    <string name="poi_radiotechnics">Radiotechnikladen</string>
     <string name="poi_halt">Eisenbahnhaltestelle</string>
     <string name="poi_railway_platform">Bahnsteig</string>
     <string name="poi_railway_station">Bahnhof</string>
@@ -472,7 +472,7 @@
     <string name="poi_small_craft_facility">Sportbooteinrichtung</string>
     <string name="poi_topmark">Toppzeichen</string>
     <string name="poi_seamark_wreck">Wrack</string>
-    <string name="poi_second_hand">Gebrauchtwaren</string>
+    <string name="poi_second_hand">Gebrauchtwarenladen</string>
     <string name="poi_service_tyres">Reifenhändler</string>
     <string name="poi_ses_station">SES-Station</string>
     <string name="poi_sewing">Schneiderei</string>
@@ -522,7 +522,7 @@
     <string name="poi_craft_tailor">Schneider</string>
     <string name="poi_tattoo">Tattoo-Studio</string>
     <string name="poi_tax_inspection">Steuerprüfung</string>
-    <string name="poi_taxi">Taxi-Stand</string>
+    <string name="poi_taxi">Taxistand</string>
     <string name="poi_office_telecommunication">Fernmeldeamt</string>
     <string name="poi_telephone">Telefon</string>
     <string name="poi_telephone_exchange">Fernsprechamt</string>
@@ -713,7 +713,7 @@
     <string name="poi_forest">Forstwald</string>
     <string name="poi_reservoir">Reservoir</string>
     <string name="poi_general_tourist_attraction_yes">Allgemeine Sehenswürdigkeit</string>
-    <string name="poi_fuel_svo">Bio-Kraftstoff</string>
+    <string name="poi_fuel_svo">Biokraftstoff</string>
     <string name="poi_training">Übungsgelände</string>
     <string name="poi_quarter">Quartier</string>
     <string name="poi_hunting_lodge">Jagdhütte</string>
@@ -893,7 +893,7 @@
     <string name="poi_recycling_plastic_bottles">Plastikflaschen</string>
     <string name="poi_recycling_green_waste">Grünabfall</string>
     <string name="poi_recycling_waste">Restmüll</string>
-    <string name="poi_recycling_plastic_packaging">Verpackungen</string>
+    <string name="poi_recycling_plastic_packaging">Kunststoffverpackungen</string>
     <string name="poi_recycling_newspaper">Zeitungen</string>
     <string name="poi_recycling_cartons">Kartons</string>
     <string name="poi_recycling_cardboard">Karton</string>
@@ -947,7 +947,7 @@
     <string name="poi_access_agricultural">Landwirtschaftl. Verkehr frei</string>
     <string name="poi_recycling_centre">Recyclingzentrum</string>
     <string name="poi_recycling_aluminium">Aluminium</string>
-    <string name="poi_recycling_white_goods">Weiße Güter</string>
+    <string name="poi_recycling_white_goods">Weiße Ware</string>
     <string name="poi_recycling_cooking_oil">Speiseöl</string>
     <string name="poi_recycling_engine_oil">Motoröl</string>
     <string name="poi_recycling_hazardous_waste">Giftmüll</string>
@@ -2065,7 +2065,7 @@
     <string name="poi_publisher">Verlagsbüro</string>
     <string name="poi_fuel_charcoal">Kraftstoff: Holzkohle</string>
     <string name="poi_fuel_coal">Kraftstoff: Kohle</string>
-    <string name="poi_escape_lane">Notweg</string>
+    <string name="poi_escape_lane">Fluchtweg</string>
     <string name="poi_crop_rice">Anbauprodukt: Reis</string>
     <string name="poi_crop_grass">Anbauprodukt: Gras</string>
     <string name="poi_crop_corn">Anbauprodukt: Mais</string>

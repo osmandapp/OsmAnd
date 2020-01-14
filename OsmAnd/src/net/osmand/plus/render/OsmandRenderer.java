@@ -49,6 +49,8 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.Shader.TileMode;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.DisplayMetrics;
@@ -387,6 +389,11 @@ public class OsmandRenderer {
 				return;
 			}
 		}
+	}
+
+	public Drawable getShieldDrawable(String shieldId){
+		Bitmap shield = RenderingIcons.getIcon(context, shieldId, true);
+		return new BitmapDrawable(context.getResources(),shield);
 	}
 
 	protected void drawBitmap(Canvas cv, Bitmap ico, RectF rf) {

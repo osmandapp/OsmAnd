@@ -186,8 +186,8 @@ public class EditCategoryDialogFragment extends DialogFragment {
 		Bundle bundle = new Bundle();
 		bundle.putString(KEY_CTX_EDIT_CAT_EDITOR_TAG, editorTag);
 		bundle.putString(KEY_CTX_EDIT_CAT_NEW, Boolean.valueOf(false).toString());
-		bundle.putString(KEY_CTX_EDIT_CAT_NAME, group.name);
-		bundle.putString(KEY_CTX_EDIT_CAT_COLOR, "" + group.color);
+		bundle.putString(KEY_CTX_EDIT_CAT_NAME, group.getName());
+		bundle.putString(KEY_CTX_EDIT_CAT_COLOR, "" + group.getColor());
 		fragment.setArguments(bundle);
 		return fragment;
 	}

@@ -230,7 +230,7 @@ public class FavoritesListFragment extends OsmAndListFragment implements SearchA
 			}
 			((TextView) row.findViewById(R.id.group_name)).setText(favorite.getCategory());
 
-			icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(activity, favorite.getColor(), false));
+			icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(activity, favorite.getColor(), false, favorite));
 			 
 			app.getUIUtilities().updateLocationView(cache, direction, distanceText, 
 					favorite.getLatitude(), favorite.getLongitude());

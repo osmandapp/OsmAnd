@@ -25,6 +25,7 @@ import net.osmand.plus.dialogs.FavoriteDialogs;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.util.Algorithms;
 
+
 public class FavoritePointEditorFragment extends PointEditorFragment {
 
 	@Nullable
@@ -146,9 +147,9 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 	public void setCategory(String name, int color) {
 		FavouritesDbHelper helper = getHelper();
 		if (helper != null) {
-			FavoriteGroup group = helper.getGroup(name);
+			FavoriteGroup group = helper.getGroup(FavouritesDbHelper.FavoriteGroup.convertDisplayNameToGroupIdName(requireContext(), name));
 			this.group = group;
-			super.setCategory(name, group.color);
+			super.setCategory(name, group.getColor());
 		}
 	}
 
@@ -248,7 +249,7 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 		MapContextMenu menu = mapActivity.getContextMenu();
 		LatLon latLon = new LatLon(favorite.getLatitude(), favorite.getLongitude());
 		if (menu.getLatLon() != null && menu.getLatLon().equals(latLon)) {
-			menu.update(latLon, favorite.getPointDescription(), favorite);
+			menu.update(latLon, favorite.getPointDescription(mapActivity), favorite);
 		}
 	}
 
@@ -309,7 +310,7 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 	@Override
 	public String getCategoryInitValue() {
 		FavouritePoint favorite = getFavorite();
-		return favorite == null || favorite.getCategory().length() == 0 ? getDefaultCategoryName() : favorite.getCategory();
+		return favorite == null || favorite.getCategory().length() == 0 ? getDefaultCategoryName() : favorite.getCategoryDisplayName(requireContext());
 	}
 
 	@Override
@@ -320,7 +321,7 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 
 	@Override
 	public Drawable getNameIcon() {
-		return FavoriteImageDrawable.getOrCreate(getMapActivity(), getPointColor(), false);
+		return FavoriteImageDrawable.getOrCreate(getMapActivity(), getPointColor(), false, getFavorite());
 	}
 
 	@Override
@@ -333,7 +334,7 @@ public class FavoritePointEditorFragment extends PointEditorFragment {
 		int color = 0;
 		FavoriteGroup group = getGroup();
 		if (group != null) {
-			color = group.color;
+			color = group.getColor();
 		}
 		if (color == 0) {
 			color = defaultColor;

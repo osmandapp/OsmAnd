@@ -1036,11 +1036,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 			}
 			String sz = "";
 			if (size > 0) {
-				if (size > 1 << 20) {
-					sz = DownloadActivity.formatGb.format(new Object[]{(float) size / (1 << 20)});
-				} else {
-					sz = DownloadActivity.formatMb.format(new Object[]{(float) size / (1 << 10)});
-				}
+				sz = AndroidUtils.formatSize(v.getContext(), size * 1024l);
 			}
 			sizeView.setText(sz);
 			sizeView.setVisibility(View.VISIBLE);
@@ -1157,11 +1153,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 					if (builder.length() > 0) {
 						builder.append(" • ");
 					}
-					if (child.getSize() > 100) {
-						builder.append(DownloadActivity.formatMb.format(new Object[]{(float) child.getSize() / (1 << 10)}));
-					} else {
-						builder.append(child.getSize()).append(" KB");
-					}
+					builder.append(AndroidUtils.formatSize(ctx, child.getSize() * 1024l));
 				}
 
 				if (!Algorithms.isEmpty(child.getDescription())) {

@@ -257,6 +257,9 @@
     <string name="unit_of_length">Unidades de longària</string>
     <string name="unit_of_speed_system_descr">Issèbera s\'unidade de letresa.</string>
     <string name="unit_of_speed_system">Unidade de lestresa</string>
-    <string name="buffer_time_descr">Tempus màssimu de archiviatzione de sos puntos in sa memòria tampone (buffer).</string>
+    <string name="buffer_time_descr">Tempus màssimu de archiviatzione de sos puntos in sa memòria tampone (buffer)</string>
     <string name="buffer_time">Tempus de iscadidura de sa memòria tampone</string>
+    <string name="shared_string_suggested">Cunsigiadu</string>
+    <string name="status_widget_title">Istadu de s\'arrastadore de OsmAnd</string>
+    <string name="back_to_osmand">Torra a OsmAnd</string>
 </resources>

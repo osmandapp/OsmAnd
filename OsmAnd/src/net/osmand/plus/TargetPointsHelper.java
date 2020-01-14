@@ -12,6 +12,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.OsmAndAppCustomization.OsmAndAppCustomizationListener;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -147,6 +148,16 @@ public class TargetPointsHelper {
 		this.settings = ctx.getSettings();
 		this.routingHelper = ctx.getRoutingHelper();
 		readFromSettings();
+
+		OsmAndAppCustomizationListener customizationListener = new OsmAndAppCustomizationListener() {
+			@Override
+			public void onOsmAndSettingsCustomized() {
+				settings = TargetPointsHelper.this.ctx.getSettings();
+				readFromSettings();
+				updateRouteAndRefresh(true);
+			}
+		};
+		ctx.getAppCustomization().addListener(customizationListener);
 	}
 
 	public void lookupAddessAll() {

@@ -27,13 +27,13 @@ public class HomeWorkCard extends BaseCard {
 	protected void updateContent() {
 		final TargetPointsHelper targetPointsHelper = mapActivity.getMyApplication().getTargetPointsHelper();
 		final FavouritesDbHelper favorites = getMyApplication().getFavorites();
-		final FavouritePoint homePoint = favorites.getHomePoint();
-		final FavouritePoint workPoint = favorites.getWorkPoint();
+		final FavouritePoint homePoint = favorites.getSpecialPoint(FavouritePoint.SpecialPointType.HOME);
+		final FavouritePoint workPoint = favorites.getSpecialPoint(FavouritePoint.SpecialPointType.WORK);
 
 		TextView homeDescr = view.findViewById(R.id.home_button_descr);
 		final TextView workDescr = view.findViewById(R.id.work_button_descr);
-		homeDescr.setText(homePoint != null ? homePoint.getDescription() : mapActivity.getString(R.string.shared_string_add));
-		workDescr.setText(workPoint != null ? workPoint.getDescription() : mapActivity.getString(R.string.shared_string_add));
+		homeDescr.setText(homePoint != null ? homePoint.getAddress() : mapActivity.getString(R.string.shared_string_add));
+		workDescr.setText(workPoint != null ? workPoint.getAddress() : mapActivity.getString(R.string.shared_string_add));
 
 		View homeButton = view.findViewById(R.id.home_button);
 		homeButton.setOnClickListener(new View.OnClickListener() {
@@ -43,7 +43,7 @@ public class HomeWorkCard extends BaseCard {
 					AddPointBottomSheetDialog.showInstance(mapActivity, PointType.HOME);
 				} else {
 					targetPointsHelper.navigateToPoint(new LatLon(homePoint.getLatitude(), homePoint.getLongitude()),
-							true, -1, homePoint.getPointDescription());
+							true, -1, homePoint.getPointDescription(mapActivity));
 				}
 			}
 		});
@@ -63,7 +63,7 @@ public class HomeWorkCard extends BaseCard {
 					AddPointBottomSheetDialog.showInstance(mapActivity, PointType.WORK);
 				} else {
 					targetPointsHelper.navigateToPoint(new LatLon(workPoint.getLatitude(), workPoint.getLongitude()),
-							true, -1, workPoint.getPointDescription());
+							true, -1, workPoint.getPointDescription(mapActivity));
 				}
 			}
 		});

@@ -3,25 +3,36 @@ package net.osmand.data;
 import java.io.Serializable;
 
 import android.content.Context;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
+import android.support.annotation.StringRes;
 
 import net.osmand.GPXUtilities.WptPt;
+import net.osmand.plus.FavouritesDbHelper;
+import net.osmand.plus.R;
+import net.osmand.util.Algorithms;
+
 
 public class FavouritePoint implements Serializable, LocationPoint {
 	private static final long serialVersionUID = 729654300829771466L;
 
-	protected static final String HIDDEN = "hidden";
+	private static final String HIDDEN = "hidden";
+	private static final String ADDRESS_EXTENSION = "address";
+
+
 
 	protected String name = "";
 	protected String description;
 	protected String category = "";
+	protected String address = "";
 	private String originObjectName = "";
 	private double latitude;
 	private double longitude;
 	private int color;
 	private boolean visible = true;
+	private SpecialPointType specialPointType = null;
 
-	public FavouritePoint(){
+	public FavouritePoint() {
 	}
 
 	public FavouritePoint(double latitude, double longitude, String name, String category) {
@@ -32,6 +43,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 			name = "";
 		}
 		this.name = name;
+		initPersonalType();
 	}
 
 	public FavouritePoint(FavouritePoint favouritePoint) {
@@ -43,23 +55,47 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		this.description = favouritePoint.description;
 		this.visible = favouritePoint.visible;
 		this.originObjectName = favouritePoint.originObjectName;
+		this.address = favouritePoint.address;
+		initPersonalType();
+	}
+
+	private void initPersonalType() {
+		if(FavouritesDbHelper.FavoriteGroup.PERSONAL_CATEGORY.equals(category)) {
+			for(SpecialPointType p : SpecialPointType.values()) {
+				if(p.typeName.equals(this.name)) {
+					this.specialPointType = p;
+				}
+			}
+		}
+	}
+
+	public SpecialPointType getSpecialPointType() {
+		return specialPointType;
 	}
 
 	public int getColor() {
 		return color;
 	}
-	
-	public PointDescription getPointDescription() {
-		return new PointDescription(PointDescription.POINT_TYPE_FAVORITE, getName());
+
+	public String getAddress() {
+		return address;
 	}
 
-	public boolean isPersonal() {
-		return false;
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public boolean isAddressSpecified() {
+		return !Algorithms.isEmpty(address);
+	}
+
+	public boolean isSpecialPoint() {
+		return specialPointType != null;
 	}
 
 	@Override
-	public PointDescription getPointDescription(Context ctx) {
-		return getPointDescription();
+	public PointDescription getPointDescription(@NonNull Context ctx) {
+		return new PointDescription(PointDescription.POINT_TYPE_FAVORITE, getDisplayName(ctx));
 	}
 	
 	public void setColor(int color) {
@@ -82,6 +118,13 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		this.originObjectName = originObjectName;
 	}
 
+	public int getOverlayIconId() {
+		if (isSpecialPoint()) {
+			return specialPointType.getIconId();
+		}
+		return 0;
+	}
+
 	public double getLatitude() {
 		return latitude;
 	}
@@ -101,12 +144,20 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	public String getCategory() {
 		return category;
 	}
+
+	public String getCategoryDisplayName(@NonNull Context ctx) {
+		return FavouritesDbHelper.FavoriteGroup.getDisplayName(ctx, category);
+	}
 	
 	public void setCategory(String category) {
 		this.category = category;
+		initPersonalType();
 	}
 
-	public String getName(Context ctx) {
+	public String getDisplayName(@NonNull Context ctx) {
+		if (isSpecialPoint()) {
+			return specialPointType.getHumanString(ctx);
+		}
 		return name;
 	}
 	
@@ -116,6 +167,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 
 	public void setName(String name) {
 		this.name = name;
+		initPersonalType();
 	}
 
 	public String getDescription () {
@@ -125,7 +177,8 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
+	@NonNull
 	@Override
 	public String toString() {
 		return "Favourite " + getName(); //$NON-NLS-1$
@@ -182,28 +235,55 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		return result;
 	}
 
-	public static FavouritePoint fromWpt(@NonNull Context ctx, @NonNull WptPt pt) {
+
+	public enum SpecialPointType {
+		HOME("home", R.string.home_button, R.drawable.ic_action_home_dark),
+		WORK("work", R.string.work_button, R.drawable.ic_action_work),
+		PARKING("parking", R.string.map_widget_parking, R.drawable.ic_action_parking_dark);
+
+		private String typeName;
+		@StringRes
+		private int resId;
+		@DrawableRes
+		private int iconId;
+
+		SpecialPointType(@NonNull String typeName, @StringRes int resId, @DrawableRes int iconId) {
+			this.typeName = typeName;
+			this.resId = resId;
+			this.iconId = iconId;
+		}
+
+		public String getCategory() { return FavouritesDbHelper.FavoriteGroup.PERSONAL_CATEGORY; }
+
+		public String getName() {
+			return typeName;
+		}
+
+		public int getIconId() {
+			return iconId;
+		}
+
+		public String getHumanString(@NonNull Context ctx) {
+			return ctx.getString(resId);
+		}
+	}
+
+
+	public static FavouritePoint fromWpt(@NonNull WptPt pt) {
 		String name = pt.name;
 		String categoryName = pt.category != null ? pt.category : "";
 		if (name == null) {
 			name = "";
 		}
 		FavouritePoint fp;
-		if (pt.getExtensionsToRead().containsKey(PersonalFavouritePoint.PERSONAL)) {
-			try {
-				fp = new PersonalFavouritePoint(ctx, name, pt.lat, pt.lon);
-			} catch (IllegalArgumentException e) {
-				fp = new FavouritePoint(pt.lat, pt.lon, name, categoryName);
-			}
-		} else {
 			fp = new FavouritePoint(pt.lat, pt.lon, name, categoryName);
-		}
 		fp.setDescription(pt.desc);
 		if (pt.comment != null) {
 			fp.setOriginObjectName(pt.comment);
 		}
 		fp.setColor(pt.getColor(0));
 		fp.setVisible(!pt.getExtensionsToRead().containsKey(HIDDEN));
+		fp.setAddress(pt.getExtensionsToRead().get(ADDRESS_EXTENSION));
 		return fp;
 	}
 
@@ -213,6 +293,9 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		pt.lon = getLongitude();
 		if (!isVisible()) {
 			pt.getExtensionsToWrite().put(HIDDEN, "true");
+		}
+		if (isAddressSpecified()) {
+			pt.getExtensionsToWrite().put(ADDRESS_EXTENSION, getAddress());
 		}
 		if (getColor() != 0) {
 			pt.setColor(getColor());
