@@ -161,12 +161,10 @@ public class MultiTouchSupport {
 					}
 					zoomRelative = distance / zoomStartedDistance;
 					listener.onZoomingOrRotating(zoomRelative, angleRelative);
-					return true;
 				} else if (inTiltMode) {
 					float dy2 = secondFingerStart.y - y2;
 					float viewAngle = dy2 / 8f;
 					listener.onChangingViewAngle(viewAngle);
-					return true;
 				} else if (isTiltSupported()) {
 					float dx1 = Math.abs(firstFingerStart.x - x1);
 					float dx2 = Math.abs(secondFingerStart.x - x2);
@@ -186,11 +184,10 @@ public class MultiTouchSupport {
 						zoomRelative = 0;
 						inZoomMode = true;
 					}
-					return true;
 				} else {
 					inZoomMode = true;
-					return true;
 				}
+				return true;
 			}
 		} catch (Exception e) {
 			log.debug("Multi touch exception" , e); //$NON-NLS-1$
