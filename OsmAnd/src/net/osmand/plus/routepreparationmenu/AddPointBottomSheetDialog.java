@@ -319,8 +319,8 @@ public class AddPointBottomSheetDialog extends MenuBottomSheetDialogFragment {
 		final View switchStartAndEndView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.bottom_sheet_item_simple_56dp, null);
 		TextView title = (TextView) switchStartAndEndView.findViewById(R.id.title);
 
-		String start = getString(R.string.route_start_point).toLowerCase();
-		String destination = getString(R.string.route_descr_destination).toLowerCase();
+		String start = getString(R.string.route_start_point);
+		String destination = getString(R.string.route_descr_destination);
 		String titleS = getString(R.string.swap_two_places, start, destination);
 		SpannableString titleSpan = new SpannableString(titleS);
 		int startIndex = titleS.indexOf(start);
