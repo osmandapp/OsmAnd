@@ -48,7 +48,8 @@ public class FavouritesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 			} else {
 				favouritesViewHolder.description.setText(favouritePoint.getCategory());
 			}
-			favouritesViewHolder.favouriteImage.setImageDrawable(FavoriteImageDrawable.getOrCreate(app, favouritePoint.getColor(), false));
+			favouritesViewHolder.favouriteImage.setImageDrawable(
+					FavoriteImageDrawable.getOrCreate(app, favouritePoint.getColor(), false, favouritePoint));
 			app.getUIUtilities().updateLocationView(cache, favouritesViewHolder.arrowImage, favouritesViewHolder.distance,
 					favouritePoint.getLatitude(), favouritePoint.getLongitude());
 		}

@@ -8,6 +8,8 @@ import net.osmand.Location;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.OsmAndAppCustomization.OsmAndAppCustomizationListener;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
 import net.osmand.plus.routing.AlarmInfo.AlarmInfoType;
@@ -46,9 +48,11 @@ public class VoiceRouter {
 	public static final String FROM_STREET_NAME = "fromStreetName";
 	public static final String FROM_DEST = "fromDest";
 
-	protected final RoutingHelper router;
 	protected static CommandPlayer player;
-	protected final OsmandSettings settings;
+
+	protected final OsmandApplication app;
+	protected final RoutingHelper router;
+	protected OsmandSettings settings;
 
 	private static int currentStatus = STATUS_UNKNOWN;
 	private static boolean playedAndArriveAtTarget = false;
@@ -84,9 +88,18 @@ public class VoiceRouter {
 
 	private List<WeakReference<VoiceMessageListener>> voiceMessageListeners = new ArrayList<>();
     
-	VoiceRouter(RoutingHelper router, final OsmandSettings settings) {
+	VoiceRouter(RoutingHelper router) {
 		this.router = router;
-		this.settings = settings;
+		this.app = router.getApplication();
+		this.settings = app.getSettings();
+
+		OsmAndAppCustomizationListener customizationListener = new OsmAndAppCustomizationListener() {
+			@Override
+			public void onOsmAndSettingsCustomized() {
+				settings = app.getSettings();
+			}
+		};
+		app.getAppCustomization().addListener(customizationListener);
 	}
 	
 	public void setPlayer(CommandPlayer player) {
@@ -695,13 +708,13 @@ public class VoiceRouter {
 			String tParam = getTurnType(next.getTurnType());
 			boolean isPlay = true;
 			ExitInfo exitInfo = next.getExitInfo();
-			String lang = player.getLanguage();
 			if (tParam != null) {
-				if (exitInfo != null) {
-					p.takeExit(tParam, dist, getSpeakableExitName(next, exitInfo, true));
-				} else {
-					p.turn(tParam, dist, getSpeakableStreetName(currentSegment, next, true));
-				}
+				p.turn(tParam, dist, getSpeakableStreetName(currentSegment, next, true));
+//				if (exitInfo != null) {
+//					p.takeExit(tParam, dist, getSpeakableExitName(next, exitInfo, true));
+//				} else {
+//					p.turn(tParam, dist, getSpeakableStreetName(currentSegment, next, true));
+//				}
 				suppressDest = true;
 			} else if (next.getTurnType().isRoundAbout()) {
 				p.roundAbout(dist, next.getTurnType().getTurnAngle(), next.getTurnType().getExitOut(), getSpeakableStreetName(currentSegment, next, true));
@@ -769,13 +782,13 @@ public class VoiceRouter {
 			String tParam = getTurnType(next.getTurnType());
 			ExitInfo exitInfo = next.getExitInfo();
 			boolean isplay = true;
-			String lang = player.getLanguage();
 			if (tParam != null) {
-				if (exitInfo != null) {
-					p.takeExit(tParam, getSpeakableExitName(next, exitInfo, !suppressDest));
-				} else {
-					p.turn(tParam, getSpeakableStreetName(currentSegment, next, !suppressDest));
-				}
+				p.turn(tParam, getSpeakableStreetName(currentSegment, next, !suppressDest));
+//				if (exitInfo != null) {
+//					p.takeExit(tParam, getSpeakableExitName(next, exitInfo, !suppressDest));
+//				} else {
+//					p.turn(tParam, getSpeakableStreetName(currentSegment, next, !suppressDest));
+//				}
 			} else if (next.getTurnType().isRoundAbout()) {
 				p.roundAbout(next.getTurnType().getTurnAngle(), next.getTurnType().getExitOut(), getSpeakableStreetName(currentSegment, next, !suppressDest));
 			} else if (next.getTurnType().getValue() == TurnType.TU || next.getTurnType().getValue() == TurnType.TRU) {

@@ -210,6 +210,10 @@ public class TrackBitmapDrawer {
 					sf = app.getSelectedGpxHelper().getSelectedFileByPath(gpxFile.path);
 					if (sf == null) {
 						sf = new GpxSelectionHelper.SelectedGpxFile();
+						GpxDataItem gpxDataItem = getGpxDataItem();
+						if (gpxDataItem != null) {
+							sf.setJoinSegments(gpxDataItem.isJoinSegments());
+						}
 					}
 					sf.setGpxFile(gpxFile, app);
 				}

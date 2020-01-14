@@ -22,6 +22,7 @@ import net.osmand.data.RotatedTileBox;
 import net.osmand.data.TransportStop;
 import net.osmand.osm.edit.Node;
 import net.osmand.osm.edit.Way;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.render.RenderingIcons;
@@ -36,6 +37,9 @@ import java.util.List;
 import java.util.TreeSet;
 
 public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider {
+
+	public static final String TRANSPORT_STOPS_OVER_MAP = "transportStops";
+
 	private static final int startZoom = 12;
 	private static final int startZoomRoute = 10;
 
@@ -53,13 +57,16 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 	private MapLayerData<List<TransportStop>> data;
 	private TransportStopRoute stopRoute = null;
 
-	private boolean showTransportStops;
+	private OsmandSettings.CommonPreference<Boolean> showTransportStops;
+
 	private Path path;
 	private float backgroundIconHalfWidth;
 	private float backgroundIconHalfHeight;
 
 	public TransportStopsLayer(MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
+		OsmandSettings settings = mapActivity.getMyApplication().getSettings();
+		showTransportStops = settings.getCustomRenderBooleanProperty(TRANSPORT_STOPS_OVER_MAP).cache();
 	}
 
 	@SuppressWarnings("deprecation")
@@ -168,14 +175,6 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 		this.stopRoute = route;
 	}
 
-	public boolean isShowTransportStops() {
-		return showTransportStops;
-	}
-
-	public void setShowTransportStops(boolean showTransportStops) {
-		this.showTransportStops = showTransportStops;
-	}
-
 	private int getRadiusPoi(RotatedTileBox tb){
 		final double zoom = tb.getZoom();
 		int r;
@@ -227,7 +226,7 @@ public class TransportStopsLayer extends OsmandMapLayer implements ContextMenuLa
 			}
 		}
 
-		if (showTransportStops && tb.getZoom() >= startZoom && objects == null) {
+		if (showTransportStops.get() && tb.getZoom() >= startZoom && objects == null) {
 			data.queryNewData(tb);
 			objects = data.getResults();
 		}

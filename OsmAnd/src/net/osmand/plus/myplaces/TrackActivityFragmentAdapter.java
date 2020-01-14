@@ -250,7 +250,7 @@ public class TrackActivityFragmentAdapter implements TrackBitmapDrawerListener {
 	private void refreshTrackBitmap() {
 		TrackBitmapDrawer trackDrawer = getTrackBitmapDrawer();
 		if (trackDrawer != null) {
-			getTrackBitmapDrawer().refreshTrackBitmap();
+			trackDrawer.refreshTrackBitmap();
 		}
 	}
 

@@ -871,7 +871,7 @@ Pôr do Sol: %2$s</string>
     <string name="osmand_parking_time_limit">Tempo limitado</string>
     <string name="osmand_parking_time_no_limit">Sem limite de tempo</string>
     <string name="osmand_parking_position_description">A localização de estacionamento do seu veículo. %1$s</string>
-    <string name="osmand_parking_position_description_add">Buscar o veículo em:</string>
+    <string name="osmand_parking_position_description_add">Buscar o veículo às:</string>
     <string name="osmand_parking_pm">PM</string>
     <string name="osmand_parking_am">AM</string>
     <string name="osmand_parking_position_name">Vaga de estacionamento</string>
@@ -3407,5 +3407,5 @@ Pôr do Sol: %2$s</string>
     <string name="reset_confirmation_descr">Ao clicar em %1$s, você perderá todas as suas alterações.</string>
     <string name="reset_all_profile_settings_descr">Todas as configurações de perfil serão redefinidas para o estado após a instalação.</string>
     <string name="reset_all_profile_settings">Redefinir todas as configurações de perfil para o padrão\?</string>
-    <string name="ltr_or_rtl_combine">%1$s: %2$s</string>
+    <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
 </resources>

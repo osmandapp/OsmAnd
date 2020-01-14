@@ -1,6 +1,5 @@
 package net.osmand.plus.monitoring;
 
-import android.content.Context;
 import android.os.AsyncTask;
 
 import net.osmand.PlatformUtil;
@@ -24,23 +23,25 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-public class LiveMonitoringHelper  {
-	
-	protected Context ctx;
-	private OsmandSettings settings;
-	private long lastTimeUpdated;
-	private LatLon lastPoint;
+public class LiveMonitoringHelper {
+
 	private final static Log log = PlatformUtil.getLog(LiveMonitoringHelper.class);
+
+	private OsmandApplication app;
+
 	private ConcurrentLinkedQueue<LiveMonitoringData> queue;
+
+	private LatLon lastPoint;
+	private long lastTimeUpdated;
 	private boolean started = false;
 
-	public LiveMonitoringHelper(Context ctx){
-		this.ctx = ctx;
-		settings = ((OsmandApplication) ctx.getApplicationContext()).getSettings();
+	public LiveMonitoringHelper(OsmandApplication app) {
+		this.app = app;
 		queue = new ConcurrentLinkedQueue<>();
 	}
-	
-	public boolean isLiveMonitoringEnabled(){
+
+	public boolean isLiveMonitoringEnabled() {
+		OsmandSettings settings = app.getSettings();
 		return settings.LIVE_MONITORING.get() && (settings.SAVE_TRACK_TO_GPX.get() || settings.SAVE_GLOBAL_TRACK_TO_GPX.get());
 	}
 
@@ -50,6 +51,7 @@ public class LiveMonitoringHelper  {
 		if (location != null && isLiveMonitoringEnabled()
 				&& OsmAndLocationProvider.isNotSimulatedLocation(location)
 				&& OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null) {
+			OsmandSettings settings = app.getSettings();
 			if (locationTime - lastTimeUpdated > settings.LIVE_MONITORING_INTERVAL.get()) {
 				record = true;
 			}
@@ -112,10 +114,11 @@ public class LiveMonitoringHelper  {
 		@Override
 		protected Void doInBackground(ConcurrentLinkedQueue<LiveMonitoringData>... concurrentLinkedQueues) {
 			while (isLiveMonitoringEnabled()) {
+				int maxSendInterval = app.getSettings().LIVE_MONITORING_MAX_INTERVAL_TO_SEND.get();
 				for (ConcurrentLinkedQueue queue : concurrentLinkedQueues) {
 					if (!queue.isEmpty()) {
 						LiveMonitoringData data = (LiveMonitoringData) queue.peek();
-						if (!(System.currentTimeMillis() - data.time > settings.LIVE_MONITORING_MAX_INTERVAL_TO_SEND.get())) {
+						if (!(System.currentTimeMillis() - data.time > maxSendInterval)) {
 							sendData(data);
 						} else {
 							queue.poll();
@@ -128,10 +131,52 @@ public class LiveMonitoringHelper  {
 	}
 
 	public void sendData(LiveMonitoringData data) {
-		String st = settings.LIVE_MONITORING_URL.get();
+		String urlStr = getLiveUrl(data);
+		try {
+			// Parse the URL and let the URI constructor handle proper encoding of special characters such as spaces
+			URL url = new URL(urlStr);
+			HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+			URI uri = new URI(url.getProtocol(), url.getUserInfo(), url.getHost(), url.getPort(),
+					url.getPath(), url.getQuery(), url.getRef());
+
+			urlConnection.setConnectTimeout(15000);
+			urlConnection.setReadTimeout(15000);
+
+			log.info("Monitor " + uri);
+
+			if (urlConnection.getResponseCode() / 100 != 2) {
+
+				String msg = urlConnection.getResponseCode() + " : " + //$NON-NLS-1$//$NON-NLS-2$
+						urlConnection.getResponseMessage();
+				log.error("Error sending monitor request: " + msg);
+			} else {
+				queue.poll();
+				InputStream is = urlConnection.getInputStream();
+				StringBuilder responseBody = new StringBuilder();
+				if (is != null) {
+					BufferedReader in = new BufferedReader(new InputStreamReader(is, "UTF-8")); //$NON-NLS-1$
+					String s;
+					while ((s = in.readLine()) != null) {
+						responseBody.append(s);
+						responseBody.append("\n"); //$NON-NLS-1$
+					}
+					is.close();
+				}
+				log.info("Monitor response (" + urlConnection.getHeaderField("Content-Type") + "): " + responseBody.toString());
+			}
+
+			urlConnection.disconnect();
+
+		} catch (Exception e) {
+			log.error("Failed connect to " + urlStr + ": " + e.getMessage(), e);
+		}
+	}
+
+	private String getLiveUrl(LiveMonitoringData data) {
+		String st = app.getSettings().LIVE_MONITORING_URL.get();
 		List<String> prm = new ArrayList<String>();
 		int maxLen = 0;
-		for(int i = 0; i < 7; i++) {
+		for (int i = 0; i < 7; i++) {
 			boolean b = st.contains("{"+i+"}");
 			if(b) {
 				maxLen = i;
@@ -165,45 +210,6 @@ public class LiveMonitoringHelper  {
 				break;
 			}
 		}
-		String urlStr = MessageFormat.format(st, prm.toArray());
-		try {
-
-			// Parse the URL and let the URI constructor handle proper encoding of special characters such as spaces
-			URL url = new URL(urlStr);
-			HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-			URI uri = new URI(url.getProtocol(), url.getUserInfo(), url.getHost(), url.getPort(),
-						url.getPath(), url.getQuery(), url.getRef());
-
-			urlConnection.setConnectTimeout(15000);
-			urlConnection.setReadTimeout(15000);
-
-			log.info("Monitor " + uri);
-
-			if (urlConnection.getResponseCode()/100 != 2) {
-
-				String msg = urlConnection.getResponseCode() + " : " + //$NON-NLS-1$//$NON-NLS-2$
-						urlConnection.getResponseMessage();
-				log.error("Error sending monitor request: " +  msg);
-			} else {
-				queue.poll();
-				InputStream is = urlConnection.getInputStream();
-				StringBuilder responseBody = new StringBuilder();
-				if (is != null) {
-					BufferedReader in = new BufferedReader(new InputStreamReader(is, "UTF-8")); //$NON-NLS-1$
-					String s;
-					while ((s = in.readLine()) != null) {
-						responseBody.append(s);
-						responseBody.append("\n"); //$NON-NLS-1$
-					}
-					is.close();
-				}
-				log.info("Monitor response (" + urlConnection.getHeaderField("Content-Type") + "): " + responseBody.toString());
-			}
-
-			urlConnection.disconnect();
-			
-		} catch (Exception e) {
-			log.error("Failed connect to " + urlStr + ": " + e.getMessage(), e);
-		}
+		return MessageFormat.format(st, prm.toArray());
 	}
 }

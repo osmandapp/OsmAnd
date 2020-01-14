@@ -846,7 +846,7 @@ public class OsmandAidlApi {
 		FavouritesDbHelper favoritesHelper = app.getFavorites();
 		List<FavouritesDbHelper.FavoriteGroup> groups = favoritesHelper.getFavoriteGroups();
 		for (FavouritesDbHelper.FavoriteGroup g : groups) {
-			if (g.name.equals(name)) {
+			if (g.getName().equals(name)) {
 				return false;
 			}
 		}
@@ -862,7 +862,7 @@ public class OsmandAidlApi {
 		FavouritesDbHelper favoritesHelper = app.getFavorites();
 		List<FavouritesDbHelper.FavoriteGroup> groups = favoritesHelper.getFavoriteGroups();
 		for (FavouritesDbHelper.FavoriteGroup g : groups) {
-			if (g.name.equals(name)) {
+			if (g.getName().equals(name)) {
 				favoritesHelper.deleteGroup(g);
 				return true;
 			}
@@ -874,7 +874,7 @@ public class OsmandAidlApi {
 		FavouritesDbHelper favoritesHelper = app.getFavorites();
 		List<FavouritesDbHelper.FavoriteGroup> groups = favoritesHelper.getFavoriteGroups();
 		for (FavouritesDbHelper.FavoriteGroup g : groups) {
-			if (g.name.equals(prevGroupName)) {
+			if (g.getName().equals(prevGroupName)) {
 				int color = 0;
 				if (!Algorithms.isEmpty(colorTag)) {
 					color = ColorDialogs.getColorByTag(colorTag);

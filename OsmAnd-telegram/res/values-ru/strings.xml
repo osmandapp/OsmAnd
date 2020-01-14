@@ -262,4 +262,5 @@
     <string name="buffer_time">Срок действия буфера</string>
     <string name="shared_string_suggested">Предложено</string>
     <string name="status_widget_title">Статус OsmAnd Tracker</string>
+    <string name="back_to_osmand">Вернуться к OsmAnd</string>
 </resources>
