@@ -490,7 +490,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public void setMapElevation(float angle) {
-		if (settings.USE_OPENGL_RENDER.get() && NativeCoreContext.isInit()) {
+		if (atlasMapRendererView != null) {
 			atlasMapRendererView.setElevationAngle(angle);
 		}
 	}

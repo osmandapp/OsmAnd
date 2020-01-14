@@ -6,7 +6,7 @@ import android.view.MotionEvent;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
@@ -47,7 +47,6 @@ public class MultiTouchSupport {
 	private boolean multiTouchAPISupported = false;
 	private final MultiTouchZoomListener listener;
 	protected final Context ctx;
-	private OsmandSettings settings;
 
 	protected Method getPointerCount;
 	protected Method getX;
@@ -73,8 +72,11 @@ public class MultiTouchSupport {
 		return inTiltMode;
 	}
 
+	private boolean isTiltSupported() {
+		return ((OsmandApplication) ctx.getApplicationContext()).getSettings().USE_OPENGL_RENDER.get() && NativeCoreContext.isInit();
+	}
+
 	private void initMethods(){
-		settings = ((OsmandApplication) ctx.getApplicationContext()).getSettings();
 		try {
 			getPointerCount = MotionEvent.class.getMethod("getPointerCount"); //$NON-NLS-1$
 			getPointerId = MotionEvent.class.getMethod("getPointerId", Integer.TYPE); //$NON-NLS-1$
@@ -137,6 +139,8 @@ public class MultiTouchSupport {
 				secondFingerStart = new PointF(x2, y2);
 				listener.onGestureInit(x1, y1, x2, y2);
 				listener.onZoomStarted(centerPoint);
+				zoomStartedDistance = distance;
+				angleStarted = angle;
 				return true;
 			} else if(actionCode == ACTION_POINTER_UP){
 				if (inZoomMode || inTiltMode) {
@@ -161,7 +165,7 @@ public class MultiTouchSupport {
 					float dy2 = secondFingerStart.y - y2;
 					float viewAngle = dy2 / 8f;
 					listener.onChangingViewAngle(viewAngle);
-				} else {
+				} else if (isTiltSupported()) {
 					float dx1 = Math.abs(firstFingerStart.x - x1);
 					float dx2 = Math.abs(secondFingerStart.x - x2);
 					float dy1 = Math.abs(firstFingerStart.y - y1);
@@ -170,20 +174,19 @@ public class MultiTouchSupport {
 					if (dx1 < TILT_X_THRESHOLD_PX && dx2 < TILT_X_THRESHOLD_PX
 							&& dy1 > TILT_Y_THRESHOLD_PX && dy2 > TILT_Y_THRESHOLD_PX
 							&& startDy < TILT_Y_THRESHOLD_PX * 6
-							&& Math.abs(dy2 - dy1) < TILT_DY_THRESHOLD_PX
-							&& settings.USE_OPENGL_RENDER.get()) {
+							&& Math.abs(dy2 - dy1) < TILT_DY_THRESHOLD_PX) {
 						listener.onChangeViewAngleStarted();
 						inTiltMode = true;
 					} else if (dx1 > TILT_X_THRESHOLD_PX || dx2 > TILT_X_THRESHOLD_PX
 							|| Math.abs(dy2 - dy1) > TILT_DY_THRESHOLD_PX
 							|| Math.abs(dy1 - dy2) > TILT_DY_THRESHOLD_PX) {
 						listener.onZoomStarted(centerPoint);
-						zoomStartedDistance = distance;
-						angleStarted = angle;
 						angleRelative = 0;
 						zoomRelative = 0;
 						inZoomMode = true;
 					}
+				} else {
+					inZoomMode = true;
 				}
 			}
 		} catch (Exception e) {
