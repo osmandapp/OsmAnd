@@ -111,9 +111,11 @@ public class MultiTouchSupport {
 			}
 			Integer pointCount = (Integer) getPointerCount.invoke(event);
 			if(pointCount < 2){
-				if (inZoomMode || inTiltMode) {
+				if (inZoomMode) {
 					listener.onZoomOrRotationEnded(zoomRelative, angleRelative);
 					inZoomMode = false;
+					return true;
+				} else if (inTiltMode) {
 					inTiltMode = false;
 					return true;
 				}
