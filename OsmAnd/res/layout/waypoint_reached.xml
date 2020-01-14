@@ -48,7 +48,7 @@
             android:layout_gravity="center_vertical"
             android:ellipsize="end"
             android:maxLines="2"
-            android:textColor="?android:textColorSecondary"
+            android:textColor="?android:textColorPrimary"
             android:textSize="@dimen/default_list_text_size"
             tools:text="Some waypoint text"/>
 
