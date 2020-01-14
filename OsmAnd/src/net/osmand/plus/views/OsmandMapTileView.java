@@ -186,6 +186,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private long multiTouchStartTime;
 	private long multiTouchEndTime;
 	private boolean wasZoomInMultiTouch;
+	private float elevationAngle;
 
 	public OsmandMapTileView(MapActivity activity, int w, int h) {
 		this.activity = activity;
@@ -257,6 +258,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				}
 			}
 		};
+		elevationAngle = settings.getLastKnownMapElevation();
 	}
 
 	public void setView(View view) {
@@ -437,6 +439,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public int getZoom() {
 		return currentViewport.getZoom();
+	}
+
+	public float getElevationAngle() {
+		return elevationAngle;
 	}
 
 	public double getZoomFractionalPart() {
@@ -1127,6 +1133,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		private LatLon initialCenterLatLon;
 		private boolean startRotating = false;
 		private static final float ANGLE_THRESHOLD = 30;
+		private float initialElevation;
 
 		@Override
 		public void onZoomOrRotationEnded(double relativeToStart, float angleRelative) {
@@ -1201,7 +1208,12 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 		@Override
 		public void onChangingViewAngle(float angle) {
-			setElevationAngle(angle);
+			setElevationAngle(initialElevation - angle);
+		}
+
+		@Override
+		public void onChangeViewAngleStarted() {
+			initialElevation = elevationAngle;
 		}
 
 		@Override
@@ -1298,6 +1310,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		} else if (angle > 90f) {
 			angle = 90f;
 		}
+		this.elevationAngle = angle;
 		((MapActivity) activity).setMapElevation(angle);
 	}
 

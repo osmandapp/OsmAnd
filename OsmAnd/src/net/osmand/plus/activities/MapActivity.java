@@ -475,7 +475,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			OsmAndMapLayersView ml = (OsmAndMapLayersView) findViewById(R.id.MapLayersView);
 			ml.setVisibility(View.VISIBLE);
 			atlasMapRendererView.setAzimuth(0);
-			atlasMapRendererView.setElevationAngle(90);
+			atlasMapRendererView.setElevationAngle(app.getSettings().getLastKnownMapElevation());
 			NativeCoreContext.getMapRendererContext().setMapRendererView(atlasMapRendererView);
 			ml.setMapView(mapView);
 			mapViewTrackingUtilities.setMapView(mapView);
@@ -1497,6 +1497,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 
 		settings.setLastKnownMapZoom(mapView.getZoom());
+		settings.setLastKnownMapElevation(mapView.getElevationAngle());
 		settings.MAP_ACTIVITY_ENABLED.set(false);
 		app.getResourceManager().interruptRendering();
 		OsmandPlugin.onMapActivityPause(this);

@@ -38,6 +38,8 @@ public class MultiTouchSupport {
 			public void onActionCancel();
 
 			public void onChangingViewAngle(float angle);
+
+			public void onChangeViewAngleStarted();
 	}
 
 	private boolean multiTouchAPISupported = false;
@@ -165,6 +167,7 @@ public class MultiTouchSupport {
 							&& dy1 > TILT_Y_THRESHOLD_PX && dy2 > TILT_Y_THRESHOLD_PX
 							&& startDy < TILT_Y_THRESHOLD_PX * 6
 							&& Math.abs(dy2 - dy1) < TILT_DY_THRESHOLD_PX) {
+						listener.onChangeViewAngleStarted();
 						inTiltMode = true;
 					} else if (dx1 > TILT_X_THRESHOLD_PX || dx2 > TILT_X_THRESHOLD_PX
 							|| Math.abs(dy2 - dy1) > TILT_DY_THRESHOLD_PX
