@@ -24,8 +24,8 @@
 		android:icon="@drawable/ic_action_offline"
 		android:key="offline_osm_editing"
 		android:layout="@layout/preference_with_descr_dialog_and_switch"
-		android:summaryOff="@string/shared_string_off"
-		android:summaryOn="@string/shared_string_on"
+		android:summaryOff="@string/shared_string_disabled"
+		android:summaryOn="@string/shared_string_enabled"
 		android:title="@string/offline_edition" />
 
 	<Preference

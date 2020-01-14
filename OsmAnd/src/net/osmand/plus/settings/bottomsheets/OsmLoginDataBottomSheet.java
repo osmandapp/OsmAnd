@@ -18,6 +18,7 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.osmedit.SettingsOsmEditingActivity;
+import net.osmand.plus.settings.OnPreferenceChanged;
 
 public class OsmLoginDataBottomSheet extends BasePreferenceBottomSheet {
 
@@ -32,8 +33,7 @@ public class OsmLoginDataBottomSheet extends BasePreferenceBottomSheet {
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
 		Context context = getContext();
-		Preference editTextPreference = getPreference();
-		if (context == null || editTextPreference == null) {
+		if (context == null) {
 			return;
 		}
 		OsmandApplication app = requiredMyApplication();
@@ -83,7 +83,13 @@ public class OsmLoginDataBottomSheet extends BasePreferenceBottomSheet {
 
 		app.getSettings().USER_NAME.set(userNameEditText.getText().toString());
 		app.getSettings().USER_PASSWORD.set(passwordEditText.getText().toString());
-		new SettingsOsmEditingActivity.ValidateOsmLoginDetailsTask(getActivity()).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		new SettingsOsmEditingActivity.ValidateOsmLoginDetailsTask(app).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+
+		Fragment target = getTargetFragment();
+		Preference preference = getPreference();
+		if (target instanceof OnPreferenceChanged && preference != null) {
+			((OnPreferenceChanged) target).onPreferenceChanged(preference.getKey());
+		}
 
 		dismiss();
 	}

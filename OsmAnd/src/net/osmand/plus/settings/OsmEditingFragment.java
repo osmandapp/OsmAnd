@@ -13,7 +13,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.settings.bottomsheets.OsmLoginDataBottomSheet;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 
-public class OsmEditingFragment extends BaseSettingsFragment {
+public class OsmEditingFragment extends BaseSettingsFragment implements OnPreferenceChanged {
 
 	private static final String OPEN_OSM_EDITS = "open_osm_edits";
 	private static final String OSM_LOGIN_DATA = "osm_login_data";
@@ -76,5 +76,13 @@ public class OsmEditingFragment extends BaseSettingsFragment {
 			}
 		}
 		return super.onPreferenceClick(preference);
+	}
+
+	@Override
+	public void onPreferenceChanged(String prefId) {
+		if (OSM_LOGIN_DATA.equals(prefId)) {
+			Preference nameAndPasswordPref = findPreference(OSM_LOGIN_DATA);
+			nameAndPasswordPref.setSummary(settings.USER_NAME.get());
+		}
 	}
 }

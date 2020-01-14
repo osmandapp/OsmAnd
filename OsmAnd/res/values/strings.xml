@@ -11,6 +11,8 @@
 	Thx - Hardy
 
 -->
+    <string name="route_recalculation">Route recalculation</string>
+    <string name="accessibility_announce">Announce</string>
     <string name="login_and_pass">Username and password</string>
     <string name="plugin_global_prefs_info">This plugin settings are global, and apply to all profiles.</string>
     <string name="osm_editing">OpenStreetMap Editing</string>
