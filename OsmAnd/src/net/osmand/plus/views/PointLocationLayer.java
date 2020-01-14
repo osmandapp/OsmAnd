@@ -41,8 +41,8 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 	private OsmandMapTileView view;
 
 	private ApplicationMode appMode;
-	private int color;
-	private LayerDrawable bearingIcon;
+	private int colorId;
+	private LayerDrawable navigationIcon;
 	private LayerDrawable locationIcon;
 	private Bitmap headingIcon;
 	private OsmAndLocationProvider locationProvider;
@@ -127,12 +127,16 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 			if (!locationOutdated && isBearing) {
 				float bearing = lastKnownLocation.getBearing();
 				canvas.rotate(bearing - 90, locationX, locationY);
-				bearingIcon.setBounds(locationX - bearingIcon.getIntrinsicWidth() / 2, locationY - bearingIcon.getIntrinsicHeight() / 2,
-						locationX + bearingIcon.getIntrinsicWidth() / 2, locationY + bearingIcon.getIntrinsicHeight() / 2);
-				bearingIcon.draw(canvas);
+				navigationIcon.setBounds(locationX - navigationIcon.getIntrinsicWidth() / 2,
+						locationY - navigationIcon.getIntrinsicHeight() / 2,
+						locationX + navigationIcon.getIntrinsicWidth() / 2,
+						locationY + navigationIcon.getIntrinsicHeight() / 2);
+				navigationIcon.draw(canvas);
 			} else {
-				locationIcon.setBounds(locationX - locationIcon.getIntrinsicWidth() / 2, locationY - locationIcon.getIntrinsicHeight() / 2,
-						locationX + locationIcon.getIntrinsicWidth() / 2, locationY + locationIcon.getIntrinsicHeight() / 2);
+				locationIcon.setBounds(locationX - locationIcon.getIntrinsicWidth() / 2,
+						locationY - locationIcon.getIntrinsicHeight() / 2,
+						locationX + locationIcon.getIntrinsicWidth() / 2,
+						locationY + locationIcon.getIntrinsicHeight() / 2);
 				locationIcon.draw(canvas);
 			}
 		}
@@ -148,16 +152,16 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 
 	private void updateIcons(ApplicationMode appMode, boolean nighMode, boolean locationOutdated) {
 		if (appMode != this.appMode || this.nm != nighMode || this.locationOutdated != locationOutdated ||
-				color != appMode.getIconColorInfo().getColor(nighMode)) {
+				colorId != appMode.getIconColorInfo().getColor(nighMode)) {
 			this.appMode = appMode;
-			this.color = appMode.getIconColorInfo().getColor(nighMode);
+			this.colorId = appMode.getIconColorInfo().getColor(nighMode);
 			this.nm = nighMode;
 			this.locationOutdated = locationOutdated;
-			bearingIcon = (LayerDrawable) view.getResources().getDrawable(appMode.getNavigationIcon().getIconId());
-			DrawableCompat.setTint(bearingIcon.getDrawable(1), ContextCompat.getColor(view.getContext(), color));
+			navigationIcon = (LayerDrawable) view.getResources().getDrawable(appMode.getNavigationIcon().getIconId());
+			DrawableCompat.setTint(navigationIcon.getDrawable(1), ContextCompat.getColor(view.getContext(), colorId));
 			headingIcon = BitmapFactory.decodeResource(view.getResources(), appMode.getLocationIcon().getHeadingIconId());
 			locationIcon = (LayerDrawable) view.getResources().getDrawable(appMode.getLocationIcon().getIconId());
-			DrawableCompat.setTint(locationIcon.getDrawable(1), ContextCompat.getColor(view.getContext(), color));
+			DrawableCompat.setTint(locationIcon.getDrawable(1), ContextCompat.getColor(view.getContext(), colorId));
 			area.setColor(view.getResources().getColor(!nm ? R.color.pos_area : R.color.pos_area_night));
 		}
 	}
