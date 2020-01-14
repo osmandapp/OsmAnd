@@ -1802,7 +1802,7 @@ Lon %2$s</string>
     <string name="dashboard_or_drawer_title">Übersichtsseite oder Menüsteuerung</string>
     <string name="dashboard_or_drawer_description">Es besteht die Möglichkeit, die App primär über die flexible Übersichtsseite oder ein statisches Menü zu steuern. Ihre Wahl kann jederzeit in den Übersichtsseiten-Einstellungen geändert werden.</string>
     <string name="access_from_map">Aufruf von der Karte aus</string>
-    <string name="favorite_category_add_new">Neu erstellen</string>
+    <string name="favorite_category_add_new">Neue Katagorie erstellen</string>
     <string name="next_proceed">Weiter</string>
     <string name="file_size_in_mb">%.1f MB</string>
     <string name="please_specify_poi_type_only_from_list">Bitte einen gültigen POI-Typ angeben oder überspringen.</string>
@@ -3426,4 +3426,5 @@ Lon %2$s</string>
     <string name="reset_all_profile_settings_descr">Alle Profil-Einstellungen werden auf den Ausgangszustand nach App-Installation zurückgesetzt.</string>
     <string name="reset_all_profile_settings">Alle Profil-Einstellungen auf den Standard zurücksetzen\?</string>
     <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
+    <string name="ltr_or_rtl_combine_via_space">%1$s %2$s</string>
 </resources>
