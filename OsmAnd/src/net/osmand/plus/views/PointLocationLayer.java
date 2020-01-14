@@ -7,12 +7,10 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.PointF;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffColorFilter;
 import android.graphics.RectF;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.LayerDrawable;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
 
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
@@ -34,10 +32,8 @@ import static android.graphics.Paint.FILTER_BITMAP_FLAG;
 public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider {
 	private static final Log LOG = PlatformUtil.getLog(PointLocationLayer.class);
 
-
 	protected final static int RADIUS = 7;
 
-	private Paint locationPaint;
 	private Paint headingPaint;
 	private Paint area;
 	private Paint aroundArea;
@@ -46,11 +42,9 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 
 	private ApplicationMode appMode;
 	private int color;
-	private Bitmap bearingIcon;
+	private LayerDrawable bearingIcon;
+	private LayerDrawable locationIcon;
 	private Bitmap headingIcon;
-	private Bitmap locationIconCenter;
-	private Bitmap locationIconTop;
-	private Bitmap locationIconBottom;
 	private OsmAndLocationProvider locationProvider;
 	private MapViewTrackingUtilities mapViewTrackingUtilities;
 	private boolean nm;
@@ -61,7 +55,6 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 	}
 
 	private void initUI() {
-		locationPaint = new Paint(ANTI_ALIAS_FLAG | FILTER_BITMAP_FLAG);
 		headingPaint = new Paint(ANTI_ALIAS_FLAG | FILTER_BITMAP_FLAG);
 		area = new Paint();
 		area.setColor(view.getResources().getColor(R.color.pos_area));
@@ -123,40 +116,29 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 
 			Float heading = locationProvider.getHeading();
 			if (!locationOutdated && heading != null && mapViewTrackingUtilities.isShowViewAngle()) {
-
 				canvas.save();
 				canvas.rotate(heading - 180, locationX, locationY);
 				canvas.drawBitmap(headingIcon, locationX - headingIcon.getWidth() / 2,
 						locationY - headingIcon.getHeight() / 2, headingPaint);
 				canvas.restore();
-
 			}
 			// Issue 5538: Some devices return positives for hasBearing() at rest, hence add 0.0 check:
 			boolean isBearing = lastKnownLocation.hasBearing() && (lastKnownLocation.getBearing() != 0.0);
 			if (!locationOutdated && isBearing) {
 				float bearing = lastKnownLocation.getBearing();
 				canvas.rotate(bearing - 90, locationX, locationY);
-				canvas.drawBitmap(bearingIcon, locationX - bearingIcon.getWidth() / 2,
-						locationY - bearingIcon.getHeight() / 2, locationPaint);
+				bearingIcon.setBounds(locationX - bearingIcon.getIntrinsicWidth() / 2, locationY - bearingIcon.getIntrinsicHeight() / 2,
+						locationX + bearingIcon.getIntrinsicWidth() / 2, locationY + bearingIcon.getIntrinsicHeight() / 2);
+				bearingIcon.draw(canvas);
 			} else {
-				if (locationIconTop != null) {
-					canvas.drawBitmap(locationIconTop, locationX - locationIconCenter.getWidth() / 2,
-							locationY - locationIconCenter.getHeight() / 2, headingPaint);
-				}
-				if (locationIconCenter != null) {
-					canvas.drawBitmap(locationIconCenter, locationX - locationIconCenter.getWidth() / 2,
-							locationY - locationIconCenter.getHeight() / 2, locationPaint);
-				}
-				if (locationIconBottom != null) {
-					canvas.drawBitmap(locationIconBottom, locationX - locationIconCenter.getWidth() / 2,
-							locationY - locationIconCenter.getHeight() / 2, headingPaint);
-				}
+				locationIcon.setBounds(locationX - locationIcon.getIntrinsicWidth() / 2, locationY - locationIcon.getIntrinsicHeight() / 2,
+						locationX + locationIcon.getIntrinsicWidth() / 2, locationY + locationIcon.getIntrinsicHeight() / 2);
+				locationIcon.draw(canvas);
 			}
-
 		}
 	}
 
-	public boolean isLocationVisible(RotatedTileBox tb, Location l) {
+	private boolean isLocationVisible(RotatedTileBox tb, Location l) {
 		return l != null && tb.containsLatLon(l.getLatitude(), l.getLongitude());
 	}
 
@@ -171,21 +153,11 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 			this.color = appMode.getIconColorInfo().getColor(nighMode);
 			this.nm = nighMode;
 			this.locationOutdated = locationOutdated;
-			bearingIcon = BitmapFactory.decodeResource(view.getResources(), appMode.getNavigationIcon().getIconId());
+			bearingIcon = (LayerDrawable) view.getResources().getDrawable(appMode.getNavigationIcon().getIconId());
+			DrawableCompat.setTint(bearingIcon.getDrawable(1), ContextCompat.getColor(view.getContext(), color));
 			headingIcon = BitmapFactory.decodeResource(view.getResources(), appMode.getLocationIcon().getHeadingIconId());
-			if (locationOutdated) {
-				locationPaint.setColorFilter(new PorterDuffColorFilter(ContextCompat.getColor(view.getContext(),
-						R.color.icon_color_secondary_light), PorterDuff.Mode.SRC_IN));
-			} else {
-				locationPaint.setColorFilter(new PorterDuffColorFilter(ContextCompat.getColor(view.getContext(), color),
-						PorterDuff.Mode.SRC_IN));
-			}
-			LayerDrawable layerDrawable = (LayerDrawable) ContextCompat.getDrawable(view.getContext(), appMode.getLocationIcon().getIconId());
-			if (layerDrawable != null) {
-				locationIconTop = ((BitmapDrawable) layerDrawable.getDrawable(0)).getBitmap();
-				locationIconCenter = ((BitmapDrawable) layerDrawable.getDrawable(1)).getBitmap();
-				locationIconBottom = ((BitmapDrawable) layerDrawable.getDrawable(2)).getBitmap();
-			}
+			locationIcon = (LayerDrawable) view.getResources().getDrawable(appMode.getLocationIcon().getIconId());
+			DrawableCompat.setTint(locationIcon.getDrawable(1), ContextCompat.getColor(view.getContext(), color));
 			area.setColor(view.getResources().getColor(!nm ? R.color.pos_area : R.color.pos_area_night));
 		}
 	}
@@ -206,7 +178,6 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 	public LatLon getObjectLocation(Object o) {
 		return getMyLocation();
 	}
-
 
 	@Override
 	public PointDescription getObjectName(Object o) {
