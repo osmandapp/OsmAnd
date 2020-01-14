@@ -946,8 +946,8 @@
     <string name="map_widget_intermediate_distance">Zwischenziel</string>
     <string name="ending_point_too_far">Endpunkt zu weit von der nächsten Straße entfernt.</string>
     <string name="intermediate_point_too_far">Zwischenziel %1$s ist zu weit von der nächsten Straße entfernt.</string>
-    <string name="context_menu_item_last_intermediate_point">Als letztes Zwischenziel einfügen</string>
-    <string name="context_menu_item_first_intermediate_point">Als erstes Zwischenziel einfügen</string>
+    <string name="context_menu_item_last_intermediate_point">Als letztes Zwischenziel hinzufügen</string>
+    <string name="context_menu_item_first_intermediate_point">Als erstes Zwischenziel hinzufügen</string>
     <string name="target_point">Ziel %1$s</string>
     <string name="shared_string_target_points">Ziele</string>
     <string name="add_as_first_destination_point">Als erstes Zwischenziel hinzufügen</string>
@@ -2789,7 +2789,7 @@ Lon %2$s</string>
     <string name="off_road_render_descr">Für den Einsatz im Gelände, basierend auf dem \'Topo\'-Kartenstil und zur Verwendung mit grünen Satellitenbildern als Unterlagekarte. Verringerte Linienstärke für Straßen, erhöhte für Fußwege, Wander-, Rad- und andere Outdoor-Routen.</string>
     <string name="touring_view_render_descr">Touring-Stil mit hohem Kontrast und maximalen Details. Enthält alle Optionen des OsmAnd-Standardstils und zeigt dabei so viele Details wie möglich an, insbesondere Straßen, Pfade und andere Verkehrswege. Klare Unterscheidung zwischen den Straßentypen durch den „Touring-Atlas“. Geeignet für den Einsatz bei Tag, Nacht und im Freien.</string>
     <string name="access_intermediate_arrival_time">Ankunftszeit Zwischenziel</string>
-    <string name="map_widget_intermediate_time">Reisezeit Zwischenziel</string>
+    <string name="map_widget_intermediate_time">Zwischenankunftszeit</string>
     <string name="unirs_render_descr">Änderung des Standardstils, um den Kontrast von Fußgänger- und Fahrradwegen zu erhöhen. Verwendet alte Mapnik-Farben.</string>
     <string name="shared_string_gpx_files">GPX-Dateien</string>
     <string name="get_osmand_live">Holen Sie sich OsmAnd Live, um alle Funktionen freizuschalten: Tägliche Karten-Updates mit unbegrenzten Downloads, alle kostenpflichtigen und kostenlosen Plugins, Wikipedia, Wikivoyage und vieles mehr.</string>
