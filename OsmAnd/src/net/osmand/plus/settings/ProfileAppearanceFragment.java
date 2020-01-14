@@ -7,11 +7,13 @@ import android.content.DialogInterface;
 import android.graphics.Matrix;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceViewHolder;
@@ -26,7 +28,6 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
@@ -72,6 +73,8 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 	public static final String PROFILE_ICON_RES_KEY = "profile_icon_res_key";
 	public static final String PROFILE_COLOR_KEY = "profile_color_key";
 	public static final String PROFILE_PARENT_KEY = "profile_parent_key";
+	public static final String PROFILE_LOCATION_ICON_KEY = "profile_location_icon_key";
+	public static final String PROFILE_NAVIGATION_ICON_KEY = "profile_navigation_icon_key";
 	public static final String BASE_PROFILE_FOR_NEW = "base_profile_for_new";
 	private SelectProfileBottomSheetDialogFragment.SelectProfileListener parentProfileListener;
 	private EditText baseProfileName;
@@ -80,7 +83,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 	private EditText profileName;
 	private FlowLayout colorItems;
 	private FlowLayout iconItems;
-	private FlowLayout mapIconItems;
+	private FlowLayout locationIconItems;
 	private FlowLayout navIconItems;
 	private OsmandTextFieldBoxes profileNameOtfb;
 	private View saveButton;
@@ -108,6 +111,8 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 			profile.iconRes = baseModeForNewProfile.getIconRes();
 			profile.routingProfile = baseModeForNewProfile.getRoutingProfile();
 			profile.routeService = baseModeForNewProfile.getRouteService();
+			profile.locationIcon = baseModeForNewProfile.getLocationIcon();
+			profile.navigationIcon = baseModeForNewProfile.getNavigationIcon();
 		} else {
 			profile.stringKey = getSelectedAppMode().getStringKey();
 			profile.parent = getSelectedAppMode().getParent();
@@ -116,6 +121,8 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 			profile.iconRes = getSelectedAppMode().getIconRes();
 			profile.routingProfile = getSelectedAppMode().getRoutingProfile();
 			profile.routeService = getSelectedAppMode().getRouteService();
+			profile.locationIcon = getSelectedAppMode().getLocationIcon();
+			profile.navigationIcon = getSelectedAppMode().getNavigationIcon();
 		}
 		changedProfile = new ApplicationProfileObject();
 		if (savedInstanceState != null) {
@@ -132,6 +139,8 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 			changedProfile.iconRes = profile.iconRes;
 			changedProfile.routingProfile = profile.routingProfile;
 			changedProfile.routeService = profile.routeService;
+			changedProfile.locationIcon = profile.locationIcon;
+			changedProfile.navigationIcon = profile.navigationIcon;
 		}
 	}
 
@@ -255,6 +264,8 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 		if (changedProfile.parent != null) {
 			outState.putString(PROFILE_PARENT_KEY, changedProfile.parent.getStringKey());
 		}
+		outState.putSerializable(PROFILE_LOCATION_ICON_KEY, changedProfile.locationIcon);
+		outState.putSerializable(PROFILE_NAVIGATION_ICON_KEY, changedProfile.navigationIcon);
 	}
 
 	private void restoreState(Bundle savedInstanceState) {
@@ -264,6 +275,8 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 		changedProfile.color = (ApplicationMode.ProfileIconColors) savedInstanceState.getSerializable(PROFILE_COLOR_KEY);
 		String parentStringKey = savedInstanceState.getString(PROFILE_PARENT_KEY);
 		changedProfile.parent = ApplicationMode.valueOfStringKey(parentStringKey, null);
+		changedProfile.locationIcon = (ApplicationMode.LocationIcon) savedInstanceState.getSerializable(PROFILE_LOCATION_ICON_KEY);
+		changedProfile.navigationIcon = (ApplicationMode.NavigationIcon) savedInstanceState.getSerializable(PROFILE_NAVIGATION_ICON_KEY);
 	}
 
 	@Override
@@ -282,11 +295,6 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 				profileIcon.setImageDrawable(getPaintedIcon(changedProfile.iconRes, iconColor));
 			}
 		}
-	}
-
-	@Override
-	protected void updatePreference(Preference preference) {
-		super.updatePreference(preference);
 	}
 
 	@Override
@@ -353,16 +361,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 			for (ApplicationMode.ProfileIconColors color : ApplicationMode.ProfileIconColors.values()) {
 				View colorItem = createColorItemView(color, colorItems);
 				colorItems.addView(colorItem, new FlowLayout.LayoutParams(0, 0));
-				ImageView outlineCircle = colorItem.findViewById(R.id.outlineCircle);
-				ImageView checkMark = colorItem.findViewById(R.id.checkMark);
-				GradientDrawable gradientDrawable = (GradientDrawable) ContextCompat.getDrawable(app, R.drawable.circle_contour_bg_light);
-				if (gradientDrawable != null) {
-					gradientDrawable.setStroke(AndroidUtils.dpToPx(app, 2),
-							UiUtilities.getColorWithAlpha(ContextCompat.getColor(app, color.getColor(isNightMode())), 0.3f));
-					outlineCircle.setImageDrawable(gradientDrawable);
-				}
-				checkMark.setVisibility(View.GONE);
-				outlineCircle.setVisibility(View.GONE);
+
 			}
 			updateColorSelector(changedProfile.color);
 		} else if (ICON_ITEMS.equals(preference.getKey())) {
@@ -375,20 +374,21 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 			}
 			setIconNewColor(changedProfile.iconRes);
 		} else if (LOCATION_ICON_ITEMS.equals(preference.getKey())) {
-			mapIconItems = (FlowLayout) holder.findViewById(R.id.color_items);
-			mapIconItems.removeAllViews();
-			for (ApplicationMode.LocationIcon iconRes : ApplicationMode.LocationIcon.values()) {
-				View iconItemView = createLocationIconView(iconRes, mapIconItems);
-				mapIconItems.addView(iconItemView, new FlowLayout.LayoutParams(0, 0));
+			locationIconItems = (FlowLayout) holder.findViewById(R.id.color_items);
+			locationIconItems.removeAllViews();
+			for (ApplicationMode.LocationIcon locationIcon : ApplicationMode.LocationIcon.values()) {
+				View iconItemView = createLocationIconView(locationIcon, locationIconItems);
+				locationIconItems.addView(iconItemView, new FlowLayout.LayoutParams(0, 0));
 			}
-
+			updateLocationIconSelector(changedProfile.locationIcon);
 		} else if (NAV_ICON_ITEMS.equals(preference.getKey())) {
 			navIconItems = (FlowLayout) holder.findViewById(R.id.color_items);
 			navIconItems.removeAllViews();
-			for (ApplicationMode.NavigationIcon iconRes : ApplicationMode.NavigationIcon.values()) {
-				View iconItemView = createNavigationIconView(iconRes, navIconItems);
+			for (ApplicationMode.NavigationIcon navigationIcon : ApplicationMode.NavigationIcon.values()) {
+				View iconItemView = createNavigationIconView(navigationIcon, navIconItems);
 				navIconItems.addView(iconItemView, new FlowLayout.LayoutParams(0, 0));
 			}
+			updateNavigationIconSelector(changedProfile.navigationIcon);
 		}
 	}
 
@@ -404,9 +404,22 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 			public void onClick(View v) {
 				if (colorRes != changedProfile.color) {
 					updateColorSelector(colorRes);
+					updatePreference(findPreference(MASTER_PROFILE));
+					updatePreference(findPreference(LOCATION_ICON_ITEMS));
 				}
 			}
 		});
+
+		ImageView outlineCircle = colorItemView.findViewById(R.id.outlineCircle);
+		ImageView checkMark = colorItemView.findViewById(R.id.checkMark);
+		GradientDrawable gradientDrawable = (GradientDrawable) ContextCompat.getDrawable(app, R.drawable.circle_contour_bg_light);
+		if (gradientDrawable != null) {
+			gradientDrawable.setStroke(AndroidUtils.dpToPx(app, 2),
+					UiUtilities.getColorWithAlpha(ContextCompat.getColor(app, colorRes.getColor(isNightMode())), 0.3f));
+			outlineCircle.setImageDrawable(gradientDrawable);
+		}
+		checkMark.setVisibility(View.GONE);
+		outlineCircle.setVisibility(View.GONE);
 		colorItemView.setTag(colorRes);
 		return colorItemView;
 	}
@@ -422,8 +435,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 		if (iconItems != null) {
 			setIconNewColor(changedProfile.iconRes);
 		}
-		int selectedColor = ContextCompat.getColor(app,
-				changedProfile.color.getColor(isNightMode()));
+		int selectedColor = ContextCompat.getColor(app, changedProfile.color.getColor(isNightMode()));
 		profileNameOtfb.setPrimaryColor(selectedColor);
 		profileName.getBackground().mutate().setColorFilter(selectedColor, PorterDuff.Mode.SRC_ATOP);
 		updateProfileButton();
@@ -462,14 +474,15 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 						UiUtilities.getColorWithAlpha(ContextCompat.getColor(app, R.color.icon_color_default_light), 0.1f)));
 		changedProfile.iconRes = iconRes;
 		updateProfileButton();
-		updateLocationIconSelector();
 	}
 
-	private View createLocationIconView(ApplicationMode.LocationIcon locationIcon, ViewGroup rootView) {
+	private View createLocationIconView(final ApplicationMode.LocationIcon locationIcon, ViewGroup rootView) {
 		FrameLayout locationIconView = (FrameLayout) UiUtilities.getInflater(getContext(), isNightMode())
 				.inflate(R.layout.preference_select_icon_button, rootView, false);
-		locationIconView.<ImageView>findViewById(R.id.icon)
-				.setImageDrawable(ContextCompat.getDrawable(app, locationIcon.getIconId()));
+		LayerDrawable locationIconDrawable = (LayerDrawable) app.getResources().getDrawable(locationIcon.getIconId());
+		DrawableCompat.setTint(locationIconDrawable.getDrawable(1), ContextCompat.getColor(app, changedProfile.color.getColor(
+				app.getDaynightHelper().isNightModeForMapControls())));
+		locationIconView.<ImageView>findViewById(R.id.icon).setImageDrawable(locationIconDrawable);
 		locationIconView.<ImageView>findViewById(R.id.headingIcon)
 				.setImageDrawable(ContextCompat.getDrawable(app, locationIcon.getHeadingIconId()));
 		ImageView coloredRect = locationIconView.findViewById(R.id.backgroundRect);
@@ -479,9 +492,9 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 		coloredRect.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-//						if (locationIcon != changedProfile.locationIcon) {
-//							updateIconSelector(locationIcon);
-//						}
+				if (locationIcon != changedProfile.locationIcon) {
+					updateLocationIconSelector(locationIcon);
+				}
 			}
 		});
 		ImageView outlineRect = locationIconView.findViewById(R.id.outlineRect);
@@ -493,17 +506,26 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 		}
 		outlineRect.setImageDrawable(rectContourDrawable);
 		outlineRect.setVisibility(View.GONE);
+		locationIconView.setTag(locationIcon);
 		return locationIconView;
 	}
 
-	private void updateLocationIconSelector() {
+	private void updateLocationIconSelector(ApplicationMode.LocationIcon locationIcon) {
+		View viewWithTag = locationIconItems.findViewWithTag(changedProfile.locationIcon);
+		viewWithTag.findViewById(R.id.outlineRect).setVisibility(View.GONE);
+		viewWithTag = locationIconItems.findViewWithTag(locationIcon);
+		viewWithTag.findViewById(R.id.outlineRect).setVisibility(View.VISIBLE);
+		changedProfile.locationIcon = locationIcon;
 	}
 
-	private View createNavigationIconView(ApplicationMode.NavigationIcon navigationIcon, ViewGroup rootView) {
+	private View createNavigationIconView(final ApplicationMode.NavigationIcon navigationIcon, ViewGroup rootView) {
 		FrameLayout navigationIconView = (FrameLayout) UiUtilities.getInflater(getContext(), isNightMode())
 				.inflate(R.layout.preference_select_icon_button, rootView, false);
+		LayerDrawable navigationIconDrawable = (LayerDrawable) app.getResources().getDrawable(navigationIcon.getIconId());
+		DrawableCompat.setTint(navigationIconDrawable.getDrawable(1), ContextCompat.getColor(app, changedProfile.color.getColor(
+				app.getDaynightHelper().isNightModeForMapControls())));
 		ImageView imageView = navigationIconView.findViewById(R.id.icon);
-		imageView.setImageDrawable(ContextCompat.getDrawable(app, navigationIcon.getIconId()));
+		imageView.setImageDrawable(navigationIconDrawable);
 		Matrix matrix = new Matrix();
 		imageView.setScaleType(ImageView.ScaleType.MATRIX);
 		matrix.postRotate((float) -90, imageView.getDrawable().getIntrinsicWidth() / 2,
@@ -516,9 +538,9 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 		coloredRect.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-//						if (navigationIcon != changedProfile.navigationIcon) {
-//							updateIconSelector(navigationIcon);
-//						}
+				if (navigationIcon != changedProfile.navigationIcon) {
+					updateNavigationIconSelector(navigationIcon);
+				}
 			}
 		});
 		ImageView outlineRect = navigationIconView.findViewById(R.id.outlineRect);
@@ -530,12 +552,16 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 		}
 		outlineRect.setImageDrawable(rectContourDrawable);
 		outlineRect.setVisibility(View.GONE);
-		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(164, AndroidUtils.dpToPx(app, 80));
-		navigationIconView.setLayoutParams(params);
+		navigationIconView.setTag(navigationIcon);
 		return navigationIconView;
 	}
 
-	private void updateNavigationIconSelector() {
+	private void updateNavigationIconSelector(ApplicationMode.NavigationIcon navigationIcon) {
+		View viewWithTag = navIconItems.findViewWithTag(changedProfile.navigationIcon);
+		viewWithTag.findViewById(R.id.outlineRect).setVisibility(View.GONE);
+		viewWithTag = navIconItems.findViewWithTag(navigationIcon);
+		viewWithTag.findViewById(R.id.outlineRect).setVisibility(View.VISIBLE);
+		changedProfile.navigationIcon = navigationIcon;
 	}
 
 	private void setIconNewColor(int iconRes) {
@@ -611,7 +637,9 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 				.icon(app, ApplicationMode.ProfileIcons.getResStringByResId(changedProfile.iconRes))
 				.setRouteService(changedProfile.routeService)
 				.setRoutingProfile(changedProfile.routingProfile)
-				.setColor(changedProfile.color);
+				.setColor(changedProfile.color)
+				.locationIcon(changedProfile.locationIcon)
+				.navigationIcon(changedProfile.navigationIcon);
 
 		ApplicationMode mode = ApplicationMode.saveProfile(builder, getMyApplication());
 		if (!ApplicationMode.values(app).contains(mode)) {
@@ -688,6 +716,8 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 		int iconRes;
 		String routingProfile;
 		RouteProvider.RouteService routeService;
+		ApplicationMode.NavigationIcon navigationIcon;
+		ApplicationMode.LocationIcon locationIcon;
 
 		@Override
 		public boolean equals(Object o) {
@@ -704,7 +734,9 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 			if (color != that.color) return false;
 			if (routingProfile != null ? !routingProfile.equals(that.routingProfile) : that.routingProfile != null)
 				return false;
-			return routeService == that.routeService;
+			if (routeService != that.routeService) return false;
+			if (navigationIcon != that.navigationIcon) return false;
+			return locationIcon == that.locationIcon;
 		}
 
 		@Override
@@ -716,6 +748,8 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 			result = 31 * result + iconRes;
 			result = 31 * result + (routingProfile != null ? routingProfile.hashCode() : 0);
 			result = 31 * result + (routeService != null ? routeService.hashCode() : 0);
+			result = 31 * result + (navigationIcon != null ? navigationIcon.hashCode() : 0);
+			result = 31 * result + (locationIcon != null ? locationIcon.hashCode() : 0);
 			return result;
 		}
 	}
