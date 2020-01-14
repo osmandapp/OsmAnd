@@ -40,6 +40,8 @@ import net.osmand.plus.myplaces.AvailableGPXFragment;
 import net.osmand.plus.myplaces.AvailableGPXFragment.GpxInfo;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.osmedit.OsmPoint.Action;
+import net.osmand.plus.settings.BaseSettingsFragment;
+import net.osmand.plus.settings.OsmEditingFragment;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.Algorithms;
 
@@ -188,6 +190,16 @@ public class OsmEditingPlugin extends OsmandPlugin {
 	@Override
 	public Class<? extends Activity> getSettingsActivity() {
 		return SettingsOsmEditingActivity.class;
+	}
+
+	@Override
+	public Class<? extends BaseSettingsFragment> getSettingsFragment() {
+		return OsmEditingFragment.class;
+	}
+
+	@Override
+	public String getPrefsDescription() {
+		return null;
 	}
 
 	@Override

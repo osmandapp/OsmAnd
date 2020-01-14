@@ -29,6 +29,7 @@ import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadResources;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
+import net.osmand.plus.settings.BaseSettingsFragment;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.util.Algorithms;
@@ -422,6 +423,16 @@ public class SRTMPlugin extends OsmandPlugin {
 	
 	@Override
 	public Class<? extends Activity> getSettingsActivity() {
+		return null;
+	}
+
+	@Override
+	public Class<? extends BaseSettingsFragment> getSettingsFragment() {
+		return null;
+	}
+
+	@Override
+	public String getPrefsDescription() {
 		return null;
 	}
 

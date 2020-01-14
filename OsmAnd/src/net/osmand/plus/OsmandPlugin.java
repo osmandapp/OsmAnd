@@ -36,6 +36,7 @@ import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
+import net.osmand.plus.settings.BaseSettingsFragment;
 import net.osmand.plus.skimapsplugin.SkiMapsPlugin;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -61,9 +62,11 @@ public abstract class OsmandPlugin {
 
 	public abstract String getId();
 
+	public abstract String getName();
+
 	public abstract String getDescription();
 
-	public abstract String getName();
+	public abstract String getPrefsDescription();
 
 	public abstract int getAssetResourceName();
 
@@ -73,6 +76,8 @@ public abstract class OsmandPlugin {
 	}
 
 	public abstract Class<? extends Activity> getSettingsActivity();
+
+	public abstract Class<? extends BaseSettingsFragment> getSettingsFragment();
 
 	public String getVersion() {
 		return "";

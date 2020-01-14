@@ -64,6 +64,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.myplaces.FavoritesActivity;
+import net.osmand.plus.settings.BaseSettingsFragment;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.TextInfoWidget;
@@ -1788,6 +1789,15 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		return SettingsAudioVideoActivity.class;
 	}
 
+	@Override
+	public Class<? extends BaseSettingsFragment> getSettingsFragment() {
+		return null;
+	}
+
+	@Override
+	public String getPrefsDescription() {
+		return null;
+	}
 
 	@Override
 	public void onMapActivityExternalResult(int requestCode, int resultCode, Intent data) {

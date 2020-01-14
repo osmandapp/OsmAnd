@@ -13,6 +13,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.settings.BaseSettingsFragment;
 
 public class AccessibilityPlugin extends OsmandPlugin {
 
@@ -63,6 +64,16 @@ public class AccessibilityPlugin extends OsmandPlugin {
 	@Override
 	public Class<? extends Activity> getSettingsActivity() {
 		return SettingsAccessibilityActivity.class;
+	}
+
+	@Override
+	public Class<? extends BaseSettingsFragment> getSettingsFragment() {
+		return null;
+	}
+
+	@Override
+	public String getPrefsDescription() {
+		return null;
 	}
 
 	@Override

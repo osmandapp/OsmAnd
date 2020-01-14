@@ -42,6 +42,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityLayers;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dialogs.RasterMapMenu;
+import net.osmand.plus.settings.BaseSettingsFragment;
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.Algorithms;
@@ -411,6 +412,15 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		return SettingsRasterMapsActivity.class;
 	}
 
+	@Override
+	public Class<? extends BaseSettingsFragment> getSettingsFragment() {
+		return null;
+	}
+
+	@Override
+	public String getPrefsDescription() {
+		return null;
+	}
 
 	public static void installMapLayers(final Activity activity, final ResultMatcher<TileSourceTemplate> result) {
 		final OsmandApplication app = (OsmandApplication) activity.getApplication();
