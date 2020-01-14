@@ -3774,4 +3774,6 @@
     <string name="poi_community_gender_male">Género de la comunidad: masculino</string>
     <string name="poi_community_gender_mixed">Género de la comunidad: mixto</string>
     <string name="poi_grave">Tumba</string>
+    <string name="poi_parking_space">Espacio de estacionamiento</string>
+    <string name="poi_url">URL</string>
 </resources>
