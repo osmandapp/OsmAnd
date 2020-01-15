@@ -780,8 +780,8 @@
     <string name="clear_dest_confirm">Ви впевнені, що хочете вилучити пункт призначення (і проміжні точки)?</string>
     <string name="recording_context_menu_show">Показати</string>
     <string name="recording_photo_description">Фото %1$s %2$s</string>
-    <string name="av_def_action_picture">Сфотографувати</string>
-    <string name="recording_context_menu_precord">Сфотографувати</string>
+    <string name="av_def_action_picture">Зробити світлину</string>
+    <string name="recording_context_menu_precord">Зробити світлину</string>
     <string name="dropbox_plugin_description">Втулок Dropbox дозволяє вам часоузгодити треки та звуко/відео-примітки з вашим обліковим записом Dropbox.</string>
     <string name="dropbox_plugin_name">Втулок Dropbox</string>
     <string name="intermediate_points_change_order">Змінити порядок</string>
@@ -797,7 +797,7 @@
     <string name="av_video_format">Формат відео</string>
     <string name="av_use_external_recorder_descr">Використовувати системну програму для запису відео.</string>
     <string name="av_use_external_recorder">Використовувати системну програму</string>
-    <string name="av_use_external_camera_descr">Використовувати системну програму для фотографій.</string>
+    <string name="av_use_external_camera_descr">Використовувати системний додаток для світлин.</string>
     <string name="recording_unavailable">недоступно</string>
     <string name="shared_string_control_stop">Стоп</string>
     <string name="shared_string_control_start">Старт</string>
@@ -2417,18 +2417,18 @@
 \nОтримайте надійний навігатор у вашій країні — будь то Україна, Франція, Німеччина, Мексика, Великобританія, Іспанія, Нідерланди, США, Росія, Бразилія чи будь-яка інша…
 \n</string>
     <string name="save_poi_too_many_uppercase">Назва містить занадто багато великих літер. Продовжити?</string>
-    <string name="shared_string_add_photos">Додати фотографії</string>
+    <string name="shared_string_add_photos">Додати світлини</string>
     <string name="mapillary_action_descr">Поділитися своїми вуличними видами цієї місцевості через Mapillary.</string>
     <string name="mapillary_widget">Віджет Mapillary</string>
     <string name="mapillary_widget_descr">Дозволяє швидко зробити внесок в Mapillary.</string>
     <string name="mapillary_descr">Світлини вулиць в мережі для всіх. Відкрийте для себе місця, діліться та знимкуйте весь світ.</string>
-    <string name="plugin_mapillary_descr">Вуличні фотографії для усіх. Відкривайте для себе місця, співпрацюйте, знімкуйте світ.</string>
-    <string name="online_photos">Мережеві світлинознімки</string>
+    <string name="plugin_mapillary_descr">Вуличні світлини для усіх. Відкривайте для себе місця, співпрацюйте, знімкуйте світ.</string>
+    <string name="online_photos">Мережеві світлини</string>
     <string name="no_photos_descr">Тут нема світлин.</string>
     <string name="open_mapillary">Відкрити Mapillary</string>
     <string name="shared_string_install">Встановити</string>
     <string name="improve_coverage_mapillary">Поліпшити фото-покриття Mapillary</string>
-    <string name="improve_coverage_install_mapillary_desc">Встановіть Mapillary, щоб додати одну або кілька фотографій до цього місця на мапі.</string>
+    <string name="improve_coverage_install_mapillary_desc">Встановіть Mapillary, щоб додати одну або кілька світлин до цього місця на мапі.</string>
     <string name="mapillary_image">Зображення Mapillary</string>
     <string name="distance_moving">Відстань виправлена</string>
     <string name="shared_string_permissions">Права доступу</string>
@@ -2445,7 +2445,7 @@
     <string name="mapillary_menu_edit_text_hint">Введіть ім\'я користувача</string>
     <string name="mapillary_menu_descr_username">Переглянути лише зображення додані</string>
     <string name="mapillary_menu_title_username">Ім\'я користувача</string>
-    <string name="mapillary_menu_filter_description">Фільтрувати фотографії за подавачем, датою чи типом. Фільтри застосовуються лише для великих масштабів.</string>
+    <string name="mapillary_menu_filter_description">Фільтрувати світлини за подавачем, датою чи видом. Фільтри застосовуються лише для великих масштабів.</string>
     <string name="shared_string_reset">Скинути</string>
     <string name="store_tracks_in_monthly_directories">Зберігати записані треки у помісячних теках</string>
     <string name="store_tracks_in_monthly_directories_descrp">Зберігати записані треки в підтеках відповідно місяцю запису (наприклад, 2018-01).</string>
@@ -3412,4 +3412,5 @@
     <string name="reset_all_profile_settings_descr">Усі налаштування профілю буде скинуто після встановлення.</string>
     <string name="reset_all_profile_settings">Скинути всі усталені налаштування профілю\?</string>
     <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
+    <string name="ltr_or_rtl_combine_via_space">%1$s %2$s</string>
 </resources>
