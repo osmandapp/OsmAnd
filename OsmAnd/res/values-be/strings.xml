@@ -3415,4 +3415,48 @@
     <string name="move_maps_to_new_destination">Перамясціць у новы пункт прызначэння</string>
     <string name="store_tracks_in_daily_directories_descrp">Запісваць сляды кожны дзень у новы падкаталог (напрыклад, 2018-01-01).</string>
     <string name="update_all_maps_q">Сапраўды хочаце абнавіць усе мапы (%1$d)\?</string>
+    <string name="select_base_profile_dialog_message">Стварыце свой профіль на аснове аднаго з базавых профіляў - гэта будзе вызначаць асноўныя параметры, такія як віджэты, адзінкі хуткасці і адлегласці. Гэта тыповыя профілі дадатку, якія разам з прыкладамі карыстацкіх профіляў могуць быць пашыраныя да:</string>
+    <string name="routing_attr_allow_classic_only_description">Маршруты, падрыхтаваныя толькі для класічнага стылю без канькабежных трас. Сюды ўваходзяць маршруты, падрыхтаваныя невялікім снегаходам з больш свабоднай лыжнёй і трасамі, падрыхтаваныя ўручную лыжнікамі.</string>
+    <string name="download_detailed_map">Сцягнуць падрабязную мапу %s, каб прагледзець гэтую вобласць.</string>
+    <string name="internal_app_storage_description">Унутранае сховішча, схаванае ад карыстальніка і іншых дадаткаў, даступнае выключна для OsmAnd</string>
+    <string name="change_data_storage_folder">Змена каталога захавання даных</string>
+    <string name="rendering_attr_piste_type_snow_park_name">Ландшафтны парк</string>
+    <string name="rendering_attr_piste_type_sleigh_name">Самаходныя і несамаходныя сані (запрэжкі)</string>
+    <string name="rendering_attr_piste_type_sled_name">Толькі самаходныя сані</string>
+    <string name="rendering_attr_piste_type_hike_name">Паход</string>
+    <string name="rendering_attr_piste_type_connection_name">Злучэнне</string>
+    <string name="rendering_attr_piste_type_skitour_name">Скітур</string>
+    <string name="rendering_attr_piste_type_downhill_name">Спуск</string>
+    <string name="rendering_attr_piste_type_nordic_name">Скандынаўскі</string>
+    <string name="routeInfo_piste_type_name">Тып гарналыжнай трасы</string>
+    <string name="rendering_attr_piste_difficulty_novice_name">Пачатковец</string>
+    <string name="rendering_attr_piste_difficulty_easy_name">Лёгка</string>
+    <string name="rendering_attr_piste_difficulty_intermediate_name">Сярэдняя</string>
+    <string name="rendering_attr_piste_difficulty_advanced_name">Высокая</string>
+    <string name="rendering_attr_piste_difficulty_expert_name">Эксперт</string>
+    <string name="rendering_attr_piste_difficulty_freeride_name">Фрырайд</string>
+    <string name="rendering_attr_piste_difficulty_extreme_name">Экстрым</string>
+    <string name="rendering_attr_piste_difficulty_undefined_name">Не вызначана</string>
+    <string name="routeInfo_piste_difficulty_name">Складанасць гарналыжнай трасы</string>
+    <string name="routing_attr_width_name">Абмежаванне па шырыні</string>
+    <string name="routing_attr_width_description">Увядзіце шырыню транспартнага сродку для ўліку пры пастраенні маршруту.</string>
+    <string name="release_3_5">• Абноўлены налады прыкладання і профілю. Цяпер налады размешчаны па тыпу. Кожны профіль можна наладзіць асобна.
+\n 
+\n  • Новы дыялог загрузкі мапы, які прапануе загрузіць мапу падчас прагляду
+\n 
+\n  • Выпраўленне цёмнай тэмы
+\n 
+\n  • Выпраўлена некалькі праблем з маршрутызацыяй па ўсім свеце
+\n 
+\n  • Абноўленая базавая мапа з больш падрабязнай дарожнай сеткай
+\n 
+\n  • Выпраўлены затопленыя раёны па ўсім свеце
+\n 
+\n  • Гарналыжная траса: дададзены профіль вышынь і складанасць маршруту
+\n 
+\n  • Іншыя выпраўленні памылак
+\n
+\n</string>
+    <string name="simulate_your_location_gpx_descr">Сімуляваць сваю пазіцыю выкарыстоўваючы запісаны GPX след.</string>
+    <string name="quick_action_directions_from_desc">Кнопка, каб усталяваць цэнтр экрана ў пункце адпраўлення, таксама прыкладанне пракладзе шлях да раней абранага пункта прызначэння або адкрые дыялог, каб выбраць пункт прызначэння, калі яго няма на карце.</string>
 </resources>
