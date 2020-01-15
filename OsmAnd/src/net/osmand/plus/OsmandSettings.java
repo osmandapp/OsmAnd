@@ -833,17 +833,23 @@ public class OsmandSettings {
 		}
 
 		@Override
-		protected Boolean getValue(Object prefs, Boolean defaultValue) {
-			return ctx.accessibilityEnabled() ?
-					super.getValue(prefs, defaultValue) :
-					defaultValue;
+		public Boolean get() {
+			return ctx.accessibilityEnabled() ? super.get() : getDefaultValue();
 		}
 
 		@Override
-		protected boolean setValue(Object prefs, Boolean val) {
-			return ctx.accessibilityEnabled() ?
-					super.setValue(prefs, val) :
-					false;
+		public Boolean getModeValue(ApplicationMode mode) {
+			return ctx.accessibilityEnabledForMode(mode) ? super.getModeValue(mode) : getDefaultValue();
+		}
+
+		@Override
+		public boolean set(Boolean obj) {
+			return ctx.accessibilityEnabled() && super.set(obj);
+		}
+
+		@Override
+		public boolean setModeValue(ApplicationMode mode, Boolean obj) {
+			return ctx.accessibilityEnabledForMode(mode) && super.setModeValue(mode, obj);
 		}
 	}
 
