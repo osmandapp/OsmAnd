@@ -3402,7 +3402,7 @@
     <string name="tts_initialization_error">Немагчыма запусціць механізм пераўтварэння тэксту ў гаворку</string>
     <string name="export_profile">Экспарт профілю</string>
     <string name="exported_osmand_profile">Профіль OsmAnd: %1$s</string>
-    <string name="overwrite_profile_q">Профіль \'%1$s\' ужо існуе. Перазапісаць\?</string>
+    <string name="overwrite_profile_q">Профіль \"%1$s\" ужо існуе. Перазапісаць\?</string>
     <string name="export_profile_failed">Не атрымалася экспартаваць профіль.</string>
     <string name="profile_import">Імпарт профілю</string>
     <string name="profile_import_descr">Каб імпартаваць профіль, выберыце яго файл на прыстасаванні і адкрыйце з дапамогай OsmAnd.</string>
