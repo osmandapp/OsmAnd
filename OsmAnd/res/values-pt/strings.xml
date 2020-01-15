@@ -2208,7 +2208,7 @@
     <string name="ski_map_render_descr">Para esquiar. Contém pistas de esqui, elevadores, pistas de cross country, etc. Escurece objetos de mapa secundários.</string>
     <string name="light_rs_render_descr">Estilo simples e contrastante para a navegação do carro. É suave para os olhos no modo noturno. Características principais: curvas de nível, estradas contrastantes de estilo laranja, menos objetos secundários do mapa para evitar distrações.</string>
     <string name="topo_render_descr">Para caminhadas, trekking e ciclismo de natureza. Legível ao ar livre. Estradas e objetos naturais contrastantes, diferentes tipos de rotas, opções avançadas de linha de contorno, detalhes extras. O ajuste da integridade da superfície distingue a qualidade da estrada. Sem modo noturno.</string>
-    <string name="mapnik_render_descr">Velho estilo de renderização padrão \'Mapnik\'. Características principais: as cores são semelhantes ao estilo \'Mapnik\'.</string>
+    <string name="mapnik_render_descr">O velho estilo padrão \'Mapnik\'. Cores como \'Mapnik\'.</string>
     <string name="touring_view_render_descr">Estilo de alto detalhe para turismo. Inclui todas as opções de configuração de estilo padrão e além disso: mostra o máximo de detalhes possível, em particular todas as estradas, caminhos e outras formas de viajar. Distinção visual clara entre todos os tipos de estradas diferentes, reminiscente de muitos mapas de turismo. Esquema de cores de alto contraste para uso ao ar livre, modo diurno e noturno.</string>
     <string name="default_render_descr">Estilo de propósito geral. Renderização simplificada e limpa em cidades densamente povoadas. Características principais: linhas de contorno, rotas, qualidade de superfície, restrições de acesso, escudos rodoviários, caminhos de renderização de acordo com a escala SAC, características desportivas Whitewater.</string>
     <string name="open_wikipedia_link_online">Abrir página da Wikipédia na Internet</string>
@@ -2233,14 +2233,14 @@
     <string name="download_file">Descarregar ficheiro</string>
     <string name="start_editing_card_image_text">O mundo livre guia de viagem, que qualquer pessoa pode editar.</string>
     <string name="welcome_to_open_beta_description">Os guias de viagem estão atualmente baseados no Wikivoyage. Teste todos os recursos gratuitamente durante o teste aberto beta. Posteriormente os guias de viagem estarão disponíveis para assinantes do OsmAnd Unlimited e proprietários da OsmAnd+.</string>
-    <string name="start_editing_card_description">Pode e deve editar qualquer artigo no Wikivoyage. Partilhe saber, experiência, talento e a sua atenção</string>
+    <string name="start_editing_card_description">Pode e deve editar qualquer artigo no Wikivoyage. Partilhe saber, experiência, talento e a sua atenção.</string>
     <string name="start_editing">Começar a editar</string>
     <string name="get_unlimited_access">Obter acesso ilimitado</string>
     <string name="welcome_to_open_beta">Bem-vindo ao beta aberto</string>
     <string name="wikivoyage_travel_guide">Guias de viagem</string>
     <string name="wikivoyage_travel_guide_descr">Guias para os lugares mais interessantes do mundo dentro do OsmAnd, sem uma conexão com a Internet.</string>
-    <string name="monthly_map_updates">Atualizações de mapa: a cada mês</string>
-    <string name="daily_map_updates">Atualizações de mapa: a cada hora</string>
+    <string name="monthly_map_updates">Atualizações de mapa mensais</string>
+    <string name="daily_map_updates">Atualizações de mapa a cada hora</string>
     <string name="in_app_purchase">Compra na aplicação</string>
     <string name="in_app_purchase_desc">Pagamento de uma só vez</string>
     <string name="in_app_purchase_desc_ex">Uma vez comprado, estará sempre disponível para si.</string>
@@ -2252,7 +2252,7 @@
     <string name="unlock_all_features">Desbloquear todas as características de OsmAnd</string>
     <string name="purchase_dialog_title">Escolher plano</string>
     <string name="purchase_dialog_travel_description">Compre uma das opções seguintes para receber a funcionalidade da guia de viagem offline:</string>
-    <string name="purchase_dialog_subtitle">Escolha o artigo adequado:</string>
+    <string name="purchase_dialog_subtitle">Escolha o artigo adequado</string>
     <string name="shared_string_dont">Não</string>
     <string name="shared_string_do">Fazer</string>
     <string name="shared_string_only_with_wifi">Apenas em Wi-Fi</string>
@@ -2269,7 +2269,7 @@
     <string name="download_maps_travel">Guias de viagem</string>
     <string name="shared_string_wikivoyage">Wikivoyage</string>
     <string name="article_removed">Artigo removido</string>
-    <string name="wikivoyage_search_hint">Pesquisa: país, cidade, província</string>
+    <string name="wikivoyage_search_hint">Pesquisar por país, cidade ou província</string>
     <string name="shared_string_read">Ler</string>
     <string name="saved_articles">Artigos marcados</string>
     <string name="shared_string_explore">Explorar</string>
@@ -2284,8 +2284,8 @@
     <string name="clear_all_intermediates">Limpar todos os pontos intermediários</string>
     <string name="group_deleted">Grupo eliminado</string>
     <string name="rendering_attr_whiteWaterSports_name">Whitewater esportes</string>
-    <string name="distance_farthest">Distância: primeiro o mais distante</string>
-    <string name="distance_nearest">Distância: primeiro o mais próximo</string>
+    <string name="distance_farthest">Primeiro o mais distante</string>
+    <string name="distance_nearest">Primeiro o mais próximo</string>
     <string name="enter_lon">Digite a longitude</string>
     <string name="enter_lat">Digite a latitude</string>
     <string name="enter_lat_and_lon">Digite a latitude e a longitude</string>
@@ -2304,7 +2304,7 @@
     <string name="enter_the_file_name">Digite o nome do ficheiro.</string>
     <string name="map_import_error">Erro de importação de mapa</string>
     <string name="map_imported_successfully">Mapa importado</string>
-    <string name="make_as_start_point">Faça este o ponto de partida</string>
+    <string name="make_as_start_point">Fazer este o ponto de partida</string>
     <string name="shared_string_current">Atual</string>
     <string name="last_intermediate_dest_description">Adiciona paragem intermédia</string>
     <string name="first_intermediate_dest_description">Adiciona paragem inicial</string>
@@ -2315,8 +2315,8 @@
     <string name="osc_file_desc">OSC - adequado para exportar para o OpenStreetMap.</string>
     <string name="shared_string_gpx_file">Ficheiro GPX</string>
     <string name="osc_file">Ficheiro OSC</string>
-    <string name="choose_file_type">Escolha o tipo de ficheiro</string>
-    <string name="osm_edits_export_desc">Selecione o tipo de exportação: notas do OSM, POI ou ambos.</string>
+    <string name="choose_file_type">Selecione o tipo de ficheiro</string>
+    <string name="osm_edits_export_desc">Selecione o tipo de exportação: notas do OSM, POIs ou ambos.</string>
     <string name="all_data">Todos os dados</string>
     <string name="osm_notes">Notas do OSM</string>
     <string name="will_open_tomorrow_at">Abre amanhã às</string>
@@ -2348,11 +2348,11 @@
 \n• Assinatura OsmAnd Live agora suporta todas as funcionalidades do OsmAnd
 \n
 \n</string>
-    <string name="modify_the_search_query">Modificar a consulta de pesquisa.</string>
+    <string name="modify_the_search_query">Modifique a sua pesquisa.</string>
     <string name="shared_string_actions">Ações</string>
     <string name="shared_string_marker">Marcador</string>
     <string name="empty_state_osm_edits">Criar ou modificar objetos OSM</string>
-    <string name="empty_state_osm_edits_descr">Criar ou modifiquar POI OSM, abrir ou comentar notas do OSM e contribuir com ficheiros gravados GPX.</string>
+    <string name="empty_state_osm_edits_descr">Criar ou modificar POIs do OSM, abrir ou comentar notas do OSM e contribuir com ficheiros gravados de GPX.</string>
     <string name="shared_string_deleted">Eliminado</string>
     <string name="shared_string_edited">Editado</string>
     <string name="shared_string_added">Adicionado</string>
@@ -3436,4 +3436,6 @@
     <string name="reset_confirmation_descr">Ao clicar em %1$s perderá todas as suas alterações.</string>
     <string name="reset_all_profile_settings_descr">Todas as configurações de perfil serão redefinidas para o estado após a instalação.</string>
     <string name="reset_all_profile_settings">Redefinir todas as configurações de perfil para o padrão\?</string>
+    <string name="ltr_or_rtl_combine_via_space">%1$s %2$s</string>
+    <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
 </resources>
