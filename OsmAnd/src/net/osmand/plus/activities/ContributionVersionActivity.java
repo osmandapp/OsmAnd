@@ -257,20 +257,23 @@ public class ContributionVersionActivity extends OsmandListActivity {
 			OsmAndBuild build = getItem(position);
 			TextView tagView = (TextView) row.findViewById(R.id.download_tag);
 			tagView.setText(build.tag);
-			
-			TextView description = (TextView) row.findViewById(R.id.download_descr);
-			StringBuilder format = new StringBuilder();
-			format.append(AndroidUtils.formatDateTime(getMyApplication(), build.date.getTime()))/*.append(" : ").append(build.size).append(" MB")*/;
-			description.setText(format.toString());
 
-			int color = getResources().getColor(R.color.color_unknown);
-			if(currentInstalledDate != null){
-				if(currentInstalledDate.before(build.date)){
-					color = getResources().getColor(R.color.color_update);
+
+			if (build.date != null) {
+				TextView description = (TextView) row.findViewById(R.id.download_descr);
+				StringBuilder format = new StringBuilder();
+				format.append(AndroidUtils.formatDateTime(getMyApplication(), build.date.getTime()))/*.append(" : ").append(build.size).append(" MB")*/;
+				description.setText(format.toString());
+				int color = getResources().getColor(R.color.color_unknown);
+				if (currentInstalledDate != null) {
+					if (currentInstalledDate.before(build.date)) {
+						color = getResources().getColor(R.color.color_update);
+					}
 				}
+				description.setTextColor(color);
+				tagView.setTextColor(color);
 			}
-			description.setTextColor(color);
-			tagView.setTextColor(color);
+
 			return row;
 		}
 		
