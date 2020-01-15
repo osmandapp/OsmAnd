@@ -183,6 +183,10 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 		findPreference(SELECT_ICON).setIconSpaceReserved(false);
 		findPreference(SELECT_LOCATION_ICON).setIconSpaceReserved(false);
 		findPreference(SELECT_NAV_ICON).setIconSpaceReserved(false);
+		if (getSelectedAppMode().equals(ApplicationMode.DEFAULT)) {
+			findPreference(SELECT_ICON).setVisible(false);
+			findPreference(ICON_ITEMS).setVisible(false);
+		}
 	}
 
 	@SuppressLint("InlinedApi")
@@ -326,6 +330,9 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 					}
 				}
 			});
+			if (getSelectedAppMode().equals(ApplicationMode.DEFAULT)) {
+				profileName.setFocusable(false);
+			}
 			profileNameOtfb = (OsmandTextFieldBoxes) holder.findViewById(R.id.profile_name_otfb);
 		} else if (MASTER_PROFILE.equals(preference.getKey())) {
 			baseProfileName = (EditText) holder.findViewById(R.id.master_profile_et);

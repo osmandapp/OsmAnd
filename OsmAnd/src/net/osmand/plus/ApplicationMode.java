@@ -832,6 +832,7 @@ public class ApplicationMode {
 	}
 
 	public enum ProfileIcons {
+		DEFAULT(R.drawable.ic_world_globe_dark, R.string.app_mode_default, "ic_world_globe_dark"),
 		CAR(R.drawable.ic_action_car_dark, R.string.app_mode_car, "ic_action_car_dark"),
 		TAXI(R.drawable.ic_action_taxi, R.string.app_mode_taxi, "ic_action_taxi"),
 		TRUCK(R.drawable.ic_action_truck_dark, R.string.app_mode_truck, "ic_action_truck_dark"),
@@ -856,7 +857,8 @@ public class ApplicationMode {
 		CAMPER(R.drawable.ic_action_camper, R.string.app_mode_camper, "ic_action_camper"),
 		PICKUP_TRUCK(R.drawable.ic_action_pickup_truck, R.string.app_mode_pickup_truck, "ic_action_pickup_truck"),
 		WAGON(R.drawable.ic_action_wagon, R.string.app_mode_wagon, "ic_action_wagon"),
-		UTV(R.drawable.ic_action_utv, R.string.app_mode_utv, "ic_action_utv");
+		UTV(R.drawable.ic_action_utv, R.string.app_mode_utv, "ic_action_utv"),
+		OSM(R.drawable.ic_action_osmand_logo, R.string.app_mode_osm, "ic_action_osmand_logo");
 
 		@DrawableRes
 		private int resId;
@@ -896,7 +898,7 @@ public class ApplicationMode {
 					return pi.resStringId;
 				}
 			}
-			return CAR.getResStringId();
+			return DEFAULT.getResStringId();
 		}
 	}
 
