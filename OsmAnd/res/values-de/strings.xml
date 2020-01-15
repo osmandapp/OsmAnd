@@ -709,7 +709,7 @@
     <string name="follow">Zielführung starten</string>
     <string name="recalculate_route_to_your_location">Nutzerprofil:</string>
     <string name="mark_final_location_first">Bitte zuerst ein Ziel festlegen</string>
-    <string name="get_directions">Wegbeschreibung</string>
+    <string name="get_directions">Navigation</string>
     <string name="opening_hours">Öffnungszeiten</string>
     <string name="opening_changeset">Änderungssatz öffnen…</string>
     <string name="closing_changeset">Änderungssatz schließen…</string>
