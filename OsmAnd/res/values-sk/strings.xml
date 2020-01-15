@@ -79,7 +79,7 @@
 \n
 \nDlaždicové mapy môžete získať priamo zo zdrojov na Internete, alebo ich môžete pripraviť na použitie offline (skopírovať ručne do dátového priečinka OsmAnd) ako SQLite databázu, ktorú vedia vytvoriť viaceré programy na prípravu máp.</string>
     <string name="osmand_background_plugin_description">Zobrazí nastavenia na zapnutie stopovania a navigácie v pozadí systému pravidelným prebúdzaním GPS zariadenia (pri vypnutej obrazovke).</string>
-    <string name="osmand_accessibility_description">Tento modul zobrazí funkcie uľahčenia prístupu priamo v OsmAnd. Napr. je možné zmeniť rýchlosť TTS hlasu, použiť trackball na približovanie, alebo automaticky oznamovať polohu hlasom.</string>
+    <string name="osmand_accessibility_description">Tento modul zobrazí funkcie uľahčenia prístupu priamo v OsmAnd. Napr. je možné zmeniť rýchlosť generovaného hlasu, použiť trackball na približovanie, alebo automaticky oznamovať polohu hlasom.</string>
     <string name="osmand_development_plugin_description">Tento modul zobrazí nastavenia pre funkcie vývoja a ladenia, ako simulácia trasy, zobrazenie výkonu vykresľovania alebo hlasové oznamy. Tieto nastavenia sú určené pre vývojárov a nie sú potrebné pre bežné použitie programu.</string>
     <string name="plugins_screen">Zásuvné moduly</string>
     <string name="prefs_plugins_descr">Zásuvné moduly aktivujú pokročilé nastavenia a dodatočné funkcie.</string>
@@ -193,9 +193,7 @@
     <string name="global_settings">Globálne nastavenia</string>
     <string name="global_app_settings">Globálne nastavenia aplikácie</string>
     <string name="download_files_not_enough_space">Nie je dostatok voľného miesta pre stiahnutie %1$s MB (voľné: %2$s).</string>
-    <string name="download_files_question_space">Naozaj stiahnuť {0} súbor(ov)?
- V úložisku je potrebných {1} MB.
- (Dostupné miesto je {2} MB.)</string>
+    <string name="download_files_question_space">Stiahnuť {0} súbor(ov)\? Bude použitých {1} MB (z {2} MB).</string>
     <string name="use_transparent_map_theme">Priehľadná téma</string>
     <string name="native_library_not_supported">Natívna knižnica nie je podporovaná na tomto zariadení.</string>
     <string name="init_native_library">Inicializácia natívnej knižnice…</string>
@@ -679,7 +677,7 @@
     <string name="osb_comment_dialog_message">Správa</string>
     <string name="osb_comment_dialog_author">Meno autora</string>
     <string name="osb_comment_dialog_success">Komentár pridaný</string>
-    <string name="osb_comment_dialog_error">Nepodarilo sa pridať komentár</string>
+    <string name="osb_comment_dialog_error">Nepodarilo sa pridať komentár.</string>
     <string name="poi_edit_title">Upravenie bodu záujmu (POI)</string>
     <string name="poi_create_title">Vytvorenie bodu záujmu (POI)</string>
     <string name="poi_error_poi_not_found">Bod sa nedá nájsť alebo je bod záujmu tvorený viacerými bodmi, s čím zatiaľ nie je možné pracovať.</string>
@@ -891,7 +889,7 @@ Proporčná pamäť %4$s MB (Limit Androidu %5$s MB, Dalvik %6$s MB).</string>
     <string name="map_widget_distancemeasurement">Meranie vzdialenosti</string>
     <string name="audionotes_location_not_defined">Umiestnenie na spojenie s poznámkou ešte nie je definované. Ak chcete priradiť poznámku k vybranému umiestneniu, použite \"Použiť umiestnenie…\".</string>
     <string name="map_widget_audionotes">Zvukové poznámky</string>
-    <string name="audionotes_plugin_description">Modul Audio/video poznámok poskytuje funkcie na vytváranie obrazových/zvukových/video poznámok počas výletu, buď tlačidlom na obrazovke mapy alebo priamo v kontextovom menu bodu na mape.</string>
+    <string name="audionotes_plugin_description">Modul Audio/video poznámok poskytuje funkcie na vytváranie obrazových/zvukových/video poznámok počas výletu, buď tlačidlom na mape alebo priamo v kontextovom menu bodu na mape.</string>
     <string name="audionotes_plugin_name">Audio/video poznámky</string>
     <string name="srtm_plugin_description">Tento modul poskytuje vrstevnice a tieňované reliéfy, ktoré môžu byť zobrazené ponad štandardné mapy. Táto funkcia je vhodná pre atlétov, turistov, chodcov a všetkých, ktorých zaujíma reliéf terénu. (Samotné vrstevnice sú samostatnými dátami, ktoré je potrebné stiahnuť po aktivovaní modulu.) 
 \n 
@@ -1287,9 +1285,9 @@ Proporčná pamäť %4$s MB (Limit Androidu %5$s MB, Dalvik %6$s MB).</string>
     <string name="speed_limit_exceed_message">Zvoľte toleranciu prekročenia povolenej rýchlosti, po ktorej dostanete hlasové oznámenie.</string>
     <string name="anonymous_user">Anonymný používateľ</string>
     <string name="logged_as">Prihlásený ako %1$s</string>
-    <string name="anonymous_user_hint">Anonymný používateľ nemôže:
-\n- Vytvárať skupiny;
-\n- Synchronizovať skupiny a zariadenia so serverom;
+    <string name="anonymous_user_hint">Anonymní používatelia nemôžu:
+\n- Vytvárať skupiny; 
+\n- Synchronizovať skupiny a zariadenia so serverom; 
 \n- Spravovať skupiny a zariadenia na osobnej nástenke na webovej stránke.</string>
     <string name="rendering_category_details">Podrobnosti</string>
     <string name="rendering_category_transport">Doprava</string>
@@ -1453,7 +1451,7 @@ Proporčná pamäť %4$s MB (Limit Androidu %5$s MB, Dalvik %6$s MB).</string>
     <string name="shared_string_remember_my_choice">Zapamätať voľbu</string>
     <string name="shared_string_refresh">Obnoviť</string>
     <string name="shared_string_download">Stiahnuť</string>
-    <string name="shared_string_downloading">Sťahovanie</string>
+    <string name="shared_string_downloading">Sťahovanie…</string>
     <string name="shared_string_download_successful">Stiahnuté</string>
     <string name="shared_string_io_error">Chyba čítania/zápisu</string>
     <string name="shared_string_unexpected_error">Neočakávaná chyba</string>
@@ -1500,7 +1498,7 @@ Dĺžka %2$s</string>
     <string name="waypoint_visit_after">Navštíviť po</string>
     <string name="waypoint_visit_before">Navštíviť pred</string>
     <string name="shared_string_collapse">Skryť</string>
-    <string name="local_osm_changes_upload_all_confirm">Idete odoslať %1$d zmien do OSM. Ste si istí?</string>
+    <string name="local_osm_changes_upload_all_confirm">Naozaj chcete odoslať %1$d zmien do OSM\?</string>
     <string name="confirmation_to_clear_history">Vymazať históriu?</string>
     <string name="osmand_parking_overdue">prekročený čas</string>
     <string name="confirm_usage_speed_cameras">Vo viacerých krajinách (ako Nemecko, Francúzsko, Taliansko) je použitie varovaní pred rýchlostnými radarmi/kamerami zakázané zákonom (nelegálne). OsmAnd nepreberá žiadnu zodpovednosť ak porušíte zákon. Stlačte \"Áno\" len ak ste na to oprávnený použiť túto funkciu.</string>
@@ -1512,7 +1510,7 @@ Dĺžka %2$s</string>
     <string name="osm_changes_added_to_local_edits">Zmeny OSM pridané do lokálnej sady zmien</string>
     <string name="mark_to_delete">Označte pre výmaz</string>
     <string name="agps_info">Informácie o A-GPS</string>
-    <string name="agps_data_last_downloaded">A-GPS dáta boli naposledy stiahnuté: %1$s</string>
+    <string name="agps_data_last_downloaded">A-GPS dáta boli stiahnuté: %1$s</string>
     <string name="shared_string_message">Správa</string>
     <string name="shared_string_do_not_use">Nepoužívať</string>
     <string name="shared_string_address">Adresa</string>
@@ -1555,12 +1553,12 @@ Dĺžka %2$s</string>
     <string name="shared_string_show_details">Zobraziť detaily</string>
     <string name="download_wikipedia_maps">Wikipédia</string>
     <string name="shared_string_import2osmand">Importovať do OsmAnd</string>
-    <string name="local_recordings_delete_all_confirm">Chystáte sa vymazať %1$d poznámok. Ste si istí?</string>
-    <string name="gps_network_not_enabled">Služba zisťovania pozície vypnutá. Zapnúť teraz?</string>
+    <string name="local_recordings_delete_all_confirm">Naozaj chcete vymazať %1$d poznámok\?</string>
+    <string name="gps_network_not_enabled">Služba zisťovania pozície je vypnutá. Zapnúť teraz\?</string>
     <string name="disable_recording_once_app_killed">Zakázať samostatné zaznamenávanie</string>
     <string name="disable_recording_once_app_killed_descrp">Zastaví záznam GPX keď je aplikácia ukončená (cez nedávne aplikácie). (Ikona režimu na pozadí zmizne z notifikačnej oblasti Androidu.)</string>
     <string name="archive_wikipedia_data">Máte stiahnuté staré nekompatibilné dáta z Wikipédie. Chcete ich archivovať?</string>
-    <string name="download_wikipedia_files">Stiahnuť ďalšie dáta z Wikipédie (%1$s MB) ?</string>
+    <string name="download_wikipedia_files">Stiahnuť ďalšie dáta z Wikipédie (%1$s MB)\?</string>
     <string name="lang_es_ar">Španielsky (Argentína)</string>
     <string name="lang_nb">Nórsky Bokmål</string>
     <string name="lang_vo">Volapuk</string>
@@ -1609,7 +1607,7 @@ Dĺžka %2$s</string>
     <string name="rendering_value_blue_name">Modrá</string>
     <string name="rendering_value_purple_name">Fialová</string>
     <string name="rendering_value_translucent_purple_name">Priehľadná fialová</string>
-    <string name="restart_is_required">Manuálne reštartujte aplikáciu pre použitie všetkých zmien.</string>
+    <string name="restart_is_required">Pre použitie zmeny je potrebný reštart aplikácie.</string>
     <string name="rendering_value_default13_name">Predvolená (13)</string>
     <string name="rendering_value_defaultTranslucentCyan_name">Predvolená (priehľadná azúrová)</string>
     <string name="rendering_value_translucent_blue_name">Priehľadná modrá</string>
@@ -1669,7 +1667,7 @@ Dĺžka %2$s</string>
     <string name="favourites_context_menu_add">Pridať Obľúbený bod</string>
     <string name="roads">Cesty</string>
     <string name="favorite_category_add_new">Pridať nový</string>
-    <string name="favorite_category_select">Zvoľte kategóriu</string>
+    <string name="favorite_category_select">Vyberte kategóriu</string>
     <string name="default_speed_system_descr">Zvoľte jednotku rýchlosti.</string>
     <string name="default_speed_system">Jednotka rýchlosti</string>
     <string name="nm">nmi</string>
@@ -1775,9 +1773,9 @@ Dĺžka %2$s</string>
     <string name="osn_reopen_dialog_title">Znovuotvoriť poznámku</string>
     <string name="osn_close_dialog_title">Uzavrieť poznámku</string>
     <string name="osn_add_dialog_success">Poznámka vytvorená</string>
-    <string name="osn_add_dialog_error">Nepodarilo sa vytvoriť poznámku</string>
+    <string name="osn_add_dialog_error">Nepodarilo sa vytvoriť poznámku.</string>
     <string name="osn_close_dialog_success">Poznámka uzavretá</string>
-    <string name="osn_close_dialog_error">Nepodarilo sa uzavrieť poznámku</string>
+    <string name="osn_close_dialog_error">Nepodarilo sa uzavrieť poznámku.</string>
     <string name="shared_string_commit">Odoslať</string>
     <string name="rendering_attr_currentTrackColor_description">Farba GPX</string>
     <string name="rendering_attr_currentTrackWidth_description">Šírka GPX</string>
@@ -1815,9 +1813,9 @@ Dĺžka %2$s</string>
     <string name="missing_write_external_storage_permission">OsmAnd nemá oprávnenie použiť pamäťovú kartu</string>
     <string name="impassable_road_desc">Vyberte cesty, ktorým sa chcete navigácii vyhnúť.</string>
     <string name="shared_string_sound">Zvuk</string>
-    <string name="no_location_permission">Aplikácia nemá oprávnenia na prístup k údajom o polohe.</string>
-    <string name="no_camera_permission">Aplikácia nemá oprávnenia na prístup k fotoaparátu.</string>
-    <string name="no_microphone_permission">Aplikácia nemá oprávnenia na prístup k mikrofónu.</string>
+    <string name="no_location_permission">Udeľte oprávnenie na prístup k údajom o polohe.</string>
+    <string name="no_camera_permission">Udeľte oprávnenia na prístup k fotoaparátu.</string>
+    <string name="no_microphone_permission">Udeľte oprávnenia na prístup k mikrofónu.</string>
     <string name="select_voice_provider">Zvoľte hlasové pokyny</string>
     <string name="select_voice_provider_descr">Vyberte alebo stiahnite hlasové pokyny pre váš jazyk.</string>
     <string name="live_updates">Okamžité aktualizácie</string>
@@ -1866,10 +1864,8 @@ Dĺžka %2$s</string>
     <string name="rendering_attr_showMtbRoutes_name">Zobraziť trasy pre horské bicykle</string>
     <string name="select_map_marker">Zvoľte mapovú značku</string>
     <string name="map_markers_other">Iné značky</string>
-    <string name="download_files_error_not_enough_space">Nedostatok miesta!
- V úložisku je dočasne je potrebných {3} MB, natrvalo {1} MB.
- Dostupné miesto je len {2} MB.</string>
-    <string name="download_files_question_space_with_temp">Naozaj stiahnuť {0} súbor(ov)? V úložisku je dočasne je potrebných {3} MB, natrvalo {1} MB. ({2} MB voľného miesta.)</string>
+    <string name="download_files_error_not_enough_space">Nedostatok miesta! V úložisku je dočasne je potrebných {3} MB, natrvalo {1} MB. (Dostupných je len {2} MB.)</string>
+    <string name="download_files_question_space_with_temp">Naozaj stiahnuť {0} súbor(ov)\? V úložisku je dočasne je potrebných {3} MB, natrvalo {1} MB. (Z {2} MB.)</string>
     <string name="upload_osm_note_description">Odošlite OSM poznámku anonymne alebo použite svoj účet na OpenStreetMap.org.</string>
     <string name="upload_osm_note">Odoslať OSM poznámku</string>
     <string name="map_marker_1st">Prvá mapová značka</string>
@@ -1894,11 +1890,11 @@ Dĺžka %2$s</string>
     <string name="osm_editors_ranking">Pozícia medzi editormi OSM</string>
     <string name="osm_live_subscription">Predplatné OsmAnd Live</string>
     <string name="osm_live_subscribe_btn">Registrovať</string>
-    <string name="osm_live_email_desc">Potrebné pre poskytnutie Vám informácií o príspevkoch.</string>
+    <string name="osm_live_email_desc">Potrebné pre informovanie vás o vašich príspevkoch.</string>
     <string name="osm_live_user_public_name">Verejné meno</string>
     <string name="osm_live_hide_user_name">Nezobrazovať moje meno v prehľadoch</string>
     <string name="osm_live_support_region">Podporovaný región</string>
-    <string name="osm_live_month_cost">Mesačná cena</string>
+    <string name="osm_live_month_cost">Cena za mesiac</string>
     <string name="osm_live_month_cost_desc">Mesačná platba</string>
     <string name="osm_live_active">Aktívne</string>
     <string name="osm_live_not_active">Neaktívne</string>
@@ -3409,4 +3405,5 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="reset_all_profile_settings_descr">Všetky nastavenia profilu budú vrátené do východzieho stavu.</string>
     <string name="reset_all_profile_settings">Resetovať nastavenia profilu na predvolené hodnoty\?</string>
     <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
+    <string name="ltr_or_rtl_combine_via_space">%1$s %2$s</string>
 </resources>

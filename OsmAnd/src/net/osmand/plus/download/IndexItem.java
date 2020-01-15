@@ -89,7 +89,7 @@ public class IndexItem implements Comparable<IndexItem> {
 	}
 
 	public String getSizeDescription(Context ctx) {
-		return ctx.getString(R.string.ltr_or_rtl_combine_via_colon, size, "MB");
+		return ctx.getString(R.string.ltr_or_rtl_combine_via_space, size, "MB");
 	}
 	
 
