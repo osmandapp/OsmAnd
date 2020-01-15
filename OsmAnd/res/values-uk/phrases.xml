@@ -3755,4 +3755,6 @@
     <string name="poi_community_gender_male">Стать спільноти: чоловіча</string>
     <string name="poi_community_gender_mixed">Стать спільноти: обидві статі</string>
     <string name="poi_grave">Могила</string>
+    <string name="poi_parking_space">Паркувальне місце</string>
+    <string name="poi_url">URL</string>
 </resources>
