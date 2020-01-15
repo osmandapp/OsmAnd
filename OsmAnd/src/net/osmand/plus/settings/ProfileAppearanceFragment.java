@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Matrix;
 import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
@@ -413,6 +414,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 					updateColorSelector(colorRes);
 					updatePreference(findPreference(MASTER_PROFILE));
 					updatePreference(findPreference(LOCATION_ICON_ITEMS));
+					updatePreference(findPreference(NAV_ICON_ITEMS));
 				}
 			}
 		});
@@ -486,12 +488,14 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 	private View createLocationIconView(final ApplicationMode.LocationIcon locationIcon, ViewGroup rootView) {
 		FrameLayout locationIconView = (FrameLayout) UiUtilities.getInflater(getContext(), isNightMode())
 				.inflate(R.layout.preference_select_icon_button, rootView, false);
+		int changedProfileColor = ContextCompat.getColor(app, changedProfile.color.getColor(
+				app.getDaynightHelper().isNightModeForMapControls()));
 		LayerDrawable locationIconDrawable = (LayerDrawable) app.getResources().getDrawable(locationIcon.getIconId());
-		DrawableCompat.setTint(locationIconDrawable.getDrawable(1), ContextCompat.getColor(app, changedProfile.color.getColor(
-				app.getDaynightHelper().isNightModeForMapControls())));
+		DrawableCompat.setTint(locationIconDrawable.getDrawable(1), changedProfileColor);
 		locationIconView.<ImageView>findViewById(R.id.icon).setImageDrawable(locationIconDrawable);
-		locationIconView.<ImageView>findViewById(R.id.headingIcon)
-				.setImageDrawable(ContextCompat.getDrawable(app, locationIcon.getHeadingIconId()));
+		ImageView headingIcon = locationIconView.findViewById(R.id.headingIcon);
+		headingIcon.setImageDrawable(ContextCompat.getDrawable(app, locationIcon.getHeadingIconId()));
+		headingIcon.setColorFilter(new PorterDuffColorFilter(changedProfileColor, PorterDuff.Mode.SRC_IN));
 		ImageView coloredRect = locationIconView.findViewById(R.id.backgroundRect);
 		AndroidUtils.setBackground(coloredRect,
 				UiUtilities.tintDrawable(ContextCompat.getDrawable(app, R.drawable.bg_select_icon_button),
@@ -506,8 +510,6 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 		});
 		ImageView outlineRect = locationIconView.findViewById(R.id.outlineRect);
 		GradientDrawable rectContourDrawable = (GradientDrawable) ContextCompat.getDrawable(app, R.drawable.bg_select_icon_button_outline);
-		int changedProfileColor = ContextCompat.getColor(app, changedProfile.color.getColor(
-				app.getDaynightHelper().isNightModeForMapControls()));
 		if (rectContourDrawable != null) {
 			rectContourDrawable.setStroke(AndroidUtils.dpToPx(app, 2), changedProfileColor);
 		}
