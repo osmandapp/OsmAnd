@@ -129,7 +129,7 @@ public class ApplicationMode {
 	public static final ApplicationMode SKI = createBase(R.string.app_mode_skiing, "ski")
 			.speed(1.38f, 15).arrivalDistance(60).offRouteDistance(50)
 			.locationIcon(LocationIcon.BICYCLE).navigationIcon(NavigationIcon.CAR)
-			.icon(R.drawable.ic_action_skiing, R.drawable.ic_action_skiing, "ic_action_skiing")
+			.icon(R.drawable.ic_action_skiing, R.drawable.map_action_skiing, "ic_action_skiing")
 			.setRoutingProfile("ski").description(R.string.base_profile_descr_ski).reg();
 
 	private static class ApplicationModeBean {
