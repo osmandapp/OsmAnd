@@ -709,12 +709,11 @@ public class VoiceRouter {
 			boolean isPlay = true;
 			ExitInfo exitInfo = next.getExitInfo();
 			if (tParam != null) {
-				p.turn(tParam, dist, getSpeakableStreetName(currentSegment, next, true));
-//				if (exitInfo != null) {
-//					p.takeExit(tParam, dist, getSpeakableExitName(next, exitInfo, true));
-//				} else {
-//					p.turn(tParam, dist, getSpeakableStreetName(currentSegment, next, true));
-//				}
+				if (exitInfo != null) {
+					p.takeExit(tParam, dist, Integer.parseInt(exitInfo.getRef()), getSpeakableExitName(next, exitInfo, true));
+				} else {
+					p.turn(tParam, dist, getSpeakableStreetName(currentSegment, next, true));
+				}
 				suppressDest = true;
 			} else if (next.getTurnType().isRoundAbout()) {
 				p.roundAbout(dist, next.getTurnType().getTurnAngle(), next.getTurnType().getExitOut(), getSpeakableStreetName(currentSegment, next, true));
@@ -783,12 +782,11 @@ public class VoiceRouter {
 			ExitInfo exitInfo = next.getExitInfo();
 			boolean isplay = true;
 			if (tParam != null) {
-				p.turn(tParam, getSpeakableStreetName(currentSegment, next, !suppressDest));
-//				if (exitInfo != null) {
-//					p.takeExit(tParam, getSpeakableExitName(next, exitInfo, !suppressDest));
-//				} else {
-//					p.turn(tParam, getSpeakableStreetName(currentSegment, next, !suppressDest));
-//				}
+				if (exitInfo != null) {
+					p.takeExit(tParam, Integer.parseInt(exitInfo.getRef()), getSpeakableExitName(next, exitInfo, !suppressDest));
+				} else {
+					p.turn(tParam, getSpeakableStreetName(currentSegment, next, !suppressDest));
+				}
 			} else if (next.getTurnType().isRoundAbout()) {
 				p.roundAbout(next.getTurnType().getTurnAngle(), next.getTurnType().getExitOut(), getSpeakableStreetName(currentSegment, next, !suppressDest));
 			} else if (next.getTurnType().getValue() == TurnType.TU || next.getTurnType().getValue() == TurnType.TRU) {
