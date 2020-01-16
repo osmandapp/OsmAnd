@@ -89,6 +89,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		OPEN_STREET_MAP_EDITING(OsmEditingFragment.class.getName(), false, R.xml.osm_editing, R.layout.global_preference_toolbar),
 		CONFIGURE_PROFILE(ConfigureProfileFragment.class.getName(), true, R.xml.configure_profile, R.layout.profile_preference_toolbar_with_switch),
 		PROXY_SETTINGS(ProxySettingsFragment.class.getName(), false, R.xml.proxy_preferences, R.layout.global_preferences_toolbar_with_switch),
+		LIVE_MONITORING(LiveMonitoringFragment.class.getName(), false, R.xml.live_monitoring, R.layout.global_preferences_toolbar_with_switch),
 		GENERAL_PROFILE(GeneralProfileSettingsFragment.class.getName(), true, R.xml.general_profile_settings, R.layout.profile_preference_toolbar_big),
 		NAVIGATION(NavigationFragment.class.getName(), true, R.xml.navigation_settings_new, R.layout.profile_preference_toolbar),
 		COORDINATES_FORMAT(CoordinatesFormatFragment.class.getName(), true, R.xml.coordinates_format, R.layout.profile_preference_toolbar),

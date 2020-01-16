@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
-	android:title="@string/audionotes_plugin_name">
+	android:title="@string/monitoring_settings">
 
 	<PreferenceCategory
 		android:key="navigation"
@@ -81,6 +82,7 @@
 		android:summaryOff="@string/shared_string_disabled"
 		android:summaryOn="@string/shared_string_enabled"
 		android:title="@string/live_monitoring"
+		app:fragment="net.osmand.plus.settings.LiveMonitoringFragment"
 		tools:icon="@drawable/ic_world_globe_dark" />
 
 	<Preference
