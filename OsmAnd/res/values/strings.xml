@@ -3330,7 +3330,7 @@
     <string name="number_of_contributors">Number of contributors</string>
     <string name="number_of_edits">Number of edits</string>
     <string name="reports_for">Report for</string>
-    <string name="file_name_containes_illegal_char">Filename contains illegal character</string>
+    <string name="file_name_containes_illegal_char">Remove all illegal characters from the filename</string>
     <string name="configure_screen_quick_action">Quick action</string>
     <string name="quick_action_item_action">Action %d</string>
     <string name="quick_action_item_screen">Screen %d</string>
