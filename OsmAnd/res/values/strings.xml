@@ -3373,7 +3373,7 @@
     <string name="favorite_empty_place_name">Place</string>
     <string name="quick_action_duplicates">Quick action renamed to %1$s to avoid duplication.</string>
     <string name="quick_action_duplicate">Quick action name duplicate</string>
-    <string name="quick_action_showhide_favorites_descr">Button showing or hideing Favorite points on the map.</string>
+    <string name="quick_action_showhide_favorites_descr">Button showing or hiding \'Favorite\' points on the map.</string>
     <string name="quick_action_showhide_poi_descr">Button showing or hiding POIs on the map.</string>
     <string name="quick_action_showhide_favorites_title">Show/hide Favorites</string>
     <string name="quick_action_favorites_show">Show Favorites</string>
