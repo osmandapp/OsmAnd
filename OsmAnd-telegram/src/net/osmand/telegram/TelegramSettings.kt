@@ -933,7 +933,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 			val lastInfo = LastChatInfo().apply {
 				chatId = obj.optLong(LastChatInfo.CHAT_ID_KEY)
 				period = obj.optLong(LastChatInfo.PERIOD_KEY)
-				}
+			}
 			lastChatsInfo.addLast(lastInfo)
 		}
 	}
