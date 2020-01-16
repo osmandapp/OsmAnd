@@ -1091,7 +1091,6 @@
     <string name="osm_live_subscription_desc">Subscription enables hourly, daily, weekly updates, and unlimited downloads for all maps globally.</string>
     <string name="get_it">Get it</string>
     <string name="get_for">Get for %1$s</string>
-    <string name="get_for_month">Get for %1$s month</string>
     <string name="osm_live_banner_desc">Get unlimited map downloads, adding weekly, daily, or even hourly updates.</string>
     <string name="osmand_plus_banner_desc">Unlimited map downloads, updates, and Wikipedia plugin.</string>
     <string name="si_mi_meters">Miles/meters</string>
