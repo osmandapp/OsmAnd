@@ -270,7 +270,6 @@
     <string name="default_speed_setting_title">Default speed</string>
     <string name="default_speed_setting_descr">Change default speed settings</string>
     <string name="minmax_speed_dialog_title">Set min/max speed</string>
-    <string name="default_speed_dialog_msg">Used to calculate the expected arrival time</string>
     <string name="new_profile">New profile</string>
     <string name="shared_string_crash">Crash</string>
     <string name="last_launch_crashed">Last OsmAnd run crashed. Please help us improve OsmAnd by sharing the error message.</string>
