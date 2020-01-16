@@ -2497,7 +2497,6 @@
     <string name="map_widget_transparent">Transparent widgets</string>
     <string name="bg_service_sleep_mode_off">Run\n app in background</string>
     <string name="bg_service_sleep_mode_on">Stop\n running in background</string>
-    <string name="gps_wakeup_interval">GPS wake-up interval: %s</string>
     <string name="int_continuosly">Continuous</string>
     <string name="screen_is_locked">Tap the lock icon to unlock</string>
     <string name="map_widget_top_text">Street name</string>
