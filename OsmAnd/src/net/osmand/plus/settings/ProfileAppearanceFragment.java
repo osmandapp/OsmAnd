@@ -491,7 +491,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 		int changedProfileColor = ContextCompat.getColor(app, changedProfile.color.getColor(
 				app.getDaynightHelper().isNightModeForMapControls()));
 		LayerDrawable locationIconDrawable = (LayerDrawable) app.getResources().getDrawable(locationIcon.getIconId());
-		DrawableCompat.setTint(locationIconDrawable.getDrawable(1), changedProfileColor);
+		DrawableCompat.setTint(DrawableCompat.wrap(locationIconDrawable.getDrawable(1)), changedProfileColor);
 		locationIconView.<ImageView>findViewById(R.id.icon).setImageDrawable(locationIconDrawable);
 		ImageView headingIcon = locationIconView.findViewById(R.id.headingIcon);
 		headingIcon.setImageDrawable(ContextCompat.getDrawable(app, locationIcon.getHeadingIconId()));
@@ -531,8 +531,8 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 		FrameLayout navigationIconView = (FrameLayout) UiUtilities.getInflater(getContext(), isNightMode())
 				.inflate(R.layout.preference_select_icon_button, rootView, false);
 		LayerDrawable navigationIconDrawable = (LayerDrawable) app.getResources().getDrawable(navigationIcon.getIconId());
-		DrawableCompat.setTint(navigationIconDrawable.getDrawable(1), ContextCompat.getColor(app, changedProfile.color.getColor(
-				app.getDaynightHelper().isNightModeForMapControls())));
+		DrawableCompat.setTint(DrawableCompat.wrap(navigationIconDrawable.getDrawable(1)),
+				ContextCompat.getColor(app, changedProfile.color.getColor(app.getDaynightHelper().isNightModeForMapControls())));
 		ImageView imageView = navigationIconView.findViewById(R.id.icon);
 		imageView.setImageDrawable(navigationIconDrawable);
 		Matrix matrix = new Matrix();
