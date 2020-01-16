@@ -68,9 +68,9 @@ import studio.carbonylgroup.textfieldboxes.ExtendedEditText;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
 import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.DIALOG_TYPE;
+import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.PROFILE_KEY_ARG;
 import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.SELECTED_KEY;
 import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.TYPE_BASE_APP_PROFILE;
-import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.TYPE_ICON;
 import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.TYPE_NAV_PROFILE;
 import static net.osmand.plus.profiles.SettingsProfileFragment.IS_NEW_PROFILE;
 import static net.osmand.plus.profiles.SettingsProfileFragment.IS_USER_PROFILE;
@@ -312,7 +312,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 				public void onClick(View v) {
 					final SelectProfileBottomSheetDialogFragment iconSelectDialog = new SelectProfileBottomSheetDialogFragment();
 					Bundle bundle = new Bundle();
-					bundle.putString(DIALOG_TYPE, TYPE_ICON);
+//					bundle.putString(DIALOG_TYPE, TYPE_ICON);
 					bundle.putString(SELECTED_ICON, profile.iconStringName);
 					iconSelectDialog.setArguments(bundle);
 					hideKeyboard();
@@ -470,10 +470,11 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		if (iconIdListener == null) {
 			iconIdListener = new SelectProfileListener() {
 				@Override
-				public void onSelectedType(int pos, String stringRes) {
+				public void onSelectedType(Bundle bundle) {
+					int pos = -1;
 					dataChanged = true;
 					profile.iconId = pos;
-					profile.iconStringName = stringRes;
+					profile.iconStringName = null;
 					profileIcon.setImageDrawable(app.getUIUtilities().getIcon(pos,
 						profile.iconColor.getColor(nightMode)));
 
@@ -487,11 +488,10 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		if (baseTypeListener == null) {
 			baseTypeListener = new SelectProfileListener() {
 				@Override
-				public void onSelectedType(int pos, String stringRes) {
-					String key = SettingsProfileFragment.getBaseProfiles(getMyApplication())
-						.get(pos).getStringKey();
-					setupBaseProfileView(key);
-					profile.parent = ApplicationMode.valueOfStringKey(key, ApplicationMode.DEFAULT);
+				public void onSelectedType(Bundle args) {
+					String profileKey = args.getString(PROFILE_KEY_ARG);
+					setupBaseProfileView(profileKey);
+					profile.parent = ApplicationMode.valueOfStringKey(profileKey, ApplicationMode.DEFAULT);
 					dataChanged = true;
 				}
 			};
@@ -503,7 +503,8 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		if (navTypeListener == null) {
 			navTypeListener = new SelectProfileListener() {
 				@Override
-				public void onSelectedType(int pos, String stringRes) {
+				public void onSelectedType(Bundle args) {
+					int pos = -1;
 					updateRoutingProfile(pos);
 				}
 			};
@@ -775,7 +776,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		}
 	}
 
-	public static List<RoutingProfileDataObject> getRoutingProfiles(OsmandApplication context) {
+	private static List<RoutingProfileDataObject> getRoutingProfiles(OsmandApplication context) {
 		List<RoutingProfileDataObject> profilesObjects = new ArrayList<>();
 		profilesObjects.add(new RoutingProfileDataObject(
 			RoutingProfilesResources.STRAIGHT_LINE_MODE.name(),
@@ -812,7 +813,7 @@ public class EditProfileFragment extends BaseOsmAndFragment {
 		return profilesObjects;
 	}
 
-	public enum RoutingProfilesResources {
+	private enum RoutingProfilesResources {
 		STRAIGHT_LINE_MODE(R.string.routing_profile_straightline, R.drawable.ic_action_split_interval),
 		BROUTER_MODE(R.string.routing_profile_broutrer, R.drawable.ic_action_split_interval),
 		CAR(R.string.rendering_value_car_name, R.drawable.ic_action_car_dark),

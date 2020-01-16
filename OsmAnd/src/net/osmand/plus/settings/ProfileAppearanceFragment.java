@@ -34,7 +34,6 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.UiUtilities.DialogButtonType;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment;
-import net.osmand.plus.profiles.SettingsProfileFragment;
 import net.osmand.plus.routing.RouteProvider;
 import net.osmand.plus.widgets.FlowLayout;
 import net.osmand.plus.widgets.OsmandTextFieldBoxes;
@@ -46,6 +45,8 @@ import java.util.ArrayList;
 
 import static net.osmand.aidlapi.OsmAndCustomizationConstants.DRAWER_SETTINGS_ID;
 import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.DIALOG_TYPE;
+import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.IS_PROFILE_IMPORTED_ARG;
+import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.PROFILE_KEY_ARG;
 import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.SELECTED_KEY;
 import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.TYPE_BASE_APP_PROFILE;
 
@@ -69,6 +70,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 	public static final String PROFILE_COLOR_KEY = "profile_color_key";
 	public static final String PROFILE_PARENT_KEY = "profile_parent_key";
 	public static final String BASE_PROFILE_FOR_NEW = "base_profile_for_new";
+	public static final String IS_BASE_PROFILE_IMPORTED = "is_base_profile_imported";
 	private SelectProfileBottomSheetDialogFragment.SelectProfileListener parentProfileListener;
 	private EditText baseProfileName;
 	private ApplicationProfileObject profile;
@@ -78,6 +80,8 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 	private FlowLayout iconItems;
 	private OsmandTextFieldBoxes profileNameOtfb;
 	private View saveButton;
+	
+	private boolean isBaseProfileImported;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -87,12 +91,8 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 		if (getArguments() != null) {
 			Bundle arguments = getArguments();
 			String keyBaseProfileForNew = arguments.getString(BASE_PROFILE_FOR_NEW, null);
-			for (ApplicationMode mode : ApplicationMode.getDefaultValues()) {
-				if (mode.getStringKey().equals(keyBaseProfileForNew)) {
-					baseModeForNewProfile = mode;
-					break;
-				}
-			}
+			baseModeForNewProfile = ApplicationMode.valueOfStringKey(keyBaseProfileForNew, null);
+			isBaseProfileImported = arguments.getBoolean(IS_BASE_PROFILE_IMPORTED);
 		}
 		if (baseModeForNewProfile != null) {
 			profile.stringKey = baseModeForNewProfile.getStringKey() + "_" + System.currentTimeMillis();
@@ -194,9 +194,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 			cancelButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					if (getActivity() != null) {
-						getActivity().onBackPressed();
-					}
+					goBackWithoutSaving();
 				}
 			});
 			saveButton.setOnClickListener(new View.OnClickListener() {
@@ -249,6 +247,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 		if (changedProfile.parent != null) {
 			outState.putString(PROFILE_PARENT_KEY, changedProfile.parent.getStringKey());
 		}
+		outState.putBoolean(IS_BASE_PROFILE_IMPORTED, isBaseProfileImported);
 	}
 
 	private void restoreState(Bundle savedInstanceState) {
@@ -258,6 +257,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 		changedProfile.color = (ApplicationMode.ProfileIconColors) savedInstanceState.getSerializable(PROFILE_COLOR_KEY);
 		String parentStringKey = savedInstanceState.getString(PROFILE_PARENT_KEY);
 		changedProfile.parent = ApplicationMode.valueOfStringKey(parentStringKey, null);
+		isBaseProfileImported = savedInstanceState.getBoolean(IS_BASE_PROFILE_IMPORTED);
 	}
 
 	@Override
@@ -481,18 +481,21 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 		if (parentProfileListener == null) {
 			parentProfileListener = new SelectProfileBottomSheetDialogFragment.SelectProfileListener() {
 				@Override
-				public void onSelectedType(int pos, String stringRes) {
-					updateParentProfile(pos);
+				public void onSelectedType(Bundle args) {
+					String profileKey = args.getString(PROFILE_KEY_ARG);
+					boolean imported = args.getBoolean(IS_PROFILE_IMPORTED_ARG);
+					updateParentProfile(profileKey, imported);
 				}
 			};
 		}
 		return parentProfileListener;
 	}
 
-	void updateParentProfile(int pos) {
-		String key = SettingsProfileFragment.getBaseProfiles(getMyApplication()).get(pos).getStringKey();
-		setupBaseProfileView(key);
-		changedProfile.parent = ApplicationMode.valueOfStringKey(key, ApplicationMode.DEFAULT);
+	void updateParentProfile(String profileKey, boolean isBaseProfileImported) {
+		deleteImportedProfile();
+		setupBaseProfileView(profileKey);
+		changedProfile.parent = ApplicationMode.valueOfStringKey(profileKey, ApplicationMode.DEFAULT);
+		this.isBaseProfileImported = isBaseProfileImported;
 	}
 
 	private void setupBaseProfileView(String stringKey) {
@@ -548,7 +551,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					changedProfile = profile;
-					mapActivity.onBackPressed();
+					goBackWithoutSaving();
 				}
 			});
 			dismissDialog.show();
@@ -567,12 +570,27 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 		return warningDialog;
 	}
 
-	public static boolean showInstance(FragmentActivity activity, SettingsScreenType screenType, @Nullable String appMode) {
+	private void goBackWithoutSaving() {
+		deleteImportedProfile();
+		if (getActivity() != null) {
+			getActivity().onBackPressed();
+		}
+	}
+
+	private void deleteImportedProfile() {
+		if (isBaseProfileImported) {
+			ApplicationMode.deleteCustomMode(ApplicationMode.valueOfStringKey(
+					changedProfile.parent.getStringKey(), ApplicationMode.DEFAULT), app);
+		}
+	}
+
+	public static boolean showInstance(FragmentActivity activity, SettingsScreenType screenType, @Nullable String appMode, boolean imported) {
 		try {
 			Fragment fragment = Fragment.instantiate(activity, screenType.fragmentName);
 			Bundle args = new Bundle();
 			if (appMode != null) {
 				args.putString(BASE_PROFILE_FOR_NEW, appMode);
+				args.putBoolean(IS_BASE_PROFILE_IMPORTED, imported);
 			}
 			fragment.setArguments(args);
 			activity.getSupportFragmentManager().beginTransaction()

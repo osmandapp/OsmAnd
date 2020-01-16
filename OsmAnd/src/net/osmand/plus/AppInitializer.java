@@ -11,7 +11,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.support.v7.app.AlertDialog;
 
@@ -32,6 +31,7 @@ import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
+import net.osmand.plus.helpers.ImportHelper;
 import net.osmand.plus.helpers.LockHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.inapp.InAppPurchaseHelper;
@@ -57,17 +57,11 @@ import net.osmand.plus.voice.MediaCommandPlayerImpl;
 import net.osmand.plus.voice.TTSCommandPlayerImpl;
 import net.osmand.plus.wikivoyage.data.TravelDbHelper;
 import net.osmand.render.RenderingRulesStorage;
-import net.osmand.router.RoutingConfiguration;
-import net.osmand.router.RoutingConfiguration.Builder;
 import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
 
-import org.xmlpull.v1.XmlPullParserException;
-
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
@@ -579,35 +573,12 @@ public class AppInitializer implements IProgress {
 
 	@SuppressLint("StaticFieldLeak")
 	private void getLazyRoutingConfig() {
-		new AsyncTask<Void, Void, RoutingConfiguration.Builder>() {
+		ImportHelper.loadRoutingFiles(app, new ImportHelper.LoadRoutingFilesCallback() {
 			@Override
-			protected Builder doInBackground(Void... voids) {
-				File routingFolder = app.getAppPath(IndexConstants.ROUTING_PROFILES_DIR);
-				RoutingConfiguration.Builder builder = RoutingConfiguration.getDefault();
-				if (routingFolder.isDirectory()) {
-					File[] fl = routingFolder.listFiles();
-					if (fl != null && fl.length > 0) {
-						for (File f : fl) {
-							if (f.isFile() && f.getName().endsWith(".xml") && f.canRead()) {
-								try {
-									RoutingConfiguration.parseFromInputStream(new FileInputStream(f), f.getName(), builder);
-								} catch (XmlPullParserException | IOException e) {
-									throw new IllegalStateException(e);
-								}
-							}
-						}
-					}
-				}
-				return builder;
-			}
-
-			@Override
-			protected void onPostExecute(Builder builder) {
-				super.onPostExecute(builder);
-				app.updateRoutingConfig(builder);
+			public void onRoutingFilesLoaded() {
 				notifyEvent(InitEvents.ROUTING_CONFIG_INITIALIZED);
 			}
-		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		});
 	}
 
 
