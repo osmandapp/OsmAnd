@@ -65,7 +65,7 @@ public class JSCommandBuilder extends CommandBuilder {
         return this;
     }
 
-    private boolean isCommandExist(String name) {
+    private boolean isJSCommandExists(String name) {
         return jsScope.get(name) instanceof Function;
     }
 
@@ -124,7 +124,7 @@ public class JSCommandBuilder extends CommandBuilder {
     }
 
     public JSCommandBuilder takeExit(String turnType, double dist, int exit, StreetName streetName) {
-        return isCommandExist(C_TAKE_EXIT) ?
+        return isJSCommandExists(C_TAKE_EXIT) ?
                 addCommand(C_TAKE_EXIT, turnType, dist, exit, convertStreetName(streetName)) :
                 addCommand(C_TURN, turnType, dist, convertStreetName(streetName));
     }
