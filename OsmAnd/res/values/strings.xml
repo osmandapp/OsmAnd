@@ -13,72 +13,72 @@
 -->
     <string name="ltr_or_rtl_combine_via_space">%1$s %2$s</string>
     <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
-    <string name="reset_confirmation_descr">By clicking %1$s, you will lose all your changes.</string>
-    <string name="reset_all_profile_settings_descr">All profile settings will be reset to the state after installation.</string>
-    <string name="reset_all_profile_settings">Reset all profile settings to default?</string>
+    <string name="reset_confirmation_descr">By clicking %1$s you lose all your changes.</string>
+    <string name="reset_all_profile_settings_descr">All profile settings will return to installation defaults.</string>
+    <string name="reset_all_profile_settings">Reset all profile settings?</string>
     <string name="select_navigation_icon">Select navigation icon</string>
     <string name="select_map_icon">Select map icon</string>
-    <string name="delete_profiles_descr">After you tap Apply, deleted profiles will be lost completely.</string>
+    <string name="delete_profiles_descr">Tapping \"Apply\", deleted profiles will be lost for good.</string>
     <string name="master_profile">Master profile</string>
-    <string name="select_color">Select color</string>
+    <string name="select_color">Select colour</string>
     <string name="rendering_value_thick_name">Thick</string>
-    <string name="desert_render_descr">For deserts and other sparsely populated areas. Displays more detail on a viewing scale.</string>
+    <string name="desert_render_descr">For deserts and other sparsely populated areas. More details.</string>
     <string name="shared_string_downloading_formatted">Downloading %s</string>
-    <string name="edit_profiles_descr">You can’t delete default OsmAnd profiles, but you can disable them in previous screen, or move them to the bottom.</string>
+    <string name="edit_profiles_descr">You can’t delete default OsmAnd profiles, but you can go back and remove them, or move them to the bottom.</string>
     <string name="edit_profiles">Edit profiles</string>
-    <string name="select_nav_profile_dialog_message">Navigation type affects the rules for route calculations.</string>
+    <string name="select_nav_profile_dialog_message">\'Navigation type\' affects rules for route calculations.</string>
     <string name="distance_and_address">%1$s • %2$s</string>
     <string name="street_city">%1$s, %2$s</string>
     <string name="personal_category_name">Personal</string>
-    <string name="add_new_profile_q">Add new profile \'%1$s\'?</string>
+    <string name="add_new_profile_q">Add the new profile \'%1$s\'?</string>
     <string name="save_heading">Include heading</string>
-    <string name="save_heading_descr">Save heading to each trackpoint while recording.</string>
+    <string name="save_heading_descr">Save heading to each trackpoint while tracking.</string>
     <string name="profile_appearance">Profile appearance</string>
-    <string name="choose_icon_color_name">Choose icon, color and name</string>
-    <string name="reorder_profiles">Edit profiles list</string>
+    <string name="choose_icon_color_name">Choose icon, colour and name</string>
+    <string name="reorder_profiles">Edit profile list</string>
     <string name="selected_profile">Selected profile</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_name">Node networks</string>
     <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Show node network cycle routes</string>
     <string name="join_segments">Join segments</string>
     <string name="download_map_dialog">Download map dialog</string>
     <string name="dialogs_and_notifications_title">Dialogs and notifications</string>
-    <string name="dialogs_and_notifications_descr">Control popups, dialogs and notifications that OsmAnd show during usage.</string>
+    <string name="dialogs_and_notifications_descr">Control popups, dialogs and notifications.</string>
     <string name="suggested_maps">Suggested maps</string>
     <string name="suggested_maps_descr">Those maps are required to use with plugin</string>
     <string name="added_profiles">Added profiles</string>
-    <string name="added_profiles_descr">Plugin adds new profile to OsmAnd</string>
+    <string name="added_profiles_descr">Profiles added by plugin</string>
     <string name="shared_string_turn_off">Turn off</string>
     <string name="new_plugin_added">New plugin added</string>
     <string name="clear_confirmation_msg">Clear %1$s?</string>
     <string name="shared_string_revert">Revert</string>
     <string name="track_saved">Track saved</string>
-    <string name="empty_filename">File name is empty</string>
-    <string name="default_speed_dialog_msg">Used to estimate arrival time for unknown type of roads and to limit speed for all roads (could change the route)</string>
+    <string name="empty_filename">Filename empty</string>
+    <string name="default_speed_dialog_msg">Estimates arrival time for unknown road types, and to limit speed for all roads (can re-oute)</string>
     <string name="rendering_value_white_name">White</string>
-    <string name="swap_two_places">Swap %1$s and %2$s</string>
+    <string name="swap_two_places">Swap %1$s ⇄ %2$s</string>
     <string name="route_start_point">Starting point</string>
     <string name="export_profile">Export profile</string>
     <string name="exported_osmand_profile">OsmAnd profile: %1$s</string>
     <string name="overwrite_profile_q">Profile \'%1$s\' already exists. Overwrite?</string>
     <string name="export_profile_failed">Could not export profile.</string>
     <string name="profile_import">Profile import</string>
-    <string name="profile_import_descr">To import a profile, select its file on the device and open it with OsmAnd.</string>
+    <string name="profile_import_descr">Import a profile by opening the file in OsmAnd.</string>
     <string name="file_import_error">%1$s import error: %2$s</string>
-    <string name="file_imported_successfully">%1$s successfully imported.</string>
-    <string name="tts_initialization_error">Cannot start text-to-speech engine</string>
+    <string name="file_imported_successfully">%1$s imported.</string>
+    <string name="tts_initialization_error">Cannot start text-to-speech engine.</string>
     <string name="layer_osm_edits">OSM Edits</string>
-    <string name="quick_action_contour_lines_descr">A toggle to show or hide contour lines on the map.</string>
+    <string name="quick_action_contour_lines_descr">Button showing or hiding contour lines on the map.</string>
     <string name="quick_action_contour_lines_show">Show contour lines</string>
     <string name="quick_action_contour_lines_hide">Hide contour lines</string>
     <string name="quick_action_show_hide_contour_lines">Show/hide contour lines</string>
-    <string name="quick_action_hillshade_descr">A toggle to show or hide hillshade on the map.</string>
+    <string name="quick_action_hillshade_descr">Button showing or hiding hillshade on the map.</string>
     <string name="quick_action_hillshade_show">Show hillshade</string>
     <string name="quick_action_hillshade_hide">Hide hillshade</string>
     <string name="quick_action_show_hide_hillshade">Show/hide hillshade</string>
-    <string name="apply_preference_to_all_profiles">You can apply this change to all profiles or only to the currently selected one.</string>
+    <string name="apply_preference_to_all_profiles">You can apply this change to all or only the selected profile.</string>
     <string name="shared_preference">Shared</string>
-    <string name="routing_attr_driving_style_prefer_unpaved_name">Prefer unpaved roads</string>
-    <string name="routing_attr_driving_style_prefer_unpaved_description">Prefer unpaved roads.</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_name">Prefer unpaved routes</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_description">Prefer unpaved routes.</string>
     <string name="release_3_5">
     • Updated app and profile settings: Settings are now arranged by type. Each profile can be customized separately.\n\n
     • New map download dialog suggesting a map to download while browsing\n\n
@@ -94,8 +94,8 @@
     <string name="shared_string_memory_used_mb_desc">Used %1$s MB</string>
     <string name="shared_string_memory_used_kb_desc">Used %1$s kB</string>
     <string name="contour_lines_and_hillshade">Contour lines and hillshade</string>
-    <string name="routing_attr_prefer_unpaved_name">Prefer unpaved roads</string>
-    <string name="routing_attr_prefer_unpaved_description">Prefer unpaved roads.</string>
+    <string name="routing_attr_prefer_unpaved_name">Prefer unpaved routes</string>
+    <string name="routing_attr_prefer_unpaved_description">Prefer unpaved routes.</string>
     <string name="update_all_maps">Update all maps</string>
     <string name="update_all_maps_q">Are you sure you want to update all (%1$d) maps?</string>
     <string name="track_storage_directory">Track storage folder</string>
@@ -123,8 +123,8 @@
     <string name="paste_Osmand_data_folder_path">Paste path to the folder with OsmAnd data</string>
     <string name="change_osmand_data_folder_question">Change OsmAnd data folder?</string>
     <string name="move_maps_to_new_destination">Move to the new destination</string>
-    <string name="internal_app_storage_description">Internal storage, hidden from user and other apps, exclusively accessible to OsmAnd</string>
-    <string name="change_data_storage_folder">Change data storage folder</string>
+    <string name="internal_app_storage_description">Internal storage for OsmAnd, (hidden from users and other apps).</string>
+    <string name="change_data_storage_folder">Change storage folder</string>
     <string name="rendering_attr_piste_type_snow_park_name">Terrain park</string>
     <string name="rendering_attr_piste_type_sleigh_name">Sleigh</string>
     <string name="rendering_attr_piste_type_sled_name">Sled</string>
@@ -163,7 +163,7 @@
     <string name="apply_to_all_profiles">Apply to all profiles</string>
     <string name="start_up_message_pref">Start-up message</string>
     <string name="analytics_pref_title">Analytics</string>
-    <string name="turn_screen_on_info">Show map on the lock screen during navigation.</string>
+    <string name="turn_screen_on_info">Map on lock screen during navigation.</string>
     <string name="route_parameters_info">Settings for routing in the selected profile \"%1$s\".</string>
     <string name="wake_time">Wake time</string>
     <string name="units_and_formats">Units &amp; formats</string>
@@ -173,7 +173,7 @@
     <string name="list_of_installed_plugins">Installed plugins</string>
     <string name="configure_navigation">Configure navigation</string>
     <string name="general_settings_profile_descr">App theme, units, region</string>
-    <string name="screen_alerts_descr">Alerts are shown in the bottom left during navigation.</string>
+    <string name="screen_alerts_descr">Alerts shown bottom left during navigation.</string>
     <string name="language_and_output">Language and output</string>
     <string name="reset_to_default">Reset to default</string>
     <string name="manage_profiles_descr">Create, import, edit profiles</string>
@@ -187,7 +187,7 @@
     <string name="shared_string_other">Other</string>
     <string name="vehicle_parameters_descr">Weight, height, speed</string>
     <string name="vehicle_parameters">Vehicle parameters</string>
-    <string name="voice_announces_info">Voice announcements only happen during navigation.</string>
+    <string name="voice_announces_info">Voice announcements only occur during navigation.</string>
     <string name="voice_announces_descr">Navigation instructions and announcements</string>
     <string name="voice_announces">Voice prompts</string>
     <string name="screen_alerts">Screen alerts</string>
@@ -249,16 +249,16 @@
     <string name="routing_attr_max_num_changes_name">Number of changes</string>
     <string name="app_mode_ufo">UFO</string>
     <string name="release_3_4">
-        • App profiles: Create a custom profile for your own needs, with a custom icon and color\n\n
-        • Now customize any profile\'s default and min/max speeds\n\n
-        • Added a widget for the current coordinates\n\n
-        • Added options to show the compass and a radius ruler on the map\n\n
-        • Fix background track logging\n\n
-        • Improved background map downloads\n\n
-        • Returned \'Turn screen on\' option\n\n
-        • Fixed Wikipedia language selection\n\n
-        • Fixed compass button behavior during navigation\n\n
-        • Other bugfixes\n\n
+    • App profiles: Create a custom profile for your own needs, with a custom icon and color\n\n
+    • Now customize any profile\'s default and min/max speeds\n\n
+    • Added a widget for the current coordinates\n\n
+    • Added options to show the compass and a radius ruler on the map\n\n
+    • Fix background track logging\n\n
+    • Improved background map downloads\n\n
+    • Returned \'Turn screen on\' option\n\n
+    • Fixed Wikipedia language selection\n\n
+    • Fixed compass button behavior during navigation\n\n
+    • Other bugfixes\n\n
     </string>
     <string name="precision_hdop_and_vdop">Horizontal precision: %1$s, vertical: %2$s</string>
     <string name="precision_hdop">Horizontal precision: %s</string>
@@ -270,6 +270,7 @@
     <string name="default_speed_setting_title">Default speed</string>
     <string name="default_speed_setting_descr">Change default speed settings</string>
     <string name="minmax_speed_dialog_title">Set min/max speed</string>
+    <string name="default_speed_dialog_msg">Used to calculate the expected arrival time</string>
     <string name="new_profile">New profile</string>
     <string name="shared_string_crash">Crash</string>
     <string name="last_launch_crashed">Last OsmAnd run crashed. Please help us improve OsmAnd by sharing the error message.</string>
@@ -329,7 +330,7 @@
     <string name="base_profile_descr_car">Car, truck, motorcycle</string>
     <string name="base_profile_descr_bicycle">Mountain bike, moped, horse</string>
     <string name="base_profile_descr_pedestrian">Walking, hiking, running</string>
-    <string name="base_profile_descr_public_transport">All PT types</string>
+    <string name="base_profile_descr_public_transport">All personal transport types</string>
     <string name="base_profile_descr_boat">Ship, rowing, sailing</string>
     <string name="base_profile_descr_aircraft">Airplane, gliding</string>
     <string name="routing_profile_geocoding">Geocoding</string>
@@ -356,7 +357,6 @@
     <string name="public_transport_calc_pedestrian">Calculate route on foot</string>
     <string name="public_transport_type">Transport type</string>
     <string name="send_log">Send log</string>
-
     <string name="routing_attr_avoid_tram_name">No trams</string>
     <string name="routing_attr_avoid_tram_description">Avoids trams</string>
     <string name="routing_attr_avoid_bus_name">No buses</string>
@@ -370,10 +370,10 @@
     <string name="routing_attr_avoid_ferry_name">No ferries</string>
     <string name="routing_attr_avoid_ferry_description">Avoids ferries</string>
     <!-- string name="release_3_3_7">
-        • Display the time between transfers in public transport\n\n
-        • Corrected UI for the Route Details\n\n
-        • Fixed dark theme in the \'Direction menu\' and \'Route Details\'\n\n
-        • Display azimuth in \'Measure Distance\'\n\n
+    • Display the time between transfers in public transport\n\n
+    • Corrected UI for the Route Details\n\n
+    • Fixed dark theme in the \'Direction menu\' and \'Route Details\'\n\n
+    • Display azimuth in \'Measure Distance\'\n\n
     </string -->
     <string name="shared_string_degrees">Degrees</string>
     <string name="shared_string_milliradians">Milliradians</string>
@@ -441,14 +441,14 @@
 	<string name="rendering_attr_highway_class_track_grade4_name">Grade 4</string>
 	<string name="rendering_attr_highway_class_track_grade5_name">Grade 5</string>
     <!-- string name="release_3_3">
-        • New \'Directions\' screen: Displays Home and Work destination buttons, \'previous route\' shortcut, list of active GPX tracks and markers, search history\n\n
-        • Additional info under \'Route details\': road types, surface, steepness, smoothness\n\n
-        • Public transport navigation supporting all kinds of transportation: metro, bus, tram, etc.\n\n
-        • New Quick action for show/hide tracks and day/night modes\n\n
-        • Fixed areas displayed as flooded in Germany, South Africa, Quebec\n\n
-        • Additional support for KML and KMZ import\n\n
-        • Fixed crashes on opening some public transport stops\n\n
-        • Removed Facebook and Firebase analytics from the free version (OsmAnd+ doesn\'t include it)\n\n
+    • New \'Directions\' screen: Displays Home and Work destination buttons, \'previous route\' shortcut, list of active GPX tracks and markers, search history\n\n
+    • Additional info under \'Route details\': road types, surface, steepness, smoothness\n\n
+    • Public transport navigation supporting all kinds of transportation: metro, bus, tram, etc.\n\n
+    • New Quick action for show/hide tracks and day/night modes\n\n
+    • Fixed areas displayed as flooded in Germany, South Africa, Quebec\n\n
+    • Additional support for KML and KMZ import\n\n
+    • Fixed crashes on opening some public transport stops\n\n
+    • Removed Facebook and Firebase analytics from the free of charge version (OsmAnd+ doesn\'t include it)\n\n
     </string -->
     <string name="use_osm_live_public_transport_description">Enable public transport for OsmAnd Live changes.</string>
     <string name="use_osm_live_public_transport">OsmAnd Live public transport</string>
@@ -462,7 +462,7 @@
     <string name="show_more">Show more</string>
     <string name="tracks_on_map">Displayed tracks</string>
     <string name="quick_action_show_hide_gpx_tracks">Show/hide GPX tracks</string>
-    <string name="quick_action_show_hide_gpx_tracks_descr">A toggle to show or hide selected GPX tracks on the map.</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Button showing or hiding selected GPX tracks on the map.</string>
     <string name="quick_action_gpx_tracks_hide">Hide GPX Tracks</string>
     <string name="quick_action_gpx_tracks_show">Show GPX Tracks</string>
     <string name="add_destination_query">Please set the destination first</string>
@@ -574,7 +574,6 @@
     <string name="show_images">Show images</string>
     <string name="purchase_cancelled_dialog_title">You have canceled your OsmAnd Live subscription</string>
     <string name="purchase_cancelled_dialog_descr">Renew subscription to continue using all the features:</string>
-
     <string name="maps_you_need_descr">Based on the articles you bookmarked, the following maps are recommended for you to download:</string>
     <string name="maps_you_need">Maps you need</string>
     <string name="osmand_team">OsmAnd team</string>
@@ -792,7 +791,7 @@
     <string name="ascendingly">A-Z</string>
     <string name="date_added">Added</string>
     <string name="order_by">Order by:</string>
-    <string name="marker_show_distance_descr">Select how to indicate distance and direction to map markers on the map screen:</string>
+    <string name="marker_show_distance_descr">Select how to indicate distance and direction to map markers on the map:</string>
     <string name="map_orientation_change_in_accordance_with_speed">Map orientation threshold</string>
     <string name="map_orientation_change_in_accordance_with_speed_descr">Select speed of switching orientation from \'Movement direction\' to \'Compass directon\' below.</string>
     <string name="all_markers_moved_to_history">All map markers moved to history</string>
@@ -812,7 +811,7 @@
     <string name="show_direction">Distance indication</string>
     <string name="sort_by">Sort by</string>
     <string name="do_not_use_animations">No animations</string>
-    <string name="do_not_use_animations_descr">Disables animations in the app.</string>
+    <string name="do_not_use_animations_descr">Turns off map animations.</string>
     <string name="keep_showing_on_map">Keep showing on map</string>
     <string name="exit_without_saving">Exit without saving?</string>
     <string name="line">Line</string>
@@ -832,10 +831,10 @@
     <string name="measurement_tool_action_bar">Browse the map and add points</string>
     <string name="measurement_tool">Measure distance</string>
     <string name="quick_action_resume_pause_navigation">Pause/resume navigation</string>
-    <string name="quick_action_resume_pause_navigation_descr">Tap this button to pause or resume the navigation.</string>
+    <string name="quick_action_resume_pause_navigation_descr">Button to pause or resume navigation.</string>
     <string name="quick_action_show_navigation_finish_dialog">Show \'Navigation finished\' dialog</string>
     <string name="quick_action_start_stop_navigation">Start/stop navigation</string>
-    <string name="quick_action_start_stop_navigation_descr">Tap this button to start or end the navigation.</string>
+    <string name="quick_action_start_stop_navigation_descr">Button to start or end navigation.</string>
     <string name="store_tracks_in_monthly_directories">Store recorded tracks in monthly folders</string>
     <string name="store_tracks_in_monthly_directories_descrp">Store recorded tracks in sub-folders per recording month (like 2018-01).</string>
     <string name="shared_string_reset">Reset</string>
@@ -878,7 +877,7 @@
     <string name="quick_action_showhide_osmbugs_title">Toggle OSM Notes</string>
     <string name="quick_action_osmbugs_show">Show OSM Notes</string>
     <string name="quick_action_osmbugs_hide">Hide OSM Notes</string>
-    <string name="quick_action_showhide_osmbugs_descr">A toggle to show or hide OSM Notes on the map.</string>
+    <string name="quick_action_showhide_osmbugs_descr">Button showing or hiding OSM Notes on the map.</string>
     <string name="sorted_by_distance">Sorted by distance</string>
     <string name="search_favorites">Search in Favorites</string>
     <string name="hillshade_menu_download_descr">Download the \'Hillshade Overlay\' map to show vertical shading.</string>
@@ -907,16 +906,16 @@
     <string name="select_city">Select city</string>
     <string name="select_postcode">Postcode search</string>
     <string name="quick_action_auto_zoom">Auto zoom map on/off</string>
-    <string name="quick_action_auto_zoom_desc">A toggle to turn on/off auto map zoom according to your speed.</string>
-    <string name="quick_action_auto_zoom_on">Enable auto zoom map</string>
-    <string name="quick_action_auto_zoom_off">Disable auto zoom map</string>
+    <string name="quick_action_auto_zoom_desc">Button turning on or off auto zoom according to your speed.</string>
+    <string name="quick_action_auto_zoom_on">Turn on auto zooming</string>
+    <string name="quick_action_auto_zoom_off">Turn off auto zooming</string>
     <string name="quick_action_add_destination">Set destination</string>
     <string name="quick_action_replace_destination">Replace destination</string>
     <string name="quick_action_add_first_intermediate">Add first intermediate</string>
-    <string name="quick_action_add_destination_desc">A button to make the screen center the route destination, any previously selected destination becomes the last intermediate destination.</string>
+    <string name="quick_action_add_destination_desc">Button centering in on route destination, making previously selected destination becomes the last intermediate destination.</string>
     <string name="quick_action_directions_from_desc">A button to make the screen center the point of departure and calculate route to the destination or open a dialog to select destination if the destination marker is not on the map.</string>
-    <string name="quick_action_replace_destination_desc">Tapping this action button makes the screen center the new route destination, replacing the previously selected destination (if any).</string>
-    <string name="quick_action_add_first_intermediate_desc">A button to make the screen center the first intermediate destination.</string>
+    <string name="quick_action_replace_destination_desc">Button centering in on new route destination, replacing previously selected destination (if any).</string>
+    <string name="quick_action_add_first_intermediate_desc">Button centering in on first intermediate destination.</string>
     <string name="no_overlay">No overlay</string>
     <string name="no_underlay">No underlay</string>
     <string name="subscribe_email_error">Error</string>
@@ -1093,6 +1092,7 @@
     <string name="osm_live_subscription_desc">Subscription enables hourly, daily, weekly updates, and unlimited downloads for all maps globally.</string>
     <string name="get_it">Get it</string>
     <string name="get_for">Get for %1$s</string>
+    <string name="get_for_month">Get for %1$s month</string>
     <string name="osm_live_banner_desc">Get unlimited map downloads, adding weekly, daily, or even hourly updates.</string>
     <string name="osmand_plus_banner_desc">Unlimited map downloads, updates, and Wikipedia plugin.</string>
     <string name="si_mi_meters">Miles/meters</string>
@@ -1195,7 +1195,6 @@
     <string name="no_waypoints_found">No waypoints found</string>
     <string name="anonymous_user_hint">Anonymous users cannot:\n- Create groups;\n- Sync groups and devices with the server;\n- Manage groups and devices in a personal dashboard on the website.</string>
     <string name="report">Report</string>
-    
     <string name="storage_permission_restart_is_required">The app is now allowed to write to external storage, but needs to be started again to do so.</string>
     <!-- string name="release_2_3">
 	\u2022 OSM Live. Support map contributors and developers and get hourly map updates. \n\n
@@ -1209,7 +1208,7 @@
     <string name="shared_string_move_down">Move ↓</string>
     <string name="finish_navigation">Finish navigation</string>
     <string name="avoid_road">Avoid road</string>
-    <string name="storage_directory_readonly_desc">Switched to internal memory since the selected data storage folder is read only. Please select a writable storage directory.</string>
+    <string name="storage_directory_readonly_desc">Switched to internal memory since the selected data storage folder is write-protected. Please select a writable storage directory.</string>
     <string name="storage_directory_shared">Shared memory</string>
     <string name="shared_string_topbar">Top bar</string>
     <string name="full_report">Full report</string>
@@ -1236,20 +1235,20 @@
     <string name="osm_live_region_desc">Part of your donation will be sent to OSM users who submit changes to the map in that region.</string>
     <string name="osm_live_subscription_settings">Subscription settings</string>
     <string name="osm_live_ask_for_purchase">Please purchase a subscription to OsmAnd Live first</string>
-    <string name="osm_live_header">This subscription enables hourly updates for all maps around the world.
-        Part of the income goes back to the OSM community and is paid out for each OSM contribution. 
-        If you love OsmAnd and OSM and want to support and be supported by them, this is the perfect way to do it.</string>
+    <string name="osm_live_header">This subscription enables hourly updates for all maps around the world.\n
+    Part of the income goes back to the OSM community and is paid out for each OSM contribution.\n
+    If you love OsmAnd and OSM and want to support and be supported by them, this is the perfect way to do it.</string>
     <string name="select_map_marker">Select map marker</string>
     <string name="map_markers_other">Other markers</string>
     <string name="upload_anonymously">Upload anonymously</string>
     <string name="show_transparency_seekbar">Show transparency seekbar</string>
-    <string name="download_files_error_not_enough_space">Not enough space!
-        {3} MB is needed temporarily, {1} MB permanently.
-        (Only {2} MB available.)</string>
-    <string name="download_files_question_space_with_temp">Download {0} file(s)?
-        {3} MB is used temporarily, {1} MB permanently. (Of {2} MB.)</string>
-    <string name="download_files_question_space">Download {0} file(s)?
-        {1} MB (of {2} MB) will be used.</string>
+    <string name="download_files_error_not_enough_space">Not enough space!\n
+    {3} MB is needed temporarily, {1} MB permanently.\n
+    (Only {2} MB available.)</string>
+    <string name="download_files_question_space_with_temp">Download {0} file(s)?\n
+    {3} MB is used temporarily, {1} MB permanently. (Of {2} MB.)</string>
+    <string name="download_files_question_space">Download {0} file(s)?\n
+    {1} MB (of {2} MB) will be used.</string>
     <string name="upload_osm_note">Upload OSM Note</string>
     <string name="map_marker_1st">First map marker</string>
     <string name="map_marker_2nd">Second map marker</string>
@@ -1320,7 +1319,7 @@
     <string name="av_audio_bitrate">Audio bitrate</string>
     <string name="av_audio_bitrate_descr">Select audio bitrate.</string>
     <string name="please_specify_poi_type_only_from_list">Please specify the correct POI type or skip it.</string>
-    <string name="access_from_map_description">Menu button launches the dashboard rather than the menu</string>
+    <string name="access_from_map_description">Menu button launches dashboard rather than menu</string>
     <string name="access_from_map">Access from map</string>
     <string name="show_on_start_description">\'Off\' launches the map directly.</string>
     <string name="show_on_start">Show on start</string>
@@ -1530,7 +1529,7 @@
     <string name="shared_string_search">Search</string>
     <string name="shared_string_show_description">Show description.</string>
     <string name="shared_string_message">Message</string>
-    <string name="agps_data_last_downloaded">A-GPS data downloaded: %1$s</string>
+    <string name="agps_data_last_downloaded">A-GPS data last downloaded: %1$s</string>
     <string name="confirm_usage_speed_cameras">In many countries (Germany, France, Italy, and others) the use of speed camera warnings is illegal. OsmAnd does not assume any liability if you violate the law. Please tap \'Yes\' only if you are eligible to use this feature.</string>
     <string name="welmode_download_maps">Download maps</string>
     <string name="welcome_select_region">To correctly reflect your traffic signs and regulations, please select your driving region:</string>
@@ -1644,18 +1643,18 @@
     <string name="track_segments">Track segments</string>
     <string name="track_points">Track points</string>
     <string name="shared_string_online_maps">Online maps</string>
-    <string name="osmand_rastermaps_plugin_description">With this plugin you can access many types of online (so called tile or raster) maps, from predefined OpenStreetMap tiles (like Mapnik) to satellite images and special purpose layers like weather maps, climate maps, geological maps, hillshade layers, etc.
-		\n\nAny of these maps can either be used as the main (base) map to be displayed on the OsmAnd map, or as an overlay or underlay to another base map (like OsmAnd\'s standard offline maps). In order to make any underlay map more visible, certain elements of the OsmAnd vector maps can easily be hidden via the \'Configure map\' menu as desired.
-		\n\nTile maps can be obtained directly via online sources, or can be prepared for offline use (and manually copied to OsmAnd\'s data folder) as an SQLite database which can be produced by a variety of 3rd party map preparation tools.
+    <string name="osmand_rastermaps_plugin_description">Access as many types of online (so called tile or raster) maps you want, from predefined OSM tiles (like Mapnik) to satellite images, and special purpose layers like weather maps, climate maps, geological maps, hillshade layers, etc.\n\n
+    Any of these maps can either be used as the default map to be displayed, or as an overlay or underlay to another base map (like OsmAnd\'s standard offline maps). Certain elements of the OsmAnd vector maps can be hidden via the \'Configure map\' menu to make any underlay map more visible.\n\n
+    Download tile maps directly online, or prepared them for offline use (manually copied to OsmAnd\'s data folder) as an SQLite database which can be produced by a variety of 3rd party map preparation tools.
 	</string>
     <string name="record_plugin_name">Trip recording</string>
-    <string name="record_plugin_description">This plugin activates the functionality to record and save your tracks by manually touching the GPX logging widget on the map, or also to automatically log all of your navigation routes to a GPX file.
-		\n\nRecorded tracks can be shared with your friends or be used for OSM contributions. Athletes can use recorded tracks to monitor their trainings. Some basic track analysis can be performed directly in OsmAnd, like lap times, average speed etc., and tracks can of course also later be analyzed in special 3rd party analysis tools.
+    <string name="record_plugin_description">This plugin activates the functionality to record and save your tracks by manually touching the GPX logging widget on the map, or also to automatically log all of your navigation routes to a GPX file.\n\n
+    Recorded tracks can be shared with your friends or be used for OSM contributions. Athletes can use recorded tracks to monitor their trainings. Some basic track analysis can be performed directly in OsmAnd, like lap times, average speed etc., and tracks can of course also later be analyzed in special 3rd party analysis tools.
 	</string>
     <string name="srtm_paid_version_title">Contour lines plugin</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd plugin for offline contour lines</string>
-    <string name="osmand_srtm_long_description_1000_chars">This plugin provides both a contour line overlay and a (relief) hillshade layer to be displayed on top of OsmAnd\'s standard maps. This functionality will be much appreciated by athletes, hikers, trekkers, and anybody interested in the relief structure of a landscape.
-		\n\nThe global data (between 70 ° north and 70 ° south) is based on measurements by SRTM (Shuttle Radar Topography Mission) and ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), an imaging instrument onboard Terra, the flagship satellite of NASA\'s Earth Observing System. ASTER is a cooperative effort between NASA, Japan\'s Ministry of Economy, Trade and Industry (METI), and Japan Space Systems (J-spacesystems).
+    <string name="osmand_srtm_long_description_1000_chars">This plugin provides both a contour line overlay and a (relief) hillshade layer to be displayed on top of OsmAnd\'s standard maps. This functionality will be much appreciated by athletes, hikers, trekkers, and anybody interested in the relief structure of a landscape.\n\n
+    The global data (between 70 ° north and 70 ° south) is based on measurements by SRTM (Shuttle Radar Topography Mission) and ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), an imaging instrument onboard Terra, the flagship satellite of NASA\'s Earth Observing System. ASTER is a cooperative effort between NASA, Japan\'s Ministry of Economy, Trade and Industry (METI), and Japan Space Systems (J-spacesystems).
 	</string>
     <string name="srtm_plugin_name">Contour lines</string>
     <string name="srtm_plugin_description">This plugin provides both a contour line overlay and a (relief) hillshade layer to be displayed on top of OsmAnd\'s standard maps. This functionality will be much appreciated by athletes, hikers, trekkers, and anybody interested in the relief structure of a landscape. (Please note that contour line and/or relief data are separate, additional downloads available after activating the plugin.)
@@ -1679,17 +1678,17 @@
 		\n\nActivating this view changes the map style to \'Winter and ski\', showing all landscape features under wintry conditions. This view can be reverted by either de-activating it again here, or by changing the \'Map style\' under \'Configure map\' as desired.
 	</string>
     <string name="audionotes_plugin_name">Audio/video notes</string>
-    <string name="audionotes_plugin_description">The Audio/video notes plugin provides the functionality to take audio/photography/video notes during a trip, using either a button on the map, or directly the context menu for any position on the map.</string>
+    <string name="audionotes_plugin_description">Make audio/photography/video notes during a trip, using either a map button, or directly from the context menu for any position on the map.</string>
     <string name="osmand_parking_plugin_name">Parking position</string>
-    <string name="osmand_parking_plugin_description">The parking position plugin lets you record where your car is parked and how much parking time is left (if there is a time limit).
-	\nBoth the location and time are visible on the OsmAnd dashboard as well as in a widget on the map. An alarm can be added to the Android calendar as a reminder.</string>
-    <string name="osmand_distance_planning_plugin_name">Distance calculator &amp; planning tool</string>
-    <string name="osmand_distance_planning_plugin_description">This plugin provides a map widget allowing creation of paths by tapping the map, or by using or modifying existing GPX files, to plan a trip and measure the distance between points. The results can be saved as a GPX file, which can later be used for guidance.</string>
+    <string name="osmand_parking_plugin_description">Lets you record where your car is parked, and alternatively how much parking time remains.\n
+    Both location and time are visible on the dashboard as well as in a map widget. An alarm reminder can be added to the Android calendar.</string>
+    <string name="osmand_distance_planning_plugin_name">Distance calculator and planning tool</string>
+    <string name="osmand_distance_planning_plugin_description">Create paths by tapping the map, or by using or modifying existing GPX files, to plan a trip and measure the distance between points. Alternatively, save as GPX file to use later for guidance.</string>
     <string name="shared_string_accessibility">Accessibility</string>
-    <string name="osmand_accessibility_description">This plugin makes the device\'s accessibility features available directly in OsmAnd. It facilitates e.g. adjusting the speech rate for text-to-speech voices, configuring directional-pad screen navigation, using a trackball for zoom control, or text-to-speech feedback, for example to auto announcing your position.</string>
+    <string name="osmand_accessibility_description">Makes the device\'s accessibility features directly available in OsmAnd. It facilitates e.g. adjusting the speech rate for text-to-speech voices, configuring D-pad navigation, using a trackball for zoom control, or text-to-speech feedback, for example to auto announce your position.</string>
     <string name="osm_settings">OSM editing</string>
-    <string name="osm_editing_plugin_description">Via this plugin OsmAnd can be used to make OSM contributions like creating or modifying OSM POI objects, opening or commenting OSM Notes, and contributing recorded GPX files. OSM is a community driven, global public domain mapping project. For details please refer to https://openstreetmap.org. Active participation is appreciated, and contributions can be made directly from OsmAnd, if you specify your personal OSM credentials in the app.</string>
-    <string name="osmand_development_plugin_description">This plugin displays settings for development and debugging features like to test or simulate routing, the rendering performance, or voice prompting. These settings are intended for developers and are not needed for the general user.</string>
+    <string name="osm_editing_plugin_description">Make OSM contributions like creating or modifying OSM POI objects, opening or commenting OSM Notes, and contributing recorded GPX files in OsmAnd by supplying your username and password. OSM is a libre, community driven, global public domain mapping project https://openstreetmap.org.</string>
+    <string name="osmand_development_plugin_description">Settings for development and debugging features, like routing simulation, rendering performance, or voice announcements.</string>
     <string name="debugging_and_development">OsmAnd development</string>
     <string name="rename_failed">Renaming failed.</string>
     <string name="days_behind">days behind</string>
@@ -1704,8 +1703,8 @@
     <string name="free">Free %1$s </string>
     <string name="device_memory">Device memory</string>
     <string name="rendering_attr_pisteGrooming_name">Piste grooming</string>
-    <string name="world_ski_missing">In order to display ski maps, the special offline map needs to be downloaded</string>
-    <string name="nautical_maps_missing">In order to display nautical maps, the special offline map needs to be downloaded</string>
+    <string name="world_ski_missing">Download the special offline map to display skiing facilities.</string>
+    <string name="nautical_maps_missing">Download the special offline map to display nautical details.</string>
     <string name="edit_group">Edit group</string>
     <string name="parking_place">Parking spot</string>
     <string name="remove_the_tag">REMOVE THE TAG</string>
@@ -1856,8 +1855,6 @@
     <string name="map_preferred_locale_descr">Preferred language for labels on the map (if unavailable, English or local names will be used).</string>
     <string name="map_preferred_locale">Preferred map language</string>
     <string name="local_map_names">Local names</string>
-    <string name="lang_sw">Swahili</string>
-    <string name="lang_he">Hebrew</string>
     <string name="forward">Forward</string>
     <string name="home">Dashboard</string>
     <string name="live_monitoring_m_descr">Send tracking data to a specified web service if GPX logging is on.</string>
@@ -1954,6 +1951,7 @@
     <string name="lang_ka">Georgian</string>
     <string name="lang_de">German</string>
     <string name="lang_el">Greek</string>
+    <string name="lang_he">Hebrew</string>
     <string name="lang_iw">Hebrew</string>
     <string name="lang_hi">Hindi</string>
     <string name="lang_hu">Hungarian</string>
@@ -1975,6 +1973,7 @@
     <string name="lang_sc">Sardinian</string>
     <string name="lang_sr">Serbian (cyrillic)</string>
     <string name="lang_sr_latn">Serbian (latin)</string>
+    <string name="lang_sw">Swahili</string>
     <string name="lang_zh_cn">Chinese (Simplified)</string>
     <string name="lang_zh_hk">Chinese (Hong Kong)</string>
     <string name="lang_sk">Slovak</string>
@@ -2002,7 +2001,7 @@
     <string name="routing_attr_prefer_motorway_description">Prefer motorways</string>
     <string name="routing_attr_avoid_toll_name">No toll roads</string>
     <string name="routing_attr_avoid_toll_description">Avoids toll roads</string>
-    <string name="routing_attr_avoid_unpaved_name">No unpaved roads</string>
+    <string name="routing_attr_avoid_unpaved_name">Only paved roads</string>
     <string name="routing_attr_avoid_unpaved_description">Avoids unpaved roads</string>
     <string name="routing_attr_avoid_ferries_name">No ferries</string>
     <string name="routing_attr_avoid_ferries_description">Avoids ferries</string>
@@ -2018,9 +2017,9 @@
     <string name="routing_attr_width_description">Specify permitted vehicle width limit on routes.</string>
     <string name="routing_attr_height_name">Height limit</string>
     <string name="routing_attr_height_description">Specify vehicle height to be permitted on routes.</string>
-    <string name="android_19_location_disabled">On Android 4.4 (KitKat) onwards, the old storage folder (%s) is deprecated. Copy all OsmAnd files to new storage location?
-        \n Note 1: Your old files will remain untouched (but can be deleted manually).
-        \n Note 2: In the new storage location it will not be possible to share files between OsmAnd and OsmAnd+.</string>
+    <string name="android_19_location_disabled">On Android 4.4 (KitKat) onwards, the old storage folder (%s) is deprecated. Copy all OsmAnd files to new storage location?\n
+    Note 1: Your old files will remain untouched (but can be deleted manually).\n
+    Note 2: In the new storage location it will not be possible to share files between OsmAnd and OsmAnd+.</string>
     <string name="copying_osmand_one_file_descr">Copying file (%s) to the new destination…</string>
     <string name="copying_osmand_files_descr">Copying OsmAnd data files to the new destination (%s)…</string>
     <string name="copying_osmand_files">Copying OsmAnd data files…</string>
@@ -2079,7 +2078,7 @@
     <string name="driving_region_uk">UK, India, &amp; similar</string>
     <string name="driving_region_australia">Australia</string>
     <string name="speak_title">Announce…</string>
-    <string name="speak_descr">Set up announcement of street names, traffic warnings (forced stops, speed bumps), speed camera warnings, speed limits.</string>
+    <string name="speak_descr">Set up announcement of street names, traffic warnings (forced stops, speed bumps), speed camera warnings and speed limits.</string>
     <string name="speak_street_names">Street names (TTS)</string>
     <string name="speak_speed_limit">Speed limit</string>
     <string name="speak_cameras">Speed cameras</string>
@@ -2118,9 +2117,9 @@
     <string name="gpx_file_name">GPX filename</string>
     <string name="gpx_saved_sucessfully">GPX file saved to {0}</string>
     <string name="use_distance_measurement_help">* Tap to mark a point.\n
-        * Long-tap the map to delete previous point.\n
-        * Long-tap on a point to view and attach description.\n
-        * Tap the measurement widget to see more actions.</string>
+    * Long-tap the map to delete previous point.\n
+    * Long-tap on a point to view and attach description.\n
+    * Tap the measurement widget to see more actions.</string>
     <string name="distance_measurement_start_editing">Start editing</string>
     <string name="distance_measurement_finish_editing">Finish editing</string>
     <string name="distance_measurement_finish_subtrack">Begin a new subtrack</string>
@@ -2180,10 +2179,10 @@
     <string name="recording_photo_description">Photo %1$s %2$s</string>
     <string name="av_def_action_picture">Take a photo</string>
     <string name="recording_context_menu_precord">Take a photo</string>
-    <string name="dropbox_plugin_description">The Dropbox plugin allows you to sync tracks and audio/video notes with your Dropbox account.</string>
+    <string name="dropbox_plugin_description">Sync tracks and audio/video notes with your Dropbox account.</string>
     <string name="dropbox_plugin_name">Dropbox plugin</string>
     <string name="intermediate_points_change_order">Change order</string>
-    <string name="srtm_paid_version_msg">Please consider paying for the \'Contour lines\' plugin to support further development.</string>
+    <string name="srtm_paid_version_msg">Please be an absolute hero and pay for the \'Contour lines\' plugin to support its development.</string>
     <string name="av_def_action_choose">On request?</string>
     <string name="av_def_action_video">Record video</string>
     <string name="av_def_action_audio">Record audio</string>
@@ -2491,7 +2490,7 @@
     <string name="map_widget_renderer">Map style</string>
     <string name="layer_map_appearance">Configure screen</string>
     <string name="show_lanes">Lanes</string>
-    <string name="avoid_unpaved">No unpaved roads</string>
+    <string name="avoid_unpaved">Only paved roads</string>
     <string name="avoid_ferries">No ferries</string>
     <string name="avoid_in_routing_title">Avoid…</string>
     <string name="map_widget_fluorescent">Fluorescent routes</string>
@@ -2500,6 +2499,7 @@
     <string name="map_widget_transparent">Transparent widgets</string>
     <string name="bg_service_sleep_mode_off">Run\n app in background</string>
     <string name="bg_service_sleep_mode_on">Stop\n running in background</string>
+    <string name="gps_wakeup_interval">GPS wake-up interval: %s</string>
     <string name="int_continuosly">Continuous</string>
     <string name="screen_is_locked">Tap the lock icon to unlock</string>
     <string name="map_widget_top_text">Street name</string>
@@ -2533,8 +2533,8 @@
     <string name="select_animate_speedup">Route simulation speed:</string>
     <string name="global_app_allocated_memory_descr">Allocated memory %1$s MB (Android limit %2$s MB, Dalvik %3$s MB).</string>
     <string name="global_app_allocated_memory">Allocated memory</string>
-    <string name="native_app_allocated_memory_descr">Total native memory allocated by app %1$s MB (Dalvik %2$s MB, other %3$s MB).
-		Proportional memory %4$s MB (Android limit %5$s MB, Dalvik %6$s MB).</string>
+    <string name="native_app_allocated_memory_descr">Total native memory allocated by app %1$s MB (Dalvik %2$s MB, other %3$s MB).\n
+    Proportional memory %4$s MB (Android limit %5$s MB, Dalvik %6$s MB).</string>
     <string name="native_app_allocated_memory">Total native memory</string>
     <string name="starting_point_too_far">Point of departure too far from nearest road.</string>
     <string name="shared_location">Shared location</string>
@@ -2587,14 +2587,14 @@
     <string name="left_side_navigation">Left-hand traffic</string>
     <string name="left_side_navigation_descr">For countries where people drive on the left side of the road.</string>
     <string name="local_index_description">Tap any existing item to see more details, long-tap to deactivate or delete. Current data on device (%1$s free):</string>
-    <string name="unknown_from_location">Point of departure not yet determined.</string>
-    <string name="unknown_location">Position not yet known.</string>
+    <string name="unknown_from_location">Point of departure not yet determined</string>
+    <string name="unknown_location">Position not yet known</string>
     <string name="modify_transparency">Set transparency (0 - transparent, 255 - opaque)</string>
     <!-- A file is downloaded -->
     <string name="confirm_interrupt_download">Cancel download?</string>
     <!-- Use ← for RTL languages -->
     <string name="first_time_msg">Thank you for using OsmAnd. Download regional data for offline use via \'Settings\' → \'Manage map files\' to view maps, locate addresses, look up POIs, find public transport and more.</string>
-    <string name="basemap_was_selected_to_download">The basemap needed to provide basic functionality is in the download queue.</string>
+    <string name="basemap_was_selected_to_download">The basemap (in the download queue) provides basic functionality.</string>
     <string name="local_indexes_cat_tile">Online and cached tile maps</string>
     <string name="local_indexes_cat_map">Standard maps (vector)</string>
     <string name="index_settings_descr">Download and manage offline map files stored on your device.</string>
@@ -2847,13 +2847,14 @@
     <string name="map_overlay">Overlay map</string>
     <string name="map_overlay_descr">Choose the overlay map</string>
     <string name="tile_source_already_installed">Map already installed, \'Settings\' will be updated.</string>
-    <string name="select_tile_source_to_install">Choose (tile) maps to install or update.</string>
+    <string name="select_tile_source_to_install">Choose maps to install or update.</string>
     <string name="internet_not_available">Unable to perform operation without a connection to the Internet.</string>
     <string name="install_more">Install more…</string>
     <string name="level_to_switch_vector_raster_descr">Use raster maps for anything beyond this level.</string>
     <string name="level_to_switch_vector_raster">Minimum vector zoom level</string>
     <string name="create_poi_link_to_osm_doc"><u>Online OSM</u> map classification with images.</string>
     <string name="error_doing_search">Could not perform offline search.</string>
+    <string name="search_offline_geo_error">Could not parse geo intent \'%s\'.</string>
     <string name="search_osm_offline">Search by geo location</string>
     <string name="system_locale">System</string>
     <string name="preferred_locale_descr">App display language (used after OsmAnd is restarted).</string>
@@ -2951,7 +2952,7 @@
     <string name="poi_context_menu_call">Show POI phone</string>
     <string name="download_type_to_filter">type to filter</string>
     <string name="use_high_res_maps">High resolution display</string>
-    <string name="use_high_res_maps_descr">Do not stretch (and blur) map tiles on high density displays.</string>
+    <string name="use_high_res_maps_descr">Do not stretch (and blur) maps on high density displays.</string>
     <string name="context_menu_item_search_transport">Search public transport</string>
     <string name="transport_searching_transport">Transport results (no destination):</string>
     <string name="transport_searching_route">Transport results ({0} to destination):</string>
@@ -3077,11 +3078,11 @@
     <string name="search_offline_address">Offline search</string>
     <string name="search_online_address">Online search</string>
     <string name="max_level_download_tile">Max. online zoom</string>
-    <string name="max_level_download_tile_descr">Do not browse online map tiles for zoom levels beyond this.</string>
+    <string name="max_level_download_tile_descr">Do not browse online maps for zoom levels beyond this.</string>
     <string name="route_general_information">Total distance %1$s, traveling time %2$d h %3$d min.</string>
     <string name="router_service_descr">Online or offline navigation service.</string>
     <string name="router_service">Navigation service</string>
-    <string name="sd_dir_not_accessible">The data storage folder on the memory card is not accessible!</string>
+    <string name="sd_dir_not_accessible">The data folder on the memory card is not accessible!</string>
     <string name="download_question">Download {0} - {1} ?</string>
     <string name="download_question_exist">Offline data for {0} already exists ({1}). Update it ({2})?</string>
     <string name="address">Address</string>
@@ -3122,7 +3123,7 @@
     <string name="finished_task">Finished</string>
     <string name="use_online_routing_descr">Use the Internet to calculate a route.</string>
     <string name="use_online_routing">Use online navigation</string>
-    <string name="osm_settings_descr">Specify OpenStreetMap.org (OSM) settings needed for OSM submissions.</string>
+    <string name="osm_settings_descr">Specify OpenStreetMap.org login details to upload edits.</string>
     <string name="data_settings_descr">Specify language, download/reload data.</string>
     <string name="data_settings">Data</string>
     <string name="additional_settings">Additional settings</string>
@@ -3142,13 +3143,13 @@
     <string name="map_view_3d">Map View 3D</string>
     <string name="show_poi_over_map_description">Show the last used POI overlay.</string>
     <string name="show_poi_over_map">Show POI overlay</string>
-    <string name="map_tile_source_descr">Choose source of online or cached map tiles</string>
+    <string name="map_tile_source_descr">Choose source of online or cached maps</string>
     <string name="map_tile_source">Tile map source</string>
     <string name="map_source">Map source</string>
     <string name="use_internet">Use the Internet</string>
     <string name="show_location">Show your position</string>
     <string name="show_gps_coordinates_text">Show GPS coordinates on the map</string>
-    <string name="use_internet_to_download_tile">Download missing map tiles</string>
+    <string name="use_internet_to_download_tile">Download missing map parts</string>
     <string name="app_description">Navigation app</string>
     <string name="search_button">Search</string>
     <string name="search_activity">Search</string>
@@ -3164,7 +3165,7 @@
     <string name="app_mode_pedestrian">Walking</string>
     <string name="position_on_map_center">Center</string>
     <string name="position_on_map_bottom">Bottom</string>
-    <string name="navigate_point_top_text">Input latitude &amp; longitude in the selected format (D - degrees, M - minutes, S - seconds)</string>
+    <string name="navigate_point_top_text">Input latitude and longitude in the selected format (D - degrees, M - minutes, S - seconds)</string>
     <string name="navigate_point_latitude">Latitude</string>
     <string name="navigate_point_longitude">Longitude</string>
     <string name="navigate_point_format_D">DDD.DDDDD</string>
@@ -3331,7 +3332,7 @@
     <string name="number_of_contributors">Number of contributors</string>
     <string name="number_of_edits">Number of edits</string>
     <string name="reports_for">Report for</string>
-    <string name="file_name_containes_illegal_char">File name contains illegal character</string>
+    <string name="file_name_containes_illegal_char">Filename contains illegal character</string>
     <string name="configure_screen_quick_action">Quick action</string>
     <string name="quick_action_item_action">Action %d</string>
     <string name="quick_action_item_screen">Screen %d</string>
@@ -3356,16 +3357,16 @@
     <string name="quick_actions_delete_text">Are you sure you want to delete the action \"%s\"?</string>
     <string name="quick_favorites_show_favorites_dialog">Show Favorites dialog</string>
     <string name="quick_favorites_name_preset">Name preset</string>
-    <string name="quick_action_add_marker_descr">A button to add a map marker at the screen center location.</string>
-    <string name="quick_action_add_gpx_descr">A button to add a GPX waypoint in the middle of the screen.</string>
-    <string name="quick_action_take_audio_note_descr">A button to add an audio note in the middle of the screen.</string>
-    <string name="quick_action_take_video_note_descr">A button to add a video note in the middle of the screen.</string>
-    <string name="quick_action_take_photo_note_descr">A button to add a photo note in the middle of the screen.</string>
-    <string name="quick_action_add_osm_bug_descr">A button to add an OSM note in the middle of the screen.</string>
-    <string name="quick_action_add_poi_descr">A button to add a POI in the middle of the screen.</string>
-    <string name="quick_action_navigation_voice_descr">A toggle to disable or enable voice guidance during navigation.</string>
-    <string name="quick_action_add_parking_descr">A button to add a parking location in the middle of the screen.</string>
-    <string name="quick_action_switch_day_night_descr">A toggle to switch between day and night modes for OsmAnd.</string>
+    <string name="quick_action_add_marker_descr">Button adding a map marker in the middle of the screen.</string>
+    <string name="quick_action_add_gpx_descr">Button adding a GPX waypoint in the middle of the screen.</string>
+    <string name="quick_action_take_audio_note_descr">Button adding an audio note in the middle of the screen.</string>
+    <string name="quick_action_take_video_note_descr">Button adding a video note in the middle of the screen.</string>
+    <string name="quick_action_take_photo_note_descr">Button adding a photo note in the middle of the screen.</string>
+    <string name="quick_action_add_osm_bug_descr">Button adding an OSM note in the middle of the screen.</string>
+    <string name="quick_action_add_poi_descr">Button adding a POI in the middle of the screen.</string>
+    <string name="quick_action_navigation_voice_descr">Button turning on or off voice guidance during navigation.</string>
+    <string name="quick_action_add_parking_descr">Button adding a parking location in the middle of the screen.</string>
+    <string name="quick_action_switch_day_night_descr">Button switching between \'Day\' and \'Night\' modes for OsmAnd.</string>
     <string name="quick_action_switch_day_mode">Day mode</string>
     <string name="quick_action_switch_night_mode">Night mode</string>
     <string name="quick_action_day_night_switch_mode">Switch day/night mode</string>
@@ -3374,8 +3375,8 @@
     <string name="favorite_empty_place_name">Place</string>
     <string name="quick_action_duplicates">Quick action renamed to %1$s to avoid duplication.</string>
     <string name="quick_action_duplicate">Quick action name duplicate</string>
-    <string name="quick_action_showhide_favorites_descr">A toggle to show or hide the Favorite points on the map.</string>
-    <string name="quick_action_showhide_poi_descr">A toggle to show or hide POIs on the map.</string>
+    <string name="quick_action_showhide_favorites_descr">Button showing or hideing Favorite points on the map.</string>
+    <string name="quick_action_showhide_poi_descr">Button showing or hiding POIs on the map.</string>
     <string name="quick_action_showhide_favorites_title">Show/hide Favorites</string>
     <string name="quick_action_favorites_show">Show Favorites</string>
     <string name="quick_action_favorites_hide">Hide Favorites</string>
@@ -3393,7 +3394,7 @@
     <string name="quick_action_gpx_category_descr">Choose an optional category.</string>
     <string name="quick_action_poi_list">POI list</string>
     <string name="quick_action_sh_poi_descr">Add one or more POI categories to display on the map.</string>
-    <string name="quick_action_page_list_descr">A button to page through the list below.</string>
+    <string name="quick_action_page_list_descr">Button paging through the list below.</string>
     <string name="quick_action_map_style_action">Add a map style</string>
     <string name="quick_action_empty_param_error">Fill out all parameters</string>
     <string name="quick_action_map_styles">Map styles</string>
@@ -3478,7 +3479,7 @@
     <string name="routing_attr_difficulty_preference_name">Prefered difficulty</string>
     <string name="routing_attr_difficulty_preference_description">Prefer routes of this difficulty, although routing over harder or easier pistes is still possible if shorter.</string>
     <string name="routing_attr_freeride_policy_name">Off-piste</string>
-    <string name="routing_attr_freeride_policy_description">Freeride and offpiste are unofficial routes and passages. Typically ungroomed, unmaintained by the officials and not checked in the evening. Enter at your own risk.</string>
+    <string name="routing_attr_freeride_policy_description">\'Freeride\' and \'Off-piste\' are unofficial routes and passages. Typically ungroomed, unmainted by the officials and not checked in the evening. Enter at your own risk.</string>
 
 
 </resources>
