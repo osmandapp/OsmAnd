@@ -260,4 +260,7 @@
     <string name="buffer_time_descr">Maksymalny czas przechowywania punktów w buforze</string>
     <string name="buffer_time">Czas ważności bufora</string>
     <string name="time_zone_descr">Wybierz strefę czasową, która ma być wyświetlana w wiadomościach o Twojej lokalizacji.</string>
+    <string name="shared_string_suggested">Proponowane</string>
+    <string name="status_widget_title">Stan modułu śledzącego OsmAnd</string>
+    <string name="back_to_osmand">Wróć do OsmAnd</string>
 </resources>
