@@ -176,7 +176,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 
 		paintIcon = new Paint();
 		pointSmall = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_white_shield_small);
-		selectedPoint = BitmapFactory.decodeResource(view.getResources(), R.drawable.ic_action_location_color);
+		selectedPoint = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_default_location_xml);
 
 		contextMenuLayer = view.getLayerByClass(ContextMenuLayer.class);
 
