@@ -3644,5 +3644,19 @@
     <string name="poi_network">Сеть</string>
     <string name="poi_parking_space">Парковочное место</string>
 
+	<string name="poi_volcano_type_scoria">Шлаковый конус</string>
+	<string name="poi_volcano_type_stratovolcano">Стратовулкан</string>
+	<string name="poi_volcano_type_shield">Щитовой</string>
+	<string name="poi_volcano_type_maar">Маар</string>
+	<string name="poi_volcano_type_caldera">Калдера</string>
+	<string name="poi_volcano_type_lava_dome">Лавовый купол</string>
+	<string name="poi_volcano_type_dirt">Грязевой</string>
+	<string name="poi_volcano_last_eruption">Последнее извержение</string>
+	<string name="poi_volcano_status_extinct">Потухший</string>
+	<string name="poi_volcano_status_dormant">Спящий</string>
+	<string name="poi_volcano_status_active">Активный</string>
+	<string name="poi_volcano_status_inactive">Неактивный</string>
+	<string name="poi_volcano_number_of_eruptions">Число извержений</string>
+
 
 </resources>
