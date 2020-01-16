@@ -35,6 +35,7 @@ import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.SavingTrackHelper.SaveGpxResult;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.settings.BaseSettingsFragment;
+import net.osmand.plus.settings.MonitoringSettingsFragment;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -149,7 +150,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 
 	@Override
 	public Class<? extends BaseSettingsFragment> getSettingsFragment() {
-		return null;
+		return MonitoringSettingsFragment.class;
 	}
 
 	@Override

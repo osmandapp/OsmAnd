@@ -11,6 +11,9 @@
 	Thx - Hardy
 
 -->
+    <string name="live_monitoring">Online tracking</string>
+    <string name="save_track_logging_accuracy">Logging accuracy</string>
+    <string name="tracks_view_descr">You can find all your recorded tracks in Menu — My place — Tracks or in OsmAd folder using file manager.</string>
     <string name="multimedia_notes_view_descr">You can find all your notes in Menu — My places — Notes</string>
     <string name="audio_notes">Audio notes</string>
     <string name="video_notes">Video notes</string>
