@@ -259,4 +259,7 @@
     <string name="unit_of_speed_system">Unidade de velocidade</string>
     <string name="buffer_time_descr">Tempo máximo para armazenar pontos no buffer</string>
     <string name="buffer_time">Tempo de expiração do buffer</string>
+    <string name="shared_string_suggested">Sugerido</string>
+    <string name="status_widget_title">Estado do Rastreador de OsmAnd</string>
+    <string name="back_to_osmand">Voltar para OsmAnd</string>
 </resources>

@@ -237,7 +237,7 @@
     <string name="privacy">Personvern</string>
     <string name="shared_string_select">Velg</string>
     <string name="min_logging_distance">Minste loggingsavstand</string>
-    <string name="min_logging_distance_descr">Filter: Minimumsdistanse til neste loggingspunkt</string>
+    <string name="min_logging_distance_descr">Filter: Minimumsavstand for logging av nytt punkt</string>
     <string name="min_logging_accuracy">Minimumsnøyaktighet for logging</string>
     <string name="min_logging_accuracy_descr">Filter: Ingen logging med mindre nøyaktigheten nås</string>
     <string name="min_logging_speed">Minimumshastighet ved logging</string>
@@ -262,4 +262,5 @@
     <string name="buffer_time">Utløpstid for mellomlager</string>
     <string name="shared_string_suggested">Foreslått</string>
     <string name="status_widget_title">OsmAnd-sporerstatus</string>
+    <string name="back_to_osmand">Tilbake til OsmAnd</string>
 </resources>
