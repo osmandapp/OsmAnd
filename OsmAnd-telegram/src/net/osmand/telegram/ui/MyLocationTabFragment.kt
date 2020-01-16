@@ -580,7 +580,7 @@ class MyLocationTabFragment : Fragment(), TelegramListener {
 			val lastInfo = lastChatsInfo.find { it.chatId == chatId }
 			if (chat != null && lastInfo != null) {
 				val index = lastChatsInfo.indexOf(lastInfo)
-				lastItems.add(LastChat(chat, settings.calcLivePeriod(lastChatsInfo[index].periods)))
+				lastItems.add(LastChat(chat, lastChatsInfo[index].period))
 			}
 		}
 		return lastItems

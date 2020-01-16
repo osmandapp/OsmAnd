@@ -65,6 +65,10 @@ public class JSCommandBuilder extends CommandBuilder {
         return this;
     }
 
+    private boolean isJSCommandExists(String name) {
+        return jsScope.get(name) instanceof Function;
+    }
+
     public JSCommandBuilder goAhead(){
         return goAhead(-1, new StreetName());
     }
@@ -115,12 +119,14 @@ public class JSCommandBuilder extends CommandBuilder {
         return addCommand(C_TURN, param, dist, convertStreetName(streetName));
     }
 
-    public JSCommandBuilder takeExit(String turnType, StreetName streetName) {
-        return takeExit(turnType, -1, streetName);
+    public JSCommandBuilder takeExit(String turnType, int exit, StreetName streetName) {
+        return takeExit(turnType, -1, exit, streetName);
     }
 
-    public JSCommandBuilder takeExit(String turnType, double dist, StreetName streetName) {
-        return addCommand(C_TAKE_EXIT, turnType, dist, convertStreetName(streetName));
+    public JSCommandBuilder takeExit(String turnType, double dist, int exit, StreetName streetName) {
+        return isJSCommandExists(C_TAKE_EXIT) ?
+                addCommand(C_TAKE_EXIT, turnType, dist, exit, convertStreetName(streetName)) :
+                addCommand(C_TURN, turnType, dist, convertStreetName(streetName));
     }
 
     /**

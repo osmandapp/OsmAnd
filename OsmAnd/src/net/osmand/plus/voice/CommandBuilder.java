@@ -179,12 +179,12 @@ public class CommandBuilder {
 		return alt(prepareStruct(C_TURN, param, dist, streetName), prepareStruct(C_TURN, param, dist));
 	}
 
-	public CommandBuilder takeExit(String turnType, StreetName streetName) {
-		return alt(prepareStruct(C_TAKE_EXIT, turnType, streetName), prepareStruct(C_TAKE_EXIT, turnType));
+	public CommandBuilder takeExit(String turnType, int exit, StreetName streetName) {
+		return alt(prepareStruct(C_TAKE_EXIT, turnType, exit, streetName), prepareStruct(C_TAKE_EXIT, turnType, exit));
 	}
 
-	public CommandBuilder takeExit(String turnType, double dist, StreetName streetName) {
-		return alt(prepareStruct(C_TAKE_EXIT, turnType, dist, streetName), prepareStruct(C_TAKE_EXIT, turnType, dist));
+	public CommandBuilder takeExit(String turnType, double dist, int exit, StreetName streetName) {
+		return alt(prepareStruct(C_TAKE_EXIT, turnType, dist, exit, streetName), prepareStruct(C_TAKE_EXIT, turnType, dist, exit));
 	}
 
 	/**
