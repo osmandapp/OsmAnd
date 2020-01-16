@@ -3080,7 +3080,7 @@
     <string name="route_general_information">Total distance %1$s, traveling time %2$d h %3$d min.</string>
     <string name="router_service_descr">Online or offline navigation service.</string>
     <string name="router_service">Navigation service</string>
-    <string name="sd_dir_not_accessible">The data folder on the memory card is not accessible!</string>
+    <string name="sd_dir_not_accessible">The storage folder on the memory card is inaccessible!</string>
     <string name="download_question">Download {0} - {1} ?</string>
     <string name="download_question_exist">Offline data for {0} already exists ({1}). Update it ({2})?</string>
     <string name="address">Address</string>
