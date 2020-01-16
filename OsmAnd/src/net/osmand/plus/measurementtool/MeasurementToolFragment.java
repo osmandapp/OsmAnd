@@ -1512,6 +1512,13 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 				final View view = UiUtilities.getInflater(mapActivity, nightMode).inflate(R.layout.close_measurement_tool_dialog, null);
 				final SwitchCompat showOnMapToggle = (SwitchCompat) view.findViewById(R.id.toggle_show_on_map);
 
+				view.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						showOnMapToggle.setChecked(!showOnMapToggle.isChecked());
+					}
+				});
+
 				builder.setView(view);
 				builder.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 					@Override
@@ -1531,6 +1538,7 @@ public class MeasurementToolFragment extends BaseOsmAndFragment {
 						}
 					}
 				});
+				UiUtilities.setupCompoundButton(showOnMapToggle, nightMode, UiUtilities.CompoundButtonType.GLOBAL);
 			} else {
 				builder.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 					@Override

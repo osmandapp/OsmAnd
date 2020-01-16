@@ -261,4 +261,5 @@
     <string name="buffer_time">Tempus de iscadidura de sa memòria tampone</string>
     <string name="shared_string_suggested">Cunsigiadu</string>
     <string name="status_widget_title">Istadu de s\'arrastadore de OsmAnd</string>
+    <string name="back_to_osmand">Torra a OsmAnd</string>
 </resources>

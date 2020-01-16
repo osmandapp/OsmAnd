@@ -851,22 +851,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 			lastChatsInfo.forEach { lastInfo ->
 				val obj = JSONObject()
 				obj.put(LastChatInfo.CHAT_ID_KEY, lastInfo.chatId)
-				obj.put(LastChatInfo.PERIODS_KEY, convertPeriodsToJson(lastInfo.periods))
-				jArray.put(obj)
-			}
-			jArray
-		} catch (e: JSONException) {
-			log.error(e)
-			null
-		}
-	}
-
-	private fun convertPeriodsToJson(periods: LinkedList<Long>): JSONArray? {
-		return try {
-			val jArray = JSONArray()
-			for (i in 0 until periods.count()) {
-				val obj = JSONObject()
-				obj.put(i.toString(), periods[i])
+				obj.put(LastChatInfo.PERIOD_KEY, lastInfo.period)
 				jArray.put(obj)
 			}
 			jArray
@@ -947,12 +932,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 			val obj = json.getJSONObject(i)
 			val lastInfo = LastChatInfo().apply {
 				chatId = obj.optLong(LastChatInfo.CHAT_ID_KEY)
-				periods = LinkedList<Long>()
-				val jsonArray = obj.getJSONArray(LastChatInfo.PERIODS_KEY)
-				for (j in 0 until jsonArray.length()) {
-					val o = jsonArray.get(j) as JSONObject
-					periods.addLast(o.optLong(j.toString()))
-				}
+				period = obj.optLong(LastChatInfo.PERIOD_KEY)
 			}
 			lastChatsInfo.addLast(lastInfo)
 		}
@@ -964,46 +944,20 @@ class TelegramSettings(private val app: TelegramApplication) {
 			addItemToSuggested(id, time)
 		} else {
 			val index = lastChatsInfo.indexOf(lastInfo)
-			lastChatsInfo[index].periods = addTimeToPeriods(lastChatsInfo[index].periods, time)
+			lastChatsInfo[index].period = time
 		}
 	}
 
 	private fun addItemToSuggested(id: Long, time: Long) {
 		val newLastInfo = LastChatInfo().apply {
 			chatId = id
-			periods = LinkedList<Long>().apply {
-				addFirst(time)
-			}
+			period = time
 		}
 		if (lastChatsInfo.size < 5) {
 			lastChatsInfo.addFirst(newLastInfo)
 		} else {
 			lastChatsInfo.removeLast()
 			lastChatsInfo.addFirst(newLastInfo)
-		}
-	}
-
-	private fun addTimeToPeriods(periods: LinkedList<Long>?, time: Long): LinkedList<Long> {
-		if (periods?.isNotEmpty() != null) {
-			return if (periods.size < 5) {
-				periods.addFirst(time)
-				periods
-			} else {
-				periods.removeLast()
-				periods.addFirst(time)
-				periods
-			}
-		}
-		return LinkedList<Long>().apply { addFirst(time) }
-	}
-
-	fun calcLivePeriod(periods: LinkedList<Long>): Long {
-		val sortedPeriods = periods.toLongArray()
-		sortedPeriods.sort()
-		return if (sortedPeriods.size % 2 == 0) {
-			(sortedPeriods[sortedPeriods.size / 2] + sortedPeriods[sortedPeriods.size / 2 - 1]) / 2
-		} else {
-			sortedPeriods[sortedPeriods.size / 2]
 		}
 	}
 
@@ -1512,11 +1466,11 @@ class TelegramSettings(private val app: TelegramApplication) {
 	class LastChatInfo {
 
 		var chatId = -1L
-		var periods = LinkedList<Long>()
+		var period = -1L
 
 		companion object {
 			internal const val CHAT_ID_KEY = "chatId"
-			internal const val PERIODS_KEY = "periods"
+			internal const val PERIOD_KEY = "period"
 		}
 	}
 }

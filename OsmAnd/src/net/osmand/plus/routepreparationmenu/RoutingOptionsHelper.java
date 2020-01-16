@@ -63,13 +63,11 @@ public class RoutingOptionsHelper {
 	public static final String DRIVING_STYLE = "driving_style";
 
 	private OsmandApplication app;
-	private OsmandSettings settings;
 
 	private Map<ApplicationMode, RouteMenuAppModes> modes = new HashMap<>();
 
 	public RoutingOptionsHelper(OsmandApplication application) {
 		app = application;
-		settings = app.getSettings();
 	}
 
 	private void addRouteMenuAppModes(ApplicationMode am, List<String> routingParameters) {
@@ -104,6 +102,7 @@ public class RoutingOptionsHelper {
 	}
 
 	public void switchMusic() {
+		OsmandSettings settings = app.getSettings();
 		boolean mt = !settings.INTERRUPT_MUSIC.get();
 		settings.INTERRUPT_MUSIC.set(mt);
 	}
@@ -311,6 +310,7 @@ public class RoutingOptionsHelper {
 	}
 
 	public void showLocalRoutingParameterGroupDialog(final LocalRoutingParameterGroup group, final MapActivity mapActivity, final OnClickListener listener) {
+		OsmandSettings settings = app.getSettings();
 		final ContextMenuAdapter adapter = new ContextMenuAdapter();
 		int i = 0;
 		int selectedIndex = -1;
@@ -364,6 +364,7 @@ public class RoutingOptionsHelper {
 				.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
+						OsmandSettings settings = app.getSettings();
 						int position = selectedPosition[0];
 						if (position >= 0 && position < group.getRoutingParameters().size()) {
 							for (int i = 0; i < group.getRoutingParameters().size(); i++) {

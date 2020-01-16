@@ -317,7 +317,7 @@ public class TextRenderer {
 			float coef = rc.getDensityValue(rc.screenDensityRatio * rc.textScale);
 			Bitmap ico = RenderingIcons.getIcon(context, sr, true);
 			if (ico != null) {
-				float left = text.centerX - ico.getWidth() / 2 * coef;// - 0.5f;
+				float left = text.centerX - ico.getWidth() / 2 * coef - 0.5f;
 				float top = text.centerY - ico.getHeight() / 2 * coef -  paintText.descent() * 1.5f;
 				if(rc.screenDensityRatio != 1f){
 					RectF rf = new RectF(left, top, left + ico.getWidth() * coef, 

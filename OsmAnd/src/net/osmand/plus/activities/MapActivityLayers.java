@@ -208,8 +208,6 @@ public class MapActivityLayers {
 	public void updateLayers(OsmandMapTileView mapView) {
 		OsmandSettings settings = getApplication().getSettings();
 		updateMapSource(mapView, settings.MAP_TILE_SOURCES);
-		boolean showStops = settings.getCustomRenderBooleanProperty(OsmandSettings.TRANSPORT_STOPS_OVER_MAP).get();
-		transportStopsLayer.setShowTransportStops(showStops);
 		OsmandPlugin.refreshLayers(mapView, activity);
 	}
 

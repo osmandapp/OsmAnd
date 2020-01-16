@@ -1471,8 +1471,6 @@ public class OsmandSettings {
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<String> PREFERRED_LOCALE = new StringPreference("preferred_locale", "").makeGlobal();
 
-	public static final String TRANSPORT_STOPS_OVER_MAP = "transportStops";
-
 	public final OsmandPreference<String> MAP_PREFERRED_LOCALE = new StringPreference("map_preferred_locale", "").makeGlobal().cache();
 	public final OsmandPreference<Boolean> MAP_TRANSLITERATE_NAMES = new BooleanPreference("map_transliterate_names", false).makeGlobal().cache();
 
@@ -2292,6 +2290,7 @@ public class OsmandSettings {
 	public static final String LAST_KNOWN_MAP_LAT = "last_known_map_lat"; //$NON-NLS-1$
 	public static final String LAST_KNOWN_MAP_LON = "last_known_map_lon"; //$NON-NLS-1$
 	public static final String LAST_KNOWN_MAP_ZOOM = "last_known_map_zoom"; //$NON-NLS-1$
+	public static final String LAST_KNOWN_MAP_ELEVATION = "last_known_map_elevation"; //$NON-NLS-1$
 
 	public static final String MAP_LABEL_TO_SHOW = "map_label_to_show"; //$NON-NLS-1$
 	public static final String MAP_LAT_TO_SHOW = "map_lat_to_show"; //$NON-NLS-1$
@@ -2403,6 +2402,14 @@ public class OsmandSettings {
 
 	public void setLastKnownMapZoom(int zoom) {
 		settingsAPI.edit(globalPreferences).putInt(LAST_KNOWN_MAP_ZOOM, zoom).commit();
+	}
+
+	public float getLastKnownMapElevation() {
+		return settingsAPI.getFloat(globalPreferences, LAST_KNOWN_MAP_ELEVATION, 90);
+	}
+
+	public void setLastKnownMapElevation(float elevation) {
+		settingsAPI.edit(globalPreferences).putFloat(LAST_KNOWN_MAP_ELEVATION, elevation).commit();
 	}
 
 	public final static String POINT_NAVIGATE_LAT = "point_navigate_lat"; //$NON-NLS-1$

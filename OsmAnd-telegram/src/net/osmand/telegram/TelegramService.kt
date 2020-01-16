@@ -245,6 +245,8 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 					oldestTime = -1
 				}
 				app().showLocationHelper.addOrUpdateStatusWidget(oldestTime, isSending)
+			} else {
+				app().showLocationHelper.addOrUpdateStatusWidget(-1, false)
 			}
 			startWidgetUpdates()
 		}, UPDATE_WIDGET_INTERVAL_MS)

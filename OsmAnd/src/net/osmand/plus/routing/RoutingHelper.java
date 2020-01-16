@@ -8,6 +8,7 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.plus.NavigationService;
+import net.osmand.plus.OsmAndAppCustomization.OsmAndAppCustomizationListener;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -95,11 +96,19 @@ public class RoutingHelper {
 	public RoutingHelper(OsmandApplication context){
 		this.app = context;
 		settings = context.getSettings();
-		voiceRouter = new VoiceRouter(this, settings);
+		voiceRouter = new VoiceRouter(this);
 		provider = new RouteProvider();
 		transportRoutingHelper = context.getTransportRoutingHelper();
 		transportRoutingHelper.setRoutingHelper(this);
 		setAppMode(settings.APPLICATION_MODE.get());
+
+		OsmAndAppCustomizationListener customizationListener = new OsmAndAppCustomizationListener() {
+			@Override
+			public void onOsmAndSettingsCustomized() {
+				settings = app.getSettings();
+			}
+		};
+		app.getAppCustomization().addListener(customizationListener);
 	}
 
 	public TransportRoutingHelper getTransportRoutingHelper() {
@@ -825,21 +834,21 @@ public class RoutingHelper {
 //		return false;
 //	}
 
-	public synchronized String getCurrentName(TurnType[] next){
-		NextDirectionInfo n = getNextRouteDirectionInfo(new NextDirectionInfo(), true);
+	public synchronized String getCurrentName(TurnType[] next, NextDirectionInfo n){
 		Location l = lastFixedLocation;
 		float speed = 0;
 		if(l != null && l.hasSpeed()) {
 			speed = l.getSpeed();
 		}
+		if(next != null) {
+			next[0] = n.directionInfo.getTurnType();
+		}
 		if(n.distanceTo > 0  && n.directionInfo != null && !n.directionInfo.getTurnType().isSkipToSpeak() &&
 				voiceRouter.isDistanceLess(speed, n.distanceTo, voiceRouter.PREPARE_DISTANCE * 0.75f, 0f)) {
 			String nm = n.directionInfo.getStreetName();
-//			String rf = n.directionInfo.getRef();
+			String rf = n.directionInfo.getRef();
 			String dn = n.directionInfo.getDestinationName();
-			if(next != null) {
-				next[0] = n.directionInfo.getTurnType();
-			}
+
 			return formatStreetName(nm, null, dn, "»");
 		}
 		RouteSegmentResult rs = getCurrentSegmentResult();

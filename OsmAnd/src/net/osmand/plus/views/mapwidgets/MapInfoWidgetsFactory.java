@@ -913,13 +913,13 @@ public class MapInfoWidgetsFactory {
 	public static class TopTextView {
 		private final RoutingHelper routingHelper;
 		private final MapActivity map;
-		private View topBar;
-		private TextView addressText;
-		private TextView addressTextShadow;
-		private TextView exitRefText;
-		private ImageView shieldIcon;
-		private ImageView turnIcon;
-		private OsmAndLocationProvider locationProvider;
+		private final View topBar;
+		private final TextView addressText;
+		private final TextView addressTextShadow;
+		private final TextView exitRefText;
+		private final ImageView shieldIcon;
+		private final ImageView turnIcon;
+		private final OsmAndLocationProvider locationProvider;
 		private WaypointHelper waypointHelper;
 		private OsmandSettings settings;
 		private View waypointInfoBar;
@@ -927,9 +927,12 @@ public class MapInfoWidgetsFactory {
 		private TurnDrawable turnDrawable;
 		private boolean showMarker;
 		private int shadowRad;
+		RouteCalculationResult.NextDirectionInfo calc1;
+
 		private static final Log LOG = PlatformUtil.getLog(TopTextView.class);
 
 		public TopTextView(OsmandApplication app, MapActivity map) {
+			turnDrawable = new NextTurnInfoWidget.TurnDrawable(map, true);
 			topBar = map.findViewById(R.id.map_top_bar);
 			addressText = (TextView) map.findViewById(R.id.map_address_text);
 			addressTextShadow = (TextView) map.findViewById(R.id.map_address_text_shadow);
@@ -943,7 +946,7 @@ public class MapInfoWidgetsFactory {
 			settings = app.getSettings();
 			waypointHelper = app.getWaypointHelper();
 			updateVisibility(false);
-			turnDrawable = new NextTurnInfoWidget.TurnDrawable(map, true);
+			calc1 = new RouteCalculationResult.NextDirectionInfo();
 		}
 
 		public boolean updateVisibility(boolean visible) {
@@ -979,13 +982,15 @@ public class MapInfoWidgetsFactory {
 			boolean showMarker = this.showMarker;
 			boolean showExitInfo = false;
 			boolean showShield = false;
+			boolean imminentTurn = false;
 			ExitInfo exitInfo = null;
 			RouteDataObject object = null;
 
 			if (routingHelper != null && routingHelper.isRouteCalculated() && !routingHelper.isDeviatedFromRoute()) {
 				if (routingHelper.isFollowingMode()) {
 					if (settings.SHOW_STREET_NAME.get()) {
-						text = routingHelper.getCurrentName(type);
+						RouteCalculationResult.NextDirectionInfo nextDirInfo = routingHelper.getNextRouteDirectionInfo(calc1, true);
+						text = routingHelper.getCurrentName(type, nextDirInfo);
 						if (text == null) {
 							text = "";
 						} else {
@@ -995,9 +1000,14 @@ public class MapInfoWidgetsFactory {
 								turnDrawable.setColor(R.color.nav_arrow);
 							}
 						}
-						RouteCalculationResult.NextDirectionInfo nextDirInfo = routingHelper.getNextRouteDirectionInfo(
-								new RouteCalculationResult.NextDirectionInfo(), true);
+
 						RouteDirectionInfo directionInfo = nextDirInfo.directionInfo;
+
+						if (nextDirInfo.imminent >= 0) {
+							imminentTurn = true;
+						} else {
+							imminentTurn = false;
+						}
 
 						if (directionInfo != null && directionInfo.getExitInfo() != null) {
 							exitInfo = directionInfo.getExitInfo();
@@ -1072,19 +1082,15 @@ public class MapInfoWidgetsFactory {
 				AndroidUiHelper.updateVisibility(addressTextShadow, shadowRad > 0);
 				boolean update = turnDrawable.setTurnType(type[0]) || showMarker != this.showMarker;
 				this.showMarker = showMarker;
-				if (showShield) {
-					if (setRoadShield(shieldIcon, object)) {
-						AndroidUiHelper.updateVisibility(shieldIcon, true);
-					} else {
-						AndroidUiHelper.updateVisibility(shieldIcon, false);
-					}
+				if (showShield && setRoadShield(shieldIcon, object)) {
+					AndroidUiHelper.updateVisibility(shieldIcon, true);
 				} else {
 					AndroidUiHelper.updateVisibility(shieldIcon, false);
 				}
 
 				if (showExitInfo) {
 					String exitRef = exitInfo.getRef();
-					if (!Algorithms.isEmpty(exitRef)) {
+					if (!Algorithms.isEmpty(exitRef) && imminentTurn) {
 						exitRefText.setText(exitRef);
 						AndroidUiHelper.updateVisibility(exitRefText, true);
 					} else {
@@ -1095,6 +1101,7 @@ public class MapInfoWidgetsFactory {
 				}
 				if (update) {
 					if (type[0] != null) {
+						turnIcon.invalidateDrawable(turnDrawable);
 						turnIcon.setImageDrawable(turnDrawable);
 						AndroidUiHelper.updateVisibility(turnIcon, true);
 					} else if (showMarker) {
