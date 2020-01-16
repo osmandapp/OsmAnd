@@ -66,8 +66,6 @@ public abstract class OsmandPlugin {
 
 	public abstract String getDescription();
 
-	public abstract String getPrefsDescription();
-
 	public abstract int getAssetResourceName();
 
 	@DrawableRes
@@ -75,9 +73,17 @@ public abstract class OsmandPlugin {
 		return R.drawable.ic_extension_dark;
 	}
 
-	public abstract Class<? extends Activity> getSettingsActivity();
+	public Class<? extends Activity> getSettingsActivity() {
+		return null;
+	}
 
-	public abstract Class<? extends BaseSettingsFragment> getSettingsFragment();
+	public Class<? extends BaseSettingsFragment> getSettingsFragment() {
+		return null;
+	}
+
+	public String getPrefsDescription() {
+		return null;
+	}
 
 	public String getVersion() {
 		return "";

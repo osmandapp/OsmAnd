@@ -420,21 +420,6 @@ public class SRTMPlugin extends OsmandPlugin {
 	@Override
 	public void disable(OsmandApplication app) {
 	}
-	
-	@Override
-	public Class<? extends Activity> getSettingsActivity() {
-		return null;
-	}
-
-	@Override
-	public Class<? extends BaseSettingsFragment> getSettingsFragment() {
-		return null;
-	}
-
-	@Override
-	public String getPrefsDescription() {
-		return null;
-	}
 
 	public static void refreshMapComplete(final MapActivity activity) {
 		activity.getMyApplication().getResourceManager().getRenderer().clearCache();

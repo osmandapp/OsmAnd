@@ -155,7 +155,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 
 	@Override
 	public String getPrefsDescription() {
-		return null;
+		return app.getString(R.string.monitoring_prefs_descr);
 	}
 
 	/**

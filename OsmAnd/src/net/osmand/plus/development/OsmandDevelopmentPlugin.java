@@ -30,7 +30,6 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 		//ApplicationMode.regWidgetVisibility("fps", new ApplicationMode[0]);
 	}
 
-
 	@Override
 	public String getId() {
 		return ID;
@@ -124,16 +123,6 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	@Override
 	public Class<? extends Activity> getSettingsActivity() {
 		return SettingsDevelopmentActivity.class;
-	}
-
-	@Override
-	public Class<? extends BaseSettingsFragment> getSettingsFragment() {
-		return null;
-	}
-
-	@Override
-	public String getPrefsDescription() {
-		return null;
 	}
 
 	@Override

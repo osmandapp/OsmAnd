@@ -407,21 +407,6 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		}
 	}
 
-	@Override
-	public Class<? extends Activity> getSettingsActivity() {
-		return SettingsRasterMapsActivity.class;
-	}
-
-	@Override
-	public Class<? extends BaseSettingsFragment> getSettingsFragment() {
-		return null;
-	}
-
-	@Override
-	public String getPrefsDescription() {
-		return null;
-	}
-
 	public static void installMapLayers(final Activity activity, final ResultMatcher<TileSourceTemplate> result) {
 		final OsmandApplication app = (OsmandApplication) activity.getApplication();
 		final OsmandSettings settings = app.getSettings();

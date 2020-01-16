@@ -11,6 +11,10 @@
 	Thx - Hardy
 
 -->
+    <string name="monitoring_prefs_descr">Navigation, logging accuracy</string>
+    <string name="multimedia_notes_prefs_descr">Picture size, audio and video quality</string>
+    <string name="osm_editing_prefs_descr">Login, password, offline editing</string>
+    <string name="accessibility_prefs_descr">Choose icon, color and name</string>
     <string name="live_monitoring_descr">Allow you to share current location using trip recording.</string>
     <string name="live_monitoring">Online tracking</string>
     <string name="save_track_logging_accuracy">Logging accuracy</string>

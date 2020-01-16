@@ -518,21 +518,6 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		parkingPlaceControl.setIcons(R.drawable.widget_parking_day, R.drawable.widget_parking_night);
 		return parkingPlaceControl;
 	}
-	
-	@Override
-	public Class<? extends Activity> getSettingsActivity() {
-		return null;
-	}
-
-	@Override
-	public Class<? extends BaseSettingsFragment> getSettingsFragment() {
-		return null;
-	}
-
-	@Override
-	public String getPrefsDescription() {
-		return null;
-	}
 
 	@Override
 	public int getAssetResourceName() {

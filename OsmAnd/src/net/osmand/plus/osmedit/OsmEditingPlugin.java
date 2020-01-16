@@ -199,7 +199,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 
 	@Override
 	public String getPrefsDescription() {
-		return null;
+		return app.getString(R.string.osm_editing_prefs_descr);
 	}
 
 	@Override

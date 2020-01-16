@@ -121,19 +121,4 @@ public class NauticalMapsPlugin extends OsmandPlugin {
 	public String getId() {
 		return ID;
 	}
-
-	@Override
-	public Class<? extends Activity> getSettingsActivity() {
-		return null;
-	}
-
-	@Override
-	public Class<? extends BaseSettingsFragment> getSettingsFragment() {
-		return null;
-	}
-
-	@Override
-	public String getPrefsDescription() {
-		return null;
-	}
 }

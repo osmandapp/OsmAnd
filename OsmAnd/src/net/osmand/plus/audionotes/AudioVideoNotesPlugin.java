@@ -1797,7 +1797,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	@Override
 	public String getPrefsDescription() {
-		return null;
+		return app.getString(R.string.multimedia_notes_prefs_descr);
 	}
 
 	@Override
