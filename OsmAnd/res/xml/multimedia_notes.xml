@@ -45,7 +45,7 @@
 	<PreferenceCategory
 		android:key="audio_notes"
 		android:layout="@layout/preference_category_with_descr"
-		android:title="@string/audio_notes" />
+		android:title="@string/map_widget_audionotes" />
 
 	<net.osmand.plus.settings.preferences.ListPreferenceEx
 		android:key="av_audio_format"
