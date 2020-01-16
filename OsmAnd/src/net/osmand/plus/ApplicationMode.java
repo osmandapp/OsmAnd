@@ -102,7 +102,7 @@ public class ApplicationMode {
 	public static final ApplicationMode BICYCLE = createBase(R.string.app_mode_bicycle, "bicycle")
 			.speed(2.77f, 15).arrivalDistance(60).offRouteDistance(50)
 			.locationIcon(LocationIcon.BICYCLE).navigationIcon(NavigationIcon.CAR)
-			.icon(R.drawable.ic_action_bicycle_dark, R.drawable.map_action_bicycle_dark,"ic_action_bicycle_dark")
+			.icon(R.drawable.ic_action_bicycle_dark, R.drawable.map_action_bicycle_dark, "ic_action_bicycle_dark")
 			.setRoutingProfile("bicycle").description(R.string.base_profile_descr_bicycle).reg();
 
 	public static final ApplicationMode PEDESTRIAN = createBase(R.string.app_mode_pedestrian, "pedestrian")
@@ -111,7 +111,7 @@ public class ApplicationMode {
 			.setRoutingProfile("pedestrian").description(R.string.base_profile_descr_pedestrian).reg();
 
 	public static final ApplicationMode PUBLIC_TRANSPORT = createBase(R.string.app_mode_public_transport, "public_transport")
-			.icon(R.drawable.ic_action_bus_dark, R.drawable.map_action_bus_dark,"ic_action_bus_dark")
+			.icon(R.drawable.ic_action_bus_dark, R.drawable.map_action_bus_dark, "ic_action_bus_dark")
 			.setRoutingProfile("public_transport").description(R.string.base_profile_descr_public_transport).reg();
 
 	public static final ApplicationMode BOAT = createBase(R.string.app_mode_boat, "boat")
@@ -123,26 +123,36 @@ public class ApplicationMode {
 	public static final ApplicationMode AIRCRAFT = createBase(R.string.app_mode_aircraft, "aircraft")
 			.speed(40f, 100)
 			.locationIcon(LocationIcon.CAR).navigationIcon(NavigationIcon.CAR)
-			.icon(R.drawable.ic_action_aircraft, R.drawable.map_action_aircraft,"ic_action_aircraft").setRouteService(RouteService.STRAIGHT)
+			.icon(R.drawable.ic_action_aircraft, R.drawable.map_action_aircraft, "ic_action_aircraft").setRouteService(RouteService.STRAIGHT)
 			.setRoutingProfile("STRAIGHT_LINE_MODE").description(R.string.base_profile_descr_aircraft).reg();
 
 	public static final ApplicationMode SKI = createBase(R.string.app_mode_skiing, "ski")
 			.speed(1.38f, 15).arrivalDistance(60).offRouteDistance(50)
 			.locationIcon(LocationIcon.BICYCLE).navigationIcon(NavigationIcon.CAR)
-			.icon(R.drawable.ic_action_skiing,  R.drawable.ic_action_skiing,"ic_action_skiing")
+			.icon(R.drawable.ic_action_skiing, R.drawable.ic_action_skiing, "ic_action_skiing")
 			.setRoutingProfile("ski").description(R.string.base_profile_descr_ski).reg();
 
 	private static class ApplicationModeBean {
-		@Expose String stringKey;
-		@Expose String userProfileName;
-		@Expose String parent;
-		@Expose String iconName = "map_world_globe_dark";
-		@Expose ProfileIconColors iconColor = ProfileIconColors.DEFAULT;
-		@Expose String routingProfile = null;
-		@Expose RouteService routeService = RouteService.OSMAND;
-		@Expose LocationIcon locationIcon = LocationIcon.DEFAULT;
-		@Expose NavigationIcon navigationIcon = NavigationIcon.CAR;
-		@Expose int order;
+		@Expose
+		String stringKey;
+		@Expose
+		String userProfileName;
+		@Expose
+		String parent;
+		@Expose
+		String iconName = "map_world_globe_dark";
+		@Expose
+		ProfileIconColors iconColor = ProfileIconColors.DEFAULT;
+		@Expose
+		String routingProfile = null;
+		@Expose
+		RouteService routeService = RouteService.OSMAND;
+		@Expose
+		LocationIcon locationIcon = LocationIcon.DEFAULT;
+		@Expose
+		NavigationIcon navigationIcon = NavigationIcon.CAR;
+		@Expose
+		int order;
 	}
 
 	private static void initRegVisibility() {
@@ -258,12 +268,12 @@ public class ApplicationMode {
 			return this;
 		}
 
-		public ApplicationModeBuilder locationIcon(LocationIcon locationIcon){
+		public ApplicationModeBuilder locationIcon(LocationIcon locationIcon) {
 			applicationMode.locationIcon = locationIcon;
 			return this;
 		}
 
-		public ApplicationModeBuilder navigationIcon(NavigationIcon navigationIcon){
+		public ApplicationModeBuilder navigationIcon(NavigationIcon navigationIcon) {
 			applicationMode.navigationIcon = navigationIcon;
 			return this;
 		}
@@ -554,11 +564,13 @@ public class ApplicationMode {
 		return routingProfile;
 	}
 
-	@DrawableRes public int getIconRes() {
+	@DrawableRes
+	public int getIconRes() {
 		return iconRes;
 	}
 
-	@DrawableRes public int getMapIconRes() {
+	@DrawableRes
+	public int getMapIconRes() {
 		return iconMapRes;
 	}
 
@@ -589,9 +601,9 @@ public class ApplicationMode {
 	}
 
 	private static void initDefaultSpeed(OsmandApplication app) {
-		for(ApplicationMode m : values) {
+		for (ApplicationMode m : values) {
 			float spd = app.getSettings().DEFAULT_SPEED.getModeValue(m);
-			if(spd > 0) {
+			if (spd > 0) {
 				m.defaultSpeed = spd;
 			}
 		}
@@ -650,7 +662,8 @@ public class ApplicationMode {
 
 	private static void initDefaultModesParams(OsmandApplication app) {
 		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-		Type t = new TypeToken<ArrayList<ApplicationModeBean>>() {}.getType();
+		Type t = new TypeToken<ArrayList<ApplicationModeBean>>() {
+		}.getType();
 		List<ApplicationModeBean> defaultAppModeBeans = gson.fromJson(app.getSettings().DEFAULT_APP_PROFILES.get(), t);
 
 		if (!Algorithms.isEmpty(defaultAppModeBeans)) {
@@ -670,9 +683,10 @@ public class ApplicationMode {
 		}
 	}
 
-	private static void initCustomModes(OsmandApplication app){
+	private static void initCustomModes(OsmandApplication app) {
 		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-		Type t = new TypeToken<ArrayList<ApplicationModeBean>>() {}.getType();
+		Type t = new TypeToken<ArrayList<ApplicationModeBean>>() {
+		}.getType();
 		List<ApplicationModeBean> customProfiles = gson.fromJson(app.getSettings().CUSTOM_APP_PROFILES.get(), t);
 
 		if (!Algorithms.isEmpty(customProfiles)) {
@@ -804,17 +818,20 @@ public class ApplicationMode {
 	}
 
 	public enum ProfileIconColors {
-		DEFAULT(R.string.rendering_value_default_name, R.color.profile_icon_color_blue_light_default,  R.color.profile_icon_color_blue_dark_default),
+		DEFAULT(R.string.rendering_value_default_name, R.color.profile_icon_color_blue_light_default, R.color.profile_icon_color_blue_dark_default),
 		PURPLE(R.string.rendering_value_purple_name, R.color.profile_icon_color_purple_light, R.color.profile_icon_color_purple_dark),
-		GREEN(R.string.rendering_value_green_name, R.color.profile_icon_color_green_light,  R.color.profile_icon_color_green_dark),
-		BLUE(R.string.rendering_value_blue_name, R.color.profile_icon_color_blue_light,  R.color.profile_icon_color_blue_dark),
+		GREEN(R.string.rendering_value_green_name, R.color.profile_icon_color_green_light, R.color.profile_icon_color_green_dark),
+		BLUE(R.string.rendering_value_blue_name, R.color.profile_icon_color_blue_light, R.color.profile_icon_color_blue_dark),
 		RED(R.string.rendering_value_red_name, R.color.profile_icon_color_red_light, R.color.profile_icon_color_red_dark),
 		DARK_YELLOW(R.string.rendering_value_darkyellow_name, R.color.profile_icon_color_yellow_light, R.color.profile_icon_color_yellow_dark),
 		MAGENTA(R.string.shared_string_color_magenta, R.color.profile_icon_color_magenta_light, R.color.profile_icon_color_magenta_dark);
 
-		@StringRes private int name;
-		@ColorRes private int dayColor;
-		@ColorRes private int nightColor;
+		@StringRes
+		private int name;
+		@ColorRes
+		private int dayColor;
+		@ColorRes
+		private int nightColor;
 
 		ProfileIconColors(@StringRes int name, @ColorRes int dayColor, @ColorRes int nightColor) {
 			this.name = name;
@@ -902,12 +919,12 @@ public class ApplicationMode {
 		}
 	}
 
-	public enum LocationIcon{
-		DEFAULT(R.drawable.map_default_location_xml,R.drawable.map_default_location_view_angle),
-		CAR(R.drawable.map_car_location_xml,R.drawable.map_car_location_view_angle),
-		BICYCLE(R.drawable.map_bicycle_location_xml,R.drawable.map_bicycle_location_view_angle);
+	public enum LocationIcon {
+		DEFAULT(R.drawable.map_default_location_xml, R.drawable.map_default_location_view_angle),
+		CAR(R.drawable.map_car_location_xml, R.drawable.map_car_location_view_angle),
+		BICYCLE(R.drawable.map_bicycle_location_xml, R.drawable.map_bicycle_location_view_angle);
 
-		LocationIcon(@DrawableRes int iconId, @DrawableRes int headingIconId){
+		LocationIcon(@DrawableRes int iconId, @DrawableRes int headingIconId) {
 			this.iconId = iconId;
 			this.headingIconId = headingIconId;
 		}
@@ -920,16 +937,17 @@ public class ApplicationMode {
 		public int getIconId() {
 			return iconId;
 		}
+
 		public int getHeadingIconId() {
 			return headingIconId;
 		}
 	}
 
-	public enum NavigationIcon{
+	public enum NavigationIcon {
 		CAR(R.drawable.map_car_navigation_xml),
 		NAUTICAL(R.drawable.map_nautical_navigation_xml);
 
-		NavigationIcon(@DrawableRes int iconId){
+		NavigationIcon(@DrawableRes int iconId) {
 			this.iconId = iconId;
 		}
 

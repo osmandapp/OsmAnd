@@ -165,7 +165,7 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 			headingIcon = BitmapFactory.decodeResource(view.getResources(), appMode.getLocationIcon().getHeadingIconId());
 			headingPaint.setColorFilter(new PorterDuffColorFilter(color, PorterDuff.Mode.SRC_IN));
 			locationIcon = (LayerDrawable) view.getResources().getDrawable(appMode.getLocationIcon().getIconId());
-			DrawableCompat.setTint(locationIcon.getDrawable(1), color);
+			DrawableCompat.setTint(DrawableCompat.wrap(locationIcon.getDrawable(1)), color);
 			area.setColor(UiUtilities.getColorWithAlpha(color, 0.16f));
 			aroundArea.setColor(color);
 		}
