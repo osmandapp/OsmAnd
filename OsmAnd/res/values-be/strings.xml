@@ -68,7 +68,7 @@
     <string name="plugin_distance_point">Пункт</string>
     <string name="gpx_file_name">Назва файла GPX</string>
     <string name="gpx_saved_sucessfully">GPX-файл захаваны ў {0}</string>
-    <string name="osmand_distance_planning_plugin_description">Убудова дадае на экран мапы віджэт, які дазваляе ствараць маршруты, націснуйшы на мапу, а таксама выкарыстоўваць ці змяняць наяўныя файлы GPX, планаваць паездку і вымяраць адлегласць паміж пунктамі. Вынікі могуць быць захаваныя ў выглядзе файла GPX, які пасля можа быць выкарыстаны для навігацыі.</string>
+    <string name="osmand_distance_planning_plugin_description">Убудова дадае на мапу віджэт, які дазваляе ствараць маршруты, націснуйшы на мапу, а таксама выкарыстоўваць ці змяняць наяўныя файлы GPX, планаваць паездку і вымяраць адлегласць паміж пунктамі. Вынікі могуць быць захаваныя ў выглядзе файла GPX, які пасля можа быць выкарыстаны для навігацыі.</string>
     <string name="osmand_distance_planning_plugin_name">Прылада для разліку адлегласцяў і плянавання</string>
     <string name="use_distance_measurement_help">* Націсніце, каб адзначыць пункт.
 \n * Доўга ўтрымлівайце на мапе, каб выдаліць папярэдні пункт.
@@ -165,11 +165,11 @@
     <string name="map_widget_distancemeasurement">Вымярэнне адлегласці</string>
     <string name="audionotes_location_not_defined">Месцазнаходжанне для прывязкі нататкі пакуль яшчэ не вызначылася. «Выкарыстаць месцазнаходжанне…» для запісу нататкі ў абраным месцы.</string>
     <string name="map_widget_audionotes">Аўдыянататкі</string>
-    <string name="audionotes_plugin_description">Убудова для стварэння аўдыё/відэа нататак падчас падарожжаў, з дапамогай кнопкі на экране мапы альбо праз кантэкстнае меню на любым месцы на мапе.</string>
+    <string name="audionotes_plugin_description">Убудова для стварэння аўдыё/відэа нататак падчас падарожжаў, з дапамогай кнопкі на мапе альбо праз кантэкстнае меню на любым месцы на мапе.</string>
     <string name="audionotes_plugin_name">Аўдыё/відэа нататкі</string>
     <string name="index_srtm_parts">частак</string>
     <string name="index_srtm_ele">Ізалініі вышынь</string>
-    <string name="srtm_plugin_name">Ізалініі вышынь</string>
+    <string name="srtm_plugin_name">Контурныя лініі</string>
     <string name="download_select_map_types">Іншыя мапы</string>
     <string name="download_roads_only_item">Толькі дарогі</string>
     <string name="download_srtm_maps">Ізалініі вышынь</string>
@@ -392,7 +392,7 @@
     <string name="osmand_parking_pm">PM</string>
     <string name="osmand_parking_am">AM</string>
     <string name="osmand_parking_position_name">Месца стаянкі</string>
-    <string name="osmand_parking_plugin_description">Убудова месца паркоўкі дазваляе запісаць дзе быў прыпаркаваны ваш аўтамабіль і колькі часу засталося ў выпадку абмежаванай па часе стаянкі. Месца паркоўкі і час відаць на панэлі кіравання OsmAnd і на віджэце на экране з мапай. У каляндар Android можна дадаць напамін.</string>
+    <string name="osmand_parking_plugin_description">Убудова месца паркоўкі дазваляе запісаць дзе быў прыпаркаваны ваш аўтамабіль і колькі часу засталося ў выпадку абмежаванай па часе стаянкі. Месца паркоўкі і час даступныя на панэлі кіравання OsmAnd і на віджэце на мапе. У каляндар Android можна дадаць напамін.</string>
     <string name="osmand_parking_plugin_name">Месца паркоўкі</string>
     <string name="context_menu_item_add_parking_point">Пазначыць месца стаянкі</string>
     <string name="context_menu_item_delete_parking_point">Выдаліць адзнаку месца стаянкі</string>
@@ -442,8 +442,8 @@
 \nЛюбая з гэтых мапаў можа быць выкарыстана ў якасці асноўнай (базавай) мапы для адлюстравання на экране OsmAnd або ў выглядзе накладкі / падкладкі да іншай базавай мапы (стандартнай аўтаномнай мапы OsmAnd). Для таго каб зрабіць любую падкладку больш бачнай, некаторыя элементы вектарнай мапы OsmAnd могуць быць па жаданні лёгка схаваныя праз меню «Налады мапы». 
 \n 
 \nТайлавыя мапы могуць быць атрыманыя непасрэдна з дапамогай сеціўных крыніц або могуць быць падрыхтаваныя для выкарыстання ў аўтаномным рэжыме (і ўласнаручна скапіяваныя ў каталог даных OsmAnd) як база даных SQLite, якую можна атрымаць з дапамогай розных інструментаў падрыхтоўкі мапаў іншых вытворцаў.</string>
-    <string name="osmand_accessibility_description">Убудова дадае падтрымку дадатковых магчымасцяў непасрэдна ў OsmAnd. Гэта палягчае, напрыклад, рэгуляванне хуткасці вымаўлення для голасу TTS, наладу накіраванасці экрана навігацыі, кіраванне маштабам пры дапамозе трэкбола або выкарыстанне галасавых загадаў зваротнай сувязі для аўтаматычнага агалошвання вашага месцазнаходжання.</string>
-    <string name="osmand_development_plugin_description">Убудова адлюстроўвае параметры для распрацоўкі і адладкі функцый, такіх як, праверка або мадэляванне маршруту, адлюстраванне прадукцыйнасці адмалёўкі, праверка галасавых падказак. Гэтыя налады прызначаныя для распрацоўшчыкаў і не патрэбныя звычайнаму карыстальніку.</string>
+    <string name="osmand_accessibility_description">Убудова дадае падтрымку дадатковых магчымасцяў непасрэдна ў OsmAnd. Гэта палягчае, напрыклад, рэгуляванне хуткасці вымаўлення для голасу TTS, наладку накіраванасці экрана навігацыі, кіраванне маштабам пры дапамозе трэкбола або выкарыстанне галасавых загадаў зваротнай сувязі для аўтаматычнага агалошвання вашага месцазнаходжання.</string>
+    <string name="osmand_development_plugin_description">Убудова адлюстроўвае параметры для распрацоўкі і адладкі функцый, такіх як, праверка або мадэляванне маршруту, адлюстраванне прадукцыйнасці адмалёўкі, праверка галасавых падказак. Гэта налады для распрацоўшчыкаў і не патрэбныя звычайнаму карыстальніку.</string>
     <string name="plugins_screen">Убудовы</string>
     <string name="prefs_plugins_descr">Убудовы актывуюць дадатковыя налады і магчымасці.</string>
     <string name="prefs_plugins">Убудовы</string>
@@ -967,7 +967,7 @@
     <string name="save_current_track_descr">Захаваць дзейны след зараз жа як GPX-файл.</string>
     <string name="save_current_track">Захаваць дзейны след</string>
     <string name="save_track_interval">Інтэрвал захавання падчас навігацыі</string>
-    <string name="save_track_interval_descr">Абраць інтэрвал захоўвання пунктаў следу падчас навігацыі.</string>
+    <string name="save_track_interval_descr">Вызгачце інтэрвал захоўвання пунктаў следу падчас навігацыі</string>
     <string name="save_track_to_gpx_descrp">GPX-след аўтаматычна захаваны ў каталог слядоў падчас навігацыі.</string>
     <string name="save_track_to_gpx">Аўтаматычна запісваць след падчас навігацыі</string>
     <string name="update_tile">Абнавіць мапу</string>
@@ -1295,11 +1295,11 @@
     <string name="download_additional_maps">Спампаваць мапы, што адсутнічаюць, %1$s (%2$d МБ)\?</string>
     <string name="shared_string_waypoints">Пункты шляху</string>
     <string name="way_alarms">Дарожныя папярэджанні</string>
-    <string name="speak_favorites">Улюбёныя паблізу</string>
+    <string name="speak_favorites">Улюбёныя месцы паблізу</string>
     <string name="speak_poi">Навакольныя POI</string>
     <string name="shared_string_all">Усе</string>
     <string name="index_tours">Паездкі</string>
-    <string name="record_plugin_description">Убудова актывуе функцыі для запісу і захоўвання вашых слядоў уласнаручна націскам на віджэт запісу GPX на экране мапы, або таксама аўтаматычна запісвае ўсе вашыя маршруты навігацыі ў файл GPX. 
+    <string name="record_plugin_description">Убудова актывуе функцыі для запісу і захоўвання вашых слядоў уласнаручна націскам на віджэт запісу GPX на мапе, або таксама аўтаматычна запісвае ўсе вашыя маршруты навігацыі ў файл GPX. 
 \n 
 \nЗапісанымі слядамі можна падзяліцца з вашымі сябрамі або выкарыстоўваць іх для адсылкі ў OSM. Спартоўцы могуць выкарыстоўваць запісаныя сляды для кантролю за трэніроўкамі. Некаторы базавы аналіз слядоў можна правесці непасрэдна ў OsmAnd, напрыклад, час праходжання кругу, сярэдняя хуткасць і г.д., сляды, вядома, пазней таксама можна прааналізаваць пры дапамозе адмысловых інструментахў аналізу іншых вытворцаў.</string>
     <string name="record_plugin_name">Запіс падарожжа</string>
@@ -1309,9 +1309,9 @@
     <string name="rendering_attr_publicTransportMode_name">Маршруты аўтобусаў, тралейбусаў і таксі</string>
     <string name="save_track_to_gpx_globally">Пісаць след у GPX-файл</string>
     <string name="save_track_interval_globally">Інтэрвал запісу</string>
-    <string name="save_track_to_gpx_globally_descr">Агульны запіс месцазнаходжання ў GPX-файл можа быць уключаны або выключаны з дапамогай кнопкі запісу GPX на экране з мапай.</string>
+    <string name="save_track_to_gpx_globally_descr">Запіс месцазнаходжання ў GPX-файл можа быць уключаны або выключаны з дапамогай кнопкі запісу GPX мапе.</string>
     <string name="confirm_every_run">Пытацца заўсёды</string>
-    <string name="save_global_track_interval_descr">Абярыце інтэрвал запісу следу (уключаецца віджэтам запісу GPX на мапе).</string>
+    <string name="save_global_track_interval_descr">Вызначце інтэрвал запісу следу (уключаецца праз віджэт запісу GPX на мапе).</string>
     <string name="save_global_track_interval">Агульны інтэрвал запісу</string>
     <string name="traffic_warning_speed_limit">Абмежаванне хуткасці</string>
     <string name="traffic_warning_border_control">Памежны кантроль</string>
@@ -1323,11 +1323,11 @@
     <string name="text_size_descr">Змяніць памер тэксту на мапе.</string>
     <string name="text_size">Памер тэксту</string>
     <string name="speed_limit_exceed">Дапушчальнае значэнне перавышэння хуткасці</string>
-    <string name="speed_limit_exceed_message">Задаць дапушчалнае значэнне перавышэння хуткасці, пры якім вы атрымаеце галасавое паведамленне.</string>
-    <string name="fav_point_emoticons_message">Назва ўлюбёнага была змененая на %1$s для магчымасці захавання радка з эматыконам ў файл.</string>
+    <string name="speed_limit_exceed_message">Абярыце дапушчальнае значэнне перавышэння хуткасці, пры якім вы атрымаеце галасавое паведамленне.</string>
+    <string name="fav_point_emoticons_message">Назва ўлюбёнага месца была змененая на \"%1$s\" для магчымасці захавання радка з эматыконам ў файл.</string>
     <string name="print_route">Паказаць маршрут</string>
-    <string name="fav_point_dublicate">Дубляванне назвы ўлюбёнага пункту</string>
-    <string name="fav_point_dublicate_message">Улюбёнае з такой назвай ўжо існуе, таму будзе выкарыстана %1$s для прадухілення дублявання назваў.</string>
+    <string name="fav_point_dublicate">Дубляванне назвы ўлюбёнага месца</string>
+    <string name="fav_point_dublicate_message">Назва ўлюбёнага месца была змененая на \"%1$s\", каб пазбегнуць паўтарэння.</string>
     <string name="local_index_description">Націсніце на любы элемент спіса для прагляду больш падрабязнай інфармацыі, доўга ўтрымлівайце, каб змясціць у архіў ці выдаліць. Дзейныя даныя прылады (%1$s вольна):</string>
     <string name="anonymous_user">Ананімны карыстальнік</string>
     <string name="logged_as">Вы ўвайшлі як %1$s</string>
@@ -1397,7 +1397,7 @@
     <string name="enable_proxy_title">Уключыць HTTP-проксі</string>
     <string name="enable_proxy_descr">Наладзіць HTTP-проксі для ўсіх сеткавых запытаў.</string>
     <string name="proxy_host_title">Хост проксі</string>
-    <string name="proxy_host_descr">Задайце назву хаста вашага проксі (напрыклад 127.0.0.1).</string>
+    <string name="proxy_host_descr">Вызначце назву хоста вашага проксі (напрыклад 127.0.0.1).</string>
     <string name="proxy_port_title">Порт проксі</string>
     <string name="proxy_port_descr">Задайце нумар парта вашага проксі (напрыклад 8118).</string>
     <string name="proxy_pref_descr">Вызначыць проксі-сервер.</string>
@@ -3415,9 +3415,9 @@
     <string name="move_maps_to_new_destination">Перамясціць у новы пункт прызначэння</string>
     <string name="store_tracks_in_daily_directories_descrp">Запісваць сляды кожны дзень у новы падкаталог (напрыклад, 2018-01-01).</string>
     <string name="update_all_maps_q">Сапраўды хочаце абнавіць усе мапы (%1$d)\?</string>
-    <string name="select_base_profile_dialog_message">Стварыце свой профіль на аснове аднаго з базавых профіляў - гэта будзе вызначаць асноўныя параметры, такія як віджэты, адзінкі хуткасці і адлегласці. Гэта тыповыя профілі дадатку, якія разам з прыкладамі карыстацкіх профіляў могуць быць пашыраныя да:</string>
+    <string name="select_base_profile_dialog_message">Стварыце свой профіль на аснове аднаго з базавых профіляў - гэта будзе вызначаць асноўныя параметры, такія як віджэты, адзінкі вымярэння хуткасці і адлегласці. Гэта тыповыя профілі дадатку, якія разам з прыкладамі профіляў карыстальніка можна пашырыць да:</string>
     <string name="routing_attr_allow_classic_only_description">Маршруты, падрыхтаваныя толькі для класічнага стылю без канькабежных трас. Сюды ўваходзяць маршруты, падрыхтаваныя невялікім снегаходам з больш свабоднай лыжнёй і трасамі, падрыхтаваныя ўручную лыжнікамі.</string>
-    <string name="download_detailed_map">Сцягнуць падрабязную мапу %s, каб прагледзець гэтую вобласць.</string>
+    <string name="download_detailed_map">Спампаваць падрабязную мапу %s, каб праглядзець гэтую вобласць.</string>
     <string name="internal_app_storage_description">Унутранае сховішча, схаванае ад карыстальніка і іншых дадаткаў, даступнае выключна для OsmAnd</string>
     <string name="change_data_storage_folder">Змена каталога захавання даных</string>
     <string name="rendering_attr_piste_type_snow_park_name">Ландшафтны парк</string>
@@ -3430,16 +3430,16 @@
     <string name="rendering_attr_piste_type_nordic_name">Скандынаўскі</string>
     <string name="routeInfo_piste_type_name">Тып гарналыжнай трасы</string>
     <string name="rendering_attr_piste_difficulty_novice_name">Пачатковец</string>
-    <string name="rendering_attr_piste_difficulty_easy_name">Лёгка</string>
+    <string name="rendering_attr_piste_difficulty_easy_name">Лёгкая</string>
     <string name="rendering_attr_piste_difficulty_intermediate_name">Сярэдняя</string>
     <string name="rendering_attr_piste_difficulty_advanced_name">Высокая</string>
-    <string name="rendering_attr_piste_difficulty_expert_name">Эксперт</string>
+    <string name="rendering_attr_piste_difficulty_expert_name">Экспертная</string>
     <string name="rendering_attr_piste_difficulty_freeride_name">Фрырайд</string>
     <string name="rendering_attr_piste_difficulty_extreme_name">Экстрым</string>
     <string name="rendering_attr_piste_difficulty_undefined_name">Не вызначана</string>
     <string name="routeInfo_piste_difficulty_name">Складанасць гарналыжнай трасы</string>
     <string name="routing_attr_width_name">Абмежаванне па шырыні</string>
-    <string name="routing_attr_width_description">Увядзіце шырыню транспартнага сродку для ўліку пры пастраенні маршруту.</string>
+    <string name="routing_attr_width_description">Увядзіце шырыню транспартнага сродку для ўліку пры разліку маршруту.</string>
     <string name="release_3_5">• Абноўлены налады прыкладання і профілю. Цяпер налады размешчаны па тыпу. Кожны профіль можна наладзіць асобна.
 \n 
 \n  • Новы дыялог загрузкі мапы, які прапануе загрузіць мапу падчас прагляду
@@ -3457,6 +3457,6 @@
 \n  • Іншыя выпраўленні памылак
 \n
 \n</string>
-    <string name="simulate_your_location_gpx_descr">Сімуляваць сваю пазіцыю выкарыстоўваючы запісаны GPX след.</string>
-    <string name="quick_action_directions_from_desc">Кнопка, каб усталяваць цэнтр экрана ў пункце адпраўлення, таксама прыкладанне пракладзе шлях да раней абранага пункта прызначэння або адкрые дыялог, каб выбраць пункт прызначэння, калі яго няма на карце.</string>
+    <string name="simulate_your_location_gpx_descr">Сімуляваць сваю пазіцыю пры дапамозе запісанага GPX-следу.</string>
+    <string name="quick_action_directions_from_desc">Кнопка для прызначэння цэнтра экрана пунктам адпраўлення. Таксама дадатак пракладзе шлях да раней абранага пункта прызначэння або адкрые дыялог для выбару пункта прызначэння, калі яго няма на мапе.</string>
 </resources>
