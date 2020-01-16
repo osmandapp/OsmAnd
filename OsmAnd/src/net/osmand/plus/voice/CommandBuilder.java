@@ -180,7 +180,7 @@ public class CommandBuilder {
 	}
 
 	public CommandBuilder takeExit(String turnType, int exit, StreetName streetName) {
-		return alt(prepareStruct(C_TAKE_EXIT, turnType, exit, streetName), prepareStruct(C_TAKE_EXIT, turnType,exit));
+		return alt(prepareStruct(C_TAKE_EXIT, turnType, exit, streetName), prepareStruct(C_TAKE_EXIT, turnType, exit));
 	}
 
 	public CommandBuilder takeExit(String turnType, double dist, int exit, StreetName streetName) {
