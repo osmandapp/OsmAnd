@@ -262,4 +262,5 @@
     <string name="buffer_time">Utløpstid for mellomlager</string>
     <string name="shared_string_suggested">Foreslått</string>
     <string name="status_widget_title">OsmAnd-sporerstatus</string>
+    <string name="back_to_osmand">Tilbake til OsmAnd</string>
 </resources>
