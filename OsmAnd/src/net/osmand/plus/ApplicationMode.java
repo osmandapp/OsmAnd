@@ -920,9 +920,9 @@ public class ApplicationMode {
 	}
 
 	public enum LocationIcon {
-		DEFAULT(R.drawable.map_default_location_xml, R.drawable.map_default_location_view_angle),
-		CAR(R.drawable.map_car_location_xml, R.drawable.map_car_location_view_angle),
-		BICYCLE(R.drawable.map_bicycle_location_xml, R.drawable.map_bicycle_location_view_angle);
+		DEFAULT(R.drawable.map_location_default, R.drawable.map_location_default_view_angle),
+		CAR(R.drawable.map_location_car, R.drawable.map_location_car_view_angle),
+		BICYCLE(R.drawable.map_location_bicycle, R.drawable.map_location_bicycle_view_angle);
 
 		LocationIcon(@DrawableRes int iconId, @DrawableRes int headingIconId) {
 			this.iconId = iconId;
@@ -944,9 +944,9 @@ public class ApplicationMode {
 	}
 
 	public enum NavigationIcon {
-		DEFAULT(R.drawable.map_car_navigation_xml),
-		NAUTICAL(R.drawable.map_nautical_navigation_xml),
-		CAR(R.drawable.map_bearing_car_xml);
+		DEFAULT(R.drawable.map_navigation_default),
+		NAUTICAL(R.drawable.map_navigation_nautical),
+		CAR(R.drawable.map_navigation_car);
 
 		NavigationIcon(@DrawableRes int iconId) {
 			this.iconId = iconId;

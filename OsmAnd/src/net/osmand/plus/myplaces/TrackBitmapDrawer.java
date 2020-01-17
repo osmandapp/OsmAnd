@@ -86,7 +86,7 @@ public class TrackBitmapDrawer {
 		defPointColor = ContextCompat.getColor(app, R.color.gpx_color_point);
 		paintIcon = new Paint();
 		pointSmall = BitmapFactory.decodeResource(app.getResources(), R.drawable.map_white_shield_small);
-		selectedPoint = (LayerDrawable) app.getResources().getDrawable(R.drawable.map_default_location_xml);
+		selectedPoint = (LayerDrawable) app.getResources().getDrawable(R.drawable.map_location_default);
 	}
 
 	public void addListener(TrackBitmapDrawerListener l) {

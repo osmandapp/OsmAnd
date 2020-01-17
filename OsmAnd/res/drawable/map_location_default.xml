@@ -2,17 +2,17 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 	<item android:id="@+id/bottom">
 		<bitmap
-			android:src="@drawable/map_bearing_car_bottom"
+			android:src="@drawable/map_location_default_bottom"
 			android:gravity="bottom|center" />
 	</item>
 	<item android:id="@+id/center">
 		<bitmap
-			android:src="@drawable/map_bearing_car_center"
+			android:src="@drawable/map_location_default_center"
 			android:gravity="bottom|center" />
 	</item>
 	<item android:id="@+id/top">
 		<bitmap
-			android:src="@drawable/map_bearing_car_top"
+			android:src="@drawable/map_location_default_top"
 			android:gravity="bottom|center" />
 	</item>
 </layer-list>
