@@ -29,7 +29,6 @@ import net.osmand.plus.activities.LocalIndexHelper;
 import net.osmand.plus.activities.LocalIndexInfo;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.base.MapViewTrackingUtilities;
-import net.osmand.plus.dialogs.RateUsBottomSheetDialog.RateUsState;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
@@ -213,12 +212,6 @@ public class AppInitializer implements IProgress {
 		}
 		app.getSettings().SHOW_TRAVEL_UPDATE_CARD.set(true);
 		app.getSettings().SHOW_TRAVEL_NEEDED_MAPS_CARD.set(true);
-
-		RateUsState rateUsState = app.getSettings().RATE_US_STATE.get();
-		if (rateUsState != RateUsState.INITIAL_STATE && rateUsState != RateUsState.LIKED) {
-			int startsAfterDismiss = app.getSettings().NUMBER_OF_APP_STARTS_AFTER_DISLIKE.get();
-			app.getSettings().NUMBER_OF_APP_STARTS_AFTER_DISLIKE.set(startsAfterDismiss + 1);
-		}
 		initSettings = true;
 	}
 

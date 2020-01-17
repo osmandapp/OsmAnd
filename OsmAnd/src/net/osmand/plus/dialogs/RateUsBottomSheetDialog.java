@@ -17,7 +17,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.base.BottomSheetDialogFragment;
 
-import java.util.Calendar;
 
 public class RateUsBottomSheetDialog extends BottomSheetDialogFragment {
 	private RateUsBottomSheetDialog.FragmentState state = RateUsBottomSheetDialog.FragmentState.INITIAL_STATE;
@@ -56,13 +55,11 @@ public class RateUsBottomSheetDialog extends BottomSheetDialogFragment {
 			case IGNORED:
 			case DISLIKED_WITH_MESSAGE:
 			case DISLIKED_WITHOUT_MESSAGE:
-				int startsAfterDislike = settings.NUMBER_OF_APP_STARTS_AFTER_DISLIKE.get();
+				int startsOnDislikeMoment = settings.NUMBER_OF_APP_STARTS_ON_DISLIKE_MOMENT.get();
 				long lastDisplayTimeInMillis = settings.LAST_DISPLAY_TIME.get();
-				Calendar modifiedTime = Calendar.getInstance();
-				modifiedTime.add(Calendar.DAY_OF_YEAR, -60);
-				Calendar lastDisplayTime = Calendar.getInstance();
-				lastDisplayTime.setTimeInMillis(lastDisplayTimeInMillis);
-				return modifiedTime.after(lastDisplayTime) && startsAfterDislike > 50;
+				long currentTime = System.currentTimeMillis();
+				return currentTime - lastDisplayTimeInMillis > 5_184_000_000L
+						&& numberOfStarts - startsOnDislikeMoment > 50;
 		}
 		return false;
 	}
@@ -102,8 +99,6 @@ public class RateUsBottomSheetDialog extends BottomSheetDialogFragment {
 				case USER_DISLIKES_APP:
 					String email = getString(R.string.support_email);
 					settings.RATE_US_STATE.set(RateUsBottomSheetDialog.RateUsState.DISLIKED_WITH_MESSAGE);
-					settings.NUMBER_OF_APP_STARTS_AFTER_DISLIKE.set(0);
-					settings.LAST_DISPLAY_TIME.set(System.currentTimeMillis());
 					Intent sendEmail = new Intent(Intent.ACTION_SENDTO);
 					sendEmail.setType("text/plain");
 					sendEmail.setData(Uri.parse("mailto:" + email));
@@ -148,8 +143,6 @@ public class RateUsBottomSheetDialog extends BottomSheetDialogFragment {
 					settings.RATE_US_STATE.set(RateUsBottomSheetDialog.RateUsState.DISLIKED_WITHOUT_MESSAGE);
 					break;
 			}
-			settings.NUMBER_OF_APP_STARTS_AFTER_DISLIKE.set(0);
-			settings.LAST_DISPLAY_TIME.set(System.currentTimeMillis());
 			dismiss();
 		}
 	}
