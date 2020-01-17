@@ -19,6 +19,7 @@ import net.osmand.plus.base.BottomSheetDialogFragment;
 
 
 public class RateUsBottomSheetDialog extends BottomSheetDialogFragment {
+	private static long sixtyDays = 60 * 24 * 60 * 60 * 1000L;
 	private RateUsBottomSheetDialog.FragmentState state = RateUsBottomSheetDialog.FragmentState.INITIAL_STATE;
 	@Nullable
 	@Override
@@ -58,7 +59,7 @@ public class RateUsBottomSheetDialog extends BottomSheetDialogFragment {
 				int startsOnDislikeMoment = settings.NUMBER_OF_APP_STARTS_ON_DISLIKE_MOMENT.get();
 				long lastDisplayTimeInMillis = settings.LAST_DISPLAY_TIME.get();
 				long currentTime = System.currentTimeMillis();
-				return currentTime - lastDisplayTimeInMillis > 5_184_000_000L
+				return currentTime - lastDisplayTimeInMillis > sixtyDays
 						&& numberOfStarts - startsOnDislikeMoment > 50;
 		}
 		return false;
