@@ -260,4 +260,7 @@
     <string name="unit_of_speed_system">Unitat de velocitat</string>
     <string name="buffer_time_descr">Temps màxim per mantenir punts a la memòria intermèdia</string>
     <string name="buffer_time">Temps de caducitat de la memòria intermèdia</string>
+    <string name="shared_string_suggested">Suggeriment</string>
+    <string name="status_widget_title">Estat de l\'enregistrador d\'OsmAnd</string>
+    <string name="back_to_osmand">Torna a OsmAnd</string>
 </resources>
