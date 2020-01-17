@@ -25,7 +25,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -310,7 +309,6 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 			profileName.setImeOptions(EditorInfo.IME_ACTION_DONE);
 			profileName.setRawInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
 			profileName.setText(changedProfile.name);
-			profileName.requestFocus();
 			profileName.addTextChangedListener(new TextWatcher() {
 				@Override
 				public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -332,7 +330,10 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 				}
 			});
 			if (getSelectedAppMode().equals(ApplicationMode.DEFAULT)) {
+				profileName.setFocusableInTouchMode(false);
 				profileName.setFocusable(false);
+			} else {
+				profileName.requestFocus();
 			}
 			profileNameOtfb = (OsmandTextFieldBoxes) holder.findViewById(R.id.profile_name_otfb);
 		} else if (MASTER_PROFILE.equals(preference.getKey())) {
@@ -444,10 +445,16 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 		if (iconItems != null) {
 			setIconNewColor(changedProfile.iconRes);
 		}
-		int selectedColor = ContextCompat.getColor(app, changedProfile.color.getColor(isNightMode()));
-		profileNameOtfb.setPrimaryColor(selectedColor);
-		profileName.getBackground().mutate().setColorFilter(selectedColor, PorterDuff.Mode.SRC_ATOP);
+		updateProfileNameAppearance();
 		updateProfileButton();
+	}
+
+	private void updateProfileNameAppearance() {
+		if (profileName.isFocusable() && profileName.isFocusableInTouchMode()) {
+			int selectedColor = ContextCompat.getColor(app, changedProfile.color.getColor(isNightMode()));
+			profileNameOtfb.setPrimaryColor(selectedColor);
+			profileName.getBackground().mutate().setColorFilter(selectedColor, PorterDuff.Mode.SRC_ATOP);
+		}
 	}
 
 	private View createIconItemView(final int iconRes, ViewGroup rootView) {
@@ -597,12 +604,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 		Activity activity = getActivity();
 		if (activity != null) {
 			View cf = activity.getCurrentFocus();
-			if (cf != null) {
-				InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-				if (imm != null) {
-					imm.hideSoftInputFromWindow(cf.getWindowToken(), 0);
-				}
-			}
+			AndroidUtils.hideSoftKeyboard(activity, cf);
 		}
 	}
 
