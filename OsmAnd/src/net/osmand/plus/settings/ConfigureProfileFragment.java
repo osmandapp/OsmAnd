@@ -1,6 +1,5 @@
 package net.osmand.plus.settings;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -20,7 +19,6 @@ import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceCategory;
 import android.support.v7.preference.PreferenceGroup;
 import android.support.v7.preference.PreferenceGroupAdapter;
-import android.support.v7.preference.SwitchPreferenceCompat;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
@@ -32,8 +30,6 @@ import android.widget.Toast;
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
-import net.osmand.aidl.ConnectedApp;
-import net.osmand.aidl.OsmandAidlApi;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -42,12 +38,10 @@ import net.osmand.plus.SettingsHelper;
 import net.osmand.plus.SettingsHelper.ProfileSettingsItem;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.PluginActivity;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
 import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet;
-import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.plus.skimapsplugin.SkiMapsPlugin;
 
 import org.apache.commons.logging.Log;
@@ -60,7 +54,6 @@ import static net.osmand.plus.profiles.EditProfileFragment.MAP_CONFIG;
 import static net.osmand.plus.profiles.EditProfileFragment.OPEN_CONFIG_ON_MAP;
 import static net.osmand.plus.profiles.EditProfileFragment.SCREEN_CONFIG;
 import static net.osmand.plus.profiles.EditProfileFragment.SELECTED_ITEM;
-import static net.osmand.plus.profiles.SettingsProfileFragment.PROFILE_STRING_KEY;
 
 public class ConfigureProfileFragment extends BaseSettingsFragment {
 
@@ -212,9 +205,6 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 		setupProfileAppearancePref();
 
 		PreferenceCategory pluginSettings = (PreferenceCategory) findPreference(PLUGIN_SETTINGS);
-		pluginSettings.setIconSpaceReserved(false);
-
-		setupConnectedAppsPref(pluginSettings);
 		setupOsmandPluginsPref(pluginSettings);
 
 		PreferenceCategory settingsActions = (PreferenceCategory) findPreference(SETTINGS_ACTIONS);
@@ -265,14 +255,9 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 		if (ctx == null) {
 			return;
 		}
-
 		Preference configureMap = findPreference(PROFILE_APPEARANCE);
-		if (!getSelectedAppMode().equals(ApplicationMode.DEFAULT)) {
-			configureMap.setIcon(getContentIcon(getSelectedAppMode().getIconRes()));
-			configureMap.setFragment(ProfileAppearanceFragment.TAG);
-		} else {
-			configureMap.setVisible(false);
-		}
+		configureMap.setIcon(getContentIcon(getSelectedAppMode().getIconRes()));
+		configureMap.setFragment(ProfileAppearanceFragment.TAG);
 	}
 
 	private void setupCopyProfileSettingsPref() {
@@ -319,25 +304,6 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 		}
 	}
 
-	private void setupConnectedAppsPref(PreferenceCategory preferenceCategory) {
-		OsmandApplication app = getMyApplication();
-		if (app == null) {
-			return;
-		}
-		List<ConnectedApp> connectedApps = app.getAidlApi().getConnectedApps();
-		for (ConnectedApp connectedApp : connectedApps) {
-			SwitchPreferenceCompat preference = new SwitchPreferenceCompat(app);
-			preference.setPersistent(false);
-			preference.setKey(connectedApp.getPack());
-			preference.setIcon(connectedApp.getIcon());
-			preference.setTitle(connectedApp.getName());
-			preference.setChecked(connectedApp.isEnabled());
-			preference.setLayoutResource(R.layout.preference_switch);
-
-			preferenceCategory.addPreference(preference);
-		}
-	}
-
 	private void setupOsmandPluginsPref(PreferenceCategory preferenceCategory) {
 		Context ctx = getContext();
 		if (ctx == null) {
@@ -345,38 +311,20 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 		}
 		List<OsmandPlugin> plugins = OsmandPlugin.getVisiblePlugins();
 		for (OsmandPlugin plugin : plugins) {
-			if (plugin instanceof SkiMapsPlugin || plugin instanceof NauticalMapsPlugin) {
+			if (plugin instanceof SkiMapsPlugin || plugin instanceof NauticalMapsPlugin || plugin.getSettingsFragment() == null) {
 				continue;
 			}
-			SwitchPreferenceEx preference = new SwitchPreferenceEx(ctx);
+			Preference preference = new Preference(ctx);
 			preference.setPersistent(false);
 			preference.setKey(plugin.getId());
 			preference.setTitle(plugin.getName());
-			preference.setChecked(plugin.isActive());
-			preference.setIcon(getPluginIcon(plugin));
-			preference.setIntent(getPluginIntent(plugin));
-			preference.setLayoutResource(R.layout.preference_dialog_and_switch);
+			preference.setSummary(plugin.getPrefsDescription());
+			preference.setIcon(getContentIcon(plugin.getLogoResourceId()));
+			preference.setLayoutResource(R.layout.preference_with_descr);
+			preference.setFragment(plugin.getSettingsFragment().getName());
 
 			preferenceCategory.addPreference(preference);
 		}
-	}
-
-	private Drawable getPluginIcon(OsmandPlugin plugin) {
-		int iconResId = plugin.getLogoResourceId();
-		return plugin.isActive() ? getActiveIcon(iconResId) : getIcon(iconResId, isNightMode() ? R.color.icon_color_secondary_dark : R.color.icon_color_secondary_light);
-	}
-
-	private Intent getPluginIntent(OsmandPlugin plugin) {
-		Intent intent;
-		final Class<? extends Activity> settingsActivity = plugin.getSettingsActivity();
-		if (settingsActivity != null && !plugin.needsInstallation()) {
-			intent = new Intent(getContext(), settingsActivity);
-			intent.putExtra(PROFILE_STRING_KEY, getSelectedAppMode().getStringKey());
-		} else {
-			intent = new Intent(getContext(), PluginActivity.class);
-			intent.putExtra(PluginActivity.EXTRA_PLUGIN_ID, plugin.getId());
-		}
-		return intent;
 	}
 
 	@Override
@@ -437,7 +385,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 		return super.onPreferenceClick(preference);
 	}
 
-	void onDeleteProfileClick() {
+	private void onDeleteProfileClick() {
 		final ApplicationMode profile = getSelectedAppMode();
 		if (getActivity() != null) {
 			if (profile.getParent() != null) {
@@ -469,33 +417,5 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 						Toast.LENGTH_SHORT).show();
 			}
 		}
-	}
-
-	@Override
-	public boolean onPreferenceChange(Preference preference, Object newValue) {
-		String key = preference.getKey();
-
-		OsmandPlugin plugin = OsmandPlugin.getPlugin(key);
-		if (plugin != null) {
-			if (newValue instanceof Boolean) {
-				if ((plugin.isActive() || !plugin.needsInstallation())) {
-					if (OsmandPlugin.enablePlugin(getActivity(), app, plugin, (Boolean) newValue)) {
-						preference.setIcon(getPluginIcon(plugin));
-						return true;
-					}
-				} else if (plugin.needsInstallation() && preference.getIntent() != null) {
-					startActivity(preference.getIntent());
-				}
-			}
-			return false;
-		}
-
-		OsmandAidlApi aidlApi = app.getAidlApi();
-		ConnectedApp connectedApp = aidlApi.getConnectedApp(key);
-		if (connectedApp != null) {
-			return aidlApi.switchEnabled(connectedApp);
-		}
-
-		return super.onPreferenceChange(preference, newValue);
 	}
 }

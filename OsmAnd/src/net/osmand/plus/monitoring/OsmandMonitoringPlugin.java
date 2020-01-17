@@ -34,6 +34,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.SavingTrackHelper.SaveGpxResult;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
+import net.osmand.plus.settings.BaseSettingsFragment;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -146,7 +147,15 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		return SettingsMonitoringActivity.class;
 	}
 
-	
+	@Override
+	public Class<? extends BaseSettingsFragment> getSettingsFragment() {
+		return MonitoringSettingsFragment.class;
+	}
+
+	@Override
+	public String getPrefsDescription() {
+		return app.getString(R.string.monitoring_prefs_descr);
+	}
 
 	/**
 	 * creates (if it wasn't created previously) the control to be added on a MapInfoLayer that shows a monitoring state (recorded/stopped)

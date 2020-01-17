@@ -49,15 +49,15 @@
 		android:layout="@layout/simple_divider_item"
 		android:selectable="false" />
 
-	<!--PreferenceCategory
-		android:key="select_map_icon"
+	<PreferenceCategory
+		android:key="select_location_icon"
 		android:layout="@layout/preference_category_with_descr"
+		android:summary="@string/select_map_icon_descr"
 		android:title="@string/select_map_icon" />
 
 	<Preference
-		android:key="map_icon_items"
-		android:layout="@layout/preference_with_descr"
-		android:title="@string/select_map_icon"
+		android:key="location_icon_items"
+		android:layout="@layout/preference_color_select"
 		android:selectable="false"/>
 
 	<Preference
@@ -67,12 +67,13 @@
 	<PreferenceCategory
 		android:key="select_nav_icon"
 		android:layout="@layout/preference_category_with_descr"
+		android:summary="@string/select_nav_icon_descr"
 		android:title="@string/select_navigation_icon" />
 
 	<Preference
 		android:key="nav_icon_items"
-		android:layout="@layout/preference_with_descr"
+		android:layout="@layout/preference_color_select"
 		android:title="@string/select_navigation_icon"
-		android:selectable="false"/-->
+		android:selectable="false"/>
 
 </PreferenceScreen>

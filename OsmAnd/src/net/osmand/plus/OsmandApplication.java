@@ -871,10 +871,14 @@ public class OsmandApplication extends MultiDexApplication {
 	public OsmandRegions getRegions() {
 		return regions;
 	}
-	
+
 	public boolean accessibilityEnabled() {
-		final AccessibilityMode mode = getSettings().ACCESSIBILITY_MODE.get();
-		if(OsmandPlugin.getEnabledPlugin(AccessibilityPlugin.class) == null) {
+		return accessibilityEnabledForMode(getSettings().APPLICATION_MODE.get());
+	}
+
+	public boolean accessibilityEnabledForMode(ApplicationMode appMode) {
+		final AccessibilityMode mode = getSettings().ACCESSIBILITY_MODE.getModeValue(appMode);
+		if (OsmandPlugin.getEnabledPlugin(AccessibilityPlugin.class) == null) {
 			return false;
 		}
 		if (mode == AccessibilityMode.ON) {

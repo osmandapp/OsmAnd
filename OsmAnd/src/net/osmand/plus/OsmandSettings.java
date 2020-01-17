@@ -833,17 +833,23 @@ public class OsmandSettings {
 		}
 
 		@Override
-		protected Boolean getValue(Object prefs, Boolean defaultValue) {
-			return ctx.accessibilityEnabled() ?
-					super.getValue(prefs, defaultValue) :
-					defaultValue;
+		public Boolean get() {
+			return ctx.accessibilityEnabled() ? super.get() : getDefaultValue();
 		}
 
 		@Override
-		protected boolean setValue(Object prefs, Boolean val) {
-			return ctx.accessibilityEnabled() ?
-					super.setValue(prefs, val) :
-					false;
+		public Boolean getModeValue(ApplicationMode mode) {
+			return ctx.accessibilityEnabledForMode(mode) ? super.getModeValue(mode) : getDefaultValue();
+		}
+
+		@Override
+		public boolean set(Boolean obj) {
+			return ctx.accessibilityEnabled() && super.set(obj);
+		}
+
+		@Override
+		public boolean setModeValue(ApplicationMode mode, Boolean obj) {
+			return ctx.accessibilityEnabledForMode(mode) && super.setModeValue(mode, obj);
 		}
 	}
 
@@ -1179,9 +1185,6 @@ public class OsmandSettings {
 
 	public final CommonPreference<Integer> NUMBER_OF_STARTS_FIRST_XMAS_SHOWN = new IntPreference("number_of_starts_first_xmas_shown", 0).makeGlobal();
 
-	// this value string is synchronized with settings_pref.xml preference name
-	public final CommonPreference<Boolean> USE_INTERNET_TO_DOWNLOAD_TILES = new BooleanPreference("use_internet_to_download_tiles", true).makeGlobal().cache();
-
 	public final OsmandPreference<String> AVAILABLE_APP_MODES = new StringPreference("available_application_modes", "car,bicycle,pedestrian,public_transport,").makeGlobal().cache();
 
 	public final OsmandPreference<String> LAST_FAV_CATEGORY_ENTERED = new StringPreference("last_fav_category", "").makeGlobal();
@@ -1374,16 +1377,16 @@ public class OsmandSettings {
 	// this value string is synchronized with settings_pref.xml preference name
 	// cache of metrics constants as they are used very often
 	public final OsmandPreference<RelativeDirectionStyle> DIRECTION_STYLE = new EnumIntPreference<RelativeDirectionStyle>(
-			"direction_style", RelativeDirectionStyle.SIDEWISE, RelativeDirectionStyle.values()).makeGlobal().cache();
+			"direction_style", RelativeDirectionStyle.SIDEWISE, RelativeDirectionStyle.values()).makeProfile().cache();
 
 	// this value string is synchronized with settings_pref.xml preference name
 	// cache of metrics constants as they are used very often
 	public final OsmandPreference<AccessibilityMode> ACCESSIBILITY_MODE = new EnumIntPreference<AccessibilityMode>(
-			"accessibility_mode", AccessibilityMode.DEFAULT, AccessibilityMode.values()).makeGlobal().cache();
+			"accessibility_mode", AccessibilityMode.DEFAULT, AccessibilityMode.values()).makeProfile().cache();
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Float> SPEECH_RATE =
-			new FloatPreference("speech_rate", 1f).makeGlobal();
+			new FloatPreference("speech_rate", 1f).makeProfile();
 
 	public final OsmandPreference<Float> ARRIVAL_DISTANCE_FACTOR =
 			new FloatPreference("arrival_distance_factor", 1f).makeProfile();
@@ -1409,27 +1412,27 @@ public class OsmandSettings {
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> ACCESSIBILITY_SMART_AUTOANNOUNCE =
-		new BooleanAccessibilityPreference("accessibility_smart_autoannounce", true).makeGlobal();
+		new BooleanAccessibilityPreference("accessibility_smart_autoannounce", true).makeProfile();
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	// cache of metrics constants as they are used very often
-	public final OsmandPreference<Integer> ACCESSIBILITY_AUTOANNOUNCE_PERIOD = new IntPreference("accessibility_autoannounce_period", 10000).makeGlobal().cache();
+	public final OsmandPreference<Integer> ACCESSIBILITY_AUTOANNOUNCE_PERIOD = new IntPreference("accessibility_autoannounce_period", 10000).makeProfile().cache();
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> DISABLE_OFFROUTE_RECALC =
-		new BooleanAccessibilityPreference("disable_offroute_recalc", false).makeGlobal();
+		new BooleanAccessibilityPreference("disable_offroute_recalc", false).makeProfile();
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> DISABLE_WRONG_DIRECTION_RECALC =
-		new BooleanAccessibilityPreference("disable_wrong_direction_recalc", false).makeGlobal();
+		new BooleanAccessibilityPreference("disable_wrong_direction_recalc", false).makeProfile();
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> DIRECTION_AUDIO_FEEDBACK =
-		new BooleanAccessibilityPreference("direction_audio_feedback", false).makeGlobal();
+		new BooleanAccessibilityPreference("direction_audio_feedback", false).makeProfile();
 	
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> DIRECTION_HAPTIC_FEEDBACK =
-		new BooleanAccessibilityPreference("direction_haptic_feedback", false).makeGlobal();
+		new BooleanAccessibilityPreference("direction_haptic_feedback", false).makeProfile();
 
 	// magnetic field doesn'torkmost of the time on some phones
 	public final OsmandPreference<Boolean> USE_MAGNETIC_FIELD_SENSOR_COMPASS = new BooleanPreference("use_magnetic_field_sensor_compass", false).makeProfile().cache();

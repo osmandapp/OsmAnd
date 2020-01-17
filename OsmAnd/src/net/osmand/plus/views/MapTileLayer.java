@@ -154,8 +154,8 @@ public class MapTileLayer extends BaseMapLayer {
 		int width = (int) Math.ceil(tilesRect.right - left);
 		int height = (int) Math.ceil(tilesRect.bottom + ellipticTileCorrection - top);
 
-		boolean useInternet = (OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class) != null || OsmandPlugin.getEnabledPlugin(MapillaryPlugin.class) != null) &&
-				settings.USE_INTERNET_TO_DOWNLOAD_TILES.get() && settings.isInternetConnectionAvailable() && map.couldBeDownloadedFromInternet();
+		boolean useInternet = (OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class) != null || OsmandPlugin.getEnabledPlugin(MapillaryPlugin.class) != null)
+				&& settings.isInternetConnectionAvailable() && map.couldBeDownloadedFromInternet();
 		int maxLevel = map.getMaximumZoomSupported();
 		int tileSize = map.getTileSize();
 		boolean oneTileShown = false;

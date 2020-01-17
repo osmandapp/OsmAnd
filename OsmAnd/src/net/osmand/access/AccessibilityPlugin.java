@@ -1,9 +1,5 @@
 package net.osmand.access;
 
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-
 import android.app.Activity;
 import android.media.AudioManager;
 import android.media.SoundPool;
@@ -12,7 +8,11 @@ import android.support.annotation.NonNull;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.settings.BaseSettingsFragment;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class AccessibilityPlugin extends OsmandPlugin {
 
@@ -28,7 +28,7 @@ public class AccessibilityPlugin extends OsmandPlugin {
 	public AccessibilityPlugin(OsmandApplication app) {
 		this.app = app;
 	}
-	
+
 	@Override
 	public boolean init(@NonNull final OsmandApplication app, Activity activity) {
 		sounds = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
@@ -56,13 +56,18 @@ public class AccessibilityPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void registerLayers(MapActivity activity) {
-	}
-
-
-	@Override
 	public Class<? extends Activity> getSettingsActivity() {
 		return SettingsAccessibilityActivity.class;
+	}
+
+	@Override
+	public Class<? extends BaseSettingsFragment> getSettingsFragment() {
+		return AccessibilitySettingsFragment.class;
+	}
+
+	@Override
+	public String getPrefsDescription() {
+		return app.getString(R.string.accessibility_prefs_descr);
 	}
 
 	@Override
@@ -98,5 +103,4 @@ public class AccessibilityPlugin extends OsmandPlugin {
 			return 0;
 		}
 	}
-
 }

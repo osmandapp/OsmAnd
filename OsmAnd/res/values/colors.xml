@@ -202,15 +202,6 @@
 	<!-- update good state, osm_modify, index_update -->
 	<color name="color_update">#0080FF</color>
 
-	<!-- Map colors, layers, special purpose consistency colors -->
-	<color name="pos_heading">#320000FF</color>
-	<!-- color name="pos_heading_night">#880000FF</color -->
-	<color name="pos_heading_night">#88536dfe</color>
-	<color name="pos_area">#280000FF</color>
-	<!-- color name="pos_area_night">#660000FF</color -->
-	<color name="pos_area_night">#66536dfe</color>
-	<color name="pos_around">#707CDC</color>  <!-- family blue similar to above -->
-
 	<color name="gpx_track">#B4B319FF</color>
 	<color name="gpx_track_fluorescent">#B400FFFF</color>
 

@@ -129,6 +129,8 @@
 	<string name="poi_cash_withdrawal_bank_card">Cash withdrawal</string>
 	<string name="poi_bath_type">Type</string>
 	<string name="poi_bath_open_air">Open air</string>
+	<string name="poi_volcano_type">Type</string>
+	<string name="poi_volcano_status">Status</string>
 
 <!--  categories -->
 	<string name="poi_shop">Store</string>
@@ -4160,5 +4162,19 @@
 	<string name="poi_parking_space">Parking space</string>
 
 	<string name="poi_url">URL</string>
+
+	<string name="poi_volcano_type_scoria">Scoria</string>
+	<string name="poi_volcano_type_stratovolcano">Stratovolcano</string>
+	<string name="poi_volcano_type_shield">Shield</string>
+	<string name="poi_volcano_type_maar">Maar</string>
+	<string name="poi_volcano_type_caldera">Caldera</string>
+	<string name="poi_volcano_type_lava_dome">Lava dome</string>
+	<string name="poi_volcano_type_dirt">Dirt</string>
+	<string name="poi_volcano_last_eruption">Last eruption</string>
+	<string name="poi_volcano_status_extinct">Extinct</string>
+	<string name="poi_volcano_status_dormant">Dormant</string>
+	<string name="poi_volcano_status_active">Active</string>
+	<string name="poi_volcano_status_inactive">Inactive</string>
+	<string name="poi_volcano_number_of_eruptions">Number of eruptions</string>
 
 </resources>
