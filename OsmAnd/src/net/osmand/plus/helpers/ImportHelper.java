@@ -76,6 +76,7 @@ import java.util.zip.ZipInputStream;
 import static android.app.Activity.RESULT_OK;
 import static net.osmand.IndexConstants.OSMAND_SETTINGS_FILE_EXT;
 import static net.osmand.IndexConstants.ROUTING_FILE_EXT;
+import static net.osmand.plus.AppInitializer.loadRoutingFiles;
 import static net.osmand.plus.myplaces.FavoritesActivity.FAV_TAB;
 import static net.osmand.plus.myplaces.FavoritesActivity.GPX_TAB;
 import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
@@ -112,10 +113,6 @@ public class ImportHelper {
 
 	public interface OnGpxImportCompleteListener {
 		void onComplete(boolean success);
-	}
-	
-	public interface LoadRoutingFilesCallback {
-		void onRoutingFilesLoaded();
 	}
 
 	public ImportHelper(final AppCompatActivity activity, final OsmandApplication app, final OsmandMapTileView mapView) {
@@ -609,38 +606,6 @@ public class ImportHelper {
 		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
-	public static void loadRoutingFiles(final OsmandApplication app, final LoadRoutingFilesCallback callback) {
-		new AsyncTask<Void, Void, RoutingConfiguration.Builder>() {
-			@Override
-			protected RoutingConfiguration.Builder doInBackground(Void... voids) {
-				File routingFolder = app.getAppPath(IndexConstants.ROUTING_PROFILES_DIR);
-				RoutingConfiguration.Builder builder = RoutingConfiguration.getDefault();
-				if (routingFolder.isDirectory()) {
-					File[] fl = routingFolder.listFiles();
-					if (fl != null && fl.length > 0) {
-						for (File f : fl) {
-							if (f.isFile() && f.getName().endsWith(".xml") && f.canRead()) {
-								try {
-									RoutingConfiguration.parseFromInputStream(new FileInputStream(f), f.getName(), builder);
-								} catch (XmlPullParserException | IOException e) {
-									throw new IllegalStateException(e);
-								}
-							}
-						}
-					}
-				}
-				return builder;
-			}
-
-			@Override
-			protected void onPostExecute(RoutingConfiguration.Builder builder) {
-				super.onPostExecute(builder);
-				app.updateRoutingConfig(builder);
-				callback.onRoutingFilesLoaded();
-			}
-		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-	}
-
 	public void chooseFileToImport(final ImportType importType, final CallbackWithObject callback) {
 		final MapActivity mapActivity = getMapActivity();
 		if (mapActivity == null) {
@@ -716,7 +681,7 @@ public class ImportHelper {
 				}
 				File dest = new File(routingDir, mFileName);
 				while (dest.exists()) {
-					mFileName = AndroidUtils.createFileNameWithIncreasedNumber(mFileName);
+					mFileName = AndroidUtils.createNewFileName(mFileName);
 					dest = new File(routingDir, mFileName);
 				}
 				return copyFile(app, dest, uri, true);
@@ -727,7 +692,7 @@ public class ImportHelper {
 				File routingDir = app.getAppPath(IndexConstants.ROUTING_PROFILES_DIR);
 				final File file = new File(routingDir, mFileName);
 				if (error == null && file.exists()) {
-					loadRoutingFiles(app, new LoadRoutingFilesCallback() {
+					loadRoutingFiles(app, new AppInitializer.LoadRoutingFilesCallback() {
 						@Override
 						public void onRoutingFilesLoaded() {
 							if (isActivityNotDestroyed(activity)) {
@@ -740,7 +705,7 @@ public class ImportHelper {
 									callback.processResult(profileKey);
 								}
 							} else {
-								app.showToastMessage(app.getString(R.string.file_does_not_contains_routing_rules, mFileName));
+								app.showToastMessage(app.getString(R.string.file_does_not_contain_routing_rules, mFileName));
 							}
 						}
 					});
@@ -808,7 +773,7 @@ public class ImportHelper {
 				if (error == null && file.exists()) {
 					app.getSettingsHelper().importSettings(file, latestChanges, version, new SettingsImportListener() {
 						@Override
-						public void onSettingsImportFinished(boolean succeed, boolean empty, List<SettingsHelper.SettingsItem> items) {
+						public void onSettingsImportFinished(boolean succeed, boolean empty, @NonNull List<SettingsHelper.SettingsItem> items) {
 							if (isActivityNotDestroyed(activity)) {
 								progress.dismiss();
 							}

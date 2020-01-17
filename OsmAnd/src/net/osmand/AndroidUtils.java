@@ -690,7 +690,7 @@ public class AndroidUtils {
 		return TextUtilsCompat.getLayoutDirectionFromLocale(Locale.getDefault()) == ViewCompat.LAYOUT_DIRECTION_RTL;
 	}
 	
-	public static String createFileNameWithIncreasedNumber(String oldName) {
+	public static String createNewFileName(String oldName) {
 		int firstDotIndex = oldName.indexOf('.');
 		String nameWithoutExt = oldName.substring(0, firstDotIndex);
 		String ext = oldName.substring(firstDotIndex);

@@ -83,7 +83,7 @@ public class SettingsHelper {
 	private ImportAsyncTask importTask;
 
 	public interface SettingsImportListener {
-		void onSettingsImportFinished(boolean succeed, boolean empty, List<SettingsItem> items);
+		void onSettingsImportFinished(boolean succeed, boolean empty, @NonNull List<SettingsItem> items);
 	}
 
 	public interface SettingsExportListener {
