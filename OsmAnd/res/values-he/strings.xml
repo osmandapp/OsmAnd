@@ -3074,7 +3074,6 @@
     <string name="new_profile">פרופיל חדש</string>
     <string name="shared_string_crash">קריסה</string>
     <string name="last_launch_crashed">הטעינה האחרונה של OsmAnd קרסה. נא לסייע לנו לשפר את OsmAnd על ידי שיתוף הודעת השגיאה.</string>
-    <string name="button_rate">אישור</string>
     <string name="shared_string_privacy_policy">מדיניות פרטיות</string>
     <string name="help_us_make_osmand_better">נשמח לקבל סיוע בשיפור OsmAnd</string>
     <string name="choose_data_to_share">נא לבחור את סוג הנתונים שברצונך לשתף:</string>

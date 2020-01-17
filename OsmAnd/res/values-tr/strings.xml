@@ -2618,7 +2618,6 @@
 \n OsmAnd+ uygulamanın ücretli versiyonudur. Satın alarak, projeyi desteklemekte, yeni özelliklerin geliştirilmesini finanse etmekte ve en son güncellemeleri almaktasınız.
 \n
 \n Ana özelliklerden bazıları:</string>
-    <string name="button_rate">Tamam</string>
     <string name="make_osmand_better_descr">OsmAnd\'ın anonim uygulama kullanım verilerini toplamasına ve işlemesine izin ver. Konumunuz veya haritada görüntülediğiniz yerler hakkında veri toplanmaz.
 \n
 \n\'Ayarlar\' → \'Gizlilik ve Güvenlik\' bölümünde istediğiniz zaman yapılandırın.</string>

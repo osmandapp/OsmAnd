@@ -3038,7 +3038,6 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="public_transport_type">Tegund samgangna</string>
     <string name="searching_gps">Leita að GPS</string>
     <string name="coordinates_widget">Viðmótshluti fyrir hnit</string>
-    <string name="button_rate">Í lagi</string>
     <string name="shared_string_privacy_policy">Meðferð persónuupplýsinga</string>
     <string name="help_us_make_osmand_better">Hjálpaðu okkur við að gera OsmAnd betra</string>
     <string name="downloaded_maps">Sótt kort</string>

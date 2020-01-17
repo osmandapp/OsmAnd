@@ -3007,7 +3007,6 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="public_transport_type">Druh dopravy</string>
     <string name="searching_gps">Vyhledávání GPS</string>
     <string name="coordinates_widget">Nástroj souřadnic</string>
-    <string name="button_rate">OK</string>
     <string name="shared_string_privacy_policy">Zásady soukromí</string>
     <string name="help_us_make_osmand_better">Pomozte nám OsmAnd vylepšit</string>
     <string name="choose_data_to_share">Zvolte typ dat, který chcete sdílet:</string>

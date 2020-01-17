@@ -2767,7 +2767,6 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="intermediate_destinations">Mellanliggande destinationer</string>
     <string name="arrive_at_time">Ankomst klockan %1$s</string>
     <string name="rate_dialog_descr">Vänligen dela din feedback och betygsätt vårt arbete på Google Play.</string>
-    <string name="button_rate">Okej</string>
     <string name="shared_string_privacy_policy">Sekretesspolicy</string>
     <string name="help_us_make_osmand_better">Hjälp oss att göra OsmAnd bättre</string>
     <string name="make_osmand_better_descr">Tillåt OsmAnd att samla in och bearbeta data för anonym appanvändning. Inga data om din position eller dina platser du visar på kartan samlas in.
