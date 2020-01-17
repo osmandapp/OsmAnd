@@ -28,6 +28,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityLayers;
 import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
+import net.osmand.plus.settings.BaseSettingsFragment;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -137,11 +138,6 @@ public class MapillaryPlugin extends OsmandPlugin {
 			layer.setMap(mapillarySource);
 			mapView.refreshMap();
 		}
-	}
-
-	@Override
-	public Class<? extends Activity> getSettingsActivity() {
-		return null;
 	}
 
 	@Override

@@ -3,6 +3,7 @@ package net.osmand.plus.profiles;
 
 
 import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.DIALOG_TYPE;
+import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.PROFILE_KEY_ARG;
 import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.TYPE_BASE_APP_PROFILE;
 
 import android.content.Context;
@@ -147,19 +148,19 @@ public class SettingsProfileFragment extends BaseOsmAndFragment
 		if (typeListener == null) {
 			typeListener = new SelectProfileListener() {
 				@Override
-				public void onSelectedType(int pos, String stringRes) {
+				public void onSelectedType(Bundle args) {
 					FragmentActivity activity = getActivity();
+					String profileKey = args.getString(PROFILE_KEY_ARG);
 					if (activity != null) {
 						if (activity instanceof SettingsProfileActivity) {
 							Intent intent = new Intent(getActivity(), EditProfileActivity.class);
 							intent.putExtra(IS_NEW_PROFILE, true);
 							intent.putExtra(IS_USER_PROFILE, true);
-							intent.putExtra(PROFILE_STRING_KEY, baseProfiles.get(pos).getStringKey());
+							intent.putExtra(PROFILE_STRING_KEY, profileKey);
 							activity.startActivity(intent);
 						} else {
 							FragmentManager fragmentManager = activity.getSupportFragmentManager();
 							if (fragmentManager != null) {
-								String profileKey = baseProfiles.get(pos).getStringKey();
 								EditProfileFragment.showInstance(fragmentManager, true, true, profileKey);
 							}
 						}

@@ -11,6 +11,7 @@ import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.LayerDrawable;
 import android.support.annotation.ColorInt;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
@@ -76,7 +77,7 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 	private Paint paintGridCircle;
 
 	private Paint paintIconSelected;
-	private Bitmap selectedPoint;
+	private LayerDrawable selectedPoint;
 	private TrackChartPoints trackChartPoints;
 
 	private RenderingLineAttributes attrs;
@@ -134,7 +135,7 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 		wayContext = new GeometryWayContext(view.getContext(), density);
 
 		paintIconSelected = new Paint();
-		selectedPoint = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_default_location);
+		selectedPoint = (LayerDrawable) view.getResources().getDrawable(R.drawable.map_location_default);
 
 		paintGridCircle = new Paint();
 		paintGridCircle.setStyle(Paint.Style.FILL_AND_STROKE);
@@ -196,7 +197,11 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 						&& highlightedPoint.getLongitude() <= latlonRect.right) {
 					float x = tileBox.getPixXFromLatLon(highlightedPoint.getLatitude(), highlightedPoint.getLongitude());
 					float y = tileBox.getPixYFromLatLon(highlightedPoint.getLatitude(), highlightedPoint.getLongitude());
-					canvas.drawBitmap(selectedPoint, x - selectedPoint.getWidth() / 2f, y - selectedPoint.getHeight() / 2f, paintIconSelected);
+					selectedPoint.setBounds((int) x - selectedPoint.getIntrinsicWidth() / 2,
+							(int) y - selectedPoint.getIntrinsicHeight() / 2,
+							(int) x + selectedPoint.getIntrinsicWidth() / 2,
+							(int) y + selectedPoint.getIntrinsicHeight() / 2);
+					selectedPoint.draw(canvas);
 				}
 			}
 		}

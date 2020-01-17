@@ -3011,7 +3011,6 @@
     <string name="public_transport_type">Тип превоза</string>
     <string name="searching_gps">Тражим GPS</string>
     <string name="coordinates_widget">Справица за координате</string>
-    <string name="button_rate">У реду</string>
     <string name="shared_string_privacy_policy">Политика приватности</string>
     <string name="help_us_make_osmand_better">Помозите нам да побољшамо OsmAnd</string>
     <string name="choose_data_to_share">Одаберите које типове података желите да делите:</string>

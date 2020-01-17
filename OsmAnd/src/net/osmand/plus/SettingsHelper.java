@@ -83,7 +83,7 @@ public class SettingsHelper {
 	private ImportAsyncTask importTask;
 
 	public interface SettingsImportListener {
-		void onSettingsImportFinished(boolean succeed, boolean empty);
+		void onSettingsImportFinished(boolean succeed, boolean empty, @NonNull List<SettingsItem> items);
 	}
 
 	public interface SettingsExportListener {
@@ -913,7 +913,7 @@ public class SettingsHelper {
 		@Override
 		protected void onPreExecute() {
 			if (importing) {
-				finishImport(listener, false, false);
+				finishImport(listener, false, false, items);
 			}
 			importing = true;
 			importSuspended = false;
@@ -948,7 +948,7 @@ public class SettingsHelper {
 				if (processedItems.size() > 0) {
 					new ImportItemsAsyncTask(file, listener, processedItems).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 				} else {
-					finishImport(listener, false, true);
+					finishImport(listener, false, true, items);
 				}
 				return;
 			}
@@ -1063,16 +1063,16 @@ public class SettingsHelper {
 
 		@Override
 		protected void onPostExecute(Boolean success) {
-			finishImport(listener, success, false);
+			finishImport(listener, success, false, items);
 		}
 	}
 
-	private void finishImport(@Nullable SettingsImportListener listener, boolean success, boolean empty) {
+	private void finishImport(@Nullable SettingsImportListener listener, boolean success, boolean empty, List<SettingsItem> items) {
 		importing = false;
 		importSuspended = false;
 		importTask = null;
 		if (listener != null) {
-			listener.onSettingsImportFinished(success, empty);
+			listener.onSettingsImportFinished(success, empty, items);
 		}
 	}
 

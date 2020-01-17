@@ -3019,7 +3019,6 @@
     <string name="searching_gps">正在搜尋 GPS</string>
     <string name="coordinates_widget">座標小工具</string>
     <string name="rate_dialog_descr">請在 Google Play 上分享您的回饋與為我們的努力進行評分。</string>
-    <string name="button_rate">確定</string>
     <string name="shared_string_privacy_policy">隱私權政策</string>
     <string name="help_us_make_osmand_better">協助我們讓 OsmAnd 變得更好</string>
     <string name="make_osmand_better_descr">允許 OsmAnd 蒐集與處理匿名應用程式使用資料。不會蒐集關於您的位置或是您在地圖上檢視了哪些地點的資料。

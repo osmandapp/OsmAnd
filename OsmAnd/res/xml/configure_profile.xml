@@ -59,7 +59,6 @@
 	<PreferenceCategory
 		android:key="plugin_settings"
 		android:layout="@layout/preference_category_with_descr"
-		android:summary="@string/list_of_installed_plugins"
 		android:title="@string/plugins_settings" />
 
 	<Preference

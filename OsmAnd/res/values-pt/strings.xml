@@ -3033,7 +3033,6 @@
     <string name="searching_gps">Procurando GPS</string>
     <string name="coordinates_widget">Widget de coordenadas</string>
     <string name="rate_dialog_descr">Por favor compartilhe os seus comentários e avalie o nosso trabalho no Google Play.</string>
-    <string name="button_rate">OK</string>
     <string name="shared_string_privacy_policy">Política de privacidade</string>
     <string name="help_us_make_osmand_better">Ajude-nos a melhorar o OsmAnd</string>
     <string name="make_osmand_better_descr">Permitir que OsmAnd colete e processe dados anônimos de uso de app. Nenhuns dados sobre a sua posição, nem sobre as localizações que visualiza no mapa são recolhidos. 
