@@ -68,7 +68,7 @@ public class DislikeOsmAndBottomSheetDialogFragment extends MenuBottomSheetDialo
 			Intent sendEmail = new Intent(Intent.ACTION_SENDTO);
 			sendEmail.setData(Uri.parse("mailto:" + email));
 			sendEmail.putExtra(Intent.EXTRA_EMAIL, email);
-			startActivity(Intent.createChooser(sendEmail, "Send Email"));
+			startActivity(Intent.createChooser(sendEmail, getString(R.string.send_report)));
 			dismiss();
 		}
 	}
