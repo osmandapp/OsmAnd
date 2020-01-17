@@ -7,19 +7,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.profiles.EditProfileFragment;
-import net.osmand.plus.profiles.EditProfileFragment.RoutingProfilesResources;
 import net.osmand.plus.profiles.RoutingProfileDataObject;
+import net.osmand.plus.profiles.RoutingProfileDataObject.RoutingProfilesResources;
 import net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment;
 import net.osmand.plus.routing.RouteProvider;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.router.GeneralRouter;
+import net.osmand.util.Algorithms;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.DIALOG_TYPE;
+import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.IS_PROFILE_IMPORTED_ARG;
+import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.PROFILE_KEY_ARG;
 import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.SELECTED_KEY;
 import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.TYPE_NAV_PROFILE;
 
@@ -29,13 +33,13 @@ public class NavigationFragment extends BaseSettingsFragment {
 	public static final String NAVIGATION_TYPE = "navigation_type";
 
 	private SelectProfileBottomSheetDialogFragment.SelectProfileListener navTypeListener;
-	private List<RoutingProfileDataObject> routingProfileDataObjects;
+	private Map<String, RoutingProfileDataObject> routingProfileDataObjects;
 	private Preference navigationType;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		routingProfileDataObjects = EditProfileFragment.getRoutingProfiles(app);
+		routingProfileDataObjects = getRoutingProfiles(app);
 	}
 
 	@Override
@@ -55,9 +59,14 @@ public class NavigationFragment extends BaseSettingsFragment {
 		if (getSelectedAppMode().getRoutingProfile() != null) {
 			GeneralRouter routingProfile = app.getRoutingConfig().getRouter(getSelectedAppMode().getRoutingProfile());
 			if (routingProfile != null) {
-				RoutingProfilesResources routingProfilesResources = RoutingProfilesResources.valueOf(routingProfile.getProfileName().toUpperCase());
-				navigationType.setSummary(routingProfilesResources.getStringRes());
-				navigationType.setIcon(getContentIcon(routingProfilesResources.getIconRes()));
+				String profileNameUC = routingProfile.getProfileName().toUpperCase();
+				if (RoutingProfilesResources.isRpValue(profileNameUC)) {
+					RoutingProfilesResources routingProfilesResources = RoutingProfilesResources.valueOf(profileNameUC);
+					navigationType.setSummary(routingProfilesResources.getStringRes());
+					navigationType.setIcon(getContentIcon(routingProfilesResources.getIconRes()));
+				} else {
+					navigationType.setIcon(getContentIcon(R.drawable.ic_action_gdirections_dark));
+				}
 			}
 		}
 		routeParameters.setIcon(getContentIcon(R.drawable.ic_action_route_distance));
@@ -103,40 +112,78 @@ public class NavigationFragment extends BaseSettingsFragment {
 		if (navTypeListener == null) {
 			navTypeListener = new SelectProfileBottomSheetDialogFragment.SelectProfileListener() {
 				@Override
-				public void onSelectedType(int pos, String stringRes) {
-					updateRoutingProfile(pos);
+				public void onSelectedType(Bundle args) {
+					if (args.getBoolean(IS_PROFILE_IMPORTED_ARG)) {
+						routingProfileDataObjects = getRoutingProfiles(app);
+					}
+					updateRoutingProfile(args.getString(PROFILE_KEY_ARG));
 				}
 			};
 		}
 		return navTypeListener;
 	}
 
-	void updateRoutingProfile(int pos) {
-		for (int i = 0; i < routingProfileDataObjects.size(); i++) {
-			if (i == pos) {
-				routingProfileDataObjects.get(i).setSelected(true);
-			} else {
-				routingProfileDataObjects.get(i).setSelected(false);
-			}
+	void updateRoutingProfile(String profileKey) {
+		RoutingProfileDataObject selectedRoutingProfileDataObject = routingProfileDataObjects.get(profileKey);
+		if (profileKey == null || selectedRoutingProfileDataObject == null) {
+			return;
 		}
-		RoutingProfileDataObject selectedRoutingProfileDataObject = routingProfileDataObjects.get(pos);
+		for (Map.Entry<String, RoutingProfileDataObject> rp : routingProfileDataObjects.entrySet()) {
+			boolean selected = profileKey.equals(rp.getKey());
+			rp.getValue().setSelected(selected);
+		}
 		navigationType.setSummary(selectedRoutingProfileDataObject.getName());
 		navigationType.setIcon(getContentIcon(selectedRoutingProfileDataObject.getIconRes()));
 		ApplicationMode.ApplicationModeBuilder builder = ApplicationMode.changeBaseMode(getSelectedAppMode());
-		if (selectedRoutingProfileDataObject.getStringKey().equals(
-				RoutingProfilesResources.STRAIGHT_LINE_MODE.name())) {
+		if (profileKey.equals(RoutingProfilesResources.STRAIGHT_LINE_MODE.name())) {
 			builder.setRouteService(RouteProvider.RouteService.STRAIGHT);
-		} else if (selectedRoutingProfileDataObject.getStringKey().equals(
-				RoutingProfilesResources.BROUTER_MODE.name())) {
+		} else if (profileKey.equals(RoutingProfilesResources.BROUTER_MODE.name())) {
 			builder.setRouteService(RouteProvider.RouteService.BROUTER);
 		} else {
-			builder.setRoutingProfile(selectedRoutingProfileDataObject.getStringKey());
+			builder.setRoutingProfile(profileKey);
 		}
 
 		ApplicationMode mode = ApplicationMode.saveProfile(builder, app);
 		if (!ApplicationMode.values(app).contains(mode)) {
 			ApplicationMode.changeProfileAvailability(mode, true, app);
 		}
+	}
+
+	public static Map<String, RoutingProfileDataObject> getRoutingProfiles(OsmandApplication context) {
+		Map<String, RoutingProfileDataObject> profilesObjects = new HashMap<>();
+		profilesObjects.put(RoutingProfilesResources.STRAIGHT_LINE_MODE.name(), new RoutingProfileDataObject(
+				RoutingProfilesResources.STRAIGHT_LINE_MODE.name(),
+				context.getString(RoutingProfilesResources.STRAIGHT_LINE_MODE.getStringRes()),
+				context.getString(R.string.special_routing_type),
+				RoutingProfilesResources.STRAIGHT_LINE_MODE.getIconRes(),
+				false, null));
+		if (context.getBRouterService() != null) {
+			profilesObjects.put(RoutingProfilesResources.BROUTER_MODE.name(), new RoutingProfileDataObject(
+					RoutingProfilesResources.BROUTER_MODE.name(),
+					context.getString(RoutingProfilesResources.BROUTER_MODE.getStringRes()),
+					context.getString(R.string.third_party_routing_type),
+					RoutingProfilesResources.BROUTER_MODE.getIconRes(),
+					false, null));
+		}
+
+		Map<String, GeneralRouter> inputProfiles = context.getRoutingConfig().getAllRouters();
+		for (Map.Entry<String, GeneralRouter> e : inputProfiles.entrySet()) {
+			if (!e.getKey().equals("geocoding")) {
+				int iconRes = R.drawable.ic_action_gdirections_dark;
+				String name = e.getValue().getProfileName();
+				String description = context.getString(R.string.osmand_default_routing);
+				if (!Algorithms.isEmpty(e.getValue().getFilename())) {
+					description = e.getValue().getFilename();
+				} else if (RoutingProfilesResources.isRpValue(name.toUpperCase())){
+					iconRes = RoutingProfilesResources.valueOf(name.toUpperCase()).getIconRes();
+					name = context
+							.getString(RoutingProfilesResources.valueOf(name.toUpperCase()).getStringRes());
+				}
+				profilesObjects.put(e.getKey(), new RoutingProfileDataObject(e.getKey(), name, description,
+						iconRes, false, e.getValue().getFilename()));
+			}
+		}
+		return profilesObjects;
 	}
 
 	private void setupVehicleParametersPref() {

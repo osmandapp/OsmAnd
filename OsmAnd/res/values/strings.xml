@@ -11,6 +11,11 @@
 	Thx - Hardy
 
 -->
+    <string name="file_does_not_contain_routing_rules">\'%1$s\' file doesn\'t contain routing rules, please choose another file.</string>
+    <string name="not_support_file_type_with_ext">Not supported file type. You need to select a file with %1$s extension.</string>
+    <string name="import_from_file">Import from file</string>
+    <string name="import_routing_file">Import routing file</string>
+    <string name="import_profile">Import profile</string>
     <string name="monitoring_prefs_descr">Navigation, logging accuracy</string>
     <string name="multimedia_notes_prefs_descr">Picture size, audio and video quality</string>
     <string name="osm_editing_prefs_descr">Login, password, offline editing</string>

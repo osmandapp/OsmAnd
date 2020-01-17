@@ -22,6 +22,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import net.osmand.AndroidUtils;
+import net.osmand.CallbackWithObject;
 import net.osmand.GPXUtilities;
 import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.GPXUtilities.WptPt;
@@ -39,6 +40,7 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.SettingsHelper;
 import net.osmand.plus.SettingsHelper.SettingsImportListener;
+import net.osmand.plus.activities.ActivityResultListener;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
@@ -49,9 +51,11 @@ import net.osmand.plus.base.bottomsheetmenu.simpleitems.ShortDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.router.RoutingConfiguration;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
+import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -69,6 +73,10 @@ import java.util.List;
 import java.util.Locale;
 import java.util.zip.ZipInputStream;
 
+import static android.app.Activity.RESULT_OK;
+import static net.osmand.IndexConstants.OSMAND_SETTINGS_FILE_EXT;
+import static net.osmand.IndexConstants.ROUTING_FILE_EXT;
+import static net.osmand.plus.AppInitializer.loadRoutingFiles;
 import static net.osmand.plus.myplaces.FavoritesActivity.FAV_TAB;
 import static net.osmand.plus.myplaces.FavoritesActivity.GPX_TAB;
 import static net.osmand.plus.myplaces.FavoritesActivity.TAB_ID;
@@ -85,6 +93,23 @@ public class ImportHelper {
 	private final OsmandApplication app;
 	private final OsmandMapTileView mapView;
 	private OnGpxImportCompleteListener gpxImportCompleteListener;
+
+	public final static int IMPORT_FILE_REQUEST = 1006;
+	
+	public enum ImportType {
+		SETTINGS(IndexConstants.OSMAND_SETTINGS_FILE_EXT),
+		ROUTING(ROUTING_FILE_EXT);
+
+		ImportType(String extension) {
+			this.extension = extension;
+		}
+
+		private String extension;
+
+		public String getExtension() {
+			return extension;
+		}
+	}
 
 	public interface OnGpxImportCompleteListener {
 		void onComplete(boolean success);
@@ -156,14 +181,10 @@ public class ImportHelper {
 			handleObfImport(intentUri, fileName);
 		} else if (fileName != null && fileName.endsWith(IndexConstants.SQLITE_EXT)) {
 			handleSqliteTileImport(intentUri, fileName);
-		} else if (fileName != null && fileName.endsWith(IndexConstants.OSMAND_SETTINGS_FILE_EXT)) {
-			if (extras != null && extras.containsKey(SettingsHelper.SETTINGS_VERSION_KEY) && extras.containsKey(SettingsHelper.SETTINGS_LATEST_CHANGES_KEY)) {
-				int version = extras.getInt(SettingsHelper.SETTINGS_VERSION_KEY, -1);
-				String latestChanges = extras.getString(SettingsHelper.SETTINGS_LATEST_CHANGES_KEY);
-				handleOsmAndSettingsImport(intentUri, fileName, latestChanges, version);
-			} else {
-				handleOsmAndSettingsImport(intentUri, fileName, null, -1);
-			}
+		} else if (fileName != null && fileName.endsWith(OSMAND_SETTINGS_FILE_EXT)) {
+			handleOsmAndSettingsImport(intentUri, fileName, extras, null);
+		} else if (fileName != null && fileName.endsWith(ROUTING_FILE_EXT)) {
+			handleRoutingFileImport(intentUri, fileName, null);
 		} else {
 			handleFavouritesImport(intentUri, fileName, saveFile, useImportDir, false);
 		}
@@ -585,8 +606,147 @@ public class ImportHelper {
 		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
+	public void chooseFileToImport(final ImportType importType, final CallbackWithObject callback) {
+		final MapActivity mapActivity = getMapActivity();
+		if (mapActivity == null) {
+			return;
+		}
+		final OsmandApplication app = mapActivity.getMyApplication();
+		Intent intent = new Intent();
+		String action;
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+			action = Intent.ACTION_OPEN_DOCUMENT;
+		} else {
+			action = Intent.ACTION_GET_CONTENT;
+		}
+		intent.setAction(action);
+		intent.setType("*/*");
+
+		ActivityResultListener listener = new ActivityResultListener(IMPORT_FILE_REQUEST, new ActivityResultListener.OnActivityResultListener() {
+			@Override
+			public void onResult(int resultCode, Intent resultData) {
+				MapActivity mapActivity = getMapActivity();
+				if (resultCode == RESULT_OK) {
+					Uri data = resultData.getData();
+					if (mapActivity == null || data == null) {
+						return;
+					}
+					String scheme = data.getScheme();
+					String fileName = "";
+					if ("file".equals(scheme)) {
+						final String path = data.getPath();
+						if (path != null) {
+							fileName = new File(path).getName();
+						}
+					} else if ("content".equals(scheme)) {
+						fileName = getNameFromContentUri(app, data);
+					}
+					
+					if (fileName.endsWith(importType.getExtension())) {
+						if (importType.equals(ImportType.SETTINGS)) {
+							handleOsmAndSettingsImport(data, fileName, resultData.getExtras(), callback);
+						} else if (importType.equals(ImportType.ROUTING)){
+							handleRoutingFileImport(data, fileName, callback);
+						}
+					} else {
+						app.showToastMessage(app.getString(R.string.not_support_file_type_with_ext, 
+								importType.getExtension().replaceAll("\\.", "").toUpperCase()));
+					}
+				}
+			}
+		});
+		
+		mapActivity.registerActivityResultListener(listener);
+		mapActivity.startActivityForResult(intent, IMPORT_FILE_REQUEST);
+	}
+
 	@SuppressLint("StaticFieldLeak")
-	private void handleOsmAndSettingsImport(final Uri uri, final String name, final String latestChanges, final int version) {
+	private void handleRoutingFileImport(final Uri uri, final String fileName, final CallbackWithObject<String> callback) {
+		final AsyncTask<Void, Void, String> routingImportTask = new AsyncTask<Void, Void, String>() {
+			
+			String mFileName;
+			ProgressDialog progress;
+
+			@Override
+			protected void onPreExecute() {
+				progress = ProgressDialog.show(activity, app.getString(R.string.loading_smth, ""), app.getString(R.string.loading_data));
+				mFileName = fileName;
+			}
+
+			@Override
+			protected String doInBackground(Void... voids) {
+				File routingDir = app.getAppPath(IndexConstants.ROUTING_PROFILES_DIR);
+				if (!routingDir.exists()) {
+					routingDir.mkdirs();
+				}
+				File dest = new File(routingDir, mFileName);
+				while (dest.exists()) {
+					mFileName = AndroidUtils.createNewFileName(mFileName);
+					dest = new File(routingDir, mFileName);
+				}
+				return copyFile(app, dest, uri, true);
+			}
+
+			@Override
+			protected void onPostExecute(String error) {
+				File routingDir = app.getAppPath(IndexConstants.ROUTING_PROFILES_DIR);
+				final File file = new File(routingDir, mFileName);
+				if (error == null && file.exists()) {
+					loadRoutingFiles(app, new AppInitializer.LoadRoutingFilesCallback() {
+						@Override
+						public void onRoutingFilesLoaded() {
+							if (isActivityNotDestroyed(activity)) {
+								progress.dismiss();
+							}
+							String profileKey = app.getRoutingConfig().getRoutingProfileKeyByFileName(mFileName);
+							if (profileKey != null) {
+								app.showShortToastMessage(app.getString(R.string.file_imported_successfully, mFileName));
+								if (callback != null) {
+									callback.processResult(profileKey);
+								}
+							} else {
+								app.showToastMessage(app.getString(R.string.file_does_not_contain_routing_rules, mFileName));
+							}
+						}
+					});
+				} else {
+					if (isActivityNotDestroyed(activity)) {
+						progress.dismiss();
+					}
+					app.showShortToastMessage(app.getString(R.string.file_import_error, mFileName, error));
+				}
+			}
+		};
+		if (app.isApplicationInitializing()) {
+			app.getAppInitializer().addListener(new AppInitializer.AppInitializeListener() {
+				@Override
+				public void onProgress(AppInitializer init, AppInitializer.InitEvents event) {
+				}
+
+				@Override
+				public void onFinish(AppInitializer init) {
+					routingImportTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+				}
+			});
+		} else {
+			routingImportTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		}
+	}
+	
+	private void handleOsmAndSettingsImport(Uri intentUri, String fileName, Bundle extras, 
+	                                        CallbackWithObject<List<SettingsHelper.SettingsItem>> callback) {
+		if (extras != null && extras.containsKey(SettingsHelper.SETTINGS_VERSION_KEY) && extras.containsKey(SettingsHelper.SETTINGS_LATEST_CHANGES_KEY)) {
+			int version = extras.getInt(SettingsHelper.SETTINGS_VERSION_KEY, -1);
+			String latestChanges = extras.getString(SettingsHelper.SETTINGS_LATEST_CHANGES_KEY);
+			handleOsmAndSettingsImport(intentUri, fileName, latestChanges, version, callback);
+		} else {
+			handleOsmAndSettingsImport(intentUri, fileName, null, -1, callback);
+		}
+	}
+
+	@SuppressLint("StaticFieldLeak")
+	private void handleOsmAndSettingsImport(final Uri uri, final String name, final String latestChanges, final int version, 
+	                                        final CallbackWithObject<List<SettingsHelper.SettingsItem>> callback) {
 		final AsyncTask<Void, Void, String> settingsImportTask = new AsyncTask<Void, Void, String>() {
 
 			ProgressDialog progress;
@@ -613,12 +773,15 @@ public class ImportHelper {
 				if (error == null && file.exists()) {
 					app.getSettingsHelper().importSettings(file, latestChanges, version, new SettingsImportListener() {
 						@Override
-						public void onSettingsImportFinished(boolean succeed, boolean empty) {
+						public void onSettingsImportFinished(boolean succeed, boolean empty, @NonNull List<SettingsHelper.SettingsItem> items) {
 							if (isActivityNotDestroyed(activity)) {
 								progress.dismiss();
 							}
 							if (succeed) {
 								app.showShortToastMessage(app.getString(R.string.file_imported_successfully, name));
+								if (callback != null) {
+									callback.processResult(items);
+								}
 							} else if (!empty) {
 								app.showShortToastMessage(app.getString(R.string.file_import_error, name, app.getString(R.string.shared_string_unexpected_error)));
 							}

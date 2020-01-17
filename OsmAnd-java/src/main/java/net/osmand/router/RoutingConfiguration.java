@@ -133,6 +133,17 @@ public class RoutingConfiguration {
 			
 		}
 
+		public String getRoutingProfileKeyByFileName(String fileName) {
+			if (fileName != null && routers != null) {
+				for (Map.Entry<String, GeneralRouter> router : routers.entrySet()) {
+					if (fileName.equals(router.getValue().getFilename())) {
+						return router.getKey();
+					}
+				}
+			}
+			return null;
+		}
+
 		public Map<String, GeneralRouter> getAllRouters() {
 			return routers;
 		}
