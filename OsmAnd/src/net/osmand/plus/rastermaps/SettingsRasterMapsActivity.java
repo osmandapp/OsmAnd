@@ -42,9 +42,7 @@ public class SettingsRasterMapsActivity extends SettingsBaseActivity {
 		// present on configure map
 //		addTileSourcePrefs(listener, cat);
 		
-		cat.addPreference(createCheckBoxPreference(settings.USE_INTERNET_TO_DOWNLOAD_TILES, 
-				R.string.use_internet, R.string.use_internet_to_download_tile));
-		
+
 //		int startZoom = 1;
 //		int endZoom = 18;
 //		String[] entries = new String[endZoom - startZoom + 1];

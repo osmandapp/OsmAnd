@@ -11,6 +11,23 @@
 	Thx - Hardy
 
 -->
+    <string name="monitoring_prefs_descr">Navigation, logging accuracy</string>
+    <string name="multimedia_notes_prefs_descr">Picture size, audio and video quality</string>
+    <string name="osm_editing_prefs_descr">Login, password, offline editing</string>
+    <string name="accessibility_prefs_descr">Choose icon, color and name</string>
+    <string name="live_monitoring_descr">Allow you to share current location using trip recording.</string>
+    <string name="live_monitoring">Online tracking</string>
+    <string name="save_track_logging_accuracy">Logging accuracy</string>
+    <string name="tracks_view_descr">You can find all your recorded tracks in Menu — My place — Tracks or in OsmAd folder using file manager.</string>
+    <string name="multimedia_notes_view_descr">You can find all your notes in Menu — My places — Notes</string>
+    <string name="video_notes">Video notes</string>
+    <string name="photo_notes">Photo notes</string>
+    <string name="route_recalculation">Route recalculation</string>
+    <string name="accessibility_announce">Announce</string>
+    <string name="login_and_pass">Username and password</string>
+    <string name="plugin_global_prefs_info">This plugin settings are global, and apply to all profiles.</string>
+    <string name="osm_editing">OpenStreetMap Editing</string>
+    <string name="osm_edits_view_descr">You can view all your unuploaded edits or osm bugs in Menu — My places — OSM Edits. Uploaded points don’t show in OsmAnd.</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">You will see the icon only while navigation or while moving.</string>
     <string name="select_map_icon_descr">Map icon appears only on the map, and changing while navigation to navigation icon.</string>
