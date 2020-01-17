@@ -25,7 +25,8 @@ import java.util.Calendar;
 public class RateUsBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 	public static final String TAG = "RateUsBottomSheetDialogFragment";
 	private static final Log LOG = PlatformUtil.getLog(SendAnalyticsBottomSheetDialogFragment.class);
-	private static final long SIXTY_DAYS = 60 * 24 * 60 * 60 * 1000L;
+	// FIXME 
+	private static final long SIXTY_DAYS = 15 * 1000; // 60 * 24 * 60 * 60 * 1000L;
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
