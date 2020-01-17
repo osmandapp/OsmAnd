@@ -3127,7 +3127,7 @@
     <string name="routing_attr_difficulty_preference_name">Предпочитаемая сложность</string>
     <string name="process_downloading_service">Служба скачивания OsmAnd</string>
     <string name="shared_string_color_magenta">Пурпурный</string>
-    <string name="button_rate">OK</string>
+    <string name="button_rate">Оценить</string>
     <string name="show_compass_ruler">Показать компас линейку</string>
     <string name="hide_compass_ruler">Скрыть компас линейку</string>
     <string name="shared_string_min_speed">Мин. скорость</string>

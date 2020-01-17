@@ -3054,7 +3054,6 @@
     <string name="precision_hdop_and_vdop">Precisión horizontal: %1$s, vertical: %2$s</string>
     <string name="precision_hdop">Precisión horizontal: %s</string>
     <string name="rate_dialog_descr">Por favor, comparte tus comentarios y califica nuestro trabajo en Google Play.</string>
-    <string name="button_rate">Valorar</string>
     <string name="shared_string_privacy_policy">Política de privacidad</string>
     <string name="help_us_make_osmand_better">Ayúdanos a mejorar OsmAnd</string>
     <string name="make_osmand_better_descr">Permite que OsmAnd recopile y procese datos de uso anónimos de la aplicación. No recopilamos datos sobre las ubicaciones que ve en el mapa. 

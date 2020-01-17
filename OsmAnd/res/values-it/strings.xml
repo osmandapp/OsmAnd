@@ -3137,7 +3137,6 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="routing_attr_piste_type_sled_description">Piste per slittino.</string>
     <string name="shared_string_crash">Interruzione</string>
     <string name="rate_dialog_descr">Per favore condividi il tuo feedback e dai un voto al nostro lavoro su Google Play.</string>
-    <string name="button_rate">OK</string>
     <string name="shared_string_privacy_policy">Politica della privacy</string>
     <string name="process_downloading_service">Servizio di download OsmAnd</string>
     <string name="make_osmand_better_descr">Permetti a OsmAnd di raccogliere ed elaborare anonimamente dati di utilizzo dell\'applicazione. Nessuna informazione circa la tua posizione o i luoghi che visualizzi nella mappa vengono raccolti. 

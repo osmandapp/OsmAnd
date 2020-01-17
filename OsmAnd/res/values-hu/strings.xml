@@ -2997,7 +2997,6 @@ Ha szereted az OsmAndot és az OSM-et, és szeretnéd támogatni a fejlődésük
     <string name="coordinates_widget">Koordináta-widget</string>
     <string name="keep_passed_markers_descr">Az Kedvencek vagy GPX-útpontok csoportjaként hozzáadott és elhagyottként megjelölt jelölők a térképen maradnak. A jelölők akkor tűnnek el a térképről, ha a csoport nem aktív (ki van kapcsolva).</string>
     <string name="rate_dialog_descr">Kérlek, adj visszajelzést vagy értékelést a Google Play-en.</string>
-    <string name="button_rate">OK</string>
     <string name="shared_string_privacy_policy">Adatvédelmi irányelvek</string>
     <string name="help_us_make_osmand_better">Segítsen, hogy jobbá tehessük az OsmAndot</string>
     <string name="make_osmand_better_descr">Engedélyezze, hogy az OsmAnd névtelen alkalmazáshasználati adatokat gyűjtsön és dolgozzon fel. Nem gyűjtünk vagy tárolunk adatokat a helyzetéről vagy az Ön által a térképen megtekintett helyekről. 

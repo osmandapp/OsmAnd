@@ -3101,7 +3101,6 @@
     <string name="routing_attr_max_num_changes_description">Вызначце максімальную колькасць змен</string>
     <string name="routing_attr_max_num_changes_name">Колькасць змен</string>
     <string name="rate_dialog_descr">Калі ласка, пакінце водгук і ацаніце нашу працу на Google Play.</string>
-    <string name="button_rate">Добра</string>
     <string name="shared_string_privacy_policy">Палітыка прыватнасці</string>
     <string name="help_us_make_osmand_better">Дапамажыце нам палепшыць OsmAnd</string>
     <string name="choose_data_to_share">Абярыце тып даных, якімі хочаце падзяліцца:</string>

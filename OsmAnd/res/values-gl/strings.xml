@@ -3063,7 +3063,6 @@ Lon %2$s</string>
     <string name="searching_gps">Estase a procurar o GPS</string>
     <string name="coordinates_widget">Trebello de coordenadas</string>
     <string name="rate_dialog_descr">Por favor, comparte os teus comentarios e valora na Google Play o noso traballo.</string>
-    <string name="button_rate">Dacordo</string>
     <string name="shared_string_privacy_policy">Política de privacidade</string>
     <string name="help_us_make_osmand_better">Axúdanos a mellorar o OsmAnd</string>
     <string name="make_osmand_better_descr">Permite que o OsmAnd recompile e procese datos anónimos de uso da aplicación. Non recompilamos datos sobre a túa ubicación, nin sobre os lugares que ves no mapa. 

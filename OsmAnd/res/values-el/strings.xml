@@ -3114,7 +3114,6 @@
     <string name="searching_gps">Αναζήτηση GPS</string>
     <string name="coordinates_widget">Γραφικό στοιχείο συντεταγμένων</string>
     <string name="rate_dialog_descr">Παρακαλούμε, στείλτε μας την αναπληροφόρηση και αξιολογηστε την εργασία μας στο Google Play.</string>
-    <string name="button_rate">Εντάξει</string>
     <string name="shared_string_privacy_policy">Πολιτική απορρήτου</string>
     <string name="help_us_make_osmand_better">Βοηθήστε μας να βελτιώσουμε το OsmAnd</string>
     <string name="make_osmand_better_descr">Να επιτρέπεται στο OsmAnd να συλλέγει και να επεξεργάζεται ανώνυμα δεδομένα χρήσης της εφαρμογής. Δεν συλλέγουμε, ούτε αποθηκεύουμε δεδομένα για την θέση σας, ή για τις τοποθεσίες που κοιτάτε στον χάρτη. 
