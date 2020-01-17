@@ -255,14 +255,9 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 		if (ctx == null) {
 			return;
 		}
-
 		Preference configureMap = findPreference(PROFILE_APPEARANCE);
-		if (!getSelectedAppMode().equals(ApplicationMode.DEFAULT)) {
-			configureMap.setIcon(getContentIcon(getSelectedAppMode().getIconRes()));
-			configureMap.setFragment(ProfileAppearanceFragment.TAG);
-		} else {
-			configureMap.setVisible(false);
-		}
+		configureMap.setIcon(getContentIcon(getSelectedAppMode().getIconRes()));
+		configureMap.setFragment(ProfileAppearanceFragment.TAG);
 	}
 
 	private void setupCopyProfileSettingsPref() {
