@@ -278,7 +278,7 @@
     <string name="shared_string_color_magenta">Magenta</string>
     <string name="shared_string_icon">Icon</string>
     <string name="rate_dialog_descr">Please share your feedback and rate our work on Google Play.</string>
-    <string name="button_rate">OK</string>
+    <string name="button_rate">Rate</string>
     <string name="shared_string_privacy_policy">Privacy Policy</string>
     <string name="help_us_make_osmand_better">Help us make OsmAnd better</string>
     <string name="make_osmand_better_descr">Allow OsmAnd to collect and process anonymous app usage data. No data about your position or locations you view on the map are collected.\n\nConfigure any time in \'Settings\' → \'Privacy and Security\'.</string>

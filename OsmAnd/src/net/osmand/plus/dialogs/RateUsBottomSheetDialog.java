@@ -37,55 +37,34 @@ public class RateUsBottomSheetDialog extends BottomSheetDialogFragment {
 	}
 
 	public static boolean shouldShow(OsmandApplication application) {
-		if (Version.isMarketEnabled(application)) {
+		long firstInstalledDays = application.getAppInitializer().getFirstInstalledDays();
+		if (!Version.isGooglePlayEnabled(application) || firstInstalledDays > 350) {
 			return false;
 		}
 		OsmandSettings settings = application.getSettings();
 		if(!settings.LAST_DISPLAY_TIME.isSet()) {
 			settings.LAST_DISPLAY_TIME.set(System.currentTimeMillis());
 		}
-		long lastDisplayTimeInMillis = settings.LAST_DISPLAY_TIME.get();
-		int numberOfApplicationRuns = settings.NUMBER_OF_APPLICATION_STARTS.get();
+		int numberOfStarts = application.getAppInitializer().getNumberOfStarts();
+
 		RateUsState state = settings.RATE_US_STATE.get();
-
-		Calendar modifiedTime = Calendar.getInstance();
-		Calendar lastDisplayTime = Calendar.getInstance();
-		lastDisplayTime.setTimeInMillis(lastDisplayTimeInMillis);
-
-		int bannerFreeRuns = 0;
-
 		switch (state) {
 			case LIKED:
 				return false;
 			case INITIAL_STATE:
-				break;
+				return firstInstalledDays > 15 && numberOfStarts > 100;
 			case IGNORED:
-				modifiedTime.add(Calendar.WEEK_OF_YEAR, -1);
-				bannerFreeRuns = 5;
-				break;
 			case DISLIKED_WITH_MESSAGE:
-				modifiedTime.add(Calendar.MONTH, -3);
-				bannerFreeRuns = 3;
-				break;
 			case DISLIKED_WITHOUT_MESSAGE:
-				modifiedTime.add(Calendar.MONTH, -2);
-				break;
-			default:
-				throw new IllegalStateException("Unexpected state:" + state);
+				int startsAfterDislike = settings.NUMBER_OF_APP_STARTS_AFTER_DISLIKE.get();
+				long lastDisplayTimeInMillis = settings.LAST_DISPLAY_TIME.get();
+				Calendar modifiedTime = Calendar.getInstance();
+				modifiedTime.add(Calendar.DAY_OF_YEAR, -60);
+				Calendar lastDisplayTime = Calendar.getInstance();
+				lastDisplayTime.setTimeInMillis(lastDisplayTimeInMillis);
+				return modifiedTime.after(lastDisplayTime) && startsAfterDislike > 50;
 		}
-
-		if (state != RateUsState.INITIAL_STATE) {
-			if (modifiedTime.after(lastDisplayTime) && numberOfApplicationRuns >= bannerFreeRuns) {
-				settings.RATE_US_STATE.set(RateUsState.INITIAL_STATE);
-				modifiedTime = Calendar.getInstance();
-			} else {
-				return false;
-			}
-		}
-		// Initial state now
-		modifiedTime.add(Calendar.MONTH, -1);
-		bannerFreeRuns = 3;
-		return modifiedTime.after(lastDisplayTime) && numberOfApplicationRuns >= bannerFreeRuns;
+		return false;
 	}
 
 	public class PositiveButtonListener implements View.OnClickListener {
@@ -123,7 +102,7 @@ public class RateUsBottomSheetDialog extends BottomSheetDialogFragment {
 				case USER_DISLIKES_APP:
 					String email = getString(R.string.support_email);
 					settings.RATE_US_STATE.set(RateUsBottomSheetDialog.RateUsState.DISLIKED_WITH_MESSAGE);
-					settings.NUMBER_OF_APPLICATION_STARTS.set(0);
+					settings.NUMBER_OF_APP_STARTS_AFTER_DISLIKE.set(0);
 					settings.LAST_DISPLAY_TIME.set(System.currentTimeMillis());
 					Intent sendEmail = new Intent(Intent.ACTION_SENDTO);
 					sendEmail.setType("text/plain");
@@ -169,7 +148,7 @@ public class RateUsBottomSheetDialog extends BottomSheetDialogFragment {
 					settings.RATE_US_STATE.set(RateUsBottomSheetDialog.RateUsState.DISLIKED_WITHOUT_MESSAGE);
 					break;
 			}
-			settings.NUMBER_OF_APPLICATION_STARTS.set(0);
+			settings.NUMBER_OF_APP_STARTS_AFTER_DISLIKE.set(0);
 			settings.LAST_DISPLAY_TIME.set(System.currentTimeMillis());
 			dismiss();
 		}

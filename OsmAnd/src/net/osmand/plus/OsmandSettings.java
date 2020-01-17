@@ -3218,6 +3218,9 @@ public class OsmandSettings {
 	public final OsmandPreference<Integer> NUMBER_OF_APPLICATION_STARTS =
 			new IntPreference("number_of_app_starts", 0).makeGlobal().cache();
 
+	public final OsmandPreference<Integer> NUMBER_OF_APP_STARTS_AFTER_DISLIKE =
+			new IntPreference("number_of_app_starts_after_dislike", 0).makeGlobal().cache();
+
 	public final OsmandPreference<RateUsBottomSheetDialog.RateUsState> RATE_US_STATE =
 			new EnumIntPreference<>("rate_us_state",
 					RateUsBottomSheetDialog.RateUsState.INITIAL_STATE, RateUsBottomSheetDialog.RateUsState.values())
