@@ -3208,15 +3208,12 @@ public class OsmandSettings {
 
 	public final OsmandPreference<Integer> NUMBER_OF_FREE_DOWNLOADS = new IntPreference(NUMBER_OF_FREE_DOWNLOADS_ID, 0).makeGlobal();
 
-	// For DashRateUsFragment
+	// For RateUsDialog
 	public final OsmandPreference<Long> LAST_DISPLAY_TIME =
 			new LongPreference("last_display_time", 0).makeGlobal().cache();
 
 	public final OsmandPreference<Long> LAST_CHECKED_UPDATES =
 			new LongPreference("last_checked_updates", 0).makeGlobal();
-
-	public final OsmandPreference<Integer> NUMBER_OF_APPLICATION_STARTS =
-			new IntPreference("number_of_app_starts", 0).makeGlobal().cache();
 
 	public final OsmandPreference<Integer> NUMBER_OF_APP_STARTS_AFTER_DISLIKE =
 			new IntPreference("number_of_app_starts_after_dislike", 0).makeGlobal().cache();
