@@ -35,7 +35,7 @@ import net.osmand.plus.access.RelativeDirectionStyle;
 import net.osmand.plus.api.SettingsAPI;
 import net.osmand.plus.api.SettingsAPI.SettingsEditor;
 import net.osmand.plus.api.SettingsAPIImpl;
-import net.osmand.plus.dialogs.RateUsBottomSheetDialog;
+import net.osmand.plus.dialogs.RateUsBottomSheetDialogFragment;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.mapillary.MapillaryPlugin;
 import net.osmand.plus.mapmarkers.CoordinateInputFormats.Format;
@@ -3218,9 +3218,9 @@ public class OsmandSettings {
 	public final OsmandPreference<Integer> NUMBER_OF_APP_STARTS_ON_DISLIKE_MOMENT =
 			new IntPreference("number_of_app_starts_on_dislike_moment", 0).makeGlobal().cache();
 
-	public final OsmandPreference<RateUsBottomSheetDialog.RateUsState> RATE_US_STATE =
+	public final OsmandPreference<RateUsBottomSheetDialogFragment.RateUsState> RATE_US_STATE =
 			new EnumIntPreference<>("rate_us_state",
-					RateUsBottomSheetDialog.RateUsState.INITIAL_STATE, RateUsBottomSheetDialog.RateUsState.values())
+					RateUsBottomSheetDialogFragment.RateUsState.INITIAL_STATE, RateUsBottomSheetDialogFragment.RateUsState.values())
 					.makeGlobal();
 
 	public final CommonPreference<String> DEFAULT_APP_PROFILES =

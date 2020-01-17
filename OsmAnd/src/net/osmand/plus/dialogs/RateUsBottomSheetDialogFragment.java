@@ -25,6 +25,7 @@ import java.util.Calendar;
 public class RateUsBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 	public static final String TAG = "RateUsBottomSheetDialogFragment";
 	private static final Log LOG = PlatformUtil.getLog(SendAnalyticsBottomSheetDialogFragment.class);
+	private static final long SIXTY_DAYS = 60 * 24 * 60 * 60 * 1000L;
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
@@ -62,16 +63,12 @@ public class RateUsBottomSheetDialogFragment extends MenuBottomSheetDialogFragme
 	protected void onRightBottomButtonClick() {
 		OsmandApplication app = getMyApplication();
 		if (app != null) {
-			app.getSettings().RATE_US_STATE.set(RateUsBottomSheetDialog.RateUsState.LIKED);
+			app.getSettings().RATE_US_STATE.set(RateUsState.LIKED);
 			Uri uri = Uri.parse(Version.getUrlWithUtmRef(app, app.getPackageName()));
 			Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
 			startActivity(goToMarket);
 			dismiss();
 		}
-	}
-
-	public static boolean shouldShow(OsmandApplication app) {
-		return RateUsBottomSheetDialog.shouldShow(app);
 	}
 
 	public static void showInstance(@NonNull FragmentManager fm) {
@@ -83,5 +80,42 @@ public class RateUsBottomSheetDialogFragment extends MenuBottomSheetDialogFragme
 		} catch (RuntimeException e) {
 			LOG.error("showInstance", e);
 		}
+	}
+
+	public static boolean shouldShow(OsmandApplication application) {
+		long firstInstalledDays = application.getAppInitializer().getFirstInstalledDays();
+		if (!Version.isGooglePlayEnabled(application) || firstInstalledDays > 350) {
+			return false;
+		}
+		OsmandSettings settings = application.getSettings();
+		if (!settings.LAST_DISPLAY_TIME.isSet()) {
+			settings.LAST_DISPLAY_TIME.set(System.currentTimeMillis());
+		}
+		int numberOfStarts = application.getAppInitializer().getNumberOfStarts();
+
+		RateUsState state = settings.RATE_US_STATE.get();
+		switch (state) {
+			case LIKED:
+				return false;
+			case INITIAL_STATE:
+				return firstInstalledDays > 15 && numberOfStarts > 100;
+			case IGNORED:
+			case DISLIKED_WITH_MESSAGE:
+			case DISLIKED_WITHOUT_MESSAGE:
+				int startsOnDislikeMoment = settings.NUMBER_OF_APP_STARTS_ON_DISLIKE_MOMENT.get();
+				long lastDisplayTimeInMillis = settings.LAST_DISPLAY_TIME.get();
+				long currentTime = System.currentTimeMillis();
+				return currentTime - lastDisplayTimeInMillis > SIXTY_DAYS
+						&& numberOfStarts - startsOnDislikeMoment > 50;
+		}
+		return false;
+	}
+
+	public enum RateUsState {
+		INITIAL_STATE,
+		IGNORED,
+		LIKED,
+		DISLIKED_WITH_MESSAGE,
+		DISLIKED_WITHOUT_MESSAGE
 	}
 }
