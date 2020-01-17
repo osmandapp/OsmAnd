@@ -1,4 +1,4 @@
-package net.osmand.plus.settings;
+package net.osmand.plus.monitoring;
 
 import android.content.Intent;
 import android.support.v4.app.FragmentManager;
@@ -8,6 +8,7 @@ import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.myplaces.FavoritesActivity;
+import net.osmand.plus.settings.BaseSettingsFragment;
 import net.osmand.plus.settings.bottomsheets.ChangeGeneralProfilesPrefBottomSheet;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;

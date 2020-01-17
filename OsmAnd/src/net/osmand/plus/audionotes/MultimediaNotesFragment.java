@@ -1,4 +1,4 @@
-package net.osmand.plus.settings;
+package net.osmand.plus.audionotes;
 
 import android.content.Intent;
 import android.hardware.Camera;
@@ -12,7 +12,7 @@ import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
+import net.osmand.plus.settings.BaseSettingsFragment;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 

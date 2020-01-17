@@ -1,4 +1,4 @@
-package net.osmand.plus.settings;
+package net.osmand.access;
 
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
@@ -6,6 +6,8 @@ import android.support.v7.preference.PreferenceScreen;
 import net.osmand.plus.R;
 import net.osmand.plus.access.AccessibilityMode;
 import net.osmand.plus.access.RelativeDirectionStyle;
+import net.osmand.plus.settings.BaseSettingsFragment;
+import net.osmand.plus.settings.OnPreferenceChanged;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 

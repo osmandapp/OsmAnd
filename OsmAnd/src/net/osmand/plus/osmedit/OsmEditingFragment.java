@@ -1,4 +1,4 @@
-package net.osmand.plus.settings;
+package net.osmand.plus.osmedit;
 
 import android.content.Intent;
 import android.support.v4.app.FragmentManager;
@@ -10,6 +10,8 @@ import android.widget.TextView;
 import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.settings.BaseSettingsFragment;
+import net.osmand.plus.settings.OnPreferenceChanged;
 import net.osmand.plus.settings.bottomsheets.OsmLoginDataBottomSheet;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 
