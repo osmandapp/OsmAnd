@@ -875,7 +875,7 @@ public class ApplicationMode {
 		PICKUP_TRUCK(R.drawable.ic_action_pickup_truck, R.string.app_mode_pickup_truck, "ic_action_pickup_truck"),
 		WAGON(R.drawable.ic_action_wagon, R.string.app_mode_wagon, "ic_action_wagon"),
 		UTV(R.drawable.ic_action_utv, R.string.app_mode_utv, "ic_action_utv"),
-		OSM(R.drawable.ic_action_osmand_logo, R.string.app_mode_osm, "ic_action_osmand_logo");
+		OSM(R.drawable.map_action_openstreetmap_logo, R.string.app_mode_osm, "map_action_openstreetmap_logo");
 
 		@DrawableRes
 		private int resId;
