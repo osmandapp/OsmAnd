@@ -135,7 +135,7 @@ public class RouteLayer extends OsmandMapLayer implements ContextMenuLayer.ICont
 		wayContext = new GeometryWayContext(view.getContext(), density);
 
 		paintIconSelected = new Paint();
-		selectedPoint = (LayerDrawable) view.getResources().getDrawable(R.drawable.map_default_location_xml);
+		selectedPoint = (LayerDrawable) view.getResources().getDrawable(R.drawable.map_location_default);
 
 		paintGridCircle = new Paint();
 		paintGridCircle.setStyle(Paint.Style.FILL_AND_STROKE);

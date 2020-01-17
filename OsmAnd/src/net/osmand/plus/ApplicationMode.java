@@ -77,7 +77,7 @@ public class ApplicationMode {
 	private int minDistanceForTurn = 50;
 	private int arrivalDistance = 90;
 	private int offRouteDistance = 350;
-	private NavigationIcon navigationIcon = NavigationIcon.CAR;
+	private NavigationIcon navigationIcon = NavigationIcon.DEFAULT;
 	private LocationIcon locationIcon = LocationIcon.DEFAULT;
 
 	private ApplicationMode(int key, String stringKey) {
@@ -90,18 +90,18 @@ public class ApplicationMode {
 	 */
 	public static final ApplicationMode DEFAULT = createBase(R.string.app_mode_default, "default")
 			.speed(1.5f, 5).arrivalDistance(90)
-			.locationIcon(LocationIcon.DEFAULT).navigationIcon(NavigationIcon.CAR)
+			.locationIcon(LocationIcon.DEFAULT).navigationIcon(NavigationIcon.DEFAULT)
 			.icon(R.drawable.ic_world_globe_dark, R.drawable.map_world_globe_dark, "ic_world_globe_dark").reg();
 
 	public static final ApplicationMode CAR = createBase(R.string.app_mode_car, "car")
 			.speed(12.5f, 35)
-			.locationIcon(LocationIcon.CAR).navigationIcon(NavigationIcon.CAR)
+			.locationIcon(LocationIcon.CAR).navigationIcon(NavigationIcon.DEFAULT)
 			.icon(R.drawable.ic_action_car_dark, R.drawable.map_action_car_dark, "ic_action_car_dark")
 			.setRoutingProfile("car").description(R.string.base_profile_descr_car).reg();
 
 	public static final ApplicationMode BICYCLE = createBase(R.string.app_mode_bicycle, "bicycle")
 			.speed(2.77f, 15).arrivalDistance(60).offRouteDistance(50)
-			.locationIcon(LocationIcon.BICYCLE).navigationIcon(NavigationIcon.CAR)
+			.locationIcon(LocationIcon.BICYCLE).navigationIcon(NavigationIcon.DEFAULT)
 			.icon(R.drawable.ic_action_bicycle_dark, R.drawable.map_action_bicycle_dark, "ic_action_bicycle_dark")
 			.setRoutingProfile("bicycle").description(R.string.base_profile_descr_bicycle).reg();
 
@@ -122,13 +122,13 @@ public class ApplicationMode {
 
 	public static final ApplicationMode AIRCRAFT = createBase(R.string.app_mode_aircraft, "aircraft")
 			.speed(40f, 100)
-			.locationIcon(LocationIcon.CAR).navigationIcon(NavigationIcon.CAR)
+			.locationIcon(LocationIcon.CAR).navigationIcon(NavigationIcon.DEFAULT)
 			.icon(R.drawable.ic_action_aircraft, R.drawable.map_action_aircraft, "ic_action_aircraft").setRouteService(RouteService.STRAIGHT)
 			.setRoutingProfile("STRAIGHT_LINE_MODE").description(R.string.base_profile_descr_aircraft).reg();
 
 	public static final ApplicationMode SKI = createBase(R.string.app_mode_skiing, "ski")
 			.speed(1.38f, 15).arrivalDistance(60).offRouteDistance(50)
-			.locationIcon(LocationIcon.BICYCLE).navigationIcon(NavigationIcon.CAR)
+			.locationIcon(LocationIcon.BICYCLE).navigationIcon(NavigationIcon.DEFAULT)
 			.icon(R.drawable.ic_action_skiing, R.drawable.map_action_skiing, "ic_action_skiing")
 			.setRoutingProfile("ski").description(R.string.base_profile_descr_ski).reg();
 
@@ -150,7 +150,7 @@ public class ApplicationMode {
 		@Expose
 		LocationIcon locationIcon = LocationIcon.DEFAULT;
 		@Expose
-		NavigationIcon navigationIcon = NavigationIcon.CAR;
+		NavigationIcon navigationIcon = NavigationIcon.DEFAULT;
 		@Expose
 		int order;
 	}
@@ -920,9 +920,9 @@ public class ApplicationMode {
 	}
 
 	public enum LocationIcon {
-		DEFAULT(R.drawable.map_default_location_xml, R.drawable.map_default_location_view_angle),
-		CAR(R.drawable.map_car_location_xml, R.drawable.map_car_location_view_angle),
-		BICYCLE(R.drawable.map_bicycle_location_xml, R.drawable.map_bicycle_location_view_angle);
+		DEFAULT(R.drawable.map_location_default, R.drawable.map_location_default_view_angle),
+		CAR(R.drawable.map_location_car, R.drawable.map_location_car_view_angle),
+		BICYCLE(R.drawable.map_location_bicycle, R.drawable.map_location_bicycle_view_angle);
 
 		LocationIcon(@DrawableRes int iconId, @DrawableRes int headingIconId) {
 			this.iconId = iconId;
@@ -944,8 +944,9 @@ public class ApplicationMode {
 	}
 
 	public enum NavigationIcon {
-		CAR(R.drawable.map_car_navigation_xml),
-		NAUTICAL(R.drawable.map_nautical_navigation_xml);
+		DEFAULT(R.drawable.map_navigation_default),
+		NAUTICAL(R.drawable.map_navigation_nautical),
+		CAR(R.drawable.map_navigation_car);
 
 		NavigationIcon(@DrawableRes int iconId) {
 			this.iconId = iconId;
