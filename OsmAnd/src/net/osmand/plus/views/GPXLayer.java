@@ -14,11 +14,13 @@ import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.graphics.drawable.LayerDrawable;
 import android.os.AsyncTask;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.util.Pair;
 
 import net.osmand.GPXUtilities;
@@ -77,7 +79,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	private Bitmap pointSmall;
 	private int currentTrackColor;
 
-	private Bitmap selectedPoint;
+	private LayerDrawable selectedPoint;
 	private TrackChartPoints trackChartPoints;
 
 	private static final int startZoom = 7;
@@ -176,7 +178,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 
 		paintIcon = new Paint();
 		pointSmall = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_white_shield_small);
-		selectedPoint = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_default_location_xml);
+		selectedPoint = (LayerDrawable) view.getResources().getDrawable(R.drawable.map_default_location_xml);
 
 		contextMenuLayer = view.getLayerByClass(ContextMenuLayer.class);
 
@@ -422,7 +424,11 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 						float x = tileBox.getPixXFromLatLon(highlightedPoint.getLatitude(), highlightedPoint.getLongitude());
 						float y = tileBox.getPixYFromLatLon(highlightedPoint.getLatitude(), highlightedPoint.getLongitude());
 						paintIcon.setColorFilter(null);
-						canvas.drawBitmap(selectedPoint, x - selectedPoint.getWidth() / 2, y - selectedPoint.getHeight() / 2, paintIcon);
+						selectedPoint.setBounds((int) x - selectedPoint.getIntrinsicWidth() / 2,
+								(int) y - selectedPoint.getIntrinsicHeight() / 2,
+								(int) x + selectedPoint.getIntrinsicWidth() / 2,
+								(int) y + selectedPoint.getIntrinsicHeight() / 2);
+						selectedPoint.draw(canvas);
 					}
 				}
 			}
