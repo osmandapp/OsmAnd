@@ -135,7 +135,7 @@
     <string name="av_def_action_choose">Выбар па запыце</string>
     <string name="av_def_action_video">Запіс відэа</string>
     <string name="av_def_action_audio">Запіс аўдыё</string>
-    <string name="av_widget_action_descr">Дзеянне віджэта па змаўчанні:</string>
+    <string name="av_widget_action_descr">Прадвызначанае дзеянне віджэта:</string>
     <string name="av_widget_action">Прадвызначанае дзеянне віджэта</string>
     <string name="av_video_format_descr">Фармат вываду відэа:</string>
     <string name="av_video_format">Фармат відэа</string>
