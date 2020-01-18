@@ -2011,7 +2011,7 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="osmand_plus_banner_desc">Versione completa di OsmAnd con download illimitati, aggiornamenti mensili delle mappe e plugin Wikipedia.</string>
     <string name="si_mi_meters">Miglia/metri</string>
     <string name="search_map">Ricerca delle mappe…</string>
-    <string name="first_usage_wizard_desc">Permetti a OsmAnd di determinate la tua posizione e suggerire le mappe da scaricare per la regione.</string>
+    <string name="first_usage_wizard_desc">Permetti a OsmAnd di determinare la tua posizione e suggerire le mappe da scaricare per la regione.</string>
     <string name="location_not_found">Posizione non trovata</string>
     <string name="no_inet_connection">Connessione internet assente</string>
     <string name="no_inet_connection_desc_map">Necessaria per scaricare le mappe.</string>
