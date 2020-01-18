@@ -11,8 +11,8 @@
 	Thx - Hardy
 
 -->
-    <string name="file_does_not_contain_routing_rules">\'%1$s\' file doesn\'t contain routing rules, please choose another file.</string>
-    <string name="not_support_file_type_with_ext">Not supported file type. You need to select a file with %1$s extension.</string>
+    <string name="file_does_not_contain_routing_rules">No routing rules in \'%1$s\'. Please choose another file.</string>
+    <string name="not_support_file_type_with_ext">Select a supported file with %1$s extension instead.</string>
     <string name="import_from_file">Import from file</string>
     <string name="import_routing_file">Import routing file</string>
     <string name="import_profile">Import profile</string>
@@ -20,36 +20,36 @@
     <string name="multimedia_notes_prefs_descr">Picture size, audio and video quality</string>
     <string name="osm_editing_prefs_descr">Login, password, offline editing</string>
     <string name="accessibility_prefs_descr">Choose icon, color and name</string>
-    <string name="live_monitoring_descr">Allow you to share current location using trip recording.</string>
+    <string name="live_monitoring_descr">Allows sharing current location using trip recording.</string>
     <string name="live_monitoring">Online tracking</string>
     <string name="save_track_logging_accuracy">Logging accuracy</string>
-    <string name="tracks_view_descr">You can find all your recorded tracks in Menu — My place — Tracks or in OsmAd folder using file manager.</string>
-    <string name="multimedia_notes_view_descr">You can find all your notes in Menu — My places — Notes</string>
+    <string name="tracks_view_descr">All your recorded tracks are to be found in Menu → My place → Tracks, or in the OsmAd folder.</string>
+    <string name="multimedia_notes_view_descr">All your OSM notes are to be found in Menu → My places → OSM edits.</string>
     <string name="video_notes">Video notes</string>
     <string name="photo_notes">Photo notes</string>
     <string name="route_recalculation">Route recalculation</string>
     <string name="accessibility_announce">Announce</string>
     <string name="login_and_pass">Username and password</string>
-    <string name="plugin_global_prefs_info">This plugin settings are global, and apply to all profiles.</string>
-    <string name="osm_editing">OpenStreetMap Editing</string>
-    <string name="osm_edits_view_descr">You can view all your unuploaded edits or osm bugs in Menu — My places — OSM Edits. Uploaded points don’t show in OsmAnd.</string>
+    <string name="plugin_global_prefs_info">These settings apply to all profiles.</string>
+    <string name="osm_editing">OSM editing</string>
+    <string name="osm_edits_view_descr">View all your unuploaded edits or OSM bugs in Menu → My places — OSM edits. Uploaded points don’t show in OsmAnd.</string>
     <string name="app_mode_osm">OSM</string>
-    <string name="select_nav_icon_descr">You will see the icon only while navigation or while moving.</string>
-    <string name="select_map_icon_descr">Map icon appears only on the map, and changing while navigation to navigation icon.</string>
+    <string name="select_nav_icon_descr">Icon only shown while navigating or moving.</string>
+    <string name="select_map_icon_descr">Map icon only shown on the map.</string>
     <string name="ltr_or_rtl_combine_via_space">%1$s %2$s</string>
     <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
     <string name="reset_confirmation_descr">By clicking %1$s you lose all your changes.</string>
     <string name="reset_all_profile_settings_descr">All profile settings will return to installation defaults.</string>
     <string name="reset_all_profile_settings">Reset all profile settings?</string>
-    <string name="select_navigation_icon">Select navigation icon</string>
-    <string name="select_map_icon">Select map icon</string>
-    <string name="delete_profiles_descr">Tapping \"Apply\", deleted profiles will be lost for good.</string>
+    <string name="select_navigation_icon">Navigation icon</string>
+    <string name="select_map_icon">Map icon</string>
+    <string name="delete_profiles_descr">Tapping \"Apply\", deletes all profiles permanently.</string>
     <string name="master_profile">Master profile</string>
-    <string name="select_color">Select colour</string>
+    <string name="select_color">Select color</string>
     <string name="rendering_value_thick_name">Thick</string>
-    <string name="desert_render_descr">For deserts and other sparsely populated areas. More details.</string>
+    <string name="desert_render_descr">For deserts and other sparsely populated areas. More detailed.</string>
     <string name="shared_string_downloading_formatted">Downloading %s</string>
-    <string name="edit_profiles_descr">You can’t delete default OsmAnd profiles, but you can go back and remove them, or move them to the bottom.</string>
+    <string name="edit_profiles_descr">OsmAnd profiles can be moved to the bottom, but not deleted. Go back to remove them.</string>
     <string name="edit_profiles">Edit profiles</string>
     <string name="select_nav_profile_dialog_message">\'Navigation type\' affects rules for route calculations.</string>
     <string name="distance_and_address">%1$s • %2$s</string>
@@ -59,7 +59,7 @@
     <string name="save_heading">Include heading</string>
     <string name="save_heading_descr">Save heading to each trackpoint while tracking.</string>
     <string name="profile_appearance">Profile appearance</string>
-    <string name="choose_icon_color_name">Choose icon, colour and name</string>
+    <string name="choose_icon_color_name">Icon, color and name</string>
     <string name="reorder_profiles">Edit profile list</string>
     <string name="selected_profile">Selected profile</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_name">Node networks</string>
@@ -80,18 +80,18 @@
     <string name="empty_filename">Filename empty</string>
     <string name="default_speed_dialog_msg">Estimates arrival time for unknown road types, and limits speed for all roads (can re-oute)</string>
     <string name="rendering_value_white_name">White</string>
-    <string name="swap_two_places">Swap %1$s ⇄ %2$s</string>
+    <string name="swap_two_places">%1$s ⇄ %2$s</string>
     <string name="route_start_point">Starting point</string>
     <string name="export_profile">Export profile</string>
     <string name="exported_osmand_profile">OsmAnd profile: %1$s</string>
-    <string name="overwrite_profile_q">Profile \'%1$s\' already exists. Overwrite?</string>
+    <string name="overwrite_profile_q">\'%1$s\' already exists. Overwrite?</string>
     <string name="export_profile_failed">Could not export profile.</string>
-    <string name="profile_import">Profile import</string>
-    <string name="profile_import_descr">Import a profile by opening the file in OsmAnd.</string>
+    <string name="profile_import">Import profile</string>
+    <string name="profile_import_descr">Add a profile by opening the file in OsmAnd.</string>
     <string name="file_import_error">%1$s import error: %2$s</string>
     <string name="file_imported_successfully">%1$s imported.</string>
     <string name="tts_initialization_error">Cannot start text-to-speech engine.</string>
-    <string name="layer_osm_edits">OSM Edits</string>
+    <string name="layer_osm_edits">OSM edits</string>
     <string name="quick_action_contour_lines_descr">Button showing or hiding contour lines on the map.</string>
     <string name="quick_action_contour_lines_show">Show contour lines</string>
     <string name="quick_action_contour_lines_hide">Hide contour lines</string>
@@ -107,7 +107,7 @@
     <string name="release_3_5">
     • Updated app and profile settings: Settings are now arranged by type. Each profile can be customized separately.\n\n
     • New map download dialog suggesting a map to download while browsing\n\n
-    • Night theme fixes\n\n
+    • Night mode fixes\n\n
     • Fixed several routing issues around the world\n\n
     • Updated basemap with more detailed road network\n\n
     • Fixed flooded areas around the world\n\n
@@ -531,7 +531,7 @@
     <string name="osm_live_payment_renews_annually">Renews annually</string>
     <string name="default_price_currency_format">%1$.2f %2$s</string>
     <string name="osm_live_payment_header">Payment interval:</string>
-    <string name="osm_live_payment_contribute_descr">Donations help fund OpenStreetMap cartography.</string>
+    <string name="osm_live_payment_contribute_descr">Donations help fund OSM cartography.</string>
     <string name="markers_remove_dialog_msg">Delete map marker \'%s\'?</string>
     <string name="edit_map_marker">Edit map marker</string>
     <string name="third_party_application">Third-party app</string>
@@ -689,13 +689,13 @@
     <string name="show_closed_notes">Show closed notes</string>
     <string name="switch_osm_notes_visibility_desc">Show/hide OSM notes on the map.</string>
     <string name="gpx_file_desc">GPX - suitable for export to JOSM or other OSM editors.</string>
-    <string name="osc_file_desc">OSC - suitable for export to OpenStreetMap.</string>
+    <string name="osc_file_desc">OSC - suitable for export to OSM.</string>
     <string name="shared_string_gpx_file">GPX file</string>
     <string name="osc_file">OSC file</string>
     <string name="choose_file_type">Select filetype</string>
-    <string name="osm_edits_export_desc">Select the export type: OSM notes, POIs, or both.</string>
+    <string name="osm_edits_export_desc">Export as OSM notes, POIs, or both.</string>
     <string name="all_data">All data</string>
-    <string name="osm_notes">OSM Notes</string>
+    <string name="osm_notes">OSM notes</string>
     <string name="will_open_tomorrow_at">Opens tomorrow at</string>
     <string name="rendering_attr_hidePOILabels_name">POI labels</string>
     <string name="shared_string_without_name">Without name</string>
@@ -725,16 +725,16 @@
     <string name="shared_string_actions">Actions</string>
     <string name="shared_string_marker">Marker</string>
     <string name="empty_state_osm_edits">Create or modify OSM objects</string>
-    <string name="empty_state_osm_edits_descr">Create or modify OSM POIs, open or comment OSM Notes, and contribute recorded GPX files.</string>
+    <string name="empty_state_osm_edits_descr">Create or modify OSM POIs, open or comment OSM notes, and contribute recorded GPX files.</string>
     <string name="shared_string_deleted">Deleted</string>
     <string name="shared_string_edited">Edited</string>
     <string name="shared_string_added">Added</string>
     <string name="marker_activated">Marker %s activated.</string>
     <string name="one_tap_active_descr">Tap a marker on the map to move it to the top of the active markers without opening the context menu.</string>
     <string name="one_tap_active">\'One tap\' active</string>
-    <string name="empty_state_av_notes">Take notes!</string>
+    <string name="empty_state_av_notes">Make notes!</string>
     <string name="empty_state_av_notes_desc">Add audio, video or photo note to every point on the map, using widget or context menu.</string>
-    <string name="notes_by_date">Notes by date</string>
+    <string name="notes_by_date">OSM notes by date</string>
     <string name="by_date">By date</string>
     <string name="by_type">By type</string>
     <string name="looking_for_tracks_with_waypoints">Looking for tracks with waypoints</string>
@@ -898,10 +898,10 @@
     <string name="increase_search_radius">Increase search radius</string>
     <string name="nothing_found">Nothing found</string>
     <string name="nothing_found_descr">Change the search or increase its radius.</string>
-    <string name="quick_action_showhide_osmbugs_title">Toggle OSM Notes</string>
-    <string name="quick_action_osmbugs_show">Show OSM Notes</string>
-    <string name="quick_action_osmbugs_hide">Hide OSM Notes</string>
-    <string name="quick_action_showhide_osmbugs_descr">Button showing or hiding OSM Notes on the map.</string>
+    <string name="quick_action_showhide_osmbugs_title">Show or hude OSM notes</string>
+    <string name="quick_action_osmbugs_show">Show OSM notes</string>
+    <string name="quick_action_osmbugs_hide">Hide OSM notes</string>
+    <string name="quick_action_showhide_osmbugs_descr">Button showing or hiding OSM notes on the map.</string>
     <string name="sorted_by_distance">Sorted by distance</string>
     <string name="search_favorites">Search in Favorites</string>
     <string name="hillshade_menu_download_descr">Download the \'Hillshade Overlay\' map to show vertical shading.</string>
@@ -1033,7 +1033,7 @@
 	\u2022 Transport menu: all available routes are now at the top\n\n
 	\u2022 Wikipedia: added the button to open the original article, updated the appearance of articles\n\n
 	\u2022 Route: added possibility to swap start and end points in one tap\n\n
-	\u2022 Notes: added sorting by type and date\n\n
+	\u2022 OSM notes: Added sorting by type and date\n\n
 	\u2022 OSM edits: Show an icon and a name of the POI category, display completed actions\n\n
 	\u2022 New quick coordinate input screen for quick markers creation\n\n
     \u2022 Detection of stop signs now considers driving direction\n\n
@@ -1053,7 +1053,7 @@
     <string name="rendering_attr_hideWaterPolygons_name">Hide water</string>
     <string name="routing_attr_allow_motorway_name">Use motorways</string>
     <string name="routing_attr_allow_motorway_description">Allows motorways.</string>
-    <string name="upload_osm_note_description">Upload your OSM Note anonymously or by using your OpenStreetMap.org profile.</string>
+    <string name="upload_osm_note_description">Upload your OSM note anonymously or by using your OSM.org profile.</string>
     <string name="wiki_around">Nearby Wikipedia articles</string>
     <string name="search_map_hint">City or region</string>
     <string name="route_roundabout_short">Take %1$d exit and go</string>
@@ -1111,8 +1111,8 @@
     <string name="new_filter">New filter</string>
     <string name="new_filter_desc">Please enter a name for the new filter, this will be added to your \'Categories\' tab.</string>
     <string name="osm_live_payment_desc">Subscription charged per month. Cancel it on Google Play at any time.</string>
-    <string name="donation_to_osm">Donation to OpenStreetMap community</string>
-    <string name="donation_to_osm_desc">Part of your donation is sent to the OSM users who submit changes to OpenStreetMap. The cost of the subscription remains the same.</string>
+    <string name="donation_to_osm">Donation to the OSM community</string>
+    <string name="donation_to_osm_desc">Part of your donation is sent to the OSM cartographers. The subscription cost remains the same.</string>
     <string name="osm_live_subscription_desc">Subscription enables hourly, daily, weekly updates, and unlimited downloads for all maps globally.</string>
     <string name="get_it">Get it</string>
     <string name="get_for">Get for %1$s</string>
@@ -1236,7 +1236,7 @@
     <string name="shared_string_topbar">Top bar</string>
     <string name="full_report">Full report</string>
     <string name="recalculate_route">Recalculate route</string>
-    <string name="open_street_map_login_and_pass">OpenStreetMap username and password</string>
+    <string name="open_street_map_login_and_pass">OSM username and password</string>
     <string name="donations">Donations</string>
     <string name="number_of_recipients">Number of recipients</string>
     <string name="osm_user_stat">Edits %1$s, rank %2$s, total edits %3$s</string>
@@ -1710,7 +1710,7 @@
     <string name="shared_string_accessibility">Accessibility</string>
     <string name="osmand_accessibility_description">Makes the device\'s accessibility features directly available in OsmAnd. It facilitates e.g. adjusting the speech rate for text-to-speech voices, configuring D-pad navigation, using a trackball for zoom control, or text-to-speech feedback, for example to auto announce your position.</string>
     <string name="osm_settings">OSM editing</string>
-    <string name="osm_editing_plugin_description">Make OSM contributions like creating or modifying OSM POI objects, opening or commenting OSM Notes, and contributing recorded GPX files in OsmAnd by supplying your username and password. OSM is a libre, community driven, global public domain mapping project https://openstreetmap.org.</string>
+    <string name="osm_editing_plugin_description">Make OSM contributions like creating or modifying OSM POI objects, opening or commenting OSM notes, and contributing recorded GPX files in OsmAnd by supplying your username and password. OSM.org is a libre, community driven, global public domain mapping project.</string>
     <string name="osmand_development_plugin_description">Settings for development and debugging features, like routing simulation, rendering performance, or voice announcements.</string>
     <string name="debugging_and_development">OsmAnd development</string>
     <string name="rename_failed">Renaming failed.</string>
@@ -1719,7 +1719,7 @@
     <string name="share_note">Share note</string>
     <string name="location_on_map">Location:\n Lat %1$s\n Lon %2$s</string>
     <string name="watch">Watch</string>
-    <string name="notes">Notes</string>
+    <string name="notes">OSM notes</string>
     <string name="online_map">Online map</string>
     <string name="roads_only">Roads only</string>
     <string name="rendering_attr_pisteRoutes_name">Ski slopes</string>
@@ -2316,7 +2316,7 @@
     <string name="osmand_long_description_1000_chars">
 		OsmAnd (OSM Automated Navigation Directions)\n\n
 
-		OsmAnd is an open source software navigation app with access to a wide variety of global OpenStreetMap (OSM) data. All map data (vector or tile maps) can be stored on the phone memory card for offline usage. Offline and online routing functionality is also offered, including turn-by-turn voice guidance.\n\n
+		OsmAnd is an open source software navigation app with access to a wide variety of global OSM data. All map data (vector or tile maps) can be stored on the phone memory card for offline usage. Offline and online routing functionality is also offered, including turn-by-turn voice guidance.\n\n
 
 		Some of the core features:\n
 		- Complete offline functionality (store downloaded vector or tile maps in the device storage)\n
@@ -2338,7 +2338,7 @@
 		OsmAnd is actively being developed and our project and its continued progress relies on financial contributions for development and testing of new functionality. Please consider buying OsmAnd+, or funding specific new features or making a general donation on https://osmand.net.
 	</string>
     <string name="osmand_extended_description_part1">
-    OsmAnd (OSM Automated Navigation Directions) is a map and navigation app with access to the free, worldwide, and high-quality OpenStreetMap (OSM) data.\n\n
+    OsmAnd (OSM Automated Navigation Directions) is a map and navigation app with access to the free, worldwide, and high-quality OSM data.\n\n
 
     Enjoy voice and optical navigator, viewing POIs (points of interest), creating and managing GPX tracks, using contour lines visualization and altitude info (through plugin), a choice between driving, cycling, pedestrian modes, OSM editing and much more.
     </string>
@@ -2412,7 +2412,7 @@
     <string name="osmand_plus_long_description_1000_chars">
 		OsmAnd+ (OSM Automated Navigation Directions)\n\n
 
-		OsmAnd+ is an open source software navigation app with access to a wide variety of global OpenStreetMap (OSM) data. All map data (vector or tile maps) can be stored on the phone memory card for offline use. Offline and online routing functionality is also offered, including turn-by-turn voice guidance.\n\n
+		OsmAnd+ is an open source software navigation app with access to a wide variety of global OSM data. All map data (vector or tile maps) can be stored on the phone memory card for offline use. Offline and online routing functionality is also offered, including turn-by-turn voice guidance.\n\n
 
 		OsmAnd+ is the paid app version, by buying it you support the project, fund the development of new features, and receive the latest updates.\n\n
 
@@ -2431,7 +2431,7 @@
 		-  Lane guidance, speed limit display, recorded and text-to-speech voices\n
 	</string>
     <string name="osmand_plus_extended_description_part1">
-        OsmAnd+ (OSM Automated Navigation Directions) is a map and navigation app with access to the free, worldwide, and high-quality OpenStreetMap (OSM) data.\n
+        OsmAnd+ (OSM Automated Navigation Directions) is a map and navigation app with access to the free, worldwide, and high-quality OSM data.\n
         Enjoy voice and optical navigation, viewing POIs (points of interest), creating and managing GPX tracks, using contour lines visualization and altitude info, a choice between driving, cycling, pedestrian modes, OSM editing and much more.\n\n
 
         OsmAnd+ is the paid app version. By buying it, you support the project, fund the development of new features, and receive the latest updates.\n\n
@@ -2702,13 +2702,13 @@
     <string name="offline_edition_descr">Always use offline editing.</string>
     <string name="update_poi_does_not_change_indexes">POI changes inside app do not affect downloaded map files, changes are saved as a file on your device instead.</string>
     <string name="local_openstreetmap_uploading">Uploading…</string>
-    <string name="local_openstreetmap_were_uploaded">{0} POI/Notes were uploaded</string>
+    <string name="local_openstreetmap_were_uploaded">{0} POI/notes were uploaded</string>
     <string name="local_openstreetmap_uploadall">Upload all</string>
     <string name="local_openstreetmap_upload">Upload edit to OSM</string>
     <string name="local_openstreetmap_delete">Delete edit</string>
     <string name="local_openstreetmap_descr_title">Asynchronous OSM editing:</string>
-    <string name="local_openstreetmap_settings">OSM POIs/Notes saved on device</string>
-    <string name="local_openstreetmap_settings_descr">Show and manage OSM POIs/Notes noted in database on device.</string>
+    <string name="local_openstreetmap_settings">OSM- POIs/-notes saved on device</string>
+    <string name="local_openstreetmap_settings_descr">Show and manage OSM- POIs/-notes in your device database.</string>
     <string name="live_monitoring_interval_descr">Specify the online tracking interval.</string>
     <string name="live_monitoring_interval">Online tracking interval</string>
     <string name="live_monitoring_url_descr">Specify the web address with parameter syntax: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
@@ -2748,7 +2748,7 @@
     <string name="general_settings_descr">Set up display and common settings for the app.</string>
     <string name="global_app_settings">Global app settings</string>
     <string name="user_name">Your OSM username</string>
-    <string name="open_street_map_login_descr">Needed for openstreetmap.org submissions.</string>
+    <string name="open_street_map_login_descr">Needed for OSM.org submissions.</string>
     <string name="user_password">Your OSM password</string>
     <string name="osmand_service">Background mode</string>
     <string name="osmand_service_descr">OsmAnd runs in the background with the screen off.</string>
@@ -3010,7 +3010,7 @@
     <string name="thanks_yandex_traffic">Thanks to Yandex for traffic info.</string>
     <string name="layer_yandex_traffic">Yandex traffic</string>
     <string name="layer_route">Route</string>
-    <string name="layer_osm_bugs">OSM Notes (online)</string>
+    <string name="layer_osm_bugs">OSM notes (online)</string>
     <string name="layer_poi">POI overlay…</string>
     <string name="layer_map">Map source…</string>
     <string name="menu_layers">Map layers</string>
@@ -3145,7 +3145,7 @@
     <string name="finished_task">Finished</string>
     <string name="use_online_routing_descr">Use the Internet to calculate a route.</string>
     <string name="use_online_routing">Use online navigation</string>
-    <string name="osm_settings_descr">Specify OpenStreetMap.org login details to upload edits.</string>
+    <string name="osm_settings_descr">Specify OSM.org login details to upload edits.</string>
     <string name="data_settings_descr">Specify language, download/reload data.</string>
     <string name="data_settings">Data</string>
     <string name="additional_settings">Additional settings</string>
