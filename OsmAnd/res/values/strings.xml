@@ -3501,7 +3501,7 @@
     <string name="routing_attr_difficulty_preference_name">Prefered difficulty</string>
     <string name="routing_attr_difficulty_preference_description">Prefer routes of this difficulty, although routing over harder or easier pistes is still possible if shorter.</string>
     <string name="routing_attr_freeride_policy_name">Off-piste</string>
-    <string name="routing_attr_freeride_policy_description">\'Freeride\' and \'Off-piste\' are unofficial routes and passages. Typically ungroomed, unmaintained by the officials and not checked in the evening. Enter at your own risk.</string>
+    <string name="routing_attr_freeride_policy_description">\'Freeride\' and \'Off-piste\' are unofficial routes and passages. Typically ungroomed, unmaintained and not checked in the evening. Enter at your own risk.</string>
 
 
 </resources>
