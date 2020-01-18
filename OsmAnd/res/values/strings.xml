@@ -96,14 +96,14 @@
     <string name="quick_action_contour_lines_show">Show contour lines</string>
     <string name="quick_action_contour_lines_hide">Hide contour lines</string>
     <string name="quick_action_show_hide_contour_lines">Show/hide contour lines</string>
-    <string name="quick_action_hillshade_descr">Button showing or hiding hillshade on the map.</string>
+    <string name="quick_action_hillshade_descr">Button showing or hiding shading of hills on the map.</string>
     <string name="quick_action_hillshade_show">Show hillshade</string>
     <string name="quick_action_hillshade_hide">Hide hillshade</string>
     <string name="quick_action_show_hide_hillshade">Show/hide hillshade</string>
     <string name="apply_preference_to_all_profiles">You can apply this change to all or only the selected profile.</string>
     <string name="shared_preference">Shared</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">Prefer unpaved routes</string>
-    <string name="routing_attr_driving_style_prefer_unpaved_description">Prefer unpaved routes.</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_description">Route through terrain without pavement.</string>
     <string name="release_3_5">
     • Updated app and profile settings: Settings are now arranged by type. Each profile can be customized separately.\n\n
     • New map download dialog suggesting a map to download while browsing\n\n
