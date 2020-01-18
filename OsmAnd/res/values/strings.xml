@@ -3187,7 +3187,7 @@
     <string name="app_mode_pedestrian">Walking</string>
     <string name="position_on_map_center">Center</string>
     <string name="position_on_map_bottom">Bottom</string>
-    <string name="navigate_point_top_text">Input latitude and longitude in the selected format (D - degrees, M - minutes, S - seconds)</string>
+    <string name="navigate_point_top_text">Input latitude and longitude as degrees-minutes-seconds (DMS)</string>
     <string name="navigate_point_latitude">Latitude</string>
     <string name="navigate_point_longitude">Longitude</string>
     <string name="navigate_point_format_D">DDD.DDDDD</string>
