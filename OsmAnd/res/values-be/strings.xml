@@ -58,7 +58,7 @@
     <string name="intermediate_items_sort_return">Аптымальны парадак прамежкавых пунктаў па шляху да месца прызначэння.</string>
     <string name="intermediate_items_sort_by_distance">Упарадкаваць ад дзвярэй да дзвярэй</string>
     <string name="local_osm_changes_backup_successful">Файл OSM-змен створаны ў %1$s</string>
-    <string name="local_osm_changes_backup_failed">Не атрымалася зарэзерваваць OSM-змены</string>
+    <string name="local_osm_changes_backup_failed">Не ўдалося стварыць рэзервовую копію правак OSM.</string>
     <string name="local_osm_changes_backup">Рэзервовае капіяванне файла змен OSM</string>
     <string name="delete_point">Выдаліць пункт</string>
     <string name="plugin_distance_point_time">час</string>
@@ -100,7 +100,7 @@
     <string name="monitoring_settings_descr">Наладзьце запіс вашых паездак.</string>
     <string name="osmand_background_plugin_description">Паказвае налады ўключэння фонавага адсочвання і навігацыі праз перыядычнае абуджэнне GPS прылады (з выключаным экранам).</string>
     <string name="contribution_activity">Усталёўка версіі</string>
-    <string name="choose_osmand_theme_descr">Абраць выгляд дадатку.</string>
+    <string name="choose_osmand_theme_descr">Налада вонкавага выгляду прыкладання.</string>
     <string name="choose_osmand_theme">Выгляд</string>
     <string name="accessibility_options">Налады адмысловых магчымасцяў</string>
     <string name="select_address_activity">Абраць адрас</string>
@@ -135,9 +135,9 @@
     <string name="av_def_action_choose">Выбар па запыце</string>
     <string name="av_def_action_video">Запіс відэа</string>
     <string name="av_def_action_audio">Запіс аўдыё</string>
-    <string name="av_widget_action_descr">Абярыце прадвызначанае дзеянне віджэта.</string>
+    <string name="av_widget_action_descr">Прадвызначанае дзеянне віджэта:</string>
     <string name="av_widget_action">Прадвызначанае дзеянне віджэта</string>
-    <string name="av_video_format_descr">Выбар выоднага фармату відэа.</string>
+    <string name="av_video_format_descr">Фармат вываду відэа:</string>
     <string name="av_video_format">Фармат відэа</string>
     <string name="av_use_external_recorder_descr">Выкарыстоўваць сістэмны дадатак для запісу відэа.</string>
     <string name="av_use_external_recorder">Выкарыстоўваць сістэмны дадатак для запісу</string>
@@ -155,7 +155,7 @@
     <string name="recording_context_menu_arecord">Запісаць аўдыянататку</string>
     <string name="recording_context_menu_vrecord">Запісаць відэанататку</string>
     <string name="layer_recordings">Пласт запісу</string>
-    <string name="recording_can_not_be_played">Запіс немагчыма прайграць</string>
+    <string name="recording_can_not_be_played">Не атрымалася прайграць запіс.</string>
     <string name="recording_context_menu_delete">Выдаліць запіс</string>
     <string name="recording_context_menu_play">Граць</string>
     <string name="recording_description">Запіс %1$s %3$s %2$s</string>
@@ -1160,12 +1160,12 @@
     <string name="amenity_type_seamark">Навігацыйны знак</string>
     <string name="app_mode_hiking">Пешы турызм</string>
     <string name="app_mode_boat">Човен</string>
-    <string name="local_osm_changes_delete_all_confirm">Вы збіраецеся выдаліць %1$d змены OSM. Вы ўпэўненыя\?</string>
+    <string name="local_osm_changes_delete_all_confirm">Вы ўпэўненыя, што хочаце выдаліць %1$d правак OSM\?</string>
     <string name="animate_routing_route_not_calculated">Калі ласка, спачатку разлічыце маршрут</string>
     <string name="android_19_location_disabled">Ад версіі 4.4 Android (KitKat) вы не можаце спампоўваць і абнаўляць мапу ў старым каталогу захоўвання (%s). Скапіяваць усе файлы OsmAnd у новае сховішча\? 
 \n Заўвага 1: Вашыя старыя файлы застануцца некранутымі (вы можаце выдаліць іх самастойна).          
 \n Заўвага 2: У новым месцы захоўвання будзе немагчыма адначасова выкарыстоўваць файлы ў OsmAnd і OsmAnd+.</string>
-    <string name="app_modes_choose_descr">Абярыце профілі, бачныя ў дадатку.</string>
+    <string name="app_modes_choose_descr">Абярыце бачныя профілі.</string>
     <string name="voice_pref_title">Голас</string>
     <string name="misc_pref_title">Рознае</string>
     <string name="localization_pref_title">Лакалізацыя</string>
@@ -3187,9 +3187,9 @@
     <string name="rendering_attr_highway_class_track_grade4_name">4 клас</string>
     <string name="rendering_attr_highway_class_track_grade5_name">5 клас</string>
     <string name="external_input_device">Вонкавыя прылады ўводу</string>
-    <string name="external_input_device_descr">"Абярыце прыладу, напрыклад,  клавіятуру або WunderLINQ для вонкавага кіравання."</string>
+    <string name="external_input_device_descr">Выберыце знешнюю прыладу кіравання, напрыклад, клавіятуру або WunderLINQ.</string>
     <string name="sett_no_ext_input">Няма</string>
-    <string name="sett_generic_ext_input">Універсальны Клавіятура</string>
+    <string name="sett_generic_ext_input">Клавіятура</string>
     <string name="sett_wunderlinq_ext_input">WunderLINQ</string>
     <string name="sett_parrot_ext_input">Parrot</string>
     <string name="turn_on_profile_desc">Калі ласка, ўключыце па меншай меры адзін профіль дадатку, каб выкарыстоўваць гэты параметр.</string>
