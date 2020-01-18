@@ -3461,4 +3461,23 @@
 \n</string>
     <string name="simulate_your_location_gpx_descr">Сімуляваць сваю пазіцыю пры дапамозе запісанага GPX-следу.</string>
     <string name="quick_action_directions_from_desc">Кнопка для прызначэння цэнтра экрана пунктам адпраўлення. Таксама дадатак пракладзе шлях да раней абранага пункта прызначэння або адкрые дыялог для выбару пункта прызначэння, калі яго няма на мапе.</string>
+    <string name="button_rate">Ацаніць</string>
+    <string name="import_from_file">Імпарт з файла</string>
+    <string name="import_routing_file">Імпартаваць файл маршрутызацыі</string>
+    <string name="import_profile">Імпартаваць профіль</string>
+    <string name="monitoring_prefs_descr">Навігацыя, дакладнасць рэгістрацыі</string>
+    <string name="multimedia_notes_prefs_descr">Памер выявы, якасць гуку і відэа</string>
+    <string name="osm_editing_prefs_descr">Лагін, пароль, рэдагаванне ў аўтаномным рэжыме</string>
+    <string name="accessibility_prefs_descr">Абярыце значок, колер і назву</string>
+    <string name="live_monitoring_descr">Дазваляе падзяліцца бягучым месцазнаходжаннем з дапамогай запісу паездкі.</string>
+    <string name="live_monitoring">Інтэрнэт-сачэнне</string>
+    <string name="save_track_logging_accuracy">Дакладнасць рэгістрацыі</string>
+    <string name="video_notes">Відэа нататкі</string>
+    <string name="photo_notes">Фота нататкі</string>
+    <string name="route_recalculation">Пераразлік маршруту</string>
+    <string name="login_and_pass">Імя карыстальніка і пароль</string>
+    <string name="plugin_global_prefs_info">Настройкі гэтага плагіна глабальныя і распаўсюджваюцца на ўсе профілі.</string>
+    <string name="osm_editing">Рэдагаванне OpenStreetMap</string>
+    <string name="app_mode_osm">OSM</string>
+    <string name="select_nav_icon_descr">Вы ўбачыце значок толькі падчас навігацыі або падчас руху.</string>
 </resources>
