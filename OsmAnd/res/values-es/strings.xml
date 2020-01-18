@@ -3054,7 +3054,6 @@
     <string name="precision_hdop_and_vdop">Precisión horizontal: %1$s, vertical: %2$s</string>
     <string name="precision_hdop">Precisión horizontal: %s</string>
     <string name="rate_dialog_descr">Por favor, comparte tus comentarios y califica nuestro trabajo en Google Play.</string>
-    <string name="button_rate">Valorar</string>
     <string name="shared_string_privacy_policy">Política de privacidad</string>
     <string name="help_us_make_osmand_better">Ayúdanos a mejorar OsmAnd</string>
     <string name="make_osmand_better_descr">Permite que OsmAnd recopile y procese datos de uso anónimos de la aplicación. No recopilamos datos sobre las ubicaciones que ve en el mapa. 
@@ -3416,4 +3415,6 @@
     <string name="reset_confirmation_descr">Haciendo click en %1$s, perderás todos tus cambios.</string>
     <string name="reset_all_profile_settings_descr">Todos los ajustes del perfil se restablecerán al estado después de la instalación.</string>
     <string name="reset_all_profile_settings">¿Restablecer todos los ajustes del perfil a los valores predeterminados\?</string>
+    <string name="ltr_or_rtl_combine_via_space">%1$s %2$s</string>
+    <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
 </resources>

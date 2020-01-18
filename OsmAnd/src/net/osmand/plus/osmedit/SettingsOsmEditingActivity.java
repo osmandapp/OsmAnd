@@ -95,7 +95,7 @@ public class SettingsOsmEditingActivity extends SettingsBaseActivity {
 		}
 	}
 
-	private static class ValidateOsmLoginDetailsTask extends AsyncTask<Void, Void, OsmBugsUtil.OsmBugResult> {
+	public static class ValidateOsmLoginDetailsTask extends AsyncTask<Void, Void, OsmBugsUtil.OsmBugResult> {
 		private final Context context;
 
 		public ValidateOsmLoginDetailsTask(Context context) {

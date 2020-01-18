@@ -31,6 +31,7 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
+import net.osmand.plus.settings.BaseSettingsFragment;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
@@ -517,12 +518,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		parkingPlaceControl.setIcons(R.drawable.widget_parking_day, R.drawable.widget_parking_night);
 		return parkingPlaceControl;
 	}
-	
-	@Override
-	public Class<? extends Activity> getSettingsActivity() {
-		return null;
-	}
-	
+
 	@Override
 	public int getAssetResourceName() {
 		return R.drawable.parking_position;

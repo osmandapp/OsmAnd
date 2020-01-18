@@ -11,6 +11,31 @@
 	Thx - Hardy
 
 -->
+    <string name="file_does_not_contain_routing_rules">\'%1$s\' file doesn\'t contain routing rules, please choose another file.</string>
+    <string name="not_support_file_type_with_ext">Not supported file type. You need to select a file with %1$s extension.</string>
+    <string name="import_from_file">Import from file</string>
+    <string name="import_routing_file">Import routing file</string>
+    <string name="import_profile">Import profile</string>
+    <string name="monitoring_prefs_descr">Navigation, logging accuracy</string>
+    <string name="multimedia_notes_prefs_descr">Picture size, audio and video quality</string>
+    <string name="osm_editing_prefs_descr">Login, password, offline editing</string>
+    <string name="accessibility_prefs_descr">Choose icon, color and name</string>
+    <string name="live_monitoring_descr">Allow you to share current location using trip recording.</string>
+    <string name="live_monitoring">Online tracking</string>
+    <string name="save_track_logging_accuracy">Logging accuracy</string>
+    <string name="tracks_view_descr">You can find all your recorded tracks in Menu — My place — Tracks or in OsmAd folder using file manager.</string>
+    <string name="multimedia_notes_view_descr">You can find all your notes in Menu — My places — Notes</string>
+    <string name="video_notes">Video notes</string>
+    <string name="photo_notes">Photo notes</string>
+    <string name="route_recalculation">Route recalculation</string>
+    <string name="accessibility_announce">Announce</string>
+    <string name="login_and_pass">Username and password</string>
+    <string name="plugin_global_prefs_info">This plugin settings are global, and apply to all profiles.</string>
+    <string name="osm_editing">OpenStreetMap Editing</string>
+    <string name="osm_edits_view_descr">You can view all your unuploaded edits or osm bugs in Menu — My places — OSM Edits. Uploaded points don’t show in OsmAnd.</string>
+    <string name="app_mode_osm">OSM</string>
+    <string name="select_nav_icon_descr">You will see the icon only while navigation or while moving.</string>
+    <string name="select_map_icon_descr">Map icon appears only on the map, and changing while navigation to navigation icon.</string>
     <string name="ltr_or_rtl_combine_via_space">%1$s %2$s</string>
     <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
     <string name="reset_confirmation_descr">By clicking %1$s you lose all your changes.</string>
@@ -278,7 +303,7 @@
     <string name="shared_string_color_magenta">Magenta</string>
     <string name="shared_string_icon">Icon</string>
     <string name="rate_dialog_descr">Please share your feedback and rate our work on Google Play.</string>
-    <string name="button_rate">OK</string>
+    <string name="button_rate">Rate</string>
     <string name="shared_string_privacy_policy">Privacy Policy</string>
     <string name="help_us_make_osmand_better">Help us make OsmAnd better</string>
     <string name="make_osmand_better_descr">Allow OsmAnd to collect and process anonymous app usage data. No data about your position or locations you view on the map are collected.\n\nConfigure any time in \'Settings\' → \'Privacy and Security\'.</string>

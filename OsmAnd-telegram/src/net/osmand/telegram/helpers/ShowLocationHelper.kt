@@ -35,6 +35,7 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 		
 		const val MIN_OSMAND_CALLBACK_VERSION_CODE = 320
 		const val MIN_OSMAND_CREATE_IMPORT_DIRS_VERSION_CODE = 340
+		const val MIN_OSMAND_SHARE_WIDGET_ICON_VERSION_CODE = 356
 
 		const val MAP_CONTEXT_MENU_BUTTON_ID = 1
 		const val MAP_CONTEXT_MENU_BUTTONS_PARAMS_ID = "DIRECTION"
@@ -46,6 +47,8 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 
 		private const val STATUS_WIDGET_ID = "status_widget"
 		private const val STATUS_WIDGET_MENU_ICON = "widget_location_sharing_night"
+		private const val STATUS_WIDGET_MENU_ICON_OLD = "ic_action_relative_bearing"
+		private const val STATUS_WIDGET_ICON_OLD = "widget_relative_bearing_day"
 		private const val STATUS_WIDGET_ANIM_ICON_DAY = "anim_widget_location_sharing_day"
 		private const val STATUS_WIDGET_ANIM_ICON_NIGHT = "anim_widget_location_sharing_night"
 		private const val STATUS_WIDGET_ON_ANIM_ICON_DAY = "anim_widget_location_sharing_on_day"
@@ -209,8 +212,13 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 	}
 
 	fun addOrUpdateStatusWidget(time: Long, isSending: Boolean) {
-		val iconDay: String
-		val iconNight: String
+		var iconDay: String
+		var iconNight: String
+		val menuIcon = if (isOsmandHasStatusWidgetIcon()) {
+			STATUS_WIDGET_MENU_ICON
+		} else {
+			STATUS_WIDGET_MENU_ICON_OLD
+		}
 		val text = when {
 			time > 0L -> {
 				iconDay = STATUS_WIDGET_ANIM_ICON_DAY
@@ -234,6 +242,10 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 				app.getString(R.string.shared_string_start)
 			}
 		}
+		if (!isOsmandHasStatusWidgetIcon()) {
+			iconDay = STATUS_WIDGET_ICON_OLD
+			iconNight = STATUS_WIDGET_ICON_OLD
+		}
 		val subText = when {
 			time > 0 -> {
 				if (text.length > 2) {
@@ -246,7 +258,7 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 		}
 		osmandAidlHelper.addMapWidget(
 				STATUS_WIDGET_ID,
-				STATUS_WIDGET_MENU_ICON,
+				menuIcon,
 				app.getString(R.string.status_widget_title),
 				iconDay,
 				iconNight,
@@ -454,6 +466,11 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 	fun canOsmandCreateGpxDirs(): Boolean {
 		val version = AndroidUtils.getAppVersionCode(app, app.settings.appToConnectPackage)
 		return version >= MIN_OSMAND_CREATE_IMPORT_DIRS_VERSION_CODE
+	}
+
+	fun isOsmandHasStatusWidgetIcon(): Boolean {
+		val version = AndroidUtils.getAppVersionCode(app, app.settings.appToConnectPackage)
+		return version >= MIN_OSMAND_SHARE_WIDGET_ICON_VERSION_CODE
 	}
 
 	fun startShowMessagesTask(chatId: Long, vararg messages: TdApi.Message) {

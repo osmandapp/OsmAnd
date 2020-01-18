@@ -48,7 +48,6 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:ellipsize="marquee"
-				android:fadingEdge="horizontal"
 				android:singleLine="true"
 				android:textColor="?colorAccent"
 				android:textSize="@dimen/default_list_text_size"

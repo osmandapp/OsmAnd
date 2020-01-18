@@ -3028,7 +3028,6 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="searching_gps">Wyszukiwanie GPS</string>
     <string name="coordinates_widget">Widżet współrzędnych</string>
     <string name="rate_dialog_descr">Podziel się opinią i oceń naszą pracę w Google Play.</string>
-    <string name="button_rate">Ok</string>
     <string name="shared_string_privacy_policy">Polityka prywatności</string>
     <string name="help_us_make_osmand_better">Pomóż nam uczynić OsmAnd lepszym</string>
     <string name="make_osmand_better_descr">Pozwól OsmAnd zbierać i przetwarzać anonimowe dane użytkowe aplikacji. Nie przechowujemy danych dotyczących twojego położenia ani lokalizacji, które widziałeś na mapie. 

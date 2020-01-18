@@ -2953,7 +2953,6 @@ voor Gebied: %1$s x %2$s</string>
     <string name="public_transport_try_ped">Probeer de wandelroute.</string>
     <string name="public_transport_try_change_settings">Probeer de instellingen te wijzigen.</string>
     <string name="public_transport_calc_pedestrian">Looproute berekenen</string>
-    <string name="button_rate">Ok</string>
     <string name="help_us_make_osmand_better">Help ons OsmAnd beter te maken</string>
     <string name="settings_privacy_and_security">Privacy en veiligheid</string>
     <string name="settings_privacy_and_security_desc">Kies welke gegevens je deelt</string>
