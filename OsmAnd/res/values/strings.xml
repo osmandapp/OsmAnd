@@ -3498,7 +3498,7 @@
     <string name="routing_attr_allow_skating_only_description">Routes groomed for freestyle or skating only without classic tracks.</string>
     <string name="routing_attr_allow_classic_only_name">Allow classic only routes</string>
     <string name="routing_attr_allow_classic_only_description">Routes groomed for classic style only without skating trails. This includes routes groomed by a smaller snowmobile with looser piste and tracks made manually by skiers.</string>
-    <string name="routing_attr_difficulty_preference_name">Prefered difficulty</string>
+    <string name="routing_attr_difficulty_preference_name">Preferred difficulty</string>
     <string name="routing_attr_difficulty_preference_description">Prefer routes of this difficulty, although routing over harder or easier pistes is still possible if shorter.</string>
     <string name="routing_attr_freeride_policy_name">Off-piste</string>
     <string name="routing_attr_freeride_policy_description">\'Freeride\' and \'Off-piste\' are unofficial routes and passages. Typically ungroomed, unmaintained and not checked in the evening. Enter at your own risk.</string>
