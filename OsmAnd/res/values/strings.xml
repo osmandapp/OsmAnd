@@ -3388,7 +3388,7 @@
     <string name="quick_action_add_poi_descr">Button adding a POI in the middle of the screen.</string>
     <string name="quick_action_navigation_voice_descr">Button turning on or off voice guidance during navigation.</string>
     <string name="quick_action_add_parking_descr">Button adding a parking location in the middle of the screen.</string>
-    <string name="quick_action_switch_day_night_descr">Button switching between \'Day\' and \'Night\' modes for OsmAnd.</string>
+    <string name="quick_action_switch_day_night_descr">Button switching between \'Day\' and \'Night\' mode.</string>
     <string name="quick_action_switch_day_mode">Day mode</string>
     <string name="quick_action_switch_night_mode">Night mode</string>
     <string name="quick_action_day_night_switch_mode">Switch day/night mode</string>
