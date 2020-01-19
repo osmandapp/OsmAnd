@@ -1216,7 +1216,7 @@
     <string name="plugin_ski_name">Suusakaardi vaade</string>
     <string name="osmand_parking_plugin_name">Parkimiskoht</string>
     <string name="osmand_distance_planning_plugin_name">Kauguse kalkulaator &amp; planeerimistöövahend</string>
-    <string name="osm_settings">OSM muutmine</string>
+    <string name="osm_settings">OpenStreetMap muutmine</string>
     <string name="rename_failed">Ümber nimetamine ebaõnnestus.</string>
     <string name="days_behind">päeva maas</string>
     <string name="watch">Vaata</string>
@@ -2806,8 +2806,7 @@
     <string name="internet_not_available">Tegevust ei saa sooritada ilma internetiühenduseta.</string>
     <string name="level_to_switch_vector_raster_descr">Kasuta rasterkaarte kõigeks seda taset ületavaks.</string>
     <string name="level_to_switch_vector_raster">Vähim vektori suurendustase</string>
-    <string name="create_poi_link_to_osm_doc">
-        <u>Veebipõhine OSM</u> kaartide klassifikatsioon piltidega.</string>
+    <string name="create_poi_link_to_osm_doc"> string name=\"lat_lon_pattern\"&gt;Laius: %1$.5f pikkus: %2$.5f&lt;/string </string>
     <string name="preferred_locale_descr">Rakenduse keel (kasutusel peale OsmAnd taaskäivitamist).</string>
     <string name="preferred_locale">Keel</string>
     <string name="send_location_email_pattern">Asukoha nägemiseks järgi veebilinki %1$s või Androidi soovitud linki %2$s</string>
@@ -3353,4 +3352,30 @@
     <string name="reset_all_profile_settings">Taasta kõikide profiiliseadete vaikeväärtused\?</string>
     <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
     <string name="ltr_or_rtl_combine_via_space">%1$s %2$s</string>
+    <string name="button_rate">Hinda</string>
+    <string name="file_does_not_contain_routing_rules">\'%1$s\' fail ei sisalda marsruutimiseegleid, palun vali teine fail.</string>
+    <string name="not_support_file_type_with_ext">Faili liiki ei toetata. Vali %1$s laiendiga fail.</string>
+    <string name="import_from_file">Impordi failist</string>
+    <string name="import_routing_file">Impordi marsruutimisfail</string>
+    <string name="import_profile">Impordi profiil</string>
+    <string name="monitoring_prefs_descr">Navigeerimine, logimise täpsus</string>
+    <string name="multimedia_notes_prefs_descr">Pildi suurus, heli ja video kvaliteet</string>
+    <string name="osm_editing_prefs_descr">Kasutajajanimi, salasõna, võrguühenduseta muutmine</string>
+    <string name="accessibility_prefs_descr">Vali ikoon, värv ja nimi</string>
+    <string name="live_monitoring_descr">Lubab sul jagada praegust asukohta kasutades reisi salvestamist.</string>
+    <string name="live_monitoring">Veebis jälgimine</string>
+    <string name="save_track_logging_accuracy">Logimise täpsus</string>
+    <string name="tracks_view_descr">Kõik oma salvestatud rajad leiad Menüü- Minu koht - Rajad või OsmAd kataloogist failihalduri abil.</string>
+    <string name="multimedia_notes_view_descr">Kõik oma märkmed leiad Menüü - Minu kohad - Märkmed</string>
+    <string name="video_notes">Video märkmed</string>
+    <string name="photo_notes">Foto märkmed</string>
+    <string name="route_recalculation">Teekonna ümberarvutamine</string>
+    <string name="accessibility_announce">Teata</string>
+    <string name="login_and_pass">Kasutajanimi ja salasõna</string>
+    <string name="plugin_global_prefs_info">Selle lisa seaded kehtivad kogu rakenduses ja rakenduvad kõikidele profiilidele.</string>
+    <string name="osm_editing">OpenStreetMap muutmine</string>
+    <string name="osm_edits_view_descr">Kõiki üleslaadimata muudatusi või osm vigu saad vaadata menüüs Menüü - Minu kohad - OSM muudatused. Üleslaaditud punkte OsmAnd ei kuva.</string>
+    <string name="app_mode_osm">OSM</string>
+    <string name="select_nav_icon_descr">Ikooni näed ainult navigeerimise või liikumise ajal.</string>
+    <string name="select_map_icon_descr">Kaardiikoon kuvatakse ainult kaardil ja muutub navigeerimise ajal navigeerimise ikooniks.</string>
 </resources>
