@@ -3348,4 +3348,17 @@
     <string name="multimedia_notes_prefs_descr">حجم الصورة ، جودة الصوت والفيديو</string>
     <string name="osm_editing_prefs_descr">تسجيل الدخول ، كلمة المرور ، تحرير دون نت</string>
     <string name="accessibility_prefs_descr">اختر الرمز ،اللون والاسم</string>
+    <string name="live_monitoring_descr">تتيح لك مشاركة الموقع الحالي باستخدام تسجيل الرحلة.</string>
+    <string name="live_monitoring">تعقب عبر الانترنت</string>
+    <string name="save_track_logging_accuracy">دقة التسجيل</string>
+    <string name="multimedia_notes_view_descr">يمكنك العثور على جميع ملاحظاتك في القائمة — أماكني المفضلة — ملاحظات</string>
+    <string name="video_notes">ملاحظات الفيديو</string>
+    <string name="photo_notes">ملاحظات الصورة</string>
+    <string name="route_recalculation">إعادة حساب الطريق</string>
+    <string name="accessibility_announce">أعلن</string>
+    <string name="login_and_pass">اسم المستخدم و كلمة السر</string>
+    <string name="plugin_global_prefs_info">إعدادات المكون الإضافي هذه شاملة، وتنطبق على جميع الملفات الشخصية.</string>
+    <string name="osm_editing">تعديل OpenStreetMap</string>
+    <string name="app_mode_osm">OSM</string>
+    <string name="select_nav_icon_descr">سترى الأيقونة فقط أثناء الملاحة أو أثناء التحرك.</string>
 </resources>
