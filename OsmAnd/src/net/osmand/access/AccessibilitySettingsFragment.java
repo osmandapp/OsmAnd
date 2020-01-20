@@ -24,29 +24,25 @@ public class AccessibilitySettingsFragment extends BaseSettingsFragment implemen
 	private static final String COPY_PLUGIN_SETTINGS = "copy_plugin_settings";
 	private static final String RESET_TO_DEFAULT = "reset_to_default";
 
-	private AccessibilityPlugin plugin = OsmandPlugin.getPlugin(AccessibilityPlugin.class);
-
 	@Override
 	protected void setupPreferences() {
-		if (plugin != null) {
-			setupAccessibilityModePref();
-			setupSpeechRatePref();
+		setupAccessibilityModePref();
+		setupSpeechRatePref();
 
-			setupSmartAutoAnnouncePref();
-			setupAutoAnnouncePeriodPref();
+		setupSmartAutoAnnouncePref();
+		setupAutoAnnouncePeriodPref();
 
-			setupDisableOffRouteRecalculationPref();
-			setupDisableWrongDirectionRecalculationPref();
+		setupDisableOffRouteRecalculationPref();
+		setupDisableWrongDirectionRecalculationPref();
 
-			setupDirectionStylePref();
-			setupDirectionAudioFeedbackPref();
-			setupDirectionHapticFeedbackPref();
+		setupDirectionStylePref();
+		setupDirectionAudioFeedbackPref();
+		setupDirectionHapticFeedbackPref();
 
-			setupCopyProfileSettingsPref();
-			setupResetToDefaultPref();
+		setupCopyProfileSettingsPref();
+		setupResetToDefaultPref();
 
-			updateAccessibilityOptions();
-		}
+		updateAccessibilityOptions();
 	}
 
 	private void setupAccessibilityModePref() {
@@ -59,7 +55,7 @@ public class AccessibilitySettingsFragment extends BaseSettingsFragment implemen
 			entryValues[i] = accessibilityModes[i].ordinal();
 		}
 
-		ListPreferenceEx accessibilityMode = (ListPreferenceEx) findPreference(plugin.ACCESSIBILITY_MODE.getId());
+		ListPreferenceEx accessibilityMode = (ListPreferenceEx) findPreference(settings.ACCESSIBILITY_MODE.getId());
 		accessibilityMode.setEntries(entries);
 		accessibilityMode.setEntryValues(entryValues);
 		accessibilityMode.setDescription(R.string.accessibility_mode_descr);
@@ -73,7 +69,7 @@ public class AccessibilitySettingsFragment extends BaseSettingsFragment implemen
 			entries[i] = (int) (entryValues[i] * 100) + " %";
 		}
 
-		ListPreferenceEx speechRate = (ListPreferenceEx) findPreference(plugin.SPEECH_RATE.getId());
+		ListPreferenceEx speechRate = (ListPreferenceEx) findPreference(settings.SPEECH_RATE.getId());
 		speechRate.setEntries(entries);
 		speechRate.setEntryValues(entryValues);
 		speechRate.setIcon(getContentIcon(R.drawable.ic_world_globe_dark));
@@ -81,7 +77,7 @@ public class AccessibilitySettingsFragment extends BaseSettingsFragment implemen
 	}
 
 	private void setupSmartAutoAnnouncePref() {
-		SwitchPreferenceEx smartAutoAnnounce = (SwitchPreferenceEx) findPreference(plugin.ACCESSIBILITY_SMART_AUTOANNOUNCE.getId());
+		SwitchPreferenceEx smartAutoAnnounce = (SwitchPreferenceEx) findPreference(settings.ACCESSIBILITY_SMART_AUTOANNOUNCE.getId());
 		smartAutoAnnounce.setDescription(getString(R.string.access_smart_autoannounce_descr));
 	}
 
@@ -103,19 +99,19 @@ public class AccessibilitySettingsFragment extends BaseSettingsFragment implemen
 			k++;
 		}
 
-		ListPreferenceEx autoAnnouncePeriod = (ListPreferenceEx) findPreference(plugin.ACCESSIBILITY_AUTOANNOUNCE_PERIOD.getId());
+		ListPreferenceEx autoAnnouncePeriod = (ListPreferenceEx) findPreference(settings.ACCESSIBILITY_AUTOANNOUNCE_PERIOD.getId());
 		autoAnnouncePeriod.setEntries(entries);
 		autoAnnouncePeriod.setEntryValues(entryValues);
 		autoAnnouncePeriod.setDescription(R.string.access_autoannounce_period_descr);
 	}
 
 	private void setupDisableOffRouteRecalculationPref() {
-		SwitchPreferenceEx disableOffRouteRecalculation = (SwitchPreferenceEx) findPreference(plugin.DISABLE_OFFROUTE_RECALC.getId());
+		SwitchPreferenceEx disableOffRouteRecalculation = (SwitchPreferenceEx) findPreference(settings.DISABLE_OFFROUTE_RECALC.getId());
 		disableOffRouteRecalculation.setDescription(getString(R.string.access_disable_offroute_recalc_descr));
 	}
 
 	private void setupDisableWrongDirectionRecalculationPref() {
-		SwitchPreferenceEx disableWrongDirectionRecalculation = (SwitchPreferenceEx) findPreference(plugin.DISABLE_WRONG_DIRECTION_RECALC.getId());
+		SwitchPreferenceEx disableWrongDirectionRecalculation = (SwitchPreferenceEx) findPreference(settings.DISABLE_WRONG_DIRECTION_RECALC.getId());
 		disableWrongDirectionRecalculation.setDescription(getString(R.string.access_disable_wrong_direction_recalc_descr));
 	}
 
@@ -129,19 +125,19 @@ public class AccessibilitySettingsFragment extends BaseSettingsFragment implemen
 			entryValues[i] = relativeDirectionStyles[i].ordinal();
 		}
 
-		ListPreferenceEx directionStyle = (ListPreferenceEx) findPreference(plugin.DIRECTION_STYLE.getId());
+		ListPreferenceEx directionStyle = (ListPreferenceEx) findPreference(settings.DIRECTION_STYLE.getId());
 		directionStyle.setEntries(entries);
 		directionStyle.setEntryValues(entryValues);
 		directionStyle.setDescription(R.string.settings_direction_style_descr);
 	}
 
 	private void setupDirectionAudioFeedbackPref() {
-		SwitchPreferenceEx directionAudioFeedback = (SwitchPreferenceEx) findPreference(plugin.DIRECTION_AUDIO_FEEDBACK.getId());
+		SwitchPreferenceEx directionAudioFeedback = (SwitchPreferenceEx) findPreference(settings.DIRECTION_AUDIO_FEEDBACK.getId());
 		directionAudioFeedback.setDescription(getString(R.string.access_direction_audio_feedback_descr));
 	}
 
 	private void setupDirectionHapticFeedbackPref() {
-		SwitchPreferenceEx directionHapticFeedback = (SwitchPreferenceEx) findPreference(plugin.DIRECTION_HAPTIC_FEEDBACK.getId());
+		SwitchPreferenceEx directionHapticFeedback = (SwitchPreferenceEx) findPreference(settings.DIRECTION_HAPTIC_FEEDBACK.getId());
 		directionHapticFeedback.setDescription(getString(R.string.access_direction_haptic_feedback_descr));
 	}
 
@@ -157,7 +153,7 @@ public class AccessibilitySettingsFragment extends BaseSettingsFragment implemen
 
 	@Override
 	public void onPreferenceChanged(String prefId) {
-		if (plugin.ACCESSIBILITY_MODE.getId().equals(prefId)) {
+		if (settings.ACCESSIBILITY_MODE.getId().equals(prefId)) {
 			updateAccessibilityOptions();
 		}
 	}
@@ -198,11 +194,12 @@ public class AccessibilitySettingsFragment extends BaseSettingsFragment implemen
 	private void updateAccessibilityOptions() {
 		boolean accessibilityEnabled = app.accessibilityEnabledForMode(getSelectedAppMode());
 		PreferenceScreen screen = getPreferenceScreen();
-		if (screen != null) {
+		OsmandMonitoringPlugin plugin = OsmandPlugin.getPlugin(OsmandMonitoringPlugin.class);
+		if (screen != null && plugin != null) {
 			for (int i = 0; i < screen.getPreferenceCount(); i++) {
 				Preference preference = screen.getPreference(i);
 				String prefId = preference.getKey();
-				if (!plugin.ACCESSIBILITY_MODE.getId().equals(prefId) && !plugin.SPEECH_RATE.getId().equals(prefId))
+				if (!settings.ACCESSIBILITY_MODE.getId().equals(prefId) && !settings.SPEECH_RATE.getId().equals(prefId))
 					preference.setEnabled(accessibilityEnabled);
 			}
 		}

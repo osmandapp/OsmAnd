@@ -877,11 +877,10 @@ public class OsmandApplication extends MultiDexApplication {
 	}
 
 	public boolean accessibilityEnabledForMode(ApplicationMode appMode) {
-		AccessibilityPlugin accessibilityPlugin = OsmandPlugin.getEnabledPlugin(AccessibilityPlugin.class);
-		if (accessibilityPlugin == null) {
+		final AccessibilityMode mode = getSettings().ACCESSIBILITY_MODE.getModeValue(appMode);
+		if (OsmandPlugin.getEnabledPlugin(AccessibilityPlugin.class) == null) {
 			return false;
 		}
-		AccessibilityMode mode = accessibilityPlugin.ACCESSIBILITY_MODE.getModeValue(appMode);
 		if (mode == AccessibilityMode.ON) {
 			return true;
 		} else if (mode == AccessibilityMode.OFF) {
