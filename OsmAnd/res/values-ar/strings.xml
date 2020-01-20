@@ -3361,4 +3361,8 @@
     <string name="osm_editing">تعديل OpenStreetMap</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">سترى الأيقونة فقط أثناء الملاحة أو أثناء التحرك.</string>
+    <string name="button_rate">معدل</string>
+    <string name="tracks_view_descr">يمكنك العثور على جميع المسارات المسجلة الخاصة بك في القائمة - مكاني - المسارات أو في مجلد أوسماند باستخدام مدير الملفات.</string>
+    <string name="osm_edits_view_descr">يمكنك عرض جميع التعديلات التي قمت بإلغاء تحميلها أو أخطاء نظام التشغيل في القائمة - الأماكن الخاصة بي - تعديلات OSM. لا يتم عرض النقاط التي تم تحميلها في أوسماند.</string>
+    <string name="select_map_icon_descr">تظهر أيقونة الخريطة فقط على الخريطة ، وتتغير أثناء التنقل إلى أيقونة التنقل.</string>
 </resources>
