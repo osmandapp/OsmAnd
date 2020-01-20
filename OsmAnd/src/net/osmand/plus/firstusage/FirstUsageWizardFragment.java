@@ -738,7 +738,7 @@ public class FirstUsageWizardFragment extends BaseOsmAndFragment implements OsmA
 	private String getFreeSpace(File dir) {
 		if (dir.canRead()) {
 			StatFs fs = new StatFs(dir.getAbsolutePath());
-			return AndroidUtils.formatSize(getActivity(), (long) fs.getAvailableBlocks()) * fs.getBlockSize() );
+			return AndroidUtils.formatSize(getActivity(), (long) fs.getAvailableBlocks() * fs.getBlockSize() );
 		}
 		return "";
 	}
