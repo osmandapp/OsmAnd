@@ -148,9 +148,9 @@ public class ApplicationMode {
 		@Expose
 		RouteService routeService = RouteService.OSMAND;
 		@Expose
-		LocationIcon locationIconBean = null;
+		LocationIcon locIcon = null;
 		@Expose
-		NavigationIcon navigationIconBean = null;
+		NavigationIcon navIcon = null;
 		@Expose
 		int order;
 	}
@@ -639,8 +639,8 @@ public class ApplicationMode {
 		b.icon(app, mb.iconName);
 		b.setColor(mb.iconColor);
 		b.setOrder(mb.order);
-		b.locationIcon(mb.locationIconBean);
-		b.navigationIcon(mb.navigationIconBean);
+		b.locationIcon(mb.locIcon);
+		b.navigationIcon(mb.navIcon);
 		return b;
 	}
 
@@ -653,8 +653,8 @@ public class ApplicationMode {
 		mb.stringKey = stringKey;
 		mb.routeService = routeService;
 		mb.routingProfile = routingProfile;
-		mb.locationIconBean = locationIcon;
-		mb.navigationIconBean = navigationIcon;
+		mb.locIcon = locationIcon;
+		mb.navIcon = navigationIcon;
 		mb.order = order;
 		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 		return gson.toJson(mb);
@@ -675,11 +675,11 @@ public class ApplicationMode {
 					applicationMode.iconColor = modeBean.iconColor;
 					applicationMode.routingProfile = modeBean.routingProfile;
 					applicationMode.routeService = modeBean.routeService;
-					if (modeBean.locationIconBean != null) {
-						applicationMode.locationIcon = modeBean.locationIconBean;
+					if (modeBean.locIcon != null) {
+						applicationMode.locationIcon = modeBean.locIcon;
 					}
-					if (modeBean.navigationIconBean != null) {
-						applicationMode.navigationIcon = modeBean.navigationIconBean;
+					if (modeBean.navIcon != null) {
+						applicationMode.navigationIcon = modeBean.navIcon;
 					}
 					applicationMode.order = modeBean.order;
 				}
@@ -701,8 +701,8 @@ public class ApplicationMode {
 						.setRoutingProfile(m.routingProfile)
 						.icon(app, m.iconName)
 						.setColor(m.iconColor)
-						.locationIcon(m.locationIconBean)
-						.navigationIcon(m.navigationIconBean)
+						.locationIcon(m.locIcon)
+						.navigationIcon(m.navIcon)
 						.setOrder(m.order)
 						.customReg();
 			}
@@ -747,8 +747,8 @@ public class ApplicationMode {
 			mb.routeService = mode.routeService;
 			mb.routingProfile = mode.routingProfile;
 			mb.order = mode.order;
-			mb.locationIconBean = mode.locationIcon;
-			mb.navigationIconBean = mode.navigationIcon;
+			mb.locIcon = mode.locationIcon;
+			mb.navIcon = mode.navigationIcon;
 			modeBeans.add(mb);
 		}
 		return modeBeans;
