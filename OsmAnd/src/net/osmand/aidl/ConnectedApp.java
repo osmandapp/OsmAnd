@@ -171,7 +171,8 @@ public class ConnectedApp implements Comparable<ConnectedApp> {
 			if (layer != null) {
 				TextInfoWidget control = createWidgetControl(mapActivity, widget.getId());
 				widgetControls.put(widget.getId(), control);
-				int menuIconId = AndroidUtils.getDrawableId(mapActivity.getMyApplication(), widget.getMenuIconName());
+				int iconId = AndroidUtils.getDrawableId(mapActivity.getMyApplication(), widget.getMenuIconName());
+				int menuIconId = iconId != 0 ? iconId : ContextMenuItem.INVALID_ID;
 				MapWidgetRegistry.MapWidgetRegInfo widgetInfo = layer.registerSideWidget(control, menuIconId,
 						widget.getMenuTitle(), "aidl_widget_" + widget.getId(), false, widget.getOrder());
 				if (!mapActivity.getMapLayers().getMapWidgetRegistry().isVisible(widgetInfo.key)) {
