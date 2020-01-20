@@ -12,7 +12,7 @@
 
 -->
     <string name="file_does_not_contain_routing_rules">No routing rules in \'%1$s\'. Please choose another file.</string>
-    <string name="not_support_file_type_with_ext">Select a supported file with %1$s extension instead.</string>
+    <string name="not_support_file_type_with_ext">Select a supported %1$s extension file instead.</string>
     <string name="import_from_file">Import from file</string>
     <string name="import_routing_file">Import routing file</string>
     <string name="import_profile">Import profile</string>
@@ -23,8 +23,8 @@
     <string name="live_monitoring_descr">Allows sharing current location using trip recording.</string>
     <string name="live_monitoring">Online tracking</string>
     <string name="save_track_logging_accuracy">Logging accuracy</string>
-    <string name="tracks_view_descr">All your recorded tracks are to be found in Menu → My place → Tracks, or in the OsmAd folder.</string>
-    <string name="multimedia_notes_view_descr">All your OSM notes are to be found in Menu → My places → OSM edits.</string>
+    <string name="tracks_view_descr">All your recorded tracks are in \'Menu\' → \'My place\' → \'Tracks\', or the OsmAnd folder.</string>
+    <string name="multimedia_notes_view_descr">All your OSM notes are in \'Menu\' → \'My places\' → \'OSM edits\'.</string>
     <string name="video_notes">Video notes</string>
     <string name="photo_notes">Photo notes</string>
     <string name="route_recalculation">Route recalculation</string>
@@ -32,7 +32,7 @@
     <string name="login_and_pass">Username and password</string>
     <string name="plugin_global_prefs_info">These settings apply to all profiles.</string>
     <string name="osm_editing">OSM editing</string>
-    <string name="osm_edits_view_descr">View all your unuploaded edits or OSM bugs in Menu → My places — OSM edits. Uploaded points don’t show in OsmAnd.</string>
+    <string name="osm_edits_view_descr">View all your unuploaded edits or OSM bugs in \'Menu\' → \'My places\' — \'OSM edits\'. Uploaded points don\'t show up in OsmAnd.</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Icon only shown while navigating or moving.</string>
     <string name="select_map_icon_descr">Map icon only shown on the map.</string>
@@ -69,7 +69,7 @@
     <string name="dialogs_and_notifications_title">Dialogs and notifications</string>
     <string name="dialogs_and_notifications_descr">Control popups, dialogs and notifications.</string>
     <string name="suggested_maps">Suggested maps</string>
-    <string name="suggested_maps_descr">Those maps are required to use with plugin</string>
+    <string name="suggested_maps_descr">Those maps are required to use with plugin.</string>
     <string name="added_profiles">Added profiles</string>
     <string name="added_profiles_descr">Profiles added by plugin</string>
     <string name="shared_string_turn_off">Turn off</string>
