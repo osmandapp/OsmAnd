@@ -2194,7 +2194,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="shared_string_time_moving">Tijd in beweging</string>
     <string name="routing_attr_driving_style_name">Rijstijl</string>
     <string name="routing_attr_height_obstacles_name">Gebruik hoogtegegevens</string>
-    <string name="routing_attr_height_obstacles_description">Gebruik hoogtegegevens van SRTM, ASTER en EU-DEM.</string>
+    <string name="routing_attr_height_obstacles_description">Factor in hoogtegegevens (van SRTM, ASTER en EU-DEM data).</string>
     <string name="shared_string_gpx_track">Track</string>
     <string name="right_side_navigation">Rechts rijdend</string>
     <string name="driving_region_automatic">Automatisch</string>
