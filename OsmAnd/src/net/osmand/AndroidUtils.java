@@ -234,7 +234,7 @@ public class AndroidUtils {
 			if(ctx == null) {
 				return size + " " + numSuffix;
 			}
-			return ctx.getString(R.string.ltr_or_rtl_combine_via_colon, size, numSuffix);
+			return ctx.getString(R.string.ltr_or_rtl_combine_via_space, size, numSuffix);
 		}
 		return "";
 	}
