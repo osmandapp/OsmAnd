@@ -7,7 +7,10 @@ import android.support.annotation.NonNull;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.access.AccessibilityMode;
+import net.osmand.plus.access.RelativeDirectionStyle;
 import net.osmand.plus.settings.BaseSettingsFragment;
 
 import java.io.IOException;
@@ -25,8 +28,27 @@ public class AccessibilityPlugin extends OsmandPlugin {
 	private SoundPool sounds;
 	private Map<Integer, Integer> soundIcons = new HashMap<Integer, Integer>();
 
+	public final OsmandSettings.OsmandPreference<AccessibilityMode> ACCESSIBILITY_MODE;
+	public final OsmandSettings.OsmandPreference<Float> SPEECH_RATE;
+	public final OsmandSettings.OsmandPreference<Boolean> ACCESSIBILITY_SMART_AUTOANNOUNCE;
+	public final OsmandSettings.OsmandPreference<Integer> ACCESSIBILITY_AUTOANNOUNCE_PERIOD;
+	public final OsmandSettings.OsmandPreference<Boolean> DISABLE_OFFROUTE_RECALC;
+	public final OsmandSettings.OsmandPreference<Boolean> DISABLE_WRONG_DIRECTION_RECALC;
+	public final OsmandSettings.OsmandPreference<RelativeDirectionStyle> DIRECTION_STYLE;
+	public final OsmandSettings.OsmandPreference<Boolean> DIRECTION_AUDIO_FEEDBACK;
+	public final OsmandSettings.OsmandPreference<Boolean> DIRECTION_HAPTIC_FEEDBACK;
+
 	public AccessibilityPlugin(OsmandApplication app) {
 		this.app = app;
+		ACCESSIBILITY_MODE = registerEnumIntPreference(app, "accessibility_mode", AccessibilityMode.DEFAULT, AccessibilityMode.values(), AccessibilityMode.class).makeProfile().cache();
+		SPEECH_RATE = registerFloatPreference(app, "speech_rate", 1f).makeProfile();
+		ACCESSIBILITY_SMART_AUTOANNOUNCE = registerBooleanAccessibilityPreference(app, "accessibility_smart_autoannounce", true).makeProfile();
+		ACCESSIBILITY_AUTOANNOUNCE_PERIOD = registerIntPreference(app, "accessibility_autoannounce_period", 10000).makeProfile().cache();
+		DISABLE_OFFROUTE_RECALC = registerBooleanAccessibilityPreference(app, "disable_offroute_recalc", false).makeProfile();
+		DISABLE_WRONG_DIRECTION_RECALC = registerBooleanAccessibilityPreference(app, "disable_wrong_direction_recalc", false).makeProfile();
+		DIRECTION_STYLE = registerEnumIntPreference(app, "direction_style", RelativeDirectionStyle.SIDEWISE, RelativeDirectionStyle.values(), RelativeDirectionStyle.class).makeProfile().cache();
+		DIRECTION_AUDIO_FEEDBACK = registerBooleanAccessibilityPreference(app, "direction_audio_feedback", false).makeProfile();
+		DIRECTION_HAPTIC_FEEDBACK = registerBooleanAccessibilityPreference(app, "direction_haptic_feedback", false).makeProfile();
 	}
 
 	@Override
@@ -86,6 +108,12 @@ public class AccessibilityPlugin extends OsmandPlugin {
 	@Override
 	public int getLogoResourceId() {
 		return R.drawable.ic_plugin_accessibility;
+	}
+
+	private OsmandSettings.CommonPreference<Boolean> registerBooleanAccessibilityPreference(OsmandApplication app, String prefId, boolean defValue) {
+		OsmandSettings.CommonPreference<Boolean> preference = app.getSettings().registerBooleanAccessibilityPreference(prefId, defValue);
+		pluginPreferences.add(preference);
+		return preference;
 	}
 
 	public void playSoundIcon(int iconId) {

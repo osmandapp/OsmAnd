@@ -14,8 +14,10 @@ import android.support.v7.app.AlertDialog;
 import android.widget.Toast;
 
 import net.osmand.PlatformUtil;
+import net.osmand.access.AccessibilityPlugin;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.routing.VoiceRouter;
@@ -83,8 +85,9 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 					ctx.getString(R.string.voice_data_corrupted));
 		}
 		OsmandApplication app = (OsmandApplication) ctx.getApplicationContext();
-		if(app.accessibilityEnabled()) {
-			cSpeechRate = app.getSettings().SPEECH_RATE.get();
+		AccessibilityPlugin accessibilityPlugin = OsmandPlugin.getPlugin(AccessibilityPlugin.class);
+		if (app.accessibilityEnabled() && accessibilityPlugin != null) {
+			cSpeechRate = accessibilityPlugin.SPEECH_RATE.get();
 		}
 		initializeEngine(app, ctx);
 		params.put(TextToSpeech.Engine.KEY_PARAM_STREAM, app.getSettings().AUDIO_STREAM_GUIDANCE

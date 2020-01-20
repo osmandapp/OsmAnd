@@ -1,12 +1,13 @@
 package net.osmand.plus.routing;
 
 
+import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.ValueHolder;
+import net.osmand.access.AccessibilityPlugin;
 import net.osmand.data.LatLon;
 import net.osmand.plus.ApplicationMode;
-import net.osmand.GPXUtilities.GPXFile;
 import net.osmand.plus.NavigationService;
 import net.osmand.plus.OsmAndAppCustomization.OsmAndAppCustomizationListener;
 import net.osmand.plus.OsmAndFormatter;
@@ -71,6 +72,7 @@ public class RoutingHelper {
 
 	private ApplicationMode mode;
 	private OsmandSettings settings;
+	private AccessibilityPlugin accessibilityPlugin;
 
 	private RouteProvider provider;
 	private VoiceRouter voiceRouter;
@@ -101,6 +103,7 @@ public class RoutingHelper {
 		transportRoutingHelper = context.getTransportRoutingHelper();
 		transportRoutingHelper.setRoutingHelper(this);
 		setAppMode(settings.APPLICATION_MODE.get());
+		accessibilityPlugin = OsmandPlugin.getPlugin(AccessibilityPlugin.class);
 
 		OsmAndAppCustomizationListener customizationListener = new OsmAndAppCustomizationListener() {
 			@Override
@@ -395,7 +398,7 @@ public class RoutingHelper {
 				// >100m off current route (sideways)
 				if (currentRoute > 0) {
 					distOrth = getOrthogonalDistance(currentLocation, routeNodes.get(currentRoute - 1), routeNodes.get(currentRoute));
-					if ((!settings.DISABLE_OFFROUTE_RECALC.get()) && (distOrth > (1.7 * posTolerance))) {
+					if ((!accessibilityPlugin.DISABLE_OFFROUTE_RECALC.get()) && (distOrth > (1.7 * posTolerance))) {
 						log.info("Recalculate route, because correlation  : " + distOrth); //$NON-NLS-1$
 						isDeviatedFromRoute = true;
 						calculateRoute = true;
@@ -404,7 +407,7 @@ public class RoutingHelper {
 				// 3. Identify wrong movement direction
 				Location next = route.getNextRouteLocation();
 				boolean wrongMovementDirection = checkWrongMovementDirection(currentLocation, next);
-				if ((!settings.DISABLE_WRONG_DIRECTION_RECALC.get()) && wrongMovementDirection && (currentLocation.distanceTo(routeNodes.get(currentRoute)) > (2 * posTolerance))) {
+				if ((!accessibilityPlugin.DISABLE_WRONG_DIRECTION_RECALC.get()) && wrongMovementDirection && (currentLocation.distanceTo(routeNodes.get(currentRoute)) > (2 * posTolerance))) {
 					log.info("Recalculate route, because wrong movement direction: " + currentLocation.distanceTo(routeNodes.get(currentRoute))); //$NON-NLS-1$
 					isDeviatedFromRoute = true;
 					calculateRoute = true;

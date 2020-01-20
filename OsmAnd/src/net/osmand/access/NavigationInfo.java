@@ -46,20 +46,20 @@ public class NavigationInfo implements OsmAndCompassListener, OsmAndLocationList
 		private int value;
 
 		public RelativeDirection() {
-			style = settings.DIRECTION_STYLE.get();
+			style = plugin.DIRECTION_STYLE.get();
 			clear();
 		}
 
 		// The argument must be not null as well as the currentLocation
 		// and currentLocation must have bearing.
 		public RelativeDirection(final Location point) {
-			style = settings.DIRECTION_STYLE.get();
+			style = plugin.DIRECTION_STYLE.get();
 			value = directionTo(point, currentLocation.getBearing());
 		}
 
 		// The first argument must be not null as well as the currentLocation.
 		public RelativeDirection(final Location point, float heading) {
-			style = settings.DIRECTION_STYLE.get();
+			style = plugin.DIRECTION_STYLE.get();
 			value = directionTo(point, heading);
 		}
 
@@ -70,7 +70,7 @@ public class NavigationInfo implements OsmAndCompassListener, OsmAndLocationList
 		// The first argument must be not null as well as the currentLocation.
 		public boolean update(final Location point, float heading) {
 			boolean result = false;
-			final RelativeDirectionStyle newStyle = settings.DIRECTION_STYLE.get();
+			final RelativeDirectionStyle newStyle = plugin.DIRECTION_STYLE.get();
 			if (style != newStyle) {
 				style = newStyle;
 				result = true;
@@ -151,7 +151,7 @@ public class NavigationInfo implements OsmAndCompassListener, OsmAndLocationList
 	private final long HAPTIC_INCLINATION_RIGHT[] = { 0, 20, 80, 20 };
 
 	private final OsmandApplication app;
-	private final OsmandSettings settings;
+	private final AccessibilityPlugin plugin;
 	private Location currentLocation;
 	private RelativeDirection lastDirection;
 	private long lastNotificationTime;
@@ -160,7 +160,7 @@ public class NavigationInfo implements OsmAndCompassListener, OsmAndLocationList
 
 	public NavigationInfo(OsmandApplication app) {
 		this.app = app;
-		settings = app.getSettings();
+		plugin = OsmandPlugin.getPlugin(AccessibilityPlugin.class);
 		currentLocation = null;
 		lastDirection = new RelativeDirection();
 		lastNotificationTime = SystemClock.uptimeMillis();
@@ -253,11 +253,11 @@ public class NavigationInfo implements OsmAndCompassListener, OsmAndLocationList
 			if (point != null) {
 				if ((currentLocation != null) && currentLocation.hasBearing() && !MapViewTrackingUtilities.isSmallSpeedForCompass(currentLocation)) {
 					final long now = SystemClock.uptimeMillis();
-					if ((now - lastNotificationTime) >= settings.ACCESSIBILITY_AUTOANNOUNCE_PERIOD.get()) {
+					if ((now - lastNotificationTime) >= plugin.ACCESSIBILITY_AUTOANNOUNCE_PERIOD.get()) {
 						Location destination = new Location("map"); //$NON-NLS-1$
 						destination.setLatitude(point.getLatitude());
 						destination.setLongitude(point.getLongitude());
-						if (lastDirection.update(destination) || !settings.ACCESSIBILITY_SMART_AUTOANNOUNCE.get()) {
+						if (lastDirection.update(destination) || !plugin.ACCESSIBILITY_SMART_AUTOANNOUNCE.get()) {
 							final String notification = distanceString(destination) + " " + lastDirection.getString(); //$NON-NLS-1$
 							lastNotificationTime = now;
 							app.runInUIThread(new Runnable() {
@@ -281,7 +281,7 @@ public class NavigationInfo implements OsmAndCompassListener, OsmAndLocationList
 			Integer inclination = direction.getInclination();
 			if (targetDirectionFlag && ((inclination == null) || (inclination != 0))) {
 				targetDirectionFlag = false;
-				if (settings.DIRECTION_AUDIO_FEEDBACK.get()) {
+				if (plugin.DIRECTION_AUDIO_FEEDBACK.get()) {
 					AccessibilityPlugin accessibilityPlugin = OsmandPlugin.getEnabledPlugin(AccessibilityPlugin.class);
 					if (accessibilityPlugin != null) {
 						if (inclination == null) {
@@ -293,7 +293,7 @@ public class NavigationInfo implements OsmAndCompassListener, OsmAndLocationList
 						}
 					}
 				}
-				if (settings.DIRECTION_HAPTIC_FEEDBACK.get()) {
+				if (plugin.DIRECTION_HAPTIC_FEEDBACK.get()) {
 					Vibrator haptic = (Vibrator)app.getSystemService(Context.VIBRATOR_SERVICE);
 					if ((haptic != null) && haptic.hasVibrator()) {
 						if (inclination == null) {
