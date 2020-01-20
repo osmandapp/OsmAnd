@@ -9,10 +9,15 @@ import android.os.StatFs;
 import android.support.v7.preference.Preference;
 
 import net.osmand.PlatformUtil;
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
+import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet.CopyAppModePrefsListener;
 import net.osmand.plus.settings.BaseSettingsFragment;
+import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet;
+import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet.ResetAppModePrefsListener;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 
@@ -34,7 +39,7 @@ import static net.osmand.plus.audionotes.AudioVideoNotesPlugin.AV_CAMERA_FOCUS_M
 import static net.osmand.plus.audionotes.AudioVideoNotesPlugin.NOTES_TAB;
 import static net.osmand.plus.audionotes.AudioVideoNotesPlugin.cameraPictureSizeDefault;
 
-public class MultimediaNotesFragment extends BaseSettingsFragment {
+public class MultimediaNotesFragment extends BaseSettingsFragment implements CopyAppModePrefsListener, ResetAppModePrefsListener {
 
 	private static final Log log = PlatformUtil.getLog(MultimediaNotesFragment.class);
 
@@ -45,7 +50,6 @@ public class MultimediaNotesFragment extends BaseSettingsFragment {
 	@Override
 	protected void setupPreferences() {
 		AudioVideoNotesPlugin plugin = OsmandPlugin.getPlugin(AudioVideoNotesPlugin.class);
-
 		if (plugin != null) {
 
 			Camera cam = openCamera();
@@ -346,13 +350,24 @@ public class MultimediaNotesFragment extends BaseSettingsFragment {
 
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
-		if (OPEN_NOTES.equals(preference.getKey())) {
+		String prefId = preference.getKey();
+		if (OPEN_NOTES.equals(prefId)) {
 			OsmAndAppCustomization appCustomization = app.getAppCustomization();
 			Intent favorites = new Intent(preference.getContext(), appCustomization.getFavoritesActivity());
 			favorites.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 			app.getSettings().FAVORITES_TAB.set(NOTES_TAB);
 			startActivity(favorites);
 			return true;
+		} else if (COPY_PLUGIN_SETTINGS.equals(prefId)) {
+			FragmentManager fragmentManager = getFragmentManager();
+			if (fragmentManager != null) {
+				SelectCopyAppModeBottomSheet.showInstance(fragmentManager, this, false, getSelectedAppMode());
+			}
+		} else if (RESET_TO_DEFAULT.equals(prefId)) {
+			FragmentManager fragmentManager = getFragmentManager();
+			if (fragmentManager != null) {
+				ResetProfilePrefsBottomSheet.showInstance(fragmentManager, prefId, this, false, getSelectedAppMode());
+			}
 		}
 		return super.onPreferenceClick(preference);
 	}
@@ -363,6 +378,22 @@ public class MultimediaNotesFragment extends BaseSettingsFragment {
 		} catch (Exception e) {
 			log.error("Error open camera", e);
 			return null;
+		}
+	}
+
+	@Override
+	public void copyAppModePrefs(ApplicationMode appMode) {
+		AudioVideoNotesPlugin plugin = OsmandPlugin.getPlugin(AudioVideoNotesPlugin.class);
+		if (plugin != null) {
+			app.getSettings().copyProfilePreferences(appMode, getSelectedAppMode(), plugin.getPreferences());
+		}
+	}
+
+	@Override
+	public void resetAppModePrefs(ApplicationMode appMode) {
+		AudioVideoNotesPlugin plugin = OsmandPlugin.getPlugin(AudioVideoNotesPlugin.class);
+		if (plugin != null) {
+			app.getSettings().resetProfilePreferences(appMode, plugin.getPreferences());
 		}
 	}
 }

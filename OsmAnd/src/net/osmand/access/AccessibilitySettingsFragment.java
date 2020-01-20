@@ -1,17 +1,25 @@
 package net.osmand.access;
 
+import android.support.v4.app.FragmentManager;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.PreferenceScreen;
 
+import net.osmand.plus.ApplicationMode;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.access.AccessibilityMode;
 import net.osmand.plus.access.RelativeDirectionStyle;
+import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
+import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
+import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet.CopyAppModePrefsListener;
 import net.osmand.plus.settings.BaseSettingsFragment;
 import net.osmand.plus.settings.OnPreferenceChanged;
+import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet;
+import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet.ResetAppModePrefsListener;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 
-public class AccessibilitySettingsFragment extends BaseSettingsFragment implements OnPreferenceChanged {
+public class AccessibilitySettingsFragment extends BaseSettingsFragment implements OnPreferenceChanged, CopyAppModePrefsListener, ResetAppModePrefsListener {
 
 	private static final String COPY_PLUGIN_SETTINGS = "copy_plugin_settings";
 	private static final String RESET_TO_DEFAULT = "reset_to_default";
@@ -147,6 +155,39 @@ public class AccessibilitySettingsFragment extends BaseSettingsFragment implemen
 	public void onPreferenceChanged(String prefId) {
 		if (settings.ACCESSIBILITY_MODE.getId().equals(prefId)) {
 			updateAccessibilityOptions();
+		}
+	}
+
+	@Override
+	public boolean onPreferenceClick(Preference preference) {
+		String prefId = preference.getKey();
+		if (COPY_PLUGIN_SETTINGS.equals(prefId)) {
+			FragmentManager fragmentManager = getFragmentManager();
+			if (fragmentManager != null) {
+				SelectCopyAppModeBottomSheet.showInstance(fragmentManager, this, false, getSelectedAppMode());
+			}
+		} else if (RESET_TO_DEFAULT.equals(prefId)) {
+			FragmentManager fragmentManager = getFragmentManager();
+			if (fragmentManager != null) {
+				ResetProfilePrefsBottomSheet.showInstance(fragmentManager, prefId, this, false, getSelectedAppMode());
+			}
+		}
+		return super.onPreferenceClick(preference);
+	}
+
+	@Override
+	public void copyAppModePrefs(ApplicationMode appMode) {
+		OsmandMonitoringPlugin plugin = OsmandPlugin.getPlugin(OsmandMonitoringPlugin.class);
+		if (plugin != null) {
+			app.getSettings().copyProfilePreferences(appMode, getSelectedAppMode(), plugin.getPreferences());
+		}
+	}
+
+	@Override
+	public void resetAppModePrefs(ApplicationMode appMode) {
+		OsmandMonitoringPlugin plugin = OsmandPlugin.getPlugin(OsmandMonitoringPlugin.class);
+		if (plugin != null) {
+			app.getSettings().resetProfilePreferences(appMode, plugin.getPreferences());
 		}
 	}
 

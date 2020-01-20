@@ -4,12 +4,18 @@ import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.preference.Preference;
 
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmAndAppCustomization;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.myplaces.FavoritesActivity;
+import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
+import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet.CopyAppModePrefsListener;
 import net.osmand.plus.settings.BaseSettingsFragment;
 import net.osmand.plus.settings.bottomsheets.ChangeGeneralProfilesPrefBottomSheet;
+import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet;
+import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet.ResetAppModePrefsListener;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 
@@ -21,7 +27,7 @@ import static net.osmand.plus.OsmandSettings.REC_DIRECTORY;
 import static net.osmand.plus.monitoring.OsmandMonitoringPlugin.MINUTES;
 import static net.osmand.plus.monitoring.OsmandMonitoringPlugin.SECONDS;
 
-public class MonitoringSettingsFragment extends BaseSettingsFragment {
+public class MonitoringSettingsFragment extends BaseSettingsFragment implements CopyAppModePrefsListener, ResetAppModePrefsListener {
 
 	private static final String COPY_PLUGIN_SETTINGS = "copy_plugin_settings";
 	private static final String RESET_TO_DEFAULT = "reset_to_default";
@@ -172,13 +178,24 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment {
 
 	@Override
 	public boolean onPreferenceClick(Preference preference) {
-		if (OPEN_TRACKS.equals(preference.getKey())) {
+		String prefId = preference.getKey();
+		if (OPEN_TRACKS.equals(prefId)) {
 			OsmAndAppCustomization appCustomization = app.getAppCustomization();
 			Intent favorites = new Intent(preference.getContext(), appCustomization.getFavoritesActivity());
 			favorites.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 			app.getSettings().FAVORITES_TAB.set(FavoritesActivity.GPX_TAB);
 			startActivity(favorites);
 			return true;
+		} else if (COPY_PLUGIN_SETTINGS.equals(prefId)) {
+			FragmentManager fragmentManager = getFragmentManager();
+			if (fragmentManager != null) {
+				SelectCopyAppModeBottomSheet.showInstance(fragmentManager, this, false, getSelectedAppMode());
+			}
+		} else if (RESET_TO_DEFAULT.equals(prefId)) {
+			FragmentManager fragmentManager = getFragmentManager();
+			if (fragmentManager != null) {
+				ResetProfilePrefsBottomSheet.showInstance(fragmentManager, prefId, this, false, getSelectedAppMode());
+			}
 		}
 		return super.onPreferenceClick(preference);
 	}
@@ -198,5 +215,21 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment {
 		}
 
 		return true;
+	}
+
+	@Override
+	public void copyAppModePrefs(ApplicationMode appMode) {
+		OsmandMonitoringPlugin plugin = OsmandPlugin.getPlugin(OsmandMonitoringPlugin.class);
+		if (plugin != null) {
+			app.getSettings().copyProfilePreferences(appMode, getSelectedAppMode(), plugin.getPreferences());
+		}
+	}
+
+	@Override
+	public void resetAppModePrefs(ApplicationMode appMode) {
+		OsmandMonitoringPlugin plugin = OsmandPlugin.getPlugin(OsmandMonitoringPlugin.class);
+		if (plugin != null) {
+			app.getSettings().resetProfilePreferences(appMode, plugin.getPreferences());
+		}
 	}
 }

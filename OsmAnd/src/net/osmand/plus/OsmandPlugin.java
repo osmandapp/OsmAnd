@@ -57,6 +57,8 @@ public abstract class OsmandPlugin {
 	private static List<OsmandPlugin> allPlugins = new ArrayList<OsmandPlugin>();
 	private static final Log LOG = PlatformUtil.getLog(OsmandPlugin.class);
 
+	protected List<OsmandSettings.OsmandPreference> pluginPreferences = new ArrayList<>();
+
 	private boolean active;
 	private String installURL = null;
 
@@ -79,6 +81,10 @@ public abstract class OsmandPlugin {
 
 	public Class<? extends BaseSettingsFragment> getSettingsFragment() {
 		return null;
+	}
+
+	public List<OsmandSettings.OsmandPreference> getPreferences() {
+		return pluginPreferences;
 	}
 
 	public String getPrefsDescription() {
@@ -627,5 +633,41 @@ public abstract class OsmandPlugin {
 		for (OsmandPlugin p : getEnabledPlugins()) {
 			p.addMyPlacesTab(favoritesActivity, mTabs, intent);
 		}
+	}
+
+	protected OsmandSettings.CommonPreference<Boolean> registerBooleanPreference(OsmandApplication app, String prefId, boolean defValue) {
+		OsmandSettings.CommonPreference<Boolean> preference = app.getSettings().registerBooleanPreference(prefId, defValue);
+		pluginPreferences.add(preference);
+		return preference;
+	}
+
+	protected OsmandSettings.CommonPreference<String> registerStringPreference(OsmandApplication app, String prefId, String defValue) {
+		OsmandSettings.CommonPreference<String> preference = app.getSettings().registerStringPreference(prefId, defValue);
+		pluginPreferences.add(preference);
+		return preference;
+	}
+
+	protected OsmandSettings.CommonPreference<Integer> registerIntPreference(OsmandApplication app, String prefId, int defValue) {
+		OsmandSettings.CommonPreference<Integer> preference = app.getSettings().registerIntPreference(prefId, defValue);
+		pluginPreferences.add(preference);
+		return preference;
+	}
+
+	protected OsmandSettings.CommonPreference<Long> registerLongPreference(OsmandApplication app, String prefId, long defValue) {
+		OsmandSettings.CommonPreference<Long> preference = app.getSettings().registerLongPreference(prefId, defValue);
+		pluginPreferences.add(preference);
+		return preference;
+	}
+
+	protected OsmandSettings.CommonPreference<Float> registerFloatPreference(OsmandApplication app, String prefId, float defValue) {
+		OsmandSettings.CommonPreference<Float> preference = app.getSettings().registerFloatPreference(prefId, defValue);
+		pluginPreferences.add(preference);
+		return preference;
+	}
+
+	protected <T extends Enum> OsmandSettings.CommonPreference<T> registerEnumIntPreference(OsmandApplication app, String prefId, Enum defaultValue, Enum[] values, Class<T> clz) {
+		OsmandSettings.CommonPreference<T> preference = app.getSettings().registerEnumIntPreference(prefId, defaultValue, values, clz);
+		pluginPreferences.add(preference);
+		return preference;
 	}
 }

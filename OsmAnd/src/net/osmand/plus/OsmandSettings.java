@@ -410,11 +410,17 @@ public class OsmandSettings {
 	}
 
 	public boolean copyPreferencesFromProfile(ApplicationMode modeFrom, ApplicationMode modeTo) {
+		return copyProfilePreferences(modeFrom, modeTo, new ArrayList<OsmandPreference>(registeredPreferences.values()));
+	}
+
+	public boolean copyProfilePreferences(ApplicationMode modeFrom, ApplicationMode modeTo, List<OsmandPreference> profilePreferences) {
 		SettingsEditor settingsEditor = settingsAPI.edit(getProfilePreferences(modeTo));
-		for (OsmandPreference pref : registeredPreferences.values()) {
+		for (OsmandPreference pref : profilePreferences) {
 			if (pref instanceof CommonPreference && !((CommonPreference) pref).global) {
 				CommonPreference profilePref = (CommonPreference) pref;
-				if (profilePref.isSetForMode(modeFrom) || profilePref.hasDefaultValueForMode(modeFrom)) {
+				Object defaultFrom = profilePref.getProfileDefaultValue(modeFrom);
+				Object defaultTo = profilePref.getProfileDefaultValue(modeFrom);
+				if (profilePref.isSetForMode(modeFrom) || !defaultFrom.equals(defaultTo)) {
 					Object copiedValue = profilePref.getModeValue(modeFrom);
 					if (copiedValue instanceof String) {
 						settingsEditor.putString(pref.getId(), (String) copiedValue);
@@ -437,6 +443,16 @@ public class OsmandSettings {
 
 	public boolean resetPreferencesForProfile(ApplicationMode mode) {
 		return settingsAPI.edit(getProfilePreferences(mode)).clear().commit();
+	}
+
+	public boolean resetProfilePreferences(ApplicationMode mode, List<OsmandPreference> profilePreferences) {
+		SettingsEditor settingsEditor = settingsAPI.edit(getProfilePreferences(mode));
+		for (OsmandPreference pref : profilePreferences) {
+			if (pref instanceof CommonPreference && !((CommonPreference) pref).global) {
+				settingsEditor.remove(pref.getId());
+			}
+		}
+		return settingsEditor.commit();
 	}
 
 	public ApplicationMode LAST_ROUTING_APPLICATION_MODE = null;
@@ -1108,6 +1124,16 @@ public class OsmandSettings {
 	}
 
 	@SuppressWarnings("unchecked")
+	public CommonPreference<Boolean> registerBooleanAccessibilityPreference(String id, boolean defValue) {
+		if (registeredPreferences.containsKey(id)) {
+			return (CommonPreference<Boolean>) registeredPreferences.get(id);
+		}
+		BooleanPreference p = new BooleanAccessibilityPreference(id, defValue);
+		registeredPreferences.put(id, p);
+		return p;
+	}
+
+	@SuppressWarnings("unchecked")
 	public CommonPreference<String> registerStringPreference(String id, String defValue) {
 		if (registeredPreferences.containsKey(id)) {
 			return (CommonPreference<String>) registeredPreferences.get(id);
@@ -1143,6 +1169,16 @@ public class OsmandSettings {
 			return (CommonPreference<Float>) registeredPreferences.get(id);
 		}
 		FloatPreference p = new FloatPreference(id, defValue);
+		registeredPreferences.put(id, p);
+		return p;
+	}
+
+	@SuppressWarnings("unchecked")
+	public <T extends Enum> CommonPreference<T> registerEnumIntPreference(String id, Enum defaultValue, Enum[] values, Class<T> clz) {
+		if (registeredPreferences.containsKey(id)) {
+			return (CommonPreference<T>) registeredPreferences.get(id);
+		}
+		EnumIntPreference p = new EnumIntPreference(id, defaultValue, values);
 		registeredPreferences.put(id, p);
 		return p;
 	}
