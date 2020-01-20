@@ -6,6 +6,7 @@ import android.media.CamcorderProfile;
 import android.media.MediaRecorder;
 import android.os.Build;
 import android.os.StatFs;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.preference.Preference;
 
 import net.osmand.PlatformUtil;
