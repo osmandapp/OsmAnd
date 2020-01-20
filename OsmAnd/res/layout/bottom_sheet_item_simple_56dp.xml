@@ -26,7 +26,6 @@
 		android:layout_gravity="center_vertical"
 		android:layout_weight="1"
 		android:ellipsize="end"
-		android:maxLines="1"
 		android:textAppearance="@style/TextAppearance.ListItemTitle"
 		osmand:typeface="@string/font_roboto_regular"
 		tools:text="Title"/>
