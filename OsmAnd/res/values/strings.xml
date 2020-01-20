@@ -80,7 +80,7 @@
     <string name="empty_filename">Filename empty</string>
     <string name="default_speed_dialog_msg">Estimates arrival time for unknown road types, and limits speed for all roads (can re-oute)</string>
     <string name="rendering_value_white_name">White</string>
-    <string name="swap_two_places">%1$s ⇄ %2$s</string>
+    <string name="swap_two_places">Swap %1$s and %2$s</string>
     <string name="route_start_point">Starting point</string>
     <string name="export_profile">Export profile</string>
     <string name="exported_osmand_profile">OsmAnd profile: %1$s</string>
