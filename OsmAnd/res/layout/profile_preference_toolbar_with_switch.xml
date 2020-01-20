@@ -35,6 +35,8 @@
 				android:layout_height="wrap_content"
 				android:layout_gravity="center_vertical"
 				android:layout_weight="1"
+				android:paddingTop="@dimen/content_padding_half"
+				android:paddingBottom="@dimen/content_padding_half"
 				android:background="?attr/card_and_list_background_basic"
 				android:orientation="vertical">
 
