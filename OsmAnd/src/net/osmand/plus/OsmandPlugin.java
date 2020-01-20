@@ -641,6 +641,12 @@ public abstract class OsmandPlugin {
 		return preference;
 	}
 
+	private OsmandSettings.CommonPreference<Boolean> registerBooleanAccessibilityPreference(OsmandApplication app, String prefId, boolean defValue) {
+		OsmandSettings.CommonPreference<Boolean> preference = app.getSettings().registerBooleanAccessibilityPreference(prefId, defValue);
+		pluginPreferences.add(preference);
+		return preference;
+	}
+
 	protected OsmandSettings.CommonPreference<String> registerStringPreference(OsmandApplication app, String prefId, String defValue) {
 		OsmandSettings.CommonPreference<String> preference = app.getSettings().registerStringPreference(prefId, defValue);
 		pluginPreferences.add(preference);

@@ -8,14 +8,11 @@ import android.support.annotation.NonNull;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.BaseSettingsFragment;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class AccessibilityPlugin extends OsmandPlugin {
@@ -29,19 +26,18 @@ public class AccessibilityPlugin extends OsmandPlugin {
 	private SoundPool sounds;
 	private Map<Integer, Integer> soundIcons = new HashMap<Integer, Integer>();
 
-	private List<OsmandPreference> pluginPreferences = new ArrayList<>();
-
 	public AccessibilityPlugin(OsmandApplication app) {
 		this.app = app;
-		pluginPreferences.add(app.getSettings().ACCESSIBILITY_MODE);
-		pluginPreferences.add(app.getSettings().SPEECH_RATE);
-		pluginPreferences.add(app.getSettings().ACCESSIBILITY_SMART_AUTOANNOUNCE);
-		pluginPreferences.add(app.getSettings().ACCESSIBILITY_AUTOANNOUNCE_PERIOD);
-		pluginPreferences.add(app.getSettings().DISABLE_OFFROUTE_RECALC);
-		pluginPreferences.add(app.getSettings().DISABLE_WRONG_DIRECTION_RECALC);
-		pluginPreferences.add(app.getSettings().DIRECTION_STYLE);
-		pluginPreferences.add(app.getSettings().DIRECTION_AUDIO_FEEDBACK);
-		pluginPreferences.add(app.getSettings().DIRECTION_HAPTIC_FEEDBACK);
+		OsmandSettings settings = app.getSettings();
+		pluginPreferences.add(settings.ACCESSIBILITY_MODE);
+		pluginPreferences.add(settings.SPEECH_RATE);
+		pluginPreferences.add(settings.ACCESSIBILITY_SMART_AUTOANNOUNCE);
+		pluginPreferences.add(settings.ACCESSIBILITY_AUTOANNOUNCE_PERIOD);
+		pluginPreferences.add(settings.DISABLE_OFFROUTE_RECALC);
+		pluginPreferences.add(settings.DISABLE_WRONG_DIRECTION_RECALC);
+		pluginPreferences.add(settings.DIRECTION_STYLE);
+		pluginPreferences.add(settings.DIRECTION_AUDIO_FEEDBACK);
+		pluginPreferences.add(settings.DIRECTION_HAPTIC_FEEDBACK);
 	}
 
 	@Override
@@ -81,11 +77,6 @@ public class AccessibilityPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public List<OsmandPreference> getPreferences() {
-		return pluginPreferences;
-	}
-
-	@Override
 	public String getPrefsDescription() {
 		return app.getString(R.string.accessibility_prefs_descr);
 	}
@@ -106,12 +97,6 @@ public class AccessibilityPlugin extends OsmandPlugin {
 	@Override
 	public int getLogoResourceId() {
 		return R.drawable.ic_plugin_accessibility;
-	}
-
-	private OsmandSettings.CommonPreference<Boolean> registerBooleanAccessibilityPreference(OsmandApplication app, String prefId, boolean defValue) {
-		OsmandSettings.CommonPreference<Boolean> preference = app.getSettings().registerBooleanAccessibilityPreference(prefId, defValue);
-		pluginPreferences.add(preference);
-		return preference;
 	}
 
 	public void playSoundIcon(int iconId) {
