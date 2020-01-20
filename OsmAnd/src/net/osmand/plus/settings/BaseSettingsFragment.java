@@ -367,6 +367,10 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 				AndroidUtils.setBackground(selectableView, drawable);
 			}
 		}
+		TextView tvPreferenceTitle = (TextView) holder.itemView.findViewById(android.R.id.title);
+		if (tvPreferenceTitle != null) {
+			tvPreferenceTitle.setSingleLine(false);
+		}
 		if (currentScreenType.profileDependent) {
 			View cb = holder.itemView.findViewById(R.id.switchWidget);
 			if (cb == null) {
