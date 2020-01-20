@@ -537,12 +537,15 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 		StringBuilder html = new StringBuilder();
 		html.append("<h1>My Favorites</h1>");
 		for (FavoriteGroup group : groups) {
-			html.append("<h3>" + group.getName() + "</h3>");
+			html.append("<h3>" + group.getDisplayName(app) + "</h3>");
 			for (FavouritePoint fp : group.getPoints()) {
 				String url = "geo:" + ((float) fp.getLatitude()) + "," + ((float) fp.getLongitude()) + "?m=" + fp.getName();
-				html.append("<p>" + fp.getName() + " - " + "<a href=\"" + url + "\">geo:"
+				html.append("<p>" + fp.getDisplayName(app) + " - " + "<a href=\"" + url + "\">geo:"
 						+ ((float) fp.getLatitude()) + "," + ((float) fp.getLongitude()) + "</a><br>");
-
+				if (fp.isAddressSpecified()) {
+					html.append(": " + fp.getAddress());
+					html.append("<br>");
+				}
 				if (!Algorithms.isEmpty(fp.getDescription())) {
 					html.append(": " + fp.getDescription());
 				}
