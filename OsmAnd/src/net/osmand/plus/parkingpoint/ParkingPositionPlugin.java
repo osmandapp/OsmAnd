@@ -31,7 +31,6 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
-import net.osmand.plus.settings.BaseSettingsFragment;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
@@ -193,7 +192,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 			activity.getMapView().removeLayer(parkingLayer);
 		}
 		parkingLayer = new ParkingPositionLayer(activity, this);
-		activity.getMapView().addLayer(parkingLayer, 5.5f);
+//		activity.getMapView().addLayer(parkingLayer, 5.5f);
 		registerWidget(activity);
 	}
 
