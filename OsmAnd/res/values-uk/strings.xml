@@ -3438,4 +3438,5 @@
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Ви побачите значок тільки під час навігації або під час переміщення.</string>
     <string name="select_map_icon_descr">Образок мапи відображається лише на мапі та змінюється під час навігації до образка навігації.</string>
+    <string name="logcat_buffer_descr">Тут ви можете бачити і ділитися часописами додатку</string>
 </resources>
