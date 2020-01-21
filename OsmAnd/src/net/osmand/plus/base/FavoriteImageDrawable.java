@@ -87,12 +87,24 @@ public class FavoriteImageDrawable extends Drawable {
 
 	@Override
 	public int getIntrinsicHeight() {
-		return synced ? syncedShadow.getHeight() : special ? favIcon.getHeight() : favBackground.getHeight();
+		if (synced) {
+			return syncedShadow.getHeight();
+		}
+		if (special) {
+			return favIcon.getHeight();
+		}
+		return favBackground.getHeight();
 	}
 
 	@Override
 	public int getIntrinsicWidth() {
-		return synced ? syncedShadow.getWidth() : special ? favIcon.getWidth() : favBackground.getWidth();
+		if (synced) {
+			return syncedShadow.getWidth();
+		}
+		if (special) {
+			return favIcon.getWidth();
+		}
+		return favBackground.getWidth();
 	}
 
 	@Override
