@@ -3443,4 +3443,5 @@ Lon %2$s</string>
     <string name="osm_editing">OpenStreetMap-Bearbeitung</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Sie sehen das Symbol nur während der Navigation oder während der Bewegung.</string>
+    <string name="multimedia_notes_view_descr">Sie finden all Ihre Notizen im Menü unter Meine Orte — Notizen.</string>
 </resources>
