@@ -605,14 +605,15 @@ public class TurnPathHelper {
 				} else {
 					turnResource = null;
 				}
-			} else if (TurnType.isSlightTurn(firstTurnType) && !TurnType.isSlightTurn(secondTurnType)
-					&& !TurnType.isSlightTurn(thirdTurnType)) {
+			} else if (firstTurnType != TurnType.C && TurnType.isSlightTurn(firstTurnType)
+					&& !TurnType.isSlightTurn(secondTurnType) && !TurnType.isSlightTurn(thirdTurnType)) {
 				if (TurnType.isLeftTurn(firstTurnType) && TurnType.isRightTurn(secondTurnType)
 						&& TurnType.isLeftTurn(thirdTurnType)){
 					turnResource = new TurnResource(secondTurnType, true, false, leftSide);
 				} else if (TurnType.isRightTurn(firstTurnType) && TurnType.isLeftTurn(secondTurnType)
 						&& TurnType.isRightTurn(thirdTurnType)) {
-					turnResource = new TurnResource(secondTurnType, true, false, leftSide); }
+					turnResource = new TurnResource(secondTurnType, true, false, leftSide);
+				}
 			} else if (firstTurnType == TurnType.C || thirdTurnType == TurnType.C) {
 				// get the small one
 				turnResource = new TurnResource(secondTurnType, true, false, leftSide);
