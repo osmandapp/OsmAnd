@@ -3424,8 +3424,6 @@
     <string name="live_monitoring_descr">לאפשר לך לשתף את המיקום הנוכחי באמצעות הקלטת המסלול.</string>
     <string name="live_monitoring">מעקב מקוון</string>
     <string name="save_track_logging_accuracy">דיוק תיעוד ביומן</string>
-    <string name="tracks_view_descr">באפשרותך למצוא את כל המסלול שהקלטת בתפריט - המיקום שלי - מסלולים או בתיקייה של OsmAnd בעזרת מנהל קבצים.</string>
-    <string name="multimedia_notes_view_descr">באפשרותך למצוא את כל ההערות שכתבת תחת תפריט - המיקומים שלי - פתקים</string>
     <string name="video_notes">הערות וידאו</string>
     <string name="photo_notes">הערות בתמונות</string>
     <string name="route_recalculation">חישוב מסלול מחדש</string>
@@ -3433,7 +3431,6 @@
     <string name="login_and_pass">שם משתמש וססמה</string>
     <string name="plugin_global_prefs_info">הגדרות התוסף הזה הן גלובליות וחלות על כל הפרופילים.</string>
     <string name="osm_editing">עריכה של OpenStreetMap</string>
-    <string name="osm_edits_view_descr">באפשרותך לצפות בכל העריכות שטרם העלית דרך התפריט - המקומות שלי - עריכות OSM. הנקודות שהועלו לא מופיעות ב־OsmAnd.</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">הסמל יופיע רק בזמן הניווט או בזמן תזוזה.</string>
     <string name="select_map_icon_descr">סמל המפה מופיע במפה בלבד והוא מתחלף בעת הניווט לסמל הניווט.</string>

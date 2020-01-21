@@ -3422,8 +3422,6 @@
     <string name="live_monitoring_descr">允許您使用旅程錄製來分享目前的位置。</string>
     <string name="live_monitoring">線上追蹤</string>
     <string name="save_track_logging_accuracy">記錄精度</string>
-    <string name="tracks_view_descr">您可以在選單 → 我的收藏 → 軌跡或使用檔案管理員在 OsmAnd 的資料夾中找到您所有已紀錄的軌跡。</string>
-    <string name="multimedia_notes_view_descr">您可以在選單 → 我的收藏 → 註記中找到您所有的註記</string>
     <string name="video_notes">視訊註記</string>
     <string name="photo_notes">照片註記</string>
     <string name="route_recalculation">路徑重新計算</string>
@@ -3431,7 +3429,6 @@
     <string name="login_and_pass">使用者名稱與密碼</string>
     <string name="plugin_global_prefs_info">此外掛程式設定是全域設定，並會套用到所有設定檔。</string>
     <string name="osm_editing">開放街圖編輯</string>
-    <string name="osm_edits_view_descr">您可以在選單 → 我的收藏 → OSM 編輯中檢視您所有未上傳的編輯或開放街圖的問題。已上傳的點不會在 OsmAnd 中顯示。</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">僅在導航或移動時，您才會看到該圖示。</string>
     <string name="select_map_icon_descr">地圖圖示只會顯示在地圖上，並會在導航時換成導航圖示。</string>

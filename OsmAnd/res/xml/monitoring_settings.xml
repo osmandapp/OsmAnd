@@ -36,19 +36,19 @@
 	<net.osmand.plus.settings.preferences.ListPreferenceEx
 		android:key="save_track_min_distance"
 		android:layout="@layout/preference_with_descr"
-		android:title="@string/save_track_min_distance"
+		android:title="@string/monitoring_min_distance"
 		tools:summary="Not selected" />
 
 	<net.osmand.plus.settings.preferences.ListPreferenceEx
 		android:key="save_track_precision"
 		android:layout="@layout/preference_with_descr"
-		android:title="@string/save_track_precision"
+		android:title="@string/monitoring_min_accuracy"
 		tools:summary="50 m" />
 
 	<net.osmand.plus.settings.preferences.ListPreferenceEx
 		android:key="save_track_min_speed"
 		android:layout="@layout/preference_with_descr"
-		android:title="@string/save_track_min_speed"
+		android:title="@string/monitoring_min_speed"
 		tools:summary="Not selected" />
 
 	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
@@ -88,7 +88,7 @@
 		android:layout="@layout/preference_with_descr_dialog_and_switch"
 		android:summaryOff="@string/shared_string_disabled"
 		android:summaryOn="@string/shared_string_enabled"
-		android:title="@string/trip_rec_notification_settings"
+		android:title="@string/monitoring_notification"
 		tools:icon="@drawable/ic_action_notification" />
 
 	<Preference
@@ -110,7 +110,7 @@
 
 	<Preference
 		android:key="open_tracks_description"
-		android:layout="@layout/preference_info"
+		android:layout="@layout/preference_description"
 		android:persistent="false"
 		android:selectable="false"
 		android:title="@string/tracks_view_descr" />
@@ -123,14 +123,14 @@
 		tools:icon="@drawable/ic_action_folder" />
 
 	<Preference
-		android:layout="@layout/simple_divider_item"
+		android:layout="@layout/divider_half_item"
 		android:selectable="false" />
 
 	<Preference
 		android:key="reset_to_default"
 		android:layout="@layout/preference_button"
 		android:persistent="false"
-		android:title="@string/reset_to_default"
+		android:title="@string/reset_plugin_to_default"
 		tools:icon="@drawable/ic_action_reset_to_default_dark" />
 
 	<Preference

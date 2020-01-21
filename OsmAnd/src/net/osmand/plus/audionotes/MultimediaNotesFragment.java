@@ -1,6 +1,7 @@
 package net.osmand.plus.audionotes;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.hardware.Camera;
 import android.media.CamcorderProfile;
 import android.media.MediaRecorder;
@@ -8,6 +9,7 @@ import android.os.Build;
 import android.os.StatFs;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.preference.Preference;
+import android.text.SpannableString;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
@@ -15,6 +17,7 @@ import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
+import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet.CopyAppModePrefsListener;
 import net.osmand.plus.settings.BaseSettingsFragment;
@@ -22,14 +25,13 @@ import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet;
 import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet.ResetAppModePrefsListener;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
+import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 
 import org.apache.commons.logging.Log;
 
 import java.io.File;
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import static net.osmand.plus.audionotes.AudioVideoNotesPlugin.AUDIO_BITRATE_DEFAULT;
 import static net.osmand.plus.audionotes.AudioVideoNotesPlugin.AV_CAMERA_FOCUS_AUTO;
@@ -324,14 +326,23 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 			storageSize.setEntries(entries);
 			storageSize.setEntryValues(entryValues);
 			storageSize.setDescription(R.string.rec_split_storage_size_desc);
+			storageSize.setIcon(getContentIcon(R.drawable.ic_sdcard));
 		} else {
 			storageSize.setVisible(false);
 		}
 	}
 
 	private void setupOpenNotesDescrPref() {
-		Preference nameAndPasswordPref = findPreference("open_notes_description");
-		nameAndPasswordPref.setTitle(getText(R.string.multimedia_notes_view_descr));
+		String multimediaNotesPath = getString(R.string.multimedia_notes_view_path);
+		String multimediaNotesPathDescr = getString(R.string.multimedia_notes_view_descr, multimediaNotesPath);
+
+		int startIndex = multimediaNotesPathDescr.indexOf(multimediaNotesPath);
+		SpannableString titleSpan = new SpannableString(multimediaNotesPathDescr);
+		Typeface typeface = FontCache.getRobotoMedium(getContext());
+		titleSpan.setSpan(new CustomTypefaceSpan(typeface), startIndex, startIndex + multimediaNotesPath.length(), 0);
+
+		Preference osmEditsDescription = findPreference("open_notes_description");
+		osmEditsDescription.setTitle(titleSpan);
 	}
 
 	private void setupOpenNotesPref() {

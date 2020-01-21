@@ -418,23 +418,17 @@ public class OsmandSettings {
 		for (OsmandPreference pref : profilePreferences) {
 			if (pref instanceof CommonPreference && !((CommonPreference) pref).global) {
 				CommonPreference profilePref = (CommonPreference) pref;
-				Object defaultFrom = profilePref.getProfileDefaultValue(modeFrom);
-				Object defaultTo = profilePref.getProfileDefaultValue(modeFrom);
-				if (profilePref.isSetForMode(modeFrom) || !defaultFrom.equals(defaultTo)) {
-					Object copiedValue = profilePref.getModeValue(modeFrom);
-					if (copiedValue instanceof String) {
-						settingsEditor.putString(pref.getId(), (String) copiedValue);
-					} else if (copiedValue instanceof Boolean) {
-						settingsEditor.putBoolean(pref.getId(), (Boolean) copiedValue);
-					} else if (copiedValue instanceof Float) {
-						settingsEditor.putFloat(pref.getId(), (Float) copiedValue);
-					} else if (copiedValue instanceof Integer) {
-						settingsEditor.putInt(pref.getId(), (Integer) copiedValue);
-					} else if (copiedValue instanceof Long) {
-						settingsEditor.putLong(pref.getId(), (Long) copiedValue);
-					}
-				} else {
-					settingsEditor.remove(pref.getId());
+				Object copiedValue = profilePref.getModeValue(modeFrom);
+				if (copiedValue instanceof String) {
+					settingsEditor.putString(pref.getId(), (String) copiedValue);
+				} else if (copiedValue instanceof Boolean) {
+					settingsEditor.putBoolean(pref.getId(), (Boolean) copiedValue);
+				} else if (copiedValue instanceof Float) {
+					settingsEditor.putFloat(pref.getId(), (Float) copiedValue);
+				} else if (copiedValue instanceof Integer) {
+					settingsEditor.putInt(pref.getId(), (Integer) copiedValue);
+				} else if (copiedValue instanceof Long) {
+					settingsEditor.putLong(pref.getId(), (Long) copiedValue);
 				}
 			}
 		}

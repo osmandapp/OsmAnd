@@ -3385,8 +3385,6 @@
     <string name="live_monitoring_descr">Seyahat kaydını kullanarak geçerli konumunuzu paylaşmaya izin verin.</string>
     <string name="live_monitoring">Çevrimiçi takip etme</string>
     <string name="save_track_logging_accuracy">Kayıt tutma doğruluğu</string>
-    <string name="tracks_view_descr">Kaydedilen tüm yol-izlerinizi Menü - Benim yerim - Yol-izleri içinde veya dosya yöneticisini kullanarak OsmAnd klasöründe bulabilirsiniz.</string>
-    <string name="multimedia_notes_view_descr">Tüm notlarınızı Menü - Yerlerim - Notlar bölümünde bulabilirsiniz</string>
     <string name="video_notes">Video notları</string>
     <string name="photo_notes">Fotoğraf notları</string>
     <string name="route_recalculation">Rotanın yeniden hesaplanması</string>
@@ -3394,7 +3392,7 @@
     <string name="login_and_pass">Kullanıcı adı ve parola</string>
     <string name="plugin_global_prefs_info">Bu eklenti ayarları globaldir ve tüm profiller için geçerlidir.</string>
     <string name="osm_editing">OpenStreetMap Düzenleme</string>
-    <string name="osm_edits_view_descr">Karşıya yüklenmemiş tüm düzenlemelerinizi veya osm hatalarınızı Menü — Yerlerim — OSM Düzenlemeleri içinde görüntüleyebilirsiniz. Yüklenen noktalar OsmAnd\'de gösterilmez.</string>
+    <string name="osm_edits_view_descr">Karşıya yüklenmemiş tüm düzenlemelerinizi veya osm hatalarınızı %1$s içinde görüntüleyebilirsiniz. Yüklenen noktalar OsmAnd\'de gösterilmez.</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Simgeyi yalnızca navigasyon sırasında veya hareket halindeyken göreceksiniz.</string>
     <string name="select_map_icon_descr">Harita simgesi yalnızca haritada görünür ve navigasyon esnasında navigasyon simgesine dönüşür.</string>

@@ -3434,8 +3434,8 @@ Ha szereted az OsmAndot és az OSM-et, és szeretnéd támogatni a fejlődésük
     <string name="live_monitoring_descr">Lehetővé teszi, hogy az útvonal rögzítésével megossza aktuális pozícióját.</string>
     <string name="live_monitoring">Online nyomvonalrögzítés</string>
     <string name="save_track_logging_accuracy">Naplózás pontossága</string>
-    <string name="tracks_view_descr">Az összes rögzített nyomvonal megtalálható a Menü &gt; Saját helyek &gt; Nyomvonalaim helyen vagy a fájlkezelővel az OsmAnd mappában.</string>
-    <string name="multimedia_notes_view_descr">Az összes jegyzetét megtalálja a Menü &gt; Saját helyek &gt; Jegyzetek helyen</string>
+    <string name="tracks_view_descr">Az összes rögzített nyomvonal megtalálható a %1$s helyen vagy a fájlkezelővel az OsmAnd mappában.</string>
+    <string name="multimedia_notes_view_descr">Az összes jegyzetét megtalálja a %1$s helyen</string>
     <string name="video_notes">Videojegyzetek</string>
     <string name="photo_notes">Fényképes jegyzetek</string>
     <string name="route_recalculation">Útvonal újraszámítása</string>
@@ -3443,7 +3443,7 @@ Ha szereted az OsmAndot és az OSM-et, és szeretnéd támogatni a fejlődésük
     <string name="login_and_pass">Felhasználónév és jelszó</string>
     <string name="plugin_global_prefs_info">Ezek a bővítménybeállítások globálisak, és minden profilra vonatkoznak.</string>
     <string name="osm_editing">OpenStreetMap-szerkesztés</string>
-    <string name="osm_edits_view_descr">Az összes még fel nem töltött szerkesztés vagy OSM-hiba megtalálható a Menü &gt; Saját helyek &gt; OSM-szerkesztések helyen. A már feltöltött pontok nem láthatók az OsmAndban.</string>
+    <string name="osm_edits_view_descr">Az összes még fel nem töltött szerkesztés vagy OSM-hiba megtalálható a %1$s. A már feltöltött pontok nem láthatók az OsmAndban.</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Az ikon csak navigáció vagy mozgás közben lesz látható.</string>
     <string name="select_map_icon_descr">A térképikon csak a térképen jelenik meg, navigáció közben pedig navigációs ikonra vált.</string>

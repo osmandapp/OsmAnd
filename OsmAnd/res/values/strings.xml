@@ -11,6 +11,32 @@
 	Thx - Hardy
 
 -->
+    <string name="monitoring_min_speed_descr">This is a low-speed cut-off filter to not record points below a certain speed. This may make recorded tracks look "smoother" when viewed on the map.</string>
+    <string name="monitoring_min_speed_descr_side_effect">Side effect: Your track will be missing all sections where the minimum speed criterion was not met (e.g. where you push your bike up a steep hill). Also, there will be no information about periods at rest, like breaks. This has effects on any analysis or post-processing, like when trying to determine the total length of your trip, time in motion, or your average speed.</string>
+    <string name="monitoring_min_speed_descr_recommendation">Recommendation: Try using the motion detection via the "logging minimum displacement" filter (B) first, it may produce better results, and you will lose less data. If your tracks remain noisy at low speeds, try non-zero values here. Please note that some measurements may not report any speed value at all (some network-based methods), in which case you would not record anything.</string>
+    <string name="monitoring_min_speed_descr_remark">Remark: "speed > 0" check: Most GPS chipsets report a speed value only if the algorithm determines you are in motion, and none if you are not. Hence using the "> 0" setting in this filter in a sense uses the motion detection of the GPS chipset. But even if not filtered here at recording time, we still use this feature in our GPX analysis to determine the "Distance corrected", i.e. the value displayed in that field is the "distance recorded while in motion".</string>
+    <string name="monitoring_min_accuracy_descr">This will record only points measured with a minimum "accuracy" indication (in meters/feet, as reported by Android for your chipset). Accuracy refers to the scatter of repeated measurements, and is not directly related to precision, which defines how close your measurements are to your "true" position.</string>
+    <string name="monitoring_min_accuracy_descr_side_effect">Side effect: As a result of filtering by accuracy, points may be entirely missing for e.g. below bridges, under trees, between high buildings, or with certain weather conditions.</string>
+    <string name="monitoring_min_accuracy_descr_recommendation">Recommendation: It is hard to predict what will be recorded and what not, it may be best to turn this filter off.</string>
+    <string name="monitoring_min_accuracy_descr_remark">Remark: If GPS had been off immediately before a recording, the first point measured may have a decreased accuracy,so in our code we may want to wait a second or so before recording a point (or record the best of 3 consecutive points, etc.), but this is not yet implemented.</string>
+    <string name="monitoring_min_distance_descr">This filter avoids duplicate points being recorded where too little actual motion may have occurred, makes a nicer spatial appearance of tracks not post-processed later.</string>
+    <string name="monitoring_min_distance_descr_side_effect">Side effects: Periods at rest are not recorded at all or by just one point each. Small (real world) movements (e.g. sideways, to mark a possile turnoff on your trip) may be filtered out. Your file contains less information for post-processing, and has worse stats by filtering out obviously redundant points at recording time, while potentially keeping artifacts caused by bad reception or GPS chipset effects.</string>
+    <string name="monitoring_min_distance_descr_recommendation">Recommendation: A setting of 5 meters may work well for you if you do not require to capture details finer than that, and do not want to explicitly capture data while at rest.</string>
+    <string name="live_monitoring_time_buffer">Time buffer</string>
+    <string name="live_monitoring_tracking_interval">Tracking interval</string>
+    <string name="live_monitoring_adress">Web address</string>
+    <string name="live_monitoring_adress_descr">Specify the web address with parameter syntax: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
+    <string name="monitoring_notification">Notification</string>
+    <string name="monitoring_min_speed">Minimum speed</string>
+    <string name="monitoring_min_accuracy">Minimum accuracy</string>
+    <string name="monitoring_min_distance">Minimum displacement</string>
+    <string name="tracks_view_path">Menu — My places — Tracks</string>
+    <string name="multimedia_notes_view_path">Menu — My places — Notes</string>
+    <string name="osm_edits_view_path">Menu — My places — OSM Edits</string>
+    <string name="reset_plugin_to_default">Reset plugin settings to default</string>
+    <string name="multimedia_rec_split_title">Recorder split</string>
+    <string name="multimedia_use_system_camera">Use system app</string>
+    <string name="multimedia_photo_play_sound">Camera shutter sound</string>
     <string name="osm_authorization_success">Authorization is successful</string>
     <string name="logcat_buffer_descr">Here you can see and share logs of the application</string>
     <string name="file_does_not_contain_routing_rules">\'%1$s\' file doesn\'t contain routing rules, please choose another file.</string>
@@ -25,8 +51,8 @@
     <string name="live_monitoring_descr">Allow you to share current location using trip recording.</string>
     <string name="live_monitoring">Online tracking</string>
     <string name="save_track_logging_accuracy">Logging accuracy</string>
-    <string name="tracks_view_descr">You can find all your recorded tracks in Menu — My place — Tracks or in OsmAd folder using file manager.</string>
-    <string name="multimedia_notes_view_descr">You can find all your notes in Menu — My places — Notes</string>
+    <string name="tracks_view_descr">You can find all your recorded tracks in %1$s or in OsmAd folder using file manager.</string>
+    <string name="multimedia_notes_view_descr">You can find all your notes in %1$s</string>
     <string name="video_notes">Video notes</string>
     <string name="photo_notes">Photo notes</string>
     <string name="route_recalculation">Route recalculation</string>
@@ -34,7 +60,7 @@
     <string name="login_and_pass">Username and password</string>
     <string name="plugin_global_prefs_info">This plugin settings are global, and apply to all profiles.</string>
     <string name="osm_editing">OpenStreetMap Editing</string>
-    <string name="osm_edits_view_descr">You can view all your unuploaded edits or osm bugs in Menu — My places — OSM Edits. Uploaded points don’t show in OsmAnd.</string>
+    <string name="osm_edits_view_descr">You can view all your unuploaded edits or osm bugs in %1$s. Uploaded points don’t show in OsmAnd.</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">You will see the icon only while navigation or while moving.</string>
     <string name="select_map_icon_descr">Map icon appears only on the map, and changing while navigation to navigation icon.</string>

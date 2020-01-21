@@ -1,8 +1,10 @@
 package net.osmand.plus.osmedit;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.preference.Preference;
+import android.text.SpannableString;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -10,10 +12,12 @@ import android.widget.TextView;
 import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.settings.BaseSettingsFragment;
 import net.osmand.plus.settings.OnPreferenceChanged;
 import net.osmand.plus.settings.bottomsheets.OsmLoginDataBottomSheet;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
+import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 
 public class OsmEditingFragment extends BaseSettingsFragment implements OnPreferenceChanged {
 
@@ -22,8 +26,8 @@ public class OsmEditingFragment extends BaseSettingsFragment implements OnPrefer
 
 	@Override
 	protected void setupPreferences() {
-		Preference vehicleParametersInfo = findPreference("osm_editing_info");
-		vehicleParametersInfo.setIcon(getContentIcon(R.drawable.ic_action_info_dark));
+		Preference osmEditingInfo = findPreference("osm_editing_info");
+		osmEditingInfo.setIcon(getContentIcon(R.drawable.ic_action_info_dark));
 
 		setupNameAndPasswordPref();
 		setupOfflineEditingPref();
@@ -52,8 +56,16 @@ public class OsmEditingFragment extends BaseSettingsFragment implements OnPrefer
 	}
 
 	private void setupOsmEditsDescrPref() {
-		Preference nameAndPasswordPref = findPreference("osm_edits_description");
-		nameAndPasswordPref.setTitle(getText(R.string.osm_edits_view_descr));
+		String osmEditsPath = getString(R.string.osm_edits_view_path);
+		String osmEditsPathDescr = getString(R.string.osm_edits_view_descr, osmEditsPath);
+
+		int startIndex = osmEditsPathDescr.indexOf(osmEditsPath);
+		SpannableString titleSpan = new SpannableString(osmEditsPathDescr);
+		Typeface typeface = FontCache.getRobotoMedium(getContext());
+		titleSpan.setSpan(new CustomTypefaceSpan(typeface), startIndex, startIndex + osmEditsPath.length(), 0);
+
+		Preference osmEditsDescription = findPreference("osm_edits_description");
+		osmEditsDescription.setTitle(titleSpan);
 	}
 
 	private void setupOsmEditsPref() {

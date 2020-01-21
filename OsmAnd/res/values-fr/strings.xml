@@ -3407,8 +3407,8 @@ représentant la zone : %1$s x %2$s</string>
     <string name="live_monitoring_descr">Permet de partager votre position actuelle grâce à l\'enregistrement du trajet.</string>
     <string name="live_monitoring">Suivi en ligne</string>
     <string name="save_track_logging_accuracy">Précision de l\'enregistrement</string>
-    <string name="tracks_view_descr">Retrouvez toutes vos traces enregistrées dans le Menu : Mon emplacement &gt; Traces ou dans le dossier OsmAnd via votre gestionnaire de fichiers.</string>
-    <string name="multimedia_notes_view_descr">Retrouvez toutes vos notes dans le menu : Mon emplacement &gt; Notes</string>
+    <string name="tracks_view_descr">Retrouvez toutes vos traces enregistrées dans le %1$s ou dans le dossier OsmAnd via votre gestionnaire de fichiers.</string>
+    <string name="multimedia_notes_view_descr">Retrouvez toutes vos notes dans le %1$s</string>
     <string name="video_notes">Notes vidéo</string>
     <string name="photo_notes">Notes photo</string>
     <string name="route_recalculation">Recalcul de l\'itinéraire</string>
@@ -3416,7 +3416,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="login_and_pass">Nom d\'utilisateur et mot de passe</string>
     <string name="plugin_global_prefs_info">Ces paramètres de greffon sont globaux et s\'appliquent à tous les profils.</string>
     <string name="osm_editing">Édition OpenStreetMap</string>
-    <string name="osm_edits_view_descr">Vous pouvez consulter toutes vos modifications non envoyées comme vos bugs OSM dans le menu : Mes emplacements &gt; Modifications OSM. Les points envoyés ne s\'affichent plus dans OsmAnd.</string>
+    <string name="osm_edits_view_descr">Vous pouvez consulter toutes vos modifications non envoyées comme vos bugs OSM dans le %1$s. Les points envoyés ne s\'affichent plus dans OsmAnd.</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Vous ne verrez l\'icône que lors de la navigation ou en déplacement.</string>
     <string name="select_map_icon_descr">L \'icône Carte n\'apparaît que sur la carte et est remplacée par l\'icône Navigation lors de la navigation.</string>

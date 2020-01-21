@@ -73,6 +73,9 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		pluginPreferences.add(settings.SHOW_TRIP_REC_NOTIFICATION);
 		pluginPreferences.add(settings.TRACK_STORAGE_DIRECTORY);
 		pluginPreferences.add(settings.LIVE_MONITORING);
+		pluginPreferences.add(settings.LIVE_MONITORING_URL);
+		pluginPreferences.add(settings.LIVE_MONITORING_INTERVAL);
+		pluginPreferences.add(settings.LIVE_MONITORING_MAX_INTERVAL_TO_SEND);
 	}
 
 	@Override

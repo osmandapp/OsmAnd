@@ -1,14 +1,18 @@
 package net.osmand.plus.monitoring;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.preference.Preference;
+import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
 
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet.CopyAppModePrefsListener;
@@ -16,8 +20,10 @@ import net.osmand.plus.settings.BaseSettingsFragment;
 import net.osmand.plus.settings.bottomsheets.ChangeGeneralProfilesPrefBottomSheet;
 import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet;
 import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet.ResetAppModePrefsListener;
+import net.osmand.plus.settings.bottomsheets.SingleSelectPreferenceBottomSheet;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
+import net.osmand.plus.widgets.style.CustomTypefaceSpan;
 
 import java.io.Serializable;
 
@@ -95,7 +101,14 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 		ListPreferenceEx saveTrackMinDistance = (ListPreferenceEx) findPreference(settings.SAVE_TRACK_MIN_DISTANCE.getId());
 		saveTrackMinDistance.setEntries(entries);
 		saveTrackMinDistance.setEntryValues(entryValues);
-		saveTrackMinDistance.setDescription(R.string.save_track_min_distance_descr);
+
+		SpannableStringBuilder stringBuilder = new SpannableStringBuilder(getString(R.string.monitoring_min_distance_descr));
+		stringBuilder.append("\n");
+		stringBuilder.append(getString(R.string.monitoring_min_distance_descr_side_effect));
+		stringBuilder.append("\n");
+		stringBuilder.append(getString(R.string.monitoring_min_distance_descr_recommendation));
+
+		saveTrackMinDistance.setDescription(stringBuilder.toString());
 	}
 
 	private void setupSaveTrackPrecisionPref() {
@@ -109,7 +122,16 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 		ListPreferenceEx saveTrackPrecision = (ListPreferenceEx) findPreference(settings.SAVE_TRACK_PRECISION.getId());
 		saveTrackPrecision.setEntries(entries);
 		saveTrackPrecision.setEntryValues(entryValues);
-		saveTrackPrecision.setDescription(R.string.save_track_precision_descr);
+
+		SpannableStringBuilder stringBuilder = new SpannableStringBuilder(getString(R.string.monitoring_min_accuracy_descr));
+		stringBuilder.append("\n");
+		stringBuilder.append(getString(R.string.monitoring_min_accuracy_descr_side_effect));
+		stringBuilder.append("\n");
+		stringBuilder.append(getString(R.string.monitoring_min_accuracy_descr_recommendation));
+		stringBuilder.append("\n");
+		stringBuilder.append(getString(R.string.monitoring_min_accuracy_descr_remark));
+
+		saveTrackPrecision.setDescription(stringBuilder.toString());
 	}
 
 	private void setupSaveTrackMinSpeedPref() {
@@ -125,7 +147,16 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 		ListPreferenceEx saveTrackMinSpeed = (ListPreferenceEx) findPreference(settings.SAVE_TRACK_MIN_SPEED.getId());
 		saveTrackMinSpeed.setEntries(entries);
 		saveTrackMinSpeed.setEntryValues(entryValues);
-		saveTrackMinSpeed.setDescription(R.string.save_track_min_speed_descr);
+
+		SpannableStringBuilder stringBuilder = new SpannableStringBuilder(getString(R.string.monitoring_min_speed_descr));
+		stringBuilder.append("\n");
+		stringBuilder.append(getString(R.string.monitoring_min_speed_descr_side_effect));
+		stringBuilder.append("\n");
+		stringBuilder.append(getString(R.string.monitoring_min_speed_descr_recommendation));
+		stringBuilder.append("\n");
+		stringBuilder.append(getString(R.string.monitoring_min_speed_descr_remark));
+
+		saveTrackMinSpeed.setDescription(stringBuilder.toString());
 	}
 
 	private void setupAutoSplitRecordingPref() {
@@ -170,8 +201,16 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 	}
 
 	private void setupOpenNotesDescrPref() {
-		Preference nameAndPasswordPref = findPreference("open_tracks_description");
-		nameAndPasswordPref.setTitle(getText(R.string.tracks_view_descr));
+		String tracksPath = getString(R.string.tracks_view_path);
+		String tracksPathDescr = getString(R.string.tracks_view_descr, tracksPath);
+
+		int startIndex = tracksPathDescr.indexOf(tracksPath);
+		SpannableString titleSpan = new SpannableString(tracksPathDescr);
+		Typeface typeface = FontCache.getRobotoMedium(getContext());
+		titleSpan.setSpan(new CustomTypefaceSpan(typeface), startIndex, startIndex + tracksPath.length(), 0);
+
+		Preference openTracksDescription = findPreference("open_tracks_description");
+		openTracksDescription.setTitle(titleSpan);
 	}
 
 	private void setupOpenNotesPref() {
@@ -228,6 +267,22 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 		}
 
 		return true;
+	}
+
+	@Override
+	public void onDisplayPreferenceDialog(Preference preference) {
+		String prefId = preference.getKey();
+		if (settings.SAVE_TRACK_MIN_DISTANCE.getId().equals(prefId)
+				|| settings.SAVE_TRACK_PRECISION.getId().equals(prefId)
+				|| settings.SAVE_TRACK_MIN_SPEED.getId().equals(prefId)) {
+			FragmentManager fm = getFragmentManager();
+			if (fm != null) {
+				ApplicationMode appMode = getSelectedAppMode();
+				SingleSelectPreferenceBottomSheet.showInstance(fm, prefId, this, false, appMode, true, true);
+			}
+		} else {
+			super.onDisplayPreferenceDialog(preference);
+		}
 	}
 
 	@Override
