@@ -208,6 +208,9 @@ public class MapTileLayer extends BaseMapLayer {
 
 					}
 					if (bmp != null) {
+						if (bmp.getWidth() != tileSize && bmp.getWidth() > 0) {
+							tileSize = bmp.getWidth();
+						}
 						int xZoom = (tileX % div) * tileSize / div;
 						int yZoom = (tileY % div) * tileSize / div;
 						// nice scale
@@ -270,11 +273,7 @@ public class MapTileLayer extends BaseMapLayer {
 		}
 	}
 	
-	public int getSourceTileSize() {
-		return map == null ? 256 : map.getTileSize();
-	}
-	
-	
+
 	@Override
 	public int getMaximumShownMapZoom() {
 		return map == null ? 20 : map.getMaximumZoomSupported() + OVERZOOM_IN;

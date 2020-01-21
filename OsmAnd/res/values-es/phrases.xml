@@ -3768,4 +3768,21 @@
     <string name="poi_cash_withdrawal_postbank">Postbank</string>
     <string name="poi_bath_type_onsen">Onsen</string>
     <string name="poi_bath_type_hammam">Hammam</string>
+    <string name="poi_parking_space">Espacio de aparcamiento</string>
+    <string name="poi_url">URL</string>
+    <string name="poi_volcano_type">Tipo</string>
+    <string name="poi_volcano_status">Estado</string>
+    <string name="poi_volcano_type_scoria">Escoria</string>
+    <string name="poi_volcano_type_stratovolcano">Estratovolcán</string>
+    <string name="poi_volcano_type_shield">Escudo</string>
+    <string name="poi_volcano_type_maar">Maar</string>
+    <string name="poi_volcano_type_caldera">Caldera</string>
+    <string name="poi_volcano_type_lava_dome">Cúpula de lava</string>
+    <string name="poi_volcano_type_dirt">Tierra</string>
+    <string name="poi_volcano_last_eruption">Última erupción</string>
+    <string name="poi_volcano_status_extinct">Extinto</string>
+    <string name="poi_volcano_status_dormant">Latente</string>
+    <string name="poi_volcano_status_active">Activo</string>
+    <string name="poi_volcano_status_inactive">Inactivo</string>
+    <string name="poi_volcano_number_of_eruptions">Número de erupciones</string>
 </resources>

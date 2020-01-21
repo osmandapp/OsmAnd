@@ -11,8 +11,8 @@
     <string name="info_button">Információ</string>
     <string name="back_to_location">Vissza a pozícióra</string>
     <string name="shared_string_help">Súgó</string>
-    <string name="accessibility_mode">Akadálymentesítési mód</string>
-    <string name="accessibility_mode_descr">Bekapcsolja a fogyatékkal élők számára készült funkciókat.</string>
+    <string name="accessibility_mode">Akadálymentes mód</string>
+    <string name="accessibility_mode_descr">Bekapcsolja a fogyatékkal élőknek szóló funkciókat.</string>
     <string name="shared_string_on">Be</string>
     <string name="shared_string_off">Kikapcsolás</string>
     <string name="accessibility_default">Android rendszerbeállítások szerint</string>
@@ -59,7 +59,7 @@
     <string name="zoom_by_trackball_descr">Térképnagyítás vízszintes \'trackball\' mozgatással.</string>
     <string name="zoom_by_trackball">\'trackball\' használata térképnagyításhoz</string>
     <string name="accessibility_preferences_descr">Akadálymentességgel kapcsolatos beállítások.</string>
-    <string name="shared_string_accessibility">Akadálymentesítés</string>
+    <string name="shared_string_accessibility">Kisegítő lehetősége</string>
     <string name="rendering_out_of_memory">Nincs elég folyamatmemória a kijelölt terület megjelenítéséhez</string>
     <string name="use_fluorescent_overlays">Fluoreszkáló rátétrétegek</string>
     <string name="use_fluorescent_overlays_descr">Élénk színek használata az útvonalak megjelenítéséhez.</string>
@@ -543,7 +543,7 @@
     <string name="osm_settings_descr">Adja meg az OSM feltöltéshez szükséges OpenStreetMap.org (OSM) adatait.</string>
     <string name="data_settings_descr">Nyelv megadása, adatok letöltése/újratöltése.</string>
     <string name="data_settings">Adat</string>
-    <string name="osm_settings">OSM szerkesztés</string>
+    <string name="osm_settings">OpenStreetMap-szerkesztés</string>
     <string name="auto_zoom_map_descr">Nagyítási szint állítása a sebesség függvényében (miközben a térkép követi a jelenlegi pozíciót).</string>
     <string name="auto_zoom_map">Térkép automatikus nagyítása</string>
     <string name="additional_settings">További beállítások</string>
@@ -1467,7 +1467,7 @@ Proporcionális memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</str
     <string name="delay_to_start_navigation">Részletes navigáció indítása ez után…</string>
     <string name="shared_string_go">Indítás</string>
     <string name="parking_place_limited">A parkolási idő vége</string>
-    <string name="your_edits">A szerkesztéseid</string>
+    <string name="your_edits">Saját szerkesztések</string>
     <string name="waypoint_visit_after">Megtekintés ez után:</string>
     <string name="simulate_your_location">Pozíció szimulálása</string>
     <string name="drawer">Lapos lista</string>
@@ -1497,7 +1497,7 @@ Hosszúság: %2$s</string>
     <string name="agps_info">A-GPS információk</string>
     <string name="agps_data_last_downloaded">Letöltött A-GPS adatok: %1$s</string>
     <string name="welcome_header">Üdvözlünk</string>
-    <string name="osm_changes_added_to_local_edits">Az OSM változások hozzáadva a helyi módosításkészlethez</string>
+    <string name="osm_changes_added_to_local_edits">OSM-módosítások hozzáadva a helyi módosításkészlethez</string>
     <string name="mark_to_delete">Megjelölés törlésre</string>
     <string name="shared_string_places">Helyek</string>
     <string name="shared_string_search">Keresés</string>
@@ -2547,7 +2547,7 @@ Ha szereted az OsmAndot és az OSM-et, és szeretnéd támogatni a fejlődésük
     <string name="shared_string_gpx_file">GPX-fájl</string>
     <string name="osc_file">OSC-fájl</string>
     <string name="choose_file_type">Fájltípus kijelölése</string>
-    <string name="osm_edits_export_desc">Az exporttípus kijelölése: OSM-jegyzet, POI vagy mindkettő.</string>
+    <string name="osm_edits_export_desc">Exportálás típusának kijelölése: OSM-jegyzetek, érdekes pontok (POI-k) vagy mindkettő.</string>
     <string name="all_data">Minden adat</string>
     <string name="osm_notes">OSM Jegyzetek</string>
     <string name="will_open_tomorrow_at">Holnap ekkor nyit:</string>
@@ -3178,7 +3178,7 @@ Ha szereted az OsmAndot és az OSM-et, és szeretnéd támogatni a fejlődésük
     <string name="osmand_settings_descr">Az egész alkalmazás beállításait módosítja</string>
     <string name="osmand_settings">OsmAnd beállítások</string>
     <string name="shared_string_calculate">Kiszámít</string>
-    <string name="layer_osm_edits">OSM szerkesztések</string>
+    <string name="layer_osm_edits">OSM-szerkesztések</string>
     <string name="quick_action_contour_lines_descr">Váltógomb, amely a térképen megjeleníti vagy elrejti a szintvonalakat.</string>
     <string name="quick_action_hillshade_descr">Váltógomb, amely a térképen megjeleníti vagy elrejti a domborzatárnyékolást.</string>
     <string name="tts_initialization_error">Szövegfelolvasó motor indítása sikertelen</string>
@@ -3421,4 +3421,30 @@ Ha szereted az OsmAndot és az OSM-et, és szeretnéd támogatni a fejlődésük
     <string name="app_mode_wagon">Családi autó</string>
     <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
     <string name="ltr_or_rtl_combine_via_space">%1$s %2$s</string>
+    <string name="button_rate">Értékelés</string>
+    <string name="file_does_not_contain_routing_rules">\'%1$s\': ez a fájl nem tartalmaz úttervezési szabályokat. Kérjük, válasszon másik fájlt.</string>
+    <string name="not_support_file_type_with_ext">Nem támogatott fájltípus. Olyan fájlt válasszon, amelynek %1$s a kiterjesztése.</string>
+    <string name="import_from_file">Importálás fájlból</string>
+    <string name="import_routing_file">Úttervezési fájl importálása</string>
+    <string name="import_profile">Profil importálása</string>
+    <string name="monitoring_prefs_descr">Navigáció, naplózás potossága</string>
+    <string name="multimedia_notes_prefs_descr">Képméret, hang- és videominőség</string>
+    <string name="osm_editing_prefs_descr">Bejelentkezés, jelszó, offline szerkesztés</string>
+    <string name="accessibility_prefs_descr">Ikonalak, -szín és -méret kiválasztása</string>
+    <string name="live_monitoring_descr">Lehetővé teszi, hogy az útvonal rögzítésével megossza aktuális pozícióját.</string>
+    <string name="live_monitoring">Online nyomvonalrögzítés</string>
+    <string name="save_track_logging_accuracy">Naplózás pontossága</string>
+    <string name="tracks_view_descr">Az összes rögzített nyomvonal megtalálható a Menü &gt; Saját helyek &gt; Nyomvonalaim helyen vagy a fájlkezelővel az OsmAnd mappában.</string>
+    <string name="multimedia_notes_view_descr">Az összes jegyzetét megtalálja a Menü &gt; Saját helyek &gt; Jegyzetek helyen</string>
+    <string name="video_notes">Videojegyzetek</string>
+    <string name="photo_notes">Fényképes jegyzetek</string>
+    <string name="route_recalculation">Útvonal újraszámítása</string>
+    <string name="accessibility_announce">Bejelentés</string>
+    <string name="login_and_pass">Felhasználónév és jelszó</string>
+    <string name="plugin_global_prefs_info">Ezek a bővítménybeállítások globálisak, és minden profilra vonatkoznak.</string>
+    <string name="osm_editing">OpenStreetMap-szerkesztés</string>
+    <string name="osm_edits_view_descr">Az összes még fel nem töltött szerkesztés vagy OSM-hiba megtalálható a Menü &gt; Saját helyek &gt; OSM-szerkesztések helyen. A már feltöltött pontok nem láthatók az OsmAndban.</string>
+    <string name="app_mode_osm">OSM</string>
+    <string name="select_nav_icon_descr">Az ikon csak navigáció vagy mozgás közben lesz látható.</string>
+    <string name="select_map_icon_descr">A térképikon csak a térképen jelenik meg, navigáció közben pedig navigációs ikonra vált.</string>
 </resources>

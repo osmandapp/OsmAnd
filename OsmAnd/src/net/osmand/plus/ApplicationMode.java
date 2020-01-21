@@ -148,9 +148,9 @@ public class ApplicationMode {
 		@Expose
 		RouteService routeService = RouteService.OSMAND;
 		@Expose
-		LocationIcon locationIcon = LocationIcon.DEFAULT;
+		LocationIcon locIcon = null;
 		@Expose
-		NavigationIcon navigationIcon = NavigationIcon.DEFAULT;
+		NavigationIcon navIcon = null;
 		@Expose
 		int order;
 	}
@@ -639,8 +639,8 @@ public class ApplicationMode {
 		b.icon(app, mb.iconName);
 		b.setColor(mb.iconColor);
 		b.setOrder(mb.order);
-		b.locationIcon(mb.locationIcon);
-		b.navigationIcon(mb.navigationIcon);
+		b.locationIcon(mb.locIcon);
+		b.navigationIcon(mb.navIcon);
 		return b;
 	}
 
@@ -653,8 +653,8 @@ public class ApplicationMode {
 		mb.stringKey = stringKey;
 		mb.routeService = routeService;
 		mb.routingProfile = routingProfile;
-		mb.locationIcon = locationIcon;
-		mb.navigationIcon = navigationIcon;
+		mb.locIcon = locationIcon;
+		mb.navIcon = navigationIcon;
 		mb.order = order;
 		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 		return gson.toJson(mb);
@@ -675,8 +675,12 @@ public class ApplicationMode {
 					applicationMode.iconColor = modeBean.iconColor;
 					applicationMode.routingProfile = modeBean.routingProfile;
 					applicationMode.routeService = modeBean.routeService;
-					applicationMode.locationIcon = modeBean.locationIcon;
-					applicationMode.navigationIcon = modeBean.navigationIcon;
+					if (modeBean.locIcon != null) {
+						applicationMode.locationIcon = modeBean.locIcon;
+					}
+					if (modeBean.navIcon != null) {
+						applicationMode.navigationIcon = modeBean.navIcon;
+					}
 					applicationMode.order = modeBean.order;
 				}
 			}
@@ -697,8 +701,8 @@ public class ApplicationMode {
 						.setRoutingProfile(m.routingProfile)
 						.icon(app, m.iconName)
 						.setColor(m.iconColor)
-						.locationIcon(m.locationIcon)
-						.navigationIcon(m.navigationIcon)
+						.locationIcon(m.locIcon)
+						.navigationIcon(m.navIcon)
 						.setOrder(m.order)
 						.customReg();
 			}
@@ -743,8 +747,8 @@ public class ApplicationMode {
 			mb.routeService = mode.routeService;
 			mb.routingProfile = mode.routingProfile;
 			mb.order = mode.order;
-			mb.locationIcon = mode.locationIcon;
-			mb.navigationIcon = mode.navigationIcon;
+			mb.locIcon = mode.locationIcon;
+			mb.navIcon = mode.navigationIcon;
 			modeBeans.add(mb);
 		}
 		return modeBeans;
@@ -875,7 +879,7 @@ public class ApplicationMode {
 		PICKUP_TRUCK(R.drawable.ic_action_pickup_truck, R.string.app_mode_pickup_truck, "ic_action_pickup_truck"),
 		WAGON(R.drawable.ic_action_wagon, R.string.app_mode_wagon, "ic_action_wagon"),
 		UTV(R.drawable.ic_action_utv, R.string.app_mode_utv, "ic_action_utv"),
-		OSM(R.drawable.ic_action_osmand_logo, R.string.app_mode_osm, "ic_action_osmand_logo");
+		OSM(R.drawable.ic_action_openstreetmap_logo, R.string.app_mode_osm, "ic_action_openstreetmap_logo");
 
 		@DrawableRes
 		private int resId;

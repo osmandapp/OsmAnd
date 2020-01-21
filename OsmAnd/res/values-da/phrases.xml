@@ -3774,4 +3774,23 @@
     <string name="poi_community_gender_female">Fællesskabet køn: kvinde</string>
     <string name="poi_community_gender_male">Fællesskabets køn: mand</string>
     <string name="poi_community_gender_mixed">Fællesskabet køn: blandet</string>
+    <string name="poi_cash_withdrawal_operator">Hævning af kontanter operatør</string>
+    <string name="poi_parking_space">Parkeringsplads</string>
+    <string name="poi_url">URL</string>
+    <string name="poi_volcano_type">Type</string>
+    <string name="poi_volcano_status">Status</string>
+    <string name="poi_volcano_type_scoria">Scoria</string>
+    <string name="poi_volcano_type_stratovolcano">Stratovulkan</string>
+    <string name="poi_volcano_type_shield">Skjold</string>
+    <string name="poi_volcano_type_maar">Maar</string>
+    <string name="poi_volcano_type_caldera">Caldera</string>
+    <string name="poi_volcano_type_lava_dome">Lavadome</string>
+    <string name="poi_volcano_type_dirt">J́ord</string>
+    <string name="poi_volcano_last_eruption">Sidste udbrud</string>
+    <string name="poi_volcano_status_extinct">Uddød</string>
+    <string name="poi_volcano_status_dormant">Sovende</string>
+    <string name="poi_volcano_status_active">Aktiv</string>
+    <string name="poi_volcano_status_inactive">Inaktiv</string>
+    <string name="poi_volcano_number_of_eruptions">Antal udbrud</string>
+    <string name="poi_memorial_ghost_bike">Spøgelsescykel</string>
 </resources>

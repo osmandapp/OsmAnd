@@ -11,8 +11,11 @@
 	Thx - Hardy
 
 -->
+    <string name="logcat_buffer_descr">Check and share detailed logs of the application</string>
     <string name="file_does_not_contain_routing_rules">No routing rules in \'%1$s\'. Please choose another file.</string>
     <string name="not_support_file_type_with_ext">Select a supported %1$s extension file instead.</string>
+    <string name="file_does_not_contain_routing_rules">\'%1$s\' file doesn\'t contain routing rules, please choose another file.</string>
+    <string name="not_support_file_type_with_ext">Not supported file type. You need to select a file with %1$s extension.</string>
     <string name="import_from_file">Import from file</string>
     <string name="import_routing_file">Import routing file</string>
     <string name="import_profile">Import profile</string>
