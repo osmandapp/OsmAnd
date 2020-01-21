@@ -3437,4 +3437,6 @@
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">הסמל יופיע רק בזמן הניווט או בזמן תזוזה.</string>
     <string name="select_map_icon_descr">סמל המפה מופיע במפה בלבד והוא מתחלף בעת הניווט לסמל הניווט.</string>
+    <string name="button_rate">דירוג</string>
+    <string name="logcat_buffer_descr">כאן ניתן לצפות ולשתף את תיעוד יומני היישומון</string>
 </resources>
