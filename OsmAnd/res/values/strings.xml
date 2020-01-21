@@ -354,7 +354,7 @@
     <string name="base_profile_descr_car">Car, truck, motorcycle</string>
     <string name="base_profile_descr_bicycle">Mountain bike, moped, horse</string>
     <string name="base_profile_descr_pedestrian">Walking, hiking, running</string>
-    <string name="base_profile_descr_public_transport">All personal transport types</string>
+    <string name="base_profile_descr_public_transport">Public transport types</string>
     <string name="base_profile_descr_boat">Ship, rowing, sailing</string>
     <string name="base_profile_descr_aircraft">Airplane, gliding</string>
     <string name="routing_profile_geocoding">Geocoding</string>
