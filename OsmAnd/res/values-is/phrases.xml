@@ -3747,4 +3747,20 @@
     <string name="poi_community_gender_female">Kyn samfélags: konur</string>
     <string name="poi_community_gender_male">Kyn samfélags: karlar</string>
     <string name="poi_community_gender_mixed">Kyn samfélags: blandað</string>
+    <string name="poi_parking_space">Bílastæði</string>
+    <string name="poi_url">Slóð (URL)</string>
+    <string name="poi_volcano_type">Tegund</string>
+    <string name="poi_volcano_status">Staða</string>
+    <string name="poi_volcano_type_scoria">Gjallgígur</string>
+    <string name="poi_volcano_type_stratovolcano">Eldkeila</string>
+    <string name="poi_volcano_type_shield">Dyngja</string>
+    <string name="poi_volcano_type_maar">Ker</string>
+    <string name="poi_volcano_type_caldera">Askja</string>
+    <string name="poi_volcano_type_lava_dome">Hraungúll</string>
+    <string name="poi_volcano_last_eruption">Gaus síðast</string>
+    <string name="poi_volcano_status_extinct">Útbrunnið</string>
+    <string name="poi_volcano_status_dormant">Sofandi</string>
+    <string name="poi_volcano_status_active">Virkt</string>
+    <string name="poi_volcano_status_inactive">Óvirkt</string>
+    <string name="poi_volcano_number_of_eruptions">Fjöldi gosa</string>
 </resources>

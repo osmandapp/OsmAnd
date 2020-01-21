@@ -3433,7 +3433,7 @@ Lon %2$s</string>
     <string name="monitoring_prefs_descr">Navigation, Genauigkeit der Protokollierung</string>
     <string name="multimedia_notes_prefs_descr">Bildgröße, Audio- und Videoqualität</string>
     <string name="osm_editing_prefs_descr">Anmeldung, Passwort, Offline-Bearbeitung</string>
-    <string name="accessibility_prefs_descr">Symbol, Farbe und Name wählen</string>
+    <string name="accessibility_prefs_descr">Symbol, Farbe und Namen wählen</string>
     <string name="live_monitoring_descr">Ermöglicht Ihnen die gemeinsame Nutzung des aktuellen Standorts mit Hilfe der Fahrtenaufzeichnung.</string>
     <string name="save_track_logging_accuracy">Genauigkeit der Protokollierung</string>
     <string name="video_notes">Video-Notizen</string>

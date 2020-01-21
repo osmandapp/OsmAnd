@@ -9,6 +9,7 @@ import android.os.StatFs;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.preference.Preference;
 
+import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmAndAppCustomization;
@@ -311,13 +312,12 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 			if (value != size) {
 				gbList.add((int) size);
 			}
-			MessageFormat formatGb = new MessageFormat("{0, number,#.##} GB", Locale.US);
 			String[] entries = new String[gbList.size()];
 			Integer[] entryValues = new Integer[gbList.size()];
 			int i = 0;
 			for (int v : gbList) {
 				entryValues[i] = v;
-				entries[i] = formatGb.format(new Object[] {(float) v});
+				entries[i] = AndroidUtils.formatSize(getActivity(), v * (1l << 30));
 				i++;
 			}
 

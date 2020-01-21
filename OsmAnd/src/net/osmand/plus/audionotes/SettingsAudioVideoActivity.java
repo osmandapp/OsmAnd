@@ -11,6 +11,7 @@ import android.preference.ListPreference;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 
+import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -272,13 +273,12 @@ public class SettingsAudioVideoActivity extends SettingsBaseActivity {
 				if (value != size) {
 					gbList.add((int) size);
 				}
-				MessageFormat formatGb = new MessageFormat("{0, number,#.##} GB", Locale.US);
 				entries = new String[gbList.size()];
 				intValues = new Integer[gbList.size()];
 				i = 0;
 				for (int v : gbList) {
 					intValues[i] = v;
-					entries[i] = formatGb.format(new Object[]{(float) v});
+					entries[i] = AndroidUtils.formatSize(this, v * (1l << 30));
 					i++;
 				}
 

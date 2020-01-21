@@ -3427,4 +3427,5 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">La emblemo montriĝos nur dum navigi aŭ dum moviĝi.</string>
     <string name="select_map_icon_descr">Map‑emblemo montriĝas nur dum foliumi mapon kaj ŝanĝiĝas dum navigi al la emblemo de navigo.</string>
+    <string name="logcat_buffer_descr">Tie ĉi vi povas legi kaj kunhavigi protokolojn de la aplikaĵo</string>
 </resources>
