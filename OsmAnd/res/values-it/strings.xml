@@ -3432,8 +3432,8 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="live_monitoring_descr">Permette di condividere la posizione corrente utilizzando la registrazione del viaggio.</string>
     <string name="live_monitoring">Tracciamento online</string>
     <string name="save_track_logging_accuracy">Precisione di registrazione</string>
-    <string name="tracks_view_descr">Puoi trovare tutte le tue tracce registrate in Menu - I miei luoghi - Le mie tracce o nella cartella OsmAd utilizzando il file manager.</string>
-    <string name="multimedia_notes_view_descr">Puoi trovare tutte le tue note in Menu - I miei luoghi - Note</string>
+    <string name="tracks_view_descr">Puoi trovare tutte le tue tracce registrate in %1$s o nella cartella OsmAd utilizzando il file manager.</string>
+    <string name="multimedia_notes_view_descr">Puoi trovare tutte le tue note in %1$s</string>
     <string name="video_notes">Note video</string>
     <string name="photo_notes">Note fotografiche</string>
     <string name="route_recalculation">Ricalcolo del percorso</string>

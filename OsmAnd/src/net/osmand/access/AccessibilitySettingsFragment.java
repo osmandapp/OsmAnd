@@ -199,7 +199,8 @@ public class AccessibilitySettingsFragment extends BaseSettingsFragment implemen
 			for (int i = 0; i < screen.getPreferenceCount(); i++) {
 				Preference preference = screen.getPreference(i);
 				String prefId = preference.getKey();
-				if (!settings.ACCESSIBILITY_MODE.getId().equals(prefId) && !settings.SPEECH_RATE.getId().equals(prefId))
+				if (!settings.ACCESSIBILITY_MODE.getId().equals(prefId) && !settings.SPEECH_RATE.getId().equals(prefId)
+						&& !RESET_TO_DEFAULT.equals(prefId) && !COPY_PLUGIN_SETTINGS.equals(prefId))
 					preference.setEnabled(accessibilityEnabled);
 			}
 		}
