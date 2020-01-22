@@ -8,6 +8,13 @@
 		android:layout="@layout/preference_category_with_descr"
 		android:title="@string/photo_notes" />
 
+	<Preference
+		android:icon="@drawable/ic_action_lock"
+		android:key="camera_permission"
+		android:layout="@layout/preference_permission"
+		android:summary="@string/give_permission"
+		android:title="@string/permission_is_required" />
+
 	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
 		android:key="av_external_cam"
 		android:layout="@layout/preference_with_descr_dialog_and_switch"
