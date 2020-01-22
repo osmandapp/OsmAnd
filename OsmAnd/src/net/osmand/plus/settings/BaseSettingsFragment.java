@@ -91,7 +91,6 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 
 		MAIN_SETTINGS(MainSettingsFragment.TAG, false, R.xml.settings_main_screen, R.layout.global_preference_toolbar),
 		GLOBAL_SETTINGS(GlobalSettingsFragment.class.getName(), false, R.xml.global_settings, R.layout.global_preference_toolbar),
-		DEVELOPMENT_SETTINGS(DevelopmentSettingsFragment.class.getName(), false, R.xml.development_settings, R.layout.global_preference_toolbar),
 		CONFIGURE_PROFILE(ConfigureProfileFragment.class.getName(), true, R.xml.configure_profile, R.layout.profile_preference_toolbar_with_switch),
 		PROXY_SETTINGS(ProxySettingsFragment.class.getName(), false, R.xml.proxy_preferences, R.layout.global_preferences_toolbar_with_switch),
 		GENERAL_PROFILE(GeneralProfileSettingsFragment.class.getName(), true, R.xml.general_profile_settings, R.layout.profile_preference_toolbar_big),
@@ -110,7 +109,8 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		MULTIMEDIA_NOTES(MultimediaNotesFragment.class.getName(), true, R.xml.multimedia_notes, R.layout.profile_preference_toolbar_big),
 		MONITORING_SETTINGS(MonitoringSettingsFragment.class.getName(), true, R.xml.monitoring_settings, R.layout.profile_preference_toolbar_big),
 		LIVE_MONITORING(LiveMonitoringFragment.class.getName(), false, R.xml.live_monitoring, R.layout.global_preferences_toolbar_with_switch),
-		ACCESSIBILITY_SETTINGS(AccessibilitySettingsFragment.class.getName(), true, R.xml.accessibility_settings, R.layout.profile_preference_toolbar_big);
+		ACCESSIBILITY_SETTINGS(AccessibilitySettingsFragment.class.getName(), true, R.xml.accessibility_settings, R.layout.profile_preference_toolbar_big),
+		DEVELOPMENT_SETTINGS(DevelopmentSettingsFragment.class.getName(), false, R.xml.development_settings, R.layout.global_preference_toolbar);
 
 		public final String fragmentName;
 		public final boolean profileDependent;
@@ -697,6 +697,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		p.setKey(b.getId());
 		p.setSummary(summary);
 		p.setLayoutResource(layoutId);
+		p.setIconSpaceReserved(true);
 		return p;
 	}
 
@@ -710,6 +711,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		p.setTitle(title);
 		p.setSummary(summary);
 		p.setLayoutResource(layoutId);
+		p.setIconSpaceReserved(true);
 		return p;
 	}
 
@@ -724,6 +726,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		listPreference.setDialogTitle(title);
 		listPreference.setEntries(names);
 		listPreference.setEntryValues(values);
+		listPreference.setIconSpaceReserved(true);
 
 		if (layoutId != 0) {
 			listPreference.setLayoutResource(layoutId);

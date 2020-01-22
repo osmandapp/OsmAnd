@@ -191,13 +191,11 @@ public class VoiceAnnouncesFragment extends BaseSettingsFragment {
 		//AudioManager.USE_DEFAULT_STREAM_TYPE};
 
 		ListPreferenceEx audioStreamGuidance = createListPreferenceEx(settings.AUDIO_STREAM_GUIDANCE.getId(), streamTypes, streamIntTypes, R.string.choose_audio_stream, R.layout.preference_with_descr);
-		audioStreamGuidance.setIconSpaceReserved(true);
 		getPreferenceScreen().addPreference(audioStreamGuidance);
 	}
 
 	private void setupInterruptMusicPref() {
 		Preference interruptMusicPref = createSwitchPreference(settings.INTERRUPT_MUSIC, R.string.interrupt_music, R.string.interrupt_music_descr, R.layout.preference_switch_with_descr);
-		interruptMusicPref.setIconSpaceReserved(true);
 		getPreferenceScreen().addPreference(interruptMusicPref);
 	}
 

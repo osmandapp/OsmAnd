@@ -3443,7 +3443,7 @@ Ha szereted az OsmAndot és az OSM-et, és szeretnéd támogatni a fejlődésük
     <string name="login_and_pass">Felhasználónév és jelszó</string>
     <string name="plugin_global_prefs_info">Ezek a bővítménybeállítások globálisak, és minden profilra vonatkoznak.</string>
     <string name="osm_editing">OpenStreetMap-szerkesztés</string>
-    <string name="osm_edits_view_descr">Az összes még fel nem töltött szerkesztés vagy OSM-hiba megtalálható a %1$s. A már feltöltött pontok nem láthatók az OsmAndban.</string>
+    <string name="osm_edits_view_descr">Az összes még fel nem töltött szerkesztés vagy OSM-hiba megtalálható a %1$s helyen. A már feltöltött pontok nem láthatók az OsmAndban.</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Az ikon csak navigáció vagy mozgás közben lesz látható.</string>
     <string name="select_map_icon_descr">A térképikon csak a térképen jelenik meg, navigáció közben pedig navigációs ikonra vált.</string>
