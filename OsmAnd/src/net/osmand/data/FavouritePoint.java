@@ -246,8 +246,8 @@ public class FavouritePoint implements Serializable, LocationPoint {
 
 
 	public enum SpecialPointType {
-		HOME("home", R.string.home_button, R.drawable.ic_action_home_dark),
-		WORK("work", R.string.work_button, R.drawable.ic_action_work),
+		HOME("home", R.string.home_button, R.drawable.mx_special_house),
+		WORK("work", R.string.work_button, R.drawable.mx_special_building),
 		PARKING("parking", R.string.map_widget_parking, R.drawable.mx_parking);
 
 		private String typeName;

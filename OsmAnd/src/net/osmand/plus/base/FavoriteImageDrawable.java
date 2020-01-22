@@ -18,6 +18,7 @@ import android.support.v4.content.res.ResourcesCompat;
 
 import net.osmand.GPXUtilities;
 import net.osmand.data.FavouritePoint;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 
 import java.util.TreeMap;
@@ -27,8 +28,7 @@ public class FavoriteImageDrawable extends Drawable {
 	private boolean withShadow;
 	private boolean synced;
 	private boolean history;
-	private boolean special;
-	private Bitmap favIcon;
+	private Drawable favIcon;
 	private Bitmap favBackground;
 	private Bitmap syncedStroke;
 	private Bitmap syncedColor;
@@ -41,7 +41,6 @@ public class FavoriteImageDrawable extends Drawable {
 	private Paint paintInnerCircle = new Paint();
 	private ColorFilter colorFilter;
 	private ColorFilter grayFilter;
-	private ColorFilter specialPointColor;
 
 	private FavoriteImageDrawable(Context ctx, int color, boolean withShadow, boolean synced, FavouritePoint point) {
 		this.withShadow = withShadow;
@@ -49,10 +48,12 @@ public class FavoriteImageDrawable extends Drawable {
 		Resources res = ctx.getResources();
 		int overlayIconId = point != null ? point.getOverlayIconId() : 0;
 		if (overlayIconId != 0) {
-			favIcon = BitmapFactory.decodeResource(res, overlayIconId);
-			listDrawable = ResourcesCompat.getDrawable(res, overlayIconId, null).mutate();
+			favIcon = ((OsmandApplication) ctx.getApplicationContext()).getUIUtilities()
+					.getIcon(getMapIconId(ctx, overlayIconId), R.color.color_white);
+			listDrawable = ((OsmandApplication) ctx.getApplicationContext()).getUIUtilities()
+					.getIcon(overlayIconId, R.color.color_white);
 		} else {
-			favIcon = BitmapFactory.decodeResource(res, R.drawable.map_favorite);
+			favIcon = res.getDrawable(R.drawable.map_favorite);
 			listDrawable = ResourcesCompat.getDrawable(res, R.drawable.ic_action_fav_dark, null).mutate();
 		}
 		int col = color == 0 || color == Color.BLACK ? res.getColor(R.color.color_favorite) : color;
@@ -61,12 +62,16 @@ public class FavoriteImageDrawable extends Drawable {
 		syncedColor = BitmapFactory.decodeResource(res, R.drawable.map_shield_marker_point_color);
 		syncedShadow = BitmapFactory.decodeResource(res, R.drawable.map_shield_marker_point_shadow);
 		syncedIcon = BitmapFactory.decodeResource(res, R.drawable.map_marker_point_14dp);
-
 		initSimplePaint(paintOuter, color == 0 || color == Color.BLACK ? 0x88555555 : color);
 		initSimplePaint(paintInnerCircle, col);
 		colorFilter = new PorterDuffColorFilter(col, PorterDuff.Mode.MULTIPLY);
 		grayFilter = new PorterDuffColorFilter(res.getColor(R.color.color_favorite_gray), PorterDuff.Mode.MULTIPLY);
-		specialPointColor = new PorterDuffColorFilter(res.getColor(R.color.icon_color_default_light), PorterDuff.Mode.MULTIPLY);
+	}
+
+	private int getMapIconId(Context ctx, int iconId) {
+		String iconName = ctx.getResources().getResourceEntryName(iconId);
+		return ctx.getResources().getIdentifier(iconName
+				.replaceFirst("mx_", "mm_"), "drawable", ctx.getPackageName());
 	}
 
 	private void initSimplePaint(Paint paint, int color) {
@@ -78,34 +83,24 @@ public class FavoriteImageDrawable extends Drawable {
 	@Override
 	protected void onBoundsChange(Rect bounds) {
 		super.onBoundsChange(bounds);
+		Rect bs = new Rect(bounds);
+		//bs.inset((int) (4 * density), (int) (4 * density));
+		bs.inset(bs.width() / 4, bs.height() / 4);
 		if (!withShadow && !synced) {
-			Rect bs = new Rect(bounds);
-			//bs.inset((int) (4 * density), (int) (4 * density));
-			bs.inset(bs.width() / 4, bs.height() / 4);
 			listDrawable.setBounds(bs);
+		} else if (withShadow) {
+			favIcon.setBounds(bs);
 		}
 	}
 
 	@Override
 	public int getIntrinsicHeight() {
-		if (synced) {
-			return syncedShadow.getHeight();
-		}
-		if (special) {
-			return favIcon.getHeight();
-		}
-		return favBackground.getHeight();
+		return synced ? syncedShadow.getHeight() : favBackground.getHeight();
 	}
 
 	@Override
 	public int getIntrinsicWidth() {
-		if (synced) {
-			return syncedShadow.getWidth();
-		}
-		if (special) {
-			return favIcon.getWidth();
-		}
-		return favBackground.getWidth();
+		return synced ? syncedShadow.getWidth() : favBackground.getWidth();
 	}
 
 	@Override
@@ -119,14 +114,14 @@ public class FavoriteImageDrawable extends Drawable {
 			canvas.drawBitmap(syncedIcon, bs.exactCenterX() - syncedIcon.getWidth() / 2f, bs.exactCenterY() - syncedIcon.getHeight() / 2f, paintIcon);
 		} else if (withShadow) {
 			canvas.drawBitmap(favBackground, bs.exactCenterX() - favBackground.getWidth() / 2f, bs.exactCenterY() - favBackground.getHeight() / 2f, paintBackground);
-			canvas.drawBitmap(favIcon, bs.exactCenterX() - favIcon.getWidth() / 2f, bs.exactCenterY() - favIcon.getHeight() / 2f, paintIcon);
+			favIcon.draw(canvas);
 		} else {
-				int min = Math.min(bs.width(), bs.height());
-				int r = (min * 4 / 10);
-				int rs = (r - 1);
-				canvas.drawCircle(min / 2, min / 2, r, paintOuter);
-				canvas.drawCircle(min / 2, min / 2, rs, paintInnerCircle);
-				listDrawable.draw(canvas);
+			int min = Math.min(bs.width(), bs.height());
+			int r = (min * 4 / 10);
+			int rs = (r - 1);
+			canvas.drawCircle(min / 2, min / 2, r, paintOuter);
+			canvas.drawCircle(min / 2, min / 2, rs, paintInnerCircle);
+			listDrawable.draw(canvas);
 		}
 	}
 
