@@ -18,13 +18,13 @@ public class FavouritePoint implements Serializable, LocationPoint {
 
 	private static final String HIDDEN = "hidden";
 	private static final String ADDRESS_EXTENSION = "address";
-
-
+	private static final String ICON_NAME_EXTENSION = "icon_name";
 
 	protected String name = "";
 	protected String description;
 	protected String category = "";
 	protected String address = "";
+	protected int iconId;
 	private String originObjectName = "";
 	private double latitude;
 	private double longitude;
@@ -56,6 +56,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		this.visible = favouritePoint.visible;
 		this.originObjectName = favouritePoint.originObjectName;
 		this.address = favouritePoint.address;
+		this.iconId = favouritePoint.iconId;
 		initPersonalType();
 	}
 
@@ -87,6 +88,14 @@ public class FavouritePoint implements Serializable, LocationPoint {
 
 	public boolean isAddressSpecified() {
 		return !Algorithms.isEmpty(address);
+	}
+
+	public int getIconId() {
+		return iconId;
+	}
+
+	public void setIconId(int iconId) {
+		this.iconId = iconId;
 	}
 
 	public boolean isSpecialPoint() {
@@ -122,7 +131,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		if (isSpecialPoint()) {
 			return specialPointType.getIconId();
 		}
-		return 0;
+		return iconId;
 	}
 
 	public double getLatitude() {
@@ -239,7 +248,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	public enum SpecialPointType {
 		HOME("home", R.string.home_button, R.drawable.ic_action_home_dark),
 		WORK("work", R.string.work_button, R.drawable.ic_action_work),
-		PARKING("parking", R.string.map_widget_parking, R.drawable.ic_action_parking_dark);
+		PARKING("parking", R.string.map_widget_parking, R.drawable.mx_parking);
 
 		private String typeName;
 		@StringRes
@@ -269,7 +278,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	}
 
 
-	public static FavouritePoint fromWpt(@NonNull WptPt pt) {
+	public static FavouritePoint fromWpt(@NonNull WptPt pt, @NonNull Context ctx) {
 		String name = pt.name;
 		String categoryName = pt.category != null ? pt.category : "";
 		if (name == null) {
@@ -284,10 +293,14 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		fp.setColor(pt.getColor(0));
 		fp.setVisible(!pt.getExtensionsToRead().containsKey(HIDDEN));
 		fp.setAddress(pt.getExtensionsToRead().get(ADDRESS_EXTENSION));
+		String iconName = pt.getExtensionsToRead().get(ICON_NAME_EXTENSION);
+		if (iconName != null) {
+			fp.setIconId(ctx.getResources().getIdentifier(iconName, "drawable", ctx.getPackageName()));
+		}
 		return fp;
 	}
 
-	public WptPt toWpt() {
+	public WptPt toWpt(@NonNull Context ctx) {
 		WptPt pt = new WptPt();
 		pt.lat = getLatitude();
 		pt.lon = getLongitude();
@@ -296,6 +309,9 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		}
 		if (isAddressSpecified()) {
 			pt.getExtensionsToWrite().put(ADDRESS_EXTENSION, getAddress());
+		}
+		if (iconId != 0) {
+			pt.getExtensionsToWrite().put(ICON_NAME_EXTENSION, ctx.getResources().getResourceEntryName(iconId));
 		}
 		if (getColor() != 0) {
 			pt.setColor(getColor());

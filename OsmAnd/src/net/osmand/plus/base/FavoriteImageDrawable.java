@@ -50,9 +50,10 @@ public class FavoriteImageDrawable extends Drawable {
 		int overlayIconId = point != null ? point.getOverlayIconId() : 0;
 		if (overlayIconId != 0) {
 			favIcon = BitmapFactory.decodeResource(res, overlayIconId);
-			special = true;
+			listDrawable = ResourcesCompat.getDrawable(res, overlayIconId, null).mutate();
 		} else {
 			favIcon = BitmapFactory.decodeResource(res, R.drawable.map_favorite);
+			listDrawable = ResourcesCompat.getDrawable(res, R.drawable.ic_action_fav_dark, null).mutate();
 		}
 		int col = color == 0 || color == Color.BLACK ? res.getColor(R.color.color_favorite) : color;
 		favBackground = BitmapFactory.decodeResource(res, R.drawable.map_white_favorite_shield);
@@ -60,7 +61,7 @@ public class FavoriteImageDrawable extends Drawable {
 		syncedColor = BitmapFactory.decodeResource(res, R.drawable.map_shield_marker_point_color);
 		syncedShadow = BitmapFactory.decodeResource(res, R.drawable.map_shield_marker_point_shadow);
 		syncedIcon = BitmapFactory.decodeResource(res, R.drawable.map_marker_point_14dp);
-		listDrawable = ResourcesCompat.getDrawable(res, R.drawable.ic_action_fav_dark, null).mutate();
+
 		initSimplePaint(paintOuter, color == 0 || color == Color.BLACK ? 0x88555555 : color);
 		initSimplePaint(paintInnerCircle, col);
 		colorFilter = new PorterDuffColorFilter(col, PorterDuff.Mode.MULTIPLY);
@@ -120,17 +121,12 @@ public class FavoriteImageDrawable extends Drawable {
 			canvas.drawBitmap(favBackground, bs.exactCenterX() - favBackground.getWidth() / 2f, bs.exactCenterY() - favBackground.getHeight() / 2f, paintBackground);
 			canvas.drawBitmap(favIcon, bs.exactCenterX() - favIcon.getWidth() / 2f, bs.exactCenterY() - favIcon.getHeight() / 2f, paintIcon);
 		} else {
-			if (special) {
-				paintIcon.setColorFilter(specialPointColor);
-				canvas.drawBitmap(favIcon, bs.exactCenterX() - bs.width() / 2f, bs.exactCenterY() - bs.height() / 2f, paintIcon);
-			} else {
 				int min = Math.min(bs.width(), bs.height());
 				int r = (min * 4 / 10);
 				int rs = (r - 1);
 				canvas.drawCircle(min / 2, min / 2, r, paintOuter);
 				canvas.drawCircle(min / 2, min / 2, rs, paintInnerCircle);
 				listDrawable.draw(canvas);
-			}
 		}
 	}
 
@@ -162,7 +158,7 @@ public class FavoriteImageDrawable extends Drawable {
 
 	private static FavoriteImageDrawable getOrCreate(Context a, int color, boolean withShadow, boolean synced, FavouritePoint point) {
 		String pointName = "";
-		if (point != null && point.isSpecialPoint()) {
+		if (point != null) {
 			pointName = point.getName();
 		}
 		color = color | 0xff000000;

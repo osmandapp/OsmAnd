@@ -271,10 +271,12 @@ public class FavouritesDbHelper {
 	public void setSpecialPoint(@NonNull LatLon latLon, FavouritePoint.SpecialPointType specialType, @Nullable String address) {
 		FavouritePoint point = getSpecialPoint(specialType);
 		if (point != null) {
+			point.setIconId(specialType.getIconId());
 			editFavourite(point, latLon.getLatitude(), latLon.getLongitude(), address);
 		} else {
 			point = new FavouritePoint(latLon.getLatitude(), latLon.getLongitude(), specialType.getName(), specialType.getCategory());
 			point.setAddress(address);
+			point.setIconId(specialType.getIconId());
 			addFavourite(point);
 		}
 	}
@@ -295,7 +297,11 @@ public class FavouritesDbHelper {
 
 		if (!p.getName().equals("")) {
 			p.setVisible(group.visible);
-			p.setColor(group.color);
+			if (FavouritePoint.SpecialPointType.PARKING.equals(p.getSpecialPointType())) {
+				p.setColor(context.getColor(R.color.map_widget_blue));
+			} else {
+				p.setColor(group.color);
+			}
 			group.points.add(p);
 			cachedFavoritePoints.add(p);
 		}
@@ -429,7 +435,11 @@ public class FavouritesDbHelper {
 			}
 			FavoriteGroup pg = getOrCreateGroup(p, 0);
 			p.setVisible(pg.visible);
-			p.setColor(pg.color);
+			if (FavouritePoint.SpecialPointType.PARKING.equals(p.getSpecialPointType())) {
+				p.setColor(context.getColor(R.color.map_widget_blue));
+			} else {
+				p.setColor(pg.color);
+			}
 			pg.points.add(p);
 		}
 		sortAll();
@@ -560,6 +570,7 @@ public class FavouritesDbHelper {
 		return GPXUtilities.writeGpxFile(f, gpx);
 	}
 
+
 	public GPXFile asGpxFile() {
 		return asGpxFile(cachedFavoritePoints);
 	}
@@ -567,7 +578,7 @@ public class FavouritesDbHelper {
 	private GPXFile asGpxFile(List<FavouritePoint> favoritePoints) {
 		GPXFile gpx = new GPXFile(Version.getFullVersion(context));
 		for (FavouritePoint p : favoritePoints) {
-			context.getSelectedGpxHelper().addPoint(p.toWpt(), gpx);
+			context.getSelectedGpxHelper().addPoint(p.toWpt(context), gpx);
 		}
 		return gpx;
 	}
@@ -724,7 +735,7 @@ public class FavouritesDbHelper {
 			return false;
 		}
 		for (WptPt p : res.getPoints()) {
-			FavouritePoint fp = FavouritePoint.fromWpt(p);
+			FavouritePoint fp = FavouritePoint.fromWpt(p, context);
 			if (fp != null) {
 				points.put(getKey(fp), fp);
 			}
