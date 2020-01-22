@@ -3311,8 +3311,8 @@ voor Gebied: %1$s x %2$s</string>
     <string name="live_monitoring_descr">Laat u toe uw positie te delen dankzij reisopname.</string>
     <string name="live_monitoring">Online volgen</string>
     <string name="save_track_logging_accuracy">Opnamenauwkeurigheid</string>
-    <string name="tracks_view_descr">U kan al uw opgenomen tracks terugvinden bij Menu - Mijn plaatsen - Tracks of in OsmAnd-map met een bestand verkenner.</string>
-    <string name="multimedia_notes_view_descr">U kan al uw notities terugvinden bij Menu - Mijn plaatsen - Notities</string>
+    <string name="tracks_view_descr">U kan al uw opgenomen tracks terugvinden bij %1$s of in OsmAnd-map met een bestand verkenner.</string>
+    <string name="multimedia_notes_view_descr">U kan al uw notities terugvinden bij %1$s</string>
     <string name="video_notes">Videonotities</string>
     <string name="photo_notes">Fotonotities</string>
     <string name="route_recalculation">Route herberekening</string>
@@ -3320,7 +3320,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="login_and_pass">Gebruikersnaam en wachtwoord</string>
     <string name="plugin_global_prefs_info">Deze plugin instellingen zijn globaal en hebben betrekking op alle profielen.</string>
     <string name="osm_editing">OpenStreetMap Bewerking</string>
-    <string name="osm_edits_view_descr">U kan al uw niet-geüploade bewerkingen of osm fouten zien in Menu - Mijn plaatsen - OSM Bewerkingen. Geüploade punten ziet u niet in OsmAnd.</string>
+    <string name="osm_edits_view_descr">U kan al uw niet-geüploade bewerkingen of osm fouten zien in %1$s. Geüploade punten ziet u niet in OsmAnd.</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">U zal het icoon enkel zien tijdens het navigeren of bewegen.</string>
     <string name="select_map_icon_descr">Kaarticoon verschijnt op de kaart en wijzigt slechts bij het navigeren in het navigatie-icoon.</string>

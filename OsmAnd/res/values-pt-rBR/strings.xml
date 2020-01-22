@@ -3421,8 +3421,8 @@ Pôr do Sol: %2$s</string>
     <string name="live_monitoring_descr">Permite compartilhar a localização atual usando a gravação de viagem.</string>
     <string name="live_monitoring">Rastreamento online</string>
     <string name="save_track_logging_accuracy">Precisão de registro</string>
-    <string name="tracks_view_descr">Você pode encontrar todas as suas faixas gravadas em Menu - Meu lugar - Faixas ou na pasta OsmAd usando o gerenciador de arquivos.</string>
-    <string name="multimedia_notes_view_descr">Você pode encontrar todas as suas anotações em Menu - Meus lugares - Notas</string>
+    <string name="tracks_view_descr">Você pode encontrar todas as suas faixas gravadas em %1$ss ou na pasta OsmAd usando o gerenciador de arquivos.</string>
+    <string name="multimedia_notes_view_descr">Você pode encontrar todas as suas anotações em %1$s</string>
     <string name="video_notes">Notas de vídeo</string>
     <string name="photo_notes">Notas fotográficas</string>
     <string name="route_recalculation">Recálculo da rota</string>
@@ -3430,7 +3430,7 @@ Pôr do Sol: %2$s</string>
     <string name="login_and_pass">Usuário e senha</string>
     <string name="plugin_global_prefs_info">As configurações deste plug-in são globais e se aplicam a todos os perfis.</string>
     <string name="osm_editing">Edição de OpenStreetMap</string>
-    <string name="osm_edits_view_descr">Você pode ver todos os erros de osm do editor carregado em Menu - Meus lugares - Edições OSM. Os pontos enviados não são exibidos no OsmAnd.</string>
+    <string name="osm_edits_view_descr">Você pode ver todos os erros de osm do editor carregado em %1$s. Os pontos enviados não são exibidos no OsmAnd.</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Você verá o ícone apenas enquanto estiver navegando ou em movimento.</string>
     <string name="select_map_icon_descr">O ícone do mapa aparece apenas no mapa e é alterado enquanto estiver navegando para o ícone de navegação.</string>

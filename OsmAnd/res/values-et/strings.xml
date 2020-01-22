@@ -3365,8 +3365,8 @@
     <string name="live_monitoring_descr">Lubab sul jagada praegust asukohta kasutades reisi salvestamist.</string>
     <string name="live_monitoring">Veebis jälgimine</string>
     <string name="save_track_logging_accuracy">Logimise täpsus</string>
-    <string name="tracks_view_descr">Kõik oma salvestatud rajad leiad Menüü- Minu koht - Rajad või OsmAd kataloogist failihalduri abil.</string>
-    <string name="multimedia_notes_view_descr">Kõik oma märkmed leiad Menüü - Minu kohad - Märkmed</string>
+    <string name="tracks_view_descr">Kõik oma salvestatud rajad leiad %1$s või OsmAd kataloogist failihalduri abil.</string>
+    <string name="multimedia_notes_view_descr">Kõik oma märkmed leiad %1$s</string>
     <string name="video_notes">Video märkmed</string>
     <string name="photo_notes">Foto märkmed</string>
     <string name="route_recalculation">Teekonna ümberarvutamine</string>
@@ -3374,7 +3374,7 @@
     <string name="login_and_pass">Kasutajanimi ja salasõna</string>
     <string name="plugin_global_prefs_info">Selle lisa seaded kehtivad kogu rakenduses ja rakenduvad kõikidele profiilidele.</string>
     <string name="osm_editing">OpenStreetMap muutmine</string>
-    <string name="osm_edits_view_descr">Kõiki üleslaadimata muudatusi või osm vigu saad vaadata menüüs Menüü - Minu kohad - OSM muudatused. Üleslaaditud punkte OsmAnd ei kuva.</string>
+    <string name="osm_edits_view_descr">Kõiki üleslaadimata muudatusi või osm vigu saad vaadata menüüs %1$s. Üleslaaditud punkte OsmAnd ei kuva.</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Ikooni näed ainult navigeerimise või liikumise ajal.</string>
     <string name="select_map_icon_descr">Kaardiikoon kuvatakse ainult kaardil ja muutub navigeerimise ajal navigeerimise ikooniks.</string>

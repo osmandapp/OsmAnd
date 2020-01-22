@@ -112,9 +112,8 @@ public class SettingsOsmEditingActivity extends SettingsBaseActivity {
 
 		@Override
 		protected void onPostExecute(OsmBugsUtil.OsmBugResult osmBugResult) {
-			if (osmBugResult.warning != null) {
-				Toast.makeText(context, osmBugResult.warning, Toast.LENGTH_LONG).show();
-			}
+			String text = osmBugResult.warning != null ? osmBugResult.warning : context.getString(R.string.osm_authorization_success);
+			Toast.makeText(context, text, Toast.LENGTH_LONG).show();
 		}
 	}
 }

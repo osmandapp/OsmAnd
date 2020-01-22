@@ -3425,8 +3425,8 @@
     <string name="live_monitoring_descr">Дозволяє ділитися поточним місцезнаходженням, використовуючи запис поїздки.</string>
     <string name="live_monitoring">Мережеве відстеження</string>
     <string name="save_track_logging_accuracy">Точність часопису</string>
-    <string name="tracks_view_descr">Ви можете знайти всі записи в Меню - Мої місця - Треки або в теці OsmAnd за допомогою файлового провідника.</string>
-    <string name="multimedia_notes_view_descr">Ви можете знайти всі свої примітки в Меню - Мої місця - Примітки</string>
+    <string name="tracks_view_descr">Ви можете знайти всі записи в %1$s або в теці OsmAnd за допомогою файлового провідника.</string>
+    <string name="multimedia_notes_view_descr">Ви можете знайти всі свої примітки в %1$s</string>
     <string name="video_notes">Відеопримітки</string>
     <string name="photo_notes">Світлинопримітки</string>
     <string name="route_recalculation">Перерахунок маршруту</string>
@@ -3434,7 +3434,7 @@
     <string name="login_and_pass">Ім\'я користувача і пароль</string>
     <string name="plugin_global_prefs_info">Налаштування цього втулка є всеохопними та стосуються всіх профілів.</string>
     <string name="osm_editing">OpenStreetMap редагування</string>
-    <string name="osm_edits_view_descr">Ви можете переглянути всі не завантажені зміни або помилки в OSM в Меню - Мої місця - Правки OSM. Завантажені точки не відображаються в OsmAnd.</string>
+    <string name="osm_edits_view_descr">Ви можете переглянути всі не завантажені зміни або помилки в OSM в %1$s. Завантажені точки не відображаються в OsmAnd.</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Ви побачите значок тільки під час навігації або під час переміщення.</string>
     <string name="select_map_icon_descr">Образок мапи відображається лише на мапі та змінюється під час навігації до образка навігації.</string>

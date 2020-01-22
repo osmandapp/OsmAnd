@@ -126,6 +126,11 @@ public class OsmandDevelopmentPlugin extends OsmandPlugin {
 	}
 
 	@Override
+	public Class<? extends BaseSettingsFragment> getSettingsFragment() {
+		return DevelopmentSettingsFragment.class;
+	}
+
+	@Override
 	public int getLogoResourceId() {
 		return R.drawable.ic_plugin_developer;
 	}

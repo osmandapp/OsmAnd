@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.settings.BaseSettingsFragment;
 
@@ -27,6 +28,16 @@ public class AccessibilityPlugin extends OsmandPlugin {
 
 	public AccessibilityPlugin(OsmandApplication app) {
 		this.app = app;
+		OsmandSettings settings = app.getSettings();
+		pluginPreferences.add(settings.ACCESSIBILITY_MODE);
+		pluginPreferences.add(settings.SPEECH_RATE);
+		pluginPreferences.add(settings.ACCESSIBILITY_SMART_AUTOANNOUNCE);
+		pluginPreferences.add(settings.ACCESSIBILITY_AUTOANNOUNCE_PERIOD);
+		pluginPreferences.add(settings.DISABLE_OFFROUTE_RECALC);
+		pluginPreferences.add(settings.DISABLE_WRONG_DIRECTION_RECALC);
+		pluginPreferences.add(settings.DIRECTION_STYLE);
+		pluginPreferences.add(settings.DIRECTION_AUDIO_FEEDBACK);
+		pluginPreferences.add(settings.DIRECTION_HAPTIC_FEEDBACK);
 	}
 
 	@Override

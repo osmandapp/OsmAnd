@@ -12,8 +12,9 @@ import net.osmand.AndroidUtils;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.R;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
+import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemTitleWithDescrAndButton;
 import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithCompoundButton;
-import net.osmand.plus.base.bottomsheetmenu.simpleitems.LongDescriptionItem;
+import net.osmand.plus.base.bottomsheetmenu.BottomSheetItemWithDescription;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
 import net.osmand.plus.settings.OnPreferenceChanged;
 import net.osmand.plus.settings.preferences.ListPreferenceEx;
@@ -24,10 +25,14 @@ public class SingleSelectPreferenceBottomSheet extends BasePreferenceBottomSheet
 	public static final String TAG = SingleSelectPreferenceBottomSheet.class.getSimpleName();
 
 	private static final String SELECTED_ENTRY_INDEX_KEY = "selected_entry_index_key";
+	private static final String USE_COLLAPSIBLE_DESCRIPTION = "use_collapsible_description";
+	private static final int COLLAPSED_DESCRIPTION_LINES = 4;
 
 	private ListPreferenceEx listPreference;
 
 	private int selectedEntryIndex = -1;
+	private boolean descriptionExpanded;
+	private boolean collapsibleDescription;
 
 	@Override
 	public void createMenuItems(Bundle savedInstanceState) {
@@ -36,8 +41,13 @@ public class SingleSelectPreferenceBottomSheet extends BasePreferenceBottomSheet
 		if (ctx == null || listPreference == null || listPreference.getEntries() == null || listPreference.getEntryValues() == null) {
 			return;
 		}
+		Bundle args = getArguments();
+		if (args != null && args.containsKey(USE_COLLAPSIBLE_DESCRIPTION)) {
+			collapsibleDescription = args.getBoolean(USE_COLLAPSIBLE_DESCRIPTION);
+		}
 		if (savedInstanceState != null) {
 			selectedEntryIndex = savedInstanceState.getInt(SELECTED_ENTRY_INDEX_KEY);
+			collapsibleDescription = savedInstanceState.getBoolean(USE_COLLAPSIBLE_DESCRIPTION);
 		} else {
 			selectedEntryIndex = listPreference.findIndexOfValue(listPreference.getValue());
 		}
@@ -47,7 +57,7 @@ public class SingleSelectPreferenceBottomSheet extends BasePreferenceBottomSheet
 
 		String description = listPreference.getDescription();
 		if (!Algorithms.isEmpty(description)) {
-			items.add(new LongDescriptionItem(description));
+			buildDescriptionItem(ctx, description);
 		}
 
 		String[] entries = listPreference.getEntries();
@@ -83,11 +93,12 @@ public class SingleSelectPreferenceBottomSheet extends BasePreferenceBottomSheet
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putInt(SELECTED_ENTRY_INDEX_KEY, selectedEntryIndex);
+		outState.putBoolean(USE_COLLAPSIBLE_DESCRIPTION, collapsibleDescription);
 	}
 
 	@Override
 	protected int getDismissButtonTextId() {
-		return R.string.shared_string_close;
+		return R.string.shared_string_cancel;
 	}
 
 	@Override
@@ -125,11 +136,41 @@ public class SingleSelectPreferenceBottomSheet extends BasePreferenceBottomSheet
 		return (ListPreferenceEx) getPreference();
 	}
 
-	public static boolean showInstance(@NonNull FragmentManager fragmentManager, String key, Fragment target,
-									   boolean usedOnMap, @Nullable ApplicationMode appMode, boolean profileDependent) {
+	private void buildDescriptionItem(Context ctx, String description) {
+		if (collapsibleDescription) {
+			final BottomSheetItemTitleWithDescrAndButton[] preferenceDescription = new BottomSheetItemTitleWithDescrAndButton[1];
+			preferenceDescription[0] = (BottomSheetItemTitleWithDescrAndButton) new BottomSheetItemTitleWithDescrAndButton.Builder()
+					.setButtonTitle(getString(R.string.shared_string_read_more))
+					.setButtonTextColor(AndroidUtils.resolveAttribute(ctx, R.attr.active_color_basic))
+					.setOnButtonClickListener(new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							descriptionExpanded = !descriptionExpanded;
+							int maxLines = descriptionExpanded ? Integer.MAX_VALUE : COLLAPSED_DESCRIPTION_LINES;
+							preferenceDescription[0].setDescriptionMaxLines(maxLines);
+							setupHeightAndBackground(getView());
+						}
+					})
+					.setDescriptionMaxLines(COLLAPSED_DESCRIPTION_LINES)
+					.setDescription(description)
+					.setLayoutId(R.layout.bottom_sheet_item_with_expandable_descr)
+					.create();
+			items.add(preferenceDescription[0]);
+		} else {
+			BaseBottomSheetItem preferenceDescription = new BottomSheetItemWithDescription.Builder()
+					.setDescription(description)
+					.setLayoutId(R.layout.bottom_sheet_item_preference_descr)
+					.create();
+			items.add(preferenceDescription);
+		}
+	}
+
+	public static boolean showInstance(@NonNull FragmentManager fragmentManager, String key, Fragment target, boolean usedOnMap,
+	                                   @Nullable ApplicationMode appMode, boolean profileDependent, boolean collapsibleDescription) {
 		try {
 			Bundle args = new Bundle();
 			args.putString(PREFERENCE_ID, key);
+			args.putBoolean(USE_COLLAPSIBLE_DESCRIPTION, collapsibleDescription);
 
 			SingleSelectPreferenceBottomSheet fragment = new SingleSelectPreferenceBottomSheet();
 			fragment.setArguments(args);

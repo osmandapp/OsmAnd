@@ -11,6 +11,7 @@
 		android:id="@+id/selectable_list_item"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
+		android:minHeight="@dimen/setting_list_item_large_height"
 		tools:background="?android:attr/selectableItemBackground">
 
 		<ImageView

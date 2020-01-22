@@ -3434,8 +3434,8 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="live_monitoring_descr">Ti permitit de cumpartzire sa positzione atuale impreende sa registratzione de su biàgiu.</string>
     <string name="live_monitoring">Arrastamentu in lìnia</string>
     <string name="save_track_logging_accuracy">Pretzisione de registratzione</string>
-    <string name="tracks_view_descr">Podes agatare totu sas rastas registradas tuas in Menù — Logos meos — Rastas o in sa cartella de OsmAnd impreende su gestore de documentos.</string>
-    <string name="multimedia_notes_view_descr">Podes agatare totu sas notas tuas in Menù — Logos meos — Notas</string>
+    <string name="tracks_view_descr">Podes agatare totu sas rastas registradas tuas in %1$s o in sa cartella de OsmAnd impreende su gestore de documentos.</string>
+    <string name="multimedia_notes_view_descr">Podes agatare totu sas notas tuas in %1$s</string>
     <string name="video_notes">Vìdeo-notas</string>
     <string name="photo_notes">Foto-notas</string>
     <string name="route_recalculation">Ricàlculu de s\'àndala</string>
@@ -3443,7 +3443,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="login_and_pass">Nùmene impreadore e crae</string>
     <string name="plugin_global_prefs_info">Sas impostatziones de s\'estensione sunt globales, e si aplicant a totu sos profilos.</string>
     <string name="osm_editing">Modìfica de OpenStreetMap</string>
-    <string name="osm_edits_view_descr">Podes pompiare totu sas modìficas non carrigadas tuas o sos errores de osm in Menù — Logos meos — Modìficas de OSM. Sos puntos carrigados no ant a èssere ammustrados in OsmAnd.</string>
+    <string name="osm_edits_view_descr">Podes pompiare totu sas modìficas non carrigadas tuas o sos errores de osm in %1$s. Sos puntos carrigados no ant a èssere ammustrados in OsmAnd.</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">As a bìdere s\'icona petzi durante sa navigatzione o su movimentu.</string>
     <string name="select_map_icon_descr">S\'icona de sa mapa aparit in sa mapa ebbia, e divenit s\'icona de navigatzione durante sa navigatzione.</string>

@@ -55,6 +55,11 @@ public class SimpleBottomSheetItem extends BaseBottomSheetItem {
 		iconView.setImageDrawable(icon);
 	}
 
+	public void setTitleColorId(@ColorRes int titleColorId) {
+		this.titleColorId = titleColorId;
+		titleTv.setTextColor(ContextCompat.getColor(titleTv.getContext(), titleColorId));
+	}
+
 	@Override
 	public void inflate(Context context, ViewGroup container, boolean nightMode) {
 		super.inflate(context, container, nightMode);

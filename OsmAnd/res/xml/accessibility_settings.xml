@@ -97,7 +97,7 @@
 		android:key="reset_to_default"
 		android:layout="@layout/preference_button"
 		android:persistent="false"
-		android:title="@string/reset_to_default"
+		android:title="@string/reset_plugin_to_default"
 		tools:icon="@drawable/ic_action_reset_to_default_dark" />
 
 </PreferenceScreen>
