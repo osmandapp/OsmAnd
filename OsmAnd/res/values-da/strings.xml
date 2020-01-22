@@ -3456,4 +3456,5 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Ikonet vises kun under navigation eller under bevægelse.</string>
     <string name="select_map_icon_descr">Kortikon vises kun på kortet og skifter under navigation til navigationsikon.</string>
+    <string name="logcat_buffer_descr">Her kan man se og dele logfiler for applikationen</string>
 </resources>

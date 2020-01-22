@@ -3435,4 +3435,5 @@
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">僅在導航或移動時，您才會看到該圖示。</string>
     <string name="select_map_icon_descr">地圖圖示只會顯示在地圖上，並會在導航時換成導航圖示。</string>
+    <string name="logcat_buffer_descr">在這裡您可以檢視及分享應用程式的紀錄檔</string>
 </resources>
