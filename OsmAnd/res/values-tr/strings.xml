@@ -3396,4 +3396,5 @@
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Simgeyi yalnızca navigasyon sırasında veya hareket halindeyken göreceksiniz.</string>
     <string name="select_map_icon_descr">Harita simgesi yalnızca haritada görünür ve navigasyon esnasında navigasyon simgesine dönüşür.</string>
+    <string name="logcat_buffer_descr">Burada uygulamanın log kayıtlarını görebilir ve paylaşabilirsiniz</string>
 </resources>

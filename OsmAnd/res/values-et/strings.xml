@@ -3378,4 +3378,5 @@
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Ikooni näed ainult navigeerimise või liikumise ajal.</string>
     <string name="select_map_icon_descr">Kaardiikoon kuvatakse ainult kaardil ja muutub navigeerimise ajal navigeerimise ikooniks.</string>
+    <string name="logcat_buffer_descr">Siin saad rakenduse logisid vaadata ja jagada</string>
 </resources>

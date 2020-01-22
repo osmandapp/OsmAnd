@@ -3447,4 +3447,5 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">As a bìdere s\'icona petzi durante sa navigatzione o su movimentu.</string>
     <string name="select_map_icon_descr">S\'icona de sa mapa aparit in sa mapa ebbia, e divenit s\'icona de navigatzione durante sa navigatzione.</string>
+    <string name="logcat_buffer_descr">Inoghe podes pompiare e cumpartzire sos registros de s\'aplicatzione</string>
 </resources>

@@ -632,12 +632,12 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="show_poi_over_map">Mostra la superposició de PDI</string>
     <string name="show_location">Mostra la vostra ubicació</string>
     <string name="searchpoi_activity">Escull un PDI</string>
-    <string name="choose_available_region">Escull una regió de la llista</string>
+    <string name="choose_available_region">Seleccioneu una regió de la llista</string>
     <string name="search_POI_level_btn">Cerca\'n més</string>
     <string name="map_source">Font del mapa</string>
-    <string name="show_poi_over_map_description">Mostra la darrera superposició de PDI seleccionada en el mapa.</string>
+    <string name="show_poi_over_map_description">Mostra la darrera superposició de PDI usada.</string>
     <string name="use_internet">Utilitza Internet</string>
-    <string name="search_address_top_text">Selecció de l\'adreça</string>
+    <string name="search_address_top_text">Adreça</string>
     <string name="favourites_context_menu_edit">Edita el Preferit</string>
     <string name="favourites_context_menu_delete">Elimina el Preferit</string>
     <string name="poi_edit_title">Edita el PDI</string>
@@ -812,9 +812,9 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="add_favorite_dialog_default_favourite_name">Preferit</string>
     <string name="add_favorite_dialog_favourite_added_template">S\'ha afegit el punt preferit «{0}».</string>
     <string name="osb_comment_dialog_success">S\'ha afegit el comentari</string>
-    <string name="poi_remove_success">PDI eliminat</string>
+    <string name="poi_remove_success">Eliminat</string>
     <string name="shared_string_clear">Neteja</string>
-    <string name="edit_filter_delete_dialog_title">Voleu eliminar el filtre seleccionat?</string>
+    <string name="edit_filter_delete_dialog_title">Voleu eliminar aquest filtre\?</string>
     <string name="no_route">Sense ruta</string>
     <string name="voice_stream_voice_call">Àudio de trucada telefònica (interrupció de la música BT del cotxe)</string>
     <string name="enable_plugin_monitoring_services">"Habiliteu el connector \"Enregistrament de ruta\"  per utilitzar els serveis de registre d\'ubicació (enregistrament GPX, seguiment en directe)"</string>
@@ -898,7 +898,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="navigate_point_top_text">Introduïu la latitud i la longitud en el format seleccionat (G - graus, M - minuts, S - segons)</string>
     <string name="navigate_point_format_D">GGG.GG</string>
     <string name="navigate_point_format_DM">GGG MM.MM</string>
-    <string name="navigate_point_format_DMS">GGG MM SS.SS</string>
+    <string name="navigate_point_format_DMS">GGG MM SS.S</string>
     <string name="favourites_remove_dialog_msg">Voleu eliminar el punt Preferit \'%s\'?</string>
     <string name="favourites_remove_dialog_success">El punt preferit {0} eliminat.</string>
     <string name="poi_action_succeded_template">Acció {0} completada.</string>
@@ -996,7 +996,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="transport_stops_to_pass">parades que heu de passar</string>
     <string name="shared_string_downloading">S\'està baixant</string>
     <string name="commiting_node">S\'està enviant el node…</string>
-    <string name="choose_intersected_street">Seleccioneu la intersecció</string>
+    <string name="choose_intersected_street">Seleccioneu el carrer intersecció</string>
     <string name="poi_remove_confirm_template">Voleu suprimir {0} (comentari)?</string>
     <string name="poi_dialog_comment_default">Canvis en el PDI</string>
     <string name="context_menu_item_destination_point">Estableix com a destinació</string>
@@ -1125,7 +1125,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="av_camera_focus_descr">Mode d\'enfocament de la càmera:</string>
     <string name="av_camera_focus">Tipus d\'enfocament</string>
     <string name="poi_error_unexpected_template">No s\'ha pogut fer l\'acció {0}.</string>
-    <string name="map_tile_source_descr">Trieu l\'origen de les tessel·les, sigui en línia o de la memòria cau.</string>
+    <string name="map_tile_source_descr">Trieu l\'origen de les tessel·les, sigui en línia o de la memòria cau</string>
     <string name="previous_run_crashed">La darrera execució de l\'OsmAnd ha fallat. El fitxer log és a {0}. Si us plau informeu del problema i adjunteu el fitxer log.</string>
     <string name="transport_stop_to_go_out">Trieu aturada per sortir</string>
     <string name="route_head">Endavant</string>
@@ -1635,15 +1635,15 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="rate_this_app">Avalua aquesta aplicació</string>
     <string name="rate_this_app_long">Us agrairíem que avaluéssiu l\'OsmAnd al Google Play</string>
     <string name="user_hates_app_get_feedback">Digueu-nos el motiu.</string>
-    <string name="user_hates_app_get_feedback_long">Us agrairíem que ens diguéssiu que voldríeu canviar d\'aquesta aplicació.</string>
+    <string name="user_hates_app_get_feedback_long">Us agrairíem que ens feu saber qualsevol suggeriment.</string>
     <string name="download_live_updates">Actualitzacions al moment</string>
-    <string name="failed_to_upload">S\'ha produït un error en la pujada</string>
+    <string name="failed_to_upload">No s\'ha pogut pujar</string>
     <string name="delete_change">Suprimeix les modificacions</string>
     <string name="successfully_uploaded_pattern">S\'ha pujat {0}/{1}</string>
     <string name="try_again">Torneu-ho a provar</string>
     <string name="error_message_pattern">Error: {0}</string>
     <string name="no_updates_available">No hi ha actualitzacions disponibles</string>
-    <string name="we_really_care_about_your_opinion">Ens interessa la vostra opinió i valorem molt els vostres comentaris.</string>
+    <string name="we_really_care_about_your_opinion">Ens interessa la vostra opinió i els vostres comentaris.</string>
     <string name="rendering_value_boldOutline_name">Contorn destacat</string>
     <string name="traffic_warning_hazard">Perill informat</string>
     <string name="dahboard_options_dialog_title">Configura el tauler</string>
@@ -1861,7 +1861,7 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="shared_string_undo_all">Desfés-ho tot</string>
     <string name="shared_string_type">Tipus</string>
     <string name="starting_point">Punt d\'inici</string>
-    <string name="select_month_and_country">Seleccioneu el mes i el país</string>
+    <string name="select_month_and_country">Mes i país:</string>
     <string name="number_of_contributors">Nombre de col·laboradors</string>
     <string name="number_of_edits">Nombre d\'edicions</string>
     <string name="reports_for">Informe per</string>
@@ -2116,7 +2116,7 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="quick_action_add_marker">Afegeix marcador de mapa</string>
     <string name="quick_action_add_poi">Afegeix PDI</string>
     <string name="quick_action_map_style">canvia l\'estil del mapa</string>
-    <string name="quick_action_map_style_switch">L\'estil del mapa s\'ha canviat a \"%s\".</string>
+    <string name="quick_action_map_style_switch">Estil del mapa canviat a \"%s\".</string>
     <string name="quick_action_take_audio_note">Nova nota d\'àudio</string>
     <string name="quick_action_take_video_note">Nova nota de vídeo</string>
     <string name="quick_action_take_photo_note">Nova nota fotogràfica</string>
@@ -2135,8 +2135,8 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="quick_favorites_show_favorites_dialog">Mostra el diàleg Favorits</string>
     <string name="quick_favorites_name_preset">Configuració de nom</string>
     <string name="quick_action_add_marker_descr">Prement aquest botó d\'acció s\'afegeix un marcador de mapa a la posició central de la pantalla.</string>
-    <string name="quick_action_add_gpx_descr">Prement aquest botó d\'acció s\'afegirà, al centre de la pantalla, una fita GPX.</string>
-    <string name="quick_action_take_audio_note_descr">Prement aquest botó d\'acció afegiu una nota d\'àudio en el centre de la pantalla.</string>
+    <string name="quick_action_add_gpx_descr">Un botó per afegir una fita GPX al centre de la pantalla.</string>
+    <string name="quick_action_take_audio_note_descr">Un botó per afegir una nota d\'àudio en el centre de la pantalla.</string>
     <string name="quick_action_take_video_note_descr">Prement aquest botó d\'acció afegiu una nota de vídeo en el centre de la pantalla.</string>
     <string name="quick_action_take_photo_note_descr">Prement el botó d\'acció s\'afegeix una nota fotogràfica en el centre de la pantalla.</string>
     <string name="quick_action_add_osm_bug_descr">Prement aquest botó d\'acció afegiu una nota OSM al centre de la pantalla.</string>
@@ -3459,4 +3459,5 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="osm_edits_view_descr">Podeu veure totes les vostres edicions no enviades o els errors OSM a %1$s. Els punts enviats no es mostren a OsmAnd.</string>
     <string name="select_nav_icon_descr">Només veureu la icona mentre navegueu o us mogueu.</string>
     <string name="select_map_icon_descr">La icona de mapa només es mostra al mapa i es canvia a la icona de navegació quan durant aquesta.</string>
+    <string name="logcat_buffer_descr">Aquí podeu veure i compartir els enregistraments de l\'aplicació</string>
 </resources>
