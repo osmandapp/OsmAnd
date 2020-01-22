@@ -3447,4 +3447,5 @@ Ha szereted az OsmAndot és az OSM-et, és szeretnéd támogatni a fejlődésük
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Az ikon csak navigáció vagy mozgás közben lesz látható.</string>
     <string name="select_map_icon_descr">A térképikon csak a térképen jelenik meg, navigáció közben pedig navigációs ikonra vált.</string>
+    <string name="logcat_buffer_descr">Az alkalmazás részletes naplóinak ellenőrzése és megosztása</string>
 </resources>
