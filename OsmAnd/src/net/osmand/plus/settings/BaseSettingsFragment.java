@@ -72,7 +72,13 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		OnPreferenceClickListener, AppModeChangedListener {
 
 	private static final Log LOG = PlatformUtil.getLog(BaseSettingsFragment.class);
-	private static final String APP_MODE_KEY = "app_mode_key";
+
+	public static final String APP_MODE_KEY = "app_mode_key";
+	public static final String OPEN_CONFIG_PROFILE = "openConfigProfile";
+	public static final String OPEN_SETTINGS = "openSettings";
+	public static final String OPEN_CONFIG_ON_MAP = "openConfigOnMap";
+	public static final String MAP_CONFIG = "openMapConfigMenu";
+	public static final String SCREEN_CONFIG = "screenConfig";
 
 	protected OsmandApplication app;
 	protected OsmandSettings settings;

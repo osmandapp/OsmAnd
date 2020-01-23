@@ -52,10 +52,6 @@ import java.io.File;
 import java.util.List;
 
 import static net.osmand.plus.UiUtilities.CompoundButtonType.TOOLBAR;
-import static net.osmand.plus.profiles.EditProfileFragment.MAP_CONFIG;
-import static net.osmand.plus.profiles.EditProfileFragment.OPEN_CONFIG_ON_MAP;
-import static net.osmand.plus.profiles.EditProfileFragment.SCREEN_CONFIG;
-import static net.osmand.plus.profiles.EditProfileFragment.SELECTED_ITEM;
 
 public class ConfigureProfileFragment extends BaseSettingsFragment implements CopyAppModePrefsListener, ResetAppModePrefsListener {
 
@@ -248,7 +244,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 
 		Intent intent = new Intent(ctx, MapActivity.class);
 		intent.putExtra(OPEN_CONFIG_ON_MAP, MAP_CONFIG);
-		intent.putExtra(SELECTED_ITEM, getSelectedAppMode().getStringKey());
+		intent.putExtra(APP_MODE_KEY, getSelectedAppMode().getStringKey());
 		configureMap.setIntent(intent);
 	}
 
@@ -262,7 +258,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 
 		Intent intent = new Intent(ctx, MapActivity.class);
 		intent.putExtra(OPEN_CONFIG_ON_MAP, SCREEN_CONFIG);
-		intent.putExtra(SELECTED_ITEM, getSelectedAppMode().getStringKey());
+		intent.putExtra(APP_MODE_KEY, getSelectedAppMode().getStringKey());
 		configureMap.setIntent(intent);
 	}
 

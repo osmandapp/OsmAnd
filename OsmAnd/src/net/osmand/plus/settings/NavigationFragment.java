@@ -1,5 +1,6 @@
 package net.osmand.plus.settings;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.preference.Preference;
 import android.support.v7.preference.SwitchPreferenceCompat;
@@ -10,6 +11,7 @@ import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.profiles.ProfileDataObject;
 import net.osmand.plus.profiles.RoutingProfileDataObject;
 import net.osmand.plus.profiles.RoutingProfileDataObject.RoutingProfilesResources;
 import net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment;
@@ -18,7 +20,9 @@ import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
 import net.osmand.router.GeneralRouter;
 import net.osmand.util.Algorithms;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.DIALOG_TYPE;
@@ -184,6 +188,17 @@ public class NavigationFragment extends BaseSettingsFragment {
 			}
 		}
 		return profilesObjects;
+	}
+
+	public static List<ProfileDataObject> getBaseProfiles(Context ctx) {
+		List<ProfileDataObject> profiles = new ArrayList<>();
+		for (ApplicationMode mode : ApplicationMode.getDefaultValues()) {
+			if (mode != ApplicationMode.DEFAULT) {
+				profiles.add(new ProfileDataObject(mode.toHumanString(ctx), mode.getDescription(ctx),
+						mode.getStringKey(), mode.getIconRes(), false, mode.getIconColorInfo()));
+			}
+		}
+		return profiles;
 	}
 
 	private void setupVehicleParametersPref() {
