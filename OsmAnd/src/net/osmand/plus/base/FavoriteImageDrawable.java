@@ -173,7 +173,7 @@ public class FavoriteImageDrawable extends Drawable {
 	}
 
 	public static FavoriteImageDrawable getOrCreate(Context a, int color, boolean withShadow, GPXUtilities.WptPt pt) {
-		return getOrCreate(a, color, withShadow, false, null);
+		return getOrCreate(a, color, withShadow, false, getFavouriteFromWpt(a, pt));
 	}
 
 	public static FavoriteImageDrawable getOrCreateSyncedIcon(Context a, int color, FavouritePoint point) {
@@ -181,6 +181,15 @@ public class FavoriteImageDrawable extends Drawable {
 	}
 
 	public static FavoriteImageDrawable getOrCreateSyncedIcon(Context a, int color, GPXUtilities.WptPt pt) {
-		return getOrCreate(a, color, false, true, null);
+		return getOrCreate(a, color, false, true, getFavouriteFromWpt(a, pt));
+	}
+
+	private static FavouritePoint getFavouriteFromWpt(Context a, GPXUtilities.WptPt pt) {
+		FavouritePoint point = null;
+		if (pt != null) {
+			point = new FavouritePoint(pt.getLatitude(), pt.getLongitude(), pt.name, pt.category);
+			point.setIconIdFromName(a, pt.getIconName());
+		}
+		return point;
 	}
 }

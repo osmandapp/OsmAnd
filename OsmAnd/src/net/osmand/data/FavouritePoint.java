@@ -18,7 +18,6 @@ public class FavouritePoint implements Serializable, LocationPoint {
 
 	private static final String HIDDEN = "hidden";
 	private static final String ADDRESS_EXTENSION = "address";
-	private static final String ICON_NAME_EXTENSION = "icon_name";
 
 	protected String name = "";
 	protected String description;
@@ -96,6 +95,10 @@ public class FavouritePoint implements Serializable, LocationPoint {
 
 	public void setIconId(int iconId) {
 		this.iconId = iconId;
+	}
+
+	public void setIconIdFromName(Context ctx, String iconName) {
+		this.iconId = ctx.getResources().getIdentifier(iconName, "drawable", ctx.getPackageName());
 	}
 
 	public boolean isSpecialPoint() {
@@ -293,9 +296,9 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		fp.setColor(pt.getColor(0));
 		fp.setVisible(!pt.getExtensionsToRead().containsKey(HIDDEN));
 		fp.setAddress(pt.getExtensionsToRead().get(ADDRESS_EXTENSION));
-		String iconName = pt.getExtensionsToRead().get(ICON_NAME_EXTENSION);
+		String iconName = pt.getIconName();
 		if (iconName != null) {
-			fp.setIconId(ctx.getResources().getIdentifier(iconName, "drawable", ctx.getPackageName()));
+			fp.setIconIdFromName(ctx, iconName);
 		}
 		return fp;
 	}
@@ -311,7 +314,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 			pt.getExtensionsToWrite().put(ADDRESS_EXTENSION, getAddress());
 		}
 		if (iconId != 0) {
-			pt.getExtensionsToWrite().put(ICON_NAME_EXTENSION, ctx.getResources().getResourceEntryName(iconId));
+			pt.setIconName(ctx.getResources().getResourceEntryName(iconId));
 		}
 		if (getColor() != 0) {
 			pt.setColor(getColor());
