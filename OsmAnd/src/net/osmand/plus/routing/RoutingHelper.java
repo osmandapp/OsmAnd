@@ -57,6 +57,7 @@ public class RoutingHelper {
 	private List<LatLon> intermediatePoints;
 	private Location lastProjection;
 	private Location lastFixedLocation;
+	private LatLon lastStartingLocation = null;
 
 	private static final int RECALCULATE_THRESHOLD_COUNT_CAUSING_FULL_RECALCULATE = 3;
 	private static final int RECALCULATE_THRESHOLD_CAUSING_FULL_RECALCULATE_INTERVAL = 2*60*1000;
@@ -174,6 +175,7 @@ public class RoutingHelper {
 
 	public synchronized void setFinalAndCurrentLocation(LatLon finalLocation, List<LatLon> intermediatePoints, Location currentLocation){
 		RouteCalculationResult previousRoute = route;
+		setLastStartingLocation(currentLocation);
 		clearCurrentRoute(finalLocation, intermediatePoints);
 		// to update route
 		setCurrentLocation(currentLocation, false, previousRoute, true);
@@ -258,6 +260,17 @@ public class RoutingHelper {
 
 	public LatLon getFinalLocation() {
 		return finalLocation;
+	}
+
+	public void setLastStartingLocation(Location nextStartLocation) {
+		LatLon start = new LatLon(nextStartLocation.getLatitude(), nextStartLocation.getLongitude());
+		if (lastStartingLocation == null) {
+			lastStartingLocation = new LatLon(nextStartLocation.getLatitude(), nextStartLocation.getLongitude());
+			app.getMapViewTrackingUtilities().detectDrivingRegion(lastStartingLocation);
+		} else if (MapUtils.getDistance(start, lastStartingLocation) > 100000) {
+			lastStartingLocation = start;
+			app.getMapViewTrackingUtilities().detectDrivingRegion(lastStartingLocation);
+		}
 	}
 
 	public List<LatLon> getIntermediatePoints() {

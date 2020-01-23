@@ -155,7 +155,7 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		return movingToMyLocation;
 	}
 
-	private void detectDrivingRegion(final LatLon latLon) {
+	public void detectDrivingRegion(final LatLon latLon) {
 		new DetectDrivingRegionTask(app).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, latLon);
 	}
 

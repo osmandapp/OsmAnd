@@ -746,9 +746,11 @@ public class OsmandRegions {
 					boolean isRegion = true;
 					for (int i = 0; i < o.getTypes().length; i++) {
 						TagValuePair tp = o.getMapIndex().decodeType(o.getTypes()[i]);
-						if ("boundary".equals(tp.value)) {
-							isRegion = false;
-							break;
+						if (o.getTypes().length > 1) {
+							if ("boundary".equals(tp.value)) {
+								isRegion = false;
+								break;
+							}
 						}
 					}
 					WorldRegion downloadRegion = getRegionData(getFullName(o));
