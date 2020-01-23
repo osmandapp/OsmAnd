@@ -98,7 +98,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 	}
 
 	public void setIconIdFromName(Context ctx, String iconName) {
-		this.iconId = ctx.getResources().getIdentifier(iconName, "drawable", ctx.getPackageName());
+		this.iconId = ctx.getResources().getIdentifier("mx_" + iconName, "drawable", ctx.getPackageName());
 	}
 
 	public boolean isSpecialPoint() {
@@ -314,7 +314,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 			pt.getExtensionsToWrite().put(ADDRESS_EXTENSION, getAddress());
 		}
 		if (iconId != 0) {
-			pt.setIconName(ctx.getResources().getResourceEntryName(iconId));
+			pt.setIconName(ctx.getResources().getResourceEntryName(iconId).substring(3));
 		}
 		if (getColor() != 0) {
 			pt.setColor(getColor());
