@@ -34,7 +34,7 @@
 		android:persistent="false"
 		android:summary="@string/map_look_descr"
 		android:title="@string/configure_map"
-		tools:icon="@drawable/ic_action_layers_dark" />
+		tools:icon="@drawable/ic_action_layers" />
 
 	<Preference
 		android:key="configure_screen"
