@@ -743,19 +743,8 @@ public class OsmandRegions {
 			while (it.hasNext()) {
 				BinaryMapDataObject o = it.next();
 				if (o.getTypes() != null) {
-					boolean isRegion = true;
-					for (int i = 0; i < o.getTypes().length; i++) {
-						TagValuePair tp = o.getMapIndex().decodeType(o.getTypes()[i]);
-						if (o.getTypes().length > 1) {
-							if ("boundary".equals(tp.value)) {
-								isRegion = false;
-								break;
-							}
-						}
-					}
 					WorldRegion downloadRegion = getRegionData(getFullName(o));
-					if (!isRegion
-							|| downloadRegion == null
+					if ( downloadRegion == null
 							|| !downloadRegion.isRegionMapDownload()
 							|| !contain(o, point31x, point31y)) {
 						it.remove();
