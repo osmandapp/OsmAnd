@@ -1053,6 +1053,7 @@ public class ImportHelper {
 					fp.setDescription(p.desc);
 				}
 				fp.setColor(p.getColor(0));
+				fp.setIconIdFromName(app, p.getIconName());
 				favourites.add(fp);
 			}
 		}
