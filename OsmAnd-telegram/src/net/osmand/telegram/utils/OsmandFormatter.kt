@@ -1,6 +1,7 @@
 package net.osmand.telegram.utils
 
 import android.content.Context
+import androidx.annotation.StringRes
 import net.osmand.telegram.R
 import net.osmand.telegram.TelegramApplication
 import java.text.DateFormatSymbols
@@ -106,17 +107,32 @@ object OsmandFormatter {
 		}
 	}
 
-	fun getListItemLiveTimeDescr(ctx: TelegramApplication, lastUpdated: Int, prefix: String = ""): String {
+	fun getListItemLiveTimeDescr(
+		ctx: TelegramApplication,
+		lastUpdated: Int, @StringRes dateRes: Int, @StringRes durationRes: Int
+	): String {
 		return if (lastUpdated > 0) {
 			val duration = System.currentTimeMillis() / 1000 - lastUpdated
 			when {
-				duration > MIN_DURATION_FOR_DATE_FORMAT -> prefix + getFormattedDate(lastUpdated.toLong())
-				duration > 0 -> prefix + getFormattedDuration(ctx, duration) + " " + ctx.getString(R.string.time_ago)
+				duration > MIN_DURATION_FOR_DATE_FORMAT -> ctx.getString(dateRes, getFormattedDate(lastUpdated.toLong()))
+				duration > 0 -> ctx.getString(durationRes, getFormattedDuration(ctx, duration))
 				else -> ""
 			}
-		} else {
-			""
-		}
+		} else ""
+	}
+
+	fun getListItemShortLiveTimeDescr(
+		ctx: TelegramApplication,
+		lastUpdated: Int, @StringRes durationRes: Int
+	): String {
+		return if (lastUpdated > 0) {
+			val duration = System.currentTimeMillis() / 1000 - lastUpdated
+			when {
+				duration > MIN_DURATION_FOR_DATE_FORMAT -> getFormattedDate(lastUpdated.toLong())
+				duration > 0 -> ctx.getString(durationRes, getFormattedDuration(ctx, duration))
+				else -> ""
+			}
+		} else ""
 	}
 
 	fun calculateRoundedDist(distInMeters: Double, ctx: TelegramApplication): Double {
