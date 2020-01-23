@@ -1082,7 +1082,7 @@
     <string name="rendering_attr_hideWaterPolygons_name">Hide water</string>
     <string name="routing_attr_allow_motorway_name">Use motorways</string>
     <string name="routing_attr_allow_motorway_description">Allows motorways.</string>
-    <string name="upload_osm_note_description">Upload your OSM note anonymously or by using your OSM.org profile.</string>
+    <string name="upload_osm_note_description">Upload your OSM note anonymously or by using your OpenStreetMap.org profile.</string>
     <string name="wiki_around">Nearby Wikipedia articles</string>
     <string name="search_map_hint">City or region</string>
     <string name="route_roundabout_short">Take %1$d exit and go</string>
@@ -1738,8 +1738,8 @@
     <string name="osmand_distance_planning_plugin_description">Create paths by tapping the map, or by using or modifying existing GPX files, to plan a trip and measure the distance between points. The result can be saved as a GPX file to use later for guidance.</string>
     <string name="shared_string_accessibility">Accessibility</string>
     <string name="osmand_accessibility_description">Makes the device\'s accessibility features directly available in OsmAnd. It facilitates e.g. adjusting the speech rate for text-to-speech voices, configuring D-pad navigation, using a trackball for zoom control, or text-to-speech feedback, for example to auto announce your position.</string>
-    <string name="osm_settings">OSM editing</string>
-    <string name="osm_editing_plugin_description">Make OSM contributions like creating or modifying OSM POI objects, opening or commenting OSM notes, and contributing recorded GPX files in OsmAnd by supplying your username and password. OSM.org is a community driven, global public domain mapping project.</string>
+    <string name="osm_settings">OpenStreetMap editing</string>
+    <string name="osm_editing_plugin_description">Make OSM contributions like creating or modifying OSM POI objects, opening or commenting OSM notes, and contributing recorded GPX files in OsmAnd by supplying your username and password. OpenStreetMap.org is a community driven, global public domain mapping project.</string>
     <string name="osmand_development_plugin_description">Settings for development and debugging features, like navigation simulation, rendering performance, or voice prompting. Intended for developers, not needed for normal app use.</string>
     <string name="debugging_and_development">OsmAnd development</string>
     <string name="rename_failed">Renaming failed.</string>
