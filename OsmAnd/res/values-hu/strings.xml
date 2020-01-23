@@ -59,7 +59,7 @@
     <string name="zoom_by_trackball_descr">Térképnagyítás vízszintes \'trackball\' mozgatással.</string>
     <string name="zoom_by_trackball">\'trackball\' használata térképnagyításhoz</string>
     <string name="accessibility_preferences_descr">Akadálymentességgel kapcsolatos beállítások.</string>
-    <string name="shared_string_accessibility">Kisegítő lehetősége</string>
+    <string name="shared_string_accessibility">Kisegítő lehetőségek</string>
     <string name="rendering_out_of_memory">Nincs elég folyamatmemória a kijelölt terület megjelenítéséhez</string>
     <string name="use_fluorescent_overlays">Fluoreszkáló rátétrétegek</string>
     <string name="use_fluorescent_overlays_descr">Élénk színek használata az útvonalak megjelenítéséhez.</string>
@@ -3248,7 +3248,7 @@ Ha szereted az OsmAndot és az OSM-et, és szeretnéd támogatni a fejlődésük
     <string name="rendering_attr_piste_difficulty_undefined_name">Meghatározatlan</string>
     <string name="routeInfo_piste_difficulty_name">Sípálya nehézsége</string>
     <string name="rendering_value_thick_name">Vastag</string>
-    <string name="desert_render_descr">Sivatagokhoz és más ritkán lakott területekhez.</string>
+    <string name="desert_render_descr">Sivatagokhoz és más ritkán lakott területekhez. Részletesebb.</string>
     <string name="quick_action_need_to_add_item_to_list">Adjon legalább egy elemet a „Gyorsművelet” beállításainál található listához</string>
     <string name="routing_attr_piste_type_downhill_name">Alpesi sí/lesiklás</string>
     <string name="routing_attr_piste_type_downhill_description">Alpesi vagy lesikló sípályák és a felvonókhoz vezető utak</string>
@@ -3447,4 +3447,5 @@ Ha szereted az OsmAndot és az OSM-et, és szeretnéd támogatni a fejlődésük
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Az ikon csak navigáció vagy mozgás közben lesz látható.</string>
     <string name="select_map_icon_descr">A térképikon csak a térképen jelenik meg, navigáció közben pedig navigációs ikonra vált.</string>
+    <string name="logcat_buffer_descr">Az alkalmazás részletes naplóinak ellenőrzése és megosztása</string>
 </resources>

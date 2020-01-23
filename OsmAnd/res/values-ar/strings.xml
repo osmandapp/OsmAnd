@@ -2517,7 +2517,7 @@
     <string name="mark_passed">علامة مُجتازة</string>
     <string name="empty_state_osm_edits">إنشاء أو تعديل عناصر OSM</string>
     <string name="empty_state_osm_edits_descr">أنشئ أو عدل نقاط الاهتمام، افتح أو علق على ملاحظات OSM أو ساهم بمسارات GPX مسجلة.</string>
-    <string name="shared_string_deleted">حُذف</string>
+    <string name="shared_string_deleted">حذف</string>
     <string name="shared_string_edited">مُعدلة</string>
     <string name="shared_string_added">تمت الإضافة</string>
     <string name="modify_the_search_query">تعديل طلب البحث.</string>
@@ -3061,11 +3061,11 @@
     <string name="rendering_attr_winter_road_name">طريق شتوي</string>
     <string name="rendering_attr_ice_road_name">طريق جليد</string>
     <string name="routeInfo_winter_ice_road_name">طرق الشتاء والجليد</string>
-    <string name="rendering_attr_tracktype_grade1_name">صلبة (ممهدة)</string>
-    <string name="rendering_attr_tracktype_grade2_name">صلبة (غير ممهدة)</string>
+    <string name="rendering_attr_tracktype_grade1_name">الصلبة (المعبدة)</string>
+    <string name="rendering_attr_tracktype_grade2_name">الصلبة (غير المعبدة)</string>
     <string name="rendering_attr_tracktype_grade3_name">صلبة في الغالب</string>
     <string name="rendering_attr_tracktype_grade4_name">لينة في الغالب</string>
-    <string name="rendering_attr_tracktype_grade5_name">لين</string>
+    <string name="rendering_attr_tracktype_grade5_name">لينة</string>
     <string name="routeInfo_tracktype_name">متانة السطح</string>
     <string name="shared_string_file_is_saved">%s تم الحفظ</string>
     <string name="shared_string_open_track">مسار مفتوح</string>
@@ -3362,4 +3362,6 @@
     <string name="select_nav_icon_descr">سترى الأيقونة فقط أثناء الملاحة أو أثناء التحرك.</string>
     <string name="button_rate">معدل</string>
     <string name="select_map_icon_descr">تظهر أيقونة الخريطة فقط على الخريطة ، وتتغير أثناء التنقل إلى أيقونة التنقل.</string>
+    <string name="logcat_buffer_descr">تحقق وتبادل سجلات مفصلة من التطبيق</string>
+    <string name="search_offline_geo_error">تعذر تحليل الهدف الجغرافي \'%s\'.</string>
 </resources>
