@@ -40,6 +40,7 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
+import net.osmand.plus.profiles.ExportImportProfileBottomSheet;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
 import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet;
 import net.osmand.plus.skimapsplugin.SkiMapsPlugin;
@@ -288,22 +289,6 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 				isNightMode() ? R.color.active_color_primary_dark : R.color.active_color_primary_light));
 	}
 
-	private void shareProfile(@NonNull File file, @NonNull ApplicationMode profile) {
-		try {
-			Context ctx = requireContext();
-			final Intent sendIntent = new Intent();
-			sendIntent.setAction(Intent.ACTION_SEND);
-			sendIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.exported_osmand_profile, profile.toHumanString(ctx)));
-			sendIntent.putExtra(Intent.EXTRA_STREAM, AndroidUtils.getUriForFile(getMyApplication(), file));
-			sendIntent.setType("*/*");
-			sendIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-			startActivity(sendIntent);
-		} catch (Exception e) {
-			app.showToastMessage(R.string.export_profile_failed);
-			LOG.error("Share profile error", e);
-		}
-	}
-
 	private void setupOsmandPluginsPref(PreferenceCategory preferenceCategory) {
 		Context ctx = getContext();
 		if (ctx == null) {
@@ -362,23 +347,14 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 				ResetProfilePrefsBottomSheet.showInstance(fragmentManager, prefId, this, false, getSelectedAppMode());
 			}
 		} else if (EXPORT_PROFILE.equals(prefId)) {
-			Context ctx = requireContext();
-			final ApplicationMode profile = getSelectedAppMode();
-			File tempDir = app.getAppPath(IndexConstants.TEMP_DIR);
-			if (!tempDir.exists()) {
-				tempDir.mkdirs();
+			FragmentManager fragmentManager = getFragmentManager();
+			if (fragmentManager != null) {
+				ExportImportProfileBottomSheet.showInstance(
+						fragmentManager,
+						ExportImportProfileBottomSheet.State.EXPORT,
+						this,
+						getSelectedAppMode());
 			}
-			String fileName = profile.toHumanString(ctx);
-			app.getSettingsHelper().exportSettings(tempDir, fileName, new SettingsHelper.SettingsExportListener() {
-				@Override
-				public void onSettingsExportFinished(@NonNull File file, boolean succeed) {
-					if (succeed) {
-						shareProfile(file, profile);
-					} else {
-						app.showToastMessage(R.string.export_profile_failed);
-					}
-				}
-			}, new ProfileSettingsItem(app.getSettings(), profile));
 		} else if (DELETE_PROFILE.equals(prefId)) {
 			onDeleteProfileClick();
 		}

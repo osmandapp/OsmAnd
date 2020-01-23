@@ -11,6 +11,11 @@
 	Thx - Hardy
 
 -->
+    <string name="shared_string_routing">Routing</string>
+    <string name="shared_string_custom_rendering_style">Custom rendering style</string>
+    <string name="shared_string_include_data">Include additional data</string>
+    <string name="import_profile_dialog_description">The imported profile contains additional data. Click Import to import only profile data or select additional data to import.</string>
+    <string name="export_profile_dialog_description">You can select additional data to export along with the profile.</string>
     <string name="file_does_not_contain_routing_rules">\'%1$s\' file doesn\'t contain routing rules, please choose another file.</string>
     <string name="not_support_file_type_with_ext">Not supported file type. You need to select a file with %1$s extension.</string>
     <string name="import_from_file">Import from file</string>

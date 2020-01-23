@@ -7,11 +7,21 @@ import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
+
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.ApplicationMode.ApplicationModeBuilder;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
+import net.osmand.plus.poi.PoiUIFilter;
+import net.osmand.plus.profiles.AdditionalDataWrapper;
+import net.osmand.plus.profiles.ExportImportProfileBottomSheet;
+import net.osmand.plus.quickaction.QuickAction;
+import net.osmand.plus.quickaction.QuickActionFactory;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -125,6 +135,7 @@ public class SettingsHelper {
 		PLUGIN,
 		DATA,
 		FILE,
+		QUICK_ACTION
 	}
 
 	public abstract static class SettingsItem {
@@ -457,6 +468,10 @@ public class SettingsHelper {
 			}
 		}
 
+		public ApplicationMode getAppMode() {
+			return appMode;
+		}
+
 		@Override
 		void writeToJson(@NonNull JSONObject json) throws JSONException {
 			super.writeToJson(json);
@@ -693,6 +708,98 @@ public class SettingsHelper {
 		}
 	}
 
+	public static class QuickActionSettingsItem extends OsmandSettingsItem {
+
+		private List<QuickAction> quickActions;
+
+		public QuickActionSettingsItem(@NonNull OsmandSettings settings,
+									   @NonNull List<QuickAction> quickActions) {
+			super(SettingsItemType.QUICK_ACTION, settings);
+			this.quickActions = quickActions;
+		}
+
+		public QuickActionSettingsItem(@NonNull OsmandSettings settings,
+									   @NonNull JSONObject jsonObject) throws JSONException {
+			super(SettingsItemType.QUICK_ACTION, settings, jsonObject);
+			readFromJson(jsonObject);
+		}
+
+		public List<QuickAction> getQuickActions() {
+			return quickActions;
+		}
+
+		@NonNull
+		@Override
+		public String getName() {
+			return "quick_actions";
+		}
+
+		@NonNull
+		@Override
+		public String getPublicName(@NonNull Context ctx) {
+			return null;
+		}
+
+		@NonNull
+		@Override
+		public String getFileName() {
+			return getName() + ".json";
+		}
+
+		@NonNull
+		@Override
+		SettingsItemReader getReader() {
+			return new OsmandSettingsItemReader(this, getSettings()) {
+
+				@Override
+				protected void readPreferenceFromJson(@NonNull OsmandPreference<?> preference, @NonNull JSONObject json) throws JSONException {
+
+				}
+
+				@Override
+				public void readFromStream(@NonNull InputStream inputStream) throws IOException, IllegalArgumentException {
+					StringBuilder buf = new StringBuilder();
+					try {
+						BufferedReader in = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
+						String str;
+						while ((str = in.readLine()) != null) {
+							buf.append(str);
+						}
+					} catch (IOException e) {
+						throw new IOException("Cannot read json body", e);
+					}
+					String jsonStr = buf.toString();
+					if (Algorithms.isEmpty(jsonStr)) {
+						throw new IllegalArgumentException("Cannot find json body");
+					}
+					final JSONObject json;
+					String itemsString;
+					try {
+						json = new JSONObject(jsonStr);
+						itemsString = json.getString("items");
+						getSettings().QUICK_ACTION_LIST.set(itemsString);
+						QuickActionFactory factory = new QuickActionFactory();
+						quickActions = factory.parseActiveActionsList(itemsString);
+					} catch (JSONException e) {
+						throw new IllegalArgumentException("Json parse error", e);
+					}
+				}
+			};
+		}
+
+		@NonNull
+		@Override
+		SettingsItemWriter getWriter() {
+			return new OsmandSettingsItemWriter(this, getSettings()) {
+				@Override
+				protected void writePreferenceToJson(@NonNull OsmandPreference<?> preference, @NonNull JSONObject json) throws JSONException {
+					QuickActionFactory factory = new QuickActionFactory();
+					json.put("items", new JSONArray(factory.quickActionListToString(quickActions)));
+				}
+			};
+		}
+	}
+
 	private static class SettingsItemsFactory {
 
 		private OsmandApplication app;
@@ -748,6 +855,9 @@ public class SettingsHelper {
 					break;
 				case FILE:
 					item = new FileSettingsItem(app, json);
+					break;
+				case QUICK_ACTION:
+					item = new QuickActionSettingsItem(settings, json);
 					break;
 			}
 			return item;
