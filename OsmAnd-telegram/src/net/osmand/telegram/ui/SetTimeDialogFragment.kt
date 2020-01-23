@@ -349,7 +349,7 @@ class SetTimeDialogFragment : BaseDialogFragment(), TelegramLocationListener, Te
 				if (message != null && content is TdApi.MessageLocation && (location != null && content.location != null)) {
 					val lastUpdated = OsmandLocationUtils.getLastUpdatedTime(message)
 					holder.description?.visibility = View.VISIBLE
-					holder.description?.text = OsmandFormatter.getListItemLiveTimeDescr(app, lastUpdated)
+					holder.description?.text = OsmandFormatter.getListItemShortLiveTimeDescr(app, lastUpdated,R.string.duration_ago)
 
 					holder.locationViewContainer?.visibility = if (lastUpdated > 0) View.VISIBLE else View.GONE
 					locationViewCache.outdatedLocation = System.currentTimeMillis() / 1000 -
