@@ -3459,5 +3459,5 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="osm_edits_view_descr">Podeu veure totes les vostres edicions no enviades o els errors OSM a %1$s. Els punts enviats no es mostren a OsmAnd.</string>
     <string name="select_nav_icon_descr">Només veureu la icona mentre navegueu o us mogueu.</string>
     <string name="select_map_icon_descr">La icona de mapa només es mostra al mapa i es canvia a la icona de navegació quan durant aquesta.</string>
-    <string name="logcat_buffer_descr">Aquí podeu veure i compartir els enregistraments de l\'aplicació</string>
+    <string name="logcat_buffer_descr">Valida i comparteix enregistraments detallats de l\'aplicació</string>
 </resources>
