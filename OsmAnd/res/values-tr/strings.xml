@@ -548,7 +548,7 @@
     <string name="local_openstreetmap_settings_descr">Cihaz veri tabanınızdaki OSM-POI\'lerini/notlarını görüntüleyin ve yönetin.</string>
     <string name="live_monitoring_interval_descr">Çevrim içi izleme aralığını belirtin.</string>
     <string name="live_monitoring_interval">Canlı izleme aralığı</string>
-    <string name="live_monitoring_url_descr">Parametre sözdizimi ile web adresini belirtin: enlem={0}, boylam={1}, zaman damgası={2}, hdop={3}, rakım={4}, Hız={5}, bearing={6}.</string>
+    <string name="live_monitoring_url_descr">Parametre sözdizimi ile web adresini belirtin: enlem={0}, boylam={1}, zaman damgası={2}, hdop={3}, rakım={4}, hız={5}, bearing={6}.</string>
     <string name="live_monitoring_url">Web adresinden izlemeyi canlı izlemek</string>
     <string name="gpx_monitoring_disabled_warn">Track\'ın kaydını GPX widget\'ı kullanarak ya da \'Seyahat kaydetme\' ayarları aracılığıyla tut.</string>
     <string name="show_current_gpx_title">Geçerli izi göster</string>
@@ -2000,7 +2000,7 @@
     <string name="quick_action_showhide_osmbugs_title">OSM notlarını göster ya da gizle</string>
     <string name="quick_action_osmbugs_show">OSM notlarını göster</string>
     <string name="quick_action_osmbugs_hide">OSM notlarını gizle</string>
-    <string name="quick_action_showhide_osmbugs_descr">OSM notlarını haritada gösterme veya gizleme butonu.</string>
+    <string name="quick_action_showhide_osmbugs_descr">OSM notlarını haritada göstermek veya gizlemek için bir buton.</string>
     <string name="sorted_by_distance">Mesafeye göre sıralandı</string>
     <string name="quick_action_btn_tutorial_descr">Butona uzunca basıp sürüklemek, ekrandaki konumunu değiştirir.</string>
     <string name="restart_search">Aramayı yeniden başlat</string>
@@ -2302,9 +2302,9 @@
     <string name="map_widget_ruler_control">Yarıçap cetveli</string>
     <string name="mapillary_action_descr">Sokak düzeyinde görüşünüzü Mapillary ile paylaşın.</string>
     <string name="type_city_town">Şehir/kasaba/bölgeyi yazın</string>
-    <string name="quick_action_auto_zoom_desc">Hızınıza göre otomatik yakınlaştırma özelliğini açma veya kapatma butonu.</string>
+    <string name="quick_action_auto_zoom_desc">Hız kontrollü otomatik yakınlaştırma özelliğini açmak veya kapatmak için buton.</string>
     <string name="quick_action_add_first_intermediate">Seyahatteki ilk ara-noktayı ekleyin</string>
-    <string name="quick_action_add_destination_desc">Önceki seçilmiş hedefi son ara hedef haline getiren, ekranı rota hedefine ortalama butonu.</string>
+    <string name="quick_action_add_destination_desc">Ekranın rota hedefini ortalamasını sağlayan bir buton, önceden seçilen bir hedef son ara hedef haline gelecektir.</string>
     <string name="quick_action_replace_destination_desc">Önceden seçilen hedefi (varsa) değiştirerek ekranı yeni rota hedefine ortalama butonu.</string>
     <string name="quick_action_add_first_intermediate_desc">Ekranı ilk ara hedefe ortalama butonu.</string>
     <string name="right_side_navigation">Sağdan akan trafik</string>
@@ -2602,7 +2602,7 @@
     <string name="apply_to_all_profiles">Tüm profillere uygula</string>
     <string name="start_up_message_pref">Başlangıç mesajı</string>
     <string name="analytics_pref_title">Analytics</string>
-    <string name="turn_screen_on_info">Navigasyon sırasında kilit ekranındaki harita.</string>
+    <string name="turn_screen_on_info">Navigasyon sırasında haritayı kilit ekranında göster.</string>
     <string name="route_parameters_info">Seçili profildeki yönlendirme ayarları \"%1$s\".</string>
     <string name="wake_time">Uyanma zamanı</string>
     <string name="units_and_formats">Birimler ve formatlar</string>
@@ -2934,7 +2934,7 @@
     <string name="step_by_step">Adım adım</string>
     <string name="exit_at">Burada çık</string>
     <string name="sit_on_the_stop">Durakta bin</string>
-    <string name="quick_action_show_hide_gpx_tracks_descr">Seçilen GPX yollarını haritada gösterme veya gizleme butonu.</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Seçilen GPX yollarını haritada göstermek veya gizlemek için bir buton.</string>
     <string name="add_destination_query">Lütfen önce hedefi ayarlayın</string>
     <string name="release_3_3">• Yeni \'Yol Tarifleri\' ekranı: Ev ve İş hedefi düğmelerini, \'önceki rota\' kısayolunu, etkin GPX yol-izlerinin ve işaretleyicilerin listesini, arama geçmişini görüntüler
 \n
@@ -3291,8 +3291,8 @@
     <string name="shared_string_memory_used_mb_desc">Kullanılan %1$s MB</string>
     <string name="shared_string_memory_used_kb_desc">Kullanılan %1$s kB</string>
     <string name="contour_lines_and_hillshade">Eş yükselti eğrileri ve tepe gölgeleri</string>
-    <string name="routing_attr_prefer_unpaved_name">Asfaltsız rotaları tercih et</string>
-    <string name="routing_attr_prefer_unpaved_description">Asfaltsız rotaları tercih et.</string>
+    <string name="routing_attr_prefer_unpaved_name">Asfaltsız yolları tercih et</string>
+    <string name="routing_attr_prefer_unpaved_description">Asfaltsız yolları tercih et.</string>
     <string name="update_all_maps">Tüm haritaları güncelle</string>
     <string name="update_all_maps_q">Tüm (%1$d) haritaları güncellemek istediğinizden emin misiniz\?</string>
     <string name="release_3_5">• Güncellenmiş uygulama ve profil ayarları. Ayarlar türlerine göre düzenlendi. Her profil ayrı olarak özelleştirilebilir. 
@@ -3314,14 +3314,14 @@
 \n</string>
     <string name="apply_preference_to_all_profiles">Bu değişikliği tümüne veya yalnızca seçili profile uygulayabilirsiniz.</string>
     <string name="shared_preference">Paylaşılan</string>
-    <string name="routing_attr_driving_style_prefer_unpaved_name">Asfaltsız rotaları tercih et</string>
-    <string name="routing_attr_driving_style_prefer_unpaved_description">Kaplamasız arazi üzerinden yönlendir.</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_name">Asfaltsız yolları tercih et</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_description">Yönlendirme için asfaltsız yolları asfaltlılara tercih et.</string>
     <string name="layer_osm_edits">OSM düzenlemeleri</string>
     <string name="quick_action_contour_lines_descr">Eş yükselti eğrilerini haritada gösterme veya gizleme butonu.</string>
     <string name="quick_action_contour_lines_show">Eş yükselti eğrilerini göster</string>
     <string name="quick_action_contour_lines_hide">Eş yükselti eğrilerini gizle</string>
     <string name="quick_action_show_hide_contour_lines">Eş yükselti eğrilerini göster/gizle</string>
-    <string name="quick_action_hillshade_descr">Haritada tepe gölgelemesini gösterme veya gizleme butonu.</string>
+    <string name="quick_action_hillshade_descr">Haritada tepe gölgelerini göstermek veya gizlemek için bir buton.</string>
     <string name="quick_action_hillshade_show">Tepe gölgesini göster</string>
     <string name="quick_action_hillshade_hide">Tepe gölgesini gizle</string>
     <string name="quick_action_show_hide_hillshade">Tepe gölgesini göster/gizle</string>
@@ -3332,13 +3332,13 @@
     <string name="overwrite_profile_q">\'%1$s\' zaten var. Üzerine yazılsın mı\?</string>
     <string name="export_profile_failed">Profil dışa aktarılamadı.</string>
     <string name="profile_import">Profili içe aktar</string>
-    <string name="profile_import_descr">Dosyayı OsmAnd\'da açarak bir profil ekleyin.</string>
+    <string name="profile_import_descr">Dosyasını OsmAnd ile açarak bir profil ekleyin.</string>
     <string name="file_import_error">%1$s içe aktarma hatası: %2$s</string>
     <string name="file_imported_successfully">%1$s içe aktarıldı.</string>
     <string name="rendering_value_white_name">Beyaz</string>
     <string name="swap_two_places">%1$s ile %2$s\'i değiştir</string>
     <string name="route_start_point">Başlangıç noktası</string>
-    <string name="default_speed_dialog_msg">Bilinmeyen yol türleri için varış süresini tahmin eder ve tüm yollar için hızı sınırlar (rotayı değiştirebilir)</string>
+    <string name="default_speed_dialog_msg">Bilinmeyen yol türleri için varış zamanını tahmin eder ve tüm yollar için hızı sınırlar (güzergahı etkileyebilir)</string>
     <string name="track_saved">Yol izi kaydedildi</string>
     <string name="empty_filename">Dosya adı boş</string>
     <string name="shared_string_revert">Eski haline döndür</string>
@@ -3350,7 +3350,7 @@
     <string name="dialogs_and_notifications_descr">Açılır pencereleri, iletişim kutularını ve bildirimleri kontrol edin.</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_name">Düğüm ağları</string>
     <string name="suggested_maps">Önerilen haritalar</string>
-    <string name="suggested_maps_descr">Bu haritaların eklenti ile kullanılması gerekmektedir.</string>
+    <string name="suggested_maps_descr">Bu haritalar eklenti için gereklidir.</string>
     <string name="added_profiles">Eklenen profiller</string>
     <string name="added_profiles_descr">Eklenti tarafından eklenen profiller</string>
     <string name="shared_string_turn_off">Kapat</string>
@@ -3358,7 +3358,7 @@
     <string name="join_segments">Segmentleri birleştir</string>
     <string name="add_new_profile_q">\'%1$s\' yeni profil eklensin mi\?</string>
     <string name="save_heading">Başlığı dahil et</string>
-    <string name="save_heading_descr">İzleme sırasında her izleme noktasına başlığı kaydet.</string>
+    <string name="save_heading_descr">Kayıt sırasında her izleme noktasına başlığı kaydet.</string>
     <string name="distance_and_address">%1$s • %2$s</string>
     <string name="street_city">%1$s, %2$s</string>
     <string name="personal_category_name">Kişisel</string>
@@ -3367,18 +3367,18 @@
     <string name="desert_render_descr">Çöller ve diğer seyrek nüfuslu alanlar için. Daha ayrıntılı.</string>
     <string name="select_navigation_icon">Navigasyon simgesi</string>
     <string name="select_map_icon">Harita simgesi</string>
-    <string name="delete_profiles_descr">\"Uygula\"ya dokunmak, tüm profilleri kalıcı olarak siler.</string>
+    <string name="delete_profiles_descr">\'Uygula\'ya dokunmak, kaldırılan profilleri kalıcı olarak siler.</string>
     <string name="master_profile">Ana profil</string>
     <string name="select_color">Renk seç</string>
-    <string name="edit_profiles_descr">OsmAnd profilleri alt tarafa taşınabilir ancak silinemez. Kaldırmak için geri dönün.</string>
+    <string name="edit_profiles_descr">OsmAnd varsayılan profilleri silinemez, ancak (önceki ekranda) devre dışı bırakılabilir veya en altta sıralanabilir.</string>
     <string name="edit_profiles">Profilleri düzenle</string>
-    <string name="select_nav_profile_dialog_message">\'Navigasyon türü\', rota hesaplamaları için kuralları etkiler.</string>
+    <string name="select_nav_profile_dialog_message">\'Navigasyon türü\' rotaların nasıl hesaplandığını yönetir.</string>
     <string name="profile_appearance">Profil görünümü</string>
     <string name="choose_icon_color_name">Simge, renk ve isim</string>
     <string name="reorder_profiles">Profil listesini düzenle</string>
     <string name="selected_profile">Seçilen profil</string>
-    <string name="reset_confirmation_descr">%1$s\'e tıkladığınızda tüm değişikliklerinizi kaybedersiniz.</string>
-    <string name="reset_all_profile_settings_descr">Tüm profil ayarları kurulum anındaki varsayılanlarına dönecektir.</string>
+    <string name="reset_confirmation_descr">%1$s\'e dokunmak tüm değişikliklerinizi atacaktır.</string>
+    <string name="reset_all_profile_settings_descr">Tüm profil ayarları kurulum anındaki varsayılanlarına sıfırlayın.</string>
     <string name="reset_all_profile_settings">Tüm profil ayarları sıfırlansın mı\?</string>
     <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
     <string name="ltr_or_rtl_combine_via_space">%1$s %2$s</string>
@@ -3408,4 +3408,34 @@
     <string name="select_map_icon_descr">Harita simgesi yalnızca haritada gösterilir.</string>
     <string name="logcat_buffer_descr">Uygulamanın detaylı log kayıtlarını kontrol edin ve paylaşın</string>
     <string name="search_offline_geo_error">Geo intent \'%s\' ayrıştırılamadı.</string>
+    <string name="tracks_view_descr">Kayıtlı yollarınız %1$s veya OsmAnd klasöründe.</string>
+    <string name="multimedia_notes_view_descr">OSM notlarınız %1$s içindedir.</string>
+    <string name="permission_is_required">Bu seçeneği kullanmak için izin gereklidir.</string>
+    <string name="monitoring_min_speed_descr">Bu, belirli bir hızın altındaki noktaları kaydetmemek için bir düşük hızda kesme filtresidir. Bu, harita üzerinde görüntülendiğinde kaydedilen yolların daha düzgün görünmesini sağlayabilir.</string>
+    <string name="monitoring_min_speed_descr_side_effect">Yan etki: Kaydedilen yolunuzda minimum hız kriterinin karşılanmadığı tüm bölümler eksik olacaktır (örn. bisikletinizi dik bir tepeye doğru ittiğiniz yer). Ayrıca, molalar gibi dinlenme süreleri hakkında hiçbir bilgi olmayacaktır. Bunun, seyahatinizin toplam uzunluğunu, hareket zamanını veya ortalama hızınızı belirlemeye çalışırken olduğu gibi herhangi bir analiz veya işlem sonrası üzerinde etkileri vardır.</string>
+    <string name="monitoring_min_speed_descr_recommendation">Öneri: Önce minimum yer değiştirme kayıt filtresi (B) üzerinden hareket algılamayı kullanmayı deneyin, daha iyi sonuçlar üretebilir ve daha az veri kaybedersiniz. Kaydettiğiniz yollarınız düşük hızlarda gürültülü kalırsa, burada sıfır olmayan değerleri deneyin. Bazı ölçümlerin herhangi bir hız değeri bildirmeyebileceğini (bazı ağ tabanlı yöntemler) unutmayın, bu durumda hiçbir şey kaydetmezsiniz.</string>
+    <string name="monitoring_min_speed_descr_remark">Not: hız &gt; 0 kontrolü: Çoğu GPS yonga seti, yalnızca algoritma hareket halinde olduğunuzu belirlerse bir hız değeri bildirir ve değilseniz hiçbir şey bildirmez. Dolayısıyla bu filtrede &gt; 0 ayarını kullanmak bir anlamda GPS yongasetinin hareket algılamasını kullanır. Ancak burada kayıt zamanında filtrelenmemiş olsa bile, düzeltilen mesafeyi belirlemek için GPX analizimizde bu özelliği kullanmaya devam ediyoruz, yani bu alanda görüntülenen değer hareket halindeyken kaydedilen mesafedir.</string>
+    <string name="monitoring_min_accuracy_descr">Bu, yalnızca minimum doğruluk göstergesiyle ölçülen noktaları kaydedecektir (Android tarafından yonga setiniz için bildirildiği gibi metre/feet cinsinden). Doğruluk, tekrarlanan ölçümlerin dağılımı anlamına gelir ve ölçümlerinizin gerçek konumunuza ne kadar yakın olduğunu tanımlayan hassasiyetle doğrudan ilişkili değildir.</string>
+    <string name="monitoring_min_accuracy_descr_side_effect">Yan etki: Doğruluğa göre filtrelemenin bir sonucu olarak, örn. köprülerin altında, ağaçların altında, yüksek binalar arasında veya belirli hava koşullarında noktalar tamamen eksik olabilir.</string>
+    <string name="monitoring_min_accuracy_descr_recommendation">Öneri: Neyin kaydedileceğini ve kaydedilmeyeceğini tahmin etmek zordur, bu filtreyi kapatmak en iyisi olabilir.</string>
+    <string name="monitoring_min_accuracy_descr_remark">Not: GPS bir kayıttan hemen önce kapalıysa, ölçülen ilk noktanın doğruluğu azalabilir, bu nedenle kodumuzda bir nokta kaydetmeden önce bir saniye beklemek isteyebiliriz (veya art arda 3 noktanın en iyisini kaydedebiliriz, vs.), ancak bu henüz uygulanmadı.</string>
+    <string name="monitoring_min_distance_descr">Bu filtre, çok az gerçek hareketin meydana gelebileceği yerlerde aynı noktanın iki kere kaydedilmesini önler, sonrasında işlenmediğinde kaydedilen yolların daha güzel bir uzaysal görünümünü sağlar.</string>
+    <string name="monitoring_min_distance_descr_side_effect">Yan etkiler: Dinlenmedeki dönemler hiç kaydedilmez veya sadece bir nokta ile kaydedilir. Küçük (gerçek dünya) hareketler (örn. yolculuğunuzda olası bir sapmayı işaretlemek için yanlara doğru) filtrelenebilir. Dosyanız daha sonra işleme için daha az bilgi içerir ve kayıt sırasında açıkça gereksiz noktaları filtreleyerek daha kötü istatistiklere sahip olurken, kötü alım veya GPS yonga seti efektlerinin neden olduğu bozulmaları koruyabilir.</string>
+    <string name="monitoring_min_distance_descr_recommendation">Öneri: Bundan daha ince ayrıntıları yakalamanız gerekmiyorsa ve dinlenirken açıkça veri yakalamak istemiyorsanız, 5 metrelik bir ayar sizin için iyi çalışabilir.</string>
+    <string name="live_monitoring_time_buffer">Zaman tamponu</string>
+    <string name="live_monitoring_tracking_interval">İzleme aralığı</string>
+    <string name="live_monitoring_adress">Web adresi</string>
+    <string name="live_monitoring_adress_descr">Web adresini parametre sözdizimi ile belirtin: enlem={0}, boylam={1}, zaman damgası={2}, hdop={3}, rakım={4}, hız={5}, bearing={6}.</string>
+    <string name="monitoring_notification">Bildirim</string>
+    <string name="monitoring_min_speed">Minimum hız</string>
+    <string name="monitoring_min_accuracy">Minimum doğruluk</string>
+    <string name="monitoring_min_distance">Minimum yer değiştirme</string>
+    <string name="tracks_view_path">Menü — Yerlerim — İzlenen yollar</string>
+    <string name="multimedia_notes_view_path">Menü — Yerlerim — Notlar</string>
+    <string name="osm_edits_view_path">Menü — Yerlerim — OSM Düzenlemeleri</string>
+    <string name="reset_plugin_to_default">Eklenti ayarlarını varsayılana sıfırla</string>
+    <string name="multimedia_rec_split_title">Kaydedici bölmesi</string>
+    <string name="multimedia_use_system_camera">Sistem uygulamasını kullan</string>
+    <string name="multimedia_photo_play_sound">Kamera deklanşör sesi</string>
+    <string name="osm_authorization_success">Yetkilendirme başarılı</string>
 </resources>
