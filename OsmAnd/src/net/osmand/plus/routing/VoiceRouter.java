@@ -3,7 +3,6 @@ package net.osmand.plus.routing;
 
 import android.media.AudioManager;
 import android.media.SoundPool;
-import android.util.Log;
 
 import net.osmand.Location;
 import net.osmand.binary.RouteDataObject;
