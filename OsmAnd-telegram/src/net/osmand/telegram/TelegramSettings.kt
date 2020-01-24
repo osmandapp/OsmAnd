@@ -66,6 +66,7 @@ private val BUFFER_TIME = listOf(60 * 60L, 2 * 60 * 60L, 4 * 60 * 60L, 8 * 60 * 
 		12 * 60 * 60L, 24 * 60 * 60L)
 private const val BUFFER_TIME_INDEX = 0
 private const val BUFFER_TIME_KEY = "buffer_time"
+private const val FREE_TIMELINE_INFO_SHOWN_TIME_KEY = "free_timeline_info_shown_time"
 
 private const val SETTINGS_NAME = "osmand_telegram_settings"
 
@@ -163,6 +164,8 @@ class TelegramSettings(private val app: TelegramApplication) {
 	var proxyEnabled = false
 
 	var bufferTime = BUFFER_TIME[BUFFER_TIME_INDEX]
+
+	var freeTimelineInfoShownTime = 0L
 
 	init {
 		updatePrefs()
@@ -645,6 +648,8 @@ class TelegramSettings(private val app: TelegramApplication) {
 
 		edit.putLong(BUFFER_TIME_KEY, bufferTime)
 
+		edit.putLong(FREE_TIMELINE_INFO_SHOWN_TIME_KEY, freeTimelineInfoShownTime)
+
 		val jArray = convertShareChatsInfoToJson()
 		if (jArray != null) {
 			edit.putString(SHARE_CHATS_INFO_KEY, jArray.toString())
@@ -740,6 +745,8 @@ class TelegramSettings(private val app: TelegramApplication) {
 		proxyEnabled = prefs.getBoolean(PROXY_ENABLED, false)
 
 		bufferTime = prefs.getLong(BUFFER_TIME_KEY, BUFFER_TIME[BUFFER_TIME_INDEX])
+
+		freeTimelineInfoShownTime = prefs.getLong(FREE_TIMELINE_INFO_SHOWN_TIME_KEY, 0L)
 
 		try {
 			parseProxyPreferences(JSONObject(prefs.getString(PROXY_PREFERENCES_KEY, "")))

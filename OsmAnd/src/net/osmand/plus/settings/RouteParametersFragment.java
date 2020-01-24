@@ -206,7 +206,6 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 						switchPreferenceEx.setIcon(getRoutingPrefIcon(p.getId()));
 						switchPreferenceEx.setSummaryOn(R.string.shared_string_on);
 						switchPreferenceEx.setSummaryOff(R.string.shared_string_off);
-						switchPreferenceEx.setIconSpaceReserved(true);
 
 						screen.addPreference(switchPreferenceEx);
 					} else {
@@ -221,7 +220,6 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 						ListPreferenceEx listPreferenceEx = (ListPreferenceEx) createListPreferenceEx(pref.getId(), p.getPossibleValueDescriptions(), svlss, title, R.layout.preference_with_descr);
 						listPreferenceEx.setDescription(description);
 						listPreferenceEx.setIcon(getRoutingPrefIcon(p.getId()));
-						listPreferenceEx.setIconSpaceReserved(true);
 
 						screen.addPreference(listPreferenceEx);
 					}

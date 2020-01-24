@@ -3466,8 +3466,8 @@ Lon %2$s</string>
     <string name="live_monitoring_descr">Permite compartir a localización actual empregando a gravación da viaxe.</string>
     <string name="live_monitoring">Seguimento en liña</string>
     <string name="save_track_logging_accuracy">Precisión de rexistro</string>
-    <string name="tracks_view_descr">Podes atopar todas as túas pistas gravadas en Menú — Os meus lugares — Pista ou no cartafol OsmAnd empregando o xestor de ficheiros.</string>
-    <string name="multimedia_notes_view_descr">Podes atopar todas as túas notas en Menú - Os meus lugares - Notas</string>
+    <string name="tracks_view_descr">Podes atopar todas as túas pistas gravadas en %1$s ou no cartafol OsmAnd empregando o xestor de ficheiros.</string>
+    <string name="multimedia_notes_view_descr">Podes atopar todas as túas notas en %1$s</string>
     <string name="video_notes">Notas de vídeo</string>
     <string name="photo_notes">Notas de imaxe</string>
     <string name="route_recalculation">Recálculo da ruta</string>
@@ -3475,7 +3475,7 @@ Lon %2$s</string>
     <string name="login_and_pass">Nome de usuario e contrasinal</string>
     <string name="plugin_global_prefs_info">A configuración deste engadido é global e se aplica a todos os perfís.</string>
     <string name="osm_editing">Edición do OpenStreetMap</string>
-    <string name="osm_edits_view_descr">Podes ollar todas as túas edicións de erros do osm non subidas en Menú — Os meus lugares — Edicións OSM. Os puntos subidos non se amosan no OsmAnd.</string>
+    <string name="osm_edits_view_descr">Podes ollar todas as túas edicións de erros do osm non subidas en %1$s. Os puntos subidos non se amosan no OsmAnd.</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Ollarás a icona só durante a navegación ou mentres esteas a moverte.</string>
     <string name="select_map_icon_descr">A icona do mapa só aparece no mapa e muda durante a navegación á icona de navegación.</string>

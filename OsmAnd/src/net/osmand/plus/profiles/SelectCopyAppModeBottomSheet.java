@@ -103,9 +103,10 @@ public class SelectCopyAppModeBottomSheet extends AppModesBottomSheetDialogFragm
 
 	@Override
 	protected void onRightBottomButtonClick() {
-		OsmandApplication app = getMyApplication();
-		if (app != null && selectedAppMode != null) {
-			app.getSettings().copyPreferencesFromProfile(selectedAppMode, currentAppMode);
+		Fragment targetFragment = getTargetFragment();
+		if (selectedAppMode != null && targetFragment instanceof CopyAppModePrefsListener) {
+			CopyAppModePrefsListener listener = (CopyAppModePrefsListener) targetFragment;
+			listener.copyAppModePrefs(selectedAppMode);
 		}
 		dismiss();
 	}
@@ -126,5 +127,9 @@ public class SelectCopyAppModeBottomSheet extends AppModesBottomSheetDialogFragm
 		} catch (RuntimeException e) {
 			LOG.error("showInstance", e);
 		}
+	}
+
+	public interface CopyAppModePrefsListener {
+		void copyAppModePrefs(ApplicationMode appMode);
 	}
 }

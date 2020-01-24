@@ -41,7 +41,9 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
 import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet;
+import net.osmand.plus.profiles.SelectCopyAppModeBottomSheet.CopyAppModePrefsListener;
 import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet;
+import net.osmand.plus.settings.bottomsheets.ResetProfilePrefsBottomSheet.ResetAppModePrefsListener;
 import net.osmand.plus.skimapsplugin.SkiMapsPlugin;
 
 import org.apache.commons.logging.Log;
@@ -55,7 +57,7 @@ import static net.osmand.plus.profiles.EditProfileFragment.OPEN_CONFIG_ON_MAP;
 import static net.osmand.plus.profiles.EditProfileFragment.SCREEN_CONFIG;
 import static net.osmand.plus.profiles.EditProfileFragment.SELECTED_ITEM;
 
-public class ConfigureProfileFragment extends BaseSettingsFragment {
+public class ConfigureProfileFragment extends BaseSettingsFragment implements CopyAppModePrefsListener, ResetAppModePrefsListener {
 
 	public static final String TAG = ConfigureProfileFragment.class.getSimpleName();
 
@@ -147,6 +149,20 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 		updateToolbarSwitch();
 	}
 
+	@Override
+	public void copyAppModePrefs(ApplicationMode appMode) {
+		if (appMode != null) {
+			app.getSettings().copyPreferencesFromProfile(appMode, getSelectedAppMode());
+		}
+	}
+
+	@Override
+	public void resetAppModePrefs(ApplicationMode appMode) {
+		if (appMode != null) {
+			app.getSettings().resetPreferencesForProfile(appMode);
+		}
+	}
+
 	private RecyclerView.ItemDecoration createDividerItemDecoration() {
 		final Drawable dividerLight = new ColorDrawable(ContextCompat.getColor(app, R.color.list_background_color_light));
 		final Drawable dividerDark = new ColorDrawable(ContextCompat.getColor(app, R.color.list_background_color_dark));
@@ -228,7 +244,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment {
 			return;
 		}
 		Preference configureMap = findPreference(CONFIGURE_MAP);
-		configureMap.setIcon(getContentIcon(R.drawable.ic_action_layers_dark));
+		configureMap.setIcon(getContentIcon(R.drawable.ic_action_layers));
 
 		Intent intent = new Intent(ctx, MapActivity.class);
 		intent.putExtra(OPEN_CONFIG_ON_MAP, MAP_CONFIG);

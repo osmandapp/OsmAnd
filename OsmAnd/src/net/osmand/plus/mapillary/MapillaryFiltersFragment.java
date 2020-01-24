@@ -117,7 +117,7 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
         final int colorRes = nightMode ? R.color.icon_color_default_dark : R.color.icon_color_default_light;
         ((AppCompatImageView) view.findViewById(R.id.mapillary_filters_user_icon)).setImageDrawable(getIcon(R.drawable.ic_action_user, colorRes));
         ((AppCompatImageView) view.findViewById(R.id.mapillary_filters_date_icon)).setImageDrawable(getIcon(R.drawable.ic_action_data, colorRes));
-        ((AppCompatImageView) view.findViewById(R.id.mapillary_filters_tile_cache_icon)).setImageDrawable(getIcon(R.drawable.ic_layer_top_dark, colorRes));
+        ((AppCompatImageView) view.findViewById(R.id.mapillary_filters_tile_cache_icon)).setImageDrawable(getIcon(R.drawable.ic_layer_top, colorRes));
 
         final DelayAutoCompleteTextView textView = (DelayAutoCompleteTextView) view.findViewById(R.id.auto_complete_text_view);
         textView.setAdapter(new MapillaryAutoCompleteAdapter(getContext(), R.layout.auto_complete_suggestion, getMyApplication()));

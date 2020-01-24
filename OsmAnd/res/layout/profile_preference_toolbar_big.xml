@@ -115,7 +115,7 @@
 				android:layout_gravity="center_vertical"
 				android:layout_marginLeft="@dimen/bottom_sheet_image_text_margin_start"
 				android:layout_marginRight="@dimen/bottom_sheet_image_text_margin_start"
-				android:src="@drawable/ic_action_arrow_drop_down"
+				android:src="@drawable/ic_action_arrow_down"
 				android:tint="?attr/default_icon_color" />
 
 		</LinearLayout>

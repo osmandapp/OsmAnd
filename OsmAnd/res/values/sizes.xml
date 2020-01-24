@@ -350,5 +350,7 @@
 
 	<dimen name="setting_profile_item_height">64dp</dimen>
 	<dimen name="setting_profile_item_switch_margin">18dp</dimen>
+	<dimen name="settings_divider_margin_start">72dp</dimen>
+	<dimen name="setting_list_item_large_height">72dp</dimen>
 
 </resources>

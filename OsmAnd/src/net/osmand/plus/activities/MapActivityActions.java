@@ -803,7 +803,7 @@ public class MapActivityActions implements DialogProvider {
 
 		optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.configure_map, mapActivity)
 				.setId(DRAWER_CONFIGURE_MAP_ID)
-				.setIcon(R.drawable.ic_action_layers_dark)
+				.setIcon(R.drawable.ic_action_layers)
 				.setListener(new ItemClickListener() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked, int[] viewCoordinates) {
@@ -943,7 +943,7 @@ public class MapActivityActions implements DialogProvider {
 
 		/*
 		optionsMenuHelper.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.configure_map, mapActivity)
-				.setIcon(R.drawable.ic_action_layers_dark)
+				.setIcon(R.drawable.ic_action_layers)
 				.setListener(new ContextMenuAdapter.ItemClickListener() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {

@@ -211,7 +211,7 @@
     <string name="my_location_search_hint">Ara: Grup veya kişi</string>
     <string name="start_location_sharing">Konumu paylaş</string>
     <string name="show_on_map">Haritada göster</string>
-    <string name="app_name">OsmAnd Çevrimiçi GPS İzleyici</string>
+    <string name="app_name">OsmAnd Çevrim İçi GPS İzleyici</string>
     <string name="phone_number_title">Telefon numarası</string>
     <string name="phone_number_descr">Uluslararası formatta telefon numarası</string>
     <string name="shared_string_password">Parola</string>

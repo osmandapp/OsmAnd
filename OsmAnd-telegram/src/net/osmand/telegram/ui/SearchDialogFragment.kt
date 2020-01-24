@@ -502,7 +502,7 @@ class SearchDialogFragment : BaseDialogFragment(), TelegramHelper.TelegramSearch
 
 		private fun getItemDescription(item: TdApi.Object, lastUpdateTime: Int?): String? {
 			if (lastUpdateTime != null) {
-				return OsmandFormatter.getListItemLiveTimeDescr(app, lastUpdateTime)
+				return OsmandFormatter.getListItemShortLiveTimeDescr(app, lastUpdateTime, R.string.duration_ago)
 			}
 			if (item is TdApi.Chat && telegramHelper.isGroup(item)) {
 				return getString(R.string.shared_string_group)

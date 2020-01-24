@@ -3439,8 +3439,8 @@ Lon %2$s</string>
     <string name="live_monitoring_descr">Permite compartir la ubicación actual utilizando la grabación del viaje.</string>
     <string name="live_monitoring">Seguimiento en línea</string>
     <string name="save_track_logging_accuracy">Precisión de registro</string>
-    <string name="tracks_view_descr">Puedes encontrar todas tus trazas grabadas en «Menú — Mi sitios — Trazas» o en la carpeta OsmAnd usando el administrador de archivos.</string>
-    <string name="multimedia_notes_view_descr">Puedes encontrar todas tus notas en «Menú — Mis sitios — Notas»</string>
+    <string name="tracks_view_descr">Puedes encontrar todas tus trazas grabadas en «%1$s» o en la carpeta OsmAnd usando el administrador de archivos.</string>
+    <string name="multimedia_notes_view_descr">Puedes encontrar todas tus notas en «%1$s»</string>
     <string name="video_notes">Notas de video</string>
     <string name="photo_notes">Notas fotográficas</string>
     <string name="route_recalculation">Recálculo de la ruta</string>
@@ -3448,7 +3448,7 @@ Lon %2$s</string>
     <string name="login_and_pass">Nombre de usuario y contraseña</string>
     <string name="plugin_global_prefs_info">Los ajustes de este complemento es global y se aplica a todos los perfiles.</string>
     <string name="osm_editing">Edición de OpenStreetMap</string>
-    <string name="osm_edits_view_descr">Puedes ver todas tus ediciones no subidas o errores de OSM en «Menú — Mis sitios — Ediciones OSM». Los puntos subidos no se muestran en OsmAnd.</string>
+    <string name="osm_edits_view_descr">Puedes ver todas tus ediciones no subidas o errores de OSM en «%1$s». Los puntos subidos no se muestran en OsmAnd.</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Sólo verás el icono durante la navegación o mientras te mueves.</string>
     <string name="select_map_icon_descr">El icono del mapa aparece sólo en el mapa y cambia mientras se navega hacia el icono de navegación.</string>

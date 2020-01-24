@@ -2518,7 +2518,7 @@
     <string name="measurement_tool_action_bar">Прагляд мапы і даданне пунктаў</string>
     <string name="measurement_tool">Вымераць адлегласць</string>
     <string name="quick_action_resume_pause_navigation">Прыпыніць/аднавіць навігацыю</string>
-    <string name="quick_action_resume_pause_navigation_descr">Націсніце гэтую кнопку, каб прыпыніць ці аднавіць навігацыю.</string>
+    <string name="quick_action_resume_pause_navigation_descr">Кнопка для прыпынення ці аднаўлення навігацыі.</string>
     <string name="quick_action_show_navigation_finish_dialog">Паказаць дыялог «Завяршэнне навігацыі»</string>
     <string name="quick_action_start_stop_navigation">Пачаць/спыніць навігацыю</string>
     <string name="quick_action_start_stop_navigation_descr">Націсніце гэтую кнопку, каб пачаць або скончыць навігацыю.</string>
@@ -2558,11 +2558,11 @@
     <string name="keep_showing_on_map">Працягваць паказваць на мапе</string>
     <string name="exit_without_saving">Выйсці без захавання\?</string>
     <string name="do_not_use_animations">Без анімацыі</string>
-    <string name="do_not_use_animations_descr">Адключэнне анімацыі ў дадатку.</string>
+    <string name="do_not_use_animations_descr">Выключэнне анімацыі мапы.</string>
     <string name="move_all_to_history">Перамясціць усё ў гісторыю</string>
     <string name="show_direction">Індыкацыя адлегласці</string>
     <string name="sort_by">Сартаваць па</string>
-    <string name="marker_show_distance_descr">Абярыце, як паказваць адлегласць і напрамак да адзнак на экране мапы:</string>
+    <string name="marker_show_distance_descr">Абярыце, як паказваць адлегласць і напрамак да адзнак на мапе:</string>
     <string name="map_orientation_change_in_accordance_with_speed">Парог арыентацыі мапы</string>
     <string name="map_orientation_change_in_accordance_with_speed_descr">Абярыце хуткасць, на якой арыентацыя мапы пераключаецца з «Напрамку руху» на «Па компасе».</string>
     <string name="all_markers_moved_to_history">Усе адзнакі перамешчаныя ў гісторыю</string>
@@ -2665,7 +2665,7 @@
     <string name="shared_string_added">Дададзена</string>
     <string name="one_tap_active_descr">Націск на адзнаку на мапе перамесціць яе на першае месца ў спісе актыўных без адкрыцця кантэкстнага меню.</string>
     <string name="one_tap_active">Актывацыя адным націскам</string>
-    <string name="empty_state_av_notes">Рабі нататкі!</string>
+    <string name="empty_state_av_notes">Стварайце нататкі!</string>
     <string name="empty_state_av_notes_desc">Дадайце аўдыё-, відэа- ці фотанататку на любую кропку на мапе, выкарыстоўваючы віджэт ці кантэкстнае меню.</string>
     <string name="modify_the_search_query">Змяніце пошукавы запыт.</string>
     <string name="what_is_here">Што тут:</string>
@@ -2709,7 +2709,7 @@
     <string name="shared_string_gpx_file">GPX-файл</string>
     <string name="osc_file">OSC-файл</string>
     <string name="choose_file_type">Абярыце тып файла</string>
-    <string name="osm_edits_export_desc">Абярыце тып экспарту: OSM-нататкі, POI ці абодва.</string>
+    <string name="osm_edits_export_desc">Экспартаваць як OSM-нататкі, POI ці абодва.</string>
     <string name="all_data">Усе даныя</string>
     <string name="osm_notes">OSM-нататкі</string>
     <string name="tunnel_warning">Наперадзе тунэль</string>
@@ -2972,7 +2972,7 @@
     <string name="show_more">Паказаць больш</string>
     <string name="tracks_on_map">Адлюстроўваемыя сляды</string>
     <string name="quick_action_show_hide_gpx_tracks">Паказаць/схаваць GPX-сляды</string>
-    <string name="quick_action_show_hide_gpx_tracks_descr">Пераключэнне паміж адлюстраваннем і хаваннем абраных GPX-слядоў на мапе.</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Кнопка для адлюстравання/хавання абраных GPX-слядоў на мапе.</string>
     <string name="quick_action_gpx_tracks_hide">Схаваць GPX-сляды</string>
     <string name="quick_action_gpx_tracks_show">Паказаць GPX-сляды</string>
     <string name="use_osm_live_public_transport_description">Уключыць грамадскі транспарт для змен OsmAnd Live.</string>
@@ -3185,7 +3185,7 @@
     <string name="select_nav_profile_dialog_title">Абярыце тып навігацыі</string>
     <string name="base_profile_descr_car">Аўтамабіль, грузавік, матацыкл</string>
     <string name="base_profile_descr_bicycle">Горны ровар, мапед, конь</string>
-    <string name="base_profile_descr_public_transport">Усе тыпы грамадскага транспарту</string>
+    <string name="base_profile_descr_public_transport">Тыпы грамадскага транспарту</string>
     <string name="routing_profile_geocoding">Геакадаванне</string>
     <string name="routing_profile_straightline">Прамая лінія</string>
     <string name="routing_profile_broutrer">BRouter (па-за сецівам)</string>
@@ -3348,10 +3348,10 @@
     <string name="clear_confirmation_msg">Ачысціць %1$s\?</string>
     <string name="download_map_dialog">Дыялог спампоўвання мапы</string>
     <string name="dialogs_and_notifications_title">Дыялогі і апавяшчэнні</string>
-    <string name="dialogs_and_notifications_descr">Кіраванне выплыўнымі вокнамі, дыялогамі і апавяшчэннямі OsmAnd.</string>
+    <string name="dialogs_and_notifications_descr">Кіраванне выплыўнымі вокнамі, дыялогамі і апавяшчэннямі.</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_name">Сеткі вузлоў</string>
     <string name="suggested_maps">Прапанаваныя мапы</string>
-    <string name="suggested_maps_descr">Гэтыя мапы неабходна выкарыстоўваць з убудовай</string>
+    <string name="suggested_maps_descr">Гэтыя мапы неабходна выкарыстоўваць з убудовай.</string>
     <string name="added_profiles">Дададзеныя профілі</string>
     <string name="added_profiles_descr">Убудова дадае новы профіль у OsmAnd</string>
     <string name="shared_string_turn_off">Выключыць</string>
@@ -3365,9 +3365,9 @@
     <string name="personal_category_name">Асабісты</string>
     <string name="shared_string_downloading_formatted">Спампоўванне %s</string>
     <string name="rendering_value_thick_name">Тоўста</string>
-    <string name="desert_render_descr">Для пустэльняў і іншых малазаселеных абласцей. Паказваецца больш звестак на шкале прагляду.</string>
-    <string name="select_navigation_icon">Абярыце значок навігацыі</string>
-    <string name="select_map_icon">Абярыце значок мапы</string>
+    <string name="desert_render_descr">Для пустэльняў і іншых малазаселеных абласцей. Лепшая дэталізацыя.</string>
+    <string name="select_navigation_icon">Значок навігацыі</string>
+    <string name="select_map_icon">Значок мапы</string>
     <string name="delete_profiles_descr">Пасля націскання кнопкі \"Ужыць\" выдаленыя профілі назаўсёды страцяцца.</string>
     <string name="master_profile">Базавы профіль</string>
     <string name="select_color">Абярыце колер</string>
@@ -3375,12 +3375,12 @@
     <string name="edit_profiles">Рэдагаваць профілі</string>
     <string name="select_nav_profile_dialog_message">Тып навігацыі ўплывае на правілы разліку маршруту.</string>
     <string name="profile_appearance">Выгляд профілю</string>
-    <string name="choose_icon_color_name">Абярыце значок, колер і назву</string>
+    <string name="choose_icon_color_name">Значок, колер і назва</string>
     <string name="reorder_profiles">Рэдагаваць спіс профіляў</string>
     <string name="selected_profile">Абраны профіль</string>
     <string name="reset_confirmation_descr">Калі націснеце %1$s, то ўсе змены страцяцца.</string>
     <string name="reset_all_profile_settings_descr">Усе налады профілю скінуцца да прадвызначаных значэнняў.</string>
-    <string name="reset_all_profile_settings">Скінуць усе налады профілю да прадвызначаных значэнняў\?</string>
+    <string name="reset_all_profile_settings">Скінуць усе налады профілю\?</string>
     <string name="ltr_or_rtl_combine_via_space">%1$s %2$s</string>
     <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
     <string name="avoid_in_routing_descr_">Пазбягаць пэўныя маршруты і тыпы дарог</string>
@@ -3412,23 +3412,23 @@
     <string name="routing_attr_driving_style_prefer_unpaved_name">Аддаваць перавагу грунтавым дарогам</string>
     <string name="routing_attr_driving_style_prefer_unpaved_description">Аддаваць перавагу дарогам без пакрыцця.</string>
     <string name="layer_osm_edits">Змены OSM</string>
-    <string name="quick_action_contour_lines_descr">Пераключальнік для адлюстравання/хавання контурных ліній на мапе.</string>
+    <string name="quick_action_contour_lines_descr">Кнопка для адлюстравання/хавання контурных ліній на мапе.</string>
     <string name="quick_action_contour_lines_show">Паказаць контурныя лініі</string>
     <string name="quick_action_contour_lines_hide">Схаваць контурныя лініі</string>
     <string name="quick_action_show_hide_contour_lines">Паказаць/схаваць контурныя лініі</string>
-    <string name="quick_action_hillshade_descr">Пераключальнік для адлюстравання/хавання зацянення рэльефу на мапе.</string>
+    <string name="quick_action_hillshade_descr">Кнопка для адлюстравання/хавання зацянення рэльефу на мапе.</string>
     <string name="quick_action_hillshade_show">Паказаць зацяненне рэльефу</string>
     <string name="quick_action_hillshade_hide">Схаваць зацяненне рэльефу</string>
     <string name="quick_action_show_hide_hillshade">Паказаць/схаваць зацяненне рэльефу</string>
-    <string name="tts_initialization_error">Немагчыма запусціць механізм пераўтварэння тэксту ў гаворку</string>
+    <string name="tts_initialization_error">Немагчыма запусціць механізм пераўтварэння тэксту ў гаворку.</string>
     <string name="export_profile">Экспарт профілю</string>
     <string name="exported_osmand_profile">Профіль OsmAnd: %1$s</string>
-    <string name="overwrite_profile_q">Профіль \"%1$s\" ужо існуе. Перазапісаць\?</string>
+    <string name="overwrite_profile_q">\"%1$s\" ужо існуе. Перазапісаць\?</string>
     <string name="export_profile_failed">Не атрымалася экспартаваць профіль.</string>
     <string name="profile_import">Імпарт профілю</string>
     <string name="profile_import_descr">Каб імпартаваць профіль, абярыце яго файл на прыладзе і адкрыйце з дапамогай OsmAnd.</string>
     <string name="file_import_error">Памылка імпарту %1$s: %2$s</string>
-    <string name="file_imported_successfully">%1$s паспяхова імпартаваны.</string>
+    <string name="file_imported_successfully">%1$s імпартаваны.</string>
     <string name="swap_two_places">Памяняць месцамі %1$s і %2$s</string>
     <string name="route_start_point">Пачатковы пункт</string>
     <string name="paste_Osmand_data_folder_path">Уставіць шлях да каталога з данымі OsmAnd</string>
@@ -3439,8 +3439,8 @@
     <string name="select_base_profile_dialog_message">Стварыце свой профіль на аснове аднаго з базавых профіляў - гэта будзе вызначаць асноўныя параметры, такія як віджэты, адзінкі вымярэння хуткасці і адлегласці. Гэта тыповыя профілі дадатку, якія разам з прыкладамі профіляў карыстальніка можна пашырыць да:</string>
     <string name="routing_attr_allow_classic_only_description">Маршруты, падрыхтаваныя толькі для класічнага стылю без канькабежных трас. Сюды ўваходзяць маршруты, падрыхтаваныя невялікім снегаходам з больш свабоднай лыжнёй і трасамі, падрыхтаваныя непасрэдна лыжнікамі.</string>
     <string name="download_detailed_map">Спампаваць падрабязную мапу %s, каб праглядзець гэтую вобласць.</string>
-    <string name="internal_app_storage_description">Унутранае сховішча, схаванае ад карыстальніка і іншых дадаткаў, даступнае выключна для OsmAnd</string>
-    <string name="change_data_storage_folder">Змена каталога захавання даных</string>
+    <string name="internal_app_storage_description">Унутранае сховішча OsmAnd, схаванае ад карыстальніка і іншых дадаткаў.</string>
+    <string name="change_data_storage_folder">Змена каталога сховішча</string>
     <string name="rendering_attr_piste_type_snow_park_name">Ландшафтны парк</string>
     <string name="rendering_attr_piste_type_sleigh_name">Самаходныя і несамаходныя сані (запрэжкі)</string>
     <string name="rendering_attr_piste_type_sled_name">Толькі самаходныя сані</string>
@@ -3461,20 +3461,20 @@
     <string name="routeInfo_piste_difficulty_name">Складанасць гарналыжнай трасы</string>
     <string name="routing_attr_width_name">Абмежаванне па шырыні</string>
     <string name="routing_attr_width_description">Увядзіце шырыню транспартнага сродку для ўліку пры разліку маршруту.</string>
-    <string name="release_3_5">• Абноўлены налады прыкладання і профілю. Цяпер налады размешчаны па тыпу. Кожны профіль можна наладзіць асобна.
-\n 
-\n  • Новы дыялог загрузкі мапы, які прапануе загрузіць мапу падчас прагляду
-\n 
-\n  • Выпраўленне цёмнай тэмы
-\n 
-\n  • Выпраўлена некалькі праблем з маршрутызацыяй па ўсім свеце
-\n 
-\n  • Абноўленая базавая мапа з больш падрабязнай дарожнай сеткай
-\n 
-\n  • Выпраўлены затопленыя раёны па ўсім свеце
-\n 
-\n  • Гарналыжная траса: дададзены профіль вышынь і складанасць маршруту
-\n 
+    <string name="release_3_5">• Абноўлены налады дадатку і профілю. Цяпер налады размешчаныя па тыпу. Кожны профіль можна наладзіць асобна. 
+\n  
+\n  • Новы дыялог загрузкі мапы, які прапануе загрузіць мапу падчас прагляду 
+\n  
+\n  • Выпраўленне начнога рэжыму 
+\n  
+\n  • Выпраўлена некалькі праблем з маршрутызацыяй па ўсім свеце 
+\n  
+\n  • Абноўленая базавая мапа з больш падрабязнай дарожнай сеткай 
+\n  
+\n  • Выпраўлены затопленыя раёны па ўсім свеце 
+\n  
+\n  • Гарналыжная траса: дададзены профіль вышынь і складанасць маршруту 
+\n  
 \n  • Іншыя выпраўленні памылак
 \n
 \n</string>
@@ -3495,8 +3495,8 @@
     <string name="photo_notes">Фотанататкі</string>
     <string name="route_recalculation">Пераразлік маршруту</string>
     <string name="login_and_pass">Імя карыстальніка і пароль</string>
-    <string name="plugin_global_prefs_info">Налады гэтай убудовы глабальныя і распаўсюджваюцца на ўсе профілі.</string>
-    <string name="osm_editing">Рэдагаванне OpenStreetMap</string>
+    <string name="plugin_global_prefs_info">Гэтыя алады распаўсюджваюцца на ўсе профілі.</string>
+    <string name="osm_editing">Рэдагаванне OSM</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Вы ўбачыце значок толькі падчас навігацыі або падчас руху.</string>
 </resources>
