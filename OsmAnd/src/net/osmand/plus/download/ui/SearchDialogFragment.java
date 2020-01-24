@@ -417,14 +417,13 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 			protected IndexItem doInBackground(Void... params) {
 				Amenity amenity = cityItem.getAmenity();
 				BinaryMapDataObject o = null;
+				WorldRegion downloadRegion = null;
 				try {
-					o = osmandRegions.getSmallestBinaryMapDataObjectAt(amenity.getLocation());
+					downloadRegion = osmandRegions.getSmallestBinaryMapDataObjectAt(amenity.getLocation()).getKey();
 				} catch (IOException e) {
 					// ignore
 				}
-				if (o != null) {
-					String selectedFullName = osmandRegions.getFullName(o);
-					WorldRegion downloadRegion = osmandRegions.getRegionData(selectedFullName);
+				if (downloadRegion != null) {
 					List<IndexItem> indexItems = ctx.getDownloadThread().getIndexes().getIndexItems(downloadRegion);
 					for (IndexItem item : indexItems) {
 						if (item.getType() == DownloadActivityType.NORMAL_FILE) {

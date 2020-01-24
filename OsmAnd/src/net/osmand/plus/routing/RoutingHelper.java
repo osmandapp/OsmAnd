@@ -39,6 +39,7 @@ public class RoutingHelper {
 	private static final org.apache.commons.logging.Log log = PlatformUtil.getLog(RoutingHelper.class);
 
 	private static final float POSITION_TOLERANCE = 60;
+	private static final int CACHE_RADIUS = 100000;
 
 	private List<WeakReference<IRouteInformationListener>> listeners = new LinkedList<>();
 	private List<WeakReference<IRoutingDataUpdateListener>> updateListeners = new LinkedList<>();
@@ -57,7 +58,6 @@ public class RoutingHelper {
 	private List<LatLon> intermediatePoints;
 	private Location lastProjection;
 	private Location lastFixedLocation;
-	private LatLon lastStartLocation = null;
 
 	private static final int RECALCULATE_THRESHOLD_COUNT_CAUSING_FULL_RECALCULATE = 3;
 	private static final int RECALCULATE_THRESHOLD_CAUSING_FULL_RECALCULATE_INTERVAL = 2*60*1000;
@@ -174,8 +174,8 @@ public class RoutingHelper {
 	}
 
 	public synchronized void setFinalAndCurrentLocation(LatLon finalLocation, List<LatLon> intermediatePoints, Location currentLocation){
+		checkAndUpdateStartLocation(currentLocation);
 		RouteCalculationResult previousRoute = route;
-		cacheStartLocation(currentLocation);
 		clearCurrentRoute(finalLocation, intermediatePoints);
 		// to update route
 		setCurrentLocation(currentLocation, false, previousRoute, true);
@@ -261,15 +261,15 @@ public class RoutingHelper {
 	public LatLon getFinalLocation() {
 		return finalLocation;
 	}
+	public void checkAndUpdateStartLocation(Location nextStartLocation) {
+		checkAndUpdateStartLocation(new LatLon(nextStartLocation.getLatitude(), nextStartLocation.getLongitude()));
+	}
 
-	public void cacheStartLocation(Location nextStartLocation) {
-		LatLon start = new LatLon(nextStartLocation.getLatitude(), nextStartLocation.getLongitude());
-		if (lastStartLocation == null) {
-			lastStartLocation = new LatLon(nextStartLocation.getLatitude(), nextStartLocation.getLongitude());
-			app.getMapViewTrackingUtilities().detectDrivingRegion(lastStartLocation);
-		} else if (MapUtils.getDistance(start, lastStartLocation) > 100000) {
-			lastStartLocation = start;
-			app.getMapViewTrackingUtilities().detectDrivingRegion(lastStartLocation);
+	public void checkAndUpdateStartLocation(LatLon newStartLocation) {
+		LatLon lastStartLocation = app.getSettings().getLastStartPoint();
+		if (lastStartLocation == null || MapUtils.getDistance(newStartLocation, lastStartLocation) > CACHE_RADIUS) {
+			app.getMapViewTrackingUtilities().detectDrivingRegion(newStartLocation);
+			app.getSettings().setLastStartPoint(newStartLocation);
 		}
 	}
 
