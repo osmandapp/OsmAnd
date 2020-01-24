@@ -21,7 +21,7 @@
 			android:layout_gravity="center"
 			android:layout_marginLeft="@dimen/content_padding"
 			android:layout_marginRight="@dimen/content_padding"
-			tools:src="@drawable/ic_action_car"
+			tools:src="@drawable/ic_action_car_dark"
 			tools:tint="?colorAccent" />
 
 		<LinearLayout

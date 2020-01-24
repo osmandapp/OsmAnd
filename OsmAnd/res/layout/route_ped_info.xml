@@ -43,7 +43,7 @@
 				android:layout_marginTop="@dimen/context_menu_padding_margin_large"
 				android:layout_marginEnd="@dimen/favorites_icon_right_margin"
 				android:layout_marginRight="@dimen/favorites_icon_right_margin"
-				android:src="@drawable/ic_action_pedestrian"
+				android:src="@drawable/ic_action_pedestrian_dark"
 				android:tint="@color/description_font_and_bottom_sheet_icons" />
 
 			<LinearLayout

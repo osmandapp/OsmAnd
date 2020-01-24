@@ -348,7 +348,7 @@ public class PublicTransportCard extends BaseCard {
 		TextView transportStopRouteTextView = (TextView) bageView.findViewById(R.id.transport_stop_route_text);
 		ImageView transportStopRouteImageView = (ImageView) bageView.findViewById(R.id.transport_stop_route_icon);
 
-		int drawableResId = transportStopRoute.type == null ? R.drawable.ic_action_bus : transportStopRoute.type.getResourceId();
+		int drawableResId = transportStopRoute.type == null ? R.drawable.ic_action_bus_dark : transportStopRoute.type.getResourceId();
 		transportStopRouteImageView.setImageDrawable(app.getUIUtilities().getPaintedIcon(drawableResId, UiUtilities.getContrastColor(app, bgColor, true)));
 		transportStopRouteTextView.setText(routeRef);
 		GradientDrawable gradientDrawableBg = (GradientDrawable) bageView.getBackground();
@@ -388,7 +388,7 @@ public class PublicTransportCard extends BaseCard {
 		TextView transportStopRouteTextView = (TextView) bageView.findViewById(R.id.transport_stop_route_text);
 		ImageView transportStopRouteImageView = (ImageView) bageView.findViewById(R.id.transport_stop_route_icon);
 
-		transportStopRouteImageView.setImageDrawable(getActiveIcon(R.drawable.ic_action_pedestrian));
+		transportStopRouteImageView.setImageDrawable(getActiveIcon(R.drawable.ic_action_pedestrian_dark));
 		transportStopRouteTextView.setText(OsmAndFormatter.getFormattedDuration((int) walkTime, app));
 		GradientDrawable gradientDrawableBg = (GradientDrawable) bageView.getBackground();
 		gradientDrawableBg.setColor(activeColor);

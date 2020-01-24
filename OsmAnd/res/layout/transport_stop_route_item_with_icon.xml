@@ -20,7 +20,7 @@
 			android:layout_height="20dp"
 			android:layout_gravity="center_vertical"
 			android:layout_margin="4dp"
-			tools:src="@drawable/ic_action_bus" />
+			tools:src="@drawable/ic_action_bus_dark" />
 
 		<net.osmand.plus.widgets.TextViewEx
 			android:id="@+id/transport_stop_route_text"

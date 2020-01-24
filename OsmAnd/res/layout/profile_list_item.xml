@@ -15,7 +15,7 @@
 		android:layout_height="@dimen/standard_icon_size"
 		android:layout_marginLeft="@dimen/content_padding"
 		android:layout_marginRight="@dimen/favorites_icon_right_margin"
-		tools:src="@drawable/ic_action_bicycle" />
+		tools:src="@drawable/ic_action_bicycle_dark" />
 
 	<LinearLayout
 		android:layout_width="match_parent"

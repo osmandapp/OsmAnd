@@ -48,7 +48,7 @@
                 android:textAllCaps="true"
                 android:textColor="@color/color_white"
                 android:textSize="@dimen/default_desc_text_size"
-                tools:drawableRight="@drawable/ic_action_car"
+                tools:drawableRight="@drawable/ic_action_car_dark"
                 tools:text="car"/>
         </LinearLayout>
 

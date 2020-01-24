@@ -468,7 +468,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		stopsContainer.setOrientation(LinearLayout.VERTICAL);
 		baseContainer.addView(stopsContainer, new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
-		int drawableResId = transportStopRoute.type == null ? R.drawable.ic_action_bus : transportStopRoute.type.getResourceId();
+		int drawableResId = transportStopRoute.type == null ? R.drawable.ic_action_bus_dark : transportStopRoute.type.getResourceId();
 		Drawable icon = getContentIcon(drawableResId);
 
 		Typeface typeface = FontCache.getRobotoMedium(app);
@@ -1124,7 +1124,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 		});
 		baseView.addView(ll);
 
-		Drawable icon = getPaintedContentIcon(R.drawable.ic_action_pedestrian, getActiveColor());
+		Drawable icon = getPaintedContentIcon(R.drawable.ic_action_pedestrian_dark, getActiveColor());
 		ImageView iconView = new ImageView(view.getContext());
 		iconView.setImageDrawable(icon);
 		FrameLayout.LayoutParams imageViewLayoutParams = new FrameLayout.LayoutParams(dpToPx(24), dpToPx(24));
@@ -1338,7 +1338,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 
 	private CollapsableView getCollapsableTransportStopRoutesView(@NonNull Context context, TransportStopRoute transportStopRoute, final List<TransportStop> stops) {
 		LinearLayout view = (LinearLayout) buildCollapsableContentView(context, false);
-		int drawableResId = transportStopRoute.type == null ? R.drawable.ic_action_bus : transportStopRoute.type.getResourceId();
+		int drawableResId = transportStopRoute.type == null ? R.drawable.ic_action_bus_dark : transportStopRoute.type.getResourceId();
 		Drawable icon = getContentIcon(drawableResId);
 		for (int i = 0; i < stops.size(); i++) {
 			final TransportStop stop = stops.get(i);
@@ -1421,7 +1421,7 @@ public class RouteDetailsFragment extends ContextMenuFragment implements PublicT
 			TextView transportStopRouteTextView = (TextView) convertView.findViewById(R.id.transport_stop_route_text);
 			ImageView transportStopRouteImageView = (ImageView) convertView.findViewById(R.id.transport_stop_route_icon);
 
-			int drawableResId = transportStopRoute.type == null ? R.drawable.ic_action_bus : transportStopRoute.type.getResourceId();
+			int drawableResId = transportStopRoute.type == null ? R.drawable.ic_action_bus_dark : transportStopRoute.type.getResourceId();
 			transportStopRouteImageView.setImageDrawable(app.getUIUtilities().getPaintedIcon(drawableResId, UiUtilities.getContrastColor(mapActivity, bgColor, true)));
 			transportStopRouteTextView.setText(routeRef + ": " + routeDescription);
 			GradientDrawable gradientDrawableBg = (GradientDrawable) convertView.getBackground();

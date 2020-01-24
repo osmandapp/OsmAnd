@@ -22,12 +22,12 @@ public class RoutingProfileDataObject extends ProfileDataObject {
 	public enum RoutingProfilesResources {
 		STRAIGHT_LINE_MODE(R.string.routing_profile_straightline, R.drawable.ic_action_split_interval),
 		BROUTER_MODE(R.string.routing_profile_broutrer, R.drawable.ic_action_split_interval),
-		CAR(R.string.rendering_value_car_name, R.drawable.ic_action_car),
-		PEDESTRIAN(R.string.rendering_value_pedestrian_name, R.drawable.ic_action_pedestrian),
-		BICYCLE(R.string.rendering_value_bicycle_name, R.drawable.ic_action_bicycle),
+		CAR(R.string.rendering_value_car_name, R.drawable.ic_action_car_dark),
+		PEDESTRIAN(R.string.rendering_value_pedestrian_name, R.drawable.ic_action_pedestrian_dark),
+		BICYCLE(R.string.rendering_value_bicycle_name, R.drawable.ic_action_bicycle_dark),
 		SKI(R.string.routing_profile_ski, R.drawable.ic_action_skiing),
-		PUBLIC_TRANSPORT(R.string.app_mode_public_transport, R.drawable.ic_action_bus),
-		BOAT(R.string.app_mode_boat, R.drawable.ic_action_sail_boat),
+		PUBLIC_TRANSPORT(R.string.app_mode_public_transport, R.drawable.ic_action_bus_dark),
+		BOAT(R.string.app_mode_boat, R.drawable.ic_action_sail_boat_dark),
 		GEOCODING(R.string.routing_profile_geocoding, R.drawable.ic_action_world_globe);
 
 		int stringRes;
