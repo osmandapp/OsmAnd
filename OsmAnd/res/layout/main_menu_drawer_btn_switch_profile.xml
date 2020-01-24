@@ -22,7 +22,7 @@
 			android:layout_width="@dimen/standard_icon_size"
 			android:layout_height="@dimen/standard_icon_size"
 			android:layout_gravity="center"
-			tools:src="@drawable/ic_action_bicycle_dark" />
+			tools:src="@drawable/ic_action_bicycle" />
 
 	</FrameLayout>
 

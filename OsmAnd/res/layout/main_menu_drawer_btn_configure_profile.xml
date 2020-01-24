@@ -28,7 +28,7 @@
 				android:layout_height="@dimen/standard_icon_size"
 				android:visibility="invisible"
 				android:layout_gravity="center"
-				tools:src="@drawable/ic_action_bicycle_dark" />
+				tools:src="@drawable/ic_action_bicycle" />
 			
 		</FrameLayout>
 

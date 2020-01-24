@@ -154,7 +154,7 @@ public class GeneralProfileSettingsFragment extends BaseSettingsFragment impleme
 	private void setupDrivingRegionPref() {
 		ApplicationMode selectedMode = getSelectedAppMode();
 		Preference defaultDrivingRegion = findPreference(settings.DRIVING_REGION.getId());
-		defaultDrivingRegion.setIcon(getContentIcon(R.drawable.ic_action_car_dark));
+		defaultDrivingRegion.setIcon(getContentIcon(R.drawable.ic_action_car));
 		defaultDrivingRegion.setSummary(getString(settings.DRIVING_REGION_AUTOMATIC.getModeValue(selectedMode) ? R.string.driving_region_automatic : settings.DRIVING_REGION.getModeValue(selectedMode).name));
 	}
 

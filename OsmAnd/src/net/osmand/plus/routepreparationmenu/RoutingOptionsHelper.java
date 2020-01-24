@@ -525,8 +525,8 @@ public class RoutingOptionsHelper {
 		if (rp instanceof LocalRoutingParameterGroup) {
 			LocalRoutingParameterGroup group = (LocalRoutingParameterGroup) rp;
 			if (group.groupName.equals(DRIVING_STYLE)) {
-				rp.activeIconId = R.drawable.ic_action_bicycle_dark;
-				rp.disabledIconId = R.drawable.ic_action_bicycle_dark;
+				rp.activeIconId = R.drawable.ic_action_bicycle;
+				rp.disabledIconId = R.drawable.ic_action_bicycle;
 			}
 		}
 		if (rp.routingParameter == null) {
@@ -888,12 +888,12 @@ public class RoutingOptionsHelper {
 
 		@Override
 		public int getActiveIconId() {
-			return R.drawable.ic_action_bus_dark;
+			return R.drawable.ic_action_bus;
 		}
 
 		@Override
 		public int getDisabledIconId() {
-			return R.drawable.ic_action_bus_dark;
+			return R.drawable.ic_action_bus;
 		}
 	}
 

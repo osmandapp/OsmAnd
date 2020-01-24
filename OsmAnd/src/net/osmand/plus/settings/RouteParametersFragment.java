@@ -389,7 +389,7 @@ public class RouteParametersFragment extends BaseSettingsFragment implements OnP
 			case AVOID_ROUTING_PARAMETER_PREFIX:
 				return getContentIcon(R.drawable.ic_action_alert);
 			case DRIVING_STYLE:
-				return getContentIcon(R.drawable.ic_action_bicycle_dark);
+				return getContentIcon(R.drawable.ic_action_bicycle);
 			case "fast_route_mode":
 				return getContentIcon(R.drawable.ic_action_fastest_route);
 			case "enable_time_conditional_routing":

@@ -334,7 +334,7 @@ public class ConfigureMapMenu {
 				.setListener(l).createItem());
 
 		/*
-		ContextMenuItem item = createProperties(customRules, null, R.string.rendering_category_transport, R.drawable.ic_action_bus_dark,
+		ContextMenuItem item = createProperties(customRules, null, R.string.rendering_category_transport, R.drawable.ic_action_bus,
 				"transport", settings.TRANSPORT_DEFAULT_SETTINGS, adapter, activity, false);
 		if (item != null) {
 			adapter.addItem(item);

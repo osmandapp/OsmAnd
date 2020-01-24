@@ -1424,7 +1424,7 @@ public class MapContextMenuFragment extends BaseOsmAndFragment implements Downlo
 				TextView transportStopRouteTextView = (TextView) convertView.findViewById(R.id.transport_stop_route_text);
 				ImageView transportStopRouteImageView = (ImageView) convertView.findViewById(R.id.transport_stop_route_icon);
 
-				int drawableResId = transportStopRoute.type == null ? R.drawable.ic_action_bus_dark : transportStopRoute.type.getResourceId();
+				int drawableResId = transportStopRoute.type == null ? R.drawable.ic_action_bus : transportStopRoute.type.getResourceId();
 				transportStopRouteImageView.setImageDrawable(app.getUIUtilities().getPaintedIcon(drawableResId, UiUtilities.getContrastColor(mapActivity, bgColor, true)));
 				transportStopRouteTextView.setText(routeRef + ": " + routeDescription);
 				GradientDrawable gradientDrawableBg = (GradientDrawable) convertView.getBackground();

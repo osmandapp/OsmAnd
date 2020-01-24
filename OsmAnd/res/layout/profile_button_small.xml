@@ -12,7 +12,7 @@
 		android:layout_width="@dimen/standard_icon_size"
 		android:layout_height="@dimen/standard_icon_size"
 		android:layout_gravity="center"
-		tools:src="@drawable/ic_action_car_dark"
+		tools:src="@drawable/ic_action_car"
 		tools:tint="@color/active_color_primary_light" />
 
 </FrameLayout>

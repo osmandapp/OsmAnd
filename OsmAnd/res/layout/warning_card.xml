@@ -15,7 +15,7 @@
 		android:layout_marginTop="@dimen/context_menu_padding_margin_large"
 		android:layout_marginEnd="@dimen/favorites_icon_right_margin"
 		android:layout_marginRight="@dimen/favorites_icon_right_margin"
-		tools:src="@drawable/ic_action_bus_dark"
+		tools:src="@drawable/ic_action_bus"
 		tools:tint="?attr/route_info_control_icon_color" />
 
 	<LinearLayout

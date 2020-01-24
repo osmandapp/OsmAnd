@@ -13,7 +13,7 @@ public class PublicTransportBetaWarningCard extends WarningCard {
 
 	public PublicTransportBetaWarningCard(@NonNull MapActivity mapActivity) {
 		super(mapActivity);
-		imageId = R.drawable.ic_action_bus_dark;
+		imageId = R.drawable.ic_action_bus;
 		title = mapActivity.getString(R.string.public_transport_warning_title);
 		linkText = mapActivity.getString(R.string.public_transport_warning_descr_blog);
 		startLinkIndex = linkText.lastIndexOf(" ");

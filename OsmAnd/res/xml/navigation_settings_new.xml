@@ -9,7 +9,7 @@
 		android:layout="@layout/preference_with_descr"
 		android:summary="@string/rendering_value_car_name"
 		android:title="@string/nav_type_hint"
-		tools:icon="@drawable/ic_action_car_dark" />
+		tools:icon="@drawable/ic_action_car" />
 
 	<Preference
 		android:key="route_parameters"
@@ -43,7 +43,7 @@
 		android:summary="@string/vehicle_parameters_descr"
 		android:title="@string/vehicle_parameters"
 		app:fragment="net.osmand.plus.settings.VehicleParametersFragment"
-		tools:icon="@drawable/ic_action_car_dark" />
+		tools:icon="@drawable/ic_action_car" />
 
 	<PreferenceCategory
 		android:key="other"

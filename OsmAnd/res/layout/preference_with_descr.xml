@@ -23,7 +23,7 @@
 			android:layout_marginTop="@dimen/bottom_sheet_icon_margin"
 			android:layout_marginRight="@dimen/content_padding"
 			android:layout_marginBottom="@dimen/bottom_sheet_icon_margin"
-			tools:src="@drawable/ic_action_car_dark"
+			tools:src="@drawable/ic_action_car"
 			tools:tint="@color/active_color_primary_light" />
 
 		<LinearLayout
