@@ -722,6 +722,18 @@ public class VoiceRouter {
 		return sb.toString();
 	}
 
+	private int getIntRef(String stringRef) {
+		int intRef = Algorithms.findFirstNumberEndIndex(stringRef);
+		if (intRef > 0) {
+			try {
+				intRef = (int) Float.parseFloat(stringRef.substring(0, intRef));
+			} catch (RuntimeException e) {
+				intRef = -1;
+			}
+		}
+		return intRef;
+	}
+
 	private void playMakeTurnIn(RouteSegmentResult currentSegment, RouteDirectionInfo next, int dist, RouteDirectionInfo pronounceNextNext) {
 		CommandBuilder p = getNewCommandPlayerToPlay();
 		if (p != null) {
@@ -730,8 +742,8 @@ public class VoiceRouter {
 			ExitInfo exitInfo = next.getExitInfo();
 			if (tParam != null) {
 				if (exitInfo != null && !Algorithms.isEmpty(exitInfo.getRef())) {
-					String speakableExitRef = getSpeakableExitRef(exitInfo.getRef());
-					p.takeExit(tParam, dist, speakableExitRef, Algorithms.findFirstNumberEndIndexInString(speakableExitRef), getSpeakableExitName(next, exitInfo, true));
+					String stringRef = getSpeakableExitRef(exitInfo.getRef());
+					p.takeExit(tParam, dist, stringRef, getIntRef(exitInfo.getRef()), getSpeakableExitName(next, exitInfo, true));
 				} else {
 					p.turn(tParam, dist, getSpeakableStreetName(currentSegment, next, true));
 				}
@@ -804,8 +816,8 @@ public class VoiceRouter {
 			boolean isplay = true;
 			if (tParam != null) {
 				if (exitInfo != null && !Algorithms.isEmpty(exitInfo.getRef())) {
-					String speakableExitRef = getSpeakableExitRef(exitInfo.getRef());
-					p.takeExit(tParam, speakableExitRef, Algorithms.findFirstNumberEndIndexInString(speakableExitRef), getSpeakableExitName(next, exitInfo, !suppressDest));
+					String stringRef = getSpeakableExitRef(exitInfo.getRef());
+					p.takeExit(tParam, stringRef, getIntRef(exitInfo.getRef()), getSpeakableExitName(next, exitInfo, !suppressDest));
 				} else {
 					p.turn(tParam, getSpeakableStreetName(currentSegment, next, !suppressDest));
 				}
