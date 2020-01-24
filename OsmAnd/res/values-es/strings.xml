@@ -3443,4 +3443,18 @@
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">Verás el icono sólo durante la navegación o mientras te estés moviendo.</string>
     <string name="select_map_icon_descr">El icono del mapa solo aparece en el mapa y cambia durante la navegación al icono de navegación.</string>
+    <string name="logcat_buffer_descr">Selecciona y comparte logs detallados de la aplicación</string>
+    <string name="permission_is_required">Un permiso es requerido para usar esta opción.</string>
+    <string name="monitoring_min_speed_descr_side_effect">Efecto secundario: En su trayecto faltarán todos los tramos en los que no se haya cumplido el criterio de velocidad mínima (por ejemplo, cuando empuje su bicicleta por una colina empinada). Además, no habrá información sobre los periodos de descanso, como las pausas. Esto tiene efectos en cualquier análisis o post-proceso, como cuando se trata de determinar la duración total de su viaje, el tiempo en movimiento o su velocidad media.</string>
+    <string name="live_monitoring_time_buffer">Búfer de tiempo</string>
+    <string name="live_monitoring_tracking_interval">Intervalo de tiempo</string>
+    <string name="live_monitoring_adress">Dirección Web</string>
+    <string name="monitoring_notification">Notificación</string>
+    <string name="monitoring_min_speed">Velocidad mínima</string>
+    <string name="monitoring_min_accuracy">Precisión mínima</string>
+    <string name="monitoring_min_distance">Desplazamiento mínimo</string>
+    <string name="reset_plugin_to_default">Restablecer la configuración del plugin a los valores por defecto</string>
+    <string name="multimedia_use_system_camera">Usar aplicación del sistema</string>
+    <string name="multimedia_photo_play_sound">Sonido del obturador de la cámara</string>
+    <string name="osm_authorization_success">La autorización ha sido correcta</string>
 </resources>
