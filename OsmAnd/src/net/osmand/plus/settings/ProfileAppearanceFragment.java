@@ -450,10 +450,12 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 	}
 
 	private void updateProfileNameAppearance() {
-		if (profileName.isFocusable() && profileName.isFocusableInTouchMode()) {
-			int selectedColor = ContextCompat.getColor(app, changedProfile.color.getColor(isNightMode()));
-			profileNameOtfb.setPrimaryColor(selectedColor);
-			profileName.getBackground().mutate().setColorFilter(selectedColor, PorterDuff.Mode.SRC_ATOP);
+		if (profileName != null) {
+			if (profileName.isFocusable() && profileName.isFocusableInTouchMode()) {
+				int selectedColor = ContextCompat.getColor(app, changedProfile.color.getColor(isNightMode()));
+				profileNameOtfb.setPrimaryColor(selectedColor);
+				profileName.getBackground().mutate().setColorFilter(selectedColor, PorterDuff.Mode.SRC_ATOP);
+			}
 		}
 	}
 
