@@ -14,7 +14,6 @@ import android.graphics.PorterDuffColorFilter;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
-import android.support.v4.content.res.ResourcesCompat;
 
 import net.osmand.GPXUtilities;
 import net.osmand.data.FavouritePoint;
@@ -47,15 +46,17 @@ public class FavoriteImageDrawable extends Drawable {
 		this.synced = synced;
 		Resources res = ctx.getResources();
 		int overlayIconId = point != null ? point.getOverlayIconId() : 0;
+		int uiIconId;
 		if (overlayIconId != 0) {
 			favIcon = ((OsmandApplication) ctx.getApplicationContext()).getUIUtilities()
 					.getIcon(getMapIconId(ctx, overlayIconId), R.color.color_white);
-			listDrawable = ((OsmandApplication) ctx.getApplicationContext()).getUIUtilities()
-					.getIcon(overlayIconId, R.color.color_white);
+			uiIconId = overlayIconId;
 		} else {
-			favIcon = res.getDrawable(R.drawable.map_favorite);
-			listDrawable = ResourcesCompat.getDrawable(res, R.drawable.ic_action_fav_dark, null).mutate();
+			favIcon = res.getDrawable(R.drawable.mm_special_star);
+			uiIconId = R.drawable.mx_special_star;
 		}
+		listDrawable = ((OsmandApplication) ctx.getApplicationContext()).getUIUtilities()
+				.getIcon(uiIconId, R.color.color_white);
 		int col = color == 0 || color == Color.BLACK ? res.getColor(R.color.color_favorite) : color;
 		favBackground = BitmapFactory.decodeResource(res, R.drawable.map_white_favorite_shield);
 		syncedStroke = BitmapFactory.decodeResource(res, R.drawable.map_shield_marker_point_stroke);
@@ -151,17 +152,17 @@ public class FavoriteImageDrawable extends Drawable {
 
 	private static TreeMap<String, FavoriteImageDrawable> cache = new TreeMap<>();
 
-	private static FavoriteImageDrawable getOrCreate(Context a, int color, boolean withShadow, boolean synced, FavouritePoint point) {
-		String pointName = "";
+	private static FavoriteImageDrawable getOrCreate(Context ctx, int color, boolean withShadow, boolean synced, FavouritePoint point) {
+		String iconName = "";
 		if (point != null) {
-			pointName = point.getName();
+			iconName = point.getIconEntryName(ctx);
 		}
 		color = color | 0xff000000;
 		int hash = (color << 4) + ((withShadow ? 1 : 0) << 2) + ((synced ? 3 : 0) << 2);
-		String uniqueId = hash + pointName;
+		String uniqueId = hash + iconName;
 		FavoriteImageDrawable drawable = cache.get(uniqueId);
 		if (drawable == null) {
-			drawable = new FavoriteImageDrawable(a, color, withShadow, synced, point);
+			drawable = new FavoriteImageDrawable(ctx, color, withShadow, synced, point);
 			drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
 			cache.put(uniqueId, drawable);
 		}
