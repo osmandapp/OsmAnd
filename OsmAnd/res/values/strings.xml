@@ -23,7 +23,7 @@
     <string name="monitoring_min_accuracy_descr_side_effect">As a result of filtering by accuracy, points may not be recorded below bridges, under trees, between high buildings, or with certain weather conditions.</string>
     <string name="monitoring_min_accuracy_descr_recommendation">It is hard to predict what will be recorded, it may be best to turn this filter off.</string>
     <string name="monitoring_min_accuracy_descr_remark">If GPS is only on right before a recording, first point accuracy may decrease, so the OsmAnd strategy may be to wait a second or so before recording a point (or take the median of 3 consecutive points, etc.) in the future.</string>
-    <string name="monitoring_min_distance_descr">This filter avoids duplicate point recording for insufficient actual motion, for a nicer spatial appearance of tracks not post-processed later.</string>
+    <string name="monitoring_min_distance_descr">This lossy filter avoids duplicate point recording for insufficient actual motion, to get nice tracks without having to do post-processing.</string>
     <string name="monitoring_min_distance_descr_side_effect">Periods at rest are not recorded, or one point each. Small (real world) movement (e.g. sideways, to mark a possile turnoff on your trip) may be filtered out. Your file contains less info for post-processing, and has worse stats by filtering out superfluous points when recording, while potentially keeping artifacts caused by bad reception or GPS chipset effects.</string>
     <string name="monitoring_min_distance_descr_recommendation">A setting of 5 meters may work well if you don\'t require any finer details, and don\'t want accuracy in determined stops.</string>
     <string name="live_monitoring_time_buffer">Time buffer</string>
