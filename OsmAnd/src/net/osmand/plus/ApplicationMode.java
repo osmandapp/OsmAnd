@@ -254,9 +254,13 @@ public class ApplicationMode {
 
 		public ApplicationModeBuilder icon(Context app, String iconResName) {
 			try {
-				applicationMode.iconResName = iconResName;
-				applicationMode.iconMapRes = applicationMode.iconRes = app.getResources().getIdentifier(iconResName, "drawable", app.getPackageName());
-				applicationMode.iconMapRes = app.getResources().getIdentifier(iconResName.replace("ic_", "map_"), "drawable", app.getPackageName());
+				int iconRes = app.getResources().getIdentifier(iconResName, "drawable", app.getPackageName());
+				int iconMapRes = app.getResources().getIdentifier(iconResName.replace("ic_", "map_"), "drawable", app.getPackageName());
+				if (iconRes != 0 && iconMapRes != 0) {
+					applicationMode.iconResName = iconResName;
+					applicationMode.iconRes = iconRes;
+					applicationMode.iconMapRes = iconMapRes;
+				}
 			} catch (Exception e) {
 //				return R.drawable.map_world_globe_dark;
 			}
