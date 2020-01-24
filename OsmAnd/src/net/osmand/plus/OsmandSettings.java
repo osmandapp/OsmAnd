@@ -30,6 +30,9 @@ import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.osm.io.NetworkUtils;
+import net.osmand.plus.ApplicationMode.LocationIcon;
+import net.osmand.plus.ApplicationMode.NavigationIcon;
+import net.osmand.plus.ApplicationMode.ProfileIconColors;
 import net.osmand.plus.access.AccessibilityMode;
 import net.osmand.plus.access.RelativeDirectionStyle;
 import net.osmand.plus.api.SettingsAPI;
@@ -40,6 +43,7 @@ import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.mapillary.MapillaryPlugin;
 import net.osmand.plus.mapmarkers.CoordinateInputFormats.Format;
 import net.osmand.plus.render.RendererRegistry;
+import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
@@ -80,6 +84,8 @@ public class OsmandSettings {
 		String getId();
 
 		void resetToDefault();
+
+		void resetModeToDefault(ApplicationMode m);
 
 		void overrideDefaultValue(T newDefaultValue);
 
@@ -475,6 +481,11 @@ public class OsmandSettings {
 		}
 
 		@Override
+		public void resetModeToDefault(ApplicationMode m) {
+			throw new UnsupportedOperationException();
+		}
+
+		@Override
 		public boolean isSet() {
 			return true;
 		}
@@ -745,6 +756,16 @@ public class OsmandSettings {
 		public void resetToDefault() {
 			T o = getProfileDefaultValue(currentMode);
 			set(o);
+		}
+
+		@Override
+		public void resetModeToDefault(ApplicationMode mode) {
+			if (global) {
+				resetToDefault();
+			} else {
+				T o = getProfileDefaultValue(mode);
+				setModeValue(mode, o);
+			}
 		}
 
 		@Override
@@ -1446,14 +1467,111 @@ public class OsmandSettings {
 	public final OsmandPreference<Float> SPEED_LIMIT_EXCEED =
 			new FloatPreference("speed_limit_exceed", 5f).makeProfile();
 
-	public final OsmandPreference<Float> DEFAULT_SPEED = new FloatPreference(
-			"default_speed", 0f).makeProfile().cache();
+	public final CommonPreference<Float> DEFAULT_SPEED = new FloatPreference("default_speed", 10f).makeProfile().cache();
+
+	{
+		DEFAULT_SPEED.setModeDefaultValue(ApplicationMode.DEFAULT, 1.5f);
+		DEFAULT_SPEED.setModeDefaultValue(ApplicationMode.CAR, 12.5f);
+		DEFAULT_SPEED.setModeDefaultValue(ApplicationMode.BICYCLE, 2.77f);
+		DEFAULT_SPEED.setModeDefaultValue(ApplicationMode.PEDESTRIAN, 1.11f);
+		DEFAULT_SPEED.setModeDefaultValue(ApplicationMode.BOAT, 1.38f);
+		DEFAULT_SPEED.setModeDefaultValue(ApplicationMode.AIRCRAFT, 40f);
+		DEFAULT_SPEED.setModeDefaultValue(ApplicationMode.SKI, 1.38f);
+	}
 
 	public final OsmandPreference<Float> MIN_SPEED = new FloatPreference(
 			"min_speed", 0f).makeProfile().cache();
 
 	public final OsmandPreference<Float> MAX_SPEED = new FloatPreference(
 			"max_speed", 0f).makeProfile().cache();
+
+	public final CommonPreference<String> ICON_RES_NAME = new StringPreference("app_mode_icon_res_name", "ic_world_globe_dark").makeProfile().cache();
+
+	{
+		ICON_RES_NAME.setModeDefaultValue(ApplicationMode.DEFAULT, "ic_world_globe_dark");
+		ICON_RES_NAME.setModeDefaultValue(ApplicationMode.CAR, "ic_action_car");
+		ICON_RES_NAME.setModeDefaultValue(ApplicationMode.BICYCLE, "ic_action_bicycle");
+		ICON_RES_NAME.setModeDefaultValue(ApplicationMode.PEDESTRIAN, "ic_action_pedestrian");
+		ICON_RES_NAME.setModeDefaultValue(ApplicationMode.PUBLIC_TRANSPORT, "ic_action_bus");
+		ICON_RES_NAME.setModeDefaultValue(ApplicationMode.BOAT, "ic_action_sail_boat");
+		ICON_RES_NAME.setModeDefaultValue(ApplicationMode.AIRCRAFT, "ic_action_aircraft");
+		ICON_RES_NAME.setModeDefaultValue(ApplicationMode.SKI, "ic_action_skiing");
+	}
+
+	public final CommonPreference<ProfileIconColors> ICON_COLOR = new EnumIntPreference<>("app_mode_icon_color", ProfileIconColors.DEFAULT, ProfileIconColors.values()).makeProfile().cache();
+
+	public final CommonPreference<String> USER_PROFILE_NAME = new StringPreference("user_profile_name", "").makeProfile().cache();
+
+	public final CommonPreference<String> ROUTING_PROFILE = new StringPreference("routing_profile", "").makeProfile().cache();
+
+	{
+		ROUTING_PROFILE.setModeDefaultValue(ApplicationMode.CAR, "car");
+		ROUTING_PROFILE.setModeDefaultValue(ApplicationMode.BICYCLE, "bicycle");
+		ROUTING_PROFILE.setModeDefaultValue(ApplicationMode.PEDESTRIAN, "pedestrian");
+		ROUTING_PROFILE.setModeDefaultValue(ApplicationMode.PUBLIC_TRANSPORT, "public_transport");
+		ROUTING_PROFILE.setModeDefaultValue(ApplicationMode.BOAT, "boat");
+		ROUTING_PROFILE.setModeDefaultValue(ApplicationMode.AIRCRAFT, "STRAIGHT_LINE_MODE");
+		ROUTING_PROFILE.setModeDefaultValue(ApplicationMode.SKI, "ski");
+	}
+
+	public final CommonPreference<RouteService> ROUTE_SERVICE = new EnumIntPreference<>("route_service", RouteService.OSMAND, RouteService.values()).makeProfile().cache();
+
+	{
+		ROUTE_SERVICE.setModeDefaultValue(ApplicationMode.AIRCRAFT, RouteService.STRAIGHT);
+	}
+
+	public final CommonPreference<Integer> MIN_DISTANCE_FOR_TURN = new IntPreference("min_distance_for_turn", 50).makeProfile().cache();
+
+	{
+		MIN_DISTANCE_FOR_TURN.setModeDefaultValue(ApplicationMode.DEFAULT, 5);
+		MIN_DISTANCE_FOR_TURN.setModeDefaultValue(ApplicationMode.CAR, 35);
+		MIN_DISTANCE_FOR_TURN.setModeDefaultValue(ApplicationMode.BICYCLE, 15);
+		MIN_DISTANCE_FOR_TURN.setModeDefaultValue(ApplicationMode.PEDESTRIAN, 5);
+		MIN_DISTANCE_FOR_TURN.setModeDefaultValue(ApplicationMode.BOAT, 20);
+		MIN_DISTANCE_FOR_TURN.setModeDefaultValue(ApplicationMode.AIRCRAFT, 100);
+		MIN_DISTANCE_FOR_TURN.setModeDefaultValue(ApplicationMode.SKI, 15);
+	}
+
+	public final CommonPreference<Integer> ARRIVAL_DISTANCE = new IntPreference("arrival_distance", 90).makeProfile().cache();
+
+	{
+		ARRIVAL_DISTANCE.setModeDefaultValue(ApplicationMode.DEFAULT, 90);
+		ARRIVAL_DISTANCE.setModeDefaultValue(ApplicationMode.BICYCLE, 60);
+		ARRIVAL_DISTANCE.setModeDefaultValue(ApplicationMode.PEDESTRIAN, 45);
+		ARRIVAL_DISTANCE.setModeDefaultValue(ApplicationMode.SKI, 60);
+	}
+
+	public final CommonPreference<Integer> OFF_ROUTE_DISTANCE = new IntPreference("off_route_distance", 350).makeProfile().cache();
+
+	{
+		OFF_ROUTE_DISTANCE.setModeDefaultValue(ApplicationMode.BICYCLE, 50);
+		OFF_ROUTE_DISTANCE.setModeDefaultValue(ApplicationMode.PEDESTRIAN, 20);
+		OFF_ROUTE_DISTANCE.setModeDefaultValue(ApplicationMode.SKI, 50);
+	}
+
+	public final CommonPreference<NavigationIcon> NAVIGATION_ICON = new EnumIntPreference<>("navigation_icon", NavigationIcon.DEFAULT, NavigationIcon.values()).makeProfile().cache();
+
+	{
+		NAVIGATION_ICON.setModeDefaultValue(ApplicationMode.DEFAULT, NavigationIcon.DEFAULT);
+		NAVIGATION_ICON.setModeDefaultValue(ApplicationMode.CAR, NavigationIcon.DEFAULT);
+		NAVIGATION_ICON.setModeDefaultValue(ApplicationMode.BICYCLE, NavigationIcon.DEFAULT);
+		NAVIGATION_ICON.setModeDefaultValue(ApplicationMode.BOAT, NavigationIcon.NAUTICAL);
+		NAVIGATION_ICON.setModeDefaultValue(ApplicationMode.AIRCRAFT, NavigationIcon.DEFAULT);
+		NAVIGATION_ICON.setModeDefaultValue(ApplicationMode.SKI, NavigationIcon.DEFAULT);
+	}
+
+	public final CommonPreference<LocationIcon> LOCATION_ICON = new EnumIntPreference<>("location_icon", LocationIcon.DEFAULT, LocationIcon.values()).makeProfile().cache();
+
+	{
+		LOCATION_ICON.setModeDefaultValue(ApplicationMode.DEFAULT, LocationIcon.DEFAULT);
+		LOCATION_ICON.setModeDefaultValue(ApplicationMode.CAR, LocationIcon.CAR);
+		LOCATION_ICON.setModeDefaultValue(ApplicationMode.BICYCLE, LocationIcon.BICYCLE);
+		LOCATION_ICON.setModeDefaultValue(ApplicationMode.BOAT, LocationIcon.DEFAULT);
+		LOCATION_ICON.setModeDefaultValue(ApplicationMode.AIRCRAFT, LocationIcon.CAR);
+		LOCATION_ICON.setModeDefaultValue(ApplicationMode.SKI, LocationIcon.BICYCLE);
+	}
+
+	public final CommonPreference<Integer> APP_MODE_ORDER = new IntPreference("app_mode_order", 0).makeProfile().cache();
 
 	public final OsmandPreference<Float> SWITCH_MAP_DIRECTION_TO_COMPASS =
 			new FloatPreference("speed_for_map_to_direction_of_movement", 0f).makeProfile();
