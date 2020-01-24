@@ -3421,4 +3421,16 @@ représentant la zone : %1$s x %2$s</string>
     <string name="select_nav_icon_descr">Vous ne verrez l\'icône que lors de la navigation ou en déplacement.</string>
     <string name="select_map_icon_descr">L \'icône Carte n\'apparaît que sur la carte et est remplacée par l\'icône Navigation lors de la navigation.</string>
     <string name="logcat_buffer_descr">Ici, vous pouvez consulter les journaux de l\'application et les partager (pour debug)</string>
+    <string name="permission_is_required">Vous n\'êtes pas autorisés à utiliser cette option.</string>
+    <string name="live_monitoring_tracking_interval">Intervalle de suivi</string>
+    <string name="live_monitoring_adress">Adresse web</string>
+    <string name="monitoring_notification">Notification</string>
+    <string name="monitoring_min_speed">Vitesse minimale</string>
+    <string name="monitoring_min_accuracy">Précision minimale</string>
+    <string name="monitoring_min_distance">Déplacement minimum</string>
+    <string name="reset_plugin_to_default">Restaurer les paramètres par défaut du greffon</string>
+    <string name="multimedia_rec_split_title">Fractionner l\'enregistrement</string>
+    <string name="multimedia_use_system_camera">Utiliser l\'application système</string>
+    <string name="multimedia_photo_play_sound">Son de la prise de vue</string>
+    <string name="osm_authorization_success">L\'autorisation a été accordée</string>
 </resources>
