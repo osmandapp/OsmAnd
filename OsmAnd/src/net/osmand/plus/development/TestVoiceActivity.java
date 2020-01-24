@@ -169,8 +169,10 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		addButton(ll, "\u25BA (3.4)  After 3100m turn right onto 'SR 80' toward 'Rome'", builder(p).prepareTurn(AbstractPrologCommandPlayer.A_RIGHT, 3100, street(p,  "SR 80", "", "Rome")));
 		addButton(ll, "\u25BA (3.5)  In 370m turn slightly right onto 'Route 23' 'Main Street', then bear left", builder(p).turn(AbstractPrologCommandPlayer.A_RIGHT_SL, 370, street(p, "Route 23", "Main Street", "")).then().bearLeft(street(p, "")));
 		addButton(ll, "\u25BA (3.6)  Turn sharply right onto 'Dr.-Quinn-Stra"+"\u00df"+"e'", builder(p).turn(AbstractPrologCommandPlayer.A_RIGHT_SH, street(p, "", "Dr.-Quinn-Straße", "")));
-		addButton(ll, "\u25BA (3.7)  Turn slightly right to exit 6 onto 'Amsterdam-Osdorp'", builder(p).takeExit(AbstractPrologCommandPlayer.A_RIGHT_SL, 6, street(p, "", "Amsterdam-Osdorp", "")));
-		addButton(ll, "\u25BA (3.8)  In 350m turn slightly right to exit 6 onto 'Amsterdam-Osdorp'", builder(p).takeExit(AbstractPrologCommandPlayer.A_RIGHT_SL, 350, 6, street(p, "", "Amsterdam-Osdorp", "")));
+		addButton(ll, "\u25BA (3.7)  Turn slightly right to exit 6 onto 'Amsterdam-Osdorp'", builder(p).takeExit(AbstractPrologCommandPlayer.A_RIGHT_SL, "6", 6, street(p, "", "Amsterdam-Osdorp", "")));
+		addButton(ll, "\u25BA (3.8)  In 350m turn slightly right to exit 6 onto 'Amsterdam-Osdorp'", builder(p).takeExit(AbstractPrologCommandPlayer.A_RIGHT_SL, 350, "6", 6, street(p, "", "Amsterdam-Osdorp", "")));
+		addButton(ll, "\u25BA (3.9)  Turn slightly right to exit 260B ", builder(p).takeExit(AbstractPrologCommandPlayer.A_RIGHT_SL, "260 B", 260, street(p, "", "", "")));
+		addButton(ll, "\u25BA (3.10)  Turn slightly left to exit 15B ", builder(p).takeExit(AbstractPrologCommandPlayer.A_LEFT_SL, "15 B", 15, street(p, "", "", "")));
 
 		addButton(ll, "Keep left/right: prepareTurn, makeTurnIn, turn:", builder(p));
 		addButton(ll, "\u25BA (4.1)  After 1810m keep left ' '", builder(p).prepareTurn(AbstractPrologCommandPlayer.A_LEFT_KEEP, 1810, street(p, "")));
