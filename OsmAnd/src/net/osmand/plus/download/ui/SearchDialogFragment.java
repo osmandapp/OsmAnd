@@ -1,7 +1,6 @@
 package net.osmand.plus.download.ui;
 
 import android.content.res.TypedArray;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -32,7 +31,6 @@ import net.osmand.Collator;
 import net.osmand.CollatorStringMatcher;
 import net.osmand.OsmAndCollator;
 import net.osmand.ResultMatcher;
-import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.data.Amenity;
@@ -416,7 +414,6 @@ public class SearchDialogFragment extends DialogFragment implements DownloadEven
 			@Override
 			protected IndexItem doInBackground(Void... params) {
 				Amenity amenity = cityItem.getAmenity();
-				BinaryMapDataObject o = null;
 				WorldRegion downloadRegion = null;
 				try {
 					downloadRegion = osmandRegions.getSmallestBinaryMapDataObjectAt(amenity.getLocation()).getKey();
