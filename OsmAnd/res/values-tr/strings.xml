@@ -1027,7 +1027,7 @@
     <string name="shared_string_search">Arama</string>
     <string name="shared_string_show_description">Açıklamayı göster.</string>
     <string name="shared_string_message">İleti</string>
-    <string name="agps_data_last_downloaded">En son indirilen A-GPS verisi: %1$s</string>
+    <string name="agps_data_last_downloaded">İndirilen A-GPS verisi: %1$s</string>
     <string name="welmode_download_maps">Harita indir</string>
     <string name="welcome_header">Hoş Geldiniz</string>
     <string name="current_route">Şu anki rota</string>
@@ -1919,7 +1919,7 @@
 \n (Sadece {2} MB mevcut.)</string>
     <string name="download_files_question_space_with_temp">{0} dosya indirilsin mi\?
 \n Geçici olarak {3} MB, kalıcı olarak {1} MB kullanılır. ({2} MB’tan.)</string>
-    <string name="upload_osm_note_description">OSM notunuzu anonim olarak ya da OSM.org profilinizi kullanarak yükleyin.</string>
+    <string name="upload_osm_note_description">OSM notunuzu anonim olarak ya da OpenStreetMap.org profilinizi kullanarak yükleyin.</string>
     <string name="upload_osm_note">OSM Not yükle</string>
     <string name="shared_string_move_up">Taşı ↑</string>
     <string name="shared_string_move_down">Taşı ↓</string>
@@ -2059,7 +2059,7 @@
     <string name="new_filter_desc">Lütfen yeni süzgeç için bir ad girin, bu \'Kategoriler\' sekmenize eklenecek.</string>
     <string name="osm_live_payment_desc">Abonelik aylık ücretlendirilir. İstediğiniz zaman Google Play\'den iptal edin.</string>
     <string name="donation_to_osm">OSM topluluğuna bağış</string>
-    <string name="donation_to_osm_desc">Bağışınızın bir kısmı, OSM haritacılarına gönderilir. Abonelik ücretiniz aynı kalır.</string>
+    <string name="donation_to_osm_desc">Bağışınızın bir kısmı, OSM\'ye katkıda bulunanlara gönderilir. Abonelik ücretiniz aynı kalır.</string>
     <string name="osm_live_subscription_desc">Abonelik; tüm küresel haritalar için sınırsız indirmeyi ve saatlik, günlük, haftalık güncellemeleri etkinleştirir.</string>
     <string name="osm_live_banner_desc">Haftalık, günlük ve hatta saatlik güncellemeler ekleyen sınırsız harita indirmeleri alın.</string>
     <string name="osmand_plus_banner_desc">Sınırsız harita indirmeleri, güncellemeleri ve Wikipedia eklentisi.</string>
@@ -2305,8 +2305,8 @@
     <string name="quick_action_auto_zoom_desc">Hız kontrollü otomatik yakınlaştırma özelliğini açmak veya kapatmak için buton.</string>
     <string name="quick_action_add_first_intermediate">Seyahatteki ilk ara-noktayı ekleyin</string>
     <string name="quick_action_add_destination_desc">Ekranın rota hedefini ortalamasını sağlayan bir buton, önceden seçilen bir hedef son ara hedef haline gelecektir.</string>
-    <string name="quick_action_replace_destination_desc">Önceden seçilen hedefi (varsa) değiştirerek ekranı yeni rota hedefine ortalama butonu.</string>
-    <string name="quick_action_add_first_intermediate_desc">Ekranı ilk ara hedefe ortalama butonu.</string>
+    <string name="quick_action_replace_destination_desc">Ekranın, (varsa) daha önce seçilen hedefi değiştirerek yeni rota hedefini ortalamasını sağlamak için bir buton.</string>
+    <string name="quick_action_add_first_intermediate_desc">Ekranın, ilk ara hedefi ortalamasını sağlamak için bir buton.</string>
     <string name="right_side_navigation">Sağdan akan trafik</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">Tepelikli</string>
     <string name="routing_attr_relief_smoothness_factor_plains_name">Az tepelikli</string>
@@ -3342,7 +3342,7 @@
     <string name="track_saved">Yol izi kaydedildi</string>
     <string name="empty_filename">Dosya adı boş</string>
     <string name="shared_string_revert">Eski haline döndür</string>
-    <string name="quick_action_directions_from_desc">Başlangıç noktasını ekranın merkezi yapan ve hedefe giden rotayı hesaplayan veya hedef işaretleyici haritada değilse, hedefi seçmek için bir iletişim kutusu açan bir buton.</string>
+    <string name="quick_action_directions_from_desc">Ekranın, kalkış noktasını ortalamasını sağlamak için bir buton. Daha sonra hedef belirlemeyi veya rota hesaplamasını tetiklemeyi isteyecektir.</string>
     <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Düğüm ağı bisiklet rotalarını göster</string>
     <string name="clear_confirmation_msg">%1$s\'i temizle\?</string>
     <string name="download_map_dialog">Harita indirme iletişim kutusu</string>
