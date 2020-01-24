@@ -261,4 +261,10 @@
     <string name="buffer_time">Puffer lejárati ideje</string>
     <string name="shared_string_suggested">Javasolt</string>
     <string name="status_widget_title">Az OsmAnd Tracker állapota</string>
+    <string name="back_to_osmand">Vissza az OsmAndba</string>
+    <string name="last_update_from_telegram_date">Utolsó frissítés a Telegramtól: %1$s</string>
+    <string name="last_response_date">Utolsó válasz: %1$s</string>
+    <string name="last_update_from_telegram_duration">Utolsó frissítés a Telegramtól: %1$s</string>
+    <string name="last_response_duration">Utolsó válasz: %1$s</string>
+    <string name="duration_ago">Ennyivel ezelőtt: %1$s</string>
 </resources>

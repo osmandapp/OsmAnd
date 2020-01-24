@@ -245,9 +245,7 @@
     <string name="shared_string_hour_short">sa</string>
     <string name="shared_string_minute_short">dk</string>
     <string name="shared_string_second_short">sn</string>
-    <string name="welcome_descr">
-        <b>OsmAnd Tracker</b> konumunuzu paylaşmanıza ve OsmAnd\'daki diğer kişileri görmenize olanak sağlar.<br/>
-        <br/>Uygulama Telegram API\'sini kullanmaktadır, bu nedenle bir Telegram hesabına ihtiyacınız vardır.</string>
+    <string name="welcome_descr"><b>OsmAnd Tracker</b> konumunuzu paylaşmanıza ve OsmAnd\'daki diğer kişileri görmenize olanak sağlar.<br/><br/>Uygulama Telegram API\'sini kullanmaktadır, bu nedenle bir Telegram hesabına ihtiyacınız vardır.</string>
     <string name="my_location">Konumum</string>
     <string name="live_now">Şimdi canlı</string>
     <string name="timeline">Zaman çizelgesi</string>
@@ -263,4 +261,9 @@
     <string name="shared_string_suggested">Önerilen</string>
     <string name="status_widget_title">OsmAnd Tracker durumu</string>
     <string name="back_to_osmand">OsmAnd\'a geri dön</string>
+    <string name="last_update_from_telegram_date">Telegram\'dan son güncelleme: %1$s</string>
+    <string name="last_response_date">Son cevap: %1$s</string>
+    <string name="last_update_from_telegram_duration">Telegram\'dan son güncelleme: %1$s önce</string>
+    <string name="last_response_duration">Son cevap: %1$s önce</string>
+    <string name="duration_ago">%1$s önce</string>
 </resources>

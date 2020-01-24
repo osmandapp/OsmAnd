@@ -2376,12 +2376,12 @@
 \n 
 \n 
 \n一些主要特點：</string>
-    <string name="quick_action_auto_zoom_desc">開啟或關閉因為您的速度而自動縮放的按鈕。</string>
+    <string name="quick_action_auto_zoom_desc">用於速度控制自動縮放開關的按鈕。</string>
     <string name="shared_string_overview">概要</string>
     <string name="quick_action_replace_destination_desc">將新路線目的地置中，並取代先前選取的目的地（如果有的話）的按鈕。</string>
     <string name="quick_action_add_first_intermediate_desc">將第一個中轉目的地置中的按鈕。</string>
     <string name="depth_contour_descr">海洋等深線和海洋標記。</string>
-    <string name="quick_action_add_destination_desc">將路徑目的地置中的按鈕，讓先前所選的目的地變成最後中轉目的地的按鈕。</string>
+    <string name="quick_action_add_destination_desc">將路徑目的地在畫面上置中的按鈕，先前選取的目的地將會變成最後的中轉目的地。</string>
     <string name="subscribe_email_desc">訂閱我們有關應用程式折扣的郵寄名單並獲得三次以上的地圖下載！</string>
     <string name="animate_my_location">以動畫顯示自己的位置</string>
     <string name="animate_my_location_desc">在導航時將「我的位置」開啟動畫平移。</string>
@@ -3326,8 +3326,8 @@
     <string name="shared_string_memory_used_mb_desc">已用 %1$s MB</string>
     <string name="shared_string_memory_used_kb_desc">已用 %1$s kB</string>
     <string name="contour_lines_and_hillshade">等高線與地形陰影</string>
-    <string name="routing_attr_prefer_unpaved_name">偏好無鋪面路徑</string>
-    <string name="routing_attr_prefer_unpaved_description">偏好無鋪面路徑。</string>
+    <string name="routing_attr_prefer_unpaved_name">偏好無鋪面道路</string>
+    <string name="routing_attr_prefer_unpaved_description">偏好無鋪面道路。</string>
     <string name="update_all_maps">更新所有地圖</string>
     <string name="update_all_maps_q">您確定您想要更新所有 (%1$d) 地圖嗎？</string>
     <string name="release_3_5">• 更新的應用程式與設定檔設定。方便地按照類型排列，並可自訂每個設定檔 
@@ -3349,8 +3349,8 @@
 \n</string>
     <string name="apply_preference_to_all_profiles">您可以套用此變更到所有或僅選定的設定檔。</string>
     <string name="shared_preference">共享</string>
-    <string name="routing_attr_driving_style_prefer_unpaved_name">偏好無鋪面路徑</string>
-    <string name="routing_attr_driving_style_prefer_unpaved_description">在無路面的情況下穿越地形。</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_name">偏好無鋪面道路</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_description">在計算路徑時，相較於有鋪面的道路，較偏好無鋪面的道路。</string>
     <string name="layer_osm_edits">OSM 編輯</string>
     <string name="quick_action_contour_lines_descr">在地圖上顯示或隱藏等高線的按鈕。</string>
     <string name="quick_action_contour_lines_show">顯示等高線</string>
@@ -3367,17 +3367,17 @@
     <string name="overwrite_profile_q">「%1$s」已存在。覆寫？</string>
     <string name="export_profile_failed">無法匯出設定檔。</string>
     <string name="profile_import">匯入設定檔</string>
-    <string name="profile_import_descr">在 OsmAnd 中開啟檔案以新增設定檔。</string>
+    <string name="profile_import_descr">使用 OsmAnd 開啟檔案以新增設定檔。</string>
     <string name="file_import_error">%1$s 匯入錯誤：%2$s</string>
     <string name="file_imported_successfully">%1$s 已匯入。</string>
     <string name="rendering_value_white_name">白</string>
     <string name="swap_two_places">交換 %1$s 與 %2$s</string>
     <string name="route_start_point">起點</string>
-    <string name="default_speed_dialog_msg">估計未知道路類型的到達時間，並限制所有道路的速度（可以重新計算路徑）</string>
+    <string name="default_speed_dialog_msg">估計未知道路類型的到達時間，並限制所有道路的速度（可能會影響路徑）</string>
     <string name="track_saved">已儲存軌跡</string>
     <string name="empty_filename">檔案名稱為空</string>
     <string name="shared_string_revert">還原</string>
-    <string name="quick_action_directions_from_desc">如果螢幕上沒有目的地標記，則讓螢幕中心點變成目的地標記並計算到目的地路徑或開啟對話框以選取目的地的按鈕。</string>
+    <string name="quick_action_directions_from_desc">讓出發點置於畫面中央的按鈕。</string>
     <string name="rendering_attr_showCycleNodeNetworkRoutes_name">顯示節點網路自行車路徑</string>
     <string name="clear_confirmation_msg">清除 %1$s？</string>
     <string name="download_map_dialog">下載地圖對話框</string>
@@ -3385,7 +3385,7 @@
     <string name="dialogs_and_notifications_descr">控制彈出式視窗、對話框與通知。</string>
     <string name="rendering_value_walkingRoutesOSMCNodes_name">節點網路</string>
     <string name="suggested_maps">建議的地圖</string>
-    <string name="suggested_maps_descr">那些地圖必須與外掛程式一起使用。</string>
+    <string name="suggested_maps_descr">這些地圖必須與外掛程式一起使用。</string>
     <string name="added_profiles">已新增設定檔</string>
     <string name="added_profiles_descr">外掛程式新增的設定檔</string>
     <string name="shared_string_turn_off">關閉</string>
@@ -3393,7 +3393,7 @@
     <string name="join_segments">新增線段</string>
     <string name="add_new_profile_q">新增新的設定檔「%1$s」？</string>
     <string name="save_heading">包含標題</string>
-    <string name="save_heading_descr">在追蹤時將標題儲存到每個追蹤點。</string>
+    <string name="save_heading_descr">在記錄時將標題儲存到每個追蹤點。</string>
     <string name="distance_and_address">%1$s • %2$s</string>
     <string name="street_city">%1$s, %2$s</string>
     <string name="personal_category_name">個人</string>
@@ -3402,18 +3402,18 @@
     <string name="desert_render_descr">適用於沙漠或其他人煙稀少的地區。更詳細。</string>
     <string name="select_navigation_icon">導航圖示</string>
     <string name="select_map_icon">地圖圖示</string>
-    <string name="delete_profiles_descr">點擊「套用」後，將會永久刪除所有設定檔。</string>
+    <string name="delete_profiles_descr">點擊「套用」後，將會永久刪除所有已移除的設定檔。</string>
     <string name="master_profile">主控設定檔</string>
     <string name="select_color">選取顏色</string>
-    <string name="edit_profiles_descr">OsmAnd 設定檔可以被移動到底部，但無法刪除。返回以移除它們。</string>
+    <string name="edit_profiles_descr">OsmAnd 預設的設定檔無法被刪除，但可以被停用（在前一個畫面），或被排到底部。</string>
     <string name="edit_profiles">編輯設定檔</string>
-    <string name="select_nav_profile_dialog_message">導航類型會影響路徑計算的規則。</string>
+    <string name="select_nav_profile_dialog_message">「導航類型」會控制路徑的計算方式。</string>
     <string name="profile_appearance">設定外觀</string>
     <string name="choose_icon_color_name">圖示、顏色與名稱</string>
     <string name="reorder_profiles">編輯設定檔清單</string>
     <string name="selected_profile">選定的設定檔</string>
-    <string name="reset_confirmation_descr">點擊 %1$s，您將會失去您所有的變更。</string>
-    <string name="reset_all_profile_settings_descr">所有設定檔都將被重設為安裝時的預設值。</string>
+    <string name="reset_confirmation_descr">點擊 %1$s 將會丟棄您所有的變更。</string>
+    <string name="reset_all_profile_settings_descr">將所有設定檔設定重設為安裝時的預設值。</string>
     <string name="reset_all_profile_settings">重設所有設定檔的設定？</string>
     <string name="ltr_or_rtl_combine_via_colon">%1$s：%2$s</string>
     <string name="ltr_or_rtl_combine_via_space">%1$s %2$s</string>
@@ -3442,4 +3442,35 @@
     <string name="select_map_icon_descr">地圖圖示僅顯示在地圖上。</string>
     <string name="logcat_buffer_descr">檢視及分享應用程式的紀錄檔</string>
     <string name="search_offline_geo_error">無法解析地理含義「%s」。</string>
+    <string name="tracks_view_descr">您已紀錄的軌跡位於 %1$s，或是 OsmAnd 資料夾。</string>
+    <string name="multimedia_notes_view_descr">您的 OSM 註記位於 %1$s。</string>
+    <string name="osm_edits_view_descr">檢視您的編輯或 OSM 臭蟲尚未上傳到 %1$s。已上傳的點將不會再顯示。</string>
+    <string name="permission_is_required">使用此選項需要權限。</string>
+    <string name="monitoring_min_speed_descr">這是一個低速過濾器，不記錄低於特定速度的點。在地圖上查看時，這可能會使記錄的軌跡看起來更平滑。</string>
+    <string name="monitoring_min_speed_descr_side_effect">副作用：您的軌跡將會遺失所有未達到最低速度標準的部份（例如，您將自行車推上陡峭的山坡）。此外，也將沒有其餘的資訊，如休息等。這會影響任何分析或後處理，例如試圖確定行程的總長度，運動時間或平均速度時。</string>
+    <string name="monitoring_min_speed_descr_recommendation">建議：先試著透過紀錄最小位移過濾器 (B) 來使用運動偵測，這可能會生成更好的結果，您也會遺失更少的資料。如果您的軌跡在低速時仍然有相當多的雜訊，請在此處嘗試使用非零的值。請注意，某些測量可能根本就不會回報任何速度值（某些以網路為基礎的方法），在這種情況下就不會記錄任何內容。</string>
+    <string name="monitoring_min_speed_descr_remark">備註：移動檢查：大多數 GPS 晶片只在演算法確定您處於運動狀態時回報速度值，否則就不回報速度值。因此，在某種意義上在此過濾器中使用 &gt; 0 的設定將會使用 GPS 晶片的運動偵測。但是，即使在錄製時未在此處過濾，我們仍會在 GPX 分析中使用此功能來確定校正後的距離，即該欄位中顯示的值是運動時記錄的距離。</string>
+    <string name="monitoring_min_accuracy_descr">這將僅記錄以最小精度指示（以公尺／英呎為單位，由 Android 為您的晶片組回報）測量的點。精密度是指重複測量的分散性，與準確度沒有直接關係，準確度定義了測量與實際位置的接近程度。</string>
+    <string name="monitoring_min_accuracy_descr_side_effect">副作用：由於按精密度進行過濾，因此，在橋樑下，樹木下，高層建築之間或在特定天氣條件下，點將會完全遺失。</string>
+    <string name="monitoring_min_accuracy_descr_recommendation">建議：很難預測將要記錄什麼而不記錄什麼，最好關閉此過濾器。</string>
+    <string name="monitoring_min_accuracy_descr_remark">備註：如果 GPS 在記錄之前已關閉，則測量的第一個點的精密度可能會降低，因此在我們的程式碼中，我們可能要等一秒鐘左右再記錄一個點（或記錄三個連續點中的最佳點，依此類推），但尚未實作。</string>
+    <string name="monitoring_min_distance_descr">該過濾器可避免記錄可能發生過少實際運動的重複點，讓軌跡看起來更平滑，可不進行後處理。</string>
+    <string name="monitoring_min_distance_descr_side_effect">副作用：完全不記錄休息時間，也不會每次只記錄一個點。較小的（真實世界）移動（例如橫向移動，以標記您的行進路線）可能會被濾除。您的檔案包含的資訊較少，可用於後製，並且由於在記錄時過濾掉了明顯的冗餘點而讓統計資訊變糟，同時還可能保留由不良接收或 GPS 晶片影響所造成的假點。</string>
+    <string name="monitoring_min_distance_descr_recommendation">建議：如果您不需要取得比其更詳細的細節，並且不想在靜止時取得資料，則設定為 5 公尺可能較合適您。</string>
+    <string name="live_monitoring_time_buffer">緩衝時間</string>
+    <string name="live_monitoring_tracking_interval">軌跡間隔</string>
+    <string name="live_monitoring_adress">網址</string>
+    <string name="live_monitoring_adress_descr">使用參數語法指定網址：lat = {0}，lon = {1}，timestamp = {2}，hdop = {3}，altitude= {4}，speed = {5}，bearing = {6}。</string>
+    <string name="monitoring_notification">通知</string>
+    <string name="monitoring_min_speed">最低速度</string>
+    <string name="monitoring_min_accuracy">最低精密度</string>
+    <string name="monitoring_min_distance">最小偏移</string>
+    <string name="tracks_view_path">選單 — 我的收藏 — 軌跡</string>
+    <string name="multimedia_notes_view_path">選單 — 我的收藏 — 註記</string>
+    <string name="osm_edits_view_path">選單 — 我的收藏 — OSM 編輯</string>
+    <string name="reset_plugin_to_default">重設外掛程式設定為預設值</string>
+    <string name="multimedia_rec_split_title">記錄器分黎</string>
+    <string name="multimedia_use_system_camera">使用系統應用程式</string>
+    <string name="multimedia_photo_play_sound">相機快門聲</string>
+    <string name="osm_authorization_success">驗證成功</string>
 </resources>
