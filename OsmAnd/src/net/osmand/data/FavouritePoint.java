@@ -3,6 +3,7 @@ package net.osmand.data;
 import java.io.Serializable;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
@@ -18,6 +19,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 
 	private static final String HIDDEN = "hidden";
 	private static final String ADDRESS_EXTENSION = "address";
+	private static final String DEFAULT_ICON_NAME = "special_star";
 
 	protected String name = "";
 	protected String description;
@@ -91,6 +93,10 @@ public class FavouritePoint implements Serializable, LocationPoint {
 
 	public int getIconId() {
 		return iconId;
+	}
+
+	public String getIconEntryName(Context ctx) {
+		return ctx.getResources().getResourceEntryName(getOverlayIconId());
 	}
 
 	public void setIconId(int iconId) {
@@ -314,7 +320,7 @@ public class FavouritePoint implements Serializable, LocationPoint {
 			pt.getExtensionsToWrite().put(ADDRESS_EXTENSION, getAddress());
 		}
 		if (iconId != 0) {
-			pt.setIconName(ctx.getResources().getResourceEntryName(iconId).substring(3));
+			pt.setIconName(getIconEntryName(ctx).substring(3));
 		}
 		if (getColor() != 0) {
 			pt.setColor(getColor());
