@@ -49,6 +49,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Map.Entry;
+
+import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
@@ -263,6 +265,8 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 			}
 		});
 		poiNameEditText.setText(editPoiData.getTag(OSMSettings.OSMTagKey.NAME.getValue()));
+		poiNameEditText.requestFocus();
+		AndroidUtils.showSoftKeyboard(poiNameEditText);
 		poiTypeTextInputLayout = (TextInputLayout) view.findViewById(R.id.poiTypeTextInputLayout);
 		poiTypeEditText = (AutoCompleteTextView) view.findViewById(R.id.poiTypeEditText);
 		poiTypeEditText.setText(editPoiData.getPoiTypeString());
