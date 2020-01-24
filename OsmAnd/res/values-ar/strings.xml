@@ -1870,7 +1870,7 @@
     <string name="rendering_value_walkingRoutesScopeOSMC_name">تلوين وفق الانتماء للشبكة</string>
     <string name="rendering_value_walkingRoutesOSMC_name">تلوين وفق رمز تنزه OSMC</string>
     <string name="shared_string_logoff">خروج</string>
-    <string name="local_recordings_delete_all_confirm">هل أنت متأكد من أنك تريد حذف الملاحظات ٪1$d؟</string>
+    <string name="local_recordings_delete_all_confirm">هل أنت متأكد من أنك تريد حذف الملاحظات %1$d؟</string>
     <string name="nautical_maps_missing">لعرض الخرائط البحرية، يجب تحميل خريطة خاصة محلياً</string>
     <string name="save_track_to_gpx_globally_descr">تسجيل الموقع العام إلى ملف GPX يمكن تشغيله أو إيقافه باستخدام نافذة تسجيل GPX على الشاشة خريطة.</string>
     <string name="proxy_host_descr">ضبط اسم مضيف البروكسي (مثال 127.0.0.1).</string>
@@ -2140,7 +2140,7 @@
     <string name="quick_action_map_source">مصدر الخريطة</string>
     <string name="quick_action_map_source_title">مصدر الخريطة</string>
     <string name="quick_action_map_source_action">إضافة مصدر خريطة</string>
-    <string name="quick_action_map_source_switch">تم تغيير مصدر الخريطة إلى \"٪ s\".</string>
+    <string name="quick_action_map_source_switch">تم تغيير مصدر الخريطة إلى \"%s\".</string>
     <string name="quick_action_btn_tutorial_title">تغيير موقع الزر</string>
     <string name="quick_action_showhide_favorites_descr">الضغط على زر الإجراء سيقوم بعرض أو إخفاء نقاطك المفضلة على الخريطة.</string>
     <string name="quick_action_fav_name_descr">دع الحقل فارغا إن كنت ترغب في استعمال العنوان أو اسم المكان.</string>
@@ -3119,7 +3119,7 @@
     <string name="logcat_buffer">عازل ضبابي</string>
     <string name="plugins_settings">إعدادات البرنامج المساعد</string>
     <string name="shared_string_by_default">بشكل افتراضي</string>
-    <string name="download_detailed_map">قم بتنزيل خريطة مفصلة٪ s لعرض هذه المنطقة.</string>
+    <string name="download_detailed_map">قم بتنزيل خريطة مفصلة%s لعرض هذه المنطقة.</string>
     <string name="internal_app_storage_description">تخزين داخلي ، مخفي عن المستخدم والتطبيقات الأخرى ، يمكن الوصول إليه حصريا من OsmAnd.</string>
     <string name="change_data_storage_folder">تغيير مجلد تخزين البيانات</string>
     <string name="rendering_attr_piste_type_snow_park_name">حديقة التضاريس</string>
@@ -3294,8 +3294,8 @@
     <string name="sett_generic_ext_input">لوحة المفاتيح</string>
     <string name="sett_wunderlinq_ext_input">وندرلينك</string>
     <string name="sett_parrot_ext_input">ببغاء</string>
-    <string name="new_route_calculated_dist_dbg">المسار: المسافة٪s ، وقت جهاز التوجيه٪s
-\nالحساب:٪.1f ثانية ،٪d طرق ،٪d تجانب)</string>
+    <string name="new_route_calculated_dist_dbg">المسار: المسافة%s ، وقت جهاز التوجيه%s
+\nالحساب:%.1f ثانية ،%d طرق ،%d تجانب)</string>
     <string name="lang_oc">الأوكيتانية</string>
     <string name="get_discount_title">احصل على خصم بمقدار %d %@ at %d%% .</string>
     <string name="get_discount_first_part">%1$s للأول %2$s</string>
@@ -3358,9 +3358,9 @@
     <string name="search_offline_geo_error">تعذر تحليل الهدف الجغرافي \'%s\'.</string>
     <string name="permission_is_required">الإذن مطلوب لاستخدام هذا الخيار.</string>
     <string name="monitoring_min_speed_descr_side_effect">اعراض جانبية: سيفقد المسار الخاص بك جميع الأقسام التي لم يتحقق فيها معيار الحد الأدنى للسرعة (على سبيل المثال ، حيث تدفع دراجتك أعلى تل شديد الانحدار). أيضا ، لن تكون هناك معلومات حول فترات الراحة ، مثل الاستراحات. هذا له تأثيرات على أي تحليل أو مرحلة ما بعد المعالجة ، مثل عند محاولة تحديد المدة الإجمالية لرحلتك ، أو وقت الحركة ، أو متوسط سرعتك.</string>
-    <string name="tracks_view_descr">المسارات المسجلة الخاصة بك هي في %1 $s، أو مجلد OsmAnd.</string>
-    <string name="multimedia_notes_view_descr">ملاحظات OSM موجودة في٪ 1 $ s.</string>
-    <string name="osm_edits_view_descr">عرض تعديلاتك أو أخطاء OSM التي لم يتم تحميلها بعد في٪ 1 $ s. لن يتم عرض النقاط التي تم تحميلها بعد الآن.</string>
+    <string name="tracks_view_descr">المسارات المسجلة الخاصة بك هي في %1$s، أو مجلد OsmAnd.</string>
+    <string name="multimedia_notes_view_descr">ملاحظات OSM موجودة في%1$s.</string>
+    <string name="osm_edits_view_descr">عرض تعديلاتك أو أخطاء OSM التي لم يتم تحميلها بعد في%1$s. لن يتم عرض النقاط التي تم تحميلها بعد الآن.</string>
     <string name="monitoring_min_speed_descr">مرشح قطع سرعة منخفضة لعدم تسجيل نقاط أقل من سرعة معينة. وهذا قد يجعل المسارات المسجلة تبدو أكثر سلاسة عند عرضها على الخريطة.</string>
     <string name="monitoring_min_speed_descr_recommendation">التوصية: حاول استخدام كشف الحركة عبر مرشح الحد الأدنى للإزاحة للتسجيل (B) أولاً ، فقد ينتج عنه نتائج أفضل ، ويستهلك بيانات أقل. إذا استمرت المسارات الخاصة بك مزعجة عند السرعات المنخفضة ، فجرب القيم غير الصفرية هنا. يرجى ملاحظة أن بعض القياسات قد لا تبلغ عن أي قيمة سرعة على الإطلاق (بعض الطرق المستندة إلى الشبكة) ، وفي هذه الحالة لن تسجل أي شيء.</string>
     <string name="monitoring_min_speed_descr_remark">ملاحظة: سرعة &gt; 0 الاختيار: معظم شرائح GPS تبلغ عن قيمة السرعة فقط إذا كانت الخوارزمية تحدد الحركة أوالسكون. وبالتالي باستخدام إعدادات&gt; 0 في هذا المرشح يتم كشف عن الحركة من شرائح GPS. ولكن حتى لو لم تتم تصفيتها هنا في وقت التسجيل ، فإننا لا نزال نستخدم هذه الميزة في تحليل GPX لتحديد المسافة المصححة ، أي أن القيمة المعروضة في هذا الحقل هي المسافة المسجلة أثناء الحركة.</string>
