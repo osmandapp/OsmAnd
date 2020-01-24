@@ -107,7 +107,7 @@ public class ApplicationMode {
 
 	public static final ApplicationMode PEDESTRIAN = createBase(R.string.app_mode_pedestrian, "pedestrian")
 			.speed(1.11f, 5).arrivalDistance(45).offRouteDistance(20)
-			.icon(R.drawable.ic_action_pedestrian_dark, R.drawable.map_action_pedestrian_dark, "ic_action_pedestrian_dark")
+			.icon(R.drawable.ic_action_pedestrian, R.drawable.map_action_pedestrian_dark, "ic_action_pedestrian")
 			.setRoutingProfile("pedestrian").description(R.string.base_profile_descr_pedestrian).reg();
 
 	public static final ApplicationMode PUBLIC_TRANSPORT = createBase(R.string.app_mode_public_transport, "public_transport")
@@ -117,7 +117,7 @@ public class ApplicationMode {
 	public static final ApplicationMode BOAT = createBase(R.string.app_mode_boat, "boat")
 			.speed(1.38f, 20)
 			.locationIcon(LocationIcon.DEFAULT).navigationIcon(NavigationIcon.NAUTICAL)
-			.icon(R.drawable.ic_action_sail_boat_dark, R.drawable.map_action_sail_boat_dark, "ic_action_sail_boat_dark")
+			.icon(R.drawable.ic_action_sail_boat, R.drawable.map_action_sail_boat_dark, "ic_action_sail_boat")
 			.setRoutingProfile("boat").description(R.string.base_profile_descr_boat).reg();
 
 	public static final ApplicationMode AIRCRAFT = createBase(R.string.app_mode_aircraft, "aircraft")
@@ -856,17 +856,17 @@ public class ApplicationMode {
 		DEFAULT(R.drawable.ic_world_globe_dark, R.string.app_mode_default, "ic_world_globe_dark"),
 		CAR(R.drawable.ic_action_car, R.string.app_mode_car, "ic_action_car"),
 		TAXI(R.drawable.ic_action_taxi, R.string.app_mode_taxi, "ic_action_taxi"),
-		TRUCK(R.drawable.ic_action_truck_dark, R.string.app_mode_truck, "ic_action_truck_dark"),
+		TRUCK(R.drawable.ic_action_truck, R.string.app_mode_truck, "ic_action_truck"),
 		SHUTTLE_BUS(R.drawable.ic_action_shuttle_bus, R.string.app_mode_shuttle_bus, "ic_action_shuttle_bus"),
 		BUS(R.drawable.ic_action_bus, R.string.app_mode_bus, "ic_action_bus"),
 		SUBWAY(R.drawable.ic_action_subway, R.string.app_mode_subway, "ic_action_subway"),
 		MOTORCYCLE(R.drawable.ic_action_motorcycle, R.string.app_mode_motorcycle, "ic_action_motorcycle"),
 		BICYCLE(R.drawable.ic_action_bicycle, R.string.app_mode_bicycle, "ic_action_bicycle"),
 		HORSE(R.drawable.ic_action_horse, R.string.app_mode_horse, "ic_action_horse"),
-		PEDESTRIAN(R.drawable.ic_action_pedestrian_dark, R.string.app_mode_pedestrian, "ic_action_pedestrian_dark"),
-		TREKKING(R.drawable.ic_action_trekking_dark, R.string.app_mode_hiking, "ic_action_trekking_dark"),
+		PEDESTRIAN(R.drawable.ic_action_pedestrian, R.string.app_mode_pedestrian, "ic_action_pedestrian"),
+		TREKKING(R.drawable.ic_action_trekking, R.string.app_mode_hiking, "ic_action_trekking"),
 		SKIING(R.drawable.ic_action_skiing, R.string.app_mode_skiing, "ic_action_skiing"),
-		SAIL_BOAT(R.drawable.ic_action_sail_boat_dark, R.string.app_mode_boat, "ic_action_sail_boat_dark"),
+		SAIL_BOAT(R.drawable.ic_action_sail_boat, R.string.app_mode_boat, "ic_action_sail_boat"),
 		AIRCRAFT(R.drawable.ic_action_aircraft, R.string.app_mode_aircraft, "ic_action_aircraft"),
 		HELICOPTER(R.drawable.ic_action_helicopter, R.string.app_mode_helicopter, "ic_action_helicopter"),
 		TRANSPORTER(R.drawable.ic_action_personal_transporter, R.string.app_mode_personal_transporter, "ic_action_personal_transporter"),

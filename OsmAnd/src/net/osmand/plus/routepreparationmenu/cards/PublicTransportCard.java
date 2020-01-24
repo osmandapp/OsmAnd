@@ -388,7 +388,7 @@ public class PublicTransportCard extends BaseCard {
 		TextView transportStopRouteTextView = (TextView) bageView.findViewById(R.id.transport_stop_route_text);
 		ImageView transportStopRouteImageView = (ImageView) bageView.findViewById(R.id.transport_stop_route_icon);
 
-		transportStopRouteImageView.setImageDrawable(getActiveIcon(R.drawable.ic_action_pedestrian_dark));
+		transportStopRouteImageView.setImageDrawable(getActiveIcon(R.drawable.ic_action_pedestrian));
 		transportStopRouteTextView.setText(OsmAndFormatter.getFormattedDuration((int) walkTime, app));
 		GradientDrawable gradientDrawableBg = (GradientDrawable) bageView.getBackground();
 		gradientDrawableBg.setColor(activeColor);
