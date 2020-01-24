@@ -1748,7 +1748,7 @@
     <string name="share_note">Share note</string>
     <string name="location_on_map">Location:\n Lat %1$s\n Lon %2$s</string>
     <string name="watch">Watch</string>
-    <string name="notes">OSM notes</string>
+    <string name="notes">A/V notes</string>
     <string name="online_map">Online map</string>
     <string name="roads_only">Roads only</string>
     <string name="rendering_attr_pisteRoutes_name">Ski slopes</string>
