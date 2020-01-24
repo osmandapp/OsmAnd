@@ -217,6 +217,19 @@ public class Algorithms {
 		}
 	}
 
+
+	/**
+	 * Find end index of first number in string if contains letters else return -1
+	 */
+	public static int findFirstNumberEndIndexInString(String value) {
+		for (int i = 0; i < value.length(); i++) {
+			if (i + 1 < value.length() && Character.isLetter(i + 1)) {
+				return i;
+			}
+		}
+		return -1;
+	}
+
 	public static boolean isDigit(char charAt) {
 		return charAt >= '0' && charAt <= '9';
 	}

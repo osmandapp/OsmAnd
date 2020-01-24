@@ -3,6 +3,7 @@ package net.osmand.plus.routing;
 
 import android.media.AudioManager;
 import android.media.SoundPool;
+import android.util.Log;
 
 import net.osmand.Location;
 import net.osmand.binary.RouteDataObject;
@@ -718,8 +719,6 @@ public class VoiceRouter {
 					sb.append(exit.charAt(i));
 				}
 			}
-			//	For pronounce letter like in transcription
-			sb.append(".");
 		}
 		return sb.toString();
 	}
@@ -732,7 +731,8 @@ public class VoiceRouter {
 			ExitInfo exitInfo = next.getExitInfo();
 			if (tParam != null) {
 				if (exitInfo != null && !Algorithms.isEmpty(exitInfo.getRef())) {
-					p.takeExit(tParam, dist, getSpeakableExitRef(exitInfo.getRef()), getSpeakableExitName(next, exitInfo, true));
+					String speakableExitRef = getSpeakableExitRef(exitInfo.getRef());
+					p.takeExit(tParam, dist, speakableExitRef, Algorithms.findFirstNumberEndIndexInString(speakableExitRef), getSpeakableExitName(next, exitInfo, true));
 				} else {
 					p.turn(tParam, dist, getSpeakableStreetName(currentSegment, next, true));
 				}
@@ -805,7 +805,8 @@ public class VoiceRouter {
 			boolean isplay = true;
 			if (tParam != null) {
 				if (exitInfo != null && !Algorithms.isEmpty(exitInfo.getRef())) {
-					p.takeExit(tParam, getSpeakableExitRef(exitInfo.getRef()), getSpeakableExitName(next, exitInfo, !suppressDest));
+					String speakableExitRef = getSpeakableExitRef(exitInfo.getRef());
+					p.takeExit(tParam, speakableExitRef, Algorithms.findFirstNumberEndIndexInString(speakableExitRef), getSpeakableExitName(next, exitInfo, !suppressDest));
 				} else {
 					p.turn(tParam, getSpeakableStreetName(currentSegment, next, !suppressDest));
 				}

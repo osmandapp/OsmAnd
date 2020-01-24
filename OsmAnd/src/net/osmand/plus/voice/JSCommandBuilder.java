@@ -119,13 +119,13 @@ public class JSCommandBuilder extends CommandBuilder {
         return addCommand(C_TURN, param, dist, convertStreetName(streetName));
     }
 
-    public JSCommandBuilder takeExit(String turnType, String exit, StreetName streetName) {
-        return takeExit(turnType, -1, exit, streetName);
+    public JSCommandBuilder takeExit(String turnType, String exit, int firstNumEndIndex, StreetName streetName) {
+        return takeExit(turnType, -1, exit, firstNumEndIndex, streetName);
     }
 
-    public JSCommandBuilder takeExit(String turnType, double dist, String exit, StreetName streetName) {
+    public JSCommandBuilder takeExit(String turnType, double dist, String exit, int firstNumEndIndex, StreetName streetName) {
         return isJSCommandExists(C_TAKE_EXIT) ?
-                addCommand(C_TAKE_EXIT, turnType, dist, exit, convertStreetName(streetName)) :
+                addCommand(C_TAKE_EXIT, turnType, dist, exit, firstNumEndIndex, convertStreetName(streetName)) :
                 addCommand(C_TURN, turnType, dist, convertStreetName(streetName));
     }
 
