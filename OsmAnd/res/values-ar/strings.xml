@@ -1348,7 +1348,6 @@
     <string name="error_calculating_route">لا يمكن حساب الطريق.</string>
     <string name="error_calculating_route_occured">حدث خطأ أثناء حساب الطريق.</string>
     <string name="empty_route_calculated">خطأ: الطريق المحسوب فارغ.</string>
-    <string name="new_route_calculated_dist">المسافة و(الزمن)</string>
     <string name="arrived_at_destination">تم الوصول.</string>
     <string name="go_back_to_osmand">عُد إلى خريطة OsmAnd</string>
     <string name="loading_data">تحميل البيانات…</string>
@@ -1952,8 +1951,7 @@
     <string name="navigate_point_format_D">DDD.DD</string>
     <string name="navigate_point_format_DM">DDD MM.MM</string>
     <string name="navigate_point_format_DMS">DDD MM SS.SS</string>
-    <string name="poi_error_poi_not_found">لم يتم العثور على النقطة أو أن المكان عبارة عن عدة نقاط وليست مدعومة بعدُ على التطبيق.</string>
-    <string name="plugin_touringview_descr">تفعيل هذه الرؤية يغير نمط خريطة أوسماند إلى \'نمط التجوال\'، هذا النمط يوفر رؤية غنية بالتفاصيل للمسافرين والسائقين المحترفين. 
+    <string name="plugin_touringview_descr">تفعيل هذه الرؤية يغير نمط خريطة أوسماند إلى \'نمط التجوال\'، هذا النمط يوفر رؤية غنية بالتفاصيل للمسافرين والسائقين المحترفين.
 \n 
 \nتوفر هذه الرؤية في أي تكبير معين للخريطة أكبر قدر ممكن من تفاصيل السفر المتاحة في بيانات الخريطة (خاصة الطرق، المسارات، المعابر وعلامات التوجيه). 
 \n 
@@ -1997,8 +1995,6 @@
     <string name="replace_favorite_confirmation">هل تريد استبدال المفضلة %1$s؟</string>
     <string name="clear_tile_data">حذف جميع الطبقات</string>
     <string name="update_all_maps_now">هل تريد تحديث كافة الخرائط الآن؟</string>
-    <string name="no_update_info_desc">لا تتحقق من وجود تحديثات الإصدار أو الخصومات المتعلقة بالتطبيق.</string>
-    <string name="no_update_info">لا تظهر التحديثات</string>
     <string name="skip_map_downloading">تخط التحميل</string>
     <string name="skip_map_downloading_desc">لا يوجد خرائط محملة. حدد الآن خريطة أو قم بتحميلها لاحقاً عبر القائمة ثم %1$s.</string>
     <string name="search_another_country">حدد منطقة أخرى</string>
@@ -2072,11 +2068,8 @@
     <string name="route_roundabout_short">خذ المخرج %1$d ثم واصل</string>
     <string name="search_map_hint">المدينة أو المنطقة</string>
     <string name="wiki_around">مقالات ويكيبيديا القريبة</string>
-    <string name="show_legacy_search">إظهار طريقة البحث القديمة</string>
-    <string name="show_legacy_search_desc">إضافة البحث المتعمق في قائمة الدرج.</string>
     <string name="routing_attr_allow_motorway_name">استخدام الطرق السريعة</string>
     <string name="routing_attr_allow_motorway_description">السماح للطرق السريعة.</string>
-    <string name="legacy_search">بحث موروث</string>
     <string name="lang_sr_latn">الصربية (اللاتينية)</string>
     <string name="lang_zh_hk">الصينية (هونج كونج)</string>
     <string name="rendering_attr_hideWaterPolygons_description">ماء</string>
@@ -2708,7 +2701,6 @@
     <string name="start_editing_card_image_text">دليل السفر إلى جميع أنحاء العالم مجاناً.</string>
     <string name="day_off_label">معطّل</string>
     <string name="unirs_render_descr">تعديل النمط الافتراضي لزيادة تباين المشاة و طرق الدراجات .يستخدم Legasy Mapnik colors .</string>
-    <string name="commiting_way">طريق الزامية…</string>
     <string name="wikivoyage_travel_guide_descr">أدلة سفر إلى أكثر الأماكن إثارة في هذا الكوكب دون اتصال.</string>
     <string name="in_app_purchase">الشراء داخل التطبيق</string>
     <string name="in_app_purchase_desc">دفع مرة واحدة</string>
@@ -2732,7 +2724,7 @@
     <string name="osm_edits_export_desc">تصدير كملاحظات OSM أو النقاط المهمة أو كليهما.</string>
     <string name="add_group_descr">يمكنك استيراد مجموعات من المفضلة أو نقاط مسار.</string>
     <string name="mapillary_menu_title_pano">عرض صور 360° فقط</string>
-    <string name="release_3_2_pre">• اصلاح الفشل عند بدء التشغيل التي وقعت في بعض الأجهزة
+    <!--string name="release_3_2_pre">• اصلاح الفشل عند بدء التشغيل التي وقعت في بعض الأجهزة
 \n
 \n• ميزة علامات جديدة: عرض العلامات التي تم اجتيازها بالفعل
 \n
@@ -2744,8 +2736,8 @@
 \n
 \n• دعم لتحرير الكائنات المضلعة (غير الملائمة)
 \n
-\n• قياس المسافة: إضافة زر القياس إلى الإجراءات في قائمة السياق</string>
-    <string name="release_3_1">• التنقل: إصلاح شريط التقدم ، تبديل سريع لنقطة البداية والنهاية للطريق
+\n• قياس المسافة: إضافة زر القياس إلى الإجراءات في قائمة السياق</string-->
+    <!--string name="release_3_1">• التنقل: إصلاح شريط التقدم ، تبديل سريع لنقطة البداية والنهاية للطريق
 \n
 \n• محددات الخرائط: قم بإيقاف تشغيل / إيقاف مجموعات ، والقدرة على إخفاء علامات من الخريطة
 \n
@@ -2757,7 +2749,7 @@
 \n
 \n• قارب الملاحة: دعم الممر المائي الممر
 \n
-\n• إصلاحات الأخطاء الأخرى</string>
+\n• إصلاحات الأخطاء الأخرى</string-->
     <string name="start_editing_card_description">يمكنك تحرير أي مقال على ويكي الرحلات وتبادل المعرفة والخبرة والموهبة والاهتمامات.</string>
     <string name="cubic_m">m³</string>
     <string name="add_home">إضافة المنزل</string>
@@ -2796,7 +2788,7 @@
     <string name="welcome_to_open_beta_description">دليل السفر حاليا على أساس wikivoyage.اختبار كافة الميزات أثناء اختبار بيتا المفتوحة مجانا.بعد ذلك، وأدلة السفر ستكون متاحة للمشتركين في osmand محدود و اصحاب osmand +.</string>
     <string name="av_locations_selected_desc">ملف GPX مع الإحداثيات والبيانات من الملاحظات المحددة.</string>
     <string name="av_locations_all_desc">ملف GPX مع الإحداثيات والبيانات من كافة الملاحظات.</string>
-    <string name="release_3_0">• جديد: دعم للسفر دون اتصال عالمية وأدلة. وترتبط المواقع المشار إليها على الخريطة. الحصول على البيانات الأولية من ويكيفوياجي.
+    <!--string name="release_3_0">• جديد: دعم للسفر دون اتصال عالمية وأدلة. وترتبط المواقع المشار إليها على الخريطة. الحصول على البيانات الأولية من ويكيفوياجي.
 \n
 \n• ويكيبيديا: نظرة جديدة، روابط نشطة، • الصور الآن دعم \"واجهة المستخدم المسار المفتوح\": تقديم الدعم لمجموعات إحداثية
 \n
@@ -2804,7 +2796,7 @@
 \n
 \n• مباشر أوسماند الاشتراك الآن يدعم جميع أوسماند الميزات
 \n
-\n</string>
+\n</string-->
     <string name="one_tap_active">نقرة لتنشيط العلامة</string>
     <string name="empty_state_av_notes_desc">إضافة ملاحظة صوتية أو فيديو أو صورة لكل نقطة على الخريطة، باستخدام قائمة السياق أو القطعة.</string>
     <string name="looking_for_tracks_with_waypoints">ابحث عن المسارات مع نقاط الطريق</string>
@@ -2887,7 +2879,7 @@
     <string name="quick_action_day_night_mode">%s وضع</string>
     <string name="avoid_pt_types">تجنب أنواع النقل…</string>
     <string name="shared_string_walk">المشي</string>
-    <string name="save_poi_value_exceed_length">اختصر طول العلامة \"٪ s\" إلى أقل من 255 حرفًا.</string>
+    <string name="save_poi_value_exceed_length">اختصر طول العلامة \"%s\" إلى أقل من 255 حرفًا.</string>
     <string name="shared_string_degrees">درجات</string>
     <string name="shared_string_milliradians">مللي راديان</string>
     <string name="angular_measeurement">وحدات القياس الزاوي</string>
@@ -2910,7 +2902,7 @@
     <string name="rendering_attr_highway_class_path_name">مسار</string>
     <string name="rendering_attr_highway_class_cycleway_name">طريق الدراجات</string>
     <string name="rendering_attr_undefined_name">غير محدد</string>
-    <string name="release_3_3">• شاشة اتجاهات جديدة تعرض أزرار وجهة المنزل والعمل ، واختصار المسار السابق ، وقائمة مسارات وعلامات GPX النشطة ، وسجل البحث. 
+    <!--string name="release_3_3">• شاشة اتجاهات جديدة تعرض أزرار وجهة المنزل والعمل ، واختصار المسار السابق ، وقائمة مسارات وعلامات GPX النشطة ، وسجل البحث.
 \n
 \n  • معلومات إضافية تحت تفاصيل الطريق: أنواع الطرق ، السطح ، الانحدار ، النعومة. 
 \n
@@ -2926,7 +2918,7 @@
 \n
 \n  • تمت إزالة تحليلات Facebook و Firebase من الإصدار المجاني (لا يتضمنها OsmAnd+)
 \n
-\n</string>
+\n</string-->
     <string name="use_osm_live_public_transport_description">تمكين تغييرات النقل العام OsmAnd Live.</string>
     <string name="use_osm_live_public_transport">OsmAnd Live وسائل النقل العام</string>
     <string name="routing_attr_avoid_sett_name">تجنب الحصى والطرق المرصوفة</string>
@@ -2937,15 +2929,15 @@
     <string name="routing_attr_avoid_subway_description">تجنب قطارالأنفاق والنقل بالسكك الحديدية خفيفة الوزن</string>
     <string name="routing_attr_avoid_ferry_name">تجنب العبارات</string>
     <string name="routing_attr_avoid_ferry_description">تجنب العبارات</string>
-    <string name="release_3_3_7">• عرض الوقت بين التنقلات في وسائل النقل العام 
+	<!--string name="release_3_3_7">• عرض الوقت بين التنقلات في وسائل النقل العام
 \n
-\n• تصحيح واجهة المستخدم للحصول على تفاصيل الطريق 
+\n• تصحيح واجهة المستخدم للحصول على تفاصيل الطريق
 \n
-\n• إصلاح السمة الداكنة في قائمة الاتجاه وتفاصيل الطريق 
+\n• إصلاح السمة الداكنة في قائمة الاتجاه وتفاصيل الطريق
 \n
 \n• عرض السمت في قياس المسافة
 \n
-\n</string>
+\n</string-->
     <string name="day">يوم</string>
     <string name="days_2_4">أيام</string>
     <string name="days_5">أيام</string>
