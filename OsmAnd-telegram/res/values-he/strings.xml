@@ -262,4 +262,9 @@
     <string name="shared_string_suggested">מוצע</string>
     <string name="status_widget_title">מצב עוקב OsmAnd</string>
     <string name="back_to_osmand">חזרה ל־OsmAnd</string>
+    <string name="last_update_from_telegram_date">עדכון אחרון מטלגרם: %1$s</string>
+    <string name="last_response_date">תגובה אחרונה: %1$s</string>
+    <string name="last_update_from_telegram_duration">עדכון אחרון מטלגרם: %1$s ago</string>
+    <string name="last_response_duration">תגובה אחרונה: לפני %1$s</string>
+    <string name="duration_ago">לפני %1$s</string>
 </resources>
