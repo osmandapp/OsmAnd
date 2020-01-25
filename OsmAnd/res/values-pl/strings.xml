@@ -3441,4 +3441,6 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="select_nav_icon_descr">Ikona wyświetlana tylko podczas nawigacji lub ruchu.</string>
     <string name="select_map_icon_descr">Ikona mapy wyświetlana tylko na mapie.</string>
     <string name="logcat_buffer_descr">Sprawdź i udostępnij szczegółowe dzienniki aplikacji</string>
+    <string name="file_does_not_contain_routing_rules">Brak reguł routingu w \'%1$s\'. Wybierz inny plik.</string>
+    <string name="permission_is_required">Wymagane jest zezwolenie na korzystanie z tej opcji.</string>
 </resources>

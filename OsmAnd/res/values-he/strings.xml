@@ -3436,4 +3436,5 @@
     <string name="select_map_icon_descr">סמל המפה מופיע במפה בלבד והוא מתחלף בעת הניווט לסמל הניווט.</string>
     <string name="button_rate">דירוג</string>
     <string name="logcat_buffer_descr">כאן ניתן לצפות ולשתף את תיעוד יומני היישומון</string>
+    <string name="permission_is_required">נדרשת הרשאה כדי להשתמש באפשרות הזו.</string>
 </resources>

@@ -3400,8 +3400,8 @@
     <string name="shared_string_downloading_formatted">Завантажується %s</string>
     <string name="rendering_value_thick_name">Товсто</string>
     <string name="desert_render_descr">Для пустель та інших малонаселених ділянок. Більше докладностей.</string>
-    <string name="select_navigation_icon">Образок навігації</string>
-    <string name="select_map_icon">Образок мапи</string>
+    <string name="select_navigation_icon">Образок положення під час руху</string>
+    <string name="select_map_icon">Позиція образка в спокої</string>
     <string name="delete_profiles_descr">Натиснення \"Застосувати\" видалить профілі назавжди.</string>
     <string name="master_profile">Основний профіль</string>
     <string name="select_color">Оберіть барву</string>
@@ -3441,8 +3441,8 @@
     <string name="osm_editing">OSM-редагування</string>
     <string name="osm_edits_view_descr">Ви можете переглянути всі не завантажені зміни або помилки в OSM в %1$s. Завантажені точки не відображаються в OsmAnd.</string>
     <string name="app_mode_osm">OSM</string>
-    <string name="select_nav_icon_descr">Образок відображається лише під час навігації чи переміщення.</string>
-    <string name="select_map_icon_descr">Образок мапи відображається лише на мапі.</string>
+    <string name="select_nav_icon_descr">Образок відображається під час навігації чи переміщення.</string>
+    <string name="select_map_icon_descr">Образок показано в спокої.</string>
     <string name="logcat_buffer_descr">Перевіряти та обмінюватися докладними часописами додатку</string>
     <string name="search_offline_geo_error">Не вдалося розібрати метод \'%s\'.</string>
     <string name="permission_is_required">Для використання цього параметра потрібен дозвіл.</string>
