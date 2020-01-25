@@ -528,6 +528,7 @@ class TelegramHelper private constructor() {
 				}
 			}
 			resultArticles.forEach {
+				shareInfo.lastTextMessageProcessed = false
 				client?.send(TdApi.SendInlineQueryResultMessage(shareInfo.chatId, 0, true,
 					true, inlineQueryResults.inlineQueryId, it.id, false)) { obj ->
 					handleTextLocationMessageUpdate(obj, shareInfo)
@@ -940,7 +941,7 @@ class TelegramHelper private constructor() {
 	}
 
 	fun editTextLocation(shareInfo: TelegramSettings.ShareChatInfo, content: TdApi.InputMessageText) {
-		if (shareInfo.currentTextMessageId!=-1L) {
+		if (shareInfo.currentTextMessageId != -1L) {
 			shareInfo.pendingTdLibText++
 			shareInfo.lastSendTextMessageTime = (System.currentTimeMillis() / 1000).toInt()
 			log.info("editTextLocation ${shareInfo.currentTextMessageId} pendingTdLibText: ${shareInfo.pendingTdLibText}")
@@ -985,6 +986,7 @@ class TelegramHelper private constructor() {
 	}
 
 	private fun handleMapLocationMessageUpdate(obj: TdApi.Object, shareInfo: TelegramSettings.ShareChatInfo) {
+		shareInfo.lastMapMessageProcessed = true
 		when (obj.constructor) {
 			TdApi.Error.CONSTRUCTOR -> {
 				log.debug("handleMapLocationMessageUpdate - ERROR $obj")
@@ -1032,11 +1034,12 @@ class TelegramHelper private constructor() {
 	}
 
 	private fun handleTextLocationMessageUpdate(obj: TdApi.Object, shareInfo: TelegramSettings.ShareChatInfo) {
+		shareInfo.lastTextMessageProcessed = true
 		when (obj.constructor) {
 			TdApi.Error.CONSTRUCTOR -> {
 				log.debug("handleTextLocationMessageUpdate - ERROR")
 				val error = obj as TdApi.Error
-				shareInfo.pendingMapMessage = false
+				shareInfo.pendingTextMessage = false
 				if (error.code != IGNORED_ERROR_CODE) {
 					shareInfo.hasSharingError = true
 					outgoingMessagesListeners.forEach {

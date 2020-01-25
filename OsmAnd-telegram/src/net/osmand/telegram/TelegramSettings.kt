@@ -108,7 +108,7 @@ private const val PROXY_ENABLED = "proxy_enabled"
 private const val PROXY_PREFERENCES_KEY = "proxy_preferences"
 
 private const val SHARING_INITIALIZATION_TIME = 60 * 2L // 2 minutes
-private const val WAITING_TDLIB_TIME = 30 // 2 seconds
+private const val WAITING_TDLIB_TIME = 3 // 3 seconds
 
 private const val GPS_UPDATE_EXPIRED_TIME = 60 * 3L // 3 minutes
 
@@ -503,13 +503,15 @@ class TelegramSettings(private val app: TelegramApplication) {
 
 	private fun getNewSharingStatusHistoryItem(): SharingStatus {
 		return SharingStatus().apply {
-			statusChangeTime = System.currentTimeMillis()
+			val currentTimeMillis = System.currentTimeMillis()
+			val currentTime = currentTimeMillis / 1000
+			statusChangeTime = currentTimeMillis
 			val lm = app.getSystemService(Context.LOCATION_SERVICE) as LocationManager
 			val gpsEnabled = try {
 				if (lm.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
 					val loc = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER)
-					val gpsActive = loc != null && ((statusChangeTime - loc.time) / 1000) < GPS_UPDATE_EXPIRED_TIME
-					val lastSentLocationExpired = ((statusChangeTime - app.shareLocationHelper.lastLocationUpdateTime) / 1000) > GPS_UPDATE_EXPIRED_TIME
+					val gpsActive = loc != null && ((currentTimeMillis - loc.time) / 1000) < GPS_UPDATE_EXPIRED_TIME
+					val lastSentLocationExpired = ((currentTimeMillis - app.shareLocationHelper.lastLocationUpdateTime) / 1000) > GPS_UPDATE_EXPIRED_TIME
 					(gpsActive || !lastSentLocationExpired)
 				} else {
 					false
@@ -522,12 +524,15 @@ class TelegramSettings(private val app: TelegramApplication) {
 			var sendChatsErrors = false
 
 			shareChatsInfo.forEach { (_, shareInfo) ->
-				if (shareInfo.lastTextSuccessfulSendTime == -1L && shareInfo.lastMapSuccessfulSendTime == -1L
-					&& ((statusChangeTime / 1000 - shareInfo.start) < SHARING_INITIALIZATION_TIME)) {
+				val initTime = (currentTime - shareInfo.start) < SHARING_INITIALIZATION_TIME
+				var initSending = false
+				initSending = initSending || (shareInfo.lastTextSuccessfulSendTime == -1L && shareTypeValue != SHARE_TYPE_MAP)
+				initSending = initSending || (shareInfo.lastMapSuccessfulSendTime == -1L && shareTypeValue != SHARE_TYPE_TEXT)
+				if (initTime && initSending) {
 					initializing = true
 				} else {
-					val textSharingError = shareInfo.lastSendTextMessageTime - shareInfo.lastTextSuccessfulSendTime > WAITING_TDLIB_TIME
-					val mapSharingError = shareInfo.lastSendMapMessageTime - shareInfo.lastMapSuccessfulSendTime > WAITING_TDLIB_TIME
+					val textSharingError = !shareInfo.lastTextMessageProcessed && currentTime - shareInfo.lastSendTextMessageTime > WAITING_TDLIB_TIME
+					val mapSharingError = !shareInfo.lastMapMessageProcessed && currentTime - shareInfo.lastSendMapMessageTime > WAITING_TDLIB_TIME
 					if (shareInfo.hasSharingError
 						|| (shareTypeValue == SHARE_TYPE_MAP_AND_TEXT && (textSharingError || mapSharingError))
 						|| textSharingError && (shareTypeValue == SHARE_TYPE_TEXT)
@@ -1424,7 +1429,15 @@ class TelegramSettings(private val app: TelegramApplication) {
 		var lastTextSuccessfulSendTime = -1L
 		var lastMapSuccessfulSendTime = -1L
 		var lastSendTextMessageTime = -1
+			set(value) {
+				field = value
+				lastTextMessageProcessed = false
+			}
 		var lastSendMapMessageTime = -1
+			set(value) {
+				field = value
+				lastMapMessageProcessed = false
+			}
 		var sentMessages = 0
 		var pendingTdLibText = 0
 		var pendingTdLibMap = 0
@@ -1434,6 +1447,8 @@ class TelegramSettings(private val app: TelegramApplication) {
 		var shouldSendViaBotMapMessage = false
 		var hasSharingError = false
 		var additionalActiveTime = ADDITIONAL_ACTIVE_TIME_VALUES_SEC[0]
+		var lastMapMessageProcessed = false
+		var lastTextMessageProcessed = false
 
 		fun getNextAdditionalActiveTime(): Long {
 			var index = ADDITIONAL_ACTIVE_TIME_VALUES_SEC.indexOf(additionalActiveTime)
