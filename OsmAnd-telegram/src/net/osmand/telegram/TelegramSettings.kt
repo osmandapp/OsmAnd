@@ -1450,7 +1450,13 @@ class TelegramSettings(private val app: TelegramApplication) {
 			}
 		var sentMessages = 0
 		var pendingTdLibText = 0
+			set(value) {
+				field = max(0, value)
+			}
 		var pendingTdLibMap = 0
+			set(value) {
+				field = max(0, value)
+			}
 		var pendingTextMessage = false
 		var pendingMapMessage = false
 		var shouldSendViaBotTextMessage = false
