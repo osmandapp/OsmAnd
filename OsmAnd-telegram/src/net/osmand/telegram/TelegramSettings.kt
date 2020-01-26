@@ -396,6 +396,9 @@ class TelegramSettings(private val app: TelegramApplication) {
 						} else if (state.constructor == TdApi.MessageSendingStateFailed.CONSTRUCTOR) {
 							shareInfo.hasSharingError = true
 							shareInfo.pendingMapMessage = false
+							if (!isOsmAndBot) {
+								shareInfo.pendingTdLibMap--
+							}
 							log.debug("updateShareInfo MAP ${message.id} MessageSendingStateFailed")
 						}
 					} else {
@@ -427,6 +430,9 @@ class TelegramSettings(private val app: TelegramApplication) {
 							log.debug("updateShareInfo TEXT ${message.id} MessageSendingStateFailed")
 							shareInfo.hasSharingError = true
 							shareInfo.pendingTextMessage = false
+							if (!isOsmAndBot) {
+								shareInfo.pendingTdLibText--
+							}
 						}
 					} else {
 						shareInfo.currentTextMessageId = message.id
@@ -531,8 +537,8 @@ class TelegramSettings(private val app: TelegramApplication) {
 				if (initTime && initSending) {
 					initializing = true
 				} else {
-					val textSharingError = !shareInfo.lastTextMessageProcessed && currentTime - shareInfo.lastSendTextMessageTime > WAITING_TDLIB_TIME
-					val mapSharingError = !shareInfo.lastMapMessageProcessed && currentTime - shareInfo.lastSendMapMessageTime > WAITING_TDLIB_TIME
+					val textSharingError = !shareInfo.lastTextMessageHandled && currentTime - shareInfo.lastSendTextMessageTime > WAITING_TDLIB_TIME
+					val mapSharingError = !shareInfo.lastMapMessageHandled && currentTime - shareInfo.lastSendMapMessageTime > WAITING_TDLIB_TIME
 					if (shareInfo.hasSharingError
 						|| (shareTypeValue == SHARE_TYPE_MAP_AND_TEXT && (textSharingError || mapSharingError))
 						|| textSharingError && (shareTypeValue == SHARE_TYPE_TEXT)
@@ -1431,12 +1437,12 @@ class TelegramSettings(private val app: TelegramApplication) {
 		var lastSendTextMessageTime = -1
 			set(value) {
 				field = value
-				lastTextMessageProcessed = false
+				lastTextMessageHandled = false
 			}
 		var lastSendMapMessageTime = -1
 			set(value) {
 				field = value
-				lastMapMessageProcessed = false
+				lastMapMessageHandled = false
 			}
 		var sentMessages = 0
 		var pendingTdLibText = 0
@@ -1447,8 +1453,8 @@ class TelegramSettings(private val app: TelegramApplication) {
 		var shouldSendViaBotMapMessage = false
 		var hasSharingError = false
 		var additionalActiveTime = ADDITIONAL_ACTIVE_TIME_VALUES_SEC[0]
-		var lastMapMessageProcessed = false
-		var lastTextMessageProcessed = false
+		var lastMapMessageHandled = false
+		var lastTextMessageHandled = false
 
 		fun getNextAdditionalActiveTime(): Long {
 			var index = ADDITIONAL_ACTIVE_TIME_VALUES_SEC.indexOf(additionalActiveTime)

@@ -13,10 +13,12 @@ import android.os.*
 import android.util.Log
 import android.widget.Toast
 import net.osmand.PlatformUtil
-import net.osmand.telegram.helpers.TelegramHelper.TelegramIncomingMessagesListener
-import net.osmand.telegram.helpers.TelegramHelper.TelegramOutgoingMessagesListener
+import net.osmand.telegram.TelegramSettings.ShareChatInfo
+import net.osmand.telegram.helpers.TelegramHelper
+import net.osmand.telegram.helpers.TelegramHelper.*
 import net.osmand.telegram.notifications.TelegramNotification.NotificationType
 import net.osmand.telegram.utils.AndroidUtils
+import net.osmand.telegram.utils.OsmandLocationUtils
 import org.drinkless.td.libcore.telegram.TdApi
 import java.util.*
 
@@ -369,8 +371,12 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 		app().settings.onDeleteLiveMessages(chatId, messages)
 	}
 
-	override fun onSendLiveLocationError(code: Int, message: String) {
+	override fun onSendLiveLocationError(code: Int, message: String, shareInfo: ShareChatInfo, messageType: Int) {
 		Log.d(PlatformUtil.TAG, "Send live location error: $code - $message")
+		when (messageType) {
+			TelegramHelper.MESSAGE_TYPE_TEXT -> shareInfo.pendingTdLibText--
+			TelegramHelper.MESSAGE_TYPE_MAP -> shareInfo.pendingTdLibMap--
+		}
 	}
 
 	companion object {
