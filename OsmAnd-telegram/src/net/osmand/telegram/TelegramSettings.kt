@@ -9,6 +9,7 @@ import android.text.SpannableStringBuilder
 import android.text.style.ForegroundColorSpan
 import net.osmand.PlatformUtil
 import net.osmand.telegram.helpers.OsmandAidlHelper
+import net.osmand.telegram.helpers.ShareLocationHelper.Companion.MAX_MESSAGES_IN_TDLIB_PER_CHAT
 import net.osmand.telegram.helpers.ShowLocationHelper
 import net.osmand.telegram.helpers.TelegramHelper
 import net.osmand.telegram.utils.*
@@ -22,6 +23,7 @@ import java.util.*
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.ConcurrentLinkedQueue
 import kotlin.collections.ArrayList
+import kotlin.math.max
 
 val ADDITIONAL_ACTIVE_TIME_VALUES_SEC = listOf(15 * 60L, 30 * 60L, 60 * 60L, 180 * 60L)
 
@@ -529,6 +531,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 			var initializing = false
 			var sendChatsErrors = false
 
+			val chatsCount = shareChatsInfo.size
 			shareChatsInfo.forEach { (_, shareInfo) ->
 				val initTime = (currentTime - shareInfo.start) < SHARING_INITIALIZATION_TIME
 				var initSending = false
@@ -537,15 +540,16 @@ class TelegramSettings(private val app: TelegramApplication) {
 				if (initTime && initSending) {
 					initializing = true
 				} else {
-					val textSharingError = !shareInfo.lastTextMessageHandled && currentTime - shareInfo.lastSendTextMessageTime > WAITING_TDLIB_TIME
-					val mapSharingError = !shareInfo.lastMapMessageHandled && currentTime - shareInfo.lastSendMapMessageTime > WAITING_TDLIB_TIME
+					val maxWaitingTime = WAITING_TDLIB_TIME * MAX_MESSAGES_IN_TDLIB_PER_CHAT * max(1, chatsCount)
+					val textSharingError = !shareInfo.lastTextMessageHandled && currentTime - shareInfo.lastSendTextMessageTime > maxWaitingTime
+					val mapSharingError = !shareInfo.lastMapMessageHandled && currentTime - shareInfo.lastSendMapMessageTime > maxWaitingTime
 					if (shareInfo.hasSharingError
 						|| (shareTypeValue == SHARE_TYPE_MAP_AND_TEXT && (textSharingError || mapSharingError))
 						|| textSharingError && (shareTypeValue == SHARE_TYPE_TEXT)
 						|| mapSharingError && (shareTypeValue == SHARE_TYPE_MAP)
 					) {
 						sendChatsErrors = true
-						locationTime = Math.max(shareInfo.lastTextSuccessfulSendTime, shareInfo.lastMapSuccessfulSendTime)
+						locationTime = max(shareInfo.lastTextSuccessfulSendTime, shareInfo.lastMapSuccessfulSendTime)
 						chatsIds.add(shareInfo.chatId)
 					}
 				}
@@ -1455,6 +1459,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 		var additionalActiveTime = ADDITIONAL_ACTIVE_TIME_VALUES_SEC[0]
 		var lastMapMessageHandled = false
 		var lastTextMessageHandled = false
+		var lastBufferCheckTime = -1L
 
 		fun getNextAdditionalActiveTime(): Long {
 			var index = ADDITIONAL_ACTIVE_TIME_VALUES_SEC.indexOf(additionalActiveTime)
@@ -1468,6 +1473,13 @@ class TelegramSettings(private val app: TelegramApplication) {
 		fun getChatLiveMessageExpireTime(): Long {
 			return userSetLivePeriod - ((System.currentTimeMillis() / 1000) - start)
 		}
+
+		fun isPendingMessagesLimitReached() =
+				pendingTdLibText >= MAX_MESSAGES_IN_TDLIB_PER_CHAT || pendingTdLibMap >= MAX_MESSAGES_IN_TDLIB_PER_CHAT
+
+		fun isPendingTextMessagesLimitReached() = pendingTdLibText >= MAX_MESSAGES_IN_TDLIB_PER_CHAT
+
+		fun isPendingMapMessagesLimitReached() = pendingTdLibMap >= MAX_MESSAGES_IN_TDLIB_PER_CHAT
 
 		companion object {
 
