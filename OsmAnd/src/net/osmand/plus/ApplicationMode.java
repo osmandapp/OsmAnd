@@ -73,7 +73,6 @@ public class ApplicationMode {
 	private RouteService routeService = RouteService.OSMAND;
 
 	private float defaultSpeed = 10f;
-	private float initialDefaultSpeed = defaultSpeed;
 	private int minDistanceForTurn = 50;
 	private int arrivalDistance = 90;
 	private int offRouteDistance = 350;
@@ -223,7 +222,6 @@ public class ApplicationMode {
 		private ApplicationMode customReg() {
 			ApplicationMode m = applicationMode;
 			m.defaultSpeed = m.parentAppMode.defaultSpeed;
-			m.initialDefaultSpeed = m.parentAppMode.initialDefaultSpeed;
 			m.minDistanceForTurn = m.parentAppMode.minDistanceForTurn;
 			m.arrivalDistance = m.parentAppMode.arrivalDistance;
 			m.offRouteDistance = m.parentAppMode.offRouteDistance;
@@ -253,17 +251,7 @@ public class ApplicationMode {
 		}
 
 		public ApplicationModeBuilder icon(Context app, String iconResName) {
-			try {
-				int iconRes = app.getResources().getIdentifier(iconResName, "drawable", app.getPackageName());
-				int iconMapRes = app.getResources().getIdentifier(iconResName.replace("ic_", "map_"), "drawable", app.getPackageName());
-				if (iconRes != 0 && iconMapRes != 0) {
-					applicationMode.iconResName = iconResName;
-					applicationMode.iconRes = iconRes;
-					applicationMode.iconMapRes = iconMapRes;
-				}
-			} catch (Exception e) {
-//				return R.drawable.map_world_globe_dark;
-			}
+			updateAppModeIcon(app, iconResName, applicationMode);
 			return this;
 		}
 
@@ -284,7 +272,6 @@ public class ApplicationMode {
 
 		public ApplicationModeBuilder speed(float defSpeed, int distForTurn) {
 			applicationMode.defaultSpeed = defSpeed;
-			applicationMode.initialDefaultSpeed = defSpeed;
 			applicationMode.minDistanceForTurn = distForTurn;
 			return this;
 		}
@@ -322,6 +309,20 @@ public class ApplicationMode {
 		public ApplicationModeBuilder setOrder(int order) {
 			applicationMode.order = order;
 			return this;
+		}
+	}
+
+	private static void updateAppModeIcon(Context app, String iconResName, ApplicationMode mode) {
+		try {
+			int iconRes = app.getResources().getIdentifier(iconResName, "drawable", app.getPackageName());
+			int iconMapRes = app.getResources().getIdentifier(iconResName.replace("ic_", "map_"), "drawable", app.getPackageName());
+			if (iconRes != 0 && iconMapRes != 0) {
+				mode.iconResName = iconResName;
+				mode.iconRes = iconRes;
+				mode.iconMapRes = iconMapRes;
+			}
+		} catch (Exception e) {
+//				return R.drawable.map_world_globe_dark;
 		}
 	}
 
@@ -544,8 +545,9 @@ public class ApplicationMode {
 	}
 
 	public void resetDefaultSpeed(OsmandApplication app) {
-		this.defaultSpeed = initialDefaultSpeed;
-		app.getSettings().DEFAULT_SPEED.setModeValue(this, 0f);
+		OsmandSettings settings = app.getSettings();
+		settings.DEFAULT_SPEED.resetModeToDefault(this);
+		this.defaultSpeed = settings.DEFAULT_SPEED.getModeValue(this);
 	}
 
 	public int getMinDistanceForTurn() {
