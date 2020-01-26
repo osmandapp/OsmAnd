@@ -2837,7 +2837,7 @@
     <string name="show_more">اعرض المزيد</string>
     <string name="tracks_on_map">المسارات على الخريطة</string>
     <string name="quick_action_show_hide_gpx_tracks">إظهار/إخفاء مسارات GPX</string>
-    <string name="quick_action_show_hide_gpx_tracks_descr">زر يعرض أو يخفي مسارات GPX المحددة على الخريطة.</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">زر لإظهار أو إخفاء مسارات GPX المحددة على الخريطة.</string>
     <string name="quick_action_gpx_tracks_hide">إخفاء المسارات</string>
     <string name="quick_action_gpx_tracks_show">عرض المسارات</string>
     <string name="add_destination_query">الرجاء إضافة الوجهة أولاً</string>
@@ -2929,7 +2929,7 @@
     <string name="routing_attr_avoid_subway_description">تجنب قطارالأنفاق والنقل بالسكك الحديدية خفيفة الوزن</string>
     <string name="routing_attr_avoid_ferry_name">تجنب العبارات</string>
     <string name="routing_attr_avoid_ferry_description">تجنب العبارات</string>
-	<!--string name="release_3_3_7">• عرض الوقت بين التنقلات في وسائل النقل العام
+    <!--string name="release_3_3_7">• عرض الوقت بين التنقلات في وسائل النقل العام
 \n
 \n• تصحيح واجهة المستخدم للحصول على تفاصيل الطريق
 \n
@@ -3023,7 +3023,7 @@
     <string name="apply_preference_to_all_profiles">يمكنك تطبيق هذا التغيير على جميع ملفات التعريف أو على ملف التعريف المحدد حاليًا فقط.</string>
     <string name="shared_preference">مشتركة</string>
     <string name="routing_attr_driving_style_prefer_unpaved_name">تفضيل الطرق الغير معبدة</string>
-    <string name="routing_attr_driving_style_prefer_unpaved_description">تفضيل الطرق غير المعبدة.</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_description">تفضيل الطرق غير المعبدة عند التوجيه.</string>
     <string name="layer_osm_edits">تحرير خرائط OSM</string>
     <string name="quick_action_contour_lines_descr">لإظهار وإخفاء الخطوط الكنتورية على الخريطة.</string>
     <string name="quick_action_contour_lines_show">إظهار الخطوط الكنتورية</string>
@@ -3039,7 +3039,7 @@
     <string name="overwrite_profile_q">ملف التعريف \'%1$s\' موجود بالفعل، هل تريد استبداله؟</string>
     <string name="export_profile_failed">لا يمكن تصدير ملف التعريف.</string>
     <string name="profile_import">استيراد ملف التعريف</string>
-    <string name="profile_import_descr">لاستيراد ملف تعريف، اذهب لمكانه على الجهاز وافتحه باستخدام OsmAnd.</string>
+    <string name="profile_import_descr">لإضافة ملف تعريف، اذهب لمكانه على الجهاز وافتحه باستخدام OsmAnd.</string>
     <string name="file_import_error">%1$s استيراد خاطئ: %2$s</string>
     <string name="file_imported_successfully">%1$s تم الاستيراد بنجاح.</string>
     <string name="rendering_value_white_name">أبيض</string>
