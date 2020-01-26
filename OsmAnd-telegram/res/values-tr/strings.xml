@@ -154,7 +154,7 @@
     <string name="add_device">Cihaz ekle</string>
     <string name="share_location_as">Konum paylaşma biçimi</string>
     <string name="live_now_description">Sizinle konum paylaşımı yapan kişi ve gruplar.</string>
-    <string name="logout_from_osmand_telegram_descr">OsmAnd Tracker uygulamasından çıkış yapmak istediğinize emin misiniz, böylece konum paylaşamaz veya başkalarının yerlerini göremezsiniz\?</string>
+    <string name="logout_from_osmand_telegram_descr">OsmAnd Tracker\'dan çıkış yapmak istediğinizden emin misiniz, bu durumda konum paylaşamaz veya başkalarının yerlerini göremezsiniz\?</string>
     <string name="logout_from_osmand_telegram">OsmAnd Tracker oturumu kapatılsın mı\?</string>
     <string name="by_distance">Mesafeye göre</string>
     <string name="by_name">Ada göre</string>
