@@ -802,6 +802,9 @@ public class RoutingHelper {
 		return route.getCurrentMaxSpeed();
 	}
 
+	public synchronized String getCurrentStreetName() {
+		return route.getCurrentStreetName();
+	}
 
 	public static String formatStreetName(String name, String ref, String destination, String towards) {
 	//Hardy, 2016-08-05:
