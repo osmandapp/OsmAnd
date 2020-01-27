@@ -15,7 +15,7 @@
     <string name="logcat_buffer_descr">Check and share detailed logs of the app</string>
     <string name="file_does_not_contain_routing_rules">No routing rules in \'%1$s\'. Please choose another file.</string>
     <string name="not_support_file_type_with_ext">Select a supported %1$s extension file instead.</string>
-    <string name="monitoring_min_speed_descr">Track smoothing by not recording points below a certain speed.</string>
+    <string name="monitoring_min_speed_descr">Smoothed GPX tracking by not recording points below a certain speed.</string>
     <string name="monitoring_min_speed_descr_side_effect">Sections (and breaks) below minimum speed are not recorded, like the steep hill you pushed your bike up. Total length, time in motion, and average speed will not be exact.</string>
     <string name="monitoring_min_speed_descr_recommendation">Try increasing the value required to detect motion in the \"Minimum logging displacement\" filter (B) first. This could end up recording nothing with some network-based methods, because there is no reported speed value.</string>
     <string name="monitoring_min_speed_descr_remark">\"Speed > 0\" check: Most GPS chipsets only report a speed when registering motion. Filtering \"> 0\" relies on reported GPS chipset speed. Even if not recorded into the GPX track, the filtering method is used to analyze it in \"Distance corrected\" to get \"distance recorded while in motion\".</string>
