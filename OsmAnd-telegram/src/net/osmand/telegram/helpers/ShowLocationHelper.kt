@@ -187,7 +187,10 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 						bearing = content.bearing.toFloat()
 					}
 					val params = generatePointParams(photoPath, stale, speed, bearing)
-					val typeName = if (isGroup) chatTitle else OsmandFormatter.getListItemLiveTimeDescr(app, date, app.getString(R.string.last_response) + ": ")
+					val typeName = if (isGroup) chatTitle else OsmandFormatter.getListItemLiveTimeDescr(
+						app, date, R.string.last_response_date,
+						R.string.last_response_duration
+					)
 					if (update) {
 						osmandAidlHelper.updateMapPoint(MAP_LAYER_ID, pointId, name, name, typeName, Color.WHITE, aLatLon, details, params)
 					} else {

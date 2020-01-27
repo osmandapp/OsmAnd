@@ -53,7 +53,9 @@
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:paddingRight="@dimen/list_content_padding">
+            android:paddingTop="6dp"
+            android:paddingRight="@dimen/list_content_padding"
+            android:paddingBottom="6dp">
 
             <TextView
                 android:id="@+id/favourite_label"

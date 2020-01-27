@@ -30,6 +30,9 @@ public class LiveMonitoringFragment extends BaseSettingsFragment {
 
 	@Override
 	protected void setupPreferences() {
+		Preference liveMonitoringInfo = findPreference("live_monitoring_info");
+		liveMonitoringInfo.setIconSpaceReserved(false);
+
 		setupLiveMonitoringUrlPref();
 		setupLiveMonitoringIntervalPref();
 		setupLiveMonitoringBufferPref();
@@ -86,9 +89,17 @@ public class LiveMonitoringFragment extends BaseSettingsFragment {
 	}
 
 	private void setupLiveMonitoringUrlPref() {
+		ApplicationMode appMode = getSelectedAppMode();
+		String summary;
+		if (settings.LIVE_MONITORING_URL.isSetForMode(appMode)) {
+			summary = settings.LIVE_MONITORING_URL.getModeValue(appMode);
+		} else {
+			summary = getString(R.string.shared_string_disabled);
+		}
+
 		EditTextPreferenceEx liveMonitoringUrl = (EditTextPreferenceEx) findPreference(settings.LIVE_MONITORING_URL.getId());
-		liveMonitoringUrl.setSummary(settings.LIVE_MONITORING_URL.getModeValue(getSelectedAppMode()));
-		liveMonitoringUrl.setDescription(R.string.live_monitoring_m_descr);
+		liveMonitoringUrl.setSummary(summary);
+		liveMonitoringUrl.setDescription(R.string.live_monitoring_adress_descr);
 		liveMonitoringUrl.setIcon(getContentIcon(R.drawable.ic_world_globe_dark));
 	}
 

@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="last_update_from_telegram_date">Last update from Telegram: %1$s</string>
+    <string name="last_response_date">Last response: %1$s</string>
+    <string name="last_update_from_telegram_duration">Last update from Telegram: %1$s ago</string>
+    <string name="last_response_duration">Last response: %1$s ago</string>
+    <string name="duration_ago">%1$s ago</string>
     <string name="back_to_osmand">Back to OsmAnd</string>
     <string name="shared_string_suggested">Suggested</string>
     <string name="status_widget_title">OsmAnd Tracker status</string>

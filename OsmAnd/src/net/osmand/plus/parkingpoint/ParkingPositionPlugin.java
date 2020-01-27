@@ -17,6 +17,7 @@ import android.widget.TimePicker;
 
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
@@ -31,7 +32,6 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
-import net.osmand.plus.settings.BaseSettingsFragment;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
@@ -62,10 +62,9 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	// Constants for determining the order of items in the additional actions context menu
 	private static final int MARK_AS_PARKING_POS_ITEM_ORDER = 10500;
 
-    private LatLon parkingPosition;
-    private OsmandApplication app;
+	private LatLon parkingPosition;
+	private OsmandApplication app;
 
-	private ParkingPositionLayer parkingLayer;
 	private TextInfoWidget parkingPlaceControl;
 	private final CommonPreference<Float> parkingLat;
 	private final CommonPreference<Float> parkingLon;
@@ -84,13 +83,12 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		parkingEvent = set.registerBooleanPreference(PARKING_EVENT_ADDED, false).makeGlobal();
 		parkingTime = set.registerLongPreference(PARKING_TIME, -1).makeGlobal();
 		parkingStartTime = set.registerLongPreference(PARKING_START_TIME, -1).makeGlobal();
-        parkingPosition = constructParkingPosition();
+		parkingPosition = constructParkingPosition();
 	}
-	
 
-    public LatLon getParkingPosition() {
-        return parkingPosition;
-    }
+	public LatLon getParkingPosition() {
+		return parkingPosition;
+	}
 	
 	public LatLon constructParkingPosition() {
 		float lat = parkingLat.get();
@@ -128,7 +126,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		parkingTime.resetToDefault();
 		parkingEvent.resetToDefault();
 		parkingStartTime.resetToDefault();
-        parkingPosition = null;
+		parkingPosition = null;
 		return true;
 	}
 
@@ -188,29 +186,16 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 
 	@Override
 	public void registerLayers(MapActivity activity) {
-		// remove old if existing after turn
-		if(parkingLayer != null) {
-			activity.getMapView().removeLayer(parkingLayer);
-		}
-		parkingLayer = new ParkingPositionLayer(activity, this);
-		activity.getMapView().addLayer(parkingLayer, 5.5f);
 		registerWidget(activity);
 	}
 
 	@Override
 	public void updateLayers(OsmandMapTileView mapView, MapActivity activity) {
 		if (isActive()) {
-			if (parkingLayer == null) {
-				registerLayers(activity);
-			}
 			if (parkingPlaceControl == null) {
 				registerWidget(activity);
 			}
 		} else {
-			if (parkingLayer != null) {
-				activity.getMapView().removeLayer(parkingLayer);
-				parkingLayer = null;
-			}
 			MapInfoLayer mapInfoLayer = activity.getMapLayers().getMapInfoLayer();
 			if (mapInfoLayer != null && parkingPlaceControl != null) {
 				mapInfoLayer.removeSideWidget(parkingPlaceControl);
@@ -270,16 +255,18 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	}
 
 	void showContextMenuIfNeeded(final MapActivity mapActivity, boolean animated) {
-		if (parkingLayer != null) {
-			MapContextMenu menu = mapActivity.getContextMenu();
-			if (menu.isVisible()) {
-				menu.hide(animated);
-				menu.show(new LatLon(parkingPosition.getLatitude(), parkingPosition.getLongitude()),
-						parkingLayer.getObjectName(parkingPosition), parkingPosition);
-			}
+		MapContextMenu menu = mapActivity.getContextMenu();
+		if (menu.isVisible()) {
+			menu.hide(animated);
+			menu.show(new LatLon(parkingPosition.getLatitude(), parkingPosition.getLongitude()),
+					getObjectName(parkingPosition), parkingPosition);
 		}
 	}
 
+	public PointDescription getObjectName(Object o) {
+		return new PointDescription(PointDescription.POINT_TYPE_PARKING_MARKER,
+				app.getString(R.string.osmand_parking_position_name));
+	}
 	/**
 	 * Method creates confirmation dialog for deletion of a parking location.
 	 */
@@ -336,25 +323,25 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 
 			@Override
 			public void onTimeChanged(TimePicker timePicker, int hourOfDay, int minute) {
-                if (mIgnoreEvent) {
-                    return;
-                }
-                if (minute % TIME_PICKER_INTERVAL != 0) {
-                    int minuteFloor = minute - (minute % TIME_PICKER_INTERVAL);
-                    minute = minuteFloor + (minute == minuteFloor + 1 ? TIME_PICKER_INTERVAL : 0);
-                    if (minute == 60) {
-                        minute = 0;
-                    }
-                    mIgnoreEvent = true;
-                    timePicker.setCurrentMinute(minute);
-                    mIgnoreEvent = false;
-                }
-                long timeInMillis = cal.getTimeInMillis() + hourOfDay * 60 * 60 * 1000 + minute * 60 * 1000;
-                textView.setText(mapActivity.getString(R.string.osmand_parking_position_description_add)
-                        + " " + parkingLayer.getFormattedTime(timeInMillis));
+				if (mIgnoreEvent) {
+					return;
+				}
+				if (minute % TIME_PICKER_INTERVAL != 0) {
+					int minuteFloor = minute - (minute % TIME_PICKER_INTERVAL);
+					minute = minuteFloor + (minute == minuteFloor + 1 ? TIME_PICKER_INTERVAL : 0);
+					if (minute == 60) {
+						minute = 0;
+					}
+					mIgnoreEvent = true;
+					timePicker.setCurrentMinute(minute);
+					mIgnoreEvent = false;
+				}
+				long timeInMillis = cal.getTimeInMillis() + hourOfDay * 60 * 60 * 1000 + minute * 60 * 1000;
+				textView.setText(mapActivity.getString(R.string.osmand_parking_position_description_add)
+						+ " " + getFormattedTime(timeInMillis));
 
-            }
-        });
+			}
+		});
 		
 		
 		//to set the same 24-hour or 12-hour mode as it is set in the device
@@ -421,24 +408,17 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 
 	/**
 	 * Method sets a parking point on a ParkingLayer.
-	 * @param mapActivity
 	 * @param latitude
 	 * @param longitude
 	 * @param isLimited
 	 */
-	void setParkingPosition(final MapActivity mapActivity, final double latitude, final double longitude, boolean isLimited) {
+	void setParkingPosition(final double latitude, final double longitude, boolean isLimited) {
 		setParkingPosition(latitude, longitude);
 		setParkingType(isLimited);
 		setParkingStartTime(Calendar.getInstance().getTimeInMillis());
-		if (parkingLayer != null) {
-			parkingLayer.refresh();
-		}
 	}
 
 	private void cancelParking() {
-		if (parkingLayer != null) {
-			parkingLayer.refresh();
-		}
 		clearParkingPosition();
 	}
 	
@@ -455,8 +435,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 			
 			@Override
 			public boolean updateInfo(DrawSettings drawSettings) {
-				if (parkingLayer != null) {
-					LatLon parkingPoint = parkingLayer.getParkingPoint();
+				LatLon parkingPoint = getParkingPosition();
 					if (parkingPoint != null && !map.getRoutingHelper().isFollowingMode()) {
 						OsmandMapTileView view = map.getMapView();
 						int d = 0;
@@ -485,7 +464,6 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 						setText(null, null);
 						return true;
 					}
-				}
 				return false;
 			}		
 			
@@ -529,7 +507,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		return R.drawable.ic_action_parking_dark;
 	}
 
-	String getFormattedTime(long timeInMillis, Activity ctx) {
+	String getFormattedTime(long timeInMillis) {
 		StringBuilder timeStringBuilder = new StringBuilder();
 		Time time = new Time();
 		time.set(timeInMillis);
@@ -537,8 +515,8 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		timeStringBuilder.append(":");
 		int minute = time.minute;
 		timeStringBuilder.append(minute < 10 ? "0" + minute : minute);
-		if (!DateFormat.is24HourFormat(ctx)) {
-			timeStringBuilder.append(time.hour >= 12 ? ctx.getString(R.string.osmand_parking_pm) : ctx
+		if (!DateFormat.is24HourFormat(app)) {
+			timeStringBuilder.append(time.hour >= 12 ? app.getString(R.string.osmand_parking_pm) : app
 					.getString(R.string.osmand_parking_am));
 		}
 		return timeStringBuilder.toString();
@@ -574,7 +552,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 		if (getParkingType()) {
 			title.append(ctx.getString(R.string.pick_up_till)).append(" ");
 			long endTime = getParkingTime();
-			title.append(getFormattedTime(endTime, ctx));
+			title.append(getFormattedTime(endTime));
 		} else {
 			title.append(ctx.getString(R.string.osmand_parking_position_name));
 		}
@@ -583,7 +561,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 
 	public String getParkingStartDesc(Activity ctx) {
 		StringBuilder parkingStartDesc = new StringBuilder();
-		String startTime = getFormattedTime(getStartParkingTime(), ctx);
+		String startTime = getFormattedTime(getStartParkingTime());
 		if (getParkingType()) {
 			parkingStartDesc.append(ctx.getString(R.string.osmand_parking_position_name));
 			parkingStartDesc.append(", ");
@@ -618,7 +596,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 	public String getParkingDescription(Activity ctx) {
 		StringBuilder timeLimitDesc = new StringBuilder();
 		timeLimitDesc.append(ctx.getString(R.string.osmand_parking_position_description_add_time) + " ");
-		timeLimitDesc.append(getFormattedTime(getStartParkingTime(), ctx) + ".");
+		timeLimitDesc.append(getFormattedTime(getStartParkingTime()) + ".");
 		if (getParkingType()) {
 			// long parkingTime = settings.getParkingTime();
 			// long parkingStartTime = settings.getStartParkingTime();
@@ -634,7 +612,7 @@ public class ParkingPositionPlugin extends OsmandPlugin {
 			// map.getString(R.string.osmand_parking_am));
 			// }
 			timeLimitDesc.append(ctx.getString(R.string.osmand_parking_position_description_add) + " ");
-			timeLimitDesc.append(getFormattedTime(getParkingTime(),ctx));
+			timeLimitDesc.append(getFormattedTime(getParkingTime()));
 		}
 		return ctx.getString(R.string.osmand_parking_position_description, timeLimitDesc.toString());
 	}

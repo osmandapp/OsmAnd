@@ -263,4 +263,9 @@
     <string name="shared_string_suggested">Запропоновано</string>
     <string name="status_widget_title">Статус відстежувача OsmAnd</string>
     <string name="back_to_osmand">Повернутися до OsmAnd</string>
+    <string name="last_update_from_telegram_date">Останнє оновлення від Telegram: %1$s</string>
+    <string name="last_response_date">Остання відповідь: %1$s</string>
+    <string name="last_update_from_telegram_duration">Останнє оновлення від Telegram: %1$s тому</string>
+    <string name="last_response_duration">Остання відповідь: %1$s тому</string>
+    <string name="duration_ago">%1$s тому</string>
 </resources>

@@ -42,6 +42,8 @@ import java.util.TimeZone;
 
 public class GPXUtilities {
 	public final static Log log = PlatformUtil.getLog(GPXUtilities.class);
+	private static final String ICON_NAME_EXTENSION = "icon";
+	private static final String DEFAULT_ICON_NAME = "special_star";
 
 	private final static String GPX_TIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ss'Z'"; //$NON-NLS-1$
 	private final static String GPX_TIME_FORMAT_MILLIS = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"; //$NON-NLS-1$
@@ -255,6 +257,18 @@ public class GPXUtilities {
 
 		public boolean isVisible() {
 			return true;
+		}
+
+		public String getIconName() {
+			String iconName = getExtensionsToRead().get(ICON_NAME_EXTENSION);
+			if (iconName == null) {
+				iconName = DEFAULT_ICON_NAME;
+			}
+			return iconName;
+		}
+
+		public void setIconName(String iconName) {
+			getExtensionsToWrite().put(ICON_NAME_EXTENSION, iconName);
 		}
 
 		@Override

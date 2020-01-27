@@ -145,7 +145,7 @@
     <string name="poi_ferry_terminal">Terminal de ferry</string>
     <string name="poi_fire_extinguisher">Extincteur</string>
     <string name="poi_fire_hose">Tuyau d\'incendie</string>
-    <string name="poi_fire_hydrant">Bouche d\'incendie</string>
+    <string name="poi_fire_hydrant">Bouche d’incendie</string>
     <string name="poi_fire_station">Caserne de pompiers</string>
     <string name="poi_first_aid">Premiers secours</string>
     <string name="poi_fishing">Magasin d\'articles de pêche</string>
@@ -3747,4 +3747,28 @@
     <string name="poi_cash_withdrawal_foreign_cards">Retrait d\'argent en espèces : cartes étrangères</string>
     <string name="poi_cash_withdrawal_postfinance_card">Carte Postfinance</string>
     <string name="poi_cash_withdrawal_migros_bank">Banque Migros</string>
+    <string name="poi_cash_withdrawal_girocard">Girocard</string>
+    <string name="poi_bath_type_hot_spring">Source d\'eau chaude</string>
+    <string name="poi_bath_type_onsen">Onsen</string>
+    <string name="poi_bath_type_hammam">Hammam</string>
+    <string name="poi_bath_type_thermal">Thermes</string>
+    <string name="poi_bath_type_river">Rivière</string>
+    <string name="poi_bath_open_air_yes">Oui</string>
+    <string name="poi_bath_open_air_no">Non</string>
+    <string name="poi_monastery_type_convent">Type de monastère : couvent</string>
+    <string name="poi_grave">Tombe</string>
+    <string name="poi_parking_space">Emplacement de parking</string>
+    <string name="poi_url">URL</string>
+    <string name="poi_volcano_type">Type</string>
+    <string name="poi_volcano_status">Statut</string>
+    <string name="poi_volcano_type_shield">Bouclier</string>
+    <string name="poi_volcano_type_maar">Maar</string>
+    <string name="poi_volcano_type_caldera">Caldeira</string>
+    <string name="poi_volcano_type_lava_dome">Dôme de lave</string>
+    <string name="poi_volcano_last_eruption">Dernière éruption</string>
+    <string name="poi_volcano_status_extinct">Éteint</string>
+    <string name="poi_volcano_status_dormant">Endormi</string>
+    <string name="poi_volcano_status_active">Actif</string>
+    <string name="poi_volcano_status_inactive">Inactif</string>
+    <string name="poi_volcano_number_of_eruptions">Nombre d’éruptions</string>
 </resources>

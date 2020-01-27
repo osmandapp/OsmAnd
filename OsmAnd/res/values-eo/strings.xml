@@ -1514,7 +1514,7 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="osmand_parking_plugin_description">Tiu ĉi kromprogramo plifaciligas al vi registri kie via aŭto estas parkumata kaj kiom da parkumeja tempo restas (se ĝi estas limigita). Ambaŭ loko kaj tempo estas montrataj en la stirpanelo de OsmAnd kaj sur la fenestraĵo sur la map‑ekrano. Memorigo povas esti aldonita al la Androida kalendaro.</string>
     <string name="osmand_distance_planning_plugin_name">Kalkulilo de distanco kaj planilo</string>
     <string name="osmand_distance_planning_plugin_description">Tiu ĉi kromprogramo liveras fenestraĵon por krei kursojn – per tuŝi sur la mapo aŭ per uzi aŭ modifi ekzistajn GPX-dosierojn – kaj por por plani vojaĝon kaj mezuri distancon inter punktoj. Rezultoj povas esti konservitaj kiel GPX-dosierojn, kiujn oni povas estonte uzi por gvidado.</string>
-    <string name="osm_settings">OSM-redaktilo</string>
+    <string name="osm_settings">OpenStreetMap-redaktilo</string>
     <string name="osm_editing_plugin_description">Per tiu ĉi kromprogramo OsmAnd povas esti uzata por kontribui al OSM per krei aŭ redakti OSM-interesejojn, per raporti aŭ komenti OSM-rimarkojn, per aldoni registritajn GPX-dosierojn. OSM estas komunuma, tutmonda, publika map-projekto. Por detaloj, legu: https://openstreetmap.org. Aktiva kontribuado estas laŭdinda, kaj vi povas kontribui senpere per OsmAnd, se vi entajpos viajn OSM-ajn ensalutilojn en la aplikaĵo.</string>
     <string name="debugging_and_development">OsmAnd-programistilo</string>
     <string name="osmand_development_plugin_description">Montras agordojn por programado kaj senerarigado kiel testado aŭ simulado de kurso, efikeco de ekran‑bildigado, aŭ voĉaj anoncoj. Tiuj ĉi agordoj taŭgas por programistoj kaj ne estas bezonataj por norma uzanto.</string>
@@ -3413,9 +3413,19 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="live_monitoring_descr">Kunhavigi vian nunan pozicion per registrado de kurso.</string>
     <string name="live_monitoring">Perreta spurado</string>
     <string name="save_track_logging_accuracy">Precizo de registrado</string>
-    <string name="tracks_view_descr">Vi povas trovi ĉiujn registritajn spurojn per “menuo” → “miaj ejoj” → “spuroj” aŭ en la dosierujo OsmAnd (uzu dosier‑esplorilon).</string>
-    <string name="multimedia_notes_view_descr">Vi povas trovi ĉiujn notojn per “menuo” → “miaj ejoj” → “notoj”.</string>
+    <string name="tracks_view_descr">Vi povas trovi ĉiujn registritajn spurojn per la %1$s aŭ en la dosierujo OsmAnd (uzu dosier‑esplorilon).</string>
+    <string name="multimedia_notes_view_descr">Vi povas trovi ĉiujn notojn per la %1$s.</string>
     <string name="video_notes">Videaj notoj</string>
     <string name="photo_notes">Fotaj notoj</string>
     <string name="route_recalculation">Rekalkuli kurson</string>
+    <string name="button_rate">Taksi</string>
+    <string name="accessibility_announce">Anonco</string>
+    <string name="login_and_pass">Uzantnomo kaj pasvorto</string>
+    <string name="plugin_global_prefs_info">Agordoj pri tiu ĉi kromprogramo influas al ĉiuj profiloj.</string>
+    <string name="osm_editing">OpenStreetMap-redaktilo</string>
+    <string name="osm_edits_view_descr">Vi povas vidi ĉiujn viajn nesenditajn redaktojn kaj rimarkojn per la %1$s. Senditaj punktoj malaperos el OsmAnd.</string>
+    <string name="app_mode_osm">OSM</string>
+    <string name="select_nav_icon_descr">La emblemo montriĝos nur dum navigi aŭ dum moviĝi.</string>
+    <string name="select_map_icon_descr">Map‑emblemo montriĝas nur dum foliumi mapon kaj ŝanĝiĝas dum navigi al la emblemo de navigo.</string>
+    <string name="logcat_buffer_descr">Tie ĉi vi povas legi kaj kunhavigi protokolojn de la aplikaĵo</string>
 </resources>

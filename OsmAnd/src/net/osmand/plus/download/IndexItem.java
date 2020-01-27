@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.util.Date;
 
+import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.map.OsmandRegions;

@@ -8,12 +8,19 @@
 		android:layout="@layout/preference_category_with_descr"
 		android:title="@string/photo_notes" />
 
+	<Preference
+		android:icon="@drawable/ic_action_lock"
+		android:key="camera_permission"
+		android:layout="@layout/preference_permission"
+		android:summary="@string/give_permission"
+		android:title="@string/permission_is_required" />
+
 	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
 		android:key="av_external_cam"
 		android:layout="@layout/preference_with_descr_dialog_and_switch"
 		android:summaryOff="@string/shared_string_disabled"
 		android:summaryOn="@string/shared_string_enabled"
-		android:title="@string/av_use_external_camera"
+		android:title="@string/multimedia_use_system_camera"
 		tools:icon="@drawable/ic_action_photo_dark" />
 
 	<net.osmand.plus.settings.preferences.ListPreferenceEx
@@ -35,7 +42,7 @@
 		android:layout="@layout/preference_with_descr_dialog_and_switch"
 		android:summaryOff="@string/shared_string_disabled"
 		android:summaryOn="@string/shared_string_enabled"
-		android:title="@string/av_photo_play_sound"
+		android:title="@string/multimedia_photo_play_sound"
 		tools:icon="@drawable/ic_action_music_off" />
 
 	<Preference
@@ -73,7 +80,7 @@
 		android:layout="@layout/preference_with_descr_dialog_and_switch"
 		android:summaryOff="@string/shared_string_disabled"
 		android:summaryOn="@string/shared_string_enabled"
-		android:title="@string/av_use_external_recorder"
+		android:title="@string/multimedia_use_system_camera"
 		tools:icon="@drawable/ic_action_video_dark" />
 
 	<net.osmand.plus.settings.preferences.ListPreferenceEx
@@ -84,7 +91,7 @@
 		tools:summary="4128x3096 (12.19 Mpx)" />
 
 	<Preference
-		android:layout="@layout/simple_divider_item"
+		android:layout="@layout/divider_half_item"
 		android:selectable="false" />
 
 	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
@@ -92,7 +99,7 @@
 		android:layout="@layout/preference_with_descr_dialog_and_switch"
 		android:summaryOff="@string/shared_string_disabled"
 		android:summaryOn="@string/shared_string_enabled"
-		android:title="@string/rec_split_title" />
+		android:title="@string/multimedia_rec_split_title" />
 
 	<net.osmand.plus.settings.preferences.ListPreferenceEx
 		android:key="av_rs_clip_length"
@@ -113,7 +120,7 @@
 
 	<Preference
 		android:key="open_notes_description"
-		android:layout="@layout/preference_info"
+		android:layout="@layout/preference_description"
 		android:persistent="false"
 		android:selectable="false"
 		android:title="@string/multimedia_notes_view_descr" />
@@ -126,14 +133,14 @@
 		tools:icon="@drawable/ic_action_folder" />
 
 	<Preference
-		android:layout="@layout/simple_divider_item"
+		android:layout="@layout/divider_half_item"
 		android:selectable="false" />
 
 	<Preference
 		android:key="reset_to_default"
 		android:layout="@layout/preference_button"
 		android:persistent="false"
-		android:title="@string/reset_to_default"
+		android:title="@string/reset_plugin_to_default"
 		tools:icon="@drawable/ic_action_reset_to_default_dark" />
 
 	<Preference

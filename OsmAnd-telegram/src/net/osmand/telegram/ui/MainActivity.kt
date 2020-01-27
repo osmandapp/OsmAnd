@@ -35,6 +35,9 @@ import net.osmand.telegram.utils.OsmandApiUtils
 import org.drinkless.td.libcore.telegram.TdApi
 import java.io.File
 import java.lang.ref.WeakReference
+import java.time.MonthDay
+import java.util.*
+import kotlin.collections.ArrayList
 
 const val OPEN_MY_LOCATION_TAB_KEY = "open_my_location_tab"
 
@@ -68,8 +71,6 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 	private lateinit var bottomNav: BottomNavigationView
 	private lateinit var coordinatorLayout: CoordinatorLayout
 	private lateinit var viewPager: ViewPager
-
-	private var snackbarShown = false
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
@@ -110,7 +111,9 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 						TIMELINE_TAB_POS -> {
 							liveNowTabFragment?.tabClosed()
 							timelineTabFragment?.tabOpened()
-							showSnackBar()
+							if (shouldShowFreeTimelineInfo()) {
+								showFreeTimelineInfo()
+							}
 						}
 					}
 					viewPager.currentItem = pos
@@ -329,7 +332,7 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 		settings.removeNonexistingChats(presentChatTitles)
 	}
 
-	fun stopShowingChatsOnMap(forceStop: Boolean) {
+	private fun stopShowingChatsOnMap(forceStop: Boolean) {
 		settings.getShowOnMapChats().forEach { app.showLocationHelper.hideChatMessages(it) }
 		app.showLocationHelper.stopShowingLocation(forceStop)
 	}
@@ -382,13 +385,22 @@ class MainActivity : AppCompatActivity(), TelegramListener, ActionButtonsListene
 		imageView.setOnClickListener { showOptionsPopupMenu(imageView) }
 	}
 
-	fun showSnackBar() {
-		if (!snackbarShown) {
-			val snackbar = Snackbar.make(coordinatorLayout, R.string.timeline_available_for_free_now, Snackbar.LENGTH_LONG).setAction(R.string.shared_string_ok) {}
-			AndroidUtils.setSnackbarTextColor(snackbar, R.color.ctrl_active_dark)
-			snackbar.show()
-			snackbarShown = true
+	private fun shouldShowFreeTimelineInfo(): Boolean {
+		val freeTimelineInfoShownTime = settings.freeTimelineInfoShownTime
+		if (freeTimelineInfoShownTime != 0L) {
+			val cal = Calendar.getInstance()
+			val day = cal.get(Calendar.DAY_OF_MONTH)
+			cal.timeInMillis = freeTimelineInfoShownTime
+			return day != cal.get(Calendar.DAY_OF_MONTH)
 		}
+		return true
+	}
+
+	private fun showFreeTimelineInfo() {
+		val snackbar = Snackbar.make(coordinatorLayout, R.string.timeline_available_for_free_now, Snackbar.LENGTH_LONG).setAction(R.string.shared_string_ok) {}
+		AndroidUtils.setSnackbarTextColor(snackbar, R.color.ctrl_active_dark)
+		snackbar.show()
+		settings.freeTimelineInfoShownTime = System.currentTimeMillis()
 	}
 
 	private fun showOptionsPopupMenu(anchor: View) {

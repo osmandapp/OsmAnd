@@ -63,6 +63,19 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		final List<ApplicationMode> am = ApplicationMode.allPossibleValues();
 		ApplicationMode.regWidgetVisibility("monitoring", am.toArray(new ApplicationMode[am.size()]));
 		settings = app.getSettings();
+		pluginPreferences.add(settings.SAVE_TRACK_TO_GPX);
+		pluginPreferences.add(settings.SAVE_TRACK_INTERVAL);
+		pluginPreferences.add(settings.SAVE_TRACK_MIN_DISTANCE);
+		pluginPreferences.add(settings.SAVE_TRACK_PRECISION);
+		pluginPreferences.add(settings.AUTO_SPLIT_RECORDING);
+		pluginPreferences.add(settings.DISABLE_RECORDING_ONCE_APP_KILLED);
+		pluginPreferences.add(settings.SAVE_HEADING_TO_GPX);
+		pluginPreferences.add(settings.SHOW_TRIP_REC_NOTIFICATION);
+		pluginPreferences.add(settings.TRACK_STORAGE_DIRECTORY);
+		pluginPreferences.add(settings.LIVE_MONITORING);
+		pluginPreferences.add(settings.LIVE_MONITORING_URL);
+		pluginPreferences.add(settings.LIVE_MONITORING_INTERVAL);
+		pluginPreferences.add(settings.LIVE_MONITORING_MAX_INTERVAL_TO_SEND);
 	}
 
 	@Override

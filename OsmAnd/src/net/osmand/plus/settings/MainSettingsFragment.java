@@ -88,6 +88,9 @@ public class MainSettingsFragment extends BaseSettingsFragment {
 				AndroidUtils.setBackground(selectedProfile, backgroundDrawable);
 			}
 		}
+		if (ApplicationMode.DEFAULT.getStringKey().equals(preference.getKey())) {
+			holder.findViewById(R.id.switchWidget).setVisibility(View.GONE);
+		}
 	}
 
 	@Override

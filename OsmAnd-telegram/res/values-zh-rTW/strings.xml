@@ -264,4 +264,9 @@
     <string name="shared_string_suggested">建議</string>
     <string name="status_widget_title">OsmAnd Tracker 狀態</string>
     <string name="back_to_osmand">回到 OsmAnd</string>
+    <string name="last_update_from_telegram_date">從 Telegram 而來的最後更新：%1$s</string>
+    <string name="last_response_date">最後回應：%1$s</string>
+    <string name="last_update_from_telegram_duration">從 Telegram 而來的最後更新：%1$s 前</string>
+    <string name="last_response_duration">最後回應：%1$s 前</string>
+    <string name="duration_ago">%1$s 前</string>
 </resources>

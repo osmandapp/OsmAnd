@@ -21,6 +21,7 @@ import net.osmand.plus.voice.CommandPlayer;
 import net.osmand.router.ExitInfo;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.TurnType;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.io.IOException;
@@ -702,6 +703,37 @@ public class VoiceRouter {
 		play(p);
 	}
 
+	private static String getSpeakableExitRef(String exit) {
+		StringBuilder sb = new StringBuilder();
+		if (exit != null) {
+			exit = exit.replace('-', ' ');
+			exit = exit.replace(':', ' ');
+			//	Add spaces between digits and letters for better pronunciation
+			int length = exit.length();
+			for (int i = 0; i < length; i++) {
+				if (i + 1 < length && Character.isDigit(exit.charAt(i)) && Character.isLetter(exit.charAt(i + 1))) {
+					sb.append(exit.charAt(i));
+					sb.append(' ');
+				} else {
+					sb.append(exit.charAt(i));
+				}
+			}
+		}
+		return sb.toString();
+	}
+
+	private int getIntRef(String stringRef) {
+		int intRef = Algorithms.findFirstNumberEndIndex(stringRef);
+		if (intRef > 0) {
+			try {
+				intRef = (int) Float.parseFloat(stringRef.substring(0, intRef));
+			} catch (RuntimeException e) {
+				intRef = -1;
+			}
+		}
+		return intRef;
+	}
+
 	private void playMakeTurnIn(RouteSegmentResult currentSegment, RouteDirectionInfo next, int dist, RouteDirectionInfo pronounceNextNext) {
 		CommandBuilder p = getNewCommandPlayerToPlay();
 		if (p != null) {
@@ -709,8 +741,9 @@ public class VoiceRouter {
 			boolean isPlay = true;
 			ExitInfo exitInfo = next.getExitInfo();
 			if (tParam != null) {
-				if (exitInfo != null) {
-					p.takeExit(tParam, dist, Integer.parseInt(exitInfo.getRef()), getSpeakableExitName(next, exitInfo, true));
+				if (exitInfo != null && !Algorithms.isEmpty(exitInfo.getRef())) {
+					String stringRef = getSpeakableExitRef(exitInfo.getRef());
+					p.takeExit(tParam, dist, stringRef, getIntRef(exitInfo.getRef()), getSpeakableExitName(next, exitInfo, true));
 				} else {
 					p.turn(tParam, dist, getSpeakableStreetName(currentSegment, next, true));
 				}
@@ -782,8 +815,9 @@ public class VoiceRouter {
 			ExitInfo exitInfo = next.getExitInfo();
 			boolean isplay = true;
 			if (tParam != null) {
-				if (exitInfo != null) {
-					p.takeExit(tParam, Integer.parseInt(exitInfo.getRef()), getSpeakableExitName(next, exitInfo, !suppressDest));
+				if (exitInfo != null && !Algorithms.isEmpty(exitInfo.getRef())) {
+					String stringRef = getSpeakableExitRef(exitInfo.getRef());
+					p.takeExit(tParam, stringRef, getIntRef(exitInfo.getRef()), getSpeakableExitName(next, exitInfo, !suppressDest));
 				} else {
 					p.turn(tParam, getSpeakableStreetName(currentSegment, next, !suppressDest));
 				}

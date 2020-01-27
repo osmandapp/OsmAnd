@@ -6,7 +6,7 @@
 
 	<Preference
 		android:key="live_monitoring_info"
-		android:layout="@layout/preference_info"
+		android:layout="@layout/preference_with_descr"
 		android:persistent="false"
 		android:selectable="false"
 		android:title="@string/live_monitoring_descr" />
@@ -14,21 +14,21 @@
 	<net.osmand.plus.settings.preferences.EditTextPreferenceEx
 		android:key="live_monitoring_url"
 		android:layout="@layout/preference_with_descr"
-		android:title="@string/live_monitoring_url"
+		android:title="@string/live_monitoring_adress"
 		tools:icon="@drawable/ic_world_globe_dark"
 		tools:summary="@string/live_monitoring_m_descr" />
 
 	<net.osmand.plus.settings.preferences.ListPreferenceEx
 		android:key="live_monitoring_interval"
 		android:layout="@layout/preference_with_descr"
-		android:title="@string/live_monitoring_interval"
+		android:title="@string/live_monitoring_tracking_interval"
 		tools:icon="@drawable/ic_action_time_span"
 		tools:summary="5 seconds" />
 
 	<net.osmand.plus.settings.preferences.ListPreferenceEx
 		android:key="live_monitoring_maximum_interval_to_send"
 		android:layout="@layout/preference_with_descr"
-		android:title="@string/live_monitoring_max_interval_to_send"
+		android:title="@string/live_monitoring_time_buffer"
 		tools:icon="@drawable/ic_action_time_span"
 		tools:summary="15 min" />
 

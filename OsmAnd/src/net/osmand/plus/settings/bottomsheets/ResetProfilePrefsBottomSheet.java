@@ -12,7 +12,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 
 import net.osmand.plus.ApplicationMode;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.UiUtilities;
 import net.osmand.plus.base.bottomsheetmenu.BaseBottomSheetItem;
@@ -71,9 +70,10 @@ public class ResetProfilePrefsBottomSheet extends BasePreferenceBottomSheet {
 
 	@Override
 	protected void onRightBottomButtonClick() {
-		OsmandApplication app = getMyApplication();
-		if (app != null) {
-			app.getSettings().resetPreferencesForProfile(getAppMode());
+		Fragment targetFragment = getTargetFragment();
+		if (targetFragment instanceof ResetAppModePrefsListener) {
+			ResetAppModePrefsListener listener = (ResetAppModePrefsListener) targetFragment;
+			listener.resetAppModePrefs(getAppMode());
 		}
 		dismiss();
 	}
@@ -99,5 +99,9 @@ public class ResetProfilePrefsBottomSheet extends BasePreferenceBottomSheet {
 		} catch (RuntimeException e) {
 			return false;
 		}
+	}
+
+	public interface ResetAppModePrefsListener {
+		void resetAppModePrefs(ApplicationMode appMode);
 	}
 }
