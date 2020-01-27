@@ -109,9 +109,10 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 		sendLocationInterval = intent.getLongExtra(SEND_LOCATION_INTERVAL, 0)
 		setupServiceErrorInterval()
 
-		app.telegramService = this
 		app.telegramHelper.addIncomingMessagesListener(this)
 		app.telegramHelper.addOutgoingMessagesListener(this)
+
+		app.telegramService = this
 
 		if (isUsedByMyLocation(usedBy)) {
 			initLocationUpdates()
@@ -122,6 +123,7 @@ class TelegramService : Service(), LocationListener, TelegramIncomingMessagesLis
 			app.telegramHelper.startLiveMessagesUpdates(app.settings.sendMyLocInterval)
 			startTracksUpdates()
 		}
+		app.shareLocationHelper.checkAndSendBufferMessages()
 
 		val locationNotification = app.notificationHelper.locationNotification
 		val notification = app.notificationHelper.buildNotification(locationNotification)
