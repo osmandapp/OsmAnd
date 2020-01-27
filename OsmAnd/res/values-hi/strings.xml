@@ -49,7 +49,6 @@
     <string name="searching_gps">जीपीएस की खोज</string>
     <string name="coordinates_widget">निर्देशांक विजेट</string>
     <string name="rate_dialog_descr">कृपया अपनी प्रतिक्रिया साझा करके हमें 30 सेकंड दें और Google Play पर हमारे काम को रेटिंग दें।</string>
-    <string name="button_rate">मूल्यांकन करें</string>
     <string name="shared_string_privacy_policy">गोपनीयता नीति</string>
     <string name="help_us_make_osmand_better">हमें OsmAnd को बेहतर बनाने में मदद करें!</string>
     <string name="choose_data_to_share">चुनें कि आप किस प्रकार का डेटा साझा करना चाहते हैं:</string>

@@ -259,4 +259,12 @@
     <string name="unit_of_speed_system">Unidad de velocidad</string>
     <string name="buffer_time_descr">Tiempo después del cual se eliminarán los mensajes de ubicación almacenados en búfer</string>
     <string name="buffer_time">Tiempo de expiración del búfer</string>
+    <string name="shared_string_suggested">Sugerido</string>
+    <string name="status_widget_title">Estado de OsmAnd Tracker</string>
+    <string name="back_to_osmand">Volver a OsmAnd</string>
+    <string name="last_update_from_telegram_date">Última actualización desde Telegram: %1$s</string>
+    <string name="last_response_date">Última respuesta: %1$s</string>
+    <string name="last_update_from_telegram_duration">Última actualización desde Telegram: hace %1$s</string>
+    <string name="last_response_duration">Última respuesta: hace %1$s</string>
+    <string name="duration_ago">hace %1$s</string>
 </resources>

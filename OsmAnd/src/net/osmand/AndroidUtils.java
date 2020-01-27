@@ -234,7 +234,7 @@ public class AndroidUtils {
 			if(ctx == null) {
 				return size + " " + numSuffix;
 			}
-			return ctx.getString(R.string.ltr_or_rtl_combine_via_colon, size, numSuffix);
+			return ctx.getString(R.string.ltr_or_rtl_combine_via_space, size, numSuffix);
 		}
 		return "";
 	}
@@ -688,5 +688,37 @@ public class AndroidUtils {
 
 	public static boolean isRTL() {
 		return TextUtilsCompat.getLayoutDirectionFromLocale(Locale.getDefault()) == ViewCompat.LAYOUT_DIRECTION_RTL;
+	}
+	
+	public static String createNewFileName(String oldName) {
+		int firstDotIndex = oldName.indexOf('.');
+		String nameWithoutExt = oldName.substring(0, firstDotIndex);
+		String ext = oldName.substring(firstDotIndex);
+
+		StringBuilder numberSection = new StringBuilder();
+		int i = nameWithoutExt.length() - 1;
+		boolean hasNameNumberSection = false;
+		do {
+			char c = nameWithoutExt.charAt(i);
+			if (Character.isDigit(c)) {
+				numberSection.insert(0, c);
+			} else if(Character.isSpaceChar(c) && numberSection.length() > 0) {
+				hasNameNumberSection = true;
+				break;
+			} else {
+				break;
+			}
+			i--;
+		} while (i >= 0);
+		int newNumberValue = Integer.parseInt(hasNameNumberSection ? numberSection.toString() : "0") + 1;
+		
+		String newName;
+		if (newNumberValue == 1) {
+			newName = nameWithoutExt + " " + newNumberValue + ext;
+		} else {
+			newName = nameWithoutExt.substring(0, i) + " " + newNumberValue + ext;
+		}
+
+		return newName;
 	}
 }

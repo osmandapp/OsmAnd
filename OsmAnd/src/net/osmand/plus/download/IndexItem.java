@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.util.Date;
 
+import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.map.OsmandRegions;
@@ -89,7 +90,7 @@ public class IndexItem implements Comparable<IndexItem> {
 	}
 
 	public String getSizeDescription(Context ctx) {
-		return ctx.getString(R.string.ltr_or_rtl_combine_via_colon, size, "MB");
+		return ctx.getString(R.string.ltr_or_rtl_combine_via_space, size, "MB");
 	}
 	
 

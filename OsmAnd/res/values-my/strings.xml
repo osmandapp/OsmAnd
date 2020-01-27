@@ -198,7 +198,6 @@
     <string name="searching_gps">GPS ရှာဖွေခြင်း</string>
     <string name="coordinates_widget">Coordinates ဝစ်ဂျက်</string>
     <string name="rate_dialog_descr">စက္ကန့် ၃၀လောက်အချိန်ပေးပြီး Google Play မှာ ကျွန်ုပ်တို့၏ application ကို သင်၏ထင်မြင်ချက်များ တင်ပြပေးပါ။</string>
-    <string name="button_rate">သတ်မှတ်ချက်</string>
     <string name="shared_string_privacy_policy">တစ်ကိုယ်ရေ မူဝါဒ</string>
     <string name="help_us_make_osmand_better">ကျွန်တော်တို့ရဲ့ OsmAnd ကိုပိုကောင်းအောင်ကူညီပါ!</string>
     <string name="choose_data_to_share">သင်မျှဝေလိုသည့်အချက်အလက်အမျိုးအစားကိုရွေးချယ်ပါ။</string>

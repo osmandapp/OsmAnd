@@ -9,6 +9,7 @@ import android.text.SpannableStringBuilder
 import android.text.style.ForegroundColorSpan
 import net.osmand.PlatformUtil
 import net.osmand.telegram.helpers.OsmandAidlHelper
+import net.osmand.telegram.helpers.ShareLocationHelper.Companion.MAX_MESSAGES_IN_TDLIB_PER_CHAT
 import net.osmand.telegram.helpers.ShowLocationHelper
 import net.osmand.telegram.helpers.TelegramHelper
 import net.osmand.telegram.utils.*
@@ -22,6 +23,7 @@ import java.util.*
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.ConcurrentLinkedQueue
 import kotlin.collections.ArrayList
+import kotlin.math.max
 
 val ADDITIONAL_ACTIVE_TIME_VALUES_SEC = listOf(15 * 60L, 30 * 60L, 60 * 60L, 180 * 60L)
 
@@ -66,6 +68,7 @@ private val BUFFER_TIME = listOf(60 * 60L, 2 * 60 * 60L, 4 * 60 * 60L, 8 * 60 * 
 		12 * 60 * 60L, 24 * 60 * 60L)
 private const val BUFFER_TIME_INDEX = 0
 private const val BUFFER_TIME_KEY = "buffer_time"
+private const val FREE_TIMELINE_INFO_SHOWN_TIME_KEY = "free_timeline_info_shown_time"
 
 private const val SETTINGS_NAME = "osmand_telegram_settings"
 
@@ -107,7 +110,7 @@ private const val PROXY_ENABLED = "proxy_enabled"
 private const val PROXY_PREFERENCES_KEY = "proxy_preferences"
 
 private const val SHARING_INITIALIZATION_TIME = 60 * 2L // 2 minutes
-private const val WAITING_TDLIB_TIME = 30 // 2 seconds
+private const val WAITING_TDLIB_TIME = 3 // 3 seconds
 
 private const val GPS_UPDATE_EXPIRED_TIME = 60 * 3L // 3 minutes
 
@@ -163,6 +166,8 @@ class TelegramSettings(private val app: TelegramApplication) {
 	var proxyEnabled = false
 
 	var bufferTime = BUFFER_TIME[BUFFER_TIME_INDEX]
+
+	var freeTimelineInfoShownTime = 0L
 
 	init {
 		updatePrefs()
@@ -393,6 +398,9 @@ class TelegramSettings(private val app: TelegramApplication) {
 						} else if (state.constructor == TdApi.MessageSendingStateFailed.CONSTRUCTOR) {
 							shareInfo.hasSharingError = true
 							shareInfo.pendingMapMessage = false
+							if (!isOsmAndBot) {
+								shareInfo.pendingTdLibMap--
+							}
 							log.debug("updateShareInfo MAP ${message.id} MessageSendingStateFailed")
 						}
 					} else {
@@ -424,6 +432,9 @@ class TelegramSettings(private val app: TelegramApplication) {
 							log.debug("updateShareInfo TEXT ${message.id} MessageSendingStateFailed")
 							shareInfo.hasSharingError = true
 							shareInfo.pendingTextMessage = false
+							if (!isOsmAndBot) {
+								shareInfo.pendingTdLibText--
+							}
 						}
 					} else {
 						shareInfo.currentTextMessageId = message.id
@@ -500,13 +511,15 @@ class TelegramSettings(private val app: TelegramApplication) {
 
 	private fun getNewSharingStatusHistoryItem(): SharingStatus {
 		return SharingStatus().apply {
-			statusChangeTime = System.currentTimeMillis()
+			val currentTimeMillis = System.currentTimeMillis()
+			val currentTime = currentTimeMillis / 1000
+			statusChangeTime = currentTimeMillis
 			val lm = app.getSystemService(Context.LOCATION_SERVICE) as LocationManager
 			val gpsEnabled = try {
 				if (lm.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
 					val loc = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER)
-					val gpsActive = loc != null && ((statusChangeTime - loc.time) / 1000) < GPS_UPDATE_EXPIRED_TIME
-					val lastSentLocationExpired = ((statusChangeTime - app.shareLocationHelper.lastLocationUpdateTime) / 1000) > GPS_UPDATE_EXPIRED_TIME
+					val gpsActive = loc != null && ((currentTimeMillis - loc.time) / 1000) < GPS_UPDATE_EXPIRED_TIME
+					val lastSentLocationExpired = ((currentTimeMillis - app.shareLocationHelper.lastLocationUpdateTime) / 1000) > GPS_UPDATE_EXPIRED_TIME
 					(gpsActive || !lastSentLocationExpired)
 				} else {
 					false
@@ -518,20 +531,25 @@ class TelegramSettings(private val app: TelegramApplication) {
 			var initializing = false
 			var sendChatsErrors = false
 
+			val chatsCount = shareChatsInfo.size
 			shareChatsInfo.forEach { (_, shareInfo) ->
-				if (shareInfo.lastTextSuccessfulSendTime == -1L && shareInfo.lastMapSuccessfulSendTime == -1L
-					&& ((statusChangeTime / 1000 - shareInfo.start) < SHARING_INITIALIZATION_TIME)) {
+				val initTime = (currentTime - shareInfo.start) < SHARING_INITIALIZATION_TIME
+				var initSending = false
+				initSending = initSending || (shareInfo.lastTextSuccessfulSendTime == -1L && shareTypeValue != SHARE_TYPE_MAP)
+				initSending = initSending || (shareInfo.lastMapSuccessfulSendTime == -1L && shareTypeValue != SHARE_TYPE_TEXT)
+				if (initTime && initSending) {
 					initializing = true
 				} else {
-					val textSharingError = shareInfo.lastSendTextMessageTime - shareInfo.lastTextSuccessfulSendTime > WAITING_TDLIB_TIME
-					val mapSharingError = shareInfo.lastSendMapMessageTime - shareInfo.lastMapSuccessfulSendTime > WAITING_TDLIB_TIME
+					val maxWaitingTime = WAITING_TDLIB_TIME * MAX_MESSAGES_IN_TDLIB_PER_CHAT * max(1, chatsCount)
+					val textSharingError = !shareInfo.lastTextMessageHandled && currentTime - shareInfo.lastSendTextMessageTime > maxWaitingTime
+					val mapSharingError = !shareInfo.lastMapMessageHandled && currentTime - shareInfo.lastSendMapMessageTime > maxWaitingTime
 					if (shareInfo.hasSharingError
 						|| (shareTypeValue == SHARE_TYPE_MAP_AND_TEXT && (textSharingError || mapSharingError))
 						|| textSharingError && (shareTypeValue == SHARE_TYPE_TEXT)
 						|| mapSharingError && (shareTypeValue == SHARE_TYPE_MAP)
 					) {
 						sendChatsErrors = true
-						locationTime = Math.max(shareInfo.lastTextSuccessfulSendTime, shareInfo.lastMapSuccessfulSendTime)
+						locationTime = max(shareInfo.lastTextSuccessfulSendTime, shareInfo.lastMapSuccessfulSendTime)
 						chatsIds.add(shareInfo.chatId)
 					}
 				}
@@ -645,6 +663,8 @@ class TelegramSettings(private val app: TelegramApplication) {
 
 		edit.putLong(BUFFER_TIME_KEY, bufferTime)
 
+		edit.putLong(FREE_TIMELINE_INFO_SHOWN_TIME_KEY, freeTimelineInfoShownTime)
+
 		val jArray = convertShareChatsInfoToJson()
 		if (jArray != null) {
 			edit.putString(SHARE_CHATS_INFO_KEY, jArray.toString())
@@ -740,6 +760,8 @@ class TelegramSettings(private val app: TelegramApplication) {
 		proxyEnabled = prefs.getBoolean(PROXY_ENABLED, false)
 
 		bufferTime = prefs.getLong(BUFFER_TIME_KEY, BUFFER_TIME[BUFFER_TIME_INDEX])
+
+		freeTimelineInfoShownTime = prefs.getLong(FREE_TIMELINE_INFO_SHOWN_TIME_KEY, 0L)
 
 		try {
 			parseProxyPreferences(JSONObject(prefs.getString(PROXY_PREFERENCES_KEY, "")))
@@ -851,22 +873,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 			lastChatsInfo.forEach { lastInfo ->
 				val obj = JSONObject()
 				obj.put(LastChatInfo.CHAT_ID_KEY, lastInfo.chatId)
-				obj.put(LastChatInfo.PERIODS_KEY, convertPeriodsToJson(lastInfo.periods))
-				jArray.put(obj)
-			}
-			jArray
-		} catch (e: JSONException) {
-			log.error(e)
-			null
-		}
-	}
-
-	private fun convertPeriodsToJson(periods: LinkedList<Long>): JSONArray? {
-		return try {
-			val jArray = JSONArray()
-			for (i in 0 until periods.count()) {
-				val obj = JSONObject()
-				obj.put(i.toString(), periods[i])
+				obj.put(LastChatInfo.PERIOD_KEY, lastInfo.period)
 				jArray.put(obj)
 			}
 			jArray
@@ -947,12 +954,7 @@ class TelegramSettings(private val app: TelegramApplication) {
 			val obj = json.getJSONObject(i)
 			val lastInfo = LastChatInfo().apply {
 				chatId = obj.optLong(LastChatInfo.CHAT_ID_KEY)
-				periods = LinkedList<Long>()
-				val jsonArray = obj.getJSONArray(LastChatInfo.PERIODS_KEY)
-				for (j in 0 until jsonArray.length()) {
-					val o = jsonArray.get(j) as JSONObject
-					periods.addLast(o.optLong(j.toString()))
-				}
+				period = obj.optLong(LastChatInfo.PERIOD_KEY)
 			}
 			lastChatsInfo.addLast(lastInfo)
 		}
@@ -964,46 +966,20 @@ class TelegramSettings(private val app: TelegramApplication) {
 			addItemToSuggested(id, time)
 		} else {
 			val index = lastChatsInfo.indexOf(lastInfo)
-			lastChatsInfo[index].periods = addTimeToPeriods(lastChatsInfo[index].periods, time)
+			lastChatsInfo[index].period = time
 		}
 	}
 
 	private fun addItemToSuggested(id: Long, time: Long) {
 		val newLastInfo = LastChatInfo().apply {
 			chatId = id
-			periods = LinkedList<Long>().apply {
-				addFirst(time)
-			}
+			period = time
 		}
 		if (lastChatsInfo.size < 5) {
 			lastChatsInfo.addFirst(newLastInfo)
 		} else {
 			lastChatsInfo.removeLast()
 			lastChatsInfo.addFirst(newLastInfo)
-		}
-	}
-
-	private fun addTimeToPeriods(periods: LinkedList<Long>?, time: Long): LinkedList<Long> {
-		if (periods?.isNotEmpty() != null) {
-			return if (periods.size < 5) {
-				periods.addFirst(time)
-				periods
-			} else {
-				periods.removeLast()
-				periods.addFirst(time)
-				periods
-			}
-		}
-		return LinkedList<Long>().apply { addFirst(time) }
-	}
-
-	fun calcLivePeriod(periods: LinkedList<Long>): Long {
-		val sortedPeriods = periods.toLongArray()
-		sortedPeriods.sort()
-		return if (sortedPeriods.size % 2 == 0) {
-			(sortedPeriods[sortedPeriods.size / 2] + sortedPeriods[sortedPeriods.size / 2 - 1]) / 2
-		} else {
-			sortedPeriods[sortedPeriods.size / 2]
 		}
 	}
 
@@ -1463,16 +1439,33 @@ class TelegramSettings(private val app: TelegramApplication) {
 		var lastTextSuccessfulSendTime = -1L
 		var lastMapSuccessfulSendTime = -1L
 		var lastSendTextMessageTime = -1
+			set(value) {
+				field = value
+				lastTextMessageHandled = false
+			}
 		var lastSendMapMessageTime = -1
+			set(value) {
+				field = value
+				lastMapMessageHandled = false
+			}
 		var sentMessages = 0
 		var pendingTdLibText = 0
+			set(value) {
+				field = max(0, value)
+			}
 		var pendingTdLibMap = 0
+			set(value) {
+				field = max(0, value)
+			}
 		var pendingTextMessage = false
 		var pendingMapMessage = false
 		var shouldSendViaBotTextMessage = false
 		var shouldSendViaBotMapMessage = false
 		var hasSharingError = false
 		var additionalActiveTime = ADDITIONAL_ACTIVE_TIME_VALUES_SEC[0]
+		var lastMapMessageHandled = false
+		var lastTextMessageHandled = false
+		var lastBufferCheckTime = -1L
 
 		fun getNextAdditionalActiveTime(): Long {
 			var index = ADDITIONAL_ACTIVE_TIME_VALUES_SEC.indexOf(additionalActiveTime)
@@ -1486,6 +1479,13 @@ class TelegramSettings(private val app: TelegramApplication) {
 		fun getChatLiveMessageExpireTime(): Long {
 			return userSetLivePeriod - ((System.currentTimeMillis() / 1000) - start)
 		}
+
+		fun isPendingMessagesLimitReached() =
+				pendingTdLibText >= MAX_MESSAGES_IN_TDLIB_PER_CHAT || pendingTdLibMap >= MAX_MESSAGES_IN_TDLIB_PER_CHAT
+
+		fun isPendingTextMessagesLimitReached() = pendingTdLibText >= MAX_MESSAGES_IN_TDLIB_PER_CHAT
+
+		fun isPendingMapMessagesLimitReached() = pendingTdLibMap >= MAX_MESSAGES_IN_TDLIB_PER_CHAT
 
 		companion object {
 
@@ -1512,11 +1512,11 @@ class TelegramSettings(private val app: TelegramApplication) {
 	class LastChatInfo {
 
 		var chatId = -1L
-		var periods = LinkedList<Long>()
+		var period = -1L
 
 		companion object {
 			internal const val CHAT_ID_KEY = "chatId"
-			internal const val PERIODS_KEY = "periods"
+			internal const val PERIOD_KEY = "period"
 		}
 	}
 }

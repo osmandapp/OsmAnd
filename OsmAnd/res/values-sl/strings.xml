@@ -3121,7 +3121,6 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="rendering_attr_showLez_name">Pokaži področja z omejitvijo izpustov</string>
     <string name="temporary_conditional_routing">Upoštevaj začasne omejitve</string>
     <string name="shared_string_default">Privzeto</string>
-    <string name="button_rate">Ocena</string>
     <string name="app_mode_subway">Prevoz s podzemno železnico</string>
     <string name="show_compass_ruler">Pokaži kompas</string>
     <string name="hide_compass_ruler">Skrij kompas</string>

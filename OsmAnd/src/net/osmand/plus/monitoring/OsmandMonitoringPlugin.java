@@ -34,6 +34,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.activities.SavingTrackHelper.SaveGpxResult;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
+import net.osmand.plus.settings.BaseSettingsFragment;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -62,6 +63,19 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		final List<ApplicationMode> am = ApplicationMode.allPossibleValues();
 		ApplicationMode.regWidgetVisibility("monitoring", am.toArray(new ApplicationMode[am.size()]));
 		settings = app.getSettings();
+		pluginPreferences.add(settings.SAVE_TRACK_TO_GPX);
+		pluginPreferences.add(settings.SAVE_TRACK_INTERVAL);
+		pluginPreferences.add(settings.SAVE_TRACK_MIN_DISTANCE);
+		pluginPreferences.add(settings.SAVE_TRACK_PRECISION);
+		pluginPreferences.add(settings.AUTO_SPLIT_RECORDING);
+		pluginPreferences.add(settings.DISABLE_RECORDING_ONCE_APP_KILLED);
+		pluginPreferences.add(settings.SAVE_HEADING_TO_GPX);
+		pluginPreferences.add(settings.SHOW_TRIP_REC_NOTIFICATION);
+		pluginPreferences.add(settings.TRACK_STORAGE_DIRECTORY);
+		pluginPreferences.add(settings.LIVE_MONITORING);
+		pluginPreferences.add(settings.LIVE_MONITORING_URL);
+		pluginPreferences.add(settings.LIVE_MONITORING_INTERVAL);
+		pluginPreferences.add(settings.LIVE_MONITORING_MAX_INTERVAL_TO_SEND);
 	}
 
 	@Override
@@ -146,7 +160,15 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 		return SettingsMonitoringActivity.class;
 	}
 
-	
+	@Override
+	public Class<? extends BaseSettingsFragment> getSettingsFragment() {
+		return MonitoringSettingsFragment.class;
+	}
+
+	@Override
+	public String getPrefsDescription() {
+		return app.getString(R.string.monitoring_prefs_descr);
+	}
 
 	/**
 	 * creates (if it wasn't created previously) the control to be added on a MapInfoLayer that shows a monitoring state (recorded/stopped)

@@ -14,25 +14,15 @@
 		android:minHeight="@dimen/bottom_sheet_list_item_height"
 		tools:background="?android:attr/selectableItemBackground">
 
-		<FrameLayout
-			android:id="@+id/icon_container"
-			android:layout_width="@dimen/route_info_toolbar_button_size"
-			android:layout_height="@dimen/route_info_toolbar_button_size"
+		<ImageView
+			android:id="@android:id/icon"
+			android:layout_width="@dimen/standard_icon_size"
+			android:layout_height="@dimen/standard_icon_size"
 			android:layout_gravity="center"
-			android:layout_marginLeft="@dimen/content_padding_half"
-			android:layout_marginTop="@dimen/content_padding_half"
-			android:layout_marginRight="@dimen/content_padding_half"
-			android:layout_marginBottom="@dimen/content_padding_half">
-
-			<ImageView
-				android:id="@android:id/icon"
-				android:layout_width="@dimen/standard_icon_size"
-				android:layout_height="@dimen/standard_icon_size"
-				android:layout_gravity="center"
-				tools:tint="?colorAccent"
-				tools:src="@drawable/ic_action_car_dark" />
-
-		</FrameLayout>
+			android:layout_marginLeft="@dimen/content_padding"
+			android:layout_marginRight="@dimen/content_padding"
+			tools:src="@drawable/ic_action_car_dark"
+			tools:tint="?colorAccent" />
 
 		<LinearLayout
 			android:layout_width="0dp"
@@ -48,12 +38,11 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:ellipsize="marquee"
-				android:fadingEdge="horizontal"
 				android:singleLine="true"
 				android:textColor="?colorAccent"
 				android:textSize="@dimen/default_list_text_size"
 				osmand:typeface="@string/font_roboto_medium"
-				tools:text="Button text"/>
+				tools:text="Button text" />
 
 		</LinearLayout>
 

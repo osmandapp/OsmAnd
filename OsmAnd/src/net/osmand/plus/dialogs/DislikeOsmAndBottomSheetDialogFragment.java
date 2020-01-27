@@ -45,7 +45,9 @@ public class DislikeOsmAndBottomSheetDialogFragment extends MenuBottomSheetDialo
 	protected void onDismissButtonClickAction() {
 		OsmandApplication app = getMyApplication();
 		if (app != null) {
-			app.getSettings().RATE_US_STATE.set(RateUsBottomSheetDialog.RateUsState.DISLIKED_WITHOUT_MESSAGE);
+			app.getSettings().RATE_US_STATE.set(RateUsBottomSheetDialogFragment.RateUsState.DISLIKED_WITHOUT_MESSAGE);
+			app.getSettings().NUMBER_OF_APP_STARTS_ON_DISLIKE_MOMENT.set(app.getAppInitializer().getNumberOfStarts());
+			app.getSettings().LAST_DISPLAY_TIME.set(System.currentTimeMillis());
 		}
 	}
 
@@ -60,14 +62,13 @@ public class DislikeOsmAndBottomSheetDialogFragment extends MenuBottomSheetDialo
 		if (app != null) {
 			OsmandSettings settings = app.getSettings();
 			String email = getString(R.string.support_email);
-			settings.RATE_US_STATE.set(RateUsBottomSheetDialog.RateUsState.DISLIKED_WITH_MESSAGE);
-			settings.NUMBER_OF_APPLICATION_STARTS.set(0);
+			settings.RATE_US_STATE.set(RateUsBottomSheetDialogFragment.RateUsState.DISLIKED_WITH_MESSAGE);
+			settings.NUMBER_OF_APP_STARTS_ON_DISLIKE_MOMENT.set(app.getAppInitializer().getNumberOfStarts());
 			settings.LAST_DISPLAY_TIME.set(System.currentTimeMillis());
 			Intent sendEmail = new Intent(Intent.ACTION_SENDTO);
-			sendEmail.setType("text/plain");
 			sendEmail.setData(Uri.parse("mailto:" + email));
 			sendEmail.putExtra(Intent.EXTRA_EMAIL, email);
-			startActivity(sendEmail);
+			startActivity(Intent.createChooser(sendEmail, getString(R.string.send_report)));
 			dismiss();
 		}
 	}

@@ -3084,7 +3084,6 @@ POIの更新は利用できません</string>
     <string name="public_transport_type">交通機関の種類</string>
     <string name="searching_gps">GPS検索</string>
     <string name="rate_dialog_descr">フィードバックの共有や、Google Playでの評価をお願いします。</string>
-    <string name="button_rate">OK</string>
     <string name="help_us_make_osmand_better">OsmAndの改善にご協力ください</string>
     <string name="make_osmand_better_descr">OsmAnd側で匿名にてアプリ使用データの収集および処理ができるようにします。マップに表示されている自身の位置やその他場所に関するデータは収集されません。 
 \n 

@@ -36,6 +36,7 @@ import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
+import net.osmand.plus.settings.BaseSettingsFragment;
 import net.osmand.plus.skimapsplugin.SkiMapsPlugin;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -56,14 +57,16 @@ public abstract class OsmandPlugin {
 	private static List<OsmandPlugin> allPlugins = new ArrayList<OsmandPlugin>();
 	private static final Log LOG = PlatformUtil.getLog(OsmandPlugin.class);
 
+	protected List<OsmandSettings.OsmandPreference> pluginPreferences = new ArrayList<>();
+
 	private boolean active;
 	private String installURL = null;
 
 	public abstract String getId();
 
-	public abstract String getDescription();
-
 	public abstract String getName();
+
+	public abstract String getDescription();
 
 	public abstract int getAssetResourceName();
 
@@ -72,7 +75,21 @@ public abstract class OsmandPlugin {
 		return R.drawable.ic_extension_dark;
 	}
 
-	public abstract Class<? extends Activity> getSettingsActivity();
+	public Class<? extends Activity> getSettingsActivity() {
+		return null;
+	}
+
+	public Class<? extends BaseSettingsFragment> getSettingsFragment() {
+		return null;
+	}
+
+	public List<OsmandSettings.OsmandPreference> getPreferences() {
+		return pluginPreferences;
+	}
+
+	public String getPrefsDescription() {
+		return null;
+	}
 
 	public String getVersion() {
 		return "";
@@ -616,5 +633,47 @@ public abstract class OsmandPlugin {
 		for (OsmandPlugin p : getEnabledPlugins()) {
 			p.addMyPlacesTab(favoritesActivity, mTabs, intent);
 		}
+	}
+
+	protected OsmandSettings.CommonPreference<Boolean> registerBooleanPreference(OsmandApplication app, String prefId, boolean defValue) {
+		OsmandSettings.CommonPreference<Boolean> preference = app.getSettings().registerBooleanPreference(prefId, defValue);
+		pluginPreferences.add(preference);
+		return preference;
+	}
+
+	private OsmandSettings.CommonPreference<Boolean> registerBooleanAccessibilityPreference(OsmandApplication app, String prefId, boolean defValue) {
+		OsmandSettings.CommonPreference<Boolean> preference = app.getSettings().registerBooleanAccessibilityPreference(prefId, defValue);
+		pluginPreferences.add(preference);
+		return preference;
+	}
+
+	protected OsmandSettings.CommonPreference<String> registerStringPreference(OsmandApplication app, String prefId, String defValue) {
+		OsmandSettings.CommonPreference<String> preference = app.getSettings().registerStringPreference(prefId, defValue);
+		pluginPreferences.add(preference);
+		return preference;
+	}
+
+	protected OsmandSettings.CommonPreference<Integer> registerIntPreference(OsmandApplication app, String prefId, int defValue) {
+		OsmandSettings.CommonPreference<Integer> preference = app.getSettings().registerIntPreference(prefId, defValue);
+		pluginPreferences.add(preference);
+		return preference;
+	}
+
+	protected OsmandSettings.CommonPreference<Long> registerLongPreference(OsmandApplication app, String prefId, long defValue) {
+		OsmandSettings.CommonPreference<Long> preference = app.getSettings().registerLongPreference(prefId, defValue);
+		pluginPreferences.add(preference);
+		return preference;
+	}
+
+	protected OsmandSettings.CommonPreference<Float> registerFloatPreference(OsmandApplication app, String prefId, float defValue) {
+		OsmandSettings.CommonPreference<Float> preference = app.getSettings().registerFloatPreference(prefId, defValue);
+		pluginPreferences.add(preference);
+		return preference;
+	}
+
+	protected <T extends Enum> OsmandSettings.CommonPreference<T> registerEnumIntPreference(OsmandApplication app, String prefId, Enum defaultValue, Enum[] values, Class<T> clz) {
+		OsmandSettings.CommonPreference<T> preference = app.getSettings().registerEnumIntPreference(prefId, defaultValue, values, clz);
+		pluginPreferences.add(preference);
+		return preference;
 	}
 }

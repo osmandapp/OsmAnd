@@ -840,7 +840,7 @@ public class ConfigureMapMenu {
 		if (props != null) {
 			adapter.addItem(props);
 		}
-		props = createProperties(customRules, null, R.string.rendering_category_details, R.drawable.ic_action_layers_dark,
+		props = createProperties(customRules, null, R.string.rendering_category_details, R.drawable.ic_action_layers,
 				"details", null, adapter, activity, true, DETAILS_ID, themeRes, nightMode, selectedProfileColor);
 		if (props != null) {
 			adapter.addItem(props);

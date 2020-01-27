@@ -3760,4 +3760,21 @@
     <string name="poi_health_food">Egészségesélelmiszer-bolt</string>
     <string name="poi_craft_floorer">Padlólerakó</string>
     <string name="poi_pet_grooming">Állatkozmetika</string>
+    <string name="poi_parking_space">Parkolóhely</string>
+    <string name="poi_url">URL</string>
+    <string name="poi_volcano_type">Típus</string>
+    <string name="poi_volcano_status">Állapot</string>
+    <string name="poi_volcano_type_scoria">Salakvulkán</string>
+    <string name="poi_volcano_type_stratovolcano">Rétegvulkán</string>
+    <string name="poi_volcano_type_shield">Pajzsvulkán</string>
+    <string name="poi_volcano_type_maar">Maar-vulkán</string>
+    <string name="poi_volcano_type_caldera">Kaldera</string>
+    <string name="poi_volcano_type_lava_dome">Lávakupola</string>
+    <string name="poi_volcano_type_dirt">Sárvulkán</string>
+    <string name="poi_volcano_last_eruption">Utolsó kitörés</string>
+    <string name="poi_volcano_status_extinct">Kialudt</string>
+    <string name="poi_volcano_status_dormant">Szunnyadó</string>
+    <string name="poi_volcano_status_active">Aktív</string>
+    <string name="poi_volcano_status_inactive">Nem aktív</string>
+    <string name="poi_volcano_number_of_eruptions">Kitörések száma</string>
 </resources>

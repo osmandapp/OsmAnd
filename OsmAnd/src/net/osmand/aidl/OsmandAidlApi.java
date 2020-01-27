@@ -40,6 +40,7 @@ import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GpxSelectionHelper;
@@ -318,7 +319,8 @@ public class OsmandAidlApi {
 							ApplicationMode.regWidgetVisibility(widget.getId(), (ApplicationMode[]) null);
 							TextInfoWidget control = connectedApp.createWidgetControl(mapActivity, widgetId);
 							connectedApp.getWidgetControls().put(widgetId, control);
-							int menuIconId = AndroidUtils.getDrawableId(app, widget.getMenuIconName());
+							int iconId = AndroidUtils.getDrawableId(app, widget.getMenuIconName());
+							int menuIconId = iconId != 0 ? iconId : ContextMenuItem.INVALID_ID;
 							MapWidgetRegInfo widgetInfo = layer.registerSideWidget(control,
 									menuIconId, widget.getMenuTitle(), "aidl_widget_" + widgetId,
 									false, widget.getOrder());

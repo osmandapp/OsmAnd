@@ -12,11 +12,13 @@ import android.support.v7.preference.PreferenceViewHolder;
 import android.view.View;
 
 import net.osmand.AndroidUtils;
+import net.osmand.CallbackWithObject;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.SettingsHelper.*;
 import net.osmand.plus.UiUtilities;
-import net.osmand.plus.profiles.ProfileDataObject;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment;
 import net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.SelectProfileListener;
 import net.osmand.plus.settings.preferences.SwitchPreferenceEx;
@@ -26,9 +28,11 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+import static net.osmand.plus.helpers.ImportHelper.ImportType.SETTINGS;
 import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.DIALOG_TYPE;
+import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.IS_PROFILE_IMPORTED_ARG;
+import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.PROFILE_KEY_ARG;
 import static net.osmand.plus.profiles.SelectProfileBottomSheetDialogFragment.TYPE_BASE_APP_PROFILE;
-import static net.osmand.plus.profiles.SettingsProfileFragment.getBaseProfiles;
 
 public class MainSettingsFragment extends BaseSettingsFragment {
 
@@ -38,7 +42,7 @@ public class MainSettingsFragment extends BaseSettingsFragment {
 	private static final String APP_PROFILES = "app_profiles";
 	private static final String SELECTED_PROFILE = "selected_profile";
 	private static final String CREATE_PROFILE = "create_profile";
-	//	private static final String IMPORT_PROFILE = "import_profile";
+	private static final String IMPORT_PROFILE = "import_profile";
 	private static final String REORDER_PROFILES = "reorder_profiles";
 
 	private List<ApplicationMode> allAppModes;
@@ -59,9 +63,7 @@ public class MainSettingsFragment extends BaseSettingsFragment {
 	@Override
 	protected void setupPreferences() {
 		allAppModes = new ArrayList<>(ApplicationMode.allPossibleValues());
-		allAppModes.remove(ApplicationMode.DEFAULT);
 		availableAppModes = new LinkedHashSet<>(ApplicationMode.values(getMyApplication()));
-		availableAppModes.remove(ApplicationMode.DEFAULT);
 		Preference globalSettings = findPreference("global_settings");
 		globalSettings.setIcon(getContentIcon(R.drawable.ic_action_settings));
 		PreferenceCategory selectedProfile = (PreferenceCategory) findPreference(SELECTED_PROFILE);
@@ -85,6 +87,9 @@ public class MainSettingsFragment extends BaseSettingsFragment {
 				Drawable backgroundDrawable = new ColorDrawable(UiUtilities.getColorWithAlpha(activeProfileColor, 0.15f));
 				AndroidUtils.setBackground(selectedProfile, backgroundDrawable);
 			}
+		}
+		if (ApplicationMode.DEFAULT.getStringKey().equals(preference.getKey())) {
+			holder.findViewById(R.id.switchWidget).setVisibility(View.GONE);
 		}
 	}
 
@@ -117,6 +122,25 @@ public class MainSettingsFragment extends BaseSettingsFragment {
 				getActivity().getSupportFragmentManager().beginTransaction()
 						.add(dialog, "select_base_profile").commitAllowingStateLoss();
 			}
+		} else if (IMPORT_PROFILE.equals(prefId)) {
+			final MapActivity mapActivity = getMapActivity();
+			if (mapActivity != null) {
+				mapActivity.getImportHelper().chooseFileToImport(SETTINGS, new CallbackWithObject<List<SettingsItem>>() {
+					
+					@Override
+					public boolean processResult(List<SettingsItem> result) {
+						for (SettingsItem item : result) {
+							if (SettingsItemType.PROFILE.equals(item.getType())) {
+								ConfigureProfileFragment.showInstance(mapActivity, SettingsScreenType.CONFIGURE_PROFILE,
+										ApplicationMode.valueOfStringKey(item.getName(), null));
+								break;
+							}
+						}
+						return false;
+					}
+
+				});
+			}
 		}
 		return super.onPreferenceClick(preference);
 	}
@@ -133,15 +157,17 @@ public class MainSettingsFragment extends BaseSettingsFragment {
 	}
 
 	private void profileManagementPref() {
+		int activeColorPrimaryResId = isNightMode() ? R.color.active_color_primary_dark 
+				: R.color.active_color_primary_light;
+		
 		Preference createProfile = findPreference(CREATE_PROFILE);
-		createProfile.setIcon(app.getUIUtilities().getIcon(R.drawable.ic_action_plus,
-				isNightMode() ? R.color.active_color_primary_dark : R.color.active_color_primary_light));
-//		Preference importProfile = findPreference(IMPORT_PROFILE);
-//		importProfile.setIcon(app.getUIUtilities().getIcon(R.drawable.ic_action_import,
-//				isNightMode() ? R.color.active_color_primary_dark : R.color.active_color_primary_light));
+		createProfile.setIcon(app.getUIUtilities().getIcon(R.drawable.ic_action_plus, activeColorPrimaryResId));
+		
+		Preference importProfile = findPreference(IMPORT_PROFILE);
+		importProfile.setIcon(app.getUIUtilities().getIcon(R.drawable.ic_action_import, activeColorPrimaryResId));
+		
 		Preference reorderProfiles = findPreference(REORDER_PROFILES);
-		reorderProfiles.setIcon(app.getUIUtilities().getIcon(R.drawable.ic_action_edit_dark,
-				isNightMode() ? R.color.active_color_primary_dark : R.color.active_color_primary_light));
+		reorderProfiles.setIcon(app.getUIUtilities().getIcon(R.drawable.ic_action_edit_dark, activeColorPrimaryResId));
 	}
 
 	private void setupAppProfiles(PreferenceCategory preferenceCategory) {
@@ -183,14 +209,15 @@ public class MainSettingsFragment extends BaseSettingsFragment {
 		if (selectProfileListener == null) {
 			selectProfileListener = new SelectProfileListener() {
 				@Override
-				public void onSelectedType(int pos, String stringRes) {
+				public void onSelectedType(Bundle args) {
 					FragmentActivity activity = getActivity();
 					if (activity != null) {
 						FragmentManager fragmentManager = activity.getSupportFragmentManager();
 						if (fragmentManager != null) {
-							ProfileDataObject profileDataObject = getBaseProfiles(app).get(pos);
+							String profileKey = args.getString(PROFILE_KEY_ARG);
+							boolean imported = args.getBoolean(IS_PROFILE_IMPORTED_ARG);
 							ProfileAppearanceFragment.showInstance(activity, SettingsScreenType.PROFILE_APPEARANCE,
-									profileDataObject.getStringKey());
+									profileKey, imported);
 						}
 					}
 				}

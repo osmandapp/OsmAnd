@@ -1654,4 +1654,5 @@
     <string name="tracks_on_map">Pokazane čary</string>
     <string name="base_profile_descr_public_transport">Wše typy zjawneho wobchada</string>
     <string name="base_profile_descr_aircraft">Lětadło, gliding</string>
+    <string name="shared_string_track_is_saved">Čara %s je składowana</string>
 </resources>

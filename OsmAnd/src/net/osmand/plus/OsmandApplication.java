@@ -50,7 +50,7 @@ import net.osmand.plus.api.SQLiteAPI;
 import net.osmand.plus.api.SQLiteAPIImpl;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.dialogs.CrashBottomSheetDialogFragment;
-import net.osmand.plus.dialogs.RateUsBottomSheetDialog;
+import net.osmand.plus.dialogs.RateUsBottomSheetDialogFragment;
 import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadService;
 import net.osmand.plus.download.IndexItem;
@@ -244,8 +244,8 @@ public class OsmandApplication extends MultiDexApplication {
 		if (routingHelper != null) {
 			routingHelper.getVoiceRouter().onApplicationTerminate();
 		}
-        if(RateUsBottomSheetDialog.shouldShow(this)) {
-            osmandSettings.RATE_US_STATE.set(RateUsBottomSheetDialog.RateUsState.IGNORED);
+        if(RateUsBottomSheetDialogFragment.shouldShow(this)) {
+            osmandSettings.RATE_US_STATE.set(RateUsBottomSheetDialogFragment.RateUsState.IGNORED);
         }
         getNotificationHelper().removeNotifications(false);
 	}
@@ -871,10 +871,14 @@ public class OsmandApplication extends MultiDexApplication {
 	public OsmandRegions getRegions() {
 		return regions;
 	}
-	
+
 	public boolean accessibilityEnabled() {
-		final AccessibilityMode mode = getSettings().ACCESSIBILITY_MODE.get();
-		if(OsmandPlugin.getEnabledPlugin(AccessibilityPlugin.class) == null) {
+		return accessibilityEnabledForMode(getSettings().APPLICATION_MODE.get());
+	}
+
+	public boolean accessibilityEnabledForMode(ApplicationMode appMode) {
+		final AccessibilityMode mode = getSettings().ACCESSIBILITY_MODE.getModeValue(appMode);
+		if (OsmandPlugin.getEnabledPlugin(AccessibilityPlugin.class) == null) {
 			return false;
 		}
 		if (mode == AccessibilityMode.ON) {

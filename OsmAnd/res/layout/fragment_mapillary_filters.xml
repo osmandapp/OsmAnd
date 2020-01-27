@@ -84,7 +84,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_margin="16dp"
-                tools:src="@drawable/ic_layer_top_dark" />
+                tools:src="@drawable/ic_layer_top" />
 
             <Button
                 android:id="@+id/button_reload_tile"

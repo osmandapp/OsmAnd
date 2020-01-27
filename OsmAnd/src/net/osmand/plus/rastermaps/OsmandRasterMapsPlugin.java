@@ -42,6 +42,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityLayers;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dialogs.RasterMapMenu;
+import net.osmand.plus.settings.BaseSettingsFragment;
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.Algorithms;
@@ -350,7 +351,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 				.setDescription(overlayMapDescr)
 				.setSelected(hasOverlayDescription)
 				.setColor(hasOverlayDescription ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
-				.setIcon(R.drawable.ic_layer_top_dark)
+				.setIcon(R.drawable.ic_layer_top)
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
 				.setListener(listener)
 				.setPosition(14)
@@ -366,7 +367,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 				.setDescription(underlayMapDescr)
 				.setSelected(hasUnderlayDescription)
 				.setColor(hasUnderlayDescription ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
-				.setIcon(R.drawable.ic_layer_bottom_dark)
+				.setIcon(R.drawable.ic_layer_bottom)
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
 				.setListener(listener)
 				.setPosition(15)
@@ -405,12 +406,6 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 					.setListener(listener).createItem());
 		}
 	}
-
-	@Override
-	public Class<? extends Activity> getSettingsActivity() {
-		return SettingsRasterMapsActivity.class;
-	}
-
 
 	public static void installMapLayers(final Activity activity, final ResultMatcher<TileSourceTemplate> result) {
 		final OsmandApplication app = (OsmandApplication) activity.getApplication();

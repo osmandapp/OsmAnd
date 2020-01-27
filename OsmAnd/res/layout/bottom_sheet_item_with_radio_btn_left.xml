@@ -3,7 +3,7 @@
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
-	android:layout_height="@dimen/bottom_sheet_list_item_height"
+	android:layout_height="wrap_content"
 	android:background="?attr/selectableItemBackground"
 	android:gravity="center_vertical"
 	android:minHeight="@dimen/bottom_sheet_list_item_height"
@@ -25,11 +25,12 @@
 		android:id="@+id/title"
 		android:layout_width="0dp"
 		android:layout_height="wrap_content"
+		android:paddingBottom="@dimen/content_padding_half"
+		android:paddingTop="@dimen/content_padding_half"
 		android:layout_marginEnd="@dimen/content_padding"
 		android:layout_marginRight="@dimen/content_padding"
 		android:layout_weight="1"
 		android:ellipsize="end"
-		android:maxLines="1"
 		android:textAppearance="@style/TextAppearance.ListItemTitle"
 		tools:text="OsmAnd"/>
 

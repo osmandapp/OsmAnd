@@ -60,4 +60,6 @@
     <string name="profile_alert_need_routing_type_title">Choazit doare merdeiñ</string>
     <string name="profile_alert_need_routing_type_msg">Ret eo deoc\'h choaz doare Merdeiñ evit krouiñ Profil Arloañ Nevez</string>
     <string name="select_nav_profile_dialog_title">Choaz doare Merdeiñ</string>
+    <string name="logcat_buffer_descr">Sellit ha rannit deizlevrioù an arload (evit diveugañ).</string>
+    <string name="permission_is_required">Ezhomm ho peus un aotre evit ober gant an dibab-mañ.</string>
 </resources>

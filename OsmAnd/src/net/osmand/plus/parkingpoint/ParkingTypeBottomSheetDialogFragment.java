@@ -64,12 +64,12 @@ public class ParkingTypeBottomSheetDialogFragment extends MenuBottomSheetDialogF
 				plugin.showDeleteEventWarning(mapActivity);
 			}
 			if (limited) {
-				plugin.setParkingPosition(mapActivity, latitude, longitude, true);
+				plugin.setParkingPosition(latitude, longitude, true);
 				plugin.showSetTimeLimitDialog(mapActivity, new Dialog(getContext()));
 				mapActivity.refreshMap();
 			} else {
 				plugin.addOrRemoveParkingEvent(false);
-				plugin.setParkingPosition(mapActivity, latitude, longitude, false);
+				plugin.setParkingPosition(latitude, longitude, false);
 				plugin.showContextMenuIfNeeded(mapActivity, true);
 				mapActivity.refreshMap();
 			}

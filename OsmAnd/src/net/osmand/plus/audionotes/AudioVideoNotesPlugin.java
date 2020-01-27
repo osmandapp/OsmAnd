@@ -51,7 +51,6 @@ import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.R;
@@ -64,6 +63,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.myplaces.FavoritesActivity;
+import net.osmand.plus.settings.BaseSettingsFragment;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.TextInfoWidget;
@@ -536,27 +536,26 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	public AudioVideoNotesPlugin(OsmandApplication app) {
 		this.app = app;
-		OsmandSettings settings = app.getSettings();
 		ApplicationMode.regWidgetVisibility("audionotes", (ApplicationMode[]) null);
-		AV_EXTERNAL_RECORDER = settings.registerBooleanPreference("av_external_recorder", false).makeGlobal();
-		AV_EXTERNAL_PHOTO_CAM = settings.registerBooleanPreference("av_external_cam", true).makeGlobal();
-		AV_VIDEO_FORMAT = settings.registerIntPreference("av_video_format", VIDEO_OUTPUT_MP4).makeGlobal();
-		AV_VIDEO_QUALITY = settings.registerIntPreference("av_video_quality", VIDEO_QUALITY_DEFAULT).makeGlobal();
-		AV_AUDIO_FORMAT = settings.registerIntPreference("av_audio_format", AUDIO_FORMAT_DEFAULT).makeGlobal();
-		AV_AUDIO_BITRATE = settings.registerIntPreference("av_audio_bitrate", AUDIO_BITRATE_DEFAULT).makeGlobal();
-		AV_DEFAULT_ACTION = settings.registerIntPreference("av_default_action", AV_DEFAULT_ACTION_CHOOSE).makeGlobal();
+		AV_EXTERNAL_RECORDER = registerBooleanPreference(app, "av_external_recorder", false);
+		AV_EXTERNAL_PHOTO_CAM = registerBooleanPreference(app, "av_external_cam", true);
+		AV_VIDEO_FORMAT = registerIntPreference(app, "av_video_format", VIDEO_OUTPUT_MP4);
+		AV_VIDEO_QUALITY = registerIntPreference(app, "av_video_quality", VIDEO_QUALITY_DEFAULT);
+		AV_AUDIO_FORMAT = registerIntPreference(app, "av_audio_format", AUDIO_FORMAT_DEFAULT);
+		AV_AUDIO_BITRATE = registerIntPreference(app, "av_audio_bitrate", AUDIO_BITRATE_DEFAULT);
+		AV_DEFAULT_ACTION = registerIntPreference(app, "av_default_action", AV_DEFAULT_ACTION_CHOOSE);
 		// camera picture size:
-		AV_CAMERA_PICTURE_SIZE = settings.registerIntPreference("av_camera_picture_size", AV_PHOTO_SIZE_DEFAULT).makeGlobal();
+		AV_CAMERA_PICTURE_SIZE = registerIntPreference(app, "av_camera_picture_size", AV_PHOTO_SIZE_DEFAULT);
 		// camera focus type:
-		AV_CAMERA_FOCUS_TYPE = settings.registerIntPreference("av_camera_focus_type", AV_CAMERA_FOCUS_AUTO).makeGlobal();
+		AV_CAMERA_FOCUS_TYPE = registerIntPreference(app, "av_camera_focus_type", AV_CAMERA_FOCUS_AUTO);
 		// camera sound:
-		AV_PHOTO_PLAY_SOUND = settings.registerBooleanPreference("av_photo_play_sound", true).makeGlobal();
+		AV_PHOTO_PLAY_SOUND = registerBooleanPreference(app, "av_photo_play_sound", true);
 
-		SHOW_RECORDINGS = settings.registerBooleanPreference("show_recordings", true).makeGlobal();
+		SHOW_RECORDINGS = registerBooleanPreference(app, "show_recordings", true);
 
-		AV_RECORDER_SPLIT = settings.registerBooleanPreference("av_recorder_split", false).makeGlobal();
-		AV_RS_CLIP_LENGTH = settings.registerIntPreference("av_rs_clip_length", CLIP_LENGTH_DEFAULT).makeGlobal();
-		AV_RS_STORAGE_SIZE = settings.registerIntPreference("av_rs_storage_size", STORAGE_SIZE_DEFAULT).makeGlobal();
+		AV_RECORDER_SPLIT = registerBooleanPreference(app, "av_recorder_split", false);
+		AV_RS_CLIP_LENGTH = registerIntPreference(app, "av_rs_clip_length", CLIP_LENGTH_DEFAULT);
+		AV_RS_STORAGE_SIZE = registerIntPreference(app, "av_rs_storage_size", STORAGE_SIZE_DEFAULT);
 	}
 
 	@Override
@@ -1788,6 +1787,15 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		return SettingsAudioVideoActivity.class;
 	}
 
+	@Override
+	public Class<? extends BaseSettingsFragment> getSettingsFragment() {
+		return MultimediaNotesFragment.class;
+	}
+
+	@Override
+	public String getPrefsDescription() {
+		return app.getString(R.string.multimedia_notes_prefs_descr);
+	}
 
 	@Override
 	public void onMapActivityExternalResult(int requestCode, int resultCode, Intent data) {

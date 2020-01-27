@@ -3760,4 +3760,22 @@
     <string name="poi_community_gender_male">Komunumo: vira</string>
     <string name="poi_community_gender_mixed">Komunumo: gea</string>
     <string name="poi_grave">Tombo</string>
+    <string name="poi_parking_space">Parkumeja loko</string>
+    <string name="poi_url">Ligilo</string>
+    <string name="poi_volcano_type">Speco de vulkano</string>
+    <string name="poi_volcano_status">Aktiveco de vulkano</string>
+    <string name="poi_volcano_type_scoria">konusa</string>
+    <string name="poi_volcano_type_stratovolcano">tavola (stratovulkano)</string>
+    <string name="poi_volcano_type_shield">ŝilda</string>
+    <string name="poi_volcano_type_maar">malprofund‑kratera (maaro)</string>
+    <string name="poi_volcano_type_caldera">kaldero</string>
+    <string name="poi_volcano_type_lava_dome">lafkupolo</string>
+    <string name="poi_volcano_type_dirt">ŝlimvulkano</string>
+    <string name="poi_volcano_last_eruption">Antaŭa erupcio</string>
+    <string name="poi_volcano_status_extinct">neaktiva</string>
+    <string name="poi_volcano_status_dormant">dormanta</string>
+    <string name="poi_volcano_status_active">aktiva</string>
+    <string name="poi_volcano_status_inactive">neaktiva</string>
+    <string name="poi_volcano_number_of_eruptions">Nombro da erupcioj</string>
+    <string name="poi_memorial_ghost_bike">Fantombiciklo</string>
 </resources>

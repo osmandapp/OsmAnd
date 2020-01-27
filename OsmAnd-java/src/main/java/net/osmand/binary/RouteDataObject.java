@@ -632,18 +632,18 @@ public class RouteDataObject {
 		return def;
 	}
 	
-	public boolean loop(){
-		return pointsX[0] == pointsX[pointsX.length - 1] && pointsY[0] == pointsY[pointsY.length - 1] ; 
+	public boolean loop() {
+		return pointsX[0] == pointsX[pointsX.length - 1] && pointsY[0] == pointsY[pointsY.length - 1];
 	}
 
-	public boolean platform(){
+	public boolean platform() {
 		int sz = types.length;
-		for(int i=0; i<sz; i++) {
+		for (int i = 0; i < sz; i++) {
 			RouteTypeRule r = region.quickGetEncodingRule(types[i]);
-			if(r.getTag().equals("railway") && r.getValue().equals("platform")) {
+			if (r.getTag().equals("railway") && r.getValue().equals("platform")) {
 				return true;
 			}
-			if(r.getTag().equals("public_transport") && r.getValue().equals("platform")) {
+			if (r.getTag().equals("public_transport") && r.getValue().equals("platform")) {
 				return true;
 			}
 		}

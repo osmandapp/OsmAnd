@@ -422,10 +422,10 @@ public class QuickActionFactory {
 				return R.drawable.ic_world_globe_dark;
 
 			case MapOverlayAction.TYPE:
-				return R.drawable.ic_layer_top_dark;
+				return R.drawable.ic_layer_top;
 
 			case MapUnderlayAction.TYPE:
-				return R.drawable.ic_layer_bottom_dark;
+				return R.drawable.ic_layer_bottom;
 
 			case NavDirectionsFromAction.TYPE:
 				return R.drawable.ic_action_route_direction_from_here;

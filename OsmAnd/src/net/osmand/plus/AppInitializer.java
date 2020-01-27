@@ -58,7 +58,6 @@ import net.osmand.plus.voice.TTSCommandPlayerImpl;
 import net.osmand.plus.wikivoyage.data.TravelDbHelper;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.RoutingConfiguration;
-import net.osmand.router.RoutingConfiguration.Builder;
 import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
 
@@ -140,6 +139,10 @@ public class AppInitializer implements IProgress {
 		void onProgress(AppInitializer init, InitEvents event);
 
 		void onFinish(AppInitializer init);
+	}
+	
+	public interface LoadRoutingFilesCallback {
+		void onRoutingFilesLoaded();
 	}
 
 
@@ -579,9 +582,19 @@ public class AppInitializer implements IProgress {
 
 	@SuppressLint("StaticFieldLeak")
 	private void getLazyRoutingConfig() {
-		new AsyncTask<Void, Void, RoutingConfiguration.Builder>() {
+		loadRoutingFiles(app, new LoadRoutingFilesCallback() {
 			@Override
-			protected Builder doInBackground(Void... voids) {
+			public void onRoutingFilesLoaded() {
+				notifyEvent(InitEvents.ROUTING_CONFIG_INITIALIZED);
+			}
+		});
+	}
+
+	public static void loadRoutingFiles(final OsmandApplication app, final LoadRoutingFilesCallback callback) {
+		new AsyncTask<Void, Void, RoutingConfiguration.Builder>() {
+			
+			@Override
+			protected RoutingConfiguration.Builder doInBackground(Void... voids) {
 				File routingFolder = app.getAppPath(IndexConstants.ROUTING_PROFILES_DIR);
 				RoutingConfiguration.Builder builder = RoutingConfiguration.getDefault();
 				if (routingFolder.isDirectory()) {
@@ -602,10 +615,10 @@ public class AppInitializer implements IProgress {
 			}
 
 			@Override
-			protected void onPostExecute(Builder builder) {
+			protected void onPostExecute(RoutingConfiguration.Builder builder) {
 				super.onPostExecute(builder);
 				app.updateRoutingConfig(builder);
-				notifyEvent(InitEvents.ROUTING_CONFIG_INITIALIZED);
+				callback.onRoutingFilesLoaded();
 			}
 		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}

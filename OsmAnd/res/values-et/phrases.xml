@@ -3749,4 +3749,22 @@
     <string name="poi_community_gender_male">Kogukonna sugu: mees</string>
     <string name="poi_community_gender_mixed">Kogukonna sugu: sega</string>
     <string name="poi_grave">Haud</string>
+    <string name="poi_parking_space">Parkimiskoht</string>
+    <string name="poi_url">URL</string>
+    <string name="poi_volcano_type">Liik</string>
+    <string name="poi_volcano_status">Olek</string>
+    <string name="poi_volcano_type_scoria">Scoria</string>
+    <string name="poi_volcano_type_stratovolcano">Kihtvulkaan</string>
+    <string name="poi_volcano_type_shield">Kilp</string>
+    <string name="poi_volcano_type_maar">Maar</string>
+    <string name="poi_volcano_type_caldera">Kaldeera</string>
+    <string name="poi_volcano_type_lava_dome">Laava kuppel</string>
+    <string name="poi_volcano_type_dirt">Muld</string>
+    <string name="poi_volcano_last_eruption">Viimane purse</string>
+    <string name="poi_volcano_status_extinct">Kustunud</string>
+    <string name="poi_volcano_status_dormant">Tegevusetu</string>
+    <string name="poi_volcano_status_active">Aktiivne</string>
+    <string name="poi_volcano_status_inactive">Mitteaktiivne</string>
+    <string name="poi_volcano_number_of_eruptions">Pursete arv</string>
+    <string name="poi_memorial_ghost_bike">Kummitusratas</string>
 </resources>

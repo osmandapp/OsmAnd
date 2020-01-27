@@ -3766,4 +3766,22 @@
     <string name="poi_community_gender_male">社群性別：男</string>
     <string name="poi_community_gender_mixed">社群性別：混合</string>
     <string name="poi_grave">墳墓</string>
+    <string name="poi_parking_space">停車位</string>
+    <string name="poi_url">URL</string>
+    <string name="poi_volcano_type">類型</string>
+    <string name="poi_volcano_status">狀態</string>
+    <string name="poi_volcano_type_scoria">火山渣</string>
+    <string name="poi_volcano_type_stratovolcano">複式火山</string>
+    <string name="poi_volcano_type_shield">盾狀火山</string>
+    <string name="poi_volcano_type_maar">低平火山口</string>
+    <string name="poi_volcano_type_caldera">破火山口</string>
+    <string name="poi_volcano_type_lava_dome">火山穹丘</string>
+    <string name="poi_volcano_type_dirt">火山灰</string>
+    <string name="poi_volcano_last_eruption">最後一次噴發</string>
+    <string name="poi_volcano_status_extinct">死火山</string>
+    <string name="poi_volcano_status_dormant">休眠火山</string>
+    <string name="poi_volcano_status_active">活火山</string>
+    <string name="poi_volcano_status_inactive">不活躍火山</string>
+    <string name="poi_volcano_number_of_eruptions">噴發次數</string>
+    <string name="poi_memorial_ghost_bike">幽靈單車</string>
 </resources>

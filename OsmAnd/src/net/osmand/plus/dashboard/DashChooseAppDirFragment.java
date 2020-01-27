@@ -57,7 +57,6 @@ public class DashChooseAppDirFragment {
 		public static final int VERSION_DEFAULTLOCATION_CHANGED = 19;
 		private TextView locationPath;
 		private TextView locationDesc;
-		MessageFormat formatGb = new MessageFormat("{0, number,#.##} GB", Locale.US);
 		private View copyMapsBtn;
 		private ImageView editBtn;
 		private View dontCopyMapsBtn;
@@ -93,8 +92,7 @@ public class DashChooseAppDirFragment {
 		private String getFreeSpace(File dir) {
 			if (dir.canRead()) {
 				StatFs fs = new StatFs(dir.getAbsolutePath());
-				return formatGb
-						.format(new Object[] { (float) (fs.getAvailableBlocks()) * fs.getBlockSize() / (1 << 30) });
+				return AndroidUtils.formatSize(activity, (long) fs.getAvailableBlocks() * fs.getBlockSize() );
 			}
 			return "";
 		}

@@ -17,6 +17,7 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadResources;
+import net.osmand.plus.settings.BaseSettingsFragment;
 
 import java.util.Collections;
 import java.util.List;
@@ -119,10 +120,5 @@ public class NauticalMapsPlugin extends OsmandPlugin {
 	@Override
 	public String getId() {
 		return ID;
-	}
-
-	@Override
-	public Class<? extends Activity> getSettingsActivity() {
-		return null;
 	}
 }

@@ -3752,4 +3752,21 @@
     <string name="poi_community_gender_male">Sexo comunitário: masculino</string>
     <string name="poi_community_gender_mixed">Sexo comunitário: misto</string>
     <string name="poi_grave">Grave</string>
+    <string name="poi_parking_space">Espaço de estacionamento</string>
+    <string name="poi_url">URL</string>
+    <string name="poi_volcano_type">Tipo</string>
+    <string name="poi_volcano_status">Estado</string>
+    <string name="poi_volcano_type_scoria">Escória</string>
+    <string name="poi_volcano_type_stratovolcano">Estratovulcão</string>
+    <string name="poi_volcano_type_shield">Escudo</string>
+    <string name="poi_volcano_type_maar">Maar</string>
+    <string name="poi_volcano_type_caldera">Caldera</string>
+    <string name="poi_volcano_type_lava_dome">Cúpula de lava</string>
+    <string name="poi_volcano_type_dirt">Sujeira</string>
+    <string name="poi_volcano_last_eruption">Última erupção</string>
+    <string name="poi_volcano_status_extinct">Extinto</string>
+    <string name="poi_volcano_status_dormant">Dormente</string>
+    <string name="poi_volcano_status_active">Ativo</string>
+    <string name="poi_volcano_status_inactive">Inativo</string>
+    <string name="poi_volcano_number_of_eruptions">Quantidade de erupções</string>
 </resources>

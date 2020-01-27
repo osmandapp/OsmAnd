@@ -154,8 +154,8 @@ public class MapTileLayer extends BaseMapLayer {
 		int width = (int) Math.ceil(tilesRect.right - left);
 		int height = (int) Math.ceil(tilesRect.bottom + ellipticTileCorrection - top);
 
-		boolean useInternet = (OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class) != null || OsmandPlugin.getEnabledPlugin(MapillaryPlugin.class) != null) &&
-				settings.USE_INTERNET_TO_DOWNLOAD_TILES.get() && settings.isInternetConnectionAvailable() && map.couldBeDownloadedFromInternet();
+		boolean useInternet = (OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class) != null || OsmandPlugin.getEnabledPlugin(MapillaryPlugin.class) != null)
+				&& settings.isInternetConnectionAvailable() && map.couldBeDownloadedFromInternet();
 		int maxLevel = map.getMaximumZoomSupported();
 		int tileSize = map.getTileSize();
 		boolean oneTileShown = false;
@@ -208,6 +208,9 @@ public class MapTileLayer extends BaseMapLayer {
 
 					}
 					if (bmp != null) {
+						if (bmp.getWidth() != tileSize && bmp.getWidth() > 0) {
+							tileSize = bmp.getWidth();
+						}
 						int xZoom = (tileX % div) * tileSize / div;
 						int yZoom = (tileY % div) * tileSize / div;
 						// nice scale
@@ -270,11 +273,7 @@ public class MapTileLayer extends BaseMapLayer {
 		}
 	}
 	
-	public int getSourceTileSize() {
-		return map == null ? 256 : map.getTileSize();
-	}
-	
-	
+
 	@Override
 	public int getMaximumShownMapZoom() {
 		return map == null ? 20 : map.getMaximumZoomSupported() + OVERZOOM_IN;

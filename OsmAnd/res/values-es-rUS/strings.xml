@@ -134,7 +134,7 @@ Lon %2$s</string>
     <string name="audionotes_plugin_name">Notas multimedia</string>
     <string name="osmand_parking_plugin_name">Estacionamiento</string>
     <string name="shared_string_accessibility">Accesibilidad</string>
-    <string name="osm_settings">Edición OSM</string>
+    <string name="osm_settings">Edición de OpenStreetMap</string>
     <string name="debugging_and_development">Desarrollo de OsmAnd</string>
     <string name="back_to_map">Volver al mapa</string>
     <string name="share_note">Compartir nota multimedia</string>
@@ -783,7 +783,7 @@ Lon %2$s</string>
 \n 
 \nOsmAnd+ es un software de navegación de código abierto con acceso a una amplia variedad de datos globales de OpenStreetMap (OSM). Todos los datos del mapa (vectores y teselas), pueden ser almacenados en la memoria del teléfono para su uso sin conexión. Ofrece funcionalidades de rutas con y sin conexión, incluyendo guía de giro-a-giro por voz. 
 \n 
-\n OsmAnd+ es la versión de pago de la aplicación, comprándola das soporte al proyecto, financias el desarrollo de nuevas funciones, y recibes las últimas actualizaciones. 
+\n OsmAnd+ es la versión de pago de la aplicación, comprándola ayudas al proyecto, financias el desarrollo de nuevas funciones, y recibes las últimas actualizaciones. 
 \n 
 \n Algunas de las funciones fundamentales: 
 \n - Completa funcionalidad sin conexión (guarda los mapas vectoriales o teselas descargados en el almacenamiento del dispositivo) 
@@ -797,7 +797,7 @@ Lon %2$s</string>
 \n - Cambio automático de modo diurno/nocturno 
 \n - Zoom del mapa según la velocidad 
 \n - Alineación del mapa, según brújula o dirección del movimiento 
-\n - Indicación de carriles, mostrar límites de velocidad, voces grabadas y sintetizadas 
+\n - Indicación de carriles, mostrar límites de velocidad, voces grabadas y sintetizadas
 \n</string>
     <string name="filterpoi_activity">Crear filtro PDI</string>
     <string name="recalculate_route_to_your_location">Modo transporte:</string>
@@ -1133,7 +1133,7 @@ Lon %2$s</string>
     <string name="trace_rendering_descr">Muestra el rendimiento de visualización.</string>
     <string name="installing_new_resources">Desempaquetando nuevos datos…</string>
     <string name="internet_connection_required_for_online_route">La navegación en línea, no funciona sin conexión a Internet.</string>
-    <string name="tts_language_not_supported_title">Idioma no soportado</string>
+    <string name="tts_language_not_supported_title">Idioma no admitido</string>
     <string name="tts_language_not_supported">El idioma elegido es incompatible con el motor TTS (texto a voz) instalado en Android, se usará el idioma TTS predefinido. ¿Buscar otro motor TTS en la tienda de aplicaciones\?</string>
     <string name="tts_missing_language_data_title">Faltan datos</string>
     <string name="tts_missing_language_data">¿Ir a la tienda de aplicaciones para descargar el idioma elegido?</string>
@@ -1224,7 +1224,7 @@ Lon %2$s</string>
     <string name="poi_filter_namefinder">NameFinder en línea</string>
     <string name="reading_cached_tiles">Leyendo teselas guardadas…</string>
     <string name="version_index_is_big_for_memory">La versión «{0}» de índices no cabe en memoria</string>
-    <string name="version_index_is_not_supported">No se soporta la versión «{0}» de índices</string>
+    <string name="version_index_is_not_supported">No se admite la versión «{0}» de índices</string>
     <string name="osmand_routing_experimental">La navegación sin conexión de OsmAnd es una característica experimental y no funciona para distancias mayores a 20 km. 
 \n 
 \nNavegación cambiada temporalmente al servicio en línea CloudMade.</string>
@@ -1331,7 +1331,7 @@ Lon %2$s</string>
     <string name="menu_mute_off">Sonido activado</string>
     <string name="menu_mute_on">Sonido desactivado</string>
     <string name="voice_data_initializing">Inicializando datos de voz…</string>
-    <string name="voice_data_not_supported">Versión no soportada de datos de voz</string>
+    <string name="voice_data_not_supported">Versión de datos de voz no admitida</string>
     <string name="voice_data_corrupted">El dato de voz indicado está corrupto</string>
     <string name="voice_data_unavailable">Paquete de indicaciones por voz elegido, no disponible</string>
     <string name="sd_unmounted">Tarjeta de memoria inaccesible.
@@ -1899,7 +1899,7 @@ Lon %2$s</string>
     <string name="osm_live_email_desc">Necesario para informarte sobre tus contribuciones.</string>
     <string name="osm_live_user_public_name">Nombre público</string>
     <string name="osm_live_hide_user_name">Ocultar mi nombre en los informes</string>
-    <string name="osm_live_support_region">Región soportada</string>
+    <string name="osm_live_support_region">Región admitida</string>
     <string name="osm_live_month_cost">Coste mensual</string>
     <string name="osm_live_month_cost_desc">Pago mensual</string>
     <string name="osm_live_active">Activo</string>
@@ -2247,8 +2247,8 @@ Lon %2$s</string>
 \n • Muestra los límites de velocidad y obtiene un aviso al excederte del mismo 
 \n • El zoom del mapa se ajusta a la velocidad 
 \n • Busca destinos por dirección, por tipo (por ejemplo: estacionamientos, restaurantes, hoteles, gasolineras, museos), o por coordenadas geográficas 
-\n • Soporta puntos intermedios en el itinerario 
-\n • Graba tu viaje o sube una traza GPX y síguela 
+\n • Admite puntos intermedios en el itinerario 
+\n • Graba tu viaje o sube una traza GPX y síguela
 \n</string>
     <string name="osmand_extended_description_part3">Mapa 
 \n • Muestra PDI (puntos de interés) a tu alrededor 
@@ -2293,11 +2293,17 @@ Lon %2$s</string>
 \n ¡Más países alrededor del globo están disponibles para descargar! 
 \n Obtén un navegador confiable en tu país - ya sea Francia, Alemania, México, Reino Unido, España, Países bajos, Estados Unidos, Rusia, Brasil o cualquier otro.</string>
     <string name="osmand_plus_extended_description_part2">"Navegación GPS 
+\n
 \n • Funciona en línea (rápido) o sin conexión (sin cargos de roaming al viajar al extranjero) 
+\n
 \n • Guía por voz giro-a-giro (voces grabadas y sintetizadas) 
+\n
 \n • (Opcional) Guía de carriles, nombres de calles y tiempo estimado al destino 
-\n • Soporta puntos intermedios en el itinerario 
+\n
+\n • Admite puntos intermedios en el itinerario 
+\n
 \n • La ruta se recalcula al salirse de la misma 
+\n
 \n • Busca destinos por dirección, por tipo (por ejemplo: Restaurantes, hoteles, gasolineras, museos), o por coordenada geográfica "</string>
     <string name="osmand_plus_extended_description_part3">Vista del mapa 
 \n • Muestra tu ubicación y orientación 
@@ -3030,7 +3036,6 @@ Lon %2$s</string>
     <string name="coordinates_widget">Widget de coordenadas</string>
     <string name="searching_gps">Buscando GPS</string>
     <string name="rate_dialog_descr">Por favor, comparte tus comentarios y califica nuestro trabajo en Google Play.</string>
-    <string name="button_rate">Valorar</string>
     <string name="shared_string_privacy_policy">Política de privacidad</string>
     <string name="help_us_make_osmand_better">Ayúdanos a mejorar OsmAnd</string>
     <string name="make_osmand_better_descr">Permite que OsmAnd recopile y procese datos de uso anónimos de la aplicación. No recopilamos datos sobre las ubicaciones que ve en el mapa. 
@@ -3416,4 +3421,35 @@ Lon %2$s</string>
     <string name="choose_icon_color_name">Elegir el icono, color y nombre</string>
     <string name="reorder_profiles">Editar la lista de perfiles</string>
     <string name="selected_profile">Perfil marcado</string>
+    <string name="button_rate">Calificar</string>
+    <string name="reset_confirmation_descr">Al pulsar en %1$s, se perderán todos los cambios.</string>
+    <string name="reset_all_profile_settings_descr">Todos los ajustes del perfil serán restablecidos al estado después de la instalación.</string>
+    <string name="reset_all_profile_settings">¿Restablecer todos los ajustes del perfil a su valor predefinido\?</string>
+    <string name="ltr_or_rtl_combine_via_space">%1$s %2$s</string>
+    <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
+    <string name="file_does_not_contain_routing_rules">El archivo «%1$s» no contiene las reglas de navegación, elige otro.</string>
+    <string name="not_support_file_type_with_ext">No se admite el tipo de archivo. Se debe elegir un archivo con la extensión «%1$s».</string>
+    <string name="import_from_file">Importar desde archivo</string>
+    <string name="import_routing_file">Importar archivo de ruta</string>
+    <string name="import_profile">Importar perfil</string>
+    <string name="monitoring_prefs_descr">Navegación, precisión de registro</string>
+    <string name="multimedia_notes_prefs_descr">Tamaño de imagen, calidad de audio y video</string>
+    <string name="osm_editing_prefs_descr">Inicio de sesión, contraseña, edición sin conexión</string>
+    <string name="accessibility_prefs_descr">Elegir icono, color y nombre</string>
+    <string name="live_monitoring_descr">Permite compartir la ubicación actual utilizando la grabación del viaje.</string>
+    <string name="live_monitoring">Seguimiento en línea</string>
+    <string name="save_track_logging_accuracy">Precisión de registro</string>
+    <string name="tracks_view_descr">Puedes encontrar todas tus trazas grabadas en «%1$s» o en la carpeta OsmAnd usando el administrador de archivos.</string>
+    <string name="multimedia_notes_view_descr">Puedes encontrar todas tus notas en «%1$s»</string>
+    <string name="video_notes">Notas de video</string>
+    <string name="photo_notes">Notas fotográficas</string>
+    <string name="route_recalculation">Recálculo de la ruta</string>
+    <string name="accessibility_announce">Anunciar</string>
+    <string name="login_and_pass">Nombre de usuario y contraseña</string>
+    <string name="plugin_global_prefs_info">Los ajustes de este complemento es global y se aplica a todos los perfiles.</string>
+    <string name="osm_editing">Edición de OpenStreetMap</string>
+    <string name="osm_edits_view_descr">Puedes ver todas tus ediciones no subidas o errores de OSM en «%1$s». Los puntos subidos no se muestran en OsmAnd.</string>
+    <string name="app_mode_osm">OSM</string>
+    <string name="select_nav_icon_descr">Sólo verás el icono durante la navegación o mientras te mueves.</string>
+    <string name="select_map_icon_descr">El icono del mapa aparece sólo en el mapa y cambia mientras se navega hacia el icono de navegación.</string>
 </resources>

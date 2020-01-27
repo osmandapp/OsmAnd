@@ -11,28 +11,20 @@
 		android:id="@+id/selectable_list_item"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:minHeight="@dimen/bottom_sheet_list_item_height"
+		android:minHeight="@dimen/setting_list_item_large_height"
 		tools:background="?android:attr/selectableItemBackground">
 
-		<FrameLayout
-			android:id="@+id/icon_container"
-			android:layout_width="@dimen/route_info_toolbar_button_size"
-			android:layout_height="@dimen/route_info_toolbar_button_size"
+		<ImageView
+			android:id="@android:id/icon"
+			android:layout_width="@dimen/standard_icon_size"
+			android:layout_height="@dimen/standard_icon_size"
 			android:layout_gravity="center"
-			android:layout_marginLeft="@dimen/content_padding_half"
-			android:layout_marginTop="@dimen/content_padding"
-			android:layout_marginRight="@dimen/content_padding_half"
-			android:layout_marginBottom="@dimen/content_padding">
-
-			<ImageView
-				android:id="@android:id/icon"
-				android:layout_width="@dimen/standard_icon_size"
-				android:layout_height="@dimen/standard_icon_size"
-				android:layout_gravity="center"
-				tools:src="@drawable/ic_action_car_dark"
-				tools:tint="@color/active_color_primary_light" />
-
-		</FrameLayout>
+			android:layout_marginLeft="@dimen/content_padding"
+			android:layout_marginTop="@dimen/bottom_sheet_icon_margin"
+			android:layout_marginRight="@dimen/content_padding"
+			android:layout_marginBottom="@dimen/bottom_sheet_icon_margin"
+			tools:src="@drawable/ic_action_car_dark"
+			tools:tint="@color/active_color_primary_light" />
 
 		<LinearLayout
 			android:layout_width="0dp"
@@ -48,7 +40,6 @@
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:ellipsize="marquee"
-				android:fadingEdge="horizontal"
 				android:singleLine="true"
 				android:textColor="?android:textColorPrimary"
 				android:textSize="@dimen/default_list_text_size"

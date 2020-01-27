@@ -709,7 +709,7 @@
     <string name="follow">Zielführung starten</string>
     <string name="recalculate_route_to_your_location">Nutzerprofil:</string>
     <string name="mark_final_location_first">Bitte zuerst ein Ziel festlegen</string>
-    <string name="get_directions">Wegbeschreibung</string>
+    <string name="get_directions">Navigation</string>
     <string name="opening_hours">Öffnungszeiten</string>
     <string name="opening_changeset">Änderungssatz öffnen…</string>
     <string name="closing_changeset">Änderungssatz schließen…</string>
@@ -742,7 +742,7 @@
     <string name="osm_settings_descr">Einstellungen für OpenStreetMap.org (OSM), die für OSM-Übermittlungen erforderlich sind.</string>
     <string name="data_settings_descr">Sprache angeben, Daten herunter- oder neu laden.</string>
     <string name="data_settings">Daten</string>
-    <string name="osm_settings">OSM-Bearbeitung</string>
+    <string name="osm_settings">OpenStreetMap-Bearbeitung</string>
     <string name="additional_settings">Weitere Einstellungen</string>
     <string name="shared_string_settings">Einstellungen</string>
     <string name="update_tile">Karte aktualisieren</string>
@@ -946,8 +946,8 @@
     <string name="map_widget_intermediate_distance">Zwischenziel</string>
     <string name="ending_point_too_far">Endpunkt zu weit von der nächsten Straße entfernt.</string>
     <string name="intermediate_point_too_far">Zwischenziel %1$s ist zu weit von der nächsten Straße entfernt.</string>
-    <string name="context_menu_item_last_intermediate_point">Als letztes Zwischenziel einfügen</string>
-    <string name="context_menu_item_first_intermediate_point">Als erstes Zwischenziel einfügen</string>
+    <string name="context_menu_item_last_intermediate_point">Als letztes Zwischenziel hinzufügen</string>
+    <string name="context_menu_item_first_intermediate_point">Als erstes Zwischenziel hinzufügen</string>
     <string name="target_point">Ziel %1$s</string>
     <string name="shared_string_target_points">Ziele</string>
     <string name="add_as_first_destination_point">Als erstes Zwischenziel hinzufügen</string>
@@ -1802,7 +1802,7 @@ Lon %2$s</string>
     <string name="dashboard_or_drawer_title">Übersichtsseite oder Menüsteuerung</string>
     <string name="dashboard_or_drawer_description">Es besteht die Möglichkeit, die App primär über die flexible Übersichtsseite oder ein statisches Menü zu steuern. Ihre Wahl kann jederzeit in den Übersichtsseiten-Einstellungen geändert werden.</string>
     <string name="access_from_map">Aufruf von der Karte aus</string>
-    <string name="favorite_category_add_new">Neu erstellen</string>
+    <string name="favorite_category_add_new">Neue Katagorie erstellen</string>
     <string name="next_proceed">Weiter</string>
     <string name="file_size_in_mb">%.1f MB</string>
     <string name="please_specify_poi_type_only_from_list">Bitte einen gültigen POI-Typ angeben oder überspringen.</string>
@@ -2789,7 +2789,7 @@ Lon %2$s</string>
     <string name="off_road_render_descr">Für den Einsatz im Gelände, basierend auf dem \'Topo\'-Kartenstil und zur Verwendung mit grünen Satellitenbildern als Unterlagekarte. Verringerte Linienstärke für Straßen, erhöhte für Fußwege, Wander-, Rad- und andere Outdoor-Routen.</string>
     <string name="touring_view_render_descr">Touring-Stil mit hohem Kontrast und maximalen Details. Enthält alle Optionen des OsmAnd-Standardstils und zeigt dabei so viele Details wie möglich an, insbesondere Straßen, Pfade und andere Verkehrswege. Klare Unterscheidung zwischen den Straßentypen durch den „Touring-Atlas“. Geeignet für den Einsatz bei Tag, Nacht und im Freien.</string>
     <string name="access_intermediate_arrival_time">Ankunftszeit Zwischenziel</string>
-    <string name="map_widget_intermediate_time">Reisezeit Zwischenziel</string>
+    <string name="map_widget_intermediate_time">Zwischenankunftszeit</string>
     <string name="unirs_render_descr">Änderung des Standardstils, um den Kontrast von Fußgänger- und Fahrradwegen zu erhöhen. Verwendet alte Mapnik-Farben.</string>
     <string name="shared_string_gpx_files">GPX-Dateien</string>
     <string name="get_osmand_live">Holen Sie sich OsmAnd Live, um alle Funktionen freizuschalten: Tägliche Karten-Updates mit unbegrenzten Downloads, alle kostenpflichtigen und kostenlosen Plugins, Wikipedia, Wikivoyage und vieles mehr.</string>
@@ -3039,7 +3039,6 @@ Lon %2$s</string>
     <string name="searching_gps">Suche GPS</string>
     <string name="coordinates_widget">Koordinaten-Widget</string>
     <string name="rate_dialog_descr">Bitte geben Sie uns Feedback und bewerten Sie unsere Arbeit auf Google Play.</string>
-    <string name="button_rate">OK</string>
     <string name="shared_string_privacy_policy">Datenschutzrichtlinie</string>
     <string name="help_us_make_osmand_better">Helfen Sie uns, OsmAnd besser zu machen</string>
     <string name="make_osmand_better_descr">Gestatten Sie OsmAnd, anonyme App-Nutzungsdaten zu sammeln und zu verarbeiten. Wir sammeln keine Daten zu Ihrem Standort oder zu irgendwelchen Orten, die Sie sich auf der Karte ansehen. 
@@ -3426,4 +3425,26 @@ Lon %2$s</string>
     <string name="reset_all_profile_settings_descr">Alle Profil-Einstellungen werden auf den Ausgangszustand nach App-Installation zurückgesetzt.</string>
     <string name="reset_all_profile_settings">Alle Profil-Einstellungen auf den Standard zurücksetzen\?</string>
     <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
+    <string name="ltr_or_rtl_combine_via_space">%1$s %2$s</string>
+    <string name="not_support_file_type_with_ext">Nicht unterstützter Dateityp. Sie müssen eine Datei mit der Erweiterung %1$s auswählen.</string>
+    <string name="import_from_file">Aus Datei importieren</string>
+    <string name="import_routing_file">Routingdatei importieren</string>
+    <string name="import_profile">Profil importieren</string>
+    <string name="monitoring_prefs_descr">Navigation, Genauigkeit der Protokollierung</string>
+    <string name="multimedia_notes_prefs_descr">Bildgröße, Audio- und Videoqualität</string>
+    <string name="osm_editing_prefs_descr">Anmeldung, Passwort, Offline-Bearbeitung</string>
+    <string name="accessibility_prefs_descr">Symbol, Farbe und Namen wählen</string>
+    <string name="live_monitoring_descr">Ermöglicht Ihnen die gemeinsame Nutzung des aktuellen Standorts mit Hilfe der Fahrtenaufzeichnung.</string>
+    <string name="save_track_logging_accuracy">Genauigkeit der Protokollierung</string>
+    <string name="video_notes">Video-Notizen</string>
+    <string name="photo_notes">Foto-Notizen</string>
+    <string name="route_recalculation">Neuberechnung der Route</string>
+    <string name="login_and_pass">Benutzername und Passwort</string>
+    <string name="osm_editing">OpenStreetMap-Bearbeitung</string>
+    <string name="app_mode_osm">OSM</string>
+    <string name="select_nav_icon_descr">Sie sehen das Symbol nur während der Navigation oder während der Bewegung.</string>
+    <string name="multimedia_notes_view_descr">Sie finden all Ihre Notizen im Menü unter Meine Orte — Notizen.</string>
+    <string name="button_rate">Bewerten</string>
+    <string name="logcat_buffer_descr">Hier können Sie Protokolle der Anwendung sehen und freigeben</string>
+    <string name="permission_is_required">Für die Verwendung dieser Option ist eine Berechtigung erforderlich.</string>
 </resources>

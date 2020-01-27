@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:title="@string/audionotes_plugin_name">
+
+	<PreferenceCategory
+		android:key="photo_notes"
+		android:layout="@layout/preference_category_with_descr"
+		android:title="@string/photo_notes" />
+
+	<Preference
+		android:icon="@drawable/ic_action_lock"
+		android:key="camera_permission"
+		android:layout="@layout/preference_permission"
+		android:summary="@string/give_permission"
+		android:title="@string/permission_is_required" />
+
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="av_external_cam"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_disabled"
+		android:summaryOn="@string/shared_string_enabled"
+		android:title="@string/multimedia_use_system_camera"
+		tools:icon="@drawable/ic_action_photo_dark" />
+
+	<net.osmand.plus.settings.preferences.ListPreferenceEx
+		android:icon="@drawable/ic_action_picture_size"
+		android:key="av_camera_picture_size"
+		android:layout="@layout/preference_with_descr"
+		android:title="@string/av_camera_pic_size"
+		tools:summary="4128x3096 (12.19 Mpx)" />
+
+	<net.osmand.plus.settings.preferences.ListPreferenceEx
+		android:icon="@drawable/ic_action_camera_focus"
+		android:key="av_camera_focus_type"
+		android:layout="@layout/preference_with_descr"
+		android:title="@string/av_camera_focus"
+		tools:summary="@string/av_camera_focus_descr" />
+
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="av_photo_play_sound"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_disabled"
+		android:summaryOn="@string/shared_string_enabled"
+		android:title="@string/multimedia_photo_play_sound"
+		tools:icon="@drawable/ic_action_music_off" />
+
+	<Preference
+		android:layout="@layout/simple_divider_item"
+		android:selectable="false" />
+
+	<PreferenceCategory
+		android:key="audio_notes"
+		android:layout="@layout/preference_category_with_descr"
+		android:title="@string/map_widget_audionotes" />
+
+	<net.osmand.plus.settings.preferences.ListPreferenceEx
+		android:key="av_audio_format"
+		android:layout="@layout/preference_with_descr"
+		android:title="@string/av_audio_format"
+		tools:summary="@string/av_audio_format_descr" />
+
+	<net.osmand.plus.settings.preferences.ListPreferenceEx
+		android:key="av_audio_bitrate"
+		android:layout="@layout/preference_with_descr"
+		android:title="@string/av_audio_bitrate"
+		tools:summary="@string/av_audio_bitrate_descr" />
+
+	<Preference
+		android:layout="@layout/simple_divider_item"
+		android:selectable="false" />
+
+	<PreferenceCategory
+		android:key="video_notes"
+		android:layout="@layout/preference_category_with_descr"
+		android:title="@string/video_notes" />
+
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="av_external_recorder"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_disabled"
+		android:summaryOn="@string/shared_string_enabled"
+		android:title="@string/multimedia_use_system_camera"
+		tools:icon="@drawable/ic_action_video_dark" />
+
+	<net.osmand.plus.settings.preferences.ListPreferenceEx
+		android:icon="@drawable/ic_action_picture_size"
+		android:key="av_video_quality"
+		android:layout="@layout/preference_with_descr"
+		android:title="@string/av_video_quality"
+		tools:summary="4128x3096 (12.19 Mpx)" />
+
+	<Preference
+		android:layout="@layout/divider_half_item"
+		android:selectable="false" />
+
+	<net.osmand.plus.settings.preferences.SwitchPreferenceEx
+		android:key="av_recorder_split"
+		android:layout="@layout/preference_with_descr_dialog_and_switch"
+		android:summaryOff="@string/shared_string_disabled"
+		android:summaryOn="@string/shared_string_enabled"
+		android:title="@string/multimedia_rec_split_title" />
+
+	<net.osmand.plus.settings.preferences.ListPreferenceEx
+		android:key="av_rs_clip_length"
+		android:layout="@layout/preference_with_descr"
+		android:title="@string/rec_split_clip_length"
+		tools:summary="5 min" />
+
+	<net.osmand.plus.settings.preferences.ListPreferenceEx
+		android:key="av_rs_storage_size"
+		android:layout="@layout/preference_with_descr"
+		android:title="@string/rec_split_storage_size"
+		tools:icon="@drawable/ic_sdcard"
+		tools:summary="5 GB" />
+
+	<Preference
+		android:layout="@layout/simple_divider_item"
+		android:selectable="false" />
+
+	<Preference
+		android:key="open_notes_description"
+		android:layout="@layout/preference_description"
+		android:persistent="false"
+		android:selectable="false"
+		android:title="@string/multimedia_notes_view_descr" />
+
+	<Preference
+		android:key="open_notes"
+		android:layout="@layout/preference_button"
+		android:persistent="false"
+		android:title="@string/notes"
+		tools:icon="@drawable/ic_action_folder" />
+
+	<Preference
+		android:layout="@layout/divider_half_item"
+		android:selectable="false" />
+
+	<Preference
+		android:key="reset_to_default"
+		android:layout="@layout/preference_button"
+		android:persistent="false"
+		android:title="@string/reset_plugin_to_default"
+		tools:icon="@drawable/ic_action_reset_to_default_dark" />
+
+	<Preference
+		android:key="copy_plugin_settings"
+		android:layout="@layout/preference_button"
+		android:persistent="false"
+		android:title="@string/copy_from_other_profile"
+		tools:icon="@drawable/ic_action_copy" />
+
+</PreferenceScreen>

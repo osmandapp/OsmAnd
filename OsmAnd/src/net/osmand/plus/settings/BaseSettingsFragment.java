@@ -40,6 +40,7 @@ import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
+import net.osmand.access.AccessibilitySettingsFragment;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -48,6 +49,10 @@ import net.osmand.plus.UiUtilities;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandActionBarActivity;
 import net.osmand.plus.activities.OsmandInAppPurchaseActivity;
+import net.osmand.plus.audionotes.MultimediaNotesFragment;
+import net.osmand.plus.development.DevelopmentSettingsFragment;
+import net.osmand.plus.monitoring.MonitoringSettingsFragment;
+import net.osmand.plus.osmedit.OsmEditingFragment;
 import net.osmand.plus.profiles.SelectAppModesBottomSheetDialogFragment;
 import net.osmand.plus.profiles.SelectAppModesBottomSheetDialogFragment.AppModeChangedListener;
 import net.osmand.plus.settings.bottomsheets.BooleanPreferenceBottomSheet;
@@ -99,7 +104,13 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		TURN_SCREEN_ON(TurnScreenOnFragment.class.getName(), true, R.xml.turn_screen_on, R.layout.profile_preference_toolbar_with_switch),
 		DATA_STORAGE(DataStorageFragment.class.getName(), false, R.xml.data_storage, R.layout.global_preference_toolbar),
 		DIALOGS_AND_NOTIFICATIONS_SETTINGS(DialogsAndNotificationsSettingsFragment.class.getName(), false, R.xml.dialogs_and_notifications_preferences, R.layout.global_preferences_toolbar_with_switch),
-		PROFILE_APPEARANCE(ProfileAppearanceFragment.TAG, true, R.xml.profile_appearance, R.layout.profile_preference_toolbar);
+		PROFILE_APPEARANCE(ProfileAppearanceFragment.TAG, true, R.xml.profile_appearance, R.layout.profile_preference_toolbar),
+		OPEN_STREET_MAP_EDITING(OsmEditingFragment.class.getName(), false, R.xml.osm_editing, R.layout.global_preference_toolbar),
+		MULTIMEDIA_NOTES(MultimediaNotesFragment.class.getName(), true, R.xml.multimedia_notes, R.layout.profile_preference_toolbar_big),
+		MONITORING_SETTINGS(MonitoringSettingsFragment.class.getName(), true, R.xml.monitoring_settings, R.layout.profile_preference_toolbar_big),
+		LIVE_MONITORING(LiveMonitoringFragment.class.getName(), false, R.xml.live_monitoring, R.layout.global_preferences_toolbar_with_switch),
+		ACCESSIBILITY_SETTINGS(AccessibilitySettingsFragment.class.getName(), true, R.xml.accessibility_settings, R.layout.profile_preference_toolbar_big),
+		DEVELOPMENT_SETTINGS(DevelopmentSettingsFragment.class.getName(), false, R.xml.development_settings, R.layout.global_preference_toolbar);
 
 		public final String fragmentName;
 		public final boolean profileDependent;
@@ -300,7 +311,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 
 		ApplicationMode appMode = getSelectedAppMode();
 		if (preference instanceof ListPreferenceEx) {
-			SingleSelectPreferenceBottomSheet.showInstance(fragmentManager, preference.getKey(), this, false, appMode, currentScreenType.profileDependent);
+			SingleSelectPreferenceBottomSheet.showInstance(fragmentManager, preference.getKey(), this, false, appMode, currentScreenType.profileDependent, false);
 		} else if (preference instanceof SwitchPreferenceEx) {
 			BooleanPreferenceBottomSheet.showInstance(fragmentManager, preference.getKey(), this, false, appMode, currentScreenType.profileDependent);
 		} else if (preference instanceof EditTextPreference) {
@@ -357,6 +368,10 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 				Drawable drawable = UiUtilities.getColoredSelectableDrawable(app, getActiveProfileColor(), 0.3f);
 				AndroidUtils.setBackground(selectableView, drawable);
 			}
+		}
+		TextView tvPreferenceTitle = (TextView) holder.itemView.findViewById(android.R.id.title);
+		if (tvPreferenceTitle != null) {
+			tvPreferenceTitle.setSingleLine(false);
 		}
 		if (currentScreenType.profileDependent) {
 			View cb = holder.itemView.findViewById(R.id.switchWidget);
@@ -682,6 +697,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		p.setKey(b.getId());
 		p.setSummary(summary);
 		p.setLayoutResource(layoutId);
+		p.setIconSpaceReserved(true);
 		return p;
 	}
 
@@ -695,6 +711,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		p.setTitle(title);
 		p.setSummary(summary);
 		p.setLayoutResource(layoutId);
+		p.setIconSpaceReserved(true);
 		return p;
 	}
 
@@ -709,6 +726,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 		listPreference.setDialogTitle(title);
 		listPreference.setEntries(names);
 		listPreference.setEntryValues(values);
+		listPreference.setIconSpaceReserved(true);
 
 		if (layoutId != 0) {
 			listPreference.setLayoutResource(layoutId);
