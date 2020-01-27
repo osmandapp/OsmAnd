@@ -3466,4 +3466,6 @@ Lon %2$s</string>
     <string name="select_map_icon_descr">El icono del mapa sólo se muestra en el mapa.</string>
     <string name="logcat_buffer_descr">Comprueba y comparte los registros detallados de la aplicación</string>
     <string name="search_offline_geo_error">No se puede analizar la geointención «%s».</string>
+    <string name="permission_is_required">Se necesita permiso para usar esta opción.</string>
+    <string name="monitoring_min_speed_descr">Se trata de un filtro de corte de baja velocidad para no grabar puntos por debajo de una cierta velocidad. Esto puede hacer que las trazas grabadas se vean más suaves cuando se muestran en el mapa.</string>
 </resources>
