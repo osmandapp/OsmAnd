@@ -1240,11 +1240,7 @@ public class OsmandSettings {
 
 	public final OsmandPreference<String> LAST_FAV_CATEGORY_ENTERED = new StringPreference("last_fav_category", "").makeGlobal();
 
-
 	public final OsmandPreference<ApplicationMode> DEFAULT_APPLICATION_MODE = new CommonPreference<ApplicationMode>("default_application_mode_string", ApplicationMode.DEFAULT) {
-		{
-			makeGlobal();
-		}
 
 		@Override
 		protected ApplicationMode getValue(Object prefs, ApplicationMode defaultValue) {
@@ -1292,12 +1288,9 @@ public class OsmandSettings {
 		public ApplicationMode parseString(String s) {
 			return appModeFromString(s);
 		}
-	};
+	}.makeGlobal();
 
 	public final OsmandPreference<ApplicationMode> LAST_ROUTE_APPLICATION_MODE = new CommonPreference<ApplicationMode>("last_route_application_mode_backup_string", ApplicationMode.DEFAULT) {
-		{
-			makeGlobal();
-		}
 
 		@Override
 		protected ApplicationMode getValue(Object prefs, ApplicationMode defaultValue) {
@@ -1340,7 +1333,7 @@ public class OsmandSettings {
 		public ApplicationMode parseString(String s) {
 			return appModeFromString(s);
 		}
-	};
+	}.makeGlobal();
 
 	public final OsmandPreference<Boolean> FIRST_MAP_IS_DOWNLOADED = new BooleanPreference(
 			"first_map_is_downloaded", false);
@@ -1354,8 +1347,6 @@ public class OsmandSettings {
 			}
 			return super.setValue(prefs, val);
 		}
-
-		;
 
 		protected DrivingRegion getDefaultValue() {
 			Locale df = Locale.getDefault();
@@ -1441,9 +1432,6 @@ public class OsmandSettings {
 				return SpeedConstants.MILES_PER_HOUR;
 			}
 		}
-
-		;
-
 	}.makeProfile();
 
 
@@ -1460,9 +1448,6 @@ public class OsmandSettings {
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Float> SPEECH_RATE =
 			new FloatPreference("speech_rate", 1f).makeProfile();
-
-	public final OsmandPreference<Float> ARRIVAL_DISTANCE_FACTOR =
-			new FloatPreference("arrival_distance_factor", 1f).makeProfile();
 
 	public final OsmandPreference<Float> SPEED_LIMIT_EXCEED =
 			new FloatPreference("speed_limit_exceed", 5f).makeProfile();
@@ -1502,6 +1487,8 @@ public class OsmandSettings {
 
 	public final CommonPreference<String> USER_PROFILE_NAME = new StringPreference("user_profile_name", "").makeProfile().cache();
 
+	public final CommonPreference<String> PARENT_APP_MODE = new StringPreference("parent_app_mode", null).makeProfile().cache();
+
 	public final CommonPreference<String> ROUTING_PROFILE = new StringPreference("routing_profile", "").makeProfile().cache();
 
 	{
@@ -1531,6 +1518,8 @@ public class OsmandSettings {
 		MIN_DISTANCE_FOR_TURN.setModeDefaultValue(ApplicationMode.AIRCRAFT, 100);
 		MIN_DISTANCE_FOR_TURN.setModeDefaultValue(ApplicationMode.SKI, 15);
 	}
+
+	public final OsmandPreference<Float> ARRIVAL_DISTANCE_FACTOR = new FloatPreference("arrival_distance_factor", 1f).makeProfile().cache();
 
 	public final CommonPreference<Integer> ARRIVAL_DISTANCE = new IntPreference("arrival_distance", 90).makeProfile().cache();
 
@@ -1571,7 +1560,7 @@ public class OsmandSettings {
 		LOCATION_ICON.setModeDefaultValue(ApplicationMode.SKI, LocationIcon.BICYCLE);
 	}
 
-	public final CommonPreference<Integer> APP_MODE_ORDER = new IntPreference("app_mode_order", 0).makeProfile().cache();
+//	public final CommonPreference<Integer> APP_MODE_ORDER = new IntPreference("app_mode_order", 0).makeProfile().cache();
 
 	public final OsmandPreference<Float> SWITCH_MAP_DIRECTION_TO_COMPASS =
 			new FloatPreference("speed_for_map_to_direction_of_movement", 0f).makeProfile();
@@ -1728,8 +1717,6 @@ public class OsmandSettings {
 			}
 			return -1;
 		}
-
-		;
 	}.makeGlobal().cache();
 
 	public final CommonPreference<Boolean> SNAP_TO_ROAD = new BooleanPreference("snap_to_road", false).makeProfile().cache();
@@ -3402,6 +3389,8 @@ public class OsmandSettings {
 	public final CommonPreference<String> CUSTOM_APP_PROFILES =
 		new StringPreference("custom_app_profiles", "").makeGlobal().cache();
 
+	public final CommonPreference<String> CUSTOM_APP_MODES_KEYS =
+		new StringPreference("custom_app_modes_keys", "").makeGlobal().cache();
 
 	public enum DayNightMode {
 		AUTO(R.string.daynight_mode_auto, R.drawable.ic_action_map_sunset),

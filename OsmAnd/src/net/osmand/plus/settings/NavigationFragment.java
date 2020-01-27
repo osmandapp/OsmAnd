@@ -138,18 +138,14 @@ public class NavigationFragment extends BaseSettingsFragment {
 		}
 		navigationType.setSummary(selectedRoutingProfileDataObject.getName());
 		navigationType.setIcon(getContentIcon(selectedRoutingProfileDataObject.getIconRes()));
-		ApplicationMode.ApplicationModeBuilder builder = ApplicationMode.changeBaseMode(getSelectedAppMode());
-		if (profileKey.equals(RoutingProfilesResources.STRAIGHT_LINE_MODE.name())) {
-			builder.setRouteService(RouteProvider.RouteService.STRAIGHT);
-		} else if (profileKey.equals(RoutingProfilesResources.BROUTER_MODE.name())) {
-			builder.setRouteService(RouteProvider.RouteService.BROUTER);
-		} else {
-			builder.setRoutingProfile(profileKey);
-		}
 
-		ApplicationMode mode = ApplicationMode.saveProfile(builder, app);
-		if (!ApplicationMode.values(app).contains(mode)) {
-			ApplicationMode.changeProfileAvailability(mode, true, app);
+		ApplicationMode appMode = getSelectedAppMode();
+		if (profileKey.equals(RoutingProfilesResources.STRAIGHT_LINE_MODE.name())) {
+			appMode.setRouteService(app, RouteProvider.RouteService.STRAIGHT);
+		} else if (profileKey.equals(RoutingProfilesResources.BROUTER_MODE.name())) {
+			appMode.setRouteService(app, RouteProvider.RouteService.BROUTER);
+		} else {
+			appMode.setRoutingProfile(app, profileKey);
 		}
 	}
 

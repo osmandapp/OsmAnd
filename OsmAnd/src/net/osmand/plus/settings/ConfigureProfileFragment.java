@@ -49,6 +49,7 @@ import net.osmand.plus.skimapsplugin.SkiMapsPlugin;
 import org.apache.commons.logging.Log;
 
 import java.io.File;
+import java.util.Collections;
 import java.util.List;
 
 import static net.osmand.plus.UiUtilities.CompoundButtonType.TOOLBAR;
@@ -413,8 +414,7 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 							public void onClick(DialogInterface dialog, int which) {
 								OsmandApplication app = getMyApplication();
 								if (app != null) {
-									ApplicationMode.deleteCustomMode(ApplicationMode.valueOfStringKey(profile.getStringKey(), ApplicationMode.DEFAULT), app);
-									app.getSettings().APPLICATION_MODE.set(ApplicationMode.DEFAULT);
+									ApplicationMode.deleteCustomModes(Collections.singletonList(profile), app);
 								}
 
 								if (getActivity() != null) {

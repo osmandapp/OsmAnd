@@ -214,22 +214,15 @@ public class ApplicationMode {
 			values.add(applicationMode);
 			defaultValues.add(applicationMode);
 			if (applicationMode.getOrder() == 0 && !values.isEmpty()) {
-				applicationMode.setOrder(values.size());
+				applicationMode.order = values.size();
 			}
 			return applicationMode;
 		}
 
 		private ApplicationMode customReg() {
-			ApplicationMode m = applicationMode;
-			m.defaultSpeed = m.parentAppMode.defaultSpeed;
-			m.minDistanceForTurn = m.parentAppMode.minDistanceForTurn;
-			m.arrivalDistance = m.parentAppMode.arrivalDistance;
-			m.offRouteDistance = m.parentAppMode.offRouteDistance;
-			m.navigationIcon = m.parentAppMode.navigationIcon;
-			m.locationIcon = m.parentAppMode.locationIcon;
 			values.add(applicationMode);
 			if (applicationMode.getOrder() == 0 && !values.isEmpty()) {
-				applicationMode.setOrder(values.size());
+				applicationMode.order = values.size();
 			}
 			return applicationMode;
 		}
@@ -341,12 +334,6 @@ public class ApplicationMode {
 
 	public static ApplicationModeBuilder createCustomMode(ApplicationMode parent, String userProfileTitle, String stringKey) {
 		return create(parent, -1, stringKey).userProfileTitle(userProfileTitle);
-	}
-
-	public static ApplicationModeBuilder changeBaseMode(ApplicationMode applicationMode) {
-		ApplicationModeBuilder builder = new ApplicationModeBuilder();
-		builder.applicationMode = applicationMode;
-		return builder;
 	}
 
 	public static List<ApplicationMode> values(OsmandApplication app) {
@@ -539,6 +526,48 @@ public class ApplicationMode {
 		return defaultSpeed;
 	}
 
+	public void setIconResName(OsmandApplication app, String iconResName) {
+		updateAppModeIcon(app, iconResName, this);
+		app.getSettings().ICON_RES_NAME.setModeValue(this, iconResName);
+	}
+
+	public void setIconColor(OsmandApplication app, ProfileIconColors iconColor) {
+		this.iconColor = iconColor;
+		app.getSettings().ICON_COLOR.setModeValue(this, iconColor);
+	}
+
+	public void setUserProfileName(OsmandApplication app, String userProfileName) {
+		this.userProfileName = userProfileName;
+		app.getSettings().USER_PROFILE_NAME.setModeValue(this, userProfileName);
+	}
+
+	public void setParentAppMode(OsmandApplication app, ApplicationMode parentAppMode) {
+		if (isCustomProfile()) {
+			this.parentAppMode = parentAppMode;
+			app.getSettings().PARENT_APP_MODE.setModeValue(this, parentAppMode.getStringKey());
+		}
+	}
+
+	public void setRoutingProfile(OsmandApplication app, String routingProfile) {
+		this.routingProfile = routingProfile;
+		app.getSettings().ROUTING_PROFILE.setModeValue(this, routingProfile);
+	}
+
+	public void setRouteService(OsmandApplication app, RouteService routeService) {
+		this.routeService = routeService;
+		app.getSettings().ROUTE_SERVICE.setModeValue(this, routeService);
+	}
+
+	public void setNavigationIcon(OsmandApplication app, NavigationIcon navigationIcon) {
+		this.navigationIcon = navigationIcon;
+		app.getSettings().NAVIGATION_ICON.setModeValue(this, navigationIcon);
+	}
+
+	public void setLocationIcon(OsmandApplication app, LocationIcon locationIcon) {
+		this.locationIcon = locationIcon;
+		app.getSettings().LOCATION_ICON.setModeValue(this, locationIcon);
+	}
+
 	public void setDefaultSpeed(OsmandApplication app, float defaultSpeed) {
 		this.defaultSpeed = defaultSpeed;
 		app.getSettings().DEFAULT_SPEED.setModeValue(this, defaultSpeed);
@@ -592,30 +621,35 @@ public class ApplicationMode {
 		return order;
 	}
 
-	public void setOrder(int order) {
+	public void setOrder(OsmandApplication app, int order) {
 		this.order = order;
 	}
 
 	public static void onApplicationStart(OsmandApplication app) {
 		// load for default profiles to initialize later custom modes
 		initDefaultModesParams(app);
-		initDefaultSpeed(app);
 		initCustomModes(app);
-		initDefaultSpeed(app);
+		initModesParams(app);
 		initRegVisibility();
-		reorderAppModes();
+		reorderAppModes(app);
 	}
 
-	private static void initDefaultSpeed(OsmandApplication app) {
-		for (ApplicationMode m : values) {
-			float spd = app.getSettings().DEFAULT_SPEED.getModeValue(m);
-			if (spd > 0) {
-				m.defaultSpeed = spd;
-			}
+	private static void initModesParams(OsmandApplication app) {
+		OsmandSettings settings = app.getSettings();
+		for (ApplicationMode mode : allPossibleValues()) {
+			mode.defaultSpeed = settings.DEFAULT_SPEED.getModeValue(mode);
+			updateAppModeIcon(app, settings.ICON_RES_NAME.getModeValue(mode), mode);
+			mode.iconColor = settings.ICON_COLOR.getModeValue(mode);
+			mode.minDistanceForTurn = settings.MIN_DISTANCE_FOR_TURN.getModeValue(mode);
+			mode.arrivalDistance = settings.ARRIVAL_DISTANCE.getModeValue(mode);
+			mode.offRouteDistance = settings.OFF_ROUTE_DISTANCE.getModeValue(mode);
+			mode.navigationIcon = settings.NAVIGATION_ICON.getModeValue(mode);
+			mode.locationIcon = settings.LOCATION_ICON.getModeValue(mode);
+//			mode.order = settings.APP_MODE_ORDER.getModeValue(mode);
 		}
 	}
 
-	public static void reorderAppModes() {
+	public static void reorderAppModes(OsmandApplication app) {
 		Comparator<ApplicationMode> comparator = new Comparator<ApplicationMode>() {
 			@Override
 			public int compare(ApplicationMode mode1, ApplicationMode mode2) {
@@ -625,12 +659,12 @@ public class ApplicationMode {
 		Collections.sort(values, comparator);
 		Collections.sort(defaultValues, comparator);
 		Collections.sort(cachedFilteredValues, comparator);
-		updateAppModesOrder();
+		updateAppModesOrder(app);
 	}
 
-	private static void updateAppModesOrder() {
+	private static void updateAppModesOrder(OsmandApplication app) {
 		for (int i = 0; i < values.size(); i++) {
-			values.get(i).setOrder(i);
+			values.get(i).setOrder(app, i);
 		}
 	}
 
@@ -667,78 +701,68 @@ public class ApplicationMode {
 	}
 
 	private static void initDefaultModesParams(OsmandApplication app) {
-		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-		Type t = new TypeToken<ArrayList<ApplicationModeBean>>() {
-		}.getType();
-		List<ApplicationModeBean> defaultAppModeBeans = gson.fromJson(app.getSettings().DEFAULT_APP_PROFILES.get(), t);
+		OsmandSettings settings = app.getSettings();
+		if (settings.DEFAULT_APP_PROFILES.isSet()) {
+			Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+			Type t = new TypeToken<ArrayList<ApplicationModeBean>>() {
+			}.getType();
+			List<ApplicationModeBean> defaultAppModeBeans = gson.fromJson(settings.DEFAULT_APP_PROFILES.get(), t);
 
-		if (!Algorithms.isEmpty(defaultAppModeBeans)) {
-			for (ApplicationModeBean modeBean : defaultAppModeBeans) {
-				ApplicationMode applicationMode = ApplicationMode.valueOfStringKey(modeBean.stringKey, null);
-				if (applicationMode != null) {
-					applicationMode.userProfileName = modeBean.userProfileName;
-					applicationMode.iconResName = modeBean.iconName;
-					applicationMode.iconColor = modeBean.iconColor;
-					applicationMode.routingProfile = modeBean.routingProfile;
-					applicationMode.routeService = modeBean.routeService;
-					if (modeBean.locIcon != null) {
-						applicationMode.locationIcon = modeBean.locIcon;
+			if (!Algorithms.isEmpty(defaultAppModeBeans)) {
+				for (ApplicationModeBean modeBean : defaultAppModeBeans) {
+					ApplicationMode mode = ApplicationMode.valueOfStringKey(modeBean.stringKey, null);
+					if (mode != null) {
+						settings.ICON_RES_NAME.setModeValue(mode, modeBean.iconName);
+						settings.ICON_COLOR.setModeValue(mode, modeBean.iconColor);
+						settings.USER_PROFILE_NAME.setModeValue(mode, modeBean.userProfileName);
+						settings.ROUTING_PROFILE.setModeValue(mode, modeBean.routingProfile);
+						settings.ROUTE_SERVICE.setModeValue(mode, modeBean.routeService);
+//						settings.APP_MODE_ORDER.setModeValue(mode, modeBean.order);
+						if (modeBean.locIcon != null) {
+							settings.LOCATION_ICON.setModeValue(mode, modeBean.locIcon);
+						}
+						if (modeBean.navIcon != null) {
+							settings.NAVIGATION_ICON.setModeValue(mode, modeBean.navIcon);
+						}
 					}
-					if (modeBean.navIcon != null) {
-						applicationMode.navigationIcon = modeBean.navIcon;
-					}
-					applicationMode.order = modeBean.order;
 				}
 			}
+			settings.DEFAULT_APP_PROFILES.resetToDefault();
 		}
 	}
 
 	private static void initCustomModes(OsmandApplication app) {
-		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-		Type t = new TypeToken<ArrayList<ApplicationModeBean>>() {
-		}.getType();
-		List<ApplicationModeBean> customProfiles = gson.fromJson(app.getSettings().CUSTOM_APP_PROFILES.get(), t);
-
-		if (!Algorithms.isEmpty(customProfiles)) {
-			for (ApplicationModeBean m : customProfiles) {
-				ApplicationMode parentMode = valueOfStringKey(m.parent, CAR);
-				createCustomMode(parentMode, m.userProfileName, m.stringKey)
-						.setRouteService(m.routeService)
-						.setRoutingProfile(m.routingProfile)
-						.icon(app, m.iconName)
-						.setColor(m.iconColor)
-						.locationIcon(m.locIcon)
-						.navigationIcon(m.navIcon)
-						.setOrder(m.order)
-						.customReg();
+		OsmandSettings settings = app.getSettings();
+		if (settings.CUSTOM_APP_PROFILES.isSet()) {
+			Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+			Type t = new TypeToken<ArrayList<ApplicationModeBean>>() {
+			}.getType();
+			List<ApplicationModeBean> customProfiles = gson.fromJson(app.getSettings().CUSTOM_APP_PROFILES.get(), t);
+			List<String> customModesKeys = new ArrayList<>();
+			if (!Algorithms.isEmpty(customProfiles)) {
+				for (ApplicationModeBean m : customProfiles) {
+					customModesKeys.add(m.stringKey);
+					ApplicationMode parentMode = valueOfStringKey(m.parent, CAR);
+					createCustomMode(parentMode, m.userProfileName, m.stringKey)
+							.setRouteService(m.routeService)
+							.setRoutingProfile(m.routingProfile)
+							.icon(app, m.iconName)
+							.setColor(m.iconColor)
+							.locationIcon(m.locIcon)
+							.navigationIcon(m.navIcon)
+							.setOrder(m.order)
+							.customReg();
+				}
 			}
+			settings.CUSTOM_APP_MODES_KEYS.set(gson.toJson(customModesKeys));
+			settings.CUSTOM_APP_PROFILES.resetToDefault();
 		}
 	}
 
-	public static void saveAppModesToSettings(OsmandApplication app) {
+	private static void saveAppModesToSettings(OsmandSettings settings) {
+		List<ApplicationModeBean> modeBeans = createApplicationModeBeans(getCustomValues());
 		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-
-		List<ApplicationModeBean> defaultModeBeans = createApplicationModeBeans(defaultValues);
-		List<ApplicationModeBean> customModeBeans = createApplicationModeBeans(getCustomValues());
-
-		String defaultProfiles = gson.toJson(defaultModeBeans);
-		String customProfiles = gson.toJson(customModeBeans);
-
-		app.getSettings().DEFAULT_APP_PROFILES.set(defaultProfiles);
-		app.getSettings().CUSTOM_APP_PROFILES.set(customProfiles);
-	}
-
-	private static void saveAppModesToSettings(OsmandSettings settings, boolean saveCustomModes) {
-		List<ApplicationMode> appModes = saveCustomModes ? getCustomValues() : defaultValues;
-		List<ApplicationModeBean> modeBeans = createApplicationModeBeans(appModes);
-
-		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-		String profiles = gson.toJson(modeBeans);
-		if (saveCustomModes) {
-			settings.CUSTOM_APP_PROFILES.set(profiles);
-		} else {
-			settings.DEFAULT_APP_PROFILES.set(profiles);
-		}
+		settings.CUSTOM_APP_PROFILES.set(gson.toJson(modeBeans));
 	}
 
 	private static List<ApplicationModeBean> createApplicationModeBeans(List<ApplicationMode> applicationModes) {
@@ -762,36 +786,23 @@ public class ApplicationMode {
 
 	public static ApplicationMode saveProfile(ApplicationModeBuilder builder, OsmandApplication app) {
 		ApplicationMode mode = ApplicationMode.valueOfStringKey(builder.applicationMode.stringKey, null);
-		if (mode != null) {
-			mode.iconResName = builder.applicationMode.iconResName;
-			mode.iconRes = builder.applicationMode.iconRes;
-			mode.iconMapRes = builder.applicationMode.iconMapRes;
-			mode.userProfileName = builder.applicationMode.userProfileName;
-			mode.parentAppMode = builder.applicationMode.parentAppMode;
-			mode.routingProfile = builder.applicationMode.routingProfile;
-			mode.routeService = builder.applicationMode.routeService;
-			mode.iconColor = builder.applicationMode.iconColor;
-			mode.locationIcon = builder.applicationMode.locationIcon;
-			mode.navigationIcon = builder.applicationMode.navigationIcon;
-			mode.order = builder.applicationMode.order;
-		} else {
+		if (mode == null) {
 			mode = builder.customReg();
 			initRegVisibility();
 		}
-		saveAppModesToSettings(app.getSettings(), mode.isCustomProfile());
-		return mode;
-	}
 
-	public static void deleteCustomMode(ApplicationMode md, OsmandApplication app) {
-		Iterator<ApplicationMode> it = values.iterator();
-		while (it.hasNext()) {
-			ApplicationMode m = it.next();
-			if (m == md) {
-				it.remove();
-			}
-		}
-		cachedFilteredValues.remove(md);
-		saveAppModesToSettings(app.getSettings(), md.isCustomProfile());
+		mode.setIconResName(app, builder.applicationMode.iconResName);
+		mode.setUserProfileName(app, builder.applicationMode.userProfileName);
+		mode.setParentAppMode(app, builder.applicationMode.parentAppMode);
+		mode.setRoutingProfile(app, builder.applicationMode.routingProfile);
+		mode.setRouteService(app, builder.applicationMode.routeService);
+		mode.setIconColor(app, builder.applicationMode.iconColor);
+		mode.setLocationIcon(app, builder.applicationMode.locationIcon);
+		mode.setNavigationIcon(app, builder.applicationMode.navigationIcon);
+		mode.setOrder(app, builder.applicationMode.order);
+
+		saveAppModesToSettings(app.getSettings());
+		return mode;
 	}
 
 	public static void deleteCustomModes(List<ApplicationMode> modes, OsmandApplication app) {
@@ -802,171 +813,33 @@ public class ApplicationMode {
 				it.remove();
 			}
 		}
+		OsmandSettings settings = app.getSettings();
+		if (modes.contains(settings.APPLICATION_MODE.get())) {
+			settings.APPLICATION_MODE.resetToDefault();
+		}
 		cachedFilteredValues.removeAll(modes);
-		saveAppModesToSettings(app.getSettings(), true);
+		saveAppModesToSettings(app.getSettings());
 	}
 
 	public static boolean changeProfileAvailability(ApplicationMode mode, boolean isSelected, OsmandApplication app) {
 		Set<ApplicationMode> selectedModes = new LinkedHashSet<>(ApplicationMode.values(app));
 		StringBuilder vls = new StringBuilder(ApplicationMode.DEFAULT.getStringKey() + ",");
 		if (allPossibleValues().contains(mode)) {
+			OsmandSettings settings = app.getSettings();
 			if (isSelected) {
 				selectedModes.add(mode);
 			} else {
 				selectedModes.remove(mode);
-				if (app.getSettings().APPLICATION_MODE.get() == mode) {
-					app.getSettings().APPLICATION_MODE.set(ApplicationMode.DEFAULT);
+				if (settings.APPLICATION_MODE.get() == mode) {
+					settings.APPLICATION_MODE.resetToDefault();
 				}
 			}
 			for (ApplicationMode m : selectedModes) {
 				vls.append(m.getStringKey()).append(",");
 			}
-			app.getSettings().AVAILABLE_APP_MODES.set(vls.toString());
+			settings.AVAILABLE_APP_MODES.set(vls.toString());
 			return true;
 		}
 		return false;
-	}
-
-	public enum ProfileIconColors {
-		DEFAULT(R.string.rendering_value_default_name, R.color.profile_icon_color_blue_light_default, R.color.profile_icon_color_blue_dark_default),
-		PURPLE(R.string.rendering_value_purple_name, R.color.profile_icon_color_purple_light, R.color.profile_icon_color_purple_dark),
-		GREEN(R.string.rendering_value_green_name, R.color.profile_icon_color_green_light, R.color.profile_icon_color_green_dark),
-		BLUE(R.string.rendering_value_blue_name, R.color.profile_icon_color_blue_light, R.color.profile_icon_color_blue_dark),
-		RED(R.string.rendering_value_red_name, R.color.profile_icon_color_red_light, R.color.profile_icon_color_red_dark),
-		DARK_YELLOW(R.string.rendering_value_darkyellow_name, R.color.profile_icon_color_yellow_light, R.color.profile_icon_color_yellow_dark),
-		MAGENTA(R.string.shared_string_color_magenta, R.color.profile_icon_color_magenta_light, R.color.profile_icon_color_magenta_dark);
-
-		@StringRes
-		private int name;
-		@ColorRes
-		private int dayColor;
-		@ColorRes
-		private int nightColor;
-
-		ProfileIconColors(@StringRes int name, @ColorRes int dayColor, @ColorRes int nightColor) {
-			this.name = name;
-			this.dayColor = dayColor;
-			this.nightColor = nightColor;
-		}
-
-		public int getName() {
-			return name;
-		}
-
-		public int getColor(boolean nightMode) {
-			return nightMode ? nightColor : dayColor;
-		}
-	}
-
-	public enum ProfileIcons {
-		DEFAULT(R.drawable.ic_world_globe_dark, R.string.app_mode_default, "ic_world_globe_dark"),
-		CAR(R.drawable.ic_action_car_dark, R.string.app_mode_car, "ic_action_car_dark"),
-		TAXI(R.drawable.ic_action_taxi, R.string.app_mode_taxi, "ic_action_taxi"),
-		TRUCK(R.drawable.ic_action_truck_dark, R.string.app_mode_truck, "ic_action_truck_dark"),
-		SHUTTLE_BUS(R.drawable.ic_action_shuttle_bus, R.string.app_mode_shuttle_bus, "ic_action_shuttle_bus"),
-		BUS(R.drawable.ic_action_bus_dark, R.string.app_mode_bus, "ic_action_bus_dark"),
-		SUBWAY(R.drawable.ic_action_subway, R.string.app_mode_subway, "ic_action_subway"),
-		MOTORCYCLE(R.drawable.ic_action_motorcycle_dark, R.string.app_mode_motorcycle, "ic_action_motorcycle_dark"),
-		BICYCLE(R.drawable.ic_action_bicycle_dark, R.string.app_mode_bicycle, "ic_action_bicycle_dark"),
-		HORSE(R.drawable.ic_action_horse, R.string.app_mode_horse, "ic_action_horse"),
-		PEDESTRIAN(R.drawable.ic_action_pedestrian_dark, R.string.app_mode_pedestrian, "ic_action_pedestrian_dark"),
-		TREKKING(R.drawable.ic_action_trekking_dark, R.string.app_mode_hiking, "ic_action_trekking_dark"),
-		SKIING(R.drawable.ic_action_skiing, R.string.app_mode_skiing, "ic_action_skiing"),
-		SAIL_BOAT(R.drawable.ic_action_sail_boat_dark, R.string.app_mode_boat, "ic_action_sail_boat_dark"),
-		AIRCRAFT(R.drawable.ic_action_aircraft, R.string.app_mode_aircraft, "ic_action_aircraft"),
-		HELICOPTER(R.drawable.ic_action_helicopter, R.string.app_mode_helicopter, "ic_action_helicopter"),
-		TRANSPORTER(R.drawable.ic_action_personal_transporter, R.string.app_mode_personal_transporter, "ic_action_personal_transporter"),
-		MONOWHEEL(R.drawable.ic_action_monowheel, R.string.app_mode_monowheel, "ic_action_monowheel"),
-		SCOOTER(R.drawable.ic_action_scooter, R.string.app_mode_scooter, "ic_action_scooter"),
-		UFO(R.drawable.ic_action_ufo, R.string.app_mode_ufo, "ic_action_ufo"),
-		OFFROAD(R.drawable.ic_action_offroad, R.string.app_mode_offroad, "ic_action_offroad"),
-		CAMPERVAN(R.drawable.ic_action_campervan, R.string.app_mode_campervan, "ic_action_campervan"),
-		CAMPER(R.drawable.ic_action_camper, R.string.app_mode_camper, "ic_action_camper"),
-		PICKUP_TRUCK(R.drawable.ic_action_pickup_truck, R.string.app_mode_pickup_truck, "ic_action_pickup_truck"),
-		WAGON(R.drawable.ic_action_wagon, R.string.app_mode_wagon, "ic_action_wagon"),
-		UTV(R.drawable.ic_action_utv, R.string.app_mode_utv, "ic_action_utv"),
-		OSM(R.drawable.ic_action_openstreetmap_logo, R.string.app_mode_osm, "ic_action_openstreetmap_logo");
-
-		@DrawableRes
-		private int resId;
-		@StringRes
-		private int titleId;
-		private String resStringId;
-
-		ProfileIcons(@DrawableRes int resId, @StringRes int titleId, @NonNull String resStringId) {
-			this.resId = resId;
-			this.titleId = titleId;
-			this.resStringId = resStringId;
-		}
-
-		public static ArrayList<Integer> getIcons() {
-			ArrayList<Integer> list = new ArrayList<>();
-			for (ProfileIcons pi : values()) {
-				list.add(pi.resId);
-			}
-			return list;
-		}
-
-		public int getResId() {
-			return resId;
-		}
-
-		public int getTitleId() {
-			return titleId;
-		}
-
-		public String getResStringId() {
-			return resStringId;
-		}
-
-		public static String getResStringByResId(int resId) {
-			for (ProfileIcons pi : values()) {
-				if (pi.resId == resId) {
-					return pi.resStringId;
-				}
-			}
-			return DEFAULT.getResStringId();
-		}
-	}
-
-	public enum LocationIcon {
-		DEFAULT(R.drawable.map_location_default, R.drawable.map_location_default_view_angle),
-		CAR(R.drawable.map_location_car, R.drawable.map_location_car_view_angle),
-		BICYCLE(R.drawable.map_location_bicycle, R.drawable.map_location_bicycle_view_angle);
-
-		LocationIcon(@DrawableRes int iconId, @DrawableRes int headingIconId) {
-			this.iconId = iconId;
-			this.headingIconId = headingIconId;
-		}
-
-		@DrawableRes
-		private final int iconId;
-		@DrawableRes
-		private final int headingIconId;
-
-		public int getIconId() {
-			return iconId;
-		}
-
-		public int getHeadingIconId() {
-			return headingIconId;
-		}
-	}
-
-	public enum NavigationIcon {
-		DEFAULT(R.drawable.map_navigation_default),
-		NAUTICAL(R.drawable.map_navigation_nautical),
-		CAR(R.drawable.map_navigation_car);
-
-		NavigationIcon(@DrawableRes int iconId) {
-			this.iconId = iconId;
-		}
-
-		@DrawableRes
-		private final int iconId;
-
-		public int getIconId() {
-			return iconId;
-		}
 	}
 }
