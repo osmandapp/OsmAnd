@@ -596,18 +596,18 @@
     <string name="map_online_data_descr">Utiliser les cartes en ligne (télécharge et conserve en cache les tuiles sur la carte mémoire).</string>
     <string name="shared_string_online_maps">Cartes en ligne</string>
     <string name="online_map_settings_descr">Sélectionnez la source de la carte : en ligne ou tuile en cache.</string>
-    <string name="osmand_rastermaps_plugin_description">Ce greffon permet d\'accéder à une grand nombre de cartes en ligne (aussi appelées tuiles ou cartes raster) qui vont de cartes OpenStreetMap (comme Mapnik) jusqu\'aux images satellites en passant par des cartes spécialisées comme des cartes météo, des cartes de climat, des cartes géologiques, des couches de relief, etc. 
+    <string name="osmand_rastermaps_plugin_description">Accédez à une grand nombre de cartes en ligne (aussi appelées tuiles ou cartes raster) qui vont de cartes OpenStreetMap (comme Mapnik) jusqu\'aux images satellites en passant par des cartes spécialisées comme des cartes météo, des cartes de climat, des cartes géologiques, les couches de relief, etc. 
 \n 
-\nChacune de ces cartes est utilisable, comme carte principale, sur-couche ou sous-couche d\'une autre carte. Afin de gérer au mieux la superposition des cartes, vous pouvez masquer certains éléments des cartes vectorielles hors ligne depuis le menu \"Paramétrer la carte\". 
+\nChacune de ces cartes est utilisable, comme carte principale, sur-couche ou sous-couche d\'une autre carte. Afin de gérer au mieux la superposition des cartes et améliorer la lisibilité, vous pouvez masquer certains éléments des cartes vectorielles hors ligne depuis le menu \"Paramétrer la carte\". 
 \n 
 \nLes cartes tuiles peuvent être obtenues directement en ligne ou peuvent être préparées pour un usage hors ligne grâce à des outils tiers puis copiées dans le dossier de données d\'OsmAnd sous forme de base de données SQLite.</string>
     <string name="osmand_background_plugin_description">Affiche les préférences afin d\'activer le suivi et la navigation en arrière-plan (écran éteint) en réveillant périodiquement le GPS.</string>
-    <string name="osmand_accessibility_description">Ce greffon active dans OsmAnd les options d\'accessibilité de votre appareil (réglage de la vitesse des voix de synthèse vocale, utilisation du trackball pour zoomer ou annonces vocales de votre position).</string>
-    <string name="osmand_development_plugin_description">Ce greffon permet de gérer les paramètres de développement et de débogage tels que la simulation de navigation ou l\'affichage des performances du rendu. Ces paramètres sont conçus pour les développeurs et peuvent être ignorés par les autres utilisateurs.</string>
+    <string name="osmand_accessibility_description">Activez, dans OsmAnd, les options d\'accessibilité de votre appareil (régler la vitesse des voix de synthèse vocale, utiliser le trackball pour zoomer ou activer les annonces vocales de votre position).</string>
+    <string name="osmand_development_plugin_description">Gérez les paramètres de développement et de débogage tels que la simulation de navigation, l\'affichage des performances ou le guidage vocal. Ces paramètres sont conçus pour les développeurs et peuvent être ignorés par les autres utilisateurs.</string>
     <string name="plugins_screen">Gestionnaire de greffons</string>
     <string name="prefs_plugins_descr">Les greffons ajoutent à l\'application des fonctionnalités supplémentaires et des paramètres avancés.</string>
     <string name="prefs_plugins">Gestionnaire de greffons</string>
-    <string name="osm_editing_plugin_description">Grâce à ce greffon vous pouvez gérer vos contributions à OpenStreetMap (OSM) directement depuis l\'application OsmAnd. Par exemple : créer ou modifier les points d\'intérêt OSM, déclarer ou commenter les notes OSM et envoyer vos traces GPX (nécessite un compte OSM). OpenStreetMap est une communauté ouverte de cartographie publique. Pour plus de détails, consultez https://openstreetmap.org.</string>
+    <string name="osm_editing_plugin_description">Contribuez à OpenStreetMap (OSM) directement depuis l\'application OsmAnd. Par exemple : créez ou modifiez les points d\'intérêt OSM, créez ou modifiez les notes OSM et envoyez vos traces GPX (nécessite un compte OSM). OpenStreetMap est une communauté ouverte et mondiale de cartographie publique.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Cartes vectorielles (hors-ligne) peuvent s\'afficher plus rapidement. Peut ne pas fonctionner sur certains appareils.</string>
     <string name="play_commands_of_currently_selected_voice">Sélectionnez une voix et testez les annonces vocales :</string>
     <string name="debugging_and_development">Débogage et développement OsmAnd</string>
@@ -720,9 +720,8 @@
     <string name="osmand_parking_pm">PM</string>
     <string name="osmand_parking_am">AM</string>
     <string name="osmand_parking_position_name">Lieu de stationnement</string>
-    <string name="osmand_parking_plugin_description">Ce greffon permet d\'enregistrer l\'emplacement de stationnement de votre véhicule et, si besoin, de mesurer la durée de stationnement restante.
-
-Ces informations sont visibles sur le Tableau de bord comme sur la carte. Un rappel peut même être ajouté à votre calendrier.</string>
+    <string name="osmand_parking_plugin_description">Enregistrez l\'emplacement de stationnement de votre véhicule et, si besoin, mesurez la durée de stationnement restante.
+\nCes informations sont visibles sur le Tableau de bord comme sur la carte. Un rappel peut même être ajouté à votre calendrier.</string>
     <string name="osmand_parking_plugin_name">Stationnement</string>
     <string name="context_menu_item_add_parking_point">Marquer comme stationnement</string>
     <string name="context_menu_item_delete_parking_point">Supprimer l\'emplacement de stationnement</string>
@@ -892,7 +891,7 @@ Ces informations sont visibles sur le Tableau de bord comme sur la carte. Un rap
     <string name="index_srtm_parts">parties</string>
     <string name="audionotes_location_not_defined">Appuyez sur \"Utiliser la position...\" pour ajouter une note sur le point.</string>
     <string name="map_widget_audionotes">Notes audio</string>
-    <string name="audionotes_plugin_description">Ce greffon permet de prendre des notes (photos, audios ou vidéos) sur un itinéraire soit en utilisant un bouton affiché sur la carte, soit directement depuis le menu contextuel de n\'importe quel point sur la carte.</string>
+    <string name="audionotes_plugin_description">Prenez des notes (photos, audios ou vidéos) pendant votre itinéraire soit en utilisant un bouton, soit depuis le menu contextuel de n\'importe quel point.</string>
     <string name="audionotes_plugin_name">Notes audio/vidéo</string>
     <string name="osmand_srtm_short_description_80_chars">Greffon OsmAnd pour les courbes de niveau hors-ligne</string>
     <string name="osmand_srtm_long_description_1000_chars">Ce greffon permet l\'affichage de courbes de niveau ainsi que du relief (ombres) qui s\'ajoutent au-dessus des cartes standard d\'OsmAnd. Ces informations sont particulièrement utiles pour les sportifs, les randonneurs, les cyclistes et d\'une manière générale par toutes les personnes qui souhaitent connaitre le relief. 
@@ -993,7 +992,7 @@ Ces informations sont visibles sur le Tableau de bord comme sur la carte. Un rap
     <string name="plugin_distance_point_ele">altitude</string>
     <string name="gpx_file_name">Nom du fichier GPX</string>
     <string name="gpx_saved_sucessfully">Fichier GPX {0} enregistré</string>
-    <string name="osmand_distance_planning_plugin_description">Ce greffon permet, depuis la carte, de créer un itinéraire soit un cliquant sur la carte, soit en ouvrant ou en modifiant un fichier GPX existant ainsi que de mesurer la distance entre des points. L\'itinéraire créé peut être enregistré dans un fichier GPX qui peut lui-même être utilisé ensuite pour une navigation.</string>
+    <string name="osmand_distance_planning_plugin_description">Créez un itinéraire (soit en appuyant sur la carte soit en ouvrant un fichier GPX existant) et mesurez la distance entre points. Enregistrez ces itinéraires comme fichiers GPX et plus tard charger les pour vous faire guider.</string>
     <string name="osmand_distance_planning_plugin_name">Mesure de distance et Outil de planification</string>
     <string name="shared_string_do_not_show_again">Ne plus afficher</string>
     <string name="local_osm_changes_backup_successful">Fichier de modifications OSM %1$s généré avec succès</string>
@@ -1202,7 +1201,7 @@ Ces informations sont visibles sur le Tableau de bord comme sur la carte. Un rap
     <string name="gpx_file_is_empty">Fichier GPX vide</string>
     <string name="shared_string_tracks">Traces</string>
     <string name="shared_string_my_favorites">Favoris</string>
-    <string name="shared_string_my_places">Favoris</string>
+    <string name="shared_string_my_places">Mes lieux favoris</string>
     <string name="selected_gpx_info_show">\n\nAppui long pour afficher sur la carte</string>
     <string name="delay_navigation_start">Démarrer la navigation pas à pas automatiquement</string>
     <string name="shared_string_selected_lowercase">sélectionné(s)</string>
@@ -1648,7 +1647,7 @@ Ces informations sont visibles sur le Tableau de bord comme sur la carte. Un rap
     <string name="contact_info">Contact</string>
     <string name="please_specify_poi_type">Merci d\'indiquer un type de point d\'intérêt.</string>
     <string name="working_days">Jours travaillés</string>
-    <string name="recent_places">Emplacements récents</string>
+    <string name="recent_places">Lieux récents</string>
     <string name="favourites">Favoris</string>
     <string name="show_on_start">Afficher au démarrage</string>
     <string name="show_gpx">Afficher les données GPX</string>
@@ -3444,4 +3443,12 @@ représentant la zone : %1$s x %2$s</string>
     <string name="monitoring_min_accuracy_descr_recommendation">Recommandation : il est difficile de prédire ce qui sera enregistré et ce qui ne le sera pas, il peut être préférable de désactiver ce filtre.</string>
     <string name="monitoring_min_distance_descr">Ce filtre limite l\'enregistrement de points en double lorsque les déplacements sont très lents donnant une apparence plus régulière aux traces.</string>
     <string name="monitoring_min_distance_descr_recommendation">Recommandation : un paramètre de 5 mètres est adapté si vous n\'avez pas besoin de détails et ne souhaitez pas enregistrer des points au repos.</string>
+    <string name="monitoring_min_speed_descr_side_effect">Effet secondaire : votre trace ne contiendra pas les parties où la vitesse minimale n\'a pas été atteinte (par exemple lorsque vous poussez votre vélo en montée ou pendant une pause). De ce fait certaines informations de votre trace seront faussées comme la durée de déplacement ou la vitesse moyenne.</string>
+    <string name="monitoring_min_speed_descr_recommendation">Recommandation : commencez par utiliser la détection de mouvement via le filtre de déplacement minimum (B) vous pourriez obtenir de meilleurs résultats en perdant moins de données. Si vos traces restent bruyantes à basse vitesse, essayez ici des valeurs non nulles. Veuillez noter que certaines mesures peuvent retourner une vitesse nulle (en raison de méthodes basées sur le réseau), dans ce cas rien ne sera enregistré.</string>
+    <string name="monitoring_min_accuracy_descr">Seuls les points mesurés avec un minimum de précision en mètres/pieds (information communiquée par votre puce GPS) seront enregistrés. La précision fait référence à la dispersion de plusieurs mesures successives et n\'est pas directement liée à la distance entre ces mesures et votre position réelle.</string>
+    <string name="monitoring_min_accuracy_descr_side_effect">Effet secondaire : avec le filtrage par précision certains points peuvent manquer ; par exemple : sous un pont, en forêt, entre de hauts bâtiments ou dans certaines conditions météorologiques.</string>
+    <string name="monitoring_min_accuracy_descr_remark">Remarque : si la localisation GPS est activée juste avant le début d\'enregistrement, la première position peut être imprécise. L\'application pourrait attendre quelques secondes avant d\'enregistrer un point (ou enregistrer le meilleur de 3 points successifs, etc), mais ces évolutions ne sont pas encore disponibles.</string>
+    <string name="tracks_view_path">Menu &gt; Mes lieux favoris &gt; Traces</string>
+    <string name="multimedia_notes_view_path">Menu &gt; Mes lieux favoris &gt; Notes</string>
+    <string name="osm_edits_view_path">Menu &gt; Mes lieux favoris &gt; Modifications OSM</string>
 </resources>
