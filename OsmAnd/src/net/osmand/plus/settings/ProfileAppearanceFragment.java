@@ -113,6 +113,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 			profile.routeService = baseModeForNewProfile.getRouteService();
 			profile.locationIcon = baseModeForNewProfile.getLocationIcon();
 			profile.navigationIcon = baseModeForNewProfile.getNavigationIcon();
+			onAppModeChanged(ApplicationMode.valueOfStringKey(baseModeForNewProfile.getStringKey(), null));
 		} else {
 			profile.stringKey = getSelectedAppMode().getStringKey();
 			profile.parent = getSelectedAppMode().getParent();
