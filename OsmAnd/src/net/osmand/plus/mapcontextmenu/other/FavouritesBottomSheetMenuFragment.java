@@ -1,9 +1,11 @@
 package net.osmand.plus.mapcontextmenu.other;
 
+import android.Manifest;
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -156,7 +158,15 @@ public class FavouritesBottomSheetMenuFragment extends MenuBottomSheetDialogFrag
 				targetPointsHelper.setStartPoint(ll, true, point.getPointDescription(app));
 				break;
 			case TARGET:
-				targetPointsHelper.navigateToPoint(ll, true, -1, point.getPointDescription(app));
+				if (OsmAndLocationProvider.isLocationPermissionAvailable(getContext())) {
+					targetPointsHelper.navigateToPoint(ll, true, -1, point.getPointDescription(app));
+				} else {
+					if (getActivity() != null) {
+						ActivityCompat.requestPermissions(getActivity(),
+								new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+								OsmAndLocationProvider.REQUEST_LOCATION_PERMISSION);
+					}
+				}
 				break;
 			case INTERMEDIATE:
 				targetPointsHelper.navigateToPoint(ll, true, targetPointsHelper.getIntermediatePoints().size(), point.getPointDescription(app));
