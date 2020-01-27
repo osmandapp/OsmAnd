@@ -1,5 +1,7 @@
 package net.osmand.plus;
 
+import android.location.GnssNavigationMessage;
+import android.location.GnssStatus;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import java.util.ArrayList;
@@ -17,7 +19,6 @@ import net.osmand.binary.GeocodingUtilities.GeocodingResult;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadPoint;
-import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.router.RouteSegmentResult;
@@ -127,7 +128,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 
 	private List<OsmAndLocationListener> locationListeners = new ArrayList<OsmAndLocationProvider.OsmAndLocationListener>();
 	private List<OsmAndCompassListener> compassListeners = new ArrayList<OsmAndLocationProvider.OsmAndCompassListener>();
-	private Listener gpsStatusListener;
+	private Object gpsStatusListener;
 	private float[] mRotationM = new float[9];
 
 
@@ -249,7 +250,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 			}
 		}
 		if (isLocationPermissionAvailable(app)) {
-			service.addGpsStatusListener(getGpsStatusListener(service));
+			registerGpsStatusListener(service);
 			try {
 				service.requestLocationUpdates(LocationManager.GPS_PROVIDER, GPS_TIMEOUT_REQUEST, GPS_DIST_REQUEST, gpsListener);
 			} catch (IllegalArgumentException e) {
@@ -291,17 +292,56 @@ public class OsmAndLocationProvider implements SensorEventListener {
 		}		
 	}
 
-	private Listener getGpsStatusListener(final LocationManager service) {
-		gpsStatusListener = new Listener() {
-			private GpsStatus gpsStatus;
-			@Override
-			public void onGpsStatusChanged(int event) {
-				gpsStatus = service.getGpsStatus(gpsStatus);
-				updateGPSInfo(gpsStatus);
-				updateLocation(location);
-			}
-		};
-		return gpsStatusListener;
+	private void registerGpsStatusListener(final LocationManager service) {
+		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+			gpsStatusListener = new GnssStatus.Callback() {
+
+				@Override
+				public void onStarted() {
+				}
+
+				@Override
+				public void onStopped() {
+				}
+
+				@Override
+				public void onFirstFix(int ttffMillis) {
+				}
+
+				@Override
+				public void onSatelliteStatusChanged(GnssStatus status) {
+					int satCount = 0;
+					boolean fixed = false;
+					int u = 0;
+					if(status != null) {
+						satCount = status.getSatelliteCount();
+						for (int i = 0; i < satCount; i++) {
+							if (status.usedInFix(i)) {
+								u++;
+								fixed = true;
+							}
+						}
+					}
+					gpsInfo.fixed = fixed;
+					gpsInfo.foundSatellites = satCount;
+					gpsInfo.usedSatellites = u;
+					updateLocation(location);
+				}
+			};
+			service.registerGnssStatusCallback((GnssStatus.Callback) gpsStatusListener);
+			service.registerGnssNavigationMessageCallback((GnssNavigationMessage.Callback) gpsStatusListener);
+		} else {
+			gpsStatusListener = new Listener() {
+				private GpsStatus gpsStatus;
+				@Override
+				public void onGpsStatusChanged(int event) {
+					gpsStatus = service.getGpsStatus(gpsStatus);
+					updateGPSInfo(gpsStatus);
+					updateLocation(location);
+				}
+			};
+			service.addGpsStatusListener((Listener) gpsStatusListener);
+		}
 	}
 	
 	private void updateGPSInfo(GpsStatus s) {
@@ -642,7 +682,13 @@ public class OsmAndLocationProvider implements SensorEventListener {
 
 	private void stopLocationRequests() {
 		LocationManager service = (LocationManager) app.getSystemService(Context.LOCATION_SERVICE);
-		service.removeGpsStatusListener(gpsStatusListener);
+		if(gpsStatusListener != null) {
+			if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+				service.unregisterGnssStatusCallback((GnssStatus.Callback) gpsStatusListener);
+			} else {
+				service.removeGpsStatusListener((Listener) gpsStatusListener);
+			}
+		}
 		service.removeUpdates(gpsListener);
 		while(!networkListeners.isEmpty()) {
 			service.removeUpdates(networkListeners.poll());
