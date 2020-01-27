@@ -1113,9 +1113,9 @@
     </string -->
     <string name="rendering_attr_contourColorScheme_description">Contour lines color scheme</string>
     <string name="save_track_min_speed">Slowest speed logged</string>
-    <string name="save_track_min_speed_descr">Filter: No logging of points below this speed.</string>
+    <string name="save_track_min_speed_descr">Filter: No points logged below this speed.</string>
     <string name="save_track_min_distance">Minimum logging displacement</string>
-    <string name="save_track_min_distance_descr">Filter: Set minimum distance from a point to log a new one.</string>
+    <string name="save_track_min_distance_descr">Filter: Set shortest distance from a logged point to a new one.</string>
     <string name="save_track_precision">Minimum logging accuracy</string>
     <string name="save_track_precision_descr">Filter: No logging unless this accuracy is reached.</string>
     <string name="christmas_poi">Christmas POI</string>
