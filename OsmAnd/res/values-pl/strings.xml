@@ -3441,4 +3441,11 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="select_nav_icon_descr">Ikona wyświetlana tylko podczas nawigacji lub ruchu.</string>
     <string name="select_map_icon_descr">Ikona mapy wyświetlana tylko na mapie.</string>
     <string name="logcat_buffer_descr">Sprawdź i udostępnij szczegółowe dzienniki aplikacji</string>
+    <string name="file_does_not_contain_routing_rules">Brak reguł routingu w \'%1$s\'. Wybierz inny plik.</string>
+    <string name="permission_is_required">Wymagane jest zezwolenie na korzystanie z tej opcji.</string>
+    <string name="not_support_file_type_with_ext">Zamiast tego wybierz obsługiwany plik z rozszerzeniem %1$s.</string>
+    <string name="monitoring_min_speed_descr_remark">Uwaga: kontrola prędkości &gt; 0: większość zestawów GPS zgłasza wartość prędkości tylko wtedy, gdy algorytm określa, że jesteś w ruchu, a żadna, jeśli nie jesteś. Dlatego użycie ustawienia &gt; 0 w tym filtrze w pewnym sensie wykorzystuje wykrywanie ruchu chipsetu GPS. Ale nawet jeśli nie zostanie przefiltrowane tutaj w czasie nagrywania, nadal używamy tej funkcji w naszej analizie GPX do określenia skorygowanej odległości, tj. wartość wyświetlana w tym polu to odległość zarejestrowana podczas ruchu.</string>
+    <string name="monitoring_min_accuracy_descr">Spowoduje to zapisanie tylko punktów zmierzonych z minimalną dokładnością (w metrach/stopach, zgodnie z raportem systemu Android dla Twojego chipsetu). Dokładność odnosi się do rozproszenia powtarzanych pomiarów i nie jest bezpośrednio związana z precyzją, która określa, jak blisko są twoje pomiary do twojej prawdziwej pozycji.</string>
+    <string name="monitoring_min_accuracy_descr_recommendation">Zalecenie: Trudno jest przewidzieć, co zostanie nagrane, a co nie, najlepiej wyłączyć ten filtr.</string>
+    <string name="monitoring_min_distance_descr">Ten filtr zapobiega zapisywaniu zduplikowanych punktów, w których mógł wystąpić zbyt mały rzeczywisty ruch, zapewnia ładniejszy przestrzenny wygląd ścieżek, które nie są później przetwarzane.</string>
 </resources>

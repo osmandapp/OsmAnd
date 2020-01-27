@@ -3446,4 +3446,5 @@ Lon %2$s</string>
     <string name="multimedia_notes_view_descr">Sie finden all Ihre Notizen im Menü unter Meine Orte — Notizen.</string>
     <string name="button_rate">Bewerten</string>
     <string name="logcat_buffer_descr">Hier können Sie Protokolle der Anwendung sehen und freigeben</string>
+    <string name="permission_is_required">Für die Verwendung dieser Option ist eine Berechtigung erforderlich.</string>
 </resources>

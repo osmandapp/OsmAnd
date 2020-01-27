@@ -316,7 +316,8 @@
     <string name="osmand_service">Κατάσταση παρασκηνίου</string>
     <string name="osmand_service_descr">Το OsmAnd εκτελείται στο παρασκήνιο με την οθόνη σβηστή.</string>
     <string name="download_files_not_enough_space">Δεν υπάρχει αρκετός ελεύθερος χώρος για να κάνετε λήψη %1$s MB (ελεύθερα: %2$s).</string>
-    <string name="download_files_question_space">Λήψη {0} αρχείου(ων); Θα χρησιμοποιηθούν{1} MB από τα {2} MB.</string>
+    <string name="download_files_question_space">Λήψη {0} αρχείου(ων);
+\nΘα χρησιμοποιηθούν {1} MB (από τα {2} MB).</string>
     <string name="use_transparent_map_theme">Διάφανο θέμα</string>
     <string name="native_library_not_supported">Η εγγενής βιβλιοθήκη δεν υποστηρίζεται σε αυτήν τη συσκευή.</string>
     <string name="init_native_library">Αρχικοποίηση εγγενούς βιβλιοθήκης…</string>
@@ -1541,7 +1542,7 @@
     <string name="online_photos">Φωτογραφίες με σύνδεση</string>
     <string name="shared_string_add_photos">Προσθήκη φωτογραφιών</string>
     <string name="nothing_found">Δεν βρέθηκε τίποτα</string>
-    <string name="quick_action_showhide_osmbugs_title">Εναλλαγή σημειώσεων OSM</string>
+    <string name="quick_action_showhide_osmbugs_title">Εμφάνιση ή απόκρυψη σημειώσεων OSM</string>
     <string name="quick_action_osmbugs_show">Εμφάνιση σημειώσεων OSM</string>
     <string name="quick_action_osmbugs_hide">Απόκρυψη σημειώσεων OSM</string>
     <string name="shared_string_to">Προς</string>
@@ -1577,7 +1578,7 @@
     <string name="shared_string_actions">Ενέργειες</string>
     <string name="shared_string_marker">Δείκτης</string>
     <string name="empty_state_osm_edits">Δημιουργία ή τροποποίηση αντικειμένων OSM</string>
-    <string name="empty_state_osm_edits_descr">Δημιουργήστε ή τροποποιήστε τα OSM ΣΕ (POI), ανοίξτε ή σχολιάστε τις Σημειώσεις OSM, και συμβάλετε με καταγραμμένα αρχεία GPX.</string>
+    <string name="empty_state_osm_edits_descr">Δημιουργήστε ή τροποποιήστε τα OSM ΣΕ (POI), ανοίξτε ή σχολιάστε τις σημειώσεις OSM και συμβάλετε με καταγραμμένα αρχεία GPX.</string>
     <string name="shared_string_deleted">Διαγραμμένο</string>
     <string name="shared_string_edited">Επεξεργάστηκε</string>
     <string name="shared_string_added">Προστέθηκε</string>
@@ -1586,7 +1587,7 @@
     <string name="one_tap_active">Ενεργό το \'Ένα πάτημα\'</string>
     <string name="empty_state_av_notes">Κρατήστε σημειώσεις!</string>
     <string name="empty_state_av_notes_desc">Προσθέστε ήχο, βίντεο ή φωτοσημείωση για κάθε σημείο στο χάρτη, χρησιμοποιώντας το widget ή το συναφές μενού.</string>
-    <string name="notes_by_date">Σημειώσεις κατά ημερομηνία</string>
+    <string name="notes_by_date">Σημειώσεις OSM κατά ημερομηνία</string>
     <string name="download_maps_travel">Ταξιδιωτικοί οδηγοί</string>
     <string name="article_removed">Το άρθρο αφαιρέθηκε</string>
     <string name="wikivoyage_search_hint">Αναζήτηση για χώρα, πόλη, ή επαρχία</string>
@@ -1632,11 +1633,11 @@
     <string name="show_closed_notes">Εμφάνιση κλειστών σημειώσεων</string>
     <string name="switch_osm_notes_visibility_desc">Εμφάνιση/απόκρυψη σημειώσεων OSM στον χάρτη.</string>
     <string name="gpx_file_desc">GPX - κατάλληλο για εξαγωγή σε JOSM ή σε άλλους επεξεργαστές OSM.</string>
-    <string name="osc_file_desc">OSC - κατάλληλο για εξαγωγή σε OpenStreetMap.</string>
+    <string name="osc_file_desc">OSC - κατάλληλο για εξαγωγή σε OSM.</string>
     <string name="shared_string_gpx_file">Αρχείο GPX</string>
     <string name="osc_file">Αρχείο OSC</string>
     <string name="choose_file_type">Επιλέξτε τύπο αρχείου</string>
-    <string name="osm_edits_export_desc">Επιλέξτε τον τύπο εξαγωγής: σημειώσεις OSM, ΣΕ ή και τα δύο.</string>
+    <string name="osm_edits_export_desc">Εξαγωγή ως σημειώσεις OSM, ΣΕ ή και τα δύο.</string>
     <string name="all_data">Όλα τα δεδομένα</string>
     <string name="osm_notes">Σημειώσεις OSM</string>
     <string name="will_open_tomorrow_at">Ανοίγει αύριο στις</string>
@@ -1720,7 +1721,7 @@
     <string name="ascendingly">Α-Ω</string>
     <string name="date_added">Προστέθηκε</string>
     <string name="order_by">Ταξινόμηση κατά:</string>
-    <string name="marker_show_distance_descr">Επιλογή υπόδειξης απόστασης και κατεύθυνσης σε δείκτες χαρτών στην οθόνη χαρτών:</string>
+    <string name="marker_show_distance_descr">Επιλογή υπόδειξης απόστασης και κατεύθυνσης σε σημειωτές χαρτών στον χάρτη:</string>
     <string name="map_orientation_change_in_accordance_with_speed">Όριο προσανατολισμού χάρτη</string>
     <string name="map_orientation_change_in_accordance_with_speed_descr">Επιλογή παρακάτω της ταχύτητας εναλλαγής προσανατολισμού από \'Κατεύθυνση κίνησης\' σε \'Κατεύθυνση πυξίδας\'.</string>
     <string name="all_markers_moved_to_history">Όλοι οι δείκτες χάρτη μετακινήθηκαν στο ιστορικό</string>
@@ -1738,7 +1739,7 @@
     <string name="show_direction">Ένδειξη απόστασης</string>
     <string name="sort_by">Ταξινόμηση κατά</string>
     <string name="do_not_use_animations">Χωρίς κίνηση γραφικών</string>
-    <string name="do_not_use_animations_descr">Απενεργοποιεί τις κινήσεις γραφικών στην εφαρμογή.</string>
+    <string name="do_not_use_animations_descr">Απενεργοποιεί τις κινήσεις χάρτη.</string>
     <string name="line">Γραμμή</string>
     <string name="save_as_route_point">Αποθήκευση ως σημεία διαδρομής</string>
     <string name="save_as_line">Αποθήκευση ως γραμμή</string>
@@ -1753,10 +1754,10 @@
     <string name="measurement_tool_action_bar">Περιηγήσου στον χάρτη και πρόσθεσε σημεία</string>
     <string name="measurement_tool">Μέτρηση απόστασης</string>
     <string name="quick_action_resume_pause_navigation">Παύση/συνέχιση πλοήγησης</string>
-    <string name="quick_action_resume_pause_navigation_descr">Πατήστε αυτό το πλήκτρο για να σταματήσετε ή να συνεχίσετε την πλοήγηση.</string>
+    <string name="quick_action_resume_pause_navigation_descr">Πλήκτρο για σταμάτημα ή συνέχιση της πλοήγησης.</string>
     <string name="quick_action_show_navigation_finish_dialog">Να εμφανίζεται ο διάλογος \'η πλοήγηση ολοκληρώθηκε\'</string>
     <string name="quick_action_start_stop_navigation">Έναρξη/στάση πλοήγησης</string>
-    <string name="quick_action_start_stop_navigation_descr">Πατήστε αυτό το πλήκτρο για εκκίνηση και τερματισμό της πλοήγησης.</string>
+    <string name="quick_action_start_stop_navigation_descr">Πλήκτρο για εκκίνηση και τερματισμό της πλοήγησης.</string>
     <string name="store_tracks_in_monthly_directories">Αποθήκευση των καταγεγραμμένων ιχνών σε μηνιαίους φακέλους</string>
     <string name="store_tracks_in_monthly_directories_descrp">Αποθήκευση καταγεγραμμένων ιχνών σε υποφακέλους ανά μήνα καταγραφής (όπως 2018-01).</string>
     <string name="mapillary_menu_descr_tile_cache">Επαναφόρτωση πλακιδίων για να δείτε τα ενημερωμένα δεδομένα.</string>
@@ -1783,7 +1784,7 @@
     <string name="restart_search">Επανεκκίνηση αναζήτησης</string>
     <string name="increase_search_radius">Αύξηση ακτίνας αναζήτησης</string>
     <string name="nothing_found_descr">Αλλάξτε την αναζήτηση ή αυξήστε την ακτίνα αναζήτησης.</string>
-    <string name="quick_action_showhide_osmbugs_descr">Μια εναλλαγή για εμφάνιση ή απόκρυψη των σημειώσεων OSM στον χάρτη</string>
+    <string name="quick_action_showhide_osmbugs_descr">Πλήκτρο εμφάνισης ή απόκρυψης σημειώσεων OSM στον χάρτη.</string>
     <string name="sorted_by_distance">Ταξινομημένα κατά απόσταση</string>
     <string name="search_favorites">Αναζήτηση στα αγαπημένα</string>
     <string name="hillshade_menu_download_descr">Κατεβάστε τον χάρτη επικάλυψης σκίασης για να εμφανιστεί η κατακόρυφη σκίαση.</string>
@@ -1812,15 +1813,15 @@
     <string name="select_city">Επιλογή πόλης</string>
     <string name="select_postcode">Αναζήτησε ταχυδρομικό κώδικα</string>
     <string name="quick_action_auto_zoom">Αυτόματη εστίαση χάρτη ναι/όχι</string>
-    <string name="quick_action_auto_zoom_desc">Εναλλαγή ενεργοποίησης/απενεργοποίησης της αυτόματης εστίασης του χάρτη, αναλόγως την ταχύτητά σας.</string>
-    <string name="quick_action_auto_zoom_on">Ενεργοποίηση αυτόματης εστίασης χάρτη</string>
-    <string name="quick_action_auto_zoom_off">Απενεργοποίηση αυτόματης εστίασης χάρτη</string>
+    <string name="quick_action_auto_zoom_desc">Πλήκτρο ενεργοποίησης/απενεργοποίησης της αυτόματης εστίασης της ταχύτητας.</string>
+    <string name="quick_action_auto_zoom_on">Ενεργοποίηση αυτόματης εστίασης</string>
+    <string name="quick_action_auto_zoom_off">Απενεργοποίηση αυτόματης εστίασης</string>
     <string name="quick_action_add_destination">Όρισε προορισμό</string>
     <string name="quick_action_replace_destination">Αντικατέστησε προορισμό</string>
     <string name="quick_action_add_first_intermediate">Πρόσθεσε ενδιάμεση στάση</string>
-    <string name="quick_action_add_destination_desc">Ένα πλήκτρο που εστιάζει στην οθόνη τον προορισμό, κάθε προηγούμενος προορισμός μετατίθεται σε προτελευταίο προορισμό.</string>
-    <string name="quick_action_replace_destination_desc">Πατώντας αυτό το πλήκτρο ενέργειας εστιάζει την οθόνη στον νέο προορισμό της διαδρομής, αντικαθιστώντας τον προηγουμένως επιλεγμένο προορισμό (εάν υπάρχει).</string>
-    <string name="quick_action_add_first_intermediate_desc">Ένα πλήκτρο που εστιάζει την οθόνη στον πρώτο ενδιάμεσο προορισμό.</string>
+    <string name="quick_action_add_destination_desc">Πλήκτρο ορισμού του κέντρου της οθόνης ως προορισμού διαδρομής. Ένας προηγουμένως επιλεγμένος προορισμός θα γίνει ο τελευταίος ενδιάμεσος προορισμός.</string>
+    <string name="quick_action_replace_destination_desc">Πλήκτρο ορισμού του κέντρου της οθόνης ως νέου προορισμού της διαδρομής, αντικαθιστώντας τον προηγουμένως επιλεγμένο προορισμό (εάν υπάρχει).</string>
+    <string name="quick_action_add_first_intermediate_desc">Πλήκτρο ορισμού του κέντρου της οθόνης ως πρώτου ενδιάμεσου προορισμού.</string>
     <string name="no_overlay">Χωρίς επικάλυψη</string>
     <string name="no_underlay">Χωρίς υπόστρωμα</string>
     <string name="subscribe_email_error">Σφάλμα</string>
@@ -1962,8 +1963,8 @@
     <string name="new_filter">Νέο φίλτρο</string>
     <string name="new_filter_desc">Παρακαλούμε, εισάγετε όνομα για το νέο φίλτρο, αυτό θα προστεθεί στην δική σας καρτέλα \'Κατηγορίες\'.</string>
     <string name="osm_live_payment_desc">Τα τέλη εγγραφής επιβαρύνονται μηνιαία. Μπορείτε να ακυρώσετε την εγγραφή σας στο Google Play οποτεδήποτε.</string>
-    <string name="donation_to_osm">Δωρεές στην κοινότητα OpenStreetMap</string>
-    <string name="donation_to_osm_desc">Μέρος της δωρεάς σας θα σταλεί στους χρήστες OSM που υποβάλλουν αλλαγές στο OpenStreetMap. Το κόστος της εγγραφής παραμένει το ίδιο.</string>
+    <string name="donation_to_osm">Δωρεά στην κοινότητα OSM</string>
+    <string name="donation_to_osm_desc">Μέρος της δωρεάς σας θα σταλεί στους συντελεστές OSM. Το κόστος της εγγραφής παραμένει το ίδιο.</string>
     <string name="osm_live_subscription_desc">Η εγγραφή ενεργοποιεί ωριαίες, ημερήσιες και εβδομαδιαίες ενημερώσεις και απεριόριστες λήψεις για όλους τους χάρτες παγκοσμίως.</string>
     <string name="get_it">Εγγραφείτε</string>
     <string name="get_for">Εγγραφείτε για %1$s</string>
@@ -2063,11 +2064,11 @@
     <string name="shared_string_move_down">Μετακίνηση ↓</string>
     <string name="finish_navigation">Ολοκλήρωση πλοήγησης</string>
     <string name="avoid_road">Αποφυγή δρόμου</string>
-    <string name="storage_directory_readonly_desc">Αλλαγή σε εσωτερική μνήμη επειδή ο επιλεγμένος φάκελος αποθήκευσης δεδομένων είναι μόνο για ανάγνωση. Παρακαλούμε, επιλέξτε έναν εγγράψιμο κατάλογο αποθήκευσης.</string>
+    <string name="storage_directory_readonly_desc">Αλλαγή σε εσωτερική μνήμη επειδή ο επιλεγμένος φάκελος αποθήκευσης δεδομένων προστατεύεται από εγγραφή. Παρακαλούμε, επιλέξτε έναν εγγράψιμο κατάλογο αποθήκευσης.</string>
     <string name="storage_directory_shared">Κοινόχρηστη μνήμη</string>
     <string name="shared_string_topbar">Γραμμή κορυφής</string>
     <string name="full_report">Πλήρης αναφορά</string>
-    <string name="open_street_map_login_and_pass">Όνομα χρήστη και κωδικός πρόσβασης OpenStreetMap</string>
+    <string name="open_street_map_login_and_pass">Όνομα χρήστη και κωδικός πρόσβασης OSM</string>
     <string name="number_of_recipients">Αριθμός αποδεκτών</string>
     <string name="osm_user_stat">Επεξεργασίες %1$s, βαθμός %2$s, συνολικές επεξεργασίες %3$s</string>
     <string name="osm_recipient_stat">Επεξεργασίες %1$s, άθροισμα %2$s mBTC</string>
@@ -2087,13 +2088,18 @@
     <string name="osm_live_region_desc">Τμήμα της δωρεάς σας θα σταλεί στους χρήστες OSM που υποβάλλουν αλλαγές στον χάρτη αυτής της περιοχής.</string>
     <string name="osm_live_subscription_settings">Ρυθμίσεις συνδρομής</string>
     <string name="osm_live_ask_for_purchase">Παρακαλούμε, αγοράστε πρώτα μια συνδρομή για το OsmAnd Live</string>
-    <string name="osm_live_header">Αυτή η συνδρομή ενεργοποιεί ωριαίες ενημερώσεις για όλες τους χάρτες παγκοσμίως. Τμήμα του εισοδήματος επιστρέφει στην κοινότητα OSM και καταβάλλεται για κάθε συνεισφορά OSM. Εάν αγαπάτε τα OsmAnd και OSM και θέλετε να υποστηρίξετε και να υποστηριχθείτε από αυτά, αυτός είναι ο τέλειος τρόπος να το κάνετε.</string>
+    <string name="osm_live_header">Αυτή η συνδρομή ενεργοποιεί ωριαίες ενημερώσεις για όλες τους χάρτες παγκοσμίως.
+\n Τμήμα του εισοδήματος επιστρέφει στην κοινότητα OSM και καταβάλλεται για κάθε συνεισφορά OSM.
+\n Εάν αγαπάτε τα OsmAnd και OSM και θέλετε να υποστηρίξετε και να υποστηριχτείτε από αυτά, αυτός είναι ο τέλειος τρόπος να το κάνετε.</string>
     <string name="select_map_marker">Επιλέξτε έναν δείκτη χάρτη</string>
     <string name="map_markers_other">Λοιποί δείκτες</string>
     <string name="upload_anonymously">Ανώνυμο ανέβασμα</string>
     <string name="show_transparency_seekbar">Δείξε με διαφάνεια τη γραμμή αναζήτησης</string>
-    <string name="download_files_error_not_enough_space">Δεν υπάρχει αρκετός χώρος! {3} MB απαιτούνται προσωρινά, {1} MB μόνιμα. Ο διαθέσιμος χώρος είναι μόνο {2} MB</string>
-    <string name="download_files_question_space_with_temp">"Λήψη {0} αρχείου(ων); {3} MB χρησιμοποιούνται προσωρινά, {1} MB μόνιμα.  (Από τα {2} MB.)"</string>
+    <string name="download_files_error_not_enough_space">Δεν υπάρχει αρκετός χώρος!
+\n {3} MB απαιτούνται προσωρινά, {1} MB μόνιμα.
+\n (Μόνο {2} MB είναι διαθέσιμα.)</string>
+    <string name="download_files_question_space_with_temp">"Λήψη {0} αρχείου(ων);
+\n {3} MB χρησιμοποιούνται προσωρινά, {1} MB μόνιμα.  (Από τα {2} MB.)"</string>
     <string name="upload_osm_note">Ανέβασμα σημείωσης OSM</string>
     <string name="map_marker_1st">Πρώτος δείκτης χάρτη</string>
     <string name="map_marker_2nd">Δεύτερος δείκτης χάρτη</string>
@@ -2170,7 +2176,7 @@
     <string name="av_audio_bitrate">Ρυθμός μεταγωγής ήχου</string>
     <string name="av_audio_bitrate_descr">Επιλογή ρυθμού μεταγωγής ήχου.</string>
     <string name="please_specify_poi_type_only_from_list">Παρακαλούμε, καθορίστε τον σωστό τύπο ΣΕ ή παραλείψετε το.</string>
-    <string name="access_from_map_description">Το πλήκτρο μενού εκκινεί τον πίνακα εργαλείων αντί για τη λίστα</string>
+    <string name="access_from_map_description">Το πλήκτρο μενού εκκινεί τον πίνακα εργαλείων αντί για το μενού</string>
     <string name="access_from_map">Πρόσβαση από τον χάρτη</string>
     <string name="show_on_start_description">Το \'Απενεργοποίηση\' εκκινεί απευθείας τον χάρτη.</string>
     <string name="show_on_start">Εμφάνιση στην εκκίνηση</string>
@@ -2829,7 +2835,7 @@
     <string name="osm_live_payment_renews_annually">Ετήσιες ανανεώσεις</string>
     <string name="default_price_currency_format">%1$.2f %2$s</string>
     <string name="osm_live_payment_header">Διάρκεια πληρωμής:</string>
-    <string name="osm_live_payment_contribute_descr">Οι δωρεές βοηθούν στη χρηματοδότηση της χαρτογράφησης του OpenStreetMap.</string>
+    <string name="osm_live_payment_contribute_descr">Οι δωρεές βοηθούν στη χρηματοδότηση της χαρτογράφησης του OSM.</string>
     <string name="markers_remove_dialog_msg">Διαγραφή δείκτη \'%s\';</string>
     <string name="edit_map_marker">Επεξεργασία δείκτη</string>
     <string name="third_party_application">Εφαρμογή τρίτων κατασκευαστών</string>
@@ -2981,7 +2987,7 @@
     <string name="show_more">Εμφάνιση περισσοτέρων</string>
     <string name="tracks_on_map">Εμφανιζόμενα ίχνη</string>
     <string name="quick_action_show_hide_gpx_tracks">Εμφάνιση/απόκρυψη ιχνών GPX</string>
-    <string name="quick_action_show_hide_gpx_tracks_descr">Μια εναλλαγή για να εμφανίσετε ή να αποκρύψετε επιλεγμένα κομμάτια GPX στο χάρτη</string>
+    <string name="quick_action_show_hide_gpx_tracks_descr">Πλήκτρο εμφάνισης ή απόκρυψης επιλεγμένων ιχνών GPX στον χάρτη</string>
     <string name="quick_action_gpx_tracks_hide">Απόκρυψη ιχνών GPX</string>
     <string name="quick_action_gpx_tracks_show">Εμφάνιση ιχνών GPX</string>
     <string name="add_destination_query">Παρακαλούμε ορίστε τον προορισμό πρώτα</string>
@@ -3332,7 +3338,7 @@
     <string name="update_all_maps_q">Είσαστε σίγουροι ότι θέλετε να ενημερώσετε όλους τους (%1$d) χάρτες;</string>
     <string name="release_3_5">• Ενημερώθηκε η εφαρμογή και οι ρυθμίσεις κατατομής (προφίλ): Οι ρυθμίσεις ταξινομούνται τώρα κατά τύπο. Κάθε κατατομή μπορεί να προσαρμοστεί ξεχωριστά. 
 \n 
-\n • Νέος ερώτημα λήψης χάρτη που προτείνει χάρτη για λήψη κατά την πλοήγηση 
+\n • Νέος διάλογος λήψης χάρτη που προτείνει χάρτη για λήψη κατά την πλοήγηση 
 \n 
 \n • Διορθώθηκαν τα νυκτερινά θέματα 
 \n 
@@ -3376,7 +3382,7 @@
     <string name="track_saved">Αποθηκεύτηκε το ίχνος</string>
     <string name="empty_filename">Το όνομα του αρχείου είναι κενό</string>
     <string name="shared_string_revert">Επαναφορά</string>
-    <string name="quick_action_directions_from_desc">Ένα πλήκτρο που εστιάζει στην οθόνη το σημείο εκκίνησης και υπολογίζει την διαδρομή προς τον προορισμό ή ανοίγει διάλογο επιλογής προορισμού, αν το σημάδι προορισμού δεν φαίνεται στον χάρτη.</string>
+    <string name="quick_action_directions_from_desc">"Πλήκτρο που ορίζει το κέντρο της οθόνης ως σημείο εκκίνησης. Θα σας ζητηθεί να ορίσετε προορισμό ή να  ξεκινήσετε υπολογισμό διαδρομής."</string>
     <string name="rendering_attr_showCycleNodeNetworkRoutes_name">Εμφάνιση δικτύου κόμβων διαδρομών ποδηλάτων</string>
     <string name="clear_confirmation_msg">Καθαρισμός του %1$s;</string>
     <string name="download_map_dialog">Ερώτημα λήψης χάρτη</string>
@@ -3399,12 +3405,12 @@
     <string name="shared_string_downloading_formatted">Λήψη %s</string>
     <string name="rendering_value_thick_name">Πυκνός</string>
     <string name="desert_render_descr">Για ερήμους και άλλες αραιοκατοικημένες περιοχές. Περισσότερες λεπτομέρειες.</string>
-    <string name="select_navigation_icon">Εικονίδιο πλοήγησης</string>
-    <string name="select_map_icon">Εικονίδιο χάρτη</string>
+    <string name="select_navigation_icon">Εικονίδιο θέσης κατά τη μετακίνηση</string>
+    <string name="select_map_icon">Εικονίδιο θέσης σε ακινησία</string>
     <string name="delete_profiles_descr">Πατώντας \'Εφαρμογή\' διαγράφονται οι αφαιρούμενες κατατομές (προφίλ) μόνιμα.</string>
     <string name="master_profile">Κύρια κατατομή (προφίλ)</string>
     <string name="select_color">Επιλέξτε χρώμα</string>
-    <string name="edit_profiles_descr">Δεν μπορείτε να διαγράψετε τις προεπιλεγμένες κατατομές (προφίλ) OsmAnd, αλλά μπορείτε να τις απενεργοποιήσετε στην προηγούμενη οθόνη, ή να τις μετακινήσετε στο τέλος.</string>
+    <string name="edit_profiles_descr">Οι προεπιλεγμένες κατατομές (προφίλ) OsmAnd δεν μπορούν να διαγραφούν , αλλά απενεργοποιούνται (στην προηγούμενη οθόνη), ή ταξινομούνται στο τέλος.</string>
     <string name="edit_profiles">Επεξεργασία κατατομών (προφίλ)</string>
     <string name="select_nav_profile_dialog_message">Ο \'τύπος πλοήγησης\' καθορίζει τους υπολογισμούς διαδρομών.</string>
     <string name="profile_appearance">Εμφάνιση κατατομής (προφίλ)</string>
@@ -3439,8 +3445,8 @@
     <string name="osm_editing">Επεξεργασία OSM</string>
     <string name="osm_edits_view_descr">Προβολή των επεξεργασιών σας ή των σφαλμάτων OSM που δεν έχουν αποσταλεί ακόμα στο %1$s. Τα σταλμένα σημεία δεν θα εμφανίζονται πια.</string>
     <string name="app_mode_osm">OSM</string>
-    <string name="select_nav_icon_descr">Το εικονίδιο εμφανίζεται μόνο κατά την πλοήγηση ή τη μετακίνηση.</string>
-    <string name="select_map_icon_descr">Το εικονίδιο χάρτη εμφανίζεται μόνο στον χάρτη.</string>
+    <string name="select_nav_icon_descr">Εμφανιζόμενο εικονίδιο κατά την πλοήγηση ή τη μετακίνηση.</string>
+    <string name="select_map_icon_descr">Εμφανιζόμενο εικονίδιο σε ακινησία.</string>
     <string name="live_monitoring_adress">Ηλ. διεύθυνση</string>
     <string name="live_monitoring_adress_descr">Καθορίστε την ηλ. διεύθυνση με σύνταξη παραμέτρων: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
     <string name="monitoring_notification">Ειδοποίηση</string>
@@ -3466,4 +3472,9 @@
     <string name="monitoring_min_accuracy_descr_recommendation">Σύσταση: Είναι δύσκολο να προβλεφθεί τι θα εγγραφεί και τι όχι, ίσως είναι καλύτερο να απενεργοποιήσετε αυτό το φίλτρο.</string>
     <string name="monitoring_min_accuracy_descr_remark">Παρατήρηση: Εάν το GPS είχε απενεργοποιηθεί αμέσως πριν μια εγγραφή, το πρώτο μετρούμενο σημείο μπορεί να έχει μειωμένη ακρίβεια, έτσι μπορεί να θέλουμε να περιμένουμε λιγάκι πριν την καταγραφή σημείου (ή να εγγράψουμε τα καλύτερα 3 διαδοχικά σημεία, κλπ.), αλλά αυτό δεν έχει ακόμα υλοποιηθεί.</string>
     <string name="monitoring_min_distance_descr">Αυτό το φίλτρο αποφεύγει διπλά σημεία να εγγραφούν όταν έχει συμβεί πολύ λίγη ενεργή κίνηση, καθιστώντας καλύτερη τη χωροταξική εμφάνιση των ιχνών που δεν επεξεργάζονται αργότερα.</string>
+    <string name="button_rate">Τιμή</string>
+    <string name="monitoring_min_distance_descr_side_effect">Παράπλευρα αποτελέσματα: Περίοδοι σε ακινησία δεν καταγράφονται καθόλου ή μόνο με ένα σημείο καθεμιά. Μικρές (πραγματικός κόσμος) κινήσεις (π.χ. πλάγιες, για να σημειώσουν έξοδο στο ταξίδι σας) μπορεί να φιλτραριστούν. Το αρχείο σας περιέχει λιγότερες πληροφορίες για μετεπεξεργασία και έχει χειρότερα στατιστικά φιλτράροντας προφανώς περιττά σημεία κατά τον χρόνο εγγραφής, ενώ δυνητικά διατηρεί παράσιτα που προκαλούνται από κακή λήψη ή επιπτώσεις κυκλωμάτων GPS.</string>
+    <string name="monitoring_min_distance_descr_recommendation">Σύσταση: Ρύθμιση 5 μέτρων μπορεί να λειτουργήσει καλά για σας, εάν δεν χρειάζεστε να πιάσετε λεπτομέρειες πιο ακριβείς από αυτό και δεν θέλετε να πάρετε δεδομένα σε ακινησία.</string>
+    <string name="live_monitoring_time_buffer">Ενδιάμεσος χρόνος</string>
+    <string name="live_monitoring_tracking_interval">Διάστημα παρακολούθησης</string>
 </resources>

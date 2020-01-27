@@ -3433,4 +3433,7 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="select_map_icon_descr">Mapová ikona zobrazená len na mape.</string>
     <string name="logcat_buffer_descr">Skontrolovať a zdieľať podrobné záznamy aplikácie</string>
     <string name="search_offline_geo_error">Nepodarilo sa prečítať geo správu \'%s\'.</string>
+    <string name="permission_is_required">Pre použitie tejto možnosti je potrebné oprávnenie.</string>
+    <string name="monitoring_min_speed_descr">Tento filter spôsobí nezaznamenávanie bodov pri pohybe pomalšie ako daná rýchlosť. Toto môže zabezpečiť plynulejšie zaznamenané stopy pri zobrazení na mape.</string>
+    <string name="monitoring_min_speed_descr_side_effect">Vedľajší efekt: Vaša stopa nebude obsahovať úseky kde nebola dosiahnutá minimálna rýchlosť (napr. kde ste tlačili bicykel do kopca). Taktiež nebudú obsahovať informáciu o obdobiach bez pohybu, napr. prestávkach. Toto má vplyv na následnú analýzu alebo spracovanie, napr. pri zisťovaní celkovej dĺžky výletu, času v pohybe alebo priemernej rýchlosti.</string>
 </resources>

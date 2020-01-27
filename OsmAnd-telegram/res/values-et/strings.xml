@@ -254,13 +254,16 @@
     <string name="shared_string_hour_short">h</string>
     <string name="shared_string_minute_short">min</string>
     <string name="shared_string_second_short">sek</string>
-    <string name="welcome_descr">
-        <b>OsmAnd Tracker</b> võimaldab sul jagada oma asukohta ja näha teiste asukohta OsmAndis. <br/>
-        <br/>Rakendus kasutab Telegrami API-t, seega vajad Telegrami kontot.</string>
+    <string name="welcome_descr"><b>OsmAnd Tracker</b> võimaldab sul jagada oma asukohta ja näha teiste asukohta OsmAndis. <br/> <br/>Rakendus kasutab Telegrami API-t, seega vajad Telegrami kontot.</string>
     <string name="my_location">Minu asukoht</string>
     <string name="live_now">Nüüd reaalajas nähtav</string>
     <string name="timeline">Ajajoon</string>
     <string name="shared_string_suggested">Soovitatud</string>
     <string name="status_widget_title">OsmAnd Tracker olek</string>
     <string name="back_to_osmand">Tagasi OsmAnd-i</string>
+    <string name="last_update_from_telegram_date">Viimane Telegram uuendus: %1$s</string>
+    <string name="last_response_date">Viimane vastus: %1$s</string>
+    <string name="last_update_from_telegram_duration">Viimane Telegram uuendus: %1$s tagasi</string>
+    <string name="last_response_duration">Viimane vastus: %1$s tagasi</string>
+    <string name="duration_ago">%1$s tagasi</string>
 </resources>
