@@ -2299,23 +2299,11 @@ Lon %2$s</string>
 \n ¡Más países alrededor del globo están disponibles para descargar! 
 \n Obtén un navegador confiable en tu país - ya sea Francia, Alemania, México, Reino Unido, España, Países bajos, Estados Unidos, Rusia, Brasil o cualquier otro.</string>
     <string name="osmand_plus_extended_description_part2">"Navegación GPS 
-\n
-\n 
 \n • Funciona en línea (rápido) o sin conexión (sin cargos de roaming al viajar al extranjero) 
-\n
-\n 
 \n • Guía por voz giro-a-giro (voces grabadas y sintetizadas) 
-\n
-\n 
 \n • (Opcional) Guía de carriles, nombres de calles y tiempo estimado al destino 
-\n
-\n 
 \n • Admite puntos intermedios en el itinerario 
-\n
-\n 
 \n • La ruta se recalcula al salirse de la misma 
-\n
-\n 
 \n • Busca destinos por dirección, por tipo (por ejemplo: Restaurantes, hoteles, estaciones de servicio, museos), o por coordenada geográfica "</string>
     <string name="osmand_plus_extended_description_part3">Vista del mapa 
 \n • Muestra tu ubicación y orientación 
@@ -3347,8 +3335,8 @@ Lon %2$s</string>
     <string name="shared_string_memory_used_mb_desc">Usado %1$s MB</string>
     <string name="shared_string_memory_used_kb_desc">Usado %1$s kB</string>
     <string name="contour_lines_and_hillshade">Curvas de nivel y sombreado</string>
-    <string name="routing_attr_prefer_unpaved_name">Preferir ruta sin pavimentar</string>
-    <string name="routing_attr_prefer_unpaved_description">Prefiere rutas sin pavimentar.</string>
+    <string name="routing_attr_prefer_unpaved_name">Preferir caminos sin pavimentar</string>
+    <string name="routing_attr_prefer_unpaved_description">Prefiere caminos sin pavimentar.</string>
     <string name="update_all_maps">Actualizar todos los mapas</string>
     <string name="update_all_maps_q">¿Actualizar todos los mapas (%1$d)\?</string>
     <string name="release_3_5">• Ajustes de la aplicación y del perfil actualizados. Cómoda distribución de los ajustes por tipo y posibilidad de personalizar cada perfil 
@@ -3370,8 +3358,8 @@ Lon %2$s</string>
 \n</string>
     <string name="apply_preference_to_all_profiles">Puedes aplicar este cambio a todos los perfiles o sólo al marcado.</string>
     <string name="shared_preference">Compartido</string>
-    <string name="routing_attr_driving_style_prefer_unpaved_name">Preferir rutas sin pavimentar</string>
-    <string name="routing_attr_driving_style_prefer_unpaved_description">Ruta por terreno sin pavimento.</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_name">Preferir caminos sin pavimentar</string>
+    <string name="routing_attr_driving_style_prefer_unpaved_description">Prefiere los caminos sin pavimentar a los pavimentados para el trazado de rutas.</string>
     <string name="layer_osm_edits">Ediciones de OSM</string>
     <string name="quick_action_contour_lines_descr">Un botón que muestra u oculta las curvas de nivel en el mapa.</string>
     <string name="quick_action_contour_lines_show">Mostrar curvas de nivel</string>
@@ -3388,13 +3376,13 @@ Lon %2$s</string>
     <string name="overwrite_profile_q">El perfil «%1$s» ya existe. ¿Sobrescribir\?</string>
     <string name="export_profile_failed">No se pudo exportar el perfil.</string>
     <string name="profile_import">Importar perfil</string>
-    <string name="profile_import_descr">Añade un perfil abriendo el archivo en OsmAnd.</string>
+    <string name="profile_import_descr">Añade un perfil abriendo este archivo con OsmAnd.</string>
     <string name="file_import_error">Error de importación de %1$s: %2$s</string>
     <string name="file_imported_successfully">%1$s importado.</string>
     <string name="rendering_value_white_name">Blanco</string>
     <string name="swap_two_places">Alternar %1$s y %2$s</string>
     <string name="route_start_point">Punto de partida</string>
-    <string name="default_speed_dialog_msg">Estima el tiempo de llegada para los tipos de caminos desconocidos, y limita la velocidad para todos los caminos (puede desviarse)</string>
+    <string name="default_speed_dialog_msg">Estima el tiempo de llegada para los tipos de caminos desconocidos, y limita la velocidad para todos los caminos (puede afectar a la ruta)</string>
     <string name="track_saved">Traza guardada</string>
     <string name="empty_filename">Nombre del archivo vacío</string>
     <string name="shared_string_revert">Revertir</string>
@@ -3414,27 +3402,27 @@ Lon %2$s</string>
     <string name="join_segments">Unir segmentos</string>
     <string name="add_new_profile_q">¿Añadir el nuevo perfil «%1$s»\?</string>
     <string name="save_heading">Incluir rumbo</string>
-    <string name="save_heading_descr">Guarda el rumbo para cada punto de la traza durante el seguimiento.</string>
+    <string name="save_heading_descr">Guarda el rumbo para cada punto de la traza durante la grabación.</string>
     <string name="distance_and_address">%1$s • %2$s</string>
     <string name="street_city">%1$s, %2$s</string>
     <string name="personal_category_name">Personal</string>
     <string name="shared_string_downloading_formatted">Descargando %s</string>
     <string name="rendering_value_thick_name">Espesor</string>
     <string name="desert_render_descr">Para desiertos y otras zonas escasamente pobladas. Más detallado.</string>
-    <string name="select_navigation_icon">Icono de navegación</string>
-    <string name="select_map_icon">Icono del mapa</string>
-    <string name="delete_profiles_descr">Al pulsar en «Aplicar», todos los perfiles serán borrados completamente.</string>
+    <string name="select_navigation_icon">Icono de la ubicación mientras se mueve</string>
+    <string name="select_map_icon">Icono de la ubicación en reposo</string>
+    <string name="delete_profiles_descr">Al pulsar en «Aplicar», los perfiles borrados se perderán completamente.</string>
     <string name="master_profile">Perfil principal</string>
     <string name="select_color">Elegir el color</string>
-    <string name="edit_profiles_descr">Los perfiles de OsmAnd se pueden mover a la parte inferior, pero no se pueden borrar. Vuelve para quitarlos.</string>
+    <string name="edit_profiles_descr">Los perfiles predefinidos de OsmAnd no se pueden borrar, sino desactivar (en la pantalla anterior) u ordenarse en la parte inferior.</string>
     <string name="edit_profiles">Editar perfiles</string>
-    <string name="select_nav_profile_dialog_message">El «Tipo de navegación» afecta a las reglas para los cálculos de la ruta.</string>
+    <string name="select_nav_profile_dialog_message">El «Tipo de navegación» rige la forma en que se calculan las rutas.</string>
     <string name="profile_appearance">Aspecto del perfil</string>
     <string name="choose_icon_color_name">Icono, color y nombre</string>
     <string name="reorder_profiles">Editar la lista de perfiles</string>
     <string name="selected_profile">Perfil marcado</string>
-    <string name="reset_confirmation_descr">Al pulsar en «%1$s», se perderán todos los cambios.</string>
-    <string name="reset_all_profile_settings_descr">Todos los ajustes del perfil volverán a los valores predefinidos de la instalación.</string>
+    <string name="reset_confirmation_descr">Al pulsar en «%1$s», serán descartados todos los cambios.</string>
+    <string name="reset_all_profile_settings_descr">Restablecer todos los ajustes del perfil a los valores predefinidos de la instalación.</string>
     <string name="reset_all_profile_settings">¿Restablecer todos los ajustes del perfil\?</string>
     <string name="ltr_or_rtl_combine_via_space">%1$s %2$s</string>
     <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
@@ -3452,7 +3440,7 @@ Lon %2$s</string>
     <string name="live_monitoring">Seguimiento en línea</string>
     <string name="save_track_logging_accuracy">Precisión de registro</string>
     <string name="tracks_view_descr">Puedes encontrar todas tus trazas grabadas en «%1$s» o en la carpeta OsmAnd usando el administrador de archivos.</string>
-    <string name="multimedia_notes_view_descr">Puedes encontrar todas tus notas en «%1$s»</string>
+    <string name="multimedia_notes_view_descr">Puedes encontrar todas tus notas en «%1$s».</string>
     <string name="video_notes">Notas de video</string>
     <string name="photo_notes">Notas fotográficas</string>
     <string name="route_recalculation">Recálculo de la ruta</string>
@@ -3462,10 +3450,36 @@ Lon %2$s</string>
     <string name="osm_editing">Edición de OSM</string>
     <string name="osm_edits_view_descr">Puedes ver todas tus ediciones no subidas o errores de OSM en «%1$s». Los puntos subidos no se muestran en OsmAnd.</string>
     <string name="app_mode_osm">OSM</string>
-    <string name="select_nav_icon_descr">El icono sólo se muestra mientras se navega o se mueve.</string>
-    <string name="select_map_icon_descr">El icono del mapa sólo se muestra en el mapa.</string>
+    <string name="select_nav_icon_descr">El icono se muestra mientras se navega o se mueve.</string>
+    <string name="select_map_icon_descr">El icono se muestra en reposo.</string>
     <string name="logcat_buffer_descr">Comprueba y comparte los registros detallados de la aplicación</string>
     <string name="search_offline_geo_error">No se puede analizar la geointención «%s».</string>
     <string name="permission_is_required">Se necesita permiso para usar esta opción.</string>
     <string name="monitoring_min_speed_descr">Se trata de un filtro de corte de baja velocidad para no grabar puntos por debajo de una cierta velocidad. Esto puede hacer que las trazas grabadas se vean más suaves cuando se muestran en el mapa.</string>
+    <string name="monitoring_min_speed_descr_side_effect">Efecto secundario: En la traza faltarán todos los tramos en los que no se haya cumplido el criterio de velocidad mínima (por ejemplo, cuando se empuja la bicicleta por una colina empinada). Además, no habrá información sobre los períodos de descanso, como las pausas. Esto tiene efectos en cualquier análisis o post-proceso, como cuando se trata de determinar la duración total del viaje, el tiempo en movimiento, o la velocidad promedio.</string>
+    <string name="monitoring_min_speed_descr_recommendation">Recomendación: Prueba primero a utilizar la detección de movimiento mediante el filtro de desplazamiento mínimo de registro (B), puede producir mejores resultados y perderá menos datos. Si las trazas siguen siendo ruidosas a bajas velocidades, prueba aquí con valores distintos de cero. Tenga en cuenta que algunas mediciones pueden no informar ningún valor de velocidad (algunos métodos basados en la red), en cuyo caso no se registraría nada.</string>
+    <string name="monitoring_min_speed_descr_remark">Observación: comprobar velocidad &gt; 0: La mayoría de los chipsets de GPS informan un valor de velocidad sólo si el algoritmo determina que está en movimiento. Por lo tanto, el uso del ajuste &gt; 0 en este filtro, en cierto sentido utiliza la detección de movimiento del conjunto de chips del GPS. Pero incluso si no se filtra aquí en el momento de la grabación, seguimos utilizando esta función en nuestro análisis GPX para determinar la distancia corregida, es decir, el valor que se muestra en ese campo es la distancia grabada en movimiento.</string>
+    <string name="monitoring_min_accuracy_descr">Esto registrará solo los puntos medidos con una indicación de precisión mínima (en metros o pies, según lo informado por Android para su conjunto de chips). La precisión se refiere a la dispersión de mediciones repetidas, y no está directamente relacionada con la precisión, que define qué tan cerca están sus mediciones de su posición real.</string>
+    <string name="monitoring_min_accuracy_descr_side_effect">Efecto secundario: Como resultado del filtrado por precisión, pueden faltar puntos por ejemplo debajo de puentes, bajo árboles, entre edificios altos o con ciertas condiciones climáticas.</string>
+    <string name="monitoring_min_accuracy_descr_recommendation">Recomendación: Es difícil predecir lo que se grabará y lo que no, puede ser mejor apagar este filtro.</string>
+    <string name="monitoring_min_accuracy_descr_remark">Observación: Si el GPS se hubiera apagado inmediatamente antes de una grabación, el primer punto medido podría tener una precisión disminuida, por lo que en nuestro código puede que queramos esperar un segundo más o menos antes de grabar un punto (o grabar el mejor de 3 puntos consecutivos, etc.), pero esto todavía no se ha implementado.</string>
+    <string name="monitoring_min_distance_descr">Este filtro evita que se registren puntos duplicados en los que puede haber muy poco movimiento real, y da un aspecto espacial más agradable a las pistas que no se procesan posteriormente.</string>
+    <string name="monitoring_min_distance_descr_side_effect">Efectos secundarios: Los períodos de descanso no se registran en absoluto o sólo en un punto cada uno. Los pequeños movimientos (del mundo real) (por ejemplo, hacia los lados, para marcar un posible desvío en su viaje) pueden ser filtrados. Su archivo contiene menos información para el post-procesamiento, y tiene peores estadísticas al filtrar los puntos obviamente redundantes en el tiempo de grabación, mientras que potencialmente mantiene los artefactos causados por la mala recepción o los efectos del chipset del GPS.</string>
+    <string name="monitoring_min_distance_descr_recommendation">Recomendación: Un ajuste de 5 metros puede funcionar bien si no necesitas capturar detalles más finos que eso, y no deseas capturar explícitamente los datos mientras está en reposo.</string>
+    <string name="live_monitoring_time_buffer">Memoria intermedia</string>
+    <string name="live_monitoring_tracking_interval">Intervalo de seguimiento</string>
+    <string name="live_monitoring_adress">Dirección web</string>
+    <string name="live_monitoring_adress_descr">Indica la dirección web con sintaxis de parámetros : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}.</string>
+    <string name="monitoring_notification">Notificación</string>
+    <string name="monitoring_min_speed">Velocidad mínima</string>
+    <string name="monitoring_min_accuracy">Precisión mínima</string>
+    <string name="monitoring_min_distance">Desplazamiento mínimo</string>
+    <string name="tracks_view_path">Menú — Mis sitios — Trazas</string>
+    <string name="multimedia_notes_view_path">Menú — Mis sitios — Notas</string>
+    <string name="osm_edits_view_path">Menú — Mis sitios — Ediciones de OSM</string>
+    <string name="reset_plugin_to_default">Restablecer ajustes del complemento a valores predefinidos</string>
+    <string name="multimedia_rec_split_title">División de grabación</string>
+    <string name="multimedia_use_system_camera">Usar la aplicación del sistema</string>
+    <string name="multimedia_photo_play_sound">Reproducir sonido al fotografiar</string>
+    <string name="osm_authorization_success">Autorización exitosa</string>
 </resources>
