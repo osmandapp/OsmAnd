@@ -3437,7 +3437,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="multimedia_use_system_camera">Utiliser l\'application système</string>
     <string name="multimedia_photo_play_sound">Son de la prise de vue</string>
     <string name="osm_authorization_success">L\'autorisation a été accordée</string>
-    <string name="search_offline_geo_error">Impossible d\'analyser le geo intent \'% s\'.</string>
+    <string name="search_offline_geo_error">Impossible d\'analyser le geo intent \'%s\'.</string>
     <string name="monitoring_min_speed_descr">Filtre interrompant l\'enregistrement en dessous d\'une certaines vitesse. Rend les traces enregistrées plus régulières lorsqu\'elles sont affichées sur la carte.</string>
     <string name="live_monitoring_time_buffer">Durée de la mémoire tampon</string>
     <string name="live_monitoring_adress_descr">Indiquez l\'adresse web avec la syntaxe suivante pour les paramètres : lat = {0}, lon = {1}, horodatage = {2}, hdop = {3}, altitude = {4}, vitesse = {5}, direction = {6}.</string>
