@@ -1434,7 +1434,7 @@ Ces informations sont visibles sur le Tableau de bord comme sur la carte. Un rap
     <string name="rendering_attr_pisteGrooming_name">Damage des pistes</string>
     <string name="free">%1$s libre</string>
     <string name="device_memory">Mémoire de l\'appareil</string>
-    <string name="notes">Notes OSM</string>
+    <string name="notes">Notes audio / vidéo</string>
     <string name="online_map">Carte en ligne</string>
     <string name="roads_only">Routes uniquement</string>
     <string name="rendering_attr_pisteRoutes_name">Pistes de ski</string>
@@ -3441,4 +3441,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="monitoring_min_speed_descr">Filtre interrompant l\'enregistrement en dessous d\'une certaines vitesse. Rend les traces enregistrées plus régulières lorsqu\'elles sont affichées sur la carte.</string>
     <string name="live_monitoring_time_buffer">Durée de la mémoire tampon</string>
     <string name="live_monitoring_adress_descr">Indiquez l\'adresse web avec la syntaxe suivante pour les paramètres : lat = {0}, lon = {1}, horodatage = {2}, hdop = {3}, altitude = {4}, vitesse = {5}, direction = {6}.</string>
+    <string name="monitoring_min_accuracy_descr_recommendation">Recommandation : il est difficile de prédire ce qui sera enregistré et ce qui ne le sera pas, il peut être préférable de désactiver ce filtre.</string>
+    <string name="monitoring_min_distance_descr">Ce filtre limite l\'enregistrement de points en double lorsque les déplacements sont très lents donnant une apparence plus régulière aux traces.</string>
+    <string name="monitoring_min_distance_descr_recommendation">Recommandation : un paramètre de 5 mètres est adapté si vous n\'avez pas besoin de détails et ne souhaitez pas enregistrer des points au repos.</string>
 </resources>
