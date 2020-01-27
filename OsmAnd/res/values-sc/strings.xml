@@ -3448,4 +3448,22 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="select_nav_icon_descr">As a bìdere s\'icona petzi durante sa navigatzione o su movimentu.</string>
     <string name="select_map_icon_descr">S\'icona de sa mapa aparit in sa mapa ebbia, e divenit s\'icona de navigatzione durante sa navigatzione.</string>
     <string name="logcat_buffer_descr">Inoghe podes pompiare e cumpartzire sos registros de s\'aplicatzione</string>
+    <string name="search_offline_geo_error">Anàlisi de su geo intent \'%s\' fallida.</string>
+    <string name="permission_is_required">Pro impreare custa optzione b\'at bisòngiu de unu permissu.</string>
+    <string name="monitoring_min_speed_descr">Custu est unu filtru pro non registrare puntos in suta de una lestresa isseberada. Faghet in modu chi sas rastas registradas pàrgiant prus regulares cando benint pompiadas in sa mapa.</string>
+    <string name="monitoring_min_speed_descr_side_effect">Efetu segundàriu: in sa rasta tua ant a mancare totu sas setziones in ue no as rispetadu su critèriu de sa lestresa mìnima (es. cando ispinghes sa bitzicleta tua cara a artu in unu montigru). Annotamala, non b\'ant a èssere informatziones a pitzu de sos perìodos de pasu, che a sas pàusas. Custu at a influentzare totu sas anàlisis o sos post-protzessamentos, a es. cando ses chirchende de determinare sa longària totale de su biàgiu tuo, su tempus in movimentu, o sa lestresa mèdia tua.</string>
+    <string name="live_monitoring_tracking_interval">Intervallu de arrastamentu</string>
+    <string name="live_monitoring_adress">Indiritzu web</string>
+    <string name="live_monitoring_adress_descr">Dislinda s\'indiritzu web cun sa sintassi de paràmetros: lat={0}, lon={1}, marcadesutempus={2}, hdop={3}, artària={4}, lestresa={5}, diretzione={6}.</string>
+    <string name="monitoring_notification">Notìfica</string>
+    <string name="monitoring_min_speed">Lestresa mìnima</string>
+    <string name="monitoring_min_accuracy">Acuradesa mìnima</string>
+    <string name="monitoring_min_distance">Movimentu mìnimu</string>
+    <string name="tracks_view_path">Menù — Logos meos — Rastas</string>
+    <string name="multimedia_notes_view_path">Menù — Logos meos — Notas</string>
+    <string name="osm_edits_view_path">Menù — Logos meos — Modìficas de OSM</string>
+    <string name="reset_plugin_to_default">Riprìstina sas impostatziones predefinidas de s\'estensione</string>
+    <string name="multimedia_use_system_camera">Imprea s\'aplicatzione de sistema</string>
+    <string name="multimedia_photo_play_sound">Sonu de s\'oturadore de sa fotocàmera</string>
+    <string name="osm_authorization_success">S\'autorizatzione est resèssida</string>
 </resources>

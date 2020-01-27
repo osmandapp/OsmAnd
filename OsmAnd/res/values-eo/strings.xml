@@ -3401,8 +3401,8 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="reset_all_profile_settings">Ĉu rekomencigi ĉiujn agordojn pri profiloj\?</string>
     <string name="ltr_or_rtl_combine_via_colon">%1$s: %2$s</string>
     <string name="ltr_or_rtl_combine_via_space">%1$s %2$s</string>
-    <string name="file_does_not_contain_routing_rules">La dosiero “%1$s” ne enhavas regulojn pri kurs‑difinado, bonvolu elekti alian dosieron.</string>
-    <string name="not_support_file_type_with_ext">Nesubtenata tipo de dosiero. Elektu dosieron kun la finaĵo %1$s.</string>
+    <string name="file_does_not_contain_routing_rules">Neniuj reguloj pri kurs‑difinado en “%1$s”. Bonvolu elekti alian dosieron.</string>
+    <string name="not_support_file_type_with_ext">Bonvolu elekti dosieron kun la subtenata finaĵo %1$s.</string>
     <string name="import_from_file">Enporti el dosiero</string>
     <string name="import_routing_file">Enporti dosieron de kurs‑difinado</string>
     <string name="import_profile">Enporti profilon</string>
@@ -3427,5 +3427,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="app_mode_osm">OSM</string>
     <string name="select_nav_icon_descr">La emblemo montriĝos nur dum navigi aŭ dum moviĝi.</string>
     <string name="select_map_icon_descr">Map‑emblemo montriĝas nur dum foliumi mapon kaj ŝanĝiĝas dum navigi al la emblemo de navigo.</string>
-    <string name="logcat_buffer_descr">Tie ĉi vi povas legi kaj kunhavigi protokolojn de la aplikaĵo</string>
+    <string name="logcat_buffer_descr">Legi kaj kunhavigi detalajn protokolojn de la aplikaĵo</string>
+    <string name="permission_is_required">Permeso estas necesa por uzi tiun ĉi eblaĵon.</string>
+    <string name="monitoring_min_speed_descr">Tiu ĉi filtrilo preventas registri punktojn sub difinita rapidlimo. Tiel registritaj spuroj aspektos pli glate dum vidiĝi sur la mapo.</string>
 </resources>

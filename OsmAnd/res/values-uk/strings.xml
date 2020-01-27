@@ -1380,7 +1380,7 @@
     <string name="shared_string_dismiss">Відхилити</string>
     <string name="shared_string_audio">Аудіо</string>
     <string name="share_note">Поділитись нотаткою</string>
-    <string name="notes">OSM примітки</string>
+    <string name="notes">A/V примітки</string>
     <string name="online_map">Мережева мапа</string>
     <string name="roads_only">Тільки дороги</string>
     <string name="free">Вільно %1$s</string>
