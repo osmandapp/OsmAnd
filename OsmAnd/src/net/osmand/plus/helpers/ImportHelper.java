@@ -15,6 +15,7 @@ import android.provider.OpenableColumns;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.style.ForegroundColorSpan;
@@ -33,6 +34,7 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.GPXDatabase;
 import net.osmand.plus.OsmandApplication;
@@ -49,6 +51,9 @@ import net.osmand.plus.base.bottomsheetmenu.SimpleBottomSheetItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.DividerHalfItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.ShortDescriptionItem;
 import net.osmand.plus.base.bottomsheetmenu.simpleitems.TitleItem;
+import net.osmand.plus.profiles.AdditionalDataWrapper;
+import net.osmand.plus.profiles.ExportImportProfileBottomSheet;
+import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.router.RoutingConfiguration;
@@ -769,24 +774,43 @@ public class ImportHelper {
 			@Override
 			protected void onPostExecute(String error) {
 				File tempDir = app.getAppPath(IndexConstants.TEMP_DIR);
-				File file = new File(tempDir, name);
+				final File file = new File(tempDir, name);
 				if (error == null && file.exists()) {
-					app.getSettingsHelper().importSettings(file, latestChanges, version, new SettingsImportListener() {
+					app.getSettingsHelper().prepareSettings(file, new SettingsHelper.SettingsImportPrepareListener() {
 						@Override
-						public void onSettingsImportFinished(boolean succeed, boolean empty, @NonNull List<SettingsHelper.SettingsItem> items) {
-							if (isActivityNotDestroyed(activity)) {
-								progress.dismiss();
-							}
-							if (succeed) {
-								app.showShortToastMessage(app.getString(R.string.file_imported_successfully, name));
-								if (callback != null) {
-									callback.processResult(items);
+						public void onSettingsPrepared(boolean succeed, boolean empty, @NonNull List<SettingsHelper.SettingsItem> items) {
+							progress.dismiss();
+							if (succeed && !empty) {
+								FragmentManager fragmentManager = activity.getSupportFragmentManager();
+								if (fragmentManager != null) {
+									ExportImportProfileBottomSheet.showInstance(
+											fragmentManager,
+											ExportImportProfileBottomSheet.State.IMPORT,
+											file,
+											items);
 								}
-							} else if (!empty) {
-								app.showShortToastMessage(app.getString(R.string.file_import_error, name, app.getString(R.string.shared_string_unexpected_error)));
+							} else {
+								app.showShortToastMessage(app.getString(R.string.file_import_error, name, ""));
 							}
 						}
 					});
+
+//					app.getSettingsHelper().importSettings(file, latestChanges, version, new SettingsImportListener() {
+//						@Override
+//						public void onSettingsImportFinished(boolean succeed, boolean empty, @NonNull List<SettingsHelper.SettingsItem> items) {
+//							if (isActivityNotDestroyed(activity)) {
+//								progress.dismiss();
+//							}
+//							if (succeed) {
+//								app.showShortToastMessage(app.getString(R.string.file_imported_successfully, name));
+//								if (callback != null) {
+//									callback.processResult(items);
+//								}
+//							} else if (!empty) {
+//								app.showShortToastMessage(app.getString(R.string.file_import_error, name, app.getString(R.string.shared_string_unexpected_error)));
+//							}
+//						}
+//					});
 				} else {
 					if (isActivityNotDestroyed(activity)) {
 						progress.dismiss();

@@ -41,7 +41,7 @@ public class QuickAction {
         this.type = type;
     }
 
-    protected QuickAction(int type) {
+    public QuickAction(int type) {
         this.id = System.currentTimeMillis();
         this.type = type;
         this.nameRes = QuickActionFactory.getActionName(type);

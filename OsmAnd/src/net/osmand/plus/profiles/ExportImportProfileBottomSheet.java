@@ -70,10 +70,11 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
     private ApplicationMode profile;
 
     private boolean includeAdditionalData = false;
+    private boolean containsAdditionalData = false;
 
     private State state;
 
-    private List<AdditionalDataWrapper> dataList;
+    private List<AdditionalDataWrapper> dataList = new ArrayList<>();
 
     private ExpandableListView listView;
 
@@ -82,6 +83,8 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
     private List<? super Object> dataToOperate = new ArrayList<>();
 
     private List<SettingsHelper.SettingsItem> settingsItems;
+
+    private File file;
 
 
     @Override
@@ -94,13 +97,16 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
         if (bundle != null) {
             this.state = (State) getArguments().getSerializable(STATE_KEY);
         }
-
-        dataList = state == State.IMPORT ? getDataFromSettingsItems() : getAdditionalData();
-        for (AdditionalDataWrapper dataWrapper : dataList) {
-            dataToOperate.addAll(dataWrapper.getItems());
+        if (state == State.IMPORT) {
+            containsAdditionalData = checkAdditionalDataContains();
+        } else {
+            dataList = getAdditionalData();
+            for (AdditionalDataWrapper dataWrapper : dataList) {
+                dataToOperate.addAll(dataWrapper.getItems());
+            }
         }
+//        dataList = state == State.IMPORT ? getDataFromSettingsItems() : getAdditionalData();
     }
-
 
     private ApplicationMode getAppModeFromItems() {
         for (SettingsHelper.SettingsItem item : settingsItems) {
@@ -142,50 +148,79 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
                 .create();
         items.add(profileItem);
 
-        BaseBottomSheetItem descriptionItem = new BottomSheetItemWithDescription.Builder()
-                .setDescription(state == State.EXPORT ?
-                        getString(R.string.export_profile_dialog_description)
-                        : getString(R.string.import_profile_dialog_description))
-                .setLayoutId(R.layout.bottom_sheet_item_pref_info)
-                .create();
-        items.add(descriptionItem);
+        if (state == State.IMPORT && containsAdditionalData || state == State.EXPORT && !dataList.isEmpty()) {
+            BaseBottomSheetItem descriptionItem = new BottomSheetItemWithDescription.Builder()
+                    .setDescription(state == State.EXPORT ?
+                            getString(R.string.export_profile_dialog_description)
+                            : getString(R.string.import_profile_dialog_description))
+                    .setLayoutId(R.layout.bottom_sheet_item_pref_info)
+                    .create();
+            items.add(descriptionItem);
 
-        final View additionalDataView = View.inflate(new ContextThemeWrapper(context, themeRes),
-                R.layout.bottom_sheet_item_additional_data, null);
-        listView = additionalDataView.findViewById(R.id.list);
-        Switch switchItem = additionalDataView.findViewById(R.id.switchItem);
-        switchItem.setTextColor(getResources().getColor(nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light));
+            final View additionalDataView = View.inflate(new ContextThemeWrapper(context, themeRes),
+                    R.layout.bottom_sheet_item_additional_data, null);
+            listView = additionalDataView.findViewById(R.id.list);
+            Switch switchItem = additionalDataView.findViewById(R.id.switchItem);
+            switchItem.setTextColor(getResources().getColor(nightMode ? R.color.active_color_primary_dark : R.color.active_color_primary_light));
 
-        switchItem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                includeAdditionalData = !includeAdditionalData;
-                listView.setVisibility(includeAdditionalData ?
-                        View.VISIBLE : View.GONE);
-            }
-        });
-        adapter = new ProfileAdditionalDataAdapter(requiredMyApplication(), dataList, profileColor);
-        listView.setAdapter(adapter);
-        final SimpleBottomSheetItem titleItem = (SimpleBottomSheetItem) new SimpleBottomSheetItem.Builder()
-                .setCustomView(additionalDataView)
-                .create();
-        items.add(titleItem);
+            switchItem.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    includeAdditionalData = !includeAdditionalData;
+                    listView.setVisibility(includeAdditionalData ?
+                            View.VISIBLE : View.GONE);
+                    if (includeAdditionalData && state == State.IMPORT) {
+                        updateDataFromSettingsItems();
+                    }
+                }
+            });
+            adapter = new ProfileAdditionalDataAdapter(requiredMyApplication(), dataList, profileColor);
+            listView.setAdapter(adapter);
+            final SimpleBottomSheetItem titleItem = (SimpleBottomSheetItem) new SimpleBottomSheetItem.Builder()
+                    .setCustomView(additionalDataView)
+                    .create();
+            items.add(titleItem);
+        }
     }
 
-    private List<AdditionalDataWrapper> getDataFromSettingsItems() {
-        List<AdditionalDataWrapper> dataList = new ArrayList<>();
-
-        List<QuickAction> quickActions = new ArrayList<>();
-        for (SettingsHelper.SettingsItem item : settingsItems) {
-            if (item.getType().equals(SettingsHelper.SettingsItemType.QUICK_ACTION)) {
-                quickActions.addAll(((SettingsHelper.QuickActionSettingsItem) item).getQuickActions());
+    private void updateDataFromSettingsItems() {
+        app.getSettingsHelper().importSettings(settingsItems, file, new SettingsHelper.SettingsImportListener() {
+            @Override
+            public void onSettingsImportFinished(boolean succeed, boolean empty, @NonNull List<SettingsHelper.SettingsItem> items) {
+                List<AdditionalDataWrapper> dataList = new ArrayList<>();
+                List<QuickAction> quickActions = new ArrayList<>();
+                List<PoiUIFilter> poiUIFilters = new ArrayList<>();
+                for (SettingsHelper.SettingsItem item : items) {
+                    if (item.getType().equals(SettingsHelper.SettingsItemType.QUICK_ACTION_LIST)) {
+                        quickActions.addAll(((SettingsHelper.QuickActionSettingsItem) item).getQuickActions());
+                    } else if (item.getType().equals(SettingsHelper.SettingsItemType.POI_UI_FILTERS_LIST)) {
+//                poiUIFilters.addAll()
+                    }
+                }
+                if (!quickActions.isEmpty()) {
+                    dataList.add(new AdditionalDataWrapper(
+                            AdditionalDataWrapper.Type.QUICK_ACTIONS,
+                            quickActions));
+                }
+                if (!poiUIFilters.isEmpty()) {
+                    dataList.add(new AdditionalDataWrapper(
+                            AdditionalDataWrapper.Type.POI_TYPES,
+                            poiUIFilters));
+                }
+                adapter.updateList(dataList);
             }
-        }
-        dataList.add(new AdditionalDataWrapper(
-                AdditionalDataWrapper.Type.QUICK_ACTIONS,
-                quickActions));
+        });
 
-        return dataList;
+
+    }
+
+    private Boolean checkAdditionalDataContains() {
+        boolean containsData = false;
+        for (SettingsHelper.SettingsItem item : settingsItems) {
+            containsData = item.getType().equals(SettingsHelper.SettingsItemType.QUICK_ACTION_LIST)
+                    || item.getType().equals(SettingsHelper.SettingsItemType.POI_UI_FILTERS_LIST);
+        }
+        return containsData;
     }
 
     private List<AdditionalDataWrapper> getAdditionalData() {
@@ -202,15 +237,15 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
                 poiList
         ));
 
-        final LinkedHashMap<String, String> entriesMap = new LinkedHashMap<>(settings.getTileSourceEntries());
-        List<MapSourceWrapper> mapSourceWrapperList = new ArrayList<>();
-        for (Map.Entry<String, String> entry : entriesMap.entrySet()) {
-            mapSourceWrapperList.add(new MapSourceWrapper(entry.getKey(), entry.getValue()));
-        }
-        dataList.add(new AdditionalDataWrapper(
-                AdditionalDataWrapper.Type.MAP_SOURCES,
-                mapSourceWrapperList
-        ));
+//        final LinkedHashMap<String, String> entriesMap = new LinkedHashMap<>(settings.getTileSourceEntries());
+//        List<MapSourceWrapper> mapSourceWrapperList = new ArrayList<>();
+//        for (Map.Entry<String, String> entry : entriesMap.entrySet()) {
+//            mapSourceWrapperList.add(new MapSourceWrapper(entry.getKey(), entry.getValue()));
+//        }
+//        dataList.add(new AdditionalDataWrapper(
+//                AdditionalDataWrapper.Type.MAP_SOURCES,
+//                mapSourceWrapperList
+//        ));
 
         return dataList;
     }
@@ -227,16 +262,22 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
     @Override
     protected void onRightBottomButtonClick() {
         super.onRightBottomButtonClick();
-        prepareFile();
-//        if (state == State.EXPORT) {
-//            if (includeAdditionalData) {
-//                prepareFileWithAdditional();
-//            } else {
-//                prepareFile();
-//            }
-//        } else {
-//
-//        }
+        if (state == State.EXPORT) {
+            prepareFile();
+        } else {
+            importSettings();
+        }
+    }
+
+    private void importSettings() {
+        app.getSettingsHelper().importSettings(settingsItems, file, new SettingsHelper.SettingsImportListener() {
+
+            @Override
+            public void onSettingsImportFinished(boolean succeed, boolean empty, @NonNull List<SettingsHelper.SettingsItem> items) {
+
+            }
+        });
+        dismiss();
     }
 
     @Override
@@ -267,11 +308,11 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
                 }
             }
             if (!quickActions.isEmpty()) {
-                settingsItems.add(new SettingsHelper.QuickActionSettingsItem(app.getSettings(), quickActions));
+                settingsItems.add(new SettingsHelper.QuickActionSettingsItem(app, quickActions));
             }
-//            if (!poiUIFilters.isEmpty()) {
-//                settingsItems.add();
-//            }
+            if (!poiUIFilters.isEmpty()) {
+                settingsItems.add(new SettingsHelper.PoiUiFilterSettingsItem(app.getSettings(), poiUIFilters));
+            }
 //            if (!mapSourceWrappers.isEmpty()) {
 //                settingsItems.add();
 //            }
@@ -336,6 +377,7 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
 
     public static boolean showInstance(@NonNull FragmentManager fragmentManager,
                                        State state,
+                                       File file,
                                        List<SettingsHelper.SettingsItem> items) {
         try {
             Bundle bundle = new Bundle();
@@ -343,11 +385,20 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
             ExportImportProfileBottomSheet fragment = new ExportImportProfileBottomSheet();
             fragment.setArguments(bundle);
             fragment.setSettingsItems(items);
+            fragment.setFile(file);
             fragment.show(fragmentManager, TAG);
             return true;
         } catch (RuntimeException e) {
             return false;
         }
+    }
+
+    public File getFile() {
+        return file;
+    }
+
+    public void setFile(File file) {
+        this.file = file;
     }
 
     public enum State {
@@ -379,6 +430,11 @@ public class ExportImportProfileBottomSheet extends BasePreferenceBottomSheet {
             this.app = app;
             this.list = list;
             this.profileColor = profileColor;
+        }
+
+        public void updateList(List<AdditionalDataWrapper> list) {
+            this.list = list;
+            notifyDataSetChanged();
         }
 
         @Override
