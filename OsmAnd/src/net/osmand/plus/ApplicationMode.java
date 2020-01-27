@@ -621,7 +621,7 @@ public class ApplicationMode {
 		return order;
 	}
 
-	public void setOrder(OsmandApplication app, int order) {
+	public void setOrder(int order) {
 		this.order = order;
 	}
 
@@ -637,15 +637,17 @@ public class ApplicationMode {
 	private static void initModesParams(OsmandApplication app) {
 		OsmandSettings settings = app.getSettings();
 		for (ApplicationMode mode : allPossibleValues()) {
+			mode.routingProfile = settings.ROUTING_PROFILE.getModeValue(mode);
+			mode.routeService = settings.ROUTE_SERVICE.getModeValue(mode);
 			mode.defaultSpeed = settings.DEFAULT_SPEED.getModeValue(mode);
-			updateAppModeIcon(app, settings.ICON_RES_NAME.getModeValue(mode), mode);
-			mode.iconColor = settings.ICON_COLOR.getModeValue(mode);
 			mode.minDistanceForTurn = settings.MIN_DISTANCE_FOR_TURN.getModeValue(mode);
 			mode.arrivalDistance = settings.ARRIVAL_DISTANCE.getModeValue(mode);
 			mode.offRouteDistance = settings.OFF_ROUTE_DISTANCE.getModeValue(mode);
+			mode.userProfileName = settings.USER_PROFILE_NAME.getModeValue(mode);
 			mode.navigationIcon = settings.NAVIGATION_ICON.getModeValue(mode);
 			mode.locationIcon = settings.LOCATION_ICON.getModeValue(mode);
-//			mode.order = settings.APP_MODE_ORDER.getModeValue(mode);
+			mode.iconColor = settings.ICON_COLOR.getModeValue(mode);
+			updateAppModeIcon(app, settings.ICON_RES_NAME.getModeValue(mode), mode);
 		}
 	}
 
@@ -664,7 +666,7 @@ public class ApplicationMode {
 
 	private static void updateAppModesOrder(OsmandApplication app) {
 		for (int i = 0; i < values.size(); i++) {
-			values.get(i).setOrder(app, i);
+			values.get(i).setOrder(i);
 		}
 	}
 
@@ -717,7 +719,6 @@ public class ApplicationMode {
 						settings.USER_PROFILE_NAME.setModeValue(mode, modeBean.userProfileName);
 						settings.ROUTING_PROFILE.setModeValue(mode, modeBean.routingProfile);
 						settings.ROUTE_SERVICE.setModeValue(mode, modeBean.routeService);
-//						settings.APP_MODE_ORDER.setModeValue(mode, modeBean.order);
 						if (modeBean.locIcon != null) {
 							settings.LOCATION_ICON.setModeValue(mode, modeBean.locIcon);
 						}
@@ -738,50 +739,46 @@ public class ApplicationMode {
 			Type t = new TypeToken<ArrayList<ApplicationModeBean>>() {
 			}.getType();
 			List<ApplicationModeBean> customProfiles = gson.fromJson(app.getSettings().CUSTOM_APP_PROFILES.get(), t);
-			List<String> customModesKeys = new ArrayList<>();
 			if (!Algorithms.isEmpty(customProfiles)) {
 				for (ApplicationModeBean m : customProfiles) {
-					customModesKeys.add(m.stringKey);
 					ApplicationMode parentMode = valueOfStringKey(m.parent, CAR);
-					createCustomMode(parentMode, m.userProfileName, m.stringKey)
+					ApplicationModeBuilder builder = createCustomMode(parentMode, m.userProfileName, m.stringKey)
 							.setRouteService(m.routeService)
 							.setRoutingProfile(m.routingProfile)
 							.icon(app, m.iconName)
 							.setColor(m.iconColor)
 							.locationIcon(m.locIcon)
 							.navigationIcon(m.navIcon)
-							.setOrder(m.order)
-							.customReg();
+							.setOrder(m.order);
+					saveProfile(builder, app);
 				}
 			}
-			settings.CUSTOM_APP_MODES_KEYS.set(gson.toJson(customModesKeys));
 			settings.CUSTOM_APP_PROFILES.resetToDefault();
 		}
-	}
-
-	private static void saveAppModesToSettings(OsmandSettings settings) {
-		List<ApplicationModeBean> modeBeans = createApplicationModeBeans(getCustomValues());
-		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-		settings.CUSTOM_APP_PROFILES.set(gson.toJson(modeBeans));
-	}
-
-	private static List<ApplicationModeBean> createApplicationModeBeans(List<ApplicationMode> applicationModes) {
-		List<ApplicationModeBean> modeBeans = new ArrayList<>();
-		for (ApplicationMode mode : applicationModes) {
-			ApplicationModeBean mb = new ApplicationModeBean();
-			mb.userProfileName = mode.userProfileName;
-			mb.iconColor = mode.iconColor;
-			mb.iconName = mode.iconResName;
-			mb.parent = mode.parentAppMode != null ? mode.parentAppMode.getStringKey() : null;
-			mb.stringKey = mode.stringKey;
-			mb.routeService = mode.routeService;
-			mb.routingProfile = mode.routingProfile;
-			mb.order = mode.order;
-			mb.locIcon = mode.locationIcon;
-			mb.navIcon = mode.navigationIcon;
-			modeBeans.add(mb);
+		if (settings.CUSTOM_APP_MODES_KEYS.isSet()) {
+			Set<String> customModesKeys = settings.getCustomAppModesKeys();
+			for (String appModeKey : customModesKeys) {
+				Object profilePreferences = settings.getProfilePreferences(appModeKey);
+				String parent = settings.PARENT_APP_MODE.getValue(profilePreferences, null);
+				String userProfileName = settings.USER_PROFILE_NAME.getValue(profilePreferences, "");
+				createCustomMode(valueOfStringKey(parent, CAR), userProfileName, appModeKey).customReg();
+			}
 		}
-		return modeBeans;
+	}
+
+	private static boolean saveCustomAppModesToSettings(OsmandSettings settings) {
+		StringBuilder stringBuilder = new StringBuilder();
+		Iterator<ApplicationMode> it = ApplicationMode.getCustomValues().iterator();
+		while (it.hasNext()) {
+			stringBuilder.append(it.next().getStringKey());
+			if (it.hasNext()) {
+				stringBuilder.append(",");
+			}
+		}
+		if (!stringBuilder.toString().equals(settings.CUSTOM_APP_MODES_KEYS.get())) {
+			return settings.CUSTOM_APP_MODES_KEYS.set(stringBuilder.toString());
+		}
+		return false;
 	}
 
 	public static ApplicationMode saveProfile(ApplicationModeBuilder builder, OsmandApplication app) {
@@ -799,9 +796,9 @@ public class ApplicationMode {
 		mode.setIconColor(app, builder.applicationMode.iconColor);
 		mode.setLocationIcon(app, builder.applicationMode.locationIcon);
 		mode.setNavigationIcon(app, builder.applicationMode.navigationIcon);
-		mode.setOrder(app, builder.applicationMode.order);
+		mode.setOrder(builder.applicationMode.order);
 
-		saveAppModesToSettings(app.getSettings());
+		saveCustomAppModesToSettings(app.getSettings());
 		return mode;
 	}
 
@@ -818,7 +815,7 @@ public class ApplicationMode {
 			settings.APPLICATION_MODE.resetToDefault();
 		}
 		cachedFilteredValues.removeAll(modes);
-		saveAppModesToSettings(app.getSettings());
+		saveCustomAppModesToSettings(app.getSettings());
 	}
 
 	public static boolean changeProfileAvailability(ApplicationMode mode, boolean isSelected, OsmandApplication app) {

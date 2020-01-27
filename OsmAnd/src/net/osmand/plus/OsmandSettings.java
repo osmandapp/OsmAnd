@@ -30,9 +30,6 @@ import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
 import net.osmand.map.TileSourceManager.TileSourceTemplate;
 import net.osmand.osm.io.NetworkUtils;
-import net.osmand.plus.profiles.LocationIcon;
-import net.osmand.plus.profiles.NavigationIcon;
-import net.osmand.plus.profiles.ProfileIconColors;
 import net.osmand.plus.access.AccessibilityMode;
 import net.osmand.plus.access.RelativeDirectionStyle;
 import net.osmand.plus.api.SettingsAPI;
@@ -42,6 +39,9 @@ import net.osmand.plus.dialogs.RateUsBottomSheetDialogFragment;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.mapillary.MapillaryPlugin;
 import net.osmand.plus.mapmarkers.CoordinateInputFormats.Format;
+import net.osmand.plus.profiles.LocationIcon;
+import net.osmand.plus.profiles.NavigationIcon;
+import net.osmand.plus.profiles.ProfileIconColors;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.plus.voice.CommandPlayer;
@@ -218,11 +218,16 @@ public class OsmandSettings {
 	}
 
 	public static String getSharedPreferencesName(ApplicationMode mode) {
+		String modeKey = mode != null ? mode.getStringKey() : null;
+		return getSharedPreferencesNameForKey(modeKey);
+	}
+
+	public static String getSharedPreferencesNameForKey(String modeKey) {
 		String sharedPreferencesName = !Algorithms.isEmpty(CUSTOM_SHARED_PREFERENCES_NAME) ? CUSTOM_SHARED_PREFERENCES_NAME : SHARED_PREFERENCES_NAME;
-		if (mode == null) {
+		if (modeKey == null) {
 			return sharedPreferencesName;
 		} else {
-			return sharedPreferencesName + "." + mode.getStringKey().toLowerCase();
+			return sharedPreferencesName + "." + modeKey.toLowerCase();
 		}
 	}
 
@@ -299,6 +304,10 @@ public class OsmandSettings {
 
 	public Object getProfilePreferences(ApplicationMode mode) {
 		return settingsAPI.getPreferenceObject(getSharedPreferencesName(mode));
+	}
+
+	public Object getProfilePreferences(String modeKey) {
+		return settingsAPI.getPreferenceObject(getSharedPreferencesNameForKey(modeKey));
 	}
 
 	public OsmandPreference getPreference(String key) {
@@ -1559,8 +1568,6 @@ public class OsmandSettings {
 		LOCATION_ICON.setModeDefaultValue(ApplicationMode.AIRCRAFT, LocationIcon.CAR);
 		LOCATION_ICON.setModeDefaultValue(ApplicationMode.SKI, LocationIcon.BICYCLE);
 	}
-
-//	public final CommonPreference<Integer> APP_MODE_ORDER = new IntPreference("app_mode_order", 0).makeProfile().cache();
 
 	public final OsmandPreference<Float> SWITCH_MAP_DIRECTION_TO_COMPASS =
 			new FloatPreference("speed_for_map_to_direction_of_movement", 0f).makeProfile();
@@ -3391,6 +3398,16 @@ public class OsmandSettings {
 
 	public final CommonPreference<String> CUSTOM_APP_MODES_KEYS =
 		new StringPreference("custom_app_modes_keys", "").makeGlobal().cache();
+
+	public Set<String> getCustomAppModesKeys() {
+		String appModesKeys = CUSTOM_APP_MODES_KEYS.get();
+		StringTokenizer toks = new StringTokenizer(appModesKeys, ",");
+		Set<String> res = new LinkedHashSet<String>();
+		while (toks.hasMoreTokens()) {
+			res.add(toks.nextToken());
+		}
+		return res;
+	}
 
 	public enum DayNightMode {
 		AUTO(R.string.daynight_mode_auto, R.drawable.ic_action_map_sunset),

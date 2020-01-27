@@ -166,7 +166,7 @@ public class EditProfilesFragment extends BaseOsmAndFragment {
 						if (order == null) {
 							order = mode.getOrder();
 						}
-						mode.setOrder(app, order);
+						mode.setOrder(order);
 					}
 					ApplicationMode.reorderAppModes(app);
 					mapActivity.onBackPressed();
