@@ -165,10 +165,13 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 	@Override
 	public void resetAppModePrefs(ApplicationMode appMode) {
 		if (appMode != null) {
-			app.getSettings().resetPreferencesForProfile(appMode);
-			ApplicationMode.initModeParams(app, appMode);
-			updateToolbar();
-			updateAllSettings();
+			boolean prefsRestored = app.getSettings().resetPreferencesForProfile(appMode);
+			if (prefsRestored) {
+				app.showToastMessage(R.string.profile_prefs_reset_successful);
+				ApplicationMode.initModeParams(app, appMode);
+				updateToolbar();
+				updateAllSettings();
+			}
 		}
 	}
 

@@ -484,6 +484,7 @@ public class MultimediaNotesFragment extends BaseSettingsFragment implements Cop
 		AudioVideoNotesPlugin plugin = OsmandPlugin.getPlugin(AudioVideoNotesPlugin.class);
 		if (plugin != null) {
 			app.getSettings().resetProfilePreferences(appMode, plugin.getPreferences());
+			app.showToastMessage(R.string.plugin_prefs_reset_successful);
 			updateAllSettings();
 		}
 	}

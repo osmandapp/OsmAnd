@@ -189,6 +189,7 @@ public class AccessibilitySettingsFragment extends BaseSettingsFragment implemen
 		OsmandMonitoringPlugin plugin = OsmandPlugin.getPlugin(OsmandMonitoringPlugin.class);
 		if (plugin != null) {
 			app.getSettings().resetProfilePreferences(appMode, plugin.getPreferences());
+			app.showToastMessage(R.string.plugin_prefs_reset_successful);
 			updateAllSettings();
 		}
 	}
