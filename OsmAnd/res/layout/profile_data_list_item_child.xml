@@ -22,8 +22,7 @@
         <net.osmand.plus.widgets.TextViewEx
             android:id="@+id/title_tv"
             android:layout_width="0dp"
-            android:textColor="?android:textColorPrimary"
-            android:textSize="@dimen/default_list_text_size"
+            android:textAppearance="@style/TextAppearance.ListItemCategoryTitle"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             tools:text="Quick actions" />
@@ -42,7 +41,7 @@
         android:id="@+id/divider"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="?attr/divider_color"
+        android:background="?attr/divider_color_basic"
         android:visibility="gone"
         tools:visibility="visible" />
 
