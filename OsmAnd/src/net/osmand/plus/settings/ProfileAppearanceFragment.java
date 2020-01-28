@@ -94,7 +94,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 	private FlowLayout navIconItems;
 	private OsmandTextFieldBoxes profileNameOtfb;
 	private View saveButton;
-	
+
 	private boolean isBaseProfileImported;
 
 	@Override
@@ -653,17 +653,7 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 			}
 			return false;
 		}
-		ApplicationMode mode = ApplicationMode.valueOfStringKey(changedProfile.stringKey, null);
-		if (mode != null && !isNew) {
-			mode.setParentAppMode(app, changedProfile.parent);
-			mode.setUserProfileName(app, changedProfile.name.trim());
-			mode.setIconResName(app, ProfileIcons.getResStringByResId(changedProfile.iconRes));
-			mode.setRouteService(app, changedProfile.routeService);
-			mode.setRoutingProfile(app, changedProfile.routingProfile);
-			mode.setIconColor(app, changedProfile.color);
-			mode.setLocationIcon(app, changedProfile.locationIcon);
-			mode.setNavigationIcon(app, changedProfile.navigationIcon);
-		} else {
+		if (isNew) {
 			ApplicationMode.ApplicationModeBuilder builder = ApplicationMode
 					.createCustomMode(changedProfile.parent, changedProfile.name.trim(), changedProfile.stringKey)
 					.icon(app, ProfileIcons.getResStringByResId(changedProfile.iconRes))
@@ -673,15 +663,23 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 					.locationIcon(changedProfile.locationIcon)
 					.navigationIcon(changedProfile.navigationIcon);
 
-			mode = ApplicationMode.saveProfile(builder, app);
-		}
-
-		if (isNew) {
+			app.getSettings().copyPreferencesFromProfile(changedProfile.parent, builder.getApplicationMode());
+			ApplicationMode mode = ApplicationMode.saveProfile(builder, app);
 			if (!ApplicationMode.values(app).contains(mode)) {
 				ApplicationMode.changeProfileAvailability(mode, true, app);
 			}
-			app.getSettings().copyPreferencesFromProfile(changedProfile.parent, mode);
+		} else {
+			ApplicationMode mode = ApplicationMode.valueOfStringKey(changedProfile.stringKey, null);
+			mode.setParentAppMode(app, changedProfile.parent);
+			mode.setUserProfileName(app, changedProfile.name.trim());
+			mode.setIconResName(app, ProfileIcons.getResStringByResId(changedProfile.iconRes));
+			mode.setRouteService(app, changedProfile.routeService);
+			mode.setRoutingProfile(app, changedProfile.routingProfile);
+			mode.setIconColor(app, changedProfile.color);
+			mode.setLocationIcon(app, changedProfile.locationIcon);
+			mode.setNavigationIcon(app, changedProfile.navigationIcon);
 		}
+
 		return true;
 	}
 
