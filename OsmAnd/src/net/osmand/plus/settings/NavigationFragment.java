@@ -140,13 +140,16 @@ public class NavigationFragment extends BaseSettingsFragment {
 		navigationType.setIcon(getContentIcon(selectedRoutingProfileDataObject.getIconRes()));
 
 		ApplicationMode appMode = getSelectedAppMode();
+		RouteProvider.RouteService routeService;
 		if (profileKey.equals(RoutingProfilesResources.STRAIGHT_LINE_MODE.name())) {
-			appMode.setRouteService(app, RouteProvider.RouteService.STRAIGHT);
+			routeService = RouteProvider.RouteService.STRAIGHT;
 		} else if (profileKey.equals(RoutingProfilesResources.BROUTER_MODE.name())) {
-			appMode.setRouteService(app, RouteProvider.RouteService.BROUTER);
+			routeService = RouteProvider.RouteService.BROUTER;
 		} else {
-			appMode.setRoutingProfile(app, profileKey);
+			routeService = RouteProvider.RouteService.OSMAND;
 		}
+		appMode.setRouteService(app, routeService);
+		appMode.setRoutingProfile(app, profileKey);
 	}
 
 	public static Map<String, RoutingProfileDataObject> getRoutingProfiles(OsmandApplication context) {

@@ -434,11 +434,10 @@ public class OsmandSettings {
 					&& !((CommonPreference) pref).global
 					&& !USER_PROFILE_NAME.getId().equals(pref.getId())) {
 				CommonPreference profilePref = (CommonPreference) pref;
-				if (modeTo.isCustomProfile() && PARENT_APP_MODE.getId().equals(pref.getId())) {
-					if (modeFrom.isCustomProfile()) {
-						PARENT_APP_MODE.setModeValue(modeTo, modeFrom.getParent().getStringKey());
-					} else {
-						PARENT_APP_MODE.setModeValue(modeTo, modeFrom.getStringKey());
+				if (PARENT_APP_MODE.getId().equals(pref.getId())) {
+					if (modeTo.isCustomProfile()) {
+						String parentKey = modeFrom.isCustomProfile() ? modeFrom.getParent().getStringKey() : modeFrom.getStringKey();
+						PARENT_APP_MODE.setModeValue(modeTo, parentKey);
 					}
 				} else {
 					Object copiedValue = profilePref.getModeValue(modeFrom);

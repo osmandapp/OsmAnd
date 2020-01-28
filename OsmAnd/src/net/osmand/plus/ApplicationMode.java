@@ -216,6 +216,10 @@ public class ApplicationMode {
 		}
 
 		private ApplicationMode customReg() {
+			ApplicationMode m = applicationMode;
+			m.minDistanceForTurn = m.parentAppMode.minDistanceForTurn;
+			m.arrivalDistance = m.parentAppMode.arrivalDistance;
+			m.offRouteDistance = m.parentAppMode.offRouteDistance;
 			values.add(applicationMode);
 			if (applicationMode.getOrder() == 0 && !values.isEmpty()) {
 				applicationMode.setOrder(values.size());
