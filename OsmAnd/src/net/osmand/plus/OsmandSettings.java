@@ -1349,9 +1349,8 @@ public class OsmandSettings {
 				return DrivingRegion.JAPAN;
 			} else if (df.getCountry().equalsIgnoreCase("au")) {
 				return DrivingRegion.AUSTRALIA;
-// potentially wrong in Europe
-//			} else if(df.getCountry().equalsIgnoreCase(Locale.UK.getCountry())) {
-//				return DrivingRegion.UK_AND_OTHERS;
+			} else if(df.getCountry().equalsIgnoreCase(Locale.UK.getCountry())) {
+				return DrivingRegion.UK_AND_OTHERS;
 			}
 			return DrivingRegion.EUROPE_ASIA;
 		}
@@ -1373,6 +1372,29 @@ public class OsmandSettings {
 	public final OsmandPreference<AngularConstants> ANGULAR_UNITS = new EnumIntPreference<AngularConstants>(
 		"angular_measurement", AngularConstants.DEGREES, AngularConstants.values()).makeProfile();
 
+	public static final String LAST_START_LAT = "last_searched_lat"; //$NON-NLS-1$
+	public static final String LAST_START_LON = "last_searched_lon"; //$NON-NLS-1$
+
+	public LatLon getLastStartPoint() {
+		if (settingsAPI.contains(globalPreferences, LAST_START_LAT) && settingsAPI.contains(globalPreferences, LAST_START_LON)) {
+			return new LatLon(settingsAPI.getFloat(globalPreferences, LAST_START_LAT, 0),
+					settingsAPI.getFloat(globalPreferences, LAST_START_LON, 0));
+		}
+		return null;
+	}
+
+	public boolean setLastStartPoint(LatLon l) {
+		if (l == null) {
+			return settingsAPI.edit(globalPreferences).remove(LAST_START_LAT).remove(LAST_START_LON).commit();
+		} else {
+			return setLastStartPoint(l.getLatitude(), l.getLongitude());
+		}
+	}
+
+	public boolean setLastStartPoint(double lat, double lon) {
+		return settingsAPI.edit(globalPreferences).putFloat(LAST_START_LAT, (float) lat).
+				putFloat(LAST_START_LON, (float) lon).commit();
+	}
 
 	public final OsmandPreference<SpeedConstants> SPEED_SYSTEM = new EnumIntPreference<SpeedConstants>(
 			"default_speed_system", SpeedConstants.KILOMETERS_PER_HOUR, SpeedConstants.values()) {
