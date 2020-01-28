@@ -468,7 +468,7 @@ public class DownloadResources extends DownloadResourceGroup {
 		List<IndexItem> res = new ArrayList<>();
 		OsmandRegions regions = app.getRegions();
 		DownloadIndexesThread downloadThread = app.getDownloadThread();
-		List<WorldRegion> downloadRegions = regions.getWoldRegionsAt(latLon);
+		List<WorldRegion> downloadRegions = regions.getWorldRegionsAt(latLon);
 		for (WorldRegion downloadRegion : downloadRegions) {
 			if (includeDownloaded || !isIndexItemDownloaded(downloadThread, type, downloadRegion, res)) {
 				addIndexItem(downloadThread, type, downloadRegion, res);
