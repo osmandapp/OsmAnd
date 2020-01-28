@@ -424,44 +424,30 @@ public class OsmandSettings {
 		return false;
 	}
 
-	public boolean copyPreferencesFromProfile(ApplicationMode modeFrom, ApplicationMode modeTo) {
-		return copyProfilePreferences(modeFrom, modeTo, new ArrayList<OsmandPreference>(registeredPreferences.values()));
+	public void copyPreferencesFromProfile(ApplicationMode modeFrom, ApplicationMode modeTo) {
+		copyProfilePreferences(modeFrom, modeTo, new ArrayList<OsmandPreference>(registeredPreferences.values()));
 	}
 
-	public boolean copyProfilePreferences(ApplicationMode modeFrom, ApplicationMode modeTo, List<OsmandPreference> profilePreferences) {
-		SettingsEditor settingsEditor = settingsAPI.edit(getProfilePreferences(modeTo));
+	public void copyProfilePreferences(ApplicationMode modeFrom, ApplicationMode modeTo, List<OsmandPreference> profilePreferences) {
 		for (OsmandPreference pref : profilePreferences) {
 			if (pref instanceof CommonPreference && !((CommonPreference) pref).global) {
 				CommonPreference profilePref = (CommonPreference) pref;
 				Object copiedValue = profilePref.getModeValue(modeFrom);
-				if (copiedValue instanceof String) {
-					settingsEditor.putString(pref.getId(), (String) copiedValue);
-				} else if (copiedValue instanceof Boolean) {
-					settingsEditor.putBoolean(pref.getId(), (Boolean) copiedValue);
-				} else if (copiedValue instanceof Float) {
-					settingsEditor.putFloat(pref.getId(), (Float) copiedValue);
-				} else if (copiedValue instanceof Integer) {
-					settingsEditor.putInt(pref.getId(), (Integer) copiedValue);
-				} else if (copiedValue instanceof Long) {
-					settingsEditor.putLong(pref.getId(), (Long) copiedValue);
-				}
+				profilePref.setModeValue(modeTo, copiedValue);
 			}
 		}
-		return settingsEditor.commit();
 	}
 
 	public boolean resetPreferencesForProfile(ApplicationMode mode) {
 		return settingsAPI.edit(getProfilePreferences(mode)).clear().commit();
 	}
 
-	public boolean resetProfilePreferences(ApplicationMode mode, List<OsmandPreference> profilePreferences) {
-		SettingsEditor settingsEditor = settingsAPI.edit(getProfilePreferences(mode));
+	public void resetProfilePreferences(ApplicationMode mode, List<OsmandPreference> profilePreferences) {
 		for (OsmandPreference pref : profilePreferences) {
 			if (pref instanceof CommonPreference && !((CommonPreference) pref).global) {
-				settingsEditor.remove(pref.getId());
+				pref.resetModeToDefault(mode);
 			}
 		}
-		return settingsEditor.commit();
 	}
 
 	public ApplicationMode LAST_ROUTING_APPLICATION_MODE = null;

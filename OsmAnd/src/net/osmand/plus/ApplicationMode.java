@@ -89,48 +89,35 @@ public class ApplicationMode {
 	 * DEFAULT("Browse map"), CAR("Car"), BICYCLE("Bicycle"), PEDESTRIAN("Pedestrian"); NAUTICAL("boat"); PUBLIC_TRANSPORT("Public transport"); AIRCRAFT("Aircraft")
 	 */
 	public static final ApplicationMode DEFAULT = createBase(R.string.app_mode_default, "default")
-			.speed(1.5f, 5).arrivalDistance(90)
-			.locationIcon(LocationIcon.DEFAULT).navigationIcon(NavigationIcon.DEFAULT)
 			.icon(R.drawable.ic_world_globe_dark, R.drawable.map_world_globe_dark, "ic_world_globe_dark").reg();
 
 	public static final ApplicationMode CAR = createBase(R.string.app_mode_car, "car")
-			.speed(12.5f, 35)
-			.locationIcon(LocationIcon.CAR).navigationIcon(NavigationIcon.DEFAULT)
 			.icon(R.drawable.ic_action_car_dark, R.drawable.map_action_car_dark, "ic_action_car_dark")
-			.setRoutingProfile("car").description(R.string.base_profile_descr_car).reg();
+			.description(R.string.base_profile_descr_car).reg();
 
 	public static final ApplicationMode BICYCLE = createBase(R.string.app_mode_bicycle, "bicycle")
-			.speed(2.77f, 15).arrivalDistance(60).offRouteDistance(50)
-			.locationIcon(LocationIcon.BICYCLE).navigationIcon(NavigationIcon.DEFAULT)
 			.icon(R.drawable.ic_action_bicycle_dark, R.drawable.map_action_bicycle_dark, "ic_action_bicycle_dark")
-			.setRoutingProfile("bicycle").description(R.string.base_profile_descr_bicycle).reg();
+			.description(R.string.base_profile_descr_bicycle).reg();
 
 	public static final ApplicationMode PEDESTRIAN = createBase(R.string.app_mode_pedestrian, "pedestrian")
-			.speed(1.11f, 5).arrivalDistance(45).offRouteDistance(20)
 			.icon(R.drawable.ic_action_pedestrian_dark, R.drawable.map_action_pedestrian_dark, "ic_action_pedestrian_dark")
-			.setRoutingProfile("pedestrian").description(R.string.base_profile_descr_pedestrian).reg();
+			.description(R.string.base_profile_descr_pedestrian).reg();
 
 	public static final ApplicationMode PUBLIC_TRANSPORT = createBase(R.string.app_mode_public_transport, "public_transport")
 			.icon(R.drawable.ic_action_bus_dark, R.drawable.map_action_bus_dark, "ic_action_bus_dark")
-			.setRoutingProfile("public_transport").description(R.string.base_profile_descr_public_transport).reg();
+			.description(R.string.base_profile_descr_public_transport).reg();
 
 	public static final ApplicationMode BOAT = createBase(R.string.app_mode_boat, "boat")
-			.speed(1.38f, 20)
-			.locationIcon(LocationIcon.DEFAULT).navigationIcon(NavigationIcon.NAUTICAL)
 			.icon(R.drawable.ic_action_sail_boat_dark, R.drawable.map_action_sail_boat_dark, "ic_action_sail_boat_dark")
-			.setRoutingProfile("boat").description(R.string.base_profile_descr_boat).reg();
+			.description(R.string.base_profile_descr_boat).reg();
 
 	public static final ApplicationMode AIRCRAFT = createBase(R.string.app_mode_aircraft, "aircraft")
-			.speed(40f, 100)
-			.locationIcon(LocationIcon.CAR).navigationIcon(NavigationIcon.DEFAULT)
 			.icon(R.drawable.ic_action_aircraft, R.drawable.map_action_aircraft, "ic_action_aircraft").setRouteService(RouteService.STRAIGHT)
-			.setRoutingProfile("STRAIGHT_LINE_MODE").description(R.string.base_profile_descr_aircraft).reg();
+			.description(R.string.base_profile_descr_aircraft).reg();
 
 	public static final ApplicationMode SKI = createBase(R.string.app_mode_skiing, "ski")
-			.speed(1.38f, 15).arrivalDistance(60).offRouteDistance(50)
-			.locationIcon(LocationIcon.BICYCLE).navigationIcon(NavigationIcon.DEFAULT)
 			.icon(R.drawable.ic_action_skiing, R.drawable.map_action_skiing, "ic_action_skiing")
-			.setRoutingProfile("ski").description(R.string.base_profile_descr_ski).reg();
+			.description(R.string.base_profile_descr_ski).reg();
 
 	private static class ApplicationModeBean {
 		@Expose
@@ -317,6 +304,20 @@ public class ApplicationMode {
 			}
 		} catch (Exception e) {
 //				return R.drawable.map_world_globe_dark;
+		}
+	}
+
+	private static void updateAppModeOrder(OsmandApplication app, ApplicationMode mode) {
+		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+		Type t = new TypeToken<Map<String, Integer>>() {
+		}.getType();
+
+		Map<String, Integer> appModesOrders = gson.fromJson(app.getSettings().APP_MODES_ORDERS.get(), t);
+		if (!Algorithms.isEmpty(appModesOrders)) {
+			Integer order = appModesOrders.get(mode.getStringKey());
+			if (order != null) {
+				mode.order = order;
+			}
 		}
 	}
 
@@ -642,29 +643,25 @@ public class ApplicationMode {
 	}
 
 	private static void initModesParams(OsmandApplication app) {
-		OsmandSettings settings = app.getSettings();
-		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-		Type t = new TypeToken<Map<String, Integer>>() {
-		}.getType();
-		Map<String, Integer> appModesOrders = gson.fromJson(app.getSettings().APP_MODES_ORDERS.get(), t);
-
 		for (ApplicationMode mode : allPossibleValues()) {
-			mode.routingProfile = settings.ROUTING_PROFILE.getModeValue(mode);
-			mode.routeService = settings.ROUTE_SERVICE.getModeValue(mode);
-			mode.defaultSpeed = settings.DEFAULT_SPEED.getModeValue(mode);
-			mode.minDistanceForTurn = settings.MIN_DISTANCE_FOR_TURN.getModeValue(mode);
-			mode.arrivalDistance = settings.ARRIVAL_DISTANCE.getModeValue(mode);
-			mode.offRouteDistance = settings.OFF_ROUTE_DISTANCE.getModeValue(mode);
-			mode.userProfileName = settings.USER_PROFILE_NAME.getModeValue(mode);
-			mode.navigationIcon = settings.NAVIGATION_ICON.getModeValue(mode);
-			mode.locationIcon = settings.LOCATION_ICON.getModeValue(mode);
-			mode.iconColor = settings.ICON_COLOR.getModeValue(mode);
-			Integer order = appModesOrders.get(mode.getStringKey());
-			if (order != null) {
-				mode.order = order;
-			}
-			updateAppModeIcon(app, settings.ICON_RES_NAME.getModeValue(mode), mode);
+			initModeParams(app, mode);
 		}
+	}
+
+	public static void initModeParams(OsmandApplication app, ApplicationMode mode) {
+		OsmandSettings settings = app.getSettings();
+		mode.routingProfile = settings.ROUTING_PROFILE.getModeValue(mode);
+		mode.routeService = settings.ROUTE_SERVICE.getModeValue(mode);
+		mode.defaultSpeed = settings.DEFAULT_SPEED.getModeValue(mode);
+		mode.minDistanceForTurn = settings.MIN_DISTANCE_FOR_TURN.getModeValue(mode);
+		mode.arrivalDistance = settings.ARRIVAL_DISTANCE.getModeValue(mode);
+		mode.offRouteDistance = settings.OFF_ROUTE_DISTANCE.getModeValue(mode);
+		mode.userProfileName = settings.USER_PROFILE_NAME.getModeValue(mode);
+		mode.navigationIcon = settings.NAVIGATION_ICON.getModeValue(mode);
+		mode.locationIcon = settings.LOCATION_ICON.getModeValue(mode);
+		mode.iconColor = settings.ICON_COLOR.getModeValue(mode);
+		updateAppModeOrder(app, mode);
+		updateAppModeIcon(app, settings.ICON_RES_NAME.getModeValue(mode), mode);
 	}
 
 	public static void reorderAppModes() {

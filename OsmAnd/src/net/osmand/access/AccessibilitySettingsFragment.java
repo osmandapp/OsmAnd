@@ -180,6 +180,7 @@ public class AccessibilitySettingsFragment extends BaseSettingsFragment implemen
 		OsmandMonitoringPlugin plugin = OsmandPlugin.getPlugin(OsmandMonitoringPlugin.class);
 		if (plugin != null) {
 			app.getSettings().copyProfilePreferences(appMode, getSelectedAppMode(), plugin.getPreferences());
+			updateAllSettings();
 		}
 	}
 
@@ -188,6 +189,7 @@ public class AccessibilitySettingsFragment extends BaseSettingsFragment implemen
 		OsmandMonitoringPlugin plugin = OsmandPlugin.getPlugin(OsmandMonitoringPlugin.class);
 		if (plugin != null) {
 			app.getSettings().resetProfilePreferences(appMode, plugin.getPreferences());
+			updateAllSettings();
 		}
 	}
 

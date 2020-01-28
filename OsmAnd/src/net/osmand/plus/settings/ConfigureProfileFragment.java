@@ -143,13 +143,22 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 	@Override
 	protected void updateToolbar() {
 		super.updateToolbar();
-		updateToolbarSwitch();
+		View view = getView();
+		if (view != null) {
+			updateToolbarSwitch();
+			TextView toolbarTitle = view.findViewById(R.id.toolbar_title);
+			toolbarTitle.setText(getSelectedAppMode().toHumanString(getContext()));
+		}
 	}
 
 	@Override
 	public void copyAppModePrefs(ApplicationMode appMode) {
 		if (appMode != null) {
-			app.getSettings().copyPreferencesFromProfile(appMode, getSelectedAppMode());
+			ApplicationMode selectedAppMode = getSelectedAppMode();
+			app.getSettings().copyPreferencesFromProfile(appMode, selectedAppMode);
+			ApplicationMode.initModeParams(app, selectedAppMode);
+			updateToolbar();
+			updateAllSettings();
 		}
 	}
 
@@ -157,6 +166,9 @@ public class ConfigureProfileFragment extends BaseSettingsFragment implements Co
 	public void resetAppModePrefs(ApplicationMode appMode) {
 		if (appMode != null) {
 			app.getSettings().resetPreferencesForProfile(appMode);
+			ApplicationMode.initModeParams(app, appMode);
+			updateToolbar();
+			updateAllSettings();
 		}
 	}
 

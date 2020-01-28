@@ -290,6 +290,7 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 		OsmandMonitoringPlugin plugin = OsmandPlugin.getPlugin(OsmandMonitoringPlugin.class);
 		if (plugin != null) {
 			app.getSettings().copyProfilePreferences(appMode, getSelectedAppMode(), plugin.getPreferences());
+			updateAllSettings();
 		}
 	}
 
@@ -298,6 +299,7 @@ public class MonitoringSettingsFragment extends BaseSettingsFragment implements 
 		OsmandMonitoringPlugin plugin = OsmandPlugin.getPlugin(OsmandMonitoringPlugin.class);
 		if (plugin != null) {
 			app.getSettings().resetProfilePreferences(appMode, plugin.getPreferences());
+			updateAllSettings();
 		}
 	}
 }
