@@ -19,6 +19,7 @@ public class BinaryMapDataObject {
 	protected int[] types = null;
 	protected int[] additionalTypes = null;
 	protected int objectType = RenderingRulesStorage.POINT_RULES;
+	protected int[] labelCoordinates = null;
 	
 	protected TIntObjectHashMap<String> objectNames = null;
 	protected TIntArrayList namesOrder = null;
@@ -33,7 +34,7 @@ public class BinaryMapDataObject {
 
 	
 	public BinaryMapDataObject(long id, int[] coordinates, int[][] polygonInnerCoordinates, int objectType, boolean area, 
-			int[] types, int[] additionalTypes){
+			int[] types, int[] additionalTypes, int[] labelCoordinates){
 		this.polygonInnerCoordinates = polygonInnerCoordinates;
 		this.coordinates = coordinates;
 		this.additionalTypes = additionalTypes;
@@ -41,6 +42,7 @@ public class BinaryMapDataObject {
 		this.id = id;
 		this.objectType = objectType;
 		this.area = area;
+		this.labelCoordinates = labelCoordinates;
 	}
 	
 	protected void setCoordinates(int[] coordinates) {
@@ -282,6 +284,18 @@ public class BinaryMapDataObject {
 				}
 			}
 			
+			//do we need it? use precision?
+			if (equals) {
+				if (labelCoordinates == null || thatObj.labelCoordinates == null) {
+					equals = labelCoordinates == thatObj.labelCoordinates;
+					//do we need it? precision?
+//				} else {
+//					for(int i = 0; i < labelCoordinates.length && equals; i++) {
+//						equals = labelCoordinates[i] == thatObj.labelCoordinates[i];
+//					}
+				}
+			}
+			
 			return equals;
 		}
 //		thatObj.mapIndex.decodeType(thatObj.types[0])
@@ -366,5 +380,9 @@ public class BinaryMapDataObject {
 	
 	public int getObjectType() {
 		return objectType;
+	}
+	
+	public int[] getLabelCoordinates() {
+		return labelCoordinates;
 	}
 }

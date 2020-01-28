@@ -50,7 +50,7 @@ public class OsmMapUtils {
 	}
 	
 	public static LatLon getComplexPolyCenter(Collection<Node> nodes) {
-		double precision = 1e-4; //where to put constant?
+		double precision = 1e-4; //where to set precision constant?
 		
 		final List<List<LatLon>> rings = new ArrayList<>();
 		List<LatLon> outerRing = new ArrayList<>();
@@ -59,7 +59,6 @@ public class OsmMapUtils {
 		}
 		rings.add(outerRing);
 		return getPolylabelPoint(rings, precision);
-		//return getPolylabelPoint(new Polygon(points), precision);
 	}
 
 	public static LatLon getWeightCenter(Collection<LatLon> nodes) {

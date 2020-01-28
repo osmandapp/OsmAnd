@@ -1917,7 +1917,8 @@ public class BinaryMapIndexReader {
 				
 			BinaryMapDataObject bm = 
 					new BinaryMapDataObject(o.id, o.coordinates, o.polygonInnerCoordinates, o.objectType, o.area, 
-							types.toArray(), additionalTypes.isEmpty() ? null : additionalTypes.toArray());
+							types.toArray(), additionalTypes.isEmpty() ? null : additionalTypes.toArray(), 
+									o.labelCoordinates);
 			if (o.namesOrder != null) {
 				bm.objectNames = new TIntObjectHashMap<>();
 				bm.namesOrder = new TIntArrayList();
