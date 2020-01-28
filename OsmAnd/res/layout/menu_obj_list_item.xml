@@ -51,8 +51,8 @@
 
             <ImageView
                 android:id="@+id/context_menu_icon_view"
-                android:layout_width="@dimen/standard_icon_size"
-                android:layout_height="@dimen/standard_icon_size"
+                android:layout_width="@dimen/dialog_button_height"
+                android:layout_height="@dimen/dialog_button_height"
                 android:src="@drawable/ic_action_building_number"/>
 
         </LinearLayout>
