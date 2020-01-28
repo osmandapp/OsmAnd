@@ -1233,12 +1233,23 @@ public class BinaryMapIndexReader {
 				}
 				break;
 			case OsmandOdb.MapData.LABELCOORDINATES_FIELD_NUMBER:
-				labelX = codedIS.readRawVarint32();
-				labelY = codedIS.readRawVarint32();
+				sizeL = codedIS.readRawVarint32();
+				old = codedIS.pushLimit(sizeL);
+				int i = 0;
+				while (codedIS.getBytesUntilLimit() > 0) {
+					if (i == 0) {
+						labelX = codedIS.readSInt32();
+					} else if (i == 1) {
+						labelY = codedIS.readSInt32();
+					} else {
+						codedIS.readRawVarint32();
+					}
+					i++;
+				}
+				codedIS.popLimit(old);
 				if (READ_STATS) {
-					req.stat.addTagHeader(OsmandOdb.MapData.LABELCOORDINATES_FIELD_NUMBER, 0);
-					req.stat.lastObjectLabelCoordinates += CodedOutputStream.computeRawVarint32Size(labelX);
-					req.stat.lastObjectLabelCoordinates += CodedOutputStream.computeRawVarint32Size(labelY);
+					req.stat.addTagHeader(OsmandOdb.MapData.LABELCOORDINATES_FIELD_NUMBER, sizeL);
+					req.stat.lastObjectLabelCoordinates += sizeL;
 				}
 				break;
 			default:

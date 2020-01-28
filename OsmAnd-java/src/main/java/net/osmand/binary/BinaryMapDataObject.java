@@ -368,12 +368,7 @@ public class BinaryMapDataObject {
 		return coordinates;
 	}
 	
-	
 	public int getObjectType() {
 		return objectType;
 	}
-	
-	public int[] getLabelCoordinates() {
-		return labelCoordinates;
-	}
-}
+}	
