@@ -168,7 +168,8 @@ public class EditProfilesFragment extends BaseOsmAndFragment {
 						}
 						mode.setOrder(order);
 					}
-					ApplicationMode.reorderAppModes(app);
+					ApplicationMode.reorderAppModes();
+					ApplicationMode.saveAppModesToSettings(app);
 					mapActivity.onBackPressed();
 				}
 			}

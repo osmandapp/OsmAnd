@@ -1569,6 +1569,8 @@ public class OsmandSettings {
 		LOCATION_ICON.setModeDefaultValue(ApplicationMode.SKI, LocationIcon.BICYCLE);
 	}
 
+	public final CommonPreference<String> APP_MODES_ORDERS = new StringPreference("app_modes_orders", "").makeGlobal().cache();
+
 	public final OsmandPreference<Float> SWITCH_MAP_DIRECTION_TO_COMPASS =
 			new FloatPreference("speed_for_map_to_direction_of_movement", 0f).makeProfile();
 

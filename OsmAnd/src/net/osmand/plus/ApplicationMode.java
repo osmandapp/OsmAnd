@@ -19,6 +19,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -336,6 +337,12 @@ public class ApplicationMode {
 		return create(parent, -1, stringKey).userProfileTitle(userProfileTitle);
 	}
 
+	public static ApplicationModeBuilder changeBaseMode(ApplicationMode applicationMode) {
+		ApplicationModeBuilder builder = new ApplicationModeBuilder();
+		builder.applicationMode = applicationMode;
+		return builder;
+	}
+
 	public static List<ApplicationMode> values(OsmandApplication app) {
 		if (customizationListener == null) {
 			customizationListener = new OsmAndAppCustomization.OsmAndAppCustomizationListener() {
@@ -631,11 +638,16 @@ public class ApplicationMode {
 		initCustomModes(app);
 		initModesParams(app);
 		initRegVisibility();
-		reorderAppModes(app);
+		reorderAppModes();
 	}
 
 	private static void initModesParams(OsmandApplication app) {
 		OsmandSettings settings = app.getSettings();
+		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+		Type t = new TypeToken<Map<String, Integer>>() {
+		}.getType();
+		Map<String, Integer> appModesOrders = gson.fromJson(app.getSettings().APP_MODES_ORDERS.get(), t);
+
 		for (ApplicationMode mode : allPossibleValues()) {
 			mode.routingProfile = settings.ROUTING_PROFILE.getModeValue(mode);
 			mode.routeService = settings.ROUTE_SERVICE.getModeValue(mode);
@@ -647,11 +659,15 @@ public class ApplicationMode {
 			mode.navigationIcon = settings.NAVIGATION_ICON.getModeValue(mode);
 			mode.locationIcon = settings.LOCATION_ICON.getModeValue(mode);
 			mode.iconColor = settings.ICON_COLOR.getModeValue(mode);
+			Integer order = appModesOrders.get(mode.getStringKey());
+			if (order != null) {
+				mode.order = order;
+			}
 			updateAppModeIcon(app, settings.ICON_RES_NAME.getModeValue(mode), mode);
 		}
 	}
 
-	public static void reorderAppModes(OsmandApplication app) {
+	public static void reorderAppModes() {
 		Comparator<ApplicationMode> comparator = new Comparator<ApplicationMode>() {
 			@Override
 			public int compare(ApplicationMode mode1, ApplicationMode mode2) {
@@ -661,10 +677,10 @@ public class ApplicationMode {
 		Collections.sort(values, comparator);
 		Collections.sort(defaultValues, comparator);
 		Collections.sort(cachedFilteredValues, comparator);
-		updateAppModesOrder(app);
+		updateAppModesOrder();
 	}
 
-	private static void updateAppModesOrder(OsmandApplication app) {
+	private static void updateAppModesOrder() {
 		for (int i = 0; i < values.size(); i++) {
 			values.get(i).setOrder(i);
 		}
@@ -709,22 +725,19 @@ public class ApplicationMode {
 			Type t = new TypeToken<ArrayList<ApplicationModeBean>>() {
 			}.getType();
 			List<ApplicationModeBean> defaultAppModeBeans = gson.fromJson(settings.DEFAULT_APP_PROFILES.get(), t);
-
 			if (!Algorithms.isEmpty(defaultAppModeBeans)) {
 				for (ApplicationModeBean modeBean : defaultAppModeBeans) {
 					ApplicationMode mode = ApplicationMode.valueOfStringKey(modeBean.stringKey, null);
 					if (mode != null) {
-						settings.ICON_RES_NAME.setModeValue(mode, modeBean.iconName);
-						settings.ICON_COLOR.setModeValue(mode, modeBean.iconColor);
-						settings.USER_PROFILE_NAME.setModeValue(mode, modeBean.userProfileName);
-						settings.ROUTING_PROFILE.setModeValue(mode, modeBean.routingProfile);
-						settings.ROUTE_SERVICE.setModeValue(mode, modeBean.routeService);
-						if (modeBean.locIcon != null) {
-							settings.LOCATION_ICON.setModeValue(mode, modeBean.locIcon);
-						}
-						if (modeBean.navIcon != null) {
-							settings.NAVIGATION_ICON.setModeValue(mode, modeBean.navIcon);
-						}
+						ApplicationModeBuilder builder = changeBaseMode(mode)
+								.setRouteService(modeBean.routeService)
+								.setRoutingProfile(modeBean.routingProfile)
+								.icon(app, modeBean.iconName)
+								.setColor(modeBean.iconColor)
+								.locationIcon(modeBean.locIcon)
+								.navigationIcon(modeBean.navIcon)
+								.setOrder(modeBean.order);
+						saveProfile(builder, app);
 					}
 				}
 			}
@@ -766,7 +779,8 @@ public class ApplicationMode {
 		}
 	}
 
-	private static boolean saveCustomAppModesToSettings(OsmandSettings settings) {
+	public static void saveAppModesToSettings(OsmandApplication app) {
+		OsmandSettings settings = app.getSettings();
 		StringBuilder stringBuilder = new StringBuilder();
 		Iterator<ApplicationMode> it = ApplicationMode.getCustomValues().iterator();
 		while (it.hasNext()) {
@@ -776,9 +790,16 @@ public class ApplicationMode {
 			}
 		}
 		if (!stringBuilder.toString().equals(settings.CUSTOM_APP_MODES_KEYS.get())) {
-			return settings.CUSTOM_APP_MODES_KEYS.set(stringBuilder.toString());
+			settings.CUSTOM_APP_MODES_KEYS.set(stringBuilder.toString());
 		}
-		return false;
+
+		Map<String, Integer> appModesOrders = new HashMap<>();
+		for (ApplicationMode mode : allPossibleValues()) {
+			appModesOrders.put(mode.getStringKey(), mode.getOrder());
+		}
+		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+		String modesOrdersStr = gson.toJson(appModesOrders);
+		settings.APP_MODES_ORDERS.set(modesOrdersStr);
 	}
 
 	public static ApplicationMode saveProfile(ApplicationModeBuilder builder, OsmandApplication app) {
@@ -798,7 +819,7 @@ public class ApplicationMode {
 		mode.setNavigationIcon(app, builder.applicationMode.navigationIcon);
 		mode.setOrder(builder.applicationMode.order);
 
-		saveCustomAppModesToSettings(app.getSettings());
+		saveAppModesToSettings(app);
 		return mode;
 	}
 
@@ -815,7 +836,7 @@ public class ApplicationMode {
 			settings.APPLICATION_MODE.resetToDefault();
 		}
 		cachedFilteredValues.removeAll(modes);
-		saveCustomAppModesToSettings(app.getSettings());
+		saveAppModesToSettings(app);
 	}
 
 	public static boolean changeProfileAvailability(ApplicationMode mode, boolean isSelected, OsmandApplication app) {
