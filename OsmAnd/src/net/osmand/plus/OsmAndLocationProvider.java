@@ -329,7 +329,6 @@ public class OsmAndLocationProvider implements SensorEventListener {
 				}
 			};
 			service.registerGnssStatusCallback((GnssStatus.Callback) gpsStatusListener);
-			service.registerGnssNavigationMessageCallback((GnssNavigationMessage.Callback) gpsStatusListener);
 		} else {
 			gpsStatusListener = new Listener() {
 				private GpsStatus gpsStatus;
