@@ -954,7 +954,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment implemen
 			name.setTextColor(getResources().getColor(visible ? enabledColor : disabledColor));
 			distanceText.setText(distance);
 			if (model.isAddressSpecified()) {
-				distanceText.setText(String.format(getString(R.string.distance_and_address), distance.trim(), model.getAddress()));
+				distanceText.setText(String.format(getString(R.string.ltr_or_rtl_combine_via_bold_point), distance.trim(), model.getAddress()));
 			}
 			icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(getActivity(),
 					visible ? model.getColor() : getResources().getColor(disabledIconColor), false, model));
