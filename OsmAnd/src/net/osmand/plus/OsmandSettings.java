@@ -430,10 +430,20 @@ public class OsmandSettings {
 
 	public void copyProfilePreferences(ApplicationMode modeFrom, ApplicationMode modeTo, List<OsmandPreference> profilePreferences) {
 		for (OsmandPreference pref : profilePreferences) {
-			if (pref instanceof CommonPreference && !((CommonPreference) pref).global) {
+			if (pref instanceof CommonPreference
+					&& !((CommonPreference) pref).global
+					&& !USER_PROFILE_NAME.getId().equals(pref.getId())) {
 				CommonPreference profilePref = (CommonPreference) pref;
-				Object copiedValue = profilePref.getModeValue(modeFrom);
-				profilePref.setModeValue(modeTo, copiedValue);
+				if (modeTo.isCustomProfile() && PARENT_APP_MODE.getId().equals(pref.getId())) {
+					if (modeFrom.isCustomProfile()) {
+						PARENT_APP_MODE.setModeValue(modeTo, modeFrom.getParent().getStringKey());
+					} else {
+						PARENT_APP_MODE.setModeValue(modeTo, modeFrom.getStringKey());
+					}
+				} else {
+					Object copiedValue = profilePref.getModeValue(modeFrom);
+					profilePref.setModeValue(modeTo, copiedValue);
+				}
 			}
 		}
 	}
@@ -1444,6 +1454,9 @@ public class OsmandSettings {
 	public final OsmandPreference<Float> SPEECH_RATE =
 			new FloatPreference("speech_rate", 1f).makeProfile();
 
+	public final OsmandPreference<Float> ARRIVAL_DISTANCE_FACTOR =
+			new FloatPreference("arrival_distance_factor", 1f).makeProfile();
+
 	public final OsmandPreference<Float> SPEED_LIMIT_EXCEED =
 			new FloatPreference("speed_limit_exceed", 5f).makeProfile();
 
@@ -1500,37 +1513,6 @@ public class OsmandSettings {
 
 	{
 		ROUTE_SERVICE.setModeDefaultValue(ApplicationMode.AIRCRAFT, RouteService.STRAIGHT);
-	}
-
-	public final CommonPreference<Integer> MIN_DISTANCE_FOR_TURN = new IntPreference("min_distance_for_turn", 50).makeProfile().cache();
-
-	{
-		MIN_DISTANCE_FOR_TURN.setModeDefaultValue(ApplicationMode.DEFAULT, 5);
-		MIN_DISTANCE_FOR_TURN.setModeDefaultValue(ApplicationMode.CAR, 35);
-		MIN_DISTANCE_FOR_TURN.setModeDefaultValue(ApplicationMode.BICYCLE, 15);
-		MIN_DISTANCE_FOR_TURN.setModeDefaultValue(ApplicationMode.PEDESTRIAN, 5);
-		MIN_DISTANCE_FOR_TURN.setModeDefaultValue(ApplicationMode.BOAT, 20);
-		MIN_DISTANCE_FOR_TURN.setModeDefaultValue(ApplicationMode.AIRCRAFT, 100);
-		MIN_DISTANCE_FOR_TURN.setModeDefaultValue(ApplicationMode.SKI, 15);
-	}
-
-	public final OsmandPreference<Float> ARRIVAL_DISTANCE_FACTOR = new FloatPreference("arrival_distance_factor", 1f).makeProfile().cache();
-
-	public final CommonPreference<Integer> ARRIVAL_DISTANCE = new IntPreference("arrival_distance", 90).makeProfile().cache();
-
-	{
-		ARRIVAL_DISTANCE.setModeDefaultValue(ApplicationMode.DEFAULT, 90);
-		ARRIVAL_DISTANCE.setModeDefaultValue(ApplicationMode.BICYCLE, 60);
-		ARRIVAL_DISTANCE.setModeDefaultValue(ApplicationMode.PEDESTRIAN, 45);
-		ARRIVAL_DISTANCE.setModeDefaultValue(ApplicationMode.SKI, 60);
-	}
-
-	public final CommonPreference<Integer> OFF_ROUTE_DISTANCE = new IntPreference("off_route_distance", 350).makeProfile().cache();
-
-	{
-		OFF_ROUTE_DISTANCE.setModeDefaultValue(ApplicationMode.BICYCLE, 50);
-		OFF_ROUTE_DISTANCE.setModeDefaultValue(ApplicationMode.PEDESTRIAN, 20);
-		OFF_ROUTE_DISTANCE.setModeDefaultValue(ApplicationMode.SKI, 50);
 	}
 
 	public final CommonPreference<NavigationIcon> NAVIGATION_ICON = new EnumIntPreference<>("navigation_icon", NavigationIcon.DEFAULT, NavigationIcon.values()).makeProfile().cache();

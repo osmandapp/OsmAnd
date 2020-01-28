@@ -89,17 +89,21 @@ public class ApplicationMode {
 	 * DEFAULT("Browse map"), CAR("Car"), BICYCLE("Bicycle"), PEDESTRIAN("Pedestrian"); NAUTICAL("boat"); PUBLIC_TRANSPORT("Public transport"); AIRCRAFT("Aircraft")
 	 */
 	public static final ApplicationMode DEFAULT = createBase(R.string.app_mode_default, "default")
+			.distanceForTurn(5).arrivalDistance(90)
 			.icon(R.drawable.ic_world_globe_dark, R.drawable.map_world_globe_dark, "ic_world_globe_dark").reg();
 
 	public static final ApplicationMode CAR = createBase(R.string.app_mode_car, "car")
+			.distanceForTurn(35)
 			.icon(R.drawable.ic_action_car_dark, R.drawable.map_action_car_dark, "ic_action_car_dark")
 			.description(R.string.base_profile_descr_car).reg();
 
 	public static final ApplicationMode BICYCLE = createBase(R.string.app_mode_bicycle, "bicycle")
+			.distanceForTurn(15).arrivalDistance(60).offRouteDistance(50)
 			.icon(R.drawable.ic_action_bicycle_dark, R.drawable.map_action_bicycle_dark, "ic_action_bicycle_dark")
 			.description(R.string.base_profile_descr_bicycle).reg();
 
 	public static final ApplicationMode PEDESTRIAN = createBase(R.string.app_mode_pedestrian, "pedestrian")
+			.distanceForTurn(5).arrivalDistance(45).offRouteDistance(20)
 			.icon(R.drawable.ic_action_pedestrian_dark, R.drawable.map_action_pedestrian_dark, "ic_action_pedestrian_dark")
 			.description(R.string.base_profile_descr_pedestrian).reg();
 
@@ -108,16 +112,20 @@ public class ApplicationMode {
 			.description(R.string.base_profile_descr_public_transport).reg();
 
 	public static final ApplicationMode BOAT = createBase(R.string.app_mode_boat, "boat")
+			.distanceForTurn(20)
 			.icon(R.drawable.ic_action_sail_boat_dark, R.drawable.map_action_sail_boat_dark, "ic_action_sail_boat_dark")
 			.description(R.string.base_profile_descr_boat).reg();
 
 	public static final ApplicationMode AIRCRAFT = createBase(R.string.app_mode_aircraft, "aircraft")
-			.icon(R.drawable.ic_action_aircraft, R.drawable.map_action_aircraft, "ic_action_aircraft").setRouteService(RouteService.STRAIGHT)
+			.distanceForTurn(100)
+			.icon(R.drawable.ic_action_aircraft, R.drawable.map_action_aircraft, "ic_action_aircraft")
 			.description(R.string.base_profile_descr_aircraft).reg();
 
 	public static final ApplicationMode SKI = createBase(R.string.app_mode_skiing, "ski")
+			.distanceForTurn(15).arrivalDistance(60).offRouteDistance(50)
 			.icon(R.drawable.ic_action_skiing, R.drawable.map_action_skiing, "ic_action_skiing")
 			.description(R.string.base_profile_descr_ski).reg();
+
 
 	private static class ApplicationModeBean {
 		@Expose
@@ -202,7 +210,7 @@ public class ApplicationMode {
 			values.add(applicationMode);
 			defaultValues.add(applicationMode);
 			if (applicationMode.getOrder() == 0 && !values.isEmpty()) {
-				applicationMode.order = values.size();
+				applicationMode.setOrder(values.size());
 			}
 			return applicationMode;
 		}
@@ -210,7 +218,7 @@ public class ApplicationMode {
 		private ApplicationMode customReg() {
 			values.add(applicationMode);
 			if (applicationMode.getOrder() == 0 && !values.isEmpty()) {
-				applicationMode.order = values.size();
+				applicationMode.setOrder(values.size());
 			}
 			return applicationMode;
 		}
@@ -251,8 +259,12 @@ public class ApplicationMode {
 			return this;
 		}
 
-		public ApplicationModeBuilder speed(float defSpeed, int distForTurn) {
+		public ApplicationModeBuilder speed(float defSpeed) {
 			applicationMode.defaultSpeed = defSpeed;
+			return this;
+		}
+
+		public ApplicationModeBuilder distanceForTurn(int distForTurn) {
 			applicationMode.minDistanceForTurn = distForTurn;
 			return this;
 		}
@@ -653,13 +665,11 @@ public class ApplicationMode {
 		mode.routingProfile = settings.ROUTING_PROFILE.getModeValue(mode);
 		mode.routeService = settings.ROUTE_SERVICE.getModeValue(mode);
 		mode.defaultSpeed = settings.DEFAULT_SPEED.getModeValue(mode);
-		mode.minDistanceForTurn = settings.MIN_DISTANCE_FOR_TURN.getModeValue(mode);
-		mode.arrivalDistance = settings.ARRIVAL_DISTANCE.getModeValue(mode);
-		mode.offRouteDistance = settings.OFF_ROUTE_DISTANCE.getModeValue(mode);
 		mode.userProfileName = settings.USER_PROFILE_NAME.getModeValue(mode);
 		mode.navigationIcon = settings.NAVIGATION_ICON.getModeValue(mode);
 		mode.locationIcon = settings.LOCATION_ICON.getModeValue(mode);
 		mode.iconColor = settings.ICON_COLOR.getModeValue(mode);
+		mode.parentAppMode = valueOfStringKey(settings.PARENT_APP_MODE.getModeValue(mode), null);
 		updateAppModeOrder(app, mode);
 		updateAppModeIcon(app, settings.ICON_RES_NAME.getModeValue(mode), mode);
 	}
