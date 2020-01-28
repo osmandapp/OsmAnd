@@ -403,6 +403,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 		WeakReference<MapRouteInfoMenuFragment> fragmentRef = findMenuFragment();
 		MapRouteInfoMenuFragment fragment = fragmentRef != null ? fragmentRef.get() : null;
 		if (fragmentRef != null && fragment.isVisible()) {
+			fragment.openMenuHeaderOnly();
 			fragment.updateRouteCalculationProgress(0);
 			fragment.updateInfo();
 		}
@@ -429,7 +430,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener, CardListener
 				fragment.updateInfo();
 				if (!routeCalculationInProgress) {
 					fragment.hideRouteCalculationProgressBar();
-					fragment.openMenuHalfScreen();
+					fragment.openMenuHeaderOnly();
 				}
 			}
 		}
