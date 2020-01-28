@@ -19,7 +19,8 @@ public class BinaryMapDataObject {
 	protected int[] types = null;
 	protected int[] additionalTypes = null;
 	protected int objectType = RenderingRulesStorage.POINT_RULES;
-	protected int[] labelCoordinates = null;
+	protected int labelX;
+	protected int labelY;
 	
 	protected TIntObjectHashMap<String> objectNames = null;
 	protected TIntArrayList namesOrder = null;
@@ -34,7 +35,7 @@ public class BinaryMapDataObject {
 
 	
 	public BinaryMapDataObject(long id, int[] coordinates, int[][] polygonInnerCoordinates, int objectType, boolean area, 
-			int[] types, int[] additionalTypes, int[] labelCoordinates){
+			int[] types, int[] additionalTypes, int labelX, int labelY){
 		this.polygonInnerCoordinates = polygonInnerCoordinates;
 		this.coordinates = coordinates;
 		this.additionalTypes = additionalTypes;
@@ -42,7 +43,8 @@ public class BinaryMapDataObject {
 		this.id = id;
 		this.objectType = objectType;
 		this.area = area;
-		this.labelCoordinates = labelCoordinates;
+		this.labelX = labelX;
+		this.labelY = labelY;
 	}
 	
 	protected void setCoordinates(int[] coordinates) {
@@ -204,95 +206,84 @@ public class BinaryMapDataObject {
 				&& this.id == thatObj.id
 				&& this.area == thatObj.area 
 				&& compareCoordinates(this.coordinates, thatObj.coordinates, coordinatesPrecision) ) {
-			if(mapIndex == null) {
+			if (mapIndex == null) {
 				throw new IllegalStateException("Illegal binary object: " + id);
 			}
-			if(thatObj.mapIndex == null) {
+			if (thatObj.mapIndex == null) {
 				throw new IllegalStateException("Illegal binary object: " + thatObj.id);
 			}
 			
 			boolean equals = true;
-			if(equals) {
-				if(polygonInnerCoordinates == null || thatObj.polygonInnerCoordinates == null) {
-					equals = polygonInnerCoordinates == thatObj.polygonInnerCoordinates; 
-				} else if(polygonInnerCoordinates.length != thatObj.polygonInnerCoordinates.length){
+			if (equals) {
+				if (polygonInnerCoordinates == null || thatObj.polygonInnerCoordinates == null) {
+					equals = polygonInnerCoordinates == thatObj.polygonInnerCoordinates;
+				} else if (polygonInnerCoordinates.length != thatObj.polygonInnerCoordinates.length) {
 					equals = false;
 				} else {
-					for(int i = 0; i < polygonInnerCoordinates.length && equals; i++) {
-						if(polygonInnerCoordinates[i] == null || thatObj.polygonInnerCoordinates[i] == null) {
-							equals = polygonInnerCoordinates[i] == thatObj.polygonInnerCoordinates[i]; 
-						} else if(polygonInnerCoordinates[i].length != thatObj.polygonInnerCoordinates[i].length){
+					for (int i = 0; i < polygonInnerCoordinates.length && equals; i++) {
+						if (polygonInnerCoordinates[i] == null || thatObj.polygonInnerCoordinates[i] == null) {
+							equals = polygonInnerCoordinates[i] == thatObj.polygonInnerCoordinates[i];
+						} else if (polygonInnerCoordinates[i].length != thatObj.polygonInnerCoordinates[i].length) {
 							equals = false;
 						} else {
-							equals = compareCoordinates(polygonInnerCoordinates[i], thatObj.polygonInnerCoordinates[i], coordinatesPrecision);
+							equals = compareCoordinates(polygonInnerCoordinates[i], thatObj.polygonInnerCoordinates[i],
+									coordinatesPrecision);
 						}
 					}
 				}
 			}
 			
-			if(equals) {
-				if(types == null || thatObj.types == null) {
-					equals = types == thatObj.types; 
-				} else if(types.length != thatObj.types.length){
+			if (equals) {
+				if (types == null || thatObj.types == null) {
+					equals = types == thatObj.types;
+				} else if (types.length != thatObj.types.length) {
 					equals = false;
 				} else {
-					for(int i = 0; i < types.length && equals; i++) {
+					for (int i = 0; i < types.length && equals; i++) {
 						TagValuePair o = mapIndex.decodeType(types[i]);
 						TagValuePair s = thatObj.mapIndex.decodeType(thatObj.types[i]);
 						equals = o.equals(s) && equals;
 					}
 				}
 			}
-			if(equals) {
-				if(additionalTypes == null || thatObj.additionalTypes == null) {
-					equals = additionalTypes == thatObj.additionalTypes; 
-				} else if(additionalTypes.length != thatObj.additionalTypes.length){
+			if (equals) {
+				if (additionalTypes == null || thatObj.additionalTypes == null) {
+					equals = additionalTypes == thatObj.additionalTypes;
+				} else if (additionalTypes.length != thatObj.additionalTypes.length) {
 					equals = false;
 				} else {
-					for(int i = 0; i < additionalTypes.length && equals; i++) {
+					for (int i = 0; i < additionalTypes.length && equals; i++) {
 						TagValuePair o = mapIndex.decodeType(additionalTypes[i]);
 						TagValuePair s = thatObj.mapIndex.decodeType(thatObj.additionalTypes[i]);
 						equals = o.equals(s);
 					}
 				}
 			}
-			if(equals) {
-				if(namesOrder == null || thatObj.namesOrder == null) {
-					equals = namesOrder == thatObj.namesOrder; 
-				} else if(namesOrder.size() != thatObj.namesOrder.size()){
+			if (equals) {
+				if (namesOrder == null || thatObj.namesOrder == null) {
+					equals = namesOrder == thatObj.namesOrder;
+				} else if (namesOrder.size() != thatObj.namesOrder.size()) {
 					equals = false;
 				} else {
-					for(int i = 0; i < namesOrder.size() && equals; i++) {
+					for (int i = 0; i < namesOrder.size() && equals; i++) {
 						TagValuePair o = mapIndex.decodeType(namesOrder.get(i));
 						TagValuePair s = thatObj.mapIndex.decodeType(thatObj.namesOrder.get(i));
 						equals = o.equals(s);
 					}
 				}
 			}
-			if(equals) {
+			if (equals) {
 				// here we know that name indexes are equal & it is enough to check the value sets
-				if(objectNames == null || thatObj.objectNames == null) {
-					equals = objectNames == thatObj.objectNames; 
-				} else if(objectNames.size() != thatObj.objectNames.size()){
+				if (objectNames == null || thatObj.objectNames == null) {
+					equals = objectNames == thatObj.objectNames;
+				} else if (objectNames.size() != thatObj.objectNames.size()) {
 					equals = false;
 				} else {
-					for(int i = 0; i < namesOrder.size() && equals; i++) {
+					for (int i = 0; i < namesOrder.size() && equals; i++) {
 						String o = objectNames.get(namesOrder.get(i));
 						String s = thatObj.objectNames.get(thatObj.namesOrder.get(i));
 						equals = Algorithms.objectEquals(o, s);
 					}
-				}
-			}
-			
-			//do we need it? use precision?
-			if (equals) {
-				if (labelCoordinates == null || thatObj.labelCoordinates == null) {
-					equals = labelCoordinates == thatObj.labelCoordinates;
-					//do we need it? precision?
-//				} else {
-//					for(int i = 0; i < labelCoordinates.length && equals; i++) {
-//						equals = labelCoordinates[i] == thatObj.labelCoordinates[i];
-//					}
 				}
 			}
 			

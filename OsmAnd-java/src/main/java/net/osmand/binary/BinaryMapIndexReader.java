@@ -76,7 +76,6 @@ import gnu.trove.map.TIntObjectMap;
 import gnu.trove.map.hash.TIntObjectHashMap;
 import gnu.trove.map.hash.TLongObjectHashMap;
 import gnu.trove.set.hash.TIntHashSet;
-import gnu.trove.set.hash.TLongHashSet;
 
 public class BinaryMapIndexReader {
 
@@ -1135,8 +1134,8 @@ public class BinaryMapIndexReader {
 		TIntArrayList additionalTypes = null;
 		TIntObjectHashMap<String> stringNames = null;
 		TIntArrayList stringOrder = null;
-		TIntArrayList labelCoordinates = null;
 		long id = 0;
+		int labelX = 0, labelY = 0;
 
 		boolean loop = true;
 		while (loop) {
@@ -1234,18 +1233,13 @@ public class BinaryMapIndexReader {
 				}
 				break;
 			case OsmandOdb.MapData.LABELCOORDINATES_FIELD_NUMBER:
-				System.out.println("label coords");
-				labelCoordinates = new TIntArrayList();
-				sizeL = codedIS.readRawVarint32();
-				old = codedIS.pushLimit(sizeL);
+				labelX = codedIS.readRawVarint32();
+				labelY = codedIS.readRawVarint32();
 				if (READ_STATS) {
-					req.stat.addTagHeader(OsmandOdb.MapData.LABELCOORDINATES_FIELD_NUMBER, sizeL);
-					req.stat.lastObjectLabelCoordinates += sizeL;
+					req.stat.addTagHeader(OsmandOdb.MapData.LABELCOORDINATES_FIELD_NUMBER, 0);
+					req.stat.lastObjectLabelCoordinates += CodedOutputStream.computeRawVarint32Size(labelX);
+					req.stat.lastObjectLabelCoordinates += CodedOutputStream.computeRawVarint32Size(labelY);
 				}
-				while (codedIS.getBytesUntilLimit() > 0) {
-					labelCoordinates.add(codedIS.readRawVarint32());
-				}
-				codedIS.popLimit(old);
 				break;
 			default:
 				skipUnknownField(t);
@@ -1274,11 +1268,8 @@ public class BinaryMapIndexReader {
 		dataObject.id = id;
 		dataObject.area = area;
 		dataObject.mapIndex = root;
-		if (labelCoordinates != null) {
-			dataObject.labelCoordinates = labelCoordinates.toArray();
-		} else {
-			dataObject.labelCoordinates = new int[0];
-		}
+		dataObject.labelX = labelX;
+		dataObject.labelY = labelY;
 		
 		return dataObject;
 	}
@@ -1941,7 +1932,7 @@ public class BinaryMapIndexReader {
 			BinaryMapDataObject bm = 
 					new BinaryMapDataObject(o.id, o.coordinates, o.polygonInnerCoordinates, o.objectType, o.area, 
 							types.toArray(), additionalTypes.isEmpty() ? null : additionalTypes.toArray(), 
-									o.labelCoordinates);
+									o.labelX, o.labelY);
 			if (o.namesOrder != null) {
 				bm.objectNames = new TIntObjectHashMap<>();
 				bm.namesOrder = new TIntArrayList();
@@ -2225,7 +2216,6 @@ public class BinaryMapIndexReader {
 	private static List<Location> readGPX(File f) {
 		List<Location> res = new ArrayList<Location>();
 		try {
-			StringBuilder content = new StringBuilder();
 			BufferedReader reader = new BufferedReader(getUTF8Reader(new FileInputStream(f)));
 			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder dom = factory.newDocumentBuilder();
@@ -2242,7 +2232,6 @@ public class BinaryMapIndexReader {
 //				Document doc = dom.parse(new InputSource(new StringReader(content.toString())));
 			Document doc = dom.parse(new InputSource(reader));
 			NodeList list = doc.getElementsByTagName("trkpt");
-			Way w = new Way(-1);
 			for (int i = 0; i < list.getLength(); i++) {
 				Element item = (Element) list.item(i);
 				try {
