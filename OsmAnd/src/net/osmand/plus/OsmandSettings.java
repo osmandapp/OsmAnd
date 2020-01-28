@@ -448,7 +448,19 @@ public class OsmandSettings {
 	}
 
 	public boolean resetPreferencesForProfile(ApplicationMode mode) {
-		return settingsAPI.edit(getProfilePreferences(mode)).clear().commit();
+		boolean prefsCleared = settingsAPI.edit(getProfilePreferences(mode)).clear().commit();
+		if (prefsCleared) {
+			for (OsmandPreference pref : registeredPreferences.values()) {
+				if (pref instanceof CommonPreference) {
+					CommonPreference commonPreference = (CommonPreference) pref;
+					if (commonPreference.cache && !commonPreference.global) {
+						commonPreference.cachedValue = null;
+					}
+				}
+			}
+		}
+
+		return prefsCleared;
 	}
 
 	public void resetProfilePreferences(ApplicationMode mode, List<OsmandPreference> profilePreferences) {
