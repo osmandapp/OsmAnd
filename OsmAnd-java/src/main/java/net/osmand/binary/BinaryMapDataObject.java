@@ -362,7 +362,35 @@ public class BinaryMapDataObject {
 		
 	}
 
+	public boolean isLabelSpecified() {
+		return (labelX != 0 || labelY != 0) && coordinates.length > 0;
+	}
 
+	public int getLabelX() {
+		long sum = 0;
+		int LABEL_SHIFT = 31 - BinaryMapIndexReader.LABEL_ZOOM_ENCODE;
+		int len = coordinates.length / 2;
+		for(int i = 0; i < len; i++) {
+			sum += coordinates[2 * i];
+		}
+		int average = ((int) (sum >> BinaryMapIndexReader.SHIFT_COORDINATES)/ len) 
+				<< (BinaryMapIndexReader.SHIFT_COORDINATES - LABEL_SHIFT);
+		int label31X = (average + this.labelX) << LABEL_SHIFT;
+		return label31X;
+	}
+	
+	public int getLabelY() {
+		long sum = 0;
+		int LABEL_SHIFT = 31 - BinaryMapIndexReader.LABEL_ZOOM_ENCODE;
+		int len = coordinates.length / 2;
+		for(int i = 0; i < len; i++) {
+			sum += coordinates[2 * i + 1];
+		}
+		int average = ((int) (sum >> BinaryMapIndexReader.SHIFT_COORDINATES)/ len) 
+				<< (BinaryMapIndexReader.SHIFT_COORDINATES - LABEL_SHIFT);
+		int label31Y = (average + this.labelY) << LABEL_SHIFT;
+		return label31Y;
+	}
 
 	public int[] getCoordinates() {
 		return coordinates;

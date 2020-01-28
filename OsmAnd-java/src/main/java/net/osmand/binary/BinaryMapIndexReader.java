@@ -81,6 +81,7 @@ public class BinaryMapIndexReader {
 
 	public final static int TRANSPORT_STOP_ZOOM = 24;
 	public static final int SHIFT_COORDINATES = 5;
+	public static final int LABEL_ZOOM_ENCODE = 31;
 	private final static Log log = PlatformUtil.getLog(BinaryMapIndexReader.class);
 	public static boolean READ_STATS = false;
 	public static final SearchPoiTypeFilter ACCEPT_ALL_POI_TYPE_FILTER = new SearchPoiTypeFilter() {
@@ -2119,7 +2120,7 @@ public class BinaryMapIndexReader {
 
 	public static void main(String[] args) throws IOException {
 		File fl = new File(System.getProperty("maps") + "/Synthetic_test_rendering.obf");
-		fl = new File("/home/madwasp79/OsmAnd-maps/_Creator/Poly_center.obf");
+		fl = new File(System.getProperty("maps") + "/Belarus_europe_2.obf");
 		
 		RandomAccessFile raf = new RandomAccessFile(fl, "r");
 
