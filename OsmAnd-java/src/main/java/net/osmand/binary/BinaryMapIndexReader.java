@@ -1135,6 +1135,7 @@ public class BinaryMapIndexReader {
 		TIntArrayList additionalTypes = null;
 		TIntObjectHashMap<String> stringNames = null;
 		TIntArrayList stringOrder = null;
+		TIntArrayList labelCoordinates = null;
 		long id = 0;
 
 		boolean loop = true;
@@ -1232,6 +1233,20 @@ public class BinaryMapIndexReader {
 					req.stat.lastStringNamesSize += sizeL;
 				}
 				break;
+			case OsmandOdb.MapData.LABELCOORDINATES_FIELD_NUMBER:
+				System.out.println("label coords");
+				labelCoordinates = new TIntArrayList();
+				sizeL = codedIS.readRawVarint32();
+				old = codedIS.pushLimit(sizeL);
+				if (READ_STATS) {
+					req.stat.addTagHeader(OsmandOdb.MapData.LABELCOORDINATES_FIELD_NUMBER, sizeL);
+					req.stat.lastObjectLabelCoordinates += sizeL;
+				}
+				while (codedIS.getBytesUntilLimit() > 0) {
+					labelCoordinates.add(codedIS.readRawVarint32());
+				}
+				codedIS.popLimit(old);
+				break;
 			default:
 				skipUnknownField(t);
 				break;
@@ -1259,6 +1274,12 @@ public class BinaryMapIndexReader {
 		dataObject.id = id;
 		dataObject.area = area;
 		dataObject.mapIndex = root;
+		if (labelCoordinates != null) {
+			dataObject.labelCoordinates = labelCoordinates.toArray();
+		} else {
+			dataObject.labelCoordinates = new int[0];
+		}
+		
 		return dataObject;
 	}
 
@@ -1562,6 +1583,7 @@ public class BinaryMapIndexReader {
 		public int lastObjectAdditionalTypes;
 		public int lastObjectTypes;
 		public int lastObjectCoordinates;
+		public int lastObjectLabelCoordinates;
 
 		public int lastObjectSize;
 		public int lastBlockStringTableSize;
@@ -1586,6 +1608,7 @@ public class BinaryMapIndexReader {
 			lastObjectAdditionalTypes = 0;
 			lastObjectTypes = 0;
 			lastObjectCoordinates = 0;
+			lastObjectLabelCoordinates = 0;
 		}
 	}
 
@@ -2094,7 +2117,7 @@ public class BinaryMapIndexReader {
 
 	public static void main(String[] args) throws IOException {
 		File fl = new File(System.getProperty("maps") + "/Synthetic_test_rendering.obf");
-		fl = new File(System.getProperty("maps") + "/Belarus_europe_2.obf");
+		fl = new File("/home/madwasp79/OsmAnd-maps/_Creator/Poly_center.obf");
 		
 		RandomAccessFile raf = new RandomAccessFile(fl, "r");
 
