@@ -174,7 +174,9 @@ public class RoutingHelper {
 	}
 
 	public synchronized void setFinalAndCurrentLocation(LatLon finalLocation, List<LatLon> intermediatePoints, Location currentLocation){
-		checkAndUpdateStartLocation(currentLocation);
+		if (currentLocation != null) {
+			checkAndUpdateStartLocation(currentLocation);
+		}
 		RouteCalculationResult previousRoute = route;
 		clearCurrentRoute(finalLocation, intermediatePoints);
 		// to update route
