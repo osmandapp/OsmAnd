@@ -52,6 +52,8 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 	protected String standardIconId = "";
 	protected String name;
 	protected boolean isStandardFilter;
+	protected int order;
+	protected boolean isActive = true;
 
 	protected final OsmandApplication app;
 
@@ -741,6 +743,22 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 
 	public void setStandardFilter(boolean isStandardFilter) {
 		this.isStandardFilter = isStandardFilter;
+	}
+
+	public int getOrder() {
+		return order;
+	}
+
+	public void setOrder(int order) {
+		this.order = order;
+	}
+
+	public boolean isActive() {
+		return isActive;
+	}
+
+	public void setActive(boolean active) {
+		isActive = active;
 	}
 
 	public Context getApplication() {

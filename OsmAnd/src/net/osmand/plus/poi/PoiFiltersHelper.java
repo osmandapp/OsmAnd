@@ -2,6 +2,11 @@ package net.osmand.plus.poi;
 
 import android.support.annotation.NonNull;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.annotations.Expose;
+import com.google.gson.reflect.TypeToken;
+
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
@@ -13,9 +18,12 @@ import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.plus.api.SQLiteAPI.SQLiteStatement;
 import net.osmand.util.Algorithms;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -24,6 +32,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
+
+import static net.osmand.plus.poi.PoiFiltersHelper.PoiFilterType.SEARCH;
+import static net.osmand.plus.poi.PoiFiltersHelper.PoiFilterType.TOP_DEFINED;
 
 public class PoiFiltersHelper {
 
@@ -54,6 +65,25 @@ public class PoiFiltersHelper {
 			UDF_CAR_AID, UDF_FOR_TOURISTS, UDF_FOOD_SHOP, UDF_FUEL, UDF_SIGHTSEEING, UDF_EMERGENCY,
 			UDF_PUBLIC_TRANSPORT, UDF_ACCOMMODATION, UDF_RESTAURANTS, UDF_PARKING
 	};
+	
+	public static final Comparator<PoiUIFilter> ORDER_COMPARATOR = new Comparator<PoiUIFilter>() {
+		@Override
+		public int compare(PoiUIFilter o1, PoiUIFilter o2) {
+			return (o1.getOrder() < o2.getOrder()) ? -1 : ((o1.getOrder() == o2.getOrder()) ? 0 : 1);
+		}
+	};
+
+	public static final Comparator<PoiUIFilter> ALPHABET_COMPARATOR = new Comparator<PoiUIFilter>() {
+		@Override
+		public int compare(PoiUIFilter o1, PoiUIFilter o2) {
+			return o1.compareTo(o2);
+		}
+	};
+	
+	public enum PoiFilterType {
+		TOP_DEFINED,
+		SEARCH
+	}
 
 	public PoiFiltersHelper(OsmandApplication application) {
 		this.application = application;
@@ -246,6 +276,149 @@ public class PoiFiltersHelper {
 		}
 		result.add(getShowAllPOIFilter());
 		return result;
+	}
+
+	public List<PoiUIFilter> getProfileDependentPoiUIFilters(boolean onlyActive) {
+		return getProfileDependentPoiUIFilters(onlyActive, new PoiFilterType[]{TOP_DEFINED, SEARCH});
+	}
+
+	public List<PoiUIFilter> getProfileDependentPoiUIFilters(boolean onlyActive, PoiFilterType[] filterTypes) {
+		initPoiUIFiltersArrangementAndActivation();
+		List<PoiUIFilter> result = new ArrayList<>();
+		for (PoiFilterType type : filterTypes) {
+			List<PoiUIFilter> filterList = new ArrayList<>();
+			switch (type) {
+				case TOP_DEFINED:
+					filterList = getTopDefinedPoiFilters();
+					break;
+				case SEARCH:
+					filterList = getSearchPoiFilters();
+					break;
+			}
+			if (onlyActive) {
+				for (PoiUIFilter f : filterList) {
+					if (f.isActive) {
+						result.add(f);
+					}
+				}
+			} else {
+				result.addAll(filterList);
+			}
+		}
+		Collections.sort(result, ORDER_COMPARATOR);
+		return result;
+	}
+	
+	private void initPoiUIFiltersArrangementAndActivation() {
+		List<PoiUIFilter> allFilters = new ArrayList<>();
+		allFilters.addAll(getTopDefinedPoiFilters());
+		allFilters.addAll(getSearchPoiFilters());
+
+		List<PoiFilterBean> poiBeans = getPoiFiltersBeans();
+		Map<String, Boolean> activation = null;
+		Map<String, Integer> arrangement = null;
+		if (poiBeans != null) {
+			activation = new HashMap<>();
+			arrangement = new HashMap<>();
+			for (PoiFilterBean filterBean : poiBeans) {
+				activation.put(filterBean.getFilterId(), filterBean.isActive);
+				arrangement.put(filterBean.getFilterId(), filterBean.getOrder());
+			}
+		}
+		reorderPoiFilters(allFilters, arrangement);
+		refreshPoiFiltersActivation(allFilters, activation);
+		
+		//set up the biggest order to custom filter
+		PoiUIFilter customFilter = getCustomPOIFilter();
+		customFilter.setActive(true);
+		customFilter.setOrder(allFilters.size());
+	}
+	
+	private void reorderPoiFilters(List<PoiUIFilter> filters, Map<String, Integer> arrangement) {
+		boolean defaultArrangement = application.getSettings().ARRANGE_POI_FILTERS_BY_DEFAULT.get();
+		if (arrangement == null || defaultArrangement) {
+			//arrangement by default
+			Collections.sort(filters, ALPHABET_COMPARATOR);
+			for (int i = 0; i < filters.size(); i++) {
+				PoiUIFilter poiFilter = filters.get(i);
+				poiFilter.setOrder(i);
+			}
+		} else {
+			for (PoiUIFilter filter : filters) {
+				String filterId = filter.getFilterId();
+				if (arrangement.containsKey(filterId)) {
+					filter.setOrder(arrangement.get(filterId));
+				}
+			}
+		}
+	}
+	
+	private void refreshPoiFiltersActivation(List<PoiUIFilter> allFilters, Map<String, Boolean> activation) {
+		if (activation == null) {
+			//activation by default
+			for (PoiUIFilter filter : allFilters) {
+				filter.setActive(true);
+			}
+		} else {
+			for (PoiUIFilter filter : allFilters) {
+				String filterId = filter.getFilterId();
+				if (activation.containsKey(filterId)) {
+					filter.setActive(activation.get(filterId));
+				}
+			}
+		}
+	}
+
+	public static class PoiFilterBean {
+		@Expose
+		String filterId;
+		@Expose
+		int order;
+		@Expose
+		boolean isActive;
+
+		public PoiFilterBean(String filterId, int order, boolean isActive) {
+			this.filterId = filterId;
+			this.order = order;
+			this.isActive = isActive;
+		}
+
+		public String getFilterId() {
+			return filterId;
+		}
+
+		public int getOrder() {
+			return order;
+		}
+
+		public boolean isActive() {
+			return isActive;
+		}
+
+		public void setFilterId(String filterId) {
+			this.filterId = filterId;
+		}
+
+		public void setOrder(int order) {
+			this.order = order;
+		}
+
+		public void setActive(boolean active) {
+			isActive = active;
+		}
+	}
+
+	public void savePoiFiltersBeans(List<PoiFilterBean> list) {
+		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+		String defaultProfiles = gson.toJson(list);
+		application.getSettings().POI_FILTERS_ARRANGEMENT.set(defaultProfiles);
+	}
+
+	public List<PoiFilterBean> getPoiFiltersBeans() {
+		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+		Type t = new TypeToken<ArrayList<PoiFilterBean>>() {
+		}.getType();
+		return gson.fromJson(application.getSettings().POI_FILTERS_ARRANGEMENT.get(), t);
 	}
 
 	private PoiFilterDbHelper openDbHelperNoPois() {

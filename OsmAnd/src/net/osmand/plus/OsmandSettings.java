@@ -3056,6 +3056,10 @@ public class OsmandSettings {
 	public void setSelectedPoiFilters(final Set<String> poiFilters) {
 		SELECTED_POI_FILTER_FOR_MAP.set(android.text.TextUtils.join(",", poiFilters));
 	}
+	
+	public final OsmandPreference<Boolean> ARRANGE_POI_FILTERS_BY_DEFAULT = new BooleanPreference("arrange_poi_filters_by_default", false).makeProfile().cache();
+	
+	public final OsmandPreference<String> POI_FILTERS_ARRANGEMENT = new StringPreference("poi_filters_arrangement", null).makeProfile().cache();
 
 	public static final String VOICE_PROVIDER_NOT_USE = "VOICE_PROVIDER_NOT_USE";
 
