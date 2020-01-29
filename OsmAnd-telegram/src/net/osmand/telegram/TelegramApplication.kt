@@ -42,7 +42,7 @@ class TelegramApplication : Application() {
 		telegramHelper.messageActiveTimeSec = settings.locHistoryTime
 		uiUtils = UiUtils(this)
 		osmandAidlHelper = OsmandAidlHelper(this)
-		osmandAidlHelper.listener = object : OsmandHelperListener {
+		osmandAidlHelper.addConnectionListener(object : OsmandHelperListener {
 			override fun onOsmandConnectionStateChanged(connected: Boolean) {
 				if (connected) {
 					osmandAidlHelper.clearNavDrawerItems("net.osmand.telegram")
@@ -60,7 +60,7 @@ class TelegramApplication : Application() {
 					showLocationHelper.addOrUpdateStatusWidget(-1, false)
 				}
 			}
-		}
+		})
 		osmandAidlHelper.setUpdatesListener(object : UpdatesListener {
 			override fun update() {
 				if (settings.hasAnyChatToShowOnMap()) {
