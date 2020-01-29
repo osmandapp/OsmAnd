@@ -3466,4 +3466,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="multimedia_use_system_camera">Imprea s\'aplicatzione de sistema</string>
     <string name="multimedia_photo_play_sound">Sonu de s\'oturadore de sa fotocàmera</string>
     <string name="osm_authorization_success">S\'autorizatzione est resèssida</string>
+    <string name="monitoring_min_speed_descr_recommendation">Impòsitu: Proa a impreare, in antis, su rilevamentu de movimentu pro mèdiu de sul filtru de movimentu mìnimu (B). Diat pòdere produire risultados mègius, e tue dias pòdere pèrdere datos de mancu. Si sas rastas tuas abarrant burdellosas a lestresas bassas, proa a impreare inoghe valores diferentes dae zero. Pro praghere ammenta·ti chi carchi mèdida diat pòdere non rilevare perunu valore de lestresa (unas àteras maneras basadas in subra de sa retza), e chi in custu casu non dias registrare nudda.</string>
+    <string name="monitoring_min_accuracy_descr_recommendation">Impòsitu: est prus difìtzile a intzertare ite at a èssere registradu e ite nono. Diat èssere mègius a istudare custu filtru.</string>
+    <string name="live_monitoring_time_buffer">Intervallu tampone (buffer)</string>
 </resources>

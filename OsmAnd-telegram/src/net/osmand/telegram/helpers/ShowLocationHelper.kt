@@ -77,6 +77,15 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 	private var forcedStop: Boolean = false
 
 	init {
+		app.osmandAidlHelper.addConnectionListener(object : OsmandAidlHelper.OsmandHelperListener {
+			override fun onOsmandConnectionStateChanged(connected: Boolean) {
+				if (!connected && showingLocation && !app.settings.monitoringEnabled) {
+					if (isUseOsmandCallback() && app.osmandAidlHelper.updatesCallbackRegistered()) {
+						showingLocation = false
+					}
+				}
+			}
+		})
 		app.osmandAidlHelper.setContextMenuButtonsListener(object : ContextMenuButtonsListener {
 
 			override fun onContextMenuButtonClicked(buttonId: Int, pointId: String, layerId: String) {
@@ -137,7 +146,7 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 			osmandAidlHelper.showMapPoint(MAP_LAYER_ID, pointId, name, name, item.chatTitle, Color.WHITE, aLatLon, details, params)
 		}
 	}
-	
+
 	fun updateLocationsOnMap() {
 		osmandAidlHelper.execOsmandApi {
 			val messages = telegramHelper.getMessages()
@@ -427,7 +436,7 @@ class ShowLocationHelper(private val app: TelegramApplication) {
 		forcedStop = force
 		if (showingLocation) {
 			showingLocation = false
-			if (isUseOsmandCallback() && app.osmandAidlHelper.updatesCallbackRegistered()) {
+			if (isUseOsmandCallback() && osmandAidlHelper.updatesCallbackRegistered()) {
 				osmandAidlHelper.unregisterFromUpdates()
 			} else if (!app.settings.monitoringEnabled) {
 				app.stopUserLocationService()
