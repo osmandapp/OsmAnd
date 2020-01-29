@@ -3376,7 +3376,7 @@
     <string name="add_new_profile_q">Adicionar novo perfil \'%1$s\'\?</string>
     <string name="save_heading">Incluir a direção</string>
     <string name="save_heading_descr">Gravar direção para cada ponto de pista durante a gravação.</string>
-    <string name="distance_and_address">%1$s • %2$s</string>
+    <string name="ltr_or_rtl_combine_via_bold_point">%1$s • %2$s</string>
     <string name="street_city">%1$s, %2$s</string>
     <string name="personal_category_name">Pessoal</string>
     <string name="shared_string_downloading_formatted">Descarregando %s</string>
