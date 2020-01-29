@@ -262,14 +262,18 @@ public class RoutingHelper {
 		return finalLocation;
 	}
 	public void checkAndUpdateStartLocation(Location nextStartLocation) {
-		checkAndUpdateStartLocation(new LatLon(nextStartLocation.getLatitude(), nextStartLocation.getLongitude()));
+		if (nextStartLocation != null) {
+			checkAndUpdateStartLocation(new LatLon(nextStartLocation.getLatitude(), nextStartLocation.getLongitude()));
+		}
 	}
 
 	public void checkAndUpdateStartLocation(LatLon newStartLocation) {
-		LatLon lastStartLocation = app.getSettings().getLastStartPoint();
-		if (lastStartLocation == null || MapUtils.getDistance(newStartLocation, lastStartLocation) > CACHE_RADIUS) {
-			app.getMapViewTrackingUtilities().detectDrivingRegion(newStartLocation);
-			app.getSettings().setLastStartPoint(newStartLocation);
+		if (newStartLocation != null) {
+			LatLon lastStartLocation = app.getSettings().getLastStartPoint();
+			if (lastStartLocation == null || MapUtils.getDistance(newStartLocation, lastStartLocation) > CACHE_RADIUS) {
+				app.getMapViewTrackingUtilities().detectDrivingRegion(newStartLocation);
+				app.getSettings().setLastStartPoint(newStartLocation);
+			}
 		}
 	}
 
