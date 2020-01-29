@@ -2279,11 +2279,11 @@
     <string name="animate_my_location_desc">تمكين استقراء موقعي أثناء الفقد المؤقت للموقع وذلك لإصلاحه.</string>
     <string name="quick_action_auto_zoom_desc">زر تشغيل أو إيقاف التكبير التلقائي وفقًا لسرعتك.</string>
     <string name="quick_action_add_destination_desc">زر توسيط في وجهة الطريق ، مما يجعل الوجهة المحددة مسبقًا تصبح الوجهة الوسيطة الأخيرة.</string>
-    <string name="quick_action_replace_destination_desc">زر يركز على وجهة مسار جديدة ، مع استبدال الوجهة المحددة مسبقًا (إن وجدت).</string>
+    <string name="quick_action_replace_destination_desc">زر لجعل الشاشة مركز الوجهة الجديدة ، مع استبدال الوجهة المحددة مسبقًا (إن وجدت).</string>
     <string name="improve_coverage_install_mapillary_desc">يمكنك التقاط صور خاصة بك أو سلسلة من الصور وإرفاقها إلى هذا الموقع من الخريطة. للقيام بذلك تحتاج إلى تثبيت تطبيق مابيلاري من Google play.</string>
     <string name="hillshade_menu_download_descr">تحتاج إلى تحميل خريطة تراكب التلال لهذه المنطقة.</string>
     <string name="hillshade_purchase_header">لمشاهدة التضاريس على الخريطة، تحتاج إلى شراء وتثبيت برنامج الخطوط الكنتورية المساعد.</string>
-    <string name="quick_action_add_first_intermediate_desc">زر توسيط في الوجهة الوسيطة الأولى.</string>
+    <string name="quick_action_add_first_intermediate_desc">زر لجعل مركز الشاشة أول وجهة وسيطة.</string>
     <string name="no_overlay">بدون طبقة</string>
     <string name="no_underlay">بدون طبقة</string>
     <string name="subscribe_email_desc">اشترك في قائمة البريد الإلكتروني لدينا فيما يخص الخصومات والحصول على 3 تنزيلات خرائط إضافية!</string>
@@ -3307,7 +3307,7 @@
     <string name="routing_attr_width_name">حد العرض</string>
     <string name="routing_attr_width_description">حدد الحد المسموح به لعرض السيارة على الطرق.</string>
     <string name="simulate_your_location_gpx_descr">محاكاة موقعك باستخدام مسار GPX مسجل.</string>
-    <string name="quick_action_directions_from_desc">زر لجعل الشاشة مركز نقطة الانطلاق وحساب الطريق إلى الوجهة أو فتح مربع حوار لتحديد الوجهة إذا لم تكن علامة الوجهة علي الخريطة.</string>
+    <string name="quick_action_directions_from_desc">زر لجعل مركز الشاشة نقطة الانطلاق. سيطلب بعد ذلك تعيين الوجهة أو تشغيل حساب المسار.</string>
     <string name="distance_and_address">%1$s • %2$s</string>
     <string name="street_city">%1$s, %2$s</string>
     <string name="personal_category_name">شخصي</string>
