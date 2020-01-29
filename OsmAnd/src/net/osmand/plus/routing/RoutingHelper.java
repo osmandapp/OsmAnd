@@ -262,7 +262,9 @@ public class RoutingHelper {
 		return finalLocation;
 	}
 	public void checkAndUpdateStartLocation(Location nextStartLocation) {
-		checkAndUpdateStartLocation(new LatLon(nextStartLocation.getLatitude(), nextStartLocation.getLongitude()));
+		if (nextStartLocation != null) {
+			checkAndUpdateStartLocation(new LatLon(nextStartLocation.getLatitude(), nextStartLocation.getLongitude()));
+		}
 	}
 
 	public void checkAndUpdateStartLocation(LatLon newStartLocation) {
