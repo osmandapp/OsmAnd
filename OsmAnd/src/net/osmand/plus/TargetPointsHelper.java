@@ -445,9 +445,7 @@ public class TargetPointsHelper {
 			Location lastKnownLocation = ctx.getLocationProvider().getLastKnownLocation();
 			LatLon latLon = lastKnownLocation != null ?
 					new LatLon(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude()) : null;
-			if (latLon != null) {
-				routingHelper.checkAndUpdateStartLocation(latLon);
-			}
+			routingHelper.checkAndUpdateStartLocation(latLon);
 			setMyLocationPoint(latLon, false, null);
 		}
 	}

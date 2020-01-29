@@ -174,9 +174,7 @@ public class RoutingHelper {
 	}
 
 	public synchronized void setFinalAndCurrentLocation(LatLon finalLocation, List<LatLon> intermediatePoints, Location currentLocation){
-		if (currentLocation != null) {
-			checkAndUpdateStartLocation(currentLocation);
-		}
+		checkAndUpdateStartLocation(currentLocation);
 		RouteCalculationResult previousRoute = route;
 		clearCurrentRoute(finalLocation, intermediatePoints);
 		// to update route
@@ -268,10 +266,12 @@ public class RoutingHelper {
 	}
 
 	public void checkAndUpdateStartLocation(LatLon newStartLocation) {
-		LatLon lastStartLocation = app.getSettings().getLastStartPoint();
-		if (lastStartLocation == null || MapUtils.getDistance(newStartLocation, lastStartLocation) > CACHE_RADIUS) {
-			app.getMapViewTrackingUtilities().detectDrivingRegion(newStartLocation);
-			app.getSettings().setLastStartPoint(newStartLocation);
+		if (newStartLocation != null) {
+			LatLon lastStartLocation = app.getSettings().getLastStartPoint();
+			if (lastStartLocation == null || MapUtils.getDistance(newStartLocation, lastStartLocation) > CACHE_RADIUS) {
+				app.getMapViewTrackingUtilities().detectDrivingRegion(newStartLocation);
+				app.getSettings().setLastStartPoint(newStartLocation);
+			}
 		}
 	}
 
