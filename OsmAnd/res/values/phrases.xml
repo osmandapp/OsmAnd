@@ -4169,7 +4169,7 @@
 	<string name="poi_volcano_type_maar">Maar</string>
 	<string name="poi_volcano_type_caldera">Caldera</string>
 	<string name="poi_volcano_type_lava_dome">Lava dome</string>
-	<string name="poi_volcano_type_dirt">Dirt</string>
+	<string name="poi_volcano_type_mud">Mud</string>
 	<string name="poi_volcano_last_eruption">Last eruption</string>
 	<string name="poi_volcano_status_extinct">Extinct</string>
 	<string name="poi_volcano_status_dormant">Dormant</string>
