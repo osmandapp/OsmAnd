@@ -79,6 +79,7 @@ public class OsmLiveCancelledDialog extends BaseOsmAndDialogFragment implements 
 			}
 			if (Build.VERSION.SDK_INT >= 21) {
 				window.setStatusBarColor(ContextCompat.getColor(ctx, getStatusBarColor()));
+				window.setNavigationBarColor(ContextCompat.getColor(ctx, getStatusBarColor()));
 			}
 		}
 		return dialog;

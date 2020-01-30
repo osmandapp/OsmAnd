@@ -79,6 +79,7 @@ public class WikivoyageExploreActivity extends TabActivity implements DownloadEv
 			}
 			if (Build.VERSION.SDK_INT >= 21) {
 				window.setStatusBarColor(getResolvedColor(getStatusBarColor()));
+				window.setNavigationBarColor(getResolvedColor(getStatusBarColor()));
 			}
 		}
 

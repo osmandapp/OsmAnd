@@ -237,6 +237,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 					} else {
 						statusBarColor = activity.getWindow().getStatusBarColor();
 						activity.getWindow().setStatusBarColor(ContextCompat.getColor(activity, colorId));
+						activity.getWindow().setNavigationBarColor(ContextCompat.getColor(activity, colorId));
 					}
 				}
 				if (activity instanceof MapActivity) {
@@ -259,6 +260,7 @@ public abstract class BaseSettingsFragment extends PreferenceFragmentCompat impl
 			if (Build.VERSION.SDK_INT >= 21) {
 				if (!(activity instanceof MapActivity) && statusBarColor != -1) {
 					activity.getWindow().setStatusBarColor(statusBarColor);
+					activity.getWindow().setNavigationBarColor(statusBarColor);
 				}
 				if (activity instanceof MapActivity) {
 					((MapActivity) activity).enterToFullScreen();
