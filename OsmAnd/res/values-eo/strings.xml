@@ -894,7 +894,7 @@ Lon: %2$s</string>
     <string name="local_osm_changes_backup">Sekurkopii kiel OSM-redakton</string>
     <string name="delete_point">Forigi punkton</string>
     <string name="plugin_distance_point_time">tempo</string>
-    <string name="plugin_distance_point_hdop">akurateco</string>
+    <string name="plugin_distance_point_hdop">precizo</string>
     <string name="plugin_distance_point_speed">rapido</string>
     <string name="plugin_distance_point_ele">alto</string>
     <string name="plugin_distance_point">Punkto</string>
@@ -1264,7 +1264,7 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="front_left">maldekstre-antaŭen</string>
     <string name="oclock">tie ĉi</string>
     <string name="towards">en la direkto al</string>
-    <string name="accuracy">Akurateco</string>
+    <string name="accuracy">Precizo</string>
     <string name="altitude">Altitudo</string>
     <string name="no_info">Sen informoj</string>
     <string name="direction_style_sidewise">Malhorloĝdirekte (8 sektoroj)</string>
@@ -2050,8 +2050,8 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="save_track_min_speed_descr">Filtrilo: ne registri punktojn sube tiu ĉi rapido.</string>
     <string name="save_track_min_distance">Minimuma delokiĝo por registri</string>
     <string name="save_track_min_distance_descr">Filtrilo: elekti minimuman distancon de punkto por registri la sekvan.</string>
-    <string name="save_track_precision">Minimuma akurateco de registrado</string>
-    <string name="save_track_precision_descr">Filtrilo: elekti minimuman akuratecon por punkto esti registrita.</string>
+    <string name="save_track_precision">Minimuma precizo de registrado</string>
+    <string name="save_track_precision_descr">Filtrilo: elekti minimuman precizon por punkto esti registrita.</string>
     <string name="christmas_poi">Kristnaskaj interesejoj</string>
     <string name="christmas_desc">Atendante Kristnaskon kaj la novan jaron, vi povas aktivigi vidigadon de interesejoj rilataj al Kristnasko: kristnaskaj arbetoj, foiroj, ktp.</string>
     <string name="christmas_desc_q">Ĉu montri Kristnaskajn interesejojn\?</string>
@@ -3430,4 +3430,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="logcat_buffer_descr">Legi kaj kunhavigi detalajn protokolojn de la aplikaĵo</string>
     <string name="permission_is_required">Permeso estas necesa por uzi tiun ĉi eblaĵon.</string>
     <string name="monitoring_min_speed_descr">Tiu ĉi filtrilo preventas registri punktojn sub difinita rapidlimo. Tiel registritaj spuroj aspektos pli glate dum vidiĝi sur la mapo.</string>
+    <string name="monitoring_min_speed_descr_side_effect">Kromefiko: en via spuro mankos fragmentoj, en kiuj la minimuma rapido ne estis atingita (ekz. kiam vi puŝis vian biciklon ĉe kruta deklivo). Ankaŭ estos neniuj informoj pri paŭzoj. Tio ĉi efikos sur analizo aŭ pritraktado: por determini tutan tempon de via ekskurso, tempon de movado aŭ mezuman rapidon.</string>
+    <string name="monitoring_min_accuracy_descr_remark">Rimarko: se GPS estos malaktiva tuj antaŭ registri spuron, la unua mezurita punkto povos havi etigitan precizon. (Eble estontece la aplikaĵo atendos sekundon aŭ pli antaŭ registri punkton (aŭ registros la plej bonan el 3 sekvantaj punktoj).)</string>
+    <string name="monitoring_min_distance_descr">Tiu ĉi filtrilo preventas de registri la ekzaktaj kopioj de punktoj, kiam malmulte da movo okazis, igas la spurojn aspekti pli bele sen antaŭa pritraktado.</string>
 </resources>
