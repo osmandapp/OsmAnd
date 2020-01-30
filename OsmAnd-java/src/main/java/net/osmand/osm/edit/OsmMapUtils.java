@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.PriorityQueue;
 
 import net.osmand.data.LatLon;
 import net.osmand.osm.edit.Relation.RelationMember;
@@ -46,6 +47,18 @@ public class OsmMapUtils {
 		}
 		return null;
 	}
+	
+	public static LatLon getComplexPolyCenter(Collection<Node> nodes) {
+		double precision = 1e-5; //where to set precision constant?
+		
+		final List<List<LatLon>> rings = new ArrayList<>();
+		List<LatLon> outerRing = new ArrayList<>();
+		for (Node n : nodes) {
+			outerRing.add(new LatLon(n.getLatitude(), n.getLongitude()));	
+		}
+		rings.add(outerRing);
+		return getPolylabelPoint(rings, precision);
+	}
 
 	public static LatLon getWeightCenter(Collection<LatLon> nodes) {
 		if (nodes.isEmpty()) {
@@ -86,7 +99,7 @@ public class OsmMapUtils {
 			return null;
 		}
 		boolean area = w.getFirstNodeId() == w.getLastNodeId();
-		LatLon ll = area ? getMathWeightCenterForNodes(nodes) : getWeightCenterForNodes(nodes);
+		LatLon ll = area ? getComplexPolyCenter(nodes) : getWeightCenterForNodes(nodes);
 		if(ll == null) {
 			return null;
 		}
@@ -107,6 +120,7 @@ public class OsmMapUtils {
 		}
 		
 		return new LatLon(flat, flon);
+
 	}
 	
 
@@ -436,6 +450,177 @@ public class OsmMapUtils {
 
 		return Math.abs(area) / 2;
 	}
+	
+	/**
+	 * Calculate "visual" center point of polygons (based on Mapbox' polylabel algorithm)
+	 * @param rings - list of lists of nodes
+	 * @param precision - precision of calculation, should be small, like 1e-4 or less.
+	 * @return coordinates of calculated center
+	 */
+	
+    private static LatLon getPolylabelPoint(List<List<LatLon>> rings, double precision) {
+        // find the bounding box of the outer ring
+        double minX = Double.MAX_VALUE;
+        double minY = Double.MAX_VALUE;
+        double maxX = -Double.MAX_VALUE;
+        double maxY = -Double.MAX_VALUE;
+        List<LatLon> outerRingCoordinates = rings.get(0);
+        for (LatLon p: outerRingCoordinates) {
+            double lat = p.getLatitude();
+            double lon = p.getLongitude();
 
+            minX = StrictMath.min(minX, lon);
+            minY = StrictMath.min(minY, lat);
+            maxX = StrictMath.max(maxX, lon);
+            maxY = StrictMath.max(maxY, lat);
+        }
 
+        double width = maxX - minX;
+        double height = maxY - minY;
+        double cellSize = Math.min(width, height);
+        double h = cellSize / 2;
+
+        if (cellSize == 0) return new LatLon(minX, minY);
+
+        // a priority queue of cells in order of their "potential" (max distance to polygon)
+        PriorityQueue<Cell> cellQueue = new PriorityQueue<>(new CellComparator());
+
+        // cover polygon with initial cells
+        for (double x = minX; x < maxX; x += cellSize) {
+            for (double y = minY; y < maxY; y += cellSize) {
+                cellQueue.add(new Cell(x + h, y + h, h, rings));
+            }
+        }
+        
+        // take centroid as the first best guess
+        Cell bestCell = getCentroidCell(rings);
+
+        // special case for rectangular polygons
+        Cell bboxCell = new Cell(minX + width / 2, minY + height / 2, 0, rings);
+        if (bboxCell.d > bestCell.d) bestCell = bboxCell;
+
+        while (!cellQueue.isEmpty()) {
+            // pick the most promising cell from the queue
+            Cell cell = cellQueue.poll();
+
+            // update the best cell if we found a better one
+            if (cell.d > bestCell.d) {
+                bestCell = cell;
+            }
+
+            // do not drill down further if there's no chance of a better solution
+//            System.out.println(String.format("check for precision: cell.max - bestCell.d = %f Precision: %f", cell.max, precision));
+            if (cell.max - bestCell.d <= precision) continue;
+
+            // split the cell into four cells
+            h = cell.h / 2;
+            cellQueue.add(new Cell(cell.x - h, cell.y - h, h, rings));
+            cellQueue.add(new Cell(cell.x + h, cell.y - h, h, rings));
+            cellQueue.add(new Cell(cell.x - h, cell.y + h, h, rings));
+            cellQueue.add(new Cell(cell.x + h, cell.y + h, h, rings));
+        }
+//        System.out.println(String.format("Best lat/lon: %f, %f", bestCell.y, bestCell.x));
+        return new LatLon(bestCell.y, bestCell.x);
+    }
+
+    // get polygon centroid
+    private static Cell getCentroidCell(List<List<LatLon>> rings) {
+        double area = 0;
+        double x = 0;
+        double y = 0;
+
+        List<LatLon> points = rings.get(0);
+        for (int i = 0, len = points.size(), j = len - 1; i < len; j = i++) {
+            LatLon a = points.get(i);
+            LatLon b = points.get(j);
+            double aLon = a.getLongitude();
+            double aLat = a.getLatitude();
+            double bLon = b.getLongitude();
+            double bLat = b.getLatitude();
+
+            double f = aLon * bLat - bLon * aLat;
+            x += (aLon + bLon) * f;
+            y += (aLat + bLat) * f;
+            area += f * 3;
+        }
+
+        if (area == 0) {
+            LatLon p = points.get(0);
+            return new Cell(p.getLatitude(), p.getLongitude(), 0, rings);
+        }
+
+        return new Cell(x / area, y / area, 0, rings);
+    }
+
+    private static class CellComparator implements Comparator<Cell> {
+        @Override
+        public int compare(Cell o1, Cell o2) {
+            return Double.compare(o2.max, o1.max);
+        }
+    }
+
+    private static class Cell {
+        private final double x; // cell center x (lon)
+        private final double y; // cell center y (lat)
+        private final double h; // half the cell size
+        private final double d; // distance from cell center to polygon
+        private final double max; // max distance to polygon within a cell
+
+        private Cell(double x, double y, double h, List<List<LatLon>> rings) {
+            this.x = x;
+            this.y = y;
+            this.h = h;
+            this.d = pointToPolygonDist(x, y, rings);
+            this.max = this.d + this.h * Math.sqrt(2);
+        }
+
+        // signed distance from point to polygon outline (negative if point is outside)
+        private double pointToPolygonDist(double x, double y, List<List<LatLon>> rings) {
+            boolean inside = false;
+            double minDistSq = Double.MAX_VALUE;
+
+            for (List<LatLon> ring: rings) {
+                for (int i = 0, len = ring.size(), j = len - 1; i < len; j = i++) {
+                    LatLon a = ring.get(i);
+                    LatLon b = ring.get(j);
+                    double aLon = a.getLongitude();
+                    double aLat = a.getLatitude();
+                    double bLon = b.getLongitude();
+                    double bLat = b.getLatitude();
+
+                    if ((aLat > y != bLat > y) && (x < (bLon - aLon) * (y - aLat) / (bLat - aLat) + aLon)) {
+                    	inside = !inside;
+                    }
+                    	
+                    minDistSq = Math.min(minDistSq, getSegmentDistanceSqared(x, y, a, b));
+                }
+            }
+            return (inside ? 1 : -1) * Math.sqrt(minDistSq);
+        }
+
+        // get squared distance from a point to a segment of polygon
+        private double getSegmentDistanceSqared(double px, double py, LatLon a, LatLon b) {
+            double x = a.getLongitude();
+            double y = a.getLatitude();
+            double dx = b.getLongitude() - x;
+            double dy = b.getLatitude() - y;
+
+            if (dx != 0 || dy != 0) {
+                double t = ((px - x) * dx + (py - y) * dy) / (dx * dx + dy * dy);
+
+                if (t > 1) {
+                    x = b.getLongitude();
+                    y = b.getLatitude();
+                } else if (t > 0) {
+                    x += dx * t;
+                    y += dy * t;
+                }
+            }
+
+            dx = px - x;
+            dy = py - y;
+
+            return dx * dx + dy * dy;
+        }
+    }
 }
