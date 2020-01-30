@@ -240,7 +240,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 					info.getFileName());
 			confirm.setMessage(getString(R.string.clear_confirmation_msg, fn));
 			confirm.show();
-		} else if (resId == R.string.maps_define_edit) {
+		} else if (resId == R.string.shared_string_edit) {
 			OsmandRasterMapsPlugin.defineNewEditLayer(getDownloadActivity(),
 					new ResultMatcher<TileSourceManager.TileSourceTemplate>() {
 				@Override
@@ -1238,6 +1238,18 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 			}
 		});
 		if (info.getType() == LocalIndexType.TILES_DATA && (info.getAttachedObject() instanceof ITileSource) &&
+				((ITileSource) info.getAttachedObject()).couldBeDownloadedFromInternet()) {
+			item = optionsMenu.getMenu().add(R.string.shared_string_edit)
+					.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_edit_dark));
+			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+				@Override
+				public boolean onMenuItemClick(MenuItem item) {
+					performBasicOperation(R.string.shared_string_edit, info);
+					return true;
+				}
+			});
+		}
+		if (info.getType() == LocalIndexType.TILES_DATA && (info.getAttachedObject() instanceof ITileSource) &&
 				((ITileSource)info.getAttachedObject()).couldBeDownloadedFromInternet()) {
 			item = optionsMenu.getMenu().add(R.string.clear_tile_data)
 					.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_remove_dark));
@@ -1247,19 +1259,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 					performBasicOperation(R.string.clear_tile_data, info);
 					return true;
 				}
-			});	
-		}
-		if (info.getType() == LocalIndexType.TILES_DATA && (info.getAttachedObject() instanceof ITileSource) &&
-				((ITileSource) info.getAttachedObject()).couldBeDownloadedFromInternet()) {
-			item = optionsMenu.getMenu().add(R.string.maps_define_edit)
-					.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_type_edit));
-			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-				@Override
-				public boolean onMenuItemClick(MenuItem item) {
-					performBasicOperation(R.string.maps_define_edit, info);
-					return true;
-				}
-			});	
+			});
 		}
 		final IndexItem update = filesToUpdate.get(info.getFileName());
 		if (update != null) {
