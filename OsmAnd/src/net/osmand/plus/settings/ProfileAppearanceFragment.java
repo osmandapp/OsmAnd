@@ -655,13 +655,15 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 		}
 		if (isNew) {
 			ApplicationMode.ApplicationModeBuilder builder = ApplicationMode
-					.createCustomMode(changedProfile.parent, changedProfile.name.trim(), changedProfile.stringKey)
-					.icon(app, ProfileIcons.getResStringByResId(changedProfile.iconRes))
-					.setRouteService(changedProfile.routeService)
+					.createCustomMode(changedProfile.parent, changedProfile.stringKey)
+					.setIconResName(ProfileIcons.getResStringByResId(changedProfile.iconRes))
+					.setUserProfileName(changedProfile.name.trim())
 					.setRoutingProfile(changedProfile.routingProfile)
-					.setColor(changedProfile.color)
-					.locationIcon(changedProfile.locationIcon)
-					.navigationIcon(changedProfile.navigationIcon);
+					.setRouteService(changedProfile.routeService)
+					.setIconColor(changedProfile.color)
+					.setLocationIcon(changedProfile.locationIcon)
+					.setNavigationIcon(changedProfile.navigationIcon)
+					.setOrder(ApplicationMode.allPossibleValues().size());
 
 			app.getSettings().copyPreferencesFromProfile(changedProfile.parent, builder.getApplicationMode());
 			ApplicationMode mode = ApplicationMode.saveProfile(builder, app);
@@ -669,15 +671,15 @@ public class ProfileAppearanceFragment extends BaseSettingsFragment {
 				ApplicationMode.changeProfileAvailability(mode, true, app);
 			}
 		} else {
-			ApplicationMode mode = ApplicationMode.valueOfStringKey(changedProfile.stringKey, null);
-			mode.setParentAppMode(app, changedProfile.parent);
-			mode.setUserProfileName(app, changedProfile.name.trim());
-			mode.setIconResName(app, ProfileIcons.getResStringByResId(changedProfile.iconRes));
-			mode.setRouteService(app, changedProfile.routeService);
-			mode.setRoutingProfile(app, changedProfile.routingProfile);
-			mode.setIconColor(app, changedProfile.color);
-			mode.setLocationIcon(app, changedProfile.locationIcon);
-			mode.setNavigationIcon(app, changedProfile.navigationIcon);
+			ApplicationMode mode = getSelectedAppMode();
+			mode.setParentAppMode(changedProfile.parent);
+			mode.setIconResName(ProfileIcons.getResStringByResId(changedProfile.iconRes));
+			mode.setUserProfileName(changedProfile.name.trim());
+			mode.setRoutingProfile(changedProfile.routingProfile);
+			mode.setRouteService(changedProfile.routeService);
+			mode.setIconColor(changedProfile.color);
+			mode.setLocationIcon(changedProfile.locationIcon);
+			mode.setNavigationIcon(changedProfile.navigationIcon);
 		}
 
 		return true;

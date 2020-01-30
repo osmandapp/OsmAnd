@@ -437,7 +437,7 @@ public class SettingsHelper {
 
 		void readFromJson(@NonNull OsmandApplication app, @NonNull JSONObject json) throws JSONException {
 			String appModeJson = json.getString("appMode");
-			builder = ApplicationMode.fromJson(app, appModeJson);
+			builder = ApplicationMode.fromJson(appModeJson);
 			ApplicationMode appMode = builder.getApplicationMode();
 			if (!appMode.isCustomProfile()) {
 				appMode = ApplicationMode.valueOfStringKey(appMode.getStringKey(), appMode);

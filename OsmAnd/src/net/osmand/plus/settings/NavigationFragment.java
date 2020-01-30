@@ -148,8 +148,8 @@ public class NavigationFragment extends BaseSettingsFragment {
 		} else {
 			routeService = RouteProvider.RouteService.OSMAND;
 		}
-		appMode.setRouteService(app, routeService);
-		appMode.setRoutingProfile(app, profileKey);
+		appMode.setRouteService(routeService);
+		appMode.setRoutingProfile(profileKey);
 	}
 
 	public static Map<String, RoutingProfileDataObject> getRoutingProfiles(OsmandApplication context) {

@@ -783,7 +783,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		builder.setPositiveButton(R.string.shared_string_ok, new OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				mode.setDefaultSpeed(app, defaultValue[0] / ratio[0]);
+				mode.setDefaultSpeed(defaultValue[0] / ratio[0]);
 				if (!defaultSpeedOnly) {
 					settings.MIN_SPEED.setModeValue(mode, minValue[0] / ratio[0]);
 					settings.MAX_SPEED.setModeValue(mode, maxValue[0] / ratio[0]);
@@ -798,7 +798,7 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 		builder.setNeutralButton(R.string.shared_string_revert, new OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				mode.resetDefaultSpeed(app);
+				mode.resetDefaultSpeed();
 				if (!defaultSpeedOnly) {
 					settings.MIN_SPEED.setModeValue(mode,0f);
 					settings.MAX_SPEED.setModeValue(mode,0f);

@@ -6,7 +6,6 @@ import android.support.annotation.DrawableRes;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.Expose;
-import com.google.gson.reflect.TypeToken;
 
 import net.osmand.StateChangedListener;
 import net.osmand.plus.profiles.LocationIcon;
@@ -15,11 +14,9 @@ import net.osmand.plus.profiles.ProfileIconColors;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.util.Algorithms;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -57,28 +54,22 @@ public class ApplicationMode {
 	private static List<ApplicationMode> cachedFilteredValues = new ArrayList<>();
 
 	private static StateChangedListener<String> listener;
+	private static StateChangedListener<String> iconNameListener;
 	private static OsmAndAppCustomization.OsmAndAppCustomizationListener customizationListener;
+
+	private OsmandApplication app;
 
 	private final int keyName;
 	private final String stringKey;
-	private String userProfileName;
 	private int descriptionId;
-	private int order;
 
 	private ApplicationMode parentAppMode;
-	private String iconResName = "ic_world_globe_dark";
 	private int iconRes = R.drawable.ic_world_globe_dark;
 	private int iconMapRes = R.drawable.map_world_globe_dark;
-	private ProfileIconColors iconColor = ProfileIconColors.DEFAULT;
-	private String routingProfile = "";
-	private RouteService routeService = RouteService.OSMAND;
 
-	private float defaultSpeed = 10f;
 	private int minDistanceForTurn = 50;
 	private int arrivalDistance = 90;
 	private int offRouteDistance = 350;
-	private NavigationIcon navigationIcon = NavigationIcon.DEFAULT;
-	private LocationIcon locationIcon = LocationIcon.DEFAULT;
 
 	private ApplicationMode(int key, String stringKey) {
 		this.keyName = key;
@@ -90,64 +81,145 @@ public class ApplicationMode {
 	 */
 	public static final ApplicationMode DEFAULT = createBase(R.string.app_mode_default, "default")
 			.distanceForTurn(5).arrivalDistance(90)
-			.icon(R.drawable.ic_world_globe_dark, R.drawable.map_world_globe_dark, "ic_world_globe_dark").reg();
+			.icon(R.drawable.ic_world_globe_dark, R.drawable.map_world_globe_dark).reg();
 
 	public static final ApplicationMode CAR = createBase(R.string.app_mode_car, "car")
 			.distanceForTurn(35)
-			.icon(R.drawable.ic_action_car_dark, R.drawable.map_action_car_dark, "ic_action_car_dark")
+			.icon(R.drawable.ic_action_car_dark, R.drawable.map_action_car_dark)
 			.description(R.string.base_profile_descr_car).reg();
 
 	public static final ApplicationMode BICYCLE = createBase(R.string.app_mode_bicycle, "bicycle")
 			.distanceForTurn(15).arrivalDistance(60).offRouteDistance(50)
-			.icon(R.drawable.ic_action_bicycle_dark, R.drawable.map_action_bicycle_dark, "ic_action_bicycle_dark")
+			.icon(R.drawable.ic_action_bicycle_dark, R.drawable.map_action_bicycle_dark)
 			.description(R.string.base_profile_descr_bicycle).reg();
 
 	public static final ApplicationMode PEDESTRIAN = createBase(R.string.app_mode_pedestrian, "pedestrian")
 			.distanceForTurn(5).arrivalDistance(45).offRouteDistance(20)
-			.icon(R.drawable.ic_action_pedestrian_dark, R.drawable.map_action_pedestrian_dark, "ic_action_pedestrian_dark")
+			.icon(R.drawable.ic_action_pedestrian_dark, R.drawable.map_action_pedestrian_dark)
 			.description(R.string.base_profile_descr_pedestrian).reg();
 
 	public static final ApplicationMode PUBLIC_TRANSPORT = createBase(R.string.app_mode_public_transport, "public_transport")
-			.icon(R.drawable.ic_action_bus_dark, R.drawable.map_action_bus_dark, "ic_action_bus_dark")
+			.icon(R.drawable.ic_action_bus_dark, R.drawable.map_action_bus_dark)
 			.description(R.string.base_profile_descr_public_transport).reg();
 
 	public static final ApplicationMode BOAT = createBase(R.string.app_mode_boat, "boat")
 			.distanceForTurn(20)
-			.icon(R.drawable.ic_action_sail_boat_dark, R.drawable.map_action_sail_boat_dark, "ic_action_sail_boat_dark")
+			.icon(R.drawable.ic_action_sail_boat_dark, R.drawable.map_action_sail_boat_dark)
 			.description(R.string.base_profile_descr_boat).reg();
 
 	public static final ApplicationMode AIRCRAFT = createBase(R.string.app_mode_aircraft, "aircraft")
 			.distanceForTurn(100)
-			.icon(R.drawable.ic_action_aircraft, R.drawable.map_action_aircraft, "ic_action_aircraft")
+			.icon(R.drawable.ic_action_aircraft, R.drawable.map_action_aircraft)
 			.description(R.string.base_profile_descr_aircraft).reg();
 
 	public static final ApplicationMode SKI = createBase(R.string.app_mode_skiing, "ski")
 			.distanceForTurn(15).arrivalDistance(60).offRouteDistance(50)
-			.icon(R.drawable.ic_action_skiing, R.drawable.map_action_skiing, "ic_action_skiing")
+			.icon(R.drawable.ic_action_skiing, R.drawable.map_action_skiing)
 			.description(R.string.base_profile_descr_ski).reg();
 
+	public static List<ApplicationMode> values(OsmandApplication app) {
+		if (customizationListener == null) {
+			customizationListener = new OsmAndAppCustomization.OsmAndAppCustomizationListener() {
+				@Override
+				public void onOsmAndSettingsCustomized() {
+					cachedFilteredValues = new ArrayList<>();
+				}
+			};
+			app.getAppCustomization().addListener(customizationListener);
+		}
+		if (cachedFilteredValues.isEmpty()) {
 
-	private static class ApplicationModeBean {
-		@Expose
-		String stringKey;
-		@Expose
-		String userProfileName;
-		@Expose
-		String parent;
-		@Expose
-		String iconName = "map_world_globe_dark";
-		@Expose
-		ProfileIconColors iconColor = ProfileIconColors.DEFAULT;
-		@Expose
-		String routingProfile = null;
-		@Expose
-		RouteService routeService = RouteService.OSMAND;
-		@Expose
-		LocationIcon locIcon = null;
-		@Expose
-		NavigationIcon navIcon = null;
-		@Expose
-		int order;
+			OsmandSettings settings = app.getSettings();
+			if (listener == null) {
+				listener = new StateChangedListener<String>() {
+					@Override
+					public void stateChanged(String change) {
+						cachedFilteredValues = new ArrayList<>();
+					}
+				};
+				settings.AVAILABLE_APP_MODES.addListener(listener);
+			}
+			String available = settings.AVAILABLE_APP_MODES.get();
+			cachedFilteredValues = new ArrayList<>();
+			for (ApplicationMode v : values) {
+				if (available.contains(v.getStringKey() + ",") || v == DEFAULT) {
+					cachedFilteredValues.add(v);
+				}
+			}
+		}
+		return cachedFilteredValues;
+	}
+
+	public static List<ApplicationMode> allPossibleValues() {
+		return values;
+	}
+
+	public static List<ApplicationMode> getDefaultValues() {
+		return defaultValues;
+	}
+
+	public static List<ApplicationMode> getCustomValues() {
+		List<ApplicationMode> customModes = new ArrayList<>();
+		for (ApplicationMode mode : values) {
+			if (mode.isCustomProfile()) {
+				customModes.add(mode);
+			}
+		}
+		return customModes;
+	}
+
+	public static List<ApplicationMode> getModesDerivedFrom(ApplicationMode am) {
+		List<ApplicationMode> list = new ArrayList<ApplicationMode>();
+		for (ApplicationMode a : values) {
+			if (a == am || a.getParent() == am) {
+				list.add(a);
+			}
+		}
+		return list;
+	}
+
+	public static ApplicationMode valueOfStringKey(String key, ApplicationMode def) {
+		for (ApplicationMode p : values) {
+			if (p.getStringKey().equals(key)) {
+				return p;
+			}
+		}
+		return def;
+	}
+
+	// returns modifiable ! Set<ApplicationMode> to exclude non-wanted derived
+	public static Set<ApplicationMode> regWidgetVisibility(String widgetId, ApplicationMode... am) {
+		HashSet<ApplicationMode> set = new HashSet<>();
+		if (am == null) {
+			set.addAll(values);
+		} else {
+			Collections.addAll(set, am);
+		}
+		for (ApplicationMode m : values) {
+			// add derived modes
+			if (set.contains(m.getParent())) {
+				set.add(m);
+			}
+		}
+		widgetsVisibilityMap.put(widgetId, set);
+		return set;
+	}
+
+	public static Set<ApplicationMode> regWidgetAvailability(String widgetId, ApplicationMode... am) {
+		HashSet<ApplicationMode> set = new HashSet<>();
+		if (am == null) {
+			set.addAll(values);
+		} else {
+			Collections.addAll(set, am);
+		}
+		for (ApplicationMode m : values) {
+			// add derived modes
+			if (set.contains(m.getParent())) {
+				set.add(m);
+			}
+		}
+		widgetsAvailabilityMap.put(widgetId, set);
+		return set;
 	}
 
 	private static void initRegVisibility() {
@@ -199,236 +271,6 @@ public class ApplicationMode {
 //		regWidgetAvailability(WIDGET_STREET_NAME, all);
 	}
 
-	public static class ApplicationModeBuilder {
-		private ApplicationMode applicationMode;
-
-		public ApplicationMode getApplicationMode() {
-			return applicationMode;
-		}
-
-		private ApplicationMode reg() {
-			values.add(applicationMode);
-			defaultValues.add(applicationMode);
-			if (applicationMode.getOrder() == 0 && !values.isEmpty()) {
-				applicationMode.setOrder(values.size());
-			}
-			return applicationMode;
-		}
-
-		private ApplicationMode customReg() {
-			ApplicationMode m = applicationMode;
-			m.minDistanceForTurn = m.parentAppMode.minDistanceForTurn;
-			m.arrivalDistance = m.parentAppMode.arrivalDistance;
-			m.offRouteDistance = m.parentAppMode.offRouteDistance;
-			values.add(applicationMode);
-			if (applicationMode.getOrder() == 0 && !values.isEmpty()) {
-				applicationMode.setOrder(values.size());
-			}
-			return applicationMode;
-		}
-
-		public ApplicationModeBuilder icon(int iconRes, int iconMapRes, String iconResName) {
-			try {
-				applicationMode.iconResName = iconResName;
-				applicationMode.iconMapRes = iconMapRes;
-				applicationMode.iconRes = iconRes;
-			} catch (Exception e) {
-
-			}
-			return this;
-		}
-
-		public ApplicationModeBuilder description(int strId) {
-			applicationMode.descriptionId = strId;
-			return this;
-		}
-
-		public ApplicationModeBuilder icon(Context app, String iconResName) {
-			updateAppModeIcon(app, iconResName, applicationMode);
-			return this;
-		}
-
-		public ApplicationModeBuilder parent(ApplicationMode parent) {
-			applicationMode.parentAppMode = parent;
-			return this;
-		}
-
-		public ApplicationModeBuilder locationIcon(LocationIcon locationIcon) {
-			applicationMode.locationIcon = locationIcon;
-			return this;
-		}
-
-		public ApplicationModeBuilder navigationIcon(NavigationIcon navigationIcon) {
-			applicationMode.navigationIcon = navigationIcon;
-			return this;
-		}
-
-		public ApplicationModeBuilder speed(float defSpeed) {
-			applicationMode.defaultSpeed = defSpeed;
-			return this;
-		}
-
-		public ApplicationModeBuilder distanceForTurn(int distForTurn) {
-			applicationMode.minDistanceForTurn = distForTurn;
-			return this;
-		}
-
-		public ApplicationModeBuilder arrivalDistance(int arrivalDistance) {
-			applicationMode.arrivalDistance = arrivalDistance;
-			return this;
-		}
-
-		public ApplicationModeBuilder offRouteDistance(int offRouteDistance) {
-			applicationMode.offRouteDistance = offRouteDistance;
-			return this;
-		}
-
-		public ApplicationModeBuilder userProfileTitle(String userProfileTitle) {
-			applicationMode.userProfileName = userProfileTitle;
-			return this;
-		}
-
-		public ApplicationModeBuilder setRoutingProfile(String routingProfileName) {
-			applicationMode.routingProfile = routingProfileName;
-			return this;
-		}
-
-		public ApplicationModeBuilder setRouteService(RouteService service) {
-			applicationMode.routeService = service;
-			return this;
-		}
-
-		public ApplicationModeBuilder setColor(ProfileIconColors colorData) {
-			applicationMode.iconColor = colorData;
-			return this;
-		}
-
-		public ApplicationModeBuilder setOrder(int order) {
-			applicationMode.order = order;
-			return this;
-		}
-	}
-
-	private static void updateAppModeIcon(Context app, String iconResName, ApplicationMode mode) {
-		try {
-			int iconRes = app.getResources().getIdentifier(iconResName, "drawable", app.getPackageName());
-			int iconMapRes = app.getResources().getIdentifier(iconResName.replace("ic_", "map_"), "drawable", app.getPackageName());
-			if (iconRes != 0 && iconMapRes != 0) {
-				mode.iconResName = iconResName;
-				mode.iconRes = iconRes;
-				mode.iconMapRes = iconMapRes;
-			}
-		} catch (Exception e) {
-//				return R.drawable.map_world_globe_dark;
-		}
-	}
-
-	private static void updateAppModeOrder(OsmandApplication app, ApplicationMode mode) {
-		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-		Type t = new TypeToken<Map<String, Integer>>() {
-		}.getType();
-
-		Map<String, Integer> appModesOrders = gson.fromJson(app.getSettings().APP_MODES_ORDERS.get(), t);
-		if (!Algorithms.isEmpty(appModesOrders)) {
-			Integer order = appModesOrders.get(mode.getStringKey());
-			if (order != null) {
-				mode.order = order;
-			}
-		}
-	}
-
-	private static ApplicationModeBuilder create(ApplicationMode parent, int key, String stringKey) {
-		ApplicationModeBuilder builder = new ApplicationModeBuilder();
-		builder.applicationMode = new ApplicationMode(key, stringKey);
-		builder.parent(parent);
-		return builder;
-	}
-
-	private static ApplicationModeBuilder createBase(int key, String stringKey) {
-		ApplicationModeBuilder builder = new ApplicationModeBuilder();
-		builder.applicationMode = new ApplicationMode(key, stringKey);
-		return builder;
-	}
-
-	public static ApplicationModeBuilder createCustomMode(ApplicationMode parent, String userProfileTitle, String stringKey) {
-		return create(parent, -1, stringKey).userProfileTitle(userProfileTitle);
-	}
-
-	public static ApplicationModeBuilder changeBaseMode(ApplicationMode applicationMode) {
-		ApplicationModeBuilder builder = new ApplicationModeBuilder();
-		builder.applicationMode = applicationMode;
-		return builder;
-	}
-
-	public static List<ApplicationMode> values(OsmandApplication app) {
-		if (customizationListener == null) {
-			customizationListener = new OsmAndAppCustomization.OsmAndAppCustomizationListener() {
-				@Override
-				public void onOsmAndSettingsCustomized() {
-					cachedFilteredValues = new ArrayList<>();
-				}
-			};
-			app.getAppCustomization().addListener(customizationListener);
-		}
-		if (cachedFilteredValues.isEmpty()) {
-
-			OsmandSettings settings = app.getSettings();
-			if (listener == null) {
-				listener = new StateChangedListener<String>() {
-					@Override
-					public void stateChanged(String change) {
-						cachedFilteredValues = new ArrayList<>();
-					}
-				};
-				settings.AVAILABLE_APP_MODES.addListener(listener);
-			}
-			String available = settings.AVAILABLE_APP_MODES.get();
-			cachedFilteredValues = new ArrayList<>();
-			for (ApplicationMode v : values) {
-				if (available.indexOf(v.getStringKey() + ",") != -1 || v == DEFAULT) {
-					cachedFilteredValues.add(v);
-				}
-			}
-		}
-		return cachedFilteredValues;
-	}
-
-	public static List<ApplicationMode> allPossibleValues() {
-		return values;
-	}
-
-	public static List<ApplicationMode> getDefaultValues() {
-		return defaultValues;
-	}
-
-	public static List<ApplicationMode> getCustomValues() {
-		List<ApplicationMode> customModes = new ArrayList<>();
-		for (ApplicationMode mode : values) {
-			if (mode.isCustomProfile()) {
-				customModes.add(mode);
-			}
-		}
-		return customModes;
-	}
-
-	// returns modifiable ! Set<ApplicationMode> to exclude non-wanted derived
-	public static Set<ApplicationMode> regWidgetVisibility(String widgetId, ApplicationMode... am) {
-		HashSet<ApplicationMode> set = new HashSet<>();
-		if (am == null) {
-			set.addAll(values);
-		} else {
-			Collections.addAll(set, am);
-		}
-		for (ApplicationMode m : values) {
-			// add derived modes
-			if (set.contains(m.getParent())) {
-				set.add(m);
-			}
-		}
-		widgetsVisibilityMap.put(widgetId, set);
-		return set;
-	}
-
 	public boolean isWidgetCollapsible(String key) {
 		return false;
 	}
@@ -444,23 +286,6 @@ public class ApplicationMode {
 		return set.contains(this);
 	}
 
-	public static Set<ApplicationMode> regWidgetAvailability(String widgetId, ApplicationMode... am) {
-		HashSet<ApplicationMode> set = new HashSet<>();
-		if (am == null) {
-			set.addAll(values);
-		} else {
-			Collections.addAll(set, am);
-		}
-		for (ApplicationMode m : values) {
-			// add derived modes
-			if (set.contains(m.getParent())) {
-				set.add(m);
-			}
-		}
-		widgetsAvailabilityMap.put(widgetId, set);
-		return set;
-	}
-
 	public boolean isWidgetAvailable(OsmandApplication app, String key) {
 		if (app.getAppCustomization().areWidgetsCustomized()) {
 			return app.getAppCustomization().isWidgetAvailable(key, this);
@@ -472,51 +297,30 @@ public class ApplicationMode {
 		return set.contains(this);
 	}
 
-	public static List<ApplicationMode> getModesDerivedFrom(ApplicationMode am) {
-		List<ApplicationMode> list = new ArrayList<ApplicationMode>();
-		for (ApplicationMode a : values) {
-			if (a == am || a.getParent() == am) {
-				list.add(a);
-			}
-		}
-		return list;
+	public String getStringKey() {
+		return stringKey;
 	}
 
 	public boolean isCustomProfile() {
 		return parentAppMode != null;
 	}
 
+	public boolean isDerivedRoutingFrom(ApplicationMode mode) {
+		return this == mode || getParent() == mode;
+	}
+
 	public ApplicationMode getParent() {
 		return parentAppMode;
-	}
-
-	public boolean hasFastSpeed() {
-		return getDefaultSpeed() > 10;
-	}
-
-	public NavigationIcon getNavigationIcon() {
-		return navigationIcon;
-	}
-
-	public LocationIcon getLocationIcon() {
-		return locationIcon;
-	}
-
-	public String getStringKey() {
-		return stringKey;
 	}
 
 	public int getNameKeyResource() {
 		return keyName;
 	}
 
-	public String getCustomProfileName() {
-		return userProfileName;
-	}
-
 	public String toHumanString(Context ctx) {
+		String userProfileName = getCustomProfileName();
 		if (Algorithms.isEmpty(userProfileName) && keyName != -1) {
-			return ctx.getString(keyName);
+			return app.getString(keyName);
 		} else {
 			return userProfileName;
 		}
@@ -524,83 +328,41 @@ public class ApplicationMode {
 
 	public String getDescription(Context ctx) {
 		if (descriptionId != 0) {
-			return ctx.getString(descriptionId);
+			return app.getString(descriptionId);
 		}
 		return "";
 	}
 
-	public RouteService getRouteService() {
-		return routeService;
+	@DrawableRes
+	public int getIconRes() {
+		return iconRes;
 	}
 
-	public static ApplicationMode valueOfStringKey(String key, ApplicationMode def) {
-		for (ApplicationMode p : values) {
-			if (p.getStringKey().equals(key)) {
-				return p;
-			}
-		}
-		return def;
+	@DrawableRes
+	public int getMapIconRes() {
+		return iconMapRes;
 	}
 
-	public String getIconName() {
-		return iconResName;
-	}
-
-	public float getDefaultSpeed() {
-		return defaultSpeed;
-	}
-
-	public void setIconResName(OsmandApplication app, String iconResName) {
-		updateAppModeIcon(app, iconResName, this);
+	public void setIconResName(String iconResName) {
 		app.getSettings().ICON_RES_NAME.setModeValue(this, iconResName);
 	}
 
-	public void setIconColor(OsmandApplication app, ProfileIconColors iconColor) {
-		this.iconColor = iconColor;
-		app.getSettings().ICON_COLOR.setModeValue(this, iconColor);
-	}
-
-	public void setUserProfileName(OsmandApplication app, String userProfileName) {
-		this.userProfileName = userProfileName;
-		app.getSettings().USER_PROFILE_NAME.setModeValue(this, userProfileName);
-	}
-
-	public void setParentAppMode(OsmandApplication app, ApplicationMode parentAppMode) {
-		if (isCustomProfile()) {
-			this.parentAppMode = parentAppMode;
-			app.getSettings().PARENT_APP_MODE.setModeValue(this, parentAppMode.getStringKey());
+	private void updateAppModeIcon() {
+		String iconResName = app.getSettings().ICON_RES_NAME.getModeValue(this);
+		try {
+			int iconRes = app.getResources().getIdentifier(iconResName, "drawable", app.getPackageName());
+			int iconMapRes = app.getResources().getIdentifier(iconResName.replace("ic_", "map_"), "drawable", app.getPackageName());
+			if (iconRes != 0 && iconMapRes != 0) {
+				this.iconRes = iconRes;
+				this.iconMapRes = iconMapRes;
+			}
+		} catch (Exception e) {
+//				return R.drawable.map_world_globe_dark;
 		}
 	}
 
-	public void setRoutingProfile(OsmandApplication app, String routingProfile) {
-		this.routingProfile = routingProfile;
-		app.getSettings().ROUTING_PROFILE.setModeValue(this, routingProfile);
-	}
-
-	public void setRouteService(OsmandApplication app, RouteService routeService) {
-		this.routeService = routeService;
-		app.getSettings().ROUTE_SERVICE.setModeValue(this, routeService);
-	}
-
-	public void setNavigationIcon(OsmandApplication app, NavigationIcon navigationIcon) {
-		this.navigationIcon = navigationIcon;
-		app.getSettings().NAVIGATION_ICON.setModeValue(this, navigationIcon);
-	}
-
-	public void setLocationIcon(OsmandApplication app, LocationIcon locationIcon) {
-		this.locationIcon = locationIcon;
-		app.getSettings().LOCATION_ICON.setModeValue(this, locationIcon);
-	}
-
-	public void setDefaultSpeed(OsmandApplication app, float defaultSpeed) {
-		this.defaultSpeed = defaultSpeed;
-		app.getSettings().DEFAULT_SPEED.setModeValue(this, defaultSpeed);
-	}
-
-	public void resetDefaultSpeed(OsmandApplication app) {
-		OsmandSettings settings = app.getSettings();
-		settings.DEFAULT_SPEED.resetModeToDefault(this);
-		this.defaultSpeed = settings.DEFAULT_SPEED.getModeValue(this);
+	public String getIconName() {
+		return app.getSettings().ICON_RES_NAME.getModeValue(this);
 	}
 
 	public int getMinDistanceForTurn() {
@@ -615,43 +377,86 @@ public class ApplicationMode {
 		return offRouteDistance;
 	}
 
-	public boolean isDerivedRoutingFrom(ApplicationMode mode) {
-		return this == mode || getParent() == mode;
+	public boolean hasFastSpeed() {
+		return getDefaultSpeed() > 10;
 	}
 
-	public String getRoutingProfile() {
-		return routingProfile;
+	public float getDefaultSpeed() {
+		return app.getSettings().DEFAULT_SPEED.getModeValue(this);
 	}
 
-	@DrawableRes
-	public int getIconRes() {
-		return iconRes;
+	public void setDefaultSpeed(float defaultSpeed) {
+		app.getSettings().DEFAULT_SPEED.setModeValue(this, defaultSpeed);
 	}
 
-	@DrawableRes
-	public int getMapIconRes() {
-		return iconMapRes;
+	public void resetDefaultSpeed() {
+		app.getSettings().DEFAULT_SPEED.resetModeToDefault(this);
 	}
 
-	public ProfileIconColors getIconColorInfo() {
-		if (iconColor != null) {
-			return iconColor;
-		} else {
-			return ProfileIconColors.DEFAULT;
+	public String getCustomProfileName() {
+		return app.getSettings().USER_PROFILE_NAME.getModeValue(this);
+	}
+
+	public void setUserProfileName(String userProfileName) {
+		app.getSettings().USER_PROFILE_NAME.setModeValue(this, userProfileName);
+	}
+
+	public void setParentAppMode(ApplicationMode parentAppMode) {
+		if (isCustomProfile()) {
+			this.parentAppMode = parentAppMode;
+			app.getSettings().PARENT_APP_MODE.setModeValue(this, parentAppMode.getStringKey());
 		}
 	}
 
+	public void setRoutingProfile(String routingProfile) {
+		app.getSettings().ROUTING_PROFILE.setModeValue(this, routingProfile);
+	}
+
+	public RouteService getRouteService() {
+		return app.getSettings().ROUTE_SERVICE.getModeValue(this);
+	}
+
+	public void setRouteService(RouteService routeService) {
+		app.getSettings().ROUTE_SERVICE.setModeValue(this, routeService);
+	}
+
+	public NavigationIcon getNavigationIcon() {
+		return app.getSettings().NAVIGATION_ICON.getModeValue(this);
+	}
+
+	public void setNavigationIcon(NavigationIcon navigationIcon) {
+		app.getSettings().NAVIGATION_ICON.setModeValue(this, navigationIcon);
+	}
+
+	public LocationIcon getLocationIcon() {
+		return app.getSettings().LOCATION_ICON.getModeValue(this);
+	}
+
+	public void setLocationIcon(LocationIcon locationIcon) {
+		app.getSettings().LOCATION_ICON.setModeValue(this, locationIcon);
+	}
+
+	public String getRoutingProfile() {
+		return app.getSettings().ROUTING_PROFILE.getModeValue(this);
+	}
+
+	public void setIconColor(ProfileIconColors iconColor) {
+		app.getSettings().ICON_COLOR.setModeValue(this, iconColor);
+	}
+
+	public ProfileIconColors getIconColorInfo() {
+		return app.getSettings().ICON_COLOR.getModeValue(this);
+	}
+
 	public int getOrder() {
-		return order;
+		return app.getSettings().APP_MODE_ORDER.getModeValue(this);
 	}
 
 	public void setOrder(int order) {
-		this.order = order;
+		app.getSettings().APP_MODE_ORDER.setModeValue(this, order);
 	}
 
 	public static void onApplicationStart(OsmandApplication app) {
-		// load for default profiles to initialize later custom modes
-		initDefaultModesParams(app);
 		initCustomModes(app);
 		initModesParams(app);
 		initRegVisibility();
@@ -659,30 +464,38 @@ public class ApplicationMode {
 	}
 
 	private static void initModesParams(OsmandApplication app) {
+		if (iconNameListener == null) {
+			iconNameListener = new StateChangedListener<String>() {
+				@Override
+				public void stateChanged(String change) {
+					for (ApplicationMode mode : allPossibleValues()) {
+						mode.updateAppModeIcon();
+					}
+				}
+			};
+			app.getSettings().ICON_RES_NAME.addListener(iconNameListener);
+		}
 		for (ApplicationMode mode : allPossibleValues()) {
-			initModeParams(app, mode);
+			mode.app = app;
+			mode.updateAppModeIcon();
 		}
 	}
 
-	public static void initModeParams(OsmandApplication app, ApplicationMode mode) {
+	private static void initCustomModes(OsmandApplication app) {
 		OsmandSettings settings = app.getSettings();
-		mode.routingProfile = settings.ROUTING_PROFILE.getModeValue(mode);
-		mode.routeService = settings.ROUTE_SERVICE.getModeValue(mode);
-		mode.defaultSpeed = settings.DEFAULT_SPEED.getModeValue(mode);
-		mode.userProfileName = settings.USER_PROFILE_NAME.getModeValue(mode);
-		mode.navigationIcon = settings.NAVIGATION_ICON.getModeValue(mode);
-		mode.locationIcon = settings.LOCATION_ICON.getModeValue(mode);
-		mode.iconColor = settings.ICON_COLOR.getModeValue(mode);
-		mode.parentAppMode = valueOfStringKey(settings.PARENT_APP_MODE.getModeValue(mode), null);
-		updateAppModeOrder(app, mode);
-		updateAppModeIcon(app, settings.ICON_RES_NAME.getModeValue(mode), mode);
+		for (String appModeKey : settings.getCustomAppModesKeys()) {
+			Object profilePreferences = settings.getProfilePreferences(appModeKey);
+			String parent = settings.PARENT_APP_MODE.getValue(profilePreferences, null);
+			ApplicationModeBuilder builder = createCustomMode(valueOfStringKey(parent, CAR), appModeKey);
+			builder.customReg(app);
+		}
 	}
 
 	public static void reorderAppModes() {
 		Comparator<ApplicationMode> comparator = new Comparator<ApplicationMode>() {
 			@Override
 			public int compare(ApplicationMode mode1, ApplicationMode mode2) {
-				return (mode1.order < mode2.order) ? -1 : ((mode1.order == mode2.order) ? 0 : 1);
+				return (mode1.getOrder() < mode2.getOrder()) ? -1 : ((mode1.getOrder() == mode2.getOrder()) ? 0 : 1);
 			}
 		};
 		Collections.sort(values, comparator);
@@ -694,101 +507,6 @@ public class ApplicationMode {
 	private static void updateAppModesOrder() {
 		for (int i = 0; i < values.size(); i++) {
 			values.get(i).setOrder(i);
-		}
-	}
-
-	public static ApplicationModeBuilder fromJson(OsmandApplication app, String json) {
-		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-		ApplicationModeBean mb = gson.fromJson(json, ApplicationModeBean.class);
-
-		ApplicationModeBuilder b = createCustomMode(valueOfStringKey(mb.parent, null),
-				mb.userProfileName, mb.stringKey);
-		b.setRouteService(mb.routeService);
-		b.setRoutingProfile(mb.routingProfile);
-		b.icon(app, mb.iconName);
-		b.setColor(mb.iconColor);
-		b.setOrder(mb.order);
-		b.locationIcon(mb.locIcon);
-		b.navigationIcon(mb.navIcon);
-		return b;
-	}
-
-	public String toJson() {
-		ApplicationModeBean mb = new ApplicationModeBean();
-		mb.userProfileName = userProfileName;
-		mb.iconColor = iconColor;
-		mb.iconName = iconResName;
-		mb.parent = parentAppMode != null ? parentAppMode.getStringKey() : null;
-		mb.stringKey = stringKey;
-		mb.routeService = routeService;
-		mb.routingProfile = routingProfile;
-		mb.locIcon = locationIcon;
-		mb.navIcon = navigationIcon;
-		mb.order = order;
-		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-		return gson.toJson(mb);
-	}
-
-	private static void initDefaultModesParams(OsmandApplication app) {
-		OsmandSettings settings = app.getSettings();
-		if (settings.DEFAULT_APP_PROFILES.isSet()) {
-			Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-			Type t = new TypeToken<ArrayList<ApplicationModeBean>>() {
-			}.getType();
-			List<ApplicationModeBean> defaultAppModeBeans = gson.fromJson(settings.DEFAULT_APP_PROFILES.get(), t);
-			if (!Algorithms.isEmpty(defaultAppModeBeans)) {
-				for (ApplicationModeBean modeBean : defaultAppModeBeans) {
-					ApplicationMode mode = ApplicationMode.valueOfStringKey(modeBean.stringKey, null);
-					if (mode != null) {
-						ApplicationModeBuilder builder = changeBaseMode(mode)
-								.setRouteService(modeBean.routeService)
-								.setRoutingProfile(modeBean.routingProfile)
-								.icon(app, modeBean.iconName)
-								.userProfileTitle(modeBean.userProfileName)
-								.setColor(modeBean.iconColor)
-								.locationIcon(modeBean.locIcon)
-								.navigationIcon(modeBean.navIcon)
-								.setOrder(modeBean.order);
-						saveProfile(builder, app);
-					}
-				}
-			}
-			settings.DEFAULT_APP_PROFILES.resetToDefault();
-		}
-	}
-
-	private static void initCustomModes(OsmandApplication app) {
-		OsmandSettings settings = app.getSettings();
-		if (settings.CUSTOM_APP_PROFILES.isSet()) {
-			Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-			Type t = new TypeToken<ArrayList<ApplicationModeBean>>() {
-			}.getType();
-			List<ApplicationModeBean> customProfiles = gson.fromJson(app.getSettings().CUSTOM_APP_PROFILES.get(), t);
-			if (!Algorithms.isEmpty(customProfiles)) {
-				for (ApplicationModeBean m : customProfiles) {
-					ApplicationMode parentMode = valueOfStringKey(m.parent, CAR);
-					ApplicationModeBuilder builder = createCustomMode(parentMode, m.userProfileName, m.stringKey)
-							.setRouteService(m.routeService)
-							.setRoutingProfile(m.routingProfile)
-							.icon(app, m.iconName)
-							.userProfileTitle(m.userProfileName)
-							.setColor(m.iconColor)
-							.locationIcon(m.locIcon)
-							.navigationIcon(m.navIcon)
-							.setOrder(m.order);
-					saveProfile(builder, app);
-				}
-			}
-			settings.CUSTOM_APP_PROFILES.resetToDefault();
-		}
-		if (settings.CUSTOM_APP_MODES_KEYS.isSet()) {
-			Set<String> customModesKeys = settings.getCustomAppModesKeys();
-			for (String appModeKey : customModesKeys) {
-				Object profilePreferences = settings.getProfilePreferences(appModeKey);
-				String parent = settings.PARENT_APP_MODE.getValue(profilePreferences, null);
-				String userProfileName = settings.USER_PROFILE_NAME.getValue(profilePreferences, "");
-				createCustomMode(valueOfStringKey(parent, CAR), userProfileName, appModeKey).customReg();
-			}
 		}
 	}
 
@@ -805,35 +523,59 @@ public class ApplicationMode {
 		if (!stringBuilder.toString().equals(settings.CUSTOM_APP_MODES_KEYS.get())) {
 			settings.CUSTOM_APP_MODES_KEYS.set(stringBuilder.toString());
 		}
-
-		Map<String, Integer> appModesOrders = new HashMap<>();
-		for (ApplicationMode mode : allPossibleValues()) {
-			appModesOrders.put(mode.getStringKey(), mode.getOrder());
-		}
-		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-		String modesOrdersStr = gson.toJson(appModesOrders);
-		settings.APP_MODES_ORDERS.set(modesOrdersStr);
 	}
 
 	public static ApplicationMode saveProfile(ApplicationModeBuilder builder, OsmandApplication app) {
 		ApplicationMode mode = ApplicationMode.valueOfStringKey(builder.applicationMode.stringKey, null);
-		if (mode == null) {
-			mode = builder.customReg();
+		if (mode != null) {
+			mode.setParentAppMode(builder.applicationMode.parentAppMode);
+			mode.setIconResName(builder.iconResName);
+			mode.setUserProfileName(builder.userProfileName);
+			mode.setRoutingProfile(builder.routingProfile);
+			mode.setRouteService(builder.routeService);
+			mode.setIconColor(builder.iconColor);
+			mode.setLocationIcon(builder.locationIcon);
+			mode.setNavigationIcon(builder.navigationIcon);
+			mode.setOrder(builder.order);
+		} else {
+			mode = builder.customReg(app);
 			initRegVisibility();
 		}
-
-		mode.setIconResName(app, builder.applicationMode.iconResName);
-		mode.setUserProfileName(app, builder.applicationMode.userProfileName);
-		mode.setParentAppMode(app, builder.applicationMode.parentAppMode);
-		mode.setRoutingProfile(app, builder.applicationMode.routingProfile);
-		mode.setRouteService(app, builder.applicationMode.routeService);
-		mode.setIconColor(app, builder.applicationMode.iconColor);
-		mode.setLocationIcon(app, builder.applicationMode.locationIcon);
-		mode.setNavigationIcon(app, builder.applicationMode.navigationIcon);
-		mode.setOrder(builder.applicationMode.order);
-
 		saveAppModesToSettings(app);
 		return mode;
+	}
+
+	public static ApplicationModeBuilder fromJson(String json) {
+		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+		ApplicationModeBean mb = gson.fromJson(json, ApplicationModeBean.class);
+
+		ApplicationModeBuilder builder = createCustomMode(valueOfStringKey(mb.parent, null), mb.stringKey);
+		builder.setUserProfileName(mb.userProfileName);
+		builder.setIconResName(mb.iconName);
+		builder.setIconColor(mb.iconColor);
+		builder.setRoutingProfile(mb.routingProfile);
+		builder.setRouteService(mb.routeService);
+		builder.setLocationIcon(mb.locIcon);
+		builder.setNavigationIcon(mb.navIcon);
+		builder.setOrder(mb.order);
+
+		return builder;
+	}
+
+	public String toJson() {
+		ApplicationModeBean mb = new ApplicationModeBean();
+		mb.stringKey = stringKey;
+		mb.userProfileName = getCustomProfileName();
+		mb.iconColor = getIconColorInfo();
+		mb.iconName = getIconName();
+		mb.parent = parentAppMode != null ? parentAppMode.getStringKey() : null;
+		mb.routeService = getRouteService();
+		mb.routingProfile = getRoutingProfile();
+		mb.locIcon = getLocationIcon();
+		mb.navIcon = getNavigationIcon();
+		mb.order = getOrder();
+		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+		return gson.toJson(mb);
 	}
 
 	public static void deleteCustomModes(List<ApplicationMode> modes, OsmandApplication app) {
@@ -872,5 +614,176 @@ public class ApplicationMode {
 			return true;
 		}
 		return false;
+	}
+
+	private static ApplicationModeBuilder create(ApplicationMode parent, int key, String stringKey) {
+		ApplicationModeBuilder builder = new ApplicationModeBuilder();
+		builder.applicationMode = new ApplicationMode(key, stringKey);
+		builder.parent(parent);
+		return builder;
+	}
+
+	private static ApplicationModeBuilder createBase(int key, String stringKey) {
+		ApplicationModeBuilder builder = new ApplicationModeBuilder();
+		builder.applicationMode = new ApplicationMode(key, stringKey);
+		return builder;
+	}
+
+	public static ApplicationModeBuilder createCustomMode(ApplicationMode parent, String stringKey) {
+		return create(parent, -1, stringKey);
+	}
+
+	public static class ApplicationModeBuilder {
+
+		private ApplicationMode applicationMode;
+
+		private String userProfileName;
+		private RouteService routeService;
+		private String routingProfile;
+		private String iconResName;
+		private ProfileIconColors iconColor;
+		private Integer order;
+		private LocationIcon locationIcon;
+		private NavigationIcon navigationIcon;
+
+		public ApplicationMode getApplicationMode() {
+			return applicationMode;
+		}
+
+		private ApplicationMode reg() {
+			values.add(applicationMode);
+			defaultValues.add(applicationMode);
+			return applicationMode;
+		}
+
+		private ApplicationMode customReg(OsmandApplication app) {
+			values.add(applicationMode);
+
+			applicationMode.app = app;
+			applicationMode.minDistanceForTurn = applicationMode.parentAppMode.minDistanceForTurn;
+			applicationMode.arrivalDistance = applicationMode.parentAppMode.arrivalDistance;
+			applicationMode.offRouteDistance = applicationMode.parentAppMode.offRouteDistance;
+
+			if (userProfileName != null) {
+				applicationMode.setUserProfileName(userProfileName);
+			}
+			if (routeService != null) {
+				applicationMode.setRouteService(routeService);
+			}
+			if (routingProfile != null) {
+				applicationMode.setRoutingProfile(routingProfile);
+			}
+			if (iconResName != null) {
+				applicationMode.setIconResName(iconResName);
+			}
+			if (iconColor != null) {
+				applicationMode.setIconColor(iconColor);
+			}
+			if (order != null) {
+				applicationMode.setOrder(order);
+			}
+			if (locationIcon != null) {
+				applicationMode.setLocationIcon(locationIcon);
+			}
+			if (navigationIcon != null) {
+				applicationMode.setNavigationIcon(navigationIcon);
+			}
+
+			return applicationMode;
+		}
+
+		public ApplicationModeBuilder icon(int iconRes, int iconMapRes) {
+			applicationMode.iconMapRes = iconMapRes;
+			applicationMode.iconRes = iconRes;
+			return this;
+		}
+
+		public ApplicationModeBuilder description(int strId) {
+			applicationMode.descriptionId = strId;
+			return this;
+		}
+
+		public ApplicationModeBuilder parent(ApplicationMode parent) {
+			applicationMode.parentAppMode = parent;
+			return this;
+		}
+
+		public ApplicationModeBuilder distanceForTurn(int distForTurn) {
+			applicationMode.minDistanceForTurn = distForTurn;
+			return this;
+		}
+
+		public ApplicationModeBuilder arrivalDistance(int arrivalDistance) {
+			applicationMode.arrivalDistance = arrivalDistance;
+			return this;
+		}
+
+		public ApplicationModeBuilder offRouteDistance(int offRouteDistance) {
+			applicationMode.offRouteDistance = offRouteDistance;
+			return this;
+		}
+
+		public ApplicationModeBuilder setUserProfileName(String userProfileName) {
+			this.userProfileName = userProfileName;
+			return this;
+		}
+
+		public ApplicationModeBuilder setRouteService(RouteService routeService) {
+			this.routeService = routeService;
+			return this;
+		}
+
+		public ApplicationModeBuilder setRoutingProfile(String routingProfile) {
+			this.routingProfile = routingProfile;
+			return this;
+		}
+
+		public ApplicationModeBuilder setIconResName(String iconResName) {
+			this.iconResName = iconResName;
+			return this;
+		}
+
+		public ApplicationModeBuilder setIconColor(ProfileIconColors iconColor) {
+			this.iconColor = iconColor;
+			return this;
+		}
+
+		public ApplicationModeBuilder setOrder(int order) {
+			this.order = order;
+			return this;
+		}
+
+		public ApplicationModeBuilder setLocationIcon(LocationIcon locIcon) {
+			this.locationIcon = locIcon;
+			return this;
+		}
+
+		public ApplicationModeBuilder setNavigationIcon(NavigationIcon navIcon) {
+			this.navigationIcon = navIcon;
+			return this;
+		}
+	}
+
+	static class ApplicationModeBean {
+		@Expose
+		String stringKey;
+		@Expose
+		String userProfileName;
+		@Expose
+		String parent;
+		@Expose
+		String iconName = "map_world_globe_dark";
+		@Expose
+		ProfileIconColors iconColor = ProfileIconColors.DEFAULT;
+		@Expose
+		String routingProfile = null;
+		@Expose
+		RouteService routeService = RouteService.OSMAND;
+		@Expose
+		LocationIcon locIcon = null;
+		@Expose
+		NavigationIcon navIcon = null;
+		@Expose
+		int order;
 	}
 }

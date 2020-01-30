@@ -430,9 +430,7 @@ public class OsmandSettings {
 
 	public void copyProfilePreferences(ApplicationMode modeFrom, ApplicationMode modeTo, List<OsmandPreference> profilePreferences) {
 		for (OsmandPreference pref : profilePreferences) {
-			if (pref instanceof CommonPreference
-					&& !((CommonPreference) pref).global
-					&& !USER_PROFILE_NAME.getId().equals(pref.getId())) {
+			if (prefCanBeCopiedOrReset(pref)) {
 				CommonPreference profilePref = (CommonPreference) pref;
 				if (PARENT_APP_MODE.getId().equals(pref.getId())) {
 					if (modeTo.isCustomProfile()) {
@@ -447,28 +445,21 @@ public class OsmandSettings {
 		}
 	}
 
-	public boolean resetPreferencesForProfile(ApplicationMode mode) {
-		boolean prefsCleared = settingsAPI.edit(getProfilePreferences(mode)).clear().commit();
-		if (prefsCleared) {
-			for (OsmandPreference pref : registeredPreferences.values()) {
-				if (pref instanceof CommonPreference) {
-					CommonPreference commonPreference = (CommonPreference) pref;
-					if (commonPreference.cache && !commonPreference.global) {
-						commonPreference.cachedValue = null;
-					}
-				}
-			}
-		}
-
-		return prefsCleared;
+	public void resetPreferencesForProfile(ApplicationMode mode) {
+		resetProfilePreferences(mode, new ArrayList<OsmandPreference>(registeredPreferences.values()));
 	}
 
 	public void resetProfilePreferences(ApplicationMode mode, List<OsmandPreference> profilePreferences) {
 		for (OsmandPreference pref : profilePreferences) {
-			if (pref instanceof CommonPreference && !((CommonPreference) pref).global) {
+			if (prefCanBeCopiedOrReset(pref)) {
 				pref.resetModeToDefault(mode);
 			}
 		}
+	}
+
+	private boolean prefCanBeCopiedOrReset(OsmandPreference pref) {
+		return pref instanceof CommonPreference && !((CommonPreference) pref).global
+				&& !USER_PROFILE_NAME.getId().equals(pref.getId()) && !APP_MODE_ORDER.getId().equals(pref.getId());
 	}
 
 	public ApplicationMode LAST_ROUTING_APPLICATION_MODE = null;
@@ -1548,7 +1539,7 @@ public class OsmandSettings {
 		LOCATION_ICON.setModeDefaultValue(ApplicationMode.SKI, LocationIcon.BICYCLE);
 	}
 
-	public final CommonPreference<String> APP_MODES_ORDERS = new StringPreference("app_modes_orders", "").makeGlobal().cache();
+	public final CommonPreference<Integer> APP_MODE_ORDER = new IntPreference("app_mode_order", 0).makeProfile().cache();
 
 	public final OsmandPreference<Float> SWITCH_MAP_DIRECTION_TO_COMPASS =
 			new FloatPreference("speed_for_map_to_direction_of_movement", 0f).makeProfile();
@@ -3370,12 +3361,6 @@ public class OsmandSettings {
 			new EnumIntPreference<>("rate_us_state",
 					RateUsBottomSheetDialogFragment.RateUsState.INITIAL_STATE, RateUsBottomSheetDialogFragment.RateUsState.values())
 					.makeGlobal();
-
-	public final CommonPreference<String> DEFAULT_APP_PROFILES =
-			new StringPreference("default_app_profiles", "").makeGlobal().cache();
-
-	public final CommonPreference<String> CUSTOM_APP_PROFILES =
-		new StringPreference("custom_app_profiles", "").makeGlobal().cache();
 
 	public final CommonPreference<String> CUSTOM_APP_MODES_KEYS =
 		new StringPreference("custom_app_modes_keys", "").makeGlobal().cache();
