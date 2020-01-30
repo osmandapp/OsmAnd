@@ -2395,7 +2395,7 @@
     <string name="passed">آخرین استفاده: %1$s</string>
     <string name="save_as_line">ذخیره‌کردن به‌عنوان خط</string>
     <string name="store_tracks_in_monthly_directories">ذخیرهٔ ردهای ضبط‌شده در پوشه‌های ماهانه</string>
-    <string name="store_tracks_in_monthly_directories_descrp">"ردهای ضبط‌شده را در زیرپوشه‌های ماهانه ذخیره می‌کند (مثلاً  ‎۲۰۱۸-۰۱)."</string>
+    <string name="store_tracks_in_monthly_directories_descrp">"ردهای ضبط‌شده در زیرپوشه‌های ماهانه ذخیره می‌شود (مثلاً  ‎۲۰۱۸-۰۱)."</string>
     <string name="display_zoom_level">زوم نمایش: %1$s</string>
     <string name="gpx_no_tracks_title">هنوز فایل GPXای ندارید</string>
     <string name="gpx_no_tracks_title_folder">همچنین می‌توانید فایل‌های GPX را در این پوشه قرار دهید</string>
@@ -3354,9 +3354,9 @@
     <string name="shared_string_memory_kb_desc">%1$s کیلوبایت</string>
     <string name="track_storage_directory">پوشهٔ ذخیره‌سازی رد</string>
     <string name="track_storage_directory_descrp">ردها را می‌توانید در پوشهٔ rec، پوشه‌های ماهانه یا روزانه ذخیره کنید.</string>
-    <string name="store_tracks_in_rec_directory">ردها در پوشهٔ rec ذخیره شوند</string>
-    <string name="store_tracks_in_daily_directories">ردها در پوشه‌های روزانه ذخیره شوند</string>
-    <string name="store_tracks_in_daily_directories_descrp">ردها در زیرپوشهٔ مخصوص همان روز ذخیره شود (مانند ‎2018-01-01).</string>
+    <string name="store_tracks_in_rec_directory">ذخیرهٔ ردها در پوشهٔ rec</string>
+    <string name="store_tracks_in_daily_directories">ذخیرهٔ ردها در پوشه‌های روزانه</string>
+    <string name="store_tracks_in_daily_directories_descrp">ردها در زیرپوشهٔ مخصوص همان روز ذخیره می‌شود (مانند ‎2018-01-01).</string>
     <string name="shared_string_memory_used_tb_desc">استفاده‌شده %1$s ترابایت</string>
     <string name="shared_string_memory_used_gb_desc">استفاده‌شده %1$s گیگابایت</string>
     <string name="shared_string_memory_used_mb_desc">استفاده‌شده %1$s مگابایت</string>
@@ -3433,7 +3433,7 @@
     <string name="shared_string_turn_off">خاموش</string>
     <string name="join_segments">پیوند پاره‌ها</string>
     <string name="save_heading">ثبت جهت</string>
-    <string name="save_heading_descr">هنگام ضبط، جهت را برای هر یک از نقطه‌های رد ثبت کن.</string>
+    <string name="save_heading_descr">هنگام ضبط، جهت (=heading) را برای هر یک از نقطه‌های رد ثبت می‌کند.</string>
     <string name="distance_and_address">%1$s • %2$s</string>
     <string name="street_city">%1$s،‏ %2$s</string>
     <string name="personal_category_name">شخصی</string>
@@ -3454,7 +3454,7 @@
     <string name="reorder_profiles">ویرایش لیست پروفایل</string>
     <string name="selected_profile">پروفایل انتخاب‌شده</string>
     <string name="reset_confirmation_descr">با زدن روی %1$s، همهٔ تغییرات شما از بین می‌رود.</string>
-    <string name="reset_all_profile_settings_descr">همهٔ تنظیمات پروفایل را به حالت اولیهٔ پس از نصب بازنشانی کنید.</string>
+    <string name="reset_all_profile_settings_descr">همهٔ تنظیمات پروفایل به حالت اولیهٔ پس از نصب بازنشانی می‌شود.</string>
     <string name="reset_all_profile_settings">همهٔ تنظیمات پروفایل را بازنشانی می‌کنید؟</string>
     <string name="ltr_or_rtl_combine">%1$s: ‪%2$s‬</string>
     <string name="ltr_or_rtl_combine_via_space">‪%1$s %2$s‬‏</string>
@@ -3468,7 +3468,7 @@
     <string name="monitoring_min_speed_descr">این یک پالایهٔ قطع‌کننده برای سرعت‌های پایین است تا نقاطی که سرعتشان از حدی پایین‌تر است ضبط نشوند. می‌تواند سبب شود که ردهای ضبط‌شده به‌شکل هموارتری روی نقشه دیده شوند.</string>
     <string name="monitoring_min_speed_descr_side_effect">اثر جانبی: همهٔ قطعه‌هایی که در آن‌ها به حداقل سرعت معیار نرسید از رد حذف خواهد شد (مثلاً هنگامی که دوچرخه‌تان را بالای یک تپه با شیب تند می‌برید). همچنین هیچ اطلاعاتی دربارهٔ بازه‌های توقف، مانند استراحت‌ها، ضبط نمی‌شود. این مسئله بر همهٔ تحلیل‌ها یا پس‌پردازش‌ها تأثیر می‌گذارد، مانند زمانی که بخواهید مسافت کلی سفر، مدت حرکت یا سرعت متوسط خود را بدانید.</string>
     <string name="monitoring_min_speed_descr_recommendation">توصیه: ابتدا از پالایهٔ «کمترین جابه‌جایی» به‌منظور تشخیص حرکت استفاده کنید (B). این‌گونه شاید نتایج بهتری بگیرید و همچنین دادهٔ کمتری از دست می‌دهید. اگر ردها در سرعت‌های پایین نویز دارد، برای اینجا از مقدارهای غیرصفر استفاده کنید. لطفاً توجه نمایید که برخی اندازه‌گیری‌ها ممکن است اصلاً هیچ سرعتی را گزارش نکنند (برخی روش‌های مبتنی بر شبکه)، که در این صورت هیچ چیزی ضبط نخواهد شد.</string>
-    <string name="monitoring_min_speed_descr_remark">توجه: بررسی «سرعت&gt;۰»: بیشتر چیپست‌های GPS فقط در صورتی مقدار سرعت را گزارش می‌کنند که الگوریتم، شما را در حال حرکت تشخیص دهد و اگر در حال حرکت نباشید چیزی گزارش نمی‌کنند. بنابراین استفاده از تنظیم «&gt;۰» در این پالایه، به تشخیص حرکت توسط چیپست GPS وابسته است. البته حتی اگر این پالایش در زمان ضبط انجام نشود، ما از این ویژگی در تحلیل‌های GPX خود استفاده می‌کنیم تا مسافت اصلاح‌شده را محاسبه کنیم؛ یعنی مقداری که برای «مسافت اصلاح‌شده» گزارش می‌کنیم میزان مسافتی است که در هنگام حرکت ضبط شده.</string>
+    <string name="monitoring_min_speed_descr_remark">توجه: بیشتر چیپست‌های GPS فقط در صورتی مقدار سرعت را گزارش می‌کنند که الگوریتم، شما را در حال حرکت تشخیص دهد و اگر در حال حرکت نباشید چیزی گزارش نمی‌کنند. بنابراین استفاده از گزینهٔ «&gt;۰» در این پالایه، به تشخیص حرکت توسط چیپست GPS وابسته است. البته حتی اگر این پالایش در زمان ضبط انجام نشود، ما از این ویژگی در تحلیل‌های GPX خود استفاده می‌کنیم تا مسافت اصلاح‌شده را محاسبه کنیم؛ یعنی مقداری که برای «مسافت اصلاح‌شده» گزارش می‌کنیم میزان مسافتی است که در هنگام حرکت ضبط شده.</string>
     <string name="monitoring_min_accuracy_descr">این مورد فقط نقاطی را ضبط می‌کند که با شاخص کمترین صحت (به متر/فوت، مطابق گزارش اندروید از چیپست) اندازه‌گیری شده‌اند. منظور از صحت، نمودار نقطه‌ای اندازه‌گیری‌های تکراری است و مستقیماً مربوط به دقت نمی‌شود (دقت: میزان نزدیکی اندازه‌گیری‌ها به موقعیت واقعی).</string>
     <string name="monitoring_min_accuracy_descr_side_effect">اثر جانبی: درنتیجهٔ پالایش بر اساس صحت، ممکن است مثلاً زیر پل‌ها، زیر درختان، میان ساختمان‌های بلند یا در شرایط جوّی بخصوص، نقاط تماماً از دست بروند.</string>
     <string name="monitoring_min_accuracy_descr_recommendation">توصیه: سخت است آنچه ثبت می‌شود یا آنچه ثبت نمی‌شود را پیشبینی کنیم. شاید بهتر باشد این پالایه را خاموش کنید.</string>
